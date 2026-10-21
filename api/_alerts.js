@@ -16,7 +16,7 @@ const FROM = process.env.ALERTS_FROM || 'BayCounty.me <hello@baycounty.me>';
 const SITE = 'https://baycounty.me';
 const b64 = s => Buffer.from(s).toString('base64url');
 const sign = s => crypto.createHmac('sha256', process.env.ALERTS_SECRET || '').update(s).digest('base64url');
-function makeToken(email, govs) { const body = b64(JSON.stringify({e: email, g: govs, t: Date.now()})); return body + '.' + sign(body); }
+function makeToken(email, govs, extra = {}) { const body = b64(JSON.stringify({...extra, e: email, g: govs, t: Date.now()})); return body + '.' + sign(body); }
 function readToken(tok) {
   const [body, sig] = String(tok || '').split('.');
   if (!body || !sig || !process.env.ALERTS_SECRET) return null;
@@ -40,4 +40,45 @@ function emailShell(title, inner, footer) {
 </table></td></tr></table></body></html>`;
 }
 const button = (href, label) => `<table cellpadding="0" cellspacing="0" border="0" style="margin-top:8px;margin-bottom:16px"><tr><td bgcolor="#1E3A76" style="background-color:#1E3A76;border-radius:6px;padding-top:12px;padding-bottom:12px;padding-left:20px;padding-right:20px"><a href="${esc(href)}" style="font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:18px;color:#FFFFFF;text-decoration:none;font-weight:bold">${esc(label)}</a></td></tr></table>`;
-module.exports = {GOVS, ALL_SEGMENT, FROM, SITE, makeToken, readToken, resend, esc, emailShell, button};
+
+// Sign-up forms must be posted from this site. Requires an Origin header from an allowed origin, or (for browsers
+// that leave Origin off) a Referer on an allowed origin. A request with neither is refused.
+const ALLOWED_ORIGIN = /^https:\/\/((www\.)?baycounty\.me|[a-z0-9-]+\.vercel\.app)$/;
+function sameOrigin(req) {
+  const h = req.headers || {};
+  if (h.origin) return ALLOWED_ORIGIN.test(String(h.origin));
+  try { return !!h.referer && ALLOWED_ORIGIN.test(new URL(String(h.referer)).origin); } catch (e) { return false; }
+}
+
+// Per-address cooldown for confirmation emails: at most one per address every 10 minutes.
+// Uses the database (alerts.claim_confirm_send, migration 0007) so it holds across server instances. If the database
+// isn't configured or the migration isn't applied, falls back to a per-instance memory map (best effort only:
+// each Vercel instance keeps its own, and it resets when the instance is recycled).
+const COOLDOWN_MIN = 10;
+const emailHash = email => crypto.createHmac('sha256', 'bcm-email-v1:' + (process.env.ALERTS_SECRET || '')).update(String(email).toLowerCase()).digest('hex').slice(0, 32);
+const memSends = new Map();
+async function claimConfirmSend(email) {
+  const h = emailHash(email);
+  try {
+    const db = require('./_db');
+    if (db.hasDb()) return (await db.q('select alerts.claim_confirm_send($1, $2) as ok', [h, COOLDOWN_MIN]))[0].ok;
+  } catch (e) { console.error('cooldown: database unavailable, using memory', e.message); }
+  const now = Date.now(), last = memSends.get(h);
+  if (last && now - last < COOLDOWN_MIN * 60e3) return false;
+  memSends.set(h, now);
+  return true;
+}
+
+// Signed link for managing preferences (no expiry, but tied to the address and the secret). Kind 'prefs'.
+function prefsToken(email) { const body = b64(JSON.stringify({k: 'prefs', e: String(email).toLowerCase()})); return body + '.' + sign('prefs.' + body); }
+function readPrefsToken(tok) {
+  const [body, sig] = String(tok || '').split('.');
+  if (!body || !sig || !process.env.ALERTS_SECRET) return null;
+  const want = sign('prefs.' + body);
+  if (want.length !== sig.length || !crypto.timingSafeEqual(Buffer.from(want), Buffer.from(sig))) return null;
+  try { const p = JSON.parse(Buffer.from(body, 'base64url').toString()); return p.k === 'prefs' && p.e ? p : null; } catch (e) { return null; }
+}
+const prefsUrl = email => `${SITE}/alerts/manage?t=${prefsToken(email)}`;
+
+module.exports = {GOVS, ALL_SEGMENT, FROM, SITE, makeToken, readToken, resend, esc, emailShell, button,
+  sameOrigin, claimConfirmSend, emailHash, prefsToken, readPrefsToken, prefsUrl, COOLDOWN_MIN};

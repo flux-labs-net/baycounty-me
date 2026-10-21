@@ -1,14 +1,15 @@
 // POST /api/subscribe {email, govs:[...]} -> sends a confirmation link (double opt-in).
-const {GOVS, FROM, SITE, makeToken, resend, esc, emailShell, button} = require('./_alerts');
-const ALLOWED = /^https:\/\/((www\.)?baycounty\.me|[a-z0-9-]+\.vercel\.app)$/;
+// Guards: same-origin Origin (or Referer) required; honeypot + fill time; 5 sign-ups/hour per connection (per instance);
+// at most one confirmation email per address every 10 minutes (database-backed, see _alerts.claimConfirmSend).
+const {GOVS, FROM, SITE, makeToken, resend, esc, emailShell, button, sameOrigin, claimConfirmSend} = require('./_alerts');
+const {ipOf} = require('./_gate');
 const hits = new Map();
 module.exports = async (req, res) => {
   res.setHeader('Cache-Control', 'no-store');
   if (req.method === 'GET') return res.status(200).json({ready: !!(process.env.ALERTS_SECRET && process.env.RESEND_FULL_KEY)});
   if (req.method !== 'POST') return res.status(405).json({ok: false, error: 'Method not allowed'});
-  const origin = req.headers.origin || '';
-  if (origin && !ALLOWED.test(origin)) return res.status(403).json({ok: false, error: 'Forbidden'});
-  const ip = String(req.headers['x-forwarded-for'] || '').split(',')[0].trim() || 'unknown', now = Date.now();
+  if (!sameOrigin(req)) return res.status(403).json({ok: false, error: 'Forbidden'});
+  const ip = ipOf(req), now = Date.now();
   const recent = (hits.get(ip) || []).filter(t => now - t < 3600e3);
   if (recent.length >= 5) return res.status(429).json({ok: false, error: 'Too many sign-ups from this connection. Try again later.'});
   let b = req.body; if (typeof b === 'string') { try { b = JSON.parse(b); } catch (e) { b = {}; } } b = b || {};
@@ -18,6 +19,8 @@ module.exports = async (req, res) => {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return res.status(400).json({ok: false, error: 'Please enter a valid email address.'});
   if (!govs.length) return res.status(400).json({ok: false, error: 'Pick at least one government to follow.'});
   if (!(process.env.RESEND_FULL_KEY || process.env.RESEND_API_KEY) || !process.env.ALERTS_SECRET) return res.status(500).json({ok: false, error: 'Alerts aren’t set up yet. Please try again soon.'});
+  // Cooldown: answer the same way whether or not an email goes out, so the form can't be used to probe addresses.
+  if (!(await claimConfirmSend(email))) { recent.push(now); hits.set(ip, recent); return res.status(200).json({ok: true}); }
   const link = `${SITE}/api/confirm?t=${makeToken(email, govs)}`;
   const names = govs.map(g => GOVS[g][0]).join(', ');
   const html = emailShell('Confirm your BayCounty.me alerts', `<p style="margin:0 0 12px 0;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:22px;color:#161B24">Please confirm you want weekly BayCounty.me updates for <b>${esc(names)}</b>: new votes, data and corrections, plus upcoming meetings.</p>${button(link, 'Confirm my alerts')}<p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#5A6372">The link works for 7 days. If you didn't ask for this, ignore this email and nothing will be sent.</p>`,
