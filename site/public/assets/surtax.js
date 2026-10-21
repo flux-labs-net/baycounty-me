@@ -56,6 +56,9 @@ function fitView() {
 function filt() {
   const q = $('stQ').value.trim().toLowerCase(), g = $('stG').value, c = $('stC').value, st = $('stS').value;
   cur = P.filter(p => (!g || p.g === g) && (!c || p.c === c) && (!st || p.s === st) && (!q || (p.n + ' ' + p.d).toLowerCase().includes(q)));
+  // newest first (by fiscal year), then name A to Z; projects with no year go last
+  const o = $('stO').value, byNew = {get: p => p.y, type: 'date', dir: 'desc'}, byName = {get: p => p.n, type: 'text', dir: 'asc'};
+  cur = TT.sortBy(cur, o === 'az' ? [byName, byNew] : o === 'big' ? [{get: p => p.k, type: 'num', dir: 'desc'}, byNew, byName] : [byNew, byName]);
   const n = s => cur.filter(p => p.s === s).length;
   $('stCount').textContent = `${cur.length.toLocaleString()} projects · ${n('completed')} completed, ${n('in_progress')} in progress, ${n('not_started')} not started`;
   $('stList').innerHTML = cur.slice(0, 200).map(p => `<li data-i="${P.indexOf(p)}" tabindex="0" role="button"${p === sel ? ' class="on" aria-current="true"' : ''}><span class="st-dot" style="background:${ST[p.s]?.[1]}"></span><div><b>${esc(p.n)}</b><span class="muted small">${esc(p.g)} · ${esc(p.c)} · ${esc(ST[p.s]?.[0] || p.s)}${p.p != null && p.s === 'in_progress' ? ` (${p.p}%)` : ''}${p.k ? ' · ' + big(p.k) : ''}</span></div></li>`).join('') + (cur.length > 200 ? `<li class="muted small">Showing 200 of ${cur.length}. Narrow the filters to see more.</li>` : '');
@@ -96,7 +99,10 @@ const pick = e => { const li = e.target.closest('li[data-i]'); if (!li) return; 
 $('stList').addEventListener('click', pick);
 $('stList').addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(e); } });
 document.addEventListener('keydown', e => { if (e.key === 'Escape' && sel) clearSel(); });
-['stQ', 'stG', 'stC', 'stS'].forEach(id => $(id).addEventListener('input', () => { clearSel(false); filt(); }));
+['stQ', 'stG', 'stC', 'stS', 'stO'].forEach(id => $(id).addEventListener('input', () => { clearSel(false); filt(); }));
+$('stCsv').addEventListener('click', () => TT.csv('baycounty-sales-tax-projects' + ($('stG').value ? '-' + TT.slug($('stG').value) : ''),
+  ['project', 'government', 'type', 'status', 'percent_complete', 'cost', 'fiscal_year', 'description', 'longitude', 'latitude'],
+  cur.map(p => [p.n, p.g, p.c, ST[p.s]?.[0] || p.s, p.p ?? '', p.k ?? '', p.y, p.d, p.x, p.yy])));
 $('stLeg').innerHTML = ['completed', 'in_progress', 'not_started'].map(s => `<li><i style="background:${ST[s][1]};border-radius:50%"></i><span>${ST[s][0]}</span></li>`).join('');
 addEventListener('resize', () => { if (P.length) draw(); });
 Promise.all([fetch('/data/surtax-projects.json').then(r => r.json()), fetch('/data/cra-geo.json').then(r => r.json()).catch(() => null)]).then(([p, g]) => {

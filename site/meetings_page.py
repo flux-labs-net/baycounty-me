@@ -63,7 +63,7 @@ def meetings_page(out_dir):
         links = ' · '.join(x for x in [f'<a href="{e(m["agenda_url"])}" target="_blank" rel="noopener">Agenda</a>' if m.get('agenda_url') else '',
                                        f'<a href="{e(m["packet_url"])}" target="_blank" rel="noopener">Packet</a>' if m.get('packet_url') else '',
                                        f'<a href="{e(m["minutes_url"])}" target="_blank" rel="noopener">Minutes</a>' if m.get('minutes_url') else ''] if x)
-        return f'''<li class="fd mt" data-g="{e(b.get("gov"))}"><div class="vt-top"><span class="vt-board">{e(b.get("name") or m["board"])}</span>{'<span class="badge">Expected</span>' if m.get("expected") else '<span class="badge ok">Agenda posted</span>' if m.get("agenda_url") and not m.get("past") else ''}</div>
+        return f'''<li class="fd mt" data-g="{e(b.get("gov"))}" data-gn="{e(GN.get(b.get("gov"), ""))}" data-d="{e(m.get("start") or "")}" data-b="{e(b.get("name") or m["board"])}" data-t="{e(m.get("title") or "")}" data-l="{e(m.get("location") or "")}" data-a="{e(m.get("agenda_url") or "")}" data-m="{e(m.get("minutes_url") or "")}" data-s="{"expected" if m.get("expected") else "posted" if m.get("agenda_url") else "calendar"}"><div class="vt-top"><span class="vt-board">{e(b.get("name") or m["board"])}</span>{'<span class="badge">Expected</span>' if m.get("expected") else '<span class="badge ok">Agenda posted</span>' if m.get("agenda_url") and not m.get("past") else ''}</div>
           <div class="vt-h">{e(_when(m["start"]))}</div><p class="small">{e(m.get("title") or "")}{(" · " + e(m.get("location"))) if m.get("location") else ""}</p>
           {f'<details class="mt-items"><summary>{len(m["items"])} money item{"s" if len(m["items"]) != 1 else ""} on the agenda</summary><ul class="plain small">{items}</ul></details>' if m.get("items") else ""}
           {f'<p class="small">{links}</p>' if links else ('<p class="small muted">From the regular schedule; the agenda isn\'t posted yet.</p>' if m.get("expected") else '<p class="small muted">On the government\'s calendar; the agenda isn\'t posted yet.</p>' if not m.get("past") else '')}</li>'''
@@ -74,7 +74,10 @@ def meetings_page(out_dir):
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Get involved</span><h1>Upcoming public meetings</h1>
     <p class="lede">When and where every Bay County board meets, with agenda links and the money items on each agenda. Public comment is open at regular meetings; check the agenda for how to speak.</p></div>
     <div class="stamp"><a class="pill" href="/meetings.ics">Add to my calendar</a><span>Checked {e(gen)}</span></div></header>
-  <div class="vt-filters mt-f"><label class="vf"><span>Government</span><select id="mtG"><option value="">All governments</option>{opts}</select></label></div>
+  <div class="vt-filters mt-f mt-tools"><label class="vf"><span>Government</span><select id="mtG"><option value="">All governments</option>{opts}</select></label>
+    <label class="vf"><span>Search</span><input id="mtQ" type="search" placeholder="Board, place or agenda item"></label>
+    <label class="vf"><span>Sort</span><select id="mtS"><option value="date">By date</option><option value="az">Board A to Z</option></select></label>
+    <div class="vf"><span>&nbsp;</span><button type="button" class="tt-csv" id="mtCsv">Download CSV</button></div></div>
   <section class="tx-sec"><div class="sec-hd"><h2 id="next">Coming up</h2><span class="muted" id="mtCount">{len(up)} meetings in the next 60 days</span></div>
     <ol class="findings" id="mtList">{"".join(card(m) for m in up) or '<li class="muted">No upcoming meetings found.</li>'}</ol></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="recent">Most recent meeting of each board</h2></div><ol class="findings" id="mtPast">{"".join(card(m) for m in past)}</ol></section>
@@ -85,8 +88,25 @@ def meetings_page(out_dir):
 <link rel="stylesheet" href="/assets/tax.css">
 <script>
 (() => {{
-  const s = document.getElementById('mtG'), q = new URLSearchParams(location.search).get('gov');
-  const run = () => {{ let n = 0; document.querySelectorAll('#mtList > li[data-g], #mtPast > li[data-g]').forEach(li => {{ const on = !s.value || li.dataset.g === s.value; li.hidden = !on; if (on && li.closest('#mtList')) n++; }}); document.getElementById('mtCount').textContent = n + ' meeting' + (n === 1 ? '' : 's') + ' in the next 60 days'; }};
-  if (q) s.value = q; s.addEventListener('input', run); run();
+  const $ = id => document.getElementById(id), s = $('mtG'), qs = $('mtQ'), so = $('mtS'), q = new URLSearchParams(location.search).get('gov');
+  const lists = [['mtList', 'asc'], ['mtPast', 'desc']];  // coming up: soonest first; recent: newest first
+  const run = () => {{
+    let n = 0; const w = qs.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
+    lists.forEach(([id, dir]) => {{
+      const ol = $(id), lis = [...ol.querySelectorAll(':scope > li[data-g]')];
+      lis.forEach(li => {{ const t = li.textContent.toLowerCase() + ' ' + li.dataset.gn.toLowerCase(); const on = (!s.value || li.dataset.g === s.value) && w.every(x => t.includes(x)); li.hidden = !on; if (on && id === 'mtList') n++; }});
+      const keys = [{{get: li => li.dataset.d, type: 'date', dir}}, {{get: li => li.dataset.b, type: 'text', dir: 'asc'}}];
+      if (so.value === 'az') keys.unshift(keys.pop());
+      window.TT && TT.sortBy(lis, keys).forEach(li => ol.appendChild(li));
+    }});
+    $('mtCount').textContent = n + ' meeting' + (n === 1 ? '' : 's') + ' in the next 60 days';
+  }};
+  if (q) s.value = q; [s, qs, so].forEach(x => x.addEventListener('input', run));
+  $('mtCsv').addEventListener('click', () => {{
+    const rows = [];
+    lists.forEach(([id]) => $(id).querySelectorAll(':scope > li[data-g]:not([hidden])').forEach(li => {{ const d = li.dataset; rows.push([id === 'mtList' ? 'Coming up' : 'Most recent', d.d, d.b, d.gn, d.t, d.l, d.s, d.a, d.m]); }}));
+    TT.csv('baycounty-meetings' + (s.value ? '-' + s.value : ''), ['list', 'date', 'board', 'government', 'meeting', 'location', 'agenda_status', 'agenda_url', 'minutes_url'], rows);
+  }});
+  if (window.TT) run(); else addEventListener('DOMContentLoaded', run);
 }})();
 </script>'''

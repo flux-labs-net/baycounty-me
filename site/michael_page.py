@@ -86,7 +86,7 @@ def michael_page(out_dir):
       <select id="ledC" aria-label="Type"><option value="">All types</option></select>
       <button type="button" class="pill sm" id="ledCsv">Download CSV</button>
     </div>
-    <div class="tablewrap"><table class="tx-table" id="ledT"><thead><tr><th scope="col">Applicant</th><th scope="col">Project</th><th scope="col">Type</th><th scope="col" class="num">Federal</th><th scope="col" class="num">First paid</th><th scope="col">Status</th></tr></thead><tbody></tbody></table></div>
+    <div class="tablewrap"><table class="tx-table" id="ledT" data-tt="own"><thead><tr><th scope="col">Applicant</th><th scope="col">Project</th><th scope="col">Type</th><th scope="col" class="num">Federal</th><th scope="col" class="num">First paid</th><th scope="col">Status</th></tr></thead><tbody></tbody></table></div>
     <button type="button" class="pill" id="ledMore">Show more</button>
   </section>
 

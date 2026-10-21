@@ -21,7 +21,7 @@ function members() { // members who appear in recorded roll calls, grouped by go
   F.m.value = [...F.m.options].some(o => o.value === keep) ? keep : '';
 }
 
-let shown = 40;
+let shown = 40, last = [];
 function filt(push = true) {
   const q = F.q.value.trim().toLowerCase(), g = F.g.value, m = F.m.value, c = F.c.value, y = F.y.value, o = F.o.value;
   let cur = D.votes.filter(v => (!g || v.g === g) && (!c || v.c === c) && (!y || (v.d || '').startsWith(y))
@@ -29,8 +29,11 @@ function filt(push = true) {
     && (!o || (o === 'split' ? v.x : o === 'unan' ? !v.x && !failed(v) : failed(v)))
     && (!q || (v.h + ' ' + v.i + ' ' + (v.s || '') + ' ' + Object.keys(v.m).join(' ') + ' ' + (D.bodies[v.b]?.n || '')).toLowerCase().includes(q)));
   const sort = F.sort.value;
-  cur = cur.slice().sort(sort === 'old' ? (a, b) => (a.d || '').localeCompare(b.d || '') : sort === 'amt' ? (a, b) => (b.a || 0) - (a.a || 0) || (b.d || '').localeCompare(a.d || '')
-    : sort === 'close' ? (a, b) => margin(a) - margin(b) || (b.d || '').localeCompare(a.d || '') : (a, b) => (b.d || '').localeCompare(a.d || ''));
+  // every order breaks ties newest first, then by item A to Z
+  const az = (a, b) => (a.h || '').localeCompare(b.h || '', 'en', {numeric: true, sensitivity: 'base'}), nw = (a, b) => (b.d || '').localeCompare(a.d || '') || az(a, b);
+  cur = cur.slice().sort(sort === 'old' ? (a, b) => (a.d || '').localeCompare(b.d || '') || az(a, b) : sort === 'amt' ? (a, b) => (b.a || 0) - (a.a || 0) || nw(a, b)
+    : sort === 'close' ? (a, b) => margin(a) - margin(b) || nw(a, b) : sort === 'az' ? (a, b) => az(a, b) || nw(a, b) : nw);
+  last = cur;
   const ns = cur.filter(v => v.x).length;
   $('vtCount').textContent = `${cur.length} vote${cur.length === 1 ? '' : 's'}${ns ? ` · ${ns} split` : ''}`;
   if (m) { const mine = cur.map(v => v.m[m]); const c2 = k => mine.filter(x => x === k).length;
@@ -64,4 +67,11 @@ $('vtClear').addEventListener('click', () => { F.q.value = ''; ['g', 'c', 'y', '
 $('vtMore').addEventListener('click', () => { shown += 60; filt(false); });
 filt(false);
 if ([...P0.keys()].some(k => ['q', 'g', 'm', 'c', 'y', 'o', 'sort'].includes(k))) $('all').scrollIntoView();
+$('vtCsv').addEventListener('click', () => {
+  const gov = Object.fromEntries(D.govs);
+  TT.csv(`baycounty-votes${F.g.value ? '-' + TT.slug(gov[F.g.value] || F.g.value) : ''}`,
+    ['date', 'government', 'board', 'item', 'summary', 'category', 'amount', 'outcome', 'tally', 'split', 'member_votes', 'source'],
+    last.map(v => [v.d, gov[v.g] || v.g, D.bodies[v.b]?.n || v.b, v.h, v.s, D.cat[v.c] || v.c, v.a ?? '', cap(v.o || ''), v.t, v.x ? 'yes' : 'no',
+      Object.entries(v.m).map(([n, x]) => `${n}: ${x}`).join('; '), v.u]));
+});
 })();

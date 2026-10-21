@@ -171,7 +171,7 @@ def audits_page():
     for g in order:
         for a in sorted(by.get(g, []), key=lambda a: a['fy'], reverse=True):
             for f in a['findings']:
-                items += f'''<li class="fd" data-g="{e(g)}" data-r="{1 if f.get("repeat") else 0}"><div class="fd-hd"><b>{e(g)}</b> <span class="muted">{e(fy_label(a["fy"]))} · {e(f.get("id"))}</span>{' <span class="badge warn">Repeat</span>' if f.get("repeat") else ''}</div>
+                items += f'''<li class="fd" data-g="{e(g)}" data-r="{1 if f.get("repeat") else 0}" data-y="{e(fy_label(a["fy"]))}" data-id="{e(f.get("id") or "")}" data-t="{e(re.sub(r"\s*\(first reported \d{4}\)", "", f.get("title", "")))}" data-u="{e(f.get("source_url") or a["source_url"])}"><div class="fd-hd"><b>{e(g)}</b> <span class="muted">{e(fy_label(a["fy"]))} · {e(f.get("id"))}</span>{' <span class="badge warn">Repeat</span>' if f.get("repeat") else ''}</div>
                   <div class="fd-t">{e(re.sub(r"\s*\(first reported \d{4}\)", "", f.get("title", "")))}</div><p>{e(f.get("plain"))}</p>{f'<p class="muted small"><b>Management response:</b> {e(f.get("mgmt_response"))}</p>' if f.get("mgmt_response") and "not extract" not in str(f.get("mgmt_response")).lower() else ""}<a class="src" href="{e(f.get("source_url") or a["source_url"])}" target="_blank" rel="noopener">Audit report</a></li>'''
     sr = ''
     for s in d['state_reports']:
@@ -194,12 +194,20 @@ def audits_page():
     <div class="tablewrap"><table class="tx-table"><thead><tr><th scope="col">Government</th><th scope="col">Year</th><th scope="col">Opinion</th><th scope="col" class="num">Findings</th><th scope="col" class="num">Repeats</th><th scope="col" class="num">Oldest unfixed since</th><th scope="col" class="num">Findings by year</th></tr></thead><tbody>{score}</tbody></table></div>
     <p class="note">"Findings by year" runs oldest to newest across the three audits reviewed.</p></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="list">Every finding</h2><span class="muted" id="fdCount"></span></div>
-    <div class="filters-row"><select id="fdG" aria-label="Government"><option value="">All governments</option>{opts}</select>
-      <label class="chk"><input type="checkbox" id="fdR"> Repeats only</label></div>
+    <div class="filters-row"><input id="fdQ" type="search" placeholder="Search findings" aria-label="Search findings"><select id="fdG" aria-label="Government"><option value="">All governments</option>{opts}</select>
+      <select id="fdS" aria-label="Sort"><option value="new">Newest first</option><option value="az">Government A to Z</option></select>
+      <label class="chk"><input type="checkbox" id="fdR"> Repeats only</label><button type="button" class="tt-csv" id="fdCsv">Download CSV</button></div>
     <ol class="findings" id="fdList">{items}</ol></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="state">State auditor reports</h2><span class="muted">Florida Auditor General reviews beyond the yearly audit</span></div>{sr}</section>
   <section class="tx-sec method"><div class="sec-hd"><h2 id="src">Sources</h2></div><p>Annual audits and management letters filed with the <a href="https://flauditor.gov/" target="_blank" rel="noopener">Florida Auditor General</a>, plus the Auditor General's own reports. Findings are summarized in plain English; the auditor's finding number is kept so you can find it in the report.</p></section>
 </div>
 <link rel="stylesheet" href="/assets/tax.css">
-<script>(()=>{{const g=document.getElementById('fdG'),r=document.getElementById('fdR'),li=[...document.querySelectorAll('#fdList .fd')],c=document.getElementById('fdCount');
-function f(){{let n=0;li.forEach(x=>{{const s=(!g.value||x.dataset.g===g.value)&&(!r.checked||x.dataset.r==='1');x.hidden=!s;if(s)n++;}});c.textContent=n+' findings';}}g.onchange=f;r.onchange=f;f();}})();</script>'''
+<script>(()=>{{const $=id=>document.getElementById(id),g=$('fdG'),r=$('fdR'),q=$('fdQ'),so=$('fdS'),ol=$('fdList'),li=[...ol.querySelectorAll('.fd')],c=$('fdCount');
+/* newest audit year first, then government A to Z, then finding number */
+function f(){{const w=q.value.trim().toLowerCase().split(/\s+/).filter(Boolean);let n=0;li.forEach(x=>{{const t=x.textContent.toLowerCase();const s=(!g.value||x.dataset.g===g.value)&&(!r.checked||x.dataset.r==='1')&&w.every(y=>t.includes(y));x.hidden=!s;if(s)n++;}});c.textContent=n+' finding'+(n===1?'':'s');
+  const k=[{{get:x=>x.dataset.y,type:'date',dir:'desc'}},{{get:x=>x.dataset.g,type:'text',dir:'asc'}}];if(so.value==='az')k.reverse();k.push({{get:x=>x.dataset.id,type:'text',dir:'asc'}});
+  if(window.TT)TT.sortBy(li,k).forEach(x=>ol.appendChild(x));}}
+[g,r,q,so].forEach(x=>x.addEventListener('input',f));
+$('fdCsv').addEventListener('click',()=>TT.csv('baycounty-audit-findings'+(g.value?'-'+TT.slug(g.value):''),['government','audit_year','finding','title','plain_english','repeat','source'],
+  li.filter(x=>!x.hidden).sort((a,b)=>[...ol.children].indexOf(a)-[...ol.children].indexOf(b)).map(x=>[x.dataset.g,x.dataset.y,x.dataset.id,x.dataset.t,(x.querySelector('p')||{{}}).textContent||'',x.dataset.r==='1'?'yes':'no',x.dataset.u])));
+if(window.TT)f();else addEventListener('DOMContentLoaded',f);}})();</script>'''

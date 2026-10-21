@@ -167,7 +167,7 @@ def money_map_page(out_dir):
     <div class="tablewrap"><table class="tx-table cm-table" id="mmVotes"></table></div>
     <p class="note">From the meeting minutes on the <a href="/public-money/votes">How They Voted</a> page, matched by the company's exact name. "Consent" means the item was approved in one vote with other routine items. Only the votes on this site are checked; contracts approved by staff under a purchasing limit never come to a vote.</p></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="heat1">Heat map: who gave to which government's officials</h2><span class="muted">Top 30 donor organizations</span></div>
-    <div class="tablewrap"><table class="heat" id="mmHeat1"></table></div>
+    <div class="tablewrap"><table data-tt="off" class="heat" id="mmHeat1"></table></div>
     <p class="note">Each cell is what the organization gave to the campaigns of that government's current officials. Darker means more. A ring marks a cell where that same government also pays the donor.</p></section>
   <section class="tx-sec method"><div class="sec-hd"><h2 id="src">Sources and method</h2></div>
     <p>Gifts come from the officials' most recent campaign reports with the Supervisor of Elections. Contracts and payments come from the contracts, change orders and check registers on this site, matched by organization name; each donor's contracts with a government are counted once. Only organizations are shown; gifts from individual people, including a company's owners or employees, are counted on the <a href="/public-money/campaign-money">Campaign Money</a> page but not named or linked to a company.</p></section>

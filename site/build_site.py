@@ -345,6 +345,7 @@ def _layout(title, desc, path, body, extra_head=''):
 <script>window.va=window.va||function(){{(window.vaq=window.vaq||[]).push(arguments)}};window.si=window.si||function(){{(window.siq=window.siq||[]).push(arguments)}};</script>
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/_vercel/speed-insights/script.js"></script>
+<script src="/assets/tables.js" defer></script>
 {extra_head}
 </head>
 <body>
@@ -449,8 +450,8 @@ def cra_page():
 document.getElementById('csv').onclick = () => {
   const cols = ['CRA','District','Amount','Paid to','For what','Type','When','Status','Counted in totals','Why not counted','Location','Source type','Source','Notes'];
   const q = v => { v = v == null ? '' : String(v); return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; };
-  const rows = filtered().map(p => [CRA[p.cra].name, p.district, p.amount, p.payee, p.purpose, p.cat, p.when, p.status, p.count ? 'Yes' : 'No', p.overlap, p.loc || p.addr, p.conf, p.url, p.notes].map(q).join(','));
-  const blob = new Blob([cols.join(',') + '\n' + rows.join('\n')], {type: 'text/csv'});
+  const rows = (S.lastSorted || filtered()).map(p => [CRA[p.cra].name, p.district, p.amount, p.payee, p.purpose, p.cat, p.when, p.status, p.count ? 'Yes' : 'No', p.overlap, p.loc || p.addr, p.conf, p.url, p.notes].map(q).join(','));
+  const blob = new Blob(['\ufeff' + cols.join(',') + '\n' + rows.join('\n')], {type: 'text/csv;charset=utf-8'});
   const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'bay-county-cra-ledger.csv'; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 2000);
 };
 """
@@ -663,6 +664,7 @@ def main():
     shutil.copy(os.path.join(ROOT, 'favicon.svg'), os.path.join(OUT, 'favicon.svg'))
     shutil.copy(os.path.join(ROOT, 'tax.css'), os.path.join(OUT, 'assets', 'tax.css'))
     shutil.copy(os.path.join(ROOT, 'report.js'), os.path.join(OUT, 'assets', 'report.js'))
+    shutil.copy(os.path.join(ROOT, 'tables.js'), os.path.join(OUT, 'assets', 'tables.js'))
     from og import build_og
     from og import preview_text
     PREVIEW.update(preview_text())

@@ -140,6 +140,8 @@ def surtax_page(out_dir):
       <select id="stG" aria-label="Government" data-param="gov"><option value="">All governments</option></select>
       <select id="stC" aria-label="Type"><option value="">All types</option></select>
       <select id="stS" aria-label="Status"><option value="">Any status</option><option value="completed">Completed</option><option value="in_progress">In progress</option><option value="not_started">Not started</option></select>
+      <select id="stO" aria-label="Sort"><option value="new">Newest first</option><option value="az">Name A to Z</option><option value="big">Largest cost</option></select>
+      <button type="button" class="tt-csv" id="stCsv">Download CSV</button>
     </div>
     <div class="st-wrap"><div class="st-mapcol"><div class="st-mapbox"><svg id="stMap" viewBox="0 0 400 300" role="img" aria-label="Map of sales tax projects. Select a project in the list or tap a dot for details."></svg>
         <div class="st-zoom print-hide"><button type="button" id="stIn" aria-label="Zoom in">+</button><button type="button" id="stOut" aria-label="Zoom out">−</button><button type="button" id="stAll" class="st-all">Show all</button></div></div>
@@ -149,11 +151,11 @@ def surtax_page(out_dir):
     <p class="note">From the county's sales tax project map service. Status comes from each project's "percent complete" field, which the county maintains; some records haven't been updated in years. Road projects are shown at the middle of the segment. {a(inf.get("projects_source_url") or "https://bayhalfcent.com/", "bayhalfcent.com")}</p></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="money-h">The county's share, year by year</h2><span class="muted">Surtax received, grants and spending on the county's program</span></div>
     <div class="two"><div class="tablewrap"><table class="tx-table"><thead><tr><th scope="col">Year</th><th scope="col" class="num">Surtax received</th><th scope="col" class="num">Grants</th><th scope="col" class="num">Spent</th></tr></thead><tbody>{fin_rows}</tbody></table></div>
-    <div><h4>How the tax is split</h4><div class="tablewrap"><table class="tx-table"><tbody>{shares}</tbody></table></div><p class="note">State formula shares, local FY2027. {a(inf["allocation"]["source_url"])}</p></div></div>
+    <div><h4>How the tax is split</h4><div class="tablewrap"><table class="tx-table"><thead><tr><th scope="col">Government</th><th scope="col" class="num">Share</th></tr></thead><tbody>{shares}</tbody></table></div><p class="note">State formula shares, local FY2027. {a(inf["allocation"]["source_url"])}</p></div></div>
     <p class="note">{e(inf["county_program_finance_note"])} {a(fin[0]["source_url"])}</p></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="hl-h">Big projects</h2></div><ul class="plain">{hl}</ul></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="sch-h">The school half-cent</h2></div>
-    <div class="two"><div><h4>Collected by Bay District Schools</h4><div class="tablewrap"><table class="tx-table"><tbody>{scol}</tbody></table></div><p class="note">From the district's audited statements (school years end June 30).</p></div>
+    <div class="two"><div><h4>Collected by Bay District Schools</h4><div class="tablewrap"><table class="tx-table"><thead><tr><th scope="col">Year</th><th scope="col" class="num">Collected</th></tr></thead><tbody>{scol}</tbody></table></div><p class="note">From the district's audited statements (school years end June 30).</p></div>
     <div><h4>Projects tied to the tax by a source</h4><ul class="plain">{sproj}</ul><p class="note">{e(sch["promised_project_list_note"])} The district had ${sch["construction_commitments_total"]["total_contract"]/1e6:,.1f}M in construction contracts open at June 30, 2025, paid from all sources, not only the surtax. {a(sch["construction_commitments_total"]["source_url"])}</p></div></div></section>
   <section class="tx-sec method"><div class="sec-hd"><h2 id="src">Gaps</h2></div><ul class="plain">{''.join(f"<li>{e(g)}</li>" for g in d["gaps"] if any(w in g.lower() for w in ("surtax", "school", "oversight", "infrastructure")))}</ul></section>
   <div class="tt" id="tt" role="tooltip" hidden></div>

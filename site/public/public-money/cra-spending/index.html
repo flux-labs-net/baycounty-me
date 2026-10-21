@@ -34,6 +34,7 @@
 <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};window.si=window.si||function(){(window.siq=window.siq||[]).push(arguments)};</script>
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/_vercel/speed-insights/script.js"></script>
+<script src="/assets/tables.js" defer></script>
 
 </head>
 <body>
@@ -188,8 +189,6 @@ section.block{display:flex;flex-direction:column;gap:12px}
 table{border-collapse:collapse;width:100%;min-width:980px;font-size:.84rem}
 th,td{padding:9px 12px;text-align:left;vertical-align:top;border-top:1px solid var(--line)}
 thead th{border-top:0;font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:500;background:var(--sunken);position:sticky;top:0;cursor:pointer;white-space:nowrap}
-thead th[aria-sort]::after{content:" ↓"}
-thead th[aria-sort="ascending"]::after{content:" ↑"}
 td.amt{font-family:var(--f-data);text-align:right;white-space:nowrap}
 th.amt{text-align:right}
 tbody tr{cursor:pointer}
@@ -336,9 +335,9 @@ details.cx ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:
 
   <section class="block">
     <div class="hd"><h2>Ledger</h2><span class="muted" style="font-size:.82rem"><span id="ledgerCount"></span> · <button type="button" id="csv" class="reset" style="padding:0">Download CSV</button></span></div>
-    <div class="tablewrap"><table id="ledger">
+    <div class="tablewrap"><table id="ledger" data-tt="own">
       <thead><tr>
-        <th data-k="amount" class="amt" aria-sort="descending">Amount</th>
+        <th data-k="amount" class="amt">Amount</th>
         <th data-k="payee">Paid to</th>
         <th data-k="purpose">For what</th>
         <th data-k="where">Where</th>

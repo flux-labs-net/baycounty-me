@@ -102,7 +102,7 @@ def votes_page(out_dir):
         roster += f'''<details class="tbl-toggle"{" open" if cnt[k] else ""}><summary>{e(board_name(b["name"]))} <span class="muted">· {cnt[k]} votes recorded</span></summary><div class="tablewrap"><table class="tx-table"><thead><tr><th scope="col">Member</th><th scope="col">Seat</th><th scope="col">Term</th><th scope="col" class="num">Recorded votes</th><th scope="col" class="num">Voted no</th></tr></thead><tbody>{rows}</tbody></table></div>{f'<p class="note"><a class="src" href="{e(b["source_url"])}" target="_blank" rel="noopener">Roster source</a></p>' if b.get("source_url") else ""}</details>'''
     def card(v):
         meta = ' · '.join(x for x in [nice(v.get('date')), CAT.get(v.get('category'), v.get('category') or ''), ('$' + format(v['amount'], ',.0f')) if v.get('amount') else ''] if x)
-        return f'''<li class="fd vt"><div class="vt-top"><span class="vt-board">{e(board_name(bodies.get(v["body"], {}).get("name", v["body"])))}</span><span class="badge warn">{e(tally(v.get("tally")))} {e((v.get("outcome") or "").capitalize())}</span></div>
+        return f'''<li class="fd vt" data-d="{e(v.get("date") or "")}" data-n="{e(v.get("headline") or v.get("item") or "")}"><div class="vt-top"><span class="vt-board">{e(board_name(bodies.get(v["body"], {}).get("name", v["body"])))}</span><span class="badge warn">{e(tally(v.get("tally")))} {e((v.get("outcome") or "").capitalize())}</span></div>
       <span class="vt-meta muted">{e(meta)}</span>
       <div class="vt-h">{e(v.get("headline") or v.get("item"))}</div>
       <p class="vt-s">{e(v.get("summary") or v.get("plain_summary") or "")}</p>
@@ -126,7 +126,7 @@ def votes_page(out_dir):
     <div class="kpi"><span class="eyebrow">Tax rate votes</span><span class="v">{sum(1 for v in vs if v.get("category") == "millage")}</span><span class="s">Millage adoptions</span></div>
     <div class="kpi"><span class="eyebrow">Boards covered so far</span><span class="v">{sum(1 for k in bodies if not k.endswith("-cra") and (cnt[k] or cnt[k.split("-")[0] + "-cra"]))} of {len([k for k in bodies if not k.endswith("-cra")])}</span><span class="s">Every county, city and School Board</span></div>
   </div>
-  <section class="tx-sec"><div class="sec-hd"><h2 id="split">Split votes</h2><span class="muted">Most recent first</span></div><ol class="findings">{sp_html}</ol></section>
+  <section class="tx-sec"><div class="sec-hd"><h2 id="split">Split votes</h2><span class="muted">Most recent first</span></div><ol class="findings" data-tt-list aria-label="Split votes">{sp_html}</ol></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="all">Every recorded vote</h2><span class="muted">Filter by government, member, year or outcome</span></div>
     <div class="vt-filters">
       <input id="vtQ" type="search" placeholder="Search votes, vendors or names" aria-label="Search votes" class="vf-q">
@@ -135,9 +135,9 @@ def votes_page(out_dir):
       <label class="vf"><span>Type</span><select id="vtC"><option value="">All types</option></select></label>
       <label class="vf"><span>Year</span><select id="vtY"><option value="">All years</option></select></label>
       <label class="vf"><span>Outcome</span><select id="vtO"><option value="">All votes</option><option value="split">Split votes</option><option value="unan">Unanimous</option><option value="failed">Failed motions</option></select></label>
-      <label class="vf"><span>Sort</span><select id="vtSort"><option value="new">Newest first</option><option value="old">Oldest first</option><option value="amt">Largest amount</option><option value="close">Closest votes</option></select></label>
+      <label class="vf"><span>Sort</span><select id="vtSort"><option value="new">Newest first</option><option value="old">Oldest first</option><option value="amt">Largest amount</option><option value="close">Closest votes</option><option value="az">Item A to Z</option></select></label>
     </div>
-    <div class="vt-status"><span id="vtCount" class="muted"></span><span id="vtMember" class="vt-memsum"></span><button type="button" class="linkbtn" id="vtClear" hidden>Clear filters</button></div>
+    <div class="vt-status"><span id="vtCount" class="muted"></span><span id="vtMember" class="vt-memsum"></span><button type="button" class="linkbtn" id="vtClear" hidden>Clear filters</button><button type="button" class="tt-csv" id="vtCsv">Download CSV</button></div>
     <ol class="findings" id="vtList"></ol><button type="button" class="pill" id="vtMore">Show more</button></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="who">Members and their records</h2><span class="muted">Counts cover only the votes recorded on this page</span></div>{roster}</section>
   <section class="tx-sec method"><div class="sec-hd"><h2 id="src">Coverage and gaps</h2></div>

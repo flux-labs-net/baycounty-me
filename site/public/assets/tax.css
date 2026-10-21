@@ -603,3 +603,9 @@ details.el-dec > .el-rh,details.el-dec > .el-cands{padding:0 18px 16px}
 .bn-tbl tr.me th,.bn-tbl tr.me td{font-weight:600}
 .bn-tbl td .ar{font-size:.7em;color:var(--muted);margin-left:3px}
 @media (max-width:640px){.hbars.bench .hb,.hbars.per .hb{grid-template-columns:minmax(0,1fr) auto}.hbars.bench .hb-v small,.hbars.per .hb-v small{white-space:normal;max-width:9rem;margin-left:auto}.hbars.bench .hb-track{grid-column:1/-1;order:3}}
+/* list tools: sort select and CSV beside existing filters */
+.vt-status .tt-csv{margin-left:auto}
+.filters-row .tt-csv{flex:none;min-height:40px}
+.mt-f.mt-tools{grid-template-columns:minmax(0,240px) minmax(0,1fr) minmax(0,190px) auto}
+.mt-tools .tt-csv{min-height:42px}
+@media (max-width:760px){.mt-f.mt-tools{grid-template-columns:repeat(2,minmax(0,1fr))}}

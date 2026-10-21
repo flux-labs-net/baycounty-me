@@ -261,7 +261,7 @@ def payments_page():
       <div class="kpi"><span class="eyebrow">Payees</span><span class="v">{a["vendor_count_total"]}</span><span class="s">{e(listed)} shown</span></div>
       <div class="kpi"><span class="eyebrow">Checked</span><span class="v">{e(a["reconciliation_summary"].split(" match")[0])}</span><span class="s">months match the register's printed total</span></div>
       <div class="kpi"><span class="eyebrow">To individuals</span><span class="v">{money(ex.get("total"))}</span><span class="s">{ex.get("n_payments", 0)} payments, not named here</span></div></div>
-    <div class="tablewrap"><table class="tx-table cm-table wp-table"><thead><tr><th scope="col">Paid to</th><th scope="col" class="num">Total</th><th scope="col" class="num">Payments</th>{"".join(f'<th scope="col" class="num">{f}</th>' for f in fys)}</tr></thead><tbody>{rows}</tbody></table></div>
+    <div class="tablewrap"><table class="tx-table cm-table wp-table" data-tt-search="off"><thead><tr><th scope="col">Paid to</th><th scope="col" class="num">Total</th><th scope="col" class="num">Payments</th>{"".join(f'<th scope="col" class="num">{f}</th>' for f in fys)}</tr></thead><tbody>{rows}</tbody></table></div>
     <details class="gaps"><summary>Notes on this register ({len(a.get("notes") or [])})</summary><ul>{notes}</ul><p>{" · ".join(f'<a class="src" href="{e(u)}" target="_blank" rel="noopener">{k + 1}</a>' for k, u in enumerate(a.get("source_urls") or []))}</p></details></section>'''
     gaps = ''.join(f'<li>{e(g)}</li>' for g in p.get('gaps') or [])
     return f'''<div class="page tax">
