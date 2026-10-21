@@ -65,12 +65,24 @@ def seed_governments(cur):
         aliases[key] = key; aliases[short.lower()] = key
     aliases.update({'bay county bocc': 'county', 'bay county board of county commissioners': 'county', 'bay district school board': 'schools',
                     'school board': 'schools', 'bay county': 'county'})
+    # every government and alias in data/entities/governments.json (constitutional officers, special districts, tourism agencies ...)
+    ent = json.load(open(os.path.join(ROOT, 'data', 'entities', 'governments.json')))['governments']
+    for g in ent:
+        cur.execute('''insert into governments (key, slug, short_name, name, kind) values (%s,%s,%s,%s,%s)
+                       on conflict (key) do update set short_name=excluded.short_name, name=excluded.name''',
+                    (g['id'], g.get('slug'), g['short'], g['name'], g['kind']))
+    for g in ent:
+        cur.execute('update governments set parent_key = %s where key = %s', (g.get('parent'), g['id']))
+        for a in [g['id'], g['name'], g['short']] + g.get('aliases', []):
+            aliases.setdefault(a.strip().lower(), g['id'])
     for a, k in aliases.items():
         cur.execute('insert into government_aliases (alias, government_key) values (%s,%s) on conflict (alias) do update set government_key = excluded.government_key', (a, k))
     return aliases
 
 
 def gov_key(row, aliases):
+    if row.get('gov_id') in aliases.values():  # set by the site build from data/entities/governments.json
+        return row['gov_id']
     for col in ('government', 'employer_id', 'gov', 'city'):
         v = row.get(col)
         if isinstance(v, str) and v.strip():

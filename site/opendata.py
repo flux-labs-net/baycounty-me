@@ -5,6 +5,32 @@ from govs import all_profiles, gov_of_body, is_split
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(HERE, '..', 'data')
 e = lambda s: html.escape(str(s if s is not None else ''))
+import sys as _sys
+_sys.path.insert(0, os.path.join(DATA, 'entities'))
+import ids  # noqa: E402  shared government / vendor / person ids (data/entities)
+
+# which columns name the government, per dataset, tried in order (office titles are matched by contained name)
+GOV_COLS = {'government-profiles': ['government'], 'votes': ['government'], 'member-votes': ['gov_id'], 'cra-payments': ['city'],
+            'property-tax-rates': ['authority_id'], 'fema-michael-projects': ['applicant'], 'officials-pay': ['title', 'government'],
+            'meetings': ['gov', 'board'], 'campaign-finance': ['office', 'gov'], 'bonds': ['gov'], 'salary-positions': ['employer_id'],
+            'salary-leaders': ['employer_id'], 'candidates-2026': ['office', 'government'], 'campaign-contributions-2026': ['office'],
+            'bed-tax-collections': [], 'property-tax-exemptions': []}
+FIXED_GOV = {'bed-tax-collections': 'county', 'property-tax-exemptions': 'county'}  # county bed tax in every zone; the county-wide tax roll
+
+
+def add_gov_id(did, rows):
+    cols = GOV_COLS.get(did, ['government', 'gov'])
+    for r in rows:
+        if did in FIXED_GOV:
+            r['gov_id'] = FIXED_GOV[did]; continue
+        g = None
+        for c in cols:
+            v = r.get(c)
+            g = ids.gov_id(v) or (ids.gov_id(v, contains=True) if c in ('office', 'title', 'board', 'government') else None)
+            if g:
+                break
+        r['gov_id'] = g
+    return rows
 
 
 def _j(*p):
@@ -25,7 +51,7 @@ def _votes():
 
 def _member_votes():
     d = _j('votes', 'votes.json'); names = {b['id']: re.sub(r'\bCity City\b', 'City', b['name']) for b in d['bodies']}
-    return [{'date': v.get('date'), 'board': names.get(v['body']), 'member': n, 'vote': x, 'headline': v.get('headline'), 'source_url': v.get('source_url')}
+    return [{'date': v.get('date'), 'board': names.get(v['body']), 'member': n, 'vote': x, 'headline': v.get('headline'), 'source_url': v.get('source_url'), 'gov_id': gov_of_body(v['body'])}
             for v in d['votes'] for n, x in (v.get('by_member') or {}).items()]
 
 
@@ -171,7 +197,7 @@ def write_downloads(out_dir):
     dest = os.path.join(out_dir, 'downloads'); os.makedirs(dest, exist_ok=True)
     meta, catalog = [], []
     for did, title, desc, fn in datasets():
-        rows = fn() or []
+        rows = add_gov_id(did, fn() or [])
         keys = list(dict.fromkeys(k for r in rows for k in r))
         buf = io.StringIO(); w = csv.DictWriter(buf, fieldnames=keys, extrasaction='ignore'); w.writeheader()
         for r in rows:
