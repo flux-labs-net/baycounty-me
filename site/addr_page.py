@@ -34,11 +34,24 @@ NAV_LABEL = {
 }
 
 
+# Per-parcel lookups (/data/ex, /data/nav) are split into evenly sized files by a hash of the parcel id,
+# so each fetch stays small (under ~40KB). address.js has the same function (shardOf); keep them in sync.
+SHARDS = {'ex': 96, 'nav': 128}
+
+
+def shard_key(pid, n):
+    h = 0x811c9dc5  # 32-bit FNV-1a
+    for c in pid.encode():
+        h = ((h ^ c) * 0x01000193) & 0xffffffff
+    return f'h{h % n}'
+
+
 def write_nav(out_dir):
     nav = json.load(open(os.path.join(HERE, '..', 'data', 'fees', 'nav_2025.json')))
     shards = defaultdict(dict)
     for pid, items in nav.items():
-        shards[pid[:3]][pid] = items
+        # levy code + dollar amount only; nothing about the owner
+        shards[shard_key(pid, SHARDS['nav'])][pid] = [[str(c), float(a)] for c, a in items]
     d = os.path.join(out_dir, 'data', 'nav'); os.makedirs(d, exist_ok=True)
     for k, v in shards.items():
         json.dump(v, open(os.path.join(d, f'{k}.json'), 'w'), separators=(',', ':'))
@@ -59,7 +72,7 @@ def addr_page(out_dir):
         'taxdist': TAXDIST, 'craAgency': CRA_AGENCY, 'cra': {k: {'spent': round(v['spent']), 'n': v['n']} for k, v in cra.items()},
         'districts': {d['id']: {'label': d['label'], 'stack': d['stack'], 'total': d['total'][L]} for d in td['districts']},
         'auth': {k: {'n': a['n'], 'g': a['g'], 'school': a['school'], 'm': a['m'][L]} for k, a in td['auth'].items()},
-        'groups': td['groups'], 'fy': td['fy'][L], 'second2026': 26411, 'navLabel': NAV_LABEL,
+        'groups': td['groups'], 'fy': td['fy'][L], 'second2026': 26411, 'navLabel': NAV_LABEL, 'shards': SHARDS,
     }
     js = open(os.path.join(HERE, 'address.js')).read().replace('__ADDR__', json.dumps(data, ensure_ascii=False, separators=(',', ':')))
     open(os.path.join(out_dir, 'assets', 'address.js'), 'w').write(js)

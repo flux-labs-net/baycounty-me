@@ -39,6 +39,7 @@ def money(n):
 
 
 def write_shards(out_dir):
+    from addr_page import shard_key, SHARDS
     fp = os.path.join(DATA, 'parcels_2026.json')
     if not os.path.exists(fp):
         return 0
@@ -48,7 +49,7 @@ def write_shards(out_dir):
         # privacy: only [school taxable, non-school taxable, homestead $, additional homestead $, other exemptions $] may be published
         if not (isinstance(v, list) and len(v) == 5 and all(isinstance(x, (int, float)) for x in v)):
             raise ValueError(f'parcels_2026.json row for {pid} is not the privacy-safe shape; run data/exemptions/build_exemptions.py --migrate')
-        sh[pid[:3]][pid] = v
+        sh[shard_key(pid, SHARDS['ex'])][pid] = v
     d = os.path.join(out_dir, 'data', 'ex'); os.makedirs(d, exist_ok=True)
     for k, v in sh.items():
         json.dump(v, open(os.path.join(d, f'{k}.json'), 'w'), separators=(',', ':'))

@@ -252,11 +252,23 @@ function distFor(parcel, cityName) {
   if (!id) id = cityName && D.districts[cityName] ? cityName : 'unincorporated';
   return {id, d: D.districts[id], exact: !!D.taxdist[code]};
 }
-async function loadEx(pid) {
-  if (!pid) return null;
-  try { const r = await fetch(`/data/ex/${pid.slice(0, 3)}.json`); if (r.ok) return (await r.json())[pid] || null; } catch (e) {}
-  return null;
+/* Parcel lookups are split into small files by a hash of the parcel id (same FNV-1a as addr_page.shard_key). */
+function shardOf(pid, n) {
+  let h = 0x811c9dc5;
+  for (const c of new TextEncoder().encode(pid)) h = Math.imul(h ^ c, 0x01000193) >>> 0;
+  return 'h' + (h % n);
 }
+const shardCache = {};
+async function shardGet(kind, pid) {
+  if (!pid) return null;
+  const url = `/data/${kind}/${shardOf(pid, D.shards[kind])}.json`;
+  try {
+    shardCache[url] = shardCache[url] || fetch(url).then(r => r.ok ? r.json() : {}).catch(() => { delete shardCache[url]; return null; });
+    const s = await shardCache[url];
+    return s ? s[pid] || null : undefined; // undefined = couldn't load
+  } catch (e) { return undefined; }
+}
+const loadEx = pid => shardGet('ex', pid);
 function taxParts(p) {
   if (p._ex) {
     // 2026 final tax roll: school and non-school taxable value as certified. Homestead amounts are shown by name;
@@ -288,8 +300,9 @@ function renderTax(p, cityName) {
 }
 async function loadFees(pid, taxTot) {
   const el = $('feeBody'); if (!el || !pid) return;
-  let items = [];
-  try { const r = await fetch(`/data/nav/${pid.slice(0, 3)}.json`); if (r.ok) items = (await r.json())[pid] || []; } catch (e) { el.innerHTML = ''; return; }
+  const got = await shardGet('nav', pid);
+  if (got === undefined) { el.innerHTML = ''; return; }
+  const items = got || [];
   const fees = items.reduce((a, x) => a + x[1], 0);
   el.innerHTML = items.length
     ? `<dl class="kv fees"><dt class="span">Flat fees on the tax bill</dt>${items.map(([c, a]) => `<dt>${esc(D.navLabel[c] || 'Other charge (' + c + ')')}</dt><dd>${usd(a)}</dd>`).join('')}<dt><b>Estimated total bill</b></dt><dd><b>${usd(taxTot + fees)}</b> <span class="muted small">tax + fees</span></dd></dl>`
