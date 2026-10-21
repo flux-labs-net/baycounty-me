@@ -12,6 +12,7 @@ from amend_page import amend_page
 from addr_page import addr_page
 from michael_page import michael_page
 from search_page import search_page, build_index
+from debt_audit_page import debt_page, audits_page
 from updates import updates_page, rss, last_updated, nice as nice_date
 OUT = os.path.join(ROOT, 'public')
 SITE = 'BayCounty.me'
@@ -28,6 +29,10 @@ MENU = [
          'desc': 'Your bill, slice by slice, and where each government spends'},
         {'label': 'Hurricane Michael', 'href': '/public-money/hurricane-michael',
          'desc': 'FEMA, HUD and state recovery money: who got it and for what'},
+        {'label': 'Debt', 'href': '/public-money/debt',
+         'desc': 'What each government owes, what for, and big payments ahead'},
+        {'label': 'Audit Findings', 'href': '/public-money/audits',
+         'desc': 'What outside auditors flagged, in plain English'},
         {'label': 'Amendment 3', 'href': '/public-money/amendment-3',
          'desc': 'What the property tax amendment would change in Bay County'},
     ]},
@@ -484,6 +489,8 @@ PAGES = [
     ('/public-money/amendment-3', 'Amendment 3: what changes in Bay County',
      'What Florida\'s 2026 Amendment 3 would do to Bay County property tax bills and local budgets, using the state\'s own estimates. Before-and-after calculator; both sides\' arguments; no position taken.', lambda: amend_page(OUT)),
     ('/public-money/hurricane-michael', 'Where the Hurricane Michael money went', 'FEMA, HUD and state recovery money in Bay County after Hurricane Michael: every FEMA project, household aid by city, Rebuild Florida awards, debris costs and the Lynn Haven case.', lambda: michael_page(OUT)),
+    ('/public-money/debt', 'What Bay County governments owe', 'Debt owed by Bay County, the school district and every city: bonds, bank loans, big single payments ahead, and pension promises, from audited statements.', debt_page),
+    ('/public-money/audits', 'What the auditors found', 'Three years of audit findings for Bay County governments in plain English, including repeat problems and Florida Auditor General reports.', audits_page),
     ('/glossary', 'Plain-English guide', 'Every term on BayCounty.me explained simply: CRAs, tax increment, millage, homestead exemptions, budgets and more.', glossary_page),
     ('/updates', 'Updates', 'New pages, new data and corrections on BayCounty.me, newest first, with an RSS feed.', updates_page),
     ('/search', 'Search', 'Search every page, glossary term and public-money record on BayCounty.me.', search_page),

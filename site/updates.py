@@ -9,6 +9,9 @@ from datetime import datetime, timezone
 import html
 
 CHANGES = [
+    {'date': '2026-10-20', 'title': 'Debt and audit findings',
+     'text': 'What every Bay County government owes, including big single payments ahead, and three years of audit findings in plain English, from audits filed with the Florida Auditor General.',
+     'pages': ['/public-money/debt', '/public-money/audits']},
     {'date': '2026-10-20', 'title': 'Search, and Hurricane Michael recovery money',
      'text': 'New: search across every page and record. New page tracking FEMA, HUD and state Hurricane Michael money in Bay County, with all 765 FEMA projects.',
      'pages': ['/search', '/public-money/hurricane-michael']},

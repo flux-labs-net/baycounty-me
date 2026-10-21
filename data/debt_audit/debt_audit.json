@@ -1,0 +1,2410 @@
+{
+ "as_of": "2026-10-20",
+ "debt": [
+  {
+   "government": "Bay County (Board of County Commissioners and constitutional officers; includes county utilities and solid waste)",
+   "fy": "FY2024 (year ended 2024-09-30) - FY2025 audit not yet filed with Auditor General",
+   "total_debt": 281388749,
+   "total_debt_note": "Matches the county's Schedule 11 'Ratios of Outstanding Debt' ($1,435 per capita). Governmental: bonds from direct placement $20,261,000; notes from direct borrowings $182,029,699; leases $1,728,798; SBITAs $1,191,776; finance purchases $2,136,645. Business-type (wholesale water, retail water/wastewater, solid waste): revenue bonds $38,885,000 + premium $2,771,127; direct-placement bond $17,793,000; notes $13,757,903; finance purchases $113,239; SBITAs $720,562. Excludes compensated absences ($7,927,921), self-insured losses ($1,475,542), landfill closure/postclosure ($19,341,711), pension and OPEB.",
+   "by_type": {
+    "revenue_bonds": 76939000,
+    "revenue_bonds_detail": "Publicly offered utility revenue bonds $38,885,000 (Water & Sewer 2015, Water 2016) plus direct-placement revenue bonds $38,054,000 (CIR 2011, Sales Tax 2018A&B, CIR 2021A, Solid Waste 2021)",
+    "bond_premium": 2771127,
+    "general_obligation_bonds": 0,
+    "notes_loans": 195787602,
+    "notes_loans_detail": "Governmental revenue notes (sales tax, tourist development tax, non-ad valorem, Hurricane Michael refunding notes) and Sheriff fleet loans $182,029,699; business-type water note, Military Point wastewater note share, SRF loans and water tank purchase note $13,757,903",
+    "leases": 1728798,
+    "sbitas": 1912338,
+    "financed_purchases": 2249884,
+    "compensated_absences": 7927921,
+    "landfill_closure_postclosure": 19341711
+   },
+   "pension_opeb": {
+    "net_pension_liability": 130424163,
+    "net_pension_liability_detail": {
+     "governmental": 123624748,
+     "business_type": 6799415
+    },
+    "total_opeb_liability": 15850837
+   },
+   "debt_service_year": {
+    "fy": "FY2025 scheduled (bonds and notes)",
+    "principal": 19612480,
+    "interest": 8869872,
+    "total": 28482352,
+    "detail": "Governmental bonds $2,093,896; governmental notes $18,222,678; business-type bonds $5,971,848; business-type notes $2,193,930. Large single (balloon) payments follow: $49,943,109 in FY2027 (Series 2024) and $48,874,337 in FY2028 (Series 2023)."
+   },
+   "issues": [
+    {
+     "name": "Revenue Refunding Note, Series 2024 (Hurricane Michael)",
+     "year_issued": 2024,
+     "original_amount": 50000000,
+     "original_amount_note": "County share $49,943,109; $56,891 is the TPO's",
+     "outstanding": 49943109,
+     "interest_rate": "4.00%",
+     "final_maturity": "2027-09-01 (single principal payment)",
+     "purpose": "Refinanced part of the $100,000,000 Revenue Refunding Note, Series 2021B (Hurricane Michael); county paid off $50 million of 2021B in FY2024. Refinancing increased debt service by $6,992,034 (economic loss $998,860) to keep cash for recovery projects pending FEMA closeouts.",
+     "repaid_by": "Non-ad valorem revenues (Resolution 4065)"
+    },
+    {
+     "name": "Capital Improvement Revenue Refunding Note, Series 2023 (Hurricane Michael)",
+     "year_issued": 2023,
+     "original_amount": 50000000,
+     "original_amount_note": "County share $48,874,337; $1,125,663 is the TPO's",
+     "outstanding": 48874337,
+     "interest_rate": "3.99%",
+     "final_maturity": "2028-09-01 (single principal payment)",
+     "purpose": "Refinanced Revenue Bond, Series 2020 to keep cash for Hurricane Michael projects; increased debt service by $6,576,953, economic loss $8,143,632",
+     "repaid_by": "Non-ad valorem revenues (Resolution 4008)"
+    },
+    {
+     "name": "Sales Tax Revenue Refunding Note, Series 2020",
+     "year_issued": 2020,
+     "original_amount": 38770000,
+     "outstanding": 33025000,
+     "interest_rate": "2.06%",
+     "final_maturity": "2032-09-01",
+     "purpose": "Refund Sales Tax Refunding Revenue Note, Series 2015",
+     "repaid_by": "Local government half-cent sales tax"
+    },
+    {
+     "name": "Water and Sewer System Revenue Refunding Bonds, Series 2015",
+     "year_issued": 2015,
+     "original_amount": 28710000,
+     "outstanding": 23435000,
+     "interest_rate": "2.0% to 5.0%",
+     "final_maturity": "2045-09-01",
+     "purpose": "Refund Water and Sewer System Revenue Bonds, Series 2011 (extended maturity 14 years; increased total debt service by $15,104,388)",
+     "repaid_by": "Water and sewer net revenues and connection fees; county may budget non-ad valorem revenues if short"
+    },
+    {
+     "name": "Tourist Development Tax Revenue Refunding Note, Series 2020",
+     "year_issued": 2020,
+     "original_amount": 32120000,
+     "outstanding": 22920000,
+     "interest_rate": "2.06%",
+     "final_maturity": "2033-04-01",
+     "purpose": "Refund TDT Revenue Note, Series 2018",
+     "repaid_by": "Up to four cents of tourist development tax collected in the Panama City Beach TDT sub-district"
+    },
+    {
+     "name": "Solid Waste System Revenue Bond, Series 2021",
+     "year_issued": 2021,
+     "original_amount": 20340000,
+     "outstanding": 17793000,
+     "interest_rate": "1.87%",
+     "final_maturity": "2041-09-01",
+     "purpose": "Solid waste system capital improvements",
+     "repaid_by": "Solid Waste Fund net revenues"
+    },
+    {
+     "name": "Water System Revenue Refunding Bonds, Series 2016",
+     "year_issued": 2016,
+     "original_amount": 30085000,
+     "outstanding": 15450000,
+     "interest_rate": "4.0% to 5.0%",
+     "final_maturity": "2030-09-01",
+     "purpose": "Refund Water System Revenue Refunding Bonds, Series 2005",
+     "repaid_by": "Wholesale water system net revenues and impact fees"
+    },
+    {
+     "name": "Capital Improvement Revenue Bond, Series 2021A",
+     "year_issued": 2021,
+     "original_amount": 15046000,
+     "outstanding": 13231000,
+     "interest_rate": "2.29%",
+     "final_maturity": "2041-09-01",
+     "purpose": "Capital improvements within the county",
+     "repaid_by": "Non-ad valorem revenues"
+    },
+    {
+     "name": "Water System Revenue Note, Series 2014",
+     "year_issued": 2014,
+     "original_amount": 18925000,
+     "outstanding": 9940000,
+     "interest_rate": "3.70%",
+     "final_maturity": "2032-09-01",
+     "purpose": "Wholesale water system capital improvements",
+     "repaid_by": "Wholesale water net revenues and impact fees"
+    },
+    {
+     "name": "Capital Improvement Revenue Note, Series 2022A",
+     "year_issued": 2022,
+     "original_amount": 10055000,
+     "outstanding": 9308000,
+     "interest_rate": "3.09%",
+     "final_maturity": "2042-09-01",
+     "purpose": "Construction and renovation of a park and sports complex",
+     "repaid_by": "Non-ad valorem revenues"
+    },
+    {
+     "name": "Capital Improvement Revenue Refunding Note, Series 2022B",
+     "year_issued": 2022,
+     "original_amount": 9505000,
+     "outstanding": 8454000,
+     "interest_rate": "2.88%",
+     "final_maturity": "2037-09-01",
+     "purpose": "Refund Capital Improvement Revenue Note, Series 2021",
+     "repaid_by": "Non-ad valorem revenues"
+    },
+    {
+     "name": "Sales Tax Revenue Refunding Bonds, Series 2018A&B",
+     "year_issued": 2018,
+     "original_amount": 11023000,
+     "outstanding": 6650000,
+     "interest_rate": "2.90%",
+     "final_maturity": "2032-09-01",
+     "purpose": "Refund Sales Tax Revenue Refunding Bonds, Series 2007",
+     "repaid_by": "Half-cent sales tax"
+    },
+    {
+     "name": "Capital Improvement Revenue Refunding Note, Series 2021",
+     "year_issued": 2021,
+     "original_amount": 11235000,
+     "outstanding": 5625000,
+     "interest_rate": "0.91%",
+     "final_maturity": "2027-09-01",
+     "purpose": "Refund Capital Improvement Revenue Refunding Bonds, Series 2011",
+     "repaid_by": "Non-ad valorem revenues"
+    },
+    {
+     "name": "Non-Ad Valorem Revenue Note, Series 2018",
+     "year_issued": 2018,
+     "original_amount": 13150000,
+     "outstanding": 2359000,
+     "interest_rate": "3.02%",
+     "final_maturity": "2025-09-01",
+     "purpose": "800 MHz radio system",
+     "repaid_by": "Non-ad valorem revenues"
+    },
+    {
+     "name": "Wastewater Revenue Refunding Note, Series 2014 (Military Point AWT, joint with City of Callaway)",
+     "year_issued": 2014,
+     "original_amount": 10445000,
+     "outstanding": 997000,
+     "interest_rate": "3.31%",
+     "final_maturity": "2026-09-01",
+     "purpose": "Refund Series 2004 wastewater bonds for the Military Point Advanced Wastewater Treatment Facility joint venture; county liable for one half",
+     "repaid_by": "Joint venture net revenues"
+    }
+   ],
+   "ratings": "None published in audit (most county debt is privately placed with banks)",
+   "population": 196112,
+   "population_note": "FY2024 estimate in county Schedule 16 (BEBR)",
+   "source_url": "https://flauditor.gov/pages/county_efile%20rpts/2024%20bay%20county.pdf",
+   "population_2025_estimate": 199950,
+   "population_source_url": "https://edr.state.fl.us/Content/population-demographics/data/2025_Pop_Estimates.pdf"
+  },
+  {
+   "government": "Bay District Schools (Bay County District School Board)",
+   "fy": "FY2025 (year ended 2025-06-30)",
+   "total_debt": 147037357,
+   "total_debt_note": "Certificates of participation (direct placements) $139,325,000 + unamortized premium $7,438,170 + copier leases $274,187. Excludes estimated insurance claims ($13,844,137), compensated absences ($15,264,842), pension and OPEB.",
+   "by_type": {
+    "revenue_bonds": 0,
+    "general_obligation_bonds": 0,
+    "certificates_of_participation": 139325000,
+    "cop_premium": 7438170,
+    "notes_loans": 0,
+    "leases": 274187,
+    "sbitas": 0,
+    "compensated_absences": 15264842
+   },
+   "pension_opeb": {
+    "net_pension_liability": 156836831,
+    "net_pension_liability_detail": {
+     "governmental": 155566453,
+     "business_type": 1270378
+    },
+    "opeb_liability": 5591032
+   },
+   "debt_service_year": {
+    "fy": "FY2026 scheduled (year ending 2026-06-30)",
+    "principal": 11490000,
+    "interest": 5384969,
+    "total": 16874969,
+    "note": "COPs only; leases add $206,816."
+   },
+   "issues": [
+    {
+     "name": "Refunding Certificates of Participation, Series 2015",
+     "year_issued": 2015,
+     "original_amount": null,
+     "outstanding": null,
+     "interest_rate": "2.56%",
+     "final_maturity": "2029",
+     "purpose": "Refunding of earlier COPs under the 1994 master lease-purchase agreement",
+     "repaid_by": "Lease payments by the district (typically from capital outlay property tax); property under ground lease to Bay County Educational Facilities Finance Corporation"
+    },
+    {
+     "name": "Certificates of Participation, Series 2019",
+     "year_issued": 2019,
+     "original_amount": null,
+     "outstanding": null,
+     "interest_rate": "1.99%",
+     "final_maturity": "2030",
+     "purpose": "Educational facilities under master lease",
+     "repaid_by": "District lease payments"
+    },
+    {
+     "name": "Certificates of Participation, Series 2020A",
+     "year_issued": 2020,
+     "original_amount": null,
+     "outstanding": null,
+     "interest_rate": "4% to 5%",
+     "final_maturity": "2040",
+     "purpose": "Educational facilities under master lease",
+     "repaid_by": "District lease payments"
+    },
+    {
+     "name": "Certificates of Participation, Series 2022A",
+     "year_issued": 2022,
+     "original_amount": null,
+     "outstanding": null,
+     "interest_rate": "4% to 5%",
+     "final_maturity": "2047",
+     "purpose": "Educational facilities under master lease",
+     "repaid_by": "District lease payments"
+    }
+   ],
+   "issues_note": "The audit gives only the combined COP balance ($139,325,000), not each series. Facilities under the ground lease include Patronis Elementary, Lucille Moore Elementary, Robert L. Young Service Center, J.R. Arnold High, Emerald Bay Academy, New Horizons Learning Center, Breakfast Point Academy, Deer Point Elementary, Jinks Middle gym, Bay High STEM classrooms and A. Gary Walsingham Academy. If the district stopped renewing the lease it could have to surrender these sites to certificate holders through June 30, 2045.",
+   "ratings": "None published in audit",
+   "population": null,
+   "source_url": "https://flauditor.gov/pages/dsb_efile%20rpts/2025%20bay%20county%20district%20school%20board.pdf",
+   "population_2025_estimate": 199950,
+   "population_note": "Countywide population (district boundaries = Bay County)",
+   "population_source_url": "https://edr.state.fl.us/Content/population-demographics/data/2025_Pop_Estimates.pdf"
+  },
+  {
+   "government": "City of Panama City (primary government; excludes Port Authority)",
+   "fy": "FY2024 (year ended 2024-09-30) - FY2025 audit not yet filed with Auditor General",
+   "total_debt": 234437765,
+   "total_debt_note": "Matches the city's own 'Ratios of Outstanding Debt' schedule: governmental revenue notes $172,827,384 (net of $27,616 discount), finance purchases $3,804,008, leases $744,766, SBITAs $230,140, utility revenue note $24,181,000, State Revolving Fund loans $32,650,467. Per capita $6,184 (city schedule). Excludes compensated absences ($2,698,163), pension and OPEB. Port Authority debt is reported separately.",
+   "by_type": {
+    "revenue_bonds": 197036000,
+    "revenue_bonds_detail": "All are bank-placed revenue NOTES, not publicly sold bonds: governmental $172,855,000 face; utility Series 2021 $24,181,000",
+    "bond_discount": -27616,
+    "general_obligation_bonds": 0,
+    "notes_loans": 32650467,
+    "notes_loans_detail": "Three 0% State Revolving Fund loans (DW0302G0, WW0302F0, DW0302G1) still being drawn; authorized total $98,660,897",
+    "financed_purchases": 3804008,
+    "leases": 744766,
+    "sbitas": 230140,
+    "compensated_absences": 2698163
+   },
+   "pension_opeb": {
+    "net_pension_liability": 34223411,
+    "net_pension_liability_detail": {
+     "governmental": 33601933,
+     "business_type": 621478
+    },
+    "net_opeb_liability": 4422842
+   },
+   "debt_service_year": {
+    "fy": "FY2025 scheduled (revenue notes only)",
+    "principal": 5990000,
+    "interest": 9943085,
+    "total": 15933085,
+    "detail": "Governmental notes $13,596,485 (of which $8,730,000 is interest on the Series 2023 note); utility Series 2021 note $2,336,600. Excludes finance purchases, leases, SBITAs. NOTE: the entire $150,000,000 Series 2023 principal is scheduled for FY2026 (single payment)."
+   },
+   "issues": [
+    {
+     "name": "Capital Improvement Revenue Note, Series 2023",
+     "year_issued": 2023,
+     "original_amount": 150000000,
+     "outstanding": 150000000,
+     "interest_rate": "5.82%",
+     "final_maturity": "FY2026 (entire principal shown due in fiscal year ending 9/30/2026)",
+     "purpose": "Capital Projects Fund projects (issued August 2023); the audit does not itemize the projects. Capital Projects Fund balance was $118,632,540 at 9/30/2024.",
+     "repaid_by": "Lien on and pledged funds of non-ad valorem revenues",
+     "notes": "Interest of $8,730,000 per year; principal due in one payment in FY2026."
+    },
+    {
+     "name": "Water and Sewer Refunding Revenue Note, Series 2021",
+     "year_issued": 2021,
+     "original_amount": 25891000,
+     "outstanding": 24181000,
+     "interest_rate": "2.50%",
+     "final_maturity": "FY2035-2039 period",
+     "purpose": "Refunding of prior water/sewer debt",
+     "repaid_by": "Net revenues of the water and wastewater system"
+    },
+    {
+     "name": "Capital Improvement Revenue Note, Series 2018",
+     "year_issued": 2018,
+     "original_amount": 16330000,
+     "outstanding": 11047000,
+     "interest_rate": "3.30%",
+     "final_maturity": "FY2030-2033 period",
+     "purpose": "Not stated in audit",
+     "repaid_by": "Business tax receipts"
+    },
+    {
+     "name": "Infrastructure Sales Surtax Revenue Note, Series 2018",
+     "year_issued": 2018,
+     "original_amount": 15100000,
+     "outstanding": 6100000,
+     "interest_rate": "3.02%",
+     "final_maturity": "FY2027",
+     "purpose": "Infrastructure capital projects",
+     "repaid_by": "Local infrastructure sales surtax"
+    },
+    {
+     "name": "Capital Improvement Revenue Note, Series 2013B",
+     "year_issued": 2013,
+     "original_amount": 12999000,
+     "outstanding": 4014000,
+     "interest_rate": "2.81%",
+     "final_maturity": "FY2028",
+     "purpose": "Marina project ($992,688 still unspent at 9/30/2024, remaining project in planning)",
+     "repaid_by": "Business tax receipts"
+    },
+    {
+     "name": "Capital Improvement Revenue Note, Series 2016",
+     "year_issued": 2016,
+     "original_amount": 3207000,
+     "outstanding": 1694000,
+     "interest_rate": "1.87%",
+     "final_maturity": "FY2030-2032 period",
+     "purpose": "Not stated",
+     "repaid_by": "Business tax receipts"
+    },
+    {
+     "name": "State Revolving Fund loan DW0302G1 (0%)",
+     "year_issued": null,
+     "original_amount": 61061597,
+     "original_amount_note": "Authorized",
+     "outstanding": 16958342,
+     "interest_rate": "0%",
+     "final_maturity": "Payments begin FY2026",
+     "purpose": "Utility system (drinking water program number)",
+     "repaid_by": "Net wastewater utility revenue (as stated in audit)"
+    },
+    {
+     "name": "State Revolving Fund loan WW0302F0 (0%)",
+     "year_issued": null,
+     "original_amount": 12350000,
+     "original_amount_note": "Authorized",
+     "outstanding": 8395970,
+     "interest_rate": "0%",
+     "final_maturity": "Payments begin FY2026",
+     "purpose": "Wastewater",
+     "repaid_by": "Net wastewater utility revenue"
+    },
+    {
+     "name": "State Revolving Fund loan DW0302G0 (0%)",
+     "year_issued": null,
+     "original_amount": 25249300,
+     "original_amount_note": "Authorized",
+     "outstanding": 7296155,
+     "interest_rate": "0%",
+     "final_maturity": "FY2041",
+     "purpose": "Utility system",
+     "repaid_by": "Net wastewater utility revenue"
+    }
+   ],
+   "ratings": "None published in audit",
+   "population": 37909,
+   "population_note": "FY2024 estimate in city's statistical section (source: Florida EDR)",
+   "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2024%20panama%20city.pdf",
+   "population_2025_estimate": 38078,
+   "population_source_url": "https://edr.state.fl.us/Content/population-demographics/data/2025_Pop_Estimates.pdf"
+  },
+  {
+   "government": "City of Panama City Beach (includes Front Beach Road CRA bonds)",
+   "fy": "FY2025 (year ended 2025-09-30)",
+   "total_debt": 87554742,
+   "total_debt_note": "Governmental revenue bonds $56,915,000 + unamortized premium $5,474,131 (both Front Beach Road CRA bond issues, carried on the city's books) + utility revenue bonds $23,540,000 + developer revenue certificates $1,619,665 + lease $5,946. Excludes compensated absences ($2,788,350), pension and OPEB. All bonds are direct placements.",
+   "by_type": {
+    "revenue_bonds": 80455000,
+    "revenue_bonds_detail": "Governmental (Front Beach Road CRA tax increment) $56,915,000; utility $23,540,000",
+    "bond_premium": 5474131,
+    "general_obligation_bonds": 0,
+    "notes_loans": 0,
+    "revenue_certificates_to_developers": 1619665,
+    "revenue_certificates_note": "Payable solely from a share of water/wastewater impact fees; void if connections/fees are insufficient",
+    "leases": 5946,
+    "sbitas": 0,
+    "compensated_absences": 2788350
+   },
+   "pension_opeb": {
+    "net_pension_liability_total": 8242009,
+    "net_pension_liability_detail": {
+     "general_employees": 892399,
+     "police_officers": 3183825,
+     "firefighters": 3519561,
+     "business_type": 646224
+    },
+    "net_opeb_obligation": 1707722
+   },
+   "debt_service_year": {
+    "fy": "FY2026 scheduled",
+    "principal": 5310946,
+    "interest": 2462252,
+    "total": 7773198,
+    "detail": "Governmental (CRA) bonds $4,983,401; utility bonds $2,783,770; lease $6,027. Excludes developer revenue certificates ($1,619,665 shown as due within one year)."
+   },
+   "issues": [
+    {
+     "name": "Capital Improvement Refunding Revenue Bonds, Series 2015 (Front Beach Road Project)",
+     "year_issued": 2015,
+     "original_amount": 42915000,
+     "outstanding": 21805000,
+     "interest_rate": "2.73%",
+     "final_maturity": "2031",
+     "purpose": "Refund Series 2006 Front Beach Road bonds; saved $5,428,743 over 17 years",
+     "repaid_by": "First lien on Front Beach Road CRA tax increment revenue and CRA assessment; FY2025 debt service was 15.4% of $22,251,398 pledged revenues"
+    },
+    {
+     "name": "Capital Improvement Revenue Bonds, Series 2020 (Front Beach Road Project)",
+     "year_issued": 2020,
+     "original_amount": 35110000,
+     "outstanding": 35110000,
+     "interest_rate": "5% through May 2041, then 4%",
+     "final_maturity": "2048-11-01",
+     "purpose": "Front Beach Road Segment 3/Hwy 79, Powell Adams Phase 2, Front Beach Road Segment 4.1 and other approved projects",
+     "repaid_by": "Front Beach Road CRA tax increment revenue; principal begins Nov. 1, 2032"
+    },
+    {
+     "name": "Utility Revenue Refunding Bond, Series 2020A",
+     "year_issued": 2020,
+     "original_amount": 19875000,
+     "outstanding": 14595000,
+     "interest_rate": "1.55% fixed",
+     "final_maturity": "2036-06-01",
+     "purpose": "Refund Utility Revenue Refunding Bonds, Series 2016",
+     "repaid_by": "Water/sewer net revenues, system development charges and (until released) public service taxes"
+    },
+    {
+     "name": "Utility Revenue Refunding Bond, Series 2022",
+     "year_issued": 2022,
+     "original_amount": 12535000,
+     "outstanding": 8945000,
+     "interest_rate": "1.37% fixed",
+     "final_maturity": "2032-06-01",
+     "purpose": "Refund Utility System Revenue Bond, Series 2020B",
+     "repaid_by": "Same utility pledge as Series 2020A"
+    }
+   ],
+   "ratings": "None published in audit (bonds are direct placements)",
+   "population": null,
+   "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2025%20panama%20city%20beach.pdf",
+   "population_2025_estimate": 19581,
+   "population_source_url": "https://edr.state.fl.us/Content/population-demographics/data/2025_Pop_Estimates.pdf"
+  },
+  {
+   "government": "Panama City Beach Community Redevelopment Agency (component unit of City of Panama City Beach)",
+   "fy": "FY2025 (year ended 2025-09-30)",
+   "total_debt": 0,
+   "total_debt_note": "The CRA reports no debt of its own. Its Front Beach Road bonds ($56,915,000 + premium) are reported by the City of Panama City Beach and repaid from CRA tax increment; the CRA transferred $21,292,435 to the city in FY2025.",
+   "by_type": {
+    "revenue_bonds": 0,
+    "general_obligation_bonds": 0,
+    "notes_loans": 0,
+    "leases": 0,
+    "sbitas": 0
+   },
+   "pension_opeb": {},
+   "debt_service_year": null,
+   "issues": [],
+   "ratings": null,
+   "population": null,
+   "source_url": "https://flauditor.gov/pages/specialdistricts_efile%20rpts/2025%20panama%20city%20beach%20community%20redevelopment%20agency.pdf"
+  },
+  {
+   "government": "City of Lynn Haven",
+   "fy": "FY2025 (year ended 2025-09-30)",
+   "total_debt": 31549735,
+   "total_debt_note": "Governmental bonds $22,103,690 + business-type bonds $1,646,310 (+ $52,570 unamortized premium) + business-type DEP loans $7,747,165. Excludes compensated absences ($664,439) and OPEB. During FY2025 the city paid off the $4,323,130 contractor-financed stormwater note (2.55%, was due 2047).",
+   "by_type": {
+    "revenue_bonds": 23750000,
+    "revenue_bonds_detail": "Taxable Revenue Bonds 2019 $21,650,000 (non-ad valorem covenant); Sales Tax Revenue Refunding 2016 $1,065,000 split gov/BTA; Capital Improvement Revenue Refunding 2015 $1,035,000",
+    "bond_premium": 52570,
+    "general_obligation_bonds": 0,
+    "notes_loans": 7747165,
+    "notes_loans_detail": "Two Florida DEP State Revolving Fund loans",
+    "leases": 0,
+    "sbitas": 0,
+    "compensated_absences": 664439
+   },
+   "pension_opeb": {
+    "net_pension_liability": 0,
+    "net_pension_asset": 4426589,
+    "pension_note": "City-sponsored police, fire and general employee plans reported a combined net pension ASSET of $4,426,589 at 9/30/2025.",
+    "total_opeb_liability": 1012495
+   },
+   "debt_service_year": {
+    "fy": "FY2026 scheduled",
+    "principal": 3116311,
+    "interest": 701461,
+    "total": 3817772,
+    "detail": "Governmental $2,910,851; business-type $906,921"
+   },
+   "issues": [
+    {
+     "name": "Taxable Revenue Bonds, Series 2019",
+     "year_issued": 2019,
+     "original_amount": null,
+     "outstanding": 21650000,
+     "interest_rate": "2.2% to 3.0%",
+     "final_maturity": "August 2034",
+     "purpose": "Costs of Hurricane Michael damage",
+     "repaid_by": "Covenant to budget and appropriate non-ad valorem revenues"
+    },
+    {
+     "name": "Sales Tax Revenue Refunding Bonds, Series 2016",
+     "year_issued": 2016,
+     "original_amount": null,
+     "outstanding": 1065000,
+     "outstanding_note": "$453,690 governmental + $611,310 business-type (43%/57% split)",
+     "interest_rate": "1.6% to 2.3%",
+     "final_maturity": "December 2027",
+     "purpose": "Refund Series 2005 sales tax bonds",
+     "repaid_by": "Half-cent sales tax revenues"
+    },
+    {
+     "name": "Capital Improvement Revenue Refunding Bonds, Series 2015",
+     "year_issued": 2015,
+     "original_amount": null,
+     "outstanding": 1035000,
+     "interest_rate": "2.0% to 4.25%",
+     "final_maturity": "December 2032",
+     "purpose": "Refund part of Series 2005 capital improvement bonds (utility)",
+     "repaid_by": "Water and sewer net revenues and system development charge bond-service components"
+    },
+    {
+     "name": "DEP SRF loan - water main replacement",
+     "year_issued": 2018,
+     "original_amount": 2360651,
+     "original_amount_note": "Amended to $3,485,021",
+     "outstanding": 2561891,
+     "interest_rate": "1.31%",
+     "final_maturity": "20 years from first payment (12/15/2019)",
+     "purpose": "Water main replacement",
+     "repaid_by": "Water and sewer system pledged revenues"
+    },
+    {
+     "name": "DEP SRF loan - wastewater rehabilitation",
+     "year_issued": 2018,
+     "original_amount": 4550022,
+     "original_amount_note": "Amended to $6,629,064",
+     "outstanding": 5185274,
+     "interest_rate": "0.93%",
+     "final_maturity": "20 years from first payment (3/15/2021)",
+     "purpose": "Wastewater rehabilitation",
+     "repaid_by": "Water and sewer system pledged revenues"
+    }
+   ],
+   "ratings": "None published in audit",
+   "population": null,
+   "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2025%20lynn%20haven.pdf",
+   "population_2025_estimate": 21733,
+   "population_source_url": "https://edr.state.fl.us/Content/population-demographics/data/2025_Pop_Estimates.pdf"
+  },
+  {
+   "government": "City of Callaway",
+   "fy": "FY2025 (year ended 2025-09-30)",
+   "total_debt": 13230554,
+   "total_debt_note": "Revenue bonds $12,275,000 + unamortized premium $449,054 + half share of Military Point AWT joint-venture SRF note $506,500. Excludes compensated absences ($359,057) and pension. The $2,250,000 FEMA Community Disaster Loan was fully forgiven in FY2025.",
+   "by_type": {
+    "revenue_bonds": 12275000,
+    "bond_premium": 449054,
+    "general_obligation_bonds": 0,
+    "notes_loans": 506500,
+    "notes_loans_detail": "City's half of the State Revolving Fund loan for the Military Point Advanced Wastewater Treatment Facility joint venture (other half reported by Bay County; city is contingently liable for it)",
+    "leases": 0,
+    "sbitas": 0,
+    "compensated_absences": 359057
+   },
+   "pension_opeb": {
+    "net_pension_liability_FRS_and_HIS": 4909908,
+    "opeb": "No OPEB liability recorded; city states retiree participation has been 0% for several years."
+   },
+   "debt_service_year": {
+    "fy": "FY2026 scheduled",
+    "principal": 1346500,
+    "interest": 489596,
+    "total": 1836096,
+    "detail": "Revenue bonds $1,312,831; Military Point note $523,265 (final payment)"
+   },
+   "issues": [
+    {
+     "name": "Capital Improvement Revenue Refunding Bonds, Series 2015",
+     "year_issued": 2015,
+     "original_amount": 15910000,
+     "outstanding": 12275000,
+     "interest_rate": "3% to 5%",
+     "final_maturity": "2037-08-01",
+     "purpose": "Refunded $18,625,000 Capital Improvement Revenue Bonds, Series 2007; saved $2,456,218 in debt service over 22 years",
+     "repaid_by": "Sales tax revenues and Electric Public Service Tax; FY2025 debt service was 24% of pledged revenues ($654,581 of $2,560,071)"
+    },
+    {
+     "name": "State Revolving Fund loan - Military Point Advanced Wastewater Treatment Facility (city's half)",
+     "year_issued": null,
+     "original_amount": null,
+     "outstanding": 506500,
+     "interest_rate": "2.82%",
+     "final_maturity": "FY2026",
+     "purpose": "Joint venture wastewater plant with Bay County, Springfield, Parker",
+     "repaid_by": "Net revenues of the Military Point facility; payments made by the joint venture"
+    },
+    {
+     "name": "FEMA Community Disaster Loan",
+     "year_issued": 2021,
+     "original_amount": 2250000,
+     "outstanding": 0,
+     "interest_rate": null,
+     "final_maturity": "Forgiven in FY2025",
+     "purpose": "Hurricane Michael revenue loss",
+     "repaid_by": "Fully forgiven by DHS/FEMA"
+    }
+   ],
+   "ratings": "None published in audit",
+   "population": null,
+   "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2025%20callaway.pdf",
+   "population_2025_estimate": 15157,
+   "population_source_url": "https://edr.state.fl.us/Content/population-demographics/data/2025_Pop_Estimates.pdf"
+  },
+  {
+   "government": "City of Springfield",
+   "fy": "FY2025 (year ended 2025-09-30)",
+   "total_debt": 25380717,
+   "total_debt_note": "Notes from direct borrowings $17,902,896 (governmental) + $7,413,488 (State Revolving Fund, business-type) + leases $45,539 + SBITA $18,794. Excludes compensated absences ($167,173), pension and OPEB. Includes the $2,902,896 FEMA Community Disaster Loan that FEMA forgave in full on May 11, 2026 (after year end).",
+   "by_type": {
+    "revenue_bonds": 0,
+    "general_obligation_bonds": 0,
+    "notes_loans": 25316384,
+    "notes_loans_detail": "City Complex bank note $15,000,000; FEMA Community Disaster Loan $2,902,896 (forgiven 5/11/2026); five DEP State Revolving Fund loans $7,413,488",
+    "leases": 45539,
+    "sbitas": 18794,
+    "financed_purchases": 0,
+    "compensated_absences": 167173
+   },
+   "pension_opeb": {
+    "net_pension_liability_FRS_and_HIS": 6349134,
+    "total_opeb_liability": 2536755
+   },
+   "debt_service_year": {
+    "fy": "FY2026 scheduled",
+    "principal": 4073402,
+    "interest": 742558,
+    "total": 4815960,
+    "note": "Includes the $2,902,896 Community Disaster Loan shown as due in FY2026, which FEMA forgave on 5/11/2026. Without it, scheduled principal is $1,170,506 and total $1,913,064."
+   },
+   "issues": [
+    {
+     "name": "City Complex Note (local bank)",
+     "year_issued": 2024,
+     "original_amount": 15000000,
+     "outstanding": 15000000,
+     "interest_rate": "4.56% fixed",
+     "final_maturity": "2039-12-01",
+     "purpose": "Construction of the new city complex",
+     "repaid_by": "Governmental funds (audit does not name a specific pledged revenue)",
+     "notes": "Issued Dec. 4, 2024; prepayable without penalty on or after Dec. 1, 2032 (audit text prints '3032'). Interest paid FY2025: $336,300."
+    },
+    {
+     "name": "FEMA Community Disaster Loan",
+     "year_issued": 2020,
+     "original_amount": 2902896,
+     "outstanding": 2902896,
+     "interest_rate": "0.25%",
+     "final_maturity": "Due September 2025; forgiven",
+     "purpose": "Essential services after Hurricane Michael revenue losses",
+     "repaid_by": "Cancelled: FEMA approved forgiveness of full balance May 11, 2026"
+    },
+    {
+     "name": "SRF Loan DW0308010 (water)",
+     "year_issued": 2007,
+     "original_amount": 2796462,
+     "outstanding": 710405,
+     "interest_rate": "2.64%",
+     "final_maturity": "2027 (schedule runs through FY2029)",
+     "purpose": "Water utility improvements",
+     "repaid_by": "Water system gross revenues after O&M"
+    },
+    {
+     "name": "SRF Loan WW030501 (sewer)",
+     "year_issued": 2016,
+     "original_amount": 5604730,
+     "outstanding": 1401639,
+     "interest_rate": "0% to 0.2%",
+     "final_maturity": "2038",
+     "purpose": "Sewer improvements; $4,154,226 forgiven",
+     "repaid_by": "Sewer system gross revenues after O&M"
+    },
+    {
+     "name": "SRF Loan WW030520 (sewer)",
+     "year_issued": 2019,
+     "original_amount": 6404835,
+     "outstanding": 1868783,
+     "interest_rate": "0.105%",
+     "final_maturity": "2040",
+     "purpose": "Sewer improvements; $4,063,425 forgiven",
+     "repaid_by": "Water and sewer gross revenues after O&M"
+    },
+    {
+     "name": "SRF Loan DW030513 (water)",
+     "year_issued": 2023,
+     "original_amount": 7529254,
+     "outstanding": 1844461,
+     "interest_rate": "0.47%",
+     "final_maturity": "2031 per pledged-revenue table; repayment schedule runs to 2036-2040",
+     "purpose": "Water distribution replacement (Springfield SRF Water and Sewer Rehabilitation); $3,550,276 forgiven",
+     "repaid_by": "Utility system gross revenues plus impact fees after O&M"
+    },
+    {
+     "name": "SRF Loan CW030532 (sewer inflow/infiltration)",
+     "year_issued": 2023,
+     "original_amount": 10712849,
+     "outstanding": 1588200,
+     "interest_rate": "0.58% (pledged-revenue table shows 0.105%)",
+     "final_maturity": "2029 per pledged-revenue table; repayment schedule runs to 2036-2040",
+     "purpose": "Sewer inflow and infiltration correction; $6,352,803 forgiven",
+     "repaid_by": "Sewer system gross revenues after O&M"
+    }
+   ],
+   "ratings": "None published in audit",
+   "population": null,
+   "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2025%20springfield.pdf",
+   "notes": "The audit's own tables disagree on some SRF maturity dates and the CW030532 interest rate; both values are shown. Interfund: Sewer Fund owes the General Fund $6,868,618 for operating loans.",
+   "population_2025_estimate": 9213,
+   "population_source_url": "https://edr.state.fl.us/Content/population-demographics/data/2025_Pop_Estimates.pdf"
+  },
+  {
+   "government": "City of Parker",
+   "fy": "FY2025 (year ended 2025-09-30)",
+   "total_debt": 766663,
+   "total_debt_note": "Financed purchases $166,335 + leases $3,597 + State Revolving Fund notes $596,731. Excludes compensated absences ($92,107), net pension and OPEB.",
+   "by_type": {
+    "revenue_bonds": 0,
+    "general_obligation_bonds": 0,
+    "notes_loans": 596731,
+    "notes_loans_detail": "Three Florida DEP State Revolving Fund loans (direct borrowings), business-type",
+    "financed_purchases": 166335,
+    "leases": 3597,
+    "sbitas": 0,
+    "compensated_absences": 92107
+   },
+   "pension_opeb": {
+    "net_pension_liability_FRS_and_HIS": 1831430,
+    "total_opeb_liability": 335355
+   },
+   "debt_service_year": {
+    "fy": "FY2026 scheduled",
+    "principal": 111028,
+    "interest": 8339,
+    "total": 119367,
+    "note": "Financed purchases $74,084 P + $6,112 I; SRF loans $35,175 P + $2,136 I; leases $1,769 P + $91 I (lease line from separate schedule)."
+   },
+   "issues": [
+    {
+     "name": "State Revolving Fund Loan WW030711 (sewer)",
+     "year_issued": null,
+     "original_amount": 1455033,
+     "outstanding": 311552,
+     "interest_rate": "0.42%",
+     "final_maturity": "2039",
+     "purpose": "Sewer system capital improvements",
+     "repaid_by": "Water system gross revenues after O&M and senior obligations"
+    },
+    {
+     "name": "State Revolving Fund Loan DW030720 (water)",
+     "year_issued": null,
+     "original_amount": 162075,
+     "outstanding": 47162,
+     "interest_rate": "2.05%",
+     "final_maturity": "2031",
+     "purpose": "Water system capital improvements",
+     "repaid_by": "Water system gross revenues after O&M and senior obligations"
+    },
+    {
+     "name": "State Revolving Fund Loan DW030722 (water)",
+     "year_issued": null,
+     "original_amount": 7026540,
+     "original_amount_note": "Authorized loan amount; $238,017 drawn and outstanding at 9/30/2025",
+     "outstanding": 238017,
+     "interest_rate": "1.43%",
+     "final_maturity": "2047",
+     "purpose": "Water system capital improvements",
+     "repaid_by": "Utility system (water and sewer) gross revenues after O&M and senior obligations"
+    }
+   ],
+   "ratings": "None published in audit",
+   "population": null,
+   "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2025%20parker.pdf",
+   "population_2025_estimate": 4608,
+   "population_source_url": "https://edr.state.fl.us/Content/population-demographics/data/2025_Pop_Estimates.pdf"
+  },
+  {
+   "government": "City of Mexico Beach",
+   "fy": "FY2025 (year ended 2025-09-30)",
+   "total_debt": 3124600,
+   "total_debt_note": "Bonds payable $3,124,600 (water/sewer revenue bonds). Excludes compensated absences ($122,435) and pension. No governmental-activities debt.",
+   "by_type": {
+    "revenue_bonds": 3124600,
+    "general_obligation_bonds": 0,
+    "notes_loans": 0,
+    "leases": 0,
+    "sbitas": 0,
+    "compensated_absences": 122435
+   },
+   "pension_opeb": {
+    "net_pension_liability_FRS_and_HIS": 2282328,
+    "opeb": "Not reported. The city has not implemented GASB 75 (OPEB); this caused the auditor's qualified opinion."
+   },
+   "debt_service_year": {
+    "fy": "FY2026 scheduled (first year in maturity schedule)",
+    "principal": 110500,
+    "interest": 123546,
+    "total": 234046
+   },
+   "issues": [
+    {
+     "name": "Water and Sewer Revenue Bonds, Series 2000",
+     "year_issued": 2000,
+     "original_amount": null,
+     "outstanding": 1353600,
+     "interest_rate": "4.875%",
+     "final_maturity": "September 2039",
+     "purpose": "Portion of costs of utility system improvements",
+     "repaid_by": "Junior and subordinate pledge of gross revenues of the water and sewer system"
+    },
+    {
+     "name": "USDA Bonds, Series 2013",
+     "year_issued": 2013,
+     "original_amount": null,
+     "outstanding": 1771000,
+     "interest_rate": "3.25%",
+     "final_maturity": "September 2052",
+     "purpose": "Construct a wastewater system",
+     "repaid_by": "Pledge of net revenues of the water and sewer systems"
+    }
+   ],
+   "ratings": "None published in audit",
+   "population": null,
+   "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2025%20mexico%20beach.pdf",
+   "notes": "Not a liability of the city: a 1997 $150,000,000 conduit floating-rate bond program for nonprofit health facilities, payable solely by borrowers (Note 9). General Fund has advanced $1,974,413 (Water), $617,099 (Sanitation) and $929,957 (Sewer) with no repayment terms.",
+   "population_2025_estimate": 1402,
+   "population_source_url": "https://edr.state.fl.us/Content/population-demographics/data/2025_Pop_Estimates.pdf"
+  },
+  {
+   "government": "Panama City-Bay County Airport and Industrial District (Northwest Florida Beaches International Airport) - independent special district",
+   "fy": "FY2025 (year ended 2025-09-30)",
+   "total_debt": 25134004,
+   "total_debt_note": "Two Florida State Infrastructure Bank (SIB) loans. A third SIB loan of up to $26,000,000 (3.80%, June 27, 2024) had a $0 balance at 9/30/2025. Excludes compensated absences ($569,378). The district also maintains a $6,000,000 letter of credit for DEP mitigation (no draws).",
+   "by_type": {
+    "revenue_bonds": 0,
+    "general_obligation_bonds": 0,
+    "notes_loans": 25134004,
+    "notes_loans_detail": "State Infrastructure Bank loans (FDOT)",
+    "leases": 0,
+    "sbitas": 0,
+    "compensated_absences": 569378
+   },
+   "pension_opeb": {
+    "net_pension_liability": 0,
+    "note": "Defined contribution (money purchase) plan only; no net pension liability. No OPEB liability disclosed."
+   },
+   "debt_service_year": {
+    "fy": "Annual payment per amended loan agreements",
+    "total": 2614217,
+    "detail": "$1,379,241 (2007 SIB loan) + $1,234,976 (2009 SIB loan). Principal reduction in FY2025 was $1,987,363. The maturity schedule in the audit begins with FY2027 and shows $0 due within one year."
+   },
+   "issues": [
+    {
+     "name": "State Infrastructure Bank Loan (agreement dated 2007-12-21)",
+     "year_issued": 2007,
+     "original_amount": 25000000,
+     "original_amount_note": "Authorized principal",
+     "outstanding": 13521490,
+     "interest_rate": "1.97% (amended 2021-08-01; originally 4.60%)",
+     "final_maturity": "2036 (schedule runs to 2037-2040 period)",
+     "purpose": "Airport (audit does not state project)",
+     "repaid_by": "Pledge of airport net revenues and eligible Passenger Facility Charge (PFC) revenues"
+    },
+    {
+     "name": "State Infrastructure Bank Loan (agreement dated 2009-04-27)",
+     "year_issued": 2009,
+     "original_amount": 20000000,
+     "original_amount_note": "Authorized principal",
+     "outstanding": 11612514,
+     "interest_rate": "2.71% (amended 2021-08-01; originally 4.60%)",
+     "final_maturity": "2036 (schedule runs to 2037-2040 period)",
+     "purpose": "Airport (audit does not state project)",
+     "repaid_by": "Net revenues and eligible PFC revenues"
+    },
+    {
+     "name": "State Infrastructure Bank Loan (agreement dated 2024-06-27)",
+     "year_issued": 2024,
+     "original_amount": 26000000,
+     "original_amount_note": "Authorized; $0 drawn at 9/30/2025",
+     "outstanding": 0,
+     "interest_rate": "3.80%",
+     "final_maturity": "2051",
+     "purpose": "Not stated in audit",
+     "repaid_by": "Net revenues and eligible PFC revenues; payments of $1,629,315/yr begin 2027-10-01"
+    }
+   ],
+   "ratings": "None published in audit",
+   "population": null,
+   "source_url": "https://flauditor.gov/pages/specialdistricts_efile%20rpts/2025%20panama%20city%20bay%20county%20airport%20and%20industrial%20district.pdf"
+  },
+  {
+   "government": "Panama City Port Authority (Port Panama City) - dependent special district, component unit of City of Panama City",
+   "fy": "FY2024 (year ended 2024-09-30) - latest filed with Auditor General",
+   "total_debt": 20530894,
+   "total_debt_note": "Notes payable $17,983,784 (bank swap note, two notes, three State Infrastructure Bank loans) + line of credit $2,000,000 + lease liability $547,110. Excludes claims and judgments ($351,198), compensated absences ($109,627), pension and OPEB.",
+   "by_type": {
+    "revenue_bonds": 0,
+    "general_obligation_bonds": 0,
+    "notes_loans": 17983784,
+    "notes_loans_detail": "Bank swap note $1,472,715; Industrial Park note $300,000; note payable $2,418,882; SIB loans $2,296,605 + $1,212,169 + $10,283,413",
+    "line_of_credit": 2000000,
+    "leases": 547110,
+    "sbitas": 0,
+    "claims_and_judgments": 351198,
+    "compensated_absences": 109627
+   },
+   "pension_opeb": {
+    "net_pension_liability": 86976,
+    "net_opeb_liability": 187934
+   },
+   "debt_service_year": {
+    "fy": "FY2025 scheduled",
+    "principal": 1686157,
+    "interest": 567857,
+    "total": 2254014,
+    "detail": "Bank swap $571,150; notes $543,277; SIB loans $1,139,587. Excludes lease and line of credit. Swap net payments are expected to reduce interest by about $44,165."
+   },
+   "issues": [
+    {
+     "name": "State Infrastructure Bank Loan (maturing October 2047)",
+     "year_issued": null,
+     "original_amount": null,
+     "outstanding": 10283413,
+     "interest_rate": "3.00%",
+     "final_maturity": "October 2047",
+     "purpose": "Not stated in audit",
+     "repaid_by": "Pledge of port facility net revenues"
+    },
+    {
+     "name": "Note payable (maturing April 2036)",
+     "year_issued": null,
+     "original_amount": null,
+     "outstanding": 2418882,
+     "interest_rate": "2.69%",
+     "final_maturity": "April 2036",
+     "purpose": "Not stated",
+     "repaid_by": "Pledge of facility net revenues"
+    },
+    {
+     "name": "State Infrastructure Bank Loan (maturing October 2032)",
+     "year_issued": null,
+     "original_amount": null,
+     "outstanding": 2296605,
+     "interest_rate": "4.00%",
+     "final_maturity": "October 2032",
+     "purpose": "Not stated",
+     "repaid_by": "Pledge of facility net revenues"
+    },
+    {
+     "name": "Bank note with interest-rate swap",
+     "year_issued": null,
+     "original_amount": null,
+     "outstanding": 1472715,
+     "interest_rate": "4.43% fixed via swap",
+     "final_maturity": "June 2027",
+     "purpose": "Not stated",
+     "repaid_by": "Pledge of facility net revenues"
+    },
+    {
+     "name": "State Infrastructure Bank Loan (maturing October 2035)",
+     "year_issued": null,
+     "original_amount": null,
+     "outstanding": 1212169,
+     "interest_rate": "4.00%",
+     "final_maturity": "October 2035",
+     "purpose": "Not stated",
+     "repaid_by": "Pledge of facility net revenues"
+    },
+    {
+     "name": "Industrial Park note",
+     "year_issued": null,
+     "original_amount": null,
+     "outstanding": 300000,
+     "interest_rate": "3.00%",
+     "final_maturity": "On sale/lease of specified Industrial Park property or on demand",
+     "purpose": "Industrial Park property",
+     "repaid_by": "Collateralized by the Industrial Park property"
+    },
+    {
+     "name": "Bank line of credit",
+     "year_issued": 2019,
+     "original_amount": 7500000,
+     "original_amount_note": "Credit limit",
+     "outstanding": 2000000,
+     "interest_rate": "6.58% at 9/30/2024",
+     "final_maturity": "Renewed to March 16, 2025; port intended to renew",
+     "purpose": "Working capital",
+     "repaid_by": "Port net revenues"
+    }
+   ],
+   "ratings": "None published in audit",
+   "population": null,
+   "source_url": "https://flauditor.gov/pages/specialdistricts_efile%20rpts/2024%20panama%20city%20port%20authority.pdf"
+  },
+  {
+   "government": "Panama City Community Redevelopment Agency (component unit of City of Panama City)",
+   "fy": "FY2024 (year ended 2024-09-30) - latest filed",
+   "total_debt": 247780,
+   "total_debt_note": "No bonds or loans; only an equipment lease liability ($247,780). Compensated absences $5,662. A 2008 agreement obliges the agency to lease Millville Waterfront Park from the city at an amount not yet determinable.",
+   "by_type": {
+    "revenue_bonds": 0,
+    "general_obligation_bonds": 0,
+    "notes_loans": 0,
+    "leases": 247780,
+    "sbitas": 0,
+    "compensated_absences": 5662
+   },
+   "pension_opeb": {
+    "note": "Defined contribution plan through the city; no net pension liability reported."
+   },
+   "debt_service_year": {
+    "fy": "FY2025 scheduled",
+    "principal": 52115,
+    "interest": 10385,
+    "total": 62500
+   },
+   "issues": [],
+   "ratings": null,
+   "population": null,
+   "source_url": "https://flauditor.gov/pages/specialdistricts_efile%20rpts/2024%20panama%20city%20community%20redevelopment%20agency.pdf"
+  }
+ ],
+ "audits": [
+  {
+   "government": "Bay County",
+   "fy": "FY2024",
+   "opinion": "Unmodified (Carr, Riggs & Ingram, report dated September 25, 2025); federal and state compliance unmodified. Prior-period error corrections: an unrecorded SBITA (liability understated $451,513) and workers' compensation liability overstated $2,894,997; beginning governmental net position restated up $2,970,575.",
+   "findings": [
+    {
+     "id": "2024-001",
+     "title": "Lack of Documented Review of Required Quarterly Reports (federal, AL 97.036 FEMA Public Assistance)",
+     "plain": "3 of 40 quarterly FEMA (Hurricane Michael) reports prepared by the county's consultant did not match approved expenses and support. There was no documented county review before the consultant submitted them. Material weakness; no questioned costs.",
+     "repeat": false,
+     "mgmt_response": "Will add a formal, signed review of quarterly FEMA reports before submission.",
+     "source_url": "https://flauditor.gov/pages/county_efile%20rpts/2024%20bay%20county.pdf"
+    },
+    {
+     "id": "2024-002",
+     "title": "Ineligible Expenses Approved for Reimbursement (federal, AL 97.083 SAFER fire staffing grant)",
+     "plain": "Two of three reimbursement requests tested included ineligible payroll costs approved by the grant administrator. The federal grantor caught them and paid only eligible costs. Material weakness; no questioned costs.",
+     "repeat": false,
+     "mgmt_response": "Additional review, including by the Clerk of Court Board Finance Office, documented by email approval.",
+     "source_url": "https://flauditor.gov/pages/county_efile%20rpts/2024%20bay%20county.pdf"
+    },
+    {
+     "id": "2024-003",
+     "title": "Material audit adjustments (Bay County financial statements)",
+     "plain": "Material adjustments were needed for the financial statements to meet GAAP because county controls did not catch them in time. Material weakness.",
+     "repeat": false,
+     "mgmt_response": "Finance Office will identify and record proposed adjustments more timely, coordinating with departments. Target 10/1/2025.",
+     "source_url": "https://flauditor.gov/pages/county_efile%20rpts/2024%20bay%20county.pdf"
+    },
+    {
+     "id": "Property Appraiser 2024-001",
+     "title": "Material adjustments - Bay County Property Appraiser",
+     "plain": "The Property Appraiser's office needed material adjustments to cash and accounts payable, and a check was improperly dated in its records. Material weakness.",
+     "repeat": false,
+     "mgmt_response": "Management agrees.",
+     "source_url": "https://flauditor.gov/pages/county_efile%20rpts/2024%20bay%20county.pdf"
+    }
+   ],
+   "financial_condition_notes": "County did not meet any s. 218.503(1) condition; no management letter recommendations for the Board or the constitutional officers; prior-year findings reported corrected (including the permit-fee finding).",
+   "source_url": "https://flauditor.gov/pages/county_efile%20rpts/2024%20bay%20county.pdf"
+  },
+  {
+   "government": "Bay County",
+   "fy": "FY2023",
+   "opinion": "Unmodified; federal and state compliance unmodified.",
+   "findings": [
+    {
+     "id": "Bay County 2023-001",
+     "title": "Permit fees not charged per adopted fee schedule (first reported 2020)",
+     "plain": "Because of problems in the permit system, the county charged some permit fees that did not match the fee schedule set by Resolutions 3945 and 3957, overcharging in some cases; the county booked a payable for the estimated excess. Auditor recommended fixing the system and remedying affected permits.",
+     "repeat": true,
+     "mgmt_response": "Corrective action plan attached to report; reported corrected in FY2024.",
+     "source_url": "https://flauditor.gov/pages/county_efile%20rpts/2023%20bay%20county.pdf"
+    },
+    {
+     "id": "Sheriff 2023-001",
+     "title": "Material adjustments - Bay County Sheriff",
+     "plain": "The Sheriff's office needed material adjustments to cash, expenses, unearned revenue, payables and accrued liabilities. Material weakness.",
+     "repeat": true,
+     "mgmt_response": "Management agrees.",
+     "source_url": "https://flauditor.gov/pages/county_efile%20rpts/2023%20bay%20county.pdf"
+    }
+   ],
+   "financial_condition_notes": "Did not meet any s. 218.503(1) condition. No federal/state award findings.",
+   "source_url": "https://flauditor.gov/pages/county_efile%20rpts/2023%20bay%20county.pdf"
+  },
+  {
+   "government": "Bay County",
+   "fy": "FY2022",
+   "opinion": "Unmodified; federal and state compliance unmodified.",
+   "findings": [
+    {
+     "id": "Bay County 2022-001",
+     "title": "Permit fees not charged per adopted fee schedule (Resolution 3847)",
+     "plain": "Permit system errors caused some permits to be charged above the adopted fee schedule.",
+     "repeat": true,
+     "mgmt_response": "See corrective action plan in report.",
+     "source_url": "https://flauditor.gov/pages/county_efile%20rpts/2022%20bay%20county.pdf"
+    },
+    {
+     "id": "Bay County 2022-002",
+     "title": "Inadequate review of component unit financial information",
+     "plain": "The county did not adequately review figures from a discretely presented component unit, so adjustments were needed. Significant deficiency.",
+     "repeat": false,
+     "mgmt_response": "See corrective action plan in report.",
+     "source_url": "https://flauditor.gov/pages/county_efile%20rpts/2022%20bay%20county.pdf"
+    },
+    {
+     "id": "Sheriff 2022-001",
+     "title": "Material adjustments - Bay County Sheriff (repeat of 2021-001)",
+     "plain": "Sheriff's office needed material audit adjustments.",
+     "repeat": true,
+     "mgmt_response": "Management agrees.",
+     "source_url": "https://flauditor.gov/pages/county_efile%20rpts/2022%20bay%20county.pdf"
+    }
+   ],
+   "financial_condition_notes": "Did not meet any s. 218.503(1) condition. A July 24, 2023 management-letter addendum answered Auditor General questions about the Bay County Law Library (no employees, contractors or compensation).",
+   "source_url": "https://flauditor.gov/pages/county_efile%20rpts/2022%20bay%20county.pdf"
+  },
+  {
+   "government": "Bay District Schools",
+   "fy": "FY2025 (year ended 2025-06-30)",
+   "opinion": "Unmodified; federal major program compliance unmodified.",
+   "findings": [
+    {
+     "id": "2025-001",
+     "title": "Audit Adjusting Entries (first reported 2024)",
+     "plain": "Significant corrections were needed, including unearned state funds not identified, an unrecorded IT subscription agreement, misclassified capital spending, and OPEB, accrual and lease adjustments. The auditor ties it partly to a lack of appropriate staffing.",
+     "repeat": true,
+     "mgmt_response": "Not corrected; per district, still having significant staff turnover and understaffing.",
+     "source_url": "https://flauditor.gov/pages/dsb_efile%20rpts/2025%20bay%20county%20district%20school%20board.pdf"
+    },
+    {
+     "id": "2025-002",
+     "title": "Expenditures not limited to budgeted amounts (first reported by Auditor General as AM 2023-001)",
+     "plain": "General Fund spending exceeded the budget in three functional categories by a total of $326,700, and the Board did not amend the budget by September 10 as state law and Board policy require. Caused by year-end adjustments not reflected in budget monitoring.",
+     "repeat": true,
+     "mgmt_response": "Over-expenditures came from year-end reclassifications and accruals; still implementing a detailed year-end budget-to-actual review.",
+     "source_url": "https://flauditor.gov/pages/dsb_efile%20rpts/2025%20bay%20county%20district%20school%20board.pdf"
+    },
+    {
+     "id": "2025-101",
+     "title": "Return of Title IV funds worksheets not documented as independently reviewed (federal, Pell Grant, Haney Technical College)",
+     "plain": "Refunds of federal student aid were calculated correctly, but there was no sign-off showing an independent review. Material weakness; no questioned costs.",
+     "repeat": false,
+     "mgmt_response": "Corrective action plan attached to report.",
+     "source_url": "https://flauditor.gov/pages/dsb_efile%20rpts/2025%20bay%20county%20district%20school%20board.pdf"
+    },
+    {
+     "id": "2025-102",
+     "title": "Return of Title IV funds not made within required timeline (federal, Pell Grant)",
+     "plain": "For 2 of 9 students tested, federal aid was returned to the U.S. Department of Education after the 45-day deadline because of manual-control human error. Could risk future Pell funding. Significant deficiency.",
+     "repeat": false,
+     "mgmt_response": "Corrective action plan attached to report.",
+     "source_url": "https://flauditor.gov/pages/dsb_efile%20rpts/2025%20bay%20county%20district%20school%20board.pdf"
+    },
+    {
+     "id": "2025-103",
+     "title": "Multi-factor authentication not required for student information (federal, Pell / Gramm-Leach-Bliley)",
+     "plain": "The district's system did not require multi-factor authentication to access student information, as federal student-information security rules require. Material weakness.",
+     "repeat": false,
+     "mgmt_response": "Corrective action plan attached to report.",
+     "source_url": "https://flauditor.gov/pages/dsb_efile%20rpts/2025%20bay%20county%20district%20school%20board.pdf"
+    }
+   ],
+   "financial_condition_notes": "Did not meet any s. 218.503(1) condition; no management letter recommendations. General Fund assigned + unassigned fund balance $68,037,213 at 6/30/2025.",
+   "source_url": "https://flauditor.gov/pages/dsb_efile%20rpts/2025%20bay%20county%20district%20school%20board.pdf"
+  },
+  {
+   "government": "Bay District Schools",
+   "fy": "FY2024 (year ended 2024-06-30)",
+   "opinion": "Unmodified; federal compliance unmodified.",
+   "findings": [
+    {
+     "id": "2024-001",
+     "title": "Lack of Appropriate Staffing Leading to Audit Entries",
+     "plain": "Staffing shortfalls meant the district's own processes missed entries the auditors had to make. Material weakness.",
+     "repeat": false,
+     "mgmt_response": "Repeated as 2025-001.",
+     "source_url": "https://flauditor.gov/pages/dsb_efile%20rpts/2024%20bay%20county%20district%20school%20board.pdf"
+    },
+    {
+     "id": "2024-002",
+     "title": "Wage rate (Davis-Bacon) compliance (federal, COVID-19 Education Stabilization Fund AL 84.425)",
+     "plain": "Two construction contracts shifted mid-stream to federal pandemic funds lacked the required Davis-Bacon wage clause, and certified payrolls were not collected. Questioned costs: $773,629. Significant deficiency.",
+     "repeat": false,
+     "mgmt_response": "Reported corrected in FY2025 summary schedule.",
+     "source_url": "https://flauditor.gov/pages/dsb_efile%20rpts/2024%20bay%20county%20district%20school%20board.pdf"
+    },
+    {
+     "id": "2024-003",
+     "title": "Expenditures not limited to budgeted amounts (repeat of AM 2023-001)",
+     "plain": "General Fund spending again exceeded budgeted function amounts without a timely Board amendment.",
+     "repeat": true,
+     "mgmt_response": "Repeated as 2025-002.",
+     "source_url": "https://flauditor.gov/pages/dsb_efile%20rpts/2024%20bay%20county%20district%20school%20board.pdf"
+    }
+   ],
+   "financial_condition_notes": "Did not meet any s. 218.503(1) condition; no management letter recommendations.",
+   "source_url": "https://flauditor.gov/pages/dsb_efile%20rpts/2024%20bay%20county%20district%20school%20board.pdf"
+  },
+  {
+   "government": "Bay District Schools",
+   "fy": "FY2023 (year ended 2023-06-30) - audited by the Florida Auditor General, Report No. 2024-189",
+   "opinion": "Unmodified (Auditor General); no material weaknesses; federal programs (Child Nutrition Cluster, Education Stabilization Fund) materially complied.",
+   "findings": [
+    {
+     "id": "AM 2023-001",
+     "title": "Budgetary controls",
+     "plain": "General Fund spending exceeded budgeted amounts in six functional categories by $9,532 to $218,198 (total $582,437) and the Board did not amend the budget by September 10.",
+     "repeat": false,
+     "mgmt_response": "Overages came from year-end reclassifications and accruals; district will add a detailed year-end budget-to-actual review.",
+     "source_url": "https://flauditor.gov/pages/pdf_files/2024-189.pdf"
+    }
+   ],
+   "financial_condition_notes": "General Fund assigned + unassigned fund balance $70,656,009 at 6/30/2023.",
+   "source_url": "https://flauditor.gov/pages/pdf_files/2024-189.pdf"
+  },
+  {
+   "government": "City of Panama City",
+   "fy": "FY2024",
+   "opinion": "Unmodified; federal and state major program compliance unmodified.",
+   "findings": [
+    {
+     "id": "2024-001",
+     "title": "CRA policies, procedures and plan documents (previously 2022-002, 2023-001)",
+     "plain": "The city's Community Redevelopment Agency's policies, procedures and plan documents did not ensure expenditures were proper; assets could be misused or unallowable spending could occur. Reported as a material weakness.",
+     "repeat": true,
+     "mgmt_response": "CRA agrees; the city reorganized the CRA and Housing departments and a new Economic Development/CRA Director is revising plans and policies (FY2022 corrective action plan, target 9/30/2024, still repeated).",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2024%20panama%20city.pdf"
+    }
+   ],
+   "financial_condition_notes": "Did not meet any s. 218.503(1) condition; no management letter recommendations. FY2022 findings 2022-001, -003, -005 and -006 reported corrected. No federal or state award findings.",
+   "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2024%20panama%20city.pdf"
+  },
+  {
+   "government": "City of Panama City",
+   "fy": "FY2023",
+   "opinion": "Unmodified; federal and state compliance unmodified.",
+   "findings": [
+    {
+     "id": "2023-001",
+     "title": "CRA policies, procedures and plan documents (previously 2022-002)",
+     "plain": "Same CRA policy deficiency as above.",
+     "repeat": true,
+     "mgmt_response": "Agrees; see corrective action plan.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2023%20panama%20city.pdf"
+    },
+    {
+     "id": "2023-002",
+     "title": "Capital asset policies (previously 2022-004)",
+     "plain": "Asset tags were missing on several capital assets and some assets could not be found for testing; procedures did not ensure assets were tagged or properly disposed of.",
+     "repeat": true,
+     "mgmt_response": "Agrees; hired an Asset and Inventory Control Administrator to re-establish asset accounting.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2023%20panama%20city.pdf"
+    }
+   ],
+   "financial_condition_notes": "Did not meet any s. 218.503(1) condition. No federal/state award findings.",
+   "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2023%20panama%20city.pdf"
+  },
+  {
+   "government": "City of Panama City",
+   "fy": "FY2022",
+   "opinion": "Unmodified; federal and state compliance unmodified.",
+   "findings": [
+    {
+     "id": "2022-001",
+     "title": "Bank reconciliations (previously 2021-001)",
+     "plain": "Bank accounts were not reconciled on a timely, regular basis, risking misappropriation or misstated records.",
+     "repeat": true,
+     "mgmt_response": "Hired outside consultant; completed March 14, 2023.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2022%20panama%20city.pdf"
+    },
+    {
+     "id": "2022-002",
+     "title": "CRA policies, procedures and plan documents",
+     "plain": "CRA policies did not ensure expenditures were proper.",
+     "repeat": false,
+     "mgmt_response": "Reorganized CRA and Housing departments; new director; ongoing.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2022%20panama%20city.pdf"
+    },
+    {
+     "id": "2022-003",
+     "title": "Schedule of Expenditures of Federal Awards and State Financial Assistance (previously 2021-008)",
+     "plain": "Inadequate procedures to prepare the federal/state grant spending schedule, so misstatements might not be caught.",
+     "repeat": true,
+     "mgmt_response": "Hired an additional accountant and created a Project Management Office for Hurricane Michael rebuilding grants; completed May 31, 2023.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2022%20panama%20city.pdf"
+    },
+    {
+     "id": "2022-004",
+     "title": "Capital assets",
+     "plain": "Inadequate capital asset policies (tagging, disposals).",
+     "repeat": false,
+     "mgmt_response": "Hired Asset and Inventory Control Administrator; target 9/30/2024.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2022%20panama%20city.pdf"
+    },
+    {
+     "id": "2022-005",
+     "title": "Late federal data collection form (previously 2021-011)",
+     "plain": "The Single Audit data collection form was not submitted on time; agencies could withhold, suspend or terminate awards.",
+     "repeat": true,
+     "mgmt_response": "Added accounting staff and an outside consultant for Hurricane Michael grant accounting; target 9/30/2023.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2022%20panama%20city.pdf"
+    },
+    {
+     "id": "2022-006",
+     "title": "Late reporting (previously 2021-012)",
+     "plain": "Related timeliness finding on required report submission (same corrective action as 2022-005).",
+     "repeat": true,
+     "mgmt_response": "Same as 2022-005.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2022%20panama%20city.pdf"
+    }
+   ],
+   "financial_condition_notes": "Did not meet any s. 218.503(1) condition. Items 2022-001 through 2022-004 were material weaknesses.",
+   "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2022%20panama%20city.pdf"
+  },
+  {
+   "government": "City of Panama City Beach",
+   "fy": "FY2025",
+   "opinion": "Unmodified; federal major program compliance unmodified.",
+   "findings": [],
+   "financial_condition_notes": "No financial statement or federal findings; no management letter recommendations; FY2024 findings 2024-001 and 2024-002 reported corrected. Did not meet any s. 218.503(1) condition.",
+   "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2025%20panama%20city%20beach.pdf"
+  },
+  {
+   "government": "City of Panama City Beach",
+   "fy": "FY2024",
+   "opinion": "Unmodified; federal and state compliance unmodified.",
+   "findings": [
+    {
+     "id": "2024-001",
+     "title": "Lack of Documented Review of Annual Project and Expenditure Report (federal, AL 21.027 COVID-19 State and Local Fiscal Recovery Funds)",
+     "plain": "The annual ARPA project and expenditure report to the U.S. Treasury was prepared by the grant administrator with no documented second-person review. Material weakness in internal control over compliance; no questioned costs.",
+     "repeat": false,
+     "mgmt_response": "Corrective action plan attached to report; reported corrected in FY2025.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2024%20panama%20city%20beach.pdf"
+    },
+    {
+     "id": "2024-002",
+     "title": "Lack of Documented Review of Quarterly Reports (state, CSFA 43.009 Local Government Fire Services Grants)",
+     "plain": "None of the quarterly state fire-grant reports tested showed a documented review before submission. Material weakness; no questioned costs.",
+     "repeat": false,
+     "mgmt_response": "Reported corrected in FY2025.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2024%20panama%20city%20beach.pdf"
+    }
+   ],
+   "financial_condition_notes": "No financial statement findings; no management letter recommendations. Did not meet any s. 218.503(1) condition.",
+   "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2024%20panama%20city%20beach.pdf"
+  },
+  {
+   "government": "City of Panama City Beach",
+   "fy": "FY2023",
+   "opinion": "Unmodified",
+   "findings": [],
+   "financial_condition_notes": "No management letter recommendations; did not meet any s. 218.503(1) condition. No federal Single Audit in FY2023 (per FY2024 report).",
+   "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2023%20panama%20city%20beach.pdf"
+  },
+  {
+   "government": "Panama City Beach Community Redevelopment Agency",
+   "fy": "FY2025",
+   "opinion": "Unmodified",
+   "findings": [],
+   "financial_condition_notes": "No internal control or compliance findings; no management letter recommendations; did not meet any s. 218.503(1) condition.",
+   "source_url": "https://flauditor.gov/pages/specialdistricts_efile%20rpts/2025%20panama%20city%20beach%20community%20redevelopment%20agency.pdf"
+  },
+  {
+   "government": "Panama City Beach Community Redevelopment Agency",
+   "fy": "FY2024",
+   "opinion": "Unmodified",
+   "findings": [],
+   "financial_condition_notes": "No findings or recommendations.",
+   "source_url": "https://flauditor.gov/pages/specialdistricts_efile%20rpts/2024%20panama%20city%20beach%20community%20redevelopment%20agency.pdf"
+  },
+  {
+   "government": "Panama City Beach Community Redevelopment Agency",
+   "fy": "FY2023",
+   "opinion": "Unmodified",
+   "findings": [],
+   "financial_condition_notes": "No findings or recommendations.",
+   "source_url": "https://flauditor.gov/pages/specialdistricts_efile%20rpts/2023%20panama%20city%20beach%20community%20redevelopment%20agency.pdf"
+  },
+  {
+   "government": "City of Lynn Haven",
+   "fy": "FY2025",
+   "opinion": "Unmodified; federal and state major program compliance unmodified. One significant deficiency (downgraded from material weakness).",
+   "findings": [
+    {
+     "id": "2025-001",
+     "title": "Reconciliation of Account Balances, Audit Adjustments",
+     "plain": "Auditors had to correct journal entries to finish year-end balances, especially grant revenues and receivables, which also changed the federal/state awards schedule. Auditor cites turnover of key staff and late Hurricane Michael grant reimbursements, but noted significant improvement over the prior year.",
+     "repeat": true,
+     "mgmt_response": "Hired an Assistant Finance Director in spring 2025, adopted a Finance policies and procedures manual, bought capital-asset software; target 9/30/2026.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2025%20lynn%20haven.pdf"
+    }
+   ],
+   "financial_condition_notes": "Did not meet any s. 218.503(1) condition. No management letter recommendations. The finding has been repeated since at least FY2022 (2022-001, 2023-001, 2024-001).",
+   "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2025%20lynn%20haven.pdf"
+  },
+  {
+   "government": "City of Lynn Haven",
+   "fy": "FY2024",
+   "opinion": "Unmodified",
+   "findings": [
+    {
+     "id": "2024-001",
+     "title": "Reconciliation of Account Balances and Audit Adjustments",
+     "plain": "Same issue; classified as a material weakness in FY2024.",
+     "repeat": true,
+     "mgmt_response": "Substantial progress; downgraded to significant deficiency in FY2025.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2024%20lynn%20haven.pdf"
+    }
+   ],
+   "financial_condition_notes": "Did not meet any s. 218.503(1) condition.",
+   "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2024%20lynn%20haven.pdf"
+  },
+  {
+   "government": "City of Lynn Haven",
+   "fy": "FY2023",
+   "opinion": "Unmodified",
+   "findings": [
+    {
+     "id": "2023-001",
+     "title": "Reconciliation of Account Balances and Audit Adjustments",
+     "plain": "Same issue; repeat of 2022-001; corrective action not taken.",
+     "repeat": true,
+     "mgmt_response": "See report.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2023%20lynn%20haven.pdf"
+    }
+   ],
+   "financial_condition_notes": "Did not meet any s. 218.503(1) condition.",
+   "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2023%20lynn%20haven.pdf"
+  },
+  {
+   "government": "City of Callaway",
+   "fy": "FY2025",
+   "opinion": "Unmodified. No federal Single Audit (federal spending under $1,000,000); state major project compliance audited.",
+   "findings": [],
+   "financial_condition_notes": "No financial statement, state award or management letter findings. Did not meet any s. 218.503(1) condition. Auditor: Mauldin & Jenkins, report dated June 1, 2026.",
+   "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2025%20callaway.pdf"
+  },
+  {
+   "government": "City of Callaway",
+   "fy": "FY2024",
+   "opinion": "Unmodified",
+   "findings": [],
+   "financial_condition_notes": "No financial statement or federal award findings; no prior-year findings.",
+   "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2024%20callaway.pdf"
+  },
+  {
+   "government": "City of Callaway",
+   "fy": "FY2023",
+   "opinion": "Unmodified",
+   "findings": [],
+   "financial_condition_notes": "No financial statement or federal award findings; no prior-year findings.",
+   "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2023%20callaway.pdf"
+  },
+  {
+   "government": "City of Springfield",
+   "fy": "FY2025",
+   "opinion": "Unmodified; federal major program compliance unmodified. Six material weaknesses (2025-001 to 2025-006) and one significant deficiency (2025-007).",
+   "findings": [
+    {
+     "id": "2025-001",
+     "title": "Audit Adjusting Entries (first reported 2007)",
+     "plain": "The auditors had to make significant corrections to the city's books.",
+     "repeat": true,
+     "mgmt_response": "Will try to reduce adjustments; eliminating them would require hiring staff, which management calls cost prohibitive.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2025%20springfield.pdf"
+    },
+    {
+     "id": "2025-002",
+     "title": "Schedule of Expenditures of Federal Awards Preparation (first reported 2007)",
+     "plain": "The city cannot prepare its own federal grant spending schedule; the auditors help, and multiple year-end grant entries were needed.",
+     "repeat": true,
+     "mgmt_response": "Management considers auditor assistance cost-beneficial.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2025%20springfield.pdf"
+    },
+    {
+     "id": "2025-003",
+     "title": "Bank Reconciliations (first reported 2007)",
+     "plain": "The pooled cash account in the ledger did not match the monthly and year-end bank reconciliations. Errors or fraud could go undetected.",
+     "repeat": true,
+     "mgmt_response": "Dedicated employee plus management review of statements and a third-person review of entries now in place. Target 9/30/2026.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2025%20springfield.pdf"
+    },
+    {
+     "id": "2025-004",
+     "title": "Account Balances with Subsidiary Ledgers (first reported 2015)",
+     "plain": "Receivables, customer deposits and payables did not agree with their detail ledgers and were not reconciled during the year.",
+     "repeat": true,
+     "mgmt_response": "Training for finance staff and monthly management review of reconciliations. Target 9/30/2026.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2025%20springfield.pdf"
+    },
+    {
+     "id": "2025-005",
+     "title": "Month-end Closing (first reported 2010)",
+     "plain": "The month-end checklist leaves out major balances, so monthly financial reports given to the Commission are not reliable.",
+     "repeat": true,
+     "mgmt_response": "Will expand checklist, starting with bank reconciliations and payables. Target 9/30/2026.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2025%20springfield.pdf"
+    },
+    {
+     "id": "2025-006",
+     "title": "Activity Classification Review (first reported 2024)",
+     "plain": "Many revenues and expenses were posted to the wrong accounts or netted together, hiding what was really collected and spent.",
+     "repeat": true,
+     "mgmt_response": "Monthly financial statement review and staff training. Target 9/30/2026.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2025%20springfield.pdf"
+    },
+    {
+     "id": "2025-007",
+     "title": "Segregation of Duties (first reported 2009)",
+     "plain": "Small staff means one person can approve, record and have custody of assets, including broad accounting system access.",
+     "repeat": true,
+     "mgmt_response": "Will add mitigating controls; staff must be cross-trained as backups. Target 9/30/2026.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2025%20springfield.pdf"
+    },
+    {
+     "id": "2025-008",
+     "title": "Actual Expenditures Exceeded Budget in the General Fund",
+     "plain": "General Fund spending exceeded the final adopted budget by about $8,069,872 without a budget amendment, violating s. 166.241(3) F.S. The auditor suggested budgeting for debt proceeds and similar sources (the year included the $15 million city complex loan).",
+     "repeat": false,
+     "mgmt_response": "Will work to stay within budget and amend the budget as statute requires. Target 11/30/2026.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2025%20springfield.pdf"
+    }
+   ],
+   "financial_condition_notes": "Did not meet any s. 218.503(1) condition.",
+   "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2025%20springfield.pdf"
+  },
+  {
+   "government": "City of Springfield",
+   "fy": "FY2024",
+   "opinion": "Unmodified; federal compliance unmodified. Material weaknesses 2024-001 to 2024-006 and 2024-011.",
+   "findings": [
+    {
+     "id": "2024-001",
+     "title": "Audit Adjusting Entries",
+     "plain": "Significant auditor corrections required.",
+     "repeat": true,
+     "mgmt_response": "See report.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2024%20springfield.pdf"
+    },
+    {
+     "id": "2024-002",
+     "title": "Schedule of Expenditures of Federal Awards Preparation",
+     "plain": "City cannot prepare its federal awards schedule.",
+     "repeat": true,
+     "mgmt_response": "See report.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2024%20springfield.pdf"
+    },
+    {
+     "id": "2024-003",
+     "title": "Bank Reconciliations",
+     "plain": "Cash in the ledger did not match bank reconciliations.",
+     "repeat": true,
+     "mgmt_response": "See report.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2024%20springfield.pdf"
+    },
+    {
+     "id": "2024-004",
+     "title": "Account Balances with Subsidiary Ledgers",
+     "plain": "Receivables, deposits and payables not reconciled to detail ledgers.",
+     "repeat": true,
+     "mgmt_response": "See report.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2024%20springfield.pdf"
+    },
+    {
+     "id": "2024-005",
+     "title": "Month-end Closing",
+     "plain": "Incomplete month-end close.",
+     "repeat": true,
+     "mgmt_response": "See report.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2024%20springfield.pdf"
+    },
+    {
+     "id": "2024-006",
+     "title": "Activity Classification Review",
+     "plain": "Revenues and expenses misclassified or netted.",
+     "repeat": false,
+     "mgmt_response": "See report.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2024%20springfield.pdf"
+    },
+    {
+     "id": "2024-007",
+     "title": "Segregation of Duties",
+     "plain": "Incompatible duties not separated.",
+     "repeat": true,
+     "mgmt_response": "See report.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2024%20springfield.pdf"
+    },
+    {
+     "id": "2024-008",
+     "title": "Collection and Write-off Policies and Procedures (first reported 2020)",
+     "plain": "No written policy for sending unpaid accounts to collections or writing them off, so receivables may be overstated and customers treated inconsistently.",
+     "repeat": true,
+     "mgmt_response": "See report.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2024%20springfield.pdf"
+    },
+    {
+     "id": "2024-009",
+     "title": "Final Budget Not Approved Within the Allowed Time Period",
+     "plain": "The FY2024 budget was amended in February 2025, after the deadline in state law.",
+     "repeat": false,
+     "mgmt_response": "See report.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2024%20springfield.pdf"
+    },
+    {
+     "id": "2024-010",
+     "title": "Timely Reporting Requirements for Grants",
+     "plain": "Single Audit package not filed on time with the Federal Audit Clearinghouse because of staffing shortages and the many corrections needed.",
+     "repeat": false,
+     "mgmt_response": "See report.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2024%20springfield.pdf"
+    },
+    {
+     "id": "2024-011",
+     "title": "Failure to Timely Transfer Tax Increment Revenues to CRA Trust Fund - City Allocation",
+     "plain": "Over three years the city did not calculate and pay its share of tax increment to its own CRA, underfunding the CRA trust fund by an estimated $291,027 (material weakness).",
+     "repeat": false,
+     "mgmt_response": "See report.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2024%20springfield.pdf"
+    }
+   ],
+   "financial_condition_notes": "Did not meet any s. 218.503(1) condition.",
+   "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2024%20springfield.pdf"
+  },
+  {
+   "government": "City of Springfield",
+   "fy": "FY2023",
+   "opinion": "Unmodified; federal compliance unmodified. Material weaknesses 2023-001 to 2023-005.",
+   "findings": [
+    {
+     "id": "2023-001",
+     "title": "Audit Adjusting Entries",
+     "plain": "Significant auditor corrections required.",
+     "repeat": true,
+     "mgmt_response": "See report.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2023%20springfield.pdf"
+    },
+    {
+     "id": "2023-002",
+     "title": "Schedule of Expenditures of Federal Awards Preparation",
+     "plain": "City cannot prepare its federal awards schedule.",
+     "repeat": true,
+     "mgmt_response": "See report.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2023%20springfield.pdf"
+    },
+    {
+     "id": "2023-003",
+     "title": "Bank Reconciliations",
+     "plain": "Cash not reconciled to bank.",
+     "repeat": true,
+     "mgmt_response": "See report.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2023%20springfield.pdf"
+    },
+    {
+     "id": "2023-004",
+     "title": "Account Balances with Subsidiary Ledgers",
+     "plain": "Detail ledgers not reconciled.",
+     "repeat": true,
+     "mgmt_response": "See report.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2023%20springfield.pdf"
+    },
+    {
+     "id": "2023-005",
+     "title": "Month-end Closing",
+     "plain": "Incomplete month-end close.",
+     "repeat": true,
+     "mgmt_response": "See report.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2023%20springfield.pdf"
+    },
+    {
+     "id": "2023-006",
+     "title": "Separation of Duties",
+     "plain": "Incompatible duties not separated.",
+     "repeat": true,
+     "mgmt_response": "See report.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2023%20springfield.pdf"
+    },
+    {
+     "id": "2023-007",
+     "title": "Collection and Write-off Policies and Procedures",
+     "plain": "No written collections/write-off policy.",
+     "repeat": true,
+     "mgmt_response": "See report.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2023%20springfield.pdf"
+    }
+   ],
+   "financial_condition_notes": "Did not meet any s. 218.503(1) condition.",
+   "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2023%20springfield.pdf"
+  },
+  {
+   "government": "City of Parker",
+   "fy": "FY2025",
+   "opinion": "Unmodified (financial statements); unmodified on federal major program compliance. Material weaknesses 2025-001 and 2025-002.",
+   "findings": [
+    {
+     "id": "2025-001",
+     "title": "Significant Audit Adjustments (first reported 2007)",
+     "plain": "The auditors had to propose adjustments before the city's books met accounting standards (GAAP). Material weakness. First reported in 2007.",
+     "repeat": true,
+     "mgmt_response": "Hired a third-party accountant; expects fewer adjustments now that Hurricane Michael grant work is ending, but not elimination given limited staff. Target 9/30/2027.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2025%20parker.pdf"
+    },
+    {
+     "id": "2025-002",
+     "title": "Lack of Segregation of Duties (first reported 2009)",
+     "plain": "Too few staff to separate incompatible duties; material weakness reported since 2009.",
+     "repeat": true,
+     "mgmt_response": "May never be fully resolved given staff size; management does not believe the cost of fixing it would provide substantial benefit. Target 9/30/2027.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2025%20parker.pdf"
+    },
+    {
+     "id": "2025-003",
+     "title": "Reporting Requirements for Grants (first reported 2023)",
+     "plain": "The audit was not finished within 9 months of year end, so the federal Single Audit package was not filed on time with the Federal Audit Clearinghouse. The city could lose grant funding.",
+     "repeat": true,
+     "mgmt_response": "Staff turnover delayed reporting; city expects to correct in the coming year.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2025%20parker.pdf"
+    },
+    {
+     "id": "2025-004",
+     "title": "Insufficient Documentation Supporting Law Enforcement Trust Fund Revenue",
+     "plain": "The city booked $36,652 from disposed criminal-case evidence as Law Enforcement Trust Fund revenue but could not show a forfeiture judgment or court order proving the money legally belonged to the city. Revenue and fund balance may be overstated by $36,652.",
+     "repeat": false,
+     "mgmt_response": "See city's corrective action plan in report.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2025%20parker.pdf"
+    },
+    {
+     "id": "2025-005",
+     "title": "Failure to Timely Transfer Tax Increment Revenues to CRA Trust Fund (first reported 2024)",
+     "plain": "State law (s. 163.387 F.S.) requires each taxing authority to pay its tax increment to the CRA by January 1. The county paid 4 days late and the city did not pay its own share before year end, leaving the CRA trust fund short about $122,929.",
+     "repeat": true,
+     "mgmt_response": "Procedures established; the city TIF payment will be built into the budget so it is transferred by January 1. Target 9/30/2027.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2025%20parker.pdf"
+    },
+    {
+     "id": "2025-006",
+     "title": "OPEB Census Errors (first reported 2024)",
+     "plain": "Employee data sent to the actuary for the retiree-health (OPEB) valuation had multiple errors, producing an inaccurate valuation and delaying the audit.",
+     "repeat": true,
+     "mgmt_response": "Errors stem from the prior valuation; a new valuation with corrected data and a more detailed census review will be done in FY2026. Target 9/30/2027.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2025%20parker.pdf"
+    },
+    {
+     "id": "2025-007",
+     "title": "Retirement Expense Not Reviewed Timely and Rates Not Updated",
+     "plain": "The city did not update new state FRS contribution rates effective July 1, 2025 in its payroll system for months, understating retirement expense and liability by about $20,000.",
+     "repeat": false,
+     "mgmt_response": "Rates updated in FY2026; actual contributions remitted through the state portal were correct; monthly reconciliation and rate-change review will be added. Target 9/30/2027.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2025%20parker.pdf"
+    }
+   ],
+   "financial_condition_notes": "Did not meet any s. 218.503(1) condition. No federal award findings in FY2025. Auditor's report dated August 19, 2026, nearly 11 months after year end (see 2025-003).",
+   "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2025%20parker.pdf"
+  },
+  {
+   "government": "City of Parker",
+   "fy": "FY2024",
+   "opinion": "Unmodified",
+   "findings": [
+    {
+     "id": "2024-001",
+     "title": "Significant Audit Adjustments",
+     "plain": "Auditor-proposed adjustments needed to meet GAAP.",
+     "repeat": true,
+     "mgmt_response": "Not corrected; lack of resources.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2024%20parker.pdf"
+    },
+    {
+     "id": "2024-002",
+     "title": "Lack of Segregation of Duties",
+     "plain": "Too few staff to separate duties.",
+     "repeat": true,
+     "mgmt_response": "Not corrected; lack of resources.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2024%20parker.pdf"
+    },
+    {
+     "id": "2024-003",
+     "title": "Schedule of Expenditures of Federal Awards",
+     "plain": "Weak controls over preparing the financial statements and the federal awards schedule (material weakness); repeat of 2023-003 and 2022-003.",
+     "repeat": true,
+     "mgmt_response": "Reported corrected in FY2025.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2024%20parker.pdf"
+    },
+    {
+     "id": "2024-004",
+     "title": "Failure to Timely Transfer Tax Increment Revenues to CRA Trust Fund - City Allocation",
+     "plain": "For the current year and the two years before, the city did not calculate and transfer its required share of tax increment to its CRA.",
+     "repeat": false,
+     "mgmt_response": "Partially corrected in FY2025 (past amounts paid but not on time).",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2024%20parker.pdf"
+    },
+    {
+     "id": "2024-005",
+     "title": "Reporting Requirements for Grants",
+     "plain": "Single Audit package not filed on time with the Federal Audit Clearinghouse.",
+     "repeat": true,
+     "mgmt_response": "Not corrected; staff turnover.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2024%20parker.pdf"
+    },
+    {
+     "id": "2024-006",
+     "title": "OPEB Census Errors",
+     "plain": "Inaccurate employee data given to the OPEB actuary.",
+     "repeat": false,
+     "mgmt_response": "New valuation planned for FY2026.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2024%20parker.pdf"
+    },
+    {
+     "id": "2024-007",
+     "title": "Lack of Review and Reconciliation of Certain Account Activity",
+     "plain": "Certain account activity was not consistently reviewed and reconciled.",
+     "repeat": false,
+     "mgmt_response": "Reported corrected in FY2025.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2024%20parker.pdf"
+    },
+    {
+     "id": "2024-101",
+     "title": "Reimbursement Requests Not Formally Approved Before Submission (federal, AL 97.036 FEMA Public Assistance)",
+     "plain": "Hurricane Michael FEMA reimbursement requests were submitted without documented city approval. Significant deficiency in internal control over compliance; no questioned costs.",
+     "repeat": false,
+     "mgmt_response": "Reported corrected in FY2025.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2024%20parker.pdf"
+    }
+   ],
+   "financial_condition_notes": "Did not meet any s. 218.503(1) condition. Auditor's reports dated January 21, 2026 (about 16 months after year end).",
+   "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2024%20parker.pdf"
+  },
+  {
+   "government": "City of Parker",
+   "fy": "FY2023",
+   "opinion": "Unmodified",
+   "findings": [
+    {
+     "id": "2023-001",
+     "title": "Significant Audit Adjustments",
+     "plain": "Auditor-proposed adjustments needed to meet GAAP.",
+     "repeat": true,
+     "mgmt_response": "Not expected to be corrected soon due to lack of resources.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2023%20parker.pdf"
+    },
+    {
+     "id": "2023-002",
+     "title": "Lack of Segregation of Duties",
+     "plain": "Too few staff to separate duties.",
+     "repeat": true,
+     "mgmt_response": "Same as above.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2023%20parker.pdf"
+    },
+    {
+     "id": "2023-003",
+     "title": "Schedule of Expenditures of Federal Awards",
+     "plain": "Weak controls over preparing the financial statements and federal awards schedule (material weakness).",
+     "repeat": true,
+     "mgmt_response": "Same as above.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2023%20parker.pdf"
+    },
+    {
+     "id": "2023-004",
+     "title": "FRS Submission",
+     "plain": "Incomplete payroll information was sent to the state with the June 2023 Florida Retirement System report, risking wrong contributions and pension balances.",
+     "repeat": false,
+     "mgmt_response": "See report.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2023%20parker.pdf"
+    },
+    {
+     "id": "2023-005",
+     "title": "Incomplete List of Capital Asset Deletions",
+     "plain": "The city first gave the auditor an incomplete list of assets sold or disposed of, which risks inaccurate asset records and misuse of equipment.",
+     "repeat": false,
+     "mgmt_response": "See report.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2023%20parker.pdf"
+    },
+    {
+     "id": "2023-006",
+     "title": "Reporting Requirements for Grants",
+     "plain": "Single Audit package not filed on time.",
+     "repeat": false,
+     "mgmt_response": "See report.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2023%20parker.pdf"
+    }
+   ],
+   "financial_condition_notes": "Did not meet any s. 218.503(1) condition. No federal award findings in FY2023.",
+   "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2023%20parker.pdf"
+  },
+  {
+   "government": "City of Mexico Beach",
+   "fy": "FY2025",
+   "opinion": "Qualified on governmental activities, business-type activities, and Water, Sewer and Sanitation Funds (GASB 75 OPEB not implemented); unmodified on General Fund and Disaster Recovery Fund. Federal major program compliance: unmodified.",
+   "findings": [
+    {
+     "id": "2025-001",
+     "title": "Management Override and Segregation of Duties (sixth-year repeat)",
+     "plain": "The finance office is too small, and had turnover, so the same person could prepare and approve adjusting journal entries. Errors or misstatements could go undetected.",
+     "repeat": true,
+     "mgmt_response": "New policies created in FY25; Finance Director to add procedures involving outside accounting advisors. Target 3/31/2027.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2025%20mexico%20beach.pdf"
+    },
+    {
+     "id": "2025-002",
+     "title": "Budgetary Control",
+     "plain": "No budget was legally adopted for the Disaster Recovery Fund, even though state law requires spending to follow an adopted budget.",
+     "repeat": true,
+     "mgmt_response": "Finance Director and City Administrator will adopt budgets for all funds. Target 7/22/2026.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2025%20mexico%20beach.pdf"
+    },
+    {
+     "id": "2025-003",
+     "title": "Impact Fee Accounting",
+     "plain": "Impact fees were not kept in a separate fund, as s. 163.31801 F.S. requires.",
+     "repeat": true,
+     "mgmt_response": "Will create a separate impact fee fund. Target 7/22/2026.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2025%20mexico%20beach.pdf"
+    },
+    {
+     "id": "2025-004",
+     "title": "Building Permit Expenditures",
+     "plain": "Building department spending is not budgeted or tracked separately, so the city cannot show it complies with the state cap on carrying forward building permit fees (s. 553.80(7)(a) F.S.).",
+     "repeat": true,
+     "mgmt_response": "Will budget and track all building department expenses. Target 10/31/2026.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2025%20mexico%20beach.pdf"
+    },
+    {
+     "id": "2025-005",
+     "title": "Debt Compliance",
+     "plain": "The bond sinking fund was underfunded at year end, which breaks the bond covenants.",
+     "repeat": true,
+     "mgmt_response": "Monthly transfers to the sinking funds have been adjusted to meet covenants. Immediate.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2025%20mexico%20beach.pdf"
+    },
+    {
+     "id": "2025-006",
+     "title": "Deficit in Unrestricted Net Position",
+     "plain": "The utility (enterprise) funds ended the year with a deficit in unrestricted net position, meaning liabilities exceed the assets available for general use. The auditor suggests rate changes, cost control or better long-term planning.",
+     "repeat": true,
+     "mgmt_response": "First phase of a Florida Rural Water rate study done; city will implement its recommendations. Target 12/31/2026.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2025%20mexico%20beach.pdf"
+    },
+    {
+     "id": "2025-007",
+     "title": "Compliance with State Reporting Requirements",
+     "plain": "The city missed the Nov. 30 deadline for the annual Public Depositor Report to the state CFO (risking state protection of public deposits), and an elected official filed the annual financial disclosure with the Commission on Ethics late.",
+     "repeat": false,
+     "mgmt_response": "Finance Director was not aware of the deadlines; now designated primary contact for both filings. Immediate.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2025%20mexico%20beach.pdf"
+    }
+   ],
+   "financial_condition_notes": "Auditor determined the city did not meet any s. 218.503(1) F.S. financial emergency condition. Six of seven findings are repeats; 2025-001 is a sixth-year repeat. Auditor's report dated June 29, 2026 (filed about 9 months after year end).",
+   "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2025%20mexico%20beach.pdf"
+  },
+  {
+   "government": "City of Mexico Beach",
+   "fy": "FY2024",
+   "opinion": "Qualified on governmental activities, business-type activities and enterprise funds (GASB 75 OPEB not implemented); unmodified on General Fund and Disaster Recovery Fund. Federal compliance: unmodified.",
+   "findings": [
+    {
+     "id": "2024-001",
+     "title": "Management Override and Segregation of Duties (fifth-year repeat)",
+     "plain": "Same segregation-of-duties weakness as above; reported as a significant deficiency.",
+     "repeat": true,
+     "mgmt_response": "In progress per FY2025 summary schedule.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2024%20mexico%20beach.pdf"
+    },
+    {
+     "id": "2024-002",
+     "title": "Reconciliation of Account Balances and Audit Adjustments (fifth-year repeat)",
+     "plain": "Account balances were not fully reconciled and the auditor had to propose adjustments; reported as a significant deficiency.",
+     "repeat": true,
+     "mgmt_response": "Reported corrected in FY2025.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2024%20mexico%20beach.pdf"
+    },
+    {
+     "id": "2024-003",
+     "title": "Utility Deposits",
+     "plain": "The city had no policy to collect and hold customer utility deposits.",
+     "repeat": true,
+     "mgmt_response": "Reported corrected in FY2025.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2024%20mexico%20beach.pdf"
+    },
+    {
+     "id": "2024-004",
+     "title": "Budgetary Control",
+     "plain": "Not all funds had legally adopted budgets.",
+     "repeat": true,
+     "mgmt_response": "Repeated as 2025-002.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2024%20mexico%20beach.pdf"
+    },
+    {
+     "id": "2024-005",
+     "title": "Impact Fee Accounting",
+     "plain": "Impact fees not in a separate fund.",
+     "repeat": true,
+     "mgmt_response": "Repeated as 2025-003.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2024%20mexico%20beach.pdf"
+    },
+    {
+     "id": "2024-006",
+     "title": "Building Permit Expenditures",
+     "plain": "Building department costs not budgeted/tracked separately.",
+     "repeat": true,
+     "mgmt_response": "Repeated as 2025-004.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2024%20mexico%20beach.pdf"
+    },
+    {
+     "id": "2024-007",
+     "title": "Debt Compliance",
+     "plain": "Bond covenant requirements (sinking fund) not met.",
+     "repeat": true,
+     "mgmt_response": "Repeated as 2025-005.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2024%20mexico%20beach.pdf"
+    },
+    {
+     "id": "2024-008",
+     "title": "Deficit in Unrestricted Net Position",
+     "plain": "Enterprise funds reported a deficit in unrestricted net position.",
+     "repeat": false,
+     "mgmt_response": "Repeated as 2025-006.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2024%20mexico%20beach.pdf"
+    }
+   ],
+   "financial_condition_notes": "Did not meet any s. 218.503(1) condition.",
+   "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2024%20mexico%20beach.pdf"
+  },
+  {
+   "government": "City of Mexico Beach",
+   "fy": "FY2023",
+   "opinion": "Qualified on governmental activities, business-type activities and enterprise funds (GASB 75 OPEB not implemented); unmodified on General Fund and Disaster Recovery Fund. Federal compliance: unmodified.",
+   "findings": [
+    {
+     "id": "2023-001",
+     "title": "Management Override and Segregation of Duties (fourth-year repeat)",
+     "plain": "Segregation-of-duties weakness; reported as a material weakness.",
+     "repeat": true,
+     "mgmt_response": "See report.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2023%20mexico%20beach.pdf"
+    },
+    {
+     "id": "2023-002",
+     "title": "Reconciliation of Account Balances and Audit Adjustments (fourth-year repeat)",
+     "plain": "Balances not reconciled; auditor adjustments needed; material weakness.",
+     "repeat": true,
+     "mgmt_response": "See report.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2023%20mexico%20beach.pdf"
+    },
+    {
+     "id": "2023-003",
+     "title": "Timeliness of Bank Reconciliations (fourth-year repeat)",
+     "plain": "Bank reconciliations were not prepared promptly; material weakness.",
+     "repeat": true,
+     "mgmt_response": "Reconciliations were timely during FY2024; new Finance Director to keep them within 30 days.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2023%20mexico%20beach.pdf"
+    },
+    {
+     "id": "2023-004",
+     "title": "Budgetary Control (fourth-year repeat)",
+     "plain": "Not all funds had legally adopted budgets.",
+     "repeat": true,
+     "mgmt_response": "Finance Director will prepare and adopt budgets for all funds.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2023%20mexico%20beach.pdf"
+    },
+    {
+     "id": "2023-005",
+     "title": "Utility Deposits (fourth-year repeat)",
+     "plain": "No policy to collect and hold customer utility deposits.",
+     "repeat": true,
+     "mgmt_response": "See report.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2023%20mexico%20beach.pdf"
+    },
+    {
+     "id": "2023-006",
+     "title": "Building Permit Expenditures (fourth-year repeat)",
+     "plain": "Building department costs not tracked against the state carry-forward cap.",
+     "repeat": true,
+     "mgmt_response": "See report.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2023%20mexico%20beach.pdf"
+    },
+    {
+     "id": "2023-007",
+     "title": "Debt Compliance (second-year repeat)",
+     "plain": "Bond covenant requirements not met.",
+     "repeat": true,
+     "mgmt_response": "See report.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2023%20mexico%20beach.pdf"
+    },
+    {
+     "id": "2023-008",
+     "title": "Impact Fee Accounting (second-year repeat)",
+     "plain": "Impact fees not in a separate fund.",
+     "repeat": true,
+     "mgmt_response": "See report.",
+     "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2023%20mexico%20beach.pdf"
+    }
+   ],
+   "financial_condition_notes": "Did not meet any s. 218.503(1) condition. The prior FY2022 audit (finding 2022-004, third-year repeat) noted the city had not paid all uncontested vendor claims within 90 days because of Hurricane Michael grant-reimbursement timing; the auditor said this did not meet the financial-emergency definition because it was not due to lack of funds.",
+   "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2023%20mexico%20beach.pdf"
+  },
+  {
+   "government": "Panama City-Bay County Airport and Industrial District",
+   "fy": "FY2025",
+   "opinion": "Unmodified; federal major program compliance audited, no findings.",
+   "findings": [],
+   "financial_condition_notes": "No financial statement or federal findings; no management letter recommendations; did not meet any s. 218.503(1) condition.",
+   "source_url": "https://flauditor.gov/pages/specialdistricts_efile%20rpts/2025%20panama%20city%20bay%20county%20airport%20and%20industrial%20district.pdf"
+  },
+  {
+   "government": "Panama City-Bay County Airport and Industrial District",
+   "fy": "FY2024",
+   "opinion": "Unmodified",
+   "findings": [],
+   "financial_condition_notes": "No findings; no recommendations; did not meet any s. 218.503(1) condition.",
+   "source_url": "https://flauditor.gov/pages/specialdistricts_efile%20rpts/2024%20panama%20city%20bay%20county%20airport%20and%20industrial%20district.pdf"
+  },
+  {
+   "government": "Panama City-Bay County Airport and Industrial District",
+   "fy": "FY2023",
+   "opinion": "Unmodified",
+   "findings": [],
+   "financial_condition_notes": "No findings; no recommendations; did not meet any s. 218.503(1) condition.",
+   "source_url": "https://flauditor.gov/pages/specialdistricts_efile%20rpts/2023%20panama%20city%20bay%20county%20airport%20and%20industrial%20district.pdf"
+  },
+  {
+   "government": "Panama City Port Authority",
+   "fy": "FY2024",
+   "opinion": "Unmodified (Tipton, Marler, Garner & Chastain, report dated March 7, 2025)",
+   "findings": [],
+   "financial_condition_notes": "No material weaknesses identified; no reportable noncompliance; prior-year recommendations corrected; no management letter recommendations; did not meet any s. 218.503(1) condition. Report includes a schedule of Deepwater Horizon oil spill funds.",
+   "source_url": "https://flauditor.gov/pages/specialdistricts_efile%20rpts/2024%20panama%20city%20port%20authority.pdf"
+  },
+  {
+   "government": "Panama City Community Redevelopment Agency",
+   "fy": "FY2024",
+   "opinion": "Unmodified",
+   "findings": [
+    {
+     "id": "2024-001",
+     "title": "Review of Policies and Procedures (previously 2022-002, 2023-001)",
+     "plain": "The CRA's policies, procedures and plan documents had several deficiencies, and it did not keep proper documentation showing it complied with Florida Statutes. Auditor recommends updating policies and plans and verifying compliance with statutes and grant rules. Material weakness.",
+     "repeat": true,
+     "mgmt_response": "Not included in the filed report text.",
+     "source_url": "https://flauditor.gov/pages/specialdistricts_efile%20rpts/2024%20panama%20city%20community%20redevelopment%20agency.pdf"
+    }
+   ],
+   "financial_condition_notes": "Did not meet any s. 218.503(1) condition; no management letter recommendations; complied with s. 163.387(6)-(7) F.S. trust fund requirements.",
+   "source_url": "https://flauditor.gov/pages/specialdistricts_efile%20rpts/2024%20panama%20city%20community%20redevelopment%20agency.pdf"
+  },
+  {
+   "government": "Panama City Community Redevelopment Agency",
+   "fy": "FY2023",
+   "opinion": "Unmodified",
+   "findings": [
+    {
+     "id": "2023-001",
+     "title": "Review of Policies and Procedures (previously 2022-002)",
+     "plain": "Same policy and statutory-documentation deficiencies; material weakness.",
+     "repeat": true,
+     "mgmt_response": "Not included in filed text.",
+     "source_url": "https://flauditor.gov/pages/specialdistricts_efile%20rpts/2023%20panama%20city%20community%20redevelopment%20agency.pdf"
+    }
+   ],
+   "financial_condition_notes": "Did not meet any s. 218.503(1) condition.",
+   "source_url": "https://flauditor.gov/pages/specialdistricts_efile%20rpts/2023%20panama%20city%20community%20redevelopment%20agency.pdf"
+  },
+  {
+   "government": "Panama City Community Redevelopment Agency",
+   "fy": "FY2022",
+   "opinion": "Unmodified",
+   "findings": [
+    {
+     "id": "2022-001",
+     "title": "Bank Reconciliations (previously 2021-002)",
+     "plain": "The high-volume concentration bank account was not reconciled on time during the year. Material weakness.",
+     "repeat": true,
+     "mgmt_response": "Not included in filed text; not repeated in FY2023.",
+     "source_url": "https://flauditor.gov/pages/specialdistricts_efile%20rpts/2022%20panama%20city%20community%20redevelopment%20agency.pdf"
+    },
+    {
+     "id": "2022-002",
+     "title": "Review of Policies and Procedures",
+     "plain": "Policy, plan and statutory-compliance documentation deficiencies. Material weakness.",
+     "repeat": false,
+     "mgmt_response": "Not included in filed text.",
+     "source_url": "https://flauditor.gov/pages/specialdistricts_efile%20rpts/2022%20panama%20city%20community%20redevelopment%20agency.pdf"
+    }
+   ],
+   "financial_condition_notes": "Did not meet any s. 218.503(1) condition.",
+   "source_url": "https://flauditor.gov/pages/specialdistricts_efile%20rpts/2022%20panama%20city%20community%20redevelopment%20agency.pdf"
+  }
+ ],
+ "state_reports": [
+  {
+   "agency": "Florida Auditor General",
+   "report": "Report No. 2025-095",
+   "date": "January 2025",
+   "government": "City of Mexico Beach",
+   "type": "Operational Audit (period Oct. 2022 - Jan. 2024)",
+   "findings": [
+    {
+     "id": "Finding 1",
+     "plain": "Heavy turnover: from Jan. 2020 to Aug. 2024 the City Administrator position turned over 3 times, City Clerk 2 times, and City Accountant 3 times (vacant 495 days). Records showed allegations of a negative workplace and conflicts between management and elected officials."
+    },
+    {
+     "id": "Finding 2",
+     "plain": "Audits and annual financial reports were filed late for FY2020-21 through FY2022-23 (FY2021-22 audit was 362 days late). The Department of Revenue withheld $37,137 ($29,166 half-cent sales tax + $7,971 municipal revenue sharing) as of August 2024."
+    },
+    {
+     "id": "Finding 3",
+     "plain": "Competitive procurement not followed: 5 purchases totaling $564,092 (including $250,000 disaster debris removal, $130,772 fuel from the same local vendor for at least 19 years, $110,260 yard waste) were not competitively selected; other bids/RFPs lacked advertising documentation."
+    },
+    {
+     "id": "Finding 4",
+     "plain": "9 purchases totaling $1 million lacked City Council approval required for purchases over $10,000; purchase orders were not used as required, and receipt of goods/services was not always documented."
+    },
+    {
+     "id": "Finding 5",
+     "plain": "The city paid a contractor the same $450,031 invoice twice; the contractor refunded $328,964 on Dec. 13, 2023 (the duplicate less $121,067 retainage)."
+    },
+    {
+     "id": "Finding 6",
+     "plain": "The city kept paying its contracted City Accountant after the agreement expired (April 2021) and issued 1099s instead of W-2s without documenting why she was treated as an independent contractor."
+    },
+    {
+     "id": "Finding 7",
+     "plain": "Application security: user access privileges were not limited to what was necessary."
+    },
+    {
+     "id": "Finding 8",
+     "plain": "IT access was not always promptly removed when no longer needed."
+    },
+    {
+     "id": "Finding 9",
+     "plain": "No policies for reporting, investigating and communicating known or suspected fraud."
+    }
+   ],
+   "source_url": "https://flauditor.gov/pages/pdf_files/2025-095.pdf"
+  },
+  {
+   "agency": "Florida Auditor General",
+   "report": "Report No. 2024-088",
+   "date": "December 2023",
+   "government": "Bay District Schools",
+   "type": "Operational Audit (FY2022-23, follow-up on Report No. 2021-121)",
+   "findings": [
+    {
+     "id": "Finding 1",
+     "plain": "Required level 2 background screenings were not always performed for contractor workers on school grounds (repeat of a 2021 finding); the district kept no complete list of such workers."
+    },
+    {
+     "id": "Finding 2",
+     "plain": "Volunteers sometimes started work before the district verified their backgrounds, contrary to state law and Board policy."
+    },
+    {
+     "id": "Finding 3",
+     "plain": "Students did not always receive the required youth mental health awareness instruction."
+    },
+    {
+     "id": "Finding 4",
+     "plain": "Controls over construction management entity (CME) subcontractor services and payments still needed improvement."
+    },
+    {
+     "id": "Finding 5",
+     "plain": "Records did not show the district monitored whether CME 'general conditions' costs were reasonable (repeat of a 2021 finding)."
+    }
+   ],
+   "source_url": "https://flauditor.gov/pages/pdf_files/2024-088.pdf"
+  },
+  {
+   "agency": "Florida Auditor General",
+   "report": "Report No. 2024-189",
+   "date": "March 2024",
+   "government": "Bay District Schools",
+   "type": "Financial and Federal Single Audit, FY ended June 30, 2023",
+   "findings": [
+    {
+     "id": "AM 2023-001",
+     "plain": "Unmodified opinion and no material weaknesses, but General Fund spending exceeded budget in six function categories by $582,437 without a timely Board amendment."
+    }
+   ],
+   "source_url": "https://flauditor.gov/pages/pdf_files/2024-189.pdf"
+  },
+  {
+   "agency": "Florida Auditor General",
+   "report": "Report No. 2026-064",
+   "date": "December 2025",
+   "government": "Bay District Schools",
+   "type": "FEFP Full-Time Equivalent Student Enrollment and Student Transportation Attestation Examination, FY ended June 30, 2024",
+   "findings": [
+    {
+     "id": "Summary",
+     "plain": "Qualified ('except for') conclusion: material noncompliance involving teachers (34 of 169 tested did not meet certification, out-of-field approval/notice or ESOL training rules) and student records (25 of 139 ESOL and 64 of 222 ESE Support Level 4-5 students). 69 FTE findings and 8 transportation findings. Proposed adjustment of -304.7341 weighted FTE, an estimated gross effect of -$1,566,251 in state funding ($1,333,656 district schools, $232,595 charter schools); transportation adjustment of -65 students. Final dollar effect is set by the Department of Education."
+    }
+   ],
+   "source_url": "https://flauditor.gov/pages/pdf_files/2026-064.pdf"
+  },
+  {
+   "agency": "Florida Auditor General",
+   "report": "Report No. 2022-192",
+   "date": "March 2022",
+   "government": "Bay District Schools",
+   "type": "FEFP Attestation Examination, FY ended June 30, 2020",
+   "findings": [
+    {
+     "id": "Summary",
+     "plain": "73 FTE enrollment findings; estimated gross dollar effect of proposed adjustments -$535,364 (-125.0999 weighted FTE x $4,279.49)."
+    }
+   ],
+   "source_url": "https://flauditor.gov/pages/pdf_files/2022-192.pdf"
+  },
+  {
+   "agency": "U.S. Attorney's Office, Northern District of Florida (U.S. Department of Justice)",
+   "report": "Press release: Lynn Haven Mayor and City Attorney Indicted on Corruption and Fraud Charges Stemming from Hurricane Michael Cleanup",
+   "date": "2020-08-19",
+   "government": "City of Lynn Haven",
+   "type": "Federal indictment (charges, not a finding of guilt)",
+   "findings": [
+    {
+     "id": "Indictment",
+     "plain": "A 64-count indictment charged Mayor Margo Anderson and City Attorney Joseph Adam Albritton with conspiracy, wire fraud, honest services fraud and theft concerning federal programs tied to Hurricane Michael cleanup. It alleged $1.8 million billed to the city for unnecessary trash pickup by contractor ECS, over $48,000 of unauthorized cleanup work at Anderson-related residences, $25,000 at Albritton-related residences, and a $106,000 motorhome given to Anderson and her husband. These are allegations; case outcomes were not confirmed from an official DOJ or court source in this research."
+    }
+   ],
+   "source_url": "https://www.justice.gov/usao-ndfl/pr/lynn-haven-mayor-and-city-attorney-indicted-corruption-and-fraud-charges-stemming"
+  }
+ ],
+ "notes": [
+  "All debt figures come from the audited financial statements filed with the Florida Auditor General. 'total_debt' means bonds, notes, loans, leases, SBITAs and finance purchases (plus unamortized bond premium where reported). It excludes compensated absences, claims, landfill closure costs, net pension and OPEB liabilities, which are shown separately.",
+  "Latest audit used: FY2025 for Lynn Haven, Callaway, Springfield, Parker, Mexico Beach, Panama City Beach, PCB CRA and the airport district; FY2025 (June 30) for Bay District Schools; FY2024 for Bay County, Panama City, Panama City CRA and the Port Authority, because their FY2025 audits were not on the Auditor General's site as of 2026-10-20.",
+  "Almost all local debt here is privately placed with banks or borrowed from the State (State Revolving Fund, State Infrastructure Bank), not publicly sold bonds, so most issues have no credit rating or EMMA listing.",
+  "Big near-term balloon payments: Panama City's $150,000,000 Series 2023 note (5.82%) is scheduled to be repaid in one payment in FY2026. Bay County's Hurricane Michael notes are due in one payment each: $49,943,109 on 9/1/2027 and $48,874,337 on 9/1/2028.",
+  "Debt service 'year' is the first scheduled year in each audit's maturity table (the year after the audit), unless otherwise noted.",
+  "No government reviewed met any s. 218.503(1) financial emergency condition in the audits reviewed. No auditor issued a deteriorating-financial-condition notice. Mexico Beach's FY2022 audit noted late vendor payments tied to Hurricane Michael grant timing, which the auditor said was not a financial emergency.",
+  "Only Mexico Beach received a modified (qualified) opinion. The cause, in FY2023-FY2025, was that the city had not implemented GASB 75 (retiree health/OPEB)."
+ ],
+ "gaps": [
+  "Bay County, City of Panama City, Panama City CRA and Panama City Port Authority FY2025 audits were not filed on the Auditor General site as of 2026-10-20, so FY2024 is used. The Port Authority has only its FY2024 audit posted there.",
+  "Credit ratings: none of the audits publish ratings, and Moody's/S&P pages could not be read. The only publicly offered bonds found are Bay County's Water & Sewer 2015 and Water 2016 bonds, Callaway 2015, Lynn Haven 2015/2016, and probably the school COPs. Their ratings still need to be checked in the official statements.",
+  "EMMA (emma.msrb.org) blocks automated access (HTTP 403), so no EMMA links were collected. They need a manual browser lookup.",
+  "Original issue amounts are missing for several issues (Mexico Beach, Lynn Haven bonds, Port loans), and per-series COP balances are missing for the school district, because the audits do not list them.",
+  "Purposes are not stated in the audits for Panama City's $150M Series 2023 note (beyond 'Capital Projects Fund'), the airport's SIB loans, and most Port loans. Council and board minutes or loan resolutions would be needed.",
+  "Management responses: several reports attach corrective action plans as scanned images (Panama City CRA, PCB 2024, Bay DSB 2025, some Bay County items). Where the text was not extractable, the field says so.",
+  "CRAs for Callaway, Springfield and Parker file separate reports. They were not reviewed because the city audits show no CRA debt. Springfield's and Parker's own audits report late or missing city TIF payments to those CRAs.",
+  "Lynn Haven federal corruption case: only the 2020 DOJ indictment release was confirmed. Plea and sentencing outcomes need official DOJ or court documents.",
+  "FY2022 audits were reviewed only where needed to complete 3 years (Panama City, Panama City CRA, Bay County). Prior-year findings for the other governments are summarized from the later audits' prior-finding schedules, with brief plain-English text."
+ ]
+}

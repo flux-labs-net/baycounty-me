@@ -236,3 +236,14 @@ a.src:hover{color:var(--blue)}
 .r-k{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
 .r-s{font-size:.86rem;color:var(--muted)}
 .results mark{background:color-mix(in srgb,var(--amber) 45%,transparent);color:inherit;border-radius:2px;padding:0 1px}
+
+/* audit findings */
+.findings{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.fd{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:6px;font-size:.92rem}
+.fd p{margin:0}
+.fd-hd{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;font-size:.86rem}
+.fd-t{font-weight:500}
+.fd[hidden]{display:none}
+
+.filters-row input[type=checkbox]{min-height:0;flex:none;width:18px;height:18px;padding:0}
+.filters-row .chk{align-items:center}
