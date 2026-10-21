@@ -403,6 +403,17 @@ window.BCReportMeta = () => 'Report: ' + filterSummary();
 
 from home import home_page  # noqa: E402
 
+def page_options():
+    import html
+    def o(h, l): return f'<option value="{h}">{html.escape(l)}</option>'
+    top = [m for m in MENU if 'href' in m]
+    out = '<option value="">Not about a specific page</option><optgroup label="Main pages">' + ''.join(o(m['href'], m['label']) for m in top) + o('/updates', "What's new") + '</optgroup>'
+    for m in MENU:
+        for g in m.get('groups', []):
+            out += f'<optgroup label="{html.escape(m["label"] + " · " + g["group"])}">' + ''.join(o(i['href'], i['label']) for i in g['items']) + '</optgroup>'
+    return out
+
+
 def about_page():
     return '''<div class="page prose">
   <span class="eyebrow">About</span>
@@ -423,7 +434,7 @@ def about_page():
     <div class="cf-row">
       <label class="cf-f"><span>What's this about?</span>
         <select name="topic"><option value="correction">A correction</option><option value="record">A record or tip</option><option value="question">A question</option><option value="other">Something else</option></select></label>
-      <label class="cf-f"><span>Page <em>(optional)</em></span><input name="page" type="text" inputmode="url" placeholder="e.g. /who-runs-bay-county" autocomplete="off"></label>
+      <label class="cf-f"><span>Page <em>(optional)</em></span><select name="page">__PAGE_OPTS__</select></label>
     </div>
     <label class="cf-f"><span>Message</span><textarea name="message" rows="6" required minlength="10" maxlength="5000" placeholder="What's wrong or missing, and where did you see the correct information? A link to the record helps most."></textarea></label>
     <div class="cf-row">
@@ -440,7 +451,8 @@ def about_page():
     const t0 = Date.now(), q = new URLSearchParams(location.search);
     let ref = q.get('page') || '';
     try { const r = new URL(document.referrer); if (!ref && r.origin === location.origin && r.pathname !== location.pathname) ref = r.pathname; } catch (e) {}
-    if (ref) { f.page.value = ref; f.topic.value = 'correction'; }
+    ref = ref.replace(/\\/+$/, '') || (ref ? '/' : '');
+    if (ref) { if (![...f.page.options].some(x => x.value === ref)) f.page.add(new Option(ref, ref), 1); f.page.value = ref; f.topic.value = 'correction'; }
     if (q.get('topic') && f.topic.querySelector(`option[value="${q.get('topic')}"]`)) f.topic.value = q.get('topic');
     f.addEventListener('input', () => { if (msg.classList.contains('err')) { msg.textContent = ''; msg.className = 'cf-msg'; } });
     f.addEventListener('submit', async ev => {
@@ -461,7 +473,7 @@ def about_page():
   </script>
   <h2>Who runs it</h2>
   <p>BayCounty.me is built and hosted by <a href="https://fluxlabs.net/" target="_blank" rel="noopener">Flux Labs</a>, a managed IT services company in Panama City.</p>
-</div>'''
+</div>'''.replace('__PAGE_OPTS__', page_options())
 
 
 PAGES = [

@@ -48,7 +48,7 @@
     <div class="cf-row">
       <label class="cf-f"><span>What's this about?</span>
         <select name="topic"><option value="correction">A correction</option><option value="record">A record or tip</option><option value="question">A question</option><option value="other">Something else</option></select></label>
-      <label class="cf-f"><span>Page <em>(optional)</em></span><input name="page" type="text" inputmode="url" placeholder="e.g. /who-runs-bay-county" autocomplete="off"></label>
+      <label class="cf-f"><span>Page <em>(optional)</em></span><select name="page"><option value="">Not about a specific page</option><optgroup label="Main pages"><option value="/">Home</option><option value="/my-address">My Address</option><option value="/who-runs-bay-county">Officials</option><option value="/glossary">Glossary</option><option value="/search">Search</option><option value="/about">About</option><option value="/updates">What&#x27;s new</option></optgroup><optgroup label="Public Money · What you pay"><option value="/public-money/tax-dollars">Tax Dollars</option><option value="/public-money/fees-and-bills">Fees &amp; Bills</option><option value="/public-money/tourist-tax">Tourist Tax</option><option value="/public-money/amendment-3">Amendment 3</option></optgroup><optgroup label="Public Money · Where it goes"><option value="/public-money/cra-spending">CRA Spending</option><option value="/public-money/sales-tax-projects">Sales Tax Projects</option><option value="/public-money/hurricane-michael">Hurricane Michael</option></optgroup><optgroup label="Public Money · Accountability"><option value="/public-money/contracts">Contracts</option><option value="/public-money/votes">How They Voted</option><option value="/public-money/debt">Debt</option><option value="/public-money/audits">Audit Findings</option></optgroup></select></label>
     </div>
     <label class="cf-f"><span>Message</span><textarea name="message" rows="6" required minlength="10" maxlength="5000" placeholder="What's wrong or missing, and where did you see the correct information? A link to the record helps most."></textarea></label>
     <div class="cf-row">
@@ -65,7 +65,8 @@
     const t0 = Date.now(), q = new URLSearchParams(location.search);
     let ref = q.get('page') || '';
     try { const r = new URL(document.referrer); if (!ref && r.origin === location.origin && r.pathname !== location.pathname) ref = r.pathname; } catch (e) {}
-    if (ref) { f.page.value = ref; f.topic.value = 'correction'; }
+    ref = ref.replace(/\/+$/, '') || (ref ? '/' : '');
+    if (ref) { if (![...f.page.options].some(x => x.value === ref)) f.page.add(new Option(ref, ref), 1); f.page.value = ref; f.topic.value = 'correction'; }
     if (q.get('topic') && f.topic.querySelector(`option[value="${q.get('topic')}"]`)) f.topic.value = q.get('topic');
     f.addEventListener('input', () => { if (msg.classList.contains('err')) { msg.textContent = ''; msg.className = 'cf-msg'; } });
     f.addEventListener('submit', async ev => {
