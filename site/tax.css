@@ -431,8 +431,9 @@ a.src:hover{color:var(--blue)}
 .rq{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:20px;align-items:start}
 @media (max-width:900px){.rq{grid-template-columns:minmax(0,1fr)}}
 .rq-form,.rq-out{display:flex;flex-direction:column;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px}
-.rq textarea,.rq input[type=text],.rq select{width:100%;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font:400 .92rem var(--f-body);padding:10px 12px;min-height:42px}
+.rq textarea,.rq input[type=text],.rq input[type=email],.rq input[type=tel],.rq select{width:100%;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font:400 .92rem var(--f-body);padding:10px 12px;min-height:42px}
 .rq textarea{resize:vertical;line-height:1.5}
+.rq textarea:focus,.rq input:not([type=checkbox]):not([type=radio]):focus,.rq select:focus{outline:2px solid var(--blue);outline-offset:1px;border-color:var(--blue)}
 #rqL{font:400 .86rem/1.55 var(--f-data);background:var(--sunken)}
 .rq-s{display:flex;flex-direction:column;gap:6px}
 .rq-opt{display:flex;gap:10px;align-items:flex-start;padding:9px 10px;border:1px solid var(--line);border-radius:10px;cursor:pointer}
