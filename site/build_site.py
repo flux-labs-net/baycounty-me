@@ -673,6 +673,8 @@ def main():
     open(os.path.join(OUT, 'updates.xml'), 'w').write(rss(DOMAIN))
     open(os.path.join(OUT, '404.html'), 'w').write(layout('Page not found', 'Page not found', '/404',
         '<div class="page prose"><h1>That page isn\'t here.</h1><p><a href="/">Back to the home page</a></p></div>'))
+    from admin_page import admin_page
+    admin_page(OUT)
     for dp, _, fs in os.walk(OUT):
         for f in fs:
             p = os.path.join(dp, f); print(os.path.relpath(p, OUT), os.path.getsize(p))

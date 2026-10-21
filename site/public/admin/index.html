@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Admin · BayCounty.me</title>
+<script>try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+:root{--bar:#3F6FB0;--ok:#1F7A4D;--warn:#9A5B00;--bad:#B3261E}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bar:#5F92E0;--ok:#5BC98E;--warn:#F2B661;--bad:#FF8C82}}
+:root[data-theme="dark"]{--bar:#5F92E0;--ok:#5BC98E;--warn:#F2B661;--bad:#FF8C82}
+body{display:block}
+.ad{max-width:1180px;margin:0 auto;padding:20px 16px 64px}
+.ad-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding-bottom:14px;border-bottom:1px solid var(--line);margin-bottom:18px}
+.ad-top h1{font:600 1.15rem var(--f-display);margin:0;display:flex;align-items:center;gap:8px}
+.ad-top h1 span{font:500 .72rem var(--f-body);color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:2px 8px}
+.ad-who{margin-left:auto;display:flex;align-items:center;gap:10px;color:var(--muted);font-size:.86rem}
+.tabs{display:flex;gap:4px;flex-wrap:wrap;margin:0 0 18px}
+.tabs button{border:1px solid transparent;background:none;color:var(--muted);font:500 .9rem var(--f-body);padding:8px 14px;border-radius:8px;cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--surface);border-color:var(--line);color:var(--ink)}
+.btn{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:0 14px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:500 .86rem var(--f-body);cursor:pointer;text-decoration:none}
+.btn:hover{border-color:var(--blue)}
+.btn.primary{background:var(--navy);border-color:var(--navy);color:#fff}
+:root[data-theme="dark"] .btn.primary{color:#0E131B}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn.primary{color:#0E131B}}
+.btn.danger{color:var(--bad)}
+.btn:disabled{opacity:.5;cursor:default}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.row .grow{flex:1}
+.muted{color:var(--muted)} .small{font-size:.84rem}
+.mono{font-family:var(--f-data);font-size:.84rem}
+table.at{width:100%;border-collapse:collapse;font-size:.88rem}
+.at th{text-align:left;font:500 .76rem var(--f-body);color:var(--muted);text-transform:uppercase;letter-spacing:.04em;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+.at td{padding:10px;border-bottom:1px solid var(--line);vertical-align:top}
+.at tr.click{cursor:pointer} .at tr.click:hover td{background:var(--sunken)}
+.at td.num,.at th.num{text-align:right;font-variant-numeric:tabular-nums}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+.tw table tr:last-child td{border-bottom:0}
+.pill{display:inline-flex;align-items:center;gap:5px;font:500 .76rem var(--f-body);padding:2px 8px;border-radius:999px;border:1px solid var(--line);white-space:nowrap}
+.pill::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.pill.active{color:var(--ok)} .pill.disabled{color:var(--warn)} .pill.revoked{color:var(--bad)} .pill.expired{color:var(--bad)}
+label.f{display:flex;flex-direction:column;gap:5px;font:500 .82rem var(--f-body);color:var(--muted)}
+label.f input,label.f textarea,label.f select,select.sel{font:400 .92rem var(--f-body);color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px;min-height:38px}
+label.f textarea{min-height:70px;resize:vertical}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:720px){.grid2,.grid3{grid-template-columns:1fr}}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:14px}
+.tile{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px}
+.tile b{display:block;font:600 1.35rem var(--f-display);font-variant-numeric:tabular-nums}
+.tile span{color:var(--muted);font-size:.8rem}
+.chart{position:relative}
+.chart svg{display:block;width:100%;height:auto}
+.chart .tip{position:absolute;pointer-events:none;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:6px 9px;font-size:.8rem;box-shadow:0 6px 20px rgba(0,0,0,.14);white-space:nowrap;display:none}
+.lists{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:12px}
+@media (max-width:860px){.lists{grid-template-columns:1fr}}
+.list h3{font:600 .9rem var(--f-display);margin:0 0 10px}
+.li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;margin-bottom:9px;font-size:.84rem}
+.li .lbl{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.li .n{font-variant-numeric:tabular-nums;color:var(--muted)}
+.li .track{grid-column:1/-1;height:6px;border-radius:3px;background:var(--sunken)}
+.li .track i{display:block;height:100%;border-radius:3px;background:var(--bar)}
+dialog{border:1px solid var(--line);border-radius:14px;background:var(--surface);color:var(--ink);padding:0;width:min(640px,calc(100vw - 32px));max-height:calc(100vh - 48px)}
+dialog::backdrop{background:rgba(10,14,20,.45)}
+dialog form{padding:20px;display:flex;flex-direction:column;gap:12px}
+dialog h2{font:600 1.05rem var(--f-display);margin:0}
+.secret{display:flex;gap:8px;align-items:center;background:var(--sunken);border:1px solid var(--line);border-radius:8px;padding:10px 12px;word-break:break-all}
+.secret code{flex:1;font-family:var(--f-data);font-size:.86rem}
+.note{border-left:3px solid var(--amber);padding:8px 12px;background:var(--sunken);border-radius:0 8px 8px 0;font-size:.86rem}
+.err{color:var(--bad);font-size:.86rem;min-height:1em}
+.signin{max-width:420px;margin:12vh auto 0}
+.signin h1{font:600 1.3rem var(--f-display);margin:0 0 6px}
+.toggle{display:flex;align-items:center;gap:8px;font-size:.9rem}
+.empty{padding:28px;text-align:center;color:var(--muted)}
+.st{font-variant-numeric:tabular-nums}
+.st.e4,.st.e5{color:var(--bad)} .st.e429{color:var(--warn)}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="ad">
+  <section id="signin" class="signin card" hidden>
+    <h1>BayCounty.me admin</h1>
+    <p class="muted small">Enter your admin email and we'll send you a sign-in link.</p>
+    <form id="signin-form" class="row" style="margin-top:12px">
+      <label class="f grow"><input type="email" name="email" aria-label="Email" required autocomplete="email" placeholder="you@example.com"></label>
+      <button class="btn primary" type="submit">Send link</button>
+    </form>
+    <p id="signin-msg" class="small muted" role="status" style="margin:10px 0 0"></p>
+  </section>
+
+  <div id="app" hidden>
+    <header class="ad-top">
+      <h1>BayCounty.me admin <span>API</span></h1>
+      <div class="ad-who"><span id="who"></span><button class="btn" id="signout" type="button">Sign out</button></div>
+    </header>
+    <div class="tabs" role="tablist">
+      <button role="tab" data-tab="keys" aria-selected="true">API keys</button>
+      <button role="tab" data-tab="analytics" aria-selected="false">Analytics</button>
+      <button role="tab" data-tab="logs" aria-selected="false">Request log</button>
+      <button role="tab" data-tab="settings" aria-selected="false">Throttles &amp; settings</button>
+    </div>
+
+    <section id="tab-keys" role="tabpanel">
+      <div class="row" style="margin-bottom:12px"><p class="muted small grow" style="margin:0">Each key belongs to one person or app. Limits apply per key; requests without a key use the keyless limits in Throttles &amp; settings.</p>
+        <button class="btn primary" id="new-key" type="button">New key</button></div>
+      <div class="tw"><table class="at" id="keys-table"><thead><tr><th>Name</th><th>Assigned to</th><th>Key</th><th class="num">Per minute</th><th class="num">Per day</th><th>Status</th><th class="num">24 hours</th><th class="num">30 days</th><th>Last used</th></tr></thead><tbody></tbody></table></div>
+    </section>
+
+    <section id="tab-analytics" role="tabpanel" hidden>
+      <div class="row" style="margin-bottom:12px">
+        <select class="sel" id="an-scope" aria-label="Traffic to show"></select>
+        <select class="sel" id="an-days" aria-label="Date range"><option value="7">Last 7 days</option><option value="30" selected>Last 30 days</option><option value="90">Last 90 days</option></select>
+      </div>
+      <div class="tiles" id="an-tiles"></div>
+      <div class="card"><div class="row" style="margin-bottom:6px"><b class="grow">Requests per day</b><span class="muted small">Central time</span></div><div class="chart" id="an-chart"></div></div>
+      <div class="lists" id="an-lists"></div>
+    </section>
+
+    <section id="tab-logs" role="tabpanel" hidden>
+      <div class="row" style="margin-bottom:12px">
+        <select class="sel" id="lg-scope" aria-label="Traffic to show"></select>
+        <label class="toggle"><input type="checkbox" id="lg-errors"> Errors and blocked only</label>
+        <button class="btn" id="lg-refresh" type="button">Refresh</button>
+      </div>
+      <div class="tw"><table class="at" id="logs-table"><thead><tr><th>Time</th><th>Key</th><th>Where</th><th>Request</th><th class="num">Status</th><th class="num">Rows</th><th class="num">ms</th></tr></thead><tbody></tbody></table></div>
+      <div class="row" style="margin-top:12px"><button class="btn" id="lg-more" type="button" hidden>Load older</button></div>
+    </section>
+
+    <section id="tab-settings" role="tabpanel" hidden>
+      <form id="settings-form" class="card" style="display:flex;flex-direction:column;gap:14px">
+        <div><b>Requests without a key</b><p class="muted small" style="margin:4px 0 0">Counted per connection. Leave a box empty for no limit.</p></div>
+        <div class="grid2"><label class="f">Per minute<input type="number" min="0" name="anon_per_minute"></label><label class="f">Per day<input type="number" min="0" name="anon_per_day"></label></div>
+        <label class="toggle"><input type="checkbox" name="require_key"> Require a key for every request (turns off keyless access)</label>
+        <div><b>Starting limits for new keys</b></div>
+        <div class="grid2"><label class="f">Per minute<input type="number" min="0" name="default_per_minute"></label><label class="f">Per day<input type="number" min="0" name="default_per_day"></label></div>
+        <div class="row"><button class="btn primary" type="submit">Save</button><span id="settings-msg" class="small muted" role="status"></span></div>
+      </form>
+      <h2 style="font:600 1rem var(--f-display);margin:24px 0 10px">Admin activity</h2>
+      <div class="tw"><table class="at" id="audit-table"><thead><tr><th>Time</th><th>Who</th><th>What</th><th>Details</th></tr></thead><tbody></tbody></table></div>
+    </section>
+  </div>
+</div>
+
+<dialog id="key-dialog"><form method="dialog" id="key-form">
+  <h2 id="kd-title">New API key</h2>
+  <div id="kd-secret" hidden><div class="note"><b>Copy this key now.</b> It's only shown once. Send it to the key's owner; we keep only a fingerprint of it.</div>
+    <div class="secret" style="margin-top:10px"><code id="kd-secret-val"></code><button class="btn" type="button" id="kd-copy">Copy</button></div></div>
+  <div id="kd-fields" style="display:flex;flex-direction:column;gap:12px">
+    <label class="f">Name<input name="name" required maxlength="300" placeholder="What it's for, e.g. News Herald data desk"></label>
+    <div class="grid2"><label class="f">Assigned to<input name="owner_name" maxlength="300" placeholder="Person"></label><label class="f">Their email<input type="email" name="owner_email" maxlength="300"></label></div>
+    <label class="f">Organization<input name="organization" maxlength="300"></label>
+    <div class="grid3"><label class="f">Per minute<input type="number" min="0" name="per_minute" placeholder="No limit"></label><label class="f">Per day<input type="number" min="0" name="per_day" placeholder="No limit"></label><label class="f">Expires<input type="date" name="expires_at"></label></div>
+    <label class="f" id="kd-status-wrap" hidden>Status<select name="status"><option value="active">Active</option><option value="disabled">Paused</option><option value="revoked">Revoked (permanent)</option></select></label>
+    <label class="f">Notes<textarea name="notes" maxlength="2000"></textarea></label>
+  </div>
+  <p class="err" id="kd-err" role="alert"></p>
+  <div class="row">
+    <button class="btn primary" type="button" id="kd-save">Create key</button>
+    <button class="btn" type="button" id="kd-stats" hidden>Analytics</button>
+    <button class="btn" type="button" id="kd-logs" hidden>Log</button>
+    <button class="btn danger" type="button" id="kd-rotate" hidden>Replace key</button>
+    <span class="grow"></span><button class="btn" value="cancel" id="kd-close">Close</button>
+  </div>
+</form></dialog>
+<script src="/assets/admin.js" defer></script>
+</body>
+</html>

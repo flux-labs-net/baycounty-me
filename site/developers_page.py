@@ -13,11 +13,12 @@ def developers_page(out_dir):
     rows = ''.join(f'''<tr><th scope="row"><code>{e(d["id"])}</code><small>{e(d["title"])}</small></th><td class="num">{d["rows"]:,}</td>
       <td class="small"><a href="/api/v1/datasets/{e(d["id"])}?limit=5">Try it</a> · <a href="/api/v1/datasets/{e(d["id"])}/schema">Columns</a> · <a href="{e(d["csv"])}">CSV</a></td></tr>''' for d in cat['datasets'])
     code = lambda s: f'<pre class="dev-code"><code>{e(s)}</code></pre>'
+    anon = 'a set number of requests a minute and per day (each response\'s headers show how many are left)'
     return f'''<div class="page tax dev">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Learn and reuse · API</span><h1>BayCounty.me API</h1>
     <p class="lede">Connect your own app, spreadsheet, newsroom tool or AI assistant to the public records on this site. Free, read-only, and no key needed.</p></div>
     <div class="stamp"><a class="pill" href="/api/v1">Open the API</a><span>{len(cat["datasets"])} datasets</span></div></header>
-  <nav class="jump" aria-label="On this page"><a href="#start">Quick start</a><a href="#endpoints">Endpoints</a><a href="#filters">Filtering</a><a href="#datasets">Datasets</a><a href="#mcp">AI assistants (MCP)</a><a href="#terms">Use and limits</a></nav>
+  <nav class="jump" aria-label="On this page"><a href="#start">Quick start</a><a href="#endpoints">Endpoints</a><a href="#filters">Filtering</a><a href="#datasets">Datasets</a><a href="#keys">API keys</a><a href="#mcp">AI assistants (MCP)</a><a href="#terms">Use and limits</a></nav>
   <section class="tx-sec" id="start"><div class="sec-hd"><h2>Quick start</h2></div>
     <p>Every dataset on the <a href="/open-data">Open data</a> page is also available as an API. Responses are JSON (or CSV with <code>format=csv</code>), and every row carries a link to its source record. Rows are served live from the BayCounty.me database, so newly added records show up within about five minutes; each response says where its rows came from in <code>meta.data_source</code>.</p>
     {code(f"curl '{SITE}/api/v1/datasets/contracts?government=Bay%20County%20BOCC&amount_min=1000000&sort=-amount&limit=5'")}
@@ -46,6 +47,15 @@ def developers_page(out_dir):
     </ul></section>
   <section class="tx-sec" id="datasets"><div class="sec-hd"><h2>Datasets</h2><span class="muted">Updated {e(cat.get("updated"))}</span></div>
     <div class="tablewrap"><table class="tx-table cm-table"><thead><tr><th scope="col">Dataset id</th><th scope="col" class="num">Rows</th><th scope="col">Links</th></tr></thead><tbody>{rows}</tbody></table></div></section>
+  <section class="tx-sec" id="keys"><div class="sec-hd"><h2>API keys and limits</h2></div>
+    <p>You don't need a key. Without one, each connection can make {anon}. If you need more, or want your use tracked separately, <a href="/about#contact">ask for a key</a>.</p>
+    <p>Send a key in any of these ways (the header is best, so the key stays out of logs and browser history):</p>
+    {code(f"curl -H 'Authorization: Bearer bcm_your_key' '{SITE}/api/v1/datasets/votes?limit=5'")}
+    <ul class="plain">
+      <li><code>Authorization: Bearer &lt;key&gt;</code> or <code>X-API-Key: &lt;key&gt;</code> header, or <code>?api_key=&lt;key&gt;</code> on the URL. The MCP server takes the same header.</li>
+      <li>Every response carries <code>X-RateLimit-Limit</code> and <code>X-RateLimit-Remaining</code> (per minute), plus <code>X-RateLimit-Limit-Day</code> and <code>X-RateLimit-Remaining-Day</code> when a daily limit applies. Daily limits reset at midnight Central time.</li>
+      <li>Over a limit, you get status <code>429</code> with a <code>Retry-After</code> header in seconds. A wrong key gets <code>401</code>; a paused, revoked or expired key gets <code>403</code>.</li>
+    </ul></section>
   <section class="tx-sec" id="mcp"><div class="sec-hd"><h2>Connect an AI assistant (MCP)</h2></div>
     <p>BayCounty.me runs a <a href="https://modelcontextprotocol.io" target="_blank" rel="noopener">Model Context Protocol</a> server, so AI assistants that support remote MCP servers can look up these records directly and cite them. There's no sign-in.</p>
     {code(f"{SITE}/api/mcp")}
@@ -59,7 +69,7 @@ def developers_page(out_dir):
       <li>The data is compiled from public records and free to reuse. Please credit BayCounty.me and link to the source record for any figure you publish.</li>
       <li>Check the original record before relying on a single number. Each dataset's notes and gaps are on its page on this site.</li>
       <li>Individual campaign donors and rank-and-file public employees are not named, here or anywhere on the site.</li>
-      <li>The API allows 120 requests a minute per connection. For bulk use, download the full files from <code>/downloads</code>. Data refreshes as the site updates, and meetings and campaign reports refresh every morning.</li>
+      <li>Requests are limited per connection or per key (see <a href="#keys">API keys</a>). For bulk use, download the full files from <code>/downloads</code>. Data refreshes as the site updates, and meetings and campaign reports refresh every morning.</li>
       <li>Questions or a use you'd like supported? <a href="/about#contact">Get in touch</a>.</li>
     </ul></section>
 </div>

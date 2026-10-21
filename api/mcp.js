@@ -3,6 +3,7 @@
 // Add as a remote MCP server / custom connector: https://baycounty.me/api/mcp
 const {filterRows} = require('./v1');
 const {loadFile: load, datasetRows} = require('./_data');
+const {gate, instrument} = require('./_gate');
 const SITE = 'https://baycounty.me';
 const VERSIONS = ['2025-06-18', '2025-03-26', '2024-11-05'];
 
@@ -86,6 +87,7 @@ async function handle(req, msg) {
   if (method === 'tools/call') {
     try {
       const out = await call(req, params.name, params.arguments || {});
+      if (out && typeof out.returned === 'number') req._rows = out.returned;
       return ok(id, {content: [{type: 'text', text: JSON.stringify(out)}], structuredContent: out, isError: false});
     } catch (e) {
       return ok(id, {content: [{type: 'text', text: e.message}], isError: true});
@@ -111,10 +113,20 @@ module.exports = async (req, res) => {
   if (req.method !== 'POST') return res.status(405).json({error: 'Use POST'});
   let body = req.body;
   if (typeof body === 'string') { try { body = JSON.parse(body); } catch (e) { return res.status(400).json(err(null, -32700, 'Parse error')); } }
+  const first = Array.isArray(body) ? null : body || {};
+  const p = (first && first.params) || {};
+  const info = {endpoint: !first ? 'batch' : first.method === 'tools/call' ? `tools/call:${p.name}` : first.method,
+    dataset: first && first.method === 'tools/call' && p.arguments ? p.arguments.id || p.arguments.slug || null : null,
+    query: first && first.method === 'tools/call' ? JSON.stringify(p.arguments || {}).replace(/"api_key":"[^"]*"/, '') : null};
+  const isNote = first && (first.id === undefined || first.id === null);
+  const ctx = await gate(req, res, 'mcp');
+  if (!isNote) instrument(res, ctx, info);
+  if (!ctx.ok) return res.status(ctx.status).json(err(first ? first.id ?? null : null, ctx.status === 429 ? -32029 : -32001, ctx.message || 'Request not allowed.'));
   if (Array.isArray(body)) {
     const out = (await Promise.all(body.map(m => handle(req, m)))).filter(Boolean);
     return out.length ? res.status(200).json(out) : res.status(202).end();
   }
   const out = await handle(req, body);
+  if (req._rows != null) info.rows = req._rows;
   return out ? res.status(200).json(out) : res.status(202).end();
 };

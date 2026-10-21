@@ -9,10 +9,10 @@
 //   GET /api/v1/openapi.json            OpenAPI 3.1 description
 // Dataset rows are read from the BayCounty.me database (see api/_data.js), falling back to the published files.
 const {loadFile: load, datasetRows} = require('./_data');
+const {gate, instrument, cleanQuery} = require('./_gate');
 const SITE = 'https://baycounty.me';
-const hits = new Map();
 
-const RESERVED = new Set(['q', 'fields', 'sort', 'limit', 'offset', 'format', 'path']);
+const RESERVED = new Set(['q', 'fields', 'sort', 'limit', 'offset', 'format', 'path', 'api_key']);
 function filterRows(rows, query) {
   const q = String(query.q || '').trim().toLowerCase();
   const conds = Object.entries(query).filter(([k]) => !RESERVED.has(k));
@@ -65,6 +65,8 @@ function openapi(catalog) {
     openapi: '3.1.0',
     info: {title: 'BayCounty.me API', version: '1.0.0', description: 'Read-only access to Bay County, Florida public records compiled by BayCounty.me: budgets, taxes, votes, contracts, campaign money, salaries, elections and more. No key needed. Every row carries a link to its source record. Individual donors and rank-and-file employees are never named.', contact: {url: `${SITE}/about#contact`}},
     servers: [{url: `${SITE}/api/v1`}],
+    components: {securitySchemes: {bearer: {type: 'http', scheme: 'bearer', description: 'Optional API key (bcm_...) for higher limits'}, apiKey: {type: 'apiKey', in: 'header', name: 'X-API-Key'}}},
+    security: [{}, {bearer: []}, {apiKey: []}],
     paths: {
       '/datasets': {get: {operationId: 'listDatasets', summary: 'List every dataset with its columns', responses: {200: {description: 'Catalog'}}}},
       '/datasets/{id}': {get: {operationId: 'queryDataset', summary: 'Rows from one dataset',
@@ -83,15 +85,18 @@ function openapi(catalog) {
 module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-API-Key');
+  res.setHeader('Access-Control-Expose-Headers', 'X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Limit-Day, X-RateLimit-Remaining-Day, Retry-After');
   if (req.method === 'OPTIONS') return res.status(204).end();
   if (req.method !== 'GET') return res.status(405).json({error: 'Only GET is supported.'});
-  const ip = String(req.headers['x-forwarded-for'] || '').split(',')[0].trim() || 'x', now = Date.now();
-  const recent = (hits.get(ip) || []).filter(t => now - t < 60e3); recent.push(now); hits.set(ip, recent);
-  if (recent.length > 120) return res.status(429).json({error: 'Too many requests. Limit is 120 per minute; download /downloads/<id>.json for bulk use.'});
-  res.setHeader('Cache-Control', 'public, s-maxage=300, stale-while-revalidate=3600');
+  // Not cached at the edge, so every request is counted against its key and logged.
+  res.setHeader('Cache-Control', 'private, max-age=60');
   const path = String(req.query.path || '').replace(/^\/+|\/+$/g, '');
   const parts = path ? path.split('/') : [];
+  const ctx = await gate(req, res, 'api');
+  const info = {endpoint: path || 'index', dataset: parts[0] === 'datasets' ? parts[1] || null : null, query: cleanQuery(req.query)};
+  instrument(res, ctx, info);
+  if (!ctx.ok) return res.status(ctx.status).json({error: ctx.message || 'Request not allowed.', reason: ctx.reason, docs: `${SITE}/developers#keys`});
   try {
     const catalog = await load(req, '/downloads/index.json');
     if (!parts.length) return res.status(200).json({
@@ -108,9 +113,10 @@ module.exports = async (req, res) => {
       const rows = filterRows(all, req.query);
       const limit = Math.min(Math.max(parseInt(req.query.limit || '100', 10) || 100, 1), 1000), offset = Math.max(parseInt(req.query.offset || '0', 10) || 0, 0);
       let page = rows.slice(offset, offset + limit);
+      info.rows = page.length;
       if (req.query.fields) { const f = String(req.query.fields).split(',').map(s => s.trim()); page = page.map(r => Object.fromEntries(f.filter(k => k in r).map(k => [k, r[k]]))); }
       if (req.query.format === 'csv') { res.setHeader('Content-Type', 'text/csv; charset=utf-8'); res.setHeader('Content-Disposition', `inline; filename="${meta.id}.csv"`); return res.status(200).send(toCsv(page)); }
-      const nextQ = new URLSearchParams(Object.entries(req.query).filter(([k]) => k !== 'path')); nextQ.set('offset', offset + limit); nextQ.set('limit', limit);
+      const nextQ = new URLSearchParams(Object.entries(req.query).filter(([k]) => k !== 'path' && k !== 'api_key')); nextQ.set('offset', offset + limit); nextQ.set('limit', limit);
       return res.status(200).json({dataset: meta.id, title: meta.title, data: page,
         meta: {total: rows.length, limit, offset, next: offset + limit < rows.length ? `${SITE}/api/v1/datasets/${meta.id}?${nextQ}` : null, updated: catalog.updated, data_source: source, source_note: 'Each row links to its source record. Check the original before relying on a single figure.'}});
     }
