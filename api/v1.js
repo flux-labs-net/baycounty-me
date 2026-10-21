@@ -134,7 +134,7 @@ module.exports = async (req, res) => {
       const idx = await load(req, '/data/search.json');
       const items = Array.isArray(idx) ? idx : (idx.items || idx.entries || []);
       const words = q.split(/\s+/);
-      const scored = items.map(it => { const t = JSON.stringify(it).toLowerCase(); const s = words.reduce((a, w) => a + (t.includes(w) ? 1 : 0), 0); return [s, it]; }).filter(([s]) => s === words.length);
+      const scored = items.map(it => { const t = JSON.stringify(it).toLowerCase(), ti = String(it.t || '').toLowerCase(); if (!words.every(w => t.includes(w))) return null; return [words.reduce((a, w) => a + (ti.includes(w) ? 10 : 0) + (String(it.s || '').toLowerCase().includes(w) ? 3 : 0), 0) + (it.u === '/developers' ? -20 : 0), it]; }).filter(Boolean).sort((a, b) => b[0] - a[0]);
       const limit = Math.min(parseInt(req.query.limit || '20', 10) || 20, 100);
       return res.status(200).json({query: q, total: scored.length, data: scored.slice(0, limit).map(([, it]) => ({type: it.k, title: it.t, summary: it.s, url: it.u ? (/^https?:/.test(it.u) ? it.u : SITE + it.u) : null}))});
     }

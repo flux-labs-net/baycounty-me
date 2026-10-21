@@ -36,7 +36,16 @@
     },
     {
      "name": "budget_status",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "Adopted Aug 28, 2025",
+      "Adopted FY2026",
+      "Adopted Sept 16, 2025",
+      "Adopted Sept 23, 2025",
+      "Adopted September 2025",
+      "Adopted September 2025, but the budget is not posted online",
+      "Total is the tentative July 2025 figure; the final adopted total was not found online"
+     ]
     },
     {
      "name": "millage",

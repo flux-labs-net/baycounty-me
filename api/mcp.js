@@ -69,7 +69,8 @@ async function call(req, name, a = {}) {
     const idx = await load(req, '/data/search.json');
     const words = String(a.q || '').toLowerCase().split(/\s+/).filter(Boolean);
     if (!words.length) throw new Error('q is required');
-    const hits = idx.filter(it => { const t = JSON.stringify(it).toLowerCase(); return words.every(w => t.includes(w)); });
+    const hits = idx.filter(it => { const t = JSON.stringify(it).toLowerCase(); return words.every(w => t.includes(w)); })
+      .map(it => [words.reduce((a, w) => a + (String(it.t || '').toLowerCase().includes(w) ? 10 : 0) + (String(it.s || '').toLowerCase().includes(w) ? 3 : 0), 0) + (it.u === '/developers' ? -20 : 0), it]).sort((a, b) => b[0] - a[0]).map(x => x[1]);
     return {query: a.q, total: hits.length, results: hits.slice(0, Math.min(a.limit || 10, 50)).map(it => ({type: it.k, title: it.t, summary: it.s, url: /^https?:/.test(it.u) ? it.u : SITE + it.u}))};
   }
   throw new Error(`Unknown tool "${name}"`);

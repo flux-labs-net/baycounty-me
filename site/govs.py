@@ -196,6 +196,12 @@ def profile(key):
         out['meetings'] = [m for m in D['meetings'].get('meetings', []) if any(b['id'] == m.get('board') and b.get('gov') == key for b in D['meetings'].get('boards', []))]
     if D.get('budgets_detail'):
         out['budget_detail'] = next((b for b in D['budgets_detail'].get('governments', []) if b.get('gov') == key), None)
+        bd = out['budget_detail']
+        # newer research found adopted budgets the tax data lacks (Callaway, Parker): use them where the tax data has no adopted figure
+        if bd and bd.get('status') == 'adopted' and 'budget' in out and not str(out['budget'].get('status') or '').lower().startswith('adopted'):
+            gf = next((f.get('amount') for f in bd.get('funds') or [] if 'general' in str(f.get('type') or f.get('name') or '').lower()), None)
+            out['budget'].update({'total': bd.get('total'), 'general_fund': gf or out['budget'].get('general_fund'),
+                                  'status': 'Adopted ' + str(bd.get('fiscal_year') or '').split(' (')[0]})
     if D.get('records'):
         out['records'] = [a for a in D['records'].get('agencies', []) if a.get('gov') == key]
     # per-resident figures
