@@ -153,19 +153,18 @@
           "Food Service appropriations": 15727360.85,
           "Other federal programs (Title I, IDEA, etc.)": 9240065.94
         },
-        "source_title": "FLDOE Bay District 2025-26 Total Budget data (BayTotalBUD2526); board tentative budget hearing coverage, July 31, 2025",
+        "source_title": "FLDOE Bay District 2025-26 Total Budget data (BayTotalBUD2526); School Board tentative budget hearing minutes, July 31, 2025",
         "source_url": "https://www.fldoe.org/file/7507/BayTotalBUD2526.pdf",
         "other_sources": [
-          "https://cp.soar.com/articles/5556310/Florida/Bay-County-School-Board-Adopts-Tentative-Millage-Rate-and-Budget-for-2025-2026",
-          "https://cp.soar.com/articles/5556300/Florida/Committee-Reviews-Proposed-Budget-with-648M-General-Fund-and-Millage-Rate-Adjustments",
-          "https://bay.k12.fl.us/uploads/Final Budget FY 25-26.pdf"
+          "https://go.boarddocs.com/fl/bcsdfl/Board.nsf/goto?open&id=DJETTG78D1BD",
+          "https://www.fldoe.org/file/7507/BayTotalBUD2526.pdf"
         ]
       },
       "history": [
         {"fy": "FY2025 (2024-25)", "total_budget": 660000000, "general_fund": 348000000, "note": "approximate, as reported at final approval", "source_url": "https://www.wjhg.com/2024/09/11/bay-district-schools-approves-2024-2025-budget/"}
       ],
       "context": [
-        {"text": "The total millage rose slightly, from 5.311 to 5.337. Coverage at the tentative stage described it as the first increase in six years and 0.99% above the rolled-back rate. The state sets the Required Local Effort portion (3.089 mills), which the district reported would yield about $104.5M toward FEFP funding.", "source_url": "https://cp.soar.com/articles/5556310/Florida/Bay-County-School-Board-Adopts-Tentative-Millage-Rate-and-Budget-for-2025-2026"},
+        {"text": "The total millage rose slightly, from 5.311 to 5.337. Coverage at the tentative stage described it as the first increase in six years and 0.99% above the rolled-back rate. The state sets the Required Local Effort portion (3.089 mills), which the district reported would yield about $104.5M toward FEFP funding.", "source_url": "https://go.boarddocs.com/fl/bcsdfl/Board.nsf/goto?open&id=DJETTG78D1BD"},
         {"text": "For FY2025 the school board lowered total millage by 0.172 mills.", "source_url": "https://www.wjhg.com/2024/09/11/bay-district-schools-approves-2024-2025-budget/"},
         {"text": "Amendment 3 on the November 2026 ballot would not change the exemption that applies to school property taxes.", "source_url": "https://floridaphoenix.com/voter-guides/ballot-measures/2026-amendment-3/"}
       ]

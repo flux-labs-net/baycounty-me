@@ -363,6 +363,7 @@ def _layout(title, desc, path, body, extra_head=''):
 def write(path, html):
     # keep each page's 'Data updated' stamp in step with its latest What's new entry
     html = re.sub(r'Data updated [A-Z][a-z]{2} \d{1,2}, \d{4}', 'Data updated ' + nice_date(last_updated(path)), html)
+    html = linkify_html(html)
     fp = os.path.join(OUT, path.strip('/'), 'index.html') if path != '/' else os.path.join(OUT, 'index.html')
     os.makedirs(os.path.dirname(fp), exist_ok=True)
     open(fp, 'w').write(html)
@@ -515,6 +516,7 @@ from meetings_page import meetings_page
 from campaign_page import campaign_page
 from money_pages import budget_page, payments_page
 from money_map import money_map_page
+from linkify import linkify_html, LINKIFY_JS
 from elections_page import elections_page
 from exemptions_page import exemptions_page
 ELECTIONS_READY = os.path.exists(os.path.join(ROOT, '..', 'data', 'elections', 'candidates_2026.json'))
@@ -653,7 +655,7 @@ def main():
     open(os.path.join(OUT, 'assets', 'site.css'), 'w').write(TOKENS + '\n' + SITE_CSS)
     from glossary import TERMS
     gl = {t['id']: {'term': t['term'], 'simple': t['simple']} for t in TERMS}
-    open(os.path.join(OUT, 'assets', 'site.js'), 'w').write(MENU_JS + DEEPLINK_JS + TERM_JS.replace('__GLOSSARY_ES__', json.dumps(glossary_es_terms(), ensure_ascii=False)).replace('__GLOSSARY__', json.dumps(gl, ensure_ascii=False)))
+    open(os.path.join(OUT, 'assets', 'site.js'), 'w').write(MENU_JS + DEEPLINK_JS + LINKIFY_JS + TERM_JS.replace('__GLOSSARY_ES__', json.dumps(glossary_es_terms(), ensure_ascii=False)).replace('__GLOSSARY__', json.dumps(gl, ensure_ascii=False)))
     shutil.copy(os.path.join(ROOT, '..', 'assets', 'logo_small.webp'), os.path.join(OUT, 'assets', 'flux-labs.webp'))
     shutil.copy(os.path.join(ROOT, 'favicon.svg'), os.path.join(OUT, 'favicon.svg'))
     shutil.copy(os.path.join(ROOT, 'tax.css'), os.path.join(OUT, 'assets', 'tax.css'))

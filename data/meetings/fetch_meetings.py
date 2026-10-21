@@ -703,9 +703,9 @@ BOARDS = [
     {"id": "schools", "name": "Bay District School Board", "gov": "schools",
      "schedule": "Not available: bay.k12.fl.us serves a JavaScript bot challenge to server requests and "
                  "the district's published meeting-schedule PDF could not be retrieved. No dates are generated.",
-     "schedule_source_url": "https://bay.k12.fl.us/school-board",
+     "schedule_source_url": "https://www.bay.k12.fl.us/o/bds/page/school-board",
      "location": "Bay District Schools, 1311 Balboa Ave., Panama City, FL 32401 (district office address; meeting venue not confirmed)",
-     "source_url": "https://bay.k12.fl.us/school-board", "calendar_url": None},
+     "source_url": "https://www.bay.k12.fl.us/o/bds/page/school-board", "calendar_url": None},
     {"id": "pc", "name": "Panama City City Commission", "gov": "pc",
      "schedule": "2nd and 4th Tuesday of each month, unless otherwise stated: 2nd Tuesday at 8 a.m., "
                  "4th Tuesday at 4:30 p.m., at the Bay County Government Center, 840 W. 11th St. "
@@ -890,12 +890,12 @@ def main(argv):
 
     # Schools - documented failure (bot challenge); record it each run.
     try:
-        page = fetch("https://bay.k12.fl.us/school-board", tries=1)
+        page = fetch("https://www.bay.k12.fl.us/o/bds/page/school-board", tries=1)
         if "Client Challenge" in page or len(page) < 5000:
             raise RuntimeError("JavaScript bot challenge page returned (no content for server requests)")
         SOURCE_LOG.setdefault("schools", {})["website"] = "reachable (no parser implemented)"
     except Exception as e:
-        note_error("schools", "website", "https://bay.k12.fl.us/school-board", e)
+        note_error("schools", "website", "https://www.bay.k12.fl.us/o/bds/page/school-board", e)
 
     # Panama City + CRA
     r = safe("pc", "AgendaCenter", src_agendacenter, "www.panamacity.gov", today, days,

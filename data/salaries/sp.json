@@ -1,0 +1,280 @@
+{
+ "employer": "City of Springfield",
+ "employer_id": "sp",
+ "gov": "sp",
+ "as_of": "2026-10-21",
+ "fiscal_year": "FY2026",
+ "fiscal_year_note": "Only FY2026 adopted department totals were obtainable. No salary-level data is published online.",
+ "sources": [
+  {
+   "title": "City of Springfield Resolution 25-15, Final Annual Budget FY2025-26 (adopted Sept 15, 2025; scanned, read by OCR): department appropriations only",
+   "url": "https://www.springfieldfl.net/media/10201",
+   "type": "budget",
+   "effective": "2025-10-01"
+  },
+  {
+   "title": "City of Springfield Resolution 26-12, Final Budget for FY 26-27 (listed on the Finance page; not downloadable on 2026-10-21 during a CivicPlus outage)",
+   "url": "https://www.springfieldfl.net/media/10891",
+   "type": "budget",
+   "effective": "2026-10-01"
+  },
+  {
+   "title": "City of Springfield directory and City Commission pages",
+   "url": "https://www.springfieldfl.net/directory",
+   "type": "budget",
+   "effective": "2026-10-21"
+  }
+ ],
+ "positions": [
+  {
+   "title": "Mayor and Commissioners (5)",
+   "department": "Legislative - Commission",
+   "category": "elected",
+   "grade": null,
+   "pay_min": null,
+   "pay_mid": null,
+   "pay_max": null,
+   "pay_basis": "annual",
+   "hourly_min": null,
+   "hourly_max": null,
+   "actual_salaries": null,
+   "budgeted_fte": 5,
+   "union": null,
+   "source": "https://www.springfieldfl.net/media/10201",
+   "notes": "Commission pay is not itemized in the adopted resolution. The Legislative appropriation is $394,097 (all costs)."
+  },
+  {
+   "title": "Police Department staff (Chief, sworn officers, support)",
+   "department": "Police",
+   "category": "law_enforcement",
+   "grade": null,
+   "pay_min": null,
+   "pay_mid": null,
+   "pay_max": null,
+   "pay_basis": "annual",
+   "hourly_min": null,
+   "hourly_max": null,
+   "actual_salaries": null,
+   "budgeted_fte": null,
+   "union": null,
+   "source": "https://www.springfieldfl.net/media/10201",
+   "notes": "FY2026 Police appropriation $3,800,375 (all costs). Positions and salaries not published."
+  },
+  {
+   "title": "Fire Department staff (Springfield Fire Rescue)",
+   "department": "Fire",
+   "category": "fire",
+   "grade": null,
+   "pay_min": null,
+   "pay_mid": null,
+   "pay_max": null,
+   "pay_basis": "annual",
+   "hourly_min": null,
+   "hourly_max": null,
+   "actual_salaries": null,
+   "budgeted_fte": null,
+   "union": null,
+   "source": "https://www.springfieldfl.net/media/10201",
+   "notes": "FY2026 Fire appropriation $2,153,688 (all costs). Positions and salaries not published."
+  },
+  {
+   "title": "Code Enforcement staff",
+   "department": "Code Enforcement",
+   "category": "code_enforcement",
+   "grade": null,
+   "pay_min": null,
+   "pay_mid": null,
+   "pay_max": null,
+   "pay_basis": "annual",
+   "hourly_min": null,
+   "hourly_max": null,
+   "actual_salaries": null,
+   "budgeted_fte": null,
+   "union": null,
+   "source": "https://www.springfieldfl.net/media/10201",
+   "notes": "FY2026 Code Enforcement appropriation $268,900 (all costs)."
+  }
+ ],
+ "leaders": [
+  {
+   "name": "Ralph Hammond",
+   "title": "Mayor",
+   "department": "City Commission",
+   "salary": null,
+   "basis": null,
+   "source": "https://www.springfieldfl.net/city-commission",
+   "as_of": "2026-10-21"
+  },
+  {
+   "name": "Jack Griffis",
+   "title": "Commissioner, Ward 1",
+   "department": "City Commission",
+   "salary": null,
+   "basis": null,
+   "source": "https://www.springfieldfl.net/city-commission",
+   "as_of": "2026-10-21"
+  },
+  {
+   "name": "Richard Chval",
+   "title": "Commissioner, Ward 2",
+   "department": "City Commission",
+   "salary": null,
+   "basis": null,
+   "source": "https://www.springfieldfl.net/city-commission",
+   "as_of": "2026-10-21"
+  },
+  {
+   "name": "Jackie Kennington",
+   "title": "Commissioner, Ward 3",
+   "department": "City Commission",
+   "salary": null,
+   "basis": null,
+   "source": "https://www.springfieldfl.net/city-commission",
+   "as_of": "2026-10-21"
+  },
+  {
+   "name": "Cindy Hamre",
+   "title": "Commissioner, Ward 4",
+   "department": "City Commission",
+   "salary": null,
+   "basis": null,
+   "source": "https://www.springfieldfl.net/city-commission",
+   "as_of": "2026-10-21"
+  },
+  {
+   "name": "Teresa Cox",
+   "title": "City Clerk",
+   "department": "Administration",
+   "salary": null,
+   "basis": null,
+   "source": "https://www.springfieldfl.net/directory",
+   "as_of": "2026-10-21"
+  },
+  {
+   "name": "Beth Strobel",
+   "title": "Finance Director",
+   "department": "Administration",
+   "salary": null,
+   "basis": null,
+   "source": "https://www.springfieldfl.net/directory",
+   "as_of": "2026-10-21"
+  },
+  {
+   "name": "Barry Roberts",
+   "title": "Police Chief",
+   "department": "Police",
+   "salary": null,
+   "basis": null,
+   "source": "https://www.springfieldfl.net/directory",
+   "as_of": "2026-10-21"
+  },
+  {
+   "name": "Brian Eddins",
+   "title": "Fire Chief",
+   "department": "Fire",
+   "salary": null,
+   "basis": null,
+   "source": "https://www.springfieldfl.net/fire",
+   "as_of": "2026-10-21"
+  }
+ ],
+ "steps": [],
+ "department_totals": [
+  {
+   "fiscal_year": "FY2026",
+   "department": "Legislative - Commission",
+   "fte": null,
+   "salaries": null,
+   "overtime": null,
+   "benefits": null,
+   "department_total_appropriation": 394097,
+   "source": "https://www.springfieldfl.net/media/10201",
+   "notes": "Total department appropriation (all costs) from Res. 25-15. The resolution does not break out personnel costs."
+  },
+  {
+   "fiscal_year": "FY2026",
+   "department": "Administration",
+   "fte": null,
+   "salaries": null,
+   "overtime": null,
+   "benefits": null,
+   "department_total_appropriation": 1832447,
+   "source": "https://www.springfieldfl.net/media/10201",
+   "notes": "Total department appropriation (all costs) from Res. 25-15. The resolution does not break out personnel costs."
+  },
+  {
+   "fiscal_year": "FY2026",
+   "department": "Police",
+   "fte": null,
+   "salaries": null,
+   "overtime": null,
+   "benefits": null,
+   "department_total_appropriation": 3800375,
+   "source": "https://www.springfieldfl.net/media/10201",
+   "notes": "Total department appropriation (all costs) from Res. 25-15. The resolution does not break out personnel costs."
+  },
+  {
+   "fiscal_year": "FY2026",
+   "department": "Fire",
+   "fte": null,
+   "salaries": null,
+   "overtime": null,
+   "benefits": null,
+   "department_total_appropriation": 2153688,
+   "source": "https://www.springfieldfl.net/media/10201",
+   "notes": "Total department appropriation (all costs) from Res. 25-15. The resolution does not break out personnel costs."
+  },
+  {
+   "fiscal_year": "FY2026",
+   "department": "Code Enforcement",
+   "fte": null,
+   "salaries": null,
+   "overtime": null,
+   "benefits": null,
+   "department_total_appropriation": 268900,
+   "source": "https://www.springfieldfl.net/media/10201",
+   "notes": "Total department appropriation (all costs) from Res. 25-15. The resolution does not break out personnel costs."
+  },
+  {
+   "fiscal_year": "FY2026",
+   "department": "Maintenance",
+   "fte": null,
+   "salaries": null,
+   "overtime": null,
+   "benefits": null,
+   "department_total_appropriation": 305576,
+   "source": "https://www.springfieldfl.net/media/10201",
+   "notes": "Total department appropriation (all costs) from Res. 25-15. The resolution does not break out personnel costs."
+  },
+  {
+   "fiscal_year": "FY2026",
+   "department": "Street",
+   "fte": null,
+   "salaries": null,
+   "overtime": null,
+   "benefits": null,
+   "department_total_appropriation": 887288,
+   "source": "https://www.springfieldfl.net/media/10201",
+   "notes": "Total department appropriation (all costs) from Res. 25-15. The resolution does not break out personnel costs."
+  },
+  {
+   "fiscal_year": "FY2026",
+   "department": "Parks",
+   "fte": null,
+   "salaries": null,
+   "overtime": null,
+   "benefits": null,
+   "department_total_appropriation": 446487,
+   "source": "https://www.springfieldfl.net/media/10201",
+   "notes": "Total department appropriation (all costs) from Res. 25-15. The resolution does not break out personnel costs."
+  }
+ ],
+ "gaps": [
+  "FY2026-27 final budget (Res. 26-12, /media/10891) is listed on the Finance page, but could not be downloaded on 2026-10-21. Springfield's site host, CivicPlus, had a service disruption that day: status.civicplus.com reported 'Municipal Websites Open' taken offline over a PHP security vulnerability, and requests redirected there. The HR and resolutions pages were unavailable too. Retry once service is restored.",
+  "No line-item budget, position list, pay plan, or salary figures are published. Springfield posts only budget resolutions with department totals. Request: (1) the FY2026-27 line-item budget with salary, overtime and benefit accounts by department; (2) the authorized position list with budgeted salary per position (no names); (3) the pay plan / step schedule for police, fire and general employees.",
+  "Salaries of the Mayor and Commissioners (charter or ordinance), City Clerk, Finance Director, Police Chief and Fire Chief. Request them.",
+  "Union contracts (police/fire): none found. Request any CBA, or confirm none exist.",
+  "No city manager: the commission oversees staff directly, with a City Clerk."
+ ],
+ "notes": []
+}

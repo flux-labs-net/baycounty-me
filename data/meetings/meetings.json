@@ -49,9 +49,9 @@
       "gov": "schools",
       "schedule": "Not available: bay.k12.fl.us serves a JavaScript bot challenge to server requests and the district's published meeting-schedule PDF could not be retrieved. No dates are generated.",
       "location": "Bay District Schools, 1311 Balboa Ave., Panama City, FL 32401 (district office address; meeting venue not confirmed)",
-      "source_url": "https://bay.k12.fl.us/school-board",
+      "source_url": "https://www.bay.k12.fl.us/o/bds/page/school-board",
       "calendar_url": null,
-      "schedule_source_url": "https://bay.k12.fl.us/school-board",
+      "schedule_source_url": "https://www.bay.k12.fl.us/o/bds/page/school-board",
       "sources": {
         "website": "error: HTTPError: HTTP Error 404: Not Found"
       },
@@ -857,7 +857,7 @@
     {
       "board": "schools",
       "source": "website",
-      "url": "https://bay.k12.fl.us/school-board",
+      "url": "https://www.bay.k12.fl.us/o/bds/page/school-board",
       "error": "HTTPError: HTTP Error 404: Not Found"
     }
   ],
