@@ -40,7 +40,7 @@ DATABASE_URL=postgresql://... python3 db/scripts/load.py --migrate
 1. **A few records:** open the table in Supabase and add rows. Leave `origin` as `manual`, fill `source_url`, and set `record_hash` to anything unique (e.g. the source URL plus a row number).
 2. **A spreadsheet:** Supabase table editor > Import data from CSV, into the matching table. Same `origin` and `record_hash` rules.
 3. **A recurring source:** write a script that inserts with `origin = 'scraper:<name>'`, logs an `ingest_runs` row, and upserts on `(origin, record_hash)`.
-4. **A new kind of data:** add a numbered migration (`db/migrations/0002_<name>.sql`) that creates the table with the same standard columns, enables RLS and adds the public read policy. Never edit `0001_init.sql`.
+4. **A new kind of data:** add a numbered migration (the next number, e.g. `db/migrations/0003_<name>.sql`) that creates the table with the same standard columns, enables RLS and adds the public read policy. Never edit `0001_init.sql`.
 
 If a site dataset gains a column, the sync fails with a message naming it: add a migration with `alter table ... add column`.
 
