@@ -527,6 +527,7 @@ a.src:hover{color:var(--blue)}
 .mm-detail{margin-top:12px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
 .mm-detail h3{margin:0 0 4px;font-size:1.05rem}.mm-detail h4{margin:14px 0 6px;font-size:.9rem}
 .mm-list li{margin:0 0 8px;font-size:.9rem;line-height:1.5}
+.mm-roll{margin:4px 0 0;padding:0;list-style:none}.mm-roll li{margin:0 0 2px;line-height:1.45}
 .heat{border-collapse:separate;border-spacing:2px;font-size:.78rem;width:100%}
 .heat th{font-weight:400;text-align:left;padding:4px 8px 4px 0;white-space:nowrap}
 .heat th small{display:block;color:var(--muted);font-size:.72rem}

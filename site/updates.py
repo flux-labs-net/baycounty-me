@@ -9,6 +9,9 @@ from datetime import datetime, timezone
 import html
 
 CHANGES = [
+    {'date': '2026-10-21', 'title': 'Money map: full roll calls on donor contract votes',
+     'text': "The table of votes on a donor's contract now shows each vote once, with every board member's vote, not only the members who received a gift from the business. Members who got a gift are listed first, with the amount and date. Most of these contracts passed unanimously on the consent agenda. One vote that had been left out was added: Panama City's June 24, 2025 award of the Millville plant generator bid to Marshall Brothers, which the minutes record under an unrelated plat item.",
+     'pages': ['/public-money/money-map']},
     {'date': '2026-10-21', 'title': 'Sort, filter and download every list',
      'text': 'Every table and list on the site can now be sorted by clicking a column heading, filtered with a search box (and drop-downs where a column has a few values), and downloaded as a CSV of exactly the rows on screen, in the order shown. Lists open newest first, then A to Z; upcoming meetings open soonest first.',
      'pages': ['/updates']},
