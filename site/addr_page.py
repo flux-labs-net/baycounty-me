@@ -68,8 +68,10 @@ def addr_page(out_dir):
   <div id="out" class="addr-out" hidden aria-live="polite">
     <div class="addr-hd">
       <div><h2 id="aTitle"></h2><p class="muted" id="aSub"></p></div>
-      <a class="pdf-btn" id="paLink" target="_blank" rel="noopener">Property Appraiser record ↗</a>
+      <div class="addr-act"><button type="button" class="pdf-btn" id="pdf"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 12v2h10v-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Export PDF</button>
+      <a class="pdf-btn" id="paLink" target="_blank" rel="noopener">Property Appraiser record ↗</a></div>
     </div>
+    <p class="print-meta" id="printMeta"></p>
     <div class="addr-grid">
       <section class="card a-map"><svg id="map" viewBox="0 0 400 260" role="img" aria-label="Map of the address"></svg><p class="muted small" id="mapCap"></p></section>
       <section class="card" id="cTax"><h3>Property tax estimate</h3><div id="taxBody"></div></section>

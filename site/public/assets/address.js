@@ -216,6 +216,14 @@ async function drawMap(pt, cityName, craName) {
   $('mapCap').innerHTML = `<i class="sw city"></i> city limits <i class="sw cra"></i> CRA districts · ${local ? 'about 3 miles across' : 'all of Bay County <span class="sw cty"></span> county line'}`;
 }
 
+/* PDF export */
+$('pdf').addEventListener('click', () => {
+  const d = new Date().toLocaleDateString('en-US', {month: 'long', day: 'numeric', year: 'numeric'});
+  $('printMeta').innerHTML = `<b>Address report:</b> ${esc($('aTitle').textContent)} · ${esc($('aSub').textContent)}<br>Exported ${d} from ${esc(location.host + location.pathname + location.search)}`;
+  document.title = 'BayCounty.me – ' + $('aTitle').textContent;
+  setTimeout(() => window.print(), 60);
+});
+
 /* restore from URL */
 (async () => {
   const u = new URL(location.href), a = u.searchParams.get('a'), qq = u.searchParams.get('q');
