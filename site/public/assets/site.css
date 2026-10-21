@@ -43,13 +43,13 @@ nav{margin-left:auto}
 .has-sub{position:relative}
 .sub-toggle svg{transition:transform .15s}
 .sub-toggle[aria-expanded="true"] svg{transform:rotate(180deg)}
-.sub{list-style:none;margin:0;padding:6px;position:absolute;right:0;top:calc(100% + 6px);min-width:300px;background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:0 10px 30px rgba(10,20,40,.12);display:none}
-.sub-toggle[aria-expanded="true"] + .sub{display:block}
-@media (hover:hover){.has-sub:hover .sub,.has-sub:focus-within .sub{display:block}}
-.sub a{display:flex;flex-direction:column;gap:2px;padding:10px 12px;border-radius:8px;text-decoration:none;color:var(--ink)}
-.sub a:hover,.sub a[aria-current="page"]{background:var(--sunken)}
-.sub .k{font-weight:500;font-size:.9rem}
-.sub .kd{font-size:.78rem;color:var(--muted)}
+.nav-sub{list-style:none;margin:0;padding:6px;position:absolute;right:0;top:calc(100% + 6px);min-width:300px;background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:0 10px 30px rgba(10,20,40,.12);display:none}
+.sub-toggle[aria-expanded="true"] + .nav-sub{display:block}
+@media (hover:hover){.has-sub:hover .nav-sub,.has-sub:focus-within .nav-sub{display:block}}
+.nav-sub a{display:flex;flex-direction:column;gap:2px;padding:10px 12px;border-radius:8px;text-decoration:none;color:var(--ink)}
+.nav-sub a:hover,.nav-sub a[aria-current="page"]{background:var(--sunken)}
+.nav-sub .k{font-weight:500;font-size:.9rem}
+.nav-sub .kd{font-size:.78rem;color:var(--muted)}
 .menu-btn{display:none;margin-left:auto;background:none;border:1px solid var(--line);border-radius:8px;width:40px;height:40px;align-items:center;justify-content:center;color:var(--ink);cursor:pointer}
 @media (max-width:720px){
   .menu-btn{display:inline-flex}
@@ -58,7 +58,7 @@ nav{margin-left:auto}
     padding:8px max(16px,env(safe-area-inset-right,0px)) 12px max(16px,env(safe-area-inset-left,0px))}
   .menu.open{display:flex}
   .menu > li > a,.sub-toggle{width:100%;justify-content:space-between;padding:12px 8px}
-  .sub{position:static;display:block;box-shadow:none;border:0;padding:0 0 6px 8px;min-width:0}
+  .nav-sub{position:static;display:block;box-shadow:none;border:0;padding:0 0 6px 8px;min-width:0}
   .sub-toggle svg{display:none}
 }
 

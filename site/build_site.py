@@ -36,7 +36,7 @@ def nav_html(active):
             items.append(
                 f'<li class="has-sub{" on" if on else ""}"><button type="button" class="sub-toggle" aria-expanded="false">'
                 f'{m["label"]}<svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 3.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>'
-                f'<ul class="sub">{kids}</ul></li>')
+                f'<ul class="nav-sub">{kids}</ul></li>')
         else:
             cur = ' aria-current="page"' if m['href'] == active else ''
             items.append(f'<li><a href="{m["href"]}"{cur}>{m["label"]}</a></li>')
