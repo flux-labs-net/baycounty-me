@@ -11,6 +11,7 @@ const qs = new URLSearchParams(location.search);
 $('mmGov').innerHTML += GORDER.filter(g => OFF.some(o => o.g === g)).map(g => `<option value="${g}">${esc(GN[g])}</option>`).join('');
 if (qs.get('show')) $('mmShow').value = qs.get('show');
 if (qs.get('gov')) $('mmGov').value = qs.get('gov');
+if (qs.get('q')) $('mmQ').value = qs.get('q');
 let sel = null; // {t:'d'|'o'|'g', id}
 const conAmt = c => c.a || c.p;
 const sameDon = new Set(GIFTS.filter(g => g.same).map(g => g.d));

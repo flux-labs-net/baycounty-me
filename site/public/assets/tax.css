@@ -610,3 +610,15 @@ details.el-dec > .el-rh,details.el-dec > .el-cands{padding:0 18px 16px}
 .mt-f.mt-tools{grid-template-columns:minmax(0,240px) minmax(0,1fr) minmax(0,190px) auto}
 .mt-tools .tt-csv{min-height:42px}
 @media (max-width:760px){.mt-f.mt-tools{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.vbtn{all:unset;cursor:pointer;font-weight:600;color:var(--ink,inherit);text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
+.vbtn:hover,.vbtn:focus-visible{text-decoration-color:currentColor}.vbtn:focus-visible{outline:2px solid var(--s1);outline-offset:2px;border-radius:3px}
+.hb.vlink{cursor:pointer}.hb.vlink:hover{background:var(--sunken)}
+.vp-card{border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-top:10px}
+.vp-card .vp-hd{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.vp-card h3{margin:0;font-size:1.2rem}
+.vp-card h4{margin:18px 0 6px;font-size:.92rem}.vp-card .kpis{margin:12px 0 4px}
+.vp-yr{display:block;font-family:var(--f-body);font-size:.74rem;line-height:1.4;margin-top:2px;white-space:normal}
+.tx-table.vp-gov{width:100%;min-width:0;table-layout:fixed}.tx-table.vp-gov th,.tx-table.vp-gov td,.tx-table.vp-gov .num{white-space:normal}
+.vp-gov th:first-child{width:34%}
+@media (max-width:640px){.vp-gov th,.vp-gov td{padding:8px 6px;font-size:.82rem}.vp-gov th:first-child{width:30%}}
+.vp-gov thead th:nth-child(2){width:14%}.vp-gov thead th:nth-child(3){width:22%}.vp-gov thead th:nth-child(4){width:30%}.vp-gov .vp-yr span{white-space:nowrap}
+.tx-table.vp-gov td::after{display:none}@media (max-width:640px){.vp-gov .vp-yr{font-size:.7rem}}
