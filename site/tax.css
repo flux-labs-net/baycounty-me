@@ -214,3 +214,17 @@ a.src:hover{color:var(--blue)}
 .leg.mini2{grid-template-columns:1fr;gap:4px}
 .leg.mini2 li{grid-template-columns:12px minmax(0,1fr) auto}
 .bill-v small{font-size:.9rem;font-weight:400;color:var(--muted)}
+
+/* ledgers and timelines */
+.filters-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.filters-row input,.filters-row select{min-height:40px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);font:400 .9rem var(--f-body);padding:0 12px}
+.filters-row input{flex:1 1 260px;min-width:0}
+.filters-row select{flex:0 1 240px;min-width:0}
+.tx-table td.wrap{white-space:normal;min-width:240px}
+.timeline{list-style:none;margin:0;padding:0 0 0 14px;border-left:2px solid var(--line);display:flex;flex-direction:column;gap:12px;font-size:.92rem}
+.timeline li{display:grid;grid-template-columns:7.5rem minmax(0,1fr);gap:12px;position:relative}
+.timeline li::before{content:"";position:absolute;left:-20px;top:.45em;width:10px;height:10px;border-radius:50%;background:var(--surface);border:2px solid var(--blue)}
+.tl-d{font:500 .82rem var(--f-data);color:var(--muted)}
+.timeline a{color:var(--blue);font-size:.8rem}
+@media (max-width:640px){.timeline li{grid-template-columns:1fr;gap:2px}}
+.plain a{color:var(--blue)}

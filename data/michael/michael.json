@@ -1,0 +1,2798 @@
+{
+ "as_of": "2026-10-20",
+ "scope": "Hurricane Michael (FEMA DR-4399-FL, declared 2018-10-11) recovery money tied to Bay County, Florida: FEMA Public Assistance to Bay County applicants, FEMA Individuals and Households housing assistance for Bay County, HUD CDBG-DR (Rebuild Florida) awards to Bay County governments, state appropriations, SBA/NFIP snapshot, Tyndall AFB (separate federal military), debris contracts, and the Lynn Haven federal corruption case.",
+ "fema_pa": {
+  "disaster": "DR-4399-FL (Hurricane Michael, declared 2018-10-11)",
+  "declaration_source_url": "https://www.fema.gov/api/open/v2/DisasterDeclarationsSummaries?$filter=disasterNumber eq 4399 and designatedArea eq 'Bay (County)'",
+  "bay_totals": {
+   "projects": 765,
+   "applicants": 79,
+   "federal_obligated": 987937684.83,
+   "total_obligated": 987937684.83,
+   "project_amount": 1124539049.66,
+   "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+  },
+  "cross_check_summaries": {
+   "federal_obligated": 987937684.83,
+   "source_url": "https://www.fema.gov/api/open/v1/PublicAssistanceFundedProjectsSummaries?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+  },
+  "disaster_wide_federal_obligated_all_counties": 2298955320.15,
+  "statewide_projects_not_attributed": {
+   "projects": 445,
+   "federal_obligated": 852376181.01,
+   "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Statewide'"
+  },
+  "by_applicant": [
+   {
+    "applicant": "Bay County",
+    "applicant_id": "005-99005-00",
+    "projects": 80,
+    "federal_obligated": 319014690.78,
+    "total_obligated": 319014690.78,
+    "project_amount": 355452798.12,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Panama City, City of",
+    "applicant_id": "005-54700-00",
+    "projects": 69,
+    "federal_obligated": 151288143.77,
+    "total_obligated": 151288143.77,
+    "project_amount": 172792932.13,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "School Board of Bay County Florida",
+    "applicant_id": "005-U5PCR-00",
+    "projects": 141,
+    "federal_obligated": 135113457.66,
+    "total_obligated": 135113457.66,
+    "project_amount": 155146998.87,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Mexico Beach, City Of",
+    "applicant_id": "005-44300-00",
+    "projects": 47,
+    "federal_obligated": 105720322.65,
+    "total_obligated": 105720322.65,
+    "project_amount": 120297774.25,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "The Board of Trustees of Bay Medical Center",
+    "applicant_id": "005-UB98H-00",
+    "projects": 26,
+    "federal_obligated": 58677253.45,
+    "total_obligated": 58677253.45,
+    "project_amount": 63895467.75,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Lynn Haven, City of",
+    "applicant_id": "005-41825-00",
+    "projects": 30,
+    "federal_obligated": 44541806.79,
+    "total_obligated": 44541806.79,
+    "project_amount": 55655686.1,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Springfield, City of",
+    "applicant_id": "005-68275-00",
+    "projects": 35,
+    "federal_obligated": 35007817.88,
+    "total_obligated": 35007817.88,
+    "project_amount": 38670892.75,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Callaway, City of",
+    "applicant_id": "005-09725-00",
+    "projects": 18,
+    "federal_obligated": 26072972.47,
+    "total_obligated": 26072972.47,
+    "project_amount": 29755992.53,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Palm Bay Education Group, Inc.",
+    "applicant_id": "005-U4OBL-00",
+    "projects": 10,
+    "federal_obligated": 14902735.14,
+    "total_obligated": 14902735.14,
+    "project_amount": 16166940.75,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Parker, City Of",
+    "applicant_id": "005-55075-00",
+    "projects": 19,
+    "federal_obligated": 12112698.0,
+    "total_obligated": 12112698.0,
+    "project_amount": 13731757.57,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Panama City Housing Authority",
+    "applicant_id": "005-UULM9-00",
+    "projects": 19,
+    "federal_obligated": 10903304.22,
+    "total_obligated": 10903304.22,
+    "project_amount": 12212382.04,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Chemical Addictions Recovery Effort, Inc. (CARE)",
+    "applicant_id": "005-UW9Z9-00",
+    "projects": 12,
+    "federal_obligated": 8228290.93,
+    "total_obligated": 8228290.93,
+    "project_amount": 9017248.28,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "First Presbyterian Church (Bay)",
+    "applicant_id": "005-0F876-00",
+    "projects": 5,
+    "federal_obligated": 6494692.83,
+    "total_obligated": 6494692.83,
+    "project_amount": 7188333.18,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Family Of God Baptist Church",
+    "applicant_id": "005-14243-00",
+    "projects": 6,
+    "federal_obligated": 5915074.25,
+    "total_obligated": 5915074.25,
+    "project_amount": 6587659.74,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Howard Carlisle Memorial Baptist Church, Inc",
+    "applicant_id": "005-URJ8M-00",
+    "projects": 5,
+    "federal_obligated": 5777173.07,
+    "total_obligated": 5777173.07,
+    "project_amount": 7394776.18,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Panama City Fellowship Church of Praise",
+    "applicant_id": "005-UQTGY-00",
+    "projects": 4,
+    "federal_obligated": 5315299.7,
+    "total_obligated": 5315299.7,
+    "project_amount": 5874807.86,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Trustees, Springfield Baptist Church, Inc.",
+    "applicant_id": "005-00AE3-00",
+    "projects": 2,
+    "federal_obligated": 4038787.25,
+    "total_obligated": 4038787.25,
+    "project_amount": 4463922.75,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Harvest Worship Center",
+    "applicant_id": "005-UE5RI-00",
+    "projects": 7,
+    "federal_obligated": 3636602.0,
+    "total_obligated": 3636602.0,
+    "project_amount": 4036184.03,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Bay County Transportation Planning Organization",
+    "applicant_id": "005-U80KV-00",
+    "projects": 9,
+    "federal_obligated": 2790746.12,
+    "total_obligated": 2790746.12,
+    "project_amount": 3403897.13,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Northstar Church",
+    "applicant_id": "005-UEEQK-00",
+    "projects": 9,
+    "federal_obligated": 2740195.91,
+    "total_obligated": 2740195.91,
+    "project_amount": 3023938.76,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Bay County Sheriff's Office",
+    "applicant_id": "005-0381B-00",
+    "projects": 6,
+    "federal_obligated": 2508462.56,
+    "total_obligated": 2508462.56,
+    "project_amount": 2552451.05,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Hiland Park United Pentecostal Church",
+    "applicant_id": "005-UPIZK-00",
+    "projects": 3,
+    "federal_obligated": 2508445.74,
+    "total_obligated": 2508445.74,
+    "project_amount": 2771644.92,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Panama City Beach, City of",
+    "applicant_id": "005-54725-00",
+    "projects": 13,
+    "federal_obligated": 2341007.64,
+    "total_obligated": 2341007.64,
+    "project_amount": 2538845.14,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "The Rock of Panama City",
+    "applicant_id": "005-UQANI-00",
+    "projects": 6,
+    "federal_obligated": 2254224.72,
+    "total_obligated": 2254224.72,
+    "project_amount": 2494889.86,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Life Management Center of NW Florida",
+    "applicant_id": "005-U931Z-00",
+    "projects": 5,
+    "federal_obligated": 2061024.88,
+    "total_obligated": 2061024.88,
+    "project_amount": 2077874.11,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Early Education and Care, Inc.",
+    "applicant_id": "005-U3JV0-00",
+    "projects": 10,
+    "federal_obligated": 2046374.41,
+    "total_obligated": 2046374.41,
+    "project_amount": 3427561.0,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "First Baptist Church, Panama City",
+    "applicant_id": "005-0C1F8-00",
+    "projects": 2,
+    "federal_obligated": 1966343.34,
+    "total_obligated": 1966343.34,
+    "project_amount": 1970587.5,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Holy Nativity Episcopal School",
+    "applicant_id": "005-UG3Z1-00",
+    "projects": 5,
+    "federal_obligated": 1647067.48,
+    "total_obligated": 1647067.48,
+    "project_amount": 1703981.14,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Friends of the Governor Stone, Inc",
+    "applicant_id": "005-UTZBH-00",
+    "projects": 3,
+    "federal_obligated": 1399041.28,
+    "total_obligated": 1399041.28,
+    "project_amount": 1552065.8,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Bay Haven Charter Academy",
+    "applicant_id": "005-UAPVM-00",
+    "projects": 11,
+    "federal_obligated": 1362286.26,
+    "total_obligated": 1362286.26,
+    "project_amount": 1506853.11,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "St. Andrew United Methodist Church",
+    "applicant_id": "005-0F67F-00",
+    "projects": 4,
+    "federal_obligated": 1299831.22,
+    "total_obligated": 1299831.22,
+    "project_amount": 1410597.56,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "City Church at Northside",
+    "applicant_id": "005-U6DNP-00",
+    "projects": 4,
+    "federal_obligated": 1233491.07,
+    "total_obligated": 1233491.07,
+    "project_amount": 1359629.59,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Girls Incorporated of Bay County",
+    "applicant_id": "005-00AAC-00",
+    "projects": 5,
+    "federal_obligated": 700879.72,
+    "total_obligated": 700879.72,
+    "project_amount": 907151.39,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Trinity United Methodist Church",
+    "applicant_id": "005-00AF1-00",
+    "projects": 4,
+    "federal_obligated": 605128.31,
+    "total_obligated": 605128.31,
+    "project_amount": 747583.15,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Rising Leaders Academy",
+    "applicant_id": "005-UKVVV-00",
+    "projects": 4,
+    "federal_obligated": 483628.99,
+    "total_obligated": 483628.99,
+    "project_amount": 500020.01,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Trinity Holiness Church",
+    "applicant_id": "005-UUBA0-00",
+    "projects": 4,
+    "federal_obligated": 459337.14,
+    "total_obligated": 459337.14,
+    "project_amount": 507694.78,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Parkway Presbyterian Church",
+    "applicant_id": "005-00B19-00",
+    "projects": 3,
+    "federal_obligated": 417650.45,
+    "total_obligated": 417650.45,
+    "project_amount": 444979.44,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Lighthouse Baptist Church",
+    "applicant_id": "005-UFIW9-00",
+    "projects": 4,
+    "federal_obligated": 387921.31,
+    "total_obligated": 387921.31,
+    "project_amount": 429108.56,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Housing Authority of Springfield",
+    "applicant_id": "005-U9X4Z-00",
+    "projects": 6,
+    "federal_obligated": 246893.0,
+    "total_obligated": 246893.0,
+    "project_amount": 278206.95,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Holy Nativity Episcopal Church",
+    "applicant_id": "005-07863-00",
+    "projects": 3,
+    "federal_obligated": 243173.01,
+    "total_obligated": 243173.01,
+    "project_amount": 312665.74,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Boys & Girls Clubs of Bay County",
+    "applicant_id": "005-UZAKC-00",
+    "projects": 8,
+    "federal_obligated": 219191.36,
+    "total_obligated": 219191.36,
+    "project_amount": 242293.75,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Chautauqua Charter School",
+    "applicant_id": "005-UBT50-00",
+    "projects": 6,
+    "federal_obligated": 208988.84,
+    "total_obligated": 208988.84,
+    "project_amount": 229329.77,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Panama City Advanced School",
+    "applicant_id": "005-17B78-00",
+    "projects": 4,
+    "federal_obligated": 184115.16,
+    "total_obligated": 184115.16,
+    "project_amount": 201165.82,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Refuge Assembly of God, Inc.",
+    "applicant_id": "005-UHFRB-00",
+    "projects": 3,
+    "federal_obligated": 182745.99,
+    "total_obligated": 182745.99,
+    "project_amount": 237727.76,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Panama City Port Authority",
+    "applicant_id": "005-U6TH3-00",
+    "projects": 3,
+    "federal_obligated": 166771.92,
+    "total_obligated": 166771.92,
+    "project_amount": 369730.9,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "EastSide Christian Church",
+    "applicant_id": "005-U5UIE-00",
+    "projects": 1,
+    "federal_obligated": 162516.97,
+    "total_obligated": 162516.97,
+    "project_amount": 180574.41,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Emmaus United Methodist Church",
+    "applicant_id": "005-0C205-00",
+    "projects": 5,
+    "federal_obligated": 159395.82,
+    "total_obligated": 159395.82,
+    "project_amount": 165190.7,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Forest Park United Methodist Church",
+    "applicant_id": "005-00B40-00",
+    "projects": 2,
+    "federal_obligated": 142571.04,
+    "total_obligated": 142571.04,
+    "project_amount": 144523.37,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Anchorage Children's Home of Bay County, Inc.",
+    "applicant_id": "005-UHTD1-00",
+    "projects": 2,
+    "federal_obligated": 132287.39,
+    "total_obligated": 132287.39,
+    "project_amount": 132287.39,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Gulf Coast Children's Advocacy Center",
+    "applicant_id": "005-UW247-00",
+    "projects": 4,
+    "federal_obligated": 129920.84,
+    "total_obligated": 129920.84,
+    "project_amount": 142393.78,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Parker United Methodist Church",
+    "applicant_id": "005-00B17-00",
+    "projects": 3,
+    "federal_obligated": 129051.1,
+    "total_obligated": 129051.1,
+    "project_amount": 168344.4,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Zion Hope Baptist Church",
+    "applicant_id": "005-UDWPY-00",
+    "projects": 2,
+    "federal_obligated": 122375.44,
+    "total_obligated": 122375.44,
+    "project_amount": 154387.0,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Wainwright Veterans of Foreign Wars Post 2185",
+    "applicant_id": "005-U8KQR-00",
+    "projects": 4,
+    "federal_obligated": 121573.01,
+    "total_obligated": 121573.01,
+    "project_amount": 378535.0,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "St. Luke Missionary Baptist Church",
+    "applicant_id": "005-00B69-00",
+    "projects": 3,
+    "federal_obligated": 121316.09,
+    "total_obligated": 121316.09,
+    "project_amount": 134240.09,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Hiland Park United Methodist Church",
+    "applicant_id": "005-0F179-00",
+    "projects": 5,
+    "federal_obligated": 116657.22,
+    "total_obligated": 116657.22,
+    "project_amount": 136731.6,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "First Church of the Nazarene",
+    "applicant_id": "005-00AA8-00",
+    "projects": 3,
+    "federal_obligated": 105643.68,
+    "total_obligated": 105643.68,
+    "project_amount": 113500.37,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Global Arts Society Corporation",
+    "applicant_id": "005-UB4U9-00",
+    "projects": 1,
+    "federal_obligated": 102150,
+    "total_obligated": 102150,
+    "project_amount": 113500,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Early Learning Coalition of Northwest Florida",
+    "applicant_id": "005-UGHZ2-00",
+    "projects": 2,
+    "federal_obligated": 95702.88,
+    "total_obligated": 95702.88,
+    "project_amount": 144488.65,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Mt Calvary Baptist Church",
+    "applicant_id": "005-0F3BD-00",
+    "projects": 3,
+    "federal_obligated": 87329.14,
+    "total_obligated": 87329.14,
+    "project_amount": 96521.67,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Unitarian Universalist Fellowship Church",
+    "applicant_id": "005-UFWWT-00",
+    "projects": 5,
+    "federal_obligated": 81322.28,
+    "total_obligated": 81322.28,
+    "project_amount": 89828.21,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Bayside Church",
+    "applicant_id": "005-UKS83-00",
+    "projects": 4,
+    "federal_obligated": 79121.47,
+    "total_obligated": 79121.47,
+    "project_amount": 369498.1,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "PanCare of Florida, Inc.",
+    "applicant_id": "000-U4MUU-00",
+    "projects": 1,
+    "federal_obligated": 78345,
+    "total_obligated": 78345,
+    "project_amount": 87050,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Community Charter Academy",
+    "applicant_id": "005-UUGLV-00",
+    "projects": 3,
+    "federal_obligated": 75446.16,
+    "total_obligated": 75446.16,
+    "project_amount": 499585.16,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "St. Andrews Presbyterian Church",
+    "applicant_id": "005-00C04-00",
+    "projects": 2,
+    "federal_obligated": 71710.26,
+    "total_obligated": 71710.26,
+    "project_amount": 79678.06,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Messiah Lutheran Church",
+    "applicant_id": "005-00B57-00",
+    "projects": 1,
+    "federal_obligated": 63962.54,
+    "total_obligated": 63962.54,
+    "project_amount": 71069.48,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Gulf Coast School for Autism",
+    "applicant_id": "005-UG8YG-00",
+    "projects": 2,
+    "federal_obligated": 62080.75,
+    "total_obligated": 62080.75,
+    "project_amount": 68123.87,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Parker Volunteer Fire Department",
+    "applicant_id": "005-ULVY8-00",
+    "projects": 2,
+    "federal_obligated": 56441.46,
+    "total_obligated": 56441.46,
+    "project_amount": 60992.73,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Bay Arts Alliance",
+    "applicant_id": "005-UJT4D-00",
+    "projects": 1,
+    "federal_obligated": 44406.55,
+    "total_obligated": 44406.55,
+    "project_amount": 49340.61,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Independence Village, LLC",
+    "applicant_id": "005-U45AK-00",
+    "projects": 1,
+    "federal_obligated": 38492.35,
+    "total_obligated": 38492.35,
+    "project_amount": 38492.35,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Victory of Faith Fellowship, Inc",
+    "applicant_id": "005-UX4UV-00",
+    "projects": 1,
+    "federal_obligated": 27649.46,
+    "total_obligated": 27649.46,
+    "project_amount": 30721.62,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "The New Midway Baptist Church",
+    "applicant_id": "005-00B16-00",
+    "projects": 2,
+    "federal_obligated": 27531,
+    "total_obligated": 27531,
+    "project_amount": 30429,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Fellowship Baptist Church",
+    "applicant_id": "005-00B3D-00",
+    "projects": 4,
+    "federal_obligated": 27471.1,
+    "total_obligated": 27471.1,
+    "project_amount": 29110.52,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Elevation Life Church",
+    "applicant_id": "005-UL6N2-00",
+    "projects": 2,
+    "federal_obligated": 22260.28,
+    "total_obligated": 22260.28,
+    "project_amount": 157012.68,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Rocky Mountain Human Services Coalition",
+    "applicant_id": "005-UPHKR-00",
+    "projects": 3,
+    "federal_obligated": 16717.0,
+    "total_obligated": 16717.0,
+    "project_amount": 18910.54,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Panama City Rescue Mission",
+    "applicant_id": "005-137CA-00",
+    "projects": 1,
+    "federal_obligated": 6455.88,
+    "total_obligated": 6455.88,
+    "project_amount": 7173.2,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Bethesda Baptist Church",
+    "applicant_id": "005-UDNUP-00",
+    "projects": 1,
+    "federal_obligated": 3690,
+    "total_obligated": 3690,
+    "project_amount": 4100,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Martin Theatre, Inc.",
+    "applicant_id": "005-UNB9C-00",
+    "projects": 2,
+    "federal_obligated": 0,
+    "total_obligated": 0,
+    "project_amount": 152859.01,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Lynn Haven United Methodist Church",
+    "applicant_id": "005-UOUZ2-00",
+    "projects": 1,
+    "federal_obligated": 0,
+    "total_obligated": 0,
+    "project_amount": 342886.75,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "applicant": "Christ Church of Panama City Florida",
+    "applicant_id": "005-UPZ28-00",
+    "projects": 4,
+    "federal_obligated": 0,
+    "total_obligated": 0,
+    "project_amount": 4601939.77,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   }
+  ],
+  "by_category": [
+   {
+    "category": "A",
+    "description": "Debris Removal",
+    "projects": 52,
+    "federal_obligated": 427653132.5,
+    "total_obligated": 427653132.5,
+    "project_amount": 466576826.49,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "category": "B",
+    "description": "Emergency Protective Measures",
+    "projects": 132,
+    "federal_obligated": 148571676.55,
+    "total_obligated": 148571676.55,
+    "project_amount": 158319510.15,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "category": "C",
+    "description": "Roads and Bridges",
+    "projects": 47,
+    "federal_obligated": 60687030.14,
+    "total_obligated": 60687030.14,
+    "project_amount": 78545846.07,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "category": "D",
+    "description": "Water Control Facilities",
+    "projects": 9,
+    "federal_obligated": 5639153.55,
+    "total_obligated": 5639153.55,
+    "project_amount": 9508145.25,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "category": "E",
+    "description": "Buildings and Equipment",
+    "projects": 340,
+    "federal_obligated": 210520910.27,
+    "total_obligated": 210520910.27,
+    "project_amount": 258734352.37,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "category": "F",
+    "description": "Utilities",
+    "projects": 33,
+    "federal_obligated": 19421236.76,
+    "total_obligated": 19421236.76,
+    "project_amount": 26020419.4,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "category": "G",
+    "description": "Parks, Recreational Facilities, and Other Items",
+    "projects": 97,
+    "federal_obligated": 69717057.59,
+    "total_obligated": 69717057.59,
+    "project_amount": 81886073.74,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   },
+   {
+    "category": "Z",
+    "description": "Management Costs",
+    "projects": 55,
+    "federal_obligated": 45727487.47,
+    "total_obligated": 45727487.47,
+    "project_amount": 44947876.19,
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'"
+   }
+  ],
+  "top_projects": [
+   {
+    "applicant": "Bay County",
+    "pw_number": 671,
+    "title": "Debris Removal from November 25, 2018 \u2013 [ongoing]",
+    "category": "A",
+    "category_description": "Debris Removal",
+    "project_size": "Large",
+    "status": "Eligible",
+    "process_step": "Project Closed Out",
+    "project_amount": 113218764.34,
+    "federal_obligated": 101896887.91,
+    "total_obligated": 101896887.91,
+    "mitigation_amount": 0,
+    "first_obligation_date": "2019-09-30",
+    "last_obligation_date": "2026-02-27",
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and pwNumber eq 671"
+   },
+   {
+    "applicant": "Bay County",
+    "pw_number": 628,
+    "title": "Countywide Stormwater Outfall System Debris",
+    "category": "A",
+    "category_description": "Debris Removal",
+    "project_size": "Large",
+    "status": "Eligible",
+    "process_step": "Pending Project Closeout Initial Review",
+    "project_amount": 94350116.09,
+    "federal_obligated": 84915104.48,
+    "total_obligated": 84915104.48,
+    "mitigation_amount": 0,
+    "first_obligation_date": "2019-09-30",
+    "last_obligation_date": "2019-09-30",
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and pwNumber eq 628"
+   },
+   {
+    "applicant": "Panama City, City of",
+    "pw_number": 1239,
+    "title": "Debris Removal from Nov. 25, 2018 \u2013 Oct. 11, 2019",
+    "category": "A",
+    "category_description": "Debris Removal",
+    "project_size": "Large",
+    "status": "Eligible",
+    "process_step": "Project Closed Out",
+    "project_amount": 60618932.03,
+    "federal_obligated": 54557038.83,
+    "total_obligated": 54557038.83,
+    "mitigation_amount": 0,
+    "first_obligation_date": "2020-04-14",
+    "last_obligation_date": "2025-08-22",
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and pwNumber eq 1239"
+   },
+   {
+    "applicant": "School Board of Bay County Florida",
+    "pw_number": 85,
+    "title": "EXP-Emergency Protective Measures from October 10 - November 24, 2018",
+    "category": "B",
+    "category_description": "Emergency Protective Measures",
+    "project_size": "Large",
+    "status": "Eligible",
+    "process_step": "Project Closed Out",
+    "project_amount": 38916530.01,
+    "federal_obligated": 38916426.15,
+    "total_obligated": 38916426.15,
+    "mitigation_amount": 0,
+    "first_obligation_date": "2019-04-26",
+    "last_obligation_date": "2023-08-16",
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and pwNumber eq 85"
+   },
+   {
+    "applicant": "Bay County",
+    "pw_number": 103,
+    "title": "EXP - Debris Removal from October 10 \u2013 November 24, 2018",
+    "category": "A",
+    "category_description": "Debris Removal",
+    "project_size": "Large",
+    "status": "Eligible",
+    "process_step": "Pending Closeout Award",
+    "project_amount": 36597327.69,
+    "federal_obligated": 36597327.69,
+    "total_obligated": 36597327.69,
+    "mitigation_amount": 0,
+    "first_obligation_date": "2019-04-05",
+    "last_obligation_date": "2020-08-05",
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and pwNumber eq 103"
+   },
+   {
+    "applicant": "Mexico Beach, City Of",
+    "pw_number": 658,
+    "title": "Debris Removal November 25, 2018 - Completion",
+    "category": "A",
+    "category_description": "Debris Removal",
+    "project_size": "Large",
+    "status": "Eligible",
+    "process_step": "Pending Closeout Award",
+    "project_amount": 38592632.56,
+    "federal_obligated": 34733369.3,
+    "total_obligated": 34733369.3,
+    "mitigation_amount": 0,
+    "first_obligation_date": "2019-10-02",
+    "last_obligation_date": "2020-07-01",
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and pwNumber eq 658"
+   },
+   {
+    "applicant": "Bay County",
+    "pw_number": 2095,
+    "title": "Countywide Asphalt Reconstruction, Resurfacing and Pavement Conditioning Survey due to Debris Operation",
+    "category": "C",
+    "category_description": "Roads and Bridges",
+    "project_size": "Large",
+    "status": "Eligible",
+    "process_step": "Pending Recipient Final Review",
+    "project_amount": 27214925,
+    "federal_obligated": 20411193.75,
+    "total_obligated": 20411193.75,
+    "mitigation_amount": 0,
+    "first_obligation_date": "2021-06-04",
+    "last_obligation_date": "2023-07-26",
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and pwNumber eq 2095"
+   },
+   {
+    "applicant": "Panama City, City of",
+    "pw_number": 35,
+    "title": "EXP - Debris Removal from October 10 \u2013 November 24, 2018",
+    "category": "A",
+    "category_description": "Debris Removal",
+    "project_size": "Large",
+    "status": "Eligible",
+    "process_step": "Project Closed Out",
+    "project_amount": 20333488.55,
+    "federal_obligated": 20333488.55,
+    "total_obligated": 20333488.55,
+    "mitigation_amount": 0,
+    "first_obligation_date": "2019-03-15",
+    "last_obligation_date": "2020-03-27",
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and pwNumber eq 35"
+   },
+   {
+    "applicant": "School Board of Bay County Florida",
+    "pw_number": 1276,
+    "title": "District Wide A&E Costs",
+    "category": "E",
+    "category_description": "Buildings and Equipment",
+    "project_size": "Large",
+    "status": "Eligible",
+    "process_step": "Obligated",
+    "project_amount": 21401280,
+    "federal_obligated": 19261152,
+    "total_obligated": 19261152,
+    "mitigation_amount": 0,
+    "first_obligation_date": "2020-05-08",
+    "last_obligation_date": "2026-08-28",
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and pwNumber eq 1276"
+   },
+   {
+    "applicant": "The Board of Trustees of Bay Medical Center",
+    "pw_number": 1547,
+    "title": "CM  Emergency Protective Measures from October 10 - November 24, 2018",
+    "category": "B",
+    "category_description": "Emergency Protective Measures",
+    "project_size": "Large",
+    "status": "Eligible",
+    "process_step": "Project Closed Out",
+    "project_amount": 16928844.23,
+    "federal_obligated": 16924386.54,
+    "total_obligated": 16924386.54,
+    "mitigation_amount": 0,
+    "first_obligation_date": "2020-09-30",
+    "last_obligation_date": "2025-05-16",
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and pwNumber eq 1547"
+   },
+   {
+    "applicant": "Callaway, City of",
+    "pw_number": 375,
+    "title": "Callaway Debris Removal from November 25, 2018 through July 26, 2019",
+    "category": "A",
+    "category_description": "Debris Removal",
+    "project_size": "Large",
+    "status": "Eligible",
+    "process_step": "Project Closed Out",
+    "project_amount": 18252547.81,
+    "federal_obligated": 16427293.03,
+    "total_obligated": 16427293.03,
+    "mitigation_amount": 0,
+    "first_obligation_date": "2019-08-23",
+    "last_obligation_date": "2026-02-05",
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and pwNumber eq 375"
+   },
+   {
+    "applicant": "Bay County",
+    "pw_number": 805,
+    "title": "Management Costs",
+    "category": "Z",
+    "category_description": "Management Costs",
+    "project_size": "Large",
+    "status": "Eligible",
+    "process_step": "Obligated",
+    "project_amount": 16001737.3,
+    "federal_obligated": 16001737.3,
+    "total_obligated": 16001737.3,
+    "mitigation_amount": 0,
+    "first_obligation_date": "2019-12-13",
+    "last_obligation_date": "2022-01-21",
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and pwNumber eq 805"
+   },
+   {
+    "applicant": "The Board of Trustees of Bay Medical Center",
+    "pw_number": 1565,
+    "title": "Emergency Protective Measures from November 25th,  2018 and October 11, 2019/ P2",
+    "category": "B",
+    "category_description": "Emergency Protective Measures",
+    "project_size": "Large",
+    "status": "Eligible",
+    "process_step": "Obligated",
+    "project_amount": 13077202.65,
+    "federal_obligated": 11769482.39,
+    "total_obligated": 11769482.39,
+    "mitigation_amount": 0,
+    "first_obligation_date": "2020-08-11",
+    "last_obligation_date": "2020-08-11",
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and pwNumber eq 1565"
+   },
+   {
+    "applicant": "Lynn Haven, City of",
+    "pw_number": 650,
+    "title": "Debris Removal Citywide November 25, 2018 - March 6, 2019",
+    "category": "A",
+    "category_description": "Debris Removal",
+    "project_size": "Large",
+    "status": "Eligible",
+    "process_step": "Project Closed Out",
+    "project_amount": 12981573.1,
+    "federal_obligated": 11669781.33,
+    "total_obligated": 11669781.33,
+    "mitigation_amount": 0,
+    "first_obligation_date": "2020-02-11",
+    "last_obligation_date": "2026-10-15",
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and pwNumber eq 650"
+   },
+   {
+    "applicant": "Mexico Beach, City Of",
+    "pw_number": 1701,
+    "title": "Canal Dredging",
+    "category": "A",
+    "category_description": "Debris Removal",
+    "project_size": "Large",
+    "status": "Eligible",
+    "process_step": "Project Closed Out",
+    "project_amount": 12926961.3,
+    "federal_obligated": 11564594.19,
+    "total_obligated": 11564594.19,
+    "mitigation_amount": 0,
+    "first_obligation_date": "2020-10-09",
+    "last_obligation_date": "2024-07-15",
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and pwNumber eq 1701"
+   },
+   {
+    "applicant": "Panama City, City of",
+    "pw_number": 2202,
+    "title": "NON 428 - PC Marina Infrastructure",
+    "category": "G",
+    "category_description": "Parks, Recreational Facilities, and Other Items",
+    "project_size": "Large",
+    "status": "Eligible",
+    "process_step": "Pending Scope and Cost Development",
+    "project_amount": 15233083.4,
+    "federal_obligated": 11424812.55,
+    "total_obligated": 11424812.55,
+    "mitigation_amount": 1698365.4,
+    "first_obligation_date": "2022-09-15",
+    "last_obligation_date": "2022-09-15",
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and pwNumber eq 2202"
+   },
+   {
+    "applicant": "Bay County",
+    "pw_number": 382,
+    "title": "EXP - Emergency Protective Measures from October 10 \u2013 November 24, 2018",
+    "category": "B",
+    "category_description": "Emergency Protective Measures",
+    "project_size": "Large",
+    "status": "Eligible",
+    "process_step": "Obligated",
+    "project_amount": 10302909.91,
+    "federal_obligated": 10302910.91,
+    "total_obligated": 10302910.91,
+    "mitigation_amount": 0,
+    "first_obligation_date": "2019-08-30",
+    "last_obligation_date": "2020-05-22",
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and pwNumber eq 382"
+   },
+   {
+    "applicant": "Panama City, City of",
+    "pw_number": 2221,
+    "title": "Repairs / Replacement - Martin Theatre Building and Downtown Improvement Board Facility- NON 428",
+    "category": "E",
+    "category_description": "Buildings and Equipment",
+    "project_size": "Small",
+    "status": "Eligible",
+    "process_step": "Pending Recipient Final Review",
+    "project_amount": 13304437.13,
+    "federal_obligated": 9978327.85,
+    "total_obligated": 9978327.85,
+    "mitigation_amount": 0,
+    "first_obligation_date": "2022-05-13",
+    "last_obligation_date": "2022-05-13",
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and pwNumber eq 2221"
+   },
+   {
+    "applicant": "Springfield, City of",
+    "pw_number": 1213,
+    "title": "Springfield Debris Removal City Wide - November 25, 2018 through October 11, 2019",
+    "category": "A",
+    "category_description": "Debris Removal",
+    "project_size": "Large",
+    "status": "Eligible",
+    "process_step": "Project Closed Out",
+    "project_amount": 11147554.03,
+    "federal_obligated": 9814949.05,
+    "total_obligated": 9814949.05,
+    "mitigation_amount": 0,
+    "first_obligation_date": "2020-05-08",
+    "last_obligation_date": "2026-07-14",
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and pwNumber eq 1213"
+   },
+   {
+    "applicant": "Lynn Haven, City of",
+    "pw_number": 172,
+    "title": "EXP - Debris Removal Citywide Oct 10 - Nov 24",
+    "category": "A",
+    "category_description": "Debris Removal",
+    "project_size": "Large",
+    "status": "Eligible",
+    "process_step": "Project Closed Out",
+    "project_amount": 9998612.87,
+    "federal_obligated": 9593653.56,
+    "total_obligated": 9593653.56,
+    "mitigation_amount": 0,
+    "first_obligation_date": "2019-05-17",
+    "last_obligation_date": "2026-06-01",
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and pwNumber eq 172"
+   },
+   {
+    "applicant": "School Board of Bay County Florida",
+    "pw_number": 424,
+    "title": "Temporary Facilities for Bay County School District November 25th, 2018 and Beyond",
+    "category": "B",
+    "category_description": "Emergency Protective Measures",
+    "project_size": "Large",
+    "status": "Eligible",
+    "process_step": "Obligated",
+    "project_amount": 10533550.64,
+    "federal_obligated": 9480195.58,
+    "total_obligated": 9480195.58,
+    "mitigation_amount": 0,
+    "first_obligation_date": "2019-09-24",
+    "last_obligation_date": "2026-01-31",
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and pwNumber eq 424"
+   },
+   {
+    "applicant": "Lynn Haven, City of",
+    "pw_number": 1998,
+    "title": "(428) - City of Lynn Haven Parks",
+    "category": "G",
+    "category_description": "Parks, Recreational Facilities, and Other Items",
+    "project_size": "Large",
+    "status": "Eligible",
+    "process_step": "Obligated",
+    "project_amount": 9768045.82,
+    "federal_obligated": 8791241.24,
+    "total_obligated": 8791241.24,
+    "mitigation_amount": 0,
+    "first_obligation_date": "2021-05-26",
+    "last_obligation_date": "2026-08-27",
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and pwNumber eq 1998"
+   },
+   {
+    "applicant": "The Board of Trustees of Bay Medical Center",
+    "pw_number": 1923,
+    "title": "South Tower",
+    "category": "E",
+    "category_description": "Buildings and Equipment",
+    "project_size": "Large",
+    "status": "Eligible",
+    "process_step": "Obligated",
+    "project_amount": 9359773.98,
+    "federal_obligated": 8423796.59,
+    "total_obligated": 8423796.59,
+    "mitigation_amount": 0,
+    "first_obligation_date": "2021-04-27",
+    "last_obligation_date": "2026-08-27",
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and pwNumber eq 1923"
+   },
+   {
+    "applicant": "Mexico Beach, City Of",
+    "pw_number": 2300,
+    "title": "NOT A 428 PROJECT-Municipal Fishing Pier",
+    "category": "G",
+    "category_description": "Parks, Recreational Facilities, and Other Items",
+    "project_size": "Large",
+    "status": "Eligible",
+    "process_step": "Obligated",
+    "project_amount": 9051440,
+    "federal_obligated": 8146296,
+    "total_obligated": 8146296,
+    "mitigation_amount": 0,
+    "first_obligation_date": "2026-09-03",
+    "last_obligation_date": "2026-09-03",
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and pwNumber eq 2300"
+   },
+   {
+    "applicant": "Palm Bay Education Group, Inc.",
+    "pw_number": 1729,
+    "title": "428 PP_Palm Bay Auditorium and Gym (and classrooms)",
+    "category": "E",
+    "category_description": "Buildings and Equipment",
+    "project_size": "Large",
+    "status": "Eligible",
+    "process_step": "Obligated",
+    "project_amount": 8576977.8,
+    "federal_obligated": 7719280.02,
+    "total_obligated": 7719280.02,
+    "mitigation_amount": 3733966.8,
+    "first_obligation_date": "2021-05-24",
+    "last_obligation_date": "2026-08-28",
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and pwNumber eq 1729"
+   },
+   {
+    "applicant": "School Board of Bay County Florida",
+    "pw_number": 1206,
+    "title": "Emergency Protective Measures from October 7th to 9th, 2018 and November 25th, 2018 & Beyond",
+    "category": "B",
+    "category_description": "Emergency Protective Measures",
+    "project_size": "Large",
+    "status": "Eligible",
+    "process_step": "Obligated",
+    "project_amount": 8377820,
+    "federal_obligated": 7540038,
+    "total_obligated": 7540038,
+    "mitigation_amount": 0,
+    "first_obligation_date": "2020-03-27",
+    "last_obligation_date": "2021-04-22",
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and pwNumber eq 1206"
+   },
+   {
+    "applicant": "Panama City, City of",
+    "pw_number": 2326,
+    "title": "Roadway damages City Wide",
+    "category": "C",
+    "category_description": "Roads and Bridges",
+    "project_size": "Large",
+    "status": "Eligible",
+    "process_step": "Obligated",
+    "project_amount": 7906791.39,
+    "federal_obligated": 7116112.26,
+    "total_obligated": 7116112.26,
+    "mitigation_amount": 0,
+    "first_obligation_date": "2023-06-23",
+    "last_obligation_date": "2026-08-27",
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and pwNumber eq 2326"
+   },
+   {
+    "applicant": "Mexico Beach, City Of",
+    "pw_number": 28,
+    "title": "EXP Debris Removal from October 24 - November 24, 2018.",
+    "category": "A",
+    "category_description": "Debris Removal",
+    "project_size": "Large",
+    "status": "Eligible",
+    "process_step": "Project Closed Out",
+    "project_amount": 6934359.38,
+    "federal_obligated": 6929631.24,
+    "total_obligated": 6929631.24,
+    "mitigation_amount": 0,
+    "first_obligation_date": "2019-03-15",
+    "last_obligation_date": "2026-02-05",
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and pwNumber eq 28"
+   },
+   {
+    "applicant": "School Board of Bay County Florida",
+    "pw_number": 309,
+    "title": "Estimated Management Cost - School Board of Bay County Florida",
+    "category": "Z",
+    "category_description": "Management Costs",
+    "project_size": "Large",
+    "status": "Eligible",
+    "process_step": "Obligated",
+    "project_amount": 5560942.28,
+    "federal_obligated": 6626908.42,
+    "total_obligated": 6626908.42,
+    "mitigation_amount": 0,
+    "first_obligation_date": "2019-06-12",
+    "last_obligation_date": "2022-01-05",
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and pwNumber eq 309"
+   },
+   {
+    "applicant": "Panama City, City of",
+    "pw_number": 1347,
+    "title": "Water and Sewer Line Repairs - FA; Contract; Mutual Aid",
+    "category": "F",
+    "category_description": "Utilities",
+    "project_size": "Large",
+    "status": "Eligible",
+    "process_step": "Project Closed Out",
+    "project_amount": 9756223.07,
+    "federal_obligated": 6322881.58,
+    "total_obligated": 6322881.58,
+    "mitigation_amount": 0,
+    "first_obligation_date": "2020-05-22",
+    "last_obligation_date": "2026-07-14",
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and pwNumber eq 1347"
+   },
+   {
+    "applicant": "Family Of God Baptist Church",
+    "pw_number": 1751,
+    "title": "(428 fixed cost)  FOGBC Buildings (EAST & WEST Campus), Specialized Damages",
+    "category": "E",
+    "category_description": "Buildings and Equipment",
+    "project_size": "Large",
+    "status": "Eligible",
+    "process_step": "Obligated",
+    "project_amount": 6387894.17,
+    "federal_obligated": 5749104.76,
+    "total_obligated": 5749104.76,
+    "mitigation_amount": 0,
+    "first_obligation_date": "2021-06-04",
+    "last_obligation_date": "2026-08-28",
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and pwNumber eq 1751"
+   },
+   {
+    "applicant": "Parker, City Of",
+    "pw_number": 1001,
+    "title": "Debris Removal from November 25, 2018 \u2013 August 23,2019",
+    "category": "A",
+    "category_description": "Debris Removal",
+    "project_size": "Large",
+    "status": "Eligible",
+    "process_step": "Project Closed Out",
+    "project_amount": 6330682.33,
+    "federal_obligated": 5697614.1,
+    "total_obligated": 5697614.1,
+    "mitigation_amount": 0,
+    "first_obligation_date": "2020-03-31",
+    "last_obligation_date": "2023-12-05",
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and pwNumber eq 1001"
+   },
+   {
+    "applicant": "School Board of Bay County Florida",
+    "pw_number": 1305,
+    "title": "428 Jinks Gym Building 7",
+    "category": "E",
+    "category_description": "Buildings and Equipment",
+    "project_size": "Large",
+    "status": "Eligible",
+    "process_step": "Obligated",
+    "project_amount": 5999070,
+    "federal_obligated": 5399163,
+    "total_obligated": 5399163,
+    "mitigation_amount": 438107,
+    "first_obligation_date": "2020-06-02",
+    "last_obligation_date": "2026-08-28",
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and pwNumber eq 1305"
+   },
+   {
+    "applicant": "Chemical Addictions Recovery Effort, Inc. (CARE)",
+    "pw_number": 1511,
+    "title": "NOT 428 PROJECT - C.A.R.E. Main Campus Facilities",
+    "category": "E",
+    "category_description": "Buildings and Equipment",
+    "project_size": "Large",
+    "status": "Eligible",
+    "process_step": "Obligated",
+    "project_amount": 5728349.72,
+    "federal_obligated": 5155514.75,
+    "total_obligated": 5155514.75,
+    "mitigation_amount": 41955.63,
+    "first_obligation_date": "2021-08-31",
+    "last_obligation_date": "2026-08-29",
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and pwNumber eq 1511"
+   },
+   {
+    "applicant": "Bay County",
+    "pw_number": 1459,
+    "title": "Countywide Ditches and Shoulders Roadside",
+    "category": "C",
+    "category_description": "Roads and Bridges",
+    "project_size": "Large",
+    "status": "Eligible",
+    "process_step": "Obligated",
+    "project_amount": 5635589,
+    "federal_obligated": 5072030.1,
+    "total_obligated": 5072030.1,
+    "mitigation_amount": 0,
+    "first_obligation_date": "2021-03-16",
+    "last_obligation_date": "2026-08-28",
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and pwNumber eq 1459"
+   },
+   {
+    "applicant": "Panama City, City of",
+    "pw_number": 318,
+    "title": "Management Cost",
+    "category": "Z",
+    "category_description": "Management Costs",
+    "project_size": "Large",
+    "status": "Eligible",
+    "process_step": "Obligated",
+    "project_amount": 5067334.89,
+    "federal_obligated": 5067334.89,
+    "total_obligated": 5067334.89,
+    "mitigation_amount": 0,
+    "first_obligation_date": "2019-06-04",
+    "last_obligation_date": "2020-08-14",
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and pwNumber eq 318"
+   },
+   {
+    "applicant": "Panama City Fellowship Church of Praise",
+    "pw_number": 2323,
+    "title": "PCFCP  Building",
+    "category": "E",
+    "category_description": "Buildings and Equipment",
+    "project_size": "Large",
+    "status": "Eligible",
+    "process_step": "Obligated",
+    "project_amount": 5589526,
+    "federal_obligated": 5030573.4,
+    "total_obligated": 5030573.4,
+    "mitigation_amount": 0,
+    "first_obligation_date": "2024-05-16",
+    "last_obligation_date": "2026-08-27",
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and pwNumber eq 2323"
+   },
+   {
+    "applicant": "Panama City, City of",
+    "pw_number": 27,
+    "title": "EXP \u2013 Emergency Protective Measures from October 10 - November 24, 2018",
+    "category": "B",
+    "category_description": "Emergency Protective Measures",
+    "project_size": "Large",
+    "status": "Eligible",
+    "process_step": "Project Closed Out",
+    "project_amount": 4967764.26,
+    "federal_obligated": 4967764.26,
+    "total_obligated": 4967764.26,
+    "mitigation_amount": 0,
+    "first_obligation_date": "2019-03-08",
+    "last_obligation_date": "2019-04-30",
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and pwNumber eq 27"
+   },
+   {
+    "applicant": "Mexico Beach, City Of",
+    "pw_number": 330,
+    "title": "Mexico Beach Management Costs",
+    "category": "Z",
+    "category_description": "Management Costs",
+    "project_size": "Large",
+    "status": "Eligible",
+    "process_step": "Obligated",
+    "project_amount": 4836051.52,
+    "federal_obligated": 4836051.52,
+    "total_obligated": 4836051.52,
+    "mitigation_amount": 0,
+    "first_obligation_date": "2019-06-10",
+    "last_obligation_date": "2022-06-09",
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and pwNumber eq 330"
+   },
+   {
+    "applicant": "Mexico Beach, City Of",
+    "pw_number": 1961,
+    "title": "NOT A 428 Project - Harbor and Canal Dredging WTBC",
+    "category": "D",
+    "category_description": "Water Control Facilities",
+    "project_size": "Large",
+    "status": "Eligible",
+    "process_step": "Pending Large Project Review",
+    "project_amount": 8335227,
+    "federal_obligated": 4706084.03,
+    "total_obligated": 4706084.03,
+    "mitigation_amount": 0,
+    "first_obligation_date": "2021-08-19",
+    "last_obligation_date": "2025-08-11",
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and pwNumber eq 1961"
+   },
+   {
+    "applicant": "Howard Carlisle Memorial Baptist Church, Inc",
+    "pw_number": 2317,
+    "title": "IMPROVED - Sanctuary/Office/Senior Adult/Youth/Pre-School",
+    "category": "E",
+    "category_description": "Buildings and Equipment",
+    "project_size": "Large",
+    "status": "Eligible",
+    "process_step": "Pending Applicant 406 HMP Completion",
+    "project_amount": 6088924.86,
+    "federal_obligated": 4566693.65,
+    "total_obligated": 4566693.65,
+    "mitigation_amount": 0,
+    "first_obligation_date": "2023-08-21",
+    "last_obligation_date": "2023-08-21",
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and pwNumber eq 2317"
+   },
+   {
+    "applicant": "The Board of Trustees of Bay Medical Center",
+    "pw_number": 2291,
+    "title": "Hospital Core Group II",
+    "category": "E",
+    "category_description": "Buildings and Equipment",
+    "project_size": "Large",
+    "status": "Eligible",
+    "process_step": "Obligated",
+    "project_amount": 4743314.32,
+    "federal_obligated": 4268982.89,
+    "total_obligated": 4268982.89,
+    "mitigation_amount": 0,
+    "first_obligation_date": "2021-10-12",
+    "last_obligation_date": "2026-08-27",
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and pwNumber eq 2291"
+   },
+   {
+    "applicant": "Panama City, City of",
+    "pw_number": 1295,
+    "title": "428 Project - Repairs to facilities in Martin Luther King, Jr. Recreation Center including buildings and property in the open",
+    "category": "E",
+    "category_description": "Buildings and Equipment",
+    "project_size": "Large",
+    "status": "Eligible",
+    "process_step": "Obligated",
+    "project_amount": 4732191.91,
+    "federal_obligated": 4258972.72,
+    "total_obligated": 4258972.72,
+    "mitigation_amount": 1500381.44,
+    "first_obligation_date": "2020-05-22",
+    "last_obligation_date": "2026-08-28",
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and pwNumber eq 1295"
+   },
+   {
+    "applicant": "Bay County",
+    "pw_number": 1425,
+    "title": "H.G. Harders Park",
+    "category": "G",
+    "category_description": "Parks, Recreational Facilities, and Other Items",
+    "project_size": "Large",
+    "status": "Eligible",
+    "process_step": "Obligated",
+    "project_amount": 4722450.25,
+    "federal_obligated": 4250205.23,
+    "total_obligated": 4250205.23,
+    "mitigation_amount": 0,
+    "first_obligation_date": "2020-09-17",
+    "last_obligation_date": "2026-08-28",
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and pwNumber eq 1425"
+   },
+   {
+    "applicant": "Panama City, City of",
+    "pw_number": 2295,
+    "title": "NON-428 St Andrews Marina Infrastructure",
+    "category": "G",
+    "category_description": "Parks, Recreational Facilities, and Other Items",
+    "project_size": "Large",
+    "status": "Eligible",
+    "process_step": "Obligated",
+    "project_amount": 4584669.36,
+    "federal_obligated": 4126202.43,
+    "total_obligated": 4126202.43,
+    "mitigation_amount": 117422.33,
+    "first_obligation_date": "2022-05-13",
+    "last_obligation_date": "2026-08-27",
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and pwNumber eq 2295"
+   },
+   {
+    "applicant": "Bay County",
+    "pw_number": 1060,
+    "title": "Emergency Protective Measures from November 25, 2018 \u2013 [ongoing]",
+    "category": "B",
+    "category_description": "Emergency Protective Measures",
+    "project_size": "Large",
+    "status": "Eligible",
+    "process_step": "Obligated",
+    "project_amount": 4550463.97,
+    "federal_obligated": 4095417.57,
+    "total_obligated": 4095417.57,
+    "mitigation_amount": 0,
+    "first_obligation_date": "2020-05-22",
+    "last_obligation_date": "2020-05-22",
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and pwNumber eq 1060"
+   },
+   {
+    "applicant": "Palm Bay Education Group, Inc.",
+    "pw_number": 666,
+    "title": "EXP - Emergency Protective Measures from October 10 - November 24 2018",
+    "category": "B",
+    "category_description": "Emergency Protective Measures",
+    "project_size": "Large",
+    "status": "Eligible",
+    "process_step": "Project Closed Out",
+    "project_amount": 4117054.46,
+    "federal_obligated": 3965860.97,
+    "total_obligated": 3965860.97,
+    "mitigation_amount": 0,
+    "first_obligation_date": "2019-10-25",
+    "last_obligation_date": "2025-05-29",
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and pwNumber eq 666"
+   },
+   {
+    "applicant": "Springfield, City of",
+    "pw_number": 1445,
+    "title": "428 Springfield Level 2 Road Damages Citywide",
+    "category": "C",
+    "category_description": "Roads and Bridges",
+    "project_size": "Large",
+    "status": "Eligible",
+    "process_step": "Pending Closeout Completion",
+    "project_amount": 4318081,
+    "federal_obligated": 3886272.9,
+    "total_obligated": 3886272.9,
+    "mitigation_amount": 0,
+    "first_obligation_date": "2020-10-14",
+    "last_obligation_date": "2026-08-28",
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and pwNumber eq 1445"
+   },
+   {
+    "applicant": "Mexico Beach, City Of",
+    "pw_number": 2299,
+    "title": "NOT A 428 Project-Mexico Beach Harbor Canal Jetties",
+    "category": "G",
+    "category_description": "Parks, Recreational Facilities, and Other Items",
+    "project_size": "Large",
+    "status": "Eligible",
+    "process_step": "Obligated",
+    "project_amount": 4267436,
+    "federal_obligated": 3840692.4,
+    "total_obligated": 3840692.4,
+    "mitigation_amount": 3891723.65,
+    "first_obligation_date": "2024-07-05",
+    "last_obligation_date": "2026-08-27",
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and pwNumber eq 2299"
+   },
+   {
+    "applicant": "Trustees, Springfield Baptist Church, Inc.",
+    "pw_number": 890,
+    "title": "Main Building (Sanctuary), Steeple, Awning, and Fencing Damage (428)",
+    "category": "E",
+    "category_description": "Buildings and Equipment",
+    "project_size": "Large",
+    "status": "Eligible",
+    "process_step": "Obligated",
+    "project_amount": 4251355,
+    "federal_obligated": 3826219.5,
+    "total_obligated": 3826219.5,
+    "mitigation_amount": 87748,
+    "first_obligation_date": "2021-01-05",
+    "last_obligation_date": "2026-08-27",
+    "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and pwNumber eq 890"
+   }
+  ],
+  "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'",
+  "applicant_names_source_url": "https://www.fema.gov/api/open/v1/PublicAssistanceApplicants?$filter=disasterNumber eq 4399",
+  "data_refreshed": "2026-10-20"
+ },
+ "fema_ia": {
+  "owners": {
+   "validRegistrations": 33917,
+   "approvedForFemaAssistance": 8183,
+   "totalApprovedIhpAmount": 58946164.51,
+   "repairReplaceAmount": 42711983.74,
+   "rentalAmount": 10930998.62,
+   "otherNeedsAmount": 5184702.89,
+   "totalDamage": 118798365.85,
+   "rows": 66,
+   "source_url": "https://www.fema.gov/api/open/v2/HousingAssistanceOwners?$filter=disasterNumber eq 4399 and county eq 'Bay (County)'"
+  },
+  "renters": {
+   "validRegistrations": 23758,
+   "approvedForFemaAssistance": 11556,
+   "totalApprovedIhpAmount": 42375534.56,
+   "repairReplaceAmount": 6807.44,
+   "rentalAmount": 27443357.13,
+   "otherNeedsAmount": 14488868.79,
+   "rows": 87,
+   "source_url": "https://www.fema.gov/api/open/v2/HousingAssistanceRenters?$filter=disasterNumber eq 4399 and county eq 'Bay (County)'"
+  },
+  "bay_total_approved_ihp_owners_plus_renters": 101321699.07,
+  "by_city": [
+   {
+    "city": "PANAMA CITY",
+    "owners_validRegistrations": 22388.0,
+    "owners_approvedForFemaAssistance": 5594.0,
+    "owners_totalApprovedIhpAmount": 42337547.88,
+    "owners_repairReplaceAmount": 30320903.02,
+    "owners_rentalAmount": 8077729.96,
+    "owners_otherNeedsAmount": 3852425.57,
+    "total_approved_ihp": 77256130.43,
+    "renters_validRegistrations": 18027.0,
+    "renters_approvedForFemaAssistance": 9518.0,
+    "renters_totalApprovedIhpAmount": 34918582.55,
+    "renters_repairReplaceAmount": 0.0,
+    "renters_rentalAmount": 22563416.45,
+    "renters_otherNeedsAmount": 12011963.6
+   },
+   {
+    "city": "LYNN HAVEN",
+    "owners_validRegistrations": 4819.0,
+    "owners_approvedForFemaAssistance": 561.0,
+    "owners_totalApprovedIhpAmount": 3157461.04,
+    "owners_repairReplaceAmount": 2200853.07,
+    "owners_rentalAmount": 661838.86,
+    "owners_otherNeedsAmount": 286645.75,
+    "total_approved_ihp": 7532609.6,
+    "renters_validRegistrations": 2315.0,
+    "renters_approvedForFemaAssistance": 1117.0,
+    "renters_totalApprovedIhpAmount": 4375148.56,
+    "renters_repairReplaceAmount": 0.0,
+    "renters_rentalAmount": 2969375.46,
+    "renters_otherNeedsAmount": 1359743.17
+   },
+   {
+    "city": "YOUNGSTOWN",
+    "owners_validRegistrations": 1683.0,
+    "owners_approvedForFemaAssistance": 818.0,
+    "owners_totalApprovedIhpAmount": 4931054.16,
+    "owners_repairReplaceAmount": 3699347.6,
+    "owners_rentalAmount": 836023.75,
+    "owners_otherNeedsAmount": 386405.33,
+    "total_approved_ihp": 5646144.34,
+    "renters_validRegistrations": 421.0,
+    "renters_approvedForFemaAssistance": 211.0,
+    "renters_totalApprovedIhpAmount": 715090.18,
+    "renters_repairReplaceAmount": 5493.4,
+    "renters_rentalAmount": 453278.9,
+    "renters_otherNeedsAmount": 248347.44
+   },
+   {
+    "city": "FOUNTAIN",
+    "owners_validRegistrations": 1092.0,
+    "owners_approvedForFemaAssistance": 582.0,
+    "owners_totalApprovedIhpAmount": 3552099.22,
+    "owners_repairReplaceAmount": 2587814.15,
+    "owners_rentalAmount": 578015.95,
+    "owners_otherNeedsAmount": 382290.12,
+    "total_approved_ihp": 3961717.29,
+    "renters_validRegistrations": 263.0,
+    "renters_approvedForFemaAssistance": 127.0,
+    "renters_totalApprovedIhpAmount": 409618.07,
+    "renters_repairReplaceAmount": 1314.04,
+    "renters_rentalAmount": 217569.0,
+    "renters_otherNeedsAmount": 190735.03
+   },
+   {
+    "city": "MEXICO BEACH",
+    "owners_validRegistrations": 653.0,
+    "owners_approvedForFemaAssistance": 195.0,
+    "owners_totalApprovedIhpAmount": 2506525.5,
+    "owners_repairReplaceAmount": 2092544.77,
+    "owners_rentalAmount": 294129.0,
+    "owners_otherNeedsAmount": 114775.1,
+    "total_approved_ihp": 2955861.28,
+    "renters_validRegistrations": 161.0,
+    "renters_approvedForFemaAssistance": 108.0,
+    "renters_totalApprovedIhpAmount": 449335.78,
+    "renters_repairReplaceAmount": 0.0,
+    "renters_rentalAmount": 232251.0,
+    "renters_otherNeedsAmount": 205607.71
+   },
+   {
+    "city": "PANAMA CITY BEACH",
+    "owners_validRegistrations": 2393.0,
+    "owners_approvedForFemaAssistance": 216.0,
+    "owners_totalApprovedIhpAmount": 891224.26,
+    "owners_repairReplaceAmount": 603610.77,
+    "owners_rentalAmount": 235314.1,
+    "owners_otherNeedsAmount": 50254.69,
+    "total_approved_ihp": 1416931.01,
+    "renters_validRegistrations": 1901.0,
+    "renters_approvedForFemaAssistance": 201.0,
+    "renters_totalApprovedIhpAmount": 525706.75,
+    "renters_repairReplaceAmount": 0.0,
+    "renters_rentalAmount": 359242.0,
+    "renters_otherNeedsAmount": 154671.08
+   },
+   {
+    "city": "SOUTHPORT",
+    "owners_validRegistrations": 362.0,
+    "owners_approvedForFemaAssistance": 109.0,
+    "owners_totalApprovedIhpAmount": 721722.08,
+    "owners_repairReplaceAmount": 546175.53,
+    "owners_rentalAmount": 120053.0,
+    "owners_otherNeedsAmount": 54283.63,
+    "total_approved_ihp": 878737.52,
+    "renters_validRegistrations": 114.0,
+    "renters_approvedForFemaAssistance": 47.0,
+    "renters_totalApprovedIhpAmount": 157015.44,
+    "renters_repairReplaceAmount": 0.0,
+    "renters_rentalAmount": 98709.0,
+    "renters_otherNeedsAmount": 55490.69
+   },
+   {
+    "city": "CALLAWAY",
+    "owners_validRegistrations": 214.0,
+    "owners_approvedForFemaAssistance": 38.0,
+    "owners_totalApprovedIhpAmount": 376715.73,
+    "owners_repairReplaceAmount": 298766.53,
+    "owners_rentalAmount": 46685.0,
+    "owners_otherNeedsAmount": 29227.0,
+    "total_approved_ihp": 801671.82,
+    "renters_validRegistrations": 217.0,
+    "renters_approvedForFemaAssistance": 113.0,
+    "renters_totalApprovedIhpAmount": 424956.09,
+    "renters_repairReplaceAmount": 0.0,
+    "renters_rentalAmount": 278834.82,
+    "renters_otherNeedsAmount": 141192.15
+   },
+   {
+    "city": "PORT ST JOE",
+    "owners_validRegistrations": 135.0,
+    "owners_approvedForFemaAssistance": 29.0,
+    "owners_totalApprovedIhpAmount": 244173.34,
+    "owners_repairReplaceAmount": 202543.95,
+    "owners_rentalAmount": 36809.0,
+    "owners_otherNeedsAmount": 4578.75,
+    "total_approved_ihp": 325338.74,
+    "renters_validRegistrations": 36.0,
+    "renters_approvedForFemaAssistance": 17.0,
+    "renters_totalApprovedIhpAmount": 81165.4,
+    "renters_repairReplaceAmount": 0.0,
+    "renters_rentalAmount": 56588.0,
+    "renters_otherNeedsAmount": 21443.4
+   },
+   {
+    "city": "PARKER",
+    "owners_validRegistrations": 53.0,
+    "owners_approvedForFemaAssistance": 19.0,
+    "owners_totalApprovedIhpAmount": 97764.57,
+    "owners_repairReplaceAmount": 66546.74,
+    "owners_rentalAmount": 18780.0,
+    "owners_otherNeedsAmount": 12437.83,
+    "total_approved_ihp": 213006.34,
+    "renters_validRegistrations": 57.0,
+    "renters_approvedForFemaAssistance": 38.0,
+    "renters_totalApprovedIhpAmount": 115241.77,
+    "renters_repairReplaceAmount": 0.0,
+    "renters_rentalAmount": 82730.0,
+    "renters_otherNeedsAmount": 32511.77
+   },
+   {
+    "city": "SPRINGFIELD",
+    "owners_validRegistrations": 14.0,
+    "owners_approvedForFemaAssistance": 9.0,
+    "owners_totalApprovedIhpAmount": 98657.49,
+    "owners_repairReplaceAmount": 72896.38,
+    "owners_rentalAmount": 16984.0,
+    "owners_otherNeedsAmount": 8777.11,
+    "total_approved_ihp": 134146.63,
+    "renters_validRegistrations": 13.0,
+    "renters_approvedForFemaAssistance": 9.0,
+    "renters_totalApprovedIhpAmount": 35489.14,
+    "renters_repairReplaceAmount": 0.0,
+    "renters_rentalAmount": 22107.0,
+    "renters_otherNeedsAmount": 8311.89
+   },
+   {
+    "city": "TYNDALL AFB",
+    "owners_validRegistrations": 3.0,
+    "owners_approvedForFemaAssistance": 0.0,
+    "owners_totalApprovedIhpAmount": 0.0,
+    "owners_repairReplaceAmount": 0.0,
+    "owners_rentalAmount": 0.0,
+    "owners_otherNeedsAmount": 0.0,
+    "total_approved_ihp": 106360.46,
+    "renters_validRegistrations": 122.0,
+    "renters_approvedForFemaAssistance": 28.0,
+    "renters_totalApprovedIhpAmount": 106360.46,
+    "renters_repairReplaceAmount": 0.0,
+    "renters_rentalAmount": 78039.5,
+    "renters_otherNeedsAmount": 28242.49
+   },
+   {
+    "city": "P C BEACH",
+    "owners_validRegistrations": 60.0,
+    "owners_approvedForFemaAssistance": 5.0,
+    "owners_totalApprovedIhpAmount": 3122.52,
+    "owners_repairReplaceAmount": 2702.54,
+    "owners_rentalAmount": 0.0,
+    "owners_otherNeedsAmount": 419.98,
+    "total_approved_ihp": 33741.72,
+    "renters_validRegistrations": 61.0,
+    "renters_approvedForFemaAssistance": 11.0,
+    "renters_totalApprovedIhpAmount": 30619.2,
+    "renters_repairReplaceAmount": 0.0,
+    "renters_rentalAmount": 12138.0,
+    "renters_otherNeedsAmount": 18481.2
+   },
+   {
+    "city": "PANAMA",
+    "owners_validRegistrations": 2.0,
+    "owners_approvedForFemaAssistance": 1.0,
+    "owners_totalApprovedIhpAmount": 7970.26,
+    "owners_repairReplaceAmount": 4094.57,
+    "owners_rentalAmount": 2858.0,
+    "owners_otherNeedsAmount": 1017.69,
+    "total_approved_ihp": 21091.83,
+    "renters_validRegistrations": 8.0,
+    "renters_approvedForFemaAssistance": 4.0,
+    "renters_totalApprovedIhpAmount": 13121.57,
+    "renters_repairReplaceAmount": 0.0,
+    "renters_rentalAmount": 10120.0,
+    "renters_otherNeedsAmount": 3001.57
+   },
+   {
+    "city": "SOUTH PORT",
+    "owners_validRegistrations": 5.0,
+    "owners_approvedForFemaAssistance": 2.0,
+    "owners_totalApprovedIhpAmount": 12415.29,
+    "owners_repairReplaceAmount": 7841.93,
+    "owners_rentalAmount": 4044.0,
+    "owners_otherNeedsAmount": 529.36,
+    "total_approved_ihp": 12415.29,
+    "renters_validRegistrations": 1.0,
+    "renters_approvedForFemaAssistance": 0.0,
+    "renters_totalApprovedIhpAmount": 0.0,
+    "renters_repairReplaceAmount": 0.0,
+    "renters_rentalAmount": 0.0,
+    "renters_otherNeedsAmount": 0.0
+   },
+   {
+    "city": "EBRO",
+    "owners_validRegistrations": 10.0,
+    "owners_approvedForFemaAssistance": 2.0,
+    "owners_totalApprovedIhpAmount": 1674.26,
+    "owners_repairReplaceAmount": 1459.26,
+    "owners_rentalAmount": 0.0,
+    "owners_otherNeedsAmount": 215.0,
+    "total_approved_ihp": 7053.51,
+    "renters_validRegistrations": 1.0,
+    "renters_approvedForFemaAssistance": 1.0,
+    "renters_totalApprovedIhpAmount": 5379.25,
+    "renters_repairReplaceAmount": 0.0,
+    "renters_rentalAmount": 1734.0,
+    "renters_otherNeedsAmount": 3645.25
+   },
+   {
+    "city": "WEWAHITCHKA",
+    "owners_validRegistrations": 1.0,
+    "owners_approvedForFemaAssistance": 1.0,
+    "owners_totalApprovedIhpAmount": 4506.62,
+    "owners_repairReplaceAmount": 2772.62,
+    "owners_rentalAmount": 1734.0,
+    "owners_otherNeedsAmount": 0.0,
+    "total_approved_ihp": 4506.62,
+    "renters_validRegistrations": 1.0,
+    "renters_approvedForFemaAssistance": 0.0,
+    "renters_totalApprovedIhpAmount": 0.0,
+    "renters_repairReplaceAmount": 0.0,
+    "renters_rentalAmount": 0.0,
+    "renters_otherNeedsAmount": 0.0
+   },
+   {
+    "city": "YOUNGTOWN",
+    "renters_validRegistrations": 1.0,
+    "renters_approvedForFemaAssistance": 1.0,
+    "renters_totalApprovedIhpAmount": 4345.48,
+    "renters_repairReplaceAmount": 0.0,
+    "renters_rentalAmount": 1734.0,
+    "renters_otherNeedsAmount": 2611.48,
+    "total_approved_ihp": 4345.48
+   },
+   {
+    "city": "LYNNHAVEN",
+    "renters_validRegistrations": 2.0,
+    "renters_approvedForFemaAssistance": 1.0,
+    "renters_totalApprovedIhpAmount": 2368.87,
+    "renters_repairReplaceAmount": 0.0,
+    "renters_rentalAmount": 0.0,
+    "renters_otherNeedsAmount": 2368.87,
+    "total_approved_ihp": 2368.87
+   },
+   {
+    "city": "PCB",
+    "owners_validRegistrations": 1.0,
+    "owners_approvedForFemaAssistance": 0.0,
+    "owners_totalApprovedIhpAmount": 0.0,
+    "owners_repairReplaceAmount": 0.0,
+    "owners_rentalAmount": 0.0,
+    "owners_otherNeedsAmount": 0.0,
+    "total_approved_ihp": 2022.0,
+    "renters_validRegistrations": 4.0,
+    "renters_approvedForFemaAssistance": 1.0,
+    "renters_totalApprovedIhpAmount": 2022.0,
+    "renters_repairReplaceAmount": 0.0,
+    "renters_rentalAmount": 2022.0,
+    "renters_otherNeedsAmount": 0.0
+   },
+   {
+    "city": "CRESTVIEW",
+    "owners_validRegistrations": 1.0,
+    "owners_approvedForFemaAssistance": 0.0,
+    "owners_totalApprovedIhpAmount": 0.0,
+    "owners_repairReplaceAmount": 0.0,
+    "owners_rentalAmount": 0.0,
+    "owners_otherNeedsAmount": 0.0,
+    "total_approved_ihp": 1734.0,
+    "renters_validRegistrations": 1.0,
+    "renters_approvedForFemaAssistance": 1.0,
+    "renters_totalApprovedIhpAmount": 1734.0,
+    "renters_repairReplaceAmount": 0.0,
+    "renters_rentalAmount": 1734.0,
+    "renters_otherNeedsAmount": 0.0
+   },
+   {
+    "city": "CALLAWAY CITY",
+    "renters_validRegistrations": 1.0,
+    "renters_approvedForFemaAssistance": 1.0,
+    "renters_totalApprovedIhpAmount": 1734.0,
+    "renters_repairReplaceAmount": 0.0,
+    "renters_rentalAmount": 1734.0,
+    "renters_otherNeedsAmount": 0.0,
+    "total_approved_ihp": 1734.0
+   },
+   {
+    "city": "VERNON",
+    "owners_validRegistrations": 5.0,
+    "owners_approvedForFemaAssistance": 2.0,
+    "owners_totalApprovedIhpAmount": 1530.29,
+    "owners_repairReplaceAmount": 1110.31,
+    "owners_rentalAmount": 0.0,
+    "owners_otherNeedsAmount": 419.98,
+    "total_approved_ihp": 1530.29,
+    "renters_validRegistrations": 2.0,
+    "renters_approvedForFemaAssistance": 0.0,
+    "renters_totalApprovedIhpAmount": 0.0,
+    "renters_repairReplaceAmount": 0.0,
+    "renters_rentalAmount": 0.0,
+    "renters_otherNeedsAmount": 0.0
+   },
+   {
+    "city": "PANAMA BEACH",
+    "renters_validRegistrations": 1.0,
+    "renters_approvedForFemaAssistance": 1.0,
+    "renters_totalApprovedIhpAmount": 500.0,
+    "renters_repairReplaceAmount": 0.0,
+    "renters_rentalAmount": 0.0,
+    "renters_otherNeedsAmount": 500.0,
+    "total_approved_ihp": 500.0
+   }
+  ],
+  "by_zip": [
+   {
+    "zip": "32404",
+    "total_approved_ihp": 30415023.44
+   },
+   {
+    "zip": "32401",
+    "total_approved_ihp": 25479521.03
+   },
+   {
+    "zip": "32405",
+    "total_approved_ihp": 17956525.4
+   },
+   {
+    "zip": "32444",
+    "total_approved_ihp": 7464888.47
+   },
+   {
+    "zip": "32466",
+    "total_approved_ihp": 5650489.82
+   },
+   {
+    "zip": "32409",
+    "total_approved_ihp": 4380755.79
+   },
+   {
+    "zip": "32438",
+    "total_approved_ihp": 3961717.29
+   },
+   {
+    "zip": "32456",
+    "total_approved_ihp": 3034481.18
+   },
+   {
+    "zip": "32408",
+    "total_approved_ihp": 1678592.51
+   },
+   {
+    "zip": "32407",
+    "total_approved_ihp": 508099.29
+   },
+   {
+    "zip": "32403",
+    "total_approved_ihp": 293732.75
+   },
+   {
+    "zip": "32410",
+    "total_approved_ihp": 246718.84
+   },
+   {
+    "zip": "32413",
+    "total_approved_ihp": 212320.14
+   },
+   {
+    "zip": "32437",
+    "total_approved_ihp": 7053.51
+   },
+   {
+    "zip": "32304",
+    "total_approved_ihp": 4887.31
+   },
+   {
+    "zip": "32402",
+    "total_approved_ihp": 4638.53
+   },
+   {
+    "zip": "32465",
+    "total_approved_ihp": 4506.62
+   },
+   {
+    "zip": "34205",
+    "total_approved_ihp": 4353.87
+   },
+   {
+    "zip": "32414",
+    "total_approved_ihp": 3897.63
+   },
+   {
+    "zip": "32461",
+    "total_approved_ihp": 2263.36
+   },
+   {
+    "zip": "32541",
+    "total_approved_ihp": 1734.0
+   },
+   {
+    "zip": "32406",
+    "total_approved_ihp": 1734.0
+   },
+   {
+    "zip": "32536",
+    "total_approved_ihp": 1734.0
+   },
+   {
+    "zip": "32462",
+    "total_approved_ihp": 1530.29
+   },
+   {
+    "zip": "32508",
+    "total_approved_ihp": 500.0
+   }
+  ],
+  "disaster_wide": {
+   "totalNumberIaApproved": 31350,
+   "totalAmountIhpApproved": 149572302.29,
+   "totalAmountHaApproved": 123061722.8,
+   "totalAmountOnaApproved": 26510579.49,
+   "totalObligatedAmountPa": 2298955320.15,
+   "totalObligatedAmountHmgp": 140249329.17,
+   "note": "All Florida counties in DR-4399, not Bay only",
+   "source_url": "https://www.fema.gov/api/open/v1/FemaWebDisasterSummaries?$filter=disasterNumber eq 4399"
+  }
+ },
+ "cdbg_dr": {
+  "program": "HUD CDBG-DR for Hurricane Michael (DR-4399), administered by Florida Department of Economic Opportunity (now FloridaCommerce) as 'Rebuild Florida'",
+  "state_allocation": [
+   {
+    "item": "Unmet needs allocation, Public Law 115-254",
+    "amount": 448023000,
+    "source_url": "https://www.govinfo.gov/content/pkg/FR-2020-01-27/pdf/2020-01204.pdf"
+   },
+   {
+    "item": "Unmet needs allocation, Public Law 116-20",
+    "amount": 287530000,
+    "source_url": "https://www.govinfo.gov/content/pkg/FR-2020-01-27/pdf/2020-01204.pdf"
+   },
+   {
+    "item": "Total CDBG-DR allocation to State of Florida for DR-4399",
+    "amount": 735553000,
+    "source_url": "https://www.govinfo.gov/content/pkg/FR-2020-01-27/pdf/2020-01204.pdf"
+   },
+   {
+    "item": "Minimum to be spent in HUD 'most impacted and distressed' areas (Bay, Calhoun, Gulf, Jackson counties plus listed ZIPs)",
+    "amount": 588442000,
+    "source_url": "https://www.govinfo.gov/content/pkg/FR-2020-01-27/pdf/2020-01204.pdf"
+   },
+   {
+    "item": "HUD press release: CDBG-DR available to Florida for Michael unmet housing and infrastructure needs (rounded)",
+    "amount": 735000000,
+    "date": "2020-10-12",
+    "source_url": "https://archives.hud.gov/news/2020/pr20-171.cfm"
+   },
+   {
+    "item": "CDBG-MIT (mitigation) to Florida, separate program, statewide, not Michael-only",
+    "amount": 633000000,
+    "date": "2020-10-12",
+    "source_url": "https://archives.hud.gov/news/2020/pr20-171.cfm"
+   }
+  ],
+  "bay_awards": [
+   {
+    "program": "Rebuild Florida General Infrastructure Repair Program",
+    "recipient": "Bay County",
+    "amount": 1324601,
+    "project": "Replace and fill an existing stormwater culvert",
+    "announced": "2021-05-06",
+    "source_url": "https://flgov.com/2021/05/06/governor-ron-desantis-announces-111-million-in-infrastructure-awards-for-communities-impacted-by-hurricane-michael"
+   },
+   {
+    "program": "Rebuild Florida General Infrastructure Repair Program",
+    "recipient": "City of Panama City",
+    "amount": 18986552,
+    "project": "Replace damaged sanitary sewer, stormwater and water lines",
+    "announced": "2021-05-06",
+    "source_url": "https://flgov.com/2021/05/06/governor-ron-desantis-announces-111-million-in-infrastructure-awards-for-communities-impacted-by-hurricane-michael"
+   },
+   {
+    "program": "Rebuild Florida General Infrastructure Repair Program",
+    "recipient": "City of Panama City Beach",
+    "amount": 21330720,
+    "project": "Consolidate outfall pipes and reroute them from the beachfront into the Gulf",
+    "announced": "2021-05-06",
+    "source_url": "https://flgov.com/2021/05/06/governor-ron-desantis-announces-111-million-in-infrastructure-awards-for-communities-impacted-by-hurricane-michael"
+   },
+   {
+    "program": "Rebuild Florida General Infrastructure Repair Program",
+    "recipient": "City of Lynn Haven",
+    "amount": 5250000,
+    "project": "Rehabilitate water, sewer and stormwater lines on West 10th Street and repave roads",
+    "announced": "2021-05-06",
+    "source_url": "https://flgov.com/2021/05/06/governor-ron-desantis-announces-111-million-in-infrastructure-awards-for-communities-impacted-by-hurricane-michael"
+   },
+   {
+    "program": "Rebuild Florida General Infrastructure Repair Program",
+    "recipient": "City of Mexico Beach",
+    "amount": 5025000,
+    "project": "Dredge sand from the Gulf to renourish the beachfront",
+    "announced": "2021-05-06",
+    "source_url": "https://flgov.com/2021/05/06/governor-ron-desantis-announces-111-million-in-infrastructure-awards-for-communities-impacted-by-hurricane-michael"
+   },
+   {
+    "program": "Rebuild Florida General Infrastructure Repair Program",
+    "recipient": "City of Springfield",
+    "amount": 3132798,
+    "project": "Clear land and build a retention pond on city property",
+    "announced": "2021-05-06",
+    "source_url": "https://flgov.com/2021/05/06/governor-ron-desantis-announces-111-million-in-infrastructure-awards-for-communities-impacted-by-hurricane-michael"
+   },
+   {
+    "program": "Rebuild Florida General Infrastructure Repair Program",
+    "recipient": "City of Callaway",
+    "amount": 2883000,
+    "project": "Rehabilitate wastewater infrastructure for inflow/infiltration caused by storm deforestation",
+    "announced": "2021-05-06",
+    "source_url": "https://flgov.com/2021/05/06/governor-ron-desantis-announces-111-million-in-infrastructure-awards-for-communities-impacted-by-hurricane-michael"
+   },
+   {
+    "program": "Rebuild Florida General Infrastructure Repair Program",
+    "recipient": "City of Parker",
+    "amount": 763454,
+    "project": "Install and replace manholes, lift stations and stormwater infrastructure",
+    "announced": "2021-05-06",
+    "source_url": "https://flgov.com/2021/05/06/governor-ron-desantis-announces-111-million-in-infrastructure-awards-for-communities-impacted-by-hurricane-michael"
+   },
+   {
+    "program": "Rebuild Florida Hometown Revitalization Program",
+    "recipient": "City of Panama City",
+    "amount": 19000000,
+    "amount_is_rounded": true,
+    "project": "Not itemized in release (program covers streetscapes, downtown lighting, commercial structure repair, business repair/revenue-loss grants)",
+    "announced": "2021-08-04",
+    "source_url": "https://flgov.com/2021/08/04/governor-ron-desantis-announces-more-than-58-million-in-awards-to-communities-impacted-by-hurricane-michael-through-the-rebuild-florida-hometown-revitalization-program"
+   },
+   {
+    "program": "Rebuild Florida Hometown Revitalization Program",
+    "recipient": "City of Lynn Haven",
+    "amount": 5400000,
+    "amount_is_rounded": true,
+    "project": "Not itemized in release (program covers streetscapes, downtown lighting, commercial structure repair, business repair/revenue-loss grants)",
+    "announced": "2021-08-04",
+    "source_url": "https://flgov.com/2021/08/04/governor-ron-desantis-announces-more-than-58-million-in-awards-to-communities-impacted-by-hurricane-michael-through-the-rebuild-florida-hometown-revitalization-program"
+   },
+   {
+    "program": "Rebuild Florida Hometown Revitalization Program",
+    "recipient": "City of Springfield",
+    "amount": 5000000,
+    "amount_is_rounded": true,
+    "project": "Not itemized in release (program covers streetscapes, downtown lighting, commercial structure repair, business repair/revenue-loss grants)",
+    "announced": "2021-08-04",
+    "source_url": "https://flgov.com/2021/08/04/governor-ron-desantis-announces-more-than-58-million-in-awards-to-communities-impacted-by-hurricane-michael-through-the-rebuild-florida-hometown-revitalization-program"
+   },
+   {
+    "program": "Rebuild Florida Hometown Revitalization Program",
+    "recipient": "City of Panama City Beach",
+    "amount": 1400000,
+    "amount_is_rounded": true,
+    "project": "Not itemized in release (program covers streetscapes, downtown lighting, commercial structure repair, business repair/revenue-loss grants)",
+    "announced": "2021-08-04",
+    "source_url": "https://flgov.com/2021/08/04/governor-ron-desantis-announces-more-than-58-million-in-awards-to-communities-impacted-by-hurricane-michael-through-the-rebuild-florida-hometown-revitalization-program"
+   },
+   {
+    "program": "Rebuild Florida Hometown Revitalization Program",
+    "recipient": "City of Callaway",
+    "amount": 1300000,
+    "amount_is_rounded": true,
+    "project": "Not itemized in release (program covers streetscapes, downtown lighting, commercial structure repair, business repair/revenue-loss grants)",
+    "announced": "2021-08-04",
+    "source_url": "https://flgov.com/2021/08/04/governor-ron-desantis-announces-more-than-58-million-in-awards-to-communities-impacted-by-hurricane-michael-through-the-rebuild-florida-hometown-revitalization-program"
+   },
+   {
+    "program": "Rebuild Florida Hazard Mitigation Grant Match Program",
+    "recipient": "Bay County",
+    "amount": 2500000,
+    "amount_is_minimum": true,
+    "project": "Pave and add drainage to 22 unpaved roads (evacuation routes); release says 'more than $2.5 million'",
+    "announced": "2022-08-19",
+    "source_url": "https://www.flgov.com/eog/node/2845"
+   }
+  ],
+  "bay_infrastructure_repair_subtotal": {
+   "amount": 58696125,
+   "source_url": "https://flgov.com/2021/05/06/governor-ron-desantis-announces-111-million-in-infrastructure-awards-for-communities-impacted-by-hurricane-michael"
+  },
+  "bay_hometown_revitalization_subtotal_rounded": {
+   "amount": 32100000,
+   "source_url": "https://flgov.com/2021/08/04/governor-ron-desantis-announces-more-than-58-million-in-awards-to-communities-impacted-by-hurricane-michael-through-the-rebuild-florida-hometown-revitalization-program"
+  },
+  "program_totals_all_communities": [
+   {
+    "item": "Infrastructure Repair round announced 2021-05-06, all Michael communities",
+    "amount": 111000000,
+    "rounded": true,
+    "source_url": "https://flgov.com/2021/05/06/governor-ron-desantis-announces-111-million-in-infrastructure-awards-for-communities-impacted-by-hurricane-michael"
+   },
+   {
+    "item": "Hometown Revitalization, 18 communities in 7 counties",
+    "amount": 58000000,
+    "rounded": true,
+    "note": "'more than $58 million'",
+    "source_url": "https://flgov.com/2021/08/04/governor-ron-desantis-announces-more-than-58-million-in-awards-to-communities-impacted-by-hurricane-michael-through-the-rebuild-florida-hometown-revitalization-program"
+   }
+  ]
+ },
+ "other": {
+  "tyndall_afb": {
+   "note": "Federal military construction, separate from local-government recovery money; not a grant to Bay County governments.",
+   "figures": [
+    {
+     "item": "Air Force estimate of Tyndall rebuild (November 2018)",
+     "amount": 4900000000,
+     "source_url": "https://www.dvidshub.net/news/printable/456619"
+    },
+    {
+     "item": "Total Air Force recovery cost estimate per Col. Jeff Hawkins (July 2019)",
+     "amount": 4250000000,
+     "source_url": "https://www.newschannel5.com/news/national/tyndall-air-force-base-still-rebuilding-after-hurricane-michael"
+    },
+    {
+     "item": "Rebuild portion estimate per Col. Hawkins (July 2019)",
+     "amount": 2700000000,
+     "source_url": "https://www.newschannel5.com/news/national/tyndall-air-force-base-still-rebuilding-after-hurricane-michael"
+    },
+    {
+     "item": "Air Force commitment to spend over next five years (announced Jan 2019)",
+     "amount": 3000000000,
+     "source_url": "https://www.fox29.com/news/air-force-plans-to-spend-3-billion-to-rebuild-hurricane-ravaged-florida-base"
+    },
+    {
+     "item": "AFCAP task order for initial recovery, executed within 24 hours of storm",
+     "amount": 293000000,
+     "source_url": "https://www.dvidshub.net/news/printable/456619"
+    }
+   ]
+  },
+  "state_appropriations_2019_session": {
+   "note": "Florida 2019 legislative session; reported by News Herald via GovTech on 2019-05-07. Statewide Michael total was 'a little more than $240 million'.",
+   "statewide_total_approx": {
+    "amount": 240000000,
+    "source_url": "https://govtech.com/em/disaster/Florida-Passes-240m-in-Hurricane-Michael-aid-30M-for-Bay-County-Projects.html"
+   },
+   "items": [
+    {
+     "recipient": "Bay District Schools",
+     "amount": 12435000,
+     "source_url": "https://govtech.com/em/disaster/Florida-Passes-240m-in-Hurricane-Michael-aid-30M-for-Bay-County-Projects.html"
+    },
+    {
+     "recipient": "Bay County",
+     "amount": 9000000,
+     "detail": "$3.78M roads, $1.5M stormwater, $1.4M Sheriff storage facility/bunker, $1.35M building repairs, $550K emergency protective measures, $500K East Bay dredge",
+     "source_url": "https://govtech.com/em/disaster/Florida-Passes-240m-in-Hurricane-Michael-aid-30M-for-Bay-County-Projects.html"
+    },
+    {
+     "recipient": "Bay County - road repairs",
+     "amount": 3780000,
+     "source_url": "https://govtech.com/em/disaster/Florida-Passes-240m-in-Hurricane-Michael-aid-30M-for-Bay-County-Projects.html"
+    },
+    {
+     "recipient": "Bay County - stormwater repairs",
+     "amount": 1500000,
+     "source_url": "https://govtech.com/em/disaster/Florida-Passes-240m-in-Hurricane-Michael-aid-30M-for-Bay-County-Projects.html"
+    },
+    {
+     "recipient": "Bay County - Sheriff's Office storage facility",
+     "amount": 1400000,
+     "source_url": "https://govtech.com/em/disaster/Florida-Passes-240m-in-Hurricane-Michael-aid-30M-for-Bay-County-Projects.html"
+    },
+    {
+     "recipient": "Bay County - building repairs",
+     "amount": 1350000,
+     "source_url": "https://govtech.com/em/disaster/Florida-Passes-240m-in-Hurricane-Michael-aid-30M-for-Bay-County-Projects.html"
+    },
+    {
+     "recipient": "Bay County - emergency protective measures",
+     "amount": 550000,
+     "source_url": "https://govtech.com/em/disaster/Florida-Passes-240m-in-Hurricane-Michael-aid-30M-for-Bay-County-Projects.html"
+    },
+    {
+     "recipient": "East Bay dredge / navigational channel",
+     "amount": 500000,
+     "source_url": "https://govtech.com/em/disaster/Florida-Passes-240m-in-Hurricane-Michael-aid-30M-for-Bay-County-Projects.html"
+    },
+    {
+     "recipient": "City of Panama City",
+     "amount": 3000000,
+     "detail": "$2M Watson Bayou dredging, $500K Watson Bayou turning basin bulkhead, $500K roads/drainage",
+     "source_url": "https://govtech.com/em/disaster/Florida-Passes-240m-in-Hurricane-Michael-aid-30M-for-Bay-County-Projects.html"
+    },
+    {
+     "recipient": "City of Lynn Haven (road repairs)",
+     "amount": 1000000,
+     "source_url": "https://govtech.com/em/disaster/Florida-Passes-240m-in-Hurricane-Michael-aid-30M-for-Bay-County-Projects.html"
+    },
+    {
+     "recipient": "City of Callaway (stormwater and roads)",
+     "amount": 1000000,
+     "source_url": "https://govtech.com/em/disaster/Florida-Passes-240m-in-Hurricane-Michael-aid-30M-for-Bay-County-Projects.html"
+    },
+    {
+     "recipient": "City of Parker",
+     "amount": 290625,
+     "source_url": "https://govtech.com/em/disaster/Florida-Passes-240m-in-Hurricane-Michael-aid-30M-for-Bay-County-Projects.html"
+    },
+    {
+     "recipient": "Housing: Local Government Housing Trust Fund (deductibles, repairs, re-entry) - regional, not Bay-only",
+     "amount": 65000000,
+     "source_url": "https://govtech.com/em/disaster/Florida-Passes-240m-in-Hurricane-Michael-aid-30M-for-Bay-County-Projects.html"
+    },
+    {
+     "recipient": "Housing: State Housing Trust Fund gap financing for affordable housing - regional, not Bay-only",
+     "amount": 50000000,
+     "source_url": "https://govtech.com/em/disaster/Florida-Passes-240m-in-Hurricane-Michael-aid-30M-for-Bay-County-Projects.html"
+    },
+    {
+     "recipient": "Grant pool managed by state emergency management for local governments - regional, not Bay-only",
+     "amount": 25000000,
+     "source_url": "https://govtech.com/em/disaster/Florida-Passes-240m-in-Hurricane-Michael-aid-30M-for-Bay-County-Projects.html"
+    }
+   ]
+  },
+  "sba_and_nfip": {
+   "note": "FEMA 'Recovery at a Glance - Bay County' fact sheet, figures as of Jan. 4, 2019 (NFIP as of Dec. 14, 2018). Early snapshot, not final.",
+   "figures": [
+    {
+     "item": "SBA disaster loans approved, Bay County (6,909 homeowners/renters and 550 businesses)",
+     "amount": 395600000,
+     "source_url": "https://www.fema.gov/press-release/20210318/fact-sheet-recovery-glance-bay-county-1"
+    },
+    {
+     "item": "NFIP flood insurance claims paid, Bay County (estimate)",
+     "amount": 65700000,
+     "source_url": "https://www.fema.gov/press-release/20210318/fact-sheet-recovery-glance-bay-county-1"
+    },
+    {
+     "item": "FEMA individual/household grants approved, Bay County (19,146 households) at that date",
+     "amount": 85300000,
+     "source_url": "https://www.fema.gov/press-release/20210318/fact-sheet-recovery-glance-bay-county-1"
+    }
+   ]
+  }
+ },
+ "debris_contracts": [
+  {
+   "government": "City of Panama City",
+   "contractor": "Crowder Gulf",
+   "amount": 94600000,
+   "amount_type": "approximate total city spending to remove all Hurricane Michael debris (final $2.1M payment approved Aug 2021)",
+   "date": "2021-09-01",
+   "source_url": "https://weartv.com/news/nation-world/florida-city-makes-last-hurricane-michael-debris-payment"
+  },
+  {
+   "government": "City of Panama City",
+   "contractor": "Crowder Gulf",
+   "amount": 2100000,
+   "amount_type": "final debris-removal payment approved by commission",
+   "date": "2021-08-31",
+   "source_url": "https://weartv.com/news/nation-world/florida-city-makes-last-hurricane-michael-debris-payment"
+  },
+  {
+   "government": "Bay County (incl. work for Callaway, Springfield, Lynn Haven)",
+   "contractor": "AshBritt Environmental (prepositioned contract)",
+   "amount": null,
+   "amount_type": "no dollar amount published in source; 750,000 cubic yards reported as of Nov 5, 2018",
+   "date": "2018-11-05",
+   "source_url": "https://ashbritt.com/2018/11/05/ashbritt-makes-significant-debris-recovery-progress-post-hurricane-michael/"
+  },
+  {
+   "government": "City of Lynn Haven",
+   "contractor": "not named",
+   "amount": null,
+   "amount_type": "mayor projected a $30M-$34M debris hauling bill (range, not a contract amount)",
+   "low": 30000000,
+   "high": 34000000,
+   "date": "2019-01-25",
+   "source_url": "https://insurancenewsnet.com/oarticle/debris-hauling-cost-exceeds-lynn-havens-total-annual-budget-by-10-million"
+  },
+  {
+   "government": "City of Lynn Haven",
+   "contractor": "Erosion Control Specialists (ECS), owner David White",
+   "amount": 1800000,
+   "amount_type": "amount billed to and paid by city for trash pick-up the indictment alleges was unnecessary ($300/hour/crew), per DOJ allegation",
+   "date": "2020-08-19",
+   "source_url": "https://www.justice.gov/usao-ndfl/pr/lynn-haven-mayor-and-city-attorney-indicted-corruption-and-fraud-charges-stemming"
+  },
+  {
+   "government": "City of Lynn Haven",
+   "contractor": "Erosion Control Specialists (ECS)",
+   "amount": 5000000,
+   "amount_type": "approximate amount DOJ says city was defrauded of via fraudulent invoices (allegation at indictment)",
+   "date": "2019-11-20",
+   "source_url": "https://www.justice.gov/usao-ndfl/pr/former-lynn-haven-city-manager-community-services-director-and-three-business"
+  },
+  {
+   "government": "City of Lynn Haven",
+   "contractor": "Phoenix Construction Services / James Finch ('Company B' in 2020 release)",
+   "amount": 2000000,
+   "amount_type": "'more than $2 million' in vegetative debris disposal fees paid by city (per DOJ release)",
+   "date": "2021-03-18",
+   "source_url": "https://www.justice.gov/usao-ndfl/pr/former-lynn-haven-city-commissioner-and-developer-charged-superseding-indictment-0"
+  }
+ ],
+ "debris_fema_pa_category_a_by_government": [
+  {
+   "government": "Bay County",
+   "fema_pa_category_A_projects": 8,
+   "fema_pa_category_A_federal_obligated": 230148975.8,
+   "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County' and damageCategoryCode eq 'A'"
+  },
+  {
+   "government": "Panama City, City of",
+   "fema_pa_category_A_projects": 5,
+   "fema_pa_category_A_federal_obligated": 76852187.13,
+   "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County' and damageCategoryCode eq 'A'"
+  },
+  {
+   "government": "Mexico Beach, City Of",
+   "fema_pa_category_A_projects": 5,
+   "fema_pa_category_A_federal_obligated": 56172531.39,
+   "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County' and damageCategoryCode eq 'A'"
+  },
+  {
+   "government": "Lynn Haven, City of",
+   "fema_pa_category_A_projects": 3,
+   "fema_pa_category_A_federal_obligated": 21420348.54,
+   "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County' and damageCategoryCode eq 'A'"
+  },
+  {
+   "government": "Callaway, City of",
+   "fema_pa_category_A_projects": 3,
+   "fema_pa_category_A_federal_obligated": 20291460.1,
+   "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County' and damageCategoryCode eq 'A'"
+  },
+  {
+   "government": "Springfield, City of",
+   "fema_pa_category_A_projects": 3,
+   "fema_pa_category_A_federal_obligated": 12599488.69,
+   "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County' and damageCategoryCode eq 'A'"
+  },
+  {
+   "government": "Parker, City Of",
+   "fema_pa_category_A_projects": 2,
+   "fema_pa_category_A_federal_obligated": 8428810.57,
+   "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County' and damageCategoryCode eq 'A'"
+  },
+  {
+   "government": "Panama City Beach, City of",
+   "fema_pa_category_A_projects": 2,
+   "fema_pa_category_A_federal_obligated": 1169509.32,
+   "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County' and damageCategoryCode eq 'A'"
+  },
+  {
+   "government": "Chemical Addictions Recovery Effort, Inc. (CARE)",
+   "fema_pa_category_A_projects": 2,
+   "fema_pa_category_A_federal_obligated": 168779.98,
+   "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County' and damageCategoryCode eq 'A'"
+  },
+  {
+   "government": "Panama City Housing Authority",
+   "fema_pa_category_A_projects": 2,
+   "fema_pa_category_A_federal_obligated": 142768.79,
+   "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County' and damageCategoryCode eq 'A'"
+  },
+  {
+   "government": "Rising Leaders Academy",
+   "fema_pa_category_A_projects": 1,
+   "fema_pa_category_A_federal_obligated": 71704.76,
+   "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County' and damageCategoryCode eq 'A'"
+  },
+  {
+   "government": "Northstar Church",
+   "fema_pa_category_A_projects": 1,
+   "fema_pa_category_A_federal_obligated": 38472.99,
+   "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County' and damageCategoryCode eq 'A'"
+  },
+  {
+   "government": "Gulf Coast Children's Advocacy Center",
+   "fema_pa_category_A_projects": 2,
+   "fema_pa_category_A_federal_obligated": 36259.5,
+   "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County' and damageCategoryCode eq 'A'"
+  },
+  {
+   "government": "Community Charter Academy",
+   "fema_pa_category_A_projects": 1,
+   "fema_pa_category_A_federal_obligated": 19875.0,
+   "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County' and damageCategoryCode eq 'A'"
+  },
+  {
+   "government": "Anchorage Children's Home of Bay County, Inc.",
+   "fema_pa_category_A_projects": 1,
+   "fema_pa_category_A_federal_obligated": 17909.26,
+   "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County' and damageCategoryCode eq 'A'"
+  },
+  {
+   "government": "Unitarian Universalist Fellowship Church",
+   "fema_pa_category_A_projects": 2,
+   "fema_pa_category_A_federal_obligated": 17900.0,
+   "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County' and damageCategoryCode eq 'A'"
+  },
+  {
+   "government": "Fellowship Baptist Church",
+   "fema_pa_category_A_projects": 1,
+   "fema_pa_category_A_federal_obligated": 13884.3,
+   "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County' and damageCategoryCode eq 'A'"
+  },
+  {
+   "government": "Trinity Holiness Church",
+   "fema_pa_category_A_projects": 1,
+   "fema_pa_category_A_federal_obligated": 9808.82,
+   "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County' and damageCategoryCode eq 'A'"
+  },
+  {
+   "government": "Chautauqua Charter School",
+   "fema_pa_category_A_projects": 1,
+   "fema_pa_category_A_federal_obligated": 7500.0,
+   "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County' and damageCategoryCode eq 'A'"
+  },
+  {
+   "government": "Rocky Mountain Human Services Coalition",
+   "fema_pa_category_A_projects": 1,
+   "fema_pa_category_A_federal_obligated": 5444.92,
+   "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County' and damageCategoryCode eq 'A'"
+  },
+  {
+   "government": "St. Luke Missionary Baptist Church",
+   "fema_pa_category_A_projects": 1,
+   "fema_pa_category_A_federal_obligated": 5000.0,
+   "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County' and damageCategoryCode eq 'A'"
+  },
+  {
+   "government": "Panama City Fellowship Church of Praise",
+   "fema_pa_category_A_projects": 1,
+   "fema_pa_category_A_federal_obligated": 4500.0,
+   "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County' and damageCategoryCode eq 'A'"
+  },
+  {
+   "government": "Bethesda Baptist Church",
+   "fema_pa_category_A_projects": 1,
+   "fema_pa_category_A_federal_obligated": 3690.0,
+   "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County' and damageCategoryCode eq 'A'"
+  },
+  {
+   "government": "Hiland Park United Methodist Church",
+   "fema_pa_category_A_projects": 1,
+   "fema_pa_category_A_federal_obligated": 3420.0,
+   "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County' and damageCategoryCode eq 'A'"
+  },
+  {
+   "government": "Wainwright Veterans of Foreign Wars Post 2185",
+   "fema_pa_category_A_projects": 1,
+   "fema_pa_category_A_federal_obligated": 2902.64,
+   "source_url": "https://www.fema.gov/api/open/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County' and damageCategoryCode eq 'A'"
+  }
+ ],
+ "lynn_haven_case": [
+  {
+   "date": "2018-10-16",
+   "event": "Lynn Haven adopted a local state of emergency after Hurricane Michael, delegating emergency contracting powers to the mayor or her designee; city entered an emergency agreement with Erosion Control Specialists (ECS) for clean-up (as described in DOJ release).",
+   "source_url": "https://www.justice.gov/usao-ndfl/pr/lynn-haven-mayor-and-city-attorney-indicted-corruption-and-fraud-charges-stemming"
+  },
+  {
+   "date": "2019-11-20",
+   "event": "35-count indictment announced against former City Manager Michael Edward White, Community Services Director David Wayne Horton, ECS owner David Mitchelle White, Greenleaf Lawn Care owner Joshua Daniel Anderson, and Shannon Delores Rodriguez. DOJ alleged about $5 million in fraudulent invoices; examples included trash-pickup invoices of $332,387.76 and $479,020.68.",
+   "source_url": "https://www.justice.gov/usao-ndfl/pr/former-lynn-haven-city-manager-community-services-director-and-three-business"
+  },
+  {
+   "date": "2020-08-19",
+   "event": "DOJ announced a 64-count indictment (returned Aug 18) of Mayor Margo Anderson and City Attorney Joseph Adam Albritton; alleged $1.8M billed for unnecessary ECS trash pickup, >$48,000 and $25,000 in private work at officials' homes billed as public work, and a $106,000 motorhome from 'Company B'. The release said all five 2019 defendants had pleaded guilty.",
+   "source_url": "https://www.justice.gov/usao-ndfl/pr/lynn-haven-mayor-and-city-attorney-indicted-corruption-and-fraud-charges-stemming"
+  },
+  {
+   "date": "2021-03-18",
+   "event": "Superseding indictment charged developer David James Finch (Phoenix Construction Services) and former Commissioner Antonius Barnes; release says Lynn Haven paid Finch more than $2M in vegetative debris disposal fees.",
+   "source_url": "https://www.justice.gov/usao-ndfl/pr/former-lynn-haven-city-commissioner-and-developer-charged-superseding-indictment-0"
+  },
+  {
+   "date": "2021-09-24",
+   "event": "Albritton pleaded guilty to wire fraud and honest services wire fraud; other charges dropped.",
+   "source_url": "https://www.wjhg.com/2021/09/24/former-lynn-haven-city-attorney-pleas-guilty-fraud-charges"
+  },
+  {
+   "date": "2021-10-07",
+   "event": "Barnes pleaded guilty to making a false statement to a federally insured institution; other charges to be dropped.",
+   "source_url": "https://www.wjhg.com/2021/10/07/former-lynn-haven-commissioner-pleads-guilty-corruption-investigation"
+  },
+  {
+   "date": "2023-02",
+   "event": "Anderson's plea agreement reduced charges to one felony count of lying to the FBI (as reported).",
+   "source_url": "https://www.wjhg.com/2023/06/05/margo-anderson-sentenced-city-corruption-investigation"
+  },
+  {
+   "date": "2023-03",
+   "event": "Finch's first trial ended in a mistrial (as reported).",
+   "source_url": "https://www.wjhg.com/2023/06/05/margo-anderson-sentenced-city-corruption-investigation"
+  },
+  {
+   "date": "2023-05-08",
+   "event": "Sentencing reported: Michael White and David White 42 months in prison each; Josh Anderson and David Horton one year probation including 9 months house arrest; Shannon Rodriguez one year probation. Pleas: M. White 4 counts (conspiracy to commit wire fraud, wire fraud, 2 honest services wire fraud); D. White conspiracy, 2 wire fraud, false claim; Horton wire fraud; J. Anderson wire fraud; Rodriguez conspiracy and wire fraud.",
+   "source_url": "https://digital-release.mypanhandle.com/news/lynn-haven-corruption-case/two-sentenced-to-prison-in-lynn-haven-corruption-case/"
+  },
+  {
+   "date": "2023-06-05",
+   "event": "Margo Anderson sentenced to one month in prison, one year probation, 100 hours community service.",
+   "source_url": "https://www.wjhg.com/2023/06/05/margo-anderson-sentenced-city-corruption-investigation"
+  },
+  {
+   "date": "2023-06",
+   "event": "Antonius Barnes sentenced (reported later as 45 days in prison).",
+   "source_url": "https://digital-release.mypanhandle.com/?p=1661660"
+  },
+  {
+   "date": "2023-07-14",
+   "event": "Restitution reported: David White (ECS owner) ordered to pay $4,745,999; Michael White $55,000; David Horton $5,000. Margo Anderson not ordered to pay restitution.",
+   "amounts": {
+    "david_white": 4745999,
+    "michael_white": 55000,
+    "david_horton": 5000
+   },
+   "source_url": "https://digital-release.mypanhandle.com/news/lynn-haven-corruption-case/lynn-haven-corruption-defendants-ordered-to-pay-restitution/amp/"
+  },
+  {
+   "date": "2023-10-26",
+   "event": "Jury found James Finch not guilty on a federal program bribery charge in his retrial (alleged $5,000 check to Barnes, Dec 4, 2017).",
+   "source_url": "https://www.wjhg.com/2023/10/26/verdict-reached-james-finch-trial/"
+  },
+  {
+   "date": "2024-02-08",
+   "event": "Albritton, the last defendant, sentenced to one year probation and $31,000 restitution. Reported that every defendant except Finch pleaded guilty to at least one felony.",
+   "amounts": {
+    "albritton_restitution": 31000
+   },
+   "source_url": "https://digital-release.mypanhandle.com/?p=1661660"
+  }
+ ],
+ "notes": [
+  "DR-4399-FL is confirmed as Hurricane Michael; Bay County was designated for Individual and Public Assistance.",
+  "FEMA has obligated $987,937,684.83 in federal Public Assistance across 765 projects for 79 applicants in Bay County. The project-level and applicant-summary datasets match to the cent. OpenFEMA's 'totalObligated' equals the federal share for every Bay project; 'projectAmount' ($1,124,539,049.66) is the eligible project cost before the non-federal share.",
+  "Debris removal (Category A) is the largest category, about $427.7M federal, followed by buildings (E) and emergency protective measures (B).",
+  "Bay County government is the largest applicant (~$319M), then Panama City (~$151M), the School Board (~$135M), Mexico Beach (~$106M), Bay Medical Center trustees (~$59M) and Lynn Haven (~$44.5M).",
+  "445 projects (~$852M federal) are coded 'Statewide' (mostly state agencies like FDOT). Some of that money was spent in Bay County, but OpenFEMA does not say where, so it is not counted in Bay totals.",
+  "FEMA housing assistance (IHP) approved for Bay County homeowners and renters adds up to about $101.3M (owners $58.9M, renters $42.4M). The data is grouped by ZIP and city, and a few rows list cities outside the county, which is how FEMA reports them.",
+  "HUD set Florida's CDBG-DR allocation for Michael at $735,553,000, with at least $588,442,000 required for the most impacted areas, which include Bay County.",
+  "Tyndall AFB rebuild figures are Air Force military construction estimates, not money to local governments. They are kept separate.",
+  "The Lynn Haven case facts come from DOJ press releases (indictment allegations) and local TV reporting of pleas, sentences and restitution. An indictment is only an allegation. James Finch was acquitted."
+ ],
+ "gaps": [
+  "OpenFEMA PA data has no street address or coordinates for projects, only county and applicant. Location is limited to applicant and project title.",
+  "Applicant names come from the PublicAssistanceApplicants dataset. Bay District Schools appears as 'School Board of Bay County Florida'. Bay County utilities appear inside city or county applicants, not as separate utilities.",
+  "FEMA Hazard Mitigation Grant Program (HMGP) project-level awards for Bay County were not pulled. The disaster-wide HMGP total is included only from FemaWebDisasterSummaries.",
+  "CDBG-DR: no full DEO/FloridaCommerce list of every Michael subrecipient and amount was retrieved. Housing program (Rebuild Florida Hurricane Michael Housing Repair) spending in Bay County, later infrastructure rounds, and current drawdown or expenditure figures from HUD DRGR quarterly reports are missing. Hometown Revitalization amounts are rounded as published.",
+  "SBA loan, NFIP and early IHP figures for Bay are a January 2019 FEMA snapshot. Final SBA totals by county were not found.",
+  "Debris contracts: Bay County's AshBritt contract value, and the debris contractors and contract amounts for Lynn Haven, Callaway, Springfield, Parker and Mexico Beach, were not found in primary records. FEMA Category A obligations per government are included as a proxy for debris spending that was reimbursed.",
+  "2019 state appropriations come from a news summary, not the General Appropriations Act line items. The $115M housing and $25M grant pool are regional, not Bay-only.",
+  "Lynn Haven case: court docket numbers and original judgment documents (PACER) were not pulled. Barnes's exact sentencing date and David White's sentence are from news reports. One Feb 2024 article calls a defendant 'David Mickey', which appears to be ECS owner David 'Mickey' White, and the May 2023 report names him David White.",
+  "OpenFEMA data was refreshed through 2026; obligations can still change as projects close out."
+ ]
+}

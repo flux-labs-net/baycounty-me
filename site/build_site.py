@@ -10,6 +10,7 @@ sys.path.insert(0, ROOT)
 from tax_page import tax_page
 from amend_page import amend_page
 from addr_page import addr_page
+from michael_page import michael_page
 OUT = os.path.join(ROOT, 'public')
 SITE = 'BayCounty.me'
 DOMAIN = 'https://baycounty.me'
@@ -23,6 +24,8 @@ MENU = [
          'desc': 'Where the six redevelopment agencies spend tax increment'},
         {'label': 'Tax Dollars', 'href': '/public-money/tax-dollars',
          'desc': 'Your bill, slice by slice, and where each government spends'},
+        {'label': 'Hurricane Michael', 'href': '/public-money/hurricane-michael',
+         'desc': 'FEMA, HUD and state recovery money: who got it and for what'},
         {'label': 'Amendment 3', 'href': '/public-money/amendment-3',
          'desc': 'What the property tax amendment would change in Bay County'},
     ]},
@@ -475,6 +478,7 @@ PAGES = [
      'Estimate your Bay County property tax bill and see who gets each slice, plus where the county, schools and every city get their money and what they spend it on.', lambda: tax_page(OUT)),
     ('/public-money/amendment-3', 'Amendment 3: what changes in Bay County',
      'What Florida\'s 2026 Amendment 3 would do to Bay County property tax bills and local budgets, using the state\'s own estimates. Before-and-after calculator; both sides\' arguments; no position taken.', lambda: amend_page(OUT)),
+    ('/public-money/hurricane-michael', 'Where the Hurricane Michael money went', 'FEMA, HUD and state recovery money in Bay County after Hurricane Michael: every FEMA project, household aid by city, Rebuild Florida awards, debris costs and the Lynn Haven case.', lambda: michael_page(OUT)),
     ('/glossary', 'Plain-English guide', 'Every term on BayCounty.me explained simply: CRAs, tax increment, millage, homestead exemptions, budgets and more.', glossary_page),
     ('/about', 'About', 'What BayCounty.me is, where its information comes from, and how to send a correction.', about_page),
 ]
