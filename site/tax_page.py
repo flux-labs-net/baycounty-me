@@ -52,6 +52,11 @@ DISTRICTS = [
     ('unincorporated - beach area', 'Unincorporated beach area (outside PCB city limits)'),
 ]
 
+# second homestead exemption (non-school, on assessed value above $50,000): $25,000, CPI-indexed from tax year 2025
+# Source: FL DOR, Additional Homestead Exemption Adjustment (revised Jan 2026)
+SECOND_HX = {2020: 25000, 2021: 25000, 2022: 25000, 2023: 25000, 2024: 25000, 2025: 25722, 2026: 26411}
+DOR_CPI = 'https://www.floridarevenue.com/property/Documents/cpi_homestead_exemption.pdf'
+
 GOV_ORDER = ['bay_county', 'bay_district_schools', 'panama_city', 'panama_city_beach', 'lynn_haven',
              'callaway', 'springfield', 'parker', 'mexico_beach']
 GOV_SHORT = {'bay_county': 'Bay County', 'bay_district_schools': 'Schools', 'panama_city': 'Panama City',
@@ -179,7 +184,7 @@ def build_data():
         govs.append(g)
 
     return {
-        'years': YEARS, 'fy': FY, 'groups': GROUPS, 'auth': auth, 'districts': districts,
+        'years': YEARS, 'fy': FY, 'second': [SECOND_HX[y] for y in YEARS], 'groups': GROUPS, 'auth': auth, 'districts': districts,
         'levy': levy, 'bars': bars, 'govs': govs,
         'gaps': GAPS,
     }
@@ -270,7 +275,7 @@ def tax_page(out_dir):
     <div class="sec-hd"><h2 id="src-h">Sources and gaps</h2></div>
     <p>Tax rates and levies come from the Florida Department of Revenue: <a href="{DOR_T1}" target="_blank" rel="noopener">2025 Comparison of Taxes Levied, Bay County</a> and the <a href="{DOR_TACD}" target="_blank" rel="noopener">2025 Bay tax district rate report</a>, matched against the <a href="{TC_RATES}" target="_blank" rel="noopener">Bay County Tax Collector's 2025 rates</a>. Earlier years come from the same DOR tables for each year. Every district's rates add up to DOR's published total.</p>
     <p>FY2026 budgets come from each government's adopted budget, linked under each government above. Audited actuals for FY2021 to FY2024 come from the Florida Office of Economic and Demographic Research (<a href="{EDR_C}" target="_blank" rel="noopener">county</a> and <a href="{EDR_M}" target="_blank" rel="noopener">city</a> reports), which compiles each government's {T('audit', 'annual financial report')}. They cover operating funds, including utilities, and leave out borrowing and transfers between a government's own accounts so nothing is counted twice.</p>
-    <p>The calculator applies each rate to your taxable value. With a homestead, the first $25,000 comes off every tax, and a second $25,000 (on value between $50,000 and $75,000) comes off everything except school taxes. It does not include other exemptions or non-ad valorem fees.</p>
+    <p>The calculator applies each rate to your taxable value. With a homestead, the first $25,000 comes off every tax, and a second amount (on value above $50,000) comes off everything except school taxes. That second amount was $25,000 through 2024 and is now adjusted for inflation: <a href="{DOR_CPI}" target="_blank" rel="noopener">$25,722 for FY2026 bills</a>. It does not include other exemptions or non-ad valorem fees.</p>
     <details class="gaps"><summary>What we couldn't find ({len(d['gaps'])})</summary><ul>{''.join(f'<li>{g}</li>' for g in d['gaps'])}</ul></details>
   </section>
   <div class="tt" id="tt" role="tooltip" hidden></div>

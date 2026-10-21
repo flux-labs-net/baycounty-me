@@ -1,0 +1,122 @@
+{
+ "source": "Florida Revenue Estimating Conference, CS/HJR 1F impact, adopted July 10, 2026",
+ "source_url": "https://edr.state.fl.us/Content/conferences/revenueimpact/archives/2026F/_pdf/impact0710.pdf",
+ "note": "Dollars are revenue change (negative = loss) by state fiscal year label, e.g. FY2028 = 2027-28 = 2027 tax roll. Board of County Commissioners includes county-dependent districts (fire MSTU, mosquito control). School impact is zero.",
+ "statewide": {
+  "FY2028": -4929543878,
+  "FY2029": -8714492521,
+  "FY2030": -9647862749,
+  "FY2031": -10710157749,
+  "FY2032": -11834731658
+ },
+ "bay": [
+  {
+   "type": "Board of County Commissioners",
+   "name": "Bay County",
+   "impact": {
+    "FY2027": 0,
+    "FY2028": -21456254,
+    "FY2029": -34951396,
+    "FY2030": -35415219,
+    "FY2031": -35568776,
+    "FY2032": -35443810
+   }
+  },
+  {
+   "type": "Independent Special District",
+   "name": "All ISDs in Bay",
+   "impact": {
+    "FY2027": 0,
+    "FY2028": -201530,
+    "FY2029": -341089,
+    "FY2030": -352081,
+    "FY2031": -359990,
+    "FY2032": -365412
+   }
+  },
+  {
+   "type": "Municipality",
+   "name": "Callaway",
+   "impact": {
+    "FY2027": 0,
+    "FY2028": -598387,
+    "FY2029": -861816,
+    "FY2030": -860137,
+    "FY2031": -850339,
+    "FY2032": -832808
+   }
+  },
+  {
+   "type": "Municipality",
+   "name": "Lynn Haven",
+   "impact": {
+    "FY2027": 0,
+    "FY2028": -1596668,
+    "FY2029": -2570421,
+    "FY2030": -2549825,
+    "FY2031": -2508064,
+    "FY2032": -2447909
+   }
+  },
+  {
+   "type": "Municipality",
+   "name": "Mexico Beach",
+   "impact": {
+    "FY2027": 0,
+    "FY2028": -272952,
+    "FY2029": -499972,
+    "FY2030": -596563,
+    "FY2031": -694956,
+    "FY2032": -794765
+   }
+  },
+  {
+   "type": "Municipality",
+   "name": "Panama City",
+   "impact": {
+    "FY2027": 0,
+    "FY2028": -2426616,
+    "FY2029": -3743903,
+    "FY2030": -3749738,
+    "FY2031": -3709591,
+    "FY2032": -3618649
+   }
+  },
+  {
+   "type": "Municipality",
+   "name": "Panama City Beach",
+   "impact": {
+    "FY2027": 0,
+    "FY2028": 0,
+    "FY2029": 0,
+    "FY2030": 0,
+    "FY2031": 0,
+    "FY2032": 0
+   }
+  },
+  {
+   "type": "Municipality",
+   "name": "Parker",
+   "impact": {
+    "FY2027": 0,
+    "FY2028": -164874,
+    "FY2029": -236612,
+    "FY2030": -236159,
+    "FY2031": -233697,
+    "FY2032": -229229
+   }
+  },
+  {
+   "type": "Municipality",
+   "name": "Springfield",
+   "impact": {
+    "FY2027": 0,
+    "FY2028": -383959,
+    "FY2029": -504531,
+    "FY2030": -504166,
+    "FY2031": -498976,
+    "FY2032": -490007
+   }
+  }
+ ]
+}

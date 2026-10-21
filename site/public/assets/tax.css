@@ -145,3 +145,32 @@
   .vbars{height:150px}.vbars.stacked{height:190px}
   .money input{font-size:10pt}
 }
+
+/* Amendment 3 page */
+.neutral{margin:10px 0 0;font-size:.86rem;color:var(--muted);border-left:3px solid var(--line);padding-left:10px;max-width:66ch}
+.seg-ctl{border:0;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
+.seg-ctl legend{font-size:.88rem;font-weight:500;margin-bottom:6px;padding:0}
+.seg-ctl label{display:flex;gap:10px;align-items:flex-start;font-size:.88rem;padding:9px 12px;border:1px solid var(--line);border-radius:10px;cursor:pointer;background:var(--bg)}
+.seg-ctl label:has(input:checked){border-color:var(--blue);background:color-mix(in srgb,var(--blue) 8%,var(--surface))}
+.seg-ctl input{accent-color:var(--blue);margin-top:3px;flex:none}
+.cmp{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.cmp-col{display:flex;flex-direction:column;gap:4px;background:var(--sunken);border-radius:10px;padding:12px 14px;min-width:0;outline:none}
+.cmp-col:focus-visible{outline:2px solid var(--blue)}
+.bill-v.sm{font-size:clamp(1.4rem,3vw,1.9rem)}
+.cmp-save{font-size:.8rem;color:var(--muted);min-height:1.2em}
+.cmp-bar{display:flex;gap:2px;height:10px;margin-top:6px}
+.cmp-bar span{display:block;height:100%;border-radius:2px}
+.leg.mini{grid-column:1/-1;grid-template-columns:repeat(auto-fill,minmax(180px,1fr))}
+.leg.mini li{grid-template-columns:12px minmax(0,1fr)}
+@media (max-width:520px){.cmp{grid-template-columns:1fr}}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media (max-width:900px){.cards{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:10px;font-size:.9rem}
+.card p{margin:0}
+a.src{font-size:.78rem;color:var(--muted);text-decoration:underline;text-decoration-color:var(--line);white-space:nowrap}
+a.src:hover{color:var(--blue)}
+.args .arg{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px;display:flex;flex-direction:column;gap:8px}
+.args .who{margin:0;font-size:.82rem;color:var(--muted)}
+.args ul,.plain{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:8px;font-size:.92rem}
+.srcs{margin:0;padding-left:18px;font-size:.84rem;display:flex;flex-direction:column;gap:4px}
+@media print{.seg-ctl label{border:0;padding:2px 0}.seg-ctl label:not(:has(input:checked)){display:none}.cards{grid-template-columns:1fr}}

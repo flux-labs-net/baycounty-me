@@ -38,9 +38,9 @@ sel.innerHTML = D.districts.map(d => `<option value="${esc(d.id)}">${esc(d.label
 try { const s = localStorage.getItem('taxDist'); if (s && D.districts.some(d => d.id === s)) sel.value = s; } catch (e) {}
 const valIn = $('cVal'), home = $('cHome');
 
-function taxable(v, homestead) {
+function taxable(v, homestead, yi = L) {
   if (!homestead) return {school: v, other: v};
-  const first = Math.min(v, 25000), second = Math.max(0, Math.min(v - 50000, 25000));
+  const first = Math.min(v, 25000), second = Math.max(0, Math.min(v - 50000, D.second[yi]));
   return {school: Math.max(0, v - first), other: Math.max(0, v - first - second)};
 }
 function billAt(dist, yi, tv) {
@@ -68,7 +68,7 @@ function calc() {
     + (dist.id === 'Panama City Beach' || dist.id.startsWith('unincorporated') ? `<tr class="zero"><th scope="row"><i class="dot"></i>${dist.id === 'Panama City Beach' ? 'City of Panama City Beach' : 'No city'}</th><td class="num">0</td><td class="num">—</td><td class="num">$0</td><td class="num">${dist.id === 'Panama City Beach' ? 'No city property tax' : 'County provides fire service'}</td></tr>` : '');
   tb.tFoot.innerHTML = `<tr><th scope="row">Total</th><td class="num">${mills(dist.total[L])}</td><td></td><td class="num">${usd(tot)}</td><td class="num">100%</td></tr>`;
   // same home, each year's rates
-  const yrs = D.years.map((_, i) => { const r = billAt(dist, i, tv); return {fy: D.fy[i], tot: r.reduce((a, x) => a + x.amt, 0), rows: r}; });
+  const yrs = D.years.map((_, i) => { const r = billAt(dist, i, taxable(v, home.checked, i)); return {fy: D.fy[i], tot: r.reduce((a, x) => a + x.amt, 0), rows: r}; });
   const max = Math.max(...yrs.map(y => y.tot), 1);
   const tr = $('bTrend');
   tr.innerHTML = yrs.map((y, i) => `<div class="vb" tabindex="0" data-tip="${i}"><span class="vb-v">${usd(y.tot)}</span><span class="vb-bar" style="height:${y.tot / max * 100}%;background:var(--s1)"></span><span class="vb-x">${y.fy}</span></div>`).join('');

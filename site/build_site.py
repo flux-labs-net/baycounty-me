@@ -8,6 +8,7 @@ import json, os, re, shutil, base64, sys
 ROOT = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, ROOT)
 from tax_page import tax_page
+from amend_page import amend_page
 OUT = os.path.join(ROOT, 'public')
 SITE = 'BayCounty.me'
 DOMAIN = 'https://baycounty.me'
@@ -20,6 +21,8 @@ MENU = [
          'desc': 'Where the six redevelopment agencies spend tax increment'},
         {'label': 'Tax Dollars', 'href': '/public-money/tax-dollars',
          'desc': 'Your bill, slice by slice, and where each government spends'},
+        {'label': 'Amendment 3', 'href': '/public-money/amendment-3',
+         'desc': 'What the property tax amendment would change in Bay County'},
     ]},
     {'label': 'Glossary', 'href': '/glossary'},
     {'label': 'About', 'href': '/about'},
@@ -462,6 +465,8 @@ PAGES = [
      'Interactive map and ledger of Bay County, Florida\'s six Community Redevelopment Agencies: who was paid, where, and for what.', cra_page),
     ('/public-money/tax-dollars', 'How your tax dollars are allocated',
      'Estimate your Bay County property tax bill and see who gets each slice, plus where the county, schools and every city get their money and what they spend it on.', lambda: tax_page(OUT)),
+    ('/public-money/amendment-3', 'Amendment 3: what changes in Bay County',
+     'What Florida\'s 2026 Amendment 3 would do to Bay County property tax bills and local budgets, using the state\'s own estimates. Before-and-after calculator; both sides\' arguments; no position taken.', lambda: amend_page(OUT)),
     ('/glossary', 'Plain-English guide', 'Every term on BayCounty.me explained simply: CRAs, tax increment, millage, homestead exemptions, budgets and more.', glossary_page),
     ('/about', 'About', 'What BayCounty.me is, where its information comes from, and how to send a correction.', about_page),
 ]
