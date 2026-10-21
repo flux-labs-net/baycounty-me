@@ -1,0 +1,423 @@
+{
+  "as_of": "2026-10-20",
+  "notes": [
+    "Fiscal year 2026 runs Oct 1, 2025 to Sept 30, 2026 (school district: July 1, 2025 to June 30, 2026).",
+    "property_tax_dollars = gross taxes levied at the adopted millage, from the Florida Department of Revenue 2025 'Comparison of Levies' Table 1 for Bay County. Budgeted ad valorem revenue (usually about 95% of the levy) appears separately in gf_revenues where available.",
+    "Unless a 'status' field says otherwise, figures are from adopted/final documents. All dollar figures are nominal. Group totals marked 'grouped' were summed by the researcher from line items in the cited source; nothing was estimated."
+  ],
+  "governments": [
+    {
+      "id": "bay_county",
+      "name": "Bay County Board of County Commissioners",
+      "fy2026": {
+        "status": "adopted at final hearing Sept 16, 2025 (budget book still labels columns 'Tentative/Recommended'; final hearing presentation confirms these totals were adopted)",
+        "total_budget": 734465609,
+        "total_budget_less_interfund_transfers": 699886639,
+        "general_fund": 281737981,
+        "millage": 5.4362,
+        "millage_detail": {"General Fund (countywide)": 5.4362, "Fire Services MSTU (unincorporated)": 1.38, "Mosquito Control": 0.2, "Total": 7.0162, "Aggregate rolled-back rate": 5.9982, "Aggregate adopted rate": 6.1067, "Percent above rolled-back": "1.81%"},
+        "property_tax_dollars": 173437899,
+        "property_tax_dollars_detail": {"County general (levied)": 173437899, "Fire MSTU (levied)": 18744318, "Mosquito Control (levied)": 2499800, "Total county levies": 194682018, "General Fund ad valorem budgeted": 163990141},
+        "gf_revenues": {
+          "Property taxes": 163990141,
+          "Sales taxes (local government half-cent)": 18681827,
+          "State revenue sharing": 6333285,
+          "Other state-shared taxes & licenses (pari-mutuel, beverage, mobile home, etc.)": 503750,
+          "Federal & state grants": 6045600,
+          "Special assessments & impact fees (incl. $26.0M hospital LPPF assessment)": 26326475,
+          "Charges for services (incl. city/school contracts for Sheriff services)": 22342833,
+          "Fines & court-related fees": 1699000,
+          "Miscellaneous (incl. EMS supplemental and VOCA reimbursements)": 7874020,
+          "Interest": 200000,
+          "Licenses & permits": 4000,
+          "Transfers, constitutional officers' excess fees & reserve release": 1737050,
+          "Fund balance carried forward": 26000000
+        },
+        "gf_expenditures": {
+          "Sheriff / law enforcement": 43595846,
+          "Jail operations (Sheriff-run)": 30841594,
+          "Emergency medical services": 30612414,
+          "Emergency management, code enforcement, animal control, medical examiner & public-safety debt": 18921368,
+          "Human services (incl. $26.0M hospital LPPF payments)": 37023523,
+          "Economic environment (incl. $4.9M to CRAs other than Front Beach)": 5187215,
+          "Parks & recreation": 13049436,
+          "Libraries": 4119374,
+          "Constitutional officers (Property Appraiser, Tax Collector, Supervisor of Elections, Clerk)": 20047395,
+          "Courts & judicial support": 5356592,
+          "Administration & general government": 19408430,
+          "Transfers out (mostly $32.0M to Transportation/roads fund)": 34405652,
+          "Reserves (budgeted contingency)": 1000000,
+          "Cash reserves": 18169142
+        },
+        "gf_expenditures_note": "Grouped by researcher from department totals in the FY2026 Final Budget Commissioners' Book General Fund proforma; groups sum to $281,737,981.",
+        "source_title": "Bay County FY 2026 Final Budget Commissioners' Book (Sept 16, 2025); FY 2026 Final Budget Revenue Detail Report; FY 2026 Final Budget Hearing Presentation",
+        "source_url": "https://www.baycountyfl.gov/DocumentCenter/View/18382/FY-2026-Final-Budget-Commissioners-Book-09-16-2025",
+        "other_sources": [
+          "https://www.baycountyfl.gov/DocumentCenter/View/18383/FY-2026-Final-Budget-Revenue-Detail-Report-09-16-2025",
+          "https://www.baycountyfl.gov/DocumentCenter/View/18735/FY-2026-Final-Budget-Hearing-Presentation-09-16-2025",
+          "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/25table1/Bay%20Table%201.pdf"
+        ]
+      },
+      "history": [
+        {"fy": "FY2025", "total_budget": 649906858, "general_fund": 237968255, "source_url": "https://www.baycountyfl.gov/DocumentCenter/View/18382/FY-2026-Final-Budget-Commissioners-Book-09-16-2025"},
+        {"fy": "FY2024", "total_budget": 588084239, "general_fund": 204141082, "source_url": "https://www.baycountyfl.gov/DocumentCenter/View/18382/FY-2026-Final-Budget-Commissioners-Book-09-16-2025"},
+        {"fy": "FY2023", "total_budget": 485371326, "general_fund": 159798323, "source_url": "https://www.baycountyfl.gov/Archive.aspx?ADID=329"},
+        {"fy": "FY2022", "total_budget": 465188542, "general_fund": 160407625, "source_url": "https://www.baycountyfl.gov/Archive.aspx?ADID=310"},
+        {"fy": "FY2021", "total_budget": 389385956, "general_fund": 129184181, "source_url": "https://www.baycountyfl.gov/Archive.aspx?ADID=259"}
+      ],
+      "context": [
+        {"text": "The countywide general millage stayed at 5.4362 mills for FY2026, the same rate since FY2024. FY2021 through FY2023 used 4.4362 mills; the FY2024 budget raised it by 1.0 mill.", "source_url": "https://www.baycountyfl.gov/Archive.aspx?ADID=313"},
+        {"text": "Commissioners turned down a staff proposal to raise the fire MSTU rate slightly and kept it at 1.38 mills. Part of the cost of new fire apparatus will come from reserves instead, and a Tourist Development Council partnership helps pay for lifeguards.", "source_url": "https://digital-release.mypanhandle.com/news/local-news/bay-county/bay-county-commissioners-approve-2026-budget/amp/"},
+        {"text": "The aggregate adopted rate (6.1067 mills) was 1.81% above the aggregate rolled-back rate (5.9982), so under Florida's TRIM rules it counts as a tax increase even though the millage rates did not change.", "source_url": "https://www.baycountyfl.gov/DocumentCenter/View/18735/FY-2026-Final-Budget-Hearing-Presentation-09-16-2025"},
+        {"text": "The county says roughly $27 million (about 16.5%) of the countywide property taxes it collects goes to Community Redevelopment Agencies run by the cities. That includes an annual payment of about $22.2 million to Panama City Beach's Front Beach Road CRA. The county also says that about 44.7% of its roughly $164 million in General Fund property tax supports the Sheriff, the jail and EMS.", "source_url": "https://www.baycountyfl.gov/829/Understanding-Amendment-3"},
+        {"text": "On a county information page that takes no position, Bay County estimates that statewide Amendment 3 (November 2026 ballot: a larger non-school homestead exemption and a lower assessment cap on non-homestead property) would reduce its recurring revenue by about $22M in FY2027-28 and about $36M in FY2028-29.", "source_url": "https://www.baycountyfl.gov/829/Understanding-Amendment-3"},
+        {"text": "The FY2026 budget adds 25 net new authorized positions: 835 total, up from 810 in FY2025.", "source_url": "https://www.baycountyfl.gov/DocumentCenter/View/18735/FY-2026-Final-Budget-Hearing-Presentation-09-16-2025"}
+      ]
+    },
+    {
+      "id": "bay_sheriff",
+      "name": "Bay County Sheriff's Office (funded through the County General Fund)",
+      "fy2026": {
+        "status": "county-funded amounts adopted in county budget; Sheriff's own full budget document not retrieved",
+        "total_budget": null,
+        "general_fund": null,
+        "county_funded_total": 74337440,
+        "county_funded_detail": {
+          "County dept 0120 Sheriff (law enforcement) total": 43495846,
+          "of which transfer to Sheriff for fees & costs": 37562790,
+          "County dept 0121 Jail Operations total": 30841594,
+          "of which transfer to Sheriff for jail": 27587866,
+          "County dept 0168 Law Enforcement (other)": 100000
+        },
+        "millage": null,
+        "property_tax_dollars": null,
+        "gf_revenues": {},
+        "gf_expenditures": {"Law enforcement (county dept 0120)": 43495846, "Jail operations (county dept 0121)": 30841594},
+        "related_revenue_note": "County GF revenues include charges billed for Sheriff services: school resource officers $2,124,151; Callaway law enforcement contract $2,789,551; Mexico Beach contract $1,304,360.",
+        "source_title": "Bay County FY 2026 Final Budget Commissioners' Book, General Fund proforma (depts 0120, 0121)",
+        "source_url": "https://www.baycountyfl.gov/DocumentCenter/View/18382/FY-2026-Final-Budget-Commissioners-Book-09-16-2025"
+      },
+      "history": [
+        {"fy": "FY2025", "total_budget": null, "general_fund": null, "county_funded_sheriff_plus_jail": 69937382, "source_url": "https://www.baycountyfl.gov/DocumentCenter/View/18382/FY-2026-Final-Budget-Commissioners-Book-09-16-2025"}
+      ],
+      "context": [
+        {"text": "The Sheriff is an independently elected constitutional officer. The County Commission funds the Sheriff's law enforcement and jail budgets through transfers from the county General Fund, and the Sheriff also runs contract policing for Callaway and Mexico Beach.", "source_url": "https://www.baycountyfl.gov/DocumentCenter/View/18383/FY-2026-Final-Budget-Revenue-Detail-Report-09-16-2025"}
+      ]
+    },
+    {
+      "id": "bay_district_schools",
+      "name": "Bay District Schools (School Board of Bay County)",
+      "fy2026": {
+        "status": "Total is the tentative figure (July 31, 2025 hearing). Fund-level detail comes from the FLDOE district budget data file (run date Feb 23, 2026), which does not say whether it is the final adopted version. The district's 'Final Budget FY 25-26' PDF could not be downloaded.",
+        "total_budget": 648500000,
+        "total_budget_note": "About $648.5M, tentative, as reported from the July 31, 2025 board meeting. The final adopted total was not confirmed.",
+        "general_fund": 345030838.97,
+        "general_fund_note": "General Fund total available (estimated revenues $262.2M + transfers in $6.9M + beginning fund balance $75.8M), from FLDOE file. Appropriations total $331,143,354; the remainder is ending fund balance. The district reported a general fund of about $344M at the tentative stage.",
+        "millage": 5.337,
+        "millage_detail": {"Required Local Effort (state-set)": 3.089, "Discretionary operating": 0.748, "Local Capital Improvement (capital outlay)": 1.5, "Voted / debt": 0.0, "Total": 5.337, "Prior year total": 5.311, "Percent above rolled-back": "0.99% (tentative stage)"},
+        "property_tax_dollars": 178916880,
+        "property_tax_dollars_note": "Budgeted local property tax revenue: General Fund district school taxes (RLE + discretionary operating, object 3411) $128,631,079 plus Local Capital Improvement tax $50,285,801. Taxable value $34,920,695,024.",
+        "revenue_mix_all_funds": {
+          "note": "Estimated revenues across General, Food Service, Other Federal, Debt Service and Capital Projects funds. Excludes transfers, beginning fund balances and internal service funds (not shown in source).",
+          "Federal": 22842463,
+          "State": 126381664,
+          "Local": 219436680
+        },
+        "gf_revenues": {
+          "State FEFP": 91536512,
+          "Other state revenue": 32893960.64,
+          "Local property tax: Required Local Effort + discretionary operating (combined)": 128631079,
+          "Other local (postsecondary fees, investment income, gifts, misc.)": 7820799.99,
+          "Federal": 1355397,
+          "Transfer in from Capital Projects": 6945451.93,
+          "Beginning fund balance": 75847638.41
+        },
+        "gf_expenditures": {
+          "Instruction": 209707552.02,
+          "Student & instructional support (student support, media, curriculum, staff training, instructional tech)": 22437855.64,
+          "School administration": 17976331.07,
+          "Board, general administration, fiscal & central services": 11379376.64,
+          "Facilities acquisition & construction": 22535762.69,
+          "Student transportation": 9865373.69,
+          "Operation & maintenance of plant": 29158066.98,
+          "Administrative technology": 4847806.16,
+          "Community services": 3235228.78,
+          "Ending fund balance": 13887485.30
+        },
+        "other_funds": {
+          "Capital Projects: Local Capital Improvement tax (1.5 mills)": 50285801,
+          "Capital Projects: school district local sales surtax": 31500000,
+          "Capital Projects: appropriations (facilities acquisition & construction)": 158144097.87,
+          "Capital Projects: transfers out (to debt service $16.87M, General Fund $6.95M, internal service $4.34M)": 28164323.93,
+          "Debt Service appropriations (principal $11.49M + interest $5.38M)": 16874969,
+          "Food Service appropriations": 15727360.85,
+          "Other federal programs (Title I, IDEA, etc.)": 9240065.94
+        },
+        "source_title": "FLDOE Bay District 2025-26 Total Budget data (BayTotalBUD2526); board tentative budget hearing coverage, July 31, 2025",
+        "source_url": "https://www.fldoe.org/file/7507/BayTotalBUD2526.pdf",
+        "other_sources": [
+          "https://cp.soar.com/articles/5556310/Florida/Bay-County-School-Board-Adopts-Tentative-Millage-Rate-and-Budget-for-2025-2026",
+          "https://cp.soar.com/articles/5556300/Florida/Committee-Reviews-Proposed-Budget-with-648M-General-Fund-and-Millage-Rate-Adjustments",
+          "https://bay.k12.fl.us/uploads/Final Budget FY 25-26.pdf"
+        ]
+      },
+      "history": [
+        {"fy": "FY2025 (2024-25)", "total_budget": 660000000, "general_fund": 348000000, "note": "approximate, as reported at final approval", "source_url": "https://www.wjhg.com/2024/09/11/bay-district-schools-approves-2024-2025-budget/"}
+      ],
+      "context": [
+        {"text": "The total millage rose slightly, from 5.311 to 5.337. Coverage at the tentative stage described it as the first increase in six years and 0.99% above the rolled-back rate. The state sets the Required Local Effort portion (3.089 mills), which the district reported would yield about $104.5M toward FEFP funding.", "source_url": "https://cp.soar.com/articles/5556310/Florida/Bay-County-School-Board-Adopts-Tentative-Millage-Rate-and-Budget-for-2025-2026"},
+        {"text": "For FY2025 the school board lowered total millage by 0.172 mills.", "source_url": "https://www.wjhg.com/2024/09/11/bay-district-schools-approves-2024-2025-budget/"},
+        {"text": "Amendment 3 on the November 2026 ballot would not change the exemption that applies to school property taxes.", "source_url": "https://floridaphoenix.com/voter-guides/ballot-measures/2026-amendment-3/"}
+      ]
+    },
+    {
+      "id": "panama_city",
+      "name": "City of Panama City",
+      "fy2026": {
+        "status": "adopted",
+        "total_budget": 153837293,
+        "total_budget_less_transfers": 136524277,
+        "general_fund": 67703379,
+        "millage": 4.7999,
+        "millage_detail": {"City operating": 4.7999, "Rolled-back rate": 4.6529, "Downtown Improvement District (separate levy)": 3.0},
+        "property_tax_dollars": 18951299,
+        "property_tax_dollars_detail": {"City levy (DOR)": 18951299, "Downtown Improvement District levy (DOR)": 246996, "GF ad valorem budgeted (incl. delinquent)": 17992550},
+        "gf_revenues": {
+          "Property taxes": 17992550,
+          "Utility service taxes, communications tax, franchise fees & local option gas tax": 13233319,
+          "Licenses & permits (incl. $13.75M 'merchant fee' on utilities)": 15010000,
+          "Intergovernmental (incl. $4.80M half-cent sales tax, $2.33M state revenue sharing)": 8118307,
+          "Charges for services": 7096681,
+          "Fines & forfeitures": 210000,
+          "Miscellaneous (net of budgeted reserve change)": 3624668,
+          "Transfers in": 2417854
+        },
+        "gf_expenditures": {
+          "Police": 19273932,
+          "Fire": 12122358,
+          "Public works, streets, drainage & engineering": 8325833,
+          "Parks, culture & recreation (incl. MLK campus, events, arts center)": 6365061,
+          "Economic environment (incl. $1.84M CRA grant)": 2071724,
+          "Development & building services": 2755071,
+          "Administration & general government": 10968341,
+          "Non-departmental (transfers/other uses)": 5821059
+        },
+        "gf_expenditures_note": "Grouped by researcher from adopted department totals; sums to $67,703,379.",
+        "source_title": "City of Panama City Adopted Budget Report, Fiscal Year 2026",
+        "source_url": "https://www.panamacity.gov/ArchiveCenter/ViewFile/Item/1562"
+      },
+      "history": [
+        {"fy": "FY2025", "total_budget": 155847043, "general_fund": 68827448, "source_url": "https://www.panamacity.gov/ArchiveCenter/ViewFile/Item/1562"},
+        {"fy": "FY2023", "total_budget": 121413000, "general_fund": 55000000, "note": "approximate per news: 'more than $121.413 million' operating budget, general fund 'almost $55 million'", "source_url": "https://news.yahoo.com/panama-city-approves-millage-rate-110025312.html"},
+        {"fy": "FY2022", "total_budget": null, "general_fund": 49878000, "note": "approximate per news ('more than $49.878 million')", "source_url": "https://news.yahoo.com/panama-city-approves-millage-rate-110025312.html"}
+      ],
+      "context": [
+        {"text": "The commission kept the 4.7999 mill rate (also used in FY2023). News coverage said the city cut about $8 million in spending and gave the budget as about $136 million, which is the total excluding interfund transfers.", "source_url": "https://digital-release.mypanhandle.com/news/local-news/bay-county/panama-city/panama-city-locks-in-2026-budget-keeps-millage-rates-unchanged/amp/"},
+        {"text": "The adopted rate is 3.2% above the rolled-back rate (4.6529).", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/25table1/Bay%20Table%201.pdf"},
+        {"text": "The General Fund pays a $1.84M grant to the city's Community Redevelopment Agency. The St. Andrews CRA fund ($1.68M) and Downtown CRA fund ($0.58M) are budgeted separately.", "source_url": "https://www.panamacity.gov/ArchiveCenter/ViewFile/Item/1562"}
+      ]
+    },
+    {
+      "id": "panama_city_beach",
+      "name": "City of Panama City Beach",
+      "fy2026": {
+        "status": "adopted (council approval Aug 28, 2025)",
+        "total_budget": 282221725,
+        "general_fund": 71918315,
+        "millage": 0,
+        "millage_note": "The city levies no ad valorem property tax. It relies mainly on Business Tax Receipts.",
+        "property_tax_dollars": 0,
+        "gf_revenues": {
+          "Property taxes": 0,
+          "Business tax receipts": 19740000,
+          "Utility taxes": 6058000,
+          "Franchise fees": 3560000,
+          "Intergovernmental (state shared/sales tax)": 6565055,
+          "Impact fees": 1292000,
+          "Licenses, permits & assessments": 8707300,
+          "Contributions & donations": 1891100,
+          "Grants": 4872390,
+          "Other fees & miscellaneous": 4584200,
+          "Transfers in": 1575000,
+          "Cash carry-forward (difference to balance)": 13073270
+        },
+        "gf_expenditures": {
+          "Law enforcement": 22717050,
+          "Fire": 14429050,
+          "Streets": 11378175,
+          "Recreation": 13891200,
+          "Building": 3031900,
+          "Library": 369200,
+          "Planning": 547340,
+          "Administration, executive, legislative & legal": 5554400
+        },
+        "fund_totals": {"General Fund": 71918315, "Front Beach Road CRA Fund": 68470410, "Utility Fund": 127314080, "Stormwater Fund": 11269500, "Pier Fund": 1655050, "Aquatic Center Fund": 1594370, "Information Technology Fund": 2878500},
+        "source_title": "City of Panama City Beach FY 2026 Annual Budget",
+        "source_url": "https://www.pcbfl.gov/Archive.aspx?ADID=151"
+      },
+      "history": [
+        {"fy": "FY2025", "total_budget": 246604970, "general_fund": 68322300, "source_url": "https://www.pcbfl.gov/Archive.aspx?ADID=151"}
+      ],
+      "context": [
+        {"text": "Panama City Beach levies no city property tax. Its Front Beach Road CRA receives tax-increment payments, mainly from Bay County (about $22.2M a year, according to the county). The FY2026 budget lists a $22.2M reimbursement from the CRA trust fund.", "source_url": "https://www.baycountyfl.gov/829/Understanding-Amendment-3"},
+        {"text": "The council approved the budget unanimously. News coverage cited a general budget of about $72 million, with law enforcement as the largest item at nearly $23 million.", "source_url": "https://www.mypanhandle.com/news/local-news/bay-county/panama-city-beach/panama-city-beach-approves-2025-2026-budget-among-other-ordinances/amp/"}
+      ]
+    },
+    {
+      "id": "lynn_haven",
+      "name": "City of Lynn Haven",
+      "fy2026": {
+        "status": "final approved Sept 23, 2025 (columns in document are labeled 'FY 2026 Proposed')",
+        "total_budget": 61858708,
+        "general_fund": 24353606,
+        "millage": 4.05,
+        "millage_detail": {"Adopted": 4.05, "Rolled-back rate": 3.8866, "Rate considered before cuts": 4.2834},
+        "property_tax_dollars": 7674166,
+        "property_tax_dollars_detail": {"City levy (DOR)": 7674166, "GF ad valorem budgeted": 7251403},
+        "gf_revenues": {
+          "Property taxes": 7251403,
+          "Other taxes (utility, franchise, etc.)": 2340233,
+          "Permits & fees": 1618293,
+          "Intergovernmental (state shared, sales tax, grants)": 8933673,
+          "Charges for services": 525931,
+          "Fines & forfeits": 53247,
+          "Miscellaneous": 891329,
+          "Other sources (transfers/fund balance)": 2739497
+        },
+        "gf_expenditures": {
+          "Police": 4792059,
+          "Fire": 5343217,
+          "Streets": 2386135,
+          "Parks, grounds, sports & Bayou preserve": 3161019,
+          "Economic development": 1854630,
+          "Code enforcement, building, animal shelter": 863999,
+          "Administration & general government (net of $2.71M indirect cost recovery)": 5952547
+        },
+        "gf_expenditures_note": "Grouped by researcher from department totals; sums to $24,353,606.",
+        "source_title": "City of Lynn Haven FY2025-26 Final Approved Budget (9-23-25)",
+        "source_url": "https://cityoflynnhaven.com/DocumentCenter/View/4411"
+      },
+      "history": [
+        {"fy": "FY2025", "total_budget": 64870778, "general_fund": 21193114, "note": "amended/adjusted (Dec 2024), not original adopted", "source_url": "https://www.cityoflynnhaven.com/DocumentCenter/View/4110/FY-2025-MID-YEAR-BUDGET-Approved-04-21-25"}
+      ],
+      "context": [
+        {"text": "The commission kept 4.05 mills. It had considered 4.2834 mills before staff made cuts in response to residents' concerns about property taxes. The adopted rate is still above the rolled-back rate of 3.8866.", "source_url": "https://www.wjhg.com/2025/09/24/lynn-haven-approves-budget-fiscal-year-2025-26/"}
+      ]
+    },
+    {
+      "id": "callaway",
+      "name": "City of Callaway",
+      "fy2026": {
+        "status": "tentative total (first public hearing); millage final per DOR",
+        "total_budget": 55000000,
+        "total_budget_note": "'Just over $55 million' at the first hearing, including about $25M in mostly grant-funded capital projects. Not confirmed as the final adopted figure.",
+        "general_fund": null,
+        "millage": 2.7,
+        "millage_detail": {"Adopted": 2.7, "Prior year": 2.75, "Rolled-back rate": 2.6981},
+        "property_tax_dollars": 2758284,
+        "gf_revenues": {},
+        "gf_expenditures": {},
+        "source_title": "News coverage of first budget hearing; FL DOR 2025 Comparison of Levies",
+        "source_url": "https://www.yahoo.com/news/articles/city-callaway-passes-possible-budget-033441301.html"
+      },
+      "history": [],
+      "context": [
+        {"text": "Callaway cut its millage slightly, from 2.75 to 2.70, the lowest city rate in the county. Law enforcement is provided by contract with the Bay County Sheriff's Office; the county budgets $2.79M in revenue from that contract.", "source_url": "https://www.yahoo.com/news/articles/city-callaway-passes-possible-budget-033441301.html"}
+      ]
+    },
+    {
+      "id": "springfield",
+      "name": "City of Springfield",
+      "fy2026": {
+        "status": "millage final per DOR; budget totals not found",
+        "total_budget": null,
+        "general_fund": null,
+        "millage": 4.865,
+        "millage_detail": {"Adopted": 4.865, "Rolled-back rate": 4.6658},
+        "property_tax_dollars": 2083737,
+        "gf_revenues": {},
+        "gf_expenditures": {},
+        "source_title": "FL DOR 2025 Comparison of Levies (Bay County); Bay County Tax Collector millage table",
+        "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/25table1/Bay%20Table%201.pdf"
+      },
+      "history": [],
+      "context": [
+        {"text": "Springfield's levy rose 9.0% year over year. The adopted rate is 4.3% above the rolled-back rate.", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/25table1/Bay%20Table%201.pdf"}
+      ]
+    },
+    {
+      "id": "parker",
+      "name": "City of Parker",
+      "fy2026": {
+        "status": "DRAFT (department-requested, Aug 22, 2025); final adopted budget not posted. Millage final per DOR.",
+        "total_budget": 14972230,
+        "general_fund": 7098904,
+        "millage": 3.0,
+        "millage_detail": {"Adopted": 3.0, "Rolled-back rate": 2.4991},
+        "property_tax_dollars": 967589,
+        "gf_revenues": {
+          "Property taxes": 903262,
+          "Other taxes": 1107385,
+          "Licenses & permits": 69200,
+          "Intergovernmental": 1360498,
+          "Charges for services": 445240,
+          "Fines & forfeits": 40000,
+          "Miscellaneous": 53280,
+          "Proceeds from reserves": 937429
+        },
+        "gf_revenues_note": "Draft revenues total $4,916,293 and fall short of draft expenditures. The draft shows a planned $1,407,500 transfer from utility reserves for a fire truck, plus remaining shortfalls.",
+        "gf_expenditures": {
+          "Police": 1278338,
+          "Fire": 2025518,
+          "Streets": 2254966,
+          "Parks": 417853,
+          "Trash": 296986,
+          "Code enforcement": 174178,
+          "Fleet": 59536,
+          "Administration / general government": 591529
+        },
+        "source_title": "City of Parker Draft Budget FY 25-26",
+        "source_url": "https://cityofparker.com/wp-content/uploads/filr/6232/Draft-Budget-FY-25-26.pdf"
+      },
+      "history": [
+        {"fy": "FY2025", "total_budget": 8251786, "general_fund": 4691843, "note": "amended budget expenditures as shown in FY26 draft", "source_url": "https://cityofparker.com/wp-content/uploads/filr/6232/Draft-Budget-FY-25-26.pdf"}
+      ],
+      "context": [
+        {"text": "Parker adopted 3.0 mills, 20% above its rolled-back rate of 2.4991.", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/25table1/Bay%20Table%201.pdf"}
+      ]
+    },
+    {
+      "id": "mexico_beach",
+      "name": "City of Mexico Beach",
+      "fy2026": {
+        "status": "adopted ~Sept 24, 2025; budget totals not published online at time of research",
+        "total_budget": null,
+        "general_fund": null,
+        "millage": 5.25,
+        "millage_detail": {"Adopted": 5.25, "Prior year": 5.75, "Initially proposed": 5.5, "Rolled-back rate": 5.128},
+        "property_tax_dollars": 4696116,
+        "gf_revenues": {},
+        "gf_expenditures": {},
+        "source_title": "WMBB coverage of adoption; FL DOR 2025 Comparison of Levies",
+        "source_url": "https://digital-release.mypanhandle.com/news/mexico-beach-adopts-2025-26-budget-lowers-millage-rate/amp/"
+      },
+      "history": [],
+      "context": [
+        {"text": "Commissioners lowered the rate by 0.50 mills, from 5.75 to 5.25, after first planning 5.5. Policing is by contract with the Bay County Sheriff's Office; the county budgets $1.30M in revenue from that contract.", "source_url": "https://digital-release.mypanhandle.com/news/mexico-beach-adopts-2025-26-budget-lowers-millage-rate/amp/"}
+      ]
+    }
+  ],
+  "gaps": [
+    "Bay District Schools: the district's 'Final Budget FY 25-26' PDF (bay.k12.fl.us) returned errors and 404s, so the final adopted all-funds total (about $648.5M at the tentative stage) is unconfirmed. The FLDOE data file omits internal service funds and does not say whether it is the final version.",
+    "Bay District Schools: RLE and discretionary operating property tax are combined in one line ($128.6M). No separate dollar split was published in the sources found.",
+    "Bay County Sheriff's Office: the Sheriff's own FY2026 budget (all sources, including contract and grant revenue) was not retrieved. The county-posted link (schneidercorp BUDGET.pdf) points to the Property Appraiser. Only county-funded amounts are included.",
+    "Callaway: no adopted budget document found online (city site blocks fetching). The total (~$55M) is the first-hearing figure, and no general fund detail is available.",
+    "Springfield: no budget document or news coverage found. Only millage and levy are included.",
+    "Parker: only a draft FY25-26 budget is posted. The FY24-25 final budget PDF is a scanned image with no readable text.",
+    "Mexico Beach: no FY2025-26 budget document is posted on the city budget page. Only millage and levy are included.",
+    "Lynn Haven and Panama City Beach: FY2021-FY2024 adopted totals were not collected. Lynn Haven's FY2025 figure is the amended, not the original adopted, budget.",
+    "Panama City: FY2024 and FY2021 adopted totals were not collected. FY2022 and FY2023 figures are approximate news figures.",
+    "Bay County: the Front Beach Road CRA payment (~$22.2M) does not appear as a General Fund department line. The county page reports it, but its budget location (possibly netted from ad valorem revenue) was not confirmed.",
+    "School district FY2021-FY2024 totals were not collected."
+  ]
+}

@@ -10,7 +10,10 @@ Live at **https://baycounty.me** (Vercel project `baycounty-me`, team Flux Labs 
 site/
   build_site.py   static site generator: layout, menu, footer, pages
   tokens.css      color and type tokens (Flux palette, Poppins)
-  site.css        header, menu, footer, home and prose page styles
+  site.css        header, menu, footer, home, prose and glossary styles
+  glossary.py     plain-English terms: one-line simple version, detail, example
+  tax_page.py     Tax Dollars page: builds its dataset from data/tax/ and writes assets/tax.js
+  tax.js, tax.css calculator, charts and government explorer for the Tax Dollars page
   public/         built output; this is what Vercel serves
 assets/
   template.html   CRA Spending page (markup, styles, map/ledger script)
@@ -18,6 +21,8 @@ assets/
 data/
   panama_city.json, lynn_haven.json, pcb.json, others.json   research files, one per CRA group
   verify_results.json   independent source check of the 30 largest records
+  tax/            millage.json (DOR rates and levies 2020-2025), budgets.json (FY2026 budgets),
+                  finances.json (EDR audited actuals FY2021-FY2024), scripts/ used to extract them
   build.py        merges research files; sets status, counted-in-totals and overlap notes
   prep_dash.py    turns merged data + map geometry into the dashboard dataset
 geo/
@@ -42,6 +47,10 @@ git add -A && git commit -m "Update" && git push
 1. Add it to `MENU` in `site/build_site.py` (a top-level link, or a child under a drop-down such as Public Money).
 2. Add a `(path, title, description, render_function)` entry to `PAGES`.
 3. Rebuild and push.
+
+## Plain-English terms
+
+Every term on the site lives in `site/glossary.py`. Wrap a word with `term('id', 'text')` in `build_site.py` (or `<span class="term" data-term="id">text</span>` in page JS) and it gets a dotted underline; hover, tap or Tab to it for the simple explanation, with a link to `/glossary#id`. Write the `simple` line so a fifth-grader can follow it.
 
 ## Data rules
 

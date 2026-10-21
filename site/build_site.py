@@ -7,6 +7,7 @@ import json, os, re, shutil, base64, sys
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, ROOT)
+from tax_page import tax_page
 OUT = os.path.join(ROOT, 'public')
 SITE = 'BayCounty.me'
 DOMAIN = 'https://baycounty.me'
@@ -17,6 +18,8 @@ MENU = [
     {'label': 'Public Money', 'children': [
         {'label': 'CRA Spending', 'href': '/public-money/cra-spending',
          'desc': 'Where the six redevelopment agencies spend tax increment'},
+        {'label': 'Tax Dollars', 'href': '/public-money/tax-dollars',
+         'desc': 'Your bill, slice by slice, and where each government spends'},
     ]},
     {'label': 'Glossary', 'href': '/glossary'},
     {'label': 'About', 'href': '/about'},
@@ -371,6 +374,8 @@ def home_page():
     pays = d['payments']
     spent = sum(p['amount'] for p in pays if p['count'] and p['amount'] and p['status'] in ('Spent', 'Committed'))
     n = len(pays)
+    from tax_page import build_data
+    td = build_data(); lv = {g: v[-1] for g, v in td['levy'].items()}; lv_tot = sum(lv.values())
     return f'''<div class="page home">
   <section class="hero">
     <span class="eyebrow">Bay County, Florida</span>
@@ -392,6 +397,20 @@ def home_page():
         <div><dt>Districts mapped</dt><dd>14</dd></div>
         <div><dt>Records</dt><dd>{n}</dd></div>
         <div><dt>Spent or committed, documented</dt><dd>${spent/1e6:.1f}M</dd></div>
+      </dl>
+    </a>
+    <a class="feature" href="/public-money/tax-dollars">
+      <div class="feature-txt">
+        <span class="eyebrow">Tax Dollars</span>
+        <h3>How your tax dollars are allocated</h3>
+        <p>Estimate your property tax bill and see who gets each slice: schools, the county, your city and special districts. Then see where each government's money comes from and what it pays for.</p>
+        <span class="go">Try the calculator →</span>
+      </div>
+      <dl class="feature-stats">
+        <div><dt>Property tax levied, FY2026</dt><dd>${lv_tot/1e6:,.1f}M</dd></div>
+        <div><dt>Governments compared</dt><dd>{len(td['govs'])}</dd></div>
+        <div><dt>Years of rates</dt><dd>{len(td['years'])}</dd></div>
+        <div><dt>Schools' share</dt><dd>{lv['school']/lv_tot:.0%}</dd></div>
       </dl>
     </a>
   </section>
@@ -441,6 +460,8 @@ PAGES = [
     ('/', 'Bay County public records, mapped', 'Maps, money and public records for Bay County, Florida, with a source on every figure.', home_page),
     ('/public-money/cra-spending', 'CRA Spending',
      'Interactive map and ledger of Bay County, Florida\'s six Community Redevelopment Agencies: who was paid, where, and for what.', cra_page),
+    ('/public-money/tax-dollars', 'How your tax dollars are allocated',
+     'Estimate your Bay County property tax bill and see who gets each slice, plus where the county, schools and every city get their money and what they spend it on.', lambda: tax_page(OUT)),
     ('/glossary', 'Plain-English guide', 'Every term on BayCounty.me explained simply: CRAs, tax increment, millage, homestead exemptions, budgets and more.', glossary_page),
     ('/about', 'About', 'What BayCounty.me is, where its information comes from, and how to send a correction.', about_page),
 ]
@@ -457,6 +478,7 @@ def main():
     open(os.path.join(OUT, 'assets', 'site.js'), 'w').write(MENU_JS + TERM_JS.replace('__GLOSSARY__', json.dumps(gl, ensure_ascii=False)))
     shutil.copy(os.path.join(ROOT, '..', 'assets', 'logo_small.webp'), os.path.join(OUT, 'assets', 'flux-labs.webp'))
     shutil.copy(os.path.join(ROOT, 'favicon.svg'), os.path.join(OUT, 'favicon.svg'))
+    shutil.copy(os.path.join(ROOT, 'tax.css'), os.path.join(OUT, 'assets', 'tax.css'))
     for path, title, desc, fn in PAGES:
         write(path, layout(title, desc, path, fn()))
     open(os.path.join(OUT, '404.html'), 'w').write(layout('Page not found', 'Page not found', '/404',

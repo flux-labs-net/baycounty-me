@@ -1,0 +1,305 @@
+{
+  "as_of": "2026-10-20",
+  "scope": "Bay County, FL ad valorem millage for tax years 2020-2025 (FY2020-21 through FY2025-26). Millage is mills per $1,000 of taxable value. 'levy' is the total taxes levied at the adopted rate in dollars, as DOR publishes it. Rates and levies for county, city, and DIB come from DOR Table 1 for the same year. Taxable values come from the DOR Databook (county total taxable value, school taxable value, and the municipal report).",
+  "authorities": [
+    {
+      "id": "bay_county_general",
+      "name": "Bay County Board of County Commissioners (general fund, countywide operating)",
+      "type": "county",
+      "applies_to": ["countywide"],
+      "years": [
+        {"tax_year": 2020, "fiscal_year": "FY2021", "millage": 4.4362, "rolled_back": 4.1815, "taxable_value": 17535078964, "levy": 77782542, "source_title": "FL DOR Table 1 Comparison of Taxes Levied, Bay, FY2019-20 and 2020-21; taxable value from FL DOR 2020 Databook taxable_value.xls", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/20table1/Bay_Table%201.pdf"},
+        {"tax_year": 2021, "fiscal_year": "FY2022", "millage": 4.4362, "rolled_back": 4.1604, "taxable_value": 19438620300, "levy": 86257830, "source_title": "FL DOR Table 1, Bay, FY2020-21 and 2021-22", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/21table1/Bay_Table%201.pdf"},
+        {"tax_year": 2022, "fiscal_year": "FY2023", "millage": 4.4362, "rolled_back": 4.0397, "taxable_value": 22522426189, "levy": 99987435, "source_title": "FL DOR Table 1, Bay, FY2021-22 and 2022-23", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/22table1/Bay%20Table%201.pdf"},
+        {"tax_year": 2023, "fiscal_year": "FY2024", "millage": 5.4362, "rolled_back": 4.0479, "taxable_value": 26490652405, "levy": 143997444, "source_title": "FL DOR Table 1, Bay, FY2022-23 and 2023-24", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/23table1/Bay%20Table%201.pdf"},
+        {"tax_year": 2024, "fiscal_year": "FY2025", "millage": 5.4362, "rolled_back": 5.1719, "taxable_value": 29635046723, "levy": 161094369, "source_title": "FL DOR Table 1, Bay, FY2023-24 and 2024-25", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/24table1/Bay%20Table%201.pdf"},
+        {"tax_year": 2025, "fiscal_year": "FY2026", "millage": 5.4362, "rolled_back": 5.2561, "taxable_value": 31904252849, "levy": 173437899, "source_title": "FL DOR Table 1, Bay, FY2024-25 and 2025-26 (cross-checked: DOR 2025 TACD, DOR 2025 Max Millage Compliance, Bay County Tax Collector 2025 millage list)", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/25table1/Bay%20Table%201.pdf"}
+      ]
+    },
+    {
+      "id": "county_fire_mstu",
+      "name": "Bay County Fire District MSTU",
+      "type": "county_mstu",
+      "applies_to": ["unincorporated"],
+      "years": [
+        {"tax_year": 2020, "fiscal_year": "FY2021", "millage": 1.3800, "rolled_back": 1.2827, "taxable_value": null, "levy": 9637453, "source_title": "FL DOR Table 1, Bay, FY2019-20 and 2020-21", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/20table1/Bay_Table%201.pdf"},
+        {"tax_year": 2021, "fiscal_year": "FY2022", "millage": 1.3800, "rolled_back": 1.2810, "taxable_value": null, "levy": 10734882, "source_title": "FL DOR Table 1, Bay, FY2020-21 and 2021-22", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/21table1/Bay_Table%201.pdf"},
+        {"tax_year": 2022, "fiscal_year": "FY2023", "millage": 1.3800, "rolled_back": 1.2352, "taxable_value": null, "levy": 12562216, "source_title": "FL DOR Table 1, Bay, FY2021-22 and 2022-23", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/22table1/Bay%20Table%201.pdf"},
+        {"tax_year": 2023, "fiscal_year": "FY2024", "millage": 1.3800, "rolled_back": 1.2266, "taxable_value": null, "levy": 14877077, "source_title": "FL DOR Table 1, Bay, FY2022-23 and 2023-24", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/23table1/Bay%20Table%201.pdf"},
+        {"tax_year": 2024, "fiscal_year": "FY2025", "millage": 1.3800, "rolled_back": 1.2807, "taxable_value": null, "levy": 16975667, "source_title": "FL DOR Table 1, Bay, FY2023-24 and 2024-25", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/24table1/Bay%20Table%201.pdf"},
+        {"tax_year": 2025, "fiscal_year": "FY2026", "millage": 1.3800, "rolled_back": 1.3074, "taxable_value": null, "levy": 18744318, "source_title": "FL DOR Table 1, Bay, FY2024-25 and 2025-26 (cross-checked: DOR 2025 TACD; Tax Collector lists 'County Fire' and 'County Fire- Beach' at 1.38)", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/25table1/Bay%20Table%201.pdf"}
+      ]
+    },
+    {
+      "id": "county_mosquito_control",
+      "name": "Bay County Mosquito Control (county-dependent levy)",
+      "type": "county_mstu",
+      "applies_to": ["all cities except Panama City Beach", "unincorporated outside the Beach Mosquito Control District"],
+      "years": [
+        {"tax_year": 2020, "fiscal_year": "FY2021", "millage": 0.2000, "rolled_back": 0.1868, "taxable_value": null, "levy": 1239783, "source_title": "FL DOR Table 1, Bay, FY2019-20 and 2020-21", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/20table1/Bay_Table%201.pdf"},
+        {"tax_year": 2021, "fiscal_year": "FY2022", "millage": 0.2000, "rolled_back": 0.1850, "taxable_value": null, "levy": 1423598, "source_title": "FL DOR Table 1, Bay, FY2020-21 and 2021-22", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/21table1/Bay_Table%201.pdf"},
+        {"tax_year": 2022, "fiscal_year": "FY2023", "millage": 0.2000, "rolled_back": 0.1811, "taxable_value": null, "levy": 1672463, "source_title": "FL DOR Table 1, Bay, FY2021-22 and 2022-23", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/22table1/Bay%20Table%201.pdf"},
+        {"tax_year": 2023, "fiscal_year": "FY2024", "millage": 0.2000, "rolled_back": 0.1825, "taxable_value": null, "levy": 1986072, "source_title": "FL DOR Table 1, Bay, FY2022-23 and 2023-24", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/23table1/Bay%20Table%201.pdf"},
+        {"tax_year": 2024, "fiscal_year": "FY2025", "millage": 0.2000, "rolled_back": 0.1898, "taxable_value": null, "levy": 2254848, "source_title": "FL DOR Table 1, Bay, FY2023-24 and 2024-25", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/24table1/Bay%20Table%201.pdf"},
+        {"tax_year": 2025, "fiscal_year": "FY2026", "millage": 0.2000, "rolled_back": 0.1913, "taxable_value": null, "levy": 2499800, "source_title": "FL DOR Table 1, Bay, FY2024-25 and 2025-26 (cross-checked: DOR 2025 TACD; Tax Collector 'County Mosquito' 0.20)", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/25table1/Bay%20Table%201.pdf"}
+      ]
+    },
+    {
+      "id": "school_rle",
+      "name": "Bay District School Board - Required Local Effort (state-set, includes any prior-period funding adjustment)",
+      "type": "school",
+      "applies_to": ["countywide"],
+      "years": [
+        {"tax_year": 2020, "fiscal_year": "FY2021", "millage": 3.7200, "rolled_back": null, "taxable_value": 18879069863, "levy": null, "source_title": "FL DOR 2020 Taxing Authority Code Descriptions, Bay (SCHOOL RLE .00372000); taxable value = DOR 2020 Databook school taxable value", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/TACD%20History/2020%20Taxing%20Authority%20Code%20Descriptions/2020%20Bay%20TACD.pdf"},
+        {"tax_year": 2021, "fiscal_year": "FY2022", "millage": 3.5990, "rolled_back": null, "taxable_value": 21036996383, "levy": null, "source_title": "FL DOR 2021 TACD, Bay; matches Bay District Schools Tentative Budget FY21-22 (RLE 3.5990)", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/TACD%20History/2021%20Taxing%20Authority%20Code%20Descriptions/2021%20Bay%20TACD.pdf"},
+        {"tax_year": 2022, "fiscal_year": "FY2023", "millage": 3.2560, "rolled_back": null, "taxable_value": 25556146041, "levy": null, "source_title": "FL DOR 2022 TACD, Bay", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/TACD%20History/2022%20Taxing%20Authority%20Code%20Descriptions/PDF/2022%20Bay%20TACD.pdf"},
+        {"tax_year": 2023, "fiscal_year": "FY2024", "millage": 3.2350, "rolled_back": null, "taxable_value": 31116122876, "levy": null, "source_title": "FL DOR 2023 TACD, Bay; matches FLDOE district budget summary FY2023-24 (RLE 3.2350)", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/TACD%20History/2023%20Taxing%20Authority%20Code%20Descrptions/PDF/2023%20Bay%20TACD.pdf"},
+        {"tax_year": 2024, "fiscal_year": "FY2025", "millage": 3.0630, "rolled_back": null, "taxable_value": 33729673749, "levy": null, "source_title": "FL DOR 2024 TACD, Bay; matches FLDOE district budget summary FY2024-25 (RLE 3.0630)", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/TACD%20History/2024%20Taxing%20Authority%20Code%20Descriptions/PDF/2024%20Bay%20TACD.pdf"},
+        {"tax_year": 2025, "fiscal_year": "FY2026", "millage": 3.0890, "rolled_back": null, "taxable_value": 35062478679, "levy": null, "source_title": "FL DOR 2025 TACD, Bay; matches FLDOE district budget summary FY2025-26 and Bay County Tax Collector (3.0890)", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/TACD%20History/2025%20Taxing%20Authority%20Code%20Descriptions/2025%20Bay%20TACD.pdf"}
+      ]
+    },
+    {
+      "id": "school_discretionary",
+      "name": "Bay District School Board - Discretionary Operating (basic discretionary)",
+      "type": "school",
+      "applies_to": ["countywide"],
+      "years": [
+        {"tax_year": 2020, "fiscal_year": "FY2021", "millage": 0.7480, "rolled_back": null, "taxable_value": 18879069863, "levy": null, "source_title": "Inferred split: DOR 2020 TACD publishes discretionary plus capital outlay as one combined 'SCHOOL DIS' figure, 2.2480. It is split here as 0.748 + 1.500, the split confirmed for 2021 and 2023-2025.", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/TACD%20History/2020%20Taxing%20Authority%20Code%20Descriptions/2020%20Bay%20TACD.pdf"},
+        {"tax_year": 2021, "fiscal_year": "FY2022", "millage": 0.7480, "rolled_back": null, "taxable_value": 21036996383, "levy": null, "source_title": "Bay District Schools Tentative Budget FY21-22", "source_url": "https://bay.k12.fl.us/uploads/Tentative Budget FY21-22.pdf"},
+        {"tax_year": 2022, "fiscal_year": "FY2023", "millage": 0.7480, "rolled_back": null, "taxable_value": 25556146041, "levy": null, "source_title": "Inferred split: DOR 2022 TACD combined SCHOOL DIS 2.2480, split 0.748 + 1.500 (as in other years)", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/TACD%20History/2022%20Taxing%20Authority%20Code%20Descriptions/PDF/2022%20Bay%20TACD.pdf"},
+        {"tax_year": 2023, "fiscal_year": "FY2024", "millage": 0.7480, "rolled_back": null, "taxable_value": 31116122876, "levy": null, "source_title": "FLDOE Bay district budget summary FY2023-24", "source_url": "https://www.fldoe.org/file/7507/BayTotalBUD2324.pdf"},
+        {"tax_year": 2024, "fiscal_year": "FY2025", "millage": 0.7480, "rolled_back": null, "taxable_value": 33729673749, "levy": null, "source_title": "FLDOE Bay district budget summary FY2024-25", "source_url": "https://www.fldoe.org/file/7507/BayTotalBUD2425.pdf"},
+        {"tax_year": 2025, "fiscal_year": "FY2026", "millage": 0.7480, "rolled_back": null, "taxable_value": 35062478679, "levy": null, "source_title": "FLDOE Bay district budget summary FY2025-26 (also a news report on the tentative adoption)", "source_url": "https://www.fldoe.org/file/7507/BayTotalBUD2526.pdf"}
+      ]
+    },
+    {
+      "id": "school_capital_outlay",
+      "name": "Bay District School Board - Local Capital Improvement (capital outlay)",
+      "type": "school",
+      "applies_to": ["countywide"],
+      "years": [
+        {"tax_year": 2020, "fiscal_year": "FY2021", "millage": 1.5000, "rolled_back": null, "taxable_value": 18879069863, "levy": null, "source_title": "Inferred split of the DOR 2020 TACD combined SCHOOL DIS figure, 2.2480 (see school_discretionary)", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/TACD%20History/2020%20Taxing%20Authority%20Code%20Descriptions/2020%20Bay%20TACD.pdf"},
+        {"tax_year": 2021, "fiscal_year": "FY2022", "millage": 1.5000, "rolled_back": null, "taxable_value": 21036996383, "levy": null, "source_title": "Bay District Schools Tentative Budget FY21-22", "source_url": "https://bay.k12.fl.us/uploads/Tentative Budget FY21-22.pdf"},
+        {"tax_year": 2022, "fiscal_year": "FY2023", "millage": 1.5000, "rolled_back": null, "taxable_value": 25556146041, "levy": null, "source_title": "Inferred split of the DOR 2022 TACD combined SCHOOL DIS figure, 2.2480", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/TACD%20History/2022%20Taxing%20Authority%20Code%20Descriptions/PDF/2022%20Bay%20TACD.pdf"},
+        {"tax_year": 2023, "fiscal_year": "FY2024", "millage": 1.5000, "rolled_back": null, "taxable_value": 31116122876, "levy": null, "source_title": "FLDOE Bay district budget summary FY2023-24", "source_url": "https://www.fldoe.org/file/7507/BayTotalBUD2324.pdf"},
+        {"tax_year": 2024, "fiscal_year": "FY2025", "millage": 1.5000, "rolled_back": null, "taxable_value": 33729673749, "levy": null, "source_title": "FLDOE Bay district budget summary FY2024-25", "source_url": "https://www.fldoe.org/file/7507/BayTotalBUD2425.pdf"},
+        {"tax_year": 2025, "fiscal_year": "FY2026", "millage": 1.5000, "rolled_back": null, "taxable_value": 35062478679, "levy": null, "source_title": "FLDOE Bay district budget summary FY2025-26", "source_url": "https://www.fldoe.org/file/7507/BayTotalBUD2526.pdf"}
+      ]
+    },
+    {
+      "id": "school_total",
+      "name": "Bay District School Board - TOTAL of all school levies (summary row; do not add to stacks on top of the components)",
+      "type": "school",
+      "applies_to": ["countywide"],
+      "years": [
+        {"tax_year": 2020, "fiscal_year": "FY2021", "millage": 5.968, "rolled_back": null, "taxable_value": 18879069863, "levy": 112660020, "source_title": "FL DOR 2020 Databook millage_taxes_levied.xls (School Board Operating)", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Databook%20Historical%20Data/2020DataBookFiles/millage_taxes_levied.xls"},
+        {"tax_year": 2021, "fiscal_year": "FY2022", "millage": 5.847, "rolled_back": null, "taxable_value": 21036996383, "levy": 122992602, "source_title": "FL DOR 2021 Databook millage_taxes_levied.xlsx", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Databook%20Historical%20Data/2021DataBookFiles/millage_taxes_levied.xlsx"},
+        {"tax_year": 2022, "fiscal_year": "FY2023", "millage": 5.504, "rolled_back": null, "taxable_value": 25556146041, "levy": 140644889, "source_title": "FL DOR 2022 Databook millage_taxes_levied.xlsx", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Databook%20Historical%20Data/2022DataBookFiles/millage_taxes_levied.xlsx"},
+        {"tax_year": 2023, "fiscal_year": "FY2024", "millage": 5.483, "rolled_back": null, "taxable_value": 31116122876, "levy": 170597347, "source_title": "FL DOR 2023 Databook millage_taxes_levied.xlsx", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Databook%20Historical%20Data/2023DataBookFiles/millage_taxes_levied.xlsx"},
+        {"tax_year": 2024, "fiscal_year": "FY2025", "millage": 5.311, "rolled_back": null, "taxable_value": 33729673749, "levy": 179129661, "source_title": "FL DOR 2024 Databook millage_taxes_levied.xlsx", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Databook%20Historical%20Data/2024DataBookFiles/millage_taxes_levied.xlsx"},
+        {"tax_year": 2025, "fiscal_year": "FY2026", "millage": 5.337, "rolled_back": null, "taxable_value": 35062478679, "levy": 187128449, "source_title": "FL DOR 2025 Databook millage_taxes_levied.xlsx", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Databook%20Historical%20Data/2025DataBookFiles/millage_taxes_levied.xlsx"}
+      ]
+    },
+    {
+      "id": "nwfwmd",
+      "name": "Northwest Florida Water Management District",
+      "type": "water_mgmt",
+      "applies_to": ["countywide"],
+      "years": [
+        {"tax_year": 2020, "fiscal_year": "FY2021", "millage": 0.0311, "rolled_back": 0.0311, "taxable_value": null, "levy": 548290, "source_title": "Rate and rolled-back rate from FL DOR MillCapComp20. Levy is the Bay-only countywide independent special district levy in the DOR 2020 Databook. The district-wide levy across 16 counties was $3,771,865 (DOR comp20).", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Max%20Millage%20Compliance/Comparison-Millage%20Rate/MillCapComp20.pdf"},
+        {"tax_year": 2021, "fiscal_year": "FY2022", "millage": 0.0294, "rolled_back": 0.0294, "taxable_value": null, "levy": 574387, "source_title": "FL DOR MillCapComp21; Bay levy from DOR 2021 Databook (district-wide levy $3,871,494)", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Max%20Millage%20Compliance/Comparison-Millage%20Rate/MillCapComp21.pdf"},
+        {"tax_year": 2022, "fiscal_year": "FY2023", "millage": 0.0261, "rolled_back": 0.0261, "taxable_value": null, "levy": 590247, "source_title": "FL DOR MillCapComp22; Bay levy from DOR 2022 Databook (district-wide $3,979,076)", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Max%20Millage%20Compliance/Comparison-Millage%20Rate/MillCapComp22.pdf"},
+        {"tax_year": 2023, "fiscal_year": "FY2024", "millage": 0.0234, "rolled_back": 0.0234, "taxable_value": null, "levy": 622514, "source_title": "FL DOR MillCapComp23; Bay levy from DOR 2023 Databook (district-wide $4,094,699)", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Max%20Millage%20Compliance/Comparison-Millage%20Rate/MillCapComp23.pdf"},
+        {"tax_year": 2024, "fiscal_year": "FY2025", "millage": 0.0218, "rolled_back": 0.0218, "taxable_value": null, "levy": 649004, "source_title": "FL DOR MillCapComp24; Bay levy from DOR 2024 Databook (district-wide $4,217,447)", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Max%20Millage%20Compliance/Comparison-Millage%20Rate/MillCapComp24.pdf"},
+        {"tax_year": 2025, "fiscal_year": "FY2026", "millage": 0.0207, "rolled_back": 0.0207, "taxable_value": null, "levy": 663367, "source_title": "FL DOR MillCapComp25. Also matches the NWFWMD FY2025-26 final hearing presentation, the DOR 2025 TACD, and the Tax Collector. District-wide levy $4,329,707.", "source_url": "https://nwfwater.com/wp-content/uploads/2025/09/20250924_Final-Public-Hearing-on-FY-2025-2026-Budget.pdf"}
+      ]
+    },
+    {
+      "id": "beach_mosquito",
+      "name": "Beach Mosquito Control District (independent special district)",
+      "type": "special_district",
+      "applies_to": ["Panama City Beach", "unincorporated beach-area (tax district 56)"],
+      "years": [
+        {"tax_year": 2020, "fiscal_year": "FY2021", "millage": 0.3500, "rolled_back": 0.4863, "taxable_value": null, "levy": 3477762, "source_title": "FL DOR MillCapComp20 (rate, RBR) and comp20 (taxes levied at adopted rate)", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Max%20Millage%20Compliance/Comparison-Millage%20Rate/MillCapComp20.pdf"},
+        {"tax_year": 2021, "fiscal_year": "FY2022", "millage": 0.3000, "rolled_back": 0.3256, "taxable_value": null, "levy": 3260297, "source_title": "FL DOR MillCapComp21 / comp21", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Max%20Millage%20Compliance/Comparison-Millage%20Rate/MillCapComp21.pdf"},
+        {"tax_year": 2022, "fiscal_year": "FY2023", "millage": 0.2200, "rolled_back": 0.2632, "taxable_value": null, "levy": 2777985, "source_title": "FL DOR MillCapComp22 / comp22", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Max%20Millage%20Compliance/Comparison-Millage%20Rate/MillCapComp22.pdf"},
+        {"tax_year": 2023, "fiscal_year": "FY2024", "millage": 0.1800, "rolled_back": 0.1937, "taxable_value": null, "levy": 2656670, "source_title": "FL DOR MillCapComp23 / comp23", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Max%20Millage%20Compliance/Comparison-Millage%20Rate/MillCapComp23.pdf"},
+        {"tax_year": 2024, "fiscal_year": "FY2025", "millage": 0.1400, "rolled_back": 0.1669, "taxable_value": null, "levy": 2290201, "source_title": "FL DOR MillCapComp24 / comp24", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Max%20Millage%20Compliance/Comparison-Millage%20Rate/MillCapComp24.pdf"},
+        {"tax_year": 2025, "fiscal_year": "FY2026", "millage": 0.1200, "rolled_back": 0.1341, "taxable_value": null, "levy": 2087639, "source_title": "FL DOR MillCapComp25 / comp25 (cross-checked: DOR 2025 TACD 0.12; Tax Collector 'Beach Mosquito' 0.12)", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Max%20Millage%20Compliance/Comparison-Taxes%20Levied/comp25.pdf"}
+      ]
+    },
+    {
+      "id": "city_callaway",
+      "name": "City of Callaway (operating)",
+      "type": "city",
+      "applies_to": ["Callaway"],
+      "years": [
+        {"tax_year": 2020, "fiscal_year": "FY2021", "millage": 2.7500, "rolled_back": 2.5710, "taxable_value": 487447425, "levy": 1340353, "source_title": "FL DOR Table 1 FY2020-21; taxable value from DOR 2020 municipal_report.xls", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/20table1/Bay_Table%201.pdf"},
+        {"tax_year": 2021, "fiscal_year": "FY2022", "millage": 2.7500, "rolled_back": 2.6400, "taxable_value": 567844010, "levy": 1561142, "source_title": "FL DOR Table 1 FY2021-22; DOR 2021 municipal_report", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/21table1/Bay_Table%201.pdf"},
+        {"tax_year": 2022, "fiscal_year": "FY2023", "millage": 2.7500, "rolled_back": 2.5430, "taxable_value": 696319339, "levy": 1914647, "source_title": "FL DOR Table 1 FY2022-23; DOR 2022 municipal_report", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/22table1/Bay%20Table%201.pdf"},
+        {"tax_year": 2023, "fiscal_year": "FY2024", "millage": 2.7500, "rolled_back": 2.5499, "taxable_value": 852116553, "levy": 2343145, "source_title": "FL DOR Table 1 FY2023-24; DOR 2023 municipal_report", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/23table1/Bay%20Table%201.pdf"},
+        {"tax_year": 2024, "fiscal_year": "FY2025", "millage": 2.7500, "rolled_back": 2.7380, "taxable_value": 954973011, "levy": 2625932, "source_title": "FL DOR Table 1 FY2024-25; DOR 2024 municipal_report", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/24table1/Bay%20Table%201.pdf"},
+        {"tax_year": 2025, "fiscal_year": "FY2026", "millage": 2.7000, "rolled_back": 2.6981, "taxable_value": 1021586781, "levy": 2758284, "source_title": "FL DOR Table 1 FY2025-26; DOR 2025 municipal_report (cross-checked: TACD 2.7000; Tax Collector 2.70)", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/25table1/Bay%20Table%201.pdf"}
+      ]
+    },
+    {
+      "id": "city_lynn_haven",
+      "name": "City of Lynn Haven (operating)",
+      "type": "city",
+      "applies_to": ["Lynn Haven"],
+      "years": [
+        {"tax_year": 2020, "fiscal_year": "FY2021", "millage": 4.3000, "rolled_back": 3.7044, "taxable_value": 1068249443, "levy": 4593303, "source_title": "FL DOR Table 1 FY2020-21; DOR 2020 municipal_report", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/20table1/Bay_Table%201.pdf"},
+        {"tax_year": 2021, "fiscal_year": "FY2022", "millage": 4.1000, "rolled_back": 3.9403, "taxable_value": 1246766588, "levy": 5109952, "source_title": "FL DOR Table 1 FY2021-22; DOR 2021 municipal_report", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/21table1/Bay_Table%201.pdf"},
+        {"tax_year": 2022, "fiscal_year": "FY2023", "millage": 4.1000, "rolled_back": 3.7602, "taxable_value": 1410219087, "levy": 5781446, "source_title": "FL DOR Table 1 FY2022-23; DOR 2022 municipal_report", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/22table1/Bay%20Table%201.pdf"},
+        {"tax_year": 2023, "fiscal_year": "FY2024", "millage": 4.0000, "rolled_back": 3.7837, "taxable_value": 1616578629, "levy": 6466185, "source_title": "FL DOR Table 1 FY2023-24; DOR 2023 municipal_report", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/23table1/Bay%20Table%201.pdf"},
+        {"tax_year": 2024, "fiscal_year": "FY2025", "millage": 4.0500, "rolled_back": 3.7594, "taxable_value": 1777750055, "levy": 7199341, "source_title": "FL DOR Table 1 FY2024-25; DOR 2024 municipal_report", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/24table1/Bay%20Table%201.pdf"},
+        {"tax_year": 2025, "fiscal_year": "FY2026", "millage": 4.0500, "rolled_back": 3.8866, "taxable_value": 1894855902, "levy": 7674166, "source_title": "FL DOR Table 1 FY2025-26; DOR 2025 municipal_report (cross-checked: TACD 4.0500; Tax Collector 4.05)", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/25table1/Bay%20Table%201.pdf"}
+      ]
+    },
+    {
+      "id": "city_mexico_beach",
+      "name": "City of Mexico Beach (operating)",
+      "type": "city",
+      "applies_to": ["Mexico Beach"],
+      "years": [
+        {"tax_year": 2020, "fiscal_year": "FY2021", "millage": 8.0000, "rolled_back": 7.0107, "taxable_value": 354624117, "levy": 2836928, "source_title": "FL DOR Table 1 FY2020-21; DOR 2020 municipal_report", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/20table1/Bay_Table%201.pdf"},
+        {"tax_year": 2021, "fiscal_year": "FY2022", "millage": 7.0000, "rolled_back": 7.1780, "taxable_value": 413146777, "levy": 2891371, "source_title": "FL DOR Table 1 FY2021-22; DOR 2021 municipal_report", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/21table1/Bay_Table%201.pdf"},
+        {"tax_year": 2022, "fiscal_year": "FY2023", "millage": 6.5000, "rolled_back": 5.6073, "taxable_value": 535207283, "levy": 3478767, "source_title": "FL DOR Table 1 FY2022-23; DOR 2022 municipal_report", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/22table1/Bay%20Table%201.pdf"},
+        {"tax_year": 2023, "fiscal_year": "FY2024", "millage": 5.9999, "rolled_back": 5.5650, "taxable_value": 642903481, "levy": 3857208, "source_title": "FL DOR Table 1 FY2023-24; DOR 2023 municipal_report", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/23table1/Bay%20Table%201.pdf"},
+        {"tax_year": 2024, "fiscal_year": "FY2025", "millage": 5.7500, "rolled_back": 5.3600, "taxable_value": 761549014, "levy": 4378852, "source_title": "FL DOR Table 1 FY2024-25; DOR 2024 municipal_report", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/24table1/Bay%20Table%201.pdf"},
+        {"tax_year": 2025, "fiscal_year": "FY2026", "millage": 5.2500, "rolled_back": 5.1280, "taxable_value": 894498270, "levy": 4696116, "source_title": "FL DOR Table 1 FY2025-26; DOR 2025 municipal_report (cross-checked: TACD; Tax Collector 5.25)", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/25table1/Bay%20Table%201.pdf"}
+      ]
+    },
+    {
+      "id": "city_panama_city",
+      "name": "City of Panama City (operating)",
+      "type": "city",
+      "applies_to": ["Panama City"],
+      "years": [
+        {"tax_year": 2020, "fiscal_year": "FY2021", "millage": 4.9999, "rolled_back": 5.2385, "taxable_value": 2184799472, "levy": 10923022, "source_title": "FL DOR Table 1 FY2020-21; DOR 2020 municipal_report", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/20table1/Bay_Table%201.pdf"},
+        {"tax_year": 2021, "fiscal_year": "FY2022", "millage": 4.8999, "rolled_back": 4.6788, "taxable_value": 2461552808, "levy": 12048297, "source_title": "FL DOR Table 1 FY2021-22; DOR 2021 municipal_report", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/21table1/Bay_Table%201.pdf"},
+        {"tax_year": 2022, "fiscal_year": "FY2023", "millage": 4.7999, "rolled_back": 4.5411, "taxable_value": 2780640230, "levy": 13345551, "source_title": "FL DOR Table 1 FY2022-23; DOR 2022 municipal_report", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/22table1/Bay%20Table%201.pdf"},
+        {"tax_year": 2023, "fiscal_year": "FY2024", "millage": 4.7999, "rolled_back": 4.4388, "taxable_value": 3282070122, "levy": 15752974, "source_title": "FL DOR Table 1 FY2023-24; DOR 2023 municipal_report", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/23table1/Bay%20Table%201.pdf"},
+        {"tax_year": 2024, "fiscal_year": "FY2025", "millage": 4.7999, "rolled_back": 4.6007, "taxable_value": 3661356670, "levy": 17573644, "source_title": "FL DOR Table 1 FY2024-25; DOR 2024 municipal_report", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/24table1/Bay%20Table%201.pdf"},
+        {"tax_year": 2025, "fiscal_year": "FY2026", "millage": 4.7999, "rolled_back": 4.6529, "taxable_value": 3948269606, "levy": 18951299, "source_title": "FL DOR Table 1 FY2025-26; DOR 2025 municipal_report (cross-checked: TACD; Tax Collector 4.7999)", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/25table1/Bay%20Table%201.pdf"}
+      ]
+    },
+    {
+      "id": "pc_downtown_improvement_board",
+      "name": "Panama City Downtown Improvement Board (city-dependent district)",
+      "type": "special_district",
+      "applies_to": ["Panama City - downtown DIB area only (tax district 31)"],
+      "years": [
+        {"tax_year": 2020, "fiscal_year": "FY2021", "millage": 3.0000, "rolled_back": 2.8634, "taxable_value": null, "levy": 117286, "source_title": "FL DOR Table 1 FY2020-21", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/20table1/Bay_Table%201.pdf"},
+        {"tax_year": 2021, "fiscal_year": "FY2022", "millage": 3.0000, "rolled_back": 2.3199, "taxable_value": null, "levy": 152151, "source_title": "FL DOR Table 1 FY2021-22", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/21table1/Bay_Table%201.pdf"},
+        {"tax_year": 2022, "fiscal_year": "FY2023", "millage": 3.0000, "rolled_back": 2.4559, "taxable_value": null, "levy": 186541, "source_title": "FL DOR Table 1 FY2022-23", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/22table1/Bay%20Table%201.pdf"},
+        {"tax_year": 2023, "fiscal_year": "FY2024", "millage": 3.0000, "rolled_back": 2.7145, "taxable_value": null, "levy": 212729, "source_title": "FL DOR Table 1 FY2023-24", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/23table1/Bay%20Table%201.pdf"},
+        {"tax_year": 2024, "fiscal_year": "FY2025", "millage": 3.0000, "rolled_back": 2.8992, "taxable_value": null, "levy": 263038, "source_title": "FL DOR Table 1 FY2024-25", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/24table1/Bay%20Table%201.pdf"},
+        {"tax_year": 2025, "fiscal_year": "FY2026", "millage": 3.0000, "rolled_back": 3.2227, "taxable_value": null, "levy": 246996, "source_title": "FL DOR Table 1 FY2025-26 (cross-checked: TACD district 31; Tax Collector 'Downtown Improvement' 3.00)", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/25table1/Bay%20Table%201.pdf"}
+      ]
+    },
+    {
+      "id": "city_parker",
+      "name": "City of Parker (operating)",
+      "type": "city",
+      "applies_to": ["Parker"],
+      "years": [
+        {"tax_year": 2020, "fiscal_year": "FY2021", "millage": 0.0, "rolled_back": null, "taxable_value": null, "levy": 0, "source_title": "No city millage. Parker is absent from DOR Table 1 FY2020-21, and the 2020 TACD for tax district 010 shows no CITY levy.", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/TACD%20History/2020%20Taxing%20Authority%20Code%20Descriptions/2020%20Bay%20TACD.pdf"},
+        {"tax_year": 2021, "fiscal_year": "FY2022", "millage": 0.0, "rolled_back": null, "taxable_value": null, "levy": 0, "source_title": "No city millage (2021 TACD district 010)", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/TACD%20History/2021%20Taxing%20Authority%20Code%20Descriptions/2021%20Bay%20TACD.pdf"},
+        {"tax_year": 2022, "fiscal_year": "FY2023", "millage": 0.0, "rolled_back": 0.0, "taxable_value": null, "levy": 0, "source_title": "DOR Table 1 FY2023-24 shows Parker 2022-23 at 0.0000 (2022 TACD district 010: no CITY levy)", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/23table1/Bay%20Table%201.pdf"},
+        {"tax_year": 2023, "fiscal_year": "FY2024", "millage": 3.0000, "rolled_back": null, "taxable_value": null, "levy": 829456, "source_title": "FL DOR Table 1 FY2023-24. First year of the levy. DOR lists RBR 0.0000 and notes the levy was adopted by unanimous vote.", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/23table1/Bay%20Table%201.pdf"},
+        {"tax_year": 2024, "fiscal_year": "FY2025", "millage": 3.0000, "rolled_back": 2.7178, "taxable_value": null, "levy": 932951, "source_title": "FL DOR Table 1 FY2024-25", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/24table1/Bay%20Table%201.pdf"},
+        {"tax_year": 2025, "fiscal_year": "FY2026", "millage": 3.0000, "rolled_back": 2.4991, "taxable_value": null, "levy": 967589, "source_title": "FL DOR Table 1 FY2025-26 (cross-checked: TACD; Tax Collector 3.00)", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/25table1/Bay%20Table%201.pdf"}
+      ]
+    },
+    {
+      "id": "city_springfield",
+      "name": "City of Springfield (operating)",
+      "type": "city",
+      "applies_to": ["Springfield"],
+      "years": [
+        {"tax_year": 2020, "fiscal_year": "FY2021", "millage": 3.4650, "rolled_back": 3.2478, "taxable_value": 192412013, "levy": 666562, "source_title": "FL DOR Table 1 FY2020-21; DOR 2020 municipal_report", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/20table1/Bay_Table%201.pdf"},
+        {"tax_year": 2021, "fiscal_year": "FY2022", "millage": 4.4650, "rolled_back": 3.1555, "taxable_value": 223582714, "levy": 998061, "source_title": "FL DOR Table 1 FY2021-22; DOR 2021 municipal_report", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/21table1/Bay_Table%201.pdf"},
+        {"tax_year": 2022, "fiscal_year": "FY2023", "millage": 4.8650, "rolled_back": 3.9672, "taxable_value": 286627373, "levy": 1395735, "source_title": "FL DOR Table 1 FY2022-23; DOR 2022 municipal_report", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/22table1/Bay%20Table%201.pdf"},
+        {"tax_year": 2023, "fiscal_year": "FY2024", "millage": 4.8650, "rolled_back": 4.2606, "taxable_value": 351958539, "levy": 1712167, "source_title": "FL DOR Table 1 FY2023-24; DOR 2023 municipal_report", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/23table1/Bay%20Table%201.pdf"},
+        {"tax_year": 2024, "fiscal_year": "FY2025", "millage": 4.8650, "rolled_back": 4.6096, "taxable_value": 393171665, "levy": 1912706, "source_title": "FL DOR Table 1 FY2024-25; DOR 2024 municipal_report", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/24table1/Bay%20Table%201.pdf"},
+        {"tax_year": 2025, "fiscal_year": "FY2026", "millage": 4.8650, "rolled_back": 4.6658, "taxable_value": 428311835, "levy": 2083737, "source_title": "FL DOR Table 1 FY2025-26; DOR 2025 municipal_report (cross-checked: TACD; Tax Collector 4.865)", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/25table1/Bay%20Table%201.pdf"}
+      ]
+    },
+    {
+      "id": "city_panama_city_beach",
+      "name": "City of Panama City Beach (levies no ad valorem property tax)",
+      "type": "city",
+      "applies_to": ["Panama City Beach"],
+      "years": [
+        {"tax_year": 2020, "fiscal_year": "FY2021", "millage": 0.0, "rolled_back": null, "taxable_value": null, "levy": 0, "source_title": "DOR 2020 TACD tax district 013 has no CITY column. PCB is not listed in DOR Table 1.", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/TACD%20History/2020%20Taxing%20Authority%20Code%20Descriptions/2020%20Bay%20TACD.pdf"},
+        {"tax_year": 2021, "fiscal_year": "FY2022", "millage": 0.0, "rolled_back": null, "taxable_value": null, "levy": 0, "source_title": "DOR 2021 TACD district 013", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/TACD%20History/2021%20Taxing%20Authority%20Code%20Descriptions/2021%20Bay%20TACD.pdf"},
+        {"tax_year": 2022, "fiscal_year": "FY2023", "millage": 0.0, "rolled_back": null, "taxable_value": null, "levy": 0, "source_title": "DOR 2022 TACD district 013", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/TACD%20History/2022%20Taxing%20Authority%20Code%20Descriptions/PDF/2022%20Bay%20TACD.pdf"},
+        {"tax_year": 2023, "fiscal_year": "FY2024", "millage": 0.0, "rolled_back": null, "taxable_value": null, "levy": 0, "source_title": "DOR 2023 TACD district 013", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/TACD%20History/2023%20Taxing%20Authority%20Code%20Descrptions/PDF/2023%20Bay%20TACD.pdf"},
+        {"tax_year": 2024, "fiscal_year": "FY2025", "millage": 0.0, "rolled_back": null, "taxable_value": null, "levy": 0, "source_title": "DOR 2024 TACD district 013", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/TACD%20History/2024%20Taxing%20Authority%20Code%20Descriptions/PDF/2024%20Bay%20TACD.pdf"},
+        {"tax_year": 2025, "fiscal_year": "FY2026", "millage": 0.0, "rolled_back": null, "taxable_value": null, "levy": 0, "source_title": "DOR 2025 TACD district 13, City Operating 0.0000", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/TACD%20History/2025%20Taxing%20Authority%20Code%20Descriptions/2025%20Bay%20TACD.pdf"}
+      ]
+    }
+  ],
+  "stacks": {
+    "_explanation": "Each stack lists the authority ids that make up one DOR tax district. These are the components of every year's stack. Use the school_* components, not school_total. Published total millage for 2025 (DOR 2025 TACD) is in stack_totals_2025. Earlier years are in stack_totals_by_year.",
+    "Callaway": ["bay_county_general", "county_mosquito_control", "school_rle", "school_discretionary", "school_capital_outlay", "nwfwmd", "city_callaway"],
+    "Lynn Haven": ["bay_county_general", "county_mosquito_control", "school_rle", "school_discretionary", "school_capital_outlay", "nwfwmd", "city_lynn_haven"],
+    "Mexico Beach": ["bay_county_general", "county_mosquito_control", "school_rle", "school_discretionary", "school_capital_outlay", "nwfwmd", "city_mexico_beach"],
+    "Parker": ["bay_county_general", "county_mosquito_control", "school_rle", "school_discretionary", "school_capital_outlay", "nwfwmd", "city_parker"],
+    "Panama City Beach": ["bay_county_general", "beach_mosquito", "school_rle", "school_discretionary", "school_capital_outlay", "nwfwmd"],
+    "Panama City": ["bay_county_general", "county_mosquito_control", "school_rle", "school_discretionary", "school_capital_outlay", "nwfwmd", "city_panama_city"],
+    "Panama City - Downtown DIB": ["bay_county_general", "county_mosquito_control", "school_rle", "school_discretionary", "school_capital_outlay", "nwfwmd", "city_panama_city", "pc_downtown_improvement_board"],
+    "Springfield": ["bay_county_general", "county_mosquito_control", "school_rle", "school_discretionary", "school_capital_outlay", "nwfwmd", "city_springfield"],
+    "unincorporated": ["bay_county_general", "county_fire_mstu", "county_mosquito_control", "school_rle", "school_discretionary", "school_capital_outlay", "nwfwmd"],
+    "unincorporated - beach area": ["bay_county_general", "county_fire_mstu", "beach_mosquito", "school_rle", "school_discretionary", "school_capital_outlay", "nwfwmd"],
+    "tax_district_codes": {"Callaway": "02", "Lynn Haven": "06", "Mexico Beach": "08", "Parker": "10", "Panama City Beach": "13", "Panama City": "16", "Springfield": "20", "Panama City - Downtown DIB": "31", "unincorporated": "55 (Fire County Mosquito)", "unincorporated - beach area": "56 (Fire Beach Mosquito)"},
+    "stack_totals_2025": {"Callaway": 13.6939, "Lynn Haven": 15.0439, "Mexico Beach": 16.2439, "Parker": 13.9939, "Panama City Beach": 10.9139, "Panama City": 15.7938, "Panama City - Downtown DIB": 18.7938, "Springfield": 15.8589, "unincorporated": 12.3739, "unincorporated - beach area": 12.2939},
+    "stack_totals_by_year": {
+      "_source": "DOR TACD 'TOTAL' column (published as decimals, e.g. .01493530 = 14.9353 mills)",
+      "2020": {"Callaway": 13.3853, "Lynn Haven": 14.9353, "Mexico Beach": 18.6353, "Parker": 10.6353, "Panama City Beach": 10.7853, "Panama City": 15.6352, "Panama City - Downtown DIB": 18.6352, "Springfield": 14.1003, "unincorporated": 12.0153, "unincorporated - beach area": 12.1653},
+      "2021": {"Callaway": 13.2626, "Lynn Haven": 14.6126, "Mexico Beach": 17.5126, "Parker": 10.5126, "Panama City Beach": 10.6126, "Panama City": 15.4125, "Panama City - Downtown DIB": 18.4125, "Springfield": 14.9776, "unincorporated": 11.8926, "unincorporated - beach area": 11.9926},
+      "2022": {"Callaway": 12.9163, "Lynn Haven": 14.2663, "Mexico Beach": 16.6663, "Parker": 10.1663, "Panama City Beach": 10.1863, "Panama City": 14.9662, "Panama City - Downtown DIB": 17.9662, "Springfield": 15.0313, "unincorporated": 11.5463, "unincorporated - beach area": 11.5663},
+      "2023": {"Callaway": 13.8926, "Lynn Haven": 15.1426, "Mexico Beach": 17.1425, "Parker": 14.1426, "Panama City Beach": 11.1226, "Panama City": 15.9425, "Panama City - Downtown DIB": 18.9425, "Springfield": 16.0076, "unincorporated": 12.5226, "unincorporated - beach area": 12.5026},
+      "2024": {"Callaway": 13.7190, "Lynn Haven": 15.0190, "Mexico Beach": 16.7190, "Parker": 13.9690, "Panama City Beach": 10.9090, "Panama City": 15.7689, "Panama City - Downtown DIB": 18.7689, "Springfield": 15.8340, "unincorporated": 12.3490, "unincorporated - beach area": 12.2890},
+      "2025": {"Callaway": 13.6939, "Lynn Haven": 15.0439, "Mexico Beach": 16.2439, "Parker": 13.9939, "Panama City Beach": 10.9139, "Panama City": 15.7938, "Panama City - Downtown DIB": 18.7938, "Springfield": 15.8589, "unincorporated": 12.3739, "unincorporated - beach area": 12.2939}
+    }
+  },
+  "non_ad_valorem": [
+    {"name": "Bay County government non-ad valorem assessments, FY2025-26 totals by function: Community Redevelopment $1,013,419; Drainage/Stormwater $2,038,360; Lighting $3,471; Road Improvements $1,160; Other $334,847; total $3,391,257", "applies_to": "parcels in county assessment areas", "amount": "total $3,391,257 (FY2025-26)", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Non-Ad%20Valorem%20Reports/2025/2025%20NAV%20by%20County.pdf"},
+    {"name": "Bay County municipal non-ad valorem assessments, FY2025-26 totals for all Bay cities combined: Community Redevelopment $1,103,899; Drainage/Stormwater $7,506,401; Fire Control $14,538,638; Other $38,395; total $23,187,333", "applies_to": "city parcels (PCB, Panama City, Lynn Haven, etc.)", "amount": "total $23,187,333 (FY2025-26)", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Non-Ad%20Valorem%20Reports/2025/2025%20NAV%20by%20City.pdf"},
+    {"name": "Independent special district non-ad valorem assessments in Bay (mostly CDDs, e.g. Pier Park and other community development districts), FY2025-26: Community Development $1,524,925; Lighting $9,290; Other $1,989; total $1,536,204", "applies_to": "parcels inside those districts", "amount": "total $1,536,204 (FY2025-26)", "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Non-Ad%20Valorem%20Reports/2025/2025%20NAV%20by%20Independent%20Special%20District.pdf"},
+    {"name": "Panama City Beach Fire Service Assessment", "applies_to": "Panama City Beach (citywide)", "amount": "FY2025-26 proposed: $0.78 per $1,000 of improvement value (Tier 1) plus $95.66 per parcel (Tier 2), 4% above FY2024-25", "source_url": "https://www.pcbfl.gov/about-us/fiscal-year-2024-25-special-assessment-info"},
+    {"name": "Panama City Beach Stormwater Management Assessment", "applies_to": "Panama City Beach (citywide)", "amount": "FY2025-26 proposed: $0.49 per $1,000 of improvement value (Tier 1) plus $48.30 per parcel (Tier 2)", "source_url": "https://www.pcbfl.gov/about-us/fiscal-year-2024-25-special-assessment-info"},
+    {"name": "Panama City Beach Front Beach Road CRA Assessment", "applies_to": "Front Beach Road CRA parcels only", "amount": "FY2025-26 proposed: Category A $38.95 per parcel; Category B $0.009 per heated sq ft + $0.04 per $1,000 improvement value + $0.06 per $1,000 land value", "source_url": "https://www.pcbfl.gov/about-us/fiscal-year-2024-25-special-assessment-info"},
+    {"name": "Lynn Haven Stormwater Non-Ad Valorem Assessment", "applies_to": "Lynn Haven", "amount": "Single-family tiers by impervious area: $104.98 / $172.10 / $246.10 / $344.20 per year; non-single-family $172.10 per 2,300 sq ft; vacant $30.98 per 2,300 sq ft (fiscal year not stated on the page)", "source_url": "https://cityoflynnhaven.com/471/Non-Ad-Valorem-FAQs"},
+    {"name": "Panama City Fire Protection Assessment", "applies_to": "Panama City", "amount": null, "source_url": null}
+  ],
+  "notes": [
+    "Millage is dollars per $1,000 of taxable value: tax = taxable value / 1000 x millage, summed over every levy in the parcel's tax district.",
+    "Taxable value is assessed value minus exemptions. The first $25,000 homestead exemption applies to all levies. The second $25,000 homestead exemption (on assessed value between $50,000 and $75,000) does NOT apply to school levies. So for a homestead, the school taxable value can be up to $25,000 higher than the county, city, and other taxable value. A calculator needs two taxable values.",
+    "Save Our Homes caps annual growth in homestead assessed value (3% or CPI, whichever is lower) for all levies. The 10% non-homestead assessment cap applies to non-school levies only.",
+    "Bay District School Board levies are split into Required Local Effort (set by the state each year through the FEFP), Discretionary Operating (0.748) and Local Capital Improvement (1.500). There was no voted or debt-service school millage in 2020-2025. DOR's TACD and the Tax Collector publish discretionary plus capital outlay as one 'School Discretionary' figure of 2.2480.",
+    "The county fire MSTU (1.38) applies only in unincorporated Bay County (TACD districts 55 and 56). Cities provide their own fire service, often funded by non-ad valorem fire assessments.",
+    "Mosquito control is split. County Mosquito Control (0.20, county-dependent) applies everywhere except Panama City Beach and the unincorporated beach area. Those two areas pay the independent Beach Mosquito Control District rate instead.",
+    "Panama City Beach levies no city ad valorem millage. It funds services through non-ad valorem fire, stormwater, and CRA assessments, plus other revenue.",
+    "City of Parker had no city millage in 2020-2022. It began levying 3.0000 mills in tax year 2023.",
+    "Bay County BOCC raised countywide operating millage from 4.4362 to 5.4362 in tax year 2023 (FY2024), 34.3% above the rolled-back rate.",
+    "No city or county ad valorem debt-service (voted bond) millage appears for any Bay authority in 2020-2025 (DOR databook debt-service columns are blank; the 2025 TACD debt columns are 0.0000).",
+    "Panama City Downtown Improvement Board (3.0 mills) applies only to downtown parcels in TACD district 31 (412 parcels in 2025), on top of Panama City's rate.",
+    "Levy figures are DOR 'taxes levied' at the adopted rate as certified for that year. DOR's following-year Table 1 shows slightly different 'prior year' amounts after roll corrections. Example: BOCC 2024 levy is $161,094,369 in the 2024 table and $160,866,813 in the 2025 table. Taxable values are the DOR Databook figures for the year (status R-NVAB for county and school). The FLDOE school budget uses a slightly different certified school taxable value: $34,920,695,024 for 2025, against $35,062,478,679 in the DOR databook.",
+    "Cross-check of 2025 rates: DOR Table 1, DOR 2025 TACD, DOR 2025 Max Millage Compliance, and the Bay County Tax Collector 2025 millage list all agree on every authority. NWFWMD's own FY2025-26 hearing document and FLDOE's Bay budget summary confirm 0.0207 and the 3.089/0.748/1.5 school split. The only presentation difference is that the Tax Collector and TACD combine school discretionary and capital as 2.2480.",
+    "Mexico Beach (2021) and Panama City (2020) adopted rates below the rolled-back rate. Beach Mosquito Control District adopted below rolled-back in every year, and Panama City DIB in 2025.",
+    "Exemptions for seniors, veterans, widows and others vary by levy and city. Bills also carry non-ad valorem assessments, which are separate from millage. Florida offers early-payment discounts: 4% in November, declining monthly."
+  ],
+  "gaps": [
+    "School rolled-back rates were not found as published figures for any year. A 2025 news report says the 5.337 adopted rate was 0.99% over rolled-back but gives no figure.",
+    "School levy dollars by component (RLE, discretionary, capital) were not found as published DOR figures. Only the total school levy from the DOR databook is given. FLDOE's budget summary lists rates and certified taxable value, so components can be computed but are left null here.",
+    "2020 and 2022 school discretionary/capital split is inferred from the combined 2.2480 published in the TACD. FLDOE budget summaries for FY2020-21 and FY2022-23 could not be fetched.",
+    "Taxable values for the fire MSTU, county mosquito control, Beach Mosquito Control District, Panama City DIB, and City of Parker were not found as published figures. They are not in the DOR municipal report (Parker is missing from it). They could be derived as levy / millage x 1000.",
+    "NWFWMD Bay-specific levy is taken from the DOR databook 'countywide independent special districts' column. NWFWMD is the only countywide independent district in Bay, but DOR does not label it by name.",
+    "Bay County Property Appraiser (baypa.net) millage tables and official TRIM / adopted-millage resolutions were not retrieved. Cross-checks used the Tax Collector page and the DOR datasets instead.",
+    "Per-parcel non-ad valorem amounts are incomplete. Missing: county solid waste and any county fire assessment rates, the Panama City fire protection assessment rate, and assessments for Callaway, Springfield, Parker and Mexico Beach. Only DOR's FY2025-26 aggregate NAV totals, the PCB FY2025-26 proposed rates, and the Lynn Haven stormwater tiers were captured. NAV aggregates for 2020-2024 exist in the DOR 'Non-Ad Valorem Reports' folders but were not extracted.",
+    "Tax year 2026 (FY2027) rates were not collected; they were outside scope."
+  ]
+}
