@@ -273,7 +273,7 @@ def payments_page():
       <li><b>The Clerk pays their bills.</b> Until November 2025, each agency's payments were listed in the Clerk's monthly check register. That's what this page shows: {money(tot)} in payments over the months covered.</li>
       <li><b>Some bills hide the details.</b> Credit card payments and payroll services show as one payment; what was bought isn't listed. Payments to individual people are counted but not named.</li></ol></div></section>
   <div class="callout">In January 2026 the Clerk of Court published an <a href="https://apps.baycoclerk.com/Web_File_Repo/bocc_finance/Panama_City_Beach_TDC_CVB_Public_CAP.pdf" target="_blank" rel="noopener">action plan for Visit Panama City Beach</a>, describing a criminal investigation and forensic audit and putting the agency's payments under the Clerk's review. The payments here are listed as recorded; this site makes no finding about any of them.</div>
-  <div class="vt-filters mt-f two"><label class="vf"><span>Agency</span><select id="wpA">{tabs}</select></label><label class="vf"><span>Search payees</span><input id="wpQ" type="search" placeholder="e.g. Meta, printing, hotel"></label></div>
+  <div class="vt-filters mt-f two"><label class="vf"><span>Agency</span><select id="wpA" data-param="agency">{tabs}</select></label><label class="vf"><span>Search payees</span><input id="wpQ" type="search" placeholder="e.g. Meta, printing, hotel" data-param="q"></label></div>
   {secs}
   <section class="tx-sec method"><div class="sec-hd"><h2 id="src">Sources and gaps</h2></div>
     <p>The Bay County Clerk of Court's monthly "Check Register – Sorted by Dollar Amount," attached to County Commission agendas. The pages are scans; they were read by OCR and each month was added up and compared with the register's printed total. A few misread amounts were corrected only where the fix made the month match.</p>
@@ -286,5 +286,6 @@ def payments_page():
   if (u.get('agency')) a.value = u.get('agency');
   const run = () => {{ document.querySelectorAll('.wp-ag').forEach(s => s.hidden = s.dataset.ag !== a.value); const t = q.value.trim().toLowerCase();
     document.querySelectorAll('.wp-ag:not([hidden]) tbody tr').forEach(tr => tr.hidden = !!t && !tr.dataset.v.includes(t)); }};
-  a.addEventListener('change', () => {{ history.replaceState(null, '', '?agency=' + a.value); run(); }}); q.addEventListener('input', run); run(); }})();
+  if (u.get('q')) q.value = u.get('q');
+  a.addEventListener('change', run); q.addEventListener('input', run); run(); }})();
 </script>'''

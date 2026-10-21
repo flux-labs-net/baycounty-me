@@ -113,10 +113,10 @@ def contracts_page(out_dir):
     <p class="note">Cash paid in the period covered, not contract value. Payroll, benefits, transfers to other offices and pass-through payments are left out. Other cities don't publish check registers online; they can be requested.</p></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="how">How contracts were awarded</h2><span class="muted">By award dollars</span></div><div class="hbars">{mbars}</div>
     <p class="note">Based on how each agenda item describes the award. "Not stated" means the agenda didn't say.</p></section>
-  <section class="tx-sec"><div class="sec-hd"><h2 id="all">Every contract in this list</h2><span class="muted" id="ctCount"></span></div>
-    <div class="filters-row"><input id="ctQ" type="search" placeholder="Search vendor or project" aria-label="Search contracts">
+  <section class="tx-sec"><div class="sec-hd"><h2 id="all">Every contract in this list</h2><span class="muted" id="ctCount" aria-live="polite"></span></div>
+    <div class="filters-row"><input id="ctQ" type="search" data-param="q" placeholder="Search vendor or project" aria-label="Search contracts">
       <select id="ctG" aria-label="Government" data-param="gov"><option value="">All governments</option>{''.join(f"<option>{e(g)}</option>" for g in govs)}</select>
-      <select id="ctM" aria-label="How awarded"><option value="">Any method</option>{''.join(f"<option>{e(k)}</option>" for k, _ in METHODS)}<option>Other</option></select>
+      <select id="ctM" aria-label="How awarded" data-param="method"><option value="">Any method</option>{''.join(f"<option>{e(k)}</option>" for k, _ in METHODS)}<option>Other</option></select>
       <button type="button" class="pill sm" id="ctCsv">Download CSV</button></div>
     <div class="tablewrap"><table class="tx-table" id="ctT"><thead><tr><th scope="col">Government</th><th scope="col">Vendor</th><th scope="col">For</th><th scope="col" class="num">Amount</th><th scope="col">How awarded</th><th scope="col">Date</th></tr></thead><tbody></tbody></table></div>
     <button type="button" class="pill" id="ctMore">Show more</button></section>

@@ -193,9 +193,9 @@ def audits_page():
   <section class="tx-sec"><div class="sec-hd"><h2 id="score">Scorecard</h2><span class="muted">Latest audit for each government</span></div>
     <div class="tablewrap"><table class="tx-table"><thead><tr><th scope="col">Government</th><th scope="col">Year</th><th scope="col">Opinion</th><th scope="col" class="num">Findings</th><th scope="col" class="num">Repeats</th><th scope="col" class="num">Oldest unfixed since</th><th scope="col" class="num">Findings by year</th></tr></thead><tbody>{score}</tbody></table></div>
     <p class="note">"Findings by year" runs oldest to newest across the three audits reviewed.</p></section>
-  <section class="tx-sec"><div class="sec-hd"><h2 id="list">Every finding</h2><span class="muted" id="fdCount"></span></div>
-    <div class="filters-row"><select id="fdG" aria-label="Government"><option value="">All governments</option>{opts}</select>
-      <label class="chk"><input type="checkbox" id="fdR"> Repeats only</label></div>
+  <section class="tx-sec"><div class="sec-hd"><h2 id="list">Every finding</h2><span class="muted" id="fdCount" aria-live="polite"></span></div>
+    <div class="filters-row"><select id="fdG" aria-label="Government" data-param="gov"><option value="">All governments</option>{opts}</select>
+      <label class="chk"><input type="checkbox" id="fdR" data-param="repeat"> Repeats only</label></div>
     <ol class="findings" id="fdList">{items}</ol></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="state">State auditor reports</h2><span class="muted">Florida Auditor General reviews beyond the yearly audit</span></div>{sr}</section>
   <section class="tx-sec method"><div class="sec-hd"><h2 id="src">Sources</h2></div><p>Annual audits and management letters filed with the <a href="https://flauditor.gov/" target="_blank" rel="noopener">Florida Auditor General</a>, plus the Auditor General's own reports. Findings are summarized in plain English; the auditor's finding number is kept so you can find it in the report.</p></section>

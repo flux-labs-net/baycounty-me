@@ -79,11 +79,11 @@ def michael_page(out_dir):
   </section>
 
   <section class="tx-sec" aria-labelledby="led-h">
-    <div class="sec-hd"><h2 id="led-h">Every FEMA project in Bay County</h2><span class="muted" id="ledCount"></span></div>
+    <div class="sec-hd"><h2 id="led-h">Every FEMA project in Bay County</h2><span class="muted" id="ledCount" aria-live="polite"></span></div>
     <div class="filters-row">
-      <input id="ledQ" type="search" placeholder="Search projects (e.g. school, pier, debris)" aria-label="Search projects">
-      <select id="ledA" aria-label="Applicant"><option value="">All applicants</option></select>
-      <select id="ledC" aria-label="Type"><option value="">All types</option></select>
+      <input id="ledQ" type="search" data-param="q" placeholder="Search projects (e.g. school, pier, debris)" aria-label="Search projects">
+      <select id="ledA" aria-label="Applicant" data-param="a"><option value="">All applicants</option></select>
+      <select id="ledC" aria-label="Type" data-param="c"><option value="">All types</option></select>
       <button type="button" class="pill sm" id="ledCsv">Download CSV</button>
     </div>
     <div class="tablewrap"><table class="tx-table" id="ledT"><thead><tr><th scope="col">Applicant</th><th scope="col">Project</th><th scope="col">Type</th><th scope="col" class="num">Federal</th><th scope="col" class="num">First paid</th><th scope="col">Status</th></tr></thead><tbody></tbody></table></div>

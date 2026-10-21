@@ -109,7 +109,8 @@ def surtax_page(out_dir):
     for p in inf['projects']:
         if p.get('lat') is None:
             continue
-        projs.append({'n': p['name'], 'g': p['government'], 'c': p.get('category') or 'Other', 's': p['status'], 'p': p.get('pct_complete'),
+        pid = f"p{p['gis_objectid']}" if p.get('gis_objectid') is not None else (f"l{p['gis_objectids'][0]}" if p.get('gis_objectids') else '')
+        projs.append({'id': pid, 'n': p['name'], 'g': p['government'], 'c': p.get('category') or 'Other', 's': p['status'], 'p': p.get('pct_complete'),
                       'k': p.get('programmed_cost') or p.get('promised_cost'), 'y': p.get('fiscal_years') or '', 'x': round(p['lng'], 5), 'yy': round(p['lat'], 5),
                       'd': (p.get('description') or '')[:260]})
     json.dump(projs, open(os.path.join(out_dir, 'data', 'surtax-projects.json'), 'w'), separators=(',', ':'))
@@ -134,14 +135,14 @@ def surtax_page(out_dir):
       <li><b>It can only build things.</b> The infrastructure money goes to roads, bridges, dirt-road paving, drainage and safety projects. The school money goes to school construction, renovation, security and technology.</li>
       <li><b>The county and cities split the infrastructure tax</b> by a state formula based on population.</li>
     </ol></div></section>
-  <section class="tx-sec"><div class="sec-hd"><h2 id="map-h">Infrastructure projects on the county map</h2><span class="muted" id="stCount"></span></div>
+  <section class="tx-sec"><div class="sec-hd"><h2 id="map-h">Infrastructure projects on the county map</h2><span class="muted" id="stCount" aria-live="polite"></span></div>
     <div class="filters-row">
-      <input id="stQ" type="search" placeholder="Search projects or roads" aria-label="Search projects">
+      <input id="stQ" type="search" placeholder="Search projects or roads" aria-label="Search projects" data-param="q">
       <select id="stG" aria-label="Government" data-param="gov"><option value="">All governments</option></select>
-      <select id="stC" aria-label="Type"><option value="">All types</option></select>
-      <select id="stS" aria-label="Status"><option value="">Any status</option><option value="completed">Completed</option><option value="in_progress">In progress</option><option value="not_started">Not started</option></select>
+      <select id="stC" aria-label="Type" data-param="type"><option value="">All types</option></select>
+      <select id="stS" aria-label="Status" data-param="status"><option value="">Any status</option><option value="completed">Completed</option><option value="in_progress">In progress</option><option value="not_started">Not started</option></select>
     </div>
-    <div class="st-wrap"><div class="st-mapcol"><div class="st-mapbox"><svg id="stMap" viewBox="0 0 400 300" role="img" aria-label="Map of sales tax projects. Select a project in the list or tap a dot for details."></svg>
+    <div class="st-wrap"><div class="st-mapcol"><div class="st-mapbox"><svg id="stMap" viewBox="0 0 400 300" role="group" aria-label="Map of sales tax projects. Each dot is a project: tab to a dot and press Enter, or pick one in the list, for details."></svg>
         <div class="st-zoom print-hide"><button type="button" id="stIn" aria-label="Zoom in">+</button><button type="button" id="stOut" aria-label="Zoom out">−</button><button type="button" id="stAll" class="st-all">Show all</button></div></div>
         <div class="st-sel" id="stSel" hidden aria-live="polite"></div></div>
       <ol class="st-list" id="stList"></ol></div>

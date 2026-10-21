@@ -18,8 +18,8 @@
                  spreadsheet formulas (a leading = + - @ gets a ' prefix).
    Announce      BCM.announce(text) speaks a short status to screen readers.
 
-   Page scripts load before this file (both are deferred and come first in the page), so code that
-   needs BCM at start-up should run on DOMContentLoaded or check window.BCM first. */
+   site.js is a deferred script in <head>, so deferred page scripts (in the body) can use BCM at
+   start-up. Inline page scripts run earlier, while the page parses: wrap them in DOMContentLoaded. */
 (() => {
 const B = window.BCM = window.BCM || {};
 

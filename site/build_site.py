@@ -334,6 +334,7 @@ def _layout(title, desc, path, body, extra_head=''):
 <script>window.va=window.va||function(){{(window.vaq=window.vaq||[]).push(arguments)}};window.si=window.si||function(){{(window.siq=window.siq||[]).push(arguments)}};</script>
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/_vercel/speed-insights/script.js"></script>
+<script src="/assets/site.js" defer></script>
 {extra_head}
 </head>
 <body>
@@ -343,7 +344,6 @@ def _layout(title, desc, path, body, extra_head=''):
 {body}
 </main>
 {FOOTER.replace('__UPDATED__', ('Page updated ' + nice_date(last_updated(path)) + ' · ') if path not in ('/404',) else '')}
-<script src="/assets/site.js" defer></script>
 <script src="/assets/report.js" defer></script>
 </body>
 </html>
