@@ -1,0 +1,156 @@
+"""Budget explorer (/public-money/budget-explorer) and tourism-agency payments (/public-money/who-gets-paid)."""
+import html, json, os
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+DATA = os.path.join(HERE, '..', 'data')
+e = lambda s: html.escape(str(s if s is not None else ''))
+PDF_BTN = '<button type="button" class="pdf-btn" id="pdf"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 12v2h10v-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Export PDF</button>'
+
+
+def money(n):
+    if n is None:
+        return '—'
+    a = abs(n)
+    return f'${n/1e9:,.2f}B' if a >= 1e9 else f'${n/1e6:,.1f}M' if a >= 1e6 else f'${n/1e3:,.0f}K' if a >= 1e4 else f'${n:,.0f}'
+
+
+def _j(*p):
+    fp = os.path.join(DATA, *p)
+    return json.load(open(fp)) if os.path.exists(fp) else None
+
+
+# ---------------- Budget explorer ----------------
+BUDGET_JS = r"""
+(() => {
+const B = __B__;
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const M = n => { const a = Math.abs(n); return a >= 1e9 ? '$' + (n/1e9).toFixed(2) + 'B' : a >= 1e6 ? '$' + (n/1e6).toFixed(1) + 'M' : a >= 1e4 ? '$' + Math.round(n/1e3).toLocaleString() + 'K' : '$' + Math.round(n).toLocaleString(); };
+$('beG').innerHTML = B.map(b => `<option value="${b.gov}">${esc(b.short)}</option>`).join('');
+const q = new URLSearchParams(location.search).get('gov'); if (q && B.some(b => b.gov === q)) $('beG').value = q;
+function bars(list, total, note) {
+  if (!list || !list.length) return `<p class="muted">${note || 'Not broken out in the published budget.'}</p>`;
+  const xs = [...list].sort((a, b) => b.amount - a.amount), mx = xs[0].amount, sum = xs.reduce((s, x) => s + x.amount, 0);
+  return '<div class="hbars">' + xs.map(x => `<div class="hb"><span class="hb-n">${esc(x.name)}${x.type ? ` <em>${esc(x.type)}</em>` : ''}</span><span class="hb-track"><span class="hb-bar" style="width:${Math.max(.5, x.amount / mx * 100).toFixed(1)}%"></span></span><span class="hb-v">${M(x.amount)} <em>${(x.amount / (total || sum) * 100).toFixed(1)}%</em></span></div>`).join('') + '</div>';
+}
+function run() {
+  const b = B.find(x => x.gov === $('beG').value);
+  history.replaceState(null, '', '?gov=' + b.gov);
+  const gf = (b.funds || []).find(f => /general/i.test(f.type || '') || /general fund/i.test(f.name));
+  const gfd = (b.general_fund_departments || []).reduce((s, x) => s + x.amount, 0);
+  $('beKpis').innerHTML = `<div class="kpi"><span class="eyebrow">Total budget</span><span class="v">${M(b.total)}</span><span class="s">${esc(b.fiscal_year)}</span></div>
+    <div class="kpi"><span class="eyebrow">Status</span><span class="v">${b.status === 'adopted' ? 'Adopted' : 'Tentative'}</span><span class="s">${b.status === 'adopted' ? 'Final budget approved in September' : 'Final adopted budget not posted online'}</span></div>
+    <div class="kpi"><span class="eyebrow">General Fund</span><span class="v">${gf ? M(gf.amount) : gfd ? M(gfd) : '—'}</span><span class="s">day-to-day operations</span></div>
+    <div class="kpi"><span class="eyebrow">Funds</span><span class="v">${(b.funds || []).length || '—'}</span><span class="s">separate accounts the money is kept in</span></div>`;
+  $('beFunds').innerHTML = bars(b.funds, b.total);
+  $('beDepts').innerHTML = bars(b.general_fund_departments, null);
+  $('beRev').innerHTML = bars(b.revenues, null, 'Revenues by source are not broken out for all funds in the published budget.');
+  $('beRevNote').textContent = b.rev_scope || '';
+  const notes = Array.isArray(b.notes) ? b.notes : (b.notes ? [b.notes] : []);
+  $('beNotes').innerHTML = notes.map(n => `<p>${esc(n)}</p>`).join('') + (b.source_url ? `<p><a class="src" href="${esc(b.source_url)}" target="_blank" rel="noopener">Budget document</a></p>` : '');
+  $('beGov').href = '/governments/' + b.slug; $('beGov').textContent = b.short + ' overview →';
+  $('beTitle').textContent = b.short + ' budget';
+}
+$('beG').addEventListener('change', run); run();
+})();
+"""
+
+
+def budget_page(out_dir):
+    from govs import GOVS
+    d = _j('civic', 'budgets_detail.json')
+    if not d:
+        return '<div class="page prose"><h1>Budget explorer</h1><p>Coming soon.</p></div>'
+    meta = {g['key']: g for g in GOVS}
+    B = []
+    for g in d['governments']:
+        m = meta.get(g['gov'])
+        if not m:
+            continue
+        rv = g.get('revenues') or []
+        B.append({**{k: g.get(k) for k in ('gov', 'name', 'fiscal_year', 'status', 'total', 'source_url', 'funds', 'general_fund_departments', 'revenues', 'notes')},
+                  'short': m['short'], 'slug': m['slug'],
+                  'rev_scope': '' if not rv else ('All funds.' if g['gov'] in ('county', 'schools', 'pc', 'mb') else 'General Fund only.')})
+    B.sort(key=lambda b: [g['key'] for g in GOVS].index(b['gov']))
+    open(os.path.join(out_dir, 'assets', 'budget.js'), 'w').write(BUDGET_JS.replace('__B__', json.dumps(B, ensure_ascii=False, separators=(',', ':'))))
+    gnotes = ''.join(f'<li>{e(n)}</li>' for n in (d.get('notes') or []))
+    return f'''<div class="page tax">
+  <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Public Money · Budgets</span><h1 id="beTitle">Budget explorer</h1>
+    <p class="lede">Open up any local government's FY2026 budget: how much goes into each fund, what the General Fund spends by department, and where the money comes from.</p></div>
+    <div class="stamp">{PDF_BTN}<a class="pill" id="beGov" href="/governments">Overview →</a></div></header>
+  <div class="vt-filters mt-f"><label class="vf"><span>Government</span><select id="beG"></select></label></div>
+  <div class="kpis" id="beKpis"></div>
+  <section class="explain"><div class="ex-txt"><span class="eyebrow">The simple version</span><h2>How a government budget is organized</h2>
+    <ol class="ex-steps"><li><b>Funds are separate bank accounts.</b> Money raised for one purpose, like water bills or a sales tax, goes into its own fund and can only be spent on that purpose.</li>
+    <li><b>The General Fund is the everyday account.</b> Police, parks, roads and city hall are paid from it, mostly with property tax.</li>
+    <li><b>Totals count some money twice.</b> When one fund pays another (a transfer), both show it, so totals aren't a perfect measure of size. The notes below say what each total includes.</li></ol></div></section>
+  <section class="tx-sec"><div class="sec-hd"><h2 id="funds">Where the money is budgeted, by fund</h2></div><div id="beFunds"></div></section>
+  <section class="tx-sec"><div class="sec-hd"><h2 id="depts">General Fund spending, by department</h2></div><div id="beDepts"></div></section>
+  <section class="tx-sec"><div class="sec-hd"><h2 id="rev">Where the money comes from</h2><span class="muted" id="beRevNote"></span></div><div id="beRev"></div></section>
+  <section class="tx-sec method"><div class="sec-hd"><h2 id="src">About this budget</h2></div><div id="beNotes"></div>
+    <details class="gaps"><summary>About all the budgets</summary><ul>{gnotes}<li>Department and fund names are shortened from the budget documents. Scanned budgets (Callaway, Springfield, Parker) were read by OCR; each list was checked against the document's printed total.</li></ul></details></section>
+</div>
+<link rel="stylesheet" href="/assets/tax.css">
+<script src="/assets/budget.js" defer></script>'''
+
+
+# ---------------- Who gets paid (tourism agencies) ----------------
+SHORT = {'visit_pcb_cvb': 'Visit Panama City Beach', 'destination_panama_city_cdc': 'Destination Panama City', 'mexico_beach_cdc': 'Mexico Beach CDC'}
+CAT = {'payroll/benefit/tax pass-through': 'Payroll or benefits', 'government': 'Government', 'credit card payment (underlying merchants not itemized)': 'Credit card bill'}
+
+
+def payments_page():
+    p = _j('money', 'payments.json')
+    if not p:
+        return '<div class="page prose"><h1>Who gets paid</h1><p>Coming soon.</p></div>'
+    A = p['governments']
+    tot = sum(a['parsed_total_all_payees'] for a in A)
+    fys = ['FY2024', 'FY2025', 'FY2026']
+    tabs, secs = '', ''
+    for i, a in enumerate(A):
+        nm = SHORT.get(a['gov'], a['name'])
+        tabs += f'<option value="{a["gov"]}">{e(nm)}</option>'
+        rows = ''
+        for v in a['vendors']:
+            cat = v.get('category')
+            badge = f' <span class="badge">{e(CAT.get(cat, cat))}</span>' if cat else ''
+            rows += (f'<tr data-v="{e(v["vendor"].lower())}"><th scope="row">{e(v["vendor"])}{badge}</th><td class="num">{money(v["total"])}</td><td class="num">{v["n_payments"]}</td>'
+                     + ''.join(f'<td class="num">{money(v["by_fy"].get(f)) if v["by_fy"].get(f) else "<span class=muted>—</span>"}</td>' for f in fys) + '</tr>')
+        cov = a.get('coverage_by_fy') or {}
+        covtxt = ' · '.join(f'{f}: {len(cov.get(f, []))} of 12 months' for f in fys)
+        notes = ''.join(f'<li>{e(n)}</li>' for n in a.get('notes') or [])
+        ex = a.get('excluded_individuals') or {}
+        listed = f'Top {a["vendors_listed"]} of {a["vendor_count_total"]} payees' if a['vendors_listed'] < a['vendor_count_total'] else f'All {a["vendor_count_total"]} payees'
+        secs += f'''<section class="tx-sec wp-ag" data-ag="{a["gov"]}"{"" if i == 0 else " hidden"}>
+    <div class="sec-hd"><h2>{e(a["name"])}</h2><span class="muted">{e(covtxt)}</span></div>
+    <div class="kpis"><div class="kpi"><span class="eyebrow">Paid out</span><span class="v">{money(a["parsed_total_all_payees"])}</span><span class="s">{a["parsed_payments"]:,} payments in the months covered</span></div>
+      <div class="kpi"><span class="eyebrow">Payees</span><span class="v">{a["vendor_count_total"]}</span><span class="s">{e(listed)} shown</span></div>
+      <div class="kpi"><span class="eyebrow">Checked</span><span class="v">{e(a["reconciliation_summary"].split(" match")[0])}</span><span class="s">months match the register's printed total</span></div>
+      <div class="kpi"><span class="eyebrow">To individuals</span><span class="v">{money(ex.get("total"))}</span><span class="s">{ex.get("n_payments", 0)} payments, not named here</span></div></div>
+    <div class="tablewrap"><table class="tx-table cm-table wp-table"><thead><tr><th scope="col">Paid to</th><th scope="col" class="num">Total</th><th scope="col" class="num">Payments</th>{"".join(f'<th scope="col" class="num">{f}</th>' for f in fys)}</tr></thead><tbody>{rows}</tbody></table></div>
+    <details class="gaps"><summary>Notes on this register ({len(a.get("notes") or [])})</summary><ul>{notes}</ul><p>{" · ".join(f'<a class="src" href="{e(u)}" target="_blank" rel="noopener">{k + 1}</a>' for k, u in enumerate(a.get("source_urls") or []))}</p></details></section>'''
+    gaps = ''.join(f'<li>{e(g)}</li>' for g in p.get('gaps') or [])
+    return f'''<div class="page tax">
+  <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Accountability · Who gets paid</span><h1>Who gets paid: tourism agencies</h1>
+    <p class="lede">Every payment by the three agencies that spend Bay County's tourist development tax on marketing, from the monthly check registers kept by the Clerk of Court. The county's own payments are on the <a href="/public-money/contracts">Contracts</a> page.</p></div>
+    <div class="stamp">{PDF_BTN}<span>Registers through October 2025</span></div></header>
+  <section class="explain"><div class="ex-txt"><span class="eyebrow">The simple version</span><h2>Where the bed tax goes after the county</h2>
+    <ol class="ex-steps"><li><b>Visitors pay a 5% bed tax</b> on hotel and rental stays. Part of it pays three agencies that market each tourism area: Panama City Beach, Panama City and Mexico Beach.</li>
+      <li><b>The Clerk pays their bills.</b> Until November 2025, each agency's payments were listed in the Clerk's monthly check register. That's what this page shows: {money(tot)} in payments over the months covered.</li>
+      <li><b>Some bills hide the details.</b> Credit card payments and payroll services show as one payment; what was bought isn't listed. Payments to individual people are counted but not named.</li></ol></div></section>
+  <div class="callout">In January 2026 the Clerk of Court published an <a href="https://apps.baycoclerk.com/Web_File_Repo/bocc_finance/Panama_City_Beach_TDC_CVB_Public_CAP.pdf" target="_blank" rel="noopener">action plan for Visit Panama City Beach</a>, describing a criminal investigation and forensic audit and putting the agency's payments under the Clerk's review. The payments here are listed as recorded; this site makes no finding about any of them.</div>
+  <div class="vt-filters mt-f two"><label class="vf"><span>Agency</span><select id="wpA">{tabs}</select></label><label class="vf"><span>Search payees</span><input id="wpQ" type="search" placeholder="e.g. Meta, printing, hotel"></label></div>
+  {secs}
+  <section class="tx-sec method"><div class="sec-hd"><h2 id="src">Sources and gaps</h2></div>
+    <p>The Bay County Clerk of Court's monthly "Check Register – Sorted by Dollar Amount," attached to County Commission agendas. The pages are scans; they were read by OCR and each month was added up and compared with the register's printed total. A few misread amounts were corrected only where the fix made the month match.</p>
+    <p>No city or the School Board posts a check register. You can <a href="/records-request">request one</a>; the request generator has them ready.</p>
+    <details class="gaps"><summary>What we couldn't find ({len(p.get("gaps") or [])})</summary><ul>{gaps}</ul></details></section>
+</div>
+<link rel="stylesheet" href="/assets/tax.css">
+<script>
+(() => {{ const a = document.getElementById('wpA'), q = document.getElementById('wpQ'), u = new URLSearchParams(location.search);
+  if (u.get('agency')) a.value = u.get('agency');
+  const run = () => {{ document.querySelectorAll('.wp-ag').forEach(s => s.hidden = s.dataset.ag !== a.value); const t = q.value.trim().toLowerCase();
+    document.querySelectorAll('.wp-ag:not([hidden]) tbody tr').forEach(tr => tr.hidden = !!t && !tr.dataset.v.includes(t)); }};
+  a.addEventListener('change', () => {{ history.replaceState(null, '', '?agency=' + a.value); run(); }}); q.addEventListener('input', run); run(); }})();
+</script>'''

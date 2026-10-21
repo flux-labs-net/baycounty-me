@@ -1,0 +1,538 @@
+{
+ "html": [
+  [
+   " bills, from the Florida Department of Revenue) to the 2026 values. The rates adopted in September 2026 will replace them when the state publishes the full set. Flat <span class=\"term\" data-term=\"non-ad-valorem\">non-ad valorem</span> fees (fire, stormwater, lighting and similar) come from the Florida Department of Revenue's parcel-level file for the 2025 tax roll, so they show what was on the FY2026 bill. For a homestead, school tax is figured on the value before the second homestead exemption, since that one doesn't apply to schools. Other exemptions are taken as reported by the Property Appraiser. Your official bill comes from the Tax Collector.</p>",
+   ", del Departamento de Ingresos de Florida [Florida Department of Revenue]) a los valores de 2026. Las tasas adoptadas en septiembre de 2026 las reemplazarán cuando el estado publique el conjunto completo. Las tarifas fijas <span class=\"term\" data-term=\"non-ad-valorem\">no basadas en el valor (non-ad valorem)</span> (bomberos, aguas pluviales, alumbrado y similares) vienen del archivo por parcela del Departamento de Ingresos de Florida para el registro tributario de 2025, así que muestran lo que había en la factura del FY2026. Para una vivienda con homestead, el impuesto escolar se calcula sobre el valor antes de la segunda exención de homestead, ya que esa no se aplica a las escuelas. Las demás exenciones se toman tal como las informa el Tasador de Propiedades. Su factura oficial la envía el Recaudador de Impuestos (Tax Collector).</p>"
+  ],
+  [
+   "<p class=\"lede\">Type a Bay County street address to see your property tax estimate, who represents you, your schools, your flood and evacuation zones, and whether you're inside a redevelopment district.</p>",
+   "<p class=\"lede\">Escriba una dirección del Condado de Bay para ver el cálculo aproximado de su impuesto a la propiedad, quién lo representa, sus escuelas, sus zonas de inundación y de evacuación, y si está dentro de un distrito de reurbanización.</p>"
+  ],
+  [
+   "<p class=\"note\">Owner names are not shown here. They're public at the Property Appraiser's site, linked above. Representative names come from Bay County's GIS and may lag an election.</p>",
+   "<p class=\"note\">Aquí no se muestran los nombres de los dueños. Son públicos en el sitio del Tasador de Propiedades (Property Appraiser), enlazado arriba. Los nombres de los representantes vienen del GIS del Condado de Bay y pueden tardar en actualizarse después de una elección.</p>"
+  ],
+  [
+   ">Bay County's public GIS server</a>, which publishes the Property Appraiser's parcel data. Property values are the 2026 roll. Flood zones come live from <a ",
+   ">servidor público de GIS del Condado de Bay</a>, que publica los datos de parcelas del Tasador de Propiedades. Los valores de las propiedades son los del registro de 2026. Las zonas de inundación se consultan en vivo en la <a "
+  ],
+  [
+   "<p class=\"muted small\">Start with the house number. Lookups go straight to Bay County's public map server; BayCounty.me doesn't store what you search.</p>",
+   "<p class=\"muted small\">Empiece con el número de la casa. Las búsquedas van directamente al servidor público de mapas del Condado de Bay; BayCounty.me no guarda lo que usted busca.</p>"
+  ],
+  [
+   ">FEMA's National Flood Hazard Layer</a>, the official current flood map, with the FIRM panel and any map revision (LOMR) that applies.</p>",
+   ">Capa Nacional de Riesgo de Inundación de FEMA (National Flood Hazard Layer)</a>, el mapa oficial de inundaciones vigente, con el panel FIRM y cualquier revisión del mapa (LOMR) que corresponda.</p>"
+  ],
+  [
+   "<p>The tax estimate applies the latest complete set of official rates (tax year 2025, ",
+   "<p>El cálculo de impuestos aplica el conjunto completo más reciente de tasas oficiales (año tributario 2025, facturas del "
+  ],
+  [
+   "<p>Addresses, parcels, property values and district boundaries come live from <a ",
+   "<p>Las direcciones, las parcelas, los valores de las propiedades y los límites de los distritos se consultan en vivo en el <a "
+  ],
+  [
+   "<span class=\"eyebrow\">My Address</span>",
+   "<span class=\"eyebrow\">Mi dirección</span>"
+  ],
+  [
+   "<h3>Zoning and development nearby</h3>",
+   "<h3>Zonificación y desarrollo cercanos</h3>"
+  ],
+  [
+   "<h1>What applies to your address</h1>",
+   "<h1>Lo que aplica a su dirección</h1>"
+  ],
+  [
+   "<h3>Flood, storms and services</h3>",
+   "<h3>Inundaciones, tormentas y servicios</h3>"
+  ],
+  [
+   "<h2 id=\"src-h\">How this works</h2>",
+   "<h2 id=\"src-h\">Cómo funciona</h2>"
+  ],
+  [
+   ">Property Appraiser record ↗</a>",
+   ">Registro del Tasador de Propiedades ↗</a>"
+  ],
+  [
+   "placeholder=\"e.g. 825 Ohio Ave",
+   "placeholder=\"p. ej., 825 Ohio Ave"
+  ],
+  [
+   "aria-label=\"Map of the address",
+   "aria-label=\"Mapa de la dirección"
+  ],
+  [
+   "<h3>Property tax estimate</h3>",
+   "<h3>Cálculo aproximado del impuesto a la propiedad</h3>"
+  ],
+  [
+   "<h3>If Amendment 3 passes</h3>",
+   "<h3>Si se aprueba la Enmienda 3 (Amendment 3)</h3>"
+  ],
+  [
+   "<h3>Zoned public schools</h3>",
+   "<h3>Escuelas públicas asignadas</h3>"
+  ],
+  [
+   "<h3>Redevelopment district (",
+   "<h3>Distrito de reurbanización ("
+  ],
+  [
+   "<span>Street address</span>",
+   "<span>Dirección</span>"
+  ],
+  [
+   "<h3>Who represents you</h3>",
+   "<h3>Quién lo representa</h3>"
+  ],
+  [
+   "<h3>The property</h3>",
+   "<h3>La propiedad</h3>"
+  ],
+  [
+   "Export PDF</button>",
+   "Exportar PDF</button>"
+  ]
+ ],
+ "js": [
+  [
+   "<p>This address is inside the <b>${esc(c.CRA)}</b> district${c.EST_YEAR ? ` (created ${esc(c.EST_YEAR)})` : ''}. The city and county taxes on growth in this area since then go to the ${esc(ag || 'CRA')}'s fund and must be spent inside its districts.</p>",
+   "<p>Esta dirección está dentro del distrito <b>${esc(c.CRA)}</b>${c.EST_YEAR ? ` (creado en ${esc(c.EST_YEAR)})` : ''}. Los impuestos de la ciudad y del condado sobre el crecimiento de esta zona desde entonces van al fondo de ${esc(ag || 'CRA')} y deben gastarse dentro de sus distritos.</p>"
+  ],
+  [
+   "<dd class=\"span muted small\">Flood zone is checked live against FEMA's National Flood Hazard Layer at the address point. A building's official zone comes from the flood map, your lender's flood determination or an elevation certificate. <a ",
+   "<dd class=\"span muted small\">La zona de inundación se verifica en vivo en la Capa Nacional de Riesgo de Inundación de FEMA (National Flood Hazard Layer), en el punto de la dirección. La zona oficial de un edificio la determina el mapa de inundaciones, la determinación de inundación de su prestamista o un certificado de elevación. <a "
+  ],
+  [
+   "'<p>This address is <b>not inside a CRA district</b>, so all of its city and county property tax goes to those governments\\' regular budgets.</p><p class=\"small\"><a href=\"/public-money/cra-spending\">See Bay County\\'s CRAs →</a></p>'",
+   "'<p>Esta dirección <b>no está dentro de un distrito de una CRA</b>, así que todo su impuesto a la propiedad de la ciudad y del condado va a los presupuestos normales de esos gobiernos.</p><p class=\"small\"><a href=\"/public-money/cra-spending\">Vea las CRA del Condado de Bay →</a></p>'"
+  ],
+  [
+   "<p class=\"muted small\">Assumes rates stay the same and the owner was a Florida resident before 2027. Local governments here would collect less; see the state's estimates. <a href=\"/public-money/amendment-3\">Amendment 3 →</a></p>`",
+   "<p class=\"muted small\">Supone que las tasas no cambian y que el dueño ya era residente de Florida antes de 2027. Los gobiernos locales de aquí recaudarían menos; vea los cálculos del estado. <a href=\"/public-money/amendment-3\">Enmienda 3 →</a></p>`"
+  ],
+  [
+   "`<p>This property has no homestead exemption, so Amendment 3 wouldn't lower its tax bill directly. It would limit how fast its taxed value can rise to <b>5% a year instead of 10%</b> for non-school taxes.${",
+   "`<p>Esta propiedad no tiene exención de homestead, así que la Enmienda 3 no bajaría directamente su factura de impuestos. Limitaría qué tan rápido puede subir su valor gravado a <b>5% al año en vez de 10%</b> para los impuestos no escolares.${"
+  ],
+  [
+   "<p class=\"small muted\">Building permits aren't published as open data. Search them on <a href=\"https://portal.baycountyfl.gov/Permit/Locator\" target=\"_blank\" rel=\"noopener\">Bay County's permit portal</a>",
+   "<p class=\"small muted\">Los permisos de construcción no se publican como datos abiertos. Búsquelos en el <a href=\"https://portal.baycountyfl.gov/Permit/Locator\" target=\"_blank\" rel=\"noopener\">portal de permisos del Condado de Bay</a>"
+  ],
+  [
+   "'<br><span class=\"muted small\">FEMA\\'s live map didn\\'t respond, so this is Bay County\\'s older copy, which predates the October 2024 maps. Use the FEMA link below to confirm.</span>'",
+   "'<br><span class=\"muted small\">El mapa en vivo de FEMA no respondió, así que esta es la copia más antigua del Condado de Bay, anterior a los mapas de octubre de 2024. Use el enlace de FEMA de abajo para confirmar.</span>'"
+  ],
+  [
+   "`<i class=\"sw city\"></i> city limits <i class=\"sw cra\"></i> CRA districts · ${local ? 'about 3 miles across' : 'all of Bay County <span class=\"sw cty\"></span> county line'}`",
+   "`<i class=\"sw city\"></i> límites de la ciudad <i class=\"sw cra\"></i> distritos de CRA · ${local ? 'unas 3 millas de ancho' : 'todo el Condado de Bay <span class=\"sw cty\"></span> límite del condado'}`"
+  ],
+  [
+   "`<p>With the full $250,000 homestead exemption on today's value and rates, this home's county, city and district taxes would drop by about <b>${usd(save)} a year</b>${",
+   "`<p>Con la exención de homestead completa de $250,000, según el valor y las tasas de hoy, los impuestos del condado, de la ciudad y de los distritos de esta vivienda bajarían unos <b>${usd(save)} al año</b>${"
+  ],
+  [
+   "<p class=\"muted\">No parcel record came back for this address, so there's no value to estimate from. <a href=\"/public-money/tax-dollars\">Use the calculator →</a></p>",
+   "<p class=\"muted\">No se encontró ningún registro de parcela para esta dirección, así que no hay un valor con qué calcular. <a href=\"/public-money/tax-dollars\">Use la calculadora →</a></p>"
+  ],
+  [
+   ". Zoning and projects come from Bay County, Panama City, Lynn Haven and Panama City Beach planning maps; pending rezoning applications aren't mapped.</p>`",
+   ". La zonificación y los proyectos vienen de los mapas de planificación del Condado de Bay, Panama City, Lynn Haven y Panama City Beach; las solicitudes de cambio de zonificación pendientes no aparecen en el mapa.</p>`"
+  ],
+  [
+   "<p class=\"muted small\">Property tax: 2026 values × ${D.fy} rates. Fees: the FY2026 tax roll. <a href=\"/public-money/tax-dollars\">Where it goes →</a></p>",
+   "<p class=\"muted small\">Impuesto a la propiedad: valores de 2026 × tasas del ${D.fy}. Tarifas: registro tributario del FY2026. <a href=\"/public-money/tax-dollars\">Adónde va el dinero →</a></p>"
+  ],
+  [
+   "' or <a href=\"https://panamacitybeach.portal.iworq.net/PANAMACITYBEACH/permits/602\" target=\"_blank\" rel=\"noopener\">Panama City Beach\\'s</a>'",
+   "' o en el <a href=\"https://panamacitybeach.portal.iworq.net/PANAMACITYBEACH/permits/602\" target=\"_blank\" rel=\"noopener\">de Panama City Beach</a>'"
+  ],
+  [
+   "'<li class=\"ac-empty\">No matching address. Check the house number, or try just the number and street name (for example \"1614 Ohio\").</li>'",
+   "'<li class=\"ac-empty\">No hay ninguna dirección que coincida. Revise el número de la casa o pruebe solo con el número y el nombre de la calle (por ejemplo, \"1614 Ohio\").</li>'"
+  ],
+  [
+   "<dt class=\"span\">Money decisions</dt><dd class=\"span\"><a href=\"/public-money/tax-dollars#govs\">See each government\\'s budget →</a></dd>",
+   "<dt class=\"span\">Decisiones sobre el dinero</dt><dd class=\"span\"><a href=\"/public-money/tax-dollars#govs\">Vea el presupuesto de cada gobierno →</a></dd>"
+  ],
+  [
+   "${cityName ? 'City of ' + cityName : 'Unincorporated Bay County'} · ZIP ${a.ZIP || '—'}${parcel ? ' · Parcel ' + parcel.A1RENUM : ''}",
+   "${cityName ? 'Ciudad de ' + cityName : 'Condado de Bay (zona no incorporada)'} · Código postal ${a.ZIP || '—'}${parcel ? ' · Parcela ' + parcel.A1RENUM : ''}"
+  ],
+  [
+   "'<dd class=\"span muted small\">Attendance zones from Bay District Schools via county GIS. Choice and magnet options differ.</dd>'",
+   "'<dd class=\"span muted small\">Zonas de asistencia de Bay District Schools, según el GIS del condado. Las opciones de escuelas de elección (choice) y magnet son distintas.</dd>'"
+  ],
+  [
+   "'<p class=\"muted\">No parcel record to estimate from. <a href=\"/public-money/amendment-3\">Try the calculator →</a></p>'",
+   "'<p class=\"muted\">No hay un registro de parcela con qué calcular. <a href=\"/public-money/amendment-3\">Pruebe la calculadora →</a></p>'"
+  ],
+  [
+   ": ['City', '<span class=\"muted\">None (unincorporated). The County Commission is your local government.</span>']",
+   ": ['Ciudad', '<span class=\"muted\">Ninguna (zona no incorporada). La Comisión del Condado es su gobierno local.</span>']"
+  ],
+  [
+   "'<p class=\"muted small\">No flat fees (non-ad valorem assessments) were on this parcel\\'s FY2026 tax bill.</p>'",
+   "'<p class=\"muted small\">La factura de impuestos del FY2026 de esta parcela no tenía tarifas fijas (cargos no basados en el valor, non-ad valorem).</p>'"
+  ],
+  [
+   "new Date(ms).toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC'})",
+   "new Date(ms).toLocaleDateString('es-US', {month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC'})"
+  ],
+  [
+   "`<b>Zone ${esc(evac[0].EZONE)}</b> <span class=\"muted small\">Know your zone before a storm</span>`",
+   "`<b>Zona ${esc(evac[0].EZONE)}</b> <span class=\"muted small\">Conozca su zona antes de una tormenta</span>`"
+  ],
+  [
+   "'<b>Zone X (shaded)</b> · moderate risk, outside the high-risk area (0.2% annual chance flood)'",
+   "'<b>Zona X (sombreada)</b> · riesgo moderado, fuera de la zona de alto riesgo (probabilidad anual de inundación de 0.2%)'"
+  ],
+  [
+   ">Development projects within half a mile <span class=\"muted small\">last 5 years</span></h4>",
+   ">Proyectos de desarrollo a menos de media milla <span class=\"muted small\">últimos 5 años</span></h4>"
+  ],
+  [
+   "'<li class=\"ac-empty\">Bay County\\'s map server didn\\'t answer. Try again in a moment.</li>'",
+   "'<li class=\"ac-empty\">El servidor de mapas del Condado de Bay no respondió. Intente de nuevo en un momento.</li>'"
+  ],
+  [
+   "'<p class=\"muted\">Bay County\\'s planning maps didn\\'t answer. Try again in a moment.</p>'",
+   "'<p class=\"muted\">Los mapas de planificación del Condado de Bay no respondieron. Intente de nuevo en un momento.</p>'"
+  ],
+  [
+   ">Rezonings within half a mile <span class=\"muted small\">last 5 years, adopted</span></h4>",
+   ">Cambios de zonificación a menos de media milla <span class=\"muted small\">últimos 5 años, adoptados</span></h4>"
+  ],
+  [
+   "<span class=\"muted small\">(capped ${usd(t.just - t.assessed)} below market)</span>",
+   "<span class=\"muted small\">(limitado a ${usd(t.just - t.assessed)} por debajo del mercado)</span>"
+  ],
+  [
+   "</b> in documented spending and awards across ${s.n} records on this site.</p>",
+   "</b> en gastos y adjudicaciones documentados en ${s.n} registros de este sitio.</p>"
+  ],
+  [
+   "= 'Bay County\\'s map server didn\\'t answer. Try again in a moment.'; $('err')",
+   "= 'El servidor de mapas del Condado de Bay no respondió. Intente de nuevo en un momento.'; $('err')"
+  ],
+  [
+   "` Its value is already capped ${usd(t.just - t.assessed)} below market.`",
+   "` Su valor ya está limitado a ${usd(t.just - t.assessed)} por debajo del mercado.`"
+  ],
+  [
+   "'Outside the high-risk areas on Bay County\\'s copy of the flood map'",
+   "'Fuera de las zonas de alto riesgo en la copia del mapa de inundaciones del Condado de Bay'"
+  ],
+  [
+   "'<dd class=\"muted\">No parcel record found for this address.</dd>'",
+   "'<dd class=\"muted\">No se encontró ningún registro de parcela para esta dirección.</dd>'"
+  ],
+  [
+   "<span class=\"muted small\">what the long-range plan allows</span>",
+   "<span class=\"muted small\">lo que permite el plan a largo plazo</span>"
+  ],
+  [
+   "d.toLocaleDateString('en-US', {month: 'short', year: 'numeric'})",
+   "d.toLocaleDateString('es-US', {month: 'short', year: 'numeric'})"
+  ],
+  [
+   "<a href=\"/public-money/cra-spending\">See what it pays for →</a>",
+   "<a href=\"/public-money/cra-spending\">Vea lo que paga →</a>"
+  ],
+  [
+   "<a href=\"/public-money/amendment-3\">What Amendment 3 does →</a>",
+   "<a href=\"/public-money/amendment-3\">Qué hace la Enmienda 3 →</a>"
+  ],
+  [
+   "<h4 class=\"dev-h\">Conditional uses within a quarter mile</h4>",
+   "<h4 class=\"dev-h\">Usos condicionales a menos de un cuarto de milla</h4>"
+  ],
+  [
+   "[['Elementary', n(es)], ['Middle', n(ms)], ['High', n(hs)]]",
+   "[['Primaria', n(es)], ['Intermedia', n(ms)], ['Secundaria (high school)', n(hs)]]"
+  ],
+  [
+   "'<span class=\"muted\">Not on FEMA\\'s flood map here</span>'",
+   "'<span class=\"muted\">Este punto no aparece en el mapa de inundaciones de FEMA</span>'"
+  ],
+  [
+   "<p class=\"muted small\">Checking fees on the tax bill…</p>",
+   "<p class=\"muted small\">Revisando las tarifas de la factura de impuestos…</p>"
+  ],
+  [
+   "` · base flood elevation <b>${esc(f.STATIC_BFE)} ft</b>${",
+   "` · elevación de inundación base (BFE) <b>${esc(f.STATIC_BFE)} pies</b>${"
+  ],
+  [
+   "`<b>Zone ${esc(f.FLD_ZONE)}</b> · FEMA high-risk area${",
+   "`<b>Zona ${esc(f.FLD_ZONE)}</b> · zona de alto riesgo según FEMA${"
+  ],
+  [
+   "['Nearest fire station', nearTxt(fire, 'Fire station')]",
+   "['Estación de bomberos más cercana', nearTxt(fire, 'Estación de bomberos')]"
+  ],
+  [
+   "'<span class=\"muted\">Couldn\\'t check right now</span>'",
+   "'<span class=\"muted\">No se pudo verificar en este momento</span>'"
+  ],
+  [
+   "'<b>Zone X</b> · minimal flood hazard on FEMA\\'s map'",
+   "'<b>Zona X</b> · riesgo mínimo de inundación en el mapa de FEMA'"
+  ],
+  [
+   "'<li class=\"ac-empty ac-note\">Closest matches:</li>'",
+   "'<li class=\"ac-empty ac-note\">Resultados más parecidos:</li>'"
+  ],
+  [
+   "` · map revision (LOMR) ${esc(flood.lomr.CASE_NO)}",
+   "` · revisión del mapa (LOMR) ${esc(flood.lomr.CASE_NO)}"
+  ],
+  [
+   "'That address wasn\\'t found. Try searching again.'",
+   "'No se encontró esa dirección. Intente buscar de nuevo.'"
+  ],
+  [
+   "'<p class=\"small muted\">None on file nearby.</p>'",
+   "'<p class=\"small muted\">No hay ninguno registrado cerca.</p>'"
+  ],
+  [
+   "'<p class=\"muted\">Couldn\\'t check right now.</p>'",
+   "'<p class=\"muted\">No se pudo verificar en este momento.</p>'"
+  ],
+  [
+   "floodTxt = `<b>Zone ${esc(f.FLD_ZONE)}</b>${bfe}`",
+   "floodTxt = `<b>Zona ${esc(f.FLD_ZONE)}</b>${bfe}`"
+  ],
+  [
+   "'<span class=\"muted\">None within 10 miles</span>'",
+   "'<span class=\"muted\">Ninguno a menos de 10 millas</span>'"
+  ],
+  [
+   "'<span class=\"muted\">Not in a mapped zone</span>'",
+   "'<span class=\"muted\">No está en una zona del mapa</span>'"
+  ],
+  [
+   "() => `Address report: ${$('aTitle').textContent}",
+   "() => `Informe de la dirección: ${$('aTitle').textContent}"
+  ],
+  [
+   "data-term=\"assessed-value\">Assessed value</span>",
+   "data-term=\"assessed-value\">Valor tasado</span>"
+  ],
+  [
+   "<dt class=\"span\">Flat fees on the tax bill</dt>",
+   "<dt class=\"span\">Tarifas fijas en la factura de impuestos</dt>"
+  ],
+  [
+   "data-term=\"taxable-value\">Taxable value</span>",
+   "data-term=\"taxable-value\">Valor gravable</span>"
+  ],
+  [
+   "cityName ? ['City', `City of ${esc(cityName)}",
+   "cityName ? ['Ciudad', `Ciudad de ${esc(cityName)}"
+  ],
+  [
+   "<span class=\"muted small\">(Bay County)</span>",
+   "<span class=\"muted small\">(Condado de Bay)</span>"
+  ],
+  [
+   "['Nearest library', nearTxt(lib, 'Library')]",
+   "['Biblioteca más cercana', nearTxt(lib, 'Biblioteca')]"
+  ],
+  [
+   ">Check this address on FEMA's map</a>.</dd>`",
+   ">Consulte esta dirección en el mapa de FEMA</a>.</dd>`"
+  ],
+  [
+   "<span class=\"muted small\">tax + fees</span>",
+   "<span class=\"muted small\">impuesto + tarifas</span>"
+  ],
+  [
+   "'<b>Zone D</b> · flood risk not determined'",
+   "'<b>Zona D</b> · riesgo de inundación no determinado'"
+  ],
+  [
+   "', to zero; it would still pay school tax'",
+   "', hasta cero; aún pagaría el impuesto escolar'"
+  ],
+  [
+   "'<p class=\"small muted\">None nearby.</p>'",
+   "'<p class=\"small muted\">Ninguno cerca.</p>'"
+  ],
+  [
+   "'<span class=\"muted\">Not mapped</span>'",
+   "'<span class=\"muted\">No está en el mapa</span>'"
+  ],
+  [
+   "FIRM panel ${esc(flood.panel.FIRM_PAN)}",
+   "panel FIRM ${esc(flood.panel.FIRM_PAN)}"
+  ],
+  [
+   "['Nearest park', nearTxt(park, 'Park')]",
+   "['Parque más cercano', nearTxt(park, 'Parque')]"
+  ],
+  [
+   "() => 'Address report: ' + $('aTitle')",
+   "() => 'Informe de la dirección: ' + $('aTitle')"
+  ],
+  [
+   "'' : ' (area inferred from the map)'}",
+   "'' : ' (zona deducida del mapa)'}"
+  ],
+  [
+   "<dt><b>Estimated total bill</b></dt>",
+   "<dt><b>Factura total aproximada</b></dt>"
+  ],
+  [
+   "(${usd(t.school)} for school taxes)",
+   "(${usd(t.school)} para impuestos escolares)"
+  ],
+  [
+   "` · flood depth ${esc(f.DEPTH)} ft`",
+   "` · profundidad de inundación ${esc(f.DEPTH)} pies`"
+  ],
+  [
+   "'Set by the future land use map'",
+   "'Lo fija el mapa de uso futuro del suelo'"
+  ],
+  [
+   "<li><b>Ordinance ${esc(g.o)}</b>",
+   "<li><b>Ordenanza ${esc(g.o)}</b>"
+  ],
+  [
+   "` and ${g.ch.length - 4} more`",
+   "` y ${g.ch.length - 4} más`"
+  ],
+  [
+   "['County Commission', r(comm)]",
+   "['Comisión del Condado', r(comm)]"
+  ],
+  [
+   "t.hx ? 'homestead' : 'codes'}",
+   "t.hx ? 'homestead' : 'códigos'}"
+  ],
+  [
+   "['Florida Senate', r(senate)]",
+   "['Senado de Florida', r(senate)]"
+  ],
+  [
+   ".toFixed(1) + ' mi away' : ",
+   ".toFixed(1) + ' mi de distancia' : "
+  ],
+  [
+   "['Florida House', r(house)]",
+   "['Cámara de Representantes de Florida', r(house)]"
+  ],
+  [
+   "'Other charge (' + c + ')'",
+   "'Otro cargo (' + c + ')'"
+  ],
+  [
+   "['Future land use', fl ?",
+   "['Uso futuro del suelo', fl ?"
+  ],
+  [
+   "['Market (just) value', ",
+   "['Valor de mercado (valor justo)', "
+  ],
+  [
+   "['Flood zone', floodTxt]",
+   "['Zona de inundación', floodTxt]"
+  ],
+  [
+   "['School Board', r(sb)]",
+   "['Junta Escolar', r(sb)]"
+  ],
+  [
+   "', effective ' + fdate(",
+   "', vigente desde el ' + fdate("
+  ],
+  [
+   "<small> / year</small>",
+   "<small> / año</small>"
+  ],
+  [
+   "['U.S. House', r(ush)]",
+   "['Cámara de Representantes de EE. UU.', r(ush)]"
+  ],
+  [
+   "esc(p.n || 'Project')",
+   "esc(p.n || 'Proyecto')"
+  ],
+  [
+   "['Mosquito control', ",
+   "['Control de mosquitos', "
+  ],
+  [
+   "['Tourist tax area', ",
+   "['Zona del impuesto turístico', "
+  ],
+  [
+   "['Evacuation zone', ",
+   "['Zona de evacuación', "
+  ],
+  [
+   "'approved ' + dstr(",
+   "'aprobado ' + dstr("
+  ],
+  [
+   ": 'No exemptions'],",
+   ": 'Sin exenciones'],"
+  ],
+  [
+   "'applied ' + dstr(",
+   "'solicitado ' + dstr("
+  ],
+  [
+   "'issued ' + dstr(",
+   "'emitido ' + dstr("
+  ],
+  [
+   "', coastal waves'",
+   "', oleaje costero'"
+  ],
+  [
+   "['Exemptions', ",
+   "['Exenciones', "
+  ],
+  [
+   ": 'to ') + r.z",
+   ": 'a ') + r.z"
+  ],
+  [
+   "['Zoning', z ?",
+   "['Zonificación', z ?"
+  ],
+  [
+   "?.n || 'City')",
+   "?.n || 'Ciudad')"
+  ],
+  [
+   "['Built', esc(",
+   "['Año de construcción', esc("
+  ],
+  [
+   " heated sq ft`",
+   " pies cuadrados climatizados`"
+  ],
+  [
+   "Loading…</p>'",
+   "Cargando…</p>'"
+  ],
+  [
+   "+ ' units' : ",
+   "+ ' unidades' : "
+  ],
+  [
+   "['Use', esc(",
+   "['Uso', esc("
+  ],
+  [
+   "· Loading…`",
+   "· Cargando…`"
+  ]
+ ]
+}

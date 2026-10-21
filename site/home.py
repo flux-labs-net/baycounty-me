@@ -64,6 +64,8 @@ def home_page():
     election = date.today() <= date(2026, 11, 3)
     topics_ = topics(s)
     cards = ''.join(f'''<a class="topic" href="{u}"><span class="eyebrow">{e}</span><h3>{h}</h3><p>{p}</p><span class="t-stat"><b>{v}</b> {l}</span></a>''' for u, e, h, p, v, l in topics_)
+    from govs import GOVS
+    GOVCHIPS = ''.join(f'<a href="/governments/{g["slug"]}">{html.escape(g["short"])}</a>' for g in GOVS)
     return f'''<div class="page home">
   <section class="hero">
     <span class="eyebrow">Bay County, Florida</span>
@@ -84,6 +86,23 @@ def home_page():
       <a href="/public-money/hurricane-michael"><b>{M(s['fema'], 0)}</b><span>in FEMA money to rebuild after Hurricane Michael</span></a>
       <a href="/public-money/debt"><b>{M(s['debt'])}</b><span>owed by the county, schools, cities and authorities</span></a>
       <a href="/public-money/tourist-tax"><b>{M(s['bt25'])}</b><span>bed tax paid by visitors in FY2025</span></a>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="govs">
+    <div class="sec-hd"><h2 id="govs">Pick your government</h2><a class="muted" href="/compare">Compare them side by side</a></div>
+    <nav class="gov-chips" aria-label="Governments">{GOVCHIPS}</nav>
+  </section>
+
+  <section class="section" aria-labelledby="inv">
+    <div class="sec-hd"><h2 id="inv">Take part</h2><span class="muted">Tools for following and asking</span></div>
+    <div class="tools">
+      <a href="/meetings"><b>Upcoming meetings</b><span>When every board meets, with agendas and the money items on them. Add them to your calendar.</span></a>
+      <a href="/alerts"><b>Email alerts</b><span>A weekly note when your government's records change or a meeting is coming up.</span></a>
+      <a href="/records-request"><b>Request a record</b><span>Write a Florida public records request in a minute.</span></a>
+      <a href="/public-money/campaign-money"><b>Campaign money</b><span>Who funds local officials' campaigns, and which donors hold contracts.</span></a>
+      <a href="/open-data"><b>Open data</b><span>Download everything on this site as CSV or JSON.</span></a>
+      <a href="/es" hreflang="es" lang="es"><b>En español</b><span>Mi dirección, solicitudes de registros y el glosario, en español.</span></a>
     </div>
   </section>
 

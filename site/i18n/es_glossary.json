@@ -1,0 +1,282 @@
+{
+ "groups": {
+  "cra": "Agencias de Reurbanización Comunitaria (CRA)",
+  "tax": "Impuestos a la propiedad y su factura",
+  "budget": "Presupuestos y de dónde viene el dinero",
+  "status": "Cómo clasificamos el gasto en este sitio",
+  "deals": "Contratos, terrenos y préstamos",
+  "records": "Registros públicos"
+ },
+ "terms": {
+  "cra": {
+   "term": "Agencia de Reurbanización Comunitaria (Community Redevelopment Agency, CRA)",
+   "simple": "Una alcancía para un vecindario que necesita mejoras. Cuando las propiedades del vecindario aumentan de valor, el dinero adicional de impuestos va a la alcancía, y solo se puede gastar en ese vecindario.",
+   "more": "La ley de Florida permite que una ciudad o un condado cree una CRA para una zona que declara oficialmente deteriorada. Normalmente, la comisión de la ciudad funciona como la junta directiva de la CRA. La CRA sigue un plan de reurbanización por escrito y tiene una fecha de terminación.",
+   "example": "La CRA de Lynn Haven abarca unos 695 acres alrededor de las avenidas Ohio y Florida."
+  },
+  "cra-district": {
+   "term": "Distrito de la CRA (CRA district)",
+   "simple": "La línea dibujada en el mapa alrededor del vecindario que cubre una CRA. El dinero que se recauda dentro de la línea se gasta dentro de la línea.",
+   "more": "Algunas CRA tienen varios distritos. Panama City tiene cuatro: Downtown, Downtown North, St. Andrews y Millville.",
+   "example": ""
+  },
+  "tif": {
+   "term": "Incremento de impuestos (tax increment, TIF)",
+   "simple": "El impuesto a la propiedad adicional que genera un vecindario porque sus propiedades valen más desde que empezó la CRA. Ese adicional es lo que llena la alcancía de la CRA.",
+   "more": "El día en que empieza una CRA, se anota el valor total de las propiedades dentro de ella. Cada año después, la ciudad y el condado pagan al fondo fiduciario de la CRA los impuestos sobre cualquier valor por encima de esa cifra inicial. TIF son las siglas en inglés de \"tax increment financing\" (financiamiento por incremento de impuestos).",
+   "example": "Si un distrito valía $100 millones cuando empezó y ahora vale $150 millones, los impuestos sobre la diferencia de $50 millones van a la CRA."
+  },
+  "base-year": {
+   "term": "Año base (base year)",
+   "simple": "La foto inicial de cuánto valían todas las propiedades de una CRA. Solo el crecimiento por encima de esa cifra aporta dinero a la CRA.",
+   "more": "El año base se fija cuando se crea la CRA y no cambia durante toda la vida de la CRA.",
+   "example": ""
+  },
+  "trust-fund": {
+   "term": "Fondo fiduciario de la CRA (CRA trust fund)",
+   "simple": "La cuenta bancaria propia de la CRA. Ahí entra el incremento de impuestos y, por ley, solo se puede gastar en el plan de esa CRA.",
+   "more": "La ley estatal (Capítulo 163, Parte III) exige que cada CRA mantenga su dinero en un fondo fiduciario separado y que informe cada año cómo lo gastó.",
+   "example": ""
+  },
+  "sunset": {
+   "term": "Fecha de terminación (sunset date)",
+   "simple": "El día en que está previsto que termine una CRA. Después de esa fecha, el dinero adicional de impuestos vuelve a los presupuestos de la ciudad y del condado.",
+   "more": "Una ciudad puede votar para extender la vida de una CRA. Lynn Haven extendió su CRA hasta 2043 en enero de 2026.",
+   "example": ""
+  },
+  "tif-rebate": {
+   "term": "Reembolso de TIF (TIF rebate)",
+   "simple": "Un acuerdo en el que la CRA le devuelve a un constructor parte de los nuevos impuestos que genera su proyecto, durante un número fijo de años, para ayudar a que el proyecto se construya.",
+   "more": "El reembolso se paga solo después de que el dueño paga la factura de impuestos completa, y tiene un monto máximo.",
+   "example": "Panama City aprobó cinco reembolsos de TIF en el centro en diciembre de 2024."
+  },
+  "facade-grant": {
+   "term": "Subvención para fachadas (façade or storefront grant)",
+   "simple": "Dinero que una CRA le da al dueño de un negocio para arreglar el frente de su edificio, por lo general igualando lo que gasta el dueño.",
+   "more": "La mayoría de los programas son 50/50: la CRA paga la mitad, hasta un límite, después de que se termina la obra.",
+   "example": ""
+  },
+  "ad-valorem": {
+   "term": "Impuesto a la propiedad (ad valorem tax)",
+   "simple": "Un impuesto basado en lo que vale su casa o terreno. Las propiedades de más valor pagan más.",
+   "more": "Ad valorem es latín y significa \"según el valor\". Varios gobiernos cobran cada uno su propio impuesto a la propiedad, y todos aparecen en una sola factura del Recaudador de Impuestos (Tax Collector).",
+   "example": ""
+  },
+  "taxing-authority": {
+   "term": "Autoridad tributaria (taxing authority)",
+   "simple": "Cualquier gobierno autorizado para poner un impuesto a la propiedad en su factura, como el condado, la junta escolar o su ciudad.",
+   "more": "Cada una fija su propia tasa cada año en una audiencia pública.",
+   "example": ""
+  },
+  "millage": {
+   "term": "Tasa en milésimas (millage, mills)",
+   "simple": "La forma en que se escriben las tasas del impuesto a la propiedad. Un \"mill\" significa $1 de impuesto por cada $1,000 del valor sobre el que se cobra impuesto a su propiedad.",
+   "more": "Una tasa de 5.5 mills equivale a 0.55%. Su factura suma los mills de cada autoridad tributaria que cubre su dirección.",
+   "example": "5 mills sobre una casa con un valor gravable de $200,000 son $1,000 al año."
+  },
+  "just-value": {
+   "term": "Valor justo (just value)",
+   "simple": "El cálculo del Tasador de Propiedades (Property Appraiser) de lo que su propiedad se vendería.",
+   "more": "Se fija con fecha del 1 de enero de cada año.",
+   "example": ""
+  },
+  "assessed-value": {
+   "term": "Valor tasado (assessed value)",
+   "simple": "El valor de su propiedad después de aplicar los límites a qué tan rápido puede subir. Para una vivienda principal con exención de homestead, normalmente sube más despacio que el mercado.",
+   "more": "La regla Save Our Homes de Florida impide que el valor tasado de una vivienda con homestead suba más de 3% al año, o la tasa de inflación si es menor.",
+   "example": ""
+  },
+  "taxable-value": {
+   "term": "Valor gravable (taxable value)",
+   "simple": "La cifra sobre la que realmente se calcula su impuesto: el valor tasado menos cualquier exención.",
+   "more": "Puede ser distinta para los impuestos escolares y los demás impuestos, porque una de las exenciones de homestead no se aplica a los impuestos escolares.",
+   "example": ""
+  },
+  "homestead": {
+   "term": "Exención de vivienda principal (homestead exemption)",
+   "simple": "Un descuento en los impuestos a la propiedad para la casa donde usted vive todo el año, siempre que lo solicite.",
+   "more": "Los primeros $25,000 de valor están exentos de todos los impuestos a la propiedad. Una segunda cantidad, sobre el valor tasado por encima de $50,000, está exenta de todos los impuestos excepto los escolares. Era de $25,000 hasta 2024 y ahora sube con la inflación: $25,722 en 2025 y $26,411 en 2026.",
+   "example": "En 2025, a una vivienda con homestead y un valor tasado de $200,000 la ciudad y el condado le cobraban impuestos sobre $149,278, y la junta escolar sobre $175,000."
+  },
+  "rolled-back": {
+   "term": "Tasa de reversión (rolled-back rate)",
+   "simple": "La tasa de impuestos que recaudaría el mismo dinero que el año pasado de las mismas propiedades. Si un gobierno escoge una tasa más alta, la ley lo llama un aumento de impuestos, aunque la tasa no haya cambiado.",
+   "more": "Las construcciones nuevas no se incluyen en el cálculo, así que el crecimiento por sí solo no cuenta como aumento.",
+   "example": ""
+  },
+  "trim": {
+   "term": "Aviso TRIM (TRIM notice)",
+   "simple": "La tarjeta postal que usted recibe cada agosto con sus impuestos propuestos y las fechas de las audiencias públicas.",
+   "more": "TRIM son las siglas en inglés de \"Truth in Millage\" (Veracidad en las Tasas), la ley de Florida que fija los pasos que los gobiernos deben seguir antes de subir los impuestos a la propiedad.",
+   "example": ""
+  },
+  "non-ad-valorem": {
+   "term": "Cargo no basado en el valor (non-ad valorem assessment)",
+   "simple": "Una tarifa fija en su factura de impuestos por un servicio, como la recolección de basura o la protección contra incendios. No se basa en lo que vale su propiedad.",
+   "more": "Aparece en la misma factura que los impuestos a la propiedad, pero se calcula por vivienda, por acre o por unidad en lugar de por valor.",
+   "example": ""
+  },
+  "mstu": {
+   "term": "MSTU",
+   "simple": "Una zona de impuesto adicional del condado que paga servicios en solo una parte del condado, por lo general las zonas fuera de las ciudades.",
+   "more": "MSTU son las siglas en inglés de \"Municipal Service Taxing Unit\" (Unidad Tributaria de Servicios Municipales).",
+   "example": ""
+  },
+  "rle": {
+   "term": "Aporte Local Obligatorio (Required Local Effort)",
+   "simple": "La tasa de impuesto escolar que el estado le indica a cada distrito escolar que cobre para poder recibir su parte del dinero estatal para escuelas.",
+   "more": "La Legislatura la fija cada año. Las juntas escolares pueden agregar una pequeña tasa discrecional y una tasa de capital para edificios.",
+   "example": ""
+  },
+  "save-our-homes": {
+   "term": "Límite Save Our Homes (Save Our Homes cap)",
+   "simple": "Un límite a qué tan rápido puede subir el valor gravado de una vivienda con homestead: 3% al año, o menos si la inflación es menor. Las propiedades de alquiler, los negocios y las segundas viviendas tienen un límite más amplio de 10%.",
+   "more": "Los límites se aplican al valor tasado, no a las tasas de impuestos. La Enmienda 3 (Amendment 3) bajaría el límite de 10% a 5% para los impuestos no escolares.",
+   "example": ""
+  },
+  "rec": {
+   "term": "Conferencia de Estimación de Ingresos (Revenue Estimating Conference)",
+   "simple": "El equipo de economistas del estado que calcula cuánto dinero sumaría o restaría una nueva ley o enmienda.",
+   "more": "Personal de la Legislatura, de la oficina del Gobernador y de la Oficina de Investigación Económica y Demográfica (Office of Economic and Demographic Research) acuerdan una sola estimación oficial.",
+   "example": "Para la Enmienda 3, calculó la pérdida de cada condado, ciudad y distrito especial."
+  },
+  "levy": {
+   "term": "Gravamen (levy)",
+   "simple": "El total de impuesto a la propiedad que un gobierno recauda en un año: su tasa multiplicada por todo el valor gravable de su zona.",
+   "more": "",
+   "example": ""
+  },
+  "fiscal-year": {
+   "term": "Año fiscal (fiscal year, FY)",
+   "simple": "El año de presupuesto de un gobierno. En Florida va del 1 de octubre al 30 de septiembre.",
+   "more": "Lleva el nombre del año en que termina.",
+   "example": "El FY2026 va del 1 de octubre de 2025 al 30 de septiembre de 2026."
+  },
+  "general-fund": {
+   "term": "Fondo general (general fund)",
+   "simple": "La cuenta corriente principal de un gobierno para los servicios de todos los días, como la policía, los parques y el funcionamiento del ayuntamiento.",
+   "more": "La mayor parte del impuesto a la propiedad va aquí. El dinero para fines especiales se guarda en fondos separados.",
+   "example": ""
+  },
+  "enterprise-fund": {
+   "term": "Fondo empresarial (enterprise fund)",
+   "simple": "Una cuenta para un servicio que usted paga directamente, como el agua y el alcantarillado. Las facturas que usted paga cubren el servicio.",
+   "more": "Funcionan como un pequeño negocio dentro del gobierno.",
+   "example": ""
+  },
+  "special-revenue": {
+   "term": "Fondo de ingresos especiales (special revenue fund)",
+   "simple": "Dinero que por ley solo se puede gastar en una cosa, como el impuesto a la gasolina para carreteras o el fondo fiduciario de una CRA.",
+   "more": "",
+   "example": ""
+  },
+  "state-shared": {
+   "term": "Ingresos compartidos del estado (state shared revenue)",
+   "simple": "Dinero que el estado recauda, sobre todo del impuesto sobre las ventas, y devuelve a las ciudades y los condados.",
+   "more": "La parte más grande es el programa del medio centavo del impuesto sobre las ventas. Las ciudades y los condados también reciben dinero de reparto de ingresos según su población y otros factores.",
+   "example": ""
+  },
+  "charges-services": {
+   "term": "Cobros por servicios (charges for services)",
+   "simple": "Dinero que un gobierno gana cobrando por cosas que ofrece, como las facturas de agua, la recolección de basura, los permisos y las tarifas de los parques.",
+   "more": "",
+   "example": ""
+  },
+  "intergovernmental": {
+   "term": "Ingresos intergubernamentales (intergovernmental revenue)",
+   "simple": "Dinero que un gobierno recibe de otro, como subvenciones federales o ingresos compartidos del estado.",
+   "more": "",
+   "example": ""
+  },
+  "constitutional-officers": {
+   "term": "Funcionarios constitucionales (constitutional officers)",
+   "simple": "Los funcionarios electos del condado que nombra la constitución de Florida: el alguacil (sheriff), el tasador de propiedades, el recaudador de impuestos, el secretario del tribunal (clerk of court) y el supervisor de elecciones.",
+   "more": "Cada uno tiene su propio presupuesto, y el condado paga la mayor parte de ellos.",
+   "example": ""
+  },
+  "audit": {
+   "term": "Auditoría / informe financiero anual (audit / annual financial report)",
+   "simple": "Una revisión anual de las cuentas de un gobierno hecha por contadores externos, para asegurarse de que los números cuadran y de que se siguieron las reglas.",
+   "more": "Los gobiernos de Florida deben presentar sus auditorías e informes financieros ante el estado. Este sitio usa esos documentos.",
+   "example": ""
+  },
+  "spent": {
+   "term": "Gastado (Spent)",
+   "simple": "El registro indica que el dinero realmente se pagó.",
+   "more": "",
+   "example": ""
+  },
+  "committed": {
+   "term": "Comprometido (Committed)",
+   "simple": "Se aprobó un contrato o una adjudicación, pero todavía no se ha pagado todo el dinero.",
+   "more": "",
+   "example": ""
+  },
+  "budgeted": {
+   "term": "Presupuestado (Budgeted)",
+   "simple": "Dinero apartado en un plan. Puede que se gaste o puede que no.",
+   "more": "",
+   "example": ""
+  },
+  "proposed": {
+   "term": "Propuesto (Proposed)",
+   "simple": "Una idea o solicitud que no se ha aprobado.",
+   "more": "",
+   "example": ""
+  },
+  "left-out": {
+   "term": "Excluido de los totales (Left out of totals)",
+   "simple": "Se muestra en el sitio, pero no se suma a los totales, para que el mismo dólar nunca se cuente dos veces.",
+   "more": "Ejemplos: una orden de cambio que ya forma parte del total de un proyecto, un posible duplicado o dinero que no viene de la CRA.",
+   "example": ""
+  },
+  "change-order": {
+   "term": "Orden de cambio (change order)",
+   "simple": "Un cambio aprobado a un contrato después de firmado, que a menudo agrega costo o tiempo.",
+   "more": "",
+   "example": ""
+  },
+  "right-of-way": {
+   "term": "Derecho de vía (right-of-way)",
+   "simple": "El terreno donde está una carretera más la franja a su lado para aceras, servicios públicos y drenaje.",
+   "more": "Ampliar una carretera a menudo significa comprar más derecho de vía.",
+   "example": ""
+  },
+  "eminent-domain": {
+   "term": "Expropiación (eminent domain)",
+   "simple": "Cuando un gobierno compra un terreno privado para un proyecto público aunque el dueño no quiera vender. Un tribunal decide el precio justo.",
+   "more": "El proceso judicial se llama \"condemnation\" (expropiación forzosa).",
+   "example": ""
+  },
+  "bond": {
+   "term": "Bono (bond)",
+   "simple": "Una forma en que un gobierno pide dinero prestado ahora y lo devuelve con intereses durante muchos años, como una hipoteca.",
+   "more": "Los pagos anuales se llaman servicio de la deuda (debt service).",
+   "example": ""
+  },
+  "cdd": {
+   "term": "Distrito de Desarrollo Comunitario (Community Development District, CDD)",
+   "simple": "Un gobierno especial creado para un solo desarrollo, para construir y pagar sus calles, tuberías y otros servicios básicos. Los dueños de las propiedades de ahí lo pagan.",
+   "more": "",
+   "example": ""
+  },
+  "interlocal": {
+   "term": "Acuerdo interlocal (interlocal agreement)",
+   "simple": "Un contrato entre dos gobiernos, como una ciudad y el condado.",
+   "more": "",
+   "example": ""
+  },
+  "public-records": {
+   "term": "Solicitud de registros públicos (public records request)",
+   "simple": "Pedirle a un gobierno que le muestre o le envíe sus registros. En Florida, cualquier persona puede pedirlos, y no tiene que decir por qué.",
+   "more": "La ley de registros públicos de Florida es el Capítulo 119 de los Estatutos de Florida. Los gobiernos pueden cobrar por las copias y por grandes cantidades de tiempo del personal.",
+   "example": ""
+  },
+  "check-register": {
+   "term": "Registro de pagos (check register)",
+   "simple": "La lista de un gobierno de cada pago que hizo: a quién se le pagó, cuánto, cuándo y por qué.",
+   "more": "Es la forma más directa de ver adónde fue el dinero, y la mayoría de las ciudades no lo publican en internet.",
+   "example": ""
+  }
+ }
+}

@@ -1,0 +1,35 @@
+# Refresh the meetings calendar every morning and rebuild the site.
+# Pushing to main triggers the normal Vercel deploy. Commits only when something changed.
+name: Refresh meetings
+on:
+  schedule:
+    - cron: '17 11 * * *'   # 6:17 a.m. Central (daylight time)
+  workflow_dispatch: {}
+permissions:
+  contents: write
+concurrency:
+  group: refresh-meetings
+  cancel-in-progress: true
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Fetch meetings
+        working-directory: data/meetings
+        run: python fetch_meetings.py
+      - name: Rebuild site
+        working-directory: site
+        run: python build_site.py > /dev/null
+      - name: Commit if changed
+        run: |
+          if git diff --quiet; then echo "No changes"; exit 0; fi
+          git config user.name "BayCounty.me bot"
+          git config user.email "hello@fluxlabs.net"
+          git add -A data/meetings site/public
+          git commit -m "Refresh meetings calendar ($(date -u +%Y-%m-%d))"
+          git push

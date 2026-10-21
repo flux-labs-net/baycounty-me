@@ -48,6 +48,35 @@ def _head(eyebrow, title, lede):
     <div class="stamp"><button type="button" class="pdf-btn" id="pdf"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 12v2h10v-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Export PDF</button><span>From audits filed with the Florida Auditor General<br>Data updated Oct 20, 2026</span></div></header>'''
 
 
+def issues_section():
+    import os, re
+    fp = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'data', 'money', 'bonds.json')
+    if not os.path.exists(fp):
+        return ''
+    b = json.load(open(fp))
+    iss = b['issues']
+    govs = sorted({i['gov'] for i in iss}, key=lambda g: -sum(x.get('outstanding') or 0 for x in iss if x['gov'] == g))
+    TYPE = {'loan': 'Loan', 'note': 'Note', 'bond': 'Bond', 'certificates of participation': 'Certificates of participation'}
+    rows = ''
+    for g in govs:
+        xs = sorted((x for x in iss if x['gov'] == g), key=lambda x: -(x.get('outstanding') or 0))
+        rows += f'<tr class="grp"><th colspan="5" scope="colgroup">{e(g)} <span class="muted small">· {money(sum(x.get("outstanding") or 0 for x in xs))} outstanding</span></th></tr>'
+        for x in xs:
+            mat = re.sub(r'\s*\(.*', '', str(x.get('final_maturity') or '—'))
+            retired = 'likely retired' in (x.get('status') or '') or 'has passed' in (x.get('status') or '')
+            src = ' · '.join(f'<a class="src" href="{e(u)}" target="_blank" rel="noopener">Source {k + 1}</a>' for k, u in enumerate((x.get('sources') or [])[:3]))
+            rows += f"""<tr><th scope="row"><b>{e(x.get('series'))}</b><small>{e(TYPE.get(x.get('type'), x.get('type') or ''))}{' · ' + e(x['placement']) if x.get('placement') else ''}{' · rated ' + e(x['rating']) if x.get('rating') else ''}</small></th>
+              <td class="num">{money(x['par_amount']) if x.get('par_amount') else '—'}<small>{e((x.get('dated_date') or '')[:4])}</small></td>
+              <td class="num">{money(x['outstanding']) if x.get('outstanding') is not None else '—'}<small>{e(x.get('outstanding_as_of') or '')}</small></td>
+              <td class="small">{e(x.get('interest_rate') or '—')}<br>until {e(mat)}{'<br><span class="badge warn">May be paid off</span>' if retired else ''}</td>
+              <td class="wrap small">{e(x.get('purpose') or '')}{'<br><span class="muted">Repaid from: ' + e(x['security']) + '</span>' if x.get('security') else ''}<br>{src}</td></tr>"""
+    gaps = ''.join(f'<li>{e(g)}</li>' for g in b.get('gaps') or [])
+    return f"""<section class="tx-sec"><div class="sec-hd"><h2 id="issues">Every bond, note and loan</h2><span class="muted">{len(iss)} issues · {money(sum(x.get('outstanding') or 0 for x in iss))} outstanding at the latest audit</span></div>
+    <div class="tablewrap"><table class="tx-table cm-table bond-table"><thead><tr><th scope="col">Issue</th><th scope="col" class="num">Borrowed</th><th scope="col" class="num">Still owed</th><th scope="col">Rate and term</th><th scope="col">What it paid for</th></tr></thead><tbody>{rows}</tbody></table></div>
+    <p class="note">From each government's latest audit, with issue dates and terms from the resolutions and loan documents. Most local borrowing here is a private loan from a bank or the state, so there is no public bond document or rating. Issue totals differ from "Who owes what" above, which also counts leases, software subscriptions and bond premiums.</p>
+    <details class="gaps"><summary>Gaps in the bond records ({len(b.get('gaps') or [])})</summary><ul>{gaps}</ul></details></section>"""
+
+
 def debt_page():
     d = load()
     rows = [x for x in d['debt'] if x['total_debt']]
@@ -113,6 +142,7 @@ def debt_page():
   <section class="tx-sec"><div class="sec-hd"><h2 id="pay">Payments this year, and pension promises</h2></div><div class="tablewrap"><table class="tx-table">{pay_tbl}</table></div>
     <p class="note">Lynn Haven reports a net pension <i>asset</i> of $4.4M (its plan holds more than it owes). Blank cells mean the audit didn't report that item for the government.</p></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="each">Every debt, by government</h2></div>{det}</section>
+  {issues_section()}
   <section class="tx-sec method"><div class="sec-hd"><h2 id="src">Sources and gaps</h2></div>{''.join(f"<p>{e(n)}</p>" for n in d["notes"])}
     <details class="gaps"><summary>What we couldn't find ({len(d["gaps"])})</summary><ul>{''.join(f"<li>{e(g)}</li>" for g in d["gaps"] if 'Lynn Haven federal' not in g)}</ul></details></section>
 </div>

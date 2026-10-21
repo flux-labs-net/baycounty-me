@@ -102,6 +102,7 @@ def addr_page(out_dir):
       <section class="card" id="cSch"><h3>Zoned public schools</h3><dl class="kv" id="schBody"></dl></section>
       <section class="card" id="cCra"><h3>Redevelopment district ({T('cra', 'CRA')})</h3><div id="craBody"></div></section>
       <section class="card" id="cSafe"><h3>Flood, storms and services</h3><dl class="kv" id="safeBody"></dl></section>
+      <section class="card" id="cDev"><h3>Zoning and development nearby</h3><div id="devBody"></div></section>
     </div>
     <p class="note">Owner names are not shown here. They're public at the Property Appraiser's site, linked above. Representative names come from Bay County's GIS and may lag an election.</p>
   </div>

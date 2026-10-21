@@ -1,0 +1,79 @@
+{
+  "as_of": "2026-10-21",
+  "source": "University of Florida, Bureau of Economic and Business Research (BEBR), Florida Estimates of Population 2025, Table 1: Estimates of Population by County and City in Florida, April 1, 2025",
+  "source_url": "https://bebr.ufl.edu/wp-content/uploads/2025/12/estimates_2025.xlsx",
+  "source_page": "https://bebr.ufl.edu/florida-estimates-of-population-2025/",
+  "source_pdf": "https://www.bebr.ufl.edu/wp-content/uploads/2025/12/estimates_2025.pdf",
+  "year": 2025,
+  "notes": [
+    "est = BEBR April 1, 2025 estimate (latest published; 2026 estimates are normally released in December).",
+    "census2020 = the 'Census Count, April 1, 2020' column exactly as published in BEBR Table 1 (not re-pulled from Census Bureau tables).",
+    "inmates_2025 = inmate population counted in the estimate (BEBR excludes inmates for state revenue-sharing purposes).",
+    "City and unincorporated figures sum exactly to the county totals for both years."
+  ],
+  "places": {
+    "Bay County": {
+      "est": 199950,
+      "census2020": 175216,
+      "change_2020_2025": 24734,
+      "pct_change": 14.1,
+      "inmates_2025": 1136
+    },
+    "Callaway": {
+      "est": 15157,
+      "census2020": 13045,
+      "change_2020_2025": 2112,
+      "pct_change": 16.2,
+      "inmates_2025": 0
+    },
+    "Lynn Haven": {
+      "est": 21733,
+      "census2020": 18695,
+      "change_2020_2025": 3038,
+      "pct_change": 16.3,
+      "inmates_2025": 0
+    },
+    "Mexico Beach": {
+      "est": 1402,
+      "census2020": 916,
+      "change_2020_2025": 486,
+      "pct_change": 53.1,
+      "inmates_2025": 0
+    },
+    "Panama City": {
+      "est": 38078,
+      "census2020": 32939,
+      "change_2020_2025": 5139,
+      "pct_change": 15.6,
+      "inmates_2025": 165
+    },
+    "Panama City Beach": {
+      "est": 19581,
+      "census2020": 18094,
+      "change_2020_2025": 1487,
+      "pct_change": 8.2,
+      "inmates_2025": 0
+    },
+    "Parker": {
+      "est": 4608,
+      "census2020": 4010,
+      "change_2020_2025": 598,
+      "pct_change": 14.9,
+      "inmates_2025": 0
+    },
+    "Springfield": {
+      "est": 9213,
+      "census2020": 8075,
+      "change_2020_2025": 1138,
+      "pct_change": 14.1,
+      "inmates_2025": 0
+    },
+    "Unincorporated Bay County": {
+      "est": 90178,
+      "census2020": 79442,
+      "change_2020_2025": 10736,
+      "pct_change": 13.5,
+      "inmates_2025": 971
+    }
+  }
+}

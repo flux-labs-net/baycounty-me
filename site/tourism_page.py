@@ -137,7 +137,7 @@ def surtax_page(out_dir):
   <section class="tx-sec"><div class="sec-hd"><h2 id="map-h">Infrastructure projects on the county map</h2><span class="muted" id="stCount"></span></div>
     <div class="filters-row">
       <input id="stQ" type="search" placeholder="Search projects or roads" aria-label="Search projects">
-      <select id="stG" aria-label="Government"><option value="">All governments</option></select>
+      <select id="stG" aria-label="Government" data-param="gov"><option value="">All governments</option></select>
       <select id="stC" aria-label="Type"><option value="">All types</option></select>
       <select id="stS" aria-label="Status"><option value="">Any status</option><option value="completed">Completed</option><option value="in_progress">In progress</option><option value="not_started">Not started</option></select>
     </div>

@@ -1,0 +1,1265 @@
+{
+ "as_of": "2026-10-21",
+ "test_points": {
+  "1614 Ohio Ave, Lynn Haven": {
+   "lng": -85.649355,
+   "lat": 30.233401
+  },
+  "7038 W Highway 98 (unincorporated, PCB area)": {
+   "lng": -85.759502,
+   "lat": 30.190644
+  },
+  "PCB city check pt (near 9000 blk Front Beach Rd)": {
+   "lng": -85.818632,
+   "lat": 30.184243
+  },
+  "Panama City check pt (501 Harrison Ave)": {
+   "lng": -85.660703,
+   "lat": 30.157344
+  }
+ },
+ "query_template": "{url}/query?geometry={lng},{lat}&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelIntersects&distance=0.5&units=esriSRUnit_StatuteMile&outFields={explicit list}&returnGeometry=false&outSR=4326&f=json",
+ "layers": [
+  {
+   "id": "bc_zoning",
+   "kind": "zoning",
+   "name": "Zoning (Bay County countywide, incl. municipal labels)",
+   "url": "https://gis.baycountyfl.gov/arcgis/rest/services/LandUsePlanning/MapServer/1",
+   "jurisdiction": "Bay County (unincorporated) + municipalities per Label suffix",
+   "fields": {
+    "date": "ORD_DATE",
+    "status": null,
+    "number": "ORD_NUM",
+    "type": "ZONING",
+    "description": "COMMENTS",
+    "address": null
+   },
+   "geometry": "polygon",
+   "count": 8555,
+   "cors": true,
+   "cors_header": "https://baycounty.me",
+   "date_min": "1997-04-08",
+   "date_max": "2026-09-08",
+   "spatial_ok": true,
+   "test_radius_mi": 0,
+   "test_results": {
+    "1614 Ohio Ave, Lynn Haven": 1,
+    "7038 W Highway 98 (unincorporated, PCB area)": 1,
+    "PCB city check pt (near 9000 blk Front Beach Rd)": 1,
+    "Panama City check pt (501 Harrison Ave)": 1
+   },
+   "notes": "Point-in-polygon at the address gives the zoning district. Label suffix shows source jurisdiction, e.g. (BC)=county, (LH)=Lynn Haven. Same data also hosted on ArcGIS Online: https://services1.arcgis.com/QB0VWfqR9MD4lF0F/arcgis/rest/services/Zoning/FeatureServer/0 (CORS *).",
+   "sample": [
+    {
+     "ZONING": "See FLU",
+     "Label": "See FLU(LH)",
+     "ORD_NUM": null,
+     "ORD_DATE": null,
+     "COMMENTS": null,
+     "COMMENTS2": null,
+     "CONDITIONS": null,
+     "_test_point": "1614 Ohio Ave, Lynn Haven"
+    },
+    {
+     "ZONING": "C-3",
+     "Label": "C-3(BC)",
+     "ORD_NUM": null,
+     "ORD_DATE": null,
+     "COMMENTS": null,
+     "COMMENTS2": null,
+     "CONDITIONS": null,
+     "_test_point": "7038 W Highway 98 (unincorporated, PCB area)"
+    },
+    {
+     "ZONING": "CH",
+     "Label": "CH(PCB)",
+     "ORD_NUM": "1233",
+     "ORD_DATE": "2012-07-26",
+     "COMMENTS": "",
+     "COMMENTS2": null,
+     "CONDITIONS": null,
+     "_test_point": "PCB city check pt (near 9000 blk Front Beach Rd)"
+    }
+   ]
+  },
+  {
+   "id": "bc_zoning_agol",
+   "kind": "zoning",
+   "name": "Zoning (ArcGIS Online copy)",
+   "url": "https://services1.arcgis.com/QB0VWfqR9MD4lF0F/arcgis/rest/services/Zoning/FeatureServer/0",
+   "jurisdiction": "Bay County countywide",
+   "fields": {
+    "date": "ORD_DATE",
+    "status": null,
+    "number": "ORD_NUM",
+    "type": "ZONING",
+    "description": "COMMENTS",
+    "address": null
+   },
+   "geometry": "polygon",
+   "count": 8555,
+   "cors": true,
+   "cors_header": "*",
+   "date_min": "1997-04-08",
+   "date_max": "2026-09-08",
+   "spatial_ok": true,
+   "test_radius_mi": 0,
+   "test_results": {
+    "1614 Ohio Ave, Lynn Haven": 1,
+    "7038 W Highway 98 (unincorporated, PCB area)": 1,
+    "PCB city check pt (near 9000 blk Front Beach Rd)": 1,
+    "Panama City check pt (501 Harrison Ave)": 1
+   },
+   "notes": "Hosted copy of bc_zoning (same 8,555 polygons); CORS wildcard.",
+   "sample": [
+    {
+     "ZONING": "See FLU",
+     "Label": "See FLU(LH)",
+     "ORD_NUM": null,
+     "ORD_DATE": null,
+     "COMMENTS": null,
+     "_test_point": "1614 Ohio Ave, Lynn Haven"
+    },
+    {
+     "ZONING": "C-3",
+     "Label": "C-3(BC)",
+     "ORD_NUM": null,
+     "ORD_DATE": null,
+     "COMMENTS": null,
+     "_test_point": "7038 W Highway 98 (unincorporated, PCB area)"
+    },
+    {
+     "ZONING": "CH",
+     "Label": "CH(PCB)",
+     "ORD_NUM": "1233",
+     "ORD_DATE": "2012-07-26",
+     "COMMENTS": "",
+     "_test_point": "PCB city check pt (near 9000 blk Front Beach Rd)"
+    }
+   ]
+  },
+  {
+   "id": "pc_zoning",
+   "kind": "zoning",
+   "name": "Zoning CPC (City of Panama City)",
+   "url": "https://services3.arcgis.com/RfAh242jlP6Nb5vP/arcgis/rest/services/Zoning_CPC/FeatureServer/0",
+   "jurisdiction": "City of Panama City",
+   "fields": {
+    "date": "ordinancedate",
+    "status": null,
+    "number": "ordinance",
+    "type": "LABEL",
+    "description": "ZONE_TYPE",
+    "address": null
+   },
+   "geometry": "polygon",
+   "count": 18835,
+   "cors": true,
+   "cors_header": "*",
+   "date_min": "0225-01-28",
+   "date_max": "2026-08-11",
+   "spatial_ok": true,
+   "test_radius_mi": 0,
+   "test_results": {
+    "1614 Ohio Ave, Lynn Haven": 0,
+    "7038 W Highway 98 (unincorporated, PCB area)": 0,
+    "PCB city check pt (near 9000 blk Front Beach Rd)": 0,
+    "Panama City check pt (501 Harrison Ave)": 1
+   },
+   "notes": "Parcel-level polygons with previouszone field (useful for rezoning history). QUIRK: distance queries fail with SRID error unless outSR=4326 is also passed. ordinancedate has at least one bad value (year 0225).",
+   "sample": [
+    {
+     "LABEL": "DTC",
+     "ZONE_TYPE": "Downtown Center",
+     "ordinance": 2766,
+     "ordinancedate": "2020-02-24",
+     "previouszone": "DTD",
+     "A1RENUM": "19718-000-000",
+     "_test_point": "Panama City check pt (501 Harrison Ave)"
+    }
+   ]
+  },
+  {
+   "id": "pcb_zoning",
+   "kind": "zoning",
+   "name": "Zoning (Panama City Beach public map)",
+   "url": "https://gis.baycountyfl.gov/arcgis/rest/services/PanamaCityBeach/PanamaCityBeachPublic/MapServer/7",
+   "jurisdiction": "City of Panama City Beach",
+   "fields": {
+    "date": "ORD_DATE",
+    "status": null,
+    "number": "ORD_NUM",
+    "type": "ZONING",
+    "description": "COMMENTS",
+    "address": null
+   },
+   "geometry": "polygon",
+   "count": 632,
+   "cors": true,
+   "cors_header": "https://baycounty.me",
+   "date_min": "2004-07-22",
+   "date_max": "2025-07-24",
+   "spatial_ok": true,
+   "test_radius_mi": 0,
+   "test_results": {
+    "1614 Ohio Ave, Lynn Haven": 0,
+    "7038 W Highway 98 (unincorporated, PCB area)": 0,
+    "PCB city check pt (near 9000 blk Front Beach Rd)": 1,
+    "Panama City check pt (501 Harrison Ave)": 0
+   },
+   "notes": "PCB city zoning as served by the county server.",
+   "sample": [
+    {
+     "ZONING": "CH",
+     "Label": "CH(PCB)",
+     "ORD_NUM": "1233",
+     "ORD_DATE": "2012-07-26",
+     "COMMENTS": "",
+     "_test_point": "PCB city check pt (near 9000 blk Front Beach Rd)"
+    }
+   ]
+  },
+  {
+   "id": "bc_flu",
+   "kind": "flu",
+   "name": "Future Land Use (Bay County countywide)",
+   "url": "https://gis.baycountyfl.gov/arcgis/rest/services/LandUsePlanning/MapServer/2",
+   "jurisdiction": "Bay County + municipalities per Label suffix",
+   "fields": {
+    "date": "ORD_DATE",
+    "status": null,
+    "number": "ORD_NUM",
+    "type": "FLU_CODE",
+    "description": "COMMENTS",
+    "address": null
+   },
+   "geometry": "polygon",
+   "count": 9609,
+   "cors": true,
+   "cors_header": "https://baycounty.me",
+   "date_min": "1992-12-17",
+   "date_max": "2026-07-21",
+   "spatial_ok": true,
+   "test_radius_mi": 0,
+   "test_results": {
+    "1614 Ohio Ave, Lynn Haven": 1,
+    "7038 W Highway 98 (unincorporated, PCB area)": 1,
+    "PCB city check pt (near 9000 blk Front Beach Rd)": 1,
+    "Panama City check pt (501 Harrison Ave)": 1
+   },
+   "notes": "Hosted copy: https://services1.arcgis.com/QB0VWfqR9MD4lF0F/arcgis/rest/services/FutureLandUse/FeatureServer/0.",
+   "sample": [
+    {
+     "FLU_CODE": "COM",
+     "Label": "COM(LH)",
+     "ORD_NUM": "Comp Plan Map",
+     "ORD_DATE": "2000-04-30",
+     "COMMENTS": "Comp Plan per NWFL Planning Map",
+     "NOTES": null,
+     "CONDITIONS": null,
+     "_test_point": "1614 Ohio Ave, Lynn Haven"
+    },
+    {
+     "FLU_CODE": "GCOM",
+     "Label": "GCOM(BC)",
+     "ORD_NUM": null,
+     "ORD_DATE": null,
+     "COMMENTS": null,
+     "NOTES": null,
+     "CONDITIONS": null,
+     "_test_point": "7038 W Highway 98 (unincorporated, PCB area)"
+    },
+    {
+     "FLU_CODE": "TD",
+     "Label": "TD(PCB)",
+     "ORD_NUM": "1143",
+     "ORD_DATE": "2009-12-10",
+     "COMMENTS": null,
+     "NOTES": null,
+     "CONDITIONS": null,
+     "_test_point": "PCB city check pt (near 9000 blk Front Beach Rd)"
+    }
+   ]
+  },
+  {
+   "id": "pc_flu",
+   "kind": "flu",
+   "name": "Future Land Use CPC (City of Panama City)",
+   "url": "https://services3.arcgis.com/RfAh242jlP6Nb5vP/arcgis/rest/services/FutureLandUse_CPC/FeatureServer/0",
+   "jurisdiction": "City of Panama City",
+   "fields": {
+    "date": "ordinancedate",
+    "status": null,
+    "number": "ordinance",
+    "type": "LANDUSE",
+    "description": null,
+    "address": null
+   },
+   "geometry": "polygon",
+   "count": 17301,
+   "cors": true,
+   "cors_header": "*",
+   "date_min": "2005-05-10",
+   "date_max": "2026-12-16",
+   "spatial_ok": true,
+   "test_radius_mi": 0,
+   "test_results": {
+    "1614 Ohio Ave, Lynn Haven": 0,
+    "7038 W Highway 98 (unincorporated, PCB area)": 0,
+    "PCB city check pt (near 9000 blk Front Beach Rd)": 0,
+    "Panama City check pt (501 Harrison Ave)": 1
+   },
+   "notes": "Same outSR=4326 quirk as pc_zoning. Has previousflu field; max ordinancedate is in the future (2026-12-16), likely data-entry.",
+   "sample": [
+    {
+     "LANDUSE": "Downtown District",
+     "ordinance": null,
+     "ordinancedate": null,
+     "previousflu": null,
+     "A1RENUM": "19718-000-000",
+     "_test_point": "Panama City check pt (501 Harrison Ave)"
+    }
+   ]
+  },
+  {
+   "id": "pcb_flu",
+   "kind": "flu",
+   "name": "Future Land Use (Panama City Beach public map)",
+   "url": "https://gis.baycountyfl.gov/arcgis/rest/services/PanamaCityBeach/PanamaCityBeachPublic/MapServer/8",
+   "jurisdiction": "City of Panama City Beach",
+   "fields": {
+    "date": "ORD_DATE",
+    "status": null,
+    "number": "ORD_NUM",
+    "type": "FLU_CODE",
+    "description": "COMMENTS",
+    "address": null
+   },
+   "geometry": "polygon",
+   "count": 697,
+   "cors": true,
+   "cors_header": "https://baycounty.me",
+   "date_min": "2008-03-27",
+   "date_max": "2025-07-24",
+   "spatial_ok": true,
+   "test_radius_mi": 0,
+   "test_results": {
+    "1614 Ohio Ave, Lynn Haven": 0,
+    "7038 W Highway 98 (unincorporated, PCB area)": 0,
+    "PCB city check pt (near 9000 blk Front Beach Rd)": 1,
+    "Panama City check pt (501 Harrison Ave)": 0
+   },
+   "notes": "",
+   "sample": [
+    {
+     "FLU_CODE": "TD",
+     "Label": "TD(PCB)",
+     "ORD_NUM": "1143",
+     "ORD_DATE": "2009-12-10",
+     "COMMENTS": null,
+     "_test_point": "PCB city check pt (near 9000 blk Front Beach Rd)"
+    }
+   ]
+  },
+  {
+   "id": "bc_rezonings",
+   "kind": "rezoning",
+   "name": "Rezonings by ordinance (zoning polygons with ORD_DATE)",
+   "url": "https://gis.baycountyfl.gov/arcgis/rest/services/LandUsePlanning/MapServer/1",
+   "jurisdiction": "Bay County countywide",
+   "fields": {
+    "date": "ORD_DATE",
+    "status": null,
+    "number": "ORD_NUM",
+    "type": "ZONING",
+    "description": "COMMENTS",
+    "address": null
+   },
+   "geometry": "polygon",
+   "count": 1856,
+   "cors": true,
+   "cors_header": "https://baycounty.me",
+   "where": "ORD_DATE >= DATE '2016-01-01'",
+   "count_total": 8555,
+   "date_min": "2016-01-14",
+   "date_max": "2026-09-08",
+   "spatial_ok": true,
+   "test_radius_mi": 0.5,
+   "test_results": {
+    "1614 Ohio Ave, Lynn Haven": 1,
+    "7038 W Highway 98 (unincorporated, PCB area)": 5,
+    "PCB city check pt (near 9000 blk Front Beach Rd)": 2,
+    "Panama City check pt (501 Harrison Ave)": 48
+   },
+   "notes": "Not a case list: zoning polygons whose ORD_NUM/ORD_DATE record the adopting ordinance; COMMENTS often holds prior zoning ('pre. C-1'). Filter with where=ORD_DATE >= DATE 'YYYY-MM-DD'. Only adopted changes; pending applications are not here.",
+   "sample": [
+    {
+     "ZONING": "C-3A",
+     "Label": "C-3A(BC)",
+     "ORD_NUM": "16-16",
+     "ORD_DATE": "2016-04-19",
+     "COMMENTS": "pre. C-1",
+     "COMMENTS2": null,
+     "CONDITIONS": null,
+     "_test_point": "1614 Ohio Ave, Lynn Haven"
+    },
+    {
+     "ZONING": "C-4",
+     "Label": "C-4(BC)",
+     "ORD_NUM": "18-16",
+     "ORD_DATE": "2018-08-21",
+     "COMMENTS": "pre. C-3",
+     "COMMENTS2": null,
+     "CONDITIONS": null,
+     "_test_point": "7038 W Highway 98 (unincorporated, PCB area)"
+    },
+    {
+     "ZONING": "MLU",
+     "Label": "MLU(BC)",
+     "ORD_NUM": "17-02",
+     "ORD_DATE": "2017-01-17",
+     "COMMENTS": null,
+     "COMMENTS2": null,
+     "CONDITIONS": null,
+     "_test_point": "7038 W Highway 98 (unincorporated, PCB area)"
+    }
+   ]
+  },
+  {
+   "id": "bc_flu_amendments",
+   "kind": "rezoning",
+   "name": "Future land use amendments by ordinance",
+   "url": "https://gis.baycountyfl.gov/arcgis/rest/services/LandUsePlanning/MapServer/2",
+   "jurisdiction": "Bay County countywide",
+   "fields": {
+    "date": "ORD_DATE",
+    "status": null,
+    "number": "ORD_NUM",
+    "type": "FLU_CODE",
+    "description": "COMMENTS",
+    "address": null
+   },
+   "geometry": "polygon",
+   "count": 1763,
+   "cors": true,
+   "cors_header": "https://baycounty.me",
+   "where": "ORD_DATE >= DATE '2016-01-01'",
+   "count_total": 9609,
+   "date_min": "2016-01-18",
+   "date_max": "2026-07-21",
+   "spatial_ok": true,
+   "test_radius_mi": 0.5,
+   "test_results": {
+    "1614 Ohio Ave, Lynn Haven": 12,
+    "7038 W Highway 98 (unincorporated, PCB area)": 2,
+    "PCB city check pt (near 9000 blk Front Beach Rd)": 2,
+    "Panama City check pt (501 Harrison Ave)": 35
+   },
+   "notes": "Same approach as bc_rezonings for comp-plan (FLU) map amendments.",
+   "sample": [
+    {
+     "FLU_CODE": "COM",
+     "Label": "COM(LH)",
+     "ORD_NUM": "1039",
+     "ORD_DATE": "2017-08-08",
+     "COMMENTS": null,
+     "_test_point": "1614 Ohio Ave, Lynn Haven"
+    },
+    {
+     "FLU_CODE": "LDR",
+     "Label": "LDR(LH)",
+     "ORD_NUM": "1111",
+     "ORD_DATE": "2021-03-23",
+     "COMMENTS": null,
+     "_test_point": "1614 Ohio Ave, Lynn Haven"
+    },
+    {
+     "FLU_CODE": "MIXU",
+     "Label": "MIXU(BC)",
+     "ORD_NUM": "17-01",
+     "ORD_DATE": "2017-01-17",
+     "COMMENTS": null,
+     "_test_point": "7038 W Highway 98 (unincorporated, PCB area)"
+    }
+   ]
+  },
+  {
+   "id": "bc_zoning_conditions",
+   "kind": "rezoning",
+   "name": "Zoning Conditions (conditional use / conditional rezoning / plan amendments)",
+   "url": "https://gis.baycountyfl.gov/arcgis/rest/services/Departmental/Planning/MapServer/17",
+   "jurisdiction": "Bay County (incl. some municipal cases)",
+   "fields": {
+    "date": null,
+    "status": null,
+    "number": "REF__NUM",
+    "type": "TYPE",
+    "description": "CONDITION",
+    "address": null
+   },
+   "geometry": "point",
+   "count": 376,
+   "cors": true,
+   "cors_header": "https://baycounty.me",
+   "date_min": null,
+   "date_max": null,
+   "spatial_ok": true,
+   "test_radius_mi": 0.5,
+   "test_results": {
+    "1614 Ohio Ave, Lynn Haven": 1,
+    "7038 W Highway 98 (unincorporated, PCB area)": 8,
+    "PCB city check pt (near 9000 blk Front Beach Rd)": 0,
+    "Panama City check pt (501 Harrison Ave)": 0
+   },
+   "notes": "Point per approved case with condition text split across CONDITION..CONDITION7. No approval date field; CREATE_DATE reflects data reload (2026-08-04). AGOL copy: https://services1.arcgis.com/QB0VWfqR9MD4lF0F/arcgis/rest/services/ZoningConditions/FeatureServer/0 (CORS *).",
+   "sample": [
+    {
+     "REF__NUM": "PLCUP20260087",
+     "TYPE": "Conditional Use",
+     "CONDITION": "Allowance of a medical office",
+     "CONDITION2": "and warehouse on a C-1 zoned parcel.",
+     "CONDITION3": null,
+     "CONDITION4": null,
+     "CONDITION5": null,
+     "CONDITION6": null,
+     "CONDITION7": null,
+     "_test_point": "1614 Ohio Ave, Lynn Haven"
+    },
+    {
+     "REF__NUM": "PZ12-055",
+     "TYPE": "Conditional Use",
+     "CONDITION": "Amends CUP05-02 to allow",
+     "CONDITION2": "20 foot setback instead of 25",
+     "CONDITION3": "on P/I propoerty in Woodlawn",
+     "CONDITION4": "Phase1 excluding Lots 19 and 25.",
+     "CONDITION5": " ",
+     "CONDITION6": " ",
+     "CONDITION7": " ",
+     "_test_point": "7038 W Highway 98 (unincorporated, PCB area)"
+    },
+    {
+     "REF__NUM": "PZ10-046",
+     "TYPE": "Conditional Rezoning",
+     "CONDITION": "60 Foot Height Limit",
+     "CONDITION2": "Located in Navy ATFP Line of",
+     "CONDITION3": "Sight Area",
+     "CONDITION4": " ",
+     "CONDITION5": " ",
+     "CONDITION6": " ",
+     "CONDITION7": " ",
+     "_test_point": "7038 W Highway 98 (unincorporated, PCB area)"
+    }
+   ]
+  },
+  {
+   "id": "pc_rezonings",
+   "kind": "rezoning",
+   "name": "Panama City zoning changes (Zoning_CPC with ordinance)",
+   "url": "https://services3.arcgis.com/RfAh242jlP6Nb5vP/arcgis/rest/services/Zoning_CPC/FeatureServer/0",
+   "jurisdiction": "City of Panama City",
+   "fields": {
+    "date": "ordinancedate",
+    "status": null,
+    "number": "ordinance",
+    "type": "LABEL",
+    "description": "previouszone",
+    "address": null
+   },
+   "geometry": "polygon",
+   "count": 6000,
+   "cors": true,
+   "cors_header": "*",
+   "where": "ordinancedate >= DATE '2016-01-01'",
+   "count_total": 18835,
+   "date_min": "2020-02-11",
+   "date_max": "2026-08-11",
+   "spatial_ok": true,
+   "test_radius_mi": 0.5,
+   "test_results": {
+    "1614 Ohio Ave, Lynn Haven": 0,
+    "7038 W Highway 98 (unincorporated, PCB area)": 0,
+    "PCB city check pt (near 9000 blk Front Beach Rd)": 0,
+    "Panama City check pt (501 Harrison Ave)": 234
+   },
+   "notes": "Use outSR=4326 with distance queries.",
+   "sample": [
+    {
+     "LABEL": "NG",
+     "ZONE_TYPE": "Neighborhood General",
+     "ordinance": 3223.2,
+     "ordinancedate": "2025-01-28",
+     "previouszone": "GC-1 and MU-2",
+     "A1RENUM": "20163-000-000",
+     "_test_point": "Panama City check pt (501 Harrison Ave)"
+    },
+    {
+     "LABEL": "NG",
+     "ZONE_TYPE": "Neighborhood General",
+     "ordinance": 3223.2,
+     "ordinancedate": "2025-01-28",
+     "previouszone": "GC-1",
+     "A1RENUM": "20161-000-000",
+     "_test_point": "Panama City check pt (501 Harrison Ave)"
+    }
+   ]
+  },
+  {
+   "id": "bc_dev_orders",
+   "kind": "dev_orders",
+   "name": "Planning Projects / Development Orders (Bay County)",
+   "url": "https://gis.baycountyfl.gov/arcgis/rest/services/Departmental/Planning/MapServer/18",
+   "jurisdiction": "Bay County (unincorporated)",
+   "fields": {
+    "date": "APPLICATION_RECEIVED",
+    "status": "TYPE",
+    "number": "NUMBER",
+    "type": null,
+    "description": "DESCRIPTION",
+    "address": "LOCATION"
+   },
+   "geometry": "point",
+   "count": 204,
+   "cors": true,
+   "cors_header": "https://baycounty.me",
+   "date_min": "2019-08-28",
+   "date_max": "2026-10-16",
+   "spatial_ok": true,
+   "test_radius_mi": 0.5,
+   "test_results": {
+    "1614 Ohio Ave, Lynn Haven": 1,
+    "7038 W Highway 98 (unincorporated, PCB area)": 4,
+    "PCB city check pt (near 9000 blk Front Beach Rd)": 0,
+    "Panama City check pt (501 Harrison Ave)": 0
+   },
+   "notes": "Actively maintained: application received through 2026-10-16, DO issued through 2026-10-14. TYPE holds status (e.g. Approved). Second date field DO_ISSUED. AGOL source: https://services1.arcgis.com/QB0VWfqR9MD4lF0F/arcgis/rest/services/Projects/FeatureServer/0 (CORS *).",
+   "sample": [
+    {
+     "NAME": "17th Street Medical Office",
+     "NUMBER": "PLDO20260140",
+     "DESCRIPTION": "7,800 sq. ft. Medical Office & Storage Building",
+     "SIZE": "1 acre",
+     "LOCATION": "229 W. 17th Street",
+     "APPLICATION_RECEIVED": "2026-06-01",
+     "DO_ISSUED": "2026-09-01",
+     "TYPE": "Approved",
+     "_test_point": "1614 Ohio Ave, Lynn Haven"
+    },
+    {
+     "NAME": "Bayshore Inlet at Hathaway Landing Improvements",
+     "NUMBER": "PZ 23-121",
+     "DESCRIPTION": "Improvements to existing Marina",
+     "SIZE": "5.3 acres",
+     "LOCATION": "312 Bayshore Dr",
+     "APPLICATION_RECEIVED": "2023-05-17",
+     "DO_ISSUED": "2024-02-27",
+     "TYPE": "Approved",
+     "_test_point": "7038 W Highway 98 (unincorporated, PCB area)"
+    },
+    {
+     "NAME": "StudioRES",
+     "NUMBER": "PLDO20250117",
+     "DESCRIPTION": "124 Room Hotel",
+     "SIZE": "2.4 acres",
+     "LOCATION": "298 Navy Boulevard",
+     "APPLICATION_RECEIVED": "2025-06-09",
+     "DO_ISSUED": "2025-10-22",
+     "TYPE": "Approved",
+     "_test_point": "7038 W Highway 98 (unincorporated, PCB area)"
+    }
+   ]
+  },
+  {
+   "id": "lh_dev_projects",
+   "kind": "dev_orders",
+   "name": "City of Lynn Haven - Development Planning Projects",
+   "url": "https://services1.arcgis.com/QB0VWfqR9MD4lF0F/arcgis/rest/services/LH_Development_Planning_Projects/FeatureServer/0",
+   "jurisdiction": "City of Lynn Haven",
+   "fields": {
+    "date": "City_Commission_Approval_Date",
+    "status": "DO_Status",
+    "number": "Parcel_Number",
+    "type": null,
+    "description": "Project",
+    "address": "Address"
+   },
+   "geometry": "point",
+   "count": 15,
+   "cors": true,
+   "cors_header": "*",
+   "date_min": "2024-12-10",
+   "date_max": "2026-03-24",
+   "spatial_ok": true,
+   "test_radius_mi": 0.5,
+   "test_results": {
+    "1614 Ohio Ave, Lynn Haven": 2,
+    "7038 W Highway 98 (unincorporated, PCB area)": 0,
+    "PCB city check pt (near 9000 blk Front Beach Rd)": 0,
+    "Panama City check pt (501 Harrison Ave)": 0
+   },
+   "notes": "Small (15 records) but current. Also Planning_Commission_Rec_Date, DO_Expires. Contains Property_Owner and Submitting_Engineer (personal names) - do NOT request those fields; use an explicit outFields list.",
+   "sample": [
+    {
+     "Project": "7 Brew Coffee ",
+     "Number_of_Units": "N/A",
+     "Acres": 0.516,
+     "Address": "1420 Ohio Ave",
+     "Parcel_Number": "10228-000-000",
+     "DO_Status": "Approved",
+     "Amendment_to_Development_Order": null,
+     "City_Commission_Approval_Date": "2025-11-12",
+     "Planning_Commission_Rec_Date": "2025-11-04",
+     "DO_Expires": "2026-11-11",
+     "_test_point": "1614 Ohio Ave, Lynn Haven"
+    },
+    {
+     "Project": "Otto's Carwash",
+     "Number_of_Units": "N/A",
+     "Acres": 2.03,
+     "Address": "1801 Highway 77",
+     "Parcel_Number": "11605-000-000",
+     "DO_Status": "Approved",
+     "Amendment_to_Development_Order": null,
+     "City_Commission_Approval_Date": "2025-12-09",
+     "Planning_Commission_Rec_Date": "2025-12-02",
+     "DO_Expires": "2026-12-08",
+     "_test_point": "1614 Ohio Ave, Lynn Haven"
+    }
+   ]
+  },
+  {
+   "id": "pcb_planning_projects",
+   "kind": "dev_orders",
+   "name": "PCB Planning Projects (City of Panama City Beach)",
+   "url": "https://services1.arcgis.com/QB0VWfqR9MD4lF0F/arcgis/rest/services/PCB_Planning_Projects_Editing/FeatureServer/0",
+   "jurisdiction": "City of Panama City Beach",
+   "fields": {
+    "date": "DateApplied",
+    "status": "DEVTYPE",
+    "number": "A1RENUM",
+    "type": "TYPE",
+    "description": "Name",
+    "address": null
+   },
+   "geometry": "point",
+   "count": 61,
+   "cors": true,
+   "cors_header": "*",
+   "date_min": "2020-10-08",
+   "date_max": "2026-06-12",
+   "spatial_ok": true,
+   "test_radius_mi": 0.5,
+   "test_results": {
+    "1614 Ohio Ave, Lynn Haven": 0,
+    "7038 W Highway 98 (unincorporated, PCB area)": 0,
+    "PCB city check pt (near 9000 blk Front Beach Rd)": 4,
+    "Panama City check pt (501 Harrison Ave)": 0
+   },
+   "notes": "Current (edited through 2026-08-21). DEVTYPE is status (Under Review / Order Issued). No address field; A1RENUM = parcel number. Service name says \"Editing\" - it is public but may be renamed; older static copies: https://gis.baycountyfl.gov/arcgis/rest/services/PanamaCityBeach/PanamaCityBeachPublic/MapServer/4 and https://services1.arcgis.com/QB0VWfqR9MD4lF0F/arcgis/rest/services/DevelopmentProjects/FeatureServer/0 (frozen 2022).",
+   "sample": [
+    {
+     "TYPE": "9 Unit Townhome Subdivision",
+     "Name": "Sunset Cove Townhomes",
+     "SIZE": null,
+     "A1RENUM": "34773-000-000",
+     "DEVTYPE": "Order Issued",
+     "DateApplied": null,
+     "DateIssued": "2024-01-29",
+     "BuildingPermit": null,
+     "OccupancyDate": null,
+     "_test_point": "PCB city check pt (near 9000 blk Front Beach Rd)"
+    },
+    {
+     "TYPE": "Commercial",
+     "Name": "OGK Commercial Building",
+     "SIZE": ".72 acres",
+     "A1RENUM": "34799-020-000",
+     "DEVTYPE": "Order Issued",
+     "DateApplied": "2025-01-03",
+     "DateIssued": "2025-05-09",
+     "BuildingPermit": null,
+     "OccupancyDate": null,
+     "_test_point": "PCB city check pt (near 9000 blk Front Beach Rd)"
+    }
+   ]
+  },
+  {
+   "id": "pcb_developments_legacy",
+   "kind": "dev_orders",
+   "name": "Developments (PCB public map, legacy)",
+   "url": "https://gis.baycountyfl.gov/arcgis/rest/services/PanamaCityBeach/PanamaCityBeachPublic/MapServer/4",
+   "jurisdiction": "City of Panama City Beach",
+   "fields": {
+    "date": "DateApplied",
+    "status": null,
+    "number": null,
+    "type": "TYPE",
+    "description": "Name",
+    "address": null
+   },
+   "geometry": "point",
+   "count": 115,
+   "cors": true,
+   "cors_header": "https://baycounty.me",
+   "date_min": "2020-10-08",
+   "date_max": "2022-10-19",
+   "spatial_ok": true,
+   "test_radius_mi": 0.5,
+   "test_results": {
+    "1614 Ohio Ave, Lynn Haven": 0,
+    "7038 W Highway 98 (unincorporated, PCB area)": 0,
+    "PCB city check pt (near 9000 blk Front Beach Rd)": 4,
+    "Panama City check pt (501 Harrison Ave)": 0
+   },
+   "notes": "Stale: dates end 2022. Prefer pcb_planning_projects.",
+   "sample": [
+    {
+     "TYPE": "Self Storage",
+     "Name": "Climate Controlled Storage",
+     "SIZE": "117,000 SF",
+     "DateApplied": null,
+     "DateIssued": null,
+     "BuildingPermit": null,
+     "OccupancyDate": null,
+     "_test_point": "PCB city check pt (near 9000 blk Front Beach Rd)"
+    },
+    {
+     "TYPE": null,
+     "Name": "Retail Hutchison",
+     "SIZE": "4,520 Sq. Ft.",
+     "DateApplied": null,
+     "DateIssued": null,
+     "BuildingPermit": null,
+     "OccupancyDate": null,
+     "_test_point": "PCB city check pt (near 9000 blk Front Beach Rd)"
+    }
+   ]
+  },
+  {
+   "id": "bc_open_code_cases",
+   "kind": "code",
+   "name": "Open Code Cases (Bay County, by parcel)",
+   "url": "https://services1.arcgis.com/QB0VWfqR9MD4lF0F/arcgis/rest/services/Open_Code_Cases/FeatureServer/0",
+   "jurisdiction": "Bay County (unincorporated)",
+   "fields": {
+    "date": null,
+    "status": "STATUS",
+    "number": "Case_",
+    "type": "CASESUBTYP",
+    "description": "CASETYPE",
+    "address": "SITE_ADDR"
+   },
+   "geometry": "polygon",
+   "count": 1395,
+   "cors": true,
+   "cors_header": "*",
+   "date_min": null,
+   "date_max": null,
+   "spatial_ok": true,
+   "test_radius_mi": 0.5,
+   "test_results": {
+    "1614 Ohio Ave, Lynn Haven": 1,
+    "7038 W Highway 98 (unincorporated, PCB area)": 4,
+    "PCB city check pt (near 9000 blk Front Beach Rd)": 0,
+    "Panama City check pt (501 Harrison Ave)": 0
+   },
+   "notes": "No date fields. Case numbers run CE15..CE20 / HM19..HM20, i.e. a ~2020 snapshot (largely Hurricane Michael). Contains A2OWNAME (owner names) - never request it. Treat as historical.",
+   "sample": [
+    {
+     "Case_": "HM19-00111",
+     "CASETYPE": "NUISANCE",
+     "CASESUBTYP": "BLIGHTED PROPERTY",
+     "STATUS": "INVESTIGATING",
+     "SITE_ADDR": "229 17TH ST W",
+     "SITE_APN": "11595-000-000",
+     "DISTRICT": 1,
+     "_test_point": "1614 Ohio Ave, Lynn Haven"
+    },
+    {
+     "Case_": "CE20-01197",
+     "CASETYPE": "LAND USE",
+     "CASESUBTYP": "DEV ORDER REQ",
+     "STATUS": "NOV",
+     "SITE_ADDR": "312 BAYSHORE DR",
+     "SITE_APN": "27907-000-000",
+     "DISTRICT": 5,
+     "_test_point": "7038 W Highway 98 (unincorporated, PCB area)"
+    },
+    {
+     "Case_": "CE20-01148",
+     "CASETYPE": "NUISANCE",
+     "CASESUBTYP": "OVERGROWTH",
+     "STATUS": "POSTCARD",
+     "SITE_ADDR": "354 GREENWOOD CIR",
+     "SITE_APN": "27344-712-000",
+     "DISTRICT": 5,
+     "_test_point": "7038 W Highway 98 (unincorporated, PCB area)"
+    }
+   ]
+  },
+  {
+   "id": "bc_code_cases_2023",
+   "kind": "code",
+   "name": "Open Code Cases by Address Points (Bay County, 2023 snapshot)",
+   "url": "https://services1.arcgis.com/QB0VWfqR9MD4lF0F/arcgis/rest/services/OpenCases_byAddressPoints/FeatureServer/1",
+   "jurisdiction": "Bay County (unincorporated)",
+   "fields": {
+    "date": "created_date",
+    "status": "STATUS",
+    "number": "Case_No",
+    "type": "CASESUBTYPE",
+    "description": "CASE_NAME",
+    "address": "Address"
+   },
+   "geometry": "point",
+   "count": 822,
+   "cors": true,
+   "cors_header": "*",
+   "date_min": "2023-03-17",
+   "date_max": "2023-04-21",
+   "spatial_ok": true,
+   "test_radius_mi": 0.5,
+   "test_results": {
+    "1614 Ohio Ave, Lynn Haven": 0,
+    "7038 W Highway 98 (unincorporated, PCB area)": 3,
+    "PCB city check pt (near 9000 blk Front Beach Rd)": 0,
+    "Panama City check pt (501 Harrison Ave)": 0
+   },
+   "notes": "Most recent public code-case layer found: case numbers up to CE23/HM23, loaded 2023-03..2023-04, not updated since 2023-04-25. DateOPened is filled with a single load date (2023-02-13); DateClosed empty. Owner names in A2OWNAME - exclude. Snapshot sibling: OpenCases_byAddressPoints_Feb142023.",
+   "sample": [
+    {
+     "Case_No": "CE22-02169",
+     "Address": "312 BAYSHORE DR",
+     "CASETYPE": "LAND USE",
+     "CASESUBTYPE": "PROHIBITED",
+     "CASE_NAME": "VIOL OF DO REQUIREMENTS",
+     "STATUS": "VERBAL NOTIFICATION",
+     "CommissionDistrict": "5",
+     "_test_point": "7038 W Highway 98 (unincorporated, PCB area)"
+    },
+    {
+     "Case_No": "HM22-00255",
+     "Address": "212 SUNSET LN",
+     "CASETYPE": "NUISANCE",
+     "CASESUBTYPE": "UNFIT/UNSAFE STRUCTURE",
+     "CASE_NAME": "Hurricane Michael Damage",
+     "STATUS": "NOV",
+     "CommissionDistrict": "5",
+     "_test_point": "7038 W Highway 98 (unincorporated, PCB area)"
+    }
+   ]
+  },
+  {
+   "id": "bc_unsafe_structures_2019",
+   "kind": "code",
+   "name": "Unsafe Parcel/Structure (Bay County, 2019)",
+   "url": "https://gis.baycountyfl.gov/arcgis/rest/services/Departmental/CodeEnforcementCases/MapServer/1",
+   "jurisdiction": "Bay County",
+   "fields": {
+    "date": "CREATE_DAT",
+    "status": null,
+    "number": "A1RENUM",
+    "type": null,
+    "description": null,
+    "address": "DSITEADDR"
+   },
+   "geometry": "polygon",
+   "count": 309,
+   "cors": true,
+   "cors_header": "https://baycounty.me",
+   "date_min": "2019-09-03",
+   "date_max": "2019-09-03",
+   "spatial_ok": true,
+   "test_radius_mi": 0.5,
+   "test_results": {
+    "1614 Ohio Ave, Lynn Haven": 1,
+    "7038 W Highway 98 (unincorporated, PCB area)": 0,
+    "PCB city check pt (near 9000 blk Front Beach Rd)": 0,
+    "Panama City check pt (501 Harrison Ave)": 0
+   },
+   "notes": "Static 2019 post-Hurricane Michael list (CREATE_DAT 2019-09-03). All unsafe_* case fields are empty. Shapefile-backed: no pagination (do not send resultRecordCount) and no statistics. Full parcel record incl. owner names and sale grantor/grantee - request only safe fields. Sibling layers 0 (PPDR Applicant - private property debris removal, 548) and 2 (Blighted Parcel, 138).",
+   "sample": [
+    {
+     "A1RENUM": "11599-000-000",
+     "DSITEADDR": "404 18TH ST W",
+     "DORAPPDESC": "MOBILE HOME",
+     "_test_point": "1614 Ohio Ave, Lynn Haven"
+    }
+   ]
+  },
+  {
+   "id": "springfield_code_closed",
+   "kind": "code",
+   "name": "Springfield Code Enforcement - Case Closed",
+   "url": "https://gis.baycountyfl.gov/arcgis/rest/services/Springfield/CodeEnforcement/MapServer/7",
+   "jurisdiction": "City of Springfield",
+   "fields": {
+    "date": "ComplaintDate",
+    "status": "Resolved",
+    "number": "CaseNumber",
+    "type": "CaseType",
+    "description": "Description",
+    "address": "Address"
+   },
+   "geometry": "point",
+   "count": 344,
+   "cors": true,
+   "cors_header": "https://baycounty.me",
+   "date_min": "2014-01-14",
+   "date_max": "2018-05-21",
+   "spatial_ok": true,
+   "test_radius_mi": 0.5,
+   "test_results": {
+    "1614 Ohio Ave, Lynn Haven": 0,
+    "7038 W Highway 98 (unincorporated, PCB area)": 0,
+    "PCB city check pt (near 9000 blk Front Beach Rd)": 0,
+    "Panama City check pt (501 Harrison Ave)": 0
+   },
+   "notes": "Stale: complaints 2014-01..2018-05. Other open-status layers in the same service: 2 Unsafe Structure (44), 4 Revisit Site (56), 9 Vacant Structure (19); others empty.",
+   "sample": []
+  },
+  {
+   "id": "bc_elevation_certificates",
+   "kind": "other",
+   "name": "Elevation Certificates (Bay County)",
+   "url": "https://gis.baycountyfl.gov/arcgis/rest/services/Departmental/Planning/MapServer/19",
+   "jurisdiction": "Bay County (unincorporated)",
+   "fields": {
+    "date": "DateIssued",
+    "status": null,
+    "number": "ParcelID",
+    "type": null,
+    "description": "PDF",
+    "address": "Address"
+   },
+   "geometry": "point",
+   "count": 3432,
+   "cors": true,
+   "cors_header": "https://baycounty.me",
+   "date_min": "1989-01-04",
+   "date_max": "2026-10-02",
+   "spatial_ok": true,
+   "test_radius_mi": 0.5,
+   "test_results": {
+    "1614 Ohio Ave, Lynn Haven": 0,
+    "7038 W Highway 98 (unincorporated, PCB area)": 87,
+    "PCB city check pt (near 9000 blk Front Beach Rd)": 0,
+    "Panama City check pt (501 Harrison Ave)": 2
+   },
+   "notes": "Not permits, but a current, dated proxy for new/substantially improved construction in flood areas (DateIssued through 2026-10-02); PDF link per certificate (PDFs may include owner names).",
+   "sample": [
+    {
+     "DateIssued": "2025-07-24",
+     "ParcelID": "27343-551-000",
+     "Address": "7101 DOLPHIN BAY BLVD - Acessory",
+     "PDF": "https://gis.baycountyfl.gov/elevationcertificates/2025/7101 DOLPHIN BAY BLVD accessory.pdf",
+     "_test_point": "7038 W Highway 98 (unincorporated, PCB area)"
+    },
+    {
+     "DateIssued": "2022-10-18",
+     "ParcelID": "27905-200-266",
+     "Address": "7139 LONDON ST",
+     "PDF": "https://gis.baycountyfl.gov/elevationcertificates/2022/7139 LONDON ST.pdf",
+     "_test_point": "7038 W Highway 98 (unincorporated, PCB area)"
+    },
+    {
+     "DateIssued": "2012-03-22",
+     "ParcelID": "20168-010-000",
+     "Address": "325 DAVIS AVE",
+     "PDF": "https://gis.baycountyfl.gov/elevationcertificates/2012/325 DAVIS AVE.pdf",
+     "_test_point": "Panama City check pt (501 Harrison Ave)"
+    }
+   ]
+  },
+  {
+   "id": "planning_overlays",
+   "kind": "other",
+   "name": "Planning Overlay Districts",
+   "url": "https://services1.arcgis.com/QB0VWfqR9MD4lF0F/arcgis/rest/services/PlanningOverlayDistricts/FeatureServer/0",
+   "jurisdiction": "Countywide (Municipality field)",
+   "fields": {
+    "date": "OrdinanceDate",
+    "status": null,
+    "number": "ORDNUM",
+    "type": "DistrictName",
+    "description": "COMMENTS",
+    "address": null
+   },
+   "geometry": "polygon",
+   "count": 60,
+   "cors": true,
+   "cors_header": "*",
+   "date_min": "2015-10-27",
+   "date_max": "2015-10-27",
+   "spatial_ok": true,
+   "test_radius_mi": 0,
+   "test_results": {
+    "1614 Ohio Ave, Lynn Haven": 0,
+    "7038 W Highway 98 (unincorporated, PCB area)": 0,
+    "PCB city check pt (near 9000 blk Front Beach Rd)": 1,
+    "Panama City check pt (501 Harrison Ave)": 0
+   },
+   "notes": "Overlay district at the address, with ordinance and Municode link.",
+   "sample": [
+    {
+     "DistrictName": "Front Beach Overlay",
+     "SubDistrict": "FBO-4",
+     "Municipality": "Panama City Beach",
+     "ORDNUM": null,
+     "OrdinanceDate": null,
+     "COMMENTS": "Establishes alternative land development requirements",
+     "E_Link": null,
+     "_test_point": "PCB city check pt (near 9000 blk Front Beach Rd)"
+    }
+   ]
+  },
+  {
+   "id": "bc_puds",
+   "kind": "other",
+   "name": "Planned Unit Developments (Bay County)",
+   "url": "https://gis.baycountyfl.gov/arcgis/rest/services/LandUsePlanning/MapServer/6",
+   "jurisdiction": "Bay County",
+   "fields": {
+    "date": null,
+    "status": null,
+    "number": null,
+    "type": "PUD",
+    "description": null,
+    "address": null
+   },
+   "geometry": "polygon",
+   "count": 8,
+   "cors": true,
+   "cors_header": "https://baycounty.me",
+   "date_min": null,
+   "date_max": null,
+   "spatial_ok": true,
+   "test_radius_mi": 0,
+   "test_results": {
+    "1614 Ohio Ave, Lynn Haven": 0,
+    "7038 W Highway 98 (unincorporated, PCB area)": 0,
+    "PCB city check pt (near 9000 blk Front Beach Rd)": 0,
+    "Panama City check pt (501 Harrison Ave)": 0
+   },
+   "notes": "Only 8 polygons; last edited 2022.",
+   "sample": []
+  },
+  {
+   "id": "pc_capital_projects",
+   "kind": "other",
+   "name": "CPC_Projects_2026 (Panama City capital/utility projects)",
+   "url": "https://services3.arcgis.com/RfAh242jlP6Nb5vP/arcgis/rest/services/CPC_Projects_2026/FeatureServer/0",
+   "jurisdiction": "City of Panama City",
+   "fields": {
+    "date": null,
+    "status": "percentcomplete",
+    "number": "Identifier",
+    "type": "Catagory",
+    "description": "notes",
+    "address": null
+   },
+   "geometry": "polygon",
+   "count": 75,
+   "cors": true,
+   "cors_header": "*",
+   "date_min": null,
+   "date_max": null,
+   "spatial_ok": true,
+   "test_radius_mi": 0.5,
+   "test_results": {
+    "1614 Ohio Ave, Lynn Haven": 0,
+    "7038 W Highway 98 (unincorporated, PCB area)": 0,
+    "PCB city check pt (near 9000 blk Front Beach Rd)": 0,
+    "Panama City check pt (501 Harrison Ave)": 10
+   },
+   "notes": "City public-works/funding project areas (SRF/CDBG), not private development. No dates.",
+   "sample": [
+    {
+     "Identifier": "Panama City Marina Civic Center",
+     "alias": null,
+     "Catagory": null,
+     "notes": null,
+     "percentcomplete": 0,
+     "_test_point": "Panama City check pt (501 Harrison Ave)"
+    },
+    {
+     "Identifier": "P-2",
+     "alias": null,
+     "Catagory": "Combined SRF/CDBG Funding",
+     "notes": null,
+     "percentcomplete": 0,
+     "_test_point": "Panama City check pt (501 Harrison Ave)"
+    }
+   ]
+  },
+  {
+   "id": "fdep_coastal_permits",
+   "kind": "other",
+   "name": "FDEP Coastal Environmental Permits (statewide)",
+   "url": "https://ca.dep.state.fl.us/arcgis/rest/services/OpenData/COASTAL_ENV_PERM/MapServer/0",
+   "jurisdiction": "State of Florida (FDEP)",
+   "fields": {
+    "date": "RECEIVED_ON",
+    "status": "PERMIT_STATUS",
+    "number": "PERMIT_NUMBER",
+    "type": "PERMIT_REASON",
+    "description": "ADDITIONAL_INFORMATION",
+    "address": "PROJECT_LOCATION"
+   },
+   "geometry": "point",
+   "count": 1113,
+   "cors": true,
+   "cors_header": "https://baycounty.me",
+   "date_min": "1979-02-05",
+   "date_max": "2026-10-16",
+   "spatial_ok": true,
+   "test_radius_mi": 0.5,
+   "test_results": {
+    "1614 Ohio Ave, Lynn Haven": 0,
+    "7038 W Highway 98 (unincorporated, PCB area)": 0,
+    "PCB city check pt (near 9000 blk Front Beach Rd)": 0,
+    "Panama City check pt (501 Harrison Ave)": 0
+   },
+   "notes": "Coastal construction (CCCL/JCP-type) permits; relevant for beachfront parcels only. APPLICANTS holds names - exclude. 65 points in a Bay County bounding box.",
+   "sample": []
+  }
+ ],
+ "recommended": {
+  "zoning": "bc_zoning",
+  "flu": "bc_flu",
+  "rezoning": "bc_rezonings",
+  "dev_orders": "bc_dev_orders",
+  "code": null,
+  "permits": null,
+  "other": "bc_elevation_certificates"
+ },
+ "recommended_by_jurisdiction": {
+  "dev_orders": {
+   "Bay County (unincorporated)": "bc_dev_orders",
+   "Lynn Haven": "lh_dev_projects",
+   "Panama City Beach": "pcb_planning_projects"
+  },
+  "zoning": {
+   "countywide": "bc_zoning",
+   "Panama City (parcel detail)": "pc_zoning"
+  },
+  "flu": {
+   "countywide": "bc_flu",
+   "Panama City (parcel detail)": "pc_flu"
+  },
+  "rezoning": {
+   "countywide": "bc_rezonings",
+   "Panama City": "pc_rezonings",
+   "conditions": "bc_zoning_conditions"
+  },
+  "code": {
+   "historical only (2023 snapshot)": "bc_code_cases_2023"
+  }
+ },
+ "permit_portals_no_api": {
+  "Bay County (unincorporated)": "https://portal.baycountyfl.gov/Permit/Locator (CityView portal; CAPTCHA-gated search, no public API)",
+  "Panama City Beach": "https://panamacitybeach.portal.iworq.net/PANAMACITYBEACH/permits/602 (iWorQ public search; no documented API)",
+  "Panama City": "https://us.cloudpermit.com/gov/login (Cloudpermit; login-based, no public search API found) - info page https://www.panamacity.gov/803/Cloudpermit",
+  "Lynn Haven": "https://www.cityoflynnhaven.com/543/Building-Permitting (applications only; no public permit search found)",
+  "Callaway": "https://www.cityofcallaway.com/189/Building-Permits (no public permit search found)"
+ }
+}

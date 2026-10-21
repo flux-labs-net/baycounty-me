@@ -9,6 +9,39 @@ from datetime import datetime, timezone
 import html
 
 CHANGES = [
+    {'date': '2026-10-21', 'title': 'Budget explorer',
+     'text': "Open any government's FY2026 budget: spending by fund, General Fund spending by department, and revenue by source. Includes Callaway's and Parker's adopted budgets, which weren't on the site before.",
+     'pages': ['/public-money/budget-explorer']},
+    {'date': '2026-10-21', 'title': 'Who gets paid: tourism agencies',
+     'text': "Payments by Visit Panama City Beach, Destination Panama City and the Mexico Beach CDC, read from the Clerk of Court's check registers and checked against each month's printed total.",
+     'pages': ['/public-money/who-gets-paid']},
+    {'date': '2026-10-21', 'title': 'Every bond, note and loan',
+     'text': 'The Debt page now lists each of 61 bond, note and loan issues with the amount borrowed, what is still owed, the rate, the final payment date and what it paid for.',
+     'pages': ['/public-money/debt']},
+    {'date': '2026-10-21', 'title': 'A page for each government',
+     'text': "Bay County, the School Board and each of the seven cities now have one page that pulls together who runs it, its budget and property tax rate, debt, audit findings, recorded votes, contracts, projects and upcoming meetings.",
+     'pages': ['/governments']},
+    {'date': '2026-10-21', 'title': 'Compare governments side by side',
+     'text': 'Pick any governments and compare budgets, tax rates, debt and staffing, in total or per resident.',
+     'pages': ['/compare']},
+    {'date': '2026-10-21', 'title': 'Upcoming public meetings',
+     'text': "Every board's next meetings, with agenda links and the money items on each agenda, checked daily. Add them all to your phone or computer calendar with one link.",
+     'pages': ['/meetings']},
+    {'date': '2026-10-21', 'title': 'Campaign money and contracts',
+     'text': "The most recent campaign of each current elected official: how much they raised, from individuals and organizations, and which donors also hold contracts with local governments. Individual donors are counted, not named; each official's full report is linked.",
+     'pages': ['/public-money/campaign-money']},
+    {'date': '2026-10-21', 'title': 'Request a public record',
+     'text': "Pick a government and a record this site is missing, or describe your own, and get a ready-to-send Florida public records request with the right office's contact details.",
+     'pages': ['/records-request']},
+    {'date': '2026-10-21', 'title': 'Open data downloads',
+     'text': 'Every dataset on the site, as CSV and JSON files you can open in a spreadsheet, with a description of each column.',
+     'pages': ['/open-data']},
+    {'date': '2026-10-21', 'title': 'Zoning and development near your address',
+     'text': 'My Address now shows the zoning and future land use at the address, development projects and orders within half a mile, recent rezonings, and conditional uses nearby.',
+     'pages': ['/my-address']},
+    {'date': '2026-10-21', 'title': 'BayCounty.me en español',
+     'text': 'My Address, the records request tool and the glossary are now available in Spanish. Mi dirección, solicitudes de registros y el glosario, en español.',
+     'pages': ['/es']},
     {'date': '2026-10-21', 'title': 'Address lookup understands more ways of typing an address',
      'text': 'My Address now finds addresses typed with full street types (Drive, Avenue, Boulevard), directions (North, West), highway forms (Hwy 98, US 98, County Road 2321), Saint or St., spelled-out numbers (Tenth Street), MLK, unit numbers, and a city, state and ZIP on the end. If a street type is wrong, it shows the closest matches.',
      'pages': ['/my-address']},
@@ -71,7 +104,9 @@ LABELS = {'/': 'Home', '/my-address': 'My Address', '/public-money/tax-dollars':
           '/public-money/sales-tax-projects': 'Sales Tax Projects', '/public-money/hurricane-michael': 'Hurricane Michael',
           '/public-money/contracts': 'Contracts', '/public-money/votes': 'How They Voted', '/public-money/debt': 'Debt',
           '/public-money/audits': 'Audit Findings', '/who-runs-bay-county': 'Officials', '/glossary': 'Glossary', '/search': 'Search',
-          '/about': 'About', '/updates': "What's new"}
+          '/about': 'About', '/updates': "What's new", '/governments': 'Governments', '/compare': 'Compare', '/meetings': 'Meetings',
+          '/public-money/campaign-money': 'Campaign Money', '/records-request': 'Records Request', '/open-data': 'Open Data', '/alerts': 'Email Alerts',
+          '/es': 'En español', '/public-money/budget-explorer': 'Budget Explorer', '/public-money/who-gets-paid': 'Who Gets Paid'}
 
 
 def last_updated(path):

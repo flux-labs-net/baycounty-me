@@ -22,12 +22,34 @@ OUT = os.path.join(ROOT, 'public')
 SITE = 'BayCounty.me'
 DOMAIN = 'https://baycounty.me'
 PREVIEW = {}  # path -> (title, summary) for link previews, filled from og.preview_text()
+ES_ALT = {'/es': '/', '/es/mi-direccion': '/my-address', '/es/glosario': '/glossary', '/es/solicitar-registros': '/records-request'}
+EN_TO_ES = {v: k for k, v in ES_ALT.items()}
 OG_VER = {}  # path -> image content hash, filled by og.build_og before pages are written
 
 # Menu: top-level items; an item with 'children' becomes a drop-down.
 MENU = [
     {'label': 'Home', 'href': '/'},
     {'label': 'My Address', 'href': '/my-address'},
+    {'label': 'Governments', 'groups': [
+        {'group': 'County and schools', 'items': [
+            {'label': 'Bay County', 'href': '/governments/bay-county', 'desc': 'County Commission, budget, debt, votes'},
+            {'label': 'Bay District Schools', 'href': '/governments/bay-district-schools', 'desc': 'School Board, budget, debt, audits'},
+            {'label': 'All governments', 'href': '/governments', 'desc': 'Every local government at a glance'},
+        ]},
+        {'group': 'Cities', 'items': [
+            {'label': 'Panama City', 'href': '/governments/panama-city', 'desc': ''},
+            {'label': 'Panama City Beach', 'href': '/governments/panama-city-beach', 'desc': ''},
+            {'label': 'Lynn Haven', 'href': '/governments/lynn-haven', 'desc': ''},
+            {'label': 'Callaway', 'href': '/governments/callaway', 'desc': ''},
+            {'label': 'Springfield', 'href': '/governments/springfield', 'desc': ''},
+            {'label': 'Parker', 'href': '/governments/parker', 'desc': ''},
+            {'label': 'Mexico Beach', 'href': '/governments/mexico-beach', 'desc': ''},
+        ]},
+        {'group': 'Side by side', 'items': [
+            {'label': 'Compare governments', 'href': '/compare', 'desc': 'Budgets, taxes and debt per resident'},
+            {'label': 'Who runs Bay County', 'href': '/who-runs-bay-county', 'desc': 'Every elected seat and top salary'},
+        ]},
+    ]},
     {'label': 'Public Money', 'groups': [
         {'group': 'What you pay', 'items': [
             {'label': 'Tax Dollars', 'href': '/public-money/tax-dollars', 'desc': 'Your property tax bill, slice by slice'},
@@ -36,6 +58,7 @@ MENU = [
             {'label': 'Amendment 3', 'href': '/public-money/amendment-3', 'desc': 'What the ballot amendment would change'},
         ]},
         {'group': 'Where it goes', 'items': [
+            {'label': 'Budget Explorer', 'href': '/public-money/budget-explorer', 'desc': 'Each budget by fund and department'},
             {'label': 'CRA Spending', 'href': '/public-money/cra-spending', 'desc': 'What redevelopment agencies paid for'},
             {'label': 'Sales Tax Projects', 'href': '/public-money/sales-tax-projects', 'desc': 'Half-cent projects: promised vs built'},
             {'label': 'Hurricane Michael', 'href': '/public-money/hurricane-michael', 'desc': 'FEMA, HUD and state recovery money'},
@@ -43,12 +66,25 @@ MENU = [
         {'group': 'Accountability', 'items': [
             {'label': 'Contracts', 'href': '/public-money/contracts', 'desc': 'Who wins contracts, and how'},
             {'label': 'How They Voted', 'href': '/public-money/votes', 'desc': 'Every recorded vote on money decisions'},
+            {'label': 'Campaign Money', 'href': '/public-money/campaign-money', 'desc': 'Who funds campaigns, and donor contracts'},
+            {'label': 'Who Gets Paid', 'href': '/public-money/who-gets-paid', 'desc': 'Every payment by the tourism agencies'},
             {'label': 'Debt', 'href': '/public-money/debt', 'desc': 'What each government owes'},
             {'label': 'Audit Findings', 'href': '/public-money/audits', 'desc': 'What outside auditors flagged'},
         ]},
     ]},
-    {'label': 'Officials', 'href': '/who-runs-bay-county'},
-    {'label': 'Glossary', 'href': '/glossary'},
+    {'label': 'Get Involved', 'groups': [
+        {'group': 'Take part', 'items': [
+            {'label': 'Meetings', 'href': '/meetings', 'desc': 'When every board meets, with agendas'},
+            {'label': 'Email alerts', 'href': '/alerts', 'desc': 'Weekly updates for your government'},
+            {'label': 'Request a record', 'href': '/records-request', 'desc': 'Write a public records request'},
+            {'label': 'Send a correction', 'href': '/about#contact', 'desc': 'Tell us what we got wrong'},
+        ]},
+        {'group': 'Learn and reuse', 'items': [
+            {'label': 'Glossary', 'href': '/glossary', 'desc': 'Government money, explained simply'},
+            {'label': 'Open data', 'href': '/open-data', 'desc': 'Download every dataset'},
+            {'label': "What's new", 'href': '/updates', 'desc': 'New pages, data and corrections'},
+        ]},
+    ]},
     {'label': 'Search', 'href': '/search'},
     {'label': 'About', 'href': '/about'},
 ]
@@ -57,9 +93,17 @@ TOKENS = open(os.path.join(ROOT, 'tokens.css')).read()
 SITE_CSS = open(os.path.join(ROOT, 'site.css')).read()
 
 
+def hreflang(path):
+    en = ES_ALT.get(path) if path.startswith('/es') else (path if path in EN_TO_ES else None)
+    if not en:
+        return ''
+    es = EN_TO_ES[en]
+    return f'\n<link rel="alternate" hreflang="en" href="{DOMAIN}{en}">\n<link rel="alternate" hreflang="es" href="{DOMAIN}{es}">'
+
+
 def nav_html(active):
     items = []
-    for m in MENU:
+    for m in (ES_MENU if active.startswith('/es') else MENU):
         if 'groups' in m:
             on = any(c['href'] == active for g in m['groups'] for c in g['items'])
             cols = ''.join(
@@ -75,7 +119,8 @@ def nav_html(active):
             cur = ' aria-current="page"' if m['href'] == active else ''
             items.append(f'<li><a href="{m["href"]}"{cur}>{m["label"]}</a></li>')
     return f'''<header class="site-head"><div class="site-head-in">
-  <a class="wordmark" href="/" aria-label="{SITE} home"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C7.6 2 4 5.5 4 9.9 4 15.6 12 22 12 22s8-6.4 8-12.1C20 5.5 16.4 2 12 2z" fill="var(--blue)"/><circle cx="12" cy="10" r="3.2" fill="var(--bg)"/></svg><span>BayCounty<b>.me</b></span></a>
+  <a class="wordmark" href="{'/es' if active.startswith('/es') else '/'}" aria-label="{SITE} {'inicio' if active.startswith('/es') else 'home'}"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C7.6 2 4 5.5 4 9.9 4 15.6 12 22 12 22s8-6.4 8-12.1C20 5.5 16.4 2 12 2z" fill="var(--blue)"/><circle cx="12" cy="10" r="3.2" fill="var(--bg)"/></svg><span>BayCounty<b>.me</b></span></a>
+  <a class="lang-link" href="__LANGHREF__" lang="__LANGCODE__" hreflang="__LANGCODE__">__LANGLABEL__</a>
   <button type="button" class="theme-btn" id="themeBtn" aria-label="Theme: match system"><svg class="ti ti-system" width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="6.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 3.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/></svg><svg class="ti ti-light" width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 2v2.2M10 15.8V18M2 10h2.2M15.8 10H18M4.3 4.3l1.6 1.6M14.1 14.1l1.6 1.6M4.3 15.7l1.6-1.6M14.1 5.9l1.6-1.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><svg class="ti ti-dark" width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path d="M16 12.6A6.6 6.6 0 0 1 7.4 4a6.6 6.6 0 1 0 8.6 8.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="theme-lbl">System</span></button>
   <button type="button" class="menu-btn" aria-expanded="false" aria-controls="site-menu"><span class="sr">Menu</span><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14" stroke="currentColor" stroke-width="1.8"/></svg></button>
   <nav aria-label="Main"><ul id="site-menu" class="menu">{"".join(items)}</ul></nav>
@@ -105,7 +150,7 @@ MENU_JS = '''(() => {
   const setMenu = o => { btn.setAttribute('aria-expanded', o); menu.classList.toggle('open', o); document.documentElement.classList.toggle('nav-locked', o); if (o) menu.scrollTop = 0; };
   btn.addEventListener('click', () => setMenu(btn.getAttribute('aria-expanded') !== 'true'));
   menu.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false); });
-  const mq = matchMedia('(min-width:721px)'), onMq = e => { if (e.matches) setMenu(false); };
+  const mq = matchMedia('(min-width:981px)'), onMq = e => { if (e.matches) setMenu(false); };
   if (mq.addEventListener) mq.addEventListener('change', onMq); else if (mq.addListener) mq.addListener(onMq);
   document.querySelectorAll('.sub-toggle').forEach(t => t.addEventListener('click', e => {
     e.stopPropagation(); const o = t.getAttribute('aria-expanded') === 'true';
@@ -117,9 +162,24 @@ MENU_JS = '''(() => {
 '''
 
 
+DEEPLINK_JS = r"""
+(() => { // ?gov= / ?cra= open a page already filtered (used by the government pages)
+  const P = new URLSearchParams(location.search), gov = P.get('gov'), cra = P.get('cra');
+  if (!gov && !cra) return;
+  const retry = fn => { let n = 0; const t = setInterval(() => { if (fn() || ++n > 60) clearInterval(t); }, 150); };
+  if (gov) document.querySelectorAll('select[data-param="gov"]').forEach(el => retry(() => {
+    const nm = x => x.replace(/^City of /i, '').replace(/ BOCC$/i, '').trim().toLowerCase();
+    const o = [...el.options].find(o => nm(o.value) === nm(gov) || nm(o.textContent) === nm(gov)); if (!o) return false;
+    el.value = o.value; el.dispatchEvent(new Event('input', {bubbles: true})); el.dispatchEvent(new Event('change', {bubbles: true}));
+    if (location.hash) document.querySelector(location.hash)?.scrollIntoView(); return true; }));
+  if (cra) retry(() => { const b = document.querySelector(`#craChips [data-c="${CSS.escape(cra)}"]`); if (!b) return false; b.click(); return true; });
+})();
+"""
+
+
 TERM_JS = r"""
 (() => {
-  const G = __GLOSSARY__;
+  const ES = document.documentElement.lang === 'es', G = ES ? __GLOSSARY_ES__ : __GLOSSARY__;
   let pop = null, cur = null, hideT = null, shownAt = 0;
   const ensure = () => {
     if (pop) return pop;
@@ -138,7 +198,7 @@ TERM_JS = r"""
     pop.innerHTML = '<b></b><p></p><a></a>';
     pop.querySelector('b').textContent = g.term;
     pop.querySelector('p').textContent = g.simple;
-    const a = pop.querySelector('a'); a.href = '/glossary#' + el.dataset.term; a.textContent = 'More in the glossary \u2192';
+    const a = pop.querySelector('a'); a.href = (ES ? '/es/glosario#' : '/glossary#') + el.dataset.term; a.textContent = ES ? 'M\u00e1s en el glosario \u2192' : 'More in the glossary \u2192';
     pop.hidden = false; el.setAttribute('aria-describedby', 'term-pop');
     const r = el.getBoundingClientRect(), w = Math.min(300, innerWidth - 24);
     pop.style.width = w + 'px';
@@ -227,6 +287,11 @@ CRA_EXPLAINER = f'''
 
 
 def layout(title, desc, path, body, extra_head=''):
+    out = _layout(title, desc, path, body, extra_head)
+    return localize_chrome(out) if path.startswith('/es') else out
+
+
+def _layout(title, desc, path, body, extra_head=''):
     full = f'{title} · {SITE}' if path != '/' else f'{SITE} · {title}'
     import html as _h
     from og import slug as _slug
@@ -242,13 +307,13 @@ def layout(title, desc, path, body, extra_head=''):
              'potentialAction': {'@type': 'SearchAction', 'target': DOMAIN + '/search?q={search_term_string}', 'query-input': 'required name=search_term_string'}},
             {'@type': 'Organization', '@id': DOMAIN + '/#org', 'name': 'Flux Labs', 'url': 'https://fluxlabs.net/'}]}) + '</script>'
     return f'''<!doctype html>
-<html lang="en">
+<html lang="{'es' if path.startswith('/es') else 'en'}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{full}</title>
 <meta name="description" content="{d}">
-<link rel="canonical" href="{DOMAIN}{path}">
+<link rel="canonical" href="{DOMAIN}{path}">{hreflang(path)}
 <meta property="og:site_name" content="BayCounty.me">
 <meta property="og:locale" content="en_US">
 <meta property="og:type" content="website">
@@ -278,7 +343,7 @@ def layout(title, desc, path, body, extra_head=''):
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-{nav_html(path)}
+{nav_html(path).replace('__LANGHREF__', ES_ALT.get(path, '/') if path.startswith('/es') else (EN_TO_ES.get(path) or '/es/')).replace('__LANGCODE__', 'en' if path.startswith('/es') else 'es').replace('__LANGLABEL__', 'English' if path.startswith('/es') else 'Español')}
 <main id="main">
 {body}
 </main>
@@ -435,7 +500,17 @@ window.BCReportMeta = () => 'Report: ' + filterSummary();
     return t
 
 
-from home import home_page  # noqa: E402
+from home import home_page
+from gov_pages import gov_page, govs_index
+from compare_page import compare_page
+from opendata import opendata_page
+from records_page import records_page
+from alerts_page import alerts_page
+from meetings_page import meetings_page
+from campaign_page import campaign_page
+from money_pages import budget_page, payments_page
+from es_pages import ES_MENU, localize_chrome, es_home, es_addr_page, es_glossary_page, es_records_page, glossary_es_terms
+from govs import GOVS as GOVLIST  # noqa: E402
 
 def page_options():
     import html
@@ -523,7 +598,20 @@ PAGES = [
     ('/public-money/tourist-tax', 'The bed tax: what visitors pay and where it goes', "Bay County's 5% tourist development tax: ten years of collections by zone, how the pennies are split, what Visit Panama City Beach spends, and who decides.", lambda: bedtax_page(OUT)),
     ('/public-money/sales-tax-projects', 'Half-cent sales taxes: promised vs built', "Every infrastructure sales tax project on Bay County's map with its status, the county's surtax money by year, and the school half-cent.", lambda: surtax_page(OUT)),
     ('/public-money/fees-and-bills', 'Fees on your tax bill, and utility bills', 'Fire, stormwater and other flat fees on Bay County tax bills, and a typical monthly water, sewer and garbage bill in each city.', fees_page),
+    ('/governments', "Bay County's local governments", 'A profile of every local government in Bay County, Florida: officials, budget, tax rate, debt, audits, votes, contracts and projects.', govs_index),
+    ('/compare', 'Compare Bay County governments', 'Compare Bay County, its cities and the school district side by side: budget, property tax, debt, staff, audit findings, split votes and utility bills, per resident.', lambda: compare_page(OUT)),
+    ('/open-data', 'Download the data', 'Every BayCounty.me dataset as CSV and JSON: votes, contracts, CRA spending, tax rates, debt, audits, FEMA projects and more.', lambda: opendata_page(OUT)),
+    ('/es', 'Registros públicos en español', 'BayCounty.me en español: estimado de impuestos por dirección, solicitudes de registros públicos y un glosario de términos de dinero público.', es_home),
+    ('/es/mi-direccion', 'Mi dirección', 'Busque cualquier dirección del condado de Bay: estimado de impuestos a la propiedad, quién lo representa, escuelas, zonas de inundación y evacuación, y distritos de reurbanización.', lambda: es_addr_page(OUT)),
+    ('/es/glosario', 'Glosario en lenguaje sencillo', 'Cada término de BayCounty.me explicado de forma sencilla: CRA, incremento de impuestos, millaje, exención de vivienda principal, presupuestos y más.', es_glossary_page),
+    ('/es/solicitar-registros', 'Solicite un registro público', 'Escriba una solicitud de registros públicos de Florida a cualquier gobierno del condado de Bay en un minuto.', lambda: es_records_page(OUT)),
+    ('/records-request', 'Request a public record', 'Write a Florida public records request to any Bay County government in a minute: pick a record the site is missing or describe your own.', lambda: records_page(OUT)),
+    ('/alerts', 'Get BayCounty.me updates by email', 'Follow Bay County, the school district or your city and get a short weekly email with new votes, data, corrections and upcoming meetings.', lambda: alerts_page(OUT)),
+    ('/meetings', 'Upcoming public meetings in Bay County', 'When and where the County Commission, School Board and every city commission meet, with agenda links and the money items on each agenda.', lambda: meetings_page(OUT)),
+    ('/public-money/campaign-money', 'Campaign money and contracts', "Who funded the campaigns of Bay County's current elected officials, from Supervisor of Elections reports, and which donors also hold local government contracts.", campaign_page),
     ('/who-runs-bay-county', 'Who runs Bay County', 'Every elected seat and appointed manager for Bay County, its cities and the school district, plus what top officials are paid.', who_page),
+    ('/public-money/budget-explorer', 'Budget explorer', "Open up any Bay County government's FY2026 budget: spending by fund and department, and where the money comes from.", lambda: budget_page(OUT)),
+    ('/public-money/who-gets-paid', 'Who gets paid: tourism agencies', 'Every payment by Visit Panama City Beach, Destination Panama City and the Mexico Beach CDC, from the Clerk of Court check registers.', payments_page),
     ('/public-money/contracts', 'Who gets the contracts', 'Major contracts approved by Bay County and its cities since 2022: winners, how they were awarded, change orders, emergency purchases and who the county paid most.', lambda: contracts_page(OUT)),
     ('/public-money/votes', 'How they voted', 'How Bay County commissioners, city officials and school board members voted on budgets, tax rates, contracts, land and borrowing, from official minutes.', lambda: votes_page(OUT)),
     ('/public-money/debt', 'What Bay County governments owe', 'Debt owed by Bay County, the school district and every city: bonds, bank loans, big single payments ahead, and pension promises, from audited statements.', debt_page),
@@ -535,6 +623,11 @@ PAGES = [
 ]
 
 
+PAGES += [(f'/governments/{g["slug"]}', g['short'] + ': budget, taxes, debt, votes and more',
+           f'{g["short"]}, Florida: who runs it, the budget and property tax rate, debt, audit findings, how officials voted, contracts and projects, from public records.',
+           (lambda k: (lambda: gov_page(k)))(g['key'])) for g in GOVLIST]
+
+
 def main():
     if os.path.exists(OUT):
         shutil.rmtree(OUT)
@@ -543,7 +636,7 @@ def main():
     open(os.path.join(OUT, 'assets', 'site.css'), 'w').write(TOKENS + '\n' + SITE_CSS)
     from glossary import TERMS
     gl = {t['id']: {'term': t['term'], 'simple': t['simple']} for t in TERMS}
-    open(os.path.join(OUT, 'assets', 'site.js'), 'w').write(MENU_JS + TERM_JS.replace('__GLOSSARY__', json.dumps(gl, ensure_ascii=False)))
+    open(os.path.join(OUT, 'assets', 'site.js'), 'w').write(MENU_JS + DEEPLINK_JS + TERM_JS.replace('__GLOSSARY_ES__', json.dumps(glossary_es_terms(), ensure_ascii=False)).replace('__GLOSSARY__', json.dumps(gl, ensure_ascii=False)))
     shutil.copy(os.path.join(ROOT, '..', 'assets', 'logo_small.webp'), os.path.join(OUT, 'assets', 'flux-labs.webp'))
     shutil.copy(os.path.join(ROOT, 'favicon.svg'), os.path.join(OUT, 'favicon.svg'))
     shutil.copy(os.path.join(ROOT, 'tax.css'), os.path.join(OUT, 'assets', 'tax.css'))

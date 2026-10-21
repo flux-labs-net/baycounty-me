@@ -45,6 +45,67 @@ async function floodAt(pt) {
   }
 }
 
+/* Zoning and development near an address. Layers from Bay County GIS and the cities' ArcGIS Online
+   services (see data/nearby/layers.json). Explicit field lists only: some layers carry owner names. */
+const GISB = 'https://gis.baycountyfl.gov/arcgis/rest/services';
+async function arcq(url, pt, opts) {
+  const p = new URLSearchParams({geometry: `${pt.x},${pt.y}`, geometryType: 'esriGeometryPoint', inSR: 4326, outSR: 4326, spatialRel: 'esriSpatialRelIntersects', returnGeometry: 'false', f: 'json', ...opts});
+  const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), 15000);
+  try { const r = await fetch(url + '/query?' + p, {mode: 'cors', signal: ctl.signal}); const j = await r.json(); if (j.error) throw new Error(j.error.message); return (j.features || []).map(f => ({...f.attributes, _g: f.geometry})); }
+  finally { clearTimeout(t); }
+}
+const safe = pr => pr.catch(() => null);
+const JUR = {BC: 'county code', LH: 'Lynn Haven code', PC: 'Panama City code', PCB: 'Panama City Beach code', CW: 'Callaway code', SF: 'Springfield code', SP: 'Springfield code', PK: 'Parker code', MB: 'Mexico Beach code'};
+const bare = v => code(v).replace(/ \([^)]*code\)$/, '');
+const code = v => String(v || '').replace(/^v\s+/i, '').replace(/\s*\(([A-Z]+)\)\s*$/, (m, j) => JUR[j] ? ` (${JUR[j]})` : m).trim();
+const dstr = v => { if (v == null || v === '') return ''; const d = typeof v === 'number' ? new Date(v) : new Date(String(v).length === 10 ? v + 'T12:00:00' : v); return isNaN(d) || d.getFullYear() < 1990 ? '' : d.toLocaleDateString('en-US', {month: 'short', year: 'numeric'}); };
+const dnum = v => { const d = typeof v === 'number' ? new Date(v) : new Date(v); return isNaN(d) ? 0 : d.getTime(); };
+const milesTo = (a, g) => { if (!g || g.x == null) return null; const R = 3958.8, toR = x => x * Math.PI / 180, dy = toR(g.y - a.y), dx = toR(g.x - a.x) * Math.cos(toR(a.y)); return R * Math.sqrt(dx * dx + dy * dy); };
+async function loadDev(pt, cityName) {
+  const el = $('devBody'); if (!el) return;
+  el.innerHTML = '<p class="muted small">Loading…</p>';
+  const half = {distance: 0.5, units: 'esriSRUnit_StatuteMile'}, since = new Date(Date.now() - 5 * 365.25 * 864e5).toISOString().slice(0, 10);
+  const PC = 'https://services3.arcgis.com/RfAh242jlP6Nb5vP/arcgis/rest/services', AGO = 'https://services1.arcgis.com/QB0VWfqR9MD4lF0F/arcgis/rest/services';
+  const inPC = cityName === 'Panama City', inPCB = cityName === 'Panama City Beach';
+  const [zon, flu, pcz, pcf, pcbf, dos, lhd, pcbd, rez, pcr, cond] = await Promise.all([
+    safe(arcq(`${GISB}/LandUsePlanning/MapServer/1`, pt, {outFields: 'ZONING,Label,ORD_NUM,ORD_DATE'})),
+    safe(arcq(`${GISB}/LandUsePlanning/MapServer/2`, pt, {outFields: 'FLU_CODE,Label,ORD_NUM,ORD_DATE'})),
+    inPC ? safe(arcq(`${PC}/Zoning_CPC/FeatureServer/0`, pt, {outFields: 'LABEL,ZONE_TYPE,ordinance,ordinancedate'})) : null,
+    inPC ? safe(arcq(`${PC}/FutureLandUse_CPC/FeatureServer/0`, pt, {outFields: 'LANDUSE'})) : null,
+    inPCB ? safe(arcq(`${GISB}/PanamaCityBeach/PanamaCityBeachPublic/MapServer/8`, pt, {outFields: 'FLU_CODE,Label'})) : null,
+    safe(arcq(`${GISB}/Departmental/Planning/MapServer/18`, pt, {...half, outFields: 'NAME,NUMBER,DESCRIPTION,SIZE,LOCATION,APPLICATION_RECEIVED,DO_ISSUED,TYPE', returnGeometry: 'true'})),
+    safe(arcq(`${AGO}/LH_Development_Planning_Projects/FeatureServer/0`, pt, {...half, outFields: 'Project,Number_of_Units,Acres,Address,DO_Status,City_Commission_Approval_Date,DO_Expires', returnGeometry: 'true'})),
+    safe(arcq(`${AGO}/PCB_Planning_Projects_Editing/FeatureServer/0`, pt, {...half, outFields: 'TYPE,Name,SIZE,DEVTYPE,DateApplied,DateIssued', returnGeometry: 'true'})),
+    safe(arcq(`${GISB}/LandUsePlanning/MapServer/1`, pt, {...half, where: `ORD_DATE >= DATE '${since}'`, outFields: 'ZONING,Label,ORD_NUM,ORD_DATE,COMMENTS', orderByFields: 'ORD_DATE DESC'})),
+    inPC ? safe(arcq(`${PC}/Zoning_CPC/FeatureServer/0`, pt, {...half, where: `ordinancedate >= DATE '${since}'`, outFields: 'LABEL,ZONE_TYPE,ordinance,ordinancedate,previouszone'})) : null,
+    safe(arcq(`${GISB}/Departmental/Planning/MapServer/17`, pt, {distance: 0.25, units: 'esriSRUnit_StatuteMile', outFields: 'REF__NUM,TYPE,CONDITION,CONDITION2,CONDITION3', returnGeometry: 'true'})),
+  ]);
+  const z = pcz?.[0] ? `${pcz[0].LABEL}${pcz[0].ZONE_TYPE ? ' (' + pcz[0].ZONE_TYPE + ')' : ''}` : zon?.[0] ? (zon[0].ZONING === 'See FLU' ? 'Set by the future land use map' : code(zon[0].Label || zon[0].ZONING)) : null;
+  const fl = pcf?.[0]?.LANDUSE || code(pcbf?.[0]?.Label || flu?.[0]?.Label || flu?.[0]?.FLU_CODE) || null;
+  // projects: merge county, Lynn Haven and PCB layers
+  const proj = [];
+  (dos || []).forEach(d => proj.push({n: d.NAME, d: d.DESCRIPTION, s: d.TYPE, a: d.LOCATION, t: dnum(d.DO_ISSUED || d.APPLICATION_RECEIVED), when: d.DO_ISSUED ? 'issued ' + dstr(d.DO_ISSUED) : d.APPLICATION_RECEIVED ? 'applied ' + dstr(d.APPLICATION_RECEIVED) : '', mi: milesTo(pt, d._g), src: 'Bay County'}));
+  (lhd || []).forEach(d => proj.push({n: (d.Project || '').trim(), d: [d.Number_of_Units && d.Number_of_Units !== 'N/A' ? d.Number_of_Units + ' units' : '', d.Acres ? d.Acres + ' acres' : ''].filter(Boolean).join(', '), s: d.DO_Status, a: d.Address, t: dnum(d.City_Commission_Approval_Date), when: d.City_Commission_Approval_Date ? 'approved ' + dstr(d.City_Commission_Approval_Date) : '', mi: milesTo(pt, d._g), src: 'Lynn Haven'}));
+  (pcbd || []).forEach(d => proj.push({n: d.Name, d: d.TYPE, s: d.DEVTYPE, a: '', t: dnum(d.DateIssued || d.DateApplied), when: d.DateIssued ? 'issued ' + dstr(d.DateIssued) : d.DateApplied ? 'applied ' + dstr(d.DateApplied) : '', mi: milesTo(pt, d._g), src: 'Panama City Beach'}));
+  const recent = proj.filter(p => !p.t || p.t >= Date.now() - 5 * 365.25 * 864e5).sort((a, b) => b.t - a.t).slice(0, 8);
+  const rz = [...(rez || []).map(r => ({z: bare(r.Label || r.ZONING), o: r.ORD_NUM, t: dnum(r.ORD_DATE), prev: bare((r.COMMENTS || '').replace(/^pre\.?\s*/i, ''))})),
+              ...(pcr || []).map(r => ({z: bare(r.LABEL), zc: bare(r.LABEL), o: r.ordinance, t: dnum(r.ordinancedate), prev: bare(r.previouszone || '')}))]
+    .filter(r => r.t && r.t <= Date.now() + 864e5 && (!r.prev || r.prev.split(' (')[0] !== (r.zc || r.z).split(' (')[0]));
+  const byOrd = new Map();
+  rz.forEach(r => { const k = String(r.o); if (!byOrd.has(k)) byOrd.set(k, {o: r.o, t: r.t, ch: []}); const g = byOrd.get(k); const c = (r.prev ? r.prev + ' \u2192 ' : 'to ') + r.z; if (!g.ch.includes(c)) g.ch.push(c); });
+  const uniq = [...byOrd.values()].sort((a, b) => b.t - a.t).slice(0, 5);
+  const cu = (cond || []).filter(c => c.TYPE).slice(0, 4);
+  const fail = [zon, flu, dos].every(x => x === null);
+  if (fail) { el.innerHTML = '<p class="muted">Bay County\'s planning maps didn\'t answer. Try again in a moment.</p>'; return; }
+  el.innerHTML = `<dl class="kv">${kv([['Zoning', z ? `<b>${esc(z)}</b>` : '<span class="muted">Not mapped</span>'], ['Future land use', fl ? `<b>${esc(fl)}</b> <span class="muted small">what the long-range plan allows</span>` : '<span class="muted">Not mapped</span>']])}</dl>
+    <h4 class="dev-h">Development projects within half a mile <span class="muted small">last 5 years</span></h4>
+    ${recent.length ? `<ul class="dev-list">${recent.map(p => `<li><b>${esc(p.n || 'Project')}</b>${p.d ? ` · ${esc(p.d)}` : ''}<br><span class="muted small">${[p.s, p.when, p.a, p.mi != null ? p.mi.toFixed(1) + ' mi away' : '', p.src].filter(Boolean).map(esc).join(' · ')}</span></li>`).join('')}</ul>` : '<p class="small muted">None on file nearby.</p>'}
+    <h4 class="dev-h">Rezonings within half a mile <span class="muted small">last 5 years, adopted</span></h4>
+    ${uniq.length ? `<ul class="dev-list">${uniq.map(g => `<li><b>Ordinance ${esc(g.o)}</b> <span class="muted small">${esc(dstr(g.t))}</span><br>${g.ch.slice(0, 4).map(esc).join('; ')}${g.ch.length > 4 ? ` and ${g.ch.length - 4} more` : ''}</li>`).join('')}</ul>` : '<p class="small muted">None nearby.</p>'}
+    ${cu.length ? `<h4 class="dev-h">Conditional uses within a quarter mile</h4><ul class="dev-list">${cu.map(c => `<li><b>${esc(c.TYPE)}</b> ${esc([c.CONDITION, c.CONDITION2, c.CONDITION3].filter(Boolean).join(' '))}<br><span class="muted small">${esc(c.REF__NUM || '')}</span></li>`).join('')}</ul>` : ''}
+    <p class="small muted">Building permits aren't published as open data. Search them on <a href="https://portal.baycountyfl.gov/Permit/Locator" target="_blank" rel="noopener">Bay County's permit portal</a>${inPCB ? ' or <a href="https://panamacitybeach.portal.iworq.net/PANAMACITYBEACH/permits/602" target="_blank" rel="noopener">Panama City Beach\'s</a>' : ''}. Zoning and projects come from Bay County, Panama City, Lynn Haven and Panama City Beach planning maps; pending rezoning applications aren't mapped.</p>`;
+}
+
 /* ---------- autocomplete ---------- */
 const inp = $('q'), list = $('acList');
 let timer, items = [], active = -1, seq = 0;
@@ -168,6 +229,7 @@ async function load(f) {
     atPoint('SchoolAttendanceZones/MapServer/0', pt), atPoint('SchoolAttendanceZones/MapServer/1', pt), atPoint('SchoolAttendanceZones/MapServer/2', pt),
     near(42), near(39), near(41)]);
   const cityName = (city || []).map(c => c.NAME).find(n => n && !/unincorp/i.test(n)) || null;
+  $('aSub').dataset.city = cityName || '';
   $('aSub').textContent = `${cityName ? 'City of ' + cityName : 'Unincorporated Bay County'} · ZIP ${a.ZIP || '—'}${parcel ? ' · Parcel ' + parcel.A1RENUM : ''}`;
   const pa = $('paLink');
   if (parcel?.PLINK) { pa.href = parcel.PLINK; pa.hidden = false; } else pa.hidden = true;
@@ -177,6 +239,7 @@ async function load(f) {
   renderSchools(es, ms, hs);
   renderCra(cra);
   renderSafe(flood, evac, mosq, tdc, fire, lib, park);
+  loadDev(pt, cityName);
   drawMap(pt, cityName, cra?.[0]?.CRA);
 }
 function miles(a, b) { if (!b) return 1e9; const R = 3958.8, t = Math.PI / 180, dLat = (b.y - a.y) * t, dLon = (b.x - a.x) * t; const h = Math.sin(dLat / 2) ** 2 + Math.cos(a.y * t) * Math.cos(b.y * t) * Math.sin(dLon / 2) ** 2; return 2 * R * Math.asin(Math.sqrt(h)); }
@@ -276,7 +339,7 @@ function renderSafe(flood, evac, mosq, tdc, fire, lib, park) {
     ['Nearest park', nearTxt(park, 'Park')],
     mosq?.[0] ? ['Mosquito control', esc(mosq[0].DISTRICT) + (mosq[0].ADMINISTRATION === 'BC' ? ' <span class="muted small">(Bay County)</span>' : '')] : null,
     tdc?.[0] ? ['Tourist tax area', esc(tdc[0].ID)] : null,
-  ]) + `<dd class="span muted small">Flood zone is checked live against FEMA's National Flood Hazard Layer at the address point. A building's official zone comes from the flood map, your lender's flood determination or an elevation certificate. <a href="https://msc.fema.gov/portal/search?AddressQuery=${encodeURIComponent($('aTitle').textContent + ', ' + ($('aSub').textContent.split(' · ')[0] || 'Bay County FL'))}" target="_blank" rel="noopener">Check this address on FEMA's map</a>.</dd>`;
+  ]) + `<dd class="span muted small">Flood zone is checked live against FEMA's National Flood Hazard Layer at the address point. A building's official zone comes from the flood map, your lender's flood determination or an elevation certificate. <a href="https://msc.fema.gov/portal/search?AddressQuery=${encodeURIComponent($('aTitle').textContent + ', ' + ($('aSub').dataset.city ? $('aSub').dataset.city + ', FL' : 'Bay County, FL'))}" target="_blank" rel="noopener">Check this address on FEMA's map</a>.</dd>`;
 }
 
 /* Amendment 3 card, filled from the same parcel */

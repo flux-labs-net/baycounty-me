@@ -1,0 +1,6434 @@
+{
+ "as_of": "2026-10-21",
+ "field_notes": {
+  "total_raised": "Monetary contributions as summarized by the Bay County SOE campaign-finance system (includes candidate loans and self-contributions; excludes in-kind).",
+  "in_kind": "In-kind contributions as summarized by the SOE.",
+  "total_spent": "SOE \"Total Expenditures & Distributions\". For closed campaigns this includes distributions of surplus funds (e.g. returned to contributors, donated to charity or party, or moved to an office account), so it often equals the amount raised.",
+  "loans": "Sum of items the filer coded as loans (all loans found were from the candidate).",
+  "n_contributions": "Count of positive contribution items (check, cash, in-kind, loan) after amendments/deletions; excludes refunds and bank interest.",
+  "from_individuals": "Count and net total of contributions from individual people (monetary and in-kind, net of any refunds). Names are not stored.",
+  "contributors": "Organization contributions listed item by item (businesses, PACs/committees, other campaigns, other organizations), plus one aggregate line for the candidate's own money. Negative amounts are refunds the campaign reported. City is as written in the filing. Contributor type follows the filer's code, corrected where the name plainly showed an organization or a person."
+ },
+ "sources": [
+  {
+   "title": "Bay County Supervisor of Elections - Candidate & Committee Finances",
+   "url": "https://www.bayvotesfl.gov/candidates/candidate-committee-finances/"
+  },
+  {
+   "title": "VoterFocus campaign finance system for Bay County (embedded on the SOE page); per-election candidate lists",
+   "url": "https://www.voterfocus.com/ws/WScand/candidate_pr.php?c=Bay"
+  },
+  {
+   "title": "VoterFocus per-campaign itemized export (CSV), one per candidate; see export_url on each candidate",
+   "url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id={id}&dhc=0&county=bay"
+  },
+  {
+   "title": "Florida Division of Elections campaign finance (state and multi-county offices only; none of the offices in scope file there)",
+   "url": "https://dos.fl.gov/elections/candidates-committees/campaign-finance/"
+  }
+ ],
+ "candidates": [
+  {
+   "official": "Daniel Raffield",
+   "office": "Bay County Commission, District 1",
+   "gov": "county",
+   "election": "2024 primary/general",
+   "total_raised": 59250.0,
+   "total_spent": 59250.0,
+   "loans": 550.0,
+   "n_contributions": 113,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=26&c=bay&ca=650&rellevel=4&committee=N",
+   "in_kind": 1030.78,
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=650&dhc=0&county=bay",
+   "soe_campaign_name": "Daniel Raffield (REP)",
+   "soe_office": "County Commissioner, District 1",
+   "soe_status": "Inactive Elected",
+   "from_individuals": {
+    "count": 49,
+    "total": 23656.14
+   },
+   "by_type_total": {
+    "candidate_self": 550.0,
+    "individual": 23656.14,
+    "business": 35074.64,
+    "pac": 1000.0
+   },
+   "note": null,
+   "contributors": [
+    {
+     "name": "ECSC, LLC",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-02-05",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "EMERALD COAST STRIPING LLC",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-02-05",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "LHM",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-02-25",
+     "city": "Lynn Haven",
+     "item": "check"
+    },
+    {
+     "name": "Anderson Columbia Co Inc",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-03-04",
+     "city": "Pc",
+     "item": "check"
+    },
+    {
+     "name": "Fritz Investments",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2024-03-04",
+     "city": "Pc",
+     "item": "check"
+    },
+    {
+     "name": "Nive Vittles",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2024-03-04",
+     "city": "Pc",
+     "item": "check"
+    },
+    {
+     "name": "Pen 3 LLC",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2024-03-04",
+     "city": "Pc",
+     "item": "check"
+    },
+    {
+     "name": "PoHaven Inc",
+     "type": "business",
+     "amount": 200.0,
+     "date": "2024-03-04",
+     "city": "Pc",
+     "item": "check"
+    },
+    {
+     "name": "Vittles Companies",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2024-03-04",
+     "city": "Pc",
+     "item": "check"
+    },
+    {
+     "name": "Vittles Inc",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2024-03-04",
+     "city": "Pc",
+     "item": "check"
+    },
+    {
+     "name": "Vittles Ta Go",
+     "type": "business",
+     "amount": 200.0,
+     "date": "2024-03-04",
+     "city": "Pc",
+     "item": "check"
+    },
+    {
+     "name": "Chris Walker Electric",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-03-05",
+     "city": "Pc",
+     "item": "check"
+    },
+    {
+     "name": "Disposal Services LLC",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-03-05",
+     "city": "Pc",
+     "item": "check"
+    },
+    {
+     "name": "Emerald Coast Properties",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-03-05",
+     "city": "Pc",
+     "item": "check"
+    },
+    {
+     "name": "Roberts and Roberts",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-03-05",
+     "city": "Pc",
+     "item": "check"
+    },
+    {
+     "name": "Hamati SF Style 8/19",
+     "type": "business",
+     "amount": 300.0,
+     "date": "2024-03-06",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Mainline Construction",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-03-06",
+     "city": "Pc",
+     "item": "check"
+    },
+    {
+     "name": "Adams Pharmacy",
+     "type": "business",
+     "amount": 250.0,
+     "date": "2024-03-07",
+     "city": "Lh",
+     "item": "check"
+    },
+    {
+     "name": "Architectural Rails",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-03-07",
+     "city": "Pc",
+     "item": "check"
+    },
+    {
+     "name": "Butler Commercial",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-03-07",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Creamer's Tree Svs",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-03-07",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Crosswinds IV INC",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-03-07",
+     "city": "Pc",
+     "item": "check"
+    },
+    {
+     "name": "Family Tradition Charter",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-03-07",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Folks Restaurant",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2024-03-07",
+     "city": "Pc",
+     "item": "check"
+    },
+    {
+     "name": "Gulf Coast Utility Contractors",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-03-07",
+     "city": "Southport",
+     "item": "check"
+    },
+    {
+     "name": "K&B Land and Timber",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2024-03-07",
+     "city": "Pc",
+     "item": "check"
+    },
+    {
+     "name": "Machriste Inc",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-03-07",
+     "city": "Pc",
+     "item": "check"
+    },
+    {
+     "name": "Maharajah of India Inc",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-03-07",
+     "city": "Pc",
+     "item": "check"
+    },
+    {
+     "name": "Maritech Machine",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-03-07",
+     "city": "Pc",
+     "item": "check"
+    },
+    {
+     "name": "Monolith Construction",
+     "type": "business",
+     "amount": 250.0,
+     "date": "2024-03-07",
+     "city": "Port St Joe",
+     "item": "check"
+    },
+    {
+     "name": "Ninth Floor LLC",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-03-07",
+     "city": "Pcb",
+     "item": "check"
+    },
+    {
+     "name": "PCB Holdings",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-03-07",
+     "city": "Pcb",
+     "item": "check"
+    },
+    {
+     "name": "Professional Window and Glass",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-03-07",
+     "city": "Pc",
+     "item": "check"
+    },
+    {
+     "name": "RJ Gorman Marine",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-03-07",
+     "city": "Pc",
+     "item": "check"
+    },
+    {
+     "name": "Register's Enterprises of Bay",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-03-07",
+     "city": "Pc",
+     "item": "check"
+    },
+    {
+     "name": "Tarpon Dock Seafood",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-03-07",
+     "city": "Pc",
+     "item": "check"
+    },
+    {
+     "name": "Trumbull Bottled Water",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-03-07",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "MB Farms of Calhoun County LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-03-20",
+     "city": "Pc",
+     "item": "check"
+    },
+    {
+     "name": "Marshall Bothers",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-03-20",
+     "city": "Pc",
+     "item": "check"
+    },
+    {
+     "name": "Bense Enterprises Inc",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-05-01",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "American Sand & Asphalt Paving",
+     "type": "business",
+     "amount": 300.0,
+     "date": "2024-05-03",
+     "city": "Lynn Haven",
+     "item": "check"
+    },
+    {
+     "name": "Emerald Coast Federal Credit U",
+     "type": "business",
+     "amount": 200.0,
+     "date": "2024-05-20",
+     "city": "Port St. Joe",
+     "item": "check"
+    },
+    {
+     "name": "Total Earth Services, LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-05-20",
+     "city": "Wildwood",
+     "item": "check"
+    },
+    {
+     "name": "Ashley's Place LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-05-23",
+     "city": "Lynn Haven",
+     "item": "check"
+    },
+    {
+     "name": "Casonco, LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-05-23",
+     "city": "Lynn Haven",
+     "item": "check"
+    },
+    {
+     "name": "Uncle Bucks Storage",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-05-23",
+     "city": "Lynn Haven",
+     "item": "check"
+    },
+    {
+     "name": "Legacy Golf Club, Inc.",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-07-25",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Oasis Resorts Inc.",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-07-25",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Cal Creations LLC",
+     "type": "business",
+     "amount": 250.0,
+     "date": "2024-08-03",
+     "city": "Lynn Haven",
+     "item": "check"
+    },
+    {
+     "name": "Hilton, Inc.",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-08-03",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Luke Brooks LLC",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-08-03",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Mikes Cafe & Oyster Bar, LLC",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-08-03",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Nancy Cobank Properties",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-08-03",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Next Level Lancaster LLC",
+     "type": "business",
+     "amount": 300.0,
+     "date": "2024-08-03",
+     "city": "Lynn Haven",
+     "item": "check"
+    },
+    {
+     "name": "Norcross Professional Center",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-08-03",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "PCB Holdings LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-08-03",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Realtors Political Act Committ",
+     "type": "pac",
+     "amount": 1000.0,
+     "date": "2024-08-03",
+     "city": "Orlando",
+     "item": "check"
+    },
+    {
+     "name": "The Lancaster Company",
+     "type": "business",
+     "amount": 250.0,
+     "date": "2024-08-03",
+     "city": "Lynn Haven",
+     "item": "check"
+    },
+    {
+     "name": "Thomas Donut & Snack Shop LLC",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-08-03",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Monolith Construction - Panhan",
+     "type": "business",
+     "amount": 132.64,
+     "date": "2024-08-08",
+     "city": "Port St. Joe",
+     "item": "in-kind"
+    },
+    {
+     "name": "CW Roberts",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-08-14",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "PSJ West II, LLC",
+     "type": "business",
+     "amount": 742.0,
+     "date": "2024-08-20",
+     "city": "Panama City",
+     "item": "in-kind"
+    },
+    {
+     "name": "Daniel Raffield (candidate, self)",
+     "type": "candidate",
+     "amount": 550.0,
+     "date": null,
+     "city": null,
+     "item": "aggregate of 2 self-contribution/loan items (incl. any in-kind)"
+    }
+   ]
+  },
+  {
+   "official": "Robert Carroll",
+   "office": "Bay County Commission, District 2",
+   "gov": "county",
+   "election": "2026 primary/general (in progress)",
+   "total_raised": 1000.0,
+   "total_spent": 1000.0,
+   "loans": 1000.0,
+   "n_contributions": 1,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=722&rellevel=4&committee=N",
+   "in_kind": 0.0,
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=722&dhc=0&county=bay",
+   "soe_campaign_name": "Robert Carroll (REP)",
+   "soe_office": "County Commissioner, District 2",
+   "soe_status": "Elected",
+   "from_individuals": {
+    "count": 0,
+    "total": 0.0
+   },
+   "by_type_total": {
+    "candidate_self": 1000.0
+   },
+   "note": "SOE lists this 2026 campaign with status \"Elected\" (no opponent shown on the SOE list).",
+   "contributors": [
+    {
+     "name": "Robert Carroll (candidate, self)",
+     "type": "candidate",
+     "amount": 1000.0,
+     "date": null,
+     "city": null,
+     "item": "aggregate of 1 self-contribution/loan items (incl. any in-kind)"
+    }
+   ]
+  },
+  {
+   "official": "Doug Crosby",
+   "office": "Bay County Commission, District 3",
+   "gov": "county",
+   "election": "2024 primary/general",
+   "total_raised": 92900.0,
+   "total_spent": 92900.0,
+   "loans": 0.0,
+   "n_contributions": 132,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=26&c=bay&ca=638&rellevel=4&committee=N",
+   "in_kind": 0.0,
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=638&dhc=0&county=bay",
+   "soe_campaign_name": "Doug Crosby (REP)",
+   "soe_office": "County Commissioner, District 3",
+   "soe_status": "Inactive Elected",
+   "from_individuals": {
+    "count": 86,
+    "total": 57100.0
+   },
+   "by_type_total": {
+    "individual": 57100.0,
+    "business": 35800.0
+   },
+   "note": null,
+   "contributors": [
+    {
+     "name": "Cantrell Foods, LLC.",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2023-08-23",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Executive Offices",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2023-08-23",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Hummy, Inc.",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2023-08-23",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Daniel C Daube JR, MD, LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2023-08-30",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Uncle Bucks Storage, LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2023-09-13",
+     "city": "Lynn Haven",
+     "item": "check"
+    },
+    {
+     "name": "BK Construction &Devlopment Co",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2023-10-06",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Sage Land Holdings II LLC",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2023-10-09",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "DiegoÃ¢â¬â¢s Taqueria & Margarita",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2023-10-10",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Los Rancheros of Panama City",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2023-10-10",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "American Sand and Asphalt Pavi",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2023-10-21",
+     "city": "Lynn Haven",
+     "item": "check"
+    },
+    {
+     "name": "Amore Medical",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2023-10-21",
+     "city": "Orlando",
+     "item": "check"
+    },
+    {
+     "name": "Cedar Creek at Deerpoint Lake",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2023-10-21",
+     "city": "Southport",
+     "item": "check"
+    },
+    {
+     "name": "Eighty-five Farms, llc",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2023-10-21",
+     "city": "South Port",
+     "item": "check"
+    },
+    {
+     "name": "Emerald Coast OBGYN of the Pan",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2023-10-21",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Glass Ventures",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2023-10-21",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Grafinn, LLC",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2023-10-21",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Gulf Coast Utility Contractors",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2023-10-21",
+     "city": "Southport",
+     "item": "check"
+    },
+    {
+     "name": "Kristianna Properties",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2023-10-21",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "M&T Holdings llc",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2023-10-21",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "McCall Sod Farms",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2023-10-21",
+     "city": "Southport",
+     "item": "check"
+    },
+    {
+     "name": "Old Glory Washing Solutions",
+     "type": "business",
+     "amount": 200.0,
+     "date": "2023-10-21",
+     "city": "Lynn Haven",
+     "item": "check"
+    },
+    {
+     "name": "Panhandle Engineering Inc",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2023-10-21",
+     "city": "Lynn Haven",
+     "item": "check"
+    },
+    {
+     "name": "Patronis Brothers, Inc",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2023-10-21",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Southeastern Outdoor Mgmt",
+     "type": "business",
+     "amount": 600.0,
+     "date": "2023-10-21",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Sweetwater Mitigation Bank llc",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2023-10-21",
+     "city": "South Port",
+     "item": "check"
+    },
+    {
+     "name": "Biil Byrd Kia",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2023-10-22",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Crosswinds IV, Inc",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2023-10-22",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Emerald Coast Floor Care of NW",
+     "type": "business",
+     "amount": 250.0,
+     "date": "2023-10-22",
+     "city": "Lynn Haven",
+     "item": "check"
+    },
+    {
+     "name": "Emerald Coast Supply",
+     "type": "business",
+     "amount": 250.0,
+     "date": "2023-10-22",
+     "city": "Lynn Haven",
+     "item": "check"
+    },
+    {
+     "name": "Folks Restaurants, Ltd",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2023-10-22",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Fritz Investments, LLC",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2023-10-22",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "GA & DW Inc.",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2023-10-22",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Greg Abrams Seafood, Inc.",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2023-10-22",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Pigneri & Lyon INC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2023-10-22",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Pohaven, Inc",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2023-10-22",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Vittles Companies, Inc.",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2023-10-22",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Vittles Ta Go, Inc",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2023-10-22",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "BGN Contractors",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2023-11-03",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "ECSC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2023-11-03",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Emerald Coast Civil Constructi",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2023-11-03",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Emerald Coast Striping",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2023-11-03",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Mr Fence",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2023-11-03",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "RV Connections",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2023-11-03",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Moore Bros Construction",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2023-11-26",
+     "city": "Lynn Haven",
+     "item": "check"
+    },
+    {
+     "name": "MB Farms of Calhoun County",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-01-10",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Marshall Brothers",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-01-10",
+     "city": "Panama City",
+     "item": "check"
+    }
+   ]
+  },
+  {
+   "official": "Doug Moore",
+   "office": "Bay County Commission, District 4",
+   "gov": "county",
+   "election": "2022 primary/general",
+   "total_raised": 15450.0,
+   "total_spent": 15450.0,
+   "loans": 0.0,
+   "n_contributions": 18,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=27&c=bay&ca=593&rellevel=4&committee=N",
+   "in_kind": 342.4,
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=593&dhc=0&county=bay",
+   "soe_campaign_name": "Doug Moore (REP)",
+   "soe_office": "County Commissioner, District 4",
+   "soe_status": "Inactive Elected",
+   "from_individuals": {
+    "count": 11,
+    "total": 10450.0
+   },
+   "by_type_total": {
+    "individual": 10450.0,
+    "business": 5000.0,
+    "candidate_self": 342.4
+   },
+   "note": "Most recent campaign for this seat (2022). Not seeking re-election in 2026.",
+   "contributors": [
+    {
+     "name": "Comprehensive Planning Assoc.",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-04-07",
+     "city": "Tallahassee",
+     "item": "check"
+    },
+    {
+     "name": "Blue Island Beach Company",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-05-31",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Hydra Properties, LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-05-31",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Island T-Shirt Company",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-05-31",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "System Service Engineering",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-06-15",
+     "city": "Lynn Haven",
+     "item": "check"
+    },
+    {
+     "name": "Doug Moore (candidate, self)",
+     "type": "candidate",
+     "amount": 342.4,
+     "date": null,
+     "city": null,
+     "item": "aggregate of 2 self-contribution/loan items (incl. any in-kind)"
+    }
+   ]
+  },
+  {
+   "official": "Clair Pease",
+   "office": "Bay County Commission, District 5",
+   "gov": "county",
+   "election": "2024 primary/general",
+   "total_raised": 103563.0,
+   "total_spent": 103563.0,
+   "loans": 20000.0,
+   "n_contributions": 114,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=26&c=bay&ca=580&rellevel=4&committee=N",
+   "in_kind": 0.0,
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=580&dhc=0&county=bay",
+   "soe_campaign_name": "Clair Pease (REP)",
+   "soe_office": "County Commissioner, District 5",
+   "soe_status": "Inactive Elected",
+   "from_individuals": {
+    "count": 62,
+    "total": 45387.0
+   },
+   "by_type_total": {
+    "individual": 45387.0,
+    "business": 36676.0,
+    "candidate_self": 20000.0,
+    "pac": 1000.0,
+    "other": 500.0
+   },
+   "note": null,
+   "contributors": [
+    {
+     "name": "A And W of PCB LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-01-25",
+     "city": "Greenwood",
+     "item": "check"
+    },
+    {
+     "name": "Capt. Jack's Seafood Buffet",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-01-26",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Homes R Us Real Estate Service",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2022-01-26",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Lillian Valley Properties, LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-01-26",
+     "city": "Lynn Haven",
+     "item": "check"
+    },
+    {
+     "name": "Pros Construction & Roofing In",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-01-26",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "System Service & Engineering",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-01-26",
+     "city": "Lynn Haven",
+     "item": "check"
+    },
+    {
+     "name": "BRI Sharky's LLC",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2022-01-27",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Bennett's Reef Inc",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2022-01-27",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Hammerhead Fred's Inc",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2022-01-27",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "RI Beach LLC",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2022-01-27",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "4610 Inc",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-01-28",
+     "city": "Marianna",
+     "item": "check"
+    },
+    {
+     "name": "A L S Computers Inc",
+     "type": "business",
+     "amount": 125.0,
+     "date": "2022-01-28",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Adishvar LLC DBA PCB Cigars",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-01-28",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "All American Air Conditioning",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2022-01-28",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "American Carpet Care Inc",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-01-28",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Anchor Consulting Engineering",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-01-28",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Beach Lease LLC",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2022-01-28",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "C & G Construction Equipment I",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-01-28",
+     "city": "Tallahassee",
+     "item": "check"
+    },
+    {
+     "name": "Carlos E Hodges LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-01-28",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Clear Springs Ranch",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-01-28",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Coastal Parasail Inc",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-01-28",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Culpepper",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-01-28",
+     "city": "Tallahassee",
+     "item": "check"
+    },
+    {
+     "name": "E.F. San Juan",
+     "type": "business",
+     "amount": 250.0,
+     "date": "2022-01-28",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Emerald Cabinets Inc",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-01-28",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Florida Architects Inc",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-01-28",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Green Glass Mall Inc",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2022-01-28",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Harpoon Harrys Harpoon Harrys",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-01-28",
+     "city": "Panama City Beah",
+     "item": "check"
+    },
+    {
+     "name": "Hodges Bayou Development 1 LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-01-28",
+     "city": "Panama",
+     "item": "check"
+    },
+    {
+     "name": "Inletcognito LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-01-28",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Inspire Coastal Properties",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-01-28",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Panama City Boatman Associatio",
+     "type": "other",
+     "amount": 500.0,
+     "date": "2022-01-28",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Rainbow Restaurants Inc",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-01-28",
+     "city": "Greenwood",
+     "item": "check"
+    },
+    {
+     "name": "Sage Devco LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-01-28",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Spikes Holding LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-01-28",
+     "city": "Fountain",
+     "item": "check"
+    },
+    {
+     "name": "Strebor Hunting Club",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-01-28",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Thomas Drive Group LLC",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2022-01-28",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Treasure Island Marina",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-01-28",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Wes Pac Inc DBA Firefly",
+     "type": "pac",
+     "amount": 1000.0,
+     "date": "2022-01-28",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "RJ Gorman Marine Construction",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-01-31",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "JDH Hospitality LLC",
+     "type": "business",
+     "amount": 200.0,
+     "date": "2022-02-01",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "NU Wave Medical Center",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2022-02-01",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Quickstop 2",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2022-02-01",
+     "city": "Ebro",
+     "item": "check"
+    },
+    {
+     "name": "SHRI Gautam Swami Inc",
+     "type": "business",
+     "amount": 251.0,
+     "date": "2022-02-01",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Joan Land LLC",
+     "type": "business",
+     "amount": 200.0,
+     "date": "2022-02-07",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Miracle Ship Shipwreck Island",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-02-07",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Pineapple Hospitality LLC",
+     "type": "business",
+     "amount": 250.0,
+     "date": "2022-02-07",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Capt Bob Zales Charters LLC",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2022-03-18",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Patronis Brothers Inc",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-03-30",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "1 Opal Inc",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-03-31",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Blue Water Commercial Group LL",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-03-31",
+     "city": "P C Beach",
+     "item": "check"
+    },
+    {
+     "name": "KB Engineering LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-03-31",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Clair Pease (candidate, self)",
+     "type": "candidate",
+     "amount": 20000.0,
+     "date": null,
+     "city": null,
+     "item": "aggregate of 1 self-contribution/loan items (incl. any in-kind)"
+    }
+   ]
+  },
+  {
+   "official": "Jerry L. Register",
+   "office": "School Board, District 1",
+   "gov": "schools",
+   "election": "2024 primary/general",
+   "total_raised": 30465.0,
+   "total_spent": 30465.0,
+   "loans": 19995.0,
+   "n_contributions": 46,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=26&c=bay&ca=657&rellevel=4&committee=N",
+   "in_kind": 1390.0,
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=657&dhc=0&county=bay",
+   "soe_campaign_name": "Jerry L. Register (NON)",
+   "soe_office": "School Board Member, District 1",
+   "soe_status": "Inactive Elected",
+   "from_individuals": {
+    "count": 33,
+    "total": 7970.0
+   },
+   "by_type_total": {
+    "candidate_self": 21385.0,
+    "individual": 7970.0,
+    "business": 2000.0,
+    "pac": 500.0
+   },
+   "note": "Not listed in fees_pay_officials.json seats; included as the SOE shows him elected to District 1 in 2024.",
+   "contributors": [
+    {
+     "name": "Watford Engineering, Inc",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-03-28",
+     "city": "Marianna",
+     "item": "check"
+    },
+    {
+     "name": "JRA Architects",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-04-17",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Fiddlers Point Oyster Company",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-05-06",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Patronis Brothers, Inc",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-07-08",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Realtors Political Advocacy Co",
+     "type": "pac",
+     "amount": 500.0,
+     "date": "2024-07-08",
+     "city": "Orlando",
+     "item": "check"
+    },
+    {
+     "name": "Jerry L. Register (candidate, self)",
+     "type": "candidate",
+     "amount": 21385.0,
+     "date": null,
+     "city": null,
+     "item": "aggregate of 8 self-contribution/loan items (incl. any in-kind)"
+    }
+   ]
+  },
+  {
+   "official": "Ann Leonard",
+   "office": "School Board, District 2",
+   "gov": "schools",
+   "election": "2022 primary/general",
+   "total_raised": 41910.0,
+   "total_spent": 41910.0,
+   "loans": 2500.0,
+   "n_contributions": 90,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=27&c=bay&ca=589&rellevel=4&committee=N",
+   "in_kind": 3443.19,
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=589&dhc=0&county=bay",
+   "soe_campaign_name": "Ann Leonard (NON)",
+   "soe_office": "School Board Member, District 2",
+   "soe_status": "Inactive Elected",
+   "from_individuals": {
+    "count": 67,
+    "total": 25908.09
+   },
+   "by_type_total": {
+    "individual": 25908.09,
+    "candidate_self": 2500.0,
+    "business": 16445.1,
+    "pac": 500.0
+   },
+   "note": "Most recent campaign for this seat (2022). Not seeking re-election; Ginger Littleton won the 2026 District 2 race (term begins Nov 2026).",
+   "contributors": [
+    {
+     "name": "132 Harrison Holdings LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-02-24",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "220 Ella LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-02-24",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Coastal Consulting Services",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-02-24",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Coastalmed of Florida, LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-02-24",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Florida Pharmacy Ventures LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-02-24",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "McElheney Properties LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-02-24",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Pharmacy Equity Partners LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-02-24",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Quality Care Properties LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-02-24",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "DAG Architects",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2022-05-01",
+     "city": "Destin",
+     "item": "check"
+    },
+    {
+     "name": "Lawson Investments Inc",
+     "type": "business",
+     "amount": 200.0,
+     "date": "2022-05-01",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Bill Cramer Chevrolet Cadillac",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-06-24",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Daddy's Place Sports Bar LLC",
+     "type": "business",
+     "amount": 995.1,
+     "date": "2022-06-25",
+     "city": "Panama City",
+     "item": "in-kind"
+    },
+    {
+     "name": "Sage Land Holdings II, LLC",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2022-06-27",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Emerald Coast Office Products",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-06-28",
+     "city": "Pensacola",
+     "item": "check"
+    },
+    {
+     "name": "System Service & Engineering",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2022-07-08",
+     "city": "Lynn Haven",
+     "item": "check"
+    },
+    {
+     "name": "Watford Engineering Inc",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2022-07-14",
+     "city": "Marianna",
+     "item": "check"
+    },
+    {
+     "name": "Trumbull Bottled Water Inc",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-07-22",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Realtors Political Action Comm",
+     "type": "pac",
+     "amount": 500.0,
+     "date": "2022-07-23",
+     "city": "Tallahassee",
+     "item": "check"
+    },
+    {
+     "name": "The Clemons Company",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2022-08-04",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "EPCI Code Admin Services",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2022-08-05",
+     "city": "Youngstown",
+     "item": "check"
+    },
+    {
+     "name": "TALCOR - West Florida Division",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2022-08-06",
+     "city": "Tallahassee",
+     "item": "check"
+    },
+    {
+     "name": "D C Jaegar Corporation",
+     "type": "business",
+     "amount": 750.0,
+     "date": "2022-08-09",
+     "city": "Winter Park",
+     "item": "check"
+    },
+    {
+     "name": "Ann Leonard (candidate, self)",
+     "type": "candidate",
+     "amount": 2500.0,
+     "date": null,
+     "city": null,
+     "item": "aggregate of 1 self-contribution/loan items (incl. any in-kind)"
+    }
+   ]
+  },
+  {
+   "official": "Christopher Moore",
+   "office": "School Board, District 3",
+   "gov": "schools",
+   "election": "2026 primary/general (in progress)",
+   "total_raised": 10900.0,
+   "total_spent": 7848.82,
+   "loans": 3000.0,
+   "n_contributions": 19,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=738&rellevel=4&committee=N",
+   "in_kind": 0.0,
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=738&dhc=0&county=bay",
+   "soe_campaign_name": "Christopher Moore (NON)",
+   "soe_office": "School Board Member, District 3",
+   "soe_status": "Advanced",
+   "from_individuals": {
+    "count": 17,
+    "total": 7800.0
+   },
+   "by_type_total": {
+    "candidate_self": 3100.0,
+    "individual": 7800.0
+   },
+   "note": "2026 race in progress; SOE status \"Advanced\" (to the Nov 3, 2026 general). Figures are through the latest report filed. Previous 2022 campaign: $5,850 raised.",
+   "contributors": [
+    {
+     "name": "Christopher Moore (candidate, self)",
+     "type": "candidate",
+     "amount": 3100.0,
+     "date": null,
+     "city": null,
+     "item": "aggregate of 2 self-contribution/loan items (incl. any in-kind)"
+    }
+   ]
+  },
+  {
+   "official": "Winston Chester",
+   "office": "School Board, District 4",
+   "gov": "schools",
+   "election": "2024 primary/general",
+   "total_raised": 17631.68,
+   "total_spent": 17631.68,
+   "loans": 2251.68,
+   "n_contributions": 90,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=26&c=bay&ca=658&rellevel=4&committee=N",
+   "in_kind": 1000.0,
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=658&dhc=0&county=bay",
+   "soe_campaign_name": "Winston Chester (NON)",
+   "soe_office": "School Board Member, District 4",
+   "soe_status": "Inactive Elected",
+   "from_individuals": {
+    "count": 75,
+    "total": 12530.0
+   },
+   "by_type_total": {
+    "candidate_self": 2251.68,
+    "individual": 12530.0,
+    "business": 3850.0
+   },
+   "note": "Not listed in fees_pay_officials.json seats; included as the SOE shows him elected to District 4 in 2024.",
+   "contributors": [
+    {
+     "name": "Fiddler's Point Oyster Co, LLC",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-04-22",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Folks Restaurants, Ltd",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2024-04-22",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Fritz Investments, LLC",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2024-04-22",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "PoHaven, Inc",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2024-04-22",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Vittles To Go, Inc.",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2024-04-22",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Band of Brothers Group, LLC",
+     "type": "business",
+     "amount": 200.0,
+     "date": "2024-04-25",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Capt. Law Charters",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2024-04-25",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Captain Tiny Charters, Inc",
+     "type": "business",
+     "amount": 200.0,
+     "date": "2024-04-25",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Greg Abrams Seafood, Inc",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-04-25",
+     "city": "Panama City",
+     "item": "in-kind"
+    },
+    {
+     "name": "McCormick Contracting Co. Inc",
+     "type": "business",
+     "amount": 200.0,
+     "date": "2024-04-25",
+     "city": "Lynn Haven",
+     "item": "check"
+    },
+    {
+     "name": "Southerland Family Funeral Hom",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-04-25",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "William W. Shields, Jr LLC",
+     "type": "business",
+     "amount": 250.0,
+     "date": "2024-04-25",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "American Sand & Asphalt Paving",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-05-07",
+     "city": "Lynn Haven",
+     "item": "check"
+    },
+    {
+     "name": "Winston Chester (candidate, self)",
+     "type": "candidate",
+     "amount": 2251.68,
+     "date": null,
+     "city": null,
+     "item": "aggregate of 2 self-contribution/loan items (incl. any in-kind)"
+    }
+   ]
+  },
+  {
+   "official": "Steve Moss",
+   "office": "School Board, District 5",
+   "gov": "schools",
+   "election": "2026 primary/general (in progress)",
+   "total_raised": 1888.8,
+   "total_spent": 1888.8,
+   "loans": 1888.8,
+   "n_contributions": 1,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=737&rellevel=4&committee=N",
+   "in_kind": 0.0,
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=737&dhc=0&county=bay",
+   "soe_campaign_name": "Steve Moss (NON)",
+   "soe_office": "School Board Member, District 5",
+   "soe_status": "Inactive Elected",
+   "from_individuals": {
+    "count": 0,
+    "total": 0.0
+   },
+   "by_type_total": {
+    "candidate_self": 1888.8
+   },
+   "note": "2026 campaign; SOE status \"Elected\".",
+   "contributors": [
+    {
+     "name": "Steve Moss (candidate, self)",
+     "type": "candidate",
+     "amount": 1888.8,
+     "date": null,
+     "city": null,
+     "item": "aggregate of 1 self-contribution/loan items (incl. any in-kind)"
+    }
+   ]
+  },
+  {
+   "official": "Mark McQueen",
+   "office": "Superintendent of Schools",
+   "gov": "constitutional",
+   "election": "2024 primary/general",
+   "total_raised": 1000.0,
+   "total_spent": 1000.0,
+   "loans": 0.0,
+   "n_contributions": 2,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=26&c=bay&ca=674&rellevel=4&committee=N",
+   "in_kind": 0.0,
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=674&dhc=0&county=bay",
+   "soe_campaign_name": "Mark McQueen (REP)",
+   "soe_office": "Superintendent of Schools",
+   "soe_status": "Inactive Elected",
+   "from_individuals": {
+    "count": 1,
+    "total": 500.0
+   },
+   "by_type_total": {
+    "individual": 500.0,
+    "candidate_self": 500.0
+   },
+   "note": null,
+   "contributors": [
+    {
+     "name": "Mark McQueen (candidate, self)",
+     "type": "candidate",
+     "amount": 500.0,
+     "date": null,
+     "city": null,
+     "item": "aggregate of 1 self-contribution/loan items (incl. any in-kind)"
+    }
+   ]
+  },
+  {
+   "official": "Tommy Ford",
+   "office": "Sheriff",
+   "gov": "constitutional",
+   "election": "2024 primary/general",
+   "total_raised": 188710.0,
+   "total_spent": 188710.0,
+   "loans": 5000.0,
+   "n_contributions": 338,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=26&c=bay&ca=660&rellevel=4&committee=N",
+   "in_kind": 15541.77,
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=660&dhc=0&county=bay",
+   "soe_campaign_name": "Tommy Ford (REP)",
+   "soe_office": "Sheriff",
+   "soe_status": "Inactive Elected",
+   "from_individuals": {
+    "count": 221,
+    "total": 111966.77
+   },
+   "by_type_total": {
+    "business": 84785.0,
+    "candidate_self": 5000.0,
+    "pac": 1500.0,
+    "individual": 111966.77,
+    "candidate": 1000.0
+   },
+   "note": null,
+   "contributors": [
+    {
+     "name": "Trees R Us",
+     "type": "business",
+     "amount": 535.0,
+     "date": "2024-01-17",
+     "city": "Panama City",
+     "item": "in-kind"
+    },
+    {
+     "name": "Local Homebuilders Pac",
+     "type": "pac",
+     "amount": 500.0,
+     "date": "2024-01-22",
+     "city": "Tallahassee",
+     "item": "check"
+    },
+    {
+     "name": "BKÃ¢â¬â¢s Car Wash",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-01-24",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Southern Belle Construction",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-01-24",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "The Drain Doctor",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-01-24",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "RJ Gorman Construction",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-01-26",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Williams Communications",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-01-26",
+     "city": "Tallahassee",
+     "item": "check"
+    },
+    {
+     "name": "Neves Media",
+     "type": "business",
+     "amount": 465.0,
+     "date": "2024-01-31",
+     "city": "Panama City",
+     "item": "in-kind"
+    },
+    {
+     "name": "WhiteÃ¢â¬â¢s Wrecker Service",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-02-01",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Bill Cramer Chevrolet Cadillac",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-02-02",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Cramer Beach Properties",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-02-02",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Cramer Brothers Investments",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-02-02",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Cramer Investments, LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-02-02",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Cramer Properties, Inc.",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-02-02",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "PFN Investments, LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-02-02",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Newman Point, Inc.",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-02-08",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "MikeÃ¢â¬â¢s Cafe & Oyster Bar, LL",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-02-13",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "ThomasÃ¢â¬â¢ Donut & Snack Shop",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-02-13",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Marion Mathews MD, PA",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-02-20",
+     "city": "Lynn Haven",
+     "item": "check"
+    },
+    {
+     "name": "Capt. Andersons",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-02-23",
+     "city": "Panama City Beach",
+     "item": "in-kind"
+    },
+    {
+     "name": "3901 Hwy 390, LLC",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-02-26",
+     "city": "Lynn Haven",
+     "item": "check"
+    },
+    {
+     "name": "Asphalt Textures, LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-02-26",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Charlie CoramÃ¢â¬â¢s St. Andrews",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-02-26",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "CoramÃ¢â¬â¢s Place Bayou George",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-02-26",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Dermatology Solutions Group",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-02-26",
+     "city": "Ft. Walton Beach",
+     "item": "check"
+    },
+    {
+     "name": "DiegoÃ¢â¬â¢s",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-02-26",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Empire Real Estate",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-02-26",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Granny Cantrell",
+     "type": "business",
+     "amount": 400.0,
+     "date": "2024-02-26",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Los Rancheros",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-02-26",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Market Street Investors, LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-02-26",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Moody Land & Timber, LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-02-26",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Roberts and Roberts, Inc.",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-02-26",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "St. Joe",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-02-26",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Treasure Island Marina",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-02-26",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Trumbull Bottle Water, Inc.",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-02-26",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Walsingham Management, LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-02-26",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Century 21 Commander Realty",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-02-27",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Sun Dermatology",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-02-27",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Coastalmed of Florida, LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-02-29",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Florida Pharmacy Ventures, LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-02-29",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "McElheney Properties, LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-02-29",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Pharmacy Equity Partners, LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-02-29",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Quality Care Properties, LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-02-29",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "American Charlie",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-03-07",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Edgewater Beach Resort",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-03-07",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Firefly",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-03-07",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "On the Fly",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-03-07",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Shoppes at Edgewater",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-03-07",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Trees R Us",
+     "type": "business",
+     "amount": 200.0,
+     "date": "2024-03-07",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Waterworks Car Wash",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-03-07",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "AdamÃ¢â¬â¢s Pharmacy",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-03-13",
+     "city": "Lynn Haven",
+     "item": "check"
+    },
+    {
+     "name": "Drytech of NWFL LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-03-13",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Halls Contracting",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-03-13",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Blue Sky Emergency Mgmnt",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-03-19",
+     "city": "Tallahassee",
+     "item": "check"
+    },
+    {
+     "name": "Architectural Rails",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-03-21",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Band of Brothers, LLC",
+     "type": "business",
+     "amount": 250.0,
+     "date": "2024-03-21",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Blackwell Insurance",
+     "type": "business",
+     "amount": 250.0,
+     "date": "2024-03-21",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Chris Walker Electric LLC",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-03-21",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Clubbs Real Estate Group",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2024-03-21",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Cypress Environmental",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-03-21",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Disposal Services, LLC",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-03-21",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "EP Consultants",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-03-21",
+     "city": "Youngstown",
+     "item": "check"
+    },
+    {
+     "name": "ESCS LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-03-21",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Emerald Coast Striping, LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-03-21",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "F&B Builders",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-03-21",
+     "city": "Port St. Joe",
+     "item": "check"
+    },
+    {
+     "name": "Gulf Coast Fab & Fire LLC",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-03-21",
+     "city": "Youngstown",
+     "item": "check"
+    },
+    {
+     "name": "Gulf Coast Real Estate Group",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-03-21",
+     "city": "Port St. Joe",
+     "item": "check"
+    },
+    {
+     "name": "Jerry Wilson Roofing",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-03-21",
+     "city": "Lynn Haven",
+     "item": "check"
+    },
+    {
+     "name": "Nichols Hi-Tech Marine Inc.",
+     "type": "business",
+     "amount": 250.0,
+     "date": "2024-03-21",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Norcross Professional Center",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-03-21",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Prestige Pavers",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2024-03-21",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Shuckums Oyster Pub & Grill",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-03-21",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Site Work Etc.",
+     "type": "business",
+     "amount": 200.0,
+     "date": "2024-03-21",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "VR & Sons",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-03-21",
+     "city": "Lynn Haven",
+     "item": "check"
+    },
+    {
+     "name": "Waller Forestry",
+     "type": "business",
+     "amount": 250.0,
+     "date": "2024-03-21",
+     "city": "Lynn Haven",
+     "item": "check"
+    },
+    {
+     "name": "E.F. San Juan, Inc.",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-03-28",
+     "city": "Youngstown",
+     "item": "check"
+    },
+    {
+     "name": "Hilton, Inc.",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-03-28",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Holiday Golf & Racquet Club",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-03-28",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Oasis Resort, Inc.",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-03-28",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Branning Shrimp Co.",
+     "type": "business",
+     "amount": 400.0,
+     "date": "2024-03-31",
+     "city": "Youngstown",
+     "item": "in-kind"
+    },
+    {
+     "name": "Wahoo Builders, Inc.",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-04-05",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Dewberry",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-04-11",
+     "city": "Port St. Joe",
+     "item": "check"
+    },
+    {
+     "name": "Cut Off",
+     "type": "business",
+     "amount": 250.0,
+     "date": "2024-04-17",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Friends of Griff Griffitts",
+     "type": "candidate",
+     "amount": 1000.0,
+     "date": "2024-04-17",
+     "city": "Venice",
+     "item": "check"
+    },
+    {
+     "name": "DMG Development, LLC",
+     "type": "business",
+     "amount": 200.0,
+     "date": "2024-04-23",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Trumbull Bottled Water",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-05-03",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Trumbull Water Services of NWF",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-05-03",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Stover C W Constuction",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2024-05-09",
+     "city": "Lynn Haven",
+     "item": "check"
+    },
+    {
+     "name": "Airboat Adventures of West Bay",
+     "type": "business",
+     "amount": 250.0,
+     "date": "2024-05-11",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Complete Electrical Services",
+     "type": "business",
+     "amount": 50.0,
+     "date": "2024-05-15",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Access 390 LLC",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-05-29",
+     "city": "Panama City",
+     "item": "in-kind"
+    },
+    {
+     "name": "Horsley Construction",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-05-29",
+     "city": "Panama City",
+     "item": "in-kind"
+    },
+    {
+     "name": "Gulf Coast Fab & Fire LLC",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-06-10",
+     "city": "Youngstown",
+     "item": "check"
+    },
+    {
+     "name": "TKVANDY LLC",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2024-06-10",
+     "city": "Lynn Haven",
+     "item": "check"
+    },
+    {
+     "name": "Nathan Lee Head LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-06-11",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Nathan Lee Head Pensacola",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-06-11",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Nathan Lee Head Tallahassee",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-06-11",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "The Sombathy Law Firm",
+     "type": "business",
+     "amount": 200.0,
+     "date": "2024-06-11",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Paparazzi Gourmet Deli",
+     "type": "business",
+     "amount": 585.0,
+     "date": "2024-06-13",
+     "city": "Panama City Beach",
+     "item": "in-kind"
+    },
+    {
+     "name": "American Charlie LLC",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-06-14",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "BP Linx LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-06-14",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "JerryÃ¢â¬â¢s Framing Crews Inc.",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-06-14",
+     "city": "Port St. Joe",
+     "item": "check"
+    },
+    {
+     "name": "LTW Commercial One LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-06-14",
+     "city": "Panama City Beach",
+     "item": "in-kind"
+    },
+    {
+     "name": "Meadows & Kelley PA",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-06-14",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Payroll Services, Inc.",
+     "type": "business",
+     "amount": 200.0,
+     "date": "2024-06-14",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Reliable Business Hospitality",
+     "type": "business",
+     "amount": 200.0,
+     "date": "2024-06-14",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Seltzer Real Estate",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-06-14",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "St. Andrews Inc. of PC",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-06-14",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Syfrett & Dykes Law Office",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-06-14",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Lewis Metal",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-06-20",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Powder Room Shooting Range",
+     "type": "business",
+     "amount": 250.0,
+     "date": "2024-06-27",
+     "city": "Panama City Beach",
+     "item": "in-kind"
+    },
+    {
+     "name": "Realtors Political Advocacy",
+     "type": "pac",
+     "amount": 1000.0,
+     "date": "2024-07-09",
+     "city": "Orlando",
+     "item": "check"
+    },
+    {
+     "name": "Trumbull Water Services of NWF",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-07-12",
+     "city": "Panama City",
+     "item": "in-kind"
+    },
+    {
+     "name": "AGR Gulf, LLC",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-08-04",
+     "city": "Port St. Joe",
+     "item": "check"
+    },
+    {
+     "name": "Correcthealth, LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-08-13",
+     "city": "Alpharetta",
+     "item": "check"
+    },
+    {
+     "name": "Triage Holding, Inc.",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-08-13",
+     "city": "Alpharetta",
+     "item": "check"
+    },
+    {
+     "name": "Tommy Ford (candidate, self)",
+     "type": "candidate",
+     "amount": 5000.0,
+     "date": null,
+     "city": null,
+     "item": "aggregate of 1 self-contribution/loan items (incl. any in-kind)"
+    }
+   ]
+  },
+  {
+   "official": "Bill Kinsaul",
+   "office": "Clerk of Circuit Court & Comptroller",
+   "gov": "constitutional",
+   "election": "2024 primary/general",
+   "total_raised": 1050.0,
+   "total_spent": 1050.0,
+   "loans": 0.0,
+   "n_contributions": 4,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=26&c=bay&ca=651&rellevel=4&committee=N",
+   "in_kind": 0.0,
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=651&dhc=0&county=bay",
+   "soe_campaign_name": "Bill Kinsaul (REP)",
+   "soe_office": "Clerk of Court and Comptroller",
+   "soe_status": "Inactive Elected",
+   "from_individuals": {
+    "count": 2,
+    "total": 300.0
+   },
+   "by_type_total": {
+    "business": 750.0,
+    "individual": 300.0
+   },
+   "note": null,
+   "contributors": [
+    {
+     "name": "Orion South LLC",
+     "type": "business",
+     "amount": 250.0,
+     "date": "2024-01-03",
+     "city": "Lynn Haven",
+     "item": "check"
+    },
+    {
+     "name": "Roberts and Roberts Inc",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-01-17",
+     "city": "Panama City",
+     "item": "check"
+    }
+   ]
+  },
+  {
+   "official": "Dan Sowell",
+   "office": "Property Appraiser",
+   "gov": "constitutional",
+   "election": "2024 primary/general",
+   "total_raised": 10500.0,
+   "total_spent": 10500.0,
+   "loans": 10500.0,
+   "n_contributions": 4,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=26&c=bay&ca=639&rellevel=4&committee=N",
+   "in_kind": 155.76,
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=639&dhc=0&county=bay",
+   "soe_campaign_name": "Dan Sowell (REP)",
+   "soe_office": "Property Appraiser",
+   "soe_status": "Inactive Elected",
+   "from_individuals": {
+    "count": 2,
+    "total": 155.76
+   },
+   "by_type_total": {
+    "candidate_self": 10500.0,
+    "individual": 155.76
+   },
+   "note": null,
+   "contributors": [
+    {
+     "name": "Dan Sowell (candidate, self)",
+     "type": "candidate",
+     "amount": 10500.0,
+     "date": null,
+     "city": null,
+     "item": "aggregate of 2 self-contribution/loan items (incl. any in-kind)"
+    }
+   ]
+  },
+  {
+   "official": "William (Chuck) Perdue",
+   "office": "Tax Collector",
+   "gov": "constitutional",
+   "election": "2024 primary/general",
+   "total_raised": 1464.38,
+   "total_spent": 1464.38,
+   "loans": 1000.0,
+   "n_contributions": 3,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=26&c=bay&ca=661&rellevel=4&committee=N",
+   "in_kind": 200.0,
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=661&dhc=0&county=bay",
+   "soe_campaign_name": "Chuck Perdue (REP)",
+   "soe_office": "Tax Collector",
+   "soe_status": "Inactive Elected",
+   "from_individuals": {
+    "count": 1,
+    "total": 464.38
+   },
+   "by_type_total": {
+    "candidate_self": 1000.0,
+    "individual": 464.38,
+    "business": 200.0
+   },
+   "note": "Filed as \"Chuck Perdue\".",
+   "contributors": [
+    {
+     "name": "Neves Media",
+     "type": "business",
+     "amount": 200.0,
+     "date": "2024-02-22",
+     "city": "Panama City",
+     "item": "in-kind"
+    },
+    {
+     "name": "William (Chuck) Perdue (candidate, self)",
+     "type": "candidate",
+     "amount": 1000.0,
+     "date": null,
+     "city": null,
+     "item": "aggregate of 1 self-contribution/loan items (incl. any in-kind)"
+    }
+   ]
+  },
+  {
+   "official": "Nina Ward",
+   "office": "Supervisor of Elections",
+   "gov": "constitutional",
+   "election": "2024 primary/general",
+   "total_raised": 12150.0,
+   "total_spent": 12150.0,
+   "loans": 1000.0,
+   "n_contributions": 20,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=26&c=bay&ca=637&rellevel=4&committee=N",
+   "in_kind": 800.0,
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=637&dhc=0&county=bay",
+   "soe_campaign_name": "Nina Ward (REP)",
+   "soe_office": "Supervisor Of Elections",
+   "soe_status": "Inactive Elected",
+   "from_individuals": {
+    "count": 12,
+    "total": 6150.0
+   },
+   "by_type_total": {
+    "business": 5800.0,
+    "individual": 6150.0,
+    "candidate_self": 1000.0
+   },
+   "note": null,
+   "contributors": [
+    {
+     "name": "Hamiltonville Farm LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2023-08-01",
+     "city": "Vernon",
+     "item": "check"
+    },
+    {
+     "name": "Gulf Coast Plumbing",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2023-08-12",
+     "city": "Lynn Haven",
+     "item": "check"
+    },
+    {
+     "name": "Ryan Construction",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2023-08-12",
+     "city": "Lynn Haven",
+     "item": "check"
+    },
+    {
+     "name": "Bayside Bingo",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2023-09-19",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Kyle Meritt Photography",
+     "type": "business",
+     "amount": 800.0,
+     "date": "2024-01-21",
+     "city": "Panama City",
+     "item": "in-kind"
+    },
+    {
+     "name": "Driftwood Lodge on the Gulf",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-02-28",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Gilmore Resorts, LLC",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-02-28",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Nina Ward (candidate, self)",
+     "type": "candidate",
+     "amount": 1000.0,
+     "date": null,
+     "city": null,
+     "item": "aggregate of 1 self-contribution/loan items (incl. any in-kind)"
+    }
+   ]
+  },
+  {
+   "official": "Allan Branch",
+   "office": "Panama City Mayor",
+   "gov": "pc",
+   "election": "2025 municipal (Apr 22, 2025)",
+   "total_raised": 101153.07,
+   "total_spent": 101153.07,
+   "loans": 0.0,
+   "n_contributions": 226,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=32&c=bay&ca=691&rellevel=4&committee=N",
+   "in_kind": 1000.0,
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=691&dhc=0&county=bay",
+   "soe_campaign_name": "Allan Branch (NON)",
+   "soe_office": "Panama City Mayor",
+   "soe_status": "Inactive Elected",
+   "from_individuals": {
+    "count": 173,
+    "total": 66553.07
+   },
+   "by_type_total": {
+    "business": 33100.0,
+    "individual": 66553.07,
+    "pac": 1000.0,
+    "other": 500.0,
+    "candidate": 1000.0
+   },
+   "note": null,
+   "contributors": [
+    {
+     "name": "TKVandy LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-12-30",
+     "city": "Lynn Haven",
+     "item": "check"
+    },
+    {
+     "name": "Bayco Development Company, LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2025-01-07",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "651 W 14th Street, LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2025-01-16",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Harrison and Luverne, LLC",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2025-01-16",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "MW Real Estate Partners",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2025-01-16",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Wattenbarger Rentals, LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2025-01-16",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "B&S Liquors, INC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2025-01-17",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Beach Lease, LL",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2025-01-17",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "CRSyt Rentals, Ince",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2025-01-17",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Clayton R Syfreff,PC-Operating",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2025-01-17",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Anchor CEI, Inc",
+     "type": "business",
+     "amount": 750.0,
+     "date": "2025-01-21",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "RLS Trust Properties, LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2025-01-21",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Culligan Water",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2025-01-27",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Emerald Coast OBGYN Research",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2025-02-05",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Emerald Coast OBYGN",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2025-02-05",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "The Sterling Company of Bay Co",
+     "type": "business",
+     "amount": 250.0,
+     "date": "2025-02-05",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Coastalmed of Florida, LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2025-02-06",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "McElheney Properties, LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2025-02-06",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Marshall Brothers",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2025-02-10",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Jade Asset Management LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2025-02-24",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Pure Water Ventures LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2025-02-24",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Rex E Harrison, DMD PA",
+     "type": "business",
+     "amount": 250.0,
+     "date": "2025-02-25",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "PG Environmental Florida, LLC",
+     "type": "business",
+     "amount": 400.0,
+     "date": "2025-02-26",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Property Account Trumbull Water Services of NW",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2025-02-27",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Meadows & Kelley PA",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2025-03-03",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Bay County Holdings, LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2025-03-10",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Folks Restaurant, Ltd",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2025-03-10",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Manual and Thompson, PA",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2025-03-10",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "POHAVEN, Inc Operating",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2025-03-10",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Vittles Companies, Inc Operati",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2025-03-10",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Vittles Inc Operating Account",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2025-03-10",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Vittles To Go, Inc",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2025-03-10",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "G&W CP DBA Sonny's BBQ",
+     "type": "business",
+     "amount": 200.0,
+     "date": "2025-03-14",
+     "city": "Lynn Haven",
+     "item": "check"
+    },
+    {
+     "name": "Realtors Political Advocacy Co",
+     "type": "pac",
+     "amount": 1000.0,
+     "date": "2025-03-14",
+     "city": "Orlando",
+     "item": "check"
+    },
+    {
+     "name": "CRE Resources, LLL",
+     "type": "business",
+     "amount": 350.0,
+     "date": "2025-03-20",
+     "city": "Pcb",
+     "item": "check"
+    },
+    {
+     "name": "Friends of Neal Dunn",
+     "type": "candidate",
+     "amount": 1000.0,
+     "date": "2025-03-20",
+     "city": "Tallahassee",
+     "item": "check"
+    },
+    {
+     "name": "Legacy Corp of Bay County",
+     "type": "other",
+     "amount": 500.0,
+     "date": "2025-03-20",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Palm Realty & Property Managme",
+     "type": "business",
+     "amount": 250.0,
+     "date": "2025-03-20",
+     "city": "Pcb",
+     "item": "check"
+    },
+    {
+     "name": "SGA Investments Inc",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2025-03-20",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "The Fit Devil",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2025-03-20",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Butler Commercial, LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2025-03-27",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Cypress Environmental Of Bay C",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2025-03-27",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "RX Express Pharmacy of Panama",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2025-03-27",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "The Zawahry Firm, PA",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2025-03-27",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Glennwood Home Builders LLC",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2025-03-31",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Fitzsimons Holdings Inc",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2025-04-02",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "QuickStop #20",
+     "type": "business",
+     "amount": 200.0,
+     "date": "2025-04-02",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Hall Insurance of NW FL, LLC",
+     "type": "business",
+     "amount": 250.0,
+     "date": "2025-04-03",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "SweetBay Realty LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2025-04-03",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Aaron Rich Marketing",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2025-04-04",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Law Offices of James Dowgul PA",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2025-04-14",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Exit Sands Realty",
+     "type": "business",
+     "amount": 150.0,
+     "date": "2025-04-15",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "The Celebration Place",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2025-04-17",
+     "city": "Lynn Haven",
+     "item": "in-kind"
+    },
+    {
+     "name": "Exit Sands Realty",
+     "type": "business",
+     "amount": -150.0,
+     "date": "2025-04-18",
+     "city": "Panama City",
+     "item": "check"
+    }
+   ]
+  },
+  {
+   "official": "Robbie Hughes",
+   "office": "Panama City Commission, Ward I",
+   "gov": "pc",
+   "election": "2025 municipal (Apr 22, 2025)",
+   "total_raised": 62192.57,
+   "total_spent": 62192.57,
+   "loans": 500.0,
+   "n_contributions": 117,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=32&c=bay&ca=694&rellevel=4&committee=N",
+   "in_kind": 0.0,
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=694&dhc=0&county=bay",
+   "soe_campaign_name": "Robbie Hughes (NON)",
+   "soe_office": "Panama City Commissioner Ward 1",
+   "soe_status": "Inactive Elected",
+   "from_individuals": {
+    "count": 80,
+    "total": 40088.93
+   },
+   "by_type_total": {
+    "candidate_self": 803.64,
+    "individual": 40088.93,
+    "business": 20200.0,
+    "other": 100.0,
+    "pac": 1000.0
+   },
+   "note": null,
+   "contributors": [
+    {
+     "name": "Two Tides Construction LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2025-01-09",
+     "city": "Savannah",
+     "item": "check"
+    },
+    {
+     "name": "Daffin Property Management LLC",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2025-01-29",
+     "city": "Lynn Haven",
+     "item": "check"
+    },
+    {
+     "name": "ILEASEIT",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2025-01-29",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "McKinney Insurance & Investmen",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2025-01-30",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Uncle Bucks Storage LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2025-02-04",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Folks Restaurants Ltd.",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2025-02-05",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "PoHaven Inc.",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2025-02-05",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Vittles Companies Inc.",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2025-02-05",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Vittles Inc.",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2025-02-05",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Vittles Ta Go Inc.",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2025-02-05",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Trumbull Bottled Water Inc.",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2025-02-10",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "PG Environmental",
+     "type": "business",
+     "amount": 250.0,
+     "date": "2025-02-15",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Cherry Cove 106 LLC",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2025-02-18",
+     "city": "Port St. Joe",
+     "item": "check"
+    },
+    {
+     "name": "Coastalmed of Florida llc",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2025-02-18",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Focus Lawn & Landscape",
+     "type": "business",
+     "amount": 200.0,
+     "date": "2025-02-18",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Gourmet Kitchen Shoppes Inc.",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2025-02-18",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Lost Rancheros of Panama City",
+     "type": "business",
+     "amount": 750.0,
+     "date": "2025-02-18",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "MacArthur Energy LLC",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2025-02-18",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Plum Delightful Antiques Inc",
+     "type": "business",
+     "amount": 250.0,
+     "date": "2025-02-18",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Rex E. Harrison DMD PA",
+     "type": "business",
+     "amount": 250.0,
+     "date": "2025-02-18",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "TK Vandy LLC",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2025-02-18",
+     "city": "Lynn Haven",
+     "item": "check"
+    },
+    {
+     "name": "Team Patriot 05-24",
+     "type": "other",
+     "amount": 100.0,
+     "date": "2025-02-18",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Law Offices of James Dowgul",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2025-02-20",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "4 Row Holdings LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2025-02-21",
+     "city": "Lynn Haven",
+     "item": "check"
+    },
+    {
+     "name": "Casonco LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2025-02-21",
+     "city": "Lynn Haven",
+     "item": "check"
+    },
+    {
+     "name": "McElheney Properties LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2025-02-21",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Pure Water Ventures LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2025-02-24",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Bay County Holdings LLC",
+     "type": "business",
+     "amount": 800.0,
+     "date": "2025-02-26",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Realtors Political Advocacy Co",
+     "type": "pac",
+     "amount": 1000.0,
+     "date": "2025-03-10",
+     "city": "Orlando",
+     "item": "check"
+    },
+    {
+     "name": "B&S Liquors Inc.",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2025-04-23",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "BP Linx LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2025-05-02",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Harrison Rivared & Duncan Char",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2025-05-02",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "KW Holdings LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2025-05-02",
+     "city": "Enterprise",
+     "item": "check"
+    },
+    {
+     "name": "PCB Holdings LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2025-05-02",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Panhandle Engineering Inc.",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2025-05-12",
+     "city": "Lynn Haven",
+     "item": "check"
+    },
+    {
+     "name": "Robbie Hughes (candidate, self)",
+     "type": "candidate",
+     "amount": 803.64,
+     "date": null,
+     "city": null,
+     "item": "aggregate of 2 self-contribution/loan items (incl. any in-kind)"
+    }
+   ]
+  },
+  {
+   "official": "Janice Lucas",
+   "office": "Panama City Commission, Ward II",
+   "gov": "pc",
+   "election": "2023 municipal (Apr 18, 2023)",
+   "total_raised": 23616.1,
+   "total_spent": 23616.1,
+   "loans": 500.0,
+   "n_contributions": 120,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=30&c=bay&ca=615&rellevel=4&committee=N",
+   "in_kind": 1259.34,
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=615&dhc=0&county=bay",
+   "soe_campaign_name": "Janice Lucas (NON)",
+   "soe_office": "Panama City Commissioner Ward 2",
+   "soe_status": "Inactive Elected",
+   "from_individuals": {
+    "count": 113,
+    "total": 22488.4
+   },
+   "by_type_total": {
+    "candidate_self": 687.04,
+    "individual": 22488.4,
+    "pac": 500.0,
+    "business": 1200.0
+   },
+   "note": null,
+   "contributors": [
+    {
+     "name": "Realtors PAC",
+     "type": "pac",
+     "amount": 500.0,
+     "date": "2023-03-23",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Somethings Cooking",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2023-03-28",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "PC Development Group, LLC",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2023-04-03",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "World Healthcare Consulting",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2023-04-13",
+     "city": "Panama City",
+     "item": "in-kind"
+    },
+    {
+     "name": "Janice Lucas (candidate, self)",
+     "type": "candidate",
+     "amount": 687.04,
+     "date": null,
+     "city": null,
+     "item": "aggregate of 3 self-contribution/loan items (incl. any in-kind)"
+    }
+   ]
+  },
+  {
+   "official": "Brian Grainger",
+   "office": "Panama City Commission, Ward III",
+   "gov": "pc",
+   "election": "2023 municipal (Apr 18, 2023)",
+   "total_raised": 16305.1,
+   "total_spent": 16305.1,
+   "loans": 9500.0,
+   "n_contributions": 25,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=30&c=bay&ca=621&rellevel=4&committee=N",
+   "in_kind": 500.0,
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=621&dhc=0&county=bay",
+   "soe_campaign_name": "Brian Grainger (NON)",
+   "soe_office": "Panama City Commissioner Ward 3",
+   "soe_status": "Inactive Elected",
+   "from_individuals": {
+    "count": 20,
+    "total": 6300.0
+   },
+   "by_type_total": {
+    "candidate_self": 9505.0,
+    "individual": 6300.0,
+    "business": 1000.0,
+    "other": 0.1
+   },
+   "note": null,
+   "contributors": [
+    {
+     "name": "Charlie Coram's Place",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2023-04-08",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Trustmark Bank",
+     "type": "other",
+     "amount": 0.1,
+     "date": "2023-06-12",
+     "city": "Panama City",
+     "item": "refund"
+    },
+    {
+     "name": "Brian Grainger (candidate, self)",
+     "type": "candidate",
+     "amount": 9505.0,
+     "date": null,
+     "city": null,
+     "item": "aggregate of 4 self-contribution/loan items (incl. any in-kind)"
+    }
+   ]
+  },
+  {
+   "official": "Josh Street",
+   "office": "Panama City Commission, Ward IV",
+   "gov": "pc",
+   "election": "2025 municipal (Apr 22, 2025)",
+   "total_raised": 28703.28,
+   "total_spent": 28703.28,
+   "loans": 1000.0,
+   "n_contributions": 60,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=32&c=bay&ca=692&rellevel=4&committee=N",
+   "in_kind": 0.0,
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=692&dhc=0&county=bay",
+   "soe_campaign_name": "Josh Street (NON)",
+   "soe_office": "Panama City Commissioner Ward 4",
+   "soe_status": "Inactive Elected",
+   "from_individuals": {
+    "count": 42,
+    "total": 16953.28
+   },
+   "by_type_total": {
+    "candidate_self": 1000.0,
+    "individual": 16953.28,
+    "business": 9750.0,
+    "pac": 1000.0
+   },
+   "note": null,
+   "contributors": [
+    {
+     "name": "Bluewater Commercial LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2025-02-19",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Flagala Design Build Inc",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2025-02-19",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Watkins Avenue LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2025-02-19",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "JEN III LLC",
+     "type": "business",
+     "amount": 250.0,
+     "date": "2025-02-24",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Garretts Automotive Service Ce",
+     "type": "business",
+     "amount": 400.0,
+     "date": "2025-03-03",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Prosperty Quality Services Inc",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2025-03-03",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Casonco LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2025-03-07",
+     "city": "Lynn Haven",
+     "item": "check"
+    },
+    {
+     "name": "Mac Daddy Holdings LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2025-03-07",
+     "city": "Lynn Haven",
+     "item": "check"
+    },
+    {
+     "name": "Meyers Electric LLC",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2025-03-07",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "committee Realtors Political Advocacy Co",
+     "type": "pac",
+     "amount": 1000.0,
+     "date": "2025-03-07",
+     "city": "Orlando",
+     "item": "check"
+    },
+    {
+     "name": "Butler Commercial LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2025-03-13",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Safe Harbor Insurance Protecti",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2025-03-13",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Donald W Cox CPA",
+     "type": "business",
+     "amount": 200.0,
+     "date": "2025-04-01",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "St Andrews Inc of PC",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2025-04-01",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "designwest group llc",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2025-04-01",
+     "city": "Tallahassee",
+     "item": "check"
+    },
+    {
+     "name": "QuickStop #20",
+     "type": "business",
+     "amount": 200.0,
+     "date": "2025-04-03",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Caldwell Broker LLC",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2025-04-09",
+     "city": "Greenville",
+     "item": "check"
+    },
+    {
+     "name": "Josh Street (candidate, self)",
+     "type": "candidate",
+     "amount": 1000.0,
+     "date": null,
+     "city": null,
+     "item": "aggregate of 1 self-contribution/loan items (incl. any in-kind)"
+    }
+   ]
+  },
+  {
+   "official": "Stuart Tettemer",
+   "office": "Panama City Beach Mayor",
+   "gov": "pcb",
+   "election": "2024 municipal (Apr 16, 2024)",
+   "total_raised": 65848.94,
+   "total_spent": 65848.94,
+   "loans": 50498.94,
+   "n_contributions": 73,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=31&c=bay&ca=665&rellevel=4&committee=N",
+   "in_kind": 1115.97,
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=665&dhc=0&county=bay",
+   "soe_campaign_name": "Stuart Tettemer (NON)",
+   "soe_office": "Panama City Beach Mayor",
+   "soe_status": "Inactive Elected",
+   "from_individuals": {
+    "count": 58,
+    "total": 14515.97
+   },
+   "by_type_total": {
+    "candidate_self": 50498.94,
+    "individual": 14515.97,
+    "other": 100.0,
+    "business": 1850.0
+   },
+   "note": null,
+   "contributors": [
+    {
+     "name": "Bay County Home Builders",
+     "type": "other",
+     "amount": 100.0,
+     "date": "2024-03-01",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Panacea RV Park LLC",
+     "type": "business",
+     "amount": 200.0,
+     "date": "2024-03-03",
+     "city": "Tallahassee",
+     "item": "check"
+    },
+    {
+     "name": "Icon Custom Builders",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-03-15",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Mold Solutions LLC",
+     "type": "business",
+     "amount": 125.0,
+     "date": "2024-03-27",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Nelson Marine Service Inc",
+     "type": "business",
+     "amount": 125.0,
+     "date": "2024-03-27",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Clubbs Real Estate Group",
+     "type": "business",
+     "amount": 400.0,
+     "date": "2024-04-06",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Stuart Tettemer (candidate, self)",
+     "type": "candidate",
+     "amount": 50498.94,
+     "date": null,
+     "city": null,
+     "item": "aggregate of 9 self-contribution/loan items (incl. any in-kind)"
+    }
+   ]
+  },
+  {
+   "official": "Paul Casto",
+   "office": "Panama City Beach Council, Ward 1",
+   "gov": "pcb",
+   "election": "2022 municipal (Apr 19, 2022)",
+   "total_raised": 55075.0,
+   "total_spent": 55075.0,
+   "loans": 0.0,
+   "n_contributions": 99,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=28&c=bay&ca=577&rellevel=4&committee=N",
+   "in_kind": 1150.0,
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=577&dhc=0&county=bay",
+   "soe_campaign_name": "Paul Casto (NON)",
+   "soe_office": "Panama City Beach Council Ward 1",
+   "soe_status": "Inactive Elected",
+   "from_individuals": {
+    "count": 62,
+    "total": 33400.0
+   },
+   "by_type_total": {
+    "business": 21825.0,
+    "individual": 33400.0,
+    "pac": 1000.0
+   },
+   "note": "Most recent campaign for this seat (2022). Not a candidate in the 2026 Ward 1 race.",
+   "contributors": [
+    {
+     "name": "BRI Sharky's LLC",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2022-01-04",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Bennett's Reef, Inc",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-01-04",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Casa Loma PCB, Inc",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-01-04",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Days PCB, Inc",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-01-04",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Hilton Sun, Inc",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-01-04",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Seahaven LLC",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2022-01-04",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "AAG Electric Motors",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2022-01-10",
+     "city": "Lynn Haven",
+     "item": "check"
+    },
+    {
+     "name": "Beach Lease, LLC",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2022-01-10",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Green Glass Mall",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2022-01-10",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Thacker Construction of NW FL",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-01-11",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Gilmore Resorts, Inc",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2022-01-13",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Panama Pawn",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2022-01-13",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "AtoZ Pest Control",
+     "type": "business",
+     "amount": 200.0,
+     "date": "2022-01-14",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Emerald Falls",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2022-01-14",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Gary Wakstein's and Assoc.",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2022-01-14",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Wakstien's",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2022-01-14",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Beachy Beach Real Estate",
+     "type": "business",
+     "amount": 200.0,
+     "date": "2022-01-17",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "The Gilmore Girls of PCB",
+     "type": "business",
+     "amount": 250.0,
+     "date": "2022-01-17",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Adishvar, LLC",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2022-01-19",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Boon Docks Restaurant, Inc",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2022-01-19",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Bug-A-Away",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2022-01-19",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Nicks Slice of Brooklyn",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2022-01-19",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Oasis Resorts, Inc",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-01-19",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Wes Pac, Inc",
+     "type": "pac",
+     "amount": 500.0,
+     "date": "2022-01-19",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Hilton, Inc",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-01-20",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Holiday Golf & Racque Club, Ic",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-01-20",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "ALS Computer",
+     "type": "business",
+     "amount": 125.0,
+     "date": "2022-01-21",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Book That Condo, LLC",
+     "type": "business",
+     "amount": 300.0,
+     "date": "2022-01-21",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Patronis Brothers",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2022-02-16",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Hill Family Properties, LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-02-21",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Able Services of NW Florida, L",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2022-03-20",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Ace Home Helpers",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2022-03-31",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Walsingham Management LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-03-31",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Goodyear Enterprises LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2022-04-12",
+     "city": "Enterprise",
+     "item": "check"
+    },
+    {
+     "name": "Grand Slam Sports Tournaments",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2022-04-12",
+     "city": "Inlet Beach",
+     "item": "check"
+    },
+    {
+     "name": "Realtors Polictical Advocacy C",
+     "type": "pac",
+     "amount": 500.0,
+     "date": "2022-04-12",
+     "city": "Orlando",
+     "item": "check"
+    },
+    {
+     "name": "The Wicked Wheel",
+     "type": "business",
+     "amount": 750.0,
+     "date": "2022-04-19",
+     "city": "Panama City Beach",
+     "item": "in-kind"
+    }
+   ]
+  },
+  {
+   "official": "Ethan Register",
+   "office": "Panama City Beach Council, Ward 2",
+   "gov": "pcb",
+   "election": "2024 municipal (Apr 16, 2024)",
+   "total_raised": 18419.61,
+   "total_spent": 18419.61,
+   "loans": 500.0,
+   "n_contributions": 68,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=31&c=bay&ca=654&rellevel=4&committee=N",
+   "in_kind": 0.0,
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=654&dhc=0&county=bay",
+   "soe_campaign_name": "Ethan Register (NON)",
+   "soe_office": "Panama City Beach Council Ward 2",
+   "soe_status": "Inactive Elected",
+   "from_individuals": {
+    "count": 30,
+    "total": 6378.44
+   },
+   "by_type_total": {
+    "candidate_self": 500.0,
+    "business": 11318.57,
+    "individual": 6378.44,
+    "other": 222.6
+   },
+   "note": null,
+   "contributors": [
+    {
+     "name": "Captain Anderson's Restaurant",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-01-16",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Florida Architects, Inc.",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-01-18",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "American Charlie",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-01-30",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Anderson Columbia Co., Inc.",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-01-30",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Architectural Rails, Inc.",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-01-30",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Asphalt Textures, LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-01-30",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "BP Linx LLC.",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-01-30",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Back Beach BBQ",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-01-30",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Balanced Beauty by Ashley PLLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-01-30",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Casa Loma",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-01-30",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Christo's Sports Bar & Grill",
+     "type": "business",
+     "amount": 300.0,
+     "date": "2024-01-30",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Days Inn",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-01-30",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Edgewater Beach & Golf Resort",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-01-30",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Firefly",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-01-30",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Folks Restaurants, Ltd.",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2024-01-30",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Fritz Investments, LLC",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2024-01-30",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Hilton Sun Inc.",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-01-30",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Nice Vittles, Inc.",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2024-01-30",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "On the Fly",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-01-30",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "PCB Charitable Giving",
+     "type": "other",
+     "amount": 500.0,
+     "date": "2024-01-30",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Pen 3, LLC",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2024-01-30",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "PoHaven, Inc.",
+     "type": "business",
+     "amount": 200.0,
+     "date": "2024-01-30",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "RJ Gorman Marine Construction",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-01-30",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Roberts and Roberts, Inc.",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-01-30",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Scott Art, Inc.",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2024-01-30",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Shoppes at Edgewater",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-01-30",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "System Service & Engineering",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-01-30",
+     "city": "Lynn Haven",
+     "item": "check"
+    },
+    {
+     "name": "Vittles Companies, Inc.",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2024-01-30",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Vittles Ta Go, Inc.",
+     "type": "business",
+     "amount": 200.0,
+     "date": "2024-01-30",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Vittles, Inc.",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2024-01-30",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Avenue Diners LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-01-31",
+     "city": "Goodlettsville",
+     "item": "check"
+    },
+    {
+     "name": "HTDG LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-01-31",
+     "city": "Goodlettsville",
+     "item": "check"
+    },
+    {
+     "name": "Harry O's Steakhouse LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-01-31",
+     "city": "Goodlettsville",
+     "item": "check"
+    },
+    {
+     "name": "RSF Investors LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-01-31",
+     "city": "Goodlettsville",
+     "item": "check"
+    },
+    {
+     "name": "Tootsies Entertainment LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-01-31",
+     "city": "Goodlettsville",
+     "item": "check"
+    },
+    {
+     "name": "The Palemetto Inn & Suites",
+     "type": "business",
+     "amount": 400.0,
+     "date": "2024-02-02",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Freedom Consulting Services LL",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2024-02-05",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "American Charlie",
+     "type": "business",
+     "amount": -277.4,
+     "date": "2024-03-13",
+     "city": "Panama City Beach",
+     "item": "refund"
+    },
+    {
+     "name": "Anderson Columbia Co. Inc",
+     "type": "business",
+     "amount": -277.4,
+     "date": "2024-03-13",
+     "city": "Panama City",
+     "item": "refund"
+    },
+    {
+     "name": "Architectural Rails, Inc.",
+     "type": "business",
+     "amount": -554.79,
+     "date": "2024-03-13",
+     "city": "Panama City",
+     "item": "refund"
+    },
+    {
+     "name": "Asphalt Textures LLC",
+     "type": "business",
+     "amount": -554.79,
+     "date": "2024-03-13",
+     "city": "Panama City",
+     "item": "refund"
+    },
+    {
+     "name": "Avenue Diners LLC",
+     "type": "business",
+     "amount": -554.79,
+     "date": "2024-03-13",
+     "city": "Goodlettsville",
+     "item": "refund"
+    },
+    {
+     "name": "BP Linx LLC",
+     "type": "business",
+     "amount": -554.79,
+     "date": "2024-03-13",
+     "city": "Panama City",
+     "item": "refund"
+    },
+    {
+     "name": "Back Beach BBQ LLC",
+     "type": "business",
+     "amount": -277.4,
+     "date": "2024-03-13",
+     "city": "Panama City Beach",
+     "item": "refund"
+    },
+    {
+     "name": "Balanced Beauty By Ashley PLLC",
+     "type": "business",
+     "amount": -554.79,
+     "date": "2024-03-13",
+     "city": "Panama City Beach",
+     "item": "refund"
+    },
+    {
+     "name": "Captain Andersons",
+     "type": "business",
+     "amount": -554.79,
+     "date": "2024-03-13",
+     "city": "Panama City Beach",
+     "item": "refund"
+    },
+    {
+     "name": "Casa Loma PCB Inc",
+     "type": "business",
+     "amount": -554.79,
+     "date": "2024-03-13",
+     "city": "Panama City Beach",
+     "item": "refund"
+    },
+    {
+     "name": "Christo's Sports Bar & Grill",
+     "type": "business",
+     "amount": -166.44,
+     "date": "2024-03-13",
+     "city": "Panama City Beach",
+     "item": "refund"
+    },
+    {
+     "name": "Days Inn PCB",
+     "type": "business",
+     "amount": -554.79,
+     "date": "2024-03-13",
+     "city": "Panama City Beach",
+     "item": "refund"
+    },
+    {
+     "name": "Edgewater Beach & Golf Resort",
+     "type": "business",
+     "amount": -554.79,
+     "date": "2024-03-13",
+     "city": "Panama City Beach",
+     "item": "refund"
+    },
+    {
+     "name": "Firefly",
+     "type": "business",
+     "amount": -554.79,
+     "date": "2024-03-13",
+     "city": "Panama City Beach",
+     "item": "refund"
+    },
+    {
+     "name": "Florida Architects Inc",
+     "type": "business",
+     "amount": -554.79,
+     "date": "2024-03-13",
+     "city": "Panama City",
+     "item": "refund"
+    },
+    {
+     "name": "Folks Restaurants Ltd.",
+     "type": "business",
+     "amount": -55.48,
+     "date": "2024-03-13",
+     "city": "Panama City",
+     "item": "refund"
+    },
+    {
+     "name": "Freedom Consulting Services",
+     "type": "business",
+     "amount": -554.79,
+     "date": "2024-03-13",
+     "city": "Panama City Beach",
+     "item": "refund"
+    },
+    {
+     "name": "Fritz Investments LLC",
+     "type": "business",
+     "amount": -55.48,
+     "date": "2024-03-13",
+     "city": "Panama City",
+     "item": "refund"
+    },
+    {
+     "name": "HTDG LLC",
+     "type": "business",
+     "amount": -554.79,
+     "date": "2024-03-13",
+     "city": "Goodlettsville",
+     "item": "refund"
+    },
+    {
+     "name": "Harry O's Steakhouse",
+     "type": "business",
+     "amount": -554.79,
+     "date": "2024-03-13",
+     "city": "Goodlettsville",
+     "item": "refund"
+    },
+    {
+     "name": "Hilton Sun Inc.",
+     "type": "business",
+     "amount": -554.79,
+     "date": "2024-03-13",
+     "city": "Panama City Beach",
+     "item": "refund"
+    },
+    {
+     "name": "Nice Vittles Inc",
+     "type": "business",
+     "amount": -55.48,
+     "date": "2024-03-13",
+     "city": "Panama City",
+     "item": "refund"
+    },
+    {
+     "name": "PCB Charitable Giving",
+     "type": "other",
+     "amount": -277.4,
+     "date": "2024-03-13",
+     "city": "Panama City Beach",
+     "item": "refund"
+    },
+    {
+     "name": "Pen 3 LLC",
+     "type": "business",
+     "amount": -55.48,
+     "date": "2024-03-13",
+     "city": "Panama City",
+     "item": "refund"
+    },
+    {
+     "name": "PoHaven Inc",
+     "type": "business",
+     "amount": -110.96,
+     "date": "2024-03-13",
+     "city": "Panama City",
+     "item": "refund"
+    },
+    {
+     "name": "RJ Gorman Marine Construction",
+     "type": "business",
+     "amount": -554.79,
+     "date": "2024-03-13",
+     "city": "Panama City",
+     "item": "refund"
+    },
+    {
+     "name": "RSF Investors",
+     "type": "business",
+     "amount": -554.79,
+     "date": "2024-03-13",
+     "city": "Goodlettsville",
+     "item": "refund"
+    },
+    {
+     "name": "Roberts and Roberts",
+     "type": "business",
+     "amount": -554.79,
+     "date": "2024-03-13",
+     "city": "Panama City",
+     "item": "refund"
+    },
+    {
+     "name": "Scott Art Inc",
+     "type": "business",
+     "amount": -55.48,
+     "date": "2024-03-13",
+     "city": "Panama City Beach",
+     "item": "refund"
+    },
+    {
+     "name": "Shoppes at Edgewater",
+     "type": "business",
+     "amount": -554.79,
+     "date": "2024-03-13",
+     "city": "Panama City Beach",
+     "item": "refund"
+    },
+    {
+     "name": "System Service & Engineering",
+     "type": "business",
+     "amount": -554.79,
+     "date": "2024-03-13",
+     "city": "Lynn Haven",
+     "item": "refund"
+    },
+    {
+     "name": "The Palmetto Inn and Suites",
+     "type": "business",
+     "amount": -221.92,
+     "date": "2024-03-13",
+     "city": "Panama City Beach",
+     "item": "refund"
+    },
+    {
+     "name": "Tootsies Entertainment LLC",
+     "type": "business",
+     "amount": -554.79,
+     "date": "2024-03-13",
+     "city": "Goodlettsville",
+     "item": "refund"
+    },
+    {
+     "name": "Vittles Companies, Inc.",
+     "type": "business",
+     "amount": -55.48,
+     "date": "2024-03-13",
+     "city": "Panama City",
+     "item": "refund"
+    },
+    {
+     "name": "Vittles Ta Go, Inc.",
+     "type": "business",
+     "amount": -110.96,
+     "date": "2024-03-13",
+     "city": "Panama City",
+     "item": "refund"
+    },
+    {
+     "name": "Vittles, Inc.",
+     "type": "business",
+     "amount": -55.48,
+     "date": "2024-03-13",
+     "city": "Panama City",
+     "item": "refund"
+    },
+    {
+     "name": "Ethan Register (candidate, self)",
+     "type": "candidate",
+     "amount": 500.0,
+     "date": null,
+     "city": null,
+     "item": "aggregate of 1 self-contribution/loan items (incl. any in-kind)"
+    }
+   ]
+  },
+  {
+   "official": "Mary Coburn",
+   "office": "Panama City Beach Council, Ward 3",
+   "gov": "pcb",
+   "election": "2026 primary/general (in progress)",
+   "total_raised": 5667.2,
+   "total_spent": 3790.72,
+   "loans": 964.2,
+   "n_contributions": 30,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=727&rellevel=4&committee=N",
+   "in_kind": 394.51,
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=727&dhc=0&county=bay",
+   "soe_campaign_name": "Mary Coburn (NON)",
+   "soe_office": "Panama City Beach Council Ward 3",
+   "soe_status": "Qualified",
+   "from_individuals": {
+    "count": 21,
+    "total": 3226.01
+   },
+   "by_type_total": {
+    "candidate_self": 1042.7,
+    "individual": 3226.01,
+    "business": 793.0,
+    "pac": 1000.0
+   },
+   "note": "2026 race in progress (Ward 3, Nov 3, 2026); SOE status \"Qualified\". Figures through latest report filed. Previous 2022 campaign: $5,580 raised.",
+   "contributors": [
+    {
+     "name": "Nelson Marine Services",
+     "type": "business",
+     "amount": 300.0,
+     "date": "2026-09-10",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Press Print Graphics",
+     "type": "business",
+     "amount": 243.0,
+     "date": "2026-09-15",
+     "city": "Panama City Beach",
+     "item": "in-kind"
+    },
+    {
+     "name": "Pretty Neat Organizing LLC",
+     "type": "business",
+     "amount": 250.0,
+     "date": "2026-09-17",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Committee Realtors Political Advocacy",
+     "type": "pac",
+     "amount": 1000.0,
+     "date": "2026-09-26",
+     "city": "Orlando",
+     "item": "check"
+    },
+    {
+     "name": "Mary Coburn (candidate, self)",
+     "type": "candidate",
+     "amount": 1042.7,
+     "date": null,
+     "city": null,
+     "item": "aggregate of 5 self-contribution/loan items (incl. any in-kind)"
+    }
+   ]
+  },
+  {
+   "official": "Michael Jarman",
+   "office": "Panama City Beach Council, Ward 4",
+   "gov": "pcb",
+   "election": "2024 municipal (Apr 16, 2024)",
+   "total_raised": 457.0,
+   "total_spent": 457.0,
+   "loans": 0.0,
+   "n_contributions": 7,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=31&c=bay&ca=645&rellevel=4&committee=N",
+   "in_kind": 0.0,
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=645&dhc=0&county=bay",
+   "soe_campaign_name": "Michael Jarman (NON)",
+   "soe_office": "Panama City Beach Council Ward 4",
+   "soe_status": "Inactive Elected",
+   "from_individuals": {
+    "count": 4,
+    "total": 238.0
+   },
+   "by_type_total": {
+    "candidate_self": 100.0,
+    "individual": 238.0,
+    "business": 119.0
+   },
+   "note": null,
+   "contributors": [
+    {
+     "name": "Capt Jacks Buffet",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2023-12-15",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Harpoon Harry's",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2023-12-15",
+     "city": "Panama City Beach",
+     "item": "check"
+    },
+    {
+     "name": "Capt Jacks Buffet",
+     "type": "business",
+     "amount": -940.5,
+     "date": "2024-03-13",
+     "city": "Panama City Beach",
+     "item": "refund"
+    },
+    {
+     "name": "michael L Harpoon Harry's",
+     "type": "business",
+     "amount": -940.5,
+     "date": "2024-04-15",
+     "city": "Panama City Beach",
+     "item": "refund"
+    },
+    {
+     "name": "Michael Jarman (candidate, self)",
+     "type": "candidate",
+     "amount": 100.0,
+     "date": null,
+     "city": null,
+     "item": "aggregate of 1 self-contribution/loan items (incl. any in-kind)"
+    }
+   ]
+  },
+  {
+   "official": "David Lowery",
+   "office": "Lynn Haven Mayor",
+   "gov": "lh",
+   "election": "2026 Lynn Haven recall election (Jan 20, 2026)",
+   "total_raised": 550.0,
+   "total_spent": 550.0,
+   "loans": 300.0,
+   "n_contributions": 2,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=34&c=bay&ca=716&rellevel=4&committee=N",
+   "in_kind": 0.0,
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=716&dhc=0&county=bay",
+   "soe_campaign_name": "Dave Lowery (NON)",
+   "soe_office": "Lynn Haven Mayor",
+   "soe_status": "Inactive Qualified",
+   "from_individuals": {
+    "count": 1,
+    "total": 250.0
+   },
+   "by_type_total": {
+    "candidate_self": 300.0,
+    "individual": 250.0
+   },
+   "note": "Campaign filed under the Jan 20, 2026 Lynn Haven recall election; SOE status shown as \"Qualified\". He also has a prefiled 2027 municipal mayor account with $0 reported.",
+   "contributors": [
+    {
+     "name": "David Lowery (candidate, self)",
+     "type": "candidate",
+     "amount": 300.0,
+     "date": null,
+     "city": null,
+     "item": "aggregate of 1 self-contribution/loan items (incl. any in-kind)"
+    }
+   ]
+  },
+  {
+   "official": "Sam Peebles",
+   "office": "Lynn Haven Commissioner, Seat 1",
+   "gov": "lh",
+   "election": "2023 municipal (Apr 18, 2023)",
+   "total_raised": 9286.95,
+   "total_spent": 9286.95,
+   "loans": 550.0,
+   "n_contributions": 57,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=30&c=bay&ca=600&rellevel=4&committee=N",
+   "in_kind": 4835.66,
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=600&dhc=0&county=bay",
+   "soe_campaign_name": "Sam Peebles (NON)",
+   "soe_office": "Lynn Haven Commissioner Seat 1",
+   "soe_status": "Inactive Elected",
+   "from_individuals": {
+    "count": 45,
+    "total": 7372.61
+   },
+   "by_type_total": {
+    "candidate_self": 750.0,
+    "individual": 7372.61,
+    "business": 4500.0,
+    "pac": 1500.0
+   },
+   "note": null,
+   "contributors": [
+    {
+     "name": "Clubbs Real Estate Group, LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2023-02-13",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Realtors Political Advocacy Co",
+     "type": "pac",
+     "amount": 500.0,
+     "date": "2023-03-22",
+     "city": "Orlando",
+     "item": "check"
+    },
+    {
+     "name": "The Yard Fairy",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2023-04-10",
+     "city": "Lynn Haven",
+     "item": "in-kind"
+    },
+    {
+     "name": "CasonCo, LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2023-05-08",
+     "city": "Lynn Haven",
+     "item": "check"
+    },
+    {
+     "name": "Merchant Management Group, LLC",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2023-05-08",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Neves Media",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2023-05-09",
+     "city": "Panama City",
+     "item": "in-kind"
+    },
+    {
+     "name": "Realtors Political Advocacy Co",
+     "type": "pac",
+     "amount": 1000.0,
+     "date": "2023-05-11",
+     "city": "Orlando",
+     "item": "in-kind"
+    },
+    {
+     "name": "Sam Peebles (candidate, self)",
+     "type": "candidate",
+     "amount": 750.0,
+     "date": null,
+     "city": null,
+     "item": "aggregate of 5 self-contribution/loan items (incl. any in-kind)"
+    }
+   ]
+  },
+  {
+   "official": "Pat Perno",
+   "office": "Lynn Haven Commissioner, Seat 2",
+   "gov": "lh",
+   "election": "2023 municipal (Apr 18, 2023)",
+   "total_raised": 10418.52,
+   "total_spent": 9783.93,
+   "loans": 4049.52,
+   "n_contributions": 14,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=30&c=bay&ca=609&rellevel=4&committee=N",
+   "in_kind": 0.0,
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=609&dhc=0&county=bay",
+   "soe_campaign_name": "Pat Perno (NON)",
+   "soe_office": "Lynn Haven Commissioner Seat 2",
+   "soe_status": "Inactive Elected",
+   "from_individuals": {
+    "count": 8,
+    "total": 2970.0
+   },
+   "by_type_total": {
+    "candidate_self": 4049.52,
+    "business": 3399.0,
+    "individual": 2970.0
+   },
+   "note": null,
+   "contributors": [
+    {
+     "name": "AMP Property Mgmt Inc",
+     "type": "business",
+     "amount": 999.0,
+     "date": "2023-03-16",
+     "city": "Lynn Haven",
+     "item": "check"
+    },
+    {
+     "name": "Garretts Automobile Service Ce",
+     "type": "business",
+     "amount": 400.0,
+     "date": "2023-03-16",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Uncle Bucks Storage LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2023-03-16",
+     "city": "Lynn Haven",
+     "item": "check"
+    },
+    {
+     "name": "Amore Medical LLC",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2023-03-23",
+     "city": "Orlando",
+     "item": "check"
+    },
+    {
+     "name": "Pat Perno (candidate, self)",
+     "type": "candidate",
+     "amount": 4049.52,
+     "date": null,
+     "city": null,
+     "item": "aggregate of 2 self-contribution/loan items (incl. any in-kind)"
+    }
+   ]
+  },
+  {
+   "official": "Jamie Warrick",
+   "office": "Lynn Haven Commissioner, Seat 3",
+   "gov": "lh",
+   "election": "2025 municipal (Apr 22, 2025)",
+   "total_raised": 7800.0,
+   "total_spent": 7800.0,
+   "loans": 1200.0,
+   "n_contributions": 19,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=32&c=bay&ca=701&rellevel=4&committee=N",
+   "in_kind": 100.0,
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=701&dhc=0&county=bay",
+   "soe_campaign_name": "Jamie Warrick (NON)",
+   "soe_office": "Lynn Haven Commissioner Seat 3",
+   "soe_status": "Inactive Elected",
+   "from_individuals": {
+    "count": 15,
+    "total": 5200.0
+   },
+   "by_type_total": {
+    "candidate_self": 1200.0,
+    "individual": 5200.0,
+    "pac": 1000.0,
+    "business": 500.0
+   },
+   "note": null,
+   "contributors": [
+    {
+     "name": "Realtors Political Advocacy Co",
+     "type": "pac",
+     "amount": 1000.0,
+     "date": "2025-03-12",
+     "city": "Orlando",
+     "item": "check"
+    },
+    {
+     "name": "Dewberry",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2025-03-15",
+     "city": "Port St. Joe",
+     "item": "check"
+    },
+    {
+     "name": "Jamie Warrick (candidate, self)",
+     "type": "candidate",
+     "amount": 1200.0,
+     "date": null,
+     "city": null,
+     "item": "aggregate of 2 self-contribution/loan items (incl. any in-kind)"
+    }
+   ]
+  },
+  {
+   "official": "Pamn Henderson",
+   "office": "Callaway Mayor",
+   "gov": "cw",
+   "election": "2024 municipal (Apr 16, 2024)",
+   "total_raised": 0.0,
+   "total_spent": 0.0,
+   "loans": 0.0,
+   "n_contributions": 0,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=31&c=bay&ca=656&rellevel=4&committee=N",
+   "in_kind": 0.0,
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=656&dhc=0&county=bay",
+   "soe_campaign_name": "Pamn Henderson (NON)",
+   "soe_office": "Callaway Mayor",
+   "soe_status": "Inactive Elected",
+   "from_individuals": {
+    "count": 0,
+    "total": 0.0
+   },
+   "by_type_total": {},
+   "note": "SOE reports $0 contributions and $0 expenditures; the export returned no itemized records.",
+   "contributors": []
+  },
+  {
+   "official": "Bobby J. Birdsell",
+   "office": "Callaway Commissioner, Ward 1",
+   "gov": "cw",
+   "election": "2026 primary/general (in progress)",
+   "total_raised": 2700.0,
+   "total_spent": 1840.32,
+   "loans": 1100.0,
+   "n_contributions": 5,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=729&rellevel=4&committee=N",
+   "in_kind": 0.0,
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=729&dhc=0&county=bay",
+   "soe_campaign_name": "Bobby J. Birdsell (NON)",
+   "soe_office": "Callaway Commissioner Ward 1",
+   "soe_status": "Qualified",
+   "from_individuals": {
+    "count": 1,
+    "total": 100.0
+   },
+   "by_type_total": {
+    "candidate_self": 1100.0,
+    "individual": 100.0,
+    "pac": 1000.0,
+    "business": 500.0
+   },
+   "note": "2026 race in progress (Ward 1, Nov 3, 2026); SOE status \"Qualified\". Figures through latest report filed.",
+   "contributors": [
+    {
+     "name": "CPAR",
+     "type": "pac",
+     "amount": 1000.0,
+     "date": "2026-09-22",
+     "city": "Orlando",
+     "item": "check"
+    },
+    {
+     "name": "Uncle Bucks Storage LLC",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2026-09-22",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Bobby J. Birdsell (candidate, self)",
+     "type": "candidate",
+     "amount": 1100.0,
+     "date": null,
+     "city": null,
+     "item": "aggregate of 2 self-contribution/loan items (incl. any in-kind)"
+    }
+   ]
+  },
+  {
+   "official": "David Griggs",
+   "office": "Callaway Commissioner, Ward 2",
+   "gov": "cw",
+   "election": "2022 municipal (Apr 19, 2022)",
+   "total_raised": 3500.0,
+   "total_spent": 3500.0,
+   "loans": 1300.0,
+   "n_contributions": 14,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=28&c=bay&ca=584&rellevel=4&committee=N",
+   "in_kind": 669.35,
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=584&dhc=0&county=bay",
+   "soe_campaign_name": "David Griggs (NON)",
+   "soe_office": "Callaway Commissioner Ward 2",
+   "soe_status": "Inactive Elected",
+   "from_individuals": {
+    "count": 4,
+    "total": 850.0
+   },
+   "by_type_total": {
+    "candidate_self": 1969.35,
+    "individual": 850.0,
+    "business": 850.0,
+    "pac": 500.0
+   },
+   "note": "Most recent campaign for this seat (2022). Not a candidate in the 2026 Ward 2 race.",
+   "contributors": [
+    {
+     "name": "Panhandle Engineering, Inc",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2022-03-18",
+     "city": "Lynn Haven",
+     "item": "check"
+    },
+    {
+     "name": "Baskerville-Donovan Inc",
+     "type": "business",
+     "amount": 250.0,
+     "date": "2022-03-25",
+     "city": "Pensacola",
+     "item": "check"
+    },
+    {
+     "name": "Innovations",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2022-03-25",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "CPAR RealtorsPolitAdvocComm",
+     "type": "pac",
+     "amount": 500.0,
+     "date": "2022-04-13",
+     "city": "Orlando",
+     "item": "check"
+    },
+    {
+     "name": "David Griggs (candidate, self)",
+     "type": "candidate",
+     "amount": 1969.35,
+     "date": null,
+     "city": null,
+     "item": "aggregate of 6 self-contribution/loan items (incl. any in-kind)"
+    }
+   ]
+  },
+  {
+   "official": "Bob Pelletier",
+   "office": "Callaway Commissioner, Ward 3",
+   "gov": "cw",
+   "election": "2024 municipal (Apr 16, 2024)",
+   "total_raised": 1350.0,
+   "total_spent": 1350.0,
+   "loans": 0.0,
+   "n_contributions": 13,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=31&c=bay&ca=655&rellevel=4&committee=N",
+   "in_kind": 657.44,
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=655&dhc=0&county=bay",
+   "soe_campaign_name": "Bob Pelletier (NON)",
+   "soe_office": "Callaway Commissioner Ward 3",
+   "soe_status": "Inactive Elected",
+   "from_individuals": {
+    "count": 6,
+    "total": 892.32
+   },
+   "by_type_total": {
+    "candidate_self": 365.12,
+    "individual": 892.32,
+    "business": 750.0
+   },
+   "note": null,
+   "contributors": [
+    {
+     "name": "Meadows & Kelley PA",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2024-03-05",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Uncle Bucks Storage",
+     "type": "business",
+     "amount": 250.0,
+     "date": "2024-03-19",
+     "city": "Lynn Haven",
+     "item": "check"
+    },
+    {
+     "name": "Bob Pelletier (candidate, self)",
+     "type": "candidate",
+     "amount": 365.12,
+     "date": null,
+     "city": null,
+     "item": "aggregate of 5 self-contribution/loan items (incl. any in-kind)"
+    }
+   ]
+  },
+  {
+   "official": "Kenneth L. Ayers, Jr.",
+   "office": "Callaway Commissioner, Ward 4",
+   "gov": "cw",
+   "election": "2024 municipal (Apr 16, 2024)",
+   "total_raised": 4195.54,
+   "total_spent": 4195.54,
+   "loans": 2695.54,
+   "n_contributions": 12,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=31&c=bay&ca=652&rellevel=4&committee=N",
+   "in_kind": 0.0,
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=652&dhc=0&county=bay",
+   "soe_campaign_name": "Kenneth Ayers (NON)",
+   "soe_office": "Callaway Commissioner Ward 4",
+   "soe_status": "Inactive Elected",
+   "from_individuals": {
+    "count": 0,
+    "total": 0.0
+   },
+   "by_type_total": {
+    "candidate_self": 2695.54,
+    "pac": 1500.0
+   },
+   "note": "Itemized expenditures in the export sum to $4,295.54, $100 more than the SOE summary figure used here.",
+   "contributors": [
+    {
+     "name": "CPAR: Action Committee",
+     "type": "pac",
+     "amount": 500.0,
+     "date": "2024-03-13",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "CPAR: Advocacy Committee",
+     "type": "pac",
+     "amount": 1000.0,
+     "date": "2024-03-13",
+     "city": "Panama City",
+     "item": "check"
+    },
+    {
+     "name": "Kenneth L. Ayers, Jr. (candidate, self)",
+     "type": "candidate",
+     "amount": 2695.54,
+     "date": null,
+     "city": null,
+     "item": "aggregate of 10 self-contribution/loan items (incl. any in-kind)"
+    }
+   ]
+  },
+  {
+   "official": "Ralph Hammond",
+   "office": "Springfield Mayor",
+   "gov": "sp",
+   "election": "2026 municipal (Apr 21, 2026)",
+   "total_raised": 3000.0,
+   "total_spent": 3000.0,
+   "loans": 3000.0,
+   "n_contributions": 2,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=36&c=bay&ca=712&rellevel=4&committee=N",
+   "in_kind": 30.0,
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=712&dhc=0&county=bay",
+   "soe_campaign_name": "Ralph Hammond (NON)",
+   "soe_office": "Springfield Mayor",
+   "soe_status": "Inactive Elected",
+   "from_individuals": {
+    "count": 0,
+    "total": 0.0
+   },
+   "by_type_total": {
+    "candidate_self": 3030.0
+   },
+   "note": null,
+   "contributors": [
+    {
+     "name": "Ralph Hammond (candidate, self)",
+     "type": "candidate",
+     "amount": 3030.0,
+     "date": null,
+     "city": null,
+     "item": "aggregate of 2 self-contribution/loan items (incl. any in-kind)"
+    }
+   ]
+  },
+  {
+   "official": "Jack Griffis",
+   "office": "Springfield Commissioner, Ward 1",
+   "gov": "sp",
+   "election": "2024 municipal (Apr 16, 2024)",
+   "total_raised": 437.0,
+   "total_spent": 437.0,
+   "loans": 437.0,
+   "n_contributions": 2,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=31&c=bay&ca=647&rellevel=4&committee=N",
+   "in_kind": 0.0,
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=647&dhc=0&county=bay",
+   "soe_campaign_name": "Jack Griffis (NON)",
+   "soe_office": "Springfield Commissioner Ward 1",
+   "soe_status": "Inactive Elected",
+   "from_individuals": {
+    "count": 0,
+    "total": 0.0
+   },
+   "by_type_total": {
+    "candidate_self": 437.0
+   },
+   "note": null,
+   "contributors": [
+    {
+     "name": "Jack Griffis (candidate, self)",
+     "type": "candidate",
+     "amount": 437.0,
+     "date": null,
+     "city": null,
+     "item": "aggregate of 2 self-contribution/loan items (incl. any in-kind)"
+    }
+   ]
+  },
+  {
+   "official": "Richard Chval",
+   "office": "Springfield Commissioner, Ward 2",
+   "gov": "sp",
+   "election": "2024 municipal (Apr 16, 2024)",
+   "total_raised": 447.0,
+   "total_spent": 447.0,
+   "loans": 447.0,
+   "n_contributions": 2,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=31&c=bay&ca=649&rellevel=4&committee=N",
+   "in_kind": 0.0,
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=649&dhc=0&county=bay",
+   "soe_campaign_name": "Richard Chval (NON)",
+   "soe_office": "Springfield Commissioner Ward 2",
+   "soe_status": "Inactive Elected",
+   "from_individuals": {
+    "count": 0,
+    "total": 0.0
+   },
+   "by_type_total": {
+    "candidate_self": 447.0
+   },
+   "note": null,
+   "contributors": [
+    {
+     "name": "Richard Chval (candidate, self)",
+     "type": "candidate",
+     "amount": 447.0,
+     "date": null,
+     "city": null,
+     "item": "aggregate of 2 self-contribution/loan items (incl. any in-kind)"
+    }
+   ]
+  },
+  {
+   "official": "Jackie Kennington",
+   "office": "Springfield Commissioner, Ward 3",
+   "gov": "sp",
+   "election": "2026 municipal (Apr 21, 2026)",
+   "total_raised": 1500.0,
+   "total_spent": 1500.0,
+   "loans": 1500.0,
+   "n_contributions": 2,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=36&c=bay&ca=713&rellevel=4&committee=N",
+   "in_kind": 1.8,
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=713&dhc=0&county=bay",
+   "soe_campaign_name": "Jackie Kennington (NON)",
+   "soe_office": "Springfield Commissioner Ward 3",
+   "soe_status": "Inactive Elected",
+   "from_individuals": {
+    "count": 1,
+    "total": 1.8
+   },
+   "by_type_total": {
+    "candidate_self": 1500.0,
+    "individual": 1.8
+   },
+   "note": null,
+   "contributors": [
+    {
+     "name": "Jackie Kennington (candidate, self)",
+     "type": "candidate",
+     "amount": 1500.0,
+     "date": null,
+     "city": null,
+     "item": "aggregate of 1 self-contribution/loan items (incl. any in-kind)"
+    }
+   ]
+  },
+  {
+   "official": "Cindy Hamre",
+   "office": "Springfield Commissioner, Ward 4",
+   "gov": "sp",
+   "election": "2026 municipal (Apr 21, 2026)",
+   "total_raised": 440.03,
+   "total_spent": 440.03,
+   "loans": 400.0,
+   "n_contributions": 3,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=36&c=bay&ca=717&rellevel=4&committee=N",
+   "in_kind": 1.9,
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=717&dhc=0&county=bay",
+   "soe_campaign_name": "Cindy Hamre (NON)",
+   "soe_office": "Springfield Commissioner Ward 4",
+   "soe_status": "Inactive Elected",
+   "from_individuals": {
+    "count": 0,
+    "total": 0.0
+   },
+   "by_type_total": {
+    "candidate_self": 441.9,
+    "other": 0.03
+   },
+   "note": null,
+   "contributors": [
+    {
+     "name": "Panhandle Credit Union",
+     "type": "other",
+     "amount": 0.02,
+     "date": "2026-01-31",
+     "city": "Panama City",
+     "item": "interest"
+    },
+    {
+     "name": "Panhandle Credit Union",
+     "type": "other",
+     "amount": 0.01,
+     "date": "2026-02-24",
+     "city": "Panama City",
+     "item": "interest"
+    },
+    {
+     "name": "Cindy Hamre (candidate, self)",
+     "type": "candidate",
+     "amount": 441.9,
+     "date": null,
+     "city": null,
+     "item": "aggregate of 3 self-contribution/loan items (incl. any in-kind)"
+    }
+   ]
+  },
+  {
+   "official": "Andrew Kelly",
+   "office": "Parker Mayor",
+   "gov": "parker",
+   "election": "2025 municipal (Apr 22, 2025)",
+   "total_raised": 100.0,
+   "total_spent": 100.0,
+   "loans": 100.0,
+   "n_contributions": 1,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=32&c=bay&ca=698&rellevel=4&committee=N",
+   "in_kind": 0.0,
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=698&dhc=0&county=bay",
+   "soe_campaign_name": "Andrew M Kelly (NON)",
+   "soe_office": "Parker Mayor",
+   "soe_status": "Inactive Elected",
+   "from_individuals": {
+    "count": 0,
+    "total": 0.0
+   },
+   "by_type_total": {
+    "candidate_self": 100.0
+   },
+   "note": "Filed as \"Andrew M Kelly\".",
+   "contributors": [
+    {
+     "name": "Andrew Kelly (candidate, self)",
+     "type": "candidate",
+     "amount": 100.0,
+     "date": null,
+     "city": null,
+     "item": "aggregate of 1 self-contribution/loan items (incl. any in-kind)"
+    }
+   ]
+  },
+  {
+   "official": "Tonya Barrow",
+   "office": "Parker Council, Seat 2 (Mayor Pro Tem)",
+   "gov": "parker",
+   "election": "2023 municipal (Apr 18, 2023)",
+   "total_raised": 1600.0,
+   "total_spent": 1600.0,
+   "loans": 1500.0,
+   "n_contributions": 7,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=30&c=bay&ca=613&rellevel=4&committee=N",
+   "in_kind": 1430.43,
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=613&dhc=0&county=bay",
+   "soe_campaign_name": "Tonya Barrow (NON)",
+   "soe_office": "Parker  Council Member Seat 2",
+   "soe_status": "Inactive Elected",
+   "from_individuals": {
+    "count": 2,
+    "total": 550.0
+   },
+   "by_type_total": {
+    "candidate_self": 2480.43,
+    "individual": 550.0
+   },
+   "note": null,
+   "contributors": [
+    {
+     "name": "Tonya Barrow (candidate, self)",
+     "type": "candidate",
+     "amount": 2480.43,
+     "date": null,
+     "city": null,
+     "item": "aggregate of 5 self-contribution/loan items (incl. any in-kind)"
+    }
+   ]
+  },
+  {
+   "official": "Ron Chaple",
+   "office": "Parker Council, Seat 1",
+   "gov": "parker",
+   "election": "2025 municipal (Apr 22, 2025)",
+   "total_raised": 100.0,
+   "total_spent": 100.0,
+   "loans": 100.0,
+   "n_contributions": 1,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=32&c=bay&ca=696&rellevel=4&committee=N",
+   "in_kind": 0.0,
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=696&dhc=0&county=bay",
+   "soe_campaign_name": "Ron Chaple (NON)",
+   "soe_office": "Parker  Council Member Seat 1",
+   "soe_status": "Inactive Elected",
+   "from_individuals": {
+    "count": 0,
+    "total": 0.0
+   },
+   "by_type_total": {
+    "candidate_self": 100.0
+   },
+   "note": null,
+   "contributors": [
+    {
+     "name": "Ron Chaple (candidate, self)",
+     "type": "candidate",
+     "amount": 100.0,
+     "date": null,
+     "city": null,
+     "item": "aggregate of 1 self-contribution/loan items (incl. any in-kind)"
+    }
+   ]
+  },
+  {
+   "official": "Katy Bodiford",
+   "office": "Parker Council, Seat 3",
+   "gov": "parker",
+   "election": "2025 municipal (Apr 22, 2025)",
+   "total_raised": 110.0,
+   "total_spent": 110.0,
+   "loans": 110.0,
+   "n_contributions": 1,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=32&c=bay&ca=700&rellevel=4&committee=N",
+   "in_kind": 0.0,
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=700&dhc=0&county=bay",
+   "soe_campaign_name": "Katy Bodiford (NON)",
+   "soe_office": "Parker  Council Member Seat 3",
+   "soe_status": "Inactive Elected",
+   "from_individuals": {
+    "count": 0,
+    "total": 0.0
+   },
+   "by_type_total": {
+    "candidate_self": 110.0
+   },
+   "note": null,
+   "contributors": [
+    {
+     "name": "Katy Bodiford (candidate, self)",
+     "type": "candidate",
+     "amount": 110.0,
+     "date": null,
+     "city": null,
+     "item": "aggregate of 1 self-contribution/loan items (incl. any in-kind)"
+    }
+   ]
+  },
+  {
+   "official": "Richard Wolff",
+   "office": "Mexico Beach Mayor (Group 1)",
+   "gov": "mb",
+   "election": "2025 municipal (Apr 22, 2025)",
+   "total_raised": 300.0,
+   "total_spent": 300.0,
+   "loans": 300.0,
+   "n_contributions": 1,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=32&c=bay&ca=697&rellevel=4&committee=N",
+   "in_kind": 0.0,
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=697&dhc=0&county=bay",
+   "soe_campaign_name": "Richard Wolff (NON)",
+   "soe_office": "Mexico Beach Mayor / Council Member Group 1",
+   "soe_status": "Inactive Elected",
+   "from_individuals": {
+    "count": 0,
+    "total": 0.0
+   },
+   "by_type_total": {
+    "candidate_self": 300.0
+   },
+   "note": null,
+   "contributors": [
+    {
+     "name": "Richard Wolff (candidate, self)",
+     "type": "candidate",
+     "amount": 300.0,
+     "date": null,
+     "city": null,
+     "item": "aggregate of 1 self-contribution/loan items (incl. any in-kind)"
+    }
+   ]
+  },
+  {
+   "official": "Erik Fosshage",
+   "office": "Mexico Beach Council, Group 2",
+   "gov": "mb",
+   "election": "2025 municipal (Apr 22, 2025)",
+   "total_raised": 710.0,
+   "total_spent": 710.0,
+   "loans": 410.0,
+   "n_contributions": 11,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=32&c=bay&ca=693&rellevel=4&committee=N",
+   "in_kind": 267.9,
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=693&dhc=0&county=bay",
+   "soe_campaign_name": "Erik Fosshage (NON)",
+   "soe_office": "Mexico Beach Council Member Group 2",
+   "soe_status": "Inactive Elected",
+   "from_individuals": {
+    "count": 7,
+    "total": 567.9
+   },
+   "by_type_total": {
+    "candidate_self": 410.0,
+    "individual": 567.9
+   },
+   "note": null,
+   "contributors": [
+    {
+     "name": "Erik Fosshage (candidate, self)",
+     "type": "candidate",
+     "amount": 410.0,
+     "date": null,
+     "city": null,
+     "item": "aggregate of 4 self-contribution/loan items (incl. any in-kind)"
+    }
+   ]
+  },
+  {
+   "official": "Linda Hamilton",
+   "office": "Mexico Beach Council, Group 3",
+   "gov": "mb",
+   "election": "2025 municipal (Apr 22, 2025)",
+   "total_raised": 200.0,
+   "total_spent": 200.0,
+   "loans": 0.0,
+   "n_contributions": 1,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=32&c=bay&ca=699&rellevel=4&committee=N",
+   "in_kind": 0.0,
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=699&dhc=0&county=bay",
+   "soe_campaign_name": "Linda W Hamilton (NON)",
+   "soe_office": "Mexico Beach Council Member Group 3",
+   "soe_status": "Inactive Elected",
+   "from_individuals": {
+    "count": 1,
+    "total": 200.0
+   },
+   "by_type_total": {
+    "individual": 200.0
+   },
+   "note": "Filed as \"Linda W Hamilton\".",
+   "contributors": []
+  },
+  {
+   "official": "Steve Cox",
+   "office": "Mexico Beach Council, Group 5",
+   "gov": "mb",
+   "election": "2026 municipal (Apr 21, 2026)",
+   "total_raised": 200.0,
+   "total_spent": 200.0,
+   "loans": 200.0,
+   "n_contributions": 1,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=36&c=bay&ca=723&rellevel=4&committee=N",
+   "in_kind": 0.0,
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=723&dhc=0&county=bay",
+   "soe_campaign_name": "Steve Cox (NON)",
+   "soe_office": "Mexico Beach Council Member Group 5",
+   "soe_status": "Inactive Elected",
+   "from_individuals": {
+    "count": 0,
+    "total": 0.0
+   },
+   "by_type_total": {
+    "candidate_self": 200.0
+   },
+   "note": null,
+   "contributors": [
+    {
+     "name": "Steve Cox (candidate, self)",
+     "type": "candidate",
+     "amount": 200.0,
+     "date": null,
+     "city": null,
+     "item": "aggregate of 1 self-contribution/loan items (incl. any in-kind)"
+    }
+   ]
+  }
+ ],
+ "gaps": [
+  "Corey Langford (Lynn Haven commissioner): no campaign account found in the Bay County SOE system for any election from 2022 through the 2027 municipal cycle. Repo vote records show Judy Tinder voting as a commissioner through Sep 2026, so he may have been appointed; not verified.",
+  "Mark Rega (Parker council member): no campaign account found in the Bay County SOE system for 2022-2027 elections. Parker Seat 4 was won by Stacie Galbreath in 2023, so he may have been appointed; not verified.",
+  "Mexico Beach Group 4 is marked not elected/vacant in fees_pay_officials.json and was not included (SOE shows Carrie Ruscoe elected to Group 4 in Apr 2026: $100 monetary, $25 in-kind).",
+  "School Board District 2: Ginger Littleton (2026 winner, term begins Nov 2026) is not yet the officeholder and was not included; SOE shows $22,360 monetary and $500 in-kind as of the latest report.",
+  "School Board Districts 1 and 4 (Jerry L. Register, Winston Chester) are not in fees_pay_officials.json seats but were included from SOE 2024 results; District 3 and 5 holders are null in that file and were taken from the SOE (Christopher Moore, Steve Moss).",
+  "Races still in progress (Christopher Moore, Mary Coburn, Bobby J. Birdsell) reflect only reports filed as of 2026-10-21.",
+  "Contract data comes only from data/contracts/contracts.json, which covers Bay County BOCC and the seven cities FY2023-FY2026. It does not cover Bay District Schools or the constitutional officers' own purchasing, so contributor matches for school board and constitutional-officer campaigns are matched only against county/city vendors. Lynn Haven check-register vendor names are truncated at 15 characters in the source.",
+  "Contributors filed as individuals who own businesses, and contributions from company owners or employees, are not matched to vendors (individuals are not named in this dataset).",
+  "Possible matches left out as unclear: \"Halls Contracting\" (Ford) vs vendor \"Hall Contracting & Construction, Inc.\"; \"ESCS LLC\" (Ford) vs \"ECSC, LLC\"; \"RJ Gorman Construction\" (Ford), which could be RJ Gorman Marine Construction, LLC or RJ Gorman Contracting, LLC; \"Emerald Coast Civil Constructi\" (Crosby) vs \"Emerald Coast Site Construction\".",
+  "www.bayvotes.gov could not be reached through this environment's network proxy; the SOE's current site is www.bayvotesfl.gov, which was reachable."
+ ]
+}

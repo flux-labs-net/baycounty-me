@@ -1,0 +1,4463 @@
+{
+ "as_of": "2026-10-21",
+ "scope": "Vendor payments (check registers) for Bay County, Florida governments not already covered in data/contracts/contracts.json. Only the Bay County Tourist Development Council agencies have public registers (inside the Bay County Clerk's monthly check registers); none were found for the cities or the school district.",
+ "governments": [
+  {
+   "gov": "visit_pcb_cvb",
+   "name": "Panama City Beach Convention & Visitors Bureau (Visit Panama City Beach) - Bay County TDC",
+   "fiscal_years": [
+    "FY2024",
+    "FY2025",
+    "FY2026"
+   ],
+   "coverage": [
+    "2024-01",
+    "2024-04",
+    "2024-05",
+    "2024-06",
+    "2024-07",
+    "2024-08",
+    "2024-09",
+    "2024-10",
+    "2024-11",
+    "2024-12",
+    "2025-01",
+    "2025-03",
+    "2025-04",
+    "2025-05",
+    "2025-06",
+    "2025-07",
+    "2025-08",
+    "2025-09",
+    "2025-10"
+   ],
+   "coverage_by_fy": {
+    "FY2024": [
+     "2024-01",
+     "2024-04",
+     "2024-05",
+     "2024-06",
+     "2024-07",
+     "2024-08",
+     "2024-09"
+    ],
+    "FY2025": [
+     "2024-10",
+     "2024-11",
+     "2024-12",
+     "2025-01",
+     "2025-03",
+     "2025-04",
+     "2025-05",
+     "2025-06",
+     "2025-07",
+     "2025-08",
+     "2025-09"
+    ],
+    "FY2026": [
+     "2025-10"
+    ]
+   },
+   "months_missing_by_fy": {
+    "FY2024": [
+     "2023-10",
+     "2023-11",
+     "2023-12",
+     "2024-02",
+     "2024-03"
+    ],
+    "FY2025": [
+     "2025-02"
+    ],
+    "FY2026": [
+     "2025-11",
+     "2025-12",
+     "2026-01",
+     "2026-02",
+     "2026-03",
+     "2026-04",
+     "2026-05",
+     "2026-06",
+     "2026-07",
+     "2026-08",
+     "2026-09"
+    ]
+   },
+   "coverage_note": "Same months as the BOCC registers: the source registers are not posted for Oct-Dec 2023, Feb-Mar 2024 or Feb 2025. From November 2025 the Clerk's register covers BOCC disbursements only, so FY2026 covers October 2025 alone.",
+   "source_urls": [
+    "https://baycountyfl.primegov.com/api/compilemeetingattachmenthistory/historyattachment/?historyId=1912316a-96cc-41aa-9ab6-f305d61502fd",
+    "https://baycountyfl.primegov.com/api/compilemeetingattachmenthistory/historyattachment/?historyId=22b26c20-ed73-4874-9b6a-97ca1fe1f862",
+    "https://baycountyfl.primegov.com/api/compilemeetingattachmenthistory/historyattachment/?historyId=2989338c-71b0-4322-99f8-0ae0fd9544fa",
+    "https://baycountyfl.primegov.com/api/compilemeetingattachmenthistory/historyattachment/?historyId=335dc508-901c-46a8-afd7-f545e73b299d",
+    "https://baycountyfl.primegov.com/api/compilemeetingattachmenthistory/historyattachment/?historyId=42e218c1-0499-467a-bb7f-7683cc839f39",
+    "https://baycountyfl.primegov.com/api/compilemeetingattachmenthistory/historyattachment/?historyId=46257ddb-3e6d-44a5-903f-a7981109795c",
+    "https://baycountyfl.primegov.com/api/compilemeetingattachmenthistory/historyattachment/?historyId=4d7d5a83-53e5-48ac-8862-4d2a2ea5950f",
+    "https://baycountyfl.primegov.com/api/compilemeetingattachmenthistory/historyattachment/?historyId=78645d07-9255-47f3-bbec-62ee6f0675a2",
+    "https://baycountyfl.primegov.com/api/compilemeetingattachmenthistory/historyattachment/?historyId=7c7727be-dda0-4202-9280-03d6f00799d7",
+    "https://baycountyfl.primegov.com/api/compilemeetingattachmenthistory/historyattachment/?historyId=9fc49bc9-71e3-4489-9578-3fcd398f5397",
+    "https://baycountyfl.primegov.com/api/compilemeetingattachmenthistory/historyattachment/?historyId=ae4c2c2e-df69-4f81-892f-ab23a0eddcde",
+    "https://baycountyfl.primegov.com/api/compilemeetingattachmenthistory/historyattachment/?historyId=aec6114c-1727-4c0e-acf7-0741c742ab5e",
+    "https://baycountyfl.primegov.com/api/compilemeetingattachmenthistory/historyattachment/?historyId=d295a170-afac-44b5-b709-46413dc9b243",
+    "https://baycountyfl.primegov.com/api/compilemeetingattachmenthistory/historyattachment/?historyId=ef22ca92-13b1-43fd-9a0c-c59e3f48029a",
+    "https://baycountyfl.primegov.com/api/compilemeetingattachmenthistory/historyattachment/?historyId=f0b6cd12-4a80-473f-b601-8125bcbbe08b"
+   ],
+   "parsed_payments": 2687,
+   "parsed_total_all_payees": 32330519.83,
+   "reconciliation_summary": "18 of 19 months match the printed total to the cent",
+   "reconciliation": [
+    {
+     "month": "2024-01",
+     "payments": 142,
+     "parsed_total": 1424039.82,
+     "printed_total": 1424039.82,
+     "difference": 0.0,
+     "ocr_corrections": [
+      {
+       "vendor": "Bestway Portable Buildings, Inc",
+       "read_as": 40800.0,
+       "corrected_to": 10800.0
+      },
+      {
+       "vendor": "PG Environmental FL, LLC $",
+       "read_as": 8055.75,
+       "corrected_to": 5055.75
+      },
+      {
+       "vendor": "Gold Ring Gulf",
+       "read_as": -659.8,
+       "corrected_to": 659.8
+      }
+     ]
+    },
+    {
+     "month": "2024-04",
+     "payments": 95,
+     "parsed_total": 946513.44,
+     "printed_total": 946513.44,
+     "difference": 0.0,
+     "ocr_corrections": [
+      {
+       "vendor": "Paychex DirDep-RCX",
+       "read_as": 550629.1,
+       "corrected_to": 50629.1
+      }
+     ]
+    },
+    {
+     "month": "2024-05",
+     "payments": 170,
+     "parsed_total": 2250017.65,
+     "printed_total": 2250017.65,
+     "difference": 0.0,
+     "ocr_corrections": []
+    },
+    {
+     "month": "2024-06",
+     "payments": 112,
+     "parsed_total": 1508043.56,
+     "printed_total": 1508043.56,
+     "difference": 0.0,
+     "ocr_corrections": []
+    },
+    {
+     "month": "2024-07",
+     "payments": 143,
+     "parsed_total": 1585278.5,
+     "printed_total": 1585278.5,
+     "difference": 0.0,
+     "ocr_corrections": []
+    },
+    {
+     "month": "2024-08",
+     "payments": 112,
+     "parsed_total": 1105839.0,
+     "printed_total": 1105839.0,
+     "difference": 0.0,
+     "ocr_corrections": []
+    },
+    {
+     "month": "2024-09",
+     "payments": 189,
+     "parsed_total": 2107514.89,
+     "printed_total": 2107514.89,
+     "difference": 0.0,
+     "ocr_corrections": []
+    },
+    {
+     "month": "2024-10",
+     "payments": 148,
+     "parsed_total": 1864385.27,
+     "printed_total": 1864385.27,
+     "difference": 0.0,
+     "ocr_corrections": []
+    },
+    {
+     "month": "2024-11",
+     "payments": 133,
+     "parsed_total": 1596423.68,
+     "printed_total": 1596423.68,
+     "difference": 0.0,
+     "ocr_corrections": []
+    },
+    {
+     "month": "2024-12",
+     "payments": 139,
+     "parsed_total": 1266698.91,
+     "printed_total": 1266698.91,
+     "difference": 0.0,
+     "ocr_corrections": []
+    },
+    {
+     "month": "2025-01",
+     "payments": 188,
+     "parsed_total": 1750958.36,
+     "printed_total": 1750958.36,
+     "difference": 0.0,
+     "ocr_corrections": []
+    },
+    {
+     "month": "2025-03",
+     "payments": 137,
+     "parsed_total": 1403786.81,
+     "printed_total": 1403786.81,
+     "difference": 0.0,
+     "ocr_corrections": []
+    },
+    {
+     "month": "2025-04",
+     "payments": 183,
+     "parsed_total": 1844408.83,
+     "printed_total": 1844408.83,
+     "difference": 0.0,
+     "ocr_corrections": []
+    },
+    {
+     "month": "2025-05",
+     "payments": 155,
+     "parsed_total": 1855804.97,
+     "printed_total": 1855804.97,
+     "difference": 0.0,
+     "ocr_corrections": []
+    },
+    {
+     "month": "2025-06",
+     "payments": 126,
+     "parsed_total": 1786568.28,
+     "printed_total": 1786568.28,
+     "difference": 0.0,
+     "ocr_corrections": []
+    },
+    {
+     "month": "2025-07",
+     "payments": 143,
+     "parsed_total": 2105504.71,
+     "printed_total": 52105504.71,
+     "difference": -50000000.0,
+     "ocr_corrections": []
+    },
+    {
+     "month": "2025-08",
+     "payments": 88,
+     "parsed_total": 1254584.53,
+     "printed_total": 1254584.53,
+     "difference": 0.0,
+     "ocr_corrections": []
+    },
+    {
+     "month": "2025-09",
+     "payments": 114,
+     "parsed_total": 1869193.09,
+     "printed_total": 1869193.09,
+     "difference": 0.0,
+     "ocr_corrections": []
+    },
+    {
+     "month": "2025-10",
+     "payments": 170,
+     "parsed_total": 2804955.53,
+     "printed_total": 2804955.53,
+     "difference": 0.0,
+     "ocr_corrections": []
+    }
+   ],
+   "excluded_individuals": {
+    "n_payments": 179,
+    "total": 397608.94
+   },
+   "vendor_count_total": 557,
+   "vendors_listed": 200,
+   "vendors": [
+    {
+     "vendor": "CyBear Interactive",
+     "total": 2996043.09,
+     "n_payments": 21,
+     "by_fy": {
+      "FY2024": 1118405.8,
+      "FY2025": 1672443.89,
+      "FY2026": 205193.4
+     }
+    },
+    {
+     "vendor": "Meta Platforms, Inc",
+     "total": 1987359.0,
+     "n_payments": 18,
+     "by_fy": {
+      "FY2024": 775217.72,
+      "FY2025": 1079419.97,
+      "FY2026": 132721.31
+     }
+    },
+    {
+     "vendor": "BGN Contractors",
+     "total": 1946257.31,
+     "n_payments": 10,
+     "by_fy": {
+      "FY2025": 1326838.58,
+      "FY2026": 619418.73
+     }
+    },
+    {
+     "vendor": "Luckie & Company, LLC",
+     "total": 1903138.59,
+     "n_payments": 19,
+     "by_fy": {
+      "FY2024": 719408.95,
+      "FY2025": 1183729.64
+     }
+    },
+    {
+     "vendor": "Direct Deposit",
+     "total": 1061227.22,
+     "n_payments": 19,
+     "by_fy": {
+      "FY2025": 934670.68,
+      "FY2026": 126556.54
+     },
+     "category": "payroll/benefit/tax pass-through"
+    },
+    {
+     "vendor": "PCB Entertainment LLC",
+     "total": 875000.0,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2025": 375000.0,
+      "FY2026": 500000.0
+     }
+    },
+    {
+     "vendor": "Pandora Media, Inc",
+     "total": 750907.52,
+     "n_payments": 19,
+     "by_fy": {
+      "FY2024": 289826.76,
+      "FY2025": 461080.76
+     }
+    },
+    {
+     "vendor": "AMEX",
+     "total": 688370.11,
+     "n_payments": 35,
+     "by_fy": {
+      "FY2024": 155333.37,
+      "FY2025": 533036.74
+     },
+     "category": "credit card payment (underlying merchants not itemized)"
+    },
+    {
+     "vendor": "Paychex DirDep-RCX",
+     "total": 681444.18,
+     "n_payments": 13,
+     "by_fy": {
+      "FY2024": 681444.18
+     },
+     "category": "payroll/benefit/tax pass-through"
+    },
+    {
+     "vendor": "Lou Hammond Group",
+     "total": 616053.35,
+     "n_payments": 40,
+     "by_fy": {
+      "FY2024": 260151.65,
+      "FY2025": 326394.55,
+      "FY2026": 29507.15
+     }
+    },
+    {
+     "vendor": "WAGE PAY ADP WAGE PAY",
+     "total": 610660.67,
+     "n_payments": 13,
+     "by_fy": {
+      "FY2024": 53778.09,
+      "FY2025": 556882.58
+     },
+     "category": "payroll/benefit/tax pass-through"
+    },
+    {
+     "vendor": "Meredith",
+     "total": 555022.18,
+     "n_payments": 6,
+     "by_fy": {
+      "FY2024": 251472.5,
+      "FY2025": 303549.68
+     }
+    },
+    {
+     "vendor": "Northwest Fl Tourism Council",
+     "total": 537750.0,
+     "n_payments": 3,
+     "by_fy": {
+      "FY2024": 179250.0,
+      "FY2025": 179250.0,
+      "FY2026": 179250.0
+     }
+    },
+    {
+     "vendor": "Florida Blue",
+     "total": 521302.03,
+     "n_payments": 61,
+     "by_fy": {
+      "FY2024": 149535.24,
+      "FY2025": 339901.3,
+      "FY2026": 31865.49
+     },
+     "category": "payroll/benefit/tax pass-through"
+    },
+    {
+     "vendor": "Pinfish Media, LLC",
+     "total": 416090.0,
+     "n_payments": 8,
+     "by_fy": {
+      "FY2024": 181810.0,
+      "FY2025": 234280.0
+     }
+    },
+    {
+     "vendor": "World Triathalon Corporation",
+     "total": 415500.0,
+     "n_payments": 5,
+     "by_fy": {
+      "FY2024": 110000.0,
+      "FY2025": 305000.0,
+      "FY2026": 500.0
+     }
+    },
+    {
+     "vendor": "City of Panama City Beach",
+     "total": 394986.14,
+     "n_payments": 29,
+     "by_fy": {
+      "FY2024": 152110.99,
+      "FY2025": 228186.69,
+      "FY2026": 14688.46
+     },
+     "category": "government"
+    },
+    {
+     "vendor": "Lamar Companies",
+     "total": 371215.0,
+     "n_payments": 21,
+     "by_fy": {
+      "FY2024": 130840.0,
+      "FY2025": 223860.0,
+      "FY2026": 16515.0
+     }
+    },
+    {
+     "vendor": "Simpleview LLC",
+     "total": 338705.15,
+     "n_payments": 15,
+     "by_fy": {
+      "FY2024": 175576.4,
+      "FY2025": 163128.75
+     }
+    },
+    {
+     "vendor": "Lose Design",
+     "total": 308786.21,
+     "n_payments": 20,
+     "by_fy": {
+      "FY2024": 164256.5,
+      "FY2025": 129298.27,
+      "FY2026": 15231.44
+     }
+    },
+    {
+     "vendor": "Pyro Shows, Inc",
+     "total": 302250.0,
+     "n_payments": 15,
+     "by_fy": {
+      "FY2024": 126000.0,
+      "FY2025": 158750.0,
+      "FY2026": 17500.0
+     }
+    },
+    {
+     "vendor": "Seabreeze Jazz Festival",
+     "total": 300000.0,
+     "n_payments": 4,
+     "by_fy": {
+      "FY2024": 150000.0,
+      "FY2025": 150000.0
+     }
+    },
+    {
+     "vendor": "John Hancock",
+     "total": 294726.35,
+     "n_payments": 38,
+     "by_fy": {
+      "FY2024": 89840.31,
+      "FY2025": 175059.34,
+      "FY2026": 29826.7
+     },
+     "category": "payroll/benefit/tax pass-through"
+    },
+    {
+     "vendor": "Pinterest, Inc",
+     "total": 294392.27,
+     "n_payments": 19,
+     "by_fy": {
+      "FY2024": 125924.38,
+      "FY2025": 155075.1,
+      "FY2026": 13392.79
+     }
+    },
+    {
+     "vendor": "ADP",
+     "total": 271836.18,
+     "n_payments": 36,
+     "by_fy": {
+      "FY2025": 233128.13,
+      "FY2026": 38708.05
+     },
+     "category": "payroll/benefit/tax pass-through"
+    },
+    {
+     "vendor": "Southeastern Outdoor Met Inc",
+     "total": 267549.37,
+     "n_payments": 14,
+     "by_fy": {
+      "FY2024": 254272.57,
+      "FY2025": 13276.8
+     }
+    },
+    {
+     "vendor": "ACH PMT AMEX EPAYMENT",
+     "total": 258871.75,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2025": 258871.75
+     },
+     "category": "credit card payment (underlying merchants not itemized)"
+    },
+    {
+     "vendor": "Panache Tent & Event, Inc",
+     "total": 251989.19,
+     "n_payments": 12,
+     "by_fy": {
+      "FY2024": 112856.54,
+      "FY2025": 116393.68,
+      "FY2026": 22738.97
+     }
+    },
+    {
+     "vendor": "Okaloosa County BOCC",
+     "total": 250000.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 250000.0
+     },
+     "category": "government"
+    },
+    {
+     "vendor": "Publix Sports Park",
+     "total": 240309.02,
+     "n_payments": 20,
+     "by_fy": {
+      "FY2024": 52688.26,
+      "FY2025": 182985.76,
+      "FY2026": 4635.0
+     }
+    },
+    {
+     "vendor": "Paychex Taxpay",
+     "total": 230239.5,
+     "n_payments": 13,
+     "by_fy": {
+      "FY2024": 230239.5
+     },
+     "category": "payroll/benefit/tax pass-through"
+    },
+    {
+     "vendor": "Bay Point Billfish, LLC",
+     "total": 221366.64,
+     "n_payments": 3,
+     "by_fy": {
+      "FY2024": 150000.0,
+      "FY2025": 71366.64
+     }
+    },
+    {
+     "vendor": "HMX Productions",
+     "total": 217950.0,
+     "n_payments": 8,
+     "by_fy": {
+      "FY2024": 54450.0,
+      "FY2025": 131400.0,
+      "FY2026": 32100.0
+     }
+    },
+    {
+     "vendor": "Travelscape, LLC",
+     "total": 211298.31,
+     "n_payments": 12,
+     "by_fy": {
+      "FY2024": 36333.19,
+      "FY2025": 174965.12
+     }
+    },
+    {
+     "vendor": "Gosh PR",
+     "total": 209340.63,
+     "n_payments": 29,
+     "by_fy": {
+      "FY2024": 83241.81,
+      "FY2025": 114415.12,
+      "FY2026": 11683.7
+     }
+    },
+    {
+     "vendor": "Kody Foundation, Inc",
+     "total": 206774.7,
+     "n_payments": 4,
+     "by_fy": {
+      "FY2024": 101103.0,
+      "FY2025": 105671.7
+     }
+    },
+    {
+     "vendor": "Bay Point Billfish Open",
+     "total": 205253.75,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2025": 205253.75
+     }
+    },
+    {
+     "vendor": "Hancock Investments",
+     "total": 200000.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2025": 200000.0
+     }
+    },
+    {
+     "vendor": "ADP Tax ADP Tax",
+     "total": 193234.11,
+     "n_payments": 14,
+     "by_fy": {
+      "FY2024": 16822.79,
+      "FY2025": 176411.32
+     },
+     "category": "payroll/benefit/tax pass-through"
+    },
+    {
+     "vendor": "iHeart Media",
+     "total": 189377.05,
+     "n_payments": 25,
+     "by_fy": {
+      "FY2024": 76097.04,
+      "FY2025": 110541.31,
+      "FY2026": 2738.7
+     }
+    },
+    {
+     "vendor": "Granicus LLC",
+     "total": 176510.0,
+     "n_payments": 10,
+     "by_fy": {
+      "FY2025": 85225.0,
+      "FY2026": 91285.0
+     }
+    },
+    {
+     "vendor": "Palm Beach Media Group",
+     "total": 174923.98,
+     "n_payments": 8,
+     "by_fy": {
+      "FY2025": 174923.98
+     }
+    },
+    {
+     "vendor": "Priceline",
+     "total": 173611.72,
+     "n_payments": 9,
+     "by_fy": {
+      "FY2024": 68327.96,
+      "FY2025": 105283.76
+     }
+    },
+    {
+     "vendor": "Thunder Beach Productions",
+     "total": 172585.27,
+     "n_payments": 3,
+     "by_fy": {
+      "FY2024": 73085.54,
+      "FY2025": 99499.73
+     }
+    },
+    {
+     "vendor": "ProTech Svs of NW Fla",
+     "total": 161811.65,
+     "n_payments": 9,
+     "by_fy": {
+      "FY2024": 26582.3,
+      "FY2025": 105479.35,
+      "FY2026": 29750.0
+     }
+    },
+    {
+     "vendor": "Young Strategies",
+     "total": 147037.4,
+     "n_payments": 11,
+     "by_fy": {
+      "FY2024": 58199.03,
+      "FY2025": 88838.37
+     }
+    },
+    {
+     "vendor": "Visit Florida",
+     "total": 142305.0,
+     "n_payments": 15,
+     "by_fy": {
+      "FY2024": 67500.0,
+      "FY2025": 66805.0,
+      "FY2026": 8000.0
+     }
+    },
+    {
+     "vendor": "Lieb Management",
+     "total": 138904.7,
+     "n_payments": 20,
+     "by_fy": {
+      "FY2024": 39952.38,
+      "FY2025": 98952.32
+     }
+    },
+    {
+     "vendor": "Bay County TPO",
+     "total": 136064.32,
+     "n_payments": 9,
+     "by_fy": {
+      "FY2024": 89516.0,
+      "FY2025": 46548.32
+     },
+     "category": "government"
+    },
+    {
+     "vendor": "Grand Slam Sports Tournaments",
+     "total": 130000.0,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2024": 55000.0,
+      "FY2026": 75000.0
+     }
+    },
+    {
+     "vendor": "JBJ Productions",
+     "total": 127333.12,
+     "n_payments": 5,
+     "by_fy": {
+      "FY2024": 47581.8,
+      "FY2025": 79751.32
+     }
+    },
+    {
+     "vendor": "Careco Multimedia Entertainment, LLC",
+     "total": 121849.5,
+     "n_payments": 5,
+     "by_fy": {
+      "FY2024": 84601.0,
+      "FY2025": 24668.0,
+      "FY2026": 12580.5
+     }
+    },
+    {
+     "vendor": "TripAdvisor, LLC",
+     "total": 119832.51,
+     "n_payments": 18,
+     "by_fy": {
+      "FY2024": 45668.83,
+      "FY2025": 74163.68
+     }
+    },
+    {
+     "vendor": "Who Dey",
+     "total": 116244.2,
+     "n_payments": 30,
+     "by_fy": {
+      "FY2024": 41492.04,
+      "FY2025": 69865.32,
+      "FY2026": 4886.84
+     }
+    },
+    {
+     "vendor": "Emerald Coast Cruizin, LLC",
+     "total": 111520.58,
+     "n_payments": 6,
+     "by_fy": {
+      "FY2024": 16426.09,
+      "FY2025": 95094.49
+     }
+    },
+    {
+     "vendor": "Hutt Insurance Agency, Inc",
+     "total": 111386.86,
+     "n_payments": 15,
+     "by_fy": {
+      "FY2024": 27789.8,
+      "FY2025": 83597.06
+     }
+    },
+    {
+     "vendor": "Hopper (USA) Inc",
+     "total": 100386.8,
+     "n_payments": 4,
+     "by_fy": {
+      "FY2024": 50000.0,
+      "FY2025": 50386.8
+     }
+    },
+    {
+     "vendor": "WSL",
+     "total": 100000.0,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2025": 50000.0,
+      "FY2026": 50000.0
+     }
+    },
+    {
+     "vendor": "Emerald Coast Boat & Lifestyle",
+     "total": 100000.0,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2024": 50000.0,
+      "FY2025": 50000.0
+     }
+    },
+    {
+     "vendor": "Hand Arendall Harrison Sale, LLC",
+     "total": 95416.0,
+     "n_payments": 22,
+     "by_fy": {
+      "FY2024": 49960.0,
+      "FY2025": 42001.0,
+      "FY2026": 3455.0
+     }
+    },
+    {
+     "vendor": "GTS Entertainment Group, Inc",
+     "total": 94720.0,
+     "n_payments": 13,
+     "by_fy": {
+      "FY2024": 38270.0,
+      "FY2025": 41450.0,
+      "FY2026": 15000.0
+     }
+    },
+    {
+     "vendor": "Fine Productions",
+     "total": 91850.0,
+     "n_payments": 3,
+     "by_fy": {
+      "FY2024": 79362.5,
+      "FY2025": 12487.5
+     }
+    },
+    {
+     "vendor": "Carvertise",
+     "total": 91055.0,
+     "n_payments": 9,
+     "by_fy": {
+      "FY2024": 37055.0,
+      "FY2025": 54000.0
+     }
+    },
+    {
+     "vendor": "Waypoint Communications",
+     "total": 91000.0,
+     "n_payments": 15,
+     "by_fy": {
+      "FY2024": 54000.0,
+      "FY2025": 37000.0
+     }
+    },
+    {
+     "vendor": "WMBB-TV",
+     "total": 90900.75,
+     "n_payments": 20,
+     "by_fy": {
+      "FY2024": 19660.5,
+      "FY2025": 69106.75,
+      "FY2026": 2133.5
+     }
+    },
+    {
+     "vendor": "CRI",
+     "total": 88800.0,
+     "n_payments": 11,
+     "by_fy": {
+      "FY2024": 9250.0,
+      "FY2025": 79550.0
+     }
+    },
+    {
+     "vendor": "WSB-TV",
+     "total": 82276.6,
+     "n_payments": 3,
+     "by_fy": {
+      "FY2025": 82276.6
+     }
+    },
+    {
+     "vendor": "Key Data Dashboard, Inc",
+     "total": 80421.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2025": 80421.0
+     }
+    },
+    {
+     "vendor": "Destinations International",
+     "total": 80409.0,
+     "n_payments": 4,
+     "by_fy": {
+      "FY2024": 39362.0,
+      "FY2025": 41047.0
+     }
+    },
+    {
+     "vendor": "Beach Movement Event Management",
+     "total": 80000.0,
+     "n_payments": 4,
+     "by_fy": {
+      "FY2025": 65000.0,
+      "FY2026": 15000.0
+     }
+    },
+    {
+     "vendor": "Florida Film Office, Inc",
+     "total": 79500.0,
+     "n_payments": 20,
+     "by_fy": {
+      "FY2024": 27825.0,
+      "FY2025": 51675.0
+     }
+    },
+    {
+     "vendor": "VR Market Data, LLC",
+     "total": 78124.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 78124.0
+     }
+    },
+    {
+     "vendor": "Beach House Logos",
+     "total": 77354.6,
+     "n_payments": 18,
+     "by_fy": {
+      "FY2024": 10606.44,
+      "FY2025": 54748.16,
+      "FY2026": 12000.0
+     }
+    },
+    {
+     "vendor": "Tom P. Haney Technical College",
+     "total": 75000.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2026": 75000.0
+     }
+    },
+    {
+     "vendor": "Battlesports",
+     "total": 74357.6,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2025": 74357.6
+     }
+    },
+    {
+     "vendor": "WJHG-TV",
+     "total": 73000.66,
+     "n_payments": 22,
+     "by_fy": {
+      "FY2024": 21353.75,
+      "FY2025": 49887.41,
+      "FY2026": 1759.5
+     }
+    },
+    {
+     "vendor": "C&A Builders, Inc",
+     "total": 70728.0,
+     "n_payments": 10,
+     "by_fy": {
+      "FY2024": 11952.0,
+      "FY2025": 58776.0
+     }
+    },
+    {
+     "vendor": "Spotify",
+     "total": 70188.3,
+     "n_payments": 4,
+     "by_fy": {
+      "FY2024": 70188.3
+     }
+    },
+    {
+     "vendor": "United Talent Agency",
+     "total": 67100.0,
+     "n_payments": 5,
+     "by_fy": {
+      "FY2024": 20000.0,
+      "FY2025": 47100.0
+     }
+    },
+    {
+     "vendor": "Blue Shield",
+     "total": 67054.38,
+     "n_payments": 3,
+     "by_fy": {
+      "FY2024": 44702.92,
+      "FY2025": 22351.46
+     },
+     "category": "payroll/benefit/tax pass-through"
+    },
+    {
+     "vendor": "Paychex",
+     "total": 66426.81,
+     "n_payments": 27,
+     "by_fy": {
+      "FY2024": 65601.81,
+      "FY2025": 750.0,
+      "FY2026": 75.0
+     },
+     "category": "payroll/benefit/tax pass-through"
+    },
+    {
+     "vendor": "Blossoms",
+     "total": 64700.0,
+     "n_payments": 8,
+     "by_fy": {
+      "FY2024": 25000.0,
+      "FY2025": 39700.0
+     }
+    },
+    {
+     "vendor": "LSC Communications Ilc",
+     "total": 64482.31,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 64482.31
+     }
+    },
+    {
+     "vendor": "Abe Froman Productions",
+     "total": 61100.0,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2025": 30550.0,
+      "FY2026": 30550.0
+     }
+    },
+    {
+     "vendor": "The Knot Worldwide",
+     "total": 60000.0,
+     "n_payments": 4,
+     "by_fy": {
+      "FY2025": 60000.0
+     }
+    },
+    {
+     "vendor": "DAG Architects Inc",
+     "total": 57904.25,
+     "n_payments": 8,
+     "by_fy": {
+      "FY2024": 8100.0,
+      "FY2025": 31430.0,
+      "FY2026": 18374.25
+     }
+    },
+    {
+     "vendor": "DSI Security Services",
+     "total": 54303.59,
+     "n_payments": 10,
+     "by_fy": {
+      "FY2024": 9719.08,
+      "FY2025": 34993.03,
+      "FY2026": 9591.48
+     }
+    },
+    {
+     "vendor": "Rowland Publishing, Inc",
+     "total": 53870.13,
+     "n_payments": 4,
+     "by_fy": {
+      "FY2024": 53870.13
+     }
+    },
+    {
+     "vendor": "Ski Productions LLC",
+     "total": 52689.35,
+     "n_payments": 3,
+     "by_fy": {
+      "FY2024": 28700.0,
+      "FY2025": 23989.35
+     }
+    },
+    {
+     "vendor": "USFA",
+     "total": 50000.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 50000.0
+     }
+    },
+    {
+     "vendor": "Affinity Global Inc",
+     "total": 50000.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2025": 50000.0
+     }
+    },
+    {
+     "vendor": "Bay Economic Development",
+     "total": 50000.0,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2025": 25000.0,
+      "FY2026": 25000.0
+     }
+    },
+    {
+     "vendor": "Athletx",
+     "total": 50000.0,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2025": 50000.0
+     }
+    },
+    {
+     "vendor": "The Florida State University Foundation, Inc",
+     "total": 50000.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2025": 50000.0
+     }
+    },
+    {
+     "vendor": "FSU Panama City Foundation",
+     "total": 50000.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2025": 50000.0
+     }
+    },
+    {
+     "vendor": "TrueX",
+     "total": 50000.0,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2024": 50000.0
+     }
+    },
+    {
+     "vendor": "DDA CHECK XXXXXX9305",
+     "total": 50000.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 50000.0
+     },
+     "category": "bank transfer (payee not named)"
+    },
+    {
+     "vendor": "Publicis Epsilon Collections Account",
+     "total": 50000.0,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2025": 50000.0
+     }
+    },
+    {
+     "vendor": "CrowdRiff",
+     "total": 48245.68,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2025": 24122.84,
+      "FY2026": 24122.84
+     }
+    },
+    {
+     "vendor": "Panama City Symphony Orchestra",
+     "total": 48000.0,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2025": 48000.0
+     }
+    },
+    {
+     "vendor": "Cleaning Plus Janitorial Svs, LLC",
+     "total": 47357.33,
+     "n_payments": 21,
+     "by_fy": {
+      "FY2024": 17751.84,
+      "FY2025": 27392.76,
+      "FY2026": 2212.73
+     }
+    },
+    {
+     "vendor": "Atlas Lighting & Electrical",
+     "total": 46175.0,
+     "n_payments": 8,
+     "by_fy": {
+      "FY2024": 18385.0,
+      "FY2025": 27790.0
+     }
+    },
+    {
+     "vendor": "Kenilworth Media Inc",
+     "total": 44660.0,
+     "n_payments": 15,
+     "by_fy": {
+      "FY2024": 15820.0,
+      "FY2025": 28840.0
+     }
+    },
+    {
+     "vendor": "Florida Society of Assoc Executives",
+     "total": 44011.25,
+     "n_payments": 21,
+     "by_fy": {
+      "FY2024": 16450.25,
+      "FY2025": 24540.75,
+      "FY2026": 3020.25
+     }
+    },
+    {
+     "vendor": "Property Innovations, Inc",
+     "total": 42529.63,
+     "n_payments": 4,
+     "by_fy": {
+      "FY2024": 17665.17,
+      "FY2025": 17644.48,
+      "FY2026": 7219.98
+     }
+    },
+    {
+     "vendor": "Lawnscapes, Inc",
+     "total": 42505.0,
+     "n_payments": 4,
+     "by_fy": {
+      "FY2025": 42505.0
+     }
+    },
+    {
+     "vendor": "Madden Media",
+     "total": 41249.98,
+     "n_payments": 8,
+     "by_fy": {
+      "FY2024": 36666.72,
+      "FY2025": 4583.26
+     }
+    },
+    {
+     "vendor": "Linkedin Corp",
+     "total": 39469.45,
+     "n_payments": 5,
+     "by_fy": {
+      "FY2024": 19477.75,
+      "FY2025": 19991.7
+     }
+    },
+    {
+     "vendor": "Byrd Security Srvs LLC",
+     "total": 37100.0,
+     "n_payments": 3,
+     "by_fy": {
+      "FY2024": 8200.0,
+      "FY2025": 28900.0
+     }
+    },
+    {
+     "vendor": "US Travel Assoc",
+     "total": 36325.0,
+     "n_payments": 3,
+     "by_fy": {
+      "FY2024": 26000.0,
+      "FY2025": 10325.0
+     }
+    },
+    {
+     "vendor": "Boardwalk Beach Hotel",
+     "total": 35265.57,
+     "n_payments": 6,
+     "by_fy": {
+      "FY2024": 500.0,
+      "FY2025": 17573.84,
+      "FY2026": 17191.73
+     }
+    },
+    {
+     "vendor": "Sunbelt Rentals",
+     "total": 35198.31,
+     "n_payments": 12,
+     "by_fy": {
+      "FY2024": 6463.4,
+      "FY2025": 22596.27,
+      "FY2026": 6138.64
+     }
+    },
+    {
+     "vendor": "Schooners Last Beach Resort iS}",
+     "total": 35000.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2025": 35000.0
+     }
+    },
+    {
+     "vendor": "Coastal Protection Engineering LLC",
+     "total": 34952.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 34952.0
+     }
+    },
+    {
+     "vendor": "Destinations Florida, Inc",
+     "total": 34747.0,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2024": 17033.0,
+      "FY2025": 17714.0
+     }
+    },
+    {
+     "vendor": "NorthStar",
+     "total": 34250.0,
+     "n_payments": 7,
+     "by_fy": {
+      "FY2024": 22500.0,
+      "FY2025": 11750.0
+     }
+    },
+    {
+     "vendor": "PG Environmental FL, LLC",
+     "total": 34113.75,
+     "n_payments": 7,
+     "by_fy": {
+      "FY2024": 12933.0,
+      "FY2025": 21180.75
+     }
+    },
+    {
+     "vendor": "RateGain Adara Inc",
+     "total": 33522.87,
+     "n_payments": 4,
+     "by_fy": {
+      "FY2025": 33522.87
+     }
+    },
+    {
+     "vendor": "US Specialty Coatings",
+     "total": 33296.35,
+     "n_payments": 5,
+     "by_fy": {
+      "FY2024": 2195.98,
+      "FY2025": 31100.37
+     }
+    },
+    {
+     "vendor": "Adara Inc",
+     "total": 32970.28,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 32970.28
+     }
+    },
+    {
+     "vendor": "Vyde LTD",
+     "total": 32896.81,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2024": 32896.81
+     }
+    },
+    {
+     "vendor": "The Windscreen Factory",
+     "total": 30823.0,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2024": 30823.0
+     }
+    },
+    {
+     "vendor": "Unicomm, LLC",
+     "total": 30705.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2025": 30705.0
+     }
+    },
+    {
+     "vendor": "Supreme Entertainment Artists, LLC",
+     "total": 30000.0,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2025": 30000.0
+     }
+    },
+    {
+     "vendor": "Kayak Software",
+     "total": 29991.28,
+     "n_payments": 3,
+     "by_fy": {
+      "FY2025": 29991.28
+     }
+    },
+    {
+     "vendor": "Fishco Graphics and Signs",
+     "total": 29261.11,
+     "n_payments": 8,
+     "by_fy": {
+      "FY2024": 9921.12,
+      "FY2025": 7455.34,
+      "FY2026": 11884.65
+     }
+    },
+    {
+     "vendor": "Due North Consulting, Inc",
+     "total": 29150.0,
+     "n_payments": 9,
+     "by_fy": {
+      "FY2024": 10950.0,
+      "FY2025": 18200.0
+     }
+    },
+    {
+     "vendor": "HELMS BRISCOE PERFORMANCE GROUP INC",
+     "total": 29005.87,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2024": 7350.0,
+      "FY2025": 21655.87
+     }
+    },
+    {
+     "vendor": "Outdoor Aluminum, INC",
+     "total": 28202.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2025": 28202.0
+     }
+    },
+    {
+     "vendor": "Women's Civic Club of PCB",
+     "total": 27955.78,
+     "n_payments": 10,
+     "by_fy": {
+      "FY2024": 8863.75,
+      "FY2025": 13622.78,
+      "FY2026": 5469.25
+     }
+    },
+    {
+     "vendor": "PREMIUM BLUECROSSFLORIDA",
+     "total": 27872.84,
+     "n_payments": 4,
+     "by_fy": {
+      "FY2025": 27872.84
+     },
+     "category": "payroll/benefit/tax pass-through"
+    },
+    {
+     "vendor": "Emerald Coast Theater",
+     "total": 27710.0,
+     "n_payments": 3,
+     "by_fy": {
+      "FY2024": 16960.0,
+      "FY2025": 10750.0
+     }
+    },
+    {
+     "vendor": "The Sports Facilities Companies",
+     "total": 27575.0,
+     "n_payments": 4,
+     "by_fy": {
+      "FY2024": 21475.0,
+      "FY2025": 1100.0,
+      "FY2026": 5000.0
+     }
+    },
+    {
+     "vendor": "NorthStar Travel Media, LLC",
+     "total": 26134.0,
+     "n_payments": 7,
+     "by_fy": {
+      "FY2024": 5534.0,
+      "FY2025": 20600.0
+     }
+    },
+    {
+     "vendor": "Gameday USA",
+     "total": 25000.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 25000.0
+     }
+    },
+    {
+     "vendor": "DDA CHECK XXXXXX9968",
+     "total": 25000.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2025": 25000.0
+     },
+     "category": "bank transfer (payee not named)"
+    },
+    {
+     "vendor": "Silverpush Inc",
+     "total": 25000.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2025": 25000.0
+     }
+    },
+    {
+     "vendor": "WAGA-TV",
+     "total": 24759.65,
+     "n_payments": 3,
+     "by_fy": {
+      "FY2025": 24759.65
+     }
+    },
+    {
+     "vendor": "Disposal Services LLC",
+     "total": 24529.05,
+     "n_payments": 3,
+     "by_fy": {
+      "FY2025": 24529.05
+     }
+    },
+    {
+     "vendor": "Home Free Touring, LLC",
+     "total": 24353.73,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2025": 24353.73
+     }
+    },
+    {
+     "vendor": "ACH DEBIT JOHN HANCOCK",
+     "total": 24314.18,
+     "n_payments": 3,
+     "by_fy": {
+      "FY2025": 24314.18
+     },
+     "category": "payroll/benefit/tax pass-through"
+    },
+    {
+     "vendor": "HIMX Productions",
+     "total": 24000.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 24000.0
+     }
+    },
+    {
+     "vendor": "AJR Publishing Inc",
+     "total": 23800.0,
+     "n_payments": 5,
+     "by_fy": {
+      "FY2024": 8000.0,
+      "FY2025": 15800.0
+     }
+    },
+    {
+     "vendor": "Panama City Beach Chamber of Commerce",
+     "total": 23300.0,
+     "n_payments": 3,
+     "by_fy": {
+      "FY2025": 23300.0
+     }
+    },
+    {
+     "vendor": "Off Duty Management",
+     "total": 22300.6,
+     "n_payments": 4,
+     "by_fy": {
+      "FY2024": 5852.0,
+      "FY2025": 16448.6
+     }
+    },
+    {
+     "vendor": "TRADE PRESS MEDIA GROUP, INC",
+     "total": 22200.0,
+     "n_payments": 3,
+     "by_fy": {
+      "FY2024": 1000.0,
+      "FY2025": 21200.0
+     }
+    },
+    {
+     "vendor": "CoStar Realty Information, Inc",
+     "total": 22109.93,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2024": 10805.93,
+      "FY2025": 11304.0
+     }
+    },
+    {
+     "vendor": "FPL",
+     "total": 22086.68,
+     "n_payments": 21,
+     "by_fy": {
+      "FY2024": 8029.39,
+      "FY2025": 13330.55,
+      "FY2026": 726.74
+     }
+    },
+    {
+     "vendor": "WSMV",
+     "total": 21750.65,
+     "n_payments": 3,
+     "by_fy": {
+      "FY2025": 21750.65
+     }
+    },
+    {
+     "vendor": "Beach Stilts Entertainment, LLC",
+     "total": 21641.0,
+     "n_payments": 8,
+     "by_fy": {
+      "FY2024": 9855.0,
+      "FY2025": 11786.0
+     }
+    },
+    {
+     "vendor": "Lane's Outdoor Equipment Inc",
+     "total": 21640.22,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 21640.22
+     }
+    },
+    {
+     "vendor": "Boomer Aviation Inc",
+     "total": 21450.0,
+     "n_payments": 4,
+     "by_fy": {
+      "FY2024": 14300.0,
+      "FY2025": 7150.0
+     }
+    },
+    {
+     "vendor": "WKRN",
+     "total": 21282.3,
+     "n_payments": 3,
+     "by_fy": {
+      "FY2025": 21282.3
+     }
+    },
+    {
+     "vendor": "Convention South",
+     "total": 20800.0,
+     "n_payments": 3,
+     "by_fy": {
+      "FY2024": 3300.0,
+      "FY2025": 17500.0
+     }
+    },
+    {
+     "vendor": "Sports Events & Touism",
+     "total": 20243.0,
+     "n_payments": 14,
+     "by_fy": {
+      "FY2024": 12020.5,
+      "FY2025": 7672.5,
+      "FY2026": 550.0
+     }
+    },
+    {
+     "vendor": "Pier Park",
+     "total": 20150.0,
+     "n_payments": 13,
+     "by_fy": {
+      "FY2024": 7750.0,
+      "FY2025": 12400.0
+     }
+    },
+    {
+     "vendor": "Edgewater Gymnastics",
+     "total": 20000.0,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2025": 10000.0,
+      "FY2026": 10000.0
+     }
+    },
+    {
+     "vendor": "Panama City Beach Chamber of",
+     "total": 20000.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 20000.0
+     }
+    },
+    {
+     "vendor": "Perfect Game inc",
+     "total": 20000.0,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2024": 10000.0,
+      "FY2025": 10000.0
+     }
+    },
+    {
+     "vendor": "Jun Group",
+     "total": 19837.4,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 19837.4
+     }
+    },
+    {
+     "vendor": "Wasserman Music, LLC",
+     "total": 19500.0,
+     "n_payments": 3,
+     "by_fy": {
+      "FY2025": 19500.0
+     }
+    },
+    {
+     "vendor": "B&A Communications LLC",
+     "total": 19412.34,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 19412.34
+     }
+    },
+    {
+     "vendor": "The Print Center",
+     "total": 19295.72,
+     "n_payments": 20,
+     "by_fy": {
+      "FY2024": 3267.65,
+      "FY2025": 12877.33,
+      "FY2026": 3150.74
+     }
+    },
+    {
+     "vendor": "Jerry Pate Turf and Irrigation",
+     "total": 18953.53,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2025": 18953.53
+     }
+    },
+    {
+     "vendor": "AHS Boys Basketball Boosters",
+     "total": 18400.0,
+     "n_payments": 4,
+     "by_fy": {
+      "FY2024": 8000.0,
+      "FY2025": 9200.0,
+      "FY2026": 1200.0
+     }
+    },
+    {
+     "vendor": "WTVF",
+     "total": 18034.45,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2025": 18034.45
+     }
+    },
+    {
+     "vendor": "Sojern",
+     "total": 18000.01,
+     "n_payments": 5,
+     "by_fy": {
+      "FY2024": 1857.76,
+      "FY2025": 16142.25
+     }
+    },
+    {
+     "vendor": "SunSouth, LLC",
+     "total": 17862.25,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 17862.25
+     }
+    },
+    {
+     "vendor": "DMW Law Group",
+     "total": 17805.0,
+     "n_payments": 3,
+     "by_fy": {
+      "FY2025": 13215.0,
+      "FY2026": 4590.0
+     }
+    },
+    {
+     "vendor": "E-proDirect LLC",
+     "total": 17604.44,
+     "n_payments": 19,
+     "by_fy": {
+      "FY2024": 5203.8,
+      "FY2025": 12400.64
+     }
+    },
+    {
+     "vendor": "The Wharf",
+     "total": 17415.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 17415.0
+     }
+    },
+    {
+     "vendor": "Kalkomey Enterprises LLC",
+     "total": 17250.0,
+     "n_payments": 3,
+     "by_fy": {
+      "FY2024": 6250.0,
+      "FY2025": 11000.0
+     }
+    },
+    {
+     "vendor": "Vyde LTD S)",
+     "total": 17089.04,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 17089.04
+     }
+    },
+    {
+     "vendor": "Adaralnc",
+     "total": 17029.72,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 17029.72
+     }
+    },
+    {
+     "vendor": "Make A Wish",
+     "total": 16769.53,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2024": 8300.11,
+      "FY2025": 8469.42
+     }
+    },
+    {
+     "vendor": "DDA CHECK XXXXXX0034",
+     "total": 16345.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2025": 16345.0
+     },
+     "category": "bank transfer (payee not named)"
+    },
+    {
+     "vendor": "Creative Artists Agency, LLC",
+     "total": 16250.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2026": 16250.0
+     }
+    },
+    {
+     "vendor": "Dynamic Sales Solutions",
+     "total": 16062.33,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2026": 16062.33
+     }
+    },
+    {
+     "vendor": "ODD-o-Ts Entertainment LLC",
+     "total": 15860.0,
+     "n_payments": 4,
+     "by_fy": {
+      "FY2024": 9260.0,
+      "FY2025": 1240.0,
+      "FY2026": 5360.0
+     }
+    },
+    {
+     "vendor": "RC Weddings & Events",
+     "total": 15846.3,
+     "n_payments": 4,
+     "by_fy": {
+      "FY2024": 7671.89,
+      "FY2025": 8174.41
+     }
+    },
+    {
+     "vendor": "Sam Hill Entertainment",
+     "total": 15770.0,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2024": 7885.0,
+      "FY2025": 7885.0
+     }
+    },
+    {
+     "vendor": "Logo Print & Promo",
+     "total": 15728.89,
+     "n_payments": 12,
+     "by_fy": {
+      "FY2024": 8643.8,
+      "FY2025": 7085.09
+     }
+    },
+    {
+     "vendor": "KLW Enterprises",
+     "total": 15714.02,
+     "n_payments": 10,
+     "by_fy": {
+      "FY2024": 8975.16,
+      "FY2025": 6661.82,
+      "FY2026": 77.04
+     }
+    },
+    {
+     "vendor": "Garden & Gun",
+     "total": 15500.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2025": 15500.0
+     }
+    },
+    {
+     "vendor": "Google",
+     "total": 15471.59,
+     "n_payments": 4,
+     "by_fy": {
+      "FY2025": 12901.15,
+      "FY2026": 2570.44
+     }
+    },
+    {
+     "vendor": "Interior Contract Services",
+     "total": 15408.51,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 15408.51
+     }
+    },
+    {
+     "vendor": "JCG Companies. LLC",
+     "total": 15000.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 15000.0
+     }
+    },
+    {
+     "vendor": "RiverWay South Apalachicola Chocotawhatch",
+     "total": 15000.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2025": 15000.0
+     }
+    },
+    {
+     "vendor": "Tipton Marler",
+     "total": 14507.0,
+     "n_payments": 4,
+     "by_fy": {
+      "FY2024": 7372.0,
+      "FY2025": 7135.0
+     }
+    },
+    {
+     "vendor": "United States Postal Service",
+     "total": 14500.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 14500.0
+     }
+    },
+    {
+     "vendor": "LELAND KRACHER ENTERPRISES LLC",
+     "total": 14500.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 14500.0
+     }
+    },
+    {
+     "vendor": "AstroTurf",
+     "total": 14482.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2025": 14482.0
+     }
+    },
+    {
+     "vendor": "BarCups",
+     "total": 14025.0,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2024": 9110.0,
+      "FY2025": 4915.0
+     }
+    },
+    {
+     "vendor": "FSBPA",
+     "total": 14000.0,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2025": 7000.0,
+      "FY2026": 7000.0
+     }
+    },
+    {
+     "vendor": "Destination Media",
+     "total": 13900.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2025": 13900.0
+     }
+    },
+    {
+     "vendor": "Skypro Studios",
+     "total": 13847.5,
+     "n_payments": 6,
+     "by_fy": {
+      "FY2025": 13847.5
+     }
+    },
+    {
+     "vendor": "Food Truck Festivals of America, LLC",
+     "total": 13500.0,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2024": 10000.0,
+      "FY2025": 3500.0
+     }
+    },
+    {
+     "vendor": "Brand USA",
+     "total": 13500.0,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2025": 4000.0,
+      "FY2026": 9500.0
+     }
+    },
+    {
+     "vendor": "Santa David Children's Fund",
+     "total": 13000.0,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2024": 6500.0,
+      "FY2025": 6500.0
+     }
+    },
+    {
+     "vendor": "ATTN Inc",
+     "total": 12817.47,
+     "n_payments": 9,
+     "by_fy": {
+      "FY2025": 12817.47
+     }
+    }
+   ],
+   "notes": [
+    "Source: the monthly 'Check Register - Sorted by Dollar Amount' prepared by the Bay County Clerk of Court & Comptroller and attached to Bay County BOCC agendas. Through October 2025 each monthly register has separate sections for the Panama City Beach Convention & Visitors Bureau and the Panama City and Mexico Beach Community Development Councils, the three tourism-marketing agencies funded by the county's tourist development tax. The pages are scanned images; they were read with OCR and every row was parsed. Parsed sums were checked against the printed section total for each month (see reconciliation). Where the printed total did not match, out-of-order amounts in the dollar-sorted list were corrected one digit at a time only if the fix brought the sum to the printed total (5 rows corrected in total). Vendor names are as printed, with spelling variants merged. Payments to individual people (performers, contractors, refunds, staff reimbursements) are excluded from the vendor list and only counted in excluded_individuals. Payroll processors, withholding/benefit remittances, credit-card bill payments and unnamed bank transfers are kept but labeled in 'category'. Voided checks appear as negative amounts and are netted. Fiscal year = Oct 1-Sep 30.",
+    "Visit Panama City Beach is the Panama City Beach CVB, Inc., which runs marketing for the Bay County Tourist Development Council. Its money comes mainly from county transfers of tourist development tax (the BOCC register shows payments to the CVB of $11.5M, $18.2M and $9.1M in the FY2024-FY2026 months covered, per data/contracts/contracts.json); this list shows how the CVB spent it.",
+    "November 2024: the register's CVB and Panama City CDC headings (and their printed totals) are swapped. Check-number series (CVB 29xxx-30xxx, CDC 10xxx) and vendors show which is which, and the rows here are assigned by content.",
+    "July 2025: OCR read the printed CVB total as $52,105,504.71. The parsed rows sum to $2,105,504.71, so the leading '5' is taken as an OCR error; this was not checked against the page image.",
+    "In January 2026 the Clerk published an 'Action Plan for Panama City Beach Convention & Visitors Bureau' after what it calls a discovery of flagrant fraud. It describes a criminal investigation and forensic audit as ongoing and moves CVB payments under Clerk pre-audit (https://apps.baycoclerk.com/Web_File_Repo/bocc_finance/Panama_City_Beach_TDC_CVB_Public_CAP.pdf). The payments listed here are the payments as recorded; this file makes no finding about any of them."
+   ]
+  },
+  {
+   "gov": "destination_panama_city_cdc",
+   "name": "Panama City Community Development Council (Destination Panama City) - Bay County TDC",
+   "fiscal_years": [
+    "FY2024",
+    "FY2025",
+    "FY2026"
+   ],
+   "coverage": [
+    "2024-01",
+    "2024-04",
+    "2024-05",
+    "2024-06",
+    "2024-07",
+    "2024-08",
+    "2024-09",
+    "2024-10",
+    "2024-11",
+    "2024-12",
+    "2025-01",
+    "2025-03",
+    "2025-04",
+    "2025-05",
+    "2025-06",
+    "2025-07",
+    "2025-08",
+    "2025-09",
+    "2025-10"
+   ],
+   "coverage_by_fy": {
+    "FY2024": [
+     "2024-01",
+     "2024-04",
+     "2024-05",
+     "2024-06",
+     "2024-07",
+     "2024-08",
+     "2024-09"
+    ],
+    "FY2025": [
+     "2024-10",
+     "2024-11",
+     "2024-12",
+     "2025-01",
+     "2025-03",
+     "2025-04",
+     "2025-05",
+     "2025-06",
+     "2025-07",
+     "2025-08",
+     "2025-09"
+    ],
+    "FY2026": [
+     "2025-10"
+    ]
+   },
+   "months_missing_by_fy": {
+    "FY2024": [
+     "2023-10",
+     "2023-11",
+     "2023-12",
+     "2024-02",
+     "2024-03"
+    ],
+    "FY2025": [
+     "2025-02"
+    ],
+    "FY2026": [
+     "2025-11",
+     "2025-12",
+     "2026-01",
+     "2026-02",
+     "2026-03",
+     "2026-04",
+     "2026-05",
+     "2026-06",
+     "2026-07",
+     "2026-08",
+     "2026-09"
+    ]
+   },
+   "coverage_note": "Same months as the BOCC registers: the source registers are not posted for Oct-Dec 2023, Feb-Mar 2024 or Feb 2025. From November 2025 the Clerk's register covers BOCC disbursements only, so FY2026 covers October 2025 alone.",
+   "source_urls": [
+    "https://baycountyfl.primegov.com/api/compilemeetingattachmenthistory/historyattachment/?historyId=1912316a-96cc-41aa-9ab6-f305d61502fd",
+    "https://baycountyfl.primegov.com/api/compilemeetingattachmenthistory/historyattachment/?historyId=22b26c20-ed73-4874-9b6a-97ca1fe1f862",
+    "https://baycountyfl.primegov.com/api/compilemeetingattachmenthistory/historyattachment/?historyId=2989338c-71b0-4322-99f8-0ae0fd9544fa",
+    "https://baycountyfl.primegov.com/api/compilemeetingattachmenthistory/historyattachment/?historyId=335dc508-901c-46a8-afd7-f545e73b299d",
+    "https://baycountyfl.primegov.com/api/compilemeetingattachmenthistory/historyattachment/?historyId=42e218c1-0499-467a-bb7f-7683cc839f39",
+    "https://baycountyfl.primegov.com/api/compilemeetingattachmenthistory/historyattachment/?historyId=46257ddb-3e6d-44a5-903f-a7981109795c",
+    "https://baycountyfl.primegov.com/api/compilemeetingattachmenthistory/historyattachment/?historyId=4d7d5a83-53e5-48ac-8862-4d2a2ea5950f",
+    "https://baycountyfl.primegov.com/api/compilemeetingattachmenthistory/historyattachment/?historyId=78645d07-9255-47f3-bbec-62ee6f0675a2",
+    "https://baycountyfl.primegov.com/api/compilemeetingattachmenthistory/historyattachment/?historyId=7c7727be-dda0-4202-9280-03d6f00799d7",
+    "https://baycountyfl.primegov.com/api/compilemeetingattachmenthistory/historyattachment/?historyId=9fc49bc9-71e3-4489-9578-3fcd398f5397",
+    "https://baycountyfl.primegov.com/api/compilemeetingattachmenthistory/historyattachment/?historyId=ae4c2c2e-df69-4f81-892f-ab23a0eddcde",
+    "https://baycountyfl.primegov.com/api/compilemeetingattachmenthistory/historyattachment/?historyId=aec6114c-1727-4c0e-acf7-0741c742ab5e",
+    "https://baycountyfl.primegov.com/api/compilemeetingattachmenthistory/historyattachment/?historyId=d295a170-afac-44b5-b709-46413dc9b243",
+    "https://baycountyfl.primegov.com/api/compilemeetingattachmenthistory/historyattachment/?historyId=ef22ca92-13b1-43fd-9a0c-c59e3f48029a",
+    "https://baycountyfl.primegov.com/api/compilemeetingattachmenthistory/historyattachment/?historyId=f0b6cd12-4a80-473f-b601-8125bcbbe08b"
+   ],
+   "parsed_payments": 647,
+   "parsed_total_all_payees": 2859059.51,
+   "reconciliation_summary": "17 of 19 months match the printed total to the cent",
+   "reconciliation": [
+    {
+     "month": "2024-01",
+     "payments": 34,
+     "parsed_total": 120379.4,
+     "printed_total": 120379.4,
+     "difference": 0.0,
+     "ocr_corrections": []
+    },
+    {
+     "month": "2024-04",
+     "payments": 34,
+     "parsed_total": 99967.56,
+     "printed_total": 99967.56,
+     "difference": 0.0,
+     "ocr_corrections": []
+    },
+    {
+     "month": "2024-05",
+     "payments": 32,
+     "parsed_total": 104522.82,
+     "printed_total": 104522.82,
+     "difference": 0.0,
+     "ocr_corrections": []
+    },
+    {
+     "month": "2024-06",
+     "payments": 32,
+     "parsed_total": 211796.74,
+     "printed_total": 211796.74,
+     "difference": 0.0,
+     "ocr_corrections": []
+    },
+    {
+     "month": "2024-07",
+     "payments": 50,
+     "parsed_total": 144004.0,
+     "printed_total": 144054.0,
+     "difference": -50.0,
+     "ocr_corrections": []
+    },
+    {
+     "month": "2024-08",
+     "payments": 20,
+     "parsed_total": 118044.27,
+     "printed_total": 118044.27,
+     "difference": 0.0,
+     "ocr_corrections": []
+    },
+    {
+     "month": "2024-09",
+     "payments": 52,
+     "parsed_total": 164472.8,
+     "printed_total": 164472.8,
+     "difference": 0.0,
+     "ocr_corrections": [
+      {
+       "vendor": "Wells Fargo Vendor Financial Services, LLC",
+       "read_as": 401.65,
+       "corrected_to": 101.65
+      }
+     ]
+    },
+    {
+     "month": "2024-10",
+     "payments": 49,
+     "parsed_total": 273468.48,
+     "printed_total": 272468.48,
+     "difference": 1000.0,
+     "ocr_corrections": []
+    },
+    {
+     "month": "2024-11",
+     "payments": 18,
+     "parsed_total": 51438.18,
+     "printed_total": 51438.18,
+     "difference": 0.0,
+     "ocr_corrections": []
+    },
+    {
+     "month": "2024-12",
+     "payments": 36,
+     "parsed_total": 134151.4,
+     "printed_total": 134151.4,
+     "difference": 0.0,
+     "ocr_corrections": []
+    },
+    {
+     "month": "2025-01",
+     "payments": 23,
+     "parsed_total": 65586.71,
+     "printed_total": 65586.71,
+     "difference": 0.0,
+     "ocr_corrections": []
+    },
+    {
+     "month": "2025-03",
+     "payments": 29,
+     "parsed_total": 106863.17,
+     "printed_total": 106863.17,
+     "difference": 0.0,
+     "ocr_corrections": []
+    },
+    {
+     "month": "2025-04",
+     "payments": 24,
+     "parsed_total": 174466.87,
+     "printed_total": 174466.87,
+     "difference": 0.0,
+     "ocr_corrections": []
+    },
+    {
+     "month": "2025-05",
+     "payments": 38,
+     "parsed_total": 257679.32,
+     "printed_total": 257679.32,
+     "difference": 0.0,
+     "ocr_corrections": []
+    },
+    {
+     "month": "2025-06",
+     "payments": 47,
+     "parsed_total": 265651.5,
+     "printed_total": 265651.5,
+     "difference": 0.0,
+     "ocr_corrections": []
+    },
+    {
+     "month": "2025-07",
+     "payments": 39,
+     "parsed_total": 144851.78,
+     "printed_total": 144851.78,
+     "difference": 0.0,
+     "ocr_corrections": []
+    },
+    {
+     "month": "2025-08",
+     "payments": 25,
+     "parsed_total": 189305.14,
+     "printed_total": 189305.14,
+     "difference": 0.0,
+     "ocr_corrections": []
+    },
+    {
+     "month": "2025-09",
+     "payments": 21,
+     "parsed_total": 73405.94,
+     "printed_total": 73405.94,
+     "difference": 0.0,
+     "ocr_corrections": []
+    },
+    {
+     "month": "2025-10",
+     "payments": 44,
+     "parsed_total": 159003.43,
+     "printed_total": 159003.43,
+     "difference": 0.0,
+     "ocr_corrections": []
+    }
+   ],
+   "excluded_individuals": {
+    "n_payments": 47,
+    "total": 61312.13
+   },
+   "vendor_count_total": 151,
+   "vendors_listed": 151,
+   "vendors": [
+    {
+     "vendor": "First Federal Bank",
+     "total": 389821.48,
+     "n_payments": 18,
+     "by_fy": {
+      "FY2024": 161762.27,
+      "FY2025": 228059.21
+     }
+    },
+    {
+     "vendor": "Aqua",
+     "total": 258841.7,
+     "n_payments": 13,
+     "by_fy": {
+      "FY2025": 231407.24,
+      "FY2026": 27434.46
+     }
+    },
+    {
+     "vendor": "Alabama Media Group",
+     "total": 248000.0,
+     "n_payments": 12,
+     "by_fy": {
+      "FY2024": 164000.0,
+      "FY2025": 84000.0
+     }
+    },
+    {
+     "vendor": "BMR Building Solutions, LLC",
+     "total": 236284.4,
+     "n_payments": 3,
+     "by_fy": {
+      "FY2025": 236284.4
+     }
+    },
+    {
+     "vendor": "MWB",
+     "total": 107749.69,
+     "n_payments": 4,
+     "by_fy": {
+      "FY2024": 79886.07,
+      "FY2025": 27863.62
+     }
+    },
+    {
+     "vendor": "Pyro Shows, Inc",
+     "total": 91850.0,
+     "n_payments": 3,
+     "by_fy": {
+      "FY2024": 45000.0,
+      "FY2025": 46850.0
+     }
+    },
+    {
+     "vendor": "Quina Grundhoefer Architects",
+     "total": 74574.82,
+     "n_payments": 4,
+     "by_fy": {
+      "FY2024": 65654.86,
+      "FY2025": 8919.96
+     }
+    },
+    {
+     "vendor": "Laurie Rowe & Company",
+     "total": 57000.0,
+     "n_payments": 6,
+     "by_fy": {
+      "FY2024": 19000.0,
+      "FY2025": 38000.0
+     }
+    },
+    {
+     "vendor": "Professional Printers",
+     "total": 51507.39,
+     "n_payments": 3,
+     "by_fy": {
+      "FY2025": 51507.39
+     }
+    },
+    {
+     "vendor": "RateGain Adara",
+     "total": 45000.02,
+     "n_payments": 9,
+     "by_fy": {
+      "FY2025": 35686.19,
+      "FY2026": 9313.83
+     }
+    },
+    {
+     "vendor": "Raymond James",
+     "total": 41958.36,
+     "n_payments": 34,
+     "by_fy": {
+      "FY2024": 13080.14,
+      "FY2025": 25358.84,
+      "FY2026": 3519.38
+     }
+    },
+    {
+     "vendor": "Carvertise, Inc",
+     "total": 41468.75,
+     "n_payments": 3,
+     "by_fy": {
+      "FY2024": 23125.0,
+      "FY2025": 18343.75
+     }
+    },
+    {
+     "vendor": "ITI Digital, LLC",
+     "total": 39000.0,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2025": 19500.0,
+      "FY2026": 19500.0
+     }
+    },
+    {
+     "vendor": "Orange Video, LLC",
+     "total": 38976.0,
+     "n_payments": 3,
+     "by_fy": {
+      "FY2024": 19488.0,
+      "FY2025": 19488.0
+     }
+    },
+    {
+     "vendor": "Zartico Inc",
+     "total": 35000.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2025": 35000.0
+     }
+    },
+    {
+     "vendor": "Krewe of St. Andrews Inc.",
+     "total": 34638.13,
+     "n_payments": 3,
+     "by_fy": {
+      "FY2024": 5621.95,
+      "FY2025": 29016.18
+     }
+    },
+    {
+     "vendor": "HMX Productions, LLC",
+     "total": 33875.0,
+     "n_payments": 4,
+     "by_fy": {
+      "FY2024": 18975.0,
+      "FY2025": 14900.0
+     }
+    },
+    {
+     "vendor": "Key Data",
+     "total": 33459.38,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2025": 16125.0,
+      "FY2026": 17334.38
+     }
+    },
+    {
+     "vendor": "850 Company LLC",
+     "total": 33375.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2025": 33375.0
+     }
+    },
+    {
+     "vendor": "Placer Labs, Inc",
+     "total": 32800.0,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2025": 16000.0,
+      "FY2026": 16800.0
+     }
+    },
+    {
+     "vendor": "Expedia Group",
+     "total": 30796.46,
+     "n_payments": 8,
+     "by_fy": {
+      "FY2025": 18388.12,
+      "FY2026": 12408.34
+     }
+    },
+    {
+     "vendor": "Bay Arts Alliance",
+     "total": 29645.06,
+     "n_payments": 4,
+     "by_fy": {
+      "FY2024": 7001.05,
+      "FY2025": 22644.01
+     }
+    },
+    {
+     "vendor": "THRIVE Media",
+     "total": 27000.0,
+     "n_payments": 4,
+     "by_fy": {
+      "FY2024": 13000.0,
+      "FY2025": 6500.0,
+      "FY2026": 7500.0
+     }
+    },
+    {
+     "vendor": "Advance Local Media",
+     "total": 27000.0,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2025": 27000.0
+     }
+    },
+    {
+     "vendor": "Beach TV Cable Company, Inc",
+     "total": 26126.17,
+     "n_payments": 18,
+     "by_fy": {
+      "FY2024": 6979.42,
+      "FY2025": 12718.42,
+      "FY2026": 6428.33
+     }
+    },
+    {
+     "vendor": "Dewberry Engineers, Inc",
+     "total": 25907.25,
+     "n_payments": 6,
+     "by_fy": {
+      "FY2024": 6710.25,
+      "FY2025": 17902.5,
+      "FY2026": 1294.5
+     }
+    },
+    {
+     "vendor": "Bay Youth Music Association, Inc",
+     "total": 25000.0,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2025": 25000.0
+     }
+    },
+    {
+     "vendor": "Clear Channel Outdoor",
+     "total": 24414.62,
+     "n_payments": 14,
+     "by_fy": {
+      "FY2024": 2045.62,
+      "FY2025": 21600.0,
+      "FY2026": 769.0
+     }
+    },
+    {
+     "vendor": "City of Panama City",
+     "total": 24372.02,
+     "n_payments": 28,
+     "by_fy": {
+      "FY2024": 5890.86,
+      "FY2025": 16693.73,
+      "FY2026": 1787.43
+     },
+     "category": "government"
+    },
+    {
+     "vendor": "Miles Partnership, LLLP",
+     "total": 21149.75,
+     "n_payments": 3,
+     "by_fy": {
+      "FY2024": 14500.0,
+      "FY2025": 6649.75
+     }
+    },
+    {
+     "vendor": "U.S. Travel Association",
+     "total": 20305.0,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2024": 6350.0,
+      "FY2025": 13955.0
+     }
+    },
+    {
+     "vendor": "Papa Joe's Bayside",
+     "total": 20000.0,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2024": 20000.0
+     }
+    },
+    {
+     "vendor": "Atlas Obscura, Inc",
+     "total": 20000.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2025": 20000.0
+     }
+    },
+    {
+     "vendor": "Carr Riggs & Ingram",
+     "total": 19550.0,
+     "n_payments": 8,
+     "by_fy": {
+      "FY2024": 7600.0,
+      "FY2025": 11950.0
+     }
+    },
+    {
+     "vendor": "WMBB",
+     "total": 18740.82,
+     "n_payments": 12,
+     "by_fy": {
+      "FY2024": 6415.0,
+      "FY2025": 10325.83,
+      "FY2026": 1999.99
+     }
+    },
+    {
+     "vendor": "Frontline Insurance",
+     "total": 18687.5,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2024": 9953.8,
+      "FY2025": 8733.7
+     }
+    },
+    {
+     "vendor": "iDSS Global, LLC",
+     "total": 18550.0,
+     "n_payments": 5,
+     "by_fy": {
+      "FY2024": 14650.0,
+      "FY2025": 3900.0
+     }
+    },
+    {
+     "vendor": "Red Fish Film Fest, LLC",
+     "total": 18500.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2025": 18500.0
+     }
+    },
+    {
+     "vendor": "Lamar Companies",
+     "total": 18105.0,
+     "n_payments": 8,
+     "by_fy": {
+      "FY2024": 3700.0,
+      "FY2025": 12705.0,
+      "FY2026": 1700.0
+     }
+    },
+    {
+     "vendor": "House of Henry",
+     "total": 18000.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 18000.0
+     }
+    },
+    {
+     "vendor": "FPL Northwest FL",
+     "total": 16940.52,
+     "n_payments": 13,
+     "by_fy": {
+      "FY2024": 11914.48,
+      "FY2025": 5026.04
+     }
+    },
+    {
+     "vendor": "Avoy Technologies Limited",
+     "total": 16600.0,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2024": 8300.0,
+      "FY2026": 8300.0
+     }
+    },
+    {
+     "vendor": "Kennon Accounting Solutions, Inc",
+     "total": 16509.94,
+     "n_payments": 4,
+     "by_fy": {
+      "FY2024": 3381.75,
+      "FY2025": 13128.19
+     }
+    },
+    {
+     "vendor": "PCB Map Company, Inc",
+     "total": 14770.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2025": 14770.0
+     }
+    },
+    {
+     "vendor": "WOW",
+     "total": 13116.21,
+     "n_payments": 18,
+     "by_fy": {
+      "FY2024": 6171.14,
+      "FY2025": 6249.48,
+      "FY2026": 695.59
+     }
+    },
+    {
+     "vendor": "StyleBlueprint, LLC",
+     "total": 13000.0,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2025": 13000.0
+     }
+    },
+    {
+     "vendor": "iHeartMedia",
+     "total": 12358.0,
+     "n_payments": 8,
+     "by_fy": {
+      "FY2025": 9002.0,
+      "FY2026": 3356.0
+     }
+    },
+    {
+     "vendor": "CrowdRiff, Inc",
+     "total": 12061.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 12061.0
+     }
+    },
+    {
+     "vendor": "Bay County Chamber of Commerce",
+     "total": 10436.65,
+     "n_payments": 9,
+     "by_fy": {
+      "FY2024": 877.6,
+      "FY2025": 9182.05,
+      "FY2026": 377.0
+     },
+     "category": "government"
+    },
+    {
+     "vendor": "Emerson Entertainment",
+     "total": 10000.0,
+     "n_payments": 4,
+     "by_fy": {
+      "FY2024": 4000.0,
+      "FY2025": 6000.0
+     }
+    },
+    {
+     "vendor": "Royal American Hospitality",
+     "total": 10000.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2025": 10000.0
+     }
+    },
+    {
+     "vendor": "Aaron Rich Marketing",
+     "total": 9211.38,
+     "n_payments": 17,
+     "by_fy": {
+      "FY2024": 4053.0,
+      "FY2025": 4253.0,
+      "FY2026": 905.38
+     }
+    },
+    {
+     "vendor": "Perry's Painting & Pressure Washing LLC",
+     "total": 8350.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 8350.0
+     }
+    },
+    {
+     "vendor": "Destinations Florida",
+     "total": 8064.0,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2024": 3953.0,
+      "FY2026": 4111.0
+     }
+    },
+    {
+     "vendor": "BHS Wrestling Booster Club, Inc",
+     "total": 8000.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2025": 8000.0
+     }
+    },
+    {
+     "vendor": "JBJ Productions, Inc",
+     "total": 7950.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 7950.0
+     }
+    },
+    {
+     "vendor": "The Local Palate",
+     "total": 7850.0,
+     "n_payments": 3,
+     "by_fy": {
+      "FY2024": 750.0,
+      "FY2025": 5850.0,
+      "FY2026": 1250.0
+     }
+    },
+    {
+     "vendor": "Second Chance of Northwest Florida, Inc",
+     "total": 7689.0,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2024": 4089.0,
+      "FY2025": 3600.0
+     }
+    },
+    {
+     "vendor": "Down to Earth Outdoor Services, LLC",
+     "total": 6900.0,
+     "n_payments": 9,
+     "by_fy": {
+      "FY2024": 3000.0,
+      "FY2025": 3900.0
+     }
+    },
+    {
+     "vendor": "814 Sand Inc",
+     "total": 6853.13,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2024": 4138.03,
+      "FY2025": 2715.1
+     }
+    },
+    {
+     "vendor": "Sunbelt Rentals, Inc",
+     "total": 6755.91,
+     "n_payments": 3,
+     "by_fy": {
+      "FY2024": 1731.37,
+      "FY2025": 5024.54
+     }
+    },
+    {
+     "vendor": "Daystar Cleaning, Inc",
+     "total": 6504.5,
+     "n_payments": 7,
+     "by_fy": {
+      "FY2025": 5809.0,
+      "FY2026": 695.5
+     }
+    },
+    {
+     "vendor": "PG Environmental Florida, LLC",
+     "total": 6117.5,
+     "n_payments": 3,
+     "by_fy": {
+      "FY2024": 3884.5,
+      "FY2025": 2233.0
+     }
+    },
+    {
+     "vendor": "Panama City Symphony Orchestra",
+     "total": 5800.0,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2024": 800.0,
+      "FY2025": 5000.0
+     }
+    },
+    {
+     "vendor": "Carvertise, Inc iS)",
+     "total": 5781.25,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2025": 5781.25
+     }
+    },
+    {
+     "vendor": "Print Source",
+     "total": 5741.34,
+     "n_payments": 3,
+     "by_fy": {
+      "FY2024": 4367.04,
+      "FY2025": 1374.3
+     }
+    },
+    {
+     "vendor": "325 Force Support MWR Fund",
+     "total": 5000.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 5000.0
+     }
+    },
+    {
+     "vendor": "Emerald and Forgotten Coast Adventures, Inc",
+     "total": 5000.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2026": 5000.0
+     }
+    },
+    {
+     "vendor": "Panama City Ballet, Inc",
+     "total": 5000.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2025": 5000.0
+     }
+    },
+    {
+     "vendor": "Panama City Beach Chamber of Commerce",
+     "total": 4850.0,
+     "n_payments": 3,
+     "by_fy": {
+      "FY2024": 2150.0,
+      "FY2025": 2700.0
+     }
+    },
+    {
+     "vendor": "Public Eye Soar, Inc",
+     "total": 4763.14,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2025": 4763.14
+     }
+    },
+    {
+     "vendor": "Public Eye Soar Festival",
+     "total": 4763.14,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2025": 4763.14
+     }
+    },
+    {
+     "vendor": "Grown Folks Entertainment",
+     "total": 4700.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 4700.0
+     }
+    },
+    {
+     "vendor": "Grown Folks Entertainment Promotions, LLC",
+     "total": 4672.95,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2025": 4672.95
+     }
+    },
+    {
+     "vendor": "American Bankers Insurance Company of Flori",
+     "total": 4291.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 4291.0
+     }
+    },
+    {
+     "vendor": "Historic St. Andrews Waterfront Partnership",
+     "total": 4200.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2025": 4200.0
+     }
+    },
+    {
+     "vendor": "Burke Blue",
+     "total": 4107.5,
+     "n_payments": 9,
+     "by_fy": {
+      "FY2024": 2221.25,
+      "FY2025": 1886.25
+     }
+    },
+    {
+     "vendor": "Otis Signature Service",
+     "total": 4059.52,
+     "n_payments": 3,
+     "by_fy": {
+      "FY2024": 1725.0,
+      "FY2025": 2334.52
+     }
+    },
+    {
+     "vendor": "Identi-D, LLC",
+     "total": 4000.0,
+     "n_payments": 4,
+     "by_fy": {
+      "FY2024": 3000.0,
+      "FY2025": 1000.0
+     }
+    },
+    {
+     "vendor": "Harrison's Kitchen & Bar",
+     "total": 4000.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2025": 4000.0
+     }
+    },
+    {
+     "vendor": "Verizon",
+     "total": 3737.75,
+     "n_payments": 12,
+     "by_fy": {
+      "FY2024": 1183.64,
+      "FY2025": 2178.66,
+      "FY2026": 375.45
+     }
+    },
+    {
+     "vendor": "WJHG",
+     "total": 3587.0,
+     "n_payments": 6,
+     "by_fy": {
+      "FY2024": 927.0,
+      "FY2025": 1710.0,
+      "FY2026": 950.0
+     }
+    },
+    {
+     "vendor": "The Lewis Bear Company",
+     "total": 3509.72,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2024": 3509.72
+     }
+    },
+    {
+     "vendor": "Lawnmasters of Panama City LLC",
+     "total": 3358.0,
+     "n_payments": 7,
+     "by_fy": {
+      "FY2024": 2570.0,
+      "FY2025": 788.0
+     }
+    },
+    {
+     "vendor": "Destinations International",
+     "total": 3319.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2025": 3319.0
+     }
+    },
+    {
+     "vendor": "Robin Malpass & Associates, Inc",
+     "total": 3268.48,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 3268.48
+     }
+    },
+    {
+     "vendor": "Patty's Potties",
+     "total": 3238.0,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2025": 3238.0
+     }
+    },
+    {
+     "vendor": "G3D Management, LLC",
+     "total": 3200.0,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2025": 3200.0
+     }
+    },
+    {
+     "vendor": "Catered by Carla",
+     "total": 3116.4,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 3116.4
+     }
+    },
+    {
+     "vendor": "Lawnscapes, Inc",
+     "total": 3065.31,
+     "n_payments": 9,
+     "by_fy": {
+      "FY2025": 3065.31
+     }
+    },
+    {
+     "vendor": "Florida's Great Northwest Foundation Inc",
+     "total": 3000.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2026": 3000.0
+     }
+    },
+    {
+     "vendor": "Visit Florida",
+     "total": 3000.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 3000.0
+     }
+    },
+    {
+     "vendor": "BTW Services, Inc",
+     "total": 3000.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 3000.0
+     }
+    },
+    {
+     "vendor": "Bay High School - Girls Weighlifting",
+     "total": 3000.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2025": 3000.0
+     }
+    },
+    {
+     "vendor": "Travelers",
+     "total": 2695.97,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 2695.97
+     }
+    },
+    {
+     "vendor": "Magic Broadcasting",
+     "total": 2670.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 2670.0
+     }
+    },
+    {
+     "vendor": "Earthshine Cleaning",
+     "total": 2667.89,
+     "n_payments": 9,
+     "by_fy": {
+      "FY2024": 1619.93,
+      "FY2025": 1047.96
+     }
+    },
+    {
+     "vendor": "VISA",
+     "total": 2654.94,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 2654.94
+     }
+    },
+    {
+     "vendor": "JSC Systems, Inc",
+     "total": 2597.5,
+     "n_payments": 4,
+     "by_fy": {
+      "FY2024": 1623.0,
+      "FY2025": 974.5
+     }
+    },
+    {
+     "vendor": "Business Presentation Services, Inc",
+     "total": 2407.65,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2024": 2407.65
+     }
+    },
+    {
+     "vendor": "Center Action Committee",
+     "total": 2400.0,
+     "n_payments": 3,
+     "by_fy": {
+      "FY2024": 600.0,
+      "FY2025": 900.0,
+      "FY2026": 900.0
+     }
+    },
+    {
+     "vendor": "Pineapple Public Relations",
+     "total": 2300.0,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2024": 2300.0
+     }
+    },
+    {
+     "vendor": "Wells Fargo Vendor Financial Services, LLC",
+     "total": 2167.31,
+     "n_payments": 17,
+     "by_fy": {
+      "FY2024": 679.9,
+      "FY2025": 1343.34,
+      "FY2026": 144.07
+     }
+    },
+    {
+     "vendor": "Rotary Club of Panama City Florida",
+     "total": 2134.0,
+     "n_payments": 7,
+     "by_fy": {
+      "FY2024": 852.0,
+      "FY2025": 1032.0,
+      "FY2026": 250.0
+     }
+    },
+    {
+     "vendor": "McCall-Bennett Co",
+     "total": 2100.0,
+     "n_payments": 6,
+     "by_fy": {
+      "FY2025": 1800.0,
+      "FY2026": 300.0
+     }
+    },
+    {
+     "vendor": "Rutabaga Paddlesports",
+     "total": 1875.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 1875.0
+     }
+    },
+    {
+     "vendor": "Bay High Schoo! Wrestling Booster Club",
+     "total": 1800.96,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 1800.96
+     }
+    },
+    {
+     "vendor": "Panama City Downtown Improvement Board, Inc",
+     "total": 1617.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2025": 1617.0
+     }
+    },
+    {
+     "vendor": "EJHG",
+     "total": 1573.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 1573.0
+     }
+    },
+    {
+     "vendor": "The Group Travel Leader Inc",
+     "total": 1520.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 1520.0
+     }
+    },
+    {
+     "vendor": "Overstreet Realty",
+     "total": 1500.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 1500.0
+     }
+    },
+    {
+     "vendor": "Gypsy Belle Photo Bus, LLC",
+     "total": 1500.0,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2024": 1500.0
+     }
+    },
+    {
+     "vendor": "mypanhandle.com",
+     "total": 1444.16,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2025": 1444.16
+     }
+    },
+    {
+     "vendor": "Florida Restaurant & Lodging Association",
+     "total": 1200.0,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2024": 600.0,
+      "FY2025": 600.0
+     }
+    },
+    {
+     "vendor": "Panama City A Cappella Chorus, Inc",
+     "total": 1200.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2025": 1200.0
+     }
+    },
+    {
+     "vendor": "Auto Owners Insurance",
+     "total": 1025.57,
+     "n_payments": 3,
+     "by_fy": {
+      "FY2024": 269.0,
+      "FY2025": 756.57
+     }
+    },
+    {
+     "vendor": "Brock Lawn and Pest Control, Inc",
+     "total": 1011.15,
+     "n_payments": 19,
+     "by_fy": {
+      "FY2024": 369.15,
+      "FY2025": 535.0,
+      "FY2026": 107.0
+     }
+    },
+    {
+     "vendor": "City of Panama City Quality of Life",
+     "total": 1000.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 1000.0
+     },
+     "category": "government"
+    },
+    {
+     "vendor": "On The Go Oyster and Loco Boils",
+     "total": 1000.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2025": 1000.0
+     }
+    },
+    {
+     "vendor": "Sun and Shield Designs, LLC",
+     "total": 900.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2025": 900.0
+     }
+    },
+    {
+     "vendor": "Panama Business Machines",
+     "total": 881.1,
+     "n_payments": 11,
+     "by_fy": {
+      "FY2024": 628.2,
+      "FY2025": 252.9
+     }
+    },
+    {
+     "vendor": "Southeast Tourism Society",
+     "total": 845.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 845.0
+     }
+    },
+    {
+     "vendor": "Gannett Florida LocaliQ",
+     "total": 763.75,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 763.75
+     }
+    },
+    {
+     "vendor": "Vertical Communications & Security, LLC",
+     "total": 747.5,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2024": 560.0,
+      "FY2025": 187.5
+     }
+    },
+    {
+     "vendor": "Mainstreet Buildings of PC, LLC",
+     "total": 715.5,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 715.5
+     }
+    },
+    {
+     "vendor": "Panama City Lions Club",
+     "total": 710.0,
+     "n_payments": 3,
+     "by_fy": {
+      "FY2025": 710.0
+     }
+    },
+    {
+     "vendor": "Dance Kraze All Charmed Up, Inc",
+     "total": 700.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2025": 700.0
+     }
+    },
+    {
+     "vendor": "Local Logistics NWFL, LLC",
+     "total": 700.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 700.0
+     }
+    },
+    {
+     "vendor": "Shelbie Scippio - VENDOR",
+     "total": 552.0,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2024": 552.0
+     }
+    },
+    {
+     "vendor": "SendSites",
+     "total": 550.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 550.0
+     }
+    },
+    {
+     "vendor": "Snelling Staffing Services",
+     "total": 448.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2025": 448.0
+     }
+    },
+    {
+     "vendor": "Florida Department of Revenue",
+     "total": 433.93,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2024": 50.0,
+      "FY2026": 383.93
+     },
+     "category": "payroll/benefit/tax pass-through"
+    },
+    {
+     "vendor": "Jamie Lee - Gulf Coast Warriors Basketball",
+     "total": 400.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 400.0
+     }
+    },
+    {
+     "vendor": "BFG Productions PCB, LLC",
+     "total": 318.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2025": 318.0
+     }
+    },
+    {
+     "vendor": "Floriopolis",
+     "total": 300.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2025": 300.0
+     }
+    },
+    {
+     "vendor": "Harris Business Machines",
+     "total": 269.22,
+     "n_payments": 6,
+     "by_fy": {
+      "FY2025": 256.35,
+      "FY2026": 12.87
+     }
+    },
+    {
+     "vendor": "Peoples First Insurance Services, LLC",
+     "total": 252.5,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2025": 252.5
+     }
+    },
+    {
+     "vendor": "Advanced Fire Protection Services, Inc",
+     "total": 251.0,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2024": 125.5,
+      "FY2025": 125.5
+     }
+    },
+    {
+     "vendor": "A&B Collective",
+     "total": 225.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2025": 225.0
+     }
+    },
+    {
+     "vendor": "UH Beautiful Mes LLC",
+     "total": 220.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 220.0
+     }
+    },
+    {
+     "vendor": "Pacesetter Personnel Services",
+     "total": 205.77,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 205.77
+     }
+    },
+    {
+     "vendor": "Gulf Coast Children's Advocacy Center, Inc",
+     "total": 200.0,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2024": 100.0,
+      "FY2025": 100.0
+     }
+    },
+    {
+     "vendor": "Northwest Florida Great Dane Rescue",
+     "total": 100.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2026": 100.0
+     }
+    },
+    {
+     "vendor": "Girls Inc. of Bay County",
+     "total": 100.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 100.0
+     },
+     "category": "government"
+    },
+    {
+     "vendor": "Anchorage Children's Home of Bay County, Inc",
+     "total": 100.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 100.0
+     },
+     "category": "government"
+    },
+    {
+     "vendor": "Heartland Rescue Ranch, Inc",
+     "total": 100.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 100.0
+     }
+    },
+    {
+     "vendor": "Life Management Center of Northwest FL, Inc",
+     "total": 100.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 100.0
+     }
+    },
+    {
+     "vendor": "Rooms with a Purpose",
+     "total": 100.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 100.0
+     }
+    },
+    {
+     "vendor": "Salty Cats of St. Andrews Rescue, Inc",
+     "total": 100.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 100.0
+     }
+    },
+    {
+     "vendor": "St Jude Children's Research Hospital, Inc",
+     "total": 100.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 100.0
+     }
+    },
+    {
+     "vendor": "The Arc of the Bay",
+     "total": 100.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 100.0
+     }
+    }
+   ],
+   "notes": [
+    "Source: the monthly 'Check Register - Sorted by Dollar Amount' prepared by the Bay County Clerk of Court & Comptroller and attached to Bay County BOCC agendas. Through October 2025 each monthly register has separate sections for the Panama City Beach Convention & Visitors Bureau and the Panama City and Mexico Beach Community Development Councils, the three tourism-marketing agencies funded by the county's tourist development tax. The pages are scanned images; they were read with OCR and every row was parsed. Parsed sums were checked against the printed section total for each month (see reconciliation). Where the printed total did not match, out-of-order amounts in the dollar-sorted list were corrected one digit at a time only if the fix brought the sum to the printed total (5 rows corrected in total). Vendor names are as printed, with spelling variants merged. Payments to individual people (performers, contractors, refunds, staff reimbursements) are excluded from the vendor list and only counted in excluded_individuals. Payroll processors, withholding/benefit remittances, credit-card bill payments and unnamed bank transfers are kept but labeled in 'category'. Voided checks appear as negative amounts and are netted. Fiscal year = Oct 1-Sep 30.",
+    "The Panama City CDC markets Panama City under the name Destination Panama City and is funded by the Panama City TDT sub-district.",
+    "July 2024 parsed $50.00 below the printed total (one small row not read). October 2024 parsed $1,000.00 above the printed total (one amount probably misread); these were not corrected."
+   ]
+  },
+  {
+   "gov": "mexico_beach_cdc",
+   "name": "Mexico Beach Community Development Council - Bay County TDC",
+   "fiscal_years": [
+    "FY2024",
+    "FY2025",
+    "FY2026"
+   ],
+   "coverage": [
+    "2024-01",
+    "2024-04",
+    "2024-05",
+    "2024-06",
+    "2024-07",
+    "2024-08",
+    "2024-09",
+    "2024-10",
+    "2024-11",
+    "2024-12",
+    "2025-01",
+    "2025-03",
+    "2025-04",
+    "2025-05",
+    "2025-06",
+    "2025-07",
+    "2025-08",
+    "2025-09",
+    "2025-10"
+   ],
+   "coverage_by_fy": {
+    "FY2024": [
+     "2024-01",
+     "2024-04",
+     "2024-05",
+     "2024-06",
+     "2024-07",
+     "2024-08",
+     "2024-09"
+    ],
+    "FY2025": [
+     "2024-10",
+     "2024-11",
+     "2024-12",
+     "2025-01",
+     "2025-03",
+     "2025-04",
+     "2025-05",
+     "2025-06",
+     "2025-07",
+     "2025-08",
+     "2025-09"
+    ],
+    "FY2026": [
+     "2025-10"
+    ]
+   },
+   "months_missing_by_fy": {
+    "FY2024": [
+     "2023-10",
+     "2023-11",
+     "2023-12",
+     "2024-02",
+     "2024-03"
+    ],
+    "FY2025": [
+     "2025-02"
+    ],
+    "FY2026": [
+     "2025-11",
+     "2025-12",
+     "2026-01",
+     "2026-02",
+     "2026-03",
+     "2026-04",
+     "2026-05",
+     "2026-06",
+     "2026-07",
+     "2026-08",
+     "2026-09"
+    ]
+   },
+   "coverage_note": "Same months as the BOCC registers: the source registers are not posted for Oct-Dec 2023, Feb-Mar 2024 or Feb 2025. From November 2025 the Clerk's register covers BOCC disbursements only, so FY2026 covers October 2025 alone.",
+   "source_urls": [
+    "https://baycountyfl.primegov.com/api/compilemeetingattachmenthistory/historyattachment/?historyId=1912316a-96cc-41aa-9ab6-f305d61502fd",
+    "https://baycountyfl.primegov.com/api/compilemeetingattachmenthistory/historyattachment/?historyId=22b26c20-ed73-4874-9b6a-97ca1fe1f862",
+    "https://baycountyfl.primegov.com/api/compilemeetingattachmenthistory/historyattachment/?historyId=2989338c-71b0-4322-99f8-0ae0fd9544fa",
+    "https://baycountyfl.primegov.com/api/compilemeetingattachmenthistory/historyattachment/?historyId=335dc508-901c-46a8-afd7-f545e73b299d",
+    "https://baycountyfl.primegov.com/api/compilemeetingattachmenthistory/historyattachment/?historyId=42e218c1-0499-467a-bb7f-7683cc839f39",
+    "https://baycountyfl.primegov.com/api/compilemeetingattachmenthistory/historyattachment/?historyId=46257ddb-3e6d-44a5-903f-a7981109795c",
+    "https://baycountyfl.primegov.com/api/compilemeetingattachmenthistory/historyattachment/?historyId=4d7d5a83-53e5-48ac-8862-4d2a2ea5950f",
+    "https://baycountyfl.primegov.com/api/compilemeetingattachmenthistory/historyattachment/?historyId=78645d07-9255-47f3-bbec-62ee6f0675a2",
+    "https://baycountyfl.primegov.com/api/compilemeetingattachmenthistory/historyattachment/?historyId=7c7727be-dda0-4202-9280-03d6f00799d7",
+    "https://baycountyfl.primegov.com/api/compilemeetingattachmenthistory/historyattachment/?historyId=9fc49bc9-71e3-4489-9578-3fcd398f5397",
+    "https://baycountyfl.primegov.com/api/compilemeetingattachmenthistory/historyattachment/?historyId=ae4c2c2e-df69-4f81-892f-ab23a0eddcde",
+    "https://baycountyfl.primegov.com/api/compilemeetingattachmenthistory/historyattachment/?historyId=aec6114c-1727-4c0e-acf7-0741c742ab5e",
+    "https://baycountyfl.primegov.com/api/compilemeetingattachmenthistory/historyattachment/?historyId=d295a170-afac-44b5-b709-46413dc9b243",
+    "https://baycountyfl.primegov.com/api/compilemeetingattachmenthistory/historyattachment/?historyId=ef22ca92-13b1-43fd-9a0c-c59e3f48029a",
+    "https://baycountyfl.primegov.com/api/compilemeetingattachmenthistory/historyattachment/?historyId=f0b6cd12-4a80-473f-b601-8125bcbbe08b"
+   ],
+   "parsed_payments": 443,
+   "parsed_total_all_payees": 1341195.94,
+   "reconciliation_summary": "19 of 19 months match the printed total to the cent",
+   "reconciliation": [
+    {
+     "month": "2024-01",
+     "payments": 17,
+     "parsed_total": 115603.26,
+     "printed_total": 115603.26,
+     "difference": 0.0,
+     "ocr_corrections": []
+    },
+    {
+     "month": "2024-04",
+     "payments": 23,
+     "parsed_total": 48671.45,
+     "printed_total": 48671.45,
+     "difference": 0.0,
+     "ocr_corrections": []
+    },
+    {
+     "month": "2024-05",
+     "payments": 23,
+     "parsed_total": 80737.03,
+     "printed_total": 80737.03,
+     "difference": 0.0,
+     "ocr_corrections": []
+    },
+    {
+     "month": "2024-06",
+     "payments": 17,
+     "parsed_total": 24416.34,
+     "printed_total": 24416.34,
+     "difference": 0.0,
+     "ocr_corrections": []
+    },
+    {
+     "month": "2024-07",
+     "payments": 29,
+     "parsed_total": 56217.57,
+     "printed_total": 56217.57,
+     "difference": 0.0,
+     "ocr_corrections": []
+    },
+    {
+     "month": "2024-08",
+     "payments": 21,
+     "parsed_total": 67334.67,
+     "printed_total": 67334.67,
+     "difference": 0.0,
+     "ocr_corrections": []
+    },
+    {
+     "month": "2024-09",
+     "payments": 30,
+     "parsed_total": 108778.77,
+     "printed_total": 108778.77,
+     "difference": 0.0,
+     "ocr_corrections": []
+    },
+    {
+     "month": "2024-10",
+     "payments": 30,
+     "parsed_total": 73488.8,
+     "printed_total": 73488.8,
+     "difference": 0.0,
+     "ocr_corrections": []
+    },
+    {
+     "month": "2024-11",
+     "payments": 19,
+     "parsed_total": 51695.14,
+     "printed_total": 51695.14,
+     "difference": 0.0,
+     "ocr_corrections": []
+    },
+    {
+     "month": "2024-12",
+     "payments": 20,
+     "parsed_total": 48649.02,
+     "printed_total": 48649.02,
+     "difference": 0.0,
+     "ocr_corrections": []
+    },
+    {
+     "month": "2025-01",
+     "payments": 25,
+     "parsed_total": 74525.9,
+     "printed_total": 74525.9,
+     "difference": 0.0,
+     "ocr_corrections": []
+    },
+    {
+     "month": "2025-03",
+     "payments": 23,
+     "parsed_total": 55472.62,
+     "printed_total": 55472.62,
+     "difference": 0.0,
+     "ocr_corrections": []
+    },
+    {
+     "month": "2025-04",
+     "payments": 30,
+     "parsed_total": 73623.15,
+     "printed_total": 73623.15,
+     "difference": 0.0,
+     "ocr_corrections": []
+    },
+    {
+     "month": "2025-05",
+     "payments": 22,
+     "parsed_total": 74366.98,
+     "printed_total": 74366.98,
+     "difference": 0.0,
+     "ocr_corrections": []
+    },
+    {
+     "month": "2025-06",
+     "payments": 22,
+     "parsed_total": 67356.71,
+     "printed_total": 67356.71,
+     "difference": 0.0,
+     "ocr_corrections": []
+    },
+    {
+     "month": "2025-07",
+     "payments": 29,
+     "parsed_total": 109885.35,
+     "printed_total": 109885.35,
+     "difference": 0.0,
+     "ocr_corrections": []
+    },
+    {
+     "month": "2025-08",
+     "payments": 27,
+     "parsed_total": 80586.1,
+     "printed_total": 80586.1,
+     "difference": 0.0,
+     "ocr_corrections": []
+    },
+    {
+     "month": "2025-09",
+     "payments": 15,
+     "parsed_total": 56000.44,
+     "printed_total": 56000.44,
+     "difference": 0.0,
+     "ocr_corrections": []
+    },
+    {
+     "month": "2025-10",
+     "payments": 21,
+     "parsed_total": 73786.64,
+     "printed_total": 73786.64,
+     "difference": 0.0,
+     "ocr_corrections": []
+    }
+   ],
+   "excluded_individuals": {
+    "n_payments": 53,
+    "total": 76130.45
+   },
+   "vendor_count_total": 57,
+   "vendors_listed": 57,
+   "vendors": [
+    {
+     "vendor": "Madden Media",
+     "total": 464871.0,
+     "n_payments": 19,
+     "by_fy": {
+      "FY2024": 148025.01,
+      "FY2025": 286315.99,
+      "FY2026": 30530.0
+     }
+    },
+    {
+     "vendor": "QuickBooks Payroll Service",
+     "total": 217835.82,
+     "n_payments": 46,
+     "by_fy": {
+      "FY2024": 73866.58,
+      "FY2025": 126212.95,
+      "FY2026": 17756.29
+     },
+     "category": "payroll/benefit/tax pass-through"
+    },
+    {
+     "vendor": "City of Mexico Beach",
+     "total": 120594.95,
+     "n_payments": 10,
+     "by_fy": {
+      "FY2024": 99747.0,
+      "FY2025": 20097.95,
+      "FY2026": 750.0
+     },
+     "category": "government"
+    },
+    {
+     "vendor": "Chase Card Services",
+     "total": 77147.94,
+     "n_payments": 19,
+     "by_fy": {
+      "FY2024": 24841.95,
+      "FY2025": 48688.57,
+      "FY2026": 3617.42
+     },
+     "category": "credit card payment (underlying merchants not itemized)"
+    },
+    {
+     "vendor": "United States Treasury",
+     "total": 77063.98,
+     "n_payments": 20,
+     "by_fy": {
+      "FY2024": 27099.02,
+      "FY2025": 46027.92,
+      "FY2026": 3937.04
+     },
+     "category": "payroll/benefit/tax pass-through"
+    },
+    {
+     "vendor": "Florida Sheriffs Employee Benefits Trust",
+     "total": 71655.85,
+     "n_payments": 18,
+     "by_fy": {
+      "FY2024": 23181.66,
+      "FY2025": 43751.51,
+      "FY2026": 4722.68
+     },
+     "category": "payroll/benefit/tax pass-through"
+    },
+    {
+     "vendor": "Cornerstone Marketing & Advertising",
+     "total": 40000.0,
+     "n_payments": 16,
+     "by_fy": {
+      "FY2024": 12500.0,
+      "FY2025": 25000.0,
+      "FY2026": 2500.0
+     }
+    },
+    {
+     "vendor": "Bay County Sheriff's Office",
+     "total": 23363.79,
+     "n_payments": 10,
+     "by_fy": {
+      "FY2024": 13248.71,
+      "FY2025": 10115.08
+     },
+     "category": "government"
+    },
+    {
+     "vendor": "Visit Florida",
+     "total": 22500.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2025": 22500.0
+     }
+    },
+    {
+     "vendor": "Travelscape, LLC",
+     "total": 20000.0,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2024": 10000.0,
+      "FY2025": 10000.0
+     }
+    },
+    {
+     "vendor": "Coast 2 Coast Printing",
+     "total": 16506.41,
+     "n_payments": 4,
+     "by_fy": {
+      "FY2024": 1842.6,
+      "FY2025": 8346.53,
+      "FY2026": 6317.28
+     }
+    },
+    {
+     "vendor": "CRI",
+     "total": 15300.0,
+     "n_payments": 6,
+     "by_fy": {
+      "FY2024": 4800.0,
+      "FY2025": 10500.0
+     }
+    },
+    {
+     "vendor": "Cathey's Ace Hardware",
+     "total": 13871.83,
+     "n_payments": 10,
+     "by_fy": {
+      "FY2024": 119.97,
+      "FY2025": 13751.86
+     }
+    },
+    {
+     "vendor": "AJR Publishing Inc",
+     "total": 11400.0,
+     "n_payments": 4,
+     "by_fy": {
+      "FY2024": 2700.0,
+      "FY2025": 8700.0
+     }
+    },
+    {
+     "vendor": "Burke Blue",
+     "total": 7755.1,
+     "n_payments": 16,
+     "by_fy": {
+      "FY2024": 5361.84,
+      "FY2025": 2393.26
+     }
+    },
+    {
+     "vendor": "Hootsuite Inc",
+     "total": 5347.68,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2024": 2673.84,
+      "FY2025": 2673.84
+     }
+    },
+    {
+     "vendor": "Compass Media, LLC",
+     "total": 5250.0,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2024": 2000.0,
+      "FY2025": 3250.0
+     }
+    },
+    {
+     "vendor": "Acentria Insurance Company",
+     "total": 4790.95,
+     "n_payments": 3,
+     "by_fy": {
+      "FY2024": 2072.45,
+      "FY2025": 2718.5
+     }
+    },
+    {
+     "vendor": "Coast View Lawn & Landscape",
+     "total": 4583.18,
+     "n_payments": 19,
+     "by_fy": {
+      "FY2024": 2157.59,
+      "FY2025": 2360.27,
+      "FY2026": 65.32
+     }
+    },
+    {
+     "vendor": "StyleBluePrint, LLC",
+     "total": 4500.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2025": 4500.0
+     }
+    },
+    {
+     "vendor": "Destinations Florida",
+     "total": 4278.0,
+     "n_payments": 3,
+     "by_fy": {
+      "FY2025": 2222.0,
+      "FY2026": 2056.0
+     }
+    },
+    {
+     "vendor": "Roberson & Associates, PA",
+     "total": 3950.0,
+     "n_payments": 13,
+     "by_fy": {
+      "FY2024": 1275.0,
+      "FY2025": 2675.0
+     }
+    },
+    {
+     "vendor": "US Relay",
+     "total": 3060.0,
+     "n_payments": 12,
+     "by_fy": {
+      "FY2024": 1785.0,
+      "FY2025": 1275.0
+     }
+    },
+    {
+     "vendor": "Coastal Protection Engineering, LLC",
+     "total": 2941.5,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 2941.5
+     }
+    },
+    {
+     "vendor": "Philadelphia Insurance Companies",
+     "total": 2697.71,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2024": 1333.2,
+      "FY2025": 1364.51
+     }
+    },
+    {
+     "vendor": "Purchase Power",
+     "total": 2543.45,
+     "n_payments": 6,
+     "by_fy": {
+      "FY2024": 537.5,
+      "FY2025": 2005.95
+     }
+    },
+    {
+     "vendor": "GreatAmerica Financial Services",
+     "total": 2312.6,
+     "n_payments": 17,
+     "by_fy": {
+      "FY2024": 776.84,
+      "FY2025": 1407.78,
+      "FY2026": 127.98
+     }
+    },
+    {
+     "vendor": "Duke Energy",
+     "total": 2277.24,
+     "n_payments": 15,
+     "by_fy": {
+      "FY2024": 644.71,
+      "FY2025": 1452.03,
+      "FY2026": 180.5
+     }
+    },
+    {
+     "vendor": "Mexico Beach Department of Public Safety",
+     "total": 2250.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2025": 2250.0
+     },
+     "category": "government"
+    },
+    {
+     "vendor": "Mexico Beach Gollywhopper, LLC",
+     "total": 2000.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 2000.0
+     }
+    },
+    {
+     "vendor": "Stow Away",
+     "total": 1669.2,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2025": 1669.2
+     }
+    },
+    {
+     "vendor": "Pitney Bowes Global Financial Services",
+     "total": 1611.52,
+     "n_payments": 7,
+     "by_fy": {
+      "FY2024": 246.09,
+      "FY2025": 1119.34,
+      "FY2026": 246.09
+     }
+    },
+    {
+     "vendor": "GSC Systems",
+     "total": 1201.5,
+     "n_payments": 4,
+     "by_fy": {
+      "FY2024": 267.5,
+      "FY2025": 592.0,
+      "FY2026": 342.0
+     }
+    },
+    {
+     "vendor": "Grace and Grit, LLC",
+     "total": 1200.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 1200.0
+     }
+    },
+    {
+     "vendor": "London Tourism Publications",
+     "total": 995.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2025": 995.0
+     }
+    },
+    {
+     "vendor": "Southeast Tourism Society",
+     "total": 745.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 745.0
+     }
+    },
+    {
+     "vendor": "Forgotten Coast Property Management",
+     "total": 700.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2025": 700.0
+     }
+    },
+    {
+     "vendor": "Panache Tent + Event",
+     "total": 577.8,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 577.8
+     }
+    },
+    {
+     "vendor": "DEX imaging",
+     "total": 539.71,
+     "n_payments": 17,
+     "by_fy": {
+      "FY2024": 179.8,
+      "FY2025": 316.57,
+      "FY2026": 43.34
+     }
+    },
+    {
+     "vendor": "MCI a Verizon Company",
+     "total": 522.95,
+     "n_payments": 16,
+     "by_fy": {
+      "FY2024": 118.82,
+      "FY2025": 384.43,
+      "FY2026": 19.7
+     }
+    },
+    {
+     "vendor": "Ramsey's Printing and Office",
+     "total": 413.25,
+     "n_payments": 5,
+     "by_fy": {
+      "FY2024": 217.75,
+      "FY2025": 195.5
+     }
+    },
+    {
+     "vendor": "The Workmans",
+     "total": 385.2,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2025": 385.2
+     }
+    },
+    {
+     "vendor": "Ethos Exteriors, LLC",
+     "total": 375.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2025": 375.0
+     }
+    },
+    {
+     "vendor": "Forgotten Coast Living",
+     "total": 300.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2025": 300.0
+     }
+    },
+    {
+     "vendor": "Mexico Beach Artificial Reef Association",
+     "total": 200.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 200.0
+     }
+    },
+    {
+     "vendor": "Donnie's Total Pride Pest Control",
+     "total": 195.0,
+     "n_payments": 3,
+     "by_fy": {
+      "FY2024": 65.0,
+      "FY2025": 130.0
+     }
+    },
+    {
+     "vendor": "EPCl",
+     "total": 139.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 139.0
+     }
+    },
+    {
+     "vendor": "Mexico Beach Sweets",
+     "total": 120.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2025": 120.0
+     }
+    },
+    {
+     "vendor": "Florida Department of Revenue",
+     "total": 102.05,
+     "n_payments": 15,
+     "by_fy": {
+      "FY2024": 47.28,
+      "FY2025": 54.77
+     },
+     "category": "payroll/benefit/tax pass-through"
+    },
+    {
+     "vendor": "Sam's Club",
+     "total": 100.0,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2024": 50.0,
+      "FY2025": 50.0
+     }
+    },
+    {
+     "vendor": "Caribbean Coffee",
+     "total": 90.0,
+     "n_payments": 2,
+     "by_fy": {
+      "FY2025": 90.0
+     }
+    },
+    {
+     "vendor": "Brock Lawn & Pest Control",
+     "total": 77.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 77.0
+     }
+    },
+    {
+     "vendor": "Bayside Florist & Gifts",
+     "total": 63.14,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 63.14
+     }
+    },
+    {
+     "vendor": "Florida UC Fund",
+     "total": 42.0,
+     "n_payments": 3,
+     "by_fy": {
+      "FY2024": 21.0,
+      "FY2025": 21.0
+     }
+    },
+    {
+     "vendor": "MCt a Verizon Company",
+     "total": 31.19,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 31.19
+     }
+    },
+    {
+     "vendor": "MCla Verizon Company",
+     "total": 11.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2024": 11.0
+     }
+    },
+    {
+     "vendor": "Bay County Chamber of Commerce",
+     "total": 10.0,
+     "n_payments": 1,
+     "by_fy": {
+      "FY2025": 10.0
+     },
+     "category": "government"
+    }
+   ],
+   "notes": [
+    "Source: the monthly 'Check Register - Sorted by Dollar Amount' prepared by the Bay County Clerk of Court & Comptroller and attached to Bay County BOCC agendas. Through October 2025 each monthly register has separate sections for the Panama City Beach Convention & Visitors Bureau and the Panama City and Mexico Beach Community Development Councils, the three tourism-marketing agencies funded by the county's tourist development tax. The pages are scanned images; they were read with OCR and every row was parsed. Parsed sums were checked against the printed section total for each month (see reconciliation). Where the printed total did not match, out-of-order amounts in the dollar-sorted list were corrected one digit at a time only if the fix brought the sum to the printed total (5 rows corrected in total). Vendor names are as printed, with spelling variants merged. Payments to individual people (performers, contractors, refunds, staff reimbursements) are excluded from the vendor list and only counted in excluded_individuals. Payroll processors, withholding/benefit remittances, credit-card bill payments and unnamed bank transfers are kept but labeled in 'category'. Voided checks appear as negative amounts and are netted. Fiscal year = Oct 1-Sep 30.",
+    "The Mexico Beach CDC is funded by the Mexico Beach TDT sub-district. Its register is grouped by payment type and is not strictly sorted by amount, so order-based OCR checks could not be used. Every month still matched its printed total."
+   ]
+  }
+ ],
+ "gaps": [
+  "City of Panama City: no check register, warrant list or vendor-payment report was found. Commission agenda packets (checked: 2026-09-08, 2026-10-13 and searched FY2023-FY2026 titles) have no such attachment. The city's Archive Center (budgets, ACFRs, pension reports) and site search had none. Needs a public-records request.",
+  "City of Panama City Beach: no register found. Council agendas on pcbgov.granicus.com (recent meetings checked) have no bills/warrant item, and pcbfl.gov blocks automated access (Cloudflare), so its document center could not be searched directly. There is no OpenGov/ClearGov transparency portal.",
+  "Callaway, Parker, Springfield, Mexico Beach: no registers. Callaway's recent agenda packets (CivicPlus) have none. Parker's Budget-Audits page holds only budgets and audits. Springfield's Finance page holds only budget resolutions and the 2025 audit. Mexico Beach's Budget & Financials page lists only budget/JLAC documents. The council minutes the site already has (data/contracts) do not itemize bills.",
+  "Bay District Schools: no warrant list or check register is posted. The Finance page has only budgets and fiscal-transparency graphs. Board agenda packets include 'Purchasing and Contracting' reports (purchase orders, not payments; e.g., https://www.bay.k12.fl.us/uploads/BB%20032420.pdf). bay.k12.fl.us uses a JavaScript challenge that blocks scripted downloads.",
+  "Visit Panama City Beach / Bay County TDC board packets (assets.simpleviewinc.com, e.g., the 2025-09-09 and 2025-08-26 agendas) have no check register, only individual invoice approvals (e.g., beach-nourishment engineering invoices in 2021 packets). The CVB's own payments are covered here through the Clerk's registers instead.",
+  "CVB, Panama City CDC and Mexico Beach CDC payments after October 2025 are not in any public register found. The Clerk's FY2026 registers from November 2025 onward cover BOCC only (cover letter dated 2026-03-13 says 'disbursements of the Board of County Commissioners'). Whether CVB/CDC payments now run through the BOCC section was not checked line by line.",
+  "Months not covered for all three TDC agencies: Oct-Dec 2023, Feb-Mar 2024 and Feb 2025 (registers not attached to BOCC agendas), plus Nov 2025-Sep 2026. The Clerk of Court could provide these.",
+  "Individuals were picked out by a first-name heuristic plus 'Last, First' patterns. A few sole proprietors may be misclassified either way; check excluded totals before quoting them.",
+  "Bay County BOCC FY2024-FY2026 and Lynn Haven FY2023-FY2025 registers are already summarized in data/contracts/contracts.json (registers) and are not repeated here."
+ ]
+}

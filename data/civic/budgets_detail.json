@@ -1,0 +1,1475 @@
+{
+  "as_of": "2026-10-21",
+  "notes": [
+    "FY2026 means Oct 1, 2025 - Sep 30, 2026 for the county and cities; for the school district it means school year 2025-26 (July 1, 2025 - June 30, 2026).",
+    "Totals are gross appropriations including interfund transfers and, where the source includes them, reserves or fund balances. Compare governments with care.",
+    "Each government's notes record the reconciliation result. Unless a note says otherwise, fund amounts sum exactly to 'total' and General Fund departments sum exactly to the General Fund amount.",
+    "Values come from scanned documents (Callaway, Springfield, Parker) read by OCR, or newspaper-ad images (Bay District Schools, Mexico Beach) read manually. Each was cross-checked by confirming the line items sum to the printed totals.",
+    "The 'type' on each fund is the researcher's classification (general, special revenue, CRA, debt service, capital, enterprise, internal service)."
+  ],
+  "governments": [
+    {
+      "gov": "county",
+      "name": "Bay County Board of County Commissioners",
+      "fiscal_year": "FY2026 (Oct 1, 2025 - Sep 30, 2026)",
+      "status": "adopted",
+      "total": 734465609,
+      "source_url": "https://www.baycountyfl.gov/DocumentCenter/View/18382/FY-2026-Final-Budget-Commissioners-Book-09-16-2025",
+      "funds": [
+        {
+          "name": "001 General Fund",
+          "amount": 281737981,
+          "type": "general"
+        },
+        {
+          "name": "101 Transportation",
+          "amount": 47079008,
+          "type": "special revenue"
+        },
+        {
+          "name": "102 Half-Cent Infrastructure Surtax",
+          "amount": 65115736,
+          "type": "special revenue"
+        },
+        {
+          "name": "112 Road Impact-East Bay County",
+          "amount": 8013,
+          "type": "special revenue"
+        },
+        {
+          "name": "114 Road Impact-Southport/Sand Hills",
+          "amount": 256960,
+          "type": "special revenue"
+        },
+        {
+          "name": "118 Transit",
+          "amount": 11002111,
+          "type": "special revenue"
+        },
+        {
+          "name": "122 Restore Act",
+          "amount": 7819761,
+          "type": "special revenue"
+        },
+        {
+          "name": "124 TDC - Sports Park",
+          "amount": 2659789,
+          "type": "special revenue (tourist development)"
+        },
+        {
+          "name": "125 TDC - Administration",
+          "amount": 25150000,
+          "type": "special revenue (tourist development)"
+        },
+        {
+          "name": "126 TDC - Mexico Beach",
+          "amount": 1137603,
+          "type": "special revenue (tourist development)"
+        },
+        {
+          "name": "127 TDC - Beach Nourishment",
+          "amount": 61227500,
+          "type": "special revenue (tourist development)"
+        },
+        {
+          "name": "128 TDC - 5th Cent",
+          "amount": 10352500,
+          "type": "special revenue (tourist development)"
+        },
+        {
+          "name": "129 TDC - Panama City",
+          "amount": 1813684,
+          "type": "special revenue (tourist development)"
+        },
+        {
+          "name": "130 Public Safety",
+          "amount": 2296900,
+          "type": "special revenue"
+        },
+        {
+          "name": "133 Intergovernmental Radio Comm",
+          "amount": 5188668,
+          "type": "special revenue"
+        },
+        {
+          "name": "135 Community Housing Fund",
+          "amount": 6927427,
+          "type": "special revenue"
+        },
+        {
+          "name": "140 Mosquito Control",
+          "amount": 3189291,
+          "type": "special revenue (dependent district)"
+        },
+        {
+          "name": "145 M.S.T.U. - Fire Services",
+          "amount": 33643487,
+          "type": "special revenue (dependent district)"
+        },
+        {
+          "name": "150 Hurricane Michael Fund",
+          "amount": 15000000,
+          "type": "special revenue"
+        },
+        {
+          "name": "160 COVID",
+          "amount": 0,
+          "type": "special revenue"
+        },
+        {
+          "name": "167 M.S.B.U.",
+          "amount": 75261,
+          "type": "special revenue"
+        },
+        {
+          "name": "401 Water Plant Operations",
+          "amount": 41628649,
+          "type": "enterprise (utilities)"
+        },
+        {
+          "name": "412 MPAWTF/Joint Venture",
+          "amount": 22909111,
+          "type": "enterprise (utilities)"
+        },
+        {
+          "name": "420 Retail Water/Wastewater",
+          "amount": 40465640,
+          "type": "enterprise (utilities)"
+        },
+        {
+          "name": "430 Solid Waste",
+          "amount": 10887853,
+          "type": "enterprise"
+        },
+        {
+          "name": "440 Builders Services",
+          "amount": 4150000,
+          "type": "enterprise"
+        },
+        {
+          "name": "501 Internal Service",
+          "amount": 8784829,
+          "type": "internal service"
+        },
+        {
+          "name": "505 Workers' Compensation",
+          "amount": 8244962,
+          "type": "internal service"
+        },
+        {
+          "name": "506 Risk",
+          "amount": 11588864,
+          "type": "internal service"
+        },
+        {
+          "name": "510 Utility Admin",
+          "amount": 4124021,
+          "type": "internal service"
+        }
+      ],
+      "general_fund_departments": [
+        {
+          "name": "Sheriff / law enforcement",
+          "amount": 43595846
+        },
+        {
+          "name": "Jail operations (Sheriff-run)",
+          "amount": 30841594
+        },
+        {
+          "name": "Emergency medical services",
+          "amount": 30612414
+        },
+        {
+          "name": "Emergency management, code enforcement, animal control, medical examiner & public-safety debt",
+          "amount": 18921368
+        },
+        {
+          "name": "Human services (incl. $26.0M hospital LPPF payments)",
+          "amount": 37023523
+        },
+        {
+          "name": "Economic environment (incl. $4.9M to CRAs other than Front Beach)",
+          "amount": 5187215
+        },
+        {
+          "name": "Parks & recreation",
+          "amount": 13049436
+        },
+        {
+          "name": "Libraries",
+          "amount": 4119374
+        },
+        {
+          "name": "Constitutional officers (Property Appraiser, Tax Collector, Supervisor of Elections, Clerk)",
+          "amount": 20047395
+        },
+        {
+          "name": "Courts & judicial support",
+          "amount": 5356592
+        },
+        {
+          "name": "Administration & general government",
+          "amount": 19408430
+        },
+        {
+          "name": "Transfers out (mostly $32.0M to Transportation/roads fund)",
+          "amount": 34405652
+        },
+        {
+          "name": "Reserves (budgeted contingency)",
+          "amount": 1000000
+        },
+        {
+          "name": "Cash reserves",
+          "amount": 18169142
+        }
+      ],
+      "revenues": [
+        {
+          "name": "Ad valorem taxes",
+          "amount": 184216751
+        },
+        {
+          "name": "Other taxes",
+          "amount": 62145570
+        },
+        {
+          "name": "Licenses & permits",
+          "amount": 3006700
+        },
+        {
+          "name": "Special assessments",
+          "amount": 31620299
+        },
+        {
+          "name": "Intergovernmental",
+          "amount": 99216287
+        },
+        {
+          "name": "Charges for services",
+          "amount": 109555789
+        },
+        {
+          "name": "Miscellaneous",
+          "amount": 13489069
+        },
+        {
+          "name": "Interest",
+          "amount": 4599942
+        },
+        {
+          "name": "Other revenue (incl. transfers in)",
+          "amount": 67514162
+        },
+        {
+          "name": "Balance forward (fund balance)",
+          "amount": 159101040
+        }
+      ],
+      "notes": "Budget book for the Sept 16, 2025 final hearing ('Summary of All Funds' and 'Summary of Revenues', p.1). Columns are labeled 'Recommended/Tentative', but the final hearing presentation (https://www.baycountyfl.gov/DocumentCenter/View/18735/FY-2026-Final-Budget-Hearing-Presentation-09-16-2025) confirms these totals were adopted. The total includes $34,578,970 of interfund transfers; net of transfers the budget is $699,886,639. Fund totals and revenue sources each reconcile exactly to $734,465,609. General Fund departments were grouped by function from the General Fund proforma in the same book (same grouping as data/tax/budgets.json) and sum to $281,737,981, including $19.2M of reserves. The constitutional officers (Sheriff, Clerk, Property Appraiser, Tax Collector, Supervisor of Elections) are funded mainly through General Fund transfers shown in these lines; their own internal budgets are not broken out here. The published TRIM 'Budget Summary' ad (Sept 2025) is on https://publicnoticesbaycountyfl.gov/public-notices"
+    },
+    {
+      "gov": "schools",
+      "name": "Bay District Schools (School Board of Bay County)",
+      "fiscal_year": "FY2026 (school year July 1, 2025 - June 30, 2026)",
+      "status": "tentative",
+      "total": 648478799.9,
+      "source_url": "https://publicnoticesbaycountyfl.gov/public-notices",
+      "source_document": "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/UyEX0avqYdcdCb4SgDUh/6c33./cropped-887.pdf",
+      "funds": [
+        {
+          "name": "General Fund",
+          "amount": 344457618.01,
+          "type": "general"
+        },
+        {
+          "name": "Special Revenue (Food Service, federal programs)",
+          "amount": 35036289.14,
+          "type": "special revenue"
+        },
+        {
+          "name": "Debt Service",
+          "amount": 16971051.0,
+          "type": "debt service"
+        },
+        {
+          "name": "Capital Projects",
+          "amount": 188123372.0,
+          "type": "capital"
+        },
+        {
+          "name": "Enterprise Funds",
+          "amount": 6788947.07,
+          "type": "enterprise"
+        },
+        {
+          "name": "Internal Service",
+          "amount": 57101522.68,
+          "type": "internal service"
+        }
+      ],
+      "general_fund_departments": [
+        {
+          "name": "Instruction",
+          "amount": 209710187.6
+        },
+        {
+          "name": "Pupil Personnel Services",
+          "amount": 12518813.14
+        },
+        {
+          "name": "Instructional Media Services",
+          "amount": 3282750.92
+        },
+        {
+          "name": "Instructional & Curriculum Development Services",
+          "amount": 4427250.71
+        },
+        {
+          "name": "Instructional Staff Training Services",
+          "amount": 2205096.68
+        },
+        {
+          "name": "Instructional Related Technology",
+          "amount": 1670.0
+        },
+        {
+          "name": "School Board",
+          "amount": 1073884.29
+        },
+        {
+          "name": "General Administration",
+          "amount": 5514198.29
+        },
+        {
+          "name": "School Administration",
+          "amount": 17978917.17
+        },
+        {
+          "name": "Facilities Acquisition & Construction",
+          "amount": 22627611.13
+        },
+        {
+          "name": "Fiscal Services",
+          "amount": 2430618.14
+        },
+        {
+          "name": "Central Services",
+          "amount": 2395451.89
+        },
+        {
+          "name": "Pupil Transportation Services",
+          "amount": 9865336.24
+        },
+        {
+          "name": "Operation of Plant",
+          "amount": 23530859.15
+        },
+        {
+          "name": "Maintenance of Plant",
+          "amount": 5986542.92
+        },
+        {
+          "name": "Administrative Technology Services",
+          "amount": 4847763.32
+        },
+        {
+          "name": "Community Services",
+          "amount": 2983332.38
+        },
+        {
+          "name": "Ending fund balance (reserve)",
+          "amount": 13077334.04
+        }
+      ],
+      "revenues": [
+        {
+          "name": "Federal sources",
+          "amount": 22887202.0
+        },
+        {
+          "name": "State sources",
+          "amount": 125351779.64
+        },
+        {
+          "name": "Local sources (incl. property taxes)",
+          "amount": 261786863.84
+        },
+        {
+          "name": "Transfers in",
+          "amount": 28061460.0
+        },
+        {
+          "name": "Fund balance / net position (beginning)",
+          "amount": 210391494.42
+        }
+      ],
+      "notes": "Figures come from the district's statutory 'Budget Summary, Fiscal Year 2025-2026' TRIM advertisement, published July 28-29, 2025 on the Bay County official public-notice site (notice ID UyEX0avqYdcdCb4SgDUh), for the July 31, 2025 tentative budget hearing. The ad image was read manually. Fund totals, revenue sources and General Fund functions all reconcile to the printed totals ($648,478,799.90 and $344,457,618.01). The General Fund line 'Ending fund balance (reserve)' $13,077,334.04 is not spending; General Fund appropriations are $331,380,283.97. The final adopted (September 2025) budget document could not be retrieved: the district's old upload URLs now return 404 on its redesigned site. FLDOE's district budget data file (https://www.fldoe.org/file/7507/BayTotalBUD2526.pdf, run 02/23/26; tool-read only) gives a slightly different General Fund total available of $345,030,838.97 (appropriations $331,143,353.67), so the final General Fund differs from the tentative by about $0.57M. Its Capital Projects total available is $190,271,408.09. That file has no internal service or enterprise sections. The status is therefore 'tentative'."
+    },
+    {
+      "gov": "pc",
+      "name": "City of Panama City",
+      "fiscal_year": "FY2026 (Oct 1, 2025 - Sep 30, 2026)",
+      "status": "adopted",
+      "total": 153837293,
+      "source_url": "https://www.panamacity.gov/ArchiveCenter/ViewFile/Item/1562",
+      "funds": [
+        {
+          "name": "001 General Fund",
+          "amount": 67703379,
+          "type": "general"
+        },
+        {
+          "name": "105 Infrastructure Surtax Fund",
+          "amount": 4990492,
+          "type": "special revenue"
+        },
+        {
+          "name": "120 St Andrews CRA Fund",
+          "amount": 1683223,
+          "type": "CRA"
+        },
+        {
+          "name": "130 Downtown CRA Fund",
+          "amount": 578482,
+          "type": "CRA"
+        },
+        {
+          "name": "140 Downtown North CRA Fund",
+          "amount": 1401220,
+          "type": "CRA"
+        },
+        {
+          "name": "180 Millville CRA Fund",
+          "amount": 1052417,
+          "type": "CRA"
+        },
+        {
+          "name": "150 City SHIP Fund",
+          "amount": 2176815,
+          "type": "special revenue"
+        },
+        {
+          "name": "190 Housing and Community Services Fund",
+          "amount": 1035654,
+          "type": "special revenue"
+        },
+        {
+          "name": "212 CIP 2013B Note Series Fund",
+          "amount": 1063564,
+          "type": "debt service"
+        },
+        {
+          "name": "215 CIP 2016 Note Series Fund",
+          "amount": 250993,
+          "type": "debt service"
+        },
+        {
+          "name": "216 CIP 2018 Note Series Fund",
+          "amount": 1420794,
+          "type": "debt service"
+        },
+        {
+          "name": "217 Infrastructure Surtax Note Series Fund",
+          "amount": 2126937,
+          "type": "debt service"
+        },
+        {
+          "name": "225 CIP 2023 Note Series Fund",
+          "amount": 8730000,
+          "type": "debt service"
+        },
+        {
+          "name": "410 Utilities Fund",
+          "amount": 33423755,
+          "type": "enterprise (utilities)"
+        },
+        {
+          "name": "440 Environmental Services Fund",
+          "amount": 11631407,
+          "type": "enterprise"
+        },
+        {
+          "name": "450 Marinas Fund",
+          "amount": 1866173,
+          "type": "enterprise"
+        },
+        {
+          "name": "501 Medical Self-Insurance",
+          "amount": 10145413,
+          "type": "internal service"
+        },
+        {
+          "name": "502 Dental Insurance",
+          "amount": 416814,
+          "type": "internal service"
+        },
+        {
+          "name": "503 Equipment Maintenance Fund",
+          "amount": 2139761,
+          "type": "internal service"
+        }
+      ],
+      "general_fund_departments": [
+        {
+          "name": "Police",
+          "amount": 19273932
+        },
+        {
+          "name": "Fire",
+          "amount": 12122358
+        },
+        {
+          "name": "Public works, streets, drainage & engineering",
+          "amount": 8325833
+        },
+        {
+          "name": "Parks, culture & recreation (incl. MLK campus, events, arts center)",
+          "amount": 6365061
+        },
+        {
+          "name": "Economic environment (incl. $1.84M CRA grant)",
+          "amount": 2071724
+        },
+        {
+          "name": "Development & building services",
+          "amount": 2755071
+        },
+        {
+          "name": "Administration & general government",
+          "amount": 10968341
+        },
+        {
+          "name": "Non-departmental (transfers/other uses)",
+          "amount": 5821059
+        }
+      ],
+      "revenues": [
+        {
+          "name": "Taxes",
+          "amount": 31225869
+        },
+        {
+          "name": "Licenses and permits (incl. $13.75M utility 'merchant fee')",
+          "amount": 15048000
+        },
+        {
+          "name": "Intergovernmental",
+          "amount": 18405032
+        },
+        {
+          "name": "Charges for services",
+          "amount": 62747722
+        },
+        {
+          "name": "Fines & forfeitures",
+          "amount": 210000
+        },
+        {
+          "name": "Miscellaneous",
+          "amount": 6725654
+        },
+        {
+          "name": "Other sources (transfers, reserves, financing)",
+          "amount": 19475016
+        }
+      ],
+      "notes": "From the 'Adopted Budget Report, Fiscal Year 2026'. Fund totals are the 'Adopted FY2026' figures from each fund's summary page. The debt service funds show 'Grand Total' on their expense pages. All 19 funds sum exactly to the All Funds Summary total of $153,837,293, which includes interfund transfers (about $136.5M excluding transfers, per budgets.json). General Fund departments were grouped by function by the researcher (same grouping as data/tax/budgets.json) and sum to $67,703,379. The General Fund also gives a $1.84M grant to the CRA, inside 'Economic environment'. Revenues by source come from the All Funds Summary."
+    },
+    {
+      "gov": "pcb",
+      "name": "City of Panama City Beach",
+      "fiscal_year": "FY2026 (Oct 1, 2025 - Sep 30, 2026)",
+      "status": "adopted",
+      "total": 282221725,
+      "source_url": "https://www.pcbfl.gov/Archive.aspx?ADID=151",
+      "funds": [
+        {
+          "name": "General Fund",
+          "amount": 71918315,
+          "type": "general"
+        },
+        {
+          "name": "Front Beach Road CRA Fund",
+          "amount": 68470410,
+          "type": "CRA"
+        },
+        {
+          "name": "Utility Fund",
+          "amount": 127314080,
+          "type": "enterprise (utilities)"
+        },
+        {
+          "name": "Stormwater Fund",
+          "amount": 11269500,
+          "type": "enterprise"
+        },
+        {
+          "name": "Pier Fund",
+          "amount": 1655050,
+          "type": "enterprise"
+        },
+        {
+          "name": "Aquatic Center Fund",
+          "amount": 1594370,
+          "type": "enterprise"
+        }
+      ],
+      "general_fund_departments": [
+        {
+          "name": "Legislative",
+          "amount": 478500
+        },
+        {
+          "name": "Executive",
+          "amount": 1087400
+        },
+        {
+          "name": "Administrative",
+          "amount": 3393500
+        },
+        {
+          "name": "Legal",
+          "amount": 595000
+        },
+        {
+          "name": "Planning",
+          "amount": 547340
+        },
+        {
+          "name": "Law Enforcement",
+          "amount": 22717050
+        },
+        {
+          "name": "Fire",
+          "amount": 14429050
+        },
+        {
+          "name": "Building",
+          "amount": 3031900
+        },
+        {
+          "name": "Street",
+          "amount": 11378175
+        },
+        {
+          "name": "Library",
+          "amount": 369200
+        },
+        {
+          "name": "Recreation",
+          "amount": 13891200
+        }
+      ],
+      "revenues": [
+        {
+          "name": "Property taxes",
+          "amount": 0
+        },
+        {
+          "name": "Business tax receipts",
+          "amount": 19740000
+        },
+        {
+          "name": "Utility taxes",
+          "amount": 6058000
+        },
+        {
+          "name": "Franchise fees",
+          "amount": 3560000
+        },
+        {
+          "name": "Intergovernmental (state shared/sales tax)",
+          "amount": 6565055
+        },
+        {
+          "name": "Impact fees",
+          "amount": 1292000
+        },
+        {
+          "name": "Licenses, permits & assessments",
+          "amount": 8707300
+        },
+        {
+          "name": "Contributions & donations",
+          "amount": 1891100
+        },
+        {
+          "name": "Grants",
+          "amount": 4872390
+        },
+        {
+          "name": "Other fees & miscellaneous",
+          "amount": 4584200
+        },
+        {
+          "name": "Transfers in",
+          "amount": 1575000
+        },
+        {
+          "name": "Cash carry-forward (difference to balance)",
+          "amount": 13073270
+        }
+      ],
+      "revenues_scope": "General Fund only",
+      "notes": "City of Panama City Beach FY 2026 Annual Budget, approved by the council Aug 28, 2025. The site blocks automated downloads, so the document was read through a web-fetch tool. The six funds sum exactly to the printed City Total of $282,221,725. The Information Technology internal service fund ($2,878,500) is listed separately and NOT included in the City Total. Adding it gives $285,100,225. The city levies no property tax. The CRA fund is mostly county and city tax-increment payments. General Fund departments sum exactly to $71,918,315. Revenues shown are General Fund only (from data/tax/budgets.json); 'cash carry-forward' is the balancing amount."
+    },
+    {
+      "gov": "lh",
+      "name": "City of Lynn Haven",
+      "fiscal_year": "FY2026 (Oct 1, 2025 - Sep 30, 2026)",
+      "status": "adopted",
+      "total": 61858708,
+      "source_url": "https://cityoflynnhaven.com/DocumentCenter/View/4411",
+      "funds": [
+        {
+          "name": "001 General Fund",
+          "amount": 24353606,
+          "type": "general"
+        },
+        {
+          "name": "021 General Impact Fees",
+          "amount": 194070,
+          "type": "special revenue"
+        },
+        {
+          "name": "101 Disaster Recovery Fund",
+          "amount": 4335514,
+          "type": "special revenue"
+        },
+        {
+          "name": "103 COVID-19 Fund",
+          "amount": 5000,
+          "type": "special revenue"
+        },
+        {
+          "name": "301 Surtax Fund",
+          "amount": 3396122,
+          "type": "special revenue / capital"
+        },
+        {
+          "name": "401 Water Fund",
+          "amount": 7261373,
+          "type": "enterprise (utilities)"
+        },
+        {
+          "name": "402 Sewer Fund",
+          "amount": 7563367,
+          "type": "enterprise (utilities)"
+        },
+        {
+          "name": "404 Stormwater Fund",
+          "amount": 8216123,
+          "type": "enterprise"
+        },
+        {
+          "name": "405 Sanitation Fund",
+          "amount": 3879472,
+          "type": "enterprise"
+        },
+        {
+          "name": "501 Water Impact Fees",
+          "amount": 150354,
+          "type": "enterprise (impact fees)"
+        },
+        {
+          "name": "502 Sewer Impact Fees",
+          "amount": 444762,
+          "type": "enterprise (impact fees)"
+        },
+        {
+          "name": "504 Stormwater Impact Fees",
+          "amount": 59673,
+          "type": "enterprise (impact fees)"
+        },
+        {
+          "name": "701 CRA Fund",
+          "amount": 1999274,
+          "type": "CRA"
+        }
+      ],
+      "general_fund_departments": [
+        {
+          "name": "Legislative",
+          "amount": 104646
+        },
+        {
+          "name": "Executive",
+          "amount": 704441
+        },
+        {
+          "name": "Finance",
+          "amount": 841817
+        },
+        {
+          "name": "Planning",
+          "amount": 271992
+        },
+        {
+          "name": "Public Works",
+          "amount": 26850
+        },
+        {
+          "name": "General Fund Debt Service",
+          "amount": 155267
+        },
+        {
+          "name": "Facility Maintenance",
+          "amount": 962024
+        },
+        {
+          "name": "Admin",
+          "amount": 3713586
+        },
+        {
+          "name": "IT",
+          "amount": 764069
+        },
+        {
+          "name": "Police",
+          "amount": 4792059
+        },
+        {
+          "name": "Fire",
+          "amount": 5343217
+        },
+        {
+          "name": "Code Enforcement",
+          "amount": 151278
+        },
+        {
+          "name": "Building Department",
+          "amount": 445520
+        },
+        {
+          "name": "HR",
+          "amount": 285718
+        },
+        {
+          "name": "LH Bayou Preserve",
+          "amount": 351575
+        },
+        {
+          "name": "Customer Service",
+          "amount": 140996
+        },
+        {
+          "name": "Street",
+          "amount": 2386135
+        },
+        {
+          "name": "Fleet",
+          "amount": 244474
+        },
+        {
+          "name": "Economic Development",
+          "amount": 1854630
+        },
+        {
+          "name": "Community Services/Sports",
+          "amount": 1437073
+        },
+        {
+          "name": "Community Services/Parks",
+          "amount": 1372371
+        },
+        {
+          "name": "Communications/Marketing",
+          "amount": 442623
+        },
+        {
+          "name": "Animal Shelter",
+          "amount": 267202
+        },
+        {
+          "name": "Indirect cost recovery (credit)",
+          "amount": -2705956
+        }
+      ],
+      "revenues": [
+        {
+          "name": "Property taxes",
+          "amount": 7251403
+        },
+        {
+          "name": "Other taxes (utility, franchise, etc.)",
+          "amount": 2340233
+        },
+        {
+          "name": "Permits & fees",
+          "amount": 1618293
+        },
+        {
+          "name": "Intergovernmental (state shared, sales tax, grants)",
+          "amount": 8933673
+        },
+        {
+          "name": "Charges for services",
+          "amount": 525931
+        },
+        {
+          "name": "Fines & forfeits",
+          "amount": 53247
+        },
+        {
+          "name": "Miscellaneous",
+          "amount": 891329
+        },
+        {
+          "name": "Other sources (transfers/fund balance)",
+          "amount": 2739497
+        }
+      ],
+      "revenues_scope": "General Fund only",
+      "notes": "'FY2025-26 Final Approved Budget (9-23-25)'. Columns are labeled 'FY 2026 Proposed', but the document is the final approved version. Fund totals come from the department-by-fund summary; the printed grand total is $61,858,708.25 ('Grand Total All Fund Revenues'). The rounded fund amounts sum to $61,858,710 because of rounding. General Fund departments are listed as printed, including a negative $2,705,956 'Indirect Recovery' line that charges overhead to other funds, and sum to $24,353,606. Revenues are General Fund only (grouped, from data/tax/budgets.json). The September 2025 TRIM budget summary ad (https://publicnoticesbaycountyfl.gov/public-notices, notice cnIWrJFRsphwVPPPSnxI) was based on the 4.2834-mill tentative rate and shows $145,010,564 'total revenues, transfers & balances' including $87.1M of fund balances. That figure is not comparable to the $61.9M appropriated total. The adopted rate was 4.05 mills. The department lines sum to $24,353,607, $1 over the subtotal because of rounding in the source."
+    },
+    {
+      "gov": "cw",
+      "name": "City of Callaway",
+      "fiscal_year": "FY2026 (Oct 1, 2025 - Sep 30, 2026)",
+      "status": "adopted",
+      "total": 55429117,
+      "source_url": "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_09182025-374?packet=true",
+      "funds": [
+        {
+          "name": "General Fund",
+          "amount": 13705820,
+          "type": "general"
+        },
+        {
+          "name": "Community Redevelopment Fund (CRA)",
+          "amount": 2634585,
+          "type": "CRA"
+        },
+        {
+          "name": "Capital Projects Fund",
+          "amount": 25496755,
+          "type": "capital"
+        },
+        {
+          "name": "Water Fund",
+          "amount": 4429122,
+          "type": "enterprise (utilities)"
+        },
+        {
+          "name": "Sewer Fund",
+          "amount": 8007965,
+          "type": "enterprise (utilities)"
+        },
+        {
+          "name": "Solid Waste Fund",
+          "amount": 1154870,
+          "type": "enterprise"
+        }
+      ],
+      "general_fund_departments": [
+        {
+          "name": "Legislative - City Commission",
+          "amount": 56050
+        },
+        {
+          "name": "City Manager",
+          "amount": 248653
+        },
+        {
+          "name": "City Clerk",
+          "amount": 152289
+        },
+        {
+          "name": "Finance",
+          "amount": 501404
+        },
+        {
+          "name": "Human Resources",
+          "amount": 94753
+        },
+        {
+          "name": "Legal Counsel",
+          "amount": 63500
+        },
+        {
+          "name": "Information Technology",
+          "amount": 107805
+        },
+        {
+          "name": "Planning & Code Enforcement",
+          "amount": 419709
+        },
+        {
+          "name": "General Government / Administration",
+          "amount": 854664
+        },
+        {
+          "name": "Law Enforcement (Sheriff contract)",
+          "amount": 2789554
+        },
+        {
+          "name": "Fire Department",
+          "amount": 2674305
+        },
+        {
+          "name": "Streets",
+          "amount": 1761184
+        },
+        {
+          "name": "Fleet Maintenance",
+          "amount": 302254
+        },
+        {
+          "name": "Leisure Services",
+          "amount": 2563294
+        },
+        {
+          "name": "Emergency Debris Removal",
+          "amount": 30314
+        },
+        {
+          "name": "Transfers Out - CIP",
+          "amount": 1086088
+        }
+      ],
+      "revenues": [
+        {
+          "name": "Taxes",
+          "amount": 4994169
+        },
+        {
+          "name": "Permits, fees & licenses",
+          "amount": 1229253
+        },
+        {
+          "name": "Impact fees",
+          "amount": 550000
+        },
+        {
+          "name": "Shared revenues",
+          "amount": 3487884
+        },
+        {
+          "name": "Charges for services",
+          "amount": 270079
+        },
+        {
+          "name": "Fines & forfeitures",
+          "amount": 49000
+        },
+        {
+          "name": "Interest & other earnings",
+          "amount": 417785
+        },
+        {
+          "name": "Rents",
+          "amount": 103300
+        },
+        {
+          "name": "Sales of fixed assets",
+          "amount": 5000
+        },
+        {
+          "name": "Miscellaneous",
+          "amount": 88000
+        },
+        {
+          "name": "Transfers in (cost allocation)",
+          "amount": 860736
+        },
+        {
+          "name": "Budgeted use of fund reserves",
+          "amount": 114525
+        },
+        {
+          "name": "Budgeted use of restricted fund reserves",
+          "amount": 1536089
+        }
+      ],
+      "revenues_scope": "General Fund only",
+      "notes": "Resolution 25-22, adopting the FY2025-26 final budget, in the Sept 18, 2025 final budget hearing agenda packet (scanned, read by OCR). Minutes confirm unanimous adoption: https://www.cityofcallaway.com/Archive.aspx?ADID=3789. The 'City-Wide Summary' by fund sums exactly to $55,429,117, which includes interfund transfers. General Fund departments and General Fund revenues each sum to $13,705,820. Discrepancy in the source: the General Fund shows 'Transfers Out - CIP' of $1,086,088, but the Capital Projects Fund budgets $1,370,501 in 'Transfers from General Fund'. The resolution does not explain the $284,413 difference. Policing is by contract with the Bay County Sheriff ('Law Enforcement'). Millage: 2.7000 (Resolution 25-21)."
+    },
+    {
+      "gov": "sp",
+      "name": "City of Springfield",
+      "fiscal_year": "FY2026 (Oct 1, 2025 - Sep 30, 2026)",
+      "status": "adopted",
+      "total": 28655332,
+      "source_url": "https://www.springfieldfl.net/media/10201",
+      "funds": [
+        {
+          "name": "General Fund",
+          "amount": 17954071,
+          "type": "general"
+        },
+        {
+          "name": "Community Redevelopment Fund (CRA)",
+          "amount": 1811373,
+          "type": "CRA"
+        },
+        {
+          "name": "Debt Service Fund",
+          "amount": 594559,
+          "type": "debt service"
+        },
+        {
+          "name": "Water Fund",
+          "amount": 2167567,
+          "type": "enterprise (utilities)"
+        },
+        {
+          "name": "Sewer Fund",
+          "amount": 4607751,
+          "type": "enterprise (utilities)"
+        },
+        {
+          "name": "Sanitation Fund",
+          "amount": 1520011,
+          "type": "enterprise"
+        }
+      ],
+      "general_fund_departments": [
+        {
+          "name": "Legislative - Commission",
+          "amount": 394097
+        },
+        {
+          "name": "Administration",
+          "amount": 1832447
+        },
+        {
+          "name": "Police",
+          "amount": 3800375
+        },
+        {
+          "name": "Fire",
+          "amount": 2153688
+        },
+        {
+          "name": "Code Enforcement",
+          "amount": 268900
+        },
+        {
+          "name": "FEMA Projects (Hurricane Michael reimbursable)",
+          "amount": 7865213
+        },
+        {
+          "name": "Maintenance",
+          "amount": 305576
+        },
+        {
+          "name": "Street",
+          "amount": 887288
+        },
+        {
+          "name": "Parks",
+          "amount": 446487
+        }
+      ],
+      "revenues": [
+        {
+          "name": "All taxes",
+          "amount": 5459185
+        },
+        {
+          "name": "Permits, fees & licenses",
+          "amount": 642200
+        },
+        {
+          "name": "Assessments",
+          "amount": 867070
+        },
+        {
+          "name": "Shared revenues",
+          "amount": 710653
+        },
+        {
+          "name": "Charges for services",
+          "amount": 28250
+        },
+        {
+          "name": "Fines and forfeitures",
+          "amount": 21250
+        },
+        {
+          "name": "Contributions and donations",
+          "amount": 18000
+        },
+        {
+          "name": "FEMA restricted funds",
+          "amount": 7865213
+        },
+        {
+          "name": "Miscellaneous",
+          "amount": 42250
+        },
+        {
+          "name": "Transfers in",
+          "amount": 2300000
+        }
+      ],
+      "revenues_scope": "General Fund only",
+      "notes": "Resolution 25-15, 'Final Annual Budget' for FY2025-26, adopted Sept 15, 2025 (scanned, read by OCR). Fund totals sum to the stated $28,655,332, which includes the $2.3M enterprise-to-General Fund transfer and the $594,559 transfer to the debt service fund. Inconsistencies in the source: (1) the Debt Service Fund is funded by a 'Projected Transfer from General Fund' of $594,559, but no transfer-out line appears among the General Fund appropriations, which sum to $17,954,071 without it; (2) on the scanned CRA page, OCR read the subtotal lines as '$4,811,373' and '$4,814,373', while the line items and the city-wide summary show $1,811,373. The scan is unclear there, so the city-wide summary figure is used. The tentative TRIM 'Budget Summary' ad (Sept 10, 2025; https://publicnoticesbaycountyfl.gov/public-notices, notice dj6eRC1nhBjvN3j2Sb9R) showed $26,843,949 total and a CRA fund of $603,749. The final resolution is higher. Also on the site: Resolution 26-02, an amended FY25-26 budget (https://www.springfieldfl.net/media/10476), and Resolution 26-12, the FY26-27 final budget (https://www.springfieldfl.net/media/10891); neither is used here."
+    },
+    {
+      "gov": "parker",
+      "name": "City of Parker",
+      "fiscal_year": "FY2026 (Oct 1, 2025 - Sep 30, 2026)",
+      "status": "adopted",
+      "total": 17252341,
+      "source_url": "https://cityofparker.com/wp-content/uploads/filr/6275/Agenda-Budget-Meeting-091725.pdf",
+      "funds": [
+        {
+          "name": "General Fund",
+          "amount": 5691404,
+          "type": "general"
+        },
+        {
+          "name": "Utility Fund",
+          "amount": 4804691,
+          "type": "enterprise (utilities)"
+        },
+        {
+          "name": "Capital Fund",
+          "amount": 6500000,
+          "type": "capital"
+        },
+        {
+          "name": "Community Redevelopment Agency (CRA)",
+          "amount": 256246,
+          "type": "CRA"
+        }
+      ],
+      "general_fund_departments": [
+        {
+          "name": "General Government",
+          "amount": 591529
+        },
+        {
+          "name": "Police",
+          "amount": 1278338
+        },
+        {
+          "name": "Fire",
+          "amount": 530518
+        },
+        {
+          "name": "Code",
+          "amount": 174178
+        },
+        {
+          "name": "Trash",
+          "amount": 296986
+        },
+        {
+          "name": "Street",
+          "amount": 2254966
+        },
+        {
+          "name": "Fleet",
+          "amount": 59536
+        },
+        {
+          "name": "Parks",
+          "amount": 417853
+        },
+        {
+          "name": "Transfer to Capital Fund",
+          "amount": 87500
+        }
+      ],
+      "revenues": [
+        {
+          "name": "Ad valorem tax (3.0 mills)",
+          "amount": 903262
+        },
+        {
+          "name": "Local option gas tax",
+          "amount": 97332
+        },
+        {
+          "name": "Utility franchise fees",
+          "amount": 333000
+        },
+        {
+          "name": "Utility taxes",
+          "amount": 560953
+        },
+        {
+          "name": "Communications service tax",
+          "amount": 116100
+        },
+        {
+          "name": "Sales & use tax",
+          "amount": 1359398
+        },
+        {
+          "name": "Solid waste disposal fees",
+          "amount": 396000
+        },
+        {
+          "name": "Other revenue sources",
+          "amount": 212820
+        },
+        {
+          "name": "Proceeds from reserves",
+          "amount": 937429
+        },
+        {
+          "name": "Transfer from Utility Fund",
+          "amount": 775111
+        }
+      ],
+      "revenues_scope": "General Fund only",
+      "notes": "Resolution 2025-414 (city budget) and CRA Resolution 2025-29 as presented in the Sept 17, 2025 final budget hearing packet (scanned, read by OCR). Approved minutes confirm both were adopted 5-0: https://cityofparker.com/wp-content/uploads/filr/6311/Approved-Minutes-2nd-Budget-mtg-091725.pdf. The resolution does not state a single grand total. 'total' here is the researcher's sum of the three city funds ($16,996,095) plus the CRA ($256,246). It includes interfund transfers ($775,111 utility to General Fund, $1,412,500 utility to capital, $87,500 General Fund to capital). Net of those, the total is $14,977,230. The Capital Fund is a $5.0M SRF loan for a water main plus $1.5M for a fire truck. The fire truck was in the General Fund 'Fire' line in the Aug 2025 draft, which is why adopted Fire is $530,518 versus $2,025,518 in the draft. General Fund appropriations and revenues each sum to $5,691,404. The printed General Fund revenue lines sum to $5,691,405, $1 more than the printed total of $5,691,404, due to rounding in the source."
+    },
+    {
+      "gov": "mb",
+      "name": "City of Mexico Beach",
+      "fiscal_year": "FY2026 (Oct 1, 2025 - Sep 30, 2026)",
+      "status": "tentative",
+      "total": 19700964,
+      "source_url": "https://publicnoticesbaycountyfl.gov/public-notices",
+      "source_document": "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/cDMgj9hUNU9paS49n7yQ/6602./cropped-966.pdf",
+      "funds": [
+        {
+          "name": "General Fund",
+          "amount": 13826168,
+          "type": "general"
+        },
+        {
+          "name": "Enterprise Funds (water/sewer)",
+          "amount": 5874795,
+          "type": "enterprise (utilities)"
+        }
+      ],
+      "general_fund_departments": [
+        {
+          "name": "Elected Officials",
+          "amount": 67805
+        },
+        {
+          "name": "City Administrator",
+          "amount": 156380
+        },
+        {
+          "name": "City Clerk",
+          "amount": 158319
+        },
+        {
+          "name": "Legal",
+          "amount": 100000
+        },
+        {
+          "name": "Development Services",
+          "amount": 125000
+        },
+        {
+          "name": "General Government",
+          "amount": 665970
+        },
+        {
+          "name": "Police (Sheriff contract)",
+          "amount": 1304360
+        },
+        {
+          "name": "Fire",
+          "amount": 1251368
+        },
+        {
+          "name": "Code Enforcement",
+          "amount": 79001
+        },
+        {
+          "name": "General Maintenance",
+          "amount": 233491
+        },
+        {
+          "name": "Roads & Streets",
+          "amount": 1534850
+        },
+        {
+          "name": "Canal",
+          "amount": 6408521
+        },
+        {
+          "name": "Vehicle Maintenance",
+          "amount": 150783
+        },
+        {
+          "name": "Parks & Recreation",
+          "amount": 1026181
+        },
+        {
+          "name": "Transfers",
+          "amount": 564139
+        }
+      ],
+      "revenues": [
+        {
+          "name": "Ad valorem taxes (5.5 mills, tentative)",
+          "amount": 4777709
+        },
+        {
+          "name": "Franchise fees",
+          "amount": 182672
+        },
+        {
+          "name": "Utility taxes",
+          "amount": 136489
+        },
+        {
+          "name": "Communication services tax",
+          "amount": 28945
+        },
+        {
+          "name": "Sales taxes",
+          "amount": 231254
+        },
+        {
+          "name": "Gas taxes",
+          "amount": 66462
+        },
+        {
+          "name": "State revenue sharing",
+          "amount": 48585
+        },
+        {
+          "name": "Licenses & permits",
+          "amount": 192305
+        },
+        {
+          "name": "Fines & forfeitures",
+          "amount": 13084
+        },
+        {
+          "name": "Interest income",
+          "amount": 461249
+        },
+        {
+          "name": "Other intergovernmental",
+          "amount": 81263
+        },
+        {
+          "name": "Charges for services",
+          "amount": 4365876
+        },
+        {
+          "name": "Miscellaneous",
+          "amount": 136227
+        },
+        {
+          "name": "Grants",
+          "amount": 5918131
+        },
+        {
+          "name": "Transfers",
+          "amount": 1193470
+        },
+        {
+          "name": "Prior year surplus (reserves)",
+          "amount": 1867242
+        }
+      ],
+      "revenues_scope": "All funds",
+      "notes": "The city's statutory TRIM 'Budget Summary, Fiscal Year 2025-2026' ad, published Sept 19, 2025 on the county public-notice site (notice cDMgj9hUNU9paS49n7yQ). It is based on the tentative 5.5-mill rate. The city adopted 5.25 mills about Sept 24, 2025, so the adopted ad valorem revenue and possibly the totals are lower than shown. No adopted budget document is posted online: the city's 'Budget & Financials' page has no files. Fund totals, departments and revenues reconcile exactly to the printed totals ($19,700,964; General Fund $13,826,168). The enterprise column also includes $224,000 of debt service and $28,617 of transfers. 'Canal' ($6.41M) is mostly grant-funded ($5.92M in grants). The ad states proposed operating expenditures are 42% above the prior year. The printed column items sum to $19,700,963, $1 under the printed total, due to rounding in the source."
+    }
+  ]
+}
