@@ -20,6 +20,16 @@ sel.innerHTML = D.districts.map(d => `<option value="${esc(d.id)}">${esc(d.label
 try { const s = localStorage.getItem('taxDist'); if (s && D.districts.some(d => d.id === s)) sel.value = s; } catch (e) {}
 const readVal = () => { const n = parseInt(String(valIn.value).replace(/[^0-9]/g, ''), 10); return isFinite(n) ? Math.min(n, 1e9) : 0; };
 const kind = () => document.querySelector('input[name="kind"]:checked').value;
+// inputs live in the link (?v=value&d=district&k=home|new|non) so an estimate can be shared, e.g. from My Address
+const P0 = new URLSearchParams(location.search);
+if (P0.get('d') && D.districts.some(d => d.id === P0.get('d'))) sel.value = P0.get('d');
+if (/^\d+$/.test(P0.get('v') || '')) valIn.value = Math.min(+P0.get('v'), 1e9).toLocaleString('en-US');
+{ const k0 = P0.get('k') || (P0.get('h') === '0' ? 'non' : P0.get('h') === '1' ? 'home' : ''), r = document.querySelector(`input[name="kind"][value="${['home', 'new', 'non'].includes(k0) ? k0 : 'x'}"]`); if (r) r.checked = true; }
+function saveUrl(v) {
+  const u = new URL(location.href);
+  u.searchParams.set('v', v); u.searchParams.set('d', sel.value); u.searchParams.set('k', kind()); u.searchParams.delete('h');
+  try { history.replaceState(null, '', u); } catch (e) {}
+}
 
 // taxable values per scenario: [label, school, non-school]
 function scenarios(v, k) {
@@ -35,6 +45,7 @@ function bill(dist, sc) {
 function calc() {
   const dist = D.districts.find(d => d.id === sel.value), v = readVal(), k = kind();
   try { localStorage.setItem('taxDist', dist.id); } catch (e) {}
+  if (calc.ready) saveUrl(v);
   const scs = scenarios(v, k), bills = scs.map(sc => bill(dist, sc));
   const tots = bills.map(b => b.reduce((a, r) => a + r.amt, 0));
   const schoolT = bills.map(b => b.filter(r => r.school).reduce((a, r) => a + r.amt, 0));
@@ -62,7 +73,8 @@ function calc() {
 valIn.addEventListener('input', () => { const pos = valIn.value.length - valIn.selectionStart, n = readVal(); valIn.value = n ? n.toLocaleString('en-US') : ''; const p = Math.max(0, valIn.value.length - pos); valIn.setSelectionRange(p, p); calc(); });
 sel.addEventListener('change', calc);
 document.querySelectorAll('input[name="kind"]').forEach(r => r.addEventListener('change', calc));
-calc();
+calc(); calc.ready = true; // don't add params to a plain visit until someone changes an input
+if (['v', 'd', 'k', 'h'].some(k => P0.has(k))) { saveUrl(readVal()); if (!location.hash) $('calc')?.scrollIntoView(); }
 
 /* ---------- budget impact ---------- */
 const FYS = ['FY2028', 'FY2029', 'FY2030', 'FY2031', 'FY2032'];
