@@ -209,3 +209,4 @@ print(len(out['payments']), Counter((p['cra'], p['status'], p['count']) for p in
 import subprocess, sys
 subprocess.run([sys.executable, os.path.join('entities', 'build_entities.py')], check=True)
 subprocess.run([sys.executable, os.path.join('campaign', 'build_vendor_matches.py')], check=True)
+subprocess.run([sys.executable, os.path.join('campaign', 'build_contract_votes.py')], check=True)

@@ -335,3 +335,14 @@ def parse_date(text, fy_start=10):
 def date_fields(text, fy_start=10):
     s, e, p = parse_date(text, fy_start)
     return {'date_start': s, 'date_end': e, 'date_precision': p}
+
+
+# ---------- votes ----------
+def vote_ids(votes):
+    """Stable id per recorded vote: body:date:first-words-of-item, with -2, -3 ... when two votes would share one."""
+    out, seen = [], {}
+    for v in votes:
+        base = f'{v["body"]}:{v["date"]}:' + re.sub(r'[^a-z0-9]+', '-', (v.get('item') or '').lower())[:40].strip('-')
+        seen[base] = seen.get(base, 0) + 1
+        out.append(base if seen[base] == 1 else f'{base}-{seen[base]}')
+    return out

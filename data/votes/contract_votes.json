@@ -1,0 +1,1415 @@
+{
+ "as_of": "2026-10-21",
+ "method": "Writes data/votes/contract_votes.json and data/votes/contract_votes_review.json. Run by data/build.py.\nA vote is linked to a contract record when all of these hold:\n  * same government (vote body -> gov_id; a CRA board counts as its city),\n  * vote date within 45 days of the record's agenda date (either side),\n  * and the vote agrees with the record in at least two ways, from:\n      vendor_name  - the vote text names the vendor by one of its aliases (whole words, at least 6 letters),\n      item_number  - the vote text and the record share a bid/contract/RFQ number such as \"PC24-005\" or \"24-18\",\n      agenda_item  - the vote text and the record's description share at least 3 distinctive words (not the vendor's name),\n      amount       - the vote amount equals the record amount to the dollar (and the vote names no other vendor);\n    or the vendor is named in a vote on the same day, the amounts are within 10% (or one is missing) and no other vendor is named;\n    or the number matches on the same day.\nWhen several votes qualify, the one with the most kinds of agreement (then the closest date) is kept. Everything weaker\n(amount only, description only, vendor named but amounts differ) goes to the review file. A link shows that the minutes record a vote on the item; it does not show why anyone voted as they did.",
+ "count_links": 82,
+ "count_records_linked": 82,
+ "count_votes_linked": 81,
+ "count_contracts_linked": 79,
+ "by_method": {
+  "vendor_name+agenda_item+amount": 26,
+  "vendor_name+item_number+agenda_item+amount": 26,
+  "vendor_name+amount": 5,
+  "vendor_name+item_number+amount": 5,
+  "vendor_name+item_number+agenda_item": 9,
+  "vendor_name+agenda_item": 2,
+  "item_number+agenda_item+amount": 4,
+  "vendor_name+item_number": 1,
+  "item_number+agenda_item": 1,
+  "agenda_item+amount": 3
+ },
+ "links": [
+  {
+   "record_id": "contract:42",
+   "record_type": "contract",
+   "vendor_ids": [
+    "hall-contracting-and-construction"
+   ],
+   "gov_id": "county",
+   "record_date": "2024-03-05",
+   "record_amount": 1701628.0,
+   "record_what": "Renovation, Emergency Services maintenance complex",
+   "record_url": "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=2139",
+   "vote_index": 2,
+   "vote_id": "bay-bocc:2024-03-05:emergency-services-maintenance-complex-r",
+   "vote_date": "2024-03-05",
+   "days_apart": 0,
+   "match_method": "vendor_name+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:45",
+   "record_type": "contract",
+   "vendor_ids": [
+    "barge-design-solutions"
+   ],
+   "gov_id": "county",
+   "record_date": "2024-04-02",
+   "record_amount": 1479500.0,
+   "record_what": "Contract 24-06, Water Treatment Plant resiliency project (additional filters)",
+   "record_url": "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=2497",
+   "vote_index": 5,
+   "vote_id": "bay-bocc:2024-04-02:contract-24-06-water-treatment-plant-res",
+   "vote_date": "2024-04-02",
+   "days_apart": 0,
+   "match_method": "vendor_name+item_number+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:46",
+   "record_type": "contract",
+   "vendor_ids": [
+    "c-w-roberts-contracting"
+   ],
+   "gov_id": "county",
+   "record_date": "2024-04-02",
+   "record_amount": 4747474.0,
+   "record_what": "ITB 24-19, Star Avenue water resiliency",
+   "record_url": "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=2497",
+   "vote_index": 4,
+   "vote_id": "bay-bocc:2024-04-02:itb-24-19-star-avenue-water-resiliency-c",
+   "vote_date": "2024-04-02",
+   "days_apart": 0,
+   "match_method": "vendor_name+item_number+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:47",
+   "record_type": "contract",
+   "vendor_ids": [
+    "rj-gorman-marine-construction"
+   ],
+   "gov_id": "county",
+   "record_date": "2024-04-16",
+   "record_amount": 11015500.0,
+   "record_what": "Contract 24-18, Eastern Shipbuilding Nelson facility seawall construction and dredging",
+   "record_url": "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=2647",
+   "vote_index": 6,
+   "vote_id": "bay-bocc:2024-04-16:contract-24-18-eastern-shipbuilding-nels",
+   "vote_date": "2024-04-16",
+   "days_apart": 0,
+   "match_method": "vendor_name+item_number+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:50",
+   "record_type": "contract",
+   "vendor_ids": [
+    "american-sand-and-asphalt-paving"
+   ],
+   "gov_id": "county",
+   "record_date": "2024-05-21",
+   "record_amount": 2600402.0,
+   "record_what": "Contract 24-27, FY24 annual resurfacing Phase 1",
+   "record_url": "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=2970",
+   "vote_index": 7,
+   "vote_id": "bay-bocc:2024-05-21:fy24-annual-resurfacing-phase-1-american",
+   "vote_date": "2024-05-21",
+   "days_apart": 0,
+   "match_method": "vendor_name+amount"
+  },
+  {
+   "record_id": "contract:51",
+   "record_type": "contract",
+   "vendor_ids": [
+    "roberts-and-roberts"
+   ],
+   "gov_id": "county",
+   "record_date": "2024-05-21",
+   "record_amount": 1349831.88,
+   "record_what": "Contract 24-34, FY24 urban local dirt roads",
+   "record_url": "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=2970",
+   "vote_index": 8,
+   "vote_id": "bay-bocc:2024-05-21:fy24-urban-local-dirt-roads-roberts-and",
+   "vote_date": "2024-05-21",
+   "days_apart": 0,
+   "match_method": "vendor_name+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:56",
+   "record_type": "contract",
+   "vendor_ids": [
+    "dominguez-design-build"
+   ],
+   "gov_id": "county",
+   "record_date": "2024-07-02",
+   "record_amount": 4385000.0,
+   "record_what": "Bay County Jail substance abuse unit construction",
+   "record_url": "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=3221",
+   "vote_index": 9,
+   "vote_id": "bay-bocc:2024-07-02:bay-county-jail-substance-abuse-unit-con",
+   "vote_date": "2024-07-02",
+   "days_apart": 0,
+   "match_method": "vendor_name+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:61",
+   "record_type": "contract",
+   "vendor_ids": [
+    "american-sand-and-asphalt-paving"
+   ],
+   "gov_id": "county",
+   "record_date": "2024-08-06",
+   "record_amount": 1836389.17,
+   "record_what": "Contract 24-47, FY24 annual resurfacing Phase 2",
+   "record_url": "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=3435",
+   "vote_index": 11,
+   "vote_id": "bay-bocc:2024-08-06:fy24-annual-resurfacing-phase-2-american",
+   "vote_date": "2024-08-06",
+   "days_apart": 0,
+   "match_method": "vendor_name+amount"
+  },
+  {
+   "record_id": "contract:63",
+   "record_type": "contract",
+   "vendor_ids": [
+    "weeks-marine"
+   ],
+   "gov_id": "county",
+   "record_date": "2024-08-20",
+   "record_amount": 27180950.0,
+   "record_what": "Contract 24-45, Mexico Beach beach restoration project",
+   "record_url": "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=3450",
+   "vote_index": 13,
+   "vote_id": "bay-bocc:2024-08-20:contract-24-45-mexico-beach-beach-restor",
+   "vote_date": "2024-08-20",
+   "days_apart": 0,
+   "match_method": "vendor_name+item_number+amount"
+  },
+  {
+   "record_id": "contract:65",
+   "record_type": "contract",
+   "vendor_ids": [
+    "marshall-brothers-construction-and-engineering"
+   ],
+   "gov_id": "county",
+   "record_date": "2024-09-04",
+   "record_amount": 1391764.8,
+   "record_what": "Contract 24-52, wastewater distribution system mitigation project",
+   "record_url": "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=3498",
+   "vote_index": 16,
+   "vote_id": "bay-bocc:2024-09-04:contract-24-52-wastewater-distribution-s",
+   "vote_date": "2024-09-04",
+   "days_apart": 0,
+   "match_method": "vendor_name+item_number+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:68",
+   "record_type": "contract",
+   "vendor_ids": [
+    "marshall-brothers-construction-and-engineering"
+   ],
+   "gov_id": "county",
+   "record_date": "2024-09-17",
+   "record_amount": 2794384.0,
+   "record_what": "ITB 24-41, water treatment plant electrical resiliency construction",
+   "record_url": "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=3581",
+   "vote_index": 20,
+   "vote_id": "bay-bocc:2024-09-17:itb-24-41-water-treatment-electrical-res",
+   "vote_date": "2024-09-17",
+   "days_apart": 0,
+   "match_method": "vendor_name+item_number+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:69",
+   "record_type": "contract",
+   "vendor_ids": [
+    "cogburn-brothers"
+   ],
+   "gov_id": "county",
+   "record_date": "2024-09-17",
+   "record_amount": 1310583.59,
+   "record_what": "ITB 24-57, water treatment plant electrical resiliency project, equipment only",
+   "record_url": "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=3581",
+   "vote_index": 21,
+   "vote_id": "bay-bocc:2024-09-17:itb-24-57-wtp-electrical-resiliency-equi",
+   "vote_date": "2024-09-17",
+   "days_apart": 0,
+   "match_method": "vendor_name+item_number+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:71",
+   "record_type": "contract",
+   "vendor_ids": [
+    "culpepper-construction"
+   ],
+   "gov_id": "county",
+   "record_date": "2024-11-19",
+   "record_amount": 1422838.0,
+   "record_what": "ITB 24-49, potable water treatment plant generator (Hurricane Ian project 4673-005-R)",
+   "record_url": "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=3824",
+   "vote_index": 25,
+   "vote_id": "bay-bocc:2024-11-19:itb-24-49-potable-water-treatment-plant",
+   "vote_date": "2024-11-19",
+   "days_apart": 0,
+   "match_method": "vendor_name+item_number+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:73",
+   "record_type": "contract",
+   "vendor_ids": [
+    "reeves-and-shaw-construction"
+   ],
+   "gov_id": "county",
+   "record_date": "2024-11-19",
+   "record_amount": 13620000.0,
+   "record_what": "ITB 25-02, Southport Sports Complex construction (lump-sum base bid $11,800,000 plus additive alternate $1,820,000 for fields 5 and 6)",
+   "record_url": "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=3824",
+   "vote_index": 24,
+   "vote_id": "bay-bocc:2024-11-19:itb-25-02-southport-sports-complex-reeve",
+   "vote_date": "2024-11-19",
+   "days_apart": 0,
+   "match_method": "vendor_name+item_number+agenda_item"
+  },
+  {
+   "record_id": "contract:74",
+   "record_type": "contract",
+   "vendor_ids": [
+    "charles-n-white-construction"
+   ],
+   "gov_id": "county",
+   "record_date": "2024-12-03",
+   "record_amount": 2846222.0,
+   "record_what": "Emergency Services criminal jail saferoom",
+   "record_url": "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=3849",
+   "vote_index": 26,
+   "vote_id": "bay-bocc:2024-12-03:contract-25-01-criminal-jail-saferoom-ch",
+   "vote_date": "2024-12-03",
+   "days_apart": 0,
+   "match_method": "vendor_name+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:75",
+   "record_type": "contract",
+   "vendor_ids": [
+    "metric-engineering"
+   ],
+   "gov_id": "county",
+   "record_date": "2024-12-03",
+   "record_amount": 2999996.28,
+   "record_what": "Contract 24-15, CR 2321 project development and environment (PD&E) study",
+   "record_url": "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=3849",
+   "vote_index": 27,
+   "vote_id": "bay-bocc:2024-12-03:contract-24-15-cr-2321-pd-e-study-metric",
+   "vote_date": "2024-12-03",
+   "days_apart": 0,
+   "match_method": "vendor_name+item_number+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:76",
+   "record_type": "contract",
+   "vendor_ids": [
+    "ecsc"
+   ],
+   "gov_id": "county",
+   "record_date": "2024-12-17",
+   "record_amount": 1843350.21,
+   "record_what": "Contract 24-50, Redwood Avenue drainage improvements",
+   "record_url": "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=3870",
+   "vote_index": 28,
+   "vote_id": "bay-bocc:2024-12-17:contract-24-50-redwood-ave-drainage-ecsc",
+   "vote_date": "2024-12-17",
+   "days_apart": 0,
+   "match_method": "vendor_name+item_number+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:77",
+   "record_type": "contract",
+   "vendor_ids": [
+    "astroturf"
+   ],
+   "gov_id": "county",
+   "record_date": "2024-12-17",
+   "record_amount": 4046613.0,
+   "record_what": "Convert three Publix Sports Park fields from grass to artificial turf (TDC recommendation; purchase order not to exceed)",
+   "record_url": "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=3870",
+   "vote_index": 29,
+   "vote_id": "bay-bocc:2024-12-17:publix-sports-park-turf-conversion-3-fie",
+   "vote_date": "2024-12-17",
+   "days_apart": 0,
+   "match_method": "vendor_name+agenda_item"
+  },
+  {
+   "record_id": "contract:79",
+   "record_type": "contract",
+   "vendor_ids": [
+    "marshall-brothers-construction-and-engineering"
+   ],
+   "gov_id": "county",
+   "record_date": "2025-02-04",
+   "record_amount": 2469690.0,
+   "record_what": "Contract 24-21, potable water distribution system hardening project",
+   "record_url": "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=3925",
+   "vote_index": 30,
+   "vote_id": "bay-bocc:2025-02-04:contract-24-21-potable-water-distributio",
+   "vote_date": "2025-02-04",
+   "days_apart": 0,
+   "match_method": "vendor_name+item_number+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:80",
+   "record_type": "contract",
+   "vendor_ids": [
+    "royal-american-construction"
+   ],
+   "gov_id": "county",
+   "record_date": "2025-02-19",
+   "record_amount": 4148597.0,
+   "record_what": "Contract 24-58, North Bay septic-to-sewer conversion Phase 1A",
+   "record_url": "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=3937",
+   "vote_index": 31,
+   "vote_id": "bay-bocc:2025-02-19:contract-24-58-north-bay-septic-to-sewer",
+   "vote_date": "2025-02-19",
+   "days_apart": 0,
+   "match_method": "vendor_name+item_number+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:82",
+   "record_type": "contract",
+   "vendor_ids": [
+    "accurate-drilling-systems"
+   ],
+   "gov_id": "county",
+   "record_date": "2025-03-04",
+   "record_amount": 6524000.0,
+   "record_what": "ITB 25-05, Dupont Bridge subaqueous water main",
+   "record_url": "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=3985",
+   "vote_index": 32,
+   "vote_id": "bay-bocc:2025-03-04:contract-25-05-dupont-bridge-subaqueous",
+   "vote_date": "2025-03-04",
+   "days_apart": 0,
+   "match_method": "vendor_name+item_number+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:84",
+   "record_type": "contract",
+   "vendor_ids": [
+    "a-c-schultes"
+   ],
+   "gov_id": "county",
+   "record_date": "2025-03-18",
+   "record_amount": 16364100.0,
+   "record_what": "Contract 25-04, North Bay underground injection control wells (Utility Services)",
+   "record_url": "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=4024",
+   "vote_index": 33,
+   "vote_id": "bay-bocc:2025-03-18:contract-25-04-north-bay-wwtf-effluent-d",
+   "vote_date": "2025-03-18",
+   "days_apart": 0,
+   "match_method": "vendor_name+item_number+amount"
+  },
+  {
+   "record_id": "contract:85",
+   "record_type": "contract",
+   "vendor_ids": [
+    "anderson-columbia"
+   ],
+   "gov_id": "county",
+   "record_date": "2025-04-01",
+   "record_amount": 1228745.71,
+   "record_what": "Contract 25-20, FY25 dirt road paving",
+   "record_url": "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=4052",
+   "vote_index": 34,
+   "vote_id": "bay-bocc:2025-04-01:contract-25-20-fy25-dirt-road-paving-and",
+   "vote_date": "2025-04-01",
+   "days_apart": 0,
+   "match_method": "vendor_name+item_number+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:86",
+   "record_type": "contract",
+   "vendor_ids": [
+    "c-w-roberts-contracting"
+   ],
+   "gov_id": "county",
+   "record_date": "2025-04-01",
+   "record_amount": 1217910.15,
+   "record_what": "Contract 25-27, FY25 annual resurfacing Phase 1",
+   "record_url": "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=4052",
+   "vote_index": 35,
+   "vote_id": "bay-bocc:2025-04-01:contract-25-27-fy25-annual-resurfacing-p",
+   "vote_date": "2025-04-01",
+   "days_apart": 0,
+   "match_method": "vendor_name+item_number+amount"
+  },
+  {
+   "record_id": "contract:87",
+   "record_type": "contract",
+   "vendor_ids": [
+    "phoenix-construction-services"
+   ],
+   "gov_id": "county",
+   "record_date": "2025-04-01",
+   "record_amount": 8571430.0,
+   "record_what": "Contract 25-06, Frankford Avenue booster station improvements",
+   "record_url": "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=4052",
+   "vote_index": 36,
+   "vote_id": "bay-bocc:2025-04-01:contract-25-06-frankford-ave-booster-sta",
+   "vote_date": "2025-04-01",
+   "days_apart": 0,
+   "match_method": "vendor_name+item_number+agenda_item"
+  },
+  {
+   "record_id": "contract:90",
+   "record_type": "contract",
+   "vendor_ids": [
+    "asrus"
+   ],
+   "gov_id": "county",
+   "record_date": "2025-04-15",
+   "record_amount": 1225000.0,
+   "record_what": "Contract 25-22, CEI for North Bay WWTF injection wells",
+   "record_url": "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=4095",
+   "vote_index": 38,
+   "vote_id": "bay-bocc:2025-04-15:contract-25-22-cei-for-north-bay-wwtf-in",
+   "vote_date": "2025-04-15",
+   "days_apart": 0,
+   "match_method": "item_number+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:91",
+   "record_type": "contract",
+   "vendor_ids": [
+    "ncmc"
+   ],
+   "gov_id": "county",
+   "record_date": "2025-04-15",
+   "record_amount": 1552000.0,
+   "record_what": "Contract 25-26, filter underdrain replacement",
+   "record_url": "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=4095",
+   "vote_index": 37,
+   "vote_id": "bay-bocc:2025-04-15:contract-25-26-filter-underdrain-replace",
+   "vote_date": "2025-04-15",
+   "days_apart": 0,
+   "match_method": "item_number+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:96",
+   "record_type": "contract",
+   "vendor_ids": [
+    "dewberry-engineers"
+   ],
+   "gov_id": "county",
+   "record_date": "2025-06-17",
+   "record_amount": 1395590.0,
+   "record_what": "Military Point AWTF Senate Bill 64 Phase 2, recharge well design and facility upgrades",
+   "record_url": "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=4176",
+   "vote_index": 41,
+   "vote_id": "bay-bocc:2025-06-17:military-point-awtf-sb64-recharge-well-d",
+   "vote_date": "2025-06-17",
+   "days_apart": 0,
+   "match_method": "vendor_name+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:98",
+   "record_type": "contract",
+   "vendor_ids": [
+    "marshall-brothers-construction-and-engineering"
+   ],
+   "gov_id": "county",
+   "record_date": "2025-07-15",
+   "record_amount": 4899690.0,
+   "record_what": "ITB 25-39, North Bay WWTF sequential batch reactor improvements (Hurricane Sally HMGP 4564-022-A)",
+   "record_url": "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=4203",
+   "vote_index": 43,
+   "vote_id": "bay-bocc:2025-07-15:itb-25-39-north-bay-wwtf-sequential-batc",
+   "vote_date": "2025-07-15",
+   "days_apart": 0,
+   "match_method": "vendor_name+item_number+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:101",
+   "record_type": "contract",
+   "vendor_ids": [
+    "emr"
+   ],
+   "gov_id": "county",
+   "record_date": "2025-08-05",
+   "record_amount": 12732910.0,
+   "record_what": "Contract 25-38, Fountain Community Northern Region Resiliency Center",
+   "record_url": "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=4218",
+   "vote_index": 44,
+   "vote_id": "bay-bocc:2025-08-05:contract-25-38-fountain-community-northe",
+   "vote_date": "2025-08-05",
+   "days_apart": 0,
+   "match_method": "item_number+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:103",
+   "record_type": "contract",
+   "vendor_ids": [
+    "roberts-and-roberts"
+   ],
+   "gov_id": "county",
+   "record_date": "2025-08-19",
+   "record_amount": 2183067.92,
+   "record_what": "Titus Road and CR 2321 intersection improvements",
+   "record_url": "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=4242",
+   "vote_index": 45,
+   "vote_id": "bay-bocc:2025-08-19:titus-road-cr-2321-intersection-roberts",
+   "vote_date": "2025-08-19",
+   "days_apart": 0,
+   "match_method": "vendor_name+agenda_item"
+  },
+  {
+   "record_id": "contract:110",
+   "record_type": "contract",
+   "vendor_ids": [
+    "anderson-columbia"
+   ],
+   "gov_id": "county",
+   "record_date": "2026-01-06",
+   "record_amount": 2368720.84,
+   "record_what": "Rollohome Road paving",
+   "record_url": "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=4523",
+   "vote_index": 54,
+   "vote_id": "bay-bocc:2026-01-06:rollohome-road-paving-anderson-columbia",
+   "vote_date": "2026-01-06",
+   "days_apart": 0,
+   "match_method": "vendor_name+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:111",
+   "record_type": "contract",
+   "vendor_ids": [
+    "coastal-protection-engineering"
+   ],
+   "gov_id": "county",
+   "record_date": "2026-01-06",
+   "record_amount": 2044071.39,
+   "record_what": "Task Order 12, regional sand search design-level investigations and permitting",
+   "record_url": "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=4523",
+   "vote_index": 55,
+   "vote_id": "bay-bocc:2026-01-06:regional-sand-search-design-permitting-t",
+   "vote_date": "2026-01-06",
+   "days_apart": 0,
+   "match_method": "vendor_name+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:116",
+   "record_type": "contract",
+   "vendor_ids": [
+    "c-w-roberts-contracting"
+   ],
+   "gov_id": "county",
+   "record_date": "2026-02-18",
+   "record_amount": 1622632.7,
+   "record_what": "Contract 26-15, FY26 annual resurfacing Phase 1",
+   "record_url": "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=4577",
+   "vote_index": 56,
+   "vote_id": "bay-bocc:2026-02-18:contract-26-15-fy26-annual-resurfacing-p",
+   "vote_date": "2026-02-18",
+   "days_apart": 0,
+   "match_method": "vendor_name+item_number+amount"
+  },
+  {
+   "record_id": "contract:117",
+   "record_type": "contract",
+   "vendor_ids": [
+    "ncmc"
+   ],
+   "gov_id": "county",
+   "record_date": "2026-02-18",
+   "record_amount": 1682000.0,
+   "record_what": "Contract 26-12, water treatment plant filter underdrain replacement",
+   "record_url": "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=4577",
+   "vote_index": 57,
+   "vote_id": "bay-bocc:2026-02-18:contract-26-12-wtp-filter-underdrain-rep",
+   "vote_date": "2026-02-18",
+   "days_apart": 0,
+   "match_method": "item_number+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:126",
+   "record_type": "contract",
+   "vendor_ids": [
+    "anderson-columbia"
+   ],
+   "gov_id": "county",
+   "record_date": "2026-06-16",
+   "record_amount": 1094264.99,
+   "record_what": "Contract 26-30, Owenwood Road dirt road stabilization",
+   "record_url": "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=4778",
+   "vote_index": 58,
+   "vote_id": "bay-bocc:2026-06-16:contract-26-30-owenwood-road-dirt-road-s",
+   "vote_date": "2026-06-16",
+   "days_apart": 0,
+   "match_method": "vendor_name+item_number+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:137",
+   "record_type": "contract",
+   "vendor_ids": [
+    "ferguson-waterworks"
+   ],
+   "gov_id": "cw",
+   "record_date": "2026-04-28",
+   "record_amount": 305074.08,
+   "record_what": "Bid CM2026-03, Cherry Street water main improvement materials Phase 3",
+   "record_url": "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_05122026-406",
+   "vote_index": 367,
+   "vote_id": "cw-commission:2026-04-28:approve-the-bid-award-to-ferguson-waterw",
+   "vote_date": "2026-04-28",
+   "days_apart": 0,
+   "match_method": "vendor_name+amount"
+  },
+  {
+   "record_id": "contract:139",
+   "record_type": "contract",
+   "vendor_ids": [
+    "core-and-main"
+   ],
+   "gov_id": "cw",
+   "record_date": "2026-08-11",
+   "record_amount": 561316.13,
+   "record_what": "Bid PW2026-07, water meters (not to exceed)",
+   "record_url": "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_08112026-414",
+   "vote_index": 370,
+   "vote_id": "cw-commission:2026-08-11:approve-the-contract-to-core-main-lp-in",
+   "vote_date": "2026-08-11",
+   "days_apart": 0,
+   "match_method": "vendor_name+amount"
+  },
+  {
+   "record_id": "contract:150",
+   "record_type": "contract",
+   "vendor_ids": [
+    "american-sand-and-asphalt-paving"
+   ],
+   "gov_id": "lh",
+   "record_date": "2024-06-21",
+   "record_amount": 757965.0,
+   "record_what": "Stormwater improvements and paving, Senior Center parking area",
+   "record_url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_06212024-765",
+   "vote_index": 285,
+   "vote_id": "lh-commission:2024-06-25:item-14-discussion-and-possible-approval",
+   "vote_date": "2024-06-25",
+   "days_apart": 4,
+   "match_method": "vendor_name+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:153",
+   "record_type": "contract",
+   "vendor_ids": [
+    "mott-macdonald"
+   ],
+   "gov_id": "lh",
+   "record_date": "2024-06-21",
+   "record_amount": 3487000.0,
+   "record_what": "Advanced Wastewater Treatment Facility engineering services (plus allowance up to $245,000)",
+   "record_url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_06212024-765",
+   "vote_index": 286,
+   "vote_id": "lh-commission:2024-06-25:item-17-discussion-and-possible-approval",
+   "vote_date": "2024-06-25",
+   "days_apart": 4,
+   "match_method": "vendor_name+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:154",
+   "record_type": "contract",
+   "vendor_ids": [
+    "c-w-roberts-contracting"
+   ],
+   "gov_id": "lh",
+   "record_date": "2024-08-09",
+   "record_amount": 780050.0,
+   "record_what": "Legislative roadway paving project phase",
+   "record_url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_08092024-785",
+   "vote_index": 287,
+   "vote_id": "lh-commission:2024-08-13:item-21-discussion-and-possible-approval",
+   "vote_date": "2024-08-13",
+   "days_apart": 4,
+   "match_method": "vendor_name+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:159",
+   "record_type": "contract",
+   "vendor_ids": [
+    "sutphen"
+   ],
+   "gov_id": "lh",
+   "record_date": "2025-10-14",
+   "record_amount": 1036122.0,
+   "record_what": "Purchase of a new Sutphen Extreme Duty fire engine (Resolution 2025-10-481, in FY26 budget)",
+   "record_url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10142025-1032",
+   "vote_index": 309,
+   "vote_id": "lh-commission:2025-10-14:approve-of-resolution-2025-10-481-approv",
+   "vote_date": "2025-10-14",
+   "days_apart": 0,
+   "match_method": "vendor_name+item_number+amount"
+  },
+  {
+   "record_id": "contract:161",
+   "record_type": "contract",
+   "vendor_ids": [
+    "panhandle-engineering"
+   ],
+   "gov_id": "lh",
+   "record_date": "2025-10-14",
+   "record_amount": 146399.0,
+   "record_what": "Task order, lift station improvements",
+   "record_url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10142025-1032",
+   "vote_index": 311,
+   "vote_id": "lh-commission:2025-10-14:approval-to-authorize-the-mayor-to-execu",
+   "vote_date": "2025-10-14",
+   "days_apart": 0,
+   "match_method": "vendor_name+amount"
+  },
+  {
+   "record_id": "contract:163",
+   "record_type": "contract",
+   "vendor_ids": [
+    "panhandle-engineering"
+   ],
+   "gov_id": "lh",
+   "record_date": "2025-11-12",
+   "record_amount": 382820.0,
+   "record_what": "Task order, sewer force main improvements design",
+   "record_url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_11122025-1054",
+   "vote_index": 316,
+   "vote_id": "lh-commission:2025-11-12:approve-and-authorize-mayor-nelson-to-ex",
+   "vote_date": "2025-11-12",
+   "days_apart": 0,
+   "match_method": "vendor_name+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:164",
+   "record_type": "contract",
+   "vendor_ids": [
+    "bcl-civil-contractors"
+   ],
+   "gov_id": "lh",
+   "record_date": "2026-01-13",
+   "record_amount": 623137.69,
+   "record_what": "IFB 25.26-02, Tennessee Avenue sidewalk construction (Resolution 2026-01-509)",
+   "record_url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_01132026-1083",
+   "vote_index": 318,
+   "vote_id": "lh-commission:2026-01-13:item-15-discussion-and-possible-approval",
+   "vote_date": "2026-01-13",
+   "days_apart": 0,
+   "match_method": "vendor_name+item_number+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:168",
+   "record_type": "contract",
+   "vendor_ids": [
+    "mainline-construction"
+   ],
+   "gov_id": "mb",
+   "record_date": "2025-04-08",
+   "record_amount": 1222819.6,
+   "record_what": "Lift station rehabilitations at Nanook St ($423,323.63) and 14th Street ($799,495.97); city covers a $71,039.60 overrun with local option gas tax",
+   "record_url": "https://mexicobeachfl.gov/uploads/2025/05/April-8-2025-City-Council-Meeting-Minutes.pdf",
+   "vote_index": 460,
+   "vote_id": "mb-council:2025-04-08:accept-mainline-construction-bids-for-li",
+   "vote_date": "2025-04-08",
+   "days_apart": 0,
+   "match_method": "vendor_name+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:170",
+   "record_type": "contract",
+   "vendor_ids": [
+    "gulf-coast-utility-contractors"
+   ],
+   "gov_id": "mb",
+   "record_date": "2025-09-09",
+   "record_amount": 4267436.0,
+   "record_what": "Mexico Beach jetties project (FEMA-funded); award conditional on full FEMA reimbursement and a council notice to proceed",
+   "record_url": "https://mexicobeachfl.gov/uploads/2025/09/September-9-2025-City-Council-Minutes.pdf",
+   "vote_index": 461,
+   "vote_id": "mb-council:2025-09-09:award-jetties-project-to-gulf-coast-util",
+   "vote_date": "2025-09-09",
+   "days_apart": 0,
+   "match_method": "vendor_name+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:197",
+   "record_type": "contract",
+   "vendor_ids": [
+    "c-w-roberts-contracting"
+   ],
+   "gov_id": "pc",
+   "record_date": "2024-01-09",
+   "record_amount": 1468813.0,
+   "record_what": "Bid PC24-007, drainage and stormwater facilities at Nelson Street shipyard (Eastern Shipbuilding)",
+   "record_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_01092024-656?html=true",
+   "vote_index": 61,
+   "vote_id": "pc-commission:2024-01-09:9-b-consideration-of-approval-of-bid-awa",
+   "vote_date": "2024-01-09",
+   "days_apart": 0,
+   "match_method": "vendor_name+item_number+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:198",
+   "record_type": "contract",
+   "vendor_ids": [
+    "burke-construction-group"
+   ],
+   "gov_id": "pc",
+   "record_date": "2024-01-23",
+   "record_amount": 19549646.0,
+   "record_what": "Martin Luther King Recreation Center construction",
+   "record_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_01232024-660?html=true",
+   "vote_index": 62,
+   "vote_id": "pc-commission:2024-01-23:11-g-consideration-of-award-of-martin-lu",
+   "vote_date": "2024-01-23",
+   "days_apart": 0,
+   "match_method": "vendor_name+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:199",
+   "record_type": "contract",
+   "vendor_ids": [
+    "extreme-land-clearing-and-excavation"
+   ],
+   "gov_id": "pc",
+   "record_date": "2024-02-13",
+   "record_amount": 15171116.23,
+   "record_what": "Bid PC-24-006, CDBG-DR Project Restore Area A-2 improvements (up to $15,929,672.04 with 5% contingency)",
+   "record_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_02132024-663?html=true",
+   "vote_index": 63,
+   "vote_id": "pc-commission:2024-02-13:11-a-consideration-of-approval-for-award",
+   "vote_date": "2024-02-13",
+   "days_apart": 0,
+   "match_method": "vendor_name+item_number"
+  },
+  {
+   "record_id": "contract:204",
+   "record_type": "contract",
+   "vendor_ids": [
+    "mainline-construction"
+   ],
+   "gov_id": "pc",
+   "record_date": "2024-02-27",
+   "record_amount": 5596399.52,
+   "record_what": "Bid PC24-005, CDBG-DR Project Restore Millville, Subsection A",
+   "record_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_02272024-664?html=true",
+   "vote_index": 67,
+   "vote_id": "pc-commission:2024-02-27:12-f-consideration-of-approval-for-award",
+   "vote_date": "2024-02-27",
+   "days_apart": 0,
+   "match_method": "vendor_name+item_number+agenda_item"
+  },
+  {
+   "record_id": "contract:205",
+   "record_type": "contract",
+   "vendor_ids": [
+    "mainline-construction"
+   ],
+   "gov_id": "pc",
+   "record_date": "2024-02-27",
+   "record_amount": 5819420.59,
+   "record_what": "Bid PC24-005, CDBG-DR Project Restore Millville, Subsection C",
+   "record_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_02272024-664?html=true",
+   "vote_index": 67,
+   "vote_id": "pc-commission:2024-02-27:12-f-consideration-of-approval-for-award",
+   "vote_date": "2024-02-27",
+   "days_apart": 0,
+   "match_method": "vendor_name+item_number+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:206",
+   "record_type": "contract",
+   "vendor_ids": [
+    "gulf-coast-utility-contractors"
+   ],
+   "gov_id": "pc",
+   "record_date": "2024-02-27",
+   "record_amount": 10365877.25,
+   "record_what": "Bid PC24-005, CDBG-DR Project Restore Millville, Subsection B",
+   "record_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_02272024-664?html=true",
+   "vote_index": 68,
+   "vote_id": "pc-commission:2024-02-27:12-g-consideration-of-award-of-bid-pc24",
+   "vote_date": "2024-02-27",
+   "days_apart": 0,
+   "match_method": "vendor_name+item_number+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:208",
+   "record_type": "contract",
+   "vendor_ids": [
+    "bcl-civil-contractors"
+   ],
+   "gov_id": "pc",
+   "record_date": "2024-03-26",
+   "record_amount": 1411600.0,
+   "record_what": "Bid PC23-056, FEMA drainage inlets",
+   "record_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_03262024-671?html=true",
+   "vote_index": 70,
+   "vote_id": "pc-commission:2024-03-26:12-d-consideration-of-approval-for-award",
+   "vote_date": "2024-03-26",
+   "days_apart": 0,
+   "match_method": "vendor_name+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:212",
+   "record_type": "contract",
+   "vendor_ids": [
+    "cbc-construction"
+   ],
+   "gov_id": "pc",
+   "record_date": "2024-06-18",
+   "record_amount": 6964150.0,
+   "record_what": "ITB PC24-022, Harrison Avenue streetscapes Phase 2",
+   "record_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_06182024-697?html=true",
+   "vote_index": 77,
+   "vote_id": "pc-commission:2024-06-18:5-consideration-to-award-a-contract-for",
+   "vote_date": "2024-06-18",
+   "days_apart": 0,
+   "match_method": "vendor_name+item_number+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:217",
+   "record_type": "contract",
+   "vendor_ids": [
+    "gulf-coast-utility-contractors"
+   ],
+   "gov_id": "pc",
+   "record_date": "2024-08-27",
+   "record_amount": 5722381.25,
+   "record_what": "Bid PC24-037, CDBG-DR Area O-11 (bid schedules 1-4 and alternate 1)",
+   "record_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_08272024-700?html=true",
+   "vote_index": 86,
+   "vote_id": "pc-commission:2024-08-27:9-i-consideration-to-ratify-agreements-r",
+   "vote_date": "2024-08-27",
+   "days_apart": 0,
+   "match_method": "vendor_name+item_number+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:218",
+   "record_type": "contract",
+   "vendor_ids": [
+    "royal-american-construction"
+   ],
+   "gov_id": "pc",
+   "record_date": "2024-09-12",
+   "record_amount": 2600925.0,
+   "record_what": "ITB PC24-032, Project STORM Group B (plus up to $130,046.25 in change orders)",
+   "record_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_09122024-704?html=true",
+   "vote_index": 89,
+   "vote_id": "pc-commission:2024-09-12:11-d-consideration-to-award-a-contract-f",
+   "vote_date": "2024-09-12",
+   "days_apart": 0,
+   "match_method": "vendor_name+item_number+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:220",
+   "record_type": "contract",
+   "vendor_ids": [
+    "panhandle-landscape-solutions"
+   ],
+   "gov_id": "pc",
+   "record_date": "2024-10-08",
+   "record_amount": 1095820.0,
+   "record_what": "PC24-049, trees for city parks",
+   "record_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_10082024-713?html=true",
+   "vote_index": 97,
+   "vote_id": "pc-commission:2024-10-08:9-e-consideration-of-approval-of-award-o",
+   "vote_date": "2024-10-08",
+   "days_apart": 0,
+   "match_method": "vendor_name+item_number+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:222",
+   "record_type": "contract",
+   "vendor_ids": [
+    "mainline-construction"
+   ],
+   "gov_id": "pc",
+   "record_date": "2024-11-12",
+   "record_amount": 2192224.92,
+   "record_what": "ITB PC24-046, Project STORM Group C (plus up to $109,611.25 in change orders)",
+   "record_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_11122024-719?html=true",
+   "vote_index": 104,
+   "vote_id": "pc-commission:2024-11-12:13-k-consideration-to-award-a-contract-f",
+   "vote_date": "2024-11-12",
+   "days_apart": 0,
+   "match_method": "vendor_name+item_number+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:230",
+   "record_type": "contract",
+   "vendor_ids": [
+    "royal-american-construction"
+   ],
+   "gov_id": "pc",
+   "record_date": "2025-03-18",
+   "record_amount": 3682340.0,
+   "record_what": "Bid PC24-030, SRF Area D-15 improvements (up to $3,866,457 with 5% contingency)",
+   "record_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_03182025-737?html=true",
+   "vote_index": 118,
+   "vote_id": "pc-commission:2025-03-18:9-f-consideration-of-approval-of-bid-pc2",
+   "vote_date": "2025-03-18",
+   "days_apart": 0,
+   "match_method": "vendor_name+item_number+agenda_item"
+  },
+  {
+   "record_id": "contract:232",
+   "record_type": "contract",
+   "vendor_ids": [
+    "rcl-emerald-coast"
+   ],
+   "gov_id": "pc",
+   "record_date": "2025-04-08",
+   "record_amount": 2716208.0,
+   "record_what": "ITB PC25-028, Hometown Revitalization, Glencove (plus $75,000 contingency)",
+   "record_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_04082025-741?html=true",
+   "vote_index": 120,
+   "vote_id": "pc-commission:2025-04-08:delaying-item-11-a-awarding-a-contract-f",
+   "vote_date": "2025-04-08",
+   "days_apart": 0,
+   "match_method": "vendor_name+item_number+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:234",
+   "record_type": "contract",
+   "vendor_ids": [
+    "850-construction-services"
+   ],
+   "gov_id": "pc",
+   "record_date": "2025-04-08",
+   "record_amount": 1025896.85,
+   "record_what": "Bid PC25-027, Pretty Bayou water and wastewater improvements Phase 2A",
+   "record_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_04082025-741?html=true",
+   "vote_index": 121,
+   "vote_id": "pc-commission:2025-04-08:11-c-consideration-of-approval-for-award",
+   "vote_date": "2025-04-08",
+   "days_apart": 0,
+   "match_method": "vendor_name+item_number+agenda_item"
+  },
+  {
+   "record_id": "contract:235",
+   "record_type": "contract",
+   "vendor_ids": [
+    "mainline-construction"
+   ],
+   "gov_id": "pc",
+   "record_date": "2025-04-24",
+   "record_amount": 4607573.44,
+   "record_what": "Bid PC25-033, SRF Area D-14 improvements (up to $4,837,952.11 with contingency)",
+   "record_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_04242025-742?html=true",
+   "vote_index": 122,
+   "vote_id": "pc-commission:2025-04-24:8-l-consideration-of-a-right-of-way-use",
+   "vote_date": "2025-04-24",
+   "days_apart": 0,
+   "match_method": "vendor_name+item_number+agenda_item"
+  },
+  {
+   "record_id": "contract:245",
+   "record_type": "contract",
+   "vendor_ids": [
+    "marshall-brothers-construction-and-engineering"
+   ],
+   "gov_id": "pc",
+   "record_date": "2025-06-24",
+   "record_amount": 4564600.0,
+   "record_what": "Bid PC25-006, Millville wastewater treatment plant generator replacement",
+   "record_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_06242025-751?html=true",
+   "vote_index": 126,
+   "vote_id": "pc-commission:2025-06-24:9-g-consideration-of-approval-of-the-fin",
+   "vote_date": "2025-06-24",
+   "days_apart": 0,
+   "match_method": "vendor_name+item_number+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:248",
+   "record_type": "contract",
+   "vendor_ids": [
+    "ecsc"
+   ],
+   "gov_id": "pc",
+   "record_date": "2025-09-23",
+   "record_amount": 2964071.12,
+   "record_what": "Bid PC25-038, SRF Baker Court utility and roadway improvements (up to $3,112,274.68 with contingency)",
+   "record_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_09232025-768?html=true",
+   "vote_index": 137,
+   "vote_id": "pc-commission:2025-09-23:12-a-consideration-to-approve-award-of-t",
+   "vote_date": "2025-09-23",
+   "days_apart": 0,
+   "match_method": "vendor_name+item_number+agenda_item"
+  },
+  {
+   "record_id": "contract:249",
+   "record_type": "contract",
+   "vendor_ids": [
+    "preferred-governmental-insurance-trust"
+   ],
+   "gov_id": "pc",
+   "record_date": "2025-09-23",
+   "record_amount": 3340551.0,
+   "record_what": "FY26 property/liability insurance coverages (renewal proposal)",
+   "record_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_09232025-768?html=true",
+   "vote_index": 138,
+   "vote_id": "pc-commission:2025-09-23:12-b-consideration-to-approve-and-execut",
+   "vote_date": "2025-09-23",
+   "days_apart": 0,
+   "match_method": "vendor_name+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:260",
+   "record_type": "contract",
+   "vendor_ids": [
+    "royal-american-construction"
+   ],
+   "gov_id": "pc",
+   "record_date": "2026-02-10",
+   "record_amount": 2027392.01,
+   "record_what": "Bid PC26-015, CDBG-DR Area O-2 (total $2,128,761.61 with 5% contingency)",
+   "record_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_02102026-825?html=true",
+   "vote_index": 146,
+   "vote_id": "pc-commission:2026-02-10:12-d-consideration-of-approval-for-award",
+   "vote_date": "2026-02-10",
+   "days_apart": 0,
+   "match_method": "vendor_name+item_number+agenda_item"
+  },
+  {
+   "record_id": "contract:269",
+   "record_type": "contract",
+   "vendor_ids": [
+    "850-construction-services"
+   ],
+   "gov_id": "pc",
+   "record_date": "2026-06-23",
+   "record_amount": 1194839.37,
+   "record_what": "PC26-011, Pretty Bayou improvements Phase 3",
+   "record_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_06232026-862?html=true",
+   "vote_index": 161,
+   "vote_id": "pc-commission:2026-06-23:13-g-consideration-of-approval-for-award",
+   "vote_date": "2026-06-23",
+   "days_apart": 0,
+   "match_method": "vendor_name+item_number+agenda_item"
+  },
+  {
+   "record_id": "contract:271",
+   "record_type": "contract",
+   "vendor_ids": [
+    "c-w-roberts-contracting"
+   ],
+   "gov_id": "pc",
+   "record_date": "2026-07-14",
+   "record_amount": 336545.0,
+   "record_what": "Bid PC26-036, Chestnut parking lot (HS015), plus 10% contingency",
+   "record_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_07142026-871?html=true",
+   "vote_index": 162,
+   "vote_id": "pc-commission:2026-07-14:9-h-consideration-of-approval-for-award",
+   "vote_date": "2026-07-14",
+   "days_apart": 0,
+   "match_method": "item_number+agenda_item"
+  },
+  {
+   "record_id": "contract:276",
+   "record_type": "contract",
+   "vendor_ids": [
+    "cbc-construction"
+   ],
+   "gov_id": "pc",
+   "record_date": "2026-09-22",
+   "record_amount": 1718585.0,
+   "record_what": "Road reconstruction, Frankford Avenue and South Discovery Loop",
+   "record_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_09222026-891?html=true",
+   "vote_index": 178,
+   "vote_id": "pc-commission:2026-09-22:12-a-discussion-on-redspeed-commissioner",
+   "vote_date": "2026-09-22",
+   "days_apart": 0,
+   "match_method": "vendor_name+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:286",
+   "record_type": "contract",
+   "vendor_ids": [
+    "alan-jay-automotive-management-inc-d-b-a-alan-jay-fleet-sale"
+   ],
+   "gov_id": "pcb",
+   "record_date": "2024-01-11",
+   "record_amount": 843637.0,
+   "record_what": "Eleven Ford F-150 police responder trucks",
+   "record_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=156",
+   "vote_index": 190,
+   "vote_id": "pcb-council:2024-01-11:resolution-24-68-purchase-of-eleven-ford",
+   "vote_date": "2024-01-11",
+   "days_apart": 0,
+   "match_method": "agenda_item+amount"
+  },
+  {
+   "record_id": "contract:287",
+   "record_type": "contract",
+   "vendor_ids": [
+    "dewberry-engineers"
+   ],
+   "gov_id": "pcb",
+   "record_date": "2024-01-25",
+   "record_amount": 341588.0,
+   "record_what": "Task order, Front Beach Road Segment 4.2 plan revisions (retaining walls, utility work)",
+   "record_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=157",
+   "vote_index": 195,
+   "vote_id": "pcb-council:2024-01-25:resolution-24-76-dewberry-engineers-task",
+   "vote_date": "2024-01-25",
+   "days_apart": 0,
+   "match_method": "vendor_name+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:288",
+   "record_type": "contract",
+   "vendor_ids": [
+    "at-and-t-enterprises",
+    "t-mobile-usa"
+   ],
+   "gov_id": "pcb",
+   "record_date": "2024-06-13",
+   "record_amount": 270100.0,
+   "record_what": "Cellular services to city facilities, devices and equipment (initial estimated annual amount)",
+   "record_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=316",
+   "vote_index": 217,
+   "vote_id": "pcb-council:2024-06-13:resolution-24-139-at-t-and-t-mobile-agre",
+   "vote_date": "2024-06-13",
+   "days_apart": 0,
+   "match_method": "agenda_item+amount"
+  },
+  {
+   "record_id": "contract:289",
+   "record_type": "contract",
+   "vendor_ids": [
+    "new-line-skateparks"
+   ],
+   "gov_id": "pcb",
+   "record_date": "2024-07-25",
+   "record_amount": 1400000.0,
+   "record_what": "Design and construction of the Frank Brown Park skatepark (ARPA funds), not to exceed",
+   "record_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=321",
+   "vote_index": 228,
+   "vote_id": "pcb-council:2024-07-25:resolution-24-160-new-line-skateparks-ag",
+   "vote_date": "2024-07-25",
+   "days_apart": 0,
+   "match_method": "vendor_name+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:290",
+   "record_type": "contract",
+   "vendor_ids": [
+    "florida-league-of-cities"
+   ],
+   "gov_id": "pcb",
+   "record_date": "2024-09-26",
+   "record_amount": 2694939.0,
+   "record_what": "Property, liability, cyber, workers comp and auto insurance renewal (combined annual premium, not to exceed)",
+   "record_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=328",
+   "vote_index": 245,
+   "vote_id": "pcb-council:2024-09-26:resolution-24-183-property-liability-wor",
+   "vote_date": "2024-09-26",
+   "days_apart": 0,
+   "match_method": "vendor_name+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:291",
+   "record_type": "contract",
+   "vendor_ids": [
+    "one80-intermediaries"
+   ],
+   "gov_id": "pcb",
+   "record_date": "2024-10-10",
+   "record_amount": 938612.0,
+   "record_what": "Stop-loss insurance renewal (estimated annual premium)",
+   "record_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=330",
+   "vote_index": 246,
+   "vote_id": "pcb-council:2024-10-10:resolution-25-06-stop-loss-insurance-ren",
+   "vote_date": "2024-10-10",
+   "days_apart": 0,
+   "match_method": "vendor_name+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:292",
+   "record_type": "contract",
+   "vendor_ids": [
+    "core-and-main"
+   ],
+   "gov_id": "pcb",
+   "record_date": "2024-10-24",
+   "record_amount": 900000.0,
+   "record_what": "Water and reclaimed water meters (not to exceed)",
+   "record_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=332",
+   "vote_index": 251,
+   "vote_id": "pcb-council:2024-10-24:resolution-25-09-purchase-of-water-and-r",
+   "vote_date": "2024-10-24",
+   "days_apart": 0,
+   "match_method": "vendor_name+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:293",
+   "record_type": "contract",
+   "vendor_ids": [
+    "m-gay-constructors"
+   ],
+   "gov_id": "pcb",
+   "record_date": "2025-01-09",
+   "record_amount": 707300.0,
+   "record_what": "Materials and installation, LED sports lighting, Frank Brown Park north ballfield complex",
+   "record_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=336",
+   "vote_index": 261,
+   "vote_id": "pcb-council:2025-01-09:resolution-25-49-m-gay-constructors-agre",
+   "vote_date": "2025-01-09",
+   "days_apart": 0,
+   "match_method": "vendor_name+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:315",
+   "record_type": "contract",
+   "vendor_ids": [
+    "southern-construction-services"
+   ],
+   "gov_id": "pcb",
+   "record_date": "2026-07-09",
+   "record_amount": 1250000.0,
+   "record_what": "Conservation Park boardwalk rehabilitation at set unit prices (not to exceed)",
+   "record_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=411",
+   "vote_index": 280,
+   "vote_id": "pcb-council:2026-07-09:resolution-no-26-130-a-resolution-of-the",
+   "vote_date": "2026-07-09",
+   "days_apart": 0,
+   "match_method": "vendor_name+agenda_item+amount"
+  },
+  {
+   "record_id": "change_order:47",
+   "record_type": "change_order",
+   "vendor_ids": [
+    "cwr-contracting"
+   ],
+   "gov_id": "pcb",
+   "record_date": "2024-05-09",
+   "record_amount": 115547.8,
+   "record_what": "Front Beach Road Segment 3 (CRA), change order 10",
+   "record_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=300",
+   "vote_index": 207,
+   "vote_id": "pcb-council:2024-05-09:resolution-24-128-change-order-10-with-c",
+   "vote_date": "2024-05-09",
+   "days_apart": 0,
+   "match_method": "vendor_name+agenda_item+amount"
+  },
+  {
+   "record_id": "change_order:48",
+   "record_type": "change_order",
+   "vendor_ids": [
+    "cwr-contracting"
+   ],
+   "gov_id": "pcb",
+   "record_date": "2024-07-25",
+   "record_amount": 150000.0,
+   "record_what": "Front Beach Road Segment 3 (CRA), additional change-order contingency",
+   "record_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=321",
+   "vote_index": 229,
+   "vote_id": "pcb-council:2024-07-25:resolution-24-161-added-contingency-for",
+   "vote_date": "2024-07-25",
+   "days_apart": 0,
+   "match_method": "vendor_name+agenda_item+amount"
+  },
+  {
+   "record_id": "change_order:49",
+   "record_type": "change_order",
+   "vendor_ids": [],
+   "gov_id": "pcb",
+   "record_date": "2024-11-14",
+   "record_amount": 346980.59,
+   "record_what": "Joint participation agreement, PCB Parkway widening utilities relocation (Mandy Ln to Nautilus St)",
+   "record_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=334",
+   "vote_index": 252,
+   "vote_id": "pcb-council:2024-11-14:resolution-25-25-change-order-to-the-fdo",
+   "vote_date": "2024-11-14",
+   "days_apart": 0,
+   "match_method": "agenda_item+amount"
+  }
+ ]
+}

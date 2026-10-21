@@ -74,8 +74,45 @@ def add_dates(did, rows):
     return rows
 
 
+def _cv():
+    try:
+        return json.load(open(os.path.join(DATA, 'votes', 'contract_votes.json')))['links']
+    except FileNotFoundError:
+        return []
+
+
+CV_SRC = {'contracts': 'contract', 'change-orders': 'change_order', 'emergency-purchases': 'emergency'}
+
+
+def add_vote_links(did, rows):
+    """contracts/change orders/emergency purchases get vote_ids; votes get contract_ids (record ids like 'contract:12'), from data/votes/contract_votes.json."""
+    links = _cv()
+    if did in CV_SRC:
+        by = {}
+        for l in links:
+            by.setdefault(l['record_id'], []).append(l)
+        for i, r in enumerate(rows):
+            ls = by.get(f'{CV_SRC[did]}:{i}', [])
+            r['record_id'] = f'{CV_SRC[did]}:{i}'
+            r['vote_ids'] = [l['vote_id'] for l in ls] or None
+            r['vote_match_method'] = '; '.join(l['match_method'] for l in ls) or None
+    elif did == 'votes':
+        by = {}
+        for l in links:
+            by.setdefault(l['vote_index'], []).append(l)
+        d = _j('votes', 'votes.json')
+        vids = ids.vote_ids(d['votes'])
+        for i, (r, v) in enumerate(zip(rows, d['votes'])):
+            ls = by.get(i, [])
+            r['vote_id'] = vids[i]
+            r['contract_ids'] = [l['record_id'] for l in ls] or None
+            r['contract_match_method'] = '; '.join(l['match_method'] for l in ls) or None
+    return rows
+
+
 def add_gov_id(did, rows):
     cols = GOV_COLS.get(did, ['government', 'gov'])
+    add_vote_links(did, rows)
     add_vendor_id(did, rows)
     add_person_id(did, rows)
     for r in rows:

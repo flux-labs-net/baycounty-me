@@ -83,3 +83,17 @@ begin
     execute format('alter table %I add column if not exists date_precision text', t);
   end loop;
 end $$;
+
+-- contract <-> vote links (data/votes/contract_votes.json)
+alter table contracts add column if not exists record_id text;
+alter table contracts add column if not exists vote_ids jsonb;
+alter table contracts add column if not exists vote_match_method text;
+alter table change_orders add column if not exists record_id text;
+alter table change_orders add column if not exists vote_ids jsonb;
+alter table change_orders add column if not exists vote_match_method text;
+alter table emergency_purchases add column if not exists record_id text;
+alter table emergency_purchases add column if not exists vote_ids jsonb;
+alter table emergency_purchases add column if not exists vote_match_method text;
+alter table votes add column if not exists vote_id text;
+alter table votes add column if not exists contract_ids jsonb;
+alter table votes add column if not exists contract_match_method text;
