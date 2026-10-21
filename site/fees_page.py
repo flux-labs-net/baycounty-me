@@ -168,7 +168,7 @@ def who_page():
   <section class="explain"><div class="ex-txt"><span class="eyebrow">The simple version</span><h2>Who's in charge of what</h2>
     <ol class="ex-steps">
       <li><b>Elected boards set policy and budgets.</b> The County Commission, each city commission or council, and the School Board vote on budgets, tax rates and big contracts.</li>
-      <li><b>Appointed managers run operations.</b> A county manager or city manager, hired by the board, runs departments and staff.</li>
+      <li><b>Appointed managers run operations.</b> A county manager or city manager, hired by the board, runs departments and staff. Springfield and Parker have no manager; the board oversees staff directly and a city clerk handles administration.</li>
       <li><b>Five county officers are elected on their own.</b> The Sheriff, Property Appraiser, Tax Collector, Clerk of Court and Supervisor of Elections each run their own office. The County Commission funds most of their budgets. Their pay is set by a state formula.</li>
     </ol>
     <p><a href="/my-address/">Find who represents your address →</a></p></div></section>

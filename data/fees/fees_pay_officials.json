@@ -1777,7 +1777,7 @@
     {
       "id": "springfield",
       "name": "City of Springfield",
-      "form": "Mayor-commission; mayor plus four ward commissioners (no city manager listed on city site)",
+      "form": "Mayor-commission; mayor plus four ward commissioners. No city manager: the commission oversees staff directly, with a City Clerk",
       "seats": [
         {
           "seat": "Mayor",
@@ -1846,7 +1846,7 @@
     {
       "id": "parker",
       "name": "City of Parker",
-      "form": "Mayor-council (5-member council incl. mayor; no city manager listed on city site)",
+      "form": "Mayor-council; 5-member council including the mayor. No city manager: the council oversees staff directly, with a City Clerk",
       "seats": [
         {
           "seat": "Mayor",
@@ -1877,6 +1877,12 @@
           "holder": "Mark Rega",
           "term_end": null,
           "elected": true
+        },
+        {
+          "seat": "City Clerk",
+          "holder": "Ingrid Bundy (named on the Jan 2025 council agenda; city site lists clerk@cityofparker.com)",
+          "term_end": null,
+          "elected": false
         }
       ],
       "manager": null,
@@ -2063,7 +2069,7 @@
     "Panama City: the 5,000-gallon bill is provisional, because the city's 'average bill' equals its base charges alone. No stormwater fee found.",
     "Lynn Haven: the FY2026-27 budget (which may carry rates effective Oct 1, 2026) could not be downloaded because the connection was reset; FY2025-26 rates are used.",
     "Callaway: the rates page shows no effective date, and the FY2027 budget assumes small consumption increases that may not be on the page yet.",
-    "Mexico Beach and Springfield: no FTE counts found. Springfield and Parker list no city manager.",
+    "Mexico Beach and Springfield: no FTE counts found. Springfield and Parker have no city manager; a City Clerk handles administration.",
     "Manager salaries not found: Bay County (Joel Schubert), Panama City (Jonathan Hayes; only his requested $175,000 minimum was reported), Lynn Haven (Chris Lightfoot), Mexico Beach (Mell Smigielski). The Panama City Beach figure is the 2021 contract base. Department-head salaries were not compiled.",
     "School board: the full current member roster with districts and term ends wasn't verified (the district website doesn't render it). Superintendent McQueen's 2024 election status and term end weren't verified.",
     "Lynn Haven, Springfield and Parker seat term-end dates are not published on their sites.",
