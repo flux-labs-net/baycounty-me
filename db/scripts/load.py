@@ -13,6 +13,7 @@ Fails loudly if a dataset gained a column the database doesn't have yet: add a m
 """
 import glob, hashlib, json, os, re, subprocess, sys
 import psycopg
+import psycopg.conninfo
 from psycopg.types.json import Jsonb
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
@@ -164,13 +165,35 @@ def load_raw(conn, sha):
     return n
 
 
+def connect(url):
+    """Connect, falling back to Supabase's IPv4 session pooler when given the direct (IPv6-only) address,
+    since GitHub runners can't reach IPv6. Set SUPABASE_REGION (e.g. us-east-2) for the fallback."""
+    try:
+        return psycopg.connect(url, autocommit=True, connect_timeout=15)
+    except psycopg.OperationalError as e:
+        params = psycopg.conninfo.conninfo_to_dict(url)
+        m = re.match(r'^db\.([a-z0-9]+)\.supabase\.co$', params.get('host') or '')
+        region = os.environ.get('SUPABASE_REGION')
+        if not (m and region):
+            raise
+        print('direct connection failed (%s); trying the session pooler' % str(e).splitlines()[0][:80])
+        ref = m.group(1)
+        for prefix in ('aws-1', 'aws-0'):
+            p = dict(params, host=f'{prefix}-{region}.pooler.supabase.com', port='5432', user=f'{params.get("user") or "postgres"}.{ref}', connect_timeout='15')
+            try:
+                return psycopg.connect(psycopg.conninfo.make_conninfo(**p), autocommit=True)
+            except psycopg.OperationalError as e2:
+                print(f'  {prefix} pooler failed: {str(e2).splitlines()[0][:120]}')
+        raise
+
+
 def main():
     url = os.environ.get('DATABASE_URL') or os.environ.get('POSTGRES_URL_NON_POOLING') or os.environ.get('POSTGRES_URL')
     if not url:
         raise SystemExit('Set DATABASE_URL (Supabase: Project Settings > Database > Connection string, session pooler).')
     cat = json.load(open(os.path.join(PUB, 'downloads', 'index.json')))
     sha = git_sha()
-    with psycopg.connect(url, autocommit=True) as conn:
+    with connect(url) as conn:
         if '--migrate' in sys.argv:
             with conn.transaction():
                 migrate(conn.cursor())

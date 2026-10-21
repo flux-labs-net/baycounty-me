@@ -40,4 +40,5 @@ jobs:
         if: steps.secret.outputs.ok == 'true'
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          SUPABASE_REGION: us-east-2
         run: python db/scripts/load.py --migrate
