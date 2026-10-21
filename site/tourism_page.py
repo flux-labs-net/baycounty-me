@@ -107,15 +107,38 @@ def surtax_id(p):  # stable id for ?p= links: the county GIS object id (points: 
     return f"p{p['gis_objectid']}" if p.get('gis_objectid') is not None else (f"l{p['gis_objectids'][0]}" if p.get('gis_objectids') else '')
 
 
+GIS_REC = 'https://services1.arcgis.com/QB0VWfqR9MD4lF0F/arcgis/rest/services/Surtax_Projects/FeatureServer/'
+
+
+def _gis_docs():
+    """Project web pages (WEBSITE field) from the county GIS snapshot made by data/surtax/fetch_gis.py, keyed by name and city."""
+    k = lambda n, c: (re.sub(r'\W+', '', (n or '').lower()), (c or '').replace('City of ', ''))
+    try:
+        g = json.load(open(os.path.join(HERE, '..', 'data', 'surtax', 'gis_projects.json')))
+    except FileNotFoundError:
+        return {}, k
+    out = {}
+    for x in g['projects']:
+        if x.get('doc'):
+            out.setdefault(k(x['name'], x['gov']), set()).add(x['doc'])
+    return {kk: next(iter(v)) for kk, v in out.items() if len(v) == 1}, k
+
+
 def surtax_page(out_dir):
     d = load(); inf, sch = d['infra_surtax'], d['school_surtax']
+    docs, dk = _gis_docs()
     projs = []
     for p in inf['projects']:
         if p.get('lat') is None:
             continue
         projs.append({'id': surtax_id(p), 'n': p['name'], 'g': p['government'], 'c': p.get('category') or 'Other', 's': p['status'], 'p': p.get('pct_complete'),
                       'k': p.get('programmed_cost') or p.get('promised_cost'), 'y': p.get('fiscal_years') or '', 'x': round(p['lng'], 5), 'yy': round(p['lat'], 5),
-                      'd': (p.get('description') or '')[:260]})
+                      'd': (p.get('description') or '')[:260],
+                      # GIS record: [layer, object ids]; the page rebuilds p['source_url'] from it (checked below)
+                      'r': [0, [p['gis_objectid']]] if p.get('gis_objectid') is not None else [1, p.get('gis_objectids') or []],
+                      **({'w': docs[dk(p['name'], p['government'])]} if dk(p['name'], p['government']) in docs else {})})
+        r = projs[-1]['r']
+        assert p['source_url'] == GIS_REC + f"{r[0]}/query?where=" + (f"OBJECTID%3D{r[1][0]}" if r[0] == 0 else "OBJECTID+IN+(" + ",".join(map(str, r[1])) + ")") + "&outFields=*&outSR=4326&f=json", p['source_url']
     json.dump(projs, open(os.path.join(out_dir, 'data', 'surtax-projects.json'), 'w'), separators=(',', ':'))
     rules = inf['rules']
     cols = {c['fy']: c['amount'] for c in inf['collections']}

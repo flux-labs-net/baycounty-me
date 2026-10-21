@@ -19,6 +19,8 @@ function centroid(mp) { // center of the largest polygon's bounding box
   mp.forEach(poly => { const r = poly[0]; const xs = r.map(p => p[0]), ys = r.map(p => p[1]); const a = (Math.max(...xs) - Math.min(...xs)) * (Math.max(...ys) - Math.min(...ys)); if (a > area) { area = a; best = [(Math.max(...xs) + Math.min(...xs)) / 2, (Math.max(...ys) + Math.min(...ys)) / 2]; } });
   return best;
 }
+const GIS = 'https://services1.arcgis.com/QB0VWfqR9MD4lF0F/arcgis/rest/services/Surtax_Projects/FeatureServer/';
+const recURL = p => !p.r ? 'https://bayhalfcent.com/' : GIS + p.r[0] + '/query?where=' + (p.r[0] === 0 ? 'OBJECTID%3D' + p.r[1][0] : 'OBJECTID+IN+(' + p.r[1].join(',') + ')') + '&outFields=*&outSR=4326&f=json';
 const dotA = p => `tabindex="0" role="button" aria-label="${esc(p.n)}, ${esc(p.g)}, ${esc(ST[p.s]?.[0] || p.s)}${p.k ? ', ' + big(p.k) : ''}"`;
 let refocus = null; // keep keyboard focus on a dot after the map redraws
 let fs = 1; // text scale so labels stay readable when the map is drawn small (phones)
@@ -77,6 +79,7 @@ function select(p, from) {
   $('stSel').innerHTML = `<div class="st-sel-hd"><span class="st-dot" style="background:${st[1]}"></span><div><b>${esc(p.n)}</b><span class="muted small">${esc(p.g)} · ${esc(p.c)}${p.y ? ' · ' + esc(p.y) : ''}</span></div><button type="button" class="st-x print-hide" aria-label="Close project details">×</button></div>
     <p class="st-meta"><span class="badge ${p.s === 'completed' ? 'ok' : ''}">${esc(st[0])}${p.p != null && p.s !== 'completed' ? ' · ' + p.p + '%' : ''}</span>${p.k ? ` <span class="small">Cost <b>${big(p.k)}</b></span>` : ''}</p>
     ${p.d ? `<p class="small">${esc(p.d.trim())}${/[.!?]$/.test(p.d.trim()) ? '' : '…'}</p>` : ''}
+    <p class="small">Source: <a class="src" href="${esc(recURL(p))}" target="_blank" rel="noopener">county GIS record</a>${p.w ? ` · <a class="src" href="${esc(p.w)}" target="_blank" rel="noopener" title="The web page or document the county's map links for this project">county's linked document</a>` : ''}</p>
     <p class="small"><a href="https://www.google.com/maps/search/?api=1&query=${p.yy},${p.x}" target="_blank" rel="noopener">See the location in Google Maps</a>${/road|street|blvd|avenue|ave\b|drive|dr\b|highway|hwy|sidewalk|trail|bridge|paving|resurfac/i.test(p.n + ' ' + p.c) ? ' <span class="muted">· road projects are pinned at the middle of the segment</span>' : ''}</p>`;
   document.querySelectorAll('#stList li.on').forEach(x => { x.classList.remove('on'); x.removeAttribute('aria-current'); });
   const li = document.querySelector(`#stList li[data-i="${p._i}"]`);
