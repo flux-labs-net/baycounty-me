@@ -439,7 +439,7 @@
       "name": "Front Beach Road CRA assessment (levy code PBCRA)",
       "category": "special district / CRA",
       "how_charged": "Category A $38.95 per parcel flat; Category B weighted: $0.009 per heated/AC sq ft (60%), $0.04 per $1,000 improvement value (30%), $0.06 per $1,000 land value (10%). Noticed maximum FY2025-26.",
-      "rate": "see how_charged",
+      "rate": "$38.95 per parcel (Category A) or weighted by building size and value (Category B)",
       "residential_single_family_amount": null,
       "residential_note": "Median billed per parcel on 2025 roll = $75.13.",
       "roll_2025": {
@@ -2065,7 +2065,7 @@
     "Several levy codes could not be matched to a named district: SB, PW, WMH, TWIN, ALSL1, BOCA, OERR, PCN; PPCD (probably Pier Park CDD) and LPWH1 (probably Lake Powell Residential Golf CDD) are inferred.",
     "Typical single-family amounts for value-based assessments (PCB fire/stormwater, Lynn Haven stormwater, Springfield fire) can't be stated without parcel-level property-use data. The DOR NAL parcel file for 2025 wasn't available from the portal, so only all-parcel medians are given.",
     "Parker: no published water/sewer/garbage rate schedule found, and no FTE count.",
-    "Panama City Beach: no residential garbage rate and no FTE count (the budget book could not be downloaded; the site blocks automated access).",
+    "Panama City Beach: no residential garbage rate and no employee count (the budget book couldn't be downloaded).",
     "Panama City: the 5,000-gallon bill is provisional, because the city's 'average bill' equals its base charges alone. No stormwater fee found.",
     "Lynn Haven: the FY2026-27 budget (which may carry rates effective Oct 1, 2026) could not be downloaded because the connection was reset; FY2025-26 rates are used.",
     "Callaway: the rates page shows no effective date, and the FY2027 budget assumes small consumption increases that may not be on the page yet.",

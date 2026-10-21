@@ -91,11 +91,17 @@ function svgNode(svg, maxW) {
 function bar(frac, color, w = 170, h = 7) {
   return {canvas: [{type: 'rect', x: 0, y: 0, w, h, color: '#EEF2F7', r: 2}, {type: 'rect', x: 0, y: 0, w: Math.max(1, w * Math.min(1, frac)), h, color: color || C.blue, r: 2}], margin: [0, 3, 0, 0]};
 }
+function stackMini(sb, w = 150, h = 7) { // a bar made of colored segments (e.g. water / sewer / garbage)
+  const tot = w * Math.min(1, pct(sb, 'width') || 1), segs = [...sb.querySelectorAll('.seg')].map(x => { const st = x.getAttribute('style') || ''; return [+((st.match(/flex:\s*([\d.]+)/) || [])[1] || 0), bgOf(x) || C.blue]; });
+  const sum = segs.reduce((a, [v]) => a + v, 0) || 1; let x = 0;
+  return {canvas: [{type: 'rect', x: 0, y: 0, w, h, color: '#EEF2F7', r: 2}, ...segs.map(([v, c]) => { const ww = tot * v / sum, o = {type: 'rect', x, y: 0, w: Math.max(.5, ww), h, color: c}; x += ww; return o; })], margin: [0, 3, 0, 0]};
+}
 function hbars(el) {
   const BW = MAXW < 400 ? 70 : 150;
   const rows = [...el.querySelectorAll(':scope > .hb')].filter(r => !skip(r)).map(r => {
     const b = r.querySelector('.hb-bar'), n = r.querySelector('.hb-n'), v = r.querySelector('.hb-v');
-    return [{text: clean(inline(n)), fontSize: 8}, bar(pct(b, 'width'), bgOf(b) || (r.classList.contains('save') ? '#C9CED6' : C.blue), BW), {text: clean(inline(v)), fontSize: 8, alignment: 'right'}];
+    const sb = !b && r.querySelector('.stackbar');
+    return [{text: clean(inline(n)), fontSize: 8}, sb ? stackMini(sb, BW) : bar(b ? pct(b, 'width') : 0, (b && bgOf(b)) || (r.classList.contains('save') ? '#C9CED6' : C.blue), BW), {text: clean(inline(v)), fontSize: 8, alignment: 'right'}];
   });
   return rows.length ? {table: {widths: ['*', BW, 'auto'], body: rows}, layout: 'noBorders', margin: [0, 2, 0, 8]} : null;
 }

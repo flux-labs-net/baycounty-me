@@ -2298,7 +2298,7 @@
    "source_title": "City of Lynn Haven FY2023 Midyear Budget (CRA Fund 701 capital projects)",
    "source_url": "https://cityoflynnhaven.com/DocumentCenter/View/2510",
    "confidence": "Official record",
-   "notes": "Budgeted amount. The kayak launch amount was not legible in the FY2026 budget OCR.",
+   "notes": "Budgeted amount. The kayak launch amount was not legible in the scanned FY2026 budget.",
    "cra": "Lynn Haven CRA",
    "city": "Lynn Haven",
    "status": "Budgeted",
@@ -2760,7 +2760,7 @@
    "source_title": "Resolution 20-108 / May 14, 2020 agenda",
    "source_url": "https://pcbfl.gov/home/showpublisheddocument/16673/637266931768470000",
    "confidence": "Official record",
-   "notes": "Construction inspection is listed as excluded from this task order. Subconsultants were Gortemoller Engineering, FTE and Southern Earth Sciences. The OCR'd line items add up to $10 less than the stated total.",
+   "notes": "Construction inspection is listed as excluded from this task order. Subconsultants were Gortemoller Engineering, FTE and Southern Earth Sciences. The line items read from the scanned page add up to $10 less than the stated total.",
    "cra": "Panama City Beach CRA",
    "city": "Panama City Beach",
    "status": "Spent",
@@ -4681,7 +4681,7 @@
   },
   {
    "cra": "Lynn Haven CRA",
-   "text": "The FY2025-26 approved CRA budget (DocumentCenter/View/4404) came back as poor OCR. Line items such as the Illinois and Minnesota sidewalks, the Porter Park kayak launch, Memorial Park, Griffin playground and the storefront allocation were not legible. The FY2026 tax increment figure was left null for that reason."
+   "text": "The FY2025-26 approved CRA budget is a poor-quality scan. Line items such as the Illinois and Minnesota sidewalks, the Porter Park kayak launch, Memorial Park, Griffin playground and the storefront allocation were not legible, so the FY2026 tax increment figure is left blank."
   },
   {
    "cra": "Lynn Haven CRA",
@@ -4717,11 +4717,11 @@
   },
   {
    "cra": "Panama City Beach CRA",
-   "text": "Actual revenues and expenditures are known only for some years: FY2020 revenue $13,085,513; FY2021 revenue $14,592,537 and expenditures $16,634,476; FY2022 $15,303,477 and $15,242,194; FY2023 $20,608,513 and $20,383,756; FY2024 $31,156,153 and $22,111,115; FY2025 $26,522,556 and $17,543,945. The schema has no field for these. Full statements are in the city ACFRs and the Exhibit A financial statements, which did not extract."
+   "text": "Actual revenues and expenditures are known only for some years: FY2020 revenue $13,085,513; FY2021 revenue $14,592,537 and expenditures $16,634,476; FY2022 $15,303,477 and $15,242,194; FY2023 $20,608,513 and $20,383,756; FY2024 $31,156,153 and $22,111,115; FY2025 $26,522,556 and $17,543,945. Full statements are in the city ACFRs and the Exhibit A financial statements, which did not extract."
   },
   {
    "cra": "Panama City Beach CRA",
-   "text": "The original Segment 3 construction contract amount (Res. 21-127, March 25, 2021) and the amounts of CWR Change Orders 1-6 were not found. The DocumentCenter resolution PDFs are image scans with no text. The city's Segment 3 page gives only a low bid of about $28M."
+   "text": "The original Segment 3 construction contract amount (Res. 21-127, March 25, 2021) and the amounts of CWR Change Orders 1-6 were not found. The resolution PDFs on the city site are image scans with no text. The city's Segment 3 page gives only a low bid of about $28M."
   },
   {
    "cra": "Panama City Beach CRA",
@@ -4761,7 +4761,7 @@
   },
   {
    "cra": "Callaway CRA",
-   "text": "CRA annual reports (e.g., cityofcallaway.com DocumentCenter/View/5173 'CRA_Annual-Report-2023'), CRA agendas and minutes, and budget resolutions (CRA Res 2021-01) are on cityofcallaway.com, but the site blocked automated fetching (robots). These would name vendors and projects."
+   "text": "Callaway's CRA annual reports (for example the 2023 annual report), CRA agendas and minutes, and budget resolutions (CRA Res 2021-01) are on cityofcallaway.com, but that site couldn't be read by our tools. These would name vendors and projects."
   },
   {
    "cra": "Callaway CRA",
@@ -4769,11 +4769,11 @@
   },
   {
    "cra": "Callaway CRA",
-   "text": "No CRA audit for FY2020 or earlier could be fetched (the Auditor General filename pattern failed for 2020 and 2021). Pre-2021 TIF history (2007-2020) is unknown apart from FY2021's $54,221, taken from the FY2022 audit comparison."
+   "text": "No CRA audit for FY2020 or earlier could be found on the Auditor General's site. Pre-2021 tax increment history (2007-2020) is unknown apart from FY2021's $54,221, taken from the FY2022 audit comparison."
   },
   {
    "cra": "Callaway CRA",
-   "text": "The 2007 Redevelopment Plan PDF (DocumentCenter/View/125) returned a server error, so planned project costs and the sunset date were not captured."
+   "text": "The 2007 Redevelopment Plan PDF on the city site returned an error, so planned project costs and the sunset date were not captured."
   },
   {
    "cra": "Callaway CRA",
@@ -4789,7 +4789,7 @@
   },
   {
    "cra": "Springfield CRA",
-   "text": "Several Springfield PDFs are scanned with no text layer: the FY24-25 budget (media/9871), Res 2025-02 and Res 2025-03, and the minutes for Nov 2024, May 2025 and Sept 2025. They need OCR to get line items and vendor awards."
+   "text": "Several Springfield PDFs are scans with no text: the FY24-25 budget, Res 2025-02 and Res 2025-03, and the minutes for Nov 2024, May 2025 and Sept 2025. Their line items and vendor awards have not been transcribed yet."
   },
   {
    "cra": "Springfield CRA",

@@ -27061,7 +27061,7 @@
    "note": "The itemized rows above plus contracts under $250,000 ($2,739,516 total; $460,600 completed) sum exactly to the reported totals.",
    "source_url": "https://flauditor.gov/pages/dsb_efile%20rpts/2025%20bay%20county%20district%20school%20board.pdf"
   },
-  "promised_project_list_note": "The 2018 referendum project lists (Elementary, Middle, High, Combination, Special Purpose, Charter) are published as images on bay.k12.fl.us/half-cent, which blocks automated access. They were not transcribed."
+  "promised_project_list_note": "The 2018 referendum project lists (Elementary, Middle, High, Combination, Special Purpose, Charter) are published as images on bay.k12.fl.us/half-cent, which couldn't be read by our tools. They have not been transcribed."
  },
  "notes": [
   "Fiscal years: county and TDT figures use the county FY (Oct 1-Sep 30, named for the ending year). School district figures use the July-June FY. EDR/DOR state figures use the state FY (July-June).",
@@ -27074,7 +27074,7 @@
  ],
  "gaps": [
   "No actual Bay County TDT collections were found for FY2026 beyond July 2026. The full-year September 2026 report was not yet posted.",
-  "The Bay County TDT ordinance and Tourist Development Plan (official cent-by-cent allocation) were not retrieved because the municode site blocks automated access. The 3/1/1-cent split is inferred from FY2024 fund revenue.",
+  "The Bay County tourist tax ordinance and Tourist Development Plan (the official cent-by-cent allocation) were not retrieved because the county code website couldn't be read by our tools. The 3/1/1-cent split is inferred from FY2024 fund revenue.",
   "No official, complete TDC member roster with seat categories was found online. Only names reported in news coverage are listed.",
   "The ad agency contract value (Luckie) and the PR/media contract values were not found. Only the CVB budget's agency retainer line ($461,135) is available.",
   "TDC/CVB spending by category before FY2024 was not compiled. Older county budget books are on the Budget Office archive page, and older CVB programs of work are on visitpanamacitybeach.com.",
@@ -27082,7 +27082,7 @@
   "No Citizens Oversight Committee reports or minutes for the infrastructure surtax were found online, and no OPPAGA/independent performance audit for Bay County's 2024 referendum appears on OPPAGA's contracted-reviews page.",
   "City-level surtax spending (Panama City, Lynn Haven, PCB, etc.) was not compiled. City project status comes only from the county GIS layer.",
   "The 2016 ballot named project categories, not a binding project list. The county's First/Last 5 Years schedules show programmed (not necessarily spent) amounts.",
-  "Bay District Schools' half-cent page and budget PDFs block automated access. The promised 2018 school project list and per-project school surtax costs were not retrieved. Few school projects could be tied to surtax funding by a source.",
+  "Bay District Schools' half-cent page and budget PDFs couldn't be read by our tools. The promised 2018 school project list and per-project school surtax costs were not retrieved. Few school projects could be tied to surtax funding by a source.",
   "School 'Local sales taxes' for FY2016-FY2017 come from the FY2017 Auditor General audit, and FY2018-FY2025 from the district financial statements filed with the Auditor General. No FY2026 figure is available yet."
  ],
  "sources": {

@@ -237,10 +237,10 @@
    }
   ],
   "data_gaps": [
-   "CRA annual reports (e.g., cityofcallaway.com DocumentCenter/View/5173 'CRA_Annual-Report-2023'), CRA agendas and minutes, and budget resolutions (CRA Res 2021-01) are on cityofcallaway.com, but the site blocked automated fetching (robots). These would name vendors and projects.",
+   "Callaway's CRA annual reports (for example the 2023 annual report), CRA agendas and minutes, and budget resolutions (CRA Res 2021-01) are on cityofcallaway.com, but that site couldn't be read by our tools. These would name vendors and projects.",
    "No vendor-level payments were found. Check the CRA board agenda packets in the city AgendaCenter.",
-   "No CRA audit for FY2020 or earlier could be fetched (the Auditor General filename pattern failed for 2020 and 2021). Pre-2021 TIF history (2007-2020) is unknown apart from FY2021's $54,221, taken from the FY2022 audit comparison.",
-   "The 2007 Redevelopment Plan PDF (DocumentCenter/View/125) returned a server error, so planned project costs and the sunset date were not captured.",
+   "No CRA audit for FY2020 or earlier could be found on the Auditor General's site. Pre-2021 tax increment history (2007-2020) is unknown apart from FY2021's $54,221, taken from the FY2022 audit comparison.",
+   "The 2007 Redevelopment Plan PDF on the city site returned an error, so planned project costs and the sunset date were not captured.",
    "The Tyndall Parkway median beautification (2019-2020, $500K, Lawnscapes Inc.) and the Cherry Street rehab ($5M) were reported as state/FDOT funded with no CRA funding mentioned, so they are excluded. Confirm whether any CRA money went in.",
    "There is no confirmed CRA tie to the Callaway Arts & Conference Center.",
    "Adopted CRA budget totals for FY2024-FY2027 were not found."
@@ -514,7 +514,7 @@
    }
   ],
   "data_gaps": [
-   "Several Springfield PDFs are scanned with no text layer: the FY24-25 budget (media/9871), Res 2025-02 and Res 2025-03, and the minutes for Nov 2024, May 2025 and Sept 2025. They need OCR to get line items and vendor awards.",
+   "Several Springfield PDFs are scans with no text: the FY24-25 budget, Res 2025-02 and Res 2025-03, and the minutes for Nov 2024, May 2025 and Sept 2025. Their line items and vendor awards have not been transcribed yet.",
    "The audit for FY2023 and earlier and TIF history for 2007-2022 were not found. Check the Florida Auditor General special district e-file or City of Springfield ACFRs.",
    "No vendor or contractor names were found for the park and sidewalk projects. The amounts listed are budget appropriations, not paid invoices.",
    "No CRA spending on the Transmitter Rd or 15th St corridor was documented.",

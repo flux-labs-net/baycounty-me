@@ -2388,7 +2388,7 @@
   }
  ],
  "notes": [
-  "All debt figures come from the audited financial statements filed with the Florida Auditor General. 'total_debt' means bonds, notes, loans, leases, SBITAs and finance purchases (plus unamortized bond premium where reported). It excludes compensated absences, claims, landfill closure costs, net pension and OPEB liabilities, which are shown separately.",
+  "All debt figures come from the audited financial statements filed with the Florida Auditor General. Total debt means bonds, notes, loans, leases, subscription IT arrangements (SBITAs) and finance purchases (plus unamortized bond premium where reported). It excludes compensated absences, claims, landfill closure costs, net pension and OPEB liabilities, which are shown separately.",
   "Latest audit used: FY2025 for Lynn Haven, Callaway, Springfield, Parker, Mexico Beach, Panama City Beach, PCB CRA and the airport district; FY2025 (June 30) for Bay District Schools; FY2024 for Bay County, Panama City, Panama City CRA and the Port Authority, because their FY2025 audits were not on the Auditor General's site as of 2026-10-20.",
   "Almost all local debt here is privately placed with banks or borrowed from the State (State Revolving Fund, State Infrastructure Bank), not publicly sold bonds, so most issues have no credit rating or EMMA listing.",
   "Big near-term balloon payments: Panama City's $150,000,000 Series 2023 note (5.82%) is scheduled to be repaid in one payment in FY2026. Bay County's Hurricane Michael notes are due in one payment each: $49,943,109 on 9/1/2027 and $48,874,337 on 9/1/2028.",
@@ -2399,10 +2399,10 @@
  "gaps": [
   "Bay County, City of Panama City, Panama City CRA and Panama City Port Authority FY2025 audits were not filed on the Auditor General site as of 2026-10-20, so FY2024 is used. The Port Authority has only its FY2024 audit posted there.",
   "Credit ratings: none of the audits publish ratings, and Moody's/S&P pages could not be read. The only publicly offered bonds found are Bay County's Water & Sewer 2015 and Water 2016 bonds, Callaway 2015, Lynn Haven 2015/2016, and probably the school COPs. Their ratings still need to be checked in the official statements.",
-  "EMMA (emma.msrb.org) blocks automated access (HTTP 403), so no EMMA links were collected. They need a manual browser lookup.",
+  "EMMA (emma.msrb.org), the national bond disclosure site, couldn't be read by our tools, so bond documents there are not linked yet.",
   "Original issue amounts are missing for several issues (Mexico Beach, Lynn Haven bonds, Port loans), and per-series COP balances are missing for the school district, because the audits do not list them.",
   "Purposes are not stated in the audits for Panama City's $150M Series 2023 note (beyond 'Capital Projects Fund'), the airport's SIB loans, and most Port loans. Council and board minutes or loan resolutions would be needed.",
-  "Management responses: several reports attach corrective action plans as scanned images (Panama City CRA, PCB 2024, Bay DSB 2025, some Bay County items). Where the text was not extractable, the field says so.",
+  "Management responses: several reports attach corrective action plans as scanned images (Panama City CRA, PCB 2024, Bay DSB 2025, some Bay County items). Where the text couldn't be read, the page says so.",
   "CRAs for Callaway, Springfield and Parker file separate reports. They were not reviewed because the city audits show no CRA debt. Springfield's and Parker's own audits report late or missing city TIF payments to those CRAs.",
   "Lynn Haven federal corruption case: only the 2020 DOJ indictment release was confirmed. Plea and sentencing outcomes need official DOJ or court documents.",
   "FY2022 audits were reviewed only where needed to complete 3 years (Panama City, Panama City CRA, Bay County). Prior-year findings for the other governments are summarized from the later audits' prior-finding schedules, with brief plain-English text."

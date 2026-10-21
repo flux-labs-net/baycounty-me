@@ -40,7 +40,8 @@ def vkey(v):
 def money(n):
     if n is None:
         return '—'
-    return f'${n/1e6:,.1f}M' if abs(n) >= 1e6 else (f'${n/1e3:,.0f}K' if abs(n) >= 1e3 else f'${n:,.0f}')
+    sign, n = ('\u2212' if n < 0 else ''), abs(n)
+    return sign + (f'${n/1e6:,.1f}M' if n >= 1e6 else (f'${n/1e3:,.0f}K' if n >= 1e3 else f'${n:,.0f}'))
 
 
 def contracts_page(out_dir):

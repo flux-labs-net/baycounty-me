@@ -291,6 +291,8 @@ def layout(title, desc, path, body, extra_head=''):
 
 
 def write(path, html):
+    # keep each page's 'Data updated' stamp in step with its latest What's new entry
+    html = re.sub(r'Data updated [A-Z][a-z]{2} \d{1,2}, \d{4}', 'Data updated ' + nice_date(last_updated(path)), html)
     fp = os.path.join(OUT, path.strip('/'), 'index.html') if path != '/' else os.path.join(OUT, 'index.html')
     os.makedirs(os.path.dirname(fp), exist_ok=True)
     open(fp, 'w').write(html)

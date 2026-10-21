@@ -226,7 +226,7 @@ function renderProp(p) {
     p.S1YRBLTACT ? ['Built', esc(p.S1YRBLTACT) + (p.S1AREAHEAT ? ` · ${Math.round(p.S1AREAHEAT).toLocaleString()} heated sq ft` : '')] : null,
     ['Market (just) value', usd(t.just)],
     ['<span class="term" data-term="assessed-value">Assessed value</span>', usd(t.assessed) + (t.assessed < t.just ? ` <span class="muted small">(capped ${usd(t.just - t.assessed)} below market)</span>` : '')],
-    ['Exemptions', t.exempt ? usd(t.exempt) + ` <span class="muted small">(${t.hx ? 'homestead' : 'codes'}${codes.filter(c => c !== 'HX').length ? (t.hx ? ' + ' : ' ') + esc(codes.filter(c => c !== 'HX').join(', ')) : ''})</span>` : 'None'],
+    ['Exemptions', t.exempt ? usd(t.exempt) + ` <span class="muted small">(${t.hx ? 'homestead' : 'codes'}${codes.filter(c => c !== 'HX').length ? (t.hx ? ' + ' : ' ') + esc(codes.filter(c => c !== 'HX').join(', ')) : ''})</span>` : 'No exemptions'],
     ['<span class="term" data-term="taxable-value">Taxable value</span>', usd(t.non) + (t.hx ? ` <span class="muted small">(${usd(t.school)} for school taxes)</span>` : '')],
   ]);
 }
