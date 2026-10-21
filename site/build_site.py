@@ -34,11 +34,12 @@ SITE_CSS = open(os.path.join(ROOT, 'site.css')).read()
 
 def nav_html(active):
     items = []
+    aria_current = ' aria-current="page"'
     for m in MENU:
         if 'children' in m:
             on = any(c['href'] == active for c in m['children'])
             kids = ''.join(
-                f'<li><a href="{c["href"]}"{" aria-current=\"page\"" if c["href"] == active else ""}>'
+                f'<li><a href="{c["href"]}"{aria_current if c["href"] == active else ""}>'
                 f'<span class="k">{c["label"]}</span><span class="kd">{c["desc"]}</span></a></li>'
                 for c in m['children'])
             items.append(
@@ -46,7 +47,7 @@ def nav_html(active):
                 f'{m["label"]}<svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 3.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>'
                 f'<ul class="nav-sub">{kids}</ul></li>')
         else:
-            cur = ' aria-current="page"' if m['href'] == active else ''
+            cur = aria_current if m['href'] == active else ''
             items.append(f'<li><a href="{m["href"]}"{cur}>{m["label"]}</a></li>')
     return f'''<header class="site-head"><div class="site-head-in">
   <a class="wordmark" href="/" aria-label="{SITE} home"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C7.6 2 4 5.5 4 9.9 4 15.6 12 22 12 22s8-6.4 8-12.1C20 5.5 16.4 2 12 2z" fill="var(--blue)"/><circle cx="12" cy="10" r="3.2" fill="var(--bg)"/></svg><span>BayCounty<b>.me</b></span></a>
@@ -226,6 +227,8 @@ def layout(title, desc, path, body, extra_head=''):
 </main>
 {FOOTER}
 <script src="/assets/site.js" defer></script>
+<script>window.va = window.va || function () {{{{ (window.vaq = window.vaq || []).push(arguments); }}}};</script>
+<script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
 '''

@@ -1,0 +1,12 @@
+{
+  "name": "baycounty-me",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Bay County public records in plain view",
+  "scripts": {
+    "build": "cd site && python3 build_site.py"
+  },
+  "dependencies": {
+    "@vercel/analytics": "^1.4.1"
+  }
+}
