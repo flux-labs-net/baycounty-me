@@ -8,10 +8,10 @@ Object.entries(D.cat).forEach(([k, n]) => $('vtC').insertAdjacentHTML('beforeend
 let shown = 40;
 function filt() {
   const q = $('vtQ').value.trim().toLowerCase(), b = $('vtB').value, c = $('vtC').value, s = $('vtS').checked;
-  const cur = D.votes.filter(v => (!b || v.b === b) && (!c || v.c === c) && (!s || Object.values(v.m).includes('no')) && (!q || (v.i + ' ' + (v.s || '') + ' ' + Object.keys(v.m).join(' ')).toLowerCase().includes(q)));
+  const cur = D.votes.filter(v => (!b || v.b === b) && (!c || v.c === c) && (!s || v.x) && (!q || (v.i + ' ' + (v.s || '') + ' ' + Object.keys(v.m).join(' ')).toLowerCase().includes(q)));
   $('vtCount').textContent = `${cur.length} votes`;
   $('vtList').innerHTML = cur.slice(0, shown).map(v => {
-    const split = Object.values(v.m).includes('no');
+    const split = v.x;
     return `<li class="fd"><div class="fd-hd"><b>${esc(D.bodies[v.b]?.n || v.b)}</b> <span class="muted">${esc(v.d)} · ${esc(D.cat[v.c] || v.c)}${v.a ? ' · $' + Math.round(v.a).toLocaleString('en-US') : ''}</span> <span class="badge ${split ? 'warn' : 'ok'}">${esc(v.t || '')} ${esc(v.o || '')}</span></div>
       <div class="fd-t">${esc(v.s || v.i)}</div>${v.s ? `<p class="small muted">${esc(v.i)}</p>` : ''}
       ${Object.keys(v.m).length ? `<p class="votes-row">${Object.entries(v.m).map(([n, x]) => `<span class="vchip v-${esc(x)}">${esc(n)}: ${V[x] || esc(x)}</span>`).join('')}</p>` : ''}

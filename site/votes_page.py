@@ -13,7 +13,14 @@ def votes_page(out_dir):
     bodies = {b['id']: b for b in d['bodies']}
     vs = sorted(d['votes'], key=lambda v: v.get('date') or '', reverse=True)
     cnt = Counter(v['body'] for v in vs)
-    split = [v for v in vs if isinstance(v.get('by_member'), dict) and 'no' in v['by_member'].values()]
+    import re as _re
+
+    def is_split(v):
+        if isinstance(v.get('by_member'), dict) and 'no' in v['by_member'].values():
+            return True
+        m = _re.search(r'(\d+)\s*(?:-|to)\s*(\d+)', v.get('tally') or '')
+        return bool(m and int(m.group(2)) > 0)
+    split = [v for v in vs if is_split(v)]
     # per-member tallies (only members with recorded roll calls)
     mem = defaultdict(lambda: Counter())
     for v in vs:
@@ -21,7 +28,7 @@ def votes_page(out_dir):
             mem[(v['body'], n)][x] += 1
     data = {'bodies': {k: {'n': b['name']} for k, b in bodies.items()}, 'cat': CAT,
             'votes': [{'b': v['body'], 'd': v.get('date'), 'c': v.get('category'), 'i': v.get('item'), 'a': v.get('amount'), 'o': v.get('outcome'), 't': v.get('tally'),
-                       'm': v.get('by_member') or {}, 's': v.get('plain_summary'), 'u': v.get('source_url'), 'ut': v.get('source_title')} for v in vs]}
+                       'm': v.get('by_member') or {}, 'x': is_split(v), 's': v.get('plain_summary'), 'u': v.get('source_url'), 'ut': v.get('source_title')} for v in vs]}
     js = open(os.path.join(HERE, 'votes.js')).read().replace('__VT__', json.dumps(data, ensure_ascii=False, separators=(',', ':')))
     open(os.path.join(out_dir, 'assets', 'votes.js'), 'w').write(js)
 
@@ -37,7 +44,7 @@ def votes_page(out_dir):
             rows += f'<tr><th scope="row">{e(m["name"])}</th><td class="small">{e(m.get("seat"))}</td><td class="small">{e(m.get("term_end"))}</td><td class="num">{rec or "—"}</td><td class="num">{c["no"] or ("0" if rec else "—")}</td></tr>'
         roster += f'''<details class="tbl-toggle"{" open" if cnt[k] else ""}><summary>{e(b["name"])} <span class="muted">· {cnt[k]} votes recorded</span></summary><div class="tablewrap"><table class="tx-table"><thead><tr><th scope="col">Member</th><th scope="col">Seat</th><th scope="col">Term</th><th scope="col" class="num">Recorded votes</th><th scope="col" class="num">Voted no</th></tr></thead><tbody>{rows}</tbody></table></div>{f'<p class="note"><a class="src" href="{e(b["source_url"])}" target="_blank" rel="noopener">Roster source</a></p>' if b.get("source_url") else ""}</details>'''
     sp_html = ''.join(f'''<li class="fd"><div class="fd-hd"><b>{e(bodies.get(v["body"], {}).get("name", v["body"]))}</b> <span class="muted">{e(v.get("date"))} · {e(CAT.get(v.get("category"), v.get("category")))}{" · $" + format(v["amount"], ",.0f") if v.get("amount") else ""}</span> <span class="badge warn">{e(v.get("tally"))} {e(v.get("outcome"))}</span></div>
-      <div class="fd-t">{e(v.get("plain_summary") or v.get("item"))}</div><p class="small"><b>No:</b> {e(", ".join(n for n, x in v["by_member"].items() if x == "no"))} · <b>Yes:</b> {e(", ".join(n for n, x in v["by_member"].items() if x == "yes"))}{" · <b>Absent:</b> " + e(", ".join(n for n, x in v["by_member"].items() if x == "absent")) if "absent" in v["by_member"].values() else ""}</p>
+      <div class="fd-t">{e(v.get("plain_summary") or v.get("item"))}</div><p class="small"><b>No:</b> {e(", ".join(n for n, x in (v.get("by_member") or {}).items() if x == "no") or "not named in the minutes")} · <b>Yes:</b> {e(", ".join(n for n, x in (v.get("by_member") or {}).items() if x == "yes") or "not named")}{" · <b>Absent:</b> " + e(", ".join(n for n, x in v["by_member"].items() if x == "absent")) if "absent" in (v.get("by_member") or {}).values() else ""}</p>
       <a class="src" href="{e(v.get("source_url"))}" target="_blank" rel="noopener">{e(v.get("source_title") or "Minutes")}</a></li>''' for v in split[:25])
     missing = [bodies[k]['name'] for k in bodies if not cnt[k] and not k.endswith('-cra')]
     return f'''<div class="page tax">
@@ -54,7 +61,7 @@ def votes_page(out_dir):
     <div class="kpi"><span class="eyebrow">Votes recorded</span><span class="v">{len(vs)}</span><span class="s">Money decisions with a source</span></div>
     <div class="kpi"><span class="eyebrow">Split votes</span><span class="v">{len(split)}</span><span class="s">Not unanimous</span></div>
     <div class="kpi"><span class="eyebrow">Tax rate votes</span><span class="v">{sum(1 for v in vs if v.get("category") == "millage")}</span><span class="s">Millage adoptions</span></div>
-    <div class="kpi"><span class="eyebrow">Boards covered so far</span><span class="v">{sum(1 for k in bodies if cnt[k])} of {len([k for k in bodies if not k.endswith("-cra")])}</span><span class="s">School Board still limited</span></div>
+    <div class="kpi"><span class="eyebrow">Boards covered so far</span><span class="v">{sum(1 for k in bodies if not k.endswith("-cra") and (cnt[k] or cnt[k.split("-")[0] + "-cra"]))} of {len([k for k in bodies if not k.endswith("-cra")])}</span><span class="s">School Board still limited</span></div>
   </div>
   <section class="tx-sec"><div class="sec-hd"><h2 id="split">Split votes</h2><span class="muted">Most recent first</span></div><ol class="findings">{sp_html}</ol></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="all">Every recorded vote</h2><span class="muted" id="vtCount"></span></div>
