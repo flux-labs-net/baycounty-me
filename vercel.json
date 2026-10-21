@@ -1,0 +1,5 @@
+{
+  "outputDirectory": "site/public",
+  "cleanUrls": true,
+  "trailingSlash": false
+}

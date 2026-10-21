@@ -1,0 +1,5 @@
+geo/land.json
+geo/counties.json
+__pycache__/
+*.pyc
+.DS_Store

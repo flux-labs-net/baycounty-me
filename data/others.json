@@ -1,0 +1,679 @@
+[
+ {
+  "cra": "Callaway CRA",
+  "city": "Callaway",
+  "created": "2007",
+  "overview": "The Callaway Community Redevelopment Agency is a dependent district and blended component unit of the City of Callaway, with the City Commission serving as its board. It was created by City Ordinance 829 (audits give May 8, 2007) and adopted its redevelopment plan by Resolution 07-13 in 2007. The district covers roughly 1,400 acres in the commercial core along Tyndall Parkway (US-98) and Highway 22. Tax increment was small until about FY2021, then rose quickly to more than $1.1 million in FY2025, while spending lagged far behind budget. Fund balance therefore grew to about $2.25 million by the end of FY2025.",
+  "districts": [
+   {
+    "name": "Callaway Community Redevelopment Area",
+    "created": "2007 (Ordinance 829; audit says established May 8, 2007; Bay County GIS EST_YEAR field says 2006)",
+    "acres": 1402,
+    "center": [
+     30.148,
+     -85.588
+    ],
+    "boundary_description": "Per the FY2024 CRA audit: about 1,402 acres within city limits, generally bounded by East 7th Street to the north, Highway 22 to the west, Cherry Street and Boat Race Road to the south, and Berthe Avenue to the east. It takes in the Tyndall Parkway (US-98) and Highway 22 commercial corridors. Bay County GIS polygon area works out to about 1,366 acres.",
+    "boundary_polygon": [
+     [
+      30.1603,
+      -85.5994
+     ],
+     [
+      30.1583,
+      -85.5863
+     ],
+     [
+      30.15,
+      -85.5901
+     ],
+     [
+      30.1511,
+      -85.5838
+     ],
+     [
+      30.1581,
+      -85.5849
+     ],
+     [
+      30.1587,
+      -85.5805
+     ],
+     [
+      30.1492,
+      -85.5799
+     ],
+     [
+      30.1541,
+      -85.5752
+     ],
+     [
+      30.1311,
+      -85.5747
+     ],
+     [
+      30.1311,
+      -85.591
+     ],
+     [
+      30.1457,
+      -85.591
+     ],
+     [
+      30.1531,
+      -85.605
+     ],
+     [
+      30.1603,
+      -85.5994
+     ]
+    ],
+    "boundary_is_approximate": true,
+    "source_url": "https://gis.baycountyfl.gov/arcgis/rest/services/Admin_A12/MapServer/27"
+   }
+  ],
+  "budget_by_year": [
+   {
+    "fy": "FY2021",
+    "tif_revenue": 54221,
+    "total_budget": null,
+    "district": "all",
+    "source_url": "https://flauditor.gov/pages/specialdistricts_efile%20rpts/2022%20callaway%20community%20redevelopment%20agency.pdf"
+   },
+   {
+    "fy": "FY2022",
+    "tif_revenue": 238097,
+    "total_budget": 231736,
+    "district": "all",
+    "source_url": "https://flauditor.gov/pages/specialdistricts_efile%20rpts/2022%20callaway%20community%20redevelopment%20agency.pdf"
+   },
+   {
+    "fy": "FY2023",
+    "tif_revenue": 487256,
+    "total_budget": 476449,
+    "district": "all",
+    "source_url": "https://flauditor.gov/pages/specialdistricts_efile%20rpts/2023%20callaway%20community%20redevelopment%20agency.pdf"
+   },
+   {
+    "fy": "FY2024",
+    "tif_revenue": 856412,
+    "total_budget": null,
+    "district": "all",
+    "source_url": "https://flauditor.gov/pages/specialdistricts_efile%20rpts/2024%20callaway%20community%20redevelopment%20agency.pdf"
+   },
+   {
+    "fy": "FY2025",
+    "tif_revenue": 1143791,
+    "total_budget": null,
+    "district": "all",
+    "source_url": "https://flauditor.gov/pages/specialdistricts_efile%20rpts/2025%20callaway%20community%20redevelopment%20agency.pdf"
+   }
+  ],
+  "payments": [
+   {
+    "payee": "Not named (Rogers Pond spillway replacement contractor)",
+    "amount": 129010,
+    "date_or_fy": "FY2025-FY2026",
+    "purpose": "Rogers Pond spillway replacement. The FY2025 audit management letter lists total expenditures of $129,010 and says construction was set to begin on or after Oct 1, 2025.",
+    "category": "Infrastructure/streetscape",
+    "location_name": "Rogers Pond spillway",
+    "address": "",
+    "lat": null,
+    "lng": null,
+    "coord_precision": "approximate",
+    "district": "Callaway Community Redevelopment Area",
+    "source_title": "Callaway CRA FY2025 audit (Mauldin & Jenkins)",
+    "source_url": "https://flauditor.gov/pages/specialdistricts_efile%20rpts/2025%20callaway%20community%20redevelopment%20agency.pdf",
+    "confidence": "documented (from official record)",
+    "notes": "Pond location not geocoded, so coordinates are left null."
+   },
+   {
+    "payee": "Not named (Berthe spillway project)",
+    "amount": null,
+    "date_or_fy": "FY2025",
+    "purpose": "Berthe spillway (stormwater) project. Its delay was the main reason FY2025 capital spending came in about $2.86 million under budget. Capital outlay budget was $3,144,257; actual was $315,715.",
+    "category": "Infrastructure/streetscape",
+    "location_name": "Berthe Avenue spillway",
+    "address": "Berthe Ave, Callaway, FL",
+    "lat": 30.14,
+    "lng": -85.576,
+    "coord_precision": "street",
+    "district": "Callaway Community Redevelopment Area",
+    "source_title": "Callaway CRA FY2025 audit",
+    "source_url": "https://flauditor.gov/pages/specialdistricts_efile%20rpts/2025%20callaway%20community%20redevelopment%20agency.pdf",
+    "confidence": "documented (from official record)",
+    "notes": "No contract amount was found. The audit says a stormwater grant was pending."
+   },
+   {
+    "payee": "Various (not named)",
+    "amount": 315715,
+    "date_or_fy": "FY2025",
+    "purpose": "Total CRA capital outlay for FY2025",
+    "category": "Infrastructure/streetscape",
+    "location_name": "Callaway CRA district",
+    "address": "",
+    "lat": 30.148,
+    "lng": -85.588,
+    "coord_precision": "approximate",
+    "district": "Callaway Community Redevelopment Area",
+    "source_title": "Callaway CRA FY2025 audit",
+    "source_url": "https://flauditor.gov/pages/specialdistricts_efile%20rpts/2025%20callaway%20community%20redevelopment%20agency.pdf",
+    "confidence": "documented (from official record)",
+    "notes": "Aggregate figure, not one payment. It probably overlaps the Rogers Pond figure."
+   },
+   {
+    "payee": "Various (not named)",
+    "amount": 221428,
+    "date_or_fy": "FY2024",
+    "purpose": "Total CRA capital outlay for FY2024. Year-end assets included $143,841 in construction in progress and $20,045 in buildings.",
+    "category": "Infrastructure/streetscape",
+    "location_name": "Callaway CRA district",
+    "address": "",
+    "lat": 30.148,
+    "lng": -85.588,
+    "coord_precision": "approximate",
+    "district": "Callaway Community Redevelopment Area",
+    "source_title": "Callaway CRA FY2024 audit",
+    "source_url": "https://flauditor.gov/pages/specialdistricts_efile%20rpts/2024%20callaway%20community%20redevelopment%20agency.pdf",
+    "confidence": "documented (from official record)",
+    "notes": "Aggregate figure. The budget was $889,406."
+   },
+   {
+    "payee": "Various (not named)",
+    "amount": 84517,
+    "date_or_fy": "FY2022",
+    "purpose": "Machinery and equipment purchased as CRA capital outlay",
+    "category": "Other",
+    "location_name": "Callaway CRA district",
+    "address": "",
+    "lat": 30.148,
+    "lng": -85.588,
+    "coord_precision": "approximate",
+    "district": "Callaway Community Redevelopment Area",
+    "source_title": "Callaway CRA FY2022 audit",
+    "source_url": "https://flauditor.gov/pages/specialdistricts_efile%20rpts/2022%20callaway%20community%20redevelopment%20agency.pdf",
+    "confidence": "documented (from official record)",
+    "notes": "The audit doesn't say what equipment was bought."
+   },
+   {
+    "payee": "Various (not named)",
+    "amount": 26427,
+    "date_or_fy": "FY2023",
+    "purpose": "CRA capital outlay for FY2023: $14,628 construction in progress and $11,799 improvements other than buildings",
+    "category": "Infrastructure/streetscape",
+    "location_name": "Callaway CRA district",
+    "address": "",
+    "lat": 30.148,
+    "lng": -85.588,
+    "coord_precision": "approximate",
+    "district": "Callaway Community Redevelopment Area",
+    "source_title": "Callaway CRA FY2023 audit",
+    "source_url": "https://flauditor.gov/pages/specialdistricts_efile%20rpts/2023%20callaway%20community%20redevelopment%20agency.pdf",
+    "confidence": "documented (from official record)",
+    "notes": "Aggregate figure. Expenditures came in $441,553 under budget because property rehab projects were delayed and business grant funds went unused."
+   },
+   {
+    "payee": "Commercial property/business owners in CRA (program)",
+    "amount": null,
+    "date_or_fy": "ongoing",
+    "purpose": "Fa\u00e7ade Improvement Program: dollar-for-dollar matching grants of up to $5,000 for exterior work such as paint, signage, lighting, sidewalks and landscaping",
+    "category": "Grant to business",
+    "location_name": "Callaway CRA district",
+    "address": "",
+    "lat": 30.148,
+    "lng": -85.588,
+    "coord_precision": "approximate",
+    "district": "Callaway Community Redevelopment Area",
+    "source_title": "City of Callaway \u2013 Fa\u00e7ade Improvement Program",
+    "source_url": "https://www.cityofcallaway.com/163/Faade-Improvement-Program",
+    "confidence": "documented (from official record)",
+    "notes": "Program terms only. FY2023 and FY2024 audits say business grant funds were set aside but no one applied. No recipients were found."
+   }
+  ],
+  "controversies": [
+   {
+    "summary": "Year after year, CRA spending ran far below budget. FY2025 capital outlay was about $316K against a $3.14M budget, so the restricted fund balance built up to about $2.25M. Audits blamed delayed property rehab and spillway projects and business grants with no applicants.",
+    "source_url": "https://flauditor.gov/pages/specialdistricts_efile%20rpts/2025%20callaway%20community%20redevelopment%20agency.pdf"
+   }
+  ],
+  "data_gaps": [
+   "CRA annual reports (e.g., cityofcallaway.com DocumentCenter/View/5173 'CRA_Annual-Report-2023'), CRA agendas and minutes, and budget resolutions (CRA Res 2021-01) are on cityofcallaway.com, but the site blocked automated fetching (robots). These would name vendors and projects.",
+   "No vendor-level payments were found. Check the CRA board agenda packets in the city AgendaCenter.",
+   "No CRA audit for FY2020 or earlier could be fetched (the Auditor General filename pattern failed for 2020 and 2021). Pre-2021 TIF history (2007-2020) is unknown apart from FY2021's $54,221, taken from the FY2022 audit comparison.",
+   "The 2007 Redevelopment Plan PDF (DocumentCenter/View/125) returned a server error, so planned project costs and the sunset date were not captured.",
+   "The Tyndall Parkway median beautification (2019-2020, $500K, Lawnscapes Inc.) and the Cherry Street rehab ($5M) were reported as state/FDOT funded with no CRA funding mentioned, so they are excluded. Confirm whether any CRA money went in.",
+   "There is no confirmed CRA tie to the Callaway Arts & Conference Center.",
+   "Adopted CRA budget totals for FY2024-FY2027 were not found."
+  ]
+ },
+ {
+  "cra": "Springfield CRA",
+  "city": "Springfield",
+  "created": "2007",
+  "overview": "The Springfield Community Redevelopment Agency was created by Resolution/Ordinance 07-05 on March 30, 2007. It is a component unit of the City of Springfield, and the City Commission sits as its board. The base taxable value was about $67.6 million; by February 2025 the area was valued at about $118.4 million. For several years the CRA collected TIF but spent nothing, and auditors found the City had not transferred its own share of the increment for FY2022-2024. Recent budgets put the built-up reserves toward park and sidewalk projects (Springfield Gardens Walking Park, Nature Park, Buddy McLemore Park, Carrie Bell Shaw Park, and 2nd/3rd Street sidewalks).",
+  "districts": [
+   {
+    "name": "Springfield Community Redevelopment Area",
+    "created": "2007 (Res./Ord. 07-05, March 30, 2007; Bay County GIS EST_YEAR says 2006)",
+    "acres": 1119,
+    "center": [
+     30.163,
+     -85.611
+    ],
+    "boundary_description": "A north-south area covering much of Springfield along the Business 98 / 15th Street (US-98) and Transmitter Road corridors, reaching north to about 30.196. Acreage is derived from the Bay County GIS polygon area (48.75M sq ft) and is not stated in city documents.",
+    "boundary_polygon": [
+     [
+      30.1459,
+      -85.6212
+     ],
+     [
+      30.1605,
+      -85.6207
+     ],
+     [
+      30.1713,
+      -85.61
+     ],
+     [
+      30.1965,
+      -85.6092
+     ],
+     [
+      30.1965,
+      -85.6034
+     ],
+     [
+      30.1724,
+      -85.6079
+     ],
+     [
+      30.1672,
+      -85.5953
+     ],
+     [
+      30.1603,
+      -85.6079
+     ],
+     [
+      30.1457,
+      -85.6079
+     ],
+     [
+      30.1459,
+      -85.6212
+     ]
+    ],
+    "boundary_is_approximate": true,
+    "source_url": "https://gis.baycountyfl.gov/arcgis/rest/services/Admin_A12/MapServer/27"
+   }
+  ],
+  "budget_by_year": [
+   {
+    "fy": "FY2023",
+    "tif_revenue": 192948,
+    "total_budget": null,
+    "district": "all",
+    "source_url": "https://www.springfieldfl.net/media/10331"
+   },
+   {
+    "fy": "FY2024",
+    "tif_revenue": 382166,
+    "total_budget": null,
+    "district": "all",
+    "source_url": "https://www.springfieldfl.net/media/10331"
+   },
+   {
+    "fy": "FY2025",
+    "tif_revenue": 506805,
+    "total_budget": 1130434,
+    "district": "all",
+    "source_url": "https://www.springfieldfl.net/media/10746"
+   },
+   {
+    "fy": "FY2026",
+    "tif_revenue": 642819.63,
+    "total_budget": 1756907.23,
+    "district": "all",
+    "source_url": "https://www.springfieldfl.net/media/10801"
+   },
+   {
+    "fy": "FY2027",
+    "tif_revenue": 736857.74,
+    "total_budget": 1547347.55,
+    "district": "all",
+    "source_url": "https://www.springfieldfl.net/media/10806"
+   }
+  ],
+  "payments": [
+   {
+    "payee": "Not named (Springfield Gardens Walking Park improvements)",
+    "amount": 606347.55,
+    "date_or_fy": "FY2027 (budgeted)",
+    "purpose": "Springfield Gardens Walking Park: A/E and other improvements",
+    "category": "Parks/public space",
+    "location_name": "Springfield Gardens Walking Park",
+    "address": "",
+    "lat": 30.17,
+    "lng": -85.607,
+    "coord_precision": "approximate",
+    "district": "Springfield Community Redevelopment Area",
+    "source_title": "Springfield CRA Resolution 2026-08, FY26-27 budget",
+    "source_url": "https://www.springfieldfl.net/media/10806",
+    "confidence": "documented (from official record)",
+    "notes": "Budget appropriation, not a confirmed payment. The park location is approximate."
+   },
+   {
+    "payee": "Not named",
+    "amount": 241809.24,
+    "date_or_fy": "FY2026 (amended budget)",
+    "purpose": "Nature Park restroom facilities, bridgeway and information board",
+    "category": "Parks/public space",
+    "location_name": "Springfield Nature Park",
+    "address": "",
+    "lat": null,
+    "lng": null,
+    "coord_precision": "approximate",
+    "district": "Springfield Community Redevelopment Area",
+    "source_title": "Springfield CRA Resolution 2026-07, amending FY25-26 budget",
+    "source_url": "https://www.springfieldfl.net/media/10801",
+    "confidence": "documented (from official record)",
+    "notes": "Appropriation. The FY27 budget carries another $235,000 for Nature Park (bridge, restrooms and other)."
+   },
+   {
+    "payee": "Not named",
+    "amount": 219660.55,
+    "date_or_fy": "FY2026 (amended budget)",
+    "purpose": "Carrie Bell Shaw Park: A/E and other improvements",
+    "category": "Parks/public space",
+    "location_name": "Carrie Bell Shaw Park",
+    "address": "",
+    "lat": null,
+    "lng": null,
+    "coord_precision": "approximate",
+    "district": "Springfield Community Redevelopment Area",
+    "source_title": "Springfield CRA Resolution 2026-07",
+    "source_url": "https://www.springfieldfl.net/media/10801",
+    "confidence": "documented (from official record)",
+    "notes": "Appropriation. FY27 budgets another $100,000."
+   },
+   {
+    "payee": "Not named",
+    "amount": 203975.0,
+    "date_or_fy": "FY2026 (amended budget)",
+    "purpose": "Springfield Gardens Walking Park: A/E and other improvements",
+    "category": "Parks/public space",
+    "location_name": "Springfield Gardens Walking Park",
+    "address": "",
+    "lat": 30.17,
+    "lng": -85.607,
+    "coord_precision": "approximate",
+    "district": "Springfield Community Redevelopment Area",
+    "source_title": "Springfield CRA Resolution 2026-07",
+    "source_url": "https://www.springfieldfl.net/media/10801",
+    "confidence": "documented (from official record)",
+    "notes": "Appropriation."
+   },
+   {
+    "payee": "Not named",
+    "amount": 185063.04,
+    "date_or_fy": "FY2026 (amended budget)",
+    "purpose": "Springfield Gardens Walking Park playground equipment (one side)",
+    "category": "Parks/public space",
+    "location_name": "Springfield Gardens Walking Park",
+    "address": "",
+    "lat": 30.17,
+    "lng": -85.607,
+    "coord_precision": "approximate",
+    "district": "Springfield Community Redevelopment Area",
+    "source_title": "Springfield CRA Resolution 2026-07",
+    "source_url": "https://www.springfieldfl.net/media/10801",
+    "confidence": "documented (from official record)",
+    "notes": "Appropriation. FY27 budgets $188,000 for playground equipment and $188,000 for paved parking (both sides)."
+   },
+   {
+    "payee": "Not named",
+    "amount": 180000.0,
+    "date_or_fy": "FY2027 (budgeted)",
+    "purpose": "Buddy McLemore Park playground equipment upgrades",
+    "category": "Parks/public space",
+    "location_name": "Buddy McLemore Park",
+    "address": "",
+    "lat": null,
+    "lng": null,
+    "coord_precision": "approximate",
+    "district": "Springfield Community Redevelopment Area",
+    "source_title": "Springfield CRA Resolution 2026-08",
+    "source_url": "https://www.springfieldfl.net/media/10806",
+    "confidence": "documented (from official record)",
+    "notes": "Appropriation. The 2024 annual report had allocated $80,000. WMBB reported in 2021 that the old playground was removed after Hurricane Michael."
+   },
+   {
+    "payee": "Not named",
+    "amount": 71186.0,
+    "date_or_fy": "FY2026 (amended budget)",
+    "purpose": "2nd Street sidewalk project (Detroit Ave to Business 98)",
+    "category": "Infrastructure/streetscape",
+    "location_name": "2nd Street sidewalk",
+    "address": "2nd St between Detroit Ave and Business 98, Springfield, FL",
+    "lat": null,
+    "lng": null,
+    "coord_precision": "street",
+    "district": "Springfield Community Redevelopment Area",
+    "source_title": "Springfield CRA Resolution 2026-07",
+    "source_url": "https://www.springfieldfl.net/media/10801",
+    "confidence": "documented (from official record)",
+    "notes": "Appropriation. The 2024 annual report allocated $45,000. The 3rd St sidewalk (Bus 98 to Everitt Ave) was budgeted at $50,000 in FY27."
+   },
+   {
+    "payee": "Carr, Riggs & Ingram, LLC",
+    "amount": 15990.0,
+    "date_or_fy": "FY2026 (amended budget)",
+    "purpose": "Auditing fees",
+    "category": "Professional services/consultant",
+    "location_name": "Springfield City Hall",
+    "address": "408 School Ave, Springfield, FL 32401",
+    "lat": 30.158,
+    "lng": -85.611,
+    "coord_precision": "approximate",
+    "district": "Springfield Community Redevelopment Area",
+    "source_title": "Springfield CRA Resolution 2026-07; CRA audits FY2024/FY2025",
+    "source_url": "https://www.springfieldfl.net/media/10801",
+    "confidence": "documented (from official record)",
+    "notes": "The budget line is 'Auditing Fees'. Carr, Riggs & Ingram is named as auditor in the FY2025 audit, so attributing the fee to them is an inference."
+   },
+   {
+    "payee": "Various (not named)",
+    "amount": 60017,
+    "date_or_fy": "FY2025",
+    "purpose": "Total actual CRA expenditures (economic environment) for FY2025, the first spending on record after FY2023-2024 had none",
+    "category": "Other",
+    "location_name": "Springfield CRA district",
+    "address": "",
+    "lat": 30.163,
+    "lng": -85.611,
+    "coord_precision": "approximate",
+    "district": "Springfield Community Redevelopment Area",
+    "source_title": "Springfield CRA FY2025 audit",
+    "source_url": "https://www.springfieldfl.net/media/10746",
+    "confidence": "documented (from official record)",
+    "notes": "Aggregate figure. Actual capital outlay was $0 against a $1,130,434 final budget."
+   }
+  ],
+  "controversies": [
+   {
+    "summary": "The FY2024 audit reported a material weakness: the City had not calculated or transferred its required share of the tax increment to the CRA for FY2022-2024, an estimated $291,027. The auditor attributed this to a lack of understanding of the requirement.",
+    "source_url": "https://www.springfieldfl.net/media/10331"
+   },
+   {
+    "summary": "The FY2025 audit repeated the finding on late City transfers, estimating the cumulative underfunding at $526,519. A catch-up transfer was made in September 2025. The audit also found the CRA had not sent its budgets to Bay County within the 10 days required by s.163.387(6), F.S.",
+    "source_url": "https://www.springfieldfl.net/media/10746"
+   },
+   {
+    "summary": "The 2024 annual report said none of the redevelopment plan's goals had yet been met and no projects had been completed. Reserves were only being built up at that point.",
+    "source_url": "https://www.springfieldfl.net/media/9881"
+   }
+  ],
+  "data_gaps": [
+   "Several Springfield PDFs are scanned with no text layer: the FY24-25 budget (media/9871), Res 2025-02 and Res 2025-03, and the minutes for Nov 2024, May 2025 and Sept 2025. They need OCR to get line items and vendor awards.",
+   "The audit for FY2023 and earlier and TIF history for 2007-2022 were not found. Check the Florida Auditor General special district e-file or City of Springfield ACFRs.",
+   "No vendor or contractor names were found for the park and sidewalk projects. The amounts listed are budget appropriations, not paid invoices.",
+   "No CRA spending on the Transmitter Rd or 15th St corridor was documented.",
+   "Exact park coordinates (Nature Park, Carrie Bell Shaw Park, Buddy McLemore Park) are not geocoded."
+  ]
+ },
+ {
+  "cra": "Parker CRA",
+  "city": "Parker",
+  "created": "2004",
+  "overview": "The Community Redevelopment Agency of the City of Parker was established May 25, 2004, by City Council Resolution 2004-05-350. It is a dependent district governed by the City Council. For most of its history it had no positive tax increment: it received $0 TIF in FY2023 and ran a tiny budget for audit costs. Increment collection finally began in FY2024 ($247,539) and grew in FY2025 ($393,198), with spending so far limited to reimbursing the City.",
+  "districts": [
+   {
+    "name": "Parker Community Redevelopment Area",
+    "created": "2004 (Resolution 2004-05-350; Bay County GIS EST_YEAR says 2006)",
+    "acres": 593,
+    "center": [
+     30.135,
+     -85.6
+    ],
+    "boundary_description": "Two pieces along the US-98 (Tyndall Pkwy / Hwy 98) corridor through Parker. The northern section runs roughly from 30.127 to 30.146 N, between about -85.591 and -85.615. A smaller southern section near the St. Andrew Bay shoreline runs roughly from 30.105 to 30.125 N. Acreage is derived from the Bay County GIS polygon area (25.84M sq ft).",
+    "boundary_polygon": [
+     [
+      30.1455,
+      -85.5913
+     ],
+     [
+      30.1273,
+      -85.5913
+     ],
+     [
+      30.1292,
+      -85.6116
+     ],
+     [
+      30.1347,
+      -85.6155
+     ],
+     [
+      30.1346,
+      -85.5933
+     ],
+     [
+      30.1438,
+      -85.5933
+     ],
+     [
+      30.1447,
+      -85.6054
+     ],
+     [
+      30.1455,
+      -85.5913
+     ]
+    ],
+    "boundary_is_approximate": true,
+    "source_url": "https://gis.baycountyfl.gov/arcgis/rest/services/Admin_A12/MapServer/27"
+   },
+   {
+    "name": "Parker Community Redevelopment Area (southern section)",
+    "created": "2004",
+    "acres": null,
+    "center": [
+     30.115,
+     -85.598
+    ],
+    "boundary_description": "A small southern piece of the Parker CRA polygon (second ring in the Bay County GIS layer).",
+    "boundary_polygon": [
+     [
+      30.1246,
+      -85.5913
+     ],
+     [
+      30.1045,
+      -85.6034
+     ],
+     [
+      30.1138,
+      -85.6036
+     ],
+     [
+      30.1246,
+      -85.5913
+     ]
+    ],
+    "boundary_is_approximate": true,
+    "source_url": "https://gis.baycountyfl.gov/arcgis/rest/services/Admin_A12/MapServer/27"
+   }
+  ],
+  "budget_by_year": [
+   {
+    "fy": "FY2023",
+    "tif_revenue": 0,
+    "total_budget": 13135,
+    "district": "all",
+    "source_url": "https://cityofparker.com/wp-content/uploads/filr/3313/CRA%20BUDGET%20RESOLUTION%20%202022-26.pdf"
+   },
+   {
+    "fy": "FY2024",
+    "tif_revenue": 247539,
+    "total_budget": null,
+    "district": "all",
+    "source_url": "https://flauditor.gov/pages/specialdistricts_efile%20rpts/2024%20community%20redevelopment%20agency%20of%20the%20city%20of%20parker.pdf"
+   },
+   {
+    "fy": "FY2025",
+    "tif_revenue": 393198,
+    "total_budget": null,
+    "district": "all",
+    "source_url": "https://flauditor.gov/pages/specialdistricts_efile%20rpts/2025%20community%20redevelopment%20agency%20of%20the%20city%20of%20parker.pdf"
+   }
+  ],
+  "payments": [
+   {
+    "payee": "City of Parker General Fund",
+    "amount": 148377,
+    "date_or_fy": "FY2025",
+    "purpose": "Transfer out to reimburse the City's general fund for FY2024 expenditures",
+    "category": "Other",
+    "location_name": "Parker City Hall",
+    "address": "1001 W Park St, Parker, FL 32404",
+    "lat": 30.131,
+    "lng": -85.603,
+    "coord_precision": "approximate",
+    "district": "Parker Community Redevelopment Area",
+    "source_title": "Parker CRA FY2025 audit (Carr, Riggs & Ingram)",
+    "source_url": "https://flauditor.gov/pages/specialdistricts_efile%20rpts/2025%20community%20redevelopment%20agency%20of%20the%20city%20of%20parker.pdf",
+    "confidence": "documented (from official record)",
+    "notes": "The audit doesn't say which City expenditures were reimbursed."
+   },
+   {
+    "payee": "Not named",
+    "amount": 2000,
+    "date_or_fy": "FY2023 and FY2024 (budgeted)",
+    "purpose": "Professional services (budget appropriation; $1,000 other current charges also budgeted)",
+    "category": "Professional services/consultant",
+    "location_name": "Parker City Hall",
+    "address": "",
+    "lat": 30.131,
+    "lng": -85.603,
+    "coord_precision": "approximate",
+    "district": "Parker Community Redevelopment Area",
+    "source_title": "Parker CRA budget resolutions 2022-26 and Sept 14, 2023 amendment",
+    "source_url": "https://cityofparker.com/wp-content/uploads/2023/09/September-14-2023-City-Council-resolution-for-the-CRA-budget-ammended.pdf",
+    "confidence": "documented (from official record)",
+    "notes": "Appropriation. The FY2024 audit shows $0 actually spent."
+   }
+  ],
+  "controversies": [
+   {
+    "summary": "The FY2024 audit found the City of Parker had not transferred its required TIF contribution to the CRA for FY2024, an estimated shortfall of $78,568 (finding 2024-001).",
+    "source_url": "https://flauditor.gov/pages/specialdistricts_efile%20rpts/2024%20community%20redevelopment%20agency%20of%20the%20city%20of%20parker.pdf"
+   }
+  ],
+  "data_gaps": [
+   "TIF and budget history for 2004-2022 was not found. The CRA reportedly had no positive increment for years. Check older Auditor General filings and City of Parker ACFRs.",
+   "Parker CRA budget documents for FY2025-FY2027 and any annual reports were not found online (cityofparker.com wp-content uploads may hold them). The FY2025 budget had $286,253 for economic environment, none of it spent.",
+   "The redevelopment plan text and any Hwy 98 corridor project list were not found.",
+   "The FY2023 Parker CRA audit URL returned an error."
+  ]
+ }
+]

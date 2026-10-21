@@ -1,0 +1,15 @@
+/* BayCounty.me tokens: Flux Labs palette (navy, blue, salmon, amber), Poppins + IBM Plex Mono. */
+:root{
+  --bg:#F6F8FB; --surface:#FFFFFF; --sunken:#EEF2F7; --ink:#161B24; --muted:#5A6372; --faint:#8A93A1; --line:#E1E6ED;
+  --navy:#1E3A76; --blue:#3F6FB0; --salmon:#E5564A; --amber:#FFB84D;
+  --f-display:"Poppins", "Segoe UI", system-ui, sans-serif;
+  --f-body:"Poppins", "Segoe UI", system-ui, sans-serif;
+  --f-data:"IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --r:10px; color-scheme:light;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#0E131B; --surface:#151C27; --sunken:#1B2431; --ink:#E7ECF3; --muted:#A1AABA; --faint:#768092; --line:#263142;
+  --navy:#9DB8EA; --blue:#7FA6DA; --salmon:#FF8C82; --amber:#FFC36B; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#0E131B; --surface:#151C27; --sunken:#1B2431; --ink:#E7ECF3; --muted:#A1AABA; --faint:#768092; --line:#263142;
+  --navy:#9DB8EA; --blue:#7FA6DA; --salmon:#FF8C82; --amber:#FFC36B; color-scheme:dark }
