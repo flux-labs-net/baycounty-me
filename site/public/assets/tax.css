@@ -542,3 +542,27 @@ a.src:hover{color:var(--blue)}
 .mm-n.on .mm-pill{fill:color-mix(in srgb,var(--blue) 16%,var(--surface));stroke:var(--blue)}
 .mm-hint{display:none;margin:0 0 6px}
 @media (max-width:760px){.mm-hint{display:block}}
+
+/* 2026 elections */
+.el-race{border:1px solid var(--line);border-radius:14px;background:var(--surface);padding:18px;margin:0 0 18px}
+.el-rh h3{margin:2px 0 4px;font-size:1.15rem}
+.el-cands{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:14px;margin-top:14px}
+.el-cand{border:1px solid var(--line);border-radius:12px;padding:14px;background:var(--bg);display:flex;flex-direction:column;gap:10px;min-width:0}
+.el-cand h4{margin:0;font-size:1.05rem}
+.el-cand h5{margin:0 0 6px;font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:500}
+.el-badges{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 2px}
+.el-links a{overflow-wrap:anywhere}
+.el-plat ul{margin:0;padding-left:18px;font-size:.9rem;line-height:1.5}
+.el-plat li{margin:0 0 4px}
+.el-raised{font-size:.92rem}
+.el-raised b{font:600 1.1rem var(--f-data)}
+.el-bar{display:flex;height:8px;border-radius:4px;background:var(--sunken);overflow:hidden;margin:6px 0}
+.el-bar span{display:block;height:100%}
+.el-bar .i,.el-split i.i{background:var(--blue)}.el-bar .o,.el-split i.o{background:var(--amber)}.el-bar .s,.el-split i.s{background:var(--muted)}
+.el-split{list-style:none;margin:0 0 6px;padding:0;display:flex;flex-direction:column;gap:2px}
+.el-split i{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:6px}
+.el-dt{font-size:.82rem}
+.el-dt th{white-space:normal}
+.el-dt th small{display:block;color:var(--muted);font-size:.74rem}
+.el-past .el-race{background:var(--sunken)}
+.el-past .el-cand{opacity:.92}

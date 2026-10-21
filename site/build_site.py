@@ -514,6 +514,13 @@ from meetings_page import meetings_page
 from campaign_page import campaign_page
 from money_pages import budget_page, payments_page
 from money_map import money_map_page
+from elections_page import elections_page
+ELECTIONS_READY = os.path.exists(os.path.join(ROOT, '..', 'data', 'elections', 'candidates_2026.json'))
+if ELECTIONS_READY:
+    for _m in MENU:
+        for _g in _m.get('groups', []):
+            if _g['group'] == 'Take part':
+                _g['items'].insert(0, {'label': '2026 Elections', 'href': '/elections', 'desc': "Who's running, their platforms and money"})
 from es_pages import ES_MENU, localize_chrome, es_home, es_addr_page, es_glossary_page, es_records_page, glossary_es_terms
 from govs import GOVS as GOVLIST  # noqa: E402
 
@@ -616,6 +623,7 @@ PAGES = [
     ('/public-money/campaign-money', 'Campaign money and contracts', "Who funded the campaigns of Bay County's current elected officials, from Supervisor of Elections reports, and which donors also hold local government contracts.", campaign_page),
     ('/who-runs-bay-county', 'Who runs Bay County', 'Every elected seat and appointed manager for Bay County, its cities and the school district, plus what top officials are paid.', who_page),
     ('/public-money/budget-explorer', 'Budget explorer', "Open up any Bay County government's FY2026 budget: spending by fund and department, and where the money comes from.", lambda: budget_page(OUT)),
+    *([('/elections', "Who's running in 2026", 'Every local race on Bay County ballots in 2026: the candidates, their platforms in their own words, links to their campaigns, and where their campaign money comes from.', elections_page)] if ELECTIONS_READY else []),
     ('/public-money/money-map', 'Money map: donors, officials and contracts', 'An interactive map and heat maps of which businesses gave to which Bay County officials, and where those donors hold local government contracts.', lambda: money_map_page(OUT)),
     ('/public-money/who-gets-paid', 'Who gets paid: tourism agencies', 'Every payment by Visit Panama City Beach, Destination Panama City and the Mexico Beach CDC, from the Clerk of Court check registers.', payments_page),
     ('/public-money/contracts', 'Who gets the contracts', 'Major contracts approved by Bay County and its cities since 2022: winners, how they were awarded, change orders, emergency purchases and who the county paid most.', lambda: contracts_page(OUT)),
