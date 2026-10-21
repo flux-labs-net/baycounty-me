@@ -69,7 +69,9 @@ def developers_page(out_dir):
     <ul class="plain">
       <li><b>Claude:</b> add a custom connector and paste the address above.</li>
       <li><b>Other assistants and tools:</b> add it as a remote MCP server using the "Streamable HTTP" transport.</li>
-      <li><b>Tools it offers:</b> <code>list_datasets</code>, <code>query_dataset</code>, <code>get_government</code> and <code>search_site</code>. Example question: "Which Bay County contracts over $5 million went to campaign donors, and how did commissioners vote?"</li>
+      <li><b>Tools it offers:</b> <code>list_datasets</code>, <code>query_dataset</code>, <code>get_government</code>, <code>search_site</code>, <code>upcoming_meetings</code> (by government, days ahead or a keyword such as a street name), <code>member_voting_record</code> (one board member's votes, including when they were in the minority) and <code>vendor_profile</code> (one company's contracts, change orders, payments, CRA payments and business campaign contributions; a match doesn't show why anything happened).</li>
+      <li><b>Resources:</b> each dataset is also an MCP resource at <code>baycounty://datasets/&lt;id&gt;</code> (up to 2,000 rows; the full file is linked).</li>
+      <li><b>Example question:</b> "Which Bay County contracts over $5 million went to campaign donors, and how did commissioners vote?"</li>
     </ul></section>
   <section class="tx-sec method" id="terms"><div class="sec-hd"><h2>Use and limits</h2></div>
     <ul class="plain">

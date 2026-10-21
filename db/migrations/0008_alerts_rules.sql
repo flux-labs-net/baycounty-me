@@ -2,6 +2,8 @@
 
 -- data/meetings/fetch_meetings.py now publishes every agenda item title (not just money items) as agenda_items.
 alter table meetings add column if not exists "agenda_items" jsonb;
+-- meetings.json marks cancelled meetings with cancelled: true; the column appears in the dataset whenever one is listed.
+alter table meetings add column if not exists "cancelled" boolean;
 
 -- Change tracking. Every dataset table already has created_at / updated_at in 0001; this adds them to any that
 -- lack them (e.g. tables added later by hand). From this migration on, db/scripts/load.py keeps rows whose
