@@ -105,7 +105,8 @@ MENU_JS = '''(() => {
   const setMenu = o => { btn.setAttribute('aria-expanded', o); menu.classList.toggle('open', o); document.documentElement.classList.toggle('nav-locked', o); if (o) menu.scrollTop = 0; };
   btn.addEventListener('click', () => setMenu(btn.getAttribute('aria-expanded') !== 'true'));
   menu.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false); });
-  matchMedia('(min-width:721px)').addEventListener('change', e => { if (e.matches) setMenu(false); });
+  const mq = matchMedia('(min-width:721px)'), onMq = e => { if (e.matches) setMenu(false); };
+  if (mq.addEventListener) mq.addEventListener('change', onMq); else if (mq.addListener) mq.addListener(onMq);
   document.querySelectorAll('.sub-toggle').forEach(t => t.addEventListener('click', e => {
     e.stopPropagation(); const o = t.getAttribute('aria-expanded') === 'true';
     document.querySelectorAll('.sub-toggle').forEach(x => x.setAttribute('aria-expanded', 'false'));

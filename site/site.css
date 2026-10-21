@@ -216,5 +216,4 @@ a{color:var(--blue)}
 @media (max-width:600px){.cf-row{grid-template-columns:minmax(0,1fr)}.contact{padding:16px}}
 #contact{scroll-margin-top:84px}
 
-html.nav-locked,html.nav-locked body{overflow:hidden}
-@media (min-width:721px){html.nav-locked,html.nav-locked body{overflow:visible}}
+@media (max-width:720px){html.nav-locked{overflow:hidden}}
