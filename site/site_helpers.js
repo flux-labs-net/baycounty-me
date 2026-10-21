@@ -24,6 +24,7 @@
    start-up. Inline page scripts run earlier, while the page parses: wrap them in DOMContentLoaded. */
 (() => {
 const B = window.BCM = window.BCM || {};
+const T = (k, d) => (window.BCM_I18N && window.BCM_I18N[k]) || d; // label override (Spanish pages set window.BCM_I18N)
 
 /* ---------- URL state ---------- */
 let pend = {}, pendT = null;
@@ -168,7 +169,7 @@ B.sortable = (table, opts) => {
         st.col = idx; st.dir = dir; st.type = type;
         [...hr.cells].forEach(c => { if (c === th) c.setAttribute('aria-sort', dir < 0 ? 'descending' : 'ascending'); else c.removeAttribute('aria-sort'); });
         if (!st.opts.onSort) sortRows(table, idx, dir, type);
-        B.announce('Sorted by ' + b.textContent.trim() + ', ' + (dir < 0 ? (type === 'text' ? 'Z to A' : 'largest first') : (type === 'text' ? 'A to Z' : 'smallest first')));
+        B.announce(T('sortedBy', 'Sorted by ') + b.textContent.trim() + ', ' + (dir < 0 ? (type === 'text' ? T('za', 'Z to A') : T('desc', 'largest first')) : (type === 'text' ? T('az', 'A to Z') : T('asc', 'smallest first'))));
       });
     });
   } else if (opts) table._bcmSort.opts = opts;
@@ -207,19 +208,19 @@ B.tableToRows = table => {
     if (links.length) anyLink = true;
     out.push({cells: (grouped ? [g] : []).concat(spread(r)), links});
   });
-  const head = hr ? (grouped ? ['Group'] : []).concat(spread(hr).map((h, i) => h || (i === 0 ? 'Item' : ''))) : null;
-  if (anyLink && head) head.push('Links');
+  const head = hr ? (grouped ? [T('group', 'Group')] : []).concat(spread(hr).map((h, i) => h || (i === 0 ? T('item', 'Item') : ''))) : null;
+  if (anyLink && head) head.push(T('links', 'Links'));
   return (head ? [head] : []).concat(out.map(o => anyLink ? o.cells.concat(o.links.join(' ')) : o.cells));
 };
 B.download = (name, text, type = 'text/csv;charset=utf-8') => {
   const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob(['﻿' + text], {type})); a.download = name;
   document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 2000);
 };
-B.csv = (table, name) => { const rows = B.tableToRows(table); B.download(/\.csv$/.test(name) ? name : name + '.csv', B.toCSV(rows)); B.announce('Downloaded ' + (rows.length - 1) + ' rows'); };
+B.csv = (table, name) => { const rows = B.tableToRows(table); B.download(/\.csv$/.test(name) ? name : name + '.csv', B.toCSV(rows)); B.announce(T('downloaded', 'Downloaded ') + (rows.length - 1) + T('rows', ' rows')); };
 function csvButton(table) {
   if (table._bcmCsv) return; table._bcmCsv = true;
   const p = document.createElement('p'); p.className = 'csv-line print-hide'; p.setAttribute('data-report', 'skip');
-  const b = document.createElement('button'); b.type = 'button'; b.className = 'linkbtn'; b.textContent = 'Download this view (CSV)';
+  const b = document.createElement('button'); b.type = 'button'; b.className = 'linkbtn'; b.textContent = T('csv', 'Download this view (CSV)');
   b.addEventListener('click', () => B.csv(table, table.dataset.csv || 'baycounty-table'));
   p.appendChild(b); (table.closest('.tablewrap') || table).after(p);
 }

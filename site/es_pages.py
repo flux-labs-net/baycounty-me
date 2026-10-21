@@ -1,10 +1,15 @@
-"""Spanish pages (/es, /es/mi-direccion, /es/glosario, /es/solicitar-registros).
+"""Spanish pages (/es, /es/mi-direccion, /es/glosario, /es/solicitar-registros, /es/impuestos,
+/es/tarifas-y-facturas, /es/exenciones, /es/elecciones, /es/reuniones).
 
-Translations live in i18n/: es_glossary.json (term-for-term) and es_address.json
-(ordered English→Spanish phrase pairs applied to the My Address page and its script).
-The rest of the site is English; /es links to it and says so.
+Translations live in i18n/: es_glossary.json (term-for-term), es_address.json (ordered English→Spanish
+phrase pairs applied to the My Address page and its script), es_common.json (strings shared by every /es
+page, incl. window.BCM_I18N labels for site.js and report.js) and one es_<page>.json per translated page.
+Each page reuses its English renderer: label dicts in the English module are swapped for Spanish ones
+while it renders (patched()), then the leftover English is replaced phrase by phrase (unmatched pairs are
+printed at build time, so a change to the English page shows up). The rest of the site is English;
+Spanish pages link to it and say so.
 """
-import html, json, os
+import contextlib, html, json, os, re, tempfile
 from glossary import GROUPS, TERMS
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -14,9 +19,27 @@ e = html.escape
 ES_MENU = [
     {'label': 'Inicio', 'href': '/es'},
     {'label': 'Mi dirección', 'href': '/es/mi-direccion'},
-    {'label': 'Solicitar registros', 'href': '/es/solicitar-registros'},
+    {'label': 'Dinero público', 'groups': [
+        {'group': 'Impuestos y tarifas', 'items': [
+            {'label': 'Sus impuestos', 'href': '/es/impuestos', 'desc': 'A dónde va cada dólar de su factura'},
+            {'label': 'Tarifas y facturas', 'href': '/es/tarifas-y-facturas', 'desc': 'Cargos fijos, agua, alcantarillado y basura'},
+            {'label': 'Exenciones', 'href': '/es/exenciones', 'desc': 'Quién paga menos impuesto a la propiedad'},
+        ]},
+    ]},
+    {'label': 'Participe', 'groups': [
+        {'group': 'Su voz', 'items': [
+            {'label': 'Elecciones 2026', 'href': '/es/elecciones', 'desc': 'Candidatos y dinero de campaña'},
+            {'label': 'Reuniones públicas', 'href': '/es/reuniones', 'desc': 'Cuándo y dónde se reúne cada junta'},
+            {'label': 'Solicitar registros', 'href': '/es/solicitar-registros', 'desc': 'Pida un registro público'},
+        ]},
+    ]},
     {'label': 'Glosario', 'href': '/es/glosario'},
 ]
+
+# Spanish page -> its English twin (hreflang alternates and the language switch link)
+ES_ALT = {'/es': '/', '/es/mi-direccion': '/my-address', '/es/glosario': '/glossary', '/es/solicitar-registros': '/records-request',
+          '/es/impuestos': '/public-money/tax-dollars', '/es/tarifas-y-facturas': '/public-money/fees-and-bills',
+          '/es/exenciones': '/public-money/exemptions', '/es/elecciones': '/elections', '/es/reuniones': '/meetings'}
 
 ES_FOOTER = [
     ('puts Bay County, Florida public records in plain view: maps, money, and the documents behind them.', 'reúne los registros públicos del condado de Bay, Florida, en un solo lugar: mapas, dinero y los documentos que los respaldan.'),
@@ -28,19 +51,116 @@ ES_FOOTER = [
     ('Skip to content', 'Saltar al contenido'),
     ('<span class="sr">Menu</span>', '<span class="sr">Menú</span>'),
     ('aria-label="Main"', 'aria-label="Principal"'),
+    ('aria-label="Theme: match system"', 'aria-label="Tema: igual que el sistema"'),
+    ('<span class="theme-lbl">System</span>', '<span class="theme-lbl">Sistema</span>'),
 ]
 MONTHS = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre']
 EN_MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
 
+def prune(built):
+    """Drop menu items and alternates for Spanish pages not in this build (e.g. /es/elecciones before the data exists)."""
+    for k in [k for k in ES_ALT if k not in built or ES_ALT[k] not in built]:
+        del ES_ALT[k]
+    for m in ES_MENU:
+        for g in m.get('groups', []):
+            g['items'] = [i for i in g['items'] if i['href'] in built]
+    ES_MENU[:] = [m for m in ES_MENU if 'href' in m or any(g['items'] for g in m['groups'])]
+
+
+def es_date(m):
+    """'Oct 20, 2026' (or an re match of it) -> '20 de octubre de 2026'."""
+    if isinstance(m, str):
+        m = re.match(r'([A-Z][a-z]{2})[a-z]*\.? (\d{1,2}),? (\d{4})', m)
+    return f'{int(m.group(2))} de {MONTHS[EN_MONTHS.index(m.group(1)[:3])]} de {m.group(3)}'
+
+
+def common():
+    return json.load(open(os.path.join(I18N, 'es_common.json')))
+
+
 def localize_chrome(page_html):
-    """Translate the shared header/footer of an /es page."""
-    import re
+    """Translate the shared header/footer of an /es page, and give site.js and report.js their Spanish labels."""
     for a, b in ES_FOOTER:
         page_html = page_html.replace(a, b)
-    page_html = re.sub(r'Page updated ([A-Z][a-z]{2}) (\d{1,2}), (\d{4})',
-                       lambda m: f'Página actualizada el {int(m.group(2))} de {MONTHS[EN_MONTHS.index(m.group(1))]} de {m.group(3)}', page_html)
+    page_html = re.sub(r'Page updated ([A-Z][a-z]{2}) (\d{1,2}), (\d{4})', lambda m: 'Página actualizada el ' + es_date(m), page_html)
+    labels = json.dumps(common()['bcm'], ensure_ascii=False)
+    page_html = page_html.replace('<script src="/assets/site.js" defer></script>', f'<script>window.BCM_I18N={labels}</script>\n<script src="/assets/site.js" defer></script>', 1)
+    page_html = page_html.replace('<script src="/assets/report.js" defer></script>', '<script src="/assets/report.es.js" defer></script>', 1)
     return page_html.replace('<meta property="og:locale" content="en_US">', '<meta property="og:locale" content="es_US">')
+
+
+def updated_key(path):
+    """Changelog path that dates an /es page: a translated data page is as fresh as its English twin."""
+    return ES_ALT[path] if path in ES_ALT and path not in ('/es', '/es/mi-direccion', '/es/glosario', '/es/solicitar-registros') else path
+
+
+REPORT_ES = [
+    ("toLocaleDateString('en-US'", "toLocaleDateString('es-US'"),
+    ("'Report exported '", "'Informe exportado el '"),
+    ("{text: 'POWERED BY'", "{text: 'DESARROLLADO POR'"),
+    ("'Powered by Flux Labs'", "'Desarrollado por Flux Labs'"),
+    ("'Public records · sources linked in the report · corrections: hello@fluxlabs.net'", "'Registros públicos · fuentes enlazadas en el informe · correcciones: hello@fluxlabs.net'"),
+    ("`Page ${page} of ${pages}`", "`Página ${page} de ${pages}`"),
+    ("'Building PDF…'", "'Creando el PDF…'"),
+    ("alert('Sorry, the PDF could not be built. Your browser\\'s Print > Save as PDF still works.')", "alert('No se pudo crear el PDF. Todavía puede usar Imprimir > Guardar como PDF en su navegador.')"),
+]
+
+
+def write_report_es(out_dir):
+    """assets/report.es.js: the PDF export with Spanish cover and footer text."""
+    js, miss = apply_pairs(open(os.path.join(HERE, 'report.js')).read(), REPORT_ES)
+    if miss:
+        print('es report.js: unmatched pairs', miss)
+    open(os.path.join(out_dir, 'assets', 'report.es.js'), 'w').write(js)
+
+
+@contextlib.contextmanager
+def patched(mod, **attrs):
+    """Swap module-level names (label dicts, small helpers) while an English renderer runs."""
+    old = {k: getattr(mod, k) for k in attrs}
+    for k, v in attrs.items():
+        setattr(mod, k, v)
+    try:
+        yield
+    finally:
+        for k, v in old.items():
+            setattr(mod, k, v)
+
+
+def page_pairs(name):
+    return json.load(open(os.path.join(I18N, f'es_{name}.json')))
+
+
+def translate(text, pairs, label, quiet=()):
+    """Apply ordered phrase pairs, then the shared ones; report pairs that no longer match the English page."""
+    text, miss = apply_pairs(text, pairs)
+    miss = [m for m in miss if not any(m.startswith(q[:60]) for q in quiet)]
+    if miss:
+        print(f'es {label}: {len(miss)} unmatched pairs', miss[:4])
+    for a, b in common()['html']:
+        text = text.replace(a, b)
+    return text
+
+
+def money_es(n, short=False):
+    """$ amount in Spanish words: 1.2e9 -> '$1.20 mil millones', 4.5e6 -> '$4.5 millones', 413000 -> '$413 mil'."""
+    if n is None:
+        return '—'
+    a = abs(n)
+    if a >= 1e9:
+        return f'${n/1e9:,.2f} mil millones'
+    if a >= 1e6:
+        return f'${n/1e6:,.1f} millones'
+    if a >= 1e4:
+        return f'${n/1e3:,.0f} mil'
+    return f'${n:,.0f}'
+
+
+def data_stamp(page, twin):
+    """'Data updated Oct 20, 2026' -> Spanish, dated like the English twin."""
+    from updates import last_updated, nice
+    return re.sub(r'Data updated [A-Z][a-z]{2} \d{1,2}, \d{4}', 'Datos actualizados el ' + es_date(nice(last_updated(twin))), page)
 
 
 def _pairs(kind):
@@ -236,7 +356,6 @@ def es_records_page(out_dir):
 ES_SECTIONS = [
     ('/governments', 'Gobiernos', 'Una página por cada gobierno local: quién lo dirige, su presupuesto, deuda, auditorías, votos y contratos.'),
     ('/compare', 'Comparar gobiernos', 'Presupuestos, impuestos y deuda por residente, lado a lado.'),
-    ('/public-money/tax-dollars', 'Sus impuestos', 'A dónde va cada dólar de su factura de impuestos a la propiedad.'),
     ('/public-money/cra-spending', 'Gastos de las CRA', 'Qué pagaron las agencias de reurbanización con el dinero de impuestos.'),
     ('/public-money/votes', 'Votos', 'Cómo votó cada funcionario en las decisiones de dinero, según las actas.'),
     ('/meetings', 'Reuniones públicas', 'Cuándo y dónde se reúne cada junta, con enlaces a las agendas.'),
@@ -247,10 +366,11 @@ ES_SECTIONS = [
 
 def es_home():
     cards = [('/es/mi-direccion', 'Mi dirección', 'Escriba una dirección del condado de Bay y vea su estimado de impuestos a la propiedad, quién lo representa, sus escuelas, sus zonas de inundación y evacuación, y si está dentro de un distrito de reurbanización.'),
+             ('/es/impuestos', 'Sus impuestos', 'Calcule su factura del impuesto a la propiedad y vea qué parte recibe el condado, las escuelas, su ciudad y cada distrito, y en qué gasta su dinero cada gobierno.'),
              ('/es/solicitar-registros', 'Solicitar registros públicos', 'Elija un gobierno y un registro, y le escribimos la solicitud bajo la ley de registros públicos de Florida.'),
              ('/es/glosario', 'Glosario', 'Cada término de dinero público explicado en lenguaje sencillo: CRA, millaje, exención de vivienda principal y más.')]
-    c = ''.join(f'<a class="gv-card" href="{h}"><span class="eyebrow">En español</span><b>{e(t)}</b><span class="small">{e(d)}</span></a>' for h, t, d in cards)
-    s = ''.join(f'<li><a href="{h}" hreflang="en">{e(t)}</a> <span class="muted small">(en inglés)</span><br><span class="small">{e(d)}</span></li>' for h, t, d in ES_SECTIONS)
+    c = ''.join(f'<a class="gv-card" href="{h}"><span class="eyebrow">En español</span><b>{e(t)}</b><span class="small">{e(d)}</span></a>' for h, t, d in cards if h in ES_ALT)
+    s = ''.join(f'<li><a href="{h}" hreflang="en">{e(t)}</a> <span class="muted small">(en inglés)</span><br><span class="small">{e(d)}</span></li>' for h, t, d in ES_SECTIONS if h not in ES_ALT.values())
     return f'''<div class="page prose es-home">
   <span class="eyebrow">BayCounty.me en español</span>
   <h1>Los registros públicos del condado de Bay, en lenguaje sencillo</h1>
@@ -260,3 +380,51 @@ def es_home():
   <p>Estas secciones están en inglés por ahora. Su navegador puede traducirlas.</p>
   <ul class="plain es-list">{s}</ul>
 </div>'''
+
+
+def _tr(d, k, label, miss):
+    if k in d:
+        return d[k]
+    miss.add(f'{label}: {k[:50]}')
+    return k
+
+
+def es_tax_page(out_dir):
+    """/es/impuestos: tax_page() rendered with Spanish data labels, then phrase pairs on the page and tax.js."""
+    import tax_page as tp
+    T, miss = page_pairs('tax'), set()
+    d = tp.build_data()
+    d['groups'] = [(g, _tr(T['groups'], n, 'group', miss)) for g, n in d['groups']]
+    for a in d['auth'].values():
+        a['n'] = _tr(T['auth'], a['n'], 'auth', miss)
+    for b in d['bars']:
+        b['n'] = _tr(T['auth'], b['n'], 'bar', miss)
+    for x in d['districts']:
+        x['label'] = T['districts'].get(x['label'], x['label'])
+    K = T['keys']
+    for g in d['govs']:
+        g['short'] = T['short'].get(g['short'], g['short'])
+        g['name'] = _tr(T['names'], g['name'], 'name', miss)
+        g['status'] = [g['status'][0], _tr(T['status'], g['status'][1], 'status', miss)]
+        for f in ('rev', 'exp', 'other'):
+            if g.get(f):
+                g[f] = {_tr(K, k, 'key', miss): v for k, v in g[f].items()}
+        for y in g.get('act', []):
+            y['rev'] = {_tr(K, k, 'key', miss): v for k, v in y['rev'].items()}
+            y['exp'] = {_tr(K, k, 'key', miss): v for k, v in y['exp'].items()}
+        g['ctx'] = [[_tr(T['ctx'], t, 'ctx', miss), u] for t, u in g['ctx']]
+        g['notes'] = [_tr(T['notes'], n, 'note', miss) for n in g['notes']]
+        g['src'] = [[t.replace('Related: ', 'Relacionado: '), u] for t, u in g['src']]
+    d['gaps'] = [_tr(T['gaps'], x, 'gap', miss) for x in d['gaps']]
+    if miss:
+        print('es tax: untranslated data labels', len(miss), sorted(miss)[:6])
+    with tempfile.TemporaryDirectory() as tmp:
+        os.makedirs(os.path.join(tmp, 'assets'))
+        with patched(tp, build_data=lambda: d):
+            page = tp.tax_page(tmp)
+        js = open(os.path.join(tmp, 'assets', 'tax.js')).read()
+    js, miss_j = apply_pairs(js, T['js'])
+    if miss_j:
+        print('es tax.js: unmatched pairs', len(miss_j), miss_j[:4])
+    open(os.path.join(out_dir, 'assets', 'tax.es.js'), 'w').write(js)
+    return data_stamp(translate(page, T['html'], 'tax'), '/public-money/tax-dollars')

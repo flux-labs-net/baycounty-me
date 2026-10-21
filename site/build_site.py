@@ -22,7 +22,7 @@ OUT = os.path.join(ROOT, 'public')
 SITE = 'BayCounty.me'
 DOMAIN = 'https://baycounty.me'
 PREVIEW = {}  # path -> (title, summary) for link previews, filled from og.preview_text()
-ES_ALT = {'/es': '/', '/es/mi-direccion': '/my-address', '/es/glosario': '/glossary', '/es/solicitar-registros': '/records-request'}
+from es_pages import ES_ALT, updated_key as es_updated_key  # Spanish page -> English twin (hreflang, language switch)
 EN_TO_ES = {v: k for k, v in ES_ALT.items()}
 OG_VER = {}  # path -> image content hash, filled by og.build_og before pages are written
 
@@ -139,9 +139,9 @@ FOOTER = '''<footer class="site-foot"><div class="site-foot-in">
 
 MENU_JS = '''(() => {
   const root = document.documentElement, tb = document.getElementById('themeBtn');
-  const NAMES = {system: 'System', light: 'Light', dark: 'Dark'}, NEXT = {system: 'light', light: 'dark', dark: 'system'};
+  const I = window.BCM_I18N || {}, NAMES = I.theme || {system: 'System', light: 'Light', dark: 'Dark'}, NEXT = {system: 'light', light: 'dark', dark: 'system'};
   const current = () => root.getAttribute('data-theme') || 'system';
-  const show = m => { tb.dataset.mode = m; tb.querySelector('.theme-lbl').textContent = NAMES[m]; tb.setAttribute('aria-label', 'Theme: ' + (m === 'system' ? 'match system' : NAMES[m].toLowerCase()) + '. Click to change.'); };
+  const show = m => { tb.dataset.mode = m; tb.querySelector('.theme-lbl').textContent = NAMES[m]; tb.setAttribute('aria-label', (I.themeLabel || 'Theme: ') + (m === 'system' ? I.themeSystem || 'match system' : NAMES[m].toLowerCase()) + (I.themeClick || '. Click to change.')); };
   show(current());
   tb.addEventListener('click', () => {
     const m = NEXT[current()];
@@ -343,7 +343,7 @@ def _layout(title, desc, path, body, extra_head=''):
 <main id="main">
 {body}
 </main>
-{FOOTER.replace('__UPDATED__', ('Page updated ' + nice_date(last_updated(path)) + ' · ') if path not in ('/404',) else '')}
+{FOOTER.replace('__UPDATED__', ('Page updated ' + nice_date(last_updated(es_updated_key(path))) + ' · ') if path not in ('/404',) else '')}
 <script src="/assets/report.js" defer></script>
 </body>
 </html>
@@ -516,7 +516,7 @@ if ELECTIONS_READY:
         for _g in _m.get('groups', []):
             if _g['group'] == 'Take part':
                 _g['items'].insert(0, {'label': '2026 Elections', 'href': '/elections', 'desc': "Who's running, their platforms and money"})
-from es_pages import ES_MENU, localize_chrome, es_home, es_addr_page, es_glossary_page, es_records_page, glossary_es_terms
+from es_pages import ES_MENU, localize_chrome, es_home, es_addr_page, es_glossary_page, es_records_page, glossary_es_terms, write_report_es, es_tax_page, prune as prune_es
 from govs import GOVS as GOVLIST  # noqa: E402
 
 def page_options():
@@ -613,6 +613,7 @@ PAGES = [
     ('/es/mi-direccion', 'Mi dirección', 'Busque cualquier dirección del condado de Bay: estimado de impuestos a la propiedad, quién lo representa, escuelas, zonas de inundación y evacuación, y distritos de reurbanización.', lambda: es_addr_page(OUT)),
     ('/es/glosario', 'Glosario en lenguaje sencillo', 'Cada término de BayCounty.me explicado de forma sencilla: CRA, incremento de impuestos, millaje, exención de vivienda principal, presupuestos y más.', es_glossary_page),
     ('/es/solicitar-registros', 'Solicite un registro público', 'Escriba una solicitud de registros públicos de Florida a cualquier gobierno del condado de Bay en un minuto.', lambda: es_records_page(OUT)),
+    ('/es/impuestos', 'A dónde va su impuesto a la propiedad', 'Calcule su factura del impuesto a la propiedad en el condado de Bay y vea qué parte recibe cada gobierno, de dónde saca el resto de su dinero y en qué lo gasta.', lambda: es_tax_page(OUT)),
     ('/records-request', 'Request a public record', 'Write a Florida public records request to any Bay County government in a minute: pick a record the site is missing or describe your own.', lambda: records_page(OUT)),
     ('/alerts', 'Get BayCounty.me updates by email', 'Follow Bay County, the school district or your city and get a short weekly email with new votes, data, corrections and upcoming meetings.', lambda: alerts_page(OUT)),
     ('/meetings', 'Upcoming public meetings in Bay County', 'When and where the County Commission, School Board and every city commission meet, with agenda links and the money items on each agenda.', lambda: meetings_page(OUT)),
@@ -637,6 +638,8 @@ PAGES = [
 PAGES += [(f'/governments/{g["slug"]}', g['short'] + ': budget, taxes, debt, votes and more',
            f'{g["short"]}, Florida: who runs it, the budget and property tax rate, debt, audit findings, how officials voted, contracts and projects, from public records.',
            (lambda k: (lambda: gov_page(k)))(g['key'])) for g in GOVLIST]
+prune_es({p[0] for p in PAGES})
+EN_TO_ES = {v: k for k, v in ES_ALT.items()}
 
 
 def main():
@@ -652,6 +655,7 @@ def main():
     shutil.copy(os.path.join(ROOT, 'favicon.svg'), os.path.join(OUT, 'favicon.svg'))
     shutil.copy(os.path.join(ROOT, 'tax.css'), os.path.join(OUT, 'assets', 'tax.css'))
     shutil.copy(os.path.join(ROOT, 'report.js'), os.path.join(OUT, 'assets', 'report.js'))
+    write_report_es(OUT)
     from og import build_og
     from og import preview_text
     PREVIEW.update(preview_text())
