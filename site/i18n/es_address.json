@@ -411,10 +411,6 @@
    "['Comisión del Condado', r(comm)]"
   ],
   [
-   "t.hx ? 'homestead' : 'codes'}",
-   "t.hx ? 'homestead' : 'códigos'}"
-  ],
-  [
    "['Florida Senate', r(senate)]",
    "['Senado de Florida', r(senate)]"
   ],

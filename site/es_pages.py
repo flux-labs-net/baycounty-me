@@ -81,7 +81,12 @@ NAV_ES = {
 EXTRA_JS = [
     (' for school taxes${t.nonOther', ' para impuestos escolares${t.nonOther'), ('for city and district taxes', 'para impuestos de la ciudad y de distritos'),
     ('No property tax is owed on this home.', 'Esta vivienda no paga impuesto a la propiedad.'), ('About exemptions →', 'Sobre las exenciones (en inglés) →'),
-    ("'entire value'", "'todo el valor'"), ("'Exemption type '", "'Exención tipo '"),
+    ("['Homestead', t.h1]", "['Exención de vivienda principal (homestead)', t.h1]"),
+    ("['Additional homestead', t.second]", "['Exención adicional de vivienda principal', t.second]"),
+    ("['Other exemptions', t.other]", "['Otras exenciones', t.other]"),
+    ("The kinds of other exemptions aren't shown, to protect owners' privacy. Owners can see theirs on the <a href=\"${PA_URL}\" target=\"_blank\" rel=\"noopener\">Property Appraiser's site</a>.",
+     "No mostramos de qué tipo son las otras exenciones, para proteger la privacidad de los dueños. Cada dueño puede ver las suyas en el <a href=\"${PA_URL}\" target=\"_blank\" rel=\"noopener\">sitio del Tasador de Propiedades (Property Appraiser)</a>."),
+    ("' <span class=\"muted small\">(includes homestead)</span>'", "' <span class=\"muted small\">(incluye homestead)</span>'"),
 ]
 EX_ES = {
     'Homestead': 'Exención de vivienda principal (homestead)', 'Additional homestead': 'Exención adicional de vivienda principal',

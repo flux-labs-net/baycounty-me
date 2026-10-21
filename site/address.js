@@ -259,11 +259,11 @@ async function loadEx(pid) {
 }
 function taxParts(p) {
   if (p._ex) {
-    // 2026 final tax roll: school and non-school taxable value as certified, with each exemption by type
-    const [tsd, tnsd, sr, ex] = p._ex, assessed = +p.VASTOTAL || 0, just = +p.VASJUST || 0;
-    const exempt = Object.values(ex).reduce((s, v) => s + v, 0);
-    return {hx: !!ex['01'], assessed, just, exempt, taxable: tnsd, second: ex['02'] || 0, other: exempt - (ex['01'] || 0) - (ex['02'] || 0),
-      school: tsd, non: tnsd, nonOther: Math.min(assessed, tnsd + sr), ex, full: tsd === 0 && tnsd === 0 && exempt > 0};
+    // 2026 final tax roll: school and non-school taxable value as certified. Homestead amounts are shown by name;
+    // every other exemption is one lumped amount, so no one's personal circumstances show up here.
+    const [tsd, tnsd, h1, h2, oth] = p._ex, assessed = +p.VASTOTAL || 0, just = +p.VASJUST || 0, exempt = h1 + h2 + oth;
+    return {hx: h1 > 0, assessed, just, exempt, taxable: tnsd, second: h2, other: oth, h1,
+      school: tsd, non: tnsd, nonOther: null, roll: true, full: tsd === 0 && tnsd === 0 && exempt > 0};
   }
   const hx = /\bHX\b/.test(p.DEXEMPTS || ''), assessed = +p.VASTOTAL || 0, just = +p.VASJUST || 0, exempt = +p.VASEXEMPT || 0, taxable = +p.VASTAXABLE || 0;
   const second = hx ? Math.min(Math.max(assessed - 50000, 0), D.second2026) : 0;
@@ -295,21 +295,22 @@ async function loadFees(pid, taxTot) {
     ? `<dl class="kv fees"><dt class="span">Flat fees on the tax bill</dt>${items.map(([c, a]) => `<dt>${esc(D.navLabel[c] || 'Other charge (' + c + ')')}</dt><dd>${usd(a)}</dd>`).join('')}<dt><b>Estimated total bill</b></dt><dd><b>${usd(taxTot + fees)}</b> <span class="muted small">tax + fees</span></dd></dl>`
     : '<p class="muted small">No flat fees (non-ad valorem assessments) were on this parcel\'s FY2026 tax bill.</p>';
 }
+const PA_URL = 'https://www.baypa.net/';
 function exList(t) {
-  const FULL = new Set(['05', '06', '08', '39', '40', '41']);
-  const items = Object.entries(t.ex).sort((a, b) => b[1] - a[1]).map(([c, v]) => `<li>${esc(D.exNames[c] || 'Exemption type ' + c)} <span class="muted">${FULL.has(c) ? 'entire value' : usd(v)}</span></li>`);
-  return `${usd(t.exempt)}<ul class="plain small ex-list">${items.join('')}</ul>${t.full ? '<span class="small"><b>No property tax is owed on this home.</b></span> ' : ''}<a class="small" href="/public-money/exemptions">About exemptions →</a>`;
+  const items = [t.h1 ? ['Homestead', t.h1] : null, t.second ? ['Additional homestead', t.second] : null, t.other ? ['Other exemptions', t.other] : null].filter(Boolean)
+    .map(([n, v]) => `<li>${n} <span class="muted">${usd(v)}</span></li>`);
+  return `${usd(t.exempt)}<ul class="plain small ex-list">${items.join('')}</ul>${t.other ? `<span class="muted small">The kinds of other exemptions aren't shown, to protect owners' privacy. Owners can see theirs on the <a href="${PA_URL}" target="_blank" rel="noopener">Property Appraiser's site</a>.</span> ` : ''}${t.full ? '<span class="small"><b>No property tax is owed on this home.</b></span> ' : ''}<a class="small" href="/public-money/exemptions">About exemptions →</a>`;
 }
 function renderProp(p) {
   const el = $('propBody');
   if (!p) { el.innerHTML = '<dd class="muted">No parcel record found for this address.</dd>'; return; }
-  const t = taxParts(p), codes = String(p.DEXEMPTS || '').trim().split(/\s+/).filter(Boolean);
+  const t = taxParts(p);
   el.innerHTML = kv([
     ['Use', esc(title(p.DORAPPDESC))],
     p.S1YRBLTACT ? ['Built', esc(p.S1YRBLTACT) + (p.S1AREAHEAT ? ` · ${Math.round(p.S1AREAHEAT).toLocaleString()} heated sq ft` : '')] : null,
     ['Market (just) value', usd(t.just)],
     ['<span class="term" data-term="assessed-value">Assessed value</span>', usd(t.assessed) + (t.assessed < t.just ? ` <span class="muted small">(capped ${usd(t.just - t.assessed)} below market)</span>` : '')],
-    ['Exemptions', t.ex ? exList(t) : t.exempt ? usd(t.exempt) + ` <span class="muted small">(${t.hx ? 'homestead' : 'codes'}${codes.filter(c => c !== 'HX').length ? (t.hx ? ' + ' : ' ') + esc(codes.filter(c => c !== 'HX').join(', ')) : ''})</span>` : 'No exemptions'],
+    ['Exemptions', t.roll ? exList(t) : t.exempt ? usd(t.exempt) + (t.hx ? ' <span class="muted small">(includes homestead)</span>' : '') : 'No exemptions'],
     ['<span class="term" data-term="taxable-value">Taxable value</span>', usd(t.non) + (t.school !== t.non ? ` <span class="muted small">(${usd(t.school)} for school taxes${t.nonOther != null && t.nonOther !== t.non ? `, ${usd(t.nonOther)} for city and district taxes` : ''})</span>` : '')],
   ]);
 }

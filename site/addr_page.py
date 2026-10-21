@@ -59,7 +59,7 @@ def addr_page(out_dir):
         'taxdist': TAXDIST, 'craAgency': CRA_AGENCY, 'cra': {k: {'spent': round(v['spent']), 'n': v['n']} for k, v in cra.items()},
         'districts': {d['id']: {'label': d['label'], 'stack': d['stack'], 'total': d['total'][L]} for d in td['districts']},
         'auth': {k: {'n': a['n'], 'g': a['g'], 'school': a['school'], 'm': a['m'][L]} for k, a in td['auth'].items()},
-        'groups': td['groups'], 'fy': td['fy'][L], 'second2026': 26411, 'navLabel': NAV_LABEL, 'exNames': __import__('exemptions_page').names_for_js(),
+        'groups': td['groups'], 'fy': td['fy'][L], 'second2026': 26411, 'navLabel': NAV_LABEL,
     }
     js = open(os.path.join(HERE, 'address.js')).read().replace('__ADDR__', json.dumps(data, ensure_ascii=False, separators=(',', ':')))
     open(os.path.join(out_dir, 'assets', 'address.js'), 'w').write(js)

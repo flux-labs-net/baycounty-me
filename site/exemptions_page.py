@@ -45,6 +45,9 @@ def write_shards(out_dir):
     P = json.load(open(fp))
     sh = defaultdict(dict)
     for pid, v in P.items():
+        # privacy: only [school taxable, non-school taxable, homestead $, additional homestead $, other exemptions $] may be published
+        if not (isinstance(v, list) and len(v) == 5 and all(isinstance(x, (int, float)) for x in v)):
+            raise ValueError(f'parcels_2026.json row for {pid} is not the privacy-safe shape; run data/exemptions/build_exemptions.py --migrate')
         sh[pid[:3]][pid] = v
     d = os.path.join(out_dir, 'data', 'ex'); os.makedirs(d, exist_ok=True)
     for k, v in sh.items():
