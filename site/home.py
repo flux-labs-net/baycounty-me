@@ -98,7 +98,7 @@ def home_page():
   <section class="section" aria-labelledby="soon">
     <div class="sec-hd"><h2 id="soon">In the works</h2><span class="muted">Research underway now</span></div>
     <div class="cols">
-      <div><h3>More boards' votes</h3><p>Panama City Beach, Lynn Haven, Callaway and Parker votes are being compiled from minutes.</p></div>
+      <div><h3>School Board votes</h3><p>Bay District Schools' meeting records aren't reachable online yet; they're being requested.</p></div>
       <div><h3>Who gets paid</h3><p>Check registers and vendor payments, as the records requests for them come back.</p></div>
     </div>
   </section>

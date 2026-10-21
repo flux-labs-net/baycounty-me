@@ -10,7 +10,7 @@ import html
 
 CHANGES = [
     {'date': '2026-10-20', 'title': 'How they voted',
-     'text': 'Recorded votes on budgets, tax rates, contracts, land and borrowing, with every member\'s vote and split votes first. Bay County, Panama City and the school board so far; more boards coming.',
+     'text': 'Recorded votes on budgets, tax rates, contracts, land and borrowing, with every member\'s vote and split votes first. Now covers the County Commission and every city: 351 votes, 115 of them split.',
      'pages': ['/public-money/votes']},
     {'date': '2026-10-20', 'title': 'Contracts and vendors',
      'text': 'Major contracts approved by Bay County and its cities since October 2022: winners, how they were awarded, change orders, emergency purchases, the bidding rules, and who the county actually paid the most.',

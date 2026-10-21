@@ -54,7 +54,7 @@ def votes_page(out_dir):
     <div class="kpi"><span class="eyebrow">Votes recorded</span><span class="v">{len(vs)}</span><span class="s">Money decisions with a source</span></div>
     <div class="kpi"><span class="eyebrow">Split votes</span><span class="v">{len(split)}</span><span class="s">Not unanimous</span></div>
     <div class="kpi"><span class="eyebrow">Tax rate votes</span><span class="v">{sum(1 for v in vs if v.get("category") == "millage")}</span><span class="s">Millage adoptions</span></div>
-    <div class="kpi"><span class="eyebrow">Boards covered so far</span><span class="v">{sum(1 for k in bodies if cnt[k])} of {len([k for k in bodies if not k.endswith("-cra")])}</span><span class="s">More being added</span></div>
+    <div class="kpi"><span class="eyebrow">Boards covered so far</span><span class="v">{sum(1 for k in bodies if cnt[k])} of {len([k for k in bodies if not k.endswith("-cra")])}</span><span class="s">School Board still limited</span></div>
   </div>
   <section class="tx-sec"><div class="sec-hd"><h2 id="split">Split votes</h2><span class="muted">Most recent first</span></div><ol class="findings">{sp_html}</ol></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="all">Every recorded vote</h2><span class="muted" id="vtCount"></span></div>
@@ -65,7 +65,7 @@ def votes_page(out_dir):
     <ol class="findings" id="vtList"></ol><button type="button" class="pill" id="vtMore">Show more</button></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="who">Members and their records</h2><span class="muted">Counts cover only the votes recorded on this page</span></div>{roster}</section>
   <section class="tx-sec method"><div class="sec-hd"><h2 id="src">Coverage and gaps</h2></div>
-    <p>{f"Not yet compiled: {e(', '.join(missing))}. Their minutes are being reviewed and will be added." if missing else ""} Votes come from official minutes; where minutes give only a tally, members are shown as "unknown".</p>
+    <p>{f"Not yet compiled: {e(', '.join(missing))}. Their minutes are being reviewed and will be added." if missing else ""} Votes come from official minutes; where minutes give only a tally, members are shown as "unknown". Minutes for Lynn Haven, Callaway, Panama City Beach, Mexico Beach, Parker and Springfield are mostly scanned and were read with text recognition, so check the linked minutes before relying on any single vote.</p>
     <ul class="plain">{''.join(f"<li>{e(n)}</li>" for n in (d.get("notes") or []))}</ul>
     {f'<details class="gaps"><summary>What we couldn\'t find ({len(d.get("gaps") or [])})</summary><ul>' + ''.join(f"<li>{e(g)}</li>" for g in d.get("gaps") or []) + '</ul></details>' if d.get("gaps") else ''}</section>
 </div>
