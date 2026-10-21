@@ -14,6 +14,70 @@ def usd(n):
     return '—' if n is None else f'${n:,.0f}'
 
 
+SUFFIX = re.compile(r'[\s,.]*\b(inc|llc|ll|co|corp|corporation|company|pa|pllc|ltd)\b\.?$', re.I)
+
+
+def _base(n):
+    b, suf = n.strip(), ''
+    m = SUFFIX.search(b)
+    if m:
+        suf = m.group(1).lower().replace('ll', 'llc') if m.group(1).lower() == 'll' else m.group(1).lower()
+        b = b[:m.start()]
+    b = re.sub(r'^committee\s+', '', b, flags=re.I)
+    return re.sub(r'[^a-z0-9]', '', b.lower().replace("'", '').replace('&', 'and')), suf
+
+
+CANON = {}
+
+
+def _display(names):
+    """Pick the clearest spelling: mixed case over ALL CAPS, then the most complete."""
+    def score(n):
+        return (n[:1].isupper(), n != n.upper() and n != n.lower(), not n.lower().startswith('committee '), len(n))
+    n = max(names, key=score)
+    return re.sub(r',?\s+LL$', ', LLC', n)
+
+
+# Names the Supervisor of Elections cut off at 30 characters, or misspelled, completed only where the full name is clear
+NAME_FIX = {
+    'Able Services of NW Florida, L': 'Able Services of NW Florida, LLC', 'American Sand and Asphalt Pavi': 'American Sand & Asphalt Paving',
+    'BK Construction &Devlopment Co': 'BK Construction & Development Co.', 'Blue Water Commercial Group LL': 'Blue Water Commercial Group, LLC',
+    'C & G Construction Equipment I': 'C & G Construction Equipment, Inc.', 'Cypress Environmental Of Bay C': 'Cypress Environmental of Bay County',
+    'Emerald Coast Civil Constructi': 'Emerald Coast Civil Construction', 'Emerald Coast Federal Credit U': 'Emerald Coast Federal Credit Union',
+    'Emerald Coast OBGYN of the Pan': 'Emerald Coast OBGYN of the Panhandle', 'Fiddlers Point Oyster Company': "Fiddler's Point Oyster Co, LLC",
+    'Freedom Consulting Services LL': 'Freedom Consulting Services, LLC', 'Garretts Automobile Service Ce': "Garrett's Automotive Service Center",
+    'Garretts Automotive Service Ce': "Garrett's Automotive Service Center", 'Harpoon Harrys Harpoon Harrys': "Harpoon Harry's",
+    'Holiday Golf & Racque Club, Ic': 'Holiday Golf & Racquet Club, Inc.', 'McKinney Insurance & Investmen': 'McKinney Insurance & Investments',
+    'Monolith Construction - Panhan': 'Monolith Construction - Panhandle', 'Palm Realty & Property Managme': 'Palm Realty & Property Management',
+    'Panama City Boatman Associatio': 'Panama City Boatman Association', 'Pros Construction & Roofing In': 'Pros Construction & Roofing, Inc.',
+    'RX Express Pharmacy of Panama': 'RX Express Pharmacy of Panama City', 'Safe Harbor Insurance Protecti': 'Safe Harbor Insurance Protection',
+    'Southerland Family Funeral Hom': 'Southerland Family Funeral Home', 'The Sterling Company of Bay Co': 'The Sterling Company of Bay County',
+    'Trumbull Water Services of NWF': 'Trumbull Water Services of NW Florida', 'Property Account Trumbull Water Services of NW': 'Trumbull Water Services of NW Florida',
+    'Vittles Companies, Inc Operati': 'Vittles Companies, Inc.', 'Vittles Inc Operating Account': 'Vittles, Inc.',
+    'Realtors Polictical Advocacy C': 'Realtors Political Advocacy Committee', 'Realtors Political Advocacy Co': 'Realtors Political Advocacy Committee',
+    'Realtors Political Advocacy': 'Realtors Political Advocacy Committee', 'Committee Realtors Political Advocacy': 'Realtors Political Advocacy Committee',
+    'committee Realtors Political Advocacy Co': 'Realtors Political Advocacy Committee', 'Realtors Political Act Committ': 'Realtors Political Action Committee',
+    'Realtors Political Action Comm': 'Realtors Political Action Committee', 'Nive Vittles': 'Nice Vittles, Inc.', "Mike's Cafe & Oyster Bar, LL": "Mike's Cafe & Oyster Bar, LLC",
+}
+
+
+def merge_orgs(orgs):
+    """Total gifts by organization, treating spelling variants of one name as one donor.
+    Names with different legal suffixes (Inc vs LLC) stay separate; a name with no suffix joins its only suffixed match."""
+    groups = defaultdict(lambda: defaultdict(lambda: [0.0, []]))
+    for x in orgs:
+        nm = NAME_FIX.get(x['name'].strip(), x['name'].strip())
+        b, suf = _base(nm)
+        g = groups[b][suf]; g[0] += x.get('amount') or 0; g[1].append(nm)
+    out = []
+    for b, by in groups.items():
+        sufs = [k for k in by if k]
+        if '' in by and len(sufs) == 1:
+            bare = by.pop(''); by[sufs[0]][0] += bare[0]; by[sufs[0]][1] += bare[1]
+        out += [(CANON.get(_base(v[1][0])) or _display(v[1]), v[0]) for v in by.values()]
+    return sorted(out, key=lambda kv: -kv[1])
+
+
 def campaign_page():
     try:
         d = json.load(open(os.path.join(DATA, 'campaign.json')))
@@ -21,6 +85,23 @@ def campaign_page():
     except FileNotFoundError:
         return '<div class="page prose"><h1>Campaign money</h1><p>Coming soon.</p></div>'
     cands = d['candidates']
+    _all = defaultdict(list)
+    for c in cands:
+        for x in c.get('contributors') or []:
+            if x.get('type') not in ('individual', 'candidate'):
+                nm = NAME_FIX.get(x['name'].strip(), x['name'].strip()); _all[_base(nm)].append(nm)
+    # a name with no legal suffix belongs to its suffixed form when there is only one
+    _sufs = defaultdict(set)
+    for b, suf in _all:
+        if suf:
+            _sufs[b].add(suf)
+    for (b, suf) in list(_all):
+        if not suf and len(_sufs[b]) == 1:
+            _all[(b, next(iter(_sufs[b])))] += _all.pop((b, ''))
+    CANON.clear(); CANON.update({k: _display(v) for k, v in _all.items()})
+    for b, ss in _sufs.items():
+        if len(ss) == 1:
+            CANON[(b, '')] = CANON[(b, next(iter(ss)))]
     # pairs: one per contributor+candidate (rows repeat per contracting government)
     pairs = defaultdict(lambda: {'govs': [], 'contracts': [], 'urls': []})
     for m in vm['matches']:
@@ -46,10 +127,7 @@ def campaign_page():
         for c in sorted(cs, key=lambda c: -(c.get('total_raised') or 0)):
             bt = c.get('by_type_total') or {}
             orgs = sorted((x for x in c.get('contributors') or [] if x.get('type') not in ('individual', 'candidate')), key=lambda x: -(x.get('amount') or 0))
-            agg = defaultdict(float)
-            for x in orgs:
-                agg[x['name']] += x.get('amount') or 0
-            top = sorted(agg.items(), key=lambda kv: -kv[1])
+            top = merge_orgs(orgs)
             orgt = sum(v for k, v in bt.items() if k not in ('individual', 'candidate_self'))
             fi = c.get('from_individuals') or {}
             det = (f'<details class="flds"><summary>{len(top)} organizations</summary><ul class="plain small">' + ''.join(f'<li>{e(n)} · {usd(v)}</li>' for n, v in top) + '</ul></details>') if top else '<span class="muted small">none</span>'
@@ -103,7 +181,7 @@ def campaign_page():
     <div class="tablewrap"><table class="tx-table cm-table" id="cmO"><thead><tr><th scope="col">Official</th><th scope="col" class="num">Raised</th><th scope="col" class="num">From individuals</th><th scope="col" class="num">From organizations</th><th scope="col" class="num">Own money</th><th scope="col">Donors</th></tr></thead><tbody>{rows}</tbody></table></div>
     <p class="note">"Raised" is the Supervisor of Elections' total of monetary contributions, which includes loans from the candidate. In-kind gifts (goods or services) are counted by type. For finished campaigns, spending includes leftover money given away or returned.</p></section>
   <section class="tx-sec method"><div class="sec-hd"><h2 id="src">Sources and gaps</h2></div>
-    <p>Every figure comes from the Bay County Supervisor of Elections' campaign finance system, including the itemized reports, which add up to the official totals. <a class="src" href="https://www.bayvotesfl.gov/candidates/candidate-committee-finances/" target="_blank" rel="noopener">Supervisor of Elections</a></p>
+    <p>Every figure comes from the Bay County Supervisor of Elections' campaign finance system, including the itemized reports, which add up to the official totals. Organization names are shown as filed, except that spelling variants of the same name are combined, and names the filing system cut off at 30 characters are completed where the full name is clear. <a class="src" href="https://www.bayvotesfl.gov/candidates/candidate-committee-finances/" target="_blank" rel="noopener">Supervisor of Elections</a></p>
     <ul class="plain">{gaps}</ul></section>
 </div>
 <link rel="stylesheet" href="/assets/tax.css">
