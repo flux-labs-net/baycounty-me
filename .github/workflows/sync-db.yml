@@ -1,0 +1,43 @@
+# Load the site's public datasets into the Supabase database.
+# Runs after every push to main that changes data or the built site, after the daily refresh, or by hand.
+# Needs one repository secret: DATABASE_URL (Supabase > Connect > Session pooler connection string).
+# Only rows with origin = 'site_build' are replaced; rows added by hand or by scrapers are never touched.
+name: Sync database
+on:
+  push:
+    branches: [main]
+    paths: ['data/**', 'site/public/downloads/**', 'db/**']
+  workflow_run:
+    workflows: ['Refresh meetings']
+    types: [completed]
+  workflow_dispatch: {}
+concurrency:
+  group: sync-db
+  cancel-in-progress: false
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check for database secret
+        id: secret
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          if [ -z "$DATABASE_URL" ]; then echo "DATABASE_URL secret not set yet; skipping."; echo "ok=false" >> "$GITHUB_OUTPUT"; else echo "ok=true" >> "$GITHUB_OUTPUT"; fi
+      - uses: actions/checkout@v4
+        if: steps.secret.outputs.ok == 'true'
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        if: steps.secret.outputs.ok == 'true'
+        with:
+          python-version: '3.12'
+      - name: Install driver
+        if: steps.secret.outputs.ok == 'true'
+        run: pip install 'psycopg[binary]>=3.2'
+      - name: Apply migrations and load data
+        if: steps.secret.outputs.ok == 'true'
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: python db/scripts/load.py --migrate
