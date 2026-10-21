@@ -145,7 +145,7 @@ def vendor(vid):
 NICK = {'doug': 'douglas', 'chris': 'christopher', 'dave': 'david', 'bob': 'robert', 'bobby': 'robert', 'rob': 'robert', 'robbie': 'robert',
         'bill': 'william', 'chuck': 'charles', 'jim': 'james', 'jamie': 'james', 'mike': 'michael', 'steve': 'steven', 'stephen': 'steven',
         'tom': 'thomas', 'tommy': 'thomas', 'nick': 'nicholas', 'pat': 'patrick', 'dan': 'daniel', 'ed': 'edward', 'andy': 'andrew',
-        'josh': 'joshua', 'sam': 'samuel', 'ken': 'kenneth', 'rick': 'richard', 'jerry': 'gerald', 'judy': 'judith', 'cindy': 'cynthia'}
+        'josh': 'joshua', 'sam': 'samuel', 'ken': 'kenneth', 'rick': 'richard'}
 
 
 def person_key(name):

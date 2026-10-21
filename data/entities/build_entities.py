@@ -204,7 +204,106 @@ def _pick_display(names):
     return re.sub(r'\s*\((bid awarded|consultant|buyer|camera|program)[^)]*\)', '', best).strip()
 
 
+# ---- people: elected officials, department leaders and 2026 candidates only ----
+def _j(*p):
+    try:
+        return json.load(open(os.path.join(HERE, '..', *p)))
+    except FileNotFoundError:
+        return None
+
+
+def _clean_person(n):
+    n, dist = ids.split_district(n)
+    n = re.sub(r'\s*\((?!chuck\)|bob\))[^)]*\)', '', n, flags=re.I).strip()  # drop notes like "(Vice Chairman ...)", keep "William (Chuck) Perdue"
+    n = re.sub(r'\s*\((serving since|appointed|not seeking|FY\d|stepped down)[^)]*\)', '', n).strip()
+    return n, dist
+
+
+# hand-checked: different name keys that are one person (key, key, evidence)
+SAME_PERSON = [
+    (('william', 'perdue'), ('charles', 'perdue'), 'Tax Collector William (Chuck) Perdue; the salary file lists "Chuck Perdue".'),
+]
+
+
+def build_people():
+    seen = []  # (raw name, role dict)
+    v = _j('votes', 'votes.json')
+    govb = lambda b: next((k for k, p in (('county', 'bay-'), ('pcb', 'pcb-'), ('pc', 'pc-'), ('lh', 'lh-'), ('cw', 'cw-'), ('sp', 'sp-'), ('parker', 'parker-'), ('mb', 'mb-'), ('schools', 'bds-')) if b.startswith(p)), None)
+    for b in v['bodies']:
+        mem = b['members'] if isinstance(b['members'], list) else []
+        for m in mem:
+            seen.append((m['name'], {'role': 'board member', 'gov_id': govb(b['id']), 'seat': m.get('seat'), 'source': 'votes'}))
+        for m in b.get('former_members_in_period') or []:
+            nm = re.sub(r'\s*\(.*$', '', m)
+            seat = (re.search(r'\(([^,)]+)', m) or [None, None])[1]
+            seen.append((nm, {'role': 'former board member', 'gov_id': govb(b['id']), 'seat': seat, 'source': 'votes'}))
+    for x in v['votes']:
+        for n in (x.get('by_member') or {}):
+            seen.append((n, {'role': 'board member', 'gov_id': govb(x['body']), 'source': 'votes'}))
+    import glob
+    for fp in sorted(glob.glob(os.path.join(HERE, '..', 'salaries', '*.json'))):
+        d = json.load(open(fp))
+        for r in d.get('leaders') or []:
+            if r.get('name'):
+                seen.append((r['name'], {'role': r.get('title'), 'gov_id': ids.gov_id(d.get('employer_id')) or ids.gov_id(d.get('employer')), 'source': 'salaries'}))
+    f = _j('fees', 'fees_pay_officials.json')
+    for r in f['pay']:
+        if r.get('name'):
+            seen.append((r['name'], {'role': r.get('title'), 'gov_id': ids.gov_id(r.get('title')) if ids.gov(ids.gov_id(r.get('title')) or '') and ids.gov(ids.gov_id(r.get('title')))['kind'] == 'constitutional' else ids.gov_id(r.get('government')), 'source': 'officials-pay'}))
+    c = _j('campaign', 'campaign.json')
+    for r in c['candidates']:
+        seen.append((r['official'], {'role': 'officeholder: ' + (r.get('office') or ''), 'gov_id': ids.gov_id(r.get('office'), contains=True) or ids.gov_id(r.get('gov')), 'source': 'campaign'}))
+    fin = _j('elections', 'finance_2026.json')
+    for r in fin['candidates']:
+        seen.append((r['name'], {'role': '2026 candidate: ' + (r.get('office') or ''), 'gov_id': ids.gov_id(r.get('office'), contains=True), 'source': 'finance_2026'}))
+    cand = _j('elections', 'candidates_2026.json')
+    for race in cand['races']:
+        for k in race.get('candidates') or []:
+            seen.append((k['name'], {'role': '2026 candidate: ' + race['office'], 'gov_id': ids.gov_id(race['office'], contains=True) or race.get('gov'), 'source': 'candidates_2026'}))
+    join = {}
+    for a, b, _ in SAME_PERSON:
+        join[b] = a
+    groups = collections.defaultdict(lambda: {'names': collections.Counter(), 'roles': [], 'districts': set(), 'govs': set()})
+    for raw, role in seen:
+        nm, dist = _clean_person(raw)
+        keys = sorted(ids.person_alt_keys(nm))
+        if not keys:
+            continue
+        k = join.get(ids.person_key(nm), ids.person_key(nm))
+        g = groups[k]
+        g['names'][nm] += 1
+        if dist:
+            g['districts'].add(dist)
+        if role.get('gov_id'):
+            g['govs'].add(role['gov_id'])
+        r = {kk: vv for kk, vv in role.items() if vv}
+        if r not in g['roles']:
+            g['roles'].append(r)
+    out, used, review = [], set(), []
+    for k, g in groups.items():
+        # display: the spelling seen most often; ties go to the one without a middle initial
+        disp = max(g['names'], key=lambda n: (g['names'][n], -len(n)))
+        toks = [t for t in re.sub(r'\([^)]*\)', ' ', disp.lower()).replace('.', ' ').replace(',', ' ').split() if t not in ('dr', 'jr', 'sr', 'ii', 'iii') and len(t) > 1]
+        pid = re.sub(r'[^a-z0-9]+', '-', ' '.join(toks)).strip('-')
+        base, i = pid, 2
+        while pid in used:
+            pid = f'{base}-{i}'; i += 1
+        used.add(pid)
+        if len(g['govs']) > 1 and not ({'county', 'schools'} >= g['govs']):
+            review.append({'person_id': pid, 'governments': sorted(g['govs']), 'names': sorted(g['names'])})
+        out.append({'id': pid, 'name': disp, 'aliases': sorted(g['names']), 'district': sorted(g['districts'])[0] if len(g['districts']) == 1 else (sorted(g['districts']) or None),
+                    'gov_ids': sorted(g['govs']), 'roles': g['roles']})
+    out.sort(key=lambda p: p['id'])
+    return {'about': 'Elected officials, department leaders and 2026 local candidates named in the site\'s datasets, one id per person. Names are matched on first and last name with common nicknames '
+                     '(Doug = Douglas, Chris = Christopher, Dave = David ...), ignoring middle initials, titles and notes in parentheses; "(D2)" style suffixes become the district field. '
+                     'People who appear under more than one government are listed in multi_government for checking. No other people are included.',
+            'count': len(out), 'people': out, 'same_person_by_hand': [{'keys': [list(a), list(b)], 'why': w} for a, b, w in SAME_PERSON], 'multi_government': review}
+
+
 def main():
+    p = build_people()
+    json.dump(p, open(os.path.join(HERE, 'people.json'), 'w'), indent=1, ensure_ascii=False)
+    print('people:', p['count'], 'multi-government:', len(p['multi_government']))
     v, rev = build_vendors()
     json.dump(v, open(os.path.join(HERE, 'vendors.json'), 'w'), indent=1, ensure_ascii=False)
     json.dump(rev, open(os.path.join(HERE, 'vendor_review.json'), 'w'), indent=1, ensure_ascii=False)

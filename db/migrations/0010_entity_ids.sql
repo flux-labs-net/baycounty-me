@@ -49,3 +49,23 @@ create policy "public read" on vendors for select using (true);
 alter table vendor_aliases enable row level security;
 drop policy if exists "public read" on vendor_aliases;
 create policy "public read" on vendor_aliases for select using (true);
+
+-- person ids (data/entities/people.json): elected officials, department leaders and 2026 candidates only
+alter table member_votes add column if not exists person_id text;
+alter table officials_pay add column if not exists person_id text;
+alter table officials_pay add column if not exists district text;
+alter table salary_leaders add column if not exists person_id text;
+alter table campaign_finance add column if not exists person_id text;
+alter table candidates_2026 add column if not exists person_id text;
+alter table votes add column if not exists members jsonb;   -- [{name, person_id, vote}]
+create index if not exists member_votes_person_id_idx on member_votes (person_id);
+create table if not exists people (
+  id text primary key,             -- e.g. douglas-moore
+  name text not null,
+  aliases jsonb not null default '[]',
+  roles jsonb not null default '[]',
+  updated_at timestamptz not null default now()
+);
+alter table people enable row level security;
+drop policy if exists "public read" on people;
+create policy "public read" on people for select using (true);

@@ -34,9 +34,32 @@ def add_vendor_id(did, rows):
     return rows
 
 
+PERSON_COL = {'member-votes': 'member', 'officials-pay': 'name', 'salary-leaders': 'name', 'campaign-finance': 'official', 'candidates-2026': 'candidate'}
+
+
+def add_person_id(did, rows):
+    """person_id from data/entities/people.json (elected officials, department leaders, 2026 candidates only).
+    A '(D2)' style suffix moves out of the name into district."""
+    col = PERSON_COL.get(did)
+    if not col:
+        return rows
+    for r in rows:
+        nm = r.get(col)
+        if isinstance(nm, str):
+            clean, dist = ids.split_district(nm)
+            if dist:
+                r[col] = clean
+                r['district'] = dist
+            elif did == 'officials-pay':
+                r['district'] = None
+        r['person_id'] = ids.person_id(nm) if isinstance(nm, str) else None
+    return rows
+
+
 def add_gov_id(did, rows):
     cols = GOV_COLS.get(did, ['government', 'gov'])
     add_vendor_id(did, rows)
+    add_person_id(did, rows)
     for r in rows:
         if did in FIXED_GOV:
             r['gov_id'] = FIXED_GOV[did]; continue
@@ -63,7 +86,8 @@ def _votes():
              'summary': v.get('summary'), 'amount': v.get('amount'), 'outcome': v.get('outcome'), 'tally': v.get('tally'), 'split': is_split(v),
              'voted_yes': '; '.join(n for n, x in (v.get('by_member') or {}).items() if x == 'yes'), 'voted_no': '; '.join(n for n, x in (v.get('by_member') or {}).items() if x == 'no'),
              'absent_or_abstained': '; '.join(n for n, x in (v.get('by_member') or {}).items() if x in ('absent', 'abstain')), 'agenda_item': v.get('item'),
-             'source_title': v.get('source_title'), 'source_url': v.get('source_url')} for v in d['votes']]
+             'source_title': v.get('source_title'), 'source_url': v.get('source_url'),
+             'members': [{'name': n, 'person_id': ids.person_id(n), 'vote': x} for n, x in (v.get('by_member') or {}).items()] or None} for v in d['votes']]
 
 
 def _member_votes():
