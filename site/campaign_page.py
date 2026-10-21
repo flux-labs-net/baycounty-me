@@ -57,7 +57,7 @@ NAME_FIX = {
     'Realtors Polictical Advocacy C': 'Realtors Political Advocacy Committee', 'Realtors Political Advocacy Co': 'Realtors Political Advocacy Committee',
     'Realtors Political Advocacy': 'Realtors Political Advocacy Committee', 'Committee Realtors Political Advocacy': 'Realtors Political Advocacy Committee',
     'committee Realtors Political Advocacy Co': 'Realtors Political Advocacy Committee', 'Realtors Political Act Committ': 'Realtors Political Action Committee',
-    'Realtors Political Action Comm': 'Realtors Political Action Committee', 'Nive Vittles': 'Nice Vittles, Inc.', "Mike's Cafe & Oyster Bar, LL": "Mike's Cafe & Oyster Bar, LLC",
+    'Realtors Political Action Comm': 'Realtors Political Action Committee', 'Nive Vittles': 'Nice Vittles, Inc.', 'Marshall Bothers': 'Marshall Brothers', "Mike's Cafe & Oyster Bar, LL": "Mike's Cafe & Oyster Bar, LLC",
 }
 
 
@@ -160,7 +160,7 @@ def campaign_page():
     return f'''<div class="page tax">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Accountability · Campaign money</span><h1>Campaign money and contracts</h1>
     <p class="lede">Who paid for the most recent campaigns of Bay County's current elected officials, from the reports they file with the Supervisor of Elections, and which donors also hold local government contracts.</p></div>
-    <div class="stamp"><button type="button" class="pdf-btn" id="pdf"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 12v2h10v-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Export PDF</button><span>Reports as of {e(d.get("as_of"))}</span></div></header>
+    <div class="stamp"><a class="pill" href="/public-money/money-map">See the money map</a><button type="button" class="pdf-btn" id="pdf"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 12v2h10v-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Export PDF</button><span>Reports as of {e(d.get("as_of"))}</span></div></header>
   <section class="explain"><div class="ex-txt"><span class="eyebrow">The simple version</span><h2>Reading campaign money</h2>
     <ol class="ex-steps">
       <li><b>Candidates must report every contribution.</b> Florida caps gifts to local candidates at $1,000 per person or business per election, and every report is public.</li>

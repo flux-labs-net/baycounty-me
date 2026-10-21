@@ -1,0 +1,7 @@
+{
+ "source_notes": [
+  "Bay County BOCC: the Clerk's OnBase 'BOCC - Minutes Search' (queried through its public API, https://bayforms.baycoclerk.com/PublicAccess/api/CustomQuery/KeywordSearch, QueryID 105, Year 2026) still lists 2026 minutes only through the June 16, 2026 regular meeting as of Oct. 21, 2026. No minutes are posted for July 7, July 21 (maximum millage), Aug. 2026 meetings, or the Sept. 2026 FY2027 budget hearings, so no roll calls could be added. The 2025 list also still lacks the separate Sept. 3 and Sept. 16, 2025 budget-hearing minutes (only the regular-meeting minutes for those dates, already in votes.json, are posted) and Dec. 2 and Dec. 16, 2025; March 3, 2026 is also missing.",
+  "Parker: the Sept. 24, 2026 FY2027 final budget hearing minutes were approved at the Oct. 6, 2026 council meeting (agenda item 1, per the Oct. 6 agenda package at https://cityofparker.com/wp-content/uploads/filr/7020/Agenda-Regular-Meeting-Package.pdf), but the approved minutes are not yet posted on https://cityofparker.com/government/city-council/ (the newest posted minutes are Sept. 15, 2026, filr 7048). The Sept. 24 agenda package (filr 7005) has the resolutions but no votes."
+ ],
+ "votes": []
+}

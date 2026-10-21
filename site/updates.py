@@ -9,6 +9,9 @@ from datetime import datetime, timezone
 import html
 
 CHANGES = [
+    {'date': '2026-10-21', 'title': 'Money map',
+     'text': 'An interactive map of which businesses and groups gave to which officials, and where those same donors hold contracts with a local government, plus heat maps of giving by government and of contract dollars held by each official\'s donors.',
+     'pages': ['/public-money/money-map']},
     {'date': '2026-10-21', 'title': 'Budget explorer',
      'text': "Open any government's FY2026 budget: spending by fund, General Fund spending by department, and revenue by source. Includes Callaway's and Parker's adopted budgets, which weren't on the site before.",
      'pages': ['/public-money/budget-explorer']},
@@ -106,7 +109,7 @@ LABELS = {'/': 'Home', '/my-address': 'My Address', '/public-money/tax-dollars':
           '/public-money/audits': 'Audit Findings', '/who-runs-bay-county': 'Officials', '/glossary': 'Glossary', '/search': 'Search',
           '/about': 'About', '/updates': "What's new", '/governments': 'Governments', '/compare': 'Compare', '/meetings': 'Meetings',
           '/public-money/campaign-money': 'Campaign Money', '/records-request': 'Records Request', '/open-data': 'Open Data', '/alerts': 'Email Alerts',
-          '/es': 'En español', '/public-money/budget-explorer': 'Budget Explorer', '/public-money/who-gets-paid': 'Who Gets Paid'}
+          '/es': 'En español', '/public-money/budget-explorer': 'Budget Explorer', '/public-money/who-gets-paid': 'Who Gets Paid', '/public-money/money-map': 'Money Map'}
 
 
 def last_updated(path):

@@ -67,6 +67,7 @@ MENU = [
             {'label': 'Contracts', 'href': '/public-money/contracts', 'desc': 'Who wins contracts, and how'},
             {'label': 'How They Voted', 'href': '/public-money/votes', 'desc': 'Every recorded vote on money decisions'},
             {'label': 'Campaign Money', 'href': '/public-money/campaign-money', 'desc': 'Who funds campaigns, and donor contracts'},
+            {'label': 'Money Map', 'href': '/public-money/money-map', 'desc': 'Donors, officials and contracts, mapped'},
             {'label': 'Who Gets Paid', 'href': '/public-money/who-gets-paid', 'desc': 'Every payment by the tourism agencies'},
             {'label': 'Debt', 'href': '/public-money/debt', 'desc': 'What each government owes'},
             {'label': 'Audit Findings', 'href': '/public-money/audits', 'desc': 'What outside auditors flagged'},
@@ -512,6 +513,7 @@ from alerts_page import alerts_page
 from meetings_page import meetings_page
 from campaign_page import campaign_page
 from money_pages import budget_page, payments_page
+from money_map import money_map_page
 from es_pages import ES_MENU, localize_chrome, es_home, es_addr_page, es_glossary_page, es_records_page, glossary_es_terms
 from govs import GOVS as GOVLIST  # noqa: E402
 
@@ -614,6 +616,7 @@ PAGES = [
     ('/public-money/campaign-money', 'Campaign money and contracts', "Who funded the campaigns of Bay County's current elected officials, from Supervisor of Elections reports, and which donors also hold local government contracts.", campaign_page),
     ('/who-runs-bay-county', 'Who runs Bay County', 'Every elected seat and appointed manager for Bay County, its cities and the school district, plus what top officials are paid.', who_page),
     ('/public-money/budget-explorer', 'Budget explorer', "Open up any Bay County government's FY2026 budget: spending by fund and department, and where the money comes from.", lambda: budget_page(OUT)),
+    ('/public-money/money-map', 'Money map: donors, officials and contracts', 'An interactive map and heat maps of which businesses gave to which Bay County officials, and where those donors hold local government contracts.', lambda: money_map_page(OUT)),
     ('/public-money/who-gets-paid', 'Who gets paid: tourism agencies', 'Every payment by Visit Panama City Beach, Destination Panama City and the Mexico Beach CDC, from the Clerk of Court check registers.', payments_page),
     ('/public-money/contracts', 'Who gets the contracts', 'Major contracts approved by Bay County and its cities since 2022: winners, how they were awarded, change orders, emergency purchases and who the county paid most.', lambda: contracts_page(OUT)),
     ('/public-money/votes', 'How they voted', 'How Bay County commissioners, city officials and school board members voted on budgets, tax rates, contracts, land and borrowing, from official minutes.', lambda: votes_page(OUT)),

@@ -996,6 +996,27 @@
   },
   {
    "body": "bds-board",
+   "date": "2025-05-13",
+   "category": "other",
+   "item": "Closing of the school number (MSID) for New Horizons Learning Center",
+   "amount": null,
+   "outcome": "passed",
+   "tally": "4-1",
+   "by_member": {
+    "Jerry Register": "yes",
+    "Ann Leonard": "yes",
+    "Chris Moore": "yes",
+    "Winston Chester": "no",
+    "Steve Moss": "yes"
+   },
+   "source_title": "Bay District School Board Meeting minutes, 2025-05-13 (BoardDocs, item 'A. Closing of MSID for New Horizons Learning Center')",
+   "source_url": "https://go.boarddocs.com/fl/bcsdfl/Board.nsf/goto?open&id=DGHMFM5B0DD7",
+   "plain_summary": "Closed New Horizons Learning Center as a separate school. Vote 4-1; Winston Chester voted no.",
+   "headline": "Closed New Horizons Learning Center as a separate school",
+   "summary": "The board approved closing the state school number for New Horizons Learning Center."
+  },
+  {
+   "body": "bds-board",
    "date": "2025-05-27",
    "category": "contract",
    "item": "Chartwells food service management contract, third renewal for 2025-26 ($3.827 per meal)",
@@ -1500,6 +1521,27 @@
   },
   {
    "body": "bds-board",
+   "date": "2025-12-16",
+   "category": "land",
+   "item": "Purchase and sale contract for a lot at 1336 Luverne Avenue, north of Bay High School, from Northshore Investment Properties",
+   "amount": 130000,
+   "outcome": "passed",
+   "tally": "5-0",
+   "by_member": {
+    "Jerry Register": "yes",
+    "Ann Leonard": "yes",
+    "Chris Moore": "yes",
+    "Winston Chester": "yes",
+    "Steve Moss": "yes"
+   },
+   "source_title": "Bay District School Board Meeting minutes, 2025-12-16 (BoardDocs, item 'B. Purchase and Sale Contract for 1336 Luverne - Land Purchase')",
+   "source_url": "https://go.boarddocs.com/fl/bcsdfl/Board.nsf/goto?open&id=DP9Q2T673B6F",
+   "plain_summary": "Bought lot near Bay High School for $130,000. Vote 5-0.",
+   "headline": "Bought lot near Bay High School for $130,000",
+   "summary": "The board approved buying a lot at 1336 Luverne Avenue, north of Bay High School, for $130,000. The parcel was appraised at $126,000."
+  },
+  {
+   "body": "bds-board",
    "date": "2026-01-13",
    "category": "budget",
    "item": "Salaries for non-bargaining administrative and confidential employees, 2025-26",
@@ -1686,6 +1728,48 @@
    "plain_summary": "Approved advertising a new college and career director job. Vote 3-1; Jerry Register voted no; Ann Leonard absent.",
    "headline": "Approved advertising a new college and career director job",
    "summary": "The board approved advertising a new job description for a Director of College and Career Student Pathways."
+  },
+  {
+   "body": "bds-board",
+   "date": "2026-04-28",
+   "category": "contract",
+   "item": "Guaranteed maximum price for selective demolition at the St. Andrew at Oakland Terrace site for the new Margaret K. Lewis school",
+   "amount": 1916662,
+   "outcome": "passed",
+   "tally": "4-0",
+   "by_member": {
+    "Jerry Register": "yes",
+    "Ann Leonard": "absent",
+    "Chris Moore": "yes",
+    "Winston Chester": "yes",
+    "Steve Moss": "yes"
+   },
+   "source_title": "Bay District School Board Meeting minutes, 2026-04-28 (BoardDocs, item 'B. Approval of Guaranteed Maximum Price for Oakland Terrace Selective Demolition')",
+   "source_url": "https://go.boarddocs.com/fl/bcsdfl/Board.nsf/goto?open&id=DTF4FP0B6117",
+   "plain_summary": "Approved $1.9 million demolition for new Margaret K. Lewis school. Vote 4-0; Ann Leonard absent.",
+   "headline": "Approved $1.9 million demolition for new Margaret K. Lewis school",
+   "summary": "Demolition at the St. Andrew at Oakland Terrace site, to make way for a new Margaret K. Lewis school, has a guaranteed maximum price of $1,916,662, paid with hurricane funds."
+  },
+  {
+   "body": "bds-board",
+   "date": "2026-04-28",
+   "category": "contract",
+   "item": "Property insurance renewal for 2026-27",
+   "amount": 3190972,
+   "outcome": "passed",
+   "tally": "4-0",
+   "by_member": {
+    "Jerry Register": "yes",
+    "Ann Leonard": "absent",
+    "Chris Moore": "yes",
+    "Winston Chester": "yes",
+    "Steve Moss": "yes"
+   },
+   "source_title": "Bay District School Board Meeting minutes, 2026-04-28 (BoardDocs, item 'A. Property Insurance Renewal')",
+   "source_url": "https://go.boarddocs.com/fl/bcsdfl/Board.nsf/goto?open&id=DTF4FP0B6117",
+   "plain_summary": "Renewed school property insurance for $3.19 million. Vote 4-0; Ann Leonard absent.",
+   "headline": "Renewed school property insurance for $3.19 million",
+   "summary": "The district renewed its property insurance for 2026-27 at an estimated $3,190,972, about 26% less than the prior year's $4,343,931, with the same limits and deductibles."
   },
   {
    "body": "bds-board",
