@@ -103,14 +103,17 @@ def bedtax_page(out_dir):
 <script src="/assets/bedtax.js" defer></script>'''
 
 
+def surtax_id(p):  # stable id for ?p= links: the county GIS object id (points: p<id>, road segments: l<first id>)
+    return f"p{p['gis_objectid']}" if p.get('gis_objectid') is not None else (f"l{p['gis_objectids'][0]}" if p.get('gis_objectids') else '')
+
+
 def surtax_page(out_dir):
     d = load(); inf, sch = d['infra_surtax'], d['school_surtax']
     projs = []
     for p in inf['projects']:
         if p.get('lat') is None:
             continue
-        pid = f"p{p['gis_objectid']}" if p.get('gis_objectid') is not None else (f"l{p['gis_objectids'][0]}" if p.get('gis_objectids') else '')
-        projs.append({'id': pid, 'n': p['name'], 'g': p['government'], 'c': p.get('category') or 'Other', 's': p['status'], 'p': p.get('pct_complete'),
+        projs.append({'id': surtax_id(p), 'n': p['name'], 'g': p['government'], 'c': p.get('category') or 'Other', 's': p['status'], 'p': p.get('pct_complete'),
                       'k': p.get('programmed_cost') or p.get('promised_cost'), 'y': p.get('fiscal_years') or '', 'x': round(p['lng'], 5), 'yy': round(p['lat'], 5),
                       'd': (p.get('description') or '')[:260]})
     json.dump(projs, open(os.path.join(out_dir, 'data', 'surtax-projects.json'), 'w'), separators=(',', ':'))

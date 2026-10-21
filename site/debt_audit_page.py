@@ -12,6 +12,10 @@ TYPES = [('revenue_bonds', 'Revenue bonds'), ('general_obligation_bonds', 'Voter
          ('certificates_of_participation', 'Certificates of participation'), ('leases', 'Leases'), ('sbitas', 'Software subscriptions'), ('financed_purchases', 'Financed purchases')]
 
 
+def finding_id(gov_short, a, f):
+    return 'f-' + re.sub(r'[^a-z0-9]+', '-', f"{gov_short} {fy_label(a['fy'])} {f.get('id') or ''}".lower()).strip('-')
+
+
 def short(g):
     for k, v in SHORT:
         if g.startswith(k):
@@ -186,7 +190,7 @@ def audits_page():
     for g in order:
         for a in sorted(by.get(g, []), key=lambda a: a['fy'], reverse=True):
             for f in a['findings']:
-                items += f'''<li class="fd" data-g="{e(g)}" data-r="{1 if f.get("repeat") else 0}"><div class="fd-hd"><b>{e(g)}</b> <span class="muted">{e(fy_label(a["fy"]))} · {e(f.get("id"))}</span>{' <span class="badge warn">Repeat</span>' if f.get("repeat") else ''}</div>
+                items += f'''<li class="fd" id="{finding_id(g, a, f)}" data-g="{e(g)}" data-r="{1 if f.get("repeat") else 0}"><div class="fd-hd"><b>{e(g)}</b> <span class="muted">{e(fy_label(a["fy"]))} · {e(f.get("id"))}</span>{' <span class="badge warn">Repeat</span>' if f.get("repeat") else ''}</div>
                   <div class="fd-t">{e(re.sub(r"\s*\(first reported \d{4}\)", "", f.get("title", "")))}</div><p>{e(f.get("plain"))}</p>{f'<p class="muted small"><b>Management response:</b> {e(f.get("mgmt_response"))}</p>' if f.get("mgmt_response") and "not extract" not in str(f.get("mgmt_response")).lower() else ""}<a class="src" href="{e(f.get("source_url") or a["source_url"])}" target="_blank" rel="noopener">Audit report</a></li>'''
     sr = ''
     for s in d['state_reports']:
@@ -217,4 +221,5 @@ def audits_page():
 </div>
 <link rel="stylesheet" href="/assets/tax.css">
 <script>(()=>{{const g=document.getElementById('fdG'),r=document.getElementById('fdR'),li=[...document.querySelectorAll('#fdList .fd')],c=document.getElementById('fdCount');
-function f(){{let n=0;li.forEach(x=>{{const s=(!g.value||x.dataset.g===g.value)&&(!r.checked||x.dataset.r==='1');x.hidden=!s;if(s)n++;}});c.textContent=n+' findings';}}g.onchange=f;r.onchange=f;f();}})();</script>'''
+function f(){{let n=0;li.forEach(x=>{{const s=(!g.value||x.dataset.g===g.value)&&(!r.checked||x.dataset.r==='1');x.hidden=!s;if(s)n++;}});c.textContent=n+' findings';}}g.onchange=f;r.onchange=f;f();
+document.addEventListener('DOMContentLoaded',()=>{{f();const t=location.hash&&document.getElementById(decodeURIComponent(location.hash.slice(1)));if(t)t.scrollIntoView();}});}})();</script>'''
