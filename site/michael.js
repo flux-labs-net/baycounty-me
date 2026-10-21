@@ -21,23 +21,26 @@ bars($('debBars'), D.debris.slice().sort((a, b) => b.f - a.f).slice(0, 10).map(x
 const A = [...new Set(D.rows.map(r => r.a))].sort((a, b) => nice(a).localeCompare(nice(b)));
 $('ledA').innerHTML += A.map(a => `<option value="${esc(a)}">${esc(nice(a))}</option>`).join('');
 $('ledC').innerHTML += Object.entries(D.cats).map(([k, v]) => `<option value="${k}">${k}: ${esc(v)}</option>`).join('');
-let shown = 50, cur = [];
+let shown = 50, cur = [], sk = null, sd = -1;
+const KEYS = [r => nice(r.a), r => r.t, r => r.c, r => r.f, r => r.d1, r => r.st];
+const coll = new Intl.Collator('en', {numeric: true, sensitivity: 'base'});
 function filt() {
   const q = $('ledQ').value.trim().toLowerCase(), a = $('ledA').value, c = $('ledC').value;
   cur = D.rows.filter(r => (!a || r.a === a) && (!c || r.c === c) && (!q || (r.t + ' ' + r.a + ' ' + r.pw).toLowerCase().includes(q)));
+  if (sk) cur = cur.map((r, i) => [r, i]).sort(([x, i], [y, j]) => { const a1 = sk(x), b1 = sk(y);
+    if (!a1 !== !b1) return !a1 ? 1 : -1; return (typeof a1 === 'number' ? a1 - b1 : coll.compare(String(a1), String(b1))) * sd || i - j; }).map(x => x[0]);
   const s = cur.reduce((x, r) => x + r.f, 0);
   $('ledCount').textContent = `${cur.length.toLocaleString()} projects · ${big(s)} federal`;
   $('ledT').tBodies[0].innerHTML = cur.slice(0, shown).map(r => `<tr><td>${esc(nice(r.a))}</td><td class="wrap">${esc(r.t || '—')} <span class="muted small">#${esc(r.pw)}</span></td><td>${esc(r.c)}</td><td class="num">${usd(r.f)}</td><td class="num">${esc(r.d1 || '—')}</td><td class="small">${esc(r.st.replace('Project ', ''))}</td></tr>`).join('') || '<tr><td colspan="6" class="muted">No projects match.</td></tr>';
   $('ledMore').hidden = cur.length <= shown;
 }
 ['ledQ', 'ledA', 'ledC'].forEach(id => $(id).addEventListener('input', () => { shown = 50; filt(); }));
+if (window.BCM) BCM.sortable($('ledT'), {onSort: (k, dir, col) => { sk = KEYS[col]; sd = dir; filt(); }});
 $('ledMore').addEventListener('click', () => { shown += 100; filt(); });
 $('ledCsv').addEventListener('click', () => {
   const head = ['applicant', 'project_number', 'title', 'category', 'federal_obligated', 'eligible_cost', 'first_obligation', 'last_obligation', 'status'];
-  const q = v => `"${String(v ?? '').replace(/"/g, '""')}"`;
-  const csv = [head.join(',')].concat(cur.map(r => [r.a, r.pw, r.t, r.c, r.f, r.e, r.d1, r.d2, r.st].map(q).join(','))).join('\n');
-  const u = URL.createObjectURL(new Blob([csv], {type: 'text/csv'}));
-  const l = document.createElement('a'); l.href = u; l.download = 'bay-county-fema-michael-projects.csv'; l.click(); setTimeout(() => URL.revokeObjectURL(u), 1000);
+  BCM.download('bay-county-fema-michael-projects.csv', BCM.toCSV([head].concat(cur.map(r => [r.a, r.pw, r.t, r.c, r.f, r.e, r.d1, r.d2, r.st]))));
+  BCM.announce('Downloaded ' + cur.length + ' projects');
 });
 { const q0 = new URL(location.href).searchParams.get('q'); if (q0) { $('ledQ').value = q0; requestAnimationFrame(() => $('led-h').scrollIntoView()); } }
 filt();
@@ -52,5 +55,6 @@ $('iaT').innerHTML = `<thead><tr><th scope="col">City (mailing)</th><th scope="c
 $('cdT').innerHTML = `<thead><tr><th scope="col">Recipient</th><th scope="col">Program</th><th scope="col">For</th><th scope="col" class="num">Award</th><th scope="col">Announced</th></tr></thead><tbody>` +
   D.cdbg.filter(x => x.amt).sort((a, b) => b.amt - a.amt).map(x => `<tr><th scope="row">${esc(x.r)}</th><td class="small">${esc(x.prog)}</td><td class="wrap small">${esc(x.p)}</td><td class="num">${x.rounded ? '~' : ''}${usd(x.amt)}</td><td class="small"><a href="${esc(x.u)}" target="_blank" rel="noopener">${esc(x.d || 'Source')}</a></td></tr>`).join('') + '</tbody>';
 
+if (window.BCM) { BCM.sortable($('iaT')); BCM.sortable($('cdT')); }
 $('pdf').addEventListener('click', () => { document.querySelectorAll('.mi details').forEach(d => d.open = true); setTimeout(() => window.print(), 60); });
 })();

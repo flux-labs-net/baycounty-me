@@ -94,7 +94,7 @@ function mainText(c) { // the cell's own value, without sub-lines, badges and so
   let s = '';
   const walk = n => n.childNodes.forEach(x => { if (x.nodeType === 3) s += x.nodeValue; else if (x.nodeType === 1 && !x.matches(SKIPTXT)) { walk(x); if (x.tagName === 'BR') s += ' '; } });
   walk(c);
-  return s.replace(/\s+/g, ' ').trim();
+  return s.replace(/\s+/g, ' ').trim() || (c.querySelector('.badge') ? c.textContent.replace(/\s+/g, ' ').trim() : ''); // a cell that is only a badge sorts by it
 }
 B.cellText = mainText;
 B.parseNum = s => {
@@ -186,7 +186,8 @@ B.csvCell = v => {
 B.toCSV = rows => rows.map(r => r.map(B.csvCell).join(',')).join('\r\n');
 const squash = s => String(s || '').replace(/\s+/g, ' ').trim();
 function exportText(c) {
-  const main = mainText(c);
+  const main = mainText(c), only = !c.childNodes.length || c.textContent.replace(/\s+/g, ' ').trim() === main;
+  if (only) return main;
   const extra = [...c.querySelectorAll('small, .sub, .badge')].filter(x => !x.closest('details')).map(x => squash(x.textContent)).filter(Boolean);
   const det = [...c.querySelectorAll('details li')].map(x => squash(x.textContent)).filter(Boolean);
   return main + (extra.length ? (main ? ' (' : '') + extra.join('; ') + (main ? ')' : '') : '') + (det.length ? (main || extra.length ? ': ' : '') + det.join('; ') : '');

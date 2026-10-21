@@ -117,11 +117,11 @@ def contracts_page(out_dir):
     <div class="filters-row"><input id="ctQ" type="search" data-param="q" placeholder="Search vendor or project" aria-label="Search contracts">
       <select id="ctG" aria-label="Government" data-param="gov"><option value="">All governments</option>{''.join(f"<option>{e(g)}</option>" for g in govs)}</select>
       <select id="ctM" aria-label="How awarded" data-param="method"><option value="">Any method</option>{''.join(f"<option>{e(k)}</option>" for k, _ in METHODS)}<option>Other</option></select>
-      <button type="button" class="pill sm" id="ctCsv">Download CSV</button></div>
-    <div class="tablewrap"><table class="tx-table" id="ctT"><thead><tr><th scope="col">Government</th><th scope="col">Vendor</th><th scope="col">For</th><th scope="col" class="num">Amount</th><th scope="col">How awarded</th><th scope="col">Date</th></tr></thead><tbody></tbody></table></div>
+      <button type="button" class="pill sm" id="ctCsv">Download this view (CSV)</button></div>
+    <div class="tablewrap"><table class="tx-table" id="ctT"><thead><tr><th scope="col">Government</th><th scope="col">Vendor</th><th scope="col">For</th><th scope="col" class="num" aria-sort="descending">Amount</th><th scope="col">How awarded</th><th scope="col">Date</th></tr></thead><tbody></tbody></table></div>
     <button type="button" class="pill" id="ctMore">Show more</button></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="co">Change orders</h2><span class="muted">Contracts that grew after they were signed</span></div>
-    <div class="tablewrap"><table class="tx-table"><thead><tr><th scope="col">Gov.</th><th scope="col">Vendor and project</th><th scope="col" class="num">Original</th><th scope="col" class="num">Added</th><th scope="col" class="num">Increase</th><th scope="col">Reason</th><th scope="col">Date</th></tr></thead><tbody>{co_rows}</tbody></table></div></section>
+    <div class="tablewrap"><table class="tx-table" data-sortable data-csv="bay-county-change-orders"><thead><tr><th scope="col">Gov.</th><th scope="col">Vendor and project</th><th scope="col" class="num">Original</th><th scope="col" class="num">Added</th><th scope="col" class="num">Increase</th><th scope="col">Reason</th><th scope="col">Date</th></tr></thead><tbody>{co_rows}</tbody></table></div></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="em">Emergency purchases</h2></div><ul class="plain">{em}</ul></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="rules">The bidding rules</h2></div><ul class="plain">{th}</ul></section>
   <section class="tx-sec method"><div class="sec-hd"><h2 id="src">How this was compiled, and gaps</h2></div><ul class="plain">{''.join(f"<li>{e(n)}</li>" for n in d["notes"])}</ul>
