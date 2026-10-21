@@ -12,6 +12,7 @@ there (Mark Sheldon, Phil Chester).
 | `pcb_2024.json` | 73 | Jan 2024 – Feb 2025 | Draft minutes printed in the next meeting's agenda packet |
 | `springfield.json` | 53 | Aug 2024 – Oct 2026 | Scanned minutes from the city document library, read with OCR |
 | `updates_2026.json` | 0 | — | Nothing new was posted (see below) |
+| `cra_2026.json` | 15 | Oct 2025 – Sept 2026 | Panama City CRA minutes (June 2, Aug 4, Sept 1, 2026) and Callaway CRA minutes (Oct 28, 2025) |
 
 ## What was found
 
@@ -86,6 +87,18 @@ there (Mark Sheldon, Phil Chester).
     award (June 2025), the $1.04 million School Ave streetscape (Sept. 2026), SRF loan pledges
     and the insurance switch to PRM.
 - **Not repeated.** Items already in `votes.json` were left out.
+
+### CRA boards (`cra_2026.json`, added 2026-10-21)
+- **Panama City CRA.** 14 votes from the June 2, Aug 4 and Sept 1, 2026 minutes, all 5-0 with
+  named roll calls: TIF rebate approvals (Golden Developments, KBP Properties, Angel's Place,
+  416 Jenks), two $15,000 Millville storefront grants, the $8,150 St. Andrews Waterfront
+  Partnership match, the 1342 MLK Blvd land transfer to American Legion Post 424, the SPARK
+  pilot, the FY2027 CRA budget (Res. CRA20260901.1, $11,492,914 across four districts) and the
+  end of CRA funding for FLOCK cameras. Motions only "to open for discussion" were skipped.
+  The Oct 13, 2026 meeting has no minutes yet.
+- **Callaway CRA.** Only one CRA meeting after Sept 18, 2025 has minutes: Oct 28, 2025 (mobile
+  home skirting grant, unanimous). The Sept 17, 2026 CRA budget hearing has an agenda only.
+- **Lynn Haven CRA.** No CRA Board meeting after May 26, 2026 is listed in the Agenda Center.
 
 ## Still unavailable, and why
 - **Bay County BOCC after June 16, 2026.** The Clerk's OnBase minutes search was queried
