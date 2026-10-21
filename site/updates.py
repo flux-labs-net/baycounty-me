@@ -9,6 +9,9 @@ from datetime import datetime, timezone
 import html
 
 CHANGES = [
+    {'date': '2026-10-21', 'title': 'Correction: Money map',
+     'text': "The first version of the Money map overstated connections. It counted a donor's contracts again for every official the donor gave to, which roughly doubled the government totals, and it drew lines from officials to governments they don't serve on. The map now puts each donor in the middle: campaign gifts on one side, the governments that pay the donor on the other, each counted once. It marks only gifts to an official whose own government pays that donor, and lists the recorded votes those officials cast on that donor's contracts. The heat map that credited contract dollars to individual officials was removed.",
+     'pages': ['/public-money/money-map']},
     {'date': '2026-10-21', 'title': "Who's running in 2026",
      'text': "Every local race on Bay County ballots this year, with each candidate's platform in their own words, links to their campaigns, and their campaign money: what they raised and spent, how much came from individuals, organizations and their own pockets, and every business or committee that gave. Races already decided are shown separately.",
      'pages': ['/elections']},

@@ -3,8 +3,9 @@ const D = __MM__;
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const M = n => { const a = Math.abs(n || 0); return a >= 1e6 ? '$' + (n/1e6).toFixed(1) + 'M' : a >= 1e4 ? '$' + Math.round(n/1e3) + 'K' : '$' + Math.round(n || 0).toLocaleString(); };
+const fd = s => s ? new Date(s + 'T12:00:00').toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'}) : '';
 const NS = 'http://www.w3.org/2000/svg';
-const OFF = D.officials, DON = D.donors, GIFTS = D.gifts, CON = D.contracts, GN = D.govs;
+const OFF = D.officials, DON = D.donors, GIFTS = D.gifts, CON = D.contracts, GN = D.govs, VOTES = D.votes;
 const GORDER = Object.keys(GN);
 const qs = new URLSearchParams(location.search);
 $('mmGov').innerHTML += GORDER.filter(g => OFF.some(o => o.g === g)).map(g => `<option value="${g}">${esc(GN[g])}</option>`).join('');
@@ -12,14 +13,16 @@ if (qs.get('show')) $('mmShow').value = qs.get('show');
 if (qs.get('gov')) $('mmGov').value = qs.get('gov');
 let sel = null; // {t:'d'|'o'|'g', id}
 const conAmt = c => c.a || c.p;
+const sameDon = new Set(GIFTS.filter(g => g.same).map(g => g.d));
 
 function filtered() {
   const show = $('mmShow').value, gov = $('mmGov').value, q = $('mmQ').value.trim().toLowerCase();
-  let offs = new Set(OFF.filter(o => !gov || o.g === gov).map(o => o.id));
+  const offs = new Set(OFF.filter(o => !gov || o.g === gov).map(o => o.id));
   let gifts = GIFTS.filter(g => offs.has(g.o));
   let dset;
-  if (show === 'k') dset = new Set(DON.filter(d => d.k).map(d => d.id));
-  else if (show === 'top') { const t = {}; gifts.forEach(g => t[g.d] = (t[g.d] || 0) + g.a); dset = new Set(Object.keys(t).sort((a, b) => t[b] - t[a]).slice(0, 40).map(Number)); DON.filter(d => d.k).forEach(d => dset.add(d.id)); }
+  if (show === 'same') dset = sameDon;
+  else if (show === 'k') dset = new Set(DON.filter(d => d.k).map(d => d.id));
+  else if (show === 'top') { const t = {}; gifts.forEach(g => t[g.d] = (t[g.d] || 0) + g.a); dset = new Set(Object.keys(t).sort((a, b) => t[b] - t[a]).slice(0, 40).map(Number)); }
   else dset = new Set(DON.map(d => d.id));
   if (q) {
     const hitD = new Set(DON.filter(d => d.n.toLowerCase().includes(q)).map(d => d.id)), hitO = new Set(OFF.filter(o => o.n.toLowerCase().includes(q)).map(o => o.id));
@@ -27,83 +30,85 @@ function filtered() {
   }
   gifts = gifts.filter(g => dset.has(g.d));
   const usedD = new Set(gifts.map(g => g.d)), usedO = new Set(gifts.map(g => g.o));
-  const cons = CON.filter(c => usedD.has(c.d) && usedO.has(c.o));
+  const cons = CON.filter(c => usedD.has(c.d));
   return {gifts, cons, usedD, usedO};
 }
 
 function render() {
   const {gifts, cons, usedD, usedO} = filtered();
   const svg = $('mmSvg'); svg.innerHTML = '';
-  const W = Math.max(720, $('mmWrap').clientWidth), RH = 22, PAD = 34;
-  // order: officials by government, donors by the average position of the officials they gave to
+  const W = Math.max(760, $('mmWrap').clientWidth), RH = 22, PAD = 34;
   const offs = OFF.filter(o => usedO.has(o.id));
   const oy = {}; offs.forEach((o, i) => oy[o.id] = i);
-  const bary = {}; gifts.forEach(g => { (bary[g.d] = bary[g.d] || []).push(oy[g.o]); });
-  const dons = DON.filter(d => usedD.has(d.id)).sort((a, b) => { const ma = bary[a.id].reduce((s, x) => s + x, 0) / bary[a.id].length, mb = bary[b.id].reduce((s, x) => s + x, 0) / bary[b.id].length; return ma - mb || b.tot - a.tot; });
+  const bary = {}; gifts.forEach(g => (bary[g.d] = bary[g.d] || []).push(oy[g.o]));
+  const avg = a => a.reduce((s, x) => s + x, 0) / a.length;
+  const dons = DON.filter(d => usedD.has(d.id)).sort((a, b) => avg(bary[a.id]) - avg(bary[b.id]) || b.tot - a.tot);
   const govs = GORDER.filter(g => cons.some(c => c.g === g));
   const rows = Math.max(dons.length, offs.length, govs.length, 1);
   const H = PAD + rows * RH + 10;
   svg.setAttribute('viewBox', `0 0 ${W} ${H}`); svg.setAttribute('width', W); svg.setAttribute('height', H);
   const meas = document.createElementNS(NS, 'text'); meas.setAttribute('class', 'mm-meas'); svg.appendChild(meas);
-  let HW = 40; offs.forEach(o => { meas.textContent = o.n; HW = Math.max(HW, meas.getComputedTextLength() / 2 + 14); });
-  let DW = 60; dons.forEach(d => { meas.textContent = (d.n.length > 34 ? d.n.slice(0, 33) + '…' : d.n) + '  $0,000'; DW = Math.max(DW, meas.getComputedTextLength() + 18); }); meas.remove();
-  const xD = Math.min(DW, W * 0.36), xO = Math.max(W / 2, xD + 60 + HW), xG = W - Math.min(180, W * 0.2);
+  let OW = 60; offs.forEach(o => { meas.textContent = o.n + '  ' + (GN[o.g] || ''); OW = Math.max(OW, meas.getComputedTextLength() + 18); });
+  let HW = 40; dons.forEach(d => { meas.textContent = d.n.length > 34 ? d.n.slice(0, 33) + '…' : d.n; HW = Math.max(HW, meas.getComputedTextLength() / 2 + 14); }); meas.remove();
+  const xO = Math.min(OW, W * 0.3), xG = W - Math.min(170, W * 0.2), xD = Math.max(xO + 70 + HW, Math.min(xG - 90 - HW, (xO + xG) / 2));
   const yOf = (n, i) => PAD + (rows - n) * RH / 2 + i * RH + RH / 2;
   const P = {d: {}, o: {}, g: {}};
   dons.forEach((d, i) => P.d[d.id] = yOf(dons.length, i));
   offs.forEach((o, i) => P.o[o.id] = yOf(offs.length, i));
   govs.forEach((g, i) => P.g[g] = yOf(govs.length, i));
   const head = (x, t, anchor) => { const e = document.createElementNS(NS, 'text'); e.setAttribute('x', x); e.setAttribute('y', 14); e.setAttribute('class', 'mm-h'); e.setAttribute('text-anchor', anchor); e.textContent = t; svg.appendChild(e); };
-  head(xD, 'Donor organizations', 'end'); head(xO, 'Officials', 'middle'); head(xG - 6, 'Contracts with', 'start');
+  head(xO, 'Officials', 'end'); head(xD, 'Donor organizations', 'middle'); head(xG - 6, 'Pays the donor', 'start');
   const gmax = Math.max(1, ...gifts.map(g => g.a)), cmax = Math.max(1, ...cons.map(conAmt));
   const links = document.createElementNS(NS, 'g'); svg.appendChild(links);
   const path = (x1, y1, x2, y2) => { const m = (x1 + x2) / 2; return `M${x1},${y1} C${m},${y1} ${m},${y2} ${x2},${y2}`; };
   const LK = [];
-  gifts.forEach(g => { const p = document.createElementNS(NS, 'path'); p.setAttribute('d', path(xD + 6, P.d[g.d], xO - HW, P.o[g.o])); p.setAttribute('class', 'mm-l gift'); p.setAttribute('stroke-width', (1 + 7 * Math.sqrt(g.a / gmax)).toFixed(1)); p._k = {d: g.d, o: g.o}; links.appendChild(p); LK.push(p); });
-  cons.forEach(c => { const p = document.createElementNS(NS, 'path'); p.setAttribute('d', path(xO + HW, P.o[c.o], xG - 6, P.g[c.g])); p.setAttribute('class', 'mm-l con' + (c.same ? ' same' : '')); p.setAttribute('stroke-width', (1.2 + 8 * Math.sqrt(conAmt(c) / cmax)).toFixed(1)); p._k = {d: c.d, o: c.o, g: c.g}; links.appendChild(p); LK.push(p); });
+  gifts.forEach(g => { const p = document.createElementNS(NS, 'path'); p.setAttribute('d', path(xO + 6, P.o[g.o], xD - HW, P.d[g.d])); p.setAttribute('class', 'mm-l gift' + (g.same ? ' same' : '')); p.setAttribute('stroke-width', (1 + 6 * Math.sqrt(g.a / gmax)).toFixed(1)); p._k = {d: g.d, o: g.o}; links.appendChild(p); LK.push(p); });
+  cons.forEach(c => { const p = document.createElementNS(NS, 'path'); p.setAttribute('d', path(xD + HW, P.d[c.d], xG - 6, P.g[c.g])); p.setAttribute('class', 'mm-l con'); p.setAttribute('stroke-width', (1 + 6 * Math.sqrt(conAmt(c) / cmax)).toFixed(1)); p._k = {d: c.d, g: c.g}; links.appendChild(p); LK.push(p); });
   const NODES = [];
   const node = (t, id, x, y, label, sub, anchor, cls) => {
-    const g = document.createElementNS(NS, 'g'); g.setAttribute('class', 'mm-n ' + cls); g.setAttribute('tabindex', '0'); g.setAttribute('role', 'button');
-    g.setAttribute('aria-label', label + (sub ? ', ' + sub : ''));
+    const g = document.createElementNS(NS, 'g'); g.setAttribute('class', 'mm-n ' + cls); g.setAttribute('tabindex', '0'); g.setAttribute('role', 'button'); g.setAttribute('aria-label', label + (sub ? ', ' + sub : ''));
     const tx = document.createElementNS(NS, 'text'); tx.setAttribute('x', x); tx.setAttribute('y', y + 4); tx.setAttribute('text-anchor', anchor);
-    tx.innerHTML = `${esc(label.length > 34 ? label.slice(0, 33) + '…' : label)}<tspan class="mm-sub" dx="6">${esc(sub)}</tspan>`;
-    const dot = document.createElementNS(NS, 'circle'); dot.setAttribute('cx', anchor === 'end' ? x + 6 : anchor === 'start' ? x - 6 : x); dot.setAttribute('cy', y); dot.setAttribute('r', 4);
     if (anchor === 'middle') {
-      tx.innerHTML = esc(label); g.setAttribute('aria-label', label + ', ' + sub);
+      tx.textContent = label.length > 34 ? label.slice(0, 33) + '…' : label;
       const bg = document.createElementNS(NS, 'rect'); bg.setAttribute('x', x - HW); bg.setAttribute('y', y - 10); bg.setAttribute('width', HW * 2); bg.setAttribute('height', 20); bg.setAttribute('rx', 10); bg.setAttribute('class', 'mm-pill');
-      const t2 = document.createElementNS(NS, 'title'); t2.textContent = sub; g.appendChild(t2);
-      g.appendChild(bg); g.appendChild(tx);
-    } else { g.appendChild(dot); g.appendChild(tx); } g._k = {t, id}; svg.appendChild(g); NODES.push(g);
+      const t2 = document.createElementNS(NS, 'title'); t2.textContent = label + (sub ? ' · ' + sub : ''); g.appendChild(t2); g.appendChild(bg); g.appendChild(tx);
+    } else {
+      tx.innerHTML = `${esc(label)}<tspan class="mm-sub" dx="6">${esc(sub)}</tspan>`;
+      const dot = document.createElementNS(NS, 'circle'); dot.setAttribute('cx', anchor === 'end' ? x + 6 : x - 6); dot.setAttribute('cy', y); dot.setAttribute('r', 4);
+      g.appendChild(dot); g.appendChild(tx);
+    }
+    g._k = {t, id}; svg.appendChild(g); NODES.push(g);
     const pick = () => { sel = sel && sel.t === t && sel.id === id ? null : {t, id}; highlight(); detail(); };
     g.addEventListener('click', pick); g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(); } });
   };
-  dons.forEach(d => node('d', d.id, xD, P.d[d.id], d.n, M(gifts.filter(g => g.d === d.id).reduce((s, g) => s + g.a, 0)), 'end', d.k ? 'k' : ''));
-  offs.forEach(o => node('o', o.id, xO, P.o[o.id], o.n, GN[o.g] || '', 'middle', ''));
-  govs.forEach(g => node('g', g, xG, P.g[g], GN[g], M(cons.filter(c => c.g === g).reduce((s, c) => s + conAmt(c), 0)), 'start', ''));
+  offs.forEach(o => node('o', o.id, xO, P.o[o.id], o.n, GN[o.g] || '', 'end', ''));
+  dons.forEach(d => node('d', d.id, xD, P.d[d.id], d.n, M(gifts.filter(g => g.d === d.id).reduce((s, g) => s + g.a, 0)) + ' given', 'middle', sameDon.has(d.id) ? 'k' : ''));
+  govs.forEach(g => node('g', g, xG, P.g[g], GN[g], '', 'start', ''));
   svg._LK = LK; svg._N = NODES;
   $('mmCount').textContent = `${dons.length} donors · ${offs.length} officials · ${gifts.length} gifts`;
   if (sel && !NODES.some(n => n._k.t === sel.t && n._k.id === sel.id)) sel = null;
   highlight(); detail();
-  const u = new URLSearchParams(); if ($('mmShow').value !== 'k') u.set('show', $('mmShow').value); if ($('mmGov').value) u.set('gov', $('mmGov').value);
+  const u = new URLSearchParams(); if ($('mmShow').value !== 'same') u.set('show', $('mmShow').value); if ($('mmGov').value) u.set('gov', $('mmGov').value);
   history.replaceState(null, '', u.toString() ? '?' + u : location.pathname);
 }
 
-function related() {
-  if (!sel) return null;
-  const on = {d: new Set(), o: new Set(), g: new Set()}, link = l => {
-    if (sel.t === 'd') return l.d === sel.id;
-    if (sel.t === 'o') return l.o === sel.id;
-    return l.g === sel.id || (!l.g && CON.some(c => c.g === sel.id && c.d === l.d && c.o === l.o));
-  };
-  return {on, link};
-}
 function highlight() {
-  const svg = $('mmSvg'), r = related();
-  svg.classList.toggle('dim', !!r);
-  if (!r) { svg._N.forEach(n => n.classList.remove('on')); svg._LK.forEach(l => l.classList.remove('on')); return; }
-  svg._LK.forEach(l => { const k = l.classList.toggle('on', r.link(l._k)); if (k) { r.on.d.add(l._k.d); r.on.o.add(l._k.o); if (l._k.g) r.on.g.add(l._k.g); } });
-  r.on[sel.t].add(sel.id);
-  svg._N.forEach(n => n.classList.toggle('on', r.on[n._k.t].has(n._k.id)));
+  const svg = $('mmSvg');
+  svg.classList.toggle('dim', !!sel);
+  if (!sel) { svg._N.forEach(n => n.classList.remove('on')); svg._LK.forEach(l => l.classList.remove('on')); return; }
+  const on = {d: new Set(), o: new Set(), g: new Set()};
+  // a donor shows its gifts and its contracts; an official shows its gifts and those donors' contracts; a government shows the donors it pays and their gifts
+  const donorsOf = sel.t === 'd' ? new Set([sel.id]) : sel.t === 'o' ? new Set(GIFTS.filter(g => g.o === sel.id).map(g => g.d)) : new Set(CON.filter(c => c.g === sel.id).map(c => c.d));
+  svg._LK.forEach(l => {
+    const k = l._k; let hit;
+    if (sel.t === 'o') hit = k.o === sel.id || (k.g && k.g === OFF[sel.id].g && donorsOf.has(k.d));
+    else if (sel.t === 'g') hit = k.g === sel.id || (!k.g && donorsOf.has(k.d));
+    else hit = k.d === sel.id;
+    hit = !!hit; l.classList.toggle('on', hit);
+    if (hit) { on.d.add(k.d); if (k.o != null) on.o.add(k.o); if (k.g) on.g.add(k.g); }
+  });
+  on[sel.t].add(sel.id);
+  svg._N.forEach(n => n.classList.toggle('on', on[n._k.t].has(n._k.id)));
 }
 function conLine(c) {
   const parts = [];
@@ -112,30 +117,40 @@ function conLine(c) {
   if (c.co) parts.push(`${c.co} change order${c.co > 1 ? 's' : ''} or other records`);
   return parts.join(', ');
 }
-function items(c) { return `<details class="flds"><summary>Records</summary><ul class="plain small">${c.items.map(s => `<li>${esc(s)}</li>`).join('')}</ul><p class="small">${c.urls.slice(0, 6).map((u, i) => `<a class="src" href="${esc(u)}" target="_blank" rel="noopener">Source ${i + 1}</a>`).join(' · ')}</p></details>`; }
+function items(c) { return `<details class="flds"><summary>Records</summary><ul class="plain small">${c.items.map(s => `<li>${esc(s)}</li>`).join('')}</ul><p class="small">${c.urls.map((u, i) => `<a class="src" href="${esc(u)}" target="_blank" rel="noopener">Source ${i + 1}</a>`).join(' · ')}</p></details>`; }
+const giftTxt = g => `<b>${M(g.a)}</b>${g.dates && g.dates.length ? ` <span class="muted small">${g.dates.map(fd).join(', ')}</span>` : ''}`;
 function detail() {
   const el = $('mmDetail');
-  if (!sel) { el.innerHTML = '<p class="muted">Tap a donor, official or government to see its connections and the records behind them.</p>'; return; }
+  if (!sel) { el.innerHTML = '<p class="muted">Tap an official, donor or government to see its connections and the records behind them.</p>'; return; }
   if (sel.t === 'd') {
-    const d = DON[sel.id], gs = GIFTS.filter(g => g.d === d.id).sort((a, b) => b.a - a.a), cs = CON.filter(c => c.d === d.id);
-    const byG = {}; cs.forEach(c => (byG[c.g] = byG[c.g] || c));
+    const d = DON[sel.id], gs = GIFTS.filter(g => g.d === d.id).sort((a, b) => b.a - a.a), cs = CON.filter(c => c.d === d.id), vs = VOTES.filter(v => v.d === d.id);
     el.innerHTML = `<h3>${esc(d.n)}</h3><p class="small muted">${d.t === 'pac' ? 'Political committee' : 'Organization'} · gave ${M(gs.reduce((s, g) => s + g.a, 0))} to ${gs.length} official${gs.length > 1 ? 's' : ''}</p>
-      <ul class="plain mm-list">${gs.map(g => { const o = OFF[g.o], same = cs.some(c => c.o === o.id && c.same); return `<li><b>${M(g.a)}</b> to ${esc(o.n)} <span class="muted">${esc(o.off)}</span>${same ? ' <span class="badge warn">Same government as a contract</span>' : ''}</li>`; }).join('')}</ul>
-      ${cs.length ? `<h4>Contracts with local governments</h4><ul class="plain mm-list">${Object.values(byG).map(c => `<li><b>${esc(GN[c.g])}</b>: ${conLine(c)}${c.likely ? ' <span class="muted small">(name spelled differently in the filing)</span>' : ''}${items(c)}</li>`).join('')}</ul>` : '<p class="small muted">No contracts with a local government matched on this site.</p>'}`;
+      <h4>Campaign gifts</h4><ul class="plain mm-list">${gs.map(g => `<li>${giftTxt(g)} to ${esc(OFF[g.o].n)} <span class="muted">${esc(OFF[g.o].off)}</span>${g.same ? ' <span class="badge warn">Their government pays this donor</span>' : ''}</li>`).join('')}</ul>
+      ${cs.length ? `<h4>Paid by local governments</h4><ul class="plain mm-list">${cs.map(c => `<li><b>${esc(GN[c.g])}</b>: ${conLine(c)}${c.likely ? ' <span class="muted small">(name spelled differently in the campaign filing)</span>' : ''}${items(c)}</li>`).join('')}</ul>` : '<p class="small muted">No contracts or payments from a local government matched on this site.</p>'}
+      ${vs.length ? `<h4>Votes on this donor's contracts</h4><ul class="plain mm-list">${vs.map(v => `<li>${esc(OFF[v.o].n)} voted <b>${esc(v.vote)}</b> · ${fd(v.date)} · ${esc(v.h)}${v.consent ? ' <span class="muted small">(consent agenda)</span>' : ''}</li>`).join('')}</ul>` : ''}`;
   } else if (sel.t === 'o') {
-    const o = OFF[sel.id], gs = GIFTS.filter(g => g.o === o.id).sort((a, b) => b.a - a.a), cs = CON.filter(c => c.o === o.id);
-    const org = gs.reduce((s, g) => s + g.a, 0);
-    el.innerHTML = `<h3>${esc(o.n)}</h3><p class="small muted">${esc(o.off)} · raised ${M(o.raised)}: ${M(o.ind)} from ${o.indn} individuals, ${M(org)} from ${gs.length} organizations · <a class="src" href="${esc(o.url)}" target="_blank" rel="noopener">Campaign report</a></p>
-      ${cs.length ? `<h4>Donors with local contracts</h4><ul class="plain mm-list">${cs.map(c => `<li><b>${esc(DON[c.d].n)}</b> gave ${M((GIFTS.find(g => g.d === c.d && g.o === o.id) || {}).a)} · ${esc(GN[c.g])}: ${conLine(c)}${c.same ? ' <span class="badge warn">Same government</span>' : ''}${items(c)}</li>`).join('')}</ul>` : '<p class="small muted">None of this official\'s organization donors matched a local contract.</p>'}
+    const o = OFF[sel.id], gs = GIFTS.filter(g => g.o === o.id).sort((a, b) => b.a - a.a), same = gs.filter(g => g.same), vs = VOTES.filter(v => v.o === o.id);
+    el.innerHTML = `<h3>${esc(o.n)}</h3><p class="small muted">${esc(o.off)} · raised ${M(o.raised)}: ${M(o.ind)} from ${o.indn} individuals, ${M(gs.reduce((s, g) => s + g.a, 0))} from ${gs.length} organizations · <a class="src" href="${esc(o.url)}" target="_blank" rel="noopener">Campaign report</a></p>
+      ${same.length ? `<h4>Donors that ${esc(GN[o.g])} also pays</h4><ul class="plain mm-list">${same.map(g => { const c = CON.find(x => x.d === g.d && x.g === o.g); return `<li><b>${esc(DON[g.d].n)}</b> gave ${giftTxt(g)} · ${esc(GN[o.g])}: ${c ? conLine(c) : ''}${c ? items(c) : ''}</li>`; }).join('')}</ul>` : `<p class="small muted">None of this official's organization donors matched a contract with ${esc(GN[o.g] || 'their government')}.</p>`}
+      ${vs.length ? `<h4>Recorded votes on those donors' contracts</h4><ul class="plain mm-list">${vs.map(v => `<li>Voted <b>${esc(v.vote)}</b> · ${fd(v.date)} · ${esc(DON[v.d].n)}: ${esc(v.h)}${v.consent ? ' <span class="muted small">(consent agenda)</span>' : ''}${v.when === 'before' ? ' · the gift came after this vote' : v.when === 'after' ? ' · the gift came before this vote' : ''}</li>`).join('')}</ul>` : ''}
       <details class="flds"><summary>All ${gs.length} organization donors</summary><ul class="plain small">${gs.map(g => `<li>${esc(DON[g.d].n)} · ${M(g.a)}</li>`).join('')}</ul></details>`;
   } else {
-    const cs = CON.filter(c => c.g === sel.id), ds = [...new Set(cs.map(c => c.d))];
-    el.innerHTML = `<h3>${esc(GN[sel.id])}</h3><p class="small muted">${ds.length} donor organization${ds.length > 1 ? 's' : ''} with contracts here gave to ${new Set(cs.map(c => c.o)).size} officials</p>
-      <ul class="plain mm-list">${ds.map(d => { const mine = cs.filter(c => c.d === d); return `<li><b>${esc(DON[d].n)}</b>: ${conLine(mine[0])}<br><span class="small">Gave to ${mine.map(c => `${esc(OFF[c.o].n)} (${M((GIFTS.find(g => g.d === d && g.o === c.o) || {}).a)})${c.same ? ' <span class="badge warn">Same government</span>' : ''}`).join(', ')}</span>${items(mine[0])}</li>`; }).join('')}</ul>`;
+    const cs = CON.filter(c => c.g === sel.id).sort((a, b) => conAmt(b) - conAmt(a));
+    el.innerHTML = `<h3>${esc(GN[sel.id])}</h3><p class="small muted">Pays ${cs.length} organization${cs.length > 1 ? 's' : ''} that gave to current officials' campaigns. Each is counted once.</p>
+      <ul class="plain mm-list">${cs.map(c => { const gs = GIFTS.filter(g => g.d === c.d); return `<li><b>${esc(DON[c.d].n)}</b>: ${conLine(c)}<br><span class="small">Gave to ${gs.map(g => `${esc(OFF[g.o].n)} (${M(g.a)})${g.same ? ' <span class="badge warn">' + esc(GN[OFF[g.o].g]) + ' official</span>' : ''}`).join(', ')}</span>${items(c)}</li>`; }).join('')}</ul>`;
   }
 }
 
-// heat maps
+function votesTable() {
+  const t = $('mmVotes');
+  if (!VOTES.length) { t.outerHTML = '<p class="muted">No recorded votes found.</p>'; return; }
+  t.innerHTML = `<thead><tr><th scope="col">Official</th><th scope="col">Donor and gift</th><th scope="col">Vote</th><th scope="col">Item</th></tr></thead><tbody>${VOTES.map(v => `<tr>
+    <th scope="row"><b>${esc(OFF[v.o].n)}</b><small>${esc(OFF[v.o].off)}</small></th>
+    <td>${esc(DON[v.d].n)}<small>${M(v.gift)}${v.gift_dates && v.gift_dates.length ? ' on ' + v.gift_dates.map(fd).join(', ') : ''}</small></td>
+    <td><b>${esc(v.vote)}</b><small>${fd(v.date)} · ${v.when === 'before' ? 'before the gift' : v.when === 'after' ? 'after the gift' : ''}</small></td>
+    <td class="wrap small">${esc(v.h)}${v.amount ? ' · ' + M(v.amount) : ''}${v.consent ? ' <span class="muted">(consent agenda)</span>' : ''} · ${esc(v.outcome)}${v.tally ? ' ' + esc(v.tally) : ''}${v.url ? ` <a class="src" href="${esc(v.url)}" target="_blank" rel="noopener">Minutes</a>` : ''}</td></tr>`).join('')}</tbody>`;
+}
+
 function shade(v, max) { if (!v) return ''; const t = Math.pow(v / max, 0.5); return `style="--h:${(12 + t * 78).toFixed(0)}%"${t > 0.55 ? ' data-hi' : ''}`; }
 function heat1() {
   const govs = GORDER.filter(g => OFF.some(o => o.g === g));
@@ -146,16 +161,9 @@ function heat1() {
   const ring = new Set(CON.map(c => c.d + '|' + c.g));
   $('mmHeat1').innerHTML = `<thead><tr><th scope="col">Donor</th>${govs.map(g => `<th scope="col"><span>${esc(GN[g])}</span></th>`).join('')}<th scope="col" class="num">Total</th></tr></thead><tbody>${top.map(d => `<tr><th scope="row">${esc(DON[d].n)}</th>${govs.map(g => { const v = cell[d + '|' + g]; const offs = GIFTS.filter(x => x.d === d && OFF[x.o].g === g).map(x => `${OFF[x.o].n} ${M(x.a)}`).join(', '); return `<td class="hc${v ? ' v' : ''}${v && ring.has(d + '|' + g) ? ' ring' : ''}" ${shade(v, mx)}${v ? ` title="${esc(DON[d].n)} → ${esc(offs)}"` : ''}>${v ? M(v) : ''}</td>`; }).join('')}<td class="num">${M(tot[d])}</td></tr>`).join('')}</tbody>`;
 }
-function heat2() {
-  const govs = GORDER.filter(g => CON.some(c => c.g === g));
-  const offs = [...new Set(CON.map(c => c.o))].sort((a, b) => a - b);
-  const cell = {}; let mx = 1;
-  CON.forEach(c => { const k = c.o + '|' + c.g; cell[k] = (cell[k] || 0) + conAmt(c); mx = Math.max(mx, cell[k]); });
-  $('mmHeat2').innerHTML = `<thead><tr><th scope="col">Official</th>${govs.map(g => `<th scope="col"><span>${esc(GN[g])}</span></th>`).join('')}</tr></thead><tbody>${offs.map(o => `<tr><th scope="row">${esc(OFF[o].n)}<small>${esc(GN[OFF[o].g] || '')}</small></th>${govs.map(g => { const v = cell[o + '|' + g], ds = CON.filter(c => c.o === o && c.g === g).map(c => DON[c.d].n).join(', '); return `<td class="hc${v ? ' v' : ''}${OFF[o].g === g ? ' ring' : ''}" ${shade(v, mx)}${v ? ` title="${esc(ds)}"` : ''}>${v ? M(v) : ''}</td>`; }).join('')}</tr>`).join('')}</tbody>`;
-}
 
 ['mmShow', 'mmGov'].forEach(id => $(id).addEventListener('change', () => { sel = null; render(); }));
 $('mmQ').addEventListener('input', render);
 let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(render, 150); });
-render(); heat1(); heat2();
+render(); votesTable(); heat1();
 })();

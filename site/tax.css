@@ -583,3 +583,5 @@ details.el-dec[open] > summary::after{content:"−"}
 details.el-dec > summary b{font-size:1rem}
 details.el-dec > .el-rh,details.el-dec > .el-cands{padding:0 18px 16px}
 @media (max-width:520px){.kv{grid-template-columns:minmax(0,42%) minmax(0,1fr)}.kv dt,.kv dd{overflow-wrap:anywhere}}
+.mm-l.gift.same{stroke:var(--salmon);opacity:.75}
+.mm-n.k .mm-pill{stroke:var(--salmon)}
