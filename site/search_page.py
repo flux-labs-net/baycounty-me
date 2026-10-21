@@ -49,7 +49,18 @@ def _fema():
              'u': '/public-money/hurricane-michael?q=' + str(r['pw'])} for r in d['rows']]
 
 
-INDEXERS = [_glossary, _cra, _fema]
+def _surtax():
+    d = json.load(open(os.path.join(DATA, 'tourism', 'tourism_surtax.json')))
+    return [{'k': 'Sales tax project', 't': p['name'], 's': f"{p['government']} · {p.get('category') or ''} · {p['status'].replace('_', ' ')}", 'u': '/public-money/sales-tax-projects'} for p in d['infra_surtax']['projects']]
+
+
+def _audits():
+    d = json.load(open(os.path.join(DATA, 'debt_audit', 'debt_audit.json')))
+    from debt_audit_page import short
+    return [{'k': 'Audit finding', 't': f"{short(a['government'])}: {f.get('title', '')}", 's': f.get('plain', ''), 'u': '/public-money/audits'} for a in d['audits'] for f in a['findings']]
+
+
+INDEXERS = [_glossary, _cra, _fema, _surtax, _audits]
 
 
 def build_index(out_dir, pages):

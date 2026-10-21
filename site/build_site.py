@@ -13,6 +13,7 @@ from addr_page import addr_page
 from michael_page import michael_page
 from search_page import search_page, build_index
 from debt_audit_page import debt_page, audits_page
+from tourism_page import bedtax_page, surtax_page
 from updates import updates_page, rss, last_updated, nice as nice_date
 OUT = os.path.join(ROOT, 'public')
 SITE = 'BayCounty.me'
@@ -29,6 +30,10 @@ MENU = [
          'desc': 'Your bill, slice by slice, and where each government spends'},
         {'label': 'Hurricane Michael', 'href': '/public-money/hurricane-michael',
          'desc': 'FEMA, HUD and state recovery money: who got it and for what'},
+        {'label': 'Tourist Tax', 'href': '/public-money/tourist-tax',
+         'desc': 'The 5% bed tax: what visitors pay and where it goes'},
+        {'label': 'Sales Tax Projects', 'href': '/public-money/sales-tax-projects',
+         'desc': 'Half-cent sales taxes: what was promised, what got built'},
         {'label': 'Debt', 'href': '/public-money/debt',
          'desc': 'What each government owes, what for, and big payments ahead'},
         {'label': 'Audit Findings', 'href': '/public-money/audits',
@@ -489,6 +494,8 @@ PAGES = [
     ('/public-money/amendment-3', 'Amendment 3: what changes in Bay County',
      'What Florida\'s 2026 Amendment 3 would do to Bay County property tax bills and local budgets, using the state\'s own estimates. Before-and-after calculator; both sides\' arguments; no position taken.', lambda: amend_page(OUT)),
     ('/public-money/hurricane-michael', 'Where the Hurricane Michael money went', 'FEMA, HUD and state recovery money in Bay County after Hurricane Michael: every FEMA project, household aid by city, Rebuild Florida awards, debris costs and the Lynn Haven case.', lambda: michael_page(OUT)),
+    ('/public-money/tourist-tax', 'The bed tax: what visitors pay and where it goes', "Bay County's 5% tourist development tax: ten years of collections by zone, how the pennies are split, what Visit Panama City Beach spends, and who decides.", lambda: bedtax_page(OUT)),
+    ('/public-money/sales-tax-projects', 'Half-cent sales taxes: promised vs built', "Every infrastructure sales tax project on Bay County's map with its status, the county's surtax money by year, and the school half-cent.", lambda: surtax_page(OUT)),
     ('/public-money/debt', 'What Bay County governments owe', 'Debt owed by Bay County, the school district and every city: bonds, bank loans, big single payments ahead, and pension promises, from audited statements.', debt_page),
     ('/public-money/audits', 'What the auditors found', 'Three years of audit findings for Bay County governments in plain English, including repeat problems and Florida Auditor General reports.', audits_page),
     ('/glossary', 'Plain-English guide', 'Every term on BayCounty.me explained simply: CRAs, tax increment, millage, homestead exemptions, budgets and more.', glossary_page),

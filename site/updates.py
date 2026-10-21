@@ -9,6 +9,9 @@ from datetime import datetime, timezone
 import html
 
 CHANGES = [
+    {'date': '2026-10-20', 'title': 'Tourist tax and sales tax projects',
+     'text': 'The 5% bed tax: ten years of collections, how the pennies are split and what Visit Panama City Beach spends. Plus a map of 1,062 half-cent sales tax projects with their status, and the school half-cent.',
+     'pages': ['/public-money/tourist-tax', '/public-money/sales-tax-projects']},
     {'date': '2026-10-20', 'title': 'Debt and audit findings',
      'text': 'What every Bay County government owes, including big single payments ahead, and three years of audit findings in plain English, from audits filed with the Florida Auditor General.',
      'pages': ['/public-money/debt', '/public-money/audits']},
