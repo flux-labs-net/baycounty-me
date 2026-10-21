@@ -53,7 +53,13 @@ def gov_page(key):
     off = p.get('officials') or {}
     mills = b.get('mills')
     # header facts
-    kp = [kpi('Residents', f'{pop:,}' if pop else '—', '2025 state estimate' if pop else '')]
+    if key == 'schools':
+        import json, os
+        st = json.load(open(os.path.join(os.path.dirname(__file__), '..', 'data', 'salaries', 'schools.json'))).get('stats') or {}
+        n = st.get('total_employees_approx')
+        kp = [kpi('Employees', f'About {n:,}' if n else '—', 'per the superintendent, Oct 2025' if n else '')]
+    else:
+        kp = [kpi('Residents', f'{pop:,}' if pop else '—', '2025 state estimate' if pop else '')]
     if b.get('total'):
         kp.append(kpi('Budget', money(b['total']), f'{e(b.get("status") or "FY2026")}' + (f' · {money(pr["budget"], 0) if pr.get("budget", 0) >= 1e6 else usd(pr.get("budget"))} per resident' if pr.get('budget') else '')))
     if mills is not None and key != 'schools':
