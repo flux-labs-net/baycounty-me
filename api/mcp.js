@@ -1,7 +1,7 @@
 // BayCounty.me MCP server (Model Context Protocol, Streamable HTTP transport, JSON responses).
 // Lets AI assistants query the same public data as the REST API. Read-only, no auth.
 // Add as a remote MCP server / custom connector: https://baycounty.me/api/mcp
-const {filterRows} = require('./v1');
+const {filterRows} = require('./_query');
 const {loadFile: load, datasetRows} = require('./_data');
 const {gate, instrument} = require('./_gate');
 const SITE = 'https://baycounty.me';

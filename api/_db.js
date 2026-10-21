@@ -1,7 +1,6 @@
 // Server-side Postgres connection (Supabase) for API keys, throttles, logs and the admin section.
 // Uses DATABASE_URL from Vercel. Supabase's direct address is IPv6-only, which serverless functions can't
 // reach, so it is rewritten to the IPv4 transaction pooler (port 6543), the mode meant for serverless.
-const {Pool} = require('pg');
 let pool = null;
 
 function connectionString() {
@@ -22,6 +21,7 @@ function getPool() {
   if (pool) return pool;
   const cs = connectionString();
   if (!cs) return null;
+  const {Pool} = require('pg'); // loaded on first use, so modules that never touch the database don't need it
   // Encrypted; Supabase's pooler certificate is signed by Supabase's own CA, which Node doesn't ship with.
   const local = /@(localhost|127\.0\.0\.1)[:/]/.test(cs);
   pool = new Pool({connectionString: cs, max: 3, idleTimeoutMillis: 10000, connectionTimeoutMillis: 4000, ssl: local ? false : {rejectUnauthorized: false}});

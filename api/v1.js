@@ -10,53 +10,8 @@
 // Dataset rows are read from the BayCounty.me database (see api/_data.js), falling back to the published files.
 const {loadFile: load, datasetRows} = require('./_data');
 const {gate, instrument, cleanQuery} = require('./_gate');
+const {CSV_MAX, filterRows, toCsv, csvCell} = require('./_query');
 const SITE = 'https://baycounty.me';
-
-const RESERVED = new Set(['q', 'fields', 'sort', 'limit', 'offset', 'format', 'path', 'api_key']);
-function filterRows(rows, query) {
-  const q = String(query.q || '').trim().toLowerCase();
-  const conds = Object.entries(query).filter(([k]) => !RESERVED.has(k));
-  let out = rows.filter(r => {
-    for (const [k0, v0] of conds) {
-      const v = String(Array.isArray(v0) ? v0[0] : v0);
-      const m = k0.match(/^(.+?)_(min|max|from|to|contains)$/);
-      const k = m && !(k0 in r) ? m[1] : k0, op = m && !(k0 in r) ? m[2] : 'eq';
-      if (!(k in r)) return false;
-      const x = r[k];
-      if (op === 'min' && !(Number(x) >= Number(v))) return false;
-      if (op === 'max' && !(Number(x) <= Number(v))) return false;
-      if (op === 'from' && !(String(x || '') >= v)) return false;
-      if (op === 'to' && !(String(x || '') <= v + '￿')) return false;
-      if (op === 'contains' && !String(x ?? '').toLowerCase().includes(v.toLowerCase())) return false;
-      if (op === 'eq') {
-        const opts = v.toLowerCase().split(',');
-        if (!opts.includes(String(x ?? '').toLowerCase())) return false;
-      }
-    }
-    return !q || JSON.stringify(r).toLowerCase().includes(q);
-  });
-  if (query.sort) {
-    const keys = String(query.sort).split(',').map(s => s.trim()).filter(Boolean);
-    out = [...out].sort((a, b) => {
-      for (const s of keys) {
-        const d = s.startsWith('-') ? -1 : 1, k = s.replace(/^[-+]/, '');
-        const x = a[k], y = b[k];
-        if (x == null && y == null) continue; if (x == null) return 1; if (y == null) return -1;
-        const c = typeof x === 'number' && typeof y === 'number' ? x - y : String(x).localeCompare(String(y));
-        if (c) return c * d;
-      }
-      return 0;
-    });
-  }
-  return out;
-}
-
-function toCsv(rows) {
-  if (!rows.length) return '';
-  const keys = [...new Set(rows.flatMap(r => Object.keys(r)))];
-  const cell = v => { if (v == null) return ''; if (Array.isArray(v)) v = v.join('; '); else if (typeof v === 'object') v = JSON.stringify(v); v = String(v); return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; };
-  return [keys.join(','), ...rows.map(r => keys.map(k => cell(r[k])).join(','))].join('\n') + '\n';
-}
 
 function openapi(catalog) {
   const ids = catalog.datasets.map(d => d.id);
@@ -71,8 +26,8 @@ function openapi(catalog) {
       '/datasets': {get: {operationId: 'listDatasets', summary: 'List every dataset with its columns', responses: {200: {description: 'Catalog'}}}},
       '/datasets/{id}': {get: {operationId: 'queryDataset', summary: 'Rows from one dataset',
         description: 'Filter on any column with ?column=value (comma-separated values mean OR). Suffixes: _min, _max (numbers), _from, _to (dates or text), _contains (text). Example: /datasets/contracts?government=Bay County&amount_min=1000000&sort=-amount',
-        parameters: [{name: 'id', in: 'path', required: true, schema: {type: 'string', enum: ids}}, p('q', 'Text search across all columns'), p('fields', 'Comma-separated columns to return'),
-          p('sort', 'Comma-separated columns; prefix with - for descending'), p('limit', 'Rows per page (default 100, max 1000)', {type: 'integer'}), p('offset', 'Rows to skip', {type: 'integer'}), p('format', 'json (default) or csv', {type: 'string', enum: ['json', 'csv']})],
+        parameters: [{name: 'id', in: 'path', required: true, schema: {type: 'string', enum: ids}}, p('q', 'Text search across the values in every column'), p('fields', 'Comma-separated columns to return'),
+          p('sort', 'Comma-separated columns; prefix with - for descending'), p('limit', 'Rows per page (default 100, max 1000). With format=csv the default is every matching row, up to 10,000', {type: 'integer'}), p('offset', 'Rows to skip', {type: 'integer'}), p('format', 'json (default) or csv', {type: 'string', enum: ['json', 'csv']})],
         responses: {200: {description: '{data: [...], meta: {total, limit, offset, next}}'}, 404: {description: 'Unknown dataset'}}}},
       '/datasets/{id}/schema': {get: {operationId: 'datasetSchema', summary: 'Columns and types for one dataset', parameters: [{name: 'id', in: 'path', required: true, schema: {type: 'string', enum: ids}}], responses: {200: {description: 'Schema'}}}},
       '/governments': {get: {operationId: 'listGovernments', summary: 'Profile of every local government', responses: {200: {description: 'Profiles'}}}},
@@ -86,7 +41,7 @@ module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-API-Key');
-  res.setHeader('Access-Control-Expose-Headers', 'X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Limit-Day, X-RateLimit-Remaining-Day, Retry-After');
+  res.setHeader('Access-Control-Expose-Headers', 'X-RateLimit-Limit, X-RateLimit-Remaining, X-RateLimit-Limit-Day, X-RateLimit-Remaining-Day, Retry-After, X-Total-Count, X-Truncated');
   if (req.method === 'OPTIONS') return res.status(204).end();
   if (req.method !== 'GET') return res.status(405).json({error: 'Only GET is supported.'});
   // Not cached at the edge, so every request is counted against its key and logged.
@@ -111,11 +66,15 @@ module.exports = async (req, res) => {
       if (parts[2] === 'schema') return res.status(200).json(meta);
       const {rows: all, source} = await datasetRows(req, meta);
       const rows = filterRows(all, req.query);
-      const limit = Math.min(Math.max(parseInt(req.query.limit || '100', 10) || 100, 1), 1000), offset = Math.max(parseInt(req.query.offset || '0', 10) || 0, 0);
+      const csv = req.query.format === 'csv';
+      // CSV returns every matching row (up to CSV_MAX) unless a limit is given; JSON pages 100 at a time (max 1,000).
+      const maxLim = csv ? CSV_MAX : 1000, defLim = csv ? CSV_MAX : 100;
+      const limit = Math.min(Math.max(parseInt(req.query.limit || String(defLim), 10) || defLim, 1), maxLim), offset = Math.max(parseInt(req.query.offset || '0', 10) || 0, 0);
       let page = rows.slice(offset, offset + limit);
       info.rows = page.length;
       if (req.query.fields) { const f = String(req.query.fields).split(',').map(s => s.trim()); page = page.map(r => Object.fromEntries(f.filter(k => k in r).map(k => [k, r[k]]))); }
-      if (req.query.format === 'csv') { res.setHeader('Content-Type', 'text/csv; charset=utf-8'); res.setHeader('Content-Disposition', `inline; filename="${meta.id}.csv"`); return res.status(200).send(toCsv(page)); }
+      if (csv) { res.setHeader('X-Total-Count', String(rows.length)); if (offset + limit < rows.length) res.setHeader('X-Truncated', 'true');
+        res.setHeader('Content-Type', 'text/csv; charset=utf-8'); res.setHeader('Content-Disposition', `inline; filename="${meta.id}.csv"`); return res.status(200).send(toCsv(page)); }
       const nextQ = new URLSearchParams(Object.entries(req.query).filter(([k]) => k !== 'path' && k !== 'api_key')); nextQ.set('offset', offset + limit); nextQ.set('limit', limit);
       return res.status(200).json({dataset: meta.id, title: meta.title, data: page,
         meta: {total: rows.length, limit, offset, next: offset + limit < rows.length ? `${SITE}/api/v1/datasets/${meta.id}?${nextQ}` : null, updated: catalog.updated, data_source: source, source_note: 'Each row links to its source record. Check the original before relying on a single figure.'}});
@@ -145,4 +104,5 @@ module.exports = async (req, res) => {
 };
 module.exports.filterRows = filterRows;
 module.exports.toCsv = toCsv;
+module.exports.csvCell = csvCell;
 module.exports.openapi = openapi;
