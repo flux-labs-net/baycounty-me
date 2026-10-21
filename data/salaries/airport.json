@@ -32,6 +32,28 @@
  ],
  "positions": [
   {
+   "title": "Lieutenant (ARFF or Police - rate sheet does not say)",
+   "department": "ARFF / Airport Police",
+   "category": "fire",
+   "grade": null,
+   "pay_min": null,
+   "pay_mid": null,
+   "pay_max": null,
+   "pay_basis": "annual",
+   "hourly_min": null,
+   "hourly_max": null,
+   "actual_salaries": [
+    46654,
+    65229,
+    65562,
+    88837
+   ],
+   "budgeted_fte": null,
+   "union": null,
+   "source": 1,
+   "notes": "FY2027 Positions & Rates lists 4 'Lieutenant' rates ($22.43, $31.36, $31.52, $42.71/hr; x 2,080 shown). Staffing levels budget 3 ARFF Lieutenants (grade 110) + 1 Police Lieutenant (grade 112). ARFF works 24-hour shifts, so 2,080-hour annualization understates ARFF pay."
+  },
+  {
    "title": "Administrative Clerk",
    "department": "Administration",
    "category": "other",
@@ -193,18 +215,13 @@
    "pay_basis": "annual",
    "hourly_min": 29.72,
    "hourly_max": 53.49,
-   "actual_salaries": [
-    46654,
-    65229,
-    65562,
-    88837
-   ],
+   "actual_salaries": null,
    "budgeted_fte": 3,
    "union": null,
    "source": 0,
-   "notes": "actual_salaries = FY2027 budgeted hourly rates from 'Positions & Rates' x 2,080 (hourly: 22.43, 31.36, 31.52, 42.71). Rate-sheet labels matched to this title: \"Lieutenant\" x4 (match by label/rate band; verify).",
+   "notes": null,
    "budgeted_fte_fy2026": 3,
-   "actual_source": 1
+   "actual_source": null
   },
   {
    "title": "Deputy Fire Chief",
@@ -770,15 +787,13 @@
    "pay_basis": "annual",
    "hourly_min": 26.45,
    "hourly_max": 47.61,
-   "actual_salaries": [
-    46696
-   ],
+   "actual_salaries": null,
    "budgeted_fte": 1,
    "union": null,
    "source": 0,
-   "notes": "actual_salaries = FY2027 budgeted hourly rates from 'Positions & Rates' x 2,080 (hourly: 22.45). Rate-sheet labels matched to this title: \"Maintenance Worker\" x1 (match by label/rate band; verify).",
+   "notes": null,
    "budgeted_fte_fy2026": 1,
-   "actual_source": 1
+   "actual_source": null
   },
   {
    "title": "Maintenance Manager",
@@ -800,6 +815,25 @@
    "notes": "actual_salaries = FY2027 budgeted hourly rates from 'Positions & Rates' x 2,080 (hourly: 45.11).",
    "budgeted_fte_fy2026": 1,
    "actual_source": 1
+  },
+  {
+   "title": "Maintenance Worker (level not specified)",
+   "department": "Maintenance",
+   "category": "other",
+   "grade": null,
+   "pay_min": null,
+   "pay_mid": null,
+   "pay_max": null,
+   "pay_basis": "annual",
+   "hourly_min": null,
+   "hourly_max": null,
+   "actual_salaries": [
+    46696
+   ],
+   "budgeted_fte": null,
+   "union": null,
+   "source": 1,
+   "notes": "FY2027 Positions & Rates row labeled only 'Maintenance Worker' ($22.45/hr). Possibly the Maintenance Lead or part-time maintenance position; not matched."
   },
   {
    "title": "Maintenance Worker I",
