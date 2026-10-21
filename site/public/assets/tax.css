@@ -587,3 +587,19 @@ details.el-dec > .el-rh,details.el-dec > .el-cands{padding:0 18px 16px}
 .mm-n.k .mm-pill{stroke:var(--salmon)}
 .dev-code{background:var(--sunken);border:1px solid var(--line);border-radius:10px;padding:10px 12px;overflow-x:auto;font:400 .82rem var(--f-data);margin:8px 0}
 .dev code{font-family:var(--f-data);font-size:.85em;overflow-wrap:anywhere}
+
+/* Budget explorer: per-resident and benchmarking */
+.hbars.per .hb-v small,.hbars.bench .hb-v small{display:block;font:400 .74rem var(--f-body);color:var(--muted);margin-top:1px}
+.hbars.bench .hb{grid-template-columns:minmax(0,15rem) minmax(0,1fr) 10rem}
+.hbars.bench .hb-n small{display:block;font-size:.74rem;color:var(--muted);line-height:1.3;margin-top:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hbars.bench .hb-track{position:relative}
+.hbars.bench .hb-med{position:absolute;top:-3px;bottom:-3px;width:0;border-left:2px dashed var(--ink);opacity:.45}
+.hbars.bench .hb.me .hb-bar{background:var(--salmon)}
+.hbars.bench .hb.me .hb-n{font-weight:600}
+.hbars.bench .hb.ctx .hb-bar{background:var(--faint)}
+#bnChips{margin:4px 0 14px}
+.bn-sum{margin:0 0 14px;font-size:.92rem}
+.bn-tbl th.on,.bn-tbl td.on{background:var(--sunken)}
+.bn-tbl tr.me th,.bn-tbl tr.me td{font-weight:600}
+.bn-tbl td .ar{font-size:.7em;color:var(--muted);margin-left:3px}
+@media (max-width:640px){.hbars.bench .hb,.hbars.per .hb{grid-template-columns:minmax(0,1fr) auto}.hbars.bench .hb-v small,.hbars.per .hb-v small{white-space:normal;max-width:9rem;margin-left:auto}.hbars.bench .hb-track{grid-column:1/-1;order:3}}

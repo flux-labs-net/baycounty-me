@@ -48,7 +48,7 @@
 <main id="main">
 <div class="page tax">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Public Money · Budgets</span><h1 id="beTitle">Budget explorer</h1>
-    <p class="lede">Open up any local government's FY2026 budget: how much goes into each fund, what the General Fund spends by department, and where the money comes from.</p></div>
+    <p class="lede">Open up any local government's FY2026 budget: how much goes into each fund, what the General Fund spends by department, and what each service costs per resident, side by side with the other cities.</p></div>
     <div class="stamp"><button type="button" class="pdf-btn" id="pdf"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 12v2h10v-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Export PDF</button><a class="pill" id="beGov" href="/governments">Overview →</a></div></header>
   <div class="vt-filters mt-f"><label class="vf"><span>Government</span><select id="beG"></select></label></div>
   <div class="kpis" id="beKpis"></div>
@@ -56,6 +56,20 @@
     <ol class="ex-steps"><li><b>Funds are separate bank accounts.</b> Money raised for one purpose, like water bills or a sales tax, goes into its own fund and can only be spent on that purpose.</li>
     <li><b>The General Fund is the everyday account.</b> Police, parks, roads and city hall are paid from it, mostly with property tax.</li>
     <li><b>Totals count some money twice.</b> When one fund pays another (a transfer), both show it, so totals aren't a perfect measure of size. The notes below say what each total includes.</li></ol></div></section>
+  <section class="tx-sec"><div class="sec-hd"><h2 id="bench">Cost per resident, by service</h2><span class="muted">FY2026 General Fund budget ÷ residents</span></div>
+    <div class="chips print-hide" id="bnChips" role="group" aria-label="Service to compare"></div>
+    <p class="bn-sum" id="bnSum"></p>
+    <div id="bnBars"></div>
+    <details class="tbl-toggle" open><summary>Every service, every government</summary><div class="tablewrap"><table class="tx-table bn-tbl" id="bnTbl"></table></div>
+      <p class="note">▲ more than 25% above the city median · ▼ more than 25% below.</p></details>
+    <details class="gaps"><summary>How the services are grouped, and what to watch for</summary><ul>
+      <li><b>Departments are grouped by name.</b> Each government names its departments differently, so they're sorted into common services. Hover a bar or read the line under each name to see exactly which departments were added together.</li>
+      <li><b>Only the General Fund is counted.</b> Some cities pay for a service partly from other funds (a roads fund, a fire assessment, the CRA), so their General Fund figure can understate the full cost.</li>
+      <li><b>Left out of every service:</b> transfers to other funds, reserves, debt payments and hurricane-recovery (FEMA and debris) lines. "Everyday General Fund" is the General Fund without those.</li>
+      <li><b>Contract services count too.</b> Callaway and Mexico Beach pay the Sheriff for policing; that contract is their police cost.</li>
+      <li><b>Visitors raise the numbers.</b> Panama City Beach and Mexico Beach serve far more people than live there, so their per-resident costs run high.</li>
+      <li><b>Bay County</b> is shown for context only. Its figures are spread over every county resident, though much of the Sheriff's patrol serves unincorporated areas. The school district isn't compared here.</li>
+      <li><b>Residents</b> are the University of Florida's April 2025 state estimates.</li></ul></details></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="funds">Where the money is budgeted, by fund</h2></div><div id="beFunds"></div></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="depts">General Fund spending, by department</h2></div><div id="beDepts"></div></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="rev">Where the money comes from</h2><span class="muted" id="beRevNote"></span></div><div id="beRev"></div></section>

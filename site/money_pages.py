@@ -1,5 +1,5 @@
 """Budget explorer (/public-money/budget-explorer) and tourism-agency payments (/public-money/who-gets-paid)."""
-import html, json, os
+import html, json, os, re
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(HERE, '..', 'data')
@@ -20,44 +20,120 @@ def _j(*p):
 
 
 # ---------------- Budget explorer ----------------
+# Common service groups, so each government's own department names line up for benchmarking.
+SERVICES = [
+    ('police', 'Police / law enforcement'),
+    ('fire', 'Fire'),
+    ('streets', 'Streets & public works'),
+    ('parks', 'Parks & recreation'),
+    ('library', 'Libraries'),
+    ('dev', 'Planning, building & code'),
+    ('admin', 'Administration & support'),
+]
+SVC_NAME = dict(SERVICES)
+# Order matters: first match wins. None = left out of service totals (transfers, reserves, debt, disaster money).
+SVC_RULES = [
+    (None, r'transfer|\breserves?\b|fund balance|debt service|fema|debris|non-departmental'),
+    ('other', r'jail|emergency medical|emergency management|human services|economic|court|canal|trash|animal|community services$|instruction|pupil|plant|facilities acquisition'),
+    ('police', r'police|law enforcement|sheriff'),
+    ('fire', r'\bfire\b'),
+    ('streets', r'street|roads|public works'),
+    ('parks', r'park|recreation|leisure|sports|bayou preserve'),
+    ('library', r'librar'),
+    ('dev', r'planning|building|code|development'),
+    ('admin', r'legislative|executive|admin|legal|finance|human resources|\bhr\b|\bit\b|information technology|manager|clerk|elected|general government|customer service|communications|fleet|vehicle|maintenance|constitutional|indirect cost|school board|fiscal|central services|technology'),
+]
+
+
+def service_of(name):
+    n = (name or '').lower()
+    for svc, rx in SVC_RULES:
+        if re.search(rx, n):
+            return svc
+    return 'other'
+
+
 BUDGET_JS = r"""
 (() => {
-const B = __B__;
+const B = __B__, SV = __SV__;
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const M = n => { const a = Math.abs(n); return a >= 1e9 ? '$' + (n/1e9).toFixed(2) + 'B' : a >= 1e6 ? '$' + (n/1e6).toFixed(1) + 'M' : a >= 1e4 ? '$' + Math.round(n/1e3).toLocaleString() + 'K' : '$' + Math.round(n).toLocaleString(); };
+const R = (n, pop) => { if (!pop || n == null) return ''; const v = n / pop; return Math.abs(v) < 1 && v !== 0 ? (v < 0 ? '−' : '') + '<$1' : (v < 0 ? '−$' : '$') + Math.round(Math.abs(v)).toLocaleString(); };
+const med = a => { if (a.length < 3) return null; const s = [...a].sort((x, y) => x - y), m = s.length >> 1; return s.length ? (s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2) : null; };
 $('beG').innerHTML = B.map(b => `<option value="${b.gov}">${esc(b.short)}</option>`).join('');
-const q = new URLSearchParams(location.search).get('gov'); if (q && B.some(b => b.gov === q)) $('beG').value = q;
-function bars(list, total, note) {
+const P = new URLSearchParams(location.search);
+if (P.get('gov') && B.some(b => b.gov === P.get('gov'))) $('beG').value = P.get('gov');
+let svc = SV.some(s => s[0] === P.get('svc')) ? P.get('svc') : 'police';
+function bars(list, total, pop, note) {
   if (!list || !list.length) return `<p class="muted">${note || 'Not broken out in the published budget.'}</p>`;
   const xs = [...list].sort((a, b) => b.amount - a.amount), mx = xs[0].amount, sum = xs.reduce((s, x) => s + x.amount, 0);
-  return '<div class="hbars">' + xs.map(x => `<div class="hb"><span class="hb-n">${esc(x.name)}${x.type ? ` <em>${esc(x.type)}</em>` : ''}</span><span class="hb-track"><span class="hb-bar" style="width:${Math.max(.5, x.amount / mx * 100).toFixed(1)}%"></span></span><span class="hb-v">${M(x.amount)} <em>${(x.amount / (total || sum) * 100).toFixed(1)}%</em></span></div>`).join('') + '</div>';
+  return '<div class="hbars per">' + xs.map(x => `<div class="hb"><span class="hb-n">${esc(x.name)}${x.type ? ` <em>${esc(x.type)}</em>` : ''}</span><span class="hb-track"><span class="hb-bar" style="width:${Math.max(.5, x.amount / mx * 100).toFixed(1)}%"></span></span><span class="hb-v">${M(x.amount)} <em>${(x.amount / (total || sum) * 100).toFixed(1)}%</em>${pop ? `<small>${R(x.amount, pop)} per resident</small>` : ''}</span></div>`).join('') + '</div>';
+}
+const cmp = B.filter(b => b.bench && b.pop);
+function bench(b) {
+  $('bnChips').innerHTML = SV.map(s => `<button type="button" class="chip" data-s="${s[0]}" aria-pressed="${s[0] === svc}">${esc(s[1])}</button>`).join('');
+  const rows = cmp.map(g => ({g, v: g.bench[svc] ? g.bench[svc].amount / g.pop : null, inc: g.bench[svc] ? g.bench[svc].lines : []}));
+  const cities = rows.filter(r => r.g.kind === 'city' && r.v != null), m = med(cities.map(r => r.v));
+  const mx = Math.max(...rows.map(r => r.v || 0));
+  rows.sort((a, b) => (b.v ?? -1) - (a.v ?? -1));
+  $('bnBars').innerHTML = '<div class="hbars bench">' + rows.map(r => `<div class="hb${r.g.gov === b.gov ? ' me' : ''}${r.g.kind !== 'city' ? ' ctx' : ''}" tabindex="0" title="${esc(r.inc.length ? 'Includes: ' + r.inc.join('; ') : 'No separate line in the General Fund')}"><span class="hb-n">${esc(r.g.short)}${r.g.kind !== 'city' ? ' <em>countywide</em>' : ''}<small>${r.inc.length ? esc(r.inc.join(' · ')) : 'Not a separate General Fund line'}</small></span><span class="hb-track">${r.v != null ? `<span class="hb-bar" style="width:${Math.max(.5, r.v / mx * 100).toFixed(1)}%"></span>` : ''}${m != null && mx ? `<span class="hb-med" style="left:${(m / mx * 100).toFixed(1)}%"></span>` : ''}</span><span class="hb-v">${r.v != null ? R(r.v, 1) : '—'} <em>${r.v != null ? 'per resident' : ''}</em><small>${r.v != null ? M(r.g.bench[svc].amount) + ' · ' + r.g.pop.toLocaleString() + ' residents' : ''}</small></span></div>`).join('') + '</div>';
+  const me = rows.find(r => r.g.gov === b.gov);
+  let s = m != null ? `City median: <b>${R(m, 1)}</b> per resident for ${esc(SV.find(x => x[0] === svc)[1].toLowerCase())}.` : '';
+  if (me && me.v != null && m && b.kind === 'city') { const d = (me.v / m - 1) * 100; s += ` ${esc(b.short)} is <b>${R(me.v, 1)}</b>, ${Math.abs(d) < 5 ? 'about the same as the median' : Math.round(Math.abs(d)) + '% ' + (d > 0 ? 'above' : 'below') + ' the median'}.`; }
+  else if (b.kind !== 'city') s += ` ${esc(b.short)} ${b.bench ? 'serves the whole county, so it is shown for context and left out of the median.' : 'isn\'t compared here: its budget pays for schools, so cost per student is the fairer measure.'}`;
+  $('bnSum').innerHTML = s;
+  // matrix
+  const cols = [...SV, ['total', 'Everyday General Fund']];
+  const meds = Object.fromEntries(cols.map(c => [c[0], med(cmp.filter(g => g.kind === 'city' && g.bench[c[0]]).map(g => g.bench[c[0]].amount / g.pop))]));
+  $('bnTbl').innerHTML = `<thead><tr><th scope="col">Per resident</th>${cols.map(c => `<th scope="col" class="num${c[0] === svc ? ' on' : ''}">${esc(c[1])}</th>`).join('')}</tr></thead><tbody>` +
+    cmp.map(g => `<tr class="${g.gov === b.gov ? 'me' : ''}"><th scope="row">${esc(g.short)}${g.kind !== 'city' ? ' <span class="muted">(countywide)</span>' : ''}</th>${cols.map(c => { const x = g.bench[c[0]]; if (!x) return '<td class="num muted">—</td>'; const v = x.amount / g.pop, md = meds[c[0]], hi = g.kind === 'city' && md && v > md * 1.25, lo = g.kind === 'city' && md && v < md * .75; return `<td class="num${c[0] === svc ? ' on' : ''}">${R(v, 1)}${hi ? '<span class="ar" title="More than 25% above the city median">▲</span>' : lo ? '<span class="ar" title="More than 25% below the city median">▼</span>' : ''}</td>`; }).join('')}</tr>`).join('') +
+    `</tbody><tfoot><tr><th scope="row">City median</th>${cols.map(c => `<td class="num${c[0] === svc ? ' on' : ''}">${meds[c[0]] != null ? R(meds[c[0]], 1) : '—'}</td>`).join('')}</tr></tfoot>`;
 }
 function run() {
-  const b = B.find(x => x.gov === $('beG').value);
-  history.replaceState(null, '', '?gov=' + b.gov);
+  const b = B.find(x => x.gov === $('beG').value), pop = b.pop;
+  history.replaceState(null, '', '?gov=' + b.gov + (svc !== 'police' ? '&svc=' + svc : ''));
   const gf = (b.funds || []).find(f => /general/i.test(f.type || '') || /general fund/i.test(f.name));
-  const gfd = (b.general_fund_departments || []).reduce((s, x) => s + x.amount, 0);
-  $('beKpis').innerHTML = `<div class="kpi"><span class="eyebrow">Total budget</span><span class="v">${M(b.total)}</span><span class="s">${esc(b.fiscal_year)}</span></div>
-    <div class="kpi"><span class="eyebrow">Status</span><span class="v">${b.status === 'adopted' ? 'Adopted' : 'Tentative'}</span><span class="s">${b.status === 'adopted' ? 'Final budget approved in September' : 'Final adopted budget not posted online'}</span></div>
-    <div class="kpi"><span class="eyebrow">General Fund</span><span class="v">${gf ? M(gf.amount) : gfd ? M(gfd) : '—'}</span><span class="s">day-to-day operations</span></div>
-    <div class="kpi"><span class="eyebrow">Funds</span><span class="v">${(b.funds || []).length || '—'}</span><span class="s">separate accounts the money is kept in</span></div>`;
-  $('beFunds').innerHTML = bars(b.funds, b.total);
-  $('beDepts').innerHTML = bars(b.general_fund_departments, null);
-  $('beRev').innerHTML = bars(b.revenues, null, 'Revenues by source are not broken out for all funds in the published budget.');
+  const gfd = (b.general_fund_departments || []).reduce((s, x) => s + x.amount, 0), gfv = gf ? gf.amount : gfd || null;
+  $('beKpis').innerHTML = `<div class="kpi"><span class="eyebrow">Total budget</span><span class="v">${M(b.total)}</span><span class="s">${pop ? R(b.total, pop) + ' per resident · ' : ''}${esc(b.fiscal_year)}</span></div>
+    <div class="kpi"><span class="eyebrow">General Fund</span><span class="v">${gfv ? M(gfv) : '—'}</span><span class="s">${gfv && pop ? R(gfv, pop) + ' per resident · ' : ''}day-to-day operations</span></div>
+    <div class="kpi"><span class="eyebrow">Residents</span><span class="v">${pop ? pop.toLocaleString() : '—'}</span><span class="s">${b.gov === 'schools' ? 'everyone in Bay County' : b.gov === 'county' ? 'whole county, cities included' : 'state estimate, April 2025'}</span></div>
+    <div class="kpi"><span class="eyebrow">Status</span><span class="v">${b.status === 'adopted' ? 'Adopted' : 'Tentative'}</span><span class="s">${b.status === 'adopted' ? 'Final budget approved in September' : 'Final adopted budget not posted online'}</span></div>`;
+  $('beFunds').innerHTML = bars(b.funds, b.total, pop);
+  $('beDepts').innerHTML = bars(b.general_fund_departments, null, pop);
+  $('beRev').innerHTML = bars(b.revenues, null, pop, 'Revenues by source are not broken out for all funds in the published budget.');
   $('beRevNote').textContent = b.rev_scope || '';
   const notes = Array.isArray(b.notes) ? b.notes : (b.notes ? [b.notes] : []);
   $('beNotes').innerHTML = notes.map(n => `<p>${esc(n)}</p>`).join('') + (b.source_url ? `<p><a class="src" href="${esc(b.source_url)}" target="_blank" rel="noopener">Budget document</a></p>` : '');
   $('beGov').href = '/governments/' + b.slug; $('beGov').textContent = b.short + ' overview →';
   $('beTitle').textContent = b.short + ' budget';
+  bench(b);
 }
+$('bnChips').addEventListener('click', ev => { const c = ev.target.closest('[data-s]'); if (c) { svc = c.dataset.s; run(); } });
 $('beG').addEventListener('change', run); run();
 })();
 """
 
 
+def _bench(depts):
+    out = {}
+    for x in depts or []:
+        s = service_of(x.get('name'))
+        if s is None:
+            continue
+        if s in SVC_NAME:
+            o = out.setdefault(s, {'amount': 0, 'lines': []})
+            o['amount'] += x['amount']
+            o['lines'].append(x['name'])
+        t = out.setdefault('total', {'amount': 0, 'lines': []})
+        t['amount'] += x['amount']
+    for o in out.values():
+        o['amount'] = round(o['amount'])
+    return out
+
+
 def budget_page(out_dir):
-    from govs import GOVS
+    from govs import GOVS, profile
     d = _j('civic', 'budgets_detail.json')
     if not d:
         return '<div class="page prose"><h1>Budget explorer</h1><p>Coming soon.</p></div>'
@@ -69,14 +145,16 @@ def budget_page(out_dir):
             continue
         rv = g.get('revenues') or []
         B.append({**{k: g.get(k) for k in ('gov', 'name', 'fiscal_year', 'status', 'total', 'source_url', 'funds', 'general_fund_departments', 'revenues', 'notes')},
-                  'short': m['short'], 'slug': m['slug'],
+                  'short': m['short'], 'slug': m['slug'], 'kind': m['kind'], 'pop': profile(g['gov']).get('population'),
+                  'bench': None if m['kind'] == 'schools' else _bench(g.get('general_fund_departments')),
                   'rev_scope': '' if not rv else ('All funds.' if g['gov'] in ('county', 'schools', 'pc', 'mb') else 'General Fund only.')})
     B.sort(key=lambda b: [g['key'] for g in GOVS].index(b['gov']))
-    open(os.path.join(out_dir, 'assets', 'budget.js'), 'w').write(BUDGET_JS.replace('__B__', json.dumps(B, ensure_ascii=False, separators=(',', ':'))))
+    js = BUDGET_JS.replace('__B__', json.dumps(B, ensure_ascii=False, separators=(',', ':'))).replace('__SV__', json.dumps(SERVICES, separators=(',', ':')))
+    open(os.path.join(out_dir, 'assets', 'budget.js'), 'w').write(js)
     gnotes = ''.join(f'<li>{e(n)}</li>' for n in (d.get('notes') or []))
     return f'''<div class="page tax">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Public Money · Budgets</span><h1 id="beTitle">Budget explorer</h1>
-    <p class="lede">Open up any local government's FY2026 budget: how much goes into each fund, what the General Fund spends by department, and where the money comes from.</p></div>
+    <p class="lede">Open up any local government's FY2026 budget: how much goes into each fund, what the General Fund spends by department, and what each service costs per resident, side by side with the other cities.</p></div>
     <div class="stamp">{PDF_BTN}<a class="pill" id="beGov" href="/governments">Overview →</a></div></header>
   <div class="vt-filters mt-f"><label class="vf"><span>Government</span><select id="beG"></select></label></div>
   <div class="kpis" id="beKpis"></div>
@@ -84,6 +162,20 @@ def budget_page(out_dir):
     <ol class="ex-steps"><li><b>Funds are separate bank accounts.</b> Money raised for one purpose, like water bills or a sales tax, goes into its own fund and can only be spent on that purpose.</li>
     <li><b>The General Fund is the everyday account.</b> Police, parks, roads and city hall are paid from it, mostly with property tax.</li>
     <li><b>Totals count some money twice.</b> When one fund pays another (a transfer), both show it, so totals aren't a perfect measure of size. The notes below say what each total includes.</li></ol></div></section>
+  <section class="tx-sec"><div class="sec-hd"><h2 id="bench">Cost per resident, by service</h2><span class="muted">FY2026 General Fund budget ÷ residents</span></div>
+    <div class="chips print-hide" id="bnChips" role="group" aria-label="Service to compare"></div>
+    <p class="bn-sum" id="bnSum"></p>
+    <div id="bnBars"></div>
+    <details class="tbl-toggle" open><summary>Every service, every government</summary><div class="tablewrap"><table class="tx-table bn-tbl" id="bnTbl"></table></div>
+      <p class="note">▲ more than 25% above the city median · ▼ more than 25% below.</p></details>
+    <details class="gaps"><summary>How the services are grouped, and what to watch for</summary><ul>
+      <li><b>Departments are grouped by name.</b> Each government names its departments differently, so they're sorted into common services. Hover a bar or read the line under each name to see exactly which departments were added together.</li>
+      <li><b>Only the General Fund is counted.</b> Some cities pay for a service partly from other funds (a roads fund, a fire assessment, the CRA), so their General Fund figure can understate the full cost.</li>
+      <li><b>Left out of every service:</b> transfers to other funds, reserves, debt payments and hurricane-recovery (FEMA and debris) lines. "Everyday General Fund" is the General Fund without those.</li>
+      <li><b>Contract services count too.</b> Callaway and Mexico Beach pay the Sheriff for policing; that contract is their police cost.</li>
+      <li><b>Visitors raise the numbers.</b> Panama City Beach and Mexico Beach serve far more people than live there, so their per-resident costs run high.</li>
+      <li><b>Bay County</b> is shown for context only. Its figures are spread over every county resident, though much of the Sheriff's patrol serves unincorporated areas. The school district isn't compared here.</li>
+      <li><b>Residents</b> are the University of Florida's April 2025 state estimates.</li></ul></details></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="funds">Where the money is budgeted, by fund</h2></div><div id="beFunds"></div></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="depts">General Fund spending, by department</h2></div><div id="beDepts"></div></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="rev">Where the money comes from</h2><span class="muted" id="beRevNote"></span></div><div id="beRev"></div></section>
