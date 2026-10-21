@@ -158,11 +158,43 @@ def build_vendors():
         if k in clusters:
             camp[k].add(d['name'].strip())
     # ids
-    out, used = [], set()
+    # site/vendors.py (the Contracts page's company list) is the source of company ids and names: a cluster whose spellings
+    # resolve to one company there takes that id. When vendors.py joins two of these clusters, it wins (its merges are
+    # hand-reviewed too) and the join is listed in the review file.
+    sys.path.insert(0, os.path.join(HERE, '..', '..', 'site'))
+    import vendors as SV
+    site_id = {}
+    for gk, c in clusters.items():
+        hits = collections.Counter(SV.resolve(n)[0] for n in c['names'] if SV.key(n) in SV._BY_KEY)
+        if hits:
+            site_id[gk] = hits.most_common(1)[0][0]
+    by_site = collections.defaultdict(list)
+    for gk, sid in site_id.items():
+        by_site[sid].append(gk)
+    merged_by_site = []
+    for sid, gks in by_site.items():
+        if len(gks) > 1:
+            keep = max(gks, key=lambda k: sum(clusters[k]['src'].values()))
+            for k in gks:
+                if k != keep:
+                    c, t = clusters.pop(k), clusters[keep]
+                    t['names'].update(c['names']); t['src'].update(c['src']); t['govs'] |= c['govs']; t['keys'] |= c['keys'] | {k}
+                    merged_by_site.append({'company': sid, 'joined': [keep, k]})
+            for k in gks:
+                if k != keep:
+                    camp[keep] = camp.get(keep, set()) | camp.pop(k, set())
+            site_id = {k: v for k, v in site_id.items() if k in clusters}
+    out, used = [], set(SV.VENDORS)
     for gk, c in sorted(clusters.items(), key=lambda kv: -sum(kv[1]['src'].values())):
         names = [n for n, _ in c['names'].most_common()]
+        if gk in site_id:
+            sid = site_id[gk]
+            out.append({'id': sid, 'name': SV.VENDORS[sid][0], 'aliases': sorted(set(names) | camp.get(gk, set()) | {SV.VENDORS[sid][0]}), 'keys': sorted(c['keys'] | {gk}),
+                        'records': dict(c['src']), 'gov_ids': sorted(c['govs']), 'site_vendor_type': SV.VENDORS[sid][2],
+                        **({'merge_evidence': c['evidence']} if c.get('evidence') else {})})
+            continue
         disp = c.get('display') or DISPLAY.get(gk) or _pick_display(c['names'])
-        vid = slug(disp) or gk
+        vid = SV.resolve(names[0])[0] if names else (slug(disp) or gk)
         base, i = vid, 2
         while vid in used:
             vid = f'{base}-{i}'; i += 1
@@ -173,10 +205,12 @@ def build_vendors():
     joint = {raw: [by_key[k] for k in ks] for raw, ks in joint_raw.items()}
     out.sort(key=lambda v: v['id'])
     # review: look-alikes not joined
-    review = {'kept_apart_by_hand': [], 'possible_matches_not_joined': [], 'joined_by_hand': [{'name': d, 'spellings_joined': ks, 'evidence': w} for ks, d, w in SAME]}
+    review = {'kept_apart_by_hand': [], 'possible_matches_not_joined': [], 'joined_by_site_vendors_py': merged_by_site, 'joined_by_hand': [{'name': d, 'spellings_joined': ks, 'evidence': w} for ks, d, w in SAME]}
     for a, b, why in KEEP_APART:
         if (a in by_key or a in {K(x['name']) for x in records.donations()}) and b in by_key:
-            review['kept_apart_by_hand'].append({'a': a, 'b': by_key[b], 'a_vendor': by_key.get(a), 'why': why})
+            same = by_key.get(a) == by_key[b]
+            review['kept_apart_by_hand'].append({'a': a, 'b': by_key[b], 'a_vendor': by_key.get(a), 'why': why,
+                                                 **({'status': 'JOINED anyway by site/vendors.py (the Contracts page company list); a person should confirm or split it there'} if same else {})})
     tok = collections.defaultdict(set)
     for v in out:
         for n in v['aliases']:

@@ -2,33 +2,36 @@
  "kept_apart_by_hand": [
   {
    "a": "gulfcoastutilityconstruction",
-   "b": "gulf-coast-utility-contractors",
-   "a_vendor": "gulf-coast-utility-construction",
-   "why": "Panama City's 2024-05-14 agenda awards Bid PC24-019 to \"Gulf Coast Utility Construction\"; no record ties it to Gulf Coast Utility Contractors, LLC. Probably the same firm, not confirmed."
+   "b": "gcuc",
+   "a_vendor": "gcuc",
+   "why": "Panama City's 2024-05-14 agenda awards Bid PC24-019 to \"Gulf Coast Utility Construction\"; no record ties it to Gulf Coast Utility Contractors, LLC. Probably the same firm, not confirmed.",
+   "status": "JOINED anyway by site/vendors.py (the Contracts page company list); a person should confirm or split it there"
   },
   {
    "a": "rjgormancontracting",
-   "b": "rj-gorman-marine-construction",
+   "b": "rj-gorman-marine",
    "a_vendor": "rj-gorman-contracting",
    "why": "Two different LLC names in the agendas. Campaign gifts are matched to whichever name the filing used; \"RJ Gorman Construction\" (one filing) matches neither and is left unmatched."
   },
   {
    "a": "cwrcontracting",
-   "b": "c-w-roberts-contracting",
+   "b": "cw-roberts",
    "a_vendor": "cwr-contracting",
    "why": "CWR Contracting, Inc. (PCB Front Beach Road Segment 3) may be C.W. Roberts Contracting; no source says so."
   },
   {
    "a": "americansandasphaltxcavation",
-   "b": "american-sand-and-asphalt-paving",
-   "a_vendor": "american-sand-and-asphalt-x-cavation",
-   "why": "The county register line reads \"American Sand & Asphalt / X-Cavation\"; it may combine two payees, so it is not added to American Sand and Asphalt Paving."
+   "b": "american-sand",
+   "a_vendor": "american-sand",
+   "why": "The county register line reads \"American Sand & Asphalt / X-Cavation\"; it may combine two payees, so it is not added to American Sand and Asphalt Paving.",
+   "status": "JOINED anyway by site/vendors.py (the Contracts page company list); a person should confirm or split it there"
   },
   {
    "a": "mottmacdonaldconsultants",
    "b": "mott-macdonald",
-   "a_vendor": "mott-macdonald-consultants",
-   "why": "\"Mott MacDonald Florida, LLC\" and plain \"Mott MacDonald\" are one vendor (same key once \"Florida, LLC\" is dropped). \"Mott MacDonald Consultants, Inc.\" is a different legal entity and is kept separate."
+   "a_vendor": "mott-macdonald",
+   "why": "\"Mott MacDonald Florida, LLC\" and plain \"Mott MacDonald\" are one vendor (same key once \"Florida, LLC\" is dropped). \"Mott MacDonald Consultants, Inc.\" is a different legal entity and is kept separate.",
+   "status": "JOINED anyway by site/vendors.py (the Contracts page company list); a person should confirm or split it there"
   },
   {
    "a": "andersonconstruction",
@@ -38,9 +41,10 @@
   },
   {
    "a": "andersonconstruction",
-   "b": "anderson-construction-company-of-north",
+   "b": "anderson-construction",
    "a_vendor": "anderson-construction",
-   "why": "Panama City agendas name \"Anderson Construction Company of North Florida\" (2023) and \"Anderson Construction Company\" (2026); probably one firm, not confirmed."
+   "why": "Panama City agendas name \"Anderson Construction Company of North Florida\" (2023) and \"Anderson Construction Company\" (2026); probably one firm, not confirmed.",
+   "status": "JOINED anyway by site/vendors.py (the Contracts page company list); a person should confirm or split it there"
   },
   {
    "a": "baypointbillfishopen",
@@ -50,13 +54,14 @@
   },
   {
    "a": "imageworksc317",
-   "b": "imageworks-commercial-interiors",
-   "a_vendor": "imageworks-c317",
-   "why": "Lynn Haven warrant list \"IMAGEWORKS C317\" may be Imageworks Commercial Interiors; not confirmed."
+   "b": "imageworks",
+   "a_vendor": "imageworks",
+   "why": "Lynn Haven warrant list \"IMAGEWORKS C317\" may be Imageworks Commercial Interiors; not confirmed.",
+   "status": "JOINED anyway by site/vendors.py (the Contracts page company list); a person should confirm or split it there"
   },
   {
    "a": "royalamericanhospitality",
-   "b": "royal-american-construction",
+   "b": "royal-american",
    "a_vendor": "royal-american-hospitality",
    "why": "Different businesses."
   },
@@ -81,8 +86,9 @@
   {
    "a": "cdrmaguirecdremergencymanagement",
    "b": "cdr-maguire",
-   "a_vendor": "cdr-maguire-cdr-emergency-management",
-   "why": "One change order names \"CDR Maguire / CDR Emergency Management\", which may be two related companies; kept as its own record."
+   "a_vendor": "cdr-maguire",
+   "why": "One change order names \"CDR Maguire / CDR Emergency Management\", which may be two related companies; kept as its own record.",
+   "status": "JOINED anyway by site/vendors.py (the Contracts page company list); a person should confirm or split it there"
   },
   {
    "a": "robertsfamily",
@@ -92,7 +98,7 @@
   },
   {
    "a": "hallscontracting",
-   "b": "hall-contracting-and-construction",
+   "b": "hall-contracting",
    "a_vendor": null,
    "why": "\"Halls Contracting\" (a campaign filing) may be Hall Contracting & Construction, Inc.; not confirmed, left unmatched."
   },
@@ -110,7 +116,7 @@
   },
   {
    "a": "rjgormanconstruction",
-   "b": "rj-gorman-marine-construction",
+   "b": "rj-gorman-marine",
    "a_vendor": null,
    "why": "\"RJ Gorman Construction\" in one campaign filing could be either RJ Gorman company; left unmatched."
   }
@@ -126,6 +132,64 @@
     "forgotten-coast-living": "Forgotten Coast Living",
     "forgotten-coast-property-management": "Forgotten Coast Property Management"
    }
+  }
+ ],
+ "joined_by_site_vendors_py": [
+  {
+   "company": "mott-macdonald",
+   "joined": [
+    "mottmacdonald",
+    "mottmacdonaldconsultants"
+   ]
+  },
+  {
+   "company": "cdr-maguire",
+   "joined": [
+    "cdrmaguire",
+    "cdrmaguirecdremergencymanagement"
+   ]
+  },
+  {
+   "company": "american-sand",
+   "joined": [
+    "americansandasphaltpaving",
+    "americansandasphaltxcavation"
+   ]
+  },
+  {
+   "company": "imageworks",
+   "joined": [
+    "imageworkscommercialinteriors",
+    "imageworksc317"
+   ]
+  },
+  {
+   "company": "sj-electro",
+   "joined": [
+    "sjelectrosystemsllcdbaprimax",
+    "sjelectrosystemsllcdbaprimex"
+   ]
+  },
+  {
+   "company": "gcuc",
+   "joined": [
+    "gulfcoastutilitycontractors",
+    "gulfcoastutilityconstruction"
+   ]
+  },
+  {
+   "company": "anderson-construction",
+   "joined": [
+    "andersonconstructioncompanyofnorth",
+    "andersonconstruction"
+   ]
+  },
+  {
+   "company": "fpl",
+   "joined": [
+    "floridapowerlight",
+    "fplfloridap"
+   ]
   }
  ],
  "joined_by_hand": [
