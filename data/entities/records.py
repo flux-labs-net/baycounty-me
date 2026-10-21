@@ -70,19 +70,23 @@ def all_records():
     return out
 
 
-def donations():
-    """Business contributions only (individuals are never listed), from officeholders' campaigns and 2026 candidates."""
+ORG_TYPES = ('business', 'pac', 'committee', 'party', 'other')
+
+
+def donations(types=('business',)):
+    """Organization contributions (individuals are never listed), from officeholders' campaigns and 2026 candidates.
+    Default: businesses only. Bank interest on a campaign account is not a contribution and is skipped."""
     out = []
     c = _j('campaign', 'campaign.json')
     for ci, cd in enumerate(c['candidates'] if c else []):
         for i, x in enumerate(cd.get('contributors') or []):
-            if x.get('type') == 'business':
-                out.append({'src': 'officeholders', 'cand_idx': ci, 'idx': i, 'name': x['name'], 'amount': x.get('amount'), 'date': x.get('date'), 'kind': x.get('kind'),
+            if x.get('type') in types and (x.get('kind') or x.get('item')) != 'interest':
+                out.append({'src': 'officeholders', 'cand_idx': ci, 'idx': i, 'name': x['name'], 'amount': x.get('amount'), 'date': x.get('date'), 'kind': x.get('kind') or x.get('item'),
                             'candidate': cd['official'], 'office': cd.get('office'), 'gov': cd.get('gov'), 'election': cd.get('election'), 'report_url': cd.get('report_url')})
     f = _j('elections', 'finance_2026.json')
     for ci, cd in enumerate(f['candidates'] if f else []):
         for i, x in enumerate(cd.get('contributors') or []):
-            if x.get('type') == 'business':
+            if x.get('type') in types and x.get('kind') != 'interest':
                 out.append({'src': 'candidates_2026', 'cand_idx': ci, 'idx': i, 'name': x['name'], 'amount': x.get('amount'), 'date': x.get('date'), 'kind': x.get('kind'),
                             'candidate': cd['name'], 'office': cd.get('office'), 'gov': None, 'election': cd.get('election'), 'report_url': cd.get('report_url')})
     return out

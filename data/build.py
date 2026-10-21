@@ -208,3 +208,4 @@ print(len(out['payments']), Counter((p['cra'], p['status'], p['count']) for p in
 # shared ids (data/entities): vendors.json, vendor_review.json, people.json, joins; they read merged.json, so run them last
 import subprocess, sys
 subprocess.run([sys.executable, os.path.join('entities', 'build_entities.py')], check=True)
+subprocess.run([sys.executable, os.path.join('campaign', 'build_vendor_matches.py')], check=True)

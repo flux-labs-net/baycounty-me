@@ -93,6 +93,9 @@ KEEP_APART = [
     ('publiceyesoar', 'publiceyesoarfestival', 'A company and its festival; may be separate accounts.'),
     ('cdrmaguirecdremergencymanagement', 'cdrmaguire', 'One change order names "CDR Maguire / CDR Emergency Management", which may be two related companies; kept as its own record.'),
     ('robertsfamily', 'robertsroberts', '"Roberts Family, LLC" (a 2026 campaign contributor) is not Roberts and Roberts, Inc.'),
+    ('hallscontracting', 'hallcontractingconstruction', '"Halls Contracting" (a campaign filing) may be Hall Contracting & Construction, Inc.; not confirmed, left unmatched.'),
+    ('escs', 'ecsc', '"ESCS LLC" (a campaign filing) may be a typo for ECSC, LLC; not confirmed, left unmatched.'),
+    ('emeraldcoastcivilconstructi', 'ecsc', '"Emerald Coast Civil Constructi[on]" (a campaign filing) is not the same name as Emerald Coast Site Construction; left unmatched.'),
     ('rjgormanconstruction', 'rjgormanmarineconstruction', '"RJ Gorman Construction" in one campaign filing could be either RJ Gorman company; left unmatched.'),
 ]
 # display names to use instead of the most common spelling

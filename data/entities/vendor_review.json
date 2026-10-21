@@ -91,6 +91,24 @@
    "why": "\"Roberts Family, LLC\" (a 2026 campaign contributor) is not Roberts and Roberts, Inc."
   },
   {
+   "a": "hallscontracting",
+   "b": "hall-contracting-and-construction",
+   "a_vendor": null,
+   "why": "\"Halls Contracting\" (a campaign filing) may be Hall Contracting & Construction, Inc.; not confirmed, left unmatched."
+  },
+  {
+   "a": "escs",
+   "b": "ecsc",
+   "a_vendor": null,
+   "why": "\"ESCS LLC\" (a campaign filing) may be a typo for ECSC, LLC; not confirmed, left unmatched."
+  },
+  {
+   "a": "emeraldcoastcivilconstructi",
+   "b": "ecsc",
+   "a_vendor": null,
+   "why": "\"Emerald Coast Civil Constructi[on]\" (a campaign filing) is not the same name as Emerald Coast Site Construction; left unmatched."
+  },
+  {
    "a": "rjgormanconstruction",
    "b": "rj-gorman-marine-construction",
    "a_vendor": null,

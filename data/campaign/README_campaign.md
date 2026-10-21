@@ -5,7 +5,7 @@ As of 2026-10-21. This folder covers who gave money to the most recent campaign 
 ## Files
 
 - `campaign.json`: one record per officeholder. Each record has totals from the Supervisor of Elections (SOE) summary, a count and total for contributions from individuals, contributions from organizations listed item by item, and links to the source report and the itemized CSV export.
-- `vendor_matches.json`: organization contributors whose names match vendors in `../contracts/contracts.json`. There is one row per contributor, candidate and contracting government.
+- `vendor_matches.json`: business contributors (to current officeholders and to 2026 candidates) that are also paid by a local government: contracts, change orders, emergency purchases, check registers, tourism agency payments and the CRA ledger. One row per vendor, candidate and paying government, with `vendor_id` from `../entities/vendors.json`. Built by `build_vendor_matches.py` (run from `data/build.py`); do not edit it by hand.
 
 ## Coverage
 
@@ -40,23 +40,17 @@ Not covered:
    - "Friends of ..." accounts were marked as candidate committees.
    - Realtors committees were marked as PACs.
 5. Privacy: individual people are never named. Each candidate has only `from_individuals` (count and total). Organizations are listed by name, with city as filed. Street addresses and occupations are not stored. The candidate's own money appears as one aggregate line.
-6. Vendor matching: names were normalized to lowercase, with punctuation and "&"/"and" removed and suffixes such as Inc/LLC/Co/Corp/PA dropped. They were compared with vendors in `contracts`, `change_orders`, `emergency_purchases` and the check-register `top_vendors` lists, and every candidate pair was reviewed by hand.
-   - `exact`: the normalized names are identical.
+6. Vendor matching (`build_vendor_matches.py`): every business contributor and every payee on the site is resolved to a vendor id in `../entities/vendors.json`. Names match after lowercasing and removing punctuation, "&"/"and" and legal suffixes such as Inc/LLC/Co/Corp/PA, plus hand-checked joins of truncated or misspelled names (each join's evidence is in `vendors.json`; look-alikes deliberately kept apart are in `vendor_review.json`).
+   - `exact`: the filed name matches the vendor's name once punctuation and suffixes are removed.
    - `likely`: the filing truncates, abbreviates or misspells an otherwise identical name, for example "American Sand and Asphalt Pavi", "Marshall Bothers", "Mr Fence", "Southeastern Outdoor Mgmt" or "Dewberry".
-   - Weak or fuzzy similarities were left out.
+   - Nothing is fuzzy-matched.
 
 ## Results
 
 - 633 itemized organization/self lines across 48 campaigns. Individual contributions are aggregated only.
-- Vendor matches:
-  - 37 contributor–candidate pairs (29 exact, 8 likely), involving 19 distinct vendor organizations.
-  - These expand to 92 rows, one per contracting government.
-  - In 21 of the pairs, the contracting government is the same body the official serves on.
-- The rows involve 11 officials:
-  - County commissioners: Raffield, Crosby, Pease.
-  - City officials: Branch, Hughes, E. Register, Warrick, Griggs.
-  - Others: Ford, Kinsaul, Chester.
-- Most matched vendors are road, utility, construction and engineering firms, for example Roberts and Roberts, Gulf Coast Utility Contractors, Marshall Brothers, C.W. Roberts, ECSC, Dewberry and Panhandle Engineering.
+- Vendor matches (rebuilt 2026-10-21): 64 vendor–candidate pairs (55 exact, 9 likely) involving 27 vendors, expanding to 153 rows (one per paying government). 45 pairs are gifts to current officeholders and 19 are gifts to 2026 candidates.
+- In 31 pairs, the paying government is the one the official serves on (or the candidate is running for).
+- Most matched vendors are road, utility, construction and engineering firms. Tourism agency payees (for example Disposal Services, PG Environmental, Bay Point Billfish) and CRA grant recipients (Charlie Coram's Place) are now included too.
 
 ## Gaps and caveats
 

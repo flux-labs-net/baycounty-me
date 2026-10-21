@@ -105,6 +105,8 @@ def campaign_page():
     # pairs: one per contributor+candidate (rows repeat per contracting government)
     pairs = defaultdict(lambda: {'govs': [], 'contracts': [], 'urls': []})
     for m in vm['matches']:
+        if not (m.get('gift_source') or 'current').startswith('current'):
+            continue  # this page covers current officeholders; 2026 candidates' matches are on the vendor pages
         k = (m['contributor'], m['candidate'])
         p = pairs[k]
         p.update({k2: m.get(k2) for k2 in ('contributor', 'candidate', 'office', 'election', 'contribution_amount', 'contribution_dates', 'match_confidence', 'campaign_report_url', 'vendor_entity', 'refunded_by_campaign')})
