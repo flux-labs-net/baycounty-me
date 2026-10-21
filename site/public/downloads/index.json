@@ -1913,6 +1913,120 @@
    "api": "/api/v1/datasets/bonds"
   },
   {
+   "id": "budget-per-resident",
+   "title": "Budget cost per resident, by service",
+   "description": "FY2026 General Fund budget per resident for police, fire, streets, parks, libraries, planning and administration, with the city median. Departments are grouped by name; the departments_included column shows what was added together. Schools are not included.",
+   "rows": 64,
+   "columns": [
+    {
+     "name": "government",
+     "type": "string",
+     "values": [
+      "Bay County Board of County Commissioners",
+      "City of Callaway",
+      "City of Lynn Haven",
+      "City of Mexico Beach",
+      "City of Panama City",
+      "City of Panama City Beach",
+      "City of Parker",
+      "City of Springfield"
+     ]
+    },
+    {
+     "name": "kind",
+     "type": "string",
+     "values": [
+      "city",
+      "county"
+     ]
+    },
+    {
+     "name": "fiscal_year",
+     "type": "string",
+     "values": [
+      "FY2026 (Oct 1, 2025 - Sep 30, 2026)"
+     ]
+    },
+    {
+     "name": "service_id",
+     "type": "string",
+     "values": [
+      "admin",
+      "dev",
+      "fire",
+      "library",
+      "parks",
+      "police",
+      "streets",
+      "total"
+     ]
+    },
+    {
+     "name": "service",
+     "type": "string",
+     "values": [
+      "Administration & support",
+      "Everyday General Fund",
+      "Fire",
+      "Libraries",
+      "Parks & recreation",
+      "Planning, building & code",
+      "Police / law enforcement",
+      "Streets & public works"
+     ]
+    },
+    {
+     "name": "general_fund_amount",
+     "type": "number"
+    },
+    {
+     "name": "residents",
+     "type": "number"
+    },
+    {
+     "name": "per_resident",
+     "type": "number"
+    },
+    {
+     "name": "city_median_per_resident",
+     "type": "number"
+    },
+    {
+     "name": "vs_city_median_pct",
+     "type": "number"
+    },
+    {
+     "name": "in_city_median",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "departments_included",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://cityoflynnhaven.com/DocumentCenter/View/4411",
+      "https://cityofparker.com/wp-content/uploads/filr/6275/Agenda-Budget-Meeting-091725.pdf",
+      "https://publicnoticesbaycountyfl.gov/public-notices",
+      "https://www.baycountyfl.gov/DocumentCenter/View/18382/FY-2026-Final-Budget-Commissioners-Book-09-16-2025",
+      "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_09182025-374?packet=true",
+      "https://www.panamacity.gov/ArchiveCenter/ViewFile/Item/1562",
+      "https://www.pcbfl.gov/Archive.aspx?ADID=151",
+      "https://www.springfieldfl.net/media/10201"
+     ]
+    }
+   ],
+   "json": "/downloads/budget-per-resident.json",
+   "csv": "/downloads/budget-per-resident.csv",
+   "api": "/api/v1/datasets/budget-per-resident"
+  },
+  {
    "id": "budget-detail",
    "title": "Budgets by fund and department",
    "description": "Adopted budgets broken down by fund and general-fund department.",

@@ -132,6 +132,48 @@ def _bench(depts):
     return out
 
 
+def per_resident_rows():
+    """One row per government and service: General Fund budget, residents, cost per resident, city median.
+    Same grouping as the budget explorer's benchmark, so the download matches the page."""
+    from govs import GOVS, profile
+    d = _j('civic', 'budgets_detail.json')
+    if not d:
+        return []
+    meta = {g['key']: g for g in GOVS}
+    gs = []
+    for g in d['governments']:
+        mt = meta.get(g['gov'])
+        if not mt or mt['kind'] == 'schools':
+            continue
+        pop = profile(g['gov']).get('population')
+        if pop:
+            gs.append((g, mt, pop, _bench(g.get('general_fund_departments'))))
+    gs.sort(key=lambda x: [k['key'] for k in GOVS].index(x[0]['gov']))
+
+    def med(a):
+        if len(a) < 3:
+            return None
+        s = sorted(a); n = len(s) // 2
+        return s[n] if len(s) % 2 else (s[n - 1] + s[n]) / 2
+
+    rows = []
+    for sid, label in SERVICES + [('total', 'Everyday General Fund')]:
+        md = med([b[sid]['amount'] / pop for g, mt, pop, b in gs if mt['kind'] == 'city' and sid in b])
+        for g, mt, pop, b in gs:
+            x = b.get(sid)
+            pr = x['amount'] / pop if x else None
+            rows.append({'government': g.get('name'), 'kind': mt['kind'], 'fiscal_year': g.get('fiscal_year'),
+                         'service_id': sid, 'service': label,
+                         'general_fund_amount': x['amount'] if x else None, 'residents': pop,
+                         'per_resident': round(pr, 2) if pr is not None else None,
+                         'city_median_per_resident': round(md, 2) if md is not None else None,
+                         'vs_city_median_pct': round((pr / md - 1) * 100, 1) if pr is not None and md and mt['kind'] == 'city' else None,
+                         'in_city_median': mt['kind'] == 'city' and x is not None,
+                         'departments_included': '; '.join(x['lines']) if x and sid != 'total' else ('All General Fund lines except transfers, reserves, debt and FEMA/debris' if x else 'Not a separate General Fund line'),
+                         'source_url': g.get('source_url')})
+    return rows
+
+
 def budget_page(out_dir):
     from govs import GOVS, profile
     d = _j('civic', 'budgets_detail.json')
@@ -167,7 +209,7 @@ def budget_page(out_dir):
     <p class="bn-sum" id="bnSum"></p>
     <div id="bnBars"></div>
     <details class="tbl-toggle" open><summary>Every service, every government</summary><div class="tablewrap"><table class="tx-table bn-tbl" id="bnTbl"></table></div>
-      <p class="note">▲ more than 25% above the city median · ▼ more than 25% below.</p></details>
+      <p class="note">▲ more than 25% above the city median · ▼ more than 25% below. Download: <a href="/downloads/budget-per-resident.csv">CSV</a> · <a href="/downloads/budget-per-resident.json">JSON</a> · <a href="/open-data">all open data</a></p></details>
     <details class="gaps"><summary>How the services are grouped, and what to watch for</summary><ul>
       <li><b>Departments are grouped by name.</b> Each government names its departments differently, so they're sorted into common services. Hover a bar or read the line under each name to see exactly which departments were added together.</li>
       <li><b>Only the General Fund is counted.</b> Some cities pay for a service partly from other funds (a roads fund, a fire assessment, the CRA), so their General Fund figure can understate the full cost.</li>
