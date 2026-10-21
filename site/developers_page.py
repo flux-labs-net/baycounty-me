@@ -35,6 +35,7 @@ def developers_page(out_dir):
       <tr><th scope="row"><code>GET /api/v1/governments/{{slug}}</code></th><td>One profile, e.g. <a href="/api/v1/governments/lynn-haven">lynn-haven</a></td></tr>
       <tr><th scope="row"><code>GET /api/v1/status</code></th><td>Rows in each dataset, when the database last loaded it, and any load errors</td></tr>
       <tr><th scope="row"><code>GET /api/v1/changes?since=</code></th><td>Records added since a date or time, e.g. <a href="/api/v1/changes?since=2026-10-01&amp;dataset=contracts">new contracts since Oct. 1</a>. Add <code>dataset=</code> to pick datasets</td></tr>
+      <tr><th scope="row"><code>GET /api/v1/meetings.ics?gov=</code></th><td>Calendar feed of upcoming meetings for one government, e.g. <a href="/api/v1/meetings.ics?gov=lh">Lynn Haven</a>. Keys: county, schools, pc, pcb, lh, cw, sp, parker, mb; a board such as <code>lh-cra</code> works too, and commas combine them. Paste the link into Google Calendar, Outlook or Apple Calendar ("subscribe by URL"). Every board at once: <a href="/meetings.ics">/meetings.ics</a></td></tr>
       <tr><th scope="row"><code>GET /api/v1/search?q=</code></th><td>Search every page on the site, e.g. <a href="/api/v1/search?q=martin%20theatre">martin theatre</a></td></tr>
       <tr><th scope="row"><code>GET /downloads/{{id}}.json</code></th><td>The whole dataset as one file, for bulk use</td></tr>
     </tbody></table></div></section>
