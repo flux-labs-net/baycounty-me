@@ -95,6 +95,14 @@
   [
    "Export PDF</button>",
    "Exportar PDF</button>"
+  ],
+  [
+   "<h3>Public money near you</h3>",
+   "<h3>Dinero público cerca de usted</h3>"
+  ],
+  [
+   "<h3>Your government's records</h3>",
+   "<h3>Los registros de su gobierno</h3>"
   ]
  ],
  "js": [
@@ -239,8 +247,8 @@
    "d.toLocaleDateString('es-US', {month: 'short', year: 'numeric'})"
   ],
   [
-   "<a href=\"/public-money/cra-spending\">See what it pays for →</a>",
-   "<a href=\"/public-money/cra-spending\">Vea lo que paga →</a>"
+   "\">See what it pays for →</a>",
+   "\">Vea lo que paga (en inglés) →</a>"
   ],
   [
    "<a href=\"/public-money/amendment-3\">What Amendment 3 does →</a>",
@@ -407,20 +415,8 @@
    "` y ${g.ch.length - 4} más`"
   ],
   [
-   "['County Commission', r(comm)]",
-   "['Comisión del Condado', r(comm)]"
-  ],
-  [
-   "['Florida Senate', r(senate)]",
-   "['Senado de Florida', r(senate)]"
-  ],
-  [
    ".toFixed(1) + ' mi away' : ",
    ".toFixed(1) + ' mi de distancia' : "
-  ],
-  [
-   "['Florida House', r(house)]",
-   "['Cámara de Representantes de Florida', r(house)]"
   ],
   [
    "'Other charge (' + c + ')'",
@@ -439,20 +435,12 @@
    "['Zona de inundación', floodTxt]"
   ],
   [
-   "['School Board', r(sb)]",
-   "['Junta Escolar', r(sb)]"
-  ],
-  [
    "', effective ' + fdate(",
    "', vigente desde el ' + fdate("
   ],
   [
    "<small> / year</small>",
    "<small> / año</small>"
-  ],
-  [
-   "['U.S. House', r(ush)]",
-   "['Cámara de Representantes de EE. UU.', r(ush)]"
   ],
   [
    "esc(p.n || 'Project')",
@@ -529,6 +517,67 @@
   [
    "· Loading…`",
    "· Cargando…`"
+  ],
+  [
+   "['County Commission', repLine(comm, 'county')]",
+   "['Comisión del Condado', repLine(comm, 'county')]"
+  ],
+  [
+   "['School Board', repLine(sb, 'schools')]",
+   "['Junta Escolar', repLine(sb, 'schools')]"
+  ],
+  [
+   "['Florida House', repLine(house)]",
+   "['Cámara de Representantes de Florida', repLine(house)]"
+  ],
+  [
+   "['Florida Senate', repLine(senate)]",
+   "['Senado de Florida', repLine(senate)]"
+  ],
+  [
+   "['U.S. House', repLine(ush)]",
+   "['Cámara de Representantes de EE. UU.', repLine(ush)]"
   ]
- ]
+ ],
+ "txt": {
+  "website": "sitio web",
+  "tally": "{y} a favor · {n} en contra en votaciones sobre dinero registradas",
+  "campaign": "Dinero de campaña (en inglés) →",
+  "ballotH": "Boleta de 2026",
+  "ballot": "Vea las contiendas de 2026 de su zona (en inglés) →",
+  "whatif": "Pruebe otras cifras en la calculadora (en inglés) →",
+  "whatifA3": "Pruebe sus propias cifras (en inglés) →",
+  "hsH": "Sin exención de homestead",
+  "hs": "Esta vivienda no tiene exención de homestead (vivienda principal) en el registro de impuestos de 2026. Es lo normal en una vivienda de alquiler o una segunda casa. Si usted es el dueño y era su residencia permanente el 1 de enero, puede solicitarla ante el {pa}. Las solicitudes vencen el 1 de marzo para los impuestos de ese año.",
+  "pa": "Tasador de Propiedades del Condado de Bay (Property Appraiser)",
+  "exLink": "Sobre las exenciones (en inglés) →",
+  "nearCraH": "Gastos de la CRA a menos de media milla",
+  "nearStH": "Proyectos del impuesto sobre las ventas a menos de una milla",
+  "nearNone": "No hay ninguno registrado cerca.",
+  "craTotal": "{n} registros · {amt} gastados o comprometidos",
+  "stTotal": "{n} proyectos",
+  "more": "y {n} más",
+  "source": "Fuente",
+  "nearNote": "Las distancias se miden desde el punto de la dirección. No se muestran los registros de la CRA ubicados solo en algún punto del distrito ni las filas que no se cuentan en los totales de la CRA; el total en dólares suma el dinero gastado y comprometido.",
+  "seeCra": "Mapa y registro de la CRA (en inglés) →",
+  "seeSt": "Mapa de proyectos del impuesto sobre las ventas (en inglés) →",
+  "fail": "No se pudo cargar en este momento.",
+  "st_completed": "Terminado",
+  "st_in_progress": "En curso",
+  "st_not_started": "Sin empezar",
+  "st_unknown": "Estado desconocido",
+  "cs_Spent": "Gastado",
+  "cs_Committed": "Comprometido",
+  "cs_Budgeted": "Presupuestado",
+  "cs_Proposed": "Propuesto",
+  "l_page": "Resumen",
+  "l_contracts": "Contratos",
+  "l_meetings": "Reuniones",
+  "l_budget": "Presupuesto",
+  "l_alerts": "Alertas",
+  "l_records": "Solicitar un registro",
+  "l_michael": "Proyectos del huracán Michael",
+  "govNote": "Cada enlace abre la página (en inglés) filtrada para ese gobierno.",
+  "barLabel": "Reparto aproximado del impuesto a la propiedad: {parts}"
+ }
 }

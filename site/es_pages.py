@@ -88,15 +88,6 @@ EXTRA_JS = [
      "No mostramos de qué tipo son las otras exenciones, para proteger la privacidad de los dueños. Cada dueño puede ver las suyas en el <a href=\"${PA_URL}\" target=\"_blank\" rel=\"noopener\">sitio del Tasador de Propiedades (Property Appraiser)</a>."),
     ("' <span class=\"muted small\">(includes homestead)</span>'", "' <span class=\"muted small\">(incluye homestead)</span>'"),
 ]
-EX_ES = {
-    'Homestead': 'Exención de vivienda principal (homestead)', 'Additional homestead': 'Exención adicional de vivienda principal',
-    'Disabled veteran, total and permanent': 'Veterano con discapacidad total y permanente', 'Disabled veteran, $5,000': 'Veterano con discapacidad, $5,000',
-    'Combat-disabled veteran discount, 65+': 'Descuento para veteranos discapacitados en combate, 65+', 'Deployed service member': 'Militar desplegado',
-    'Disabled veteran in a wheelchair': 'Veterano discapacitado en silla de ruedas', 'Disabled first responder': 'Socorrista discapacitado',
-    'Totally and permanently disabled person': 'Persona con discapacidad total y permanente', 'Senior, county': 'Persona mayor, condado',
-    'Long-term senior, county': 'Persona mayor de larga residencia, condado', 'Widow': 'Viuda', 'Widower': 'Viudo',
-    'Disabled person, $5,000': 'Persona con discapacidad, $5,000', 'Blind person': 'Persona ciega', 'Granny flat': 'Vivienda para padres o abuelos',
-}
 
 
 def es_addr_page(out_dir):
@@ -104,9 +95,15 @@ def es_addr_page(out_dir):
     page = addr_page(out_dir)  # writes the English assets/address.js
     page, miss_h = apply_pairs(page, _pairs('html'))
     js = open(os.path.join(out_dir, 'assets', 'address.js')).read()
-    pairs = [x for x in _pairs('js') if x[0] != '(${usd(t.school)} for school taxes)']
+    from addr_page import ADDR_TXT
+    es_txt = json.load(open(os.path.join(I18N, 'es_address.json')))['txt']
+    en_txt = json.dumps(ADDR_TXT, ensure_ascii=False, separators=(',', ':'))
+    if en_txt not in js or set(es_txt) != set(ADDR_TXT):
+        print('es address: UI text block out of sync with addr_page.ADDR_TXT', sorted(set(ADDR_TXT) ^ set(es_txt)))
+    js = js.replace(en_txt, json.dumps({**ADDR_TXT, **es_txt}, ensure_ascii=False, separators=(',', ':')))
+    pairs =[x for x in _pairs('js') if x[0] != '(${usd(t.school)} for school taxes)']
     js, miss_j = apply_pairs(js, pairs + EXTRA_JS)
-    for a, b in {**NAV_ES, **EX_ES}.items():
+    for a, b in NAV_ES.items():
         js = js.replace(json.dumps(a, ensure_ascii=False), json.dumps(b, ensure_ascii=False))
     # in-site links from the script point at English pages; keep them, but send glossary/records to Spanish
     js = js.replace("'/glossary#", "'/es/glosario#").replace('"/glossary#', '"/es/glosario#')
