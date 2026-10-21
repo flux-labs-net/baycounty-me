@@ -1,0 +1,2687 @@
+{
+ "name": "BayCounty.me open data",
+ "updated": "2026-10-21",
+ "license": "Public records; free to reuse with credit to BayCounty.me",
+ "datasets": [
+  {
+   "id": "government-profiles",
+   "title": "Government profiles",
+   "description": "One row per government: population, budget, tax rate, debt, audit findings, votes, staff, utility bill and Hurricane Michael money.",
+   "rows": 9,
+   "columns": [
+    {
+     "name": "government",
+     "type": "string"
+    },
+    {
+     "name": "kind",
+     "type": "string",
+     "values": [
+      "city",
+      "county",
+      "schools"
+     ]
+    },
+    {
+     "name": "population_2025",
+     "type": "number"
+    },
+    {
+     "name": "budget_total",
+     "type": "number"
+    },
+    {
+     "name": "general_fund",
+     "type": "number"
+    },
+    {
+     "name": "budget_status",
+     "type": "string"
+    },
+    {
+     "name": "millage",
+     "type": "number"
+    },
+    {
+     "name": "property_tax_levy",
+     "type": "number"
+    },
+    {
+     "name": "debt_total",
+     "type": "number"
+    },
+    {
+     "name": "debt_year",
+     "type": "string",
+     "values": [
+      "FY2024 (year ended 2024-09-30) - FY2025 audit not yet filed with Auditor General",
+      "FY2025 (year ended 2025-06-30)",
+      "FY2025 (year ended 2025-09-30)"
+     ]
+    },
+    {
+     "name": "audit_year",
+     "type": "string",
+     "values": [
+      "FY2024",
+      "FY2025"
+     ]
+    },
+    {
+     "name": "audit_findings",
+     "type": "number"
+    },
+    {
+     "name": "repeat_findings",
+     "type": "number"
+    },
+    {
+     "name": "votes_recorded",
+     "type": "number"
+    },
+    {
+     "name": "split_votes",
+     "type": "number"
+    },
+    {
+     "name": "employees_fte",
+     "type": "number"
+    },
+    {
+     "name": "typical_utility_bill",
+     "type": "number"
+    },
+    {
+     "name": "fema_michael_obligated",
+     "type": "number"
+    },
+    {
+     "name": "page",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/government-profiles.json",
+   "csv": "/downloads/government-profiles.csv",
+   "api": "/api/v1/datasets/government-profiles"
+  },
+  {
+   "id": "votes",
+   "title": "Recorded votes",
+   "description": "Money votes by the County Commission, School Board, city commissions and CRA boards, with how each member voted.",
+   "rows": 576,
+   "columns": [
+    {
+     "name": "date",
+     "type": "string"
+    },
+    {
+     "name": "government",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "schools",
+      "sp"
+     ]
+    },
+    {
+     "name": "board",
+     "type": "string",
+     "values": [
+      "Bay County Board of County Commissioners",
+      "Bay District School Board",
+      "Callaway City Commission",
+      "Callaway Community Redevelopment Agency Board",
+      "Lynn Haven City Commission",
+      "Lynn Haven Community Redevelopment Agency Board (City Commission sitting as CRA)",
+      "Mexico Beach City Council",
+      "Panama City Beach City Council (also sits as Front Beach Road CRA)",
+      "Panama City Commission",
+      "Panama City Community Redevelopment Agency Board (City Commission sitting as CRA)",
+      "Parker City Council",
+      "Springfield City Commission"
+     ]
+    },
+    {
+     "name": "category",
+     "type": "string",
+     "values": [
+      "budget",
+      "contract",
+      "cra",
+      "debt",
+      "land",
+      "millage",
+      "other"
+     ]
+    },
+    {
+     "name": "headline",
+     "type": "string"
+    },
+    {
+     "name": "summary",
+     "type": "string"
+    },
+    {
+     "name": "amount",
+     "type": "number"
+    },
+    {
+     "name": "outcome",
+     "type": "string",
+     "values": [
+      "adopted (per news and later final-hearing packet)",
+      "adopted (per news)",
+      "failed",
+      "passed",
+      "passed (roll call; tally not reported)",
+      "scheduled; outcome not yet published"
+     ]
+    },
+    {
+     "name": "tally",
+     "type": "string",
+     "values": [
+      "1-4",
+      "2-2",
+      "2-3",
+      "3-0",
+      "3-1",
+      "3-2",
+      "3-2 (failed)",
+      "4-0",
+      "4-0 (minutes: 'carried unanimously')",
+      "4-0 (unanimous)",
+      "4-1",
+      "5-0",
+      "5-0 (minutes: 'carried unanimously')",
+      "not found",
+      "unanimous",
+      "unanimous (per news; names not listed)"
+     ]
+    },
+    {
+     "name": "split",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "voted_yes",
+     "type": "string"
+    },
+    {
+     "name": "voted_no",
+     "type": "string"
+    },
+    {
+     "name": "absent_or_abstained",
+     "type": "string",
+     "values": [
+      "Ann Leonard",
+      "Brian Grainger",
+      "Chris Moore",
+      "Clair Pease",
+      "Dave Lowery",
+      "Doug Crosby",
+      "Erik Fosshage",
+      "Ethan Register",
+      "Jackie Kennington",
+      "Janice Lucas",
+      "Jenna Haligas",
+      "Jerry Register",
+      "Jesse Nelson",
+      "Jesse Nelson; Judy Tinder",
+      "Josh Street",
+      "Josh Street; Brian Grainger",
+      "Josh Street; Janice Lucas",
+      "Judy Vandergrift",
+      "Katy Bodiford",
+      "Mary Coburn",
+      "Michael Jarman",
+      "Paul Casto",
+      "Richard Chval",
+      "Richard Wolff",
+      "Robbie Hughes; Josh Street",
+      "Robert Carroll",
+      "Steve Moss"
+     ]
+    },
+    {
+     "name": "agenda_item",
+     "type": "string"
+    },
+    {
+     "name": "source_title",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/votes.json",
+   "csv": "/downloads/votes.csv",
+   "api": "/api/v1/datasets/votes"
+  },
+  {
+   "id": "member-votes",
+   "title": "Votes by member",
+   "description": "One row per member per vote (long format), for tallying individual records.",
+   "rows": 2868,
+   "columns": [
+    {
+     "name": "date",
+     "type": "string"
+    },
+    {
+     "name": "board",
+     "type": "string",
+     "values": [
+      "Bay County Board of County Commissioners",
+      "Bay District School Board",
+      "Callaway City Commission",
+      "Callaway Community Redevelopment Agency Board",
+      "Lynn Haven City Commission",
+      "Lynn Haven Community Redevelopment Agency Board (City Commission sitting as CRA)",
+      "Mexico Beach City Council",
+      "Panama City Beach City Council (also sits as Front Beach Road CRA)",
+      "Panama City Commission",
+      "Panama City Community Redevelopment Agency Board (City Commission sitting as CRA)",
+      "Parker City Council",
+      "Springfield City Commission"
+     ]
+    },
+    {
+     "name": "member",
+     "type": "string"
+    },
+    {
+     "name": "vote",
+     "type": "string",
+     "values": [
+      "absent",
+      "abstain",
+      "no",
+      "unknown",
+      "yes"
+     ]
+    },
+    {
+     "name": "headline",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/member-votes.json",
+   "csv": "/downloads/member-votes.csv",
+   "api": "/api/v1/datasets/member-votes"
+  },
+  {
+   "id": "contracts",
+   "title": "Contracts",
+   "description": "Major contracts approved since October 2022: vendor, amount, purpose, how awarded.",
+   "rows": 322,
+   "columns": [
+    {
+     "name": "government",
+     "type": "string",
+     "values": [
+      "Bay County BOCC",
+      "City of Callaway",
+      "City of Lynn Haven",
+      "City of Mexico Beach",
+      "City of Panama City",
+      "City of Panama City Beach",
+      "City of Parker"
+     ]
+    },
+    {
+     "name": "vendor",
+     "type": "string"
+    },
+    {
+     "name": "amount",
+     "type": "number"
+    },
+    {
+     "name": "purpose",
+     "type": "string"
+    },
+    {
+     "name": "date",
+     "type": "string"
+    },
+    {
+     "name": "method",
+     "type": "string"
+    },
+    {
+     "name": "source_title",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "notes",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/contracts.json",
+   "csv": "/downloads/contracts.csv",
+   "api": "/api/v1/datasets/contracts"
+  },
+  {
+   "id": "change-orders",
+   "title": "Change orders",
+   "description": "Contract change orders with original and new totals.",
+   "rows": 51,
+   "columns": [
+    {
+     "name": "government",
+     "type": "string",
+     "values": [
+      "Bay County BOCC",
+      "City of Lynn Haven",
+      "City of Mexico Beach",
+      "City of Panama City",
+      "City of Panama City Beach"
+     ]
+    },
+    {
+     "name": "vendor",
+     "type": "string"
+    },
+    {
+     "name": "project",
+     "type": "string"
+    },
+    {
+     "name": "original_amount",
+     "type": "number"
+    },
+    {
+     "name": "change_amount",
+     "type": "number"
+    },
+    {
+     "name": "new_total",
+     "type": "number"
+    },
+    {
+     "name": "pct_of_original",
+     "type": "number"
+    },
+    {
+     "name": "reason",
+     "type": "string"
+    },
+    {
+     "name": "date",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/change-orders.json",
+   "csv": "/downloads/change-orders.csv",
+   "api": "/api/v1/datasets/change-orders"
+  },
+  {
+   "id": "emergency-purchases",
+   "title": "Emergency purchases",
+   "description": "Purchases made under emergency rules without normal bidding.",
+   "rows": 12,
+   "columns": [
+    {
+     "name": "government",
+     "type": "string",
+     "values": [
+      "Bay County BOCC",
+      "City of Lynn Haven",
+      "City of Mexico Beach",
+      "City of Panama City",
+      "City of Panama City Beach"
+     ]
+    },
+    {
+     "name": "vendor",
+     "type": "string",
+     "values": [
+      "Graybar Electric Company, Inc. (Schneider Electric)",
+      "Gulf Coast Utility Contractors (GCUC) and STAline Waterworks, Inc.",
+      "Marshall Brothers",
+      "Marshall Brothers Construction",
+      "Marshall Brothers Construction & Engineering",
+      "Not named (John Deere dealer under Sourcewell contract 011723-JDC)",
+      "Not named in agenda title",
+      "Not named in minutes",
+      "Roberts and Roberts, Inc.",
+      "Standby Systems Services",
+      "Williams Communications, Inc."
+     ]
+    },
+    {
+     "name": "amount",
+     "type": "number"
+    },
+    {
+     "name": "purpose",
+     "type": "string"
+    },
+    {
+     "name": "date",
+     "type": "string"
+    },
+    {
+     "name": "basis",
+     "type": "string",
+     "values": [
+      "Board asked to ratify the contract for emergency repairs already constructed; materials bought directly by the county",
+      "Change order approved and ratified",
+      "City Manager emergency purchase, ratified by Council; materials via OMNIA Partners cooperative contract EV2370",
+      "Commission approval of emergency repair",
+      "Commission approval of emergency repairs",
+      "Council approval of emergency purchase",
+      "Emergency purchase, ratified after the fact; bought under Sourcewell cooperative contract",
+      "Emergency repair; Board asked to ratify the purchase order",
+      "Ratification of emergency procurement and exigent circumstances",
+      "Ratification of emergency repairs"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/emergency-purchases.json",
+   "csv": "/downloads/emergency-purchases.csv",
+   "api": "/api/v1/datasets/emergency-purchases"
+  },
+  {
+   "id": "cra-payments",
+   "title": "CRA spending",
+   "description": "What Bay County's Community Redevelopment Agencies paid for, with locations.",
+   "rows": 168,
+   "columns": [
+    {
+     "name": "cra",
+     "type": "string",
+     "values": [
+      "Callaway CRA",
+      "Lynn Haven CRA",
+      "Panama City Beach CRA",
+      "Panama City CRA",
+      "Parker CRA",
+      "Springfield CRA"
+     ]
+    },
+    {
+     "name": "city",
+     "type": "string",
+     "values": [
+      "Callaway",
+      "Lynn Haven",
+      "Panama City",
+      "Panama City Beach",
+      "Parker",
+      "Springfield"
+     ]
+    },
+    {
+     "name": "payee",
+     "type": "string"
+    },
+    {
+     "name": "amount",
+     "type": "number"
+    },
+    {
+     "name": "date_or_fy",
+     "type": "string"
+    },
+    {
+     "name": "status",
+     "type": "string",
+     "values": [
+      "Budgeted",
+      "Committed",
+      "Incoming",
+      "Not CRA-funded",
+      "Proposed",
+      "Spent"
+     ]
+    },
+    {
+     "name": "category",
+     "type": "string",
+     "values": [
+      "Administration/staff",
+      "Debt service",
+      "Developer incentive",
+      "Events/marketing",
+      "Grant to business",
+      "Housing",
+      "Infrastructure/streetscape",
+      "Marina/waterfront",
+      "Other",
+      "Parks/public space",
+      "Professional services/consultant",
+      "Property acquisition"
+     ]
+    },
+    {
+     "name": "purpose",
+     "type": "string"
+    },
+    {
+     "name": "location_name",
+     "type": "string"
+    },
+    {
+     "name": "district",
+     "type": "string",
+     "values": [
+      "All",
+      "Callaway Community Redevelopment Area",
+      "Downtown",
+      "Downtown North (Glenwood)",
+      "Front Beach Road CRA",
+      "Lynn Haven Community Redevelopment Area",
+      "Millville",
+      "Parker Community Redevelopment Area",
+      "Pier Park CRA",
+      "Springfield Community Redevelopment Area",
+      "St. Andrews"
+     ]
+    },
+    {
+     "name": "lat",
+     "type": "number"
+    },
+    {
+     "name": "lng",
+     "type": "number"
+    },
+    {
+     "name": "count",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "source_title",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "notes",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/cra-payments.json",
+   "csv": "/downloads/cra-payments.csv",
+   "api": "/api/v1/datasets/cra-payments"
+  },
+  {
+   "id": "property-tax-rates",
+   "title": "Property tax rates",
+   "description": "Millage, rolled-back rate and levy for every taxing authority, by tax year.",
+   "rows": 90,
+   "columns": [
+    {
+     "name": "authority_id",
+     "type": "string",
+     "values": [
+      "bay_county_general",
+      "beach_mosquito",
+      "city_callaway",
+      "city_lynn_haven",
+      "city_mexico_beach",
+      "city_panama_city",
+      "city_parker",
+      "city_springfield",
+      "county_fire_mstu",
+      "county_mosquito_control",
+      "nwfwmd",
+      "pc_downtown_improvement_board",
+      "school_capital_outlay",
+      "school_discretionary",
+      "school_rle"
+     ]
+    },
+    {
+     "name": "authority",
+     "type": "string",
+     "values": [
+      "Bay County Commission",
+      "Beach Mosquito Control District",
+      "City of Callaway",
+      "City of Lynn Haven",
+      "City of Mexico Beach",
+      "City of Panama City",
+      "City of Parker",
+      "City of Springfield",
+      "County fire service (outside cities)",
+      "County mosquito control",
+      "Downtown Improvement Board",
+      "NW Florida Water Management District",
+      "Schools: buildings and buses",
+      "Schools: local operating",
+      "Schools: state-required rate"
+     ]
+    },
+    {
+     "name": "kind",
+     "type": "string",
+     "values": [
+      "city",
+      "county",
+      "countysvc",
+      "other",
+      "school"
+     ]
+    },
+    {
+     "name": "school",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "tax_year",
+     "type": "number"
+    },
+    {
+     "name": "millage",
+     "type": "number"
+    },
+    {
+     "name": "rolled_back_rate",
+     "type": "number"
+    },
+    {
+     "name": "levy",
+     "type": "number"
+    }
+   ],
+   "json": "/downloads/property-tax-rates.json",
+   "csv": "/downloads/property-tax-rates.csv",
+   "api": "/api/v1/datasets/property-tax-rates"
+  },
+  {
+   "id": "debt",
+   "title": "Debt by government",
+   "description": "Total debt from the latest audited financial statements.",
+   "rows": 13,
+   "columns": [
+    {
+     "name": "government",
+     "type": "string"
+    },
+    {
+     "name": "fy",
+     "type": "string",
+     "values": [
+      "FY2024 (year ended 2024-09-30) - FY2025 audit not yet filed with Auditor General",
+      "FY2024 (year ended 2024-09-30) - latest filed",
+      "FY2024 (year ended 2024-09-30) - latest filed with Auditor General",
+      "FY2025 (year ended 2025-06-30)",
+      "FY2025 (year ended 2025-09-30)"
+     ]
+    },
+    {
+     "name": "total_debt",
+     "type": "number"
+    },
+    {
+     "name": "total_debt_note",
+     "type": "string"
+    },
+    {
+     "name": "population_2025_estimate",
+     "type": "number"
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/debt.json",
+   "csv": "/downloads/debt.csv",
+   "api": "/api/v1/datasets/debt"
+  },
+  {
+   "id": "audit-findings",
+   "title": "Audit findings",
+   "description": "Findings from audits filed with the Florida Auditor General, in plain English.",
+   "rows": 106,
+   "columns": [
+    {
+     "name": "government",
+     "type": "string",
+     "values": [
+      "Bay County",
+      "Bay District Schools",
+      "City of Lynn Haven",
+      "City of Mexico Beach",
+      "City of Panama City",
+      "City of Panama City Beach",
+      "City of Parker",
+      "City of Springfield",
+      "Panama City Community Redevelopment Agency"
+     ]
+    },
+    {
+     "name": "fy",
+     "type": "string",
+     "values": [
+      "FY2022",
+      "FY2023",
+      "FY2023 (year ended 2023-06-30) - audited by the Florida Auditor General, Report No. 2024-189",
+      "FY2024",
+      "FY2024 (year ended 2024-06-30)",
+      "FY2025",
+      "FY2025 (year ended 2025-06-30)"
+     ]
+    },
+    {
+     "name": "opinion",
+     "type": "string",
+     "values": [
+      "Qualified on governmental activities, business-type activities and enterprise funds (GASB 75 OPEB not implemented); unmodified on General Fund and Disaster Recovery Fund. Federal compliance: unmodified.",
+      "Qualified on governmental activities, business-type activities, and Water, Sewer and Sanitation Funds (GASB 75 OPEB not implemented); unmodified on General Fund and Disaster Recovery Fund. Federal major program compliance: unmodified.",
+      "Unmodified",
+      "Unmodified (Auditor General); no material weaknesses; federal programs (Child Nutrition Cluster, Education Stabilization Fund) materially complied.",
+      "Unmodified (Carr, Riggs & Ingram, report dated September 25, 2025); federal and state compliance unmodified. Prior-period error corrections: an unrecorded SBITA (liability understated $451,513) and workers' compensation liability overstated $2,894,997; beginning governmental net position restated up $2,970,575.",
+      "Unmodified (financial statements); unmodified on federal major program compliance. Material weaknesses 2025-001 and 2025-002.",
+      "Unmodified; federal and state compliance unmodified.",
+      "Unmodified; federal and state major program compliance unmodified.",
+      "Unmodified; federal and state major program compliance unmodified. One significant deficiency (downgraded from material weakness).",
+      "Unmodified; federal compliance unmodified.",
+      "Unmodified; federal compliance unmodified. Material weaknesses 2023-001 to 2023-005.",
+      "Unmodified; federal compliance unmodified. Material weaknesses 2024-001 to 2024-006 and 2024-011.",
+      "Unmodified; federal major program compliance unmodified.",
+      "Unmodified; federal major program compliance unmodified. Six material weaknesses (2025-001 to 2025-006) and one significant deficiency (2025-007)."
+     ]
+    },
+    {
+     "name": "finding",
+     "type": "string"
+    },
+    {
+     "name": "plain_english",
+     "type": "string"
+    },
+    {
+     "name": "repeat",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "management_response",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://flauditor.gov/pages/county_efile%20rpts/2022%20bay%20county.pdf",
+      "https://flauditor.gov/pages/county_efile%20rpts/2023%20bay%20county.pdf",
+      "https://flauditor.gov/pages/county_efile%20rpts/2024%20bay%20county.pdf",
+      "https://flauditor.gov/pages/dsb_efile%20rpts/2024%20bay%20county%20district%20school%20board.pdf",
+      "https://flauditor.gov/pages/dsb_efile%20rpts/2025%20bay%20county%20district%20school%20board.pdf",
+      "https://flauditor.gov/pages/mun_efile%20rpts/2022%20panama%20city.pdf",
+      "https://flauditor.gov/pages/mun_efile%20rpts/2023%20lynn%20haven.pdf",
+      "https://flauditor.gov/pages/mun_efile%20rpts/2023%20mexico%20beach.pdf",
+      "https://flauditor.gov/pages/mun_efile%20rpts/2023%20panama%20city.pdf",
+      "https://flauditor.gov/pages/mun_efile%20rpts/2023%20parker.pdf",
+      "https://flauditor.gov/pages/mun_efile%20rpts/2023%20springfield.pdf",
+      "https://flauditor.gov/pages/mun_efile%20rpts/2024%20lynn%20haven.pdf",
+      "https://flauditor.gov/pages/mun_efile%20rpts/2024%20mexico%20beach.pdf",
+      "https://flauditor.gov/pages/mun_efile%20rpts/2024%20panama%20city%20beach.pdf",
+      "https://flauditor.gov/pages/mun_efile%20rpts/2024%20panama%20city.pdf",
+      "https://flauditor.gov/pages/mun_efile%20rpts/2024%20parker.pdf",
+      "https://flauditor.gov/pages/mun_efile%20rpts/2024%20springfield.pdf",
+      "https://flauditor.gov/pages/mun_efile%20rpts/2025%20lynn%20haven.pdf",
+      "https://flauditor.gov/pages/mun_efile%20rpts/2025%20mexico%20beach.pdf",
+      "https://flauditor.gov/pages/mun_efile%20rpts/2025%20parker.pdf",
+      "https://flauditor.gov/pages/mun_efile%20rpts/2025%20springfield.pdf",
+      "https://flauditor.gov/pages/pdf_files/2024-189.pdf",
+      "https://flauditor.gov/pages/specialdistricts_efile%20rpts/2022%20panama%20city%20community%20redevelopment%20agency.pdf",
+      "https://flauditor.gov/pages/specialdistricts_efile%20rpts/2023%20panama%20city%20community%20redevelopment%20agency.pdf",
+      "https://flauditor.gov/pages/specialdistricts_efile%20rpts/2024%20panama%20city%20community%20redevelopment%20agency.pdf"
+     ]
+    }
+   ],
+   "json": "/downloads/audit-findings.json",
+   "csv": "/downloads/audit-findings.csv",
+   "api": "/api/v1/datasets/audit-findings"
+  },
+  {
+   "id": "fema-michael-projects",
+   "title": "Hurricane Michael FEMA projects",
+   "description": "Every FEMA Public Assistance project in Bay County for disaster DR-4399.",
+   "rows": 765,
+   "columns": [
+    {
+     "name": "applicant",
+     "type": "string"
+    },
+    {
+     "name": "project",
+     "type": "number"
+    },
+    {
+     "name": "title",
+     "type": "string"
+    },
+    {
+     "name": "category",
+     "type": "string",
+     "values": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "Z"
+     ]
+    },
+    {
+     "name": "federal_share",
+     "type": "number"
+    },
+    {
+     "name": "eligible_amount",
+     "type": "number"
+    },
+    {
+     "name": "first_obligated",
+     "type": "string"
+    },
+    {
+     "name": "last_obligated",
+     "type": "string"
+    },
+    {
+     "name": "status",
+     "type": "string",
+     "values": [
+      "Obligated",
+      "Pending Amendment Processing",
+      "Pending Applicant 406 HMP Completion",
+      "Pending Applicant Project Review",
+      "Pending Award",
+      "Pending Closeout Award",
+      "Pending Closeout Completion",
+      "Pending EHP Closeout Review",
+      "Pending Insurance Closeout Review",
+      "Pending Large Project Review",
+      "Pending PDMG Project Review",
+      "Pending Project Closeout Initial Review",
+      "Pending Recipient Final Review",
+      "Pending Scope and Cost Development",
+      "Project Closed Out"
+     ]
+    },
+    {
+     "name": "size",
+     "type": "string",
+     "values": [
+      "Large",
+      "Small"
+     ]
+    }
+   ],
+   "json": "/downloads/fema-michael-projects.json",
+   "csv": "/downloads/fema-michael-projects.csv",
+   "api": "/api/v1/datasets/fema-michael-projects"
+  },
+  {
+   "id": "sales-tax-projects",
+   "title": "Half-cent sales tax projects",
+   "description": "Every infrastructure sales tax project on the county map, with status and cost.",
+   "rows": 1062,
+   "columns": [
+    {
+     "name": "name",
+     "type": "string"
+    },
+    {
+     "name": "government",
+     "type": "string",
+     "values": [
+      "Bay County",
+      "City of Callaway",
+      "City of Lynn Haven",
+      "City of Mexico Beach",
+      "City of Panama City",
+      "City of Panama City Beach",
+      "City of Parker",
+      "City of Springfield"
+     ]
+    },
+    {
+     "name": "category",
+     "type": "string",
+     "values": [
+      "Bridge Repair",
+      "Capacity Improvement",
+      "Dirt Road Stabilization",
+      "Intersection Improvement",
+      "Local Road Microsurfacing",
+      "Local Road Reconstruction",
+      "Projected Resurfacing and Reconstruction",
+      "Resurfacing",
+      "Road Rehabilitation from Hurricane Michael",
+      "Roadway Safety",
+      "Stormwater Improvement",
+      "Utility  and Road Improvement",
+      "Utility Capacity Improvement",
+      "Utility Improvement"
+     ]
+    },
+    {
+     "name": "status",
+     "type": "string",
+     "values": [
+      "completed",
+      "in_progress",
+      "not_started",
+      "unknown"
+     ]
+    },
+    {
+     "name": "pct_complete",
+     "type": "number"
+    },
+    {
+     "name": "promised_cost",
+     "type": "number"
+    },
+    {
+     "name": "programmed_cost",
+     "type": "number"
+    },
+    {
+     "name": "actual_cost",
+     "type": "string"
+    },
+    {
+     "name": "fiscal_years",
+     "type": "string",
+     "values": [
+      "Completed FY2021",
+      "FY 2018",
+      "FY2016",
+      "FY2017",
+      "FY2017 - FY2021",
+      "FY2017,FY2018,  FY2019, FY2020, FY2021",
+      "FY2018",
+      "FY2018, FY2019",
+      "FY2018; FY2021",
+      "FY2019",
+      "FY2020",
+      "FY2021",
+      "FY2022",
+      "FY2023",
+      "FY2024",
+      "FY2025",
+      "FY2026",
+      "FY2027",
+      "FY2028 and FY2029"
+     ]
+    },
+    {
+     "name": "location",
+     "type": "string"
+    },
+    {
+     "name": "lat",
+     "type": "number"
+    },
+    {
+     "name": "lng",
+     "type": "number"
+    },
+    {
+     "name": "description",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/sales-tax-projects.json",
+   "csv": "/downloads/sales-tax-projects.csv",
+   "api": "/api/v1/datasets/sales-tax-projects"
+  },
+  {
+   "id": "bed-tax-collections",
+   "title": "Tourist tax collections",
+   "description": "Bed tax collected by zone and fiscal year.",
+   "rows": 33,
+   "columns": [
+    {
+     "name": "fy",
+     "type": "number"
+    },
+    {
+     "name": "district",
+     "type": "string",
+     "values": [
+      "Mexico Beach",
+      "Panama City",
+      "Panama City Beach"
+     ]
+    },
+    {
+     "name": "amount",
+     "type": "number"
+    },
+    {
+     "name": "partial",
+     "type": "boolean",
+     "values": [
+      true
+     ]
+    },
+    {
+     "name": "period",
+     "type": "string",
+     "values": [
+      "fiscal year to date through July 2026 (10 months)"
+     ]
+    },
+    {
+     "name": "basis",
+     "type": "string",
+     "values": [
+      "cash collections incl. penalties & interest",
+      "cash collections incl. penalties & interest (Clerk 12-month total)"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://assets.simpleviewinc.com/simpleview/image/upload/v1/clients/panamacitybeach/2020_09_September_PowerPoint_989e6acf-47d8-493c-8358-fe8a2653b40b.pdf",
+      "https://assets.simpleviewinc.com/sv-panamacitybeach/image/upload/v1/clients/panamacitybeach/Sept_2025_TDT_Report_3c0d695b-ccf4-4622-8a19-d72ab372500c.pdf",
+      "https://assets.simpleviewinc.com/sv-panamacitybeach/image/upload/v1/cms_resources/clients/panamacitybeach/2022_09_September_PowerPoint_9b7f7b1d-1f97-4a0d-8fcc-2aa4a4d1183f.pdf",
+      "https://res.cloudinary.com/sv-panamacitybeach/image/upload/v1788380477/July_FY2026_TDT_Report_jel5we.pdf"
+     ]
+    }
+   ],
+   "json": "/downloads/bed-tax-collections.json",
+   "csv": "/downloads/bed-tax-collections.csv",
+   "api": "/api/v1/datasets/bed-tax-collections"
+  },
+  {
+   "id": "fees-assessments",
+   "title": "Fees on tax bills",
+   "description": "Non-ad valorem assessments: fire, stormwater, CRA and other flat fees.",
+   "rows": 18,
+   "columns": [
+    {
+     "name": "government",
+     "type": "string",
+     "values": [
+      "Bay County (Board of County Commissioners)",
+      "Bay County (Board of County Commissioners) - per DOR classification",
+      "City of Callaway / City of Springfield",
+      "City of Lynn Haven",
+      "City of Panama City",
+      "City of Panama City Beach",
+      "City of Springfield",
+      "Independent special district (unidentified, code SB)",
+      "Independent special district (unidentified, code TWIN)",
+      "Independent special districts (unidentified, codes PW, WMH)",
+      "Lake Powell Residential Golf Community Development District (independent special district)"
+     ]
+    },
+    {
+     "name": "area",
+     "type": "string",
+     "values": [
+      "140 parcels",
+      "20 parcels",
+      "City of Lynn Haven",
+      "City of Panama City",
+      "City of Panama City Beach",
+      "City of Springfield",
+      "Countywide developed commercial parcels",
+      "Countywide developed parcels (roll does not identify city vs unincorporated; FAQ does not limit it to unincorporated)",
+      "Front Beach Road Community Redevelopment Area only",
+      "Individual parcels",
+      "PW 30 parcels; WMH 55 parcels",
+      "Specific parcels",
+      "Specific subdivisions (street lighting MSBUs)",
+      "Unincorporated Bay County fire MSTU",
+      "Wild Heron, unincorporated Bay County (about 724 acres)"
+     ]
+    },
+    {
+     "name": "name",
+     "type": "string"
+    },
+    {
+     "name": "category",
+     "type": "string",
+     "values": [
+      "fire",
+      "other",
+      "other (liens, lot clearing etc.)",
+      "road improvement",
+      "special district",
+      "special district (CDD)",
+      "special district / CRA",
+      "special district / community development",
+      "stormwater",
+      "street lighting"
+     ]
+    },
+    {
+     "name": "how_charged",
+     "type": "string"
+    },
+    {
+     "name": "rate",
+     "type": "string",
+     "values": [
+      "$0.49/$1,000 improvement value + $48.30/parcel (noticed maximum)",
+      "$0.78/$1,000 improvement value + $95.66/parcel (noticed maximum)",
+      "$150 homestead unit / $300 non-homestead unit / $24.51 vacant parcel",
+      "$165.68/parcel",
+      "$200.00 per parcel per year",
+      "$38.95 per parcel (Category A) or weighted by building size and value (Category B)",
+      "$40.00 per residential unit per year",
+      "$99.45",
+      "1.3800 mills ($1.38 per $1,000 taxable value)",
+      "ALSL1 $60.00/parcel; BOCA $27.00/parcel",
+      "PW $141.00; WMH $92.00",
+      "about $139 per unit (2021 adoption); current per-unit rate not located",
+      "not located",
+      "varies",
+      "varies by lot/product",
+      "varies by parcel"
+     ]
+    },
+    {
+     "name": "residential_single_family_amount",
+     "type": "string"
+    },
+    {
+     "name": "fiscal_year",
+     "type": "string",
+     "values": [
+      "FY2025-26",
+      "FY2025-26 (2025 roll)",
+      "FY2025-26 (2025 roll); rate in place since 2006 roll",
+      "FY2025-26 (rates held flat from FY2024-25)"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Tax%20Roll%20Data%20Files/NAV/2025/NAV%20D/NAVD132506.TXT",
+      "https://www.baycountyfl.gov/DocumentCenter/View/18735/FY-2026-Final-Budget-Hearing-Presentation-09-16-2025",
+      "https://www.baycountyfl.gov/m/faq?cat=30",
+      "https://www.pcbfl.gov/about-us/fiscal-year-2024-25-special-assessment-info",
+      "https://www.wjhg.com/2025/09/10/updated-fire-service-assessment-passed/"
+     ]
+    }
+   ],
+   "json": "/downloads/fees-assessments.json",
+   "csv": "/downloads/fees-assessments.csv",
+   "api": "/api/v1/datasets/fees-assessments"
+  },
+  {
+   "id": "officials-pay",
+   "title": "Officials and pay",
+   "description": "Salaries of top elected and appointed officials.",
+   "rows": 33,
+   "columns": [
+    {
+     "name": "government",
+     "type": "string",
+     "values": [
+      "Bay County",
+      "Bay District Schools",
+      "City of Callaway",
+      "City of Lynn Haven",
+      "City of Panama City",
+      "City of Panama City Beach",
+      "City of Parker"
+     ]
+    },
+    {
+     "name": "title",
+     "type": "string",
+     "values": [
+      "City Manager",
+      "Clerk of Circuit Court & Comptroller",
+      "County Commissioner",
+      "County Manager",
+      "Mayor and 4 Commissioners (combined regular salaries)",
+      "Mayor and 4 Commissioners (combined)",
+      "Mayor and Commissioners (combined)",
+      "Mayor and Council stipends (combined, all funds)",
+      "Property Appraiser",
+      "School Board Member (each of 5)",
+      "Sheriff",
+      "Superintendent of Schools",
+      "Supervisor of Elections",
+      "Tax Collector"
+     ]
+    },
+    {
+     "name": "name",
+     "type": "string",
+     "values": [
+      "Bill Kinsaul",
+      "Chris Lightfoot",
+      "Clair Pease (D5)",
+      "Dan Sowell",
+      "Daniel Raffield (D1)",
+      "Doug Crosby (D3)",
+      "Doug Moore (D4)",
+      "Drew Whitman",
+      "Ed Cook",
+      "Joel Schubert",
+      "Jonathan Hayes",
+      "Mark McQueen",
+      "Nina Ward",
+      "Robert Carroll (D2)",
+      "Tommy Ford",
+      "William (Chuck) Perdue"
+     ]
+    },
+    {
+     "name": "annual",
+     "type": "number"
+    },
+    {
+     "name": "year",
+     "type": "string",
+     "values": [
+      "2021 (initial base salary in employment agreement, Res. 21-148)",
+      "2023",
+      "2026",
+      "FY2025-26",
+      "FY2025-26 budget",
+      "FY2025-26 draft budget",
+      "FY2026 proposed budget",
+      "FY2026-27",
+      "FY2026-27 budget"
+     ]
+    },
+    {
+     "name": "basis",
+     "type": "string",
+     "values": [
+      "Account 512300 MAYOR/COMM, total for the legislative body",
+      "Appointed 4-1 on March 16, 2026; contract salary not located",
+      "Budgeted regular salary for the single City Manager position (current wage $161,125 + $2,080 increase); plus $6,000 auto and $600 phone allowances",
+      "City Commission cost center 'Regular Salaries & Wages' - covers 5 elected members plus 0.5 executive assistant, so not a per-member figure",
+      "Commission salaries line, total for 5 members",
+      "EDR statutory formula",
+      "Employment agreement; later raises not located",
+      "General Fund $13,200 + Water/Sewer fund lines $4,620 + $8,580",
+      "Promoted March 2026; salary not located",
+      "Requested a minimum of $175,000 when selected Dec 15, 2023; final contract salary not located",
+      "Statutory formula salary (Ch. 145 / s. 1001.47 F.S.) computed by EDR",
+      "Statutory formula salary computed by EDR (Sept 2026)"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://cityoflynnhaven.com/DocumentCenter/View/4411",
+      "https://cityofparker.com/wp-content/uploads/filr/6232/Draft-Budget-FY-25-26.pdf",
+      "https://pcbfl.gov/home/showpublisheddocument/24574/638512745062370000",
+      "https://www.cityofcallaway.com/DocumentCenter/View/5704/Final-Budget-2627",
+      "https://www.edr.state.fl.us/Content/local-government/reports/FY%202025-26%20Salaries.pdf",
+      "https://www.edr.state.fl.us/Content/local-government/reports/finsal26.pdf",
+      "https://www.mypanhandle.com/news/local-news/bay-county/bay-county-welcomes-new-county-manager-bids-farewell-to-former/amp/",
+      "https://www.panamacity.gov/DocumentCenter/View/10236/Tentative-Budget-FY-26---Digital-book",
+      "https://www.wjhg.com/2023/12/16/new-city-manager-panama-city-selected-4-1-vote",
+      "https://www.wjhg.com/2026/03/16/lynn-haven-appoints-new-city-manager"
+     ]
+    }
+   ],
+   "json": "/downloads/officials-pay.json",
+   "csv": "/downloads/officials-pay.csv",
+   "api": "/api/v1/datasets/officials-pay"
+  },
+  {
+   "id": "meetings",
+   "title": "Upcoming meetings",
+   "description": "Scheduled and expected meetings for every board.",
+   "rows": 44,
+   "columns": [
+    {
+     "name": "board",
+     "type": "string",
+     "values": [
+      "county",
+      "county-planning",
+      "cw",
+      "cw-cra",
+      "lh",
+      "lh-cra",
+      "mb",
+      "parker",
+      "pc",
+      "pc-cra",
+      "pcb",
+      "sp"
+     ]
+    },
+    {
+     "name": "title",
+     "type": "string",
+     "values": [
+      "10/13/26 CRA Board Meeting",
+      "10/20/26 Special Executive Session - Case No. 5:26-cv-00032-AW-MJF (Vickie Gainer v. City of Lynn Ha",
+      "BOCC Regular Meeting",
+      "Bay County Board of County Commissioners Meeting",
+      "Budget Hearing",
+      "CRA Board Meeting",
+      "City Commission Meeting",
+      "City Council",
+      "City Council Meeting",
+      "Commission Meeting",
+      "Commission Workshop",
+      "Community Redevelopment Agency Board Meeting for October 13, 2026",
+      "LDC Workshop",
+      "Planning Commission Meeting",
+      "Regular Meeting",
+      "Regular Meeting (expected)",
+      "Virtual CRA Workshop",
+      "Virtual Workshop Meeting of October 20, 2026."
+     ]
+    },
+    {
+     "name": "start",
+     "type": "string"
+    },
+    {
+     "name": "location",
+     "type": "string",
+     "values": [
+      "825 Ohio Avenue, Lynn Haven",
+      "Bay County Government Center - 840 W 11th St. Panama City FL 32401",
+      "Bay County Government Center, 840 W. 11th St., Panama City, FL",
+      "Bay County Government Center, 840 W. 11th St., Panama City, FL 32401",
+      "Bay County Government Center, 840 W. 11th St., Panama City, FL 32401 (workshops are virtual)",
+      "Bay County Govt. Center - 840 W. 11th St Panama City FL 32401",
+      "Callaway Arts & Conference Center - 500 Callaway Park Way Callaway FL 32404",
+      "Callaway Arts & Conference Center, 500 Callaway Pkwy, Callaway, FL 32404",
+      "Callaway Arts & Conference Center, 500 Callaway Pkwy, Callaway, FL 32404 (typical; confirm on agenda)",
+      "City Hall Council Chambers, 17007 Panama City Beach Pkwy, Panama City Beach, FL 32413",
+      "Government Center - 840 W. 11th st. Panama City FL 32401",
+      "Live Stream on City website - https://www.panamacity.gov/369/Live-Stream - Panama City FL 3240",
+      "Parker City Hall, 1001 West Park Street, Parker, FL 32404 (city contact address; confirm venue on agenda)",
+      "Springfield City Hall Commission Room, 408 School Ave., Springfield, FL",
+      "Venue not stated on the council meetings page; City of Mexico Beach offices: 201 Paradise Path, Mexico Beach, FL 32456",
+      "Virtual (live stream on the city website)",
+      "Walter T. Kelley Chambers - 825 Ohio Avenue Lynn Haven FL 32444",
+      "Walter T. Kelley Commission Chambers, 825 Ohio Ave., Lynn Haven, FL 32444"
+     ]
+    },
+    {
+     "name": "agenda_url",
+     "type": "string",
+     "values": [
+      "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1942",
+      "https://cityofparker.com/wp-content/uploads/filr/7047/Agenda-Regular-Council-Meeting-Package.pdf",
+      "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1130,plainText=false)",
+      "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1137,plainText=false)",
+      "https://mexicobeachfl.gov/uploads/2026/09/October-13-2026-City-Council-Meeting-Agenda.pdf",
+      "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=419",
+      "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&event_id=219",
+      "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_09172026-423",
+      "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_10132026-425",
+      "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-912?html=true",
+      "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10202026-915?html=true",
+      "https://www.springfieldfl.net/media/10901"
+     ]
+    },
+    {
+     "name": "packet_url",
+     "type": "string",
+     "values": [
+      "https://baycountyfl.primegov.com/Public/CompiledDocument?meetingTemplateId=1942&compileOutputType=1",
+      "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1131,plainText=false)",
+      "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1138,plainText=false)",
+      "https://mexicobeachfl.gov/uploads/2026/09/October-13-2026-CIty-Council-Meeting-Agenda-Packet.pdf",
+      "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-912?packet=true",
+      "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10202026-915?packet=true"
+     ]
+    },
+    {
+     "name": "minutes_url",
+     "type": "string",
+     "values": [
+      "https://www.springfieldfl.net/media/10906"
+     ]
+    },
+    {
+     "name": "source",
+     "type": "string",
+     "values": [
+      "AgendaCenter:https://www.cityofcallaway.com/AgendaCenter",
+      "AgendaCenter:https://www.panamacity.gov/AgendaCenter",
+      "CivicClerk:https://lynnhavenfl.portal.civicclerk.com",
+      "Granicus:https://pcbgov.granicus.com/ViewPublisherRSS.php?view_id=1&mode=agendas",
+      "MexicoBeach:https://mexicobeachfl.gov/government/council-meetings/",
+      "Parker:https://cityofparker.com/government/agendas-minutes/",
+      "PrimeGov:https://baycountyfl.primegov.com/public/portal",
+      "Springfield:https://www.springfieldfl.net/meetings",
+      "Springfield:https://www.springfieldfl.net/meetings/recent",
+      "calendar:https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=26&feed=calendar",
+      "calendar:https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=38&feed=calendar",
+      "calendar:https://www.cityofcallaway.com/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar",
+      "calendar:https://www.panamacity.gov/common/modules/iCalendar/iCalendar.aspx?catID=22&feed=calendar",
+      "schedule:pattern observed in posted agendas (no published schedule found)",
+      "schedule:published schedule (mexicobeachfl.gov council-meetings page)"
+     ]
+    },
+    {
+     "name": "status",
+     "type": "string",
+     "values": [
+      "calendar",
+      "expected",
+      "posted"
+     ]
+    },
+    {
+     "name": "past",
+     "type": "boolean",
+     "values": [
+      true
+     ]
+    },
+    {
+     "name": "detail_url",
+     "type": "string",
+     "values": [
+      "https://baycountyfl.new.swagit.com/videos/404435",
+      "https://lynnhavenfl.portal.civicclerk.com/event/1069/files",
+      "https://lynnhavenfl.portal.civicclerk.com/event/1070/files",
+      "https://lynnhavenfl.portal.civicclerk.com/event/1093/files",
+      "https://lynnhavenfl.portal.civicclerk.com/event/1094/files",
+      "https://lynnhavenfl.portal.civicclerk.com/event/2130/files",
+      "https://lynnhavenfl.portal.civicclerk.com/event/2143/files",
+      "https://www.baycountyfl.gov/calendar.aspx?EID=1594",
+      "https://www.baycountyfl.gov/calendar.aspx?EID=1595",
+      "https://www.baycountyfl.gov/calendar.aspx?EID=1604",
+      "https://www.baycountyfl.gov/calendar.aspx?EID=1605",
+      "https://www.baycountyfl.gov/calendar.aspx?EID=1685",
+      "https://www.baycountyfl.gov/calendar.aspx?EID=1686",
+      "https://www.cityofcallaway.com/calendar.aspx?EID=2696",
+      "https://www.cityofcallaway.com/calendar.aspx?EID=2697",
+      "https://www.cityofcallaway.com/calendar.aspx?EID=2707",
+      "https://www.panamacity.gov/calendar.aspx?EID=6076",
+      "https://www.panamacity.gov/calendar.aspx?EID=6077",
+      "https://www.panamacity.gov/calendar.aspx?EID=6148",
+      "https://www.panamacity.gov/calendar.aspx?EID=7564",
+      "https://www.panamacity.gov/calendar.aspx?EID=7565",
+      "https://www.springfieldfl.net/community/meeting/commission-meeting-74",
+      "https://www.springfieldfl.net/community/meeting/commission-meeting-76",
+      "https://www.springfieldfl.net/community/meeting/commission-meeting-77",
+      "https://www.springfieldfl.net/community/meeting/commission-workshop-54",
+      "https://youtube.com/live/aX2AYat8SmM?feature=share"
+     ]
+    },
+    {
+     "name": "items",
+     "type": "array"
+    },
+    {
+     "name": "time_from_schedule",
+     "type": "boolean",
+     "values": [
+      true
+     ]
+    },
+    {
+     "name": "calendar_source",
+     "type": "string",
+     "values": [
+      "calendar:https://www.cityoflynnhaven.gov/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar"
+     ]
+    },
+    {
+     "name": "expected",
+     "type": "boolean",
+     "values": [
+      true
+     ]
+    }
+   ],
+   "json": "/downloads/meetings.json",
+   "csv": "/downloads/meetings.csv",
+   "api": "/api/v1/datasets/meetings"
+  },
+  {
+   "id": "campaign-finance",
+   "title": "Campaign finance totals",
+   "description": "Money raised by current officeholders (organizations named; individuals summed).",
+   "rows": 48,
+   "columns": [
+    {
+     "name": "official",
+     "type": "string"
+    },
+    {
+     "name": "office",
+     "type": "string"
+    },
+    {
+     "name": "gov",
+     "type": "string",
+     "values": [
+      "constitutional",
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "schools",
+      "sp"
+     ]
+    },
+    {
+     "name": "election",
+     "type": "string",
+     "values": [
+      "2022 municipal (Apr 19, 2022)",
+      "2022 primary/general",
+      "2023 municipal (Apr 18, 2023)",
+      "2024 municipal (Apr 16, 2024)",
+      "2024 primary/general",
+      "2025 municipal (Apr 22, 2025)",
+      "2026 Lynn Haven recall election (Jan 20, 2026)",
+      "2026 municipal (Apr 21, 2026)",
+      "2026 primary/general (in progress)"
+     ]
+    },
+    {
+     "name": "total_raised",
+     "type": "number"
+    },
+    {
+     "name": "total_spent",
+     "type": "number"
+    },
+    {
+     "name": "n_contributions",
+     "type": "number"
+    },
+    {
+     "name": "report_url",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/campaign-finance.json",
+   "csv": "/downloads/campaign-finance.csv",
+   "api": "/api/v1/datasets/campaign-finance"
+  },
+  {
+   "id": "vendor-payments",
+   "title": "Who gets paid",
+   "description": "Payments to vendors from check registers, totaled by vendor and year.",
+   "rows": 408,
+   "columns": [
+    {
+     "name": "government",
+     "type": "string",
+     "values": [
+      "Mexico Beach Community Development Council - Bay County TDC",
+      "Panama City Beach Convention & Visitors Bureau (Visit Panama City Beach) - Bay County TDC",
+      "Panama City Community Development Council (Destination Panama City) - Bay County TDC"
+     ]
+    },
+    {
+     "name": "vendor",
+     "type": "string"
+    },
+    {
+     "name": "total",
+     "type": "number"
+    },
+    {
+     "name": "payments",
+     "type": "number"
+    }
+   ],
+   "json": "/downloads/vendor-payments.json",
+   "csv": "/downloads/vendor-payments.csv",
+   "api": "/api/v1/datasets/vendor-payments"
+  },
+  {
+   "id": "bonds",
+   "title": "Bonds and notes",
+   "description": "Outstanding bond and note issues of Bay County governments.",
+   "rows": 61,
+   "columns": [
+    {
+     "name": "gov",
+     "type": "string",
+     "values": [
+      "Bay County BOCC",
+      "Bay County BOCC (joint with City of Callaway)",
+      "Bay District Schools",
+      "City of Callaway",
+      "City of Lynn Haven",
+      "City of Mexico Beach",
+      "City of Panama City",
+      "City of Panama City Beach",
+      "City of Parker",
+      "City of Springfield",
+      "Panama City Port Authority",
+      "Panama City-Bay County Airport and Industrial District"
+     ]
+    },
+    {
+     "name": "issuer",
+     "type": "string",
+     "values": [
+      "Bay County, Florida",
+      "City of Callaway, Florida",
+      "City of Lynn Haven, Florida",
+      "City of Mexico Beach, Florida",
+      "City of Panama City Beach, Florida",
+      "City of Panama City, Florida",
+      "City of Parker, Florida",
+      "City of Springfield, Florida",
+      "Panama City Port Authority",
+      "Panama City-Bay County Airport and Industrial District",
+      "School Board of Bay County, Florida (certificates issued through the Bay County Educational Facilities Finance Corporation master lease)"
+     ]
+    },
+    {
+     "name": "series",
+     "type": "string"
+    },
+    {
+     "name": "type",
+     "type": "string",
+     "values": [
+      "bond",
+      "certificates of participation",
+      "loan",
+      "note"
+     ]
+    },
+    {
+     "name": "par_amount",
+     "type": "number"
+    },
+    {
+     "name": "par_note",
+     "type": "string",
+     "values": [
+      "Amended to $3,485,021",
+      "Amended to $6,629,064",
+      "Authorized",
+      "Authorized loan amount; $238,017 drawn and outstanding at 9/30/2025",
+      "Authorized not to exceed $30,250,000 (term sheet; resolution caption says not to exceed $35,000,000); final par not stated in the documents read.",
+      "Authorized principal",
+      "County share $48,874,337; $1,125,663 is the TPO's",
+      "County share $49,943,109; $56,891 is the TPO's",
+      "Credit limit"
+     ]
+    },
+    {
+     "name": "dated_date",
+     "type": "string",
+     "values": [
+      "2011-07-12",
+      "2014-06-17",
+      "2015-03-26",
+      "2015-11-04",
+      "2015-12-01",
+      "2016-10-12",
+      "2018-02-22",
+      "2018-07-19",
+      "2019-12-01",
+      "2020-02-20",
+      "2020-10-06",
+      "2020-11-20",
+      "2021-05-13",
+      "2021-06-04",
+      "2021-09-23",
+      "2022-03-03",
+      "2022-09-01",
+      "2022-09-08",
+      "2023-08 (issued August 2023; authorized 2023-08-08)",
+      "2023-08-01",
+      "2023-09-01",
+      "2024-02-21"
+     ]
+    },
+    {
+     "name": "final_maturity",
+     "type": "string"
+    },
+    {
+     "name": "interest_rate",
+     "type": "string"
+    },
+    {
+     "name": "purpose",
+     "type": "string"
+    },
+    {
+     "name": "security",
+     "type": "string"
+    },
+    {
+     "name": "outstanding",
+     "type": "number"
+    },
+    {
+     "name": "outstanding_as_of",
+     "type": "string",
+     "values": [
+      "FY2024 fiscal year end",
+      "FY2025 fiscal year end"
+     ]
+    },
+    {
+     "name": "placement",
+     "type": "string",
+     "values": [
+      "audit lists as direct placement; certificates carry premium",
+      "bank loan (not a public issue; not rated, per audit)",
+      "direct (bank bond)",
+      "direct (bank note)",
+      "direct (fixed-rate bond placed with a lender)",
+      "direct (lender)",
+      "direct loan from Truist Commercial Equity, Inc. (Truist Bank loan and escrow agreement)",
+      "direct placement (per audit)",
+      "loan",
+      "private placement with PNC Bank, N.A.",
+      "public offering (Raymond James & Associates senior manager, Jefferies co-manager per draft authorizing resolution 20-75)",
+      "public offering (bonds with premium; serial 2.0%-5.0%)",
+      "public offering (issued at a premium of $825,372)",
+      "public offering (serial 4.0%-5.0%)",
+      "seller-financed purchase note (City of Callaway)"
+     ]
+    },
+    {
+     "name": "rating",
+     "type": "string",
+     "values": [
+      "A (S&P), as stated in the FY2025 audit's management discussion",
+      "None (purchaser certificate states no rating will be obtained)",
+      "Not rated"
+     ]
+    },
+    {
+     "name": "official_statement_url",
+     "type": "string"
+    },
+    {
+     "name": "status",
+     "type": "string",
+     "values": [
+      "Final maturity date has passed as of 2026-10-21; whether it was repaid or refinanced was not confirmed (FY2025/FY2026 audit not yet posted).",
+      "final maturity date has passed since the audit; likely retired",
+      "outstanding at audit date"
+     ]
+    },
+    {
+     "name": "sources",
+     "type": "array"
+    },
+    {
+     "name": "rating_note",
+     "type": "string",
+     "values": [
+      "Audit MD&A says the city's Utility System bonds carry AA- (S&P) and AA+ (Fitch); it is not clear those ratings apply to this privately placed bond.",
+      "Moody's maintains a rating page for 'Bay County of FL Water and Sewer Ent' (https://www.moodys.com/credit-ratings/Bay-County-of-FL-Water-and-Sewer-Ent-credit-rating-902789673); the rating itself could not be read."
+     ]
+    },
+    {
+     "name": "emma_issuer_urls",
+     "type": "array"
+    },
+    {
+     "name": "notes",
+     "type": "string",
+     "values": [
+      "Interest of $8,730,000 per year; principal due in one payment in FY2026.",
+      "Issued Dec. 4, 2024; prepayable without penalty on or after Dec. 1, 2032 (audit text prints '3032'). Interest paid FY2025: $336,300."
+     ]
+    },
+    {
+     "name": "outstanding_note",
+     "type": "string",
+     "values": [
+      "$453,690 governmental + $611,310 business-type (43%/57% split)"
+     ]
+    }
+   ],
+   "json": "/downloads/bonds.json",
+   "csv": "/downloads/bonds.csv",
+   "api": "/api/v1/datasets/bonds"
+  },
+  {
+   "id": "budget-detail",
+   "title": "Budgets by fund and department",
+   "description": "Adopted budgets broken down by fund and general-fund department.",
+   "rows": 216,
+   "columns": [
+    {
+     "name": "government",
+     "type": "string",
+     "values": [
+      "Bay County Board of County Commissioners",
+      "Bay District Schools (School Board of Bay County)",
+      "City of Callaway",
+      "City of Lynn Haven",
+      "City of Mexico Beach",
+      "City of Panama City",
+      "City of Panama City Beach",
+      "City of Parker",
+      "City of Springfield"
+     ]
+    },
+    {
+     "name": "fiscal_year",
+     "type": "string",
+     "values": [
+      "FY2026 (Oct 1, 2025 - Sep 30, 2026)",
+      "FY2026 (school year July 1, 2025 - June 30, 2026)"
+     ]
+    },
+    {
+     "name": "level",
+     "type": "string",
+     "values": [
+      "department",
+      "fund"
+     ]
+    },
+    {
+     "name": "name",
+     "type": "string"
+    },
+    {
+     "name": "amount",
+     "type": "number"
+    }
+   ],
+   "json": "/downloads/budget-detail.json",
+   "csv": "/downloads/budget-detail.csv",
+   "api": "/api/v1/datasets/budget-detail"
+  },
+  {
+   "id": "salary-positions",
+   "title": "Public salaries by job title",
+   "description": "Pay ranges, budgeted positions and unnamed actual salaries by job title for the county, constitutional officers, school district, cities, airport and port.",
+   "rows": 1455,
+   "columns": [
+    {
+     "name": "employer",
+     "type": "string",
+     "values": [
+      "Bay County Board of County Commissioners",
+      "Bay County Sheriff's Office",
+      "Bay County Tax Collector",
+      "Bay District Schools",
+      "City of Callaway",
+      "City of Lynn Haven",
+      "City of Mexico Beach",
+      "City of Panama City",
+      "City of Panama City Beach",
+      "City of Parker",
+      "City of Springfield",
+      "Panama City-Bay County Airport and Industrial District (Northwest Florida Beaches International Airport, ECP)"
+     ]
+    },
+    {
+     "name": "employer_id",
+     "type": "string",
+     "values": [
+      "airport",
+      "bocc",
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "schools",
+      "sheriff",
+      "sp",
+      "tax_collector"
+     ]
+    },
+    {
+     "name": "government",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "schools",
+      "sp",
+      "special_district"
+     ]
+    },
+    {
+     "name": "fiscal_year",
+     "type": "string",
+     "values": [
+      "2025-26",
+      "FY2026",
+      "FY2027"
+     ]
+    },
+    {
+     "name": "title",
+     "type": "string"
+    },
+    {
+     "name": "department",
+     "type": "string"
+    },
+    {
+     "name": "category",
+     "type": "string",
+     "values": [
+      "admin",
+      "beach_safety",
+      "code_enforcement",
+      "corrections",
+      "dispatch",
+      "district_admin",
+      "elected",
+      "emergency_management",
+      "ems",
+      "executive",
+      "finance",
+      "fire",
+      "food_service",
+      "it",
+      "law_enforcement",
+      "legal",
+      "library",
+      "maintenance",
+      "other",
+      "parks",
+      "planning",
+      "public_works",
+      "school_admin",
+      "support",
+      "teaching",
+      "transportation",
+      "utilities"
+     ]
+    },
+    {
+     "name": "grade",
+     "type": "string"
+    },
+    {
+     "name": "pay_min",
+     "type": "number"
+    },
+    {
+     "name": "pay_mid",
+     "type": "number"
+    },
+    {
+     "name": "pay_max",
+     "type": "number"
+    },
+    {
+     "name": "pay_basis",
+     "type": "string",
+     "values": [
+      "annual",
+      "hourly"
+     ]
+    },
+    {
+     "name": "hourly_min",
+     "type": "number"
+    },
+    {
+     "name": "hourly_max",
+     "type": "number"
+    },
+    {
+     "name": "actual_salaries",
+     "type": "array"
+    },
+    {
+     "name": "budgeted_fte",
+     "type": "number"
+    },
+    {
+     "name": "union",
+     "type": "string",
+     "values": [
+      "ABCE",
+      "BESPA"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "notes",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/salary-positions.json",
+   "csv": "/downloads/salary-positions.csv",
+   "api": "/api/v1/datasets/salary-positions"
+  },
+  {
+   "id": "salary-leaders",
+   "title": "Salaries of officials and leaders",
+   "description": "Named salaries of elected officials and top appointed leaders only.",
+   "rows": 94,
+   "columns": [
+    {
+     "name": "employer",
+     "type": "string",
+     "values": [
+      "Bay County Board of County Commissioners",
+      "Bay County Clerk of Court & Comptroller",
+      "Bay County Property Appraiser",
+      "Bay County Sheriff's Office",
+      "Bay County Supervisor of Elections",
+      "Bay County Tax Collector",
+      "Bay District Schools",
+      "City of Callaway",
+      "City of Lynn Haven",
+      "City of Mexico Beach",
+      "City of Panama City",
+      "City of Panama City Beach",
+      "City of Parker",
+      "City of Springfield",
+      "Panama City Port Authority (Port Panama City)",
+      "Panama City-Bay County Airport and Industrial District (Northwest Florida Beaches International Airport, ECP)"
+     ]
+    },
+    {
+     "name": "employer_id",
+     "type": "string",
+     "values": [
+      "airport",
+      "bocc",
+      "clerk",
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "port",
+      "property_appraiser",
+      "schools",
+      "sheriff",
+      "soe",
+      "sp",
+      "tax_collector"
+     ]
+    },
+    {
+     "name": "government",
+     "type": "string",
+     "values": [
+      "city_agency",
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "schools",
+      "sp",
+      "special_district"
+     ]
+    },
+    {
+     "name": "name",
+     "type": "string"
+    },
+    {
+     "name": "title",
+     "type": "string"
+    },
+    {
+     "name": "department",
+     "type": "string"
+    },
+    {
+     "name": "salary",
+     "type": "number"
+    },
+    {
+     "name": "basis",
+     "type": "string",
+     "values": [
+      "FY2027 budgeted regular salary (plus $6,000 auto allowance, $600 phone allowance, $590 annual bonus)",
+      "annual",
+      "annual (statutory formula, s. 1001.395 F.S.)",
+      "annual (statutory formula, s. 1001.47 F.S.)",
+      "annual base salary in the employment contract presented Jan 9, 2024 (plus COLAs given to all employees afterward, per contract)",
+      "annual, FY2027 budget",
+      "initial annual base salary in the proposed contract",
+      "initial base salary in 2021 employment agreement (Res. 21-148); later raises not located",
+      "pay grade NB227",
+      "pay grade NB230"
+     ]
+    },
+    {
+     "name": "as_of",
+     "type": "string",
+     "values": [
+      "2021-04-22",
+      "2024-01-09",
+      "2026-02-19",
+      "2026-03-03",
+      "2026-03-17",
+      "2026-04-07",
+      "2026-08-11",
+      "2026-09-08",
+      "2026-10-01",
+      "2026-10-21",
+      "2026-27",
+      "FY2026-27"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://baycountyfl.primegov.com/api/compilemeetingattachmenthistory/historyattachment/?historyId=0dee837a-7239-4c5d-8f8c-8d3740e854c2",
+      "https://baycountyfl.primegov.com/api/compilemeetingattachmenthistory/historyattachment/?historyId=e9bda0e9-91e3-4ec5-a3ed-3df98bd5f622",
+      "https://baycountyfl.primegov.com/api/compilemeetingattachmenthistory/historyattachment/?historyId=fda33e91-34e7-49c1-8cb2-f75eda1099ec",
+      "https://bayso.org/executive-command-staff/",
+      "https://cityofparker.com/departments/police/",
+      "https://cityofparker.com/government/city-council/",
+      "https://cityofparker.com/wp-content/uploads/2026/09/Agenda-Final-Budget-Meeting-Package-09.24.26-1.pdf",
+      "https://files-backend.assets.thrillshare.com/documents/asset/uploaded_file/5786/Bds/a789a2df-7a40-493f-a70a-02a7777eb566/Final-Budget-FY-2026-2027.pdf (names); https://files-backend.assets.thrillshare.com/documents/asset/uploaded_file/5786/Bds/3b14ebee-2a6e-4fec-ad9b-6eff9a3f50bc/Salary-Placement-Schedule-2026-2027-apprv-062326.pdf (grade)",
+      "https://mexicobeachfl.gov/uploads/2026/10/FY26-27-Budget.pdf",
+      "https://pcbfl.gov/government",
+      "https://pcbfl.gov/home/showpublisheddocument/24574/638512745062370000",
+      "https://portpcfl.com/wp-content/uploads/2026/03/Press-release-announcing-Bob-Majka.pdf",
+      "https://www.bay.k12.fl.us/o/bds/page/human-resources (name); https://files-backend.assets.thrillshare.com/documents/asset/uploaded_file/5786/Bds/3b14ebee-2a6e-4fec-ad9b-6eff9a3f50bc/Salary-Placement-Schedule-2026-2027-apprv-062326.pdf (grade)",
+      "https://www.bayvotesfl.gov/about/meet-the-staff/",
+      "https://www.cityofcallaway.com/70/Mayor-Commission",
+      "https://www.cityofcallaway.com/DocumentCenter/View/5704/Final-Budget-2627",
+      "https://www.cityofcallaway.com/directory.aspx",
+      "https://www.cityoflynnhaven.com/directory.aspx",
+      "https://www.edr.state.fl.us/Content/local-government/reports/finsal26.pdf",
+      "https://www.iflybeaches.com/uploads/documents/FY-2027-Positions-and-Rates.pdf",
+      "https://www.panamacity.gov/395/City-Commission",
+      "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_08112026-879?packet=true",
+      "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09082026-890?packet=true",
+      "https://www.panamacity.gov/AgendaCenter/ViewFile/Item/12048?fileID=26868",
+      "https://www.panamacity.gov/AgendaCenter/ViewFile/Item/17544?fileID=37586",
+      "https://www.panamacity.gov/ArchiveCenter/ViewFile/Item/1562",
+      "https://www.springfieldfl.net/city-commission",
+      "https://www.springfieldfl.net/directory",
+      "https://www.springfieldfl.net/fire",
+      "https://www.wjhg.com/2026/03/16/lynn-haven-appoints-new-city-manager"
+     ]
+    },
+    {
+     "name": "notes",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/salary-leaders.json",
+   "csv": "/downloads/salary-leaders.csv",
+   "api": "/api/v1/datasets/salary-leaders"
+  },
+  {
+   "id": "candidates-2026",
+   "title": "2026 local candidates",
+   "description": "Every 2026 local race and candidate with status, platform in their own words and campaign money totals.",
+   "rows": 36,
+   "columns": [
+    {
+     "name": "race_id",
+     "type": "string",
+     "values": [
+      "bocc-d2",
+      "bocc-d4",
+      "cw-w1",
+      "cw-w2",
+      "judge-g1",
+      "judge-g4",
+      "lh-mayor-2026",
+      "lpcdd-s2",
+      "lpcdd-s5",
+      "mb-g4",
+      "mb-g5",
+      "pcb-w1",
+      "pcb-w3",
+      "sb-d2",
+      "sb-d3",
+      "sb-d5",
+      "sp-mayor",
+      "sp-w3",
+      "sp-w4"
+     ]
+    },
+    {
+     "name": "office",
+     "type": "string",
+     "values": [
+      "Bay County Commission, District 2",
+      "Bay County Commission, District 4",
+      "Bay County Judge, Group 1",
+      "Bay County Judge, Group 4",
+      "Bay District School Board, District 2",
+      "Bay District School Board, District 3",
+      "Bay District School Board, District 5",
+      "City of Callaway Commissioner, Ward 1",
+      "City of Callaway Commissioner, Ward 2",
+      "City of Lynn Haven Mayor (partial term)",
+      "City of Mexico Beach Council Member, Group 4",
+      "City of Mexico Beach Council Member, Group 5",
+      "City of Panama City Beach Council, Ward 1",
+      "City of Panama City Beach Council, Ward 3",
+      "City of Springfield Commissioner, Ward 3",
+      "City of Springfield Commissioner, Ward 4",
+      "City of Springfield Mayor",
+      "Lake Powell Residential Golf Community Development District, Seat 2",
+      "Lake Powell Residential Golf Community Development District, Seat 5"
+     ]
+    },
+    {
+     "name": "government",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "pcb",
+      "schools",
+      "sp",
+      "special"
+     ]
+    },
+    {
+     "name": "race_status",
+     "type": "string",
+     "values": [
+      "decided_earlier_2026",
+      "decided_primary",
+      "elected_unopposed",
+      "on_ballot_nov3"
+     ]
+    },
+    {
+     "name": "candidate",
+     "type": "string"
+    },
+    {
+     "name": "party",
+     "type": "string",
+     "values": [
+      "LIB",
+      "REP"
+     ]
+    },
+    {
+     "name": "incumbent",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "status",
+     "type": "string",
+     "values": [
+      "appointed",
+      "did_not_qualify",
+      "elected_unopposed",
+      "lost",
+      "lost_primary",
+      "on_ballot",
+      "withdrew",
+      "won"
+     ]
+    },
+    {
+     "name": "website",
+     "type": "string",
+     "values": [
+      "https://gingerlittleton.com/",
+      "https://michaelpettyforschoolboard.com/",
+      "https://vote4karencuster.com/",
+      "https://votebrianrust.com/",
+      "https://votegrantwittstruck.com/",
+      "https://votejohnhaley.com/",
+      "https://www.sanchezforpcb.com/"
+     ]
+    },
+    {
+     "name": "platform",
+     "type": "array"
+    },
+    {
+     "name": "platform_sources",
+     "type": "array"
+    },
+    {
+     "name": "total_raised",
+     "type": "number"
+    },
+    {
+     "name": "total_spent",
+     "type": "number"
+    },
+    {
+     "name": "from_individuals_total",
+     "type": "number"
+    },
+    {
+     "name": "from_individuals_count",
+     "type": "number"
+    },
+    {
+     "name": "from_organizations",
+     "type": "number"
+    },
+    {
+     "name": "own_money",
+     "type": "number"
+    },
+    {
+     "name": "reports_through",
+     "type": "string",
+     "values": [
+      "2026-03-10",
+      "2026-05-14",
+      "2026-06-23",
+      "2026-07-20",
+      "2026-07-23",
+      "2026-08-09",
+      "2026-08-13",
+      "2026-09-10",
+      "2026-10-02",
+      "2026-10-16"
+     ]
+    },
+    {
+     "name": "finance_report_url",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/candidates-2026.json",
+   "csv": "/downloads/candidates-2026.csv",
+   "api": "/api/v1/datasets/candidates-2026"
+  },
+  {
+   "id": "campaign-contributions-2026",
+   "title": "2026 contributions from organizations",
+   "description": "Every contribution from a business, committee or party to a 2026 local candidate. Individual donors are not included.",
+   "rows": 162,
+   "columns": [
+    {
+     "name": "candidate",
+     "type": "string",
+     "values": [
+      "Bobby J. Birdsell",
+      "Brian Rust",
+      "Carl Curti",
+      "Carlos Sanchez",
+      "Cindy Hamre",
+      "Colleen Koch",
+      "Dr. John L. Haley",
+      "Glenn Manley",
+      "Grant Wittstruck",
+      "Karen Custer",
+      "Mary Coburn",
+      "Michael Petty",
+      "Nick Atkinson",
+      "Scott Duvall",
+      "Scott Heilmann",
+      "Spring Overway"
+     ]
+    },
+    {
+     "name": "office",
+     "type": "string",
+     "values": [
+      "Bay County Commission, District 4",
+      "Callaway Commission, Ward 1",
+      "Callaway Commission, Ward 2",
+      "Panama City Beach Council, Ward 1",
+      "Panama City Beach Council, Ward 3",
+      "School Board, District 2",
+      "School Board, District 3",
+      "Springfield Commission, Ward 4",
+      "Springfield Mayor"
+     ]
+    },
+    {
+     "name": "contributor",
+     "type": "string"
+    },
+    {
+     "name": "contributor_type",
+     "type": "string",
+     "values": [
+      "business",
+      "committee",
+      "other",
+      "pac"
+     ]
+    },
+    {
+     "name": "city",
+     "type": "string",
+     "values": [
+      "GOODLETTSVILLE",
+      "Homewood",
+      "LYNN HAVEN",
+      "Lecanto",
+      "Lynn Haven",
+      "Lynn Heven",
+      "Orlando",
+      "PANAMA CITY",
+      "PANAMA CITY BEACH",
+      "Panam City Beach",
+      "Panama City",
+      "Panama City Beach",
+      "Panama City Becah",
+      "Panama Ciy",
+      "Panama city Beach",
+      "Santa Rosa Beach",
+      "Southport",
+      "St. Augustine",
+      "TALLAHASSEE",
+      "Tallahassee",
+      "Tupelo",
+      "Valparaiso"
+     ]
+    },
+    {
+     "name": "amount",
+     "type": "number"
+    },
+    {
+     "name": "date",
+     "type": "string"
+    },
+    {
+     "name": "kind",
+     "type": "string",
+     "values": [
+      "check",
+      "in-kind",
+      "interest",
+      "refund"
+     ]
+    },
+    {
+     "name": "report_url",
+     "type": "string",
+     "values": [
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=714&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=719&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=726&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=727&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=728&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=729&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=730&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=734&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=735&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=736&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=739&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=740&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=742&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=743&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=36&c=bay&ca=715&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=36&c=bay&ca=717&rellevel=4&committee=N"
+     ]
+    }
+   ],
+   "json": "/downloads/campaign-contributions-2026.json",
+   "csv": "/downloads/campaign-contributions-2026.csv",
+   "api": "/api/v1/datasets/campaign-contributions-2026"
+  },
+  {
+   "id": "property-tax-exemptions",
+   "title": "Property tax exemptions (2026 roll)",
+   "description": "Every exemption type on the 2026 tax roll: parcels, value exempted and estimated tax removed.",
+   "rows": 25,
+   "columns": [
+    {
+     "name": "code",
+     "type": "string"
+    },
+    {
+     "name": "exemption",
+     "type": "string"
+    },
+    {
+     "name": "statute",
+     "type": "string",
+     "values": [
+      "193.703",
+      "196.031(1)(a)",
+      "196.031(1)(b)",
+      "196.075",
+      "196.081",
+      "196.082",
+      "196.101",
+      "196.102",
+      "196.173",
+      "196.196",
+      "196.197",
+      "196.1975",
+      "196.1978",
+      "196.1978(3)",
+      "196.198",
+      "196.1983",
+      "196.199",
+      "196.1995",
+      "196.202",
+      "196.24",
+      "196.26"
+     ]
+    },
+    {
+     "name": "applies_to",
+     "type": "string",
+     "values": [
+      "all",
+      "county",
+      "nonschool"
+     ]
+    },
+    {
+     "name": "parcels",
+     "type": "number"
+    },
+    {
+     "name": "homesteads",
+     "type": "number"
+    },
+    {
+     "name": "value_exempted",
+     "type": "number"
+    },
+    {
+     "name": "estimated_tax_removed",
+     "type": "number"
+    },
+    {
+     "name": "roll",
+     "type": "string",
+     "values": [
+      "2026 final tax roll (Florida DOR NAL, Bay County, posted 2026-10-16)"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://floridarevenue.com/property/dataportal/"
+     ]
+    }
+   ],
+   "json": "/downloads/property-tax-exemptions.json",
+   "csv": "/downloads/property-tax-exemptions.csv",
+   "api": "/api/v1/datasets/property-tax-exemptions"
+  }
+ ]
+}

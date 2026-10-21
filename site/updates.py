@@ -9,6 +9,9 @@ from datetime import datetime, timezone
 import html
 
 CHANGES = [
+    {'date': '2026-10-21', 'title': 'An API for BayCounty.me',
+     'text': 'Every dataset on the site is now available through a free, read-only API with filtering, sorting and CSV output, plus an MCP server so AI assistants can look up and cite these records directly.',
+     'pages': ['/developers']},
     {'date': '2026-10-21', 'title': 'Correction: Money map',
      'text': "The first version of the Money map overstated connections. It counted a donor's contracts again for every official the donor gave to, which roughly doubled the government totals, and it drew lines from officials to governments they don't serve on. The map now puts each donor in the middle: campaign gifts on one side, the governments that pay the donor on the other, each counted once. It marks only gifts to an official whose own government pays that donor, and lists the recorded votes those officials cast on that donor's contracts. The heat map that credited contract dollars to individual officials was removed.",
      'pages': ['/public-money/money-map']},
@@ -121,7 +124,7 @@ LABELS = {'/': 'Home', '/my-address': 'My Address', '/public-money/tax-dollars':
           '/public-money/audits': 'Audit Findings', '/who-runs-bay-county': 'Officials', '/glossary': 'Glossary', '/search': 'Search',
           '/about': 'About', '/updates': "What's new", '/governments': 'Governments', '/compare': 'Compare', '/meetings': 'Meetings',
           '/public-money/campaign-money': 'Campaign Money', '/records-request': 'Records Request', '/open-data': 'Open Data', '/alerts': 'Email Alerts',
-          '/es': 'En español', '/public-money/budget-explorer': 'Budget Explorer', '/public-money/who-gets-paid': 'Who Gets Paid', '/public-money/money-map': 'Money Map', '/elections': '2026 Elections', '/public-money/exemptions': 'Exemptions'}
+          '/es': 'En español', '/public-money/budget-explorer': 'Budget Explorer', '/public-money/who-gets-paid': 'Who Gets Paid', '/public-money/money-map': 'Money Map', '/elections': '2026 Elections', '/developers': 'API', '/public-money/exemptions': 'Exemptions'}
 
 
 def last_updated(path):

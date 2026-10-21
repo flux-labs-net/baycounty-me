@@ -63,6 +63,68 @@ def _flat(rows, keys):
     return [{k: r.get(k) for k in keys} for r in rows]
 
 
+def _salaries(kind):
+    import glob
+    out = []
+    for fp in sorted(glob.glob(os.path.join(DATA, 'salaries', '*.json'))):
+        d = json.load(open(fp)); src = d.get('sources') or []
+        def url(x):
+            if isinstance(x, int) and 0 <= x < len(src):
+                return src[x].get('url')
+            return x if isinstance(x, str) else None
+        if kind == 'positions':
+            for r in d.get('positions') or []:
+                act = [a for a in (r.get('actual_salaries') or []) if isinstance(a, (int, float))]
+                out.append({'employer': d.get('employer'), 'employer_id': d.get('employer_id'), 'government': d.get('gov'), 'fiscal_year': d.get('fiscal_year'),
+                            'title': r.get('title'), 'department': r.get('department'), 'category': r.get('category'), 'grade': r.get('grade'),
+                            'pay_min': r.get('pay_min'), 'pay_mid': r.get('pay_mid'), 'pay_max': r.get('pay_max'), 'pay_basis': r.get('pay_basis'),
+                            'hourly_min': r.get('hourly_min'), 'hourly_max': r.get('hourly_max'), 'actual_salaries': act or None, 'budgeted_fte': r.get('budgeted_fte'),
+                            'union': r.get('union'), 'source_url': url(r.get('source')), 'notes': r.get('notes')})
+        else:
+            for r in d.get('leaders') or []:
+                out.append({'employer': d.get('employer'), 'employer_id': d.get('employer_id'), 'government': d.get('gov'), 'name': r.get('name'), 'title': r.get('title'),
+                            'department': r.get('department'), 'salary': r.get('salary'), 'basis': r.get('basis'), 'as_of': r.get('as_of'), 'source_url': url(r.get('source')), 'notes': r.get('notes')})
+    return out
+
+
+def _candidates():
+    c, f = _j('elections', 'candidates_2026.json'), _j('elections', 'finance_2026.json')
+    if not c:
+        return []
+    import sys; sys.path.insert(0, HERE)
+    from elections_page import match_finance
+    fin = (f or {}).get('candidates') or []; out = []
+    for r in c['races']:
+        for k in r.get('candidates') or []:
+            m = match_finance(k, r.get('office'), fin) or {}
+            bt = m.get('by_type_total') or {}; fi = m.get('from_individuals') or {}
+            out.append({'race_id': r.get('id'), 'office': r.get('office'), 'government': r.get('gov'), 'race_status': r.get('status'), 'candidate': k.get('name'),
+                        'party': k.get('party'), 'incumbent': k.get('incumbent'), 'status': k.get('status'), 'website': k.get('website'),
+                        'platform': k.get('platform') or None, 'platform_sources': k.get('platform_sources') or None,
+                        'total_raised': m.get('total_raised'), 'total_spent': m.get('total_spent'), 'from_individuals_total': fi.get('total'), 'from_individuals_count': fi.get('count'),
+                        'from_organizations': round(sum(v for x, v in bt.items() if x not in ('individual', 'candidate_self')), 2) if bt else None,
+                        'own_money': bt.get('candidate_self'), 'reports_through': m.get('through'), 'finance_report_url': m.get('report_url')})
+    return out
+
+
+def _contributions():
+    f = _j('elections', 'finance_2026.json')
+    if not f:
+        return []
+    # organizations only; individual donors are never published on this site
+    return [{'candidate': c['name'], 'office': c.get('office'), 'contributor': x.get('name'), 'contributor_type': x.get('type'), 'city': x.get('city'),
+             'amount': x.get('amount'), 'date': x.get('date'), 'kind': x.get('kind'), 'report_url': c.get('report_url')}
+            for c in f.get('candidates') or [] for x in c.get('contributors') or [] if x.get('type') not in ('candidate', 'individual', 'self')]
+
+
+def _exemptions():
+    d = _j('exemptions', 'exemptions_2026.json')
+    if not d:
+        return []
+    return [{'code': k, 'exemption': v['name'], 'statute': v['statute'], 'applies_to': v['applies'], 'parcels': v['parcels'], 'homesteads': v['homes'],
+             'value_exempted': v['value'], 'estimated_tax_removed': v['tax'], 'roll': d.get('roll'), 'source_url': d.get('source')} for k, v in d['codes'].items()]
+
+
 def datasets():
     ct = _j('contracts', 'contracts.json'); da = _j('debt_audit', 'debt_audit.json'); f = _j('fees', 'fees_pay_officials.json')
     ts = _j('tourism', 'tourism_surtax.json'); pa = _j('michael', 'pa_ledger.json')
@@ -90,6 +152,13 @@ def datasets():
         (('money', 'bonds.json'), 'bonds', 'Bonds and notes', 'Outstanding bond and note issues of Bay County governments.', lambda d: d.get('issues', [])),
         (('civic', 'budgets_detail.json'), 'budget-detail', 'Budgets by fund and department', 'Adopted budgets broken down by fund and general-fund department.', lambda d: [{'government': g.get('name'), 'fiscal_year': g.get('fiscal_year'), 'level': lvl, 'name': x.get('name'), 'amount': x.get('amount')} for g in d.get('governments', []) for lvl, key in (('fund', 'funds'), ('department', 'general_fund_departments')) for x in g.get(key) or []]),
     ]
+    extra += [
+        (('salaries', 'bocc.json'), 'salary-positions', 'Public salaries by job title', 'Pay ranges, budgeted positions and unnamed actual salaries by job title for the county, constitutional officers, school district, cities, airport and port.', lambda d: _salaries('positions')),
+        (('salaries', 'bocc.json'), 'salary-leaders', 'Salaries of officials and leaders', 'Named salaries of elected officials and top appointed leaders only.', lambda d: _salaries('leaders')),
+        (('elections', 'candidates_2026.json'), 'candidates-2026', '2026 local candidates', 'Every 2026 local race and candidate with status, platform in their own words and campaign money totals.', lambda d: _candidates()),
+        (('elections', 'finance_2026.json'), 'campaign-contributions-2026', '2026 contributions from organizations', 'Every contribution from a business, committee or party to a 2026 local candidate. Individual donors are not included.', lambda d: _contributions()),
+        (('exemptions', 'exemptions_2026.json'), 'property-tax-exemptions', 'Property tax exemptions (2026 roll)', 'Every exemption type on the 2026 tax roll: parcels, value exempted and estimated tax removed.', lambda d: _exemptions()),
+    ]
     for path, did, title, desc, fn in extra:
         d = _j(*path)
         if d:
@@ -99,7 +168,7 @@ def datasets():
 
 def write_downloads(out_dir):
     dest = os.path.join(out_dir, 'downloads'); os.makedirs(dest, exist_ok=True)
-    meta = []
+    meta, catalog = [], []
     for did, title, desc, fn in datasets():
         rows = fn() or []
         keys = list(dict.fromkeys(k for r in rows for k in r))
@@ -109,6 +178,25 @@ def write_downloads(out_dir):
         open(os.path.join(dest, did + '.csv'), 'w', newline='').write(buf.getvalue())
         json.dump(rows, open(os.path.join(dest, did + '.json'), 'w'), ensure_ascii=False, separators=(',', ':'))
         meta.append((did, title, desc, len(rows), keys, os.path.getsize(os.path.join(dest, did + '.csv'))))
+        def typ(k):
+            vals = [r.get(k) for r in rows if r.get(k) is not None][:200]
+            if not vals: return 'string'
+            if all(isinstance(v, bool) for v in vals): return 'boolean'
+            if all(isinstance(v, (int, float)) and not isinstance(v, bool) for v in vals): return 'number'
+            if all(isinstance(v, list) for v in vals): return 'array'
+            if all(isinstance(v, dict) for v in vals): return 'object'
+            return 'string'
+        def col(k):
+            c = {'name': k, 'type': typ(k)}
+            vals = {r.get(k) for r in rows if isinstance(r.get(k), (str, bool)) and r.get(k) != ''}
+            if c['type'] in ('string', 'boolean') and 0 < len(vals) <= 30 and len(rows) > len(vals):
+                c['values'] = sorted(vals, key=str)
+            return c
+        catalog.append({'id': did, 'title': title, 'description': desc, 'rows': len(rows), 'columns': [col(k) for k in keys],
+                        'json': f'/downloads/{did}.json', 'csv': f'/downloads/{did}.csv', 'api': f'/api/v1/datasets/{did}'})
+    import datetime
+    json.dump({'name': 'BayCounty.me open data', 'updated': datetime.date.today().isoformat(), 'license': 'Public records; free to reuse with credit to BayCounty.me',
+               'datasets': catalog}, open(os.path.join(dest, 'index.json'), 'w'), ensure_ascii=False, indent=1)
     return meta
 
 
@@ -121,7 +209,7 @@ def opendata_page(out_dir):
     <p class="lede">Everything on BayCounty.me, as spreadsheets. Free to use for reporting, research or your own analysis. Please credit BayCounty.me, and check the original record before relying on any single figure: every row carries its source link.</p></div></header>
   <div class="tablewrap"><table class="tx-table od-table"><thead><tr><th scope="col">Dataset</th><th scope="col" class="num">Rows</th><th scope="col">Download</th></tr></thead><tbody>{rows}</tbody></table></div>
   <section class="tx-sec method"><div class="sec-hd"><h2 id="notes">Notes</h2></div><ul class="plain">
-    <li>CSV files open in Excel, Google Sheets or Numbers. JSON is the same data for programmers.</li>
+    <li>CSV files open in Excel, Google Sheets or Numbers. JSON is the same data for programmers. To filter and query the data from your own app or AI assistant, use the <a href="/developers">API</a>.</li>
     <li>Files are rebuilt every time the site's data changes. The <a href="/updates">What's new</a> page lists each change.</li>
     <li>Found an error? <a href="/about#contact">Send a correction</a>.</li></ul></section>
 </div>

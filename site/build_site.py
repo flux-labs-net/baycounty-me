@@ -84,6 +84,7 @@ MENU = [
         {'group': 'Learn and reuse', 'items': [
             {'label': 'Glossary', 'href': '/glossary', 'desc': 'Government money, explained simply'},
             {'label': 'Open data', 'href': '/open-data', 'desc': 'Download every dataset'},
+            {'label': 'API', 'href': '/developers', 'desc': 'Connect apps and AI assistants'},
             {'label': "What's new", 'href': '/updates', 'desc': 'New pages, data and corrections'},
         ]},
     ]},
@@ -517,6 +518,7 @@ from campaign_page import campaign_page
 from money_pages import budget_page, payments_page
 from money_map import money_map_page
 from linkify import linkify_html, LINKIFY_JS
+from developers_page import developers_page
 from elections_page import elections_page
 from exemptions_page import exemptions_page
 ELECTIONS_READY = os.path.exists(os.path.join(ROOT, '..', 'data', 'elections', 'candidates_2026.json'))
@@ -617,6 +619,7 @@ PAGES = [
     ('/governments', "Bay County's local governments", 'A profile of every local government in Bay County, Florida: officials, budget, tax rate, debt, audits, votes, contracts and projects.', govs_index),
     ('/compare', 'Compare Bay County governments', 'Compare Bay County, its cities and the school district side by side: budget, property tax, debt, staff, audit findings, split votes and utility bills, per resident.', lambda: compare_page(OUT)),
     ('/open-data', 'Download the data', 'Every BayCounty.me dataset as CSV and JSON: votes, contracts, CRA spending, tax rates, debt, audits, FEMA projects and more.', lambda: opendata_page(OUT)),
+    ('/developers', 'API for developers', 'Connect apps, spreadsheets and AI assistants to BayCounty.me: a free, read-only API and MCP server for Bay County public records.', lambda: developers_page(OUT)),
     ('/es', 'Registros públicos en español', 'BayCounty.me en español: estimado de impuestos por dirección, solicitudes de registros públicos y un glosario de términos de dinero público.', es_home),
     ('/es/mi-direccion', 'Mi dirección', 'Busque cualquier dirección del condado de Bay: estimado de impuestos a la propiedad, quién lo representa, escuelas, zonas de inundación y evacuación, y distritos de reurbanización.', lambda: es_addr_page(OUT)),
     ('/es/glosario', 'Glosario en lenguaje sencillo', 'Cada término de BayCounty.me explicado de forma sencilla: CRA, incremento de impuestos, millaje, exención de vivienda principal, presupuestos y más.', es_glossary_page),

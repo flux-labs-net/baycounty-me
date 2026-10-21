@@ -1,0 +1,26 @@
+code,exemption,statute,applies_to,parcels,homesteads,value_exempted,estimated_tax_removed,roll,source_url
+01,Homestead,196.031(1)(a),all,46089,46089,1150520318,15397615,"2026 final tax roll (Florida DOR NAL, Bay County, posted 2026-10-16)",https://floridarevenue.com/property/dataportal/
+02,Additional homestead,196.031(1)(b),nonschool,39795,39795,1015432881,8147389,"2026 final tax roll (Florida DOR NAL, Bay County, posted 2026-10-16)",https://floridarevenue.com/property/dataportal/
+03,"Senior (65+, limited income), county",196.075,county,2006,2006,80673656,501685,"2026 final tax roll (Florida DOR NAL, Bay County, posted 2026-10-16)",https://floridarevenue.com/property/dataportal/
+05,Totally and permanently disabled veteran or surviving spouse,196.081,all,3415,3413,840544766,11069282,"2026 final tax roll (Florida DOR NAL, Bay County, posted 2026-10-16)",https://floridarevenue.com/property/dataportal/
+08,"Totally and permanently disabled person (quadriplegic, or limited income)",196.101,all,295,295,31692721,426950,"2026 final tax roll (Florida DOR NAL, Bay County, posted 2026-10-16)",https://floridarevenue.com/property/dataportal/
+09,"Religious, charitable and other nonprofit",196.196,all,820,0,359976250,5308108,"2026 final tax roll (Florida DOR NAL, Bay County, posted 2026-10-16)",https://floridarevenue.com/property/dataportal/
+12,Hospitals and nursing homes,196.197,all,1,0,2821146,30790,"2026 final tax roll (Florida DOR NAL, Bay County, posted 2026-10-16)",https://floridarevenue.com/property/dataportal/
+13,Nonprofit homes for the aged,196.1975,all,3,0,28911378,522907,"2026 final tax roll (Florida DOR NAL, Bay County, posted 2026-10-16)",https://floridarevenue.com/property/dataportal/
+15,Affordable housing (nonprofit),196.1978,all,98,0,102367100,1574148,"2026 final tax roll (Florida DOR NAL, Bay County, posted 2026-10-16)",https://floridarevenue.com/property/dataportal/
+16,Educational,196.198,all,15,0,7407140,123189,"2026 final tax roll (Florida DOR NAL, Bay County, posted 2026-10-16)",https://floridarevenue.com/property/dataportal/
+17,Charter schools,196.1983,all,12,0,28073012,426305,"2026 final tax roll (Florida DOR NAL, Bay County, posted 2026-10-16)",https://floridarevenue.com/property/dataportal/
+20,Government property,196.199,all,2090,0,2354101875,39517952,"2026 final tax roll (Florida DOR NAL, Bay County, posted 2026-10-16)",https://floridarevenue.com/property/dataportal/
+22,Economic development (county),196.1995,county,3,0,18282306,128272,"2026 final tax roll (Florida DOR NAL, Bay County, posted 2026-10-16)",https://floridarevenue.com/property/dataportal/
+31,Blind person,196.202,all,37,37,185000,2547,"2026 final tax roll (Florida DOR NAL, Bay County, posted 2026-10-16)",https://floridarevenue.com/property/dataportal/
+32,Widower,196.202,all,602,598,3008068,40234,"2026 final tax roll (Florida DOR NAL, Bay County, posted 2026-10-16)",https://floridarevenue.com/property/dataportal/
+33,Widow,196.202,all,2936,2924,14685832,197735,"2026 final tax roll (Florida DOR NAL, Bay County, posted 2026-10-16)",https://floridarevenue.com/property/dataportal/
+34,"Disabled person ($5,000)",196.202,all,893,892,4589626,61224,"2026 final tax roll (Florida DOR NAL, Bay County, posted 2026-10-16)",https://floridarevenue.com/property/dataportal/
+35,"Disabled veteran, 10%+ service-connected ($5,000)",196.24,all,6078,6030,30735751,412731,"2026 final tax roll (Florida DOR NAL, Bay County, posted 2026-10-16)",https://floridarevenue.com/property/dataportal/
+36,Conservation land,196.26,all,5,0,11732,145,"2026 final tax roll (Florida DOR NAL, Bay County, posted 2026-10-16)",https://floridarevenue.com/property/dataportal/
+38,Deployed service member,196.173,all,14,14,983859,14203,"2026 final tax roll (Florida DOR NAL, Bay County, posted 2026-10-16)",https://floridarevenue.com/property/dataportal/
+39,"Long-term senior (65+, 25 years in home, limited income), county",196.075,county,520,520,37943591,237588,"2026 final tax roll (Florida DOR NAL, Bay County, posted 2026-10-16)",https://floridarevenue.com/property/dataportal/
+41,Disabled first responder or surviving spouse,196.102,all,4,4,532768,6592,"2026 final tax roll (Florida DOR NAL, Bay County, posted 2026-10-16)",https://floridarevenue.com/property/dataportal/
+43,Affordable housing (Florida Housing certified),196.1978(3),all,13,0,151988005,2011654,"2026 final tax roll (Florida DOR NAL, Bay County, posted 2026-10-16)",https://floridarevenue.com/property/dataportal/
+80,Combat-disabled veteran 65+ discount,196.082,all,337,337,41873169,580602,"2026 final tax roll (Florida DOR NAL, Bay County, posted 2026-10-16)",https://floridarevenue.com/property/dataportal/
+81,Granny flat (parent or grandparent living quarters),193.703,all,5,5,272654,3579,"2026 final tax roll (Florida DOR NAL, Bay County, posted 2026-10-16)",https://floridarevenue.com/property/dataportal/
