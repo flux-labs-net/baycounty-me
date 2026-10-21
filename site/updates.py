@@ -9,6 +9,9 @@ from datetime import datetime, timezone
 import html
 
 CHANGES = [
+    {'date': '2026-10-20', 'title': 'Contracts and vendors',
+     'text': 'Major contracts approved by Bay County and its cities since October 2022: winners, how they were awarded, change orders, emergency purchases, the bidding rules, and who the county actually paid the most.',
+     'pages': ['/public-money/contracts']},
     {'date': '2026-10-20', 'title': 'Fees, utility bills and who runs Bay County',
      'text': 'Every flat fee on Bay County tax bills, a typical monthly water, sewer and garbage bill in each city, and a guide to every elected seat, appointed manager and top salary. My Address now shows the actual fees on each parcel.',
      'pages': ['/public-money/fees-and-bills', '/who-runs-bay-county', '/my-address']},

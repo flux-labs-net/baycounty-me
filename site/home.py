@@ -32,11 +32,12 @@ def stats():
     pcb25 = sum(c['amount'] for c in ts['bed_tax']['collections'] if c['fy'] == 2025 and c['district'] == 'Panama City Beach')
     sp = ts['infra_surtax']['projects']
     done = sum(1 for p in sp if p['status'] == 'completed')
+    ct = _j('contracts', 'contracts.json'); ct_n = sum(1 for c in ct['contracts'] if c.get('amount'))
     rec = _j('amendment3', 'rec_bay.json')
     a3 = -sum(r['impact']['FY2029'] for r in rec['bay'])
     return dict(lv_tot=lv_tot, school_share=lv['school'] / lv_tot, ngovs=len(td['govs']), cra_spent=cra_spent, cra_n=len(cra),
                 fema=pa['federal_obligated'], fema_n=pa['projects'], ia=mi['fema_ia']['bay_total_approved_ihp_owners_plus_renters'],
-                debt=debt, findings=findings, repeats=repeats, bt25=bt25, pcb_share=pcb25 / bt25, sp_n=len(sp), sp_done=done, a3=a3)
+                debt=debt, findings=findings, repeats=repeats, bt25=bt25, pcb_share=pcb25 / bt25, sp_n=len(sp), sp_done=done, a3=a3, ct_n=ct_n)
 
 
 def home_page():
@@ -54,8 +55,10 @@ def home_page():
         ('/public-money/audits', 'Audit Findings', 'What the auditors found', 'Three years of audit findings in plain English, including problems that keep coming back.', f'{s["findings"]}', f'findings, {s["repeats"]} repeats in the latest audits'),
         ('/public-money/fees-and-bills', 'Fees & Bills', 'Fees on your tax bill, and water and garbage', 'Fire, stormwater and other flat fees, plus a typical monthly utility bill in each city.', '$28.1M', 'in flat fees on FY2026 tax bills'),
         ('/who-runs-bay-county', 'Officials', 'Who runs Bay County', 'Every elected seat and appointed manager, and what top officials are paid.', '5', 'independently elected county officers'),
+        ('/public-money/contracts', 'Contracts', 'Who gets the contracts', 'Major contracts since 2022: winners, how they were awarded, change orders and who the county paid most.', 'CONTRACTS_N', 'contracts tracked'),
         ('/public-money/amendment-3', 'Amendment 3', 'What changes if it passes', 'The property tax amendment on the November ballot: your bill before and after, and the state\'s estimates.', M(s['a3']), 'less for Bay governments in FY2029 (state est.)'),
     ]
+    topics = [t if t[4] != 'CONTRACTS_N' else t[:4] + (str(s['ct_n']),) + t[5:] for t in topics]
     cards = ''.join(f'''<a class="topic" href="{u}"><span class="eyebrow">{e}</span><h3>{h}</h3><p>{p}</p><span class="t-stat"><b>{v}</b> {l}</span></a>''' for u, e, h, p, v, l in topics)
     return f'''<div class="page home">
   <section class="hero">
@@ -95,7 +98,6 @@ def home_page():
   <section class="section" aria-labelledby="soon">
     <div class="sec-hd"><h2 id="soon">In the works</h2><span class="muted">Research underway now</span></div>
     <div class="cols">
-      <div><h3>Contracts and vendors</h3><p>Who the county and cities pay the most, how contracts were awarded, and change orders that grew them.</p></div>
       <div><h3>How they voted</h3><p>Every commissioner's vote on budgets, tax rates, big contracts and CRA deals.</p></div>
       <div><h3>Who gets paid</h3><p>Check registers and vendor payments, as the records requests for them come back.</p></div>
     </div>

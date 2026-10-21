@@ -60,7 +60,12 @@ def _audits():
     return [{'k': 'Audit finding', 't': f"{short(a['government'])}: {f.get('title', '')}", 's': f.get('plain', ''), 'u': '/public-money/audits'} for a in d['audits'] for f in a['findings']]
 
 
-INDEXERS = [_glossary, _cra, _fema, _surtax, _audits]
+def _contracts():
+    d = json.load(open(os.path.join(DATA, 'contracts', 'contracts.json')))
+    return [{'k': 'Contract', 't': c['vendor'] or 'Vendor not named', 's': f"${c['amount']:,.0f} · {c['government']} · {c.get('purpose') or ''} ({c.get('date') or ''})", 'u': '/public-money/contracts'} for c in d['contracts'] if c.get('amount')]
+
+
+INDEXERS = [_glossary, _cra, _fema, _surtax, _audits, _contracts]
 
 
 def build_index(out_dir, pages):
