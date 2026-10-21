@@ -365,3 +365,18 @@ a.src:hover{color:var(--blue)}
 .st-sel-hd > div{display:flex;flex-direction:column;gap:2px;flex:1;min-width:0}
 .st-x{border:0;background:none;color:var(--muted);font-size:1.4rem;line-height:1;cursor:pointer;padding:0 4px}
 .st-meta{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+
+/* Vote cards */
+.vt{gap:6px;min-width:0;overflow-wrap:anywhere}
+.vt-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.vt-board{font-size:.8rem;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.vt-top .badge{flex:none;white-space:nowrap}
+.vt-meta{font-size:.82rem;margin-top:-4px}
+.vt-h{font-weight:600;font-size:1rem;line-height:1.35;color:var(--ink)}
+.vt-s{color:var(--ink);line-height:1.5}
+.vt .vchip b{font-weight:500}
+.fd a.src{white-space:normal;align-self:flex-start}
+
+.method{overflow-wrap:anywhere}
+.method li{min-width:0}
+.m-h{font-size:.95rem;margin:4px 0 0}

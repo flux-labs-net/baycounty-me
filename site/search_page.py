@@ -67,7 +67,11 @@ def _contracts():
 
 def _votes():
     d = json.load(open(os.path.join(DATA, 'votes', 'votes.json')))
-    return [{'k': 'Vote', 't': v.get('plain_summary') or v.get('item'), 's': f"{v.get('date')} · {v.get('tally') or ''} {v.get('outcome') or ''} · {', '.join(v.get('by_member') or {})}", 'u': '/public-money/votes'} for v in d['votes']]
+    import re
+    names = {b['id']: re.sub(r'\bCity City\b', 'City', b['name']) for b in d['bodies']}
+    return [{'k': 'Vote', 't': v.get('headline') or v.get('plain_summary') or v.get('item'),
+             's': f"{names.get(v['body'], v['body'])} · {v.get('date')} · {re.sub(r'[(].*?[)]', '', v.get('tally') or '').strip()} {v.get('outcome') or ''} · {v.get('summary') or ''} {', '.join(v.get('by_member') or {})}",
+             'u': '/public-money/votes?q=' + __import__('urllib.parse').parse.quote((v.get('headline') or '')[:40]) + '#all'} for v in d['votes']]
 
 
 INDEXERS = [_glossary, _cra, _fema, _surtax, _audits, _contracts, _votes]

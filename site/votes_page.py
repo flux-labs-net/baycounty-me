@@ -5,6 +5,49 @@ from collections import defaultdict, Counter
 HERE = os.path.dirname(os.path.abspath(__file__))
 SRC = os.path.join(HERE, '..', 'data', 'votes', 'votes.json')
 e = lambda s: html.escape(str(s if s is not None else ''))
+from datetime import date as _date
+import re as _re2
+
+
+def board_name(n):
+    return _re2.sub(r'\bCity City\b', 'City', n or '')
+
+
+def nice(d):
+    try:
+        return _date.fromisoformat(d[:10]).strftime('%b %-d, %Y')
+    except Exception:
+        return d or ''
+
+
+def tally(t):
+    return _re2.sub(r'\s*\(.*?\)', '', t or '').strip()
+
+
+def src_label(v):
+    t = (v.get('source_title') or '').lower()
+    kind = 'Minutes' if 'minute' in t else 'Agenda' if 'agenda' in t else 'Source'
+    return f'{kind}, {nice(v.get("date"))}'
+
+
+METHOD = [
+    'Each vote comes from the official minutes posted by that government. A few recent votes whose minutes aren\'t posted yet come from the agenda packet or local news, and the source link says so.',
+    'Panama City, Lynn Haven, Panama City Beach and Parker minutes list how each member voted. Callaway, Mexico Beach and Springfield minutes usually say "carried unanimously" and name only the no votes, so members present are shown as yes. A member shown as absent may also have abstained or stepped out.',
+    'County Commission items on the consent agenda are approved together in one vote. The count shown is that vote.',
+    'Many city minutes are scanned images read with text recognition, so a name or number can be misread. Every vote links to its minutes so you can check.',
+    'The headline and summary for each vote are rewritten in plain English from the motion in the minutes, without adding anything the minutes don\'t say. The dollar amount is the largest figure in the motion.',
+    'Lynn Haven: Judy Vandergrift served through May 2025 and Judy Tinder\'s recorded votes run through September 2026. Corey Langford now holds that seat. Mayor Jesse Nelson was followed by Dave Lowery in early 2026.',
+]
+
+ORDER = {'no': 0, 'yes': 1, 'abstain': 2, 'absent': 3, 'unknown': 4}
+VL = {'yes': 'Yes', 'no': 'No', 'absent': 'Absent', 'abstain': 'Abstained', 'unknown': '?'}
+
+
+def chips(bm):
+    items = sorted((bm or {}).items(), key=lambda kv: ORDER.get(kv[1], 9))
+    return ''.join(f'<span class="vchip v-{e(x)}">{e(n)} <b>{VL.get(x, e(x))}</b></span>' for n, x in items)
+
+
 CAT = {'budget': 'Budget', 'millage': 'Tax rate', 'contract': 'Contract', 'cra': 'CRA', 'land': 'Land', 'debt': 'Borrowing', 'other': 'Other'}
 
 
@@ -26,9 +69,10 @@ def votes_page(out_dir):
     for v in vs:
         for n, x in (v.get('by_member') or {}).items():
             mem[(v['body'], n)][x] += 1
-    data = {'bodies': {k: {'n': b['name']} for k, b in bodies.items()}, 'cat': CAT,
-            'votes': [{'b': v['body'], 'd': v.get('date'), 'c': v.get('category'), 'i': v.get('item'), 'a': v.get('amount'), 'o': v.get('outcome'), 't': v.get('tally'),
-                       'm': v.get('by_member') or {}, 'x': is_split(v), 's': v.get('plain_summary'), 'u': v.get('source_url'), 'ut': v.get('source_title')} for v in vs]}
+    data = {'bodies': {k: {'n': board_name(b['name'])} for k, b in bodies.items()}, 'cat': CAT,
+            'votes': [{'b': v['body'], 'd': v.get('date'), 'dn': nice(v.get('date')), 'c': v.get('category'), 'i': v.get('item'), 'a': v.get('amount'), 'o': v.get('outcome'), 't': tally(v.get('tally')),
+                       'm': v.get('by_member') or {}, 'x': is_split(v), 'h': v.get('headline') or v.get('item'), 's': v.get('summary') or v.get('plain_summary'),
+                       'u': v.get('source_url'), 'ut': v.get('source_title'), 'ul': src_label(v)} for v in vs]}
     js = open(os.path.join(HERE, 'votes.js')).read().replace('__VT__', json.dumps(data, ensure_ascii=False, separators=(',', ':')))
     open(os.path.join(out_dir, 'assets', 'votes.js'), 'w').write(js)
 
@@ -42,11 +86,17 @@ def votes_page(out_dir):
             c = mem.get((k, m['name']), Counter())
             rec = sum(c.values())
             rows += f'<tr><th scope="row">{e(m["name"])}</th><td class="small">{e(m.get("seat"))}</td><td class="small">{e(m.get("term_end"))}</td><td class="num">{rec or "—"}</td><td class="num">{c["no"] or ("0" if rec else "—")}</td></tr>'
-        roster += f'''<details class="tbl-toggle"{" open" if cnt[k] else ""}><summary>{e(b["name"])} <span class="muted">· {cnt[k]} votes recorded</span></summary><div class="tablewrap"><table class="tx-table"><thead><tr><th scope="col">Member</th><th scope="col">Seat</th><th scope="col">Term</th><th scope="col" class="num">Recorded votes</th><th scope="col" class="num">Voted no</th></tr></thead><tbody>{rows}</tbody></table></div>{f'<p class="note"><a class="src" href="{e(b["source_url"])}" target="_blank" rel="noopener">Roster source</a></p>' if b.get("source_url") else ""}</details>'''
-    sp_html = ''.join(f'''<li class="fd"><div class="fd-hd"><b>{e(bodies.get(v["body"], {}).get("name", v["body"]))}</b> <span class="muted">{e(v.get("date"))} · {e(CAT.get(v.get("category"), v.get("category")))}{" · $" + format(v["amount"], ",.0f") if v.get("amount") else ""}</span> <span class="badge warn">{e(v.get("tally"))} {e(v.get("outcome"))}</span></div>
-      <div class="fd-t">{e(v.get("plain_summary") or v.get("item"))}</div><p class="small"><b>No:</b> {e(", ".join(n for n, x in (v.get("by_member") or {}).items() if x == "no") or "not named in the minutes")} · <b>Yes:</b> {e(", ".join(n for n, x in (v.get("by_member") or {}).items() if x == "yes") or "not named")}{" · <b>Absent:</b> " + e(", ".join(n for n, x in v["by_member"].items() if x == "absent")) if "absent" in (v.get("by_member") or {}).values() else ""}</p>
-      <a class="src" href="{e(v.get("source_url"))}" target="_blank" rel="noopener">{e(v.get("source_title") or "Minutes")}</a></li>''' for v in split[:25])
-    missing = [bodies[k]['name'] for k in bodies if not cnt[k] and not k.endswith('-cra')]
+        roster += f'''<details class="tbl-toggle"{" open" if cnt[k] else ""}><summary>{e(board_name(b["name"]))} <span class="muted">· {cnt[k]} votes recorded</span></summary><div class="tablewrap"><table class="tx-table"><thead><tr><th scope="col">Member</th><th scope="col">Seat</th><th scope="col">Term</th><th scope="col" class="num">Recorded votes</th><th scope="col" class="num">Voted no</th></tr></thead><tbody>{rows}</tbody></table></div>{f'<p class="note"><a class="src" href="{e(b["source_url"])}" target="_blank" rel="noopener">Roster source</a></p>' if b.get("source_url") else ""}</details>'''
+    def card(v):
+        meta = ' · '.join(x for x in [nice(v.get('date')), CAT.get(v.get('category'), v.get('category') or ''), ('$' + format(v['amount'], ',.0f')) if v.get('amount') else ''] if x)
+        return f'''<li class="fd vt"><div class="vt-top"><span class="vt-board">{e(board_name(bodies.get(v["body"], {}).get("name", v["body"])))}</span><span class="badge warn">{e(tally(v.get("tally")))} {e((v.get("outcome") or "").capitalize())}</span></div>
+      <span class="vt-meta muted">{e(meta)}</span>
+      <div class="vt-h">{e(v.get("headline") or v.get("item"))}</div>
+      <p class="vt-s">{e(v.get("summary") or v.get("plain_summary") or "")}</p>
+      {f'<p class="votes-row">{chips(v.get("by_member"))}</p>' if v.get("by_member") else ""}
+      <a class="src" href="{e(v.get("source_url"))}" target="_blank" rel="noopener" title="{e(v.get("source_title") or "")}">{e(src_label(v))}</a></li>'''
+    sp_html = ''.join(card(v) for v in split[:25])
+    missing = [board_name(bodies[k]['name']) for k in bodies if not cnt[k] and not k.endswith('-cra')]
     return f'''<div class="page tax">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Accountability · Votes</span><h1>How they voted</h1>
     <p class="lede">Budgets, tax rates, big contracts, land deals and borrowing are decided by recorded votes. Here's how each elected official voted on the money decisions since 2024, from official minutes.</p></div>
@@ -73,7 +123,8 @@ def votes_page(out_dir):
   <section class="tx-sec"><div class="sec-hd"><h2 id="who">Members and their records</h2><span class="muted">Counts cover only the votes recorded on this page</span></div>{roster}</section>
   <section class="tx-sec method"><div class="sec-hd"><h2 id="src">Coverage and gaps</h2></div>
     <p>{f"Not yet compiled: {e(', '.join(missing))}. Their minutes are being reviewed and will be added." if missing else ""} Votes come from official minutes; where minutes give only a tally, members are shown as "unknown". Minutes for Lynn Haven, Callaway, Panama City Beach, Mexico Beach, Parker and Springfield are mostly scanned and were read with text recognition, so check the linked minutes before relying on any single vote.</p>
-    <ul class="plain">{''.join(f"<li>{e(n)}</li>" for n in (d.get("notes") or []))}</ul>
+    <h3 class="m-h">How we read the minutes</h3>
+    <ul class="plain">{''.join(f"<li>{x}</li>" for x in METHOD)}</ul>
     {f'<details class="gaps"><summary>What we couldn\'t find ({len(d.get("gaps") or [])})</summary><ul>' + ''.join(f"<li>{e(g)}</li>" for g in d.get("gaps") or []) + '</ul></details>' if d.get("gaps") else ''}</section>
 </div>
 <link rel="stylesheet" href="/assets/tax.css">
