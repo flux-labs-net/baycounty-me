@@ -65,7 +65,12 @@ def _contracts():
     return [{'k': 'Contract', 't': c['vendor'] or 'Vendor not named', 's': f"${c['amount']:,.0f} · {c['government']} · {c.get('purpose') or ''} ({c.get('date') or ''})", 'u': '/public-money/contracts'} for c in d['contracts'] if c.get('amount')]
 
 
-INDEXERS = [_glossary, _cra, _fema, _surtax, _audits, _contracts]
+def _votes():
+    d = json.load(open(os.path.join(DATA, 'votes', 'votes.json')))
+    return [{'k': 'Vote', 't': v.get('plain_summary') or v.get('item'), 's': f"{v.get('date')} · {v.get('tally') or ''} {v.get('outcome') or ''} · {', '.join(v.get('by_member') or {})}", 'u': '/public-money/votes'} for v in d['votes']]
+
+
+INDEXERS = [_glossary, _cra, _fema, _surtax, _audits, _contracts, _votes]
 
 
 def build_index(out_dir, pages):

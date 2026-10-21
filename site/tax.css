@@ -286,3 +286,12 @@ a.src:hover{color:var(--blue)}
 .cards.two-col{grid-template-columns:repeat(2,minmax(0,1fr))}
 @media (max-width:900px){.cards.two-col{grid-template-columns:minmax(0,1fr)}}
 .gov-card .tx-table{min-width:0}
+
+.votes-row{display:flex;flex-wrap:wrap;gap:6px;margin:2px 0}
+.vchip{font-size:.76rem;padding:2px 8px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.vchip.v-no{color:#A86A00;border-color:color-mix(in srgb,#A86A00 45%,transparent);font-weight:500}
+.vchip.v-yes{color:var(--ink)}
+:root[data-theme="dark"] .vchip.v-no{color:#F2C94C}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .vchip.v-no{color:#F2C94C}}
+
+.tx-sec > *, .tx-sec details{min-width:0;max-width:100%}
