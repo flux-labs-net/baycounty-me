@@ -2,18 +2,9 @@
 // Lets AI assistants query the same public data as the REST API. Read-only, no auth.
 // Add as a remote MCP server / custom connector: https://baycounty.me/api/mcp
 const {filterRows} = require('./v1');
+const {loadFile: load, datasetRows} = require('./_data');
 const SITE = 'https://baycounty.me';
-const cache = new Map();
 const VERSIONS = ['2025-06-18', '2025-03-26', '2024-11-05'];
-
-async function load(req, path) {
-  const c = cache.get(path);
-  if (c && Date.now() - c.t < 300e3) return c.v;
-  const host = req.headers['x-forwarded-host'] || req.headers.host || 'baycounty.me';
-  const r = await fetch(`https://${host}${path}`);
-  if (!r.ok) throw new Error(`Could not load ${path}`);
-  const v = await r.json(); cache.set(path, {t: Date.now(), v}); return v;
-}
 
 const TOOLS = [
   {name: 'list_datasets', title: 'List datasets',
@@ -52,14 +43,15 @@ async function call(req, name, a = {}) {
     if (!meta) throw new Error(`Unknown dataset "${a.id}". Valid ids: ${c.datasets.map(d => d.id).join(', ')}`);
     const query = {...(a.filters || {}), ...(a.q ? {q: a.q} : {}), ...(a.sort ? {sort: a.sort} : {})};
     for (const k of Object.keys(query)) query[k] = String(query[k]);
-    const rows = filterRows(await load(req, meta.json), query);
+    const rows = filterRows((await datasetRows(req, meta)).rows, query);
     const limit = Math.min(Math.max(a.limit || 25, 1), 200), offset = Math.max(a.offset || 0, 0);
     let page = rows.slice(offset, offset + limit);
     if (a.fields) { const f = a.fields.split(',').map(s => s.trim()); page = page.map(r => Object.fromEntries(f.filter(k => k in r).map(k => [k, r[k]]))); }
     return {dataset: meta.id, total: rows.length, offset, returned: page.length, rows: page, note: 'Cite each row\'s source link. Data compiled by BayCounty.me from public records.'};
   }
   if (name === 'get_government') {
-    const rows = (await load(req, '/downloads/government-profiles.json')).map(r => ({slug: (r.page || '').split('/').pop(), ...r}));
+    const c = await load(req, '/downloads/index.json'), gp = c.datasets.find(d => d.id === 'government-profiles');
+    const rows = (gp ? (await datasetRows(req, gp)).rows : await load(req, '/downloads/government-profiles.json')).map(r => ({slug: (r.page || '').split('/').pop(), ...r}));
     if (!a.slug) return {governments: rows};
     const g = rows.find(r => r.slug === a.slug);
     if (!g) throw new Error(`Unknown government "${a.slug}". Valid: ${rows.map(r => r.slug).join(', ')}`);

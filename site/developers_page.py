@@ -19,7 +19,7 @@ def developers_page(out_dir):
     <div class="stamp"><a class="pill" href="/api/v1">Open the API</a><span>{len(cat["datasets"])} datasets</span></div></header>
   <nav class="jump" aria-label="On this page"><a href="#start">Quick start</a><a href="#endpoints">Endpoints</a><a href="#filters">Filtering</a><a href="#datasets">Datasets</a><a href="#mcp">AI assistants (MCP)</a><a href="#terms">Use and limits</a></nav>
   <section class="tx-sec" id="start"><div class="sec-hd"><h2>Quick start</h2></div>
-    <p>Every dataset on the <a href="/open-data">Open data</a> page is also available as an API. Responses are JSON (or CSV with <code>format=csv</code>), and every row carries a link to its source record.</p>
+    <p>Every dataset on the <a href="/open-data">Open data</a> page is also available as an API. Responses are JSON (or CSV with <code>format=csv</code>), and every row carries a link to its source record. Rows are served live from the BayCounty.me database, so newly added records show up within about five minutes; each response says where its rows came from in <code>meta.data_source</code>.</p>
     {code(f"curl '{SITE}/api/v1/datasets/contracts?government=Bay%20County%20BOCC&amount_min=1000000&sort=-amount&limit=5'")}
     {code(f"curl '{SITE}/api/v1/datasets/votes?board=Lynn%20Haven%20City%20Commission&split=true&date_from=2025-01-01'")}
     {code(f"curl '{SITE}/api/v1/datasets/salary-positions?category=law_enforcement&fields=employer,title,pay_min,pay_max&format=csv'")}

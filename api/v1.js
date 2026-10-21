@@ -7,18 +7,10 @@
 //   GET /api/v1/governments[/{slug}]    one profile per government
 //   GET /api/v1/search?q=               search every page on the site
 //   GET /api/v1/openapi.json            OpenAPI 3.1 description
+// Dataset rows are read from the BayCounty.me database (see api/_data.js), falling back to the published files.
+const {loadFile: load, datasetRows} = require('./_data');
 const SITE = 'https://baycounty.me';
-const cache = new Map();
 const hits = new Map();
-
-async function load(req, path) {
-  const c = cache.get(path);
-  if (c && Date.now() - c.t < 300e3) return c.v;
-  const host = req.headers['x-forwarded-host'] || req.headers.host || 'baycounty.me';
-  const r = await fetch(`https://${host}${path}`);
-  if (!r.ok) throw Object.assign(new Error('not found'), {status: r.status === 404 ? 404 : 502});
-  const v = await r.json(); cache.set(path, {t: Date.now(), v}); return v;
-}
 
 const RESERVED = new Set(['q', 'fields', 'sort', 'limit', 'offset', 'format', 'path']);
 function filterRows(rows, query) {
@@ -112,17 +104,19 @@ module.exports = async (req, res) => {
       const meta = catalog.datasets.find(d => d.id === parts[1]);
       if (!meta) return res.status(404).json({error: `Unknown dataset "${parts[1]}".`, datasets: catalog.datasets.map(d => d.id)});
       if (parts[2] === 'schema') return res.status(200).json(meta);
-      const rows = filterRows(await load(req, meta.json), req.query);
+      const {rows: all, source} = await datasetRows(req, meta);
+      const rows = filterRows(all, req.query);
       const limit = Math.min(Math.max(parseInt(req.query.limit || '100', 10) || 100, 1), 1000), offset = Math.max(parseInt(req.query.offset || '0', 10) || 0, 0);
       let page = rows.slice(offset, offset + limit);
       if (req.query.fields) { const f = String(req.query.fields).split(',').map(s => s.trim()); page = page.map(r => Object.fromEntries(f.filter(k => k in r).map(k => [k, r[k]]))); }
       if (req.query.format === 'csv') { res.setHeader('Content-Type', 'text/csv; charset=utf-8'); res.setHeader('Content-Disposition', `inline; filename="${meta.id}.csv"`); return res.status(200).send(toCsv(page)); }
       const nextQ = new URLSearchParams(Object.entries(req.query).filter(([k]) => k !== 'path')); nextQ.set('offset', offset + limit); nextQ.set('limit', limit);
       return res.status(200).json({dataset: meta.id, title: meta.title, data: page,
-        meta: {total: rows.length, limit, offset, next: offset + limit < rows.length ? `${SITE}/api/v1/datasets/${meta.id}?${nextQ}` : null, updated: catalog.updated, source_note: 'Each row links to its source record. Check the original before relying on a single figure.'}});
+        meta: {total: rows.length, limit, offset, next: offset + limit < rows.length ? `${SITE}/api/v1/datasets/${meta.id}?${nextQ}` : null, updated: catalog.updated, data_source: source, source_note: 'Each row links to its source record. Check the original before relying on a single figure.'}});
     }
     if (parts[0] === 'governments') {
-      const rows = await load(req, '/downloads/government-profiles.json');
+      const gp = catalog.datasets.find(d => d.id === 'government-profiles');
+      const rows = gp ? (await datasetRows(req, gp)).rows : await load(req, '/downloads/government-profiles.json');
       const withSlug = rows.map(r => ({slug: (r.page || '').split('/').pop(), ...r}));
       if (parts.length === 1) return res.status(200).json({data: withSlug});
       const g = withSlug.find(r => r.slug === parts[1]);

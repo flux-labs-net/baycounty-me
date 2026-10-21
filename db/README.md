@@ -48,4 +48,6 @@ If a site dataset gains a column, the sync fails with a message naming it: add a
 
 The same rules as the site apply: individual campaign donors and rank-and-file employees are never stored by name. Only elected officials and top leaders are named in salary data.
 
-The site and API still read the JSON files. Moving them to read from the database is the next phase.
+## Who reads it
+
+The API (`/api/v1`) and the MCP server read dataset rows from the database through Supabase's public read-only API (`api/_data.js`), cached for five minutes. If the database can't be reached they fall back to the published `/downloads` files, and `meta.data_source` says which was used. Set `API_SOURCE=files` in Vercel to force the files. The static site pages are still built from the JSON in `data/`.
