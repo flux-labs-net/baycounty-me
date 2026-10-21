@@ -993,6 +993,931 @@
     }
    ],
    "method_note": "Registers are scanned images; figures were read by OCR and parsed line by line. For every month with a legible printed total, the parsed BOCC line items summed to 94.7%-100.1% of the printed total (most months 99.6%-100%). Only the Board of County Commissioners section is counted (the CVB and CDC sections are excluded). Vendor names were merged across spelling variants (older registers truncate names at 25 characters). top_vendors excludes payees that are other governments, constitutional officers, tax/payroll/benefit remittances, pass-through transfers, banks/debt service, title/escrow agents and law-firm trust payments; top_payees_all shows the unfiltered ranking. Amounts are net of voided checks listed in the register."
+  },
+  {
+   "government": "City of Lynn Haven",
+   "fy": 2023,
+   "url": "https://www.cityoflynnhaven.com/AgendaCenter",
+   "source_note": "\"Check Reconciliation (Filtered)\" warrant lists attached to City Commission agenda packets under \"City Manager's Report - Warrant list update\". The lists show only checks of about $10,000 or more (smallest seen $10,035.07). Checks were de-duplicated by check number because workshop and regular-meeting packets repeat the same list.",
+   "check_dates_covered": [
+    "10/07/2022",
+    "09/30/2023"
+   ],
+   "checks_counted": 484,
+   "monthly_sources": [
+    {
+     "packet": "2022-10-25_10252022-422",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10252022-422"
+    },
+    {
+     "packet": "2022-11-08_11082022-425",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_11082022-425"
+    },
+    {
+     "packet": "2022-12-13_12132022-435",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_12132022-435"
+    },
+    {
+     "packet": "2023-01-10_01102023-441",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_01102023-441"
+    },
+    {
+     "packet": "2023-01-24_01242023-446",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_01242023-446"
+    },
+    {
+     "packet": "2023-02-14_02142023-448",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_02142023-448"
+    },
+    {
+     "packet": "2023-02-28_02282023-456",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_02282023-456"
+    },
+    {
+     "packet": "2023-03-14_03142023-463",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_03142023-463"
+    },
+    {
+     "packet": "2023-04-11_04112023-470",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_04112023-470"
+    },
+    {
+     "packet": "2023-05-09_05092023-520",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_05092023-520"
+    },
+    {
+     "packet": "2023-05-23_05232023-566",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_05232023-566"
+    },
+    {
+     "packet": "2023-06-13_06132023-571",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_06132023-571"
+    },
+    {
+     "packet": "2023-06-27_06272023-577",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_06272023-577"
+    },
+    {
+     "packet": "2023-07-11_07112023-578",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_07112023-578"
+    },
+    {
+     "packet": "2023-07-25_07252023-585",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_07252023-585"
+    },
+    {
+     "packet": "2023-08-04_08042023-586",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_08042023-586"
+    },
+    {
+     "packet": "2023-08-22_08222023-591",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_08222023-591"
+    },
+    {
+     "packet": "2023-09-13_09132023-599",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_09132023-599"
+    },
+    {
+     "packet": "2023-09-26_09262023-618",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_09262023-618"
+    },
+    {
+     "packet": "2023-10-09_10092023-643",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10092023-643"
+    },
+    {
+     "packet": "2023-11-14_11142023-656",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_11142023-656"
+    },
+    {
+     "packet": "2023-12-12_12122023-698",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_12122023-698"
+    }
+   ],
+   "parsed_total_listed_checks": 32514961.39,
+   "top_vendors": [
+    {
+     "vendor": "CULPEPPER CONST",
+     "vendor_number": "25944",
+     "amount": 5120862.36
+    },
+    {
+     "vendor": "BGN CONTRACTORS",
+     "vendor_number": "26721",
+     "amount": 3305699.7
+    },
+    {
+     "vendor": "QUILLIAN POWELL",
+     "vendor_number": "25999",
+     "amount": 2108968.83
+    },
+    {
+     "vendor": "ABENTRAS",
+     "vendor_number": "21140",
+     "amount": 1782457.07
+    },
+    {
+     "vendor": "ROBERTS & ROBER",
+     "vendor_number": "16119",
+     "amount": 1760771.63
+    },
+    {
+     "vendor": "AMERICAN SAND &",
+     "vendor_number": "539",
+     "amount": 1038983.87
+    },
+    {
+     "vendor": "FPL - FLORIDA P",
+     "vendor_number": "172",
+     "amount": 882256.67
+    },
+    {
+     "vendor": "PANHANDLE ENGIN",
+     "vendor_number": "263",
+     "amount": 787419.25
+    },
+    {
+     "vendor": "IMAGEWORKS C317",
+     "vendor_number": "25127",
+     "amount": 605358.65
+    },
+    {
+     "vendor": "PUBLIC RISK MGM",
+     "vendor_number": "26087",
+     "amount": 603812.0
+    },
+    {
+     "vendor": "DEWBERRY",
+     "vendor_number": "19668",
+     "amount": 588231.29
+    },
+    {
+     "vendor": "BALDWIN CONTAIN",
+     "vendor_number": "19973",
+     "amount": 438812.32
+    },
+    {
+     "vendor": "DAVISON FUELS I",
+     "vendor_number": "15217",
+     "amount": 426309.67
+    },
+    {
+     "vendor": "GULF COAST UTIL",
+     "vendor_number": "3488",
+     "amount": 389470.6
+    },
+    {
+     "vendor": "READY MIX USA",
+     "vendor_number": "24683",
+     "amount": 384739.66
+    },
+    {
+     "vendor": "CONTAINER SYSTE",
+     "vendor_number": "27653",
+     "amount": 371654.0
+    },
+    {
+     "vendor": "GREENSOUTH SOLU",
+     "vendor_number": "28146",
+     "amount": 370307.5
+    },
+    {
+     "vendor": "ARRIS GENERAL",
+     "vendor_number": "28203",
+     "amount": 364880.23
+    },
+    {
+     "vendor": "CW ROBERTS CONT",
+     "vendor_number": "4630",
+     "amount": 360727.66
+    },
+    {
+     "vendor": "PHOENIX CONSTRU",
+     "vendor_number": "278",
+     "amount": 345148.55
+    }
+   ],
+   "top_payees_all": [
+    {
+     "payee": "CULPEPPER CONST",
+     "vendor_number": "25944",
+     "amount": 5120862.36
+    },
+    {
+     "payee": "BGN CONTRACTORS",
+     "vendor_number": "26721",
+     "amount": 3305699.7
+    },
+    {
+     "payee": "QUILLIAN POWELL",
+     "vendor_number": "25999",
+     "amount": 2108968.83
+    },
+    {
+     "payee": "ABENTRAS",
+     "vendor_number": "21140",
+     "amount": 1782457.07
+    },
+    {
+     "payee": "ROBERTS & ROBER",
+     "vendor_number": "16119",
+     "amount": 1760771.63
+    },
+    {
+     "payee": "AMERICAN SAND &",
+     "vendor_number": "539",
+     "amount": 1038983.87
+    },
+    {
+     "payee": "FPL - FLORIDA P",
+     "vendor_number": "172",
+     "amount": 882256.67
+    },
+    {
+     "payee": "PANHANDLE ENGIN",
+     "vendor_number": "263",
+     "amount": 787419.25
+    },
+    {
+     "payee": "GENERAL EMPLOYE",
+     "vendor_number": "153",
+     "amount": 769793.26
+    },
+    {
+     "payee": "IMAGEWORKS C317",
+     "vendor_number": "25127",
+     "amount": 605358.65
+    },
+    {
+     "payee": "PUBLIC RISK MGM",
+     "vendor_number": "26087",
+     "amount": 603812.0
+    },
+    {
+     "payee": "DEWBERRY",
+     "vendor_number": "19668",
+     "amount": 588231.29
+    },
+    {
+     "payee": "BAY COUNTY WATE",
+     "vendor_number": "30",
+     "amount": 438865.05
+    },
+    {
+     "payee": "BALDWIN CONTAIN",
+     "vendor_number": "19973",
+     "amount": 438812.32
+    },
+    {
+     "payee": "REGIONS BANK",
+     "vendor_number": "962",
+     "amount": 431512.5
+    },
+    {
+     "payee": "DAVISON FUELS I",
+     "vendor_number": "15217",
+     "amount": 426309.67
+    },
+    {
+     "payee": "GULF COAST UTIL",
+     "vendor_number": "3488",
+     "amount": 389470.6
+    },
+    {
+     "payee": "READY MIX USA",
+     "vendor_number": "24683",
+     "amount": 384739.66
+    },
+    {
+     "payee": "CONTAINER SYSTE",
+     "vendor_number": "27653",
+     "amount": 371654.0
+    },
+    {
+     "payee": "GREENSOUTH SOLU",
+     "vendor_number": "28146",
+     "amount": 370307.5
+    }
+   ],
+   "method_note": "Scanned pages read by OCR. Vendor names are truncated to 15 characters in the source report, so payees are grouped by the city's vendor number. Only checks of roughly $10,000 or more are listed, and electronic payments may not appear, so totals understate spending. Coverage depends on which packets included a warrant list. One FY2025 row with an unreadable check date (Hancock Bank, $18,067.03) was dropped."
+  },
+  {
+   "government": "City of Lynn Haven",
+   "fy": 2024,
+   "url": "https://www.cityoflynnhaven.com/AgendaCenter",
+   "source_note": "\"Check Reconciliation (Filtered)\" warrant lists attached to City Commission agenda packets under \"City Manager's Report - Warrant list update\". The lists show only checks of about $10,000 or more (smallest seen $10,035.07). Checks were de-duplicated by check number because workshop and regular-meeting packets repeat the same list.",
+   "check_dates_covered": [
+    "10/15/2023",
+    "09/30/2024"
+   ],
+   "checks_counted": 370,
+   "monthly_sources": [
+    {
+     "packet": "2023-11-14_11142023-657",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_11142023-657"
+    },
+    {
+     "packet": "2023-12-12_12122023-698",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_12122023-698"
+    },
+    {
+     "packet": "2024-01-09_01092024-703",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_01092024-703"
+    },
+    {
+     "packet": "2024-01-23_01232024-709",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_01232024-709"
+    },
+    {
+     "packet": "2024-02-13_02132024-717",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_02132024-717"
+    },
+    {
+     "packet": "2024-02-27_02272024-722",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_02272024-722"
+    },
+    {
+     "packet": "2024-03-12_03122024-726",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_03122024-726"
+    },
+    {
+     "packet": "2024-04-09_04092024-736",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_04092024-736"
+    },
+    {
+     "packet": "2024-04-23_04232024-741",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_04232024-741"
+    },
+    {
+     "packet": "2024-04-23_04232024-742",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_04232024-742"
+    },
+    {
+     "packet": "2024-05-14_05142024-749",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_05142024-749"
+    },
+    {
+     "packet": "2024-05-28_05282024-757",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_05282024-757"
+    },
+    {
+     "packet": "2024-06-11_06112024-761",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_06112024-761"
+    },
+    {
+     "packet": "2024-06-25_06252024-767",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_06252024-767"
+    },
+    {
+     "packet": "2024-07-11_07112024-772",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_07112024-772"
+    },
+    {
+     "packet": "2024-07-23_07232024-780",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_07232024-780"
+    },
+    {
+     "packet": "2024-08-27_08272024-793",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_08272024-793"
+    },
+    {
+     "packet": "2024-09-11_09112024-799",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_09112024-799"
+    },
+    {
+     "packet": "2024-09-24_09242024-809",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_09242024-809"
+    },
+    {
+     "packet": "2024-09-24_09242024-810",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_09242024-810"
+    },
+    {
+     "packet": "2024-10-08_10082024-819",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10082024-819"
+    },
+    {
+     "packet": "2024-10-22_10222024-822",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10222024-822"
+    },
+    {
+     "packet": "2024-11-12_11122024-827",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_11122024-827"
+    },
+    {
+     "packet": "2024-12-10_12102024-834",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_12102024-834"
+    }
+   ],
+   "parsed_total_listed_checks": 19896941.35,
+   "top_vendors": [
+    {
+     "vendor": "ABENTRAS",
+     "vendor_number": "21140",
+     "amount": 2189639.57
+    },
+    {
+     "vendor": "ROBERTS & ROBER",
+     "vendor_number": "16119",
+     "amount": 1661260.07
+    },
+    {
+     "vendor": "FPL - FLORIDA P",
+     "vendor_number": "172",
+     "amount": 924583.53
+    },
+    {
+     "vendor": "BCL CIVIL CONTR",
+     "vendor_number": "12914",
+     "amount": 821801.9
+    },
+    {
+     "vendor": "GREENSOUTH SOLU",
+     "vendor_number": "28146",
+     "amount": 785312.5
+    },
+    {
+     "vendor": "CORE & MAIN LP",
+     "vendor_number": "21116",
+     "amount": 768703.07
+    },
+    {
+     "vendor": "CBC CONSTRUCTIO",
+     "vendor_number": "28874",
+     "amount": 740468.63
+    },
+    {
+     "vendor": "CULPEPPER CONST",
+     "vendor_number": "25944",
+     "amount": 737592.37
+    },
+    {
+     "vendor": "DEWBERRY",
+     "vendor_number": "19668",
+     "amount": 615587.77
+    },
+    {
+     "vendor": "PUBLIC RISK MGM",
+     "vendor_number": "26087",
+     "amount": 572757.0
+    },
+    {
+     "vendor": "WASTE PRO",
+     "vendor_number": "14695",
+     "amount": 526268.75
+    },
+    {
+     "vendor": "QUILLIAN POWELL",
+     "vendor_number": "25999",
+     "amount": 430377.61
+    },
+    {
+     "vendor": "AMERICAN SAND &",
+     "vendor_number": "539",
+     "amount": 393182.0
+    },
+    {
+     "vendor": "PANHANDLE ENGIN",
+     "vendor_number": "263",
+     "amount": 358261.2
+    },
+    {
+     "vendor": "DAVISON FUELS I",
+     "vendor_number": "15217",
+     "amount": 352744.95
+    },
+    {
+     "vendor": "GULF COAST UTIL",
+     "vendor_number": "3488",
+     "amount": 321450.72
+    },
+    {
+     "vendor": "ENERGREEN AMERI",
+     "vendor_number": "28855",
+     "amount": 303785.31
+    },
+    {
+     "vendor": "ENERGY SYSTEMS",
+     "vendor_number": "12052",
+     "amount": 267564.44
+    },
+    {
+     "vendor": "850 CONSTRUCTIO",
+     "vendor_number": "29689",
+     "amount": 252315.0
+    },
+    {
+     "vendor": "BAY COUNTY SOLI",
+     "vendor_number": "28",
+     "amount": 251075.2
+    }
+   ],
+   "top_payees_all": [
+    {
+     "payee": "ABENTRAS",
+     "vendor_number": "21140",
+     "amount": 2189639.57
+    },
+    {
+     "payee": "ROBERTS & ROBER",
+     "vendor_number": "16119",
+     "amount": 1661260.07
+    },
+    {
+     "payee": "FPL - FLORIDA P",
+     "vendor_number": "172",
+     "amount": 924583.53
+    },
+    {
+     "payee": "GENERAL EMPLOYE",
+     "vendor_number": "153",
+     "amount": 894661.98
+    },
+    {
+     "payee": "BCL CIVIL CONTR",
+     "vendor_number": "12914",
+     "amount": 821801.9
+    },
+    {
+     "payee": "GREENSOUTH SOLU",
+     "vendor_number": "28146",
+     "amount": 785312.5
+    },
+    {
+     "payee": "CORE & MAIN LP",
+     "vendor_number": "21116",
+     "amount": 768703.07
+    },
+    {
+     "payee": "CBC CONSTRUCTIO",
+     "vendor_number": "28874",
+     "amount": 740468.63
+    },
+    {
+     "payee": "CULPEPPER CONST",
+     "vendor_number": "25944",
+     "amount": 737592.37
+    },
+    {
+     "payee": "DEWBERRY",
+     "vendor_number": "19668",
+     "amount": 615587.77
+    },
+    {
+     "payee": "PUBLIC RISK MGM",
+     "vendor_number": "26087",
+     "amount": 572757.0
+    },
+    {
+     "payee": "WASTE PRO",
+     "vendor_number": "14695",
+     "amount": 526268.75
+    },
+    {
+     "payee": "BAY COUNTY WATE",
+     "vendor_number": "30",
+     "amount": 443001.57
+    },
+    {
+     "payee": "QUILLIAN POWELL",
+     "vendor_number": "25999",
+     "amount": 430377.61
+    },
+    {
+     "payee": "AMERICAN SAND &",
+     "vendor_number": "539",
+     "amount": 393182.0
+    },
+    {
+     "payee": "PANHANDLE ENGIN",
+     "vendor_number": "263",
+     "amount": 358261.2
+    },
+    {
+     "payee": "DAVISON FUELS I",
+     "vendor_number": "15217",
+     "amount": 352744.95
+    },
+    {
+     "payee": "GULF COAST UTIL",
+     "vendor_number": "3488",
+     "amount": 321450.72
+    },
+    {
+     "payee": "ENERGREEN AMERI",
+     "vendor_number": "28855",
+     "amount": 303785.31
+    },
+    {
+     "payee": "ENERGY SYSTEMS",
+     "vendor_number": "12052",
+     "amount": 267564.44
+    }
+   ],
+   "method_note": "Scanned pages read by OCR. Vendor names are truncated to 15 characters in the source report, so payees are grouped by the city's vendor number. Only checks of roughly $10,000 or more are listed, and electronic payments may not appear, so totals understate spending. Coverage depends on which packets included a warrant list. One FY2025 row with an unreadable check date (Hancock Bank, $18,067.03) was dropped."
+  },
+  {
+   "government": "City of Lynn Haven",
+   "fy": 2025,
+   "url": "https://www.cityoflynnhaven.com/AgendaCenter",
+   "source_note": "\"Check Reconciliation (Filtered)\" warrant lists attached to City Commission agenda packets under \"City Manager's Report - Warrant list update\". The lists show only checks of about $10,000 or more (smallest seen $10,035.07). Checks were de-duplicated by check number because workshop and regular-meeting packets repeat the same list.",
+   "check_dates_covered": [
+    "10/04/2024",
+    "07/31/2025"
+   ],
+   "checks_counted": 307,
+   "monthly_sources": [
+    {
+     "packet": "2024-10-22_10222024-822",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10222024-822"
+    },
+    {
+     "packet": "2024-11-12_11122024-827",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_11122024-827"
+    },
+    {
+     "packet": "2024-12-10_12102024-834",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_12102024-834"
+    },
+    {
+     "packet": "2025-01-14_01142025-843",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_01142025-843"
+    },
+    {
+     "packet": "2025-01-28_01282025-848",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_01282025-848"
+    },
+    {
+     "packet": "2025-02-11_02112025-857",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_02112025-857"
+    },
+    {
+     "packet": "2025-02-25_02252025-866",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_02252025-866"
+    },
+    {
+     "packet": "2025-02-25_02252025-867",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_02252025-867"
+    },
+    {
+     "packet": "2025-03-11_03112025-869",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_03112025-869"
+    },
+    {
+     "packet": "2025-03-25_03252025-874",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_03252025-874"
+    },
+    {
+     "packet": "2025-03-25_03252025-875",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_03252025-875"
+    },
+    {
+     "packet": "2025-04-08_04082025-907",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_04082025-907"
+    },
+    {
+     "packet": "2025-04-21_04212025-911",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_04212025-911"
+    },
+    {
+     "packet": "2025-05-13_05132025-915",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_05132025-915"
+    },
+    {
+     "packet": "2025-05-13_05132025-916",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_05132025-916"
+    },
+    {
+     "packet": "2025-05-27_05272025-924",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_05272025-924"
+    },
+    {
+     "packet": "2025-05-27_05272025-925",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_05272025-925"
+    },
+    {
+     "packet": "2025-06-10_06102025-929",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_06102025-929"
+    },
+    {
+     "packet": "2025-07-09_07092025-967",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_07092025-967"
+    },
+    {
+     "packet": "2025-07-22_07222025-972",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_07222025-972"
+    },
+    {
+     "packet": "2025-08-12_08122025-977",
+     "url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_08122025-977"
+    }
+   ],
+   "parsed_total_listed_checks": 20770141.81,
+   "top_vendors": [
+    {
+     "vendor": "JDF RVOC TR OF",
+     "vendor_number": "24060",
+     "amount": 4354833.86
+    },
+    {
+     "vendor": "ABENTRAS",
+     "vendor_number": "21140",
+     "amount": 1775617.52
+    },
+    {
+     "vendor": "CW ROBERTS CONT",
+     "vendor_number": "4630",
+     "amount": 877470.45
+    },
+    {
+     "vendor": "FPL - FLORIDA P",
+     "vendor_number": "172",
+     "amount": 827046.35
+    },
+    {
+     "vendor": "GREENSOUTH SOLU",
+     "vendor_number": "28146",
+     "amount": 704122.48
+    },
+    {
+     "vendor": "PUBLIC RISK MGM",
+     "vendor_number": "26087",
+     "amount": 601836.0
+    },
+    {
+     "vendor": "WASTE PRO",
+     "vendor_number": "14695",
+     "amount": 580505.25
+    },
+    {
+     "vendor": "850 CONSTRUCTIO",
+     "vendor_number": "29689",
+     "amount": 559296.32
+    },
+    {
+     "vendor": "CULPEPPER CONST",
+     "vendor_number": "25944",
+     "amount": 518170.69
+    },
+    {
+     "vendor": "RDK ASSETS INC",
+     "vendor_number": "28151",
+     "amount": 516543.62
+    },
+    {
+     "vendor": "DEWBERRY",
+     "vendor_number": "19668",
+     "amount": 448640.57
+    },
+    {
+     "vendor": "AMERICAN SAND &",
+     "vendor_number": "539",
+     "amount": 429929.4
+    },
+    {
+     "vendor": "CORE & MAIN LP",
+     "vendor_number": "21116",
+     "amount": 378707.63
+    },
+    {
+     "vendor": "GARBER FLEET SA",
+     "vendor_number": "13005",
+     "amount": 348548.0
+    },
+    {
+     "vendor": "BCL CIVIL CONTR",
+     "vendor_number": "12914",
+     "amount": 343059.87
+    },
+    {
+     "vendor": "PANHANDLE ENGIN",
+     "vendor_number": "263",
+     "amount": 335960.91
+    },
+    {
+     "vendor": "DAVISON FUELS I",
+     "vendor_number": "15217",
+     "amount": 272991.92
+    },
+    {
+     "vendor": "BAY COUNTY FINA",
+     "vendor_number": "26",
+     "amount": 260507.85
+    },
+    {
+     "vendor": "ENERGREEN AMERI",
+     "vendor_number": "28855",
+     "amount": 236259.12
+    },
+    {
+     "vendor": "BAY COUNTY SOLI",
+     "vendor_number": "28",
+     "amount": 207826.77
+    }
+   ],
+   "top_payees_all": [
+    {
+     "payee": "JDF RVOC TR OF",
+     "vendor_number": "24060",
+     "amount": 4354833.86
+    },
+    {
+     "payee": "ABENTRAS",
+     "vendor_number": "21140",
+     "amount": 1775617.52
+    },
+    {
+     "payee": "GENERAL EMPLOYE",
+     "vendor_number": "153",
+     "amount": 1061752.65
+    },
+    {
+     "payee": "CW ROBERTS CONT",
+     "vendor_number": "4630",
+     "amount": 877470.45
+    },
+    {
+     "payee": "HANCOCK BANK",
+     "vendor_number": "13220",
+     "amount": 835505.05
+    },
+    {
+     "payee": "FPL - FLORIDA P",
+     "vendor_number": "172",
+     "amount": 827046.35
+    },
+    {
+     "payee": "GREENSOUTH SOLU",
+     "vendor_number": "28146",
+     "amount": 704122.48
+    },
+    {
+     "payee": "PUBLIC RISK MGM",
+     "vendor_number": "26087",
+     "amount": 601836.0
+    },
+    {
+     "payee": "WASTE PRO",
+     "vendor_number": "14695",
+     "amount": 580505.25
+    },
+    {
+     "payee": "850 CONSTRUCTIO",
+     "vendor_number": "29689",
+     "amount": 559296.32
+    },
+    {
+     "payee": "CULPEPPER CONST",
+     "vendor_number": "25944",
+     "amount": 518170.69
+    },
+    {
+     "payee": "RDK ASSETS INC",
+     "vendor_number": "28151",
+     "amount": 516543.62
+    },
+    {
+     "payee": "BAY COUNTY WATE",
+     "vendor_number": "30",
+     "amount": 463853.97
+    },
+    {
+     "payee": "DEWBERRY",
+     "vendor_number": "19668",
+     "amount": 448640.57
+    },
+    {
+     "payee": "AMERICAN SAND &",
+     "vendor_number": "539",
+     "amount": 429929.4
+    },
+    {
+     "payee": "CORE & MAIN LP",
+     "vendor_number": "21116",
+     "amount": 378707.63
+    },
+    {
+     "payee": "GARBER FLEET SA",
+     "vendor_number": "13005",
+     "amount": 348548.0
+    },
+    {
+     "payee": "BCL CIVIL CONTR",
+     "vendor_number": "12914",
+     "amount": 343059.87
+    },
+    {
+     "payee": "PANHANDLE ENGIN",
+     "vendor_number": "263",
+     "amount": 335960.91
+    },
+    {
+     "payee": "DAVISON FUELS I",
+     "vendor_number": "15217",
+     "amount": 272991.92
+    }
+   ],
+   "method_note": "Scanned pages read by OCR. Vendor names are truncated to 15 characters in the source report, so payees are grouped by the city's vendor number. Only checks of roughly $10,000 or more are listed, and electronic payments may not appear, so totals understate spending. Coverage depends on which packets included a warrant list. One FY2025 row with an unreadable check date (Hancock Bank, $18,067.03) was dropped."
   }
  ],
  "contracts": [
@@ -2501,7 +3426,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Bay County BOCC regular meeting agenda 2026-10-20, consent/regular item 15",
    "source_url": "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=5259",
-   "notes": "County bid posting: https://www.baycountyfl.gov/bids.aspx?bidID=617; solicitation type taken from the posting text."
+   "notes": "County bid posting: https://www.baycountyfl.gov/bids.aspx?bidID=617; solicitation type taken from the posting text. On the agenda for the 2026-10-20 meeting (the as-of date); the Board's action was not yet published."
   },
   {
    "government": "City of Callaway",
@@ -2823,6 +3748,105 @@
    "notes": ""
   },
   {
+   "government": "City of Mexico Beach",
+   "vendor": "KK Storm",
+   "amount": 313440.11,
+   "purpose": "Payment of the undisputed portion of Hurricane Michael debris-removal billing (FEMA reimbursable)",
+   "date": "2024-10-22",
+   "method": "Payment under existing contract",
+   "source_title": "Mexico Beach City Council minutes 2024-10-22",
+   "source_url": "https://mexicobeachfl.gov/uploads/2024/10/October-22-2024-City-Council-Minutes.pdf",
+   "notes": "Approved per council minutes (scanned; read by OCR). Minutes: $612,289.81 was outstanding; the remaining $299,453.70 was disputed over per-load pricing."
+  },
+  {
+   "government": "City of Mexico Beach",
+   "vendor": "BGN Contractors",
+   "amount": 209518.0,
+   "purpose": "Construction of the Parker Park amphitheater (budgeted funds)",
+   "date": "2025-03-25",
+   "method": "Competitive sealed bid (invitation to bid) (one bid received)",
+   "source_title": "Mexico Beach City Council minutes 2025-03-25",
+   "source_url": "https://mexicobeachfl.gov/uploads/2025/02/March-25-2025-City-Council-Minutes.pdf",
+   "notes": "Approved per council minutes (scanned; read by OCR)."
+  },
+  {
+   "government": "City of Mexico Beach",
+   "vendor": "Mainline Construction",
+   "amount": 1222819.6,
+   "purpose": "Lift station rehabilitations at Nanook St ($423,323.63) and 14th Street ($799,495.97); city covers a $71,039.60 overrun with local option gas tax",
+   "date": "2025-04-08",
+   "method": "Competitive sealed bid (invitation to bid) (low bids)",
+   "source_title": "Mexico Beach City Council minutes 2025-04-08",
+   "source_url": "https://mexicobeachfl.gov/uploads/2025/05/April-8-2025-City-Council-Meeting-Minutes.pdf",
+   "notes": "Approved per council minutes (scanned; read by OCR)."
+  },
+  {
+   "government": "City of Mexico Beach",
+   "vendor": "Razorback LLC",
+   "amount": 531000.0,
+   "purpose": "Install three lift station bypass pumps (sewer impact fees)",
+   "date": "2025-04-23",
+   "method": "Not stated in minutes",
+   "source_title": "Mexico Beach City Council minutes 2025-04-23",
+   "source_url": "https://mexicobeachfl.gov/uploads/2025/04/April-23-2025-City-Council-Meeting-Minutes.pdf",
+   "notes": "Approved per council minutes (scanned; read by OCR). On 2026-01-13 the council approved deductive change orders of $263,291.60 to Razorback as part of the scope moved to Mainline Construction."
+  },
+  {
+   "government": "City of Mexico Beach",
+   "vendor": "Gulf Coast Utility Contractors (GCUC)",
+   "amount": 4267436.0,
+   "purpose": "Mexico Beach jetties project (FEMA-funded); award conditional on full FEMA reimbursement and a council notice to proceed",
+   "date": "2025-09-09",
+   "method": "Bid award (solicitation type not stated in minutes)",
+   "source_title": "Mexico Beach City Council minutes 2025-09-09",
+   "source_url": "https://mexicobeachfl.gov/uploads/2025/09/September-9-2025-City-Council-Minutes.pdf",
+   "notes": "Approved per council minutes (scanned; read by OCR). Contract accepted 2026-05-26 at $4,267,436.00, with Change Order 1 for $66,296.33 (cost increases from funding delay) approved the same day (https://mexicobeachfl.gov/uploads/2026/05/May-26-2026-City-Council-Minutes.pdf)."
+  },
+  {
+   "government": "City of Mexico Beach",
+   "vendor": "RJ Gorman Contracting, LLC",
+   "amount": 8638967.26,
+   "purpose": "New Mexico Beach pier, FEMA-funded (includes blowout panels and pier extension)",
+   "date": "2025-12-16",
+   "method": "Competitive sealed bid (invitation to bid) (apparent low bidder; engineer reviewed bid)",
+   "source_title": "Mexico Beach City Council minutes 2025-12-16",
+   "source_url": "https://mexicobeachfl.gov/uploads/2025/11/December-16-2025-City-Council-Meeting-Minutes.pdf",
+   "notes": "Approved per council minutes (scanned; read by OCR). Largest Mexico Beach contract found."
+  },
+  {
+   "government": "City of Mexico Beach",
+   "vendor": "Walter Marine",
+   "amount": 132250.0,
+   "purpose": "Mexico Beach Artificial Reef Association reef project (FWC grant $60,000 plus MBARA $72,250; no city cost)",
+   "date": "2026-02-24",
+   "method": "Bid award (solicitation type not stated in minutes)",
+   "source_title": "Mexico Beach City Council minutes 2026-02-24",
+   "source_url": "https://mexicobeachfl.gov/uploads/2026/02/February-24-2026-City-Council-Meeting-Minutes.pdf",
+   "notes": "Approved per council minutes (scanned; read by OCR)."
+  },
+  {
+   "government": "City of Mexico Beach",
+   "vendor": "Dewberry Engineering",
+   "amount": 119867.0,
+   "purpose": "Task order, jetty project construction services and shorebird/marine turtle surveys (replaces an outdated $88,000 task order)",
+   "date": "2026-05-12",
+   "method": "Task order / work authorization under existing continuing-services contract",
+   "source_title": "Mexico Beach City Council minutes 2026-05-12",
+   "source_url": "https://mexicobeachfl.gov/uploads/2026/05/May-12-2026-City-Council-Meeting-Minutes.pdf",
+   "notes": "Approved per council minutes (scanned; read by OCR)."
+  },
+  {
+   "government": "City of Mexico Beach",
+   "vendor": "H.G. Harders & Sons",
+   "amount": 1790075.0,
+   "purpose": "Boat ramp repairs and expansion (FWC grant $986,831; city share $93,470)",
+   "date": "2026-06-09",
+   "method": "Competitive sealed bid (invitation to bid) (lowest of four bidders)",
+   "source_title": "Mexico Beach City Council minutes 2026-06-09",
+   "source_url": "https://mexicobeachfl.gov/uploads/2026/06/June-9-2026-City-Council-Meeting-Minutes.pdf",
+   "notes": "Approved per council minutes (scanned; read by OCR)."
+  },
+  {
    "government": "City of Panama City",
    "vendor": "HALFF Associates, Inc.",
    "amount": 1676541.56,
@@ -2831,7 +3855,7 @@
    "method": "Professional services proposal; selection method not stated in agenda title",
    "source_title": "Panama City Commission agenda 2022-10-11, item 11.d",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_10112022-581?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_10112022-581"
   },
   {
    "government": "City of Panama City",
@@ -2842,7 +3866,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2022-10-25, item 10.g",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_10252022-582?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_10252022-582"
   },
   {
    "government": "City of Panama City",
@@ -2853,7 +3877,7 @@
    "method": "Not stated in agenda item",
    "source_title": "Panama City Commission agenda 2022-12-13, item 11.g",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_12132022-590?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_12132022-590"
   },
   {
    "government": "City of Panama City",
@@ -2864,7 +3888,7 @@
    "method": "Cooperative purchasing contract (e.g., Sourcewell / FSA / OMNIA / state contract) (Sourcewell #060920-ATC)",
    "source_title": "Panama City Commission agenda 2023-01-10, item 10.a",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_01102023-593?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_01102023-593"
   },
   {
    "government": "City of Panama City",
@@ -2875,7 +3899,7 @@
    "method": "Cooperative purchasing contract (e.g., Sourcewell / FSA / OMNIA / state contract) (Sourcewell #060920-ATC)",
    "source_title": "Panama City Commission agenda 2023-01-10, item 10.b",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_01102023-593?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_01102023-593"
   },
   {
    "government": "City of Panama City",
@@ -2886,7 +3910,7 @@
    "method": "Competitive sealed bid (invitation to bid) (low bidder)",
    "source_title": "Panama City Commission agenda 2023-01-24, item 11.g",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_01242023-595?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_01242023-595"
   },
   {
    "government": "City of Panama City",
@@ -2897,7 +3921,7 @@
    "method": "Not stated in agenda item",
    "source_title": "Panama City Commission agenda 2023-02-14, item 9.k",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_02142023-605?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_02142023-605"
   },
   {
    "government": "City of Panama City",
@@ -2908,7 +3932,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2023-02-14, item 9.q",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_02142023-605?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_02142023-605"
   },
   {
    "government": "City of Panama City",
@@ -2919,7 +3943,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2023-02-28, item 10.b",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_02282023-598?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_02282023-598"
   },
   {
    "government": "City of Panama City",
@@ -2930,7 +3954,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2023-03-28, item 10.d",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_03282023-603?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_03282023-603"
   },
   {
    "government": "City of Panama City",
@@ -2941,7 +3965,7 @@
    "method": "Task order / work authorization under existing continuing-services contract",
    "source_title": "Panama City Commission agenda 2023-05-23, item 11.b",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_05232023-618?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_05232023-618"
   },
   {
    "government": "City of Panama City",
@@ -2952,7 +3976,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2023-05-23, item 11.e",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_05232023-618?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_05232023-618"
   },
   {
    "government": "City of Panama City",
@@ -2963,7 +3987,7 @@
    "method": "Task order / work authorization under existing continuing-services contract",
    "source_title": "Panama City Commission agenda 2023-07-11, item 8.d",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_07112023-625?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_07112023-625"
   },
   {
    "government": "City of Panama City",
@@ -2974,7 +3998,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2023-07-25, item 10.c",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_07252023-627?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_07252023-627"
   },
   {
    "government": "City of Panama City",
@@ -2985,7 +4009,7 @@
    "method": "Competitive qualifications/proposals (RFQ/RFP, ranked firms)",
    "source_title": "Panama City Commission agenda 2023-07-25, item 11.g",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_07252023-627?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_07252023-627"
   },
   {
    "government": "City of Panama City",
@@ -2996,7 +4020,7 @@
    "method": "Task order / work authorization under existing continuing-services contract",
    "source_title": "Panama City Commission agenda 2023-07-25, item 11.i",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_07252023-627?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_07252023-627"
   },
   {
    "government": "City of Panama City",
@@ -3007,7 +4031,7 @@
    "method": "Not stated in agenda item",
    "source_title": "Panama City Commission agenda 2023-09-12, item 9.n",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_09122023-637?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_09122023-637"
   },
   {
    "government": "City of Panama City",
@@ -3018,18 +4042,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2023-09-26, item 10.d",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_09262023-638?html=true",
-   "notes": ""
-  },
-  {
-   "government": "City of Panama City",
-   "vendor": "Hagerty Consulting",
-   "amount": 1538120.0,
-   "purpose": "Task order, comprehensive services for 13 CDBG-DR and 14 HMGP projects (not to exceed)",
-   "date": "2023-11-14",
-   "method": "Task order / work authorization under existing continuing-services contract",
-   "source_title": "Panama City Commission agenda 2023-11-14, item 11.a",
-   "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_11142023-649?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_09262023-638"
   },
   {
    "government": "City of Panama City",
@@ -3040,7 +4053,7 @@
    "method": "Task order / work authorization under existing continuing-services contract",
    "source_title": "Panama City Commission agenda 2023-11-28, item 9.d",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_11282023-650?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_11282023-650"
   },
   {
    "government": "City of Panama City",
@@ -3051,7 +4064,7 @@
    "method": "Task order / work authorization under existing continuing-services contract",
    "source_title": "Panama City Commission agenda 2023-11-28, item 10.h",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_11282023-650?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_11282023-650"
   },
   {
    "government": "City of Panama City",
@@ -3062,7 +4075,7 @@
    "method": "Task order / work authorization under existing continuing-services contract",
    "source_title": "Panama City Commission agenda 2023-11-28, item 10.n",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_11282023-650?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_11282023-650"
   },
   {
    "government": "City of Panama City",
@@ -3073,7 +4086,7 @@
    "method": "Task order / work authorization under existing continuing-services contract",
    "source_title": "Panama City Commission agenda 2023-12-12, item 10.f",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_12122023-653?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_12122023-653"
   },
   {
    "government": "City of Panama City",
@@ -3084,7 +4097,7 @@
    "method": "Competitive sealed bid (invitation to bid) (low bidder)",
    "source_title": "Panama City Commission agenda 2024-01-09, item 9.b",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_01092024-656?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_01092024-656"
   },
   {
    "government": "City of Panama City",
@@ -3095,7 +4108,7 @@
    "method": "Not stated in agenda item",
    "source_title": "Panama City Commission agenda 2024-01-23, item 11.g",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_01232024-660?html=true",
-   "notes": "Largest Panama City award found in the period."
+   "notes": "Largest Panama City award found in the period. Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_01232024-660"
   },
   {
    "government": "City of Panama City",
@@ -3106,7 +4119,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2024-02-13, item 11.a",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_02132024-663?html=true",
-   "notes": "Later change orders on Area A-2 (2026-03-24, 2026-07-14) are addressed to CBC Construction; the agendas do not explain the change of contractor."
+   "notes": "Later change orders on Area A-2 (2026-03-24, 2026-07-14) are addressed to CBC Construction; the agendas do not explain the change of contractor. Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_02132024-663"
   },
   {
    "government": "City of Panama City",
@@ -3117,7 +4130,7 @@
    "method": "Not stated in agenda item",
    "source_title": "Panama City Commission agenda 2024-02-13, item 11.c",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_02132024-663?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_02132024-663"
   },
   {
    "government": "City of Panama City",
@@ -3128,7 +4141,7 @@
    "method": "Not stated in agenda item",
    "source_title": "Panama City Commission agenda 2024-02-13, item 11.d",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_02132024-663?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_02132024-663"
   },
   {
    "government": "City of Panama City",
@@ -3139,7 +4152,7 @@
    "method": "Task order / work authorization under existing continuing-services contract",
    "source_title": "Panama City Commission agenda 2024-02-27, item 11.g",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_02272024-664?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_02272024-664"
   },
   {
    "government": "City of Panama City",
@@ -3150,7 +4163,7 @@
    "method": "Amendment to existing professional services contract",
    "source_title": "Panama City Commission agenda 2024-02-27, item 12.d",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_02272024-664?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_02272024-664"
   },
   {
    "government": "City of Panama City",
@@ -3161,7 +4174,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2024-02-27, item 12.f",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_02272024-664?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_02272024-664"
   },
   {
    "government": "City of Panama City",
@@ -3172,7 +4185,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2024-02-27, item 12.f",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_02272024-664?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_02272024-664"
   },
   {
    "government": "City of Panama City",
@@ -3183,7 +4196,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2024-02-27, item 12.g",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_02272024-664?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_02272024-664"
   },
   {
    "government": "City of Panama City",
@@ -3194,7 +4207,7 @@
    "method": "Task order / work authorization under existing continuing-services contract",
    "source_title": "Panama City Commission agenda 2024-03-26, item 11.g",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_03262024-671?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_03262024-671"
   },
   {
    "government": "City of Panama City",
@@ -3205,7 +4218,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2024-03-26, item 12.d",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_03262024-671?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_03262024-671"
   },
   {
    "government": "City of Panama City",
@@ -3216,7 +4229,7 @@
    "method": "Task order / work authorization under existing continuing-services contract",
    "source_title": "Panama City Commission agenda 2024-05-14, item 10.g",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_05142024-679?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_05142024-679"
   },
   {
    "government": "City of Panama City",
@@ -3227,7 +4240,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2024-05-14, item 10.k",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_05142024-679?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_05142024-679"
   },
   {
    "government": "City of Panama City",
@@ -3238,7 +4251,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2024-06-11, item 9.a",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_06112024-688?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_06112024-688"
   },
   {
    "government": "City of Panama City",
@@ -3249,7 +4262,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2024-06-18, item 5",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_06182024-697?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_06182024-697"
   },
   {
    "government": "City of Panama City",
@@ -3260,7 +4273,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2024-07-09, item 10.c",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_07092024-693?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_07092024-693"
   },
   {
    "government": "City of Panama City",
@@ -3271,7 +4284,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2024-08-13, item 9.g",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_08132024-699?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_08132024-699"
   },
   {
    "government": "City of Panama City",
@@ -3282,7 +4295,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2024-08-13, item 9.h",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_08132024-699?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_08132024-699"
   },
   {
    "government": "City of Panama City",
@@ -3293,7 +4306,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2024-08-13, item 9.k",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_08132024-699?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_08132024-699"
   },
   {
    "government": "City of Panama City",
@@ -3304,7 +4317,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2024-08-27, item 11.d",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_08272024-700?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_08272024-700"
   },
   {
    "government": "City of Panama City",
@@ -3315,7 +4328,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2024-09-12, item 11.d",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_09122024-704?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_09122024-704"
   },
   {
    "government": "City of Panama City",
@@ -3326,7 +4339,7 @@
    "method": "Task order / work authorization under existing continuing-services contract",
    "source_title": "Panama City Commission agenda 2024-10-08, item 9.c",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_10082024-713?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_10082024-713"
   },
   {
    "government": "City of Panama City",
@@ -3337,7 +4350,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2024-10-08, item 9.e",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_10082024-713?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_10082024-713"
   },
   {
    "government": "City of Panama City",
@@ -3348,7 +4361,7 @@
    "method": "Response to solicitation PC24-038",
    "source_title": "Panama City Commission agenda 2024-10-22, item 9.b",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_10222024-714?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_10222024-714"
   },
   {
    "government": "City of Panama City",
@@ -3359,7 +4372,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2024-11-12, item 13.k",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_11122024-719?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_11122024-719"
   },
   {
    "government": "City of Panama City",
@@ -3370,7 +4383,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2024-12-30, item 5.b",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_12302024-732?html=true",
-   "notes": "The 2024-12-10 agenda (item 11.h) had proposed awarding PC24-050 to AAG for $1,093,892.07; the 2024-12-30 special meeting agenda proposed Hydra Service instead."
+   "notes": "The 2024-12-10 agenda (item 11.h) had proposed awarding PC24-050 to AAG for $1,093,892.07; the 2024-12-30 special meeting agenda proposed Hydra Service instead. Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_12302024-732"
   },
   {
    "government": "City of Panama City",
@@ -3381,7 +4394,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2024-12-30, item 5.c",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_12302024-732?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_12302024-732"
   },
   {
    "government": "City of Panama City",
@@ -3392,7 +4405,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2024-12-30, item 5.d",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_12302024-732?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_12302024-732"
   },
   {
    "government": "City of Panama City",
@@ -3403,7 +4416,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2025-01-14, item 9.b",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_01142025-724?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_01142025-724"
   },
   {
    "government": "City of Panama City",
@@ -3414,7 +4427,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2025-01-28, item 9.e",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_01282025-725?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_01282025-725"
   },
   {
    "government": "City of Panama City",
@@ -3425,7 +4438,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2025-02-11, item 9.d",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_02112025-733?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_02112025-733"
   },
   {
    "government": "City of Panama City",
@@ -3436,7 +4449,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2025-02-11, item 9.f",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_02112025-733?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_02112025-733"
   },
   {
    "government": "City of Panama City",
@@ -3447,7 +4460,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2025-03-18, item 9.f",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_03182025-737?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_03182025-737"
   },
   {
    "government": "City of Panama City",
@@ -3458,7 +4471,7 @@
    "method": "Task order / work authorization under existing continuing-services contract",
    "source_title": "Panama City Commission agenda 2025-03-25, item 9.c",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_03252025-738?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_03252025-738"
   },
   {
    "government": "City of Panama City",
@@ -3469,7 +4482,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2025-04-08, item 11.a",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_04082025-741?html=true",
-   "notes": "Also on the 2025-02-25 agenda (item 12.f)."
+   "notes": "Also on the 2025-02-25 agenda (item 12.f). Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_04082025-741"
   },
   {
    "government": "City of Panama City",
@@ -3480,7 +4493,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2025-04-08, item 11.b",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_04082025-741?html=true",
-   "notes": "The 2025-03-18 agenda (item 9.h) listed this award at $352,586.00; the 2025-04-08 agenda lists $499,998.00."
+   "notes": "The 2025-03-18 agenda (item 9.h) listed this award at $352,586.00; the 2025-04-08 agenda lists $499,998.00. Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_04082025-741"
   },
   {
    "government": "City of Panama City",
@@ -3491,7 +4504,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2025-04-08, item 11.c",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_04082025-741?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_04082025-741"
   },
   {
    "government": "City of Panama City",
@@ -3502,7 +4515,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2025-04-24, item 8.e",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_04242025-742?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_04242025-742"
   },
   {
    "government": "City of Panama City",
@@ -3513,7 +4526,7 @@
    "method": "Task order / work authorization under existing continuing-services contract",
    "source_title": "Panama City Commission agenda 2025-04-24, item 8.f",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_04242025-742?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_04242025-742"
   },
   {
    "government": "City of Panama City",
@@ -3524,7 +4537,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2025-04-24, item 8.g",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_04242025-742?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_04242025-742"
   },
   {
    "government": "City of Panama City",
@@ -3535,7 +4548,7 @@
    "method": "Task order / work authorization under existing continuing-services contract",
    "source_title": "Panama City Commission agenda 2025-04-24, item 8.i",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_04242025-742?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_04242025-742"
   },
   {
    "government": "City of Panama City",
@@ -3546,7 +4559,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2025-05-13, item 9.d",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_05132025-745?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_05132025-745"
   },
   {
    "government": "City of Panama City",
@@ -3557,7 +4570,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2025-05-13, item 9.f",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_05132025-745?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_05132025-745"
   },
   {
    "government": "City of Panama City",
@@ -3568,7 +4581,7 @@
    "method": "Lease-purchase financing; equipment proposal from Ten-8",
    "source_title": "Panama City Commission agenda 2025-05-13, item 12.e",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_05132025-745?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_05132025-745"
   },
   {
    "government": "City of Panama City",
@@ -3579,7 +4592,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2025-05-27, item 8.f",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_05272025-746?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_05272025-746"
   },
   {
    "government": "City of Panama City",
@@ -3590,7 +4603,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2025-05-27, item 8.h",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_05272025-746?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_05272025-746"
   },
   {
    "government": "City of Panama City",
@@ -3601,7 +4614,7 @@
    "method": "Task order / work authorization under existing continuing-services contract",
    "source_title": "Panama City Commission agenda 2025-06-10, item 12.f",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_06102025-750?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_06102025-750"
   },
   {
    "government": "City of Panama City",
@@ -3612,7 +4625,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2025-06-24, item 9.d",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_06242025-751?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_06242025-751"
   },
   {
    "government": "City of Panama City",
@@ -3623,7 +4636,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2025-08-26, item 8.i",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_08262025-762?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_08262025-762"
   },
   {
    "government": "City of Panama City",
@@ -3634,7 +4647,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2025-08-26, item 8.j",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_08262025-762?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_08262025-762"
   },
   {
    "government": "City of Panama City",
@@ -3645,7 +4658,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2025-09-23, item 12.a",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_09232025-768?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_09232025-768"
   },
   {
    "government": "City of Panama City",
@@ -3656,7 +4669,7 @@
    "method": "Renewal of existing coverage / agreement",
    "source_title": "Panama City Commission agenda 2025-09-23, item 12.b",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_09232025-768?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_09232025-768"
   },
   {
    "government": "City of Panama City",
@@ -3667,7 +4680,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2025-10-14, item 12.c",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_10142025-771?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_10142025-771"
   },
   {
    "government": "City of Panama City",
@@ -3678,7 +4691,7 @@
    "method": "Task order / work authorization under existing continuing-services contract",
    "source_title": "Panama City Commission agenda 2025-10-28, item 9.h",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_10282025-790?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_10282025-790"
   },
   {
    "government": "City of Panama City",
@@ -3689,7 +4702,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2025-11-18, item 9.e",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_11182025-795?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_11182025-795"
   },
   {
    "government": "City of Panama City",
@@ -3700,7 +4713,7 @@
    "method": "Task order / work authorization under existing continuing-services contract",
    "source_title": "Panama City Commission agenda 2025-11-18, item 9.f",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_11182025-795?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_11182025-795"
   },
   {
    "government": "City of Panama City",
@@ -3711,7 +4724,7 @@
    "method": "Task order / work authorization under existing continuing-services contract",
    "source_title": "Panama City Commission agenda 2025-11-18, item 12.g",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_11182025-795?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_11182025-795"
   },
   {
    "government": "City of Panama City",
@@ -3722,7 +4735,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2025-12-16, item 9.h",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_12162025-796?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_12162025-796"
   },
   {
    "government": "City of Panama City",
@@ -3733,7 +4746,7 @@
    "method": "Not stated in agenda item",
    "source_title": "Panama City Commission agenda 2025-12-16, item 12.i",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_12162025-796?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_12162025-796"
   },
   {
    "government": "City of Panama City",
@@ -3744,7 +4757,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2026-01-13, item 8.c",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_01132026-812?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_01132026-812"
   },
   {
    "government": "City of Panama City",
@@ -3755,7 +4768,7 @@
    "method": "Cooperative purchasing contract (e.g., Sourcewell / FSA / OMNIA / state contract) (Sourcewell #030824)",
    "source_title": "Panama City Commission agenda 2026-01-13, item 8.d",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_01132026-812?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_01132026-812"
   },
   {
    "government": "City of Panama City",
@@ -3766,7 +4779,7 @@
    "method": "Cooperative purchasing contract (e.g., Sourcewell / FSA / OMNIA / state contract) (Sourcewell #2377)",
    "source_title": "Panama City Commission agenda 2026-01-13, item 8.e",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_01132026-812?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_01132026-812"
   },
   {
    "government": "City of Panama City",
@@ -3777,7 +4790,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2026-02-10, item 12.d",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_02102026-825?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_02102026-825"
   },
   {
    "government": "City of Panama City",
@@ -3788,7 +4801,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2026-03-10, item 8.b",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_03102026-834?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_03102026-834"
   },
   {
    "government": "City of Panama City",
@@ -3799,7 +4812,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2026-03-10, item 10.h",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_03102026-834?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_03102026-834"
   },
   {
    "government": "City of Panama City",
@@ -3810,7 +4823,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2026-04-14, item 9.d",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_04142026-844?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_04142026-844"
   },
   {
    "government": "City of Panama City",
@@ -3821,7 +4834,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2026-04-14, item 9.e",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_04142026-844?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_04142026-844"
   },
   {
    "government": "City of Panama City",
@@ -3832,7 +4845,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2026-04-28, item 9.c",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_04282026-845?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_04282026-845"
   },
   {
    "government": "City of Panama City",
@@ -3843,7 +4856,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2026-05-26, item 8.a",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_05262026-855?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_05262026-855"
   },
   {
    "government": "City of Panama City",
@@ -3854,7 +4867,7 @@
    "method": "Task order / work authorization under existing continuing-services contract",
    "source_title": "Panama City Commission agenda 2026-06-23, item 8.a",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_06232026-862?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_06232026-862"
   },
   {
    "government": "City of Panama City",
@@ -3865,7 +4878,7 @@
    "method": "Task order / work authorization under existing continuing-services contract",
    "source_title": "Panama City Commission agenda 2026-06-23, item 8.e",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_06232026-862?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_06232026-862"
   },
   {
    "government": "City of Panama City",
@@ -3876,7 +4889,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2026-06-23, item 13.g",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_06232026-862?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_06232026-862"
   },
   {
    "government": "City of Panama City",
@@ -3887,7 +4900,7 @@
    "method": "Task order / work authorization under existing continuing-services contract",
    "source_title": "Panama City Commission agenda 2026-07-14, item 9.e",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_07142026-871?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_07142026-871"
   },
   {
    "government": "City of Panama City",
@@ -3898,7 +4911,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2026-07-14, item 9.h",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_07142026-871?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_07142026-871"
   },
   {
    "government": "City of Panama City",
@@ -3909,7 +4922,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2026-08-25, item 9.e",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_08252026-880?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_08252026-880"
   },
   {
    "government": "City of Panama City",
@@ -3920,7 +4933,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2026-08-25, item 9.f",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_08252026-880?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_08252026-880"
   },
   {
    "government": "City of Panama City",
@@ -3931,7 +4944,7 @@
    "method": "Competitive sealed bid (invitation to bid)",
    "source_title": "Panama City Commission agenda 2026-09-08, item 9.b",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_09082026-890?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_09082026-890"
   },
   {
    "government": "City of Panama City",
@@ -3942,7 +4955,7 @@
    "method": "Renewal of existing coverage / agreement",
    "source_title": "Panama City Commission agenda 2026-09-22, item 9.e",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_09222026-891?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_09222026-891"
   },
   {
    "government": "City of Panama City",
@@ -3953,7 +4966,7 @@
    "method": "Not stated in agenda item",
    "source_title": "Panama City Commission agenda 2026-09-22, item 12.d",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_09222026-891?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_09222026-891"
   },
   {
    "government": "City of Panama City Beach",
@@ -3964,7 +4977,7 @@
    "method": "Piggyback on another government's contract (OMNIA cooperative contract, per attachment name)",
    "source_title": "Panama City Beach City Council agenda 2022-10-13, item I.11",
    "source_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=35",
-   "notes": "Amount taken from the item memo/resolution PDF: https://pcbgov.granicus.com/services/legistar/download/pdf/1596576/Res_23-20.Piggybacking_Purchase_of_2_Chiller_Units.pdf"
+   "notes": "Amount taken from the item memo/resolution PDF: https://pcbgov.granicus.com/services/legistar/download/pdf/1596576/Res_23-20.Piggybacking_Purchase_of_2_Chiller_Units.pdf Approval confirmed in council minutes: https://pcbgov.granicus.com/services/legistar/download/pdf/1620796/10.13.2022.Council_Meeting_Minutes.Draft.pdf."
   },
   {
    "government": "City of Panama City Beach",
@@ -3975,7 +4988,7 @@
    "method": "Intergovernmental agreement (FDOT utility work)",
    "source_title": "Panama City Beach City Council agenda 2023-01-26, item J.3",
    "source_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=25",
-   "notes": "Amount taken from the item memo/resolution PDF: https://pcbgov.granicus.com/services/legistar/download/pdf/1744630/217838-4-56-01_-_UWBHC_Agreement__At_Utility_Expense__Panama_City_Beach__Revised_1-13-23_.pdf"
+   "notes": "Amount taken from the item memo/resolution PDF: https://pcbgov.granicus.com/services/legistar/download/pdf/1744630/217838-4-56-01_-_UWBHC_Agreement__At_Utility_Expense__Panama_City_Beach__Revised_1-13-23_.pdf Council action not confirmed (minutes for this meeting not found or not matched)."
   },
   {
    "government": "City of Panama City Beach",
@@ -3986,7 +4999,7 @@
    "method": "Cooperative purchasing contract (e.g., Sourcewell / FSA / OMNIA / state contract) (Sourcewell #071619-CPL)",
    "source_title": "Panama City Beach City Council agenda 2023-01-26, item J.5",
    "source_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=25",
-   "notes": "Amount taken from the item memo/resolution PDF: https://pcbgov.granicus.com/services/legistar/download/pdf/1752229/Res_23-98.Sourcewell.NGU_Lighting_Agreement.Frank_Brown_Park.pdf"
+   "notes": "Amount taken from the item memo/resolution PDF: https://pcbgov.granicus.com/services/legistar/download/pdf/1752229/Res_23-98.Sourcewell.NGU_Lighting_Agreement.Frank_Brown_Park.pdf Approval confirmed in council minutes: https://pcbgov.granicus.com/services/legistar/download/pdf/1769593/01.26.2023.Council_Meeting_Minutes.draft.pdf."
   },
   {
    "government": "City of Panama City Beach",
@@ -3997,7 +5010,7 @@
    "method": "Competitive sealed bid (invitation to bid) (PCB23-14 bid tabulation attached)",
    "source_title": "Panama City Beach City Council agenda 2023-01-26, item J.6",
    "source_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=25",
-   "notes": "Amount taken from the item memo/resolution PDF: https://pcbgov.granicus.com/services/legistar/download/pdf/1758072/Res_23-103.Mainline_Construction.Gardenia_Street_Drainage_Pipe_Project.pdf"
+   "notes": "Amount taken from the item memo/resolution PDF: https://pcbgov.granicus.com/services/legistar/download/pdf/1758072/Res_23-103.Mainline_Construction.Gardenia_Street_Drainage_Pipe_Project.pdf Approval confirmed in council minutes: https://pcbgov.granicus.com/services/legistar/download/pdf/1769593/01.26.2023.Council_Meeting_Minutes.draft.pdf."
   },
   {
    "government": "City of Panama City Beach",
@@ -4008,7 +5021,7 @@
    "method": "Not stated in agenda item",
    "source_title": "Panama City Beach City Council agenda 2023-02-23, item J.6",
    "source_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=123",
-   "notes": "Amount taken from the item memo/resolution PDF: https://pcbgov.granicus.com/services/legistar/download/pdf/1799417/Res_23.-125.CW_Roberts.Gayles_Trail_Project.BA23.pdf"
+   "notes": "Amount taken from the item memo/resolution PDF: https://pcbgov.granicus.com/services/legistar/download/pdf/1799417/Res_23.-125.CW_Roberts.Gayles_Trail_Project.BA23.pdf Approval confirmed in council minutes: https://pcbgov.granicus.com/services/legistar/download/pdf/1822894/02.23.2023.Council_Meeting_Minutes.draft.pdf."
   },
   {
    "government": "City of Panama City Beach",
@@ -4019,7 +5032,7 @@
    "method": "Task order / work authorization under existing continuing-services contract",
    "source_title": "Panama City Beach City Council agenda 2023-03-09, item J.7",
    "source_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=125",
-   "notes": "Amount taken from the item memo/resolution PDF: https://pcbgov.granicus.com/services/legistar/download/pdf/1823164/Res_23-139.Mott_MacDonald.Task_Order.Laguna_Beach_Septic_to_Sewer.pdf"
+   "notes": "Amount taken from the item memo/resolution PDF: https://pcbgov.granicus.com/services/legistar/download/pdf/1823164/Res_23-139.Mott_MacDonald.Task_Order.Laguna_Beach_Septic_to_Sewer.pdf Approval confirmed in council minutes: https://pcbgov.granicus.com/services/legistar/download/pdf/1844230/03.09.2023.Council_Meeting_Minutes.draft.pdf."
   },
   {
    "government": "City of Panama City Beach",
@@ -4030,7 +5043,7 @@
    "method": "Competitive sealed bid (invitation to bid) (PCB23-20 bid tabulation attached)",
    "source_title": "Panama City Beach City Council agenda 2023-04-13, item J.4",
    "source_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=128",
-   "notes": "Amount taken from the item memo/resolution PDF: https://pcbgov.granicus.com/services/legistar/download/pdf/1881270/Res_23-156.Gulf_Coast_Utility_Contractors.Alf_Coleman_Rd_Project.pdf"
+   "notes": "Amount taken from the item memo/resolution PDF: https://pcbgov.granicus.com/services/legistar/download/pdf/1881270/Res_23-156.Gulf_Coast_Utility_Contractors.Alf_Coleman_Rd_Project.pdf Approval confirmed in council minutes: https://pcbgov.granicus.com/services/legistar/download/pdf/1910147/04.13.2023.Council_Meeting_Minutes.draft.pdf."
   },
   {
    "government": "City of Panama City Beach",
@@ -4041,7 +5054,7 @@
    "method": "Task order / work authorization under existing continuing-services contract",
    "source_title": "Panama City Beach City Council agenda 2023-06-08, item J.3",
    "source_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=134",
-   "notes": "Amount taken from the item memo/resolution PDF: https://pcbgov.granicus.com/services/legistar/download/pdf/1984668/Res_23-187.Infrastructure_Solutions.Task_Order.LS_No._73.pdf"
+   "notes": "Amount taken from the item memo/resolution PDF: https://pcbgov.granicus.com/services/legistar/download/pdf/1984668/Res_23-187.Infrastructure_Solutions.Task_Order.LS_No._73.pdf Council action not confirmed (minutes for this meeting not found or not matched)."
   },
   {
    "government": "City of Panama City Beach",
@@ -4052,7 +5065,7 @@
    "method": "Competitive proposals (PCB 23-43 evaluation scoring sheet attached)",
    "source_title": "Panama City Beach City Council agenda 2023-09-28, item J.9",
    "source_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=147",
-   "notes": "Amount taken from the item memo/resolution PDF: https://pcbgov.granicus.com/services/legistar/download/pdf/2190234/Res_23-240.FLC.Property_Insurance_Purchase.pdf"
+   "notes": "Amount taken from the item memo/resolution PDF: https://pcbgov.granicus.com/services/legistar/download/pdf/2190234/Res_23-240.FLC.Property_Insurance_Purchase.pdf Approval confirmed in council minutes: https://pcbgov.granicus.com/services/legistar/download/pdf/2214267/09.28.2023.Council_Meeting_Minutes.draft.pdf."
   },
   {
    "government": "City of Panama City Beach",
@@ -4063,7 +5076,7 @@
    "method": "Not stated in agenda item",
    "source_title": "Panama City Beach City Council agenda 2024-01-11, item J.7",
    "source_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=156",
-   "notes": "Amount taken from the item memo/resolution PDF: https://pcbgov.granicus.com/services/legistar/download/pdf/2369035/Res_24-68.Alan_Jay.Purchase_11_Ford_F150_Trucks_PD.BA10.pdf"
+   "notes": "Amount taken from the item memo/resolution PDF: https://pcbgov.granicus.com/services/legistar/download/pdf/2369035/Res_24-68.Alan_Jay.Purchase_11_Ford_F150_Trucks_PD.BA10.pdf Approval confirmed in council minutes: https://pcbgov.granicus.com/services/legistar/download/pdf/2396026/01.11.2024.Council_Meeting_Minutes.draft.pdf."
   },
   {
    "government": "City of Panama City Beach",
@@ -4074,7 +5087,7 @@
    "method": "Task order / work authorization under existing continuing-services contract",
    "source_title": "Panama City Beach City Council agenda 2024-01-25, item J.2",
    "source_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=157",
-   "notes": "Amount taken from the item memo/resolution PDF: https://pcbgov.granicus.com/services/legistar/download/pdf/2396950/Res_24-76.Task_Order_Dewberry_Engineering_Seg_4.2_Project.pdf"
+   "notes": "Amount taken from the item memo/resolution PDF: https://pcbgov.granicus.com/services/legistar/download/pdf/2396950/Res_24-76.Task_Order_Dewberry_Engineering_Seg_4.2_Project.pdf Approval confirmed in council minutes: https://pcbgov.granicus.com/services/legistar/download/pdf/2417981/01.25.2024.Council_Meeting_Minutes.draft.pdf."
   },
   {
    "government": "City of Panama City Beach",
@@ -4085,7 +5098,7 @@
    "method": "Not stated in agenda item",
    "source_title": "Panama City Beach City Council agenda 2024-06-13, item I.4",
    "source_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=316",
-   "notes": ""
+   "notes": "Approval confirmed in council minutes: https://pcbgov.granicus.com/services/legistar/download/pdf/2704073/06.13.2024.Council_Meeting_Minutes.draft.pdf."
   },
   {
    "government": "City of Panama City Beach",
@@ -4096,7 +5109,7 @@
    "method": "Negotiated after solicitation PCB24-25 (Council authorized negotiation 2024-04-11)",
    "source_title": "Panama City Beach City Council agenda 2024-07-25, item J.6",
    "source_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=321",
-   "notes": "Amount taken from the item memo/resolution PDF: https://d2kbkoa27fdvtw.cloudfront.net/pcbgov/0aae3a2b5208a9da44d53909fc9a3e270.pdf"
+   "notes": "Amount taken from the item memo/resolution PDF: https://d2kbkoa27fdvtw.cloudfront.net/pcbgov/0aae3a2b5208a9da44d53909fc9a3e270.pdf Council action not confirmed (minutes for this meeting not found or not matched)."
   },
   {
    "government": "City of Panama City Beach",
@@ -4107,7 +5120,7 @@
    "method": "Renewal of existing coverage / agreement",
    "source_title": "Panama City Beach City Council agenda 2024-09-26, item I.4",
    "source_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=328",
-   "notes": ""
+   "notes": "Approval confirmed in council minutes: https://pcbgov.granicus.com/services/legistar/download/pdf/2895464/09.26.2024.Council_Meeting_Minutes.draft.pdf."
   },
   {
    "government": "City of Panama City Beach",
@@ -4118,7 +5131,7 @@
    "method": "Renewal of existing coverage / agreement",
    "source_title": "Panama City Beach City Council agenda 2024-10-10, item I.6",
    "source_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=330",
-   "notes": ""
+   "notes": "Approval confirmed in council minutes: https://pcbgov.granicus.com/services/legistar/download/pdf/2929382/10.10.2024.Council_Meeting_Minutes.draft.pdf."
   },
   {
    "government": "City of Panama City Beach",
@@ -4129,7 +5142,7 @@
    "method": "Not stated in agenda item",
    "source_title": "Panama City Beach City Council agenda 2024-10-24, item I.3",
    "source_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=332",
-   "notes": ""
+   "notes": "Approval confirmed in council minutes: https://pcbgov.granicus.com/services/legistar/download/pdf/2969031/10.24.2024.Council_Meeting_Minutes.draft.pdf."
   },
   {
    "government": "City of Panama City Beach",
@@ -4140,7 +5153,7 @@
    "method": "Not stated in agenda item",
    "source_title": "Panama City Beach City Council agenda 2025-01-09, item H.3",
    "source_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=336",
-   "notes": ""
+   "notes": "Approval confirmed in council minutes: https://pcbgov.granicus.com/services/legistar/download/pdf/3101392/01.09.2025.Council_Meeting_Minutes.Draft.pdf."
   },
   {
    "government": "City of Panama City Beach",
@@ -4151,7 +5164,7 @@
    "method": "Task order / work authorization under existing continuing-services contract",
    "source_title": "Panama City Beach City Council agenda 2025-01-30, item I.7",
    "source_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=337",
-   "notes": ""
+   "notes": "Council action not confirmed (minutes for this meeting not found or not matched)."
   },
   {
    "government": "City of Panama City Beach",
@@ -4162,7 +5175,7 @@
    "method": "Not stated in agenda item",
    "source_title": "Panama City Beach City Council agenda 2025-02-27, item I.9",
    "source_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=351",
-   "notes": ""
+   "notes": "Approval confirmed in council minutes: https://pcbgov.granicus.com/services/legistar/download/pdf/3193293/02.27.2025.Council_Meeting_Minutes.draft.pdf."
   },
   {
    "government": "City of Panama City Beach",
@@ -4173,7 +5186,7 @@
    "method": "Piggyback on another government's contract (City of Tallahassee contract)",
    "source_title": "Panama City Beach City Council agenda 2025-03-13, item I.3",
    "source_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=353",
-   "notes": ""
+   "notes": "Approval confirmed in council minutes: https://pcbgov.granicus.com/services/legistar/download/pdf/3213140/03.13.2025.Council_Meeting_Minutes.draft.pdf."
   },
   {
    "government": "City of Panama City Beach",
@@ -4184,7 +5197,7 @@
    "method": "Competitive sealed bid (invitation to bid) (lowest qualified bid)",
    "source_title": "Panama City Beach City Council agenda 2025-04-10, item J.2",
    "source_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=356",
-   "notes": "Amount taken from the item memo/resolution PDF: https://d2kbkoa27fdvtw.cloudfront.net/pcbgov/5354912afaf7c344e86f878fbe57e5af0.pdf"
+   "notes": "Amount taken from the item memo/resolution PDF: https://d2kbkoa27fdvtw.cloudfront.net/pcbgov/5354912afaf7c344e86f878fbe57e5af0.pdf Approval confirmed in council minutes: https://pcbgov.granicus.com/services/legistar/download/pdf/3285908/04.10.2025.Council_Meeting_Minutes.draft.pdf."
   },
   {
    "government": "City of Panama City Beach",
@@ -4195,7 +5208,7 @@
    "method": "Piggyback on another government's contract (City of Tallahassee contract)",
    "source_title": "Panama City Beach City Council agenda 2025-04-24, item I.1",
    "source_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=357",
-   "notes": ""
+   "notes": "Approval confirmed in council minutes: https://pcbgov.granicus.com/services/legistar/download/pdf/3310404/04.24.2025.Council_Meeting_Minutes.draft.pdf."
   },
   {
    "government": "City of Panama City Beach",
@@ -4206,7 +5219,7 @@
    "method": "Competitive bid; Council accepted bid results and authorized negotiation on 2024-10-24 (Res. 25-10)",
    "source_title": "Panama City Beach City Council agenda 2025-04-24, item J.3",
    "source_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=357",
-   "notes": "Amount taken from the item memo/resolution PDF: https://d2kbkoa27fdvtw.cloudfront.net/pcbgov/c80f510e78d0090a00d410397dbfcd400.pdf"
+   "notes": "Amount taken from the item memo/resolution PDF: https://d2kbkoa27fdvtw.cloudfront.net/pcbgov/c80f510e78d0090a00d410397dbfcd400.pdf Approval confirmed in council minutes: https://pcbgov.granicus.com/services/legistar/download/pdf/3310404/04.24.2025.Council_Meeting_Minutes.draft.pdf."
   },
   {
    "government": "City of Panama City Beach",
@@ -4217,7 +5230,7 @@
    "method": "Piggyback on another government's contract (City of Tallahassee contract)",
    "source_title": "Panama City Beach City Council agenda 2025-05-08, item I.1",
    "source_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=358",
-   "notes": ""
+   "notes": "Council action not confirmed (minutes for this meeting not found or not matched)."
   },
   {
    "government": "City of Panama City Beach",
@@ -4228,7 +5241,7 @@
    "method": "Not stated in agenda item",
    "source_title": "Panama City Beach City Council agenda 2025-05-22, item J.3",
    "source_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=360",
-   "notes": "Amount taken from the item memo/resolution PDF: https://d2kbkoa27fdvtw.cloudfront.net/pcbgov/4ee4ae11b46f1e4fcf0536cbd619a7930.pdf"
+   "notes": "Amount taken from the item memo/resolution PDF: https://d2kbkoa27fdvtw.cloudfront.net/pcbgov/4ee4ae11b46f1e4fcf0536cbd619a7930.pdf Council action not confirmed (minutes for this meeting not found or not matched)."
   },
   {
    "government": "City of Panama City Beach",
@@ -4239,7 +5252,7 @@
    "method": "Competitive sealed bid (invitation to bid) (PCB25-37 bid form and tabulation attached)",
    "source_title": "Panama City Beach City Council agenda 2025-09-11, item I.1",
    "source_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=375",
-   "notes": ""
+   "notes": "Approval confirmed in council minutes: https://pcbgov.granicus.com/services/legistar/download/pdf/3620744/09.11.2025.Council_Meeting_Minutes.draft.pdf."
   },
   {
    "government": "City of Panama City Beach",
@@ -4250,7 +5263,7 @@
    "method": "Contract assignment tendered by surety (Old Republic) after original contractor (Beaches Construction) breached",
    "source_title": "Panama City Beach City Council agenda 2025-09-11, item I.4",
    "source_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=375",
-   "notes": "Amount taken from the item memo/resolution PDF: https://d2kbkoa27fdvtw.cloudfront.net/pcbgov/02c066da4196118c979d02d89f446c210.pdf"
+   "notes": "Amount taken from the item memo/resolution PDF: https://d2kbkoa27fdvtw.cloudfront.net/pcbgov/02c066da4196118c979d02d89f446c210.pdf Approval confirmed in council minutes: https://pcbgov.granicus.com/services/legistar/download/pdf/3620744/09.11.2025.Council_Meeting_Minutes.draft.pdf."
   },
   {
    "government": "City of Panama City Beach",
@@ -4261,7 +5274,7 @@
    "method": "Renewal of existing coverage / agreement",
    "source_title": "Panama City Beach City Council agenda 2025-09-25, item I.1",
    "source_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=377",
-   "notes": ""
+   "notes": "Council action not confirmed (minutes for this meeting not found or not matched)."
   },
   {
    "government": "City of Panama City Beach",
@@ -4272,7 +5285,7 @@
    "method": "Not stated in agenda item",
    "source_title": "Panama City Beach City Council agenda 2025-09-25, item I.2",
    "source_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=377",
-   "notes": ""
+   "notes": "Approval confirmed in council minutes: https://pcbgov.granicus.com/services/legistar/download/pdf/2969031/10.24.2024.Council_Meeting_Minutes.draft.pdf."
   },
   {
    "government": "City of Panama City Beach",
@@ -4283,7 +5296,7 @@
    "method": "Existing agreement (additional authorization)",
    "source_title": "Panama City Beach City Council agenda 2025-10-23, item I.3",
    "source_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=381",
-   "notes": ""
+   "notes": "Council action not confirmed (minutes for this meeting not found or not matched)."
   },
   {
    "government": "City of Panama City Beach",
@@ -4294,7 +5307,7 @@
    "method": "Task order / work authorization under existing continuing-services contract",
    "source_title": "Panama City Beach City Council agenda 2025-10-23, item J.3",
    "source_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=381",
-   "notes": ""
+   "notes": "Approval confirmed in council minutes: https://pcbgov.granicus.com/services/legistar/download/pdf/3708472/10.23.2025.Council_Meeting_Minutes.draft.pdf."
   },
   {
    "government": "City of Panama City Beach",
@@ -4305,7 +5318,7 @@
    "method": "Intergovernmental agreement (FDOT utility work)",
    "source_title": "Panama City Beach City Council agenda 2025-10-23, item J.4",
    "source_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=381",
-   "notes": "Amount taken from the item memo/resolution PDF: https://d2kbkoa27fdvtw.cloudfront.net/pcbgov/a6853c38d5ae3f1a3658bf8c705537d30.pdf"
+   "notes": "Amount taken from the item memo/resolution PDF: https://d2kbkoa27fdvtw.cloudfront.net/pcbgov/a6853c38d5ae3f1a3658bf8c705537d30.pdf Approval confirmed in council minutes: https://pcbgov.granicus.com/services/legistar/download/pdf/3708472/10.23.2025.Council_Meeting_Minutes.draft.pdf."
   },
   {
    "government": "City of Panama City Beach",
@@ -4316,7 +5329,7 @@
    "method": "Piggyback on another government's contract (City of Tallahassee contract)",
    "source_title": "Panama City Beach City Council agenda 2025-11-13, item I.2",
    "source_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=383",
-   "notes": ""
+   "notes": "Council action not confirmed (minutes for this meeting not found or not matched)."
   },
   {
    "government": "City of Panama City Beach",
@@ -4327,7 +5340,7 @@
    "method": "Competitive sealed bid (invitation to bid) (low bid)",
    "source_title": "Panama City Beach City Council agenda 2025-11-13, item J.8",
    "source_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=383",
-   "notes": "Amount taken from the item memo/resolution PDF: https://d2kbkoa27fdvtw.cloudfront.net/pcbgov/7948dddf7f213a89a7d1e5baea00badb0.pdf"
+   "notes": "Amount taken from the item memo/resolution PDF: https://d2kbkoa27fdvtw.cloudfront.net/pcbgov/7948dddf7f213a89a7d1e5baea00badb0.pdf Approval confirmed in council minutes: https://pcbgov.granicus.com/services/legistar/download/pdf/3789316/11.13.2025.Council_Meeting_Minutes.draft.pdf."
   },
   {
    "government": "City of Panama City Beach",
@@ -4338,7 +5351,7 @@
    "method": "Not stated in agenda item",
    "source_title": "Panama City Beach City Council agenda 2025-12-11, item I.12",
    "source_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=385",
-   "notes": ""
+   "notes": "Approval confirmed in council minutes: https://pcbgov.granicus.com/services/legistar/download/pdf/3824740/12.11.2025.Council_Meeting_Minutes.draft.pdf."
   },
   {
    "government": "City of Panama City Beach",
@@ -4349,7 +5362,7 @@
    "method": "Not stated in agenda item",
    "source_title": "Panama City Beach City Council agenda 2026-01-08, item I.6",
    "source_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=386",
-   "notes": ""
+   "notes": "Approval confirmed in council minutes: https://pcbgov.granicus.com/services/legistar/download/pdf/3851849/01.08.2026.Council_Meeting_Minutes.draft.pdf."
   },
   {
    "government": "City of Panama City Beach",
@@ -4360,7 +5373,7 @@
    "method": "Not stated in agenda item",
    "source_title": "Panama City Beach City Council agenda 2026-01-22, item J.1",
    "source_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=387",
-   "notes": "Amount taken from the item memo/resolution PDF: https://pcbgov.granicus.com/services/legistar/download/pdf/3858990/Res_26-68.RJ_Gorman.City_Pier_Side_Rail_Project.pdf"
+   "notes": "Amount taken from the item memo/resolution PDF: https://pcbgov.granicus.com/services/legistar/download/pdf/3858990/Res_26-68.RJ_Gorman.City_Pier_Side_Rail_Project.pdf Approval confirmed in council minutes: https://pcbgov.granicus.com/services/legistar/download/pdf/3895685/01.22.2026.Council_Meeting_Minutes.draft.pdf."
   },
   {
    "government": "City of Panama City Beach",
@@ -4371,7 +5384,7 @@
    "method": "Existing agreement (additional authorization)",
    "source_title": "Panama City Beach City Council agenda 2026-05-14, item J.1",
    "source_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=399",
-   "notes": ""
+   "notes": "Approval confirmed in council minutes: https://pcbgov.granicus.com/services/legistar/download/pdf/4126452/05.14.2026.Council_Minutes.draft.pdf."
   },
   {
    "government": "City of Panama City Beach",
@@ -4382,7 +5395,7 @@
    "method": "Not stated in agenda item",
    "source_title": "Panama City Beach City Council agenda 2026-07-09, item I.1",
    "source_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=411",
-   "notes": ""
+   "notes": "Approval confirmed in council minutes: https://pcbgov.granicus.com/services/legistar/download/pdf/4247873/07.09.2026.Council_Minutes.draft.pdf."
   },
   {
    "government": "City of Panama City Beach",
@@ -4393,7 +5406,7 @@
    "method": "Competitive qualifications/proposals (RFQ/RFP, ranked firms) (highest-ranked firm)",
    "source_title": "Panama City Beach City Council agenda 2026-07-09, item J.3",
    "source_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=411",
-   "notes": "Amount taken from the item memo/resolution PDF: https://d2kbkoa27fdvtw.cloudfront.net/pcbgov/e707573a23a60f3a99b814dd7d7d1f950.pdf"
+   "notes": "Amount taken from the item memo/resolution PDF: https://d2kbkoa27fdvtw.cloudfront.net/pcbgov/e707573a23a60f3a99b814dd7d7d1f950.pdf Approval confirmed in council minutes: https://pcbgov.granicus.com/services/legistar/download/pdf/4247873/07.09.2026.Council_Minutes.draft.pdf."
   },
   {
    "government": "City of Panama City Beach",
@@ -4404,7 +5417,7 @@
    "method": "Task order / work authorization under existing continuing-services contract",
    "source_title": "Panama City Beach City Council agenda 2026-07-23, item I.5",
    "source_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=412",
-   "notes": ""
+   "notes": "Approval confirmed in council minutes: https://pcbgov.granicus.com/services/legistar/download/pdf/4289205/07.0232026.Council_Minutes.draft.pdf."
   },
   {
    "government": "City of Panama City Beach",
@@ -4415,7 +5428,7 @@
    "method": "Renewal of existing coverage / agreement",
    "source_title": "Panama City Beach City Council agenda 2026-09-24, item I.2",
    "source_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=419",
-   "notes": ""
+   "notes": "Approval confirmed in council minutes: https://pcbgov.granicus.com/services/legistar/download/pdf/4417784/09.24.2026.Council_Minutes.draft.pdf."
   },
   {
    "government": "City of Panama City Beach",
@@ -4426,7 +5439,7 @@
    "method": "Cooperative purchasing contract (e.g., Sourcewell / FSA / OMNIA / state contract) (Sourcewell)",
    "source_title": "Panama City Beach City Council agenda 2026-10-22, item I.1",
    "source_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&event_id=219",
-   "notes": ""
+   "notes": "Meeting scheduled after the as-of date; council action not yet taken."
   },
   {
    "government": "City of Panama City Beach",
@@ -4437,7 +5450,18 @@
    "method": "Not stated in agenda item",
    "source_title": "Panama City Beach City Council agenda 2026-10-22, item J.2",
    "source_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&event_id=219",
-   "notes": "Amount taken from the item memo/resolution PDF: https://d2kbkoa27fdvtw.cloudfront.net/pcbgov/d274e4fd63a46a0075ff049ef6d224020.pdf"
+   "notes": "Amount taken from the item memo/resolution PDF: https://d2kbkoa27fdvtw.cloudfront.net/pcbgov/d274e4fd63a46a0075ff049ef6d224020.pdf Meeting scheduled after the as-of date; council action not yet taken."
+  },
+  {
+   "government": "City of Parker",
+   "vendor": "Not named in approval minutes (low bid at 2023-07-18 opening: Roberts and Roberts, $692,851.75)",
+   "amount": 692851.75,
+   "purpose": "Street resurfacing / road improvements Phase 1 (projects A-E), Anchor Engineering bid recommendation",
+   "date": "2023-08-01",
+   "method": "Competitive sealed bid (invitation to bid) (three bids opened 2023-07-18)",
+   "source_title": "Parker City Council minutes 2023-08-01 (approval) and 2023-07-18 (bid opening)",
+   "source_url": "https://cityofparker.com/wp-content/uploads/filr/4833/August%201%2C%202023%20Council%20Corrected%20Meeting%20Minutes.pdf",
+   "notes": "The 2023-08-01 minutes record approval of \"the bid and alternate\" recommended by Anchor Engineering without naming the contractor or amount. Amount and vendor shown are the low bid read at the 2023-07-18 opening (https://cityofparker.com/wp-content/uploads/filr/4806/July%2018%2C%202023%20Council%20Minutes.pdf); the final awarded amount including the alternate is not in the minutes."
   }
  ],
  "change_orders": [
@@ -4722,6 +5746,34 @@
    "notes": ""
   },
   {
+   "government": "City of Mexico Beach",
+   "vendor": "Razorback LLC",
+   "project": "Lift station bypass pumps, deductive change orders",
+   "original_amount": 531000.0,
+   "change_amount": -263291.6,
+   "new_total": null,
+   "pct_of_original": -49.6,
+   "reason": "Scope moved to Mainline Construction, which was already mobilized at each site (net savings $55,087.10)",
+   "date": "2026-01-13",
+   "source_title": "Mexico Beach City Council minutes 2026-01-13",
+   "source_url": "https://mexicobeachfl.gov/uploads/2026/01/January-13-2026-City-Council-Meeting-Minutes.pdf",
+   "notes": "Original amount is the $531,000 approved 2025-04-23."
+  },
+  {
+   "government": "City of Mexico Beach",
+   "vendor": "Mainline Construction",
+   "project": "Lift station bypass pumps, add change orders (scope moved from Razorback)",
+   "original_amount": 1222819.6,
+   "change_amount": 208204.5,
+   "new_total": null,
+   "pct_of_original": 17.0,
+   "reason": "Took over bypass-pump scope from Razorback LLC",
+   "date": "2026-01-13",
+   "source_title": "Mexico Beach City Council minutes 2026-01-13",
+   "source_url": "https://mexicobeachfl.gov/uploads/2026/01/January-13-2026-City-Council-Meeting-Minutes.pdf",
+   "notes": "Original shown is Mainline's 2025-04-08 lift station rehab award; the change order may attach to a different Mainline contract. A separate deductive change order of $75,687.00 (Nanook Rd) was presented for information."
+  },
+  {
    "government": "City of Panama City",
    "vendor": "Hagerty Consulting",
    "project": "Hurricane Michael recovery consulting, contract amendment 15",
@@ -4733,7 +5785,7 @@
    "date": "2022-10-11",
    "source_title": "Panama City Commission agenda 2022-10-11, item 11.e",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_10112022-581?html=true",
-   "notes": "Original contract amount not stated."
+   "notes": "Original contract amount not stated. Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_10112022-581"
   },
   {
    "government": "City of Panama City",
@@ -4747,7 +5799,7 @@
    "date": "2022-11-29",
    "source_title": "Panama City Commission agenda 2022-11-29, item 11.d",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_11292022-589?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_11292022-589"
   },
   {
    "government": "City of Panama City",
@@ -4761,7 +5813,7 @@
    "date": "2025-04-24",
    "source_title": "Panama City Commission agenda 2025-04-24, item 8.j",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_04242025-742?html=true",
-   "notes": "Followed by CO6 $106,245.29 (2025-08-12) and CO7 $193,604.25 (2025-09-23); listed COs total $443,687.53 (6.4%)."
+   "notes": "Followed by CO6 $106,245.29 (2025-08-12) and CO7 $193,604.25 (2025-09-23); listed COs total $443,687.53 (6.4%). Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_04242025-742"
   },
   {
    "government": "City of Panama City",
@@ -4775,7 +5827,7 @@
    "date": "2025-05-13",
    "source_title": "Panama City Commission agenda 2025-05-13, item 9.e",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_05132025-745?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_05132025-745"
   },
   {
    "government": "City of Panama City",
@@ -4789,7 +5841,7 @@
    "date": "2025-06-24",
    "source_title": "Panama City Commission agenda 2025-06-24, item 9.c",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_06242025-751?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_06242025-751"
   },
   {
    "government": "City of Panama City",
@@ -4803,7 +5855,7 @@
    "date": "2025-08-12",
    "source_title": "Panama City Commission agenda 2025-08-12, item 9.h",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_08122025-761?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_08122025-761"
   },
   {
    "government": "City of Panama City",
@@ -4817,7 +5869,7 @@
    "date": "2025-09-23",
    "source_title": "Panama City Commission agenda 2025-09-23, item 9.g",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_09232025-768?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_09232025-768"
   },
   {
    "government": "City of Panama City",
@@ -4831,7 +5883,7 @@
    "date": "2025-09-23",
    "source_title": "Panama City Commission agenda 2025-09-23, item 9.i",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_09232025-768?html=true",
-   "notes": "Contractor name taken from the 2024-01-23 award; a final change order of $263,888.46 followed on 2026-03-10 (item 10.i)."
+   "notes": "Contractor name taken from the 2024-01-23 award; a final change order of $263,888.46 followed on 2026-03-10 (item 10.i). Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_09232025-768"
   },
   {
    "government": "City of Panama City",
@@ -4845,7 +5897,7 @@
    "date": "2025-12-16",
    "source_title": "Panama City Commission agenda 2025-12-16, item 9.i",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_12162025-796?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_12162025-796"
   },
   {
    "government": "City of Panama City",
@@ -4859,7 +5911,7 @@
    "date": "2025-12-16",
    "source_title": "Panama City Commission agenda 2025-12-16, item 12.h",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_12162025-796?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_12162025-796"
   },
   {
    "government": "City of Panama City",
@@ -4873,7 +5925,7 @@
    "date": "2026-01-27",
    "source_title": "Panama City Commission agenda 2026-01-27, item 7.f",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_01272026-813?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_01272026-813"
   },
   {
    "government": "City of Panama City",
@@ -4887,7 +5939,7 @@
    "date": "2026-02-10",
    "source_title": "Panama City Commission agenda 2026-02-10, item 8.i",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_02102026-825?html=true",
-   "notes": "Followed by COs 12-15 ($940,652.41, 2026-06-09) and CO16 ($132,082.60, 2026-07-14); these three items total $1,475,054.01 (25.8% of the original)."
+   "notes": "Followed by COs 12-15 ($940,652.41, 2026-06-09) and CO16 ($132,082.60, 2026-07-14); these three items total $1,475,054.01 (25.8% of the original). Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_02102026-825"
   },
   {
    "government": "City of Panama City",
@@ -4901,7 +5953,7 @@
    "date": "2026-02-24",
    "source_title": "Panama City Commission agenda 2026-02-24, item 8.f",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_02242026-826?html=true",
-   "notes": "Original shown is GCUC's Subsection B award; the agenda does not say which subsection(s) the deduct applies to."
+   "notes": "Original shown is GCUC's Subsection B award; the agenda does not say which subsection(s) the deduct applies to. Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_02242026-826"
   },
   {
    "government": "City of Panama City",
@@ -4915,7 +5967,7 @@
    "date": "2026-03-10",
    "source_title": "Panama City Commission agenda 2026-03-10, item 10.i",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_03102026-834?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_03102026-834"
   },
   {
    "government": "City of Panama City",
@@ -4929,7 +5981,7 @@
    "date": "2026-03-10",
    "source_title": "Panama City Commission agenda 2026-03-10, item 10.j",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_03102026-834?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_03102026-834"
   },
   {
    "government": "City of Panama City",
@@ -4943,7 +5995,7 @@
    "date": "2026-03-10",
    "source_title": "Panama City Commission agenda 2026-03-10, item 8.g",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_03102026-834?html=true",
-   "notes": "Original contract amount not found in FY2023-FY2026 agendas."
+   "notes": "Original contract amount not found in FY2023-FY2026 agendas. Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_03102026-834"
   },
   {
    "government": "City of Panama City",
@@ -4957,7 +6009,7 @@
    "date": "2026-03-24",
    "source_title": "Panama City Commission agenda 2026-03-24, item 8.i",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_03242026-835?html=true",
-   "notes": "PC24-006 was proposed for award to Extreme Land Clearing & Excavation ($15,171,116.23) on 2024-02-13; this CO names CBC Construction. CO5 ($152,215.39) followed 2026-07-14."
+   "notes": "PC24-006 was proposed for award to Extreme Land Clearing & Excavation ($15,171,116.23) on 2024-02-13; this CO names CBC Construction. CO5 ($152,215.39) followed 2026-07-14. Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_03242026-835"
   },
   {
    "government": "City of Panama City",
@@ -4971,7 +6023,7 @@
    "date": "2026-05-26",
    "source_title": "Panama City Commission agenda 2026-05-26, item 11.a",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_05262026-855?html=true",
-   "notes": "A 2026-05-12 version of CO3 listed $1,187,519.06."
+   "notes": "A 2026-05-12 version of CO3 listed $1,187,519.06. Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_05262026-855"
   },
   {
    "government": "City of Panama City",
@@ -4985,7 +6037,7 @@
    "date": "2026-06-09",
    "source_title": "Panama City Commission agenda 2026-06-09, item 9.c",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_06092026-861?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_06092026-861"
   },
   {
    "government": "City of Panama City",
@@ -4999,7 +6051,7 @@
    "date": "2026-07-14",
    "source_title": "Panama City Commission agenda 2026-07-14, item 9.g",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_07142026-871?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_07142026-871"
   },
   {
    "government": "City of Panama City",
@@ -5013,7 +6065,7 @@
    "date": "2026-07-14",
    "source_title": "Panama City Commission agenda 2026-07-14, item 9.f",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_07142026-871?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_07142026-871"
   },
   {
    "government": "City of Panama City",
@@ -5027,7 +6079,7 @@
    "date": "2026-07-14",
    "source_title": "Panama City Commission agenda 2026-07-14, item 9.b",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_07142026-871?html=true",
-   "notes": "Original task order amount not identified with certainty."
+   "notes": "Original task order amount not identified with certainty. Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_07142026-871"
   },
   {
    "government": "City of Panama City",
@@ -5041,7 +6093,7 @@
    "date": "2026-08-25",
    "source_title": "Panama City Commission agenda 2026-08-25, item 9.d",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_08252026-880?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_08252026-880"
   },
   {
    "government": "City of Panama City",
@@ -5069,7 +6121,7 @@
    "date": "2023-10-26",
    "source_title": "Panama City Beach City Council agenda 2023-10-26, item J.4",
    "source_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=149",
-   "notes": "Original contract amount not found in FY2023-FY2026 agendas."
+   "notes": "Original contract amount not found in FY2023-FY2026 agendas. Council action not confirmed (minutes for this meeting not found or not matched)."
   },
   {
    "government": "City of Panama City Beach",
@@ -5083,7 +6135,7 @@
    "date": "2024-05-09",
    "source_title": "Panama City Beach City Council agenda 2024-05-09, item J.6",
    "source_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=300",
-   "notes": "Amount from resolution PDF: https://pcbgov.granicus.com/services/legistar/download/pdf/2596402/Res_24-128.CWR_Change_Order_10.FBR_Segment_3.pdf"
+   "notes": "Amount from resolution PDF: https://pcbgov.granicus.com/services/legistar/download/pdf/2596402/Res_24-128.CWR_Change_Order_10.FBR_Segment_3.pdf Approval confirmed in council minutes: https://pcbgov.granicus.com/services/legistar/download/pdf/2638399/05.09.2024.Council_Meeting_Minutes.draft.pdf."
   },
   {
    "government": "City of Panama City Beach",
@@ -5097,7 +6149,7 @@
    "date": "2024-07-25",
    "source_title": "Panama City Beach City Council agenda 2024-07-25, item J.7",
    "source_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=321",
-   "notes": "Amount from item memo: https://d2kbkoa27fdvtw.cloudfront.net/pcbgov/f0ca2954bea558a11f5a68e28098373c0.pdf"
+   "notes": "Amount from item memo: https://d2kbkoa27fdvtw.cloudfront.net/pcbgov/f0ca2954bea558a11f5a68e28098373c0.pdf Approval confirmed in council minutes: https://pcbgov.granicus.com/services/legistar/download/pdf/3159185/02.13.2025.Council_Meeting_Minutes.draft.pdf."
   },
   {
    "government": "City of Panama City Beach",
@@ -5111,7 +6163,7 @@
    "date": "2024-11-14",
    "source_title": "Panama City Beach City Council agenda 2024-11-14, item J.4",
    "source_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=334",
-   "notes": "Item memo: overall contract amount increased to $446,330.59. https://d2kbkoa27fdvtw.cloudfront.net/pcbgov/b73b18898afc40bf9424b6a8f35ae2aa0.pdf"
+   "notes": "Item memo: overall contract amount increased to $446,330.59. https://d2kbkoa27fdvtw.cloudfront.net/pcbgov/b73b18898afc40bf9424b6a8f35ae2aa0.pdf Approval confirmed in council minutes: https://pcbgov.granicus.com/services/legistar/download/pdf/3020155/11.14.2024.Council_Meeting_Minutes.draft.pdf."
   },
   {
    "government": "City of Panama City Beach",
@@ -5125,7 +6177,7 @@
    "date": "2026-03-12",
    "source_title": "Panama City Beach City Council agenda 2026-03-12, item J.3",
    "source_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=393",
-   "notes": "Change amount is the sum of the two components in the item memo: https://d2kbkoa27fdvtw.cloudfront.net/pcbgov/36b4d4d945c636acf2166ac32c06df0a0.pdf"
+   "notes": "Change amount is the sum of the two components in the item memo: https://d2kbkoa27fdvtw.cloudfront.net/pcbgov/36b4d4d945c636acf2166ac32c06df0a0.pdf Approval confirmed in council minutes: https://pcbgov.granicus.com/services/legistar/download/pdf/3993428/03.12.2026.Council_Minutes.draft.2.pdf."
   }
  ],
  "emergency_purchases": [
@@ -5171,7 +6223,7 @@
    "basis": "Emergency repair; Board asked to ratify the purchase order",
    "source_title": "Bay County BOCC agenda 2026-10-20, item 9 (agenda item summary and PO POBOCC-10001207)",
    "source_url": "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=5259",
-   "notes": "Amount is the sum of the four PO lines ($30,155.94 + $97,176.64 + $5,020.07 + $74,439.11)."
+   "notes": "Amount is the sum of the four PO lines ($30,155.94 + $97,176.64 + $5,020.07 + $74,439.11). On the agenda for the 2026-10-20 meeting (the as-of date); the Board's action was not yet published."
   },
   {
    "government": "City of Lynn Haven",
@@ -5196,6 +6248,17 @@
    "notes": "A related emergency lift station repair by Marshall Brothers was on the 2025-06-24 agenda without an amount in the title."
   },
   {
+   "government": "City of Mexico Beach",
+   "vendor": "Not named in minutes",
+   "amount": 40000.0,
+   "purpose": "Emergency dredge engine purchase (not to exceed)",
+   "date": "2023-04-11",
+   "basis": "Council approval of emergency purchase",
+   "source_title": "Mexico Beach City Council minutes 2023-04-11",
+   "source_url": "https://mexicobeachfl.gov/uploads/2023/04/City-Council-Meeting-Minutes-04-11-2023.pdf",
+   "notes": "Amount is a not-to-exceed ceiling."
+  },
+  {
    "government": "City of Panama City",
    "vendor": "Not named in agenda title",
    "amount": 475000.0,
@@ -5204,7 +6267,7 @@
    "basis": "Ratification of emergency procurement and exigent circumstances",
    "source_title": "Panama City Commission agenda 2023-03-28, item 10.g",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_03282023-603?html=true",
-   "notes": "Amount is approximate per the agenda."
+   "notes": "Amount is approximate per the agenda. Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_03282023-603"
   },
   {
    "government": "City of Panama City",
@@ -5215,7 +6278,7 @@
    "basis": "Ratification of emergency repairs",
    "source_title": "Panama City Commission agenda 2023-07-25, item 11.l",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_07252023-627?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_07252023-627"
   },
   {
    "government": "City of Panama City",
@@ -5226,7 +6289,7 @@
    "basis": "Ratification of emergency repairs",
    "source_title": "Panama City Commission agenda 2023-10-10, item 9.f",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_10102023-644?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_10102023-644"
   },
   {
    "government": "City of Panama City",
@@ -5237,7 +6300,7 @@
    "basis": "Ratification of emergency repairs",
    "source_title": "Panama City Commission agenda 2024-04-23, item 12.e",
    "source_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_04232024-675?html=true",
-   "notes": ""
+   "notes": "Approval confirmed in the commission minutes for this meeting (roll-call vote or consent agenda): https://panamacity.gov/AgendaCenter/ViewFile/Minutes/_04232024-675"
   },
   {
    "government": "City of Panama City Beach",
@@ -5248,7 +6311,7 @@
    "basis": "City Manager emergency purchase, ratified by Council; materials via OMNIA Partners cooperative contract EV2370",
    "source_title": "Panama City Beach City Council agenda 2025-02-27, item J.2",
    "source_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=351",
-   "notes": "Item memo: https://d2kbkoa27fdvtw.cloudfront.net/pcbgov/237044a4490fd919961cba375dd930030.pdf"
+   "notes": "Item memo: https://d2kbkoa27fdvtw.cloudfront.net/pcbgov/237044a4490fd919961cba375dd930030.pdf Approval confirmed in council minutes: https://pcbgov.granicus.com/services/legistar/download/pdf/3193293/02.27.2025.Council_Meeting_Minutes.draft.pdf."
   }
  ],
  "thresholds": [
@@ -5284,28 +6347,36 @@
   },
   {
    "government": "City of Mexico Beach",
+   "rule": "Per the city Finance Director at the 2026-09-22 council meeting, the state Joint Legislative Auditing Committee (JLAC) review now requires any purchase over $15,000 to come before the council for approval, even when it is budgeted.",
+   "source_url": "https://mexicobeachfl.gov/uploads/2026/08/September-22-2026-Cit-Council-Meeting-Minutes.pdf",
+   "notes": "Statement recorded in council minutes (staff comments), not an ordinance."
+  },
+  {
+   "government": "City of Mexico Beach",
    "rule": "Expenditures over $8,000 require competitive bids (normally advertised); $3,000-$8,000 require three verbal quotes. Council may waive competitive bidding by majority vote for single-source, federal/state agency or one-time auction purchases.",
    "source_url": "https://mexicobeachfl.gov/uploads/2025/01/ordinance-612-Purchasing-Procedure-Requiring-Quotes.pdf",
    "notes": "Ordinance 612, adopted 2013-12-10, posted on the city site in 2025; no later amendment was found, but one may exist."
   }
  ],
  "notes": [
-  "Contract amounts are the amounts in the agenda recommendation or agenda title (or the attached item memo/resolution where noted). An agenda item is a proposal; the records were not each checked against minutes. Known cases where a proposal changed are recorded in notes (e.g., PCB pickleball bids rejected 2026-04-09; Panama City PC24-050 re-awarded; Panama City PC25-001 amount changed between agendas).",
+  "Panama City records were checked against the commission minutes (124 of 126 meetings); one proposed award that minutes show was deleted from the agenda (Hagerty Consulting task order $1,538,120, 2023-11-14) was removed. Panama City Beach records were checked against council minutes where available (38 of 50 confirmed). Bay County and Lynn Haven records come from agendas and were not checked against minutes. Contract amounts are the amounts in the agenda recommendation or agenda title (or the attached item memo/resolution where noted). An agenda item is a proposal; the records were not each checked against minutes. Known cases where a proposal changed are recorded in notes (e.g., PCB pickleball bids rejected 2026-04-09; Panama City PC24-050 re-awarded; Panama City PC25-001 amount changed between agendas).",
   "Bay County awards were taken from every BOCC regular-meeting agenda from 2022-10-04 through 2026-10-20 (97 meetings) on the county PrimeGov portal. Items of $250,000 or more were captured, plus all change orders and emergency purchases of note. Grant agreements, budget amendments, land transactions, SHIP loans and bonds were excluded.",
   "Panama City (126 commission agendas, 2022-10 to 2026-10) and Panama City Beach (94 council agendas, 2022-10 to 2026-10) were reviewed in full for items of about $250,000 or more. For Lynn Haven, Callaway, Mexico Beach and Parker, smaller awards (about $100,000 and up) are included because few contracts reach $250,000.",
   "Method labels are based on the wording of the agenda item: \"ITB\"/\"base bid\"/\"low bidder\" = competitive sealed bid; \"RFQ\"/\"top ranked\" = qualifications-based selection; \"task order\" = work under an existing continuing-services contract; \"piggyback\"/Sourcewell/FSA/OMNIA/City of Tallahassee contract = cooperative or piggyback purchase. For Bay County items identified only by contract number, the type comes from the county's bid posting at baycountyfl.gov/bids.aspx where available (link in notes). Where the source does not say, the method is \"Not stated\".",
   "Vendors that appear most often across governments in this period: Marshall Brothers Construction & Engineering, Roberts and Roberts, C.W. Roberts Contracting, Anderson Columbia, Mainline Construction, Gulf Coast Utility Contractors, Royal American Construction, Dewberry Engineers, Mott MacDonald, Panhandle Engineering, CDR Maguire and Hagerty Consulting (disaster-recovery consulting).",
   "Bay County check-register top vendors are cash paid in the months covered, not contract value; large construction payments in a year reflect work performed on contracts awarded earlier (e.g., Weeks Marine's $25.3M in FY2025 on the $27.2M Mexico Beach beach restoration contract 24-45).",
+  "Lynn Haven FY2025 warrant lists include one check of $4,312,791.60 dated 2024-12-15 to vendor no. 24060, \"JDF RVOC TR OF\" (truncated name; a revocable trust). The list does not state its purpose. The same payee got recurring checks of $21,021.13 in other periods.",
+  "Bay County FY2026 registers show $12,814,239.25 paid to Hand Arendall Harrison Sale LLC (a law firm). It is listed in top_payees_all but left out of top_vendors as a likely trust/closing payment; the purpose is not stated in the register.",
   "Discrepancy: Bay County bid posting 24-22 (artificial reef) lists Walter Marine, Inc. as bid recipient, while the 2024-10-01 BOCC agenda recommends awarding Contract 24-22 to Weeks Marine for $492,750."
  ],
  "gaps": [
-  "No check register or vendor-payment list was found for any city (Panama City, Panama City Beach, Callaway, Springfield, Parker, Mexico Beach). Lynn Haven agenda packets include a filtered \"Check Reconciliation\" (warrant list) of larger checks; see registers if present.",
+  "No check register or vendor-payment list was found for any city (Panama City, Panama City Beach, Callaway, Springfield, Parker, Mexico Beach). Lynn Haven agenda packets include a filtered \"Check Reconciliation\" (warrant list) of checks of about $10,000 or more from October 2022 to July 2025. Those lists are summarized in registers, but they are partial: smaller checks and electronic payments are left out, and some packets had no list or an unreadable one (12 of 144).",
   "Bay County check registers were only found attached to BOCC agendas from January 2024 onward. FY2023 is not covered. FY2024 covers 7 of 12 months (Jan and Apr-Sep 2024; Oct-Dec 2023 and Feb-Mar 2024 are missing). FY2025 is missing February 2025. FY2026 runs through July 2026 (Aug-Sep 2026 had not been presented as of 2026-10-20). Missing months could be requested from the Clerk of Court.",
   "The Bay County registers list the BOCC's disbursements only. Spending by the Sheriff, Clerk, Property Appraiser, Tax Collector and Supervisor of Elections shows up as lump-sum transfers to those offices; their own vendor payments are not included.",
   "Bay County FY2023 agendas (Oct 2022 to Feb 2024) were read from the first 25 pages of each compiled agenda packet; a few items whose text fell outside those pages may be missing.",
   "Springfield: meeting pages on springfieldfl.net do not include agenda documents, and the document library needs a staff login. No Springfield contracts or purchasing thresholds were captured.",
   "Callaway: most agenda packets are scanned images and agenda titles carry no dollar amounts, so only three awards were captured from the few text-searchable packets. No Callaway purchasing threshold was found.",
-  "Mexico Beach and Parker: council minutes are scanned images and were read by OCR. Coverage depends on OCR quality and on which minutes are posted.",
+  "Mexico Beach: all 87 posted council minutes from FY2023-FY2026 were read by OCR; amounts depend on OCR quality. Parker: council minutes posted online run from Oct 2022 to about March 2024, with only a few later ones; they are scanned and seldom name awarded vendors or amounts, and Parker agendas list no dollar amounts. Only one Parker award could be documented.",
   "Panama City Beach: many council agenda titles have no dollar amount. Amounts were pulled from linked item memos and resolutions for the larger items, but some regular-agenda contracts (e.g., Front Beach Road Segment 3 change order 11, the CRA program management agreement with DRMP, the CentralSquare ERP agreement, the 2026 command bus vendor) have no amount here.",
   "Original contract amounts for several change orders (e.g., Bay County juvenile courthouse addition, PCB Front Beach Road Segment 3, Panama City Martin Theatre and SRF Area F1) were not in the FY2023-FY2026 agendas reviewed, so percentage increases could not be computed for them.",
   "Procurement portals (Bay County OpenGov, DemandStar, BidNet, Bonfire) were not used as data sources. Awards were taken from agendas, plus the county's own bids.aspx postings for solicitation type."
