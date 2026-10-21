@@ -1,6 +1,8 @@
-(() => {
-const D = __MI__;
+(async () => {
 const $ = id => document.getElementById(id);
+let D; // page data loads after the page has rendered; the markup shows a loading note until then
+try { const r = await fetch('/data/michael-page.json'); if (!r.ok) throw new Error(r.status); D = await r.json(); }
+catch (e) { $('ledCount').textContent = 'The FEMA projects could not be loaded. Please refresh the page.'; return; }
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const usd = n => '$' + Math.round(n).toLocaleString('en-US');
 const big = n => n == null ? '—' : n >= 1e9 ? '$' + (n / 1e9).toFixed(2) + 'B' : n >= 1e6 ? '$' + (n / 1e6).toFixed(1) + 'M' : n >= 1e3 ? '$' + Math.round(n / 1e3) + 'K' : usd(n);

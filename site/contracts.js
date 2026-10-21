@@ -1,6 +1,9 @@
-(() => {
-const R = __CT__;
+(async () => {
 const $ = id => document.getElementById(id);
+let D; // page data loads after the page has rendered; the markup shows a loading note until then
+try { const r = await fetch('/data/contracts-page.json'); if (!r.ok) throw new Error(r.status); D = await r.json(); }
+catch (e) { $('ctCount').textContent = 'The contracts could not be loaded. Please refresh the page.'; return; }
+const R = D;
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const usd = n => '$' + Math.round(n).toLocaleString('en-US');
 const big = n => (n < 0 ? '\u2212' : '') + (Math.abs(n) >= 1e6 ? '$' + (Math.abs(n) / 1e6).toFixed(1) + 'M' : '$' + Math.round(Math.abs(n) / 1e3) + 'K');
