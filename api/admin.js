@@ -169,15 +169,32 @@ module.exports = async (req, res) => {
     }
     return res.status(200).json({ok: true, message: 'If that address can sign in, a link is on its way.'});
   }
+  // The emailed link opens a confirm page; only pressing its button (a POST) signs in. Email security scanners
+  // (Microsoft Defender Safe Links and others) open links before you do, and would otherwise use up the one-time link.
   if (action === 'verify' && req.method === 'GET') {
+    if (!req.query.t && req.query['amp;t']) req.query.t = req.query['amp;t']; // link copied from an HTML view with &amp;
     const t = readToken(req.query.t);
-    const fail = () => { res.setHeader('Location', '/admin?signin=expired'); return res.status(302).end(); };
+    const ok = t && t.kind === 'login' && admins().includes(t.e);
+    res.setHeader('Content-Type', 'text/html; charset=utf-8');
+    res.setHeader('Referrer-Policy', 'no-referrer');
+    const tokAttr = String(req.query.t || '').replace(/[^A-Za-z0-9._-]/g, '');
+    return res.status(200).send(`<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex">
+<title>Sign in · BayCounty.me admin</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"><link rel="stylesheet" href="/assets/site.css">
+<style>body{display:block}.b{max-width:420px;margin:14vh auto 0;padding:24px;background:var(--surface);border:1px solid var(--line);border-radius:12px}h1{font:600 1.2rem var(--f-display);margin:0 0 8px}p{color:var(--muted);margin:0 0 16px}button,a.btn{display:inline-flex;min-height:40px;align-items:center;padding:0 18px;border-radius:8px;border:0;background:var(--navy);color:#fff;font:500 .95rem var(--f-body);cursor:pointer;text-decoration:none}</style></head>
+<body><div class="b">${ok ? `<h1>Sign in to BayCounty.me admin</h1><p>Signing in as ${t.e.replace(/[<>&"]/g, '')}.</p>
+<form method="post" action="/api/admin?action=verify"><input type="hidden" name="t" value="${tokAttr}"><button type="submit" autofocus>Sign in</button></form>`
+      : `<h1>This link has expired</h1><p>Sign-in links last 15 minutes and work once.</p><a class="btn" href="/admin">Get a new link</a>`}</div></body></html>`);
+  }
+  if (action === 'verify' && req.method === 'POST') {
+    const b = typeof req.body === 'string' ? Object.fromEntries(new URLSearchParams(req.body)) : req.body || {};
+    const t = readToken(b.t);
+    const fail = () => { res.setHeader('Location', '/admin?signin=expired'); return res.status(303).end(); };
     if (!t || t.kind !== 'login' || !admins().includes(t.e)) return fail();
     const used = await q(`select 1 from apiadmin.audit where action = 'login' and detail->>'nonce' = $1`, [t.n]);
     if (used.length) return fail();
     await audit(t.e, 'login', null, {nonce: t.n});
     setCookie(res, makeToken({kind: 'session', e: t.e, exp: Date.now() + SESSION_HOURS * 3600e3}), SESSION_HOURS * 3600);
-    res.setHeader('Location', '/admin'); return res.status(302).end();
+    res.setHeader('Location', '/admin'); return res.status(303).end();
   }
   if (action === 'logout') { setCookie(res, '', 0); return res.status(200).json({ok: true}); }
 
