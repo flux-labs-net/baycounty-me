@@ -74,3 +74,10 @@ Env vars: `RESEND_API_KEY` (send-only key for fluxlabs.net, set in Vercel), opti
 (default hello@fluxlabs.net) and `CONTACT_FROM` (default `BayCounty.me <forms@fluxlabs.net>`).
 Spam guards: hidden honeypot field, 3-second minimum fill time, origin check, 5 messages/hour per IP.
 Link to it with `/about?page=/some/path#contact` to prefill the page.
+
+## Link previews
+
+`site/og.py` renders a 1200x630 Open Graph image per page with Playwright (title, headline number from
+`home.topics()`, Bay County map) into `site/og-cache/`, copied to `public/og/` on build. Images re-render only
+when their content changes; the `?v=` hash on `og:image` busts link-preview caches. Pages also carry Twitter
+card tags, an apple-touch-icon, and WebSite/Organization JSON-LD on the home page.

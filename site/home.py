@@ -40,12 +40,9 @@ def stats():
                 debt=debt, findings=findings, repeats=repeats, bt25=bt25, pcb_share=pcb25 / bt25, sp_n=len(sp), sp_done=done, a3=a3, ct_n=ct_n)
 
 
-def home_page():
-    s = stats()
-    from updates import CHANGES, nice
-    news = ''.join(f'<li><span class="tl-d">{nice(c["date"])}</span><span><a href="{c["pages"][0]}"><b>{html.escape(c["title"])}</b></a> {html.escape(c["text"])}</span></li>' for c in CHANGES[:4])
-    election = date.today() <= date(2026, 11, 3)
-    topics = [
+def topics(s):
+    """(href, eyebrow, heading, blurb, stat, stat label) for every topic card; also used for link-preview images."""
+    return [
         ('/public-money/tax-dollars', 'Tax Dollars', 'How your tax dollars are allocated', 'Your property tax bill, slice by slice, and where each government gets and spends its money.', M(s['lv_tot']), 'property tax levied, FY2026'),
         ('/public-money/cra-spending', 'CRA Spending', "Where the CRA money goes", 'Map and ledger of what the six redevelopment agencies bought, built and granted, and who was paid.', M(s['cra_spent']), f'documented across {s["cra_n"]} records'),
         ('/public-money/hurricane-michael', 'Hurricane Michael', 'Where the recovery money went', 'Every FEMA rebuilding project, aid to households, Rebuild Florida awards and debris costs.', M(s['fema'], 0), f'FEMA rebuilding money, {s["fema_n"]} projects'),
@@ -55,11 +52,18 @@ def home_page():
         ('/public-money/audits', 'Audit Findings', 'What the auditors found', 'Three years of audit findings in plain English, including problems that keep coming back.', f'{s["findings"]}', f'findings, {s["repeats"]} repeats in the latest audits'),
         ('/public-money/fees-and-bills', 'Fees & Bills', 'Fees on your tax bill, and water and garbage', 'Fire, stormwater and other flat fees, plus a typical monthly utility bill in each city.', '$28.1M', 'in flat fees on FY2026 tax bills'),
         ('/who-runs-bay-county', 'Officials', 'Who runs Bay County', 'Every elected seat and appointed manager, and what top officials are paid.', '5', 'independently elected county officers'),
-        ('/public-money/contracts', 'Contracts', 'Who gets the contracts', 'Major contracts since 2022: winners, how they were awarded, change orders and who the county paid most.', 'CONTRACTS_N', 'contracts tracked'),
+        ('/public-money/contracts', 'Contracts', 'Who gets the contracts', 'Major contracts since 2022: winners, how they were awarded, change orders and who the county paid most.', str(s['ct_n']), 'contracts tracked'),
         ('/public-money/amendment-3', 'Amendment 3', 'What changes if it passes', 'The property tax amendment on the November ballot: your bill before and after, and the state\'s estimates.', M(s['a3']), 'less for Bay governments in FY2029 (state est.)'),
     ]
-    topics = [t if t[4] != 'CONTRACTS_N' else t[:4] + (str(s['ct_n']),) + t[5:] for t in topics]
-    cards = ''.join(f'''<a class="topic" href="{u}"><span class="eyebrow">{e}</span><h3>{h}</h3><p>{p}</p><span class="t-stat"><b>{v}</b> {l}</span></a>''' for u, e, h, p, v, l in topics)
+
+
+def home_page():
+    s = stats()
+    from updates import CHANGES, nice
+    news = ''.join(f'<li><span class="tl-d">{nice(c["date"])}</span><span><a href="{c["pages"][0]}"><b>{html.escape(c["title"])}</b></a> {html.escape(c["text"])}</span></li>' for c in CHANGES[:4])
+    election = date.today() <= date(2026, 11, 3)
+    topics_ = topics(s)
+    cards = ''.join(f'''<a class="topic" href="{u}"><span class="eyebrow">{e}</span><h3>{h}</h3><p>{p}</p><span class="t-stat"><b>{v}</b> {l}</span></a>''' for u, e, h, p, v, l in topics_)
     return f'''<div class="page home">
   <section class="hero">
     <span class="eyebrow">Bay County, Florida</span>

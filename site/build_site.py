@@ -21,6 +21,7 @@ from updates import updates_page, rss, last_updated, nice as nice_date
 OUT = os.path.join(ROOT, 'public')
 SITE = 'BayCounty.me'
 DOMAIN = 'https://baycounty.me'
+OG_VER = {}  # path -> image content hash, filled by og.build_og before pages are written
 
 # Menu: top-level items; an item with 'children' becomes a drop-down.
 MENU = [
@@ -222,21 +223,46 @@ CRA_EXPLAINER = f'''
 
 def layout(title, desc, path, body, extra_head=''):
     full = f'{title} · {SITE}' if path != '/' else f'{SITE} · {title}'
+    import html as _h
+    from og import slug as _slug
+    t, d = _h.escape(title, quote=True), _h.escape(desc, quote=True)
+    ver = OG_VER.get(path, '')
+    img = f'{DOMAIN}/og/{_slug(path) if path in OG_VER else "home"}.png' + (f'?v={ver}' if ver else '')
+    ld = ''
+    if path == '/':
+        ld = '<script type="application/ld+json">' + json.dumps({'@context': 'https://schema.org', '@graph': [
+            {'@type': 'WebSite', '@id': DOMAIN + '/#site', 'name': 'BayCounty.me', 'url': DOMAIN + '/', 'description': desc, 'inLanguage': 'en-US',
+             'publisher': {'@id': DOMAIN + '/#org'},
+             'potentialAction': {'@type': 'SearchAction', 'target': DOMAIN + '/search?q={search_term_string}', 'query-input': 'required name=search_term_string'}},
+            {'@type': 'Organization', '@id': DOMAIN + '/#org', 'name': 'Flux Labs', 'url': 'https://fluxlabs.net/'}]}) + '</script>'
     return f'''<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{full}</title>
-<meta name="description" content="{desc}">
+<meta name="description" content="{d}">
 <link rel="canonical" href="{DOMAIN}{path}">
-<meta property="og:title" content="{title}">
-<meta property="og:description" content="{desc}">
-<meta property="og:url" content="{DOMAIN}{path}">
+<meta property="og:site_name" content="BayCounty.me">
+<meta property="og:locale" content="en_US">
 <meta property="og:type" content="website">
-<meta name="theme-color" content="#1E3A76">
+<meta property="og:title" content="{t}">
+<meta property="og:description" content="{d}">
+<meta property="og:url" content="{DOMAIN}{path}">
+<meta property="og:image" content="{img}">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="{t}: BayCounty.me, public records for Bay County, Florida">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{t}">
+<meta name="twitter:description" content="{d}">
+<meta name="twitter:image" content="{img}">
+<meta name="twitter:image:alt" content="{t}: BayCounty.me, public records for Bay County, Florida">
+{ld}<meta name="theme-color" content="#1E3A76">
 <script>try{{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}}catch(e){{}}</script>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -514,6 +540,8 @@ def main():
     shutil.copy(os.path.join(ROOT, 'favicon.svg'), os.path.join(OUT, 'favicon.svg'))
     shutil.copy(os.path.join(ROOT, 'tax.css'), os.path.join(OUT, 'assets', 'tax.css'))
     shutil.copy(os.path.join(ROOT, 'report.js'), os.path.join(OUT, 'assets', 'report.js'))
+    from og import build_og
+    OG_VER.update(build_og(OUT, PAGES, MENU))
     for path, title, desc, fn in PAGES:
         write(path, layout(title, desc, path, fn()))
     print('search index:', build_index(OUT, PAGES), 'entries')

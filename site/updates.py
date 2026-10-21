@@ -9,6 +9,9 @@ from datetime import datetime, timezone
 import html
 
 CHANGES = [
+    {'date': '2026-10-21', 'title': 'Link previews',
+     'text': 'Every page now shows a title, summary and image with its headline number when a link is shared in a text, email or social post.',
+     'pages': ['/']},
     {'date': '2026-10-21', 'title': 'Send a correction from the site',
      'text': 'A contact form on the About page sends corrections, records and questions straight to the BayCounty.me team. Email is optional and only used to reply.',
      'pages': ['/about']},
