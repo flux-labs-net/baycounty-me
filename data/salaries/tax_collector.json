@@ -1,0 +1,107 @@
+{
+ "employer": "Bay County Tax Collector",
+ "employer_id": "tax_collector",
+ "gov": "county",
+ "as_of": "2026-10-21",
+ "fiscal_year": "FY2027",
+ "sources": [
+  {
+   "title": "Bay County Tax Collector Budget Request FY2026-27 (DR-584), dated 9/15/2026",
+   "url": "https://baycountyfltax.gov/uploads/2026/10/BAY-2026-27-9.15.26.pdf",
+   "type": "budget",
+   "effective": "2026-10-01"
+  },
+  {
+   "title": "Bay County Tax Collector Budget Request FY2025-26 (DR-584), dated 9/30/2025",
+   "url": "https://baycountyfltax.gov/uploads/2026/06/TBAY-2025-26-9.30.25.pdf",
+   "type": "budget",
+   "effective": "2025-10-01"
+  },
+  {
+   "title": "Salaries of Elected County Constitutional Officers and School District Officials for FY2026-27 (Florida Legislature, Office of Economic and Demographic Research; Ch. 145, F.S. formula)",
+   "url": "https://www.edr.state.fl.us/Content/local-government/reports/finsal26.pdf",
+   "type": "statute",
+   "effective": "2026-10-01"
+  },
+  {
+   "title": "Salaries of Elected County Constitutional Officers and School District Officials for FY2025-26 (Florida EDR; Ch. 145, F.S. formula)",
+   "url": "https://www.edr.state.fl.us/Content/local-government/reports/FY%202025-26%20Salaries.pdf",
+   "type": "statute",
+   "effective": "2025-10-01"
+  },
+  {
+   "title": "Bay County Tax Collector - About (Chuck Perdue, Tax Collector)",
+   "url": "https://baycountyfltax.gov/about/",
+   "type": "payroll",
+   "effective": "2026-10-21"
+  }
+ ],
+ "positions": [
+  {
+   "title": "All employees other than the Tax Collector (81 positions)",
+   "department": "Tax Collector",
+   "category": "finance",
+   "grade": null,
+   "pay_min": null,
+   "pay_mid": null,
+   "pay_max": null,
+   "pay_basis": "annual",
+   "hourly_min": null,
+   "hourly_max": null,
+   "actual_salaries": null,
+   "budgeted_fte": 81,
+   "union": null,
+   "source": 0,
+   "notes": "DR-584 Schedule I: 81 current positions; annual rates total $4,256,607 at 9/30/26, budgeted $4,341,739 at 9/30/27 after $85,132 guideline increases (average ~$53,602/position, derived). Position-level detail is not itemized in the posted form.",
+   "avg_salary": 53601.72,
+   "total_annual_rates": 4341739
+  }
+ ],
+ "leaders": [
+  {
+   "name": "Chuck Perdue",
+   "title": "Tax Collector",
+   "department": "Tax Collector",
+   "salary": 199754,
+   "basis": "annual",
+   "source": 2,
+   "as_of": "2026-10-01",
+   "salary_fy2025_26": 198466,
+   "salary_source_fy2025_26": 3,
+   "notes": "Base salary under Ch. 145, F.S.; officers who complete the statutory certification program may receive up to $2,000/yr special qualification salary on top (not included). The office's own FY2026-27 budget (dated 9/15/26, before EDR's FY27 figures) carries the official at $200,466 (= FY26 $198,466 + $2,000 special qualification); FY25-26 budget also shows $200,466 approved. Name from source 4."
+  }
+ ],
+ "steps": [],
+ "department_totals": [
+  {
+   "department": "Tax Collector - all (FY2027 approved)",
+   "fte": 82,
+   "salaries": 4542205,
+   "overtime": 6630,
+   "benefits": 1987849,
+   "special_pay": 133197,
+   "retirement_frs": 755454,
+   "health_life": 876973,
+   "personnel_total": 6669881,
+   "source": 0,
+   "notes": "salaries = official (object 11) + regular employees (12); benefits = FICA + FRS (official, regular, SMS/SES, DROP) + life/health + unemployment; special pay (object 15) shown separately."
+  },
+  {
+   "department": "Tax Collector - all (FY2026 approved)",
+   "fte": 82,
+   "salaries": 4041345,
+   "overtime": 3000,
+   "benefits": 1974900,
+   "special_pay": 127313,
+   "retirement_frs": 700101,
+   "health_life": 955806,
+   "personnel_total": 6146558,
+   "source": 1,
+   "notes": "salaries = official (object 11) + regular employees (12); benefits = FICA + FRS (official, regular, SMS/SES, DROP) + life/health + unemployment; special pay (object 15) shown separately."
+  }
+ ],
+ "gaps": [
+  "Position-by-position salary detail (titles and rates) is summarized as one line in the DR-584 Schedule I. Request: 'Tax Collector position roster with job titles and annual rates as of 10/1/2026, and pay plan'.",
+  "The Tax Collector careers page (baycountyfltax.gov/careers/) could not be retrieved in this session (permission prompt timed out)."
+ ]
+}

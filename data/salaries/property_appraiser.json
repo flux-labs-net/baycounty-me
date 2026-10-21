@@ -1,0 +1,71 @@
+{
+ "employer": "Bay County Property Appraiser",
+ "employer_id": "property_appraiser",
+ "gov": "county",
+ "as_of": "2026-10-21",
+ "fiscal_year": "FY2027",
+ "sources": [
+  {
+   "title": "Salaries of Elected County Constitutional Officers and School District Officials for FY2026-27 (Florida Legislature, Office of Economic and Demographic Research; Ch. 145, F.S. formula)",
+   "url": "https://www.edr.state.fl.us/Content/local-government/reports/finsal26.pdf",
+   "type": "statute",
+   "effective": "2026-10-01"
+  },
+  {
+   "title": "Salaries of Elected County Constitutional Officers and School District Officials for FY2025-26 (Florida EDR; Ch. 145, F.S. formula)",
+   "url": "https://www.edr.state.fl.us/Content/local-government/reports/FY%202025-26%20Salaries.pdf",
+   "type": "statute",
+   "effective": "2025-10-01"
+  },
+  {
+   "title": "Bay County Property Appraiser website (baypa.net)",
+   "url": "https://baypa.net/",
+   "type": "payroll",
+   "effective": "2026-10-21"
+  },
+  {
+   "title": "Bay County Property Appraiser 2025-2026 Budget (linked from baycountyfl.gov/822/Constitutional-Budgets) - NOT RETRIEVABLE (Cloudflare 403)",
+   "url": "https://tsc-gis-wp1.schneidercorp.com/baycounty/wp-content/uploads/sites/61/2021/10/BUDGET.pdf",
+   "type": "budget",
+   "effective": "2025-10-01"
+  },
+  {
+   "title": "FY 2027 Final Budget Detailed Revenues and Expenditures (BOCC) - Property Appraiser (0105)",
+   "url": "https://www.baycountyfl.gov/DocumentCenter/View/21091/FY-2027-Final-Budget-Detailed-Revenues-and-Expenditures",
+   "type": "budget",
+   "effective": "2026-10-01"
+  }
+ ],
+ "positions": [],
+ "leaders": [
+  {
+   "name": "Dan Sowell",
+   "title": "Property Appraiser",
+   "department": "Property Appraiser",
+   "salary": 171359,
+   "basis": "annual",
+   "source": 0,
+   "as_of": "2026-10-01",
+   "salary_fy2025_26": 170173,
+   "salary_source_fy2025_26": 1,
+   "notes": "Base salary under Ch. 145, F.S.; officers who complete the statutory certification program may receive up to $2,000/yr special qualification salary on top (not included). Name from source 2."
+  }
+ ],
+ "steps": [],
+ "department_totals": [
+  {
+   "department": "Property Appraiser - BOCC share of budget",
+   "fte": null,
+   "salaries": null,
+   "overtime": null,
+   "benefits": null,
+   "transfer_total": 5077362,
+   "source": 4,
+   "notes": "FY2027 BOCC 'Fees & Cost-Prop Appraiser' payment (plus $44,184 workers' comp carried by the BOCC). Personnel detail is in the PA's DR-484 budget (not retrieved)."
+  }
+ ],
+ "gaps": [
+  "The PA's posted 2025-2026 budget (DR-484, which includes a Schedule of salaries and position count) is behind a Cloudflare challenge and could not be retrieved; no FY2026-27 PA budget link found. Request: 'Property Appraiser FY2026-27 budget as approved by the Florida Department of Revenue (Form DR-484) including Schedule I salary detail and number of positions'.",
+  "No PA pay plan or job postings with pay found online. Request: 'Property Appraiser pay plan / position roster with title and annual rate'."
+ ]
+}

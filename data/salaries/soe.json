@@ -1,0 +1,106 @@
+{
+ "employer": "Bay County Supervisor of Elections",
+ "employer_id": "soe",
+ "gov": "county",
+ "as_of": "2026-10-21",
+ "fiscal_year": "FY2026",
+ "sources": [
+  {
+   "title": "Bay County Supervisor of Elections Approved Budget FY25-26 (Fund 180 Dept 116)",
+   "url": "https://bay-soe.s3.amazonaws.com/uploads/2025/10/30162120/SOE-Approved-Budget-FY25-26.pdf",
+   "type": "budget",
+   "effective": "2025-10-01"
+  },
+  {
+   "title": "Salaries of Elected County Constitutional Officers and School District Officials for FY2026-27 (Florida Legislature, Office of Economic and Demographic Research; Ch. 145, F.S. formula)",
+   "url": "https://www.edr.state.fl.us/Content/local-government/reports/finsal26.pdf",
+   "type": "statute",
+   "effective": "2026-10-01"
+  },
+  {
+   "title": "Salaries of Elected County Constitutional Officers and School District Officials for FY2025-26 (Florida EDR; Ch. 145, F.S. formula)",
+   "url": "https://www.edr.state.fl.us/Content/local-government/reports/FY%202025-26%20Salaries.pdf",
+   "type": "statute",
+   "effective": "2025-10-01"
+  },
+  {
+   "title": "Bay County SOE - Meet the Supervisor / Meet the Staff",
+   "url": "https://www.bayvotesfl.gov/about/meet-the-staff/",
+   "type": "payroll",
+   "effective": "2026-10-21"
+  },
+  {
+   "title": "FY 2027 Final Budget Detailed Revenues and Expenditures (BOCC) - Supervisor of Elections (0115)",
+   "url": "https://www.baycountyfl.gov/DocumentCenter/View/21091/FY-2027-Final-Budget-Detailed-Revenues-and-Expenditures",
+   "type": "budget",
+   "effective": "2026-10-01"
+  }
+ ],
+ "positions": [],
+ "leaders": [
+  {
+   "name": "Nina Ward",
+   "title": "Supervisor of Elections",
+   "department": "Supervisor of Elections",
+   "salary": 171359,
+   "basis": "annual",
+   "source": 1,
+   "as_of": "2026-10-01",
+   "salary_fy2025_26": 170173,
+   "salary_source_fy2025_26": 2,
+   "notes": "Base salary under Ch. 145, F.S.; officers who complete the statutory certification program may receive up to $2,000/yr special qualification salary on top (not included). FY25-26 office budget line 5101100 'Supervisor of Election Salary' = $171,000 (prior year $160,000). Appointed May 2024, elected 2024 (source 3)."
+  },
+  {
+   "name": "Thien Cao",
+   "title": "Deputy Supervisor of Elections",
+   "department": "Supervisor of Elections",
+   "salary": null,
+   "basis": "annual",
+   "source": 3,
+   "as_of": "2026-10-21",
+   "notes": "Salary not published."
+  },
+  {
+   "name": "Chelsea Hitt",
+   "title": "Chief Administrative Deputy",
+   "department": "Supervisor of Elections",
+   "salary": null,
+   "basis": "annual",
+   "source": 3,
+   "as_of": "2026-10-21",
+   "notes": "Salary not published."
+  }
+ ],
+ "steps": [],
+ "department_totals": [
+  {
+   "department": "Supervisor of Elections (FY2025-26 approved)",
+   "fte": null,
+   "salaries": 810960,
+   "overtime": 10050,
+   "benefits": 500296.45,
+   "election_temp_wages": 224280.5,
+   "fica": 74738.28,
+   "retirement_frs": 224934.73,
+   "health_life": 190123.44,
+   "workers_comp": 5500,
+   "personnel_total": 1545586.94,
+   "source": 0,
+   "notes": "salaries = Supervisor salary $171,000 + regular wages $639,960; election_temp_wages = poll workers $92,008.50 + election temps $45,050 + early voting $87,222; benefits = FICA + retirement + insurance + workers comp + re-employment tax. Total compensation $1,545,586.94."
+  },
+  {
+   "department": "Supervisor of Elections - FY2027 BOCC funding",
+   "fte": null,
+   "salaries": null,
+   "overtime": null,
+   "benefits": null,
+   "transfer_total": 2729857,
+   "source": 4,
+   "notes": "FY2027 BOCC 'Fees & Cost-Sup Of Elect' transfer (plus $1,064,538 equipment and $213,012 facility costs carried by the BOCC). The SOE's own FY2026-27 budget detail was not posted as of 2026-10-21."
+  }
+ ],
+ "gaps": [
+  "SOE FY2026-27 approved budget not posted (site still shows 'Current Budget 2025-2026'). Request: 'SOE FY2026-27 approved budget with personnel detail'.",
+  "No SOE pay plan or staff salaries online. Request: 'SOE position roster with job title and annual salary as of 10/1/2026'. Number of regular positions is not stated in the posted budget."
+ ]
+}

@@ -1,0 +1,61 @@
+{
+ "employer": "Panama City Port Authority (Port Panama City)",
+ "employer_id": "port",
+ "gov": "city_agency",
+ "as_of": "2026-10-21",
+ "fiscal_year": "FY2026",
+ "sources": [
+  {
+   "title": "Port Panama City U.S.A. Operating Budget FY2025-2026",
+   "url": "https://portpcfl.com/wp-content/uploads/2025/09/BUDGET-FY25-26.pdf",
+   "type": "budget",
+   "effective": "2025-10-01"
+  },
+  {
+   "title": "Port Panama City - Port Management (leadership)",
+   "url": "https://portpcfl.com/about-us/port-management/",
+   "type": "payroll",
+   "effective": "2026-10-21"
+  },
+  {
+   "title": "Press release: Panama City Port Authority Names Bob Majka as Executive Director (Feb 19, 2026)",
+   "url": "https://portpcfl.com/wp-content/uploads/2026/03/Press-release-announcing-Bob-Majka.pdf",
+   "type": "payroll",
+   "effective": "2026-02-19"
+  }
+ ],
+ "positions": [],
+ "leaders": [
+  {
+   "name": "Robert (Bob) Majka",
+   "title": "Executive Director",
+   "department": "Port Panama City",
+   "salary": null,
+   "basis": "annual",
+   "source": 2,
+   "as_of": "2026-02-19",
+   "notes": "Selected Feb 2026 (former Bay County Manager). Contract salary not found online."
+  }
+ ],
+ "steps": [],
+ "department_totals": [
+  {
+   "department": "Port Panama City - all personnel (FY2025-26 proposed budget)",
+   "fte": null,
+   "salaries": 5699900,
+   "overtime": null,
+   "benefits": 1880000,
+   "retirement_frs": 241000,
+   "health_life": 950000,
+   "workers_comp": 205000,
+   "other_personnel": 104000,
+   "personnel_total": 7683900,
+   "source": 0,
+   "notes": "salaries = administrative $1,057,800 + operations & maintenance $4,415,500 + O&M auto $51,600 + casual labor $175,000; benefits = retirement/pension + social security + workers comp (premium + claims) + hospitalization + disability; misc personnel $104,000 separate. FY2024-25 projected actual personnel $7,576,600."
+  }
+ ],
+ "gaps": [
+  "The Port Authority is an agency of the City of Panama City (board appointed by the City Commission), not a county body; included here because it was in scope as a county-level public employer.",
+  "No position list, pay plan, or individual salaries posted; FY2026-27 budget not posted as of 2026-10-21. Request: 'Port Authority FY2026-27 budget, staff position roster with annual salaries, and the Executive Director employment agreement (2026)'."
+ ]
+}
