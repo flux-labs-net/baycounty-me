@@ -3,9 +3,10 @@
 Pages share one layout: head, top menu (with sub-menus), and a 'Powered by Flux Labs' footer.
 Add a new page by adding an entry to MENU (for the menu) and to PAGES (for the file).
 """
-import json, os, re, shutil, base64
+import json, os, re, shutil, base64, sys
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, ROOT)
 OUT = os.path.join(ROOT, 'public')
 SITE = 'BayCounty.me'
 DOMAIN = 'https://baycounty.me'
@@ -17,6 +18,7 @@ MENU = [
         {'label': 'CRA Spending', 'href': '/public-money/cra-spending',
          'desc': 'Where the six redevelopment agencies spend tax increment'},
     ]},
+    {'label': 'Glossary', 'href': '/glossary'},
     {'label': 'About', 'href': '/about'},
 ]
 
@@ -54,8 +56,7 @@ FOOTER = '''<footer class="site-foot"><div class="site-foot-in">
   <a class="powered" href="https://fluxlabs.net/" target="_blank" rel="noopener"><span>Powered by</span><img src="/assets/flux-labs.webp" alt="Flux Labs" width="140" height="25"></a>
 </div></footer>'''
 
-MENU_JS = '''<script>
-(() => {
+MENU_JS = '''(() => {
   const root = document.documentElement, tb = document.getElementById('themeBtn');
   const NAMES = {system: 'System', light: 'Light', dark: 'Dark'}, NEXT = {system: 'light', light: 'dark', dark: 'system'};
   const current = () => root.getAttribute('data-theme') || 'system';
@@ -76,7 +77,116 @@ MENU_JS = '''<script>
   document.addEventListener('click', e => { if (!e.target.closest('.has-sub')) document.querySelectorAll('.sub-toggle').forEach(x => x.setAttribute('aria-expanded', 'false')); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') document.querySelectorAll('.sub-toggle').forEach(x => x.setAttribute('aria-expanded', 'false')); });
 })();
-</script>'''
+'''
+
+
+TERM_JS = r"""
+(() => {
+  const G = __GLOSSARY__;
+  let pop = null, cur = null, hideT = null, shownAt = 0;
+  const ensure = () => {
+    if (pop) return pop;
+    pop = document.createElement('div'); pop.className = 'term-pop'; pop.id = 'term-pop';
+    pop.setAttribute('role', 'tooltip'); pop.hidden = true; document.body.appendChild(pop);
+    pop.addEventListener('pointerenter', () => clearTimeout(hideT));
+    pop.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') later(); });
+    return pop;
+  };
+  function show(el) {
+    const g = G[el.dataset.term]; if (!g) return;
+    ensure(); clearTimeout(hideT);
+    if (cur && cur !== el) cur.removeAttribute('aria-describedby');
+    if (cur !== el || pop.hidden) shownAt = Date.now();
+    cur = el;
+    pop.innerHTML = '<b></b><p></p><a></a>';
+    pop.querySelector('b').textContent = g.term;
+    pop.querySelector('p').textContent = g.simple;
+    const a = pop.querySelector('a'); a.href = '/glossary#' + el.dataset.term; a.textContent = 'More in the glossary \u2192';
+    pop.hidden = false; el.setAttribute('aria-describedby', 'term-pop');
+    const r = el.getBoundingClientRect(), w = Math.min(300, innerWidth - 24);
+    pop.style.width = w + 'px';
+    const x = Math.max(12, Math.min(r.left + r.width / 2 - w / 2, innerWidth - w - 12));
+    const h = pop.offsetHeight;
+    let y = r.bottom + 8; if (y + h > innerHeight - 8) y = r.top - h - 8;
+    pop.style.left = (x + scrollX) + 'px'; pop.style.top = (Math.max(8, y) + scrollY) + 'px';
+  }
+  function hide() { if (pop) pop.hidden = true; if (cur) cur.removeAttribute('aria-describedby'); cur = null; }
+  function later() { clearTimeout(hideT); hideT = setTimeout(hide, 160); }
+  const termOf = e => e.target.closest && e.target.closest('.term');
+  document.addEventListener('pointerover', e => { if (e.pointerType !== 'mouse') return; const t = termOf(e); if (t) show(t); });
+  document.addEventListener('pointerout', e => { if (e.pointerType === 'mouse' && termOf(e)) later(); });
+  document.addEventListener('focusin', e => { const t = termOf(e); if (t) show(t); });
+  document.addEventListener('focusout', e => { if (termOf(e)) later(); });
+  document.addEventListener('click', e => {
+    const t = termOf(e);
+    if (t) { e.preventDefault(); e.stopPropagation(); if (cur === t && pop && !pop.hidden && Date.now() - shownAt > 500) hide(); else show(t); }
+    else if (!(e.target.closest && e.target.closest('.term-pop'))) hide();
+  }, true);
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') hide();
+    const t = termOf(e); if (t && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); show(t); }
+  });
+  addEventListener('scroll', () => { if (cur) show(cur); }, {passive: true});
+  const prep = () => document.querySelectorAll('.term:not([tabindex])').forEach(t => { t.tabIndex = 0; t.setAttribute('role', 'button'); });
+  prep(); new MutationObserver(prep).observe(document.body, {childList: true, subtree: true});
+})();
+"""
+
+
+def term(tid, text):
+    return f'<span class="term" data-term="{tid}">{text}</span>'
+
+
+def glossary_page():
+    from glossary import GROUPS, TERMS
+    jump = ''.join(f'<a href="#g-{g}">{label}</a>' for g, label in GROUPS)
+    out = [f'''<div class="page prose glossary">
+  <span class="eyebrow">Glossary</span>
+  <h1>Plain-English guide</h1>
+  <p class="lede">Government money comes with a lot of jargon. Here is every term on this site, explained simply first, with more detail after. Anywhere on the site, a word with a dotted underline can be tapped for its short explanation.</p>
+  <nav class="g-jump" aria-label="Glossary sections">{jump}</nav>''']
+    for g, label in GROUPS:
+        out.append(f'<section class="g-group" id="g-{g}"><h2>{label}</h2>')
+        for t in [t for t in TERMS if t['group'] == g]:
+            out.append(f'<article class="g-term" id="{t["id"]}"><h3>{t["term"]}</h3><p class="g-simple">{t["simple"]}</p>'
+                       + (f'<p class="g-more">{t["more"]}</p>' if t['more'] else '')
+                       + (f'<p class="g-ex"><b>Example:</b> {t["example"]}</p>' if t['example'] else '')
+                       + '</article>')
+        out.append('</section>')
+    out.append('</div>')
+    return '\n'.join(out)
+
+
+CRA_EXPLAINER = f'''
+  <section class="explain" aria-labelledby="whatcra">
+    <div class="ex-txt">
+      <span class="eyebrow">The simple version</span>
+      <h2 id="whatcra">What's a CRA?</h2>
+      <p>A {term('cra', 'Community Redevelopment Agency')} is like a savings jar for one neighborhood that needs fixing up.</p>
+      <ol class="ex-steps">
+        <li><b>Take a snapshot.</b> When the CRA starts, the city writes down what all the property inside its {term('cra-district', 'district')} is worth. That's the {term('base-year', 'base year')}.</li>
+        <li><b>Watch it grow.</b> As buildings get fixed up and new ones go up, the area becomes worth more.</li>
+        <li><b>The growth fills the jar.</b> Property tax on that extra value, the {term('tif', 'tax increment')}, goes into the CRA's {term('trust-fund', 'trust fund')} instead of the city's and county's main budgets. It can only be spent on that neighborhood, until the CRA's {term('sunset', 'end date')}.</li>
+      </ol>
+      <p class="muted">Why it matters: every dollar in the jar is a dollar the city and county don't have for everything else. This page shows what each jar paid for.</p>
+    </div>
+    <svg class="ex-fig" viewBox="0 0 320 230" role="img" aria-label="Three bars for year 1, year 5 and year 10. The base value stays the same; the growth above it, which goes to the CRA, gets taller each time.">
+      <line x1="20" x2="300" y1="170" y2="170" stroke="var(--line)" stroke-width="1"/>
+      <line x1="20" x2="300" y1="110" y2="110" stroke="var(--faint)" stroke-width="1" stroke-dasharray="4 4"/>
+      <rect x="40" y="110" width="60" height="60" rx="3" fill="var(--faint)" fill-opacity=".45"/>
+      <rect x="130" y="110" width="60" height="60" rx="3" fill="var(--faint)" fill-opacity=".45"/>
+      <rect x="130" y="80" width="60" height="30" rx="3" fill="var(--blue)"/>
+      <rect x="220" y="110" width="60" height="60" rx="3" fill="var(--faint)" fill-opacity=".45"/>
+      <rect x="220" y="35" width="60" height="75" rx="3" fill="var(--blue)"/>
+      <text x="70" y="188" text-anchor="middle" font-size="11" fill="var(--muted)">Year 1</text>
+      <text x="160" y="188" text-anchor="middle" font-size="11" fill="var(--muted)">Year 5</text>
+      <text x="250" y="188" text-anchor="middle" font-size="11" fill="var(--muted)">Year 10</text>
+      <rect x="20" y="204" width="10" height="10" rx="2" fill="var(--faint)" fill-opacity=".45"/>
+      <text x="36" y="213" font-size="10.5" fill="var(--muted)">Base value: taxes go to city and county</text>
+      <rect x="20" y="219" width="10" height="10" rx="2" fill="var(--blue)"/>
+      <text x="36" y="228" font-size="10.5" fill="var(--muted)">Growth: taxes go to the CRA</text>
+    </svg>
+  </section>'''
 
 
 def layout(title, desc, path, body, extra_head=''):
@@ -109,7 +219,7 @@ def layout(title, desc, path, body, extra_head=''):
 {body}
 </main>
 {FOOTER}
-{MENU_JS}
+<script src="/assets/site.js" defer></script>
 </body>
 </html>
 '''
@@ -180,12 +290,22 @@ def cra_page():
                   '<div class="stamp"><button type="button" id="pdf" class="pdf-btn"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 12v2h10v-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Export PDF</button><span>Research compiled Oct 20, 2026<br>Six CRAs · 14 districts</span></div>')
     t = t.replace('</header>\n\n  <div class="kpis" id="kpis"></div>', '</header>\n  <p class="print-meta" id="printMeta"></p>\n\n  <div class="kpis" id="kpis"></div>', 1)
     t = t.replace('</style>', PRINT_CSS + '</style>', 1)
+    t = t.replace('<p class="print-meta" id="printMeta"></p>', '<p class="print-meta" id="printMeta"></p>' + CRA_EXPLAINER, 1)
+    t = t.replace('<p class="lede">Every Community Redevelopment Agency in Bay County', '<p class="lede">Every ' + term('cra', 'Community Redevelopment Agency') + ' in Bay County', 1)
+    t = t.replace('>Tax increment revenue by fiscal year, each on its own scale.', '>' + term('tif', 'Tax increment') + ' revenue by ' + term('fiscal-year', 'fiscal year') + ', each on its own scale.', 1)
+    t = t.replace('<b>Spent</b> means the record reports money paid. <b>Committed</b> means an awarded contract or multi-year award not yet fully paid. <b>Budgeted</b> and <b>Proposed</b> are plans, not payments.',
+                  '<b>' + term('spent', 'Spent') + '</b> means the record reports money paid. <b>' + term('committed', 'Committed') + '</b> means an awarded contract or multi-year award not yet fully paid. <b>' + term('budgeted', 'Budgeted') + '</b> and <b>' + term('proposed', 'Proposed') + '</b> are plans, not payments.', 1)
+    t = t.replace('(a change order inside', '(a ' + term('change-order', 'change order') + ' inside', 1)
+    t = t.replace('it stays in the ledger struck through and is left out of every total', 'it stays in the ledger struck through and is ' + term('left-out', 'left out of every total'), 1)
+    t = t.replace('Vendor-level check registers are not published', 'Vendor-level ' + term('check-register', 'check registers') + ' are not published', 1)
+    t = t.replace('a public records request to each city', 'a ' + term('public-records', 'public records request') + ' to each city', 1)
     t = t.replace('<div class="hd"><h2>Ledger</h2><span class="muted" id="ledgerCount" style="font-size:.82rem"></span></div>',
                   '<div class="hd"><h2>Ledger</h2><span class="muted" style="font-size:.82rem"><span id="ledgerCount"></span> · <button type="button" id="csv" class="reset" style="padding:0">Download CSV</button></span></div>')
     # split script out; it loads its data from /data/*.json
     js = re.search(r'<script>(.*)</script>', t, re.S).group(1)
     t = t[:t.index('<script>')] + '<script src="/assets/cra.js" defer></script>\n'
     js = js.replace('const D = __DATA__;', '')
+    js = js.replace("['FY2025 tax increment', fmt(tif,true)", "['FY2025 <span class=\\\"term\\\" data-term=\\\"tif\\\">tax increment</span>', fmt(tif,true)", 1)
     csv_js = r"""
 document.getElementById('csv').onclick = () => {
   const cols = ['CRA','District','Amount','Paid to','For what','Type','When','Status','Counted in totals','Why not counted','Location','Source type','Source','Notes'];
@@ -284,6 +404,15 @@ def home_page():
       <div><h3>Gaps stated plainly</h3><p>Where a city does not publish something, such as a check register, the page says so and names the record to request.</p></div>
     </div>
   </section>
+
+  <section class="section">
+    <a class="guide-cta" href="/glossary">
+      <span class="eyebrow">New to this?</span>
+      <h3>Government money, explained simply</h3>
+      <p>What's a CRA? What's a mill? What does "rolled-back rate" mean? The plain-English guide explains every term on this site. Words with a dotted underline can also be tapped anywhere for a quick answer.</p>
+      <span class="go">Read the guide →</span>
+    </a>
+  </section>
 </div>'''
 
 
@@ -312,6 +441,7 @@ PAGES = [
     ('/', 'Bay County public records, mapped', 'Maps, money and public records for Bay County, Florida, with a source on every figure.', home_page),
     ('/public-money/cra-spending', 'CRA Spending',
      'Interactive map and ledger of Bay County, Florida\'s six Community Redevelopment Agencies: who was paid, where, and for what.', cra_page),
+    ('/glossary', 'Plain-English guide', 'Every term on BayCounty.me explained simply: CRAs, tax increment, millage, homestead exemptions, budgets and more.', glossary_page),
     ('/about', 'About', 'What BayCounty.me is, where its information comes from, and how to send a correction.', about_page),
 ]
 
@@ -322,6 +452,9 @@ def main():
     os.makedirs(os.path.join(OUT, 'assets'))
     os.makedirs(os.path.join(OUT, 'data'))
     open(os.path.join(OUT, 'assets', 'site.css'), 'w').write(TOKENS + '\n' + SITE_CSS)
+    from glossary import TERMS
+    gl = {t['id']: {'term': t['term'], 'simple': t['simple']} for t in TERMS}
+    open(os.path.join(OUT, 'assets', 'site.js'), 'w').write(MENU_JS + TERM_JS.replace('__GLOSSARY__', json.dumps(gl, ensure_ascii=False)))
     shutil.copy(os.path.join(ROOT, '..', 'assets', 'logo_small.webp'), os.path.join(OUT, 'assets', 'flux-labs.webp'))
     shutil.copy(os.path.join(ROOT, 'favicon.svg'), os.path.join(OUT, 'favicon.svg'))
     for path, title, desc, fn in PAGES:

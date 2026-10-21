@@ -111,12 +111,47 @@ nav{margin-left:auto}
 .prose p,.prose li{max-width:66ch}
 .prose p{margin:0}
 .prose ul{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+/* plain-English terms: dotted underline, tap or hover for a short explanation */
+.term{text-decoration:underline dotted;text-decoration-color:var(--blue);text-underline-offset:3px;text-decoration-thickness:1.5px;cursor:help;border-radius:3px}
+.term:hover,.term:focus-visible{background:color-mix(in srgb,var(--blue) 12%,transparent);outline:none}
+.term-pop{position:absolute;z-index:1000;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:12px 14px;box-shadow:0 8px 28px rgba(0,0,0,.16);font:400 .9rem/1.45 var(--f-body);text-align:left}
+.term-pop b{display:block;font-weight:600;margin-bottom:4px}
+.term-pop p{margin:0 0 8px;color:var(--ink)}
+.term-pop a{color:var(--blue);font-size:.84rem;font-weight:500}
+/* "What's a CRA?" explainer */
+.explain{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:28px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px 24px;margin:6px 0 4px}
+.ex-txt{display:flex;flex-direction:column;gap:10px;min-width:0}
+.ex-txt h2{font-size:1.35rem;margin:0}
+.ex-txt p{margin:0;max-width:62ch}
+.ex-steps{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:8px;max-width:62ch}
+.ex-fig{width:100%;max-width:340px;height:auto;justify-self:center}
+.ex-fig text{font-family:var(--f-body)}
+@media (max-width:760px){.explain{grid-template-columns:1fr;padding:18px 16px}}
+/* home: glossary call-out */
+.guide-cta{display:flex;flex-direction:column;gap:8px;padding:20px 22px;border:1px solid var(--line);border-radius:14px;background:var(--surface);color:var(--ink);text-decoration:none}
+.guide-cta:hover{border-color:var(--blue)}
+.guide-cta h3{font-size:1.2rem;margin:0}
+.guide-cta p{margin:0;color:var(--muted);max-width:70ch}
+.guide-cta .go{color:var(--blue);font-weight:500}
+/* glossary page */
+.g-jump{display:flex;flex-wrap:wrap;gap:8px}
+.g-jump a{padding:6px 12px;border:1px solid var(--line);border-radius:999px;font-size:.86rem;color:var(--ink);text-decoration:none;background:var(--surface)}
+.g-jump a:hover{border-color:var(--blue);color:var(--blue)}
+.g-group{display:flex;flex-direction:column;gap:12px;margin-top:10px;scroll-margin-top:84px}
+.g-group h2{border-bottom:1px solid var(--line);padding-bottom:6px}
+.g-term{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:6px;scroll-margin-top:84px}
+.g-term:target{border-color:var(--blue);box-shadow:0 0 0 3px color-mix(in srgb,var(--blue) 20%,transparent)}
+.g-term h3{font-size:1.02rem;margin:0}
+.g-simple{font-size:1rem}
+.g-more,.g-ex{color:var(--muted);font-size:.92rem}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 
 /* print: every page drops the menu and keeps the Powered by Flux Labs footer */
 @media print{
   body{display:block;min-height:0;background:#fff}
-  .site-head,.skip,.menu-btn,.theme-btn{display:none!important}
+  .site-head,.skip,.menu-btn,.theme-btn,.term-pop{display:none!important}
+  .term{text-decoration:none}
+  .explain{break-inside:avoid}
   .site-foot{margin-top:18px;border-top:1px solid #D9DFE7;break-inside:avoid}
   .site-foot-in{padding:10px 0 0}
   .foot-about .muted{display:none}

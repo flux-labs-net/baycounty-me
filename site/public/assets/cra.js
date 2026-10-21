@@ -51,7 +51,7 @@ function renderKPIs(rows){
     ['Spent or committed', fmt(spent,true), 'Documented payments and awards, each dollar once'],
     ['Budgeted, not yet confirmed', fmt(planned,true), 'Appropriations and plan lines'],
     ['Records shown', rows.length.toLocaleString(), `${named} named payees`],
-    ['FY2025 tax increment', fmt(tif,true), tifN===ids.length ? `${ids.length===6?'All six CRAs':ids.map(i=>SHORT[i]).join(', ')}` : 'Where reported'],
+    ['FY2025 <span class=\"term\" data-term=\"tif\">tax increment</span>', fmt(tif,true), tifN===ids.length ? `${ids.length===6?'All six CRAs':ids.map(i=>SHORT[i]).join(', ')}` : 'Where reported'],
   ].map(([l,v,s]) => `<div class="kpi"><span class="eyebrow">${l}</span><span class="v">${v}</span><span class="s">${s}</span></div>`).join('');
 }
 
