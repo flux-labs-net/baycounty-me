@@ -367,6 +367,7 @@ ES_SECTIONS = [
 def es_home():
     cards = [('/es/mi-direccion', 'Mi dirección', 'Escriba una dirección del condado de Bay y vea su estimado de impuestos a la propiedad, quién lo representa, sus escuelas, sus zonas de inundación y evacuación, y si está dentro de un distrito de reurbanización.'),
              ('/es/impuestos', 'Sus impuestos', 'Calcule su factura del impuesto a la propiedad y vea qué parte recibe el condado, las escuelas, su ciudad y cada distrito, y en qué gasta su dinero cada gobierno.'),
+             ('/es/tarifas-y-facturas', 'Tarifas y facturas', 'Las tarifas fijas de su factura de impuestos (bomberos, aguas pluviales, alumbrado) y cuánto cuesta el agua, el alcantarillado y la basura en cada ciudad.'),
              ('/es/solicitar-registros', 'Solicitar registros públicos', 'Elija un gobierno y un registro, y le escribimos la solicitud bajo la ley de registros públicos de Florida.'),
              ('/es/glosario', 'Glosario', 'Cada término de dinero público explicado en lenguaje sencillo: CRA, millaje, exención de vivienda principal y más.')]
     c = ''.join(f'<a class="gv-card" href="{h}"><span class="eyebrow">En español</span><b>{e(t)}</b><span class="small">{e(d)}</span></a>' for h, t, d in cards if h in ES_ALT)
@@ -428,3 +429,36 @@ def es_tax_page(out_dir):
         print('es tax.js: unmatched pairs', len(miss_j), miss_j[:4])
     open(os.path.join(out_dir, 'assets', 'tax.es.js'), 'w').write(js)
     return data_stamp(translate(page, T['html'], 'tax'), '/public-money/tax-dollars')
+
+
+def es_fees_page():
+    """/es/tarifas-y-facturas: fees_page() run on a Spanish copy of its data file, then phrase pairs."""
+    import fees_page as fp
+    T, miss = page_pairs('fees'), set()
+    d = json.load(open(fp.SRC))
+    tr = lambda s: _tr(T['data'], s, 'fees', miss) if s else s
+    for x in d['assessments']:  # only what the table shows: rows with a 2025 levy, and the rate before how_charged
+        r = x.get('roll_2025')
+        r = r[0] if isinstance(r, list) and r else (r if isinstance(r, dict) else {})
+        if not r.get('total_levied'):
+            continue
+        for k in ('name', 'government', 'rate' if x.get('rate') else 'how_charged'):
+            if x.get(k):
+                x[k] = tr(x[k])
+    for u in d['utility_rates']:  # 'provider' stays English: fees_page matches it to its bill table; the page pairs translate it
+        for k in ('area', 'calc', 'effective') if u.get('bill_5000gal') else ():
+            if u.get(k):
+                u[k] = tr(u[k])
+    shown = [g for g in d['gaps'] if not re.search(r'salar|pay|roster|term|school board|manager', g, re.I)]
+    d['gaps'] = [tr(g) for g in shown]
+    assert not any(re.search(r'salar|pay|roster|term|school board|manager', g, re.I) for g in d['gaps']), 'a Spanish gap would be filtered out'
+    if miss:
+        print('es fees: untranslated data text', len(miss), sorted(miss)[:6])
+    with tempfile.NamedTemporaryFile('w', suffix='.json', delete=False) as f:
+        json.dump(d, f, ensure_ascii=False)
+    try:
+        with patched(fp, SRC=f.name, OTHER_NOTE={k: T['other_note'][k] for k in fp.OTHER_NOTE}):
+            page = fp.fees_page()
+    finally:
+        os.unlink(f.name)
+    return data_stamp(translate(page, T['html'], 'fees'), '/public-money/fees-and-bills')
