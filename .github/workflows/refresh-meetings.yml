@@ -1,4 +1,4 @@
-# Refresh the meetings calendar every morning and rebuild the site.
+# Refresh the meetings calendar and candidates' campaign finance reports every morning, then rebuild the site.
 # Pushing to main triggers the normal Vercel deploy. Commits only when something changed.
 name: Refresh meetings
 on:
@@ -22,6 +22,10 @@ jobs:
       - name: Fetch meetings
         working-directory: data/meetings
         run: python fetch_meetings.py
+      - name: Fetch campaign finance reports
+        continue-on-error: true
+        working-directory: data/elections/scripts
+        run: ./refresh.sh "$RUNNER_TEMP/soe"
       - name: Rebuild site
         working-directory: site
         run: python build_site.py > /dev/null
@@ -30,6 +34,6 @@ jobs:
           if git diff --quiet; then echo "No changes"; exit 0; fi
           git config user.name "BayCounty.me bot"
           git config user.email "hello@fluxlabs.net"
-          git add -A data/meetings site/public
-          git commit -m "Refresh meetings calendar ($(date -u +%Y-%m-%d))"
+          git add -A data/meetings data/elections/finance_2026.json site/public
+          git commit -m "Daily refresh: meetings and campaign finance ($(date -u +%Y-%m-%d))"
           git push

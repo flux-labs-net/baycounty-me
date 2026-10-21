@@ -13,7 +13,7 @@ e = lambda s: html.escape(str(s if s is not None else ''))
 GOVN = {'county': 'Bay County', 'schools': 'School Board', 'constitutional': 'County offices', 'special': 'Special districts', 'pc': 'Panama City',
         'pcb': 'Panama City Beach', 'lh': 'Lynn Haven', 'cw': 'Callaway', 'sp': 'Springfield', 'parker': 'Parker', 'mb': 'Mexico Beach'}
 PARTY = {'REP': 'Republican', 'DEM': 'Democrat', 'NPA': 'No party', 'LPF': 'Libertarian', 'LIB': 'Libertarian', 'IND': 'Independent', 'WRI': 'Write-in'}
-STATUS_LBL = {'on_ballot': 'On the Nov. 3 ballot', 'won': 'Won', 'elected_unopposed': 'Elected unopposed', 'lost_primary': 'Lost primary', 'withdrew': 'Withdrew', 'lost': 'Lost', 'did_not_qualify': 'Did not qualify', 'appointed': 'Appointed'}
+STATUS_LBL = {'filed': 'Filed to run', 'on_ballot': 'On the Nov. 3 ballot', 'won': 'Won', 'elected_unopposed': 'Elected unopposed', 'lost_primary': 'Lost primary', 'withdrew': 'Withdrew', 'lost': 'Lost', 'did_not_qualify': 'Did not qualify', 'appointed': 'Appointed'}
 
 
 def usd(n):
@@ -125,6 +125,28 @@ def cand_card(c, r, raised_max, active):
     <div><h5>Campaign money</h5>{money_block(r, raised_max)}</div></article>'''
 
 
+def _okey(o):
+    o = (o or '').lower()
+    num = re.findall(r'\d+', o)
+    kind = next((k for k in ('school', 'judge', 'commission', 'council', 'mayor', 'cdd', 'community development') if k in o), '')
+    kind = 'cdd' if kind == 'community development' else kind
+    place = next((k for k in ('panama city beach', 'panama city', 'lynn haven', 'callaway', 'springfield', 'parker', 'mexico beach', 'lake powell', 'bay county') if k in o), '')
+    return (place if place != 'bay county' else '', kind, num[0] if num else '')
+
+
+def _soe_status(st, active):
+    st = (st or '').lower()
+    if 'withdr' in st: return 'withdrew'
+    if 'did not qualify' in st or 'not qualif' in st: return 'did_not_qualify'
+    if 'defeat' in st: return 'lost'
+    if 'elected' in st: return 'won'
+    if 'qualified' in st or 'advanced' in st: return 'on_ballot' if active else 'filed'
+    return 'filed'
+
+
+GOV_OF_OFFICE = [('panama city beach', 'pcb'), ('panama city', 'pc'), ('lynn haven', 'lh'), ('callaway', 'cw'), ('springfield', 'sp'), ('parker', 'parker'), ('mexico beach', 'mb')]
+
+
 def elections_page():
     C, F = load()
     if not C:
@@ -132,6 +154,27 @@ def elections_page():
     fin = F.get('candidates') or []
     order = list(GOVN)
     races = sorted(C['races'], key=lambda r: (order.index(r.get('gov')) if r.get('gov') in order else 99, r.get('office') or ''))
+    # every campaign the SOE lists for a 2026 race appears, even if the researched roster missed it
+    matched = set()
+    for r in races:
+        for c in r.get('candidates') or []:
+            m = match_finance(c, r.get('office'), fin)
+            if m:
+                matched.add(id(m))
+    for m in fin:
+        if id(m) in matched or '2026' not in (m.get('election') or ''):
+            continue
+        k = _okey(m.get('soe_office') or m.get('office'))
+        race = next((r for r in races if _okey(r.get('office'))[1:] == k[1:] and (not k[0] or k[0] in (r.get('office') or '').lower())), None)
+        if race:
+            race.setdefault('candidates', []).append({'name': m['name'], 'party': {'Republican': 'REP', 'Democrat': 'DEM', 'Libertarian': 'LIB', 'No Party Affiliation': 'NPA'}.get(m.get('party'), None),
+                'status': _soe_status(m.get('soe_status'), race.get('status') == 'on_ballot_nov3'), 'platform': [], 'soe_finance_url': m.get('report_url'),
+                'platform_note': 'Listed in the Supervisor of Elections filings; platform not yet reviewed.'})
+            matched.add(id(m))
+    upcoming = defaultdict(list)
+    for m in fin:
+        if '2027' in (m.get('election') or ''):
+            upcoming[m.get('office') or m.get('soe_office')].append(m)
     active = [r for r in races if r.get('status') == 'on_ballot_nov3']
     decided = [r for r in races if r.get('status') != 'on_ballot_nov3']
     used = set()
@@ -145,7 +188,7 @@ def elections_page():
                 used.add(id(m))
             recs.append(m)
         mx = max([x.get('total_raised') or 0 for x in recs if x] or [0])
-        MAIN = ('on_ballot', 'won', 'elected_unopposed', 'appointed')
+        MAIN = ('on_ballot', 'won', 'elected_unopposed', 'appointed', 'filed')
         main = [(c, m) for c, m in zip(cands, recs) if c.get('status') in MAIN]
         rest = [(c, m) for c, m in zip(cands, recs) if c.get('status') not in MAIN]
         cards = ''.join(cand_card(c, m, mx, is_active) for c, m in main)
@@ -167,6 +210,17 @@ def elections_page():
       <div class="el-cands">{cards}</div></details>'''
 
     act = ''.join(race_html(r, True) for r in active)
+    U = C.get('upcoming_2027') or {}
+    up_races = []
+    for office, ms in sorted(upcoming.items()):
+        g = next((v for k, v in GOV_OF_OFFICE if k in office.lower()), '')
+        info = U.get(office) or {}
+        cands = [{'name': m['name'], 'party': None, 'status': _soe_status(m.get('soe_status'), False), 'soe_finance_url': m.get('report_url'),
+                  **(info.get('candidates', {}).get(m['name']) or {'platform': [], 'platform_note': 'Platform not yet reviewed.'})} for m in ms]
+        up_races.append({'id': 'up-' + re.sub(r'[^a-z0-9]+', '-', office.lower()), 'gov': g, 'office': office, 'status': 'upcoming', 'candidates': cands,
+                         'notes': info.get('notes') or 'Filed with the Supervisor of Elections for the April 20, 2027 city election. Qualifying hasn\'t happened yet, so more candidates may file.'})
+    up = ''.join(race_html(r, True) for r in up_races)
+    up_html = f'<section class="tx-sec" id="next"><div class="sec-hd"><h2>Already running for April 2027</h2><span class="muted">City elections: candidates who have opened a campaign</span></div>{up}</section>' if up else ''
     dec = ''.join(race_html(r, False) for r in decided)
     opts = ''.join(f'<option value="{k}">{e(v)}</option>' for k, v in GOVN.items() if any(r.get('gov') == k for r in races))
     ncand = sum(len(r.get('candidates') or []) for r in active)
@@ -175,16 +229,17 @@ def elections_page():
     return f'''<div class="page tax el">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Get involved · 2026 elections</span><h1>Who's running in 2026</h1>
     <p class="lede">Every local race on Bay County ballots this year: the candidates, what they say they'll do in their own words, links to their campaigns, and where their campaign money comes from. BayCounty.me doesn't endorse or rate candidates.</p></div>
-    <div class="stamp"><a class="pill" href="https://www.bayvotesfl.gov/" target="_blank" rel="noopener">Supervisor of Elections ↗</a><span>Updated {e(C.get("as_of"))}</span></div></header>
+    <div class="stamp"><a class="pill" href="https://www.bayvotesfl.gov/" target="_blank" rel="noopener">Supervisor of Elections ↗</a><span>Campaign reports checked {e(F.get("as_of") or C.get("as_of"))}</span></div></header>
   <div class="kpis">
     <div class="kpi"><span class="eyebrow">On the Nov. 3 ballot</span><span class="v">{len(active)}</span><span class="s">local races · {ncand} candidates</span></div>
     <div class="kpi"><span class="eyebrow">Raised so far</span><span class="v">${raised/1e3:,.0f}K</span><span class="s">by candidates in those races</span></div>
     <div class="kpi"><span class="eyebrow">Already decided</span><span class="v">{len(decided)}</span><span class="s">won in the primary, unopposed or earlier in 2026</span></div>
   </div>
   <div class="callout">To check your registration, find your polling place or see your sample ballot, use the <a href="https://www.bayvotesfl.gov/" target="_blank" rel="noopener">Bay County Supervisor of Elections</a> or <a href="https://vote.gov" target="_blank" rel="noopener">vote.gov</a>. <a href="/my-address">My Address</a> shows your County Commission and School Board districts.</div>
-  <nav class="jump" aria-label="On this page"><a href="#active">On the ballot</a><a href="#decided">Already decided</a><a href="#how">How we did this</a></nav>
+  <nav class="jump" aria-label="On this page"><a href="#active">On the ballot</a>{'<a href="#next">April 2027</a>' if upcoming else ''}<a href="#decided">Already decided</a><a href="#how">How we did this</a></nav>
   <div class="vt-filters mt-f"><label class="vf"><span>Government</span><select id="elG"><option value="">All races</option>{opts}</select></label></div>
   <section class="tx-sec" id="active"><div class="sec-hd"><h2>On the November 3 ballot</h2><span class="muted">Candidates in alphabetical order</span></div>{act or '<p class="muted">No local races found on the ballot.</p>'}</section>
+  {up_html}
   <section class="tx-sec el-past" id="decided"><div class="sec-hd"><h2>Already decided in 2026</h2><span class="muted">Shown separately: these campaigns are over</span></div>{dec or '<p class="muted">None.</p>'}</section>
   <section class="tx-sec method" id="how"><div class="sec-hd"><h2>How we did this</h2></div>
     <p><b>Platforms</b> are summarized only from each candidate's own campaign website, campaign social pages or questionnaire answers they wrote, with links to each source. If we couldn't find a statement from the candidate, we say so rather than fill in from news coverage. Candidates are listed alphabetically.</p>
