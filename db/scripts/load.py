@@ -206,6 +206,18 @@ def main():
             print(f'{d["id"]:32s} {n:6d} rows (replaced {dl})')
         print('raw files updated:', load_raw(conn, sha))
         print('total rows:', total)
+        prune_logs(conn)
+
+
+def prune_logs(conn):
+    """Delete API request-log rows older than 180 days (migration 0006). Skipped if that migration isn't applied."""
+    try:
+        with conn.transaction():
+            cur = conn.cursor()
+            cur.execute('select apiadmin.prune_requests(180)')
+            print('api log rows pruned (older than 180 days):', cur.fetchone()[0])
+    except psycopg.Error as e:
+        print('api log prune skipped:', str(e).splitlines()[0][:120])
 
 
 if __name__ == '__main__':
