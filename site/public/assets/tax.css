@@ -280,3 +280,9 @@ a.src:hover{color:var(--blue)}
 
 .kv.fees{margin-top:6px;padding-top:8px;border-top:1px solid var(--line)}
 .kv.fees dt.span{color:var(--ink);font-weight:500}
+
+.stackbar.mini{display:flex;height:12px;gap:2px;border-radius:3px;overflow:hidden;background:none}
+.stackbar.mini .seg{display:block;height:100%}
+.cards.two-col{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (max-width:900px){.cards.two-col{grid-template-columns:minmax(0,1fr)}}
+.gov-card .tx-table{min-width:0}

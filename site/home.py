@@ -52,6 +52,8 @@ def home_page():
         ('/public-money/tourist-tax', 'Tourist Tax', 'What visitors pay, and where it goes', 'Ten years of bed tax collections, how the pennies are split and what Visit PCB spends.', M(s['bt25']), f'collected in FY2025, {s["pcb_share"]:.0%} from the PCB zone'),
         ('/public-money/debt', 'Debt', 'What local governments owe', 'Bonds and bank loans by government, big single payments ahead, and pension promises.', M(s['debt']), 'owed across Bay County governments'),
         ('/public-money/audits', 'Audit Findings', 'What the auditors found', 'Three years of audit findings in plain English, including problems that keep coming back.', f'{s["findings"]}', f'findings, {s["repeats"]} repeats in the latest audits'),
+        ('/public-money/fees-and-bills', 'Fees & Bills', 'Fees on your tax bill, and water and garbage', 'Fire, stormwater and other flat fees, plus a typical monthly utility bill in each city.', '$28.1M', 'in flat fees on FY2026 tax bills'),
+        ('/who-runs-bay-county', 'Officials', 'Who runs Bay County', 'Every elected seat and appointed manager, and what top officials are paid.', '5', 'independently elected county officers'),
         ('/public-money/amendment-3', 'Amendment 3', 'What changes if it passes', 'The property tax amendment on the November ballot: your bill before and after, and the state\'s estimates.', M(s['a3']), 'less for Bay governments in FY2029 (state est.)'),
     ]
     cards = ''.join(f'''<a class="topic" href="{u}"><span class="eyebrow">{e}</span><h3>{h}</h3><p>{p}</p><span class="t-stat"><b>{v}</b> {l}</span></a>''' for u, e, h, p, v, l in topics)
@@ -95,7 +97,7 @@ def home_page():
     <div class="cols">
       <div><h3>Contracts and vendors</h3><p>Who the county and cities pay the most, how contracts were awarded, and change orders that grew them.</p></div>
       <div><h3>How they voted</h3><p>Every commissioner's vote on budgets, tax rates, big contracts and CRA deals.</p></div>
-      <div><h3>Fees and utility bills</h3><p>Fire and stormwater fees on your tax bill, and water, sewer and garbage costs city by city.</p></div>
+      <div><h3>Who gets paid</h3><p>Check registers and vendor payments, as the records requests for them come back.</p></div>
     </div>
   </section>
 

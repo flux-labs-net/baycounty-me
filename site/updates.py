@@ -9,6 +9,9 @@ from datetime import datetime, timezone
 import html
 
 CHANGES = [
+    {'date': '2026-10-20', 'title': 'Fees, utility bills and who runs Bay County',
+     'text': 'Every flat fee on Bay County tax bills, a typical monthly water, sewer and garbage bill in each city, and a guide to every elected seat, appointed manager and top salary. My Address now shows the actual fees on each parcel.',
+     'pages': ['/public-money/fees-and-bills', '/who-runs-bay-county', '/my-address']},
     {'date': '2026-10-20', 'title': 'Designed PDF reports, and a new home page',
      'text': 'Export PDF now builds a formatted report on every page, with tables, charts, maps and source links. The home page shows headline numbers and every topic.',
      'pages': ['/', '/my-address', '/public-money/cra-spending', '/public-money/tax-dollars']},
