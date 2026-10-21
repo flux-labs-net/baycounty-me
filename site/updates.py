@@ -9,6 +9,9 @@ from datetime import datetime, timezone
 import html
 
 CHANGES = [
+    {'date': '2026-10-21', 'title': 'Correction: flood zones on My Address',
+     'text': "Flood zones now come live from FEMA's National Flood Hazard Layer, which reflects Bay County's October 24, 2024 flood maps. The earlier lookup used an older county copy that missed high-risk zones for some addresses (about 8% in a sample of 300) and showed outdated base flood elevations. Results now also show the FIRM panel and any map revision, with a link to check the address on FEMA's map. Thanks to the readers who reported it.",
+     'pages': ['/my-address']},
     {'date': '2026-10-21', 'title': 'Link previews',
      'text': 'Every page now shows a title, summary and image with its headline number when a link is shared in a text, email or social post.',
      'pages': ['/']},

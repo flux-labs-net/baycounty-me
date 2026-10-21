@@ -20,6 +20,31 @@ async function q(path, params) {
 }
 const atPoint = (path, pt, extra = {}) => q(path, {geometry: JSON.stringify({x: pt.x, y: pt.y, spatialReference: {wkid: 4326}}), geometryType: 'esriGeometryPoint', inSR: 4326, spatialRel: 'esriSpatialRelIntersects', ...extra}).then(f => f.map(x => x.attributes)).catch(() => null);
 
+/* FEMA National Flood Hazard Layer: the official, current flood map. The county's copy (Admin_A12/51) is older. */
+const NFHL = 'https://hazards.fema.gov/arcgis/rest/services/public/NFHL/MapServer';
+async function femaAt(layer, pt, fields) {
+  const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), 15000);
+  try {
+    const r = await fetch(`${NFHL}/${layer}/query?` + new URLSearchParams({geometry: JSON.stringify({x: pt.x, y: pt.y, spatialReference: {wkid: 4326}}), geometryType: 'esriGeometryPoint', inSR: 4326, spatialRel: 'esriSpatialRelIntersects', outFields: fields, returnGeometry: 'false', f: 'json'}), {mode: 'cors', signal: ctl.signal});
+    const j = await r.json(); if (j.error) throw new Error(j.error.message);
+    return (j.features || []).map(f => f.attributes);
+  } finally { clearTimeout(t); }
+}
+async function floodAt(pt) {
+  try {
+    const [zones, panels, lomr] = await Promise.all([
+      femaAt(28, pt, 'FLD_ZONE,ZONE_SUBTY,SFHA_TF,STATIC_BFE,V_DATUM,DEPTH').catch(() => femaAt(28, pt, 'FLD_ZONE,ZONE_SUBTY,SFHA_TF,STATIC_BFE,V_DATUM,DEPTH')),
+      femaAt(3, pt, 'FIRM_PAN,EFF_DATE').catch(() => []),
+      femaAt(1, pt, 'CASE_NO,EFF_DATE').catch(() => [])]);
+    const rank = z => (z.SFHA_TF === 'T' ? 1000 : 0) + (/^V/.test(z.FLD_ZONE) ? 500 : 0) + (z.STATIC_BFE > 0 ? z.STATIC_BFE : 0) + (/0\.2/.test(z.ZONE_SUBTY || '') ? 100 : 0);
+    zones.sort((a, b) => rank(b) - rank(a));
+    return {src: 'fema', zone: zones[0] || null, panel: panels[0] || null, lomr: lomr[0] || null};
+  } catch (e) {
+    const c = await atPoint('Admin_A12/MapServer/51', pt);
+    return c === null ? null : {src: 'county', zone: c[0] || null, panel: null, lomr: null};
+  }
+}
+
 /* ---------- autocomplete ---------- */
 const inp = $('q'), list = $('acList');
 let timer, items = [], active = -1, seq = 0;
@@ -73,7 +98,7 @@ async function load(f) {
     .then(fs => fs.map(x => ({...x.attributes, d: miles(pt, x.geometry)})).sort((p, r) => p.d - r.d)[0] || null).catch(() => null);
   const [parcel, city, cra, comm, local, mosq, flood, evac, tdc, sb, house, senate, ush, es, ms, hs, fire, lib, park] = await Promise.all([
     parcelP, atPoint('Admin_A12/MapServer/26', pt), atPoint('Admin_A12/MapServer/27', pt), atPoint('Admin_A12/MapServer/28', pt), atPoint('Admin_A12/MapServer/30', pt),
-    atPoint('Admin_A12/MapServer/34', pt), atPoint('Admin_A12/MapServer/51', pt), atPoint('Admin_A12/MapServer/80', pt), atPoint('Admin_A12/MapServer/84', pt),
+    atPoint('Admin_A12/MapServer/34', pt), floodAt(pt), atPoint('Admin_A12/MapServer/80', pt), atPoint('Admin_A12/MapServer/84', pt),
     atPoint('ElectionAdministration/MapServer/2', pt), atPoint('ElectionAdministration/MapServer/3', pt), atPoint('ElectionAdministration/MapServer/4', pt), atPoint('ElectionAdministration/MapServer/5', pt),
     atPoint('SchoolAttendanceZones/MapServer/0', pt), atPoint('SchoolAttendanceZones/MapServer/1', pt), atPoint('SchoolAttendanceZones/MapServer/2', pt),
     near(42), near(39), near(41)]);
@@ -165,10 +190,18 @@ function renderCra(cra) {
     <p class="small"><a href="/public-money/cra-spending">See what it pays for →</a></p>`;
 }
 function renderSafe(flood, evac, mosq, tdc, fire, lib, park) {
-  const f = flood?.[0];
-  const floodTxt = flood === null ? '<span class="muted">Couldn\'t check</span>'
-    : f ? `<b>Zone ${esc(f.FLD_ZONE)}${f.ZONE_SUBTY && f.ZONE_SUBTY.trim() ? ' (' + esc(title(f.ZONE_SUBTY)) + ')' : ''}</b> · FEMA high-risk area${f.STATIC_BFE > 0 ? ` · base flood elevation ${esc(f.STATIC_BFE)} ft` : ''}`
-    : 'Outside FEMA\'s mapped high-risk flood areas';
+  const f = flood?.zone, fdate = ms => ms ? new Date(ms).toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC'}) : '';
+  const bfe = f && f.STATIC_BFE > 0 ? ` · base flood elevation <b>${esc(f.STATIC_BFE)} ft</b>${f.V_DATUM ? ' <span class="muted small">(' + esc(f.V_DATUM) + ')</span>' : ''}` : '';
+  let floodTxt;
+  if (flood === null) floodTxt = '<span class="muted">Couldn\'t check right now</span>';
+  else if (!f) floodTxt = flood.src === 'county' ? 'Outside the high-risk areas on Bay County\'s copy of the flood map' : '<span class="muted">Not on FEMA\'s flood map here</span>';
+  else if (f.SFHA_TF === 'T' || /^(A|V)/.test(f.FLD_ZONE)) floodTxt = `<b>Zone ${esc(f.FLD_ZONE)}</b> · FEMA high-risk area${/^V/.test(f.FLD_ZONE) ? ', coastal waves' : ''}${bfe}${f.DEPTH > 0 ? ` · flood depth ${esc(f.DEPTH)} ft` : ''}`;
+  else if (f.FLD_ZONE === 'X' && /0\.2/.test(f.ZONE_SUBTY || '')) floodTxt = '<b>Zone X (shaded)</b> · moderate risk, outside the high-risk area (0.2% annual chance flood)';
+  else if (f.FLD_ZONE === 'X') floodTxt = '<b>Zone X</b> · minimal flood hazard on FEMA\'s map';
+  else if (f.FLD_ZONE === 'D') floodTxt = '<b>Zone D</b> · flood risk not determined';
+  else floodTxt = `<b>Zone ${esc(f.FLD_ZONE)}</b>${bfe}`;
+  if (flood?.panel?.FIRM_PAN) floodTxt += `<br><span class="muted small">FIRM panel ${esc(flood.panel.FIRM_PAN)}${flood.panel.EFF_DATE ? ', effective ' + fdate(flood.panel.EFF_DATE) : ''}${flood.lomr?.CASE_NO ? ` · map revision (LOMR) ${esc(flood.lomr.CASE_NO)}${flood.lomr.EFF_DATE ? ', ' + fdate(flood.lomr.EFF_DATE) : ''}` : ''}</span>`;
+  if (flood?.src === 'county') floodTxt += '<br><span class="muted small">FEMA\'s live map didn\'t respond, so this is Bay County\'s older copy, which predates the October 2024 maps. Use the FEMA link below to confirm.</span>';
   const nearTxt = (x, nm) => x ? `${esc(x.NAME || nm)} <span class="muted small">${x.d.toFixed(1)} mi${x.FULLADDR || x.ADDRESS ? ' · ' + esc(x.FULLADDR || x.ADDRESS) : ''}</span>` : '<span class="muted">None within 10 miles</span>';
   $('safeBody').innerHTML = kv([
     ['Flood zone', floodTxt],
@@ -178,7 +211,7 @@ function renderSafe(flood, evac, mosq, tdc, fire, lib, park) {
     ['Nearest park', nearTxt(park, 'Park')],
     mosq?.[0] ? ['Mosquito control', esc(mosq[0].DISTRICT) + (mosq[0].ADMINISTRATION === 'BC' ? ' <span class="muted small">(Bay County)</span>' : '')] : null,
     tdc?.[0] ? ['Tourist tax area', esc(tdc[0].ID)] : null,
-  ]) + '<dd class="span muted small">Flood zones are FEMA\'s effective map as published by Bay County. Lenders and insurers use the official FEMA map; check <a href="https://msc.fema.gov/portal/search" target="_blank" rel="noopener">FEMA\'s Map Service Center</a>.</dd>';
+  ]) + `<dd class="span muted small">Flood zone is checked live against FEMA's National Flood Hazard Layer at the address point. A building's official zone comes from the flood map, your lender's flood determination or an elevation certificate. <a href="https://msc.fema.gov/portal/search?AddressQuery=${encodeURIComponent($('aTitle').textContent + ', ' + ($('aSub').textContent.split(' · ')[0] || 'Bay County FL'))}" target="_blank" rel="noopener">Check this address on FEMA's map</a>.</dd>`;
 }
 
 /* Amendment 3 card, filled from the same parcel */
