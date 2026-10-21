@@ -316,4 +316,35 @@ document.getElementById('csv').onclick = () => {
   const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'bay-county-cra-ledger.csv'; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 2000);
 };
 
+const STATUS_LABEL = {Other:'Incoming / not CRA-funded'};
+function filterSummary(){
+  const parts = [S.cras.size ? [...S.cras].map(i=>SHORT[i]).join(', ') : 'All six CRAs'];
+  if (S.status !== 'all') parts.push('Status: ' + (STATUS_LABEL[S.status] || S.status));
+  if (S.cat !== 'all') parts.push('Type: ' + S.cat);
+  if (S.q) parts.push('Search: "' + S.q + '"');
+  if (!S.nc) parts.push('Rows left out of totals hidden');
+  return parts.join(' · ');
+}
+let printState = null;
+function beforePrint(){
+  if (printState) return;
+  printState = {showAll: S.showAll, open: [...document.querySelectorAll('details.cx')].map(d => d.open), vb: {...VB}};
+  S.showAll = true; renderLedger(filtered());
+  document.querySelectorAll('details.cx').forEach((d, i) => { d.open = true; d.classList.toggle('print-hide', S.cras.size > 0 && !S.cras.has(ORDER[i])); });
+  document.querySelectorAll('.prof').forEach(b => b.classList.toggle('print-hide', S.cras.size > 0 && !S.cras.has(b.dataset.c)));
+  const day = new Date().toLocaleDateString('en-US', {year:'numeric', month:'long', day:'numeric'});
+  document.getElementById('printMeta').innerHTML = '<b>Report:</b> ' + esc(filterSummary()) + '<br><b>Exported</b> ' + day + ' from baycounty.me/public-money/cra-spending';
+  fitView();
+}
+function afterPrint(){
+  if (!printState) return;
+  S.showAll = printState.showAll; renderLedger(filtered());
+  document.querySelectorAll('details.cx').forEach((d, i) => d.open = printState.open[i]);
+  document.querySelectorAll('.print-hide').forEach(e => e.classList.remove('print-hide'));
+  setVB(printState.vb); printState = null;
+}
+window.addEventListener('beforeprint', beforePrint);
+window.addEventListener('afterprint', afterPrint);
+document.getElementById('pdf').onclick = () => { beforePrint(); setTimeout(() => window.print(), 60); };
+
 })();
