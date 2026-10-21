@@ -72,8 +72,8 @@ async function stats(key, days) {
       from d left join apiadmin.requests r on (r.at at time zone 'America/Chicago')::date = d.day and ${W('r.')}
       group by d.day order by d.day`, p);
   const group = col => q(`select coalesce(${col}::text, '(none)') label, count(*)::int n from apiadmin.requests where ${w} group by 1 order by 2 desc limit 10`, p);
-  const [endpoints, datasets, statuses, surfaces] = await Promise.all([group('endpoint'), group('dataset'), group('status'), group('surface')]);
-  return {days, totals: tot, daily, endpoints, datasets, statuses, surfaces};
+  const [endpoints, datasets, statuses, surfaces, ips] = await Promise.all([group('endpoint'), group('dataset'), group('status'), group('surface'), group('host(ip)')]);
+  return {days, totals: tot, daily, endpoints, datasets, statuses, surfaces, ips: ips.filter(x => x.label !== '(none)')};
 }
 
 async function route(req, res, action, me) {
@@ -136,9 +136,32 @@ async function route(req, res, action, me) {
       let w = 'true' + scope(Q.key, p)('r.');
       if (Q.before) { p.push(parseInt(Q.before, 10)); w += ` and r.id < $${p.length}`; }
       if (Q.status === 'errors') w += ' and r.status >= 400';
-      const rows = await q(`select r.id, r.at, r.key_id, k.name key_name, k.prefix, r.surface, r.endpoint, r.dataset, r.query, r.status, r.rows_returned, r.ms, r.ip_hash, r.user_agent
+      if (Q.ip) { p.push(String(Q.ip).trim()); w += ` and r.ip <<= $${p.length}::inet`; }
+      const rows = await q(`select r.id, r.at, r.key_id, k.name key_name, k.prefix, r.surface, r.endpoint, r.dataset, r.query, r.status, r.rows_returned, r.ms, r.ip_hash, host(r.ip) ip, r.user_agent
           from apiadmin.requests r left join apiadmin.keys k on k.id = r.key_id where ${w} order by r.id desc limit ${lim}`, p);
       return {logs: rows, next_before: rows.length === lim ? rows[rows.length - 1].id : null};
+    }
+    case 'blocks': {
+      if (req.method === 'POST') {
+        const net = String(body.network || '').trim();
+        if (!/^[0-9a-fA-F:.]+(\/\d{1,3})?$/.test(net)) throw Object.assign(new Error('Enter an IP address or range, e.g. 203.0.113.7 or 203.0.113.0/24.'), {status: 400});
+        let row;
+        try {
+          [row] = await q(`insert into apiadmin.blocks (network, reason, expires_at, created_by) values ($1::cidr, $2, $3, $4)
+              on conflict (network) do update set reason = excluded.reason, expires_at = excluded.expires_at returning id, network::text network`,
+            [net, txt(body.reason, 300) || null, body.expires_at ? new Date(body.expires_at).toISOString() : null, me.e]);
+        } catch (e) { if (e.code === '22P02' || e.code === '22023') throw Object.assign(new Error('That isn\u2019t a valid IP address or range.'), {status: 400}); throw e; }
+        await audit(me.e, 'block_ip', null, {network: row.network, reason: txt(body.reason, 300) || null});
+      }
+      return {blocks: await q(`select b.id, b.network::text network, b.reason, b.expires_at, b.created_by, b.created_at,
+          (select count(*)::int from apiadmin.requests r where r.ip <<= b.network and r.status = 403 and r.at > now() - interval '30 days') blocked_30d
+          from apiadmin.blocks b order by b.created_at desc`)};
+    }
+    case 'unblock': {
+      const [row] = await q('delete from apiadmin.blocks where id = $1 returning network::text network', [body.id]);
+      if (!row) throw Object.assign(new Error('Block not found.'), {status: 404});
+      await audit(me.e, 'unblock_ip', null, {network: row.network});
+      return {ok: true};
     }
     case 'audit': return {audit: await q('select at, admin, action, key_id, detail from apiadmin.audit order by id desc limit 100')};
     default: throw Object.assign(new Error('Unknown action.'), {status: 404});

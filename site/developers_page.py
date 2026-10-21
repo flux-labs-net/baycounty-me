@@ -69,6 +69,7 @@ def developers_page(out_dir):
       <li>The data is compiled from public records and free to reuse. Please credit BayCounty.me and link to the source record for any figure you publish.</li>
       <li>Check the original record before relying on a single number. Each dataset's notes and gaps are on its page on this site.</li>
       <li>Individual campaign donors and rank-and-file public employees are not named, here or anywhere on the site.</li>
+      <li>Each API and MCP request is logged with its time, query, key (if any) and IP address, to enforce limits and stop abuse. IP addresses are deleted from the log after 90 days.</li>
       <li>Requests are limited per connection or per key (see <a href="#keys">API keys</a>). For bulk use, download the full files from <code>/downloads</code>. Data refreshes as the site updates, and meetings and campaign reports refresh every morning.</li>
       <li>Questions or a use you'd like supported? <a href="/about#contact">Get in touch</a>.</li>
     </ul></section>

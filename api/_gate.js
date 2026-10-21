@@ -1,6 +1,7 @@
 // API keys, throttles and request logging for /api/v1 and /api/mcp.
 // Every request is checked by apiadmin.check_request (one database call) and logged to apiadmin.requests.
 // Keys can be sent as `Authorization: Bearer <key>`, an `X-API-Key` header, or `?api_key=`.
+// Logs keep the caller's IP address for 90 days (plus a salted hash used for per-connection limits).
 // If the database can't be reached the API stays up with a per-instance limit and nothing is logged.
 const crypto = require('crypto');
 const {q} = require('./_db');
@@ -27,6 +28,7 @@ const MESSAGES = {
   key_revoked: 'This API key has been revoked.',
   key_expired: 'This API key has expired.',
   rate_limited: 'Too many requests this minute. Slow down, or download /downloads/<id>.json for bulk use.',
+  blocked: 'Requests from this address are blocked. Contact BayCounty.me if you think this is a mistake.',
   daily_quota: 'This key has used its daily request allowance. It resets at midnight Central time.',
 };
 
@@ -40,9 +42,15 @@ function memLimit(h) {
 // Returns a context with .ok, .status, .message and .log(fields). Sets rate-limit headers on res.
 async function gate(req, res, surface) {
   const t0 = Date.now(), key = keyFrom(req), ih = ipHash(req);
+  const ip = /^[0-9a-fA-F:.]{3,45}$/.test(ipOf(req)) ? ipOf(req) : null;
   let r, offline = false;
   try {
-    r = (await q('select apiadmin.check_request($1, $2) as r', [key ? sha256(key) : null, ih]))[0].r;
+    try {
+      r = (await q('select apiadmin.check_request($1, $2, $3) as r', [key ? sha256(key) : null, ih, ip]))[0].r;
+    } catch (e) {
+      if (e.code !== '42883') throw e; // blocklist migration not applied yet
+      r = (await q('select apiadmin.check_request($1, $2) as r', [key ? sha256(key) : null, ih]))[0].r;
+    }
   } catch (e) {
     console.error('gate: database unavailable', e.message);
     offline = true;
@@ -55,10 +63,10 @@ async function gate(req, res, surface) {
   ctx.log = async (f = {}) => {
     if (offline) return;
     try {
-      await q(`insert into apiadmin.requests (key_id, ip_hash, surface, endpoint, dataset, query, status, rows_returned, ms, user_agent)
-               values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)`,
+      await q(`insert into apiadmin.requests (key_id, ip_hash, surface, endpoint, dataset, query, status, rows_returned, ms, user_agent, ip)
+               values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)`,
         [ctx.keyId, ih, surface, f.endpoint || null, f.dataset || null, f.query ? String(f.query).slice(0, 500) : null,
-         f.status ?? null, f.rows ?? null, Date.now() - t0, String(req.headers['user-agent'] || '').slice(0, 200) || null]);
+         f.status ?? null, f.rows ?? null, Date.now() - t0, String(req.headers['user-agent'] || '').slice(0, 200) || null, ip]);
     } catch (e) { console.error('gate: log failed', e.message); }
   };
   return ctx;

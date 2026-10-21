@@ -41,7 +41,7 @@ table.at{width:100%;border-collapse:collapse;font-size:.88rem}
 .pill::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
 .pill.active{color:var(--ok)} .pill.disabled{color:var(--warn)} .pill.revoked{color:var(--bad)} .pill.expired{color:var(--bad)}
 label.f{display:flex;flex-direction:column;gap:5px;font:500 .82rem var(--f-body);color:var(--muted)}
-label.f input,label.f textarea,label.f select,select.sel{font:400 .92rem var(--f-body);color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px;min-height:38px}
+label.f input,label.f textarea,label.f select,.sel{font:400 .92rem var(--f-body);color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px;min-height:38px}
 label.f textarea{min-height:70px;resize:vertical}
 .grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 .grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
@@ -53,8 +53,10 @@ label.f textarea{min-height:70px;resize:vertical}
 .chart{position:relative}
 .chart svg{display:block;width:100%;height:auto}
 .chart .tip{position:absolute;pointer-events:none;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:6px 9px;font-size:.8rem;box-shadow:0 6px 20px rgba(0,0,0,.14);white-space:nowrap;display:none}
-.lists{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:12px}
+.lists{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:12px}
 @media (max-width:860px){.lists{grid-template-columns:1fr}}
+.linkish{background:none;border:0;padding:0;color:var(--blue);font:inherit;cursor:pointer;text-decoration:underline;text-underline-offset:2px}
+.linkish.danger{color:var(--bad)}
 .list h3{font:600 .9rem var(--f-display);margin:0 0 10px}
 .li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;margin-bottom:9px;font-size:.84rem}
 .li .lbl{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -136,10 +138,11 @@ def admin_page(out_dir):
     <section id="tab-logs" role="tabpanel" hidden>
       <div class="row" style="margin-bottom:12px">
         <select class="sel" id="lg-scope" aria-label="Traffic to show"></select>
+        <input class="sel mono" id="lg-ip" placeholder="Filter by IP or range" aria-label="Filter by IP address or range" style="min-width:200px">
         <label class="toggle"><input type="checkbox" id="lg-errors"> Errors and blocked only</label>
         <button class="btn" id="lg-refresh" type="button">Refresh</button>
       </div>
-      <div class="tw"><table class="at" id="logs-table"><thead><tr><th>Time</th><th>Key</th><th>Where</th><th>Request</th><th class="num">Status</th><th class="num">Rows</th><th class="num">ms</th></tr></thead><tbody></tbody></table></div>
+      <div class="tw"><table class="at" id="logs-table"><thead><tr><th>Time</th><th>Key</th><th>Where</th><th>Request</th><th>IP address</th><th class="num">Status</th><th class="num">Rows</th><th class="num">ms</th></tr></thead><tbody></tbody></table></div>
       <div class="row" style="margin-top:12px"><button class="btn" id="lg-more" type="button" hidden>Load older</button></div>
     </section>
 
@@ -152,6 +155,16 @@ def admin_page(out_dir):
         <div class="grid2"><label class="f">Per minute<input type="number" min="0" name="default_per_minute"></label><label class="f">Per day<input type="number" min="0" name="default_per_day"></label></div>
         <div class="row"><button class="btn primary" type="submit">Save</button><span id="settings-msg" class="small muted" role="status"></span></div>
       </form>
+      <h2 style="font:600 1rem var(--f-display);margin:24px 0 6px">Blocked addresses</h2>
+      <p class="muted small" style="margin:0 0 10px">Requests from these addresses get a 403, with or without a key. IP addresses in the request log are kept for 90 days.</p>
+      <form id="block-form" class="card row" style="margin-bottom:10px;align-items:flex-end">
+        <label class="f">Address or range<input name="network" class="mono" required placeholder="203.0.113.7 or 203.0.113.0/24"></label>
+        <label class="f grow">Reason<input name="reason" maxlength="300" placeholder="Optional"></label>
+        <label class="f">Until<input type="date" name="expires_at"></label>
+        <button class="btn danger" type="submit">Block</button>
+      </form>
+      <p id="block-msg" class="err" role="status"></p>
+      <div class="tw"><table class="at" id="blocks-table"><thead><tr><th>Address or range</th><th>Reason</th><th>Until</th><th class="num">Blocked requests, 30 days</th><th>Added</th><th></th></tr></thead><tbody></tbody></table></div>
       <h2 style="font:600 1rem var(--f-display);margin:24px 0 10px">Admin activity</h2>
       <div class="tw"><table class="at" id="audit-table"><thead><tr><th>Time</th><th>Who</th><th>What</th><th>Details</th></tr></thead><tbody></tbody></table></div>
     </section>

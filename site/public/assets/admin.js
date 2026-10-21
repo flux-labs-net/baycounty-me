@@ -138,7 +138,7 @@
       return `<div class="card list"><h3>${title}</h3>${rows.length ? rows.map(r => `<div class="li"><span class="lbl" title="${esc(map(r.label))}">${esc(map(r.label))}</span><span class="n">${fmt(r.n)}</span><span class="track"><i style="width:${(r.n / max * 100).toFixed(1)}%"></i></span></div>`).join('') : '<p class="muted small">No requests in this range.</p>'}</div>`;
     };
     const SC = {200: '200 OK', 400: '400 Bad request', 401: '401 Key missing or invalid', 403: '403 Key paused, revoked or expired', 404: '404 Not found', 429: '429 Over a limit', 500: '500 Server error', 502: '502 Upstream error'};
-    $('#an-lists').innerHTML = list('Top endpoints', j.endpoints) + list('Top datasets', j.datasets.filter(d => d.label !== '(none)')) + list('Responses', j.statuses, l => SC[l] || l);
+    $('#an-lists').innerHTML = list('Top endpoints', j.endpoints) + list('Top datasets', j.datasets.filter(d => d.label !== '(none)')) + list('Responses', j.statuses, l => SC[l] || l) + list('Top IP addresses', j.ips || []);
   }
   function chart(daily) {
     const el = $('#an-chart'), W = 1000, H = 220, P = {l: 44, r: 8, t: 10, b: 26};
@@ -177,6 +177,8 @@
   let before = null;
   $('#lg-scope').addEventListener('change', () => loadLogs(true));
   $('#lg-errors').addEventListener('change', () => loadLogs(true));
+  $('#lg-ip').addEventListener('keydown', e => { if (e.key === 'Enter') loadLogs(true); });
+  $('#lg-ip').addEventListener('change', () => loadLogs(true));
   $('#lg-refresh').addEventListener('click', () => loadLogs(true));
   $('#lg-more').addEventListener('click', () => loadLogs(false));
   async function loadLogs(reset) {
@@ -185,25 +187,60 @@
     const params = {key: $('#lg-scope').value || 'all', limit: '100'};
     if (before) params.before = before;
     if ($('#lg-errors').checked) params.status = 'errors';
+    if ($('#lg-ip').value.trim()) params.ip = $('#lg-ip').value.trim();
     const j = await api('logs', {params});
     const tb = $('#logs-table tbody');
     const rows = j.logs.map(l => `<tr><td class="small" style="white-space:nowrap">${stamp(l.at)}</td>
       <td class="small">${l.key_name ? esc(l.key_name) + `<div class="muted mono">${esc(l.prefix)}…</div>` : '<span class="muted">No key</span>'}</td>
       <td class="small">${l.surface === 'mcp' ? 'AI (MCP)' : 'API'}</td>
       <td class="small"><span class="mono">${esc(l.endpoint || '')}</span>${l.query ? `<div class="muted mono" style="word-break:break-all">${esc(l.query)}</div>` : ''}</td>
+      <td class="small mono">${l.ip ? `<button class="linkish" data-ip="${esc(l.ip)}" title="Show only this address">${esc(l.ip)}</button> <button class="linkish danger small" data-block="${esc(l.ip)}">Block</button>` : '<span class="muted">\u2014</span>'}</td>
       <td class="num st e${l.status === 429 ? 429 : String(l.status || '')[0]}">${esc(l.status ?? '')}</td><td class="num">${fmt(l.rows_returned)}</td><td class="num">${fmt(l.ms)}</td></tr>`).join('');
-    if (reset) tb.innerHTML = rows || '<tr><td colspan="7" class="empty">No requests yet.</td></tr>'; else tb.insertAdjacentHTML('beforeend', rows);
+    if (reset) tb.innerHTML = rows || '<tr><td colspan="8" class="empty">No requests yet.</td></tr>'; else tb.insertAdjacentHTML('beforeend', rows);
     before = j.next_before; $('#lg-more').hidden = !before;
   }
 
+  $('#logs-table').addEventListener('click', async e => {
+    const ipBtn = e.target.closest('[data-ip]'), blk = e.target.closest('[data-block]');
+    if (ipBtn) { $('#lg-ip').value = ipBtn.dataset.ip; loadLogs(true); }
+    if (blk) {
+      const reason = prompt(`Block ${blk.dataset.block}? Its requests will get a 403 until you remove the block in Throttles & settings.\n\nReason (optional):`);
+      if (reason === null) return;
+      try { await api('blocks', {method: 'POST', body: {network: blk.dataset.block, reason}}); blk.replaceWith(Object.assign(document.createElement('span'), {className: 'small muted', textContent: 'Blocked'})); }
+      catch (err) { alert(err.message); }
+    }
+  });
+
+  // ---------- blocks ----------
+  async function loadBlocks() {
+    const j = await api('blocks');
+    $('#blocks-table tbody').innerHTML = j.blocks.map(b => `<tr><td class="mono">${esc(b.network.replace(/\/(32|128)$/, ''))}</td><td class="small">${esc(b.reason || '')}</td>
+      <td class="small">${b.expires_at ? new Date(b.expires_at).toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'}) : 'Until removed'}</td>
+      <td class="num">${fmt(b.blocked_30d)}</td><td class="small">${stamp(b.created_at)}<div class="muted">${esc(b.created_by || '')}</div></td>
+      <td><button class="btn" data-unblock="${b.id}" type="button">Remove</button></td></tr>`).join('') || '<tr><td colspan="6" class="empty">No addresses are blocked.</td></tr>';
+  }
+  $('#blocks-table').addEventListener('click', async e => {
+    const b = e.target.closest('[data-unblock]'); if (!b) return;
+    try { await api('unblock', {method: 'POST', body: {id: Number(b.dataset.unblock)}}); loadBlocks(); } catch (err) { $('#block-msg').textContent = err.message; }
+  });
+  $('#block-form').addEventListener('submit', async e => {
+    e.preventDefault();
+    const f = e.target; $('#block-msg').textContent = '';
+    try {
+      await api('blocks', {method: 'POST', body: {network: f.network.value, reason: f.reason.value, expires_at: f.expires_at.value ? f.expires_at.value + 'T23:59:59-05:00' : ''}});
+      f.reset(); loadBlocks();
+    } catch (err) { $('#block-msg').textContent = err.message; }
+  });
+
   // ---------- settings ----------
   async function loadSettings() {
+    loadBlocks().catch(() => {});
     const [s, a] = await Promise.all([api('settings'), api('audit')]);
     const f = $('#settings-form');
     for (const k of ['anon_per_minute', 'anon_per_day', 'default_per_minute', 'default_per_day']) f[k].value = s.settings[k] ?? '';
     f.require_key.checked = !!s.settings.require_key;
     const name = id => (KEYS.find(k => k.id === id) || {}).name;
-    const WHAT = {create_key: 'Created a key', update_key: 'Changed a key', rotate_key: 'Replaced a key', update_settings: 'Changed settings', login: 'Signed in', login_requested: 'Asked for a sign-in link'};
+    const WHAT = {create_key: 'Created a key', update_key: 'Changed a key', rotate_key: 'Replaced a key', update_settings: 'Changed settings', block_ip: 'Blocked an address', unblock_ip: 'Removed a block', login: 'Signed in', login_requested: 'Asked for a sign-in link'};
     $('#audit-table tbody').innerHTML = a.audit.map(x => `<tr><td class="small" style="white-space:nowrap">${stamp(x.at)}</td><td class="small">${esc(x.admin)}</td><td class="small">${esc(WHAT[x.action] || x.action)}${x.key_id && name(x.key_id) ? ': ' + esc(name(x.key_id)) : ''}</td>
       <td class="small muted mono" style="word-break:break-all">${x.detail && x.action !== 'login' ? esc(JSON.stringify(x.detail)) : ''}</td></tr>`).join('') || '<tr><td colspan="4" class="empty">Nothing yet.</td></tr>';
   }
