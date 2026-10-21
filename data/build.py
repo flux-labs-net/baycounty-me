@@ -134,6 +134,13 @@ for c in cras:
     for g in c.get('data_gaps', []):
         out['gaps'].append({'cra': name, 'text': g})
 
+# structured dates next to the free text (date_or_fy is kept): local fiscal years run Oct 1 - Sep 30
+import sys
+sys.path.insert(0, 'entities')
+import ids
+for q in out['payments']:
+    q.update(ids.date_fields(q.get('date_or_fy')))
+
 json.dump(out, open('merged.json', 'w'), indent=1)
 from collections import Counter
 print(len(out['payments']), Counter((p['cra'], p['status'], p['count']) for p in out['payments']))

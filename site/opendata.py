@@ -56,6 +56,24 @@ def add_person_id(did, rows):
     return rows
 
 
+# free-text date column -> structured date_start / date_end / date_precision next to it (the text is kept)
+DATE_COL = {'cra-payments': 'date_or_fy', 'sales-tax-projects': 'fiscal_years', 'officials-pay': 'year', 'debt': 'fy', 'audit-findings': 'fy',
+            'salary-positions': 'fiscal_year', 'salary-leaders': ('fiscal_year', 'as_of'), 'budget-detail': 'fiscal_year', 'budget-per-resident': 'fiscal_year',
+            'fees-assessments': 'fiscal_year', 'bed-tax-collections': 'fy'}
+
+
+def add_dates(did, rows):
+    cols = DATE_COL.get(did)
+    if not cols:
+        return rows
+    cols = (cols,) if isinstance(cols, str) else cols
+    for r in rows:
+        fy_start = (ids.gov(r.get('gov_id') or '') or {}).get('fy_start_month', 10)
+        val = next((r.get(c) for c in cols if r.get(c) not in (None, '')), None)
+        r.update(ids.date_fields(val, fy_start))
+    return rows
+
+
 def add_gov_id(did, rows):
     cols = GOV_COLS.get(did, ['government', 'gov'])
     add_vendor_id(did, rows)
@@ -70,7 +88,7 @@ def add_gov_id(did, rows):
             if g:
                 break
         r['gov_id'] = g
-    return rows
+    return add_dates(did, rows)
 
 
 def _j(*p):

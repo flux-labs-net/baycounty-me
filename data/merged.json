@@ -169,7 +169,10 @@
    "city": "Panama City",
    "status": "Committed",
    "count": false,
-   "overlap": "Total of the five rebate awards listed separately"
+   "overlap": "Total of the five rebate awards listed separately",
+   "date_start": "2024-12",
+   "date_end": "2024-12",
+   "date_precision": "month"
   },
   {
    "payee": "Owner of 436 Harrison Ave (not named)",
@@ -191,7 +194,10 @@
    "city": "Panama City",
    "status": "Committed",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2024-12",
+   "date_end": "2024-12",
+   "date_precision": "month"
   },
   {
    "payee": "Owner of 445 Grace Ave (not named)",
@@ -213,7 +219,10 @@
    "city": "Panama City",
    "status": "Committed",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2024-12",
+   "date_end": "2024-12",
+   "date_precision": "month"
   },
   {
    "payee": "Owner of 401 E 6th St (Acorns to Oaks Academy site; owner not named)",
@@ -235,7 +244,10 @@
    "city": "Panama City",
    "status": "Committed",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2024-12",
+   "date_end": "2024-12",
+   "date_precision": "month"
   },
   {
    "payee": "Owner of 724/728 Magnolia Ave (not named)",
@@ -257,7 +269,10 @@
    "city": "Panama City",
    "status": "Committed",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2024-12",
+   "date_end": "2024-12",
+   "date_precision": "month"
   },
   {
    "payee": "Owner of 542 Harrison Ave (not named)",
@@ -279,7 +294,10 @@
    "city": "Panama City",
    "status": "Committed",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2024-12",
+   "date_end": "2024-12",
+   "date_precision": "month"
   },
   {
    "payee": "Inland Construction & Engineering (bid awarded May 28, 2024)",
@@ -301,7 +319,10 @@
    "city": "Panama City",
    "status": "Budgeted",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2023-10-01",
+   "date_end": "2026-09-30",
+   "date_precision": "range"
   },
   {
    "payee": "City of Panama City (2008 park purchase)",
@@ -323,7 +344,10 @@
    "city": "Panama City",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2008",
+   "date_end": "2022-09-30",
+   "date_precision": "range"
   },
   {
    "payee": "Not stated",
@@ -345,7 +369,10 @@
    "city": "Panama City",
    "status": "Budgeted",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2023-10-01",
+   "date_end": "2026-09-30",
+   "date_precision": "range"
   },
   {
    "payee": "Not stated (bid award for six streets)",
@@ -367,7 +394,10 @@
    "city": "Panama City",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2013-10-01",
+   "date_end": "2014-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Not stated",
@@ -389,7 +419,10 @@
    "city": "Panama City",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2022-10-01",
+   "date_end": "2023-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Bay Medical / Sacred Heart Health System",
@@ -411,7 +444,10 @@
    "city": "Panama City",
    "status": "Proposed",
    "count": false,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2013-10-01",
+   "date_end": "2014-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Sankofa Group, LLC (buyer; payment to CRA)",
@@ -433,7 +469,10 @@
    "city": "Panama City",
    "status": "Incoming",
    "count": false,
-   "overlap": "Land sale offer to the CRA (money in, not spending)"
+   "overlap": "Land sale offer to the CRA (money in, not spending)",
+   "date_start": "2025-02-27",
+   "date_end": "2025-07",
+   "date_precision": "range"
   },
   {
    "payee": "Not stated",
@@ -455,7 +494,10 @@
    "city": "Panama City",
    "status": "Budgeted",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2023-10-01",
+   "date_end": "2026-09-30",
+   "date_precision": "range"
   },
   {
    "payee": "Not stated (seller not named)",
@@ -477,7 +519,10 @@
    "city": "Panama City",
    "status": "Spent",
    "count": false,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2017-04",
+   "date_end": "2017-04",
+   "date_precision": "month"
   },
   {
    "payee": "Seller not named",
@@ -499,7 +544,10 @@
    "city": "Panama City",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2013-10-01",
+   "date_end": "2014-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "City of Panama City Parks, Culture and Recreation Dept.",
@@ -521,7 +569,10 @@
    "city": "Panama City",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2023-10-01",
+   "date_end": "2024-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "City of Panama City Parks, Culture and Recreation Dept.",
@@ -543,7 +594,10 @@
    "city": "Panama City",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2024-10-01",
+   "date_end": "2025-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Panama City Police Department",
@@ -565,7 +619,10 @@
    "city": "Panama City",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2013-10-01",
+   "date_end": "2014-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Panama City Police Department",
@@ -587,7 +644,10 @@
    "city": "Panama City",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2009-10-01",
+   "date_end": "2010-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "A.D. Harris Improvement Society, Inc.",
@@ -609,7 +669,10 @@
    "city": "Panama City",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2010-10-01",
+   "date_end": "2011-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Not stated",
@@ -631,7 +694,10 @@
    "city": "Panama City",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2021-10-01",
+   "date_end": "2022-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Not stated",
@@ -653,7 +719,10 @@
    "city": "Panama City",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2021-10-01",
+   "date_end": "2022-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "FUSUS (camera program) / 20 participating businesses",
@@ -675,7 +744,10 @@
    "city": "Panama City",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2021-10-01",
+   "date_end": "2022-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Not stated",
@@ -697,7 +769,10 @@
    "city": "Panama City",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2020-10-01",
+   "date_end": "2021-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Not stated (contractor)",
@@ -719,7 +794,10 @@
    "city": "Panama City",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2023-10-01",
+   "date_end": "2024-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Not stated",
@@ -741,7 +819,10 @@
    "city": "Panama City",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2024-10-01",
+   "date_end": "2025-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Not stated",
@@ -763,7 +844,10 @@
    "city": "Panama City",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2022-10-01",
+   "date_end": "2025-09-30",
+   "date_precision": "range"
   },
   {
    "payee": "Beach Drive PC Holdings LLC (George Kingston)",
@@ -785,7 +869,10 @@
    "city": "Panama City",
    "status": "Incoming",
    "count": false,
-   "overlap": "Payment to the City in a land swap, not CRA spending"
+   "overlap": "Payment to the City in a land swap, not CRA spending",
+   "date_start": null,
+   "date_end": "2022",
+   "date_precision": "approx"
   },
   {
    "payee": "Glenwood homeowners (via CRA program)",
@@ -807,7 +894,10 @@
    "city": "Panama City",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2023-10-01",
+   "date_end": "2024-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "World Changers / First Baptist Church of Panama City",
@@ -829,7 +919,10 @@
    "city": "Panama City",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2016-10-01",
+   "date_end": "2017-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "World Changers / First Baptist Church of Panama City",
@@ -851,7 +944,10 @@
    "city": "Panama City",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2017-10-01",
+   "date_end": "2018-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "World Changers Organization",
@@ -873,7 +969,10 @@
    "city": "Panama City",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2024-10-01",
+   "date_end": "2025-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Charlie Coram's Place",
@@ -895,7 +994,10 @@
    "city": "Panama City",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2023-10-01",
+   "date_end": "2024-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Acorns to Oaks Academy",
@@ -917,7 +1019,10 @@
    "city": "Panama City",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2023-10-01",
+   "date_end": "2024-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Lady Loran, LLC",
@@ -939,7 +1044,10 @@
    "city": "Panama City",
    "status": "Committed",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2023-10-01",
+   "date_end": "2024-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Purpose Brewed, LLC",
@@ -961,7 +1069,10 @@
    "city": "Panama City",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2023-10-01",
+   "date_end": "2024-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Ink Trax (Old Coke Building)",
@@ -983,7 +1094,10 @@
    "city": "Panama City",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2010-10-01",
+   "date_end": "2011-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Absolute Business Solutions",
@@ -1005,7 +1119,10 @@
    "city": "Panama City",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2010-10-01",
+   "date_end": "2011-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Owners of 1137 Beck Ave",
@@ -1027,7 +1144,10 @@
    "city": "Panama City",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2016-10-01",
+   "date_end": "2017-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Lake Ware Apartments",
@@ -1049,7 +1169,10 @@
    "city": "Panama City",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2017-10-01",
+   "date_end": "2018-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Jani's Ceramics",
@@ -1071,7 +1194,10 @@
    "city": "Panama City",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2009-10-01",
+   "date_end": "2010-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Layla's Gelato",
@@ -1093,7 +1219,10 @@
    "city": "Panama City",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2010-10",
+   "date_end": "2010-10",
+   "date_precision": "month"
   },
   {
    "payee": "13 Downtown businesses (not named)",
@@ -1115,7 +1244,10 @@
    "city": "Panama City",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2013-10-01",
+   "date_end": "2014-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "12 Downtown North businesses (not named)",
@@ -1137,7 +1269,10 @@
    "city": "Panama City",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2013-10-01",
+   "date_end": "2014-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Downtown North homeowners (12, not named)",
@@ -1159,7 +1294,10 @@
    "city": "Panama City",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2013-10-01",
+   "date_end": "2014-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Downtown businesses (not named)",
@@ -1181,7 +1319,10 @@
    "city": "Panama City",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2014-10-01",
+   "date_end": "2015-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "St. Andrews businesses (3, not named)",
@@ -1203,7 +1344,10 @@
    "city": "Panama City",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2013-10-01",
+   "date_end": "2014-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Downtown businesses incl. 424 Harrison Ave (4 grants)",
@@ -1225,7 +1369,10 @@
    "city": "Panama City",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2016-10-01",
+   "date_end": "2017-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Homeowner at 316 Park Ave",
@@ -1247,7 +1394,10 @@
    "city": "Panama City",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2016-10-01",
+   "date_end": "2017-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Historic St. Andrews Waterfront Partnership",
@@ -1269,7 +1419,10 @@
    "city": "Panama City",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2023-10-01",
+   "date_end": "2024-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Historic St. Andrews Waterfront Partnership",
@@ -1291,7 +1444,10 @@
    "city": "Panama City",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2014-10-01",
+   "date_end": "2015-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Downtown Improvement Board",
@@ -1313,7 +1469,10 @@
    "city": "Panama City",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2014-10-01",
+   "date_end": "2015-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "City of Panama City (Harrison Ave Streetscape bond repayment)",
@@ -1335,7 +1494,10 @@
    "city": "Panama City",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2016-10-01",
+   "date_end": "2017-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Not stated",
@@ -1357,7 +1519,10 @@
    "city": "Panama City",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2009-10-01",
+   "date_end": "2010-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Not stated",
@@ -1379,7 +1544,10 @@
    "city": "Panama City",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2009-10-01",
+   "date_end": "2010-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Not stated",
@@ -1401,7 +1569,10 @@
    "city": "Panama City",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2013-10-01",
+   "date_end": "2014-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Not stated",
@@ -1423,7 +1594,10 @@
    "city": "Panama City",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2023-10-01",
+   "date_end": "2026-09-30",
+   "date_precision": "range"
   },
   {
    "payee": "Not stated (Kiwanis contributed $175,000)",
@@ -1445,7 +1619,10 @@
    "city": "Panama City",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2024-10-01",
+   "date_end": "2025-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Not stated",
@@ -1467,7 +1644,10 @@
    "city": "Panama City",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2025-10-01",
+   "date_end": "2026-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Not stated (FDOT grant $500,000)",
@@ -1489,7 +1669,10 @@
    "city": "Panama City",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2024-10-01",
+   "date_end": "2025-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Not stated (FDOT grant $300,000)",
@@ -1511,7 +1694,10 @@
    "city": "Panama City",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2023-10-01",
+   "date_end": "2024-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Not stated (FDOT grant $250,000)",
@@ -1533,7 +1719,10 @@
    "city": "Panama City",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2024-10-01",
+   "date_end": "2025-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Not stated",
@@ -1555,7 +1744,10 @@
    "city": "Panama City",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2024-10-01",
+   "date_end": "2025-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Retail Strategies (consultant)",
@@ -1577,7 +1769,10 @@
    "city": "Panama City",
    "status": "Budgeted",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2024-10-01",
+   "date_end": "2025-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Incremental Development Alliance (consultant)",
@@ -1599,7 +1794,10 @@
    "city": "Panama City",
    "status": "Budgeted",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2025-10-01",
+   "date_end": "2026-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "GAI Consultants, Community Solutions Group",
@@ -1621,7 +1819,10 @@
    "city": "Panama City",
    "status": "Spent",
    "count": false,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2024",
+   "date_end": "2025",
+   "date_precision": "range"
   },
   {
    "payee": "Not stated",
@@ -1643,7 +1844,10 @@
    "city": "Panama City",
    "status": "Budgeted",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2025-10-01",
+   "date_end": "2026-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Not stated",
@@ -1665,7 +1869,10 @@
    "city": "Panama City",
    "status": "Budgeted",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2025-10-01",
+   "date_end": "2026-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Not stated",
@@ -1687,7 +1894,10 @@
    "city": "Panama City",
    "status": "Budgeted",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2025-10-01",
+   "date_end": "2026-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Not stated",
@@ -1709,7 +1919,10 @@
    "city": "Panama City",
    "status": "Budgeted",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2025-10-01",
+   "date_end": "2026-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "City of Panama City (paid by the CRA; much of the work goes to outside contractors)",
@@ -1731,7 +1944,10 @@
    "city": "Panama City",
    "status": "Committed",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2026-03",
+   "date_end": "2027-09-30",
+   "date_precision": "range"
   },
   {
    "payee": "Not stated",
@@ -1753,7 +1969,10 @@
    "city": "Panama City",
    "status": "Proposed",
    "count": false,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2026-04",
+   "date_end": "2026-04",
+   "date_precision": "month"
   },
   {
    "payee": "BCL Civil Contractors",
@@ -1775,7 +1994,10 @@
    "city": "Lynn Haven",
    "status": "Committed",
    "count": false,
-   "overlap": "Mostly FDOT grant money; CRA share not stated"
+   "overlap": "Mostly FDOT grant money; CRA share not stated",
+   "date_start": "2026-01-13",
+   "date_end": "2026-01-13",
+   "date_precision": "day"
   },
   {
    "payee": "Contractor(s) not named",
@@ -1797,7 +2019,10 @@
    "city": "Lynn Haven",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2024-10-01",
+   "date_end": "2025-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Contractor not named",
@@ -1819,7 +2044,10 @@
    "city": "Lynn Haven",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2023-10-01",
+   "date_end": "2024-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Contractor not named",
@@ -1841,7 +2069,10 @@
    "city": "Lynn Haven",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2022-10-01",
+   "date_end": "2023-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Contractor not named",
@@ -1863,7 +2094,10 @@
    "city": "Lynn Haven",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2023-10-01",
+   "date_end": "2024-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Contractor not named",
@@ -1885,7 +2119,10 @@
    "city": "Lynn Haven",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2023-10-01",
+   "date_end": "2024-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Contractor not named",
@@ -1907,7 +2144,10 @@
    "city": "Lynn Haven",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2023-10-01",
+   "date_end": "2024-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Vendor not named",
@@ -1929,7 +2169,10 @@
    "city": "Lynn Haven",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2023-10-01",
+   "date_end": "2024-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Six residential property owners (not named)",
@@ -1951,7 +2194,10 @@
    "city": "Lynn Haven",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2023-10-01",
+   "date_end": "2024-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Three homeowners (not named)",
@@ -1973,7 +2219,10 @@
    "city": "Lynn Haven",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2023-10-01",
+   "date_end": "2024-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Local business (not named)",
@@ -1995,7 +2244,10 @@
    "city": "Lynn Haven",
    "status": "Spent",
    "count": false,
-   "overlap": "May be the same storefront grant reported for FY2021"
+   "overlap": "May be the same storefront grant reported for FY2021",
+   "date_start": "2021-10-01",
+   "date_end": "2022-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Four residential property owners (not named)",
@@ -2017,7 +2269,10 @@
    "city": "Lynn Haven",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2021-10-01",
+   "date_end": "2022-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Local business (not named)",
@@ -2039,7 +2294,10 @@
    "city": "Lynn Haven",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2020-10-01",
+   "date_end": "2021-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Seven residential property owners (not named)",
@@ -2061,7 +2319,10 @@
    "city": "Lynn Haven",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2020-10-01",
+   "date_end": "2021-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Contractors not named",
@@ -2083,7 +2344,10 @@
    "city": "Lynn Haven",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2020-10-01",
+   "date_end": "2021-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Three local businesses (not named)",
@@ -2105,7 +2369,10 @@
    "city": "Lynn Haven",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2019-10-01",
+   "date_end": "2020-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Roberts Hall and McMullin Library restoration projects",
@@ -2127,7 +2394,10 @@
    "city": "Lynn Haven",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2019-10-01",
+   "date_end": "2020-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Contractors not named",
@@ -2149,7 +2419,10 @@
    "city": "Lynn Haven",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2019-10-01",
+   "date_end": "2020-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Residential property owners (not named)",
@@ -2171,7 +2444,10 @@
    "city": "Lynn Haven",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2019-10-01",
+   "date_end": "2020-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Contractor not named",
@@ -2193,7 +2469,10 @@
    "city": "Lynn Haven",
    "status": "Budgeted",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2017-10-01",
+   "date_end": "2018-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Contractor not named",
@@ -2215,7 +2494,10 @@
    "city": "Lynn Haven",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2016-10-01",
+   "date_end": "2017-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Hardware store and other storefront applicants (not named)",
@@ -2237,7 +2519,10 @@
    "city": "Lynn Haven",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2016-10-01",
+   "date_end": "2017-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Grant recipient(s) not named",
@@ -2259,7 +2544,10 @@
    "city": "Lynn Haven",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2018-10-01",
+   "date_end": "2019-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Contractor not named",
@@ -2281,7 +2569,10 @@
    "city": "Lynn Haven",
    "status": "Budgeted",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2022-10-01",
+   "date_end": "2023-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Vendor not named",
@@ -2303,7 +2594,10 @@
    "city": "Lynn Haven",
    "status": "Budgeted",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2022-10-01",
+   "date_end": "2023-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Lynn Haven Police Department",
@@ -2325,7 +2619,10 @@
    "city": "Lynn Haven",
    "status": "Budgeted",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2023-10-01",
+   "date_end": "2024-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Storefront program applicants (not named)",
@@ -2347,7 +2644,10 @@
    "city": "Lynn Haven",
    "status": "Budgeted",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2023-10-01",
+   "date_end": "2024-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Contractor not named",
@@ -2369,7 +2669,10 @@
    "city": "Lynn Haven",
    "status": "Budgeted",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2023-10-01",
+   "date_end": "2024-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "City of Lynn Haven (CRA Director and staff)",
@@ -2391,7 +2694,10 @@
    "city": "Lynn Haven",
    "status": "Budgeted",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2024-10-01",
+   "date_end": "2025-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Not applicable (city-led design; CRA dollars contemplated)",
@@ -2413,7 +2719,10 @@
    "city": "Lynn Haven",
    "status": "Not CRA-funded",
    "count": false,
-   "overlap": "Mostly state and federal grant money"
+   "overlap": "Mostly state and federal grant money",
+   "date_start": "2021",
+   "date_end": "2026",
+   "date_precision": "range"
   },
   {
    "payee": "South Thomas Drive / Front Beach Road Segment 1 contractor (not named in source)",
@@ -2435,7 +2744,10 @@
    "city": "Panama City Beach",
    "status": "Spent",
    "count": false,
-   "overlap": "Included in the $15.4M South Thomas Dr project total"
+   "overlap": "Included in the $15.4M South Thomas Dr project total",
+   "date_start": "2009-09",
+   "date_end": "2011-11",
+   "date_precision": "range"
   },
   {
    "payee": "Various (South Thomas Dr / FBR Segment 1 project total)",
@@ -2457,7 +2769,10 @@
    "city": "Panama City Beach",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2013",
+   "date_end": "2013",
+   "date_precision": "year"
   },
   {
    "payee": "Richard Jackson Blvd construction contractor (not named in source)",
@@ -2479,7 +2794,10 @@
    "city": "Panama City Beach",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2009",
+   "date_end": "2009",
+   "date_precision": "approx"
   },
   {
    "payee": "PBS&J",
@@ -2501,7 +2819,10 @@
    "city": "Panama City Beach",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2009",
+   "date_end": "2010",
+   "date_precision": "approx"
   },
   {
    "payee": "GAC Contractors, Inc.",
@@ -2523,7 +2844,10 @@
    "city": "Panama City Beach",
    "status": "Spent",
    "count": false,
-   "overlap": "Included in the $16.0M Segment 2 project total"
+   "overlap": "Included in the $16.0M Segment 2 project total",
+   "date_start": "2016-09-22",
+   "date_end": "2016-09-22",
+   "date_precision": "day"
   },
   {
    "payee": "GAC Contractors, Inc.",
@@ -2545,7 +2869,10 @@
    "city": "Panama City Beach",
    "status": "Spent",
    "count": false,
-   "overlap": "Included in the $16.0M Segment 2 project total"
+   "overlap": "Included in the $16.0M Segment 2 project total",
+   "date_start": "2019",
+   "date_end": "2019",
+   "date_precision": "year"
   },
   {
    "payee": "GAC Contractors, Inc.",
@@ -2567,7 +2894,10 @@
    "city": "Panama City Beach",
    "status": "Spent",
    "count": false,
-   "overlap": "Included in the $16.0M Segment 2 project total"
+   "overlap": "Included in the $16.0M Segment 2 project total",
+   "date_start": "2020-06-29",
+   "date_end": "2020-06-29",
+   "date_precision": "day"
   },
   {
    "payee": "Various (Segment 2 project total)",
@@ -2589,7 +2919,10 @@
    "city": "Panama City Beach",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2021-10-01",
+   "date_end": "2022-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Contractor not named in this source (other city records name GAC Contractors, later CWR Contracting)",
@@ -2611,7 +2944,10 @@
    "city": "Panama City Beach",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": null,
+   "date_end": "2024-09-30",
+   "date_precision": "day"
   },
   {
    "payee": "CWR Contracting, Inc.",
@@ -2633,7 +2969,10 @@
    "city": "Panama City Beach",
    "status": "Spent",
    "count": false,
-   "overlap": "Part of the Segment 3 project cost"
+   "overlap": "Part of the Segment 3 project cost",
+   "date_start": "2026-03",
+   "date_end": "2026-03",
+   "date_precision": "month"
   },
   {
    "payee": "CWR Contracting, Inc.",
@@ -2655,7 +2994,10 @@
    "city": "Panama City Beach",
    "status": "Spent",
    "count": false,
-   "overlap": "Part of the Segment 3 project cost"
+   "overlap": "Part of the Segment 3 project cost",
+   "date_start": "2023-07-13",
+   "date_end": "2023-07-13",
+   "date_precision": "day"
   },
   {
    "payee": "Dewberry Engineers, Inc.",
@@ -2677,7 +3019,10 @@
    "city": "Panama City Beach",
    "status": "Spent",
    "count": false,
-   "overlap": "Part of the Segment 3 project cost"
+   "overlap": "Part of the Segment 3 project cost",
+   "date_start": "2021-03",
+   "date_end": "2021-03",
+   "date_precision": "month"
   },
   {
    "payee": "Dewberry Engineers, Inc.",
@@ -2699,7 +3044,10 @@
    "city": "Panama City Beach",
    "status": "Spent",
    "count": false,
-   "overlap": "Included in the Segment 4.1 project spending"
+   "overlap": "Included in the Segment 4.1 project spending",
+   "date_start": "2019",
+   "date_end": "2019",
+   "date_precision": "year"
   },
   {
    "payee": "Dewberry Engineers, Inc.",
@@ -2721,7 +3069,10 @@
    "city": "Panama City Beach",
    "status": "Spent",
    "count": false,
-   "overlap": "Included in the Segment 4.1 project spending"
+   "overlap": "Included in the Segment 4.1 project spending",
+   "date_start": "2019",
+   "date_end": "2019",
+   "date_precision": "year"
   },
   {
    "payee": "Dewberry Engineers, Inc.",
@@ -2743,7 +3094,10 @@
    "city": "Panama City Beach",
    "status": "Spent",
    "count": false,
-   "overlap": "Included in the Segment 4.1 project spending"
+   "overlap": "Included in the Segment 4.1 project spending",
+   "date_start": "2021-07",
+   "date_end": "2021-07",
+   "date_precision": "month"
   },
   {
    "payee": "Dewberry Engineers, Inc.",
@@ -2765,7 +3119,10 @@
    "city": "Panama City Beach",
    "status": "Spent",
    "count": false,
-   "overlap": "Included in the Segment 4.2 project spending"
+   "overlap": "Included in the Segment 4.2 project spending",
+   "date_start": "2020-05-14",
+   "date_end": "2020-05-14",
+   "date_precision": "day"
   },
   {
    "payee": "Dewberry Engineers, Inc.",
@@ -2787,7 +3144,10 @@
    "city": "Panama City Beach",
    "status": "Spent",
    "count": false,
-   "overlap": "Included in the Segment 4.2 project spending"
+   "overlap": "Included in the Segment 4.2 project spending",
+   "date_start": "2021-05-13",
+   "date_end": "2021-05-13",
+   "date_precision": "day"
   },
   {
    "payee": "Dewberry Engineers, Inc.",
@@ -2809,7 +3169,10 @@
    "city": "Panama City Beach",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2019-04",
+   "date_end": "2019-04",
+   "date_precision": "month"
   },
   {
    "payee": "Volkert, Inc.",
@@ -2831,7 +3194,10 @@
    "city": "Panama City Beach",
    "status": "Spent",
    "count": false,
-   "overlap": "Included in the Segment 4.3 project spending"
+   "overlap": "Included in the Segment 4.3 project spending",
+   "date_start": "2021-07",
+   "date_end": "2021-07",
+   "date_precision": "month"
   },
   {
    "payee": "McKim & Creed",
@@ -2853,7 +3219,10 @@
    "city": "Panama City Beach",
    "status": "Spent",
    "count": false,
-   "overlap": "Included in the Segment 4.3 project spending"
+   "overlap": "Included in the Segment 4.3 project spending",
+   "date_start": "2023",
+   "date_end": "2023",
+   "date_precision": "year"
   },
   {
    "payee": "Chandler and Associates",
@@ -2875,7 +3244,10 @@
    "city": "Panama City Beach",
    "status": "Spent",
    "count": false,
-   "overlap": "Included in the Segment 4.2 project spending"
+   "overlap": "Included in the Segment 4.2 project spending",
+   "date_start": "2023",
+   "date_end": "2023",
+   "date_precision": "year"
   },
   {
    "payee": "The Corradino Group",
@@ -2897,7 +3269,10 @@
    "city": "Panama City Beach",
    "status": "Spent",
    "count": false,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2022",
+   "date_end": "2024",
+   "date_precision": "range"
   },
   {
    "payee": "Gulf Coast Utility Contractors, LLC",
@@ -2919,7 +3294,10 @@
    "city": "Panama City Beach",
    "status": "Not CRA-funded",
    "count": false,
-   "overlap": "Reported as grant-funded, not CRA money"
+   "overlap": "Reported as grant-funded, not CRA money",
+   "date_start": "2023-04-13",
+   "date_end": "2023-04-13",
+   "date_precision": "day"
   },
   {
    "payee": "Atkins North America, Inc.",
@@ -2941,7 +3319,10 @@
    "city": "Panama City Beach",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2021-03-25",
+   "date_end": "2021-03-25",
+   "date_precision": "day"
   },
   {
    "payee": "Rotolo Consultants, Inc.",
@@ -2963,7 +3344,10 @@
    "city": "Panama City Beach",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2020-05-28",
+   "date_end": "2020-05-28",
+   "date_precision": "day"
   },
   {
    "payee": "Metro Power, Inc.",
@@ -2985,7 +3369,10 @@
    "city": "Panama City Beach",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2020-05-14",
+   "date_end": "2020-05-14",
+   "date_precision": "day"
   },
   {
    "payee": "L&R Contracting",
@@ -3007,7 +3394,10 @@
    "city": "Panama City Beach",
    "status": "Spent",
    "count": false,
-   "overlap": "Resolution does not say CRA; may be city utility funds"
+   "overlap": "Resolution does not say CRA; may be city utility funds",
+   "date_start": "2020-12-10",
+   "date_end": "2020-12-10",
+   "date_precision": "day"
   },
   {
    "payee": "Palmetto Hospitality of PCB, LLC",
@@ -3029,7 +3419,10 @@
    "city": "Panama City Beach",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2021-02",
+   "date_end": "2021-02",
+   "date_precision": "month"
   },
   {
    "payee": "PCBH",
@@ -3051,7 +3444,10 @@
    "city": "Panama City Beach",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2022-04-28",
+   "date_end": "2022-04-28",
+   "date_precision": "day"
   },
   {
    "payee": "Property owners (condemnation, Segment 3 / SR 79)",
@@ -3073,7 +3469,10 @@
    "city": "Panama City Beach",
    "status": "Spent",
    "count": false,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2019-07-11",
+   "date_end": "2020",
+   "date_precision": "range"
   },
   {
    "payee": "Property owners (condemnation, Segment 3)",
@@ -3095,7 +3494,10 @@
    "city": "Panama City Beach",
    "status": "Spent",
    "count": false,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2020-12-10",
+   "date_end": "2020-12-10",
+   "date_precision": "day"
   },
   {
    "payee": "Property owners / sellers (land line, various)",
@@ -3117,7 +3519,10 @@
    "city": "Panama City Beach",
    "status": "Budgeted",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2023-10-01",
+   "date_end": "2024-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Property owners / sellers (land line, various)",
@@ -3139,7 +3544,10 @@
    "city": "Panama City Beach",
    "status": "Budgeted",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2024-10-01",
+   "date_end": "2025-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Various (Segment 4.1 project spending to date)",
@@ -3161,7 +3569,10 @@
    "city": "Panama City Beach",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": null,
+   "date_end": "2024-09-30",
+   "date_precision": "day"
   },
   {
    "payee": "Various (Segment 4.2 project spending to date)",
@@ -3183,7 +3594,10 @@
    "city": "Panama City Beach",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": null,
+   "date_end": "2024-09-30",
+   "date_precision": "day"
   },
   {
    "payee": "Various (Segment 4.3 project spending to date)",
@@ -3205,7 +3619,10 @@
    "city": "Panama City Beach",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": null,
+   "date_end": "2024-09-30",
+   "date_precision": "day"
   },
   {
    "payee": "Various (contractor not named in source)",
@@ -3227,7 +3644,10 @@
    "city": "Panama City Beach",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2023-10",
+   "date_end": "2023-10",
+   "date_precision": "month"
   },
   {
    "payee": "Various (North Thomas Dr project spending to date)",
@@ -3249,7 +3669,10 @@
    "city": "Panama City Beach",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": null,
+   "date_end": "2024-09-30",
+   "date_precision": "day"
   },
   {
    "payee": "Bondholders (Series 2015 and 2020 bonds)",
@@ -3271,7 +3694,10 @@
    "city": "Panama City Beach",
    "status": "Budgeted",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2023-10-01",
+   "date_end": "2024-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Bondholders (Series 2015, 2020 and 2024 bonds)",
@@ -3293,7 +3719,10 @@
    "city": "Panama City Beach",
    "status": "Budgeted",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2024-10-01",
+   "date_end": "2025-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Pier Park Community Development District",
@@ -3315,7 +3744,10 @@
    "city": "Panama City Beach",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2024-10-01",
+   "date_end": "2025-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Pier Park Community Development District",
@@ -3337,7 +3769,10 @@
    "city": "Panama City Beach",
    "status": "Not CRA-funded",
    "count": false,
-   "overlap": "Business tax receipts the City remits to the Pier Park CDD; City money, not CRA spending"
+   "overlap": "Business tax receipts the City remits to the Pier Park CDD; City money, not CRA spending",
+   "date_start": "2021-10-01",
+   "date_end": "2022-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Pier Park Community Development District",
@@ -3359,7 +3794,10 @@
    "city": "Panama City Beach",
    "status": "Not CRA-funded",
    "count": false,
-   "overlap": "Business tax receipts the City remits to the Pier Park CDD; City money, not CRA spending"
+   "overlap": "Business tax receipts the City remits to the Pier Park CDD; City money, not CRA spending",
+   "date_start": "2020-10-01",
+   "date_end": "2021-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "City of Panama City Beach / CRA staff",
@@ -3381,7 +3819,10 @@
    "city": "Panama City Beach",
    "status": "Budgeted",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2024-10-01",
+   "date_end": "2025-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Contractor not named in source",
@@ -3403,7 +3844,10 @@
    "city": "Panama City Beach",
    "status": "Not CRA-funded",
    "count": false,
-   "overlap": "State DEO grant amount obtained for streetlights, not CRA spending"
+   "overlap": "State DEO grant amount obtained for streetlights, not CRA spending",
+   "date_start": "2025",
+   "date_end": "2025",
+   "date_precision": "year"
   },
   {
    "payee": "Keystone Field Services",
@@ -3425,7 +3869,10 @@
    "city": "Panama City Beach",
    "status": "Spent",
    "count": false,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2019",
+   "date_end": "2022",
+   "date_precision": "range"
   },
   {
    "payee": "Morgenstern Phifer Messina",
@@ -3447,7 +3894,10 @@
    "city": "Panama City Beach",
    "status": "Spent",
    "count": false,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2022",
+   "date_end": "2022",
+   "date_precision": "year"
   },
   {
    "payee": "Not named (Rogers Pond spillway replacement contractor)",
@@ -3469,7 +3919,10 @@
    "city": "Callaway",
    "status": "Spent",
    "count": false,
-   "overlap": "Included in FY2025 total capital outlay"
+   "overlap": "Included in FY2025 total capital outlay",
+   "date_start": "2024-10-01",
+   "date_end": "2026-09-30",
+   "date_precision": "range"
   },
   {
    "payee": "Not named (Berthe spillway project)",
@@ -3491,7 +3944,10 @@
    "city": "Callaway",
    "status": "Spent",
    "count": false,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2024-10-01",
+   "date_end": "2025-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Various (not named)",
@@ -3513,7 +3969,10 @@
    "city": "Callaway",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2024-10-01",
+   "date_end": "2025-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Various (not named)",
@@ -3535,7 +3994,10 @@
    "city": "Callaway",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2023-10-01",
+   "date_end": "2024-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Various (not named)",
@@ -3557,7 +4019,10 @@
    "city": "Callaway",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2021-10-01",
+   "date_end": "2022-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Various (not named)",
@@ -3579,7 +4044,10 @@
    "city": "Callaway",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2022-10-01",
+   "date_end": "2023-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Commercial property/business owners in CRA (program)",
@@ -3601,7 +4069,10 @@
    "city": "Callaway",
    "status": "Spent",
    "count": false,
-   "overlap": ""
+   "overlap": "",
+   "date_start": null,
+   "date_end": null,
+   "date_precision": "unknown"
   },
   {
    "payee": "Not named (Springfield Gardens Walking Park improvements)",
@@ -3623,7 +4094,10 @@
    "city": "Springfield",
    "status": "Budgeted",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2026-10-01",
+   "date_end": "2027-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Not named",
@@ -3645,7 +4119,10 @@
    "city": "Springfield",
    "status": "Budgeted",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2025-10-01",
+   "date_end": "2026-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Not named",
@@ -3667,7 +4144,10 @@
    "city": "Springfield",
    "status": "Budgeted",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2025-10-01",
+   "date_end": "2026-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Not named",
@@ -3689,7 +4169,10 @@
    "city": "Springfield",
    "status": "Budgeted",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2025-10-01",
+   "date_end": "2026-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Not named",
@@ -3711,7 +4194,10 @@
    "city": "Springfield",
    "status": "Budgeted",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2025-10-01",
+   "date_end": "2026-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Not named",
@@ -3733,7 +4219,10 @@
    "city": "Springfield",
    "status": "Budgeted",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2026-10-01",
+   "date_end": "2027-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Not named",
@@ -3755,7 +4244,10 @@
    "city": "Springfield",
    "status": "Budgeted",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2025-10-01",
+   "date_end": "2026-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Carr, Riggs & Ingram, LLC",
@@ -3777,7 +4269,10 @@
    "city": "Springfield",
    "status": "Budgeted",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2025-10-01",
+   "date_end": "2026-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Various (not named)",
@@ -3799,7 +4294,10 @@
    "city": "Springfield",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2024-10-01",
+   "date_end": "2025-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "City of Parker General Fund",
@@ -3821,7 +4319,10 @@
    "city": "Parker",
    "status": "Spent",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2024-10-01",
+   "date_end": "2025-09-30",
+   "date_precision": "fiscal_year"
   },
   {
    "payee": "Not named",
@@ -3843,7 +4344,10 @@
    "city": "Parker",
    "status": "Budgeted",
    "count": true,
-   "overlap": ""
+   "overlap": "",
+   "date_start": "2022-10-01",
+   "date_end": "2024-09-30",
+   "date_precision": "range"
   }
  ],
  "budgets": [

@@ -259,6 +259,19 @@ def parse_date(text, fy_start=10):
     t = str(text).strip()
     if not t:
         return None, None, 'unknown'
+    m = re.search(r'year ended (\d{4})-(\d{2})-(\d{2})', t, re.I)
+    if m:
+        y, mo, dd = map(int, m.groups())
+        sm = mo % 12 + 1
+        s = f'{y - 1 if sm > mo else y}-{sm:02d}-01'
+        return s, f'{y}-{mo:02d}-{dd:02d}', 'fiscal_year'
+    # resolution, task-order and change-order numbers look like dates ("Res. 19-76", "Task Order 2019-03"): drop them
+    t = re.sub(r'\b(res\.?|resolution|task order|change order|co)\s*#?\s*[a-z]*\d[\w-]*', ' ', t, flags=re.I)
+    t = re.sub(r'\b(\d{4} roll|since \d{4}( roll)?)\b', ' ', t, flags=re.I)
+    # the text outside parentheses decides; a parenthetical is used only when the rest names no date
+    main = re.sub(r'\([^)]*\)', ' ', t)
+    if re.search(r'\d{4}', main) and main != t:
+        return parse_date(main, fy_start)
     approx = bool(re.match(r'^(c\.|ca\.|circa|about|around)\s', t, re.I))
     toks = []  # (start, end, precision, pos)
     used = []
@@ -268,12 +281,6 @@ def parse_date(text, fy_start=10):
             return
         used.append((m.start(), m.end())); toks.append((s, e, p, m.start()))
 
-    m = re.search(r'year ended (\d{4})-(\d{2})-(\d{2})', t, re.I)
-    if m:
-        y, mo, dd = map(int, m.groups())
-        sm = mo % 12 + 1
-        s = f'{y - 1 if sm > mo else y}-{sm:02d}-01'
-        return s, f'{y}-{mo:02d}-{dd:02d}', 'fiscal_year'
     for m in re.finditer(r'\bFY\s?(\d{4})\s?-\s?(?:FY\s?)?(\d{2,4})\b', t, re.I):
         a, b = int(m.group(1)), m.group(2)
         b = int(b) if len(b) == 4 else int(str(a)[:2] + b)

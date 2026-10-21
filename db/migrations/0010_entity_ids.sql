@@ -69,3 +69,17 @@ create table if not exists people (
 alter table people enable row level security;
 drop policy if exists "public read" on people;
 create policy "public read" on people for select using (true);
+
+-- structured dates next to free-text dates (the text column is kept): ISO date, YYYY-MM or YYYY; precision is
+-- day | month | year | fiscal_year | range | approx | unknown. Local fiscal years run Oct 1 - Sep 30, schools Jul 1 - Jun 30.
+do $$
+declare t text;
+begin
+  foreach t in array array['cra_payments','sales_tax_projects','officials_pay','debt','audit_findings','salary_positions','salary_leaders',
+    'budget_detail','budget_per_resident','fees_assessments','bed_tax_collections']
+  loop
+    execute format('alter table %I add column if not exists date_start text', t);
+    execute format('alter table %I add column if not exists date_end text', t);
+    execute format('alter table %I add column if not exists date_precision text', t);
+  end loop;
+end $$;
