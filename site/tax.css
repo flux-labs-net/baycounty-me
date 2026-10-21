@@ -277,3 +277,6 @@ a.src:hover{color:var(--blue)}
   .card a{color:inherit;text-decoration:none}
   :root:not(#print) .tax{--water:#C9DCEF;--land:#FBFCFD;--landline:#AFC2D8;--city:#EEF1F5;--cityline:#CDD6E1}
 }
+
+.kv.fees{margin-top:6px;padding-top:8px;border-top:1px solid var(--line)}
+.kv.fees dt.span{color:var(--ink);font-weight:500}

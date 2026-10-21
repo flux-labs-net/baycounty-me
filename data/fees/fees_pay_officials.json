@@ -1,0 +1,2073 @@
+{
+  "as_of": "2026-10-20",
+  "scope_note": "Assessments use the 2025 certified non-ad valorem roll (bills mailed Nov 2025 for FY2025-26). Utility rates and officeholders are the most current found as of 2026-10-20. Salaries: EDR statutory figures for FY2025-26 and FY2026-27.",
+  "assessments": [
+    {
+      "government": "Bay County (Board of County Commissioners)",
+      "area": "Countywide developed parcels (roll does not identify city vs unincorporated; FAQ does not limit it to unincorporated)",
+      "name": "Stormwater utility fee - residential (levy code STWR)",
+      "category": "stormwater",
+      "how_charged": "Flat $40 per developed residential parcel; each condominium unit is a separate residential property; DOR land use 1,2,4,5,50. Exempt: qualified senior, disabled veteran and disabled-person homesteads, community cemeteries.",
+      "rate": "$40.00 per residential unit per year",
+      "residential_single_family_amount": 40.0,
+      "roll_2025": {
+        "levy_code": "STWR",
+        "dor_gov_type": "county",
+        "dor_function_code": "2",
+        "parcels_billed": 42113,
+        "total_levied": 1732360.0,
+        "median_per_parcel": 40.0,
+        "p25": 40.0,
+        "p75": 40.0,
+        "min": 40.0,
+        "max": 160.0,
+        "most_common_amounts": [
+          {
+            "amount": 40.0,
+            "parcels": 41165
+          },
+          {
+            "amount": 80.0,
+            "parcels": 738
+          },
+          {
+            "amount": 120.0,
+            "parcels": 172
+          },
+          {
+            "amount": 160.0,
+            "parcels": 38
+          }
+        ],
+        "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Tax%20Roll%20Data%20Files/NAV/2025/NAV%20D/NAVD132506.TXT"
+      },
+      "fiscal_year": "FY2025-26 (2025 roll); rate in place since 2006 roll",
+      "source_url": "https://www.baycountyfl.gov/m/faq?cat=30",
+      "other_sources": [
+        "https://www.baycountyfl.gov/206/Stormwater-Utility",
+        "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Tax%20Roll%20Data%20Files/NAV/2025/NAV%20D/NAVD132506.TXT"
+      ]
+    },
+    {
+      "government": "Bay County (Board of County Commissioners)",
+      "area": "Countywide developed commercial parcels",
+      "name": "Stormwater utility fee - commercial (levy code STWC)",
+      "category": "stormwater",
+      "how_charged": "Flat $200 per developed commercial parcel",
+      "rate": "$200.00 per parcel per year",
+      "residential_single_family_amount": null,
+      "roll_2025": {
+        "levy_code": "STWC",
+        "dor_gov_type": "county",
+        "dor_function_code": "2",
+        "parcels_billed": 1530,
+        "total_levied": 306000.0,
+        "median_per_parcel": 200.0,
+        "p25": 200.0,
+        "p75": 200.0,
+        "min": 200.0,
+        "max": 200.0,
+        "most_common_amounts": [
+          {
+            "amount": 200.0,
+            "parcels": 1530
+          }
+        ],
+        "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Tax%20Roll%20Data%20Files/NAV/2025/NAV%20D/NAVD132506.TXT"
+      },
+      "fiscal_year": "FY2025-26 (2025 roll)",
+      "source_url": "https://www.baycountyfl.gov/m/faq?cat=30"
+    },
+    {
+      "government": "Bay County (Board of County Commissioners)",
+      "area": "Unincorporated Bay County fire MSTU",
+      "name": "MSTU - Fire Services (ad valorem, NOT a non-ad valorem assessment)",
+      "category": "fire",
+      "how_charged": "Ad valorem millage on taxable value: 1.3800 mills for FY2026. Listed here because unincorporated fire is funded by millage, not a per-unit assessment; no county fire NAV appears on the 2025 NAV roll.",
+      "rate": "1.3800 mills ($1.38 per $1,000 taxable value)",
+      "residential_single_family_amount": null,
+      "fiscal_year": "FY2025-26",
+      "source_url": "https://www.baycountyfl.gov/DocumentCenter/View/18735/FY-2026-Final-Budget-Hearing-Presentation-09-16-2025"
+    },
+    {
+      "government": "Bay County (Board of County Commissioners)",
+      "area": "Specific subdivisions (street lighting MSBUs)",
+      "name": "Street lighting assessments (levy codes ALSL1 and BOCA)",
+      "category": "street lighting",
+      "how_charged": "Flat per parcel within each lighting unit (ALSL1 $60.00 x 43 parcels; BOCA $27.00 x 33 parcels). DOR county total for Lighting = $3,471. Unit names not decoded from public listing.",
+      "rate": "ALSL1 $60.00/parcel; BOCA $27.00/parcel",
+      "residential_single_family_amount": null,
+      "roll_2025": [
+        {
+          "levy_code": "ALSL1",
+          "dor_gov_type": "county",
+          "dor_function_code": "5",
+          "parcels_billed": 43,
+          "total_levied": 2580.0,
+          "median_per_parcel": 60.0,
+          "p25": 60.0,
+          "p75": 60.0,
+          "min": 60.0,
+          "max": 60.0,
+          "most_common_amounts": [
+            {
+              "amount": 60.0,
+              "parcels": 43
+            }
+          ],
+          "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Tax%20Roll%20Data%20Files/NAV/2025/NAV%20D/NAVD132506.TXT"
+        },
+        {
+          "levy_code": "BOCA",
+          "dor_gov_type": "county",
+          "dor_function_code": "5",
+          "parcels_billed": 33,
+          "total_levied": 891.0,
+          "median_per_parcel": 27.0,
+          "p25": 27.0,
+          "p75": 27.0,
+          "min": 27.0,
+          "max": 27.0,
+          "most_common_amounts": [
+            {
+              "amount": 27.0,
+              "parcels": 33
+            }
+          ],
+          "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Tax%20Roll%20Data%20Files/NAV/2025/NAV%20D/NAVD132506.TXT"
+        }
+      ],
+      "fiscal_year": "FY2025-26 (2025 roll)",
+      "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Tax%20Roll%20Data%20Files/NAV/2025/NAV%20D/NAVD132506.TXT",
+      "other_sources": [
+        "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Non-Ad%20Valorem%20Reports/2025/2025%20NAV%20by%20County.pdf"
+      ]
+    },
+    {
+      "government": "Bay County (Board of County Commissioners)",
+      "area": "Specific parcels",
+      "name": "Road improvement assessment (levy code OERR)",
+      "category": "road improvement",
+      "how_charged": "Flat $165.68 per parcel, 7 parcels",
+      "rate": "$165.68/parcel",
+      "residential_single_family_amount": null,
+      "roll_2025": {
+        "levy_code": "OERR",
+        "dor_gov_type": "county",
+        "dor_function_code": "9",
+        "parcels_billed": 7,
+        "total_levied": 1159.76,
+        "median_per_parcel": 165.68,
+        "p25": 165.68,
+        "p75": 165.68,
+        "min": 165.68,
+        "max": 165.68,
+        "most_common_amounts": [
+          {
+            "amount": 165.68,
+            "parcels": 7
+          }
+        ],
+        "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Tax%20Roll%20Data%20Files/NAV/2025/NAV%20D/NAVD132506.TXT"
+      },
+      "fiscal_year": "FY2025-26 (2025 roll)",
+      "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Tax%20Roll%20Data%20Files/NAV/2025/NAV%20D/NAVD132506.TXT"
+    },
+    {
+      "government": "Bay County (Board of County Commissioners) - per DOR classification",
+      "area": "20 parcels",
+      "name": "Levy code PPCD (DOR function: community development/redevelopment)",
+      "category": "special district / community development",
+      "how_charged": "Parcel-specific amounts ($1,003.38 to $199,609.02); total $1,013,419.22. Code likely refers to the Pier Park Community Development District (Panama City Beach) - NOT confirmed; DOR files it under the county.",
+      "rate": "varies by parcel",
+      "residential_single_family_amount": null,
+      "roll_2025": {
+        "levy_code": "PPCD",
+        "dor_gov_type": "county",
+        "dor_function_code": "1",
+        "parcels_billed": 20,
+        "total_levied": 1013419.22,
+        "median_per_parcel": 39179.95,
+        "p25": 6394.7,
+        "p75": 91275.05,
+        "min": 1003.38,
+        "max": 199609.02,
+        "most_common_amounts": [
+          {
+            "amount": 1003.38,
+            "parcels": 1
+          },
+          {
+            "amount": 3801.29,
+            "parcels": 1
+          },
+          {
+            "amount": 3910.0,
+            "parcels": 1
+          },
+          {
+            "amount": 5457.52,
+            "parcels": 1
+          }
+        ],
+        "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Tax%20Roll%20Data%20Files/NAV/2025/NAV%20D/NAVD132506.TXT"
+      },
+      "fiscal_year": "FY2025-26 (2025 roll)",
+      "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Tax%20Roll%20Data%20Files/NAV/2025/NAV%20D/NAVD132506.TXT"
+    },
+    {
+      "government": "Bay County (Board of County Commissioners)",
+      "area": "Individual parcels",
+      "name": "Liens / other (levy codes LIEN, PCN)",
+      "category": "other (liens, lot clearing etc.)",
+      "how_charged": "Parcel-specific; LIEN 241 parcels $312,691.90; PCN 17 parcels $22,155.28. DOR county 'Other' total $334,847.",
+      "rate": "varies",
+      "residential_single_family_amount": null,
+      "roll_2025": [
+        {
+          "levy_code": "LIEN",
+          "dor_gov_type": "county",
+          "dor_function_code": "10",
+          "parcels_billed": 241,
+          "total_levied": 312691.9,
+          "median_per_parcel": 1121.79,
+          "p25": 561.26,
+          "p75": 1610.89,
+          "min": 0.0,
+          "max": 10845.45,
+          "most_common_amounts": [
+            {
+              "amount": 0.0,
+              "parcels": 8
+            },
+            {
+              "amount": 1309.9,
+              "parcels": 2
+            },
+            {
+              "amount": 62.07,
+              "parcels": 1
+            },
+            {
+              "amount": 76.98,
+              "parcels": 1
+            }
+          ],
+          "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Tax%20Roll%20Data%20Files/NAV/2025/NAV%20D/NAVD132506.TXT"
+        },
+        {
+          "levy_code": "PCN",
+          "dor_gov_type": "county",
+          "dor_function_code": "10",
+          "parcels_billed": 17,
+          "total_levied": 22155.28,
+          "median_per_parcel": 878.83,
+          "p25": 659.84,
+          "p75": 1321.6,
+          "min": 0.0,
+          "max": 4896.94,
+          "most_common_amounts": [
+            {
+              "amount": 0.0,
+              "parcels": 1
+            },
+            {
+              "amount": 617.5,
+              "parcels": 1
+            },
+            {
+              "amount": 645.84,
+              "parcels": 1
+            },
+            {
+              "amount": 646.02,
+              "parcels": 1
+            }
+          ],
+          "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Tax%20Roll%20Data%20Files/NAV/2025/NAV%20D/NAVD132506.TXT"
+        }
+      ],
+      "fiscal_year": "FY2025-26 (2025 roll)",
+      "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Tax%20Roll%20Data%20Files/NAV/2025/NAV%20D/NAVD132506.TXT"
+    },
+    {
+      "government": "City of Panama City",
+      "area": "City of Panama City",
+      "name": "Fire service assessment (levy code PCF)",
+      "category": "fire",
+      "how_charged": "By property type: homesteaded residential dwelling unit $150 (maximum); non-homestead residential (e.g., rentals) $300 per unit; vacant land $24.51 per parcel (FY2024-25 figure, matches 2025 roll); commercial/non-residential by building square footage and fire-response factors (per-sq-ft rates not found).",
+      "rate": "$150 homestead unit / $300 non-homestead unit / $24.51 vacant parcel",
+      "residential_single_family_amount": {
+        "homestead": 150.0,
+        "non_homestead": 300.0
+      },
+      "roll_2025": {
+        "levy_code": "PCF",
+        "dor_gov_type": "municipality",
+        "dor_function_code": "3",
+        "parcels_billed": 17667,
+        "total_levied": 5755249.49,
+        "median_per_parcel": 150.0,
+        "p25": 150.0,
+        "p75": 300.0,
+        "min": 0.0,
+        "max": 110812.3,
+        "most_common_amounts": [
+          {
+            "amount": 150.0,
+            "parcels": 6383
+          },
+          {
+            "amount": 300.0,
+            "parcels": 5109
+          },
+          {
+            "amount": 24.51,
+            "parcels": 3949
+          },
+          {
+            "amount": 600.0,
+            "parcels": 322
+          }
+        ],
+        "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Tax%20Roll%20Data%20Files/NAV/2025/NAV%20D/NAVD132506.TXT"
+      },
+      "fiscal_year": "FY2025-26 (rates held flat from FY2024-25)",
+      "source_url": "https://www.wjhg.com/2025/09/10/updated-fire-service-assessment-passed/",
+      "other_sources": [
+        "https://www.mypanhandle.com/news/local-news/bay-county/panama-city-commissioners-speak-about-controversial-fire-assessment-fee/amp/",
+        "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Tax%20Roll%20Data%20Files/NAV/2025/NAV%20D/NAVD132506.TXT"
+      ]
+    },
+    {
+      "government": "City of Panama City Beach",
+      "area": "City of Panama City Beach",
+      "name": "Fire service assessment (levy code PBF)",
+      "category": "fire",
+      "how_charged": "Two tiers: Tier 1 per $1,000 of improvement value (Property Appraiser) + Tier 2 flat per tax parcel. Noticed MAXIMUM FY2025-26 rates: $0.78 per $1,000 improvement value + $95.66 per parcel (4% over FY2024-25).",
+      "rate": "$0.78/$1,000 improvement value + $95.66/parcel (noticed maximum)",
+      "residential_single_family_amount": null,
+      "residential_note": "Depends on improvement value. Median billed per parcel on 2025 roll = $348.68 (all parcel types).",
+      "roll_2025": {
+        "levy_code": "PBF",
+        "dor_gov_type": "municipality",
+        "dor_function_code": "3",
+        "parcels_billed": 20630,
+        "total_levied": 7916909.53,
+        "median_per_parcel": 348.68,
+        "p25": 256.73,
+        "p75": 471.77,
+        "min": 0.0,
+        "max": 8081.89,
+        "most_common_amounts": [
+          {
+            "amount": 103.17,
+            "parcels": 1071
+          },
+          {
+            "amount": 527.04,
+            "parcels": 432
+          },
+          {
+            "amount": 348.68,
+            "parcels": 375
+          },
+          {
+            "amount": 323.59,
+            "parcels": 256
+          }
+        ],
+        "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Tax%20Roll%20Data%20Files/NAV/2025/NAV%20D/NAVD132506.TXT"
+      },
+      "fiscal_year": "FY2025-26",
+      "source_url": "https://www.pcbfl.gov/about-us/fiscal-year-2024-25-special-assessment-info",
+      "other_sources": [
+        "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Tax%20Roll%20Data%20Files/NAV/2025/NAV%20D/NAVD132506.TXT"
+      ],
+      "caveat": "Amounts on the 2025 certified roll do not reconcile exactly with the noticed maximum rates: the smallest non-zero PBF bill is $103.17 (1,068 parcels billed $103.17 fire and $56.70 stormwater), and fire/stormwater Tier-1 amounts on the roll move in a 1.531 ratio rather than the 0.78/0.49 = 1.592 ratio. The adopted final rate resolution was not located."
+    },
+    {
+      "government": "City of Panama City Beach",
+      "area": "City of Panama City Beach",
+      "name": "Stormwater management assessment (levy code PBSW)",
+      "category": "stormwater",
+      "how_charged": "Tier 1 per $1,000 improvement value + Tier 2 per parcel. Noticed MAXIMUM FY2025-26: $0.49 per $1,000 improvement value + $48.30 per parcel.",
+      "rate": "$0.49/$1,000 improvement value + $48.30/parcel (noticed maximum)",
+      "residential_single_family_amount": null,
+      "residential_note": "Depends on improvement value. Median billed per parcel on 2025 roll = $217.10 (all parcel types).",
+      "roll_2025": {
+        "levy_code": "PBSW",
+        "dor_gov_type": "municipality",
+        "dor_function_code": "2",
+        "parcels_billed": 20137,
+        "total_levied": 4829915.04,
+        "median_per_parcel": 217.1,
+        "p25": 154.18,
+        "p75": 300.18,
+        "min": 0.0,
+        "max": 5269.47,
+        "most_common_amounts": [
+          {
+            "amount": 56.7,
+            "parcels": 1081
+          },
+          {
+            "amount": 333.63,
+            "parcels": 431
+          },
+          {
+            "amount": 217.1,
+            "parcels": 374
+          },
+          {
+            "amount": 200.7,
+            "parcels": 256
+          }
+        ],
+        "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Tax%20Roll%20Data%20Files/NAV/2025/NAV%20D/NAVD132506.TXT"
+      },
+      "fiscal_year": "FY2025-26",
+      "source_url": "https://www.pcbfl.gov/about-us/fiscal-year-2024-25-special-assessment-info",
+      "other_sources": [
+        "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Tax%20Roll%20Data%20Files/NAV/2025/NAV%20D/NAVD132506.TXT"
+      ],
+      "caveat": "See PBF caveat; smallest non-zero PBSW bill on roll is $56.70."
+    },
+    {
+      "government": "City of Panama City Beach",
+      "area": "Front Beach Road Community Redevelopment Area only",
+      "name": "Front Beach Road CRA assessment (levy code PBCRA)",
+      "category": "special district / CRA",
+      "how_charged": "Category A $38.95 per parcel flat; Category B weighted: $0.009 per heated/AC sq ft (60%), $0.04 per $1,000 improvement value (30%), $0.06 per $1,000 land value (10%). Noticed maximum FY2025-26.",
+      "rate": "see how_charged",
+      "residential_single_family_amount": null,
+      "residential_note": "Median billed per parcel on 2025 roll = $75.13.",
+      "roll_2025": {
+        "levy_code": "PBCRA",
+        "dor_gov_type": "municipality",
+        "dor_function_code": "1",
+        "parcels_billed": 12662,
+        "total_levied": 1103899.44,
+        "median_per_parcel": 75.13,
+        "p25": 67.41,
+        "p75": 83.21,
+        "min": 0.0,
+        "max": 6315.13,
+        "most_common_amounts": [
+          {
+            "amount": 66.14,
+            "parcels": 375
+          },
+          {
+            "amount": 73.78,
+            "parcels": 241
+          },
+          {
+            "amount": 67.73,
+            "parcels": 224
+          },
+          {
+            "amount": 66.99,
+            "parcels": 188
+          }
+        ],
+        "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Tax%20Roll%20Data%20Files/NAV/2025/NAV%20D/NAVD132506.TXT"
+      },
+      "fiscal_year": "FY2025-26",
+      "source_url": "https://www.pcbfl.gov/about-us/fiscal-year-2024-25-special-assessment-info",
+      "other_sources": [
+        "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Tax%20Roll%20Data%20Files/NAV/2025/NAV%20D/NAVD132506.TXT"
+      ]
+    },
+    {
+      "government": "City of Lynn Haven",
+      "area": "City of Lynn Haven",
+      "name": "Stormwater assessment (levy code LN)",
+      "category": "stormwater",
+      "how_charged": "Per equivalent billing unit (1 unit = 3,900 sq ft impervious area); vacant land 0.28 units. Adopted Aug 2021 at about $139 per unit. FY2025-26 per-unit rate not found; FY2026 budget carries $2,652,000 non-ad valorem stormwater revenue.",
+      "rate": "about $139 per unit (2021 adoption); current per-unit rate not located",
+      "residential_single_family_amount": null,
+      "residential_note": "2025 roll: median $172.10; most common bills $172.10 (1,918 parcels), $246.10 (1,908), $104.98 (1,824), $344.20 (1,568).",
+      "roll_2025": {
+        "levy_code": "LN",
+        "dor_gov_type": "municipality",
+        "dor_function_code": "2",
+        "parcels_billed": 8486,
+        "total_levied": 2676485.71,
+        "median_per_parcel": 172.1,
+        "p25": 104.98,
+        "p75": 246.1,
+        "min": 0.0,
+        "max": 72992.77,
+        "most_common_amounts": [
+          {
+            "amount": 172.1,
+            "parcels": 1918
+          },
+          {
+            "amount": 246.1,
+            "parcels": 1908
+          },
+          {
+            "amount": 104.98,
+            "parcels": 1824
+          },
+          {
+            "amount": 344.2,
+            "parcels": 1568
+          }
+        ],
+        "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Tax%20Roll%20Data%20Files/NAV/2025/NAV%20D/NAVD132506.TXT"
+      },
+      "fiscal_year": "FY2025-26 (2025 roll)",
+      "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Tax%20Roll%20Data%20Files/NAV/2025/NAV%20D/NAVD132506.TXT",
+      "other_sources": [
+        "https://news.wfsu.org/wfsu-local-news/2021-08-25/lynn-haven-adopts-stormwater-assessment-tax-bills-to-go-up",
+        "https://cityoflynnhaven.com/DocumentCenter/View/4411"
+      ]
+    },
+    {
+      "government": "City of Springfield",
+      "area": "City of Springfield",
+      "name": "Fire assessment (levy code SF)",
+      "category": "fire",
+      "how_charged": "Not documented in a located resolution. 2025 roll: most common bill $146.57 (721 parcels); median $207.40; amounts vary by parcel.",
+      "rate": "not located",
+      "residential_single_family_amount": null,
+      "roll_2025": {
+        "levy_code": "SF",
+        "dor_gov_type": "municipality",
+        "dor_function_code": "3",
+        "parcels_billed": 3805,
+        "total_levied": 866478.96,
+        "median_per_parcel": 207.4,
+        "p25": 156.19,
+        "p75": 253.67,
+        "min": 0.0,
+        "max": 8657.21,
+        "most_common_amounts": [
+          {
+            "amount": 146.57,
+            "parcels": 721
+          },
+          {
+            "amount": 148.7,
+            "parcels": 17
+          },
+          {
+            "amount": 146.83,
+            "parcels": 11
+          },
+          {
+            "amount": 146.66,
+            "parcels": 8
+          }
+        ],
+        "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Tax%20Roll%20Data%20Files/NAV/2025/NAV%20D/NAVD132506.TXT"
+      },
+      "fiscal_year": "FY2025-26 (2025 roll)",
+      "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Tax%20Roll%20Data%20Files/NAV/2025/NAV%20D/NAVD132506.TXT"
+    },
+    {
+      "government": "City of Callaway / City of Springfield",
+      "area": "Individual parcels",
+      "name": "Other (levy codes CN - Callaway, SN - Springfield; likely liens)",
+      "category": "other",
+      "how_charged": "Parcel-specific: CN 3 parcels $24,315.34; SN 2 parcels $14,079.83 (DOR municipal 'Other' total $38,395).",
+      "rate": "varies",
+      "residential_single_family_amount": null,
+      "roll_2025": [
+        {
+          "levy_code": "CN",
+          "dor_gov_type": "municipality",
+          "dor_function_code": "10",
+          "parcels_billed": 3,
+          "total_levied": 24315.34,
+          "median_per_parcel": 2207.88,
+          "p25": 254.53,
+          "p75": 21852.93,
+          "min": 254.53,
+          "max": 21852.93,
+          "most_common_amounts": [
+            {
+              "amount": 254.53,
+              "parcels": 1
+            },
+            {
+              "amount": 2207.88,
+              "parcels": 1
+            },
+            {
+              "amount": 21852.93,
+              "parcels": 1
+            }
+          ],
+          "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Tax%20Roll%20Data%20Files/NAV/2025/NAV%20D/NAVD132506.TXT"
+        },
+        {
+          "levy_code": "SN",
+          "dor_gov_type": "municipality",
+          "dor_function_code": "10",
+          "parcels_billed": 2,
+          "total_levied": 14079.83,
+          "median_per_parcel": 7039.91,
+          "p25": 6268.07,
+          "p75": 7811.76,
+          "min": 6268.07,
+          "max": 7811.76,
+          "most_common_amounts": [
+            {
+              "amount": 6268.07,
+              "parcels": 1
+            },
+            {
+              "amount": 7811.76,
+              "parcels": 1
+            }
+          ],
+          "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Tax%20Roll%20Data%20Files/NAV/2025/NAV%20D/NAVD132506.TXT"
+        }
+      ],
+      "fiscal_year": "FY2025-26 (2025 roll)",
+      "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Tax%20Roll%20Data%20Files/NAV/2025/NAV%20D/NAVD132506.TXT"
+    },
+    {
+      "government": "Lake Powell Residential Golf Community Development District (independent special district)",
+      "area": "Wild Heron, unincorporated Bay County (about 724 acres)",
+      "name": "CDD assessments (levy code LPWH1)",
+      "category": "special district (CDD)",
+      "how_charged": "Per-lot CDD assessment; 2025 roll 560 parcels, median $2,219.01, range $1,674.32-$28,428.27.",
+      "rate": "varies by lot/product",
+      "residential_single_family_amount": null,
+      "residential_note": "Median lot bill $2,219.01 (2025 roll)",
+      "roll_2025": {
+        "levy_code": "LPWH1",
+        "dor_gov_type": "independent special district",
+        "dor_function_code": "1",
+        "parcels_billed": 560,
+        "total_levied": 1329004.77,
+        "median_per_parcel": 2219.01,
+        "p25": 1994.69,
+        "p75": 2315.05,
+        "min": 1674.32,
+        "max": 28428.27,
+        "most_common_amounts": [
+          {
+            "amount": 2219.01,
+            "parcels": 104
+          },
+          {
+            "amount": 1930.86,
+            "parcels": 78
+          },
+          {
+            "amount": 2443.33,
+            "parcels": 73
+          },
+          {
+            "amount": 2091.36,
+            "parcels": 70
+          }
+        ],
+        "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Tax%20Roll%20Data%20Files/NAV/2025/NAV%20D/NAVD132506.TXT"
+      },
+      "fiscal_year": "FY2025-26 (2025 roll)",
+      "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Tax%20Roll%20Data%20Files/NAV/2025/NAV%20D/NAVD132506.TXT",
+      "other_sources": [
+        "https://lakepowellcdd.net/about"
+      ],
+      "caveat": "Code-to-district match (LPWH = Lake Powell / Wild Heron) is an inference from the name."
+    },
+    {
+      "government": "Independent special district (unidentified, code SB)",
+      "area": "140 parcels",
+      "name": "Levy code SB (DOR function: community development)",
+      "category": "special district",
+      "how_charged": "Parcel amounts $788.13-$16,068.27; median $1,418.64.",
+      "rate": "varies",
+      "residential_single_family_amount": null,
+      "roll_2025": {
+        "levy_code": "SB",
+        "dor_gov_type": "independent special district",
+        "dor_function_code": "1",
+        "parcels_billed": 140,
+        "total_levied": 195920.37,
+        "median_per_parcel": 1418.64,
+        "p25": 1103.39,
+        "p75": 1576.27,
+        "min": 788.13,
+        "max": 16068.27,
+        "most_common_amounts": [
+          {
+            "amount": 788.13,
+            "parcels": 35
+          },
+          {
+            "amount": 1576.27,
+            "parcels": 29
+          },
+          {
+            "amount": 1103.39,
+            "parcels": 28
+          },
+          {
+            "amount": 1418.64,
+            "parcels": 28
+          }
+        ],
+        "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Tax%20Roll%20Data%20Files/NAV/2025/NAV%20D/NAVD132506.TXT"
+      },
+      "fiscal_year": "FY2025-26 (2025 roll)",
+      "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Tax%20Roll%20Data%20Files/NAV/2025/NAV%20D/NAVD132506.TXT"
+    },
+    {
+      "government": "Independent special districts (unidentified, codes PW, WMH)",
+      "area": "PW 30 parcels; WMH 55 parcels",
+      "name": "Lighting assessments (DOR function: lighting)",
+      "category": "street lighting",
+      "how_charged": "Flat per parcel: PW $141.00; WMH $92.00. DOR ISD lighting total $9,290.",
+      "rate": "PW $141.00; WMH $92.00",
+      "residential_single_family_amount": null,
+      "roll_2025": [
+        {
+          "levy_code": "PW",
+          "dor_gov_type": "independent special district",
+          "dor_function_code": "5",
+          "parcels_billed": 30,
+          "total_levied": 4230.0,
+          "median_per_parcel": 141.0,
+          "p25": 141.0,
+          "p75": 141.0,
+          "min": 141.0,
+          "max": 141.0,
+          "most_common_amounts": [
+            {
+              "amount": 141.0,
+              "parcels": 30
+            }
+          ],
+          "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Tax%20Roll%20Data%20Files/NAV/2025/NAV%20D/NAVD132506.TXT"
+        },
+        {
+          "levy_code": "WMH",
+          "dor_gov_type": "independent special district",
+          "dor_function_code": "5",
+          "parcels_billed": 55,
+          "total_levied": 5060.0,
+          "median_per_parcel": 92.0,
+          "p25": 92.0,
+          "p75": 92.0,
+          "min": 92.0,
+          "max": 92.0,
+          "most_common_amounts": [
+            {
+              "amount": 92.0,
+              "parcels": 55
+            }
+          ],
+          "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Tax%20Roll%20Data%20Files/NAV/2025/NAV%20D/NAVD132506.TXT"
+        }
+      ],
+      "fiscal_year": "FY2025-26 (2025 roll)",
+      "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Tax%20Roll%20Data%20Files/NAV/2025/NAV%20D/NAVD132506.TXT",
+      "other_sources": [
+        "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Non-Ad%20Valorem%20Reports/2025/2025%20NAV%20by%20Independent%20Special%20District.pdf"
+      ]
+    },
+    {
+      "government": "Independent special district (unidentified, code TWIN)",
+      "area": "20 parcels",
+      "name": "Levy code TWIN (DOR function: other)",
+      "category": "other",
+      "how_charged": "Flat $99.45 per parcel",
+      "rate": "$99.45",
+      "residential_single_family_amount": null,
+      "roll_2025": {
+        "levy_code": "TWIN",
+        "dor_gov_type": "independent special district",
+        "dor_function_code": "10",
+        "parcels_billed": 20,
+        "total_levied": 1989.0,
+        "median_per_parcel": 99.45,
+        "p25": 99.45,
+        "p75": 99.45,
+        "min": 99.45,
+        "max": 99.45,
+        "most_common_amounts": [
+          {
+            "amount": 99.45,
+            "parcels": 20
+          }
+        ],
+        "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Tax%20Roll%20Data%20Files/NAV/2025/NAV%20D/NAVD132506.TXT"
+      },
+      "fiscal_year": "FY2025-26 (2025 roll)",
+      "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Tax%20Roll%20Data%20Files/NAV/2025/NAV%20D/NAVD132506.TXT"
+    }
+  ],
+  "assessment_roll_totals": {
+    "description": "Florida DOR 2025 NAV reports (Fiscal Year 2025-2026), Bay County rows, dated 1/23/2026. Totals reconcile to the levy-code sums from the NAV D file.",
+    "county_government": {
+      "community_development_redevelopment": 1013419,
+      "drainage_stormwater": 2038360,
+      "lighting": 3471,
+      "road_improvements": 1160,
+      "other": 334847,
+      "total": 3391257,
+      "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Non-Ad%20Valorem%20Reports/2025/2025%20NAV%20by%20County.pdf"
+    },
+    "municipalities": {
+      "community_development_redevelopment": 1103899,
+      "drainage_stormwater": 7506401,
+      "fire": 14538638,
+      "other": 38395,
+      "total": 23187333,
+      "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Non-Ad%20Valorem%20Reports/2025/2025%20NAV%20by%20City.pdf"
+    },
+    "independent_special_districts": {
+      "community_development_redevelopment": 1524925,
+      "lighting": 9290,
+      "other": 1989,
+      "total": 1536204,
+      "source_url": "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/Non-Ad%20Valorem%20Reports/2025/2025%20NAV%20by%20Independent%20Special%20District.pdf"
+    },
+    "no_solid_waste_on_roll": "No solid waste/garbage, water-sewer or EMS non-ad valorem assessment appears on the 2025 Bay County roll; garbage is billed on city utility bills (or by private haulers).",
+    "no_nav_found_for": [
+      "City of Parker",
+      "City of Mexico Beach",
+      "City of Callaway (only lien-type 'CN')",
+      "City of Lynn Haven fire (none; stormwater only)"
+    ]
+  },
+  "non_ad_valorem_authorities_on_2025_roll": [
+    {
+      "code": "ALSL1",
+      "dor_gov_type": "county",
+      "parcels": 43,
+      "total": 2580.0
+    },
+    {
+      "code": "BOCA",
+      "dor_gov_type": "county",
+      "parcels": 33,
+      "total": 891.0
+    },
+    {
+      "code": "CN",
+      "dor_gov_type": "municipality",
+      "parcels": 3,
+      "total": 24315.34
+    },
+    {
+      "code": "LIEN",
+      "dor_gov_type": "county",
+      "parcels": 241,
+      "total": 312691.9
+    },
+    {
+      "code": "LN",
+      "dor_gov_type": "municipality",
+      "parcels": 8486,
+      "total": 2676485.71
+    },
+    {
+      "code": "LPWH1",
+      "dor_gov_type": "independent special district",
+      "parcels": 560,
+      "total": 1329004.77
+    },
+    {
+      "code": "OERR",
+      "dor_gov_type": "county",
+      "parcels": 7,
+      "total": 1159.76
+    },
+    {
+      "code": "PBCRA",
+      "dor_gov_type": "municipality",
+      "parcels": 12662,
+      "total": 1103899.44
+    },
+    {
+      "code": "PBF",
+      "dor_gov_type": "municipality",
+      "parcels": 20630,
+      "total": 7916909.53
+    },
+    {
+      "code": "PBSW",
+      "dor_gov_type": "municipality",
+      "parcels": 20137,
+      "total": 4829915.04
+    },
+    {
+      "code": "PCF",
+      "dor_gov_type": "municipality",
+      "parcels": 17667,
+      "total": 5755249.49
+    },
+    {
+      "code": "PCN",
+      "dor_gov_type": "county",
+      "parcels": 17,
+      "total": 22155.28
+    },
+    {
+      "code": "PPCD",
+      "dor_gov_type": "county",
+      "parcels": 20,
+      "total": 1013419.22
+    },
+    {
+      "code": "PW",
+      "dor_gov_type": "independent special district",
+      "parcels": 30,
+      "total": 4230.0
+    },
+    {
+      "code": "SB",
+      "dor_gov_type": "independent special district",
+      "parcels": 140,
+      "total": 195920.37
+    },
+    {
+      "code": "SF",
+      "dor_gov_type": "municipality",
+      "parcels": 3805,
+      "total": 866478.96
+    },
+    {
+      "code": "SN",
+      "dor_gov_type": "municipality",
+      "parcels": 2,
+      "total": 14079.83
+    },
+    {
+      "code": "STWC",
+      "dor_gov_type": "county",
+      "parcels": 1530,
+      "total": 306000.0
+    },
+    {
+      "code": "STWR",
+      "dor_gov_type": "county",
+      "parcels": 42113,
+      "total": 1732360.0
+    },
+    {
+      "code": "TWIN",
+      "dor_gov_type": "independent special district",
+      "parcels": 20,
+      "total": 1989.0
+    },
+    {
+      "code": "WMH",
+      "dor_gov_type": "independent special district",
+      "parcels": 55,
+      "total": 5060.0
+    }
+  ],
+  "utility_rates": [
+    {
+      "provider": "Bay County Utility Services (retail)",
+      "area": "Bay County retail water/wastewater service area (unincorporated customers where the county is the retail provider)",
+      "water": {
+        "base_monthly_3_4in": 21.1,
+        "base_monthly_1in": 35.15,
+        "tiers_per_1000_gal": [
+          {
+            "range": "0-3,000",
+            "rate": 2.6
+          },
+          {
+            "range": "3,001-6,000",
+            "rate": 2.9
+          },
+          {
+            "range": "6,001-9,000",
+            "rate": 3.65
+          },
+          {
+            "range": "above 9,000",
+            "rate": 4.35
+          }
+        ]
+      },
+      "sewer": {
+        "base_monthly_3_4in": 37.0,
+        "base_monthly_1in": 61.7,
+        "per_1000_gal": 9.8,
+        "sewer_only_flat": 104.1
+      },
+      "garbage": null,
+      "garbage_note": "County Solid Waste Division does not provide collection; it runs the Steelfield Road landfill (disposal only).",
+      "stormwater": null,
+      "stormwater_note": "County stormwater is a $40/yr non-ad valorem charge on the tax bill, not on the utility bill.",
+      "bill_5000gal": 120.7,
+      "calc": "Water: 21.10 + 3 x 2.60 + 2 x 2.90 = 34.70; Sewer: 37.00 + 5 x 9.80 = 86.00; Total = 120.70 (3/4-inch meter, 2026 column; assumes wastewater volume charge on all metered water)",
+      "effective": "Fee schedule header 'Effective April 21, 2026'; uses the '2026' column (prior '2025' column took effect Jan 1, 2025)",
+      "source_url": "https://www.baycountyfl.gov/DocumentCenter/View/16599/Utilities-FY-25-Fees-and-Fines"
+    },
+    {
+      "provider": "City of Panama City Utilities (water, wastewater, garbage)",
+      "area": "Panama City (city utility also serves parts of unincorporated Bay County)",
+      "water": {
+        "base_monthly": 14.09,
+        "per_1000_gal": 6.28
+      },
+      "sewer": {
+        "base_monthly": 32.29,
+        "per_1000_gal": 11.9
+      },
+      "garbage": 45.91,
+      "stormwater": null,
+      "stormwater_note": "No stormwater line listed in the rate notice.",
+      "bill_5000gal": 183.19,
+      "calc": "14.09 + 32.29 + 45.91 + 5 x 6.28 + 5 x 11.90 = 92.29 + 31.40 + 59.50 = 183.19",
+      "calc_caveat": "The city's FAQ says the average residential bill becomes 'approximately $92.29', which equals the three base charges alone - so usage may include an allowance not described in the notice. Treat the 5,000-gallon figure as provisional until the rate ordinance is checked.",
+      "effective": "October 2026 usage (first bills week of Nov 2, 2026)",
+      "source_url": "https://www.panamacity.gov/DocumentCenter/View/12312"
+    },
+    {
+      "provider": "City of Panama City Beach Utilities",
+      "area": "Panama City Beach, inside city",
+      "water": {
+        "base_monthly_5_8_or_3_4in": 37.54,
+        "included_gallons": 6000,
+        "per_1000_gal_above_6000": 3.58,
+        "outside_city_base": 46.92
+      },
+      "sewer": {
+        "base_monthly_residential": 49.88,
+        "per_1000_gal_above_6000": 3.7,
+        "availability_flat": 24.84
+      },
+      "garbage": null,
+      "garbage_note": "Not on the city rate sheet; not located.",
+      "stormwater": null,
+      "stormwater_note": "Stormwater is a non-ad valorem assessment on the tax bill (PBSW), not on the utility bill.",
+      "bill_5000gal": 87.42,
+      "calc": "5,000 gal is within the 6,000-gal minimum: water 37.54 + sewer 49.88 = 87.42 (rate sheet also shows combined 0-6,000 gal water+sewer = 87.42)",
+      "calc_caveat": "Sheet says billing is bi-monthly on even months while headings say 'monthly ... per unit'; figure is per month as labeled.",
+      "effective": "February 1, 2026",
+      "source_url": "https://www.pcbfl.gov/DocumentCenter/View/3907/CityRateSheet-2026"
+    },
+    {
+      "provider": "City of Lynn Haven Utilities",
+      "area": "Lynn Haven, inside city",
+      "water": {
+        "base_monthly": 16.85,
+        "per_1000_gal": 4.05,
+        "outside_city_base": 21.06,
+        "outside_per_1000": 5.06
+      },
+      "sewer": {
+        "base_monthly": 16.95,
+        "per_1000_gal": 10.17,
+        "residential_cap_gal": 12000
+      },
+      "garbage": 24.86,
+      "stormwater": null,
+      "stormwater_note": "Stormwater is a non-ad valorem assessment on the tax bill (LN).",
+      "bill_5000gal": 129.76,
+      "calc": "16.85 + 16.95 + 24.86 = 58.66 base; + 5 x (4.05 + 10.17) = 71.10; total = 129.76 (matches budget's own table: 5,000 gal - $129.76). Water+sewer only = 104.90",
+      "effective": "FY2025-26 rates as printed in budget approved Sept 23, 2025 (FY2026-27 budget exists but could not be downloaded; rates may have changed Oct 1, 2026)",
+      "source_url": "https://cityoflynnhaven.com/DocumentCenter/View/4411"
+    },
+    {
+      "provider": "City of Callaway Utility Billing (water/sewer purchased wholesale from Bay County)",
+      "area": "Callaway, inside city",
+      "water": {
+        "base_monthly": 11.37,
+        "per_1000_gal": 5.32,
+        "city_water_franchise_fee": "10% of water bill",
+        "outside_city_base": 14.21,
+        "outside_per_1000": 6.65
+      },
+      "sewer": {
+        "base_monthly": 30.69,
+        "per_1000_gal": 6.13,
+        "outside_city_base": 38.36,
+        "outside_per_1000": 7.66
+      },
+      "garbage": 13.0,
+      "stormwater": 1.0,
+      "bill_5000gal": 117.11,
+      "calc": "Water 11.37 + 5 x 5.32 = 37.97; franchise fee 10% = 3.80; Sewer 30.69 + 5 x 6.13 = 61.34; Stormwater 1.00; Solid waste 13.00; Total = 117.11",
+      "calc_caveat": "The city's rates page mislabels its headings (outside-city base rates appear under 'per 1,000 gallons'); figures were matched by the stated 25% outside surcharge (11.37 x 1.25 = 14.21; 30.69 x 1.25 = 38.36; 5.32 x 1.25 = 6.65; 6.13 x 1.25 = 7.66). FY2027 budget assumes consumption rates rise $0.05 (water) and $0.15 (sewer) to cover county increases, which may not yet be on the page.",
+      "effective": "Not stated on page (retrieved 2026-10-20)",
+      "source_url": "https://www.cityofcallaway.com/102/Rates"
+    },
+    {
+      "provider": "City of Springfield Public Works / Utility Billing",
+      "area": "Springfield, inside city",
+      "water": {
+        "base_monthly": 8.95,
+        "per_1000_gal": 5.13,
+        "senior_base": 7.58,
+        "senior_per_1000": 4.36,
+        "outside_base": 11.21,
+        "outside_per_1000": 6.4
+      },
+      "sewer": {
+        "base_monthly": 30.43,
+        "per_1000_gal": 14.9,
+        "outside_base": 37.29,
+        "outside_per_1000": 18.29
+      },
+      "garbage": 37.67,
+      "garbage_senior": 33.875,
+      "stormwater": 3.0,
+      "bill_5000gal": 180.2,
+      "calc": "Base 8.95 + 30.43 + 37.67 + 3.00 = 80.05 (city's stated total base); + 5 x (5.13 + 14.90) = 100.15; total = 180.20",
+      "effective": "October 1, 2025",
+      "source_url": "https://www.springfieldfl.net/publicworks/page/utility-billing-rates"
+    },
+    {
+      "provider": "City of Mexico Beach (water/wastewater supplied by Bay County; city bills)",
+      "area": "Mexico Beach",
+      "water": {
+        "base_monthly_0_4000gal": 40.83,
+        "per_1000_gal_over_4000": 3.68,
+        "utility_tax": "7% of water"
+      },
+      "sewer": {
+        "base_monthly_0_4000gal": 55.07,
+        "per_1000_gal_over_4000": 5.2
+      },
+      "garbage": 40.0,
+      "garbage_note": "2 pickups per week",
+      "stormwater": null,
+      "bill_5000gal": 147.9,
+      "calc": "Water 40.83 + 1 x 3.68 = 44.51; utility tax 7% = 3.12; Sewer 55.07 + 1 x 5.20 = 60.27; Sanitation 40.00; Total = 147.90 (city's stated minimum bill is $138.76)",
+      "effective": "Not stated ('current monthly rates', page retrieved 2026-10-20); council raised water 2.6% and sewer 4% on Oct 28, 2025",
+      "source_url": "https://mexicobeachfl.gov/residents/utilities-payments/",
+      "other_sources": [
+        "https://www.mypanhandle.com/news/local-news/bay-county/mexico-beach/water-and-sewer-rates-rise-in-mexico-beach/amp"
+      ]
+    },
+    {
+      "provider": "City of Parker Water Department",
+      "area": "Parker",
+      "water": null,
+      "sewer": null,
+      "garbage": null,
+      "stormwater": null,
+      "bill_5000gal": null,
+      "calc": "Not computed - no published rate schedule located. FY2025-26 draft budget shows a 10% city utility tax on water and garbage 'permit fees' (suggesting private haulers).",
+      "effective": null,
+      "source_url": "https://cityofparker.com/wp-content/uploads/filr/6232/Draft-Budget-FY-25-26.pdf"
+    }
+  ],
+  "pay": [
+    {
+      "government": "Bay County",
+      "title": "Sheriff",
+      "name": "Tommy Ford",
+      "annual": 238643,
+      "year": "FY2025-26",
+      "basis": "Statutory formula salary (Ch. 145 / s. 1001.47 F.S.) computed by EDR",
+      "source_url": "https://www.edr.state.fl.us/Content/local-government/reports/FY%202025-26%20Salaries.pdf"
+    },
+    {
+      "government": "Bay County",
+      "title": "Sheriff",
+      "name": "Tommy Ford",
+      "annual": 240075,
+      "year": "FY2026-27",
+      "basis": "Statutory formula salary computed by EDR (Sept 2026)",
+      "source_url": "https://www.edr.state.fl.us/Content/local-government/reports/finsal26.pdf"
+    },
+    {
+      "government": "Bay County",
+      "title": "Clerk of Circuit Court & Comptroller",
+      "name": "Bill Kinsaul",
+      "annual": 170173,
+      "year": "FY2025-26",
+      "basis": "Statutory formula salary (Ch. 145 / s. 1001.47 F.S.) computed by EDR",
+      "source_url": "https://www.edr.state.fl.us/Content/local-government/reports/FY%202025-26%20Salaries.pdf"
+    },
+    {
+      "government": "Bay County",
+      "title": "Clerk of Circuit Court & Comptroller",
+      "name": "Bill Kinsaul",
+      "annual": 171359,
+      "year": "FY2026-27",
+      "basis": "Statutory formula salary computed by EDR (Sept 2026)",
+      "source_url": "https://www.edr.state.fl.us/Content/local-government/reports/finsal26.pdf"
+    },
+    {
+      "government": "Bay County",
+      "title": "Property Appraiser",
+      "name": "Dan Sowell",
+      "annual": 170173,
+      "year": "FY2025-26",
+      "basis": "Statutory formula salary (Ch. 145 / s. 1001.47 F.S.) computed by EDR",
+      "source_url": "https://www.edr.state.fl.us/Content/local-government/reports/FY%202025-26%20Salaries.pdf"
+    },
+    {
+      "government": "Bay County",
+      "title": "Property Appraiser",
+      "name": "Dan Sowell",
+      "annual": 171359,
+      "year": "FY2026-27",
+      "basis": "Statutory formula salary computed by EDR (Sept 2026)",
+      "source_url": "https://www.edr.state.fl.us/Content/local-government/reports/finsal26.pdf"
+    },
+    {
+      "government": "Bay County",
+      "title": "Supervisor of Elections",
+      "name": "Nina Ward",
+      "annual": 170173,
+      "year": "FY2025-26",
+      "basis": "Statutory formula salary (Ch. 145 / s. 1001.47 F.S.) computed by EDR",
+      "source_url": "https://www.edr.state.fl.us/Content/local-government/reports/FY%202025-26%20Salaries.pdf"
+    },
+    {
+      "government": "Bay County",
+      "title": "Supervisor of Elections",
+      "name": "Nina Ward",
+      "annual": 171359,
+      "year": "FY2026-27",
+      "basis": "Statutory formula salary computed by EDR (Sept 2026)",
+      "source_url": "https://www.edr.state.fl.us/Content/local-government/reports/finsal26.pdf"
+    },
+    {
+      "government": "Bay County",
+      "title": "Tax Collector",
+      "name": "William (Chuck) Perdue",
+      "annual": 198466,
+      "year": "FY2025-26",
+      "basis": "Statutory formula salary (Ch. 145 / s. 1001.47 F.S.) computed by EDR",
+      "source_url": "https://www.edr.state.fl.us/Content/local-government/reports/FY%202025-26%20Salaries.pdf"
+    },
+    {
+      "government": "Bay County",
+      "title": "Tax Collector",
+      "name": "William (Chuck) Perdue",
+      "annual": 199754,
+      "year": "FY2026-27",
+      "basis": "Statutory formula salary computed by EDR (Sept 2026)",
+      "source_url": "https://www.edr.state.fl.us/Content/local-government/reports/finsal26.pdf"
+    },
+    {
+      "government": "Bay County",
+      "title": "Superintendent of Schools",
+      "name": "Mark McQueen",
+      "annual": 198466,
+      "year": "FY2025-26",
+      "basis": "Statutory formula salary (Ch. 145 / s. 1001.47 F.S.) computed by EDR",
+      "source_url": "https://www.edr.state.fl.us/Content/local-government/reports/FY%202025-26%20Salaries.pdf"
+    },
+    {
+      "government": "Bay County",
+      "title": "Superintendent of Schools",
+      "name": "Mark McQueen",
+      "annual": 199754,
+      "year": "FY2026-27",
+      "basis": "Statutory formula salary computed by EDR (Sept 2026)",
+      "source_url": "https://www.edr.state.fl.us/Content/local-government/reports/finsal26.pdf"
+    },
+    {
+      "government": "Bay County",
+      "title": "County Commissioner",
+      "name": "Daniel Raffield (D1)",
+      "annual": 92378,
+      "year": "FY2025-26",
+      "basis": "EDR statutory formula",
+      "source_url": "https://www.edr.state.fl.us/Content/local-government/reports/FY%202025-26%20Salaries.pdf"
+    },
+    {
+      "government": "Bay County",
+      "title": "County Commissioner",
+      "name": "Daniel Raffield (D1)",
+      "annual": 93692,
+      "year": "FY2026-27",
+      "basis": "EDR statutory formula",
+      "source_url": "https://www.edr.state.fl.us/Content/local-government/reports/finsal26.pdf"
+    },
+    {
+      "government": "Bay County",
+      "title": "County Commissioner",
+      "name": "Robert Carroll (D2)",
+      "annual": 92378,
+      "year": "FY2025-26",
+      "basis": "EDR statutory formula",
+      "source_url": "https://www.edr.state.fl.us/Content/local-government/reports/FY%202025-26%20Salaries.pdf"
+    },
+    {
+      "government": "Bay County",
+      "title": "County Commissioner",
+      "name": "Robert Carroll (D2)",
+      "annual": 93692,
+      "year": "FY2026-27",
+      "basis": "EDR statutory formula",
+      "source_url": "https://www.edr.state.fl.us/Content/local-government/reports/finsal26.pdf"
+    },
+    {
+      "government": "Bay County",
+      "title": "County Commissioner",
+      "name": "Doug Crosby (D3)",
+      "annual": 92378,
+      "year": "FY2025-26",
+      "basis": "EDR statutory formula",
+      "source_url": "https://www.edr.state.fl.us/Content/local-government/reports/FY%202025-26%20Salaries.pdf"
+    },
+    {
+      "government": "Bay County",
+      "title": "County Commissioner",
+      "name": "Doug Crosby (D3)",
+      "annual": 93692,
+      "year": "FY2026-27",
+      "basis": "EDR statutory formula",
+      "source_url": "https://www.edr.state.fl.us/Content/local-government/reports/finsal26.pdf"
+    },
+    {
+      "government": "Bay County",
+      "title": "County Commissioner",
+      "name": "Doug Moore (D4)",
+      "annual": 92378,
+      "year": "FY2025-26",
+      "basis": "EDR statutory formula",
+      "source_url": "https://www.edr.state.fl.us/Content/local-government/reports/FY%202025-26%20Salaries.pdf"
+    },
+    {
+      "government": "Bay County",
+      "title": "County Commissioner",
+      "name": "Doug Moore (D4)",
+      "annual": 93692,
+      "year": "FY2026-27",
+      "basis": "EDR statutory formula",
+      "source_url": "https://www.edr.state.fl.us/Content/local-government/reports/finsal26.pdf"
+    },
+    {
+      "government": "Bay County",
+      "title": "County Commissioner",
+      "name": "Clair Pease (D5)",
+      "annual": 92378,
+      "year": "FY2025-26",
+      "basis": "EDR statutory formula",
+      "source_url": "https://www.edr.state.fl.us/Content/local-government/reports/FY%202025-26%20Salaries.pdf"
+    },
+    {
+      "government": "Bay County",
+      "title": "County Commissioner",
+      "name": "Clair Pease (D5)",
+      "annual": 93692,
+      "year": "FY2026-27",
+      "basis": "EDR statutory formula",
+      "source_url": "https://www.edr.state.fl.us/Content/local-government/reports/finsal26.pdf"
+    },
+    {
+      "government": "Bay District Schools",
+      "title": "School Board Member (each of 5)",
+      "name": null,
+      "annual": 46970,
+      "year": "FY2025-26",
+      "basis": "EDR statutory formula",
+      "source_url": "https://www.edr.state.fl.us/Content/local-government/reports/FY%202025-26%20Salaries.pdf"
+    },
+    {
+      "government": "Bay District Schools",
+      "title": "School Board Member (each of 5)",
+      "name": null,
+      "annual": 47321,
+      "year": "FY2026-27",
+      "basis": "EDR statutory formula",
+      "source_url": "https://www.edr.state.fl.us/Content/local-government/reports/finsal26.pdf"
+    },
+    {
+      "government": "City of Panama City Beach",
+      "title": "City Manager",
+      "name": "Drew Whitman",
+      "annual": 150000,
+      "year": "2021 (initial base salary in employment agreement, Res. 21-148)",
+      "basis": "Employment agreement; later raises not located",
+      "source_url": "https://pcbfl.gov/home/showpublisheddocument/24574/638512745062370000"
+    },
+    {
+      "government": "City of Callaway",
+      "title": "City Manager",
+      "name": "Ed Cook",
+      "annual": 163225,
+      "year": "FY2026-27 budget",
+      "basis": "Budgeted regular salary for the single City Manager position (current wage $161,125 + $2,080 increase); plus $6,000 auto and $600 phone allowances",
+      "source_url": "https://www.cityofcallaway.com/DocumentCenter/View/5704/Final-Budget-2627"
+    },
+    {
+      "government": "City of Callaway",
+      "title": "Mayor and 4 Commissioners (combined)",
+      "name": null,
+      "annual": 50000,
+      "year": "FY2026-27 budget",
+      "basis": "Commission salaries line, total for 5 members",
+      "source_url": "https://www.cityofcallaway.com/DocumentCenter/View/5704/Final-Budget-2627"
+    },
+    {
+      "government": "City of Lynn Haven",
+      "title": "Mayor and Commissioners (combined)",
+      "name": null,
+      "annual": 86560,
+      "year": "FY2025-26 budget",
+      "basis": "Account 512300 MAYOR/COMM, total for the legislative body",
+      "source_url": "https://cityoflynnhaven.com/DocumentCenter/View/4411"
+    },
+    {
+      "government": "City of Panama City",
+      "title": "Mayor and 4 Commissioners (combined regular salaries)",
+      "name": null,
+      "annual": 204217,
+      "year": "FY2026 proposed budget",
+      "basis": "City Commission cost center 'Regular Salaries & Wages' - covers 5 elected members plus 0.5 executive assistant, so not a per-member figure",
+      "source_url": "https://www.panamacity.gov/DocumentCenter/View/10236/Tentative-Budget-FY-26---Digital-book"
+    },
+    {
+      "government": "City of Parker",
+      "title": "Mayor and Council stipends (combined, all funds)",
+      "name": null,
+      "annual": 26400,
+      "year": "FY2025-26 draft budget",
+      "basis": "General Fund $13,200 + Water/Sewer fund lines $4,620 + $8,580",
+      "source_url": "https://cityofparker.com/wp-content/uploads/filr/6232/Draft-Budget-FY-25-26.pdf"
+    },
+    {
+      "government": "City of Panama City",
+      "title": "City Manager",
+      "name": "Jonathan Hayes",
+      "annual": null,
+      "year": "2023",
+      "basis": "Requested a minimum of $175,000 when selected Dec 15, 2023; final contract salary not located",
+      "source_url": "https://www.wjhg.com/2023/12/16/new-city-manager-panama-city-selected-4-1-vote"
+    },
+    {
+      "government": "Bay County",
+      "title": "County Manager",
+      "name": "Joel Schubert",
+      "annual": null,
+      "year": "2026",
+      "basis": "Promoted March 2026; salary not located",
+      "source_url": "https://www.mypanhandle.com/news/local-news/bay-county/bay-county-welcomes-new-county-manager-bids-farewell-to-former/amp/"
+    },
+    {
+      "government": "City of Lynn Haven",
+      "title": "City Manager",
+      "name": "Chris Lightfoot",
+      "annual": null,
+      "year": "2026",
+      "basis": "Appointed 4-1 on March 16, 2026; contract salary not located",
+      "source_url": "https://www.wjhg.com/2026/03/16/lynn-haven-appoints-new-city-manager"
+    }
+  ],
+  "governments": [
+    {
+      "id": "bay-county",
+      "name": "Bay County Board of County Commissioners",
+      "form": "Non-charter county; 5-member commission with appointed county manager (Ch. 125 F.S.)",
+      "election_method_note": "County pages describe the board as 'elected at-large'; members represent and are listed by Districts 1-5.",
+      "seats": [
+        {
+          "seat": "District 1",
+          "holder": "Daniel Raffield (Vice Chairman per commission page)",
+          "term_end": "Nov 2028",
+          "elected": true
+        },
+        {
+          "seat": "District 2",
+          "holder": "Robert Carroll",
+          "term_end": "Nov 2026 (seat on 2026 ballot)",
+          "elected": true
+        },
+        {
+          "seat": "District 3",
+          "holder": "Doug Crosby",
+          "term_end": "Nov 2028",
+          "elected": true
+        },
+        {
+          "seat": "District 4",
+          "holder": "Doug Moore (stepped down as chairman Nov 18, 2025; not seeking re-election)",
+          "term_end": "Nov 2026 (seat on 2026 ballot)",
+          "elected": true
+        },
+        {
+          "seat": "District 5",
+          "holder": "Clair Pease (Chairman per commission page)",
+          "term_end": "Nov 2028",
+          "elected": true
+        },
+        {
+          "seat": "County Manager",
+          "holder": "Joel Schubert",
+          "term_end": null,
+          "elected": false
+        },
+        {
+          "seat": "Deputy County Manager",
+          "holder": "Keith Bryant",
+          "term_end": null,
+          "elected": false
+        }
+      ],
+      "manager": "Joel Schubert (County Manager, promoted March 2026; succeeded Bob Majka)",
+      "ftes": {
+        "value": 835,
+        "detail": "FY2026 authorized positions: 791 full-time + 44 part-time (BOCC only; excludes constitutional officers)",
+        "source_url": "https://www.baycountyfl.gov/DocumentCenter/View/18735/FY-2026-Final-Budget-Hearing-Presentation-09-16-2025"
+      },
+      "website": "https://www.baycountyfl.gov/",
+      "contact_url": "https://www.baycountyfl.gov/305/County-Commissioners",
+      "source_url": "https://www.baycountyfl.gov/305/County-Commissioners",
+      "other_sources": [
+        "https://www.baycountyfl.gov/420/Elected-Officials",
+        "https://fl-counties.com/wp-content/uploads/2024/11/Election-2024-all-candidates-including-primary-updated-11-11.pdf",
+        "https://www.mypanhandle.com/news/bay-county-candidate-qualifying-for-2026-election-begins-next-week/amp/",
+        "https://www.wjhg.com/2025/11/19/bay-county-commissioner-steps-down-role-chairman/"
+      ],
+      "term_end_basis": "2026 seats from 2026 qualifying article (D2, D4); D1, D3, D5 elected/re-elected Nov 2024 per FAC results (4-year terms)."
+    },
+    {
+      "id": "panama-city",
+      "name": "City of Panama City",
+      "form": "Commission-manager; mayor elected at-large, four commissioners elected by ward",
+      "seats": [
+        {
+          "seat": "Mayor (at-large)",
+          "holder": "Allan Branch",
+          "term_end": "May 2027",
+          "elected": true
+        },
+        {
+          "seat": "Ward I",
+          "holder": "Robbie Hughes",
+          "term_end": "May 2029",
+          "elected": true
+        },
+        {
+          "seat": "Ward II",
+          "holder": "Janice Lucas",
+          "term_end": "May 2027",
+          "elected": true
+        },
+        {
+          "seat": "Ward III",
+          "holder": "Brian Grainger",
+          "term_end": "May 2027",
+          "elected": true
+        },
+        {
+          "seat": "Ward IV",
+          "holder": "Josh Street",
+          "term_end": "May 2029",
+          "elected": true
+        },
+        {
+          "seat": "City Manager",
+          "holder": "Jonathan Hayes",
+          "term_end": null,
+          "elected": false
+        },
+        {
+          "seat": "City Attorney",
+          "holder": "Nevin Zimmerman (FY26 budget book)",
+          "term_end": null,
+          "elected": false
+        },
+        {
+          "seat": "City Clerk-Treasurer",
+          "holder": "Janette Smith (FY26 budget book)",
+          "term_end": null,
+          "elected": false
+        }
+      ],
+      "manager": "Jonathan Hayes",
+      "department_heads_fy26_budget": {
+        "Assistant City Managers": [
+          "Jared Jones",
+          "Brandy Waldron"
+        ],
+        "Development Services": "Michael Fuller",
+        "Fire Chief": "David Collier",
+        "Housing": "Shiela Ware",
+        "Human Resources": "Vickie Lewis",
+        "Logistics": "Shawn Selph",
+        "Police Chief": "Mark Smith",
+        "Public Works": "Clint Murphy",
+        "Parks, Culture and Recreation": "Keith Mefford"
+      },
+      "ftes": {
+        "value": 631,
+        "detail": "Total funded employees, FY2026 proposed (648 in FY2024 and FY2025)",
+        "source_url": "https://www.panamacity.gov/DocumentCenter/View/10236/Tentative-Budget-FY-26---Digital-book"
+      },
+      "website": "https://www.panamacity.gov/",
+      "contact_url": "https://www.panamacity.gov/Directory.aspx",
+      "source_url": "https://www.panamacity.gov/395/City-Commission",
+      "other_sources": [
+        "https://www.panamacity.gov/233/City-Manager"
+      ]
+    },
+    {
+      "id": "panama-city-beach",
+      "name": "City of Panama City Beach",
+      "form": "Council-city manager (home-rule city); mayor plus four ward council members",
+      "seats": [
+        {
+          "seat": "Mayor",
+          "holder": "Stuart Tettemer",
+          "term_end": "2028",
+          "elected": true
+        },
+        {
+          "seat": "Ward 1",
+          "holder": "Paul Casto",
+          "term_end": "2026",
+          "elected": true
+        },
+        {
+          "seat": "Ward 2",
+          "holder": "Ethan Register",
+          "term_end": "2028",
+          "elected": true
+        },
+        {
+          "seat": "Ward 3",
+          "holder": "Mary Coburn",
+          "term_end": "2026",
+          "elected": true
+        },
+        {
+          "seat": "Ward 4 (Vice Mayor)",
+          "holder": "Michael Jarman",
+          "term_end": "2028",
+          "elected": true
+        },
+        {
+          "seat": "City Manager",
+          "holder": "Drew Whitman",
+          "term_end": null,
+          "elected": false
+        },
+        {
+          "seat": "Assistant City Manager",
+          "holder": "Holly White",
+          "term_end": null,
+          "elected": false
+        }
+      ],
+      "manager": "Drew R. Whitman (appointed April 22, 2021; city page does not show a later change)",
+      "ftes": null,
+      "website": "https://www.pcbfl.gov/",
+      "contact_url": "https://www.pcbfl.gov/184/City-Manager",
+      "source_url": "https://pcbfl.gov/government",
+      "other_sources": [
+        "https://www.pcbfl.gov/184/City-Manager"
+      ]
+    },
+    {
+      "id": "lynn-haven",
+      "name": "City of Lynn Haven",
+      "form": "Commission-manager; mayor and four commissioners elected at large",
+      "seats": [
+        {
+          "seat": "Mayor",
+          "holder": "David Lowery",
+          "term_end": null,
+          "elected": true
+        },
+        {
+          "seat": "Commissioner",
+          "holder": "Sam Peebles",
+          "term_end": null,
+          "elected": true
+        },
+        {
+          "seat": "Commissioner",
+          "holder": "Pat Perno",
+          "term_end": null,
+          "elected": true
+        },
+        {
+          "seat": "Commissioner",
+          "holder": "Jamie Warrick",
+          "term_end": null,
+          "elected": true
+        },
+        {
+          "seat": "Commissioner",
+          "holder": null,
+          "term_end": null,
+          "elected": true,
+          "note": "Fifth seat not listed in city directory; FY26 budget (Sept 2025) listed Judy Tinder"
+        },
+        {
+          "seat": "City Manager",
+          "holder": "Chris Lightfoot",
+          "term_end": null,
+          "elected": false
+        }
+      ],
+      "manager": "Chris Lightfoot (interim from July 2025; appointed March 16, 2026)",
+      "ftes": {
+        "value": 219.5,
+        "detail": "Total city FTEs, FY2025-26 approved budget (General Fund 168.20, CRA 0.803, Enterprise 50.5)",
+        "source_url": "https://cityoflynnhaven.com/DocumentCenter/View/4411"
+      },
+      "website": "https://www.cityoflynnhaven.com/",
+      "contact_url": "https://www.cityoflynnhaven.com/directory.aspx",
+      "source_url": "https://www.cityoflynnhaven.com/directory.aspx",
+      "other_sources": [
+        "https://cityoflynnhaven.com/DocumentCenter/View/4411",
+        "https://www.wjhg.com/2026/03/16/lynn-haven-appoints-new-city-manager"
+      ]
+    },
+    {
+      "id": "callaway",
+      "name": "City of Callaway",
+      "form": "Commission-manager; mayor plus one commissioner from each of four wards",
+      "seats": [
+        {
+          "seat": "Mayor",
+          "holder": "Pamn Henderson",
+          "term_end": "Nov 2028",
+          "elected": true
+        },
+        {
+          "seat": "Ward I",
+          "holder": "Bobby J. Birdsell",
+          "term_end": "Nov 2026",
+          "elected": true
+        },
+        {
+          "seat": "Ward II (Mayor Pro Tem)",
+          "holder": "David Griggs",
+          "term_end": "Nov 2026",
+          "elected": true
+        },
+        {
+          "seat": "Ward III",
+          "holder": "Bob Pelletier",
+          "term_end": "Nov 2028",
+          "elected": true
+        },
+        {
+          "seat": "Ward IV",
+          "holder": "Kenneth L. Ayers, Jr.",
+          "term_end": "Nov 2028",
+          "elected": true
+        },
+        {
+          "seat": "City Manager",
+          "holder": "Ed Cook",
+          "term_end": null,
+          "elected": false
+        }
+      ],
+      "manager": "Ed Cook",
+      "ftes": {
+        "value": 99.0,
+        "detail": "Total budgeted FTEs FY2026-27 (General Fund 78, enterprise funds 21)",
+        "source_url": "https://www.cityofcallaway.com/DocumentCenter/View/5704/Final-Budget-2627"
+      },
+      "website": "https://www.cityofcallaway.com/",
+      "contact_url": "https://www.cityofcallaway.com/directory.aspx",
+      "source_url": "https://www.cityofcallaway.com/70/Mayor-Commission",
+      "other_sources": [
+        "https://www.cityofcallaway.com/77/City-Manager"
+      ]
+    },
+    {
+      "id": "springfield",
+      "name": "City of Springfield",
+      "form": "Mayor-commission; mayor plus four ward commissioners (no city manager listed on city site)",
+      "seats": [
+        {
+          "seat": "Mayor",
+          "holder": "Ralph Hammond",
+          "term_end": null,
+          "elected": true
+        },
+        {
+          "seat": "Ward 1",
+          "holder": "Jack Griffis (serving since 2023)",
+          "term_end": null,
+          "elected": true
+        },
+        {
+          "seat": "Ward 2",
+          "holder": "Richard Chval (serving since 2024)",
+          "term_end": null,
+          "elected": true
+        },
+        {
+          "seat": "Ward 3",
+          "holder": "Jackie Kennington (serving since 2016)",
+          "term_end": null,
+          "elected": true
+        },
+        {
+          "seat": "Ward 4",
+          "holder": "Cindy Hamre (serving since 2022)",
+          "term_end": null,
+          "elected": true
+        },
+        {
+          "seat": "City Clerk",
+          "holder": "Teresa Cox",
+          "term_end": null,
+          "elected": false
+        },
+        {
+          "seat": "Finance Director",
+          "holder": "Beth Strobel",
+          "term_end": null,
+          "elected": false
+        },
+        {
+          "seat": "Fire Chief",
+          "holder": "Brian Eddins",
+          "term_end": null,
+          "elected": false
+        },
+        {
+          "seat": "Police Chief",
+          "holder": "Barry Roberts",
+          "term_end": null,
+          "elected": false
+        }
+      ],
+      "manager": null,
+      "ftes": null,
+      "website": "https://www.springfieldfl.net/",
+      "contact_url": "https://www.springfieldfl.net/directory",
+      "source_url": "https://www.springfieldfl.net/city-commission",
+      "other_sources": [
+        "https://www.springfieldfl.net/directory"
+      ]
+    },
+    {
+      "id": "parker",
+      "name": "City of Parker",
+      "form": "Mayor-council (5-member council incl. mayor; no city manager listed on city site)",
+      "seats": [
+        {
+          "seat": "Mayor",
+          "holder": "Andrew Kelly",
+          "term_end": null,
+          "elected": true
+        },
+        {
+          "seat": "Mayor Pro Tem",
+          "holder": "Tonya Barrow",
+          "term_end": null,
+          "elected": true
+        },
+        {
+          "seat": "Council Member",
+          "holder": "Katy Bodiford",
+          "term_end": null,
+          "elected": true
+        },
+        {
+          "seat": "Council Member",
+          "holder": "Ron Chaple",
+          "term_end": null,
+          "elected": true
+        },
+        {
+          "seat": "Council Member",
+          "holder": "Mark Rega",
+          "term_end": null,
+          "elected": true
+        }
+      ],
+      "manager": null,
+      "ftes": null,
+      "website": "https://cityofparker.com/",
+      "contact_url": "https://cityofparker.com/residents/",
+      "source_url": "https://cityofparker.com/government/city-council/"
+    },
+    {
+      "id": "mexico-beach",
+      "name": "City of Mexico Beach",
+      "form": "Council-administrator; mayor and four council members, all elected at large; City Administrator appointed by council",
+      "seats": [
+        {
+          "seat": "Mayor (Group 1)",
+          "holder": "Richard Wolff",
+          "term_end": "May 2027",
+          "elected": true
+        },
+        {
+          "seat": "Group 2",
+          "holder": "Erik Fosshage",
+          "term_end": "May 2027",
+          "elected": true
+        },
+        {
+          "seat": "Group 3",
+          "holder": "Linda Hamilton",
+          "term_end": "May 2027",
+          "elected": true
+        },
+        {
+          "seat": "Group 4",
+          "holder": "Lisa Logan (appointed April 2026)",
+          "term_end": "2028 (until next regular election)",
+          "elected": false
+        },
+        {
+          "seat": "Group 5",
+          "holder": "Steve Cox",
+          "term_end": "2028",
+          "elected": true
+        },
+        {
+          "seat": "City Administrator",
+          "holder": "Mell Smigielski",
+          "term_end": null,
+          "elected": false
+        },
+        {
+          "seat": "City Clerk",
+          "holder": "Tammy Brunson",
+          "term_end": null,
+          "elected": false
+        }
+      ],
+      "manager": "Mell Smigielski (City Administrator)",
+      "ftes": null,
+      "website": "https://mexicobeachfl.gov/",
+      "contact_url": "https://mexicobeachfl.gov/government/staff-directory/",
+      "source_url": "https://mexicobeachfl.gov/government/mayor-and-council/"
+    },
+    {
+      "id": "bay-district-schools",
+      "name": "Bay District Schools (School Board of Bay County)",
+      "form": "Five-member elected school board by district; superintendent (Bay listed by EDR/FADSS as an elected-superintendent district)",
+      "seats": [
+        {
+          "seat": "Superintendent",
+          "holder": "Mark McQueen (appointed by Gov. DeSantis July 2023 to finish Bill Husfelt's term)",
+          "term_end": null,
+          "elected": true
+        },
+        {
+          "seat": "District 2",
+          "holder": "Ann Leonard (not seeking re-election); Ginger Littleton won Aug 18, 2026 primary, term begins Nov 2026",
+          "term_end": "Nov 2026",
+          "elected": true
+        },
+        {
+          "seat": "District 3",
+          "holder": null,
+          "term_end": "Nov 2026 (on 2026 ballot)",
+          "elected": true
+        },
+        {
+          "seat": "District 5",
+          "holder": null,
+          "term_end": "Nov 2026 (on 2026 ballot)",
+          "elected": true
+        }
+      ],
+      "manager": null,
+      "ftes": null,
+      "website": "https://www.bay.k12.fl.us/",
+      "contact_url": "https://www.bay.k12.fl.us/o/bds/page/school-board",
+      "source_url": "https://www.bay.k12.fl.us/o/bds/page/school-board",
+      "other_sources": [
+        "https://www.wjhg.com/2026/08/19/florida-2026-primary-ginger-littleton-wins-bay-district-school-board-district-2/",
+        "https://digital-release.mypanhandle.com/news/schools/superintendent-mark-mcqueen-takes-oath-of-office",
+        "https://www.mypanhandle.com/news/bay-county-candidate-qualifying-for-2026-election-begins-next-week/amp/"
+      ]
+    }
+  ],
+  "constitutional_officers": [
+    {
+      "office": "Sheriff",
+      "holder": "Tommy Ford",
+      "elected": "Nov 2024 (won primary 78.07%)",
+      "term_end": "Jan 2029 (4-year term; next election Nov 2028)",
+      "website": "https://www.bayso.org/",
+      "salary_fy2025_26": 238643,
+      "salary_fy2026_27": 240075,
+      "source_url": "https://fl-counties.com/wp-content/uploads/2024/11/Election-2024-all-candidates-including-primary-updated-11-11.pdf"
+    },
+    {
+      "office": "Clerk of Circuit Court & Comptroller",
+      "holder": "Bill Kinsaul",
+      "elected": "2024, unopposed",
+      "term_end": "Jan 2029",
+      "website": "https://baycoclerk.com/",
+      "salary_fy2025_26": 170173,
+      "salary_fy2026_27": 171359,
+      "source_url": "https://fl-counties.com/wp-content/uploads/2024/11/Election-2024-all-candidates-including-primary-updated-11-11.pdf"
+    },
+    {
+      "office": "Property Appraiser",
+      "holder": "Dan Sowell",
+      "elected": "2024, unopposed",
+      "term_end": "Jan 2029",
+      "website": "https://baypa.net/",
+      "salary_fy2025_26": 170173,
+      "salary_fy2026_27": 171359,
+      "source_url": "https://fl-counties.com/wp-content/uploads/2024/11/Election-2024-all-candidates-including-primary-updated-11-11.pdf"
+    },
+    {
+      "office": "Tax Collector",
+      "holder": "William (Chuck) Perdue",
+      "elected": "2024, unopposed",
+      "term_end": "Jan 2029",
+      "website": "https://baycountyfltax.gov/",
+      "salary_fy2025_26": 198466,
+      "salary_fy2026_27": 199754,
+      "source_url": "https://fl-counties.com/wp-content/uploads/2024/11/Election-2024-all-candidates-including-primary-updated-11-11.pdf"
+    },
+    {
+      "office": "Supervisor of Elections",
+      "holder": "Nina Ward",
+      "elected": "2024, unopposed (succeeded Mark Andersen)",
+      "term_end": "Jan 2029",
+      "website": "https://www.bayvotesfl.gov/",
+      "salary_fy2025_26": 170173,
+      "salary_fy2026_27": 171359,
+      "source_url": "https://fl-counties.com/wp-content/uploads/2024/11/Election-2024-all-candidates-including-primary-updated-11-11.pdf"
+    },
+    {
+      "office": "Superintendent of Schools",
+      "holder": "Mark McQueen",
+      "elected": "Appointed July 2023 to complete Husfelt's term; 2024 election status not verified",
+      "term_end": null,
+      "website": "https://www.bay.k12.fl.us/",
+      "salary_fy2025_26": 198466,
+      "salary_fy2026_27": 199754,
+      "source_url": "https://digital-release.mypanhandle.com/news/schools/superintendent-mark-mcqueen-takes-oath-of-office"
+    }
+  ],
+  "notes": [
+    "Levy-code list comes from the Florida DOR NAV D file for Bay County (county 13), 2025 roll: 21 levy codes, 128,201 parcel-levy lines. DOR government type 1=county, 2=municipality, 3=independent special district. Code-to-name matches marked as inferred are not confirmed by a public code table.",
+    "The Tax Collector's NAV page lists only assessment types (paving, stormwater, solid waste); it does not publish a list of levying authorities. baycountyfltax.gov and baypa.net returned HTTP 403 to automated requests.",
+    "Unincorporated Bay County fire service is funded by the 1.38-mill MSTU (ad valorem), not a per-unit fire assessment. City fire assessments exist only in Panama City (PCF), Panama City Beach (PBF) and Springfield (SF).",
+    "Bay County stormwater ($40 residential / $200 commercial) appears on 42,113 + 1,530 parcels; the roll does not show which are inside cities.",
+    "No solid waste/garbage non-ad valorem assessment is on the 2025 Bay County roll. Garbage is billed monthly on city utility bills (Panama City $45.91, Springfield $37.67, Mexico Beach $40.00, Lynn Haven $24.86, Callaway $13.00).",
+    "EDR salary figures are the Chapter 145 statutory formula amounts; EDR says they apply to elected officers and should be verified by each county. FY2026-27 uses April 1, 2025 population estimates.",
+    "City elected-official pay is shown only as combined budget lines where per-member amounts were not published; dividing those lines would be an estimate and was not done.",
+    "Bay County commission page and county directory disagree on chair: the directory lists Doug Moore as Chairman; the commission page lists Clair Pease as Chairman and Daniel Raffield as Vice Chairman. WJHG reported Moore stepped down as chairman on Nov 18, 2025, which supports the commission page.",
+    "Panama City Beach's noticed FY2025-26 fire and stormwater rates are maximums; the 2025 roll amounts do not reconcile exactly with them (see caveat on PBF)."
+  ],
+  "gaps": [
+    "Final adopted rate resolutions not located for Panama City fire (commercial per-square-foot rates), Panama City Beach fire/stormwater/CRA (only the maximum-rate notice found), Lynn Haven stormwater (current per-unit rate), and Springfield fire (rate method).",
+    "Several levy codes could not be matched to a named district: SB, PW, WMH, TWIN, ALSL1, BOCA, OERR, PCN; PPCD (probably Pier Park CDD) and LPWH1 (probably Lake Powell Residential Golf CDD) are inferred.",
+    "Typical single-family amounts for value-based assessments (PCB fire/stormwater, Lynn Haven stormwater, Springfield fire) can't be stated without parcel-level property-use data. The DOR NAL parcel file for 2025 wasn't available from the portal, so only all-parcel medians are given.",
+    "Parker: no published water/sewer/garbage rate schedule found, and no FTE count.",
+    "Panama City Beach: no residential garbage rate and no FTE count (the budget book could not be downloaded; the site blocks automated access).",
+    "Panama City: the 5,000-gallon bill is provisional, because the city's 'average bill' equals its base charges alone. No stormwater fee found.",
+    "Lynn Haven: the FY2026-27 budget (which may carry rates effective Oct 1, 2026) could not be downloaded because the connection was reset; FY2025-26 rates are used.",
+    "Callaway: the rates page shows no effective date, and the FY2027 budget assumes small consumption increases that may not be on the page yet.",
+    "Mexico Beach and Springfield: no FTE counts found. Springfield and Parker list no city manager.",
+    "Manager salaries not found: Bay County (Joel Schubert), Panama City (Jonathan Hayes; only his requested $175,000 minimum was reported), Lynn Haven (Chris Lightfoot), Mexico Beach (Mell Smigielski). The Panama City Beach figure is the 2021 contract base. Department-head salaries were not compiled.",
+    "School board: the full current member roster with districts and term ends wasn't verified (the district website doesn't render it). Superintendent McQueen's 2024 election status and term end weren't verified.",
+    "Lynn Haven, Springfield and Parker seat term-end dates are not published on their sites. Lynn Haven's fifth commission seat is unconfirmed.",
+    "Bay County commissioner term ends were derived from election cycles (2024 FAC results, 2026 qualifying list), not from a single county roster."
+  ]
+}

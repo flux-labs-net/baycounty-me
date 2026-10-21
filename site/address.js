@@ -114,7 +114,18 @@ function renderTax(p, cityName) {
   el.innerHTML = `<div class="bill-hd"><span class="bill-v sm">${usd(tot)}<small> / year</small></span><span class="muted small">${esc(d.label)} · ${String(+d.total.toFixed(4))} mills${exact ? '' : ' (area inferred from the map)'}</span></div>
     <div class="stackbar">${byG.map(([g, v]) => `<span class="seg" style="flex:${v} 1 0;background:var(--s${GI[g]})" title="${esc(GN[g])}: ${usd(v)}"></span>`).join('')}</div>
     <ul class="leg mini2">${byG.map(([g, v]) => `<li><i style="background:var(--s${GI[g]})"></i><span>${esc(g === 'city' ? (rows.find(r => r.g === 'city')?.n || 'City') : GN[g])}</span><b>${usd(v)}</b></li>`).join('')}</ul>
-    <p class="muted small">2026 values × ${D.fy} rates. Property tax only; fees not included. <a href="/public-money/tax-dollars">Where it goes →</a></p>`;
+    <div id="feeBody"><p class="muted small">Checking fees on the tax bill…</p></div>
+    <p class="muted small">Property tax: 2026 values × ${D.fy} rates. Fees: the FY2026 tax roll. <a href="/public-money/tax-dollars">Where it goes →</a></p>`;
+  loadFees(p.A1RENUM, tot);
+}
+async function loadFees(pid, taxTot) {
+  const el = $('feeBody'); if (!el || !pid) return;
+  let items = [];
+  try { const r = await fetch(`/data/nav/${pid.slice(0, 3)}.json`); if (r.ok) items = (await r.json())[pid] || []; } catch (e) { el.innerHTML = ''; return; }
+  const fees = items.reduce((a, x) => a + x[1], 0);
+  el.innerHTML = items.length
+    ? `<dl class="kv fees"><dt class="span">Flat fees on the tax bill</dt>${items.map(([c, a]) => `<dt>${esc(D.navLabel[c] || 'Other charge (' + c + ')')}</dt><dd>${usd(a)}</dd>`).join('')}<dt><b>Estimated total bill</b></dt><dd><b>${usd(taxTot + fees)}</b> <span class="muted small">tax + fees</span></dd></dl>`
+    : '<p class="muted small">No flat fees (non-ad valorem assessments) were on this parcel\'s FY2026 tax bill.</p>';
 }
 function renderProp(p) {
   const el = $('propBody');

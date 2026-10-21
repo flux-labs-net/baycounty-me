@@ -25,7 +25,28 @@ CRA_AGENCY = {
 }
 
 
+NAV_LABEL = {
+    'STWR': 'Bay County stormwater fee', 'STWC': 'Bay County stormwater fee (commercial)', 'ALSL1': 'Street lighting assessment', 'BOCA': 'Street lighting assessment',
+    'OERR': 'Road improvement assessment', 'PPCD': 'Pier Park area assessment', 'PCF': 'Panama City fire assessment', 'PBF': 'Panama City Beach fire assessment',
+    'PBSW': 'Panama City Beach stormwater assessment', 'PBCRA': 'Front Beach Road CRA assessment', 'LN': 'Lynn Haven stormwater assessment',
+    'SF': 'Springfield fire assessment', 'LPWH1': 'Community development district assessment', 'SB': 'Special district assessment',
+    'PW': 'Lighting district assessment', 'WMH': 'Lighting district assessment', 'TWIN': 'Special district assessment',
+}
+
+
+def write_nav(out_dir):
+    nav = json.load(open(os.path.join(HERE, '..', 'data', 'fees', 'nav_2025.json')))
+    shards = defaultdict(dict)
+    for pid, items in nav.items():
+        shards[pid[:3]][pid] = items
+    d = os.path.join(out_dir, 'data', 'nav'); os.makedirs(d, exist_ok=True)
+    for k, v in shards.items():
+        json.dump(v, open(os.path.join(d, f'{k}.json'), 'w'), separators=(',', ':'))
+    return len(shards)
+
+
 def addr_page(out_dir):
+    write_nav(out_dir)
     td = build_data()
     L = len(YEARS) - 1
     merged = json.load(open(os.path.join(HERE, '..', 'data', 'merged.json')))
@@ -38,7 +59,7 @@ def addr_page(out_dir):
         'taxdist': TAXDIST, 'craAgency': CRA_AGENCY, 'cra': {k: {'spent': round(v['spent']), 'n': v['n']} for k, v in cra.items()},
         'districts': {d['id']: {'label': d['label'], 'stack': d['stack'], 'total': d['total'][L]} for d in td['districts']},
         'auth': {k: {'n': a['n'], 'g': a['g'], 'school': a['school'], 'm': a['m'][L]} for k, a in td['auth'].items()},
-        'groups': td['groups'], 'fy': td['fy'][L], 'second2026': 26411,
+        'groups': td['groups'], 'fy': td['fy'][L], 'second2026': 26411, 'navLabel': NAV_LABEL,
     }
     js = open(os.path.join(HERE, 'address.js')).read().replace('__ADDR__', json.dumps(data, ensure_ascii=False, separators=(',', ':')))
     open(os.path.join(out_dir, 'assets', 'address.js'), 'w').write(js)
@@ -88,7 +109,7 @@ def addr_page(out_dir):
   <section class="tx-sec method" aria-labelledby="src-h">
     <div class="sec-hd"><h2 id="src-h">How this works</h2></div>
     <p>Addresses, parcels, property values and district boundaries come live from <a href="https://gis.baycountyfl.gov/arcgis/rest/services" target="_blank" rel="noopener">Bay County's public GIS server</a>, which publishes the Property Appraiser's parcel data. Property values are the 2026 roll. Flood zones come from FEMA's flood map layer in that service.</p>
-    <p>The tax estimate applies the latest complete set of official rates (tax year 2025, {data['fy']} bills, from the Florida Department of Revenue) to the 2026 values. The rates adopted in September 2026 will replace them when the state publishes the full set. It covers {T('ad-valorem', 'property taxes')} only, not {T('non-ad-valorem', 'non-ad valorem fees')}. For a homestead, school tax is figured on the value before the second homestead exemption, since that one doesn't apply to schools. Other exemptions are taken as reported by the Property Appraiser. Your official bill comes from the Tax Collector.</p>
+    <p>The tax estimate applies the latest complete set of official rates (tax year 2025, {data['fy']} bills, from the Florida Department of Revenue) to the 2026 values. The rates adopted in September 2026 will replace them when the state publishes the full set. Flat {T('non-ad-valorem', 'non-ad valorem')} fees (fire, stormwater, lighting and similar) come from the Florida Department of Revenue's parcel-level file for the 2025 tax roll, so they show what was on the FY2026 bill. For a homestead, school tax is figured on the value before the second homestead exemption, since that one doesn't apply to schools. Other exemptions are taken as reported by the Property Appraiser. Your official bill comes from the Tax Collector.</p>
   </section>
   <div class="tt" id="tt" role="tooltip" hidden></div>
 </div>
