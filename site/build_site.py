@@ -12,6 +12,7 @@ from amend_page import amend_page
 from addr_page import addr_page
 from michael_page import michael_page
 from search_page import search_page, build_index
+from updates import updates_page, rss, last_updated, nice as nice_date
 OUT = os.path.join(ROOT, 'public')
 SITE = 'BayCounty.me'
 DOMAIN = 'https://baycounty.me'
@@ -65,7 +66,8 @@ def nav_html(active):
 
 FOOTER = '''<footer class="site-foot"><div class="site-foot-in">
   <div class="foot-about"><p><b>BayCounty.me</b> puts Bay County, Florida public records in plain view: maps, money, and the documents behind them.</p>
-  <p class="muted">Found an error or have a record to add? Email <span class="sel">hello@fluxlabs.net</span>.</p></div>
+  <p class="muted">Found an error or have a record to add? Email <span class="sel">hello@fluxlabs.net</span>.</p>
+  <p class="muted foot-links">__UPDATED__<a href="/updates">What's new</a> · <a href="/updates.xml">RSS</a> · <a href="/about">Sources and method</a></p></div>
   <a class="powered" href="https://fluxlabs.net/" target="_blank" rel="noopener"><span>Powered by</span><img src="/assets/flux-labs.webp" alt="Flux Labs" width="140" height="25"></a>
 </div></footer>'''
 
@@ -223,6 +225,7 @@ def layout(title, desc, path, body, extra_head=''):
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="/assets/site.css">
+<link rel="alternate" type="application/rss+xml" title="BayCounty.me updates" href="/updates.xml">
 {extra_head}
 </head>
 <body>
@@ -231,7 +234,7 @@ def layout(title, desc, path, body, extra_head=''):
 <main id="main">
 {body}
 </main>
-{FOOTER}
+{FOOTER.replace('__UPDATED__', ('Page updated ' + nice_date(last_updated(path)) + ' · ') if path not in ('/404',) else '')}
 <script src="/assets/site.js" defer></script>
 </body>
 </html>
@@ -482,6 +485,7 @@ PAGES = [
      'What Florida\'s 2026 Amendment 3 would do to Bay County property tax bills and local budgets, using the state\'s own estimates. Before-and-after calculator; both sides\' arguments; no position taken.', lambda: amend_page(OUT)),
     ('/public-money/hurricane-michael', 'Where the Hurricane Michael money went', 'FEMA, HUD and state recovery money in Bay County after Hurricane Michael: every FEMA project, household aid by city, Rebuild Florida awards, debris costs and the Lynn Haven case.', lambda: michael_page(OUT)),
     ('/glossary', 'Plain-English guide', 'Every term on BayCounty.me explained simply: CRAs, tax increment, millage, homestead exemptions, budgets and more.', glossary_page),
+    ('/updates', 'Updates', 'New pages, new data and corrections on BayCounty.me, newest first, with an RSS feed.', updates_page),
     ('/search', 'Search', 'Search every page, glossary term and public-money record on BayCounty.me.', search_page),
     ('/about', 'About', 'What BayCounty.me is, where its information comes from, and how to send a correction.', about_page),
 ]
@@ -502,6 +506,7 @@ def main():
     for path, title, desc, fn in PAGES:
         write(path, layout(title, desc, path, fn()))
     print('search index:', build_index(OUT, PAGES), 'entries')
+    open(os.path.join(OUT, 'updates.xml'), 'w').write(rss(DOMAIN))
     open(os.path.join(OUT, '404.html'), 'w').write(layout('Page not found', 'Page not found', '/404',
         '<div class="page prose"><h1>That page isn\'t here.</h1><p><a href="/">Back to the home page</a></p></div>'))
     for dp, _, fs in os.walk(OUT):

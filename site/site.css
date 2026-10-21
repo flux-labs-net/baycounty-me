@@ -151,3 +151,6 @@ a{color:var(--blue)}
   .foot-about .muted{display:none}
   .powered{border-color:#D9DFE7}
 }
+
+.foot-links{font-size:.82rem}
+.foot-links a{color:inherit}

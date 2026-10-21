@@ -52,6 +52,14 @@ git add -A && git commit -m "Update" && git push
 
 Every term on the site lives in `site/glossary.py`. Wrap a word with `term('id', 'text')` in `build_site.py` (or `<span class="term" data-term="id">text</span>` in page JS) and it gets a dotted underline; hover, tap or Tab to it for the simple explanation, with a link to `/glossary#id`. Write the `simple` line so a fifth-grader can follow it.
 
+## Updates feed
+
+Every data change gets an entry at the top of `CHANGES` in `site/updates.py`. That drives the "Page updated" line in each page's footer, the /updates page and the /updates.xml RSS feed.
+
+## Search
+
+`site/search_page.py` builds `data/search.json` after the pages are written: page text and headings, glossary terms, and dataset records. Add a dataset by appending a function to `INDEXERS`.
+
 ## Data rules
 
 - Every figure comes from a public record with a linked source. Nothing is estimated.
