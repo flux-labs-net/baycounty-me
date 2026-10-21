@@ -17,14 +17,24 @@ function connectionString() {
   return u.toString();
 }
 
+// TLS settings. Supabase's certificate is signed by Supabase's own CA, which Node doesn't ship with.
+// * SUPABASE_CA_CERT set (the PEM text from Supabase > Database settings > SSL configuration > Download certificate,
+//   pasted as-is, or with literal \n for line breaks): the connection is encrypted AND the server is verified.
+// * Not set: FALLBACK. Still encrypted, but the certificate isn't checked, so a network attacker who could
+//   intercept the connection could impersonate the database. Set SUPABASE_CA_CERT to close that gap.
+function tlsOptions(cs) {
+  if (/@(localhost|127\.0\.0\.1)[:/]/.test(cs)) return false;
+  const ca = String(process.env.SUPABASE_CA_CERT || '').replace(/\\n/g, '\n').trim();
+  if (ca) return {ca, rejectUnauthorized: true};
+  return {rejectUnauthorized: false};
+}
+
 function getPool() {
   if (pool) return pool;
   const cs = connectionString();
   if (!cs) return null;
   const {Pool} = require('pg'); // loaded on first use, so modules that never touch the database don't need it
-  // Encrypted; Supabase's pooler certificate is signed by Supabase's own CA, which Node doesn't ship with.
-  const local = /@(localhost|127\.0\.0\.1)[:/]/.test(cs);
-  pool = new Pool({connectionString: cs, max: 3, idleTimeoutMillis: 10000, connectionTimeoutMillis: 4000, ssl: local ? false : {rejectUnauthorized: false}});
+  pool = new Pool({connectionString: cs, max: 3, idleTimeoutMillis: 10000, connectionTimeoutMillis: 4000, ssl: tlsOptions(cs)});
   pool.on('error', e => console.error('pg pool', e.message));
   return pool;
 }
