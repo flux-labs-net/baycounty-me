@@ -144,9 +144,7 @@ section.block{display:flex;flex-direction:column;gap:12px}
 .tablewrap{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
 table{border-collapse:collapse;width:100%;min-width:980px;font-size:.84rem}
 th,td{padding:9px 12px;text-align:left;vertical-align:top;border-top:1px solid var(--line)}
-thead th{border-top:0;font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:500;background:var(--sunken);position:sticky;top:0;cursor:pointer;white-space:nowrap}
-thead th[aria-sort]::after{content:" ↓"}
-thead th[aria-sort="ascending"]::after{content:" ↑"}
+thead th{border-top:0;font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:500;background:var(--sunken);position:sticky;top:0;white-space:nowrap}
 td.amt{font-family:var(--f-data);text-align:right;white-space:nowrap}
 th.amt{text-align:right}
 tbody tr{cursor:pointer}
@@ -230,7 +228,7 @@ details.cx ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:
         <th data-k="where">Where</th>
         <th data-k="when">When</th>
         <th data-k="status">Status</th>
-        <th data-k="src">Source</th>
+        <th data-k="src" data-nosort>Source</th>
       </tr></thead>
       <tbody></tbody>
     </table></div>
@@ -540,8 +538,10 @@ function renderLedger(rows){
   document.querySelectorAll('#ledger thead th').forEach(th => { if (th.dataset.k===k) th.setAttribute('aria-sort', d<0?'descending':'ascending'); else th.removeAttribute('aria-sort'); });
   document.querySelectorAll('#ledger tbody tr').forEach(tr => tr.onclick = e => { if (e.target.closest('a')) return; select(+tr.dataset.id); document.getElementById('mapbox').scrollIntoView({behavior:'smooth', block:'start'}); });
 }
-document.querySelectorAll('#ledger thead th').forEach(th => th.onclick = () => { const k = th.dataset.k; if (k==='src') return;
-  if (S.sortK===k) S.sortDir *= -1; else { S.sortK = k; S.sortDir = k==='amount'||k==='when' ? -1 : 1; } renderLedger(filtered()); });
+// sortable headers are real buttons (keyboard and screen reader friendly) via the shared helper in site.js
+const sortBy = k => { if (S.sortK===k) S.sortDir *= -1; else { S.sortK = k; S.sortDir = k==='amount'||k==='when' ? -1 : 1; } renderLedger(filtered()); return S.sortDir; };
+if (window.BCM) BCM.sortable(document.getElementById('ledger'), {onSort: k => sortBy(k)});
+else document.querySelectorAll('#ledger thead th').forEach(th => th.onclick = () => { if (th.dataset.k !== 'src') sortBy(th.dataset.k); });
 document.getElementById('more').onclick = () => { S.showAll = true; renderLedger(filtered()); };
 
 /* ---------- context ---------- */

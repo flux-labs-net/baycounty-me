@@ -8,8 +8,10 @@
                  script are picked up (retried for ~9 s). A checkbox writes 1/0 only when it differs
                  from its starting state.
                  Pages with their own JS state use BCM.urlState.get(k) / .set({k: v}) / .setLater().
-   Sorting       BCM.sortable(table, {onSort(key, dir, col)}) turns header cells into real buttons
-                 with aria-sort. With no onSort the rows are sorted in place (numbers with $ , % K M B,
+   Sorting       BCM.sortable(table, {onSort(key, dir, col, type)}) turns header cells into real buttons
+                 with aria-sort (key = th[data-k] or the column index; onSort may return 1 or -1 to pick
+                 the direction itself; a th that starts with aria-sort counts as the current sort).
+                 With no onSort the rows are sorted in place (numbers with $ , % K M B,
                  dates, or text are detected per column; rows under a tr.grp group header stay in their
                  group). Call it again after re-rendering a table to re-apply the sort. Tables with
                  data-sortable are set up on load; th[data-nosort] stays plain.
@@ -155,16 +157,17 @@ B.sortable = (table, opts) => {
     [...hr.cells].forEach(th => {
       const span = +th.colSpan || 1, idx = ci; ci += span;
       if (th.hasAttribute('data-nosort') || span > 1 || !th.textContent.trim() || th.querySelector('button')) return;
+      if (th.hasAttribute('aria-sort')) { st.col = idx; st.dir = th.getAttribute('aria-sort') === 'ascending' ? 1 : -1; } // already sorted this way
       const b = document.createElement('button'); b.type = 'button'; b.className = 'th-sort';
       while (th.firstChild) b.appendChild(th.firstChild);
       th.appendChild(b);
       b.addEventListener('click', () => {
         const type = th.dataset.type || (th.classList.contains('num') && st.opts.onSort ? 'num' : B.detectType(bodyRows(table).filter(r => !r.classList.contains('grp')).map(r => mainText(cellAt(r, idx)))));
-        const dir = st.col === idx ? -st.dir : (type === 'text' ? 1 : -1);
+        let dir = st.col === idx ? -st.dir : (type === 'text' ? 1 : -1);
+        if (st.opts.onSort) { const r = st.opts.onSort(th.dataset.k != null ? th.dataset.k : idx, dir, idx, type); if (r === 1 || r === -1) dir = r; }
         st.col = idx; st.dir = dir; st.type = type;
         [...hr.cells].forEach(c => { if (c === th) c.setAttribute('aria-sort', dir < 0 ? 'descending' : 'ascending'); else c.removeAttribute('aria-sort'); });
-        if (st.opts.onSort) st.opts.onSort(th.dataset.k != null ? th.dataset.k : idx, dir, idx, type);
-        else sortRows(table, idx, dir, type);
+        if (!st.opts.onSort) sortRows(table, idx, dir, type);
         B.announce('Sorted by ' + b.textContent.trim() + ', ' + (dir < 0 ? (type === 'text' ? 'Z to A' : 'largest first') : (type === 'text' ? 'A to Z' : 'smallest first')));
       });
     });
