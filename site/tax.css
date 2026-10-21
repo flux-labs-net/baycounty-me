@@ -380,3 +380,15 @@ a.src:hover{color:var(--blue)}
 .method{overflow-wrap:anywhere}
 .method li{min-width:0}
 .m-h{font-size:.95rem;margin:4px 0 0}
+/* Votes filters */
+.vt-filters{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;align-items:end}
+.vt-filters .vf-q{grid-column:1/-1}
+.vt-filters input,.vt-filters select{width:100%;min-height:42px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);font:400 .9rem var(--f-body);padding:0 12px}
+.vf{display:flex;flex-direction:column;gap:4px;min-width:0}
+.vf > span{font-size:.72rem;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.vt-status{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;font-size:.88rem;min-height:24px}
+.vt-memsum{color:var(--ink)}
+.linkbtn{border:0;background:none;color:var(--blue);font:500 .88rem var(--f-body);cursor:pointer;padding:0;text-decoration:underline;text-underline-offset:2px}
+.vchip.me{box-shadow:0 0 0 2px var(--blue)}
+@media (max-width:1000px){.vt-filters{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:560px){.vt-filters{grid-template-columns:repeat(2,minmax(0,1fr))}}

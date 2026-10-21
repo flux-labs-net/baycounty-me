@@ -39,6 +39,18 @@ METHOD = [
     'Lynn Haven: Judy Vandergrift served through May 2025 and Judy Tinder\'s recorded votes run through September 2026. Corey Langford now holds that seat. Mayor Jesse Nelson was followed by Dave Lowery in early 2026.',
 ]
 
+GOVS = [('county', 'Bay County Commission', ('bay-',)), ('pc', 'Panama City', ('pc-',)), ('pcb', 'Panama City Beach', ('pcb-',)),
+        ('lh', 'Lynn Haven', ('lh-',)), ('cw', 'Callaway', ('cw-',)), ('sp', 'Springfield', ('sp-',)), ('parker', 'Parker', ('parker-',)),
+        ('mb', 'Mexico Beach', ('mb-',)), ('schools', 'School Board', ('bds-',))]
+
+
+def gov_of(body):
+    for k, _, pre in GOVS:
+        if body.startswith(pre):
+            return k
+    return 'other'
+
+
 ORDER = {'no': 0, 'yes': 1, 'abstain': 2, 'absent': 3, 'unknown': 4}
 VL = {'yes': 'Yes', 'no': 'No', 'absent': 'Absent', 'abstain': 'Abstained', 'unknown': '?'}
 
@@ -69,8 +81,9 @@ def votes_page(out_dir):
     for v in vs:
         for n, x in (v.get('by_member') or {}).items():
             mem[(v['body'], n)][x] += 1
-    data = {'bodies': {k: {'n': board_name(b['name'])} for k, b in bodies.items()}, 'cat': CAT,
-            'votes': [{'b': v['body'], 'd': v.get('date'), 'dn': nice(v.get('date')), 'c': v.get('category'), 'i': v.get('item'), 'a': v.get('amount'), 'o': v.get('outcome'), 't': tally(v.get('tally')),
+    data = {'bodies': {k: {'n': board_name(b['name']), 'g': gov_of(k)} for k, b in bodies.items()}, 'cat': CAT,
+            'govs': [[k, n] for k, n, _ in GOVS if any(gov_of(v['body']) == k for v in vs)],
+            'votes': [{'b': v['body'], 'g': gov_of(v['body']), 'd': v.get('date'), 'dn': nice(v.get('date')), 'c': v.get('category'), 'i': v.get('item'), 'a': v.get('amount'), 'o': v.get('outcome'), 't': tally(v.get('tally')),
                        'm': v.get('by_member') or {}, 'x': is_split(v), 'h': v.get('headline') or v.get('item'), 's': v.get('summary') or v.get('plain_summary'),
                        'u': v.get('source_url'), 'ut': v.get('source_title'), 'ul': src_label(v)} for v in vs]}
     js = open(os.path.join(HERE, 'votes.js')).read().replace('__VT__', json.dumps(data, ensure_ascii=False, separators=(',', ':')))
@@ -114,11 +127,17 @@ def votes_page(out_dir):
     <div class="kpi"><span class="eyebrow">Boards covered so far</span><span class="v">{sum(1 for k in bodies if not k.endswith("-cra") and (cnt[k] or cnt[k.split("-")[0] + "-cra"]))} of {len([k for k in bodies if not k.endswith("-cra")])}</span><span class="s">School Board still limited</span></div>
   </div>
   <section class="tx-sec"><div class="sec-hd"><h2 id="split">Split votes</h2><span class="muted">Most recent first</span></div><ol class="findings">{sp_html}</ol></section>
-  <section class="tx-sec"><div class="sec-hd"><h2 id="all">Every recorded vote</h2><span class="muted" id="vtCount"></span></div>
-    <div class="filters-row"><input id="vtQ" type="search" placeholder="Search items or names" aria-label="Search votes">
-      <select id="vtB" aria-label="Board"><option value="">All boards</option></select>
-      <select id="vtC" aria-label="Type"><option value="">All types</option></select>
-      <label class="chk"><input type="checkbox" id="vtS"> Split votes only</label></div>
+  <section class="tx-sec"><div class="sec-hd"><h2 id="all">Every recorded vote</h2><span class="muted">Filter by government, member, year or outcome</span></div>
+    <div class="vt-filters">
+      <input id="vtQ" type="search" placeholder="Search votes, vendors or names" aria-label="Search votes" class="vf-q">
+      <label class="vf"><span>Government</span><select id="vtG"><option value="">All governments</option></select></label>
+      <label class="vf"><span>Member</span><select id="vtM"><option value="">Anyone</option></select></label>
+      <label class="vf"><span>Type</span><select id="vtC"><option value="">All types</option></select></label>
+      <label class="vf"><span>Year</span><select id="vtY"><option value="">All years</option></select></label>
+      <label class="vf"><span>Outcome</span><select id="vtO"><option value="">All votes</option><option value="split">Split votes</option><option value="unan">Unanimous</option><option value="failed">Failed motions</option></select></label>
+      <label class="vf"><span>Sort</span><select id="vtSort"><option value="new">Newest first</option><option value="old">Oldest first</option><option value="amt">Largest amount</option><option value="close">Closest votes</option></select></label>
+    </div>
+    <div class="vt-status"><span id="vtCount" class="muted"></span><span id="vtMember" class="vt-memsum"></span><button type="button" class="linkbtn" id="vtClear" hidden>Clear filters</button></div>
     <ol class="findings" id="vtList"></ol><button type="button" class="pill" id="vtMore">Show more</button></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="who">Members and their records</h2><span class="muted">Counts cover only the votes recorded on this page</span></div>{roster}</section>
   <section class="tx-sec method"><div class="sec-hd"><h2 id="src">Coverage and gaps</h2></div>

@@ -9,6 +9,9 @@ from datetime import datetime, timezone
 import html
 
 CHANGES = [
+    {'date': '2026-10-21', 'title': 'Votes: filters and corrections',
+     'text': 'Filter recorded votes by government, member, year and outcome, sort by date, amount or closest margin, and share a filtered view by link. Corrections checked against the original minutes: removed two Lynn Haven votes counted twice from a second copy of the same minutes; fixed member votes on a Lynn Haven CRA vote and a Panama City Beach vote that had been misread; restored amounts cut off or misread from scanned pages; and noted fiscal-year and resolution-number typos that appear in the minutes themselves.',
+     'pages': ['/public-money/votes']},
     {'date': '2026-10-21', 'title': 'Clearer vote summaries',
      'text': 'Every recorded vote now has a plain-English headline and summary saying what was decided, rewritten from the motion in the minutes. The earlier text was pasted from the minutes and was often hard to read. Each card shows who voted which way and links to the minutes.',
      'pages': ['/public-money/votes']},
