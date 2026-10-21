@@ -9,6 +9,9 @@ from datetime import datetime, timezone
 import html
 
 CHANGES = [
+    {'date': '2026-10-21', 'title': 'School Board votes, and more city votes',
+     'text': 'How They Voted now includes 104 School Board votes from January 2024 to September 2026 with each member\'s vote, including budgets, millage and major contracts; all 2024 Panama City Beach council votes, including the FY2025 budget; and Springfield votes from mid-2024 to October 2026, including both final budget hearings.',
+     'pages': ['/public-money/votes']},
     {'date': '2026-10-21', 'title': 'Money map',
      'text': 'An interactive map of which businesses and groups gave to which officials, and where those same donors hold contracts with a local government, plus heat maps of giving by government and of contract dollars held by each official\'s donors.',
      'pages': ['/public-money/money-map']},

@@ -124,7 +124,7 @@ def votes_page(out_dir):
     <div class="kpi"><span class="eyebrow">Votes recorded</span><span class="v">{len(vs)}</span><span class="s">Money decisions with a source</span></div>
     <div class="kpi"><span class="eyebrow">Split votes</span><span class="v">{len(split)}</span><span class="s">Not unanimous</span></div>
     <div class="kpi"><span class="eyebrow">Tax rate votes</span><span class="v">{sum(1 for v in vs if v.get("category") == "millage")}</span><span class="s">Millage adoptions</span></div>
-    <div class="kpi"><span class="eyebrow">Boards covered so far</span><span class="v">{sum(1 for k in bodies if not k.endswith("-cra") and (cnt[k] or cnt[k.split("-")[0] + "-cra"]))} of {len([k for k in bodies if not k.endswith("-cra")])}</span><span class="s">School Board still limited</span></div>
+    <div class="kpi"><span class="eyebrow">Boards covered so far</span><span class="v">{sum(1 for k in bodies if not k.endswith("-cra") and (cnt[k] or cnt[k.split("-")[0] + "-cra"]))} of {len([k for k in bodies if not k.endswith("-cra")])}</span><span class="s">Every county, city and School Board</span></div>
   </div>
   <section class="tx-sec"><div class="sec-hd"><h2 id="split">Split votes</h2><span class="muted">Most recent first</span></div><ol class="findings">{sp_html}</ol></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="all">Every recorded vote</h2><span class="muted">Filter by government, member, year or outcome</span></div>

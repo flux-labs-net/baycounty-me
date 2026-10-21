@@ -121,7 +121,7 @@ def home_page():
   <section class="section" aria-labelledby="soon">
     <div class="sec-hd"><h2 id="soon">In the works</h2><span class="muted">Research underway now</span></div>
     <div class="cols">
-      <div><h3>School Board votes</h3><p>Bay District Schools' meeting records aren't reachable online yet; they're being requested.</p></div>
+      <div><h3>2026 County Commission minutes</h3><p>The Clerk hasn't posted Commission minutes after June 16, including the September budget hearings. Votes will be added when they are.</p></div>
       <div><h3>City check registers</h3><p>No city posts its vendor payments. The county's and the <a href="/public-money/who-gets-paid">tourism agencies'</a> are up; the cities' are being requested.</p></div>
     </div>
   </section>
