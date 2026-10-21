@@ -52,6 +52,8 @@ def alerts_page(out_dir):
     <li><b>What's new</b> for each government you follow: votes, contracts, data updates and corrections from the <a href="/updates">change log</a>.</li>
     <li><b>Meetings coming up</b> in the next week, with agenda links when they're posted. See all of them on the <a href="/meetings">meetings page</a>.</li>
     <li>Prefer a feed reader? Use the <a href="/updates.xml">RSS feed</a>.</li></ul></section>
+  <section class="tx-sec method"><div class="sec-hd"><h2 id="manage">Change or stop your emails</h2></div>
+    <p>Every email has a <b>Change what you follow</b> link that lets you add or remove governments, turn off alerts or unsubscribe from everything. Lost it? <a href="/alerts/manage">Get a new link by email</a>.</p></section>
 </div>
 <link rel="stylesheet" href="/assets/tax.css">
 <script>

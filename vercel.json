@@ -10,6 +10,10 @@
   ],
   "rewrites": [
     {
+      "source": "/alerts/manage",
+      "destination": "/api/manage"
+    },
+    {
       "source": "/api/v1/:path*",
       "destination": "/api/v1?path=:path*"
     }

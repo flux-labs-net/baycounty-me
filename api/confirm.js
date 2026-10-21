@@ -3,7 +3,7 @@
 //                            scanners (Microsoft Defender Safe Links and others) open links before people do.
 //   POST /api/confirm (t)    does the work, then redirects to /alerts with a status.
 // Token kinds: weekly digest sign-ups (no kind, from subscribe.js) and rule alerts (kind 'rule', see _rules.js).
-const {GOVS, ALL_SEGMENT, readToken, resend, esc} = require('./_alerts');
+const {GOVS, ALL_SEGMENT, readToken, resend, esc, setPrefsProperty} = require('./_alerts');
 
 function page(title, body) {
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex">
@@ -21,6 +21,7 @@ async function confirmDigest(p, key) {
     r = {ok: adds.some(a => a.ok) || adds.every(a => a.status === 409 || a.status === 422)};
     if (!r.ok) console.error('confirm add', adds.map(a => a.status + ' ' + JSON.stringify(a.body)).join(' | '));
   }
+  if (r.ok) await setPrefsProperty(p.e, key); // per-contact manage link used by the digest footer
   return r.ok ? `/alerts?status=confirmed&g=${p.g.join(',')}` : '/alerts?status=error';
 }
 
