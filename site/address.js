@@ -1,5 +1,7 @@
 (() => {
 const D = __ADDR__;
+const X = __ADDR_TXT__;
+const fmt = (s, o) => s.replace(/\{(\w+)\}/g, (m, k) => o[k] ?? m);
 const GIS = 'https://gis.baycountyfl.gov/arcgis/rest/services';
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -234,15 +236,78 @@ async function load(f) {
   const pa = $('paLink');
   if (parcel?.PLINK) { pa.href = parcel.PLINK; pa.hidden = false; } else pa.hidden = true;
   if (parcel) parcel._ex = await loadEx(parcel.A1RENUM);
+  const govKey = cityKey(cityName);
   renderTax(parcel, cityName);
   renderProp(parcel);
   renderReps(comm, local, sb, house, senate, ush, cityName);
   renderSchools(es, ms, hs);
   renderCra(cra);
   renderSafe(flood, evac, mosq, tdc, fire, lib, park);
+  renderGovLinks(govKey);
   loadDev(pt, cityName);
+  loadNear(pt, govKey);
   drawMap(pt, cityName, cra?.[0]?.CRA);
 }
+/* The government that runs this address: its city, or the County Commission outside city limits. Keys match govs.py. */
+const cityKey = cityName => (cityName && Object.keys(D.govs).find(k => D.govs[k].s === cityName)) || 'county';
+
+/* GIS representative name -> the name used in recorded votes (same government only; one clear match or none).
+   Matches last names and first names where one starts the other (Doug/Douglas), ignoring initials and Jr./Sr. */
+function normName(s) { return String(s || '').toLowerCase().replace(/[.,]/g, ' ').split(/\s+/).filter(w => w.length > 1 && !/^(jr|sr|ii|iii|iv)$/.test(w)); }
+function matchMember(rep, gov) {
+  const a = normName(rep); if (a.length < 2) return null;
+  const hits = (D.members[gov] || []).filter(([n]) => { const b = normName(n); return b.length > 1 && b[b.length - 1] === a[a.length - 1] && (b[0].startsWith(a[0]) || a[0].startsWith(b[0])); });
+  return hits.length === 1 ? hits[0] : null;
+}
+
+/* Links to this government's records, filtered with the params each page already reads (see gov_pages.py). */
+function govRecordLinks(k) {
+  const g = D.govs[k]; if (!g) return '';
+  const L = [[`/governments/${g.slug}`, X.l_page], g.c ? [`/public-money/contracts?gov=${encodeURIComponent(g.c)}#all`, X.l_contracts] : null, [`/meetings?gov=${k}`, X.l_meetings],
+    g.b ? [`/public-money/budget-explorer?gov=${k}`, X.l_budget] : null, [`/alerts?gov=${k}`, X.l_alerts], [`/records-request?gov=${k}`, X.l_records],
+    g.f ? [`/public-money/hurricane-michael?q=${encodeURIComponent(g.f)}`, X.l_michael] : null].filter(Boolean);
+  return `<dt>${esc(g.s)}</dt><dd>${L.map(([h, t]) => `<a href="${esc(h)}">${esc(t)}</a>`).join(' · ')}</dd>`;
+}
+function renderGovLinks(k) {
+  const keys = [...new Set([k, 'county', 'schools'])];
+  $('govBody').innerHTML = `<dl class="kv">${keys.map(govRecordLinks).join('')}</dl><p class="muted small">${esc(X.govNote)}</p>`;
+}
+
+/* Public money near the address: CRA ledger rows within half a mile and sales tax projects within a mile.
+   Fetched only after an address is chosen. */
+let NEAR = null;
+async function loadNear(pt, govKey) {
+  const el = $('nearBody'); if (!el) return;
+  el.innerHTML = '<p class="muted small">Loading…</p>';
+  try {
+    NEAR = NEAR || await Promise.all(['/data/cra-pay-1.json', '/data/cra-pay-2.json', '/data/surtax-projects.json'].map(u => fetch(u).then(r => { if (!r.ok) throw new Error(u); return r.json(); })))
+      .then(([a, b, s]) => ({cra: a.concat(b), st: s}));
+  } catch (e) { NEAR = null; el.innerHTML = `<p class="muted">${esc(X.fail)}</p>`; return; }
+  el.innerHTML = nearHtml(pt, NEAR, govKey);
+}
+function nearCra(pt, pays) {
+  // only rows counted in CRA totals and placed at a site (not just somewhere in a district)
+  return pays.filter(p => p.count && p.placed === 'site' && p.lat != null && p.lng != null)
+    .map(p => ({...p, mi: miles(pt, {x: p.lng, y: p.lat})})).filter(p => p.mi <= 0.5).sort((a, b) => a.mi - b.mi);
+}
+function nearSurtax(pt, projs) {
+  return projs.filter(p => p.x != null && p.yy != null).map(p => ({...p, mi: miles(pt, {x: p.x, y: p.yy})})).filter(p => p.mi <= 1).sort((a, b) => a.mi - b.mi);
+}
+function nearHtml(pt, N, govKey) {
+  const cr = nearCra(pt, N.cra), st = nearSurtax(pt, N.st), MAX = 5;
+  const craAmt = cr.filter(p => p.status === 'Spent' || p.status === 'Committed').reduce((a, p) => a + (p.amount || 0), 0);
+  const more = n => n > MAX ? `<li class="muted small">${esc(fmt(X.more, {n: n - MAX}))}</li>` : '';
+  const craIds = [...new Set(cr.map(p => p.cra))], craName = id => (Object.entries(D.craId).find(([, v]) => v === id) || [id])[0];
+  const stGov = st[0]?.g;
+  return `<h4 class="dev-h">${esc(X.nearCraH)}${cr.length ? ` <span class="muted small">${esc(fmt(X.craTotal, {n: cr.length, amt: big(craAmt)}))}</span>` : ''}</h4>
+    ${cr.length ? `<ul class="dev-list">${cr.slice(0, MAX).map(p => `<li><b>${p.amount ? usd(p.amount) : '—'}</b> · ${esc(p.purpose || p.payee || '')}<br><span class="muted small">${[X['cs_' + p.status] || p.status, p.when, p.mi.toFixed(1) + ' mi'].filter(Boolean).map(esc).join(' · ')}${p.url ? ` · <a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(X.source)}</a>` : ''}</span></li>`).join('')}${more(cr.length)}</ul>
+      <p class="small">${craIds.map(id => `<a href="/public-money/cra-spending?cra=${esc(id)}">${esc(craIds.length > 1 ? craName(id) + ': ' : '')}${esc(X.seeCra)}</a>`).join(' · ')}</p>` : `<p class="small muted">${esc(X.nearNone)}</p>`}
+    <h4 class="dev-h">${esc(X.nearStH)}${st.length ? ` <span class="muted small">${esc(fmt(X.stTotal, {n: st.length}))}</span>` : ''}</h4>
+    ${st.length ? `<ul class="dev-list">${st.slice(0, MAX).map(p => `<li><b>${esc(p.n)}</b>${p.k ? ` · ${big(p.k)}` : ''}<br><span class="muted small">${[X['st_' + p.s] || X.st_unknown, p.p != null && p.s === 'in_progress' ? p.p + '%' : '', p.g, p.mi.toFixed(1) + ' mi'].filter(Boolean).map(esc).join(' · ')}</span></li>`).join('')}${more(st.length)}</ul>
+      <p class="small"><a href="/public-money/sales-tax-projects?gov=${encodeURIComponent(stGov)}">${esc(X.seeSt)}</a></p>` : `<p class="small muted">${esc(X.nearNone)}</p>`}
+    <p class="muted small">${esc(X.nearNote)}</p>`;
+}
+
 function miles(a, b) { if (!b) return 1e9; const R = 3958.8, t = Math.PI / 180, dLat = (b.y - a.y) * t, dLon = (b.x - a.x) * t; const h = Math.sin(dLat / 2) ** 2 + Math.cos(a.y * t) * Math.cos(b.y * t) * Math.sin(dLon / 2) ** 2; return 2 * R * Math.asin(Math.sqrt(h)); }
 const kv = rows => rows.filter(Boolean).map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('');
 
@@ -284,6 +349,16 @@ function taxParts(p) {
   const fullEx = taxable === 0 && /\b(13|14|VT|96)\b/.test(p.DEXEMPTS || '');
   return {hx, assessed, just, exempt, taxable, second, other, school: fullEx ? 0 : hx ? Math.max(0, taxable + second) : Math.max(0, just - exempt), non: taxable};
 }
+/* Link to a calculator with this parcel's numbers. Both calculators take the value before exemptions
+   (assessed value) and apply the homestead themselves: v = assessed value, d = district id, h = 1/0 homestead. */
+function whatIf(path, p, distId, t) {
+  const u = new URLSearchParams({v: Math.round(t.assessed || 0), d: distId, h: t.hx ? '1' : '0'});
+  if (path.endsWith('amendment-3')) { u.delete('h'); u.set('k', t.hx ? 'home' : 'non'); }
+  return `${path}?${u}#calc`;
+}
+/* Florida DOR land-use codes where someone could live and claim a homestead: 01 single family, 02 mobile home,
+   04 condominium, 05 co-op, 08 multi-family under 10 units. */
+const isResidential = p => /^0[12458]/.test(String(p?.DORAPPCODE || '').trim());
 function renderTax(p, cityName) {
   const el = $('taxBody');
   if (!p) { el.innerHTML = `<p class="muted">No parcel record came back for this address, so there's no value to estimate from. <a href="/public-money/tax-dollars">Use the calculator →</a></p>`; return; }
@@ -291,11 +366,14 @@ function renderTax(p, cityName) {
   const rows = d.stack.map(aid => { const a = D.auth[aid]; return {n: a.n, g: a.g, m: a.m, amt: (a.school ? t.school : (a.g === 'county' || a.g === 'countysvc' || t.nonOther == null) ? t.non : t.nonOther) / 1000 * a.m}; }).filter(r => r.m > 0);
   const tot = rows.reduce((s, r) => s + r.amt, 0);
   const byG = D.groups.map(([g]) => [g, rows.filter(r => r.g === g).reduce((s, r) => s + r.amt, 0)]).filter(x => x[1] > 0.5);
+  const gname = g => g === 'city' ? (rows.find(r => r.g === 'city')?.n || 'City') : GN[g];
+  const barLabel = fmt(X.barLabel, {parts: byG.map(([g, v]) => `${gname(g)} ${usd(v)} (${tot ? Math.round(v / tot * 100) : 0}%)`).join(', ')});
   el.innerHTML = `<div class="bill-hd"><span class="bill-v sm">${usd(tot)}<small> / year</small></span><span class="muted small">${esc(d.label)} · ${String(+d.total.toFixed(4))} mills${exact ? '' : ' (area inferred from the map)'}</span></div>
-    <div class="stackbar">${byG.map(([g, v]) => `<span class="seg" style="flex:${v} 1 0;background:var(--s${GI[g]})" title="${esc(GN[g])}: ${usd(v)}"></span>`).join('')}</div>
-    <ul class="leg mini2">${byG.map(([g, v]) => `<li><i style="background:var(--s${GI[g]})"></i><span>${esc(g === 'city' ? (rows.find(r => r.g === 'city')?.n || 'City') : GN[g])}</span><b>${usd(v)}</b></li>`).join('')}</ul>
+    <div class="stackbar" role="img" aria-label="${esc(barLabel)}">${byG.map(([g, v]) => `<span class="seg" style="flex:${v} 1 0;background:var(--s${GI[g]})" title="${esc(GN[g])}: ${usd(v)}"></span>`).join('')}</div>
+    <ul class="leg mini2">${byG.map(([g, v]) => `<li><i style="background:var(--s${GI[g]})"></i><span>${esc(gname(g))}</span><b>${usd(v)}</b></li>`).join('')}</ul>
     <div id="feeBody"><p class="muted small">Checking fees on the tax bill…</p></div>
-    <p class="muted small">Property tax: 2026 values × ${D.fy} rates. Fees: the FY2026 tax roll. <a href="/public-money/tax-dollars">Where it goes →</a></p>`;
+    <p class="muted small">Property tax: 2026 values × ${D.fy} rates. Fees: the FY2026 tax roll. <a href="/public-money/tax-dollars">Where it goes →</a></p>
+    <p class="small"><a href="${esc(whatIf('/public-money/tax-dollars', p, id, t))}">${esc(X.whatif)}</a></p>`;
   loadFees(p.A1RENUM, tot);
 }
 async function loadFees(pid, taxTot) {
@@ -325,17 +403,30 @@ function renderProp(p) {
     ['<span class="term" data-term="assessed-value">Assessed value</span>', usd(t.assessed) + (t.assessed < t.just ? ` <span class="muted small">(capped ${usd(t.just - t.assessed)} below market)</span>` : '')],
     ['Exemptions', t.roll ? exList(t) : t.exempt ? usd(t.exempt) + (t.hx ? ' <span class="muted small">(includes homestead)</span>' : '') : 'No exemptions'],
     ['<span class="term" data-term="taxable-value">Taxable value</span>', usd(t.non) + (t.school !== t.non ? ` <span class="muted small">(${usd(t.school)} for school taxes${t.nonOther != null && t.nonOther !== t.non ? `, ${usd(t.nonOther)} for city and district taxes` : ''})</span>` : '')],
-  ]);
+  ]) + (!t.hx && isResidential(p) ? `<dt class="span">${esc(X.hsH)}</dt><dd class="span small">${fmt(esc(X.hs), {pa: `<a href="${PA_URL}" target="_blank" rel="noopener">${esc(X.pa)}</a>`})} <a href="/public-money/exemptions#apply">${esc(X.exLink)}</a></dd>` : '');
+}
+/* A local representative: name links to their recorded votes when they're in the votes data, with a yes/no tally,
+   plus a link to campaign money for that government. State and federal seats link to their district site. */
+function repLine(x, gov) {
+  const a = x?.[0]; if (!a) return '<span class="muted">—</span>';
+  const m = gov ? matchMember(a.REPNAME, gov) : null;
+  const name = m ? `<a href="/public-money/votes?m=${encodeURIComponent(m[0])}#all">${esc(a.REPNAME)}</a>` : a.DISTRICTURL ? `<a href="${esc(a.DISTRICTURL)}" target="_blank" rel="noopener">${esc(a.REPNAME || '—')}</a>` : esc(a.REPNAME || '—');
+  const site = m && a.DISTRICTURL ? ` <a class="small" href="${esc(a.DISTRICTURL)}" target="_blank" rel="noopener">${esc(X.website)}</a>` : '';
+  const tal = m ? `<br><span class="muted small">${esc(fmt(X.tally, {y: m[1], n: m[2]}))}</span>` : '';
+  const cm = gov ? ` <a class="small" href="/public-money/campaign-money?gov=${gov}">${esc(X.campaign)}</a>` : '';
+  return `${name} <span class="muted small">${esc(a.NAME || '')}</span>${site}${tal}${gov ? (tal ? ' ·' : '<br>') + cm : ''}`;
 }
 function renderReps(comm, local, sb, house, senate, ush, cityName) {
-  const r = (x, pre) => x?.[0] ? `${x[0].DISTRICTURL ? `<a href="${esc(x[0].DISTRICTURL)}" target="_blank" rel="noopener">${esc(x[0].REPNAME || '—')}</a>` : esc(x[0].REPNAME || '—')} <span class="muted small">${esc(pre || x[0].NAME || '')}</span>` : '<span class="muted">—</span>';
+  const ck = cityName ? cityKey(cityName) : null;
+  const ballot = D.elections ? [...new Set([ck || 'county', 'county', 'schools'])].map(k => `<a href="/elections?gov=${k}">${esc(D.govs[k]?.s || k)}</a>`).join(' · ') : '';
   $('repBody').innerHTML = kv([
-    ['County Commission', r(comm)],
-    cityName ? ['City', `City of ${esc(cityName)}${local?.[0] ? ' · ' + r(local) : ''}`] : ['City', '<span class="muted">None (unincorporated). The County Commission is your local government.</span>'],
-    ['School Board', r(sb)],
-    ['Florida House', r(house)],
-    ['Florida Senate', r(senate)],
-    ['U.S. House', r(ush)],
+    ['County Commission', repLine(comm, 'county')],
+    cityName ? ['City', `City of ${esc(cityName)}${local?.[0] ? ' · ' + repLine(local, ck !== 'county' ? ck : null) : ck !== 'county' ? ` <a class="small" href="/public-money/campaign-money?gov=${ck}">${esc(X.campaign)}</a>` : ''}`] : ['City', '<span class="muted">None (unincorporated). The County Commission is your local government.</span>'],
+    ['School Board', repLine(sb, 'schools')],
+    ['Florida House', repLine(house)],
+    ['Florida Senate', repLine(senate)],
+    ['U.S. House', repLine(ush)],
+    ballot ? [esc(X.ballotH), `<span class="small">${esc(X.ballot)} ${ballot}</span>`] : null,
   ]) + '<dt class="span">Money decisions</dt><dd class="span"><a href="/public-money/tax-dollars#govs">See each government\'s budget →</a></dd>';
 }
 function renderSchools(es, ms, hs) {
@@ -346,10 +437,10 @@ function renderCra(cra) {
   const el = $('craBody'), c = cra?.[0];
   if (cra === null) { el.innerHTML = '<p class="muted">Couldn\'t check right now.</p>'; return; }
   if (!c) { el.innerHTML = '<p>This address is <b>not inside a CRA district</b>, so all of its city and county property tax goes to those governments\' regular budgets.</p><p class="small"><a href="/public-money/cra-spending">See Bay County\'s CRAs →</a></p>'; return; }
-  const ag = D.craAgency[c.CRA], s = ag && D.cra[ag];
+  const ag = D.craAgency[c.CRA], s = ag && D.cra[ag], cid = ag && D.craId[ag];
   el.innerHTML = `<p>This address is inside the <b>${esc(c.CRA)}</b> district${c.EST_YEAR ? ` (created ${esc(c.EST_YEAR)})` : ''}. The city and county taxes on growth in this area since then go to the ${esc(ag || 'CRA')}'s fund and must be spent inside its districts.</p>
     ${s ? `<p class="small">${esc(ag)}: <b>${big(s.spent)}</b> in documented spending and awards across ${s.n} records on this site.</p>` : ''}
-    <p class="small"><a href="/public-money/cra-spending">See what it pays for →</a></p>`;
+    <p class="small"><a href="/public-money/cra-spending${cid ? '?cra=' + cid : ''}">See what it pays for →</a></p>`;
 }
 function renderSafe(flood, evac, mosq, tdc, fire, lib, park) {
   const f = flood?.zone, fdate = ms => ms ? new Date(ms).toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC'}) : '';
@@ -382,15 +473,16 @@ renderTax = function (p, cityName) { // eslint-disable-line no-func-assign
   _renderTax(p, cityName);
   const el = $('a3Body');
   if (!p) { el.innerHTML = '<p class="muted">No parcel record to estimate from. <a href="/public-money/amendment-3">Try the calculator →</a></p>'; return; }
-  const {d} = distFor(p, cityName), t = taxParts(p);
+  const {id, d} = distFor(p, cityName), t = taxParts(p);
   const nonM = d.stack.filter(a => !D.auth[a].school).reduce((s, a) => s + D.auth[a].m, 0);
+  const try3 = `<p class="small"><a href="${esc(whatIf('/public-money/amendment-3', p, id, t))}">${esc(X.whatifA3)}</a></p>`;
   if (!t.hx) {
-    el.innerHTML = `<p>This property has no homestead exemption, so Amendment 3 wouldn't lower its tax bill directly. It would limit how fast its taxed value can rise to <b>5% a year instead of 10%</b> for non-school taxes.${t.assessed < t.just ? ` Its value is already capped ${usd(t.just - t.assessed)} below market.` : ''}</p><p class="small"><a href="/public-money/amendment-3">What Amendment 3 does →</a></p>`;
+    el.innerHTML = `<p>This property has no homestead exemption, so Amendment 3 wouldn't lower its tax bill directly. It would limit how fast its taxed value can rise to <b>5% a year instead of 10%</b> for non-school taxes.${t.assessed < t.just ? ` Its value is already capped ${usd(t.just - t.assessed)} below market.` : ''}</p><p class="small"><a href="/public-money/amendment-3">What Amendment 3 does →</a></p>` + try3;
     return;
   }
   const after = Math.max(0, t.assessed - 250000 - t.other), save = (t.non - after) / 1000 * nonM;
   el.innerHTML = `<p>With the full $250,000 homestead exemption on today's value and rates, this home's county, city and district taxes would drop by about <b>${usd(save)} a year</b>${after === 0 ? ', to zero; it would still pay school tax' : ''}.</p>
-    <p class="muted small">Assumes rates stay the same and the owner was a Florida resident before 2027. Local governments here would collect less; see the state's estimates. <a href="/public-money/amendment-3">Amendment 3 →</a></p>`;
+    <p class="muted small">Assumes rates stay the same and the owner was a Florida resident before 2027. Local governments here would collect less; see the state's estimates. <a href="/public-money/amendment-3">Amendment 3 →</a></p>` + try3;
 };
 
 /* ---------- map ---------- */
