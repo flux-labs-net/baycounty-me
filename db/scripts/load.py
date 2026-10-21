@@ -152,7 +152,7 @@ def load_dataset(conn, d, aliases, sha):
             g = gov_key(r, aliases)
             batch.append([adapt(r.get(n), cols[n]) for n in names] + [g, 'site_build', run, h])
             added.append((h, g, r))
-        cur.execute(f"delete from {table} where origin = 'site_build' and not (record_hash = any(%s))", (list(seen),))
+        cur.execute(f"delete from {table} where origin = 'site_build' and not (record_hash = any(%s::text[]))", (list(seen),))
         deleted = cur.rowcount
         cur.executemany(sql, batch)
         # Rule alerts: new rows in the datasets rules watch become alerts.events (migration 0008). Skipped on a
