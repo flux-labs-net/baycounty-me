@@ -31,7 +31,7 @@
 <main id="main">
 <div class="page tax">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Public Money · Debt</span><h1>What Bay County governments owe</h1><p class="lede">Local governments borrow to build things now and pay over time. Here's what each one owes, what for, and what it pays each year, from their audited financial statements.</p></div>
-    <div class="stamp"><button type="button" class="pdf-btn" onclick="document.querySelectorAll('details').forEach(d=>d.open=true);setTimeout(()=>print(),60)"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 12v2h10v-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Export PDF</button><span>From audits filed with the Florida Auditor General<br>Research compiled Oct 20, 2026</span></div></header>
+    <div class="stamp"><button type="button" class="pdf-btn" id="pdf"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 12v2h10v-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Export PDF</button><span>From audits filed with the Florida Auditor General<br>Research compiled Oct 20, 2026</span></div></header>
   <section class="explain"><div class="ex-txt"><span class="eyebrow">The simple version</span><h2>How local government borrowing works</h2>
     <ol class="ex-steps">
       <li><b>Borrow now, repay later.</b> A <span class="term" data-term="bond">bond</span> or loan pays for something big today, like a water plant or a building, and gets paid back with interest over years.</li>
@@ -75,5 +75,6 @@
   <a class="powered" href="https://fluxlabs.net/" target="_blank" rel="noopener"><span>Powered by</span><img src="/assets/flux-labs.webp" alt="Flux Labs" width="140" height="25"></a>
 </div></footer>
 <script src="/assets/site.js" defer></script>
+<script src="/assets/report.js" defer></script>
 </body>
 </html>

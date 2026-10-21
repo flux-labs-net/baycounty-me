@@ -25,7 +25,7 @@ def a(u, t='Source'):
     return f'<a class="src" href="{e(u)}" target="_blank" rel="noopener">{t}</a>'
 
 
-PDF = '''<div class="stamp"><button type="button" class="pdf-btn" onclick="document.querySelectorAll('details').forEach(d=>d.open=true);setTimeout(()=>print(),60)"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 12v2h10v-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Export PDF</button><span>Research compiled Oct 20, 2026</span></div>'''
+PDF = '''<div class="stamp"><button type="button" class="pdf-btn" id="pdf"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 12v2h10v-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Export PDF</button><span>Research compiled Oct 20, 2026</span></div>'''
 
 
 def bedtax_page(out_dir):

@@ -45,7 +45,7 @@ def load():
 
 def _head(eyebrow, title, lede):
     return f'''<header class="tx-top"><div class="tx-brand"><span class="eyebrow">{eyebrow}</span><h1>{title}</h1><p class="lede">{lede}</p></div>
-    <div class="stamp"><button type="button" class="pdf-btn" onclick="document.querySelectorAll('details').forEach(d=>d.open=true);setTimeout(()=>print(),60)"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 12v2h10v-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Export PDF</button><span>From audits filed with the Florida Auditor General<br>Research compiled Oct 20, 2026</span></div></header>'''
+    <div class="stamp"><button type="button" class="pdf-btn" id="pdf"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 12v2h10v-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Export PDF</button><span>From audits filed with the Florida Auditor General<br>Research compiled Oct 20, 2026</span></div></header>'''
 
 
 def debt_page():

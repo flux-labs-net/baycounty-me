@@ -345,6 +345,8 @@ function afterPrint(){
 }
 window.addEventListener('beforeprint', beforePrint);
 window.addEventListener('afterprint', afterPrint);
-document.getElementById('pdf').onclick = () => { beforePrint(); setTimeout(() => window.print(), 60); };
+window.BCReportBefore = beforePrint;
+window.BCReportAfter = afterPrint;
+window.BCReportMeta = () => 'Report: ' + filterSummary();
 
 })();

@@ -9,6 +9,9 @@ from datetime import datetime, timezone
 import html
 
 CHANGES = [
+    {'date': '2026-10-20', 'title': 'Designed PDF reports, and a new home page',
+     'text': 'Export PDF now builds a formatted report on every page, with tables, charts, maps and source links. The home page shows headline numbers and every topic.',
+     'pages': ['/', '/my-address', '/public-money/cra-spending', '/public-money/tax-dollars']},
     {'date': '2026-10-20', 'title': 'Tourist tax and sales tax projects',
      'text': 'The 5% bed tax: ten years of collections, how the pennies are split and what Visit Panama City Beach spends. Plus a map of 1,062 half-cent sales tax projects with their status, and the school half-cent.',
      'pages': ['/public-money/tourist-tax', '/public-money/sales-tax-projects']},

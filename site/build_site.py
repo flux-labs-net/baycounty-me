@@ -246,6 +246,7 @@ def layout(title, desc, path, body, extra_head=''):
 </main>
 {FOOTER.replace('__UPDATED__', ('Page updated ' + nice_date(last_updated(path)) + ' · ') if path not in ('/404',) else '')}
 <script src="/assets/site.js" defer></script>
+<script src="/assets/report.js" defer></script>
 </body>
 </html>
 '''
@@ -371,7 +372,9 @@ function afterPrint(){
 }
 window.addEventListener('beforeprint', beforePrint);
 window.addEventListener('afterprint', afterPrint);
-document.getElementById('pdf').onclick = () => { beforePrint(); setTimeout(() => window.print(), 60); };
+window.BCReportBefore = beforePrint;
+window.BCReportAfter = afterPrint;
+window.BCReportMeta = () => 'Report: ' + filterSummary();
 """
     js = ("(async () => {\n"
           "const [M, G, P1, P2] = await Promise.all(['/data/cra-meta.json','/data/cra-geo.json','/data/cra-pay-1.json','/data/cra-pay-2.json'].map(u => fetch(u).then(r => r.json())));\n"
@@ -392,76 +395,7 @@ document.getElementById('pdf').onclick = () => { beforePrint(); setTimeout(() =>
     return t
 
 
-def home_page():
-    d = json.load(open(os.path.join(ROOT, '..', 'data', 'merged.json')))
-    pays = d['payments']
-    spent = sum(p['amount'] for p in pays if p['count'] and p['amount'] and p['status'] in ('Spent', 'Committed'))
-    n = len(pays)
-    from tax_page import build_data
-    td = build_data(); lv = {g: v[-1] for g, v in td['levy'].items()}; lv_tot = sum(lv.values())
-    return f'''<div class="page home">
-  <section class="hero">
-    <span class="eyebrow">Bay County, Florida</span>
-    <h1>Local government, in plain view.</h1>
-    <p class="lede">Maps, money and the public records behind them, for Panama City, Panama City Beach, Lynn Haven, Callaway, Springfield, Parker and the rest of Bay County. Every figure links to its source.</p>
-    <form class="home-search" action="/my-address/" method="get" role="search">
-      <label for="hq">Look up your address</label>
-      <div><input id="hq" name="q" type="search" placeholder="e.g. 825 Ohio Ave" autocomplete="off"><button type="submit">Look up</button></div>
-      <small class="muted">Your tax estimate, representatives, schools, flood zone and more.</small>
-    </form>
-  </section>
-
-  <section class="section">
-    <div class="sec-hd"><h2>Public Money</h2><span class="muted">Where tax dollars go, and who receives them</span></div>
-    <a class="feature" href="/public-money/cra-spending">
-      <div class="feature-txt">
-        <span class="eyebrow">CRA Spending</span>
-        <h3>Where Bay County's CRA money goes</h3>
-        <p>The six Community Redevelopment Agencies keep part of the property tax growth inside their districts. This map and ledger show what they bought, built and granted, and who was paid.</p>
-        <span class="go">Open the map →</span>
-      </div>
-      <dl class="feature-stats">
-        <div><dt>CRAs</dt><dd>6</dd></div>
-        <div><dt>Districts mapped</dt><dd>14</dd></div>
-        <div><dt>Records</dt><dd>{n}</dd></div>
-        <div><dt>Spent or committed, documented</dt><dd>${spent/1e6:.1f}M</dd></div>
-      </dl>
-    </a>
-    <a class="feature" href="/public-money/tax-dollars">
-      <div class="feature-txt">
-        <span class="eyebrow">Tax Dollars</span>
-        <h3>How your tax dollars are allocated</h3>
-        <p>Estimate your property tax bill and see who gets each slice: schools, the county, your city and special districts. Then see where each government's money comes from and what it pays for.</p>
-        <span class="go">Try the calculator →</span>
-      </div>
-      <dl class="feature-stats">
-        <div><dt>Property tax levied, FY2026</dt><dd>${lv_tot/1e6:,.1f}M</dd></div>
-        <div><dt>Governments compared</dt><dd>{len(td['govs'])}</dd></div>
-        <div><dt>Years of rates</dt><dd>{len(td['years'])}</dd></div>
-        <div><dt>Schools' share</dt><dd>{lv['school']/lv_tot:.0%}</dd></div>
-      </dl>
-    </a>
-  </section>
-
-  <section class="section how">
-    <div class="sec-hd"><h2>How this site works</h2></div>
-    <div class="cols">
-      <div><h3>Public records only</h3><p>Figures come from audits, adopted budgets, annual reports, council resolutions and local reporting. If a number is not in a record, it is not on the site.</p></div>
-      <div><h3>Sources on every row</h3><p>Each payment, grant or contract links to the document it came from, so you can check it yourself.</p></div>
-      <div><h3>Gaps stated plainly</h3><p>Where a city does not publish something, such as a check register, the page says so and names the record to request.</p></div>
-    </div>
-  </section>
-
-  <section class="section">
-    <a class="guide-cta" href="/glossary">
-      <span class="eyebrow">New to this?</span>
-      <h3>Government money, explained simply</h3>
-      <p>What's a CRA? What's a mill? What does "rolled-back rate" mean? The plain-English guide explains every term on this site. Words with a dotted underline can also be tapped anywhere for a quick answer.</p>
-      <span class="go">Read the guide →</span>
-    </a>
-  </section>
-</div>'''
-
+from home import home_page  # noqa: E402
 
 def about_page():
     return '''<div class="page prose">
@@ -517,6 +451,7 @@ def main():
     shutil.copy(os.path.join(ROOT, '..', 'assets', 'logo_small.webp'), os.path.join(OUT, 'assets', 'flux-labs.webp'))
     shutil.copy(os.path.join(ROOT, 'favicon.svg'), os.path.join(OUT, 'favicon.svg'))
     shutil.copy(os.path.join(ROOT, 'tax.css'), os.path.join(OUT, 'assets', 'tax.css'))
+    shutil.copy(os.path.join(ROOT, 'report.js'), os.path.join(OUT, 'assets', 'report.js'))
     for path, title, desc, fn in PAGES:
         write(path, layout(title, desc, path, fn()))
     print('search index:', build_index(OUT, PAGES), 'entries')
