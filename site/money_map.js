@@ -11,7 +11,15 @@ const qs = new URLSearchParams(location.search);
 $('mmGov').innerHTML += GORDER.filter(g => OFF.some(o => o.g === g)).map(g => `<option value="${g}">${esc(GN[g])}</option>`).join('');
 if (qs.get('show')) $('mmShow').value = qs.get('show');
 if (qs.get('gov')) $('mmGov').value = qs.get('gov');
+if (qs.get('q')) $('mmQ').value = qs.get('q');
 let sel = null; // {t:'d'|'o'|'g', id}
+{ const m = /^([dog])-(.+)$/.exec(qs.get('sel') || ''); if (m) sel = {t: m[1], id: m[1] === 'g' ? m[2] : +m[2]}; }
+function writeURL(later) { // keep the view in the link: ?show=&gov=&q=&sel=d-12
+  const u = new URL(location.href), set = (k, v) => v ? u.searchParams.set(k, v) : u.searchParams.delete(k);
+  set('show', $('mmShow').value !== 'same' ? $('mmShow').value : ''); set('gov', $('mmGov').value); set('q', $('mmQ').value.trim()); set('sel', sel ? sel.t + '-' + sel.id : '');
+  clearTimeout(writeURL.t); const go = () => history.replaceState(history.state, '', u.pathname + u.search + u.hash);
+  if (later) writeURL.t = setTimeout(go, 350); else go();
+}
 const conAmt = c => c.a || c.p;
 const sameDon = new Set(GIFTS.filter(g => g.same).map(g => g.d));
 
@@ -78,7 +86,7 @@ function render() {
       g.appendChild(dot); g.appendChild(tx);
     }
     g._k = {t, id}; svg.appendChild(g); NODES.push(g);
-    const pick = () => { sel = sel && sel.t === t && sel.id === id ? null : {t, id}; highlight(); detail(); };
+    const pick = () => { sel = sel && sel.t === t && sel.id === id ? null : {t, id}; highlight(); detail(); writeURL(); };
     g.addEventListener('click', pick); g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(); } });
   };
   offs.forEach(o => node('o', o.id, xO, P.o[o.id], o.n, GN[o.g] || '', 'end', ''));
@@ -88,8 +96,7 @@ function render() {
   $('mmCount').textContent = `${dons.length} donors · ${offs.length} officials · ${gifts.length} gifts`;
   if (sel && !NODES.some(n => n._k.t === sel.t && n._k.id === sel.id)) sel = null;
   highlight(); detail();
-  const u = new URLSearchParams(); if ($('mmShow').value !== 'same') u.set('show', $('mmShow').value); if ($('mmGov').value) u.set('gov', $('mmGov').value);
-  history.replaceState(null, '', u.toString() ? '?' + u : location.pathname);
+  writeURL(true);
 }
 
 function highlight() {
@@ -166,4 +173,5 @@ function heat1() {
 $('mmQ').addEventListener('input', render);
 let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(render, 150); });
 render(); votesTable(); heat1();
+if (sel && qs.get('sel')) $('map').scrollIntoView();
 })();

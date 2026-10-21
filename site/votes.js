@@ -1,6 +1,8 @@
-(() => {
-const D = __VT__;
+(async () => {
 const $ = id => document.getElementById(id);
+let D; // page data loads after the page has rendered; the markup shows a loading note until then
+try { const r = await fetch('/data/votes-page.json'); if (!r.ok) throw new Error(r.status); D = await r.json(); }
+catch (e) { $('vtCount').textContent = 'The votes could not be loaded. Please refresh the page.'; return; }
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const V = {yes: 'Yes', no: 'No', absent: 'Absent', abstain: 'Abstained', unknown: '?'}, ORD = {no: 0, yes: 1, abstain: 2, absent: 3, unknown: 4};
 const cap = s => s ? s[0].toUpperCase() + s.slice(1) : '';
@@ -21,7 +23,7 @@ function members() { // members who appear in recorded roll calls, grouped by go
   F.m.value = [...F.m.options].some(o => o.value === keep) ? keep : '';
 }
 
-let shown = 40;
+let shown = 40, view = [];
 function filt(push = true) {
   const q = F.q.value.trim().toLowerCase(), g = F.g.value, m = F.m.value, c = F.c.value, y = F.y.value, o = F.o.value;
   let cur = D.votes.filter(v => (!g || v.g === g) && (!c || v.c === c) && (!y || (v.d || '').startsWith(y))
@@ -31,6 +33,7 @@ function filt(push = true) {
   const sort = F.sort.value;
   cur = cur.slice().sort(sort === 'old' ? (a, b) => (a.d || '').localeCompare(b.d || '') : sort === 'amt' ? (a, b) => (b.a || 0) - (a.a || 0) || (b.d || '').localeCompare(a.d || '')
     : sort === 'close' ? (a, b) => margin(a) - margin(b) || (b.d || '').localeCompare(a.d || '') : (a, b) => (b.d || '').localeCompare(a.d || ''));
+  view = cur;
   const ns = cur.filter(v => v.x).length;
   $('vtCount').textContent = `${cur.length} vote${cur.length === 1 ? '' : 's'}${ns ? ` · ${ns} split` : ''}`;
   if (m) { const mine = cur.map(v => v.m[m]); const c2 = k => mine.filter(x => x === k).length;
@@ -62,6 +65,15 @@ F.g.addEventListener('change', () => { members(); shown = 40; filt(); });
 ['q', 'm', 'c', 'y', 'o', 'sort'].forEach(k => F[k].addEventListener('input', () => { shown = 40; filt(); }));
 $('vtClear').addEventListener('click', () => { F.q.value = ''; ['g', 'c', 'y', 'o'].forEach(k => F[k].value = ''); F.sort.value = 'new'; members(); F.m.value = ''; shown = 40; filt(); });
 $('vtMore').addEventListener('click', () => { shown += 60; filt(false); });
+$('vtCsv').addEventListener('click', () => { // one row per member per vote, for the votes in the current view
+  const rows = [['date', 'government', 'board', 'item', 'type', 'amount', 'tally', 'outcome', 'split', 'member', 'member_vote', 'source_url']];
+  const mf = F.m.value;
+  view.forEach(v => { const base = [v.d, GN[v.g] || v.g, D.bodies[v.b]?.n || v.b, v.h, D.cat[v.c] || v.c, v.a || '', v.t || '', v.o || '', v.x ? 'yes' : 'no'];
+    const ms = Object.entries(v.m).filter(([n]) => !mf || n === mf);
+    if (!ms.length) rows.push(base.concat(['', '', v.u || '']));
+    ms.forEach(([n, x]) => rows.push(base.concat([n, V[x] || x, v.u || '']))); });
+  if (window.BCM) { BCM.download('bay-county-votes' + (mf ? '-' + mf.toLowerCase().replace(/[^a-z0-9]+/g, '-') : '') + '.csv', BCM.toCSV(rows)); BCM.announce('Downloaded ' + view.length + ' votes'); }
+});
 filt(false);
 if ([...P0.keys()].some(k => ['q', 'g', 'm', 'c', 'y', 'o', 'sort'].includes(k))) $('all').scrollIntoView();
 })();

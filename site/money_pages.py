@@ -233,6 +233,15 @@ SHORT = {'visit_pcb_cvb': 'Visit Panama City Beach', 'destination_panama_city_cd
 CAT = {'payroll/benefit/tax pass-through': 'Payroll or benefits', 'government': 'Government', 'credit card payment (underlying merchants not itemized)': 'Credit card bill'}
 
 
+def fy_cell(a, v, f):  # a payee's total for one year, linked to that year's monthly registers on the page
+    amt = v['by_fy'].get(f)
+    if not amt:
+        return '<span class=muted>—</span>'
+    if not (a.get('coverage_by_fy') or {}).get(f):
+        return money(amt)
+    return f'<a href="#reg-{a["gov"]}-{f}" title="{f} check registers">{money(amt)}</a>'
+
+
 def payments_page():
     p = _j('money', 'payments.json')
     if not p:
@@ -240,6 +249,12 @@ def payments_page():
     A = p['governments']
     tot = sum(a['parsed_total_all_payees'] for a in A)
     fys = ['FY2024', 'FY2025', 'FY2026']
+    reg = {}  # month -> Clerk register document (the same monthly registers carry the agency sections)
+    for r in (_j('contracts', 'contracts.json') or {}).get('registers', []):
+        for m in r.get('monthly_sources') or []:
+            if m.get('month') and m.get('url'):
+                reg[m['month']] = m
+    mon = lambda m: __import__('datetime').date(int(m[:4]), int(m[5:7]), 1).strftime('%b %Y')
     tabs, secs = '', ''
     for i, a in enumerate(A):
         nm = SHORT.get(a['gov'], a['name'])
@@ -249,9 +264,13 @@ def payments_page():
             cat = v.get('category')
             badge = f' <span class="badge">{e(CAT.get(cat, cat))}</span>' if cat else ''
             rows += (f'<tr data-v="{e(v["vendor"].lower())}"><th scope="row">{e(v["vendor"])}{badge}</th><td class="num">{money(v["total"])}</td><td class="num">{v["n_payments"]}</td>'
-                     + ''.join(f'<td class="num">{money(v["by_fy"].get(f)) if v["by_fy"].get(f) else "<span class=muted>—</span>"}</td>' for f in fys) + '</tr>')
+                     + ''.join(f'<td class="num">{fy_cell(a, v, f)}</td>' for f in fys) + '</tr>')
         cov = a.get('coverage_by_fy') or {}
         covtxt = ' · '.join(f'{f}: {len(cov.get(f, []))} of 12 months' for f in fys)
+        src_urls = set(a.get('source_urls') or [])
+        reglist = ''.join(f'<li id="reg-{a["gov"]}-{f}"><b>{f}</b>: ' + ', '.join(
+            f'<a class="src" href="{e(reg[m]["url"])}" target="_blank" rel="noopener" title="{e(reg[m].get("document") or "")}">{mon(m)}</a>' if m in reg and reg[m]['url'] in src_urls else e(mon(m))
+            for m in cov.get(f, [])) + '</li>' for f in fys if cov.get(f))
         notes = ''.join(f'<li>{e(n)}</li>' for n in a.get('notes') or [])
         ex = a.get('excluded_individuals') or {}
         listed = f'Top {a["vendors_listed"]} of {a["vendor_count_total"]} payees' if a['vendors_listed'] < a['vendor_count_total'] else f'All {a["vendor_count_total"]} payees'
@@ -261,7 +280,9 @@ def payments_page():
       <div class="kpi"><span class="eyebrow">Payees</span><span class="v">{a["vendor_count_total"]}</span><span class="s">{e(listed)} shown</span></div>
       <div class="kpi"><span class="eyebrow">Checked</span><span class="v">{e(a["reconciliation_summary"].split(" match")[0])}</span><span class="s">months match the register's printed total</span></div>
       <div class="kpi"><span class="eyebrow">To individuals</span><span class="v">{money(ex.get("total"))}</span><span class="s">{ex.get("n_payments", 0)} payments, not named here</span></div></div>
-    <div class="tablewrap"><table class="tx-table cm-table wp-table"><thead><tr><th scope="col">Paid to</th><th scope="col" class="num">Total</th><th scope="col" class="num">Payments</th>{"".join(f'<th scope="col" class="num">{f}</th>' for f in fys)}</tr></thead><tbody>{rows}</tbody></table></div>
+    <div class="tablewrap"><table class="tx-table cm-table wp-table" data-sortable data-csv="who-gets-paid-{e(a["gov"]).replace("_", "-")}"><thead><tr><th scope="col">Paid to</th><th scope="col" class="num">Total</th><th scope="col" class="num">Payments</th>{"".join(f'<th scope="col" class="num">{f}</th>' for f in fys)}</tr></thead><tbody>{rows}</tbody></table></div>
+    <p class="note">Each amount links to that year's registers below. The registers are monthly, so a payee's total for a year comes from one or more of that year's files.</p>
+    <details class="tbl-toggle"><summary>Monthly check registers ({sum(len(cov.get(f, [])) for f in fys)})</summary><ul class="plain small">{reglist}</ul><p class="note">The Clerk of Court's monthly "Check Register – Sorted by Dollar Amount," attached to County Commission agendas. Each file has a section for this agency.</p></details>
     <details class="gaps"><summary>Notes on this register ({len(a.get("notes") or [])})</summary><ul>{notes}</ul><p>{" · ".join(f'<a class="src" href="{e(u)}" target="_blank" rel="noopener">{k + 1}</a>' for k, u in enumerate(a.get("source_urls") or []))}</p></details></section>'''
     gaps = ''.join(f'<li>{e(g)}</li>' for g in p.get('gaps') or [])
     return f'''<div class="page tax">
@@ -273,7 +294,7 @@ def payments_page():
       <li><b>The Clerk pays their bills.</b> Until November 2025, each agency's payments were listed in the Clerk's monthly check register. That's what this page shows: {money(tot)} in payments over the months covered.</li>
       <li><b>Some bills hide the details.</b> Credit card payments and payroll services show as one payment; what was bought isn't listed. Payments to individual people are counted but not named.</li></ol></div></section>
   <div class="callout">In January 2026 the Clerk of Court published an <a href="https://apps.baycoclerk.com/Web_File_Repo/bocc_finance/Panama_City_Beach_TDC_CVB_Public_CAP.pdf" target="_blank" rel="noopener">action plan for Visit Panama City Beach</a>, describing a criminal investigation and forensic audit and putting the agency's payments under the Clerk's review. The payments here are listed as recorded; this site makes no finding about any of them.</div>
-  <div class="vt-filters mt-f two"><label class="vf"><span>Agency</span><select id="wpA">{tabs}</select></label><label class="vf"><span>Search payees</span><input id="wpQ" type="search" placeholder="e.g. Meta, printing, hotel"></label></div>
+  <div class="vt-filters mt-f two"><label class="vf"><span>Agency</span><select id="wpA" data-param="agency">{tabs}</select></label><label class="vf"><span>Search payees</span><input id="wpQ" type="search" placeholder="e.g. Meta, printing, hotel" data-param="q"></label></div>
   {secs}
   <section class="tx-sec method"><div class="sec-hd"><h2 id="src">Sources and gaps</h2></div>
     <p>The Bay County Clerk of Court's monthly "Check Register – Sorted by Dollar Amount," attached to County Commission agendas. The pages are scans; they were read by OCR and each month was added up and compared with the register's printed total. A few misread amounts were corrected only where the fix made the month match.</p>
@@ -284,7 +305,9 @@ def payments_page():
 <script>
 (() => {{ const a = document.getElementById('wpA'), q = document.getElementById('wpQ'), u = new URLSearchParams(location.search);
   if (u.get('agency')) a.value = u.get('agency');
+  addEventListener('hashchange', () => {{ const t = document.getElementById(location.hash.slice(1)); if (t && t.closest('details')) {{ t.closest('details').open = true; t.scrollIntoView({{block: 'center'}}); }} }});
   const run = () => {{ document.querySelectorAll('.wp-ag').forEach(s => s.hidden = s.dataset.ag !== a.value); const t = q.value.trim().toLowerCase();
     document.querySelectorAll('.wp-ag:not([hidden]) tbody tr').forEach(tr => tr.hidden = !!t && !tr.dataset.v.includes(t)); }};
-  a.addEventListener('change', () => {{ history.replaceState(null, '', '?agency=' + a.value); run(); }}); q.addEventListener('input', run); run(); }})();
+  if (u.get('q')) q.value = u.get('q');
+  a.addEventListener('change', run); q.addEventListener('input', run); run(); }})();
 </script>'''

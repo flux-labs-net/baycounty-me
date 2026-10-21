@@ -73,9 +73,9 @@ def meetings_page(out_dir):
     return f'''<div class="page tax">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Get involved</span><h1>Upcoming public meetings</h1>
     <p class="lede">When and where every Bay County board meets, with agenda links and the money items on each agenda. Public comment is open at regular meetings; check the agenda for how to speak.</p></div>
-    <div class="stamp"><a class="pill" href="/meetings.ics">Add to my calendar</a><span>Checked {e(gen)}</span></div></header>
-  <div class="vt-filters mt-f"><label class="vf"><span>Government</span><select id="mtG"><option value="">All governments</option>{opts}</select></label></div>
-  <section class="tx-sec"><div class="sec-hd"><h2 id="next">Coming up</h2><span class="muted" id="mtCount">{len(up)} meetings in the next 60 days</span></div>
+    <div class="stamp"><a class="pill" href="/meetings.ics">Add to my calendar</a><button type="button" class="pdf-btn" id="pdf"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 12v2h10v-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Export PDF</button><span>Checked {e(gen)}</span></div></header>
+  <div class="vt-filters mt-f"><label class="vf"><span>Government</span><select id="mtG" data-param="gov"><option value="">All governments</option>{opts}</select></label></div>
+  <section class="tx-sec"><div class="sec-hd"><h2 id="next">Coming up</h2><span class="muted" id="mtCount" aria-live="polite">{len(up)} meetings in the next 60 days</span></div>
     <ol class="findings" id="mtList">{"".join(card(m) for m in up) or '<li class="muted">No upcoming meetings found.</li>'}</ol></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="recent">Most recent meeting of each board</h2></div><ol class="findings" id="mtPast">{"".join(card(m) for m in past)}</ol></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="sched">Regular schedules</h2></div>
@@ -87,6 +87,6 @@ def meetings_page(out_dir):
 (() => {{
   const s = document.getElementById('mtG'), q = new URLSearchParams(location.search).get('gov');
   const run = () => {{ let n = 0; document.querySelectorAll('#mtList > li[data-g], #mtPast > li[data-g]').forEach(li => {{ const on = !s.value || li.dataset.g === s.value; li.hidden = !on; if (on && li.closest('#mtList')) n++; }}); document.getElementById('mtCount').textContent = n + ' meeting' + (n === 1 ? '' : 's') + ' in the next 60 days'; }};
-  if (q) s.value = q; s.addEventListener('input', run); run();
+  if (q && [...s.options].some(o => o.value === q)) s.value = q; s.addEventListener('input', run); s.addEventListener('change', run); run();
 }})();
 </script>'''

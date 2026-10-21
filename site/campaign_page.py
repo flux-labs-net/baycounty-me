@@ -173,12 +173,12 @@ def campaign_page():
     <div class="kpi"><span class="eyebrow">Donors with contracts</span><span class="v">{len(plist)}</span><span class="s">gifts to {off_matched} officials from contract holders</span></div>
     <div class="kpi"><span class="eyebrow">Same government</span><span class="v">{same}</span><span class="s">gifts where the contract is with the official's own government</span></div>
   </div>
-  <div class="vt-filters mt-f"><label class="vf"><span>Government</span><select id="cmG"><option value="">All</option>{opts}</select></label></div>
+  <div class="vt-filters mt-f"><label class="vf"><span>Government</span><select id="cmG" data-param="gov"><option value="">All</option>{opts}</select></label></div>
   <section class="tx-sec"><div class="sec-hd"><h2 id="matches">Donors who also hold local contracts</h2><span class="muted">Same-government matches first</span></div>
-    <div class="tablewrap"><table class="tx-table cm-table" id="cmM"><thead><tr><th scope="col">Contributor</th><th scope="col" class="num">Gave</th><th scope="col">To</th><th scope="col">Local contracts and payments</th></tr></thead><tbody>{mrows}</tbody></table></div>
+    <div class="tablewrap"><table class="tx-table cm-table" id="cmM" data-sortable data-csv="bay-county-donors-with-contracts"><thead><tr><th scope="col">Contributor</th><th scope="col" class="num">Gave</th><th scope="col">To</th><th scope="col" data-nosort>Local contracts and payments</th></tr></thead><tbody>{mrows}</tbody></table></div>
     <p class="note">Matched by organization name against the contracts and payments on this site. Contracts can come before or after a gift; the dates are shown so you can compare. Gifts from a company's owners or employees as individuals are not matched.</p></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="officials">Every official</h2><span class="muted">Most recent campaign for the seat they hold</span></div>
-    <div class="tablewrap"><table class="tx-table cm-table" id="cmO"><thead><tr><th scope="col">Official</th><th scope="col" class="num">Raised</th><th scope="col" class="num">From individuals</th><th scope="col" class="num">From organizations</th><th scope="col" class="num">Own money</th><th scope="col">Donors</th></tr></thead><tbody>{rows}</tbody></table></div>
+    <div class="tablewrap"><table class="tx-table cm-table" id="cmO" data-sortable data-csv="bay-county-campaign-money-officials"><thead><tr><th scope="col">Official</th><th scope="col" class="num">Raised</th><th scope="col" class="num">From individuals</th><th scope="col" class="num">From organizations</th><th scope="col" class="num">Own money</th><th scope="col" data-nosort>Donors</th></tr></thead><tbody>{rows}</tbody></table></div>
     <p class="note">"Raised" is the Supervisor of Elections' total of monetary contributions, which includes loans from the candidate. In-kind gifts (goods or services) are counted by type. For finished campaigns, spending includes leftover money given away or returned.</p></section>
   <section class="tx-sec method"><div class="sec-hd"><h2 id="src">Sources and gaps</h2></div>
     <p>Every figure comes from the Bay County Supervisor of Elections' campaign finance system, including the itemized reports, which add up to the official totals. Organization names are shown as filed, except that spelling variants of the same name are combined, and names the filing system cut off at 30 characters are completed where the full name is clear. <a class="src" href="https://www.bayvotesfl.gov/candidates/candidate-committee-finances/" target="_blank" rel="noopener">Supervisor of Elections</a></p>
@@ -187,5 +187,5 @@ def campaign_page():
 <link rel="stylesheet" href="/assets/tax.css">
 <script>
 (() => {{ const s = document.getElementById('cmG'); const run = () => document.querySelectorAll('#cmM tbody tr, #cmO tbody tr').forEach(tr => tr.hidden = !!s.value && tr.dataset.g !== s.value);
-  const q = new URLSearchParams(location.search).get('gov'); if (q) s.value = q; s.addEventListener('input', run); run(); }})();
+  const q = new URLSearchParams(location.search).get('gov'); if (q && [...s.options].some(o => o.value === q)) s.value = q; s.addEventListener('input', run); s.addEventListener('change', run); run(); }})();
 </script>'''

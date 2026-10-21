@@ -22,8 +22,8 @@ def michael_page(out_dir):
         'cdbg': [{'prog': a['program'].replace('Rebuild Florida ', ''), 'r': a['recipient'], 'amt': a.get('amount'), 'p': a.get('project', ''), 'd': a.get('announced', ''), 'rounded': a.get('amount_is_rounded', False), 'u': a['source_url']} for a in cdbg_bay],
         'debris': [{'g': x['government'], 'p': x['fema_pa_category_A_projects'], 'f': x['fema_pa_category_A_federal_obligated']} for x in m['debris_fema_pa_category_a_by_government']],
     }
-    js = open(os.path.join(HERE, 'michael.js')).read().replace('__MI__', json.dumps(data, ensure_ascii=False, separators=(',', ':')))
-    open(os.path.join(out_dir, 'assets', 'michael.js'), 'w').write(js)
+    json.dump(data, open(os.path.join(out_dir, 'data', 'michael-page.json'), 'w'), ensure_ascii=False, separators=(',', ':'))
+    open(os.path.join(out_dir, 'assets', 'michael.js'), 'w').write(open(os.path.join(HERE, 'michael.js')).read())
 
     def a(u, t):
         return f'<a href="{u}" target="_blank" rel="noopener">{t}</a>'
@@ -69,7 +69,7 @@ def michael_page(out_dir):
 
   <section class="tx-sec" aria-labelledby="who-h">
     <div class="sec-hd"><h2 id="who-h">Who got FEMA rebuilding money</h2><span class="muted">Federal share obligated, Public Assistance</span></div>
-    <div class="hbars" id="appBars"></div>
+    <div class="hbars" id="appBars"><p class="bcm-loading">Loading…</p></div>
     <p class="note">FEMA paid {share:.0%} of the ${tot['project_amount']/1e6:,.0f}M in eligible costs on these projects. The rest came from the state and the local governments themselves. Another {pa['statewide_projects_not_attributed']['projects']} projects (${pa['statewide_projects_not_attributed']['federal_obligated']/1e6:,.0f}M, mostly state agencies) are coded "statewide," so FEMA's data doesn't say how much was spent in Bay County. {a(tot['source_url'], 'OpenFEMA')}</p>
   </section>
 
@@ -79,26 +79,26 @@ def michael_page(out_dir):
   </section>
 
   <section class="tx-sec" aria-labelledby="led-h">
-    <div class="sec-hd"><h2 id="led-h">Every FEMA project in Bay County</h2><span class="muted" id="ledCount"></span></div>
+    <div class="sec-hd"><h2 id="led-h">Every FEMA project in Bay County</h2><span class="muted" id="ledCount" aria-live="polite">Loading projects…</span></div>
     <div class="filters-row">
-      <input id="ledQ" type="search" placeholder="Search projects (e.g. school, pier, debris)" aria-label="Search projects">
-      <select id="ledA" aria-label="Applicant"><option value="">All applicants</option></select>
-      <select id="ledC" aria-label="Type"><option value="">All types</option></select>
-      <button type="button" class="pill sm" id="ledCsv">Download CSV</button>
+      <input id="ledQ" type="search" data-param="q" placeholder="Search projects (e.g. school, pier, debris)" aria-label="Search projects">
+      <select id="ledA" aria-label="Applicant" data-param="a"><option value="">All applicants</option></select>
+      <select id="ledC" aria-label="Type" data-param="c"><option value="">All types</option></select>
+      <button type="button" class="pill sm" id="ledCsv">Download this view (CSV)</button>
     </div>
-    <div class="tablewrap"><table class="tx-table" id="ledT"><thead><tr><th scope="col">Applicant</th><th scope="col">Project</th><th scope="col">Type</th><th scope="col" class="num">Federal</th><th scope="col" class="num">First paid</th><th scope="col">Status</th></tr></thead><tbody></tbody></table></div>
-    <button type="button" class="pill" id="ledMore">Show more</button>
+    <div class="tablewrap"><table class="tx-table" id="ledT"><thead><tr><th scope="col">Applicant</th><th scope="col">Project</th><th scope="col">Type</th><th scope="col" class="num" aria-sort="descending">Federal</th><th scope="col" class="num">First paid</th><th scope="col">Status</th></tr></thead><tbody><tr><td colspan="6" class="muted">Loading projects…</td></tr></tbody></table></div>
+    <button type="button" class="pill" id="ledMore" hidden>Show more</button>
   </section>
 
   <section class="tx-sec" aria-labelledby="ia-h">
     <div class="sec-hd"><h2 id="ia-h">Help for households</h2><span class="muted">FEMA Individuals and Households Program, by mailing city</span></div>
-    <div class="tablewrap"><table class="tx-table" id="iaT"></table></div>
+    <div class="tablewrap"><table class="tx-table" id="iaT" data-csv="bay-county-fema-household-aid"></table></div>
     <p class="note">"Registered" counts everyone who applied; "approved" counts those FEMA found eligible for any aid. {a(ia['owners']['source_url'], 'Owners data')} · {a(ia['renters']['source_url'], 'Renters data')}</p>
   </section>
 
   <section class="tx-sec" aria-labelledby="cd-h">
     <div class="sec-hd"><h2 id="cd-h">Rebuild Florida (HUD) awards to Bay governments</h2></div>
-    <div class="tablewrap"><table class="tx-table" id="cdT"></table></div>
+    <div class="tablewrap"><table class="tx-table" id="cdT" data-csv="bay-county-rebuild-florida-awards"></table></div>
     <p class="note">Florida received ${cd['state_allocation'][2]['amount']/1e6:,.1f}M in HUD disaster block grants for Michael across the Panhandle. These are the announced awards to Bay County governments that we could confirm; housing repair spending in Bay County isn't broken out publicly. {a(cd['state_allocation'][2]['source_url'], 'Federal Register')}</p>
   </section>
 
