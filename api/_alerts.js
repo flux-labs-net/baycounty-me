@@ -12,7 +12,7 @@ const GOVS = {
   mb: ['Mexico Beach', 'd629cd98-bffd-49f2-99bb-f519f70594e1'],
 };
 const ALL_SEGMENT = '1ae0dd54-dba8-4baa-93b2-fc1e1a04a9aa';
-const FROM = process.env.ALERTS_FROM || 'BayCounty.me <alerts@fluxlabs.net>';
+const FROM = process.env.ALERTS_FROM || 'BayCounty.me <hello@baycounty.me>';
 const SITE = 'https://baycounty.me';
 const b64 = s => Buffer.from(s).toString('base64url');
 const sign = s => crypto.createHmac('sha256', process.env.ALERTS_SECRET || '').update(s).digest('base64url');

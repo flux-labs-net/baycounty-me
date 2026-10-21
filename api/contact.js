@@ -1,5 +1,5 @@
 // BayCounty.me contact form -> email via Resend.
-// Env: RESEND_API_KEY (required), CONTACT_TO (default hello@fluxlabs.net), CONTACT_FROM.
+// Env: RESEND_FULL_KEY or RESEND_API_KEY (a key that can send from baycounty.me), CONTACT_TO (default hello@fluxlabs.net), CONTACT_FROM.
 const TOPICS = { correction: 'Correction', record: 'Record or tip', question: 'Question', other: 'Something else' };
 const ALLOWED = /^https:\/\/((www\.)?baycounty\.me|[a-z0-9-]+\.vercel\.app)$/;
 const hits = new Map(); // best-effort per-instance rate limit
@@ -27,7 +27,7 @@ module.exports = async (req, res) => {
   const topic = TOPICS[b.topic] || TOPICS.other;
   if (message.length < 10) return res.status(400).json({ ok: false, error: 'Please write a little more in your message.' });
   if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return res.status(400).json({ ok: false, error: 'That email address doesn’t look right.' });
-  if (!process.env.RESEND_API_KEY) return res.status(500).json({ ok: false, error: 'The form isn’t configured yet. Please email hello@fluxlabs.net.' });
+  if (!(process.env.RESEND_FULL_KEY || process.env.RESEND_API_KEY)) return res.status(500).json({ ok: false, error: 'The form isn’t configured yet. Please email hello@fluxlabs.net.' });
 
   const rows = [['Topic', topic], ['Name', name || '(not given)'], ['Email', email || '(not given)'], ['Page', page || '(not given)']];
   const html = `<div style="font:14px/1.5 -apple-system,Segoe UI,Arial,sans-serif;color:#0f172a">
@@ -38,9 +38,9 @@ module.exports = async (req, res) => {
 
   const r = await fetch('https://api.resend.com/emails', {
     method: 'POST',
-    headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}`, 'Content-Type': 'application/json' },
+    headers: { Authorization: `Bearer ${process.env.RESEND_FULL_KEY || process.env.RESEND_API_KEY}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      from: process.env.CONTACT_FROM || 'BayCounty.me <forms@fluxlabs.net>',
+      from: process.env.CONTACT_FROM || 'BayCounty.me <hello@baycounty.me>',
       to: [process.env.CONTACT_TO || 'hello@fluxlabs.net'],
       reply_to: email || undefined,
       subject: `[BayCounty.me] ${topic}${page ? ' · ' + page.replace(/^https?:\/\/[^/]+/, '') : ''}`,

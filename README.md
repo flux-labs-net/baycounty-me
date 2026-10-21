@@ -70,8 +70,8 @@ Every data change gets an entry at the top of `CHANGES` in `site/updates.py`. Th
 ## Contact form
 
 `/about#contact` posts to `api/contact.js` (a Vercel function), which emails the message through Resend.
-Env vars: `RESEND_API_KEY` (send-only key for fluxlabs.net, set in Vercel), optional `CONTACT_TO`
-(default hello@fluxlabs.net) and `CONTACT_FROM` (default `BayCounty.me <forms@fluxlabs.net>`).
+Env vars: `RESEND_FULL_KEY` (or `RESEND_API_KEY`), a Resend key that can send from baycounty.me, set in Vercel; optional `CONTACT_TO`
+(default hello@fluxlabs.net) and `CONTACT_FROM` (default `BayCounty.me <hello@baycounty.me>`). Alerts send from `ALERTS_FROM` (default the same address).
 Spam guards: hidden honeypot field, 3-second minimum fill time, origin check, 5 messages/hour per IP.
 Link to it with `/about?page=/some/path#contact` to prefill the page.
 

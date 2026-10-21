@@ -35,9 +35,9 @@ module.exports = async (req, res) => {
     const r = await resend('/broadcasts', 'POST', {segment_id: GOVS[g.key][1], from: FROM, reply_to: 'hello@fluxlabs.net', subject, name: `${subject} (${new Date().toISOString().slice(0, 10)})`, html: emailShell(subject, inner, footer), text, send: autosend}, key);
     done.push({gov: g.name, ok: r.ok, id: r.body && r.body.id, error: r.ok ? undefined : r.body});
   }
-  if (done.length && !autosend && process.env.RESEND_API_KEY) {
+  if (done.length && !autosend) {
     await resend('/emails', 'POST', {from: FROM, to: [process.env.DIGEST_REVIEWER || 'hello@fluxlabs.net'], subject: `BayCounty.me: ${done.length} weekly digest${done.length > 1 ? 's' : ''} ready to review`,
-      text: `These weekly digests were saved as drafts in Resend (Broadcasts). Review and send them there:\n\n${done.map(d => `- ${d.gov}${d.ok ? '' : ' (failed: ' + JSON.stringify(d.error) + ')'}`).join('\n')}\n\nhttps://resend.com/broadcasts`}, process.env.RESEND_API_KEY);
+      text: `These weekly digests were saved as drafts in Resend (Broadcasts). Review and send them there:\n\n${done.map(d => `- ${d.gov}${d.ok ? '' : ' (failed: ' + JSON.stringify(d.error) + ')'}`).join('\n')}\n\nhttps://resend.com/broadcasts`}, key);
   }
   return res.status(200).json({ok: true, autosend, digests: done});
 };
