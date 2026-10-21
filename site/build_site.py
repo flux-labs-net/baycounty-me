@@ -516,7 +516,7 @@ if ELECTIONS_READY:
         for _g in _m.get('groups', []):
             if _g['group'] == 'Take part':
                 _g['items'].insert(0, {'label': '2026 Elections', 'href': '/elections', 'desc': "Who's running, their platforms and money"})
-from es_pages import ES_MENU, localize_chrome, es_home, es_addr_page, es_glossary_page, es_records_page, glossary_es_terms, write_report_es, es_tax_page, es_fees_page, prune as prune_es
+from es_pages import ES_MENU, localize_chrome, es_home, es_addr_page, es_glossary_page, es_records_page, glossary_es_terms, write_report_es, es_tax_page, es_fees_page, es_exemptions_page, prune as prune_es
 from govs import GOVS as GOVLIST  # noqa: E402
 
 def page_options():
@@ -615,6 +615,7 @@ PAGES = [
     ('/es/solicitar-registros', 'Solicite un registro público', 'Escriba una solicitud de registros públicos de Florida a cualquier gobierno del condado de Bay en un minuto.', lambda: es_records_page(OUT)),
     ('/es/impuestos', 'A dónde va su impuesto a la propiedad', 'Calcule su factura del impuesto a la propiedad en el condado de Bay y vea qué parte recibe cada gobierno, de dónde saca el resto de su dinero y en qué lo gasta.', lambda: es_tax_page(OUT)),
     ('/es/tarifas-y-facturas', 'Tarifas en su factura de impuestos, y facturas de servicios', 'Las tarifas fijas de bomberos, aguas pluviales y otras en las facturas de impuestos del condado de Bay, y una factura típica de agua, alcantarillado y basura en cada ciudad.', es_fees_page),
+    ('/es/exenciones', 'Exenciones del impuesto a la propiedad', 'Quién recibe una exención del impuesto a la propiedad en el condado de Bay, desde el homestead hasta los veteranos con discapacidad, cuántas casas y cuánto impuesto quita cada una, según el registro de 2026.', es_exemptions_page),
     ('/records-request', 'Request a public record', 'Write a Florida public records request to any Bay County government in a minute: pick a record the site is missing or describe your own.', lambda: records_page(OUT)),
     ('/alerts', 'Get BayCounty.me updates by email', 'Follow Bay County, the school district or your city and get a short weekly email with new votes, data, corrections and upcoming meetings.', lambda: alerts_page(OUT)),
     ('/meetings', 'Upcoming public meetings in Bay County', 'When and where the County Commission, School Board and every city commission meet, with agenda links and the money items on each agenda.', lambda: meetings_page(OUT)),

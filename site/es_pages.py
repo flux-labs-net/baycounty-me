@@ -368,6 +368,7 @@ def es_home():
     cards = [('/es/mi-direccion', 'Mi dirección', 'Escriba una dirección del condado de Bay y vea su estimado de impuestos a la propiedad, quién lo representa, sus escuelas, sus zonas de inundación y evacuación, y si está dentro de un distrito de reurbanización.'),
              ('/es/impuestos', 'Sus impuestos', 'Calcule su factura del impuesto a la propiedad y vea qué parte recibe el condado, las escuelas, su ciudad y cada distrito, y en qué gasta su dinero cada gobierno.'),
              ('/es/tarifas-y-facturas', 'Tarifas y facturas', 'Las tarifas fijas de su factura de impuestos (bomberos, aguas pluviales, alumbrado) y cuánto cuesta el agua, el alcantarillado y la basura en cada ciudad.'),
+             ('/es/exenciones', 'Exenciones', 'Quién paga menos impuesto a la propiedad, desde el homestead hasta los veteranos con discapacidad, y cómo solicitar una exención.'),
              ('/es/solicitar-registros', 'Solicitar registros públicos', 'Elija un gobierno y un registro, y le escribimos la solicitud bajo la ley de registros públicos de Florida.'),
              ('/es/glosario', 'Glosario', 'Cada término de dinero público explicado en lenguaje sencillo: CRA, millaje, exención de vivienda principal y más.')]
     c = ''.join(f'<a class="gv-card" href="{h}"><span class="eyebrow">En español</span><b>{e(t)}</b><span class="small">{e(d)}</span></a>' for h, t, d in cards if h in ES_ALT)
@@ -462,3 +463,20 @@ def es_fees_page():
     finally:
         os.unlink(f.name)
     return data_stamp(translate(page, T['html'], 'fees'), '/public-money/fees-and-bills')
+
+
+def money_short_es(n):
+    """exemptions_page.money in Spanish style: billions as millions ('$1,150M'; 'B' would read as 'billón')."""
+    a = abs(n or 0)
+    return f'${n/1e6:,.0f}M' if a >= 1e9 else f'${n/1e6:,.1f}M' if a >= 1e6 else f'${n/1e3:,.0f}K' if a >= 1e4 else f'${n:,.0f}'
+
+
+def es_exemptions_page():
+    """/es/exenciones: exemptions_page() with Spanish label tables (no shard rewrite), then phrase pairs."""
+    import exemptions_page as xp
+    T = page_pairs('exemptions')
+    home = [(c, *T['home'][c], school) for c, _n, _a, _w, school in xp.HOME]
+    other = {c: T['other'][c] for c in xp.OTHER_NAMES}
+    with patched(xp, HOME=home, OTHER_NAMES=other, DIST_SHORT=T['dist'], money=money_short_es, write_shards=lambda out_dir: 0):
+        page = xp.exemptions_page(None)
+    return translate(page, T['html'], 'exemptions')  # the 'No' cells of the school-taxes column are already Spanish
