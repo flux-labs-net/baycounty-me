@@ -3,6 +3,9 @@
   "private": true,
   "description": "BayCounty.me serverless functions (the site itself is static, built by site/build_site.py).",
   "engines": {"node": ">=20"},
+  "scripts": {
+    "test": "node --test api/__tests__/*.test.js"
+  },
   "dependencies": {
     "pg": "8.13.1"
   }

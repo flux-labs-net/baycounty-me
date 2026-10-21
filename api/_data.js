@@ -54,4 +54,16 @@ async function datasetRows(req, meta) {
   return v;
 }
 
-module.exports = {loadFile, datasetRows, SITE_URL};
+// One read from the database's public REST API (same read-only key as above). path is e.g. 'ingest_runs?select=...'.
+// Returns {rows, total} (total from Content-Range when count is asked for).
+async function rest(path, {count = false, timeout = 8000} = {}) {
+  const ctl = new AbortController(), timer = setTimeout(() => ctl.abort(), timeout);
+  try {
+    const r = await fetch(`${DB_URL}/rest/v1/${path}`, {signal: ctl.signal, headers: {apikey: DB_KEY, ...(count ? {Prefer: 'count=exact'} : {})}});
+    if (!r.ok && r.status !== 206) throw Object.assign(new Error(`database ${r.status}`), {status: r.status === 400 ? 400 : 502});
+    const m = String(r.headers.get('content-range') || '').match(/\/(\d+)$/);
+    return {rows: await r.json(), total: m ? Number(m[1]) : null};
+  } finally { clearTimeout(timer); }
+}
+
+module.exports = {loadFile, datasetRows, rest, SITE_URL};
