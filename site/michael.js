@@ -24,7 +24,7 @@ $('ledC').innerHTML += Object.entries(D.cats).map(([k, v]) => `<option value="${
 let shown = 50, cur = [];
 function filt() {
   const q = $('ledQ').value.trim().toLowerCase(), a = $('ledA').value, c = $('ledC').value;
-  cur = D.rows.filter(r => (!a || r.a === a) && (!c || r.c === c) && (!q || (r.t + ' ' + r.a).toLowerCase().includes(q)));
+  cur = D.rows.filter(r => (!a || r.a === a) && (!c || r.c === c) && (!q || (r.t + ' ' + r.a + ' ' + r.pw).toLowerCase().includes(q)));
   const s = cur.reduce((x, r) => x + r.f, 0);
   $('ledCount').textContent = `${cur.length.toLocaleString()} projects · ${big(s)} federal`;
   $('ledT').tBodies[0].innerHTML = cur.slice(0, shown).map(r => `<tr><td>${esc(nice(r.a))}</td><td class="wrap">${esc(r.t || '—')} <span class="muted small">#${esc(r.pw)}</span></td><td>${esc(r.c)}</td><td class="num">${usd(r.f)}</td><td class="num">${esc(r.d1 || '—')}</td><td class="small">${esc(r.st.replace('Project ', ''))}</td></tr>`).join('') || '<tr><td colspan="6" class="muted">No projects match.</td></tr>';
@@ -39,6 +39,7 @@ $('ledCsv').addEventListener('click', () => {
   const u = URL.createObjectURL(new Blob([csv], {type: 'text/csv'}));
   const l = document.createElement('a'); l.href = u; l.download = 'bay-county-fema-michael-projects.csv'; l.click(); setTimeout(() => URL.revokeObjectURL(u), 1000);
 });
+{ const q0 = new URL(location.href).searchParams.get('q'); if (q0) { $('ledQ').value = q0; requestAnimationFrame(() => $('led-h').scrollIntoView()); } }
 filt();
 
 /* households */

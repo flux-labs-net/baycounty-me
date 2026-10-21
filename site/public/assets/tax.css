@@ -228,3 +228,11 @@ a.src:hover{color:var(--blue)}
 .timeline a{color:var(--blue);font-size:.8rem}
 @media (max-width:640px){.timeline li{grid-template-columns:1fr;gap:2px}}
 .plain a{color:var(--blue)}
+
+/* search */
+.results{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;max-width:820px}
+.results a{display:flex;flex-direction:column;gap:3px;padding:12px 14px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);text-decoration:none}
+.results a:hover{border-color:var(--blue)}
+.r-k{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.r-s{font-size:.86rem;color:var(--muted)}
+.results mark{background:color-mix(in srgb,var(--amber) 45%,transparent);color:inherit;border-radius:2px;padding:0 1px}

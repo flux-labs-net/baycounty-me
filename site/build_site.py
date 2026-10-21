@@ -11,6 +11,7 @@ from tax_page import tax_page
 from amend_page import amend_page
 from addr_page import addr_page
 from michael_page import michael_page
+from search_page import search_page, build_index
 OUT = os.path.join(ROOT, 'public')
 SITE = 'BayCounty.me'
 DOMAIN = 'https://baycounty.me'
@@ -31,6 +32,7 @@ MENU = [
     ]},
     {'label': 'Glossary', 'href': '/glossary'},
     {'label': 'About', 'href': '/about'},
+    {'label': 'Search', 'href': '/search'},
 ]
 
 TOKENS = open(os.path.join(ROOT, 'tokens.css')).read()
@@ -480,6 +482,7 @@ PAGES = [
      'What Florida\'s 2026 Amendment 3 would do to Bay County property tax bills and local budgets, using the state\'s own estimates. Before-and-after calculator; both sides\' arguments; no position taken.', lambda: amend_page(OUT)),
     ('/public-money/hurricane-michael', 'Where the Hurricane Michael money went', 'FEMA, HUD and state recovery money in Bay County after Hurricane Michael: every FEMA project, household aid by city, Rebuild Florida awards, debris costs and the Lynn Haven case.', lambda: michael_page(OUT)),
     ('/glossary', 'Plain-English guide', 'Every term on BayCounty.me explained simply: CRAs, tax increment, millage, homestead exemptions, budgets and more.', glossary_page),
+    ('/search', 'Search', 'Search every page, glossary term and public-money record on BayCounty.me.', search_page),
     ('/about', 'About', 'What BayCounty.me is, where its information comes from, and how to send a correction.', about_page),
 ]
 
@@ -498,6 +501,7 @@ def main():
     shutil.copy(os.path.join(ROOT, 'tax.css'), os.path.join(OUT, 'assets', 'tax.css'))
     for path, title, desc, fn in PAGES:
         write(path, layout(title, desc, path, fn()))
+    print('search index:', build_index(OUT, PAGES), 'entries')
     open(os.path.join(OUT, '404.html'), 'w').write(layout('Page not found', 'Page not found', '/404',
         '<div class="page prose"><h1>That page isn\'t here.</h1><p><a href="/">Back to the home page</a></p></div>'))
     for dp, _, fs in os.walk(OUT):

@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Search · BayCounty.me</title>
+<meta name="description" content="Search every page, glossary term and public-money record on BayCounty.me.">
+<link rel="canonical" href="https://baycounty.me/search">
+<meta property="og:title" content="Search">
+<meta property="og:description" content="Search every page, glossary term and public-money record on BayCounty.me.">
+<meta property="og:url" content="https://baycounty.me/search">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#1E3A76">
+<script>try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head"><div class="site-head-in">
+  <a class="wordmark" href="/" aria-label="BayCounty.me home"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C7.6 2 4 5.5 4 9.9 4 15.6 12 22 12 22s8-6.4 8-12.1C20 5.5 16.4 2 12 2z" fill="var(--blue)"/><circle cx="12" cy="10" r="3.2" fill="var(--bg)"/></svg><span>BayCounty<b>.me</b></span></a>
+  <button type="button" class="theme-btn" id="themeBtn" aria-label="Theme: match system"><svg class="ti ti-system" width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="6.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 3.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/></svg><svg class="ti ti-light" width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 2v2.2M10 15.8V18M2 10h2.2M15.8 10H18M4.3 4.3l1.6 1.6M14.1 14.1l1.6 1.6M4.3 15.7l1.6-1.6M14.1 5.9l1.6-1.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><svg class="ti ti-dark" width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path d="M16 12.6A6.6 6.6 0 0 1 7.4 4a6.6 6.6 0 1 0 8.6 8.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="theme-lbl">System</span></button>
+  <button type="button" class="menu-btn" aria-expanded="false" aria-controls="site-menu"><span class="sr">Menu</span><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14" stroke="currentColor" stroke-width="1.8"/></svg></button>
+  <nav aria-label="Main"><ul id="site-menu" class="menu"><li><a href="/">Home</a></li><li><a href="/my-address">My Address</a></li><li class="has-sub"><button type="button" class="sub-toggle" aria-expanded="false">Public Money<svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 3.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button><ul class="nav-sub"><li><a href="/public-money/cra-spending"><span class="k">CRA Spending</span><span class="kd">Where the six redevelopment agencies spend tax increment</span></a></li><li><a href="/public-money/tax-dollars"><span class="k">Tax Dollars</span><span class="kd">Your bill, slice by slice, and where each government spends</span></a></li><li><a href="/public-money/hurricane-michael"><span class="k">Hurricane Michael</span><span class="kd">FEMA, HUD and state recovery money: who got it and for what</span></a></li><li><a href="/public-money/amendment-3"><span class="k">Amendment 3</span><span class="kd">What the property tax amendment would change in Bay County</span></a></li></ul></li><li><a href="/glossary">Glossary</a></li><li><a href="/about">About</a></li><li><a href="/search" aria-current="page">Search</a></li></ul></nav>
+</div></header>
+<main id="main">
+<div class="page tax srch">
+  <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Search</span><h1>Search BayCounty.me</h1>
+    <p class="lede">Every page, every glossary term, and every record in the site's ledgers: CRA payments and FEMA projects so far.</p></div></header>
+  <section class="addr-search" role="search">
+    <label for="sq" class="fld"><span>Search for a name, place, project or term</span></label>
+    <div class="ac"><input id="sq" type="search" autocomplete="off" placeholder="e.g. Crowder Gulf, millage, St. Andrews, pier"></div>
+    <p class="muted small" id="sCount"></p>
+  </section>
+  <ol class="results" id="sRes" aria-live="polite"></ol>
+</div>
+<link rel="stylesheet" href="/assets/tax.css">
+<script>
+(() => {
+  const inp = document.getElementById('sq'), res = document.getElementById('sRes'), cnt = document.getElementById('sCount');
+  const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const norm = s => String(s || '').toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g, '');
+  let IDX = null, t;
+  const W = {Page: 6, Section: 4, Glossary: 5};
+  async function load() { if (!IDX) { IDX = (await (await fetch('/data/search.json')).json()).map(r => ({...r, _t: norm(r.t), _s: norm(r.s), _x: norm(r.x)})); } return IDX; }
+  function hl(s, words) { let h = esc(s); words.forEach(w => { if (w.length > 1) h = h.replace(new RegExp('(' + w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'ig'), '<mark>$1</mark>'); }); return h; }
+  async function run() {
+    const q = inp.value.trim(), words = norm(q).split(/\s+/).filter(Boolean);
+    const u = new URL(location.href); if (q) u.searchParams.set('q', q); else u.searchParams.delete('q'); history.replaceState(null, '', u);
+    if (!words.length) { res.innerHTML = ''; cnt.textContent = ''; return; }
+    const idx = await load();
+    const hits = [];
+    for (const r of idx) {
+      let sc = 0, ok = true;
+      for (const w of words) { const it = r._t.indexOf(w), is = r._s.indexOf(w), ix = r._x ? r._x.indexOf(w) : -1; if (it < 0 && is < 0 && ix < 0) { ok = false; break; } sc += it >= 0 ? (it === 0 ? 4 : 3) : is >= 0 ? 1 : 0.5; }
+      if (ok) hits.push([sc + (W[r.k] || 0), r]);
+    }
+    hits.sort((a, b) => b[0] - a[0]);
+    cnt.textContent = hits.length ? `${hits.length.toLocaleString()} result${hits.length === 1 ? '' : 's'}${hits.length > 100 ? ', showing the top 100' : ''}` : 'No results. Try fewer or different words.';
+    const snip = r => { if (!r.x || words.some(w => r._s.includes(w))) return r.s; const i = r._x.indexOf(words[0]); return i < 0 ? r.s : '…' + r.x.slice(Math.max(0, i - 80), i + 140) + '…'; };
+    res.innerHTML = hits.slice(0, 100).map(([, r]) => `<li><a href="${esc(r.u)}"><span class="r-k">${esc(r.k)}</span><b>${hl(r.t, words)}</b><span class="r-s">${hl(snip(r), words)}</span></a></li>`).join('');
+  }
+  inp.addEventListener('input', () => { clearTimeout(t); t = setTimeout(run, 150); });
+  const q0 = new URL(location.href).searchParams.get('q'); if (q0) { inp.value = q0; run(); } else inp.focus({preventScroll: true});
+})();
+</script>
+</main>
+<footer class="site-foot"><div class="site-foot-in">
+  <div class="foot-about"><p><b>BayCounty.me</b> puts Bay County, Florida public records in plain view: maps, money, and the documents behind them.</p>
+  <p class="muted">Found an error or have a record to add? Email <span class="sel">hello@fluxlabs.net</span>.</p></div>
+  <a class="powered" href="https://fluxlabs.net/" target="_blank" rel="noopener"><span>Powered by</span><img src="/assets/flux-labs.webp" alt="Flux Labs" width="140" height="25"></a>
+</div></footer>
+<script src="/assets/site.js" defer></script>
+</body>
+</html>
