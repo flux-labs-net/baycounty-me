@@ -7,6 +7,7 @@ on:
   workflow_dispatch: {}
 permissions:
   contents: write
+  issues: write
 concurrency:
   group: refresh-meetings
   cancel-in-progress: true
@@ -22,6 +23,30 @@ jobs:
       - name: Fetch meetings
         working-directory: data/meetings
         run: python fetch_meetings.py
+      - name: Report meeting source errors
+        # When meetings.json lists errors, this step fails (red X and an error annotation on the run) and opens one
+        # issue, or comments on the open one. continue-on-error keeps the rest of the refresh (and the database sync,
+        # which only follows a successful run) going, since one broken source shouldn't hold back the others.
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          n=$(python -c "import json;print(len(json.load(open('data/meetings/meetings.json')).get('errors') or []))")
+          if [ "$n" = "0" ]; then echo "No meeting source errors"; exit 0; fi
+          python - > "$RUNNER_TEMP/body.md" <<'PY'
+          import json, os
+          e = json.load(open('data/meetings/meetings.json'))['errors']
+          print(f"The daily meetings refresh reported {len(e)} source error(s).\n")
+          for x in e:
+              print(f"- **{x.get('board')}** ({x.get('source')}): {x.get('error')}  \n  {x.get('url')}")
+          print(f"\nRun: {os.environ['GITHUB_SERVER_URL']}/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{os.environ['GITHUB_RUN_ID']}")
+          PY
+          title="Meetings refresh: source errors"
+          num=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --search "in:title \"$title\"" --json number --jq '.[0].number // empty' || true)
+          if [ -n "$num" ]; then gh issue comment "$num" --repo "$GITHUB_REPOSITORY" --body-file "$RUNNER_TEMP/body.md"
+          else gh issue create --repo "$GITHUB_REPOSITORY" --title "$title" --body-file "$RUNNER_TEMP/body.md"; fi
+          echo "::error title=Meeting sources::meetings.json has $n source error(s); see the open issue."
+          exit 1
       - name: Fetch campaign finance reports
         continue-on-error: true
         working-directory: data/elections/scripts
@@ -31,9 +56,11 @@ jobs:
         run: python build_site.py > /dev/null
       - name: Commit if changed
         run: |
-          if git diff --quiet; then echo "No changes"; exit 0; fi
+          paths="data/meetings data/elections/finance_2026.json site/public"
+          # git status --porcelain also lists new, untracked files, which git diff --quiet ignores.
+          if [ -z "$(git status --porcelain -- $paths)" ]; then echo "No changes"; exit 0; fi
           git config user.name "BayCounty.me bot"
           git config user.email "hello@fluxlabs.net"
-          git add -A data/meetings data/elections/finance_2026.json site/public
+          git add -A $paths
           git commit -m "Daily refresh: meetings and campaign finance ($(date -u +%Y-%m-%d))"
           git push
