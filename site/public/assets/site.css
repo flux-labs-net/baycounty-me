@@ -195,3 +195,18 @@ a{color:var(--blue)}
 .t-stat b{display:block;font:600 1.25rem/1.15 var(--f-display);color:var(--ink);font-variant-numeric:tabular-nums}
 .home .timeline a{font-size:inherit;color:var(--ink)}
 .home .timeline a:hover{color:var(--blue)}
+
+/* grouped Public Money menu */
+.nav-mega{display:none;min-width:0;width:min(760px,calc(100vw - 32px));padding:12px;gap:8px;position:fixed;top:58px;right:max(16px,calc((100vw - 1360px) / 2 + 16px))}
+.sub-toggle[aria-expanded="true"] + .nav-mega{display:grid}
+@media (hover:hover){.has-sub:hover .nav-mega,.has-sub:focus-within .nav-mega{display:grid}}
+.nav-mega{grid-template-columns:repeat(3,minmax(0,1fr))}
+.nav-grp{list-style:none;min-width:0}
+.nav-grp > ul{list-style:none;margin:0;padding:0}
+.nav-gh{display:block;font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:500;padding:4px 12px 6px}
+@media (max-width:720px){
+  .nav-mega{display:block;position:static;width:auto;padding:0 0 6px 8px}
+  .nav-gh{padding:10px 12px 2px}
+}
+.nav-mega::before{content:"";position:absolute;left:0;right:0;top:-14px;height:14px}
+@media (max-width:720px){.nav-mega::before{display:none}}

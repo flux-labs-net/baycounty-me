@@ -24,30 +24,27 @@ DOMAIN = 'https://baycounty.me'
 MENU = [
     {'label': 'Home', 'href': '/'},
     {'label': 'My Address', 'href': '/my-address'},
-    {'label': 'Public Money', 'children': [
-        {'label': 'CRA Spending', 'href': '/public-money/cra-spending',
-         'desc': 'Where the six redevelopment agencies spend tax increment'},
-        {'label': 'Tax Dollars', 'href': '/public-money/tax-dollars',
-         'desc': 'Your bill, slice by slice, and where each government spends'},
-        {'label': 'Hurricane Michael', 'href': '/public-money/hurricane-michael',
-         'desc': 'FEMA, HUD and state recovery money: who got it and for what'},
-        {'label': 'Tourist Tax', 'href': '/public-money/tourist-tax',
-         'desc': 'The 5% bed tax: what visitors pay and where it goes'},
-        {'label': 'Sales Tax Projects', 'href': '/public-money/sales-tax-projects',
-         'desc': 'Half-cent sales taxes: what was promised, what got built'},
-        {'label': 'Fees & Bills', 'href': '/public-money/fees-and-bills',
-         'desc': 'Fees on your tax bill, and water, sewer and garbage costs'},
-        {'label': 'Debt', 'href': '/public-money/debt',
-         'desc': 'What each government owes, what for, and big payments ahead'},
-        {'label': 'Audit Findings', 'href': '/public-money/audits',
-         'desc': 'What outside auditors flagged, in plain English'},
-        {'label': 'Amendment 3', 'href': '/public-money/amendment-3',
-         'desc': 'What the property tax amendment would change in Bay County'},
+    {'label': 'Public Money', 'groups': [
+        {'group': 'What you pay', 'items': [
+            {'label': 'Tax Dollars', 'href': '/public-money/tax-dollars', 'desc': 'Your property tax bill, slice by slice'},
+            {'label': 'Fees & Bills', 'href': '/public-money/fees-and-bills', 'desc': 'Fees on your tax bill, water and garbage'},
+            {'label': 'Tourist Tax', 'href': '/public-money/tourist-tax', 'desc': 'The 5% bed tax visitors pay'},
+            {'label': 'Amendment 3', 'href': '/public-money/amendment-3', 'desc': 'What the ballot amendment would change'},
+        ]},
+        {'group': 'Where it goes', 'items': [
+            {'label': 'CRA Spending', 'href': '/public-money/cra-spending', 'desc': 'What redevelopment agencies paid for'},
+            {'label': 'Sales Tax Projects', 'href': '/public-money/sales-tax-projects', 'desc': 'Half-cent projects: promised vs built'},
+            {'label': 'Hurricane Michael', 'href': '/public-money/hurricane-michael', 'desc': 'FEMA, HUD and state recovery money'},
+        ]},
+        {'group': 'Accountability', 'items': [
+            {'label': 'Debt', 'href': '/public-money/debt', 'desc': 'What each government owes'},
+            {'label': 'Audit Findings', 'href': '/public-money/audits', 'desc': 'What outside auditors flagged'},
+        ]},
     ]},
     {'label': 'Officials', 'href': '/who-runs-bay-county'},
     {'label': 'Glossary', 'href': '/glossary'},
-    {'label': 'About', 'href': '/about'},
     {'label': 'Search', 'href': '/search'},
+    {'label': 'About', 'href': '/about'},
 ]
 
 TOKENS = open(os.path.join(ROOT, 'tokens.css')).read()
@@ -57,16 +54,17 @@ SITE_CSS = open(os.path.join(ROOT, 'site.css')).read()
 def nav_html(active):
     items = []
     for m in MENU:
-        if 'children' in m:
-            on = any(c['href'] == active for c in m['children'])
-            kids = ''.join(
-                f'<li><a href="{c["href"]}"{" aria-current=\"page\"" if c["href"] == active else ""}>'
-                f'<span class="k">{c["label"]}</span><span class="kd">{c["desc"]}</span></a></li>'
-                for c in m['children'])
+        if 'groups' in m:
+            on = any(c['href'] == active for g in m['groups'] for c in g['items'])
+            cols = ''.join(
+                f'<li class="nav-grp"><span class="nav-gh">{g["group"]}</span><ul>' + ''.join(
+                    f'<li><a href="{c["href"]}"{" aria-current=\"page\"" if c["href"] == active else ""}>'
+                    f'<span class="k">{c["label"]}</span><span class="kd">{c["desc"]}</span></a></li>' for c in g['items']) + '</ul></li>'
+                for g in m['groups'])
             items.append(
                 f'<li class="has-sub{" on" if on else ""}"><button type="button" class="sub-toggle" aria-expanded="false">'
                 f'{m["label"]}<svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 3.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>'
-                f'<ul class="nav-sub">{kids}</ul></li>')
+                f'<ul class="nav-sub nav-mega">{cols}</ul></li>')
         else:
             cur = ' aria-current="page"' if m['href'] == active else ''
             items.append(f'<li><a href="{m["href"]}"{cur}>{m["label"]}</a></li>')
