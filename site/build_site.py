@@ -9,6 +9,7 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, ROOT)
 from tax_page import tax_page
 from amend_page import amend_page
+from addr_page import addr_page
 OUT = os.path.join(ROOT, 'public')
 SITE = 'BayCounty.me'
 DOMAIN = 'https://baycounty.me'
@@ -16,6 +17,7 @@ DOMAIN = 'https://baycounty.me'
 # Menu: top-level items; an item with 'children' becomes a drop-down.
 MENU = [
     {'label': 'Home', 'href': '/'},
+    {'label': 'My Address', 'href': '/my-address'},
     {'label': 'Public Money', 'children': [
         {'label': 'CRA Spending', 'href': '/public-money/cra-spending',
          'desc': 'Where the six redevelopment agencies spend tax increment'},
@@ -384,6 +386,11 @@ def home_page():
     <span class="eyebrow">Bay County, Florida</span>
     <h1>Local government, in plain view.</h1>
     <p class="lede">Maps, money and the public records behind them, for Panama City, Panama City Beach, Lynn Haven, Callaway, Springfield, Parker and the rest of Bay County. Every figure links to its source.</p>
+    <form class="home-search" action="/my-address/" method="get" role="search">
+      <label for="hq">Look up your address</label>
+      <div><input id="hq" name="q" type="search" placeholder="e.g. 825 Ohio Ave" autocomplete="off"><button type="submit">Look up</button></div>
+      <small class="muted">Your tax estimate, representatives, schools, flood zone and more.</small>
+    </form>
   </section>
 
   <section class="section">
@@ -461,6 +468,7 @@ def about_page():
 
 PAGES = [
     ('/', 'Bay County public records, mapped', 'Maps, money and public records for Bay County, Florida, with a source on every figure.', home_page),
+    ('/my-address', 'My Address', 'Look up any Bay County address: property tax estimate, who represents you, zoned schools, flood and evacuation zones, and whether it is in a redevelopment district.', lambda: addr_page(OUT)),
     ('/public-money/cra-spending', 'CRA Spending',
      'Interactive map and ledger of Bay County, Florida\'s six Community Redevelopment Agencies: who was paid, where, and for what.', cra_page),
     ('/public-money/tax-dollars', 'How your tax dollars are allocated',

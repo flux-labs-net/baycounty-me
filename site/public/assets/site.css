@@ -127,6 +127,16 @@ a{color:var(--blue)}
 .ex-fig{width:100%;max-width:340px;height:auto;justify-self:center}
 .ex-fig text{font-family:var(--f-body)}
 @media (max-width:760px){.explain{grid-template-columns:1fr;padding:18px 16px}}
+/* home: address search */
+.home-search{display:flex;flex-direction:column;gap:6px;max-width:560px;margin-top:6px}
+.home-search label{font-weight:500;font-size:.92rem}
+.home-search div{display:flex;gap:8px}
+.home-search input{flex:1;min-width:0;min-height:48px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);font:500 1rem var(--f-body);padding:0 14px}
+.home-search input:focus{outline:2px solid var(--blue);outline-offset:1px}
+.home-search button{min-height:48px;padding:0 18px;border-radius:12px;border:0;background:var(--navy);color:#fff;font:500 .95rem var(--f-body);cursor:pointer}
+:root[data-theme="dark"] .home-search button{color:#0E131B}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .home-search button{color:#0E131B}}
+.home-search small{font-size:.8rem}
 /* home: glossary call-out */
 .guide-cta{display:flex;flex-direction:column;gap:8px;padding:20px 22px;border:1px solid var(--line);border-radius:14px;background:var(--surface);color:var(--ink);text-decoration:none}
 .guide-cta:hover{border-color:var(--blue)}

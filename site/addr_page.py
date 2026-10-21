@@ -1,0 +1,94 @@
+"""'My Address' page for baycounty.me.
+
+Everything is looked up live in the browser from Bay County's public GIS server
+(gis.baycountyfl.gov, which allows cross-origin requests). This module only ships
+the rates, district stacks and CRA totals the page needs to interpret the results.
+"""
+import json, os
+from collections import defaultdict
+from tax_page import build_data, YEARS
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+
+# Property Appraiser tax district code -> DOR district id used by the rate stacks
+TAXDIST = {'2': 'Callaway', '02': 'Callaway', '6': 'Lynn Haven', '06': 'Lynn Haven', '8': 'Mexico Beach', '08': 'Mexico Beach',
+           '10': 'Parker', '13': 'Panama City Beach', '16': 'Panama City', '20': 'Springfield',
+           '31': 'Panama City - Downtown DIB', '55': 'unincorporated', '56': 'unincorporated - beach area'}
+
+# Bay County GIS CRA district names -> CRA agency used on the CRA page
+CRA_AGENCY = {
+    'Downtown Extension CRA': 'Panama City CRA', 'Downtown N Extension CRA': 'Panama City CRA', 'Downtown North CRA': 'Panama City CRA',
+    'St. Andrews CRA': 'Panama City CRA', 'St Andrews CRA - West Expansion Area': 'Panama City CRA',
+    'St Andrews CRA - East Expansion Area': 'Panama City CRA', 'Millville CRA': 'Panama City CRA', 'Downtown CRA / DIB': 'Panama City CRA',
+    'Front Beach Road CRA': 'Panama City Beach CRA', 'Pier Park CRA': 'Panama City Beach CRA',
+    'Lynn Haven CRA': 'Lynn Haven CRA', 'Callaway CRA': 'Callaway CRA', 'Springfield CRA': 'Springfield CRA', 'Parker CRA': 'Parker CRA',
+}
+
+
+def addr_page(out_dir):
+    td = build_data()
+    L = len(YEARS) - 1
+    merged = json.load(open(os.path.join(HERE, '..', 'data', 'merged.json')))
+    cra = defaultdict(lambda: {'spent': 0, 'n': 0})
+    for p in merged['payments']:
+        c = cra[p['cra']]; c['n'] += 1
+        if p['count'] and p['amount'] and p['status'] in ('Spent', 'Committed'):
+            c['spent'] += p['amount']
+    data = {
+        'taxdist': TAXDIST, 'craAgency': CRA_AGENCY, 'cra': {k: {'spent': round(v['spent']), 'n': v['n']} for k, v in cra.items()},
+        'districts': {d['id']: {'label': d['label'], 'stack': d['stack'], 'total': d['total'][L]} for d in td['districts']},
+        'auth': {k: {'n': a['n'], 'g': a['g'], 'school': a['school'], 'm': a['m'][L]} for k, a in td['auth'].items()},
+        'groups': td['groups'], 'fy': td['fy'][L], 'second2026': 26411,
+    }
+    js = open(os.path.join(HERE, 'address.js')).read().replace('__ADDR__', json.dumps(data, ensure_ascii=False, separators=(',', ':')))
+    open(os.path.join(out_dir, 'assets', 'address.js'), 'w').write(js)
+
+    def T(tid, text):
+        return f'<span class="term" data-term="{tid}">{text}</span>'
+
+    return f'''<div class="page tax addr">
+  <header class="tx-top">
+    <div class="tx-brand">
+      <span class="eyebrow">My Address</span>
+      <h1>What applies to your address</h1>
+      <p class="lede">Type a Bay County street address to see your property tax estimate, who represents you, your schools, your flood and evacuation zones, and whether you're inside a redevelopment district.</p>
+    </div>
+  </header>
+
+  <section class="addr-search" role="search">
+    <label for="q" class="fld"><span>Street address</span></label>
+    <div class="ac">
+      <input id="q" type="search" autocomplete="off" spellcheck="false" placeholder="e.g. 825 Ohio Ave" aria-autocomplete="list" aria-controls="acList" aria-expanded="false">
+      <ul id="acList" class="ac-list" role="listbox" hidden></ul>
+    </div>
+    <p class="muted small">Start with the house number. Lookups go straight to Bay County's public map server; BayCounty.me doesn't store what you search.</p>
+    <p class="err" id="err" role="alert" hidden></p>
+  </section>
+
+  <div id="out" class="addr-out" hidden aria-live="polite">
+    <div class="addr-hd">
+      <div><h2 id="aTitle"></h2><p class="muted" id="aSub"></p></div>
+      <a class="pdf-btn" id="paLink" target="_blank" rel="noopener">Property Appraiser record ↗</a>
+    </div>
+    <div class="addr-grid">
+      <section class="card a-map"><svg id="map" viewBox="0 0 400 260" role="img" aria-label="Map of the address"></svg><p class="muted small" id="mapCap"></p></section>
+      <section class="card" id="cTax"><h3>Property tax estimate</h3><div id="taxBody"></div></section>
+      <section class="card" id="cProp"><h3>The property</h3><dl class="kv" id="propBody"></dl></section>
+      <section class="card" id="cA3"><h3>If Amendment 3 passes</h3><div id="a3Body"></div></section>
+      <section class="card" id="cReps"><h3>Who represents you</h3><dl class="kv" id="repBody"></dl></section>
+      <section class="card" id="cSch"><h3>Zoned public schools</h3><dl class="kv" id="schBody"></dl></section>
+      <section class="card" id="cCra"><h3>Redevelopment district ({T('cra', 'CRA')})</h3><div id="craBody"></div></section>
+      <section class="card" id="cSafe"><h3>Flood, storms and services</h3><dl class="kv" id="safeBody"></dl></section>
+    </div>
+    <p class="note">Owner names are not shown here. They're public at the Property Appraiser's site, linked above. Representative names come from Bay County's GIS and may lag an election.</p>
+  </div>
+
+  <section class="tx-sec method" aria-labelledby="src-h">
+    <div class="sec-hd"><h2 id="src-h">How this works</h2></div>
+    <p>Addresses, parcels, property values and district boundaries come live from <a href="https://gis.baycountyfl.gov/arcgis/rest/services" target="_blank" rel="noopener">Bay County's public GIS server</a>, which publishes the Property Appraiser's parcel data. Property values are the 2026 roll. Flood zones come from FEMA's flood map layer in that service.</p>
+    <p>The tax estimate applies the latest complete set of official rates (tax year 2025, {data['fy']} bills, from the Florida Department of Revenue) to the 2026 values. The rates adopted in September 2026 will replace them when the state publishes the full set. It covers {T('ad-valorem', 'property taxes')} only, not {T('non-ad-valorem', 'non-ad valorem fees')}. For a homestead, school tax is figured on the value before the second homestead exemption, since that one doesn't apply to schools. Other exemptions are taken as reported by the Property Appraiser. Your official bill comes from the Tax Collector.</p>
+  </section>
+  <div class="tt" id="tt" role="tooltip" hidden></div>
+</div>
+<link rel="stylesheet" href="/assets/tax.css">
+<script src="/assets/address.js" defer></script>'''
