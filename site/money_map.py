@@ -102,7 +102,9 @@ def map_data():
             if not v['body'].startswith(BODY.get(OFFG(o), ('~',))) or v.get('category') != 'contract':
                 continue
             txt = ' '.join([v.get('item') or '', v.get('summary') or '', v.get('headline') or '']).lower()
-            if re.search(r'\bplat\b', txt) or not any(a in txt for a in al):
+            # skip plat approvals, judged by the headline (what the vote did): minutes sometimes file a contract award
+            # under an unrelated plat item, e.g. Panama City's 2025-06-24 Marshall Brothers generator award
+            if re.search(r'\bplat\b', (v.get('headline') or v.get('item') or '').lower()) or not any(a in txt for a in al):
                 continue
             mv = next((val for n, val in (v.get('by_member') or {}).items() if n.split()[-1].lower() == last), None)
             if mv not in ('yes', 'no', 'abstain', 'absent'):
@@ -110,13 +112,38 @@ def map_data():
             before = [x for x in gf['dates'] if x <= v['date']]
             vrows.append({'d': gf['d'], 'o': gf['o'], 'gift': gf['a'], 'gift_dates': gf['dates'], 'date': v['date'], 'h': v.get('headline') or v['item'],
                           'amount': v.get('amount'), 'vote': mv, 'outcome': v.get('outcome'), 'tally': v.get('tally'), 'consent': 'consent' in (v.get('item') or '').lower(),
-                          'when': None if not gf['dates'] else ('after' if before else 'before'), 'url': v.get('source_url')})
+                          'when': None if not gf['dates'] else ('after' if before else 'before'), 'url': v.get('source_url'), '_v': v})
     vrows.sort(key=lambda r: (officials[r['o']]['n'], r['date']))
+    vgroups = vote_groups(vrows, officials)
+    for r in vrows:
+        r.pop('_v')
     dl = donors_list(donors)
     for x in dl:
         x['k'] = bool(held.get(x['id']))
         x['tot'] = round(sum(g['a'] for g in gifts if g['d'] == x['id']), 2)
-    return {'officials': officials, 'donors': dl, 'gifts': gifts, 'contracts': cons, 'votes': vrows, 'govs': GSHORT, 'as_of': d.get('as_of')}
+    return {'officials': officials, 'donors': dl, 'gifts': gifts, 'contracts': cons, 'votes': vrows, 'vgroups': vgroups, 'govs': GSHORT, 'as_of': d.get('as_of')}
+
+
+def vote_groups(vrows, officials):
+    """One row per recorded vote and donor, with the full roll call. Members who got a gift from that donor carry it."""
+    groups = {}
+    for r in vrows:
+        v = r['_v']
+        k = (v['body'], v['date'], v.get('item'), r['d'])
+        if k not in groups:
+            g = OFFG(officials[r['o']])
+            cur = {o['n'].split()[-1].lower(): o['id'] for o in officials if o['g'] == g}
+            roll = [{'n': n, 'vote': val, 'o': cur.get(n.split()[-1].lower())} for n, val in (v.get('by_member') or {}).items()]
+            groups[k] = {'d': r['d'], 'g': g, 'date': r['date'], 'h': r['h'], 'amount': r['amount'], 'outcome': r['outcome'], 'tally': r['tally'],
+                         'consent': r['consent'], 'url': r['url'], 'roll': roll}
+        for m in groups[k]['roll']:
+            if m['n'].split()[-1].lower() == officials[r['o']]['n'].split()[-1].lower():
+                m.update({'o': r['o'], 'gift': r['gift'], 'gift_dates': r['gift_dates'], 'when': r['when']})
+    out = list(groups.values())
+    for x in out:  # gift recipients first, then the rest of the board in the minutes' order
+        x['roll'].sort(key=lambda m: 'gift' not in m)
+    out.sort(key=lambda x: x['date'], reverse=True)
+    return out
 
 
 def donors_list(donors):
@@ -151,7 +178,7 @@ def money_map_page(out_dir):
     <div class="kpi"><span class="eyebrow">Donor organizations</span><span class="v">{len(D["donors"])}</span><span class="s">gave to {len(D["officials"])} current officials</span></div>
     <div class="kpi"><span class="eyebrow">Also paid by a local government</span><span class="v">{len(k_ids)}</span><span class="s">gave ${k_gift:,.0f} in all</span></div>
     <div class="kpi"><span class="eyebrow">Gift to the official's own government's contractor</span><span class="v">{len(same)}</span><span class="s">gifts totaling ${sum(g["a"] for g in same):,.0f}</span></div>
-    <div class="kpi"><span class="eyebrow">Voted on that donor's contract</span><span class="v">{len(voted)}</span><span class="s">official–donor pairs, {len(D["votes"])} recorded votes</span></div>
+    <div class="kpi"><span class="eyebrow">Voted on that donor's contract</span><span class="v">{len(voted)}</span><span class="s">official–donor pairs, {len(D["vgroups"])} recorded votes</span></div>
   </div>
   <div class="vt-filters mm-f">
     <label class="vf"><span>Show donors</span><select id="mmShow"><option value="same">Gave to an official whose government pays them</option><option value="k">Paid by any local government</option><option value="top">Top 40 by amount given</option><option value="all">All organizations</option></select></label>
@@ -163,7 +190,7 @@ def money_map_page(out_dir):
     <p class="mm-hint muted small">Scroll sideways to see the whole map.</p><div class="mm-wrap" id="mmWrap"><svg id="mmSvg" role="img" aria-label="Map of officials, the organizations that gave to their campaigns, and the governments that pay those organizations"></svg></div>
     <div class="mm-detail" id="mmDetail" aria-live="polite"><p class="muted">Tap an official, donor or government to see its connections and the records behind them.</p></div>
   </section>
-  <section class="tx-sec"><div class="sec-hd"><h2 id="votes">Votes on a donor's contract</h2><span class="muted">Where the minutes record the official voting on a contract with a business that gave to their campaign</span></div>
+  <section class="tx-sec"><div class="sec-hd"><h2 id="votes">Votes on a donor's contract</h2><span class="muted">Contract votes where at least one board member had received a gift from the business. The full roll call is shown; members who got a gift are listed first, in bold.</span></div>
     <div class="tablewrap"><table class="tx-table cm-table" id="mmVotes"></table></div>
     <p class="note">From the meeting minutes on the <a href="/public-money/votes">How They Voted</a> page, matched by the company's exact name. "Consent" means the item was approved in one vote with other routine items. Only the votes on this site are checked; contracts approved by staff under a purchasing limit never come to a vote.</p></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="heat1">Heat map: who gave to which government's officials</h2><span class="muted">Top 30 donor organizations</span></div>

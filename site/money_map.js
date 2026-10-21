@@ -11,6 +11,7 @@ const qs = new URLSearchParams(location.search);
 $('mmGov').innerHTML += GORDER.filter(g => OFF.some(o => o.g === g)).map(g => `<option value="${g}">${esc(GN[g])}</option>`).join('');
 if (qs.get('show')) $('mmShow').value = qs.get('show');
 if (qs.get('gov')) $('mmGov').value = qs.get('gov');
+if (qs.get('q')) $('mmQ').value = qs.get('q');
 let sel = null; // {t:'d'|'o'|'g', id}
 const conAmt = c => c.a || c.p;
 const sameDon = new Set(GIFTS.filter(g => g.same).map(g => g.d));
@@ -142,13 +143,19 @@ function detail() {
 }
 
 function votesTable() {
-  const t = $('mmVotes');
-  if (!VOTES.length) { t.outerHTML = '<p class="muted">No recorded votes found.</p>'; return; }
-  t.innerHTML = `<thead><tr><th scope="col">Official</th><th scope="col">Donor and gift</th><th scope="col">Vote</th><th scope="col">Item</th></tr></thead><tbody>${VOTES.map(v => `<tr>
-    <th scope="row"><b>${esc(OFF[v.o].n)}</b><small>${esc(OFF[v.o].off)}</small></th>
-    <td>${esc(DON[v.d].n)}<small>${M(v.gift)}${v.gift_dates && v.gift_dates.length ? ' on ' + v.gift_dates.map(fd).join(', ') : ''}</small></td>
-    <td><b>${esc(v.vote)}</b><small>${fd(v.date)} · ${v.when === 'before' ? 'before the gift' : v.when === 'after' ? 'after the gift' : ''}</small></td>
-    <td class="wrap small">${esc(v.h)}${v.amount ? ' · ' + M(v.amount) : ''}${v.consent ? ' <span class="muted">(consent agenda)</span>' : ''} · ${esc(v.outcome)}${v.tally ? ' ' + esc(v.tally) : ''}${v.url ? ` <a class="src" href="${esc(v.url)}" target="_blank" rel="noopener">Minutes</a>` : ''}</td></tr>`).join('')}</tbody>`;
+  const t = $('mmVotes'), VG = D.vgroups || [];
+  if (!VG.length) { t.outerHTML = '<p class="muted">No recorded votes found.</p>'; return; }
+  const member = m => {
+    const name = m.gift ? `<b>${esc(m.n)}</b>` : esc(m.n);
+    const vote = m.vote === 'yes' ? 'yes' : `<b>${esc(m.vote)}</b>`;
+    const gift = m.gift ? ` <span class="small">got ${M(m.gift)}${m.gift_dates && m.gift_dates.length ? ' on ' + m.gift_dates.map(fd).join(', ') : ''}${m.when === 'after' ? ', before this vote' : m.when === 'before' ? ', after this vote' : ''}</span>` : '';
+    return `<li>${name}: ${vote}${gift}</li>`;
+  };
+  t.innerHTML = `<thead><tr><th scope="col">Date</th><th scope="col">Donor</th><th scope="col">Item</th><th scope="col">Roll call</th></tr></thead><tbody>${VG.map(v => `<tr>
+    <td>${fd(v.date)}<small>${esc(GN[v.g] || '')}</small></td>
+    <th scope="row">${esc(DON[v.d].n)}</th>
+    <td class="wrap small">${esc(v.h)}${v.amount ? ' · ' + M(v.amount) : ''}${v.consent ? ' <span class="muted">(consent agenda)</span>' : ''}${v.url ? ` <a class="src" href="${esc(v.url)}" target="_blank" rel="noopener">Minutes</a>` : ''}</td>
+    <td class="wrap small"><span>${esc(v.outcome || '')}${v.tally ? ' ' + esc(v.tally) : ''}</span><ul class="plain mm-roll">${v.roll.map(member).join('')}</ul></td></tr>`).join('')}</tbody>`;
 }
 
 function shade(v, max) { if (!v) return ''; const t = Math.pow(v / max, 0.5); return `style="--h:${(12 + t * 78).toFixed(0)}%"${t > 0.55 ? ' data-hi' : ''}`; }
