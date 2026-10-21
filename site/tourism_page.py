@@ -106,10 +106,13 @@ def bedtax_page(out_dir):
 def surtax_page(out_dir):
     d = load(); inf, sch = d['infra_surtax'], d['school_surtax']
     projs = []
-    for p in inf['projects']:
+    from opendata import schedule_by_project
+    sb = schedule_by_project()
+    for pi, p in enumerate(inf['projects']):
         if p.get('lat') is None:
             continue
-        projs.append({'n': p['name'], 'g': p['government'], 'c': p.get('category') or 'Other', 's': p['status'], 'p': p.get('pct_complete'),
+        sx = sb.get(pi)  # county program schedule lines matched to this project (programmed dollars by year)
+        projs.append({**({'sp': sum(x['programmed_total'] or 0 for x in sx), 'sfy': {k: v for x in sx for k, v in x['fy_amounts'].items()}, 'su': sx[0]['source_url']} if sx else {}), 'i': pi,'n': p['name'], 'g': p['government'], 'c': p.get('category') or 'Other', 's': p['status'], 'p': p.get('pct_complete'),
                       'k': p.get('programmed_cost') or p.get('promised_cost'), 'y': p.get('fiscal_years') or '', 'x': round(p['lng'], 5), 'yy': round(p['lat'], 5),
                       'd': (p.get('description') or '')[:260]})
     json.dump(projs, open(os.path.join(out_dir, 'data', 'surtax-projects.json'), 'w'), separators=(',', ':'))

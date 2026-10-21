@@ -255,6 +255,28 @@ def _officials_pay(f):
     return out
 
 
+def schedule_by_project():
+    """GIS project index -> county program schedule lines matched to it (data/surtax/schedule_matches.json)."""
+    m = _j('surtax', 'schedule_matches.json') or {'matches': []}
+    out = {}
+    for x in m['matches']:
+        out.setdefault(x['project_index'], []).append(x)
+    return out
+
+
+def _surtax_rows(ts):
+    rows = _flat(ts['infra_surtax']['projects'], ['name', 'government', 'category', 'status', 'pct_complete', 'promised_cost', 'programmed_cost', 'actual_cost', 'fiscal_years', 'location', 'lat', 'lng', 'description', 'source_url'])
+    sb = schedule_by_project()
+    for i, r in enumerate(rows):
+        xs = sb.get(i, [])
+        r['schedule_programmed_total'] = sum(x['programmed_total'] or 0 for x in xs) if xs else None
+        r['schedule_fy_amounts'] = {k: v for x in xs for k, v in (x['fy_amounts'] or {}).items()} if xs else None
+        r['schedule_line'] = '; '.join(x['schedule_name'] for x in xs) or None
+        r['schedule_match_method'] = '; '.join(x['method'] for x in xs) or None
+        r['schedule_source_url'] = xs[0]['source_url'] if xs else None
+    return rows
+
+
 def _exemptions():
     d = _j('exemptions', 'exemptions_2026.json')
     if not d:
@@ -278,7 +300,7 @@ def datasets():
         ('debt', 'Debt by government', 'Total debt from the latest audited financial statements.', lambda: _flat(da['debt'], ['government', 'fy', 'total_debt', 'total_debt_note', 'population_2025_estimate', 'source_url'])),
         ('audit-findings', 'Audit findings', 'Findings from audits filed with the Florida Auditor General, in plain English.', lambda: [{'government': a['government'], 'fy': a.get('fy'), 'opinion': a.get('opinion'), 'finding': x.get('title'), 'plain_english': x.get('plain'), 'repeat': x.get('repeat'), 'management_response': x.get('mgmt_response'), 'source_url': x.get('source_url') or a.get('source_url')} for a in da['audits'] for x in a.get('findings') or []]),
         ('fema-michael-projects', 'Hurricane Michael FEMA projects', 'Every FEMA Public Assistance project in Bay County for disaster DR-4399.', lambda: [{'applicant': r['a'], 'project': r['pw'], 'title': r['t'], 'category': r['c'], 'federal_share': r['f'], 'eligible_amount': r['e'], 'first_obligated': r.get('d1'), 'last_obligated': r.get('d2'), 'status': r.get('st'), 'size': r.get('sz')} for r in pa['rows']]),
-        ('sales-tax-projects', 'Half-cent sales tax projects', 'Every infrastructure sales tax project on the county map, with status and cost.', lambda: _flat(ts['infra_surtax']['projects'], ['name', 'government', 'category', 'status', 'pct_complete', 'promised_cost', 'programmed_cost', 'actual_cost', 'fiscal_years', 'location', 'lat', 'lng', 'description', 'source_url'])),
+        ('sales-tax-projects', 'Half-cent sales tax projects', "Every infrastructure sales tax project on the county map, with status and cost. schedule_* columns add the county program schedule's programmed dollars by year where the schedule line could be matched to the project.", lambda: _surtax_rows(ts)),
         ('bed-tax-collections', 'Tourist tax collections', 'Bed tax collected by zone and fiscal year.', lambda: _flat(ts['bed_tax']['collections'], ['fy', 'district', 'amount', 'partial', 'period', 'basis', 'source_url'])),
         ('fees-assessments', 'Fees on tax bills', 'Non-ad valorem assessments: fire, stormwater, CRA and other flat fees.', lambda: _flat(f['assessments'], ['government', 'area', 'name', 'category', 'how_charged', 'rate', 'residential_single_family_amount', 'fiscal_year', 'source_url'])),
         ('officials-pay', 'Officials and pay', 'Salaries of top elected and appointed officials. Rows with row_type board_total are a whole board\'s combined pay, not one person.', lambda: _officials_pay(f)),

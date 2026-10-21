@@ -97,3 +97,10 @@ alter table emergency_purchases add column if not exists vote_match_method text;
 alter table votes add column if not exists vote_id text;
 alter table votes add column if not exists contract_ids jsonb;
 alter table votes add column if not exists contract_match_method text;
+
+-- county surtax program schedule matched to GIS projects (data/surtax/schedule_matches.json)
+alter table sales_tax_projects add column if not exists schedule_programmed_total numeric;
+alter table sales_tax_projects add column if not exists schedule_fy_amounts jsonb;
+alter table sales_tax_projects add column if not exists schedule_line text;
+alter table sales_tax_projects add column if not exists schedule_match_method text;
+alter table sales_tax_projects add column if not exists schedule_source_url text;
