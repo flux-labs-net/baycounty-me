@@ -21,6 +21,7 @@ from updates import updates_page, rss, last_updated, nice as nice_date
 OUT = os.path.join(ROOT, 'public')
 SITE = 'BayCounty.me'
 DOMAIN = 'https://baycounty.me'
+PREVIEW = {}  # path -> (title, summary) for link previews, filled from og.preview_text()
 OG_VER = {}  # path -> image content hash, filled by og.build_og before pages are written
 
 # Menu: top-level items; an item with 'children' becomes a drop-down.
@@ -225,7 +226,8 @@ def layout(title, desc, path, body, extra_head=''):
     full = f'{title} · {SITE}' if path != '/' else f'{SITE} · {title}'
     import html as _h
     from og import slug as _slug
-    t, d = _h.escape(title, quote=True), _h.escape(desc, quote=True)
+    pt, pd = PREVIEW.get(path, (title, desc))
+    t, d = _h.escape(pt, quote=True), _h.escape(pd, quote=True)
     ver = OG_VER.get(path, '')
     img = f'{DOMAIN}/og/{_slug(path) if path in OG_VER else "home"}.png' + (f'?v={ver}' if ver else '')
     ld = ''
@@ -541,6 +543,8 @@ def main():
     shutil.copy(os.path.join(ROOT, 'tax.css'), os.path.join(OUT, 'assets', 'tax.css'))
     shutil.copy(os.path.join(ROOT, 'report.js'), os.path.join(OUT, 'assets', 'report.js'))
     from og import build_og
+    from og import preview_text
+    PREVIEW.update(preview_text())
     OG_VER.update(build_og(OUT, PAGES, MENU))
     for path, title, desc, fn in PAGES:
         write(path, layout(title, desc, path, fn()))

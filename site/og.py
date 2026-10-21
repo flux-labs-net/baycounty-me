@@ -160,3 +160,58 @@ def build_og(out_dir, pages, menu):
         shutil.copy(icon, os.path.join(out_dir, 'apple-touch-icon.png'))
     print(f'og: {len(todo)} rendered, {len(cards) - len(todo)} cached')
     return {k: v for k, v in cache.items() if k in cards}
+
+
+def preview_text():
+    """Title and summary shown when a page link is pasted (og/twitter + meta description). Numbers come from the data."""
+    import sys
+    sys.path.insert(0, HERE)
+    from home import stats
+    import re
+
+    def is_split(x):  # same rule as votes_page
+        if isinstance(x.get('by_member'), dict) and 'no' in x['by_member'].values():
+            return True
+        m = re.search(r'(\d+)\s*(?:-|to)\s*(\d+)', x.get('tally') or '')
+        return bool(m and int(m.group(2)) > 0)
+    s = stats()
+    v = json.load(open(os.path.join(ROOT, 'data', 'votes', 'votes.json')))['votes']
+    nv, ns = len(v), sum(1 for x in v if is_split(x))
+    M = lambda n: f'${n/1e9:,.2f}B' if n >= 1e9 else f'${n/1e6:,.1f}M'
+    return {
+        '/': ('Bay County, Florida: where the public money goes',
+              'Look up your address, see where your property taxes go, and check spending, contracts, votes and debt for Bay County and every city. Sources on every figure.'),
+        '/my-address': ('Look up your Bay County address',
+                        "Your estimated property tax bill, who represents you, your zoned schools, flood and evacuation zones, and whether you're in a redevelopment district."),
+        '/public-money/cra-spending': ("Where Bay County's CRA money goes",
+                                       f"{M(s['cra_spent'])} across {s['cra_n']} records: what Bay County's six Community Redevelopment Agencies bought, built and granted, and who was paid. Mapped, with sources."),
+        '/public-money/tax-dollars': ('Where your Bay County property tax goes',
+                                      f"{M(s['lv_tot'])} levied in FY2026. Estimate your own bill, see each government's slice, and track six years of tax rates for the county, schools and every city."),
+        '/public-money/amendment-3': ('Amendment 3: what it would mean for Bay County',
+                                      f"The state estimates Bay County governments would collect {M(s['a3'])} less in FY2029. See your bill before and after, and each government's share. No position taken."),
+        '/public-money/hurricane-michael': ('Hurricane Michael: where the recovery money went',
+                                            f"{M(s['fema'])} in FEMA rebuilding money across {s['fema_n']} Bay County projects, plus household aid, Rebuild Florida awards and debris costs. Every project listed."),
+        '/public-money/tourist-tax': ("Bay County's bed tax: what visitors pay and where it goes",
+                                      f"{M(s['bt25'])} collected in FY2025, {s['pcb_share']:.0%} from the Panama City Beach zone. Ten years of collections, how the 5% is split, and what Visit Panama City Beach spends."),
+        '/public-money/sales-tax-projects': ('Half-cent sales tax projects: promised vs built',
+                                             f"{s['sp_done']:,} of {s['sp_n']:,} Bay County infrastructure sales tax projects are marked complete. Every project on a map with its status, plus the school half-cent."),
+        '/public-money/fees-and-bills': ('Fees on your Bay County tax bill, and utility bills',
+                                         '$28.1M in flat fees on FY2026 tax bills, from fire to stormwater, plus a typical monthly water, sewer and garbage bill in each city.'),
+        '/who-runs-bay-county': ('Who runs Bay County',
+                                 'Every elected seat and appointed manager for Bay County, its seven cities and the school district, plus what top officials are paid.'),
+        '/public-money/contracts': ("Who gets Bay County's contracts",
+                                    f"{s['ct_n']} major contracts since 2022 from Bay County and its cities: who won, how they were awarded, change orders, emergency purchases and the biggest payees."),
+        '/public-money/votes': ('How Bay County officials voted on money',
+                                f"{nv} recorded votes on budgets, tax rates, contracts, land and borrowing, with every member's vote. {ns} were split, and those are listed first."),
+        '/public-money/debt': ("What Bay County's governments owe",
+                               f"{M(s['debt'])} owed by the county, schools, cities and authorities, including big single payments ahead and pension promises, from audited financial reports."),
+        '/public-money/audits': ('What the auditors found in Bay County',
+                                 f"{s['findings']} audit findings across Bay County governments in three years, explained in plain English, including {s['repeats']} repeated in the latest audits."),
+        '/glossary': ('Government money, explained simply',
+                      "What's a CRA? A mill? A rolled-back rate? Plain-English definitions of every term used on BayCounty.me, with examples."),
+        '/updates': ("What's new on BayCounty.me", 'New pages, new data and corrections to BayCounty.me, newest first. Subscribe by RSS.'),
+        '/search': ('Search Bay County public records',
+                    'Search every BayCounty.me page and record: CRA payments, FEMA projects, contracts, votes, audit findings and glossary terms.'),
+        '/about': ('About BayCounty.me',
+                   'An independent project putting Bay County, Florida public records in plain view, built by Flux Labs in Panama City. Send a correction or a record.'),
+    }
