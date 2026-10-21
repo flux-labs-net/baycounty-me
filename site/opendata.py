@@ -165,6 +165,9 @@ def _salaries(kind):
                             'pay_min': r.get('pay_min'), 'pay_mid': r.get('pay_mid'), 'pay_max': r.get('pay_max'), 'pay_basis': r.get('pay_basis'),
                             'hourly_min': r.get('hourly_min'), 'hourly_max': r.get('hourly_max'), 'actual_salaries': act or None, 'budgeted_fte': r.get('budgeted_fte'),
                             'union': r.get('union'), 'source_url': url(r.get('source')), 'notes': r.get('notes')})
+                fte_only = not act and not any(r.get(k) for k in ('pay_min', 'pay_mid', 'pay_max', 'hourly_min', 'hourly_max'))
+                out[-1]['fte_only'] = fte_only
+                out[-1]['pay_status'] = 'Position count only: the source lists this job but not its pay' if fte_only else 'Pay listed'
         else:
             for r in d.get('leaders') or []:
                 out.append({'employer': d.get('employer'), 'employer_id': d.get('employer_id'), 'government': d.get('gov'), 'name': r.get('name'), 'title': r.get('title'),
@@ -196,10 +199,23 @@ def _contributions():
     f = _j('elections', 'finance_2026.json')
     if not f:
         return []
-    # organizations only; individual donors are never published on this site
+    # organizations only; individual donors are never published on this site.
+    # Bank interest on a campaign account (kind 'interest', a few cents a month) is not a contribution from anyone: left out.
     return [{'candidate': c['name'], 'office': c.get('office'), 'contributor': x.get('name'), 'contributor_type': x.get('type'), 'city': x.get('city'),
              'amount': x.get('amount'), 'date': x.get('date'), 'kind': x.get('kind'), 'report_url': c.get('report_url')}
-            for c in f.get('candidates') or [] for x in c.get('contributors') or [] if x.get('type') not in ('candidate', 'individual', 'self')]
+            for c in f.get('candidates') or [] for x in c.get('contributors') or []
+            if x.get('type') not in ('candidate', 'individual', 'self') and x.get('kind') != 'interest']
+
+
+def _officials_pay(f):
+    """A row with no name is a whole board's pay (e.g. 'Mayor and 4 Commissioners (combined)' or 'each of 5'): say so."""
+    out = _flat(f['pay'], ['government', 'title', 'name', 'annual', 'year', 'basis', 'source_url'])
+    for r in out:
+        t = r.get('title') or ''
+        r['row_type'] = 'person' if r.get('name') else ('board_each_member' if re.search(r'\beach\b', t, re.I) else 'board_total')
+        if not r.get('name'):
+            r['name'] = 'Board total (all members combined)' if r['row_type'] == 'board_total' else 'Each board member (not named)'
+    return out
 
 
 def _exemptions():
@@ -228,7 +244,7 @@ def datasets():
         ('sales-tax-projects', 'Half-cent sales tax projects', 'Every infrastructure sales tax project on the county map, with status and cost.', lambda: _flat(ts['infra_surtax']['projects'], ['name', 'government', 'category', 'status', 'pct_complete', 'promised_cost', 'programmed_cost', 'actual_cost', 'fiscal_years', 'location', 'lat', 'lng', 'description', 'source_url'])),
         ('bed-tax-collections', 'Tourist tax collections', 'Bed tax collected by zone and fiscal year.', lambda: _flat(ts['bed_tax']['collections'], ['fy', 'district', 'amount', 'partial', 'period', 'basis', 'source_url'])),
         ('fees-assessments', 'Fees on tax bills', 'Non-ad valorem assessments: fire, stormwater, CRA and other flat fees.', lambda: _flat(f['assessments'], ['government', 'area', 'name', 'category', 'how_charged', 'rate', 'residential_single_family_amount', 'fiscal_year', 'source_url'])),
-        ('officials-pay', 'Officials and pay', 'Salaries of top elected and appointed officials.', lambda: _flat(f['pay'], ['government', 'title', 'name', 'annual', 'year', 'basis', 'source_url'])),
+        ('officials-pay', 'Officials and pay', 'Salaries of top elected and appointed officials. Rows with row_type board_total are a whole board\'s combined pay, not one person.', lambda: _officials_pay(f)),
     ]
     extra = [
         (('meetings', 'meetings.json'), 'meetings', 'Upcoming meetings', 'Scheduled and expected meetings for every board.', lambda d: d.get('meetings', [])),
@@ -239,10 +255,10 @@ def datasets():
         (('civic', 'budgets_detail.json'), 'budget-detail', 'Budgets by fund and department', 'Adopted budgets broken down by fund and general-fund department.', lambda d: [{'government': g.get('name'), 'fiscal_year': g.get('fiscal_year'), 'level': lvl, 'name': x.get('name'), 'amount': x.get('amount')} for g in d.get('governments', []) for lvl, key in (('fund', 'funds'), ('department', 'general_fund_departments')) for x in g.get(key) or []]),
     ]
     extra += [
-        (('salaries', 'bocc.json'), 'salary-positions', 'Public salaries by job title', 'Pay ranges, budgeted positions and unnamed actual salaries by job title for the county, constitutional officers, school district, cities, airport and port.', lambda d: _salaries('positions')),
+        (('salaries', 'bocc.json'), 'salary-positions', 'Public salaries by job title', 'Pay ranges, budgeted positions and unnamed actual salaries by job title for the county, constitutional officers, school district, cities, airport and port. Rows with fte_only = true are positions the source counts but gives no pay for (see pay_status).', lambda d: _salaries('positions')),
         (('salaries', 'bocc.json'), 'salary-leaders', 'Salaries of officials and leaders', 'Named salaries of elected officials and top appointed leaders only.', lambda d: _salaries('leaders')),
         (('elections', 'candidates_2026.json'), 'candidates-2026', '2026 local candidates', 'Every 2026 local race and candidate with status, platform in their own words and campaign money totals.', lambda d: _candidates()),
-        (('elections', 'finance_2026.json'), 'campaign-contributions-2026', '2026 contributions from organizations', 'Every contribution from a business, committee or party to a 2026 local candidate. Individual donors are not included.', lambda d: _contributions()),
+        (('elections', 'finance_2026.json'), 'campaign-contributions-2026', '2026 contributions from organizations', 'Every contribution from a business, committee or party to a 2026 local candidate. Individual donors are not included, and neither is bank interest on campaign accounts.', lambda d: _contributions()),
         (('exemptions', 'exemptions_2026.json'), 'property-tax-exemptions', 'Property tax exemptions (2026 roll)', 'Every exemption type on the 2026 tax roll: parcels, value exempted and estimated tax removed.', lambda d: _exemptions()),
     ]
     for path, did, title, desc, fn in extra:

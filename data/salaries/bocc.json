@@ -13436,7 +13436,8 @@
    "benefits": 31781699.0,
    "personnel_total": 92533799.0,
    "source": 2,
-   "notes": "Sum of the cost centers above. FTE: 809 full-time + 23 part-time positions = 832 (FY2027 final, source 3; FY2026 adopted 791 FT + 44 PT = 835; FY2025 adopted 810)."
+   "notes": "Sum of the cost centers above. FTE: 809 full-time + 23 part-time positions = 832 (FY2027 final, source 3; FY2026 adopted 791 FT + 44 PT = 835; FY2025 adopted 810). This is a total row: leave it out when adding up departments.",
+   "total": true
   },
   {
    "department": "Sheriff's Office - BOCC transfer (0120)",
