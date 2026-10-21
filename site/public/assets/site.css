@@ -62,7 +62,9 @@ a{color:var(--blue)}
   .site-head nav{position:absolute;left:0;right:0;top:60px;margin:0}
   .menu{display:none;flex-direction:column;align-items:stretch;gap:0;background:var(--surface);border-bottom:1px solid var(--line);
     padding:8px max(16px,env(safe-area-inset-right,0px)) 12px max(16px,env(safe-area-inset-left,0px))}
-  .menu.open{display:flex}
+  .menu.open{display:flex;max-height:calc(100vh - 60px);max-height:calc(100dvh - 60px);overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;box-shadow:0 12px 24px rgba(10,20,40,.12)}
+  .nav-sub .kd{display:none}
+  .nav-sub a{padding:9px 12px}
   .menu > li > a,.sub-toggle{width:100%;justify-content:space-between;padding:12px 8px}
   .nav-sub{position:static;display:block;box-shadow:none;border:0;padding:0 0 6px 8px;min-width:0}
   .sub-toggle svg{display:none}
@@ -229,3 +231,6 @@ a{color:var(--blue)}
 .cf-note{margin:0;font-size:.8rem;color:var(--muted)}
 @media (max-width:600px){.cf-row{grid-template-columns:minmax(0,1fr)}.contact{padding:16px}}
 #contact{scroll-margin-top:84px}
+
+html.nav-locked,html.nav-locked body{overflow:hidden}
+@media (min-width:721px){html.nav-locked,html.nav-locked body{overflow:visible}}

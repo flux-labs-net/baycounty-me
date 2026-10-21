@@ -11,13 +11,16 @@
     show(m);
   });
   const btn = document.querySelector('.menu-btn'), menu = document.getElementById('site-menu');
-  btn.addEventListener('click', () => { const o = btn.getAttribute('aria-expanded') === 'true'; btn.setAttribute('aria-expanded', !o); menu.classList.toggle('open', !o); });
+  const setMenu = o => { btn.setAttribute('aria-expanded', o); menu.classList.toggle('open', o); document.documentElement.classList.toggle('nav-locked', o); if (o) menu.scrollTop = 0; };
+  btn.addEventListener('click', () => setMenu(btn.getAttribute('aria-expanded') !== 'true'));
+  menu.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false); });
+  matchMedia('(min-width:721px)').addEventListener('change', e => { if (e.matches) setMenu(false); });
   document.querySelectorAll('.sub-toggle').forEach(t => t.addEventListener('click', e => {
     e.stopPropagation(); const o = t.getAttribute('aria-expanded') === 'true';
     document.querySelectorAll('.sub-toggle').forEach(x => x.setAttribute('aria-expanded', 'false'));
     t.setAttribute('aria-expanded', !o); }));
   document.addEventListener('click', e => { if (!e.target.closest('.has-sub')) document.querySelectorAll('.sub-toggle').forEach(x => x.setAttribute('aria-expanded', 'false')); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') document.querySelectorAll('.sub-toggle').forEach(x => x.setAttribute('aria-expanded', 'false')); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') { document.querySelectorAll('.sub-toggle').forEach(x => x.setAttribute('aria-expanded', 'false')); if (menu.classList.contains('open')) { setMenu(false); btn.focus(); } } });
 })();
 
 (() => {
