@@ -154,6 +154,33 @@ def load_dataset(conn, d, aliases, sha):
     return len(batch), deleted
 
 
+def load_entities(conn):
+    """vendors / vendor_aliases (and people, when the table exists) from data/entities, replaced in full each sync."""
+    n = 0
+    with conn.transaction():
+        cur = conn.cursor()
+        if not table_columns(cur, 'vendors'):
+            return 0
+        v = json.load(open(os.path.join(ROOT, 'data', 'entities', 'vendors.json')))
+        cur.execute('delete from vendor_aliases'); cur.execute('delete from vendors')
+        cur.executemany('insert into vendors (id, name, aliases, gov_ids, merge_evidence) values (%s,%s,%s,%s,%s)',
+                        [(x['id'], x['name'], Jsonb(x['aliases']), Jsonb(x['gov_ids']), x.get('merge_evidence')) for x in v['vendors']])
+        al = {}
+        for x in v['vendors']:
+            for a in x['aliases']:
+                al.setdefault(a.strip().lower(), x['id'])
+        cur.executemany('insert into vendor_aliases (alias, vendor_id) values (%s,%s)', list(al.items()))
+        n += len(v['vendors'])
+        pf = os.path.join(ROOT, 'data', 'entities', 'people.json')
+        if table_columns(cur, 'people') and os.path.exists(pf):
+            p = json.load(open(pf))
+            cur.execute('delete from people')
+            cur.executemany('insert into people (id, name, aliases, roles) values (%s,%s,%s,%s)',
+                            [(x['id'], x['name'], Jsonb(x['aliases']), Jsonb(x.get('roles') or [])) for x in p['people']])
+            n += len(p['people'])
+    return n
+
+
 def load_raw(conn, sha):
     n = 0
     with conn.transaction():
@@ -216,6 +243,7 @@ def main():
             n, dl = load_dataset(conn, d, aliases, sha)
             total += n
             print(f'{d["id"]:32s} {n:6d} rows (replaced {dl})')
+        print('entities (vendors, people):', load_entities(conn))
         print('raw files updated:', load_raw(conn, sha))
         print('total rows:', total)
 

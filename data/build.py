@@ -137,3 +137,7 @@ for c in cras:
 json.dump(out, open('merged.json', 'w'), indent=1)
 from collections import Counter
 print(len(out['payments']), Counter((p['cra'], p['status'], p['count']) for p in out['payments']))
+
+# shared ids (data/entities): vendors.json, vendor_review.json, people.json, joins; they read merged.json, so run them last
+import subprocess, sys
+subprocess.run([sys.executable, os.path.join('entities', 'build_entities.py')], check=True)

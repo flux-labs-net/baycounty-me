@@ -1,0 +1,377 @@
+{
+ "kept_apart_by_hand": [
+  {
+   "a": "gulfcoastutilityconstruction",
+   "b": "gulf-coast-utility-contractors",
+   "a_vendor": "gulf-coast-utility-construction",
+   "why": "Panama City's 2024-05-14 agenda awards Bid PC24-019 to \"Gulf Coast Utility Construction\"; no record ties it to Gulf Coast Utility Contractors, LLC. Probably the same firm, not confirmed."
+  },
+  {
+   "a": "rjgormancontracting",
+   "b": "rj-gorman-marine-construction",
+   "a_vendor": "rj-gorman-contracting",
+   "why": "Two different LLC names in the agendas. Campaign gifts are matched to whichever name the filing used; \"RJ Gorman Construction\" (one filing) matches neither and is left unmatched."
+  },
+  {
+   "a": "cwrcontracting",
+   "b": "c-w-roberts-contracting",
+   "a_vendor": "cwr-contracting",
+   "why": "CWR Contracting, Inc. (PCB Front Beach Road Segment 3) may be C.W. Roberts Contracting; no source says so."
+  },
+  {
+   "a": "americansandasphaltxcavation",
+   "b": "american-sand-and-asphalt-paving",
+   "a_vendor": "american-sand-and-asphalt-x-cavation",
+   "why": "The county register line reads \"American Sand & Asphalt / X-Cavation\"; it may combine two payees, so it is not added to American Sand and Asphalt Paving."
+  },
+  {
+   "a": "mottmacdonaldconsultants",
+   "b": "mott-macdonald",
+   "a_vendor": "mott-macdonald-consultants",
+   "why": "\"Mott MacDonald Florida, LLC\" and plain \"Mott MacDonald\" are one vendor (same key once \"Florida, LLC\" is dropped). \"Mott MacDonald Consultants, Inc.\" is a different legal entity and is kept separate."
+  },
+  {
+   "a": "andersonconstruction",
+   "b": "anderson-columbia",
+   "a_vendor": "anderson-construction",
+   "why": "Anderson Construction Company (of North Florida) is not Anderson Columbia Co., Inc."
+  },
+  {
+   "a": "andersonconstruction",
+   "b": "anderson-construction-company-of-north",
+   "a_vendor": "anderson-construction",
+   "why": "Panama City agendas name \"Anderson Construction Company of North Florida\" (2023) and \"Anderson Construction Company\" (2026); probably one firm, not confirmed."
+  },
+  {
+   "a": "baypointbillfishopen",
+   "b": "bay-point-billfish",
+   "a_vendor": "bay-point-billfish-open",
+   "why": "Visit PCB paid both \"Bay Point Billfish, LLC\" and \"Bay Point Billfish Open\"; the tournament may be a separate account."
+  },
+  {
+   "a": "imageworksc317",
+   "b": "imageworks-commercial-interiors",
+   "a_vendor": "imageworks-c317",
+   "why": "Lynn Haven warrant list \"IMAGEWORKS C317\" may be Imageworks Commercial Interiors; not confirmed."
+  },
+  {
+   "a": "royalamericanhospitality",
+   "b": "royal-american-construction",
+   "a_vendor": "royal-american-hospitality",
+   "why": "Different businesses."
+  },
+  {
+   "a": "keydata",
+   "b": "key-data-dashboard",
+   "a_vendor": "key-data",
+   "why": "Visit PCB paid \"Key Data Dashboard, Inc\" and Destination Panama City paid \"Key Data\"; probably the same data firm, not confirmed."
+  },
+  {
+   "a": "grownfolksentertainment",
+   "b": "grown-folks-entertainment-promotions",
+   "a_vendor": "grown-folks-entertainment",
+   "why": "Two spellings in the Destination Panama City register; probably one business, not confirmed."
+  },
+  {
+   "a": "publiceyesoar",
+   "b": "public-eye-soar-festival",
+   "a_vendor": "public-eye-soar",
+   "why": "A company and its festival; may be separate accounts."
+  },
+  {
+   "a": "cdrmaguirecdremergencymanagement",
+   "b": "cdr-maguire",
+   "a_vendor": "cdr-maguire-cdr-emergency-management",
+   "why": "One change order names \"CDR Maguire / CDR Emergency Management\", which may be two related companies; kept as its own record."
+  },
+  {
+   "a": "robertsfamily",
+   "b": "roberts-and-roberts",
+   "a_vendor": null,
+   "why": "\"Roberts Family, LLC\" (a 2026 campaign contributor) is not Roberts and Roberts, Inc."
+  },
+  {
+   "a": "rjgormanconstruction",
+   "b": "rj-gorman-marine-construction",
+   "a_vendor": null,
+   "why": "\"RJ Gorman Construction\" in one campaign filing could be either RJ Gorman company; left unmatched."
+  }
+ ],
+ "possible_matches_not_joined": [
+  {
+   "shared_words": "forgotten coast",
+   "vendors": [
+    "forgotten-coast-living",
+    "forgotten-coast-property-management"
+   ],
+   "names": {
+    "forgotten-coast-living": "Forgotten Coast Living",
+    "forgotten-coast-property-management": "Forgotten Coast Property Management"
+   }
+  }
+ ],
+ "joined_by_hand": [
+  {
+   "name": "Marshall Brothers Construction & Engineering, Inc.",
+   "spellings_joined": [
+    "marshallbrothers",
+    "marshallbrothersconstruction",
+    "marshallbrothersconstructionengineering",
+    "marshallbothers"
+   ],
+   "evidence": "Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing."
+  },
+  {
+   "name": "C.W. Roberts Contracting, Inc.",
+   "spellings_joined": [
+    "cwrobertscontracting",
+    "cwroberts",
+    "cwrobertscont"
+   ],
+   "evidence": "Spacing variants (\"C. W.\", \"C.W.\", \"CW\") and the Lynn Haven warrant list's 15-character \"CW ROBERTS CONT\". Kept separate from Roberts and Roberts, Inc., a different company."
+  },
+  {
+   "name": "Roberts and Roberts, Inc.",
+   "spellings_joined": [
+    "robertsroberts",
+    "robertsrober",
+    "robersroberts"
+   ],
+   "evidence": "\"ROBERTS & ROBER\" is the Lynn Haven warrant list cut at 15 characters; \"Robers and Roberts, Inc\" is a typo in one 2026 campaign filing."
+  },
+  {
+   "name": "Gulf Coast Utility Contractors, LLC",
+   "spellings_joined": [
+    "gulfcoastutilitycontractors",
+    "gulfcoastutilitycontractor",
+    "gulfcoastutil"
+   ],
+   "evidence": "Agendas add \"(GCUC)\" or drop the plural; \"GULF COAST UTIL\" is the Lynn Haven warrant list cut at 15 characters."
+  },
+  {
+   "name": "Dewberry Engineers Inc.",
+   "spellings_joined": [
+    "dewberryengineers",
+    "dewberryengineering",
+    "dewberry"
+   ],
+   "evidence": "Panama City awarded Project RESTORE Glenwood task orders to \"Dewberry Engineering Inc.\" (2023-11-28 agenda) and the CEI task order for the same project to \"Dewberry Engineers Inc.\" (2025-06-10); Dewberry's Panhandle offices came from its 2016 purchase of Preble-Rish (dewberry.com). \"DEWBERRY\" is the Lynn Haven warrant list; \"Dewberry\" is how two campaign filings list it."
+  },
+  {
+   "name": "American Sand and Asphalt Paving, Inc.",
+   "spellings_joined": [
+    "americansandasphaltpaving",
+    "americansandasphalt",
+    "americansand",
+    "americansandasphaltpavi"
+   ],
+   "evidence": "\"AMERICAN SAND &\" is the Lynn Haven warrant list cut at 15 characters; \"American Sand and Asphalt Pavi\" is a campaign filing cut at 30 characters."
+  },
+  {
+   "name": "BGN Contractors (Gage Golden Construction)",
+   "spellings_joined": [
+    "bgncontractors",
+    "gagegoldenconstruction",
+    "gagegoldenconstructiondbabgncontractors"
+   ],
+   "evidence": "The county agenda names the firm \"Gage Golden Construction dba BGN Contractors\"; the county check register lists \"GAGE GOLDEN CONSTRUCTION\"."
+  },
+  {
+   "name": "ECSC, LLC (Emerald Coast Site Construction)",
+   "spellings_joined": [
+    "ecsc",
+    "emeraldcoastsiteconstruction"
+   ],
+   "evidence": "Agendas give both names together: \"ECSC, LLC (Emerald Coast Site Construction)\" and \"Emerald Coast Site Construction (ECSC)\"."
+  },
+  {
+   "name": "Culpepper Construction Co.",
+   "spellings_joined": [
+    "culpepperconstruction",
+    "culpepperconst",
+    "culpepper"
+   ],
+   "evidence": "\"CULPEPPER CONST\" is the Lynn Haven warrant list cut at 15 characters; one campaign filing lists just \"Culpepper\"."
+  },
+  {
+   "name": "RJ Gorman Marine Construction, LLC",
+   "spellings_joined": [
+    "rjgormanmarineconstruction",
+    "rjgormanmarine"
+   ],
+   "evidence": "Register spelling \"R.J. Gorman Marine Construction LLC\"; one campaign filing cuts it to \"RJ Gorman Marine\". Kept separate from RJ Gorman Contracting, LLC (a different LLC that built the Mexico Beach and PCB piers)."
+  },
+  {
+   "name": "Panhandle Engineering, Inc.",
+   "spellings_joined": [
+    "panhandleengineering",
+    "panhandleengin"
+   ],
+   "evidence": "\"PANHANDLE ENGIN\" is the Lynn Haven warrant list cut at 15 characters."
+  },
+  {
+   "name": "BCL Civil Contractors, Inc.",
+   "spellings_joined": [
+    "bclcivilcontractors",
+    "bclcivilcontr"
+   ],
+   "evidence": "\"BCL CIVIL CONTR\" is the Lynn Haven warrant list cut at 15 characters."
+  },
+  {
+   "name": "CBC Construction",
+   "spellings_joined": [
+    "cbcconstruction",
+    "cbcconstructio"
+   ],
+   "evidence": "\"CBC CONSTRUCTIO\" is the Lynn Haven warrant list cut at 15 characters."
+  },
+  {
+   "name": "850 Construction Services, LLC",
+   "spellings_joined": [
+    "850constructionservices",
+    "850constructio"
+   ],
+   "evidence": "\"850 CONSTRUCTIO\" is the Lynn Haven warrant list cut at 15 characters."
+  },
+  {
+   "name": "Phoenix Construction Services, Inc.",
+   "spellings_joined": [
+    "phoenixconstructionservices",
+    "phoenixconstru"
+   ],
+   "evidence": "\"PHOENIX CONSTRU\" is the Lynn Haven warrant list cut at 15 characters."
+  },
+  {
+   "name": "ARRIS General Contractors",
+   "spellings_joined": [
+    "arrisgeneralcontractors",
+    "arrisgeneral"
+   ],
+   "evidence": "\"ARRIS GENERAL\" is the Lynn Haven warrant list cut short."
+  },
+  {
+   "name": "Davison Fuels & Oil, LLC",
+   "spellings_joined": [
+    "davisonfuelsoil",
+    "davisonfuelsi"
+   ],
+   "evidence": "\"DAVISON FUELS I\" is the Lynn Haven warrant list cut at 15 characters."
+  },
+  {
+   "name": "Telemetry and Process Control, Inc.",
+   "spellings_joined": [
+    "telemetryprocesscontrol",
+    "telemetryprocesscon"
+   ],
+   "evidence": "The county register cuts the name at \"TELEMETRY AND PROCESS CON\"."
+  },
+  {
+   "name": "Southeastern Outdoor Management",
+   "spellings_joined": [
+    "southeasternoutdoormanagement",
+    "southeasternoutdoormet",
+    "southeasternoutdoormgmt"
+   ],
+   "evidence": "\"Southeastern Outdoor Met Inc\" is how the scanned Visit PCB register reads; \"Southeastern Outdoor Mgmt\" is a campaign filing."
+  },
+  {
+   "name": "Halff Associates, Inc.",
+   "spellings_joined": [
+    "halffassociates",
+    "halff"
+   ],
+   "evidence": "Panama City's agenda names \"Halff (Halff Engineering / Halff Associates)\"."
+  },
+  {
+   "name": "Hydra Service(s), Inc.",
+   "spellings_joined": [
+    "hydraservices",
+    "hydraservice"
+   ],
+   "evidence": "Same pump-station firm spelled with and without the final \"s\" in Panama City and county agendas."
+  },
+  {
+   "name": "Inland Construction and Engineering, Inc.",
+   "spellings_joined": [
+    "inlandconstructionengineering",
+    "inlandconstruction"
+   ],
+   "evidence": "Panama City agendas use both the full name and \"Inland Construction\"; the CRA ledger names \"Inland Construction & Engineering\" for the Millville park bid."
+  },
+  {
+   "name": "Southern Construction Services, Inc.",
+   "spellings_joined": [
+    "southernconstructionservice",
+    "southernconstructionservices",
+    "southernconstruction"
+   ],
+   "evidence": "Singular/plural and a shortened form in the same governments' agendas."
+  },
+  {
+   "name": "Ten-8 Fire & Safety, LLC",
+   "spellings_joined": [
+    "ten8",
+    "ten8firesafety"
+   ],
+   "evidence": "Fire apparatus dealer named \"Ten-8\" in the county agenda and \"Ten-8 Fire & Safety, LLC\" elsewhere."
+  },
+  {
+   "name": "H.G. Harders & Sons, Inc.",
+   "spellings_joined": [
+    "hghardersons",
+    "hghardersson",
+    "hgharderssons"
+   ],
+   "evidence": "Apostrophe and plural variants of the same contractor."
+  },
+  {
+   "name": "S.J. Electro Systems, LLC (PRIMEX)",
+   "spellings_joined": [
+    "sjelectrosystemsdbaprimax",
+    "sjelectrosystemsdbaprimex"
+   ],
+   "evidence": "The two county agenda spellings differ only in \"Primax\"/\"Primex\"."
+  },
+  {
+   "name": "Bayou Builders of Bay County, LLC",
+   "spellings_joined": [
+    "bayoubuildersofbay",
+    "bayoubuildersofbaycounty"
+   ],
+   "evidence": "\"Bay Co.\" and \"Bay County\" spellings in Panama City agendas."
+  },
+  {
+   "name": "Vyde LTD",
+   "spellings_joined": [
+    "vyde",
+    "vydeltds"
+   ],
+   "evidence": "The scanned Visit PCB register reads one line as \"Vyde LTD S)\"; the extra characters are a scan error."
+  },
+  {
+   "name": "Carvertise, Inc",
+   "spellings_joined": [
+    "carvertise",
+    "carvertiseincis"
+   ],
+   "evidence": "The scanned Destination Panama City register reads one line as \"Carvertise, Inc iS)\"; the extra characters are a scan error."
+  },
+  {
+   "name": "Florida Blue (Blue Cross and Blue Shield of Florida)",
+   "spellings_joined": [
+    "floridablue",
+    "floridabluebluecrossblueshield"
+   ],
+   "evidence": "The county register names the payee \"Florida Blue / Blue Cross Blue Shield of Florida\"; Florida Blue is that insurer's trade name."
+  },
+  {
+   "name": "World Changers (with First Baptist Church of Panama City)",
+   "spellings_joined": [
+    "worldchangersfirstbaptistchurchofpanamacity",
+    "worldchangersorganization",
+    "worldchangers"
+   ],
+   "evidence": "Panama City CRA annual reports name the same volunteer home-repair program as \"World Changers / First Baptist Church of Panama City\" and \"World Changers Organization\"."
+  }
+ ]
+}

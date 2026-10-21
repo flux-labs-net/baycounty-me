@@ -85,17 +85,21 @@ def gov_id(*values, contains=False):
 
 
 # ---------- vendors ----------
-SUFFIX = r'\b(inc|incorporated|llc|lc|llp|lllp|pllc|co|corp|corporation|company|pa|ltd|lp|the|of florida|of fl|fl|florida|dba|d b a)\b'
+TRAIL = {'inc', 'incorporated', 'llc', 'lc', 'llp', 'lllp', 'pllc', 'co', 'corp', 'corporation', 'company', 'pa', 'ltd', 'lp', 'fl', 'florida', 'of'}
 
 
 def vkey(name):
-    """Matching key: lowercase, '&' -> and, no parentheticals, no punctuation or legal suffixes, no spaces."""
+    """Matching key: lowercase, '&' -> and, no parentheticals or punctuation, a leading 'the' and trailing legal
+    suffixes ('Inc', 'LLC', 'Co', 'of Florida' ...) dropped, no spaces. 'Florida Architects' keeps 'florida'."""
     s = (name or '').lower().replace('&', ' and ')
     s = re.sub(r'\(.*?\)', ' ', s)
-    s = re.sub(r'[^a-z0-9 ]', ' ', s)
-    s = re.sub(SUFFIX, ' ', s)
-    s = re.sub(r'\band\b', ' ', s)
-    return re.sub(r'\s+', '', s)
+    s = re.sub(r"[’']", '', s)
+    toks = re.sub(r'[^a-z0-9 ]', ' ', s).split()
+    if toks and toks[0] == 'the':
+        toks = toks[1:]
+    while len(toks) > 1 and toks[-1] in TRAIL:
+        toks = toks[:-1]
+    return ''.join(t for t in toks if t != 'and')
 
 
 def _vendor_tables():

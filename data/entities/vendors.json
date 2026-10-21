@@ -1,0 +1,9520 @@
+{
+ "about": "One record per vendor (business or organization paid by a Bay County government, CRA or tourism agency). aliases are every spelling found in contracts, change orders, emergency purchases, check registers (including 15-character truncations), TDC payments, the CRA ledger and business campaign contributions. Built by data/entities/build_entities.py; hand-reviewed joins carry merge_evidence. Look-alike names that were not joined are in vendor_review.json.",
+ "count": 568,
+ "vendors": [
+  {
+   "id": "325-force-support-mwr-fund",
+   "name": "325 Force Support MWR Fund",
+   "aliases": [
+    "325 Force Support MWR Fund"
+   ],
+   "keys": [
+    "325forcesupportmwrfund"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "814-sand",
+   "name": "814 Sand Inc",
+   "aliases": [
+    "814 Sand Inc"
+   ],
+   "keys": [
+    "814sand"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "850",
+   "name": "850 Company LLC",
+   "aliases": [
+    "850 Company LLC"
+   ],
+   "keys": [
+    "850"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "850-construction-services",
+   "name": "850 Construction Services, LLC",
+   "aliases": [
+    "850 CONSTRUCTIO",
+    "850 Construction Services LLC",
+    "850 Construction Services, LLC"
+   ],
+   "keys": [
+    "850constructio",
+    "850constructionservices"
+   ],
+   "records": {
+    "contract": 5,
+    "register": 2
+   },
+   "gov_ids": [
+    "county",
+    "lh",
+    "pc"
+   ],
+   "merge_evidence": "\"850 CONSTRUCTIO\" is the Lynn Haven warrant list cut at 15 characters."
+  },
+  {
+   "id": "a-and-b-collective",
+   "name": "A&B Collective",
+   "aliases": [
+    "A&B Collective"
+   ],
+   "keys": [
+    "abcollective"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "a-c-schultes",
+   "name": "A.C. Schultes of Florida, Inc.",
+   "aliases": [
+    "A.C. Schultes of Florida, Inc."
+   ],
+   "keys": [
+    "acschultes"
+   ],
+   "records": {
+    "contract": 1,
+    "register": 2
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "a-d-harris-improvement-society",
+   "name": "A.D. Harris Improvement Society, Inc.",
+   "aliases": [
+    "A.D. Harris Improvement Society, Inc."
+   ],
+   "keys": [
+    "adharrisimprovementsociety"
+   ],
+   "records": {
+    "cra": 1
+   },
+   "gov_ids": [
+    "pc"
+   ]
+  },
+  {
+   "id": "aaron-rich-marketing",
+   "name": "Aaron Rich Marketing",
+   "aliases": [
+    "Aaron Rich Marketing"
+   ],
+   "keys": [
+    "aaronrichmarketing"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "abe-froman-productions",
+   "name": "Abe Froman Productions",
+   "aliases": [
+    "Abe Froman Productions"
+   ],
+   "keys": [
+    "abefromanproductions"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "abentras",
+   "name": "ABENTRAS",
+   "aliases": [
+    "ABENTRAS"
+   ],
+   "keys": [
+    "abentras"
+   ],
+   "records": {
+    "register": 3
+   },
+   "gov_ids": [
+    "lh"
+   ]
+  },
+  {
+   "id": "absolute-business-solutions",
+   "name": "Absolute Business Solutions",
+   "aliases": [
+    "Absolute Business Solutions"
+   ],
+   "keys": [
+    "absolutebusinesssolutions"
+   ],
+   "records": {
+    "cra": 1
+   },
+   "gov_ids": [
+    "pc"
+   ]
+  },
+  {
+   "id": "accurate-drilling-systems",
+   "name": "Accurate Drilling Systems, Inc.",
+   "aliases": [
+    "Accurate Drilling Systems, Inc."
+   ],
+   "keys": [
+    "accuratedrillingsystems"
+   ],
+   "records": {
+    "contract": 1,
+    "register": 1
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "acentria-insurance",
+   "name": "Acentria Insurance Company",
+   "aliases": [
+    "Acentria Insurance Company"
+   ],
+   "keys": [
+    "acentriainsurance"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "mb_cdc"
+   ]
+  },
+  {
+   "id": "ach-debit-john-hancock",
+   "name": "ACH DEBIT JOHN HANCOCK",
+   "aliases": [
+    "ACH DEBIT JOHN HANCOCK"
+   ],
+   "keys": [
+    "achdebitjohnhancock"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "ach-pmt-amex-epayment",
+   "name": "ACH PMT AMEX EPAYMENT",
+   "aliases": [
+    "ACH PMT AMEX EPAYMENT"
+   ],
+   "keys": [
+    "achpmtamexepayment"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "acorns-to-oaks-academy",
+   "name": "Acorns to Oaks Academy",
+   "aliases": [
+    "Acorns to Oaks Academy"
+   ],
+   "keys": [
+    "acornstooaksacademy"
+   ],
+   "records": {
+    "cra": 1
+   },
+   "gov_ids": [
+    "pc"
+   ]
+  },
+  {
+   "id": "action-truck-center",
+   "name": "Action Truck Center",
+   "aliases": [
+    "Action Truck Center"
+   ],
+   "keys": [
+    "actiontruckcenter"
+   ],
+   "records": {
+    "contract": 3
+   },
+   "gov_ids": [
+    "pc"
+   ]
+  },
+  {
+   "id": "adara",
+   "name": "Adara Inc",
+   "aliases": [
+    "Adara Inc"
+   ],
+   "keys": [
+    "adara"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "adaralnc",
+   "name": "Adaralnc",
+   "aliases": [
+    "Adaralnc"
+   ],
+   "keys": [
+    "adaralnc"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "adp",
+   "name": "ADP",
+   "aliases": [
+    "ADP"
+   ],
+   "keys": [
+    "adp"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "adp-tax-adp-tax",
+   "name": "ADP Tax ADP Tax",
+   "aliases": [
+    "ADP Tax ADP Tax"
+   ],
+   "keys": [
+    "adptaxadptax"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "advance-local-media",
+   "name": "Advance Local Media",
+   "aliases": [
+    "Advance Local Media"
+   ],
+   "keys": [
+    "advancelocalmedia"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "advanced-fire-protection-services",
+   "name": "Advanced Fire Protection Services, Inc",
+   "aliases": [
+    "Advanced Fire Protection Services, Inc"
+   ],
+   "keys": [
+    "advancedfireprotectionservices"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "affinity-global",
+   "name": "Affinity Global Inc",
+   "aliases": [
+    "Affinity Global Inc"
+   ],
+   "keys": [
+    "affinityglobal"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "ahs-boys-basketball-boosters",
+   "name": "AHS Boys Basketball Boosters",
+   "aliases": [
+    "AHS Boys Basketball Boosters"
+   ],
+   "keys": [
+    "ahsboysbasketballboosters"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "ajr-publishing",
+   "name": "AJR Publishing Inc",
+   "aliases": [
+    "AJR Publishing Inc"
+   ],
+   "keys": [
+    "ajrpublishing"
+   ],
+   "records": {
+    "tdc": 2
+   },
+   "gov_ids": [
+    "mb_cdc",
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "alabama-media-group",
+   "name": "Alabama Media Group",
+   "aliases": [
+    "Alabama Media Group"
+   ],
+   "keys": [
+    "alabamamediagroup"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "alan-jay-automotive-management-inc-d-b-a-alan-jay-fleet-sale",
+   "name": "Alan Jay Automotive Management, Inc. d/b/a Alan Jay Fleet Sales",
+   "aliases": [
+    "Alan Jay Automotive Management, Inc. d/b/a Alan Jay Fleet Sales"
+   ],
+   "keys": [
+    "alanjayautomotivemanagementincdbaalanjayfleetsales"
+   ],
+   "records": {
+    "contract": 4
+   },
+   "gov_ids": [
+    "pcb"
+   ]
+  },
+  {
+   "id": "alfred-benesch-and",
+   "name": "Alfred Benesch & Company",
+   "aliases": [
+    "Alfred Benesch & Company"
+   ],
+   "keys": [
+    "alfredbenesch"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "american-bankers-insurance-company-of-flori",
+   "name": "American Bankers Insurance Company of Flori",
+   "aliases": [
+    "American Bankers Insurance Company of Flori"
+   ],
+   "keys": [
+    "americanbankersinsurancecompanyofflori"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "american-sand-and-asphalt-paving",
+   "name": "American Sand and Asphalt Paving, Inc.",
+   "aliases": [
+    "AMERICAN SAND &",
+    "American Sand & Asphalt Paving",
+    "American Sand and Asphalt",
+    "American Sand and Asphalt Pavi",
+    "American Sand and Asphalt Paving",
+    "American Sand and Asphalt Paving, Inc."
+   ],
+   "keys": [
+    "americansand",
+    "americansandasphalt",
+    "americansandasphaltpaving"
+   ],
+   "records": {
+    "contract": 7,
+    "register": 3
+   },
+   "gov_ids": [
+    "county",
+    "lh",
+    "pc"
+   ],
+   "merge_evidence": "\"AMERICAN SAND &\" is the Lynn Haven warrant list cut at 15 characters; \"American Sand and Asphalt Pavi\" is a campaign filing cut at 30 characters."
+  },
+  {
+   "id": "american-sand-and-asphalt-x-cavation",
+   "name": "American Sand & Asphalt / X-Cavation",
+   "aliases": [
+    "American Sand & Asphalt / X-Cavation"
+   ],
+   "keys": [
+    "americansandasphaltxcavation"
+   ],
+   "records": {
+    "register": 2
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "amex",
+   "name": "AMEX",
+   "aliases": [
+    "AMEX"
+   ],
+   "keys": [
+    "amex"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "anchorage-children-s-home-of-bay-county",
+   "name": "Anchorage Children's Home of Bay County, Inc",
+   "aliases": [
+    "Anchorage Children's Home of Bay County, Inc"
+   ],
+   "keys": [
+    "anchoragechildrenshomeofbaycounty"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "anderson-columbia",
+   "name": "Anderson Columbia Co., Inc.",
+   "aliases": [
+    "Anderson Columbia",
+    "Anderson Columbia Co Inc",
+    "Anderson Columbia Co. Inc",
+    "Anderson Columbia Co., Inc.",
+    "Anderson Columbia, Inc."
+   ],
+   "keys": [
+    "andersoncolumbia"
+   ],
+   "records": {
+    "contract": 6,
+    "change_order": 1,
+    "register": 3
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "anderson-construction",
+   "name": "Anderson Construction Company",
+   "aliases": [
+    "Anderson Construction Company"
+   ],
+   "keys": [
+    "andersonconstruction"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "pc"
+   ]
+  },
+  {
+   "id": "anderson-construction-company-of-north",
+   "name": "Anderson Construction Company of North Florida",
+   "aliases": [
+    "Anderson Construction Company of North Florida"
+   ],
+   "keys": [
+    "andersonconstructioncompanyofnorth"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "pc"
+   ]
+  },
+  {
+   "id": "ap-sound-inc-dba-all-pro-sound",
+   "name": "AP Sound Inc. dba All Pro Sound",
+   "aliases": [
+    "AP Sound Inc. dba All Pro Sound"
+   ],
+   "keys": [
+    "apsoundincdbaallprosound"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "apt-acquisition-and-construction",
+   "name": "APT Acquisition & Construction Corp.",
+   "aliases": [
+    "APT Acquisition & Construction Corp."
+   ],
+   "keys": [
+    "aptacquisitionconstruction"
+   ],
+   "records": {
+    "register": 1
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "aqua",
+   "name": "Aqua",
+   "aliases": [
+    "Aqua"
+   ],
+   "keys": [
+    "aqua"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "aqua-aerobic-systems",
+   "name": "Aqua-Aerobic Systems, Inc.",
+   "aliases": [
+    "Aqua-Aerobic Systems, Inc."
+   ],
+   "keys": [
+    "aquaaerobicsystems"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "arris-general-contractors",
+   "name": "ARRIS General Contractors",
+   "aliases": [
+    "ARRIS GENERAL",
+    "ARRIS General Contractors"
+   ],
+   "keys": [
+    "arrisgeneral",
+    "arrisgeneralcontractors"
+   ],
+   "records": {
+    "contract": 1,
+    "register": 1
+   },
+   "gov_ids": [
+    "lh"
+   ],
+   "merge_evidence": "\"ARRIS GENERAL\" is the Lynn Haven warrant list cut short."
+  },
+  {
+   "id": "art-construction-of-northwest",
+   "name": "Art Construction of Northwest Florida LLC",
+   "aliases": [
+    "Art Construction of Northwest Florida LLC"
+   ],
+   "keys": [
+    "artconstructionofnorthwest"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "pc"
+   ]
+  },
+  {
+   "id": "asphalt-paving-systems",
+   "name": "Asphalt Paving Systems",
+   "aliases": [
+    "Asphalt Paving Systems"
+   ],
+   "keys": [
+    "asphaltpavingsystems"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "asrus",
+   "name": "ASRus, LLC",
+   "aliases": [
+    "ASRus, LLC"
+   ],
+   "keys": [
+    "asrus"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "astroturf",
+   "name": "Astroturf Corporation",
+   "aliases": [
+    "AstroTurf",
+    "Astroturf Corporation"
+   ],
+   "keys": [
+    "astroturf"
+   ],
+   "records": {
+    "contract": 1,
+    "tdc": 1
+   },
+   "gov_ids": [
+    "county",
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "at-and-t-enterprises",
+   "name": "AT&T Enterprises, LLC",
+   "aliases": [
+    "AT&T Enterprises, LLC"
+   ],
+   "keys": [
+    "attenterprises"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "pcb"
+   ]
+  },
+  {
+   "id": "athletx",
+   "name": "Athletx",
+   "aliases": [
+    "Athletx"
+   ],
+   "keys": [
+    "athletx"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "atkins-north-america",
+   "name": "Atkins North America, Inc.",
+   "aliases": [
+    "Atkins North America, Inc."
+   ],
+   "keys": [
+    "atkinsnorthamerica"
+   ],
+   "records": {
+    "cra": 1
+   },
+   "gov_ids": [
+    "pcb"
+   ]
+  },
+  {
+   "id": "atlas-lighting-and-electrical",
+   "name": "Atlas Lighting & Electrical",
+   "aliases": [
+    "Atlas Lighting & Electrical"
+   ],
+   "keys": [
+    "atlaslightingelectrical"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "atlas-obscura",
+   "name": "Atlas Obscura, Inc",
+   "aliases": [
+    "Atlas Obscura, Inc"
+   ],
+   "keys": [
+    "atlasobscura"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "attn",
+   "name": "ATTN Inc",
+   "aliases": [
+    "ATTN Inc"
+   ],
+   "keys": [
+    "attn"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "auto-owners-insurance",
+   "name": "Auto Owners Insurance",
+   "aliases": [
+    "Auto Owners Insurance"
+   ],
+   "keys": [
+    "autoownersinsurance"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "avoy-technologies-limited",
+   "name": "Avoy Technologies Limited",
+   "aliases": [
+    "Avoy Technologies Limited"
+   ],
+   "keys": [
+    "avoytechnologieslimited"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "b-and-a-communications",
+   "name": "B&A Communications LLC",
+   "aliases": [
+    "B&A Communications LLC"
+   ],
+   "keys": [
+    "bacommunications"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "baldwin-contain",
+   "name": "BALDWIN CONTAIN",
+   "aliases": [
+    "BALDWIN CONTAIN"
+   ],
+   "keys": [
+    "baldwincontain"
+   ],
+   "records": {
+    "register": 1
+   },
+   "gov_ids": [
+    "lh"
+   ]
+  },
+  {
+   "id": "barcups",
+   "name": "BarCups",
+   "aliases": [
+    "BarCups"
+   ],
+   "keys": [
+    "barcups"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "barge-design-solutions",
+   "name": "Barge Design Solutions, Inc.",
+   "aliases": [
+    "Barge Design Solutions",
+    "Barge Design Solutions (BARGE)",
+    "Barge Design Solutions, Inc."
+   ],
+   "keys": [
+    "bargedesignsolutions"
+   ],
+   "records": {
+    "contract": 5,
+    "change_order": 1,
+    "register": 2
+   },
+   "gov_ids": [
+    "county",
+    "pc"
+   ]
+  },
+  {
+   "id": "barron-and-redding",
+   "name": "BARRON & REDDING PA",
+   "aliases": [
+    "BARRON & REDDING PA"
+   ],
+   "keys": [
+    "barronredding"
+   ],
+   "records": {
+    "register": 1
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "battlesports",
+   "name": "Battlesports",
+   "aliases": [
+    "Battlesports"
+   ],
+   "keys": [
+    "battlesports"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "bay-arts-alliance",
+   "name": "Bay Arts Alliance",
+   "aliases": [
+    "Bay Arts Alliance"
+   ],
+   "keys": [
+    "bayartsalliance"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "bay-county-chamber-of-commerce",
+   "name": "Bay County Chamber of Commerce",
+   "aliases": [
+    "Bay County Chamber of Commerce"
+   ],
+   "keys": [
+    "baycountychamberofcommerce"
+   ],
+   "records": {
+    "tdc": 2
+   },
+   "gov_ids": [
+    "destination_pc",
+    "mb_cdc"
+   ]
+  },
+  {
+   "id": "bay-economic-development",
+   "name": "Bay Economic Development",
+   "aliases": [
+    "Bay Economic Development"
+   ],
+   "keys": [
+    "bayeconomicdevelopment"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "bay-high-schoo-wrestling-booster-club",
+   "name": "Bay High Schoo! Wrestling Booster Club",
+   "aliases": [
+    "Bay High Schoo! Wrestling Booster Club"
+   ],
+   "keys": [
+    "bayhighschoowrestlingboosterclub"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "bay-high-school-girls-weighlifting",
+   "name": "Bay High School - Girls Weighlifting",
+   "aliases": [
+    "Bay High School - Girls Weighlifting"
+   ],
+   "keys": [
+    "bayhighschoolgirlsweighlifting"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "bay-medical-sacred-heart-health-system",
+   "name": "Bay Medical / Sacred Heart Health System",
+   "aliases": [
+    "Bay Medical / Sacred Heart Health System"
+   ],
+   "keys": [
+    "baymedicalsacredhearthealthsystem"
+   ],
+   "records": {
+    "cra": 1
+   },
+   "gov_ids": [
+    "pc"
+   ]
+  },
+  {
+   "id": "bay-point-billfish",
+   "name": "Bay Point Billfish, LLC",
+   "aliases": [
+    "BAY POINT BILLFISH LLC",
+    "Bay Point Billfish, LLC"
+   ],
+   "keys": [
+    "baypointbillfish"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "bay-point-billfish-open",
+   "name": "Bay Point Billfish Open",
+   "aliases": [
+    "Bay Point Billfish Open"
+   ],
+   "keys": [
+    "baypointbillfishopen"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "bay-youth-music-association",
+   "name": "Bay Youth Music Association, Inc",
+   "aliases": [
+    "Bay Youth Music Association, Inc"
+   ],
+   "keys": [
+    "bayyouthmusicassociation"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "bayou-builders-of-bay-county",
+   "name": "Bayou Builders of Bay County, LLC",
+   "aliases": [
+    "Bayou Builders of Bay Co., LLC",
+    "Bayou Builders of Bay County",
+    "Bayou Builders of Bay County, LLC"
+   ],
+   "keys": [
+    "bayoubuildersofbay",
+    "bayoubuildersofbaycounty"
+   ],
+   "records": {
+    "contract": 2
+   },
+   "gov_ids": [
+    "pc"
+   ],
+   "merge_evidence": "\"Bay Co.\" and \"Bay County\" spellings in Panama City agendas."
+  },
+  {
+   "id": "bayside-florist-and-gifts",
+   "name": "Bayside Florist & Gifts",
+   "aliases": [
+    "Bayside Florist & Gifts"
+   ],
+   "keys": [
+    "baysidefloristgifts"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "mb_cdc"
+   ]
+  },
+  {
+   "id": "bcl-civil-contractors",
+   "name": "BCL Civil Contractors, Inc.",
+   "aliases": [
+    "BCL CIVIL CONTR",
+    "BCL Civil Contractors",
+    "BCL Civil Contractors Inc.",
+    "BCL Civil Contractors, Inc."
+   ],
+   "keys": [
+    "bclcivilcontr",
+    "bclcivilcontractors"
+   ],
+   "records": {
+    "contract": 6,
+    "change_order": 1,
+    "register": 2,
+    "cra": 1
+   },
+   "gov_ids": [
+    "county",
+    "lh",
+    "pc"
+   ],
+   "merge_evidence": "\"BCL CIVIL CONTR\" is the Lynn Haven warrant list cut at 15 characters."
+  },
+  {
+   "id": "beach-house-logos",
+   "name": "Beach House Logos",
+   "aliases": [
+    "Beach House Logos"
+   ],
+   "keys": [
+    "beachhouselogos"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "beach-movement-event-management",
+   "name": "Beach Movement Event Management",
+   "aliases": [
+    "Beach Movement Event Management"
+   ],
+   "keys": [
+    "beachmovementeventmanagement"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "beach-stilts-entertainment",
+   "name": "Beach Stilts Entertainment, LLC",
+   "aliases": [
+    "Beach Stilts Entertainment, LLC"
+   ],
+   "keys": [
+    "beachstiltsentertainment"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "beach-tv-cable",
+   "name": "Beach TV Cable Company, Inc",
+   "aliases": [
+    "Beach TV Cable Company, Inc"
+   ],
+   "keys": [
+    "beachtvcable"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "beard-equipment",
+   "name": "Beard Equipment Co.",
+   "aliases": [
+    "Beard Equipment Co."
+   ],
+   "keys": [
+    "beardequipment"
+   ],
+   "records": {
+    "register": 2
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "behar-peteranecz",
+   "name": "Behar Peteranecz Inc.",
+   "aliases": [
+    "Behar Peteranecz",
+    "Behar Peteranecz Inc."
+   ],
+   "keys": [
+    "beharpeteranecz"
+   ],
+   "records": {
+    "contract": 1,
+    "change_order": 1
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "bfg-productions-pcb",
+   "name": "BFG Productions PCB, LLC",
+   "aliases": [
+    "BFG Productions PCB, LLC"
+   ],
+   "keys": [
+    "bfgproductionspcb"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "bgn-contractors",
+   "name": "BGN Contractors (Gage Golden Construction)",
+   "aliases": [
+    "BGN CONTRACTORS",
+    "BGN Contractors",
+    "BGN Contractors (Gage Golden Construction dba BGN Contractors)",
+    "BGN Contractors (Gage Golden Construction)",
+    "GAGE GOLDEN CONSTRUCTION",
+    "Gage Golden Construction dba BGN Contractors"
+   ],
+   "keys": [
+    "bgncontractors",
+    "gagegoldenconstruction",
+    "gagegoldenconstructiondbabgncontractors"
+   ],
+   "records": {
+    "contract": 4,
+    "change_order": 3,
+    "register": 2,
+    "tdc": 1
+   },
+   "gov_ids": [
+    "county",
+    "lh",
+    "mb",
+    "pc",
+    "visit_pcb"
+   ],
+   "merge_evidence": "The county agenda names the firm \"Gage Golden Construction dba BGN Contractors\"; the county check register lists \"GAGE GOLDEN CONSTRUCTION\"."
+  },
+  {
+   "id": "bhs-wrestling-booster-club",
+   "name": "BHS Wrestling Booster Club, Inc",
+   "aliases": [
+    "BHS Wrestling Booster Club, Inc"
+   ],
+   "keys": [
+    "bhswrestlingboosterclub"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "bill-smith-electric",
+   "name": "Bill Smith Electric",
+   "aliases": [
+    "Bill Smith Electric"
+   ],
+   "keys": [
+    "billsmithelectric"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "lh"
+   ]
+  },
+  {
+   "id": "black-and-veatch",
+   "name": "Black and Veatch Corporation",
+   "aliases": [
+    "Black & Veatch",
+    "Black and Veatch Corporation"
+   ],
+   "keys": [
+    "blackveatch"
+   ],
+   "records": {
+    "contract": 2
+   },
+   "gov_ids": [
+    "county",
+    "pc"
+   ]
+  },
+  {
+   "id": "blossoms",
+   "name": "Blossoms",
+   "aliases": [
+    "Blossoms"
+   ],
+   "keys": [
+    "blossoms"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "blue-shield",
+   "name": "Blue Shield",
+   "aliases": [
+    "Blue Shield"
+   ],
+   "keys": [
+    "blueshield"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "bmr-building-solutions",
+   "name": "BMR Building Solutions, LLC",
+   "aliases": [
+    "BMR Building Solutions, LLC"
+   ],
+   "keys": [
+    "bmrbuildingsolutions"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "boardwalk-beach-hotel",
+   "name": "Boardwalk Beach Hotel",
+   "aliases": [
+    "Boardwalk Beach Hotel"
+   ],
+   "keys": [
+    "boardwalkbeachhotel"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "boomer-aviation",
+   "name": "Boomer Aviation Inc",
+   "aliases": [
+    "Boomer Aviation Inc"
+   ],
+   "keys": [
+    "boomeraviation"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "bowring-marsh-bermuda-l",
+   "name": "BOWRING MARSH BERMUDA L",
+   "aliases": [
+    "BOWRING MARSH BERMUDA L"
+   ],
+   "keys": [
+    "bowringmarshbermudal"
+   ],
+   "records": {
+    "register": 1
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "brand-usa",
+   "name": "Brand USA",
+   "aliases": [
+    "Brand USA"
+   ],
+   "keys": [
+    "brandusa"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "break-n-ground",
+   "name": "Break-N-Ground LLC",
+   "aliases": [
+    "Break-N-Ground LLC"
+   ],
+   "keys": [
+    "breaknground"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "pc"
+   ]
+  },
+  {
+   "id": "brock-lawn-and-pest-control",
+   "name": "Brock Lawn and Pest Control, Inc",
+   "aliases": [
+    "Brock Lawn & Pest Control",
+    "Brock Lawn and Pest Control, Inc"
+   ],
+   "keys": [
+    "brocklawnpestcontrol"
+   ],
+   "records": {
+    "tdc": 2
+   },
+   "gov_ids": [
+    "destination_pc",
+    "mb_cdc"
+   ]
+  },
+  {
+   "id": "btw-services",
+   "name": "BTW Services, Inc",
+   "aliases": [
+    "BTW Services, Inc"
+   ],
+   "keys": [
+    "btwservices"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "burke-blue",
+   "name": "Burke Blue",
+   "aliases": [
+    "Burke Blue"
+   ],
+   "keys": [
+    "burkeblue"
+   ],
+   "records": {
+    "tdc": 2
+   },
+   "gov_ids": [
+    "destination_pc",
+    "mb_cdc"
+   ]
+  },
+  {
+   "id": "burke-construction-group",
+   "name": "Burke Construction Group, Inc.",
+   "aliases": [
+    "Burke Construction Group, Inc."
+   ],
+   "keys": [
+    "burkeconstructiongroup"
+   ],
+   "records": {
+    "contract": 1,
+    "change_order": 2
+   },
+   "gov_ids": [
+    "pc"
+   ]
+  },
+  {
+   "id": "business-presentation-services",
+   "name": "Business Presentation Services, Inc",
+   "aliases": [
+    "Business Presentation Services, Inc"
+   ],
+   "keys": [
+    "businesspresentationservices"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "byrd-security-srvs",
+   "name": "Byrd Security Srvs LLC",
+   "aliases": [
+    "Byrd Security Srvs LLC"
+   ],
+   "keys": [
+    "byrdsecuritysrvs"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "c-and-a-builders",
+   "name": "C&A Builders, Inc",
+   "aliases": [
+    "C&A Builders, Inc"
+   ],
+   "keys": [
+    "cabuilders"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "c-miles-construction",
+   "name": "C-Miles Construction, Inc.",
+   "aliases": [
+    "C-Miles Construction, Inc."
+   ],
+   "keys": [
+    "cmilesconstruction"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "pc"
+   ]
+  },
+  {
+   "id": "c-w-roberts-contracting",
+   "name": "C.W. Roberts Contracting, Inc.",
+   "aliases": [
+    "C. W. Roberts Contracting, Inc.",
+    "C.W. Roberts",
+    "C.W. Roberts Contracting Inc.",
+    "C.W. Roberts Contracting, Inc.",
+    "CW ROBERTS CONT",
+    "CW Roberts"
+   ],
+   "keys": [
+    "cwroberts",
+    "cwrobertscont",
+    "cwrobertscontracting"
+   ],
+   "records": {
+    "contract": 12,
+    "register": 5
+   },
+   "gov_ids": [
+    "county",
+    "lh",
+    "pc",
+    "pcb"
+   ],
+   "merge_evidence": "Spacing variants (\"C. W.\", \"C.W.\", \"CW\") and the Lynn Haven warrant list's 15-character \"CW ROBERTS CONT\". Kept separate from Roberts and Roberts, Inc., a different company."
+  },
+  {
+   "id": "careco-multimedia-entertainment",
+   "name": "Careco Multimedia Entertainment, LLC",
+   "aliases": [
+    "Careco Multimedia Entertainment, LLC"
+   ],
+   "keys": [
+    "carecomultimediaentertainment"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "caribbean-coffee",
+   "name": "Caribbean Coffee",
+   "aliases": [
+    "Caribbean Coffee"
+   ],
+   "keys": [
+    "caribbeancoffee"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "mb_cdc"
+   ]
+  },
+  {
+   "id": "carollo-engineers",
+   "name": "Carollo Engineers, Inc.",
+   "aliases": [
+    "Carollo Engineers",
+    "Carollo Engineers, Inc."
+   ],
+   "keys": [
+    "carolloengineers"
+   ],
+   "records": {
+    "contract": 2
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "carr-riggs-and-ingram",
+   "name": "Carr, Riggs & Ingram, LLC",
+   "aliases": [
+    "Carr Riggs & Ingram",
+    "Carr, Riggs & Ingram, LLC"
+   ],
+   "keys": [
+    "carrriggsingram"
+   ],
+   "records": {
+    "tdc": 1,
+    "cra": 1
+   },
+   "gov_ids": [
+    "destination_pc",
+    "sp"
+   ]
+  },
+  {
+   "id": "carvertise",
+   "name": "Carvertise, Inc",
+   "aliases": [
+    "Carvertise",
+    "Carvertise, Inc",
+    "Carvertise, Inc iS)"
+   ],
+   "keys": [
+    "carvertise",
+    "carvertiseincis"
+   ],
+   "records": {
+    "tdc": 3
+   },
+   "gov_ids": [
+    "destination_pc",
+    "visit_pcb"
+   ],
+   "merge_evidence": "The scanned Destination Panama City register reads one line as \"Carvertise, Inc iS)\"; the extra characters are a scan error."
+  },
+  {
+   "id": "catered-by-carla",
+   "name": "Catered by Carla",
+   "aliases": [
+    "Catered by Carla"
+   ],
+   "keys": [
+    "cateredbycarla"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "cathey-s-ace-hardware",
+   "name": "Cathey's Ace Hardware",
+   "aliases": [
+    "Cathey's Ace Hardware"
+   ],
+   "keys": [
+    "catheysacehardware"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "mb_cdc"
+   ]
+  },
+  {
+   "id": "cbc-construction",
+   "name": "CBC Construction",
+   "aliases": [
+    "CBC CONSTRUCTIO",
+    "CBC Construction"
+   ],
+   "keys": [
+    "cbcconstructio",
+    "cbcconstruction"
+   ],
+   "records": {
+    "contract": 4,
+    "change_order": 5,
+    "register": 1
+   },
+   "gov_ids": [
+    "lh",
+    "pc"
+   ],
+   "merge_evidence": "\"CBC CONSTRUCTIO\" is the Lynn Haven warrant list cut at 15 characters."
+  },
+  {
+   "id": "cdr-maguire",
+   "name": "CDR Maguire, Inc.",
+   "aliases": [
+    "CDR Maguire",
+    "CDR Maguire Inc.",
+    "CDR Maguire, Inc."
+   ],
+   "keys": [
+    "cdrmaguire"
+   ],
+   "records": {
+    "contract": 4,
+    "change_order": 1,
+    "register": 2
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "cdr-maguire-cdr-emergency-management",
+   "name": "CDR Maguire / CDR Emergency Management",
+   "aliases": [
+    "CDR Maguire / CDR Emergency Management"
+   ],
+   "keys": [
+    "cdrmaguirecdremergencymanagement"
+   ],
+   "records": {
+    "change_order": 1
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "center-action-committee",
+   "name": "Center Action Committee",
+   "aliases": [
+    "Center Action Committee"
+   ],
+   "keys": [
+    "centeractioncommittee"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "chandler-and-associates",
+   "name": "Chandler and Associates",
+   "aliases": [
+    "Chandler and Associates"
+   ],
+   "keys": [
+    "chandlerassociates"
+   ],
+   "records": {
+    "cra": 1
+   },
+   "gov_ids": [
+    "pcb"
+   ]
+  },
+  {
+   "id": "charles-n-white-construction",
+   "name": "Charles N. White Construction Company",
+   "aliases": [
+    "Charles N. White Construction Co.",
+    "Charles N. White Construction Company"
+   ],
+   "keys": [
+    "charlesnwhiteconstruction"
+   ],
+   "records": {
+    "contract": 1,
+    "register": 1
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "charlie-coram-s-place",
+   "name": "Charlie Coram's Place",
+   "aliases": [
+    "Charlie Coram's Place",
+    "Charlie Coram's place"
+   ],
+   "keys": [
+    "charliecoramsplace"
+   ],
+   "records": {
+    "cra": 1
+   },
+   "gov_ids": [
+    "pc"
+   ]
+  },
+  {
+   "id": "chase-card-services",
+   "name": "Chase Card Services",
+   "aliases": [
+    "Chase Card Services"
+   ],
+   "keys": [
+    "chasecardservices"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "mb_cdc"
+   ]
+  },
+  {
+   "id": "ck-contractors-and-develo",
+   "name": "CK CONTRACTORS AND DEVELO",
+   "aliases": [
+    "CK CONTRACTORS AND DEVELO"
+   ],
+   "keys": [
+    "ckcontractorsdevelo"
+   ],
+   "records": {
+    "register": 1
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "cleaning-plus-janitorial-svs",
+   "name": "Cleaning Plus Janitorial Svs, LLC",
+   "aliases": [
+    "Cleaning Plus Janitorial Svs, LLC"
+   ],
+   "keys": [
+    "cleaningplusjanitorialsvs"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "clear-channel-outdoor",
+   "name": "Clear Channel Outdoor",
+   "aliases": [
+    "Clear Channel Outdoor"
+   ],
+   "keys": [
+    "clearchanneloutdoor"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "coast-2-coast-printing",
+   "name": "Coast 2 Coast Printing",
+   "aliases": [
+    "Coast 2 Coast Printing"
+   ],
+   "keys": [
+    "coast2coastprinting"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "mb_cdc"
+   ]
+  },
+  {
+   "id": "coast-view-lawn-and-landscape",
+   "name": "Coast View Lawn & Landscape",
+   "aliases": [
+    "Coast View Lawn & Landscape"
+   ],
+   "keys": [
+    "coastviewlawnlandscape"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "mb_cdc"
+   ]
+  },
+  {
+   "id": "coastal-parasail",
+   "name": "Coastal Parasail, Inc.",
+   "aliases": [
+    "Coastal Parasail Inc",
+    "Coastal Parasail, Inc."
+   ],
+   "keys": [
+    "coastalparasail"
+   ],
+   "records": {
+    "register": 3
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "coastal-protection-engineering",
+   "name": "Coastal Protection Engineering LLC",
+   "aliases": [
+    "Coastal Protection Engineering LLC",
+    "Coastal Protection Engineering, LLC"
+   ],
+   "keys": [
+    "coastalprotectionengineering"
+   ],
+   "records": {
+    "contract": 2,
+    "tdc": 2
+   },
+   "gov_ids": [
+    "county",
+    "mb_cdc",
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "cogburn-brothers",
+   "name": "Cogburn Brothers, Inc.",
+   "aliases": [
+    "Cogburn Brothers, Inc."
+   ],
+   "keys": [
+    "cogburnbrothers"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "compass-media",
+   "name": "Compass Media, LLC",
+   "aliases": [
+    "Compass Media, LLC"
+   ],
+   "keys": [
+    "compassmedia"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "mb_cdc"
+   ]
+  },
+  {
+   "id": "construction-services",
+   "name": "Construction Services, LLC",
+   "aliases": [
+    "Construction Services, LLC"
+   ],
+   "keys": [
+    "constructionservices"
+   ],
+   "records": {
+    "contract": 2
+   },
+   "gov_ids": [
+    "lh"
+   ]
+  },
+  {
+   "id": "container-syste",
+   "name": "CONTAINER SYSTE",
+   "aliases": [
+    "CONTAINER SYSTE"
+   ],
+   "keys": [
+    "containersyste"
+   ],
+   "records": {
+    "register": 1
+   },
+   "gov_ids": [
+    "lh"
+   ]
+  },
+  {
+   "id": "convention-south",
+   "name": "Convention South",
+   "aliases": [
+    "Convention South"
+   ],
+   "keys": [
+    "conventionsouth"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "convergeone",
+   "name": "ConvergeOne",
+   "aliases": [
+    "ConvergeOne"
+   ],
+   "keys": [
+    "convergeone"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "core-and-main",
+   "name": "Core & Main, LP",
+   "aliases": [
+    "CORE & MAIN LP",
+    "Core & Main LP",
+    "Core & Main, LP"
+   ],
+   "keys": [
+    "coremain"
+   ],
+   "records": {
+    "contract": 4,
+    "register": 2
+   },
+   "gov_ids": [
+    "cw",
+    "lh",
+    "pcb"
+   ]
+  },
+  {
+   "id": "cornerstone-marketing-and-advertising",
+   "name": "Cornerstone Marketing & Advertising",
+   "aliases": [
+    "Cornerstone Marketing & Advertising"
+   ],
+   "keys": [
+    "cornerstonemarketingadvertising"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "mb_cdc"
+   ]
+  },
+  {
+   "id": "costar-realty-information",
+   "name": "CoStar Realty Information, Inc",
+   "aliases": [
+    "CoStar Realty Information, Inc"
+   ],
+   "keys": [
+    "costarrealtyinformation"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "coverage-one",
+   "name": "Coverage One",
+   "aliases": [
+    "Coverage One"
+   ],
+   "keys": [
+    "coverageone"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "creative-artists-agency",
+   "name": "Creative Artists Agency, LLC",
+   "aliases": [
+    "Creative Artists Agency, LLC"
+   ],
+   "keys": [
+    "creativeartistsagency"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "cri",
+   "name": "CRI",
+   "aliases": [
+    "CRI"
+   ],
+   "keys": [
+    "cri"
+   ],
+   "records": {
+    "tdc": 2
+   },
+   "gov_ids": [
+    "mb_cdc",
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "crowdriff",
+   "name": "CrowdRiff, Inc",
+   "aliases": [
+    "CrowdRiff",
+    "CrowdRiff, Inc"
+   ],
+   "keys": [
+    "crowdriff"
+   ],
+   "records": {
+    "tdc": 2
+   },
+   "gov_ids": [
+    "destination_pc",
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "culpepper-construction",
+   "name": "Culpepper Construction Co.",
+   "aliases": [
+    "CULPEPPER CONST",
+    "CULPEPPER CONSTRUCTION CO.",
+    "Culpepper",
+    "Culpepper Construction",
+    "Culpepper Construction Co.",
+    "Culpepper Construction Company, Inc."
+   ],
+   "keys": [
+    "culpepperconst",
+    "culpepperconstruction"
+   ],
+   "records": {
+    "contract": 1,
+    "change_order": 1,
+    "register": 5
+   },
+   "gov_ids": [
+    "county",
+    "lh"
+   ],
+   "merge_evidence": "\"CULPEPPER CONST\" is the Lynn Haven warrant list cut at 15 characters; one campaign filing lists just \"Culpepper\"."
+  },
+  {
+   "id": "cwr-contracting",
+   "name": "CWR Contracting, Inc.",
+   "aliases": [
+    "CWR Contracting, Inc."
+   ],
+   "keys": [
+    "cwrcontracting"
+   ],
+   "records": {
+    "change_order": 4,
+    "cra": 2
+   },
+   "gov_ids": [
+    "pcb"
+   ]
+  },
+  {
+   "id": "cybear-interactive",
+   "name": "CyBear Interactive",
+   "aliases": [
+    "CyBear Interactive"
+   ],
+   "keys": [
+    "cybearinteractive"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "d-and-b-builders",
+   "name": "D&B Builders, Inc.",
+   "aliases": [
+    "D&B Builders, Inc."
+   ],
+   "keys": [
+    "dbbuilders"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "dag-architects",
+   "name": "DAG Architects Inc",
+   "aliases": [
+    "DAG Architects",
+    "DAG Architects Inc"
+   ],
+   "keys": [
+    "dagarchitects"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "daikin-applied-americas",
+   "name": "Daikin Applied Americas, Inc.",
+   "aliases": [
+    "Daikin Applied Americas, Inc."
+   ],
+   "keys": [
+    "daikinappliedamericas"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "pcb"
+   ]
+  },
+  {
+   "id": "dance-kraze-all-charmed-up",
+   "name": "Dance Kraze All Charmed Up, Inc",
+   "aliases": [
+    "Dance Kraze All Charmed Up, Inc"
+   ],
+   "keys": [
+    "dancekrazeallcharmedup"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "davison-fuels-and-oil",
+   "name": "Davison Fuels & Oil, LLC",
+   "aliases": [
+    "DAVISON FUELS & OIL, LLC",
+    "DAVISON FUELS I",
+    "Davison Fuels & Oil, LLC"
+   ],
+   "keys": [
+    "davisonfuelsi",
+    "davisonfuelsoil"
+   ],
+   "records": {
+    "register": 4
+   },
+   "gov_ids": [
+    "county",
+    "lh"
+   ],
+   "merge_evidence": "\"DAVISON FUELS I\" is the Lynn Haven warrant list cut at 15 characters."
+  },
+  {
+   "id": "daystar-cleaning",
+   "name": "Daystar Cleaning, Inc",
+   "aliases": [
+    "Daystar Cleaning, Inc"
+   ],
+   "keys": [
+    "daystarcleaning"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "deckard-technologies",
+   "name": "Deckard Technologies, Inc.",
+   "aliases": [
+    "Deckard Technologies, Inc."
+   ],
+   "keys": [
+    "deckardtechnologies"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "pcb"
+   ]
+  },
+  {
+   "id": "destination-media",
+   "name": "Destination Media",
+   "aliases": [
+    "Destination Media"
+   ],
+   "keys": [
+    "destinationmedia"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "destinations",
+   "name": "Destinations Florida, Inc",
+   "aliases": [
+    "Destinations Florida",
+    "Destinations Florida, Inc"
+   ],
+   "keys": [
+    "destinations"
+   ],
+   "records": {
+    "tdc": 3
+   },
+   "gov_ids": [
+    "destination_pc",
+    "mb_cdc",
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "destinations-international",
+   "name": "Destinations International",
+   "aliases": [
+    "Destinations International"
+   ],
+   "keys": [
+    "destinationsinternational"
+   ],
+   "records": {
+    "tdc": 2
+   },
+   "gov_ids": [
+    "destination_pc",
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "dewberry-engineers",
+   "name": "Dewberry Engineers Inc.",
+   "aliases": [
+    "DEWBERRY",
+    "Dewberry",
+    "Dewberry Engineering",
+    "Dewberry Engineering Inc.",
+    "Dewberry Engineering, Inc.",
+    "Dewberry Engineers",
+    "Dewberry Engineers Inc.",
+    "Dewberry Engineers, Inc",
+    "Dewberry Engineers, Inc."
+   ],
+   "keys": [
+    "dewberry",
+    "dewberryengineering",
+    "dewberryengineers"
+   ],
+   "records": {
+    "contract": 18,
+    "register": 3,
+    "tdc": 1,
+    "cra": 7
+   },
+   "gov_ids": [
+    "county",
+    "destination_pc",
+    "lh",
+    "mb",
+    "pc",
+    "pcb"
+   ],
+   "merge_evidence": "Panama City awarded Project RESTORE Glenwood task orders to \"Dewberry Engineering Inc.\" (2023-11-28 agenda) and the CEI task order for the same project to \"Dewberry Engineers Inc.\" (2025-06-10); Dewberry's Panhandle offices came from its 2016 purchase of Preble-Rish (dewberry.com). \"DEWBERRY\" is the Lynn Haven warrant list; \"Dewberry\" is how two campaign filings list it."
+  },
+  {
+   "id": "dex-imaging",
+   "name": "DEX imaging",
+   "aliases": [
+    "DEX imaging"
+   ],
+   "keys": [
+    "deximaging"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "mb_cdc"
+   ]
+  },
+  {
+   "id": "direct-deposit",
+   "name": "Direct Deposit",
+   "aliases": [
+    "Direct Deposit"
+   ],
+   "keys": [
+    "directdeposit"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "disposal-services",
+   "name": "Disposal Services LLC",
+   "aliases": [
+    "Disposal Services LLC",
+    "Disposal Services, LLC"
+   ],
+   "keys": [
+    "disposalservices"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "dmw-law-group",
+   "name": "DMW Law Group",
+   "aliases": [
+    "DMW Law Group"
+   ],
+   "keys": [
+    "dmwlawgroup"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "dominguez-design-build",
+   "name": "Dominguez Design-Build, Inc.",
+   "aliases": [
+    "Dominguez Design-Build, Inc."
+   ],
+   "keys": [
+    "dominguezdesignbuild"
+   ],
+   "records": {
+    "contract": 1,
+    "register": 1
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "donnie-s-total-pride-pest-control",
+   "name": "Donnie's Total Pride Pest Control",
+   "aliases": [
+    "Donnie's Total Pride Pest Control"
+   ],
+   "keys": [
+    "donniestotalpridepestcontrol"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "mb_cdc"
+   ]
+  },
+  {
+   "id": "down-to-earth-outdoor-services",
+   "name": "Down to Earth Outdoor Services, LLC",
+   "aliases": [
+    "Down to Earth Outdoor Services, LLC"
+   ],
+   "keys": [
+    "downtoearthoutdoorservices"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "dsi-security-services",
+   "name": "DSI Security Services",
+   "aliases": [
+    "DSI Security Services"
+   ],
+   "keys": [
+    "dsisecurityservices"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "due-north-consulting",
+   "name": "Due North Consulting, Inc",
+   "aliases": [
+    "Due North Consulting, Inc"
+   ],
+   "keys": [
+    "duenorthconsulting"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "duke-energy",
+   "name": "Duke Energy",
+   "aliases": [
+    "Duke Energy"
+   ],
+   "keys": [
+    "dukeenergy"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "mb_cdc"
+   ]
+  },
+  {
+   "id": "dynamic-sales-solutions",
+   "name": "Dynamic Sales Solutions",
+   "aliases": [
+    "Dynamic Sales Solutions"
+   ],
+   "keys": [
+    "dynamicsalessolutions"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "e-prodirect",
+   "name": "E-proDirect LLC",
+   "aliases": [
+    "E-proDirect LLC"
+   ],
+   "keys": [
+    "eprodirect"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "earthshine-cleaning",
+   "name": "Earthshine Cleaning",
+   "aliases": [
+    "Earthshine Cleaning"
+   ],
+   "keys": [
+    "earthshinecleaning"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "ecsc",
+   "name": "ECSC, LLC (Emerald Coast Site Construction)",
+   "aliases": [
+    "ECSC",
+    "ECSC, LLC",
+    "ECSC, LLC (Emerald Coast Site Construction)",
+    "ECSC,LLC",
+    "Emerald Coast Site Construction",
+    "Emerald Coast Site Construction (ECSC)"
+   ],
+   "keys": [
+    "ecsc",
+    "emeraldcoastsiteconstruction"
+   ],
+   "records": {
+    "contract": 5,
+    "change_order": 2,
+    "register": 1
+   },
+   "gov_ids": [
+    "county",
+    "lh",
+    "pc"
+   ],
+   "merge_evidence": "Agendas give both names together: \"ECSC, LLC (Emerald Coast Site Construction)\" and \"Emerald Coast Site Construction (ECSC)\"."
+  },
+  {
+   "id": "edgewater-gymnastics",
+   "name": "Edgewater Gymnastics",
+   "aliases": [
+    "Edgewater Gymnastics"
+   ],
+   "keys": [
+    "edgewatergymnastics"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "ejhg",
+   "name": "EJHG",
+   "aliases": [
+    "EJHG"
+   ],
+   "keys": [
+    "ejhg"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "emerald-and-forgotten-coast-adventures",
+   "name": "Emerald and Forgotten Coast Adventures, Inc",
+   "aliases": [
+    "Emerald and Forgotten Coast Adventures, Inc"
+   ],
+   "keys": [
+    "emeraldforgottencoastadventures"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "emerald-coast-boat-and-lifestyle",
+   "name": "Emerald Coast Boat & Lifestyle",
+   "aliases": [
+    "Emerald Coast Boat & Lifestyle"
+   ],
+   "keys": [
+    "emeraldcoastboatlifestyle"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "emerald-coast-cruizin",
+   "name": "Emerald Coast Cruizin, LLC",
+   "aliases": [
+    "Emerald Coast Cruizin, LLC"
+   ],
+   "keys": [
+    "emeraldcoastcruizin"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "emerald-coast-theater",
+   "name": "Emerald Coast Theater",
+   "aliases": [
+    "Emerald Coast Theater"
+   ],
+   "keys": [
+    "emeraldcoasttheater"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "emerson-entertainment",
+   "name": "Emerson Entertainment",
+   "aliases": [
+    "Emerson Entertainment"
+   ],
+   "keys": [
+    "emersonentertainment"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "empire-pipe-and-supply",
+   "name": "Empire Pipe and Supply Co.",
+   "aliases": [
+    "Empire Pipe and Supply",
+    "Empire Pipe and Supply Co."
+   ],
+   "keys": [
+    "empirepipesupply"
+   ],
+   "records": {
+    "contract": 2,
+    "register": 1
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "emr",
+   "name": "EMR Inc.",
+   "aliases": [
+    "EMR Inc.",
+    "EMR, Inc."
+   ],
+   "keys": [
+    "emr"
+   ],
+   "records": {
+    "contract": 1,
+    "change_order": 1,
+    "register": 1
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "energreen-ameri",
+   "name": "ENERGREEN AMERI",
+   "aliases": [
+    "ENERGREEN AMERI"
+   ],
+   "keys": [
+    "energreenameri"
+   ],
+   "records": {
+    "register": 2
+   },
+   "gov_ids": [
+    "lh"
+   ]
+  },
+  {
+   "id": "energy-systems",
+   "name": "ENERGY SYSTEMS",
+   "aliases": [
+    "ENERGY SYSTEMS"
+   ],
+   "keys": [
+    "energysystems"
+   ],
+   "records": {
+    "register": 1
+   },
+   "gov_ids": [
+    "lh"
+   ]
+  },
+  {
+   "id": "epcl",
+   "name": "EPCl",
+   "aliases": [
+    "EPCl"
+   ],
+   "keys": [
+    "epcl"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "mb_cdc"
+   ]
+  },
+  {
+   "id": "ethos-exteriors",
+   "name": "Ethos Exteriors, LLC",
+   "aliases": [
+    "Ethos Exteriors, LLC"
+   ],
+   "keys": [
+    "ethosexteriors"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "mb_cdc"
+   ]
+  },
+  {
+   "id": "expedia-group",
+   "name": "Expedia Group",
+   "aliases": [
+    "Expedia Group"
+   ],
+   "keys": [
+    "expediagroup"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "extreme-land-clearing-and-excavation",
+   "name": "Extreme Land Clearing & Excavation LLC",
+   "aliases": [
+    "Extreme Land Clearing & Excavation LLC"
+   ],
+   "keys": [
+    "extremelandclearingexcavation"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "pc"
+   ]
+  },
+  {
+   "id": "ferguson-waterworks",
+   "name": "Ferguson Waterworks",
+   "aliases": [
+    "Ferguson Waterworks"
+   ],
+   "keys": [
+    "fergusonwaterworks"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "cw"
+   ]
+  },
+  {
+   "id": "fine-productions",
+   "name": "Fine Productions",
+   "aliases": [
+    "Fine Productions"
+   ],
+   "keys": [
+    "fineproductions"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "first-federal-bank",
+   "name": "First Federal Bank",
+   "aliases": [
+    "First Federal Bank"
+   ],
+   "keys": [
+    "firstfederalbank"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "first-transit",
+   "name": "First Transit, Inc.",
+   "aliases": [
+    "First Transit, Inc."
+   ],
+   "keys": [
+    "firsttransit"
+   ],
+   "records": {
+    "register": 3
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "fishco-graphics-and-signs",
+   "name": "Fishco Graphics and Signs",
+   "aliases": [
+    "Fishco Graphics and Signs"
+   ],
+   "keys": [
+    "fishcographicssigns"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "florida-architects",
+   "name": "Florida Architects",
+   "aliases": [
+    "Florida Architects",
+    "Florida Architects Inc",
+    "Florida Architects, Inc."
+   ],
+   "keys": [
+    "floridaarchitects"
+   ],
+   "records": {
+    "contract": 2
+   },
+   "gov_ids": [
+    "lh",
+    "pc"
+   ]
+  },
+  {
+   "id": "florida-blue",
+   "name": "Florida Blue (Blue Cross and Blue Shield of Florida)",
+   "aliases": [
+    "Florida Blue",
+    "Florida Blue (Blue Cross and Blue Shield of Florida)",
+    "Florida Blue / Blue Cross Blue Shield of Florida"
+   ],
+   "keys": [
+    "floridablue",
+    "floridabluebluecrossblueshield"
+   ],
+   "records": {
+    "register": 1,
+    "tdc": 1
+   },
+   "gov_ids": [
+    "county",
+    "visit_pcb"
+   ],
+   "merge_evidence": "The county register names the payee \"Florida Blue / Blue Cross Blue Shield of Florida\"; Florida Blue is that insurer's trade name."
+  },
+  {
+   "id": "florida-film-office",
+   "name": "Florida Film Office, Inc",
+   "aliases": [
+    "Florida Film Office, Inc"
+   ],
+   "keys": [
+    "floridafilmoffice"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "florida-league-of-cities",
+   "name": "Florida League of Cities, Inc.",
+   "aliases": [
+    "Florida League of Cities, Inc."
+   ],
+   "keys": [
+    "floridaleagueofcities"
+   ],
+   "records": {
+    "contract": 4
+   },
+   "gov_ids": [
+    "pcb"
+   ]
+  },
+  {
+   "id": "florida-power-and-light",
+   "name": "Florida Power & Light Company",
+   "aliases": [
+    "Florida Power & Light Company"
+   ],
+   "keys": [
+    "floridapowerlight"
+   ],
+   "records": {
+    "register": 3
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "florida-restaurant-and-lodging-association",
+   "name": "Florida Restaurant & Lodging Association",
+   "aliases": [
+    "Florida Restaurant & Lodging Association"
+   ],
+   "keys": [
+    "floridarestaurantlodgingassociation"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "florida-s-great-northwest-foundation",
+   "name": "Florida's Great Northwest Foundation Inc",
+   "aliases": [
+    "Florida's Great Northwest Foundation Inc"
+   ],
+   "keys": [
+    "floridasgreatnorthwestfoundation"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "florida-society-of-assoc-executives",
+   "name": "Florida Society of Assoc Executives",
+   "aliases": [
+    "Florida Society of Assoc Executives"
+   ],
+   "keys": [
+    "floridasocietyofassocexecutives"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "florida-uc-fund",
+   "name": "Florida UC Fund",
+   "aliases": [
+    "Florida UC Fund"
+   ],
+   "keys": [
+    "floridaucfund"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "mb_cdc"
+   ]
+  },
+  {
+   "id": "floriopolis",
+   "name": "Floriopolis",
+   "aliases": [
+    "Floriopolis"
+   ],
+   "keys": [
+    "floriopolis"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "food-truck-festivals-of-america",
+   "name": "Food Truck Festivals of America, LLC",
+   "aliases": [
+    "Food Truck Festivals of America, LLC"
+   ],
+   "keys": [
+    "foodtruckfestivalsofamerica"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "forgotten-coast-living",
+   "name": "Forgotten Coast Living",
+   "aliases": [
+    "Forgotten Coast Living"
+   ],
+   "keys": [
+    "forgottencoastliving"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "mb_cdc"
+   ]
+  },
+  {
+   "id": "forgotten-coast-property-management",
+   "name": "Forgotten Coast Property Management",
+   "aliases": [
+    "Forgotten Coast Property Management"
+   ],
+   "keys": [
+    "forgottencoastpropertymanagement"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "mb_cdc"
+   ]
+  },
+  {
+   "id": "fpl",
+   "name": "FPL",
+   "aliases": [
+    "FPL"
+   ],
+   "keys": [
+    "fpl"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "fpl-florida-p",
+   "name": "FPL - FLORIDA P",
+   "aliases": [
+    "FPL - FLORIDA P"
+   ],
+   "keys": [
+    "fplfloridap"
+   ],
+   "records": {
+    "register": 3
+   },
+   "gov_ids": [
+    "lh"
+   ]
+  },
+  {
+   "id": "fpl-northwest",
+   "name": "FPL Northwest FL",
+   "aliases": [
+    "FPL Northwest FL"
+   ],
+   "keys": [
+    "fplnorthwest"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "frazer",
+   "name": "FRAZER LTD",
+   "aliases": [
+    "FRAZER LTD"
+   ],
+   "keys": [
+    "frazer"
+   ],
+   "records": {
+    "register": 1
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "frontline-insurance",
+   "name": "Frontline Insurance",
+   "aliases": [
+    "Frontline Insurance"
+   ],
+   "keys": [
+    "frontlineinsurance"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "fsbpa",
+   "name": "FSBPA",
+   "aliases": [
+    "FSBPA"
+   ],
+   "keys": [
+    "fsbpa"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "fsu-panama-city-foundation",
+   "name": "FSU Panama City Foundation",
+   "aliases": [
+    "FSU Panama City Foundation"
+   ],
+   "keys": [
+    "fsupanamacityfoundation"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "fusus",
+   "name": "FUSUS",
+   "aliases": [
+    "FUSUS"
+   ],
+   "keys": [
+    "fusus"
+   ],
+   "records": {
+    "cra": 1
+   },
+   "gov_ids": [
+    "pc"
+   ]
+  },
+  {
+   "id": "g3d-management",
+   "name": "G3D Management, LLC",
+   "aliases": [
+    "G3D Management, LLC"
+   ],
+   "keys": [
+    "g3dmanagement"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "gac-contractors",
+   "name": "GAC Contractors, Inc.",
+   "aliases": [
+    "GAC Contractors, Inc."
+   ],
+   "keys": [
+    "gaccontractors"
+   ],
+   "records": {
+    "cra": 3
+   },
+   "gov_ids": [
+    "pcb"
+   ]
+  },
+  {
+   "id": "gai-consultants-community-solutions-group",
+   "name": "GAI Consultants, Community Solutions Group",
+   "aliases": [
+    "GAI Consultants, Community Solutions Group"
+   ],
+   "keys": [
+    "gaiconsultantscommunitysolutionsgroup"
+   ],
+   "records": {
+    "cra": 1
+   },
+   "gov_ids": [
+    "pc"
+   ]
+  },
+  {
+   "id": "gameday-usa",
+   "name": "Gameday USA",
+   "aliases": [
+    "Gameday USA"
+   ],
+   "keys": [
+    "gamedayusa"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "gannett-florida-localiq",
+   "name": "Gannett Florida LocaliQ",
+   "aliases": [
+    "Gannett Florida LocaliQ"
+   ],
+   "keys": [
+    "gannettfloridalocaliq"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "garber-fleet-sa",
+   "name": "GARBER FLEET SA",
+   "aliases": [
+    "GARBER FLEET SA"
+   ],
+   "keys": [
+    "garberfleetsa"
+   ],
+   "records": {
+    "register": 1
+   },
+   "gov_ids": [
+    "lh"
+   ]
+  },
+  {
+   "id": "garden-and-gun",
+   "name": "Garden & Gun",
+   "aliases": [
+    "Garden & Gun"
+   ],
+   "keys": [
+    "gardengun"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "gemini-engineering-and-sciences",
+   "name": "Gemini Engineering & Sciences, Inc.",
+   "aliases": [
+    "Gemini Engineering & Sciences, Inc."
+   ],
+   "keys": [
+    "geminiengineeringsciences"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "pcb"
+   ]
+  },
+  {
+   "id": "girls-inc-of-bay-county",
+   "name": "Girls Inc. of Bay County",
+   "aliases": [
+    "Girls Inc. of Bay County"
+   ],
+   "keys": [
+    "girlsincofbaycounty"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "google",
+   "name": "Google",
+   "aliases": [
+    "Google"
+   ],
+   "keys": [
+    "google"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "gortemoller-engineering",
+   "name": "Gortemoller Engineering, Inc.",
+   "aliases": [
+    "Gortemoller Engineering",
+    "Gortemoller Engineering, Inc."
+   ],
+   "keys": [
+    "gortemollerengineering"
+   ],
+   "records": {
+    "contract": 2
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "gosh-pr",
+   "name": "Gosh PR",
+   "aliases": [
+    "Gosh PR"
+   ],
+   "keys": [
+    "goshpr"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "grace-and-grit",
+   "name": "Grace and Grit, LLC",
+   "aliases": [
+    "Grace and Grit, LLC"
+   ],
+   "keys": [
+    "gracegrit"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "mb_cdc"
+   ]
+  },
+  {
+   "id": "grand-slam-sports-tournaments",
+   "name": "Grand Slam Sports Tournaments",
+   "aliases": [
+    "Grand Slam Sports Tournaments"
+   ],
+   "keys": [
+    "grandslamsportstournaments"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "granicus",
+   "name": "Granicus LLC",
+   "aliases": [
+    "Granicus LLC"
+   ],
+   "keys": [
+    "granicus"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "graybar-electric",
+   "name": "Graybar Electric Company, Inc. (Schneider Electric)",
+   "aliases": [
+    "Graybar Electric Company, Inc. (Schneider Electric)"
+   ],
+   "keys": [
+    "graybarelectric"
+   ],
+   "records": {
+    "emergency": 1
+   },
+   "gov_ids": [
+    "pcb"
+   ]
+  },
+  {
+   "id": "greatamerica-financial-services",
+   "name": "GreatAmerica Financial Services",
+   "aliases": [
+    "GreatAmerica Financial Services"
+   ],
+   "keys": [
+    "greatamericafinancialservices"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "mb_cdc"
+   ]
+  },
+  {
+   "id": "greensouth-solu",
+   "name": "GREENSOUTH SOLU",
+   "aliases": [
+    "GREENSOUTH SOLU"
+   ],
+   "keys": [
+    "greensouthsolu"
+   ],
+   "records": {
+    "register": 3
+   },
+   "gov_ids": [
+    "lh"
+   ]
+  },
+  {
+   "id": "grown-folks-entertainment",
+   "name": "Grown Folks Entertainment",
+   "aliases": [
+    "Grown Folks Entertainment"
+   ],
+   "keys": [
+    "grownfolksentertainment"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "grown-folks-entertainment-promotions",
+   "name": "Grown Folks Entertainment Promotions, LLC",
+   "aliases": [
+    "Grown Folks Entertainment Promotions, LLC"
+   ],
+   "keys": [
+    "grownfolksentertainmentpromotions"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "gsc-systems",
+   "name": "GSC Systems",
+   "aliases": [
+    "GSC Systems"
+   ],
+   "keys": [
+    "gscsystems"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "mb_cdc"
+   ]
+  },
+  {
+   "id": "gts-entertainment-group",
+   "name": "GTS Entertainment Group, Inc",
+   "aliases": [
+    "GTS Entertainment Group, Inc"
+   ],
+   "keys": [
+    "gtsentertainmentgroup"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "gulf-coast-children-s-advocacy-center",
+   "name": "Gulf Coast Children's Advocacy Center, Inc",
+   "aliases": [
+    "Gulf Coast Children's Advocacy Center, Inc"
+   ],
+   "keys": [
+    "gulfcoastchildrensadvocacycenter"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "gulf-coast-utility-construction",
+   "name": "Gulf Coast Utility Construction",
+   "aliases": [
+    "Gulf Coast Utility Construction"
+   ],
+   "keys": [
+    "gulfcoastutilityconstruction"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "pc"
+   ]
+  },
+  {
+   "id": "gulf-coast-utility-contractors",
+   "name": "Gulf Coast Utility Contractors, LLC",
+   "aliases": [
+    "GULF COAST UTIL",
+    "Gulf Coast Utility Contractor, LLC (GCUC)",
+    "Gulf Coast Utility Contractors",
+    "Gulf Coast Utility Contractors (GCUC)",
+    "Gulf Coast Utility Contractors, LLC",
+    "Gulf Coast Utility Contractors, LLC (GCUC)"
+   ],
+   "keys": [
+    "gulfcoastutil",
+    "gulfcoastutilitycontractor",
+    "gulfcoastutilitycontractors"
+   ],
+   "records": {
+    "contract": 8,
+    "change_order": 6,
+    "emergency": 1,
+    "register": 2,
+    "cra": 1
+   },
+   "gov_ids": [
+    "county",
+    "lh",
+    "mb",
+    "pc",
+    "pcb"
+   ],
+   "merge_evidence": "Agendas add \"(GCUC)\" or drop the plural; \"GULF COAST UTIL\" is the Lynn Haven warrant list cut at 15 characters."
+  },
+  {
+   "id": "gypsy-belle-photo-bus",
+   "name": "Gypsy Belle Photo Bus, LLC",
+   "aliases": [
+    "Gypsy Belle Photo Bus, LLC"
+   ],
+   "keys": [
+    "gypsybellephotobus"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "h-a-contracting",
+   "name": "H.A. Contracting Corp.",
+   "aliases": [
+    "H.A. Contracting Corp."
+   ],
+   "keys": [
+    "hacontracting"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "pcb"
+   ]
+  },
+  {
+   "id": "h-g-harders-and-sons",
+   "name": "H.G. Harders & Sons, Inc.",
+   "aliases": [
+    "H.G. Harders & Sons",
+    "H.G. Harders & Sons, Inc.",
+    "H.G. Harders and Sons, Inc.",
+    "HG Harder's and Son, Inc."
+   ],
+   "keys": [
+    "hghardersons",
+    "hghardersson",
+    "hgharderssons"
+   ],
+   "records": {
+    "contract": 3
+   },
+   "gov_ids": [
+    "county",
+    "mb"
+   ],
+   "merge_evidence": "Apostrophe and plural variants of the same contractor."
+  },
+  {
+   "id": "hagerty-consulting",
+   "name": "Hagerty Consulting",
+   "aliases": [
+    "Hagerty Consulting"
+   ],
+   "keys": [
+    "hagertyconsulting"
+   ],
+   "records": {
+    "contract": 2,
+    "change_order": 2
+   },
+   "gov_ids": [
+    "pc"
+   ]
+  },
+  {
+   "id": "halff-associates",
+   "name": "Halff Associates, Inc.",
+   "aliases": [
+    "HALFF Associates, Inc.",
+    "Halff (Halff Engineering / Halff Associates)",
+    "Halff Associates",
+    "Halff Associates, Inc."
+   ],
+   "keys": [
+    "halff",
+    "halffassociates"
+   ],
+   "records": {
+    "contract": 8
+   },
+   "gov_ids": [
+    "county",
+    "pc"
+   ],
+   "merge_evidence": "Panama City's agenda names \"Halff (Halff Engineering / Halff Associates)\"."
+  },
+  {
+   "id": "hall-contracting-and-construction",
+   "name": "Hall Contracting and Construction, Inc.",
+   "aliases": [
+    "Hall Contracting & Construction, Inc.",
+    "Hall Contracting and Construction, Inc."
+   ],
+   "keys": [
+    "hallcontractingconstruction"
+   ],
+   "records": {
+    "contract": 2,
+    "register": 1
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "hancock-bank",
+   "name": "HANCOCK BANK",
+   "aliases": [
+    "HANCOCK BANK"
+   ],
+   "keys": [
+    "hancockbank"
+   ],
+   "records": {
+    "register": 1
+   },
+   "gov_ids": [
+    "lh"
+   ]
+  },
+  {
+   "id": "hancock-investments",
+   "name": "Hancock Investments",
+   "aliases": [
+    "Hancock Investments"
+   ],
+   "keys": [
+    "hancockinvestments"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "hand-arendall-harrison-sale",
+   "name": "Hand Arendall Harrison Sale, LLC",
+   "aliases": [
+    "Hand Arendall Harrison Sale, LLC"
+   ],
+   "keys": [
+    "handarendallharrisonsale"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "harris-business-machines",
+   "name": "Harris Business Machines",
+   "aliases": [
+    "Harris Business Machines"
+   ],
+   "keys": [
+    "harrisbusinessmachines"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "harrison-s-kitchen-and-bar",
+   "name": "Harrison's Kitchen & Bar",
+   "aliases": [
+    "Harrison's Kitchen & Bar"
+   ],
+   "keys": [
+    "harrisonskitchenbar"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "heartland-rescue-ranch",
+   "name": "Heartland Rescue Ranch, Inc",
+   "aliases": [
+    "Heartland Rescue Ranch, Inc"
+   ],
+   "keys": [
+    "heartlandrescueranch"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "helms-briscoe-performance-group",
+   "name": "HELMS BRISCOE PERFORMANCE GROUP INC",
+   "aliases": [
+    "HELMS BRISCOE PERFORMANCE GROUP INC"
+   ],
+   "keys": [
+    "helmsbriscoeperformancegroup"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "himx-productions",
+   "name": "HIMX Productions",
+   "aliases": [
+    "HIMX Productions"
+   ],
+   "keys": [
+    "himxproductions"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "historic-st-andrews-waterfront-partnership",
+   "name": "Historic St. Andrews Waterfront Partnership",
+   "aliases": [
+    "Historic St. Andrews Waterfront Partnership"
+   ],
+   "keys": [
+    "historicstandrewswaterfrontpartnership"
+   ],
+   "records": {
+    "tdc": 1,
+    "cra": 2
+   },
+   "gov_ids": [
+    "destination_pc",
+    "pc"
+   ]
+  },
+  {
+   "id": "hmx-productions",
+   "name": "HMX Productions, LLC",
+   "aliases": [
+    "HMX Productions",
+    "HMX Productions, LLC"
+   ],
+   "keys": [
+    "hmxproductions"
+   ],
+   "records": {
+    "tdc": 2
+   },
+   "gov_ids": [
+    "destination_pc",
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "home-free-touring",
+   "name": "Home Free Touring, LLC",
+   "aliases": [
+    "Home Free Touring, LLC"
+   ],
+   "keys": [
+    "homefreetouring"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "hootsuite",
+   "name": "Hootsuite Inc",
+   "aliases": [
+    "Hootsuite Inc"
+   ],
+   "keys": [
+    "hootsuite"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "mb_cdc"
+   ]
+  },
+  {
+   "id": "hopper",
+   "name": "Hopper (USA) Inc",
+   "aliases": [
+    "Hopper (USA) Inc"
+   ],
+   "keys": [
+    "hopper"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "house-of-henry",
+   "name": "House of Henry",
+   "aliases": [
+    "House of Henry"
+   ],
+   "keys": [
+    "houseofhenry"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "houston-freightliner",
+   "name": "Houston Freightliner",
+   "aliases": [
+    "Houston Freightliner"
+   ],
+   "keys": [
+    "houstonfreightliner"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "pc"
+   ]
+  },
+  {
+   "id": "hr-green",
+   "name": "HR Green, Inc.",
+   "aliases": [
+    "HR Green, Inc."
+   ],
+   "keys": [
+    "hrgreen"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "pcb"
+   ]
+  },
+  {
+   "id": "human-performance-consulting",
+   "name": "Human Performance Consulting, LLC",
+   "aliases": [
+    "Human Performance Consulting, LLC"
+   ],
+   "keys": [
+    "humanperformanceconsulting"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "pcb"
+   ]
+  },
+  {
+   "id": "hunter-apparatus",
+   "name": "Hunter Apparatus",
+   "aliases": [
+    "Hunter Apparatus"
+   ],
+   "keys": [
+    "hunterapparatus"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "hutt-insurance-agency",
+   "name": "Hutt Insurance Agency, Inc",
+   "aliases": [
+    "Hutt Insurance Agency, Inc"
+   ],
+   "keys": [
+    "huttinsuranceagency"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "hydra-service",
+   "name": "Hydra Service(s), Inc.",
+   "aliases": [
+    "Hydra Service",
+    "Hydra Service(s), Inc.",
+    "Hydra Services",
+    "Hydra Services Inc."
+   ],
+   "keys": [
+    "hydraservice",
+    "hydraservices"
+   ],
+   "records": {
+    "contract": 3
+   },
+   "gov_ids": [
+    "county",
+    "pc"
+   ],
+   "merge_evidence": "Same pump-station firm spelled with and without the final \"s\" in Panama City and county agendas."
+  },
+  {
+   "id": "ideal-development-concepts",
+   "name": "Ideal Development Concepts, LLC",
+   "aliases": [
+    "Ideal Development Concepts, LLC"
+   ],
+   "keys": [
+    "idealdevelopmentconcepts"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "pcb"
+   ]
+  },
+  {
+   "id": "identi-d",
+   "name": "Identi-D, LLC",
+   "aliases": [
+    "Identi-D, LLC"
+   ],
+   "keys": [
+    "identid"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "idss-global",
+   "name": "iDSS Global, LLC",
+   "aliases": [
+    "iDSS Global, LLC"
+   ],
+   "keys": [
+    "idssglobal"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "iheart-media",
+   "name": "iHeart Media",
+   "aliases": [
+    "iHeart Media",
+    "iHeartMedia"
+   ],
+   "keys": [
+    "iheartmedia"
+   ],
+   "records": {
+    "tdc": 2
+   },
+   "gov_ids": [
+    "destination_pc",
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "imageworks-c317",
+   "name": "IMAGEWORKS C317",
+   "aliases": [
+    "IMAGEWORKS C317"
+   ],
+   "keys": [
+    "imageworksc317"
+   ],
+   "records": {
+    "register": 1
+   },
+   "gov_ids": [
+    "lh"
+   ]
+  },
+  {
+   "id": "imageworks-commercial-interiors",
+   "name": "Imageworks Commercial Interiors",
+   "aliases": [
+    "Imageworks Commercial Interiors"
+   ],
+   "keys": [
+    "imageworkscommercialinteriors"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "incremental-development-alliance",
+   "name": "Incremental Development Alliance",
+   "aliases": [
+    "Incremental Development Alliance",
+    "Incremental Development Alliance (consultant)"
+   ],
+   "keys": [
+    "incrementaldevelopmentalliance"
+   ],
+   "records": {
+    "cra": 1
+   },
+   "gov_ids": [
+    "pc"
+   ]
+  },
+  {
+   "id": "indigital",
+   "name": "INdigital, Inc. (spelled \"Inditigal\" in the recommendation)",
+   "aliases": [
+    "INdigital, Inc. (spelled \"Inditigal\" in the recommendation)"
+   ],
+   "keys": [
+    "indigital"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "infrastructure-consulting-and-engineering",
+   "name": "Infrastructure Consulting & Engineering, PLLC",
+   "aliases": [
+    "Infrastructure Consulting & Engineering, PLLC"
+   ],
+   "keys": [
+    "infrastructureconsultingengineering"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "infrastructure-solution-services",
+   "name": "Infrastructure Solution Services, Inc. (ISS)",
+   "aliases": [
+    "Infrastructure Solution Services, Inc.",
+    "Infrastructure Solution Services, Inc. (ISS)"
+   ],
+   "keys": [
+    "infrastructuresolutionservices"
+   ],
+   "records": {
+    "contract": 2
+   },
+   "gov_ids": [
+    "county",
+    "pcb"
+   ]
+  },
+  {
+   "id": "ingram-signalization",
+   "name": "Ingram Signalization, Inc.",
+   "aliases": [
+    "Ingram Signalization, Inc."
+   ],
+   "keys": [
+    "ingramsignalization"
+   ],
+   "records": {
+    "contract": 1,
+    "register": 3
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "ink-trax",
+   "name": "Ink Trax (Old Coke Building)",
+   "aliases": [
+    "Ink Trax (Old Coke Building)"
+   ],
+   "keys": [
+    "inktrax"
+   ],
+   "records": {
+    "cra": 1
+   },
+   "gov_ids": [
+    "pc"
+   ]
+  },
+  {
+   "id": "inland-construction-and-engineering",
+   "name": "Inland Construction and Engineering, Inc.",
+   "aliases": [
+    "Inland Construction",
+    "Inland Construction & Engineering (bid awarded May 28, 2024)",
+    "Inland Construction and Engineering",
+    "Inland Construction and Engineering, Inc."
+   ],
+   "keys": [
+    "inlandconstruction",
+    "inlandconstructionengineering"
+   ],
+   "records": {
+    "contract": 4,
+    "cra": 1
+   },
+   "gov_ids": [
+    "county",
+    "pc"
+   ],
+   "merge_evidence": "Panama City agendas use both the full name and \"Inland Construction\"; the CRA ledger names \"Inland Construction & Engineering\" for the Millville park bid."
+  },
+  {
+   "id": "inliner-solutions",
+   "name": "Inliner Solutions",
+   "aliases": [
+    "Inliner Solutions"
+   ],
+   "keys": [
+    "inlinersolutions"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "interior-contract-services",
+   "name": "Interior Contract Services",
+   "aliases": [
+    "Interior Contract Services"
+   ],
+   "keys": [
+    "interiorcontractservices"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "isu-via-blue-cross-and-blue-shield",
+   "name": "ISU via Blue Cross and Blue Shield of Florida, Inc.",
+   "aliases": [
+    "ISU via Blue Cross and Blue Shield of Florida, Inc."
+   ],
+   "keys": [
+    "isuviabluecrossblueshield"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "pcb"
+   ]
+  },
+  {
+   "id": "iti-digital",
+   "name": "ITI Digital, LLC",
+   "aliases": [
+    "ITI Digital, LLC"
+   ],
+   "keys": [
+    "itidigital"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "j-v-gander-distributors",
+   "name": "J.V. Gander Distributors Inc.",
+   "aliases": [
+    "J.V. Gander Distributors Inc."
+   ],
+   "keys": [
+    "jvganderdistributors"
+   ],
+   "records": {
+    "register": 3
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "jamie-lee-gulf-coast-warriors-basketball",
+   "name": "Jamie Lee - Gulf Coast Warriors Basketball",
+   "aliases": [
+    "Jamie Lee - Gulf Coast Warriors Basketball"
+   ],
+   "keys": [
+    "jamieleegulfcoastwarriorsbasketball"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "jani-s-ceramics",
+   "name": "Jani's Ceramics",
+   "aliases": [
+    "Jani's Ceramics"
+   ],
+   "keys": [
+    "janisceramics"
+   ],
+   "records": {
+    "cra": 1
+   },
+   "gov_ids": [
+    "pc"
+   ]
+  },
+  {
+   "id": "jbj-productions",
+   "name": "JBJ Productions, Inc",
+   "aliases": [
+    "JBJ Productions",
+    "JBJ Productions, Inc"
+   ],
+   "keys": [
+    "jbjproductions"
+   ],
+   "records": {
+    "tdc": 2
+   },
+   "gov_ids": [
+    "destination_pc",
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "jcg-companies",
+   "name": "JCG Companies. LLC",
+   "aliases": [
+    "JCG Companies. LLC"
+   ],
+   "keys": [
+    "jcgcompanies"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "jdf-rvoc-tr",
+   "name": "JDF RVOC TR OF",
+   "aliases": [
+    "JDF RVOC TR OF"
+   ],
+   "keys": [
+    "jdfrvoctr"
+   ],
+   "records": {
+    "register": 1
+   },
+   "gov_ids": [
+    "lh"
+   ]
+  },
+  {
+   "id": "jerry-pate-turf-and-irrigation",
+   "name": "Jerry Pate Turf and Irrigation",
+   "aliases": [
+    "Jerry Pate Turf and Irrigation"
+   ],
+   "keys": [
+    "jerrypateturfirrigation"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "jet-vac-equipment",
+   "name": "Jet-Vac Equipment Company, LLC",
+   "aliases": [
+    "Jet-Vac Equipment Company, LLC"
+   ],
+   "keys": [
+    "jetvacequipment"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "lh"
+   ]
+  },
+  {
+   "id": "john-hancock",
+   "name": "John Hancock",
+   "aliases": [
+    "John Hancock"
+   ],
+   "keys": [
+    "johnhancock"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "js-and-s-water-holdings",
+   "name": "JS&S WATER HOLDINGS INC",
+   "aliases": [
+    "JS&S WATER HOLDINGS INC"
+   ],
+   "keys": [
+    "jsswaterholdings"
+   ],
+   "records": {
+    "register": 1
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "jsc-systems",
+   "name": "JSC Systems, Inc",
+   "aliases": [
+    "JSC Systems, Inc"
+   ],
+   "keys": [
+    "jscsystems"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "jun-group",
+   "name": "Jun Group",
+   "aliases": [
+    "Jun Group"
+   ],
+   "keys": [
+    "jungroup"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "kalkomey-enterprises",
+   "name": "Kalkomey Enterprises LLC",
+   "aliases": [
+    "Kalkomey Enterprises LLC"
+   ],
+   "keys": [
+    "kalkomeyenterprises"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "kayak-software",
+   "name": "Kayak Software",
+   "aliases": [
+    "Kayak Software"
+   ],
+   "keys": [
+    "kayaksoftware"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "kemira-water-solutions",
+   "name": "Kemira Water Solutions, Inc.",
+   "aliases": [
+    "Kemira Water Solutions, Inc."
+   ],
+   "keys": [
+    "kemirawatersolutions"
+   ],
+   "records": {
+    "register": 2
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "kenilworth-media",
+   "name": "Kenilworth Media Inc",
+   "aliases": [
+    "Kenilworth Media Inc"
+   ],
+   "keys": [
+    "kenilworthmedia"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "kennon-accounting-solutions",
+   "name": "Kennon Accounting Solutions, Inc",
+   "aliases": [
+    "Kennon Accounting Solutions, Inc"
+   ],
+   "keys": [
+    "kennonaccountingsolutions"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "key-data",
+   "name": "Key Data",
+   "aliases": [
+    "Key Data"
+   ],
+   "keys": [
+    "keydata"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "key-data-dashboard",
+   "name": "Key Data Dashboard, Inc",
+   "aliases": [
+    "Key Data Dashboard, Inc"
+   ],
+   "keys": [
+    "keydatadashboard"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "keystone-field-services",
+   "name": "Keystone Field Services",
+   "aliases": [
+    "Keystone Field Services"
+   ],
+   "keys": [
+    "keystonefieldservices"
+   ],
+   "records": {
+    "cra": 1
+   },
+   "gov_ids": [
+    "pcb"
+   ]
+  },
+  {
+   "id": "killian-construction",
+   "name": "Killian Construction",
+   "aliases": [
+    "Killian Construction"
+   ],
+   "keys": [
+    "killianconstruction"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "kimley-horn-and-associates",
+   "name": "Kimley-Horn and Associates, Inc.",
+   "aliases": [
+    "Kimley-Horn and Associates, Inc."
+   ],
+   "keys": [
+    "kimleyhornassociates"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "kk-storm",
+   "name": "KK Storm",
+   "aliases": [
+    "KK Storm"
+   ],
+   "keys": [
+    "kkstorm"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "mb"
+   ]
+  },
+  {
+   "id": "klw-enterprises",
+   "name": "KLW Enterprises",
+   "aliases": [
+    "KLW Enterprises"
+   ],
+   "keys": [
+    "klwenterprises"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "kody-foundation",
+   "name": "Kody Foundation, Inc",
+   "aliases": [
+    "Kody Foundation, Inc"
+   ],
+   "keys": [
+    "kodyfoundation"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "krewe-of-st-andrews",
+   "name": "Krewe of St. Andrews Inc.",
+   "aliases": [
+    "Krewe of St. Andrews Inc."
+   ],
+   "keys": [
+    "kreweofstandrews"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "l-and-r-contracting",
+   "name": "L&R Contracting",
+   "aliases": [
+    "L&R Contracting"
+   ],
+   "keys": [
+    "lrcontracting"
+   ],
+   "records": {
+    "cra": 1
+   },
+   "gov_ids": [
+    "pcb"
+   ]
+  },
+  {
+   "id": "lady-loran",
+   "name": "Lady Loran, LLC",
+   "aliases": [
+    "Lady Loran, LLC"
+   ],
+   "keys": [
+    "ladyloran"
+   ],
+   "records": {
+    "cra": 1
+   },
+   "gov_ids": [
+    "pc"
+   ]
+  },
+  {
+   "id": "lake-merial",
+   "name": "Lake Merial, Inc.",
+   "aliases": [
+    "Lake Merial, Inc."
+   ],
+   "keys": [
+    "lakemerial"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "lake-ware-apartments",
+   "name": "Lake Ware Apartments",
+   "aliases": [
+    "Lake Ware Apartments"
+   ],
+   "keys": [
+    "lakewareapartments"
+   ],
+   "records": {
+    "cra": 1
+   },
+   "gov_ids": [
+    "pc"
+   ]
+  },
+  {
+   "id": "lamar-companies",
+   "name": "Lamar Companies",
+   "aliases": [
+    "Lamar Companies"
+   ],
+   "keys": [
+    "lamarcompanies"
+   ],
+   "records": {
+    "tdc": 2
+   },
+   "gov_ids": [
+    "destination_pc",
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "lane-s-outdoor-equipment",
+   "name": "Lane's Outdoor Equipment Inc",
+   "aliases": [
+    "Lane's Outdoor Equipment Inc"
+   ],
+   "keys": [
+    "lanesoutdoorequipment"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "laurie-rowe-and",
+   "name": "Laurie Rowe & Company",
+   "aliases": [
+    "Laurie Rowe & Company"
+   ],
+   "keys": [
+    "laurierowe"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "lawnmasters-of-panama-city",
+   "name": "Lawnmasters of Panama City LLC",
+   "aliases": [
+    "Lawnmasters of Panama City LLC"
+   ],
+   "keys": [
+    "lawnmastersofpanamacity"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "lawnscapes",
+   "name": "Lawnscapes, Inc",
+   "aliases": [
+    "Lawnscapes, Inc"
+   ],
+   "keys": [
+    "lawnscapes"
+   ],
+   "records": {
+    "tdc": 2
+   },
+   "gov_ids": [
+    "destination_pc",
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "lawnscapes-of-bay-county",
+   "name": "Lawnscapes of Bay County, Inc.",
+   "aliases": [
+    "Lawnscapes of Bay County, Inc."
+   ],
+   "keys": [
+    "lawnscapesofbaycounty"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "lh"
+   ]
+  },
+  {
+   "id": "layla-s-gelato",
+   "name": "Layla's Gelato",
+   "aliases": [
+    "Layla's Gelato"
+   ],
+   "keys": [
+    "laylasgelato"
+   ],
+   "records": {
+    "cra": 1
+   },
+   "gov_ids": [
+    "pc"
+   ]
+  },
+  {
+   "id": "leake-landscapes",
+   "name": "Leake Landscapes",
+   "aliases": [
+    "Leake Landscapes"
+   ],
+   "keys": [
+    "leakelandscapes"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "pc"
+   ]
+  },
+  {
+   "id": "leasing-2",
+   "name": "Leasing 2, Inc.",
+   "aliases": [
+    "Leasing 2, Inc."
+   ],
+   "keys": [
+    "leasing2"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "pc"
+   ]
+  },
+  {
+   "id": "legacy-water-group",
+   "name": "Legacy Water Group, LLC",
+   "aliases": [
+    "Legacy Water Group, LLC"
+   ],
+   "keys": [
+    "legacywatergroup"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "pc"
+   ]
+  },
+  {
+   "id": "leland-kracher-enterprises",
+   "name": "LELAND KRACHER ENTERPRISES LLC",
+   "aliases": [
+    "LELAND KRACHER ENTERPRISES LLC"
+   ],
+   "keys": [
+    "lelandkracherenterprises"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "lieb-management",
+   "name": "Lieb Management",
+   "aliases": [
+    "Lieb Management"
+   ],
+   "keys": [
+    "liebmanagement"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "life-management-center-of-northwest",
+   "name": "Life Management Center of Northwest FL, Inc",
+   "aliases": [
+    "Life Management Center of Northwest FL, Inc"
+   ],
+   "keys": [
+    "lifemanagementcenterofnorthwest"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "linkedin",
+   "name": "Linkedin Corp",
+   "aliases": [
+    "Linkedin Corp"
+   ],
+   "keys": [
+    "linkedin"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "local-logistics-nwfl",
+   "name": "Local Logistics NWFL, LLC",
+   "aliases": [
+    "Local Logistics NWFL, LLC"
+   ],
+   "keys": [
+    "locallogisticsnwfl"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "logo-print-and-promo",
+   "name": "Logo Print & Promo",
+   "aliases": [
+    "Logo Print & Promo"
+   ],
+   "keys": [
+    "logoprintpromo"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "london-tourism-publications",
+   "name": "London Tourism Publications",
+   "aliases": [
+    "London Tourism Publications"
+   ],
+   "keys": [
+    "londontourismpublications"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "mb_cdc"
+   ]
+  },
+  {
+   "id": "lose-design",
+   "name": "Lose Design",
+   "aliases": [
+    "Lose Design"
+   ],
+   "keys": [
+    "losedesign"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "lou-hammond-group",
+   "name": "Lou Hammond Group",
+   "aliases": [
+    "Lou Hammond Group"
+   ],
+   "keys": [
+    "louhammondgroup"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "lsc-communications-ilc",
+   "name": "LSC Communications Ilc",
+   "aliases": [
+    "LSC Communications Ilc"
+   ],
+   "keys": [
+    "lsccommunicationsilc"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "luckie-and",
+   "name": "Luckie & Company, LLC",
+   "aliases": [
+    "Luckie & Company, LLC"
+   ],
+   "keys": [
+    "luckie"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "m-gay-constructors",
+   "name": "M. Gay Constructors, Inc.",
+   "aliases": [
+    "M. Gay Constructors, Inc."
+   ],
+   "keys": [
+    "mgayconstructors"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "pcb"
+   ]
+  },
+  {
+   "id": "madden-media",
+   "name": "Madden Media",
+   "aliases": [
+    "Madden Media"
+   ],
+   "keys": [
+    "maddenmedia"
+   ],
+   "records": {
+    "tdc": 2
+   },
+   "gov_ids": [
+    "mb_cdc",
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "magic-broadcasting",
+   "name": "Magic Broadcasting",
+   "aliases": [
+    "Magic Broadcasting"
+   ],
+   "keys": [
+    "magicbroadcasting"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "magnum-engineering",
+   "name": "Magnum Engineering",
+   "aliases": [
+    "Magnum Engineering"
+   ],
+   "keys": [
+    "magnumengineering"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "pc"
+   ]
+  },
+  {
+   "id": "mainline-construction",
+   "name": "Mainline Construction, LLC",
+   "aliases": [
+    "Mainline Construction",
+    "Mainline Construction LLC",
+    "Mainline Construction, Inc.",
+    "Mainline Construction, LLC"
+   ],
+   "keys": [
+    "mainlineconstruction"
+   ],
+   "records": {
+    "contract": 11,
+    "change_order": 4
+   },
+   "gov_ids": [
+    "mb",
+    "pc",
+    "pcb"
+   ]
+  },
+  {
+   "id": "mainstreet-buildings-of-pc",
+   "name": "Mainstreet Buildings of PC, LLC",
+   "aliases": [
+    "Mainstreet Buildings of PC, LLC"
+   ],
+   "keys": [
+    "mainstreetbuildingsofpc"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "make-a-wish",
+   "name": "Make A Wish",
+   "aliases": [
+    "Make A Wish"
+   ],
+   "keys": [
+    "makeawish"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "marsh-usa",
+   "name": "Marsh USA LLC",
+   "aliases": [
+    "Marsh USA LLC"
+   ],
+   "keys": [
+    "marshusa"
+   ],
+   "records": {
+    "register": 3
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "marshall-brothers-construction-and-engineering",
+   "name": "Marshall Brothers Construction & Engineering, Inc.",
+   "aliases": [
+    "Marshall Bothers",
+    "Marshall Brothers",
+    "Marshall Brothers Construction",
+    "Marshall Brothers Construction & Engineering",
+    "Marshall Brothers Construction & Engineering, Inc.",
+    "Marshall Brothers Construction and Engineering Inc.",
+    "Marshall Brothers Construction and Engineering, Inc.",
+    "Marshall Brothers, Inc."
+   ],
+   "keys": [
+    "marshallbrothers",
+    "marshallbrothersconstruction",
+    "marshallbrothersconstructionengineering"
+   ],
+   "records": {
+    "contract": 13,
+    "change_order": 2,
+    "emergency": 4,
+    "register": 2
+   },
+   "gov_ids": [
+    "county",
+    "lh",
+    "pc"
+   ],
+   "merge_evidence": "Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing."
+  },
+  {
+   "id": "mccall-bennett",
+   "name": "McCall-Bennett Co",
+   "aliases": [
+    "McCall-Bennett Co"
+   ],
+   "keys": [
+    "mccallbennett"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "mci-a-verizon",
+   "name": "MCI a Verizon Company",
+   "aliases": [
+    "MCI a Verizon Company"
+   ],
+   "keys": [
+    "mciaverizon"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "mb_cdc"
+   ]
+  },
+  {
+   "id": "mckim-and-creed",
+   "name": "McKim & Creed",
+   "aliases": [
+    "McKim & Creed"
+   ],
+   "keys": [
+    "mckimcreed"
+   ],
+   "records": {
+    "cra": 1
+   },
+   "gov_ids": [
+    "pcb"
+   ]
+  },
+  {
+   "id": "mcla-verizon",
+   "name": "MCla Verizon Company",
+   "aliases": [
+    "MCla Verizon Company"
+   ],
+   "keys": [
+    "mclaverizon"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "mb_cdc"
+   ]
+  },
+  {
+   "id": "mct-a-verizon",
+   "name": "MCt a Verizon Company",
+   "aliases": [
+    "MCt a Verizon Company"
+   ],
+   "keys": [
+    "mctaverizon"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "mb_cdc"
+   ]
+  },
+  {
+   "id": "meredith",
+   "name": "Meredith",
+   "aliases": [
+    "Meredith"
+   ],
+   "keys": [
+    "meredith"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "meta-platforms",
+   "name": "Meta Platforms, Inc",
+   "aliases": [
+    "Meta Platforms, Inc"
+   ],
+   "keys": [
+    "metaplatforms"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "metric-engineering",
+   "name": "Metric Engineering, Inc.",
+   "aliases": [
+    "Metric Engineering",
+    "Metric Engineering, Inc."
+   ],
+   "keys": [
+    "metricengineering"
+   ],
+   "records": {
+    "contract": 2,
+    "register": 1
+   },
+   "gov_ids": [
+    "county",
+    "pc"
+   ]
+  },
+  {
+   "id": "metro-power",
+   "name": "Metro Power, Inc.",
+   "aliases": [
+    "Metro Power, Inc."
+   ],
+   "keys": [
+    "metropower"
+   ],
+   "records": {
+    "cra": 1
+   },
+   "gov_ids": [
+    "pcb"
+   ]
+  },
+  {
+   "id": "mexico-beach-artificial-reef-association",
+   "name": "Mexico Beach Artificial Reef Association",
+   "aliases": [
+    "Mexico Beach Artificial Reef Association"
+   ],
+   "keys": [
+    "mexicobeachartificialreefassociation"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "mb_cdc"
+   ]
+  },
+  {
+   "id": "mexico-beach-gollywhopper",
+   "name": "Mexico Beach Gollywhopper, LLC",
+   "aliases": [
+    "Mexico Beach Gollywhopper, LLC"
+   ],
+   "keys": [
+    "mexicobeachgollywhopper"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "mb_cdc"
+   ]
+  },
+  {
+   "id": "mexico-beach-sweets",
+   "name": "Mexico Beach Sweets",
+   "aliases": [
+    "Mexico Beach Sweets"
+   ],
+   "keys": [
+    "mexicobeachsweets"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "mb_cdc"
+   ]
+  },
+  {
+   "id": "miles-partnership",
+   "name": "Miles Partnership, LLLP",
+   "aliases": [
+    "Miles Partnership, LLLP"
+   ],
+   "keys": [
+    "milespartnership"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "morgenstern-phifer-messina",
+   "name": "Morgenstern Phifer Messina",
+   "aliases": [
+    "Morgenstern Phifer Messina"
+   ],
+   "keys": [
+    "morgensternphifermessina"
+   ],
+   "records": {
+    "cra": 1
+   },
+   "gov_ids": [
+    "pcb"
+   ]
+  },
+  {
+   "id": "motorola-solutions",
+   "name": "Motorola Solutions",
+   "aliases": [
+    "Motorola Solutions"
+   ],
+   "keys": [
+    "motorolasolutions"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "pc"
+   ]
+  },
+  {
+   "id": "mott-macdonald",
+   "name": "Mott MacDonald Florida, LLC",
+   "aliases": [
+    "Mott MacDonald",
+    "Mott MacDonald Florida LLC",
+    "Mott MacDonald Florida, LLC"
+   ],
+   "keys": [
+    "mottmacdonald"
+   ],
+   "records": {
+    "contract": 10,
+    "change_order": 1
+   },
+   "gov_ids": [
+    "county",
+    "lh",
+    "pc",
+    "pcb"
+   ]
+  },
+  {
+   "id": "mott-macdonald-consultants",
+   "name": "Mott MacDonald Consultants, Inc.",
+   "aliases": [
+    "Mott MacDonald Consultants, Inc."
+   ],
+   "keys": [
+    "mottmacdonaldconsultants"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "mr-fence",
+   "name": "Mr. Fence of Florida, Inc.",
+   "aliases": [
+    "Mr Fence",
+    "Mr. Fence of Florida, Inc",
+    "Mr. Fence of Florida, Inc."
+   ],
+   "keys": [
+    "mrfence"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "pcb"
+   ]
+  },
+  {
+   "id": "mrd-associates",
+   "name": "MRD Associates, Inc.",
+   "aliases": [
+    "MRD Associates, Inc."
+   ],
+   "keys": [
+    "mrdassociates"
+   ],
+   "records": {
+    "change_order": 1
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "mwb",
+   "name": "MWB",
+   "aliases": [
+    "MWB"
+   ],
+   "keys": [
+    "mwb"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "mypanhandle-com",
+   "name": "mypanhandle.com",
+   "aliases": [
+    "mypanhandle.com"
+   ],
+   "keys": [
+    "mypanhandlecom"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "ncmc",
+   "name": "NCMC, LLC",
+   "aliases": [
+    "NCMC, LLC"
+   ],
+   "keys": [
+    "ncmc"
+   ],
+   "records": {
+    "contract": 3,
+    "register": 1
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "neel-schaffer",
+   "name": "Neel-Schaffer, Inc.",
+   "aliases": [
+    "Neel-Schaffer, Inc."
+   ],
+   "keys": [
+    "neelschaffer"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "new-line-skateparks",
+   "name": "New Line Skateparks FL, Inc.",
+   "aliases": [
+    "New Line Skateparks FL, Inc."
+   ],
+   "keys": [
+    "newlineskateparks"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "pcb"
+   ]
+  },
+  {
+   "id": "ngu-sports-lighting",
+   "name": "NGU Sports Lighting, LLC",
+   "aliases": [
+    "NGU Sports Lighting, LLC"
+   ],
+   "keys": [
+    "ngusportslighting"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "pcb"
+   ]
+  },
+  {
+   "id": "north-florida-professional-services",
+   "name": "North Florida Professional Services",
+   "aliases": [
+    "North Florida Professional Services"
+   ],
+   "keys": [
+    "northfloridaprofessionalservices"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "cw"
+   ]
+  },
+  {
+   "id": "northstar",
+   "name": "NorthStar",
+   "aliases": [
+    "NorthStar"
+   ],
+   "keys": [
+    "northstar"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "northstar-travel-media",
+   "name": "NorthStar Travel Media, LLC",
+   "aliases": [
+    "NorthStar Travel Media, LLC"
+   ],
+   "keys": [
+    "northstartravelmedia"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "northwest-fl-tourism-council",
+   "name": "Northwest Fl Tourism Council",
+   "aliases": [
+    "Northwest Fl Tourism Council"
+   ],
+   "keys": [
+    "northwestfltourismcouncil"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "northwest-florida-great-dane-rescue",
+   "name": "Northwest Florida Great Dane Rescue",
+   "aliases": [
+    "Northwest Florida Great Dane Rescue"
+   ],
+   "keys": [
+    "northwestfloridagreatdanerescue"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "odd-o-ts-entertainment",
+   "name": "ODD-o-Ts Entertainment LLC",
+   "aliases": [
+    "ODD-o-Ts Entertainment LLC"
+   ],
+   "keys": [
+    "oddotsentertainment"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "off-duty-management",
+   "name": "Off Duty Management",
+   "aliases": [
+    "Off Duty Management"
+   ],
+   "keys": [
+    "offdutymanagement"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "okaloosa-county-bocc",
+   "name": "Okaloosa County BOCC",
+   "aliases": [
+    "Okaloosa County BOCC"
+   ],
+   "keys": [
+    "okaloosacountybocc"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "on-the-go-oyster-and-loco-boils",
+   "name": "On The Go Oyster and Loco Boils",
+   "aliases": [
+    "On The Go Oyster and Loco Boils"
+   ],
+   "keys": [
+    "onthegooysterlocoboils"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "one80-intermediaries",
+   "name": "One80 Intermediaries, Inc.",
+   "aliases": [
+    "One80 Intermediaries, Inc."
+   ],
+   "keys": [
+    "one80intermediaries"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "pcb"
+   ]
+  },
+  {
+   "id": "orange-video",
+   "name": "Orange Video, LLC",
+   "aliases": [
+    "Orange Video, LLC"
+   ],
+   "keys": [
+    "orangevideo"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "otis-signature-service",
+   "name": "Otis Signature Service",
+   "aliases": [
+    "Otis Signature Service"
+   ],
+   "keys": [
+    "otissignatureservice"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "outdoor-aluminum",
+   "name": "Outdoor Aluminum, INC",
+   "aliases": [
+    "Outdoor Aluminum, INC"
+   ],
+   "keys": [
+    "outdooraluminum"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "overstreet-realty",
+   "name": "Overstreet Realty",
+   "aliases": [
+    "Overstreet Realty"
+   ],
+   "keys": [
+    "overstreetrealty"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "ovivo-usa",
+   "name": "Ovivo USA, LLC",
+   "aliases": [
+    "Ovivo USA LLC",
+    "Ovivo USA, LLC"
+   ],
+   "keys": [
+    "ovivousa"
+   ],
+   "records": {
+    "contract": 2
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "pacesetter-personnel-services",
+   "name": "Pacesetter Personnel Services",
+   "aliases": [
+    "Pacesetter Personnel Services"
+   ],
+   "keys": [
+    "pacesetterpersonnelservices"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "palm-beach-media-group",
+   "name": "Palm Beach Media Group",
+   "aliases": [
+    "Palm Beach Media Group"
+   ],
+   "keys": [
+    "palmbeachmediagroup"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "palmetto-hospitality-of-pcb",
+   "name": "Palmetto Hospitality of PCB, LLC",
+   "aliases": [
+    "Palmetto Hospitality of PCB, LLC"
+   ],
+   "keys": [
+    "palmettohospitalityofpcb"
+   ],
+   "records": {
+    "cra": 1
+   },
+   "gov_ids": [
+    "pcb"
+   ]
+  },
+  {
+   "id": "panache-tent-and-event",
+   "name": "Panache Tent & Event, Inc",
+   "aliases": [
+    "Panache Tent & Event, Inc",
+    "Panache Tent + Event"
+   ],
+   "keys": [
+    "panachetentevent"
+   ],
+   "records": {
+    "tdc": 2
+   },
+   "gov_ids": [
+    "mb_cdc",
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "panama-business-machines",
+   "name": "Panama Business Machines",
+   "aliases": [
+    "Panama Business Machines"
+   ],
+   "keys": [
+    "panamabusinessmachines"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "panama-city-a-cappella-chorus",
+   "name": "Panama City A Cappella Chorus, Inc",
+   "aliases": [
+    "Panama City A Cappella Chorus, Inc"
+   ],
+   "keys": [
+    "panamacityacappellachorus"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "panama-city-ballet",
+   "name": "Panama City Ballet, Inc",
+   "aliases": [
+    "Panama City Ballet, Inc"
+   ],
+   "keys": [
+    "panamacityballet"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "panama-city-beach-chamber",
+   "name": "Panama City Beach Chamber of",
+   "aliases": [
+    "Panama City Beach Chamber of"
+   ],
+   "keys": [
+    "panamacitybeachchamber"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "panama-city-beach-chamber-of-commerce",
+   "name": "Panama City Beach Chamber of Commerce",
+   "aliases": [
+    "Panama City Beach Chamber of Commerce"
+   ],
+   "keys": [
+    "panamacitybeachchamberofcommerce"
+   ],
+   "records": {
+    "tdc": 2
+   },
+   "gov_ids": [
+    "destination_pc",
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "panama-city-downtown-improvement-board",
+   "name": "Panama City Downtown Improvement Board, Inc",
+   "aliases": [
+    "Panama City Downtown Improvement Board, Inc"
+   ],
+   "keys": [
+    "panamacitydowntownimprovementboard"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "panama-city-lions-club",
+   "name": "Panama City Lions Club",
+   "aliases": [
+    "Panama City Lions Club"
+   ],
+   "keys": [
+    "panamacitylionsclub"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "panama-city-symphony-orchestra",
+   "name": "Panama City Symphony Orchestra",
+   "aliases": [
+    "Panama City Symphony Orchestra"
+   ],
+   "keys": [
+    "panamacitysymphonyorchestra"
+   ],
+   "records": {
+    "tdc": 2
+   },
+   "gov_ids": [
+    "destination_pc",
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "pandora-media",
+   "name": "Pandora Media, Inc",
+   "aliases": [
+    "Pandora Media, Inc"
+   ],
+   "keys": [
+    "pandoramedia"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "panhandle-engineering",
+   "name": "Panhandle Engineering, Inc.",
+   "aliases": [
+    "PANHANDLE ENGIN",
+    "PANHANDLE ENGINEERING",
+    "Panhandle Engineering",
+    "Panhandle Engineering Inc",
+    "Panhandle Engineering Inc.",
+    "Panhandle Engineering, Inc",
+    "Panhandle Engineering, Inc."
+   ],
+   "keys": [
+    "panhandleengin",
+    "panhandleengineering"
+   ],
+   "records": {
+    "contract": 10,
+    "register": 3
+   },
+   "gov_ids": [
+    "lh",
+    "pc"
+   ],
+   "merge_evidence": "\"PANHANDLE ENGIN\" is the Lynn Haven warrant list cut at 15 characters."
+  },
+  {
+   "id": "panhandle-landscape-solutions",
+   "name": "Panhandle Landscape Solutions, LLC",
+   "aliases": [
+    "Panhandle Landscape Solutions, LLC"
+   ],
+   "keys": [
+    "panhandlelandscapesolutions"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "pc"
+   ]
+  },
+  {
+   "id": "papa-joe-s-bayside",
+   "name": "Papa Joe's Bayside",
+   "aliases": [
+    "Papa Joe's Bayside"
+   ],
+   "keys": [
+    "papajoesbayside"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "patty-s-potties",
+   "name": "Patty's Potties",
+   "aliases": [
+    "Patty's Potties"
+   ],
+   "keys": [
+    "pattyspotties"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "pavement-technology",
+   "name": "Pavement Technology, Inc.",
+   "aliases": [
+    "Pavement Technology, Inc."
+   ],
+   "keys": [
+    "pavementtechnology"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "paychex",
+   "name": "Paychex",
+   "aliases": [
+    "Paychex"
+   ],
+   "keys": [
+    "paychex"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "paychex-dirdep-rcx",
+   "name": "Paychex DirDep-RCX",
+   "aliases": [
+    "Paychex DirDep-RCX"
+   ],
+   "keys": [
+    "paychexdirdeprcx"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "paychex-taxpay",
+   "name": "Paychex Taxpay",
+   "aliases": [
+    "Paychex Taxpay"
+   ],
+   "keys": [
+    "paychextaxpay"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "pbs-and-j",
+   "name": "PBS&J",
+   "aliases": [
+    "PBS&J"
+   ],
+   "keys": [
+    "pbsj"
+   ],
+   "records": {
+    "cra": 1
+   },
+   "gov_ids": [
+    "pcb"
+   ]
+  },
+  {
+   "id": "pcb-entertainment",
+   "name": "PCB Entertainment LLC",
+   "aliases": [
+    "PCB Entertainment LLC"
+   ],
+   "keys": [
+    "pcbentertainment"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "pcb-map",
+   "name": "PCB Map Company, Inc",
+   "aliases": [
+    "PCB Map Company, Inc"
+   ],
+   "keys": [
+    "pcbmap"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "pcbh",
+   "name": "PCBH",
+   "aliases": [
+    "PCBH"
+   ],
+   "keys": [
+    "pcbh"
+   ],
+   "records": {
+    "cra": 1
+   },
+   "gov_ids": [
+    "pcb"
+   ]
+  },
+  {
+   "id": "peoples-first-insurance-services",
+   "name": "Peoples First Insurance Services, LLC",
+   "aliases": [
+    "Peoples First Insurance Services, LLC"
+   ],
+   "keys": [
+    "peoplesfirstinsuranceservices"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "perfect-game",
+   "name": "Perfect Game inc",
+   "aliases": [
+    "Perfect Game inc"
+   ],
+   "keys": [
+    "perfectgame"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "perry-s-painting-and-pressure-washing",
+   "name": "Perry's Painting & Pressure Washing LLC",
+   "aliases": [
+    "Perry's Painting & Pressure Washing LLC"
+   ],
+   "keys": [
+    "perryspaintingpressurewashing"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "pg-environmental",
+   "name": "PG Environmental Florida, LLC",
+   "aliases": [
+    "PG Environmental",
+    "PG Environmental FL, LLC",
+    "PG Environmental Florida, LLC"
+   ],
+   "keys": [
+    "pgenvironmental"
+   ],
+   "records": {
+    "tdc": 2
+   },
+   "gov_ids": [
+    "destination_pc",
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "philadelphia-insurance-companies",
+   "name": "Philadelphia Insurance Companies",
+   "aliases": [
+    "Philadelphia Insurance Companies"
+   ],
+   "keys": [
+    "philadelphiainsurancecompanies"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "mb_cdc"
+   ]
+  },
+  {
+   "id": "phoenix-construction-services",
+   "name": "Phoenix Construction Services, Inc.",
+   "aliases": [
+    "PHOENIX CONSTRU",
+    "Phoenix Construction Services, Inc."
+   ],
+   "keys": [
+    "phoenixconstru",
+    "phoenixconstructionservices"
+   ],
+   "records": {
+    "contract": 1,
+    "change_order": 1,
+    "register": 2
+   },
+   "gov_ids": [
+    "county",
+    "lh"
+   ],
+   "merge_evidence": "\"PHOENIX CONSTRU\" is the Lynn Haven warrant list cut at 15 characters."
+  },
+  {
+   "id": "pier-park",
+   "name": "Pier Park",
+   "aliases": [
+    "Pier Park"
+   ],
+   "keys": [
+    "pierpark"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "pineapple-public-relations",
+   "name": "Pineapple Public Relations",
+   "aliases": [
+    "Pineapple Public Relations"
+   ],
+   "keys": [
+    "pineapplepublicrelations"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "piney-grove-nursery-and-landscaping",
+   "name": "Piney Grove Nursery and Landscaping, Inc.",
+   "aliases": [
+    "Piney Grove Nursery and Landscaping, Inc."
+   ],
+   "keys": [
+    "pineygrovenurserylandscaping"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "pc"
+   ]
+  },
+  {
+   "id": "pinfish-media",
+   "name": "Pinfish Media, LLC",
+   "aliases": [
+    "Pinfish Media, LLC"
+   ],
+   "keys": [
+    "pinfishmedia"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "pinterest",
+   "name": "Pinterest, Inc",
+   "aliases": [
+    "Pinterest, Inc"
+   ],
+   "keys": [
+    "pinterest"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "pitney-bowes-global-financial-services",
+   "name": "Pitney Bowes Global Financial Services",
+   "aliases": [
+    "Pitney Bowes Global Financial Services"
+   ],
+   "keys": [
+    "pitneybowesglobalfinancialservices"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "mb_cdc"
+   ]
+  },
+  {
+   "id": "placer-labs",
+   "name": "Placer Labs, Inc",
+   "aliases": [
+    "Placer Labs, Inc"
+   ],
+   "keys": [
+    "placerlabs"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "port-engr",
+   "name": "Port Engr LLC",
+   "aliases": [
+    "Port Engr LLC"
+   ],
+   "keys": [
+    "portengr"
+   ],
+   "records": {
+    "register": 1
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "ppm-consultants",
+   "name": "PPM Consultants, Inc.",
+   "aliases": [
+    "PPM Consultants, Inc."
+   ],
+   "keys": [
+    "ppmconsultants"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "pc"
+   ]
+  },
+  {
+   "id": "preferred-governmental-insurance-trust",
+   "name": "Preferred Governmental Insurance Trust (PGIT)",
+   "aliases": [
+    "Preferred Governmental Insurance Trust (PGIT)"
+   ],
+   "keys": [
+    "preferredgovernmentalinsurancetrust"
+   ],
+   "records": {
+    "contract": 2
+   },
+   "gov_ids": [
+    "pc"
+   ]
+  },
+  {
+   "id": "premium-bluecrossflorida",
+   "name": "PREMIUM BLUECROSSFLORIDA",
+   "aliases": [
+    "PREMIUM BLUECROSSFLORIDA"
+   ],
+   "keys": [
+    "premiumbluecrossflorida"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "priceline",
+   "name": "Priceline",
+   "aliases": [
+    "Priceline"
+   ],
+   "keys": [
+    "priceline"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "print-source",
+   "name": "Print Source",
+   "aliases": [
+    "Print Source"
+   ],
+   "keys": [
+    "printsource"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "professional-printers",
+   "name": "Professional Printers",
+   "aliases": [
+    "Professional Printers"
+   ],
+   "keys": [
+    "professionalprinters"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "property-innovations",
+   "name": "Property Innovations, Inc",
+   "aliases": [
+    "Property Innovations, Inc"
+   ],
+   "keys": [
+    "propertyinnovations"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "protech-svs-of-nw-fla",
+   "name": "ProTech Svs of NW Fla",
+   "aliases": [
+    "ProTech Svs of NW Fla"
+   ],
+   "keys": [
+    "protechsvsofnwfla"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "public-eye-soar",
+   "name": "Public Eye Soar, Inc",
+   "aliases": [
+    "Public Eye Soar, Inc"
+   ],
+   "keys": [
+    "publiceyesoar"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "public-eye-soar-festival",
+   "name": "Public Eye Soar Festival",
+   "aliases": [
+    "Public Eye Soar Festival"
+   ],
+   "keys": [
+    "publiceyesoarfestival"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "public-risk-mgm",
+   "name": "PUBLIC RISK MGM",
+   "aliases": [
+    "PUBLIC RISK MGM"
+   ],
+   "keys": [
+    "publicriskmgm"
+   ],
+   "records": {
+    "register": 3
+   },
+   "gov_ids": [
+    "lh"
+   ]
+  },
+  {
+   "id": "publicis-epsilon-collections-account",
+   "name": "Publicis Epsilon Collections Account",
+   "aliases": [
+    "Publicis Epsilon Collections Account"
+   ],
+   "keys": [
+    "publicisepsiloncollectionsaccount"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "publix-sports-park",
+   "name": "Publix Sports Park",
+   "aliases": [
+    "Publix Sports Park"
+   ],
+   "keys": [
+    "publixsportspark"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "purchase-power",
+   "name": "Purchase Power",
+   "aliases": [
+    "Purchase Power"
+   ],
+   "keys": [
+    "purchasepower"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "mb_cdc"
+   ]
+  },
+  {
+   "id": "purpose-brewed",
+   "name": "Purpose Brewed, LLC",
+   "aliases": [
+    "Purpose Brewed, LLC"
+   ],
+   "keys": [
+    "purposebrewed"
+   ],
+   "records": {
+    "cra": 1
+   },
+   "gov_ids": [
+    "pc"
+   ]
+  },
+  {
+   "id": "pyro-shows",
+   "name": "Pyro Shows, Inc",
+   "aliases": [
+    "Pyro Shows, Inc"
+   ],
+   "keys": [
+    "pyroshows"
+   ],
+   "records": {
+    "tdc": 2
+   },
+   "gov_ids": [
+    "destination_pc",
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "quickbooks-payroll-service",
+   "name": "QuickBooks Payroll Service",
+   "aliases": [
+    "QuickBooks Payroll Service"
+   ],
+   "keys": [
+    "quickbookspayrollservice"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "mb_cdc"
+   ]
+  },
+  {
+   "id": "quillian-powell",
+   "name": "QUILLIAN POWELL",
+   "aliases": [
+    "QUILLIAN POWELL"
+   ],
+   "keys": [
+    "quillianpowell"
+   ],
+   "records": {
+    "register": 2
+   },
+   "gov_ids": [
+    "lh"
+   ]
+  },
+  {
+   "id": "quina-grundhoefer-architects",
+   "name": "Quina Grundhoefer Architects",
+   "aliases": [
+    "Quina Grundhoefer Architects"
+   ],
+   "keys": [
+    "quinagrundhoeferarchitects"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "r-and-m-service-solutions",
+   "name": "R&M Service Solutions, LLC",
+   "aliases": [
+    "R&M Service Solutions, LLC"
+   ],
+   "keys": [
+    "rmservicesolutions"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "r-e-crawford-construction",
+   "name": "R. E. Crawford Construction, LLC",
+   "aliases": [
+    "R. E. Crawford Construction, LLC"
+   ],
+   "keys": [
+    "recrawfordconstruction"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "ramsey-s-printing-and-office",
+   "name": "Ramsey's Printing and Office",
+   "aliases": [
+    "Ramsey's Printing and Office"
+   ],
+   "keys": [
+    "ramseysprintingoffice"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "mb_cdc"
+   ]
+  },
+  {
+   "id": "rategain-adara",
+   "name": "RateGain Adara Inc",
+   "aliases": [
+    "RateGain Adara",
+    "RateGain Adara Inc"
+   ],
+   "keys": [
+    "rategainadara"
+   ],
+   "records": {
+    "tdc": 2
+   },
+   "gov_ids": [
+    "destination_pc",
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "raymond-james",
+   "name": "Raymond James",
+   "aliases": [
+    "Raymond James"
+   ],
+   "keys": [
+    "raymondjames"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "razorback",
+   "name": "Razorback LLC",
+   "aliases": [
+    "Razorback LLC"
+   ],
+   "keys": [
+    "razorback"
+   ],
+   "records": {
+    "contract": 1,
+    "change_order": 1
+   },
+   "gov_ids": [
+    "mb"
+   ]
+  },
+  {
+   "id": "rc-weddings-and-events",
+   "name": "RC Weddings & Events",
+   "aliases": [
+    "RC Weddings & Events"
+   ],
+   "keys": [
+    "rcweddingsevents"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "rcl-emerald-coast",
+   "name": "RCL Emerald Coast, LLC",
+   "aliases": [
+    "RCL Emerald Coast, LLC"
+   ],
+   "keys": [
+    "rclemeraldcoast"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "pc"
+   ]
+  },
+  {
+   "id": "rdk-assets",
+   "name": "RDK ASSETS INC",
+   "aliases": [
+    "RDK ASSETS INC"
+   ],
+   "keys": [
+    "rdkassets"
+   ],
+   "records": {
+    "register": 1
+   },
+   "gov_ids": [
+    "lh"
+   ]
+  },
+  {
+   "id": "ready-mix-usa",
+   "name": "READY MIX USA",
+   "aliases": [
+    "READY MIX USA"
+   ],
+   "keys": [
+    "readymixusa"
+   ],
+   "records": {
+    "register": 1
+   },
+   "gov_ids": [
+    "lh"
+   ]
+  },
+  {
+   "id": "red-fish-film-fest",
+   "name": "Red Fish Film Fest, LLC",
+   "aliases": [
+    "Red Fish Film Fest, LLC"
+   ],
+   "keys": [
+    "redfishfilmfest"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "reeves-and-shaw-construction",
+   "name": "Reeves & Shaw Construction LLC",
+   "aliases": [
+    "Reeves & Shaw Construction LLC",
+    "Reeves and Shaw Construction, LLC"
+   ],
+   "keys": [
+    "reevesshawconstruction"
+   ],
+   "records": {
+    "contract": 1,
+    "register": 2
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "regions-bank",
+   "name": "REGIONS BANK",
+   "aliases": [
+    "REGIONS BANK"
+   ],
+   "keys": [
+    "regionsbank"
+   ],
+   "records": {
+    "register": 1
+   },
+   "gov_ids": [
+    "lh"
+   ]
+  },
+  {
+   "id": "retail-strategies",
+   "name": "Retail Strategies",
+   "aliases": [
+    "Retail Strategies",
+    "Retail Strategies (consultant)"
+   ],
+   "keys": [
+    "retailstrategies"
+   ],
+   "records": {
+    "cra": 1
+   },
+   "gov_ids": [
+    "pc"
+   ]
+  },
+  {
+   "id": "riverway-south-apalachicola-chocotawhatch",
+   "name": "RiverWay South Apalachicola Chocotawhatch",
+   "aliases": [
+    "RiverWay South Apalachicola Chocotawhatch"
+   ],
+   "keys": [
+    "riverwaysouthapalachicolachocotawhatch"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "rj-gorman-contracting",
+   "name": "RJ Gorman Contracting, LLC",
+   "aliases": [
+    "RJ Gorman Contracting LLC",
+    "RJ Gorman Contracting, LLC"
+   ],
+   "keys": [
+    "rjgormancontracting"
+   ],
+   "records": {
+    "contract": 2
+   },
+   "gov_ids": [
+    "mb",
+    "pcb"
+   ]
+  },
+  {
+   "id": "rj-gorman-marine-construction",
+   "name": "RJ Gorman Marine Construction, LLC",
+   "aliases": [
+    "R.J. Gorman Marine Construction LLC",
+    "RJ Gorman Marine",
+    "RJ Gorman Marine Construction",
+    "RJ Gorman Marine Construction, LLC"
+   ],
+   "keys": [
+    "rjgormanmarineconstruction"
+   ],
+   "records": {
+    "contract": 1,
+    "register": 2
+   },
+   "gov_ids": [
+    "county"
+   ],
+   "merge_evidence": "Register spelling \"R.J. Gorman Marine Construction LLC\"; one campaign filing cuts it to \"RJ Gorman Marine\". Kept separate from RJ Gorman Contracting, LLC (a different LLC that built the Mexico Beach and PCB piers)."
+  },
+  {
+   "id": "roberson-and-associates",
+   "name": "Roberson & Associates, PA",
+   "aliases": [
+    "Roberson & Associates, PA"
+   ],
+   "keys": [
+    "robersonassociates"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "mb_cdc"
+   ]
+  },
+  {
+   "id": "roberts-and-roberts",
+   "name": "Roberts and Roberts, Inc.",
+   "aliases": [
+    "ROBERTS & ROBER",
+    "ROBERTS & ROBERTS INC",
+    "Robers and Roberts, Inc",
+    "Roberts and Roberts",
+    "Roberts and Roberts Inc",
+    "Roberts and Roberts, Inc."
+   ],
+   "keys": [
+    "robertsrober",
+    "robertsroberts"
+   ],
+   "records": {
+    "contract": 9,
+    "change_order": 1,
+    "emergency": 1,
+    "register": 5
+   },
+   "gov_ids": [
+    "county",
+    "lh",
+    "pcb"
+   ],
+   "merge_evidence": "\"ROBERTS & ROBER\" is the Lynn Haven warrant list cut at 15 characters; \"Robers and Roberts, Inc\" is a typo in one 2026 campaign filing."
+  },
+  {
+   "id": "robin-malpass-and-associates",
+   "name": "Robin Malpass & Associates, Inc",
+   "aliases": [
+    "Robin Malpass & Associates, Inc"
+   ],
+   "keys": [
+    "robinmalpassassociates"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "rooms-with-a-purpose",
+   "name": "Rooms with a Purpose",
+   "aliases": [
+    "Rooms with a Purpose"
+   ],
+   "keys": [
+    "roomswithapurpose"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "rotary-club-of-panama-city",
+   "name": "Rotary Club of Panama City Florida",
+   "aliases": [
+    "Rotary Club of Panama City Florida"
+   ],
+   "keys": [
+    "rotaryclubofpanamacity"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "rotolo-consultants",
+   "name": "Rotolo Consultants, Inc.",
+   "aliases": [
+    "Rotolo Consultants, Inc."
+   ],
+   "keys": [
+    "rotoloconsultants"
+   ],
+   "records": {
+    "contract": 1,
+    "cra": 1
+   },
+   "gov_ids": [
+    "lh",
+    "pcb"
+   ]
+  },
+  {
+   "id": "rowland-publishing",
+   "name": "Rowland Publishing, Inc",
+   "aliases": [
+    "Rowland Publishing, Inc"
+   ],
+   "keys": [
+    "rowlandpublishing"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "royal-american-construction",
+   "name": "Royal American Construction Company, Inc.",
+   "aliases": [
+    "Royal American Construction",
+    "Royal American Construction Co.",
+    "Royal American Construction Co., Inc.",
+    "Royal American Construction Company",
+    "Royal American Construction Company, Inc."
+   ],
+   "keys": [
+    "royalamericanconstruction"
+   ],
+   "records": {
+    "contract": 9,
+    "register": 2
+   },
+   "gov_ids": [
+    "county",
+    "pc"
+   ]
+  },
+  {
+   "id": "royal-american-hospitality",
+   "name": "Royal American Hospitality",
+   "aliases": [
+    "Royal American Hospitality"
+   ],
+   "keys": [
+    "royalamericanhospitality"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "rutabaga-paddlesports",
+   "name": "Rutabaga Paddlesports",
+   "aliases": [
+    "Rutabaga Paddlesports"
+   ],
+   "keys": [
+    "rutabagapaddlesports"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "s-c-rowe",
+   "name": "S.C. Rowe, Inc.",
+   "aliases": [
+    "S.C. Rowe, Inc."
+   ],
+   "keys": [
+    "scrowe"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "pcb"
+   ]
+  },
+  {
+   "id": "s-j-electro-systems-llc-dba-primax",
+   "name": "S.J. Electro Systems, LLC dba PRIMAX",
+   "aliases": [
+    "S.J. Electro Systems, LLC dba PRIMAX"
+   ],
+   "keys": [
+    "sjelectrosystemsllcdbaprimax"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "salty-cats-of-st-andrews-rescue",
+   "name": "Salty Cats of St. Andrews Rescue, Inc",
+   "aliases": [
+    "Salty Cats of St. Andrews Rescue, Inc"
+   ],
+   "keys": [
+    "saltycatsofstandrewsrescue"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "sam-hill-entertainment",
+   "name": "Sam Hill Entertainment",
+   "aliases": [
+    "Sam Hill Entertainment"
+   ],
+   "keys": [
+    "samhillentertainment"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "sam-s-club",
+   "name": "Sam's Club",
+   "aliases": [
+    "Sam's Club"
+   ],
+   "keys": [
+    "samsclub"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "mb_cdc"
+   ]
+  },
+  {
+   "id": "samsara",
+   "name": "Samsara",
+   "aliases": [
+    "Samsara"
+   ],
+   "keys": [
+    "samsara"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "lh"
+   ]
+  },
+  {
+   "id": "sansom-equipment",
+   "name": "Sansom Equipment Company, Inc.",
+   "aliases": [
+    "Sansom Equipment Company, Inc."
+   ],
+   "keys": [
+    "sansomequipment"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "pcb"
+   ]
+  },
+  {
+   "id": "santa-david-children-s-fund",
+   "name": "Santa David Children's Fund",
+   "aliases": [
+    "Santa David Children's Fund"
+   ],
+   "keys": [
+    "santadavidchildrensfund"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "schooners-last-beach-resort-is",
+   "name": "Schooners Last Beach Resort iS}",
+   "aliases": [
+    "Schooners Last Beach Resort iS}"
+   ],
+   "keys": [
+    "schoonerslastbeachresortis"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "seabreeze-jazz-festival",
+   "name": "Seabreeze Jazz Festival",
+   "aliases": [
+    "Seabreeze Jazz Festival"
+   ],
+   "keys": [
+    "seabreezejazzfestival"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "second-chance-of-northwest",
+   "name": "Second Chance of Northwest Florida, Inc",
+   "aliases": [
+    "Second Chance of Northwest Florida, Inc"
+   ],
+   "keys": [
+    "secondchanceofnorthwest"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "sendsites",
+   "name": "SendSites",
+   "aliases": [
+    "SendSites"
+   ],
+   "keys": [
+    "sendsites"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "shelbie-scippio-vendor",
+   "name": "Shelbie Scippio - VENDOR",
+   "aliases": [
+    "Shelbie Scippio - VENDOR"
+   ],
+   "keys": [
+    "shelbiescippiovendor"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "sieverding-construction",
+   "name": "Sieverding Construction, Inc.",
+   "aliases": [
+    "Sieverding Construction, Inc."
+   ],
+   "keys": [
+    "sieverdingconstruction"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "signal-maintenance-and-services",
+   "name": "Signal Maintenance and Services, Inc.",
+   "aliases": [
+    "Signal Maintenance and Services, Inc."
+   ],
+   "keys": [
+    "signalmaintenanceservices"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "silverpush",
+   "name": "Silverpush Inc",
+   "aliases": [
+    "Silverpush Inc"
+   ],
+   "keys": [
+    "silverpush"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "simpleview",
+   "name": "Simpleview LLC",
+   "aliases": [
+    "Simpleview LLC"
+   ],
+   "keys": [
+    "simpleview"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "sj-electro-systems-llc-dba-primex",
+   "name": "SJ Electro Systems, LLC dba Primex",
+   "aliases": [
+    "SJ Electro Systems, LLC dba Primex"
+   ],
+   "keys": [
+    "sjelectrosystemsllcdbaprimex"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "ski-productions",
+   "name": "Ski Productions LLC",
+   "aliases": [
+    "Ski Productions LLC"
+   ],
+   "keys": [
+    "skiproductions"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "skypro-studios",
+   "name": "Skypro Studios",
+   "aliases": [
+    "Skypro Studios"
+   ],
+   "keys": [
+    "skyprostudios"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "smith-industrial-services",
+   "name": "Smith Industrial Services",
+   "aliases": [
+    "Smith Industrial Services"
+   ],
+   "keys": [
+    "smithindustrialservices"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "snelling-staffing-services",
+   "name": "Snelling Staffing Services",
+   "aliases": [
+    "Snelling Staffing Services"
+   ],
+   "keys": [
+    "snellingstaffingservices"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "sojern",
+   "name": "Sojern",
+   "aliases": [
+    "Sojern"
+   ],
+   "keys": [
+    "sojern"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "southeast-tourism-society",
+   "name": "Southeast Tourism Society",
+   "aliases": [
+    "Southeast Tourism Society"
+   ],
+   "keys": [
+    "southeasttourismsociety"
+   ],
+   "records": {
+    "tdc": 2
+   },
+   "gov_ids": [
+    "destination_pc",
+    "mb_cdc"
+   ]
+  },
+  {
+   "id": "southeastern-outdoor-management",
+   "name": "Southeastern Outdoor Management",
+   "aliases": [
+    "Southeastern Outdoor Management",
+    "Southeastern Outdoor Met Inc",
+    "Southeastern Outdoor Mgmt"
+   ],
+   "keys": [
+    "southeasternoutdoormanagement",
+    "southeasternoutdoormet"
+   ],
+   "records": {
+    "contract": 1,
+    "tdc": 1
+   },
+   "gov_ids": [
+    "county",
+    "visit_pcb"
+   ],
+   "merge_evidence": "\"Southeastern Outdoor Met Inc\" is how the scanned Visit PCB register reads; \"Southeastern Outdoor Mgmt\" is a campaign filing."
+  },
+  {
+   "id": "southern-construction-services",
+   "name": "Southern Construction Services, Inc.",
+   "aliases": [
+    "Southern Construction",
+    "Southern Construction Service, Inc.",
+    "Southern Construction Services, Inc."
+   ],
+   "keys": [
+    "southernconstruction",
+    "southernconstructionservice",
+    "southernconstructionservices"
+   ],
+   "records": {
+    "contract": 4,
+    "change_order": 2
+   },
+   "gov_ids": [
+    "county",
+    "pc",
+    "pcb"
+   ],
+   "merge_evidence": "Singular/plural and a shortened form in the same governments' agendas."
+  },
+  {
+   "id": "sports-events-and-touism",
+   "name": "Sports Events & Touism",
+   "aliases": [
+    "Sports Events & Touism"
+   ],
+   "keys": [
+    "sportseventstouism"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "spotify",
+   "name": "Spotify",
+   "aliases": [
+    "Spotify"
+   ],
+   "keys": [
+    "spotify"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "st-jude-children-s-research-hospital",
+   "name": "St Jude Children's Research Hospital, Inc",
+   "aliases": [
+    "St Jude Children's Research Hospital, Inc"
+   ],
+   "keys": [
+    "stjudechildrensresearchhospital"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "staline-waterworks",
+   "name": "STAline Waterworks, Inc.",
+   "aliases": [
+    "STAline Waterworks, Inc."
+   ],
+   "keys": [
+    "stalinewaterworks"
+   ],
+   "records": {
+    "change_order": 1,
+    "emergency": 1
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "standby-systems-services",
+   "name": "Standby Systems Services",
+   "aliases": [
+    "Standby Systems Services"
+   ],
+   "keys": [
+    "standbysystemsservices"
+   ],
+   "records": {
+    "emergency": 1
+   },
+   "gov_ids": [
+    "pc"
+   ]
+  },
+  {
+   "id": "stow-away",
+   "name": "Stow Away",
+   "aliases": [
+    "Stow Away"
+   ],
+   "keys": [
+    "stowaway"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "mb_cdc"
+   ]
+  },
+  {
+   "id": "stryker-sales",
+   "name": "STRYKER SALES LLC",
+   "aliases": [
+    "STRYKER SALES LLC"
+   ],
+   "keys": [
+    "strykersales"
+   ],
+   "records": {
+    "register": 1
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "styleblueprint",
+   "name": "StyleBlueprint, LLC",
+   "aliases": [
+    "StyleBluePrint, LLC",
+    "StyleBlueprint, LLC"
+   ],
+   "keys": [
+    "styleblueprint"
+   ],
+   "records": {
+    "tdc": 2
+   },
+   "gov_ids": [
+    "destination_pc",
+    "mb_cdc"
+   ]
+  },
+  {
+   "id": "sun-and-shield-designs",
+   "name": "Sun and Shield Designs, LLC",
+   "aliases": [
+    "Sun and Shield Designs, LLC"
+   ],
+   "keys": [
+    "sunshielddesigns"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "sunbelt-rentals",
+   "name": "Sunbelt Rentals, Inc",
+   "aliases": [
+    "Sunbelt Rentals",
+    "Sunbelt Rentals, Inc"
+   ],
+   "keys": [
+    "sunbeltrentals"
+   ],
+   "records": {
+    "tdc": 2
+   },
+   "gov_ids": [
+    "destination_pc",
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "sunsouth",
+   "name": "SunSouth, LLC",
+   "aliases": [
+    "SunSouth, LLC"
+   ],
+   "keys": [
+    "sunsouth"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "supreme-entertainment-artists",
+   "name": "Supreme Entertainment Artists, LLC",
+   "aliases": [
+    "Supreme Entertainment Artists, LLC"
+   ],
+   "keys": [
+    "supremeentertainmentartists"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "sutphen",
+   "name": "Sutphen (Extreme Duty Custom fire engine)",
+   "aliases": [
+    "Sutphen (Extreme Duty Custom fire engine)"
+   ],
+   "keys": [
+    "sutphen"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "lh"
+   ]
+  },
+  {
+   "id": "t-k-vandy",
+   "name": "T K Vandy LLC",
+   "aliases": [
+    "T K Vandy LLC",
+    "TK Vandy LLC",
+    "TKVANDY LLC",
+    "TKVandy LLC"
+   ],
+   "keys": [
+    "tkvandy"
+   ],
+   "records": {
+    "contract": 4
+   },
+   "gov_ids": [
+    "county",
+    "pc"
+   ]
+  },
+  {
+   "id": "t-mobile-usa",
+   "name": "T-Mobile USA, Inc.",
+   "aliases": [
+    "T-Mobile USA, Inc."
+   ],
+   "keys": [
+    "tmobileusa"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "pcb"
+   ]
+  },
+  {
+   "id": "tb-landmark-construction",
+   "name": "TB Landmark Construction, Inc.",
+   "aliases": [
+    "T B Landmark Construction, Inc.",
+    "TB Landmark Construction, Inc."
+   ],
+   "keys": [
+    "tblandmarkconstruction"
+   ],
+   "records": {
+    "contract": 1,
+    "register": 2
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "tcs-electrical",
+   "name": "TCS Electrical Co.",
+   "aliases": [
+    "TCS Electrical Co."
+   ],
+   "keys": [
+    "tcselectrical"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "telemetry-and-process-control",
+   "name": "Telemetry and Process Control, Inc.",
+   "aliases": [
+    "TELEMETRY AND PROCESS CON",
+    "Telemetry and Process Control, Inc."
+   ],
+   "keys": [
+    "telemetryprocesscon",
+    "telemetryprocesscontrol"
+   ],
+   "records": {
+    "contract": 1,
+    "register": 1
+   },
+   "gov_ids": [
+    "county"
+   ],
+   "merge_evidence": "The county register cuts the name at \"TELEMETRY AND PROCESS CON\"."
+  },
+  {
+   "id": "ten-8-fire-and-safety",
+   "name": "Ten-8 Fire & Safety, LLC",
+   "aliases": [
+    "Ten-8",
+    "Ten-8 Fire & Safety, LLC"
+   ],
+   "keys": [
+    "ten8",
+    "ten8firesafety"
+   ],
+   "records": {
+    "contract": 3
+   },
+   "gov_ids": [
+    "county",
+    "pc",
+    "pcb"
+   ],
+   "merge_evidence": "Fire apparatus dealer named \"Ten-8\" in the county agenda and \"Ten-8 Fire & Safety, LLC\" elsewhere."
+  },
+  {
+   "id": "tetra-tech",
+   "name": "Tetra Tech, Inc.",
+   "aliases": [
+    "Tetra Tech, Inc."
+   ],
+   "keys": [
+    "tetratech"
+   ],
+   "records": {
+    "change_order": 2
+   },
+   "gov_ids": [
+    "lh"
+   ]
+  },
+  {
+   "id": "the-arc-of-the-bay",
+   "name": "The Arc of the Bay",
+   "aliases": [
+    "The Arc of the Bay"
+   ],
+   "keys": [
+    "arcofthebay"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "the-corradino-group",
+   "name": "The Corradino Group",
+   "aliases": [
+    "The Corradino Group"
+   ],
+   "keys": [
+    "corradinogroup"
+   ],
+   "records": {
+    "cra": 1
+   },
+   "gov_ids": [
+    "pcb"
+   ]
+  },
+  {
+   "id": "the-florida-state-university-foundation",
+   "name": "The Florida State University Foundation, Inc",
+   "aliases": [
+    "The Florida State University Foundation, Inc"
+   ],
+   "keys": [
+    "floridastateuniversityfoundation"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "the-group-travel-leader",
+   "name": "The Group Travel Leader Inc",
+   "aliases": [
+    "The Group Travel Leader Inc"
+   ],
+   "keys": [
+    "grouptravelleader"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "the-knot-worldwide",
+   "name": "The Knot Worldwide",
+   "aliases": [
+    "The Knot Worldwide"
+   ],
+   "keys": [
+    "knotworldwide"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "the-lewis-bear",
+   "name": "The Lewis Bear Company",
+   "aliases": [
+    "The Lewis Bear Company"
+   ],
+   "keys": [
+    "lewisbear"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "the-local-palate",
+   "name": "The Local Palate",
+   "aliases": [
+    "The Local Palate"
+   ],
+   "keys": [
+    "localpalate"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "the-print-center",
+   "name": "The Print Center",
+   "aliases": [
+    "The Print Center"
+   ],
+   "keys": [
+    "printcenter"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "the-sports-facilities-companies",
+   "name": "The Sports Facilities Companies",
+   "aliases": [
+    "The Sports Facilities Companies"
+   ],
+   "keys": [
+    "sportsfacilitiescompanies"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "the-water-spigot",
+   "name": "The Water Spigot, Inc.",
+   "aliases": [
+    "The Water Spigot, Inc."
+   ],
+   "keys": [
+    "waterspigot"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "pcb"
+   ]
+  },
+  {
+   "id": "the-wharf",
+   "name": "The Wharf",
+   "aliases": [
+    "The Wharf"
+   ],
+   "keys": [
+    "wharf"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "the-windscreen-factory",
+   "name": "The Windscreen Factory",
+   "aliases": [
+    "The Windscreen Factory"
+   ],
+   "keys": [
+    "windscreenfactory"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "the-workmans",
+   "name": "The Workmans",
+   "aliases": [
+    "The Workmans"
+   ],
+   "keys": [
+    "workmans"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "mb_cdc"
+   ]
+  },
+  {
+   "id": "thompson-tractor",
+   "name": "Thompson Tractor",
+   "aliases": [
+    "Thompson Tractor"
+   ],
+   "keys": [
+    "thompsontractor"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "pcb"
+   ]
+  },
+  {
+   "id": "thrive-media",
+   "name": "THRIVE Media",
+   "aliases": [
+    "THRIVE Media"
+   ],
+   "keys": [
+    "thrivemedia"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "thunder-beach-productions",
+   "name": "Thunder Beach Productions",
+   "aliases": [
+    "Thunder Beach Productions"
+   ],
+   "keys": [
+    "thunderbeachproductions"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "tipton-marler",
+   "name": "Tipton Marler",
+   "aliases": [
+    "Tipton Marler"
+   ],
+   "keys": [
+    "tiptonmarler"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "tom-p-haney-technical-college",
+   "name": "Tom P. Haney Technical College",
+   "aliases": [
+    "Tom P. Haney Technical College"
+   ],
+   "keys": [
+    "tomphaneytechnicalcollege"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "trade-press-media-group",
+   "name": "TRADE PRESS MEDIA GROUP, INC",
+   "aliases": [
+    "TRADE PRESS MEDIA GROUP, INC"
+   ],
+   "keys": [
+    "tradepressmediagroup"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "travelers",
+   "name": "Travelers",
+   "aliases": [
+    "Travelers"
+   ],
+   "keys": [
+    "travelers"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "travelscape",
+   "name": "Travelscape, LLC",
+   "aliases": [
+    "Travelscape, LLC"
+   ],
+   "keys": [
+    "travelscape"
+   ],
+   "records": {
+    "tdc": 2
+   },
+   "gov_ids": [
+    "mb_cdc",
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "tripadvisor",
+   "name": "TripAdvisor, LLC",
+   "aliases": [
+    "TripAdvisor, LLC"
+   ],
+   "keys": [
+    "tripadvisor"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "truex",
+   "name": "TrueX",
+   "aliases": [
+    "TrueX"
+   ],
+   "keys": [
+    "truex"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "u-s-travel-association",
+   "name": "U.S. Travel Association",
+   "aliases": [
+    "U.S. Travel Association"
+   ],
+   "keys": [
+    "ustravelassociation"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "uh-beautiful-mes",
+   "name": "UH Beautiful Mes LLC",
+   "aliases": [
+    "UH Beautiful Mes LLC"
+   ],
+   "keys": [
+    "uhbeautifulmes"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "unicomm",
+   "name": "Unicomm, LLC",
+   "aliases": [
+    "Unicomm, LLC"
+   ],
+   "keys": [
+    "unicomm"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "united-talent-agency",
+   "name": "United Talent Agency",
+   "aliases": [
+    "United Talent Agency"
+   ],
+   "keys": [
+    "unitedtalentagency"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "us-relay",
+   "name": "US Relay",
+   "aliases": [
+    "US Relay"
+   ],
+   "keys": [
+    "usrelay"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "mb_cdc"
+   ]
+  },
+  {
+   "id": "us-specialty-coatings",
+   "name": "US Specialty Coatings",
+   "aliases": [
+    "US Specialty Coatings"
+   ],
+   "keys": [
+    "usspecialtycoatings"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "us-travel-assoc",
+   "name": "US Travel Assoc",
+   "aliases": [
+    "US Travel Assoc"
+   ],
+   "keys": [
+    "ustravelassoc"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "usfa",
+   "name": "USFA",
+   "aliases": [
+    "USFA"
+   ],
+   "keys": [
+    "usfa"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "vba-design",
+   "name": "VBA Design",
+   "aliases": [
+    "VBA Design"
+   ],
+   "keys": [
+    "vbadesign"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "pc"
+   ]
+  },
+  {
+   "id": "verizon",
+   "name": "Verizon",
+   "aliases": [
+    "Verizon"
+   ],
+   "keys": [
+    "verizon"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "vertical-communications-and-security",
+   "name": "Vertical Communications & Security, LLC",
+   "aliases": [
+    "Vertical Communications & Security, LLC"
+   ],
+   "keys": [
+    "verticalcommunicationssecurity"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "visa",
+   "name": "VISA",
+   "aliases": [
+    "VISA"
+   ],
+   "keys": [
+    "visa"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "visit",
+   "name": "Visit Florida",
+   "aliases": [
+    "Visit Florida"
+   ],
+   "keys": [
+    "visit"
+   ],
+   "records": {
+    "tdc": 3
+   },
+   "gov_ids": [
+    "destination_pc",
+    "mb_cdc",
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "volkert",
+   "name": "Volkert, Inc.",
+   "aliases": [
+    "Volkert, Inc."
+   ],
+   "keys": [
+    "volkert"
+   ],
+   "records": {
+    "contract": 1,
+    "cra": 1
+   },
+   "gov_ids": [
+    "pc",
+    "pcb"
+   ]
+  },
+  {
+   "id": "vr-market-data",
+   "name": "VR Market Data, LLC",
+   "aliases": [
+    "VR Market Data, LLC"
+   ],
+   "keys": [
+    "vrmarketdata"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "vyde",
+   "name": "Vyde LTD",
+   "aliases": [
+    "Vyde LTD",
+    "Vyde LTD S)"
+   ],
+   "keys": [
+    "vyde",
+    "vydeltds"
+   ],
+   "records": {
+    "tdc": 2
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ],
+   "merge_evidence": "The scanned Visit PCB register reads one line as \"Vyde LTD S)\"; the extra characters are a scan error."
+  },
+  {
+   "id": "waga-tv",
+   "name": "WAGA-TV",
+   "aliases": [
+    "WAGA-TV"
+   ],
+   "keys": [
+    "wagatv"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "wage-pay-adp-wage-pay",
+   "name": "WAGE PAY ADP WAGE PAY",
+   "aliases": [
+    "WAGE PAY ADP WAGE PAY"
+   ],
+   "keys": [
+    "wagepayadpwagepay"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "walter-marine",
+   "name": "Walter Marine",
+   "aliases": [
+    "Walter Marine"
+   ],
+   "keys": [
+    "waltermarine"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "mb"
+   ]
+  },
+  {
+   "id": "wasserman-music",
+   "name": "Wasserman Music, LLC",
+   "aliases": [
+    "Wasserman Music, LLC"
+   ],
+   "keys": [
+    "wassermanmusic"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "waste-pro",
+   "name": "WASTE PRO",
+   "aliases": [
+    "WASTE PRO"
+   ],
+   "keys": [
+    "wastepro"
+   ],
+   "records": {
+    "register": 2
+   },
+   "gov_ids": [
+    "lh"
+   ]
+  },
+  {
+   "id": "waypoint-communications",
+   "name": "Waypoint Communications",
+   "aliases": [
+    "Waypoint Communications"
+   ],
+   "keys": [
+    "waypointcommunications"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "weeks-marine",
+   "name": "Weeks Marine, Inc.",
+   "aliases": [
+    "Weeks Marine",
+    "Weeks Marine, Inc."
+   ],
+   "keys": [
+    "weeksmarine"
+   ],
+   "records": {
+    "contract": 2,
+    "register": 2
+   },
+   "gov_ids": [
+    "county"
+   ]
+  },
+  {
+   "id": "wells-fargo-vendor-financial-services",
+   "name": "Wells Fargo Vendor Financial Services, LLC",
+   "aliases": [
+    "Wells Fargo Vendor Financial Services, LLC"
+   ],
+   "keys": [
+    "wellsfargovendorfinancialservices"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "who-dey",
+   "name": "Who Dey",
+   "aliases": [
+    "Who Dey"
+   ],
+   "keys": [
+    "whodey"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "williams-communications",
+   "name": "Williams Communications, Inc.",
+   "aliases": [
+    "Williams Communications",
+    "Williams Communications, Inc."
+   ],
+   "keys": [
+    "williamscommunications"
+   ],
+   "records": {
+    "contract": 1,
+    "emergency": 1
+   },
+   "gov_ids": [
+    "county",
+    "pcb"
+   ]
+  },
+  {
+   "id": "wise-services",
+   "name": "Wise Services",
+   "aliases": [
+    "Wise Services"
+   ],
+   "keys": [
+    "wiseservices"
+   ],
+   "records": {
+    "contract": 1
+   },
+   "gov_ids": [
+    "pc"
+   ]
+  },
+  {
+   "id": "wjhg",
+   "name": "WJHG",
+   "aliases": [
+    "WJHG"
+   ],
+   "keys": [
+    "wjhg"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "wjhg-tv",
+   "name": "WJHG-TV",
+   "aliases": [
+    "WJHG-TV"
+   ],
+   "keys": [
+    "wjhgtv"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "wkrn",
+   "name": "WKRN",
+   "aliases": [
+    "WKRN"
+   ],
+   "keys": [
+    "wkrn"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "wmbb",
+   "name": "WMBB",
+   "aliases": [
+    "WMBB"
+   ],
+   "keys": [
+    "wmbb"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "wmbb-tv",
+   "name": "WMBB-TV",
+   "aliases": [
+    "WMBB-TV"
+   ],
+   "keys": [
+    "wmbbtv"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "women-s-civic-club-of-pcb",
+   "name": "Women's Civic Club of PCB",
+   "aliases": [
+    "Women's Civic Club of PCB"
+   ],
+   "keys": [
+    "womenscivicclubofpcb"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "world-changers",
+   "name": "World Changers (with First Baptist Church of Panama City)",
+   "aliases": [
+    "World Changers (with First Baptist Church of Panama City)",
+    "World Changers / First Baptist Church of Panama City",
+    "World Changers Organization"
+   ],
+   "keys": [
+    "worldchangersfirstbaptistchurchofpanamacity",
+    "worldchangersorganization"
+   ],
+   "records": {
+    "cra": 3
+   },
+   "gov_ids": [
+    "pc"
+   ],
+   "merge_evidence": "Panama City CRA annual reports name the same volunteer home-repair program as \"World Changers / First Baptist Church of Panama City\" and \"World Changers Organization\"."
+  },
+  {
+   "id": "world-triathalon",
+   "name": "World Triathalon Corporation",
+   "aliases": [
+    "World Triathalon Corporation"
+   ],
+   "keys": [
+    "worldtriathalon"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "wow",
+   "name": "WOW",
+   "aliases": [
+    "WOW"
+   ],
+   "keys": [
+    "wow"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  },
+  {
+   "id": "wsb-tv",
+   "name": "WSB-TV",
+   "aliases": [
+    "WSB-TV"
+   ],
+   "keys": [
+    "wsbtv"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "wsl",
+   "name": "WSL",
+   "aliases": [
+    "WSL"
+   ],
+   "keys": [
+    "wsl"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "wsmv",
+   "name": "WSMV",
+   "aliases": [
+    "WSMV"
+   ],
+   "keys": [
+    "wsmv"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "wtvf",
+   "name": "WTVF",
+   "aliases": [
+    "WTVF"
+   ],
+   "keys": [
+    "wtvf"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "young-strategies",
+   "name": "Young Strategies",
+   "aliases": [
+    "Young Strategies"
+   ],
+   "keys": [
+    "youngstrategies"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "visit_pcb"
+   ]
+  },
+  {
+   "id": "zartico",
+   "name": "Zartico Inc",
+   "aliases": [
+    "Zartico Inc"
+   ],
+   "keys": [
+    "zartico"
+   ],
+   "records": {
+    "tdc": 1
+   },
+   "gov_ids": [
+    "destination_pc"
+   ]
+  }
+ ],
+ "joint": {
+  "Mott MacDonald and Panhandle Engineering": [
+   "mott-macdonald",
+   "panhandle-engineering"
+  ],
+  "Leasing 2, Inc. (financing); Ten-8 Fire & Safety, LLC (apparatus proposal)": [
+   "leasing-2",
+   "ten-8-fire-and-safety"
+  ],
+  "Dewberry Engineers (with Halff Associates and Magnum Engineering)": [
+   "dewberry-engineers",
+   "halff-associates",
+   "magnum-engineering"
+  ],
+  "AT&T Enterprises, LLC and T-Mobile USA, Inc.": [
+   "at-and-t-enterprises",
+   "t-mobile-usa"
+  ],
+  "Gulf Coast Utility Contractors (GCUC) and STAline Waterworks, Inc.": [
+   "gulf-coast-utility-contractors",
+   "staline-waterworks"
+  ],
+  "FUSUS (camera program) / 20 participating businesses": [
+   "fusus"
+  ]
+ },
+ "skipped": {
+  "not a named vendor": 153,
+  "cra money in": 2
+ }
+}

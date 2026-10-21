@@ -18,8 +18,25 @@ GOV_COLS = {'government-profiles': ['government'], 'votes': ['government'], 'mem
 FIXED_GOV = {'bed-tax-collections': 'county', 'property-tax-exemptions': 'county'}  # county bed tax in every zone; the county-wide tax roll
 
 
+VENDOR_COL = {'contracts': 'vendor', 'change-orders': 'vendor', 'emergency-purchases': 'vendor', 'cra-payments': 'payee', 'vendor-payments': 'vendor',
+              'campaign-contributions-2026': 'contributor'}
+
+
+def add_vendor_id(did, rows):
+    """vendor_id from data/entities/vendors.json; vendor_ids lists every firm when one record names several (a joint award)."""
+    col = VENDOR_COL.get(did)
+    if not col:
+        return rows
+    for r in rows:
+        v = [] if did == 'campaign-contributions-2026' and r.get('contributor_type') != 'business' else ids.vendor_ids(r.get(col))
+        r['vendor_id'] = v[0] if v else None
+        r['vendor_ids'] = v if len(v) > 1 else None
+    return rows
+
+
 def add_gov_id(did, rows):
     cols = GOV_COLS.get(did, ['government', 'gov'])
+    add_vendor_id(did, rows)
     for r in rows:
         if did in FIXED_GOV:
             r['gov_id'] = FIXED_GOV[did]; continue
