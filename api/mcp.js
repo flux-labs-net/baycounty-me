@@ -69,6 +69,15 @@ async function call(req, name, a = {}) {
   throw new Error(`Unknown tool "${name}"`);
 }
 
+const MAX_BATCH = 20;
+// What a request is, for the request log.
+function describe(m) {
+  const p = (m && m.params) || {};
+  return {endpoint: m && m.method === 'tools/call' ? `tools/call:${p.name}` : (m && m.method) || null,
+    dataset: m && m.method === 'tools/call' && p.arguments ? p.arguments.id || p.arguments.slug || p.arguments.vendor || null : null,
+    query: m && m.method === 'tools/call' ? JSON.stringify(p.arguments || {}).replace(/"api_key":"[^"]*"/, '') : null};
+}
+
 const ok = (id, result) => ({jsonrpc: '2.0', id, result});
 const err = (id, code, message) => ({jsonrpc: '2.0', id, error: {code, message}});
 
@@ -113,19 +122,31 @@ module.exports = async (req, res) => {
   if (req.method !== 'POST') return res.status(405).json({error: 'Use POST'});
   let body = req.body;
   if (typeof body === 'string') { try { body = JSON.parse(body); } catch (e) { return res.status(400).json(err(null, -32700, 'Parse error')); } }
-  const first = Array.isArray(body) ? null : body || {};
-  const p = (first && first.params) || {};
-  const info = {endpoint: !first ? 'batch' : first.method === 'tools/call' ? `tools/call:${p.name}` : first.method,
-    dataset: first && first.method === 'tools/call' && p.arguments ? p.arguments.id || p.arguments.slug || null : null,
-    query: first && first.method === 'tools/call' ? JSON.stringify(p.arguments || {}).replace(/"api_key":"[^"]*"/, '') : null};
-  const isNote = first && (first.id === undefined || first.id === null);
-  const ctx = await gate(req, res, 'mcp');
-  if (!isNote) instrument(res, ctx, info);
-  if (!ctx.ok) return res.status(ctx.status).json(err(first ? first.id ?? null : null, ctx.status === 429 ? -32029 : -32001, ctx.message || 'Request not allowed.'));
+  // JSON-RPC batches: protocol 2025-06-18 removed them, but this server still accepts 2025-03-26 clients, which may
+  // send them. Each request in a batch goes through the gate on its own (counted, throttled and logged like a single
+  // request), so a batch can't be used to get around the limits. Batches are capped at MAX_BATCH requests.
   if (Array.isArray(body)) {
-    const out = (await Promise.all(body.map(m => handle(req, m)))).filter(Boolean);
+    if (!body.length) return res.status(400).json(err(null, -32600, 'Invalid request: empty batch'));
+    if (body.length > MAX_BATCH) return res.status(400).json(err(null, -32600, `Batches are limited to ${MAX_BATCH} requests.`));
+    const out = [];
+    for (const m of body) {
+      const isReq = m && m.method && m.id !== undefined && m.id !== null;
+      if (!isReq) { const r = await handle(req, m); if (r) out.push(r); continue; } // notifications and invalid items do no work
+      const ctx = await gate(req, res, 'mcp'), inf = describe(m);
+      if (!ctx.ok) { await ctx.log({...inf, status: ctx.status}); out.push(err(m.id, ctx.status === 429 ? -32029 : -32001, ctx.message || 'Request not allowed.')); continue; }
+      req._rows = null;
+      const r = await handle(req, m);
+      await ctx.log({...inf, status: 200, rows: req._rows});
+      if (r) out.push(r);
+    }
     return out.length ? res.status(200).json(out) : res.status(202).end();
   }
+  const first = body || {};
+  const info = describe(first);
+  const isNote = first.id === undefined || first.id === null;
+  const ctx = await gate(req, res, 'mcp');
+  if (!isNote) instrument(res, ctx, info);
+  if (!ctx.ok) return res.status(ctx.status).json(err(first.id ?? null, ctx.status === 429 ? -32029 : -32001, ctx.message || 'Request not allowed.'));
   const out = await handle(req, body);
   if (req._rows != null) info.rows = req._rows;
   return out ? res.status(200).json(out) : res.status(202).end();
