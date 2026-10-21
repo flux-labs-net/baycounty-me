@@ -35,7 +35,7 @@ module.exports = async (req, res) => {
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
     if (!p) return res.status(200).send(page('Link expired', `<h1>This link has expired</h1><p>Confirmation links last 7 days. Sign up again and we'll send a new one.</p><a class="btn" href="/alerts">Back to alerts</a>`));
     const tokAttr = String(raw).replace(/[^A-Za-z0-9._-]/g, '');
-    const what = p.kind === 'rule' ? 'this alert' : `weekly updates for ${esc(p.g.filter(g => GOVS[g]).map(g => GOVS[g][0]).join(', '))}`;
+    const what = p.kind === 'rule' ? `this alert: ${esc(require('./_rules').describe(p.r, p.p || {}))},` : `weekly updates for ${esc(p.g.filter(g => GOVS[g]).map(g => GOVS[g][0]).join(', '))}`;
     return res.status(200).send(page('Confirm your alerts', `<h1>Confirm your BayCounty.me alerts</h1><p>Press the button to start getting ${what} at ${esc(p.e)}.</p>
 <form method="post" action="/api/confirm"><input type="hidden" name="t" value="${tokAttr}"><button type="submit" autofocus>Confirm</button></form>`));
   }

@@ -61,6 +61,20 @@ Paste the file as-is, or with literal `\n` for line breaks. Without it, the code
 the certificate (the previous behavior). After setting it, check `/admin` still loads; if it fails with a certificate error,
 the pooler host doesn't match the certificate, so remove the variable and report it.
 
+## Change tracking and rule alerts (migration 0008)
+
+From 0008 on, the loader compares each dataset with the previous sync by `record_hash`: unchanged rows stay as they
+are (so `created_at` is when a record first appeared, which `/api/v1/changes` reads), rows that disappeared are deleted,
+and only new hashes are inserted. A record whose content changed gets a new hash, so it shows up as new.
+`ingest_runs.rows_added` and `notes` record the counts; a dataset that fails to load gets a `failed` row and the sync
+continues with the next dataset, then exits non-zero.
+
+New rows in `contracts`, `change-orders`, `member-votes`, `meetings` and `candidates-2026` are also written to
+`alerts.events` (skipped on a dataset's very first load). The daily `/api/alerts-run` cron matches them against
+confirmed rules in `alerts.subscriptions`, records each match in `alerts.deliveries` (never sent twice), and writes one
+email per subscriber to `alerts.outbox`: drafts for review unless `ALERTS_AUTOSEND=1`. Everything in the `alerts`
+schema is private (not exposed by Supabase's data API).
+
 ## API log retention
 
 Migration `0006` adds `apiadmin.prune_requests(days)`, which deletes `apiadmin.requests` rows older than 180 days.
