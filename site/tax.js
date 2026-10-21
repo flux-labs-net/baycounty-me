@@ -37,6 +37,16 @@ const sel = $('cDist');
 sel.innerHTML = D.districts.map(d => `<option value="${esc(d.id)}">${esc(d.label)} · ${mills(d.total[L])} mills</option>`).join('');
 try { const s = localStorage.getItem('taxDist'); if (s && D.districts.some(d => d.id === s)) sel.value = s; } catch (e) {}
 const valIn = $('cVal'), home = $('cHome');
+// inputs live in the link (?v=value&d=district&h=1|0) so an estimate can be shared, e.g. from My Address
+const P0 = new URLSearchParams(location.search);
+if (P0.get('d') && D.districts.some(d => d.id === P0.get('d'))) sel.value = P0.get('d');
+if (/^\d+$/.test(P0.get('v') || '')) valIn.value = Math.min(+P0.get('v'), 1e9).toLocaleString('en-US');
+if (P0.has('h')) home.checked = P0.get('h') !== '0';
+function saveUrl(v) {
+  const u = new URL(location.href);
+  u.searchParams.set('v', v); u.searchParams.set('d', sel.value); u.searchParams.set('h', home.checked ? '1' : '0');
+  try { history.replaceState(null, '', u); } catch (e) {}
+}
 
 function taxable(v, homestead, yi = L) {
   if (!homestead) return {school: v, other: v};
@@ -54,6 +64,7 @@ function readVal() { const n = parseInt(String(valIn.value).replace(/[^0-9]/g, '
 function calc() {
   const dist = D.districts.find(d => d.id === sel.value), v = readVal(), tv = taxable(v, home.checked);
   try { localStorage.setItem('taxDist', dist.id); } catch (e) {}
+  if (calc.ready) saveUrl(v);
   const rows = billAt(dist, L, tv).filter(r => r.m > 0), tot = rows.reduce((a, r) => a + r.amt, 0);
   $('bTotal').textContent = usd(tot);
   $('bSub').textContent = tot ? `about ${usd(tot / 12)} a month · ${mills(dist.total[L])} mills in all` : 'Enter a value to see your estimate';
@@ -82,7 +93,8 @@ valIn.addEventListener('input', () => {
   calc();
 });
 sel.addEventListener('change', calc); home.addEventListener('change', calc);
-calc();
+calc(); calc.ready = true; // don't add params to a plain visit until someone changes an input
+if (['v', 'd', 'h'].some(k => P0.has(k))) { saveUrl(readVal()); if (!location.hash) $('calc')?.scrollIntoView(); }
 
 /* ---------- countywide bars ---------- */
 (() => {
