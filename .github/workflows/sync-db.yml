@@ -8,7 +8,7 @@ on:
     branches: [main]
     paths: ['data/**', 'site/public/downloads/**', 'db/**']
   workflow_run:
-    workflows: ['Refresh meetings']
+    workflows: ['Refresh meetings', 'Refresh weekly sources']
     types: [completed]
   workflow_dispatch: {}
 concurrency:
