@@ -3,7 +3,7 @@
 // The session is a signed, HttpOnly, SameSite=Strict cookie; changes also need the X-BCM-Admin header.
 const crypto = require('crypto');
 const {q, hasDb} = require('./_db');
-const {sha256, derive} = require('./_gate');
+const {sha256, derive, ipOf} = require('./_gate');
 const {FROM, resend} = require('./_alerts');
 
 const SITE = 'https://baycounty.me';
@@ -175,7 +175,7 @@ module.exports = async (req, res) => {
   if (!process.env.ALERTS_SECRET || !hasDb()) return res.status(500).json({error: 'Admin isn’t configured on this deployment.'});
 
   if (action === 'login' && req.method === 'POST') {
-    const ip = String(req.headers['x-forwarded-for'] || '').split(',')[0].trim(), now = Date.now();
+    const ip = ipOf(req), now = Date.now();
     const recent = (loginHits.get(ip) || []).filter(t => now - t < 600e3); recent.push(now); loginHits.set(ip, recent);
     if (recent.length > 5) return res.status(429).json({error: 'Too many sign-in attempts. Try again in a few minutes.'});
     const b = typeof req.body === 'string' ? JSON.parse(req.body || '{}') : req.body || {};
