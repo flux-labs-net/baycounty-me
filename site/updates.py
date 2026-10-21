@@ -9,6 +9,9 @@ from datetime import datetime, timezone
 import html
 
 CHANGES = [
+    {'date': '2026-10-21', 'title': 'Send a correction from the site',
+     'text': 'A contact form on the About page sends corrections, records and questions straight to the BayCounty.me team. Email is optional and only used to reply.',
+     'pages': ['/about']},
     {'date': '2026-10-21', 'title': 'Correction: Lynn Haven commission, and a cleaner officials page',
      'text': 'Corey Langford is listed as Lynn Haven\'s fifth commissioner; Judy Tinder\'s recorded votes remain on the votes page as a former member. The officials page now shows each board as a simple roster, with notes under names and county officers as cards. Springfield and Parker are described as clerk-run cities with no manager, and Parker\'s City Clerk, Rachelle Stanley, is listed.',
      'pages': ['/who-runs-bay-county', '/public-money/votes']},

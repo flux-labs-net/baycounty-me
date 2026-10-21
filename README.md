@@ -66,3 +66,11 @@ Every data change gets an entry at the top of `CHANGES` in `site/updates.py`. Th
 - Status: **Spent** (reported paid), **Committed** (awarded, not fully paid), **Budgeted** / **Proposed** (plans), **Incoming** (money to the CRA), **Not CRA-funded**.
 - Totals count each dollar once. Components of a listed project total, possible duplicates and non-CRA money stay in the ledger but are left out of totals (`count: false` with an `overlap` reason).
 - Corrections go to hello@fluxlabs.net.
+
+## Contact form
+
+`/about#contact` posts to `api/contact.js` (a Vercel function), which emails the message through Resend.
+Env vars: `RESEND_API_KEY` (send-only key for fluxlabs.net, set in Vercel), optional `CONTACT_TO`
+(default hello@fluxlabs.net) and `CONTACT_FROM` (default `BayCounty.me <forms@fluxlabs.net>`).
+Spam guards: hidden honeypot field, 3-second minimum fill time, origin check, 5 messages/hour per IP.
+Link to it with `/about?page=/some/path#contact` to prefill the page.

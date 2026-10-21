@@ -210,3 +210,22 @@ a{color:var(--blue)}
 }
 .nav-mega::before{content:"";position:absolute;left:0;right:0;top:-14px;height:14px}
 @media (max-width:720px){.nav-mega::before{display:none}}
+/* Contact form (About) */
+.contact{display:flex;flex-direction:column;gap:14px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;max-width:760px}
+.cf-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.cf-f{display:flex;flex-direction:column;gap:6px;min-width:0}
+.cf-f > span{font-size:.84rem;font-weight:500}
+.cf-f em{font-style:normal;font-weight:400;color:var(--muted)}
+.contact input,.contact select,.contact textarea{width:100%;min-height:44px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font:400 .95rem var(--f-body);padding:10px 12px}
+.contact textarea{resize:vertical;min-height:140px;line-height:1.5}
+.contact input:focus-visible,.contact select:focus-visible,.contact textarea:focus-visible{outline:2px solid var(--blue);outline-offset:1px;border-color:transparent}
+.cf-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.cf-go{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.cf-go button{min-height:44px;padding:0 20px;border:0;border-radius:999px;background:var(--navy);color:var(--bg);font:500 .92rem var(--f-body);cursor:pointer}
+.cf-go button:disabled{opacity:.6;cursor:wait}
+.cf-msg{margin:0;font-size:.9rem}
+.cf-msg.ok{color:#1F7A4D}
+.cf-msg.err{color:var(--salmon)}
+.cf-note{margin:0;font-size:.8rem;color:var(--muted)}
+@media (max-width:600px){.cf-row{grid-template-columns:minmax(0,1fr)}.contact{padding:16px}}
+#contact{scroll-margin-top:84px}

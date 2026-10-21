@@ -82,7 +82,7 @@ def nav_html(active):
 
 FOOTER = '''<footer class="site-foot"><div class="site-foot-in">
   <div class="foot-about"><p><b>BayCounty.me</b> puts Bay County, Florida public records in plain view: maps, money, and the documents behind them.</p>
-  <p class="muted">Found an error or have a record to add? Email <span class="sel">hello@fluxlabs.net</span>.</p>
+  <p class="muted">Found an error or have a record to add? <a href="/about#contact">Send a correction</a> or email <span class="sel">hello@fluxlabs.net</span>.</p>
   <p class="muted foot-links">__UPDATED__<a href="/updates">What's new</a> · <a href="/updates.xml">RSS</a> · <a href="/about">Sources and method</a></p></div>
   <a class="powered" href="https://fluxlabs.net/" target="_blank" rel="noopener"><span>Powered by</span><img src="/assets/flux-labs.webp" alt="Flux Labs" width="140" height="25"></a>
 </div></footer>'''
@@ -417,8 +417,48 @@ def about_page():
     <li><b>Budgeted</b> or <b>Proposed</b>: a plan or appropriation, not a payment.</li>
   </ul>
   <p>Totals count each dollar once. When one record is part of another (a change order inside a project total, for example), it stays visible but is left out of the totals.</p>
-  <h2>Corrections</h2>
-  <p>If you find an error, or have a public record that fills a gap, email <span class="sel">hello@fluxlabs.net</span> with a link or a copy of the document. Corrections are dated on the page they affect.</p>
+  <h2 id="contact">Corrections, records and questions</h2>
+  <p>Found an error, or have a public record that fills a gap? Send it here. Corrections are dated on the page they affect and listed under <a href="/updates">What's new</a>.</p>
+  <form class="contact" id="contactForm" novalidate>
+    <div class="cf-row">
+      <label class="cf-f"><span>What's this about?</span>
+        <select name="topic"><option value="correction">A correction</option><option value="record">A record or tip</option><option value="question">A question</option><option value="other">Something else</option></select></label>
+      <label class="cf-f"><span>Page <em>(optional)</em></span><input name="page" type="text" inputmode="url" placeholder="e.g. /who-runs-bay-county" autocomplete="off"></label>
+    </div>
+    <label class="cf-f"><span>Message</span><textarea name="message" rows="6" required minlength="10" maxlength="5000" placeholder="What's wrong or missing, and where did you see the correct information? A link to the record helps most."></textarea></label>
+    <div class="cf-row">
+      <label class="cf-f"><span>Name <em>(optional)</em></span><input name="name" type="text" autocomplete="name" maxlength="120"></label>
+      <label class="cf-f"><span>Email <em>(only if you want a reply)</em></span><input name="email" type="email" autocomplete="email" maxlength="200"></label>
+    </div>
+    <label class="cf-hp" aria-hidden="true">Website <input name="website" type="text" tabindex="-1" autocomplete="off"></label>
+    <div class="cf-go"><button type="submit">Send message</button><p class="cf-msg" id="cfMsg" role="status" aria-live="polite"></p></div>
+    <p class="cf-note">Messages go to the BayCounty.me team at Flux Labs. Your email address is used only to reply and is never published. To send a document, include a link, or email <span class="sel">hello@fluxlabs.net</span>.</p>
+  </form>
+  <script>
+  (() => {
+    const f = document.getElementById('contactForm'), msg = document.getElementById('cfMsg'), btn = f.querySelector('button');
+    const t0 = Date.now(), q = new URLSearchParams(location.search);
+    let ref = q.get('page') || '';
+    try { const r = new URL(document.referrer); if (!ref && r.origin === location.origin && r.pathname !== location.pathname) ref = r.pathname; } catch (e) {}
+    if (ref) { f.page.value = ref; f.topic.value = 'correction'; }
+    if (q.get('topic') && f.topic.querySelector(`option[value="${q.get('topic')}"]`)) f.topic.value = q.get('topic');
+    f.addEventListener('input', () => { if (msg.classList.contains('err')) { msg.textContent = ''; msg.className = 'cf-msg'; } });
+    f.addEventListener('submit', async ev => {
+      ev.preventDefault();
+      const d = Object.fromEntries(new FormData(f)); d.t = t0;
+      if ((d.message || '').trim().length < 10) { msg.className = 'cf-msg err'; msg.textContent = 'Please write a little more in your message.'; f.message.focus(); return; }
+      if (d.email && !f.email.checkValidity()) { msg.className = 'cf-msg err'; msg.textContent = 'That email address doesn\u2019t look right.'; f.email.focus(); return; }
+      btn.disabled = true; btn.textContent = 'Sending\u2026'; msg.className = 'cf-msg'; msg.textContent = '';
+      try {
+        const r = await fetch('/api/contact', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(d)});
+        const j = await r.json().catch(() => ({}));
+        if (!r.ok || !j.ok) throw new Error(j.error || 'Your message couldn\u2019t be sent. Please try again or email hello@fluxlabs.net.');
+        f.reset(); f.classList.add('sent'); msg.className = 'cf-msg ok'; msg.textContent = 'Thanks, your message was sent.' + (d.email ? ' We\u2019ll reply by email if needed.' : '');
+      } catch (e) { msg.className = 'cf-msg err'; msg.textContent = e.message; }
+      btn.disabled = false; btn.textContent = 'Send message';
+    });
+  })();
+  </script>
   <h2>Who runs it</h2>
   <p>BayCounty.me is built and hosted by <a href="https://fluxlabs.net/" target="_blank" rel="noopener">Flux Labs</a>, a managed IT services company in Panama City.</p>
 </div>'''
