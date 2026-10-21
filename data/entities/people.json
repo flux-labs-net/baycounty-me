@@ -1,7 +1,31 @@
 {
  "about": "Elected officials, department leaders and 2026 local candidates named in the site's datasets, one id per person. Names are matched on first and last name with common nicknames (Doug = Douglas, Chris = Christopher, Dave = David ...), ignoring middle initials, titles and notes in parentheses; \"(D2)\" style suffixes become the district field. People who appear under more than one government are listed in multi_government for checking. No other people are included.",
- "count": 134,
+ "count": 136,
  "people": [
+  {
+   "id": "adrian-welle",
+   "name": "Adrian Welle",
+   "aliases": [
+    "Adrian Welle"
+   ],
+   "district": null,
+   "gov_ids": [
+    "mb"
+   ],
+   "roles": [
+    {
+     "role": "former board member",
+     "gov_id": "mb",
+     "seat": "2024",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "mb",
+     "source": "votes"
+    }
+   ]
+  },
   {
    "id": "allan-branch",
    "name": "Allan Branch",
@@ -2313,6 +2337,30 @@
     {
      "role": "board member",
      "gov_id": "pc",
+     "source": "votes"
+    }
+   ]
+  },
+  {
+   "id": "michele-miller",
+   "name": "Michele Miller",
+   "aliases": [
+    "Michele Miller"
+   ],
+   "district": null,
+   "gov_ids": [
+    "mb"
+   ],
+   "roles": [
+    {
+     "role": "former board member",
+     "gov_id": "mb",
+     "seat": "Mayor",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "mb",
      "source": "votes"
     }
    ]
