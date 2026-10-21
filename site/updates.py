@@ -10,7 +10,7 @@ import html
 
 CHANGES = [
     {'date': '2026-10-21', 'title': 'Correction: Lynn Haven commission, and a cleaner officials page',
-     'text': 'Corey Langford is listed as Lynn Haven\'s fifth commissioner; Judy Tinder\'s recorded votes remain on the votes page as a former member. The officials page now shows each board as a simple roster, with notes under names and county officers as cards. Springfield and Parker are described as clerk-run cities with no manager, and Parker\'s City Clerk is listed.',
+     'text': 'Corey Langford is listed as Lynn Haven\'s fifth commissioner; Judy Tinder\'s recorded votes remain on the votes page as a former member. The officials page now shows each board as a simple roster, with notes under names and county officers as cards. Springfield and Parker are described as clerk-run cities with no manager, and Parker\'s City Clerk, Rachelle Stanley, is listed.',
      'pages': ['/who-runs-bay-county', '/public-money/votes']},
     {'date': '2026-10-20', 'title': 'How they voted',
      'text': 'Recorded votes on budgets, tax rates, contracts, land and borrowing, with every member\'s vote and split votes first. Now covers the County Commission and every city: 351 votes, 115 of them split.',
