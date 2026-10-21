@@ -1,6 +1,6 @@
 // Pure query helpers shared by the REST API (v1.js) and the MCP server (mcp.js): filtering, sorting and CSV.
 // No database or network access here, so they can be tested on their own (see api/__tests__).
-const RESERVED = new Set(['q', 'fields', 'sort', 'limit', 'offset', 'format', 'path', 'api_key']);
+const RESERVED = new Set(['q', 'fields', 'sort', 'limit', 'offset', 'format', 'path', 'api_key', 'group_by', 'sum']);
 const CSV_MAX = 10000; // format=csv returns every matching row up to this many
 const blank = x => x == null || x === '' || (typeof x === 'string' && !x.trim());
 // A number for comparisons, or null when the value is missing or not numeric (so it never matches _min/_max).
@@ -18,7 +18,7 @@ function filterRows(rows, query) {
   let out = rows.filter(r => {
     for (const [k0, v0] of conds) {
       const v = String(Array.isArray(v0) ? v0[0] : v0);
-      const m = k0.match(/^(.+?)_(min|max|from|to|contains)$/);
+      const m = k0.match(/^(.+?)_(min|max|from|to|contains|ne|null)$/);
       const k = m && !(k0 in r) ? m[1] : k0, op = m && !(k0 in r) ? m[2] : 'eq';
       if (!(k in r)) return false;
       const x = r[k];
@@ -30,6 +30,14 @@ function filterRows(rows, query) {
       if (op === 'from' && (blank(x) || !(String(x) >= v))) return false;
       if (op === 'to' && (blank(x) || !(String(x) <= v + '￿'))) return false;
       if (op === 'contains' && !String(x ?? '').toLowerCase().includes(v.toLowerCase())) return false;
+      // _ne: not equal to any of the comma-separated values (case-insensitive). Blank values count as "not equal".
+      if (op === 'ne' && v.toLowerCase().split(',').includes(String(x ?? '').toLowerCase()) && !blank(x)) return false;
+      // _null=true: missing or blank; _null=false: has a value. Anything else is ignored.
+      if (op === 'null') {
+        const want = v.toLowerCase();
+        if (want === 'true' && !blank(x)) return false;
+        if (want === 'false' && blank(x)) return false;
+      }
       if (op === 'eq') {
         const opts = v.toLowerCase().split(',');
         if (!opts.includes(String(x ?? '').toLowerCase())) return false;
@@ -69,4 +77,28 @@ function toCsv(rows) {
   return [keys.map(csvCell).join(','), ...rows.map(r => keys.map(k => csvCell(r[k])).join(','))].join('\n') + '\n';
 }
 
-module.exports = {RESERVED, CSV_MAX, filterRows, toCsv, csvCell, rowText, num, blank};
+// Aggregation: ?group_by=col[,col2]&sum=col[,col2]. One row per group with count and sum_<col> for each sum
+// column (non-numeric and blank values are skipped and not counted in the sum; n_<col> says how many were added).
+// Groups are sorted by count, largest first. Throws {status: 400} for unknown columns.
+function aggregate(rows, groupBy, sum, columns) {
+  const gs = String(groupBy || '').split(',').map(s => s.trim()).filter(Boolean);
+  const ss = String(sum || '').split(',').map(s => s.trim()).filter(Boolean);
+  const known = new Set(columns || rows.flatMap(r => Object.keys(r)));
+  const bad = [...gs, ...ss].filter(c => !known.has(c));
+  if (!gs.length) throw Object.assign(new Error('group_by needs at least one column.'), {status: 400, expose: true});
+  if (bad.length) throw Object.assign(new Error(`Unknown column(s): ${bad.join(', ')}.`), {status: 400, expose: true});
+  const groups = new Map();
+  for (const r of rows) {
+    const keyVals = gs.map(c => (r[c] === undefined ? null : r[c]));
+    const k = JSON.stringify(keyVals);
+    let g = groups.get(k);
+    if (!g) { g = {...Object.fromEntries(gs.map((c, i) => [c, keyVals[i]])), count: 0}; for (const c of ss) { g['sum_' + c] = 0; g['n_' + c] = 0; } groups.set(k, g); }
+    g.count++;
+    for (const c of ss) { const n = num(r[c]); if (n !== null) { g['sum_' + c] += n; g['n_' + c]++; } }
+  }
+  const out = [...groups.values()];
+  for (const g of out) for (const c of ss) g['sum_' + c] = Math.round(g['sum_' + c] * 100) / 100;
+  return out.sort((a, b) => b.count - a.count);
+}
+
+module.exports = {RESERVED, CSV_MAX, filterRows, toCsv, csvCell, rowText, num, blank, aggregate};
