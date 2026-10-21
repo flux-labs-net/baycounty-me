@@ -340,3 +340,7 @@ a.src:hover{color:var(--blue)}
   .pay-table td.wrap{grid-column:1/-1;grid-row:3;min-width:0;margin-top:4px}
   .pay-table td:nth-child(2) br{display:none}
 }
+
+.cov-table{min-width:0}
+.cov-table th a{font-weight:500}
+.callout.launch{border-left-color:var(--blue)}

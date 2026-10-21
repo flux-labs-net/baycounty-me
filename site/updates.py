@@ -54,7 +54,17 @@ CHANGES = [
 ]
 
 
+LABELS = {'/': 'Home', '/my-address': 'My Address', '/public-money/tax-dollars': 'Tax Dollars', '/public-money/fees-and-bills': 'Fees & Bills',
+          '/public-money/tourist-tax': 'Tourist Tax', '/public-money/amendment-3': 'Amendment 3', '/public-money/cra-spending': 'CRA Spending',
+          '/public-money/sales-tax-projects': 'Sales Tax Projects', '/public-money/hurricane-michael': 'Hurricane Michael',
+          '/public-money/contracts': 'Contracts', '/public-money/votes': 'How They Voted', '/public-money/debt': 'Debt',
+          '/public-money/audits': 'Audit Findings', '/who-runs-bay-county': 'Officials', '/glossary': 'Glossary', '/search': 'Search',
+          '/about': 'About', '/updates': "What's new"}
+
+
 def last_updated(path):
+    if path == '/updates':
+        return CHANGES[0]['date']
     for c in CHANGES:
         if path in c['pages']:
             return c['date']
@@ -65,12 +75,44 @@ def nice(d):
     return date.fromisoformat(d).strftime('%b %-d, %Y')
 
 
+def coverage():
+    """How far back each dataset reaches, read from the data so it stays accurate."""
+    import json, os, re
+    D = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'data')
+    j = lambda *p: json.load(open(os.path.join(D, *p)))
+    mon = lambda d: date.fromisoformat(d[:10]).strftime('%B %Y')
+    rows = []
+    try:
+        from tax_page import build_data
+        y = build_data()['years']; rows.append(('Property tax rates and levies', f'Tax years {y[0]}\u2013{y[-1]}', '/public-money/tax-dollars'))
+    except Exception:
+        pass
+    fy = sorted({int(m.group(1)) for c in j('tourism', 'tourism_surtax.json')['bed_tax']['collections'] for m in [re.match(r'(\d{4})', str(c['fy']))] if m})
+    part = [c for c in j('tourism', 'tourism_surtax.json')['bed_tax']['collections'] if c.get('partial') and str(c['fy']).startswith(str(fy[-1]))]
+    rows.append(('Tourist (bed) tax collections', f'FY{fy[0]}\u2013FY{fy[-1]}' + (f" (FY{fy[-1]} through {part[0]['period'].split('through ')[-1].split(' (')[0]})" if part and 'through' in part[0].get('period', '') else ''), '/public-money/tourist-tax'))
+    rows.append(('Hurricane Michael recovery money', 'October 2018 disaster declaration to date', '/public-money/hurricane-michael'))
+    ds = sorted(c['date'] for c in j('contracts', 'contracts.json')['contracts'] if c.get('date'))
+    rows.append(('Contracts and change orders', f'Since {mon(ds[0])}', '/public-money/contracts'))
+    fa = sorted({m.group(0) for a in j('debt_audit', 'debt_audit.json')['audits'] for m in [re.match(r'FY\d{4}', a.get('fy') or '')] if m})
+    rows.append(('Audit findings', f'{fa[0]}\u2013{fa[-1]} audits', '/public-money/audits'))
+    vd = sorted(v['date'] for v in j('votes', 'votes.json')['votes'] if v.get('date'))
+    rows.append(('Recorded votes', f'{mon(vd[0])} to {mon(vd[-1])}', '/public-money/votes'))
+    rows.append(('Property values (My Address)', '2026 property roll, live from Bay County GIS', '/my-address'))
+    return rows
+
+
 def updates_page():
-    items = ''.join(f'''<li><span class="tl-d">{nice(c["date"])}</span><span><b>{html.escape(c["title"])}.</b> {html.escape(c["text"])} {" · ".join(f'<a href="{p}">{p}</a>' for p in c["pages"])}</span></li>''' for c in CHANGES)
+    launch = nice(CHANGES[-1]['date'])
+    cov = ''.join(f'<tr><th scope="row"><a href="{u}">{html.escape(n)}</a></th><td>{html.escape(r)}</td></tr>' for n, r, u in coverage())
+    items = ''.join(f'''<li><span class="tl-d">{nice(c["date"])}</span><span><b>{html.escape(c["title"])}.</b> {html.escape(c["text"])} {" · ".join(f'<a href="{p}">{LABELS.get(p, p)}</a>' for p in c["pages"])}</span></li>''' for c in CHANGES)
     return f'''<div class="page tax">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">What's new</span><h1>Updates</h1>
     <p class="lede">New pages, new data and corrections, newest first. Subscribe with any feed reader to get them as they happen: <a href="/updates.xml">RSS feed</a>.</p></div></header>
-  <ol class="timeline">{items}</ol>
+  <aside class="callout launch"><b>BayCounty.me launched on {launch}.</b> The first entries below are the initial pages going live. From here on, each new dataset, data refresh and correction gets its own dated entry.</aside>
+  <section class="tx-sec"><div class="sec-hd"><h2 id="log">Change log</h2></div><ol class="timeline">{items}</ol></section>
+  <section class="tx-sec"><div class="sec-hd"><h2 id="covers">What the data covers</h2><span class="muted">The site is new; many of the records go back years</span></div>
+    <div class="tablewrap"><table class="tx-table cov-table"><thead><tr><th scope="col">Records</th><th scope="col">Period covered</th></tr></thead><tbody>{cov}</tbody></table></div>
+    <p class="note">Each page lists its own sources and the date its data was gathered. See <a href="/about">About</a> for how records are collected.</p></section>
 </div>
 <link rel="stylesheet" href="/assets/tax.css">'''
 
