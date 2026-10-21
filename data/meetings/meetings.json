@@ -1,0 +1,868 @@
+{
+  "generated": "2026-10-21T07:26:01-05:00",
+  "window": {
+    "from": "2026-10-21",
+    "to": "2026-12-20"
+  },
+  "timezone": "America/Chicago",
+  "boards": [
+    {
+      "id": "county",
+      "name": "Bay County Board of County Commissioners",
+      "gov": "county",
+      "schedule": "Regular meetings at 9:00 a.m., generally the 1st and 3rd Tuesday of the month (dates as posted on the County calendar and PrimeGov; budget hearings at 5:01 p.m. in September).",
+      "location": "Bay County Government Center, 840 W. 11th St., Panama City, FL 32401",
+      "source_url": "https://baycountyfl.primegov.com/public/portal",
+      "calendar_url": "https://www.baycountyfl.gov/Calendar.aspx",
+      "schedule_source_url": "https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=38&feed=calendar",
+      "sources": {
+        "PrimeGov": "ok (22 records)",
+        "calendar (iCal cat 38)": "ok (4 records)"
+      },
+      "coverage": {
+        "agenda_feed": 0,
+        "calendar": 4,
+        "expected": 0
+      }
+    },
+    {
+      "id": "county-planning",
+      "name": "Bay County Planning Commission",
+      "gov": "county",
+      "schedule": "Monthly; recent posted dates are the 3rd Tuesday at 1:30 p.m. (per the County calendar).",
+      "location": "Bay County Government Center, 840 W. 11th St., Panama City, FL 32401",
+      "source_url": "https://www.baycountyfl.gov/Calendar.aspx",
+      "calendar_url": "https://www.baycountyfl.gov/Calendar.aspx",
+      "schedule_source_url": "https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=26&feed=calendar",
+      "sources": {
+        "calendar (iCal cat 26)": "ok (2 records)"
+      },
+      "coverage": {
+        "agenda_feed": 0,
+        "calendar": 2,
+        "expected": 0
+      }
+    },
+    {
+      "id": "schools",
+      "name": "Bay District School Board",
+      "gov": "schools",
+      "schedule": "Not available: bay.k12.fl.us serves a JavaScript bot challenge to server requests and the district's published meeting-schedule PDF could not be retrieved. No dates are generated.",
+      "location": "Bay District Schools, 1311 Balboa Ave., Panama City, FL 32401 (district office address; meeting venue not confirmed)",
+      "source_url": "https://bay.k12.fl.us/school-board",
+      "calendar_url": null,
+      "schedule_source_url": "https://bay.k12.fl.us/school-board",
+      "sources": {
+        "website": "error: HTTPError: HTTP Error 404: Not Found"
+      },
+      "coverage": {
+        "agenda_feed": 0,
+        "calendar": 0,
+        "expected": 0
+      }
+    },
+    {
+      "id": "pc",
+      "name": "Panama City City Commission",
+      "gov": "pc",
+      "schedule": "2nd and 4th Tuesday of each month, unless otherwise stated: 2nd Tuesday at 8 a.m., 4th Tuesday at 4:30 p.m., at the Bay County Government Center, 840 W. 11th St. Virtual workshops are also posted on the city calendar. Holiday months are consolidated on the city calendar.",
+      "location": "Bay County Government Center, 840 W. 11th St., Panama City, FL 32401",
+      "source_url": "https://www.panamacity.gov/AgendaCenter",
+      "calendar_url": "https://www.panamacity.gov/Calendar.aspx",
+      "schedule_source_url": "https://panamacity.gov/401/About-Meetings",
+      "sources": {
+        "AgendaCenter": "ok (26 records)",
+        "calendar (iCal cat 22)": "ok (52 records)"
+      },
+      "coverage": {
+        "agenda_feed": 0,
+        "calendar": 3,
+        "expected": 0
+      }
+    },
+    {
+      "id": "pc-cra",
+      "name": "Panama City Community Redevelopment Agency (CRA) Board",
+      "gov": "pc",
+      "schedule": "Beginning October 2026: first Tuesday of the month at 4:30 p.m., alternating monthly between a regular CRA Board meeting and a virtual CRA workshop.",
+      "location": "Bay County Government Center, 840 W. 11th St., Panama City, FL 32401 (workshops are virtual)",
+      "source_url": "https://www.panamacity.gov/AgendaCenter",
+      "calendar_url": "https://www.panamacity.gov/Calendar.aspx",
+      "schedule_source_url": "https://panamacity.gov/787/CRA-Board",
+      "sources": {
+        "AgendaCenter": "ok (3 records)",
+        "calendar (iCal cat 22)": "ok (11 records)"
+      },
+      "coverage": {
+        "agenda_feed": 0,
+        "calendar": 2,
+        "expected": 0
+      }
+    },
+    {
+      "id": "pcb",
+      "name": "Panama City Beach City Council",
+      "gov": "pcb",
+      "schedule": "2nd and 4th Thursday of every month (except November and December); 2nd Thursday meetings at 5 p.m., 4th Thursday meetings at 9 a.m.",
+      "location": "City Council Chambers, City Hall, 17007 Panama City Beach Pkwy, Panama City Beach, FL 32413",
+      "source_url": "https://pcbgov.granicus.com/ViewPublisher.php?view_id=1",
+      "calendar_url": "https://pcbgov.granicus.com/ViewPublisher.php?view_id=1",
+      "schedule_source_url": "https://www.pcbfl.gov/185/City-Council",
+      "sources": {
+        "Granicus RSS": "ok (67 records)"
+      },
+      "coverage": {
+        "agenda_feed": 1,
+        "calendar": 0,
+        "expected": 0
+      }
+    },
+    {
+      "id": "lh",
+      "name": "Lynn Haven City Commission",
+      "gov": "lh",
+      "schedule": "Regular meetings 2nd and 4th Tuesday at 5:30 p.m. in the Walter T. Kelley Commission Chambers, 825 Ohio Ave. (pattern of dates on the city calendar and CivicClerk; holiday months consolidated).",
+      "location": "Walter T. Kelley Commission Chambers, 825 Ohio Ave., Lynn Haven, FL 32444",
+      "source_url": "https://lynnhavenfl.portal.civicclerk.com/",
+      "calendar_url": "https://www.cityoflynnhaven.gov/Calendar.aspx",
+      "schedule_source_url": "https://www.cityoflynnhaven.gov/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar",
+      "sources": {
+        "CivicClerk": "ok (18 records)",
+        "calendar (iCal cat 14)": "ok (5 records)"
+      },
+      "coverage": {
+        "agenda_feed": 4,
+        "calendar": 0,
+        "expected": 0
+      }
+    },
+    {
+      "id": "lh-cra",
+      "name": "Lynn Haven Community Redevelopment Agency (CRA) Board",
+      "gov": "lh",
+      "schedule": "Recent CRA Board meetings have been held at 5:15 p.m. before City Commission meetings (observed on CivicClerk; no standalone published schedule found).",
+      "location": "825 Ohio Ave., Lynn Haven, FL 32444",
+      "source_url": "https://lynnhavenfl.portal.civicclerk.com/",
+      "calendar_url": null,
+      "schedule_source_url": "https://lynnhavenfl.portal.civicclerk.com/",
+      "sources": {
+        "CivicClerk": "ok (5 records)"
+      },
+      "coverage": {
+        "agenda_feed": 0,
+        "calendar": 0,
+        "expected": 0
+      }
+    },
+    {
+      "id": "cw",
+      "name": "Callaway City Commission",
+      "gov": "cw",
+      "schedule": "Commission meetings at 6:00 p.m. at the Callaway Arts & Conference Center, 500 Callaway Pkwy; 2nd and 4th Tuesday pattern on the city calendar (one meeting in Nov/Dec).",
+      "location": "Callaway Arts & Conference Center, 500 Callaway Pkwy, Callaway, FL 32404",
+      "source_url": "https://www.cityofcallaway.com/AgendaCenter",
+      "calendar_url": "https://www.cityofcallaway.com/Calendar.aspx",
+      "schedule_source_url": "https://www.cityofcallaway.com/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar",
+      "sources": {
+        "AgendaCenter": "ok (12 records)",
+        "calendar (iCal cat 14)": "ok (11 records)"
+      },
+      "coverage": {
+        "agenda_feed": 0,
+        "calendar": 3,
+        "expected": 0
+      }
+    },
+    {
+      "id": "cw-cra",
+      "name": "Callaway Community Redevelopment Agency (CRA)",
+      "gov": "cw",
+      "schedule": "No published regular schedule found; meetings appear in the AgendaCenter when posted.",
+      "location": "Callaway Arts & Conference Center, 500 Callaway Pkwy, Callaway, FL 32404 (typical; confirm on agenda)",
+      "source_url": "https://www.cityofcallaway.com/AgendaCenter",
+      "calendar_url": null,
+      "schedule_source_url": "https://www.cityofcallaway.com/147/Community-Redevelopment",
+      "sources": {
+        "AgendaCenter": "ok (1 records)"
+      },
+      "coverage": {
+        "agenda_feed": 0,
+        "calendar": 0,
+        "expected": 0
+      }
+    },
+    {
+      "id": "sp",
+      "name": "Springfield City Commission",
+      "gov": "sp",
+      "schedule": "Commission Meetings the first Monday of the month and Commission Workshops the third Monday, at 5:30 p.m., City Hall Commission Room, 408 School Avenue.",
+      "location": "Springfield City Hall Commission Room, 408 School Ave., Springfield, FL 32401",
+      "source_url": "https://www.springfieldfl.net/meetings",
+      "calendar_url": "https://www.springfieldfl.net/calendar",
+      "schedule_source_url": "https://www.springfieldfl.net/city-commission",
+      "sources": {
+        "Meetings list /meetings": "ok (4 records)",
+        "Meetings list /meetings/recent": "ok (54 records)"
+      },
+      "coverage": {
+        "agenda_feed": 3,
+        "calendar": 0,
+        "expected": 0
+      }
+    },
+    {
+      "id": "parker",
+      "name": "Parker City Council",
+      "gov": "parker",
+      "schedule": "Regular meetings 1st and 3rd Tuesday at 5:30 p.m. (pattern of posted agendas; no current published schedule statement found - expected dates are marked as such).",
+      "location": "Parker City Hall, 1001 West Park Street, Parker, FL 32404 (city contact address; confirm venue on agenda)",
+      "source_url": "https://cityofparker.com/government/agendas-minutes/",
+      "calendar_url": null,
+      "schedule_source_url": "https://cityofparker.com/government/agendas-minutes/",
+      "sources": {
+        "Agendas & Minutes page": "ok (209 records)"
+      },
+      "coverage": {
+        "agenda_feed": 0,
+        "calendar": 0,
+        "expected": 4
+      }
+    },
+    {
+      "id": "mb",
+      "name": "Mexico Beach City Council",
+      "gov": "mb",
+      "schedule": "Second and fourth Tuesdays of the month at 9:00 a.m. CT.",
+      "location": "Venue not stated on the council meetings page; City of Mexico Beach offices: 201 Paradise Path, Mexico Beach, FL 32456",
+      "source_url": "https://mexicobeachfl.gov/government/council-meetings/",
+      "calendar_url": null,
+      "schedule_source_url": "https://mexicobeachfl.gov/government/council-meetings/",
+      "sources": {
+        "Council Meetings page": "ok (82 records)"
+      },
+      "coverage": {
+        "agenda_feed": 4,
+        "calendar": 0,
+        "expected": 3
+      }
+    }
+  ],
+  "meetings": [
+    {
+      "board": "cw-cra",
+      "title": "Budget Hearing",
+      "start": "2026-09-17",
+      "location": "Callaway Arts & Conference Center, 500 Callaway Pkwy, Callaway, FL 32404 (typical; confirm on agenda)",
+      "agenda_url": "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_09172026-423",
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "AgendaCenter:https://www.cityofcallaway.com/AgendaCenter",
+      "status": "posted",
+      "past": true
+    },
+    {
+      "board": "pcb",
+      "title": "City Council",
+      "start": "2026-09-24T09:00:00-05:00",
+      "location": "City Hall Council Chambers, 17007 Panama City Beach Pkwy, Panama City Beach, FL 32413",
+      "agenda_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=419",
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "Granicus:https://pcbgov.granicus.com/ViewPublisherRSS.php?view_id=1&mode=agendas",
+      "status": "posted",
+      "past": true
+    },
+    {
+      "board": "sp",
+      "title": "Commission Meeting",
+      "start": "2026-10-05T17:30:00-05:00",
+      "location": "Springfield City Hall Commission Room, 408 School Ave., Springfield, FL",
+      "agenda_url": "https://www.springfieldfl.net/media/10901",
+      "packet_url": null,
+      "minutes_url": "https://www.springfieldfl.net/media/10906",
+      "source": "Springfield:https://www.springfieldfl.net/meetings/recent",
+      "status": "posted",
+      "detail_url": "https://www.springfieldfl.net/community/meeting/commission-meeting-74",
+      "past": true
+    },
+    {
+      "board": "cw",
+      "title": "Regular Meeting",
+      "start": "2026-10-13",
+      "location": "Callaway Arts & Conference Center, 500 Callaway Pkwy, Callaway, FL 32404",
+      "agenda_url": "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_10132026-425",
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "AgendaCenter:https://www.cityofcallaway.com/AgendaCenter",
+      "status": "posted",
+      "past": true
+    },
+    {
+      "board": "lh-cra",
+      "title": "10/13/26 CRA Board Meeting",
+      "start": "2026-10-13T17:15:00-05:00",
+      "location": "825 Ohio Avenue, Lynn Haven",
+      "agenda_url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1130,plainText=false)",
+      "packet_url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1131,plainText=false)",
+      "minutes_url": null,
+      "source": "CivicClerk:https://lynnhavenfl.portal.civicclerk.com",
+      "status": "posted",
+      "detail_url": "https://lynnhavenfl.portal.civicclerk.com/event/2130/files",
+      "past": true,
+      "items": []
+    },
+    {
+      "board": "mb",
+      "title": "City Council Meeting",
+      "start": "2026-10-13T09:00:00-05:00",
+      "location": "Venue not stated on the council meetings page; City of Mexico Beach offices: 201 Paradise Path, Mexico Beach, FL 32456",
+      "agenda_url": "https://mexicobeachfl.gov/uploads/2026/09/October-13-2026-City-Council-Meeting-Agenda.pdf",
+      "packet_url": "https://mexicobeachfl.gov/uploads/2026/09/October-13-2026-CIty-Council-Meeting-Agenda-Packet.pdf",
+      "minutes_url": null,
+      "source": "MexicoBeach:https://mexicobeachfl.gov/government/council-meetings/",
+      "status": "posted",
+      "detail_url": "https://youtube.com/live/aX2AYat8SmM?feature=share",
+      "past": true
+    },
+    {
+      "board": "pc-cra",
+      "title": "Community Redevelopment Agency Board Meeting for October 13, 2026",
+      "start": "2026-10-13T16:30:00-05:00",
+      "location": "Bay County Government Center, 840 W. 11th St., Panama City, FL 32401 (workshops are virtual)",
+      "agenda_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-912?html=true",
+      "packet_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-912?packet=true",
+      "minutes_url": null,
+      "source": "AgendaCenter:https://www.panamacity.gov/AgendaCenter",
+      "status": "posted",
+      "past": true,
+      "items": [
+        {
+          "title": "Consideration, approval, and authorization to execute a Redevelopment Site Preparation (RSP) Grant Agreement with Boys & Girls Clubs of Bay County in an amount to be determined by the CRA Board, up to the requested amount of $372,166.00, for eligible site preparation costs associated with the property located at 265 Everitt Avenue, Panama City, Florida (Parcel ID 23379-010-000), within the Millvil",
+          "amount": "$372,166.00"
+        },
+        {
+          "title": "Consideration, approval, and authorization to execute a Redevelopment Site Preparation (RSP) Grant Agreement with Angel’s Place of Bay County LLC in an amount to be determined by the CRA Board, up to the requested amount of $35,360.92 for eligible site preparation costs associated with the property located at 2509 W. 13th St, Panama City, Florida (Parcel ID 29788-000-000), within the St. Andrews C",
+          "amount": "$35,360.92"
+        },
+        {
+          "title": "Consideration, approval, and authorization to execute a Redevelopment Site Preparation (RSP) Grant Agreement with Jenks & Oak, LLC, in an amount to be determined by the CRA Board, up to the requested amount of $192,000.00, for eligible site preparation costs associated with the property located at 402 Jenks Avenue, Panama City, FL (Parcel 19595-000-000), within the Downtown CRA District.",
+          "amount": "$192,000.00"
+        },
+        {
+          "title": "Consideration and approval of the Amended Panama City Community Redevelopment Agency (CRA) Commercial Property Improvement (CPI) Grant Program.",
+          "amount": null
+        },
+        {
+          "title": "Consideration, approval, and authorization to execute a Task Order with Panhandle Engineering, Inc. in the amount of $67,215.00 for survey and design services for the 16th Street Sidewalk Project within the St. Andrews CRA District – East Expansion Area, and authorization for staff to pursue Florida Department of Transportation (FDOT) Safe Routes to School (SRTS) grant funding for the project.",
+          "amount": "$67,215.00"
+        },
+        {
+          "title": "Consideration, approval, and authorization to award ITB No. PC26-048, Lisenby Avenue Sidewalk Improvements, to Break-N-Ground, LLC in the amount of $156,388.63 and authorization to execute the associated contract.",
+          "amount": "$156,388.63"
+        }
+      ]
+    },
+    {
+      "board": "county",
+      "title": "BOCC Regular Meeting",
+      "start": "2026-10-20T09:00:00-05:00",
+      "location": "Bay County Government Center, 840 W. 11th St., Panama City, FL",
+      "agenda_url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1942",
+      "packet_url": "https://baycountyfl.primegov.com/Public/CompiledDocument?meetingTemplateId=1942&compileOutputType=1",
+      "minutes_url": null,
+      "source": "PrimeGov:https://baycountyfl.primegov.com/public/portal",
+      "status": "posted",
+      "detail_url": "https://baycountyfl.new.swagit.com/videos/404435",
+      "past": true,
+      "items": [
+        {
+          "title": "FY 2026 Budget Amendment - Board adopt a resolution amending the Fiscal Year 2025-2026 Budget.",
+          "amount": null
+        },
+        {
+          "title": "FY 2027 Budget Amendment - Board adopt a resolution amending the Fiscal Year 2026-2027 Budget.",
+          "amount": null
+        },
+        {
+          "title": "FY 2027 Public Health Services Contract - Board authorize chairman to sign the FY26/27 public health services contract for the period of October 1, 2026 through September 30, 2027.",
+          "amount": null
+        },
+        {
+          "title": "Misdemeanor Probation Services Contract - Board to approve the attached contract with Professional Probation Services, Inc., for misdemeanor probation services, and authorize the chairman to sign the same.",
+          "amount": null
+        },
+        {
+          "title": "Ratify Purchase/Repair of Emergency Communications Equipment - Board to ratify Purchase Order POBOCC-10001207 to Williams Communications, Inc.",
+          "amount": null
+        },
+        {
+          "title": "Purchase of Fire Engine - Board approve the purchase of a fire engine and authorize the chairman to sign the proposal.",
+          "amount": null
+        },
+        {
+          "title": "Janitorial Services Contract Amendment - Approve Amendment No. 1 to Contract 25-11 with Executive Cleaning, Inc., increasing the annual contract amount to $56,528 for Group D Janitorial Services.",
+          "amount": "$56,528"
+        },
+        {
+          "title": "Grounds Maintenance Contract Amendment - Approve Amendment No. 2 to Contract 25-51 with Brandow’s Lawn and Landscape, removing 21 properties and reducing the contract total by $50,226 to $209,380.97.",
+          "amount": "$50,226"
+        },
+        {
+          "title": "Automatic Backwash Filter Rehab Contract - Board award Contract 26-57, Military Point Automatic Backwash Filter Rehab, to Marshall Brothers in the amount of $690,869.00.",
+          "amount": "$690,869.00"
+        },
+        {
+          "title": "Advanced Wastewater Treatment Plant Lease Agreement - Board award the first amendment to lease No. USAF-AETC-TYN-01-96-009 and authorize the chairman to execute the agreement.",
+          "amount": null
+        }
+      ]
+    },
+    {
+      "board": "lh",
+      "title": "10/20/26 Special Executive Session - Case No. 5:26-cv-00032-AW-MJF (Vickie Gainer v. City of Lynn Ha",
+      "start": "2026-10-20T15:30:00-05:00",
+      "location": "825 Ohio Avenue, Lynn Haven",
+      "agenda_url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1137,plainText=false)",
+      "packet_url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1138,plainText=false)",
+      "minutes_url": null,
+      "source": "CivicClerk:https://lynnhavenfl.portal.civicclerk.com",
+      "status": "posted",
+      "detail_url": "https://lynnhavenfl.portal.civicclerk.com/event/2143/files",
+      "past": true,
+      "items": []
+    },
+    {
+      "board": "parker",
+      "title": "Regular Meeting",
+      "start": "2026-10-20T17:30:00-05:00",
+      "location": "Parker City Hall, 1001 West Park Street, Parker, FL 32404 (city contact address; confirm venue on agenda)",
+      "agenda_url": "https://cityofparker.com/wp-content/uploads/filr/7047/Agenda-Regular-Council-Meeting-Package.pdf",
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "Parker:https://cityofparker.com/government/agendas-minutes/",
+      "status": "posted",
+      "past": true
+    },
+    {
+      "board": "pc",
+      "title": "Virtual Workshop Meeting of October 20, 2026.",
+      "start": "2026-10-20T16:30:00-05:00",
+      "location": "Virtual (live stream on the city website)",
+      "agenda_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10202026-915?html=true",
+      "packet_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10202026-915?packet=true",
+      "minutes_url": null,
+      "source": "AgendaCenter:https://www.panamacity.gov/AgendaCenter",
+      "status": "posted",
+      "past": true,
+      "items": []
+    },
+    {
+      "board": "pcb",
+      "title": "City Council",
+      "start": "2026-10-22T09:00:00-05:00",
+      "location": "City Hall Council Chambers, 17007 Panama City Beach Pkwy, Panama City Beach, FL 32413",
+      "agenda_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&event_id=219",
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "Granicus:https://pcbgov.granicus.com/ViewPublisherRSS.php?view_id=1&mode=agendas",
+      "status": "posted",
+      "time_from_schedule": true
+    },
+    {
+      "board": "cw",
+      "title": "Commission Meeting",
+      "start": "2026-10-27T18:00:00-05:00",
+      "location": "Callaway Arts & Conference Center - 500 Callaway Park Way Callaway FL 32404",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "calendar:https://www.cityofcallaway.com/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar",
+      "status": "calendar",
+      "detail_url": "https://www.cityofcallaway.com/calendar.aspx?EID=2707"
+    },
+    {
+      "board": "lh",
+      "title": "City Commission Meeting",
+      "start": "2026-10-27T17:30:00-05:00",
+      "location": "Walter T. Kelley Chambers - 825 Ohio Avenue Lynn Haven FL 32444",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "CivicClerk:https://lynnhavenfl.portal.civicclerk.com",
+      "status": "posted",
+      "detail_url": "https://lynnhavenfl.portal.civicclerk.com/event/1093/files",
+      "calendar_source": "calendar:https://www.cityoflynnhaven.gov/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar",
+      "items": []
+    },
+    {
+      "board": "mb",
+      "title": "City Council Meeting",
+      "start": "2026-10-27T09:00:00-05:00",
+      "location": "Venue not stated on the council meetings page; City of Mexico Beach offices: 201 Paradise Path, Mexico Beach, FL 32456",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "MexicoBeach:https://mexicobeachfl.gov/government/council-meetings/",
+      "status": "posted"
+    },
+    {
+      "board": "pc",
+      "title": "City Commission Meeting",
+      "start": "2026-10-27T16:30:00-05:00",
+      "location": "Bay County Govt. Center - 840 W. 11th St Panama City FL 32401",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "calendar:https://www.panamacity.gov/common/modules/iCalendar/iCalendar.aspx?catID=22&feed=calendar",
+      "status": "calendar",
+      "detail_url": "https://www.panamacity.gov/calendar.aspx?EID=6148"
+    },
+    {
+      "board": "mb",
+      "title": "LDC Workshop",
+      "start": "2026-10-29T09:00:00-05:00",
+      "location": "Venue not stated on the council meetings page; City of Mexico Beach offices: 201 Paradise Path, Mexico Beach, FL 32456",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "MexicoBeach:https://mexicobeachfl.gov/government/council-meetings/",
+      "status": "posted"
+    },
+    {
+      "board": "mb",
+      "title": "LDC Workshop",
+      "start": "2026-10-30T09:00:00-05:00",
+      "location": "Venue not stated on the council meetings page; City of Mexico Beach offices: 201 Paradise Path, Mexico Beach, FL 32456",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "MexicoBeach:https://mexicobeachfl.gov/government/council-meetings/",
+      "status": "posted"
+    },
+    {
+      "board": "sp",
+      "title": "Commission Meeting",
+      "start": "2026-11-02T17:30:00-06:00",
+      "location": "Springfield City Hall Commission Room, 408 School Ave., Springfield, FL",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "Springfield:https://www.springfieldfl.net/meetings",
+      "status": "posted",
+      "detail_url": "https://www.springfieldfl.net/community/meeting/commission-meeting-76"
+    },
+    {
+      "board": "county",
+      "title": "Bay County Board of County Commissioners Meeting",
+      "start": "2026-11-03T09:00:00-06:00",
+      "location": "Government Center - 840 W. 11th st. Panama City FL 32401",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "calendar:https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=38&feed=calendar",
+      "status": "calendar",
+      "detail_url": "https://www.baycountyfl.gov/calendar.aspx?EID=1594"
+    },
+    {
+      "board": "parker",
+      "title": "Regular Meeting (expected)",
+      "start": "2026-11-03T17:30:00-06:00",
+      "location": "Parker City Hall, 1001 West Park Street, Parker, FL 32404 (city contact address; confirm venue on agenda)",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "schedule:pattern observed in posted agendas (no published schedule found)",
+      "status": "expected",
+      "expected": true
+    },
+    {
+      "board": "pc-cra",
+      "title": "Virtual CRA Workshop",
+      "start": "2026-11-03T16:30:00-06:00",
+      "location": "Live Stream on City website - https://www.panamacity.gov/369/Live-Stream - Panama City FL 3240",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "calendar:https://www.panamacity.gov/common/modules/iCalendar/iCalendar.aspx?catID=22&feed=calendar",
+      "status": "calendar",
+      "detail_url": "https://www.panamacity.gov/calendar.aspx?EID=6076"
+    },
+    {
+      "board": "mb",
+      "title": "LDC Workshop",
+      "start": "2026-11-05T09:00:00-06:00",
+      "location": "Venue not stated on the council meetings page; City of Mexico Beach offices: 201 Paradise Path, Mexico Beach, FL 32456",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "MexicoBeach:https://mexicobeachfl.gov/government/council-meetings/",
+      "status": "posted"
+    },
+    {
+      "board": "cw",
+      "title": "Commission Meeting",
+      "start": "2026-11-10T18:00:00-06:00",
+      "location": "Callaway Arts & Conference Center - 500 Callaway Park Way Callaway FL 32404",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "calendar:https://www.cityofcallaway.com/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar",
+      "status": "calendar",
+      "detail_url": "https://www.cityofcallaway.com/calendar.aspx?EID=2696"
+    },
+    {
+      "board": "lh",
+      "title": "City Commission Meeting",
+      "start": "2026-11-10T17:30:00-06:00",
+      "location": "Walter T. Kelley Chambers - 825 Ohio Avenue Lynn Haven FL 32444",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "CivicClerk:https://lynnhavenfl.portal.civicclerk.com",
+      "status": "posted",
+      "detail_url": "https://lynnhavenfl.portal.civicclerk.com/event/1069/files",
+      "calendar_source": "calendar:https://www.cityoflynnhaven.gov/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar"
+    },
+    {
+      "board": "mb",
+      "title": "Regular Meeting (expected)",
+      "start": "2026-11-10T09:00:00-06:00",
+      "location": "Venue not stated on the council meetings page; City of Mexico Beach offices: 201 Paradise Path, Mexico Beach, FL 32456",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "schedule:published schedule (mexicobeachfl.gov council-meetings page)",
+      "status": "expected",
+      "expected": true
+    },
+    {
+      "board": "sp",
+      "title": "Commission Workshop",
+      "start": "2026-11-16T17:30:00-06:00",
+      "location": "Springfield City Hall Commission Room, 408 School Ave., Springfield, FL",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "Springfield:https://www.springfieldfl.net/meetings",
+      "status": "posted",
+      "detail_url": "https://www.springfieldfl.net/community/meeting/commission-workshop-54"
+    },
+    {
+      "board": "county",
+      "title": "Bay County Board of County Commissioners Meeting",
+      "start": "2026-11-17T09:00:00-06:00",
+      "location": "Government Center - 840 W. 11th st. Panama City FL 32401",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "calendar:https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=38&feed=calendar",
+      "status": "calendar",
+      "detail_url": "https://www.baycountyfl.gov/calendar.aspx?EID=1604"
+    },
+    {
+      "board": "county-planning",
+      "title": "Planning Commission Meeting",
+      "start": "2026-11-17T13:30:00-06:00",
+      "location": "Bay County Government Center, 840 W. 11th St., Panama City, FL 32401",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "calendar:https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=26&feed=calendar",
+      "status": "calendar",
+      "detail_url": "https://www.baycountyfl.gov/calendar.aspx?EID=1685"
+    },
+    {
+      "board": "parker",
+      "title": "Regular Meeting (expected)",
+      "start": "2026-11-17T17:30:00-06:00",
+      "location": "Parker City Hall, 1001 West Park Street, Parker, FL 32404 (city contact address; confirm venue on agenda)",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "schedule:pattern observed in posted agendas (no published schedule found)",
+      "status": "expected",
+      "expected": true
+    },
+    {
+      "board": "pc",
+      "title": "City Commission Meeting",
+      "start": "2026-11-17T16:30:00-06:00",
+      "location": "Bay County Government Center - 840 W 11th St. Panama City FL 32401",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "calendar:https://www.panamacity.gov/common/modules/iCalendar/iCalendar.aspx?catID=22&feed=calendar",
+      "status": "calendar",
+      "detail_url": "https://www.panamacity.gov/calendar.aspx?EID=7564"
+    },
+    {
+      "board": "lh",
+      "title": "City Commission Meeting",
+      "start": "2026-11-24T17:30:00-06:00",
+      "location": "Walter T. Kelley Commission Chambers, 825 Ohio Ave., Lynn Haven, FL 32444",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "CivicClerk:https://lynnhavenfl.portal.civicclerk.com",
+      "status": "posted",
+      "detail_url": "https://lynnhavenfl.portal.civicclerk.com/event/1094/files"
+    },
+    {
+      "board": "mb",
+      "title": "Regular Meeting (expected)",
+      "start": "2026-11-24T09:00:00-06:00",
+      "location": "Venue not stated on the council meetings page; City of Mexico Beach offices: 201 Paradise Path, Mexico Beach, FL 32456",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "schedule:published schedule (mexicobeachfl.gov council-meetings page)",
+      "status": "expected",
+      "expected": true
+    },
+    {
+      "board": "county",
+      "title": "Bay County Board of County Commissioners Meeting",
+      "start": "2026-12-01T09:00:00-06:00",
+      "location": "Government Center - 840 W. 11th st. Panama City FL 32401",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "calendar:https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=38&feed=calendar",
+      "status": "calendar",
+      "detail_url": "https://www.baycountyfl.gov/calendar.aspx?EID=1595"
+    },
+    {
+      "board": "parker",
+      "title": "Regular Meeting (expected)",
+      "start": "2026-12-01T17:30:00-06:00",
+      "location": "Parker City Hall, 1001 West Park Street, Parker, FL 32404 (city contact address; confirm venue on agenda)",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "schedule:pattern observed in posted agendas (no published schedule found)",
+      "status": "expected",
+      "expected": true
+    },
+    {
+      "board": "pc-cra",
+      "title": "CRA Board Meeting",
+      "start": "2026-12-01T16:30:00-06:00",
+      "location": "Bay County Govt. Center - 840 W. 11th St Panama City FL 32401",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "calendar:https://www.panamacity.gov/common/modules/iCalendar/iCalendar.aspx?catID=22&feed=calendar",
+      "status": "calendar",
+      "detail_url": "https://www.panamacity.gov/calendar.aspx?EID=6077"
+    },
+    {
+      "board": "sp",
+      "title": "Commission Meeting",
+      "start": "2026-12-07T17:30:00-06:00",
+      "location": "Springfield City Hall Commission Room, 408 School Ave., Springfield, FL",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "Springfield:https://www.springfieldfl.net/meetings",
+      "status": "posted",
+      "detail_url": "https://www.springfieldfl.net/community/meeting/commission-meeting-77"
+    },
+    {
+      "board": "cw",
+      "title": "Commission Meeting",
+      "start": "2026-12-08T18:00:00-06:00",
+      "location": "Callaway Arts & Conference Center - 500 Callaway Park Way Callaway FL 32404",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "calendar:https://www.cityofcallaway.com/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar",
+      "status": "calendar",
+      "detail_url": "https://www.cityofcallaway.com/calendar.aspx?EID=2697"
+    },
+    {
+      "board": "lh",
+      "title": "City Commission Meeting",
+      "start": "2026-12-08T17:30:00-06:00",
+      "location": "Walter T. Kelley Chambers - 825 Ohio Avenue Lynn Haven FL 32444",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "CivicClerk:https://lynnhavenfl.portal.civicclerk.com",
+      "status": "posted",
+      "detail_url": "https://lynnhavenfl.portal.civicclerk.com/event/1070/files",
+      "calendar_source": "calendar:https://www.cityoflynnhaven.gov/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar"
+    },
+    {
+      "board": "mb",
+      "title": "Regular Meeting (expected)",
+      "start": "2026-12-08T09:00:00-06:00",
+      "location": "Venue not stated on the council meetings page; City of Mexico Beach offices: 201 Paradise Path, Mexico Beach, FL 32456",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "schedule:published schedule (mexicobeachfl.gov council-meetings page)",
+      "status": "expected",
+      "expected": true
+    },
+    {
+      "board": "county",
+      "title": "Bay County Board of County Commissioners Meeting",
+      "start": "2026-12-15T09:00:00-06:00",
+      "location": "Government Center - 840 W. 11th st. Panama City FL 32401",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "calendar:https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=38&feed=calendar",
+      "status": "calendar",
+      "detail_url": "https://www.baycountyfl.gov/calendar.aspx?EID=1605"
+    },
+    {
+      "board": "county-planning",
+      "title": "Planning Commission Meeting",
+      "start": "2026-12-15T13:30:00-06:00",
+      "location": "Bay County Government Center, 840 W. 11th St., Panama City, FL 32401",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "calendar:https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=26&feed=calendar",
+      "status": "calendar",
+      "detail_url": "https://www.baycountyfl.gov/calendar.aspx?EID=1686"
+    },
+    {
+      "board": "parker",
+      "title": "Regular Meeting (expected)",
+      "start": "2026-12-15T17:30:00-06:00",
+      "location": "Parker City Hall, 1001 West Park Street, Parker, FL 32404 (city contact address; confirm venue on agenda)",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "schedule:pattern observed in posted agendas (no published schedule found)",
+      "status": "expected",
+      "expected": true
+    },
+    {
+      "board": "pc",
+      "title": "City Commission Meeting",
+      "start": "2026-12-15T16:30:00-06:00",
+      "location": "Bay County Government Center - 840 W 11th St. Panama City FL 32401",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "calendar:https://www.panamacity.gov/common/modules/iCalendar/iCalendar.aspx?catID=22&feed=calendar",
+      "status": "calendar",
+      "detail_url": "https://www.panamacity.gov/calendar.aspx?EID=7565"
+    }
+  ],
+  "errors": [
+    {
+      "board": "schools",
+      "source": "website",
+      "url": "https://bay.k12.fl.us/school-board",
+      "error": "HTTPError: HTTP Error 404: Not Found"
+    }
+  ],
+  "notes": [
+    "status=posted: listed by an official agenda system or the board's own meetings page (agenda_url is set once an agenda is published); status=calendar: posted on the government's website calendar, agenda not yet linked; expected=true: generated from the regular schedule, not an official posting - confirm before relying on it.",
+    "Each board also includes its most recent past meeting, flagged past=true."
+  ]
+}
