@@ -8,12 +8,14 @@ const DB_KEY = process.env.SUPABASE_PUBLISHABLE_KEY || 'sb_publishable_Z2KjpNqiF
 const PAGE = 1000;
 const TTL = 300e3;
 const cache = new Map();
+// Published files are always fetched from this fixed origin, never from the request's Host or
+// X-Forwarded-Host headers (which a caller controls; using them would let one request poison the cache).
+const SITE_URL = String(process.env.SITE_URL || 'https://baycounty.me').replace(/\/+$/, '');
 
 async function loadFile(req, path) {
   const c = cache.get(path);
   if (c && Date.now() - c.t < TTL) return c.v;
-  const host = req.headers['x-forwarded-host'] || req.headers.host || 'baycounty.me';
-  const r = await fetch(`https://${host}${path}`);
+  const r = await fetch(`${SITE_URL}${path}`);
   if (!r.ok) throw Object.assign(new Error(`Could not load ${path}`), {status: r.status === 404 ? 404 : 502});
   const v = await r.json(); cache.set(path, {t: Date.now(), v}); return v;
 }
@@ -52,4 +54,4 @@ async function datasetRows(req, meta) {
   return v;
 }
 
-module.exports = {loadFile, datasetRows};
+module.exports = {loadFile, datasetRows, SITE_URL};
