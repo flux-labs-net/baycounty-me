@@ -53,10 +53,22 @@ function clean(body) {
   return out;
 }
 
+// An IPv4/IPv6 address, optionally with a /prefix in range. Checked before Postgres sees it, so bad input is a 400, not a 500.
+const net = require('net');
+function validNet(s) {
+  const m = String(s).match(/^([0-9a-fA-F:.]+)(?:\/(\d{1,3}))?$/);
+  if (!m) return false;
+  const v = net.isIP(m[1]);
+  if (!v) return false;
+  return m[2] === undefined || Number(m[2]) <= (v === 4 ? 32 : 128);
+}
+const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
 // Which requests a stats/logs query covers: one key, keyless traffic, or everything.
 function scope(k, params) {
   if (!k || k === 'all') return () => '';
   if (k === 'anon') return a => ` and ${a}key_id is null`;
+  if (!UUID.test(String(k))) throw Object.assign(new Error('Unknown key filter.'), {status: 400});
   params.push(k); const n = params.length;
   return a => ` and ${a}key_id = $${n}`;
 }
@@ -77,7 +89,11 @@ async function stats(key, days) {
 }
 
 async function route(req, res, action, me) {
-  const body = req.method === 'POST' ? (typeof req.body === 'string' ? JSON.parse(req.body || '{}') : req.body || {}) : {};
+  let body = {};
+  if (req.method === 'POST') {
+    try { body = typeof req.body === 'string' ? JSON.parse(req.body || '{}') : req.body || {}; }
+    catch (e) { throw Object.assign(new Error('The request body isn\u2019t valid JSON.'), {status: 400}); }
+  }
   const Q = req.query || {};
   switch (action) {
     case 'me': return {email: me.e, expires: me.exp};
@@ -134,22 +150,29 @@ async function route(req, res, action, me) {
     case 'logs': {
       const p = [], lim = Math.min(parseInt(Q.limit || '100', 10) || 100, 500);
       let w = 'true' + scope(Q.key, p)('r.');
-      if (Q.before) { p.push(parseInt(Q.before, 10)); w += ` and r.id < $${p.length}`; }
+      if (Q.before) {
+        if (!/^\d{1,18}$/.test(String(Q.before))) throw Object.assign(new Error('"before" must be a log id (a whole number).'), {status: 400});
+        p.push(String(Q.before)); w += ` and r.id < $${p.length}::bigint`;
+      }
       if (Q.status === 'errors') w += ' and r.status >= 400';
-      if (Q.ip) { p.push(String(Q.ip).trim()); w += ` and r.ip <<= $${p.length}::inet`; }
+      if (Q.ip) {
+        const ip = String(Q.ip).trim();
+        if (!validNet(ip)) throw Object.assign(new Error('Enter an IP address or range, e.g. 203.0.113.7 or 203.0.113.0/24.'), {status: 400});
+        p.push(ip); w += ` and r.ip <<= $${p.length}::inet`;
+      }
       const rows = await q(`select r.id, r.at, r.key_id, k.name key_name, k.prefix, r.surface, r.endpoint, r.dataset, r.query, r.status, r.rows_returned, r.ms, r.ip_hash, host(r.ip) ip, r.user_agent
           from apiadmin.requests r left join apiadmin.keys k on k.id = r.key_id where ${w} order by r.id desc limit ${lim}`, p);
       return {logs: rows, next_before: rows.length === lim ? rows[rows.length - 1].id : null};
     }
     case 'blocks': {
       if (req.method === 'POST') {
-        const net = String(body.network || '').trim();
-        if (!/^[0-9a-fA-F:.]+(\/\d{1,3})?$/.test(net)) throw Object.assign(new Error('Enter an IP address or range, e.g. 203.0.113.7 or 203.0.113.0/24.'), {status: 400});
+        const network = String(body.network || '').trim();
+        if (!validNet(network)) throw Object.assign(new Error('Enter an IP address or range, e.g. 203.0.113.7 or 203.0.113.0/24.'), {status: 400});
         let row;
         try {
           [row] = await q(`insert into apiadmin.blocks (network, reason, expires_at, created_by) values ($1::cidr, $2, $3, $4)
               on conflict (network) do update set reason = excluded.reason, expires_at = excluded.expires_at returning id, network::text network`,
-            [net, txt(body.reason, 300) || null, body.expires_at ? new Date(body.expires_at).toISOString() : null, me.e]);
+            [network, txt(body.reason, 300) || null, body.expires_at ? new Date(body.expires_at).toISOString() : null, me.e]);
         } catch (e) { if (e.code === '22P02' || e.code === '22023') throw Object.assign(new Error('That isn\u2019t a valid IP address or range.'), {status: 400}); throw e; }
         await audit(me.e, 'block_ip', null, {network: row.network, reason: txt(body.reason, 300) || null});
       }
