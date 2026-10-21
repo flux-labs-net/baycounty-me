@@ -12,8 +12,8 @@ DATA = os.path.join(HERE, '..', 'data', 'elections')
 e = lambda s: html.escape(str(s if s is not None else ''))
 GOVN = {'county': 'Bay County', 'schools': 'School Board', 'constitutional': 'County offices', 'special': 'Special districts', 'pc': 'Panama City',
         'pcb': 'Panama City Beach', 'lh': 'Lynn Haven', 'cw': 'Callaway', 'sp': 'Springfield', 'parker': 'Parker', 'mb': 'Mexico Beach'}
-PARTY = {'REP': 'Republican', 'DEM': 'Democrat', 'NPA': 'No party', 'LPF': 'Libertarian', 'IND': 'Independent', 'WRI': 'Write-in'}
-STATUS_LBL = {'on_ballot': 'On the Nov. 3 ballot', 'won': 'Won', 'elected_unopposed': 'Elected unopposed', 'lost_primary': 'Lost primary', 'withdrew': 'Withdrew', 'lost': 'Lost'}
+PARTY = {'REP': 'Republican', 'DEM': 'Democrat', 'NPA': 'No party', 'LPF': 'Libertarian', 'LIB': 'Libertarian', 'IND': 'Independent', 'WRI': 'Write-in'}
+STATUS_LBL = {'on_ballot': 'On the Nov. 3 ballot', 'won': 'Won', 'elected_unopposed': 'Elected unopposed', 'lost_primary': 'Lost primary', 'withdrew': 'Withdrew', 'lost': 'Lost', 'did_not_qualify': 'Did not qualify', 'appointed': 'Appointed'}
 
 
 def usd(n):
@@ -22,7 +22,7 @@ def usd(n):
 
 def _key(n):
     n = re.sub(r'\(.*?\)|"[^"]*"', ' ', (n or '').lower())
-    parts = [p for p in re.findall(r"[a-z']+", n) if p not in ('jr', 'sr', 'ii', 'iii', 'iv') and len(p) > 1]
+    parts = [p for p in re.findall(r"[a-z']+", n) if p not in ('jr', 'sr', 'ii', 'iii', 'iv', 'dr', 'mr', 'mrs', 'ms') and len(p) > 1]
     return (parts[0] if parts else '', parts[-1] if parts else '')
 
 
@@ -41,6 +41,11 @@ def load():
 
 def match_finance(cand, office, fin):
     """Finance record for a roster candidate: same last name, first name or initial agreeing, and an office that agrees."""
+    url = (cand.get('soe_finance_url') or '').split('#')[0]
+    if url:
+        for r in fin:
+            if (r.get('report_url') or '').split('#')[0] == url:
+                return r
     k = _key(cand['name'])
     best = None
     for r in fin:
@@ -57,6 +62,24 @@ def match_finance(cand, office, fin):
     return best
 
 
+def _clean(t):
+    t = re.sub(r'\s*SOE status: [^.;]*[.;]?', '', t or '')
+    return re.sub(r'\s*Names shown as printed.*$', '', t).strip()
+
+
+def _notes(r):
+    out = []
+    for n in r.get('notes') or []:
+        if n.startswith('Includes') or 'No campaign finance reports' in n or 'total_spent' in n or 'other three' in n:
+            continue
+        if 'deletion line' in n:
+            n = "One of the campaign's amended reports may count a $1,000 loan from the candidate twice. Figures here follow the Supervisor of Elections' totals."
+        n = re.sub(r'Campaign filed a termination report \([^)]*\); account is closed\.', 'The campaign account is closed.', n)
+        n = re.sub(r'\s*\(rpt \d+, line \d+\)|\s*\(D/A pair applied\)', '', n)
+        out.append(n)
+    return out[:3]
+
+
 def money_block(r, raised_max):
     if not r:
         return '<p class="small muted">No campaign finance report found for this candidate in the Supervisor of Elections system.</p>'
@@ -70,7 +93,7 @@ def money_block(r, raised_max):
     for x in orgs:
         agg[(x['name'], x.get('type'))] += x.get('amount') or 0
     top = sorted(agg.items(), key=lambda kv: -kv[1])
-    w = lambda v: f'{max(.5, (v or 0) / raised_max * 100):.1f}%' if raised_max else '0%'
+    w = lambda v: f'{(v or 0) / raised_max * 100:.1f}%' if raised_max and v else '0%'
     bands = fi.get('bands') or {}
     band_txt = ' · '.join(f'{e(k)}: {v.get("count", v) if isinstance(v, dict) else v}' for k, v in bands.items()) if bands else ''
     inc, outc = fi.get('in_county') or {}, fi.get('out_of_county') or {}
@@ -83,6 +106,7 @@ def money_block(r, raised_max):
       <details class="flds"><summary>Every organization donor ({len(top)})</summary>{('<table class="tx-table el-dt"><tbody>' + "".join(f'<tr><th scope="row">{e(n)}<small>{e(TYPE.get(t, t or ""))}</small></th><td class="num">{usd(v)}</td></tr>' for (n, t), v in top) + '</tbody></table>') if top else '<p class="small muted">None reported.</p>'}
         <p class="small muted">Individual donors are counted, not named, on this site.{(" By size: " + band_txt + ".") if band_txt else ""}{f" {inc.get('count', 0)} gave from inside Bay County ({usd(inc.get('total'))}), {outc.get('count', 0)} from outside ({usd(outc.get('total'))})." if inc else ""} Every name is in the <a href="{e(r.get("report_url"))}" target="_blank" rel="noopener">full report</a>.</p></details>
       {f'<details class="flds"><summary>Where the money went</summary><table class="tx-table el-dt"><tbody>' + "".join(f'<tr><th scope="row">{e(x["payee"])}<small>{e(x.get("purpose") or "")}</small></th><td class="num">{usd(x.get("total"))}</td></tr>' for x in exp) + '</tbody></table></details>' if exp else ''}
+      {"".join(f'<p class="small muted">{e(n)}</p>' for n in _notes(r))}
       <p class="small"><a class="src" href="{e(r.get("report_url"))}" target="_blank" rel="noopener">Campaign finance report</a>{f' · <a class="src" href="{e(r["export_url"])}" target="_blank" rel="noopener">Itemized download</a>' if r.get("export_url") else ""}</p>
     </div>'''
 
@@ -121,7 +145,14 @@ def elections_page():
                 used.add(id(m))
             recs.append(m)
         mx = max([x.get('total_raised') or 0 for x in recs if x] or [0])
-        cards = ''.join(cand_card(c, m, mx, is_active) for c, m in zip(cands, recs))
+        MAIN = ('on_ballot', 'won', 'elected_unopposed', 'appointed')
+        main = [(c, m) for c, m in zip(cands, recs) if c.get('status') in MAIN]
+        rest = [(c, m) for c, m in zip(cands, recs) if c.get('status') not in MAIN]
+        cards = ''.join(cand_card(c, m, mx, is_active) for c, m in main)
+        if rest:
+            lbl = 'Also ran' if any(c.get('status') in ('lost_primary', 'lost') for c, _ in rest) else 'Also filed'
+            cards_rest = ''.join(cand_card(c, m, mx, False) for c, m in rest)
+            cards += f'<details class="el-others"><summary>{lbl}: {", ".join(e(c["name"]) for c, _ in rest)}</summary><div class="el-cands">{cards_rest}</div></details>'
         sub = []
         if r.get('incumbent'):
             sub.append(f'Incumbent: {e(r["incumbent"])}')
@@ -131,8 +162,9 @@ def elections_page():
             lbl = {'decided_primary': 'Decided in the Aug. 18 primary', 'elected_unopposed': 'Elected unopposed', 'decided_earlier_2026': 'Decided earlier in 2026'}.get(r.get('status'), r.get('status'))
             sub.append(e(lbl) + (f' · {e(r["winner"])}' if r.get('winner') else ''))
         res = f' · <a class="src" href="{e(r["result_url"])}" target="_blank" rel="noopener">Official results</a>' if r.get('result_url') else ''
-        return f'''<section class="el-race" data-g="{e(r.get("gov"))}" id="{e(r.get("id"))}"><div class="el-rh"><span class="eyebrow">{e(GOVN.get(r.get("gov"), ""))}</span><h3>{e(r["office"])}</h3><p class="small muted">{" · ".join(sub)}{res}</p>{f'<p class="small">{e(r["notes"])}</p>' if r.get("notes") else ""}</div>
-      <div class="el-cands">{cards}</div></section>'''
+        return f'''<section class="el-race" data-g="{e(r.get("gov"))}" id="{e(r.get("id"))}"><div class="el-rh"><span class="eyebrow">{e(GOVN.get(r.get("gov"), ""))}</span><h3>{e(r["office"])}</h3><p class="small muted">{" · ".join(sub)}{res}</p>{f'<p class="small">{e(_clean(r["notes"]))}</p>' if r.get("notes") else ""}</div>
+      <div class="el-cands">{cards}</div></section>''' if is_active else f'''<details class="el-race el-dec" data-g="{e(r.get("gov"))}" id="{e(r.get("id"))}"><summary><span class="eyebrow">{e(GOVN.get(r.get("gov"), ""))}</span><b>{e(r["office"])}</b><span class="small muted">{" · ".join(sub[-1:])}</span></summary><div class="el-rh"><p class="small muted">{" · ".join(sub)}{res}</p>{f'<p class="small">{e(_clean(r["notes"]))}</p>' if r.get("notes") else ""}</div>
+      <div class="el-cands">{cards}</div></details>'''
 
     act = ''.join(race_html(r, True) for r in active)
     dec = ''.join(race_html(r, False) for r in decided)

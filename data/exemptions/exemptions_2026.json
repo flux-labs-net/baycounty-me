@@ -1,0 +1,311 @@
+{
+ "as_of": "2026-10-21",
+ "roll": "2026 final tax roll (Florida DOR NAL, Bay County, posted 2026-10-16)",
+ "rates": "FY2026",
+ "source": "https://floridarevenue.com/property/dataportal/",
+ "totals": {
+  "parcels": 131336,
+  "homesteads": 46089,
+  "homestead_jv": 13873972491,
+  "zero_school": 4015,
+  "zero_all": 4015,
+  "tax_removed": 86743805
+ },
+ "codes": {
+  "01": {
+   "name": "Homestead",
+   "statute": "196.031(1)(a)",
+   "applies": "all",
+   "parcels": 46089,
+   "homes": 46089,
+   "value": 1150520318,
+   "tax": 15397615
+  },
+  "02": {
+   "name": "Additional homestead",
+   "statute": "196.031(1)(b)",
+   "applies": "nonschool",
+   "parcels": 39795,
+   "homes": 39795,
+   "value": 1015432881,
+   "tax": 8147389
+  },
+  "03": {
+   "name": "Senior (65+, limited income), county",
+   "statute": "196.075",
+   "applies": "county",
+   "parcels": 2006,
+   "homes": 2006,
+   "value": 80673656,
+   "tax": 501685
+  },
+  "05": {
+   "name": "Totally and permanently disabled veteran or surviving spouse",
+   "statute": "196.081",
+   "applies": "all",
+   "parcels": 3415,
+   "homes": 3413,
+   "value": 840544766,
+   "tax": 11069282
+  },
+  "08": {
+   "name": "Totally and permanently disabled person (quadriplegic, or limited income)",
+   "statute": "196.101",
+   "applies": "all",
+   "parcels": 295,
+   "homes": 295,
+   "value": 31692721,
+   "tax": 426950
+  },
+  "09": {
+   "name": "Religious, charitable and other nonprofit",
+   "statute": "196.196",
+   "applies": "all",
+   "parcels": 820,
+   "homes": 0,
+   "value": 359976250,
+   "tax": 5308108
+  },
+  "12": {
+   "name": "Hospitals and nursing homes",
+   "statute": "196.197",
+   "applies": "all",
+   "parcels": 1,
+   "homes": 0,
+   "value": 2821146,
+   "tax": 30790
+  },
+  "13": {
+   "name": "Nonprofit homes for the aged",
+   "statute": "196.1975",
+   "applies": "all",
+   "parcels": 3,
+   "homes": 0,
+   "value": 28911378,
+   "tax": 522907
+  },
+  "15": {
+   "name": "Affordable housing (nonprofit)",
+   "statute": "196.1978",
+   "applies": "all",
+   "parcels": 98,
+   "homes": 0,
+   "value": 102367100,
+   "tax": 1574148
+  },
+  "16": {
+   "name": "Educational",
+   "statute": "196.198",
+   "applies": "all",
+   "parcels": 15,
+   "homes": 0,
+   "value": 7407140,
+   "tax": 123189
+  },
+  "17": {
+   "name": "Charter schools",
+   "statute": "196.1983",
+   "applies": "all",
+   "parcels": 12,
+   "homes": 0,
+   "value": 28073012,
+   "tax": 426305
+  },
+  "20": {
+   "name": "Government property",
+   "statute": "196.199",
+   "applies": "all",
+   "parcels": 2090,
+   "homes": 0,
+   "value": 2354101875,
+   "tax": 39517952
+  },
+  "22": {
+   "name": "Economic development (county)",
+   "statute": "196.1995",
+   "applies": "county",
+   "parcels": 3,
+   "homes": 0,
+   "value": 18282306,
+   "tax": 128272
+  },
+  "31": {
+   "name": "Blind person",
+   "statute": "196.202",
+   "applies": "all",
+   "parcels": 37,
+   "homes": 37,
+   "value": 185000,
+   "tax": 2547
+  },
+  "32": {
+   "name": "Widower",
+   "statute": "196.202",
+   "applies": "all",
+   "parcels": 602,
+   "homes": 598,
+   "value": 3008068,
+   "tax": 40234
+  },
+  "33": {
+   "name": "Widow",
+   "statute": "196.202",
+   "applies": "all",
+   "parcels": 2936,
+   "homes": 2924,
+   "value": 14685832,
+   "tax": 197735
+  },
+  "34": {
+   "name": "Disabled person ($5,000)",
+   "statute": "196.202",
+   "applies": "all",
+   "parcels": 893,
+   "homes": 892,
+   "value": 4589626,
+   "tax": 61224
+  },
+  "35": {
+   "name": "Disabled veteran, 10%+ service-connected ($5,000)",
+   "statute": "196.24",
+   "applies": "all",
+   "parcels": 6078,
+   "homes": 6030,
+   "value": 30735751,
+   "tax": 412731
+  },
+  "36": {
+   "name": "Conservation land",
+   "statute": "196.26",
+   "applies": "all",
+   "parcels": 5,
+   "homes": 0,
+   "value": 11732,
+   "tax": 145
+  },
+  "38": {
+   "name": "Deployed service member",
+   "statute": "196.173",
+   "applies": "all",
+   "parcels": 14,
+   "homes": 14,
+   "value": 983859,
+   "tax": 14203
+  },
+  "39": {
+   "name": "Long-term senior (65+, 25 years in home, limited income), county",
+   "statute": "196.075",
+   "applies": "county",
+   "parcels": 520,
+   "homes": 520,
+   "value": 37943591,
+   "tax": 237588
+  },
+  "41": {
+   "name": "Disabled first responder or surviving spouse",
+   "statute": "196.102",
+   "applies": "all",
+   "parcels": 4,
+   "homes": 4,
+   "value": 532768,
+   "tax": 6592
+  },
+  "43": {
+   "name": "Affordable housing (Florida Housing certified)",
+   "statute": "196.1978(3)",
+   "applies": "all",
+   "parcels": 13,
+   "homes": 0,
+   "value": 151988005,
+   "tax": 2011654
+  },
+  "80": {
+   "name": "Combat-disabled veteran 65+ discount",
+   "statute": "196.082",
+   "applies": "all",
+   "parcels": 337,
+   "homes": 337,
+   "value": 41873169,
+   "tax": 580602
+  },
+  "81": {
+   "name": "Granny flat (parent or grandparent living quarters)",
+   "statute": "193.703",
+   "applies": "all",
+   "parcels": 5,
+   "homes": 5,
+   "value": 272654,
+   "tax": 3579
+  }
+ },
+ "veterans_by_district": {
+  "Callaway": {
+   "homesteads": 3320,
+   "05": 397,
+   "35": 757,
+   "38": 5,
+   "80": 37,
+   "full_exempt_value": 80242373
+  },
+  "Lynn Haven": {
+   "homesteads": 5091,
+   "35": 783,
+   "05": 427,
+   "80": 53,
+   "38": 1,
+   "full_exempt_value": 115429273
+  },
+  "Mexico Beach": {
+   "homesteads": 428,
+   "05": 23,
+   "35": 47,
+   "80": 8,
+   "full_exempt_value": 8399569
+  },
+  "Panama City": {
+   "homesteads": 7651,
+   "35": 761,
+   "05": 442,
+   "38": 5,
+   "80": 36,
+   "full_exempt_value": 111029066
+  },
+  "Panama City Beach": {
+   "homesteads": 3901,
+   "35": 440,
+   "05": 264,
+   "80": 24,
+   "38": 1,
+   "full_exempt_value": 89975003
+  },
+  "Parker": {
+   "homesteads": 888,
+   "35": 167,
+   "05": 102,
+   "80": 12,
+   "full_exempt_value": 20907553
+  },
+  "Springfield": {
+   "homesteads": 1503,
+   "35": 176,
+   "05": 91,
+   "80": 14,
+   "full_exempt_value": 14077051
+  },
+  "unincorporated": {
+   "homesteads": 15893,
+   "05": 1193,
+   "35": 2131,
+   "80": 105,
+   "38": 2,
+   "full_exempt_value": 345087831
+  },
+  "unincorporated - beach area": {
+   "homesteads": 7414,
+   "35": 768,
+   "05": 474,
+   "80": 48,
+   "full_exempt_value": 156871190
+  }
+ }
+}

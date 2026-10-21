@@ -78,13 +78,30 @@ NAV_ES = {
 }
 
 
+EXTRA_JS = [
+    (' for school taxes${t.nonOther', ' para impuestos escolares${t.nonOther'), ('for city and district taxes', 'para impuestos de la ciudad y de distritos'),
+    ('No property tax is owed on this home.', 'Esta vivienda no paga impuesto a la propiedad.'), ('About exemptions →', 'Sobre las exenciones (en inglés) →'),
+    ("'entire value'", "'todo el valor'"), ("'Exemption type '", "'Exención tipo '"),
+]
+EX_ES = {
+    'Homestead': 'Exención de vivienda principal (homestead)', 'Additional homestead': 'Exención adicional de vivienda principal',
+    'Disabled veteran, total and permanent': 'Veterano con discapacidad total y permanente', 'Disabled veteran, $5,000': 'Veterano con discapacidad, $5,000',
+    'Combat-disabled veteran discount, 65+': 'Descuento para veteranos discapacitados en combate, 65+', 'Deployed service member': 'Militar desplegado',
+    'Disabled veteran in a wheelchair': 'Veterano discapacitado en silla de ruedas', 'Disabled first responder': 'Socorrista discapacitado',
+    'Totally and permanently disabled person': 'Persona con discapacidad total y permanente', 'Senior, county': 'Persona mayor, condado',
+    'Long-term senior, county': 'Persona mayor de larga residencia, condado', 'Widow': 'Viuda', 'Widower': 'Viudo',
+    'Disabled person, $5,000': 'Persona con discapacidad, $5,000', 'Blind person': 'Persona ciega', 'Granny flat': 'Vivienda para padres o abuelos',
+}
+
+
 def es_addr_page(out_dir):
     from addr_page import addr_page
     page = addr_page(out_dir)  # writes the English assets/address.js
     page, miss_h = apply_pairs(page, _pairs('html'))
     js = open(os.path.join(out_dir, 'assets', 'address.js')).read()
-    js, miss_j = apply_pairs(js, _pairs('js'))
-    for a, b in NAV_ES.items():
+    pairs = [x for x in _pairs('js') if x[0] != '(${usd(t.school)} for school taxes)']
+    js, miss_j = apply_pairs(js, pairs + EXTRA_JS)
+    for a, b in {**NAV_ES, **EX_ES}.items():
         js = js.replace(json.dumps(a, ensure_ascii=False), json.dumps(b, ensure_ascii=False))
     # in-site links from the script point at English pages; keep them, but send glossary/records to Spanish
     js = js.replace("'/glossary#", "'/es/glosario#").replace('"/glossary#', '"/es/glosario#')

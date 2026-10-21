@@ -566,3 +566,20 @@ a.src:hover{color:var(--blue)}
 .el-dt th small{display:block;color:var(--muted);font-size:.74rem}
 .el-past .el-race{background:var(--sunken)}
 .el-past .el-cand{opacity:.92}
+/* exemptions */
+.ex-table td.ex-t{position:relative;min-width:7rem}
+.ex-bar{position:absolute;left:0;top:50%;height:6px;margin-top:9px;background:var(--blue);opacity:.35;border-radius:3px}
+.ex-h{font-size:.95rem;margin:18px 0 8px}
+.ex-list{margin:4px 0}
+.ex-list li{margin:0 0 2px}
+.el-others{grid-column:1/-1;margin-top:4px}
+.el-others > summary{cursor:pointer;font-size:.86rem;color:var(--muted);padding:6px 0}
+.el-others .el-cand{opacity:.9}
+details.el-dec{padding:0;margin:0 0 10px}
+details.el-dec > summary{list-style:none;cursor:pointer;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;padding:14px 18px}
+details.el-dec > summary::-webkit-details-marker{display:none}
+details.el-dec > summary::after{content:"+";margin-left:auto;color:var(--muted);font-size:1.1rem}
+details.el-dec[open] > summary::after{content:"−"}
+details.el-dec > summary b{font-size:1rem}
+details.el-dec > .el-rh,details.el-dec > .el-cands{padding:0 18px 16px}
+@media (max-width:520px){.kv{grid-template-columns:minmax(0,42%) minmax(0,1fr)}.kv dt,.kv dd{overflow-wrap:anywhere}}

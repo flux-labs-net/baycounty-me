@@ -1,0 +1,5882 @@
+{
+ "as_of": "2026-10-21",
+ "source": "Bay County Supervisor of Elections campaign finance system (VoterFocus), https://www.voterfocus.com/ws/WScand/candidate_pr.php?c=Bay, embedded at https://www.bayvotesfl.gov/candidates/candidate-committee-finances/. Reporting groups: 2026 Primary/General Election (el=35), 2026 Municipal Super Tuesday (el=36), Lynn Haven Recall 1/20/2026 (el=34). Per-candidate itemized CSV export: https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id={id}&dhc=0&county=bay",
+ "field_notes": {
+  "total_raised": "SOE monetary contributions plus SOE in-kind contributions. Monetary includes candidate loans and bank interest as filed.",
+  "monetary": "SOE \"Monetary Contributions\" (sum of all reports, including amendments), net of contribution refunds reported as negative items.",
+  "in_kind": "SOE \"In-Kind Contributions\".",
+  "total_spent": "SOE \"Expenditures and Distributions\". For closed campaigns this includes refunds to contributors, loan repayments to the candidate and other surplus distributions.",
+  "cash_on_hand_estimate": "monetary minus total_spent for campaigns that have not filed a termination report; null for closed campaigns or campaigns with no reports. Does not account for outstanding loans or uncashed checks.",
+  "through": "End date of the latest report period filed.",
+  "latest_report": "Report code, period covered and SOE due date, as listed on the candidate page.",
+  "from_individuals": "Contributions from individual people: count of positive items and net total (after any refunds). Bands are per contribution item (under $100, $100-$499, $500-$999, $1,000 and over). in_county/out_of_county/location_unknown split by the city/ZIP filed. unique_donors_approx counts distinct filed names and is approximate. No names are stored.",
+  "contributors": "Organizations (business, pac, committee, party, other) and the candidate's own money and loans, item by item, as filed. Negative amounts are refunds the campaign reported. kind is the filed item type.",
+  "by_type_total": "Net contribution totals by contributor type (monetary and in-kind). Candidate committees (\"Friends of ...\") are counted under pac. Bank interest is under other. Sums to total_raised.",
+  "top_expenditures": "Up to 15 largest payees by total. Payee name variants are merged. Payments to individual people are aggregated as \"Payments to individuals\" or \"Refunds to individual contributors\". purpose lists the filed descriptions, most money first."
+ },
+ "summary": {
+  "candidates": 36,
+  "total_raised_all": 379891.34,
+  "total_monetary_all": 370837.66,
+  "total_in_kind_all": 9053.68,
+  "total_spent_all": 298537.76,
+  "reconciled": 29,
+  "no_activity": 7
+ },
+ "candidates": [
+  {
+   "name": "Robert Carroll",
+   "office": "Bay County Commission, District 2",
+   "soe_office": "County Commissioner, District 2",
+   "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
+   "party": "Republican",
+   "soe_status": "Active - Elected",
+   "soe_campaign_name": "Robert Carroll (REP)",
+   "cand_id": 722,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=722&rellevel=4&committee=N",
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=722&dhc=0&county=bay",
+   "latest_report": "TRQ / period 2026-06-01 to 2026-09-10 / due 2026-09-10",
+   "through": "2026-09-10",
+   "total_raised": 1000.0,
+   "monetary": 1000.0,
+   "in_kind": 0.0,
+   "loans": 1000.0,
+   "total_spent": 1000.0,
+   "cash_on_hand_estimate": null,
+   "n_contributions": 1,
+   "from_individuals": {
+    "count": 0,
+    "total": 0.0,
+    "bands": {
+     "under_100": {
+      "count": 0,
+      "total": 0.0
+     },
+     "100_499": {
+      "count": 0,
+      "total": 0.0
+     },
+     "500_999": {
+      "count": 0,
+      "total": 0.0
+     },
+     "1000_plus": {
+      "count": 0,
+      "total": 0.0
+     }
+    },
+    "in_county": {
+     "count": 0,
+     "total": 0.0
+    },
+    "out_of_county": {
+     "count": 0,
+     "total": 0.0
+    },
+    "unique_donors_approx": 0
+   },
+   "candidate_self": {
+    "contributions": 0.0,
+    "loans": 1000.0
+   },
+   "by_type_total": {
+    "individual": 0.0,
+    "business": 0.0,
+    "pac": 0.0,
+    "party": 0.0,
+    "candidate_self": 1000.0,
+    "other": 0.0
+   },
+   "contributors": [
+    {
+     "name": "Robert Carroll (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 1000.0,
+     "date": "2026-01-20",
+     "kind": "loan"
+    }
+   ],
+   "top_expenditures": [
+    {
+     "payee": "Payments to the candidate (loan repayments, reimbursements, surplus returned)",
+     "total": 516.84,
+     "payments": 1,
+     "purpose": "Distribution of surplus: Refund to candidate loan"
+    },
+    {
+     "payee": "The Print Shop",
+     "total": 308.16,
+     "payments": 1,
+     "purpose": "Candidate Petitions"
+    },
+    {
+     "payee": "Bay County Supervisor of Elections",
+     "total": 140.0,
+     "payments": 1,
+     "purpose": "Petition Verification"
+    },
+    {
+     "payee": "Hancock Whitney Bank",
+     "total": 35.0,
+     "payments": 1,
+     "purpose": "Bank Fees"
+    }
+   ],
+   "reconciliation": "itemized matches summary",
+   "notes": [
+    "Campaign filed a termination report (TRQ); account is closed."
+   ]
+  },
+  {
+   "name": "Brian Rust",
+   "office": "Bay County Commission, District 4",
+   "soe_office": "County Commissioner, District 4",
+   "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
+   "party": "Republican",
+   "soe_status": "Active - Withdrawn",
+   "soe_campaign_name": "Brian Rust (REP)",
+   "cand_id": 714,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=714&rellevel=4&committee=N",
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=714&dhc=0&county=bay",
+   "latest_report": "TRW2 / period 2026-04-01 to 2026-08-09 / due 2026-08-09",
+   "through": "2026-08-09",
+   "total_raised": 4688.87,
+   "monetary": 3143.48,
+   "in_kind": 1545.39,
+   "loans": 0.0,
+   "total_spent": 3678.48,
+   "cash_on_hand_estimate": null,
+   "n_contributions": 16,
+   "from_individuals": {
+    "count": 12,
+    "total": 3018.48,
+    "bands": {
+     "under_100": {
+      "count": 5,
+      "total": 204.13
+     },
+     "100_499": {
+      "count": 5,
+      "total": 814.35
+     },
+     "500_999": {
+      "count": 0,
+      "total": 0.0
+     },
+     "1000_plus": {
+      "count": 2,
+      "total": 2000.0
+     }
+    },
+    "in_county": {
+     "count": 8,
+     "total": 2762.32
+    },
+    "out_of_county": {
+     "count": 2,
+     "total": 130.13
+    },
+    "location_unknown": {
+     "count": 2,
+     "total": 126.03
+    },
+    "unique_donors_approx": 12
+   },
+   "candidate_self": {
+    "contributions": 637.71,
+    "loans": 0.0
+   },
+   "by_type_total": {
+    "individual": 3018.48,
+    "business": 1032.68,
+    "pac": 0.0,
+    "party": 0.0,
+    "candidate_self": 637.71,
+    "other": 0.0
+   },
+   "contributors": [
+    {
+     "name": "Color Match USA INC",
+     "city": "Panama Ciy",
+     "type": "business",
+     "amount": 125.0,
+     "date": "2026-03-13",
+     "kind": "check"
+    },
+    {
+     "name": "Brian Rust (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 637.71,
+     "date": "2026-03-15",
+     "kind": "in-kind"
+    },
+    {
+     "name": "Knock-It-Off Media, LLC",
+     "city": "Southport",
+     "type": "business",
+     "amount": 676.56,
+     "date": "2026-03-15",
+     "kind": "in-kind"
+    },
+    {
+     "name": "Knock-it-off Media, LC",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 231.12,
+     "date": "2026-03-15",
+     "kind": "in-kind"
+    }
+   ],
+   "top_expenditures": [
+    {
+     "payee": "Mayo Clinic",
+     "total": 2935.0,
+     "payments": 1,
+     "purpose": "Distribution of surplus: donation"
+    },
+    {
+     "payee": "Refunds to individual contributors",
+     "total": 743.48,
+     "payments": 7,
+     "purpose": "Refund: refund; Refund: Refund"
+    }
+   ],
+   "reconciliation": "itemized matches summary",
+   "notes": [
+    "Campaign filed a termination report (TRW2); account is closed.",
+    "Monetary contributions minus expenditures/distributions = -535.00 at termination (SOE figures)."
+   ]
+  },
+  {
+   "name": "Scott Duvall",
+   "office": "Bay County Commission, District 4",
+   "soe_office": "County Commissioner, District 4",
+   "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
+   "party": "Republican",
+   "soe_status": "Active - Elected",
+   "soe_campaign_name": "Scott Duvall (REP)",
+   "cand_id": 719,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=719&rellevel=4&committee=N",
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=719&dhc=0&county=bay",
+   "latest_report": "TRQ / period 2026-06-01 to 2026-09-10 / due 2026-09-10",
+   "through": "2026-09-10",
+   "total_raised": 62251.0,
+   "monetary": 62251.0,
+   "in_kind": 0.0,
+   "loans": 100.0,
+   "total_spent": 62251.0,
+   "cash_on_hand_estimate": null,
+   "n_contributions": 94,
+   "from_individuals": {
+    "count": 55,
+    "total": 31500.0,
+    "bands": {
+     "under_100": {
+      "count": 1,
+      "total": 50.0
+     },
+     "100_499": {
+      "count": 23,
+      "total": 4950.0
+     },
+     "500_999": {
+      "count": 9,
+      "total": 4500.0
+     },
+     "1000_plus": {
+      "count": 22,
+      "total": 22000.0
+     }
+    },
+    "in_county": {
+     "count": 41,
+     "total": 24400.0
+    },
+    "out_of_county": {
+     "count": 4,
+     "total": 3200.0
+    },
+    "location_unknown": {
+     "count": 10,
+     "total": 3900.0
+    },
+    "unique_donors_approx": 55
+   },
+   "candidate_self": {
+    "contributions": 0.0,
+    "loans": 100.0
+   },
+   "by_type_total": {
+    "individual": 31500.0,
+    "business": 30651.0,
+    "pac": 0.0,
+    "party": 0.0,
+    "candidate_self": 100.0,
+    "other": 0.0
+   },
+   "contributors": [
+    {
+     "name": "Scott Duvall (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 100.0,
+     "date": "2026-02-03",
+     "kind": "loan"
+    },
+    {
+     "name": "SGA Investments INC",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-02-09",
+     "kind": "check"
+    },
+    {
+     "name": "BGN Contractors",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 250.0,
+     "date": "2026-02-26",
+     "kind": "check"
+    },
+    {
+     "name": "ECSC,LLC",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2026-02-26",
+     "kind": "check"
+    },
+    {
+     "name": "A-1 Anytime Bonding INC",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2026-02-27",
+     "kind": "check"
+    },
+    {
+     "name": "Mr. Fence of Florida, Inc",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 250.0,
+     "date": "2026-02-27",
+     "kind": "check"
+    },
+    {
+     "name": "Robers and Roberts, Inc",
+     "city": "Tallahassee",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-03-03",
+     "kind": "check"
+    },
+    {
+     "name": "Roberts Family, LLC",
+     "city": "Tallahassee",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-03-03",
+     "kind": "check"
+    },
+    {
+     "name": "Abbott Family Properties, LLC",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-03-04",
+     "kind": "check"
+    },
+    {
+     "name": "Culpepper",
+     "city": "Tallahassee",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-03-04",
+     "kind": "check"
+    },
+    {
+     "name": "Bay County Fence, LLC",
+     "city": "Lynn Haven",
+     "type": "business",
+     "amount": 300.0,
+     "date": "2026-03-05",
+     "kind": "check"
+    },
+    {
+     "name": "J & K Stewart Properties, LLC",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-03-05",
+     "kind": "check"
+    },
+    {
+     "name": "Mainline Construction, LLC",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-03-05",
+     "kind": "check"
+    },
+    {
+     "name": "Manuel & Thompson, PA",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-03-05",
+     "kind": "check"
+    },
+    {
+     "name": "Mikes Custom Welding & Fabrica",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2026-03-05",
+     "kind": "check"
+    },
+    {
+     "name": "RV Connections, Inc",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-03-05",
+     "kind": "check"
+    },
+    {
+     "name": "North Florida Security Agency",
+     "city": "Lynn Haven",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2026-03-07",
+     "kind": "check"
+    },
+    {
+     "name": "Solid Rock Plumbing LLC",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-03-11",
+     "kind": "check"
+    },
+    {
+     "name": "Marshall Brothers",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-03-13",
+     "kind": "check"
+    },
+    {
+     "name": "CASONCO LLC",
+     "city": "Lynn Heven",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-03-16",
+     "kind": "check"
+    },
+    {
+     "name": "Panhandle Engineering Inc.",
+     "city": "Lynn Haven",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-03-16",
+     "kind": "check"
+    },
+    {
+     "name": "Butler Commercial LLC",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-03-18",
+     "kind": "check"
+    },
+    {
+     "name": "Designwest Group LLC",
+     "city": "Tallahassee",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-03-18",
+     "kind": "check"
+    },
+    {
+     "name": "RJ Gorman Contracting LLC",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-03-18",
+     "kind": "check"
+    },
+    {
+     "name": "Clubs Real Estate Group LLC",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-03-25",
+     "kind": "check"
+    },
+    {
+     "name": "St. Joe",
+     "city": "Santa Rosa Beach",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-03-25",
+     "kind": "check"
+    },
+    {
+     "name": "Kilgores Brick Pavers LLC",
+     "city": "Panama City Beach",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-03-26",
+     "kind": "check"
+    },
+    {
+     "name": "McKinney Insurance & Invest.",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2026-03-26",
+     "kind": "check"
+    },
+    {
+     "name": "Tonies Dance Workshop",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-03-26",
+     "kind": "check"
+    },
+    {
+     "name": "Mike Hill Used Cars INC",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-03-29",
+     "kind": "check"
+    },
+    {
+     "name": "132 Harrison Holdings LLC",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-03-30",
+     "kind": "check"
+    },
+    {
+     "name": "Custom Clean Northwest Fl. LLC",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 300.0,
+     "date": "2026-03-30",
+     "kind": "check"
+    },
+    {
+     "name": "Discount Towing & Recovery LLC",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-03-30",
+     "kind": "check"
+    },
+    {
+     "name": "GPO Equity Holding LLC",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-03-30",
+     "kind": "check"
+    },
+    {
+     "name": "M & M Properties of Bay County",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2026-03-30",
+     "kind": "check"
+    },
+    {
+     "name": "Dermatology Associates",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-04-22",
+     "kind": "check"
+    },
+    {
+     "name": "Quickstop",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 251.0,
+     "date": "2026-04-23",
+     "kind": "check"
+    },
+    {
+     "name": "BP Linx LLC",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-05-07",
+     "kind": "check"
+    },
+    {
+     "name": "Book That Condo LLC",
+     "city": "Panama City Beach",
+     "type": "business",
+     "amount": 300.0,
+     "date": "2026-05-07",
+     "kind": "check"
+    }
+   ],
+   "top_expenditures": [
+    {
+     "payee": "Refunds to individual contributors",
+     "total": 20167.01,
+     "payments": 54,
+     "purpose": "Refund: Refund"
+    },
+    {
+     "payee": "Bay County Supervisor of Elections",
+     "total": 5542.68,
+     "payments": 1,
+     "purpose": "Qualifying"
+    },
+    {
+     "payee": "Gagnon's Sign Depot",
+     "total": 5404.95,
+     "payments": 3,
+     "purpose": "Signage; Signs-"
+    },
+    {
+     "payee": "Propolis LLC",
+     "total": 3500.0,
+     "payments": 1,
+     "purpose": "Campaign Consulting"
+    },
+    {
+     "payee": "Hotel Indigo",
+     "total": 2528.28,
+     "payments": 2,
+     "purpose": "Fundraiser Event Center; Deposit for Fundraiser"
+    },
+    {
+     "payee": "Payments to individuals",
+     "total": 811.2,
+     "payments": 2,
+     "purpose": "Refund; Media Subscription"
+    },
+    {
+     "payee": "SGA Investments Inc",
+     "total": 661.21,
+     "payments": 1,
+     "purpose": "Refund: Refund"
+    },
+    {
+     "payee": "Roberts Family LLC",
+     "total": 661.21,
+     "payments": 1,
+     "purpose": "Refund: Refund"
+    },
+    {
+     "payee": "Roberts & Roberts Inc",
+     "total": 661.21,
+     "payments": 1,
+     "purpose": "Refund: Refund"
+    },
+    {
+     "payee": "Culpepper",
+     "total": 661.21,
+     "payments": 1,
+     "purpose": "Refund: Refund"
+    },
+    {
+     "payee": "Abbott Family Properties, LLC",
+     "total": 661.21,
+     "payments": 1,
+     "purpose": "Refund: Refund"
+    },
+    {
+     "payee": "Manuel & Thompson, PA",
+     "total": 661.21,
+     "payments": 1,
+     "purpose": "Refund: Refund"
+    },
+    {
+     "payee": "J & K Stewart Properties LLC",
+     "total": 661.21,
+     "payments": 1,
+     "purpose": "Refund: Refund"
+    },
+    {
+     "payee": "Mainline Construction LLC",
+     "total": 661.21,
+     "payments": 1,
+     "purpose": "Refund: Refund"
+    },
+    {
+     "payee": "RV Connections Inc",
+     "total": 661.21,
+     "payments": 1,
+     "purpose": "Refund"
+    }
+   ],
+   "reconciliation": "itemized matches summary",
+   "notes": [
+    "Campaign filed a termination report (TRQ); account is closed.",
+    "The other three District 4 candidates show SOE status Withdrawn. This campaign filed a termination report (TRQ) and its expenditures include refunds of most contributions; total_spent includes those refunds."
+   ]
+  },
+  {
+   "name": "Sunny Reid",
+   "office": "Bay County Commission, District 4",
+   "soe_office": "County Commissioner, District 4",
+   "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
+   "party": "Republican",
+   "soe_status": "Inactive - Withdrawn",
+   "soe_campaign_name": "Sunny Reid (REP)",
+   "cand_id": 721,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=721&rellevel=4&committee=N",
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=721&dhc=0&county=bay",
+   "latest_report": "TRW1 / period 2026-03-25 to 2026-06-23 / due 2026-06-23",
+   "through": "2026-06-23",
+   "total_raised": 0.0,
+   "monetary": 0.0,
+   "in_kind": 0.0,
+   "loans": 0.0,
+   "total_spent": 0.0,
+   "cash_on_hand_estimate": null,
+   "n_contributions": 0,
+   "from_individuals": {
+    "count": 0,
+    "total": 0.0,
+    "bands": {
+     "under_100": {
+      "count": 0,
+      "total": 0.0
+     },
+     "100_499": {
+      "count": 0,
+      "total": 0.0
+     },
+     "500_999": {
+      "count": 0,
+      "total": 0.0
+     },
+     "1000_plus": {
+      "count": 0,
+      "total": 0.0
+     }
+    },
+    "in_county": {
+     "count": 0,
+     "total": 0.0
+    },
+    "out_of_county": {
+     "count": 0,
+     "total": 0.0
+    },
+    "unique_donors_approx": 0
+   },
+   "candidate_self": {
+    "contributions": 0.0,
+    "loans": 0.0
+   },
+   "by_type_total": {
+    "individual": 0.0,
+    "business": 0.0,
+    "pac": 0.0,
+    "party": 0.0,
+    "candidate_self": 0.0,
+    "other": 0.0
+   },
+   "contributors": [],
+   "top_expenditures": [],
+   "reconciliation": "no activity reported (export empty; all SOE totals $0.00)",
+   "notes": [
+    "Campaign filed a termination report (TRW1); account is closed."
+   ]
+  },
+  {
+   "name": "Suzanne McDowell",
+   "office": "Bay County Commission, District 4",
+   "soe_office": "County Commissioner, District 4",
+   "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
+   "party": "Libertarian",
+   "soe_status": "Inactive - Withdrawn",
+   "soe_campaign_name": "Suzanne McDowell (LIB)",
+   "cand_id": 711,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=711&rellevel=4&committee=N",
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=711&dhc=0&county=bay",
+   "latest_report": null,
+   "through": null,
+   "total_raised": 0.0,
+   "monetary": 0.0,
+   "in_kind": 0.0,
+   "loans": 0.0,
+   "total_spent": 0.0,
+   "cash_on_hand_estimate": null,
+   "n_contributions": 0,
+   "from_individuals": {
+    "count": 0,
+    "total": 0.0,
+    "bands": {
+     "under_100": {
+      "count": 0,
+      "total": 0.0
+     },
+     "100_499": {
+      "count": 0,
+      "total": 0.0
+     },
+     "500_999": {
+      "count": 0,
+      "total": 0.0
+     },
+     "1000_plus": {
+      "count": 0,
+      "total": 0.0
+     }
+    },
+    "in_county": {
+     "count": 0,
+     "total": 0.0
+    },
+    "out_of_county": {
+     "count": 0,
+     "total": 0.0
+    },
+    "unique_donors_approx": 0
+   },
+   "candidate_self": {
+    "contributions": 0.0,
+    "loans": 0.0
+   },
+   "by_type_total": {
+    "individual": 0.0,
+    "business": 0.0,
+    "pac": 0.0,
+    "party": 0.0,
+    "candidate_self": 0.0,
+    "other": 0.0
+   },
+   "contributors": [],
+   "top_expenditures": [],
+   "reconciliation": "no activity reported (export empty; all SOE totals $0.00)",
+   "notes": [
+    "No campaign finance reports listed on the SOE candidate page."
+   ]
+  },
+  {
+   "name": "Timothy Campbell",
+   "office": "Bay County Judge, Group 1",
+   "soe_office": "County Judge, Group 1",
+   "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
+   "party": "Nonpartisan",
+   "soe_status": "Inactive - Elected",
+   "soe_campaign_name": "Timothy Campbell (NON)",
+   "cand_id": 720,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=720&rellevel=4&committee=N",
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=720&dhc=0&county=bay",
+   "latest_report": "TRQJ / period 2026-04-01 to 2026-07-23 / due 2026-07-23",
+   "through": "2026-07-23",
+   "total_raised": 7640.0,
+   "monetary": 7640.0,
+   "in_kind": 0.0,
+   "loans": 7590.0,
+   "total_spent": 7640.0,
+   "cash_on_hand_estimate": null,
+   "n_contributions": 2,
+   "from_individuals": {
+    "count": 0,
+    "total": 0.0,
+    "bands": {
+     "under_100": {
+      "count": 0,
+      "total": 0.0
+     },
+     "100_499": {
+      "count": 0,
+      "total": 0.0
+     },
+     "500_999": {
+      "count": 0,
+      "total": 0.0
+     },
+     "1000_plus": {
+      "count": 0,
+      "total": 0.0
+     }
+    },
+    "in_county": {
+     "count": 0,
+     "total": 0.0
+    },
+    "out_of_county": {
+     "count": 0,
+     "total": 0.0
+    },
+    "unique_donors_approx": 0
+   },
+   "candidate_self": {
+    "contributions": 50.0,
+    "loans": 7590.0
+   },
+   "by_type_total": {
+    "individual": 0.0,
+    "business": 0.0,
+    "pac": 0.0,
+    "party": 0.0,
+    "candidate_self": 7640.0,
+    "other": 0.0
+   },
+   "contributors": [
+    {
+     "name": "Timothy Campbell (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 50.0,
+     "date": "2026-02-09",
+     "kind": "cash"
+    },
+    {
+     "name": "Timothy Campbell (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 7590.0,
+     "date": "2026-04-14",
+     "kind": "loan"
+    }
+   ],
+   "top_expenditures": [
+    {
+     "payee": "Bay County Supervisor of Elections",
+     "total": 7590.2,
+     "payments": 1,
+     "purpose": "Check 101 -Qualifying"
+    },
+    {
+     "payee": "Regions Bank",
+     "total": 34.84,
+     "payments": 2,
+     "purpose": "Purchase Pre-printed checks; Monthly paper statement fee"
+    },
+    {
+     "payee": "Payments to the candidate (loan repayments, reimbursements, surplus returned)",
+     "total": 14.96,
+     "payments": 1,
+     "purpose": "Distribution of surplus: close account"
+    }
+   ],
+   "reconciliation": "itemized matches summary",
+   "notes": [
+    "Campaign filed a termination report (TRQJ); account is closed."
+   ]
+  },
+  {
+   "name": "Tracy A Smith",
+   "office": "Bay County Judge, Group 4",
+   "soe_office": "County Judge, Group 4",
+   "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
+   "party": "Nonpartisan",
+   "soe_status": "Inactive - Elected",
+   "soe_campaign_name": "Tracy A Smith (NON)",
+   "cand_id": 725,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=725&rellevel=4&committee=N",
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=725&dhc=0&county=bay",
+   "latest_report": "TRQJ / period 2026-04-01 to 2026-07-23 / due 2026-07-23",
+   "through": "2026-07-23",
+   "total_raised": 10000.0,
+   "monetary": 10000.0,
+   "in_kind": 0.0,
+   "loans": 10000.0,
+   "total_spent": 10000.0,
+   "cash_on_hand_estimate": null,
+   "n_contributions": 1,
+   "from_individuals": {
+    "count": 0,
+    "total": 0.0,
+    "bands": {
+     "under_100": {
+      "count": 0,
+      "total": 0.0
+     },
+     "100_499": {
+      "count": 0,
+      "total": 0.0
+     },
+     "500_999": {
+      "count": 0,
+      "total": 0.0
+     },
+     "1000_plus": {
+      "count": 0,
+      "total": 0.0
+     }
+    },
+    "in_county": {
+     "count": 0,
+     "total": 0.0
+    },
+    "out_of_county": {
+     "count": 0,
+     "total": 0.0
+    },
+    "unique_donors_approx": 0
+   },
+   "candidate_self": {
+    "contributions": 0.0,
+    "loans": 10000.0
+   },
+   "by_type_total": {
+    "individual": 0.0,
+    "business": 0.0,
+    "pac": 0.0,
+    "party": 0.0,
+    "candidate_self": 10000.0,
+    "other": 0.0
+   },
+   "contributors": [
+    {
+     "name": "Tracy A Smith (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 10000.0,
+     "date": "2026-03-31",
+     "kind": "loan"
+    }
+   ],
+   "top_expenditures": [
+    {
+     "payee": "Bay County Supervisor of Elections",
+     "total": 7590.2,
+     "payments": 1,
+     "purpose": "Qualifying Fee"
+    },
+    {
+     "payee": "Payments to the candidate (loan repayments, reimbursements, surplus returned)",
+     "total": 2409.8,
+     "payments": 1,
+     "purpose": "Distribution of surplus: Reimbursement of Loan/ Close out Campaign Account"
+    }
+   ],
+   "reconciliation": "itemized matches summary",
+   "notes": [
+    "Campaign filed a termination report (TRQJ); account is closed."
+   ]
+  },
+  {
+   "name": "Bobby J. Birdsell",
+   "office": "Callaway Commission, Ward 1",
+   "soe_office": "Callaway Commissioner Ward 1",
+   "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
+   "party": "Nonpartisan",
+   "soe_status": "Active - Qualified",
+   "soe_campaign_name": "Bobby J. Birdsell (NON)",
+   "cand_id": 729,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=729&rellevel=4&committee=N",
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=729&dhc=0&county=bay",
+   "latest_report": "G5 / period 2026-10-03 to 2026-10-16 / due 2026-10-23",
+   "through": "2026-10-16",
+   "total_raised": 2700.0,
+   "monetary": 2700.0,
+   "in_kind": 0.0,
+   "loans": 1100.0,
+   "total_spent": 1840.32,
+   "cash_on_hand_estimate": 859.68,
+   "n_contributions": 5,
+   "from_individuals": {
+    "count": 1,
+    "total": 100.0,
+    "bands": {
+     "under_100": {
+      "count": 0,
+      "total": 0.0
+     },
+     "100_499": {
+      "count": 1,
+      "total": 100.0
+     },
+     "500_999": {
+      "count": 0,
+      "total": 0.0
+     },
+     "1000_plus": {
+      "count": 0,
+      "total": 0.0
+     }
+    },
+    "in_county": {
+     "count": 1,
+     "total": 100.0
+    },
+    "out_of_county": {
+     "count": 0,
+     "total": 0.0
+    },
+    "unique_donors_approx": 1
+   },
+   "candidate_self": {
+    "contributions": 0.0,
+    "loans": 1100.0
+   },
+   "by_type_total": {
+    "individual": 100.0,
+    "business": 500.0,
+    "pac": 1000.0,
+    "party": 0.0,
+    "candidate_self": 1100.0,
+    "other": 0.0
+   },
+   "contributors": [
+    {
+     "name": "Bobby J. Birdsell (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 100.0,
+     "date": "2026-03-04",
+     "kind": "loan"
+    },
+    {
+     "name": "Bobby J. Birdsell (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 1000.0,
+     "date": "2026-07-29",
+     "kind": "loan"
+    },
+    {
+     "name": "CPAR",
+     "city": "Orlando",
+     "type": "pac",
+     "amount": 1000.0,
+     "date": "2026-09-22",
+     "kind": "check"
+    },
+    {
+     "name": "Uncle Bucks Storage LLC",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2026-09-22",
+     "kind": "check"
+    }
+   ],
+   "top_expenditures": [
+    {
+     "payee": "Vistaprint",
+     "total": 1108.01,
+     "payments": 2,
+     "purpose": "mailers; business card"
+    },
+    {
+     "payee": "Signs on the Cheap",
+     "total": 632.31,
+     "payments": 1,
+     "purpose": "campaign signs"
+    },
+    {
+     "payee": "City of Callaway",
+     "total": 100.0,
+     "payments": 1,
+     "purpose": "qualifying fee"
+    }
+   ],
+   "reconciliation": "itemized matches summary",
+   "notes": [
+    "Includes 1,100.00 in loans; loans count in SOE monetary contributions."
+   ]
+  },
+  {
+   "name": "Karen Custer",
+   "office": "Callaway Commission, Ward 1",
+   "soe_office": "Callaway Commissioner Ward 1",
+   "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
+   "party": "Nonpartisan",
+   "soe_status": "Active - Qualified",
+   "soe_campaign_name": "Karen Custer (NON)",
+   "cand_id": 726,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=726&rellevel=4&committee=N",
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=726&dhc=0&county=bay",
+   "latest_report": "G4 / period 2026-09-19 to 2026-10-02 / due 2026-10-09",
+   "through": "2026-10-02",
+   "total_raised": 1973.7,
+   "monetary": 1973.7,
+   "in_kind": 0.0,
+   "loans": 100.0,
+   "total_spent": 1465.43,
+   "cash_on_hand_estimate": 508.27,
+   "n_contributions": 29,
+   "from_individuals": {
+    "count": 28,
+    "total": 1873.0,
+    "bands": {
+     "under_100": {
+      "count": 21,
+      "total": 623.0
+     },
+     "100_499": {
+      "count": 7,
+      "total": 1250.0
+     },
+     "500_999": {
+      "count": 0,
+      "total": 0.0
+     },
+     "1000_plus": {
+      "count": 0,
+      "total": 0.0
+     }
+    },
+    "in_county": {
+     "count": 22,
+     "total": 1025.0
+    },
+    "out_of_county": {
+     "count": 5,
+     "total": 798.0
+    },
+    "location_unknown": {
+     "count": 1,
+     "total": 50.0
+    },
+    "unique_donors_approx": 17
+   },
+   "candidate_self": {
+    "contributions": 0.0,
+    "loans": 100.0
+   },
+   "by_type_total": {
+    "individual": 1873.0,
+    "business": 0.0,
+    "pac": 0.0,
+    "party": 0.0,
+    "candidate_self": 100.0,
+    "other": 0.7
+   },
+   "contributors": [
+    {
+     "name": "Karen Custer (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 100.0,
+     "date": "2026-02-20",
+     "kind": "loan"
+    },
+    {
+     "name": "Peoples South Bank",
+     "city": "Panama City",
+     "type": "other",
+     "amount": 0.05,
+     "date": "2026-03-15",
+     "kind": "interest"
+    },
+    {
+     "name": "PeoplesSouth Bank",
+     "city": "Panama City",
+     "type": "other",
+     "amount": 0.14,
+     "date": "2026-04-15",
+     "kind": "interest"
+    },
+    {
+     "name": "PeoplesSouth Bank",
+     "city": "Panama City",
+     "type": "other",
+     "amount": 0.14,
+     "date": "2026-05-17",
+     "kind": "interest"
+    },
+    {
+     "name": "PeoplesSouth Bank",
+     "city": "Panama City",
+     "type": "other",
+     "amount": 0.12,
+     "date": "2026-06-15",
+     "kind": "interest"
+    },
+    {
+     "name": "PeoplesSouth Bank",
+     "city": "Panama City",
+     "type": "other",
+     "amount": 0.09,
+     "date": "2026-07-15",
+     "kind": "interest"
+    },
+    {
+     "name": "PeoplesSouth Bank",
+     "city": "Panama City",
+     "type": "other",
+     "amount": 0.14,
+     "date": "2026-08-16",
+     "kind": "interest"
+    },
+    {
+     "name": "PeoplesSouth Bank",
+     "city": "Panama City",
+     "type": "other",
+     "amount": 0.02,
+     "date": "2026-09-15",
+     "kind": "interest"
+    }
+   ],
+   "top_expenditures": [
+    {
+     "payee": "Super Cheap Signs",
+     "total": 436.84,
+     "payments": 1,
+     "purpose": "campaign signs"
+    },
+    {
+     "payee": "Publix",
+     "total": 287.76,
+     "payments": 2,
+     "purpose": "reception food"
+    },
+    {
+     "payee": "Campaign Partners",
+     "total": 208.0,
+     "payments": 8,
+     "purpose": "website fee; monthly website fee; monthly website fee-"
+    },
+    {
+     "payee": "Walmart",
+     "total": 146.76,
+     "payments": 2,
+     "purpose": "reception supplies; reception"
+    },
+    {
+     "payee": "Payments to the candidate (loan repayments, reimbursements, surplus returned)",
+     "total": 130.59,
+     "payments": 1,
+     "purpose": "shirts"
+    },
+    {
+     "payee": "Vistaprint",
+     "total": 120.38,
+     "payments": 2,
+     "purpose": "business cards and note cards; Printing"
+    },
+    {
+     "payee": "City of Callaway",
+     "total": 100.0,
+     "payments": 1,
+     "purpose": "Election Fee"
+    },
+    {
+     "payee": "Amazon",
+     "total": 24.6,
+     "payments": 1,
+     "purpose": "campaign shirt"
+    },
+    {
+     "payee": "Anedot",
+     "total": 10.5,
+     "payments": 11,
+     "purpose": "fee; Fee"
+    }
+   ],
+   "reconciliation": "itemized matches summary",
+   "notes": [
+    "Includes 100.00 in loans; loans count in SOE monetary contributions.",
+    "Includes 0.70 bank interest (filed as a contribution item)."
+   ]
+  },
+  {
+   "name": "Jamie Kirkland",
+   "office": "Callaway Commission, Ward 2",
+   "soe_office": "Callaway Commissioner Ward 2",
+   "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
+   "party": "Nonpartisan",
+   "soe_status": "Active - Qualified",
+   "soe_campaign_name": "Jamie Kirkland (NON)",
+   "cand_id": 732,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=732&rellevel=4&committee=N",
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=732&dhc=0&county=bay",
+   "latest_report": "G4 / period 2026-09-19 to 2026-10-02 / due 2026-10-09",
+   "through": "2026-10-02",
+   "total_raised": 302.23,
+   "monetary": 0.0,
+   "in_kind": 302.23,
+   "loans": 0.0,
+   "total_spent": 0.0,
+   "cash_on_hand_estimate": 0.0,
+   "n_contributions": 2,
+   "from_individuals": {
+    "count": 1,
+    "total": 43.85,
+    "bands": {
+     "under_100": {
+      "count": 1,
+      "total": 43.85
+     },
+     "100_499": {
+      "count": 0,
+      "total": 0.0
+     },
+     "500_999": {
+      "count": 0,
+      "total": 0.0
+     },
+     "1000_plus": {
+      "count": 0,
+      "total": 0.0
+     }
+    },
+    "in_county": {
+     "count": 1,
+     "total": 43.85
+    },
+    "out_of_county": {
+     "count": 0,
+     "total": 0.0
+    },
+    "unique_donors_approx": 1
+   },
+   "candidate_self": {
+    "contributions": 258.38,
+    "loans": 0.0
+   },
+   "by_type_total": {
+    "individual": 43.85,
+    "business": 0.0,
+    "pac": 0.0,
+    "party": 0.0,
+    "candidate_self": 258.38,
+    "other": 0.0
+   },
+   "contributors": [
+    {
+     "name": "Jamie Kirkland (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 258.38,
+     "date": "2026-06-26",
+     "kind": "in-kind"
+    }
+   ],
+   "top_expenditures": [],
+   "reconciliation": "itemized matches summary",
+   "notes": []
+  },
+  {
+   "name": "Shannon Aufdencamp",
+   "office": "Callaway Commission, Ward 2",
+   "soe_office": "Callaway Commissioner Ward 2",
+   "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
+   "party": "Nonpartisan",
+   "soe_status": "Active - Did not qualify",
+   "soe_campaign_name": "Shannon Aufdencamp (NON)",
+   "cand_id": 748,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=748&rellevel=4&committee=N",
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=748&dhc=0&county=bay",
+   "latest_report": "TRQ / period 2026-06-01 to 2026-09-10 / due 2026-09-10",
+   "through": "2026-09-10",
+   "total_raised": 150.0,
+   "monetary": 150.0,
+   "in_kind": 0.0,
+   "loans": 150.0,
+   "total_spent": 150.0,
+   "cash_on_hand_estimate": null,
+   "n_contributions": 1,
+   "from_individuals": {
+    "count": 0,
+    "total": 0.0,
+    "bands": {
+     "under_100": {
+      "count": 0,
+      "total": 0.0
+     },
+     "100_499": {
+      "count": 0,
+      "total": 0.0
+     },
+     "500_999": {
+      "count": 0,
+      "total": 0.0
+     },
+     "1000_plus": {
+      "count": 0,
+      "total": 0.0
+     }
+    },
+    "in_county": {
+     "count": 0,
+     "total": 0.0
+    },
+    "out_of_county": {
+     "count": 0,
+     "total": 0.0
+    },
+    "unique_donors_approx": 0
+   },
+   "candidate_self": {
+    "contributions": 0.0,
+    "loans": 150.0
+   },
+   "by_type_total": {
+    "individual": 0.0,
+    "business": 0.0,
+    "pac": 0.0,
+    "party": 0.0,
+    "candidate_self": 150.0,
+    "other": 0.0
+   },
+   "contributors": [
+    {
+     "name": "Shannon Aufdencamp (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 150.0,
+     "date": "2026-06-10",
+     "kind": "loan"
+    }
+   ],
+   "top_expenditures": [
+    {
+     "payee": "Payments to the candidate (loan repayments, reimbursements, surplus returned)",
+     "total": 144.0,
+     "payments": 1,
+     "purpose": "Distribution of surplus: Repayment of Loan"
+    },
+    {
+     "payee": "Panhandle Credit Union",
+     "total": 6.0,
+     "payments": 3,
+     "purpose": "Statement Fee"
+    }
+   ],
+   "reconciliation": "itemized matches summary",
+   "notes": [
+    "Campaign filed a termination report (TRQ); account is closed.",
+    "SOE status \"Did not qualify\": campaign account opened but candidate did not qualify for the ballot."
+   ]
+  },
+  {
+   "name": "Spring Overway",
+   "office": "Callaway Commission, Ward 2",
+   "soe_office": "Callaway Commissioner Ward 2",
+   "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
+   "party": "Nonpartisan",
+   "soe_status": "Active - Qualified",
+   "soe_campaign_name": "Spring Overway (NON)",
+   "cand_id": 742,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=742&rellevel=4&committee=N",
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=742&dhc=0&county=bay",
+   "latest_report": "G5 / period 2026-10-03 to 2026-10-16 / due 2026-10-23",
+   "through": "2026-10-16",
+   "total_raised": 2800.0,
+   "monetary": 2050.0,
+   "in_kind": 750.0,
+   "loans": 0.0,
+   "total_spent": 1729.13,
+   "cash_on_hand_estimate": 320.87,
+   "n_contributions": 7,
+   "from_individuals": {
+    "count": 5,
+    "total": 1850.0,
+    "bands": {
+     "under_100": {
+      "count": 0,
+      "total": 0.0
+     },
+     "100_499": {
+      "count": 3,
+      "total": 600.0
+     },
+     "500_999": {
+      "count": 2,
+      "total": 1250.0
+     },
+     "1000_plus": {
+      "count": 0,
+      "total": 0.0
+     }
+    },
+    "in_county": {
+     "count": 4,
+     "total": 1550.0
+    },
+    "out_of_county": {
+     "count": 1,
+     "total": 300.0
+    },
+    "unique_donors_approx": 4
+   },
+   "candidate_self": {
+    "contributions": 0.0,
+    "loans": 0.0
+   },
+   "by_type_total": {
+    "individual": 1850.0,
+    "business": 950.0,
+    "pac": 0.0,
+    "party": 0.0,
+    "candidate_self": 0.0,
+    "other": 0.0
+   },
+   "contributors": [
+    {
+     "name": "Taylor's Towing",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 750.0,
+     "date": "2026-06-09",
+     "kind": "check"
+    },
+    {
+     "name": "Taylors Towing,Inc",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 200.0,
+     "date": "2026-09-28",
+     "kind": "check"
+    }
+   ],
+   "top_expenditures": [
+    {
+     "payee": "Deezigns & Graphics Sign Co",
+     "total": 784.57,
+     "payments": 4,
+     "purpose": "yard signs; signs; campaign signs; stickers"
+    },
+    {
+     "payee": "Thread White and Blue",
+     "total": 304.95,
+     "payments": 1,
+     "purpose": "Campaign T-shirts"
+    },
+    {
+     "payee": "City of Callaway",
+     "total": 302.95,
+     "payments": 3,
+     "purpose": "Community center rental; Candidate Fee- Given to BCSE; Refund of deposit for the community center rental"
+    },
+    {
+     "payee": "U.S. Postal Service",
+     "total": 164.0,
+     "payments": 1,
+     "purpose": "postage"
+    },
+    {
+     "payee": "Walmart",
+     "total": 159.21,
+     "payments": 3,
+     "purpose": "printer ink, copy paper, envelopes; Items for Meet and Greet event; ink pens; note pad"
+    },
+    {
+     "payee": "Dollar General",
+     "total": 7.56,
+     "payments": 1,
+     "purpose": "napkins, cups for meet and greet"
+    },
+    {
+     "payee": "UPS",
+     "total": 5.89,
+     "payments": 1,
+     "purpose": "Flyer printing"
+    }
+   ],
+   "reconciliation": "itemized matches summary",
+   "notes": []
+  },
+  {
+   "name": "Alyssa Finneyfrock",
+   "office": "Lake Powell Community Development District, Seat 2",
+   "soe_office": "Lake Powell CDD Seat 2",
+   "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
+   "party": "Nonpartisan",
+   "soe_status": "Active - Qualified",
+   "soe_campaign_name": "Alyssa Finneyfrock (NON)",
+   "cand_id": 746,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=746&rellevel=4&committee=N",
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=746&dhc=0&county=bay",
+   "latest_report": null,
+   "through": null,
+   "total_raised": 0.0,
+   "monetary": 0.0,
+   "in_kind": 0.0,
+   "loans": 0.0,
+   "total_spent": 0.0,
+   "cash_on_hand_estimate": null,
+   "n_contributions": 0,
+   "from_individuals": {
+    "count": 0,
+    "total": 0.0,
+    "bands": {
+     "under_100": {
+      "count": 0,
+      "total": 0.0
+     },
+     "100_499": {
+      "count": 0,
+      "total": 0.0
+     },
+     "500_999": {
+      "count": 0,
+      "total": 0.0
+     },
+     "1000_plus": {
+      "count": 0,
+      "total": 0.0
+     }
+    },
+    "in_county": {
+     "count": 0,
+     "total": 0.0
+    },
+    "out_of_county": {
+     "count": 0,
+     "total": 0.0
+    },
+    "unique_donors_approx": 0
+   },
+   "candidate_self": {
+    "contributions": 0.0,
+    "loans": 0.0
+   },
+   "by_type_total": {
+    "individual": 0.0,
+    "business": 0.0,
+    "pac": 0.0,
+    "party": 0.0,
+    "candidate_self": 0.0,
+    "other": 0.0
+   },
+   "contributors": [],
+   "top_expenditures": [],
+   "reconciliation": "no activity reported (export empty; all SOE totals $0.00)",
+   "notes": [
+    "No campaign finance reports listed on the SOE candidate page."
+   ]
+  },
+  {
+   "name": "Greg Porta",
+   "office": "Lake Powell Community Development District, Seat 2",
+   "soe_office": "Lake Powell CDD Seat 2",
+   "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
+   "party": "Nonpartisan",
+   "soe_status": "Active - Qualified",
+   "soe_campaign_name": "Greg Porta (NON)",
+   "cand_id": 744,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=744&rellevel=4&committee=N",
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=744&dhc=0&county=bay",
+   "latest_report": null,
+   "through": null,
+   "total_raised": 0.0,
+   "monetary": 0.0,
+   "in_kind": 0.0,
+   "loans": 0.0,
+   "total_spent": 0.0,
+   "cash_on_hand_estimate": null,
+   "n_contributions": 0,
+   "from_individuals": {
+    "count": 0,
+    "total": 0.0,
+    "bands": {
+     "under_100": {
+      "count": 0,
+      "total": 0.0
+     },
+     "100_499": {
+      "count": 0,
+      "total": 0.0
+     },
+     "500_999": {
+      "count": 0,
+      "total": 0.0
+     },
+     "1000_plus": {
+      "count": 0,
+      "total": 0.0
+     }
+    },
+    "in_county": {
+     "count": 0,
+     "total": 0.0
+    },
+    "out_of_county": {
+     "count": 0,
+     "total": 0.0
+    },
+    "unique_donors_approx": 0
+   },
+   "candidate_self": {
+    "contributions": 0.0,
+    "loans": 0.0
+   },
+   "by_type_total": {
+    "individual": 0.0,
+    "business": 0.0,
+    "pac": 0.0,
+    "party": 0.0,
+    "candidate_self": 0.0,
+    "other": 0.0
+   },
+   "contributors": [],
+   "top_expenditures": [],
+   "reconciliation": "no activity reported (export empty; all SOE totals $0.00)",
+   "notes": [
+    "No campaign finance reports listed on the SOE candidate page."
+   ]
+  },
+  {
+   "name": "Kenneth Black",
+   "office": "Lake Powell Community Development District, Seat 5",
+   "soe_office": "Lake Powell CDD Seat 5",
+   "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
+   "party": "Nonpartisan",
+   "soe_status": "Active - Qualified",
+   "soe_campaign_name": "Kenneth Black (NON)",
+   "cand_id": 741,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=741&rellevel=4&committee=N",
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=741&dhc=0&county=bay",
+   "latest_report": null,
+   "through": null,
+   "total_raised": 0.0,
+   "monetary": 0.0,
+   "in_kind": 0.0,
+   "loans": 0.0,
+   "total_spent": 0.0,
+   "cash_on_hand_estimate": null,
+   "n_contributions": 0,
+   "from_individuals": {
+    "count": 0,
+    "total": 0.0,
+    "bands": {
+     "under_100": {
+      "count": 0,
+      "total": 0.0
+     },
+     "100_499": {
+      "count": 0,
+      "total": 0.0
+     },
+     "500_999": {
+      "count": 0,
+      "total": 0.0
+     },
+     "1000_plus": {
+      "count": 0,
+      "total": 0.0
+     }
+    },
+    "in_county": {
+     "count": 0,
+     "total": 0.0
+    },
+    "out_of_county": {
+     "count": 0,
+     "total": 0.0
+    },
+    "unique_donors_approx": 0
+   },
+   "candidate_self": {
+    "contributions": 0.0,
+    "loans": 0.0
+   },
+   "by_type_total": {
+    "individual": 0.0,
+    "business": 0.0,
+    "pac": 0.0,
+    "party": 0.0,
+    "candidate_self": 0.0,
+    "other": 0.0
+   },
+   "contributors": [],
+   "top_expenditures": [],
+   "reconciliation": "no activity reported (export empty; all SOE totals $0.00)",
+   "notes": [
+    "No campaign finance reports listed on the SOE candidate page."
+   ]
+  },
+  {
+   "name": "Kevin Williams",
+   "office": "Lake Powell Community Development District, Seat 5",
+   "soe_office": "Lake Powell CDD Seat 5",
+   "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
+   "party": "Nonpartisan",
+   "soe_status": "Inactive - Withdrawn",
+   "soe_campaign_name": "Kevin Williams (NON)",
+   "cand_id": 745,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=745&rellevel=4&committee=N",
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=745&dhc=0&county=bay",
+   "latest_report": null,
+   "through": null,
+   "total_raised": 0.0,
+   "monetary": 0.0,
+   "in_kind": 0.0,
+   "loans": 0.0,
+   "total_spent": 0.0,
+   "cash_on_hand_estimate": null,
+   "n_contributions": 0,
+   "from_individuals": {
+    "count": 0,
+    "total": 0.0,
+    "bands": {
+     "under_100": {
+      "count": 0,
+      "total": 0.0
+     },
+     "100_499": {
+      "count": 0,
+      "total": 0.0
+     },
+     "500_999": {
+      "count": 0,
+      "total": 0.0
+     },
+     "1000_plus": {
+      "count": 0,
+      "total": 0.0
+     }
+    },
+    "in_county": {
+     "count": 0,
+     "total": 0.0
+    },
+    "out_of_county": {
+     "count": 0,
+     "total": 0.0
+    },
+    "unique_donors_approx": 0
+   },
+   "candidate_self": {
+    "contributions": 0.0,
+    "loans": 0.0
+   },
+   "by_type_total": {
+    "individual": 0.0,
+    "business": 0.0,
+    "pac": 0.0,
+    "party": 0.0,
+    "candidate_self": 0.0,
+    "other": 0.0
+   },
+   "contributors": [],
+   "top_expenditures": [],
+   "reconciliation": "no activity reported (export empty; all SOE totals $0.00)",
+   "notes": [
+    "No campaign finance reports listed on the SOE candidate page."
+   ]
+  },
+  {
+   "name": "Tim Rosson",
+   "office": "Lake Powell Community Development District, Seat 5",
+   "soe_office": "Lake Powell CDD Seat 5",
+   "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
+   "party": "Nonpartisan",
+   "soe_status": "Active - Qualified",
+   "soe_campaign_name": "Tim Rosson (NON)",
+   "cand_id": 747,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=747&rellevel=4&committee=N",
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=747&dhc=0&county=bay",
+   "latest_report": null,
+   "through": null,
+   "total_raised": 0.0,
+   "monetary": 0.0,
+   "in_kind": 0.0,
+   "loans": 0.0,
+   "total_spent": 0.0,
+   "cash_on_hand_estimate": null,
+   "n_contributions": 0,
+   "from_individuals": {
+    "count": 0,
+    "total": 0.0,
+    "bands": {
+     "under_100": {
+      "count": 0,
+      "total": 0.0
+     },
+     "100_499": {
+      "count": 0,
+      "total": 0.0
+     },
+     "500_999": {
+      "count": 0,
+      "total": 0.0
+     },
+     "1000_plus": {
+      "count": 0,
+      "total": 0.0
+     }
+    },
+    "in_county": {
+     "count": 0,
+     "total": 0.0
+    },
+    "out_of_county": {
+     "count": 0,
+     "total": 0.0
+    },
+    "unique_donors_approx": 0
+   },
+   "candidate_self": {
+    "contributions": 0.0,
+    "loans": 0.0
+   },
+   "by_type_total": {
+    "individual": 0.0,
+    "business": 0.0,
+    "pac": 0.0,
+    "party": 0.0,
+    "candidate_self": 0.0,
+    "other": 0.0
+   },
+   "contributors": [],
+   "top_expenditures": [],
+   "reconciliation": "no activity reported (export empty; all SOE totals $0.00)",
+   "notes": [
+    "No campaign finance reports listed on the SOE candidate page."
+   ]
+  },
+  {
+   "name": "Carlos Sanchez",
+   "office": "Panama City Beach Council, Ward 1",
+   "soe_office": "Panama City Beach Council Ward 1",
+   "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
+   "party": "Nonpartisan",
+   "soe_status": "Active - Qualified",
+   "soe_campaign_name": "Carlos Sanchez (NON)",
+   "cand_id": 739,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=739&rellevel=4&committee=N",
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=739&dhc=0&county=bay",
+   "latest_report": "G4 / period 2026-09-19 to 2026-10-02 / due 2026-10-09",
+   "through": "2026-10-02",
+   "total_raised": 29585.72,
+   "monetary": 29189.91,
+   "in_kind": 395.81,
+   "loans": 10000.0,
+   "total_spent": 15101.2,
+   "cash_on_hand_estimate": 14088.71,
+   "n_contributions": 133,
+   "from_individuals": {
+    "count": 127,
+    "total": 18285.72,
+    "bands": {
+     "under_100": {
+      "count": 38,
+      "total": 1539.91
+     },
+     "100_499": {
+      "count": 81,
+      "total": 11245.81
+     },
+     "500_999": {
+      "count": 5,
+      "total": 2500.0
+     },
+     "1000_plus": {
+      "count": 3,
+      "total": 3000.0
+     }
+    },
+    "in_county": {
+     "count": 29,
+     "total": 4690.81
+    },
+    "out_of_county": {
+     "count": 98,
+     "total": 13594.91
+    },
+    "unique_donors_approx": 124
+   },
+   "candidate_self": {
+    "contributions": 0.0,
+    "loans": 10000.0
+   },
+   "by_type_total": {
+    "individual": 18285.72,
+    "business": 1300.0,
+    "pac": 0.0,
+    "party": 0.0,
+    "candidate_self": 10000.0,
+    "other": 0.0
+   },
+   "contributors": [
+    {
+     "name": "Carlos Sanchez (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 5000.0,
+     "date": "2026-05-01",
+     "kind": "loan"
+    },
+    {
+     "name": "Pretty Neat Organizing LLC",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-05-20",
+     "kind": "check"
+    },
+    {
+     "name": "Carlos Sanchez (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 1000.0,
+     "date": "2026-06-25",
+     "kind": "loan"
+    },
+    {
+     "name": "Carlos Sanchez (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 1000.0,
+     "date": "2026-07-31",
+     "kind": "loan"
+    },
+    {
+     "name": "Nelson Marine Service Inc",
+     "city": "Panama City Beach",
+     "type": "business",
+     "amount": 300.0,
+     "date": "2026-08-28",
+     "kind": "check"
+    },
+    {
+     "name": "Carlos Sanchez (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 3000.0,
+     "date": "2026-08-31",
+     "kind": "loan"
+    }
+   ],
+   "top_expenditures": [
+    {
+     "payee": "Lamar Advertising",
+     "total": 3750.0,
+     "payments": 1,
+     "purpose": "Advertising Media"
+    },
+    {
+     "payee": "Trailhead Media",
+     "total": 2400.0,
+     "payments": 2,
+     "purpose": "Advertising Media"
+    },
+    {
+     "payee": "Vistaprint",
+     "total": 1521.44,
+     "payments": 5,
+     "purpose": "Campaign Handouts; Campaign Materials; Shirts; Business Cards"
+    },
+    {
+     "payee": "PrintPlace",
+     "total": 1158.28,
+     "payments": 1,
+     "purpose": "Mailers"
+    },
+    {
+     "payee": "Super Cheap Signs",
+     "total": 978.4,
+     "payments": 2,
+     "purpose": "Yard Signs; Yard Sign"
+    },
+    {
+     "payee": "City of Panama City Beach",
+     "total": 750.0,
+     "payments": 1,
+     "purpose": "Qualifying Fee"
+    },
+    {
+     "payee": "PCB Life",
+     "total": 720.0,
+     "payments": 1,
+     "purpose": "Advertising"
+    },
+    {
+     "payee": "Facebook (Meta)",
+     "total": 713.26,
+     "payments": 23,
+     "purpose": "Advertising"
+    },
+    {
+     "payee": "Daley Professional Web Solutio",
+     "total": 699.0,
+     "payments": 1,
+     "purpose": "Online Website"
+    },
+    {
+     "payee": "Gagnon's Sign Depot",
+     "total": 619.53,
+     "payments": 1,
+     "purpose": "Yard Signs"
+    },
+    {
+     "payee": "Burnie Thompson LLC",
+     "total": 500.0,
+     "payments": 1,
+     "purpose": "Advertising"
+    },
+    {
+     "payee": "GNS Embroidery",
+     "total": 323.92,
+     "payments": 1,
+     "purpose": "Campaign Shirts"
+    },
+    {
+     "payee": "PCB Chamber of Commerce",
+     "total": 275.0,
+     "payments": 1,
+     "purpose": "Membership/Advertisement"
+    },
+    {
+     "payee": "Vconnecta Limited",
+     "total": 204.97,
+     "payments": 1,
+     "purpose": "Canvassing App"
+    },
+    {
+     "payee": "BannerBuzz",
+     "total": 183.83,
+     "payments": 2,
+     "purpose": "Banner"
+    }
+   ],
+   "reconciliation": "itemized matches summary",
+   "notes": [
+    "Includes 10,000.00 in loans; loans count in SOE monetary contributions."
+   ]
+  },
+  {
+   "name": "Grant Wittstruck",
+   "office": "Panama City Beach Council, Ward 1",
+   "soe_office": "Panama City Beach Council Ward 1",
+   "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
+   "party": "Nonpartisan",
+   "soe_status": "Active - Qualified",
+   "soe_campaign_name": "Grant Wittstruck (NON)",
+   "cand_id": 730,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=730&rellevel=4&committee=N",
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=730&dhc=0&county=bay",
+   "latest_report": "G4 / period 2026-09-19 to 2026-10-02 / due 2026-10-09",
+   "through": "2026-10-02",
+   "total_raised": 58114.35,
+   "monetary": 57797.2,
+   "in_kind": 317.15,
+   "loans": 1000.0,
+   "total_spent": 36965.39,
+   "cash_on_hand_estimate": 20831.81,
+   "n_contributions": 118,
+   "from_individuals": {
+    "count": 68,
+    "total": 24253.75,
+    "bands": {
+     "under_100": {
+      "count": 12,
+      "total": 426.0
+     },
+     "100_499": {
+      "count": 26,
+      "total": 4827.75
+     },
+     "500_999": {
+      "count": 21,
+      "total": 10500.0
+     },
+     "1000_plus": {
+      "count": 9,
+      "total": 9000.0
+     }
+    },
+    "in_county": {
+     "count": 49,
+     "total": 17368.45
+    },
+    "out_of_county": {
+     "count": 12,
+     "total": 2905.0
+    },
+    "location_unknown": {
+     "count": 7,
+     "total": 3980.3
+    },
+    "refunds_to_individuals": -500.0,
+    "unique_donors_approx": 62
+   },
+   "candidate_self": {
+    "contributions": 0.0,
+    "loans": 1000.0
+   },
+   "by_type_total": {
+    "individual": 24253.75,
+    "business": 31110.6,
+    "pac": 1500.0,
+    "party": 0.0,
+    "candidate_self": 1000.0,
+    "other": 250.0
+   },
+   "contributors": [
+    {
+     "name": "Grant Wittstruck (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 1000.0,
+     "date": "2026-03-25",
+     "kind": "loan"
+    },
+    {
+     "name": "Panama City Beach Charitable G",
+     "city": "Panama City Beach",
+     "type": "other",
+     "amount": 250.0,
+     "date": "2026-04-09",
+     "kind": "check"
+    },
+    {
+     "name": "Florida Parasail Company, LLC",
+     "city": "Panama City Beach",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-04-10",
+     "kind": "check"
+    },
+    {
+     "name": "Pigneri & Lyon Inc.",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-04-14",
+     "kind": "check"
+    },
+    {
+     "name": "BRI Sharky's, LLC.",
+     "city": "Panama City Beach",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-04-17",
+     "kind": "check"
+    },
+    {
+     "name": "Beach Movement Event Managemen",
+     "city": "Panama City Beach",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2026-04-17",
+     "kind": "check"
+    },
+    {
+     "name": "Bennett's Reef, Inc.",
+     "city": "Panama City Beach",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-04-17",
+     "kind": "check"
+    },
+    {
+     "name": "Emerald Coast Curizin'",
+     "city": "Tupelo",
+     "type": "business",
+     "amount": 300.0,
+     "date": "2026-04-17",
+     "kind": "check"
+    },
+    {
+     "name": "Hammerheaad Fred's",
+     "city": "Panama City Beach",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-04-17",
+     "kind": "check"
+    },
+    {
+     "name": "Lyndell Partners, LLC",
+     "city": "Panama City Beach",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2026-04-17",
+     "kind": "check"
+    },
+    {
+     "name": "Seahaven Residential Managemen",
+     "city": "Panama City Beach",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2026-04-17",
+     "kind": "check"
+    },
+    {
+     "name": "Maxwell Company",
+     "city": "Panama City Beach",
+     "type": "business",
+     "amount": 250.0,
+     "date": "2026-04-21",
+     "kind": "check"
+    },
+    {
+     "name": "St. Joe",
+     "city": "Santa Rosa Beach",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-04-27",
+     "kind": "check"
+    },
+    {
+     "name": "Prestiage Worldwide PCB Inc.",
+     "city": "Panama City Beach",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2026-05-20",
+     "kind": "check"
+    },
+    {
+     "name": "RJ Gorman Contracting LLC",
+     "city": "Panama City Beach",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-05-20",
+     "kind": "check"
+    },
+    {
+     "name": "Tresure Island Marina",
+     "city": "Panama City Beach",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-05-20",
+     "kind": "check"
+    },
+    {
+     "name": "Burger Guyz of FL, Inc.",
+     "city": "Panama City Beach",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-05-26",
+     "kind": "check"
+    },
+    {
+     "name": "Diegos Margaritas Bar",
+     "city": "Panama City Beach",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2026-05-26",
+     "kind": "check"
+    },
+    {
+     "name": "4 Row Holdings LLC",
+     "city": "Lynn Haven",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-05-27",
+     "kind": "check"
+    },
+    {
+     "name": "Meyers Electric, LLC",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 350.0,
+     "date": "2026-05-27",
+     "kind": "check"
+    },
+    {
+     "name": "The LiQ, LLC.",
+     "city": "Panama City Beach",
+     "type": "business",
+     "amount": 350.0,
+     "date": "2026-05-27",
+     "kind": "check"
+    },
+    {
+     "name": "Uncle bucks Storage LLC",
+     "city": "Lynn Haven",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-05-27",
+     "kind": "check"
+    },
+    {
+     "name": "Whiskey's Saloon",
+     "city": "Panama City Beach",
+     "type": "business",
+     "amount": 350.0,
+     "date": "2026-05-27",
+     "kind": "check"
+    },
+    {
+     "name": "Patronis Brothers, Inc.",
+     "city": "Panama City Beach",
+     "type": "business",
+     "amount": 300.0,
+     "date": "2026-06-03",
+     "kind": "check"
+    },
+    {
+     "name": "Panhandle Engineering",
+     "city": "Lynn Haven",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-06-27",
+     "kind": "check"
+    },
+    {
+     "name": "Legacy Golf Club PCB, Inc.",
+     "city": "Panama City Beach",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-07-02",
+     "kind": "check"
+    },
+    {
+     "name": "Oasis Resorts, Inc.",
+     "city": "Panama City Beach",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-07-02",
+     "kind": "check"
+    },
+    {
+     "name": "Coastal Classic Homes",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 250.0,
+     "date": "2026-07-07",
+     "kind": "check"
+    },
+    {
+     "name": "Saltwater Grill",
+     "city": "Panama City Beach",
+     "type": "business",
+     "amount": 960.6,
+     "date": "2026-07-29",
+     "kind": "check"
+    },
+    {
+     "name": "Cynthia Morehouse Real Estate",
+     "city": "Panama City Beach",
+     "type": "business",
+     "amount": 250.0,
+     "date": "2026-08-03",
+     "kind": "check"
+    },
+    {
+     "name": "Walsingham Management LLC",
+     "city": "Panama City Beach",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-08-06",
+     "kind": "check"
+    },
+    {
+     "name": "Factory Direct Furniture, LLC",
+     "city": "Panama City Beach",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2026-08-15",
+     "kind": "check"
+    },
+    {
+     "name": "RC Hospitality Solutions",
+     "city": "Panama City Beach",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-08-17",
+     "kind": "check"
+    },
+    {
+     "name": "Driftaway, Lllp",
+     "city": "Panama City Beach",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-08-20",
+     "kind": "check"
+    },
+    {
+     "name": "Geilmore Resorts, LLC",
+     "city": "Panam City Beach",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-08-20",
+     "kind": "check"
+    },
+    {
+     "name": "Hilton Sun Incorporated",
+     "city": "Panama City Beach",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-08-28",
+     "kind": "check"
+    },
+    {
+     "name": "Mike's Cafe & Oyster Bar, LLC",
+     "city": "Panama City Beach",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2026-09-01",
+     "kind": "check"
+    },
+    {
+     "name": "Thomas Pizza & Cream, LLC",
+     "city": "Panama City Beach",
+     "type": "business",
+     "amount": 250.0,
+     "date": "2026-09-01",
+     "kind": "check"
+    },
+    {
+     "name": "Thomas' Donut & Snak Shop, LLC",
+     "city": "Panama City Beach",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2026-09-01",
+     "kind": "check"
+    },
+    {
+     "name": "BRI Sharky's",
+     "city": "Panama City Beach",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-09-03",
+     "kind": "check"
+    },
+    {
+     "name": "Bennetts Reef",
+     "city": "Panama City Beach",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-09-03",
+     "kind": "check"
+    },
+    {
+     "name": "Hammerhead Fred's",
+     "city": "Panama City Beach",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-09-03",
+     "kind": "check"
+    },
+    {
+     "name": "RI Beach LLC",
+     "city": "Panam City Beach",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-09-03",
+     "kind": "check"
+    },
+    {
+     "name": "Seahaven Residentail Manadgeme",
+     "city": "Panam City Beach",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-09-03",
+     "kind": "check"
+    },
+    {
+     "name": "Friends of Griff Griffitts",
+     "city": "Tallahassee",
+     "type": "committee",
+     "amount": 500.0,
+     "date": "2026-09-10",
+     "kind": "check"
+    },
+    {
+     "name": "BRI Sharky's",
+     "city": "Panama City Beach",
+     "type": "business",
+     "amount": -1000.0,
+     "date": "2026-09-18",
+     "kind": "refund"
+    },
+    {
+     "name": "Bennetts Reef",
+     "city": "Panama City Beach",
+     "type": "business",
+     "amount": -1000.0,
+     "date": "2026-09-18",
+     "kind": "refund"
+    },
+    {
+     "name": "Hammerhead Fred's",
+     "city": "Panama City Becah",
+     "type": "business",
+     "amount": -1000.0,
+     "date": "2026-09-18",
+     "kind": "refund"
+    },
+    {
+     "name": "Seahaven Residential Managemen",
+     "city": "Panama City Beach",
+     "type": "business",
+     "amount": -500.0,
+     "date": "2026-09-18",
+     "kind": "refund"
+    },
+    {
+     "name": "Seahaven Development",
+     "city": "Panama City Becah",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-09-22",
+     "kind": "check"
+    },
+    {
+     "name": "White Sand Beach, LLC",
+     "city": "Panama City Beach",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-09-22",
+     "kind": "check"
+    },
+    {
+     "name": "Lyndell Partners LLC",
+     "city": "Panama City Beach",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2026-09-23",
+     "kind": "check"
+    },
+    {
+     "name": "Realtors Political Advocacy Co",
+     "city": "Orlando",
+     "type": "pac",
+     "amount": 1000.0,
+     "date": "2026-09-23",
+     "kind": "check"
+    },
+    {
+     "name": "Timmins Consulting LLC",
+     "city": "Tallahassee",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2026-09-24",
+     "kind": "check"
+    }
+   ],
+   "top_expenditures": [
+    {
+     "payee": "Payments to individuals",
+     "total": 9250.0,
+     "payments": 6,
+     "purpose": "Consulting; Consultant; consulting; Sign Stands; and 1 other descriptions"
+    },
+    {
+     "payee": "LAT30 Strategic Partners",
+     "total": 4696.56,
+     "payments": 5,
+     "purpose": "Adverting; Advertising Spend; Advertising; Media Spend Reimbursement"
+    },
+    {
+     "payee": "Lamar Advertising",
+     "total": 3867.0,
+     "payments": 1,
+     "purpose": "Billboard"
+    },
+    {
+     "payee": "Watts Up Media",
+     "total": 2500.0,
+     "payments": 1,
+     "purpose": "Commercial"
+    },
+    {
+     "payee": "Trailhead Media",
+     "total": 2400.0,
+     "payments": 2,
+     "purpose": "Billboards; Advertising"
+    },
+    {
+     "payee": "Gagnon's Sign Depot",
+     "total": 2081.85,
+     "payments": 5,
+     "purpose": "Signs; Sign"
+    },
+    {
+     "payee": "Ad Cheef",
+     "total": 1750.0,
+     "payments": 1,
+     "purpose": "Advertising"
+    },
+    {
+     "payee": "Revolt Ministries",
+     "total": 1255.65,
+     "payments": 1,
+     "purpose": "Sign Supplies"
+    },
+    {
+     "payee": "PCB Life",
+     "total": 1200.0,
+     "payments": 1,
+     "purpose": "Advertising"
+    },
+    {
+     "payee": "Ink Trax",
+     "total": 802.41,
+     "payments": 1,
+     "purpose": "Shirts"
+    },
+    {
+     "payee": "Engagement Strategies",
+     "total": 762.12,
+     "payments": 1,
+     "purpose": "Communication"
+    },
+    {
+     "payee": "Constant Contact",
+     "total": 673.75,
+     "payments": 6,
+     "purpose": "Communication; Communications"
+    },
+    {
+     "payee": "iHeart Media",
+     "total": 500.0,
+     "payments": 1,
+     "purpose": "Marketing"
+    },
+    {
+     "payee": "L2 Inc",
+     "total": 500.0,
+     "payments": 1,
+     "purpose": "Data"
+    },
+    {
+     "payee": "Inside Drive",
+     "total": 500.0,
+     "payments": 1,
+     "purpose": "Advertising"
+    }
+   ],
+   "reconciliation": "itemized matches summary",
+   "notes": [
+    "Includes 1,000.00 in loans; loans count in SOE monetary contributions."
+   ]
+  },
+  {
+   "name": "Scott Heilmann",
+   "office": "Panama City Beach Council, Ward 1",
+   "soe_office": "Panama City Beach Council Ward 1",
+   "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
+   "party": "Nonpartisan",
+   "soe_status": "Active - Did not qualify",
+   "soe_campaign_name": "Scott Heilmann (NON)",
+   "cand_id": 736,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=736&rellevel=4&committee=N",
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=736&dhc=0&county=bay",
+   "latest_report": "TRQ / period 2026-06-01 to 2026-09-10 / due 2026-09-10",
+   "through": "2026-09-10",
+   "total_raised": 11000.0,
+   "monetary": 11000.0,
+   "in_kind": 0.0,
+   "loans": 10000.0,
+   "total_spent": 11000.0,
+   "cash_on_hand_estimate": null,
+   "n_contributions": 2,
+   "from_individuals": {
+    "count": 0,
+    "total": 0.0,
+    "bands": {
+     "under_100": {
+      "count": 0,
+      "total": 0.0
+     },
+     "100_499": {
+      "count": 0,
+      "total": 0.0
+     },
+     "500_999": {
+      "count": 0,
+      "total": 0.0
+     },
+     "1000_plus": {
+      "count": 0,
+      "total": 0.0
+     }
+    },
+    "in_county": {
+     "count": 0,
+     "total": 0.0
+    },
+    "out_of_county": {
+     "count": 0,
+     "total": 0.0
+    },
+    "unique_donors_approx": 0
+   },
+   "candidate_self": {
+    "contributions": 0.0,
+    "loans": 10000.0
+   },
+   "by_type_total": {
+    "individual": 0.0,
+    "business": 1000.0,
+    "pac": 0.0,
+    "party": 0.0,
+    "candidate_self": 10000.0,
+    "other": 0.0
+   },
+   "contributors": [
+    {
+     "name": "Scott Heilmann (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 10000.0,
+     "date": "2026-04-21",
+     "kind": "loan"
+    },
+    {
+     "name": "Oasis Resorts Inc",
+     "city": "Panama City Beach",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-04-28",
+     "kind": "check"
+    }
+   ],
+   "top_expenditures": [
+    {
+     "payee": "Payments to the candidate (loan repayments, reimbursements, surplus returned)",
+     "total": 9580.28,
+     "payments": 1,
+     "purpose": "Repayment of loan to self"
+    },
+    {
+     "payee": "Oasis Resorts INC",
+     "total": 1000.0,
+     "payments": 1,
+     "purpose": "refund of campaign donation"
+    },
+    {
+     "payee": "Payments to individuals",
+     "total": 419.72,
+     "payments": 1,
+     "purpose": "LOGO T-shirts for campaign"
+    }
+   ],
+   "reconciliation": "itemized matches summary",
+   "notes": [
+    "Campaign filed a termination report (TRQ); account is closed.",
+    "SOE status \"Did not qualify\": campaign account opened but candidate did not qualify for the ballot."
+   ]
+  },
+  {
+   "name": "Mary Coburn",
+   "office": "Panama City Beach Council, Ward 3",
+   "soe_office": "Panama City Beach Council Ward 3",
+   "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
+   "party": "Nonpartisan",
+   "soe_status": "Active - Qualified",
+   "soe_campaign_name": "Mary Coburn (NON)",
+   "cand_id": 727,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=727&rellevel=4&committee=N",
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=727&dhc=0&county=bay",
+   "latest_report": "G4 / period 2026-09-19 to 2026-10-02 / due 2026-10-09",
+   "through": "2026-10-02",
+   "total_raised": 6061.71,
+   "monetary": 5667.2,
+   "in_kind": 394.51,
+   "loans": 964.2,
+   "total_spent": 3790.72,
+   "cash_on_hand_estimate": 1876.48,
+   "n_contributions": 30,
+   "from_individuals": {
+    "count": 21,
+    "total": 3226.01,
+    "bands": {
+     "under_100": {
+      "count": 16,
+      "total": 526.01
+     },
+     "100_499": {
+      "count": 2,
+      "total": 200.0
+     },
+     "500_999": {
+      "count": 1,
+      "total": 500.0
+     },
+     "1000_plus": {
+      "count": 2,
+      "total": 2000.0
+     }
+    },
+    "in_county": {
+     "count": 20,
+     "total": 2226.01
+    },
+    "out_of_county": {
+     "count": 1,
+     "total": 1000.0
+    },
+    "unique_donors_approx": 21
+   },
+   "candidate_self": {
+    "contributions": 78.5,
+    "loans": 964.2
+   },
+   "by_type_total": {
+    "individual": 3226.01,
+    "business": 793.0,
+    "pac": 1000.0,
+    "party": 0.0,
+    "candidate_self": 1042.7,
+    "other": 0.0
+   },
+   "contributors": [
+    {
+     "name": "Mary Coburn (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 500.0,
+     "date": "2026-04-21",
+     "kind": "loan"
+    },
+    {
+     "name": "Mary Coburn (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 14.3,
+     "date": "2026-04-27",
+     "kind": "in-kind"
+    },
+    {
+     "name": "Mary Coburn (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 64.2,
+     "date": "2026-08-06",
+     "kind": "loan"
+    },
+    {
+     "name": "Mary Coburn (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 64.2,
+     "date": "2026-08-06",
+     "kind": "in-kind"
+    },
+    {
+     "name": "Nelson Marine Services",
+     "city": "Panama City Beach",
+     "type": "business",
+     "amount": 300.0,
+     "date": "2026-09-10",
+     "kind": "check"
+    },
+    {
+     "name": "Mary Coburn (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 400.0,
+     "date": "2026-09-14",
+     "kind": "loan"
+    },
+    {
+     "name": "Press Print Graphics",
+     "city": "Panama City Beach",
+     "type": "business",
+     "amount": 243.0,
+     "date": "2026-09-15",
+     "kind": "in-kind"
+    },
+    {
+     "name": "Pretty Neat Organizing LLC",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 250.0,
+     "date": "2026-09-17",
+     "kind": "check"
+    },
+    {
+     "name": "Committee Realtors Political Advocacy",
+     "city": "Orlando",
+     "type": "pac",
+     "amount": 1000.0,
+     "date": "2026-09-26",
+     "kind": "check"
+    }
+   ],
+   "top_expenditures": [
+    {
+     "payee": "Trailhead Media",
+     "total": 1200.0,
+     "payments": 1,
+     "purpose": "Advertising"
+    },
+    {
+     "payee": "Vistaprint",
+     "total": 912.7,
+     "payments": 1,
+     "purpose": "Door Hangers"
+    },
+    {
+     "payee": "Super Cheap Signs",
+     "total": 746.02,
+     "payments": 1,
+     "purpose": "Signs"
+    },
+    {
+     "payee": "Burnie Thompson LLC",
+     "total": 500.0,
+     "payments": 1,
+     "purpose": "Advertising/Social Media"
+    },
+    {
+     "payee": "City of Panama City Beach",
+     "total": 250.0,
+     "payments": 1,
+     "purpose": "Filing Fee"
+    },
+    {
+     "payee": "Krewe of Dominique",
+     "total": 170.0,
+     "payments": 1,
+     "purpose": "Advertising"
+    },
+    {
+     "payee": "Hancock Whitney Bank",
+     "total": 12.0,
+     "payments": 3,
+     "purpose": "Bank Fee"
+    }
+   ],
+   "reconciliation": "itemized matches summary",
+   "notes": [
+    "Includes 964.20 in loans; loans count in SOE monetary contributions.",
+    "Amended report re-coded one $1,000 contribution from \"self\" to individual (D/A pair applied)."
+   ]
+  },
+  {
+   "name": "Nick Atkinson",
+   "office": "Panama City Beach Council, Ward 3",
+   "soe_office": "Panama City Beach Council Ward 3",
+   "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
+   "party": "Nonpartisan",
+   "soe_status": "Active - Qualified",
+   "soe_campaign_name": "Nick Atkinson (NON)",
+   "cand_id": 743,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=743&rellevel=4&committee=N",
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=743&dhc=0&county=bay",
+   "latest_report": "G4 / period 2026-09-19 to 2026-10-02 / due 2026-10-09",
+   "through": "2026-10-02",
+   "total_raised": 17300.0,
+   "monetary": 17300.0,
+   "in_kind": 0.0,
+   "loans": 850.0,
+   "total_spent": 12574.95,
+   "cash_on_hand_estimate": 4725.05,
+   "n_contributions": 30,
+   "from_individuals": {
+    "count": 17,
+    "total": 6100.0,
+    "bands": {
+     "under_100": {
+      "count": 1,
+      "total": 50.0
+     },
+     "100_499": {
+      "count": 9,
+      "total": 1550.0
+     },
+     "500_999": {
+      "count": 5,
+      "total": 2500.0
+     },
+     "1000_plus": {
+      "count": 2,
+      "total": 2000.0
+     }
+    },
+    "in_county": {
+     "count": 12,
+     "total": 4550.0
+    },
+    "out_of_county": {
+     "count": 4,
+     "total": 550.0
+    },
+    "location_unknown": {
+     "count": 1,
+     "total": 1000.0
+    },
+    "unique_donors_approx": 17
+   },
+   "candidate_self": {
+    "contributions": 0.0,
+    "loans": 850.0
+   },
+   "by_type_total": {
+    "individual": 6100.0,
+    "business": 10350.0,
+    "pac": 0.0,
+    "party": 0.0,
+    "candidate_self": 850.0,
+    "other": 0.0
+   },
+   "contributors": [
+    {
+     "name": "Nick Atkinson (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 100.0,
+     "date": "2026-05-23",
+     "kind": "loan"
+    },
+    {
+     "name": "Nick Atkinson (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 750.0,
+     "date": "2026-06-10",
+     "kind": "loan"
+    },
+    {
+     "name": "BAY POINT BILLFISH LLC",
+     "city": "PANAMA CITY BEACH",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-09-01",
+     "kind": "check"
+    },
+    {
+     "name": "BP LINX LLC",
+     "city": "PANAMA CITY",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-09-01",
+     "kind": "check"
+    },
+    {
+     "name": "CULPEPPER CONSTRUCTION CO.",
+     "city": "TALLAHASSEE",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-09-01",
+     "kind": "check"
+    },
+    {
+     "name": "PANHANDLE ENGINEERING",
+     "city": "LYNN HAVEN",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-09-01",
+     "kind": "check"
+    },
+    {
+     "name": "ROBERTS & ROBERTS INC",
+     "city": "TALLAHASSEE",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-09-01",
+     "kind": "check"
+    },
+    {
+     "name": "TOOTSIES SOUTH LLC",
+     "city": "GOODLETTSVILLE",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-09-01",
+     "kind": "check"
+    },
+    {
+     "name": "HILTON INC.",
+     "city": "PANAMA CITY BEACH",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-09-16",
+     "kind": "check"
+    },
+    {
+     "name": "LEGACY GULF CLUB",
+     "city": "PANAMA CITY BEACH",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-09-16",
+     "kind": "check"
+    },
+    {
+     "name": "OASIS RESORTS INC",
+     "city": "PANAMA CITY BEACH",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-09-16",
+     "kind": "check"
+    },
+    {
+     "name": "HILTON SUN INCORPORATED",
+     "city": "PANAMA CITY BEACH",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-09-29",
+     "kind": "check"
+    },
+    {
+     "name": "PANAMA PAWN INC",
+     "city": "PANAMA CITY BEACH",
+     "type": "business",
+     "amount": 350.0,
+     "date": "2026-09-29",
+     "kind": "check"
+    }
+   ],
+   "top_expenditures": [
+    {
+     "payee": "Neves Media Productions LLC",
+     "total": 7964.85,
+     "payments": 2,
+     "purpose": "RETAINER FOR SIGNS, POSTCARDS, AND GRAPHIC DESIGN; SIGNS, POST CARDS"
+    },
+    {
+     "payee": "PTN CONSULTING",
+     "total": 3000.0,
+     "payments": 1,
+     "purpose": "CAMPAIGN CONSULTING"
+    },
+    {
+     "payee": "City of Panama City Beach",
+     "total": 750.0,
+     "payments": 1,
+     "purpose": "Election Qualifying"
+    },
+    {
+     "payee": "Lowe's",
+     "total": 376.2,
+     "payments": 1,
+     "purpose": "LUMBER AND HARDWARE FOR SIGNS"
+    },
+    {
+     "payee": "WebElect.Net LLC",
+     "total": 280.0,
+     "payments": 1,
+     "purpose": "CANVASSING"
+    },
+    {
+     "payee": "UHAUL",
+     "total": 98.97,
+     "payments": 2,
+     "purpose": "RENTAL TRUCK TO TRANSPORT SIGNAGE; RENTAL TRUCK FOR SIGNAGE (MILEAGE FEE)"
+    },
+    {
+     "payee": "GNS Embroidery",
+     "total": 42.41,
+     "payments": 1,
+     "purpose": "CAMPAIGN CARDS"
+    },
+    {
+     "payee": "WinRed",
+     "total": 31.52,
+     "payments": 4,
+     "purpose": "PROCESSING FEE"
+    },
+    {
+     "payee": "Centennial Bank",
+     "total": 31.0,
+     "payments": 1,
+     "purpose": "Purchase of bank checks."
+    }
+   ],
+   "reconciliation": "itemized matches summary",
+   "notes": [
+    "Includes 850.00 in loans; loans count in SOE monetary contributions."
+   ]
+  },
+  {
+   "name": "Ginger Littleton",
+   "office": "School Board, District 2",
+   "soe_office": "School Board Member, District 2",
+   "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
+   "party": "Nonpartisan",
+   "soe_status": "Active - Elected",
+   "soe_campaign_name": "Ginger Littleton (NON)",
+   "cand_id": 731,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=731&rellevel=4&committee=N",
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=731&dhc=0&county=bay",
+   "latest_report": "P7 / period 2026-08-01 to 2026-08-13 / due 2026-08-14",
+   "through": "2026-08-13",
+   "total_raised": 22860.0,
+   "monetary": 22360.0,
+   "in_kind": 500.0,
+   "loans": 10060.0,
+   "total_spent": 19933.52,
+   "cash_on_hand_estimate": 2426.48,
+   "n_contributions": 33,
+   "from_individuals": {
+    "count": 28,
+    "total": 12800.0,
+    "bands": {
+     "under_100": {
+      "count": 1,
+      "total": 50.0
+     },
+     "100_499": {
+      "count": 12,
+      "total": 2250.0
+     },
+     "500_999": {
+      "count": 9,
+      "total": 4500.0
+     },
+     "1000_plus": {
+      "count": 6,
+      "total": 6000.0
+     }
+    },
+    "in_county": {
+     "count": 17,
+     "total": 7850.0
+    },
+    "out_of_county": {
+     "count": 8,
+     "total": 2950.0
+    },
+    "location_unknown": {
+     "count": 3,
+     "total": 2000.0
+    },
+    "unique_donors_approx": 28
+   },
+   "candidate_self": {
+    "contributions": 0.0,
+    "loans": 10060.0
+   },
+   "by_type_total": {
+    "individual": 12800.0,
+    "business": 0.0,
+    "pac": 0.0,
+    "party": 0.0,
+    "candidate_self": 10060.0,
+    "other": 0.0
+   },
+   "contributors": [
+    {
+     "name": "Ginger Littleton (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 2000.0,
+     "date": "2026-03-20",
+     "kind": "loan"
+    },
+    {
+     "name": "Ginger Littleton (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 3000.0,
+     "date": "2026-05-11",
+     "kind": "loan"
+    },
+    {
+     "name": "Ginger Littleton (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 10.0,
+     "date": "2026-07-13",
+     "kind": "loan"
+    },
+    {
+     "name": "Ginger Littleton (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 50.0,
+     "date": "2026-07-18",
+     "kind": "loan"
+    },
+    {
+     "name": "Ginger Littleton (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 5000.0,
+     "date": "2026-07-22",
+     "kind": "loan"
+    }
+   ],
+   "top_expenditures": [
+    {
+     "payee": "Neves Media Productions LLC",
+     "total": 12717.09,
+     "payments": 13,
+     "purpose": "Campaign Services; Printing"
+    },
+    {
+     "payee": "Lamar Advertising",
+     "total": 3402.0,
+     "payments": 1,
+     "purpose": "Billboard Advertising"
+    },
+    {
+     "payee": "Bay County Supervisor of Elections",
+     "total": 1878.8,
+     "payments": 1,
+     "purpose": "Qualifying Fee"
+    },
+    {
+     "payee": "St Andrews Bay Yacht Club",
+     "total": 1489.95,
+     "payments": 1,
+     "purpose": "Campaign Fundraiser"
+    },
+    {
+     "payee": "U.S. Postal Service",
+     "total": 156.0,
+     "payments": 1,
+     "purpose": "Postage"
+    },
+    {
+     "payee": "Stripe",
+     "total": 135.19,
+     "payments": 4,
+     "purpose": "Stripe fees for online contributions; Stripe fees for online contribution; Stripe Fees for online donation"
+    },
+    {
+     "payee": "League of Women Voters",
+     "total": 70.0,
+     "payments": 1,
+     "purpose": "Technology & Security"
+    },
+    {
+     "payee": "Payments to individuals",
+     "total": 63.69,
+     "payments": 1,
+     "purpose": "Reimburse for candy purchase for parade"
+    },
+    {
+     "payee": "Trustmark Bank",
+     "total": 20.8,
+     "payments": 1,
+     "purpose": "Order campaign checks"
+    }
+   ],
+   "reconciliation": "itemized matches summary",
+   "notes": [
+    "Includes 10,060.00 in loans; loans count in SOE monetary contributions."
+   ]
+  },
+  {
+   "name": "Michael Petty",
+   "office": "School Board, District 2",
+   "soe_office": "School Board Member, District 2",
+   "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
+   "party": "Nonpartisan",
+   "soe_status": "Active - Defeated",
+   "soe_campaign_name": "Michael Petty (NON)",
+   "cand_id": 734,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=734&rellevel=4&committee=N",
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=734&dhc=0&county=bay",
+   "latest_report": "P7 / period 2026-08-01 to 2026-08-13 / due 2026-08-14",
+   "through": "2026-08-13",
+   "total_raised": 17741.25,
+   "monetary": 17071.3,
+   "in_kind": 669.95,
+   "loans": 150.0,
+   "total_spent": 8895.61,
+   "cash_on_hand_estimate": 8175.69,
+   "n_contributions": 84,
+   "from_individuals": {
+    "count": 77,
+    "total": 14041.3,
+    "bands": {
+     "under_100": {
+      "count": 39,
+      "total": 1606.75
+     },
+     "100_499": {
+      "count": 29,
+      "total": 4974.85
+     },
+     "500_999": {
+      "count": 4,
+      "total": 2459.7
+     },
+     "1000_plus": {
+      "count": 5,
+      "total": 5000.0
+     }
+    },
+    "in_county": {
+     "count": 38,
+     "total": 8898.95
+    },
+    "out_of_county": {
+     "count": 39,
+     "total": 5142.35
+    },
+    "unique_donors_approx": 69
+   },
+   "candidate_self": {
+    "contributions": 49.95,
+    "loans": 150.0
+   },
+   "by_type_total": {
+    "individual": 14041.3,
+    "business": 1500.0,
+    "pac": 2000.0,
+    "party": 0.0,
+    "candidate_self": 199.95,
+    "other": 0.0
+   },
+   "contributors": [
+    {
+     "name": "Michael Petty (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 150.0,
+     "date": "2026-04-10",
+     "kind": "loan"
+    },
+    {
+     "name": "Michael Petty (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 49.95,
+     "date": "2026-05-11",
+     "kind": "in-kind"
+    },
+    {
+     "name": "StageCoach RV Park",
+     "city": "St. Augustine",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-05-12",
+     "kind": "check"
+    },
+    {
+     "name": "TK Vandy LLC",
+     "city": "Lynn Haven",
+     "type": "business",
+     "amount": 250.0,
+     "date": "2026-06-27",
+     "kind": "check"
+    },
+    {
+     "name": "FEA Advocacy Fund",
+     "city": "Tallahassee",
+     "type": "pac",
+     "amount": 1000.0,
+     "date": "2026-07-24",
+     "kind": "check"
+    },
+    {
+     "name": "Okaloosa Tiger",
+     "city": "Valparaiso",
+     "type": "pac",
+     "amount": 1000.0,
+     "date": "2026-07-24",
+     "kind": "check"
+    },
+    {
+     "name": "TKVandy LLC",
+     "city": "Lynn Haven",
+     "type": "business",
+     "amount": 250.0,
+     "date": "2026-07-24",
+     "kind": "check"
+    }
+   ],
+   "top_expenditures": [
+    {
+     "payee": "GNS Embroidery",
+     "total": 2863.5,
+     "payments": 1,
+     "purpose": "Purchased yard signs, t-shirts, embroidered shirts"
+    },
+    {
+     "payee": "Creative Printing",
+     "total": 2037.55,
+     "payments": 1,
+     "purpose": "yard signs"
+    },
+    {
+     "payee": "Bay County Supervisor of Elections",
+     "total": 1981.7,
+     "payments": 3,
+     "purpose": "Qualifying; filing fee; Refund: Petition Overpayment"
+    },
+    {
+     "payee": "PCB Life",
+     "total": 720.0,
+     "payments": 1,
+     "purpose": "Magazine Advertising"
+    },
+    {
+     "payee": "The Flyer Lab",
+     "total": 446.48,
+     "payments": 1,
+     "purpose": "campaign flyers and business cards"
+    },
+    {
+     "payee": "Signs Unlimited",
+     "total": 433.35,
+     "payments": 1,
+     "purpose": "Yard signs"
+    },
+    {
+     "payee": "Amazon",
+     "total": 143.88,
+     "payments": 2,
+     "purpose": "American Flags; Supplies for event"
+    },
+    {
+     "payee": "Tracfone Services",
+     "total": 74.0,
+     "payments": 5,
+     "purpose": "Campaign phone; campaign phone; cellphone"
+    },
+    {
+     "payee": "League of Women Voters",
+     "total": 70.0,
+     "payments": 1,
+     "purpose": "Forum expense"
+    },
+    {
+     "payee": "Regions Bank",
+     "total": 65.0,
+     "payments": 4,
+     "purpose": "checks; Refund: bank error; wire fee; Refund: Fee Refund"
+    },
+    {
+     "payee": "Namecheap.com",
+     "total": 60.15,
+     "payments": 7,
+     "purpose": "website; Website"
+    },
+    {
+     "payee": "Venmo",
+     "total": 0.0,
+     "payments": 4,
+     "purpose": "bank verification; Refund: Bank Verification"
+    }
+   ],
+   "reconciliation": "itemized matches summary",
+   "notes": [
+    "Includes 150.00 in loans; loans count in SOE monetary contributions."
+   ]
+  },
+  {
+   "name": "Christopher Moore",
+   "office": "School Board, District 3",
+   "soe_office": "School Board Member, District 3",
+   "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
+   "party": "Nonpartisan",
+   "soe_status": "Active - Advanced",
+   "soe_campaign_name": "Christopher Moore (NON)",
+   "cand_id": 738,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=738&rellevel=4&committee=N",
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=738&dhc=0&county=bay",
+   "latest_report": "G4 / period 2026-09-19 to 2026-10-02 / due 2026-10-09",
+   "through": "2026-10-02",
+   "total_raised": 10900.0,
+   "monetary": 10900.0,
+   "in_kind": 0.0,
+   "loans": 3000.0,
+   "total_spent": 7848.82,
+   "cash_on_hand_estimate": 3051.18,
+   "n_contributions": 19,
+   "from_individuals": {
+    "count": 17,
+    "total": 7800.0,
+    "bands": {
+     "under_100": {
+      "count": 1,
+      "total": 50.0
+     },
+     "100_499": {
+      "count": 8,
+      "total": 1250.0
+     },
+     "500_999": {
+      "count": 3,
+      "total": 1500.0
+     },
+     "1000_plus": {
+      "count": 5,
+      "total": 5000.0
+     }
+    },
+    "in_county": {
+     "count": 15,
+     "total": 6600.0
+    },
+    "out_of_county": {
+     "count": 1,
+     "total": 1000.0
+    },
+    "location_unknown": {
+     "count": 1,
+     "total": 200.0
+    },
+    "unique_donors_approx": 17
+   },
+   "candidate_self": {
+    "contributions": 100.0,
+    "loans": 3000.0
+   },
+   "by_type_total": {
+    "individual": 7800.0,
+    "business": 0.0,
+    "pac": 0.0,
+    "party": 0.0,
+    "candidate_self": 3100.0,
+    "other": 0.0
+   },
+   "contributors": [
+    {
+     "name": "Christopher Moore (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 100.0,
+     "date": "2026-05-11",
+     "kind": "check"
+    },
+    {
+     "name": "Christopher Moore (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 3000.0,
+     "date": "2026-05-31",
+     "kind": "loan"
+    }
+   ],
+   "top_expenditures": [
+    {
+     "payee": "Signs on the Cheap",
+     "total": 3324.7,
+     "payments": 3,
+     "purpose": "Yard signs; Signs"
+    },
+    {
+     "payee": "Bay County Supervisor of Elections",
+     "total": 1878.8,
+     "payments": 1,
+     "purpose": "Qualifying fee"
+    },
+    {
+     "payee": "iHeart Media",
+     "total": 1020.0,
+     "payments": 1,
+     "purpose": "Radio advertisement"
+    },
+    {
+     "payee": "Burnie Thompson LLC",
+     "total": 1000.0,
+     "payments": 2,
+     "purpose": "Media Services"
+    },
+    {
+     "payee": "JVC Media of Fl Ft Walto",
+     "total": 440.0,
+     "payments": 1,
+     "purpose": "Radio Advertisement"
+    },
+    {
+     "payee": "Zazzle Inc.",
+     "total": 160.27,
+     "payments": 1,
+     "purpose": "Photo Election Campaign Business Cards"
+    },
+    {
+     "payee": "Trustmark Bank",
+     "total": 25.05,
+     "payments": 1,
+     "purpose": "Initial checks for campaign expenditures"
+    }
+   ],
+   "reconciliation": "itemized matches summary",
+   "notes": [
+    "Includes 3,000.00 in loans; loans count in SOE monetary contributions."
+   ]
+  },
+  {
+   "name": "Colleen Koch",
+   "office": "School Board, District 3",
+   "soe_office": "School Board Member, District 3",
+   "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
+   "party": "Nonpartisan",
+   "soe_status": "Active - Defeated",
+   "soe_campaign_name": "Colleen Koch (NON)",
+   "cand_id": 740,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=740&rellevel=4&committee=N",
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=740&dhc=0&county=bay",
+   "latest_report": "P7 / period 2026-08-01 to 2026-08-13 / due 2026-08-14",
+   "through": "2026-08-13",
+   "total_raised": 18832.5,
+   "monetary": 17378.42,
+   "in_kind": 1454.08,
+   "loans": 2000.0,
+   "total_spent": 15904.93,
+   "cash_on_hand_estimate": 1473.49,
+   "n_contributions": 55,
+   "from_individuals": {
+    "count": 49,
+    "total": 15605.0,
+    "bands": {
+     "under_100": {
+      "count": 11,
+      "total": 538.42
+     },
+     "100_499": {
+      "count": 23,
+      "total": 4540.0
+     },
+     "500_999": {
+      "count": 10,
+      "total": 5526.58
+     },
+     "1000_plus": {
+      "count": 5,
+      "total": 5000.0
+     }
+    },
+    "in_county": {
+     "count": 44,
+     "total": 13780.0
+    },
+    "out_of_county": {
+     "count": 4,
+     "total": 1325.0
+    },
+    "location_unknown": {
+     "count": 1,
+     "total": 500.0
+    },
+    "unique_donors_approx": 48
+   },
+   "candidate_self": {
+    "contributions": 0.0,
+    "loans": 2000.0
+   },
+   "by_type_total": {
+    "individual": 15605.0,
+    "business": 1227.5,
+    "pac": 0.0,
+    "party": 0.0,
+    "candidate_self": 2000.0,
+    "other": 0.0
+   },
+   "contributors": [
+    {
+     "name": "Colleen Koch (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 1000.0,
+     "date": "2026-05-26",
+     "kind": "loan"
+    },
+    {
+     "name": "Who-Dey Prints and Embroidery",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 77.5,
+     "date": "2026-05-26",
+     "kind": "in-kind"
+    },
+    {
+     "name": "Colleen Koch (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 1000.0,
+     "date": "2026-05-28",
+     "kind": "loan"
+    },
+    {
+     "name": "GRAFINN LLC",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2026-06-23",
+     "kind": "check"
+    },
+    {
+     "name": "MIA RITA LLC",
+     "city": "Panama City Beach",
+     "type": "business",
+     "amount": 450.0,
+     "date": "2026-06-23",
+     "kind": "in-kind"
+    },
+    {
+     "name": "Dollins Law",
+     "city": "Homewood",
+     "type": "business",
+     "amount": 200.0,
+     "date": "2026-07-13",
+     "kind": "check"
+    }
+   ],
+   "top_expenditures": [
+    {
+     "payee": "Nexstar Media",
+     "total": 3500.0,
+     "payments": 2,
+     "purpose": "Advertising"
+    },
+    {
+     "payee": "Premium Outdoor LLC.",
+     "total": 3150.0,
+     "payments": 1,
+     "purpose": "Advertising"
+    },
+    {
+     "payee": "Google",
+     "total": 2121.57,
+     "payments": 3,
+     "purpose": "Advertising"
+    },
+    {
+     "payee": "Bay County Supervisor of Elections",
+     "total": 1878.8,
+     "payments": 1,
+     "purpose": "Qualifying Fee"
+    },
+    {
+     "payee": "A.G.E. Graphics",
+     "total": 1398.75,
+     "payments": 3,
+     "purpose": "Signs; signs"
+    },
+    {
+     "payee": "Who Dey Prints & Embroidery",
+     "total": 821.31,
+     "payments": 1,
+     "purpose": "Wearables"
+    },
+    {
+     "payee": "Color Press Printing",
+     "total": 742.75,
+     "payments": 3,
+     "purpose": "Flyer Printing; Printing; Logo Design"
+    },
+    {
+     "payee": "Signs on the Cheap",
+     "total": 624.92,
+     "payments": 1,
+     "purpose": "Corrugated Plastic Signs"
+    },
+    {
+     "payee": "Signworks PC, Inc",
+     "total": 564.22,
+     "payments": 3,
+     "purpose": "Signs; Sign and Printables; Printables"
+    },
+    {
+     "payee": "4AllPromos",
+     "total": 366.95,
+     "payments": 1,
+     "purpose": "Marketing Items"
+    },
+    {
+     "payee": "Front Door Photo",
+     "total": 250.0,
+     "payments": 1,
+     "purpose": "Production"
+    },
+    {
+     "payee": "BancCard",
+     "total": 223.25,
+     "payments": 2,
+     "purpose": "Credit Card Transaction/Processing Fees; Processing Fees"
+    },
+    {
+     "payee": "Sam's Club",
+     "total": 129.18,
+     "payments": 2,
+     "purpose": "Water and supplies for parade; Parade Supplies"
+    },
+    {
+     "payee": "Facebook (Meta)",
+     "total": 87.82,
+     "payments": 3,
+     "purpose": "Marketing"
+    },
+    {
+     "payee": "The Home Depot",
+     "total": 45.41,
+     "payments": 1,
+     "purpose": "Sign Frame Supplies"
+    }
+   ],
+   "reconciliation": "itemized matches summary",
+   "notes": [
+    "Includes 2,000.00 in loans; loans count in SOE monetary contributions.",
+    "Amended report replaced a $1,000 contribution first filed as from a business with a contribution from an individual (D/A pair applied)."
+   ]
+  },
+  {
+   "name": "Dr. John L. Haley",
+   "office": "School Board, District 3",
+   "soe_office": "School Board Member, District 3",
+   "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
+   "party": "Nonpartisan",
+   "soe_status": "Active - Advanced",
+   "soe_campaign_name": "Dr. John L. Haley (NON)",
+   "cand_id": 728,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=728&rellevel=4&committee=N",
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=728&dhc=0&county=bay",
+   "latest_report": "G4 / period 2026-09-19 to 2026-10-02 / due 2026-10-09",
+   "through": "2026-10-02",
+   "total_raised": 54786.62,
+   "monetary": 54786.62,
+   "in_kind": 0.0,
+   "loans": 45461.92,
+   "total_spent": 44758.53,
+   "cash_on_hand_estimate": 10028.09,
+   "n_contributions": 83,
+   "from_individuals": {
+    "count": 40,
+    "total": 9224.7,
+    "bands": {
+     "under_100": {
+      "count": 14,
+      "total": 540.0
+     },
+     "100_499": {
+      "count": 16,
+      "total": 2725.0
+     },
+     "500_999": {
+      "count": 9,
+      "total": 4959.7
+     },
+     "1000_plus": {
+      "count": 1,
+      "total": 1000.0
+     }
+    },
+    "in_county": {
+     "count": 34,
+     "total": 7399.7
+    },
+    "out_of_county": {
+     "count": 5,
+     "total": 1795.0
+    },
+    "location_unknown": {
+     "count": 1,
+     "total": 30.0
+    },
+    "unique_donors_approx": 36
+   },
+   "candidate_self": {
+    "contributions": 0.0,
+    "loans": 45461.92
+   },
+   "by_type_total": {
+    "individual": 9224.7,
+    "business": 0.0,
+    "pac": 0.0,
+    "party": 0.0,
+    "candidate_self": 45461.92,
+    "other": 100.0
+   },
+   "contributors": [
+    {
+     "name": "Dr. John L. Haley (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 100.0,
+     "date": "2026-03-11",
+     "kind": "loan"
+    },
+    {
+     "name": "Dr. John L. Haley (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 600.0,
+     "date": "2026-03-13",
+     "kind": "loan"
+    },
+    {
+     "name": "Dr. John L. Haley (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 320.0,
+     "date": "2026-03-30",
+     "kind": "loan"
+    },
+    {
+     "name": "Dr. John L. Haley (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 4000.0,
+     "date": "2026-04-02",
+     "kind": "loan"
+    },
+    {
+     "name": "Dr. John L. Haley (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 100.0,
+     "date": "2026-04-20",
+     "kind": "loan"
+    },
+    {
+     "name": "Dr. John L. Haley (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 500.0,
+     "date": "2026-05-01",
+     "kind": "loan"
+    },
+    {
+     "name": "Dr. John L. Haley (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 700.0,
+     "date": "2026-05-01",
+     "kind": "loan"
+    },
+    {
+     "name": "Dr. John L. Haley (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 1000.0,
+     "date": "2026-05-04",
+     "kind": "loan"
+    },
+    {
+     "name": "Dr. John L. Haley (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 1000.0,
+     "date": "2026-05-04",
+     "kind": "loan"
+    },
+    {
+     "name": "Dr. John L. Haley (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 1800.0,
+     "date": "2026-05-05",
+     "kind": "loan"
+    },
+    {
+     "name": "Dr. John L. Haley (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 100.0,
+     "date": "2026-05-15",
+     "kind": "loan"
+    },
+    {
+     "name": "Dr. John L. Haley (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 200.0,
+     "date": "2026-05-26",
+     "kind": "loan"
+    },
+    {
+     "name": "Dr. John L. Haley (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 200.0,
+     "date": "2026-06-01",
+     "kind": "loan"
+    },
+    {
+     "name": "Dr. John L. Haley (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 3800.0,
+     "date": "2026-06-04",
+     "kind": "loan"
+    },
+    {
+     "name": "Dr. John L. Haley (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 1000.0,
+     "date": "2026-06-09",
+     "kind": "loan"
+    },
+    {
+     "name": "Dr. John L. Haley (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 2200.0,
+     "date": "2026-06-22",
+     "kind": "loan"
+    },
+    {
+     "name": "Dr. John L. Haley (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 1000.0,
+     "date": "2026-06-29",
+     "kind": "loan"
+    },
+    {
+     "name": "Dr. John L. Haley (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 111.82,
+     "date": "2026-06-30",
+     "kind": "loan"
+    },
+    {
+     "name": "Dr. John L. Haley (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 500.0,
+     "date": "2026-07-01",
+     "kind": "loan"
+    },
+    {
+     "name": "Dr. John L. Haley (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 3550.0,
+     "date": "2026-07-01",
+     "kind": "loan"
+    },
+    {
+     "name": "Dr. John L. Haley (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 600.0,
+     "date": "2026-07-01",
+     "kind": "loan"
+    },
+    {
+     "name": "Dr. John L. Haley (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 2000.0,
+     "date": "2026-07-07",
+     "kind": "loan"
+    },
+    {
+     "name": "Dr. John L. Haley (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 1000.0,
+     "date": "2026-07-17",
+     "kind": "loan"
+    },
+    {
+     "name": "Dr. John L. Haley (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 100.0,
+     "date": "2026-07-22",
+     "kind": "loan"
+    },
+    {
+     "name": "Dr. John L. Haley (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 300.0,
+     "date": "2026-07-22",
+     "kind": "loan"
+    },
+    {
+     "name": "Dr. John L. Haley (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 300.0,
+     "date": "2026-07-29",
+     "kind": "loan"
+    },
+    {
+     "name": "Dr. John L. Haley (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 2700.0,
+     "date": "2026-08-03",
+     "kind": "loan"
+    },
+    {
+     "name": "Dr. John L. Haley (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 2600.0,
+     "date": "2026-08-06",
+     "kind": "loan"
+    },
+    {
+     "name": "Dr. John L. Haley (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 250.0,
+     "date": "2026-08-08",
+     "kind": "loan"
+    },
+    {
+     "name": "Dr. John L. Haley (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 250.0,
+     "date": "2026-08-10",
+     "kind": "loan"
+    },
+    {
+     "name": "Dr. John L. Haley (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 1000.0,
+     "date": "2026-08-12",
+     "kind": "loan"
+    },
+    {
+     "name": "Dr. John L. Haley (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 1000.0,
+     "date": "2026-08-12",
+     "kind": "loan"
+    },
+    {
+     "name": "Dr. John L. Haley (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 750.0,
+     "date": "2026-08-19",
+     "kind": "loan"
+    },
+    {
+     "name": "Dr. John L. Haley (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 600.0,
+     "date": "2026-08-24",
+     "kind": "loan"
+    },
+    {
+     "name": "Dr. John L. Haley (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 240.0,
+     "date": "2026-08-24",
+     "kind": "loan"
+    },
+    {
+     "name": "Dr. John L. Haley (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 600.0,
+     "date": "2026-08-26",
+     "kind": "loan"
+    },
+    {
+     "name": "Dr. John L. Haley (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 300.0,
+     "date": "2026-08-26",
+     "kind": "loan"
+    },
+    {
+     "name": "Dr. John L. Haley (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 959.7,
+     "date": "2026-08-31",
+     "kind": "loan"
+    },
+    {
+     "name": "Dr. John L. Haley (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 1300.0,
+     "date": "2026-09-04",
+     "kind": "loan"
+    },
+    {
+     "name": "Dr. John L. Haley (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 3000.0,
+     "date": "2026-09-04",
+     "kind": "loan"
+    },
+    {
+     "name": "Pentecoastal Temple Church",
+     "city": "Panama City",
+     "type": "other",
+     "amount": 100.0,
+     "date": "2026-09-13",
+     "kind": "check"
+    },
+    {
+     "name": "Dr. John L. Haley (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 830.4,
+     "date": "2026-09-14",
+     "kind": "loan"
+    },
+    {
+     "name": "Dr. John L. Haley (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 2000.0,
+     "date": "2026-10-02",
+     "kind": "loan"
+    }
+   ],
+   "top_expenditures": [
+    {
+     "payee": "Political Marketing Int'l Inc",
+     "total": 10592.22,
+     "payments": 8,
+     "purpose": "on line ads and text messages; Website/Facebook Setup; On-line Advertising; on-line campaign; and 4 other descriptions"
+    },
+    {
+     "payee": "Lamar Advertising",
+     "total": 9800.0,
+     "payments": 6,
+     "purpose": "advertising; digital bullletin; Billboard; Digital Sign; and 1 other descriptions"
+    },
+    {
+     "payee": "Signs Unlimited",
+     "total": 6334.14,
+     "payments": 11,
+     "purpose": "signs; coroplast signs; Yard signs; coroplast; and 4 other descriptions"
+    },
+    {
+     "payee": "Payments to individuals",
+     "total": 5800.0,
+     "payments": 8,
+     "purpose": "campaign manager; campaign advisor; video production; videographer; and 2 other descriptions"
+    },
+    {
+     "payee": "iHeart Media",
+     "total": 2829.0,
+     "payments": 1,
+     "purpose": "radio"
+    },
+    {
+     "payee": "Corvus Blue Communications",
+     "total": 1900.0,
+     "payments": 2,
+     "purpose": "campaign manager; consultant"
+    },
+    {
+     "payee": "Bay County Supervisor of Elections",
+     "total": 1878.8,
+     "payments": 1,
+     "purpose": "Qualifying fee"
+    },
+    {
+     "payee": "Who Dey Prints & Embroidery",
+     "total": 1294.7,
+     "payments": 2,
+     "purpose": "t-shirts and-cashier checks fee; shirts"
+    },
+    {
+     "payee": "Hilton Garden Inn",
+     "total": 950.0,
+     "payments": 1,
+     "purpose": "watch night"
+    },
+    {
+     "payee": "The Home Depot",
+     "total": 532.05,
+     "payments": 8,
+     "purpose": "supplies; fourth of July supplies; lumber for signs-; yard sign suppleis; and 2 other descriptions"
+    },
+    {
+     "payee": "Vistaprint",
+     "total": 492.66,
+     "payments": 4,
+     "purpose": "door hangers; flyers; business cards --; Refund: Business Card Refund"
+    },
+    {
+     "payee": "Office Depot/OfficeMax",
+     "total": 487.86,
+     "payments": 4,
+     "purpose": "Banners and copies; supplies; copies"
+    },
+    {
+     "payee": "Walmart",
+     "total": 399.04,
+     "payments": 5,
+     "purpose": "outdoor canop; 4th of July-supplies; snacks for workers; supplies for 4th of july; and 1 other descriptions"
+    },
+    {
+     "payee": "Rivas Imaging",
+     "total": 300.0,
+     "payments": 1,
+     "purpose": "Photos"
+    },
+    {
+     "payee": "Delta",
+     "total": 250.0,
+     "payments": 1,
+     "purpose": "Ad in anniversary souvenir booklet"
+    }
+   ],
+   "reconciliation": "itemized matches summary",
+   "notes": [
+    "Includes 45,461.92 in loans; loans count in SOE monetary contributions.",
+    "The 2026 P7 amended report contains a deletion line with every field blank (rpt 5796, line 1) that could not be matched to an earlier item. The SOE summary counts both the original 8/12/2026 $1,000 candidate loan (coded I) and the amended re-filing of that loan (coded S, rpt 5796 line 2), so the $1,000 loan may be double-counted in the SOE totals. Figures here follow the SOE summary."
+   ]
+  },
+  {
+   "name": "Glenn Manley",
+   "office": "School Board, District 3",
+   "soe_office": "School Board Member, District 3",
+   "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
+   "party": "Nonpartisan",
+   "soe_status": "Active - Defeated",
+   "soe_campaign_name": "Glenn Manley (NON)",
+   "cand_id": 735,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=735&rellevel=4&committee=N",
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=735&dhc=0&county=bay",
+   "latest_report": "P7 / period 2026-08-01 to 2026-08-13 / due 2026-08-14",
+   "through": "2026-08-13",
+   "total_raised": 25530.0,
+   "monetary": 23780.0,
+   "in_kind": 1750.0,
+   "loans": 5000.0,
+   "total_spent": 19310.9,
+   "cash_on_hand_estimate": 4469.1,
+   "n_contributions": 68,
+   "from_individuals": {
+    "count": 43,
+    "total": 11680.0,
+    "bands": {
+     "under_100": {
+      "count": 5,
+      "total": 230.0
+     },
+     "100_499": {
+      "count": 30,
+      "total": 4950.0
+     },
+     "500_999": {
+      "count": 3,
+      "total": 1500.0
+     },
+     "1000_plus": {
+      "count": 5,
+      "total": 5000.0
+     }
+    },
+    "in_county": {
+     "count": 37,
+     "total": 8780.0
+    },
+    "out_of_county": {
+     "count": 3,
+     "total": 750.0
+    },
+    "location_unknown": {
+     "count": 3,
+     "total": 2150.0
+    },
+    "unique_donors_approx": 42
+   },
+   "candidate_self": {
+    "contributions": 0.0,
+    "loans": 5000.0
+   },
+   "by_type_total": {
+    "individual": 11680.0,
+    "business": 8850.0,
+    "pac": 0.0,
+    "party": 0.0,
+    "candidate_self": 5000.0,
+    "other": 0.0
+   },
+   "contributors": [
+    {
+     "name": "T K Vandy LLC",
+     "city": "Lynn Haven",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-04-06",
+     "kind": "check"
+    },
+    {
+     "name": "Glenn Manley (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 3000.0,
+     "date": "2026-04-15",
+     "kind": "loan"
+    },
+    {
+     "name": "Neves Media Productuions LLC",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 750.0,
+     "date": "2026-04-23",
+     "kind": "in-kind"
+    },
+    {
+     "name": "St. Andrews Inc. of PC",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 250.0,
+     "date": "2026-04-23",
+     "kind": "check"
+    },
+    {
+     "name": "Fritz Investments, LLC",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2026-05-08",
+     "kind": "check"
+    },
+    {
+     "name": "Pohaven, Inc",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2026-05-08",
+     "kind": "check"
+    },
+    {
+     "name": "Vittles Companies, Inc",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2026-05-08",
+     "kind": "check"
+    },
+    {
+     "name": "Vittles Ta Go, Inc",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2026-05-08",
+     "kind": "check"
+    },
+    {
+     "name": "Vittles, Inc",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2026-05-08",
+     "kind": "check"
+    },
+    {
+     "name": "Charlie Coram's place",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2026-05-14",
+     "kind": "check"
+    },
+    {
+     "name": "Campers Inn",
+     "city": "Panama City Beach",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-06-23",
+     "kind": "check"
+    },
+    {
+     "name": "ECSC, LLC",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 500.0,
+     "date": "2026-06-23",
+     "kind": "check"
+    },
+    {
+     "name": "77 Seafood",
+     "city": "Panama city Beach",
+     "type": "business",
+     "amount": 150.0,
+     "date": "2026-07-06",
+     "kind": "check"
+    },
+    {
+     "name": "DYB's painting",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2026-07-06",
+     "kind": "check"
+    },
+    {
+     "name": "Eleventh West Inc.",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2026-07-06",
+     "kind": "check"
+    },
+    {
+     "name": "G & W Coastal Properties",
+     "city": "Lynn Haven",
+     "type": "business",
+     "amount": 200.0,
+     "date": "2026-07-08",
+     "kind": "check"
+    },
+    {
+     "name": "The Holman Company LLC",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2026-07-24",
+     "kind": "check"
+    },
+    {
+     "name": "132 Harrison Holdings LLC",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-07-27",
+     "kind": "check"
+    },
+    {
+     "name": "The Holman Company LLC",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2026-07-27",
+     "kind": "check"
+    },
+    {
+     "name": "Glenn Manley (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 2000.0,
+     "date": "2026-07-29",
+     "kind": "loan"
+    },
+    {
+     "name": "Turf Pro Pest Control",
+     "city": "Lynn Haven",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2026-08-03",
+     "kind": "check"
+    },
+    {
+     "name": "Gulf Coast Gutter LLC",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-08-08",
+     "kind": "check"
+    },
+    {
+     "name": "5 Bridges Real Estate Services",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 250.0,
+     "date": "2026-08-10",
+     "kind": "check"
+    },
+    {
+     "name": "651 West 14th Street LLC",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 250.0,
+     "date": "2026-08-10",
+     "kind": "check"
+    },
+    {
+     "name": "Almega Sports",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-08-10",
+     "kind": "in-kind"
+    }
+   ],
+   "top_expenditures": [
+    {
+     "payee": "Neves Media Productions LLC",
+     "total": 15143.86,
+     "payments": 16,
+     "purpose": "Political mail outs; Political Mail outs; Graphic design; Business signs-4â€™x3â€™; and 10 other descriptions"
+    },
+    {
+     "payee": "Bay County Supervisor of Elections",
+     "total": 1878.8,
+     "payments": 1,
+     "purpose": "Qualifying"
+    },
+    {
+     "payee": "Almega Sports",
+     "total": 1247.4,
+     "payments": 3,
+     "purpose": "T-Shirts political promo; Political promos; Political signature footballs"
+    },
+    {
+     "payee": "ESPN Radio NW Fla",
+     "total": 552.0,
+     "payments": 2,
+     "purpose": "Radio political ads; Political Ads"
+    },
+    {
+     "payee": "Copper Tap Grill",
+     "total": 290.84,
+     "payments": 1,
+     "purpose": "Fund Raiser"
+    },
+    {
+     "payee": "U.S. Postal Service",
+     "total": 78.0,
+     "payments": 1,
+     "purpose": "Stamps for mailing circulars"
+    },
+    {
+     "payee": "League of Women Voters",
+     "total": 70.0,
+     "payments": 1,
+     "purpose": "Political Forum"
+    },
+    {
+     "payee": "Mom's for Liberty",
+     "total": 50.0,
+     "payments": 1,
+     "purpose": "Political Booth"
+    }
+   ],
+   "reconciliation": "itemized matches summary",
+   "notes": [
+    "Includes 5,000.00 in loans; loans count in SOE monetary contributions."
+   ]
+  },
+  {
+   "name": "Steve Moss",
+   "office": "School Board, District 5",
+   "soe_office": "School Board Member, District 5",
+   "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
+   "party": "Nonpartisan",
+   "soe_status": "Inactive - Elected",
+   "soe_campaign_name": "Steve Moss (NON)",
+   "cand_id": 737,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=737&rellevel=4&committee=N",
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=737&dhc=0&county=bay",
+   "latest_report": "TRQ / period 2026-06-01 to 2026-09-10 / due 2026-09-10",
+   "through": "2026-09-10",
+   "total_raised": 1888.8,
+   "monetary": 1888.8,
+   "in_kind": 0.0,
+   "loans": 1888.8,
+   "total_spent": 1888.8,
+   "cash_on_hand_estimate": null,
+   "n_contributions": 1,
+   "from_individuals": {
+    "count": 0,
+    "total": 0.0,
+    "bands": {
+     "under_100": {
+      "count": 0,
+      "total": 0.0
+     },
+     "100_499": {
+      "count": 0,
+      "total": 0.0
+     },
+     "500_999": {
+      "count": 0,
+      "total": 0.0
+     },
+     "1000_plus": {
+      "count": 0,
+      "total": 0.0
+     }
+    },
+    "in_county": {
+     "count": 0,
+     "total": 0.0
+    },
+    "out_of_county": {
+     "count": 0,
+     "total": 0.0
+    },
+    "unique_donors_approx": 0
+   },
+   "candidate_self": {
+    "contributions": 0.0,
+    "loans": 1888.8
+   },
+   "by_type_total": {
+    "individual": 0.0,
+    "business": 0.0,
+    "pac": 0.0,
+    "party": 0.0,
+    "candidate_self": 1888.8,
+    "other": 0.0
+   },
+   "contributors": [
+    {
+     "name": "Steve Moss (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 1888.8,
+     "date": "2026-05-28",
+     "kind": "loan"
+    }
+   ],
+   "top_expenditures": [
+    {
+     "payee": "Bay County Supervisor of Elections",
+     "total": 1878.8,
+     "payments": 1,
+     "purpose": "Qualifying Fee"
+    },
+    {
+     "payee": "Payments to the candidate (loan repayments, reimbursements, surplus returned)",
+     "total": 9.0,
+     "payments": 1,
+     "purpose": "Refund: Loan Refund"
+    },
+    {
+     "payee": "Panhandle Credit Union",
+     "total": 1.0,
+     "payments": 1,
+     "purpose": "Fee for temporary checks"
+    }
+   ],
+   "reconciliation": "itemized matches summary",
+   "notes": [
+    "Campaign filed a termination report (TRQ); account is closed."
+   ]
+  },
+  {
+   "name": "Carrie Ruscoe",
+   "office": "Mexico Beach Council, Group 4",
+   "soe_office": "Mexico Beach Council Member Group 4",
+   "election": "2026 Municipal Super Tuesday (Apr 21, 2026)",
+   "party": "Nonpartisan",
+   "soe_status": "Inactive - Elected",
+   "soe_campaign_name": "Carrie Ruscoe (NON)",
+   "cand_id": 724,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=36&c=bay&ca=724&rellevel=4&committee=N",
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=724&dhc=0&county=bay",
+   "latest_report": "MTRQ / period 2026-01-31 to 2026-05-14 / due 2026-05-14",
+   "through": "2026-05-14",
+   "total_raised": 125.0,
+   "monetary": 100.0,
+   "in_kind": 25.0,
+   "loans": 0.0,
+   "total_spent": 100.0,
+   "cash_on_hand_estimate": null,
+   "n_contributions": 2,
+   "from_individuals": {
+    "count": 0,
+    "total": 0.0,
+    "bands": {
+     "under_100": {
+      "count": 0,
+      "total": 0.0
+     },
+     "100_499": {
+      "count": 0,
+      "total": 0.0
+     },
+     "500_999": {
+      "count": 0,
+      "total": 0.0
+     },
+     "1000_plus": {
+      "count": 0,
+      "total": 0.0
+     }
+    },
+    "in_county": {
+     "count": 0,
+     "total": 0.0
+    },
+    "out_of_county": {
+     "count": 0,
+     "total": 0.0
+    },
+    "unique_donors_approx": 0
+   },
+   "candidate_self": {
+    "contributions": 125.0,
+    "loans": 0.0
+   },
+   "by_type_total": {
+    "individual": 0.0,
+    "business": 0.0,
+    "pac": 0.0,
+    "party": 0.0,
+    "candidate_self": 125.0,
+    "other": 0.0
+   },
+   "contributors": [
+    {
+     "name": "Carrie Ruscoe (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 100.0,
+     "date": "2026-02-03",
+     "kind": "check"
+    },
+    {
+     "name": "Carrie Ruscoe (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 25.0,
+     "date": "2026-02-13",
+     "kind": "in-kind"
+    }
+   ],
+   "top_expenditures": [
+    {
+     "payee": "City of Mexico Beach",
+     "total": 84.0,
+     "payments": 1,
+     "purpose": "Candidate qualifying fee"
+    },
+    {
+     "payee": "Centennial Bank",
+     "total": 10.0,
+     "payments": 2,
+     "purpose": "Monthly service charge"
+    },
+    {
+     "payee": "Payments to the candidate (loan repayments, reimbursements, surplus returned)",
+     "total": 6.0,
+     "payments": 1,
+     "purpose": "Distribution of surplus: Return of remaining candidate funds upon campaign termination and account closure"
+    }
+   ],
+   "reconciliation": "itemized matches summary",
+   "notes": [
+    "Campaign filed a termination report (MTRQ); account is closed."
+   ]
+  },
+  {
+   "name": "Steve Cox",
+   "office": "Mexico Beach Council, Group 5",
+   "soe_office": "Mexico Beach Council Member Group 5",
+   "election": "2026 Municipal Super Tuesday (Apr 21, 2026)",
+   "party": "Nonpartisan",
+   "soe_status": "Inactive - Elected",
+   "soe_campaign_name": "Steve Cox (NON)",
+   "cand_id": 723,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=36&c=bay&ca=723&rellevel=4&committee=N",
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=723&dhc=0&county=bay",
+   "latest_report": "MTRQ / period 2026-01-31 to 2026-05-14 / due 2026-05-14",
+   "through": "2026-05-14",
+   "total_raised": 200.0,
+   "monetary": 200.0,
+   "in_kind": 0.0,
+   "loans": 200.0,
+   "total_spent": 200.0,
+   "cash_on_hand_estimate": null,
+   "n_contributions": 1,
+   "from_individuals": {
+    "count": 0,
+    "total": 0.0,
+    "bands": {
+     "under_100": {
+      "count": 0,
+      "total": 0.0
+     },
+     "100_499": {
+      "count": 0,
+      "total": 0.0
+     },
+     "500_999": {
+      "count": 0,
+      "total": 0.0
+     },
+     "1000_plus": {
+      "count": 0,
+      "total": 0.0
+     }
+    },
+    "in_county": {
+     "count": 0,
+     "total": 0.0
+    },
+    "out_of_county": {
+     "count": 0,
+     "total": 0.0
+    },
+    "unique_donors_approx": 0
+   },
+   "candidate_self": {
+    "contributions": 0.0,
+    "loans": 200.0
+   },
+   "by_type_total": {
+    "individual": 0.0,
+    "business": 0.0,
+    "pac": 0.0,
+    "party": 0.0,
+    "candidate_self": 200.0,
+    "other": 0.0
+   },
+   "contributors": [
+    {
+     "name": "Steve Cox (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 200.0,
+     "date": "2026-02-01",
+     "kind": "loan"
+    }
+   ],
+   "top_expenditures": [
+    {
+     "payee": "Payments to the candidate (loan repayments, reimbursements, surplus returned)",
+     "total": 106.0,
+     "payments": 1,
+     "purpose": "Distribution of surplus: Repayment Of Loan"
+    },
+    {
+     "payee": "City of Mexico Beach",
+     "total": 84.0,
+     "payments": 1,
+     "purpose": "Assessment Fee"
+    },
+    {
+     "payee": "Centennial Bank",
+     "total": 10.0,
+     "payments": 2,
+     "purpose": "Bank Fee; Bank FEE"
+    }
+   ],
+   "reconciliation": "itemized matches summary",
+   "notes": [
+    "Campaign filed a termination report (MTRQ); account is closed."
+   ]
+  },
+  {
+   "name": "Jackie Kennington",
+   "office": "Springfield Commission, Ward 3",
+   "soe_office": "Springfield Commissioner Ward 3",
+   "election": "2026 Municipal Super Tuesday (Apr 21, 2026)",
+   "party": "Nonpartisan",
+   "soe_status": "Inactive - Elected",
+   "soe_campaign_name": "Jackie Kennington (NON)",
+   "cand_id": 713,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=36&c=bay&ca=713&rellevel=4&committee=N",
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=713&dhc=0&county=bay",
+   "latest_report": "MTRQ / period 2026-01-31 to 2026-05-14 / due 2026-05-14",
+   "through": "2026-05-14",
+   "total_raised": 1501.8,
+   "monetary": 1500.0,
+   "in_kind": 1.8,
+   "loans": 1500.0,
+   "total_spent": 1500.0,
+   "cash_on_hand_estimate": null,
+   "n_contributions": 2,
+   "from_individuals": {
+    "count": 1,
+    "total": 1.8,
+    "bands": {
+     "under_100": {
+      "count": 1,
+      "total": 1.8
+     },
+     "100_499": {
+      "count": 0,
+      "total": 0.0
+     },
+     "500_999": {
+      "count": 0,
+      "total": 0.0
+     },
+     "1000_plus": {
+      "count": 0,
+      "total": 0.0
+     }
+    },
+    "in_county": {
+     "count": 1,
+     "total": 1.8
+    },
+    "out_of_county": {
+     "count": 0,
+     "total": 0.0
+    },
+    "unique_donors_approx": 1
+   },
+   "candidate_self": {
+    "contributions": 0.0,
+    "loans": 1500.0
+   },
+   "by_type_total": {
+    "individual": 1.8,
+    "business": 0.0,
+    "pac": 0.0,
+    "party": 0.0,
+    "candidate_self": 1500.0,
+    "other": 0.0
+   },
+   "contributors": [
+    {
+     "name": "Jackie Kennington (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 1500.0,
+     "date": "2025-12-22",
+     "kind": "loan"
+    }
+   ],
+   "top_expenditures": [
+    {
+     "payee": "Payments to the candidate (loan repayments, reimbursements, surplus returned)",
+     "total": 1068.0,
+     "payments": 1,
+     "purpose": "Distribution of surplus: Close out bank account"
+    },
+    {
+     "payee": "City of Springfield",
+     "total": 432.0,
+     "payments": 1,
+     "purpose": "Qualitying and Assessment Fees"
+    }
+   ],
+   "reconciliation": "itemized matches summary",
+   "notes": [
+    "Campaign filed a termination report (MTRQ); account is closed."
+   ]
+  },
+  {
+   "name": "Cindy Hamre",
+   "office": "Springfield Commission, Ward 4",
+   "soe_office": "Springfield Commissioner Ward 4",
+   "election": "2026 Municipal Super Tuesday (Apr 21, 2026)",
+   "party": "Nonpartisan",
+   "soe_status": "Inactive - Elected",
+   "soe_campaign_name": "Cindy Hamre (NON)",
+   "cand_id": 717,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=36&c=bay&ca=717&rellevel=4&committee=N",
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=717&dhc=0&county=bay",
+   "latest_report": "MTRQ / period 2026-01-31 to 2026-05-14 / due 2026-05-14",
+   "through": "2026-05-14",
+   "total_raised": 441.93,
+   "monetary": 440.03,
+   "in_kind": 1.9,
+   "loans": 400.0,
+   "total_spent": 440.03,
+   "cash_on_hand_estimate": null,
+   "n_contributions": 3,
+   "from_individuals": {
+    "count": 0,
+    "total": 0.0,
+    "bands": {
+     "under_100": {
+      "count": 0,
+      "total": 0.0
+     },
+     "100_499": {
+      "count": 0,
+      "total": 0.0
+     },
+     "500_999": {
+      "count": 0,
+      "total": 0.0
+     },
+     "1000_plus": {
+      "count": 0,
+      "total": 0.0
+     }
+    },
+    "in_county": {
+     "count": 0,
+     "total": 0.0
+    },
+    "out_of_county": {
+     "count": 0,
+     "total": 0.0
+    },
+    "unique_donors_approx": 0
+   },
+   "candidate_self": {
+    "contributions": 41.9,
+    "loans": 400.0
+   },
+   "by_type_total": {
+    "individual": 0.0,
+    "business": 0.0,
+    "pac": 0.0,
+    "party": 0.0,
+    "candidate_self": 441.9,
+    "other": 0.03
+   },
+   "contributors": [
+    {
+     "name": "Cindy Hamre (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 400.0,
+     "date": "2025-12-19",
+     "kind": "loan"
+    },
+    {
+     "name": "Cindy Hamre (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 1.9,
+     "date": "2026-01-07",
+     "kind": "in-kind"
+    },
+    {
+     "name": "Panhandle Credit Union",
+     "city": "Panama City",
+     "type": "other",
+     "amount": 0.02,
+     "date": "2026-01-31",
+     "kind": "interest"
+    },
+    {
+     "name": "Panhandle Credit Union",
+     "city": "Panama City",
+     "type": "other",
+     "amount": 0.01,
+     "date": "2026-02-24",
+     "kind": "interest"
+    },
+    {
+     "name": "Cindy Hamre (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 40.0,
+     "date": "2026-05-05",
+     "kind": "check"
+    }
+   ],
+   "top_expenditures": [
+    {
+     "payee": "City of Springfield",
+     "total": 432.0,
+     "payments": 1,
+     "purpose": "Qualifying fee"
+    },
+    {
+     "payee": "Payments to the candidate (loan repayments, reimbursements, surplus returned)",
+     "total": 8.03,
+     "payments": 1,
+     "purpose": "Distribution of surplus: Repayment of Loan"
+    }
+   ],
+   "reconciliation": "itemized matches summary",
+   "notes": [
+    "Campaign filed a termination report (MTRQ); account is closed.",
+    "Includes 0.03 bank interest (filed as a contribution item)."
+   ]
+  },
+  {
+   "name": "Carl Curti",
+   "office": "Springfield Mayor",
+   "soe_office": "Springfield Mayor",
+   "election": "2026 Municipal Super Tuesday (Apr 21, 2026)",
+   "party": "Nonpartisan",
+   "soe_status": "Inactive - Defeated",
+   "soe_campaign_name": "Carl Curti (NON)",
+   "cand_id": 715,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=36&c=bay&ca=715&rellevel=4&committee=N",
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=715&dhc=0&county=bay",
+   "latest_report": "MTR / period 2026-04-17 to 2026-07-20 / due 2026-07-20",
+   "through": "2026-07-20",
+   "total_raised": 5935.86,
+   "monetary": 5020.0,
+   "in_kind": 915.86,
+   "loans": 500.0,
+   "total_spent": 5020.0,
+   "cash_on_hand_estimate": null,
+   "n_contributions": 15,
+   "from_individuals": {
+    "count": 6,
+    "total": 1845.49,
+    "bands": {
+     "under_100": {
+      "count": 2,
+      "total": 82.99
+     },
+     "100_499": {
+      "count": 2,
+      "total": 262.5
+     },
+     "500_999": {
+      "count": 1,
+      "total": 500.0
+     },
+     "1000_plus": {
+      "count": 1,
+      "total": 1000.0
+     }
+    },
+    "in_county": {
+     "count": 4,
+     "total": 717.99
+    },
+    "out_of_county": {
+     "count": 2,
+     "total": 1127.5
+    },
+    "unique_donors_approx": 6
+   },
+   "candidate_self": {
+    "contributions": 554.77,
+    "loans": 500.0
+   },
+   "by_type_total": {
+    "individual": 1845.49,
+    "business": 3035.6,
+    "pac": 0.0,
+    "party": 0.0,
+    "candidate_self": 1054.77,
+    "other": 0.0
+   },
+   "contributors": [
+    {
+     "name": "Carl Curti (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 20.0,
+     "date": "2026-01-05",
+     "kind": "cash"
+    },
+    {
+     "name": "Jerry Wilson Building Contract",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-01-05",
+     "kind": "check"
+    },
+    {
+     "name": "Jerry Wilson Roofing, LLC",
+     "city": "Lynn Haven",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-01-05",
+     "kind": "check"
+    },
+    {
+     "name": "Carl Curti (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 6.5,
+     "date": "2026-01-08",
+     "kind": "in-kind"
+    },
+    {
+     "name": "Tailor Bilt Golf, Inc.",
+     "city": "Lecanto",
+     "type": "business",
+     "amount": 1000.0,
+     "date": "2026-01-13",
+     "kind": "check"
+    },
+    {
+     "name": "Carl Curti (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 224.7,
+     "date": "2026-02-23",
+     "kind": "in-kind"
+    },
+    {
+     "name": "Gagnon's Sign Depot",
+     "city": "Panama City",
+     "type": "business",
+     "amount": 35.6,
+     "date": "2026-02-23",
+     "kind": "in-kind"
+    },
+    {
+     "name": "Carl Curti (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 303.57,
+     "date": "2026-04-16",
+     "kind": "in-kind"
+    },
+    {
+     "name": "Carl Curti (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 500.0,
+     "date": "2026-04-16",
+     "kind": "loan"
+    }
+   ],
+   "top_expenditures": [
+    {
+     "payee": "Gagnon's Sign Depot",
+     "total": 1214.45,
+     "payments": 1,
+     "purpose": "Magnets, Signs"
+    },
+    {
+     "payee": "Vittles",
+     "total": 1000.0,
+     "payments": 1,
+     "purpose": "Sides dishes for Fish Fry"
+    },
+    {
+     "payee": "Payments to individuals",
+     "total": 890.0,
+     "payments": 3,
+     "purpose": "Campaign Hats for advertising; Campaign Shirts"
+    },
+    {
+     "payee": "Sam's Club",
+     "total": 582.61,
+     "payments": 1,
+     "purpose": "Supplies for Fish Fry"
+    },
+    {
+     "payee": "Payments to the candidate (loan repayments, reimbursements, surplus returned)",
+     "total": 375.79,
+     "payments": 1,
+     "purpose": "Refund: Partial Repayment of Loan"
+    },
+    {
+     "payee": "The Home Depot",
+     "total": 360.22,
+     "payments": 1,
+     "purpose": "Lumber for large campaign signs"
+    },
+    {
+     "payee": "City of Springfield",
+     "total": 216.0,
+     "payments": 1,
+     "purpose": "Assessment Fee"
+    },
+    {
+     "payee": "Office Depot/OfficeMax",
+     "total": 133.93,
+     "payments": 1,
+     "purpose": "Printing Flyers"
+    },
+    {
+     "payee": "Thy Neighbors Services",
+     "total": 125.0,
+     "payments": 1,
+     "purpose": "Distribution of surplus: Donation of funds to Charity"
+    },
+    {
+     "payee": "Smith Wholesale Meats",
+     "total": 90.0,
+     "payments": 1,
+     "purpose": "Fish for Fish Fry"
+    },
+    {
+     "payee": "Hancock Whitney Bank",
+     "total": 32.0,
+     "payments": 5,
+     "purpose": "Bank Fee - Early Closure; Bank Fee; service fee; Service Charge - Bank Fee"
+    }
+   ],
+   "reconciliation": "itemized matches summary",
+   "notes": [
+    "Campaign filed a termination report (MTR); account is closed."
+   ]
+  },
+  {
+   "name": "Ralph Hammond",
+   "office": "Springfield Mayor",
+   "soe_office": "Springfield Mayor",
+   "election": "2026 Municipal Super Tuesday (Apr 21, 2026)",
+   "party": "Nonpartisan",
+   "soe_status": "Inactive - Elected",
+   "soe_campaign_name": "Ralph Hammond (NON)",
+   "cand_id": 712,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=36&c=bay&ca=712&rellevel=4&committee=N",
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=712&dhc=0&county=bay",
+   "latest_report": "MTR / period 2026-04-17 to 2026-07-20 / due 2026-07-20",
+   "through": "2026-07-20",
+   "total_raised": 3030.0,
+   "monetary": 3000.0,
+   "in_kind": 30.0,
+   "loans": 3000.0,
+   "total_spent": 3000.0,
+   "cash_on_hand_estimate": null,
+   "n_contributions": 2,
+   "from_individuals": {
+    "count": 0,
+    "total": 0.0,
+    "bands": {
+     "under_100": {
+      "count": 0,
+      "total": 0.0
+     },
+     "100_499": {
+      "count": 0,
+      "total": 0.0
+     },
+     "500_999": {
+      "count": 0,
+      "total": 0.0
+     },
+     "1000_plus": {
+      "count": 0,
+      "total": 0.0
+     }
+    },
+    "in_county": {
+     "count": 0,
+     "total": 0.0
+    },
+    "out_of_county": {
+     "count": 0,
+     "total": 0.0
+    },
+    "unique_donors_approx": 0
+   },
+   "candidate_self": {
+    "contributions": 30.0,
+    "loans": 3000.0
+   },
+   "by_type_total": {
+    "individual": 0.0,
+    "business": 0.0,
+    "pac": 0.0,
+    "party": 0.0,
+    "candidate_self": 3030.0,
+    "other": 0.0
+   },
+   "contributors": [
+    {
+     "name": "Ralph Hammond (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 3000.0,
+     "date": "2025-11-18",
+     "kind": "loan"
+    },
+    {
+     "name": "Ralph Hammond (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 30.0,
+     "date": "2026-02-10",
+     "kind": "in-kind"
+    }
+   ],
+   "top_expenditures": [
+    {
+     "payee": "Payments to the candidate (loan repayments, reimbursements, surplus returned)",
+     "total": 1766.75,
+     "payments": 1,
+     "purpose": "Distribution of surplus: Personal Loan Reimbursement"
+    },
+    {
+     "payee": "Signworks PC, Inc",
+     "total": 734.02,
+     "payments": 2,
+     "purpose": "Yard Signs, Static Car Signs; Signs & Stands"
+    },
+    {
+     "payee": "Creative Printing",
+     "total": 277.33,
+     "payments": 1,
+     "purpose": "Door Hangers"
+    },
+    {
+     "payee": "City of Springfield",
+     "total": 216.0,
+     "payments": 1,
+     "purpose": "Qualifying Fee"
+    },
+    {
+     "payee": "Bay County Supervisor of Elections",
+     "total": 5.9,
+     "payments": 1,
+     "purpose": "Petition Verification"
+    }
+   ],
+   "reconciliation": "itemized matches summary",
+   "notes": [
+    "Campaign filed a termination report (MTR); account is closed."
+   ]
+  },
+  {
+   "name": "Dave Lowery",
+   "office": "Lynn Haven Mayor (recall election)",
+   "soe_office": "Lynn Haven Mayor",
+   "election": "2026 Lynn Haven Recall (Jan 20, 2026)",
+   "party": "Nonpartisan",
+   "soe_status": "Inactive - Qualified",
+   "soe_campaign_name": "Dave Lowery (NON)",
+   "cand_id": 716,
+   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=34&c=bay&ca=716&rellevel=4&committee=N",
+   "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=716&dhc=0&county=bay",
+   "latest_report": "RTRQ / period 2025-12-11 to 2026-03-10 / due 2026-03-10",
+   "through": "2026-03-10",
+   "total_raised": 550.0,
+   "monetary": 550.0,
+   "in_kind": 0.0,
+   "loans": 300.0,
+   "total_spent": 550.0,
+   "cash_on_hand_estimate": null,
+   "n_contributions": 2,
+   "from_individuals": {
+    "count": 1,
+    "total": 250.0,
+    "bands": {
+     "under_100": {
+      "count": 0,
+      "total": 0.0
+     },
+     "100_499": {
+      "count": 1,
+      "total": 250.0
+     },
+     "500_999": {
+      "count": 0,
+      "total": 0.0
+     },
+     "1000_plus": {
+      "count": 0,
+      "total": 0.0
+     }
+    },
+    "in_county": {
+     "count": 1,
+     "total": 250.0
+    },
+    "out_of_county": {
+     "count": 0,
+     "total": 0.0
+    },
+    "unique_donors_approx": 1
+   },
+   "candidate_self": {
+    "contributions": 0.0,
+    "loans": 300.0
+   },
+   "by_type_total": {
+    "individual": 250.0,
+    "business": 0.0,
+    "pac": 0.0,
+    "party": 0.0,
+    "candidate_self": 300.0,
+    "other": 0.0
+   },
+   "contributors": [
+    {
+     "name": "Dave Lowery (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 300.0,
+     "date": "2025-12-04",
+     "kind": "loan"
+    }
+   ],
+   "top_expenditures": [
+    {
+     "payee": "Refunds to individual contributors",
+     "total": 250.0,
+     "payments": 1,
+     "purpose": "Refund: Refunding donation (running unopposed)"
+    },
+    {
+     "payee": "City of Lynn Haven",
+     "total": 198.6,
+     "payments": 1,
+     "purpose": "Candidate Filing Fee"
+    },
+    {
+     "payee": "Payments to the candidate (loan repayments, reimbursements, surplus returned)",
+     "total": 101.4,
+     "payments": 1,
+     "purpose": "Refund: Closing account due to running unopposed (partial refund minus filing fee)"
+    }
+   ],
+   "reconciliation": "itemized matches summary",
+   "notes": [
+    "Campaign filed a termination report (RTRQ); account is closed.",
+    "Lynn Haven recall election (Jan 20, 2026): campaign closed after running unopposed; contributions refunded per the filing. The two recall political committees (Lynn Haven Recall; Recall Mayor Nelson) are committees, not candidates, and are not included."
+   ]
+  }
+ ],
+ "gaps": [
+  "Lake Powell Community Development District (Seats 2 and 5): five candidates are listed in the SOE system with no reports and $0 totals; nothing to itemize.",
+  "Suzanne McDowell and Sunny Reid (County Commission District 4, both Withdrawn): no reports or itemized activity listed.",
+  "Lynn Haven recall (Jan 20, 2026): the two recall political committees (\"Lynn Haven Recall\", \"Recall Mayor Nelson\") are committees, not candidates, and are excluded. Only the candidate account for the mayor's seat is included.",
+  "No 2026 elections were listed in the SOE system for Panama City, Lynn Haven (other than the recall), Parker, or for county constitutional offices; Panama City and Parker hold municipal elections in odd years (2025, 2027).",
+  "Campaigns still active through Nov 3 have filed through G4 (period ending 2026-10-02) or, for two Callaway candidates, G5 (period ending 2026-10-16). The G5 report for the others (period 10/3 to 10/16) was not posted as of 2026-10-21, and the G6 report is due after the election. Figures will change.",
+  "Dr. John L. Haley: one blank deletion line in an amended report could not be matched; SOE totals may double-count one $1,000 candidate loan (see candidate notes).",
+  "Expenditure payees have no type code in the filings. Payees were judged to be individual people by name and aggregated as \"Payments to individuals\" (or \"Refunds to individual contributors\"); a few business names that are personal names could be misjudged.",
+  "In-county vs out-of-county is based on the city/ZIP filed for each individual contribution (Bay County cities and ZIPs). Contributions with no address filed are counted as location_unknown."
+ ]
+}

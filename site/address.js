@@ -233,6 +233,7 @@ async function load(f) {
   $('aSub').textContent = `${cityName ? 'City of ' + cityName : 'Unincorporated Bay County'} · ZIP ${a.ZIP || '—'}${parcel ? ' · Parcel ' + parcel.A1RENUM : ''}`;
   const pa = $('paLink');
   if (parcel?.PLINK) { pa.href = parcel.PLINK; pa.hidden = false; } else pa.hidden = true;
+  if (parcel) parcel._ex = await loadEx(parcel.A1RENUM);
   renderTax(parcel, cityName);
   renderProp(parcel);
   renderReps(comm, local, sb, house, senate, ush, cityName);
@@ -251,17 +252,31 @@ function distFor(parcel, cityName) {
   if (!id) id = cityName && D.districts[cityName] ? cityName : 'unincorporated';
   return {id, d: D.districts[id], exact: !!D.taxdist[code]};
 }
+async function loadEx(pid) {
+  if (!pid) return null;
+  try { const r = await fetch(`/data/ex/${pid.slice(0, 3)}.json`); if (r.ok) return (await r.json())[pid] || null; } catch (e) {}
+  return null;
+}
 function taxParts(p) {
+  if (p._ex) {
+    // 2026 final tax roll: school and non-school taxable value as certified, with each exemption by type
+    const [tsd, tnsd, sr, ex] = p._ex, assessed = +p.VASTOTAL || 0, just = +p.VASJUST || 0;
+    const exempt = Object.values(ex).reduce((s, v) => s + v, 0);
+    return {hx: !!ex['01'], assessed, just, exempt, taxable: tnsd, second: ex['02'] || 0, other: exempt - (ex['01'] || 0) - (ex['02'] || 0),
+      school: tsd, non: tnsd, nonOther: Math.min(assessed, tnsd + sr), ex, full: tsd === 0 && tnsd === 0 && exempt > 0};
+  }
   const hx = /\bHX\b/.test(p.DEXEMPTS || ''), assessed = +p.VASTOTAL || 0, just = +p.VASJUST || 0, exempt = +p.VASEXEMPT || 0, taxable = +p.VASTAXABLE || 0;
   const second = hx ? Math.min(Math.max(assessed - 50000, 0), D.second2026) : 0;
   const other = hx ? Math.max(0, exempt - Math.min(assessed, 25000) - second) : exempt;
-  return {hx, assessed, just, exempt, taxable, second, other, school: hx ? Math.max(0, taxable + second) : Math.max(0, just - exempt), non: taxable};
+  // county codes for full exemptions (disabled veteran, totally disabled person, etc.): no school tax either
+  const fullEx = taxable === 0 && /\b(13|14|VT|96)\b/.test(p.DEXEMPTS || '');
+  return {hx, assessed, just, exempt, taxable, second, other, school: fullEx ? 0 : hx ? Math.max(0, taxable + second) : Math.max(0, just - exempt), non: taxable};
 }
 function renderTax(p, cityName) {
   const el = $('taxBody');
   if (!p) { el.innerHTML = `<p class="muted">No parcel record came back for this address, so there's no value to estimate from. <a href="/public-money/tax-dollars">Use the calculator →</a></p>`; return; }
   const {id, d, exact} = distFor(p, cityName), t = taxParts(p);
-  const rows = d.stack.map(aid => { const a = D.auth[aid]; return {n: a.n, g: a.g, m: a.m, amt: (a.school ? t.school : t.non) / 1000 * a.m}; }).filter(r => r.m > 0);
+  const rows = d.stack.map(aid => { const a = D.auth[aid]; return {n: a.n, g: a.g, m: a.m, amt: (a.school ? t.school : (a.g === 'county' || a.g === 'countysvc' || t.nonOther == null) ? t.non : t.nonOther) / 1000 * a.m}; }).filter(r => r.m > 0);
   const tot = rows.reduce((s, r) => s + r.amt, 0);
   const byG = D.groups.map(([g]) => [g, rows.filter(r => r.g === g).reduce((s, r) => s + r.amt, 0)]).filter(x => x[1] > 0.5);
   el.innerHTML = `<div class="bill-hd"><span class="bill-v sm">${usd(tot)}<small> / year</small></span><span class="muted small">${esc(d.label)} · ${String(+d.total.toFixed(4))} mills${exact ? '' : ' (area inferred from the map)'}</span></div>
@@ -280,6 +295,11 @@ async function loadFees(pid, taxTot) {
     ? `<dl class="kv fees"><dt class="span">Flat fees on the tax bill</dt>${items.map(([c, a]) => `<dt>${esc(D.navLabel[c] || 'Other charge (' + c + ')')}</dt><dd>${usd(a)}</dd>`).join('')}<dt><b>Estimated total bill</b></dt><dd><b>${usd(taxTot + fees)}</b> <span class="muted small">tax + fees</span></dd></dl>`
     : '<p class="muted small">No flat fees (non-ad valorem assessments) were on this parcel\'s FY2026 tax bill.</p>';
 }
+function exList(t) {
+  const FULL = new Set(['05', '06', '08', '39', '40', '41']);
+  const items = Object.entries(t.ex).sort((a, b) => b[1] - a[1]).map(([c, v]) => `<li>${esc(D.exNames[c] || 'Exemption type ' + c)} <span class="muted">${FULL.has(c) ? 'entire value' : usd(v)}</span></li>`);
+  return `${usd(t.exempt)}<ul class="plain small ex-list">${items.join('')}</ul>${t.full ? '<span class="small"><b>No property tax is owed on this home.</b></span> ' : ''}<a class="small" href="/public-money/exemptions">About exemptions →</a>`;
+}
 function renderProp(p) {
   const el = $('propBody');
   if (!p) { el.innerHTML = '<dd class="muted">No parcel record found for this address.</dd>'; return; }
@@ -289,8 +309,8 @@ function renderProp(p) {
     p.S1YRBLTACT ? ['Built', esc(p.S1YRBLTACT) + (p.S1AREAHEAT ? ` · ${Math.round(p.S1AREAHEAT).toLocaleString()} heated sq ft` : '')] : null,
     ['Market (just) value', usd(t.just)],
     ['<span class="term" data-term="assessed-value">Assessed value</span>', usd(t.assessed) + (t.assessed < t.just ? ` <span class="muted small">(capped ${usd(t.just - t.assessed)} below market)</span>` : '')],
-    ['Exemptions', t.exempt ? usd(t.exempt) + ` <span class="muted small">(${t.hx ? 'homestead' : 'codes'}${codes.filter(c => c !== 'HX').length ? (t.hx ? ' + ' : ' ') + esc(codes.filter(c => c !== 'HX').join(', ')) : ''})</span>` : 'No exemptions'],
-    ['<span class="term" data-term="taxable-value">Taxable value</span>', usd(t.non) + (t.hx ? ` <span class="muted small">(${usd(t.school)} for school taxes)</span>` : '')],
+    ['Exemptions', t.ex ? exList(t) : t.exempt ? usd(t.exempt) + ` <span class="muted small">(${t.hx ? 'homestead' : 'codes'}${codes.filter(c => c !== 'HX').length ? (t.hx ? ' + ' : ' ') + esc(codes.filter(c => c !== 'HX').join(', ')) : ''})</span>` : 'No exemptions'],
+    ['<span class="term" data-term="taxable-value">Taxable value</span>', usd(t.non) + (t.school !== t.non ? ` <span class="muted small">(${usd(t.school)} for school taxes${t.nonOther != null && t.nonOther !== t.non ? `, ${usd(t.nonOther)} for city and district taxes` : ''})</span>` : '')],
   ]);
 }
 function renderReps(comm, local, sb, house, senate, ush, cityName) {

@@ -98,7 +98,7 @@ def home_page():
     <div class="sec-hd"><h2 id="inv">Take part</h2><span class="muted">Tools for following and asking</span></div>
     <div class="tools">
       <a href="/meetings"><b>Upcoming meetings</b><span>When every board meets, with agendas and the money items on them. Add them to your calendar.</span></a>
-      <a href="/alerts"><b>Email alerts</b><span>A weekly note when your government's records change or a meeting is coming up.</span></a>
+      <a href="/elections"><b>2026 elections</b><span>Who's running, what they say they'll do, and where their campaign money comes from.</span></a>
       <a href="/records-request"><b>Request a record</b><span>Write a Florida public records request in a minute.</span></a>
       <a href="/public-money/campaign-money"><b>Campaign money</b><span>Who funds local officials' campaigns, and which donors hold contracts.</span></a>
       <a href="/open-data"><b>Open data</b><span>Download everything on this site as CSV or JSON.</span></a>

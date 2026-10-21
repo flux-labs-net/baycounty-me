@@ -9,6 +9,12 @@ from datetime import datetime, timezone
 import html
 
 CHANGES = [
+    {'date': '2026-10-21', 'title': "Who's running in 2026",
+     'text': "Every local race on Bay County ballots this year, with each candidate's platform in their own words, links to their campaigns, and their campaign money: what they raised and spent, how much came from individuals, organizations and their own pockets, and every business or committee that gave. Races already decided are shown separately.",
+     'pages': ['/elections']},
+    {'date': '2026-10-21', 'title': 'Property tax exemptions, and exemptions on My Address',
+     'text': "A new page shows every property tax exemption in the 2026 tax roll, from homestead to disabled veterans, with how many homes get each and how much tax it takes off bills. My Address now lists each exemption on a home by name and uses the certified school and non-school taxable values, which corrects estimates for fully exempt homes and for seniors with the county senior exemption.",
+     'pages': ['/public-money/exemptions', '/my-address']},
     {'date': '2026-10-21', 'title': 'School Board votes, and more city votes',
      'text': 'How They Voted now includes 104 School Board votes from January 2024 to September 2026 with each member\'s vote, including budgets, millage and major contracts; all 2024 Panama City Beach council votes, including the FY2025 budget; and Springfield votes from mid-2024 to October 2026, including both final budget hearings.',
      'pages': ['/public-money/votes']},
@@ -112,7 +118,7 @@ LABELS = {'/': 'Home', '/my-address': 'My Address', '/public-money/tax-dollars':
           '/public-money/audits': 'Audit Findings', '/who-runs-bay-county': 'Officials', '/glossary': 'Glossary', '/search': 'Search',
           '/about': 'About', '/updates': "What's new", '/governments': 'Governments', '/compare': 'Compare', '/meetings': 'Meetings',
           '/public-money/campaign-money': 'Campaign Money', '/records-request': 'Records Request', '/open-data': 'Open Data', '/alerts': 'Email Alerts',
-          '/es': 'En español', '/public-money/budget-explorer': 'Budget Explorer', '/public-money/who-gets-paid': 'Who Gets Paid', '/public-money/money-map': 'Money Map'}
+          '/es': 'En español', '/public-money/budget-explorer': 'Budget Explorer', '/public-money/who-gets-paid': 'Who Gets Paid', '/public-money/money-map': 'Money Map', '/elections': '2026 Elections', '/public-money/exemptions': 'Exemptions'}
 
 
 def last_updated(path):
