@@ -50,16 +50,81 @@ const inp = $('q'), list = $('acList');
 let timer, items = [], active = -1, seq = 0;
 function clean(s) { return s.toUpperCase().replace(/['"%_\\]/g, '').replace(/\s+/g, ' ').trim(); }
 inp.addEventListener('input', () => { clearTimeout(timer); timer = setTimeout(suggest, 220); });
+/* Address parsing: the county stores USPS abbreviations (DR, AVE, N), spelled-out highways
+   ("W HIGHWAY 98"), "SAINT" or "ST", and ordinals like "10TH". People type all sorts of variants,
+   so we normalize what they type, match the words in any order, and relax if nothing matches. */
+const TYPES = {DRIVE: 'DR', DRV: 'DR', DR: 'DR', STREET: 'ST', STR: 'ST', ST: 'ST', AVENUE: 'AVE', AV: 'AVE', AVN: 'AVE', AVE: 'AVE', ROAD: 'RD', RD: 'RD',
+  BOULEVARD: 'BLVD', BLV: 'BLVD', BLVD: 'BLVD', LANE: 'LN', LN: 'LN', COURT: 'CT', CRT: 'CT', CT: 'CT', COURTS: 'CTS', CIRCLE: 'CIR', CIRC: 'CIR', CIR: 'CIR',
+  PLACE: 'PL', PL: 'PL', TERRACE: 'TER', TERR: 'TER', TER: 'TER', TRAIL: 'TRL', TR: 'TRL', TRL: 'TRL', PARKWAY: 'PKWY', PKY: 'PKWY', PKWY: 'PKWY',
+  PLAZA: 'PLZ', PLZ: 'PLZ', POINT: 'PT', PT: 'PT', COVE: ['COVE', 'CV'], CV: ['COVE', 'CV'], CROSSING: 'XING', XING: 'XING', LANDING: 'LNDG', LNDG: 'LNDG',
+  MANOR: 'MNR', MNR: 'MNR', SQUARE: 'SQ', SQ: 'SQ', ALLEY: 'ALY', ALY: 'ALY', BEND: 'BND', BND: 'BND', GARDENS: 'GDNS', GDNS: 'GDNS', KNOLL: 'KNL', KNL: 'KNL',
+  TRACE: 'TRCE', TRCE: 'TRCE', CORNER: 'COR', COR: 'COR', LOOP: 'LOOP', RUN: 'RUN', PATH: 'PATH', PASS: 'PASS', WAY: 'WAY', TURN: 'TURN', ISLE: 'ISLE'};
+const DIRS = {NORTH: 'N', SOUTH: 'S', EAST: 'E', WEST: 'W', NORTHWEST: 'NW', N: 'N', S: 'S', E: 'E', W: 'W', NW: 'NW'};
+const ORD = {FIRST: '1ST', SECOND: '2ND', THIRD: '3RD', FOURTH: '4TH', FIFTH: '5TH', SIXTH: '6TH', SEVENTH: '7TH', EIGHTH: '8TH', NINTH: '9TH', TENTH: '10TH',
+  ELEVENTH: '11TH', TWELFTH: '12TH', THIRTEENTH: '13TH', FOURTEENTH: '14TH', FIFTEENTH: '15TH', SIXTEENTH: '16TH', SEVENTEENTH: '17TH', EIGHTEENTH: '18TH', NINETEENTH: '19TH', TWENTIETH: '20TH'};
+const PLACES = ['PANAMA CITY BEACH', 'PANAMA CITY', 'LYNN HAVEN', 'CALLAWAY', 'SPRINGFIELD', 'PARKER', 'MEXICO BEACH', 'SOUTHPORT', 'FOUNTAIN', 'YOUNGSTOWN', 'TYNDALL AFB', 'BAYOU GEORGE', 'BAY COUNTY'];
+function parseAddr(raw) {
+  let s = raw.toUpperCase().replace(/[.,'"%_\\]/g, ' ').replace(/\s+/g, ' ').trim();
+  s = s.replace(/\b(FL|FLORIDA)\b/g, ' ').replace(/\b\d{5}(-\d{4})?\s*$/, ' ').replace(/\s+/g, ' ').trim();
+  let place = '';
+  for (const p of PLACES) { const re = new RegExp(`\\s${p}$`); if (re.test(s)) { place = p; s = s.replace(re, '').trim(); break; } }
+  let unit = '';
+  const um = /\s(?:#\s*|(?:APT|APARTMENT|UNIT|STE|SUITE|BLDG|LOT|RM|SPC|TRLR)\s+#?\s*)([A-Z0-9-]+)\s*$/.exec(s);
+  if (um) { unit = um[1]; s = s.slice(0, um.index).trim(); }
+  const hm = /^(\d+)\s*([A-Z])?\s+(.*)$/.exec(s) || /^(\d+)$/.exec(s);
+  if (!hm) return null;
+  const house = hm[1], rest = (hm[3] || '').trim();
+  let w = rest ? rest.split(' ') : [];
+  // highway forms: HWY 98, US 98, US HWY 98, SR 77, STATE ROAD 77, CR 2321, COUNTY ROAD 2321 -> HIGHWAY n
+  const joined = w.join(' ').replace(/\b(?:US|U S|SR|S R|STATE ROAD|STATE RD|CR|C R|COUNTY ROAD|COUNTY RD)\s*(?:HWY|HIGHWAY)?\s*(\d+[A-Z]?)\b/g, 'HIGHWAY $1')
+    .replace(/\bHWY\b/g, 'HIGHWAY').replace(/\bMLK\b/g, 'MARTIN LUTHER KING JR').replace(/\bJUNIOR\b/g, 'JR').replace(/\bMOUNT\b/g, 'MT');
+  w = joined ? joined.split(' ') : [];
+  const toks = []; // {alts:[...], kind:'name'|'type'|'dir'}
+  w.forEach((t, i) => {
+    const last = i === w.length - 1;
+    if (ORD[t]) { toks.push({alts: [ORD[t]], kind: 'name'}); return; }
+    if (DIRS[t] && (i === 0 || last)) { toks.push({alts: [DIRS[t]], kind: 'dir'}); return; }
+    if ((t === 'ST' || t === 'SAINT') && !last) { toks.push({alts: ['ST', 'SAINT'], kind: 'name', word: true}); return; }
+    if (TYPES[t] && last && i > 0) { const v = TYPES[t]; toks.push({alts: Array.isArray(v) ? v : [v], kind: 'type'}); return; }
+    toks.push({alts: [t], kind: 'name', partial: last});
+  });
+  return {house, unit, place, toks};
+}
+const sq = s => s.replace(/'/g, "''");
+function whereFor(a, keep) {
+  const parts = [`ADDRESS LIKE '${a.house} %'`];
+  a.toks.filter(t => keep.includes(t.kind)).forEach(t => {
+    const ors = t.alts.map(x => t.kind === 'name' && !t.word ? (t.partial ? `ADDRESS LIKE '% ${sq(x)}%'` : `(ADDRESS LIKE '% ${sq(x)} %' OR ADDRESS LIKE '% ${sq(x)}')`)
+      : `(ADDRESS LIKE '% ${sq(x)} %' OR ADDRESS LIKE '% ${sq(x)}')`);
+    parts.push('(' + ors.join(' OR ') + ')');
+  });
+  if (a.unit) parts.push(`(UNIT = '${sq(a.unit)}' OR UNIT LIKE '${sq(a.unit)}%')`);
+  return parts.join(' AND ');
+}
+async function findAddr(a) {
+  const opts = {outFields: 'ADDRESS,UNIT,CMNTY,ZIP,RENUM', returnGeometry: 'true', outSR: 4326, resultRecordCount: 25, orderByFields: 'ADDRESS'};
+  // strict, then without direction/type (they're often typed differently), then without the unit
+  const tries = [['name', 'type', 'dir'], ['name']];
+  for (const keep of tries) {
+    const f = await q('Admin_A12/MapServer/3', {where: whereFor(a, keep), ...opts});
+    if (f.length) return {f, relaxed: keep.length === 1 && a.toks.some(t => t.kind !== 'name')};
+  }
+  if (a.unit) { const f = await q('Admin_A12/MapServer/3', {where: whereFor({...a, unit: ''}, ['name']), ...opts}); if (f.length) return {f, relaxed: true}; }
+  return {f: [], relaxed: false};
+}
 async function suggest() {
-  const s = clean(inp.value);
-  if (s.length < 3 || !/^\d/.test(s)) { hideList(); return; }
+  const a = parseAddr(inp.value);
+  if (!a || (!a.toks.length && inp.value.trim().length < 3)) { hideList(); return; }
+  if (!a.toks.length) { hideList(); return; }
   const my = ++seq;
   try {
-    const f = await q('Admin_A12/MapServer/3', {where: `ADDRESS LIKE '${s}%'`, outFields: 'ADDRESS,UNIT,CMNTY,ZIP,RENUM', returnGeometry: 'true', outSR: 4326, resultRecordCount: 10, orderByFields: 'ADDRESS'});
+    let {f, relaxed} = await findAddr(a);
     if (my !== seq) return;
+    if (a.place) f.sort((x, y) => ((y.attributes.CMNTY || '').toUpperCase() === a.place) - ((x.attributes.CMNTY || '').toUpperCase() === a.place));
+    f = f.slice(0, 10);
     items = f; active = -1;
-    if (!f.length) { list.innerHTML = '<li class="ac-empty">No matching address. Try just the number and street name.</li>'; showList(); return; }
-    list.innerHTML = f.map((x, i) => `<li role="option" id="ac${i}" data-i="${i}">${esc(title(x.attributes.ADDRESS))}${x.attributes.UNIT ? ' #' + esc(x.attributes.UNIT) : ''}<span>${esc(x.attributes.CMNTY || '')} ${esc(x.attributes.ZIP || '')}</span></li>`).join('');
+    if (!f.length) { list.innerHTML = '<li class="ac-empty">No matching address. Check the house number, or try just the number and street name (for example "1614 Ohio").</li>'; showList(); return; }
+    list.innerHTML = (relaxed ? '<li class="ac-empty ac-note">Closest matches:</li>' : '') + f.map((x, i) => `<li role="option" id="ac${i}" data-i="${i}">${esc(title(x.attributes.ADDRESS))}${x.attributes.UNIT && x.attributes.UNIT.trim() ? ' #' + esc(x.attributes.UNIT) : ''}<span>${esc(x.attributes.CMNTY || '')} ${esc(x.attributes.ZIP || '')}</span></li>`).join('');
     showList();
   } catch (e) { if (my === seq) { list.innerHTML = '<li class="ac-empty">Bay County\'s map server didn\'t answer. Try again in a moment.</li>'; showList(); } }
 }

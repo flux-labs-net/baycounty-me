@@ -9,6 +9,9 @@ from datetime import datetime, timezone
 import html
 
 CHANGES = [
+    {'date': '2026-10-21', 'title': 'Address lookup understands more ways of typing an address',
+     'text': 'My Address now finds addresses typed with full street types (Drive, Avenue, Boulevard), directions (North, West), highway forms (Hwy 98, US 98, County Road 2321), Saint or St., spelled-out numbers (Tenth Street), MLK, unit numbers, and a city, state and ZIP on the end. If a street type is wrong, it shows the closest matches.',
+     'pages': ['/my-address']},
     {'date': '2026-10-21', 'title': 'Votes: filters and corrections',
      'text': 'Filter recorded votes by government, member, year and outcome, sort by date, amount or closest margin, and share a filtered view by link. Corrections checked against the original minutes: removed two Lynn Haven votes counted twice from a second copy of the same minutes; fixed member votes on a Lynn Haven CRA vote and a Panama City Beach vote that had been misread; restored amounts cut off or misread from scanned pages; and noted fiscal-year and resolution-number typos that appear in the minutes themselves.',
      'pages': ['/public-money/votes']},
