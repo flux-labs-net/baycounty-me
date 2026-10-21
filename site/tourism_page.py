@@ -141,7 +141,9 @@ def surtax_page(out_dir):
       <select id="stC" aria-label="Type"><option value="">All types</option></select>
       <select id="stS" aria-label="Status"><option value="">Any status</option><option value="completed">Completed</option><option value="in_progress">In progress</option><option value="not_started">Not started</option></select>
     </div>
-    <div class="st-wrap"><svg id="stMap" viewBox="0 0 400 300" role="img" aria-label="Map of sales tax projects"></svg>
+    <div class="st-wrap"><div class="st-mapcol"><div class="st-mapbox"><svg id="stMap" viewBox="0 0 400 300" role="img" aria-label="Map of sales tax projects. Select a project in the list or tap a dot for details."></svg>
+        <div class="st-zoom print-hide"><button type="button" id="stIn" aria-label="Zoom in">+</button><button type="button" id="stOut" aria-label="Zoom out">−</button><button type="button" id="stAll" class="st-all">Show all</button></div></div>
+        <div class="st-sel" id="stSel" hidden aria-live="polite"></div></div>
       <ol class="st-list" id="stList"></ol></div>
     <ul class="leg mini" id="stLeg"></ul>
     <p class="note">From the county's sales tax project map service. Status comes from each project's "percent complete" field, which the county maintains; some records haven't been updated in years. Road projects are shown at the middle of the segment. {a(inf.get("projects_source_url") or "https://bayhalfcent.com/", "bayhalfcent.com")}</p></section>
