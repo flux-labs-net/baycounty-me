@@ -340,6 +340,8 @@ def _layout(title, desc, path, body, extra_head=''):
 <link rel="stylesheet" href="/assets/site.css">
 <link rel="alternate" type="application/rss+xml" title="BayCounty.me updates" href="/updates.xml">
 {extra_head}
+<script>window.va=window.va||function(){{(window.vaq=window.vaq||[]).push(arguments)}};</script>
+<script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
