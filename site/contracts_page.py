@@ -2,6 +2,7 @@
 import json, os, re, html
 from collections import defaultdict
 import vendors as V
+from change_growth import growth_section
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 SRC = os.path.join(HERE, '..', 'data', 'contracts', 'contracts.json')
@@ -182,8 +183,8 @@ def contracts_page(out_dir):
       <button type="button" class="pill sm" id="ctCsv">Download CSV</button></div>
     <div class="tablewrap"><table class="tx-table" id="ctT" data-tt="own"><thead><tr><th scope="col">Government</th><th scope="col">Vendor</th><th scope="col">For</th><th scope="col" class="num">Amount</th><th scope="col">How awarded</th><th scope="col">Date</th></tr></thead><tbody></tbody></table></div>
     <button type="button" class="pill" id="ctMore">Show more</button></section>
-  <section class="tx-sec"><div class="sec-hd"><h2 id="co">Change orders</h2><span class="muted">Contracts that grew after they were signed</span></div>
-    <div class="tablewrap"><table class="tx-table"><thead><tr><th scope="col">Gov.</th><th scope="col">Vendor and project</th><th scope="col" class="num">Original</th><th scope="col" class="num">Added</th><th scope="col" class="num">Increase</th><th scope="col">Reason</th><th scope="col">Date</th></tr></thead><tbody>{co_rows}</tbody></table></div></section>
+  {growth_section(d, f'''<details class="tbl-toggle"><summary>Every change order in this list ({len(d["change_orders"])})</summary>
+    <div class="tablewrap"><table class="tx-table"><thead><tr><th scope="col">Gov.</th><th scope="col">Vendor and project</th><th scope="col" class="num">Original</th><th scope="col" class="num">Added</th><th scope="col" class="num">Increase</th><th scope="col">Reason</th><th scope="col">Date</th></tr></thead><tbody>{co_rows}</tbody></table></div></details>''')}
   <section class="tx-sec"><div class="sec-hd"><h2 id="em">Emergency purchases</h2></div><ul class="plain">{em}</ul></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="rules">The bidding rules</h2></div><ul class="plain">{th}</ul></section>
   <section class="tx-sec method"><div class="sec-hd"><h2 id="src">How this was compiled, and gaps</h2></div><ul class="plain">{''.join(f"<li>{e(n)}</li>" for n in d["notes"])}</ul>

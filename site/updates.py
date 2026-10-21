@@ -9,6 +9,9 @@ from datetime import datetime, timezone
 import html
 
 CHANGES = [
+    {'date': '2026-10-21', 'title': 'Contracts: how much each contract grew',
+     'text': "Change orders are now added up for each contract and measured against its original amount, instead of listed one by one. Of the 22 contracts whose original amount is known, 12 grew by more than 10%, the point where Bay County and Panama City rules require board approval for the added cost. Each bar opens to its change orders, reasons and sources. Contracts whose original amount wasn't in the agendas are listed separately, and where an agenda states the new contract total, that total is used. Every individual change order is still listed below.",
+     'pages': ['/public-money/contracts']},
     {'date': '2026-10-21', 'title': 'Contracts: one name per company, and company cards',
      'text': "Agendas, check registers and campaign reports spell the same company many ways, so the contract winners list was splitting some firms into two or more entries. The 322 contracts used 206 spellings; they now resolve to the companies behind them. Marshall Brothers, for example, had been listed at $11.1M and is now ranked sixth at $24.0M. A new Look up a company section shows everything on the site for one company: contracts by government next to what each government paid it (where a check register shows it), change orders, emergency purchases, campaign gifts from the company, and votes on its contracts by officials it gave to. Insurance pools owned by governments (Florida League of Cities, PGIT) are no longer counted as contractor wins.",
      'pages': ['/public-money/contracts']},
