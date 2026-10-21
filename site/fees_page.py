@@ -17,7 +17,7 @@ def a(u, t='Source'):
     return f'<a class="src" href="{e(u)}" target="_blank" rel="noopener">{t}</a>' if u else ''
 
 
-PDF = '''<div class="stamp"><button type="button" class="pdf-btn" id="pdf"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 12v2h10v-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Export PDF</button><span>Research compiled Oct 20, 2026</span></div>'''
+PDF = '''<div class="stamp"><button type="button" class="pdf-btn" id="pdf"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 12v2h10v-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Export PDF</button><span>Data updated Oct 20, 2026</span></div>'''
 
 # Monthly bill at 5,000 gallons split into comparable parts. Arithmetic from each provider's
 # published rates as recorded in fees_pay_officials.json ("calc" field).
@@ -91,28 +91,76 @@ def fees_page():
 <link rel="stylesheet" href="/assets/tax.css">'''
 
 
+STAFF = re.compile(r'manager|clerk|attorney|chief|director|administrator|treasurer', re.I)
+
+
+def split_note(h):
+    """'Doug Moore (stepped down as chairman...)' -> ('Doug Moore', 'stepped down as chairman...')."""
+    if not h:
+        return None, ''
+    h = re.sub(r'\(([A-Z][a-z]+)\)', r'"\1"', h)  # nickname: William (Chuck) Perdue
+    m = re.match(r'\s*([^(;]+?)\s*(?=\(|;|$)', h)
+    name = m.group(1) if m else h
+    rest = h[len(m.group(0)) if m else len(h):].strip()
+    rest = re.sub(r'^\(([^()]*)\)', r'\1', rest).lstrip('; ').replace('); ', '. ').replace('; ', '. ').strip()
+    return name, rest
+
+
+def term_txt(t):
+    if not t or t == '—':
+        return '', ''
+    main, note = split_note(t)
+    return main, note
+
+
+def roster_li(s):
+    name, note = split_note(s.get('holder'))
+    term, tnote = term_txt(s.get('term_end'))
+    notes = '. '.join(x for x in (note, tnote) if x)
+    if not s.get('elected') and not STAFF.search(s['seat']):
+        notes = ('Appointed to the seat. ' + notes).strip()
+    who = f'<b>{e(name)}</b>' if name else '<span class="vacant">Not published online</span>'
+    return (f'<li><span class="seat">{e(s["seat"])}</span><span class="who">{who}'
+            f'{f"<small>{e(notes)}</small>" if notes else ""}</span>'
+            f'<span class="r-term">{"until " + e(term) if term else ""}</span></li>')
+
+
 def who_page():
     d = json.load(open(SRC))
-    pay = {}
-    for p in d['pay']:
-        pay.setdefault((p['government'], p['title']), []).append(p)
     blocks = ''
     for g in d['governments']:
-        seats = ''.join(f'<tr><th scope="row">{e(s["seat"])}</th><td>{e(s.get("holder") or "Not published online")}</td><td class="small">{"Elected" if s.get("elected") else "Appointed"}</td><td class="small">{e(s.get("term_end") or "—")}</td></tr>' for s in g.get('seats', []))
+        seats = g.get('seats', [])
+        board = [s for s in seats if s.get('elected') or not STAFF.search(s['seat'])]
+        staff = [s for s in seats if s not in board]
         ft = g.get('ftes'); ftv = ft.get('value') if isinstance(ft, dict) else ft
-        blocks += f'''<article class="card gov-card"><h3>{e(g["name"])}</h3><p class="muted small">{e(g.get("form", ""))}</p>
-          <div class="tablewrap"><table class="tx-table"><thead><tr><th scope="col">Seat</th><th scope="col">Who</th><th scope="col">How</th><th scope="col">Term ends</th></tr></thead><tbody>{seats}</tbody></table></div>
-          <p class="small">{"<b>Employees:</b> " + f"{ftv:,}" + " · " if ftv else ""}{f'<a href="{e(g.get("website"))}" target="_blank" rel="noopener">Website</a>' if g.get("website") else ""}{f' · <a href="{e(g.get("contact_url"))}" target="_blank" rel="noopener">Contact</a>' if g.get("contact_url") else ""} {a(g.get("source_url"))}</p></article>'''
-    def site(c):
-        return f'<a href="{e(c["website"])}" target="_blank" rel="noopener">Website</a>' if c.get('website') else ''
-    co = ''.join(f'<tr><th scope="row">{e(c["office"])}</th><td>{e(c["holder"])}</td><td class="small">{e(c.get("elected", ""))}</td><td class="small">{e(c.get("term_end", ""))}</td><td class="num">{money(c.get("salary_fy2025_26"))}</td><td class="num">{money(c.get("salary_fy2026_27"))}</td><td>{site(c)}</td></tr>' for c in d['constitutional_officers'])
+        links = ' · '.join(x for x in [
+            f'{ftv:,g} employees' if ftv else '',
+            f'<a href="{e(g.get("website"))}" target="_blank" rel="noopener">Website</a>' if g.get('website') else '',
+            f'<a href="{e(g.get("contact_url"))}" target="_blank" rel="noopener">Contact</a>' if g.get('contact_url') else '',
+            a(g.get('source_url'))] if x)
+        blocks += f'''<article class="card gov"><h3>{e(g["name"])}</h3><p class="muted small">{e(g.get("form", ""))}</p>
+          <h4 class="roster-h">Elected board</h4><ul class="roster">{"".join(roster_li(s) for s in board)}</ul>
+          {f'<h4 class="roster-h">Appointed staff</h4><ul class="roster">{"".join(roster_li(s) for s in staff)}</ul>' if staff else ""}
+          <p class="gov-ft small">{links}</p></article>'''
+
+    def officer(c):
+        term, _ = term_txt(c.get('term_end'))
+        el, eln = term_txt(c.get('elected'))
+        p1, p2 = c.get('salary_fy2025_26'), c.get('salary_fy2026_27')
+        return f'''<article class="card officer"><span class="eyebrow">{e(c["office"])}</span><h3>{e(split_note(c["holder"])[0])}</h3>
+          <dl class="off-kv"><div><dt>Term ends</dt><dd>{e(term or "—")}</dd></div><div><dt>Chosen</dt><dd>{e(el or "—")}{f' <small>({e(eln)})</small>' if eln else ""}</dd></div>
+          <div><dt>Pay FY2026</dt><dd class="num">{money(p1)}</dd></div><div><dt>Pay FY2027</dt><dd class="num">{money(p2)}</dd></div></dl>
+          <p class="gov-ft small">{f'<a href="{e(c["website"])}" target="_blank" rel="noopener">Website</a> · ' if c.get("website") else ""}{a(c.get("source_url"))}</p></article>'''
+    co = ''.join(officer(c) for c in d['constitutional_officers'])
     seen = set(); prow = ''
     for p in sorted(d['pay'], key=lambda p: -(p['annual'] or 0)):
         k = (p['government'], p['title'], p.get('name'))
         if k in seen or not p.get('annual'):
             continue
         seen.add(k)
-        prow += f'<tr><th scope="row">{e(p["title"])}</th><td>{e(p.get("name") or "")}</td><td class="small">{e(p["government"])}</td><td class="num">{money(p["annual"])}</td><td class="small">{e(p["year"])}</td><td class="wrap small muted">{e(p.get("basis", ""))} {a(p.get("source_url"))}</td></tr>'
+        prow += (f'<tr><th scope="row"><b>{e(p["title"])}</b>{f"<small>{e(p.get("name"))}</small>" if p.get("name") else ""}</th>'
+                 f'<td>{e(p["government"])}<small>{e(p["year"])}</small></td><td class="num">{money(p["annual"])}</td>'
+                 f'<td class="wrap small muted">{e(p.get("basis", ""))} {a(p.get("source_url"))}</td></tr>')
     gaps = ''.join(f'<li>{e(g)}</li>' for g in d['gaps'] if re.search(r'salar|pay|roster|term|school board|manager', g, re.I))
     return f'''<div class="page tax">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Who Runs Bay County</span><h1>Who runs Bay County</h1>
@@ -124,11 +172,11 @@ def who_page():
       <li><b>Five county officers are elected on their own.</b> The Sheriff, Property Appraiser, Tax Collector, Clerk of Court and Supervisor of Elections each run their own office. The County Commission funds most of their budgets. Their pay is set by a state formula.</li>
     </ol>
     <p><a href="/my-address/">Find who represents your address →</a></p></div></section>
-  <section class="tx-sec"><div class="sec-hd"><h2 id="co">Countywide elected officers</h2></div>
-    <div class="tablewrap"><table class="tx-table"><thead><tr><th scope="col">Office</th><th scope="col">Who</th><th scope="col">Elected</th><th scope="col">Term ends</th><th scope="col" class="num">Pay FY2026</th><th scope="col" class="num">Pay FY2027</th><th scope="col"></th></tr></thead><tbody>{co}</tbody></table></div></section>
-  <section class="tx-sec"><div class="sec-hd"><h2 id="govs">Governments</h2></div><div class="cards two-col">{blocks}</div></section>
+  <section class="tx-sec"><div class="sec-hd"><h2 id="co">Countywide elected officers</h2><span class="muted">Pay set by state formula</span></div>
+    <div class="officers">{co}</div></section>
+  <section class="tx-sec"><div class="sec-hd"><h2 id="govs">Governments</h2><span class="muted">Elected boards and the staff they appoint</span></div><div class="gov-grid">{blocks}</div></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="pay">What officials are paid</h2><span class="muted">From state salary reports, budgets and contracts</span></div>
-    <div class="tablewrap"><table class="tx-table"><thead><tr><th scope="col">Position</th><th scope="col">Who</th><th scope="col">Government</th><th scope="col" class="num">Annual</th><th scope="col">Year</th><th scope="col">Basis</th></tr></thead><tbody>{prow}</tbody></table></div>
+    <div class="tablewrap"><table class="tx-table pay-table"><thead><tr><th scope="col">Position</th><th scope="col">Government</th><th scope="col" class="num">Annual</th><th scope="col">Basis</th></tr></thead><tbody>{prow}</tbody></table></div>
     <p class="note">Where a budget shows only one combined line for a whole city commission, that total is listed rather than divided among members.</p></section>
   <section class="tx-sec method"><div class="sec-hd"><h2 id="gaps">What we couldn't find</h2></div><ul class="plain">{gaps}</ul></section>
 </div>

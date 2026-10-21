@@ -1694,10 +1694,9 @@
         },
         {
           "seat": "Commissioner",
-          "holder": null,
+          "holder": "Corey Langford",
           "term_end": null,
-          "elected": true,
-          "note": "Fifth seat not listed in city directory; FY26 budget (Sept 2025) listed Judy Tinder"
+          "elected": true
         },
         {
           "seat": "City Manager",
@@ -2067,7 +2066,7 @@
     "Mexico Beach and Springfield: no FTE counts found. Springfield and Parker list no city manager.",
     "Manager salaries not found: Bay County (Joel Schubert), Panama City (Jonathan Hayes; only his requested $175,000 minimum was reported), Lynn Haven (Chris Lightfoot), Mexico Beach (Mell Smigielski). The Panama City Beach figure is the 2021 contract base. Department-head salaries were not compiled.",
     "School board: the full current member roster with districts and term ends wasn't verified (the district website doesn't render it). Superintendent McQueen's 2024 election status and term end weren't verified.",
-    "Lynn Haven, Springfield and Parker seat term-end dates are not published on their sites. Lynn Haven's fifth commission seat is unconfirmed.",
+    "Lynn Haven, Springfield and Parker seat term-end dates are not published on their sites.",
     "Bay County commissioner term ends were derived from election cycles (2024 FAC results, 2026 qualifying list), not from a single county roster."
   ]
 }

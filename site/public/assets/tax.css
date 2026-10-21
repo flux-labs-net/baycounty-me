@@ -295,3 +295,48 @@ a.src:hover{color:var(--blue)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .vchip.v-no{color:#F2C94C}}
 
 .tx-sec > *, .tx-sec details{min-width:0;max-width:100%}
+/* Who runs Bay County: officer cards, roster lists */
+.officers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:900px){.officers{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.officers{grid-template-columns:minmax(0,1fr)}}
+.officer .gov-ft{margin-top:auto}
+.officer{gap:6px}
+.officer h3{margin:0;font-size:1.05rem}
+.off-kv{display:grid;grid-template-columns:1fr 1fr;gap:8px 12px;margin:6px 0 0}
+.off-kv div{min-width:0}
+.off-kv dt{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.off-kv dd{margin:2px 0 0;font-size:.88rem}
+.off-kv dd.num{font-family:var(--f-data)}
+.off-kv small{color:var(--muted)}
+.gov-grid{columns:2 420px;column-gap:16px}
+.gov-grid .gov{break-inside:avoid;margin:0 0 16px;gap:0}
+.gov h3{margin:0 0 2px}
+.gov > p.muted{margin:0 0 6px}
+.gov .roster-h{margin:14px 0 0;font-size:.7rem;font-family:var(--f-body);font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.roster{list-style:none;margin:4px 0 0;padding:0}
+.roster li{display:grid;grid-template-columns:minmax(0,9.5rem) minmax(0,1fr) auto;gap:2px 14px;align-items:baseline;padding:9px 0;border-top:1px solid var(--line)}
+.roster li:first-child{border-top:0}
+.roster .seat{font-size:.84rem;color:var(--muted)}
+.roster .who b{font-weight:500}
+.roster .who small{display:block;margin-top:2px;font-size:.8rem;line-height:1.45;color:var(--muted)}
+.roster .vacant{color:var(--muted);font-style:italic}
+.roster .r-term{font:400 .78rem var(--f-data);color:var(--muted);white-space:nowrap;text-align:right}
+.gov-ft{margin:10px 0 0;padding-top:10px;border-top:1px solid var(--line);color:var(--muted)}
+.pay-table th small,.pay-table td small{display:block;color:var(--muted);font-size:.8rem;margin-top:1px}
+.pay-table th b{font-weight:500}
+.pay-table td::after{content:none!important}
+.pay-table th[scope=row]{width:30%}
+.pay-table td.wrap{width:42%;min-width:16rem}
+@media (max-width:560px){
+  .roster li{grid-template-columns:minmax(0,1fr) auto}
+  .roster .seat{grid-column:1/-1;font-size:.76rem;text-transform:uppercase;letter-spacing:.04em}
+  .pay-table{min-width:0}
+  .pay-table,.pay-table tbody{display:block}
+  .pay-table thead{display:none}
+  .pay-table tr{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:start;align-content:start;gap:2px 12px;padding:10px 12px;border-bottom:1px solid var(--line)}
+  .pay-table th,.pay-table td{padding:0!important;border:0;width:auto!important;min-width:0!important;white-space:normal!important;overflow-wrap:anywhere;height:auto}
+  .pay-table td:nth-child(2){grid-column:1;grid-row:2}
+  .pay-table td.num{grid-column:2;grid-row:1}
+  .pay-table td.wrap{grid-column:1/-1;grid-row:3;min-width:0;margin-top:4px}
+  .pay-table td:nth-child(2) br{display:none}
+}

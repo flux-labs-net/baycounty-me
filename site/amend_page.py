@@ -78,7 +78,7 @@ def amend_page(out_dir):
       <p class="lede">On November 3, 2026, Florida voters decide Amendment 3, a property tax change. It needs at least 60% "yes" to pass. This page shows what it would do to your bill and to local budgets here, using the state's own estimates.</p>
       <p class="neutral">BayCounty.me takes no position on Amendment 3. Arguments on both sides are summarized below, with sources.</p>
     </div>
-    <div class="stamp"><button type="button" id="pdf" class="pdf-btn"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 12v2h10v-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Export PDF</button><span>Research compiled Oct 20, 2026</span></div>
+    <div class="stamp"><button type="button" id="pdf" class="pdf-btn"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 12v2h10v-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Export PDF</button><span>Data updated Oct 20, 2026</span></div>
   </header>
 
   <section class="explain" aria-labelledby="what-h">

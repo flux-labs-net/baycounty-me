@@ -150,7 +150,7 @@ function table(el) {
 }
 function kv(el) {
   const rows = []; let dt = null;
-  [...el.children].forEach(c => { if (c.tagName === 'DT' && !c.classList.contains('span')) dt = c; else if (c.tagName === 'DD') { rows.push(dt && !c.classList.contains('span') ? [{text: clean(inline(dt)), color: C.muted, fontSize: 8}, {text: clean(inline(c)), fontSize: 8}] : [{text: clean(inline(c)), fontSize: 7.5, color: C.muted, colSpan: 2}, {}]); dt = null; } });
+  [...el.children].flatMap(c => c.tagName === 'DIV' ? [...c.children] : [c]).forEach(c => { if (c.tagName === 'DT' && !c.classList.contains('span')) dt = c; else if (c.tagName === 'DD') { rows.push(dt && !c.classList.contains('span') ? [{text: clean(inline(dt)), color: C.muted, fontSize: 8}, {text: clean(inline(c)), fontSize: 8}] : [{text: clean(inline(c)), fontSize: 7.5, color: C.muted, colSpan: 2}, {}]); dt = null; } });
   return rows.length ? {table: {widths: [92, '*'], body: rows}, layout: {defaultBorder: false, paddingTop: () => 2, paddingBottom: () => 2, paddingLeft: () => 0}, margin: [0, 0, 0, 4]} : null;
 }
 function kpis(el) {
@@ -195,6 +195,7 @@ function walk(el, out, inGrid) {
   if (cl.contains('eyebrow')) { out.push({text: textOf(el).toUpperCase(), fontSize: 6.8, color: C.muted, characterSpacing: .6, margin: [0, 4, 0, 2]}); return; }
   if (t === 'TABLE') { const x = table(el); if (x) out.push(x); return; }
   if (t === 'DL') { const x = kv(el); if (x) out.push(x); return; }
+  if (t === 'UL' && cl.contains('roster')) { out.push({table: {widths: [62, '*', 'auto'], body: [...el.children].map(li => [{text: textOf(li.querySelector('.seat')), fontSize: 7.5, color: C.muted}, {stack: [{text: textOf(li.querySelector('.who b, .who .vacant')), fontSize: 8.5}].concat(li.querySelector('.who small') ? [{text: textOf(li.querySelector('.who small')), fontSize: 7, color: C.muted}] : [])}, {text: textOf(li.querySelector('.r-term')), fontSize: 7, color: C.muted}])}, layout: {hLineWidth: (i, n) => i > 0 && i < n.table.body.length ? .5 : 0, vLineWidth: () => 0, hLineColor: () => C.line, paddingLeft: () => 0, paddingRight: () => 4}, margin: [0, 0, 0, 4]}); return; }
   if ((t === 'UL' || t === 'OL') && (cl.contains('findings') || cl.contains('results'))) { [...el.children].filter(li => !skip(li)).forEach(li => out.push(card(li))); return; }
   if (t === 'UL' || t === 'OL') { if (cl.contains('leg')) out.push(legend(el)); else { const x = list(el); if (x) out.push(x); } return; }
   if (cl.contains('kpis')) { out.push(kpis(el)); return; }
@@ -204,7 +205,8 @@ function walk(el, out, inGrid) {
   if (cl.contains('stackbar')) { out.push(stackbar(el)); return; }
   if (cl.contains('cmp')) { out.push({columns: [...el.querySelectorAll('.cmp-col')].map(c => ({stack: [{text: textOf(c.querySelector('.eyebrow')).toUpperCase(), fontSize: 6.5, color: C.muted}, {text: textOf(c.querySelector('.bill-v')), fontSize: 15, bold: true}, {text: textOf(c.querySelector('.cmp-save')), fontSize: 7.5, color: C.muted}]})), columnGap: 10, margin: [0, 2, 0, 8]}); return; }
   if (cl.contains('callout')) { out.push({table: {widths: [3, '*'], body: [[{text: '', fillColor: C.amber}, {stack: blocksOf(el), margin: [6, 4, 4, 4], fillColor: '#FFF8EC'}]]}, layout: 'noBorders', margin: [0, 2, 0, 10]}); return; }
-  if (cl.contains('profiles')) { out.push(grid(el, 3)); return; }
+  if (cl.contains('profiles') || cl.contains('officers')) { out.push(grid(el, 3)); return; }
+  if (cl.contains('gov-grid')) { out.push(grid(el, 2)); return; }
   if (cl.contains('addr-grid') || cl.contains('cards') || cl.contains('two') || cl.contains('st-wrap')) { out.push(grid(el, 2)); return; }
   if (cl.contains('card') || cl.contains('prof') || cl.contains('fd') || cl.contains('arg') || cl.contains('g-term') || cl.contains('trend-box') || cl.contains('calc')) { out.push(card(el)); return; }
   if (cl.contains('explain')) { const kids = [...el.children].filter(x => !skip(x)); const fig = kids.find(k => k.tagName.toLowerCase() === 'svg'); const txt = kids.filter(k => k !== fig).flatMap(k => blocksOf(k));

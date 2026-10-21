@@ -92,7 +92,7 @@ def contracts_page(out_dir):
     return f'''<div class="page tax">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Public Money · Contracts</span><h1>Who gets the contracts</h1>
     <p class="lede">The big contracts Bay County and its cities approved since October 2022: who won them, how they were awarded, which ones grew, and who the county actually paid the most.</p></div>
-    <div class="stamp"><button type="button" class="pdf-btn" id="pdf"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 12v2h10v-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Export PDF</button><span>Agendas Oct 2022 to Oct 2026<br>Research compiled Oct 20, 2026</span></div></header>
+    <div class="stamp"><button type="button" class="pdf-btn" id="pdf"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 12v2h10v-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Export PDF</button><span>Agendas Oct 2022 to Oct 2026<br>Data updated Oct 20, 2026</span></div></header>
   <section class="explain"><div class="ex-txt"><span class="eyebrow">The simple version</span><h2>How a government picks a contractor</h2>
     <ol class="ex-steps">
       <li><b>Big purchases must be bid.</b> Above a dollar limit ($150,000 for the county, $100,000 for Panama City), the government advertises the job and usually takes the lowest qualified bid.</li>

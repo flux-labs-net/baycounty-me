@@ -50,7 +50,7 @@ def votes_page(out_dir):
     return f'''<div class="page tax">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Accountability · Votes</span><h1>How they voted</h1>
     <p class="lede">Budgets, tax rates, big contracts, land deals and borrowing are decided by recorded votes. Here's how each elected official voted on the money decisions since 2024, from official minutes.</p></div>
-    <div class="stamp"><button type="button" class="pdf-btn" id="pdf"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 12v2h10v-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Export PDF</button><span>Minutes Jan 2024 to Oct 2026<br>Research compiled Oct 20, 2026</span></div></header>
+    <div class="stamp"><button type="button" class="pdf-btn" id="pdf"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 12v2h10v-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Export PDF</button><span>Minutes Jan 2024 to Oct 2026<br>Data updated Oct 20, 2026</span></div></header>
   <section class="explain"><div class="ex-txt"><span class="eyebrow">The simple version</span><h2>Reading the votes</h2>
     <ol class="ex-steps">
       <li><b>Most votes are unanimous.</b> Many items pass 5-0, often together on a "consent agenda" with no discussion. A unanimous vote still means every member approved it.</li>
