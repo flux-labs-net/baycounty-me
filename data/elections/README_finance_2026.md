@@ -36,8 +36,8 @@ Totals for all 36 candidates:
    - Expenditures: all E items, including refunds to contributors, distributions and reimbursements.
 5. Classified contributors by the filer's code (I individual, B business, C/F/E committee, S self, O other). A code was changed only when it was plainly wrong:
    - An LLC or Inc coded as an individual became a business.
-   - A personal name coded as a business became an individual. These were Dougles B Dykes, Craig E Dye, Christopher B Forehand, Jorge L Gonzalez and Karen Bailey. A personal living trust was also treated as an individual.
-   - The candidate's own money filed under a name variant or the code I was recognized as self, using name variants and the same filed address. Examples: "Robert C Curti" for Carl Curti, "Fred G Manley", "Carlos Mario Sanchez", "Scott Heillmann", "Nicholas A Atkinson", "James Kirkland" and "David L. Lowery".
+   - A personal name coded as a business became an individual. This happened for five contributors. A personal living trust was also treated as an individual. Their names are not published, and the build script stores them only as hashes.
+   - The candidate's own money filed under a name variant or the code I was recognized as self, using name variants and the same filed address (for example a middle initial added, a misspelling, or a full first name instead of a nickname).
    - Same-surname relatives at other addresses stayed individuals.
    - A church and a charitable group were coded as other.
    - "Press Print Graphics", coded S, was coded as a business.

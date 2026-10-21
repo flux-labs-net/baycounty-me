@@ -1,33 +1,59 @@
 import re
+# Private people are never named in this repo: corrections that concern an individual contributor or payee are keyed
+# by name_hash() of the lowercased filed name (sha256, first 20 hex digits). Candidates, businesses and groups stay readable.
+import hashlib
+
+
+def name_hash(name):
+    return hashlib.sha256(re.sub(r'\s+', ' ', (name or '')).strip().lower().rstrip('.').encode()).hexdigest()[:20]
+
+
 # contributor-type corrections keyed on lowercased filed name (applies across candidates)
 TYPE_OVERRIDE = {
-    # personal names filed as business (B) -> individual (aggregated only)
-    'dougles b dykes': 'individual', 'craig e dye': 'individual', 'christopher b forehand': 'individual',
-    'jorge l gonzalez': 'individual', 'karen bailey': 'individual',
-    # personal trust -> individual (site policy, as in data/campaign)
-    'allen living trust': 'individual',
-    # non-business organizations
-    'pentecoastal temple church': 'other', 'panama city beach charitable g': 'other',
-    # business coded S (self)
+    'pentecoastal temple church': 'other',
+    'panama city beach charitable g': 'other',
     'press print graphics': 'business',
-    # candidate (self) filed under a variant name
-    'scott heillmann': 'self', 'robert c curti': 'self', 'robert curti': 'self', 'robert carl curti': 'self',
-    'carlos mario sanchez': 'self', 'fred g manley': 'self',
-    # same-surname relatives in other states, coded I; keep as individuals (not self)
-    'carlos a sanchez': 'individual', 'carlos andres sanchez': 'individual',
+    'scott heillmann': 'self',
+    'robert c curti': 'self',
+    'robert curti': 'self',
+    'robert carl curti': 'self',
+    'carlos mario sanchez': 'self',
+    'fred g manley': 'self',
 }
+# personal names, a personal trust and same-surname relatives filed as a business or as the candidate -> individual (aggregated only)
+TYPE_OVERRIDE_HASHED = {h: 'individual' for h in {
+    '4c750efdc83032567807', '681d1e177db4817dd420', '68549651f17e777a789f', '6f505279c5654e235a5e',
+    '6fefd5516525a16b7475', 'a347e3265778acaed37a', 'b74c51f043b3b0326bf3', 'd799d3b9dafdc7188d50',
+}}
 FIRST_ALIAS = {'dave': 'david', 'jamie': 'james', 'nick': 'nicholas', 'steve': 'steven'}
-_persons = """Adrien A Rivard|Allen G Bense|Arthur Cullen|Beverly Wall|Beverly Walls|Brad Tilghman|Brian R Graninger|Brittany Rivas|Carla K Dykes|Casey Miller|
-Cassandra Smith|Charles G Lindsey|Charles H Coram|Charles Handrop|Charles W Roberts|Chase A Curti|Christopher B Forehand|Christopher C Cramer|Clara Young Pease|
-Clay S Cox|Clyde A Mills|Craig E Dye|Crystal Michel|Darrell Rizzuto|David L Trepanier|David S Barger|David Spencer|Dennis Isadore|Derek Clay McDavid|Dominck Hughes|
-Dominick Hughes|Dominique Hughes|Douglas B Dykes|Edward Wachtfeitl|Frank A Hall|George Roberts|Gerald Quave Jr.|Greg Abrams|Greg Brudnicki|Jacksonf Cole Davis|
-Jacob Lethio|James Brooks|James D Morris|James E Ray|Jason L Toole|Jay M Trumbull Sr|Jerry E Bolin|John J Trubia|John Stephen Wilson|Jorge L Gonzalez|Karen Verhonich|
-Keith Gross|Kristy Strickland|Kyle Shoots|Larry R Basford|Lauren Dodge|Marsha Greer|Mckenzie Duvall|Michael L Nichols|Michael R Bennett|Peter C Overstreet|
-Raymond W Greer|Rex reid|Ronald J Leake|Ross M Clemons|Russell S Prothro|Steve Nail|Stoney Thompson|Thomas Lee Furr|Todd Haney|Troy Syfrett|Walt Eisenbrown|
-William Cramer|William G Harrison, Jr.|Zachary B Taylor|JANET Waves|
-Carrie Ruscoe|Cindy Hamre|David L. Lowery|Jackie Kennington|Karen Custer|Ralph Hammond|Robert Carl Curti|Robert Carroll|Scott Duvall|Scott Heilmann|Shannon Aufdencamp|
-Steve Cox|Steven Moss|Timothy Campbell|Tracy Smith"""
-PAYEE_PERSON = {re.sub(r'\s+', ' ', x).strip().lower() for x in _persons.split('|')}
+# expenditure payees who are private people (combined into "Payments to individuals"), by name_hash()
+PAYEE_PERSON_HASHED = {
+    '0001ec87689b9809504a', '140fd67b6d38d4813b89', '1a6a3269fcb2a896b18d', '277db771e2bb08c94b00',
+    '2b109214dc97806419a5', '2ccc5ebf78222212f965', '2fe5fda52158b48788d8', '32807108f5b8351e5fab',
+    '370c44f8f4c819229d27', '38823171db957ab74136', '39240fdde4f34365b158', '3a6f88d680b13c38523e',
+    '3c070bb62742321dc189', '3c80fa9f1c40b6231ce3', '3d9a3533f920851bcca9', '404103360c0a96fc84b4',
+    '440d97b4954d3d99720b', '4c750efdc83032567807', '4cb13ef6a70d6702b8d9', '508266b4cde89dc753a6',
+    '50e4ff613888bb727710', '6029debaaade42add44a', '612988e4c60c59bbe7bc', '615879adab161d981b3a',
+    '61884e891ecb9ce8adb1', '66aa8596e64a9bfcf471', '6705de58254086a13b10', '6a8f00e8fe83b5dd4de2',
+    '6c3c09677c65b2d1b208', '6e00bcf42ec03bc8a4b0', '6e8158fc2b02a31d72c0', '6fefd5516525a16b7475',
+    '705f5e1f1af324e47935', '76549c8034f8928d49a3', '7a3e630cbcdc0cb0190a', '7b4284a2b0ab9beab7d4',
+    '7cd0f72f4d4fd3214bca', '7e037e489b5aafd599ab', '80752b316858ea3d24c0', '8441df6d8a2c17a9a403',
+    '8736f1784286b58ea333', '87c592defa6446d24c2b', '89ad8c98d76902814cf6', '8c35683e4c976a9bfe21',
+    '8fee435e63da8ce79905', '91fdf67a500707d848c9', '92f9383549a5e2ea7328', '954ed3ad0668c739c28b',
+    '96669c45909878e88c4b', '9a62b9a98745518ad9d4', 'a08ab4be11a39adc8be8', 'a24f378ceadf3f804277',
+    'a331c1602b3d18064120', 'a9d052159e641b086f89', 'ae6584d538afe35acc71', 'af005016b666d01c31e0',
+    'b5e1a8a6de3d52c05536', 'b74c51f043b3b0326bf3', 'b93abb212a9c2f15c42f', 'bf46f4db763af0076bc6',
+    'c45964e2eabc23377a1b', 'c69d55beb7f1536f3dde', 'c9e09a9a97a8bb33828e', 'cc27f89f866732b0303e',
+    'ce0cd6fa6214ca3f2cbb', 'd63c32f71c484bff434b', 'db3dc1013800ccd0844c', 'e0c3e64b51356a6c595e',
+    'e1917611dfcd9136de18', 'e45b55f9005c478ec241', 'e51d4711648c6718c304', 'e8ada251fc76d1aad21c',
+    'ec0460e86f7e19e05d06', 'ee63ac80946320b3f90a', 'f356564eb01917158b55', 'fdc396cf697b602e3356',
+}
+# payees who are candidates (public), readable
+PAYEE_PERSON = {
+    'carrie ruscoe', 'cindy hamre', 'david l. lowery', 'jackie kennington', 'karen custer',
+    'ralph hammond', 'robert carl curti', 'robert carroll', 'scott duvall', 'scott heilmann',
+    'shannon aufdencamp', 'steve cox', 'steven moss', 'timothy campbell', 'tracy smith',
+}
 PAYEE_ORG = set()
 _canon = [
     (r'supervisor of elect|supv of elections|bay county soe|bay co supervisor', 'Bay County Supervisor of Elections'),
