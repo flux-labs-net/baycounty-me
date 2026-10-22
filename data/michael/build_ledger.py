@@ -22,13 +22,17 @@ proj = get('v2/PublicAssistanceFundedProjectsDetails', "disasterNumber eq 4399 a
 apps = {a['applicantId']: a['applicantName'] for a in get('v1/PublicAssistanceApplicants', 'disasterNumber eq 4399')}
 CAT = {'A': 'Debris removal', 'B': 'Emergency protective measures', 'C': 'Roads and bridges', 'D': 'Water control',
        'E': 'Buildings and equipment', 'F': 'Utilities', 'G': 'Parks and other', 'Z': 'Management costs'}
+if not proj:
+    raise SystemExit('OpenFEMA returned no projects; keeping the existing file.')
 rows = []
 for p in proj:
     rows.append({'a': apps.get(p.get('applicantId'), p.get('applicantId')), 'pw': p.get('pwNumber'), 't': (p.get('applicationTitle') or p.get('projectTitle') or '').strip(),
                  'c': p.get('damageCategoryCode'), 'f': round(p.get('federalShareObligated') or 0, 2), 'e': round(p.get('projectAmount') or 0, 2),
                  'd1': (p.get('firstObligationDate') or '')[:10], 'd2': (p.get('lastObligationDate') or '')[:10],
                  'st': p.get('projectProcessStep') or '', 'sz': p.get('projectSize') or ''})
-rows.sort(key=lambda r: -r['f'])
+# Ties broken by applicant and project number, so a rerun with the same data writes the same file (the weekly
+# refresh workflow commits only when the file changes).
+rows.sort(key=lambda r: (-r['f'], str(r['a']), str(r['pw'])))
 out = {'source': 'OpenFEMA PublicAssistanceFundedProjectsDetails (v2) and PublicAssistanceApplicants (v1), DR-4399-FL',
        'source_url': f"{API}/v2/PublicAssistanceFundedProjectsDetails?$filter=disasterNumber eq 4399 and county eq 'Bay County'",
        'categories': CAT, 'rows': rows}

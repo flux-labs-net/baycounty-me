@@ -167,19 +167,8 @@ MENU_JS = '''(() => {
 '''
 
 
-DEEPLINK_JS = r"""
-(() => { // ?gov= / ?cra= open a page already filtered (used by the government pages)
-  const P = new URLSearchParams(location.search), gov = P.get('gov'), cra = P.get('cra');
-  if (!gov && !cra) return;
-  const retry = fn => { let n = 0; const t = setInterval(() => { if (fn() || ++n > 60) clearInterval(t); }, 150); };
-  if (gov) document.querySelectorAll('select[data-param="gov"]').forEach(el => retry(() => {
-    const nm = x => x.replace(/^City of /i, '').replace(/ BOCC$/i, '').trim().toLowerCase();
-    const o = [...el.options].find(o => nm(o.value) === nm(gov) || nm(o.textContent) === nm(gov)); if (!o) return false;
-    el.value = o.value; el.dispatchEvent(new Event('input', {bubbles: true})); el.dispatchEvent(new Event('change', {bubbles: true}));
-    if (location.hash) document.querySelector(location.hash)?.scrollIntoView(); return true; }));
-  if (cra) retry(() => { const b = document.querySelector(`#craChips [data-c="${CSS.escape(cra)}"]`); if (!b) return false; b.click(); return true; });
-})();
-"""
+# Shared helpers (window.BCM): URL state for data-param controls (?gov= etc.) and announce. Tables use tables.js.
+DEEPLINK_JS = open(os.path.join(ROOT, 'site_helpers.js')).read()
 
 
 TERM_JS = r"""
@@ -348,6 +337,7 @@ def _layout(title, desc, path, body, extra_head=''):
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/_vercel/speed-insights/script.js"></script>
 <script src="/assets/tables.js" defer></script>
+<script src="/assets/site.js" defer></script>
 {extra_head}
 </head>
 <body>
@@ -357,7 +347,6 @@ def _layout(title, desc, path, body, extra_head=''):
 {body}
 </main>
 {FOOTER.replace('__UPDATED__', ('Page updated ' + nice_date(last_updated(path)) + ' · ') if path not in ('/404',) else '')}
-<script src="/assets/site.js" defer></script>
 <script src="/assets/report.js" defer></script>
 </body>
 </html>

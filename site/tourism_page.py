@@ -103,8 +103,30 @@ def bedtax_page(out_dir):
 <script src="/assets/bedtax.js" defer></script>'''
 
 
+def surtax_id(p):  # stable id for ?p= links: the county GIS object id (points: p<id>, road segments: l<first id>)
+    return f"p{p['gis_objectid']}" if p.get('gis_objectid') is not None else (f"l{p['gis_objectids'][0]}" if p.get('gis_objectids') else '')
+
+
+GIS_REC = 'https://services1.arcgis.com/QB0VWfqR9MD4lF0F/arcgis/rest/services/Surtax_Projects/FeatureServer/'
+
+
+def _gis_docs():
+    """Project web pages (WEBSITE field) from the county GIS snapshot made by data/surtax/fetch_gis.py, keyed by name and city."""
+    k = lambda n, c: (re.sub(r'\W+', '', (n or '').lower()), (c or '').replace('City of ', ''))
+    try:
+        g = json.load(open(os.path.join(HERE, '..', 'data', 'surtax', 'gis_projects.json')))
+    except FileNotFoundError:
+        return {}, k
+    out = {}
+    for x in g['projects']:
+        if x.get('doc'):
+            out.setdefault(k(x['name'], x['gov']), set()).add(x['doc'])
+    return {kk: next(iter(v)) for kk, v in out.items() if len(v) == 1}, k
+
+
 def surtax_page(out_dir):
     d = load(); inf, sch = d['infra_surtax'], d['school_surtax']
+    docs, dk = _gis_docs()
     projs = []
     from opendata import schedule_by_project
     sb = schedule_by_project()
@@ -112,9 +134,14 @@ def surtax_page(out_dir):
         if p.get('lat') is None:
             continue
         sx = sb.get(pi)  # county program schedule lines matched to this project (programmed dollars by year)
-        projs.append({**({'sp': sum(x['programmed_total'] or 0 for x in sx), 'sfy': {k: v for x in sx for k, v in x['fy_amounts'].items()}, 'su': sx[0]['source_url']} if sx else {}), 'i': pi,'n': p['name'], 'g': p['government'], 'c': p.get('category') or 'Other', 's': p['status'], 'p': p.get('pct_complete'),
+        projs.append({**({'sp': sum(x['programmed_total'] or 0 for x in sx), 'sfy': {k: v for x in sx for k, v in x['fy_amounts'].items()}, 'su': sx[0]['source_url']} if sx else {}), 'i': pi, 'id': surtax_id(p), 'n': p['name'], 'g': p['government'], 'c': p.get('category') or 'Other', 's': p['status'], 'p': p.get('pct_complete'),
                       'k': p.get('programmed_cost') or p.get('promised_cost'), 'y': p.get('fiscal_years') or '', 'x': round(p['lng'], 5), 'yy': round(p['lat'], 5),
-                      'd': (p.get('description') or '')[:260]})
+                      'd': (p.get('description') or '')[:260],
+                      # GIS record: [layer, object ids]; the page rebuilds p['source_url'] from it (checked below)
+                      'r': [0, [p['gis_objectid']]] if p.get('gis_objectid') is not None else [1, p.get('gis_objectids') or []],
+                      **({'w': docs[dk(p['name'], p['government'])]} if dk(p['name'], p['government']) in docs else {})})
+        r = projs[-1]['r']
+        assert p['source_url'] == GIS_REC + f"{r[0]}/query?where=" + (f"OBJECTID%3D{r[1][0]}" if r[0] == 0 else "OBJECTID+IN+(" + ",".join(map(str, r[1])) + ")") + "&outFields=*&outSR=4326&f=json", p['source_url']
     json.dump(projs, open(os.path.join(out_dir, 'data', 'surtax-projects.json'), 'w'), separators=(',', ':'))
     rules = inf['rules']
     cols = {c['fy']: c['amount'] for c in inf['collections']}
@@ -137,16 +164,16 @@ def surtax_page(out_dir):
       <li><b>It can only build things.</b> The infrastructure money goes to roads, bridges, dirt-road paving, drainage and safety projects. The school money goes to school construction, renovation, security and technology.</li>
       <li><b>The county and cities split the infrastructure tax</b> by a state formula based on population.</li>
     </ol></div></section>
-  <section class="tx-sec"><div class="sec-hd"><h2 id="map-h">Infrastructure projects on the county map</h2><span class="muted" id="stCount"></span></div>
+  <section class="tx-sec"><div class="sec-hd"><h2 id="map-h">Infrastructure projects on the county map</h2><span class="muted" id="stCount" aria-live="polite"></span></div>
     <div class="filters-row">
-      <input id="stQ" type="search" placeholder="Search projects or roads" aria-label="Search projects">
+      <input id="stQ" type="search" placeholder="Search projects or roads" aria-label="Search projects" data-param="q">
       <select id="stG" aria-label="Government" data-param="gov"><option value="">All governments</option></select>
-      <select id="stC" aria-label="Type"><option value="">All types</option></select>
-      <select id="stS" aria-label="Status"><option value="">Any status</option><option value="completed">Completed</option><option value="in_progress">In progress</option><option value="not_started">Not started</option></select>
+      <select id="stC" aria-label="Type" data-param="type"><option value="">All types</option></select>
+      <select id="stS" aria-label="Status" data-param="status"><option value="">Any status</option><option value="completed">Completed</option><option value="in_progress">In progress</option><option value="not_started">Not started</option></select>
       <select id="stO" aria-label="Sort"><option value="new">Newest first</option><option value="az">Name A to Z</option><option value="big">Largest cost</option></select>
       <button type="button" class="tt-csv" id="stCsv">Download CSV</button>
     </div>
-    <div class="st-wrap"><div class="st-mapcol"><div class="st-mapbox"><svg id="stMap" viewBox="0 0 400 300" role="img" aria-label="Map of sales tax projects. Select a project in the list or tap a dot for details."></svg>
+    <div class="st-wrap"><div class="st-mapcol"><div class="st-mapbox"><svg id="stMap" viewBox="0 0 400 300" role="group" aria-label="Map of sales tax projects. Each dot is a project: tab to a dot and press Enter, or pick one in the list, for details."></svg>
         <div class="st-zoom print-hide"><button type="button" id="stIn" aria-label="Zoom in">+</button><button type="button" id="stOut" aria-label="Zoom out">−</button><button type="button" id="stAll" class="st-all">Show all</button></div></div>
         <div class="st-sel" id="stSel" hidden aria-live="polite"></div></div>
       <ol class="st-list" id="stList"></ol></div>

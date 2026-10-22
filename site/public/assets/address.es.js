@@ -1,5 +1,7 @@
 (() => {
-const D = {"taxdist":{"2":"Callaway","02":"Callaway","6":"Lynn Haven","06":"Lynn Haven","8":"Mexico Beach","08":"Mexico Beach","10":"Parker","13":"Panama City Beach","16":"Panama City","20":"Springfield","31":"Panama City - Downtown DIB","55":"unincorporated","56":"unincorporated - beach area"},"craAgency":{"Downtown Extension CRA":"Panama City CRA","Downtown N Extension CRA":"Panama City CRA","Downtown North CRA":"Panama City CRA","St. Andrews CRA":"Panama City CRA","St Andrews CRA - West Expansion Area":"Panama City CRA","St Andrews CRA - East Expansion Area":"Panama City CRA","Millville CRA":"Panama City CRA","Downtown CRA / DIB":"Panama City CRA","Front Beach Road CRA":"Panama City Beach CRA","Pier Park CRA":"Panama City Beach CRA","Lynn Haven CRA":"Lynn Haven CRA","Callaway CRA":"Callaway CRA","Springfield CRA":"Springfield CRA","Parker CRA":"Parker CRA"},"cra":{"Panama City CRA":{"spent":14042979,"n":73},"Lynn Haven CRA":{"spent":1800964,"n":30},"Panama City Beach CRA":{"spent":80404359,"n":47},"Callaway CRA":{"spent":648087,"n":7},"Springfield CRA":{"spent":60017,"n":9},"Parker CRA":{"spent":148377,"n":2}},"districts":{"Panama City":{"label":"Panama City","stack":["bay_county_general","county_mosquito_control","school_rle","school_discretionary","school_capital_outlay","nwfwmd","city_panama_city"],"total":15.7938},"Panama City - Downtown DIB":{"label":"Panama City, downtown improvement district","stack":["bay_county_general","county_mosquito_control","school_rle","school_discretionary","school_capital_outlay","nwfwmd","city_panama_city","pc_downtown_improvement_board"],"total":18.7938},"Panama City Beach":{"label":"Panama City Beach","stack":["bay_county_general","beach_mosquito","school_rle","school_discretionary","school_capital_outlay","nwfwmd"],"total":10.9139},"Lynn Haven":{"label":"Lynn Haven","stack":["bay_county_general","county_mosquito_control","school_rle","school_discretionary","school_capital_outlay","nwfwmd","city_lynn_haven"],"total":15.0439},"Callaway":{"label":"Callaway","stack":["bay_county_general","county_mosquito_control","school_rle","school_discretionary","school_capital_outlay","nwfwmd","city_callaway"],"total":13.6939},"Springfield":{"label":"Springfield","stack":["bay_county_general","county_mosquito_control","school_rle","school_discretionary","school_capital_outlay","nwfwmd","city_springfield"],"total":15.8589},"Parker":{"label":"Parker","stack":["bay_county_general","county_mosquito_control","school_rle","school_discretionary","school_capital_outlay","nwfwmd","city_parker"],"total":13.9939},"Mexico Beach":{"label":"Mexico Beach","stack":["bay_county_general","county_mosquito_control","school_rle","school_discretionary","school_capital_outlay","nwfwmd","city_mexico_beach"],"total":16.2439},"unincorporated":{"label":"Unincorporated Bay County (not in a city)","stack":["bay_county_general","county_fire_mstu","county_mosquito_control","school_rle","school_discretionary","school_capital_outlay","nwfwmd"],"total":12.3739},"unincorporated - beach area":{"label":"Unincorporated beach area (outside PCB city limits)","stack":["bay_county_general","county_fire_mstu","beach_mosquito","school_rle","school_discretionary","school_capital_outlay","nwfwmd"],"total":12.2939}},"auth":{"bay_county_general":{"n":"Bay County Commission","g":"county","school":false,"m":5.4362},"county_fire_mstu":{"n":"County fire service (outside cities)","g":"countysvc","school":false,"m":1.38},"county_mosquito_control":{"n":"County mosquito control","g":"countysvc","school":false,"m":0.2},"school_rle":{"n":"Schools: state-required rate","g":"school","school":true,"m":3.089},"school_discretionary":{"n":"Schools: local operating","g":"school","school":true,"m":0.748},"school_capital_outlay":{"n":"Schools: buildings and buses","g":"school","school":true,"m":1.5},"nwfwmd":{"n":"NW Florida Water Management District","g":"other","school":false,"m":0.0207},"beach_mosquito":{"n":"Beach Mosquito Control District","g":"other","school":false,"m":0.12},"pc_downtown_improvement_board":{"n":"Downtown Improvement Board","g":"other","school":false,"m":3.0},"city_callaway":{"n":"City of Callaway","g":"city","school":false,"m":2.7},"city_lynn_haven":{"n":"City of Lynn Haven","g":"city","school":false,"m":4.05},"city_mexico_beach":{"n":"City of Mexico Beach","g":"city","school":false,"m":5.25},"city_panama_city":{"n":"City of Panama City","g":"city","school":false,"m":4.7999},"city_parker":{"n":"City of Parker","g":"city","school":false,"m":3.0},"city_springfield":{"n":"City of Springfield","g":"city","school":false,"m":4.865}},"groups":[["school","Escuelas"],["county","Bay County"],["city","Su ciudad"],["countysvc","Bomberos y mosquitos del condado"],["other","Distritos especiales"]],"fy":"FY2026","second2026":26411,"navLabel":{"STWR":"Tarifa de aguas pluviales del condado de Bay","STWC":"Tarifa de aguas pluviales del condado de Bay (comercial)","ALSL1":"Contribución especial de alumbrado público","BOCA":"Contribución especial de alumbrado público","OERR":"Contribución especial para mejoras de calles","PPCD":"Contribución especial del área de Pier Park","PCF":"Contribución especial de bomberos de Panama City","PBF":"Contribución especial de bomberos de Panama City Beach","PBSW":"Contribución especial de aguas pluviales de Panama City Beach","PBCRA":"Contribución especial de la CRA de Front Beach Road","LN":"Contribución especial de aguas pluviales de Lynn Haven","SF":"Contribución especial de bomberos de Springfield","LPWH1":"Contribución del distrito de desarrollo comunitario","SB":"Contribución de distrito especial","PW":"Contribución del distrito de alumbrado","WMH":"Contribución del distrito de alumbrado","TWIN":"Contribución de distrito especial"},"exNames":{"01":"Exención de vivienda principal (homestead)","02":"Exención adicional de vivienda principal","05":"Veterano con discapacidad total y permanente","35":"Veterano con discapacidad, $5,000","80":"Descuento para veteranos discapacitados en combate, 65+","38":"Militar desplegado","06":"Veterano discapacitado en silla de ruedas","41":"Socorrista discapacitado","08":"Persona con discapacidad total y permanente","03":"Persona mayor, condado","39":"Persona mayor de larga residencia, condado","33":"Viuda","32":"Viudo","34":"Persona con discapacidad, $5,000","31":"Persona ciega","81":"Vivienda para padres o abuelos","20":"Government property","09":"Churches, charities and other nonprofits","43":"Affordable housing (state-certified)","15":"Affordable housing (nonprofit)","13":"Nonprofit homes for the aged","17":"Charter schools","22":"Economic development incentive (county)","16":"Private schools","12":"Hospitals and nursing homes","36":"Conservation land"}};
+const D = {"taxdist":{"2":"Callaway","02":"Callaway","6":"Lynn Haven","06":"Lynn Haven","8":"Mexico Beach","08":"Mexico Beach","10":"Parker","13":"Panama City Beach","16":"Panama City","20":"Springfield","31":"Panama City - Downtown DIB","55":"unincorporated","56":"unincorporated - beach area"},"craAgency":{"Downtown Extension CRA":"Panama City CRA","Downtown N Extension CRA":"Panama City CRA","Downtown North CRA":"Panama City CRA","St. Andrews CRA":"Panama City CRA","St Andrews CRA - West Expansion Area":"Panama City CRA","St Andrews CRA - East Expansion Area":"Panama City CRA","Millville CRA":"Panama City CRA","Downtown CRA / DIB":"Panama City CRA","Front Beach Road CRA":"Panama City Beach CRA","Pier Park CRA":"Panama City Beach CRA","Lynn Haven CRA":"Lynn Haven CRA","Callaway CRA":"Callaway CRA","Springfield CRA":"Springfield CRA","Parker CRA":"Parker CRA"},"cra":{"Panama City CRA":{"spent":14042979,"n":73},"Lynn Haven CRA":{"spent":1800964,"n":30},"Panama City Beach CRA":{"spent":80404359,"n":47},"Callaway CRA":{"spent":648087,"n":7},"Springfield CRA":{"spent":60017,"n":9},"Parker CRA":{"spent":148377,"n":2}},"districts":{"Panama City":{"label":"Panama City","stack":["bay_county_general","county_mosquito_control","school_rle","school_discretionary","school_capital_outlay","nwfwmd","city_panama_city"],"total":15.7938},"Panama City - Downtown DIB":{"label":"Panama City, downtown improvement district","stack":["bay_county_general","county_mosquito_control","school_rle","school_discretionary","school_capital_outlay","nwfwmd","city_panama_city","pc_downtown_improvement_board"],"total":18.7938},"Panama City Beach":{"label":"Panama City Beach","stack":["bay_county_general","beach_mosquito","school_rle","school_discretionary","school_capital_outlay","nwfwmd"],"total":10.9139},"Lynn Haven":{"label":"Lynn Haven","stack":["bay_county_general","county_mosquito_control","school_rle","school_discretionary","school_capital_outlay","nwfwmd","city_lynn_haven"],"total":15.0439},"Callaway":{"label":"Callaway","stack":["bay_county_general","county_mosquito_control","school_rle","school_discretionary","school_capital_outlay","nwfwmd","city_callaway"],"total":13.6939},"Springfield":{"label":"Springfield","stack":["bay_county_general","county_mosquito_control","school_rle","school_discretionary","school_capital_outlay","nwfwmd","city_springfield"],"total":15.8589},"Parker":{"label":"Parker","stack":["bay_county_general","county_mosquito_control","school_rle","school_discretionary","school_capital_outlay","nwfwmd","city_parker"],"total":13.9939},"Mexico Beach":{"label":"Mexico Beach","stack":["bay_county_general","county_mosquito_control","school_rle","school_discretionary","school_capital_outlay","nwfwmd","city_mexico_beach"],"total":16.2439},"unincorporated":{"label":"Unincorporated Bay County (not in a city)","stack":["bay_county_general","county_fire_mstu","county_mosquito_control","school_rle","school_discretionary","school_capital_outlay","nwfwmd"],"total":12.3739},"unincorporated - beach area":{"label":"Unincorporated beach area (outside PCB city limits)","stack":["bay_county_general","county_fire_mstu","beach_mosquito","school_rle","school_discretionary","school_capital_outlay","nwfwmd"],"total":12.2939}},"auth":{"bay_county_general":{"n":"Bay County Commission","g":"county","school":false,"m":5.4362},"county_fire_mstu":{"n":"County fire service (outside cities)","g":"countysvc","school":false,"m":1.38},"county_mosquito_control":{"n":"County mosquito control","g":"countysvc","school":false,"m":0.2},"school_rle":{"n":"Schools: state-required rate","g":"school","school":true,"m":3.089},"school_discretionary":{"n":"Schools: local operating","g":"school","school":true,"m":0.748},"school_capital_outlay":{"n":"Schools: buildings and buses","g":"school","school":true,"m":1.5},"nwfwmd":{"n":"NW Florida Water Management District","g":"other","school":false,"m":0.0207},"beach_mosquito":{"n":"Beach Mosquito Control District","g":"other","school":false,"m":0.12},"pc_downtown_improvement_board":{"n":"Downtown Improvement Board","g":"other","school":false,"m":3.0},"city_callaway":{"n":"City of Callaway","g":"city","school":false,"m":2.7},"city_lynn_haven":{"n":"City of Lynn Haven","g":"city","school":false,"m":4.05},"city_mexico_beach":{"n":"City of Mexico Beach","g":"city","school":false,"m":5.25},"city_panama_city":{"n":"City of Panama City","g":"city","school":false,"m":4.7999},"city_parker":{"n":"City of Parker","g":"city","school":false,"m":3.0},"city_springfield":{"n":"City of Springfield","g":"city","school":false,"m":4.865}},"groups":[["school","Escuelas"],["county","Bay County"],["city","Su ciudad"],["countysvc","Bomberos y mosquitos del condado"],["other","Distritos especiales"]],"fy":"FY2026","second2026":26411,"navLabel":{"STWR":"Tarifa de aguas pluviales del condado de Bay","STWC":"Tarifa de aguas pluviales del condado de Bay (comercial)","ALSL1":"Contribución especial de alumbrado público","BOCA":"Contribución especial de alumbrado público","OERR":"Contribución especial para mejoras de calles","PPCD":"Contribución especial del área de Pier Park","PCF":"Contribución especial de bomberos de Panama City","PBF":"Contribución especial de bomberos de Panama City Beach","PBSW":"Contribución especial de aguas pluviales de Panama City Beach","PBCRA":"Contribución especial de la CRA de Front Beach Road","LN":"Contribución especial de aguas pluviales de Lynn Haven","SF":"Contribución especial de bomberos de Springfield","LPWH1":"Contribución del distrito de desarrollo comunitario","SB":"Contribución de distrito especial","PW":"Contribución del distrito de alumbrado","WMH":"Contribución del distrito de alumbrado","TWIN":"Contribución de distrito especial"},"shards":{"ex":96,"nav":128},"govs":{"county":{"s":"Bay County","slug":"bay-county","c":"Bay County BOCC","f":"Bay County","cra":null,"b":true},"schools":{"s":"Bay District Schools","slug":"bay-district-schools","c":null,"f":"School Board of Bay County Florida","cra":null,"b":true},"pc":{"s":"Panama City","slug":"panama-city","c":"City of Panama City","f":"Panama City, City of","cra":"pc","b":true},"pcb":{"s":"Panama City Beach","slug":"panama-city-beach","c":"City of Panama City Beach","f":"Panama City Beach, City of","cra":"pcb","b":true},"lh":{"s":"Lynn Haven","slug":"lynn-haven","c":"City of Lynn Haven","f":"Lynn Haven, City of","cra":"lh","b":true},"cw":{"s":"Callaway","slug":"callaway","c":"City of Callaway","f":"Callaway, City of","cra":"cw","b":true},"sp":{"s":"Springfield","slug":"springfield","c":"City of Springfield","f":"Springfield, City of","cra":"sf","b":true},"parker":{"s":"Parker","slug":"parker","c":"City of Parker","f":"Parker, City Of","cra":"pk","b":true},"mb":{"s":"Mexico Beach","slug":"mexico-beach","c":"City of Mexico Beach","f":"Mexico Beach, City Of","cra":null,"b":true}},"craId":{"Panama City CRA":"pc","Panama City Beach CRA":"pcb","Lynn Haven CRA":"lh","Callaway CRA":"cw","Springfield CRA":"sf","Parker CRA":"pk"},"members":{"county":[["Clair Pease",52,1],["Daniel Raffield",32,0],["Doug Crosby",31,0],["Douglas Moore",56,0],["Robert Carroll",52,0],["Tommy Hamm",24,0],["William T. Dozier",24,0]],"pc":[["Allan Branch",76,4],["Brian Grainger",139,5],["Janice Lucas",124,16],["Jenna Haligas",64,3],["Josh Street",126,14],["Michael Rohan",42,28],["Robbie Hughes",64,15]],"pcb":[["Ethan Register",74,2],["Mark Sheldon",16,0],["Mary Coburn",81,11],["Michael Jarman",88,4],["Paul Casto",83,0],["Phil Chester",16,0],["Stuart Tettemer",71,6]],"lh":[["Dave Lowery",11,1],["Jamie Warrick",53,6],["Jesse Nelson",26,4],["Judy Tinder",24,12],["Judy Vandergrift",18,1],["Pat Perno",56,3],["Sam Peebles",54,5]],"cw":[["Bob Pelletier",36,5],["Bobby Birdsell",17,0],["David Griggs",41,0],["Kenneth L. Ayers, Jr.",41,0],["Pamn Henderson",41,0],["Scott Davis",16,1]],"sp":[["Cindy Hamre",58,0],["Jack Griffis",58,0],["Jackie Kennington",57,0],["Ralph Hammond",57,1],["Richard Chval",55,0]],"parker":[["Andrew Kelly",14,0],["John Haney",10,1],["Katy Bodiford",12,0],["Mark Rega",3,0],["Ron Chaple",14,0],["Tonya Barrow",7,7]],"mb":[["Erik Fosshage",6,1],["Jason Adams",10,0],["Jerry Smith",4,0],["Linda Hamilton",12,1],["Lisa Logan",3,0],["Richard Wolff",9,2],["Steve Cox",9,0],["Tim Linderman",4,0]],"schools":[["Ann Leonard",88,11],["Chris Moore",88,1],["Jerry Register",79,23],["Steve Moss",98,2],["Winston Chester",99,5]]},"elections":true};
+const X = {"website":"sitio web","tally":"{y} a favor · {n} en contra en votaciones sobre dinero registradas","campaign":"Dinero de campaña (en inglés) →","ballotH":"Boleta de 2026","ballot":"Vea las contiendas de 2026 de su zona (en inglés) →","whatif":"Pruebe otras cifras en la calculadora (en inglés) →","whatifA3":"Pruebe sus propias cifras (en inglés) →","hsH":"Sin exención de homestead","hs":"Esta vivienda no tiene exención de homestead (vivienda principal) en el registro de impuestos de 2026. Es lo normal en una vivienda de alquiler o una segunda casa. Si usted es el dueño y era su residencia permanente el 1 de enero, puede solicitarla ante el {pa}. Las solicitudes vencen el 1 de marzo para los impuestos de ese año.","pa":"Tasador de Propiedades del Condado de Bay (Property Appraiser)","exLink":"Sobre las exenciones (en inglés) →","nearCraH":"Gastos de la CRA a menos de media milla","nearStH":"Proyectos del impuesto sobre las ventas a menos de una milla","nearNone":"No hay ninguno registrado cerca.","craTotal":"{n} registros · {amt} gastados o comprometidos","stTotal":"{n} proyectos","more":"y {n} más","source":"Fuente","nearNote":"Las distancias se miden desde el punto de la dirección. No se muestran los registros de la CRA ubicados solo en algún punto del distrito ni las filas que no se cuentan en los totales de la CRA; el total en dólares suma el dinero gastado y comprometido.","seeCra":"Mapa y registro de la CRA (en inglés) →","seeSt":"Mapa de proyectos del impuesto sobre las ventas (en inglés) →","fail":"No se pudo cargar en este momento.","st_completed":"Terminado","st_in_progress":"En curso","st_not_started":"Sin empezar","st_unknown":"Estado desconocido","cs_Spent":"Gastado","cs_Committed":"Comprometido","cs_Budgeted":"Presupuestado","cs_Proposed":"Propuesto","l_page":"Resumen","l_contracts":"Contratos","l_meetings":"Reuniones","l_budget":"Presupuesto","l_alerts":"Alertas","l_records":"Solicitar un registro","l_michael":"Proyectos del huracán Michael","govNote":"Cada enlace abre la página (en inglés) filtrada para ese gobierno.","barLabel":"Reparto aproximado del impuesto a la propiedad: {parts}"};
+const fmt = (s, o) => s.replace(/\{(\w+)\}/g, (m, k) => o[k] ?? m);
 const GIS = 'https://gis.baycountyfl.gov/arcgis/rest/services';
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -234,15 +236,78 @@ async function load(f) {
   const pa = $('paLink');
   if (parcel?.PLINK) { pa.href = parcel.PLINK; pa.hidden = false; } else pa.hidden = true;
   if (parcel) parcel._ex = await loadEx(parcel.A1RENUM);
+  const govKey = cityKey(cityName);
   renderTax(parcel, cityName);
   renderProp(parcel);
   renderReps(comm, local, sb, house, senate, ush, cityName);
   renderSchools(es, ms, hs);
   renderCra(cra);
   renderSafe(flood, evac, mosq, tdc, fire, lib, park);
+  renderGovLinks(govKey);
   loadDev(pt, cityName);
+  loadNear(pt, govKey);
   drawMap(pt, cityName, cra?.[0]?.CRA);
 }
+/* The government that runs this address: its city, or the County Commission outside city limits. Keys match govs.py. */
+const cityKey = cityName => (cityName && Object.keys(D.govs).find(k => D.govs[k].s === cityName)) || 'county';
+
+/* GIS representative name -> the name used in recorded votes (same government only; one clear match or none).
+   Matches last names and first names where one starts the other (Doug/Douglas), ignoring initials and Jr./Sr. */
+function normName(s) { return String(s || '').toLowerCase().replace(/[.,]/g, ' ').split(/\s+/).filter(w => w.length > 1 && !/^(jr|sr|ii|iii|iv)$/.test(w)); }
+function matchMember(rep, gov) {
+  const a = normName(rep); if (a.length < 2) return null;
+  const hits = (D.members[gov] || []).filter(([n]) => { const b = normName(n); return b.length > 1 && b[b.length - 1] === a[a.length - 1] && (b[0].startsWith(a[0]) || a[0].startsWith(b[0])); });
+  return hits.length === 1 ? hits[0] : null;
+}
+
+/* Links to this government's records, filtered with the params each page already reads (see gov_pages.py). */
+function govRecordLinks(k) {
+  const g = D.govs[k]; if (!g) return '';
+  const L = [[`/governments/${g.slug}`, X.l_page], g.c ? [`/public-money/contracts?gov=${encodeURIComponent(g.c)}#all`, X.l_contracts] : null, [`/meetings?gov=${k}`, X.l_meetings],
+    g.b ? [`/public-money/budget-explorer?gov=${k}`, X.l_budget] : null, [`/alerts?gov=${k}`, X.l_alerts], [`/records-request?gov=${k}`, X.l_records],
+    g.f ? [`/public-money/hurricane-michael?q=${encodeURIComponent(g.f)}`, X.l_michael] : null].filter(Boolean);
+  return `<dt>${esc(g.s)}</dt><dd>${L.map(([h, t]) => `<a href="${esc(h)}">${esc(t)}</a>`).join(' · ')}</dd>`;
+}
+function renderGovLinks(k) {
+  const keys = [...new Set([k, 'county', 'schools'])];
+  $('govBody').innerHTML = `<dl class="kv">${keys.map(govRecordLinks).join('')}</dl><p class="muted small">${esc(X.govNote)}</p>`;
+}
+
+/* Public money near the address: CRA ledger rows within half a mile and sales tax projects within a mile.
+   Fetched only after an address is chosen. */
+let NEAR = null;
+async function loadNear(pt, govKey) {
+  const el = $('nearBody'); if (!el) return;
+  el.innerHTML = '<p class="muted small">Cargando…</p>';
+  try {
+    NEAR = NEAR || await Promise.all(['/data/cra-pay-1.json', '/data/cra-pay-2.json', '/data/surtax-projects.json'].map(u => fetch(u).then(r => { if (!r.ok) throw new Error(u); return r.json(); })))
+      .then(([a, b, s]) => ({cra: a.concat(b), st: s}));
+  } catch (e) { NEAR = null; el.innerHTML = `<p class="muted">${esc(X.fail)}</p>`; return; }
+  el.innerHTML = nearHtml(pt, NEAR, govKey);
+}
+function nearCra(pt, pays) {
+  // only rows counted in CRA totals and placed at a site (not just somewhere in a district)
+  return pays.filter(p => p.count && p.placed === 'site' && p.lat != null && p.lng != null)
+    .map(p => ({...p, mi: miles(pt, {x: p.lng, y: p.lat})})).filter(p => p.mi <= 0.5).sort((a, b) => a.mi - b.mi);
+}
+function nearSurtax(pt, projs) {
+  return projs.filter(p => p.x != null && p.yy != null).map(p => ({...p, mi: miles(pt, {x: p.x, y: p.yy})})).filter(p => p.mi <= 1).sort((a, b) => a.mi - b.mi);
+}
+function nearHtml(pt, N, govKey) {
+  const cr = nearCra(pt, N.cra), st = nearSurtax(pt, N.st), MAX = 5;
+  const craAmt = cr.filter(p => p.status === 'Spent' || p.status === 'Committed').reduce((a, p) => a + (p.amount || 0), 0);
+  const more = n => n > MAX ? `<li class="muted small">${esc(fmt(X.more, {n: n - MAX}))}</li>` : '';
+  const craIds = [...new Set(cr.map(p => p.cra))], craName = id => (Object.entries(D.craId).find(([, v]) => v === id) || [id])[0];
+  const stGov = st[0]?.g;
+  return `<h4 class="dev-h">${esc(X.nearCraH)}${cr.length ? ` <span class="muted small">${esc(fmt(X.craTotal, {n: cr.length, amt: big(craAmt)}))}</span>` : ''}</h4>
+    ${cr.length ? `<ul class="dev-list">${cr.slice(0, MAX).map(p => `<li><b>${p.amount ? usd(p.amount) : '—'}</b> · ${esc(p.purpose || p.payee || '')}<br><span class="muted small">${[X['cs_' + p.status] || p.status, p.when, p.mi.toFixed(1) + ' mi'].filter(Boolean).map(esc).join(' · ')}${p.url ? ` · <a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(X.source)}</a>` : ''}</span></li>`).join('')}${more(cr.length)}</ul>
+      <p class="small">${craIds.map(id => `<a href="/public-money/cra-spending?cra=${esc(id)}">${esc(craIds.length > 1 ? craName(id) + ': ' : '')}${esc(X.seeCra)}</a>`).join(' · ')}</p>` : `<p class="small muted">${esc(X.nearNone)}</p>`}
+    <h4 class="dev-h">${esc(X.nearStH)}${st.length ? ` <span class="muted small">${esc(fmt(X.stTotal, {n: st.length}))}</span>` : ''}</h4>
+    ${st.length ? `<ul class="dev-list">${st.slice(0, MAX).map(p => `<li><b>${esc(p.n)}</b>${p.k ? ` · ${big(p.k)}` : ''}<br><span class="muted small">${[X['st_' + p.s] || X.st_unknown, p.p != null && p.s === 'in_progress' ? p.p + '%' : '', p.g, p.mi.toFixed(1) + ' mi'].filter(Boolean).map(esc).join(' · ')}</span></li>`).join('')}${more(st.length)}</ul>
+      <p class="small"><a href="/public-money/sales-tax-projects?gov=${encodeURIComponent(stGov)}">${esc(X.seeSt)}</a></p>` : `<p class="small muted">${esc(X.nearNone)}</p>`}
+    <p class="muted small">${esc(X.nearNote)}</p>`;
+}
+
 function miles(a, b) { if (!b) return 1e9; const R = 3958.8, t = Math.PI / 180, dLat = (b.y - a.y) * t, dLon = (b.x - a.x) * t; const h = Math.sin(dLat / 2) ** 2 + Math.cos(a.y * t) * Math.cos(b.y * t) * Math.sin(dLon / 2) ** 2; return 2 * R * Math.asin(Math.sqrt(h)); }
 const kv = rows => rows.filter(Boolean).map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('');
 
@@ -252,18 +317,30 @@ function distFor(parcel, cityName) {
   if (!id) id = cityName && D.districts[cityName] ? cityName : 'unincorporated';
   return {id, d: D.districts[id], exact: !!D.taxdist[code]};
 }
-async function loadEx(pid) {
-  if (!pid) return null;
-  try { const r = await fetch(`/data/ex/${pid.slice(0, 3)}.json`); if (r.ok) return (await r.json())[pid] || null; } catch (e) {}
-  return null;
+/* Parcel lookups are split into small files by a hash of the parcel id (same FNV-1a as addr_page.shard_key). */
+function shardOf(pid, n) {
+  let h = 0x811c9dc5;
+  for (const c of new TextEncoder().encode(pid)) h = Math.imul(h ^ c, 0x01000193) >>> 0;
+  return 'h' + (h % n);
 }
+const shardCache = {};
+async function shardGet(kind, pid) {
+  if (!pid) return null;
+  const url = `/data/${kind}/${shardOf(pid, D.shards[kind])}.json`;
+  try {
+    shardCache[url] = shardCache[url] || fetch(url).then(r => r.ok ? r.json() : {}).catch(() => { delete shardCache[url]; return null; });
+    const s = await shardCache[url];
+    return s ? s[pid] || null : undefined; // undefined = couldn't load
+  } catch (e) { return undefined; }
+}
+const loadEx = pid => shardGet('ex', pid);
 function taxParts(p) {
   if (p._ex) {
-    // 2026 final tax roll: school and non-school taxable value as certified, with each exemption by type
-    const [tsd, tnsd, sr, ex] = p._ex, assessed = +p.VASTOTAL || 0, just = +p.VASJUST || 0;
-    const exempt = Object.values(ex).reduce((s, v) => s + v, 0);
-    return {hx: !!ex['01'], assessed, just, exempt, taxable: tnsd, second: ex['02'] || 0, other: exempt - (ex['01'] || 0) - (ex['02'] || 0),
-      school: tsd, non: tnsd, nonOther: Math.min(assessed, tnsd + sr), ex, full: tsd === 0 && tnsd === 0 && exempt > 0};
+    // 2026 final tax roll: school and non-school taxable value as certified. Homestead amounts are shown by name;
+    // every other exemption is one lumped amount, so no one's personal circumstances show up here.
+    const [tsd, tnsd, h1, h2, oth] = p._ex, assessed = +p.VASTOTAL || 0, just = +p.VASJUST || 0, exempt = h1 + h2 + oth;
+    return {hx: h1 > 0, assessed, just, exempt, taxable: tnsd, second: h2, other: oth, h1,
+      school: tsd, non: tnsd, nonOther: null, roll: true, full: tsd === 0 && tnsd === 0 && exempt > 0};
   }
   const hx = /\bHX\b/.test(p.DEXEMPTS || ''), assessed = +p.VASTOTAL || 0, just = +p.VASJUST || 0, exempt = +p.VASEXEMPT || 0, taxable = +p.VASTAXABLE || 0;
   const second = hx ? Math.min(Math.max(assessed - 50000, 0), D.second2026) : 0;
@@ -272,6 +349,16 @@ function taxParts(p) {
   const fullEx = taxable === 0 && /\b(13|14|VT|96)\b/.test(p.DEXEMPTS || '');
   return {hx, assessed, just, exempt, taxable, second, other, school: fullEx ? 0 : hx ? Math.max(0, taxable + second) : Math.max(0, just - exempt), non: taxable};
 }
+/* Link to a calculator with this parcel's numbers. Both calculators take the value before exemptions
+   (assessed value) and apply the homestead themselves: v = assessed value, d = district id, h = 1/0 homestead. */
+function whatIf(path, p, distId, t) {
+  const u = new URLSearchParams({v: Math.round(t.assessed || 0), d: distId, h: t.hx ? '1' : '0'});
+  if (path.endsWith('amendment-3')) { u.delete('h'); u.set('k', t.hx ? 'home' : 'non'); }
+  return `${path}?${u}#calc`;
+}
+/* Florida DOR land-use codes where someone could live and claim a homestead: 01 single family, 02 mobile home,
+   04 condominium, 05 co-op, 08 multi-family under 10 units. */
+const isResidential = p => /^0[12458]/.test(String(p?.DORAPPCODE || '').trim());
 function renderTax(p, cityName) {
   const el = $('taxBody');
   if (!p) { el.innerHTML = `<p class="muted">No se encontró ningún registro de parcela para esta dirección, así que no hay un valor con qué calcular. <a href="/public-money/tax-dollars">Use la calculadora →</a></p>`; return; }
@@ -279,49 +366,67 @@ function renderTax(p, cityName) {
   const rows = d.stack.map(aid => { const a = D.auth[aid]; return {n: a.n, g: a.g, m: a.m, amt: (a.school ? t.school : (a.g === 'county' || a.g === 'countysvc' || t.nonOther == null) ? t.non : t.nonOther) / 1000 * a.m}; }).filter(r => r.m > 0);
   const tot = rows.reduce((s, r) => s + r.amt, 0);
   const byG = D.groups.map(([g]) => [g, rows.filter(r => r.g === g).reduce((s, r) => s + r.amt, 0)]).filter(x => x[1] > 0.5);
+  const gname = g => g === 'city' ? (rows.find(r => r.g === 'city')?.n || 'Ciudad') : GN[g];
+  const barLabel = fmt(X.barLabel, {parts: byG.map(([g, v]) => `${gname(g)} ${usd(v)} (${tot ? Math.round(v / tot * 100) : 0}%)`).join(', ')});
   el.innerHTML = `<div class="bill-hd"><span class="bill-v sm">${usd(tot)}<small> / año</small></span><span class="muted small">${esc(d.label)} · ${String(+d.total.toFixed(4))} mills${exact ? '' : ' (zona deducida del mapa)'}</span></div>
-    <div class="stackbar">${byG.map(([g, v]) => `<span class="seg" style="flex:${v} 1 0;background:var(--s${GI[g]})" title="${esc(GN[g])}: ${usd(v)}"></span>`).join('')}</div>
-    <ul class="leg mini2">${byG.map(([g, v]) => `<li><i style="background:var(--s${GI[g]})"></i><span>${esc(g === 'city' ? (rows.find(r => r.g === 'city')?.n || 'Ciudad') : GN[g])}</span><b>${usd(v)}</b></li>`).join('')}</ul>
+    <div class="stackbar" role="img" aria-label="${esc(barLabel)}">${byG.map(([g, v]) => `<span class="seg" style="flex:${v} 1 0;background:var(--s${GI[g]})" title="${esc(GN[g])}: ${usd(v)}"></span>`).join('')}</div>
+    <ul class="leg mini2">${byG.map(([g, v]) => `<li><i style="background:var(--s${GI[g]})"></i><span>${esc(gname(g))}</span><b>${usd(v)}</b></li>`).join('')}</ul>
     <div id="feeBody"><p class="muted small">Revisando las tarifas de la factura de impuestos…</p></div>
-    <p class="muted small">Impuesto a la propiedad: valores de 2026 × tasas del ${D.fy}. Tarifas: registro tributario del FY2026. <a href="/public-money/tax-dollars">Adónde va el dinero →</a></p>`;
+    <p class="muted small">Impuesto a la propiedad: valores de 2026 × tasas del ${D.fy}. Tarifas: registro tributario del FY2026. <a href="/public-money/tax-dollars">Adónde va el dinero →</a></p>
+    <p class="small"><a href="${esc(whatIf('/public-money/tax-dollars', p, id, t))}">${esc(X.whatif)}</a></p>`;
   loadFees(p.A1RENUM, tot);
 }
 async function loadFees(pid, taxTot) {
   const el = $('feeBody'); if (!el || !pid) return;
-  let items = [];
-  try { const r = await fetch(`/data/nav/${pid.slice(0, 3)}.json`); if (r.ok) items = (await r.json())[pid] || []; } catch (e) { el.innerHTML = ''; return; }
+  const got = await shardGet('nav', pid);
+  if (got === undefined) { el.innerHTML = ''; return; }
+  const items = got || [];
   const fees = items.reduce((a, x) => a + x[1], 0);
   el.innerHTML = items.length
     ? `<dl class="kv fees"><dt class="span">Tarifas fijas en la factura de impuestos</dt>${items.map(([c, a]) => `<dt>${esc(D.navLabel[c] || 'Otro cargo (' + c + ')')}</dt><dd>${usd(a)}</dd>`).join('')}<dt><b>Factura total aproximada</b></dt><dd><b>${usd(taxTot + fees)}</b> <span class="muted small">impuesto + tarifas</span></dd></dl>`
     : '<p class="muted small">La factura de impuestos del FY2026 de esta parcela no tenía tarifas fijas (cargos no basados en el valor, non-ad valorem).</p>';
 }
+const PA_URL = 'https://www.baypa.net/';
 function exList(t) {
-  const FULL = new Set(['05', '06', '08', '39', '40', '41']);
-  const items = Object.entries(t.ex).sort((a, b) => b[1] - a[1]).map(([c, v]) => `<li>${esc(D.exNames[c] || 'Exención tipo ' + c)} <span class="muted">${FULL.has(c) ? 'todo el valor' : usd(v)}</span></li>`);
-  return `${usd(t.exempt)}<ul class="plain small ex-list">${items.join('')}</ul>${t.full ? '<span class="small"><b>Esta vivienda no paga impuesto a la propiedad.</b></span> ' : ''}<a class="small" href="/public-money/exemptions">Sobre las exenciones (en inglés) →</a>`;
+  const items = [t.h1 ? ['Exención de vivienda principal (homestead)', t.h1] : null, t.second ? ['Exención adicional de vivienda principal', t.second] : null, t.other ? ['Otras exenciones', t.other] : null].filter(Boolean)
+    .map(([n, v]) => `<li>${n} <span class="muted">${usd(v)}</span></li>`);
+  return `${usd(t.exempt)}<ul class="plain small ex-list">${items.join('')}</ul>${t.other ? `<span class="muted small">No mostramos de qué tipo son las otras exenciones, para proteger la privacidad de los dueños. Cada dueño puede ver las suyas en el <a href="${PA_URL}" target="_blank" rel="noopener">sitio del Tasador de Propiedades (Property Appraiser)</a>.</span> ` : ''}${t.full ? '<span class="small"><b>Esta vivienda no paga impuesto a la propiedad.</b></span> ' : ''}<a class="small" href="/public-money/exemptions">Sobre las exenciones (en inglés) →</a>`;
 }
 function renderProp(p) {
   const el = $('propBody');
   if (!p) { el.innerHTML = '<dd class="muted">No se encontró ningún registro de parcela para esta dirección.</dd>'; return; }
-  const t = taxParts(p), codes = String(p.DEXEMPTS || '').trim().split(/\s+/).filter(Boolean);
+  const t = taxParts(p);
   el.innerHTML = kv([
     ['Uso', esc(title(p.DORAPPDESC))],
     p.S1YRBLTACT ? ['Año de construcción', esc(p.S1YRBLTACT) + (p.S1AREAHEAT ? ` · ${Math.round(p.S1AREAHEAT).toLocaleString()} pies cuadrados climatizados` : '')] : null,
     ['Valor de mercado (valor justo)', usd(t.just)],
     ['<span class="term" data-term="assessed-value">Valor tasado</span>', usd(t.assessed) + (t.assessed < t.just ? ` <span class="muted small">(limitado a ${usd(t.just - t.assessed)} por debajo del mercado)</span>` : '')],
-    ['Exenciones', t.ex ? exList(t) : t.exempt ? usd(t.exempt) + ` <span class="muted small">(${t.hx ? 'homestead' : 'códigos'}${codes.filter(c => c !== 'HX').length ? (t.hx ? ' + ' : ' ') + esc(codes.filter(c => c !== 'HX').join(', ')) : ''})</span>` : 'Sin exenciones'],
+    ['Exenciones', t.roll ? exList(t) : t.exempt ? usd(t.exempt) + (t.hx ? ' <span class="muted small">(incluye homestead)</span>' : '') : 'Sin exenciones'],
     ['<span class="term" data-term="taxable-value">Valor gravable</span>', usd(t.non) + (t.school !== t.non ? ` <span class="muted small">(${usd(t.school)} para impuestos escolares${t.nonOther != null && t.nonOther !== t.non ? `, ${usd(t.nonOther)} para impuestos de la ciudad y de distritos` : ''})</span>` : '')],
-  ]);
+  ]) + (!t.hx && isResidential(p) ? `<dt class="span">${esc(X.hsH)}</dt><dd class="span small">${fmt(esc(X.hs), {pa: `<a href="${PA_URL}" target="_blank" rel="noopener">${esc(X.pa)}</a>`})} <a href="/public-money/exemptions#apply">${esc(X.exLink)}</a></dd>` : '');
+}
+/* A local representative: name links to their recorded votes when they're in the votes data, with a yes/no tally,
+   plus a link to campaign money for that government. State and federal seats link to their district site. */
+function repLine(x, gov) {
+  const a = x?.[0]; if (!a) return '<span class="muted">—</span>';
+  const m = gov ? matchMember(a.REPNAME, gov) : null;
+  const name = m ? `<a href="/public-money/votes?m=${encodeURIComponent(m[0])}#all">${esc(a.REPNAME)}</a>` : a.DISTRICTURL ? `<a href="${esc(a.DISTRICTURL)}" target="_blank" rel="noopener">${esc(a.REPNAME || '—')}</a>` : esc(a.REPNAME || '—');
+  const site = m && a.DISTRICTURL ? ` <a class="small" href="${esc(a.DISTRICTURL)}" target="_blank" rel="noopener">${esc(X.website)}</a>` : '';
+  const tal = m ? `<br><span class="muted small">${esc(fmt(X.tally, {y: m[1], n: m[2]}))}</span>` : '';
+  const cm = gov ? ` <a class="small" href="/public-money/campaign-money?gov=${gov}">${esc(X.campaign)}</a>` : '';
+  return `${name} <span class="muted small">${esc(a.NAME || '')}</span>${site}${tal}${gov ? (tal ? ' ·' : '<br>') + cm : ''}`;
 }
 function renderReps(comm, local, sb, house, senate, ush, cityName) {
-  const r = (x, pre) => x?.[0] ? `${x[0].DISTRICTURL ? `<a href="${esc(x[0].DISTRICTURL)}" target="_blank" rel="noopener">${esc(x[0].REPNAME || '—')}</a>` : esc(x[0].REPNAME || '—')} <span class="muted small">${esc(pre || x[0].NAME || '')}</span>` : '<span class="muted">—</span>';
+  const ck = cityName ? cityKey(cityName) : null;
+  const ballot = D.elections ? [...new Set([ck || 'county', 'county', 'schools'])].map(k => `<a href="/elections?gov=${k}">${esc(D.govs[k]?.s || k)}</a>`).join(' · ') : '';
   $('repBody').innerHTML = kv([
-    ['Comisión del Condado', r(comm)],
-    cityName ? ['Ciudad', `Ciudad de ${esc(cityName)}${local?.[0] ? ' · ' + r(local) : ''}`] : ['Ciudad', '<span class="muted">Ninguna (zona no incorporada). La Comisión del Condado es su gobierno local.</span>'],
-    ['Junta Escolar', r(sb)],
-    ['Cámara de Representantes de Florida', r(house)],
-    ['Senado de Florida', r(senate)],
-    ['Cámara de Representantes de EE. UU.', r(ush)],
+    ['Comisión del Condado', repLine(comm, 'county')],
+    cityName ? ['Ciudad', `Ciudad de ${esc(cityName)}${local?.[0] ? ' · ' + repLine(local, ck !== 'county' ? ck : null) : ck !== 'county' ? ` <a class="small" href="/public-money/campaign-money?gov=${ck}">${esc(X.campaign)}</a>` : ''}`] : ['Ciudad', '<span class="muted">Ninguna (zona no incorporada). La Comisión del Condado es su gobierno local.</span>'],
+    ['Junta Escolar', repLine(sb, 'schools')],
+    ['Cámara de Representantes de Florida', repLine(house)],
+    ['Senado de Florida', repLine(senate)],
+    ['Cámara de Representantes de EE. UU.', repLine(ush)],
+    ballot ? [esc(X.ballotH), `<span class="small">${esc(X.ballot)} ${ballot}</span>`] : null,
   ]) + '<dt class="span">Decisiones sobre el dinero</dt><dd class="span"><a href="/public-money/tax-dollars#govs">Vea el presupuesto de cada gobierno →</a></dd>';
 }
 function renderSchools(es, ms, hs) {
@@ -332,10 +437,10 @@ function renderCra(cra) {
   const el = $('craBody'), c = cra?.[0];
   if (cra === null) { el.innerHTML = '<p class="muted">No se pudo verificar en este momento.</p>'; return; }
   if (!c) { el.innerHTML = '<p>Esta dirección <b>no está dentro de un distrito de una CRA</b>, así que todo su impuesto a la propiedad de la ciudad y del condado va a los presupuestos normales de esos gobiernos.</p><p class="small"><a href="/public-money/cra-spending">Vea las CRA del Condado de Bay →</a></p>'; return; }
-  const ag = D.craAgency[c.CRA], s = ag && D.cra[ag];
+  const ag = D.craAgency[c.CRA], s = ag && D.cra[ag], cid = ag && D.craId[ag];
   el.innerHTML = `<p>Esta dirección está dentro del distrito <b>${esc(c.CRA)}</b>${c.EST_YEAR ? ` (creado en ${esc(c.EST_YEAR)})` : ''}. Los impuestos de la ciudad y del condado sobre el crecimiento de esta zona desde entonces van al fondo de ${esc(ag || 'CRA')} y deben gastarse dentro de sus distritos.</p>
     ${s ? `<p class="small">${esc(ag)}: <b>${big(s.spent)}</b> en gastos y adjudicaciones documentados en ${s.n} registros de este sitio.</p>` : ''}
-    <p class="small"><a href="/public-money/cra-spending">Vea lo que paga →</a></p>`;
+    <p class="small"><a href="/public-money/cra-spending${cid ? '?cra=' + cid : ''}">Vea lo que paga (en inglés) →</a></p>`;
 }
 function renderSafe(flood, evac, mosq, tdc, fire, lib, park) {
   const f = flood?.zone, fdate = ms => ms ? new Date(ms).toLocaleDateString('es-US', {month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC'}) : '';
@@ -368,15 +473,16 @@ renderTax = function (p, cityName) { // eslint-disable-line no-func-assign
   _renderTax(p, cityName);
   const el = $('a3Body');
   if (!p) { el.innerHTML = '<p class="muted">No hay un registro de parcela con qué calcular. <a href="/public-money/amendment-3">Pruebe la calculadora →</a></p>'; return; }
-  const {d} = distFor(p, cityName), t = taxParts(p);
+  const {id, d} = distFor(p, cityName), t = taxParts(p);
   const nonM = d.stack.filter(a => !D.auth[a].school).reduce((s, a) => s + D.auth[a].m, 0);
+  const try3 = `<p class="small"><a href="${esc(whatIf('/public-money/amendment-3', p, id, t))}">${esc(X.whatifA3)}</a></p>`;
   if (!t.hx) {
-    el.innerHTML = `<p>Esta propiedad no tiene exención de homestead, así que la Enmienda 3 no bajaría directamente su factura de impuestos. Limitaría qué tan rápido puede subir su valor gravado a <b>5% al año en vez de 10%</b> para los impuestos no escolares.${t.assessed < t.just ? ` Su valor ya está limitado a ${usd(t.just - t.assessed)} por debajo del mercado.` : ''}</p><p class="small"><a href="/public-money/amendment-3">Qué hace la Enmienda 3 →</a></p>`;
+    el.innerHTML = `<p>Esta propiedad no tiene exención de homestead, así que la Enmienda 3 no bajaría directamente su factura de impuestos. Limitaría qué tan rápido puede subir su valor gravado a <b>5% al año en vez de 10%</b> para los impuestos no escolares.${t.assessed < t.just ? ` Su valor ya está limitado a ${usd(t.just - t.assessed)} por debajo del mercado.` : ''}</p><p class="small"><a href="/public-money/amendment-3">Qué hace la Enmienda 3 →</a></p>` + try3;
     return;
   }
   const after = Math.max(0, t.assessed - 250000 - t.other), save = (t.non - after) / 1000 * nonM;
   el.innerHTML = `<p>Con la exención de homestead completa de $250,000, según el valor y las tasas de hoy, los impuestos del condado, de la ciudad y de los distritos de esta vivienda bajarían unos <b>${usd(save)} al año</b>${after === 0 ? ', hasta cero; aún pagaría el impuesto escolar' : ''}.</p>
-    <p class="muted small">Supone que las tasas no cambian y que el dueño ya era residente de Florida antes de 2027. Los gobiernos locales de aquí recaudarían menos; vea los cálculos del estado. <a href="/public-money/amendment-3">Enmienda 3 →</a></p>`;
+    <p class="muted small">Supone que las tasas no cambian y que el dueño ya era residente de Florida antes de 2027. Los gobiernos locales de aquí recaudarían menos; vea los cálculos del estado. <a href="/public-money/amendment-3">Enmienda 3 →</a></p>` + try3;
 };
 
 /* ---------- map ---------- */

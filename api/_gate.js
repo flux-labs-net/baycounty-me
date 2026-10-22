@@ -8,7 +8,16 @@ const {q} = require('./_db');
 
 const derive = label => crypto.createHmac('sha256', process.env.ALERTS_SECRET || 'baycounty.me').update(label).digest();
 const sha256 = s => crypto.createHash('sha256').update(s).digest('hex');
-const ipOf = req => String(req.headers['x-forwarded-for'] || '').split(',')[0].trim() || 'unknown';
+// Caller IP. Prefer headers Vercel sets itself (x-real-ip, x-vercel-forwarded-for), which a client can't spoof.
+// The first x-forwarded-for entry is whatever the client sent, so it's only a last resort (e.g. local dev).
+function ipOf(req) {
+  const h = req.headers || {};
+  for (const v of [h['x-real-ip'], h['x-vercel-forwarded-for'], h['x-forwarded-for']]) {
+    const ip = String(v || '').split(',')[0].trim();
+    if (ip) return ip;
+  }
+  return 'unknown';
+}
 const ipHash = req => crypto.createHmac('sha256', derive('bcm-ip-v1')).update(ipOf(req)).digest('hex').slice(0, 24);
 
 function keyFrom(req) {
@@ -91,4 +100,4 @@ function instrument(res, ctx, info) {
   }
 }
 
-module.exports = {gate, instrument, cleanQuery, sha256, derive, MESSAGES};
+module.exports = {gate, instrument, cleanQuery, sha256, derive, MESSAGES, ipOf};

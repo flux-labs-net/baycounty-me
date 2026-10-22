@@ -1,7 +1,325 @@
 {
  "source_notes": [
   "Bay County BOCC: the Clerk's OnBase 'BOCC - Minutes Search' (queried through its public API, https://bayforms.baycoclerk.com/PublicAccess/api/CustomQuery/KeywordSearch, QueryID 105, Year 2026) still lists 2026 minutes only through the June 16, 2026 regular meeting as of Oct. 21, 2026. No minutes are posted for July 7, July 21 (maximum millage), Aug. 2026 meetings, or the Sept. 2026 FY2027 budget hearings, so no roll calls could be added. The 2025 list also still lacks the separate Sept. 3 and Sept. 16, 2025 budget-hearing minutes (only the regular-meeting minutes for those dates, already in votes.json, are posted) and Dec. 2 and Dec. 16, 2025; March 3, 2026 is also missing.",
-  "Parker: the Sept. 24, 2026 FY2027 final budget hearing minutes were approved at the Oct. 6, 2026 council meeting (agenda item 1, per the Oct. 6 agenda package at https://cityofparker.com/wp-content/uploads/filr/7020/Agenda-Regular-Meeting-Package.pdf), but the approved minutes are not yet posted on https://cityofparker.com/government/city-council/ (the newest posted minutes are Sept. 15, 2026, filr 7048). The Sept. 24 agenda package (filr 7005) has the resolutions but no votes."
+  "Parker: the Sept. 24, 2026 FY2027 final budget hearing minutes were approved at the Oct. 6, 2026 council meeting (agenda item 1, per the Oct. 6 agenda package at https://cityofparker.com/wp-content/uploads/filr/7020/Agenda-Regular-Meeting-Package.pdf), but the approved minutes are not yet posted on https://cityofparker.com/government/city-council/ (the newest posted minutes are Sept. 15, 2026, filr 7048). The Sept. 24 agenda package (filr 7005) has the resolutions but no votes.",
+  "Panama City: Aug 19 (special call) and Aug 25, 2026 commission minutes from the city Agenda Center; these dates were missing from votes.json. Commissioner Lucas was absent Aug 25. Motions on minutes, agenda changes and adjournment are left out. Oct 13, 2026 minutes are not posted yet.",
+  "Callaway: Sept 8, 2026 minutes from the Agenda Center. Sept 17 (final budget hearing) and Sept 22, 2026 minutes are drafts printed in the Oct 13, 2026 agenda packet for approval; the final minutes link is not posted yet. 'Carried unanimously' with all five members present is recorded as 5-0, as in existing cw-commission entries. Rezoning and development-order items were left out."
  ],
- "votes": []
+ "votes": [
+  {
+   "body": "pc-commission",
+   "date": "2026-08-19",
+   "category": "other",
+   "item": "6. Commission discussion and consideration - approval of Leslie Glaze for the City Clerk-Treasurer position and moving forward with contract negotiations",
+   "amount": null,
+   "outcome": "passed",
+   "tally": "5-0",
+   "by_member": {
+    "Allan Branch": "yes",
+    "Robbie Hughes": "yes",
+    "Janice Lucas": "yes",
+    "Brian Grainger": "yes",
+    "Josh Street": "yes"
+   },
+   "source_title": "City of Panama City Special Call City Commission Meeting of August 19, 2026 - Minutes",
+   "source_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Minutes/_08192026-899",
+   "plain_summary": "The Panama City Commission voted 5-0 to chose Leslie Glaze as City Clerk-Treasurer.",
+   "headline": "Chose Leslie Glaze as City Clerk-Treasurer",
+   "summary": "After interviewing two finalists, the commission picked Leslie Glaze for City Clerk-Treasurer and began contract talks."
+  },
+  {
+   "body": "pc-commission",
+   "date": "2026-08-25",
+   "category": "land",
+   "item": "6.a. Developer Agreement with Zachary Seymour for a property located at 101 E 7th Street (Parcel ID 20075-000-000)",
+   "amount": null,
+   "outcome": "passed",
+   "tally": "4-0",
+   "by_member": {
+    "Allan Branch": "yes",
+    "Robbie Hughes": "yes",
+    "Janice Lucas": "absent",
+    "Brian Grainger": "yes",
+    "Josh Street": "yes"
+   },
+   "source_title": "City of Panama City City Commission Meeting of August 25, 2026 - Minutes",
+   "source_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Minutes/_08252026-880",
+   "plain_summary": "The Panama City Commission voted 4-0 to approved a developer agreement for 101 E. 7th St. Not recorded voting (absent): Janice Lucas.",
+   "headline": "Approved a developer agreement for 101 E. 7th St",
+   "summary": "Approves the developer agreement for 101 E. 7th Street, with changes discussed by the city attorney, and asks staff for an update in one year."
+  },
+  {
+   "body": "pc-commission",
+   "date": "2026-08-25",
+   "category": "contract",
+   "item": "9.a.-9.e. Consent agenda: six firms for PC25-052 continuing professional services; $98,325.25 Baskerville-Donovan task order for Tarpon Dock Bridge design; right-of-way use agreement at 802 E. 8th Court; $181,825.93 Change Order 3 to Emerald Coast Site Construction (PC25-038 Baker Court); PC26-014 Project STORM Group I to Marshall Brothers ($1,199,749.00)",
+   "amount": 1199749,
+   "outcome": "passed",
+   "tally": "4-0",
+   "by_member": {
+    "Allan Branch": "yes",
+    "Robbie Hughes": "yes",
+    "Janice Lucas": "absent",
+    "Brian Grainger": "yes",
+    "Josh Street": "yes"
+   },
+   "source_title": "City of Panama City City Commission Meeting of August 25, 2026 - Minutes",
+   "source_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Minutes/_08252026-880",
+   "plain_summary": "The Panama City Commission voted 4-0 to approved consent items including a $1.2 million stormwater contract. Not recorded voting (absent): Janice Lucas.",
+   "headline": "Approved consent items including a $1.2 million stormwater contract",
+   "summary": "One vote approved five consent items. The largest is a $1,199,749 contract to Marshall Brothers for Project STORM Group I, with up to $59,987.45 more in change orders the city manager may sign. Others: a $181,825.93 change order to Emerald Coast Site Construction for Baker Court drainage and a $98,325.25 Baskerville-Donovan design task order for the Tarpon Dock Bridge."
+  },
+  {
+   "body": "pc-commission",
+   "date": "2026-08-25",
+   "category": "contract",
+   "item": "9.f. Award of Bid PC26-023 for the Truesdell Clubhouse Exterior Renovations in the amount of $498,797.47 to Art Construction of Northwest Florida LLC, plus a 10% project contingency of $49,879.75",
+   "amount": 498797.47,
+   "outcome": "passed",
+   "tally": "4-0",
+   "by_member": {
+    "Allan Branch": "yes",
+    "Robbie Hughes": "yes",
+    "Janice Lucas": "absent",
+    "Brian Grainger": "yes",
+    "Josh Street": "yes"
+   },
+   "source_title": "City of Panama City City Commission Meeting of August 25, 2026 - Minutes",
+   "source_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Minutes/_08252026-880",
+   "plain_summary": "The Panama City Commission voted 4-0 to awarded $498,797 Truesdell Clubhouse renovation to Art Construction. Not recorded voting (absent): Janice Lucas.",
+   "headline": "Awarded $498,797 Truesdell Clubhouse renovation to Art Construction",
+   "summary": "Art Construction of Northwest Florida LLC will renovate the Truesdell Clubhouse exterior for $498,797.47, with a $49,879.75 contingency and substantial completion by Jan. 31, 2027."
+  },
+  {
+   "body": "pc-commission",
+   "date": "2026-08-25",
+   "category": "debt",
+   "item": "11.a. Alternative financing option for the construction of Wet Slips at the Downtown Panama City Marina - accept the Prepayment and Participation Rent Agreement with JOE PCOZ, LLC",
+   "amount": null,
+   "outcome": "passed",
+   "tally": "4-0",
+   "by_member": {
+    "Allan Branch": "yes",
+    "Robbie Hughes": "yes",
+    "Janice Lucas": "absent",
+    "Brian Grainger": "yes",
+    "Josh Street": "yes"
+   },
+   "source_title": "City of Panama City City Commission Meeting of August 25, 2026 - Minutes",
+   "source_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Minutes/_08252026-880",
+   "plain_summary": "The Panama City Commission voted 4-0 to accepted a prepayment rent agreement with JOE PCOZ to finance marina wet slips. Not recorded voting (absent): Janice Lucas.",
+   "headline": "Accepted a prepayment rent agreement with JOE PCOZ to finance marina wet slips",
+   "summary": "The city accepted a prepayment and participation rent agreement with JOE PCOZ, LLC to pay for new wet slips at the downtown marina, with a management agreement due within 60 days. The minutes give no dollar amount."
+  },
+  {
+   "body": "pc-commission",
+   "date": "2026-08-25",
+   "category": "contract",
+   "item": "12.a. Award of bid PC26-021 for the construction of 50 wet slips in the western basin of the downtown Panama City Marina to the lowest bidder, Art Marine, LLC",
+   "amount": null,
+   "outcome": "passed",
+   "tally": "4-0",
+   "by_member": {
+    "Allan Branch": "yes",
+    "Robbie Hughes": "yes",
+    "Janice Lucas": "absent",
+    "Brian Grainger": "yes",
+    "Josh Street": "yes"
+   },
+   "source_title": "City of Panama City City Commission Meeting of August 25, 2026 - Minutes",
+   "source_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Minutes/_08252026-880",
+   "plain_summary": "The Panama City Commission voted 4-0 to awarded downtown marina wet slip construction to Art Marine. Not recorded voting (absent): Janice Lucas.",
+   "headline": "Awarded downtown marina wet slip construction to Art Marine",
+   "summary": "Art Marine, LLC, the lowest bidder, will build 50 wet slips in the marina's western basin. Staff will also hire construction inspection services. The minutes give no bid amount."
+  },
+  {
+   "body": "pc-commission",
+   "date": "2026-08-25",
+   "category": "budget",
+   "item": "12.d. Resolution 20260825.2 accepting a state funded grant for Frankford Avenue Trail Design in the amount of $425,000.00 and Budget Amendment Resolution 20260825.3",
+   "amount": 425000,
+   "outcome": "passed",
+   "tally": "4-0",
+   "by_member": {
+    "Allan Branch": "yes",
+    "Robbie Hughes": "yes",
+    "Janice Lucas": "absent",
+    "Brian Grainger": "yes",
+    "Josh Street": "yes"
+   },
+   "source_title": "City of Panama City City Commission Meeting of August 25, 2026 - Minutes",
+   "source_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Minutes/_08252026-880",
+   "plain_summary": "The Panama City Commission voted 4-0 to accepted a $425,000 state grant for Frankford Avenue trail design. Not recorded voting (absent): Janice Lucas.",
+   "headline": "Accepted a $425,000 state grant for Frankford Avenue trail design",
+   "summary": "The city accepted a $425,000 state grant to design the Frankford Avenue trail and amended the budget to match."
+  },
+  {
+   "body": "cw-commission",
+   "date": "2026-09-08",
+   "category": "other",
+   "item": "approve the Development Agreement for Capacity with the St. Joe Company",
+   "amount": null,
+   "outcome": "passed",
+   "tally": "5-0 (minutes: 'carried unanimously')",
+   "by_member": {
+    "Pamn Henderson": "yes",
+    "Bobby Birdsell": "yes",
+    "David Griggs": "yes",
+    "Bob Pelletier": "yes",
+    "Kenneth L. Ayers, Jr.": "yes"
+   },
+   "source_title": "City of Callaway Regular Meeting - Minutes, September 8, 2026",
+   "source_url": "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Minutes/_09082026-420",
+   "plain_summary": "The Callaway Commission voted 5-0 to approved a utility capacity development agreement with St. Joe.",
+   "headline": "Approved a utility capacity development agreement with St. Joe",
+   "summary": "Approves a development agreement with the St. Joe Company on utility capacity, with added sections on inspections, indemnification, city infrastructure standards, environmental protections and default."
+  },
+  {
+   "body": "cw-commission",
+   "date": "2026-09-08",
+   "category": "contract",
+   "item": "approve the bid award (LS2026-11 Air Conditioner Replacements) to Parker Services in the not-to-exceed amount of $44,668.00",
+   "amount": 44668,
+   "outcome": "passed",
+   "tally": "5-0 (minutes: 'carried unanimously')",
+   "by_member": {
+    "Pamn Henderson": "yes",
+    "Bobby Birdsell": "yes",
+    "David Griggs": "yes",
+    "Bob Pelletier": "yes",
+    "Kenneth L. Ayers, Jr.": "yes"
+   },
+   "source_title": "City of Callaway Regular Meeting - Minutes, September 8, 2026",
+   "source_url": "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Minutes/_09082026-420",
+   "plain_summary": "The Callaway Commission voted 5-0 to awarded $44,668 air conditioner replacement to Parker Services.",
+   "headline": "Awarded $44,668 air conditioner replacement to Parker Services",
+   "summary": "Parker Services will replace air conditioners under bid LS2026-11 for up to $44,668."
+  },
+  {
+   "body": "cw-commission",
+   "date": "2026-09-17",
+   "category": "millage",
+   "item": "Resolution No. 26-12, levying a Final Ad Valorem Rate of 2.7000 mils for FY2026/27",
+   "amount": null,
+   "outcome": "passed",
+   "tally": "5-0 (minutes: 'carried unanimously upon roll-call vote')",
+   "by_member": {
+    "Pamn Henderson": "yes",
+    "Bobby Birdsell": "yes",
+    "David Griggs": "yes",
+    "Bob Pelletier": "yes",
+    "Kenneth L. Ayers, Jr.": "yes"
+   },
+   "source_title": "City of Callaway Final Budget Hearing Minutes, September 17, 2026 (draft, in the Oct 13, 2026 agenda packet for approval)",
+   "source_url": "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_10132026-425",
+   "plain_summary": "The Callaway Commission voted 5-0 to kept the FY2027 city tax rate at 2.7 mills.",
+   "headline": "Kept the FY2027 city tax rate at 2.7 mills",
+   "summary": "The final FY2026-27 rate is 2.7000 mills, 0.5999% above the rolled-back rate of 2.6839 mills."
+  },
+  {
+   "body": "cw-commission",
+   "date": "2026-09-17",
+   "category": "budget",
+   "item": "Resolution No. 26-13, adopting the Final budget for FY2026/27 ($50,215,139)",
+   "amount": 50215139,
+   "outcome": "passed",
+   "tally": "5-0 (minutes: 'carried unanimously upon roll-call vote')",
+   "by_member": {
+    "Pamn Henderson": "yes",
+    "Bobby Birdsell": "yes",
+    "David Griggs": "yes",
+    "Bob Pelletier": "yes",
+    "Kenneth L. Ayers, Jr.": "yes"
+   },
+   "source_title": "City of Callaway Final Budget Hearing Minutes, September 17, 2026 (draft, in the Oct 13, 2026 agenda packet for approval)",
+   "source_url": "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_10132026-425",
+   "plain_summary": "The Callaway Commission voted 5-0 to adopted a $50.2 million city budget for FY2027.",
+   "headline": "Adopted a $50.2 million city budget for FY2027",
+   "summary": "Resolution 26-13 adopts a FY2026-27 budget of $50,215,139, including a $12,227,754 General Fund (amounts from the resolution in the Sept 17, 2026 agenda packet, https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_09172026-422)."
+  },
+  {
+   "body": "cw-commission",
+   "date": "2026-09-22",
+   "category": "contract",
+   "item": "approve the bid award (CM2026-12 Beulah Avenue Paving) to American Sand in the not-to-exceed amount of $334,344.25",
+   "amount": 334344.25,
+   "outcome": "passed",
+   "tally": "5-0 (minutes: 'carried unanimously'; Mayor Henderson attended by phone)",
+   "by_member": {
+    "Pamn Henderson": "yes",
+    "Bobby Birdsell": "yes",
+    "David Griggs": "yes",
+    "Bob Pelletier": "yes",
+    "Kenneth L. Ayers, Jr.": "yes"
+   },
+   "source_title": "City of Callaway Regular Meeting Minutes, September 22, 2026 (draft, in the Oct 13, 2026 agenda packet for approval)",
+   "source_url": "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_10132026-425",
+   "plain_summary": "The Callaway Commission voted 5-0 to awarded $334,344 Beulah Avenue paving to American Sand.",
+   "headline": "Awarded $334,344 Beulah Avenue paving to American Sand",
+   "summary": "American Sand will pave Beulah Avenue for up to $334,344.25. Five bids were received."
+  },
+  {
+   "body": "cw-commission",
+   "date": "2026-09-22",
+   "category": "contract",
+   "item": "approve the bid award (CM2026-13 South Gay Avenue Paving) to American Sand in the not-to-exceed amount of $351,280.14",
+   "amount": 351280.14,
+   "outcome": "passed",
+   "tally": "5-0 (minutes: 'carried unanimously'; Mayor Henderson attended by phone)",
+   "by_member": {
+    "Pamn Henderson": "yes",
+    "Bobby Birdsell": "yes",
+    "David Griggs": "yes",
+    "Bob Pelletier": "yes",
+    "Kenneth L. Ayers, Jr.": "yes"
+   },
+   "source_title": "City of Callaway Regular Meeting Minutes, September 22, 2026 (draft, in the Oct 13, 2026 agenda packet for approval)",
+   "source_url": "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_10132026-425",
+   "plain_summary": "The Callaway Commission voted 5-0 to awarded $351,280 South Gay Avenue paving to American Sand.",
+   "headline": "Awarded $351,280 South Gay Avenue paving to American Sand",
+   "summary": "American Sand will pave South Gay Avenue from Cherry Street to Lake Drive (base bid plus alternate) for up to $351,280.14. Five bids were received."
+  },
+  {
+   "body": "cw-commission",
+   "date": "2026-09-22",
+   "category": "contract",
+   "item": "approve the bid award (LS2026-14 Air Conditioner Replacements Phase 2) to Cooler Air Conditioning in the not-to-exceed amount of $60,100.00",
+   "amount": 60100,
+   "outcome": "passed",
+   "tally": "5-0 (minutes: 'carried unanimously'; Mayor Henderson attended by phone)",
+   "by_member": {
+    "Pamn Henderson": "yes",
+    "Bobby Birdsell": "yes",
+    "David Griggs": "yes",
+    "Bob Pelletier": "yes",
+    "Kenneth L. Ayers, Jr.": "yes"
+   },
+   "source_title": "City of Callaway Regular Meeting Minutes, September 22, 2026 (draft, in the Oct 13, 2026 agenda packet for approval)",
+   "source_url": "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_10132026-425",
+   "plain_summary": "The Callaway Commission voted 5-0 to awarded $60,100 arts center air conditioner replacement to Cooler Air Conditioning.",
+   "headline": "Awarded $60,100 arts center air conditioner replacement to Cooler Air Conditioning",
+   "summary": "Cooler Air Conditioning will replace the last four units at the Arts & Conference Center for up to $60,100."
+  },
+  {
+   "body": "cw-commission",
+   "date": "2026-09-22",
+   "category": "contract",
+   "item": "approve the bid award (LS2026-15 Parking Lot Sealcoating & Striping) to McShae Contracting DBA Emerald Coast Striping in the not-to-exceed amount of $47,970.15",
+   "amount": 47970.15,
+   "outcome": "passed",
+   "tally": "5-0 (minutes: 'carried unanimously'; Mayor Henderson attended by phone)",
+   "by_member": {
+    "Pamn Henderson": "yes",
+    "Bobby Birdsell": "yes",
+    "David Griggs": "yes",
+    "Bob Pelletier": "yes",
+    "Kenneth L. Ayers, Jr.": "yes"
+   },
+   "source_title": "City of Callaway Regular Meeting Minutes, September 22, 2026 (draft, in the Oct 13, 2026 agenda packet for approval)",
+   "source_url": "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_10132026-425",
+   "plain_summary": "The Callaway Commission voted 5-0 to awarded $47,970 parking lot sealcoating to Emerald Coast Striping.",
+   "headline": "Awarded $47,970 parking lot sealcoating to Emerald Coast Striping",
+   "summary": "McShae Contracting, doing business as Emerald Coast Striping, will sealcoat and stripe city parking lots for up to $47,970.15. Two bids were received."
+  }
+ ]
 }

@@ -35,6 +35,7 @@
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/_vercel/speed-insights/script.js"></script>
 <script src="/assets/tables.js" defer></script>
+<script src="/assets/site.js" defer></script>
 
 </head>
 <body>
@@ -63,7 +64,7 @@
     <div class="kpi"><span class="eyebrow">Donors with contracts</span><span class="v">37</span><span class="s">gifts to 11 officials from contract holders</span></div>
     <div class="kpi"><span class="eyebrow">Same government</span><span class="v">21</span><span class="s">gifts where the contract is with the official's own government</span></div>
   </div>
-  <div class="vt-filters mt-f"><label class="vf"><span>Government</span><select id="cmG"><option value="">All</option><option value="county">Bay County Commission</option><option value="constitutional">County officers</option><option value="schools">School Board &amp; Superintendent</option><option value="pc">Panama City</option><option value="pcb">Panama City Beach</option><option value="lh">Lynn Haven</option><option value="cw">Callaway</option><option value="sp">Springfield</option><option value="parker">Parker</option><option value="mb">Mexico Beach</option></select></label></div>
+  <div class="vt-filters mt-f"><label class="vf"><span>Government</span><select id="cmG" data-param="gov"><option value="">All</option><option value="county">Bay County Commission</option><option value="constitutional">County officers</option><option value="schools">School Board &amp; Superintendent</option><option value="pc">Panama City</option><option value="pcb">Panama City Beach</option><option value="lh">Lynn Haven</option><option value="cw">Callaway</option><option value="sp">Springfield</option><option value="parker">Parker</option><option value="mb">Mexico Beach</option></select></label></div>
   <section class="tx-sec"><div class="sec-hd"><h2 id="matches">Donors who also hold local contracts</h2><span class="muted">Same-government matches first</span></div>
     <div class="tablewrap"><table class="tx-table cm-table" id="cmM"><thead><tr><th scope="col">Contributor</th><th scope="col" class="num">Gave</th><th scope="col">To</th><th scope="col">Local contracts and payments</th></tr></thead><tbody><tr data-g="county"><th scope="row"><b>Roberts and Roberts</b><small>Roberts and Roberts, Inc.</small></th>
           <td class="num">$1,000<small>2024-03-05</small></td>
@@ -321,7 +322,7 @@
 <link rel="stylesheet" href="/assets/tax.css">
 <script>
 (() => { const s = document.getElementById('cmG'); const run = () => document.querySelectorAll('#cmM tbody tr, #cmO tbody tr').forEach(tr => tr.hidden = !!s.value && tr.dataset.g !== s.value);
-  const q = new URLSearchParams(location.search).get('gov'); if (q) s.value = q; s.addEventListener('input', run); run(); })();
+  const q = new URLSearchParams(location.search).get('gov'); if (q && [...s.options].some(o => o.value === q)) s.value = q; s.addEventListener('input', run); s.addEventListener('change', run); run(); })();
 </script>
 </main>
 <footer class="site-foot"><div class="site-foot-in">
@@ -330,7 +331,6 @@
   <p class="muted foot-links">Page updated Oct 21, 2026 · <a href="/updates">What's new</a> · <a href="/updates.xml">RSS</a> · <a href="/about">Sources and method</a></p></div>
   <a class="powered" href="https://fluxlabs.net/" target="_blank" rel="noopener"><span>Powered by</span><img src="/assets/flux-labs.webp" alt="Flux Labs" width="140" height="25"></a>
 </div></footer>
-<script src="/assets/site.js" defer></script>
 <script src="/assets/report.js" defer></script>
 </body>
 </html>

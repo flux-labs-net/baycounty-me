@@ -1,0 +1,53 @@
+# Weekly refresh of sources that change slowly: Hurricane Michael FEMA Public Assistance projects (OpenFEMA, no key)
+# and the county's half-cent sales tax project map (Bay County GIS). Rebuilds the site and commits only when
+# something changed; pushing to main triggers the normal Vercel deploy, and sync-db.yml runs after this workflow.
+# Same pattern as refresh-meetings.yml. Each fetch keeps the existing file if its source fails or returns nothing.
+name: Refresh weekly sources
+on:
+  schedule:
+    - cron: '41 11 * * 2'   # Tuesdays 6:41 a.m. Central (daylight time)
+  workflow_dispatch: {}
+permissions:
+  contents: write
+concurrency:
+  group: refresh-weekly
+  cancel-in-progress: true
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install build dependencies
+        run: pip install shapely
+      - name: Fetch FEMA Public Assistance ledger (OpenFEMA)
+        id: fema
+        continue-on-error: true
+        working-directory: data/michael
+        run: python build_ledger.py < /dev/null
+      - name: Fetch sales tax project map (Bay County GIS)
+        id: gis
+        continue-on-error: true
+        working-directory: data/surtax
+        run: python fetch_gis.py < /dev/null
+      - name: Report fetch failures
+        if: steps.fema.outcome == 'failure' || steps.gis.outcome == 'failure'
+        run: |
+          echo "::warning title=Weekly refresh::FEMA fetch: ${{ steps.fema.outcome }}; GIS fetch: ${{ steps.gis.outcome }}. The previous files were kept."
+      - name: Rebuild site
+        run: |
+          cd data && python build.py && python prep_dash.py
+          cd ../site && python build_site.py > /dev/null
+      - name: Commit if changed
+        run: |
+          # Commit only when a fetched source file changed; then include whatever the rebuild regenerated.
+          if [ -z "$(git status --porcelain -- data/michael/pa_ledger.json data/surtax/gis_projects.json)" ]; then echo "No source changes"; exit 0; fi
+          paths="data site/public"
+          git config user.name "BayCounty.me bot"
+          git config user.email "hello@fluxlabs.net"
+          git add -A $paths
+          git commit -m "Weekly refresh: FEMA projects and sales tax project map ($(date -u +%Y-%m-%d))"
+          git push

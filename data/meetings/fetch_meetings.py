@@ -182,6 +182,30 @@ MONEY_KW = re.compile(
 AMOUNT_RE = re.compile(r"\$\s?\d[\d,]*(?:\.\d{1,2})?(?:\s?(?:million|thousand))?", re.I)
 
 
+AGENDA_SKIP = re.compile(
+    r"^(call to order|invocation|pledge|roll call|adjourn\w*|approval of (the )?agenda|"
+    r"additions?, deletions?|public comment\w*|mayor'?s report|commissioners'? reports?|"
+    r"city manager'?s report|city attorney'?s report|reports?)\b", re.I)
+
+
+def agenda_items(titles, limit=150):
+    """Every agenda item title (cleaned, de-duplicated), skipping procedural items.
+    Used for keyword alerts (a street name, a vendor) and search; money_items() stays the money subset."""
+    out, seen = [], set()
+    for t in titles:
+        t = re.sub(r"\s+", " ", t or "").strip(" -")
+        if len(t) < 6 or AGENDA_SKIP.match(t) or t.startswith("*") or (t.isupper() and len(t) < 45):
+            continue   # procedural items and section headings ("CONSENT AGENDA")
+        key = t[:120].lower()
+        if key in seen:
+            continue
+        seen.add(key)
+        out.append(t[:400])
+        if len(out) >= limit:
+            break
+    return out
+
+
 def money_items(titles, limit=60):
     out, seen = [], set()
     for t in titles:
@@ -324,7 +348,7 @@ def src_primegov_bocc(board, today):
 def primegov_items(m):
     tid = m.get("_html_template")
     if not tid:
-        return None, None
+        return None, None, None
     page = fetch("%s/Portal/Meeting?meetingTemplateId=%s" % (PRIMEGOV, tid))
     text = clean(page)
     text = text.replace("Combine item's attachments into one PDF and view", " ")
@@ -337,7 +361,7 @@ def primegov_items(m):
     lm = re.search(r"(BAY COUNTY GOVERNMENT CENTER\s+840 WEST 11\s*th STREET\s+PANAMA CITY,\s*FLORIDA)", text)
     if lm:
         loc = "Bay County Government Center, 840 W. 11th St., Panama City, FL"
-    return money_items(titles), loc
+    return money_items(titles), loc, agenda_items(titles)
 
 
 # ---- CivicClerk (Lynn Haven) ----------------------------------------------
@@ -407,12 +431,40 @@ def src_civicclerk_lh(today, days):
     return out
 
 
+def civicclerk_plain_titles(url):
+    """Numbered items ("12. Resolution ...") from CivicClerk's plain-text agenda file. Continuation lines are joined."""
+    text = fetch(url.replace("plainText=false", "plainText=true"))
+    titles, cur = [], None
+    for line in text.splitlines():
+        l = line.strip()
+        if not l or l.startswith("**"):
+            continue
+        mm_ = re.match(r"^(\d{1,2})\.\s+(.*)$", l)
+        if mm_:
+            if cur:
+                titles.append(cur)
+            cur = mm_.group(2)
+        elif cur is not None and re.match(r"^[A-Z][A-Z &/'-]{3,}$", l):   # section heading ends an item
+            titles.append(cur)
+            cur = None
+        elif cur is not None and not re.match(r"^[A-Z]\.\s", l):
+            cur += " " + l
+    if cur:
+        titles.append(cur)
+    # a line that ran two items together ("2027 11. Resolution ...")
+    out = []
+    for t in titles:
+        out.extend(x.strip() for x in re.split(r"\s(?=\d{1,2}\.\s+[A-Z])", t))
+    return out
+
+
 def civicclerk_items(m):
+    """(money items, all agenda items). Uses the structured agenda; if it has no items yet, the plain-text agenda file."""
     aid = m.get("_cc_agenda")
-    if not aid:
-        return None
-    d = fetch_json("%s/Meetings/%s" % (LH_CC_API, aid))
     titles = []
+    if aid:
+        d = fetch_json("%s/Meetings/%s" % (LH_CC_API, aid))
+
     def walk(items):
         for x in items or []:
             t = clean(x.get("agendaObjectItemName") or "")
@@ -420,8 +472,13 @@ def civicclerk_items(m):
                 t += " - " + clean(x.get("agendaObjectItemDescription"))
             titles.append(t)
             walk(x.get("childItems"))
-    walk(d.get("items"))
-    return money_items(titles)
+    if aid:
+        walk(d.get("items"))
+    if not titles and m.get("agenda_url") and "GetMeetingFileStream" in m["agenda_url"]:
+        titles = civicclerk_plain_titles(m["agenda_url"])
+    if not aid and not titles:
+        return None, None
+    return money_items(titles), agenda_items(titles)
 
 
 # ---- CivicPlus AgendaCenter (Panama City, Callaway) -----------------------
@@ -477,7 +534,7 @@ def src_agendacenter(host, today, days, cat_map):
 def agendacenter_html_items(m):
     url = m.get("_html_agenda")
     if not url:
-        return None, None
+        return None, None, None
     text = strip_tags(fetch(url), sep="\n")
     lines = [l.strip() for l in text.split("\n") if l.strip()]
     titles, cur = [], []
@@ -495,7 +552,7 @@ def agendacenter_html_items(m):
     if cur:
         titles.append(" ".join(cur))
     head = " ".join(lines[:12])
-    return money_items(titles), parse_time_text(head)
+    return money_items(titles), parse_time_text(head), agenda_items(titles)
 
 
 # ---- Granicus (Panama City Beach) -----------------------------------------
@@ -682,6 +739,55 @@ def src_springfield():
     return out
 
 
+# ---- Bay District Schools (Apptegy / Thrillshare district calendar) -------
+# The district website (bay.k12.fl.us, an Apptegy site) serves a JavaScript bot challenge to scripts, but the
+# calendar behind its Events page is Apptegy's public Thrillshare API (organization 31249). School Board meetings
+# are posted there with date, time and venue. Agendas are not in the feed: the district posts them on
+# bay.k12.fl.us/school-board-meetings, which scripts can't read, so agenda_url stays empty and the board
+# meetings page is the link.
+
+BDS_EVENTS = "https://thrillshare-cmsv2.services.thrillshare.com/api/v4/o/31249/cms/events"
+BDS_PAGE = "https://www.bay.k12.fl.us/school-board-meetings"
+
+
+def src_bds_events(today, days):
+    out = []
+    q = {"start_date": (today - dt.timedelta(days=120)).isoformat(),
+         "end_date": (today + dt.timedelta(days=days + 1)).isoformat()}
+    url = BDS_EVENTS + "?" + urllib.parse.urlencode(q)
+    nxt, pages, events = url, 0, []
+    try:
+        while nxt and pages < 10:
+            d = fetch_json(nxt)
+            events.extend(d.get("events") or [])
+            links = (d.get("meta") or {}).get("links") or {}
+            new = links.get("next")   # absent on the last page
+            nxt = new if new and new != nxt else None
+            pages += 1
+    except Exception as e:
+        note_error("schools", "District calendar (Thrillshare)", url, e)
+        return out
+    seen = set()
+    for ev in events:
+        title = (ev.get("title") or "").strip()
+        if not re.search(r"school board|board meeting|board workshop", title, re.I):
+            continue
+        if ev.get("id") in seen:
+            continue
+        seen.add(ev.get("id"))
+        try:
+            st = dt.datetime.fromisoformat(re.sub(r"\.\d+", "", ev.get("start_at") or ""))
+        except ValueError:
+            continue
+        timed = not ev.get("all_day")
+        venue = (ev.get("venue") or ev.get("address") or "").replace(", USA", "").strip() or None
+        out.append(meeting("schools", title, st.date(), st.hour if timed else None, st.minute if timed else 0,
+                           location=venue, source="Thrillshare:" + BDS_EVENTS, status="calendar",
+                           detail_url=BDS_PAGE))
+    note_ok("schools", "District calendar (Thrillshare)", len(out))
+    return out
+
+
 # --------------------------------------------------------------------------
 # Board catalogue
 # --------------------------------------------------------------------------
@@ -701,11 +807,13 @@ BOARDS = [
      "source_url": "https://www.baycountyfl.gov/Calendar.aspx",
      "calendar_url": "https://www.baycountyfl.gov/Calendar.aspx"},
     {"id": "schools", "name": "Bay District School Board", "gov": "schools",
-     "schedule": "Not available: bay.k12.fl.us serves a JavaScript bot challenge to server requests and "
-                 "the district's published meeting-schedule PDF could not be retrieved. No dates are generated.",
-     "schedule_source_url": "https://www.bay.k12.fl.us/o/bds/page/school-board",
-     "location": "Bay District Schools, 1311 Balboa Ave., Panama City, FL 32401 (district office address; meeting venue not confirmed)",
-     "source_url": "https://www.bay.k12.fl.us/o/bds/page/school-board", "calendar_url": None},
+     "schedule": "Regular meetings generally the 2nd and 4th Tuesday at 3:00 p.m. at the district office, "
+                 "1311 Balboa Ave. (dates and times as posted on the district calendar). Agendas are posted on the "
+                 "district's School Board Meetings page.",
+     "schedule_source_url": "https://www.bay.k12.fl.us/events",
+     "location": "Bay District Schools, 1311 Balboa Ave., Panama City, FL 32401",
+     "source_url": "https://www.bay.k12.fl.us/school-board-meetings",
+     "calendar_url": "https://thrillshare-cmsv2.services.thrillshare.com/api/v4/o/31249/cms/events/generate_ical?filter_ids&section_ids"},
     {"id": "pc", "name": "Panama City City Commission", "gov": "pc",
      "schedule": "2nd and 4th Tuesday of each month, unless otherwise stated: 2nd Tuesday at 8 a.m., "
                  "4th Tuesday at 4:30 p.m., at the Bay County Government Center, 840 W. 11th St. "
@@ -859,6 +967,8 @@ def finalize(m, board, past=False):
         o["time_from_schedule"] = True
     if m.get("items") is not None:
         o["items"] = m["items"]
+    if m.get("agenda_items"):
+        o["agenda_items"] = m["agenda_items"]
     return o
 
 
@@ -888,14 +998,8 @@ def main(argv):
     cal["county"] += civicplus_ical("county", "www.baycountyfl.gov", 38, r"Board of County Commissioners|BOCC")
     cal["county-planning"] += civicplus_ical("county-planning", "www.baycountyfl.gov", 26, r"Planning Commission")
 
-    # Schools - documented failure (bot challenge); record it each run.
-    try:
-        page = fetch("https://www.bay.k12.fl.us/o/bds/page/school-board", tries=1)
-        if "Client Challenge" in page or len(page) < 5000:
-            raise RuntimeError("JavaScript bot challenge page returned (no content for server requests)")
-        SOURCE_LOG.setdefault("schools", {})["website"] = "reachable (no parser implemented)"
-    except Exception as e:
-        note_error("schools", "website", "https://www.bay.k12.fl.us/o/bds/page/school-board", e)
+    # Schools: the district calendar's public API (the website itself blocks scripts).
+    cal["schools"] += safe("schools", "District calendar (Thrillshare)", src_bds_events, today, days) or []
 
     # Panama City + CRA
     r = safe("pc", "AgendaCenter", src_agendacenter, "www.panamacity.gov", today, days,
@@ -946,15 +1050,17 @@ def main(argv):
                 continue
             try:
                 if m.get("_html_template"):
-                    items, loc = primegov_items(m)
-                    m["items"] = items
+                    items, loc, allit = primegov_items(m)
+                    m["items"], m["agenda_items"] = items, allit
                     if loc and not m.get("location"):
                         m["location"] = loc
-                elif m.get("_cc_agenda"):
-                    m["items"] = civicclerk_items(m)
+                elif m.get("_cc_agenda") or "GetMeetingFileStream" in (m.get("agenda_url") or ""):
+                    items, allit = civicclerk_items(m)
+                    if items is not None:
+                        m["items"], m["agenda_items"] = items, allit
                 elif m.get("_html_agenda"):
-                    items, t = agendacenter_html_items(m)
-                    m["items"] = items
+                    items, t, allit = agendacenter_html_items(m)
+                    m["items"], m["agenda_items"] = items, allit
                     if t and m["hh"] is None:
                         m["hh"], m["mm"] = t
             except Exception as e:

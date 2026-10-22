@@ -1,17 +1,18 @@
 {
  "as_of": "2026-10-21",
- "method": "Writes data/votes/contract_votes.json and data/votes/contract_votes_review.json. Run by data/build.py.\nA vote is linked to a contract record when all of these hold:\n  * same government (vote body -> gov_id; a CRA board counts as its city),\n  * vote date within 45 days of the record's agenda date (either side),\n  * and the vote agrees with the record in at least two ways, from:\n      vendor_name  - the vote text names the vendor by one of its aliases (whole words, at least 6 letters),\n      item_number  - the vote text and the record share a bid/contract/RFQ number such as \"PC24-005\" or \"24-18\",\n      agenda_item  - the vote text and the record's description share at least 3 distinctive words (not the vendor's name),\n      amount       - the vote amount equals the record amount to the dollar (and the vote names no other vendor);\n    or the vendor is named in a vote on the same day, the amounts are within 10% (or one is missing) and no other vendor is named;\n    or the number matches on the same day.\nWhen several votes qualify, the one with the most kinds of agreement (then the closest date) is kept. Everything weaker\n(amount only, description only, vendor named but amounts differ) goes to the review file. A link shows that the minutes record a vote on the item; it does not show why anyone voted as they did.",
- "count_links": 82,
- "count_records_linked": 82,
- "count_votes_linked": 81,
- "count_contracts_linked": 79,
+ "method": "Writes data/votes/contract_votes.json and data/votes/contract_votes_review.json. Run by data/build.py.\nA vote is linked to a contract record when all of these hold:\n  * same government (vote body -> gov_id; a CRA board counts as its city),\n  * vote date within 45 days of the record's agenda date (either side),\n  * and the vote agrees with the record in at least two ways, from:\n      vendor_name  - the vote text names the vendor by one of its aliases (whole words, at least 6 letters),\n      item_number  - the vote text and the record share a bid/contract/RFQ number such as \"PC24-005\" or \"24-18\",\n      agenda_item  - the vote text and the record's description share at least 3 distinctive words (not the vendor's name),\n      amount       - the vote amount equals the record amount to the dollar (and the vote names no other vendor);\n    or the vendor is named in a vote on the same day, both amounts are given and within 3%, and no other vendor is named;\n    or the number matches on the same day.\nWhen several votes qualify, the one with the most kinds of agreement (then the closest date) is kept. Everything weaker\n(amount only, description only, vendor named but amounts differ) goes to the review file. A link shows that the minutes record a vote on the item; it does not show why anyone voted as they did.",
+ "count_links": 100,
+ "count_records_linked": 100,
+ "count_votes_linked": 98,
+ "count_contracts_linked": 96,
  "by_method": {
-  "vendor_name+agenda_item+amount": 26,
-  "vendor_name+item_number+agenda_item+amount": 26,
-  "vendor_name+amount": 5,
+  "vendor_name+amount": 11,
+  "vendor_name+agenda_item+amount": 31,
+  "vendor_name": 1,
+  "vendor_name+item_number+agenda_item+amount": 30,
   "vendor_name+item_number+amount": 5,
-  "vendor_name+item_number+agenda_item": 9,
-  "vendor_name+agenda_item": 2,
+  "vendor_name+item_number+agenda_item": 10,
+  "vendor_name+agenda_item": 3,
   "item_number+agenda_item+amount": 4,
   "vendor_name+item_number": 1,
   "item_number+agenda_item": 1,
@@ -19,7 +20,262 @@
  },
  "links": [
   {
-   "record_id": "contract:42",
+   "record_id": "contract:1",
+   "record_type": "contract",
+   "vendor_ids": [
+    "roberts-and-roberts"
+   ],
+   "gov_id": "cw",
+   "record_date": "2024-12-10",
+   "record_amount": 818268.7,
+   "record_what": "Legislative paving: Boat Race Road, Big Oak Lane and Hardwood Court (not to exceed)",
+   "record_url": "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Minutes/_12102024-339",
+   "vote_index": 372,
+   "vote_id": "cw-commission:2024-12-10:approve-the-contract-award-to-roberts-ro",
+   "vote_date": "2024-12-10",
+   "days_apart": 0,
+   "match_method": "vendor_name+amount"
+  },
+  {
+   "record_id": "contract:3",
+   "record_type": "contract",
+   "vendor_ids": [
+    "mainline"
+   ],
+   "gov_id": "cw",
+   "record_date": "2025-04-08",
+   "record_amount": 2174001.55,
+   "record_what": "Bid PW2024-16, lift station rehabilitation Phase 1 (not to exceed; contingent on state approval)",
+   "record_url": "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Minutes/_04082025-353",
+   "vote_index": 374,
+   "vote_id": "cw-commission:2025-04-08:approve-the-award-to-mainline-constructi",
+   "vote_date": "2025-04-08",
+   "days_apart": 0,
+   "match_method": "vendor_name+amount"
+  },
+  {
+   "record_id": "contract:4",
+   "record_type": "contract",
+   "vendor_ids": [
+    "roberts-and-roberts"
+   ],
+   "gov_id": "cw",
+   "record_date": "2025-04-08",
+   "record_amount": 2131420.7,
+   "record_what": "Bid CM2024-09, Hugh Thomas Drive north extension (not to exceed; contingent on state approval)",
+   "record_url": "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Minutes/_04082025-353",
+   "vote_index": 375,
+   "vote_id": "cw-commission:2025-04-08:approve-the-award-to-roberts-roberts-inc",
+   "vote_date": "2025-04-08",
+   "days_apart": 0,
+   "match_method": "vendor_name+amount"
+  },
+  {
+   "record_id": "contract:5",
+   "record_type": "contract",
+   "vendor_ids": [
+    "holley-development"
+   ],
+   "gov_id": "cw",
+   "record_date": "2025-04-22",
+   "record_amount": 1237500.0,
+   "record_what": "Bid CM2025-03, Beacon Point Plaza north outparcel (not to exceed; contingent on state approval)",
+   "record_url": "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Minutes/_04222025-354",
+   "vote_index": 376,
+   "vote_id": "cw-commission:2025-04-22:approve-the-award-to-holley-development",
+   "vote_date": "2025-04-22",
+   "days_apart": 0,
+   "match_method": "vendor_name+amount"
+  },
+  {
+   "record_id": "contract:6",
+   "record_type": "contract",
+   "vendor_ids": [
+    "gcuc"
+   ],
+   "gov_id": "cw",
+   "record_date": "2025-09-23",
+   "record_amount": 271403.61,
+   "record_what": "Bid CM2025-09, East Bay paver & drainage project (not to exceed)",
+   "record_url": "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Minutes/_09232025-376",
+   "vote_index": 384,
+   "vote_id": "cw-commission:2025-09-23:award-to-gulf-coast-utility-contractors",
+   "vote_date": "2025-09-23",
+   "days_apart": 0,
+   "match_method": "vendor_name+amount"
+  },
+  {
+   "record_id": "contract:7",
+   "record_type": "contract",
+   "vendor_ids": [
+    "american-sand"
+   ],
+   "gov_id": "cw",
+   "record_date": "2026-09-22",
+   "record_amount": 334344.25,
+   "record_what": "Bid CM2026-12, Beulah Avenue paving (not to exceed)",
+   "record_url": "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_10132026-425",
+   "vote_index": 398,
+   "vote_id": "cw-commission:2026-09-22:approve-the-bid-award-cm2026-12-beulah-a",
+   "vote_date": "2026-09-22",
+   "days_apart": 0,
+   "match_method": "vendor_name+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:8",
+   "record_type": "contract",
+   "vendor_ids": [
+    "american-sand"
+   ],
+   "gov_id": "cw",
+   "record_date": "2026-09-22",
+   "record_amount": 351280.14,
+   "record_what": "Bid CM2026-13, South Gay Avenue paving, Cherry Street to Lake Drive (base bid plus alternate; not to exceed)",
+   "record_url": "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_10132026-425",
+   "vote_index": 399,
+   "vote_id": "cw-commission:2026-09-22:approve-the-bid-award-cm2026-13-south-ga",
+   "vote_date": "2026-09-22",
+   "days_apart": 0,
+   "match_method": "vendor_name+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:9",
+   "record_type": "contract",
+   "vendor_ids": [
+    "reliantsouth"
+   ],
+   "gov_id": "sp",
+   "record_date": "2024-10-03",
+   "record_amount": 22318442.0,
+   "record_what": "City Complex construction",
+   "record_url": "https://www.springfieldfl.net/media/9236",
+   "vote_index": 413,
+   "vote_id": "sp-commission:2024-10-03:city-complex-project-reject-killian-cons",
+   "vote_date": "2024-10-03",
+   "days_apart": 0,
+   "match_method": "vendor_name"
+  },
+  {
+   "record_id": "contract:10",
+   "record_type": "contract",
+   "vendor_ids": [
+    "reliantsouth"
+   ],
+   "gov_id": "sp",
+   "record_date": "2025-06-02",
+   "record_amount": 5721789.0,
+   "record_what": "Civic Center construction",
+   "record_url": "https://www.springfieldfl.net/media/9991",
+   "vote_index": 429,
+   "vote_id": "sp-commission:2025-06-02:civic-center-construction-award-to-relia",
+   "vote_date": "2025-06-02",
+   "days_apart": 0,
+   "match_method": "vendor_name+amount"
+  },
+  {
+   "record_id": "contract:11",
+   "record_type": "contract",
+   "vendor_ids": [
+    "mainline"
+   ],
+   "gov_id": "sp",
+   "record_date": "2026-02-02",
+   "record_amount": 1838055.83,
+   "record_what": "CDBG-DR Nature Park construction project",
+   "record_url": "https://www.springfieldfl.net/media/10451",
+   "vote_index": 449,
+   "vote_id": "sp-commission:2026-02-02:award-the-cdbg-dr-nature-park-constructi",
+   "vote_date": "2026-02-02",
+   "days_apart": 0,
+   "match_method": "vendor_name+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:12",
+   "record_type": "contract",
+   "vendor_ids": [
+    "gcuc"
+   ],
+   "gov_id": "sp",
+   "record_date": "2026-09-08",
+   "record_amount": 1036773.6,
+   "record_what": "Project M0056, School Avenue streetscape",
+   "record_url": "https://www.springfieldfl.net/media/10871",
+   "vote_index": 463,
+   "vote_id": "sp-commission:2026-09-08:award-m0056-school-avenue-streetscape-pr",
+   "vote_date": "2026-09-08",
+   "days_apart": 0,
+   "match_method": "vendor_name+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:13",
+   "record_type": "contract",
+   "vendor_ids": [
+    "marshall-brothers"
+   ],
+   "gov_id": "sp",
+   "record_date": "2025-12-01",
+   "record_amount": 566489.0,
+   "record_what": "RFP 25-04, sanitary sewer bypass pump station project",
+   "record_url": "https://www.springfieldfl.net/media/10401",
+   "vote_index": 445,
+   "vote_id": "sp-commission:2025-12-01:award-the-sanitary-sewer-bypass-pump-sta",
+   "vote_date": "2025-12-01",
+   "days_apart": 0,
+   "match_method": "vendor_name+item_number+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:14",
+   "record_type": "contract",
+   "vendor_ids": [
+    "hall-s-contracting-construction"
+   ],
+   "gov_id": "sp",
+   "record_date": "2025-09-02",
+   "record_amount": 88943.0,
+   "record_what": "RFP 25-03, facade project (CDBG-funded), pending FloridaCommerce approval",
+   "record_url": "https://www.springfieldfl.net/media/10126",
+   "vote_index": 433,
+   "vote_id": "sp-commission:2025-09-02:award-rfp-25-03-facade-project-to-hall-s",
+   "vote_date": "2025-09-02",
+   "days_apart": 0,
+   "match_method": "vendor_name+item_number+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:15",
+   "record_type": "contract",
+   "vendor_ids": [
+    "stoa-architects"
+   ],
+   "gov_id": "sp",
+   "record_date": "2025-02-03",
+   "record_amount": 72033.0,
+   "record_what": "Task Order 2, redesign of the Nature Park on Transmitter Road",
+   "record_url": "https://www.springfieldfl.net/media/9551",
+   "vote_index": 422,
+   "vote_id": "sp-commission:2025-02-03:stoa-architects-task-order-2-redesign-of",
+   "vote_date": "2025-02-03",
+   "days_apart": 0,
+   "match_method": "vendor_name+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:16",
+   "record_type": "contract",
+   "vendor_ids": [
+    "breaking-ground"
+   ],
+   "gov_id": "sp",
+   "record_date": "2025-09-02",
+   "record_amount": 71186.0,
+   "record_what": "RFP 25-01, 2nd Street sidewalk project (after the Preslie Construction contract was terminated)",
+   "record_url": "https://www.springfieldfl.net/media/10126",
+   "vote_index": 432,
+   "vote_id": "sp-commission:2025-09-02:terminate-preslie-construction-sidewalk",
+   "vote_date": "2025-09-02",
+   "days_apart": 0,
+   "match_method": "vendor_name+item_number+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:59",
    "record_type": "contract",
    "vendor_ids": [
     "hall-contracting"
@@ -36,7 +292,7 @@
    "match_method": "vendor_name+agenda_item+amount"
   },
   {
-   "record_id": "contract:45",
+   "record_id": "contract:62",
    "record_type": "contract",
    "vendor_ids": [
     "barge"
@@ -53,7 +309,7 @@
    "match_method": "vendor_name+item_number+agenda_item+amount"
   },
   {
-   "record_id": "contract:46",
+   "record_id": "contract:63",
    "record_type": "contract",
    "vendor_ids": [
     "cw-roberts"
@@ -70,7 +326,7 @@
    "match_method": "vendor_name+item_number+agenda_item+amount"
   },
   {
-   "record_id": "contract:47",
+   "record_id": "contract:64",
    "record_type": "contract",
    "vendor_ids": [
     "rj-gorman-marine"
@@ -87,7 +343,7 @@
    "match_method": "vendor_name+item_number+agenda_item+amount"
   },
   {
-   "record_id": "contract:50",
+   "record_id": "contract:67",
    "record_type": "contract",
    "vendor_ids": [
     "american-sand"
@@ -104,7 +360,7 @@
    "match_method": "vendor_name+amount"
   },
   {
-   "record_id": "contract:51",
+   "record_id": "contract:68",
    "record_type": "contract",
    "vendor_ids": [
     "roberts-and-roberts"
@@ -121,7 +377,7 @@
    "match_method": "vendor_name+agenda_item+amount"
   },
   {
-   "record_id": "contract:56",
+   "record_id": "contract:73",
    "record_type": "contract",
    "vendor_ids": [
     "dominguez-design-build"
@@ -138,7 +394,7 @@
    "match_method": "vendor_name+agenda_item+amount"
   },
   {
-   "record_id": "contract:61",
+   "record_id": "contract:78",
    "record_type": "contract",
    "vendor_ids": [
     "american-sand"
@@ -155,7 +411,7 @@
    "match_method": "vendor_name+amount"
   },
   {
-   "record_id": "contract:63",
+   "record_id": "contract:80",
    "record_type": "contract",
    "vendor_ids": [
     "weeks-marine"
@@ -172,7 +428,7 @@
    "match_method": "vendor_name+item_number+amount"
   },
   {
-   "record_id": "contract:65",
+   "record_id": "contract:82",
    "record_type": "contract",
    "vendor_ids": [
     "marshall-brothers"
@@ -189,7 +445,7 @@
    "match_method": "vendor_name+item_number+agenda_item+amount"
   },
   {
-   "record_id": "contract:68",
+   "record_id": "contract:85",
    "record_type": "contract",
    "vendor_ids": [
     "marshall-brothers"
@@ -206,7 +462,7 @@
    "match_method": "vendor_name+item_number+agenda_item+amount"
   },
   {
-   "record_id": "contract:69",
+   "record_id": "contract:86",
    "record_type": "contract",
    "vendor_ids": [
     "cogburn-brothers"
@@ -223,7 +479,7 @@
    "match_method": "vendor_name+item_number+agenda_item+amount"
   },
   {
-   "record_id": "contract:71",
+   "record_id": "contract:88",
    "record_type": "contract",
    "vendor_ids": [
     "culpepper"
@@ -240,7 +496,7 @@
    "match_method": "vendor_name+item_number+agenda_item+amount"
   },
   {
-   "record_id": "contract:73",
+   "record_id": "contract:90",
    "record_type": "contract",
    "vendor_ids": [
     "reeves-shaw"
@@ -257,7 +513,7 @@
    "match_method": "vendor_name+item_number+agenda_item"
   },
   {
-   "record_id": "contract:74",
+   "record_id": "contract:91",
    "record_type": "contract",
    "vendor_ids": [
     "charles-white"
@@ -274,7 +530,7 @@
    "match_method": "vendor_name+agenda_item+amount"
   },
   {
-   "record_id": "contract:75",
+   "record_id": "contract:92",
    "record_type": "contract",
    "vendor_ids": [
     "metric"
@@ -291,7 +547,7 @@
    "match_method": "vendor_name+item_number+agenda_item+amount"
   },
   {
-   "record_id": "contract:76",
+   "record_id": "contract:93",
    "record_type": "contract",
    "vendor_ids": [
     "ecsc"
@@ -308,7 +564,7 @@
    "match_method": "vendor_name+item_number+agenda_item+amount"
   },
   {
-   "record_id": "contract:77",
+   "record_id": "contract:94",
    "record_type": "contract",
    "vendor_ids": [
     "astroturf"
@@ -325,7 +581,7 @@
    "match_method": "vendor_name+agenda_item"
   },
   {
-   "record_id": "contract:79",
+   "record_id": "contract:96",
    "record_type": "contract",
    "vendor_ids": [
     "marshall-brothers"
@@ -342,7 +598,7 @@
    "match_method": "vendor_name+item_number+agenda_item+amount"
   },
   {
-   "record_id": "contract:80",
+   "record_id": "contract:97",
    "record_type": "contract",
    "vendor_ids": [
     "royal-american"
@@ -359,7 +615,7 @@
    "match_method": "vendor_name+item_number+agenda_item+amount"
   },
   {
-   "record_id": "contract:82",
+   "record_id": "contract:99",
    "record_type": "contract",
    "vendor_ids": [
     "accurate-drilling-systems"
@@ -376,7 +632,7 @@
    "match_method": "vendor_name+item_number+agenda_item+amount"
   },
   {
-   "record_id": "contract:84",
+   "record_id": "contract:101",
    "record_type": "contract",
    "vendor_ids": [
     "a-c-schultes-florida"
@@ -393,7 +649,7 @@
    "match_method": "vendor_name+item_number+amount"
   },
   {
-   "record_id": "contract:85",
+   "record_id": "contract:102",
    "record_type": "contract",
    "vendor_ids": [
     "anderson-columbia"
@@ -410,7 +666,7 @@
    "match_method": "vendor_name+item_number+agenda_item+amount"
   },
   {
-   "record_id": "contract:86",
+   "record_id": "contract:103",
    "record_type": "contract",
    "vendor_ids": [
     "cw-roberts"
@@ -427,7 +683,7 @@
    "match_method": "vendor_name+item_number+amount"
   },
   {
-   "record_id": "contract:87",
+   "record_id": "contract:104",
    "record_type": "contract",
    "vendor_ids": [
     "phoenix"
@@ -444,7 +700,7 @@
    "match_method": "vendor_name+item_number+agenda_item"
   },
   {
-   "record_id": "contract:90",
+   "record_id": "contract:107",
    "record_type": "contract",
    "vendor_ids": [
     "asrus"
@@ -461,7 +717,7 @@
    "match_method": "item_number+agenda_item+amount"
   },
   {
-   "record_id": "contract:91",
+   "record_id": "contract:108",
    "record_type": "contract",
    "vendor_ids": [
     "ncmc"
@@ -478,7 +734,7 @@
    "match_method": "item_number+agenda_item+amount"
   },
   {
-   "record_id": "contract:96",
+   "record_id": "contract:113",
    "record_type": "contract",
    "vendor_ids": [
     "dewberry"
@@ -495,7 +751,7 @@
    "match_method": "vendor_name+agenda_item+amount"
   },
   {
-   "record_id": "contract:98",
+   "record_id": "contract:115",
    "record_type": "contract",
    "vendor_ids": [
     "marshall-brothers"
@@ -512,7 +768,7 @@
    "match_method": "vendor_name+item_number+agenda_item+amount"
   },
   {
-   "record_id": "contract:101",
+   "record_id": "contract:118",
    "record_type": "contract",
    "vendor_ids": [
     "emr"
@@ -529,7 +785,7 @@
    "match_method": "item_number+agenda_item+amount"
   },
   {
-   "record_id": "contract:103",
+   "record_id": "contract:120",
    "record_type": "contract",
    "vendor_ids": [
     "roberts-and-roberts"
@@ -546,7 +802,7 @@
    "match_method": "vendor_name+agenda_item"
   },
   {
-   "record_id": "contract:110",
+   "record_id": "contract:127",
    "record_type": "contract",
    "vendor_ids": [
     "anderson-columbia"
@@ -563,7 +819,7 @@
    "match_method": "vendor_name+agenda_item+amount"
   },
   {
-   "record_id": "contract:111",
+   "record_id": "contract:128",
    "record_type": "contract",
    "vendor_ids": [
     "coastal-protection-engineering"
@@ -580,7 +836,7 @@
    "match_method": "vendor_name+agenda_item+amount"
   },
   {
-   "record_id": "contract:116",
+   "record_id": "contract:133",
    "record_type": "contract",
    "vendor_ids": [
     "cw-roberts"
@@ -597,7 +853,7 @@
    "match_method": "vendor_name+item_number+amount"
   },
   {
-   "record_id": "contract:117",
+   "record_id": "contract:134",
    "record_type": "contract",
    "vendor_ids": [
     "ncmc"
@@ -614,7 +870,7 @@
    "match_method": "item_number+agenda_item+amount"
   },
   {
-   "record_id": "contract:126",
+   "record_id": "contract:143",
    "record_type": "contract",
    "vendor_ids": [
     "anderson-columbia"
@@ -631,7 +887,7 @@
    "match_method": "vendor_name+item_number+agenda_item+amount"
   },
   {
-   "record_id": "contract:137",
+   "record_id": "contract:154",
    "record_type": "contract",
    "vendor_ids": [
     "ferguson-waterworks"
@@ -641,14 +897,14 @@
    "record_amount": 305074.08,
    "record_what": "Bid CM2026-03, Cherry Street water main improvement materials Phase 3",
    "record_url": "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_05122026-406",
-   "vote_index": 367,
+   "vote_index": 388,
    "vote_id": "cw-commission:2026-04-28:approve-the-bid-award-to-ferguson-waterw",
    "vote_date": "2026-04-28",
    "days_apart": 0,
    "match_method": "vendor_name+amount"
   },
   {
-   "record_id": "contract:139",
+   "record_id": "contract:156",
    "record_type": "contract",
    "vendor_ids": [
     "core-main"
@@ -658,14 +914,14 @@
    "record_amount": 561316.13,
    "record_what": "Bid PW2026-07, water meters (not to exceed)",
    "record_url": "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_08112026-414",
-   "vote_index": 370,
+   "vote_index": 391,
    "vote_id": "cw-commission:2026-08-11:approve-the-contract-to-core-main-lp-in",
    "vote_date": "2026-08-11",
    "days_apart": 0,
    "match_method": "vendor_name+amount"
   },
   {
-   "record_id": "contract:150",
+   "record_id": "contract:167",
    "record_type": "contract",
    "vendor_ids": [
     "american-sand"
@@ -675,14 +931,14 @@
    "record_amount": 757965.0,
    "record_what": "Stormwater improvements and paving, Senior Center parking area",
    "record_url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_06212024-765",
-   "vote_index": 285,
+   "vote_index": 306,
    "vote_id": "lh-commission:2024-06-25:item-14-discussion-and-possible-approval",
    "vote_date": "2024-06-25",
    "days_apart": 4,
    "match_method": "vendor_name+agenda_item+amount"
   },
   {
-   "record_id": "contract:153",
+   "record_id": "contract:170",
    "record_type": "contract",
    "vendor_ids": [
     "mott-macdonald"
@@ -692,14 +948,14 @@
    "record_amount": 3487000.0,
    "record_what": "Advanced Wastewater Treatment Facility engineering services (plus allowance up to $245,000)",
    "record_url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_06212024-765",
-   "vote_index": 286,
+   "vote_index": 307,
    "vote_id": "lh-commission:2024-06-25:item-17-discussion-and-possible-approval",
    "vote_date": "2024-06-25",
    "days_apart": 4,
    "match_method": "vendor_name+agenda_item+amount"
   },
   {
-   "record_id": "contract:154",
+   "record_id": "contract:171",
    "record_type": "contract",
    "vendor_ids": [
     "cw-roberts"
@@ -709,14 +965,14 @@
    "record_amount": 780050.0,
    "record_what": "Legislative roadway paving project phase",
    "record_url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_08092024-785",
-   "vote_index": 287,
+   "vote_index": 308,
    "vote_id": "lh-commission:2024-08-13:item-21-discussion-and-possible-approval",
    "vote_date": "2024-08-13",
    "days_apart": 4,
    "match_method": "vendor_name+agenda_item+amount"
   },
   {
-   "record_id": "contract:159",
+   "record_id": "contract:176",
    "record_type": "contract",
    "vendor_ids": [
     "sutphen"
@@ -726,14 +982,14 @@
    "record_amount": 1036122.0,
    "record_what": "Purchase of a new Sutphen Extreme Duty fire engine (Resolution 2025-10-481, in FY26 budget)",
    "record_url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10142025-1032",
-   "vote_index": 309,
+   "vote_index": 330,
    "vote_id": "lh-commission:2025-10-14:approve-of-resolution-2025-10-481-approv",
    "vote_date": "2025-10-14",
    "days_apart": 0,
    "match_method": "vendor_name+item_number+amount"
   },
   {
-   "record_id": "contract:161",
+   "record_id": "contract:178",
    "record_type": "contract",
    "vendor_ids": [
     "panhandle-engineering"
@@ -743,14 +999,14 @@
    "record_amount": 146399.0,
    "record_what": "Task order, lift station improvements",
    "record_url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10142025-1032",
-   "vote_index": 311,
+   "vote_index": 332,
    "vote_id": "lh-commission:2025-10-14:approval-to-authorize-the-mayor-to-execu",
    "vote_date": "2025-10-14",
    "days_apart": 0,
    "match_method": "vendor_name+amount"
   },
   {
-   "record_id": "contract:163",
+   "record_id": "contract:180",
    "record_type": "contract",
    "vendor_ids": [
     "panhandle-engineering"
@@ -760,14 +1016,14 @@
    "record_amount": 382820.0,
    "record_what": "Task order, sewer force main improvements design",
    "record_url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_11122025-1054",
-   "vote_index": 316,
+   "vote_index": 337,
    "vote_id": "lh-commission:2025-11-12:approve-and-authorize-mayor-nelson-to-ex",
    "vote_date": "2025-11-12",
    "days_apart": 0,
    "match_method": "vendor_name+agenda_item+amount"
   },
   {
-   "record_id": "contract:164",
+   "record_id": "contract:181",
    "record_type": "contract",
    "vendor_ids": [
     "bcl"
@@ -777,14 +1033,14 @@
    "record_amount": 623137.69,
    "record_what": "IFB 25.26-02, Tennessee Avenue sidewalk construction (Resolution 2026-01-509)",
    "record_url": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_01132026-1083",
-   "vote_index": 318,
+   "vote_index": 339,
    "vote_id": "lh-commission:2026-01-13:item-15-discussion-and-possible-approval",
    "vote_date": "2026-01-13",
    "days_apart": 0,
    "match_method": "vendor_name+item_number+agenda_item+amount"
   },
   {
-   "record_id": "contract:168",
+   "record_id": "contract:185",
    "record_type": "contract",
    "vendor_ids": [
     "mainline"
@@ -794,14 +1050,14 @@
    "record_amount": 1222819.6,
    "record_what": "Lift station rehabilitations at Nanook St ($423,323.63) and 14th Street ($799,495.97); city covers a $71,039.60 overrun with local option gas tax",
    "record_url": "https://mexicobeachfl.gov/uploads/2025/05/April-8-2025-City-Council-Meeting-Minutes.pdf",
-   "vote_index": 460,
+   "vote_index": 490,
    "vote_id": "mb-council:2025-04-08:accept-mainline-construction-bids-for-li",
    "vote_date": "2025-04-08",
    "days_apart": 0,
    "match_method": "vendor_name+agenda_item+amount"
   },
   {
-   "record_id": "contract:170",
+   "record_id": "contract:187",
    "record_type": "contract",
    "vendor_ids": [
     "gcuc"
@@ -811,14 +1067,14 @@
    "record_amount": 4267436.0,
    "record_what": "Mexico Beach jetties project (FEMA-funded); award conditional on full FEMA reimbursement and a council notice to proceed",
    "record_url": "https://mexicobeachfl.gov/uploads/2025/09/September-9-2025-City-Council-Minutes.pdf",
-   "vote_index": 461,
+   "vote_index": 491,
    "vote_id": "mb-council:2025-09-09:award-jetties-project-to-gulf-coast-util",
    "vote_date": "2025-09-09",
    "days_apart": 0,
    "match_method": "vendor_name+agenda_item+amount"
   },
   {
-   "record_id": "contract:197",
+   "record_id": "contract:214",
    "record_type": "contract",
    "vendor_ids": [
     "cw-roberts"
@@ -835,7 +1091,7 @@
    "match_method": "vendor_name+item_number+agenda_item+amount"
   },
   {
-   "record_id": "contract:198",
+   "record_id": "contract:215",
    "record_type": "contract",
    "vendor_ids": [
     "burke-construction-group"
@@ -852,7 +1108,7 @@
    "match_method": "vendor_name+agenda_item+amount"
   },
   {
-   "record_id": "contract:199",
+   "record_id": "contract:216",
    "record_type": "contract",
    "vendor_ids": [
     "extreme-land-clearing-excavation"
@@ -869,7 +1125,7 @@
    "match_method": "vendor_name+item_number"
   },
   {
-   "record_id": "contract:204",
+   "record_id": "contract:221",
    "record_type": "contract",
    "vendor_ids": [
     "mainline"
@@ -886,7 +1142,7 @@
    "match_method": "vendor_name+item_number+agenda_item"
   },
   {
-   "record_id": "contract:205",
+   "record_id": "contract:222",
    "record_type": "contract",
    "vendor_ids": [
     "mainline"
@@ -903,7 +1159,7 @@
    "match_method": "vendor_name+item_number+agenda_item+amount"
   },
   {
-   "record_id": "contract:206",
+   "record_id": "contract:223",
    "record_type": "contract",
    "vendor_ids": [
     "gcuc"
@@ -920,7 +1176,7 @@
    "match_method": "vendor_name+item_number+agenda_item+amount"
   },
   {
-   "record_id": "contract:208",
+   "record_id": "contract:225",
    "record_type": "contract",
    "vendor_ids": [
     "bcl"
@@ -937,7 +1193,7 @@
    "match_method": "vendor_name+agenda_item+amount"
   },
   {
-   "record_id": "contract:212",
+   "record_id": "contract:229",
    "record_type": "contract",
    "vendor_ids": [
     "cbc"
@@ -954,7 +1210,7 @@
    "match_method": "vendor_name+item_number+agenda_item+amount"
   },
   {
-   "record_id": "contract:217",
+   "record_id": "contract:234",
    "record_type": "contract",
    "vendor_ids": [
     "gcuc"
@@ -971,7 +1227,7 @@
    "match_method": "vendor_name+item_number+agenda_item+amount"
   },
   {
-   "record_id": "contract:218",
+   "record_id": "contract:235",
    "record_type": "contract",
    "vendor_ids": [
     "royal-american"
@@ -988,7 +1244,7 @@
    "match_method": "vendor_name+item_number+agenda_item+amount"
   },
   {
-   "record_id": "contract:220",
+   "record_id": "contract:237",
    "record_type": "contract",
    "vendor_ids": [
     "panhandle-landscape-solutions"
@@ -1005,7 +1261,7 @@
    "match_method": "vendor_name+item_number+agenda_item+amount"
   },
   {
-   "record_id": "contract:222",
+   "record_id": "contract:239",
    "record_type": "contract",
    "vendor_ids": [
     "mainline"
@@ -1022,7 +1278,7 @@
    "match_method": "vendor_name+item_number+agenda_item+amount"
   },
   {
-   "record_id": "contract:230",
+   "record_id": "contract:247",
    "record_type": "contract",
    "vendor_ids": [
     "royal-american"
@@ -1039,7 +1295,7 @@
    "match_method": "vendor_name+item_number+agenda_item"
   },
   {
-   "record_id": "contract:232",
+   "record_id": "contract:249",
    "record_type": "contract",
    "vendor_ids": [
     "rcl-emerald-coast"
@@ -1056,7 +1312,7 @@
    "match_method": "vendor_name+item_number+agenda_item+amount"
   },
   {
-   "record_id": "contract:234",
+   "record_id": "contract:251",
    "record_type": "contract",
    "vendor_ids": [
     "850-construction"
@@ -1073,7 +1329,7 @@
    "match_method": "vendor_name+item_number+agenda_item"
   },
   {
-   "record_id": "contract:235",
+   "record_id": "contract:252",
    "record_type": "contract",
    "vendor_ids": [
     "mainline"
@@ -1090,7 +1346,7 @@
    "match_method": "vendor_name+item_number+agenda_item"
   },
   {
-   "record_id": "contract:245",
+   "record_id": "contract:262",
    "record_type": "contract",
    "vendor_ids": [
     "marshall-brothers"
@@ -1107,7 +1363,7 @@
    "match_method": "vendor_name+item_number+agenda_item+amount"
   },
   {
-   "record_id": "contract:248",
+   "record_id": "contract:265",
    "record_type": "contract",
    "vendor_ids": [
     "ecsc"
@@ -1124,7 +1380,7 @@
    "match_method": "vendor_name+item_number+agenda_item"
   },
   {
-   "record_id": "contract:249",
+   "record_id": "contract:266",
    "record_type": "contract",
    "vendor_ids": [
     "pgit"
@@ -1141,7 +1397,7 @@
    "match_method": "vendor_name+agenda_item+amount"
   },
   {
-   "record_id": "contract:260",
+   "record_id": "contract:277",
    "record_type": "contract",
    "vendor_ids": [
     "royal-american"
@@ -1158,7 +1414,7 @@
    "match_method": "vendor_name+item_number+agenda_item"
   },
   {
-   "record_id": "contract:269",
+   "record_id": "contract:286",
    "record_type": "contract",
    "vendor_ids": [
     "850-construction"
@@ -1175,7 +1431,7 @@
    "match_method": "vendor_name+item_number+agenda_item"
   },
   {
-   "record_id": "contract:271",
+   "record_id": "contract:288",
    "record_type": "contract",
    "vendor_ids": [
     "cw-roberts"
@@ -1192,7 +1448,41 @@
    "match_method": "item_number+agenda_item"
   },
   {
-   "record_id": "contract:276",
+   "record_id": "contract:289",
+   "record_type": "contract",
+   "vendor_ids": [
+    "marshall-brothers"
+   ],
+   "gov_id": "pc",
+   "record_date": "2026-08-25",
+   "record_amount": 1199749.0,
+   "record_what": "ITB PC26-014, Project STORM Group I (plus up to $59,987.45 in change orders)",
+   "record_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_08252026-880?html=true",
+   "vote_index": 170,
+   "vote_id": "pc-commission:2026-08-25:9-a-9-e-consent-agenda-six-firms-for-pc2",
+   "vote_date": "2026-08-25",
+   "days_apart": 0,
+   "match_method": "vendor_name+agenda_item"
+  },
+  {
+   "record_id": "contract:290",
+   "record_type": "contract",
+   "vendor_ids": [
+    "art-construction-northwest-florida"
+   ],
+   "gov_id": "pc",
+   "record_date": "2026-08-25",
+   "record_amount": 498797.47,
+   "record_what": "Bid PC26-023, Truesdell clubhouse exterior renovations (plus 10% contingency)",
+   "record_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_08252026-880?html=true",
+   "vote_index": 171,
+   "vote_id": "pc-commission:2026-08-25:9-f-award-of-bid-pc26-023-for-the-truesd",
+   "vote_date": "2026-08-25",
+   "days_apart": 0,
+   "match_method": "vendor_name+item_number+agenda_item+amount"
+  },
+  {
+   "record_id": "contract:293",
    "record_type": "contract",
    "vendor_ids": [
     "cbc"
@@ -1202,14 +1492,14 @@
    "record_amount": 1718585.0,
    "record_what": "Road reconstruction, Frankford Avenue and South Discovery Loop",
    "record_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_09222026-891?html=true",
-   "vote_index": 178,
+   "vote_index": 185,
    "vote_id": "pc-commission:2026-09-22:12-a-discussion-on-redspeed-commissioner",
    "vote_date": "2026-09-22",
    "days_apart": 0,
    "match_method": "vendor_name+agenda_item+amount"
   },
   {
-   "record_id": "contract:286",
+   "record_id": "contract:303",
    "record_type": "contract",
    "vendor_ids": [
     "alan-jay-automotive-management-alan-jay-fleet-sales"
@@ -1219,14 +1509,14 @@
    "record_amount": 843637.0,
    "record_what": "Eleven Ford F-150 police responder trucks",
    "record_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=156",
-   "vote_index": 190,
+   "vote_index": 211,
    "vote_id": "pcb-council:2024-01-11:resolution-24-68-purchase-of-eleven-ford",
    "vote_date": "2024-01-11",
    "days_apart": 0,
    "match_method": "agenda_item+amount"
   },
   {
-   "record_id": "contract:287",
+   "record_id": "contract:304",
    "record_type": "contract",
    "vendor_ids": [
     "dewberry"
@@ -1236,14 +1526,14 @@
    "record_amount": 341588.0,
    "record_what": "Task order, Front Beach Road Segment 4.2 plan revisions (retaining walls, utility work)",
    "record_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=157",
-   "vote_index": 195,
+   "vote_index": 216,
    "vote_id": "pcb-council:2024-01-25:resolution-24-76-dewberry-engineers-task",
    "vote_date": "2024-01-25",
    "days_apart": 0,
    "match_method": "vendor_name+agenda_item+amount"
   },
   {
-   "record_id": "contract:288",
+   "record_id": "contract:305",
    "record_type": "contract",
    "vendor_ids": [
     "at-t-enterprises",
@@ -1254,14 +1544,14 @@
    "record_amount": 270100.0,
    "record_what": "Cellular services to city facilities, devices and equipment (initial estimated annual amount)",
    "record_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=316",
-   "vote_index": 217,
+   "vote_index": 238,
    "vote_id": "pcb-council:2024-06-13:resolution-24-139-at-t-and-t-mobile-agre",
    "vote_date": "2024-06-13",
    "days_apart": 0,
    "match_method": "agenda_item+amount"
   },
   {
-   "record_id": "contract:289",
+   "record_id": "contract:306",
    "record_type": "contract",
    "vendor_ids": [
     "new-line-skateparks-fl"
@@ -1271,14 +1561,14 @@
    "record_amount": 1400000.0,
    "record_what": "Design and construction of the Frank Brown Park skatepark (ARPA funds), not to exceed",
    "record_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=321",
-   "vote_index": 228,
+   "vote_index": 249,
    "vote_id": "pcb-council:2024-07-25:resolution-24-160-new-line-skateparks-ag",
    "vote_date": "2024-07-25",
    "days_apart": 0,
    "match_method": "vendor_name+agenda_item+amount"
   },
   {
-   "record_id": "contract:290",
+   "record_id": "contract:307",
    "record_type": "contract",
    "vendor_ids": [
     "flc"
@@ -1288,14 +1578,14 @@
    "record_amount": 2694939.0,
    "record_what": "Property, liability, cyber, workers comp and auto insurance renewal (combined annual premium, not to exceed)",
    "record_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=328",
-   "vote_index": 245,
+   "vote_index": 266,
    "vote_id": "pcb-council:2024-09-26:resolution-24-183-property-liability-wor",
    "vote_date": "2024-09-26",
    "days_apart": 0,
    "match_method": "vendor_name+agenda_item+amount"
   },
   {
-   "record_id": "contract:291",
+   "record_id": "contract:308",
    "record_type": "contract",
    "vendor_ids": [
     "one80-intermediaries"
@@ -1305,14 +1595,14 @@
    "record_amount": 938612.0,
    "record_what": "Stop-loss insurance renewal (estimated annual premium)",
    "record_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=330",
-   "vote_index": 246,
+   "vote_index": 267,
    "vote_id": "pcb-council:2024-10-10:resolution-25-06-stop-loss-insurance-ren",
    "vote_date": "2024-10-10",
    "days_apart": 0,
    "match_method": "vendor_name+agenda_item+amount"
   },
   {
-   "record_id": "contract:292",
+   "record_id": "contract:309",
    "record_type": "contract",
    "vendor_ids": [
     "core-main"
@@ -1322,14 +1612,14 @@
    "record_amount": 900000.0,
    "record_what": "Water and reclaimed water meters (not to exceed)",
    "record_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=332",
-   "vote_index": 251,
+   "vote_index": 272,
    "vote_id": "pcb-council:2024-10-24:resolution-25-09-purchase-of-water-and-r",
    "vote_date": "2024-10-24",
    "days_apart": 0,
    "match_method": "vendor_name+agenda_item+amount"
   },
   {
-   "record_id": "contract:293",
+   "record_id": "contract:310",
    "record_type": "contract",
    "vendor_ids": [
     "m-gay-constructors"
@@ -1339,14 +1629,14 @@
    "record_amount": 707300.0,
    "record_what": "Materials and installation, LED sports lighting, Frank Brown Park north ballfield complex",
    "record_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=336",
-   "vote_index": 261,
+   "vote_index": 282,
    "vote_id": "pcb-council:2025-01-09:resolution-25-49-m-gay-constructors-agre",
    "vote_date": "2025-01-09",
    "days_apart": 0,
    "match_method": "vendor_name+agenda_item+amount"
   },
   {
-   "record_id": "contract:315",
+   "record_id": "contract:332",
    "record_type": "contract",
    "vendor_ids": [
     "southern-construction"
@@ -1356,11 +1646,28 @@
    "record_amount": 1250000.0,
    "record_what": "Conservation Park boardwalk rehabilitation at set unit prices (not to exceed)",
    "record_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=411",
-   "vote_index": 280,
+   "vote_index": 301,
    "vote_id": "pcb-council:2026-07-09:resolution-no-26-130-a-resolution-of-the",
    "vote_date": "2026-07-09",
    "days_apart": 0,
    "match_method": "vendor_name+agenda_item+amount"
+  },
+  {
+   "record_id": "change_order:44",
+   "record_type": "change_order",
+   "vendor_ids": [
+    "ecsc"
+   ],
+   "gov_id": "pc",
+   "record_date": "2026-08-25",
+   "record_amount": 181825.93,
+   "record_what": "SRF Baker Court utility and roadway improvements (PC25-038), change order 3",
+   "record_url": "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_08252026-880?html=true",
+   "vote_index": 170,
+   "vote_id": "pc-commission:2026-08-25:9-a-9-e-consent-agenda-six-firms-for-pc2",
+   "vote_date": "2026-08-25",
+   "days_apart": 0,
+   "match_method": "vendor_name+item_number+agenda_item"
   },
   {
    "record_id": "change_order:47",
@@ -1373,7 +1680,7 @@
    "record_amount": 115547.8,
    "record_what": "Front Beach Road Segment 3 (CRA), change order 10",
    "record_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=300",
-   "vote_index": 207,
+   "vote_index": 228,
    "vote_id": "pcb-council:2024-05-09:resolution-24-128-change-order-10-with-c",
    "vote_date": "2024-05-09",
    "days_apart": 0,
@@ -1390,7 +1697,7 @@
    "record_amount": 150000.0,
    "record_what": "Front Beach Road Segment 3 (CRA), additional change-order contingency",
    "record_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=321",
-   "vote_index": 229,
+   "vote_index": 250,
    "vote_id": "pcb-council:2024-07-25:resolution-24-161-added-contingency-for",
    "vote_date": "2024-07-25",
    "days_apart": 0,
@@ -1405,7 +1712,7 @@
    "record_amount": 346980.59,
    "record_what": "Joint participation agreement, PCB Parkway widening utilities relocation (Mandy Ln to Nautilus St)",
    "record_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=334",
-   "vote_index": 252,
+   "vote_index": 273,
    "vote_id": "pcb-council:2024-11-14:resolution-25-25-change-order-to-the-fdo",
    "vote_date": "2024-11-14",
    "days_apart": 0,

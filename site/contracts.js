@@ -1,7 +1,9 @@
-(() => {
-const R = __CT__;
-const VP = __VP__;
+(async () => {
 const $ = id => document.getElementById(id);
+let D; // page data loads after the page has rendered; the markup shows a loading note until then
+try { const r = await fetch('/data/contracts-page.json'); if (!r.ok) throw new Error(r.status); D = await r.json(); }
+catch (e) { $('ctCount').textContent = 'The contracts could not be loaded. Please refresh the page.'; return; }
+const R = D.rows, VP = D.vp;
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const usd = n => '$' + Math.round(n).toLocaleString('en-US');
 const big = n => (n < 0 ? '\u2212' : '') + (Math.abs(n) >= 1e6 ? '$' + (Math.abs(n) / 1e6).toFixed(1) + 'M' : '$' + Math.round(Math.abs(n) / 1e3) + 'K');
@@ -21,9 +23,8 @@ function filt() {
 ['ctQ', 'ctG', 'ctM'].forEach(id => $(id).addEventListener('input', () => { shown = 50; filt(); }));
 $('ctMore').addEventListener('click', () => { shown += 100; filt(); });
 $('ctCsv').addEventListener('click', () => {
-  const q = v => `"${String(v ?? '').replace(/"/g, '""')}"`;
-  const csv = ['government,vendor,purpose,amount,method,method_as_stated,date,source_url,notes'].concat(cur.map(r => [r.g, r.v, r.p, r.a, r.m, r.mf, r.d, r.u, r.n].map(q).join(','))).join('\n');
-  const u = URL.createObjectURL(new Blob([csv], {type: 'text/csv'})), l = document.createElement('a'); l.href = u; l.download = 'baycounty-contracts.csv'; l.click(); setTimeout(() => URL.revokeObjectURL(u), 1000);
+  const rows = [['government', 'vendor', 'purpose', 'amount', 'method', 'method_as_stated', 'date', 'source_url', 'notes']].concat(cur.map(r => [r.g, r.v, r.p, r.a, r.m, r.mf, r.d, r.u, r.n]));
+  TT.csv('baycounty-contracts', rows[0], rows.slice(1)); if (window.BCM) BCM.announce('Downloaded ' + cur.length + ' contracts');
 });
 filt();
 

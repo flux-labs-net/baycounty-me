@@ -33,6 +33,9 @@ def developers_page(out_dir):
       <tr><th scope="row"><code>GET /api/v1/datasets/{{id}}/schema</code></th><td>Columns and types for one dataset</td></tr>
       <tr><th scope="row"><code>GET /api/v1/governments</code></th><td>A profile of each local government: budget, tax rate, debt, audits, votes, staff</td></tr>
       <tr><th scope="row"><code>GET /api/v1/governments/{{slug}}</code></th><td>One profile, e.g. <a href="/api/v1/governments/lynn-haven">lynn-haven</a></td></tr>
+      <tr><th scope="row"><code>GET /api/v1/status</code></th><td>Rows in each dataset, when the database last loaded it, and any load errors</td></tr>
+      <tr><th scope="row"><code>GET /api/v1/changes?since=</code></th><td>Records added since a date or time, e.g. <a href="/api/v1/changes?since=2026-10-01&amp;dataset=contracts">new contracts since Oct. 1</a>. Add <code>dataset=</code> to pick datasets</td></tr>
+      <tr><th scope="row"><code>GET /api/v1/meetings.ics?gov=</code></th><td>Calendar feed of upcoming meetings for one government, e.g. <a href="/api/v1/meetings.ics?gov=lh">Lynn Haven</a>. Keys: county, schools, pc, pcb, lh, cw, sp, parker, mb; a board such as <code>lh-cra</code> works too, and commas combine them. Paste the link into Google Calendar, Outlook or Apple Calendar ("subscribe by URL"). Every board at once: <a href="/meetings.ics">/meetings.ics</a></td></tr>
       <tr><th scope="row"><code>GET /api/v1/search?q=</code></th><td>Search every page on the site, e.g. <a href="/api/v1/search?q=martin%20theatre">martin theatre</a></td></tr>
       <tr><th scope="row"><code>GET /downloads/{{id}}.json</code></th><td>The whole dataset as one file, for bulk use</td></tr>
     </tbody></table></div></section>
@@ -41,9 +44,13 @@ def developers_page(out_dir):
       <li><b>Match a column:</b> <code>?government=City%20of%20Callaway</code> (spaces as <code>%20</code>; the catalog lists each column's allowed values). Matching ignores capitals. Separate several values with commas to match any of them: <code>?outcome=failed,tabled</code>.</li>
       <li><b>Ranges:</b> add <code>_min</code> or <code>_max</code> to a number column (<code>amount_min=500000</code>) and <code>_from</code> or <code>_to</code> to a date (<code>date_from=2025-10-01</code>).</li>
       <li><b>Text:</b> <code>_contains</code> on a column (<code>vendor_contains=roberts</code>), or <code>q=</code> to search every column.</li>
+      <li><b>Not equal:</b> <code>_ne</code> leaves out values (<code>outcome_ne=passed</code>; commas for several).</li>
+      <li><b>Empty or not:</b> <code>_null=true</code> finds rows where a column is blank, <code>_null=false</code> rows where it has a value (<code>amount_null=false</code>). Blank values never match <code>_min</code>, <code>_max</code>, <code>_from</code> or <code>_to</code>.</li>
+      <li><b>Totals:</b> <code>group_by=government&amp;sum=amount</code> returns one row per group with <code>count</code>, <code>sum_amount</code> and <code>n_amount</code> (how many numbers were added), largest group first. Filters apply first, and it works with <code>format=csv</code>. Example: <a href="/api/v1/datasets/contracts?group_by=government&amp;sum=amount">contract dollars by government</a>.</li>
       <li><b>Sort:</b> <code>sort=-amount,date</code> (a minus sign sorts high to low).</li>
       <li><b>Columns:</b> <code>fields=vendor,amount,source_url</code>.</li>
       <li><b>Paging:</b> <code>limit</code> (up to 1,000, default 100) and <code>offset</code>. The response's <code>meta.next</code> is the link to the next page.</li>
+      <li><b>Caching:</b> responses carry an <code>ETag</code> (and <code>Last-Modified</code> where the data's date is known). Send it back as <code>If-None-Match</code> (or <code>If-Modified-Since</code>) and you get <code>304 Not Modified</code> with no body when nothing changed.</li>
     </ul></section>
   <section class="tx-sec" id="datasets"><div class="sec-hd"><h2>Datasets</h2><span class="muted">Updated {e(cat.get("updated"))}</span></div>
     <div class="tablewrap"><table class="tx-table cm-table"><thead><tr><th scope="col">Dataset id</th><th scope="col" class="num">Rows</th><th scope="col">Links</th></tr></thead><tbody>{rows}</tbody></table></div></section>
@@ -62,7 +69,9 @@ def developers_page(out_dir):
     <ul class="plain">
       <li><b>Claude:</b> add a custom connector and paste the address above.</li>
       <li><b>Other assistants and tools:</b> add it as a remote MCP server using the "Streamable HTTP" transport.</li>
-      <li><b>Tools it offers:</b> <code>list_datasets</code>, <code>query_dataset</code>, <code>get_government</code> and <code>search_site</code>. Example question: "Which Bay County contracts over $5 million went to campaign donors, and how did commissioners vote?"</li>
+      <li><b>Tools it offers:</b> <code>list_datasets</code>, <code>query_dataset</code>, <code>get_government</code>, <code>search_site</code>, <code>upcoming_meetings</code> (by government, days ahead or a keyword such as a street name), <code>member_voting_record</code> (one board member's votes, including when they were in the minority) and <code>vendor_profile</code> (one company's contracts, change orders, payments, CRA payments and business campaign contributions; a match doesn't show why anything happened).</li>
+      <li><b>Resources:</b> each dataset is also an MCP resource at <code>baycounty://datasets/&lt;id&gt;</code> (up to 2,000 rows; the full file is linked).</li>
+      <li><b>Example question:</b> "Which Bay County contracts over $5 million went to campaign donors, and how did commissioners vote?"</li>
     </ul></section>
   <section class="tx-sec method" id="terms"><div class="sec-hd"><h2>Use and limits</h2></div>
     <ul class="plain">

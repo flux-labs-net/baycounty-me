@@ -1,5 +1,5 @@
 """How They Voted page for baycounty.me (data: data/votes/votes.json)."""
-import json, os, html
+import json, os, html, shutil
 from collections import defaultdict, Counter
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -86,8 +86,8 @@ def votes_page(out_dir):
             'votes': [{'b': v['body'], 'g': gov_of(v['body']), 'd': v.get('date'), 'dn': nice(v.get('date')), 'c': v.get('category'), 'i': v.get('item'), 'a': v.get('amount'), 'o': v.get('outcome'), 't': tally(v.get('tally')),
                        'm': v.get('by_member') or {}, 'x': is_split(v), 'h': v.get('headline') or v.get('item'), 's': v.get('summary') or v.get('plain_summary'),
                        'u': v.get('source_url'), 'ut': v.get('source_title'), 'ul': src_label(v)} for v in vs]}
-    js = open(os.path.join(HERE, 'votes.js')).read().replace('__VT__', json.dumps(data, ensure_ascii=False, separators=(',', ':')))
-    open(os.path.join(out_dir, 'assets', 'votes.js'), 'w').write(js)
+    json.dump(data, open(os.path.join(out_dir, 'data', 'votes-page.json'), 'w'), ensure_ascii=False, separators=(',', ':'))
+    shutil.copy(os.path.join(HERE, 'votes.js'), os.path.join(out_dir, 'assets', 'votes.js'))
 
     roster = ''
     for k, b in bodies.items():
@@ -137,7 +137,7 @@ def votes_page(out_dir):
       <label class="vf"><span>Outcome</span><select id="vtO"><option value="">All votes</option><option value="split">Split votes</option><option value="unan">Unanimous</option><option value="failed">Failed motions</option></select></label>
       <label class="vf"><span>Sort</span><select id="vtSort"><option value="new">Newest first</option><option value="old">Oldest first</option><option value="amt">Largest amount</option><option value="close">Closest votes</option><option value="az">Item A to Z</option></select></label>
     </div>
-    <div class="vt-status"><span id="vtCount" class="muted"></span><span id="vtMember" class="vt-memsum"></span><button type="button" class="linkbtn" id="vtClear" hidden>Clear filters</button><button type="button" class="tt-csv" id="vtCsv">Download CSV</button></div>
+    <div class="vt-status"><span id="vtCount" class="muted" aria-live="polite">Loading votes…</span><span id="vtMember" class="vt-memsum"></span><button type="button" class="linkbtn" id="vtClear" hidden>Clear filters</button><button type="button" class="tt-csv" id="vtCsv">Download CSV</button></div>
     <ol class="findings" id="vtList"></ol><button type="button" class="pill" id="vtMore">Show more</button></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="who">Members and their records</h2><span class="muted">Counts cover only the votes recorded on this page</span></div>{roster}</section>
   <section class="tx-sec method"><div class="sec-hd"><h2 id="src">Coverage and gaps</h2></div>

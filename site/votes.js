@@ -1,6 +1,8 @@
-(() => {
-const D = __VT__;
+(async () => {
 const $ = id => document.getElementById(id);
+let D; // page data loads after the page has rendered; the markup shows a loading note until then
+try { const r = await fetch('/data/votes-page.json'); if (!r.ok) throw new Error(r.status); D = await r.json(); }
+catch (e) { $('vtCount').textContent = 'The votes could not be loaded. Please refresh the page.'; return; }
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const V = {yes: 'Yes', no: 'No', absent: 'Absent', abstain: 'Abstained', unknown: '?'}, ORD = {no: 0, yes: 1, abstain: 2, absent: 3, unknown: 4};
 const cap = s => s ? s[0].toUpperCase() + s.slice(1) : '';

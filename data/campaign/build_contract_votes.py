@@ -9,7 +9,7 @@ A vote is linked to a contract record when all of these hold:
       item_number  - the vote text and the record share a bid/contract/RFQ number such as "PC24-005" or "24-18",
       agenda_item  - the vote text and the record's description share at least 3 distinctive words (not the vendor's name),
       amount       - the vote amount equals the record amount to the dollar (and the vote names no other vendor);
-    or the vendor is named in a vote on the same day, the amounts are within 10% (or one is missing) and no other vendor is named;
+    or the vendor is named in a vote on the same day, both amounts are given and within 3%, and no other vendor is named;
     or the number matches on the same day.
 When several votes qualify, the one with the most kinds of agreement (then the closest date) is kept. Everything weaker
 (amount only, description only, vendor named but amounts differ) goes to the review file. A link shows that the minutes record a vote on the item; it does not show why anyone voted as they did.
@@ -119,7 +119,7 @@ def build():
             by_name = bool(vids) and any(x in v['_vend'] for x in vids)
             by_num = bool(rn & v['_n'])
             amt_eq = r['amount'] is not None and v.get('amount') is not None and abs(float(v['amount']) - float(r['amount'])) < 1
-            amt_ok = r['amount'] is None or v.get('amount') is None or amt_eq or (r['amount'] and abs(float(v['amount']) - float(r['amount'])) <= 0.1 * abs(float(r['amount'])))
+            amt_ok = r['amount'] is None or v.get('amount') is None or amt_eq or (r['amount'] and abs(float(v['amount']) - float(r['amount'])) <= 0.03 * abs(float(r['amount'])))
             shared = item_words(r['what'], vids) & v['_w']
             by_item = len(shared) >= 3
             other_vendor = bool(v['_vend'] - set(vids))
@@ -128,7 +128,7 @@ def build():
                 if methods:
                     cands.append({'vote': v, 'gap': gap, 'methods': methods, 'confident': False, 'shared': sorted(shared)})
                 continue
-            confident = ((by_num and (by_name or amt_eq or by_item or gap == 0)) or (by_name and (amt_eq or (by_item and (gap == 0 or amt_ok)))) or (by_name and gap == 0 and amt_ok and not other_vendor)
+            confident = ((by_num and (by_name or amt_eq or by_item or gap == 0)) or (by_name and (amt_eq or (by_item and (gap == 0 or amt_ok)))) or (by_name and gap == 0 and amt_ok and not other_vendor and r['amount'] is not None and v.get('amount') is not None)
                          or (by_item and amt_eq))
             cands.append({'vote': v, 'gap': gap, 'methods': methods, 'confident': confident, 'shared': sorted(shared)})
         conf = [c for c in cands if c['confident']]

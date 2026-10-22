@@ -4552,6 +4552,46 @@
    "cra": "Panama City CRA"
   },
   {
+   "fy": "FY2027",
+   "tif_revenue": 4399193,
+   "total_budget": 11552914,
+   "district": "all",
+   "source_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Item/17481?fileID=37374",
+   "cra": "Panama City CRA"
+  },
+  {
+   "fy": "FY2027",
+   "tif_revenue": 626126,
+   "total_budget": 3326878,
+   "district": "Downtown",
+   "source_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Item/17481?fileID=37374",
+   "cra": "Panama City CRA"
+  },
+  {
+   "fy": "FY2027",
+   "tif_revenue": 1022897,
+   "total_budget": 5074482,
+   "district": "St. Andrews",
+   "source_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Item/17481?fileID=37374",
+   "cra": "Panama City CRA"
+  },
+  {
+   "fy": "FY2027",
+   "tif_revenue": 1563545,
+   "total_budget": 1863545,
+   "district": "Downtown North (Glenwood)",
+   "source_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Item/17481?fileID=37374",
+   "cra": "Panama City CRA"
+  },
+  {
+   "fy": "FY2027",
+   "tif_revenue": 1186625,
+   "total_budget": 1288009,
+   "district": "Millville",
+   "source_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Item/17481?fileID=37374",
+   "cra": "Panama City CRA"
+  },
+  {
    "fy": "FY2017",
    "tif_revenue": 300373,
    "total_budget": null,
@@ -4629,6 +4669,14 @@
    "total_budget": 1999274,
    "district": "all",
    "source_url": "https://mcclibraryfunctions.azurewebsites.us/api/ordinanceDownload/14573/1411175/pdf",
+   "cra": "Lynn Haven CRA"
+  },
+  {
+   "fy": "FY2027",
+   "tif_revenue": 983728.55,
+   "total_budget": 1014054.45,
+   "district": "all",
+   "source_url": "https://www.cityoflynnhaven.gov/DocumentCenter/View/5091/FY2026-27-Final-Approved-Budget",
    "cra": "Lynn Haven CRA"
   },
   {
@@ -4944,6 +4992,14 @@
    "cra": "Callaway CRA"
   },
   {
+   "fy": "FY2027",
+   "tif_revenue": 3024494,
+   "total_budget": 3114390,
+   "district": "all",
+   "source_url": "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_09172026-422",
+   "cra": "Callaway CRA"
+  },
+  {
    "fy": "FY2023",
    "tif_revenue": 192948,
    "total_budget": null,
@@ -5005,6 +5061,14 @@
    "total_budget": null,
    "district": "all",
    "source_url": "https://flauditor.gov/pages/specialdistricts_efile%20rpts/2025%20community%20redevelopment%20agency%20of%20the%20city%20of%20parker.pdf",
+   "cra": "Parker CRA"
+  },
+  {
+   "fy": "FY2027",
+   "tif_revenue": 424195,
+   "total_budget": 424265,
+   "district": "all",
+   "source_url": "https://cityofparker.com/wp-content/uploads/filr/7005/Agenda-Final-Budget-Meeting-Package-09.24.26.pdf",
    "cra": "Parker CRA"
   }
  ],
@@ -5170,6 +5234,10 @@
   {
    "cra": "Panama City CRA",
    "text": "No Glenwood, Bayou George/Lake Caroline or Cove/East CRA districts exist as separate districts. Glenwood is part of Downtown North. The Cove area got a $12.949M city contract, but no CRA district covers it."
+  },
+  {
+   "cra": "Panama City CRA",
+   "text": "FY2027 CRA budget (added 2026-10-21): Resolution CRA20260901.1 gives Millville $1,228,009, but the attached proposed budget table totals $1,288,009 ($1,186,625 TIF plus $101,384 reserves). The FY2027 rows use the table. FY2027 totals include $5.15M of planned debt proceeds for St. Andrews and Downtown. No FY2025 Auditor General filing for the Panama City CRA was found on flauditor.gov."
   },
   {
    "cra": "Lynn Haven CRA",

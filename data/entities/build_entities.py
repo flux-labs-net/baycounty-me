@@ -194,7 +194,7 @@ def build_vendors():
                         **({'merge_evidence': c['evidence']} if c.get('evidence') else {})})
             continue
         disp = c.get('display') or DISPLAY.get(gk) or _pick_display(c['names'])
-        vid = SV.resolve(names[0])[0] if names else (slug(disp) or gk)
+        vid = re.sub(r'[^a-z0-9]+', '-', SV.key(names[0])).strip('-') if names else (slug(disp) or gk)  # same id rule as vendors.resolve for unlisted names
         base, i = vid, 2
         while vid in used:
             vid = f'{base}-{i}'; i += 1

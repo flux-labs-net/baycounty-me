@@ -109,7 +109,7 @@ def profile(key):
     if tg:
         out['budget'] = {'total': tg.get('total'), 'general_fund': tg.get('gf'), 'mills': tg.get('mills'), 'levy': tg.get('levy'),
                          'status': (tg.get('status') or [None, None])[1], 'revenue': tg.get('rev') or {}, 'spending': tg.get('exp') or {},
-                         'sources': tg.get('src') or [], 'context': tg.get('ctx') or [], 'history': tg.get('hist') or [], 'actuals': tg.get('act') or []}
+                         'sources': tg.get('src') or [], 'context': tg.get('ctx') or [], 'history': tg.get('hist') or [], 'actuals': tg.get('act') or [], 'next': tg.get('next')}
     if g['auth']:
         a = D['tax']['auth'].get(g['auth'])
         if a:

@@ -39,13 +39,17 @@ def money(n):
 
 
 def write_shards(out_dir):
+    from addr_page import shard_key, SHARDS
     fp = os.path.join(DATA, 'parcels_2026.json')
     if not os.path.exists(fp):
         return 0
     P = json.load(open(fp))
     sh = defaultdict(dict)
     for pid, v in P.items():
-        sh[pid[:3]][pid] = v
+        # privacy: only [school taxable, non-school taxable, homestead $, additional homestead $, other exemptions $] may be published
+        if not (isinstance(v, list) and len(v) == 5 and all(isinstance(x, (int, float)) for x in v)):
+            raise ValueError(f'parcels_2026.json row for {pid} is not the privacy-safe shape; run data/exemptions/build_exemptions.py --migrate')
+        sh[shard_key(pid, SHARDS['ex'])][pid] = v
     d = os.path.join(out_dir, 'data', 'ex'); os.makedirs(d, exist_ok=True)
     for k, v in sh.items():
         json.dump(v, open(os.path.join(d, f'{k}.json'), 'w'), separators=(',', ':'))
@@ -94,6 +98,7 @@ def exemptions_page(out_dir):
     <div class="kpi"><span class="eyebrow">Owe no property tax</span><span class="v">{T["zero_all"]:,}</span><span class="s">homesteads fully exempt from all property tax</span></div>
     <div class="kpi"><span class="eyebrow">Disabled veterans, fully exempt</span><span class="v">{full_vet:,}</span><span class="s">homes · {money(C.get("05", {}).get("value", 0))} in value</span></div>
   </div>
+  <p class="note"><a href="/my-address"><b>See your parcel →</b></a> My Address shows a home's homestead exemption and the total of any others. To protect owners' privacy, this site never shows which other exemptions (veteran, disability, widow and so on) a particular property has; this page shows countywide counts only.</p>
   <section class="tx-sec"><div class="sec-hd"><h2 id="home">Exemptions for homeowners</h2><span class="muted">2026 tax roll · estimated tax at FY{e(str(D["rates"])[-4:])} rates</span></div>
     <div class="tablewrap"><table class="tx-table cm-table ex-table"><thead><tr><th scope="col">Exemption and who qualifies</th><th scope="col">Amount</th><th scope="col">School taxes?</th><th scope="col" class="num">Homes</th><th scope="col" class="num">Value exempted</th><th scope="col" class="num">Tax taken off bills</th></tr></thead><tbody>{rows}</tbody></table></div>
     <p class="note">"School taxes?" says whether the exemption also lowers school taxes. No Bay County city has adopted the city senior exemptions state law allows. A home can have several exemptions; homes are counted under each one.</p></section>
@@ -114,7 +119,7 @@ def exemptions_page(out_dir):
     <ul class="plain"><li><b>Apply with the Bay County Property Appraiser.</b> Under state law, applications for most exemptions are due by March 1 for that year's taxes. Once granted, most renew automatically each year as long as you still qualify.</li>
       <li><b>Veterans</b> need a VA letter showing the disability rating; surviving spouses need the veteran's rating and proof of marriage.</li>
       <li><b>Seniors</b> applying for the income-based exemptions file a household income statement each year.</li>
-      <li>See what your home gets now on <a href="/my-address">My Address</a>; the property card lists each exemption.</li>
+      <li>See what your home gets now on <a href="/my-address">My Address</a>; the property card shows the homestead exemption and the total of any others.</li>
       <li><a href="https://www.baypa.net/" target="_blank" rel="noopener">Bay County Property Appraiser ↗</a></li></ul></section>
   <section class="tx-sec method"><div class="sec-hd"><h2 id="src">Sources and method</h2></div>
     <p>Counts and values come from the 2026 final tax roll for Bay County that the Property Appraiser files with the Florida Department of Revenue (the "NAL" file, posted October 16, 2026), which lists each parcel's exemptions by type and its school and non-school taxable values. <a class="src" href="{e(D["source"])}" target="_blank" rel="noopener">Florida DOR data portal</a></p>

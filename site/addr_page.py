@@ -34,15 +34,69 @@ NAV_LABEL = {
 }
 
 
+# Per-parcel lookups (/data/ex, /data/nav) are split into evenly sized files by a hash of the parcel id,
+# so each fetch stays small (under ~40KB). address.js has the same function (shardOf); keep them in sync.
+SHARDS = {'ex': 96, 'nav': 128}
+
+
+def shard_key(pid, n):
+    h = 0x811c9dc5  # 32-bit FNV-1a
+    for c in pid.encode():
+        h = ((h ^ c) * 0x01000193) & 0xffffffff
+    return f'h{h % n}'
+
+
 def write_nav(out_dir):
     nav = json.load(open(os.path.join(HERE, '..', 'data', 'fees', 'nav_2025.json')))
     shards = defaultdict(dict)
     for pid, items in nav.items():
-        shards[pid[:3]][pid] = items
+        # levy code + dollar amount only; nothing about the owner
+        shards[shard_key(pid, SHARDS['nav'])][pid] = [[str(c), float(a)] for c, a in items]
     d = os.path.join(out_dir, 'data', 'nav'); os.makedirs(d, exist_ok=True)
     for k, v in shards.items():
         json.dump(v, open(os.path.join(d, f'{k}.json'), 'w'), separators=(',', ':'))
     return len(shards)
+
+
+# UI text added to the address hub. es_pages swaps this whole object for i18n/es_address.json "txt".
+ADDR_TXT = {
+    'website': 'website', 'tally': '{y} yes · {n} no in recorded money votes', 'campaign': 'Campaign money →',
+    'ballotH': '2026 ballot', 'ballot': 'See the 2026 races for your area →',
+    'whatif': 'Try what-if numbers in the calculator →', 'whatifA3': 'Try your own numbers →',
+    'hsH': 'No homestead exemption',
+    'hs': "This home has no homestead exemption on the 2026 tax roll. That's normal for a rental or a second home. If you own it and it was your permanent home on January 1, you can apply with the {pa}. Applications are due March 1 for that year's taxes.",
+    'pa': 'Bay County Property Appraiser', 'exLink': 'About exemptions →',
+    'nearCraH': 'CRA spending within half a mile', 'nearStH': 'Sales tax projects within a mile', 'nearNone': 'None on file nearby.',
+    'craTotal': '{n} records · {amt} spent or committed', 'stTotal': '{n} projects', 'more': 'and {n} more', 'source': 'Source',
+    'nearNote': "Distances are from the address point. CRA records placed only somewhere in a district, and rows left out of CRA totals, aren't shown; the dollar total counts spent and committed money.",
+    'seeCra': 'CRA map and ledger →', 'seeSt': 'Sales tax project map →', 'fail': "Couldn't load right now.",
+    'st_completed': 'Completed', 'st_in_progress': 'In progress', 'st_not_started': 'Not started', 'st_unknown': 'Status unknown',
+    'cs_Spent': 'Spent', 'cs_Committed': 'Committed', 'cs_Budgeted': 'Budgeted', 'cs_Proposed': 'Proposed',
+    'l_page': 'Overview', 'l_contracts': 'Contracts', 'l_meetings': 'Meetings', 'l_budget': 'Budget', 'l_alerts': 'Alerts',
+    'l_records': 'Request a record', 'l_michael': 'Hurricane Michael projects',
+    'govNote': 'Each link opens the page filtered to that government.',
+    'barLabel': 'Estimated property tax split: {parts}',
+}
+
+
+def member_votes():
+    """{gov: [[member name as votes.js expects it, yes, no], ...]} from recorded roll calls."""
+    from votes_page import gov_of
+    d = json.load(open(os.path.join(HERE, '..', 'data', 'votes', 'votes.json')))
+    tally = defaultdict(lambda: defaultdict(lambda: [0, 0]))
+    for v in d['votes']:
+        for n, x in (v.get('by_member') or {}).items():
+            if x in ('yes', 'no'):
+                tally[gov_of(v['body'])][n][x == 'no'] += 1
+    return {g: [[n, y, no] for n, (y, no) in sorted(ms.items())] for g, ms in tally.items() if g != 'other'}
+
+
+def gov_links():
+    """What each government's own records pages accept as a filter (see gov_pages.py for the same links)."""
+    from govs import GOVS, CRA_NAME
+    bud = {g.get('gov') for g in json.load(open(os.path.join(HERE, '..', 'data', 'civic', 'budgets_detail.json'))).get('governments', [])}
+    return {g['key']: {'s': g['short'], 'slug': g['slug'], 'c': g.get('contracts'), 'f': (g.get('fema') or [None])[0], 'cra': g.get('cra'), 'b': g['key'] in bud}
+            for g in GOVS}, {v: k for k, v in CRA_NAME.items()}
 
 
 def addr_page(out_dir):
@@ -59,9 +113,13 @@ def addr_page(out_dir):
         'taxdist': TAXDIST, 'craAgency': CRA_AGENCY, 'cra': {k: {'spent': round(v['spent']), 'n': v['n']} for k, v in cra.items()},
         'districts': {d['id']: {'label': d['label'], 'stack': d['stack'], 'total': d['total'][L]} for d in td['districts']},
         'auth': {k: {'n': a['n'], 'g': a['g'], 'school': a['school'], 'm': a['m'][L]} for k, a in td['auth'].items()},
-        'groups': td['groups'], 'fy': td['fy'][L], 'second2026': 26411, 'navLabel': NAV_LABEL, 'exNames': __import__('exemptions_page').names_for_js(),
+        'groups': td['groups'], 'fy': td['fy'][L], 'second2026': 26411, 'navLabel': NAV_LABEL, 'shards': SHARDS,
     }
+    data['govs'], data['craId'] = gov_links()
+    data['members'] = member_votes()
+    data['elections'] = os.path.exists(os.path.join(HERE, '..', 'data', 'elections', 'candidates_2026.json'))
     js = open(os.path.join(HERE, 'address.js')).read().replace('__ADDR__', json.dumps(data, ensure_ascii=False, separators=(',', ':')))
+    js = js.replace('__ADDR_TXT__', json.dumps(ADDR_TXT, ensure_ascii=False, separators=(',', ':')))
     open(os.path.join(out_dir, 'assets', 'address.js'), 'w').write(js)
 
     def T(tid, text):
@@ -103,6 +161,8 @@ def addr_page(out_dir):
       <section class="card" id="cCra"><h3>Redevelopment district ({T('cra', 'CRA')})</h3><div id="craBody"></div></section>
       <section class="card" id="cSafe"><h3>Flood, storms and services</h3><dl class="kv" id="safeBody"></dl></section>
       <section class="card" id="cDev"><h3>Zoning and development nearby</h3><div id="devBody"></div></section>
+      <section class="card" id="cNear"><h3>Public money near you</h3><div id="nearBody"></div></section>
+      <section class="card" id="cGov"><h3>Your government's records</h3><div id="govBody"></div></section>
     </div>
     <p class="note">Owner names are not shown here. They're public at the Property Appraiser's site, linked above. Representative names come from Bay County's GIS and may lag an election.</p>
   </div>

@@ -37,6 +37,16 @@ const sel = $('cDist');
 sel.innerHTML = D.districts.map(d => `<option value="${esc(d.id)}">${esc(d.label)} · ${mills(d.total[L])} mills</option>`).join('');
 try { const s = localStorage.getItem('taxDist'); if (s && D.districts.some(d => d.id === s)) sel.value = s; } catch (e) {}
 const valIn = $('cVal'), home = $('cHome');
+// inputs live in the link (?v=value&d=district&h=1|0) so an estimate can be shared, e.g. from My Address
+const P0 = new URLSearchParams(location.search);
+if (P0.get('d') && D.districts.some(d => d.id === P0.get('d'))) sel.value = P0.get('d');
+if (/^\d+$/.test(P0.get('v') || '')) valIn.value = Math.min(+P0.get('v'), 1e9).toLocaleString('en-US');
+if (P0.has('h')) home.checked = P0.get('h') !== '0';
+function saveUrl(v) {
+  const u = new URL(location.href);
+  u.searchParams.set('v', v); u.searchParams.set('d', sel.value); u.searchParams.set('h', home.checked ? '1' : '0');
+  try { history.replaceState(null, '', u); } catch (e) {}
+}
 
 function taxable(v, homestead, yi = L) {
   if (!homestead) return {school: v, other: v};
@@ -54,6 +64,7 @@ function readVal() { const n = parseInt(String(valIn.value).replace(/[^0-9]/g, '
 function calc() {
   const dist = D.districts.find(d => d.id === sel.value), v = readVal(), tv = taxable(v, home.checked);
   try { localStorage.setItem('taxDist', dist.id); } catch (e) {}
+  if (calc.ready) saveUrl(v);
   const rows = billAt(dist, L, tv).filter(r => r.m > 0), tot = rows.reduce((a, r) => a + r.amt, 0);
   $('bTotal').textContent = usd(tot);
   $('bSub').textContent = tot ? `about ${usd(tot / 12)} a month · ${mills(dist.total[L])} mills in all` : 'Enter a value to see your estimate';
@@ -82,7 +93,8 @@ valIn.addEventListener('input', () => {
   calc();
 });
 sel.addEventListener('change', calc); home.addEventListener('change', calc);
-calc();
+calc(); calc.ready = true; // don't add params to a plain visit until someone changes an input
+if (['v', 'd', 'h'].some(k => P0.has(k))) { saveUrl(readVal()); if (!location.hash) $('calc')?.scrollIntoView(); }
 
 /* ---------- countywide bars ---------- */
 (() => {
@@ -128,6 +140,13 @@ function renderGov() {
   ];
   let h = `<div class="gov-hd"><h3>${esc(g.name)}</h3><span class="badge ${st}">${st === 'ok' ? '✓' : '!'} ${esc(stText)}</span></div>
   <div class="kpis">${tiles.map(([l, v, s]) => `<div class="kpi"><span class="eyebrow">${l}</span><span class="v">${v}</span><span class="s">${esc(s)}</span></div>`).join('')}</div>`;
+  if (g.next) {
+    const n = g.next, bits = [];
+    if (n.total) bits.push(`total ${big(n.total)}${n.excl ? ' (not counting transfers between its own funds)' : ''}`);
+    if (n.gf) bits.push(`general fund ${big(n.gf)}`);
+    if (n.mills != null) bits.push(n.mills ? `${mills(n.mills)} mills` : 'no city property tax');
+    h += `<p class="note"><b>New budget, ${esc(n.fy)} (Oct 2026 to Sept 2027):</b> ${bits.join(', ')}. ${n.adopted ? 'Adopted' : 'Final hearing held; adoption not yet confirmed in posted minutes'}. <a href="${esc(n.src[1] || '#')}" target="_blank" rel="noopener">${esc(n.src[0])}</a>. The breakdowns below are still the ${esc('FY2026')} budget.</p>`;
+  }
   if (g.mix) h += `<p class="note">Across all funds, the schools expect ${big(g.mix.Local)} from local sources (mostly property tax), ${big(g.mix.State)} from the state and ${big(g.mix.Federal)} from the federal government.</p>`;
   h += `<div class="two">
     <div><h4>Where the general fund money comes from <span class="muted">FY2026 budget</span></h4>${barList(g.rev, {empty: 'This government does not post a budget online with this detail.'})}</div>
