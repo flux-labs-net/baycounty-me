@@ -101,7 +101,7 @@
  "html": [
   [
    "<span class=\"eyebrow\">Public Money · Exemptions</span><h1>Property tax exemptions</h1>",
-   "<span class=\"eyebrow\">Dinero público · Exenciones</span><h1>Exenciones del impuesto a la propiedad</h1>"
+   "<span class=\"eyebrow\">Dinero público · Exenciones</span><h1><span class=\"term\" data-term=\"exemption\">Exenciones</span> del impuesto a la propiedad</h1>"
   ],
   [
    "<p class=\"lede\">Who doesn't pay property tax on part or all of their property, and what it adds up to. From the 2026 tax roll for every parcel in Bay County, with a closer look at exemptions for veterans.</p>",
@@ -165,7 +165,7 @@
   ],
   [
    "<p class=\"note\"><a href=\"/my-address\"><b>See your parcel →</b></a> My Address shows a home's homestead exemption and the total of any others. To protect owners' privacy, this site never shows which other exemptions (veteran, disability, widow and so on) a particular property has; this page shows countywide counts only.</p>",
-   "<p class=\"note\"><a href=\"/es/mi-direccion\"><b>Vea su parcela →</b></a> Mi dirección muestra la exención de homestead de una casa y el total de las demás. Para proteger la privacidad de los dueños, este sitio nunca muestra qué otras exenciones (de veterano, discapacidad, viudez y otras) tiene una propiedad en particular; esta página solo muestra números de todo el condado.</p>"
+   "<p class=\"note\"><a href=\"/es/mi-direccion\"><b>Vea su parcela →</b></a> Mi dirección muestra la <span class=\"term\" data-term=\"homestead\">exención de homestead</span> de una casa y el total de las demás. Para proteger la privacidad de los dueños, este sitio nunca muestra qué otras exenciones (de veterano, discapacidad, viudez y otras) tiene una propiedad en particular; esta página solo muestra números de todo el condado.</p>"
   ],
   [
    "<h2 id=\"home\">Exemptions for homeowners</h2><span class=\"muted\">2026 tax roll · estimated tax at FY",
@@ -305,7 +305,7 @@
   ],
   [
    " bills, the same rates My Address uses) to the value each exemption removes, parcel by parcel, using each parcel's own tax district. Where a parcel has several exemptions, the tax is shared among them by amount. It doesn't include the Save Our Homes cap, which limits how fast a homestead's taxed value can rise and is not an exemption. Total for all exemptions, homes and other property: ",
-   ", las mismas tasas que usa Mi dirección) al valor que quita cada exención, parcela por parcela, con el distrito tributario de cada parcela. Si una parcela tiene varias exenciones, el impuesto se reparte entre ellas según la cantidad. No incluye el límite Save Our Homes, que frena qué tan rápido sube el valor gravado de una vivienda con homestead y no es una exención. Total de todas las exenciones, de casas y de otras propiedades: "
+   ", las mismas tasas que usa Mi dirección) al valor que quita cada exención, parcela por parcela, con el distrito tributario de cada parcela. Si una parcela tiene varias exenciones, el impuesto se reparte entre ellas según la cantidad. No incluye el <span class=\"term\" data-term=\"save-our-homes\">límite Save Our Homes</span>, que frena qué tan rápido sube el valor gravado de una vivienda con homestead y no es una exención. Total de todas las exenciones, de casas y de otras propiedades: "
   ],
   [
    " a year.</p></section>",

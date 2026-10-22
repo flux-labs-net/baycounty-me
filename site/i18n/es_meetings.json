@@ -62,7 +62,7 @@
   ],
   [
    "<p class=\"lede\">When and where every Bay County board meets, with agenda links and the money items on each agenda. Public comment is open at regular meetings; check the agenda for how to speak.</p>",
-   "<p class=\"lede\">Cuándo y dónde se reúne cada junta del Condado de Bay, con enlaces a las agendas y los temas de dinero de cada una. En las reuniones regulares el público puede hablar; la agenda dice cómo hacerlo. Las reuniones son en inglés.</p>"
+   "<p class=\"lede\">Cuándo y dónde se reúne cada junta del Condado de Bay, con enlaces a las agendas y los temas de dinero de cada una. En las reuniones regulares hay <span class=\"term\" data-term=\"public-comment\">comentario público</span>: cualquier persona puede hablar; la agenda dice cómo hacerlo. Las reuniones son en inglés.</p>"
   ],
   [
    "<a class=\"pill\" href=\"/meetings.ics\">Add to my calendar</a>",

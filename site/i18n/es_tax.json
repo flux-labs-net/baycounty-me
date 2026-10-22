@@ -277,7 +277,7 @@
   ],
   [
    "<small id=\"cValHint\" class=\"muted\">On your TRIM notice or the Property Appraiser's site. Not the sale price.</small>",
-   "<small id=\"cValHint\" class=\"muted\">Está en su aviso TRIM o en el sitio del Tasador de Propiedades. No es el precio de venta.</small>"
+   "<small id=\"cValHint\" class=\"muted\">Está en su <span class=\"term\" data-term=\"trim\">aviso TRIM</span> o en el sitio del Tasador de Propiedades. No es el precio de venta.</small>"
   ],
   [
    "<span>I live here full time and have a <span class=\"term\" data-term=\"homestead\">homestead exemption</span></span>",
@@ -297,7 +297,7 @@
   ],
   [
    "<p class=\"note\">This covers <span class=\"term\" data-term=\"ad-valorem\">property taxes</span> only. Your actual bill also has <span class=\"term\" data-term=\"non-ad-valorem\">non-ad valorem assessments</span> (flat fees for things like fire service, stormwater or garbage) and may have other exemptions for seniors, veterans or disability. Paying in November takes 4% off.</p>",
-   "<p class=\"note\">Esto incluye solo el <span class=\"term\" data-term=\"ad-valorem\">impuesto a la propiedad</span>. Su factura real también tiene <span class=\"term\" data-term=\"non-ad-valorem\">cargos no basados en el valor (non-ad valorem)</span> (tarifas fijas por cosas como bomberos, aguas pluviales o basura) y puede tener otras exenciones para personas mayores, veteranos o personas con discapacidad. Si paga en noviembre, le descuentan 4%. Vea las <a href=\"/es/tarifas-y-facturas\">tarifas y facturas</a> y las <a href=\"/es/exenciones\">exenciones</a>.</p>"
+   "<p class=\"note\">Esto incluye solo el <span class=\"term\" data-term=\"ad-valorem\">impuesto a la propiedad</span>. Su factura real también tiene <span class=\"term\" data-term=\"non-ad-valorem\">cargos no basados en el valor (non-ad valorem)</span> (tarifas fijas por cosas como bomberos, aguas pluviales o basura) y puede tener otras <span class=\"term\" data-term=\"exemption\">exenciones</span> para personas mayores, veteranos o personas con discapacidad. Si paga en noviembre, le descuentan 4%. Vea las <a href=\"/es/tarifas-y-facturas\">tarifas y facturas</a> y las <a href=\"/es/exenciones\">exenciones</a>.</p>"
   ],
   [
    "<h2 id=\"all-h\">Where all of Bay County's property tax goes</h2><span class=\"muted\">Total <span class=\"term\" data-term=\"levy\">levied</span> in ",

@@ -241,21 +241,25 @@ def glossary_es():
 
 def glossary_es_terms():
     g = glossary_es()
-    return {t['id']: {'term': g['terms'].get(t['id'], {}).get('term') or t['term'], 'simple': g['terms'].get(t['id'], {}).get('simple') or t['simple']} for t in TERMS}
+    out = {t['id']: {'term': g['terms'].get(t['id'], {}).get('term') or t['term'], 'simple': g['terms'].get(t['id'], {}).get('simple') or t['simple']} for t in TERMS}
+    out.update({t['id']: {'term': t['term'], 'simple': t['simple']} for t in g.get('extra', [])})  # Spanish-only terms used by /es pages
+    return out
 
 
 def es_glossary_page():
     g = glossary_es()
-    gl = g['groups']
-    jump = ''.join(f'<a href="#g-{k}">{e(gl.get(k, label))}</a>' for k, label in GROUPS)
+    gl = {**g['groups'], **dict(g.get('extra_groups', []))}
+    groups = list(GROUPS) + [(k, v) for k, v in g.get('extra_groups', [])]
+    terms = list(TERMS) + g.get('extra', [])
+    jump = ''.join(f'<a href="#g-{k}">{e(gl.get(k, label))}</a>' for k, label in groups)
     out = [f'''<div class="page prose glossary">
   <span class="eyebrow">Glosario</span>
   <h1>Guía en lenguaje sencillo</h1>
   <p class="lede">El dinero público viene con mucha jerga. Aquí está cada término de este sitio, explicado primero de forma sencilla y luego con más detalle. En todo el sitio, una palabra con subrayado punteado se puede tocar para ver su explicación corta.</p>
   <nav class="g-jump" aria-label="Secciones del glosario">{jump}</nav>''']
-    for k, label in GROUPS:
+    for k, label in groups:
         out.append(f'<section class="g-group" id="g-{k}"><h2>{e(gl.get(k, label))}</h2>')
-        for t in [t for t in TERMS if t['group'] == k]:
+        for t in [t for t in terms if t['group'] == k]:
             s = g['terms'].get(t['id'], {})
             term, simple, more, ex = (s.get(f) if s.get(f) is not None else t[f] for f in ('term', 'simple', 'more', 'example'))
             out.append(f'<article class="g-term" id="{t["id"]}"><h3>{e(term)}</h3><p class="g-simple">{e(simple)}</p>'

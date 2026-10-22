@@ -86,7 +86,7 @@
   ],
   [
    "<p class=\"lede\">Beyond property tax, your tax bill can carry flat fees for fire service, stormwater and lighting. Your utility bill adds water, sewer and garbage. Here's what each government charges.</p>",
-   "<p class=\"lede\">Además del impuesto a la propiedad, su factura de impuestos puede traer tarifas fijas para bomberos, aguas pluviales (el agua de lluvia que corre por las calles) y alumbrado. Su factura de servicios suma el agua, el alcantarillado y la basura. Aquí está lo que cobra cada gobierno.</p>"
+   "<p class=\"lede\">Además del impuesto a la propiedad, su factura de impuestos puede traer tarifas fijas para bomberos, <span class=\"term\" data-term=\"stormwater\">aguas pluviales</span> (el agua de lluvia que corre por las calles) y alumbrado. Su factura de servicios suma el agua, el alcantarillado y la basura. Aquí está lo que cobra cada gobierno.</p>"
   ],
   [
    "<h2>Taxes vs. fees</h2>",
