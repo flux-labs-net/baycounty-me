@@ -20,6 +20,11 @@
     e.stopPropagation(); const o = t.getAttribute('aria-expanded') === 'true';
     document.querySelectorAll('.sub-toggle').forEach(x => x.setAttribute('aria-expanded', 'false'));
     t.setAttribute('aria-expanded', !o); }));
+  // Line each mega menu up under its own button, nudged left only if it would run off the right edge.
+  const placeMega = li => { const m = li.querySelector('.nav-mega'); if (!m || innerWidth <= 980) return;
+    const l = li.getBoundingClientRect().left, w = Math.min(760, innerWidth - 32);
+    m.style.setProperty('--mx', Math.max(16 - l, Math.min(0, innerWidth - 16 - w - l)) + 'px'); };
+  document.querySelectorAll('.has-sub').forEach(li => ['mouseenter', 'focusin', 'click'].forEach(ev => li.addEventListener(ev, () => placeMega(li))));
   document.addEventListener('click', e => { if (!e.target.closest('.has-sub')) document.querySelectorAll('.sub-toggle').forEach(x => x.setAttribute('aria-expanded', 'false')); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') { document.querySelectorAll('.sub-toggle').forEach(x => x.setAttribute('aria-expanded', 'false')); if (menu.classList.contains('open')) { setMenu(false); btn.focus(); } } });
 })();
