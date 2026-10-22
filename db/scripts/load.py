@@ -102,7 +102,36 @@ def gov_key(row, aliases):
 
 
 # Datasets that rule alerts watch (api/_rules.js). New rows in these become alerts.events.
-ALERT_DATASETS = {'contracts', 'change-orders', 'member-votes', 'meetings', 'candidates-2026'}
+# "New" means a record whose identity fields weren't in the table before this sync. record_hash alone isn't
+# enough: adding a column or correcting a typo changes every hash, which would make every record look new.
+ALERT_DATASETS = {
+    'contracts': ('government', 'vendor', 'amount', 'date', 'purpose'),
+    'change-orders': ('government', 'vendor', 'project', 'change_amount', 'date'),
+    'member-votes': ('date', 'board', 'member', 'headline'),
+    'meetings': ('board', 'start', 'title'),
+    'candidates-2026': ('race_id', 'candidate'),
+}
+
+
+def identity(values):
+    """Comparable identity for a record from its key field values (numbers to cents, text trimmed and lowercased)."""
+    out = []
+    for v in values:
+        if v is None or v == '':
+            out.append('')
+        elif isinstance(v, (int, float)) and not isinstance(v, bool):
+            out.append(f'{float(v):.2f}')
+        else:
+            s = str(v).strip().lower()
+            try:
+                out.append(f'{float(s):.2f}' if re.fullmatch(r'-?\d+(\.\d+)?', s) else s)
+            except ValueError:
+                out.append(s)
+    return tuple(out)
+
+
+class SchemaGap(Exception):
+    """A dataset has columns its table lacks; that dataset is skipped and the sync exits non-zero at the end."""
 
 
 def has_table(cur, name):
@@ -142,7 +171,12 @@ def load_dataset(conn, d, aliases, sha):
             raise SystemExit(f'Table {table} is missing: add a migration for dataset "{d["id"]}".')
         missing = [c['name'] for c in d['columns'] if c['name'] not in cols]
         if missing:
-            raise SystemExit(f'Dataset "{d["id"]}" has columns the table lacks: {missing}. Add a migration.')
+            raise SchemaGap(f'Dataset "{d["id"]}" has columns the table lacks: {missing}. Add a migration.')
+        keys = ALERT_DATASETS.get(d['id'])
+        old_ids = set()
+        if keys and all(k in cols for k in keys):
+            cur.execute(f"select {', '.join(chr(34) + k + chr(34) for k in keys)} from {table} where origin = 'site_build'")
+            old_ids = {identity(x) for x in cur.fetchall()}
         cur.execute("insert into ingest_runs (origin, dataset, git_sha) values ('site_build', %s, %s) returning id", (d['id'], sha))
         run = cur.fetchone()[0]
         # Compare with the previous sync by record_hash: rows whose hash is still present are kept as they are
@@ -170,10 +204,12 @@ def load_dataset(conn, d, aliases, sha):
         # Rule alerts: new rows in the datasets rules watch become alerts.events (migration 0008). Skipped on a
         # dataset's first load (everything would look new) and when the migration isn't applied.
         events = 0
-        if old and d['id'] in ALERT_DATASETS and added and has_table(cur, 'alerts.events'):
-            cur.executemany('insert into alerts.events (dataset, record_hash, government_key, record, ingest_run_id) values (%s,%s,%s,%s,%s)',
-                            [(d['id'], h, g, Jsonb(r), run) for h, g, r in added])
-            events = len(added)
+        if old and old_ids and added and has_table(cur, 'alerts.events'):
+            fresh = [(h, g, r) for h, g, r in added if identity(adapt(r.get(k), cols[k]) for k in keys) not in old_ids]
+            if fresh:
+                cur.executemany('insert into alerts.events (dataset, record_hash, government_key, record, ingest_run_id) values (%s,%s,%s,%s,%s)',
+                                [(d['id'], h, g, Jsonb(r), run) for h, g, r in fresh])
+            events = len(fresh)
         extra = ', rows_added = %s' if 'rows_added' in table_columns(cur, 'ingest_runs') else ''
         cur.execute(f"update ingest_runs set finished_at = now(), rows_in = %s, rows_deleted = %s{extra}, status = 'ok', notes = %s where id = %s",
                     (len(seen), deleted, *([len(batch)] if extra else []), f'{len(batch)} new, {len(seen) - len(batch)} unchanged' + (f', {events} alert events' if events else ''), run))
@@ -272,7 +308,7 @@ def main():
                 n, dl, new, ev = load_dataset(conn, d, aliases, sha)
             except SystemExit:
                 raise
-            except psycopg.Error as e:
+            except (psycopg.Error, SchemaGap) as e:
                 # One bad dataset shouldn't stop the rest; the failure is recorded for /api/v1/status.
                 msg = str(e).splitlines()[0][:300]
                 print(f'{d["id"]:32s} FAILED: {msg}')
