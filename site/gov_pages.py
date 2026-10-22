@@ -108,7 +108,7 @@ def gov_page(key):
         rel = ''.join(f'<li>{e(x["name"])}: {money(x["total"])}</li>' for x in d.get('related') or [] if x.get('total'))
         secs.append(f'''<section class="tx-sec"><div class="sec-hd"><h2 id="debt">Debt</h2><span class="muted">{e(d.get("fy") or "")}</span></div>
           <p><b>{money(d["total"])}</b> owed{f" — about {usd(pr['debt'])} per resident" if pr.get("debt") else ""}. {e(d.get("note") or "")}</p>
-          {f'<div class="tablewrap"><table class="tx-table"><tbody>{bt}</tbody></table></div>' if bt else ''}
+          {f'<div class="tablewrap"><table class="tx-table"><thead><tr><th scope="col">Kind of debt</th><th scope="col" class="num">Owed</th></tr></thead><tbody>{bt}</tbody></table></div>' if bt else ''}
           {f'<p class="small">Related agencies:</p><ul class="plain small">{rel}</ul>' if rel else ''}
           <p class="src-line">{src(d.get("source_url"), "Audited financial statements")} · <a href="/public-money/debt">All local debt</a></p></section>''')
     # audits

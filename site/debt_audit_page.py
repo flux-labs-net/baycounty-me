@@ -76,7 +76,7 @@ def issues_section():
               <td class="wrap small">{e(x.get('purpose') or '')}{'<br><span class="muted">Repaid from: ' + e(x['security']) + '</span>' if x.get('security') else ''}<br>{src}</td></tr>"""
     gaps = ''.join(f'<li>{e(g)}</li>' for g in b.get('gaps') or [])
     return f"""<section class="tx-sec"><div class="sec-hd"><h2 id="issues">Every bond, note and loan</h2><span class="muted">{len(iss)} issues · {money(sum(x.get('outstanding') or 0 for x in iss))} outstanding at the latest audit</span></div>
-    <div class="tablewrap"><table class="tx-table cm-table bond-table" data-sortable data-csv="bay-county-bonds-notes-loans"><thead><tr><th scope="col">Issue</th><th scope="col" class="num">Borrowed</th><th scope="col" class="num">Still owed</th><th scope="col">Rate and term</th><th scope="col">What it paid for</th></tr></thead><tbody>{rows}</tbody></table></div>
+    <div class="tablewrap"><table class="tx-table cm-table bond-table"><thead><tr><th scope="col">Issue</th><th scope="col" class="num">Borrowed</th><th scope="col" class="num">Still owed</th><th scope="col">Rate and term</th><th scope="col">What it paid for</th></tr></thead><tbody>{rows}</tbody></table></div>
     <p class="note">From each government's latest audit, with issue dates and terms from the resolutions and loan documents. Most local borrowing here is a private loan from a bank or the state, so there is no public bond document or rating. Issue totals differ from "Who owes what" above, which also counts leases, software subscriptions and bond premiums.</p>
     <details class="gaps"><summary>Gaps in the bond records ({len(b.get('gaps') or [])})</summary><ul>{gaps}</ul></details></section>"""
 
@@ -122,7 +122,7 @@ def debt_page():
         lis = ''.join(f'''<tr><td class="wrap"><b>{e(i.get("name"))}</b><br><span class="muted small">{e(i.get("purpose") or "Purpose not stated in the audit")}</span></td><td class="num">{e(i.get("year_issued") or "—")}</td><td class="num">{money(i.get("original_amount"))}</td><td class="num">{money(i.get("outstanding"))}</td><td class="num">{e(i.get("interest_rate") or "—")}</td><td class="small">{e(i.get("final_maturity") or "—")}</td><td class="wrap small">{e(i.get("repaid_by") or "—")}</td></tr>''' for i in iss)
         slug = re.sub(r'[^a-z0-9]+', '-', short(x['government']).lower()).strip('-')
         det += f'''<details class="tbl-toggle" data-g="{e(short(x["government"]))}"><summary>{e(short(x["government"]))}: {len(iss)} debts, {money(x["total_debt"])}</summary><p class="note">{e(x.get("total_debt_note", ""))} <a href="{e(x["source_url"])}" target="_blank" rel="noopener">Audit ({e(fy_label(x["fy"]))})</a></p>
-        <div class="tablewrap"><table class="tx-table" data-sortable data-csv="debt-{slug}"><thead><tr><th scope="col">Debt</th><th scope="col" class="num">Issued</th><th scope="col" class="num">Original</th><th scope="col" class="num">Owed</th><th scope="col" class="num">Rate</th><th scope="col">Final payment</th><th scope="col">Repaid from</th></tr></thead><tbody>{lis}</tbody></table></div></details>'''
+        <div class="tablewrap"><table class="tx-table"><thead><tr><th scope="col">Debt</th><th scope="col" class="num">Issued</th><th scope="col" class="num">Original</th><th scope="col" class="num">Owed</th><th scope="col" class="num">Rate</th><th scope="col">Final payment</th><th scope="col">Repaid from</th></tr></thead><tbody>{lis}</tbody></table></div></details>'''
 
     T = lambda tid, t: f'<span class="term" data-term="{tid}">{t}</span>'
     return f'''<div class="page tax">
@@ -144,8 +144,8 @@ def debt_page():
   <section class="tx-sec"><div class="sec-hd"><h2 id="who">Who owes what</h2><span class="muted">Latest audited year; per resident where a population applies</span></div><div class="hbars">{bars}</div>
     <p class="note">Panama City Beach's figure includes $56.9M of Front Beach Road CRA bonds carried on the city's books. Port Panama City and the Panama City CRA are reported separately from the city.</p></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="lump">Big single payments ahead</h2><span class="muted">Loans paid back all at once at the end, rather than a bit each year</span></div><ul class="plain">{bl}</ul></section>
-  <section class="tx-sec"><div class="sec-hd"><h2 id="types">What kind of debt</h2></div><div class="tablewrap"><table class="tx-table" data-sortable data-csv="bay-county-debt-by-type">{type_tbl}</table></div></section>
-  <section class="tx-sec"><div class="sec-hd"><h2 id="pay">Payments this year, and pension promises</h2></div><div class="tablewrap"><table class="tx-table" data-sortable data-csv="bay-county-debt-payments-pensions">{pay_tbl}</table></div>
+  <section class="tx-sec"><div class="sec-hd"><h2 id="types">What kind of debt</h2></div><div class="tablewrap"><table class="tx-table">{type_tbl}</table></div></section>
+  <section class="tx-sec"><div class="sec-hd"><h2 id="pay">Payments this year, and pension promises</h2></div><div class="tablewrap"><table class="tx-table">{pay_tbl}</table></div>
     <p class="note">Lynn Haven reports a net pension <i>asset</i> of $4.4M (its plan holds more than it owes). Blank cells mean the audit didn't report that item for the government.</p></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="each">Every debt, by government</h2></div>{det}</section>
   {issues_section()}
@@ -190,7 +190,7 @@ def audits_page():
     for g in order:
         for a in sorted(by.get(g, []), key=lambda a: a['fy'], reverse=True):
             for f in a['findings']:
-                items += f'''<li class="fd" id="{finding_id(g, a, f)}" data-g="{e(g)}" data-r="{1 if f.get("repeat") else 0}"><div class="fd-hd"><b>{e(g)}</b> <span class="muted">{e(fy_label(a["fy"]))} · {e(f.get("id"))}</span>{' <span class="badge warn">Repeat</span>' if f.get("repeat") else ''}</div>
+                items += f'''<li class="fd" id="{finding_id(g, a, f)}" data-g="{e(g)}" data-r="{1 if f.get("repeat") else 0}" data-y="{e(fy_label(a["fy"]))}" data-id="{e(f.get("id") or "")}" data-t="{e(re.sub(r"\s*\(first reported \d{4}\)", "", f.get("title", "")))}" data-u="{e(f.get("source_url") or a["source_url"])}"><div class="fd-hd"><b>{e(g)}</b> <span class="muted">{e(fy_label(a["fy"]))} · {e(f.get("id"))}</span>{' <span class="badge warn">Repeat</span>' if f.get("repeat") else ''}</div>
                   <div class="fd-t">{e(re.sub(r"\s*\(first reported \d{4}\)", "", f.get("title", "")))}</div><p>{e(f.get("plain"))}</p>{f'<p class="muted small"><b>Management response:</b> {e(f.get("mgmt_response"))}</p>' if f.get("mgmt_response") and "not extract" not in str(f.get("mgmt_response")).lower() else ""}<a class="src" href="{e(f.get("source_url") or a["source_url"])}" target="_blank" rel="noopener">Audit report</a></li>'''
     sr = ''
     for s in d['state_reports']:
@@ -210,16 +210,24 @@ def audits_page():
       <li><b>No Bay County government was in a state "financial emergency"</b> in the years reviewed.</li>
     </ol><p class="muted">Each finding links to the {T('audit', 'audit report')} filed with the Florida Auditor General.</p></div></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="score">Scorecard</h2><span class="muted">Latest audit for each government</span></div>
-    <div class="tablewrap"><table class="tx-table" data-sortable data-csv="bay-county-audit-scorecard"><thead><tr><th scope="col">Government</th><th scope="col">Year</th><th scope="col">Opinion</th><th scope="col" class="num">Findings</th><th scope="col" class="num">Repeats</th><th scope="col" class="num">Oldest unfixed since</th><th scope="col" class="num" data-nosort>Findings by year</th></tr></thead><tbody>{score}</tbody></table></div>
+    <div class="tablewrap"><table class="tx-table"><thead><tr><th scope="col">Government</th><th scope="col">Year</th><th scope="col">Opinion</th><th scope="col" class="num">Findings</th><th scope="col" class="num">Repeats</th><th scope="col" class="num">Oldest unfixed since</th><th scope="col" class="num">Findings by year</th></tr></thead><tbody>{score}</tbody></table></div>
     <p class="note">"Findings by year" runs oldest to newest across the three audits reviewed.</p></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="list">Every finding</h2><span class="muted" id="fdCount" aria-live="polite"></span></div>
-    <div class="filters-row"><select id="fdG" aria-label="Government" data-param="gov"><option value="">All governments</option>{opts}</select>
-      <label class="chk"><input type="checkbox" id="fdR" data-param="repeat"> Repeats only</label></div>
+    <div class="filters-row"><input id="fdQ" type="search" placeholder="Search findings" aria-label="Search findings"><select id="fdG" aria-label="Government" data-param="gov"><option value="">All governments</option>{opts}</select>
+      <select id="fdS" aria-label="Sort"><option value="new">Newest first</option><option value="az">Government A to Z</option></select>
+      <label class="chk"><input type="checkbox" id="fdR" data-param="repeat"> Repeats only</label><button type="button" class="tt-csv" id="fdCsv">Download CSV</button></div>
     <ol class="findings" id="fdList">{items}</ol></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="state">State auditor reports</h2><span class="muted">Florida Auditor General reviews beyond the yearly audit</span></div>{sr}</section>
   <section class="tx-sec method"><div class="sec-hd"><h2 id="src">Sources</h2></div><p>Annual audits and management letters filed with the <a href="https://flauditor.gov/" target="_blank" rel="noopener">Florida Auditor General</a>, plus the Auditor General's own reports. Findings are summarized in plain English; the auditor's finding number is kept so you can find it in the report.</p></section>
 </div>
 <link rel="stylesheet" href="/assets/tax.css">
-<script>(()=>{{const g=document.getElementById('fdG'),r=document.getElementById('fdR'),li=[...document.querySelectorAll('#fdList .fd')],c=document.getElementById('fdCount');
-function f(){{let n=0;li.forEach(x=>{{const s=(!g.value||x.dataset.g===g.value)&&(!r.checked||x.dataset.r==='1');x.hidden=!s;if(s)n++;}});c.textContent=n+' findings';}}g.onchange=f;r.onchange=f;f();
-document.addEventListener('DOMContentLoaded',()=>{{f();const t=location.hash&&document.getElementById(decodeURIComponent(location.hash.slice(1)));if(t)t.scrollIntoView();}});}})();</script>'''
+<script>(()=>{{const $=id=>document.getElementById(id),g=$('fdG'),r=$('fdR'),q=$('fdQ'),so=$('fdS'),ol=$('fdList'),li=[...ol.querySelectorAll('.fd')],c=$('fdCount');
+/* newest audit year first, then government A to Z, then finding number */
+function f(){{const w=q.value.trim().toLowerCase().split(/\s+/).filter(Boolean);let n=0;li.forEach(x=>{{const t=x.textContent.toLowerCase();const s=(!g.value||x.dataset.g===g.value)&&(!r.checked||x.dataset.r==='1')&&w.every(y=>t.includes(y));x.hidden=!s;if(s)n++;}});c.textContent=n+' finding'+(n===1?'':'s');
+  const k=[{{get:x=>x.dataset.y,type:'date',dir:'desc'}},{{get:x=>x.dataset.g,type:'text',dir:'asc'}}];if(so.value==='az')k.reverse();k.push({{get:x=>x.dataset.id,type:'text',dir:'asc'}});
+  if(window.TT)TT.sortBy(li,k).forEach(x=>ol.appendChild(x));}}
+[g,r,q,so].forEach(x=>x.addEventListener('input',f));
+$('fdCsv').addEventListener('click',()=>TT.csv('baycounty-audit-findings'+(g.value?'-'+TT.slug(g.value):''),['government','audit_year','finding','title','plain_english','repeat','source'],
+  li.filter(x=>!x.hidden).sort((a,b)=>[...ol.children].indexOf(a)-[...ol.children].indexOf(b)).map(x=>[x.dataset.g,x.dataset.y,x.dataset.id,x.dataset.t,(x.querySelector('p')||{{}}).textContent||'',x.dataset.r==='1'?'yes':'no',x.dataset.u])));
+const go=()=>{{f();const t=location.hash&&document.getElementById(decodeURIComponent(location.hash.slice(1)));if(t)t.scrollIntoView();}};
+if(window.TT)go();else addEventListener('DOMContentLoaded',go);}})();</script>'''

@@ -156,7 +156,7 @@ function renderGov() {
         <div><h4>Money in, by source <span class="muted">${cur}${y.rt ? ' · ' + big(y.rt) : ''}</span></h4>${barList(y.rev, {empty: 'The state has not posted this year’s revenue yet.'})}</div>
         <div><h4>Money out, by service <span class="muted">${cur}${y.et ? ' · ' + big(y.et) : ''}</span></h4>${barList(y.exp)}</div>
       </div>
-      <div class="tablewrap"><table class="tx-table"><thead><tr><th scope="col"></th>${g.act.map(a => `<th scope="col" class="num">${a.fy}</th>`).join('')}</tr></thead><tbody>
+      <div class="tablewrap"><table class="tx-table"><thead><tr><th scope="col">Measure</th>${g.act.map(a => `<th scope="col" class="num">${a.fy}</th>`).join('')}</tr></thead><tbody>
         <tr><th scope="row">Money in</th>${g.act.map(a => `<td class="num">${big(a.rt)}</td>`).join('')}</tr>
         <tr><th scope="row">Money out</th>${g.act.map(a => `<td class="num">${big(a.et)}</td>`).join('')}</tr>
         <tr><th scope="row">Property tax collected</th>${g.act.map(a => `<td class="num">${big(a.rev['Property taxes'])}</td>`).join('')}</tr>

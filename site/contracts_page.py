@@ -1,6 +1,8 @@
 """Contracts & Vendors page for baycounty.me (data: data/contracts/contracts.json)."""
 import json, os, re, html
 from collections import defaultdict
+import vendors as V
+from change_growth import growth_section
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 SRC = os.path.join(HERE, '..', 'data', 'contracts', 'contracts.json')
@@ -44,21 +46,78 @@ def money(n):
     return sign + (f'${n/1e6:,.1f}M' if n >= 1e6 else (f'${n/1e3:,.0f}K' if n >= 1e3 else f'${n:,.0f}'))
 
 
+def vendor_profiles(d, cs):
+    """Everything on the site about each company: awards, change orders, emergency purchases, payments in the
+    check registers' top-payee lists, campaign gifts from the company and recorded votes on its contracts."""
+    P = {}
+    def prof(raw):
+        vid, n, t = V.resolve(raw)
+        p = P.setdefault(vid, {'id': vid, 'n': n, 't': t, 'aka': set(), 'aw': [], 'co': [], 'em': [], 'paid': [], 'gifts': [], 'votes': []})
+        if raw and raw.strip() != n:
+            p['aka'].add(re.sub(r'\s*\(.*?\)\s*', ' ', raw).strip())
+        return p
+    for i, c in enumerate(sorted(cs, key=lambda c: c.get('date') or '', reverse=True)):
+        prof(c['vendor'])['aw'].append({'g': SHORT.get(c['government'], c['government']), 'a': c['amount'], 'p': c.get('purpose') or '', 'd': c.get('date') or '',
+                                         'm': c['b'], 'u': c.get('source_url') or ''})
+    for x in d['change_orders']:
+        prof(x.get('vendor'))['co'].append({'g': SHORT.get(x['government'], x['government']), 'a': x.get('change_amount'), 'p': x.get('project') or '',
+                                            'pct': x.get('pct_of_original'), 'd': x.get('date') or '', 'u': x.get('source_url') or ''})
+    for x in d['emergency_purchases']:
+        prof(x.get('vendor'))['em'].append({'g': SHORT.get(x['government'], x['government']), 'a': x.get('amount'), 'p': x.get('purpose') or '',
+                                            'd': x.get('date') or '', 'u': x.get('source_url') or ''})
+    for r in d['registers']:
+        tv = r.get('top_vendors') or []
+        for rank, v in enumerate(tv, 1):
+            lh = 'Lynn Haven' in r['government']
+            prof(v['vendor'])['paid'].append({'g': SHORT.get(r['government'], r['government']), 'fy': r['fy'], 'a': v['amount'], 'rank': rank, 'of': len(tv),
+                                              'cover': 'checks of about $10,000 or more' if lh else f'{len(r.get("months_covered") or [])} of 12 months'})
+    try:  # campaign gifts and votes come from the money map's data, so both pages agree
+        import money_map as mm
+        M = mm.map_data()
+    except FileNotFoundError:
+        M = None
+    if M:
+        O, DN = M['officials'], {x['id']: x['n'] for x in M['donors']}
+        for g in M['gifts']:
+            vid = V.resolve(DN[g['d']])[0]
+            if vid in P:  # only companies that appear in the contract records
+                o = O[g['o']]
+                P[vid]['mm'] = DN[g['d']]  # the name the money map uses, for its search link
+                P[vid]['gifts'].append({'o': o['n'], 'off': o['off'], 'a': g['a'], 'same': g['same'], 'dates': g['dates']})
+        for v in M['vgroups']:
+            vid = V.resolve(DN[v['d']])[0]
+            if vid in P:
+                P[vid]['votes'].append({'d': v['date'], 'g': mm.GSHORT.get(v['g'], v['g']), 'h': v['h'], 'a': v['amount'], 'tally': v['tally'], 'outcome': v['outcome'],
+                                        'consent': v['consent'], 'u': v['url'], 'roll': [{'n': m['n'], 'vote': m['vote'], 'gift': m.get('gift')} for m in v['roll']]})
+    for p in P.values():
+        seen = {V.key(p['n'])}  # one spelling per distinct form; skip ones that differ only by Inc/LLC or punctuation
+        aka = []
+        for a in sorted(p['aka'], key=len):
+            if V.key(a) not in seen and not a.isupper():  # all-caps forms are register truncations
+                seen.add(V.key(a)); aka.append(a)
+        p['aka'] = sorted(aka)
+        p['gifts'].sort(key=lambda g: -g['a'])
+        p['tot'] = round(sum(a['a'] for a in p['aw']), 2)
+    return P
+
+
 def contracts_page(out_dir):
     d = json.load(open(SRC))
     cs = [c for c in d['contracts'] if c.get('amount')]
     for c in cs:
         c['b'] = bucket(c.get('method'))
-    # vendor totals (awards)
-    vt = defaultdict(lambda: {'n': 0, 'amt': 0, 'names': defaultdict(int), 'govs': set()})
     for c in cs:
-        if re.match(r'not named|various|multiple', c['vendor'] or '', re.I) or c['b'] == 'Intergovernmental' or re.search(r'department of|^city of|county (board|commission)|^state of|authority$', c['vendor'] or '', re.I):
+        c['vid'], c['vn'], c['vt'] = V.resolve(c['vendor'])
+    # vendor totals (awards), one row per company however its name is spelled; other governments and unnamed vendors left out
+    vt = defaultdict(lambda: {'n': 0, 'amt': 0, 'name': '', 'id': '', 'govs': set()})
+    for c in cs:
+        if c['vt'] != 'business':
             continue
-        k = vkey(c['vendor']); v = vt[k]
-        v['n'] += 1; v['amt'] += c['amount']; v['names'][c['vendor']] += 1; v['govs'].add(SHORT.get(c['government'], c['government']))
+        v = vt[c['vid']]
+        v['n'] += 1; v['amt'] += c['amount']; v['name'] = c['vn']; v['id'] = c['vid']; v['govs'].add(SHORT.get(c['government'], c['government']))
     top_v = sorted(vt.values(), key=lambda v: -v['amt'])[:15]
     mx = top_v[0]['amt'] if top_v else 1
-    vbars = ''.join(f'''<div class="hb"><span class="hb-n">{e(max(v["names"], key=v["names"].get))} <em>{v["n"]} award{"s" if v["n"] > 1 else ""} · {e(", ".join(sorted(v["govs"])))}</em></span><span class="hb-track"><span class="hb-bar" style="width:{max(.5, v["amt"]/mx*100):.1f}%"></span></span><span class="hb-v">{money(v["amt"])}</span></div>''' for v in top_v)
+    vbars = ''.join(f'''<div class="hb vlink" role="button" tabindex="0" data-v="{e(v["id"])}"><span class="hb-n">{e(v["name"])} <em>{v["n"]} award{"s" if v["n"] > 1 else ""} · {e(", ".join(sorted(v["govs"])))}</em></span><span class="hb-track"><span class="hb-bar" style="width:{max(.5, v["amt"]/mx*100):.1f}%"></span></span><span class="hb-v">{money(v["amt"])}</span></div>''' for v in top_v)
     # methods
     mt = defaultdict(lambda: [0, 0])
     for c in cs:
@@ -83,9 +142,10 @@ def contracts_page(out_dir):
     em = ''.join(f'''<li><b>{e(SHORT.get(x["government"], x["government"]))}, {e(x.get("date"))}: {money(x.get("amount"))}</b> to {e(x.get("vendor"))} for {e(x.get("purpose"))}. <span class="muted">{e(x.get("basis", ""))}</span> <a class="src" href="{e(x.get("source_url"))}" target="_blank" rel="noopener">Source</a></li>''' for x in sorted(d['emergency_purchases'], key=lambda x: x.get('date') or ''))
     th = ''.join(f'''<li><b>{e(SHORT.get(x["government"], x["government"]))}.</b> {e(x["rule"])} <a class="src" href="{e(x.get("source_url"))}" target="_blank" rel="noopener">Source</a></li>''' for x in d['thresholds'])
     # ledger data for JS
-    rows = [{'g': SHORT.get(c['government'], c['government']), 'v': c['vendor'], 'a': c['amount'], 'p': c.get('purpose') or '', 'd': c.get('date') or '', 'm': c['b'], 'mf': c.get('method') or '',
+    rows = [{'g': SHORT.get(c['government'], c['government']), 'v': c['vendor'], 'id': c['vid'], 'a': c['amount'], 'p': c.get('purpose') or '', 'd': c.get('date') or '', 'm': c['b'], 'mf': c.get('method') or '',
              'u': c.get('source_url') or '', 'n': c.get('notes') or ''} for c in sorted(cs, key=lambda c: -c['amount'])]
-    json.dump(rows, open(os.path.join(out_dir, 'data', 'contracts-page.json'), 'w'), ensure_ascii=False, separators=(',', ':'))
+    vp = sorted(vendor_profiles(d, cs).values(), key=lambda p: p['n'].lower())
+    json.dump({'rows': rows, 'vp': vp}, open(os.path.join(out_dir, 'data', 'contracts-page.json'), 'w'), ensure_ascii=False, separators=(',', ':'))
     open(os.path.join(out_dir, 'assets', 'contracts.js'), 'w').write(open(os.path.join(HERE, 'contracts.js')).read())
     govs = sorted(set(r['g'] for r in rows))
     cot = sum(x.get('change_amount') or 0 for x in d['change_orders'])
@@ -108,7 +168,10 @@ def contracts_page(out_dir):
     <div class="kpi"><span class="eyebrow">Emergency purchases</span><span class="v">{len(d["emergency_purchases"])}</span><span class="s">Approved after the fact</span></div>
   </div>
   <section class="tx-sec"><div class="sec-hd"><h2 id="top">Biggest contract winners</h2><span class="muted">Total awards in this list, all governments</span></div><div class="hbars">{vbars}</div>
-    <p class="note">Award amounts as proposed on agendas. Payments to other governments (such as FDOT for road work) are left out of this ranking. A company's name may vary between agendas; similar names are combined.</p></section>
+    <p class="note">Award amounts as proposed on agendas. Payments to other governments and to insurance pools that governments own (such as FDOT for road work, or the Florida League of Cities and PGIT for insurance) are left out of this ranking. Each company is counted once, however agendas spell its name. Tap a company to see everything on it.</p></section>
+  <section class="tx-sec"><div class="sec-hd"><h2 id="company">Look up a company</h2><span class="muted">Every record on this site for one company: contracts, payments, change orders, campaign gifts and votes</span></div>
+    <div class="filters-row"><input id="vpQ" list="vpList" type="search" placeholder="Type a company name" aria-label="Company name" autocomplete="off"><datalist id="vpList"></datalist></div>
+    <div id="vpCard" class="vp-card" aria-live="polite"><p class="muted">Pick a company, or tap a name in the list above or in the contracts table below.</p></div></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="paid">Who actually got paid the most</h2><span class="muted">From Bay County's check registers and Lynn Haven's warrant lists</span></div>{regs}
     <p class="note">Cash paid in the period covered, not contract value. Payroll, benefits, transfers to other offices and pass-through payments are left out. Other cities don't publish check registers online; they can be requested.</p></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="how">How contracts were awarded</h2><span class="muted">By award dollars</span></div><div class="hbars">{mbars}</div>
@@ -117,11 +180,11 @@ def contracts_page(out_dir):
     <div class="filters-row"><input id="ctQ" type="search" data-param="q" placeholder="Search vendor or project" aria-label="Search contracts">
       <select id="ctG" aria-label="Government" data-param="gov"><option value="">All governments</option>{''.join(f"<option>{e(g)}</option>" for g in govs)}</select>
       <select id="ctM" aria-label="How awarded" data-param="method"><option value="">Any method</option>{''.join(f"<option>{e(k)}</option>" for k, _ in METHODS)}<option>Other</option></select>
-      <button type="button" class="pill sm" id="ctCsv">Download this view (CSV)</button></div>
-    <div class="tablewrap"><table class="tx-table" id="ctT"><thead><tr><th scope="col">Government</th><th scope="col">Vendor</th><th scope="col">For</th><th scope="col" class="num" aria-sort="descending">Amount</th><th scope="col">How awarded</th><th scope="col">Date</th></tr></thead><tbody><tr><td colspan="6" class="muted">Loading contracts…</td></tr></tbody></table></div>
+      <button type="button" class="pill sm" id="ctCsv">Download CSV</button></div>
+    <div class="tablewrap"><table class="tx-table" id="ctT" data-tt="own"><thead><tr><th scope="col">Government</th><th scope="col">Vendor</th><th scope="col">For</th><th scope="col" class="num">Amount</th><th scope="col">How awarded</th><th scope="col">Date</th></tr></thead><tbody><tr><td colspan="6" class="muted">Loading contracts…</td></tr></tbody></table></div>
     <button type="button" class="pill" id="ctMore" hidden>Show more</button></section>
-  <section class="tx-sec"><div class="sec-hd"><h2 id="co">Change orders</h2><span class="muted">Contracts that grew after they were signed</span></div>
-    <div class="tablewrap"><table class="tx-table" data-sortable data-csv="bay-county-change-orders"><thead><tr><th scope="col">Gov.</th><th scope="col">Vendor and project</th><th scope="col" class="num">Original</th><th scope="col" class="num">Added</th><th scope="col" class="num">Increase</th><th scope="col">Reason</th><th scope="col">Date</th></tr></thead><tbody>{co_rows}</tbody></table></div></section>
+  {growth_section(d, f'''<details class="tbl-toggle"><summary>Every change order in this list ({len(d["change_orders"])})</summary>
+    <div class="tablewrap"><table class="tx-table"><thead><tr><th scope="col">Gov.</th><th scope="col">Vendor and project</th><th scope="col" class="num">Original</th><th scope="col" class="num">Added</th><th scope="col" class="num">Increase</th><th scope="col">Reason</th><th scope="col">Date</th></tr></thead><tbody>{co_rows}</tbody></table></div></details>''')}
   <section class="tx-sec"><div class="sec-hd"><h2 id="em">Emergency purchases</h2></div><ul class="plain">{em}</ul></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="rules">The bidding rules</h2></div><ul class="plain">{th}</ul></section>
   <section class="tx-sec method"><div class="sec-hd"><h2 id="src">How this was compiled, and gaps</h2></div><ul class="plain">{''.join(f"<li>{e(n)}</li>" for n in d["notes"])}</ul>

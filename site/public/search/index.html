@@ -34,6 +34,8 @@
 <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};window.si=window.si||function(){(window.siq=window.siq||[]).push(arguments)};</script>
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/_vercel/speed-insights/script.js"></script>
+<script src="/assets/tables.js" defer></script>
+<script src="/assets/site.js" defer></script>
 
 </head>
 <body>
@@ -62,15 +64,32 @@
   const inp = document.getElementById('sq'), res = document.getElementById('sRes'), cnt = document.getElementById('sCount');
   const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   const norm = s => String(s || '').toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g, '');
-  let IDX = null, t;
+  let IDX = null, t, pending = 0;
   const W = {Page: 6, Section: 4, Glossary: 5};
-  async function load() { if (!IDX) { IDX = (await (await fetch('/data/search.json')).json()).map(r => ({...r, _t: norm(r.t), _s: norm(r.s), _x: norm(r.x)})); } return IDX; }
+  const prep = r => ({...r, _t: norm(r.t), _s: norm(r.s), _x: norm(r.x)});
+  // The index comes in pieces: core.json (pages, sections, glossary) first, then page text and each dataset.
+  // Results show as soon as core.json arrives and refresh as the rest lands; once all is in, IDX matches search.json in order.
+  let coreP = null;
+  function load() {
+    if (coreP) return coreP;
+    coreP = fetch('/data/search/core.json').then(r => r.json()).then(c => {
+      const core = c.rows.map(prep), parts = c.parts.map(() => []);
+      const rebuild = () => { IDX = core.concat(...parts); };
+      rebuild(); pending = c.parts.length + 1;
+      const done = () => { pending--; rebuild(); if (inp.value.trim()) run(); };
+      fetch('/data/search/text.json').then(r => r.json()).then(tx => { let i = 0; core.forEach(r => { if (r.k === 'Page') { r.x = tx[i++] || ''; r._x = norm(r.x); } }); }).catch(() => {}).finally(done);
+      c.parts.forEach((n, i) => fetch('/data/search/' + n + '.json').then(r => r.json()).then(p => { parts[i] = p.k ? p.rows.map(([t, s, u]) => prep({k: p.k, t, s, u})) : p.rows.map(prep); }).catch(() => {}).finally(done));
+      return IDX;
+    });
+    return coreP;
+  }
+  const getIdx = async () => { await load(); return IDX; };
   function hl(s, words) { let h = esc(s); words.forEach(w => { if (w.length > 1) h = h.replace(new RegExp('(' + w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + ')', 'ig'), '<mark>$1</mark>'); }); return h; }
   async function run() {
     const q = inp.value.trim(), words = norm(q).split(/\s+/).filter(Boolean);
     const u = new URL(location.href); if (q) u.searchParams.set('q', q); else u.searchParams.delete('q'); history.replaceState(null, '', u);
     if (!words.length) { res.innerHTML = ''; cnt.textContent = ''; return; }
-    const idx = await load();
+    const idx = await getIdx();
     const hits = [];
     for (const r of idx) {
       let sc = 0, ok = true;
@@ -78,11 +97,12 @@
       if (ok) hits.push([sc + (W[r.k] || 0), r]);
     }
     hits.sort((a, b) => b[0] - a[0]);
-    cnt.textContent = hits.length ? `${hits.length.toLocaleString()} result${hits.length === 1 ? '' : 's'}${hits.length > 100 ? ', showing the top 100' : ''}` : 'No results. Try fewer or different words.';
+    cnt.textContent = (hits.length ? `${hits.length.toLocaleString()} result${hits.length === 1 ? '' : 's'}${hits.length > 100 ? ', showing the top 100' : ''}` : pending ? 'No results yet.' : 'No results. Try fewer or different words.') + (pending ? ' Still loading records…' : '');
     const snip = r => { if (!r.x || words.some(w => r._s.includes(w))) return r.s; const i = r._x.indexOf(words[0]); return i < 0 ? r.s : '…' + r.x.slice(Math.max(0, i - 80), i + 140) + '…'; };
     res.innerHTML = hits.slice(0, 100).map(([, r]) => `<li><a href="${esc(r.u)}"><span class="r-k">${esc(r.k)}</span><b>${hl(r.t, words)}</b><span class="r-s">${hl(snip(r), words)}</span></a></li>`).join('');
   }
   inp.addEventListener('input', () => { clearTimeout(t); t = setTimeout(run, 150); });
+  inp.addEventListener('focus', load, {once: true}); // start fetching the small core file before the first keystroke
   const q0 = new URL(location.href).searchParams.get('q'); if (q0) { inp.value = q0; run(); } else inp.focus({preventScroll: true});
 })();
 </script>
@@ -93,7 +113,6 @@
   <p class="muted foot-links">Page updated Oct 20, 2026 · <a href="/updates">What's new</a> · <a href="/updates.xml">RSS</a> · <a href="/about">Sources and method</a></p></div>
   <a class="powered" href="https://fluxlabs.net/" target="_blank" rel="noopener"><span>Powered by</span><img src="/assets/flux-labs.webp" alt="Flux Labs" width="140" height="25"></a>
 </div></footer>
-<script src="/assets/site.js" defer></script>
 <script src="/assets/report.js" defer></script>
 </body>
 </html>

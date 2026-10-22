@@ -34,6 +34,8 @@
 <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};window.si=window.si||function(){(window.siq=window.siq||[]).push(arguments)};</script>
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/_vercel/speed-insights/script.js"></script>
+<script src="/assets/tables.js" defer></script>
+<script src="/assets/site.js" defer></script>
 
 </head>
 <body>
@@ -49,7 +51,7 @@
 <div class="page tax mm">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Accountability · Money map</span><h1>Money map</h1>
     <p class="lede">Which businesses and groups gave to which officials' campaigns, and which of those donors are paid by a local government. Tap any name to follow its connections.</p></div>
-    <div class="stamp"><a class="pill" href="/public-money/campaign-money">Campaign money tables</a><span>Reports as of 2026-10-21</span></div></header>
+    <div class="stamp"><a class="pill" href="/public-money/campaign-money">Campaign money tables</a><button type="button" class="pdf-btn" id="pdf"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 12v2h10v-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Export PDF</button><span>Reports as of 2026-10-21</span></div></header>
   <section class="explain"><div class="ex-txt"><span class="eyebrow">Read this first</span><h2>What the map does and doesn't show</h2>
     <ol class="ex-steps"><li><b>A gift and a contract are two separate facts.</b> A line to an official is a campaign gift. A line to a government is that government's contracts or payments to the same business. The map never adds contract dollars to an official.</li>
       <li><b>Officials only vote on their own government's contracts.</b> A county commissioner has no say in a city's contracts. The connections that can matter are marked: a gift to an official whose own government pays that donor.</li>
@@ -58,7 +60,7 @@
     <div class="kpi"><span class="eyebrow">Donor organizations</span><span class="v">415</span><span class="s">gave to 48 current officials</span></div>
     <div class="kpi"><span class="eyebrow">Also paid by a local government</span><span class="v">20</span><span class="s">gave $27,658 in all</span></div>
     <div class="kpi"><span class="eyebrow">Gift to the official's own government's contractor</span><span class="v">21</span><span class="s">gifts totaling $17,345</span></div>
-    <div class="kpi"><span class="eyebrow">Voted on that donor's contract</span><span class="v">10</span><span class="s">official–donor pairs, 16 recorded votes</span></div>
+    <div class="kpi"><span class="eyebrow">Voted on that donor's contract</span><span class="v">11</span><span class="s">official–donor pairs, 14 recorded votes</span></div>
   </div>
   <div class="vt-filters mm-f">
     <label class="vf"><span>Show donors</span><select id="mmShow"><option value="same">Gave to an official whose government pays them</option><option value="k">Paid by any local government</option><option value="top">Top 40 by amount given</option><option value="all">All organizations</option></select></label>
@@ -70,11 +72,11 @@
     <p class="mm-hint muted small">Scroll sideways to see the whole map.</p><div class="mm-wrap" id="mmWrap"><svg id="mmSvg" role="img" aria-label="Map of officials, the organizations that gave to their campaigns, and the governments that pay those organizations"></svg></div>
     <div class="mm-detail" id="mmDetail" aria-live="polite"><p class="muted">Tap an official, donor or government to see its connections and the records behind them.</p></div>
   </section>
-  <section class="tx-sec"><div class="sec-hd"><h2 id="votes">Votes on a donor's contract</h2><span class="muted">Where the minutes record the official voting on a contract with a business that gave to their campaign</span></div>
+  <section class="tx-sec"><div class="sec-hd"><h2 id="votes">Votes on a donor's contract</h2><span class="muted">Contract votes where at least one board member had received a gift from the business. The full roll call is shown; members who got a gift are listed first, in bold.</span></div>
     <div class="tablewrap"><table class="tx-table cm-table" id="mmVotes"></table></div>
     <p class="note">From the meeting minutes on the <a href="/public-money/votes">How They Voted</a> page, matched by the company's exact name. "Consent" means the item was approved in one vote with other routine items. Only the votes on this site are checked; contracts approved by staff under a purchasing limit never come to a vote.</p></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="heat1">Heat map: who gave to which government's officials</h2><span class="muted">Top 30 donor organizations</span></div>
-    <div class="tablewrap"><table class="heat" id="mmHeat1"></table></div>
+    <div class="tablewrap"><table data-tt="off" class="heat" id="mmHeat1"></table></div>
     <p class="note">Each cell is what the organization gave to the campaigns of that government's current officials. Darker means more. A ring marks a cell where that same government also pays the donor.</p></section>
   <section class="tx-sec method"><div class="sec-hd"><h2 id="src">Sources and method</h2></div>
     <p>Gifts come from the officials' most recent campaign reports with the Supervisor of Elections. Contracts and payments come from the contracts, change orders and check registers on this site, matched by organization name; each donor's contracts with a government are counted once. Only organizations are shown; gifts from individual people, including a company's owners or employees, are counted on the <a href="/public-money/campaign-money">Campaign Money</a> page but not named or linked to a company.</p></section>
@@ -88,7 +90,6 @@
   <p class="muted foot-links">Page updated Oct 21, 2026 · <a href="/updates">What's new</a> · <a href="/updates.xml">RSS</a> · <a href="/about">Sources and method</a></p></div>
   <a class="powered" href="https://fluxlabs.net/" target="_blank" rel="noopener"><span>Powered by</span><img src="/assets/flux-labs.webp" alt="Flux Labs" width="140" height="25"></a>
 </div></footer>
-<script src="/assets/site.js" defer></script>
 <script src="/assets/report.js" defer></script>
 </body>
 </html>

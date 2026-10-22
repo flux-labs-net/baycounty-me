@@ -1397,7 +1397,7 @@
    "id": "meetings",
    "title": "Upcoming meetings",
    "description": "Scheduled and expected meetings for every board.",
-   "rows": 44,
+   "rows": 45,
    "columns": [
     {
      "name": "board",
@@ -1414,6 +1414,7 @@
       "pc",
       "pc-cra",
       "pcb",
+      "schools",
       "sp"
      ]
     },
@@ -1423,20 +1424,25 @@
      "values": [
       "10/13/26 CRA Board Meeting",
       "10/20/26 Special Executive Session - Case No. 5:26-cv-00032-AW-MJF (Vickie Gainer v. City of Lynn Ha",
+      "3rd LDC Workshop",
       "BOCC Regular Meeting",
       "Bay County Board of County Commissioners Meeting",
       "Budget Hearing",
+      "CANCELLED - ELECTION DAY*** Agenda Regular Meeting",
       "CRA Board Meeting",
       "City Commission Meeting",
+      "City Commission Meeting of October 27, 2026.",
       "City Council",
       "City Council Meeting",
       "Commission Meeting",
-      "Commission Workshop",
       "Community Redevelopment Agency Board Meeting for October 13, 2026",
-      "LDC Workshop",
+      "LDC 5th Workshop",
       "Planning Commission Meeting",
       "Regular Meeting",
       "Regular Meeting (expected)",
+      "School Board Meeting",
+      "School Board Meeting - Organizational Meeting",
+      "Special Meeting and 4th LDC Workshop",
       "Virtual CRA Workshop",
       "Virtual Workshop Meeting of October 20, 2026."
      ]
@@ -1449,6 +1455,7 @@
      "name": "location",
      "type": "string",
      "values": [
+      "1311 Balboa Ave, Panama City, FL 32401",
       "825 Ohio Avenue, Lynn Haven",
       "Bay County Government Center - 840 W 11th St. Panama City FL 32401",
       "Bay County Government Center, 840 W. 11th St., Panama City, FL",
@@ -1475,15 +1482,20 @@
      "values": [
       "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1942",
       "https://cityofparker.com/wp-content/uploads/filr/7047/Agenda-Regular-Council-Meeting-Package.pdf",
+      "https://cityofparker.com/wp-content/uploads/filr/7056/Agenda-Regular-Meeting-Cancelled-11.03.26.pdf",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1130,plainText=false)",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1137,plainText=false)",
       "https://mexicobeachfl.gov/uploads/2026/09/October-13-2026-City-Council-Meeting-Agenda.pdf",
+      "https://mexicobeachfl.gov/uploads/2026/10/November-5-2026-Special-Meeting-LDC-Workshop.pdf",
+      "https://mexicobeachfl.gov/uploads/2026/10/October-29-2026-LDC-Workshop-3.pdf",
+      "https://mexicobeachfl.gov/uploads/2026/10/October-30-2026-Special-Meeting-LDC-Workshop-2.pdf",
       "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=419",
       "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&event_id=219",
       "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_09172026-423",
       "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_10132026-425",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-912?html=true",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10202026-915?html=true",
+      "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10272026-902?html=true",
       "https://www.springfieldfl.net/media/10901"
      ]
     },
@@ -1496,13 +1508,15 @@
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1138,plainText=false)",
       "https://mexicobeachfl.gov/uploads/2026/09/October-13-2026-CIty-Council-Meeting-Agenda-Packet.pdf",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-912?packet=true",
-      "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10202026-915?packet=true"
+      "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10202026-915?packet=true",
+      "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10272026-902?packet=true"
      ]
     },
     {
      "name": "minutes_url",
      "type": "string",
      "values": [
+      "https://cityofparker.com/wp-content/uploads/filr/7056/Agenda-Regular-Meeting-Cancelled-11.03.26.pdf",
       "https://www.springfieldfl.net/media/10906"
      ]
     },
@@ -1517,8 +1531,8 @@
       "MexicoBeach:https://mexicobeachfl.gov/government/council-meetings/",
       "Parker:https://cityofparker.com/government/agendas-minutes/",
       "PrimeGov:https://baycountyfl.primegov.com/public/portal",
-      "Springfield:https://www.springfieldfl.net/meetings",
       "Springfield:https://www.springfieldfl.net/meetings/recent",
+      "Thrillshare:https://thrillshare-cmsv2.services.thrillshare.com/api/v4/o/31249/cms/events",
       "calendar:https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=26&feed=calendar",
       "calendar:https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=38&feed=calendar",
       "calendar:https://www.cityofcallaway.com/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar",
@@ -1554,6 +1568,7 @@
       "https://lynnhavenfl.portal.civicclerk.com/event/1094/files",
       "https://lynnhavenfl.portal.civicclerk.com/event/2130/files",
       "https://lynnhavenfl.portal.civicclerk.com/event/2143/files",
+      "https://www.bay.k12.fl.us/school-board-meetings",
       "https://www.baycountyfl.gov/calendar.aspx?EID=1594",
       "https://www.baycountyfl.gov/calendar.aspx?EID=1595",
       "https://www.baycountyfl.gov/calendar.aspx?EID=1604",
@@ -1569,14 +1584,15 @@
       "https://www.panamacity.gov/calendar.aspx?EID=7564",
       "https://www.panamacity.gov/calendar.aspx?EID=7565",
       "https://www.springfieldfl.net/community/meeting/commission-meeting-74",
-      "https://www.springfieldfl.net/community/meeting/commission-meeting-76",
-      "https://www.springfieldfl.net/community/meeting/commission-meeting-77",
-      "https://www.springfieldfl.net/community/meeting/commission-workshop-54",
       "https://youtube.com/live/aX2AYat8SmM?feature=share"
      ]
     },
     {
      "name": "items",
+     "type": "array"
+    },
+    {
+     "name": "agenda_items",
      "type": "array"
     },
     {
@@ -1590,7 +1606,15 @@
      "name": "calendar_source",
      "type": "string",
      "values": [
-      "calendar:https://www.cityoflynnhaven.gov/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar"
+      "calendar:https://www.cityoflynnhaven.gov/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar",
+      "calendar:https://www.panamacity.gov/common/modules/iCalendar/iCalendar.aspx?catID=22&feed=calendar"
+     ]
+    },
+    {
+     "name": "cancelled",
+     "type": "boolean",
+     "values": [
+      true
      ]
     },
     {
