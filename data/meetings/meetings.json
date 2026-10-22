@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-22T16:27:45-05:00",
+  "generated": "2026-10-22T17:23:24-05:00",
   "window": {
     "from": "2026-10-22",
     "to": "2026-12-21"
@@ -561,7 +561,7 @@
         }
       ],
       "agenda_items": [
-        "Appove minutes of the 10/13/26 Commission meeting",
+        "Approve minutes of the 10/13/26 Commission meeting",
         "Approve Amended Minutes 07/28/26 MEMO",
         "Approve Surplus of Asset 4749; 2020 Nissan Pathfinder.",
         "Authorize the Mayor to execute the Annual Drinking Water Fee Waiver request.",
@@ -586,8 +586,8 @@
       "title": "City Council Meeting",
       "start": "2026-10-27T09:00:00-05:00",
       "location": "Venue not stated on the council meetings page; City of Mexico Beach offices: 201 Paradise Path, Mexico Beach, FL 32456",
-      "agenda_url": null,
-      "packet_url": null,
+      "agenda_url": "https://mexicobeachfl.gov/uploads/2026/09/Octerver-27-2026-City-Council-Meeting-Agena.pdf",
+      "packet_url": "https://mexicobeachfl.gov/uploads/2026/09/October-27-2026-City-Council-Meeting-Packet.pdf",
       "minutes_url": null,
       "source": "MexicoBeach:https://mexicobeachfl.gov/government/council-meetings/",
       "status": "posted"
