@@ -1,4 +1,4 @@
-"""Admin section (/admin): API keys, throttles, request logs and analytics.
+"""Admin section (/admin): API keys, throttles, request logs, analytics, ingestion health and email previews.
 
 A standalone page (no site menu, not in search or the sitemap, noindex). Everything it shows comes from
 /api/admin after an emailed sign-in link; the page itself holds no data.
@@ -77,6 +77,25 @@ dialog h2{font:600 1.05rem var(--f-display);margin:0}
 .empty{padding:28px;text-align:center;color:var(--muted)}
 .st{font-variant-numeric:tabular-nums}
 .st.e4,.st.e5{color:var(--bad)} .st.e429{color:var(--warn)}
+.pill.ok{color:var(--ok)} .pill.failed{color:var(--bad)} .pill.running{color:var(--warn)}
+.banner{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border:1px solid var(--line);border-left-width:4px;border-radius:10px;background:var(--surface);margin-bottom:14px}
+.banner.good{border-left-color:var(--ok)} .banner.bad{border-left-color:var(--bad)}
+.banner ul{margin:6px 0 0;padding-left:18px} .banner li{margin:2px 0}
+.sched{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 16px;font-size:.88rem}
+.sched span:nth-child(even){color:var(--muted);text-align:right;white-space:nowrap}
+.h2{font:600 1rem var(--f-display);margin:24px 0 10px}
+.em{display:grid;grid-template-columns:280px minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:860px){.em{grid-template-columns:1fr}}
+.em-list{display:flex;flex-direction:column;gap:6px}
+.em-list button{text-align:left;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:10px;padding:10px 12px;cursor:pointer;font:500 .9rem var(--f-body)}
+.em-list button span{display:block;font:400 .78rem var(--f-body);color:var(--muted);margin-top:3px}
+.em-list button[aria-pressed="true"]{border-color:var(--blue);box-shadow:0 0 0 1px var(--blue)}
+.em-meta{display:flex;flex-direction:column;gap:4px;margin-bottom:10px}
+.em-subj{font:600 .98rem var(--f-body)}
+.em-frame{border:1px solid var(--line);border-radius:12px;background:#F6F8FB;overflow:hidden;display:flex;justify-content:center}
+.em-frame iframe{border:0;width:100%;height:720px;background:#F6F8FB;transition:width .2s}
+.em-frame.mobile iframe{width:375px;max-width:100%}
+.em-text{white-space:pre-wrap;font-family:var(--f-data);font-size:.82rem;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;margin:0;max-height:720px;overflow:auto}
 [hidden]{display:none!important}
 """
 
@@ -118,6 +137,8 @@ def admin_page(out_dir):
       <button role="tab" data-tab="analytics" aria-selected="false">Analytics</button>
       <button role="tab" data-tab="logs" aria-selected="false">Request log</button>
       <button role="tab" data-tab="settings" aria-selected="false">Throttles &amp; settings</button>
+      <button role="tab" data-tab="ingestion" aria-selected="false">Ingestion</button>
+      <button role="tab" data-tab="emails" aria-selected="false">Emails</button>
     </div>
 
     <section id="tab-keys" role="tabpanel">
@@ -168,6 +189,48 @@ def admin_page(out_dir):
       <div class="tw"><table class="at" id="blocks-table"><thead><tr><th>Address or range</th><th>Reason</th><th>Until</th><th class="num">Blocked requests, 30 days</th><th>Added</th><th></th></tr></thead><tbody></tbody></table></div>
       <h2 style="font:600 1rem var(--f-display);margin:24px 0 10px">Admin activity</h2>
       <div class="tw"><table class="at" id="audit-table"><thead><tr><th>Time</th><th>Who</th><th>What</th><th>Details</th></tr></thead><tbody></tbody></table></div>
+    </section>
+
+    <section id="tab-ingestion" role="tabpanel" hidden>
+      <div class="row" style="margin-bottom:12px"><p class="muted small grow" style="margin:0">Each database sync logs one run per dataset. Admins (ADMIN_EMAILS) are emailed when a workflow fails and by the daily check below.</p>
+        <a class="btn" href="https://github.com/jeremymcs/baycounty-me/actions" target="_blank" rel="noopener">Workflow runs</a><button class="btn" id="in-refresh" type="button">Refresh</button></div>
+      <div id="in-banner"></div>
+      <div class="tiles" id="in-tiles"></div>
+      <div class="lists" style="margin-top:0">
+        <div class="card"><h3 style="font:600 .9rem var(--f-display);margin:0 0 10px">Schedule <span class="muted small" style="font-weight:400">(Central time)</span></h3><div class="sched" id="in-sched"></div></div>
+        <div class="card"><h3 style="font:600 .9rem var(--f-display);margin:0 0 10px">Who gets told</h3><div class="small" style="display:flex;flex-direction:column;gap:6px">
+          <div><b>Workflow problems</b> <span class="muted">(failed fetch, new meeting-source errors, failed push, failed load, missing secret): an email right after the run.</span></div>
+          <div><b>Daily check</b> <span class="muted">(failed or stuck loads, no sync in 36 hours, failed alert emails, unprocessed alert backlog): an email only when something is wrong.</span></div>
+          <div><b>Weekly digest</b> <span class="muted">drafts or failures: the digest reviewer.</span></div></div></div>
+      </div>
+      <h2 class="h2">Datasets</h2>
+      <div class="tw"><table class="at" id="in-table"><thead><tr><th>Dataset</th><th>Status</th><th>Last run</th><th>Last success</th><th class="num">Rows</th><th class="num">Added</th><th class="num">Removed</th><th>Notes</th></tr></thead><tbody></tbody></table></div>
+      <h2 class="h2">Failures, last 14 days</h2>
+      <div class="tw"><table class="at" id="in-fail"><thead><tr><th>Time</th><th>Dataset</th><th>Error</th><th>Commit</th></tr></thead><tbody></tbody></table></div>
+    </section>
+
+    <section id="tab-emails" role="tabpanel" hidden>
+      <div class="em">
+        <div>
+          <div class="em-list" id="em-list"></div>
+          <div class="card" style="margin-top:12px;display:flex;flex-direction:column;gap:10px">
+            <label class="f" id="em-gov-wrap">Government<select class="sel" id="em-gov"></select></label>
+            <label class="f" id="em-src-wrap" hidden>Content<select class="sel" id="em-src"><option value="sample">Sample matches</option><option value="latest">Latest real email</option></select></label>
+            <button class="btn" id="em-test" type="button">Send a test to me</button>
+            <p class="small muted" id="em-test-msg" role="status" style="margin:0"></p>
+          </div>
+        </div>
+        <div>
+          <div class="em-meta"><span class="muted small" id="em-when"></span><span class="em-subj" id="em-subj"></span><span class="note" id="em-note" hidden></span></div>
+          <div class="row" style="margin-bottom:10px">
+            <div class="tabs" style="margin:0" role="group" aria-label="View"><button type="button" data-view="html" aria-selected="true">Email</button><button type="button" data-view="text" aria-selected="false">Plain text</button></div>
+            <span class="grow"></span>
+            <div class="tabs" style="margin:0" role="group" aria-label="Width"><button type="button" data-width="desktop" aria-selected="true">Desktop</button><button type="button" data-width="mobile" aria-selected="false">Phone</button></div>
+          </div>
+          <div class="em-frame" id="em-frame"><iframe id="em-iframe" title="Email preview" sandbox="allow-popups allow-popups-to-escape-sandbox"></iframe></div>
+          <pre class="em-text" id="em-text" hidden></pre>
+        </div>
+      </div>
     </section>
   </div>
 </div>

@@ -7,7 +7,7 @@
   const when = t => {
     if (!t) return '<span class="muted">Never</span>';
     const d = new Date(t), s = (Date.now() - d) / 1000;
-    const rel = s < 60 ? 'just now' : s < 3600 ? Math.round(s / 60) + ' min ago' : s < 86400 ? Math.round(s / 3600) + ' hr ago' : Math.round(s / 86400) + ' days ago';
+    const rel = s < 60 ? 'just now' : s < 3600 ? Math.round(s / 60) + ' min ago' : s < 86400 ? Math.round(s / 3600) + ' hr ago' : Math.round(s / 86400) === 1 ? '1 day ago' : Math.round(s / 86400) + ' days ago';
     return `<span title="${esc(d.toLocaleString())}">${rel}</span>`;
   };
   const stamp = t => new Date(t).toLocaleString('en-US', {month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit', second: '2-digit'});
@@ -34,14 +34,14 @@
   $('#signout').addEventListener('click', async () => { await api('logout', {method: 'POST'}).catch(() => {}); location.href = '/admin'; });
 
   // ---------- tabs ----------
-  const loaders = {keys: loadKeys, analytics: loadStats, logs: () => loadLogs(true), settings: loadSettings};
+  const loaders = {keys: loadKeys, analytics: loadStats, logs: () => loadLogs(true), settings: loadSettings, ingestion: loadIngestion, emails: loadEmails};
   function tab(name) {
-    document.querySelectorAll('[role=tab]').forEach(b => b.setAttribute('aria-selected', String(b.dataset.tab === name)));
+    document.querySelectorAll('[role=tab][data-tab]').forEach(b => b.setAttribute('aria-selected', String(b.dataset.tab === name)));
     document.querySelectorAll('[role=tabpanel]').forEach(p => { p.hidden = p.id !== 'tab-' + name; });
     history.replaceState(null, '', '#' + name);
     loaders[name]();
   }
-  document.querySelectorAll('[role=tab]').forEach(b => b.addEventListener('click', () => tab(b.dataset.tab)));
+  document.querySelectorAll('[role=tab][data-tab]').forEach(b => b.addEventListener('click', () => tab(b.dataset.tab)));
 
   // ---------- keys ----------
   let KEYS = [];
@@ -240,7 +240,7 @@
     for (const k of ['anon_per_minute', 'anon_per_day', 'default_per_minute', 'default_per_day']) f[k].value = s.settings[k] ?? '';
     f.require_key.checked = !!s.settings.require_key;
     const name = id => (KEYS.find(k => k.id === id) || {}).name;
-    const WHAT = {create_key: 'Created a key', update_key: 'Changed a key', rotate_key: 'Replaced a key', update_settings: 'Changed settings', block_ip: 'Blocked an address', unblock_ip: 'Removed a block', login: 'Signed in', login_requested: 'Asked for a sign-in link'};
+    const WHAT = {email_test: 'Sent a test email', create_key: 'Created a key', update_key: 'Changed a key', rotate_key: 'Replaced a key', update_settings: 'Changed settings', block_ip: 'Blocked an address', unblock_ip: 'Removed a block', login: 'Signed in', login_requested: 'Asked for a sign-in link'};
     $('#audit-table tbody').innerHTML = a.audit.map(x => `<tr><td class="small" style="white-space:nowrap">${stamp(x.at)}</td><td class="small">${esc(x.admin)}</td><td class="small">${esc(WHAT[x.action] || x.action)}${x.key_id && name(x.key_id) ? ': ' + esc(name(x.key_id)) : ''}</td>
       <td class="small muted mono" style="word-break:break-all">${x.detail && x.action !== 'login' ? esc(JSON.stringify(x.detail)) : ''}</td></tr>`).join('') || '<tr><td colspan="4" class="empty">Nothing yet.</td></tr>';
   }
@@ -251,6 +251,85 @@
     if (body.require_key && !confirm('Require a key for every request? Anyone using the API or MCP server without a key will be turned away.')) return;
     try { await api('settings', {method: 'POST', body}); $('#settings-msg').textContent = 'Saved. Takes effect on the next request.'; loadSettings(); }
     catch (err) { $('#settings-msg').textContent = err.message; }
+  });
+
+  // ---------- ingestion ----------
+  // Schedules are cron times in UTC (workflows and vercel.json); shown in Central time for today's date.
+  const SCHED = [
+    ['Meetings + campaign finance refresh, then database sync', 'daily', 11, 17],
+    ['FEMA ledger + sales tax map refresh, then database sync', 'Tuesdays', 11, 41],
+    ['Daily ingestion check + rule alerts', 'daily', 13, 40],
+    ['Weekly digest drafts', 'Mondays', 13, 0],
+  ];
+  const central = (h, m) => { const d = new Date(); d.setUTCHours(h, m, 0, 0); return d.toLocaleTimeString('en-US', {hour: 'numeric', minute: '2-digit', timeZone: 'America/Chicago'}); };
+  const RUN = {ok: 'OK', failed: 'Failed', running: 'Running'};
+  async function loadIngestion() {
+    $('#in-sched').innerHTML = SCHED.map(([what, days, h, m]) => `<span>${esc(what)}</span><span>${esc(days)}, ${central(h, m)}</span>`).join('');
+    let r;
+    try { r = await api('ingestion'); }
+    catch (e) { $('#in-banner').innerHTML = `<div class="banner bad"><div><b>Couldn’t load ingestion status.</b><div class="small muted">${esc(e.message)}</div></div></div>`; return; }
+    $('#in-banner').innerHTML = r.problems.length
+      ? `<div class="banner bad"><div><b>${r.problems.length} problem${r.problems.length === 1 ? '' : 's'}</b><ul class="small">${r.problems.map(p => `<li>${esc(p.text)}</li>`).join('')}</ul></div></div>`
+      : `<div class="banner good"><div><b>All good.</b> <span class="small muted">Every dataset’s latest load succeeded. Checked ${when(r.checked_at)}.</span></div></div>`;
+    const failed = r.datasets.filter(d => d.status === 'failed').length;
+    $('#in-tiles').innerHTML = [[r.last_sync ? when(r.last_sync).replace(/<[^>]+>/g, '') : 'Never', 'Last successful sync'], [fmt(r.datasets.length), 'Datasets'], [fmt(failed), 'Failing now'],
+      [fmt(r.alerts.drafts), 'Alert emails waiting for review'], [fmt(r.alerts.events_pending), 'New records not yet matched']]
+      .map(([v, l]) => `<div class="tile"><b>${v}</b><span>${l}</span></div>`).join('');
+    $('#in-table tbody').innerHTML = r.datasets.map(d => `<tr><td class="mono" style="white-space:nowrap">${esc(d.dataset)}${d.origin && d.origin !== 'site_build' ? `<div class="muted small">${esc(d.origin)}</div>` : ''}</td>
+      <td><span class="pill ${esc(d.status)}">${RUN[d.status] || esc(d.status)}</span></td><td>${when(d.finished_at || d.started_at)}</td><td>${when(d.last_ok)}</td>
+      <td class="num">${fmt(d.rows_in)}</td><td class="num">${fmt(d.rows_added)}</td><td class="num">${fmt(d.rows_deleted)}</td>
+      <td class="small ${d.status === 'failed' ? '' : 'muted'}" style="min-width:220px;max-width:360px">${esc(d.notes || '')}</td></tr>`).join('') || '<tr><td colspan="8" class="empty">No loads in the last 60 days.</td></tr>';
+    $('#in-fail tbody').innerHTML = r.failures.map(f => `<tr><td class="small" style="white-space:nowrap">${stamp(f.started_at)}</td><td class="mono">${esc(f.dataset)}</td><td class="small">${esc(f.notes || '')}</td>
+      <td class="mono small">${f.git_sha ? `<a href="https://github.com/jeremymcs/baycounty-me/commit/${esc(f.git_sha)}" target="_blank" rel="noopener">${esc(String(f.git_sha).slice(0, 7))}</a>` : ''}</td></tr>`).join('') || '<tr><td colspan="4" class="empty">No failures.</td></tr>';
+  }
+  $('#in-refresh').addEventListener('click', loadIngestion);
+
+  // ---------- email previews ----------
+  let EM = null, emCur = null, emView = 'html', emReq = 0;
+  async function loadEmails() {
+    if (!EM) {
+      EM = await api('email_previews');
+      $('#em-gov').innerHTML = EM.govs.map(g => `<option value="${esc(g.key)}"${g.key === 'lh' ? ' selected' : ''}>${esc(g.name)}</option>`).join('');
+      $('#em-list').innerHTML = EM.templates.map(x => `<button type="button" data-id="${esc(x.id)}" aria-pressed="false">${esc(x.name)}<span>${esc(x.when)}</span></button>`).join('');
+      $('#em-list').querySelectorAll('button').forEach(b => b.addEventListener('click', () => showEmail(b.dataset.id)));
+    }
+    showEmail(emCur || EM.templates[0].id);
+  }
+  async function showEmail(id) {
+    emCur = id;
+    const tpl = EM.templates.find(x => x.id === id);
+    $('#em-list').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.id === id)));
+    $('#em-gov-wrap').hidden = ['manage_link', 'admin_signin'].includes(id);
+    $('#em-src-wrap').hidden = !tpl.sources;
+    $('#em-when').textContent = tpl.when; $('#em-test-msg').textContent = '';
+    $('#em-subj').textContent = 'Loading…'; $('#em-note').hidden = true;
+    const mine = ++emReq;
+    let m;
+    try { m = await api('email_preview', {params: {template: id, gov: $('#em-gov').value, source: $('#em-src').value}}); }
+    catch (e) { m = {subject: '', html: '', text: '', note: e.message}; }
+    if (mine !== emReq) return; // a newer preview was requested meanwhile
+    $('#em-subj').textContent = m.subject ? 'Subject: ' + m.subject : 'No email';
+    $('#em-note').hidden = !m.note; $('#em-note').textContent = m.note || '';
+    $('#em-iframe').srcdoc = m.html ? m.html.replace(/<head>/i, '<head><base target="_blank">') : '<p style="font:14px Arial;color:#5A6372;padding:24px">Nothing to show.</p>';
+    $('#em-text').textContent = m.text || '';
+    $('#em-test').disabled = !m.html && !m.text;
+  }
+  $('#em-gov').addEventListener('change', () => emCur && showEmail(emCur));
+  $('#em-src').addEventListener('change', () => emCur && showEmail(emCur));
+  document.querySelectorAll('[data-view]').forEach(b => b.addEventListener('click', () => {
+    emView = b.dataset.view;
+    document.querySelectorAll('[data-view]').forEach(x => x.setAttribute('aria-selected', String(x === b)));
+    $('#em-frame').hidden = emView !== 'html'; $('#em-text').hidden = emView !== 'text';
+  }));
+  document.querySelectorAll('[data-width]').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('[data-width]').forEach(x => x.setAttribute('aria-selected', String(x === b)));
+    $('#em-frame').classList.toggle('mobile', b.dataset.width === 'mobile');
+  }));
+  $('#em-test').addEventListener('click', async () => {
+    const btn = $('#em-test'); btn.disabled = true; $('#em-test-msg').textContent = 'Sending…';
+    try { const r = await api('email_test', {method: 'POST', body: {template: emCur, gov: $('#em-gov').value, source: $('#em-src').value}}); $('#em-test-msg').textContent = `Sent to ${r.to}. Subject starts with [Test].`; }
+    catch (e) { $('#em-test-msg').textContent = e.message; }
+    btn.disabled = false;
   });
 
   // ---------- start ----------

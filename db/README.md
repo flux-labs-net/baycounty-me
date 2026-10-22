@@ -81,3 +81,16 @@ Migration `0006` adds `apiadmin.prune_requests(days)`, which deletes `apiadmin.r
 It runs automatically now and then from `check_request` (about one request in a thousand), and after every database
 sync (`db/scripts/load.py` calls it at the end). Raw IP addresses are cleared from log rows after 90 days, as before.
 Run it by hand with `select apiadmin.prune_requests(180);`.
+
+## Ingestion alerts for admins
+
+- **Workflows:** each ingestion workflow (`refresh-meetings`, `refresh-weekly`, `sync-db`) ends with
+  `.github/scripts/notify_admins.py`, which emails the admins when the job or any step failed (including steps with
+  `continue-on-error`) or a step reported an `alert` output (e.g. a missing `DATABASE_URL`). Repeat meeting-source errors
+  only comment on the open issue and don't email again. Needs repository secrets `RESEND_FULL_KEY` and `ADMIN_EMAILS`.
+- **Daily check:** `/api/alerts-run` first runs `api/_health.js` against `ingest_runs` and the `alerts` tables, and emails
+  `ADMIN_EMAILS` (Vercel) only when a dataset's latest load failed or is stuck, there's been no successful sync in
+  `INGEST_STALE_HOURS` (default 36), alert emails failed, or new records sat unprocessed for 2 days.
+  `GET /api/alerts-run?health=1` with the `CRON_SECRET` runs just the check.
+- **/admin:** the Ingestion tab shows the same report; the Emails tab previews every subscriber email (built by the same
+  code that sends them, `api/_emails.js`) and can send a test to the signed-in admin.
