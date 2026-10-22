@@ -40,5 +40,40 @@ class T(unittest.TestCase):
         self.assertEqual(w.fingerprint(b'<p>Hi  <b>there</b></p>', 'text/html'), w.fingerprint(b'<div>Hi there</div>', 'text/html'))
 
 
+class ResendInbox(unittest.TestCase):
+    def setUp(self):
+        self._get = w.resend_get
+
+    def tearDown(self):
+        w.resend_get = self._get
+
+    def test_addressed_to(self):
+        self.assertTrue(w.addressed_to({'to': ['Ingest <ingest@baycounty.me>']}, 'ingest@baycounty.me'))
+        self.assertTrue(w.addressed_to({'to': ['x@y.com'], 'received_for': ['ingest@baycounty.me']}, 'ingest@baycounty.me'))
+        self.assertFalse(w.addressed_to({'to': ['hello@baycounty.me']}, 'ingest@baycounty.me'))
+
+    def test_list_stops_at_lookback(self):
+        import datetime as dt
+        new = (dt.datetime.now(dt.timezone.utc) - dt.timedelta(days=1)).isoformat()
+        old = (dt.datetime.now(dt.timezone.utc) - dt.timedelta(days=40)).isoformat()
+        w.resend_get = lambda path, key: {'has_more': True, 'data': [{'id': 'a', 'created_at': new}, {'id': 'b', 'created_at': old}]}
+        self.assertEqual([x['id'] for x in w.resend_list('k')], ['a'])
+
+    def test_raw_fallback_rebuilds_message(self):
+        w.resend_get = lambda path, key: {'raw': None, 'subject': 'Agenda posted', 'headers': {'from': 'Callaway <clerk@cityofcallaway.com>'},
+                                          'message_id': '<m@x>', 'created_at': '2026-10-22 19:13:17.694+00',
+                                          'text': 'New agenda', 'html': '<a href="https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_10272026-430">View</a>'}
+        p = w.parse_email(w.resend_raw('k', 'id1'))
+        self.assertEqual(w.classify(p), (['cw'], ['https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_10272026-430']))
+
+    def test_notice_from_resend_dry_run(self):
+        run = w.Run(w.DB(None, True), w.Storage()); run.storage.url = ''
+        w.resend_get = lambda path, key: {'data': [{'id': 'e1', 'to': ['ingest@baycounty.me'], 'created_at': '2099-01-01T00:00:00Z'},
+                                                   {'id': 'e2', 'to': ['hello@baycounty.me'], 'created_at': '2099-01-01T00:00:00Z'}]} \
+            if path.startswith('/emails/receiving?') else {'raw': None, 'subject': 'Lynn Haven agenda', 'headers': {'from': 'a@b.c'}, 'text': 'x'}
+        self.assertEqual(run.resend_inbox('k'), {'lh'})
+        self.assertEqual(run.counts['notices'], 1)
+
+
 if __name__ == '__main__':
     unittest.main()

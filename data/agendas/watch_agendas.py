@@ -4,7 +4,8 @@ watch_agendas.py - know when an agenda is posted, and capture the files.
 
 Two triggers, one pipeline:
 
-  --inbox   Poll a mailbox over POP3 (TLS). Each notice email (CivicPlus AgendaCenter "Notify Me", CivicClerk
+  --inbox   Read the agenda mailbox: Resend receiving (ingest@baycounty.me, via the Resend API) and/or a POP3
+            mailbox, whichever is configured. --email-id <id> processes one Resend email (the webhook path). Each notice email (CivicPlus AgendaCenter "Notify Me", CivicClerk
             subscriptions, or anything forwarded there) is matched to a source by its sender and links, and that
             source is rescanned right away. Links in the email that point straight at a document, and PDF
             attachments, are captured too.
@@ -20,10 +21,12 @@ account only exists to receive the notice emails.
 
 Environment:
   DATABASE_URL                     Postgres (Supabase). Required unless --dry-run.
-  POP_HOST, POP_USER, POP_PASS     mailbox (port POP_PORT, default 995, TLS). Needed for --inbox.
+  RESEND_KEY                       Resend API key (full access): reads received mail and sends the admin summary
+  AGENDA_INBOX                     address notices go to (default ingest@baycounty.me); AGENDA_LOOKBACK_DAYS (14)
+  POP_HOST, POP_USER, POP_PASS     optional POP3 mailbox instead of / as well as Resend (port POP_PORT, default 995)
   POP_DELETE=1                     delete messages from the server once recorded (default: leave them; UIDL dedupes)
   SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY   store files in Storage (optional)
-  RESEND_KEY, ADMIN_EMAILS         email the admins a summary when new or updated documents land (optional)
+  ADMIN_EMAILS                     who gets the summary when new or updated documents land
   AGENDA_MAX_DOWNLOADS             cap per run (default 150); packets can be large
 
 Usage:
@@ -35,6 +38,7 @@ Standard library only, plus psycopg when writing to the database.
 
 import datetime as dt
 import email
+import email.message
 import email.policy
 import email.utils
 import hashlib
@@ -236,6 +240,71 @@ def file_name(url, ctype):
     return base
 
 
+RESEND_API = "https://api.resend.com"
+AGENDA_INBOX = (os.environ.get("AGENDA_INBOX") or "ingest@baycounty.me").lower()
+LOOKBACK_DAYS = int(os.environ.get("AGENDA_LOOKBACK_DAYS") or 14)
+
+
+def resend_get(path, key):
+    req = urllib.request.Request(RESEND_API + path, headers={"Authorization": "Bearer " + key, "User-Agent": fm.UA,
+                                                             "Accept": "application/json"})
+    with urllib.request.urlopen(req, timeout=60) as r:
+        return json.loads(r.read().decode("utf-8"))
+
+
+def resend_list(key, pages=3):
+    """Received emails from the last LOOKBACK_DAYS, newest first (up to pages x 100)."""
+    out, after = [], None
+    cutoff = dt.datetime.now(dt.timezone.utc) - dt.timedelta(days=LOOKBACK_DAYS)
+    for _ in range(pages):
+        j = resend_get("/emails/receiving?limit=100" + ("&after=" + urllib.parse.quote(after) if after else ""), key)
+        data = j.get("data") or []
+        for it in data:
+            try:
+                when = dt.datetime.fromisoformat(str(it.get("created_at")).replace("Z", "+00:00").replace(" ", "T"))
+                if when.tzinfo is None:
+                    when = when.replace(tzinfo=dt.timezone.utc)
+                if when < cutoff:
+                    return out
+            except ValueError:
+                pass
+            out.append(it)
+        if not j.get("has_more") or not data:
+            break
+        after = data[-1]["id"]
+    return out
+
+
+def addressed_to(item, addr):
+    """True when addr is among the recipients (to, cc, bcc, received_for). Resend's list can't filter by recipient."""
+    vals = []
+    for k in ("to", "cc", "bcc", "received_for"):
+        v = item.get(k) or []
+        vals += v if isinstance(v, list) else [v]
+    return any(addr in email.utils.parseaddr(str(v))[1].lower() or addr in str(v).lower() for v in vals)
+
+
+def resend_raw(key, email_id):
+    """The original message (RFC 822 bytes) for a received email; rebuilt from its parts if Resend has no raw copy."""
+    d = resend_get("/emails/receiving/" + urllib.parse.quote(email_id), key)
+    url = (d.get("raw") or {}).get("download_url")
+    if url:
+        with urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": fm.UA}), timeout=120) as r:
+            return r.read(MAX_BYTES)
+    m = email.message.EmailMessage()
+    h = d.get("headers") or {}
+    m["From"] = h.get("from") or d.get("from") or ""
+    m["Subject"] = d.get("subject") or ""
+    if d.get("message_id"):
+        m["Message-ID"] = d["message_id"]
+    if d.get("created_at"):
+        m["Date"] = email.utils.format_datetime(dt.datetime.fromisoformat(str(d["created_at"]).replace("Z", "+00:00").replace(" ", "T")))
+    m.set_content(d.get("text") or "")
+    if d.get("html"):
+        m.add_alternative(d["html"], subtype="html")
+    return m.as_bytes()
+
+
 class Storage:
     def __init__(self):
         self.url = (os.environ.get("SUPABASE_URL") or "").rstrip("/")
@@ -388,11 +457,48 @@ class Run:
         return n
 
     # --- inbox -----------------------------------------------------------------------------------------------
-    def inbox(self):
-        host, user, pw = os.environ.get("POP_HOST"), os.environ.get("POP_USER"), os.environ.get("POP_PASS")
-        if not (host and user and pw):
-            self.error("inbox", "POP_HOST, POP_USER and POP_PASS must be set for --inbox")
+    def inbox(self, email_id=None):
+        """Read notice emails from Resend receiving (RESEND_KEY) and/or a POP3 mailbox (POP_*), whichever is set."""
+        key = os.environ.get("RESEND_KEY")
+        pop = all(os.environ.get(k) for k in ("POP_HOST", "POP_USER", "POP_PASS"))
+        if not (key or pop):
+            self.error("inbox", "Set RESEND_KEY (Resend receiving) or POP_HOST, POP_USER and POP_PASS for --inbox")
             return set()
+        triggered = set()
+        if key:
+            triggered |= self.resend_inbox(key, email_id)
+        if pop:
+            triggered |= self.pop_inbox()
+        return triggered
+
+    def resend_inbox(self, key, email_id=None):
+        """Emails received at AGENDA_INBOX through Resend. Each one's original message (raw .eml) is downloaded and
+        run through the same parser as POP3 mail. Dedupe key: uidl 'resend:<email id>'."""
+        triggered = set()
+        try:
+            items = resend_list(key)
+        except Exception as e:
+            self.error("inbox", "Resend receiving list failed: %s" % e)
+            items = []
+        # A webhook-triggered run names its email; read the whole recent inbox anyway, since GitHub keeps only one
+        # queued run and a notice that arrived in between would otherwise wait for the next scheduled check.
+        if email_id and not any(it.get("id") == email_id for it in items):
+            items.insert(0, {"id": email_id})
+        mine = [it for it in items if it.get("id") == email_id or addressed_to(it, AGENDA_INBOX)]
+        print("inbox (Resend): %d received, %d to %s" % (len(items), len(mine), AGENDA_INBOX))
+        for it in mine:
+            uid = "resend:" + it["id"]
+            if self.db.one("select 1 from agendas.notices where uidl = %s", (uid,)):
+                continue
+            try:
+                raw = resend_raw(key, it["id"])
+                triggered |= self.notice(uid, raw)
+            except Exception as e:
+                self.error("inbox", "Resend email %s: %s" % (it["id"], e))
+        return triggered
+
+    def pop_inbox(self):
+        host, user, pw = os.environ.get("POP_HOST"), os.environ.get("POP_USER"), os.environ.get("POP_PASS")
         try:
             box = poplib.POP3_SSL(host, int(os.environ.get("POP_PORT") or 995), timeout=60)
             box.user(user)
@@ -501,10 +607,11 @@ def notify(run):
 
 def main(argv):
     dry = "--dry-run" in argv
-    do_inbox, do_sweep = "--inbox" in argv, "--sweep" in argv
+    do_inbox, do_sweep = "--inbox" in argv or "--email-id" in argv, "--sweep" in argv
     if not (do_inbox or do_sweep):
         print(__doc__)
         return 2
+    email_id = argv[argv.index("--email-id") + 1] if "--email-id" in argv else None
     only = None
     if "--only" in argv:
         only = [k.strip() for k in argv[argv.index("--only") + 1].split(",") if k.strip()]
@@ -521,7 +628,7 @@ def main(argv):
     try:
         keys, emailed = set(), set()
         if do_inbox:
-            emailed = run.inbox()
+            emailed = run.inbox(email_id)
             keys |= emailed
         if do_sweep:
             keys |= set(SOURCES)

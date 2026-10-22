@@ -33,7 +33,7 @@ geo/
 
 ## Agenda watcher
 
-`data/agendas/watch_agendas.py` polls the agenda mailbox (POP3) and every agenda system, stores each agenda, packet and minutes file with its versions, and reports on /admin → Agendas. Setup and secrets: `data/agendas/README_agendas.md`.
+`data/agendas/watch_agendas.py` reads the agenda inbox (`ingest@baycounty.me` in Resend, triggered instantly by `api/agenda-inbound.js`) and every agenda system, stores each agenda, packet and minutes file with its versions, and reports on /admin → Agendas. Setup and secrets: `data/agendas/README_agendas.md`.
 
 ## Rebuild
 
