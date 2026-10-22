@@ -40,7 +40,8 @@
     {"fy": "FY2023", "tif_revenue": 649367, "total_budget": 1047214, "district": "all", "source_url": "https://www.flauditor.gov/pages/specialdistricts_efile%20rpts/2023%20lynn%20haven%20community%20redevelopment%20agency.pdf"},
     {"fy": "FY2024", "tif_revenue": 878883, "total_budget": 1274481, "district": "all", "source_url": "https://www.flauditor.gov/pages/specialdistricts_efile%20rpts/2024%20lynn%20haven%20community%20redevelopment%20agency.pdf"},
     {"fy": "FY2025", "tif_revenue": 1036446, "total_budget": 1581713, "district": "all", "source_url": "https://flauditor.gov/pages/specialdistricts_efile%20rpts/2025%20lynn%20haven%20community%20redevelopment%20agency.pdf"},
-    {"fy": "FY2026", "tif_revenue": null, "total_budget": 1999274, "district": "all", "source_url": "https://mcclibraryfunctions.azurewebsites.us/api/ordinanceDownload/14573/1411175/pdf"}
+    {"fy": "FY2026", "tif_revenue": null, "total_budget": 1999274, "district": "all", "source_url": "https://mcclibraryfunctions.azurewebsites.us/api/ordinanceDownload/14573/1411175/pdf"},
+    {"fy": "FY2027", "tif_revenue": 983728.55, "total_budget": 1014054.45, "district": "all", "source_url": "https://www.cityoflynnhaven.gov/DocumentCenter/View/5091/FY2026-27-Final-Approved-Budget"}
   ],
   "payments": [
     {

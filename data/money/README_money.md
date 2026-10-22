@@ -4,27 +4,29 @@ As of 2026-10-21. Built from public, official sources only. Every amount comes f
 
 ## payments.json: vendor payments (check registers)
 
-**What was found.** The only public vendor-payment registers not already on the site are for the three tourist-development-tax agencies. Each monthly "Check Register - Sorted by Dollar Amount" from the Bay County Clerk of Court & Comptroller (attached to BOCC agendas on baycountyfl.primegov.com) has a section for each of them through October 2025. The earlier contracts work counted only the BOCC sections and skipped these.
+**What was found.** The only public vendor-payment registers not already on the site are for the three tourist-development-tax agencies. Each monthly "Check Register - Sorted by Dollar Amount" from the Bay County Clerk of Court & Comptroller has a section for each of them.
 
-| gov id | Agency | Months | Payments parsed | Parsed total | Vendors (listed) |
+**Refreshed 2026-10-21.** The Clerk's OnBase public records search ("BOCC - Check Registry Search", https://bayforms.baycoclerk.com/PublicAccess/PublicRecordSearch/, queried through its JSON API) holds text-PDF copies of the registers, including months that were never attached to BOCC agendas and the months after October 2025, which do still include the three agency sections. All months were re-parsed from these text PDFs, so no OCR was needed except December 2024 (missing from OnBase; read by OCR from the Feb 4, 2025 agenda scan).
+
+| gov id | Agency | Months | Payments | Total | Payees |
 |---|---|---|---|---|---|
-| visit_pcb_cvb | Panama City Beach CVB (Visit Panama City Beach), Bay County TDC | 19 | 2,687 | $32,330,519.83 | 557 (top 200) |
-| destination_panama_city_cdc | Panama City Community Development Council (Destination Panama City) | 19 | 647 | $2,859,059.51 | 151 |
-| mexico_beach_cdc | Mexico Beach Community Development Council | 19 | 443 | $1,341,195.94 | 57 |
+| visit_pcb_cvb | Panama City Beach CVB (Visit Panama City Beach), Bay County TDC | 31 | 4,309 | $53,971,860.73 | 654 (top 200 listed) |
+| destination_panama_city_cdc | Panama City Community Development Council (Destination Panama City) | 31 | 1,020 | $4,554,616.57 | 174 |
+| mexico_beach_cdc | Mexico Beach Community Development Council | 31 | 799 | $2,192,655.60 | 72 |
 
-- **Months covered:** Jan and Apr-Sep 2024 (FY2024); Oct 2024-Jan 2025 and Mar-Sep 2025 (FY2025); Oct 2025 (FY2026).
-- **Accuracy:** the registers are scanned pages. Every row was read with OCR and checked against the printed section total. 54 of 57 agency-months match to the cent. The other three: one has a printed total that OCR misread (rows match the corrected figure), and two are off by $50 and $1,000. Five misread amounts were corrected using the register's dollar order, and only where the correction made the month match its printed total. Each month's reconciliation is in the file.
-- **Excluded:** payments to individual people, counted only in `excluded_individuals`. CVB: 179 payments, $397,609.
+- **Months covered:** every month Oct 2023 – Nov 2025 (FY2024 and FY2025 complete), plus Mar – Jul 2026.
+- **Accuracy:** all 93 agency-months match the printed section total to the cent. No amounts were corrected. The earlier OCR-based figures had small misreads (e.g. CDC July and Oct 2024); those are now fixed by the text copies.
+- **Excluded:** payments to individual people, counted only in `excluded_individuals` (CVB 414 payments, $971,244.62). Individuals were picked out by name pattern; check before quoting.
 - **Kept but labeled in `category`:** payroll processors, benefit and tax remittances, credit-card bill payments, unnamed bank transfers, and other governments.
-- **November 2024:** the Clerk's register has the CVB and Panama City CDC headings swapped. Rows were assigned to the right agency by check-number series and vendor.
+- **November 2024:** the register has the CVB and Panama City CDC headings swapped; rows are assigned by content.
 - **Context:** in January 2026 the Clerk posted an action plan for the CVB after what it calls a discovery of fraud, with a criminal investigation and forensic audit described as ongoing. The data records payments only and makes no finding about any of them.
 
 **Gaps (see `gaps` in the file):**
 
-- **Panama City, Panama City Beach, Callaway, Parker, Springfield, Mexico Beach and Bay District Schools:** no check register, warrant list or vendor-payment report is posted on agenda sites, finance pages or transparency portals. pcbfl.gov and bay.k12.fl.us block scripted access, so their searches were partly manual.
+- **Still missing:** Dec 2025 – Feb 2026 (not listed in OnBase; the agenda scan for those months has BOCC payments only) and Aug – Sep 2026 (not posted yet).
+- **Panama City, Panama City Beach, Callaway, Parker, Springfield, Mexico Beach and Bay District Schools:** no check register, warrant list or vendor-payment report is posted.
 - **Visit PCB board packets:** no register, only individual invoice approvals.
-- **After October 2025:** CVB and CDC payments are not public. The Clerk's registers from November 2025 cover BOCC only.
-- **Missing months for all three agencies:** Oct-Dec 2023, Feb-Mar 2024 and Feb 2025.
+- **Site text:** `site/money_pages.py` still says "Registers through October 2025" and describes the registers as scans read by OCR; it needs a small wording update (not done here: site code is outside this data stream).
 
 Bay County BOCC FY2024-26 and Lynn Haven FY2023-25 registers are already in `data/contracts/contracts.json` and are not repeated here.
 
@@ -60,4 +62,4 @@ They cover the BOCC, Bay District Schools, all seven cities, the airport distric
 ## Files and method
 
 - `payments.json`, `bonds.json`, `README_money.md`
-- Build scripts are in the session scratchpad and are not committed: `plan.py` (finds section pages by header OCR), `parse_tdc.py` (row parsing and reconciliation), `build_payments.py` (vendor merge and classification), `final_payments.py`, `build_bonds.py`.
+- Build scripts are in the session scratchpad and are not committed. The 2026-10-21 refresh used `parse_cr.py` (text-PDF row parsing and reconciliation), `rebuild_pay.py` (vendor merge, individual exclusion, categories) and `finalize_pay.py`.

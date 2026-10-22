@@ -360,7 +360,12 @@
    "total_budget": 4238181,
    "district": "all",
    "source_url": "https://www.yahoo.com/news/articles/panama-city-cra-discusses-proposed-181335224.html"
-  }
+  },
+  {"fy": "FY2027", "tif_revenue": 4399193, "total_budget": 11552914, "district": "all", "source_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Item/17481?fileID=37374"},
+  {"fy": "FY2027", "tif_revenue": 626126, "total_budget": 3326878, "district": "Downtown", "source_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Item/17481?fileID=37374"},
+  {"fy": "FY2027", "tif_revenue": 1022897, "total_budget": 5074482, "district": "St. Andrews", "source_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Item/17481?fileID=37374"},
+  {"fy": "FY2027", "tif_revenue": 1563545, "total_budget": 1863545, "district": "Downtown North (Glenwood)", "source_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Item/17481?fileID=37374"},
+  {"fy": "FY2027", "tif_revenue": 1186625, "total_budget": 1288009, "district": "Millville", "source_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Item/17481?fileID=37374"}
  ],
  "payments": [
   {
@@ -1641,6 +1646,7 @@
   "Downtown Marina/Bay County Marina and St. Andrews Marina rebuilds appear to be funded mainly by the city, FEMA and grants. No CRA payment amounts were found. The 2026 St. Andrews Marina cost-plus contract amount was not reported.",
   "Hurricane Michael recovery: CDBG-DR Hometown Revitalization facade grants ($20.1M across CRA corridors) are city/state funds, not CRA TIF, so they are excluded from payments. CRA-specific post-storm spending in FY2019-2020 is undocumented online.",
   "Precise district boundary shapefiles are not available. Polygons are rough sketches from the street boundaries described in the 2025 plan and should be replaced with city GIS data (Panama City GIS or a Bay County request).",
-  "No Glenwood, Bayou George/Lake Caroline or Cove/East CRA districts exist as separate districts. Glenwood is part of Downtown North. The Cove area got a $12.949M city contract, but no CRA district covers it."
+  "No Glenwood, Bayou George/Lake Caroline or Cove/East CRA districts exist as separate districts. Glenwood is part of Downtown North. The Cove area got a $12.949M city contract, but no CRA district covers it.",
+  "FY2027 CRA budget (added 2026-10-21): Resolution CRA20260901.1 gives Millville $1,228,009, but the attached proposed budget table totals $1,288,009 ($1,186,625 TIF plus $101,384 reserves). The FY2027 rows use the table. FY2027 totals include $5.15M of planned debt proceeds for St. Andrews and Downtown. No FY2025 Auditor General filing for the Panama City CRA was found on flauditor.gov."
  ]
 }
