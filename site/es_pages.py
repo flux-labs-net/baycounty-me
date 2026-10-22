@@ -370,6 +370,7 @@ def es_home():
              ('/es/tarifas-y-facturas', 'Tarifas y facturas', 'Las tarifas fijas de su factura de impuestos (bomberos, aguas pluviales, alumbrado) y cuánto cuesta el agua, el alcantarillado y la basura en cada ciudad.'),
              ('/es/exenciones', 'Exenciones', 'Quién paga menos impuesto a la propiedad, desde el homestead hasta los veteranos con discapacidad, y cómo solicitar una exención.'),
              ('/es/elecciones', 'Elecciones 2026', 'Cada contienda local de 2026: los candidatos, lo que proponen, y de dónde viene el dinero de su campaña.'),
+             ('/es/reuniones', 'Reuniones públicas', 'Cuándo y dónde se reúne cada junta, con enlaces a las agendas y los temas de dinero de cada reunión.'),
              ('/es/solicitar-registros', 'Solicitar registros públicos', 'Elija un gobierno y un registro, y le escribimos la solicitud bajo la ley de registros públicos de Florida.'),
              ('/es/glosario', 'Glosario', 'Cada término de dinero público explicado en lenguaje sencillo: CRA, millaje, exención de vivienda principal y más.')]
     c = ''.join(f'<a class="gv-card" href="{h}"><span class="eyebrow">En español</span><b>{e(t)}</b><span class="small">{e(d)}</span></a>' for h, t, d in cards if h in ES_ALT)
@@ -481,6 +482,47 @@ def es_exemptions_page():
     with patched(xp, HOME=home, OTHER_NAMES=other, DIST_SHORT=T['dist'], money=money_short_es, write_shards=lambda out_dir: 0):
         page = xp.exemptions_page(None)
     return translate(page, T['html'], 'exemptions')  # the 'No' cells of the school-taxes column are already Spanish
+
+
+ES_DAYS = ['lun', 'mar', 'mié', 'jue', 'vie', 'sáb', 'dom']
+
+
+def es_meetings_page():
+    """/es/reuniones: meetings_page() with Spanish dates, generic titles and schedules (i18n/es_meetings.json),
+    then phrase pairs. Board names, specific titles, agenda items and venues stay as each government posts them.
+    The English page writes /meetings.ics; this one writes nothing outside its HTML."""
+    import meetings_page as mp
+    from govs import _load
+    T = page_pairs('meetings')
+    md = _load().get('meetings') or {'boards': [], 'meetings': []}
+    md = json.loads(json.dumps(md))
+    miss = set()
+    for b in md.get('boards', []):
+        if b.get('schedule'):
+            b['schedule'] = _tr(T['schedule'], b['schedule'], 'schedule', miss)
+    for x in md.get('boards', []) + md.get('meetings', []):
+        for a, c in T['place'] if x.get('location') else ():
+            x['location'] = x['location'].replace(a, c)
+    for m in md.get('meetings', []):
+        m['title'] = T['titles'].get(m.get('title'), m.get('title'))
+    if miss:
+        print('es meetings: untranslated schedules', sorted(miss))
+
+    def when(s):
+        d, timed = mp._dt(s)
+        if not d:
+            return s
+        t = f'{ES_DAYS[d.weekday()]}, {d.day} de {MONTHS[d.month - 1][:3]}.'
+        return t + (' · ' + d.strftime('%-I:%M').replace(':00', '') + (' a. m.' if d.hour < 12 else ' p. m.') if timed else '')
+    real = _load()
+    with tempfile.TemporaryDirectory() as tmp, patched(mp, _load=lambda: {**real, 'meetings': md}, _when=when):
+        page = mp.meetings_page(tmp)
+    page = translate(page, T['html'], 'meetings', quiet=('<li class="muted">No upcoming', '<span class="badge">Expected', '<span class="badge ok">Agenda posted', 'rel="noopener">Packet', 'rel="noopener">Minutes', 'rel="noopener">Agenda', "<p class=\"small muted\">From the regular", "<p class=\"small muted\">On the government"))
+    page = page.replace('<option value="county">Bay County</option>', '<option value="county">Condado de Bay</option>').replace('<option value="schools">Bay District Schools</option>', '<option value="schools">Escuelas del Distrito de Bay</option>')
+    page = re.sub(r'(<p class="small">)(CANCEL+ED\b)', r'\1<span class="badge warn">Cancelada</span> \2', page)
+    page = re.sub(r'<summary>(\d+) money items? on the agenda</summary>', lambda m: f'<summary>{m.group(1)} tema{"s" if m.group(1) != "1" else ""} de dinero en la agenda</summary>', page)
+    page = re.sub(r'<span>Revisado el (\d{4})-(\d{2})-(\d{2})</span>', lambda m: '<span>Revisado el ' + iso_es(m) + '</span>', page)
+    return page
 
 
 def iso_es(m):
