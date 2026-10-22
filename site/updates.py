@@ -9,6 +9,18 @@ from datetime import datetime, timezone
 import html
 
 CHANGES = [
+    {'date': '2026-10-21', 'title': 'Company pages, and one map of public money',
+     'text': "Every company with more than one record now has its own page: its contracts, change orders, payments, CRA money, gifts from the business to campaigns, and the votes that approved its contracts with how each member voted. A gift near a vote does not show why anyone voted the way they did. A new map shows CRA spending and 1,062 sales tax projects over CRA districts and city limits. Hurricane Michael projects are not on it because FEMA does not publish their locations.",
+     'pages': ['/public-money/vendors', '/public-money/map', '/public-money/contracts', '/public-money/who-gets-paid', '/public-money/money-map']},
+    {'date': '2026-10-21', 'title': 'New votes, FY2027 budgets, contracts and tourism payments',
+     'text': "Added 30 votes (Panama City CRA and Commission, Callaway Commission and CRA) with each member's vote; the FY2027 budgets adopted in September for all nine governments; 17 contracts, mostly Springfield and Callaway; and tourism agency payments for 18 more months, each checked against the register's printed totals. Bay County Commission minutes after June 16 are not posted yet.",
+     'pages': ['/public-money/votes', '/public-money/tax-dollars', '/public-money/contracts', '/public-money/who-gets-paid', '/public-money/cra-spending']},
+    {'date': '2026-10-21', 'title': 'My Address: your officials, nearby spending, and privacy',
+     'text': "My Address now links each local official to how they voted and to campaign money, lists CRA spending and sales tax projects near you, and links to your government's contracts, meetings and budget. To protect owners' privacy it no longer shows which kinds of exemptions a parcel gets (such as disability or veteran exemptions); it shows homestead and one total for all other exemptions.",
+     'pages': ['/my-address', '/public-money/exemptions']},
+    {'date': '2026-10-21', 'title': 'Share any view; alerts you choose; Spanish pages',
+     'text': "Filters now stay in the page link, so you can share exactly what you are looking at. Search results open the record itself. You can now get an email when a contract over an amount you pick is approved, when a board member votes, or when an agenda mentions a word you choose, and change what you follow at any time. Tax Dollars, Fees and Bills, Exemptions, Elections and Meetings are now in Spanish.",
+     'pages': ['/alerts', '/search', '/updates']},
     {'date': '2026-10-21', 'title': 'Contracts: how much each contract grew',
      'text': "Change orders are now added up for each contract and measured against its original amount, instead of listed one by one. Of the 22 contracts whose original amount is known, 12 grew by more than 10%, the point where Bay County and Panama City rules require board approval for the added cost. Each bar opens to its change orders, reasons and sources. Contracts whose original amount wasn't in the agendas are listed separately, and where an agenda states the new contract total, that total is used. Every individual change order is still listed below.",
      'pages': ['/public-money/contracts']},
