@@ -137,7 +137,7 @@ def index_page(out_dir):
     rows = []
     for vid, p in sorted(P.items(), key=lambda kv: -kv[1]['sort']):
         srcs = ', '.join(SHORT[k] for k, _, _ in SRC if p['cnt'].get(k))
-        rows.append(f'''<tr data-n="{e((p["v"]["name"] + " " + " ".join(p["v"]["aliases"])).lower())}"><th scope="row"><a href="{BASE}/{vid}">{e(p["v"]["name"])}</a><small>{'<span class="badge warn">campaign gifts</span> ' if p['gifts'] else ''}{e(", ".join(gname(g) for g in p["govs"]))}</small></th>
+        rows.append(f'''<tr data-n="{e((p["v"]["name"] + " " + " ".join(p["v"]["aliases"])).lower())}"><th scope="row"><a href="{BASE}/{vid}">{e(p["v"]["name"])}</a>{' <span class="badge warn vd-gift" title="This business gave to a local campaign">campaign gifts</span>' if p['gifts'] else ''}<small>{e(", ".join(gname(g) for g in p["govs"]))}</small></th>
       <td class="num">{money(p["awarded"]) if p["awarded"] else "—"}</td><td class="num">{money(p["paid"]) if p["paid"] else "—"}</td><td class="num">{money(p["tot"].get("cra")) if p["tot"].get("cra") else "—"}</td>
       <td class="num">{len(p["recs"])}</td><td class="small">{e(srcs)}</td></tr>''')
     ng = sum(1 for p in P.values() if p['gifts'])
