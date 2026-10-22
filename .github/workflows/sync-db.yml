@@ -1,6 +1,7 @@
 # Load the site's public datasets into the Supabase database.
 # Runs after every push to main that changes data or the built site, after the daily refresh, or by hand.
 # Needs one repository secret: DATABASE_URL (Supabase > Connect > Session pooler connection string).
+# Problems (failed load, missing secret) email the admins: repository secrets RESEND_FULL_KEY and ADMIN_EMAILS.
 # Only rows with origin = 'site_build' are replaced; rows added by hand or by scrapers are never touched.
 name: Sync database
 on:
@@ -22,25 +23,37 @@ jobs:
     timeout-minutes: 15
     steps:
       - name: Check for database secret
-        id: secret
+        id: database_secret
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: |
-          if [ -z "$DATABASE_URL" ]; then echo "DATABASE_URL secret not set yet; skipping."; echo "ok=false" >> "$GITHUB_OUTPUT"; else echo "ok=true" >> "$GITHUB_OUTPUT"; fi
+          if [ -z "$DATABASE_URL" ]; then
+            echo "::warning title=Database sync skipped::DATABASE_URL secret not set."
+            echo "ok=false" >> "$GITHUB_OUTPUT"
+            echo "alert=The DATABASE_URL repository secret is missing, so the database sync was skipped." >> "$GITHUB_OUTPUT"
+          else echo "ok=true" >> "$GITHUB_OUTPUT"; fi
       - uses: actions/checkout@v4
-        if: steps.secret.outputs.ok == 'true'
         with:
           ref: main
       - uses: actions/setup-python@v5
-        if: steps.secret.outputs.ok == 'true'
+        if: steps.database_secret.outputs.ok == 'true'
         with:
           python-version: '3.12'
       - name: Install driver
-        if: steps.secret.outputs.ok == 'true'
+        if: steps.database_secret.outputs.ok == 'true'
         run: pip install 'psycopg[binary]>=3.2'
       - name: Apply migrations and load data
-        if: steps.secret.outputs.ok == 'true'
+        id: load_database
+        if: steps.database_secret.outputs.ok == 'true'
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           SUPABASE_REGION: us-east-2
         run: python db/scripts/load.py --migrate
+      - name: Email admins about problems
+        if: always()
+        env:
+          STEPS: ${{ toJSON(steps) }}
+          JOB_STATUS: ${{ job.status }}
+          RESEND_KEY: ${{ secrets.RESEND_FULL_KEY }}
+          ADMIN_EMAILS: ${{ secrets.ADMIN_EMAILS }}
+        run: python3 .github/scripts/notify_admins.py

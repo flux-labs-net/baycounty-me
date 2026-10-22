@@ -1,5 +1,6 @@
 # Refresh the meetings calendar and candidates' campaign finance reports every morning, then rebuild the site.
 # Pushing to main triggers the normal Vercel deploy. Commits only when something changed.
+# Problems (failed fetch, new source errors, failed push) email the admins: secrets RESEND_FULL_KEY and ADMIN_EMAILS.
 name: Refresh meetings
 on:
   schedule:
@@ -21,9 +22,11 @@ jobs:
         with:
           python-version: '3.12'
       - name: Fetch meetings
+        id: fetch_meetings
         working-directory: data/meetings
         run: python fetch_meetings.py
       - name: Report meeting source errors
+        id: meeting_source_errors
         # When meetings.json lists errors, this step fails (red X and an error annotation on the run) and opens one
         # issue, or comments on the open one. continue-on-error keeps the rest of the refresh (and the database sync,
         # which only follows a successful run) going, since one broken source shouldn't hold back the others.
@@ -43,18 +46,22 @@ jobs:
           PY
           title="Meetings refresh: source errors"
           num=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --search "in:title \"$title\"" --json number --jq '.[0].number // empty' || true)
-          if [ -n "$num" ]; then gh issue comment "$num" --repo "$GITHUB_REPOSITORY" --body-file "$RUNNER_TEMP/body.md"
+          # Admins are emailed when the issue is first opened; daily repeats only add a comment (notify=false).
+          if [ -n "$num" ]; then gh issue comment "$num" --repo "$GITHUB_REPOSITORY" --body-file "$RUNNER_TEMP/body.md"; echo "notify=false" >> "$GITHUB_OUTPUT"
           else gh issue create --repo "$GITHUB_REPOSITORY" --title "$title" --body-file "$RUNNER_TEMP/body.md"; fi
           echo "::error title=Meeting sources::meetings.json has $n source error(s); see the open issue."
           exit 1
       - name: Fetch campaign finance reports
+        id: fetch_campaign_finance
         continue-on-error: true
         working-directory: data/elections/scripts
         run: ./refresh.sh "$RUNNER_TEMP/soe"
       - name: Rebuild site
+        id: rebuild_site
         working-directory: site
         run: python build_site.py > /dev/null
       - name: Commit if changed
+        id: commit_and_push
         run: |
           paths="data/meetings data/elections/finance_2026.json site/public"
           # git status --porcelain also lists new, untracked files, which git diff --quiet ignores.
@@ -64,3 +71,12 @@ jobs:
           git add -A $paths
           git commit -m "Daily refresh: meetings and campaign finance ($(date -u +%Y-%m-%d))"
           git push
+      - name: Email admins about problems
+        if: always()
+        env:
+          STEPS: ${{ toJSON(steps) }}
+          JOB_STATUS: ${{ job.status }}
+          RESEND_KEY: ${{ secrets.RESEND_FULL_KEY }}
+          ADMIN_EMAILS: ${{ secrets.ADMIN_EMAILS }}
+          EXTRA_FILE: ${{ runner.temp }}/body.md
+        run: python3 .github/scripts/notify_admins.py

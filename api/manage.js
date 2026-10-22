@@ -107,9 +107,8 @@ module.exports = async (req, res) => {
       try { known = (await following(email, KEY())).exists || (await rules(email)).length > 0; } catch (e) {}
       if (known) {
         const link = prefsUrl(email);
-        await resend('/emails', 'POST', {from: FROM, to: [email], subject: 'Manage your BayCounty.me emails',
-          html: emailShell('Manage your BayCounty.me emails', `<p style="margin:0 0 12px 0;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:22px;color:#161B24">Here’s your link to change what you follow or unsubscribe.</p>${button(link, 'Manage my emails')}`, 'If you didn’t ask for this, you can ignore it.'),
-          text: `Change what you follow or unsubscribe: ${link}`}, KEY()).catch(e => console.error('manage: send link', e.message));
+        const m = require('./_emails').manageLinkEmail(link);
+        await resend('/emails', 'POST', {from: FROM, to: [email], subject: m.subject, html: m.html, text: m.text}, KEY()).catch(e => console.error('manage: send link', e.message));
       }
     }
     return html(200, page('Check your email', `<h1>Check your email</h1><p>${esc(MSG.sent)}</p><a class="btn" href="/alerts">Back to alerts</a>`));

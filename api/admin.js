@@ -1,10 +1,12 @@
-// BayCounty.me admin: API keys, throttles, request logs and analytics. Used by /admin.
+// BayCounty.me admin: API keys, throttles, request logs, analytics, ingestion health and email previews. Used by /admin.
 // Sign-in is by emailed link to an address listed in ADMIN_EMAILS (comma-separated, set in Vercel).
 // The session is a signed, HttpOnly, SameSite=Strict cookie; changes also need the X-BCM-Admin header.
 const crypto = require('crypto');
 const {q, hasDb} = require('./_db');
 const {sha256, derive, ipOf} = require('./_gate');
-const {FROM, resend} = require('./_alerts');
+const {FROM, GOVS, resend} = require('./_alerts');
+const {adminSignInEmail} = require('./_emails');
+const {preview, PREVIEWS} = require('./_previews');
 
 const SITE = 'https://baycounty.me';
 const COOKIE = 'bcm_admin';
@@ -187,6 +189,20 @@ async function route(req, res, action, me) {
       return {ok: true};
     }
     case 'audit': return {audit: await q('select at, admin, action, key_id, detail from apiadmin.audit order by id desc limit 100')};
+    case 'ingestion': return require('./_health').report();
+    case 'email_previews': return {templates: PREVIEWS, govs: Object.entries(GOVS).map(([key, [name]]) => ({key, name}))};
+    case 'email_preview': return preview(String(Q.template || ''), {gov: Q.gov, source: Q.source});
+    case 'email_test': {
+      if (req.method !== 'POST') throw Object.assign(new Error('Use POST.'), {status: 405});
+      // Sends the previewed email to the signed-in admin only, never to anyone else.
+      const m = await preview(String(body.template || ''), {gov: body.gov, source: body.source});
+      if (!m.html && !m.text) throw Object.assign(new Error(m.note || 'Nothing to send.'), {status: 400});
+      const key = process.env.RESEND_FULL_KEY || process.env.RESEND_API_KEY;
+      const r = await resend('/emails', 'POST', {from: FROM, to: [me.e], subject: '[Test] ' + m.subject, html: m.html, text: m.text}, key);
+      if (!r.ok) throw Object.assign(new Error('Resend didn\u2019t accept the test email (' + r.status + ').'), {status: 502});
+      await audit(me.e, 'email_test', null, {template: body.template}).catch(() => {});
+      return {ok: true, to: me.e};
+    }
     default: throw Object.assign(new Error('Unknown action.'), {status: 404});
   }
 }
@@ -207,9 +223,8 @@ module.exports = async (req, res) => {
       const tok = makeToken({kind: 'login', e: email, n: crypto.randomBytes(9).toString('base64url'), exp: now + 15 * 60e3});
       const link = `${SITE}/api/admin?action=verify&t=${encodeURIComponent(tok)}`;
       const key = process.env.RESEND_FULL_KEY || process.env.RESEND_API_KEY;
-      const r = await resend('/emails', 'POST', {from: FROM, to: [email], subject: 'Sign in to BayCounty.me admin',
-        text: `Sign in to the BayCounty.me admin:\n\n${link}\n\nThe link works once and expires in 15 minutes. If you didn't ask for it, ignore this email.`,
-        html: `<p>Sign in to the BayCounty.me admin:</p><p><a href="${link}" style="display:inline-block;padding:10px 18px;background:#1E3A76;color:#fff;border-radius:8px;text-decoration:none">Sign in</a></p><p style="color:#5A6372;font-size:13px">The link works once and expires in 15 minutes. If you didn't ask for it, ignore this email.</p>`}, key);
+      const m = adminSignInEmail(link);
+      const r = await resend('/emails', 'POST', {from: FROM, to: [email], subject: m.subject, text: m.text, html: m.html}, key);
       if (!r.ok) console.error('admin login email', r.status, JSON.stringify(r.body));
       await audit(email, 'login_requested', null, {ok: r.ok}).catch(() => {});
     }

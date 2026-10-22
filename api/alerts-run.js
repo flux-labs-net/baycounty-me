@@ -5,6 +5,7 @@
 // GET /api/alerts-run?send=drafts with the CRON_SECRET to send the waiting drafts.
 // With ALERTS_AUTOSEND=1, each run's emails are sent right away.
 // Auth: Authorization: Bearer <CRON_SECRET> (Vercel sends it on cron calls).
+// Each run first does the ingestion health check (_health.js) and emails ADMIN_EMAILS if it finds problems.
 const {FROM, SITE, resend, esc, emailShell, button, prefsUrl} = require('./_alerts');
 const {match, describe} = require('./_rules');
 const db = require('./_db');
@@ -65,6 +66,12 @@ module.exports = async (req, res) => {
   if (!db.hasDb()) return res.status(500).json({ok: false, error: 'DATABASE_URL missing'});
   const autosend = process.env.ALERTS_AUTOSEND === '1';
   const reviewer = process.env.DIGEST_REVIEWER || 'hello@fluxlabs.net';
+  // Ingestion health check (see _health.js): emails the admins (ADMIN_EMAILS) only when something is wrong.
+  // Runs first and on its own, so a problem in the alerts run below can't hide it. ?health=1 runs only the check.
+  let health = null;
+  try { health = await require('./_health').checkAndNotify(key); }
+  catch (e) { console.error('ingest health', e); health = {error: e.message}; }
+  if ((req.query || {}).health) return res.status(200).json({ok: !health.error, health});
   try {
     // Send drafts on request (after review), only when autosend is on: the owner flips ALERTS_AUTOSEND=1 to approve.
     if ((req.query || {}).send === 'drafts') {
@@ -74,7 +81,8 @@ module.exports = async (req, res) => {
       return res.status(200).json({ok: true, sent, drafts: drafts.length});
     }
     const events = await db.q(`select id, dataset, record_hash, government_key, record from alerts.events where processed_at is null order by id limit ${MAX_EVENTS}`);
-    if (!events.length) return res.status(200).json({ok: true, events: 0, emails: 0});
+    const problems = health && health.problems ? health.problems.length : null;
+    if (!events.length) return res.status(200).json({ok: true, events: 0, emails: 0, ingest_problems: problems});
     const rules = await db.q(`select id, email, rule_type, params from alerts.subscriptions where confirmed and unsubscribed_at is null`);
     const seen = new Set((rules.length ? await db.q(`select subscription_id, dedupe_key from alerts.deliveries where subscription_id = any($1)`, [rules.map(r => r.id)]) : [])
       .map(d => `${d.subscription_id}|${d.dedupe_key}`));
@@ -94,7 +102,7 @@ module.exports = async (req, res) => {
       await resend('/emails', 'POST', {from: FROM, to: [reviewer], subject: `BayCounty.me: ${made.length} rule alert email${made.length > 1 ? 's' : ''} ready to review`,
         text: `The daily alerts run matched ${events.length} new record(s) and drafted ${made.length} email(s) (saved in alerts.outbox, status 'draft'):\n\n${made.map(o => `- #${o.id}: ${o.matches} match(es): ${o.subject}`).join('\n')}\n\nTo send drafts: set ALERTS_AUTOSEND=1 in Vercel, then POST ${SITE}/api/alerts-run?send=drafts with the CRON_SECRET (or wait for the next run, which sends new matches directly).\nAddresses aren't listed here; see alerts.outbox in Supabase.`}, key).catch(() => {});
     }
-    return res.status(200).json({ok: true, autosend, events: events.length, rules: rules.length, emails: made.length, sent});
+    return res.status(200).json({ok: true, autosend, events: events.length, rules: rules.length, emails: made.length, sent, ingest_problems: problems});
   } catch (e) {
     console.error('alerts-run', e);
     if (e.code === '42P01') return res.status(200).json({ok: false, error: 'Migration 0008 not applied yet.'});
