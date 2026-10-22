@@ -44,6 +44,16 @@ for k, gs in cent_src.items():
     p = big.representative_point()
     centroids[k] = [round(p.y, 5), round(p.x, 5)]
 
+# vendor profile page for the payee, when it has one (/public-money/vendors/<id>; data/entities ids)
+import sys as _sys, os as _os
+_sys.path.insert(0, 'entities'); _sys.path.insert(0, _os.path.join('..', 'site'))
+try:
+    import vendor_pages as _vp
+    _PROF = set(_vp.build())
+    VP = lambda name: next((v for v in __import__('ids').vendor_ids(name) if v in _PROF), None)
+except Exception:  # site code missing: no links
+    VP = lambda name: None
+
 random.seed(7)
 pays = []
 for i, p in enumerate(m['payments']):
@@ -62,7 +72,7 @@ for i, p in enumerate(m['payments']):
         'loc': p['location_name'] or '', 'addr': p['address'] or '', 'lat': round(lat, 5), 'lng': round(lng, 5),
         'prec': prec, 'placed': placed, 'src': p['source_title'] or '', 'url': p['source_url'] or '',
         'conf': p['confidence'], 'notes': p['notes'] or '', 'status': p['status'], 'count': p['count'],
-        'overlap': p['overlap'],
+        'overlap': p['overlap'], 'vp': VP(p['payee']),
     })
 
 def num(x):

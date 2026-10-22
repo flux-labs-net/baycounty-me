@@ -118,7 +118,7 @@ def build():
         'count_rows': len(rows), 'count_contributor_candidate_pairs': len(pairs_set), 'count_distinct_vendors': len({r['vendor_id'] for r in rows}),
         'count_by_confidence_pairs': dict(conf),
         'pairs_where_contract_government_matches_office': len({(r['contributor'], r['candidate']) for r in rows if r['same_government_as_office']}),
-        'count_by_gift_source_pairs': dict(collections.Counter(next(r['gift_source'] for r in rows if (r['contributor'], r['candidate']) == p) for p in pairs_set)),
+        'count_by_gift_source_pairs': dict(sorted(collections.Counter(next(r['gift_source'] for r in rows if (r['contributor'], r['candidate']) == p) for p in pairs_set).items())),
         'count_by_record_type_rows': dict(collections.Counter(t for r in rows for t in r['record_types'])),
         'matches': rows,
     }

@@ -118,6 +118,14 @@ def map_data():
     for r in vrows:
         r.pop('_v')
     dl = donors_list(donors)
+    try:  # vendor profile page for each donor that has one
+        from vendor_pages import build as _vb
+        import ids as _ids
+        _prof = set(_vb())
+        for x in dl:
+            x['vp'] = next((v for v in _ids.vendor_ids(x['n']) if v in _prof), None)
+    except Exception:
+        pass
     for x in dl:
         x['k'] = bool(held.get(x['id']))
         x['tot'] = round(sum(g['a'] for g in gifts if g['d'] == x['id']), 2)

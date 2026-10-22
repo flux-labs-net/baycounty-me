@@ -77,6 +77,14 @@ def _votes():
 INDEXERS = [_glossary, _cra, _fema, _surtax, _audits, _contracts, _votes]
 
 
+def _vendors():
+    from vendor_pages import search_rows
+    return search_rows()
+
+
+INDEXERS.append(_vendors)
+
+
 def build_index(out_dir, pages):
     rows = _pages(out_dir, pages)
     for fn in INDEXERS:

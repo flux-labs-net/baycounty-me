@@ -62,6 +62,7 @@ MENU = [
             {'label': 'Budget Explorer', 'href': '/public-money/budget-explorer', 'desc': 'Each budget by fund and department'},
             {'label': 'CRA Spending', 'href': '/public-money/cra-spending', 'desc': 'What redevelopment agencies paid for'},
             {'label': 'Sales Tax Projects', 'href': '/public-money/sales-tax-projects', 'desc': 'Half-cent projects: promised vs built'},
+            {'label': 'Public Money Map', 'href': '/public-money/map', 'desc': 'CRA spending and sales tax projects, mapped'},
             {'label': 'Hurricane Michael', 'href': '/public-money/hurricane-michael', 'desc': 'FEMA, HUD and state recovery money'},
         ]},
         {'group': 'Accountability', 'items': [
@@ -70,6 +71,7 @@ MENU = [
             {'label': 'Campaign Money', 'href': '/public-money/campaign-money', 'desc': 'Who funds campaigns, and donor contracts'},
             {'label': 'Money Map', 'href': '/public-money/money-map', 'desc': 'Donors, officials and contracts, mapped'},
             {'label': 'Who Gets Paid', 'href': '/public-money/who-gets-paid', 'desc': 'Every payment by the tourism agencies'},
+            {'label': 'Vendors', 'href': '/public-money/vendors', 'desc': 'Every company paid, with its contracts and votes'},
             {'label': 'Debt', 'href': '/public-money/debt', 'desc': 'What each government owes'},
             {'label': 'Audit Findings', 'href': '/public-money/audits', 'desc': 'What outside auditors flagged'},
         ]},
@@ -646,6 +648,11 @@ PAGES = [
 ]
 
 
+from vendor_pages import pages as vendor_page_list, index_page as vendors_index  # noqa: E402
+from public_map import public_map_page  # noqa: E402
+PAGES += [('/public-money/map', 'Public money map', 'CRA spending and half-cent sales tax projects across Bay County on one map, with CRA district lines and city limits.', lambda: public_map_page(OUT))]
+PAGES += [(p, t, d, fn or (lambda: vendors_index(OUT))) for p, t, d, fn in vendor_page_list()]
+
 PAGES += [(f'/governments/{g["slug"]}', g['short'] + ': budget, taxes, debt, votes and more',
            f'{g["short"]}, Florida: who runs it, the budget and property tax rate, debt, audit findings, how officials voted, contracts and projects, from public records.',
            (lambda k: (lambda: gov_page(k)))(g['key'])) for g in GOVLIST]
@@ -668,10 +675,10 @@ def main():
     from og import build_og
     from og import preview_text
     PREVIEW.update(preview_text())
-    OG_VER.update(build_og(OUT, PAGES, MENU))
+    OG_VER.update(build_og(OUT, [x for x in PAGES if not x[0].startswith('/public-money/vendors/')], MENU))  # vendor pages use the default card
     for path, title, desc, fn in PAGES:
         write(path, layout(title, desc, path, fn()))
-    print('search index:', build_index(OUT, PAGES), 'entries')
+    print('search index:', build_index(OUT, [x for x in PAGES if not x[0].startswith('/public-money/vendors/')]), 'entries')  # vendors: own indexer
     open(os.path.join(OUT, 'updates.xml'), 'w').write(rss(DOMAIN))
     open(os.path.join(OUT, '404.html'), 'w').write(layout('Page not found', 'Page not found', '/404',
         '<div class="page prose"><h1>That page isn\'t here.</h1><p><a href="/">Back to the home page</a></p></div>'))

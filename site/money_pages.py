@@ -233,6 +233,14 @@ SHORT = {'visit_pcb_cvb': 'Visit Panama City Beach', 'destination_panama_city_cd
 CAT = {'payroll/benefit/tax pass-through': 'Payroll or benefits', 'government': 'Government', 'credit card payment (underlying merchants not itemized)': 'Credit card bill'}
 
 
+def VLINK(name):
+    try:  # link to the vendor's profile page when it has one (vendor_pages.py)
+        from vendor_pages import link
+        return link(name)
+    except Exception:
+        return e(name)
+
+
 def payments_page():
     p = _j('money', 'payments.json')
     if not p:
@@ -248,7 +256,7 @@ def payments_page():
         for v in a['vendors']:
             cat = v.get('category')
             badge = f' <span class="badge">{e(CAT.get(cat, cat))}</span>' if cat else ''
-            rows += (f'<tr data-v="{e(v["vendor"].lower())}"><th scope="row">{e(v["vendor"])}{badge}</th><td class="num">{money(v["total"])}</td><td class="num">{v["n_payments"]}</td>'
+            rows += (f'<tr data-v="{e(v["vendor"].lower())}"><th scope="row">{VLINK(v["vendor"])}{badge}</th><td class="num">{money(v["total"])}</td><td class="num">{v["n_payments"]}</td>'
                      + ''.join(f'<td class="num">{money(v["by_fy"].get(f)) if v["by_fy"].get(f) else "<span class=muted>—</span>"}</td>' for f in fys) + '</tr>')
         cov = a.get('coverage_by_fy') or {}
         covtxt = ' · '.join(f'{f}: {len(cov.get(f, []))} of 12 months' for f in fys)
