@@ -44,7 +44,7 @@ DATABASE_URL=... python3 data/agendas/watch_agendas.py --inbox --sweep
 python3 -m unittest discover data/agendas/tests
 ```
 
-Limits: `AGENDA_MAX_DOWNLOADS` (default 150 per run), files over 80 MB are skipped, and sweeps skip files checked in the last `AGENDA_RECHECK_HOURS` (default 6) unless an email just pointed at that government. HTML agendas are hashed on their visible text, so markup that changes on every load doesn't count as an amendment. AgendaCenter's `?html=true` agendas are captured as the PDF.
+Limits: `AGENDA_MAX_DOWNLOADS` (default 150 per run, so a big backlog fills in over several runs). Every file is downloaded and hashed in full (up to 1 GB), but only files up to `AGENDA_STORE_MAX_MB` (default 50, Supabase Storage's default per-file limit) are stored; larger packets are still tracked and versioned and open from their source link. The summary email lists only files for meetings from the past week on (up to 40), so a backfill doesn't flood the inbox. Sweeps and skip files checked in the last `AGENDA_RECHECK_HOURS` (default 6) unless an email just pointed at that government. HTML agendas are hashed on their visible text, so markup that changes on every load doesn't count as an amendment. AgendaCenter's `?html=true` agendas are captured as the PDF.
 
 ## Tables
 

@@ -55,7 +55,8 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HERE, "..", "meetings"))
 import fetch_meetings as fm  # noqa: E402  (reuses the per-board source adapters)
 
-MAX_BYTES = 80 * 1024 * 1024
+MAX_BYTES = 1024 * 1024 * 1024                    # never read more than 1 GB of one file
+STORE_MAX = int(os.environ.get("AGENDA_STORE_MAX_MB") or 50) * 1024 * 1024  # Supabase Storage's default per-file limit
 MAX_DOWNLOADS = int(os.environ.get("AGENDA_MAX_DOWNLOADS") or 150)
 RECHECK_HOURS = float(os.environ.get("AGENDA_RECHECK_HOURS") or 6)  # sweeps skip files checked more recently
 BUCKET = "agendas"
@@ -191,15 +192,28 @@ def classify(parsed):
 
 
 def download(url, tries=3):
+    """Stream a file. -> (data or None, content type, sha256 of the bytes, size). Every file is hashed in full; the
+    bytes are kept only up to STORE_MAX (big County/Lynn Haven packets are tracked and versioned, not stored)."""
     last = None
     for attempt in range(tries):
         try:
             req = urllib.request.Request(url, headers={"User-Agent": fm.UA, "Accept": "*/*"})
-            with urllib.request.urlopen(req, timeout=120) as r:
-                data = r.read(MAX_BYTES + 1)
-                if len(data) > MAX_BYTES:
-                    raise ValueError("file is larger than %d MB" % (MAX_BYTES // 1048576))
-                return data, (r.headers.get_content_type() or "application/octet-stream"), r.geturl()
+            with urllib.request.urlopen(req, timeout=180) as r:
+                ctype = r.headers.get_content_type() or "application/octet-stream"
+                h, size, keep = hashlib.sha256(), 0, []
+                while True:
+                    chunk = r.read(1024 * 1024)
+                    if not chunk:
+                        break
+                    size += len(chunk)
+                    if size > MAX_BYTES:
+                        raise ValueError("file is larger than %d MB" % (MAX_BYTES // 1048576))
+                    h.update(chunk)
+                    if keep is not None:
+                        keep.append(chunk)
+                        if size > STORE_MAX and ctype != "text/html":
+                            keep = None
+                return (b"".join(keep) if keep is not None else None), ctype, h.hexdigest(), size
         except ValueError:
             raise
         except urllib.error.HTTPError as e:
@@ -290,7 +304,7 @@ def resend_raw(key, email_id):
     url = (d.get("raw") or {}).get("download_url")
     if url:
         with urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": fm.UA}), timeout=120) as r:
-            return r.read(MAX_BYTES)
+            return r.read(STORE_MAX)
     m = email.message.EmailMessage()
     h = d.get("headers") or {}
     m["From"] = h.get("from") or d.get("from") or ""
@@ -330,8 +344,11 @@ class Storage:
                 if e.code not in (400, 409):  # 400/409: already exists
                     raise
             self.ready = True
-        self._req("POST", "/storage/v1/object/%s/%s" % (BUCKET, urllib.parse.quote(path)), data, ctype or "application/octet-stream",
-                  {"x-upsert": "true"})
+        try:
+            self._req("POST", "/storage/v1/object/%s/%s" % (BUCKET, urllib.parse.quote(path)), data, ctype or "application/octet-stream",
+                      {"x-upsert": "true"})
+        except urllib.error.HTTPError as e:  # Storage explains itself in the body (size limit, bad key ...)
+            raise RuntimeError("HTTP %s: %s" % (e.code, e.read()[:300].decode("utf-8", "replace")))
         return path
 
 
@@ -397,28 +414,31 @@ class Run:
             self.db.one("update agendas.documents set title = coalesce(%s, title), meeting_date = coalesce(%s, meeting_date), "
                         "board = coalesce(board, %s) where id = %s", (title, meeting_date, board, row[0]))
         doc_id, old_sha = (row[0], row[1]) if row else (None, None)
+        raw_sha = None
         if data is None:
             if self.downloads >= MAX_DOWNLOADS:
                 return
             self.downloads += 1
             try:
-                data, ctype, _final = download(url)
+                data, ctype, raw_sha, size = download(url)
             except Exception as e:
                 self.counts["failed"] += 1
                 self.db.one("update agendas.documents set status = 'failed', error = %s, last_checked_at = now() where id = %s",
                             (str(e)[:500], doc_id))
                 self.error("download", e, source_key, url, notice_id, doc_id)
                 return
-        sha = fingerprint(data, ctype)
+        else:
+            size = len(data)
+        sha = fingerprint(data, ctype) if data is not None else raw_sha
         info = {"url": url, "source": source_key, "board": board, "kind": kind, "title": title,
-                "meeting_date": str(meeting_date) if meeting_date else None, "bytes": len(data)}
+                "meeting_date": str(meeting_date) if meeting_date else None, "bytes": size}
         if sha == old_sha:
             self.counts["unchanged"] += 1
             self.db.one("update agendas.documents set status = 'unchanged', error = null, last_checked_at = now() where id = %s", (doc_id,))
             return
         status = "updated" if old_sha else "new"
         path = None
-        if self.storage.on:
+        if self.storage.on and data is not None:
             gov = GOV_OF_BOARD.get(board) or source_key
             path = "%s/%s/%s-%s" % (gov, meeting_date or dt.date.today(), sha[:12], file_name(url, ctype))
             try:
@@ -428,10 +448,10 @@ class Run:
                 self.error("store", e, source_key, url, notice_id, doc_id)
         self.db.one("insert into agendas.versions (document_id, sha256, bytes, content_type, storage_path, ingest_run_id) "
                     "values (%s,%s,%s,%s,%s,%s) on conflict (document_id, sha256) do nothing",
-                    (doc_id, sha, len(data), ctype, path, self.run_id))
+                    (doc_id, sha, size, ctype, path, self.run_id))
         self.db.one("""update agendas.documents set status = %s, error = null, current_sha256 = %s, content_type = %s, bytes = %s,
                 last_checked_at = now(), last_changed_at = now(), version_count = version_count + 1 where id = %s""",
-                    (status, sha, ctype, len(data), doc_id))
+                    (status, sha, ctype, size, doc_id))
         self.counts[status] += 1
         self.fresh.append((status, info))
         print("  %-8s %-7s %s %s" % (status, kind, board or source_key, title or url))
@@ -586,10 +606,17 @@ def notify(run):
     key, to = os.environ.get("RESEND_KEY"), os.environ.get("ADMIN_EMAILS") or "hello@fluxlabs.net"
     if not (key and run.fresh):
         return
-    rows = sorted(run.fresh, key=lambda x: (x[1]["board"] or "", x[1]["meeting_date"] or ""))
+    # Only news: files for meetings from the last week on (or undated, e.g. email attachments). A backfill of old
+    # meetings stays on the admin tab instead of flooding the inbox.
+    cutoff = str(fm.now_central().date() - dt.timedelta(days=7))
+    rows = [x for x in run.fresh if not x[1]["meeting_date"] or x[1]["meeting_date"] >= cutoff]
+    if not rows:
+        return
+    rows.sort(key=lambda x: (x[1]["meeting_date"] or "9999", x[1]["board"] or ""), reverse=True)
+    more = max(0, len(rows) - 40)
     lines = ["%s: %s %s%s (%s)" % ("NEW" if s == "new" else "UPDATED", d["board"] or d["source"], d["kind"],
                                    " for " + d["meeting_date"] if d["meeting_date"] else "", d["title"] or "") + "\n  " + d["url"]
-             for s, d in rows]
+             for s, d in rows[:40]] + (["...and %d more on the Agendas tab." % more] if more else [])
     n_new = sum(1 for s, _ in rows if s == "new")
     subject = "BayCounty.me agendas: %d new, %d updated" % (n_new, len(rows) - n_new)
     text = "\n".join(lines) + "\n\nReview them on https://baycounty.me/admin (Agendas tab).\n"
@@ -598,7 +625,8 @@ def notify(run):
     body = json.dumps({"from": os.environ.get("ALERTS_FROM") or "BayCounty.me <hello@baycounty.me>",
                        "to": [a for a in re.split(r"[\s,;]+", to) if a], "subject": subject, "text": text, "html": html}).encode()
     req = urllib.request.Request("https://api.resend.com/emails", data=body, method="POST",
-                                 headers={"Authorization": "Bearer " + key, "Content-Type": "application/json"})
+                                 headers={"Authorization": "Bearer " + key, "Content-Type": "application/json",
+                                          "User-Agent": fm.UA})  # Resend's front door rejects requests with no UA
     try:
         urllib.request.urlopen(req, timeout=30).read()
     except Exception as e:
