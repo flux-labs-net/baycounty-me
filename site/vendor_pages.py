@@ -25,6 +25,7 @@ SRC = [('contract', 'Contracts awarded', 'Contract awards approved on agendas si
        ('tdc', 'Tourism agency payments', 'Paid by Visit Panama City Beach, Destination Panama City or the Mexico Beach CDC'),
        ('cra', 'CRA spending', 'Redevelopment agency records that name this payee')]
 SRC_NAME = {k: n for k, n, _ in SRC}
+SHORT = {'contract': 'Contracts', 'change_order': 'Change orders', 'emergency': 'Emergency buys', 'register': 'Check registers', 'tdc': 'Tourism agencies', 'cra': 'CRA'}
 NOTE = ("A campaign gift near a vote, or from a company that holds a contract, is a fact in two public records. "
         "It does not show why anyone voted the way they did, or how a contract was awarded.")
 
@@ -135,8 +136,8 @@ def index_page(out_dir):
     P = build()
     rows = []
     for vid, p in sorted(P.items(), key=lambda kv: -kv[1]['sort']):
-        srcs = ', '.join(SRC_NAME[k].split(' ')[0].lower() if k != 'tdc' else 'tourism' for k, _, _ in SRC if p['cnt'].get(k))
-        rows.append(f'''<tr data-n="{e((p["v"]["name"] + " " + " ".join(p["v"]["aliases"])).lower())}"><th scope="row"><a href="{BASE}/{vid}">{e(p["v"]["name"])}</a>{' <span class="badge warn">campaign gifts</span>' if p['gifts'] else ''}<small>{e(", ".join(gname(g) for g in p["govs"]))}</small></th>
+        srcs = ', '.join(SHORT[k] for k, _, _ in SRC if p['cnt'].get(k))
+        rows.append(f'''<tr data-n="{e((p["v"]["name"] + " " + " ".join(p["v"]["aliases"])).lower())}"><th scope="row"><a href="{BASE}/{vid}">{e(p["v"]["name"])}</a><small>{'<span class="badge warn">campaign gifts</span> ' if p['gifts'] else ''}{e(", ".join(gname(g) for g in p["govs"]))}</small></th>
       <td class="num">{money(p["awarded"]) if p["awarded"] else "—"}</td><td class="num">{money(p["paid"]) if p["paid"] else "—"}</td><td class="num">{money(p["tot"].get("cra")) if p["tot"].get("cra") else "—"}</td>
       <td class="num">{len(p["recs"])}</td><td class="small">{e(srcs)}</td></tr>''')
     ng = sum(1 for p in P.values() if p['gifts'])
@@ -150,7 +151,7 @@ def index_page(out_dir):
   <div class="kpis"><div class="kpi"><span class="eyebrow">Vendors with a page</span><span class="v">{len(P)}</span><span class="s">2 or more records, or a campaign gift</span></div>
     <div class="kpi"><span class="eyebrow">Gave to a campaign</span><span class="v">{ng}</span><span class="s">businesses that also hold local money</span></div></div>
   <section class="tx-sec"><div class="sec-hd"><h2 id="all">Every vendor</h2><span class="muted">Largest first</span></div>
-    <div class="tablewrap"><table class="tx-table" id="vdT" data-tt-sort="1:desc"><thead><tr><th scope="col">Vendor</th><th scope="col" class="num">Awarded</th><th scope="col" class="num">Paid (registers)</th><th scope="col" class="num">CRA</th><th scope="col" class="num">Records</th><th scope="col">Found in</th></tr></thead><tbody>{"".join(rows)}</tbody></table></div>
+    <div class="tablewrap"><table class="tx-table vd-table" id="vdT" data-tt-sort="1:desc"><thead><tr><th scope="col">Vendor</th><th scope="col" class="num">Awarded</th><th scope="col" class="num">Paid (registers)</th><th scope="col" class="num">CRA</th><th scope="col" class="num">Records</th><th scope="col">Found in</th></tr></thead><tbody>{"".join(rows)}</tbody></table></div>
     <p class="note">Awarded adds contract awards and emergency purchases. Paid adds the check-register and tourism-agency payment totals shown in each source; those lists cover only part of each year. CRA counts only records that the CRA ledger includes in its totals. Change orders are on each vendor's page.</p></section>
 </div>
 <link rel="stylesheet" href="/assets/tax.css">'''
@@ -189,7 +190,7 @@ def vendor_page(vid):
       <td class="small">{"<span class='badge warn'>Same government</span> " if any(m == g.get("office_gov_id") for m in g["_govs"]) else ""}{e(", ".join(gname(x) for x in g["_govs"]))}</td>
       <td class="small">{e(g["contributor"])}{" (spelled differently in the filing)" if g["match_confidence"] == "likely" else ""} <a class="src" href="{e(g["campaign_report_url"])}" target="_blank" rel="noopener">Report</a></td></tr>''' for g in sorted(p['gifts'], key=lambda g: (-g['contribution_amount'], g['candidate'])))
         gifts = f'''<section class="tx-sec"><div class="sec-hd"><h2 id="gifts">Campaign gifts from the business</h2><span class="muted">Business contributions only</span></div>
-    <div class="tablewrap"><table class="tx-table"><thead><tr><th scope="col">To</th><th scope="col" class="num">Gave</th><th scope="col">Dates</th><th scope="col">Governments that pay this vendor</th><th scope="col">Filed as</th></tr></thead><tbody>{gr}</tbody></table></div>
+    <div class="tablewrap"><table class="tx-table vd-table"><thead><tr><th scope="col">To</th><th scope="col" class="num">Gave</th><th scope="col">Dates</th><th scope="col">Governments that pay this vendor</th><th scope="col">Filed as</th></tr></thead><tbody>{gr}</tbody></table></div>
     <p class="note">From the Supervisor of Elections reports of current officeholders and 2026 candidates. Gifts from the company's owners or employees as individuals are not linked to it, and individual donors are never named on this site. "Same government" means the official serves on (or the candidate is running for) a government that pays this vendor. {e(NOTE)}</p></section>'''
     votes = ''
     if p['votes']:

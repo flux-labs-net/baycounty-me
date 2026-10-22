@@ -638,3 +638,10 @@ details.el-dec > .el-rh,details.el-dec > .el-cands{padding:0 18px 16px}
 .cg-d{padding:4px 10px 12px;line-height:1.5}.cg-d ul{margin:6px 0 0}.cg-d li{margin:0 0 4px}
 .cg-h{margin:26px 0 8px;font-size:1rem}.cg-h .muted{font-weight:400;font-size:.84rem;margin-left:6px}
 @media (max-width:640px){.cg summary{grid-template-columns:minmax(0,1fr) auto;row-gap:5px}.cg-track{grid-column:1/-1;grid-row:2}.cg-n em{white-space:normal}}
+
+/* Vendor tables: name on top, details stacked underneath; long lists wrap so money columns stay in view */
+.vd-table th[scope="row"]{min-width:13rem;max-width:24rem;white-space:normal;font-weight:500}
+.vd-table th[scope="row"] small,.vd-table td small{display:block;margin-top:3px;color:var(--muted);font-size:.78rem;font-weight:400;line-height:1.4}
+.vd-table th[scope="row"] small .badge{margin-right:4px;vertical-align:1px}
+.vd-table td.small{white-space:normal;min-width:9rem;max-width:16rem;color:var(--muted)}
+.vd-table td,.vd-table th{vertical-align:top}
