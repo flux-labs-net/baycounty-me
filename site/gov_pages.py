@@ -62,6 +62,9 @@ def gov_page(key):
         kp = [kpi('Residents', f'{pop:,}' if pop else '—', '2025 state estimate' if pop else '')]
     if b.get('total'):
         kp.append(kpi('Budget', money(b['total']), f'{e(b.get("status") or "FY2026")}' + (f' · {money(pr["budget"], 0) if pr.get("budget", 0) >= 1e6 else usd(pr.get("budget"))} per resident' if pr.get('budget') else '')))
+    nx = b.get('next') or {}
+    if nx.get('total'):
+        kp.append(kpi('New budget', money(nx['total']), f"{nx['fy']} · " + ('adopted Sept 2026' if nx.get('adopted') else 'final hearing held')))
     if mills is not None and key != 'schools':
         kp.append(kpi('Property tax rate', f'{mills:g} mills' if mills else 'None', f'${mills*100:,.0f} per $100,000 of taxable value' if mills else 'No city property tax'))
     elif mills:

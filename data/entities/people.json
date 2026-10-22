@@ -1,0 +1,3610 @@
+{
+ "about": "Elected officials, department leaders and 2026 local candidates named in the site's datasets, one id per person. Names are matched on first and last name with common nicknames (Doug = Douglas, Chris = Christopher, Dave = David ...), ignoring middle initials, titles and notes in parentheses; \"(D2)\" style suffixes become the district field. People who appear under more than one government are listed in multi_government for checking. No other people are included.",
+ "count": 136,
+ "people": [
+  {
+   "id": "adrian-welle",
+   "name": "Adrian Welle",
+   "aliases": [
+    "Adrian Welle"
+   ],
+   "district": null,
+   "gov_ids": [
+    "mb"
+   ],
+   "roles": [
+    {
+     "role": "former board member",
+     "gov_id": "mb",
+     "seat": "2024",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "mb",
+     "source": "votes"
+    }
+   ]
+  },
+  {
+   "id": "allan-branch",
+   "name": "Allan Branch",
+   "aliases": [
+    "Allan Branch"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pc"
+   ],
+   "roles": [
+    {
+     "role": "board member",
+     "gov_id": "pc",
+     "seat": "Mayor (at large)",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "pc",
+     "source": "votes"
+    },
+    {
+     "role": "Mayor",
+     "gov_id": "pc",
+     "source": "salaries"
+    },
+    {
+     "role": "officeholder: Panama City Mayor",
+     "gov_id": "pc",
+     "source": "campaign"
+    }
+   ]
+  },
+  {
+   "id": "alyssa-finneyfrock",
+   "name": "Alyssa Finneyfrock",
+   "aliases": [
+    "Alyssa Finneyfrock"
+   ],
+   "district": null,
+   "gov_ids": [
+    "lake_powell_cdd"
+   ],
+   "roles": [
+    {
+     "role": "2026 candidate: Lake Powell Community Development District, Seat 2",
+     "gov_id": "lake_powell_cdd",
+     "source": "finance_2026"
+    },
+    {
+     "role": "2026 candidate: Lake Powell Residential Golf Community Development District, Seat 2",
+     "gov_id": "lake_powell_cdd",
+     "source": "candidates_2026"
+    }
+   ]
+  },
+  {
+   "id": "andrew-kelly",
+   "name": "Andrew Kelly",
+   "aliases": [
+    "Andrew Kelly"
+   ],
+   "district": null,
+   "gov_ids": [
+    "parker"
+   ],
+   "roles": [
+    {
+     "role": "board member",
+     "gov_id": "parker",
+     "seat": "Mayor",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "parker",
+     "source": "votes"
+    },
+    {
+     "role": "Mayor",
+     "gov_id": "parker",
+     "source": "salaries"
+    },
+    {
+     "role": "officeholder: Parker Mayor",
+     "gov_id": "parker",
+     "source": "campaign"
+    }
+   ]
+  },
+  {
+   "id": "ann-leonard",
+   "name": "Ann Leonard",
+   "aliases": [
+    "Ann Leonard"
+   ],
+   "district": null,
+   "gov_ids": [
+    "schools"
+   ],
+   "roles": [
+    {
+     "role": "board member",
+     "gov_id": "schools",
+     "seat": "District 2",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "schools",
+     "source": "votes"
+    },
+    {
+     "role": "School Board Member, District 2",
+     "gov_id": "schools",
+     "source": "salaries"
+    },
+    {
+     "role": "officeholder: School Board, District 2",
+     "gov_id": "schools",
+     "source": "campaign"
+    }
+   ]
+  },
+  {
+   "id": "ashley-robyck",
+   "name": "Ashley Robyck",
+   "aliases": [
+    "Ashley Robyck"
+   ],
+   "district": null,
+   "gov_ids": [
+    "cw"
+   ],
+   "roles": [
+    {
+     "role": "City Clerk",
+     "gov_id": "cw",
+     "source": "salaries"
+    }
+   ]
+  },
+  {
+   "id": "barry-roberts",
+   "name": "Barry Roberts",
+   "aliases": [
+    "Barry Roberts"
+   ],
+   "district": null,
+   "gov_ids": [
+    "sp"
+   ],
+   "roles": [
+    {
+     "role": "Police Chief",
+     "gov_id": "sp",
+     "source": "salaries"
+    }
+   ]
+  },
+  {
+   "id": "beth-strobel",
+   "name": "Beth Strobel",
+   "aliases": [
+    "Beth Strobel"
+   ],
+   "district": null,
+   "gov_ids": [
+    "sp"
+   ],
+   "roles": [
+    {
+     "role": "Finance Director",
+     "gov_id": "sp",
+     "source": "salaries"
+    }
+   ]
+  },
+  {
+   "id": "bill-kinsaul",
+   "name": "Bill Kinsaul",
+   "aliases": [
+    "Bill Kinsaul"
+   ],
+   "district": null,
+   "gov_ids": [
+    "clerk"
+   ],
+   "roles": [
+    {
+     "role": "Clerk of Circuit Court & Comptroller",
+     "gov_id": "clerk",
+     "source": "salaries"
+    },
+    {
+     "role": "Clerk of Circuit Court & Comptroller",
+     "gov_id": "clerk",
+     "source": "officials-pay"
+    },
+    {
+     "role": "officeholder: Clerk of Circuit Court & Comptroller",
+     "gov_id": "clerk",
+     "source": "campaign"
+    }
+   ]
+  },
+  {
+   "id": "bob-pelletier",
+   "name": "Bob Pelletier",
+   "aliases": [
+    "Bob Pelletier"
+   ],
+   "district": null,
+   "gov_ids": [
+    "cw"
+   ],
+   "roles": [
+    {
+     "role": "board member",
+     "gov_id": "cw",
+     "seat": "Ward III",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "cw",
+     "source": "votes"
+    },
+    {
+     "role": "Commissioner, Ward III",
+     "gov_id": "cw",
+     "source": "salaries"
+    },
+    {
+     "role": "officeholder: Callaway Commissioner, Ward 3",
+     "gov_id": "cw",
+     "source": "campaign"
+    }
+   ]
+  },
+  {
+   "id": "bobby-birdsell",
+   "name": "Bobby Birdsell",
+   "aliases": [
+    "Bobby Birdsell",
+    "Bobby J. Birdsell"
+   ],
+   "district": null,
+   "gov_ids": [
+    "cw"
+   ],
+   "roles": [
+    {
+     "role": "board member",
+     "gov_id": "cw",
+     "seat": "Ward I (appointed Oct 2025)",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "cw",
+     "source": "votes"
+    },
+    {
+     "role": "Commissioner, Ward I",
+     "gov_id": "cw",
+     "source": "salaries"
+    },
+    {
+     "role": "officeholder: Callaway Commissioner, Ward 1",
+     "gov_id": "cw",
+     "source": "campaign"
+    },
+    {
+     "role": "2026 candidate: Callaway Commission, Ward 1",
+     "gov_id": "cw",
+     "source": "finance_2026"
+    },
+    {
+     "role": "2026 candidate: City of Callaway Commissioner, Ward 1",
+     "gov_id": "cw",
+     "source": "candidates_2026"
+    }
+   ]
+  },
+  {
+   "id": "brandy-waldron",
+   "name": "Brandy Waldron",
+   "aliases": [
+    "Brandy Waldron"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pc"
+   ],
+   "roles": [
+    {
+     "role": "Assistant City Manager and Interim City Clerk-Treasurer",
+     "gov_id": "pc",
+     "source": "salaries"
+    }
+   ]
+  },
+  {
+   "id": "brian-eddins",
+   "name": "Brian Eddins",
+   "aliases": [
+    "Brian Eddins"
+   ],
+   "district": null,
+   "gov_ids": [
+    "sp"
+   ],
+   "roles": [
+    {
+     "role": "Fire Chief",
+     "gov_id": "sp",
+     "source": "salaries"
+    }
+   ]
+  },
+  {
+   "id": "brian-grainger",
+   "name": "Brian Grainger",
+   "aliases": [
+    "Brian Grainger"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pc"
+   ],
+   "roles": [
+    {
+     "role": "board member",
+     "gov_id": "pc",
+     "seat": "Ward 3",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "pc",
+     "source": "votes"
+    },
+    {
+     "role": "Commissioner, Ward III",
+     "gov_id": "pc",
+     "source": "salaries"
+    },
+    {
+     "role": "officeholder: Panama City Commission, Ward III",
+     "gov_id": "pc",
+     "source": "campaign"
+    }
+   ]
+  },
+  {
+   "id": "brian-rust",
+   "name": "Brian Rust",
+   "aliases": [
+    "Brian Rust"
+   ],
+   "district": null,
+   "gov_ids": [
+    "county"
+   ],
+   "roles": [
+    {
+     "role": "2026 candidate: Bay County Commission, District 4",
+     "gov_id": "county",
+     "source": "finance_2026"
+    },
+    {
+     "role": "2026 candidate: Bay County Commission, District 4",
+     "gov_id": "county",
+     "source": "candidates_2026"
+    }
+   ]
+  },
+  {
+   "id": "carl-curti",
+   "name": "Carl Curti",
+   "aliases": [
+    "Carl Curti"
+   ],
+   "district": null,
+   "gov_ids": [
+    "sp"
+   ],
+   "roles": [
+    {
+     "role": "2026 candidate: Springfield Mayor",
+     "gov_id": "sp",
+     "source": "finance_2026"
+    },
+    {
+     "role": "2026 candidate: City of Springfield Mayor",
+     "gov_id": "sp",
+     "source": "candidates_2026"
+    }
+   ]
+  },
+  {
+   "id": "carlos-sanchez",
+   "name": "Carlos Sanchez",
+   "aliases": [
+    "Carlos Sanchez"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pcb"
+   ],
+   "roles": [
+    {
+     "role": "2026 candidate: Panama City Beach Council, Ward 1",
+     "gov_id": "pcb",
+     "source": "finance_2026"
+    },
+    {
+     "role": "2026 candidate: City of Panama City Beach Council, Ward 1",
+     "gov_id": "pcb",
+     "source": "candidates_2026"
+    }
+   ]
+  },
+  {
+   "id": "carrie-ruscoe",
+   "name": "Carrie Ruscoe",
+   "aliases": [
+    "Carrie Ruscoe"
+   ],
+   "district": null,
+   "gov_ids": [
+    "mb"
+   ],
+   "roles": [
+    {
+     "role": "2026 candidate: Mexico Beach Council, Group 4",
+     "gov_id": "mb",
+     "source": "finance_2026"
+    },
+    {
+     "role": "2026 candidate: City of Mexico Beach Council Member, Group 4",
+     "gov_id": "mb",
+     "source": "candidates_2026"
+    }
+   ]
+  },
+  {
+   "id": "chelsea-hitt",
+   "name": "Chelsea Hitt",
+   "aliases": [
+    "Chelsea Hitt"
+   ],
+   "district": null,
+   "gov_ids": [
+    "soe"
+   ],
+   "roles": [
+    {
+     "role": "Chief Administrative Deputy",
+     "gov_id": "soe",
+     "source": "salaries"
+    }
+   ]
+  },
+  {
+   "id": "chris-lightfoot",
+   "name": "Chris Lightfoot",
+   "aliases": [
+    "Chris Lightfoot"
+   ],
+   "district": null,
+   "gov_ids": [
+    "lh"
+   ],
+   "roles": [
+    {
+     "role": "City Manager",
+     "gov_id": "lh",
+     "source": "salaries"
+    },
+    {
+     "role": "City Manager",
+     "gov_id": "lh",
+     "source": "officials-pay"
+    }
+   ]
+  },
+  {
+   "id": "chris-moore",
+   "name": "Chris Moore",
+   "aliases": [
+    "Chris Moore",
+    "Christopher Moore"
+   ],
+   "district": null,
+   "gov_ids": [
+    "schools"
+   ],
+   "roles": [
+    {
+     "role": "board member",
+     "gov_id": "schools",
+     "seat": "District 3",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "schools",
+     "source": "votes"
+    },
+    {
+     "role": "School Board Member, District 3",
+     "gov_id": "schools",
+     "source": "salaries"
+    },
+    {
+     "role": "officeholder: School Board, District 3",
+     "gov_id": "schools",
+     "source": "campaign"
+    },
+    {
+     "role": "2026 candidate: School Board, District 3",
+     "gov_id": "schools",
+     "source": "finance_2026"
+    },
+    {
+     "role": "2026 candidate: Bay District School Board, District 3",
+     "gov_id": "schools",
+     "source": "candidates_2026"
+    }
+   ]
+  },
+  {
+   "id": "cindy-hamre",
+   "name": "Cindy Hamre",
+   "aliases": [
+    "Cindy Hamre"
+   ],
+   "district": null,
+   "gov_ids": [
+    "sp"
+   ],
+   "roles": [
+    {
+     "role": "board member",
+     "gov_id": "sp",
+     "seat": "Ward 4",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "sp",
+     "source": "votes"
+    },
+    {
+     "role": "Commissioner, Ward 4",
+     "gov_id": "sp",
+     "source": "salaries"
+    },
+    {
+     "role": "officeholder: Springfield Commissioner, Ward 4",
+     "gov_id": "sp",
+     "source": "campaign"
+    },
+    {
+     "role": "2026 candidate: Springfield Commission, Ward 4",
+     "gov_id": "sp",
+     "source": "finance_2026"
+    },
+    {
+     "role": "2026 candidate: City of Springfield Commissioner, Ward 4",
+     "gov_id": "sp",
+     "source": "candidates_2026"
+    }
+   ]
+  },
+  {
+   "id": "clair-pease",
+   "name": "Clair Pease",
+   "aliases": [
+    "Clair Pease"
+   ],
+   "district": "District 5",
+   "gov_ids": [
+    "county"
+   ],
+   "roles": [
+    {
+     "role": "board member",
+     "gov_id": "county",
+     "seat": "District 5 (Chairman)",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "county",
+     "source": "votes"
+    },
+    {
+     "role": "County Commissioner, District 5 (Chairman)",
+     "gov_id": "county",
+     "source": "salaries"
+    },
+    {
+     "role": "County Commissioner",
+     "gov_id": "county",
+     "source": "officials-pay"
+    },
+    {
+     "role": "officeholder: Bay County Commission, District 5",
+     "gov_id": "county",
+     "source": "campaign"
+    }
+   ]
+  },
+  {
+   "id": "clint-murphy",
+   "name": "Clint Murphy",
+   "aliases": [
+    "Clint Murphy"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pc"
+   ],
+   "roles": [
+    {
+     "role": "Director of Public Works",
+     "gov_id": "pc",
+     "source": "salaries"
+    }
+   ]
+  },
+  {
+   "id": "colleen-koch",
+   "name": "Colleen Koch",
+   "aliases": [
+    "Colleen Koch"
+   ],
+   "district": null,
+   "gov_ids": [
+    "schools"
+   ],
+   "roles": [
+    {
+     "role": "2026 candidate: School Board, District 3",
+     "gov_id": "schools",
+     "source": "finance_2026"
+    },
+    {
+     "role": "2026 candidate: Bay District School Board, District 3",
+     "gov_id": "schools",
+     "source": "candidates_2026"
+    }
+   ]
+  },
+  {
+   "id": "corey-langford",
+   "name": "Corey Langford",
+   "aliases": [
+    "Corey Langford"
+   ],
+   "district": null,
+   "gov_ids": [
+    "lh"
+   ],
+   "roles": [
+    {
+     "role": "board member",
+     "gov_id": "lh",
+     "seat": "Commissioner",
+     "source": "votes"
+    },
+    {
+     "role": "Commissioner",
+     "gov_id": "lh",
+     "source": "salaries"
+    }
+   ]
+  },
+  {
+   "id": "dan-sowell",
+   "name": "Dan Sowell",
+   "aliases": [
+    "Dan Sowell"
+   ],
+   "district": null,
+   "gov_ids": [
+    "property_appraiser"
+   ],
+   "roles": [
+    {
+     "role": "Property Appraiser",
+     "gov_id": "property_appraiser",
+     "source": "salaries"
+    },
+    {
+     "role": "Property Appraiser",
+     "gov_id": "property_appraiser",
+     "source": "officials-pay"
+    },
+    {
+     "role": "officeholder: Property Appraiser",
+     "gov_id": "property_appraiser",
+     "source": "campaign"
+    }
+   ]
+  },
+  {
+   "id": "daniel-raffield",
+   "name": "Daniel Raffield",
+   "aliases": [
+    "Daniel Raffield"
+   ],
+   "district": "District 1",
+   "gov_ids": [
+    "county"
+   ],
+   "roles": [
+    {
+     "role": "board member",
+     "gov_id": "county",
+     "seat": "District 1 (Vice Chairman)",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "county",
+     "source": "votes"
+    },
+    {
+     "role": "County Commissioner, District 1 (Vice Chairman)",
+     "gov_id": "county",
+     "source": "salaries"
+    },
+    {
+     "role": "County Commissioner",
+     "gov_id": "county",
+     "source": "officials-pay"
+    },
+    {
+     "role": "officeholder: Bay County Commission, District 1",
+     "gov_id": "county",
+     "source": "campaign"
+    }
+   ]
+  },
+  {
+   "id": "dave-lowery",
+   "name": "Dave Lowery",
+   "aliases": [
+    "Dave Lowery",
+    "David Lowery"
+   ],
+   "district": null,
+   "gov_ids": [
+    "lh"
+   ],
+   "roles": [
+    {
+     "role": "board member",
+     "gov_id": "lh",
+     "seat": "Mayor",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "lh",
+     "source": "votes"
+    },
+    {
+     "role": "Mayor",
+     "gov_id": "lh",
+     "source": "salaries"
+    },
+    {
+     "role": "officeholder: Lynn Haven Mayor",
+     "gov_id": "lh",
+     "source": "campaign"
+    },
+    {
+     "role": "2026 candidate: Lynn Haven Mayor (recall election)",
+     "gov_id": "lh",
+     "source": "finance_2026"
+    },
+    {
+     "role": "2026 candidate: City of Lynn Haven Mayor (partial term)",
+     "gov_id": "lh",
+     "source": "candidates_2026"
+    }
+   ]
+  },
+  {
+   "id": "david-baldwin",
+   "name": "David Baldwin",
+   "aliases": [
+    "David Baldwin"
+   ],
+   "district": null,
+   "gov_ids": [
+    "sheriff"
+   ],
+   "roles": [
+    {
+     "role": "Major - Law Enforcement Operations",
+     "gov_id": "sheriff",
+     "source": "salaries"
+    }
+   ]
+  },
+  {
+   "id": "david-collier",
+   "name": "David Collier",
+   "aliases": [
+    "David Collier"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pc"
+   ],
+   "roles": [
+    {
+     "role": "Fire Chief",
+     "gov_id": "pc",
+     "source": "salaries"
+    }
+   ]
+  },
+  {
+   "id": "david-griggs",
+   "name": "David Griggs",
+   "aliases": [
+    "David Griggs"
+   ],
+   "district": null,
+   "gov_ids": [
+    "cw"
+   ],
+   "roles": [
+    {
+     "role": "board member",
+     "gov_id": "cw",
+     "seat": "Ward II (Mayor Pro Tem)",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "cw",
+     "source": "votes"
+    },
+    {
+     "role": "Commissioner, Ward II (Mayor Pro Tem)",
+     "gov_id": "cw",
+     "source": "salaries"
+    },
+    {
+     "role": "officeholder: Callaway Commissioner, Ward 2",
+     "gov_id": "cw",
+     "source": "campaign"
+    }
+   ]
+  },
+  {
+   "id": "denise-kelley",
+   "name": "Denise Kelley",
+   "aliases": [
+    "Denise Kelley"
+   ],
+   "district": null,
+   "gov_ids": [
+    "schools"
+   ],
+   "roles": [
+    {
+     "role": "Deputy Superintendent - Teaching & Learning",
+     "gov_id": "schools",
+     "source": "salaries"
+    }
+   ]
+  },
+  {
+   "id": "doug-crosby",
+   "name": "Doug Crosby",
+   "aliases": [
+    "Doug Crosby"
+   ],
+   "district": "District 3",
+   "gov_ids": [
+    "county"
+   ],
+   "roles": [
+    {
+     "role": "board member",
+     "gov_id": "county",
+     "seat": "District 3",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "county",
+     "source": "votes"
+    },
+    {
+     "role": "County Commissioner, District 3",
+     "gov_id": "county",
+     "source": "salaries"
+    },
+    {
+     "role": "County Commissioner",
+     "gov_id": "county",
+     "source": "officials-pay"
+    },
+    {
+     "role": "officeholder: Bay County Commission, District 3",
+     "gov_id": "county",
+     "source": "campaign"
+    }
+   ]
+  },
+  {
+   "id": "douglas-moore",
+   "name": "Douglas Moore",
+   "aliases": [
+    "Doug Moore",
+    "Douglas Moore"
+   ],
+   "district": "District 4",
+   "gov_ids": [
+    "county"
+   ],
+   "roles": [
+    {
+     "role": "board member",
+     "gov_id": "county",
+     "seat": "District 4",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "county",
+     "source": "votes"
+    },
+    {
+     "role": "County Commissioner, District 4",
+     "gov_id": "county",
+     "source": "salaries"
+    },
+    {
+     "role": "County Commissioner",
+     "gov_id": "county",
+     "source": "officials-pay"
+    },
+    {
+     "role": "officeholder: Bay County Commission, District 4",
+     "gov_id": "county",
+     "source": "campaign"
+    }
+   ]
+  },
+  {
+   "id": "drew-whitman",
+   "name": "Drew Whitman",
+   "aliases": [
+    "Drew Whitman"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pcb"
+   ],
+   "roles": [
+    {
+     "role": "City Manager",
+     "gov_id": "pcb",
+     "source": "salaries"
+    },
+    {
+     "role": "City Manager",
+     "gov_id": "pcb",
+     "source": "officials-pay"
+    }
+   ]
+  },
+  {
+   "id": "ed-cook",
+   "name": "Ed Cook",
+   "aliases": [
+    "Ed Cook"
+   ],
+   "district": null,
+   "gov_ids": [
+    "cw"
+   ],
+   "roles": [
+    {
+     "role": "City Manager",
+     "gov_id": "cw",
+     "source": "salaries"
+    },
+    {
+     "role": "City Manager",
+     "gov_id": "cw",
+     "source": "officials-pay"
+    }
+   ]
+  },
+  {
+   "id": "erik-fosshage",
+   "name": "Erik Fosshage",
+   "aliases": [
+    "Erik Fosshage"
+   ],
+   "district": null,
+   "gov_ids": [
+    "mb"
+   ],
+   "roles": [
+    {
+     "role": "board member",
+     "gov_id": "mb",
+     "seat": "Group 2",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "mb",
+     "source": "votes"
+    },
+    {
+     "role": "Council Member (Group 2)",
+     "gov_id": "mb",
+     "source": "salaries"
+    },
+    {
+     "role": "officeholder: Mexico Beach Council, Group 2",
+     "gov_id": "mb",
+     "source": "campaign"
+    }
+   ]
+  },
+  {
+   "id": "ethan-register",
+   "name": "Ethan Register",
+   "aliases": [
+    "Ethan Register"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pcb"
+   ],
+   "roles": [
+    {
+     "role": "board member",
+     "gov_id": "pcb",
+     "seat": "Councilman",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "pcb",
+     "source": "votes"
+    },
+    {
+     "role": "Council Member, Ward 2",
+     "gov_id": "pcb",
+     "source": "salaries"
+    },
+    {
+     "role": "officeholder: Panama City Beach Council, Ward 2",
+     "gov_id": "pcb",
+     "source": "campaign"
+    }
+   ]
+  },
+  {
+   "id": "ginger-littleton",
+   "name": "Ginger Littleton",
+   "aliases": [
+    "Ginger Littleton"
+   ],
+   "district": null,
+   "gov_ids": [
+    "schools"
+   ],
+   "roles": [
+    {
+     "role": "2026 candidate: School Board, District 2",
+     "gov_id": "schools",
+     "source": "finance_2026"
+    },
+    {
+     "role": "2026 candidate: Bay District School Board, District 2",
+     "gov_id": "schools",
+     "source": "candidates_2026"
+    }
+   ]
+  },
+  {
+   "id": "glenn-manley",
+   "name": "Glenn Manley",
+   "aliases": [
+    "Glenn Manley"
+   ],
+   "district": null,
+   "gov_ids": [
+    "schools"
+   ],
+   "roles": [
+    {
+     "role": "2026 candidate: School Board, District 3",
+     "gov_id": "schools",
+     "source": "finance_2026"
+    },
+    {
+     "role": "2026 candidate: Bay District School Board, District 3",
+     "gov_id": "schools",
+     "source": "candidates_2026"
+    }
+   ]
+  },
+  {
+   "id": "grant-wittstruck",
+   "name": "Grant Wittstruck",
+   "aliases": [
+    "Grant Wittstruck"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pcb"
+   ],
+   "roles": [
+    {
+     "role": "2026 candidate: Panama City Beach Council, Ward 1",
+     "gov_id": "pcb",
+     "source": "finance_2026"
+    },
+    {
+     "role": "2026 candidate: City of Panama City Beach Council, Ward 1",
+     "gov_id": "pcb",
+     "source": "candidates_2026"
+    }
+   ]
+  },
+  {
+   "id": "greg-porta",
+   "name": "Greg Porta",
+   "aliases": [
+    "Greg Porta"
+   ],
+   "district": null,
+   "gov_ids": [
+    "lake_powell_cdd"
+   ],
+   "roles": [
+    {
+     "role": "2026 candidate: Lake Powell Community Development District, Seat 2",
+     "gov_id": "lake_powell_cdd",
+     "source": "finance_2026"
+    },
+    {
+     "role": "2026 candidate: Lake Powell Residential Golf Community Development District, Seat 2",
+     "gov_id": "lake_powell_cdd",
+     "source": "candidates_2026"
+    }
+   ]
+  },
+  {
+   "id": "holly-buchanan",
+   "name": "Holly Buchanan",
+   "aliases": [
+    "Holly Buchanan"
+   ],
+   "district": null,
+   "gov_ids": [
+    "schools"
+   ],
+   "roles": [
+    {
+     "role": "Executive Director of Human Resources & Employee Support Services",
+     "gov_id": "schools",
+     "source": "salaries"
+    }
+   ]
+  },
+  {
+   "id": "holly-white",
+   "name": "Holly White",
+   "aliases": [
+    "Holly White"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pcb"
+   ],
+   "roles": [
+    {
+     "role": "Assistant City Manager",
+     "gov_id": "pcb",
+     "source": "salaries"
+    }
+   ]
+  },
+  {
+   "id": "jack-griffis",
+   "name": "Jack Griffis",
+   "aliases": [
+    "Jack Griffis"
+   ],
+   "district": null,
+   "gov_ids": [
+    "sp"
+   ],
+   "roles": [
+    {
+     "role": "board member",
+     "gov_id": "sp",
+     "seat": "Ward 1",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "sp",
+     "source": "votes"
+    },
+    {
+     "role": "Commissioner, Ward 1",
+     "gov_id": "sp",
+     "source": "salaries"
+    },
+    {
+     "role": "officeholder: Springfield Commissioner, Ward 1",
+     "gov_id": "sp",
+     "source": "campaign"
+    }
+   ]
+  },
+  {
+   "id": "jackie-kennington",
+   "name": "Jackie Kennington",
+   "aliases": [
+    "Jackie Kennington"
+   ],
+   "district": null,
+   "gov_ids": [
+    "sp"
+   ],
+   "roles": [
+    {
+     "role": "board member",
+     "gov_id": "sp",
+     "seat": "Ward 3",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "sp",
+     "source": "votes"
+    },
+    {
+     "role": "Commissioner, Ward 3",
+     "gov_id": "sp",
+     "source": "salaries"
+    },
+    {
+     "role": "officeholder: Springfield Commissioner, Ward 3",
+     "gov_id": "sp",
+     "source": "campaign"
+    },
+    {
+     "role": "2026 candidate: Springfield Commission, Ward 3",
+     "gov_id": "sp",
+     "source": "finance_2026"
+    },
+    {
+     "role": "2026 candidate: City of Springfield Commissioner, Ward 3",
+     "gov_id": "sp",
+     "source": "candidates_2026"
+    }
+   ]
+  },
+  {
+   "id": "james-baxley",
+   "name": "James Baxley",
+   "aliases": [
+    "James Baxley"
+   ],
+   "district": null,
+   "gov_ids": [
+    "parker"
+   ],
+   "roles": [
+    {
+     "role": "Chief of Police",
+     "gov_id": "parker",
+     "source": "salaries"
+    }
+   ]
+  },
+  {
+   "id": "jamie-kirkland",
+   "name": "Jamie Kirkland",
+   "aliases": [
+    "Jamie Kirkland"
+   ],
+   "district": null,
+   "gov_ids": [
+    "cw"
+   ],
+   "roles": [
+    {
+     "role": "2026 candidate: Callaway Commission, Ward 2",
+     "gov_id": "cw",
+     "source": "finance_2026"
+    },
+    {
+     "role": "2026 candidate: City of Callaway Commissioner, Ward 2",
+     "gov_id": "cw",
+     "source": "candidates_2026"
+    }
+   ]
+  },
+  {
+   "id": "jamie-warrick",
+   "name": "Jamie Warrick",
+   "aliases": [
+    "Jamie Warrick"
+   ],
+   "district": null,
+   "gov_ids": [
+    "lh"
+   ],
+   "roles": [
+    {
+     "role": "board member",
+     "gov_id": "lh",
+     "seat": "Commissioner",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "lh",
+     "source": "votes"
+    },
+    {
+     "role": "Commissioner",
+     "gov_id": "lh",
+     "source": "salaries"
+    },
+    {
+     "role": "officeholder: Lynn Haven Commissioner, Seat 3",
+     "gov_id": "lh",
+     "source": "campaign"
+    }
+   ]
+  },
+  {
+   "id": "janette-smith",
+   "name": "Janette Smith",
+   "aliases": [
+    "Janette Smith"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pc"
+   ],
+   "roles": [
+    {
+     "role": "City Clerk-Treasurer (former, through Aug 10, 2026)",
+     "gov_id": "pc",
+     "source": "salaries"
+    }
+   ]
+  },
+  {
+   "id": "janice-lucas",
+   "name": "Janice Lucas",
+   "aliases": [
+    "Janice Lucas"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pc"
+   ],
+   "roles": [
+    {
+     "role": "board member",
+     "gov_id": "pc",
+     "seat": "Ward 2",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "pc",
+     "source": "votes"
+    },
+    {
+     "role": "Commissioner, Ward II",
+     "gov_id": "pc",
+     "source": "salaries"
+    },
+    {
+     "role": "officeholder: Panama City Commission, Ward II",
+     "gov_id": "pc",
+     "source": "campaign"
+    }
+   ]
+  },
+  {
+   "id": "jared-jones",
+   "name": "Jared Jones",
+   "aliases": [
+    "Jared Jones"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pc"
+   ],
+   "roles": [
+    {
+     "role": "Assistant City Manager",
+     "gov_id": "pc",
+     "source": "salaries"
+    }
+   ]
+  },
+  {
+   "id": "jason-adams",
+   "name": "Jason Adams",
+   "aliases": [
+    "Jason Adams"
+   ],
+   "district": null,
+   "gov_ids": [
+    "mb"
+   ],
+   "roles": [
+    {
+     "role": "former board member",
+     "gov_id": "mb",
+     "seat": "2024-2025",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "mb",
+     "source": "votes"
+    }
+   ]
+  },
+  {
+   "id": "jenna-haligas",
+   "name": "Jenna Haligas",
+   "aliases": [
+    "Jenna Haligas"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pc"
+   ],
+   "roles": [
+    {
+     "role": "former board member",
+     "gov_id": "pc",
+     "seat": "Ward 1",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "pc",
+     "source": "votes"
+    }
+   ]
+  },
+  {
+   "id": "jerry-register",
+   "name": "Jerry Register",
+   "aliases": [
+    "Jerry L. Register",
+    "Jerry Register"
+   ],
+   "district": null,
+   "gov_ids": [
+    "schools"
+   ],
+   "roles": [
+    {
+     "role": "board member",
+     "gov_id": "schools",
+     "seat": "District 1",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "schools",
+     "source": "votes"
+    },
+    {
+     "role": "School Board Member, District 1",
+     "gov_id": "schools",
+     "source": "salaries"
+    },
+    {
+     "role": "officeholder: School Board, District 1",
+     "gov_id": "schools",
+     "source": "campaign"
+    }
+   ]
+  },
+  {
+   "id": "jerry-smith",
+   "name": "Jerry Smith",
+   "aliases": [
+    "Jerry Smith"
+   ],
+   "district": null,
+   "gov_ids": [
+    "mb"
+   ],
+   "roles": [
+    {
+     "role": "former board member",
+     "gov_id": "mb",
+     "seat": "Mayor Pro Tem",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "mb",
+     "source": "votes"
+    }
+   ]
+  },
+  {
+   "id": "jesse-nelson",
+   "name": "Jesse Nelson",
+   "aliases": [
+    "Jesse Nelson"
+   ],
+   "district": null,
+   "gov_ids": [
+    "lh"
+   ],
+   "roles": [
+    {
+     "role": "former board member",
+     "gov_id": "lh",
+     "seat": "Mayor",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "lh",
+     "source": "votes"
+    }
+   ]
+  },
+  {
+   "id": "jim-loyed",
+   "name": "Jim Loyed",
+   "aliases": [
+    "Jim Loyed"
+   ],
+   "district": null,
+   "gov_ids": [
+    "schools"
+   ],
+   "roles": [
+    {
+     "role": "Deputy Superintendent - Business & Finance (CFO)",
+     "gov_id": "schools",
+     "source": "salaries"
+    }
+   ]
+  },
+  {
+   "id": "joel-heape",
+   "name": "Joel Heape",
+   "aliases": [
+    "Joel Heape"
+   ],
+   "district": null,
+   "gov_ids": [
+    "sheriff"
+   ],
+   "roles": [
+    {
+     "role": "Chief Deputy",
+     "gov_id": "sheriff",
+     "source": "salaries"
+    }
+   ]
+  },
+  {
+   "id": "joel-schubert",
+   "name": "Joel Schubert",
+   "aliases": [
+    "Joel B. Schubert",
+    "Joel Schubert"
+   ],
+   "district": null,
+   "gov_ids": [
+    "county"
+   ],
+   "roles": [
+    {
+     "role": "County Manager",
+     "gov_id": "county",
+     "source": "salaries"
+    },
+    {
+     "role": "County Manager",
+     "gov_id": "county",
+     "source": "officials-pay"
+    }
+   ]
+  },
+  {
+   "id": "john-haley",
+   "name": "John Haley",
+   "aliases": [
+    "Dr. John L. Haley",
+    "John Haley"
+   ],
+   "district": null,
+   "gov_ids": [
+    "schools"
+   ],
+   "roles": [
+    {
+     "role": "2026 candidate: School Board, District 3",
+     "gov_id": "schools",
+     "source": "finance_2026"
+    },
+    {
+     "role": "2026 candidate: Bay District School Board, District 3",
+     "gov_id": "schools",
+     "source": "candidates_2026"
+    }
+   ]
+  },
+  {
+   "id": "john-haney",
+   "name": "John Haney",
+   "aliases": [
+    "John Haney"
+   ],
+   "district": null,
+   "gov_ids": [
+    "parker"
+   ],
+   "roles": [
+    {
+     "role": "board member",
+     "gov_id": "parker",
+     "source": "votes"
+    }
+   ]
+  },
+  {
+   "id": "jonathan-hayes",
+   "name": "Jonathan Hayes",
+   "aliases": [
+    "Jonathan Hayes"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pc"
+   ],
+   "roles": [
+    {
+     "role": "City Manager",
+     "gov_id": "pc",
+     "source": "salaries"
+    },
+    {
+     "role": "City Manager",
+     "gov_id": "pc",
+     "source": "officials-pay"
+    }
+   ]
+  },
+  {
+   "id": "josh-balkom",
+   "name": "Josh Balkom",
+   "aliases": [
+    "Josh Balkom"
+   ],
+   "district": null,
+   "gov_ids": [
+    "schools"
+   ],
+   "roles": [
+    {
+     "role": "Deputy Superintendent - Operational Services",
+     "gov_id": "schools",
+     "source": "salaries"
+    }
+   ]
+  },
+  {
+   "id": "josh-street",
+   "name": "Josh Street",
+   "aliases": [
+    "Josh Street"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pc"
+   ],
+   "roles": [
+    {
+     "role": "board member",
+     "gov_id": "pc",
+     "seat": "Ward 4",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "pc",
+     "source": "votes"
+    },
+    {
+     "role": "Commissioner, Ward IV",
+     "gov_id": "pc",
+     "source": "salaries"
+    },
+    {
+     "role": "officeholder: Panama City Commission, Ward IV",
+     "gov_id": "pc",
+     "source": "campaign"
+    }
+   ]
+  },
+  {
+   "id": "judy-tinder",
+   "name": "Judy Tinder",
+   "aliases": [
+    "Judy Tinder"
+   ],
+   "district": null,
+   "gov_ids": [
+    "lh"
+   ],
+   "roles": [
+    {
+     "role": "board member",
+     "gov_id": "lh",
+     "seat": "Former commissioner (votes through Sep 2026)",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "lh",
+     "source": "votes"
+    }
+   ]
+  },
+  {
+   "id": "judy-vandergrift",
+   "name": "Judy Vandergrift",
+   "aliases": [
+    "Judy Vandergrift"
+   ],
+   "district": null,
+   "gov_ids": [
+    "lh"
+   ],
+   "roles": [
+    {
+     "role": "former board member",
+     "gov_id": "lh",
+     "seat": "Commissioner",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "lh",
+     "source": "votes"
+    }
+   ]
+  },
+  {
+   "id": "karen-custer",
+   "name": "Karen Custer",
+   "aliases": [
+    "Karen Custer"
+   ],
+   "district": null,
+   "gov_ids": [
+    "cw"
+   ],
+   "roles": [
+    {
+     "role": "2026 candidate: Callaway Commission, Ward 1",
+     "gov_id": "cw",
+     "source": "finance_2026"
+    },
+    {
+     "role": "2026 candidate: City of Callaway Commissioner, Ward 1",
+     "gov_id": "cw",
+     "source": "candidates_2026"
+    }
+   ]
+  },
+  {
+   "id": "katy-bodiford",
+   "name": "Katy Bodiford",
+   "aliases": [
+    "Katy Bodiford"
+   ],
+   "district": null,
+   "gov_ids": [
+    "parker"
+   ],
+   "roles": [
+    {
+     "role": "board member",
+     "gov_id": "parker",
+     "seat": "Council Member",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "parker",
+     "source": "votes"
+    },
+    {
+     "role": "Council Member",
+     "gov_id": "parker",
+     "source": "salaries"
+    },
+    {
+     "role": "officeholder: Parker Council, Seat 3",
+     "gov_id": "parker",
+     "source": "campaign"
+    }
+   ]
+  },
+  {
+   "id": "keith-bryant",
+   "name": "Keith C. Bryant",
+   "aliases": [
+    "Keith C. Bryant"
+   ],
+   "district": null,
+   "gov_ids": [
+    "county"
+   ],
+   "roles": [
+    {
+     "role": "Deputy County Manager",
+     "gov_id": "county",
+     "source": "salaries"
+    }
+   ]
+  },
+  {
+   "id": "keith-mefford",
+   "name": "Keith Mefford",
+   "aliases": [
+    "Keith Mefford"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pc"
+   ],
+   "roles": [
+    {
+     "role": "Director, Parks, Culture and Recreation",
+     "gov_id": "pc",
+     "source": "salaries"
+    }
+   ]
+  },
+  {
+   "id": "kenneth-ayers",
+   "name": "Kenneth L. Ayers, Jr.",
+   "aliases": [
+    "Kenneth L. Ayers, Jr."
+   ],
+   "district": null,
+   "gov_ids": [
+    "cw"
+   ],
+   "roles": [
+    {
+     "role": "board member",
+     "gov_id": "cw",
+     "seat": "Ward IV",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "cw",
+     "source": "votes"
+    },
+    {
+     "role": "Commissioner, Ward IV",
+     "gov_id": "cw",
+     "source": "salaries"
+    },
+    {
+     "role": "officeholder: Callaway Commissioner, Ward 4",
+     "gov_id": "cw",
+     "source": "campaign"
+    }
+   ]
+  },
+  {
+   "id": "kenneth-black",
+   "name": "Kenneth Black",
+   "aliases": [
+    "Kenneth Black"
+   ],
+   "district": null,
+   "gov_ids": [
+    "lake_powell_cdd"
+   ],
+   "roles": [
+    {
+     "role": "2026 candidate: Lake Powell Community Development District, Seat 5",
+     "gov_id": "lake_powell_cdd",
+     "source": "finance_2026"
+    },
+    {
+     "role": "2026 candidate: Lake Powell Residential Golf Community Development District, Seat 5",
+     "gov_id": "lake_powell_cdd",
+     "source": "candidates_2026"
+    }
+   ]
+  },
+  {
+   "id": "kevin-williams",
+   "name": "Kevin Williams",
+   "aliases": [
+    "Kevin Williams"
+   ],
+   "district": null,
+   "gov_ids": [
+    "lake_powell_cdd"
+   ],
+   "roles": [
+    {
+     "role": "2026 candidate: Lake Powell Community Development District, Seat 5",
+     "gov_id": "lake_powell_cdd",
+     "source": "finance_2026"
+    },
+    {
+     "role": "2026 candidate: Lake Powell Residential Golf Community Development District, Seat 5",
+     "gov_id": "lake_powell_cdd",
+     "source": "candidates_2026"
+    }
+   ]
+  },
+  {
+   "id": "lee-walters",
+   "name": "Lee Walters",
+   "aliases": [
+    "Lee Walters"
+   ],
+   "district": null,
+   "gov_ids": [
+    "schools"
+   ],
+   "roles": [
+    {
+     "role": "Deputy Superintendent - Facilities & Maintenance",
+     "gov_id": "schools",
+     "source": "salaries"
+    }
+   ]
+  },
+  {
+   "id": "leslie-glaze",
+   "name": "Leslie Glaze",
+   "aliases": [
+    "Leslie Glaze"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pc"
+   ],
+   "roles": [
+    {
+     "role": "City Clerk-Treasurer (proposed contract)",
+     "gov_id": "pc",
+     "source": "salaries"
+    }
+   ]
+  },
+  {
+   "id": "linda-hamilton",
+   "name": "Linda Hamilton",
+   "aliases": [
+    "Linda Hamilton"
+   ],
+   "district": null,
+   "gov_ids": [
+    "mb"
+   ],
+   "roles": [
+    {
+     "role": "board member",
+     "gov_id": "mb",
+     "seat": "Group 3",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "mb",
+     "source": "votes"
+    },
+    {
+     "role": "Council Member (Group 3)",
+     "gov_id": "mb",
+     "source": "salaries"
+    },
+    {
+     "role": "officeholder: Mexico Beach Council, Group 3",
+     "gov_id": "mb",
+     "source": "campaign"
+    }
+   ]
+  },
+  {
+   "id": "lisa-logan",
+   "name": "Lisa Logan",
+   "aliases": [
+    "Lisa Logan"
+   ],
+   "district": null,
+   "gov_ids": [
+    "mb"
+   ],
+   "roles": [
+    {
+     "role": "board member",
+     "gov_id": "mb",
+     "seat": "Group 4 (appointed April 2026)",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "mb",
+     "source": "votes"
+    },
+    {
+     "role": "Council Member (Group 4, appointed April 2026)",
+     "gov_id": "mb",
+     "source": "salaries"
+    }
+   ]
+  },
+  {
+   "id": "mark-mcqueen",
+   "name": "Mark McQueen",
+   "aliases": [
+    "Mark McQueen"
+   ],
+   "district": null,
+   "gov_ids": [
+    "county",
+    "schools"
+   ],
+   "roles": [
+    {
+     "role": "Superintendent of Schools",
+     "gov_id": "schools",
+     "source": "salaries"
+    },
+    {
+     "role": "Superintendent of Schools",
+     "gov_id": "county",
+     "source": "officials-pay"
+    },
+    {
+     "role": "officeholder: Superintendent of Schools",
+     "gov_id": "schools",
+     "source": "campaign"
+    }
+   ]
+  },
+  {
+   "id": "mark-rega",
+   "name": "Mark Rega",
+   "aliases": [
+    "Mark Rega"
+   ],
+   "district": null,
+   "gov_ids": [
+    "parker"
+   ],
+   "roles": [
+    {
+     "role": "board member",
+     "gov_id": "parker",
+     "seat": "Council Member",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "parker",
+     "source": "votes"
+    },
+    {
+     "role": "Council Member",
+     "gov_id": "parker",
+     "source": "salaries"
+    }
+   ]
+  },
+  {
+   "id": "mark-sheldon",
+   "name": "Mark Sheldon",
+   "aliases": [
+    "Mark Sheldon"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pcb"
+   ],
+   "roles": [
+    {
+     "role": "former board member",
+     "gov_id": "pcb",
+     "seat": "Mayor",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "pcb",
+     "source": "votes"
+    }
+   ]
+  },
+  {
+   "id": "mark-smith",
+   "name": "Mark Smith",
+   "aliases": [
+    "Mark Smith"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pc"
+   ],
+   "roles": [
+    {
+     "role": "Police Chief",
+     "gov_id": "pc",
+     "source": "salaries"
+    }
+   ]
+  },
+  {
+   "id": "mary-coburn",
+   "name": "Mary Coburn",
+   "aliases": [
+    "Mary Coburn"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pcb"
+   ],
+   "roles": [
+    {
+     "role": "board member",
+     "gov_id": "pcb",
+     "seat": "Councilmember",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "pcb",
+     "source": "votes"
+    },
+    {
+     "role": "Council Member, Ward 3",
+     "gov_id": "pcb",
+     "source": "salaries"
+    },
+    {
+     "role": "officeholder: Panama City Beach Council, Ward 3",
+     "gov_id": "pcb",
+     "source": "campaign"
+    },
+    {
+     "role": "2026 candidate: Panama City Beach Council, Ward 3",
+     "gov_id": "pcb",
+     "source": "finance_2026"
+    },
+    {
+     "role": "2026 candidate: City of Panama City Beach Council, Ward 3",
+     "gov_id": "pcb",
+     "source": "candidates_2026"
+    }
+   ]
+  },
+  {
+   "id": "mell-smigielski",
+   "name": "Mell Smigielski",
+   "aliases": [
+    "Mell Smigielski"
+   ],
+   "district": null,
+   "gov_ids": [
+    "mb"
+   ],
+   "roles": [
+    {
+     "role": "City Administrator",
+     "gov_id": "mb",
+     "source": "salaries"
+    }
+   ]
+  },
+  {
+   "id": "michael-fuller",
+   "name": "Michael Fuller",
+   "aliases": [
+    "Michael Fuller"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pc"
+   ],
+   "roles": [
+    {
+     "role": "Director, Development Services",
+     "gov_id": "pc",
+     "source": "salaries"
+    }
+   ]
+  },
+  {
+   "id": "michael-jarman",
+   "name": "Michael Jarman",
+   "aliases": [
+    "Michael Jarman"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pcb"
+   ],
+   "roles": [
+    {
+     "role": "board member",
+     "gov_id": "pcb",
+     "seat": "Vice Mayor / Ward",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "pcb",
+     "source": "votes"
+    },
+    {
+     "role": "Vice Mayor, Ward 4",
+     "gov_id": "pcb",
+     "source": "salaries"
+    },
+    {
+     "role": "officeholder: Panama City Beach Council, Ward 4",
+     "gov_id": "pcb",
+     "source": "campaign"
+    }
+   ]
+  },
+  {
+   "id": "michael-petty",
+   "name": "Michael Petty",
+   "aliases": [
+    "Michael Petty"
+   ],
+   "district": null,
+   "gov_ids": [
+    "schools"
+   ],
+   "roles": [
+    {
+     "role": "2026 candidate: School Board, District 2",
+     "gov_id": "schools",
+     "source": "finance_2026"
+    },
+    {
+     "role": "2026 candidate: Bay District School Board, District 2",
+     "gov_id": "schools",
+     "source": "candidates_2026"
+    }
+   ]
+  },
+  {
+   "id": "michael-rohan",
+   "name": "Michael Rohan",
+   "aliases": [
+    "Michael Rohan"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pc"
+   ],
+   "roles": [
+    {
+     "role": "former board member",
+     "gov_id": "pc",
+     "seat": "Mayor",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "pc",
+     "source": "votes"
+    }
+   ]
+  },
+  {
+   "id": "michele-miller",
+   "name": "Michele Miller",
+   "aliases": [
+    "Michele Miller"
+   ],
+   "district": null,
+   "gov_ids": [
+    "mb"
+   ],
+   "roles": [
+    {
+     "role": "former board member",
+     "gov_id": "mb",
+     "seat": "Mayor",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "mb",
+     "source": "votes"
+    }
+   ]
+  },
+  {
+   "id": "nevin-zimmerman",
+   "name": "Nevin Zimmerman",
+   "aliases": [
+    "Nevin Zimmerman"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pc"
+   ],
+   "roles": [
+    {
+     "role": "City Attorney",
+     "gov_id": "pc",
+     "source": "salaries"
+    }
+   ]
+  },
+  {
+   "id": "nick-atkinson",
+   "name": "Nick Atkinson",
+   "aliases": [
+    "Nick Atkinson"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pcb"
+   ],
+   "roles": [
+    {
+     "role": "2026 candidate: Panama City Beach Council, Ward 3",
+     "gov_id": "pcb",
+     "source": "finance_2026"
+    },
+    {
+     "role": "2026 candidate: City of Panama City Beach Council, Ward 3",
+     "gov_id": "pcb",
+     "source": "candidates_2026"
+    }
+   ]
+  },
+  {
+   "id": "nina-ward",
+   "name": "Nina Ward",
+   "aliases": [
+    "Nina Ward"
+   ],
+   "district": null,
+   "gov_ids": [
+    "soe"
+   ],
+   "roles": [
+    {
+     "role": "Supervisor of Elections",
+     "gov_id": "soe",
+     "source": "salaries"
+    },
+    {
+     "role": "Supervisor of Elections",
+     "gov_id": "soe",
+     "source": "officials-pay"
+    },
+    {
+     "role": "officeholder: Supervisor of Elections",
+     "gov_id": "soe",
+     "source": "campaign"
+    }
+   ]
+  },
+  {
+   "id": "pamn-henderson",
+   "name": "Pamn Henderson",
+   "aliases": [
+    "Pamn Henderson"
+   ],
+   "district": null,
+   "gov_ids": [
+    "cw"
+   ],
+   "roles": [
+    {
+     "role": "board member",
+     "gov_id": "cw",
+     "seat": "Mayor",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "cw",
+     "source": "votes"
+    },
+    {
+     "role": "Mayor",
+     "gov_id": "cw",
+     "source": "salaries"
+    },
+    {
+     "role": "officeholder: Callaway Mayor",
+     "gov_id": "cw",
+     "source": "campaign"
+    }
+   ]
+  },
+  {
+   "id": "parker-mcclellan",
+   "name": "Parker W. McClellan Jr.",
+   "aliases": [
+    "Parker W. McClellan Jr."
+   ],
+   "district": null,
+   "gov_ids": [
+    "airport"
+   ],
+   "roles": [
+    {
+     "role": "Executive Director",
+     "gov_id": "airport",
+     "source": "salaries"
+    }
+   ]
+  },
+  {
+   "id": "pat-perno",
+   "name": "Pat Perno",
+   "aliases": [
+    "Pat Perno"
+   ],
+   "district": null,
+   "gov_ids": [
+    "lh"
+   ],
+   "roles": [
+    {
+     "role": "board member",
+     "gov_id": "lh",
+     "seat": "Commissioner",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "lh",
+     "source": "votes"
+    },
+    {
+     "role": "Commissioner",
+     "gov_id": "lh",
+     "source": "salaries"
+    },
+    {
+     "role": "officeholder: Lynn Haven Commissioner, Seat 2",
+     "gov_id": "lh",
+     "source": "campaign"
+    }
+   ]
+  },
+  {
+   "id": "paul-casto",
+   "name": "Paul Casto",
+   "aliases": [
+    "Paul Casto"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pcb"
+   ],
+   "roles": [
+    {
+     "role": "board member",
+     "gov_id": "pcb",
+     "seat": "Councilman",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "pcb",
+     "source": "votes"
+    },
+    {
+     "role": "Council Member, Ward 1",
+     "gov_id": "pcb",
+     "source": "salaries"
+    },
+    {
+     "role": "officeholder: Panama City Beach Council, Ward 1",
+     "gov_id": "pcb",
+     "source": "campaign"
+    }
+   ]
+  },
+  {
+   "id": "phil-chester",
+   "name": "Phil Chester",
+   "aliases": [
+    "Phil Chester"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pcb"
+   ],
+   "roles": [
+    {
+     "role": "former board member",
+     "gov_id": "pcb",
+     "seat": "Councilman",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "pcb",
+     "source": "votes"
+    }
+   ]
+  },
+  {
+   "id": "rachelle-stanley",
+   "name": "Rachelle Stanley",
+   "aliases": [
+    "Rachelle Stanley"
+   ],
+   "district": null,
+   "gov_ids": [
+    "parker"
+   ],
+   "roles": [
+    {
+     "role": "City Clerk",
+     "gov_id": "parker",
+     "source": "salaries"
+    }
+   ]
+  },
+  {
+   "id": "ralph-hammond",
+   "name": "Ralph Hammond",
+   "aliases": [
+    "Ralph Hammond",
+    "Ralph L. Hammond"
+   ],
+   "district": null,
+   "gov_ids": [
+    "sp"
+   ],
+   "roles": [
+    {
+     "role": "board member",
+     "gov_id": "sp",
+     "seat": "Mayor",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "sp",
+     "source": "votes"
+    },
+    {
+     "role": "Mayor",
+     "gov_id": "sp",
+     "source": "salaries"
+    },
+    {
+     "role": "officeholder: Springfield Mayor",
+     "gov_id": "sp",
+     "source": "campaign"
+    },
+    {
+     "role": "2026 candidate: Springfield Mayor",
+     "gov_id": "sp",
+     "source": "finance_2026"
+    },
+    {
+     "role": "2026 candidate: City of Springfield Mayor",
+     "gov_id": "sp",
+     "source": "candidates_2026"
+    }
+   ]
+  },
+  {
+   "id": "richard-chval",
+   "name": "Richard Chval",
+   "aliases": [
+    "Richard Chval"
+   ],
+   "district": null,
+   "gov_ids": [
+    "sp"
+   ],
+   "roles": [
+    {
+     "role": "board member",
+     "gov_id": "sp",
+     "seat": "Ward 2",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "sp",
+     "source": "votes"
+    },
+    {
+     "role": "Commissioner, Ward 2",
+     "gov_id": "sp",
+     "source": "salaries"
+    },
+    {
+     "role": "officeholder: Springfield Commissioner, Ward 2",
+     "gov_id": "sp",
+     "source": "campaign"
+    }
+   ]
+  },
+  {
+   "id": "richard-mcconnell",
+   "name": "Richard A. McConnell",
+   "aliases": [
+    "Richard A. McConnell"
+   ],
+   "district": null,
+   "gov_ids": [
+    "airport"
+   ],
+   "roles": [
+    {
+     "role": "Deputy Executive Director",
+     "gov_id": "airport",
+     "source": "salaries"
+    }
+   ]
+  },
+  {
+   "id": "richard-wolff",
+   "name": "Richard Wolff",
+   "aliases": [
+    "Richard Wolff"
+   ],
+   "district": null,
+   "gov_ids": [
+    "mb"
+   ],
+   "roles": [
+    {
+     "role": "board member",
+     "gov_id": "mb",
+     "seat": "Mayor (Group 1)",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "mb",
+     "source": "votes"
+    },
+    {
+     "role": "Mayor (Group 1)",
+     "gov_id": "mb",
+     "source": "salaries"
+    },
+    {
+     "role": "officeholder: Mexico Beach Mayor (Group 1)",
+     "gov_id": "mb",
+     "source": "campaign"
+    }
+   ]
+  },
+  {
+   "id": "rick-anglin",
+   "name": "Rick Anglin",
+   "aliases": [
+    "Rick Anglin"
+   ],
+   "district": null,
+   "gov_ids": [
+    "sheriff"
+   ],
+   "roles": [
+    {
+     "role": "Major - Jail, Warrants & Court Security",
+     "gov_id": "sheriff",
+     "source": "salaries"
+    }
+   ]
+  },
+  {
+   "id": "robbie-hughes",
+   "name": "Robbie Hughes",
+   "aliases": [
+    "Robbie Hughes"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pc"
+   ],
+   "roles": [
+    {
+     "role": "board member",
+     "gov_id": "pc",
+     "seat": "Ward 1",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "pc",
+     "source": "votes"
+    },
+    {
+     "role": "Commissioner, Ward I",
+     "gov_id": "pc",
+     "source": "salaries"
+    },
+    {
+     "role": "officeholder: Panama City Commission, Ward I",
+     "gov_id": "pc",
+     "source": "campaign"
+    }
+   ]
+  },
+  {
+   "id": "robert-carroll",
+   "name": "Robert Carroll",
+   "aliases": [
+    "Robert Carroll"
+   ],
+   "district": "District 2",
+   "gov_ids": [
+    "county"
+   ],
+   "roles": [
+    {
+     "role": "board member",
+     "gov_id": "county",
+     "seat": "District 2",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "county",
+     "source": "votes"
+    },
+    {
+     "role": "County Commissioner, District 2",
+     "gov_id": "county",
+     "source": "salaries"
+    },
+    {
+     "role": "County Commissioner",
+     "gov_id": "county",
+     "source": "officials-pay"
+    },
+    {
+     "role": "officeholder: Bay County Commission, District 2",
+     "gov_id": "county",
+     "source": "campaign"
+    },
+    {
+     "role": "2026 candidate: Bay County Commission, District 2",
+     "gov_id": "county",
+     "source": "finance_2026"
+    },
+    {
+     "role": "2026 candidate: Bay County Commission, District 2",
+     "gov_id": "county",
+     "source": "candidates_2026"
+    }
+   ]
+  },
+  {
+   "id": "robert-majka",
+   "name": "Robert (Bob) Majka",
+   "aliases": [
+    "Robert (Bob) Majka"
+   ],
+   "district": null,
+   "gov_ids": [
+    "port"
+   ],
+   "roles": [
+    {
+     "role": "Executive Director",
+     "gov_id": "port",
+     "source": "salaries"
+    }
+   ]
+  },
+  {
+   "id": "ron-chaple",
+   "name": "Ron Chaple",
+   "aliases": [
+    "Ron Chaple"
+   ],
+   "district": null,
+   "gov_ids": [
+    "parker"
+   ],
+   "roles": [
+    {
+     "role": "board member",
+     "gov_id": "parker",
+     "seat": "Council Member",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "parker",
+     "source": "votes"
+    },
+    {
+     "role": "Council Member",
+     "gov_id": "parker",
+     "source": "salaries"
+    },
+    {
+     "role": "officeholder: Parker Council, Seat 1",
+     "gov_id": "parker",
+     "source": "campaign"
+    }
+   ]
+  },
+  {
+   "id": "sam-peebles",
+   "name": "Sam Peebles",
+   "aliases": [
+    "Sam Peebles"
+   ],
+   "district": null,
+   "gov_ids": [
+    "lh"
+   ],
+   "roles": [
+    {
+     "role": "board member",
+     "gov_id": "lh",
+     "seat": "Commissioner (Mayor Pro Tem in 2025)",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "lh",
+     "source": "votes"
+    },
+    {
+     "role": "Commissioner",
+     "gov_id": "lh",
+     "source": "salaries"
+    },
+    {
+     "role": "officeholder: Lynn Haven Commissioner, Seat 1",
+     "gov_id": "lh",
+     "source": "campaign"
+    }
+   ]
+  },
+  {
+   "id": "scott-chandler",
+   "name": "Scott Chandler",
+   "aliases": [
+    "Scott Chandler"
+   ],
+   "district": null,
+   "gov_ids": [
+    "county"
+   ],
+   "roles": [
+    {
+     "role": "Chief Infrastructure Officer",
+     "gov_id": "county",
+     "source": "salaries"
+    }
+   ]
+  },
+  {
+   "id": "scott-davis",
+   "name": "Scott Davis",
+   "aliases": [
+    "Scott Davis"
+   ],
+   "district": null,
+   "gov_ids": [
+    "cw"
+   ],
+   "roles": [
+    {
+     "role": "former board member",
+     "gov_id": "cw",
+     "seat": "Ward I",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "cw",
+     "source": "votes"
+    }
+   ]
+  },
+  {
+   "id": "scott-duvall",
+   "name": "Scott Duvall",
+   "aliases": [
+    "Scott Duvall"
+   ],
+   "district": null,
+   "gov_ids": [
+    "county"
+   ],
+   "roles": [
+    {
+     "role": "2026 candidate: Bay County Commission, District 4",
+     "gov_id": "county",
+     "source": "finance_2026"
+    },
+    {
+     "role": "2026 candidate: Bay County Commission, District 4",
+     "gov_id": "county",
+     "source": "candidates_2026"
+    }
+   ]
+  },
+  {
+   "id": "scott-heilmann",
+   "name": "Scott Heilmann",
+   "aliases": [
+    "Scott Heilmann"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pcb"
+   ],
+   "roles": [
+    {
+     "role": "2026 candidate: Panama City Beach Council, Ward 1",
+     "gov_id": "pcb",
+     "source": "finance_2026"
+    },
+    {
+     "role": "2026 candidate: City of Panama City Beach Council, Ward 1",
+     "gov_id": "pcb",
+     "source": "candidates_2026"
+    }
+   ]
+  },
+  {
+   "id": "shannon-aufdencamp",
+   "name": "Shannon Aufdencamp",
+   "aliases": [
+    "Shannon Aufdencamp"
+   ],
+   "district": null,
+   "gov_ids": [
+    "cw"
+   ],
+   "roles": [
+    {
+     "role": "2026 candidate: Callaway Commission, Ward 2",
+     "gov_id": "cw",
+     "source": "finance_2026"
+    },
+    {
+     "role": "2026 candidate: City of Callaway Commissioner, Ward 2",
+     "gov_id": "cw",
+     "source": "candidates_2026"
+    }
+   ]
+  },
+  {
+   "id": "shawn-selph",
+   "name": "Shawn Selph",
+   "aliases": [
+    "Shawn Selph"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pc"
+   ],
+   "roles": [
+    {
+     "role": "Logistics Director",
+     "gov_id": "pc",
+     "source": "salaries"
+    }
+   ]
+  },
+  {
+   "id": "shiela-ware",
+   "name": "Shiela Ware",
+   "aliases": [
+    "Shiela Ware"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pc"
+   ],
+   "roles": [
+    {
+     "role": "Director, Housing (CDBG/SHIP)",
+     "gov_id": "pc",
+     "source": "salaries"
+    }
+   ]
+  },
+  {
+   "id": "spring-overway",
+   "name": "Spring Overway",
+   "aliases": [
+    "Spring Overway"
+   ],
+   "district": null,
+   "gov_ids": [
+    "cw"
+   ],
+   "roles": [
+    {
+     "role": "2026 candidate: Callaway Commission, Ward 2",
+     "gov_id": "cw",
+     "source": "finance_2026"
+    },
+    {
+     "role": "2026 candidate: City of Callaway Commissioner, Ward 2",
+     "gov_id": "cw",
+     "source": "candidates_2026"
+    }
+   ]
+  },
+  {
+   "id": "steve-cox",
+   "name": "Steve Cox",
+   "aliases": [
+    "Steve Cox"
+   ],
+   "district": null,
+   "gov_ids": [
+    "mb"
+   ],
+   "roles": [
+    {
+     "role": "board member",
+     "gov_id": "mb",
+     "seat": "Group 5",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "mb",
+     "source": "votes"
+    },
+    {
+     "role": "Council Member (Group 5)",
+     "gov_id": "mb",
+     "source": "salaries"
+    },
+    {
+     "role": "officeholder: Mexico Beach Council, Group 5",
+     "gov_id": "mb",
+     "source": "campaign"
+    },
+    {
+     "role": "2026 candidate: Mexico Beach Council, Group 5",
+     "gov_id": "mb",
+     "source": "finance_2026"
+    },
+    {
+     "role": "2026 candidate: City of Mexico Beach Council Member, Group 5",
+     "gov_id": "mb",
+     "source": "candidates_2026"
+    }
+   ]
+  },
+  {
+   "id": "steve-moss",
+   "name": "Steve Moss",
+   "aliases": [
+    "Steve Moss"
+   ],
+   "district": null,
+   "gov_ids": [
+    "schools"
+   ],
+   "roles": [
+    {
+     "role": "board member",
+     "gov_id": "schools",
+     "seat": "District 5",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "schools",
+     "source": "votes"
+    },
+    {
+     "role": "School Board Member, District 5",
+     "gov_id": "schools",
+     "source": "salaries"
+    },
+    {
+     "role": "officeholder: School Board, District 5",
+     "gov_id": "schools",
+     "source": "campaign"
+    },
+    {
+     "role": "2026 candidate: School Board, District 5",
+     "gov_id": "schools",
+     "source": "finance_2026"
+    },
+    {
+     "role": "2026 candidate: Bay District School Board, District 5",
+     "gov_id": "schools",
+     "source": "candidates_2026"
+    }
+   ]
+  },
+  {
+   "id": "stuart-tettemer",
+   "name": "Stuart Tettemer",
+   "aliases": [
+    "Stuart Tettemer"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pcb"
+   ],
+   "roles": [
+    {
+     "role": "board member",
+     "gov_id": "pcb",
+     "seat": "Mayor",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "pcb",
+     "source": "votes"
+    },
+    {
+     "role": "Mayor",
+     "gov_id": "pcb",
+     "source": "salaries"
+    },
+    {
+     "role": "officeholder: Panama City Beach Mayor",
+     "gov_id": "pcb",
+     "source": "campaign"
+    }
+   ]
+  },
+  {
+   "id": "sunny-reid",
+   "name": "Sunny Reid",
+   "aliases": [
+    "Sunny Reid"
+   ],
+   "district": null,
+   "gov_ids": [
+    "county"
+   ],
+   "roles": [
+    {
+     "role": "2026 candidate: Bay County Commission, District 4",
+     "gov_id": "county",
+     "source": "finance_2026"
+    },
+    {
+     "role": "2026 candidate: Bay County Commission, District 4",
+     "gov_id": "county",
+     "source": "candidates_2026"
+    }
+   ]
+  },
+  {
+   "id": "suzanne-mcdowell",
+   "name": "Suzanne McDowell",
+   "aliases": [
+    "Suzanne McDowell"
+   ],
+   "district": null,
+   "gov_ids": [
+    "county"
+   ],
+   "roles": [
+    {
+     "role": "2026 candidate: Bay County Commission, District 4",
+     "gov_id": "county",
+     "source": "finance_2026"
+    },
+    {
+     "role": "2026 candidate: Bay County Commission, District 4",
+     "gov_id": "county",
+     "source": "candidates_2026"
+    }
+   ]
+  },
+  {
+   "id": "tammy-brunson",
+   "name": "Tammy Brunson",
+   "aliases": [
+    "Tammy Brunson"
+   ],
+   "district": null,
+   "gov_ids": [
+    "mb"
+   ],
+   "roles": [
+    {
+     "role": "City Clerk",
+     "gov_id": "mb",
+     "source": "salaries"
+    }
+   ]
+  },
+  {
+   "id": "teresa-cox",
+   "name": "Teresa Cox",
+   "aliases": [
+    "Teresa Cox"
+   ],
+   "district": null,
+   "gov_ids": [
+    "sp"
+   ],
+   "roles": [
+    {
+     "role": "City Clerk",
+     "gov_id": "sp",
+     "source": "salaries"
+    }
+   ]
+  },
+  {
+   "id": "thien-cao",
+   "name": "Thien Cao",
+   "aliases": [
+    "Thien Cao"
+   ],
+   "district": null,
+   "gov_ids": [
+    "soe"
+   ],
+   "roles": [
+    {
+     "role": "Deputy Supervisor of Elections",
+     "gov_id": "soe",
+     "source": "salaries"
+    }
+   ]
+  },
+  {
+   "id": "tim-linderman",
+   "name": "Tim Linderman",
+   "aliases": [
+    "Tim Linderman"
+   ],
+   "district": null,
+   "gov_ids": [
+    "mb"
+   ],
+   "roles": [
+    {
+     "role": "former board member",
+     "gov_id": "mb",
+     "seat": "2024",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "mb",
+     "source": "votes"
+    }
+   ]
+  },
+  {
+   "id": "tim-rosson",
+   "name": "Tim Rosson",
+   "aliases": [
+    "Tim Rosson"
+   ],
+   "district": null,
+   "gov_ids": [
+    "lake_powell_cdd"
+   ],
+   "roles": [
+    {
+     "role": "2026 candidate: Lake Powell Community Development District, Seat 5",
+     "gov_id": "lake_powell_cdd",
+     "source": "finance_2026"
+    },
+    {
+     "role": "2026 candidate: Lake Powell Residential Golf Community Development District, Seat 5",
+     "gov_id": "lake_powell_cdd",
+     "source": "candidates_2026"
+    }
+   ]
+  },
+  {
+   "id": "timothy-campbell",
+   "name": "Timothy Campbell",
+   "aliases": [
+    "Timothy Campbell"
+   ],
+   "district": null,
+   "gov_ids": [
+    "county_court"
+   ],
+   "roles": [
+    {
+     "role": "2026 candidate: Bay County Judge, Group 1",
+     "gov_id": "county_court",
+     "source": "finance_2026"
+    },
+    {
+     "role": "2026 candidate: Bay County Judge, Group 1",
+     "gov_id": "county_court",
+     "source": "candidates_2026"
+    }
+   ]
+  },
+  {
+   "id": "tommy-ford",
+   "name": "Tommy Ford",
+   "aliases": [
+    "Tommy Ford"
+   ],
+   "district": null,
+   "gov_ids": [
+    "sheriff"
+   ],
+   "roles": [
+    {
+     "role": "Sheriff",
+     "gov_id": "sheriff",
+     "source": "salaries"
+    },
+    {
+     "role": "Sheriff",
+     "gov_id": "sheriff",
+     "source": "officials-pay"
+    },
+    {
+     "role": "officeholder: Sheriff",
+     "gov_id": "sheriff",
+     "source": "campaign"
+    }
+   ]
+  },
+  {
+   "id": "tommy-hamm",
+   "name": "Tommy Hamm",
+   "aliases": [
+    "Tommy Hamm"
+   ],
+   "district": null,
+   "gov_ids": [
+    "county"
+   ],
+   "roles": [
+    {
+     "role": "former board member",
+     "gov_id": "county",
+     "seat": "District 1",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "county",
+     "source": "votes"
+    }
+   ]
+  },
+  {
+   "id": "tonya-barrow",
+   "name": "Tonya Barrow",
+   "aliases": [
+    "Tonya Barrow"
+   ],
+   "district": null,
+   "gov_ids": [
+    "parker"
+   ],
+   "roles": [
+    {
+     "role": "board member",
+     "gov_id": "parker",
+     "seat": "Mayor Pro Tem",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "parker",
+     "source": "votes"
+    },
+    {
+     "role": "Mayor Pro Tem / Council Member",
+     "gov_id": "parker",
+     "source": "salaries"
+    },
+    {
+     "role": "officeholder: Parker Council, Seat 2 (Mayor Pro Tem)",
+     "gov_id": "parker",
+     "source": "campaign"
+    }
+   ]
+  },
+  {
+   "id": "tracy-smith",
+   "name": "Tracy A Smith",
+   "aliases": [
+    "Tracy A Smith"
+   ],
+   "district": null,
+   "gov_ids": [
+    "county_court"
+   ],
+   "roles": [
+    {
+     "role": "2026 candidate: Bay County Judge, Group 4",
+     "gov_id": "county_court",
+     "source": "finance_2026"
+    },
+    {
+     "role": "2026 candidate: Bay County Judge, Group 4",
+     "gov_id": "county_court",
+     "source": "candidates_2026"
+    }
+   ]
+  },
+  {
+   "id": "vickie-lewis",
+   "name": "Vickie Lewis",
+   "aliases": [
+    "Vickie Lewis"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pc"
+   ],
+   "roles": [
+    {
+     "role": "Director of Human Resources/Risk Management",
+     "gov_id": "pc",
+     "source": "salaries"
+    }
+   ]
+  },
+  {
+   "id": "william-dozier",
+   "name": "William T. Dozier",
+   "aliases": [
+    "William T. Dozier"
+   ],
+   "district": null,
+   "gov_ids": [
+    "county"
+   ],
+   "roles": [
+    {
+     "role": "former board member",
+     "gov_id": "county",
+     "seat": "District 3",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "county",
+     "source": "votes"
+    }
+   ]
+  },
+  {
+   "id": "william-perdue",
+   "name": "William (Chuck) Perdue",
+   "aliases": [
+    "Chuck Perdue",
+    "William (Chuck) Perdue"
+   ],
+   "district": null,
+   "gov_ids": [
+    "tax_collector"
+   ],
+   "roles": [
+    {
+     "role": "Tax Collector",
+     "gov_id": "tax_collector",
+     "source": "salaries"
+    },
+    {
+     "role": "Tax Collector",
+     "gov_id": "tax_collector",
+     "source": "officials-pay"
+    },
+    {
+     "role": "officeholder: Tax Collector",
+     "gov_id": "tax_collector",
+     "source": "campaign"
+    }
+   ]
+  },
+  {
+   "id": "winston-chester",
+   "name": "Winston Chester",
+   "aliases": [
+    "Winston Chester"
+   ],
+   "district": null,
+   "gov_ids": [
+    "schools"
+   ],
+   "roles": [
+    {
+     "role": "board member",
+     "gov_id": "schools",
+     "seat": "District 4",
+     "source": "votes"
+    },
+    {
+     "role": "board member",
+     "gov_id": "schools",
+     "source": "votes"
+    },
+    {
+     "role": "School Board Member, District 4",
+     "gov_id": "schools",
+     "source": "salaries"
+    },
+    {
+     "role": "officeholder: School Board, District 4",
+     "gov_id": "schools",
+     "source": "campaign"
+    }
+   ]
+  }
+ ],
+ "same_person_by_hand": [
+  {
+   "keys": [
+    [
+     "william",
+     "perdue"
+    ],
+    [
+     "charles",
+     "perdue"
+    ]
+   ],
+   "why": "Tax Collector William (Chuck) Perdue; the salary file lists \"Chuck Perdue\"."
+  }
+ ],
+ "multi_government": []
+}

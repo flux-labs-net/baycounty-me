@@ -1,6 +1,8 @@
-(() => {
-const D = __MI__;
+(async () => {
 const $ = id => document.getElementById(id);
+let D; // page data loads after the page has rendered; the markup shows a loading note until then
+try { const r = await fetch('/data/michael-page.json'); if (!r.ok) throw new Error(r.status); D = await r.json(); }
+catch (e) { $('ledCount').textContent = 'The FEMA projects could not be loaded. Please refresh the page.'; return; }
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const usd = n => '$' + Math.round(n).toLocaleString('en-US');
 const big = n => n == null ? '—' : n >= 1e9 ? '$' + (n / 1e9).toFixed(2) + 'B' : n >= 1e6 ? '$' + (n / 1e6).toFixed(1) + 'M' : n >= 1e3 ? '$' + Math.round(n / 1e3) + 'K' : usd(n);
@@ -39,10 +41,8 @@ function filt() {
 $('ledMore').addEventListener('click', () => { shown += 100; filt(); });
 $('ledCsv').addEventListener('click', () => {
   const head = ['applicant', 'project_number', 'title', 'category', 'federal_obligated', 'eligible_cost', 'first_obligation', 'last_obligation', 'status'];
-  const q = v => `"${String(v ?? '').replace(/"/g, '""')}"`;
-  const csv = [head.join(',')].concat(cur.map(r => [r.a, r.pw, r.t, r.c, r.f, r.e, r.d1, r.d2, r.st].map(q).join(','))).join('\n');
-  const u = URL.createObjectURL(new Blob([csv], {type: 'text/csv'}));
-  const l = document.createElement('a'); l.href = u; l.download = 'bay-county-fema-michael-projects.csv'; l.click(); setTimeout(() => URL.revokeObjectURL(u), 1000);
+  TT.csv('bay-county-fema-michael-projects', head, cur.map(r => [r.a, r.pw, r.t, r.c, r.f, r.e, r.d1, r.d2, r.st]));
+  if (window.BCM) BCM.announce('Downloaded ' + cur.length + ' projects');
 });
 { const q0 = new URL(location.href).searchParams.get('q'); if (q0) { $('ledQ').value = q0; requestAnimationFrame(() => $('led-h').scrollIntoView()); } }
 filt();

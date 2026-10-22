@@ -278,5 +278,61 @@
    "more": "Es la forma más directa de ver adónde fue el dinero, y la mayoría de las ciudades no lo publican en internet.",
    "example": ""
   }
- }
+ },
+ "extra_groups": [
+  [
+   "vote",
+   "Elecciones y reuniones"
+  ]
+ ],
+ "extra": [
+  {
+   "id": "exemption",
+   "group": "tax",
+   "term": "Exención (exemption)",
+   "simple": "Una parte del valor de su propiedad sobre la que no paga impuesto. Si tiene una exención de $25,000, le cobran como si su casa valiera $25,000 menos.",
+   "more": "Casi todas las exenciones las fija la Constitución de Florida. Hay que pedirlas al Tasador de Propiedades (Property Appraiser), por lo general antes del 1 de marzo. Algunas son para veteranos, personas mayores con ingresos bajos o personas con discapacidad.",
+   "example": "Una casa tasada en $200,000 con la exención de homestead paga impuesto de la ciudad y del condado sobre unos $150,000."
+  },
+  {
+   "id": "stormwater",
+   "group": "tax",
+   "term": "Aguas pluviales (stormwater)",
+   "simple": "El agua de lluvia que corre por las calles y los techos. Las ciudades y el condado cobran una tarifa para pagar las zanjas, los tubos y los estanques que la llevan.",
+   "more": "La tarifa de aguas pluviales casi siempre es fija por casa o por parcela y aparece en la factura de impuestos o en la factura de servicios.",
+   "example": ""
+  },
+  {
+   "id": "qualifying",
+   "group": "vote",
+   "term": "Calificar como candidato (qualifying)",
+   "simple": "El paso en que un candidato entrega sus papeles y paga la cuota, o junta firmas, para aparecer en la boleta. Si no lo hace a tiempo, no aparece.",
+   "more": "Cada elección tiene una semana de inscripción que fija la ley. Si solo una persona califica para un puesto, gana sin oposición y el puesto no aparece en la boleta.",
+   "example": ""
+  },
+  {
+   "id": "in-kind",
+   "group": "vote",
+   "term": "Donación en especie (in-kind contribution)",
+   "simple": "Una donación a una campaña que no es dinero, sino cosas o servicios, como comida para un evento o letreros gratis.",
+   "more": "La ley de Florida cuenta las donaciones en especie igual que las de dinero, con el mismo límite por persona o negocio.",
+   "example": ""
+  },
+  {
+   "id": "recall",
+   "group": "vote",
+   "term": "Elección revocatoria (recall election)",
+   "simple": "Una votación para decidir si un funcionario electo sale de su cargo antes de que termine su período.",
+   "more": "En Florida, los votantes de una ciudad pueden pedirla juntando firmas. Si el funcionario renuncia antes, la votación se cancela.",
+   "example": ""
+  },
+  {
+   "id": "public-comment",
+   "group": "vote",
+   "term": "Comentario público (public comment)",
+   "simple": "El momento de una reunión del gobierno en que cualquier persona puede hablar a la junta, casi siempre por unos 3 minutos.",
+   "more": "La ley de Florida da al público el derecho a hablar antes de que una junta vote sobre la mayoría de los temas. La agenda dice cómo y cuándo pedir la palabra.",
+   "example": ""
+  }
+ ]
 }

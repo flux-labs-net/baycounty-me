@@ -1,10 +1,17 @@
 """Build exemption data from Florida DOR's 2026 final NAL file for Bay County (county 13).
 
 Source: https://floridarevenue.com/property/dataportal/ -> Tax Roll Data Files / NAL / 2026F / "Bay 13 Final NAL 2026.zip"
-Usage: python3 build_exemptions.py /path/to/NAL13F202601.csv
+Usage: python3 build_exemptions.py /path/to/NAL13F202601.csv   (or --migrate to convert an older parcels_2026.json)
 Writes:
   exemptions_2026.json  countywide summary by exemption type, veterans by tax district, estimated taxes each type removes
-  parcels_2026.json     per parcel with a personal (homestead-type) exemption: [school taxable, non-school taxable, county-senior amount, {code: amount}]
+  parcels_2026.json     per parcel with a personal (homestead-type) exemption, PRIVACY-SAFE shape (see public_row):
+                        [school taxable, non-school taxable, homestead $, additional homestead $, other exemptions $]
+                        No exemption types other than homestead are written: widow/widower, disability, blindness, veteran,
+                        deployment, first-responder, senior and similar personal-status exemptions are summed into one
+                        'other exemptions' dollar amount so no one's personal circumstances can be read off a parcel.
+                        Only one non-school taxable value is written (the certified one), because a separate city value
+                        would reveal a county-only senior exemption by subtraction.
+                        Countywide counts by type stay in exemptions_2026.json.
 Estimated taxes use the latest complete set of adopted rates on the site (tax year 2025, FY2026 bills), the same rates My Address uses.
 """
 import csv, json, os, sys
@@ -32,6 +39,23 @@ CODES = {  # DOR NAL exemption fields (Florida Statutes)
 }
 PERSONAL = {'01', '02', '03', '04', '05', '06', '08', '31', '32', '33', '34', '35', '38', '39', '40', '41', '80', '81'}
 VETERAN = {'05', '06', '35', '38', '80'}
+
+
+HOMESTEAD = ('01', '02')  # value-based homestead exemptions shown by name; everything else is lumped
+
+
+def public_row(tv_sd, tv_nsd, ex):
+    """Per-parcel row safe to publish: taxable values, homestead amounts, and one lumped 'other exemptions' amount (no types)."""
+    other = sum(a for c, a in ex.items() if c not in HOMESTEAD)
+    return [round(tv_sd), round(tv_nsd), round(ex.get('01', 0)), round(ex.get('02', 0)), round(other)]
+
+
+def migrate(fp):
+    """Convert an older parcels_2026.json ([tsd, tnsd, senior, {code: amount}]) to the public shape, in place."""
+    P = json.load(open(fp))
+    out = {k: (public_row(v[0], v[1], v[3]) if len(v) == 4 and isinstance(v[3], dict) else v) for k, v in P.items()}
+    json.dump(out, open(fp, 'w'), separators=(',', ':'))
+    return len(out)
 
 
 def main(path):
@@ -93,7 +117,7 @@ def main(path):
         if ex.keys() & PERSONAL:
             p = r['PARCEL_ID'].strip()
             pid = f'{p[:5]}-{p[5:8]}-{p[8:11]}' if len(p) == 11 else p
-            parcels[pid] = [round(tv_sd), round(tv_nsd), round(sr), {c: round(a) for c, a in ex.items()}]
+            parcels[pid] = public_row(tv_sd, tv_nsd, ex)
     out = {
         'as_of': '2026-10-21', 'roll': '2026 final tax roll (Florida DOR NAL, Bay County, posted 2026-10-16)', 'rates': td['fy'][L],
         'source': 'https://floridarevenue.com/property/dataportal/',
@@ -112,4 +136,7 @@ def main(path):
 
 
 if __name__ == '__main__':
-    main(sys.argv[1])
+    if sys.argv[1:] == ['--migrate']:
+        print(migrate(os.path.join(HERE, 'parcels_2026.json')), 'parcels migrated')
+    else:
+        main(sys.argv[1])

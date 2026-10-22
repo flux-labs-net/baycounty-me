@@ -22,7 +22,7 @@ OUT = os.path.join(ROOT, 'public')
 SITE = 'BayCounty.me'
 DOMAIN = 'https://baycounty.me'
 PREVIEW = {}  # path -> (title, summary) for link previews, filled from og.preview_text()
-ES_ALT = {'/es': '/', '/es/mi-direccion': '/my-address', '/es/glosario': '/glossary', '/es/solicitar-registros': '/records-request'}
+from es_pages import ES_ALT, updated_key as es_updated_key  # Spanish page -> English twin (hreflang, language switch)
 EN_TO_ES = {v: k for k, v in ES_ALT.items()}
 OG_VER = {}  # path -> image content hash, filled by og.build_og before pages are written
 
@@ -62,6 +62,7 @@ MENU = [
             {'label': 'Budget Explorer', 'href': '/public-money/budget-explorer', 'desc': 'Each budget by fund and department'},
             {'label': 'CRA Spending', 'href': '/public-money/cra-spending', 'desc': 'What redevelopment agencies paid for'},
             {'label': 'Sales Tax Projects', 'href': '/public-money/sales-tax-projects', 'desc': 'Half-cent projects: promised vs built'},
+            {'label': 'Public Money Map', 'href': '/public-money/map', 'desc': 'CRA spending and sales tax projects, mapped'},
             {'label': 'Hurricane Michael', 'href': '/public-money/hurricane-michael', 'desc': 'FEMA, HUD and state recovery money'},
         ]},
         {'group': 'Accountability', 'items': [
@@ -70,6 +71,7 @@ MENU = [
             {'label': 'Campaign Money', 'href': '/public-money/campaign-money', 'desc': 'Who funds campaigns, and donor contracts'},
             {'label': 'Money Map', 'href': '/public-money/money-map', 'desc': 'Donors, officials and contracts, mapped'},
             {'label': 'Who Gets Paid', 'href': '/public-money/who-gets-paid', 'desc': 'Every payment by the tourism agencies'},
+            {'label': 'Vendors', 'href': '/public-money/vendors', 'desc': 'Every company paid, with its contracts and votes'},
             {'label': 'Debt', 'href': '/public-money/debt', 'desc': 'What each government owes'},
             {'label': 'Audit Findings', 'href': '/public-money/audits', 'desc': 'What outside auditors flagged'},
         ]},
@@ -139,9 +141,9 @@ FOOTER = '''<footer class="site-foot"><div class="site-foot-in">
 
 MENU_JS = '''(() => {
   const root = document.documentElement, tb = document.getElementById('themeBtn');
-  const NAMES = {system: 'System', light: 'Light', dark: 'Dark'}, NEXT = {system: 'light', light: 'dark', dark: 'system'};
+  const I = window.BCM_I18N || {}, NAMES = I.theme || {system: 'System', light: 'Light', dark: 'Dark'}, NEXT = {system: 'light', light: 'dark', dark: 'system'};
   const current = () => root.getAttribute('data-theme') || 'system';
-  const show = m => { tb.dataset.mode = m; tb.querySelector('.theme-lbl').textContent = NAMES[m]; tb.setAttribute('aria-label', 'Theme: ' + (m === 'system' ? 'match system' : NAMES[m].toLowerCase()) + '. Click to change.'); };
+  const show = m => { tb.dataset.mode = m; tb.querySelector('.theme-lbl').textContent = NAMES[m]; tb.setAttribute('aria-label', (I.themeLabel || 'Theme: ') + (m === 'system' ? I.themeSystem || 'match system' : NAMES[m].toLowerCase()) + (I.themeClick || '. Click to change.')); };
   show(current());
   tb.addEventListener('click', () => {
     const m = NEXT[current()];
@@ -165,19 +167,8 @@ MENU_JS = '''(() => {
 '''
 
 
-DEEPLINK_JS = r"""
-(() => { // ?gov= / ?cra= open a page already filtered (used by the government pages)
-  const P = new URLSearchParams(location.search), gov = P.get('gov'), cra = P.get('cra');
-  if (!gov && !cra) return;
-  const retry = fn => { let n = 0; const t = setInterval(() => { if (fn() || ++n > 60) clearInterval(t); }, 150); };
-  if (gov) document.querySelectorAll('select[data-param="gov"]').forEach(el => retry(() => {
-    const nm = x => x.replace(/^City of /i, '').replace(/ BOCC$/i, '').trim().toLowerCase();
-    const o = [...el.options].find(o => nm(o.value) === nm(gov) || nm(o.textContent) === nm(gov)); if (!o) return false;
-    el.value = o.value; el.dispatchEvent(new Event('input', {bubbles: true})); el.dispatchEvent(new Event('change', {bubbles: true}));
-    if (location.hash) document.querySelector(location.hash)?.scrollIntoView(); return true; }));
-  if (cra) retry(() => { const b = document.querySelector(`#craChips [data-c="${CSS.escape(cra)}"]`); if (!b) return false; b.click(); return true; });
-})();
-"""
+# Shared helpers (window.BCM): URL state for data-param controls (?gov= etc.) and announce. Tables use tables.js.
+DEEPLINK_JS = open(os.path.join(ROOT, 'site_helpers.js')).read()
 
 
 TERM_JS = r"""
@@ -346,6 +337,7 @@ def _layout(title, desc, path, body, extra_head=''):
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/_vercel/speed-insights/script.js"></script>
 <script src="/assets/tables.js" defer></script>
+<script src="/assets/site.js" defer></script>
 {extra_head}
 </head>
 <body>
@@ -354,8 +346,7 @@ def _layout(title, desc, path, body, extra_head=''):
 <main id="main">
 {body}
 </main>
-{FOOTER.replace('__UPDATED__', ('Page updated ' + nice_date(last_updated(path)) + ' · ') if path not in ('/404',) else '')}
-<script src="/assets/site.js" defer></script>
+{FOOTER.replace('__UPDATED__', ('Page updated ' + nice_date(last_updated(es_updated_key(path))) + ' · ') if path not in ('/404',) else '')}
 <script src="/assets/report.js" defer></script>
 </body>
 </html>
@@ -528,7 +519,7 @@ if ELECTIONS_READY:
         for _g in _m.get('groups', []):
             if _g['group'] == 'Take part':
                 _g['items'].insert(0, {'label': '2026 Elections', 'href': '/elections', 'desc': "Who's running, their platforms and money"})
-from es_pages import ES_MENU, localize_chrome, es_home, es_addr_page, es_glossary_page, es_records_page, glossary_es_terms
+from es_pages import ES_MENU, localize_chrome, es_home, es_addr_page, es_glossary_page, es_records_page, glossary_es_terms, write_report_es, es_tax_page, es_fees_page, es_exemptions_page, es_elections_page, es_meetings_page, prune as prune_es
 from govs import GOVS as GOVLIST  # noqa: E402
 
 def page_options():
@@ -625,6 +616,11 @@ PAGES = [
     ('/es/mi-direccion', 'Mi dirección', 'Busque cualquier dirección del condado de Bay: estimado de impuestos a la propiedad, quién lo representa, escuelas, zonas de inundación y evacuación, y distritos de reurbanización.', lambda: es_addr_page(OUT)),
     ('/es/glosario', 'Glosario en lenguaje sencillo', 'Cada término de BayCounty.me explicado de forma sencilla: CRA, incremento de impuestos, millaje, exención de vivienda principal, presupuestos y más.', es_glossary_page),
     ('/es/solicitar-registros', 'Solicite un registro público', 'Escriba una solicitud de registros públicos de Florida a cualquier gobierno del condado de Bay en un minuto.', lambda: es_records_page(OUT)),
+    ('/es/impuestos', 'A dónde va su impuesto a la propiedad', 'Calcule su factura del impuesto a la propiedad en el condado de Bay y vea qué parte recibe cada gobierno, de dónde saca el resto de su dinero y en qué lo gasta.', lambda: es_tax_page(OUT)),
+    ('/es/tarifas-y-facturas', 'Tarifas en su factura de impuestos, y facturas de servicios', 'Las tarifas fijas de bomberos, aguas pluviales y otras en las facturas de impuestos del condado de Bay, y una factura típica de agua, alcantarillado y basura en cada ciudad.', es_fees_page),
+    ('/es/exenciones', 'Exenciones del impuesto a la propiedad', 'Quién recibe una exención del impuesto a la propiedad en el condado de Bay, desde el homestead hasta los veteranos con discapacidad, cuántas casas y cuánto impuesto quita cada una, según el registro de 2026.', es_exemptions_page),
+    *([('/es/elecciones', 'Quiénes son candidatos en 2026', 'Cada contienda local en las boletas del condado de Bay en 2026: los candidatos, sus propuestas, enlaces a sus campañas y de dónde viene el dinero de su campaña.', es_elections_page)] if ELECTIONS_READY else []),
+    ('/es/reuniones', 'Próximas reuniones públicas en el condado de Bay', 'Cuándo y dónde se reúnen la Comisión del Condado, la Junta Escolar y cada comisión de ciudad, con enlaces a las agendas y los temas de dinero de cada una.', es_meetings_page),
     ('/records-request', 'Request a public record', 'Write a Florida public records request to any Bay County government in a minute: pick a record the site is missing or describe your own.', lambda: records_page(OUT)),
     ('/alerts', 'Get BayCounty.me updates by email', 'Follow Bay County, the school district or your city and get a short weekly email with new votes, data, corrections and upcoming meetings.', lambda: alerts_page(OUT)),
     ('/meetings', 'Upcoming public meetings in Bay County', 'When and where the County Commission, School Board and every city commission meet, with agenda links and the money items on each agenda.', lambda: meetings_page(OUT)),
@@ -646,9 +642,16 @@ PAGES = [
 ]
 
 
+from vendor_pages import pages as vendor_page_list, index_page as vendors_index  # noqa: E402
+from public_map import public_map_page  # noqa: E402
+PAGES += [('/public-money/map', 'Public money map', 'CRA spending and half-cent sales tax projects across Bay County on one map, with CRA district lines and city limits.', lambda: public_map_page(OUT))]
+PAGES += [(p, t, d, fn or (lambda: vendors_index(OUT))) for p, t, d, fn in vendor_page_list()]
+
 PAGES += [(f'/governments/{g["slug"]}', g['short'] + ': budget, taxes, debt, votes and more',
            f'{g["short"]}, Florida: who runs it, the budget and property tax rate, debt, audit findings, how officials voted, contracts and projects, from public records.',
            (lambda k: (lambda: gov_page(k)))(g['key'])) for g in GOVLIST]
+prune_es({p[0] for p in PAGES})
+EN_TO_ES = {v: k for k, v in ES_ALT.items()}
 
 
 def main():
@@ -664,14 +667,15 @@ def main():
     shutil.copy(os.path.join(ROOT, 'favicon.svg'), os.path.join(OUT, 'favicon.svg'))
     shutil.copy(os.path.join(ROOT, 'tax.css'), os.path.join(OUT, 'assets', 'tax.css'))
     shutil.copy(os.path.join(ROOT, 'report.js'), os.path.join(OUT, 'assets', 'report.js'))
+    write_report_es(OUT)
     shutil.copy(os.path.join(ROOT, 'tables.js'), os.path.join(OUT, 'assets', 'tables.js'))
     from og import build_og
     from og import preview_text
     PREVIEW.update(preview_text())
-    OG_VER.update(build_og(OUT, PAGES, MENU))
+    OG_VER.update(build_og(OUT, [x for x in PAGES if not x[0].startswith('/public-money/vendors/')], MENU))  # vendor pages use the default card
     for path, title, desc, fn in PAGES:
         write(path, layout(title, desc, path, fn()))
-    print('search index:', build_index(OUT, PAGES), 'entries')
+    print('search index:', build_index(OUT, [x for x in PAGES if not x[0].startswith('/public-money/vendors/')]), 'entries')  # vendors: own indexer
     open(os.path.join(OUT, 'updates.xml'), 'w').write(rss(DOMAIN))
     open(os.path.join(OUT, '404.html'), 'w').write(layout('Page not found', 'Page not found', '/404',
         '<div class="page prose"><h1>That page isn\'t here.</h1><p><a href="/">Back to the home page</a></p></div>'))

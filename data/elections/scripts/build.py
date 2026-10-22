@@ -75,6 +75,7 @@ def self_match(name, cand):
 def classify_c(r, cand):
     n = clean(r['name']); low = n.lower().rstrip('.'); code = r['cont. type']
     if low in TYPE_OVERRIDE: return TYPE_OVERRIDE[low]
+    if name_hash(low) in TYPE_OVERRIDE_HASHED: return TYPE_OVERRIDE_HASHED[name_hash(low)]
     if self_match(n, cand) and code in ('I', 'S', ''): return 'self'
     if code == 'S': return 'self' if self_match(n, cand) else ('business' if ORG_RE.search(n) else 'individual')
     if re.match(r'^friends of ', low) or re.search(r'campaign account|for (county|school|city)', low): return 'committee'
@@ -91,6 +92,7 @@ def exp_is_person(name):
     if low in {x.rstrip('.') for x in PAYEE_PERSON}: return True
     if low in PAYEE_ORG: return False
     if low in PAYEE_PERSON: return True
+    if name_hash(low) in PAYEE_PERSON_HASHED: return True
     return False
 
 cands = []; gaps = []; allpayees = collections.Counter(); review = []

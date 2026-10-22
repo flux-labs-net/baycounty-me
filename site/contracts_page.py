@@ -144,9 +144,9 @@ def contracts_page(out_dir):
     # ledger data for JS
     rows = [{'g': SHORT.get(c['government'], c['government']), 'v': c['vendor'], 'id': c['vid'], 'a': c['amount'], 'p': c.get('purpose') or '', 'd': c.get('date') or '', 'm': c['b'], 'mf': c.get('method') or '',
              'u': c.get('source_url') or '', 'n': c.get('notes') or ''} for c in sorted(cs, key=lambda c: -c['amount'])]
-    js = open(os.path.join(HERE, 'contracts.js')).read().replace('__CT__', json.dumps(rows, ensure_ascii=False, separators=(',', ':'))).replace('__VP__', json.dumps(
-        sorted(vendor_profiles(d, cs).values(), key=lambda p: p['n'].lower()), ensure_ascii=False, separators=(',', ':')))
-    open(os.path.join(out_dir, 'assets', 'contracts.js'), 'w').write(js)
+    vp = sorted(vendor_profiles(d, cs).values(), key=lambda p: p['n'].lower())
+    json.dump({'rows': rows, 'vp': vp}, open(os.path.join(out_dir, 'data', 'contracts-page.json'), 'w'), ensure_ascii=False, separators=(',', ':'))
+    open(os.path.join(out_dir, 'assets', 'contracts.js'), 'w').write(open(os.path.join(HERE, 'contracts.js')).read())
     govs = sorted(set(r['g'] for r in rows))
     cot = sum(x.get('change_amount') or 0 for x in d['change_orders'])
     T = lambda tid, t: f'<span class="term" data-term="{tid}">{t}</span>'
@@ -176,13 +176,13 @@ def contracts_page(out_dir):
     <p class="note">Cash paid in the period covered, not contract value. Payroll, benefits, transfers to other offices and pass-through payments are left out. Other cities don't publish check registers online; they can be requested.</p></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="how">How contracts were awarded</h2><span class="muted">By award dollars</span></div><div class="hbars">{mbars}</div>
     <p class="note">Based on how each agenda item describes the award. "Not stated" means the agenda didn't say.</p></section>
-  <section class="tx-sec"><div class="sec-hd"><h2 id="all">Every contract in this list</h2><span class="muted" id="ctCount"></span></div>
-    <div class="filters-row"><input id="ctQ" type="search" placeholder="Search vendor or project" aria-label="Search contracts">
+  <section class="tx-sec"><div class="sec-hd"><h2 id="all">Every contract in this list</h2><span class="muted" id="ctCount" aria-live="polite">Loading contracts…</span></div>
+    <div class="filters-row"><input id="ctQ" type="search" data-param="q" placeholder="Search vendor or project" aria-label="Search contracts">
       <select id="ctG" aria-label="Government" data-param="gov"><option value="">All governments</option>{''.join(f"<option>{e(g)}</option>" for g in govs)}</select>
-      <select id="ctM" aria-label="How awarded"><option value="">Any method</option>{''.join(f"<option>{e(k)}</option>" for k, _ in METHODS)}<option>Other</option></select>
+      <select id="ctM" aria-label="How awarded" data-param="method"><option value="">Any method</option>{''.join(f"<option>{e(k)}</option>" for k, _ in METHODS)}<option>Other</option></select>
       <button type="button" class="pill sm" id="ctCsv">Download CSV</button></div>
-    <div class="tablewrap"><table class="tx-table" id="ctT" data-tt="own"><thead><tr><th scope="col">Government</th><th scope="col">Vendor</th><th scope="col">For</th><th scope="col" class="num">Amount</th><th scope="col">How awarded</th><th scope="col">Date</th></tr></thead><tbody></tbody></table></div>
-    <button type="button" class="pill" id="ctMore">Show more</button></section>
+    <div class="tablewrap"><table class="tx-table" id="ctT" data-tt="own"><thead><tr><th scope="col">Government</th><th scope="col">Vendor</th><th scope="col">For</th><th scope="col" class="num">Amount</th><th scope="col">How awarded</th><th scope="col">Date</th></tr></thead><tbody><tr><td colspan="6" class="muted">Loading contracts…</td></tr></tbody></table></div>
+    <button type="button" class="pill" id="ctMore" hidden>Show more</button></section>
   {growth_section(d, f'''<details class="tbl-toggle"><summary>Every change order in this list ({len(d["change_orders"])})</summary>
     <div class="tablewrap"><table class="tx-table"><thead><tr><th scope="col">Gov.</th><th scope="col">Vendor and project</th><th scope="col" class="num">Original</th><th scope="col" class="num">Added</th><th scope="col" class="num">Increase</th><th scope="col">Reason</th><th scope="col">Date</th></tr></thead><tbody>{co_rows}</tbody></table></div></details>''')}
   <section class="tx-sec"><div class="sec-hd"><h2 id="em">Emergency purchases</h2></div><ul class="plain">{em}</ul></section>

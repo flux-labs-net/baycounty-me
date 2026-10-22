@@ -1,0 +1,224 @@
+{
+ "_about": "Spanish for /es/tarifas-y-facturas (Fees & Bills). 'data' maps English text in data/fees/fees_pay_officials.json (assessment names, governments, rates, utility areas, calculations, effective dates, gaps) to Spanish; 'html' is ordered phrase pairs for fees_page.py's page.",
+ "data": {
+  "Stormwater utility fee - residential (levy code STWR)": "Tarifa de aguas pluviales, residencial",
+  "Stormwater utility fee - commercial (levy code STWC)": "Tarifa de aguas pluviales, comercial",
+  "Street lighting assessments (levy codes ALSL1 and BOCA)": "Contribuciones para alumbrado público",
+  "Road improvement assessment (levy code OERR)": "Contribución para mejoras de calles",
+  "Levy code PPCD (DOR function: community development/redevelopment)": "Código PPCD (según el DOR: desarrollo comunitario o reurbanización)",
+  "Liens / other (levy codes LIEN, PCN)": "Gravámenes y otros",
+  "Fire service assessment (levy code PCF)": "Contribución para el servicio de bomberos",
+  "Fire service assessment (levy code PBF)": "Contribución para el servicio de bomberos",
+  "Stormwater management assessment (levy code PBSW)": "Contribución para el manejo de aguas pluviales",
+  "Front Beach Road CRA assessment (levy code PBCRA)": "Contribución de la CRA de Front Beach Road",
+  "Stormwater assessment (levy code LN)": "Contribución para aguas pluviales",
+  "Fire assessment (levy code SF)": "Contribución para bomberos",
+  "Other (levy codes CN - Callaway, SN - Springfield; likely liens)": "Otros (probablemente gravámenes)",
+  "CDD assessments (levy code LPWH1)": "Contribuciones del distrito de desarrollo comunitario (CDD)",
+  "Levy code SB (DOR function: community development)": "Código SB (según el DOR: desarrollo comunitario)",
+  "Lighting assessments (DOR function: lighting)": "Contribuciones para alumbrado (según el DOR: alumbrado)",
+  "Levy code TWIN (DOR function: other)": "Código TWIN (según el DOR: otros)",
+  "Bay County (Board of County Commissioners)": "Condado de Bay",
+  "Bay County (Board of County Commissioners) - per DOR classification": "Condado de Bay (según la clasificación del DOR)",
+  "City of Panama City": "Ciudad de Panama City",
+  "City of Panama City Beach": "Ciudad de Panama City Beach",
+  "City of Lynn Haven": "Ciudad de Lynn Haven",
+  "City of Springfield": "Ciudad de Springfield",
+  "City of Callaway / City of Springfield": "Ciudad de Callaway / Ciudad de Springfield",
+  "Lake Powell Residential Golf Community Development District (independent special district)": "Lake Powell Residential Golf Community Development District, distrito especial independiente",
+  "Independent special district (unidentified, code SB)": "Distrito especial independiente sin identificar",
+  "Independent special districts (unidentified, codes PW, WMH)": "Distritos especiales independientes sin identificar",
+  "Independent special district (unidentified, code TWIN)": "Distrito especial independiente sin identificar",
+  "$40.00 per residential unit per year": "$40.00 por vivienda al año",
+  "$200.00 per parcel per year": "$200.00 por parcela al año",
+  "ALSL1 $60.00/parcel; BOCA $27.00/parcel": "ALSL1 $60.00 por parcela; BOCA $27.00 por parcela",
+  "$165.68/parcel": "$165.68 por parcela",
+  "varies by parcel": "cambia según la parcela",
+  "varies": "cambia",
+  "$150 homestead unit / $300 non-homestead unit / $24.51 vacant parcel": "$150 por vivienda con homestead / $300 por vivienda sin homestead / $24.51 por terreno vacío",
+  "$0.78/$1,000 improvement value + $95.66/parcel (noticed maximum)": "$0.78 por cada $1,000 del valor de lo construido + $95.66 por parcela (máximo anunciado)",
+  "$0.49/$1,000 improvement value + $48.30/parcel (noticed maximum)": "$0.49 por cada $1,000 del valor de lo construido + $48.30 por parcela (máximo anunciado)",
+  "$38.95 per parcel (Category A) or weighted by building size and value (Category B)": "$38.95 por parcela (Categoría A) o según el tamaño y el valor del edificio (Categoría B)",
+  "about $139 per unit (2021 adoption); current per-unit rate not located": "unos $139 por vivienda (aprobado en 2021); no encontramos la tarifa actual",
+  "not located": "no la encontramos",
+  "varies by lot/product": "cambia según el lote o el tipo de vivienda",
+  "PW $141.00; WMH $92.00": "PW $141.00; WMH $92.00",
+  "$99.45": "$99.45",
+  "Bay County retail water/wastewater service area (unincorporated customers where the county is the retail provider)": "Zona donde el condado vende agua y alcantarillado directamente (clientes fuera de las ciudades)",
+  "Panama City (city utility also serves parts of unincorporated Bay County)": "Panama City (el servicio de la ciudad también llega a partes del condado fuera de las ciudades)",
+  "Panama City Beach, inside city": "Panama City Beach, dentro de la ciudad",
+  "Lynn Haven, inside city": "Lynn Haven, dentro de la ciudad",
+  "Callaway, inside city": "Callaway, dentro de la ciudad",
+  "Springfield, inside city": "Springfield, dentro de la ciudad",
+  "Mexico Beach": "Mexico Beach",
+  "Water: 21.10 + 3 x 2.60 + 2 x 2.90 = 34.70; Sewer: 37.00 + 5 x 9.80 = 86.00; Total = 120.70 (3/4-inch meter, 2026 column; assumes wastewater volume charge on all metered water)": "Agua: 21.10 + 3 x 2.60 + 2 x 2.90 = 34.70; alcantarillado: 37.00 + 5 x 9.80 = 86.00; total = 120.70 (medidor de 3/4 de pulgada, columna de 2026; supone que se cobra alcantarillado por toda el agua medida)",
+  "14.09 + 32.29 + 45.91 + 5 x 6.28 + 5 x 11.90 = 92.29 + 31.40 + 59.50 = 183.19": "14.09 + 32.29 + 45.91 + 5 x 6.28 + 5 x 11.90 = 92.29 + 31.40 + 59.50 = 183.19",
+  "5,000 gal is within the 6,000-gal minimum: water 37.54 + sewer 49.88 = 87.42 (rate sheet also shows combined 0-6,000 gal water+sewer = 87.42)": "5,000 galones están dentro del mínimo de 6,000: agua 37.54 + alcantarillado 49.88 = 87.42 (la hoja de tarifas también da 87.42 por agua y alcantarillado juntos, de 0 a 6,000 galones)",
+  "16.85 + 16.95 + 24.86 = 58.66 base; + 5 x (4.05 + 10.17) = 71.10; total = 129.76 (matches budget's own table: 5,000 gal - $129.76). Water+sewer only = 104.90": "16.85 + 16.95 + 24.86 = 58.66 de cargo base; + 5 x (4.05 + 10.17) = 71.10; total = 129.76 (igual que la tabla del propio presupuesto: 5,000 galones, $129.76). Solo agua y alcantarillado = 104.90",
+  "Water 11.37 + 5 x 5.32 = 37.97; franchise fee 10% = 3.80; Sewer 30.69 + 5 x 6.13 = 61.34; Stormwater 1.00; Solid waste 13.00; Total = 117.11": "Agua 11.37 + 5 x 5.32 = 37.97; cargo de franquicia 10% = 3.80; alcantarillado 30.69 + 5 x 6.13 = 61.34; aguas pluviales 1.00; basura 13.00; total = 117.11",
+  "Base 8.95 + 30.43 + 37.67 + 3.00 = 80.05 (city's stated total base); + 5 x (5.13 + 14.90) = 100.15; total = 180.20": "Cargo base 8.95 + 30.43 + 37.67 + 3.00 = 80.05 (el total base que da la ciudad); + 5 x (5.13 + 14.90) = 100.15; total = 180.20",
+  "Water 40.83 + 1 x 3.68 = 44.51; utility tax 7% = 3.12; Sewer 55.07 + 1 x 5.20 = 60.27; Sanitation 40.00; Total = 147.90 (city's stated minimum bill is $138.76)": "Agua 40.83 + 1 x 3.68 = 44.51; impuesto al servicio 7% = 3.12; alcantarillado 55.07 + 1 x 5.20 = 60.27; basura 40.00; total = 147.90 (la ciudad dice que la factura mínima es $138.76)",
+  "Fee schedule header 'Effective April 21, 2026'; uses the '2026' column (prior '2025' column took effect Jan 1, 2025)": "La tabla de tarifas dice 'Effective April 21, 2026' (vigente desde el 21 de abril de 2026); usamos la columna de 2026 (la de 2025 empezó el 1 de enero de 2025)",
+  "October 2026 usage (first bills week of Nov 2, 2026)": "Consumo de octubre de 2026 (primeras facturas la semana del 2 de noviembre de 2026)",
+  "February 1, 2026": "1 de febrero de 2026",
+  "FY2025-26 rates as printed in budget approved Sept 23, 2025 (FY2026-27 budget exists but could not be downloaded; rates may have changed Oct 1, 2026)": "Tarifas del FY2025-26 como aparecen en el presupuesto aprobado el 23 de septiembre de 2025 (el presupuesto del FY2026-27 existe pero no se pudo descargar; las tarifas pudieron cambiar el 1 de octubre de 2026)",
+  "Not stated on page (retrieved 2026-10-20)": "La página no lo dice (consultada el 20 de octubre de 2026)",
+  "October 1, 2025": "1 de octubre de 2025",
+  "Not stated ('current monthly rates', page retrieved 2026-10-20); council raised water 2.6% and sewer 4% on Oct 28, 2025": "No lo dice ('current monthly rates', página consultada el 20 de octubre de 2026); el concejo subió el agua 2.6% y el alcantarillado 4% el 28 de octubre de 2025",
+  "Final adopted rate resolutions not located for Panama City fire (commercial per-square-foot rates), Panama City Beach fire/stormwater/CRA (only the maximum-rate notice found), Lynn Haven stormwater (current per-unit rate), and Springfield fire (rate method).": "No encontramos las resoluciones finales con las tarifas aprobadas para los bomberos de Panama City (tarifas comerciales por pie cuadrado), los bomberos, las aguas pluviales y la CRA de Panama City Beach (solo encontramos el aviso de la tarifa máxima), las aguas pluviales de Lynn Haven (tarifa actual por vivienda) ni los bomberos de Springfield (cómo se calcula).",
+  "Several levy codes could not be matched to a named district: SB, PW, WMH, TWIN, ALSL1, BOCA, OERR, PCN; PPCD (probably Pier Park CDD) and LPWH1 (probably Lake Powell Residential Golf CDD) are inferred.": "Varios códigos de cobro no se pudieron unir con un distrito con nombre: SB, PW, WMH, TWIN, ALSL1, BOCA, OERR, PCN. PPCD (probablemente el CDD de Pier Park) y LPWH1 (probablemente el CDD de Lake Powell Residential Golf) son suposiciones.",
+  "Typical single-family amounts for value-based assessments (PCB fire/stormwater, Lynn Haven stormwater, Springfield fire) can't be stated without parcel-level property-use data. The DOR NAL parcel file for 2025 wasn't available from the portal, so only all-parcel medians are given.": "No se puede dar la cantidad típica para una casa en los cobros que dependen del valor (bomberos y aguas pluviales de PCB, aguas pluviales de Lynn Haven, bomberos de Springfield) sin saber el uso de cada parcela. El archivo de parcelas NAL del DOR para 2025 no estaba en el portal, así que solo damos el valor del medio de todas las parcelas.",
+  "Parker: no published water/sewer/garbage rate schedule found, and no FTE count.": "Parker: no encontramos una tabla publicada de tarifas de agua, alcantarillado y basura, ni el número de empleados.",
+  "Panama City Beach: no residential garbage rate and no employee count (the budget book couldn't be downloaded).": "Panama City Beach: no encontramos la tarifa de basura para viviendas ni el número de empleados (no se pudo descargar el libro del presupuesto).",
+  "Panama City: the 5,000-gallon bill is provisional, because the city's 'average bill' equals its base charges alone. No stormwater fee found.": "Panama City: la factura de 5,000 galones es provisional, porque la 'factura promedio' de la ciudad es igual solo a sus cargos base. No encontramos una tarifa de aguas pluviales.",
+  "Lynn Haven: the FY2026-27 budget (which may carry rates effective Oct 1, 2026) could not be downloaded because the connection was reset; FY2025-26 rates are used.": "Lynn Haven: no se pudo descargar el presupuesto del FY2026-27 (que puede traer tarifas desde el 1 de octubre de 2026) porque se cortó la conexión; usamos las tarifas del FY2025-26.",
+  "Callaway: the rates page shows no effective date, and the FY2027 budget assumes small consumption increases that may not be on the page yet.": "Callaway: la página de tarifas no dice desde cuándo valen, y el presupuesto del FY2027 cuenta con pequeños aumentos por consumo que quizás todavía no están en la página."
+ },
+ "other_note": {
+  "City of Callaway": "10% de cargo de franquicia sobre el agua ($3.80) y $1 de aguas pluviales",
+  "City of Springfield": "$3 de aguas pluviales",
+  "City of Mexico Beach": "7% de impuesto al servicio de agua"
+ },
+ "html": [
+  [
+   "<span class=\"eyebrow\">Public Money · Fees &amp; Bills</span><h1>Fees on your tax bill, and what water and garbage cost</h1>",
+   "<span class=\"eyebrow\">Dinero público · Tarifas y facturas</span><h1>Las tarifas de su factura de impuestos, y lo que cuestan el agua y la basura</h1>"
+  ],
+  [
+   "<p class=\"lede\">Beyond property tax, your tax bill can carry flat fees for fire service, stormwater and lighting. Your utility bill adds water, sewer and garbage. Here's what each government charges.</p>",
+   "<p class=\"lede\">Además del impuesto a la propiedad, su factura de impuestos puede traer tarifas fijas para bomberos, <span class=\"term\" data-term=\"stormwater\">aguas pluviales</span> (el agua de lluvia que corre por las calles) y alumbrado. Su factura de servicios suma el agua, el alcantarillado y la basura. Aquí está lo que cobra cada gobierno.</p>"
+  ],
+  [
+   "<h2>Taxes vs. fees</h2>",
+   "<h2>Impuestos y tarifas: la diferencia</h2>"
+  ],
+  [
+   "<li><b>Property tax depends on your home's value.</b> A bigger taxable value means a bigger tax.</li>",
+   "<li><b>El impuesto a la propiedad depende del valor de su casa.</b> Si el valor gravable es más alto, el impuesto es más alto.</li>"
+  ],
+  [
+   "<li><b>Fees on the tax bill are mostly flat.</b> <span class=\"term\" data-term=\"non-ad-valorem\">Non-ad valorem assessments</span> charge per home, per parcel or by building size for a specific service, like fire protection or stormwater drainage. They're not affected by homestead exemptions or Amendment 3.</li>",
+   "<li><b>Las tarifas de la factura de impuestos casi siempre son fijas.</b> Los <span class=\"term\" data-term=\"non-ad-valorem\">cargos no basados en el valor (non-ad valorem)</span> se cobran por casa, por parcela o según el tamaño del edificio, para un servicio en particular, como los bomberos o el drenaje del agua de lluvia. No cambian con la exención de homestead ni con la Enmienda 3.</li>"
+  ],
+  [
+   "<li><b>Utility bills are separate.</b> Water, sewer and garbage are billed monthly by your city or the county, based on how much you use.</li>",
+   "<li><b>La factura de servicios es aparte.</b> Su ciudad o el condado le cobran cada mes el agua, el alcantarillado y la basura, según lo que use.</li>"
+  ],
+  [
+   "<p><a href=\"/my-address/\">Look up the exact fees on your parcel →</a></p>",
+   "<p><a href=\"/es/mi-direccion\">Busque las tarifas exactas de su parcela →</a></p>"
+  ],
+  [
+   "<span class=\"eyebrow\">Fees on Bay County tax bills</span>",
+   "<span class=\"eyebrow\">Tarifas en las facturas de impuestos del Condado de Bay</span>"
+  ],
+  [
+   "<span class=\"s\">FY2026 tax roll, all governments</span>",
+   "<span class=\"s\">Registro tributario del FY2026, todos los gobiernos</span>"
+  ],
+  [
+   "<span class=\"eyebrow\">City fire assessments</span>",
+   "<span class=\"eyebrow\">Contribuciones de las ciudades para bomberos</span>"
+  ],
+  [
+   "<span class=\"s\">Panama City, PCB and Springfield</span>",
+   "<span class=\"s\">Panama City, Panama City Beach y Springfield</span>"
+  ],
+  [
+   "<span class=\"eyebrow\">Stormwater fees</span>",
+   "<span class=\"eyebrow\">Tarifas de aguas pluviales</span>"
+  ],
+  [
+   "<span class=\"s\">County and cities</span>",
+   "<span class=\"s\">Condado y ciudades</span>"
+  ],
+  [
+   "<span class=\"eyebrow\">Garbage on the tax bill</span>",
+   "<span class=\"eyebrow\">Basura en la factura de impuestos</span>"
+  ],
+  [
+   "<span class=\"s\">Billed on utility bills instead</span>",
+   "<span class=\"s\">Se cobra en la factura de servicios</span>"
+  ],
+  [
+   "<h2 id=\"tb\">Fees on the tax bill</h2><span class=\"muted\">FY2026 bills (2025 tax roll)</span>",
+   "<h2 id=\"tb\">Tarifas en la factura de impuestos</h2><span class=\"muted\">Facturas del FY2026 (registro tributario de 2025)</span>"
+  ],
+  [
+   "<th scope=\"col\">Fee</th><th scope=\"col\">How it's charged</th><th scope=\"col\" class=\"num\">Most common bill</th><th scope=\"col\" class=\"num\">Parcels billed</th><th scope=\"col\" class=\"num\">Total</th><th scope=\"col\">Source</th>",
+   "<th scope=\"col\">Tarifa</th><th scope=\"col\">Cómo se cobra</th><th scope=\"col\" class=\"num\">Cobro más común</th><th scope=\"col\" class=\"num\">Parcelas con el cobro</th><th scope=\"col\" class=\"num\">Total</th><th scope=\"col\">Fuente</th>"
+  ],
+  [
+   "<p class=\"note\">Unincorporated Bay County's fire service is a property tax (1.38 mills), not a flat fee, so it's on the <a href=\"/public-money/tax-dollars\">tax dollars page</a>. Counts and totals come from the Florida Department of Revenue's parcel-level file for Bay County. ",
+   "<p class=\"note\">El servicio de bomberos del condado fuera de las ciudades es un impuesto a la propiedad (1.38 milésimas), no una tarifa fija, así que está en la página de <a href=\"/es/impuestos\">sus impuestos</a>. Los números y totales vienen del archivo por parcela del Departamento de Ingresos de Florida (Florida Department of Revenue) para el Condado de Bay. "
+  ],
+  [
+   "rel=\"noopener\">DOR file</a>",
+   "rel=\"noopener\">Archivo del DOR</a>"
+  ],
+  [
+   "<h2 id=\"ub\">A typical monthly utility bill</h2><span class=\"muted\">5,000 gallons of water, 3/4-inch meter</span>",
+   "<h2 id=\"ub\">Una factura de servicios típica de un mes</h2><span class=\"muted\">5,000 galones de agua, medidor de 3/4 de pulgada</span>"
+  ],
+  [
+   "<em> water, sewer, garbage</em>",
+   "<em> agua, alcantarillado, basura</em>"
+  ],
+  [
+   "<em> water, sewer (garbage not included)</em>",
+   "<em> agua, alcantarillado (sin basura)</em>"
+  ],
+  [
+   "<span>Water and sewer</span></li><li><i style=\"background:var(--s2)\"></i><span>Garbage</span></li><li><i style=\"background:var(--s4)\"></i><span>Stormwater, fees and utility taxes</span>",
+   "<span>Agua y alcantarillado</span></li><li><i style=\"background:var(--s2)\"></i><span>Basura</span></li><li><i style=\"background:var(--s4)\"></i><span>Aguas pluviales, cargos e impuestos al servicio</span>"
+  ],
+  [
+   "<summary>How each bill is calculated</summary>",
+   "<summary>Cómo se calcula cada factura</summary>"
+  ],
+  [
+   "<th scope=\"col\">Provider</th><th scope=\"col\" class=\"num\">Water and sewer</th><th scope=\"col\" class=\"num\">Garbage</th><th scope=\"col\" class=\"num\">Other</th><th scope=\"col\" class=\"num\">Total</th><th scope=\"col\">Calculation</th>",
+   "<th scope=\"col\">Proveedor</th><th scope=\"col\" class=\"num\">Agua y alcantarillado</th><th scope=\"col\" class=\"num\">Basura</th><th scope=\"col\" class=\"num\">Otros</th><th scope=\"col\" class=\"num\">Total</th><th scope=\"col\">Cálculo</th>"
+  ],
+  [
+   "City of Panama City Utilities (water, wastewater, garbage)<br>",
+   "Servicios de la Ciudad de Panama City (agua, aguas residuales, basura)<br>"
+  ],
+  [
+   "City of Springfield Public Works / Utility Billing<br>",
+   "Ciudad de Springfield, Obras Públicas y cobro de servicios<br>"
+  ],
+  [
+   "City of Mexico Beach (water/wastewater supplied by Bay County; city bills)<br>",
+   "Ciudad de Mexico Beach (el agua y el alcantarillado los da el Condado de Bay; la ciudad cobra)<br>"
+  ],
+  [
+   "City of Lynn Haven Utilities<br>",
+   "Servicios de la Ciudad de Lynn Haven<br>"
+  ],
+  [
+   "Bay County Utility Services (retail)<br>",
+   "Bay County Utility Services (servicios del condado, venta directa)<br>"
+  ],
+  [
+   "City of Callaway Utility Billing (water/sewer purchased wholesale from Bay County)<br>",
+   "Ciudad de Callaway, cobro de servicios (compra el agua y el alcantarillado al Condado de Bay)<br>"
+  ],
+  [
+   "City of Panama City Beach Utilities<br>",
+   "Servicios de la Ciudad de Panama City Beach<br>"
+  ],
+  [
+   "<span class=\"muted\">Effective: ",
+   "<span class=\"muted\">Vigente: "
+  ],
+  [
+   "<p class=\"note\">Bills are worked out from each provider's published rate sheet. Panama City Beach's garbage rate and Parker's utility rates weren't found online. Panama City's own notice gives an \"average\" bill equal to its base charges alone, so its usage charges may include an allowance the notice doesn't describe.</p>",
+   "<p class=\"note\">Las facturas se calculan con la hoja de tarifas que publica cada proveedor. No encontramos en internet la tarifa de basura de Panama City Beach ni las tarifas de servicios de Parker. El aviso de Panama City da una factura \"promedio\" igual solo a sus cargos base, así que sus cobros por consumo pueden incluir una cantidad que el aviso no explica.</p>"
+  ],
+  [
+   "<h2 id=\"gaps\">What we couldn't find</h2>",
+   "<h2 id=\"gaps\">Lo que no pudimos encontrar</h2>"
+  ]
+ ]
+}

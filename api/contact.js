@@ -1,6 +1,7 @@
 // BayCounty.me contact form -> email via Resend.
 // Env: RESEND_FULL_KEY or RESEND_API_KEY (a key that can send from baycounty.me), CONTACT_TO (default hello@fluxlabs.net), CONTACT_FROM.
 const TOPICS = { correction: 'Correction', record: 'Record or tip', question: 'Question', other: 'Something else' };
+const {ipOf} = require('./_gate');
 const ALLOWED = /^https:\/\/((www\.)?baycounty\.me|[a-z0-9-]+\.vercel\.app)$/;
 const hits = new Map(); // best-effort per-instance rate limit
 
@@ -13,7 +14,7 @@ module.exports = async (req, res) => {
   const origin = req.headers.origin || '';
   if (origin && !ALLOWED.test(origin)) return res.status(403).json({ ok: false, error: 'Forbidden' });
 
-  const ip = String(req.headers['x-forwarded-for'] || '').split(',')[0].trim() || 'unknown';
+  const ip = ipOf(req);
   const now = Date.now(), recent = (hits.get(ip) || []).filter(t => now - t < 3600e3);
   if (recent.length >= 5) return res.status(429).json({ ok: false, error: 'Too many messages from this connection. Please try again later or email hello@fluxlabs.net.' });
 

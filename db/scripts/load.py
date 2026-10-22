@@ -65,12 +65,24 @@ def seed_governments(cur):
         aliases[key] = key; aliases[short.lower()] = key
     aliases.update({'bay county bocc': 'county', 'bay county board of county commissioners': 'county', 'bay district school board': 'schools',
                     'school board': 'schools', 'bay county': 'county'})
+    # every government and alias in data/entities/governments.json (constitutional officers, special districts, tourism agencies ...)
+    ent = json.load(open(os.path.join(ROOT, 'data', 'entities', 'governments.json')))['governments']
+    for g in ent:
+        cur.execute('''insert into governments (key, slug, short_name, name, kind) values (%s,%s,%s,%s,%s)
+                       on conflict (key) do update set short_name=excluded.short_name, name=excluded.name''',
+                    (g['id'], g.get('slug'), g['short'], g['name'], g['kind']))
+    for g in ent:
+        cur.execute('update governments set parent_key = %s where key = %s', (g.get('parent'), g['id']))
+        for a in [g['id'], g['name'], g['short']] + g.get('aliases', []):
+            aliases.setdefault(a.strip().lower(), g['id'])
     for a, k in aliases.items():
         cur.execute('insert into government_aliases (alias, government_key) values (%s,%s) on conflict (alias) do update set government_key = excluded.government_key', (a, k))
     return aliases
 
 
 def gov_key(row, aliases):
+    if row.get('gov_id') in aliases.values():  # set by the site build from data/entities/governments.json
+        return row['gov_id']
     for col in ('government', 'employer_id', 'gov', 'city'):
         v = row.get(col)
         if isinstance(v, str) and v.strip():
@@ -87,6 +99,15 @@ def gov_key(row, aliases):
             if len(a) > 4 and a in b.lower():
                 return kk
     return None
+
+
+# Datasets that rule alerts watch (api/_rules.js). New rows in these become alerts.events.
+ALERT_DATASETS = {'contracts', 'change-orders', 'member-votes', 'meetings', 'candidates-2026'}
+
+
+def has_table(cur, name):
+    cur.execute('select to_regclass(%s) is not null', (name,))
+    return cur.fetchone()[0]
 
 
 def table_columns(cur, table):
@@ -124,22 +145,67 @@ def load_dataset(conn, d, aliases, sha):
             raise SystemExit(f'Dataset "{d["id"]}" has columns the table lacks: {missing}. Add a migration.')
         cur.execute("insert into ingest_runs (origin, dataset, git_sha) values ('site_build', %s, %s) returning id", (d['id'], sha))
         run = cur.fetchone()[0]
-        cur.execute(f"delete from {table} where origin = 'site_build'")
-        deleted = cur.rowcount
+        # Compare with the previous sync by record_hash: rows whose hash is still present are kept as they are
+        # (so created_at is when a record first appeared), rows that are gone are deleted, and only new hashes are
+        # inserted. A record whose content changed gets a new hash, so it counts as removed + added.
+        cur.execute(f"select record_hash from {table} where origin = 'site_build'")
+        old = {x[0] for x in cur.fetchall()}
         names = [c['name'] for c in d['columns']]
         qcols = ', '.join('"' + n + '"' for n in names)
         sql = f'insert into {table} ({qcols}, government_key, origin, ingest_run_id, record_hash) values ({", ".join(["%s"] * (len(names) + 4))}) on conflict (origin, record_hash) do nothing'
-        batch, seen = [], set()
+        batch, seen, added = [], set(), []
         for r in rows:
             h = hashlib.sha1(json.dumps(r, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
             if h in seen:
                 continue
             seen.add(h)
-            batch.append([adapt(r.get(n), cols[n]) for n in names] + [gov_key(r, aliases), 'site_build', run, h])
+            if h in old:
+                continue
+            g = gov_key(r, aliases)
+            batch.append([adapt(r.get(n), cols[n]) for n in names] + [g, 'site_build', run, h])
+            added.append((h, g, r))
+        cur.execute(f"delete from {table} where origin = 'site_build' and not (record_hash = any(%s::text[]))", (list(seen),))
+        deleted = cur.rowcount
         cur.executemany(sql, batch)
-        cur.execute("update ingest_runs set finished_at = now(), rows_in = %s, rows_deleted = %s, status = 'ok' where id = %s", (len(batch), deleted, run))
+        # Rule alerts: new rows in the datasets rules watch become alerts.events (migration 0008). Skipped on a
+        # dataset's first load (everything would look new) and when the migration isn't applied.
+        events = 0
+        if old and d['id'] in ALERT_DATASETS and added and has_table(cur, 'alerts.events'):
+            cur.executemany('insert into alerts.events (dataset, record_hash, government_key, record, ingest_run_id) values (%s,%s,%s,%s,%s)',
+                            [(d['id'], h, g, Jsonb(r), run) for h, g, r in added])
+            events = len(added)
+        extra = ', rows_added = %s' if 'rows_added' in table_columns(cur, 'ingest_runs') else ''
+        cur.execute(f"update ingest_runs set finished_at = now(), rows_in = %s, rows_deleted = %s{extra}, status = 'ok', notes = %s where id = %s",
+                    (len(seen), deleted, *([len(batch)] if extra else []), f'{len(batch)} new, {len(seen) - len(batch)} unchanged' + (f', {events} alert events' if events else ''), run))
         cur.execute('update datasets set updated_at = now(), title = %s, description = %s where id = %s', (d['title'], d['description'], d['id']))
-    return len(batch), deleted
+    return len(seen), deleted, len(batch), events
+
+
+def load_entities(conn):
+    """vendors / vendor_aliases (and people, when the table exists) from data/entities, replaced in full each sync."""
+    n = 0
+    with conn.transaction():
+        cur = conn.cursor()
+        if not table_columns(cur, 'vendors'):
+            return 0
+        v = json.load(open(os.path.join(ROOT, 'data', 'entities', 'vendors.json')))
+        cur.execute('delete from vendor_aliases'); cur.execute('delete from vendors')
+        cur.executemany('insert into vendors (id, name, aliases, gov_ids, merge_evidence) values (%s,%s,%s,%s,%s)',
+                        [(x['id'], x['name'], Jsonb(x['aliases']), Jsonb(x['gov_ids']), x.get('merge_evidence')) for x in v['vendors']])
+        al = {}
+        for x in v['vendors']:
+            for a in x['aliases']:
+                al.setdefault(a.strip().lower(), x['id'])
+        cur.executemany('insert into vendor_aliases (alias, vendor_id) values (%s,%s)', list(al.items()))
+        n += len(v['vendors'])
+        pf = os.path.join(ROOT, 'data', 'entities', 'people.json')
+        if table_columns(cur, 'people') and os.path.exists(pf):
+            p = json.load(open(pf))
+            cur.execute('delete from people')
+            cur.executemany('insert into people (id, name, aliases, roles) values (%s,%s,%s,%s)',
+                            [(x['id'], x['name'], Jsonb(x['aliases']), Jsonb(x.get('roles') or [])) for x in p['people']])
+            n += len(p['people'])
+    return n
 
 
 def load_raw(conn, sha):
@@ -200,12 +266,39 @@ def main():
         with conn.transaction():
             aliases = seed_governments(conn.cursor())
         total = 0
+        failed = []
         for d in cat['datasets']:
-            n, dl = load_dataset(conn, d, aliases, sha)
+            try:
+                n, dl, new, ev = load_dataset(conn, d, aliases, sha)
+            except SystemExit:
+                raise
+            except psycopg.Error as e:
+                # One bad dataset shouldn't stop the rest; the failure is recorded for /api/v1/status.
+                msg = str(e).splitlines()[0][:300]
+                print(f'{d["id"]:32s} FAILED: {msg}')
+                failed.append(d['id'])
+                with conn.transaction():
+                    conn.cursor().execute("insert into ingest_runs (origin, dataset, git_sha, finished_at, status, notes) values ('site_build', %s, %s, now(), 'failed', %s)", (d['id'], sha, msg))
+                continue
             total += n
-            print(f'{d["id"]:32s} {n:6d} rows (replaced {dl})')
+            print(f'{d["id"]:32s} {n:6d} rows ({new} new, {dl} removed{", %d alert events" % ev if ev else ""})')
+        print('entities (vendors, people):', load_entities(conn))
         print('raw files updated:', load_raw(conn, sha))
         print('total rows:', total)
+        prune_logs(conn)
+        if failed:
+            raise SystemExit('datasets that failed to load: ' + ', '.join(failed))
+
+
+def prune_logs(conn):
+    """Delete API request-log rows older than 180 days (migration 0006). Skipped if that migration isn't applied."""
+    try:
+        with conn.transaction():
+            cur = conn.cursor()
+            cur.execute('select apiadmin.prune_requests(180)')
+            print('api log rows pruned (older than 180 days):', cur.fetchone()[0])
+    except psycopg.Error as e:
+        print('api log prune skipped:', str(e).splitlines()[0][:120])
 
 
 if __name__ == '__main__':

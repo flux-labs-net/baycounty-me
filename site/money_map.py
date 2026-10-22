@@ -118,6 +118,14 @@ def map_data():
     for r in vrows:
         r.pop('_v')
     dl = donors_list(donors)
+    try:  # vendor profile page for each donor that has one
+        from vendor_pages import build as _vb
+        import ids as _ids
+        _prof = set(_vb())
+        for x in dl:
+            x['vp'] = next((v for v in _ids.vendor_ids(x['n']) if v in _prof), None)
+    except Exception:
+        pass
     for x in dl:
         x['k'] = bool(held.get(x['id']))
         x['tot'] = round(sum(g['a'] for g in gifts if g['d'] == x['id']), 2)
@@ -169,7 +177,7 @@ def money_map_page(out_dir):
     return f'''<div class="page tax mm">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Accountability · Money map</span><h1>Money map</h1>
     <p class="lede">Which businesses and groups gave to which officials' campaigns, and which of those donors are paid by a local government. Tap any name to follow its connections.</p></div>
-    <div class="stamp"><a class="pill" href="/public-money/campaign-money">Campaign money tables</a><span>Reports as of {e(D.get("as_of"))}</span></div></header>
+    <div class="stamp"><a class="pill" href="/public-money/campaign-money">Campaign money tables</a><button type="button" class="pdf-btn" id="pdf"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 12v2h10v-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Export PDF</button><span>Reports as of {e(D.get("as_of"))}</span></div></header>
   <section class="explain"><div class="ex-txt"><span class="eyebrow">Read this first</span><h2>What the map does and doesn't show</h2>
     <ol class="ex-steps"><li><b>A gift and a contract are two separate facts.</b> A line to an official is a campaign gift. A line to a government is that government's contracts or payments to the same business. The map never adds contract dollars to an official.</li>
       <li><b>Officials only vote on their own government's contracts.</b> A county commissioner has no say in a city's contracts. The connections that can matter are marked: a gift to an official whose own government pays that donor.</li>

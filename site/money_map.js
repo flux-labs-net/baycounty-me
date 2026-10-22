@@ -13,6 +13,13 @@ if (qs.get('show')) $('mmShow').value = qs.get('show');
 if (qs.get('gov')) $('mmGov').value = qs.get('gov');
 if (qs.get('q')) $('mmQ').value = qs.get('q');
 let sel = null; // {t:'d'|'o'|'g', id}
+{ const m = /^([dog])-(.+)$/.exec(qs.get('sel') || ''); if (m) sel = {t: m[1], id: m[1] === 'g' ? m[2] : +m[2]}; }
+function writeURL(later) { // keep the view in the link: ?show=&gov=&q=&sel=d-12
+  const u = new URL(location.href), set = (k, v) => v ? u.searchParams.set(k, v) : u.searchParams.delete(k);
+  set('show', $('mmShow').value !== 'same' ? $('mmShow').value : ''); set('gov', $('mmGov').value); set('q', $('mmQ').value.trim()); set('sel', sel ? sel.t + '-' + sel.id : '');
+  clearTimeout(writeURL.t); const go = () => history.replaceState(history.state, '', u.pathname + u.search + u.hash);
+  if (later) writeURL.t = setTimeout(go, 350); else go();
+}
 const conAmt = c => c.a || c.p;
 const sameDon = new Set(GIFTS.filter(g => g.same).map(g => g.d));
 
@@ -79,7 +86,7 @@ function render() {
       g.appendChild(dot); g.appendChild(tx);
     }
     g._k = {t, id}; svg.appendChild(g); NODES.push(g);
-    const pick = () => { sel = sel && sel.t === t && sel.id === id ? null : {t, id}; highlight(); detail(); };
+    const pick = () => { sel = sel && sel.t === t && sel.id === id ? null : {t, id}; highlight(); detail(); writeURL(); };
     g.addEventListener('click', pick); g.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(); } });
   };
   offs.forEach(o => node('o', o.id, xO, P.o[o.id], o.n, GN[o.g] || '', 'end', ''));
@@ -89,8 +96,7 @@ function render() {
   $('mmCount').textContent = `${dons.length} donors · ${offs.length} officials · ${gifts.length} gifts`;
   if (sel && !NODES.some(n => n._k.t === sel.t && n._k.id === sel.id)) sel = null;
   highlight(); detail();
-  const u = new URLSearchParams(); if ($('mmShow').value !== 'same') u.set('show', $('mmShow').value); if ($('mmGov').value) u.set('gov', $('mmGov').value);
-  history.replaceState(null, '', u.toString() ? '?' + u : location.pathname);
+  writeURL(true);
 }
 
 function highlight() {
@@ -125,7 +131,7 @@ function detail() {
   if (!sel) { el.innerHTML = '<p class="muted">Tap an official, donor or government to see its connections and the records behind them.</p>'; return; }
   if (sel.t === 'd') {
     const d = DON[sel.id], gs = GIFTS.filter(g => g.d === d.id).sort((a, b) => b.a - a.a), cs = CON.filter(c => c.d === d.id), vs = VOTES.filter(v => v.d === d.id);
-    el.innerHTML = `<h3>${esc(d.n)}</h3><p class="small muted">${d.t === 'pac' ? 'Political committee' : 'Organization'} · gave ${M(gs.reduce((s, g) => s + g.a, 0))} to ${gs.length} official${gs.length > 1 ? 's' : ''}</p>
+    el.innerHTML = `<h3>${d.vp ? `<a href="/public-money/vendors/${esc(d.vp)}">${esc(d.n)}</a>` : esc(d.n)}</h3><p class="small muted">${d.t === 'pac' ? 'Political committee' : 'Organization'} · gave ${M(gs.reduce((s, g) => s + g.a, 0))} to ${gs.length} official${gs.length > 1 ? 's' : ''}</p>
       <h4>Campaign gifts</h4><ul class="plain mm-list">${gs.map(g => `<li>${giftTxt(g)} to ${esc(OFF[g.o].n)} <span class="muted">${esc(OFF[g.o].off)}</span>${g.same ? ' <span class="badge warn">Their government pays this donor</span>' : ''}</li>`).join('')}</ul>
       ${cs.length ? `<h4>Paid by local governments</h4><ul class="plain mm-list">${cs.map(c => `<li><b>${esc(GN[c.g])}</b>: ${conLine(c)}${c.likely ? ' <span class="muted small">(name spelled differently in the campaign filing)</span>' : ''}${items(c)}</li>`).join('')}</ul>` : '<p class="small muted">No contracts or payments from a local government matched on this site.</p>'}
       ${vs.length ? `<h4>Votes on this donor's contracts</h4><ul class="plain mm-list">${vs.map(v => `<li>${esc(OFF[v.o].n)} voted <b>${esc(v.vote)}</b> · ${fd(v.date)} · ${esc(v.h)}${v.consent ? ' <span class="muted small">(consent agenda)</span>' : ''}</li>`).join('')}</ul>` : ''}`;
@@ -173,4 +179,5 @@ function heat1() {
 $('mmQ').addEventListener('input', render);
 let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(render, 150); });
 render(); votesTable(); heat1();
+if (sel && qs.get('sel')) $('map').scrollIntoView();
 })();

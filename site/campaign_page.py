@@ -105,6 +105,8 @@ def campaign_page():
     # pairs: one per contributor+candidate (rows repeat per contracting government)
     pairs = defaultdict(lambda: {'govs': [], 'contracts': [], 'urls': []})
     for m in vm['matches']:
+        if not (m.get('gift_source') or 'current').startswith('current'):
+            continue  # this page covers current officeholders; 2026 candidates' matches are on the vendor pages
         k = (m['contributor'], m['candidate'])
         p = pairs[k]
         p.update({k2: m.get(k2) for k2 in ('contributor', 'candidate', 'office', 'election', 'contribution_amount', 'contribution_dates', 'match_confidence', 'campaign_report_url', 'vendor_entity', 'refunded_by_campaign')})
@@ -173,7 +175,7 @@ def campaign_page():
     <div class="kpi"><span class="eyebrow">Donors with contracts</span><span class="v">{len(plist)}</span><span class="s">gifts to {off_matched} officials from contract holders</span></div>
     <div class="kpi"><span class="eyebrow">Same government</span><span class="v">{same}</span><span class="s">gifts where the contract is with the official's own government</span></div>
   </div>
-  <div class="vt-filters mt-f"><label class="vf"><span>Government</span><select id="cmG"><option value="">All</option>{opts}</select></label></div>
+  <div class="vt-filters mt-f"><label class="vf"><span>Government</span><select id="cmG" data-param="gov"><option value="">All</option>{opts}</select></label></div>
   <section class="tx-sec"><div class="sec-hd"><h2 id="matches">Donors who also hold local contracts</h2><span class="muted">Same-government matches first</span></div>
     <div class="tablewrap"><table class="tx-table cm-table" id="cmM"><thead><tr><th scope="col">Contributor</th><th scope="col" class="num">Gave</th><th scope="col">To</th><th scope="col">Local contracts and payments</th></tr></thead><tbody>{mrows}</tbody></table></div>
     <p class="note">Matched by organization name against the contracts and payments on this site. Contracts can come before or after a gift; the dates are shown so you can compare. Gifts from a company's owners or employees as individuals are not matched.</p></section>
@@ -187,5 +189,5 @@ def campaign_page():
 <link rel="stylesheet" href="/assets/tax.css">
 <script>
 (() => {{ const s = document.getElementById('cmG'); const run = () => document.querySelectorAll('#cmM tbody tr, #cmO tbody tr').forEach(tr => tr.hidden = !!s.value && tr.dataset.g !== s.value);
-  const q = new URLSearchParams(location.search).get('gov'); if (q) s.value = q; s.addEventListener('input', run); run(); }})();
+  const q = new URLSearchParams(location.search).get('gov'); if (q && [...s.options].some(o => o.value === q)) s.value = q; s.addEventListener('input', run); s.addEventListener('change', run); run(); }})();
 </script>'''

@@ -5,6 +5,127 @@ from govs import all_profiles, gov_of_body, is_split
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(HERE, '..', 'data')
 e = lambda s: html.escape(str(s if s is not None else ''))
+import sys as _sys
+_sys.path.insert(0, os.path.join(DATA, 'entities'))
+import ids  # noqa: E402  shared government / vendor / person ids (data/entities)
+
+# which columns name the government, per dataset, tried in order (office titles are matched by contained name)
+GOV_COLS = {'government-profiles': ['government'], 'votes': ['government'], 'member-votes': ['gov_id'], 'cra-payments': ['city'],
+            'property-tax-rates': ['authority_id'], 'fema-michael-projects': ['applicant'], 'officials-pay': ['title', 'government'],
+            'meetings': ['gov', 'board'], 'campaign-finance': ['office', 'gov'], 'bonds': ['gov'], 'salary-positions': ['employer_id'],
+            'salary-leaders': ['employer_id'], 'candidates-2026': ['office', 'government'], 'campaign-contributions-2026': ['office'],
+            'bed-tax-collections': [], 'property-tax-exemptions': []}
+FIXED_GOV = {'bed-tax-collections': 'county', 'property-tax-exemptions': 'county'}  # county bed tax in every zone; the county-wide tax roll
+
+
+VENDOR_COL = {'contracts': 'vendor', 'change-orders': 'vendor', 'emergency-purchases': 'vendor', 'cra-payments': 'payee', 'vendor-payments': 'vendor',
+              'campaign-contributions-2026': 'contributor'}
+
+
+def add_vendor_id(did, rows):
+    """vendor_id from data/entities/vendors.json; vendor_ids lists every firm when one record names several (a joint award)."""
+    col = VENDOR_COL.get(did)
+    if not col:
+        return rows
+    for r in rows:
+        v = [] if did == 'campaign-contributions-2026' and r.get('contributor_type') != 'business' else ids.vendor_ids(r.get(col))
+        r['vendor_id'] = v[0] if v else None
+        r['vendor_ids'] = v if len(v) > 1 else None
+    return rows
+
+
+PERSON_COL = {'member-votes': 'member', 'officials-pay': 'name', 'salary-leaders': 'name', 'campaign-finance': 'official', 'candidates-2026': 'candidate'}
+
+
+def add_person_id(did, rows):
+    """person_id from data/entities/people.json (elected officials, department leaders, 2026 candidates only).
+    A '(D2)' style suffix moves out of the name into district."""
+    col = PERSON_COL.get(did)
+    if not col:
+        return rows
+    for r in rows:
+        nm = r.get(col)
+        if isinstance(nm, str):
+            clean, dist = ids.split_district(nm)
+            if dist:
+                r[col] = clean
+                r['district'] = dist
+            elif did == 'officials-pay':
+                r['district'] = None
+        r['person_id'] = ids.person_id(nm) if isinstance(nm, str) else None
+    return rows
+
+
+# free-text date column -> structured date_start / date_end / date_precision next to it (the text is kept)
+DATE_COL = {'cra-payments': 'date_or_fy', 'sales-tax-projects': 'fiscal_years', 'officials-pay': 'year', 'debt': 'fy', 'audit-findings': 'fy',
+            'salary-positions': 'fiscal_year', 'salary-leaders': ('fiscal_year', 'as_of'), 'budget-detail': 'fiscal_year', 'budget-per-resident': 'fiscal_year',
+            'fees-assessments': 'fiscal_year', 'bed-tax-collections': 'fy'}
+
+
+def add_dates(did, rows):
+    cols = DATE_COL.get(did)
+    if not cols:
+        return rows
+    cols = (cols,) if isinstance(cols, str) else cols
+    for r in rows:
+        fy_start = (ids.gov(r.get('gov_id') or '') or {}).get('fy_start_month', 10)
+        val = next((r.get(c) for c in cols if r.get(c) not in (None, '')), None)
+        r.update(ids.date_fields(val, fy_start))
+    return rows
+
+
+def _cv():
+    try:
+        return json.load(open(os.path.join(DATA, 'votes', 'contract_votes.json')))['links']
+    except FileNotFoundError:
+        return []
+
+
+CV_SRC = {'contracts': 'contract', 'change-orders': 'change_order', 'emergency-purchases': 'emergency'}
+
+
+def add_vote_links(did, rows):
+    """contracts/change orders/emergency purchases get vote_ids; votes get contract_ids (record ids like 'contract:12'), from data/votes/contract_votes.json."""
+    links = _cv()
+    if did in CV_SRC:
+        by = {}
+        for l in links:
+            by.setdefault(l['record_id'], []).append(l)
+        for i, r in enumerate(rows):
+            ls = by.get(f'{CV_SRC[did]}:{i}', [])
+            r['record_id'] = f'{CV_SRC[did]}:{i}'
+            r['vote_ids'] = [l['vote_id'] for l in ls] or None
+            r['vote_match_method'] = '; '.join(l['match_method'] for l in ls) or None
+    elif did == 'votes':
+        by = {}
+        for l in links:
+            by.setdefault(l['vote_index'], []).append(l)
+        d = _j('votes', 'votes.json')
+        vids = ids.vote_ids(d['votes'])
+        for i, (r, v) in enumerate(zip(rows, d['votes'])):
+            ls = by.get(i, [])
+            r['vote_id'] = vids[i]
+            r['contract_ids'] = [l['record_id'] for l in ls] or None
+            r['contract_match_method'] = '; '.join(l['match_method'] for l in ls) or None
+    return rows
+
+
+def add_gov_id(did, rows):
+    cols = GOV_COLS.get(did, ['government', 'gov'])
+    add_vote_links(did, rows)
+    add_vendor_id(did, rows)
+    add_person_id(did, rows)
+    for r in rows:
+        if did in FIXED_GOV:
+            r['gov_id'] = FIXED_GOV[did]; continue
+        g = None
+        for c in cols:
+            v = r.get(c)
+            g = ids.gov_id(v) or (ids.gov_id(v, contains=True) if c in ('office', 'title', 'board', 'government') else None)
+            if g:
+                break
+        r['gov_id'] = g
+    return add_dates(did, rows)
 
 
 def _j(*p):
@@ -20,12 +141,13 @@ def _votes():
              'summary': v.get('summary'), 'amount': v.get('amount'), 'outcome': v.get('outcome'), 'tally': v.get('tally'), 'split': is_split(v),
              'voted_yes': '; '.join(n for n, x in (v.get('by_member') or {}).items() if x == 'yes'), 'voted_no': '; '.join(n for n, x in (v.get('by_member') or {}).items() if x == 'no'),
              'absent_or_abstained': '; '.join(n for n, x in (v.get('by_member') or {}).items() if x in ('absent', 'abstain')), 'agenda_item': v.get('item'),
-             'source_title': v.get('source_title'), 'source_url': v.get('source_url')} for v in d['votes']]
+             'source_title': v.get('source_title'), 'source_url': v.get('source_url'),
+             'members': [{'name': n, 'person_id': ids.person_id(n), 'vote': x} for n, x in (v.get('by_member') or {}).items()] or None} for v in d['votes']]
 
 
 def _member_votes():
     d = _j('votes', 'votes.json'); names = {b['id']: re.sub(r'\bCity City\b', 'City', b['name']) for b in d['bodies']}
-    return [{'date': v.get('date'), 'board': names.get(v['body']), 'member': n, 'vote': x, 'headline': v.get('headline'), 'source_url': v.get('source_url')}
+    return [{'date': v.get('date'), 'board': names.get(v['body']), 'member': n, 'vote': x, 'headline': v.get('headline'), 'source_url': v.get('source_url'), 'gov_id': gov_of_body(v['body'])}
             for v in d['votes'] for n, x in (v.get('by_member') or {}).items()]
 
 
@@ -80,6 +202,9 @@ def _salaries(kind):
                             'pay_min': r.get('pay_min'), 'pay_mid': r.get('pay_mid'), 'pay_max': r.get('pay_max'), 'pay_basis': r.get('pay_basis'),
                             'hourly_min': r.get('hourly_min'), 'hourly_max': r.get('hourly_max'), 'actual_salaries': act or None, 'budgeted_fte': r.get('budgeted_fte'),
                             'union': r.get('union'), 'source_url': url(r.get('source')), 'notes': r.get('notes')})
+                fte_only = not act and not any(r.get(k) for k in ('pay_min', 'pay_mid', 'pay_max', 'hourly_min', 'hourly_max'))
+                out[-1]['fte_only'] = fte_only
+                out[-1]['pay_status'] = 'Position count only: the source lists this job but not its pay' if fte_only else 'Pay listed'
         else:
             for r in d.get('leaders') or []:
                 out.append({'employer': d.get('employer'), 'employer_id': d.get('employer_id'), 'government': d.get('gov'), 'name': r.get('name'), 'title': r.get('title'),
@@ -111,10 +236,45 @@ def _contributions():
     f = _j('elections', 'finance_2026.json')
     if not f:
         return []
-    # organizations only; individual donors are never published on this site
+    # organizations only; individual donors are never published on this site.
+    # Bank interest on a campaign account (kind 'interest', a few cents a month) is not a contribution from anyone: left out.
     return [{'candidate': c['name'], 'office': c.get('office'), 'contributor': x.get('name'), 'contributor_type': x.get('type'), 'city': x.get('city'),
              'amount': x.get('amount'), 'date': x.get('date'), 'kind': x.get('kind'), 'report_url': c.get('report_url')}
-            for c in f.get('candidates') or [] for x in c.get('contributors') or [] if x.get('type') not in ('candidate', 'individual', 'self')]
+            for c in f.get('candidates') or [] for x in c.get('contributors') or []
+            if x.get('type') not in ('candidate', 'individual', 'self') and x.get('kind') != 'interest']
+
+
+def _officials_pay(f):
+    """A row with no name is a whole board's pay (e.g. 'Mayor and 4 Commissioners (combined)' or 'each of 5'): say so."""
+    out = _flat(f['pay'], ['government', 'title', 'name', 'annual', 'year', 'basis', 'source_url'])
+    for r in out:
+        t = r.get('title') or ''
+        r['row_type'] = 'person' if r.get('name') else ('board_each_member' if re.search(r'\beach\b', t, re.I) else 'board_total')
+        if not r.get('name'):
+            r['name'] = 'Board total (all members combined)' if r['row_type'] == 'board_total' else 'Each board member (not named)'
+    return out
+
+
+def schedule_by_project():
+    """GIS project index -> county program schedule lines matched to it (data/surtax/schedule_matches.json)."""
+    m = _j('surtax', 'schedule_matches.json') or {'matches': []}
+    out = {}
+    for x in m['matches']:
+        out.setdefault(x['project_index'], []).append(x)
+    return out
+
+
+def _surtax_rows(ts):
+    rows = _flat(ts['infra_surtax']['projects'], ['name', 'government', 'category', 'status', 'pct_complete', 'promised_cost', 'programmed_cost', 'actual_cost', 'fiscal_years', 'location', 'lat', 'lng', 'description', 'source_url'])
+    sb = schedule_by_project()
+    for i, r in enumerate(rows):
+        xs = sb.get(i, [])
+        r['schedule_programmed_total'] = sum(x['programmed_total'] or 0 for x in xs) if xs else None
+        r['schedule_fy_amounts'] = {k: v for x in xs for k, v in (x['fy_amounts'] or {}).items()} if xs else None
+        r['schedule_line'] = '; '.join(x['schedule_name'] for x in xs) or None
+        r['schedule_match_method'] = '; '.join(x['method'] for x in xs) or None
+        r['schedule_source_url'] = xs[0]['source_url'] if xs else None
+    return rows
 
 
 def _exemptions():
@@ -140,10 +300,10 @@ def datasets():
         ('debt', 'Debt by government', 'Total debt from the latest audited financial statements.', lambda: _flat(da['debt'], ['government', 'fy', 'total_debt', 'total_debt_note', 'population_2025_estimate', 'source_url'])),
         ('audit-findings', 'Audit findings', 'Findings from audits filed with the Florida Auditor General, in plain English.', lambda: [{'government': a['government'], 'fy': a.get('fy'), 'opinion': a.get('opinion'), 'finding': x.get('title'), 'plain_english': x.get('plain'), 'repeat': x.get('repeat'), 'management_response': x.get('mgmt_response'), 'source_url': x.get('source_url') or a.get('source_url')} for a in da['audits'] for x in a.get('findings') or []]),
         ('fema-michael-projects', 'Hurricane Michael FEMA projects', 'Every FEMA Public Assistance project in Bay County for disaster DR-4399.', lambda: [{'applicant': r['a'], 'project': r['pw'], 'title': r['t'], 'category': r['c'], 'federal_share': r['f'], 'eligible_amount': r['e'], 'first_obligated': r.get('d1'), 'last_obligated': r.get('d2'), 'status': r.get('st'), 'size': r.get('sz')} for r in pa['rows']]),
-        ('sales-tax-projects', 'Half-cent sales tax projects', 'Every infrastructure sales tax project on the county map, with status and cost.', lambda: _flat(ts['infra_surtax']['projects'], ['name', 'government', 'category', 'status', 'pct_complete', 'promised_cost', 'programmed_cost', 'actual_cost', 'fiscal_years', 'location', 'lat', 'lng', 'description', 'source_url'])),
+        ('sales-tax-projects', 'Half-cent sales tax projects', "Every infrastructure sales tax project on the county map, with status and cost. schedule_* columns add the county program schedule's programmed dollars by year where the schedule line could be matched to the project.", lambda: _surtax_rows(ts)),
         ('bed-tax-collections', 'Tourist tax collections', 'Bed tax collected by zone and fiscal year.', lambda: _flat(ts['bed_tax']['collections'], ['fy', 'district', 'amount', 'partial', 'period', 'basis', 'source_url'])),
         ('fees-assessments', 'Fees on tax bills', 'Non-ad valorem assessments: fire, stormwater, CRA and other flat fees.', lambda: _flat(f['assessments'], ['government', 'area', 'name', 'category', 'how_charged', 'rate', 'residential_single_family_amount', 'fiscal_year', 'source_url'])),
-        ('officials-pay', 'Officials and pay', 'Salaries of top elected and appointed officials.', lambda: _flat(f['pay'], ['government', 'title', 'name', 'annual', 'year', 'basis', 'source_url'])),
+        ('officials-pay', 'Officials and pay', 'Salaries of top elected and appointed officials. Rows with row_type board_total are a whole board\'s combined pay, not one person.', lambda: _officials_pay(f)),
     ]
     extra = [
         (('meetings', 'meetings.json'), 'meetings', 'Upcoming meetings', 'Scheduled and expected meetings for every board.', lambda d: d.get('meetings', [])),
@@ -154,10 +314,10 @@ def datasets():
         (('civic', 'budgets_detail.json'), 'budget-detail', 'Budgets by fund and department', 'Adopted budgets broken down by fund and general-fund department.', lambda d: [{'government': g.get('name'), 'fiscal_year': g.get('fiscal_year'), 'level': lvl, 'name': x.get('name'), 'amount': x.get('amount')} for g in d.get('governments', []) for lvl, key in (('fund', 'funds'), ('department', 'general_fund_departments')) for x in g.get(key) or []]),
     ]
     extra += [
-        (('salaries', 'bocc.json'), 'salary-positions', 'Public salaries by job title', 'Pay ranges, budgeted positions and unnamed actual salaries by job title for the county, constitutional officers, school district, cities, airport and port.', lambda d: _salaries('positions')),
+        (('salaries', 'bocc.json'), 'salary-positions', 'Public salaries by job title', 'Pay ranges, budgeted positions and unnamed actual salaries by job title for the county, constitutional officers, school district, cities, airport and port. Rows with fte_only = true are positions the source counts but gives no pay for (see pay_status).', lambda d: _salaries('positions')),
         (('salaries', 'bocc.json'), 'salary-leaders', 'Salaries of officials and leaders', 'Named salaries of elected officials and top appointed leaders only.', lambda d: _salaries('leaders')),
         (('elections', 'candidates_2026.json'), 'candidates-2026', '2026 local candidates', 'Every 2026 local race and candidate with status, platform in their own words and campaign money totals.', lambda d: _candidates()),
-        (('elections', 'finance_2026.json'), 'campaign-contributions-2026', '2026 contributions from organizations', 'Every contribution from a business, committee or party to a 2026 local candidate. Individual donors are not included.', lambda d: _contributions()),
+        (('elections', 'finance_2026.json'), 'campaign-contributions-2026', '2026 contributions from organizations', 'Every contribution from a business, committee or party to a 2026 local candidate. Individual donors are not included, and neither is bank interest on campaign accounts.', lambda d: _contributions()),
         (('exemptions', 'exemptions_2026.json'), 'property-tax-exemptions', 'Property tax exemptions (2026 roll)', 'Every exemption type on the 2026 tax roll: parcels, value exempted and estimated tax removed.', lambda d: _exemptions()),
     ]
     for path, did, title, desc, fn in extra:
@@ -171,7 +331,7 @@ def write_downloads(out_dir):
     dest = os.path.join(out_dir, 'downloads'); os.makedirs(dest, exist_ok=True)
     meta, catalog = [], []
     for did, title, desc, fn in datasets():
-        rows = fn() or []
+        rows = add_gov_id(did, fn() or [])
         keys = list(dict.fromkeys(k for r in rows for k in r))
         buf = io.StringIO(); w = csv.DictWriter(buf, fieldnames=keys, extrasaction='ignore'); w.writeheader()
         for r in rows:

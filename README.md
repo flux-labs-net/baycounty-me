@@ -69,7 +69,7 @@ Every data change gets an entry at the top of `CHANGES` in `site/updates.py`. Th
 
 ## Search
 
-`site/search_page.py` builds `data/search.json` after the pages are written: page text and headings, glossary terms, and dataset records. Add a dataset by appending a function to `INDEXERS`.
+`site/search_page.py` builds `data/search.json` after the pages are written: page text and headings, glossary terms, and dataset records. Add a dataset by appending a function to `INDEXERS`. The API reads `search.json`; the search page reads the same index split into `data/search/` (`core.json` with pages, sections and glossary first, then `text.json` and one file per dataset in the background). Each record links to its own view (for example `?id=` on CRA Spending, `?p=` on Sales Tax Projects).
 
 ## Data rules
 

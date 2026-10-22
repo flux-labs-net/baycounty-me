@@ -268,8 +268,18 @@ const fyOf = s => { const m = String(s||'').match(/(19|20)\d{2}/); return m ? +m
 
 /* ---------- state ---------- */
 const S = { cras:new Set(), status:'all', cat:'all', q:'', nc:true, sel:null, sortK:'when', sortDir:-1, showAll:false };
-try { const saved = JSON.parse(localStorage.getItem('cra-filters')||'null'); if (saved){ S.status=saved.status||'all'; S.cat=saved.cat||'all'; S.nc=saved.nc!==false; (saved.cras||[]).forEach(c=>CRA[c]&&S.cras.add(c)); } } catch(e){}
-const save = () => { try { localStorage.setItem('cra-filters', JSON.stringify({cras:[...S.cras],status:S.status,cat:S.cat,nc:S.nc})); } catch(e){} };
+/* filters live in the link (?cra=pc,lh&status=Spent&cat=…&q=…&nc=0&id=12) so a view can be shared; with no filters in the link, the last-used filters come back */
+const UP = new URLSearchParams(location.search), UKEYS = ['cra','cras','status','cat','q','nc','id'];
+if (UKEYS.some(k => UP.has(k))){
+  (UP.get('cra')||UP.get('cras')||'').split(',').forEach(c => CRA[c] && S.cras.add(c));
+  if (UP.get('status')) S.status = UP.get('status');
+  if (UP.get('cat')) S.cat = UP.get('cat');
+  S.q = UP.get('q') || ''; S.nc = UP.get('nc') !== '0';
+  const id = UP.get('id'); if (id != null && D.payments[+id]) S.sel = +id;
+} else try { const saved = JSON.parse(localStorage.getItem('cra-filters')||'null'); if (saved){ S.status=saved.status||'all'; S.cat=saved.cat||'all'; S.nc=saved.nc!==false; (saved.cras||[]).forEach(c=>CRA[c]&&S.cras.add(c)); } } catch(e){}
+const save = () => { try { localStorage.setItem('cra-filters', JSON.stringify({cras:[...S.cras],status:S.status,cat:S.cat,nc:S.nc})); } catch(e){}
+  const o = {cra:[...S.cras].join(','), cras:'', status:S.status==='all'?'':S.status, cat:S.cat==='all'?'':S.cat, q:S.q, nc:S.nc?'':'0', id:S.sel==null?'':S.sel};
+  if (window.BCM) BCM.urlState.setLater(o, 300); };
 
 function filtered(){
   const q = S.q.toLowerCase();
@@ -317,7 +327,9 @@ document.getElementById('craChips').addEventListener('click', e => {
 const cats = [...new Set(D.payments.map(p=>p.cat))].sort();
 document.getElementById('fCat').innerHTML += cats.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join('');
 const fStatus = document.getElementById('fStatus'), fCat = document.getElementById('fCat'), fQ = document.getElementById('fQ'), fNC = document.getElementById('fNC');
-fStatus.value = S.status; fCat.value = S.cat; fNC.checked = S.nc;
+if (![...fStatus.options].some(o => o.value === S.status)) S.status = 'all';
+if (![...fCat.options].some(o => o.value === S.cat)) S.cat = 'all';
+fStatus.value = S.status; fCat.value = S.cat; fNC.checked = S.nc; fQ.value = S.q;
 fStatus.onchange = () => { S.status = fStatus.value; update(); };
 fCat.onchange = () => { S.cat = fCat.value; update(); };
 fQ.oninput = () => { S.q = fQ.value; update(); };
@@ -440,7 +452,7 @@ function renderRail(rows){
         <span class="amt">${p.amount!=null?fmt(p.amount):'Amount not found'}</span>
         <span><span class="pill st-${p.status.replace(/[^A-Za-z]/g,'').replace('NotCRAfunded','NotCRA')}">${esc(p.status)}</span> <span class="muted" style="font-size:.78rem">${esc(p.conf)}</span></span>
         <dl>
-          <dt>Paid to</dt><dd>${esc(p.payee)}</dd>
+          <dt>Paid to</dt><dd>${p.vp ? `<a href="/public-money/vendors/${esc(p.vp)}">${esc(p.payee)}</a>` : esc(p.payee)}</dd>
           <dt>For</dt><dd>${esc(p.purpose)}</dd>
           <dt>When</dt><dd>${esc(p.when||'—')}</dd>
           <dt>Where</dt><dd>${esc(p.loc||p.addr||'—')}${p.addr && p.loc ? `<br><span class="muted">${esc(p.addr)}</span>`:''}${p.placed==='district'?'<br><span class="muted">Pinned at district center</span>':(p.prec==='approximate'?'<br><span class="muted">Approximate location</span>':'')}</dd>
@@ -554,7 +566,8 @@ function update(refit){
   if (refit) fitView();
 }
 renderProfiles(); renderCtx(); renderLegend();
-requestAnimationFrame(() => update(true));
+requestAnimationFrame(() => { update(true);
+  if (S.sel != null){ select(S.sel); document.getElementById('mapbox').scrollIntoView({block:'start'}); } });
 matchMedia('(prefers-color-scheme: dark)').addEventListener('change', renderLegend);
 new MutationObserver(renderLegend).observe(document.documentElement, {attributes:true, attributeFilter:['data-theme']});
 </script>

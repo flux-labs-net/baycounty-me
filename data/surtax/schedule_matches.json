@@ -1,0 +1,3586 @@
+{
+ "about": "Join the county's surtax program schedule (programmed dollars by year) to the surtax GIS projects.",
+ "method": "Input:  ../tourism/tourism_surtax.json  infra_surtax.county_program_schedule (105 county projects from the county's\n        \"Public Works First 5 Years / List of Projects\" PDFs) and infra_surtax.projects (the county GIS layer).\nOutput: schedule_matches.json  {matches: [...], unmatched: [...], review: [...], match_rate}\nRun by data/build.py; tourism_page / the public-money map read the matches to show programmed amounts.\n\nMatch rules (same government only: the schedule is Bay County's own list, so only \"Bay County\" GIS projects):\n  * names are reduced to road/place words: lowercase, numbers kept, generic words (road, rd, ave, phase, grant,\n    project, sidewalk...) and funding notes in parentheses dropped; road-name abbreviations normalized (CR, SR, St, Dr...);\n  * score = shared distinctive tokens / tokens in the shorter name, + a bonus when the schedule's extra words\n    (from, to, @, between) name the same cross streets, and when the category word agrees (bridge, sidewalk, turn lane,\n    intersection, drainage/stormwater, resurfacing/paving);\n  * confident: exact normalized name, or every distinctive word of the shorter name is shared, the category agrees, and no\n    other GIS project scores as high (ties, e.g. several GIS segments with one road name, go to review);\n  * \"(program)\" rows, transfers and \"Future Capacity Project\" are county-wide lines with no single place: never matched.\nProgrammed amounts are attached with the schedule's source_url. Nothing is copied to a project the match isn't sure of.",
+ "schedule_rows": 105,
+ "matched_rows": 40,
+ "match_rate": 0.381,
+ "programmed_total": 163295329,
+ "programmed_matched": 40772364,
+ "programmed_match_rate": 0.25,
+ "exact_name_matches": 8,
+ "gis_projects_with_two_schedule_lines": [
+  0
+ ],
+ "matches": [
+  {
+   "schedule_index": 0,
+   "schedule_name": "North Lagoon (Joan Ave to Thomas Drive)/Multi Use Path",
+   "category": "Resurfacing",
+   "programmed_total": 579416,
+   "fy_amounts": {
+    "2017": 56000,
+    "2018": 523416
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "project_index": 109,
+   "project_name": "North Lagoon Drive Repaving and Roadway Safety Project",
+   "method": "name words + category + cross streets",
+   "score": 1.45,
+   "shared_words": [
+    "lagoon"
+   ]
+  },
+  {
+   "schedule_index": 2,
+   "schedule_name": "Center Dr",
+   "category": "Resurfacing",
+   "programmed_total": 262092,
+   "fy_amounts": {
+    "2017": 262092
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "project_index": 124,
+   "project_name": "Center Drive",
+   "method": "exact name",
+   "score": 1.0
+  },
+  {
+   "schedule_index": 4,
+   "schedule_name": "CR 2300 (Grant & Non Surtax Funding)",
+   "category": "Resurfacing",
+   "programmed_total": 0,
+   "fy_amounts": {},
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "project_index": 113,
+   "project_name": "County Road 2300 Repaving",
+   "method": "name words + category",
+   "score": 1.25,
+   "shared_words": [
+    "2300",
+    "cr"
+   ]
+  },
+  {
+   "schedule_index": 10,
+   "schedule_name": "CR 389 (East Ave) SR 77 to 390",
+   "category": "Resurfacing",
+   "programmed_total": 1325143,
+   "fy_amounts": {
+    "2019": 1325143
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "project_index": 136,
+   "project_name": "County Road 389 (East Avenue) North Repaving",
+   "method": "name words + category + cross streets",
+   "score": 1.75,
+   "shared_words": [
+    "389",
+    "cr"
+   ]
+  },
+  {
+   "schedule_index": 11,
+   "schedule_name": "CR 389 (East Ave) 390 to Baldwin",
+   "category": "Resurfacing",
+   "programmed_total": 1348197,
+   "fy_amounts": {
+    "2020": 1348197
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "project_index": 111,
+   "project_name": "County Road 389 (East Avenue) Repaving",
+   "method": "name words + category + cross streets",
+   "score": 1.75,
+   "shared_words": [
+    "389",
+    "cr"
+   ]
+  },
+  {
+   "schedule_index": 13,
+   "schedule_name": "New Church Road",
+   "category": "Resurfacing",
+   "programmed_total": 133400,
+   "fy_amounts": {
+    "2019": 133400
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "project_index": 120,
+   "project_name": "New Church Road Repaving",
+   "method": "name words + category",
+   "score": 1.25,
+   "shared_words": [
+    "church",
+    "new"
+   ]
+  },
+  {
+   "schedule_index": 20,
+   "schedule_name": "Wildwood Road",
+   "category": "Resurfacing",
+   "programmed_total": 235750,
+   "fy_amounts": {
+    "2020": 235750
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "project_index": 116,
+   "project_name": "Wildwood Road Repaving",
+   "method": "name words + category",
+   "score": 1.25,
+   "shared_words": [
+    "wildwood"
+   ]
+  },
+  {
+   "schedule_index": 23,
+   "schedule_name": "CR 388",
+   "category": "Resurfacing",
+   "programmed_total": 2361570,
+   "fy_amounts": {
+    "2021": 2361570
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "project_index": 107,
+   "project_name": "County Road 388 Roadway Repaving",
+   "method": "name words + category",
+   "score": 1.25,
+   "shared_words": [
+    "388",
+    "cr"
+   ]
+  },
+  {
+   "schedule_index": 24,
+   "schedule_name": "Pine Log Road",
+   "category": "Resurfacing",
+   "programmed_total": 750000,
+   "fy_amounts": {
+    "2021": 750000
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "project_index": 884,
+   "project_name": "Pine Log Rd",
+   "method": "exact name",
+   "score": 1.0
+  },
+  {
+   "schedule_index": 25,
+   "schedule_name": "East Callaway Dr",
+   "category": "Resurfacing",
+   "programmed_total": 740000,
+   "fy_amounts": {
+    "2021": 740000
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "project_index": 130,
+   "project_name": "East Callaway Drive Repaving",
+   "method": "name words + category",
+   "score": 1.25,
+   "shared_words": [
+    "callaway"
+   ]
+  },
+  {
+   "schedule_index": 26,
+   "schedule_name": "Frankford Ave",
+   "category": "Resurfacing",
+   "programmed_total": 300000,
+   "fy_amounts": {
+    "2021": 300000
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "project_index": 127,
+   "project_name": "Frankford Avenue Repaving",
+   "method": "name words + category",
+   "score": 1.25,
+   "shared_words": [
+    "frankford"
+   ]
+  },
+  {
+   "schedule_index": 30,
+   "schedule_name": "Bertha Nelson Road (US 231 to Titus Road)",
+   "category": "Dirt road stabilization & drainage",
+   "programmed_total": 497710,
+   "fy_amounts": {
+    "2017": 497710
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "project_index": 147,
+   "project_name": "Bertha Nelson Road Paving",
+   "method": "name words + category + cross streets",
+   "score": 1.75,
+   "shared_words": [
+    "bertha",
+    "nelson"
+   ]
+  },
+  {
+   "schedule_index": 31,
+   "schedule_name": "Wendy Road (US 231 to Coe Road)",
+   "category": "Dirt road stabilization & drainage",
+   "programmed_total": 428220,
+   "fy_amounts": {
+    "2017": 428220
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "project_index": 148,
+   "project_name": "Wendy Road Paving",
+   "method": "name words + category + cross streets",
+   "score": 1.75,
+   "shared_words": [
+    "wendy"
+   ]
+  },
+  {
+   "schedule_index": 32,
+   "schedule_name": "Cowels Road",
+   "category": "Dirt road stabilization & drainage",
+   "programmed_total": 2090708,
+   "fy_amounts": {
+    "2018": 2090708
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "project_index": 159,
+   "project_name": "Cowels Road Paving",
+   "method": "name words + category",
+   "score": 1.25,
+   "shared_words": [
+    "cowels"
+   ]
+  },
+  {
+   "schedule_index": 33,
+   "schedule_name": "Nehi Road (Grant)",
+   "category": "Dirt road stabilization & drainage",
+   "programmed_total": 2144401,
+   "fy_amounts": {
+    "2019": 2144401
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "project_index": 160,
+   "project_name": "Nehi Road Paving",
+   "method": "name words + category",
+   "score": 1.25,
+   "shared_words": [
+    "nehi"
+   ]
+  },
+  {
+   "schedule_index": 34,
+   "schedule_name": "Veal Road (Grant)",
+   "category": "Dirt road stabilization & drainage",
+   "programmed_total": 1545557,
+   "fy_amounts": {
+    "2020": 1545557
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "project_index": 149,
+   "project_name": "Veal Road Paving",
+   "method": "name words + category",
+   "score": 1.25,
+   "shared_words": [
+    "veal"
+   ]
+  },
+  {
+   "schedule_index": 40,
+   "schedule_name": "CR 389 @ Dundee Lane Construct Left Turn Lane",
+   "category": "Intersection improvement",
+   "programmed_total": 250000,
+   "fy_amounts": {
+    "2021": 250000
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "project_index": 32,
+   "project_name": "County Road 389 at Dundee Lane Intersection Improvements",
+   "method": "name words + category + cross streets",
+   "score": 1.75,
+   "shared_words": [
+    "389",
+    "cr"
+   ]
+  },
+  {
+   "schedule_index": 41,
+   "schedule_name": "CR 2297 Bridge Replacement (Grant / Surtax)",
+   "category": "Bridge repair & replacement",
+   "programmed_total": 789942,
+   "fy_amounts": {
+    "2017": 789942
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "project_index": 42,
+   "project_name": "CR 2297 Bridge Replacement",
+   "method": "exact name",
+   "score": 1.0
+  },
+  {
+   "schedule_index": 43,
+   "schedule_name": "Deer Point Dam Bridge Rehabilitation",
+   "category": "Bridge repair & replacement",
+   "programmed_total": 474834,
+   "fy_amounts": {
+    "2017": 474834
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "project_index": 1,
+   "project_name": "Deer Point Dam Bridge Repair",
+   "method": "name words + category",
+   "score": 1.25,
+   "shared_words": [
+    "dam",
+    "deer",
+    "point"
+   ]
+  },
+  {
+   "schedule_index": 44,
+   "schedule_name": "Scotts Ferry Road Bridge Replacement (design)",
+   "category": "Bridge repair & replacement",
+   "programmed_total": 420000,
+   "fy_amounts": {
+    "2021": 420000
+   },
+   "schedule_status": "in_progress (under design)",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "project_index": 0,
+   "project_name": "Scotts Ferry Road Bridge Replacement",
+   "method": "exact name",
+   "score": 1.0
+  },
+  {
+   "schedule_index": 45,
+   "schedule_name": "Webber Road (NOV 35-37) (Non Sales Tax Funds = $500,000)",
+   "category": "FDEP notice of violation",
+   "programmed_total": 587379,
+   "fy_amounts": {
+    "2017": 587379
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "project_index": 142,
+   "project_name": "Webber Road Paving",
+   "method": "name words + category + cross streets",
+   "score": 1.75,
+   "shared_words": [
+    "webber"
+   ]
+  },
+  {
+   "schedule_index": 58,
+   "schedule_name": "Merritt Brown Road Sidewalk",
+   "category": "Roadway safety",
+   "programmed_total": 595229,
+   "fy_amounts": {
+    "2020": 595229
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "project_index": 344,
+   "project_name": "Merritt Brown Road Sidewalk",
+   "method": "exact name",
+   "score": 1.0
+  },
+  {
+   "schedule_index": 61,
+   "schedule_name": "CR 2297 (Grant 75%)",
+   "category": "Resurfacing",
+   "programmed_total": 3428273,
+   "fy_amounts": {
+    "2023": 3428273
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "project_index": 112,
+   "project_name": "County Road 2297 Repaving",
+   "method": "name words + category",
+   "score": 1.25,
+   "shared_words": [
+    "2297",
+    "cr"
+   ]
+  },
+  {
+   "schedule_index": 65,
+   "schedule_name": "Sweetwater Branch Road (DEP Grant 40%)",
+   "category": "Dirt road stabilization & drainage",
+   "programmed_total": 3624116,
+   "fy_amounts": {
+    "2022": 3624116
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "project_index": 154,
+   "project_name": "Sweetwater Branch Road Paving",
+   "method": "name words + category",
+   "score": 1.25,
+   "shared_words": [
+    "branch",
+    "sweetwater"
+   ]
+  },
+  {
+   "schedule_index": 66,
+   "schedule_name": "County Line Road DEP Grant",
+   "category": "Dirt road stabilization & drainage",
+   "programmed_total": 2200000,
+   "fy_amounts": {
+    "2023": 900000,
+    "2024": 1300000
+   },
+   "schedule_status": "in_progress (under design)",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "project_index": 155,
+   "project_name": "County Line Road Paving",
+   "method": "name words + category",
+   "score": 1.25,
+   "shared_words": [
+    "cr",
+    "line"
+   ]
+  },
+  {
+   "schedule_index": 69,
+   "schedule_name": "Ivydell Street",
+   "category": "Dirt road stabilization & drainage",
+   "programmed_total": 550000,
+   "fy_amounts": {
+    "2026": 550000
+   },
+   "schedule_status": "planned/not started (no status colour)",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "project_index": 158,
+   "project_name": "Ivydell Street Paving",
+   "method": "name words + category",
+   "score": 1.25,
+   "shared_words": [
+    "ivydell"
+   ]
+  },
+  {
+   "schedule_index": 72,
+   "schedule_name": "Transmitter Rd & US 231 (SB Rt Turn Lane) ($1,384,000 FDOT Grant)",
+   "category": "Intersection improvement",
+   "programmed_total": 1384000,
+   "fy_amounts": {
+    "2022": 259000,
+    "2023": 1125000
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "project_index": 5,
+   "project_name": "Transmitter Road at US Highway 231 Intersection Improvements",
+   "method": "name words + category",
+   "score": 1.25,
+   "shared_words": [
+    "transmitter"
+   ]
+  },
+  {
+   "schedule_index": 73,
+   "schedule_name": "Sherman Avenue & 15th Street",
+   "category": "Intersection improvement",
+   "programmed_total": 888000,
+   "fy_amounts": {
+    "2022": 138000,
+    "2023": 750000
+   },
+   "schedule_status": "in_progress (under design)",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "project_index": 11,
+   "project_name": "Sherman Avenue and 15th Street (US Highway 98) Intersection Improvements",
+   "method": "name words + category",
+   "score": 1.25,
+   "shared_words": [
+    "15th",
+    "sherman"
+   ]
+  },
+  {
+   "schedule_index": 74,
+   "schedule_name": "Joan Ave at North Lagoon Dr",
+   "category": "Intersection improvement",
+   "programmed_total": 1200000,
+   "fy_amounts": {
+    "2022": 200000,
+    "2023": 1000000
+   },
+   "schedule_status": "in_progress (under design)",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "project_index": 10,
+   "project_name": "Joan Avenue at North Lagoon Drive Intersection Improvements",
+   "method": "name words + category + cross streets",
+   "score": 1.75,
+   "shared_words": [
+    "joan"
+   ]
+  },
+  {
+   "schedule_index": 75,
+   "schedule_name": "Star Ave @ US 231",
+   "category": "Intersection improvement",
+   "programmed_total": 2000000,
+   "fy_amounts": {
+    "2024": 2000000
+   },
+   "schedule_status": "in_progress (under design)",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "project_index": 8,
+   "project_name": "Star Avenue and US Highway 231 Intersection Improvements",
+   "method": "name words + category + cross streets",
+   "score": 1.75,
+   "shared_words": [
+    "star"
+   ]
+  },
+  {
+   "schedule_index": 79,
+   "schedule_name": "Replace Scotts Ferry Road Bridge (75% FDOT)",
+   "category": "Bridge repair & replacement",
+   "programmed_total": 100000,
+   "fy_amounts": {
+    "2024": 100000
+   },
+   "schedule_status": "in_progress (under design)",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "project_index": 0,
+   "project_name": "Scotts Ferry Road Bridge Replacement",
+   "method": "name words + category",
+   "score": 1.25,
+   "shared_words": [
+    "ferry",
+    "scotts"
+   ]
+  },
+  {
+   "schedule_index": 80,
+   "schedule_name": "Replace Mashburn Rd Bridge",
+   "category": "Bridge repair & replacement",
+   "programmed_total": 800000,
+   "fy_amounts": {
+    "2024": 100000,
+    "2025": 700000
+   },
+   "schedule_status": "removed (struck through)",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "project_index": 28,
+   "project_name": "Mashburn Road Bridge Replacement",
+   "method": "name words + category",
+   "score": 1.25,
+   "shared_words": [
+    "mashburn"
+   ]
+  },
+  {
+   "schedule_index": 81,
+   "schedule_name": "Replace Scott Road Bridge (FDOT)",
+   "category": "Bridge repair & replacement",
+   "programmed_total": 100000,
+   "fy_amounts": {
+    "2024": 100000
+   },
+   "schedule_status": "in_progress (under design)",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "project_index": 4,
+   "project_name": "Scott Road Bridge Replacement",
+   "method": "name words + category",
+   "score": 1.25,
+   "shared_words": [
+    "scott"
+   ]
+  },
+  {
+   "schedule_index": 82,
+   "schedule_name": "Replace Pinecrest Rd Bridge",
+   "category": "Bridge repair & replacement",
+   "programmed_total": 470000,
+   "fy_amounts": {
+    "2025": 70000,
+    "2026": 400000
+   },
+   "schedule_status": "removed (struck through)",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "project_index": 31,
+   "project_name": "Pinecrest Road Bridge Replacement",
+   "method": "name words + category",
+   "score": 1.25,
+   "shared_words": [
+    "pinecrest"
+   ]
+  },
+  {
+   "schedule_index": 83,
+   "schedule_name": "Repair Replace Otter Creek Bridge (75% LMS)",
+   "category": "Bridge repair & replacement",
+   "programmed_total": 1800000,
+   "fy_amounts": {
+    "2025": 100000,
+    "2026": 1700000
+   },
+   "schedule_status": "removed (struck through)",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "project_index": 29,
+   "project_name": "Otter Creek Bridge Replacement",
+   "method": "name words + category",
+   "score": 1.25,
+   "shared_words": [
+    "creek",
+    "otter"
+   ]
+  },
+  {
+   "schedule_index": 84,
+   "schedule_name": "W. Linger Longer Rd (V33-34) (DEP Grant 40%)",
+   "category": "FDEP notice of violation",
+   "programmed_total": 2174270,
+   "fy_amounts": {
+    "2023": 2174270
+   },
+   "schedule_status": "in_progress (construction/advertising)",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "project_index": 141,
+   "project_name": "W Linger Longer Road Paving",
+   "method": "name words + category",
+   "score": 1.25,
+   "shared_words": [
+    "linger",
+    "longer"
+   ]
+  },
+  {
+   "schedule_index": 98,
+   "schedule_name": "Industrial Drive & Redwood Ave Outfall Improvement (CDBG-DR)",
+   "category": "Stormwater capacity",
+   "programmed_total": 1445697,
+   "fy_amounts": {
+    "2022": 1445697
+   },
+   "schedule_status": "in_progress (under design)",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "project_index": 16,
+   "project_name": "Industrial Drive and Redwood Aveue Outfall Improvements Project",
+   "method": "name words + category",
+   "score": 1.25,
+   "shared_words": [
+    "industrial",
+    "redwood"
+   ]
+  },
+  {
+   "schedule_index": 102,
+   "schedule_name": "1716 Vecuna Cir (HMGP Grant 100%)",
+   "category": "Stormwater capacity",
+   "programmed_total": 275730,
+   "fy_amounts": {
+    "2023": 275730
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "project_index": 91,
+   "project_name": "1716 Vecuna Cir",
+   "method": "exact name",
+   "score": 1.0
+  },
+  {
+   "schedule_index": 103,
+   "schedule_name": "7135 N Lagoon Dr (HMGP Grant 100%)",
+   "category": "Stormwater capacity",
+   "programmed_total": 372730,
+   "fy_amounts": {
+    "2023": 372730
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "project_index": 90,
+   "project_name": "7135 N Lagoon Dr",
+   "method": "exact name",
+   "score": 1.0
+  },
+  {
+   "schedule_index": 104,
+   "schedule_name": "Jamaican Lake Basin Model",
+   "category": "Stormwater capacity",
+   "programmed_total": 100000,
+   "fy_amounts": {
+    "2023": 100000
+   },
+   "schedule_status": "in_progress (under design)",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "project_index": 102,
+   "project_name": "Jamaican Lake Basin Model",
+   "method": "exact name",
+   "score": 1.0
+  }
+ ],
+ "unmatched": [
+  {
+   "schedule_index": 1,
+   "schedule_name": "Silver Lake Road",
+   "category": "Resurfacing",
+   "programmed_total": 488445,
+   "fy_amounts": {
+    "2017": 488445
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "uncertain: several GIS projects score the same"
+  },
+  {
+   "schedule_index": 3,
+   "schedule_name": "Camellia St",
+   "category": "Resurfacing",
+   "programmed_total": 29783,
+   "fy_amounts": {
+    "2017": 29783
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "uncertain: several GIS projects score the same"
+  },
+  {
+   "schedule_index": 5,
+   "schedule_name": "Thomas Dr Drainage Rehab (Bristol St to Joan Ave)",
+   "category": "Resurfacing",
+   "programmed_total": 89914,
+   "fy_amounts": {
+    "2017": 89914
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "uncertain: several GIS projects score the same"
+  },
+  {
+   "schedule_index": 6,
+   "schedule_name": "Thomas Dr Reconstruction (Bristol St to Joan Ave)",
+   "category": "Resurfacing",
+   "programmed_total": 9880498,
+   "fy_amounts": {
+    "2018": 9285,
+    "2019": 68372,
+    "2020": 5531513,
+    "2021": 4271328
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "uncertain: category differs"
+  },
+  {
+   "schedule_index": 7,
+   "schedule_name": "CR 2302",
+   "category": "Resurfacing",
+   "programmed_total": 325000,
+   "fy_amounts": {
+    "2018": 325000
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "uncertain: several GIS projects score the same"
+  },
+  {
+   "schedule_index": 8,
+   "schedule_name": "High Point Rd",
+   "category": "Resurfacing",
+   "programmed_total": 275000,
+   "fy_amounts": {
+    "2018": 275000
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "uncertain: several GIS projects score the same"
+  },
+  {
+   "schedule_index": 9,
+   "schedule_name": "Indian Bluff Rd",
+   "category": "Resurfacing",
+   "programmed_total": 253047,
+   "fy_amounts": {
+    "2018": 253047
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "uncertain: several GIS projects score the same"
+  },
+  {
+   "schedule_index": 12,
+   "schedule_name": "Long Road",
+   "category": "Resurfacing",
+   "programmed_total": 194450,
+   "fy_amounts": {
+    "2019": 194450
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "uncertain: several GIS projects score the same"
+  },
+  {
+   "schedule_index": 14,
+   "schedule_name": "Resota Beach Rd",
+   "category": "Resurfacing",
+   "programmed_total": 112840,
+   "fy_amounts": {
+    "2019": 112840
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "uncertain: several GIS projects score the same"
+  },
+  {
+   "schedule_index": 15,
+   "schedule_name": "Laird Street",
+   "category": "Resurfacing",
+   "programmed_total": 671473,
+   "fy_amounts": {
+    "2019": 671473
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "uncertain: several GIS projects score the same"
+  },
+  {
+   "schedule_index": 16,
+   "schedule_name": "Allison Avenue",
+   "category": "Resurfacing",
+   "programmed_total": 382693,
+   "fy_amounts": {
+    "2019": 382693
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "uncertain: several GIS projects score the same"
+  },
+  {
+   "schedule_index": 17,
+   "schedule_name": "Harvard Blvd",
+   "category": "Resurfacing",
+   "programmed_total": 170885,
+   "fy_amounts": {
+    "2020": 170885
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "uncertain: several GIS projects score the same"
+  },
+  {
+   "schedule_index": 18,
+   "schedule_name": "Bayou George Dr",
+   "category": "Resurfacing",
+   "programmed_total": 472350,
+   "fy_amounts": {
+    "2020": 472350
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "uncertain: several GIS projects score the same"
+  },
+  {
+   "schedule_index": 19,
+   "schedule_name": "Merritt Brown Rd",
+   "category": "Resurfacing",
+   "programmed_total": 177900,
+   "fy_amounts": {
+    "2020": 177900
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "uncertain: several GIS projects score the same"
+  },
+  {
+   "schedule_index": 21,
+   "schedule_name": "Cherokee Heights Rd",
+   "category": "Resurfacing",
+   "programmed_total": 161586,
+   "fy_amounts": {
+    "2020": 161586
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "uncertain: several GIS projects score the same"
+  },
+  {
+   "schedule_index": 22,
+   "schedule_name": "Edwards Road",
+   "category": "Resurfacing",
+   "programmed_total": 159715,
+   "fy_amounts": {
+    "2020": 159715
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "uncertain: several GIS projects score the same"
+  },
+  {
+   "schedule_index": 27,
+   "schedule_name": "Pavement Preservation (program)",
+   "category": "Resurfacing",
+   "programmed_total": 1155764,
+   "fy_amounts": {
+    "2018": 195812,
+    "2019": 397197,
+    "2020": 389621,
+    "2021": 173134
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "county-wide program line, no single location"
+  },
+  {
+   "schedule_index": 28,
+   "schedule_name": "Local Roads (program)",
+   "category": "Resurfacing",
+   "programmed_total": 4374010,
+   "fy_amounts": {
+    "2018": 856753,
+    "2019": 613913,
+    "2020": 986789,
+    "2021": 1916555
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "county-wide program line, no single location"
+  },
+  {
+   "schedule_index": 29,
+   "schedule_name": "Panama City transfer",
+   "category": "Resurfacing",
+   "programmed_total": 760068,
+   "fy_amounts": {
+    "2020": 760068
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "county-wide program line, no single location"
+  },
+  {
+   "schedule_index": 35,
+   "schedule_name": "Silver Lake Road and S. Silver Lake Rd (Grant)",
+   "category": "Dirt road stabilization & drainage",
+   "programmed_total": 1400000,
+   "fy_amounts": {
+    "2021": 1400000
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "uncertain: several GIS projects score the same"
+  },
+  {
+   "schedule_index": 36,
+   "schedule_name": "Dirt Local Roads (program)",
+   "category": "Dirt road stabilization & drainage",
+   "programmed_total": 3175815,
+   "fy_amounts": {
+    "2018": 762242,
+    "2019": 707507,
+    "2020": 841295,
+    "2021": 864771
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "county-wide program line, no single location"
+  },
+  {
+   "schedule_index": 37,
+   "schedule_name": "CR 389 & Hwy 77 Intersection Left Turn Lane ($301k Grant)",
+   "category": "Intersection improvement",
+   "programmed_total": 596304,
+   "fy_amounts": {
+    "2017": 596304
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "uncertain: several GIS projects score the same"
+  },
+  {
+   "schedule_index": 38,
+   "schedule_name": "CR 389 & Hwy 231 Intersection Right Turn Lane ($301k Grant)",
+   "category": "Intersection improvement",
+   "programmed_total": 395048,
+   "fy_amounts": {
+    "2017": 395048
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "uncertain: several GIS projects score the same"
+  },
+  {
+   "schedule_index": 39,
+   "schedule_name": "Moylan @ PCB Parkway (Construct Left Turn Lane)",
+   "category": "Intersection improvement",
+   "programmed_total": 385387,
+   "fy_amounts": {
+    "2019": 385387
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "uncertain: category differs"
+  },
+  {
+   "schedule_index": 42,
+   "schedule_name": "East Ave Bridge Replacement (FY17 design / FY19 construction)",
+   "category": "Bridge repair & replacement",
+   "programmed_total": 734124,
+   "fy_amounts": {
+    "2017": 64434,
+    "2019": 669690
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "no distinctive name words"
+  },
+  {
+   "schedule_index": 46,
+   "schedule_name": "Sorrel's Dr (V-38)",
+   "category": "FDEP notice of violation",
+   "programmed_total": 480583,
+   "fy_amounts": {
+    "2017": 480583
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "no GIS project shares its road or place name"
+  },
+  {
+   "schedule_index": 47,
+   "schedule_name": "Old Allentown Road (C-24 and V-25)",
+   "category": "FDEP notice of violation",
+   "programmed_total": 515960,
+   "fy_amounts": {
+    "2018": 515960
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "uncertain: not every name word matches (possible misspelling)"
+  },
+  {
+   "schedule_index": 48,
+   "schedule_name": "Jenks Avenue Widening - Baldwin to S.R. 390 (Grant / Surtax)",
+   "category": "Capacity improvement",
+   "programmed_total": 12323543,
+   "fy_amounts": {
+    "2017": 7158,
+    "2018": 1115010,
+    "2019": 602828,
+    "2020": 2845667,
+    "2021": 7752880
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "uncertain: category differs"
+  },
+  {
+   "schedule_index": 49,
+   "schedule_name": "CR 2321 to SR 390 Connector Road",
+   "category": "Capacity improvement",
+   "programmed_total": 3311152,
+   "fy_amounts": {
+    "2018": 91667,
+    "2019": 17313,
+    "2020": 20792,
+    "2021": 3181380
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "uncertain: several GIS projects score the same"
+  },
+  {
+   "schedule_index": 50,
+   "schedule_name": "Loop Road Phase 2",
+   "category": "Capacity improvement",
+   "programmed_total": 3500000,
+   "fy_amounts": {
+    "2020": 1750000,
+    "2021": 1750000
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "no GIS project shares its road or place name"
+  },
+  {
+   "schedule_index": 51,
+   "schedule_name": "Laird Street Sidewalks (Joan Ave to Treasure Palms)",
+   "category": "Roadway safety",
+   "programmed_total": 650558,
+   "fy_amounts": {
+    "2017": 650558
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "uncertain: several GIS projects score the same"
+  },
+  {
+   "schedule_index": 52,
+   "schedule_name": "Frankford Ave Sidewalk (23rd St to SR 390)",
+   "category": "Roadway safety",
+   "programmed_total": 625026,
+   "fy_amounts": {
+    "2018": 625026
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "uncertain: category differs"
+  },
+  {
+   "schedule_index": 53,
+   "schedule_name": "CR 30 FB Rd (Twin Lakes to E. Lakeshore Dr) (Grant / Surtax)",
+   "category": "Roadway safety",
+   "programmed_total": 2405019,
+   "fy_amounts": {
+    "2018": 112352,
+    "2021": 2292667
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "uncertain: category differs"
+  },
+  {
+   "schedule_index": 54,
+   "schedule_name": "CR 30 FB Rd (Kelly Street - Twin Lakes) (Grant / Surtax)",
+   "category": "Roadway safety",
+   "programmed_total": 112353,
+   "fy_amounts": {
+    "2018": 112353
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "uncertain: category differs"
+  },
+  {
+   "schedule_index": 55,
+   "schedule_name": "CR 30 FB Rd (US 98 - Kelly Street) (Grant / Surtax) Design",
+   "category": "Roadway safety",
+   "programmed_total": 100000,
+   "fy_amounts": {
+    "2021": 100000
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "uncertain: category differs"
+  },
+  {
+   "schedule_index": 56,
+   "schedule_name": "Magnolia Beach Rd Sidewalk I",
+   "category": "Roadway safety",
+   "programmed_total": 602543,
+   "fy_amounts": {
+    "2019": 602543
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "uncertain: several GIS projects score the same"
+  },
+  {
+   "schedule_index": 57,
+   "schedule_name": "Magnolia Beach Rd Sidewalk PH II",
+   "category": "Roadway safety",
+   "programmed_total": 602543,
+   "fy_amounts": {
+    "2019": 602543
+   },
+   "schedule_status": "in_progress (construction/advertising)",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "uncertain: several GIS projects score the same"
+  },
+  {
+   "schedule_index": 59,
+   "schedule_name": "Allison Ave Regional Stormwater Facility (Land Purchase)",
+   "category": "Stormwater capacity",
+   "programmed_total": 496390,
+   "fy_amounts": {
+    "2017": 496390
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "uncertain: several GIS projects score the same"
+  },
+  {
+   "schedule_index": 60,
+   "schedule_name": "Laird Stormwater Basin Study",
+   "category": "Stormwater capacity",
+   "programmed_total": 75000,
+   "fy_amounts": {
+    "2021": 75000
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "uncertain: several GIS projects score the same"
+  },
+  {
+   "schedule_index": 62,
+   "schedule_name": "Annual Resurfacing Program",
+   "category": "Resurfacing",
+   "programmed_total": 17500000,
+   "fy_amounts": {
+    "2022": 1000000,
+    "2024": 5500000,
+    "2025": 5500000,
+    "2026": 5500000
+   },
+   "schedule_status": "in_progress (construction/advertising)",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "reason": "county-wide program line, no single location"
+  },
+  {
+   "schedule_index": 63,
+   "schedule_name": "Local Roads (program)",
+   "category": "Resurfacing",
+   "programmed_total": 10844233,
+   "fy_amounts": {
+    "2022": 5470585,
+    "2023": 3408648,
+    "2024": 655000,
+    "2025": 655000,
+    "2026": 655000
+   },
+   "schedule_status": "in_progress (construction/advertising)",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "reason": "county-wide program line, no single location"
+  },
+  {
+   "schedule_index": 64,
+   "schedule_name": "Pavement Preservation (program)",
+   "category": "Resurfacing",
+   "programmed_total": 2000000,
+   "fy_amounts": {
+    "2022": 400000,
+    "2023": 400000,
+    "2024": 400000,
+    "2025": 400000,
+    "2026": 400000
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "reason": "county-wide program line, no single location"
+  },
+  {
+   "schedule_index": 67,
+   "schedule_name": "Steelfield Road (LMS Grant)",
+   "category": "Dirt road stabilization & drainage",
+   "programmed_total": 2800000,
+   "fy_amounts": {
+    "2022": 2800000
+   },
+   "schedule_status": "in_progress (under design)",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "reason": "no GIS project shares its road or place name"
+  },
+  {
+   "schedule_index": 68,
+   "schedule_name": "Rollohome Road",
+   "category": "Dirt road stabilization & drainage",
+   "programmed_total": 1000000,
+   "fy_amounts": {
+    "2025": 1000000
+   },
+   "schedule_status": "in_progress (under design)",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "reason": "no GIS project shares its road or place name"
+  },
+  {
+   "schedule_index": 70,
+   "schedule_name": "Owenwood Road",
+   "category": "Dirt road stabilization & drainage",
+   "programmed_total": 375000,
+   "fy_amounts": {
+    "2026": 375000
+   },
+   "schedule_status": "planned/not started (no status colour)",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "reason": "uncertain: several GIS projects score the same"
+  },
+  {
+   "schedule_index": 71,
+   "schedule_name": "Dirt Local Roads (program)",
+   "category": "Dirt road stabilization & drainage",
+   "programmed_total": 4175064,
+   "fy_amounts": {
+    "2023": 1493233,
+    "2024": 1349831,
+    "2025": 666000,
+    "2026": 666000
+   },
+   "schedule_status": "in_progress (construction/advertising)",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "reason": "county-wide program line, no single location"
+  },
+  {
+   "schedule_index": 76,
+   "schedule_name": "CR 388 @ US 231 Construct Left Turn Lane",
+   "category": "Intersection improvement",
+   "programmed_total": 260000,
+   "fy_amounts": {
+    "2023": 60000,
+    "2024": 200000
+   },
+   "schedule_status": "planned/not started (no status colour)",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "reason": "uncertain: several GIS projects score the same"
+  },
+  {
+   "schedule_index": 77,
+   "schedule_name": "CR 2321 @ Highpoint Rd Construct Left Turn Lane",
+   "category": "Intersection improvement",
+   "programmed_total": 400000,
+   "fy_amounts": {
+    "2025": 400000
+   },
+   "schedule_status": "planned/not started (no status colour)",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "reason": "uncertain: several GIS projects score the same"
+  },
+  {
+   "schedule_index": 78,
+   "schedule_name": "CR 2301 @ Bayhead Rd Construct Left Turn Lane",
+   "category": "Intersection improvement",
+   "programmed_total": 400000,
+   "fy_amounts": {
+    "2026": 400000
+   },
+   "schedule_status": "planned/not started (no status colour)",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "reason": "uncertain: category differs"
+  },
+  {
+   "schedule_index": 85,
+   "schedule_name": "Alvie Homes Rd (V 27-28)",
+   "category": "FDEP notice of violation",
+   "programmed_total": 650000,
+   "fy_amounts": {
+    "2026": 650000
+   },
+   "schedule_status": "planned/not started (no status colour)",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "reason": "uncertain: not every name word matches (possible misspelling)"
+  },
+  {
+   "schedule_index": 86,
+   "schedule_name": "Minge Branch Connector",
+   "category": "Capacity improvement",
+   "programmed_total": 1900000,
+   "fy_amounts": {
+    "2022": 1900000
+   },
+   "schedule_status": "in_progress (construction/advertising)",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "reason": "uncertain: category differs"
+  },
+  {
+   "schedule_index": 87,
+   "schedule_name": "24th St Connector Rd Project (LH/County)",
+   "category": "Capacity improvement",
+   "programmed_total": 500000,
+   "fy_amounts": {
+    "2022": 500000
+   },
+   "schedule_status": "removed (struck through)",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "reason": "uncertain: several GIS projects score the same"
+  },
+  {
+   "schedule_index": 88,
+   "schedule_name": "Bay Parkway PH III (N. Clara to Alf Coleman) (PCB/County/TRIP)(75%)",
+   "category": "Capacity improvement",
+   "programmed_total": 9000000,
+   "fy_amounts": {
+    "2023": 1000000,
+    "2024": 4000000,
+    "2025": 4000000
+   },
+   "schedule_status": "in_progress (under design)",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "reason": "uncertain: category differs"
+  },
+  {
+   "schedule_index": 89,
+   "schedule_name": "Future Capacity Project",
+   "category": "Capacity improvement",
+   "programmed_total": 6000000,
+   "fy_amounts": {
+    "2026": 6000000
+   },
+   "schedule_status": "planned/not started (no status colour)",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "reason": "county-wide program line, no single location"
+  },
+  {
+   "schedule_index": 90,
+   "schedule_name": "CR 30 FB Rd PH III (Kelly St - US 98) (75% FDOT Grant)",
+   "category": "Roadway safety",
+   "programmed_total": 1152870,
+   "fy_amounts": {
+    "2023": 1152870
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "reason": "uncertain: category differs"
+  },
+  {
+   "schedule_index": 91,
+   "schedule_name": "Kings Point Sidewalk Project",
+   "category": "Roadway safety",
+   "programmed_total": 1200000,
+   "fy_amounts": {
+    "2022": 200000,
+    "2023": 1000000
+   },
+   "schedule_status": "transferred_to_city",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "reason": "uncertain: several GIS projects score the same"
+  },
+  {
+   "schedule_index": 92,
+   "schedule_name": "North Shore Rd Bike Lane Project",
+   "category": "Roadway safety",
+   "programmed_total": 874144,
+   "fy_amounts": {
+    "2023": 100000,
+    "2024": 774144
+   },
+   "schedule_status": "removed (struck through)",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "reason": "no GIS project shares its road or place name"
+  },
+  {
+   "schedule_index": 93,
+   "schedule_name": "Goose Bayou Bike Lane Project",
+   "category": "Roadway safety",
+   "programmed_total": 229125,
+   "fy_amounts": {
+    "2024": 229125
+   },
+   "schedule_status": "removed (struck through)",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "reason": "uncertain: category differs"
+  },
+  {
+   "schedule_index": 94,
+   "schedule_name": "Old Bicycle Road Bike Lane Project",
+   "category": "Roadway safety",
+   "programmed_total": 2239050,
+   "fy_amounts": {
+    "2024": 1000000,
+    "2025": 1239050
+   },
+   "schedule_status": "removed (struck through)",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "reason": "uncertain: category differs"
+  },
+  {
+   "schedule_index": 95,
+   "schedule_name": "Laurie Ave Sidewalk Project",
+   "category": "Roadway safety",
+   "programmed_total": 515280,
+   "fy_amounts": {
+    "2024": 50000,
+    "2025": 465280
+   },
+   "schedule_status": "removed (struck through)",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "reason": "no GIS project shares its road or place name"
+  },
+  {
+   "schedule_index": 96,
+   "schedule_name": "Kelly Street Bike Lane Project",
+   "category": "Roadway safety",
+   "programmed_total": 400000,
+   "fy_amounts": {
+    "2025": 50000,
+    "2026": 350000
+   },
+   "schedule_status": "removed (struck through)",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "reason": "uncertain: category differs"
+  },
+  {
+   "schedule_index": 97,
+   "schedule_name": "Harvard Blvd Sidewalk Project",
+   "category": "Roadway safety",
+   "programmed_total": 1298500,
+   "fy_amounts": {
+    "2025": 100000,
+    "2026": 1198500
+   },
+   "schedule_status": "removed (struck through)",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "reason": "uncertain: several GIS projects score the same"
+  },
+  {
+   "schedule_index": 99,
+   "schedule_name": "E. Hiland Park Drainage Improvement",
+   "category": "Stormwater capacity",
+   "programmed_total": 1500000,
+   "fy_amounts": {
+    "2023": 1500000
+   },
+   "schedule_status": "in_progress (under design)",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "reason": "uncertain: several GIS projects score the same"
+  },
+  {
+   "schedule_index": 100,
+   "schedule_name": "Watson Bayou Drainage Improvement Project",
+   "category": "Stormwater capacity",
+   "programmed_total": 2472930,
+   "fy_amounts": {
+    "2024": 2472930
+   },
+   "schedule_status": "in_progress (under design)",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "reason": "uncertain: several GIS projects score the same"
+  },
+  {
+   "schedule_index": 101,
+   "schedule_name": "1712 Vecuna Cir (HMGP Grant 100%)",
+   "category": "Stormwater capacity",
+   "programmed_total": 214000,
+   "fy_amounts": {
+    "2023": 214000
+   },
+   "schedule_status": "removed (struck through)",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "reason": "uncertain: not every name word matches (possible misspelling)"
+  }
+ ],
+ "review": [
+  {
+   "schedule_index": 1,
+   "schedule_name": "Silver Lake Road",
+   "category": "Resurfacing",
+   "programmed_total": 488445,
+   "fy_amounts": {
+    "2017": 488445
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "several GIS projects score the same",
+   "candidates": [
+    {
+     "project_index": 152,
+     "project_name": "South Silver Lake Road Paving",
+     "score": 1.25,
+     "shared_words": [
+      "lake",
+      "silver"
+     ]
+    },
+    {
+     "project_index": 150,
+     "project_name": "Silver Lake Road Paving",
+     "score": 1.25,
+     "shared_words": [
+      "lake",
+      "silver"
+     ]
+    },
+    {
+     "project_index": 119,
+     "project_name": "Silver Lake Road Repaving",
+     "score": 1.25,
+     "shared_words": [
+      "lake",
+      "silver"
+     ]
+    },
+    {
+     "project_index": 1023,
+     "project_name": "Lake Joanna Dr",
+     "score": 0.75,
+     "shared_words": [
+      "lake"
+     ]
+    }
+   ]
+  },
+  {
+   "schedule_index": 3,
+   "schedule_name": "Camellia St",
+   "category": "Resurfacing",
+   "programmed_total": 29783,
+   "fy_amounts": {
+    "2017": 29783
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "several GIS projects score the same",
+   "candidates": [
+    {
+     "project_index": 570,
+     "project_name": "Camellia Dr",
+     "score": 1.25,
+     "shared_words": [
+      "camellia"
+     ]
+    },
+    {
+     "project_index": 125,
+     "project_name": "Camellia Street Repaving",
+     "score": 1.25,
+     "shared_words": [
+      "camellia"
+     ]
+    }
+   ]
+  },
+  {
+   "schedule_index": 5,
+   "schedule_name": "Thomas Dr Drainage Rehab (Bristol St to Joan Ave)",
+   "category": "Resurfacing",
+   "programmed_total": 89914,
+   "fy_amounts": {
+    "2017": 89914
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "several GIS projects score the same",
+   "candidates": [
+    {
+     "project_index": 110,
+     "project_name": "Thomas Drive drainage rehab and Repaving",
+     "score": 1.75,
+     "shared_words": [
+      "thomas"
+     ]
+    },
+    {
+     "project_index": 101,
+     "project_name": "Thomas Dr Drainage Rehab",
+     "score": 1.75,
+     "shared_words": [
+      "thomas"
+     ]
+    },
+    {
+     "project_index": 668,
+     "project_name": "Alva Thomas Rd",
+     "score": 1.25,
+     "shared_words": [
+      "thomas"
+     ]
+    },
+    {
+     "project_index": 527,
+     "project_name": "Alva Thomas Rd",
+     "score": 1.25,
+     "shared_words": [
+      "thomas"
+     ]
+    }
+   ]
+  },
+  {
+   "schedule_index": 6,
+   "schedule_name": "Thomas Dr Reconstruction (Bristol St to Joan Ave)",
+   "category": "Resurfacing",
+   "programmed_total": 9880498,
+   "fy_amounts": {
+    "2018": 9285,
+    "2019": 68372,
+    "2020": 5531513,
+    "2021": 4271328
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "category differs",
+   "candidates": [
+    {
+     "project_index": 101,
+     "project_name": "Thomas Dr Drainage Rehab",
+     "score": 1.5,
+     "shared_words": [
+      "thomas"
+     ]
+    },
+    {
+     "project_index": 110,
+     "project_name": "Thomas Drive drainage rehab and Repaving",
+     "score": 1.25,
+     "shared_words": [
+      "thomas"
+     ]
+    },
+    {
+     "project_index": 668,
+     "project_name": "Alva Thomas Rd",
+     "score": 0.75,
+     "shared_words": [
+      "thomas"
+     ]
+    },
+    {
+     "project_index": 527,
+     "project_name": "Alva Thomas Rd",
+     "score": 0.75,
+     "shared_words": [
+      "thomas"
+     ]
+    }
+   ]
+  },
+  {
+   "schedule_index": 7,
+   "schedule_name": "CR 2302",
+   "category": "Resurfacing",
+   "programmed_total": 325000,
+   "fy_amounts": {
+    "2018": 325000
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "several GIS projects score the same",
+   "candidates": [
+    {
+     "project_index": 410,
+     "project_name": "Highway 2302",
+     "score": 1.25,
+     "shared_words": [
+      "2302"
+     ]
+    },
+    {
+     "project_index": 123,
+     "project_name": "County Road 2302 Repaving",
+     "score": 1.25,
+     "shared_words": [
+      "2302",
+      "cr"
+     ]
+    },
+    {
+     "project_index": 524,
+     "project_name": "Gobbler Cr",
+     "score": 0.75,
+     "shared_words": [
+      "cr"
+     ]
+    },
+    {
+     "project_index": 155,
+     "project_name": "County Line Road Paving",
+     "score": 0.75,
+     "shared_words": [
+      "cr"
+     ]
+    }
+   ]
+  },
+  {
+   "schedule_index": 8,
+   "schedule_name": "High Point Rd",
+   "category": "Resurfacing",
+   "programmed_total": 275000,
+   "fy_amounts": {
+    "2018": 275000
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "several GIS projects score the same",
+   "candidates": [
+    {
+     "project_index": 651,
+     "project_name": "High Point Dr",
+     "score": 1.25,
+     "shared_words": [
+      "high",
+      "point"
+     ]
+    },
+    {
+     "project_index": 557,
+     "project_name": "High Ave",
+     "score": 1.25,
+     "shared_words": [
+      "high"
+     ]
+    },
+    {
+     "project_index": 947,
+     "project_name": "Deer Point Lake Dr",
+     "score": 0.75,
+     "shared_words": [
+      "point"
+     ]
+    },
+    {
+     "project_index": 535,
+     "project_name": "Deer Point Dr",
+     "score": 0.75,
+     "shared_words": [
+      "point"
+     ]
+    }
+   ]
+  },
+  {
+   "schedule_index": 9,
+   "schedule_name": "Indian Bluff Rd",
+   "category": "Resurfacing",
+   "programmed_total": 253047,
+   "fy_amounts": {
+    "2018": 253047
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "several GIS projects score the same",
+   "candidates": [
+    {
+     "project_index": 811,
+     "project_name": "Indian Bluff Dr",
+     "score": 1.25,
+     "shared_words": [
+      "bluff",
+      "indian"
+     ]
+    },
+    {
+     "project_index": 807,
+     "project_name": "Indian Bluff Rd",
+     "score": 1.25,
+     "shared_words": [
+      "bluff",
+      "indian"
+     ]
+    },
+    {
+     "project_index": 135,
+     "project_name": "Indian Bluff Road",
+     "score": 1.25,
+     "shared_words": [
+      "bluff",
+      "indian"
+     ]
+    },
+    {
+     "project_index": 938,
+     "project_name": "Yellow Bluff Rd",
+     "score": 0.75,
+     "shared_words": [
+      "bluff"
+     ]
+    }
+   ]
+  },
+  {
+   "schedule_index": 12,
+   "schedule_name": "Long Road",
+   "category": "Resurfacing",
+   "programmed_total": 194450,
+   "fy_amounts": {
+    "2019": 194450
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "several GIS projects score the same",
+   "candidates": [
+    {
+     "project_index": 727,
+     "project_name": "Long St",
+     "score": 1.25,
+     "shared_words": [
+      "long"
+     ]
+    },
+    {
+     "project_index": 121,
+     "project_name": "Long Road Repaving",
+     "score": 1.25,
+     "shared_words": [
+      "long"
+     ]
+    }
+   ]
+  },
+  {
+   "schedule_index": 14,
+   "schedule_name": "Resota Beach Rd",
+   "category": "Resurfacing",
+   "programmed_total": 112840,
+   "fy_amounts": {
+    "2019": 112840
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "several GIS projects score the same",
+   "candidates": [
+    {
+     "project_index": 978,
+     "project_name": "Resota Ln",
+     "score": 1.25,
+     "shared_words": [
+      "resota"
+     ]
+    },
+    {
+     "project_index": 920,
+     "project_name": "Resota Beach Rd",
+     "score": 1.25,
+     "shared_words": [
+      "beach",
+      "resota"
+     ]
+    },
+    {
+     "project_index": 911,
+     "project_name": "Resota Beach Rd",
+     "score": 1.25,
+     "shared_words": [
+      "beach",
+      "resota"
+     ]
+    },
+    {
+     "project_index": 908,
+     "project_name": "Resota Beach Rd",
+     "score": 1.25,
+     "shared_words": [
+      "beach",
+      "resota"
+     ]
+    }
+   ]
+  },
+  {
+   "schedule_index": 15,
+   "schedule_name": "Laird Street",
+   "category": "Resurfacing",
+   "programmed_total": 671473,
+   "fy_amounts": {
+    "2019": 671473
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "several GIS projects score the same",
+   "candidates": [
+    {
+     "project_index": 425,
+     "project_name": "Laird St",
+     "score": 1.25,
+     "shared_words": [
+      "laird"
+     ]
+    },
+    {
+     "project_index": 133,
+     "project_name": "Laird Street",
+     "score": 1.25,
+     "shared_words": [
+      "laird"
+     ]
+    },
+    {
+     "project_index": 114,
+     "project_name": "Laird Street",
+     "score": 1.25,
+     "shared_words": [
+      "laird"
+     ]
+    },
+    {
+     "project_index": 1046,
+     "project_name": "Laird Cir",
+     "score": 1.0,
+     "shared_words": [
+      "laird"
+     ]
+    }
+   ]
+  },
+  {
+   "schedule_index": 16,
+   "schedule_name": "Allison Avenue",
+   "category": "Resurfacing",
+   "programmed_total": 382693,
+   "fy_amounts": {
+    "2019": 382693
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "several GIS projects score the same",
+   "candidates": [
+    {
+     "project_index": 134,
+     "project_name": "Allison Avenue",
+     "score": 1.25,
+     "shared_words": [
+      "allison"
+     ]
+    },
+    {
+     "project_index": 126,
+     "project_name": "Allison Avenue",
+     "score": 1.25,
+     "shared_words": [
+      "allison"
+     ]
+    }
+   ]
+  },
+  {
+   "schedule_index": 17,
+   "schedule_name": "Harvard Blvd",
+   "category": "Resurfacing",
+   "programmed_total": 170885,
+   "fy_amounts": {
+    "2020": 170885
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "several GIS projects score the same",
+   "candidates": [
+    {
+     "project_index": 549,
+     "project_name": "Harvard Ave",
+     "score": 1.25,
+     "shared_words": [
+      "harvard"
+     ]
+    },
+    {
+     "project_index": 519,
+     "project_name": "Harvard Cir",
+     "score": 1.25,
+     "shared_words": [
+      "harvard"
+     ]
+    },
+    {
+     "project_index": 513,
+     "project_name": "Harvard Ave",
+     "score": 1.25,
+     "shared_words": [
+      "harvard"
+     ]
+    },
+    {
+     "project_index": 115,
+     "project_name": "Harvard Boulevard Repaving",
+     "score": 1.25,
+     "shared_words": [
+      "harvard"
+     ]
+    }
+   ]
+  },
+  {
+   "schedule_index": 18,
+   "schedule_name": "Bayou George Dr",
+   "category": "Resurfacing",
+   "programmed_total": 472350,
+   "fy_amounts": {
+    "2020": 472350
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "several GIS projects score the same",
+   "candidates": [
+    {
+     "project_index": 828,
+     "project_name": "Bayou George Rd",
+     "score": 1.25,
+     "shared_words": [
+      "bayou",
+      "george"
+     ]
+    },
+    {
+     "project_index": 117,
+     "project_name": "Bayou George Drive Repaving",
+     "score": 1.25,
+     "shared_words": [
+      "bayou",
+      "george"
+     ]
+    },
+    {
+     "project_index": 1004,
+     "project_name": "Goose Bayou Rd",
+     "score": 0.75,
+     "shared_words": [
+      "bayou"
+     ]
+    },
+    {
+     "project_index": 973,
+     "project_name": "Robinson Bayou Cir",
+     "score": 0.75,
+     "shared_words": [
+      "bayou"
+     ]
+    }
+   ]
+  },
+  {
+   "schedule_index": 19,
+   "schedule_name": "Merritt Brown Rd",
+   "category": "Resurfacing",
+   "programmed_total": 177900,
+   "fy_amounts": {
+    "2020": 177900
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "several GIS projects score the same",
+   "candidates": [
+    {
+     "project_index": 667,
+     "project_name": "Merritt Brown Way",
+     "score": 1.25,
+     "shared_words": [
+      "brown",
+      "merritt"
+     ]
+    },
+    {
+     "project_index": 118,
+     "project_name": "Merritt Brown Road Repaving",
+     "score": 1.25,
+     "shared_words": [
+      "brown",
+      "merritt"
+     ]
+    },
+    {
+     "project_index": 344,
+     "project_name": "Merritt Brown Road Sidewalk",
+     "score": 1.0,
+     "shared_words": [
+      "brown",
+      "merritt"
+     ]
+    }
+   ]
+  },
+  {
+   "schedule_index": 21,
+   "schedule_name": "Cherokee Heights Rd",
+   "category": "Resurfacing",
+   "programmed_total": 161586,
+   "fy_amounts": {
+    "2020": 161586
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "several GIS projects score the same",
+   "candidates": [
+    {
+     "project_index": 865,
+     "project_name": "Cherokee St",
+     "score": 1.25,
+     "shared_words": [
+      "cherokee"
+     ]
+    },
+    {
+     "project_index": 649,
+     "project_name": "Cherokee Rd",
+     "score": 1.25,
+     "shared_words": [
+      "cherokee"
+     ]
+    },
+    {
+     "project_index": 643,
+     "project_name": "Cherokee Ln",
+     "score": 1.25,
+     "shared_words": [
+      "cherokee"
+     ]
+    },
+    {
+     "project_index": 131,
+     "project_name": "Cherokee Heights Road Repaving",
+     "score": 1.25,
+     "shared_words": [
+      "cherokee",
+      "heights"
+     ]
+    }
+   ]
+  },
+  {
+   "schedule_index": 22,
+   "schedule_name": "Edwards Road",
+   "category": "Resurfacing",
+   "programmed_total": 159715,
+   "fy_amounts": {
+    "2020": 159715
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "several GIS projects score the same",
+   "candidates": [
+    {
+     "project_index": 466,
+     "project_name": "Edwards Rd",
+     "score": 1.25,
+     "shared_words": [
+      "edwards"
+     ]
+    },
+    {
+     "project_index": 132,
+     "project_name": "Edwards Road",
+     "score": 1.25,
+     "shared_words": [
+      "edwards"
+     ]
+    }
+   ]
+  },
+  {
+   "schedule_index": 35,
+   "schedule_name": "Silver Lake Road and S. Silver Lake Rd (Grant)",
+   "category": "Dirt road stabilization & drainage",
+   "programmed_total": 1400000,
+   "fy_amounts": {
+    "2021": 1400000
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "several GIS projects score the same",
+   "candidates": [
+    {
+     "project_index": 152,
+     "project_name": "South Silver Lake Road Paving",
+     "score": 1.25,
+     "shared_words": [
+      "lake",
+      "silver"
+     ]
+    },
+    {
+     "project_index": 150,
+     "project_name": "Silver Lake Road Paving",
+     "score": 1.25,
+     "shared_words": [
+      "lake",
+      "silver"
+     ]
+    },
+    {
+     "project_index": 119,
+     "project_name": "Silver Lake Road Repaving",
+     "score": 1.25,
+     "shared_words": [
+      "lake",
+      "silver"
+     ]
+    },
+    {
+     "project_index": 1023,
+     "project_name": "Lake Joanna Dr",
+     "score": 0.75,
+     "shared_words": [
+      "lake"
+     ]
+    }
+   ]
+  },
+  {
+   "schedule_index": 37,
+   "schedule_name": "CR 389 & Hwy 77 Intersection Left Turn Lane ($301k Grant)",
+   "category": "Intersection improvement",
+   "programmed_total": 596304,
+   "fy_amounts": {
+    "2017": 596304
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "several GIS projects score the same",
+   "candidates": [
+    {
+     "project_index": 32,
+     "project_name": "County Road 389 at Dundee Lane Intersection Improvements",
+     "score": 1.25,
+     "shared_words": [
+      "389",
+      "cr"
+     ]
+    },
+    {
+     "project_index": 7,
+     "project_name": "County Road 389 and State Road 77",
+     "score": 1.25,
+     "shared_words": [
+      "389",
+      "77",
+      "cr"
+     ]
+    },
+    {
+     "project_index": 6,
+     "project_name": "County Road 389 at US Highway 231 Intersection Improvements",
+     "score": 1.25,
+     "shared_words": [
+      "389",
+      "cr"
+     ]
+    },
+    {
+     "project_index": 136,
+     "project_name": "County Road 389 (East Avenue) North Repaving",
+     "score": 1.0,
+     "shared_words": [
+      "389",
+      "cr"
+     ]
+    }
+   ]
+  },
+  {
+   "schedule_index": 38,
+   "schedule_name": "CR 389 & Hwy 231 Intersection Right Turn Lane ($301k Grant)",
+   "category": "Intersection improvement",
+   "programmed_total": 395048,
+   "fy_amounts": {
+    "2017": 395048
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "several GIS projects score the same",
+   "candidates": [
+    {
+     "project_index": 32,
+     "project_name": "County Road 389 at Dundee Lane Intersection Improvements",
+     "score": 1.25,
+     "shared_words": [
+      "389",
+      "cr"
+     ]
+    },
+    {
+     "project_index": 6,
+     "project_name": "County Road 389 at US Highway 231 Intersection Improvements",
+     "score": 1.25,
+     "shared_words": [
+      "389",
+      "cr"
+     ]
+    },
+    {
+     "project_index": 136,
+     "project_name": "County Road 389 (East Avenue) North Repaving",
+     "score": 1.0,
+     "shared_words": [
+      "389",
+      "cr"
+     ]
+    },
+    {
+     "project_index": 111,
+     "project_name": "County Road 389 (East Avenue) Repaving",
+     "score": 1.0,
+     "shared_words": [
+      "389",
+      "cr"
+     ]
+    }
+   ]
+  },
+  {
+   "schedule_index": 39,
+   "schedule_name": "Moylan @ PCB Parkway (Construct Left Turn Lane)",
+   "category": "Intersection improvement",
+   "programmed_total": 385387,
+   "fy_amounts": {
+    "2019": 385387
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "category differs",
+   "candidates": [
+    {
+     "project_index": 948,
+     "project_name": "Moylan Rd",
+     "score": 1.5,
+     "shared_words": [
+      "moylan"
+     ]
+    },
+    {
+     "project_index": 13,
+     "project_name": "Moylan Road at Panama City Beach Parkway Intersection Improvements",
+     "score": 1.25,
+     "shared_words": [
+      "moylan"
+     ]
+    }
+   ]
+  },
+  {
+   "schedule_index": 47,
+   "schedule_name": "Old Allentown Road (C-24 and V-25)",
+   "category": "FDEP notice of violation",
+   "programmed_total": 515960,
+   "fy_amounts": {
+    "2018": 515960
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "not every name word matches (possible misspelling)",
+   "candidates": [
+    {
+     "project_index": 146,
+     "project_name": "Old Allanton Road Paving",
+     "score": 1.25,
+     "shared_words": [
+      "old"
+     ]
+    }
+   ]
+  },
+  {
+   "schedule_index": 48,
+   "schedule_name": "Jenks Avenue Widening - Baldwin to S.R. 390 (Grant / Surtax)",
+   "category": "Capacity improvement",
+   "programmed_total": 12323543,
+   "fy_amounts": {
+    "2017": 7158,
+    "2018": 1115010,
+    "2019": 602828,
+    "2020": 2845667,
+    "2021": 7752880
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "category differs",
+   "candidates": [
+    {
+     "project_index": 144,
+     "project_name": "Baldwin Road Widening",
+     "score": 1.0,
+     "shared_words": [
+      "baldwin"
+     ]
+    },
+    {
+     "project_index": 139,
+     "project_name": "Jenks Avenue Widening with Bike Lanes",
+     "score": 0.5,
+     "shared_words": [
+      "jenks"
+     ]
+    }
+   ]
+  },
+  {
+   "schedule_index": 49,
+   "schedule_name": "CR 2321 to SR 390 Connector Road",
+   "category": "Capacity improvement",
+   "programmed_total": 3311152,
+   "fy_amounts": {
+    "2018": 91667,
+    "2019": 17313,
+    "2020": 20792,
+    "2021": 3181380
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "several GIS projects score the same",
+   "candidates": [
+    {
+     "project_index": 1061,
+     "project_name": "HIGHWAY 2321",
+     "score": 1.0,
+     "shared_words": [
+      "2321"
+     ]
+    },
+    {
+     "project_index": 1060,
+     "project_name": "Highway 2321",
+     "score": 1.0,
+     "shared_words": [
+      "2321"
+     ]
+    },
+    {
+     "project_index": 1059,
+     "project_name": "Highway 2321",
+     "score": 1.0,
+     "shared_words": [
+      "2321"
+     ]
+    },
+    {
+     "project_index": 1058,
+     "project_name": "Highway 2321",
+     "score": 1.0,
+     "shared_words": [
+      "2321"
+     ]
+    }
+   ]
+  },
+  {
+   "schedule_index": 51,
+   "schedule_name": "Laird Street Sidewalks (Joan Ave to Treasure Palms)",
+   "category": "Roadway safety",
+   "programmed_total": 650558,
+   "fy_amounts": {
+    "2017": 650558
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "several GIS projects score the same",
+   "candidates": [
+    {
+     "project_index": 1046,
+     "project_name": "Laird Cir",
+     "score": 1.0,
+     "shared_words": [
+      "laird"
+     ]
+    },
+    {
+     "project_index": 425,
+     "project_name": "Laird St",
+     "score": 1.0,
+     "shared_words": [
+      "laird"
+     ]
+    },
+    {
+     "project_index": 133,
+     "project_name": "Laird Street",
+     "score": 1.0,
+     "shared_words": [
+      "laird"
+     ]
+    },
+    {
+     "project_index": 114,
+     "project_name": "Laird Street",
+     "score": 1.0,
+     "shared_words": [
+      "laird"
+     ]
+    }
+   ]
+  },
+  {
+   "schedule_index": 52,
+   "schedule_name": "Frankford Ave Sidewalk (23rd St to SR 390)",
+   "category": "Roadway safety",
+   "programmed_total": 625026,
+   "fy_amounts": {
+    "2018": 625026
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "category differs",
+   "candidates": [
+    {
+     "project_index": 108,
+     "project_name": "Frankford Avenue Roadway Safety Project",
+     "score": 1.5,
+     "shared_words": [
+      "frankford"
+     ]
+    },
+    {
+     "project_index": 127,
+     "project_name": "Frankford Avenue Repaving",
+     "score": 1.0,
+     "shared_words": [
+      "frankford"
+     ]
+    }
+   ]
+  },
+  {
+   "schedule_index": 53,
+   "schedule_name": "CR 30 FB Rd (Twin Lakes to E. Lakeshore Dr) (Grant / Surtax)",
+   "category": "Roadway safety",
+   "programmed_total": 2405019,
+   "fy_amounts": {
+    "2018": 112352,
+    "2021": 2292667
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "category differs",
+   "candidates": [
+    {
+     "project_index": 143,
+     "project_name": "County Road 30 (Front Beach Road) Safety Projcet",
+     "score": 1.333,
+     "shared_words": [
+      "30",
+      "cr"
+     ]
+    },
+    {
+     "project_index": 861,
+     "project_name": "Beach Dr",
+     "score": 1.0,
+     "shared_words": [
+      "beach"
+     ]
+    },
+    {
+     "project_index": 860,
+     "project_name": "Beach Dr",
+     "score": 1.0,
+     "shared_words": [
+      "beach"
+     ]
+    },
+    {
+     "project_index": 859,
+     "project_name": "Beach Dr",
+     "score": 1.0,
+     "shared_words": [
+      "beach"
+     ]
+    }
+   ]
+  },
+  {
+   "schedule_index": 54,
+   "schedule_name": "CR 30 FB Rd (Kelly Street - Twin Lakes) (Grant / Surtax)",
+   "category": "Roadway safety",
+   "programmed_total": 112353,
+   "fy_amounts": {
+    "2018": 112353
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "category differs",
+   "candidates": [
+    {
+     "project_index": 143,
+     "project_name": "County Road 30 (Front Beach Road) Safety Projcet",
+     "score": 1.333,
+     "shared_words": [
+      "30",
+      "cr"
+     ]
+    },
+    {
+     "project_index": 395,
+     "project_name": "County Road 30 (Front Beach Road) Safety Projcet",
+     "score": 1.167,
+     "shared_words": [
+      "30",
+      "cr"
+     ]
+    },
+    {
+     "project_index": 861,
+     "project_name": "Beach Dr",
+     "score": 1.0,
+     "shared_words": [
+      "beach"
+     ]
+    },
+    {
+     "project_index": 860,
+     "project_name": "Beach Dr",
+     "score": 1.0,
+     "shared_words": [
+      "beach"
+     ]
+    }
+   ]
+  },
+  {
+   "schedule_index": 55,
+   "schedule_name": "CR 30 FB Rd (US 98 - Kelly Street) (Grant / Surtax) Design",
+   "category": "Roadway safety",
+   "programmed_total": 100000,
+   "fy_amounts": {
+    "2021": 100000
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "category differs",
+   "candidates": [
+    {
+     "project_index": 395,
+     "project_name": "County Road 30 (Front Beach Road) Safety Projcet",
+     "score": 1.5,
+     "shared_words": [
+      "30",
+      "cr"
+     ]
+    },
+    {
+     "project_index": 861,
+     "project_name": "Beach Dr",
+     "score": 1.0,
+     "shared_words": [
+      "beach"
+     ]
+    },
+    {
+     "project_index": 860,
+     "project_name": "Beach Dr",
+     "score": 1.0,
+     "shared_words": [
+      "beach"
+     ]
+    },
+    {
+     "project_index": 859,
+     "project_name": "Beach Dr",
+     "score": 1.0,
+     "shared_words": [
+      "beach"
+     ]
+    }
+   ]
+  },
+  {
+   "schedule_index": 56,
+   "schedule_name": "Magnolia Beach Rd Sidewalk I",
+   "category": "Roadway safety",
+   "programmed_total": 602543,
+   "fy_amounts": {
+    "2019": 602543
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "several GIS projects score the same",
+   "candidates": [
+    {
+     "project_index": 861,
+     "project_name": "Beach Dr",
+     "score": 1.0,
+     "shared_words": [
+      "beach"
+     ]
+    },
+    {
+     "project_index": 860,
+     "project_name": "Beach Dr",
+     "score": 1.0,
+     "shared_words": [
+      "beach"
+     ]
+    },
+    {
+     "project_index": 859,
+     "project_name": "Beach Dr",
+     "score": 1.0,
+     "shared_words": [
+      "beach"
+     ]
+    },
+    {
+     "project_index": 840,
+     "project_name": "Beach Dr",
+     "score": 1.0,
+     "shared_words": [
+      "beach"
+     ]
+    }
+   ]
+  },
+  {
+   "schedule_index": 57,
+   "schedule_name": "Magnolia Beach Rd Sidewalk PH II",
+   "category": "Roadway safety",
+   "programmed_total": 602543,
+   "fy_amounts": {
+    "2019": 602543
+   },
+   "schedule_status": "in_progress (construction/advertising)",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "several GIS projects score the same",
+   "candidates": [
+    {
+     "project_index": 861,
+     "project_name": "Beach Dr",
+     "score": 1.0,
+     "shared_words": [
+      "beach"
+     ]
+    },
+    {
+     "project_index": 860,
+     "project_name": "Beach Dr",
+     "score": 1.0,
+     "shared_words": [
+      "beach"
+     ]
+    },
+    {
+     "project_index": 859,
+     "project_name": "Beach Dr",
+     "score": 1.0,
+     "shared_words": [
+      "beach"
+     ]
+    },
+    {
+     "project_index": 840,
+     "project_name": "Beach Dr",
+     "score": 1.0,
+     "shared_words": [
+      "beach"
+     ]
+    }
+   ]
+  },
+  {
+   "schedule_index": 59,
+   "schedule_name": "Allison Ave Regional Stormwater Facility (Land Purchase)",
+   "category": "Stormwater capacity",
+   "programmed_total": 496390,
+   "fy_amounts": {
+    "2017": 496390
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "several GIS projects score the same",
+   "candidates": [
+    {
+     "project_index": 134,
+     "project_name": "Allison Avenue",
+     "score": 1.0,
+     "shared_words": [
+      "allison"
+     ]
+    },
+    {
+     "project_index": 126,
+     "project_name": "Allison Avenue",
+     "score": 1.0,
+     "shared_words": [
+      "allison"
+     ]
+    },
+    {
+     "project_index": 14,
+     "project_name": "Grand Lagoon Regional Stormwater Facility",
+     "score": 0.75,
+     "shared_words": [
+      "stormwater"
+     ]
+    }
+   ]
+  },
+  {
+   "schedule_index": 60,
+   "schedule_name": "Laird Stormwater Basin Study",
+   "category": "Stormwater capacity",
+   "programmed_total": 75000,
+   "fy_amounts": {
+    "2021": 75000
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+   "reason": "several GIS projects score the same",
+   "candidates": [
+    {
+     "project_index": 1046,
+     "project_name": "Laird Cir",
+     "score": 1.0,
+     "shared_words": [
+      "laird"
+     ]
+    },
+    {
+     "project_index": 425,
+     "project_name": "Laird St",
+     "score": 1.0,
+     "shared_words": [
+      "laird"
+     ]
+    },
+    {
+     "project_index": 133,
+     "project_name": "Laird Street",
+     "score": 1.0,
+     "shared_words": [
+      "laird"
+     ]
+    },
+    {
+     "project_index": 114,
+     "project_name": "Laird Street",
+     "score": 1.0,
+     "shared_words": [
+      "laird"
+     ]
+    }
+   ]
+  },
+  {
+   "schedule_index": 70,
+   "schedule_name": "Owenwood Road",
+   "category": "Dirt road stabilization & drainage",
+   "programmed_total": 375000,
+   "fy_amounts": {
+    "2026": 375000
+   },
+   "schedule_status": "planned/not started (no status colour)",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "reason": "several GIS projects score the same",
+   "candidates": [
+    {
+     "project_index": 635,
+     "project_name": "Owenwood Rd",
+     "score": 1.25,
+     "shared_words": [
+      "owenwood"
+     ]
+    },
+    {
+     "project_index": 582,
+     "project_name": "Owenwood Rd",
+     "score": 1.25,
+     "shared_words": [
+      "owenwood"
+     ]
+    },
+    {
+     "project_index": 151,
+     "project_name": "Owenwood Road Paving",
+     "score": 1.25,
+     "shared_words": [
+      "owenwood"
+     ]
+    }
+   ]
+  },
+  {
+   "schedule_index": 76,
+   "schedule_name": "CR 388 @ US 231 Construct Left Turn Lane",
+   "category": "Intersection improvement",
+   "programmed_total": 260000,
+   "fy_amounts": {
+    "2023": 60000,
+    "2024": 200000
+   },
+   "schedule_status": "planned/not started (no status colour)",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "reason": "several GIS projects score the same",
+   "candidates": [
+    {
+     "project_index": 107,
+     "project_name": "County Road 388 Roadway Repaving",
+     "score": 1.25,
+     "shared_words": [
+      "388",
+      "cr"
+     ]
+    },
+    {
+     "project_index": 6,
+     "project_name": "County Road 389 at US Highway 231 Intersection Improvements",
+     "score": 1.25,
+     "shared_words": [
+      "cr"
+     ]
+    },
+    {
+     "project_index": 155,
+     "project_name": "County Line Road Paving",
+     "score": 1.0,
+     "shared_words": [
+      "cr"
+     ]
+    },
+    {
+     "project_index": 395,
+     "project_name": "County Road 30 (Front Beach Road) Safety Projcet",
+     "score": 0.75,
+     "shared_words": [
+      "cr"
+     ]
+    }
+   ]
+  },
+  {
+   "schedule_index": 77,
+   "schedule_name": "CR 2321 @ Highpoint Rd Construct Left Turn Lane",
+   "category": "Intersection improvement",
+   "programmed_total": 400000,
+   "fy_amounts": {
+    "2025": 400000
+   },
+   "schedule_status": "planned/not started (no status colour)",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "reason": "several GIS projects score the same",
+   "candidates": [
+    {
+     "project_index": 1061,
+     "project_name": "HIGHWAY 2321",
+     "score": 1.0,
+     "shared_words": [
+      "2321"
+     ]
+    },
+    {
+     "project_index": 1060,
+     "project_name": "Highway 2321",
+     "score": 1.0,
+     "shared_words": [
+      "2321"
+     ]
+    },
+    {
+     "project_index": 1059,
+     "project_name": "Highway 2321",
+     "score": 1.0,
+     "shared_words": [
+      "2321"
+     ]
+    },
+    {
+     "project_index": 1058,
+     "project_name": "Highway 2321",
+     "score": 1.0,
+     "shared_words": [
+      "2321"
+     ]
+    }
+   ]
+  },
+  {
+   "schedule_index": 78,
+   "schedule_name": "CR 2301 @ Bayhead Rd Construct Left Turn Lane",
+   "category": "Intersection improvement",
+   "programmed_total": 400000,
+   "fy_amounts": {
+    "2026": 400000
+   },
+   "schedule_status": "planned/not started (no status colour)",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "reason": "category differs",
+   "candidates": [
+    {
+     "project_index": 3,
+     "project_name": "County Road 2301 Bridge Replacement",
+     "score": 1.0,
+     "shared_words": [
+      "2301",
+      "cr"
+     ]
+    },
+    {
+     "project_index": 32,
+     "project_name": "County Road 389 at Dundee Lane Intersection Improvements",
+     "score": 0.75,
+     "shared_words": [
+      "cr"
+     ]
+    },
+    {
+     "project_index": 7,
+     "project_name": "County Road 389 and State Road 77",
+     "score": 0.75,
+     "shared_words": [
+      "cr"
+     ]
+    },
+    {
+     "project_index": 6,
+     "project_name": "County Road 389 at US Highway 231 Intersection Improvements",
+     "score": 0.75,
+     "shared_words": [
+      "cr"
+     ]
+    }
+   ]
+  },
+  {
+   "schedule_index": 85,
+   "schedule_name": "Alvie Homes Rd (V 27-28)",
+   "category": "FDEP notice of violation",
+   "programmed_total": 650000,
+   "fy_amounts": {
+    "2026": 650000
+   },
+   "schedule_status": "planned/not started (no status colour)",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "reason": "not every name word matches (possible misspelling)",
+   "candidates": [
+    {
+     "project_index": 145,
+     "project_name": "Alvie Holmes Road Paving",
+     "score": 1.25,
+     "shared_words": [
+      "alvie"
+     ]
+    },
+    {
+     "project_index": 30,
+     "project_name": "Alvie Holmes Road Bridge Replacement",
+     "score": 0.5,
+     "shared_words": [
+      "alvie"
+     ]
+    }
+   ]
+  },
+  {
+   "schedule_index": 86,
+   "schedule_name": "Minge Branch Connector",
+   "category": "Capacity improvement",
+   "programmed_total": 1900000,
+   "fy_amounts": {
+    "2022": 1900000
+   },
+   "schedule_status": "in_progress (construction/advertising)",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "reason": "category differs",
+   "candidates": [
+    {
+     "project_index": 689,
+     "project_name": "Minge Branch Connector Road",
+     "score": 1.0,
+     "shared_words": [
+      "branch",
+      "minge"
+     ]
+    },
+    {
+     "project_index": 550,
+     "project_name": "Sherrett Branch Rd",
+     "score": 0.5,
+     "shared_words": [
+      "branch"
+     ]
+    },
+    {
+     "project_index": 154,
+     "project_name": "Sweetwater Branch Road Paving",
+     "score": 0.5,
+     "shared_words": [
+      "branch"
+     ]
+    }
+   ]
+  },
+  {
+   "schedule_index": 87,
+   "schedule_name": "24th St Connector Rd Project (LH/County)",
+   "category": "Capacity improvement",
+   "programmed_total": 500000,
+   "fy_amounts": {
+    "2022": 500000
+   },
+   "schedule_status": "removed (struck through)",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "reason": "several GIS projects score the same",
+   "candidates": [
+    {
+     "project_index": 617,
+     "project_name": "W 24th Ct",
+     "score": 1.0,
+     "shared_words": [
+      "24th"
+     ]
+    },
+    {
+     "project_index": 495,
+     "project_name": "E 24th Plz",
+     "score": 1.0,
+     "shared_words": [
+      "24th"
+     ]
+    }
+   ]
+  },
+  {
+   "schedule_index": 88,
+   "schedule_name": "Bay Parkway PH III (N. Clara to Alf Coleman) (PCB/County/TRIP)(75%)",
+   "category": "Capacity improvement",
+   "programmed_total": 9000000,
+   "fy_amounts": {
+    "2023": 1000000,
+    "2024": 4000000,
+    "2025": 4000000
+   },
+   "schedule_status": "in_progress (under design)",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "reason": "category differs",
+   "candidates": [
+    {
+     "project_index": 394,
+     "project_name": "Bay Parkway  Phase III",
+     "score": 1.5,
+     "shared_words": [
+      "bay"
+     ]
+    },
+    {
+     "project_index": 910,
+     "project_name": "Bay Ave",
+     "score": 1.0,
+     "shared_words": [
+      "bay"
+     ]
+    },
+    {
+     "project_index": 868,
+     "project_name": "Bay Line Dr",
+     "score": 1.0,
+     "shared_words": [
+      "bay"
+     ]
+    },
+    {
+     "project_index": 671,
+     "project_name": "N Bay Dr",
+     "score": 1.0,
+     "shared_words": [
+      "bay"
+     ]
+    }
+   ]
+  },
+  {
+   "schedule_index": 90,
+   "schedule_name": "CR 30 FB Rd PH III (Kelly St - US 98) (75% FDOT Grant)",
+   "category": "Roadway safety",
+   "programmed_total": 1152870,
+   "fy_amounts": {
+    "2023": 1152870
+   },
+   "schedule_status": "completed",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "reason": "category differs",
+   "candidates": [
+    {
+     "project_index": 395,
+     "project_name": "County Road 30 (Front Beach Road) Safety Projcet",
+     "score": 1.5,
+     "shared_words": [
+      "30",
+      "cr"
+     ]
+    },
+    {
+     "project_index": 861,
+     "project_name": "Beach Dr",
+     "score": 1.0,
+     "shared_words": [
+      "beach"
+     ]
+    },
+    {
+     "project_index": 860,
+     "project_name": "Beach Dr",
+     "score": 1.0,
+     "shared_words": [
+      "beach"
+     ]
+    },
+    {
+     "project_index": 859,
+     "project_name": "Beach Dr",
+     "score": 1.0,
+     "shared_words": [
+      "beach"
+     ]
+    }
+   ]
+  },
+  {
+   "schedule_index": 91,
+   "schedule_name": "Kings Point Sidewalk Project",
+   "category": "Roadway safety",
+   "programmed_total": 1200000,
+   "fy_amounts": {
+    "2022": 200000,
+    "2023": 1000000
+   },
+   "schedule_status": "transferred_to_city",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "reason": "several GIS projects score the same",
+   "candidates": [
+    {
+     "project_index": 987,
+     "project_name": "Kings Dr",
+     "score": 1.0,
+     "shared_words": [
+      "kings"
+     ]
+    },
+    {
+     "project_index": 518,
+     "project_name": "Kings Rd",
+     "score": 1.0,
+     "shared_words": [
+      "kings"
+     ]
+    },
+    {
+     "project_index": 947,
+     "project_name": "Deer Point Lake Dr",
+     "score": 0.5,
+     "shared_words": [
+      "point"
+     ]
+    },
+    {
+     "project_index": 651,
+     "project_name": "High Point Dr",
+     "score": 0.5,
+     "shared_words": [
+      "point"
+     ]
+    }
+   ]
+  },
+  {
+   "schedule_index": 93,
+   "schedule_name": "Goose Bayou Bike Lane Project",
+   "category": "Roadway safety",
+   "programmed_total": 229125,
+   "fy_amounts": {
+    "2024": 229125
+   },
+   "schedule_status": "removed (struck through)",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "reason": "category differs",
+   "candidates": [
+    {
+     "project_index": 1004,
+     "project_name": "Goose Bayou Rd",
+     "score": 1.0,
+     "shared_words": [
+      "bayou",
+      "goose"
+     ]
+    },
+    {
+     "project_index": 973,
+     "project_name": "Robinson Bayou Cir",
+     "score": 0.5,
+     "shared_words": [
+      "bayou"
+     ]
+    },
+    {
+     "project_index": 958,
+     "project_name": "S Gainer Bayou Rd",
+     "score": 0.5,
+     "shared_words": [
+      "bayou"
+     ]
+    },
+    {
+     "project_index": 950,
+     "project_name": "Fanning Bayou Dr",
+     "score": 0.5,
+     "shared_words": [
+      "bayou"
+     ]
+    }
+   ]
+  },
+  {
+   "schedule_index": 94,
+   "schedule_name": "Old Bicycle Road Bike Lane Project",
+   "category": "Roadway safety",
+   "programmed_total": 2239050,
+   "fy_amounts": {
+    "2024": 1000000,
+    "2025": 1239050
+   },
+   "schedule_status": "removed (struck through)",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "reason": "category differs",
+   "candidates": [
+    {
+     "project_index": 146,
+     "project_name": "Old Allanton Road Paving",
+     "score": 0.5,
+     "shared_words": [
+      "old"
+     ]
+    }
+   ]
+  },
+  {
+   "schedule_index": 96,
+   "schedule_name": "Kelly Street Bike Lane Project",
+   "category": "Roadway safety",
+   "programmed_total": 400000,
+   "fy_amounts": {
+    "2025": 50000,
+    "2026": 350000
+   },
+   "schedule_status": "removed (struck through)",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "reason": "category differs",
+   "candidates": [
+    {
+     "project_index": 864,
+     "project_name": "Kelly St",
+     "score": 1.0,
+     "shared_words": [
+      "kelly"
+     ]
+    }
+   ]
+  },
+  {
+   "schedule_index": 97,
+   "schedule_name": "Harvard Blvd Sidewalk Project",
+   "category": "Roadway safety",
+   "programmed_total": 1298500,
+   "fy_amounts": {
+    "2025": 100000,
+    "2026": 1198500
+   },
+   "schedule_status": "removed (struck through)",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "reason": "several GIS projects score the same",
+   "candidates": [
+    {
+     "project_index": 549,
+     "project_name": "Harvard Ave",
+     "score": 1.0,
+     "shared_words": [
+      "harvard"
+     ]
+    },
+    {
+     "project_index": 519,
+     "project_name": "Harvard Cir",
+     "score": 1.0,
+     "shared_words": [
+      "harvard"
+     ]
+    },
+    {
+     "project_index": 513,
+     "project_name": "Harvard Ave",
+     "score": 1.0,
+     "shared_words": [
+      "harvard"
+     ]
+    },
+    {
+     "project_index": 115,
+     "project_name": "Harvard Boulevard Repaving",
+     "score": 1.0,
+     "shared_words": [
+      "harvard"
+     ]
+    }
+   ]
+  },
+  {
+   "schedule_index": 99,
+   "schedule_name": "E. Hiland Park Drainage Improvement",
+   "category": "Stormwater capacity",
+   "programmed_total": 1500000,
+   "fy_amounts": {
+    "2023": 1500000
+   },
+   "schedule_status": "in_progress (under design)",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "reason": "several GIS projects score the same",
+   "candidates": [
+    {
+     "project_index": 644,
+     "project_name": "Park Ave",
+     "score": 1.0,
+     "shared_words": [
+      "park"
+     ]
+    },
+    {
+     "project_index": 573,
+     "project_name": "Park Ave",
+     "score": 1.0,
+     "shared_words": [
+      "park"
+     ]
+    }
+   ]
+  },
+  {
+   "schedule_index": 100,
+   "schedule_name": "Watson Bayou Drainage Improvement Project",
+   "category": "Stormwater capacity",
+   "programmed_total": 2472930,
+   "fy_amounts": {
+    "2024": 2472930
+   },
+   "schedule_status": "in_progress (under design)",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "reason": "several GIS projects score the same",
+   "candidates": [
+    {
+     "project_index": 1004,
+     "project_name": "Goose Bayou Rd",
+     "score": 0.5,
+     "shared_words": [
+      "bayou"
+     ]
+    },
+    {
+     "project_index": 973,
+     "project_name": "Robinson Bayou Cir",
+     "score": 0.5,
+     "shared_words": [
+      "bayou"
+     ]
+    },
+    {
+     "project_index": 958,
+     "project_name": "S Gainer Bayou Rd",
+     "score": 0.5,
+     "shared_words": [
+      "bayou"
+     ]
+    },
+    {
+     "project_index": 950,
+     "project_name": "Fanning Bayou Dr",
+     "score": 0.5,
+     "shared_words": [
+      "bayou"
+     ]
+    }
+   ]
+  },
+  {
+   "schedule_index": 101,
+   "schedule_name": "1712 Vecuna Cir (HMGP Grant 100%)",
+   "category": "Stormwater capacity",
+   "programmed_total": 214000,
+   "fy_amounts": {
+    "2023": 214000
+   },
+   "schedule_status": "removed (struck through)",
+   "source_url": "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf",
+   "reason": "not every name word matches (possible misspelling)",
+   "candidates": [
+    {
+     "project_index": 91,
+     "project_name": "1716 Vecuna Cir",
+     "score": 0.75,
+     "shared_words": [
+      "vecuna"
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -107,6 +107,10 @@
     {
      "name": "page",
      "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
     }
    ],
    "json": "/downloads/government-profiles.json",
@@ -117,7 +121,7 @@
    "id": "votes",
    "title": "Recorded votes",
    "description": "Money votes by the County Commission, School Board, city commissions and CRA boards, with how each member voted.",
-   "rows": 576,
+   "rows": 606,
    "columns": [
     {
      "name": "date",
@@ -209,7 +213,9 @@
       "4-0 (unanimous)",
       "4-1",
       "5-0",
+      "5-0 (minutes: 'carried unanimously upon roll-call vote')",
       "5-0 (minutes: 'carried unanimously')",
+      "5-0 (minutes: 'carried unanimously'; Mayor Henderson attended by phone)",
       "not found",
       "unanimous",
       "unanimous (per news; names not listed)"
@@ -275,6 +281,52 @@
     {
      "name": "source_url",
      "type": "string"
+    },
+    {
+     "name": "members",
+     "type": "array"
+    },
+    {
+     "name": "vote_id",
+     "type": "string"
+    },
+    {
+     "name": "contract_ids",
+     "type": "array"
+    },
+    {
+     "name": "contract_match_method",
+     "type": "string",
+     "values": [
+      "agenda_item+amount",
+      "item_number+agenda_item",
+      "item_number+agenda_item+amount",
+      "vendor_name",
+      "vendor_name+agenda_item",
+      "vendor_name+agenda_item+amount",
+      "vendor_name+agenda_item; vendor_name+item_number+agenda_item",
+      "vendor_name+amount",
+      "vendor_name+item_number",
+      "vendor_name+item_number+agenda_item",
+      "vendor_name+item_number+agenda_item+amount",
+      "vendor_name+item_number+agenda_item; vendor_name+item_number+agenda_item+amount",
+      "vendor_name+item_number+amount"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "schools",
+      "sp"
+     ]
     }
    ],
    "json": "/downloads/votes.json",
@@ -285,7 +337,7 @@
    "id": "member-votes",
    "title": "Votes by member",
    "description": "One row per member per vote (long format), for tallying individual records.",
-   "rows": 2868,
+   "rows": 3023,
    "columns": [
     {
      "name": "date",
@@ -331,6 +383,25 @@
     {
      "name": "source_url",
      "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "schools",
+      "sp"
+     ]
+    },
+    {
+     "name": "person_id",
+     "type": "string"
     }
    ],
    "json": "/downloads/member-votes.json",
@@ -341,7 +412,7 @@
    "id": "contracts",
    "title": "Contracts",
    "description": "Major contracts approved since October 2022: vendor, amount, purpose, how awarded.",
-   "rows": 322,
+   "rows": 339,
    "columns": [
     {
      "name": "government",
@@ -353,7 +424,8 @@
       "City of Mexico Beach",
       "City of Panama City",
       "City of Panama City Beach",
-      "City of Parker"
+      "City of Parker",
+      "City of Springfield"
      ]
     },
     {
@@ -387,6 +459,53 @@
     {
      "name": "notes",
      "type": "string"
+    },
+    {
+     "name": "record_id",
+     "type": "string"
+    },
+    {
+     "name": "vote_ids",
+     "type": "array"
+    },
+    {
+     "name": "vote_match_method",
+     "type": "string",
+     "values": [
+      "agenda_item+amount",
+      "item_number+agenda_item",
+      "item_number+agenda_item+amount",
+      "vendor_name",
+      "vendor_name+agenda_item",
+      "vendor_name+agenda_item+amount",
+      "vendor_name+amount",
+      "vendor_name+item_number",
+      "vendor_name+item_number+agenda_item",
+      "vendor_name+item_number+agenda_item+amount",
+      "vendor_name+item_number+amount"
+     ]
+    },
+    {
+     "name": "vendor_id",
+     "type": "string"
+    },
+    {
+     "name": "vendor_ids",
+     "type": "array"
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "sp"
+     ]
     }
    ],
    "json": "/downloads/contracts.json",
@@ -445,6 +564,68 @@
     {
      "name": "source_url",
      "type": "string"
+    },
+    {
+     "name": "record_id",
+     "type": "string"
+    },
+    {
+     "name": "vote_ids",
+     "type": "array"
+    },
+    {
+     "name": "vote_match_method",
+     "type": "string",
+     "values": [
+      "agenda_item+amount",
+      "vendor_name+agenda_item+amount",
+      "vendor_name+item_number+agenda_item"
+     ]
+    },
+    {
+     "name": "vendor_id",
+     "type": "string",
+     "values": [
+      "anderson-columbia",
+      "barge",
+      "bcl",
+      "behar-peteranecz",
+      "bgn",
+      "burke-construction-group",
+      "cbc",
+      "cdr-maguire",
+      "culpepper",
+      "cwr-contracting",
+      "ecsc",
+      "emr",
+      "gcuc",
+      "hagerty-consulting",
+      "mainline",
+      "marshall-brothers",
+      "mott-macdonald",
+      "mrd-associates",
+      "phoenix",
+      "razorback",
+      "roberts-and-roberts",
+      "southern-construction",
+      "staline-waterworks",
+      "tetra-tech"
+     ]
+    },
+    {
+     "name": "vendor_ids",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "lh",
+      "mb",
+      "pc",
+      "pcb"
+     ]
     }
    ],
    "json": "/downloads/change-orders.json",
@@ -516,6 +697,45 @@
     {
      "name": "source_url",
      "type": "string"
+    },
+    {
+     "name": "record_id",
+     "type": "string"
+    },
+    {
+     "name": "vote_ids",
+     "type": "string"
+    },
+    {
+     "name": "vote_match_method",
+     "type": "string"
+    },
+    {
+     "name": "vendor_id",
+     "type": "string",
+     "values": [
+      "gcuc",
+      "graybar-electric",
+      "marshall-brothers",
+      "roberts-and-roberts",
+      "standby-systems-services",
+      "williams-communications"
+     ]
+    },
+    {
+     "name": "vendor_ids",
+     "type": "array"
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "lh",
+      "mb",
+      "pc",
+      "pcb"
+     ]
     }
    ],
    "json": "/downloads/emergency-purchases.json",
@@ -646,6 +866,47 @@
     {
      "name": "notes",
      "type": "string"
+    },
+    {
+     "name": "vendor_id",
+     "type": "string"
+    },
+    {
+     "name": "vendor_ids",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "cw",
+      "lh",
+      "parker",
+      "pc",
+      "pcb",
+      "sp"
+     ]
+    },
+    {
+     "name": "date_start",
+     "type": "string"
+    },
+    {
+     "name": "date_end",
+     "type": "string"
+    },
+    {
+     "name": "date_precision",
+     "type": "string",
+     "values": [
+      "approx",
+      "day",
+      "fiscal_year",
+      "month",
+      "range",
+      "unknown",
+      "year"
+     ]
     }
    ],
    "json": "/downloads/cra-payments.json",
@@ -734,6 +995,22 @@
     {
      "name": "levy",
      "type": "number"
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "beach_mosquito",
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "nwfwmd",
+      "parker",
+      "pc",
+      "schools",
+      "sp"
+     ]
     }
    ],
    "json": "/downloads/property-tax-rates.json",
@@ -776,6 +1053,48 @@
     {
      "name": "source_url",
      "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "airport",
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "port",
+      "schools",
+      "sp"
+     ]
+    },
+    {
+     "name": "date_start",
+     "type": "string",
+     "values": [
+      "2023-10-01",
+      "2024-07-01",
+      "2024-10-01"
+     ]
+    },
+    {
+     "name": "date_end",
+     "type": "string",
+     "values": [
+      "2024-09-30",
+      "2025-06-30",
+      "2025-09-30"
+     ]
+    },
+    {
+     "name": "date_precision",
+     "type": "string",
+     "values": [
+      "fiscal_year"
+     ]
     }
    ],
    "json": "/downloads/debt.json",
@@ -886,6 +1205,53 @@
       "https://flauditor.gov/pages/specialdistricts_efile%20rpts/2023%20panama%20city%20community%20redevelopment%20agency.pdf",
       "https://flauditor.gov/pages/specialdistricts_efile%20rpts/2024%20panama%20city%20community%20redevelopment%20agency.pdf"
      ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "schools",
+      "sp"
+     ]
+    },
+    {
+     "name": "date_start",
+     "type": "string",
+     "values": [
+      "2021-10-01",
+      "2022-07-01",
+      "2022-10-01",
+      "2023-07-01",
+      "2023-10-01",
+      "2024-07-01",
+      "2024-10-01"
+     ]
+    },
+    {
+     "name": "date_end",
+     "type": "string",
+     "values": [
+      "2022-09-30",
+      "2023-06-30",
+      "2023-09-30",
+      "2024-06-30",
+      "2024-09-30",
+      "2025-06-30",
+      "2025-09-30"
+     ]
+    },
+    {
+     "name": "date_precision",
+     "type": "string",
+     "values": [
+      "fiscal_year"
+     ]
     }
    ],
    "json": "/downloads/audit-findings.json",
@@ -968,6 +1334,23 @@
       "Large",
       "Small"
      ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "port",
+      "schools",
+      "sheriff",
+      "sp"
+     ]
     }
    ],
    "json": "/downloads/fema-michael-projects.json",
@@ -977,7 +1360,7 @@
   {
    "id": "sales-tax-projects",
    "title": "Half-cent sales tax projects",
-   "description": "Every infrastructure sales tax project on the county map, with status and cost.",
+   "description": "Every infrastructure sales tax project on the county map, with status and cost. schedule_* columns add the county program schedule's programmed dollars by year where the schedule line could be matched to the project.",
    "rows": 1062,
    "columns": [
     {
@@ -1088,6 +1471,97 @@
     {
      "name": "source_url",
      "type": "string"
+    },
+    {
+     "name": "schedule_programmed_total",
+     "type": "number"
+    },
+    {
+     "name": "schedule_fy_amounts",
+     "type": "object"
+    },
+    {
+     "name": "schedule_line",
+     "type": "string"
+    },
+    {
+     "name": "schedule_match_method",
+     "type": "string",
+     "values": [
+      "exact name",
+      "exact name; name words + category",
+      "name words + category",
+      "name words + category + cross streets"
+     ]
+    },
+    {
+     "name": "schedule_source_url",
+     "type": "string",
+     "values": [
+      "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-First-5-Years-List-of-Projects.pdf",
+      "http://bayhalfcent.com/wp-content/uploads/2024/10/Public-Works-Last-5-Years-List-of-Projects.pdf"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "sp"
+     ]
+    },
+    {
+     "name": "date_start",
+     "type": "string",
+     "values": [
+      "2015-10-01",
+      "2016-10-01",
+      "2017-10-01",
+      "2018-10-01",
+      "2019-10-01",
+      "2020-10-01",
+      "2021-10-01",
+      "2022-10-01",
+      "2023-10-01",
+      "2024-10-01",
+      "2025-10-01",
+      "2026-10-01",
+      "2027-10-01"
+     ]
+    },
+    {
+     "name": "date_end",
+     "type": "string",
+     "values": [
+      "2016-09-30",
+      "2017-09-30",
+      "2018-09-30",
+      "2019-09-30",
+      "2020-09-30",
+      "2021-09-30",
+      "2022-09-30",
+      "2023-09-30",
+      "2024-09-30",
+      "2025-09-30",
+      "2026-09-30",
+      "2027-09-30",
+      "2029-09-30"
+     ]
+    },
+    {
+     "name": "date_precision",
+     "type": "string",
+     "values": [
+      "fiscal_year",
+      "range",
+      "unknown"
+     ]
     }
    ],
    "json": "/downloads/sales-tax-projects.json",
@@ -1147,6 +1621,54 @@
       "https://assets.simpleviewinc.com/sv-panamacitybeach/image/upload/v1/clients/panamacitybeach/Sept_2025_TDT_Report_3c0d695b-ccf4-4622-8a19-d72ab372500c.pdf",
       "https://assets.simpleviewinc.com/sv-panamacitybeach/image/upload/v1/cms_resources/clients/panamacitybeach/2022_09_September_PowerPoint_9b7f7b1d-1f97-4a0d-8fcc-2aa4a4d1183f.pdf",
       "https://res.cloudinary.com/sv-panamacitybeach/image/upload/v1788380477/July_FY2026_TDT_Report_jel5we.pdf"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county"
+     ]
+    },
+    {
+     "name": "date_start",
+     "type": "string",
+     "values": [
+      "2015-10-01",
+      "2016-10-01",
+      "2017-10-01",
+      "2018-10-01",
+      "2019-10-01",
+      "2020-10-01",
+      "2021-10-01",
+      "2022-10-01",
+      "2023-10-01",
+      "2024-10-01",
+      "2025-10-01"
+     ]
+    },
+    {
+     "name": "date_end",
+     "type": "string",
+     "values": [
+      "2016-09-30",
+      "2017-09-30",
+      "2018-09-30",
+      "2019-09-30",
+      "2020-09-30",
+      "2021-09-30",
+      "2022-09-30",
+      "2023-09-30",
+      "2024-09-30",
+      "2025-09-30",
+      "2026-09-30"
+     ]
+    },
+    {
+     "name": "date_precision",
+     "type": "string",
+     "values": [
+      "fiscal_year"
      ]
     }
    ],
@@ -1268,6 +1790,39 @@
       "https://www.pcbfl.gov/about-us/fiscal-year-2024-25-special-assessment-info",
       "https://www.wjhg.com/2025/09/10/updated-fire-service-assessment-passed/"
      ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "lake_powell_cdd",
+      "lh",
+      "pc",
+      "pcb",
+      "sp"
+     ]
+    },
+    {
+     "name": "date_start",
+     "type": "string",
+     "values": [
+      "2025-10-01"
+     ]
+    },
+    {
+     "name": "date_end",
+     "type": "string",
+     "values": [
+      "2026-09-30"
+     ]
+    },
+    {
+     "name": "date_precision",
+     "type": "string",
+     "values": [
+      "fiscal_year"
+     ]
     }
    ],
    "json": "/downloads/fees-assessments.json",
@@ -1277,7 +1832,7 @@
   {
    "id": "officials-pay",
    "title": "Officials and pay",
-   "description": "Salaries of top elected and appointed officials.",
+   "description": "Salaries of top elected and appointed officials. Rows with row_type board_total are a whole board's combined pay, not one person.",
    "rows": 33,
    "columns": [
     {
@@ -1318,19 +1873,21 @@
      "type": "string",
      "values": [
       "Bill Kinsaul",
+      "Board total (all members combined)",
       "Chris Lightfoot",
-      "Clair Pease (D5)",
+      "Clair Pease",
       "Dan Sowell",
-      "Daniel Raffield (D1)",
-      "Doug Crosby (D3)",
-      "Doug Moore (D4)",
+      "Daniel Raffield",
+      "Doug Crosby",
+      "Doug Moore",
       "Drew Whitman",
+      "Each board member (not named)",
       "Ed Cook",
       "Joel Schubert",
       "Jonathan Hayes",
       "Mark McQueen",
       "Nina Ward",
-      "Robert Carroll (D2)",
+      "Robert Carroll",
       "Tommy Ford",
       "William (Chuck) Perdue"
      ]
@@ -1387,6 +1944,100 @@
       "https://www.wjhg.com/2023/12/16/new-city-manager-panama-city-selected-4-1-vote",
       "https://www.wjhg.com/2026/03/16/lynn-haven-appoints-new-city-manager"
      ]
+    },
+    {
+     "name": "row_type",
+     "type": "string",
+     "values": [
+      "board_each_member",
+      "board_total",
+      "person"
+     ]
+    },
+    {
+     "name": "district",
+     "type": "string",
+     "values": [
+      "District 1",
+      "District 2",
+      "District 3",
+      "District 4",
+      "District 5"
+     ]
+    },
+    {
+     "name": "person_id",
+     "type": "string",
+     "values": [
+      "bill-kinsaul",
+      "chris-lightfoot",
+      "clair-pease",
+      "dan-sowell",
+      "daniel-raffield",
+      "doug-crosby",
+      "douglas-moore",
+      "drew-whitman",
+      "ed-cook",
+      "joel-schubert",
+      "jonathan-hayes",
+      "mark-mcqueen",
+      "nina-ward",
+      "robert-carroll",
+      "tommy-ford",
+      "william-perdue"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "clerk",
+      "county",
+      "cw",
+      "lh",
+      "parker",
+      "pc",
+      "pcb",
+      "property_appraiser",
+      "schools",
+      "sheriff",
+      "soe",
+      "tax_collector"
+     ]
+    },
+    {
+     "name": "date_start",
+     "type": "string",
+     "values": [
+      "2021",
+      "2023",
+      "2025-07-01",
+      "2025-10-01",
+      "2026",
+      "2026-07-01",
+      "2026-10-01"
+     ]
+    },
+    {
+     "name": "date_end",
+     "type": "string",
+     "values": [
+      "2021",
+      "2023",
+      "2026",
+      "2026-06-30",
+      "2026-09-30",
+      "2027-06-30",
+      "2027-09-30"
+     ]
+    },
+    {
+     "name": "date_precision",
+     "type": "string",
+     "values": [
+      "fiscal_year",
+      "year"
+     ]
     }
    ],
    "json": "/downloads/officials-pay.json",
@@ -1397,7 +2048,7 @@
    "id": "meetings",
    "title": "Upcoming meetings",
    "description": "Scheduled and expected meetings for every board.",
-   "rows": 44,
+   "rows": 45,
    "columns": [
     {
      "name": "board",
@@ -1414,6 +2065,7 @@
       "pc",
       "pc-cra",
       "pcb",
+      "schools",
       "sp"
      ]
     },
@@ -1423,20 +2075,25 @@
      "values": [
       "10/13/26 CRA Board Meeting",
       "10/20/26 Special Executive Session - Case No. 5:26-cv-00032-AW-MJF (Vickie Gainer v. City of Lynn Ha",
+      "3rd LDC Workshop",
       "BOCC Regular Meeting",
       "Bay County Board of County Commissioners Meeting",
       "Budget Hearing",
+      "CANCELLED - ELECTION DAY*** Agenda Regular Meeting",
       "CRA Board Meeting",
       "City Commission Meeting",
+      "City Commission Meeting of October 27, 2026.",
       "City Council",
       "City Council Meeting",
       "Commission Meeting",
-      "Commission Workshop",
       "Community Redevelopment Agency Board Meeting for October 13, 2026",
-      "LDC Workshop",
+      "LDC 5th Workshop",
       "Planning Commission Meeting",
       "Regular Meeting",
       "Regular Meeting (expected)",
+      "School Board Meeting",
+      "School Board Meeting - Organizational Meeting",
+      "Special Meeting and 4th LDC Workshop",
       "Virtual CRA Workshop",
       "Virtual Workshop Meeting of October 20, 2026."
      ]
@@ -1449,6 +2106,7 @@
      "name": "location",
      "type": "string",
      "values": [
+      "1311 Balboa Ave, Panama City, FL 32401",
       "825 Ohio Avenue, Lynn Haven",
       "Bay County Government Center - 840 W 11th St. Panama City FL 32401",
       "Bay County Government Center, 840 W. 11th St., Panama City, FL",
@@ -1475,15 +2133,20 @@
      "values": [
       "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1942",
       "https://cityofparker.com/wp-content/uploads/filr/7047/Agenda-Regular-Council-Meeting-Package.pdf",
+      "https://cityofparker.com/wp-content/uploads/filr/7056/Agenda-Regular-Meeting-Cancelled-11.03.26.pdf",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1130,plainText=false)",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1137,plainText=false)",
       "https://mexicobeachfl.gov/uploads/2026/09/October-13-2026-City-Council-Meeting-Agenda.pdf",
+      "https://mexicobeachfl.gov/uploads/2026/10/November-5-2026-Special-Meeting-LDC-Workshop.pdf",
+      "https://mexicobeachfl.gov/uploads/2026/10/October-29-2026-LDC-Workshop-3.pdf",
+      "https://mexicobeachfl.gov/uploads/2026/10/October-30-2026-Special-Meeting-LDC-Workshop-2.pdf",
       "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=419",
       "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&event_id=219",
       "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_09172026-423",
       "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_10132026-425",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-912?html=true",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10202026-915?html=true",
+      "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10272026-902?html=true",
       "https://www.springfieldfl.net/media/10901"
      ]
     },
@@ -1496,13 +2159,15 @@
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1138,plainText=false)",
       "https://mexicobeachfl.gov/uploads/2026/09/October-13-2026-CIty-Council-Meeting-Agenda-Packet.pdf",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-912?packet=true",
-      "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10202026-915?packet=true"
+      "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10202026-915?packet=true",
+      "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10272026-902?packet=true"
      ]
     },
     {
      "name": "minutes_url",
      "type": "string",
      "values": [
+      "https://cityofparker.com/wp-content/uploads/filr/7056/Agenda-Regular-Meeting-Cancelled-11.03.26.pdf",
       "https://www.springfieldfl.net/media/10906"
      ]
     },
@@ -1517,8 +2182,8 @@
       "MexicoBeach:https://mexicobeachfl.gov/government/council-meetings/",
       "Parker:https://cityofparker.com/government/agendas-minutes/",
       "PrimeGov:https://baycountyfl.primegov.com/public/portal",
-      "Springfield:https://www.springfieldfl.net/meetings",
       "Springfield:https://www.springfieldfl.net/meetings/recent",
+      "Thrillshare:https://thrillshare-cmsv2.services.thrillshare.com/api/v4/o/31249/cms/events",
       "calendar:https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=26&feed=calendar",
       "calendar:https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=38&feed=calendar",
       "calendar:https://www.cityofcallaway.com/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar",
@@ -1544,6 +2209,21 @@
      ]
     },
     {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "schools",
+      "sp"
+     ]
+    },
+    {
      "name": "detail_url",
      "type": "string",
      "values": [
@@ -1554,6 +2234,7 @@
       "https://lynnhavenfl.portal.civicclerk.com/event/1094/files",
       "https://lynnhavenfl.portal.civicclerk.com/event/2130/files",
       "https://lynnhavenfl.portal.civicclerk.com/event/2143/files",
+      "https://www.bay.k12.fl.us/school-board-meetings",
       "https://www.baycountyfl.gov/calendar.aspx?EID=1594",
       "https://www.baycountyfl.gov/calendar.aspx?EID=1595",
       "https://www.baycountyfl.gov/calendar.aspx?EID=1604",
@@ -1569,14 +2250,15 @@
       "https://www.panamacity.gov/calendar.aspx?EID=7564",
       "https://www.panamacity.gov/calendar.aspx?EID=7565",
       "https://www.springfieldfl.net/community/meeting/commission-meeting-74",
-      "https://www.springfieldfl.net/community/meeting/commission-meeting-76",
-      "https://www.springfieldfl.net/community/meeting/commission-meeting-77",
-      "https://www.springfieldfl.net/community/meeting/commission-workshop-54",
       "https://youtube.com/live/aX2AYat8SmM?feature=share"
      ]
     },
     {
      "name": "items",
+     "type": "array"
+    },
+    {
+     "name": "agenda_items",
      "type": "array"
     },
     {
@@ -1590,7 +2272,15 @@
      "name": "calendar_source",
      "type": "string",
      "values": [
-      "calendar:https://www.cityoflynnhaven.gov/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar"
+      "calendar:https://www.cityoflynnhaven.gov/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar",
+      "calendar:https://www.panamacity.gov/common/modules/iCalendar/iCalendar.aspx?catID=22&feed=calendar"
+     ]
+    },
+    {
+     "name": "cancelled",
+     "type": "boolean",
+     "values": [
+      true
      ]
     },
     {
@@ -1665,6 +2355,30 @@
     {
      "name": "report_url",
      "type": "string"
+    },
+    {
+     "name": "person_id",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "clerk",
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "property_appraiser",
+      "schools",
+      "sheriff",
+      "soe",
+      "sp",
+      "tax_collector"
+     ]
     }
    ],
    "json": "/downloads/campaign-finance.json",
@@ -1675,7 +2389,7 @@
    "id": "vendor-payments",
    "title": "Who gets paid",
    "description": "Payments to vendors from check registers, totaled by vendor and year.",
-   "rows": 408,
+   "rows": 446,
    "columns": [
     {
      "name": "government",
@@ -1697,6 +2411,23 @@
     {
      "name": "payments",
      "type": "number"
+    },
+    {
+     "name": "vendor_id",
+     "type": "string"
+    },
+    {
+     "name": "vendor_ids",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "destination_pc",
+      "mb_cdc",
+      "visit_pcb"
+     ]
     }
    ],
    "json": "/downloads/vendor-payments.json",
@@ -1881,6 +2612,23 @@
      "type": "array"
     },
     {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "airport",
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "port",
+      "schools",
+      "sp"
+     ]
+    },
+    {
      "name": "rating_note",
      "type": "string",
      "values": [
@@ -2020,6 +2768,41 @@
       "https://www.pcbfl.gov/Archive.aspx?ADID=151",
       "https://www.springfieldfl.net/media/10201"
      ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "sp"
+     ]
+    },
+    {
+     "name": "date_start",
+     "type": "string",
+     "values": [
+      "2025-10-01"
+     ]
+    },
+    {
+     "name": "date_end",
+     "type": "string",
+     "values": [
+      "2026-09-30"
+     ]
+    },
+    {
+     "name": "date_precision",
+     "type": "string",
+     "values": [
+      "fiscal_year"
+     ]
     }
    ],
    "json": "/downloads/budget-per-resident.json",
@@ -2070,6 +2853,44 @@
     {
      "name": "amount",
      "type": "number"
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "schools",
+      "sp"
+     ]
+    },
+    {
+     "name": "date_start",
+     "type": "string",
+     "values": [
+      "2025-07-01",
+      "2025-10-01"
+     ]
+    },
+    {
+     "name": "date_end",
+     "type": "string",
+     "values": [
+      "2026-06-30",
+      "2026-09-30"
+     ]
+    },
+    {
+     "name": "date_precision",
+     "type": "string",
+     "values": [
+      "fiscal_year"
+     ]
     }
    ],
    "json": "/downloads/budget-detail.json",
@@ -2079,7 +2900,7 @@
   {
    "id": "salary-positions",
    "title": "Public salaries by job title",
-   "description": "Pay ranges, budgeted positions and unnamed actual salaries by job title for the county, constitutional officers, school district, cities, airport and port.",
+   "description": "Pay ranges, budgeted positions and unnamed actual salaries by job title for the county, constitutional officers, school district, cities, airport and port. Rows with fte_only = true are positions the source counts but gives no pay for (see pay_status).",
    "rows": 1455,
    "columns": [
     {
@@ -2239,6 +3060,65 @@
     {
      "name": "notes",
      "type": "string"
+    },
+    {
+     "name": "fte_only",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "pay_status",
+     "type": "string",
+     "values": [
+      "Pay listed",
+      "Position count only: the source lists this job but not its pay"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "airport",
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "schools",
+      "sheriff",
+      "sp",
+      "tax_collector"
+     ]
+    },
+    {
+     "name": "date_start",
+     "type": "string",
+     "values": [
+      "2025-07-01",
+      "2025-10-01",
+      "2026-10-01"
+     ]
+    },
+    {
+     "name": "date_end",
+     "type": "string",
+     "values": [
+      "2026-06-30",
+      "2026-09-30",
+      "2027-09-30"
+     ]
+    },
+    {
+     "name": "date_precision",
+     "type": "string",
+     "values": [
+      "fiscal_year"
+     ]
     }
    ],
    "json": "/downloads/salary-positions.json",
@@ -2401,6 +3281,74 @@
     {
      "name": "notes",
      "type": "string"
+    },
+    {
+     "name": "person_id",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "airport",
+      "clerk",
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "port",
+      "property_appraiser",
+      "schools",
+      "sheriff",
+      "soe",
+      "sp",
+      "tax_collector"
+     ]
+    },
+    {
+     "name": "date_start",
+     "type": "string",
+     "values": [
+      "2021-04-22",
+      "2024-01-09",
+      "2026-02-19",
+      "2026-03-03",
+      "2026-03-17",
+      "2026-04-07",
+      "2026-07-01",
+      "2026-08-11",
+      "2026-09-08",
+      "2026-10-01",
+      "2026-10-21"
+     ]
+    },
+    {
+     "name": "date_end",
+     "type": "string",
+     "values": [
+      "2021-04-22",
+      "2024-01-09",
+      "2026-02-19",
+      "2026-03-03",
+      "2026-03-17",
+      "2026-04-07",
+      "2026-08-11",
+      "2026-09-08",
+      "2026-10-01",
+      "2026-10-21",
+      "2027-06-30"
+     ]
+    },
+    {
+     "name": "date_precision",
+     "type": "string",
+     "values": [
+      "day",
+      "fiscal_year"
+     ]
     }
    ],
    "json": "/downloads/salary-leaders.json",
@@ -2585,6 +3533,25 @@
     {
      "name": "finance_report_url",
      "type": "string"
+    },
+    {
+     "name": "person_id",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "county_court",
+      "cw",
+      "lake_powell_cdd",
+      "lh",
+      "mb",
+      "pcb",
+      "schools",
+      "sp"
+     ]
     }
    ],
    "json": "/downloads/candidates-2026.json",
@@ -2594,8 +3561,8 @@
   {
    "id": "campaign-contributions-2026",
    "title": "2026 contributions from organizations",
-   "description": "Every contribution from a business, committee or party to a 2026 local candidate. Individual donors are not included.",
-   "rows": 162,
+   "description": "Every contribution from a business, committee or party to a 2026 local candidate. Individual donors are not included, and neither is bank interest on campaign accounts.",
+   "rows": 153,
    "columns": [
     {
      "name": "candidate",
@@ -2605,12 +3572,10 @@
       "Brian Rust",
       "Carl Curti",
       "Carlos Sanchez",
-      "Cindy Hamre",
       "Colleen Koch",
       "Dr. John L. Haley",
       "Glenn Manley",
       "Grant Wittstruck",
-      "Karen Custer",
       "Mary Coburn",
       "Michael Petty",
       "Nick Atkinson",
@@ -2630,7 +3595,6 @@
       "Panama City Beach Council, Ward 3",
       "School Board, District 2",
       "School Board, District 3",
-      "Springfield Commission, Ward 4",
       "Springfield Mayor"
      ]
     },
@@ -2690,7 +3654,6 @@
      "values": [
       "check",
       "in-kind",
-      "interest",
       "refund"
      ]
     },
@@ -2700,7 +3663,6 @@
      "values": [
       "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=714&rellevel=4&committee=N",
       "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=719&rellevel=4&committee=N",
-      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=726&rellevel=4&committee=N",
       "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=727&rellevel=4&committee=N",
       "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=728&rellevel=4&committee=N",
       "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=729&rellevel=4&committee=N",
@@ -2712,8 +3674,42 @@
       "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=740&rellevel=4&committee=N",
       "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=742&rellevel=4&committee=N",
       "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=743&rellevel=4&committee=N",
-      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=36&c=bay&ca=715&rellevel=4&committee=N",
-      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=36&c=bay&ca=717&rellevel=4&committee=N"
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=36&c=bay&ca=715&rellevel=4&committee=N"
+     ]
+    },
+    {
+     "name": "vendor_id",
+     "type": "string",
+     "values": [
+      "bay-point-billfish",
+      "bgn",
+      "charlie-coram-s-place",
+      "culpepper",
+      "ecsc",
+      "mainline",
+      "marshall-brothers",
+      "mr-fence",
+      "panhandle-engineering",
+      "press-print-graphics",
+      "rj-gorman-contracting",
+      "roberts-and-roberts",
+      "timmins-consulting",
+      "tk-vandy"
+     ]
+    },
+    {
+     "name": "vendor_ids",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "pcb",
+      "schools",
+      "sp"
      ]
     }
    ],
@@ -2799,6 +3795,13 @@
      "type": "string",
      "values": [
       "https://floridarevenue.com/property/dataportal/"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county"
      ]
     }
    ],

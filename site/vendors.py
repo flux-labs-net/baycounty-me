@@ -97,6 +97,26 @@ _PUBLIC = re.compile(r'department of|^city of|^bay county\b|county (board|commis
 _UNNAMED = re.compile(r'^(not named|various|multiple)', re.I)
 
 
+_ENT = {}
+
+
+def _entities():
+    """Every spelling in data/entities/vendors.json -> (id, name, type). That file is built from this module's VENDORS
+    (its ids defer to these), so the two resolvers agree; this fallback covers spellings only the entity build joined."""
+    if not _ENT:
+        import json, os
+        try:
+            d = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'data', 'entities', 'vendors.json')))
+        except (FileNotFoundError, ValueError):
+            d = {'vendors': []}
+        for v in d['vendors']:
+            t = VENDORS[v['id']][2] if v['id'] in VENDORS else 'business'
+            for a in v['aliases']:
+                _ENT.setdefault(a.strip().lower(), (v['id'], v['name'], t))
+        _ENT.setdefault('', None)
+    return _ENT
+
+
 def resolve(raw):
     """(id, display name, type) for any spelling of a vendor name."""
     raw = (raw or '').strip()
@@ -107,5 +127,8 @@ def resolve(raw):
     if vid:
         n, _, t = VENDORS[vid]
         return (vid, n, t)
+    ent = _entities().get(raw.lower())  # data/entities/vendors.json: spellings joined there (truncations, OCR errors, typos)
+    if ent:
+        return ent
     clean = re.sub(r'\s*\(.*?\)\s*', ' ', raw).strip()
     return (re.sub(r'[^a-z0-9]+', '-', k).strip('-') or 'unknown', clean, 'public' if _PUBLIC.search(raw) else 'business')

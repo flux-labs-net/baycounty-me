@@ -343,7 +343,9 @@
    "former_members_in_period": [
     "Jerry Smith (Mayor Pro Tem, 2024)",
     "Tim Linderman (2024)",
-    "Jason Adams (2024-2025)"
+    "Jason Adams (2024-2025)",
+    "Michele Miller (Mayor, recalled in 2024)",
+    "Adrian Welle (2024)"
    ],
    "source_url": "https://mexicobeachfl.gov/government/mayor-and-council/"
   },
@@ -3916,6 +3918,153 @@
   },
   {
    "body": "pc-commission",
+   "date": "2026-08-19",
+   "category": "other",
+   "item": "6. Commission discussion and consideration - approval of Leslie Glaze for the City Clerk-Treasurer position and moving forward with contract negotiations",
+   "amount": null,
+   "outcome": "passed",
+   "tally": "5-0",
+   "by_member": {
+    "Allan Branch": "yes",
+    "Robbie Hughes": "yes",
+    "Janice Lucas": "yes",
+    "Brian Grainger": "yes",
+    "Josh Street": "yes"
+   },
+   "source_title": "City of Panama City Special Call City Commission Meeting of August 19, 2026 - Minutes",
+   "source_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Minutes/_08192026-899",
+   "plain_summary": "The Panama City Commission voted 5-0 to chose Leslie Glaze as City Clerk-Treasurer.",
+   "headline": "Chose Leslie Glaze as City Clerk-Treasurer",
+   "summary": "After interviewing two finalists, the commission picked Leslie Glaze for City Clerk-Treasurer and began contract talks."
+  },
+  {
+   "body": "pc-commission",
+   "date": "2026-08-25",
+   "category": "land",
+   "item": "6.a. Developer Agreement with Zachary Seymour for a property located at 101 E 7th Street (Parcel ID 20075-000-000)",
+   "amount": null,
+   "outcome": "passed",
+   "tally": "4-0",
+   "by_member": {
+    "Allan Branch": "yes",
+    "Robbie Hughes": "yes",
+    "Janice Lucas": "absent",
+    "Brian Grainger": "yes",
+    "Josh Street": "yes"
+   },
+   "source_title": "City of Panama City City Commission Meeting of August 25, 2026 - Minutes",
+   "source_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Minutes/_08252026-880",
+   "plain_summary": "The Panama City Commission voted 4-0 to approved a developer agreement for 101 E. 7th St. Not recorded voting (absent): Janice Lucas.",
+   "headline": "Approved a developer agreement for 101 E. 7th St",
+   "summary": "Approves the developer agreement for 101 E. 7th Street, with changes discussed by the city attorney, and asks staff for an update in one year."
+  },
+  {
+   "body": "pc-commission",
+   "date": "2026-08-25",
+   "category": "contract",
+   "item": "9.a.-9.e. Consent agenda: six firms for PC25-052 continuing professional services; $98,325.25 Baskerville-Donovan task order for Tarpon Dock Bridge design; right-of-way use agreement at 802 E. 8th Court; $181,825.93 Change Order 3 to Emerald Coast Site Construction (PC25-038 Baker Court); PC26-014 Project STORM Group I to Marshall Brothers ($1,199,749.00)",
+   "amount": 1199749,
+   "outcome": "passed",
+   "tally": "4-0",
+   "by_member": {
+    "Allan Branch": "yes",
+    "Robbie Hughes": "yes",
+    "Janice Lucas": "absent",
+    "Brian Grainger": "yes",
+    "Josh Street": "yes"
+   },
+   "source_title": "City of Panama City City Commission Meeting of August 25, 2026 - Minutes",
+   "source_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Minutes/_08252026-880",
+   "plain_summary": "The Panama City Commission voted 4-0 to approved consent items including a $1.2 million stormwater contract. Not recorded voting (absent): Janice Lucas.",
+   "headline": "Approved consent items including a $1.2 million stormwater contract",
+   "summary": "One vote approved five consent items. The largest is a $1,199,749 contract to Marshall Brothers for Project STORM Group I, with up to $59,987.45 more in change orders the city manager may sign. Others: a $181,825.93 change order to Emerald Coast Site Construction for Baker Court drainage and a $98,325.25 Baskerville-Donovan design task order for the Tarpon Dock Bridge."
+  },
+  {
+   "body": "pc-commission",
+   "date": "2026-08-25",
+   "category": "contract",
+   "item": "9.f. Award of Bid PC26-023 for the Truesdell Clubhouse Exterior Renovations in the amount of $498,797.47 to Art Construction of Northwest Florida LLC, plus a 10% project contingency of $49,879.75",
+   "amount": 498797.47,
+   "outcome": "passed",
+   "tally": "4-0",
+   "by_member": {
+    "Allan Branch": "yes",
+    "Robbie Hughes": "yes",
+    "Janice Lucas": "absent",
+    "Brian Grainger": "yes",
+    "Josh Street": "yes"
+   },
+   "source_title": "City of Panama City City Commission Meeting of August 25, 2026 - Minutes",
+   "source_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Minutes/_08252026-880",
+   "plain_summary": "The Panama City Commission voted 4-0 to awarded $498,797 Truesdell Clubhouse renovation to Art Construction. Not recorded voting (absent): Janice Lucas.",
+   "headline": "Awarded $498,797 Truesdell Clubhouse renovation to Art Construction",
+   "summary": "Art Construction of Northwest Florida LLC will renovate the Truesdell Clubhouse exterior for $498,797.47, with a $49,879.75 contingency and substantial completion by Jan. 31, 2027."
+  },
+  {
+   "body": "pc-commission",
+   "date": "2026-08-25",
+   "category": "debt",
+   "item": "11.a. Alternative financing option for the construction of Wet Slips at the Downtown Panama City Marina - accept the Prepayment and Participation Rent Agreement with JOE PCOZ, LLC",
+   "amount": null,
+   "outcome": "passed",
+   "tally": "4-0",
+   "by_member": {
+    "Allan Branch": "yes",
+    "Robbie Hughes": "yes",
+    "Janice Lucas": "absent",
+    "Brian Grainger": "yes",
+    "Josh Street": "yes"
+   },
+   "source_title": "City of Panama City City Commission Meeting of August 25, 2026 - Minutes",
+   "source_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Minutes/_08252026-880",
+   "plain_summary": "The Panama City Commission voted 4-0 to accepted a prepayment rent agreement with JOE PCOZ to finance marina wet slips. Not recorded voting (absent): Janice Lucas.",
+   "headline": "Accepted a prepayment rent agreement with JOE PCOZ to finance marina wet slips",
+   "summary": "The city accepted a prepayment and participation rent agreement with JOE PCOZ, LLC to pay for new wet slips at the downtown marina, with a management agreement due within 60 days. The minutes give no dollar amount."
+  },
+  {
+   "body": "pc-commission",
+   "date": "2026-08-25",
+   "category": "contract",
+   "item": "12.a. Award of bid PC26-021 for the construction of 50 wet slips in the western basin of the downtown Panama City Marina to the lowest bidder, Art Marine, LLC",
+   "amount": null,
+   "outcome": "passed",
+   "tally": "4-0",
+   "by_member": {
+    "Allan Branch": "yes",
+    "Robbie Hughes": "yes",
+    "Janice Lucas": "absent",
+    "Brian Grainger": "yes",
+    "Josh Street": "yes"
+   },
+   "source_title": "City of Panama City City Commission Meeting of August 25, 2026 - Minutes",
+   "source_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Minutes/_08252026-880",
+   "plain_summary": "The Panama City Commission voted 4-0 to awarded downtown marina wet slip construction to Art Marine. Not recorded voting (absent): Janice Lucas.",
+   "headline": "Awarded downtown marina wet slip construction to Art Marine",
+   "summary": "Art Marine, LLC, the lowest bidder, will build 50 wet slips in the marina's western basin. Staff will also hire construction inspection services. The minutes give no bid amount."
+  },
+  {
+   "body": "pc-commission",
+   "date": "2026-08-25",
+   "category": "budget",
+   "item": "12.d. Resolution 20260825.2 accepting a state funded grant for Frankford Avenue Trail Design in the amount of $425,000.00 and Budget Amendment Resolution 20260825.3",
+   "amount": 425000,
+   "outcome": "passed",
+   "tally": "4-0",
+   "by_member": {
+    "Allan Branch": "yes",
+    "Robbie Hughes": "yes",
+    "Janice Lucas": "absent",
+    "Brian Grainger": "yes",
+    "Josh Street": "yes"
+   },
+   "source_title": "City of Panama City City Commission Meeting of August 25, 2026 - Minutes",
+   "source_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Minutes/_08252026-880",
+   "plain_summary": "The Panama City Commission voted 4-0 to accepted a $425,000 state grant for Frankford Avenue trail design. Not recorded voting (absent): Janice Lucas.",
+   "headline": "Accepted a $425,000 state grant for Frankford Avenue trail design",
+   "summary": "The city accepted a $425,000 state grant to design the Frankford Avenue trail and amended the budget to match."
+  },
+  {
+   "body": "pc-commission",
    "date": "2026-09-08",
    "category": "land",
    "item": "10.b. Consideration of approval for 6th Street and Harmon Avenue contract",
@@ -4375,6 +4524,300 @@
    "plain_summary": "The CRA board voted 4-0 to that the program includes 0% repayable loan option over 24 months following completion of the project, for non-profits doing affordable housing. Not recorded voting (absent or abstained): Brian Grainger.",
    "headline": "Added 0% loan option for nonprofit affordable housing",
    "summary": "The program will include a 0% repayable loan option over 24 months after project completion for nonprofits doing affordable housing. Listed under the agenda item on the Wilson Avenue Redevelopment, LLC performance agreement for 724 & 728 Magnolia Avenue."
+  },
+  {
+   "body": "pc-cra",
+   "date": "2026-06-02",
+   "category": "cra",
+   "item": "9. Consideration and approval of the Panama City Tax Increment Rebate Program application submitted by Golden Developments, LLC, for the properties at 534 Oak Avenue, 541 Oak Avenue, and an unaddressed parcel on Oak Avenue, and authorization of the CRA Executive Director to execute a Performance Agreement",
+   "amount": null,
+   "outcome": "passed",
+   "tally": "5-0",
+   "by_member": {
+    "Allan Branch": "yes",
+    "Robbie Hughes": "yes",
+    "Janice Lucas": "yes",
+    "Brian Grainger": "yes",
+    "Josh Street": "yes"
+   },
+   "source_title": "City of Panama City Community Redevelopment Agency Board Meeting of June 2, 2026 - Minutes",
+   "source_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Minutes/_06022026-870",
+   "plain_summary": "The CRA board voted 5-0: approved TIF rebate for Golden Developments on Oak Avenue.",
+   "headline": "Approved TIF rebate for Golden Developments on Oak Avenue",
+   "summary": "Golden Developments, LLC was accepted into the Tax Increment Rebate Program for 534 and 541 Oak Avenue and a third Oak Avenue parcel. A rebate returns part of the added property tax from a new development. The minutes give no dollar amount."
+  },
+  {
+   "body": "pc-cra",
+   "date": "2026-08-04",
+   "category": "cra",
+   "item": "7. Acceptance and Discussion of Sankofa's Letter of Termination for the Glenwood Town Center Development Agreement",
+   "amount": null,
+   "outcome": "passed",
+   "tally": "5-0",
+   "by_member": {
+    "Allan Branch": "yes",
+    "Robbie Hughes": "yes",
+    "Janice Lucas": "yes",
+    "Brian Grainger": "yes",
+    "Josh Street": "yes"
+   },
+   "source_title": "City of Panama City Community Redevelopment Agency Board Meeting of August 4, 2026 - Minutes",
+   "source_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Minutes/_08042026-894",
+   "plain_summary": "The CRA board voted 5-0: accepted Sankofa's termination of the Glenwood Town Center agreement.",
+   "headline": "Accepted Sankofa's termination of the Glenwood Town Center agreement",
+   "summary": "The board accepted Sankofa's letter ending its development agreement for the Glenwood Town Center. No direction was given to staff."
+  },
+  {
+   "body": "pc-cra",
+   "date": "2026-08-04",
+   "category": "cra",
+   "item": "8. Consideration and Approval for the Panama City Tax Rebate Program Application submitted by KBP Properties Florida, LLC for property located at 4101 W. 19th St and authorization to execute a Performance Agreement",
+   "amount": null,
+   "outcome": "passed",
+   "tally": "5-0",
+   "by_member": {
+    "Allan Branch": "yes",
+    "Robbie Hughes": "yes",
+    "Janice Lucas": "yes",
+    "Brian Grainger": "yes",
+    "Josh Street": "yes"
+   },
+   "source_title": "City of Panama City Community Redevelopment Agency Board Meeting of August 4, 2026 - Minutes",
+   "source_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Minutes/_08042026-894",
+   "plain_summary": "The CRA board voted 5-0: approved TIF rebate for KBP Properties at 4101 W. 19th St.",
+   "headline": "Approved TIF rebate for KBP Properties at 4101 W. 19th St",
+   "summary": "KBP Properties Florida, LLC was accepted into the Tax Increment Rebate Program for 4101 W. 19th St. The minutes give no dollar amount."
+  },
+  {
+   "body": "pc-cra",
+   "date": "2026-08-04",
+   "category": "cra",
+   "item": "9. Consideration and approval to provide matching donation funds to Historic St. Andrews Waterfront Partnership in the amount of $8,150.00",
+   "amount": 8150,
+   "outcome": "passed",
+   "tally": "5-0",
+   "by_member": {
+    "Allan Branch": "yes",
+    "Robbie Hughes": "yes",
+    "Janice Lucas": "yes",
+    "Brian Grainger": "yes",
+    "Josh Street": "yes"
+   },
+   "source_title": "City of Panama City Community Redevelopment Agency Board Meeting of August 4, 2026 - Minutes",
+   "source_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Minutes/_08042026-894",
+   "plain_summary": "The CRA board voted 5-0: gave $8,150 in matching funds to the Historic St. Andrews Waterfront Partnership.",
+   "headline": "Gave $8,150 in matching funds to the Historic St. Andrews Waterfront Partnership",
+   "summary": "The CRA will match donations to the Historic St. Andrews Waterfront Partnership with $8,150. A second motion, also 5-0, made the agreement match the one used for the Center for the Arts."
+  },
+  {
+   "body": "pc-cra",
+   "date": "2026-08-04",
+   "category": "land",
+   "item": "11. Consideration and approval for disposition of a CRA-owned property located at 1342 MLK Blvd (Parcel No. 17367-000-000) in the Downtown North District to American Legion Post #424",
+   "amount": null,
+   "outcome": "passed",
+   "tally": "5-0",
+   "by_member": {
+    "Allan Branch": "yes",
+    "Robbie Hughes": "yes",
+    "Janice Lucas": "yes",
+    "Brian Grainger": "yes",
+    "Josh Street": "yes"
+   },
+   "source_title": "City of Panama City Community Redevelopment Agency Board Meeting of August 4, 2026 - Minutes",
+   "source_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Minutes/_08042026-894",
+   "plain_summary": "The CRA board voted 5-0: approved transfer of CRA land at 1342 MLK Blvd to American Legion Post 424.",
+   "headline": "Approved transfer of CRA land at 1342 MLK Blvd to American Legion Post 424",
+   "summary": "CRA-owned property at 1342 MLK Blvd in the Downtown North district goes to American Legion Post #424. The minutes give no price."
+  },
+  {
+   "body": "pc-cra",
+   "date": "2026-09-01",
+   "category": "cra",
+   "item": "7. Consideration, Approval, and Authorization to Execute a Performance Agreement for the Panama City Tax Increment Rebate Program application submitted by Angel's Place of Bay County LLC for the property located at 2509 W. 13th Street (Parcel ID 29788-000-000), within the St. Andrews CRA District",
+   "amount": null,
+   "outcome": "passed",
+   "tally": "5-0",
+   "by_member": {
+    "Allan Branch": "yes",
+    "Robbie Hughes": "yes",
+    "Janice Lucas": "yes",
+    "Brian Grainger": "yes",
+    "Josh Street": "yes"
+   },
+   "source_title": "City of Panama City Community Redevelopment Agency Board Meeting of September 1, 2026 - Minutes",
+   "source_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Minutes/_09012026-904",
+   "plain_summary": "The CRA board voted 5-0: approved TIF rebate for Angel's Place at 2509 W. 13th St.",
+   "headline": "Approved TIF rebate for Angel's Place at 2509 W. 13th St",
+   "summary": "Angel's Place of Bay County LLC was accepted into the Tax Increment Rebate Program for 2509 W. 13th Street in the St. Andrews district."
+  },
+  {
+   "body": "pc-cra",
+   "date": "2026-09-01",
+   "category": "cra",
+   "item": "8. Consideration and Approval of a Commercial Property Improvement (CPI) Grant in the amount of $15,000.00 for Eastside Vault LLC, for exterior improvements to the commercial property located at 2621 E. 5th Street (Parcel ID 22597-010-000), within the Millville CRA District",
+   "amount": 15000,
+   "outcome": "passed",
+   "tally": "5-0",
+   "by_member": {
+    "Allan Branch": "yes",
+    "Robbie Hughes": "yes",
+    "Janice Lucas": "yes",
+    "Brian Grainger": "yes",
+    "Josh Street": "yes"
+   },
+   "source_title": "City of Panama City Community Redevelopment Agency Board Meeting of September 1, 2026 - Minutes",
+   "source_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Minutes/_09012026-904",
+   "plain_summary": "The CRA board voted 5-0: gave a $15,000 storefront grant for 2621 E. 5th St.",
+   "headline": "Gave a $15,000 storefront grant for 2621 E. 5th St",
+   "summary": "A $15,000 Commercial Property Improvement grant for exterior work at 2621 E. 5th Street (Eastside Vault LLC) in the Millville district."
+  },
+  {
+   "body": "pc-cra",
+   "date": "2026-09-01",
+   "category": "cra",
+   "item": "9. Consideration and Approval of a Commercial Property Improvement (CPI) Grant in the amount of $15,000.00 for The Spot on 98 LLC, commercial property located at 1813 E. 5th Street, within the Millville CRA District",
+   "amount": 15000,
+   "outcome": "passed",
+   "tally": "5-0",
+   "by_member": {
+    "Allan Branch": "yes",
+    "Robbie Hughes": "yes",
+    "Janice Lucas": "yes",
+    "Brian Grainger": "yes",
+    "Josh Street": "yes"
+   },
+   "source_title": "City of Panama City Community Redevelopment Agency Board Meeting of September 1, 2026 - Minutes",
+   "source_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Minutes/_09012026-904",
+   "plain_summary": "The CRA board voted 5-0: gave a $15,000 storefront grant for 1813 E. 5th St.",
+   "headline": "Gave a $15,000 storefront grant for 1813 E. 5th St",
+   "summary": "A $15,000 Commercial Property Improvement grant for the commercial property at 1813 E. 5th Street (The Spot on 98 LLC) in the Millville district."
+  },
+  {
+   "body": "pc-cra",
+   "date": "2026-09-01",
+   "category": "other",
+   "item": "10. Presentation of the FY2025-2026 CRA Goals, Objectives and Performance Measures Results Report and consideration and approval of the FY2026-2027 CRA Goals, Objectives, Performance Measures, Standards and Annual Work Plan",
+   "amount": null,
+   "outcome": "passed",
+   "tally": "5-0",
+   "by_member": {
+    "Allan Branch": "yes",
+    "Robbie Hughes": "yes",
+    "Janice Lucas": "yes",
+    "Brian Grainger": "yes",
+    "Josh Street": "yes"
+   },
+   "source_title": "City of Panama City Community Redevelopment Agency Board Meeting of September 1, 2026 - Minutes",
+   "source_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Minutes/_09012026-904",
+   "plain_summary": "The CRA board voted 5-0: approved the CRA's FY2027 goals and work plan.",
+   "headline": "Approved the CRA's FY2027 goals and work plan",
+   "summary": "The board approved the FY2026-27 goals, performance measures and work plan, except routine maintenance, which was left for the budget hearing."
+  },
+  {
+   "body": "pc-cra",
+   "date": "2026-09-01",
+   "category": "budget",
+   "item": "11. Consideration, Approval, and Authorization to Execute Resolution CRA20260901.1 adopting the Panama City Community Redevelopment Agency Fiscal Year 2026-2027 Annual Budget",
+   "amount": 11492914,
+   "outcome": "passed",
+   "tally": "5-0",
+   "by_member": {
+    "Allan Branch": "yes",
+    "Robbie Hughes": "yes",
+    "Janice Lucas": "yes",
+    "Brian Grainger": "yes",
+    "Josh Street": "yes"
+   },
+   "source_title": "City of Panama City Community Redevelopment Agency Board Meeting of September 1, 2026 - Minutes",
+   "source_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Minutes/_09012026-904",
+   "plain_summary": "The CRA board voted 5-0: adopted an $11.5 million CRA budget for FY2027.",
+   "headline": "Adopted an $11.5 million CRA budget for FY2027",
+   "summary": "Resolution CRA20260901.1 sets FY2026-27 spending of $5,074,482 for St. Andrews, $3,326,878 for Downtown, $1,863,545 for Downtown North and $1,228,009 for Millville, $11,492,914 in all (total added by researcher; https://www.panamacity.gov/AgendaCenter/ViewFile/Item/17481?fileID=37375). The attached budget table shows Millville at $1,288,009, so the resolution and the table differ by $60,000."
+  },
+  {
+   "body": "pc-cra",
+   "date": "2026-09-01",
+   "category": "cra",
+   "item": "12. Consideration and Approval of the Small-Business Property Activation & Redevelopment Kickstart (SPARK) Pilot Program in Downtown North CRA District",
+   "amount": null,
+   "outcome": "passed",
+   "tally": "5-0",
+   "by_member": {
+    "Allan Branch": "yes",
+    "Robbie Hughes": "yes",
+    "Janice Lucas": "yes",
+    "Brian Grainger": "yes",
+    "Josh Street": "yes"
+   },
+   "source_title": "City of Panama City Community Redevelopment Agency Board Meeting of September 1, 2026 - Minutes",
+   "source_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Minutes/_09012026-904",
+   "plain_summary": "The CRA board voted 5-0: created the SPARK small-business pilot program in Downtown North.",
+   "headline": "Created the SPARK small-business pilot program in Downtown North",
+   "summary": "The board approved the SPARK pilot program, with revisions, for the Downtown North district. A board member asked for scoring, a clear definition of affordable housing, and phases."
+  },
+  {
+   "body": "pc-cra",
+   "date": "2026-09-01",
+   "category": "cra",
+   "item": "13. Consideration and Approval of the Proposed Development Agreement and a CRA Redevelopment Site Preparation Grant Award for the property located at 101 E 7th Street (Parcel ID 20075-000-000) in the Downtown CRA District",
+   "amount": null,
+   "outcome": "passed",
+   "tally": "5-0",
+   "by_member": {
+    "Allan Branch": "yes",
+    "Robbie Hughes": "yes",
+    "Janice Lucas": "yes",
+    "Brian Grainger": "yes",
+    "Josh Street": "yes"
+   },
+   "source_title": "City of Panama City Community Redevelopment Agency Board Meeting of September 1, 2026 - Minutes",
+   "source_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Minutes/_09012026-904",
+   "plain_summary": "The CRA board voted 5-0: approved a development agreement and site-prep grant for 101 E. 7th St.",
+   "headline": "Approved a development agreement and site-prep grant for 101 E. 7th St",
+   "summary": "A development agreement and Redevelopment Site Preparation grant for 101 E. 7th Street in the Downtown district. The minutes give no grant amount."
+  },
+  {
+   "body": "pc-cra",
+   "date": "2026-09-01",
+   "category": "cra",
+   "item": "14. Consideration, Approval, and Authorization to Execute a Performance Agreement for the Panama City Tax Increment Rebate Program application submitted by 416 Jenks LLC, for the property located at 416 Jenks Avenue (Parcel ID 19592-000-000), within the Downtown CRA District",
+   "amount": null,
+   "outcome": "passed",
+   "tally": "5-0",
+   "by_member": {
+    "Allan Branch": "yes",
+    "Robbie Hughes": "yes",
+    "Janice Lucas": "yes",
+    "Brian Grainger": "yes",
+    "Josh Street": "yes"
+   },
+   "source_title": "City of Panama City Community Redevelopment Agency Board Meeting of September 1, 2026 - Minutes",
+   "source_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Minutes/_09012026-904",
+   "plain_summary": "The CRA board voted 5-0: approved TIF rebate for 416 Jenks LLC.",
+   "headline": "Approved TIF rebate for 416 Jenks LLC",
+   "summary": "416 Jenks LLC was accepted into the Tax Increment Rebate Program for 416 Jenks Avenue in the Downtown district."
+  },
+  {
+   "body": "pc-cra",
+   "date": "2026-09-01",
+   "category": "other",
+   "item": "15. Discuss the CRA's involvement with the FLOCK program with PCPD - motion to eliminate the CRA funding from the FLOCK camera program",
+   "amount": null,
+   "outcome": "passed",
+   "tally": "5-0",
+   "by_member": {
+    "Allan Branch": "yes",
+    "Robbie Hughes": "yes",
+    "Janice Lucas": "yes",
+    "Brian Grainger": "yes",
+    "Josh Street": "yes"
+   },
+   "source_title": "City of Panama City Community Redevelopment Agency Board Meeting of September 1, 2026 - Minutes",
+   "source_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Minutes/_09012026-904",
+   "plain_summary": "The CRA board voted 5-0: ended CRA funding for the police FLOCK camera program.",
+   "headline": "Ended CRA funding for the police FLOCK camera program",
+   "summary": "The CRA had helped pay for the Panama City Police Department's FLOCK license-plate camera program for five years. The board voted to stop that funding."
   },
   {
    "body": "pcb-council",
@@ -8214,6 +8657,174 @@
    "summary": "Resolution No. 26-10 adopts the proposed FY2026/27 budget, as amended, ahead of the final budget hearing."
   },
   {
+   "body": "cw-commission",
+   "date": "2026-09-08",
+   "category": "other",
+   "item": "approve the Development Agreement for Capacity with the St. Joe Company",
+   "amount": null,
+   "outcome": "passed",
+   "tally": "5-0 (minutes: 'carried unanimously')",
+   "by_member": {
+    "Pamn Henderson": "yes",
+    "Bobby Birdsell": "yes",
+    "David Griggs": "yes",
+    "Bob Pelletier": "yes",
+    "Kenneth L. Ayers, Jr.": "yes"
+   },
+   "source_title": "City of Callaway Regular Meeting - Minutes, September 8, 2026",
+   "source_url": "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Minutes/_09082026-420",
+   "plain_summary": "The Callaway Commission voted 5-0 to approved a utility capacity development agreement with St. Joe.",
+   "headline": "Approved a utility capacity development agreement with St. Joe",
+   "summary": "Approves a development agreement with the St. Joe Company on utility capacity, with added sections on inspections, indemnification, city infrastructure standards, environmental protections and default."
+  },
+  {
+   "body": "cw-commission",
+   "date": "2026-09-08",
+   "category": "contract",
+   "item": "approve the bid award (LS2026-11 Air Conditioner Replacements) to Parker Services in the not-to-exceed amount of $44,668.00",
+   "amount": 44668,
+   "outcome": "passed",
+   "tally": "5-0 (minutes: 'carried unanimously')",
+   "by_member": {
+    "Pamn Henderson": "yes",
+    "Bobby Birdsell": "yes",
+    "David Griggs": "yes",
+    "Bob Pelletier": "yes",
+    "Kenneth L. Ayers, Jr.": "yes"
+   },
+   "source_title": "City of Callaway Regular Meeting - Minutes, September 8, 2026",
+   "source_url": "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Minutes/_09082026-420",
+   "plain_summary": "The Callaway Commission voted 5-0 to awarded $44,668 air conditioner replacement to Parker Services.",
+   "headline": "Awarded $44,668 air conditioner replacement to Parker Services",
+   "summary": "Parker Services will replace air conditioners under bid LS2026-11 for up to $44,668."
+  },
+  {
+   "body": "cw-commission",
+   "date": "2026-09-17",
+   "category": "millage",
+   "item": "Resolution No. 26-12, levying a Final Ad Valorem Rate of 2.7000 mils for FY2026/27",
+   "amount": null,
+   "outcome": "passed",
+   "tally": "5-0 (minutes: 'carried unanimously upon roll-call vote')",
+   "by_member": {
+    "Pamn Henderson": "yes",
+    "Bobby Birdsell": "yes",
+    "David Griggs": "yes",
+    "Bob Pelletier": "yes",
+    "Kenneth L. Ayers, Jr.": "yes"
+   },
+   "source_title": "City of Callaway Final Budget Hearing Minutes, September 17, 2026 (draft, in the Oct 13, 2026 agenda packet for approval)",
+   "source_url": "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_10132026-425",
+   "plain_summary": "The Callaway Commission voted 5-0 to kept the FY2027 city tax rate at 2.7 mills.",
+   "headline": "Kept the FY2027 city tax rate at 2.7 mills",
+   "summary": "The final FY2026-27 rate is 2.7000 mills, 0.5999% above the rolled-back rate of 2.6839 mills."
+  },
+  {
+   "body": "cw-commission",
+   "date": "2026-09-17",
+   "category": "budget",
+   "item": "Resolution No. 26-13, adopting the Final budget for FY2026/27 ($50,215,139)",
+   "amount": 50215139,
+   "outcome": "passed",
+   "tally": "5-0 (minutes: 'carried unanimously upon roll-call vote')",
+   "by_member": {
+    "Pamn Henderson": "yes",
+    "Bobby Birdsell": "yes",
+    "David Griggs": "yes",
+    "Bob Pelletier": "yes",
+    "Kenneth L. Ayers, Jr.": "yes"
+   },
+   "source_title": "City of Callaway Final Budget Hearing Minutes, September 17, 2026 (draft, in the Oct 13, 2026 agenda packet for approval)",
+   "source_url": "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_10132026-425",
+   "plain_summary": "The Callaway Commission voted 5-0 to adopted a $50.2 million city budget for FY2027.",
+   "headline": "Adopted a $50.2 million city budget for FY2027",
+   "summary": "Resolution 26-13 adopts a FY2026-27 budget of $50,215,139, including a $12,227,754 General Fund (amounts from the resolution in the Sept 17, 2026 agenda packet, https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_09172026-422)."
+  },
+  {
+   "body": "cw-commission",
+   "date": "2026-09-22",
+   "category": "contract",
+   "item": "approve the bid award (CM2026-12 Beulah Avenue Paving) to American Sand in the not-to-exceed amount of $334,344.25",
+   "amount": 334344.25,
+   "outcome": "passed",
+   "tally": "5-0 (minutes: 'carried unanimously'; Mayor Henderson attended by phone)",
+   "by_member": {
+    "Pamn Henderson": "yes",
+    "Bobby Birdsell": "yes",
+    "David Griggs": "yes",
+    "Bob Pelletier": "yes",
+    "Kenneth L. Ayers, Jr.": "yes"
+   },
+   "source_title": "City of Callaway Regular Meeting Minutes, September 22, 2026 (draft, in the Oct 13, 2026 agenda packet for approval)",
+   "source_url": "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_10132026-425",
+   "plain_summary": "The Callaway Commission voted 5-0 to awarded $334,344 Beulah Avenue paving to American Sand.",
+   "headline": "Awarded $334,344 Beulah Avenue paving to American Sand",
+   "summary": "American Sand will pave Beulah Avenue for up to $334,344.25. Five bids were received."
+  },
+  {
+   "body": "cw-commission",
+   "date": "2026-09-22",
+   "category": "contract",
+   "item": "approve the bid award (CM2026-13 South Gay Avenue Paving) to American Sand in the not-to-exceed amount of $351,280.14",
+   "amount": 351280.14,
+   "outcome": "passed",
+   "tally": "5-0 (minutes: 'carried unanimously'; Mayor Henderson attended by phone)",
+   "by_member": {
+    "Pamn Henderson": "yes",
+    "Bobby Birdsell": "yes",
+    "David Griggs": "yes",
+    "Bob Pelletier": "yes",
+    "Kenneth L. Ayers, Jr.": "yes"
+   },
+   "source_title": "City of Callaway Regular Meeting Minutes, September 22, 2026 (draft, in the Oct 13, 2026 agenda packet for approval)",
+   "source_url": "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_10132026-425",
+   "plain_summary": "The Callaway Commission voted 5-0 to awarded $351,280 South Gay Avenue paving to American Sand.",
+   "headline": "Awarded $351,280 South Gay Avenue paving to American Sand",
+   "summary": "American Sand will pave South Gay Avenue from Cherry Street to Lake Drive (base bid plus alternate) for up to $351,280.14. Five bids were received."
+  },
+  {
+   "body": "cw-commission",
+   "date": "2026-09-22",
+   "category": "contract",
+   "item": "approve the bid award (LS2026-14 Air Conditioner Replacements Phase 2) to Cooler Air Conditioning in the not-to-exceed amount of $60,100.00",
+   "amount": 60100,
+   "outcome": "passed",
+   "tally": "5-0 (minutes: 'carried unanimously'; Mayor Henderson attended by phone)",
+   "by_member": {
+    "Pamn Henderson": "yes",
+    "Bobby Birdsell": "yes",
+    "David Griggs": "yes",
+    "Bob Pelletier": "yes",
+    "Kenneth L. Ayers, Jr.": "yes"
+   },
+   "source_title": "City of Callaway Regular Meeting Minutes, September 22, 2026 (draft, in the Oct 13, 2026 agenda packet for approval)",
+   "source_url": "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_10132026-425",
+   "plain_summary": "The Callaway Commission voted 5-0 to awarded $60,100 arts center air conditioner replacement to Cooler Air Conditioning.",
+   "headline": "Awarded $60,100 arts center air conditioner replacement to Cooler Air Conditioning",
+   "summary": "Cooler Air Conditioning will replace the last four units at the Arts & Conference Center for up to $60,100."
+  },
+  {
+   "body": "cw-commission",
+   "date": "2026-09-22",
+   "category": "contract",
+   "item": "approve the bid award (LS2026-15 Parking Lot Sealcoating & Striping) to McShae Contracting DBA Emerald Coast Striping in the not-to-exceed amount of $47,970.15",
+   "amount": 47970.15,
+   "outcome": "passed",
+   "tally": "5-0 (minutes: 'carried unanimously'; Mayor Henderson attended by phone)",
+   "by_member": {
+    "Pamn Henderson": "yes",
+    "Bobby Birdsell": "yes",
+    "David Griggs": "yes",
+    "Bob Pelletier": "yes",
+    "Kenneth L. Ayers, Jr.": "yes"
+   },
+   "source_title": "City of Callaway Regular Meeting Minutes, September 22, 2026 (draft, in the Oct 13, 2026 agenda packet for approval)",
+   "source_url": "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_10132026-425",
+   "plain_summary": "The Callaway Commission voted 5-0 to awarded $47,970 parking lot sealcoating to Emerald Coast Striping.",
+   "headline": "Awarded $47,970 parking lot sealcoating to Emerald Coast Striping",
+   "summary": "McShae Contracting, doing business as Emerald Coast Striping, will sealcoat and stripe city parking lots for up to $47,970.15. Two bids were received."
+  },
+  {
    "body": "cw-cra",
    "date": "2024-09-19",
    "category": "budget",
@@ -8253,6 +8864,27 @@
    "plain_summary": "The Callaway CRA board voted 4-0 to approve CRA Resolution No. 2025-01, adopting the CRA budget for FY2025/24.",
    "headline": "Adopted the FY2025/26 CRA budget",
    "summary": "CRA Resolution No. 2025-01 adopts the Community Redevelopment Agency budget at the September 18, 2025 budget hearing. The minutes label the year \"FY2024/24\" and \"FY2025/24\"; a budget adopted that month is for FY2025/26."
+  },
+  {
+   "body": "cw-cra",
+   "date": "2025-10-28",
+   "category": "cra",
+   "item": "approve the Mobile Home Skirting Grant",
+   "amount": null,
+   "outcome": "passed",
+   "tally": "5-0 (minutes: 'carried unanimously')",
+   "by_member": {
+    "Pamn Henderson": "yes",
+    "Bobby Birdsell": "yes",
+    "David Griggs": "yes",
+    "Bob Pelletier": "yes",
+    "Kenneth L. Ayers, Jr.": "yes"
+   },
+   "source_title": "City of Callaway CRA Budget Hearing - Minutes, October 28, 2025",
+   "source_url": "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Minutes/_10282025-382",
+   "plain_summary": "The Callaway CRA board voted 5-0 (all present) to approve the Mobile Home Skirting Improvement Grant.",
+   "headline": "Created a mobile home skirting grant",
+   "summary": "A CRA grant that pays part of the cost of skirting for mobile homes. The city manager said applicants may have no code violations other than skirting. The minutes give no dollar amount."
   },
   {
    "body": "sp-commission",
@@ -9879,12 +10511,19 @@
    "amount": null,
    "outcome": "passed",
    "tally": "4-1",
-   "by_member": {},
+   "by_member": {
+    "Michele Miller": "yes",
+    "Linda Hamilton": "yes",
+    "Adrian Welle": "yes",
+    "Richard Wolff": "yes",
+    "Jerry Smith": "no"
+   },
    "source_title": "City of Mexico Beach January 23 2024 City Council Minutes (scanned)",
    "source_url": "https://mexicobeachfl.gov/uploads/2024/01/January-23-2024-City-Counicl-Minutes.pdf",
-   "plain_summary": "The council raised boat ramp fees 4-1. The minutes do not name the dissenter. The council in January 2024 included members who left before the April 2024 election, and the OCR roster is incomplete, so no names are recorded.",
+   "plain_summary": "The council raised boat ramp fees 4-1. Linda Hamilton moved and Adrian Welle seconded; Jerry Smith voted no. Mayor Michele Miller, Hamilton, Welle, Smith and Richard Wolff were present.",
    "headline": "Raised boat ramp fees",
-   "summary": "The daily boat ramp fee rises to $25 and the annual pass to $200."
+   "summary": "The daily boat ramp fee rises to $25 and the annual pass to $200.",
+   "notes": "Members from the minutes (scanned; read with text recognition): present were Mayor Miller and Councilmembers Linda Hamilton, Adrian Welle, Jerry Smith and Richard Wolff; \"Motion passed with a 4 to 1 vote. No vote was Mr. Smith.\" The minutes give the mayor's surname only; her first name is from news coverage of the 2024 recall (https://digital-release.mypanhandle.com/news/local-news/politics-news/mexico-beach-recalls-mayor-michele-miller-votes-in-richard-wolff/amp/)."
   },
   {
    "body": "mb-council",
@@ -12493,17 +13132,17 @@
   "Still missing: Bay County Commission minutes after June 16, 2026 (including the July 21 maximum-millage meeting and the September 2026 budget hearings), the September 2025 budget-hearing minutes, Dec. 2 and 16, 2025 and March 3, 2026; and Parker's September 24, 2026 final budget hearing minutes, approved but not yet posted."
  ],
  "stats": {
-  "total_votes": 576,
+  "total_votes": 606,
   "split_votes": 160,
   "by_body": {
    "bay-bocc": 61,
-   "pc-commission": 120,
-   "pc-cra": 9,
+   "pc-commission": 127,
+   "pc-cra": 23,
    "pcb-council": 94,
    "lh-commission": 47,
    "lh-cra": 12,
-   "cw-commission": 30,
-   "cw-cra": 2,
+   "cw-commission": 38,
+   "cw-cra": 3,
    "sp-commission": 63,
    "parker-council": 14,
    "mb-council": 20,

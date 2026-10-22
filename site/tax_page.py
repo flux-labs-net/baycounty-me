@@ -164,10 +164,26 @@ def build_data():
              'hist': [[h['fy'], r0(h.get('total_budget'))] for h in b.get('history', []) if h.get('total_budget')]}
         notes = [f.get(k) for k in ('total_budget_note', 'gf_expenditures_note', 'gf_revenues_note', 'millage_note') if f.get(k)]
         g['notes'] = notes
+        # FY2027 budgets adopted in Sept 2026. The breakdowns above stay FY2026 (FY2027 detail isn't
+        # published for most governments yet); FY2027 is shown as its own line with its own source.
+        n = b.get('fy2027') or {}
+        nt = n.get('total_budget') or n.get('total_budget_less_transfers') or n.get('total_budget_less_interfund_transfers')
+        if nt or n.get('general_fund'):
+            st = str(n.get('status') or '')
+            g['next'] = {'fy': 'FY2027', 'total': r0(nt), 'gf': r0(n.get('general_fund')), 'mills': n.get('millage'),
+                         'adopted': st.lower().startswith('adopted'),
+                         'status': st.split(';')[0].split('. ')[0][:140],
+                         'excl': bool(not n.get('total_budget') and nt),
+                         'src': [n.get('source_title') or 'FY2027 budget source', n.get('source_url')]}
+        if g['total'] and not any(h[0].startswith('FY2026') for h in g['hist']):
+            g['hist'].append(['FY2026', g['total']])
+        g['hist'].sort(key=lambda h: h[0])
+        if g.get('next') and g['next']['total']:
+            g['hist'].append(['FY2027', g['next']['total']])
         if gid == 'bay_county':
             s = bud_by['bay_sheriff']
             g['ctx'].append([f"The Sheriff is elected separately, but the County Commission pays for most of the office: ${s['fy2026']['county_funded_total']/1e6:.1f}M from the county general fund in FY2026 for law enforcement (${s['fy2026']['gf_expenditures']['Law enforcement (county dept 0120)']/1e6:.1f}M) and the jail (${s['fy2026']['gf_expenditures']['Jail operations (county dept 0121)']/1e6:.1f}M).", s['fy2026']['source_url']])
-            g['hist'] = [[h['fy'], r0(h['total_budget'])] for h in sorted(b['history'], key=lambda h: h['fy'])] + [['FY2026', g['total']]]
+            g['hist'] = [[h['fy'], r0(h['total_budget'])] for h in sorted(b['history'], key=lambda h: h['fy'])] + [['FY2026', g['total']]] + ([['FY2027', g['next']['total']]] if g.get('next') and g['next']['total'] else [])
         if gid == 'bay_district_schools':
             g['mix'] = {k: r0(v) for k, v in f['revenue_mix_all_funds'].items() if k != 'note'}
             g['other'] = {k: r0(v) for k, v in f['other_funds'].items()}
