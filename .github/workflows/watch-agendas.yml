@@ -1,0 +1,72 @@
+# Agenda watcher (data/agendas/watch_agendas.py). Checks the agenda mailbox every 30 minutes during the
+# working day and rescans whatever government a notice email points at; sweeps every source twice a day.
+# New or changed files are stored, logged for /admin (Agendas tab), emailed to the admins, and kick off the
+# meetings refresh so the site picks them up.
+# Secrets: DATABASE_URL, POP_HOST, POP_USER, POP_PASS, SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY,
+#          RESEND_FULL_KEY, ADMIN_EMAILS. Optional repository variable POP_DELETE=1.
+name: Watch agendas
+on:
+  schedule:
+    - cron: '*/30 11-23 * * 1-5'   # inbox: every 30 min, 6 a.m.-6:30 p.m. Central (daylight time), weekdays
+    - cron: '7 12,22 * * *'        # sweep: every source, 7 a.m. and 5 p.m. Central
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'inbox, sweep or both'
+        default: both
+      only:
+        description: 'Limit to sources (comma list: pc,cw,lh,county,pcb,sp,parker,mb). Blank = all.'
+        default: ''
+permissions:
+  contents: read
+  actions: write
+concurrency:
+  group: watch-agendas
+  cancel-in-progress: false
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install 'psycopg[binary]'
+      - name: Check the inbox and sources
+        id: watch
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          SUPABASE_REGION: ${{ vars.SUPABASE_REGION }}
+          POP_HOST: ${{ secrets.POP_HOST }}
+          POP_USER: ${{ secrets.POP_USER }}
+          POP_PASS: ${{ secrets.POP_PASS }}
+          POP_DELETE: ${{ vars.POP_DELETE }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          RESEND_KEY: ${{ secrets.RESEND_FULL_KEY }}
+          ADMIN_EMAILS: ${{ secrets.ADMIN_EMAILS }}
+          SCHEDULE: ${{ github.event.schedule }}
+          MODE: ${{ inputs.mode }}
+          ONLY: ${{ inputs.only }}
+        run: |
+          args=""
+          case "${MODE:-}" in
+            inbox) args="--inbox" ;; sweep) args="--sweep" ;; both) args="--inbox --sweep" ;;
+            *) if [ "$SCHEDULE" = "7 12,22 * * *" ]; then args="--sweep"; else args="--inbox"; fi ;;
+          esac
+          [ -n "$ONLY" ] && args="$args --only $ONLY"
+          python data/agendas/watch_agendas.py $args
+      - name: Refresh meetings when something new landed
+        if: steps.watch.outputs.new_docs != '0' || steps.watch.outputs.updated_docs != '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh workflow run refresh-meetings.yml --repo "$GITHUB_REPOSITORY"
+      - name: Email admins about problems
+        if: failure()
+        env:
+          STEPS: ${{ toJSON(steps) }}
+          JOB_STATUS: ${{ job.status }}
+          RESEND_KEY: ${{ secrets.RESEND_FULL_KEY }}
+          ADMIN_EMAILS: ${{ secrets.ADMIN_EMAILS }}
+        run: python3 .github/scripts/notify_admins.py
