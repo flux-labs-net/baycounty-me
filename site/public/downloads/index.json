@@ -1,6 +1,6 @@
 {
  "name": "BayCounty.me open data",
- "updated": "2026-10-21",
+ "updated": "2026-10-22",
  "license": "Public records; free to reuse with credit to BayCounty.me",
  "datasets": [
   {
@@ -2048,7 +2048,7 @@
    "id": "meetings",
    "title": "Upcoming meetings",
    "description": "Scheduled and expected meetings for every board.",
-   "rows": 45,
+   "rows": 49,
    "columns": [
     {
      "name": "board",
@@ -2086,6 +2086,7 @@
       "City Council",
       "City Council Meeting",
       "Commission Meeting",
+      "Commission Workshop",
       "Community Redevelopment Agency Board Meeting for October 13, 2026",
       "LDC 5th Workshop",
       "Planning Commission Meeting",
@@ -2182,6 +2183,7 @@
       "MexicoBeach:https://mexicobeachfl.gov/government/council-meetings/",
       "Parker:https://cityofparker.com/government/agendas-minutes/",
       "PrimeGov:https://baycountyfl.primegov.com/public/portal",
+      "Springfield:https://www.springfieldfl.net/meetings",
       "Springfield:https://www.springfieldfl.net/meetings/recent",
       "Thrillshare:https://thrillshare-cmsv2.services.thrillshare.com/api/v4/o/31249/cms/events",
       "calendar:https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=26&feed=calendar",
@@ -2250,6 +2252,10 @@
       "https://www.panamacity.gov/calendar.aspx?EID=7564",
       "https://www.panamacity.gov/calendar.aspx?EID=7565",
       "https://www.springfieldfl.net/community/meeting/commission-meeting-74",
+      "https://www.springfieldfl.net/community/meeting/commission-meeting-76",
+      "https://www.springfieldfl.net/community/meeting/commission-meeting-77",
+      "https://www.springfieldfl.net/community/meeting/commission-workshop-54",
+      "https://www.springfieldfl.net/community/meeting/commission-workshop-55",
       "https://youtube.com/live/aX2AYat8SmM?feature=share"
      ]
     },

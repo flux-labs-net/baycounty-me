@@ -1,8 +1,8 @@
 {
-  "generated": "2026-10-21T16:57:36-05:00",
+  "generated": "2026-10-22T06:28:57-05:00",
   "window": {
-    "from": "2026-10-21",
-    "to": "2026-12-20"
+    "from": "2026-10-22",
+    "to": "2026-12-21"
   },
   "timezone": "America/Chicago",
   "boards": [
@@ -53,7 +53,7 @@
       "calendar_url": "https://thrillshare-cmsv2.services.thrillshare.com/api/v4/o/31249/cms/events/generate_ical?filter_ids&section_ids",
       "schedule_source_url": "https://www.bay.k12.fl.us/events",
       "sources": {
-        "District calendar (Thrillshare)": "ok (11 records)"
+        "District calendar (Thrillshare)": "ok (10 records)"
       },
       "coverage": {
         "agenda_feed": 0,
@@ -71,7 +71,7 @@
       "calendar_url": "https://www.panamacity.gov/Calendar.aspx",
       "schedule_source_url": "https://panamacity.gov/401/About-Meetings",
       "sources": {
-        "AgendaCenter": "ok (27 records)",
+        "AgendaCenter": "ok (26 records)",
         "calendar (iCal cat 22)": "ok (52 records)"
       },
       "coverage": {
@@ -127,7 +127,7 @@
       "calendar_url": "https://www.cityoflynnhaven.gov/Calendar.aspx",
       "schedule_source_url": "https://www.cityoflynnhaven.gov/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar",
       "sources": {
-        "CivicClerk": "ok (18 records)",
+        "CivicClerk": "ok (16 records)",
         "calendar (iCal cat 14)": "ok (5 records)"
       },
       "coverage": {
@@ -164,7 +164,7 @@
       "calendar_url": "https://www.cityofcallaway.com/Calendar.aspx",
       "schedule_source_url": "https://www.cityofcallaway.com/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar",
       "sources": {
-        "AgendaCenter": "ok (12 records)",
+        "AgendaCenter": "ok (11 records)",
         "calendar (iCal cat 14)": "ok (11 records)"
       },
       "coverage": {
@@ -201,11 +201,11 @@
       "calendar_url": "https://www.springfieldfl.net/calendar",
       "schedule_source_url": "https://www.springfieldfl.net/city-commission",
       "sources": {
-        "Meetings list /meetings": "ok (0 records)",
-        "Meetings list /meetings/recent": "ok (50 records)"
+        "Meetings list /meetings": "ok (4 records)",
+        "Meetings list /meetings/recent": "ok (54 records)"
       },
       "coverage": {
-        "agenda_feed": 0,
+        "agenda_feed": 4,
         "calendar": 0,
         "expected": 0
       }
@@ -689,6 +689,18 @@
       "status": "posted"
     },
     {
+      "board": "sp",
+      "title": "Commission Meeting",
+      "start": "2026-11-02T17:30:00-06:00",
+      "location": "Springfield City Hall Commission Room, 408 School Ave., Springfield, FL",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "Springfield:https://www.springfieldfl.net/meetings",
+      "status": "posted",
+      "detail_url": "https://www.springfieldfl.net/community/meeting/commission-meeting-76"
+    },
+    {
       "board": "county",
       "title": "Bay County Board of County Commissioners Meeting",
       "start": "2026-11-03T09:00:00-06:00",
@@ -783,6 +795,18 @@
       "source": "Thrillshare:https://thrillshare-cmsv2.services.thrillshare.com/api/v4/o/31249/cms/events",
       "status": "calendar",
       "detail_url": "https://www.bay.k12.fl.us/school-board-meetings"
+    },
+    {
+      "board": "sp",
+      "title": "Commission Workshop",
+      "start": "2026-11-16T17:30:00-06:00",
+      "location": "Springfield City Hall Commission Room, 408 School Ave., Springfield, FL",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "Springfield:https://www.springfieldfl.net/meetings",
+      "status": "posted",
+      "detail_url": "https://www.springfieldfl.net/community/meeting/commission-workshop-54"
     },
     {
       "board": "county",
@@ -905,6 +929,18 @@
       "detail_url": "https://www.panamacity.gov/calendar.aspx?EID=6077"
     },
     {
+      "board": "sp",
+      "title": "Commission Meeting",
+      "start": "2026-12-07T17:30:00-06:00",
+      "location": "Springfield City Hall Commission Room, 408 School Ave., Springfield, FL",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "Springfield:https://www.springfieldfl.net/meetings",
+      "status": "posted",
+      "detail_url": "https://www.springfieldfl.net/community/meeting/commission-meeting-77"
+    },
+    {
       "board": "cw",
       "title": "Commission Meeting",
       "start": "2026-12-08T18:00:00-06:00",
@@ -988,6 +1024,18 @@
       "source": "calendar:https://www.panamacity.gov/common/modules/iCalendar/iCalendar.aspx?catID=22&feed=calendar",
       "status": "calendar",
       "detail_url": "https://www.panamacity.gov/calendar.aspx?EID=7565"
+    },
+    {
+      "board": "sp",
+      "title": "Commission Workshop",
+      "start": "2026-12-21T17:30:00-06:00",
+      "location": "Springfield City Hall Commission Room, 408 School Ave., Springfield, FL",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "Springfield:https://www.springfieldfl.net/meetings",
+      "status": "posted",
+      "detail_url": "https://www.springfieldfl.net/community/meeting/commission-workshop-55"
     }
   ],
   "errors": [],
