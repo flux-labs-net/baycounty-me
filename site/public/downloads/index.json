@@ -117,7 +117,7 @@
    "id": "votes",
    "title": "Recorded votes",
    "description": "Money votes by the County Commission, School Board, city commissions and CRA boards, with how each member voted.",
-   "rows": 576,
+   "rows": 606,
    "columns": [
     {
      "name": "date",
@@ -209,7 +209,9 @@
       "4-0 (unanimous)",
       "4-1",
       "5-0",
+      "5-0 (minutes: 'carried unanimously upon roll-call vote')",
       "5-0 (minutes: 'carried unanimously')",
+      "5-0 (minutes: 'carried unanimously'; Mayor Henderson attended by phone)",
       "not found",
       "unanimous",
       "unanimous (per news; names not listed)"
@@ -285,7 +287,7 @@
    "id": "member-votes",
    "title": "Votes by member",
    "description": "One row per member per vote (long format), for tallying individual records.",
-   "rows": 2868,
+   "rows": 3018,
    "columns": [
     {
      "name": "date",
@@ -341,7 +343,7 @@
    "id": "contracts",
    "title": "Contracts",
    "description": "Major contracts approved since October 2022: vendor, amount, purpose, how awarded.",
-   "rows": 322,
+   "rows": 339,
    "columns": [
     {
      "name": "government",
@@ -353,7 +355,8 @@
       "City of Mexico Beach",
       "City of Panama City",
       "City of Panama City Beach",
-      "City of Parker"
+      "City of Parker",
+      "City of Springfield"
      ]
     },
     {
@@ -1699,7 +1702,7 @@
    "id": "vendor-payments",
    "title": "Who gets paid",
    "description": "Payments to vendors from check registers, totaled by vendor and year.",
-   "rows": 408,
+   "rows": 446,
    "columns": [
     {
      "name": "government",

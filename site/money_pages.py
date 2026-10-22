@@ -288,16 +288,16 @@ def payments_page():
     return f'''<div class="page tax">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Accountability · Who gets paid</span><h1>Who gets paid: tourism agencies</h1>
     <p class="lede">Every payment by the three agencies that spend Bay County's tourist development tax on marketing, from the monthly check registers kept by the Clerk of Court. The county's own payments are on the <a href="/public-money/contracts">Contracts</a> page.</p></div>
-    <div class="stamp">{PDF_BTN}<span>Registers through October 2025</span></div></header>
+    <div class="stamp">{PDF_BTN}<span>Registers through July 2026</span></div></header>
   <section class="explain"><div class="ex-txt"><span class="eyebrow">The simple version</span><h2>Where the bed tax goes after the county</h2>
     <ol class="ex-steps"><li><b>Visitors pay a 5% bed tax</b> on hotel and rental stays. Part of it pays three agencies that market each tourism area: Panama City Beach, Panama City and Mexico Beach.</li>
-      <li><b>The Clerk pays their bills.</b> Until November 2025, each agency's payments were listed in the Clerk's monthly check register. That's what this page shows: {money(tot)} in payments over the months covered.</li>
+      <li><b>The Clerk pays their bills.</b> Each agency's payments are listed in the Clerk's monthly check register. That's what this page shows: {money(tot)} in payments over the months covered. A few months were never posted; they're listed under Sources and gaps.</li>
       <li><b>Some bills hide the details.</b> Credit card payments and payroll services show as one payment; what was bought isn't listed. Payments to individual people are counted but not named.</li></ol></div></section>
   <div class="callout">In January 2026 the Clerk of Court published an <a href="https://apps.baycoclerk.com/Web_File_Repo/bocc_finance/Panama_City_Beach_TDC_CVB_Public_CAP.pdf" target="_blank" rel="noopener">action plan for Visit Panama City Beach</a>, describing a criminal investigation and forensic audit and putting the agency's payments under the Clerk's review. The payments here are listed as recorded; this site makes no finding about any of them.</div>
   <div class="vt-filters mt-f two"><label class="vf"><span>Agency</span><select id="wpA" data-param="agency">{tabs}</select></label><label class="vf"><span>Search payees</span><input id="wpQ" type="search" placeholder="e.g. Meta, printing, hotel" data-param="q"></label></div>
   {secs}
   <section class="tx-sec method"><div class="sec-hd"><h2 id="src">Sources and gaps</h2></div>
-    <p>The Bay County Clerk of Court's monthly "Check Register – Sorted by Dollar Amount," attached to County Commission agendas. The pages are scans; they were read by OCR and each month was added up and compared with the register's printed total. A few misread amounts were corrected only where the fix made the month match.</p>
+    <p>The Bay County Clerk of Court's monthly "Check Register – Sorted by Dollar Amount," attached to County Commission agendas. Most months come from the Clerk's public records search as text PDFs; one month (December 2024) was only available as a scan and was read by OCR. Every month was added up and checked against the register's printed totals for each agency.</p>
     <p>No city or the School Board posts a check register. You can <a href="/records-request">request one</a>; the request generator has them ready.</p>
     <details class="gaps"><summary>What we couldn't find ({len(p.get("gaps") or [])})</summary><ul>{gaps}</ul></details></section>
 </div>
