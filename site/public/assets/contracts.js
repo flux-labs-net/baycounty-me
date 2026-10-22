@@ -34,6 +34,7 @@ const fdt = s => s ? new Date(s + 'T12:00:00').toLocaleDateString('en-US', {mont
 const src = u => u ? ` <a class="src" href="${esc(u)}" target="_blank" rel="noopener">Source</a>` : '';
 const named = VP.filter(p => p.t !== 'unnamed');
 $('vpList').innerHTML = named.map(p => `<option value="${esc(p.n)}">`).join('');
+const VSLUG = fetch('/data/vendor-slugs.json').then(r => r.json()).catch(() => ({}));  // vendor profile pages
 function card(id, scroll) {
   const p = VBY[id], el = $('vpCard');
   if (!p) return;
@@ -57,7 +58,9 @@ function card(id, scroll) {
     ${p.gifts.length ? `<h4>Campaign gifts from the company</h4><ul class="plain mm-list">${p.gifts.map(g => `<li><b>${esc(g.o)}</b>, ${esc(g.off)}: ${usd(g.a)}${g.dates && g.dates.length ? ' on ' + g.dates.map(fdt).join(', ') : ''}${g.same ? ' <span class="badge warn">their government pays this company</span>' : ''}</li>`).join('')}</ul>
       <p class="note">From current officials' latest campaign reports. Gifts from the company's owners or employees as individuals aren't linked to it.</p>` : ''}
     ${p.votes.length ? `<h4>Votes on this company's contracts by officials it gave to</h4><ul class="plain mm-list">${p.votes.map(v => `<li><b>${fdt(v.d)}</b> · ${esc(v.g)}: ${esc(v.h)}${v.a ? ' · ' + big(v.a) : ''}${v.consent ? ' <span class="muted">(consent agenda)</span>' : ''} · ${esc(v.outcome || '')} ${esc(v.tally || '')}${src(v.u)}<br><span class="small">${v.roll.map(m => m.gift ? `<b>${esc(m.n)}</b> ${esc(m.vote)} (got ${usd(m.gift)})` : `${esc(m.n)} ${esc(m.vote)}`).join(' · ')}</span></li>`).join('')}</ul>` : ''}
-    ${p.gifts.length ? `<p><a class="pill" href="/public-money/money-map?show=all&amp;q=${encodeURIComponent(p.mm || p.n)}#map">See it on the money map</a></p>` : ''}`;
+    ${p.gifts.length ? `<p><a class="pill" href="/public-money/money-map?show=all&amp;q=${encodeURIComponent(p.mm || p.n)}#map">See it on the money map</a></p>` : ''}
+    <p data-vprof="${esc(p.id)}" hidden><a class="pill" href="/public-money/vendors/${esc(p.id)}">Full vendor page</a></p>`;
+  VSLUG.then(s => { const x = el.querySelector('[data-vprof]'); if (x && s.ids && s.ids[x.dataset.vprof]) x.hidden = false; });
   const all = $('vpAll'); if (all) all.addEventListener('click', () => { el.querySelectorAll('.vp-aw li[hidden]').forEach(li => li.hidden = false); all.remove(); });
   const u = new URL(location.href); u.searchParams.set('company', id); history.replaceState(null, '', u.pathname + u.search + '#company');
   if (scroll) $('company').scrollIntoView({behavior: 'smooth', block: 'start'});

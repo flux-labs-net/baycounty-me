@@ -205,7 +205,7 @@ function renderRail(rows){
         <span class="amt">${p.amount!=null?fmt(p.amount):'Amount not found'}</span>
         <span><span class="pill st-${p.status.replace(/[^A-Za-z]/g,'').replace('NotCRAfunded','NotCRA')}">${esc(p.status)}</span> <span class="muted" style="font-size:.78rem">${esc(p.conf)}</span></span>
         <dl>
-          <dt>Paid to</dt><dd>${esc(p.payee)}</dd>
+          <dt>Paid to</dt><dd>${p.vp ? `<a href="/public-money/vendors/${esc(p.vp)}">${esc(p.payee)}</a>` : esc(p.payee)}</dd>
           <dt>For</dt><dd>${esc(p.purpose)}</dd>
           <dt>When</dt><dd>${esc(p.when||'—')}</dd>
           <dt>Where</dt><dd>${esc(p.loc||p.addr||'—')}${p.addr && p.loc ? `<br><span class="muted">${esc(p.addr)}</span>`:''}${p.placed==='district'?'<br><span class="muted">Pinned at district center</span>':(p.prec==='approximate'?'<br><span class="muted">Approximate location</span>':'')}</dd>

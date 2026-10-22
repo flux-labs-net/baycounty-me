@@ -5,8 +5,8 @@
  "count_contributor_candidate_pairs": 66,
  "count_distinct_vendors": 29,
  "count_by_confidence_pairs": {
-  "exact": 57,
-  "likely": 9
+  "likely": 9,
+  "exact": 57
  },
  "pairs_where_contract_government_matches_office": 31,
  "count_by_gift_source_pairs": {
