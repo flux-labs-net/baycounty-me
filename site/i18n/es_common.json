@@ -1,0 +1,39 @@
+{
+ "_about": "Shared Spanish strings for every /es page: phrase pairs applied to page bodies (no warning when absent), and window.BCM_I18N labels read by site.js (theme button). Table filter/sort/CSV labels come from tables.js, which reads the page language.",
+ "html": [
+  [
+   "Export PDF</button>",
+   "Exportar PDF</button>"
+  ],
+  [
+   "<span class=\"eyebrow\">The simple version</span>",
+   "<span class=\"eyebrow\">La versión sencilla</span>"
+  ],
+  [
+   " rel=\"noopener\">Source</a>",
+   " rel=\"noopener\">Fuente</a>"
+  ],
+  [
+   "<span class=\"muted\">Source: ",
+   "<span class=\"muted\">Fuente: "
+  ],
+  [
+   "<span>Government</span>",
+   "<span>Gobierno</span>"
+  ],
+  [
+   "aria-label=\"On this page\"",
+   "aria-label=\"En esta página\""
+  ]
+ ],
+ "bcm": {
+  "theme": {
+   "system": "Sistema",
+   "light": "Claro",
+   "dark": "Oscuro"
+  },
+  "themeLabel": "Tema: ",
+  "themeSystem": "igual que el sistema",
+  "themeClick": ". Toque para cambiar."
+ }
+}

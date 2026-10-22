@@ -1,0 +1,315 @@
+{
+ "_about": "Spanish for /es/exenciones (Exemptions). 'home' replaces exemptions_page.HOME labels by code (name, amount, who qualifies); 'other' replaces OTHER_NAMES; 'html' is ordered phrase pairs for the page.",
+ "home": {
+  "01": [
+   "Exención de vivienda principal (homestead)",
+   "Los primeros $25,000 del valor",
+   "Su casa permanente, que es suya y donde vivía el 1 de enero."
+  ],
+  "02": [
+   "Exención adicional de homestead",
+   "El valor entre $50,000 y unos $76,000",
+   "Viene sola con la exención de homestead. Ahora la cantidad sube cada año con la inflación. No se aplica a los impuestos escolares."
+  ],
+  "05": [
+   "Veterano con discapacidad total y permanente",
+   "Todo el valor",
+   "Un veterano con una discapacidad total y permanente por su servicio, según el VA (Departamento de Asuntos de Veteranos), o su cónyuge sobreviviente. También el cónyuge sobreviviente de un militar que murió en servicio activo."
+  ],
+  "35": [
+   "Veterano con discapacidad, $5,000",
+   "$5,000",
+   "Un veterano con una discapacidad del 10% o más por su servicio, o su cónyuge sobreviviente."
+  ],
+  "80": [
+   "Descuento para veteranos discapacitados en combate, 65+",
+   "Un porcentaje igual a la calificación de discapacidad del VA",
+   "Un veterano de 65 años o más con una discapacidad por combate."
+  ],
+  "38": [
+   "Militar desplegado",
+   "Una parte del valor según los días desplegado",
+   "Militares enviados fuera de EE. UU. en una operación que califica durante el año anterior."
+  ],
+  "06": [
+   "Veterano discapacitado en silla de ruedas",
+   "Todo el valor",
+   "Un veterano con una discapacidad por su servicio que usa silla de ruedas, o su cónyuge sobreviviente."
+  ],
+  "41": [
+   "Socorrista con discapacidad",
+   "Todo el valor",
+   "Un socorrista (bombero, policía o paramédico) con discapacidad total y permanente por un accidente en el trabajo, o el cónyuge sobreviviente de uno que murió en el trabajo."
+  ],
+  "08": [
+   "Persona con discapacidad total y permanente",
+   "Todo el valor",
+   "Personas con cuadriplejia; o personas con paraplejia, que deben usar silla de ruedas o legalmente ciegas, cuyo ingreso familiar está por debajo de un límite del estado."
+  ],
+  "03": [
+   "Persona mayor, condado",
+   "Hasta $50,000 más, solo en impuestos del condado",
+   "Dueños de casa de 65 años o más cuyo ingreso familiar está por debajo de un límite del estado que cambia cada año."
+  ],
+  "39": [
+   "Persona mayor de larga residencia, condado",
+   "Todo el valor, solo en impuestos del condado",
+   "Dueños de casa de 65 años o más con ingresos bajos que han vivido 25 años o más en una casa que vale menos de cierta cantidad."
+  ],
+  "33": [
+   "Viuda",
+   "$5,000",
+   "Una viuda que no se ha vuelto a casar."
+  ],
+  "32": [
+   "Viudo",
+   "$5,000",
+   "Un viudo que no se ha vuelto a casar."
+  ],
+  "34": [
+   "Persona con discapacidad, $5,000",
+   "$5,000",
+   "Un residente de Florida con discapacidad total y permanente."
+  ],
+  "31": [
+   "Persona ciega",
+   "$5,000",
+   "Un residente de Florida legalmente ciego."
+  ],
+  "81": [
+   "Vivienda para padres o abuelos (granny flat)",
+   "Menos valor tasado",
+   "Un espacio para vivir construido para un padre o abuelo de 62 años o más."
+  ]
+ },
+ "other": {
+  "20": "Propiedad del gobierno",
+  "09": "Iglesias, organizaciones benéficas y otras sin fines de lucro",
+  "43": "Vivienda asequible (certificada por el estado)",
+  "15": "Vivienda asequible (sin fines de lucro)",
+  "13": "Hogares para personas mayores sin fines de lucro",
+  "17": "Escuelas chárter",
+  "22": "Incentivo para el desarrollo económico (condado)",
+  "16": "Escuelas privadas",
+  "12": "Hospitales y hogares de ancianos",
+  "36": "Tierras de conservación"
+ },
+ "dist": {
+  "unincorporated": "Fuera de las ciudades (tierra adentro)",
+  "unincorporated - beach area": "Fuera de las ciudades (zona de playa)"
+ },
+ "html": [
+  [
+   "<span class=\"eyebrow\">Public Money · Exemptions</span><h1>Property tax exemptions</h1>",
+   "<span class=\"eyebrow\">Dinero público · Exenciones</span><h1><span class=\"term\" data-term=\"exemption\">Exenciones</span> del impuesto a la propiedad</h1>"
+  ],
+  [
+   "<p class=\"lede\">Who doesn't pay property tax on part or all of their property, and what it adds up to. From the 2026 tax roll for every parcel in Bay County, with a closer look at exemptions for veterans.</p>",
+   "<p class=\"lede\">Quién no paga impuesto a la propiedad sobre una parte o todo el valor de su propiedad, y cuánto suma eso. Del registro tributario de 2026 de cada parcela del Condado de Bay, con una mirada de cerca a las exenciones para veteranos.</p>"
+  ],
+  [
+   "<span>2026 tax roll</span></div>",
+   "<span>Registro tributario de 2026</span></div>"
+  ],
+  [
+   "<h2>How an exemption works</h2>",
+   "<h2>Cómo funciona una exención</h2>"
+  ],
+  [
+   "<li><b>An exemption takes value off the tax bill.</b> A $25,000 exemption means you're taxed as if your home were worth $25,000 less. A full exemption means no property tax at all.</li>",
+   "<li><b>Una exención le quita valor a la factura de impuestos.</b> Una exención de $25,000 quiere decir que le cobran como si su casa valiera $25,000 menos. Una exención completa quiere decir que no paga nada de impuesto a la propiedad.</li>"
+  ],
+  [
+   "<li><b>Most are set by the Florida Constitution and state law.</b> Local governments choose only a few, like the extra exemption for seniors with limited income.</li>",
+   "<li><b>Casi todas las fija la Constitución de Florida y la ley del estado.</b> Los gobiernos locales solo escogen unas pocas, como la exención adicional para personas mayores con ingresos bajos.</li>"
+  ],
+  [
+   "<li><b>Exempt value spreads the cost.</b> When value is exempt, each tax rate raises less from it, so the rest of the tax base carries more of the budget. The dollars here estimate the tax each exemption takes off the bill at current rates.</li>",
+   "<li><b>El valor exento reparte el costo.</b> Cuando un valor está exento, cada tasa cobra menos sobre él, así que el resto de las propiedades carga más del presupuesto. Los dólares de esta página calculan cuánto impuesto le quita cada exención a las facturas con las tasas de ahora.</li>"
+  ],
+  [
+   "<span class=\"eyebrow\">Homesteads</span>",
+   "<span class=\"eyebrow\">Viviendas con homestead</span>"
+  ],
+  [
+   "<span class=\"s\">homes with the homestead exemption in 2026</span>",
+   "<span class=\"s\">casas con la exención de homestead en 2026</span>"
+  ],
+  [
+   "<span class=\"eyebrow\">Homeowner exemptions</span>",
+   "<span class=\"eyebrow\">Exenciones para dueños de casa</span>"
+  ],
+  [
+   "<span class=\"s\">estimated tax they take off bills each year</span>",
+   "<span class=\"s\">impuesto aproximado que le quitan a las facturas cada año</span>"
+  ],
+  [
+   "<span class=\"eyebrow\">Owe no property tax</span>",
+   "<span class=\"eyebrow\">No pagan impuesto a la propiedad</span>"
+  ],
+  [
+   "<span class=\"s\">homesteads fully exempt from all property tax</span>",
+   "<span class=\"s\">viviendas con homestead exentas de todo el impuesto a la propiedad</span>"
+  ],
+  [
+   "<span class=\"eyebrow\">Disabled veterans, fully exempt</span>",
+   "<span class=\"eyebrow\">Veteranos con discapacidad, exención completa</span>"
+  ],
+  [
+   "in value</span>",
+   "de valor</span>"
+  ],
+  [
+   "<span class=\"s\">homes · ",
+   "<span class=\"s\">casas · "
+  ],
+  [
+   "<p class=\"note\"><a href=\"/my-address\"><b>See your parcel →</b></a> My Address shows a home's homestead exemption and the total of any others. To protect owners' privacy, this site never shows which other exemptions (veteran, disability, widow and so on) a particular property has; this page shows countywide counts only.</p>",
+   "<p class=\"note\"><a href=\"/es/mi-direccion\"><b>Vea su parcela →</b></a> Mi dirección muestra la <span class=\"term\" data-term=\"homestead\">exención de homestead</span> de una casa y el total de las demás. Para proteger la privacidad de los dueños, este sitio nunca muestra qué otras exenciones (de veterano, discapacidad, viudez y otras) tiene una propiedad en particular; esta página solo muestra números de todo el condado.</p>"
+  ],
+  [
+   "<h2 id=\"home\">Exemptions for homeowners</h2><span class=\"muted\">2026 tax roll · estimated tax at FY",
+   "<h2 id=\"home\">Exenciones para dueños de casa</h2><span class=\"muted\">Registro tributario de 2026 · impuesto aproximado con las tasas del FY"
+  ],
+  [
+   " rates</span></div>\n    <div class=\"tablewrap\"><table class=\"tx-table cm-table ex-table\">",
+   "</span></div>\n    <div class=\"tablewrap\"><table class=\"tx-table cm-table ex-table\">"
+  ],
+  [
+   "<th scope=\"col\">Exemption and who qualifies</th><th scope=\"col\">Amount</th><th scope=\"col\">School taxes?</th><th scope=\"col\" class=\"num\">Homes</th><th scope=\"col\" class=\"num\">Value exempted</th><th scope=\"col\" class=\"num\">Tax taken off bills</th>",
+   "<th scope=\"col\">Exención y quién califica</th><th scope=\"col\">Cantidad</th><th scope=\"col\">¿Impuestos escolares?</th><th scope=\"col\" class=\"num\">Casas</th><th scope=\"col\" class=\"num\">Valor exento</th><th scope=\"col\" class=\"num\">Impuesto que se quita</th>"
+  ],
+  [
+   "<td class=\"small\">Yes</td>",
+   "<td class=\"small\">Sí</td>"
+  ],
+  [
+   "<p class=\"note\">\"School taxes?\" says whether the exemption also lowers school taxes. No Bay County city has adopted the city senior exemptions state law allows. A home can have several exemptions; homes are counted under each one.</p>",
+   "<p class=\"note\">\"¿Impuestos escolares?\" dice si la exención también baja los impuestos de las escuelas. Ninguna ciudad del Condado de Bay ha aprobado las exenciones municipales para personas mayores que permite la ley del estado. Una casa puede tener varias exenciones; se cuenta en cada una.</p>"
+  ],
+  [
+   "<h2 id=\"veterans\">Veterans</h2><span class=\"muted\">",
+   "<h2 id=\"veterans\">Veteranos</h2><span class=\"muted\">"
+  ],
+  [
+   " veteran exemptions on ",
+   " exenciones de veteranos en "
+  ],
+  [
+   " homesteads</span></div>\n    <div class=\"kpis\">",
+   " viviendas con homestead</span></div>\n    <div class=\"kpis\">"
+  ],
+  [
+   "<span class=\"eyebrow\">Fully exempt</span>",
+   "<span class=\"eyebrow\">Exención completa</span>"
+  ],
+  [
+   "<span class=\"s\">total and permanent service-connected disability, or surviving spouses</span>",
+   "<span class=\"s\">discapacidad total y permanente por su servicio, o cónyuges sobrevivientes</span>"
+  ],
+  [
+   "<span class=\"eyebrow\">$5,000 exemption</span>",
+   "<span class=\"eyebrow\">Exención de $5,000</span>"
+  ],
+  [
+   "<span class=\"s\">service-connected disability of 10% or more</span>",
+   "<span class=\"s\">discapacidad del 10% o más por su servicio</span>"
+  ],
+  [
+   "<span class=\"eyebrow\">Combat-disabled, 65+</span>",
+   "<span class=\"eyebrow\">Discapacidad por combate, 65+</span>"
+  ],
+  [
+   "<span class=\"s\">discount equal to the disability rating</span>",
+   "<span class=\"s\">descuento igual a la calificación de discapacidad</span>"
+  ],
+  [
+   "<span class=\"eyebrow\">Tax effect</span>",
+   "<span class=\"eyebrow\">Efecto en los impuestos</span>"
+  ],
+  [
+   "<span class=\"s\">estimated a year across all veteran exemptions</span>",
+   "<span class=\"s\">aproximado al año, sumando todas las exenciones de veteranos</span>"
+  ],
+  [
+   "<h3 class=\"ex-h\">Share of homesteads fully exempt for a disabled veteran</h3>",
+   "<h3 class=\"ex-h\">Parte de las viviendas con homestead con exención completa por veterano con discapacidad</h3>"
+  ],
+  [
+   " homesteads</em></span>",
+   " viviendas con homestead</em></span>"
+  ],
+  [
+   " homes · $",
+   " casas · $"
+  ],
+  [
+   "<p class=\"note\">Bay County is home to Tyndall Air Force Base and Naval Support Activity Panama City. The full exemption for disabled veterans is set by the Florida Constitution; local governments can't change it.</p>",
+   "<p class=\"note\">En el Condado de Bay están la Base de la Fuerza Aérea Tyndall (Tyndall Air Force Base) y la base naval Naval Support Activity Panama City. La exención completa para veteranos con discapacidad la fija la Constitución de Florida; los gobiernos locales no la pueden cambiar.</p>"
+  ],
+  [
+   "<h2 id=\"other\">Other exempt property</h2><span class=\"muted\">",
+   "<h2 id=\"other\">Otras propiedades exentas</h2><span class=\"muted\">"
+  ],
+  [
+   " a year in estimated tax</span>",
+   " al año de impuesto aproximado</span>"
+  ],
+  [
+   "<th scope=\"col\">Type</th><th scope=\"col\" class=\"num\">Parcels</th><th scope=\"col\" class=\"num\">Value exempted</th><th scope=\"col\" class=\"num\">Tax taken off bills</th>",
+   "<th scope=\"col\">Tipo</th><th scope=\"col\" class=\"num\">Parcelas</th><th scope=\"col\" class=\"num\">Valor exento</th><th scope=\"col\" class=\"num\">Impuesto que se quita</th>"
+  ],
+  [
+   "<p class=\"note\">Government property includes land and buildings owned by the federal, state, county and city governments and the school district, including military land.</p>",
+   "<p class=\"note\">La propiedad del gobierno incluye terrenos y edificios del gobierno federal, del estado, del condado, de las ciudades y del distrito escolar, también las tierras militares.</p>"
+  ],
+  [
+   "<h2 id=\"apply\">Do you qualify?</h2>",
+   "<h2 id=\"apply\">¿Usted califica?</h2>"
+  ],
+  [
+   "<li><b>Apply with the Bay County Property Appraiser.</b> Under state law, applications for most exemptions are due by March 1 for that year's taxes. Once granted, most renew automatically each year as long as you still qualify.</li>",
+   "<li><b>Haga la solicitud con el Tasador de Propiedades del Condado de Bay (Bay County Property Appraiser).</b> Según la ley del estado, las solicitudes de casi todas las exenciones vencen el 1 de marzo para los impuestos de ese año. Cuando se la dan, casi todas se renuevan solas cada año mientras usted siga calificando.</li>"
+  ],
+  [
+   "<li><b>Veterans</b> need a VA letter showing the disability rating; surviving spouses need the veteran's rating and proof of marriage.</li>",
+   "<li><b>Los veteranos</b> necesitan una carta del VA con la calificación de discapacidad; los cónyuges sobrevivientes necesitan la calificación del veterano y prueba del matrimonio.</li>"
+  ],
+  [
+   "<li><b>Seniors</b> applying for the income-based exemptions file a household income statement each year.</li>",
+   "<li><b>Las personas mayores</b> que piden las exenciones por ingresos entregan cada año una declaración del ingreso de su hogar.</li>"
+  ],
+  [
+   "<li>See what your home gets now on <a href=\"/my-address\">My Address</a>; the property card shows the homestead exemption and the total of any others.</li>",
+   "<li>Vea lo que recibe su casa ahora en <a href=\"/es/mi-direccion\">Mi dirección</a>; la ficha de la propiedad muestra la exención de homestead y el total de las demás.</li>"
+  ],
+  [
+   "rel=\"noopener\">Bay County Property Appraiser ↗</a>",
+   "rel=\"noopener\">Tasador de Propiedades del Condado de Bay (en inglés) ↗</a>"
+  ],
+  [
+   "<h2 id=\"src\">Sources and method</h2>",
+   "<h2 id=\"src\">Fuentes y método</h2>"
+  ],
+  [
+   "<p>Counts and values come from the 2026 final tax roll for Bay County that the Property Appraiser files with the Florida Department of Revenue (the \"NAL\" file, posted October 16, 2026), which lists each parcel's exemptions by type and its school and non-school taxable values. ",
+   "<p>Los números y valores vienen del registro tributario final de 2026 del Condado de Bay que el Tasador de Propiedades entrega al Departamento de Ingresos de Florida (Florida Department of Revenue) (el archivo \"NAL\", publicado el 16 de octubre de 2026), que da las exenciones de cada parcela por tipo y su valor gravable para escuelas y para lo demás. "
+  ],
+  [
+   "rel=\"noopener\">Florida DOR data portal</a>",
+   "rel=\"noopener\">Portal de datos del DOR de Florida</a>"
+  ],
+  [
+   "<p>\"Tax taken off bills\" applies the latest complete set of adopted tax rates (FY",
+   "<p>\"Impuesto que se quita\" aplica el último conjunto completo de tasas aprobadas (facturas del FY"
+  ],
+  [
+   " bills, the same rates My Address uses) to the value each exemption removes, parcel by parcel, using each parcel's own tax district. Where a parcel has several exemptions, the tax is shared among them by amount. It doesn't include the Save Our Homes cap, which limits how fast a homestead's taxed value can rise and is not an exemption. Total for all exemptions, homes and other property: ",
+   ", las mismas tasas que usa Mi dirección) al valor que quita cada exención, parcela por parcela, con el distrito tributario de cada parcela. Si una parcela tiene varias exenciones, el impuesto se reparte entre ellas según la cantidad. No incluye el <span class=\"term\" data-term=\"save-our-homes\">límite Save Our Homes</span>, que frena qué tan rápido sube el valor gravado de una vivienda con homestead y no es una exención. Total de todas las exenciones, de casas y de otras propiedades: "
+  ],
+  [
+   " a year.</p></section>",
+   " al año.</p></section>"
+  ]
+ ]
+}

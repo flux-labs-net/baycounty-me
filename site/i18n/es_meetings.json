@@ -1,0 +1,168 @@
+{
+ "_about": "Spanish for /es/reuniones (Meetings). Board names, meeting titles, agenda items and venues come from the weekly meetings refresh and stay as each agency posts them, except the generic titles and the board schedules below; a schedule that changes falls back to English and is reported at build time.",
+ "titles": {
+  "Regular Meeting": "Reunión regular",
+  "Regular Meeting (expected)": "Reunión regular (esperada)",
+  "City Commission Meeting": "Reunión de la Comisión de la Ciudad",
+  "Commission Meeting": "Reunión de la Comisión",
+  "City Council": "Concejo de la Ciudad",
+  "City Council Meeting": "Reunión del Concejo de la Ciudad",
+  "Bay County Board of County Commissioners Meeting": "Reunión de la Junta de Comisionados del Condado de Bay",
+  "BOCC Regular Meeting": "Reunión regular de la Comisión del Condado (BOCC)",
+  "School Board Meeting": "Reunión de la Junta Escolar",
+  "School Board Meeting - Organizational Meeting": "Reunión de la Junta Escolar: reunión de organización",
+  "Planning Commission Meeting": "Reunión de la Comisión de Planificación",
+  "Budget Hearing": "Audiencia de presupuesto",
+  "CRA Board Meeting": "Reunión de la Junta de la CRA",
+  "Virtual CRA Workshop": "Taller virtual de la CRA",
+  "Special Meeting": "Reunión especial",
+  "Workshop": "Taller"
+ },
+ "schedule": {
+  "Regular meetings at 9:00 a.m., generally the 1st and 3rd Tuesday of the month (dates as posted on the County calendar and PrimeGov; budget hearings at 5:01 p.m. in September).": "Reuniones regulares a las 9:00 a. m., por lo general el 1.er y el 3.er martes del mes (fechas como aparecen en el calendario del condado y en PrimeGov; en septiembre, las audiencias de presupuesto son a las 5:01 p. m.).",
+  "Monthly; recent posted dates are the 3rd Tuesday at 1:30 p.m. (per the County calendar).": "Una vez al mes; las fechas recientes son el 3.er martes a la 1:30 p. m. (según el calendario del condado).",
+  "Regular meetings generally the 2nd and 4th Tuesday at 3:00 p.m. at the district office, 1311 Balboa Ave. (dates and times as posted on the district calendar). Agendas are posted on the district's School Board Meetings page.": "Reuniones regulares, por lo general el 2.º y el 4.º martes a las 3:00 p. m. en la oficina del distrito, 1311 Balboa Ave. (fechas y horas como aparecen en el calendario del distrito). Las agendas se publican en la página School Board Meetings del distrito.",
+  "2nd and 4th Tuesday of each month, unless otherwise stated: 2nd Tuesday at 8 a.m., 4th Tuesday at 4:30 p.m., at the Bay County Government Center, 840 W. 11th St. Virtual workshops are also posted on the city calendar. Holiday months are consolidated on the city calendar.": "El 2.º y el 4.º martes de cada mes, salvo aviso: el 2.º martes a las 8 a. m. y el 4.º martes a las 4:30 p. m., en el Bay County Government Center, 840 W. 11th St. Los talleres virtuales también están en el calendario de la ciudad. En los meses con días festivos, el calendario junta las reuniones.",
+  "Beginning October 2026: first Tuesday of the month at 4:30 p.m., alternating monthly between a regular CRA Board meeting and a virtual CRA workshop.": "Desde octubre de 2026: el primer martes del mes a las 4:30 p. m.; un mes hay reunión regular de la Junta de la CRA y el otro un taller virtual de la CRA.",
+  "2nd and 4th Thursday of every month (except November and December); 2nd Thursday meetings at 5 p.m., 4th Thursday meetings at 9 a.m.": "El 2.º y el 4.º jueves de cada mes (menos noviembre y diciembre); las del 2.º jueves a las 5 p. m. y las del 4.º jueves a las 9 a. m.",
+  "Regular meetings 2nd and 4th Tuesday at 5:30 p.m. in the Walter T. Kelley Commission Chambers, 825 Ohio Ave. (pattern of dates on the city calendar and CivicClerk; holiday months consolidated).": "Reuniones regulares el 2.º y el 4.º martes a las 5:30 p. m. en la sala Walter T. Kelley Commission Chambers, 825 Ohio Ave. (según las fechas del calendario de la ciudad y de CivicClerk; en los meses con días festivos se juntan).",
+  "Recent CRA Board meetings have been held at 5:15 p.m. before City Commission meetings (observed on CivicClerk; no standalone published schedule found).": "Las reuniones recientes de la Junta de la CRA han sido a las 5:15 p. m., antes de las reuniones de la Comisión de la Ciudad (según CivicClerk; no encontramos un horario publicado aparte).",
+  "Commission meetings at 6:00 p.m. at the Callaway Arts & Conference Center, 500 Callaway Pkwy; 2nd and 4th Tuesday pattern on the city calendar (one meeting in Nov/Dec).": "Reuniones de la comisión a las 6:00 p. m. en el Callaway Arts & Conference Center, 500 Callaway Pkwy; el 2.º y el 4.º martes según el calendario de la ciudad (una sola reunión en noviembre y diciembre).",
+  "No published regular schedule found; meetings appear in the AgendaCenter when posted.": "No encontramos un horario regular publicado; las reuniones aparecen en el AgendaCenter cuando se publican.",
+  "Commission Meetings the first Monday of the month and Commission Workshops the third Monday, at 5:30 p.m., City Hall Commission Room, 408 School Avenue.": "Reuniones de la comisión el primer lunes del mes y talleres de la comisión el tercer lunes, a las 5:30 p. m., en la sala de la comisión del ayuntamiento, 408 School Avenue.",
+  "Regular meetings 1st and 3rd Tuesday at 5:30 p.m. (pattern of posted agendas; no current published schedule statement found - expected dates are marked as such).": "Reuniones regulares el 1.er y el 3.er martes a las 5:30 p. m. (según las agendas publicadas; no encontramos un horario publicado ahora, así que las fechas esperadas están marcadas).",
+  "Second and fourth Tuesdays of the month at 9:00 a.m. CT.": "El segundo y el cuarto martes del mes a las 9:00 a. m., hora del Centro."
+ },
+ "place": [
+  [
+   " (workshops are virtual)",
+   " (los talleres son virtuales)"
+  ],
+  [
+   " (typical; confirm on agenda)",
+   " (lo usual; confírmelo en la agenda)"
+  ],
+  [
+   " (city contact address; confirm venue on agenda)",
+   " (dirección de contacto de la ciudad; confirme el lugar en la agenda)"
+  ],
+  [
+   "Venue not stated on the council meetings page; City of Mexico Beach offices: ",
+   "La página de reuniones del concejo no dice el lugar; oficinas de la Ciudad de Mexico Beach: "
+  ],
+  [
+   "Virtual (live stream on the city website)",
+   "Virtual (transmisión en vivo en el sitio de la ciudad)"
+  ]
+ ],
+ "html": [
+  [
+   "<span class=\"eyebrow\">Get involved</span><h1>Upcoming public meetings</h1>",
+   "<span class=\"eyebrow\">Participe</span><h1>Próximas reuniones públicas</h1>"
+  ],
+  [
+   "<p class=\"lede\">When and where every Bay County board meets, with agenda links and the money items on each agenda. Public comment is open at regular meetings; check the agenda for how to speak.</p>",
+   "<p class=\"lede\">Cuándo y dónde se reúne cada junta del Condado de Bay, con enlaces a las agendas y los temas de dinero de cada una. En las reuniones regulares hay <span class=\"term\" data-term=\"public-comment\">comentario público</span>: cualquier persona puede hablar; la agenda dice cómo hacerlo. Las reuniones son en inglés.</p>"
+  ],
+  [
+   "<a class=\"pill\" href=\"/meetings.ics\">Add to my calendar</a>",
+   "<a class=\"pill\" href=\"/meetings.ics\">Agregar a mi calendario</a>"
+  ],
+  [
+   "<span>Checked ",
+   "<span>Revisado el "
+  ],
+  [
+   "<option value=\"\">All governments</option>",
+   "<option value=\"\">Todos los gobiernos</option>"
+  ],
+  [
+   "<span>Search</span><input id=\"mtQ\" type=\"search\" placeholder=\"Board, place or agenda item\">",
+   "<span>Buscar</span><input id=\"mtQ\" type=\"search\" placeholder=\"Junta, lugar o tema de la agenda\">"
+  ],
+  [
+   "<span>Sort</span><select id=\"mtS\"><option value=\"date\">By date</option><option value=\"az\">Board A to Z</option></select>",
+   "<span>Ordenar</span><select id=\"mtS\"><option value=\"date\">Por fecha</option><option value=\"az\">Junta, de la A a la Z</option></select>"
+  ],
+  [
+   "id=\"mtCsv\">Download CSV</button>",
+   "id=\"mtCsv\">Descargar CSV</button>"
+  ],
+  [
+   "<h2 id=\"next\">Coming up</h2>",
+   "<h2 id=\"next\">Próximas</h2>"
+  ],
+  [
+   " meetings in the next 60 days</span>",
+   " reuniones en los próximos 60 días</span>"
+  ],
+  [
+   "<li class=\"muted\">No upcoming meetings found.</li>",
+   "<li class=\"muted\">No encontramos próximas reuniones.</li>"
+  ],
+  [
+   "<h2 id=\"recent\">Most recent meeting of each board</h2>",
+   "<h2 id=\"recent\">La reunión más reciente de cada junta</h2>"
+  ],
+  [
+   "<h2 id=\"sched\">Regular schedules</h2>",
+   "<h2 id=\"sched\">Horarios regulares</h2>"
+  ],
+  [
+   "<th scope=\"col\">Board</th><th scope=\"col\">When and where</th>",
+   "<th scope=\"col\">Junta</th><th scope=\"col\">Cuándo y dónde</th>"
+  ],
+  [
+   "target=_blank rel=noopener>Calendar</a>",
+   "target=_blank rel=noopener>Calendario</a>"
+  ],
+  [
+   "<p class=\"note\">\"Expected\" meetings are projected from a board's regular schedule because no agenda is posted yet. Boards cancel and move meetings, so confirm on the agenda before you go. The School Board's site couldn't be read by our tools; check bay.k12.fl.us. The calendar link works with Apple, Google and Outlook calendars.</p>",
+   "<p class=\"note\">Las reuniones \"esperadas\" se calculan con el horario regular de cada junta porque todavía no hay agenda. Las juntas cancelan y cambian reuniones, así que confírmelo en la agenda antes de ir. Nuestras herramientas no pudieron leer el sitio de la Junta Escolar; revise bay.k12.fl.us. El enlace del calendario funciona con los calendarios de Apple, Google y Outlook. Los nombres de las juntas, los títulos de las reuniones, los temas de las agendas y los lugares aparecen como los publica cada gobierno, en inglés.</p>"
+  ],
+  [
+   "<span class=\"badge\">Expected</span>",
+   "<span class=\"badge\">Esperada</span>"
+  ],
+  [
+   "<span class=\"badge ok\">Agenda posted</span>",
+   "<span class=\"badge ok\">Agenda publicada</span>"
+  ],
+  [
+   "rel=\"noopener\">Agenda</a>",
+   "rel=\"noopener\">Agenda</a>"
+  ],
+  [
+   "rel=\"noopener\">Packet</a>",
+   "rel=\"noopener\">Documentos</a>"
+  ],
+  [
+   "rel=\"noopener\">Minutes</a>",
+   "rel=\"noopener\">Actas</a>"
+  ],
+  [
+   "<p class=\"small muted\">From the regular schedule; the agenda isn't posted yet.</p>",
+   "<p class=\"small muted\">Según el horario regular; la agenda todavía no está publicada.</p>"
+  ],
+  [
+   "<p class=\"small muted\">On the government's calendar; the agenda isn't posted yet.</p>",
+   "<p class=\"small muted\">Está en el calendario del gobierno; la agenda todavía no está publicada.</p>"
+  ],
+  [
+   "n + ' meeting' + (n === 1 ? '' : 's') + ' in the next 60 days';",
+   "n + (n === 1 ? ' reunión' : ' reuniones') + ' en los próximos 60 días';"
+  ],
+  [
+   "id === 'mtList' ? 'Coming up' : 'Most recent'",
+   "id === 'mtList' ? 'Próximas' : 'Más recientes'"
+  ],
+  [
+   "['list', 'date', 'board', 'government', 'meeting', 'location', 'agenda_status', 'agenda_url', 'minutes_url']",
+   "['lista', 'fecha', 'junta', 'gobierno', 'reunion', 'lugar', 'estado_agenda', 'agenda_url', 'actas_url']"
+  ],
+  [
+   "'baycounty-meetings'",
+   "'baycounty-reuniones'"
+  ]
+ ]
+}
