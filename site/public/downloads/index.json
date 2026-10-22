@@ -2137,12 +2137,13 @@
       "https://cityofparker.com/wp-content/uploads/filr/7056/Agenda-Regular-Meeting-Cancelled-11.03.26.pdf",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1130,plainText=false)",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1137,plainText=false)",
+      "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1145,plainText=false)",
       "https://mexicobeachfl.gov/uploads/2026/09/October-13-2026-City-Council-Meeting-Agenda.pdf",
       "https://mexicobeachfl.gov/uploads/2026/10/November-5-2026-Special-Meeting-LDC-Workshop.pdf",
       "https://mexicobeachfl.gov/uploads/2026/10/October-29-2026-LDC-Workshop-3.pdf",
       "https://mexicobeachfl.gov/uploads/2026/10/October-30-2026-Special-Meeting-LDC-Workshop-2.pdf",
       "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=419",
-      "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&event_id=219",
+      "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=421",
       "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_09172026-423",
       "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_10132026-425",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-912?html=true",
@@ -2158,6 +2159,7 @@
       "https://baycountyfl.primegov.com/Public/CompiledDocument?meetingTemplateId=1942&compileOutputType=1",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1131,plainText=false)",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1138,plainText=false)",
+      "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1146,plainText=false)",
       "https://mexicobeachfl.gov/uploads/2026/09/October-13-2026-CIty-Council-Meeting-Agenda-Packet.pdf",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-912?packet=true",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10202026-915?packet=true",
@@ -2266,13 +2268,6 @@
     {
      "name": "agenda_items",
      "type": "array"
-    },
-    {
-     "name": "time_from_schedule",
-     "type": "boolean",
-     "values": [
-      true
-     ]
     },
     {
      "name": "calendar_source",
@@ -3568,7 +3563,7 @@
    "id": "campaign-contributions-2026",
    "title": "2026 contributions from organizations",
    "description": "Every contribution from a business, committee or party to a 2026 local candidate. Individual donors are not included, and neither is bank interest on campaign accounts.",
-   "rows": 153,
+   "rows": 154,
    "columns": [
     {
      "name": "candidate",
@@ -3582,6 +3577,7 @@
       "Dr. John L. Haley",
       "Glenn Manley",
       "Grant Wittstruck",
+      "Judy Tinder",
       "Mary Coburn",
       "Michael Petty",
       "Nick Atkinson",
@@ -3597,6 +3593,7 @@
       "Bay County Commission, District 4",
       "Callaway Commission, Ward 1",
       "Callaway Commission, Ward 2",
+      "Lynn Haven Commissioner Seat 1",
       "Panama City Beach Council, Ward 1",
       "Panama City Beach Council, Ward 3",
       "School Board, District 2",
@@ -3631,6 +3628,7 @@
       "Orlando",
       "PANAMA CITY",
       "PANAMA CITY BEACH",
+      "Panam",
       "Panam City Beach",
       "Panama City",
       "Panama City Beach",
@@ -3680,7 +3678,8 @@
       "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=740&rellevel=4&committee=N",
       "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=742&rellevel=4&committee=N",
       "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=743&rellevel=4&committee=N",
-      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=36&c=bay&ca=715&rellevel=4&committee=N"
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=36&c=bay&ca=715&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=37&c=bay&ca=751&rellevel=4&committee=N"
      ]
     },
     {
@@ -3713,6 +3712,7 @@
      "values": [
       "county",
       "cw",
+      "lh",
       "pcb",
       "schools",
       "sp"
