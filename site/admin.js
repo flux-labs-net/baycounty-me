@@ -34,7 +34,7 @@
   $('#signout').addEventListener('click', async () => { await api('logout', {method: 'POST'}).catch(() => {}); location.href = '/admin'; });
 
   // ---------- tabs ----------
-  const loaders = {keys: loadKeys, analytics: loadStats, logs: () => loadLogs(true), settings: loadSettings, ingestion: loadIngestion, emails: loadEmails};
+  const loaders = {keys: loadKeys, analytics: loadStats, logs: () => loadLogs(true), settings: loadSettings, ingestion: loadIngestion, agendas: loadAgendas, emails: loadEmails};
   function tab(name) {
     document.querySelectorAll('[role=tab][data-tab]').forEach(b => b.setAttribute('aria-selected', String(b.dataset.tab === name)));
     document.querySelectorAll('[role=tabpanel]').forEach(p => { p.hidden = p.id !== 'tab-' + name; });
@@ -283,6 +283,71 @@
       <td class="mono small">${f.git_sha ? `<a href="https://github.com/jeremymcs/baycounty-me/commit/${esc(f.git_sha)}" target="_blank" rel="noopener">${esc(String(f.git_sha).slice(0, 7))}</a>` : ''}</td></tr>`).join('') || '<tr><td colspan="4" class="empty">No failures.</td></tr>';
   }
   $('#in-refresh').addEventListener('click', loadIngestion);
+
+  // ---------- agendas ----------
+  const AG_STATUS = {new: 'New', updated: 'Updated', unchanged: 'Unchanged', failed: 'Failed', pending: 'Pending', processed: 'Processed', unmatched: 'Unmatched', ok: 'OK', running: 'Running'};
+  const kb = n => n == null ? '' : n < 1048576 ? Math.max(1, Math.round(n / 1024)) + ' KB' : (n / 1048576).toFixed(1) + ' MB';
+  const day = d => d ? new Date(String(d).slice(0, 10) + 'T12:00:00').toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'}) : '';
+  const shortUrl = u => { try { const x = new URL(u); return x.hostname.replace(/^www\./, '') + x.pathname.slice(0, 48) + (x.pathname.length > 48 ? '…' : ''); } catch (e) { return String(u).slice(0, 60); } };
+  let agBoardsLoaded = false;
+  async function loadAgendas() {
+    const params = {days: $('#ag-days').value, board: $('#ag-board').value, status: $('#ag-status').value};
+    let r;
+    try { r = await api('agendas', {params}); }
+    catch (e) { $('#ag-banner').innerHTML = `<div class="banner bad"><div><b>Couldn’t load the agenda watcher.</b><div class="small muted">${esc(e.message)}</div></div></div>`; return; }
+    $('#ag-banner').innerHTML = r.problems.length
+      ? `<div class="banner bad"><div><b>${r.problems.length} thing${r.problems.length === 1 ? '' : 's'} to look at</b><ul class="small">${r.problems.map(p => `<li>${esc(p.text)}</li>`).join('')}</ul></div></div>`
+      : `<div class="banner good"><div><b>All good.</b> <span class="small muted">Last run ${when(r.last_run && (r.last_run.finished_at || r.last_run.started_at))}, last inbox check ${when(r.last_inbox && (r.last_inbox.finished_at || r.last_inbox.started_at))}.</span></div></div>`;
+    if (!r.installed) { $('#ag-tiles').innerHTML = ''; ['#ag-docs', '#ag-notices', '#ag-errors', '#ag-runs'].forEach(t => $(t + ' tbody').innerHTML = ''); return; }
+    const c = r.counts;
+    $('#ag-tiles').innerHTML = [[r.last_inbox ? when(r.last_inbox.finished_at || r.last_inbox.started_at).replace(/<[^>]+>/g, '') : 'Never', 'Last inbox check'],
+      [fmt(c.notices_7d), 'Notice emails, 7 days'], [fmt(c.new_7d), 'New documents, 7 days'], [fmt(c.updated_7d), 'Amended documents, 7 days'],
+      [fmt(c.documents), 'Documents tracked'], [fmt(c.open_errors), 'Open errors']].map(([v, l]) => `<div class="tile"><b>${v}</b><span>${l}</span></div>`).join('');
+    if (!agBoardsLoaded && r.boards.length) {
+      $('#ag-board').innerHTML = '<option value="">All boards</option>' + r.boards.map(b => `<option value="${esc(b.board)}">${esc(b.board)} (${fmt(b.n)})</option>`).join('');
+      $('#ag-board').value = params.board; agBoardsLoaded = true;
+    }
+    $('#ag-docs tbody').innerHTML = r.documents.map(d => {
+      const files = d.versions.map((v, i) => `<button class="btn" type="button" data-ver="${v.id}" style="min-height:28px;padding:0 8px;font-size:.78rem" title="${esc(stamp(v.fetched_at))} · ${esc(v.sha256.slice(0, 12))}">${i === 0 ? 'Latest' : 'v' + (d.versions.length - i)}${v.stored ? '' : ' ↗'}</button>`).join(' ');
+      return `<tr><td class="small" style="white-space:nowrap">${when(d.last_changed_at || d.first_seen_at)}</td><td class="mono small">${esc(d.board || d.source_key)}</td>
+        <td><b>${esc(d.title || d.kind)}</b><div class="muted small">${esc(d.kind)}${d.bytes ? ' · ' + kb(d.bytes) : ''} · <a href="${esc(/^https?:/.test(d.url) ? d.url : '#')}" target="_blank" rel="noopener">${esc(shortUrl(d.url))}</a></div>${d.error ? `<div class="small" style="color:var(--bad)">${esc(d.error)}</div>` : ''}</td>
+        <td class="small" style="white-space:nowrap">${day(d.meeting_date)}</td><td><span class="pill ${esc(d.status)}">${AG_STATUS[d.status] || esc(d.status)}</span></td>
+        <td class="num">${fmt(d.version_count)}</td><td style="white-space:nowrap">${files || '<span class="muted small">None</span>'}</td></tr>`;
+    }).join('') || '<tr><td colspan="7" class="empty">No documents in this window.</td></tr>';
+    $('#ag-notices tbody').innerHTML = r.notices.map(n => `<tr><td class="small" style="white-space:nowrap">${n.received_at ? stamp(n.received_at) : when(n.pulled_at)}</td>
+      <td class="small" style="max-width:200px;word-break:break-word">${esc(n.from_addr)}</td>
+      <td style="min-width:220px"><b>${esc(n.subject || '(no subject)')}</b><details class="ag"><summary class="small">Email text</summary><pre>${esc(n.body_text || '')}</pre></details></td>
+      <td class="mono small">${esc((n.sources || []).join(', ') || '—')}</td>
+      <td class="small">${(n.links || []).length ? `<details class="ag"><summary>${(n.links || []).length}</summary><div class="ag-links">${n.links.map(u => `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(shortUrl(u))}</a>`).join('')}</div></details>` : '0'}</td>
+      <td class="small">${(n.attachments || []).map(a => `${esc(a.filename)} <span class="muted">${kb(a.bytes)}</span>`).join('<br>') || '—'}</td>
+      <td><span class="pill ${esc(n.status)}">${AG_STATUS[n.status] || esc(n.status)}</span>${n.error ? `<div class="small" style="color:var(--bad)">${esc(n.error)}</div>` : ''}</td></tr>`).join('') || '<tr><td colspan="7" class="empty">No emails yet. Sign up for Notify Me with the agenda mailbox address.</td></tr>';
+    $('#ag-errors tbody').innerHTML = r.errors.map(e => `<tr${e.resolved_at ? ' class="muted"' : ''}><td class="small" style="white-space:nowrap">${stamp(e.at)}</td><td class="mono small">${esc(e.stage)}</td><td class="mono small">${esc(e.source_key || '')}</td>
+      <td class="small" style="min-width:240px">${esc(e.message)}${e.url ? `<div><a href="${esc(e.url)}" target="_blank" rel="noopener">${esc(shortUrl(e.url))}</a></div>` : ''}</td>
+      <td>${e.resolved_at ? '<span class="small">Resolved</span>' : `<button class="btn" type="button" data-resolve="${e.id}" style="min-height:28px;padding:0 8px;font-size:.78rem">Resolve</button>`}</td></tr>`).join('') || '<tr><td colspan="5" class="empty">No errors.</td></tr>';
+    $('#ag-runs tbody').innerHTML = r.runs.slice(0, 20).map(x => `<tr><td class="small" style="white-space:nowrap">${stamp(x.started_at)}</td><td><span class="pill ${esc(x.status)}">${AG_STATUS[x.status] || esc(x.status)}</span></td>
+      <td class="num">${fmt(x.rows_in)}</td><td class="small">${esc(x.notes || '')}</td></tr>`).join('') || '<tr><td colspan="4" class="empty">No runs yet.</td></tr>';
+  }
+  $('#ag-refresh').addEventListener('click', loadAgendas);
+  ['#ag-days', '#ag-board', '#ag-status'].forEach(s => $(s).addEventListener('change', loadAgendas));
+  $('#ag-docs').addEventListener('click', async e => {
+    const b = e.target.closest('[data-ver]'); if (!b) return;
+    const w = window.open('', '_blank');
+    try { const j = await api('agenda_file', {params: {id: b.dataset.ver}}); if (j.url) w.location = j.url; else { w.close(); alert('This file wasn’t stored and has no public link.'); } }
+    catch (err) { w.close(); alert(err.message); }
+  });
+  $('#ag-errors').addEventListener('click', async e => {
+    const b = e.target.closest('[data-resolve]'); if (!b) return;
+    try { await api('agenda_resolve', {method: 'POST', body: {id: b.dataset.resolve}}); loadAgendas(); } catch (err) { alert(err.message); }
+  });
+  $('#ag-resolve-all').addEventListener('click', async () => {
+    if (!confirm('Mark every open agenda error resolved?')) return;
+    try { await api('agenda_resolve', {method: 'POST', body: {all: true}}); loadAgendas(); } catch (err) { alert(err.message); }
+  });
+  $('#ag-run').addEventListener('click', async e => {
+    const b = e.target; b.disabled = true;
+    try { await api('agenda_run', {method: 'POST', body: {mode: 'both'}}); b.textContent = 'Started'; setTimeout(() => { b.textContent = 'Run now'; b.disabled = false; loadAgendas(); }, 60000); }
+    catch (err) { alert(err.message); b.disabled = false; }
+  });
 
   // ---------- email previews ----------
   let EM = null, emCur = null, emView = 'html', emReq = 0;

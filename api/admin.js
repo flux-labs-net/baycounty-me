@@ -190,6 +190,20 @@ async function route(req, res, action, me) {
     }
     case 'audit': return {audit: await q('select at, admin, action, key_id, detail from apiadmin.audit order by id desc limit 100')};
     case 'ingestion': return require('./_health').report();
+    case 'agendas': return require('./_agendas').report({days: parseInt(Q.days || '14', 10) || 14, board: String(Q.board || '').slice(0, 40), status: String(Q.status || '').slice(0, 20)});
+    case 'agenda_file': return require('./_agendas').fileLink(parseInt(Q.id, 10) || 0);
+    case 'agenda_resolve': {
+      if (req.method !== 'POST') throw Object.assign(new Error('Use POST.'), {status: 405});
+      const r = await require('./_agendas').resolveError(parseInt(body.id, 10) || 0, !!body.all);
+      await audit(me.e, 'agenda_resolve', null, {id: body.id || null, all: !!body.all, resolved: r.resolved});
+      return r;
+    }
+    case 'agenda_run': {
+      if (req.method !== 'POST') throw Object.assign(new Error('Use POST.'), {status: 405});
+      const r = await require('./_agendas').runNow(String(body.mode || 'both'), String(body.only || ''));
+      await audit(me.e, 'agenda_run', null, {mode: body.mode || 'both', only: body.only || ''});
+      return r;
+    }
     case 'email_previews': return {templates: PREVIEWS, govs: Object.entries(GOVS).map(([key, [name]]) => ({key, name}))};
     case 'email_preview': return preview(String(Q.template || ''), {gov: Q.gov, source: Q.source});
     case 'email_test': {

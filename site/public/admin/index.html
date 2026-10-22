@@ -84,6 +84,9 @@ dialog h2{font:600 1.05rem var(--f-display);margin:0}
 .st.e4,.st.e5{color:var(--bad)} .st.e429{color:var(--warn)}
 .pill.ok{color:var(--ok)} .pill.failed{color:var(--bad)} .pill.running{color:var(--warn)}
 .banner{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;border:1px solid var(--line);border-left-width:4px;border-radius:10px;background:var(--surface);margin-bottom:14px}
+.pill.new{color:var(--blue)} .pill.updated{color:var(--warn)} .pill.unchanged{color:var(--muted)} .pill.processed{color:var(--ok)} .pill.unmatched{color:var(--warn)} .pill.pending{color:var(--muted)}
+details.ag summary{cursor:pointer;color:var(--blue)} details.ag pre{white-space:pre-wrap;max-height:260px;overflow:auto;font-size:.8rem;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px;margin:6px 0 0}
+.ag-links{display:flex;flex-direction:column;gap:2px;max-width:420px;word-break:break-all}
 .banner.good{border-left-color:var(--ok)} .banner.bad{border-left-color:var(--bad)}
 .banner ul{margin:6px 0 0;padding-left:18px} .banner li{margin:2px 0}
 .sched{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 16px;font-size:.88rem}
@@ -127,6 +130,7 @@ dialog h2{font:600 1.05rem var(--f-display);margin:0}
       <button role="tab" data-tab="logs" aria-selected="false">Request log</button>
       <button role="tab" data-tab="settings" aria-selected="false">Throttles &amp; settings</button>
       <button role="tab" data-tab="ingestion" aria-selected="false">Ingestion</button>
+      <button role="tab" data-tab="agendas" aria-selected="false">Agendas</button>
       <button role="tab" data-tab="emails" aria-selected="false">Emails</button>
     </div>
 
@@ -196,6 +200,27 @@ dialog h2{font:600 1.05rem var(--f-display);margin:0}
       <div class="tw"><table class="at" id="in-table"><thead><tr><th>Dataset</th><th>Status</th><th>Last run</th><th>Last success</th><th class="num">Rows</th><th class="num">Added</th><th class="num">Removed</th><th>Notes</th></tr></thead><tbody></tbody></table></div>
       <h2 class="h2">Failures, last 14 days</h2>
       <div class="tw"><table class="at" id="in-fail"><thead><tr><th>Time</th><th>Dataset</th><th>Error</th><th>Commit</th></tr></thead><tbody></tbody></table></div>
+    </section>
+
+    <section id="tab-agendas" role="tabpanel" hidden>
+      <div class="row" style="margin-bottom:12px"><p class="muted small grow" style="margin:0">Notice emails (CivicPlus Notify Me and similar) arrive in the agenda mailbox. Each one triggers a rescan of that government’s agenda system; every agenda, packet and minutes file is downloaded and hashed. A changed file is a new version.</p>
+        <a class="btn" href="https://github.com/jeremymcs/baycounty-me/actions/workflows/watch-agendas.yml" target="_blank" rel="noopener">Workflow runs</a>
+        <button class="btn" id="ag-run" type="button">Run now</button><button class="btn" id="ag-refresh" type="button">Refresh</button></div>
+      <div id="ag-banner"></div>
+      <div class="tiles" id="ag-tiles"></div>
+      <div class="row" style="gap:8px;flex-wrap:wrap;margin:18px 0 8px">
+        <h2 class="h2 grow" style="margin:0">Documents</h2>
+        <select class="sel" id="ag-board" aria-label="Board"><option value="">All boards</option></select>
+        <select class="sel" id="ag-status" aria-label="Status"><option value="">Any status</option><option value="new">New</option><option value="updated">Updated</option><option value="unchanged">Unchanged</option><option value="failed">Failed</option></select>
+        <select class="sel" id="ag-days" aria-label="Window"><option value="7">Last 7 days</option><option value="14" selected>Last 14 days</option><option value="30">Last 30 days</option><option value="120">Last 120 days</option></select>
+      </div>
+      <div class="tw"><table class="at" id="ag-docs" data-tt="off"><thead><tr><th>Changed</th><th>Board</th><th>Document</th><th>Meeting</th><th>Status</th><th>Versions</th><th>Files</th></tr></thead><tbody></tbody></table></div>
+      <h2 class="h2">Inbox</h2>
+      <div class="tw"><table class="at" id="ag-notices" data-tt="off"><thead><tr><th>Received</th><th>From</th><th>Subject</th><th>Matched</th><th>Links</th><th>Attachments</th><th>Status</th></tr></thead><tbody></tbody></table></div>
+      <div class="row" style="margin:18px 0 8px"><h2 class="h2 grow" style="margin:0">Errors, last 14 days</h2><button class="btn" id="ag-resolve-all" type="button">Mark all resolved</button></div>
+      <div class="tw"><table class="at" id="ag-errors" data-tt="off"><thead><tr><th>Time</th><th>Stage</th><th>Source</th><th>Error</th><th></th></tr></thead><tbody></tbody></table></div>
+      <h2 class="h2">Runs</h2>
+      <div class="tw"><table class="at" id="ag-runs" data-tt="off"><thead><tr><th>Started</th><th>Status</th><th class="num">Files checked</th><th>Summary</th></tr></thead><tbody></tbody></table></div>
     </section>
 
     <section id="tab-emails" role="tabpanel" hidden>
