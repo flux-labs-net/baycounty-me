@@ -42,7 +42,7 @@ jobs:
         id: watch
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          SUPABASE_REGION: ${{ vars.SUPABASE_REGION }}
+          SUPABASE_REGION: ${{ vars.SUPABASE_REGION || 'us-east-2' }}
           POP_HOST: ${{ secrets.POP_HOST }}
           POP_USER: ${{ secrets.POP_USER }}
           POP_PASS: ${{ secrets.POP_PASS }}
