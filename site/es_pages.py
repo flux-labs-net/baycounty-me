@@ -369,6 +369,7 @@ def es_home():
              ('/es/impuestos', 'Sus impuestos', 'Calcule su factura del impuesto a la propiedad y vea qué parte recibe el condado, las escuelas, su ciudad y cada distrito, y en qué gasta su dinero cada gobierno.'),
              ('/es/tarifas-y-facturas', 'Tarifas y facturas', 'Las tarifas fijas de su factura de impuestos (bomberos, aguas pluviales, alumbrado) y cuánto cuesta el agua, el alcantarillado y la basura en cada ciudad.'),
              ('/es/exenciones', 'Exenciones', 'Quién paga menos impuesto a la propiedad, desde el homestead hasta los veteranos con discapacidad, y cómo solicitar una exención.'),
+             ('/es/elecciones', 'Elecciones 2026', 'Cada contienda local de 2026: los candidatos, lo que proponen, y de dónde viene el dinero de su campaña.'),
              ('/es/solicitar-registros', 'Solicitar registros públicos', 'Elija un gobierno y un registro, y le escribimos la solicitud bajo la ley de registros públicos de Florida.'),
              ('/es/glosario', 'Glosario', 'Cada término de dinero público explicado en lenguaje sencillo: CRA, millaje, exención de vivienda principal y más.')]
     c = ''.join(f'<a class="gv-card" href="{h}"><span class="eyebrow">En español</span><b>{e(t)}</b><span class="small">{e(d)}</span></a>' for h, t, d in cards if h in ES_ALT)
@@ -480,3 +481,49 @@ def es_exemptions_page():
     with patched(xp, HOME=home, OTHER_NAMES=other, DIST_SHORT=T['dist'], money=money_short_es, write_shards=lambda out_dir: 0):
         page = xp.exemptions_page(None)
     return translate(page, T['html'], 'exemptions')  # the 'No' cells of the school-taxes column are already Spanish
+
+
+def iso_es(m):
+    """re match of YYYY-MM-DD -> '2 de octubre de 2026'."""
+    return f'{int(m.group(3))} de {MONTHS[int(m.group(2)) - 1]} de {m.group(1)}'
+
+
+def es_elections_page():
+    """/es/elecciones: elections_page() on Spanish copies of its data (notes, backgrounds, platform summaries, gaps)
+    with Spanish label dicts, then phrase pairs. Office names stay English until after rendering because
+    elections_page matches finance records by office. Individual donors are never named, as on the English page."""
+    import elections_page as ep
+    T, miss = page_pairs('elections'), set()
+    C, F = ep.load()
+    if not C:
+        return ep.elections_page()
+    tx = lambda s: _tr(T['text'], s, 'text', miss) if s else s
+    for r in C['races']:
+        if r.get('notes'):
+            r['notes'] = tx(ep._clean(r['notes']))
+        for c in r.get('candidates') or []:
+            for k in ('background', 'platform_note'):
+                if c.get(k):
+                    c[k] = tx(c[k])
+            c['platform'] = [tx(p) for p in c.get('platform') or []]
+    C['gaps'] = [tx(g) for g in C.get('gaps') or []]
+    F['gaps'] = [tx(g) for g in F.get('gaps') or []]
+    notes = {}
+    for r in F.get('candidates') or []:
+        for n in ep._notes(r):
+            notes[n] = tx(n)
+    orig_notes = ep._notes
+    with patched(ep, load=lambda: (C, F), GOVN=T['govn'], PARTY=T['party'], STATUS_LBL=T['status'], _clean=lambda t: t,
+                 _notes=lambda r: [notes.get(n, n) for n in orig_notes(r)]):
+        page = ep.elections_page()
+    if miss:
+        print('es elections: untranslated data text', len(miss), sorted(miss)[:6])
+    page = translate(page, T['html'], 'elections', quiet=('<a href="#next">April 2027</a>', '<h2>Already running for April 2027</h2>', 'Filed with the Supervisor of Elections for the April 20', '<p class="muted">No local races', '<p class="muted">None.</p>', '<th scope="row">Refunds to individual', ' of the total is in-kind', '>No platform statement found.', 'No campaign finance report found', '<span class="badge">Withdrew</span>', '<small>Party</small>', '<small>Committee</small>', '<small>Business</small>', '<small>Political committee</small>', '<small>Other</small>', 'Decided earlier in 2026', 'Decided in the Aug. 18 primary', ' (appointed)', ' (not a candidate)', '<p class="small muted">None reported.</p>'))
+    for a, b in T['re']:
+        page = re.sub(a, b, page)
+    page = re.sub(r'; and (\d+) other descriptions</small>', r'; y \1 descripciones más</small>', page)
+    page = re.sub(r'(?<=<span class="muted small">hasta )(\d{4})-(\d{2})-(\d{2})', lambda m: 'el ' + iso_es(m), page)
+    page = re.sub(r'<span>Campaign reports checked (\d{4})-(\d{2})-(\d{2})</span>', lambda m: '<span>Informes de campaña revisados el ' + iso_es(m) + '</span>', page)
+    for en, es in sorted(T['office'].items(), key=lambda kv: -len(kv[0])):
+        page = page.replace(f'<h3>{html.escape(en)}</h3>', f'<h3>{html.escape(es)}</h3>').replace(f'<b>{html.escape(en)}</b>', f'<b>{html.escape(es)}</b>')
+    return page

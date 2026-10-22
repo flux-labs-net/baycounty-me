@@ -1,0 +1,506 @@
+{
+ "_about": "Spanish for /es/elecciones (2026 Elections). 'text' maps English text from data/elections (race notes, candidate backgrounds, platform summaries, platform notes, finance notes, gaps) to Spanish; 'office' maps office names (kept English in the data because elections_page matches finance records by office); 'govn', 'party', 'status' replace elections_page label dicts; 'html' and 're' translate the page template. Platform lines are BayCounty.me's own summaries of what candidates wrote, translated; expenditure purposes stay as filed. Individual donors are never named.",
+ "govn": {
+  "county": "Condado de Bay",
+  "schools": "Junta Escolar",
+  "constitutional": "Oficinas del condado",
+  "special": "Distritos especiales",
+  "pc": "Panama City",
+  "pcb": "Panama City Beach",
+  "lh": "Lynn Haven",
+  "cw": "Callaway",
+  "sp": "Springfield",
+  "parker": "Parker",
+  "mb": "Mexico Beach"
+ },
+ "party": {
+  "REP": "Republicano",
+  "DEM": "Demócrata",
+  "NPA": "Sin partido",
+  "LPF": "Libertario",
+  "LIB": "Libertario",
+  "IND": "Independiente",
+  "WRI": "Por escrito (write-in)"
+ },
+ "status": {
+  "filed": "Se inscribió",
+  "on_ballot": "En la boleta del 3 de noviembre",
+  "won": "Ganó",
+  "elected_unopposed": "Elegido sin oposición",
+  "lost_primary": "Perdió la primaria",
+  "withdrew": "Se retiró",
+  "lost": "Perdió",
+  "did_not_qualify": "No calificó",
+  "appointed": "Nombrado"
+ },
+ "office": {
+  "Bay District School Board, District 3": "Junta Escolar del Distrito de Bay (Bay District School Board), Distrito 3",
+  "Lake Powell Residential Golf Community Development District, Seat 2": "Lake Powell Residential Golf Community Development District (distrito de desarrollo comunitario), Puesto 2",
+  "Lake Powell Residential Golf Community Development District, Seat 5": "Lake Powell Residential Golf Community Development District (distrito de desarrollo comunitario), Puesto 5",
+  "City of Callaway Commissioner, Ward 1": "Comisionado de la Ciudad de Callaway, Distrito 1 (Ward 1)",
+  "City of Callaway Commissioner, Ward 2": "Comisionado de la Ciudad de Callaway, Distrito 2 (Ward 2)",
+  "City of Panama City Beach Council, Ward 1": "Concejo de la Ciudad de Panama City Beach, Distrito 1 (Ward 1)",
+  "City of Panama City Beach Council, Ward 3": "Concejo de la Ciudad de Panama City Beach, Distrito 3 (Ward 3)",
+  "Bay District School Board, District 2": "Junta Escolar del Distrito de Bay, Distrito 2",
+  "Bay County Commission, District 2": "Comisión del Condado de Bay (Bay County Commission), Distrito 2",
+  "Bay County Commission, District 4": "Comisión del Condado de Bay, Distrito 4",
+  "Bay County Judge, Group 1": "Juez del Condado de Bay, Grupo 1",
+  "Bay County Judge, Group 4": "Juez del Condado de Bay, Grupo 4",
+  "Bay District School Board, District 5": "Junta Escolar del Distrito de Bay, Distrito 5",
+  "City of Springfield Commissioner, Ward 3": "Comisionado de la Ciudad de Springfield, Distrito 3 (Ward 3)",
+  "City of Springfield Commissioner, Ward 4": "Comisionado de la Ciudad de Springfield, Distrito 4 (Ward 4)",
+  "City of Mexico Beach Council Member, Group 4": "Miembro del Concejo de la Ciudad de Mexico Beach, Grupo 4",
+  "City of Mexico Beach Council Member, Group 5": "Miembro del Concejo de la Ciudad de Mexico Beach, Grupo 5",
+  "City of Springfield Mayor": "Alcalde de la Ciudad de Springfield",
+  "City of Lynn Haven Mayor (partial term)": "Alcalde de la Ciudad de Lynn Haven (resto del período)"
+ },
+ "text": {
+  "No candidate reached 50%+1 in the Aug 18 primary (Moore 9,023 / 29.25%; Haley 8,831 / 28.63%; Koch 8,577 / 27.81%; Manley 4,413 / 14.31%). The top two, Moore and Haley, meet on the Nov 3 ballot.": "Nadie sacó más de la mitad de los votos (50%+1) en la primaria del 18 de agosto (Moore 9,023 / 29.25%; Haley 8,831 / 28.63%; Koch 8,577 / 27.81%; Manley 4,413 / 14.31%). Los dos primeros, Moore y Haley, se enfrentan en la boleta del 3 de noviembre.",
+  "Voted on only by voters inside the Lake Powell CDD (Wild Heron area). Listed on the Notice of General Election. Incumbent not confirmed.": "Solo votan los electores que viven dentro del CDD de Lake Powell (zona de Wild Heron). Aparece en el Aviso de Elección General. No se confirmó quién ocupa el puesto ahora.",
+  "Voted on only by voters inside the Lake Powell CDD. Kevin Williams filed and withdrew (June 4, 2026). Black states in his SOE candidate statement that he has been a supervisor since Sept 2024.": "Solo votan los electores que viven dentro del CDD de Lake Powell. Kevin Williams se inscribió y se retiró (4 de junio de 2026). Black dice en su declaración de candidato ante el Supervisor de Elecciones (SOE) que es supervisor desde septiembre de 2024.",
+  "City election held with the Nov 3, 2026 general election. Ward is a residency requirement; voting is citywide.": "Elección de la ciudad junto con la elección general del 3 de noviembre de 2026. El distrito (ward) solo indica dónde debe vivir el candidato; vota toda la ciudad.",
+  "Open seat; the city website lists David Griggs as Ward II commissioner and he is not a candidate. Shannon Aufdencamp filed but did not qualify. Voting is citywide.": "Puesto abierto: el sitio de la ciudad dice que David Griggs es el comisionado del Distrito II y él no es candidato. Shannon Aufdencamp se inscribió pero no calificó. Vota toda la ciudad.",
+  "Open seat; the city website lists Paul Casto as Ward 1 council member and he is not a candidate. Council members are elected citywide. Scott Heilmann filed but did not qualify.": "Puesto abierto: el sitio de la ciudad dice que Paul Casto es el concejal del Distrito 1 y él no es candidato. A los concejales los elige toda la ciudad. Scott Heilmann se inscribió pero no calificó.",
+  "Council members are elected citywide.": "A los concejales los elige toda la ciudad.",
+  "Open seat. Decided in the Aug 18, 2026 primary (school board races need 50%+1): Littleton 16,154 (51.59%), Petty 15,160 (48.41%). Not on the Nov 3 ballot.": "Puesto abierto. Se decidió en la primaria del 18 de agosto de 2026 (en la junta escolar hace falta más de la mitad, 50%+1): Littleton 16,154 (51.59%), Petty 15,160 (48.41%). No está en la boleta del 3 de noviembre.",
+  "Only qualified candidate when county qualifying closed at noon June 12, 2026; does not appear on the Nov 3 ballot.": "Fue el único candidato que calificó cuando cerró la inscripción del condado, al mediodía del 12 de junio de 2026; no aparece en la boleta del 3 de noviembre.",
+  "Open seat; incumbent Doug Moore announced he would not seek re-election. Scott Duvall was the only candidate to qualify (qualifying closed June 12, 2026). Three other filers withdrew before qualifying: Suzanne McDowell (LIB, Oct 2025), Sunny Reid (REP, Mar 2026), Brian Rust (REP, May 2026).": "Puesto abierto: el comisionado actual, Doug Moore, dijo que no buscaría la reelección. Scott Duvall fue el único que calificó (la inscripción cerró el 12 de junio de 2026). Otros tres se retiraron antes de calificar: Suzanne McDowell (libertaria, octubre de 2025), Sunny Reid (republicano, marzo de 2026) y Brian Rust (republicano, mayo de 2026).",
+  "County court judgeship (6-year term). Judicial qualifying closed noon April 24, 2026; sole qualifier. Incumbency based on a 14th Judicial Circuit judge-directory link (jud14.flcourts.org/judges/timothy-c-campbell) that could not be opened.": "Juez del tribunal del condado (período de 6 años). La inscripción judicial cerró al mediodía del 24 de abril de 2026; fue el único que calificó. Que ya ocupa el cargo se basa en un enlace del directorio de jueces del 14.º Circuito Judicial (jud14.flcourts.org/judges/timothy-c-campbell) que no se pudo abrir.",
+  "County court judgeship (6-year term). Judicial qualifying closed noon April 24, 2026; sole qualifier. Smith was appointed to the Bay County Court by the Governor in September 2024.": "Juez del tribunal del condado (período de 6 años). La inscripción judicial cerró al mediodía del 24 de abril de 2026; fue la única que calificó. El gobernador nombró a Smith en el Tribunal del Condado de Bay en septiembre de 2024.",
+  "Only qualified candidate when qualifying closed June 12, 2026; not on the primary or Nov 3 ballot.": "Fue el único candidato que calificó cuando cerró la inscripción el 12 de junio de 2026; no estuvo en la boleta de la primaria ni está en la del 3 de noviembre.",
+  "Sole qualifier (Springfield qualifying closed noon Feb 13, 2026); not on the April 21 ballot. Incumbent not confirmed.": "Única persona que calificó (la inscripción de Springfield cerró al mediodía del 13 de febrero de 2026); no estuvo en la boleta del 21 de abril. No se confirmó quién ocupaba el puesto.",
+  "Sole candidate in the 2026 Municipal Super Tuesday cycle (SOE status Inactive-Elected); no Mexico Beach contest appeared on the April 21, 2026 ballot (SOE results cover Springfield only). Qualifying filings dated Feb 2026; exact close of qualifying and incumbency not confirmed.": "Única persona candidata en las elecciones municipales de 2026 (Municipal Super Tuesday; estado en el SOE: Inactive-Elected); no hubo ninguna contienda de Mexico Beach en la boleta del 21 de abril de 2026 (los resultados del SOE solo son de Springfield). Los papeles de inscripción son de febrero de 2026; no se confirmó la fecha exacta de cierre ni quién ocupaba el puesto.",
+  "Municipal election April 21, 2026: Hammond 310 (55.76%), Curti 246 (44.24%).": "Elección municipal del 21 de abril de 2026: Hammond 310 (55.76%), Curti 246 (44.24%).",
+  "A recall election for Mayor Jesse Nelson was set for Jan 20, 2026, with Dave Lowery as the only qualified candidate to fill the seat. Nelson resigned before the vote and the SOE canceled the recall election, so no votes were cast. The City Commission then unanimously appointed Lowery to serve until the next regular election (April 20, 2027). The SOE has no results for this contest; the outcome is from local news reports.": "Se había fijado para el 20 de enero de 2026 una elección revocatoria del alcalde Jesse Nelson, con Dave Lowery como único candidato calificado para el puesto. Nelson renunció antes de la votación y el SOE canceló la elección, así que nadie votó. Después, la Comisión de la Ciudad nombró a Lowery por unanimidad hasta la próxima elección regular (20 de abril de 2027). El SOE no tiene resultados de esta contienda; lo que pasó viene de las noticias locales.",
+  "Incumbent (joined the board Nov 2022); retired U.S. Navy captain; senior program manager at General Dynamics IT (per SOE candidate statement).": "Ocupa el puesto (entró a la junta en noviembre de 2022); capitán retirado de la Marina de EE. UU.; gerente de programas en General Dynamics IT (según su declaración de candidato ante el SOE).",
+  "30+ years with Bay District Schools, including principal of J.R. Arnold High and district Executive Director of Operations (per campaign site).": "Más de 30 años en Bay District Schools, incluso como director de la escuela secundaria J.R. Arnold y director ejecutivo de operaciones del distrito (según su sitio de campaña).",
+  "Bay District Schools classroom teacher; certified teacher since 2003 (per SOE candidate statement).": "Maestra de Bay District Schools; maestra certificada desde 2003 (según su declaración de candidata ante el SOE).",
+  "Retired from the utility industry; Lake Powell CDD supervisor since Sept 2024 (per SOE candidate statement).": "Jubilado de la industria de servicios públicos; supervisor del CDD de Lake Powell desde septiembre de 2024 (según su declaración de candidato ante el SOE).",
+  "Incumbent Ward I commissioner; security professional, retired U.S. Air Force senior NCO and paramedic (per SOE candidate statement).": "Comisionado actual del Distrito I; profesional de seguridad, suboficial retirado de la Fuerza Aérea de EE. UU. y paramédico (según su declaración de candidato ante el SOE).",
+  "Chemical engineer (process and safety engineering); co-founded a general contracting business (per SOE candidate statement).": "Ingeniera química (ingeniería de procesos y de seguridad); cofundó una empresa de construcción (según su declaración de candidata ante el SOE).",
+  "Vice-chair of the Callaway Planning Board; background in banking, billing and insurance (per SOE candidate statement).": "Vicepresidenta de la Junta de Planificación de Callaway; experiencia en bancos, cobros y seguros (según su declaración de candidata ante el SOE).",
+  "Retired U.S. Air Force Chief Master Sergeant (EOD); utilities operations manager (per campaign site).": "Sargento mayor jefe retirado de la Fuerza Aérea de EE. UU. (desactivación de explosivos, EOD); gerente de operaciones de servicios públicos (según su sitio de campaña).",
+  "Local small business owner; has served on the PCB Planning Board and the city Half-Cent Sales Tax Oversight Committee (per SOE candidate statement).": "Dueño de un pequeño negocio local; ha servido en la Junta de Planificación de PCB y en el Comité de Supervisión del impuesto de medio centavo de la ciudad (según su declaración de candidato ante el SOE).",
+  "Family nurse practitioner (per SOE candidate statement).": "Enfermero practicante de familia (según su declaración de candidato ante el SOE).",
+  "20+ years of military service; works at Naval Support Activity Panama City (per SOE candidate statement).": "Más de 20 años de servicio militar; trabaja en la base naval Naval Support Activity Panama City (según su declaración de candidato ante el SOE).",
+  "Incumbent Ward 3 council member; 30-year career in downtown revitalization (per SOE candidate statement).": "Concejal actual del Distrito 3; 30 años de carrera en la renovación de centros urbanos (según su declaración de candidata ante el SOE).",
+  "Former Bay County teacher and administrator; previously served 13 years on the Bay District School Board (per campaign site).": "Exmaestra y exadministradora en el Condado de Bay; antes sirvió 13 años en la Junta Escolar del Distrito de Bay (según su sitio de campaña).",
+  "Bay County teacher, administrator, literacy leader and Guardian ad Litem since 2004 (per campaign site).": "Maestro, administrador, líder de programas de lectura y Guardian ad Litem (defensor voluntario de menores en los tribunales) en el Condado de Bay desde 2004 (según su sitio de campaña).",
+  "Retired; formerly worked in swimming pool construction and maintenance; U.S. Army veteran (per SOE candidate statement).": "Jubilado; antes trabajó en la construcción y el mantenimiento de piscinas; veterano del Ejército de EE. UU. (según su declaración de candidato ante el SOE).",
+  "Springfield mayor since 2013; retired U.S. Air Force (23 years) (per SOE candidate statement).": "Alcalde de Springfield desde 2013; retirado de la Fuerza Aérea de EE. UU. (23 años) (según su declaración de candidato ante el SOE).",
+  "Retired U.S. Air Force lieutenant colonel; college professor of public administration (per SOE candidate statement).": "Teniente coronel retirado de la Fuerza Aérea de EE. UU.; profesor universitario de administración pública (según su declaración de candidato ante el SOE).",
+  "No campaign website found; platform from the candidate statement filed with the SOE.": "No encontramos un sitio de campaña; las propuestas vienen de la declaración de candidato que entregó al SOE.",
+  "No campaign website or platform statement found": "No encontramos un sitio de campaña ni una declaración de propuestas",
+  "No campaign website or platform statement found. Withdrew June 4, 2026.": "No encontramos un sitio de campaña ni una declaración de propuestas. Se retiró el 4 de junio de 2026.",
+  "No campaign website found; SOE candidate statement is mostly biographical and lists no specific policy proposals.": "No encontramos un sitio de campaña; su declaración ante el SOE habla sobre todo de su vida y no da propuestas concretas.",
+  "No campaign website or platform statement found. Filed paperwork but did not qualify.": "No encontramos un sitio de campaña ni una declaración de propuestas. Entregó papeles pero no calificó.",
+  "Filed but did not qualify; platform from the candidate statement filed with the SOE.": "Se inscribió pero no calificó; las propuestas vienen de la declaración de candidato que entregó al SOE.",
+  "Campaign website has a short statement; no detailed issues page found.": "El sitio de campaña tiene una declaración corta; no encontramos una página con propuestas detalladas.",
+  "Campaign website has limited issue content (no working issues page found).": "El sitio de campaña dice poco sobre propuestas (no encontramos una página de propuestas que funcione).",
+  "Campaign Facebook page exists but could not be read (Facebook blocks automated access); no other platform material found": "Tiene una página de campaña en Facebook, pero no la pudimos leer (Facebook bloquea el acceso automático); no encontramos otras propuestas",
+  "SOE candidate statement only pointed to www.VoteBrianRust.com; as of 2026-10-21 that site shows a podcast page with no campaign platform. Withdrew May 11, 2026.": "Su declaración ante el SOE solo mandaba a www.VoteBrianRust.com; al 21 de octubre de 2026 ese sitio muestra una página de podcast sin propuestas de campaña. Se retiró el 11 de mayo de 2026.",
+  "Withdrew March 25, 2026; platform from the candidate statement filed with the SOE.": "Se retiró el 25 de marzo de 2026; las propuestas vienen de la declaración de candidato que entregó al SOE.",
+  "No campaign website or platform statement found. Withdrew October 20, 2025.": "No encontramos un sitio de campaña ni una declaración de propuestas. Se retiró el 20 de octubre de 2025.",
+  "Platform from the candidate statement filed with the SOE.": "Las propuestas vienen de la declaración de candidato que entregó al SOE.",
+  "Platform from the candidate statement filed with the SOE for the canceled Jan 20, 2026 recall election.": "Las propuestas vienen de la declaración de candidato que entregó al SOE para la elección revocatoria del 20 de enero de 2026, que se canceló.",
+  "Listed in the Supervisor of Elections filings; platform not yet reviewed.": "Aparece en los registros del Supervisor de Elecciones; todavía no revisamos sus propuestas.",
+  "Platform not yet reviewed.": "Todavía no revisamos sus propuestas.",
+  "Running for re-election to continue what he describes as recent gains for students and the district, and says more work is needed to build on them.": "Busca la reelección para seguir con lo que llama avances recientes para los estudiantes y el distrito, y dice que falta trabajo para seguir mejorando.",
+  "Says every decision and every dollar spent should be judged by the question \"How does this benefit the student?\"": "Dice que cada decisión y cada dólar gastado se deben medir con la pregunta \"¿Cómo ayuda esto al estudiante?\"",
+  "Wants sustained improvement in results for all students and for the teachers and administrators who support them.": "Quiere que mejoren, de forma constante, los resultados de todos los estudiantes y el apoyo a los maestros y administradores que los ayudan.",
+  "Emphasizes the board's budget and policy roles and says his contract and budget management experience helps him oversee the district's budget.": "Destaca el papel de la junta en el presupuesto y las reglas, y dice que su experiencia con contratos y presupuestos le ayuda a vigilar el presupuesto del distrito.",
+  "Says board decisions should start with whether they benefit students (\"Students First, Politics Last\").": "Dice que las decisiones de la junta deben empezar por preguntar si ayudan a los estudiantes (\"Students First, Politics Last\": primero los estudiantes, la política al final).",
+  "Wants to modernize school facilities to expand career and technical programs that let students earn credentials for high-demand careers while still in school.": "Quiere modernizar las escuelas para tener más programas técnicos y de oficios, para que los estudiantes saquen certificados para trabajos muy buscados mientras siguen en la escuela.",
+  "Wants teachers and support staff to have the resources they need and fair pay, and wants their feedback considered in decisions.": "Quiere que los maestros y el personal de apoyo tengan los recursos que necesitan y un sueldo justo, y que sus opiniones cuenten en las decisiones.",
+  "Supports strong school security, school resource officers, practiced emergency protocols and action on bullying.": "Apoya una buena seguridad en las escuelas, policías escolares, planes de emergencia bien practicados y medidas contra el acoso escolar.",
+  "Says classroom technology should support teachers, not replace them.": "Dice que la tecnología en el salón debe ayudar a los maestros, no reemplazarlos.",
+  "Pledges fiscal responsibility and a stronger connection between the District Office and local schools.": "Promete cuidar el dinero y unir más a la oficina del distrito con las escuelas.",
+  "Says \"our children are not a business\" and that education is a lifelong endeavor.": "Dice que \"nuestros niños no son un negocio\" y que la educación dura toda la vida.",
+  "Wants technology in the classroom used responsibly.": "Quiere que la tecnología en el salón se use con responsabilidad.",
+  "Wants classroom teachers to get the support they need.": "Quiere que los maestros reciban el apoyo que necesitan.",
+  "Says she would advocate for students, families and educators and help the board make sound decisions that affect parents and staff.": "Dice que defendería a los estudiantes, las familias y los educadores, y ayudaría a la junta a tomar buenas decisiones que afectan a los padres y al personal.",
+  "Running for re-election to keep guiding CDD issues and the district's fiduciary responsibilities.": "Busca la reelección para seguir guiando los asuntos del CDD y el buen manejo del dinero del distrito.",
+  "Points to his work as chair of the property owners' association safety and security committee on the security system, gate access, cameras, radar speed signs and emergency planning.": "Habla de su trabajo como presidente del comité de seguridad de la asociación de propietarios: el sistema de seguridad, el acceso por el portón, las cámaras, los letreros de velocidad con radar y los planes de emergencia.",
+  "Wants to keep working with the property owners' association board on issues that benefit both bodies.": "Quiere seguir trabajando con la junta de la asociación de propietarios en temas que ayudan a los dos grupos.",
+  "Says he wants to keep Wild Heron safe, secure and well kept.": "Dice que quiere que Wild Heron siga siendo seguro y bien cuidado.",
+  "Points to his current work on Callaway policy decisions, budget oversight and long-term planning.": "Habla de su trabajo actual en las decisiones de Callaway, la vigilancia del presupuesto y los planes a largo plazo.",
+  "Says his military, security and paramedic experience taught him that preparation and teamwork matter in decisions.": "Dice que su experiencia militar, en seguridad y como paramédico le enseñó que prepararse y trabajar en equipo importa al decidir.",
+  "Wants to end fees for public records requests by Callaway residents, require city-owned phones for official business and make city emails searchable.": "Quiere quitar el cobro por pedir registros públicos a los residentes de Callaway, exigir teléfonos de la ciudad para los asuntos oficiales y que se puedan buscar los correos de la ciudad.",
+  "Wants to restore decorum in commission meetings with clear time limits so residents can speak without interruption.": "Quiere que vuelva el orden a las reuniones de la comisión, con límites de tiempo claros para que los residentes hablen sin que los interrumpan.",
+  "Supports updating land development codes (setbacks, driveway space, street widths for emergency vehicles) and a temporary moratorium on incompatible residential development until those standards are in place.": "Apoya actualizar las reglas de construcción (distancia a la calle, espacio para entradas de carros, ancho de calles para vehículos de emergencia) y una pausa temporal a los proyectos de vivienda que no encajen, hasta que esas reglas existan.",
+  "Wants close review of traffic impacts from new development, especially along Highway 22.": "Quiere revisar de cerca cómo afectan al tráfico las nuevas construcciones, sobre todo en la Highway 22.",
+  "Wants advance approval for any spending over budget, closer oversight of contracts and budgets, and to explore an independent review of city finances.": "Quiere que cualquier gasto por encima del presupuesto se apruebe antes, vigilar más los contratos y presupuestos, y estudiar una revisión independiente de las finanzas de la ciudad.",
+  "Wants to build a connected, supportive community (\"Build the Village\").": "Quiere crear una comunidad unida que se apoye (\"Build the Village\": construir el pueblo).",
+  "Advocates safe, family-friendly neighborhoods.": "Defiende vecindarios seguros y buenos para las familias.",
+  "Wants to help military families moving to the area as Tyndall Air Force Base grows, and encourage them to choose Callaway.": "Quiere ayudar a las familias militares que llegan a la zona mientras crece la Base de la Fuerza Aérea Tyndall, y animarlas a escoger Callaway.",
+  "Says she would bring financial skills from banking, billing and insurance work to the commission.": "Dice que llevaría a la comisión lo que sabe de finanzas por su trabajo en bancos, cobros y seguros.",
+  "Pledges not to engage in negativity or personal attacks and to treat every resident with respect.": "Promete no hacer campaña negativa ni ataques personales, y tratar con respeto a cada residente.",
+  "Wants more security and law enforcement presence on the east end of the beach, building on the 2026 Spring Break approach.": "Quiere más seguridad y más policía en el lado este de la playa, siguiendo lo que se hizo en las vacaciones de primavera (Spring Break) de 2026.",
+  "Wants to prioritize disaster resilience, with infrastructure built to withstand storms and well-tested emergency procedures.": "Quiere dar prioridad a estar listos para desastres, con obras que aguanten tormentas y planes de emergencia bien probados.",
+  "Wants to upgrade underground utilities, use cost-saving technology such as advanced water metering, and keep wastewater systems environmentally sound.": "Quiere mejorar las tuberías y redes subterráneas, usar tecnología que ahorre dinero, como medidores de agua modernos, y que el sistema de aguas residuales cuide el medio ambiente.",
+  "Wants to streamline city services, cut waste and publish data-driven performance measures (KPIs) so residents can see how tax dollars are used.": "Quiere hacer más simples los servicios de la ciudad, cortar el desperdicio y publicar medidas de resultados con datos (KPI) para que los residentes vean cómo se usan los impuestos.",
+  "Wants better communication with residents about city operations, projects and decisions.": "Quiere informar mejor a los residentes sobre el trabajo, los proyectos y las decisiones de la ciudad.",
+  "Wants growth balanced with residents' needs, including easing traffic congestion.": "Quiere que el crecimiento vaya de acuerdo con lo que necesitan los residentes, y que haya menos tráfico.",
+  "Proposes a Homestead Assessment Discount Program to lower city fire and stormwater assessments for homesteaded residents.": "Propone un programa de descuento para viviendas con homestead que baje los cobros de la ciudad por bomberos y aguas pluviales a esos residentes.",
+  "Wants free spectator access to the Russell-Fields City Pier for residents, with possible changes to visitor fees to cover the cost.": "Quiere que los residentes entren gratis a mirar en el muelle Russell-Fields City Pier, quizás cambiando lo que pagan los visitantes para cubrir el costo.",
+  "Wants to support police, fire, EMS and lifeguards, continue the current Spring Break approach and strengthen emergency preparedness.": "Quiere apoyar a la policía, los bomberos, las ambulancias y los salvavidas, seguir con el plan actual de Spring Break y estar más preparados para emergencias.",
+  "Wants roads, water, sewer and stormwater systems to keep pace with growth, with new development paying its fair share.": "Quiere que las calles, el agua, el alcantarillado y el drenaje crezcan al ritmo de la ciudad, y que las nuevas construcciones paguen su parte justa.",
+  "Wants to protect neighborhoods from excessive density, invest in parks and youth recreation, and improve sidewalks.": "Quiere proteger los vecindarios de tener demasiadas construcciones juntas, invertir en parques y recreación para jóvenes, y mejorar las aceras.",
+  "Supports an annual Tourism Local Investment and Impact Report on how tourism dollars benefit residents.": "Apoya un informe anual sobre cómo el dinero del turismo ayuda a los residentes (Tourism Local Investment and Impact Report).",
+  "Says he has pushed for fiscal responsibility and government transparency at council meetings.": "Dice que en las reuniones del concejo ha pedido cuidar el dinero y que el gobierno sea transparente.",
+  "Wants the city to follow its own rules and the laws it is responsible for upholding.": "Quiere que la ciudad cumpla sus propias reglas y las leyes que le toca hacer cumplir.",
+  "Wants balance between residents, communities and businesses so growth does not come at residents' expense.": "Quiere un equilibrio entre residentes, comunidades y negocios, para que el crecimiento no perjudique a los residentes.",
+  "Says he is running to provide independent leadership for residents.": "Dice que es candidato para dar a los residentes un liderazgo independiente.",
+  "Wants to protect quality of life and support responsible growth.": "Quiere proteger la calidad de vida y apoyar un crecimiento responsable.",
+  "Says that before major developments are approved, the city must make sure infrastructure, traffic and public safety can support them.": "Dice que antes de aprobar proyectos grandes, la ciudad debe asegurarse de que las calles, el tráfico y la seguridad pública puedan con ellos.",
+  "Wants to listen to residents, support local businesses and push for common-sense planning.": "Quiere escuchar a los residentes, apoyar a los negocios locales y pedir una planificación con sentido común.",
+  "Says residents should come before tourists: \"if it's good enough for us, it's good enough for tourists.\"": "Dice que los residentes deben ir antes que los turistas: \"si es bueno para nosotros, es bueno para los turistas\".",
+  "Supports responsible growth, fiscal accountability and better quality of life for residents.": "Apoya un crecimiento responsable, rendir cuentas del dinero y una mejor calidad de vida para los residentes.",
+  "Wants development projects to benefit the community, with protection and compatibility for neighboring properties.": "Quiere que los proyectos de construcción ayuden a la comunidad, y que protejan y respeten a las propiedades vecinas.",
+  "Says she votes for the community as a whole rather than special interests.": "Dice que vota por toda la comunidad y no por intereses especiales.",
+  "Says every child can succeed and some students \"just need a longer runway.\"": "Dice que todos los niños pueden salir adelante y que algunos estudiantes \"solo necesitan más pista para despegar\".",
+  "Wants the district to build pathways to success for every student, whether that means vocational school, college or another route.": "Quiere que el distrito abra caminos al éxito para cada estudiante, ya sea una escuela técnica, la universidad u otro camino.",
+  "Says she will work every day to solve the problems students face.": "Dice que trabajará todos los días para resolver los problemas que tienen los estudiantes.",
+  "Campaign theme is \"Kids First. Always.\"": "El lema de su campaña es \"Kids First. Always.\" (Los niños primero. Siempre.)",
+  "Says he has advocated for kids and schools since 2004 and asks voters to support him to continue that work on the School Board.": "Dice que defiende a los niños y las escuelas desde 2004 y pide el voto para seguir ese trabajo en la Junta Escolar.",
+  "Says strict adherence to the U.S. and Florida Constitutions would come first in all of his decisions as commissioner.": "Dice que como comisionado, seguir al pie de la letra la Constitución de EE. UU. y la de Florida estaría primero en todas sus decisiones.",
+  "Wants existing statutes reviewed where he sees them as questionable under the Constitution.": "Quiere revisar las leyes que, según él, son dudosas frente a la Constitución.",
+  "Says parts of the federal Constitution are being passed over and should be applied to county policies.": "Dice que se están pasando por alto partes de la Constitución federal y que se deben aplicar a las reglas del condado.",
+  "Wants to increase constitutional awareness, enforcement and education in Bay County.": "Quiere que en el Condado de Bay se conozca, se cumpla y se enseñe más la Constitución.",
+  "Says most of the city's water, sewer, stormwater and street paving upgrades are done and wants to finish the remaining work with planning and funding.": "Dice que ya se hizo casi toda la mejora del agua, el alcantarillado, el drenaje y el asfalto de la ciudad, y quiere terminar lo que falta con planes y dinero.",
+  "Points to the new Government Complex and Civic Center due in 2026.": "Habla del nuevo complejo de gobierno y centro cívico, que debe estar listo en 2026.",
+  "Supports projects in design: a School Ave. streetscape, a new nature park, Springfield Gardens Walking Park improvements and a Carrie Bell Shaw outdoor recreation park.": "Apoya proyectos que se están diseñando: arreglar la calle School Ave., un nuevo parque natural, mejoras al parque Springfield Gardens Walking Park y un parque de recreación al aire libre Carrie Bell Shaw.",
+  "Pledges integrity, accountability, availability and honesty, and stresses teamwork among the commission, staff and residents.": "Promete integridad, rendir cuentas, estar disponible y ser honesto, y destaca el trabajo en equipo entre la comisión, el personal y los residentes.",
+  "Says he is not seeking office to advance a political agenda.": "Dice que no busca el cargo para impulsar una agenda política.",
+  "Wants to support city staff and respect the role of the Lynn Haven City Commission.": "Quiere apoyar al personal de la ciudad y respetar el papel de la Comisión de la Ciudad de Lynn Haven.",
+  "Wants to keep city operations professional.": "Quiere que el trabajo de la ciudad siga siendo profesional.",
+  "Wants to protect Lynn Haven taxpayers while stabilizing the city budget.": "Quiere proteger a quienes pagan impuestos en Lynn Haven mientras pone en orden el presupuesto de la ciudad.",
+  "Wants to restore public trust in local government.": "Quiere que la gente vuelva a confiar en el gobierno local.",
+  "The campaign account is closed.": "La cuenta de la campaña está cerrada.",
+  "Monetary contributions minus expenditures/distributions = -535.00 at termination (SOE figures).": "Donaciones en dinero menos gastos y repartos = -535.00 al cerrar (cifras del SOE).",
+  "SOE status \"Did not qualify\": campaign account opened but candidate did not qualify for the ballot.": "Según el SOE, no calificó: abrió la cuenta de campaña pero no calificó para la boleta.",
+  "Amended report re-coded one $1,000 contribution from \"self\" to individual.": "Un informe corregido cambió una donación de $1,000 de \"propia\" a \"de una persona\".",
+  "Amended report replaced a $1,000 contribution first filed as from a business with a contribution from an individual.": "Un informe corregido cambió una donación de $1,000 que primero aparecía como de un negocio por una donación de una persona.",
+  "One of the campaign's amended reports may count a $1,000 loan from the candidate twice. Figures here follow the Supervisor of Elections' totals.": "Uno de los informes corregidos de la campaña puede contar dos veces un préstamo de $1,000 del candidato. Las cifras de aquí siguen los totales del Supervisor de Elecciones.",
+  "Lynn Haven recall election (Jan 20, 2026): campaign closed after running unopposed; contributions refunded per the filing. The two recall political committees (Lynn Haven Recall; Recall Mayor Nelson) are committees, not candidates, and are not included.": "Elección revocatoria de Lynn Haven (20 de enero de 2026): la campaña cerró porque no tuvo oposición; según el informe, devolvió las donaciones. Los dos comités políticos de la revocatoria (Lynn Haven Recall; Recall Mayor Nelson) son comités, no candidatos, y no están incluidos.",
+  "Campaign Facebook/Instagram pages could not be read (Facebook blocks automated access). Platforms come only from candidate websites and the candidate statements filed with the SOE (shown on each candidate's VoterFocus page). Candidates whose only platform material is on Facebook have platform [] (e.g. Scott Duvall).": "No pudimos leer las páginas de campaña en Facebook o Instagram (Facebook bloquea el acceso automático). Las propuestas vienen solo de los sitios de los candidatos y de las declaraciones que entregaron al SOE (en la página de cada candidato en VoterFocus). Los candidatos que solo tienen propuestas en Facebook aparecen sin propuestas (por ejemplo, Scott Duvall).",
+  "No platform material found for: Robert Carroll, Scott Duvall, Steve Moss, Timothy Campbell, Tracy A Smith, Glenn Manley, Jamie Kirkland, Alyssa Finneyfrock, Greg Porta, Tim Rosson, Carl Curti, Jackie Kennington, Cindy Hamre, Carrie Ruscoe, Steve Cox, and withdrawn or non-qualified filers McDowell, Rust, Williams and Aufdencamp.": "No encontramos propuestas de: Robert Carroll, Scott Duvall, Steve Moss, Timothy Campbell, Tracy A Smith, Glenn Manley, Jamie Kirkland, Alyssa Finneyfrock, Greg Porta, Tim Rosson, Carl Curti, Jackie Kennington, Cindy Hamre, Carrie Ruscoe, Steve Cox, ni de quienes se retiraron o no calificaron: McDowell, Rust, Williams y Aufdencamp.",
+  "Glenn Manley: a Facebook profile is linked by a third-party voter guide but could not be confirmed as an official campaign page, so it is not listed.": "Glenn Manley: una guía de votantes de otra organización enlaza un perfil de Facebook, pero no pudimos confirmar que sea su página oficial de campaña, así que no lo ponemos.",
+  "votebrianrust.com (the site cited in Brian Rust's SOE statement) no longer shows campaign content.": "votebrianrust.com (el sitio que da Brian Rust en su declaración ante el SOE) ya no muestra nada de la campaña.",
+  "The Nov 3 sample ballot is only available as a personalized request form on bayvotesfl.gov. The active race list was assembled from the SOE 'Offices up for Election' page, SOE/VoterFocus candidate statuses, the Notice of General Election (county and special district offices) and the SOE snapshot sheets for Callaway and Panama City Beach, which list Nov 3, 2026 as their election date.": "La boleta de muestra del 3 de noviembre solo se consigue pidiéndola con un formulario personal en bayvotesfl.gov. Armamos la lista de contiendas con la página 'Offices up for Election' del SOE, el estado de cada candidato en el SOE y VoterFocus, el Aviso de Elección General (cargos del condado y de distritos especiales) y las hojas del SOE de Callaway y Panama City Beach, que dan el 3 de noviembre de 2026 como su fecha de elección.",
+  "Incumbents not confirmed: Lake Powell CDD Seat 2; Springfield Wards 3 and 4; Mexico Beach Groups 4 and 5. Timothy Campbell's incumbency (County Judge G1) relies on a court-directory link that could not be opened.": "No se confirmó quién ocupa el puesto en: CDD de Lake Powell, Puesto 2; Springfield, Distritos 3 y 4; Mexico Beach, Grupos 4 y 5. Que Timothy Campbell ya es juez (Juez del Condado, Grupo 1) se basa en un enlace del directorio del tribunal que no se pudo abrir.",
+  "Mexico Beach Groups 4 and 5: exact close of qualifying not confirmed (2026 snapshot no longer posted); decided_date left null.": "Mexico Beach, Grupos 4 y 5: no se confirmó la fecha exacta de cierre de la inscripción (la hoja de 2026 ya no está publicada); dejamos la fecha de decisión en blanco.",
+  "Lynn Haven mayor (partial term): no SOE result exists because the Jan 20, 2026 recall election was canceled. Outcome (appointment of Dave Lowery) and date are from WJHG/WMBB reports; decided_date 2026-01-13 is the Tuesday commission meeting those reports describe.": "Alcalde de Lynn Haven (resto del período): el SOE no tiene resultados porque se canceló la elección revocatoria del 20 de enero de 2026. Lo que pasó (el nombramiento de Dave Lowery) y la fecha vienen de las noticias de WJHG y WMBB; la fecha de decisión, 13 de enero de 2026, es la reunión de la comisión de ese martes que describen esas noticias.",
+  "Out of scope and not included: Circuit Judge, 14th Circuit Groups 7 and 10 (multi-county), and all state and federal races. Lynn Haven's five charter amendments on the Aug 18 ballot are ballot measures, not candidate races. No mosquito-control or soil and water district seats are on Bay County's 2026 ballot according to the SOE offices list. Panama City, Parker and other Lynn Haven/Mexico Beach seats are up in April 2027, not 2026.": "Fuera de esta página: Juez de Circuito del 14.º Circuito, Grupos 7 y 10 (de varios condados), y todas las contiendas estatales y federales. Las cinco enmiendas a la carta de Lynn Haven de la boleta del 18 de agosto son preguntas a los votantes, no contiendas de candidatos. Según la lista del SOE, no hay puestos de control de mosquitos ni de distritos de suelo y agua en la boleta de 2026 del Condado de Bay. Los puestos de Panama City, Parker y los demás de Lynn Haven y Mexico Beach se eligen en abril de 2027, no en 2026.",
+  "Candidate names follow printed 2026 ballots where available (Aug 18 primary, Apr 21 Springfield); for Nov 3 city and CDD races and races decided at qualifying, names follow SOE candidate filings because the full Nov 3 ballot text was not available.": "Los nombres de los candidatos son como aparecen en las boletas impresas de 2026 cuando las hay (primaria del 18 de agosto, Springfield del 21 de abril); para las contiendas de ciudades y CDD del 3 de noviembre y las que se decidieron en la inscripción, los nombres son como aparecen en los registros del SOE, porque no estaba disponible el texto completo de la boleta del 3 de noviembre.",
+  "Candidate status values 'lost', 'did_not_qualify' and 'appointed' were added beyond the original enum to describe these cases accurately (see status_legend).": "Agregamos los estados 'perdió', 'no calificó' y 'nombrado' para describir bien estos casos.",
+  "Lake Powell Community Development District (Seats 2 and 5): five candidates are listed in the SOE system with no reports and $0 totals; nothing to itemize.": "Lake Powell Community Development District (Puestos 2 y 5): cinco candidatos aparecen en el sistema del SOE sin informes y con $0; no hay nada que detallar.",
+  "Suzanne McDowell and Sunny Reid (County Commission District 4, both Withdrawn): no reports or itemized activity listed.": "Suzanne McDowell y Sunny Reid (Comisión del Condado, Distrito 4; los dos se retiraron): no aparecen informes ni movimientos.",
+  "Lynn Haven recall (Jan 20, 2026): the two recall political committees (\"Lynn Haven Recall\", \"Recall Mayor Nelson\") are committees, not candidates, and are excluded. Only the candidate account for the mayor's seat is included.": "Revocatoria de Lynn Haven (20 de enero de 2026): los dos comités políticos de la revocatoria (\"Lynn Haven Recall\", \"Recall Mayor Nelson\") son comités, no candidatos, y no están incluidos. Solo incluimos la cuenta del candidato a alcalde.",
+  "No 2026 elections were listed in the SOE system for Panama City, Lynn Haven (other than the recall), Parker, or for county constitutional offices; Panama City and Parker hold municipal elections in odd years (2025, 2027).": "El sistema del SOE no tenía elecciones de 2026 para Panama City, Lynn Haven (aparte de la revocatoria), Parker ni los cargos constitucionales del condado; Panama City y Parker tienen elecciones municipales en años impares (2025, 2027).",
+  "Campaigns still active through Nov 3 have filed through G4 (period ending 2026-10-02) or, for two Callaway candidates, G5 (period ending 2026-10-16). The G5 report for the others (period 10/3 to 10/16) was not posted as of 2026-10-21, and the G6 report is due after the election. Figures will change.": "Las campañas que siguen hasta el 3 de noviembre han entregado informes hasta el G4 (período que termina el 2 de octubre de 2026) o, en el caso de dos candidatos de Callaway, el G5 (que termina el 16 de octubre de 2026). Al 21 de octubre de 2026 no estaba publicado el informe G5 de los demás (del 3 al 16 de octubre), y el G6 se entrega después de la elección. Las cifras van a cambiar.",
+  "Dr. John L. Haley: one blank deletion line in an amended report could not be matched; SOE totals may double-count one $1,000 candidate loan (see candidate notes).": "Dr. John L. Haley: no se pudo identificar una línea borrada en blanco de un informe corregido; los totales del SOE pueden contar dos veces un préstamo de $1,000 del candidato (vea las notas del candidato).",
+  "Expenditure payees have no type code in the filings. Payees were judged to be individual people by name and aggregated as \"Payments to individuals\" (or \"Refunds to individual contributors\"); a few business names that are personal names could be misjudged.": "En los informes, a quién se le pagó no viene con un tipo. Por el nombre decidimos quiénes eran personas y los sumamos como \"Pagos a personas\" (o \"Devoluciones a personas que donaron\"); algunos negocios con nombre de persona pueden estar mal clasificados.",
+  "In-county vs out-of-county is based on the city/ZIP filed for each individual contribution (Bay County cities and ZIPs). Contributions with no address filed are counted as location_unknown.": "Dentro o fuera del condado depende de la ciudad o el código postal que se dio en cada donación de una persona (ciudades y códigos postales del Condado de Bay). Las donaciones sin dirección se cuentan como de lugar desconocido."
+ },
+ "html": [
+  [
+   "<span class=\"eyebrow\">Get involved · 2026 elections</span><h1>Who's running in 2026</h1>",
+   "<span class=\"eyebrow\">Participe · Elecciones 2026</span><h1>Quiénes son candidatos en 2026</h1>"
+  ],
+  [
+   "<p class=\"lede\">Every local race on Bay County ballots this year: the candidates, what they say they'll do in their own words, links to their campaigns, and where their campaign money comes from. BayCounty.me doesn't endorse or rate candidates.</p>",
+   "<p class=\"lede\">Cada contienda local en las boletas del Condado de Bay este año: los candidatos, lo que dicen que harán, enlaces a sus campañas y de dónde viene el dinero de su campaña. BayCounty.me no apoya ni califica a ningún candidato.</p>"
+  ],
+  [
+   "rel=\"noopener\">Supervisor of Elections ↗</a>",
+   "rel=\"noopener\">Supervisor de Elecciones (en inglés) ↗</a>"
+  ],
+  [
+   "<span class=\"eyebrow\">On the Nov. 3 ballot</span>",
+   "<span class=\"eyebrow\">En la boleta del 3 de noviembre</span>"
+  ],
+  [
+   "<span class=\"s\">local races · ",
+   "<span class=\"s\">contiendas locales · "
+  ],
+  [
+   " candidates</span>",
+   " candidatos</span>"
+  ],
+  [
+   "<span class=\"eyebrow\">Raised so far</span>",
+   "<span class=\"eyebrow\">Recaudado hasta ahora</span>"
+  ],
+  [
+   "<span class=\"s\">by candidates in those races</span>",
+   "<span class=\"s\">por los candidatos de esas contiendas</span>"
+  ],
+  [
+   "<span class=\"eyebrow\">Already decided</span>",
+   "<span class=\"eyebrow\">Ya decididas</span>"
+  ],
+  [
+   "<span class=\"s\">won in the primary, unopposed or earlier in 2026</span>",
+   "<span class=\"s\">ganadas en la primaria, sin oposición o antes en 2026</span>"
+  ],
+  [
+   "<div class=\"callout\">To check your registration, find your polling place or see your sample ballot, use the <a href=\"https://www.bayvotesfl.gov/\" target=\"_blank\" rel=\"noopener\">Bay County Supervisor of Elections</a> or <a href=\"https://vote.gov\" target=\"_blank\" rel=\"noopener\">vote.gov</a>. <a href=\"/my-address\">My Address</a> shows your County Commission and School Board districts.</div>",
+   "<div class=\"callout\">Para revisar su inscripción, buscar dónde votar o ver su boleta de muestra, use el sitio del <a href=\"https://www.bayvotesfl.gov/\" target=\"_blank\" rel=\"noopener\">Supervisor de Elecciones del Condado de Bay (Bay County Supervisor of Elections)</a> o <a href=\"https://vote.gov/es/\" target=\"_blank\" rel=\"noopener\">vote.gov en español</a>. <a href=\"/es/mi-direccion\">Mi dirección</a> le dice sus distritos de la Comisión del Condado y de la Junta Escolar.</div>"
+  ],
+  [
+   "<a href=\"#active\">On the ballot</a>",
+   "<a href=\"#active\">En la boleta</a>"
+  ],
+  [
+   "<a href=\"#next\">April 2027</a>",
+   "<a href=\"#next\">Abril de 2027</a>"
+  ],
+  [
+   "<a href=\"#decided\">Already decided</a>",
+   "<a href=\"#decided\">Ya decididas</a>"
+  ],
+  [
+   "<a href=\"#how\">How we did this</a>",
+   "<a href=\"#how\">Cómo lo hicimos</a>"
+  ],
+  [
+   "<option value=\"\">All races</option>",
+   "<option value=\"\">Todas las contiendas</option>"
+  ],
+  [
+   "<h2>On the November 3 ballot</h2><span class=\"muted\">Candidates in alphabetical order</span>",
+   "<h2>En la boleta del 3 de noviembre</h2><span class=\"muted\">Candidatos en orden alfabético</span>"
+  ],
+  [
+   "<p class=\"muted\">No local races found on the ballot.</p>",
+   "<p class=\"muted\">No encontramos contiendas locales en la boleta.</p>"
+  ],
+  [
+   "<h2>Already running for April 2027</h2><span class=\"muted\">City elections: candidates who have opened a campaign</span>",
+   "<h2>Ya son candidatos para abril de 2027</h2><span class=\"muted\">Elecciones de ciudades: candidatos que ya abrieron una campaña</span>"
+  ],
+  [
+   "<h2>Already decided in 2026</h2><span class=\"muted\">Shown separately: these campaigns are over</span>",
+   "<h2>Ya decididas en 2026</h2><span class=\"muted\">Aparte, porque estas campañas ya terminaron</span>"
+  ],
+  [
+   "<p class=\"muted\">None.</p>",
+   "<p class=\"muted\">Ninguna.</p>"
+  ],
+  [
+   "<h2>How we did this</h2>",
+   "<h2>Cómo lo hicimos</h2>"
+  ],
+  [
+   "<p><b>Platforms</b> are summarized only from each candidate's own campaign website, campaign social pages or questionnaire answers they wrote, with links to each source. If we couldn't find a statement from the candidate, we say so rather than fill in from news coverage. Candidates are listed alphabetically.</p>",
+   "<p><b>Las propuestas</b> son resúmenes hechos solo con el sitio de campaña de cada candidato, sus páginas de campaña en redes sociales o las respuestas que escribió en cuestionarios, con enlaces a cada fuente. En esta página en español, esos resúmenes están traducidos; las fuentes están en inglés. Si no encontramos nada escrito por el candidato, lo decimos en vez de llenar con noticias. Los candidatos están en orden alfabético.</p>"
+  ],
+  [
+   "<p><b>Money</b> comes from the campaign reports candidates file with the Bay County Supervisor of Elections, through the date shown. Organizations are listed by name; gifts from individual people are counted and totaled, and every name is in the linked report. Florida caps gifts to local candidates at $1,000 per person or business per election.</p>",
+   "<p><b>El dinero</b> viene de los informes de campaña que los candidatos entregan al Supervisor de Elecciones del Condado de Bay, hasta la fecha que se muestra. Las organizaciones aparecen con su nombre; las donaciones de personas se cuentan y se suman, y todos los nombres están en el informe enlazado. En Florida, una persona o un negocio puede dar como máximo $1,000 a un candidato local por elección.</p>"
+  ],
+  [
+   "<p>Sitting officials' past campaigns are on the <a href=\"/public-money/campaign-money\">Campaign Money</a> page.</p>",
+   "<p>Las campañas pasadas de los funcionarios actuales están en la página <a href=\"/public-money/campaign-money\" hreflang=\"en\">Campaign Money</a> (en inglés).</p>"
+  ],
+  [
+   "<summary>What we couldn't find</summary>",
+   "<summary>Lo que no pudimos encontrar</summary>"
+  ],
+  [
+   "<span class=\"badge\">Incumbent</span>",
+   "<span class=\"badge\">En el cargo</span>"
+  ],
+  [
+   "rel=\"noopener\">Campaign website</a>",
+   "rel=\"noopener\">Sitio de campaña</a>"
+  ],
+  [
+   "<h5>In their words</h5>",
+   "<h5>Lo que dice (resumen traducido)</h5>"
+  ],
+  [
+   ">No platform statement found.</p>",
+   ">No encontramos una declaración de propuestas.</p>"
+  ],
+  [
+   "<h5>Campaign money</h5>",
+   "<h5>Dinero de campaña</h5>"
+  ],
+  [
+   "No campaign finance report found for this candidate in the Supervisor of Elections system.",
+   "No encontramos un informe de finanzas de campaña de este candidato en el sistema del Supervisor de Elecciones."
+  ],
+  [
+   " from organizations</li>",
+   " de organizaciones</li>"
+  ],
+  [
+   " of the total is in-kind (goods or services)</li>",
+   " del total es en especie (cosas o servicios)</li>"
+  ],
+  [
+   "<small>Business</small>",
+   "<small>Negocio</small>"
+  ],
+  [
+   "<small>Political committee</small>",
+   "<small>Comité político</small>"
+  ],
+  [
+   "<small>Party</small>",
+   "<small>Partido</small>"
+  ],
+  [
+   "<small>Committee</small>",
+   "<small>Comité</small>"
+  ],
+  [
+   "<small>Other</small>",
+   "<small>Otro</small>"
+  ],
+  [
+   "<p class=\"small muted\">None reported.</p>",
+   "<p class=\"small muted\">No reportó ninguna.</p>"
+  ],
+  [
+   "Individual donors are counted, not named, on this site.",
+   "En este sitio contamos a las personas que donan, pero no damos sus nombres."
+  ],
+  [
+   " By size: ",
+   " Por cantidad: "
+  ],
+  [
+   "under_100: ",
+   "menos de $100: "
+  ],
+  [
+   "100_499: ",
+   "$100 a $499: "
+  ],
+  [
+   "500_999: ",
+   "$500 a $999: "
+  ],
+  [
+   "1000_plus: ",
+   "$1,000 o más: "
+  ],
+  [
+   " Every name is in the <a href=",
+   " Todos los nombres están en el <a href="
+  ],
+  [
+   ">full report</a>.</p></details>",
+   ">informe completo</a> (en inglés).</p></details>"
+  ],
+  [
+   "<summary>Where the money went</summary>",
+   "<summary>En qué se gastó el dinero <span class=\"muted small\">(con la descripción tal como está en el informe, en inglés)</span></summary>"
+  ],
+  [
+   "<th scope=\"row\">Payments to individuals<small>",
+   "<th scope=\"row\">Pagos a personas<small>"
+  ],
+  [
+   "<th scope=\"row\">Payments to the candidate (loan repayments, reimbursements, surplus returned)<small>",
+   "<th scope=\"row\">Pagos al candidato (devolución de préstamos, reembolsos, dinero sobrante)<small>"
+  ],
+  [
+   "<th scope=\"row\">Refunds to individual contributors<small>",
+   "<th scope=\"row\">Devoluciones a personas que donaron<small>"
+  ],
+  [
+   "rel=\"noopener\">Campaign finance report</a>",
+   "rel=\"noopener\">Informe de finanzas de campaña</a>"
+  ],
+  [
+   "rel=\"noopener\">Itemized download</a>",
+   "rel=\"noopener\">Descarga detallada</a>"
+  ],
+  [
+   "rel=\"noopener\">Official results</a>",
+   "rel=\"noopener\">Resultados oficiales</a>"
+  ],
+  [
+   "Decided in the Aug. 18 primary",
+   "Se decidió en la primaria del 18 de agosto"
+  ],
+  [
+   "Decided earlier in 2026",
+   "Se decidió antes, en 2026"
+  ],
+  [
+   " (not a candidate)",
+   " (no es candidato)"
+  ],
+  [
+   " (appointed)",
+   " (nombrado)"
+  ],
+  [
+   "<span class=\"badge\">Withdrew</span>",
+   "<span class=\"badge\">Se retiró</span>"
+  ],
+  [
+   "Filed with the Supervisor of Elections for the April 20, 2027 city election. Qualifying hasn't happened yet, so more candidates may file.",
+   "Se inscribió ante el Supervisor de Elecciones para la elección de la ciudad del 20 de abril de 2027. La inscripción final todavía no ha pasado, así que pueden llegar más candidatos."
+  ]
+ ],
+ "re": [
+  [
+   "</b> raised · (\\$[\\d,]+|—) spent <span class=\"muted small\">through ([^<]*)</span>",
+   "</b> recaudados · \\1 gastados <span class=\"muted small\">hasta \\2</span>"
+  ],
+  [
+   " from (\\d+) individuals</li>",
+   " de \\1 personas</li>"
+  ],
+  [
+   " own money \\(incl\\. (\\$[\\d,]+) in loans\\)</li>",
+   " de dinero propio (incluye \\1 en préstamos)</li>"
+  ],
+  [
+   " own money</li>",
+   " de dinero propio</li>"
+  ],
+  [
+   "<summary>Every organization donor \\((\\d+)\\)</summary>",
+   "<summary>Todas las organizaciones que donaron (\\1)</summary>"
+  ],
+  [
+   " (\\d+) gave from inside Bay County \\((\\$[\\d,]+)\\), (\\d+) from outside \\((\\$[\\d,]+)\\)\\.",
+   " \\1 donaron desde el Condado de Bay (\\2) y \\3 desde fuera (\\4)."
+  ],
+  [
+   ">Source (\\d+)</a>",
+   ">Fuente \\1</a>"
+  ],
+  [
+   "<summary>Also ran: ",
+   "<summary>También compitieron: "
+  ],
+  [
+   "<summary>Also filed: ",
+   "<summary>También se inscribieron: "
+  ],
+  [
+   "Incumbent: ",
+   "En el cargo: "
+  ],
+  [
+   "(?<=[>\\s])Nonpartisan(?= ·|</p>)",
+   "Sin partido"
+  ],
+  [
+   "(?<=[>\\s])Partisan(?= ·|</p>)",
+   "Con partido"
+  ],
+  [
+   "(?<=[>\\s])Elected unopposed(?= ·|</p>|</span>)",
+   "Elegido sin oposición"
+  ]
+ ]
+}
