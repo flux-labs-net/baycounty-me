@@ -16,7 +16,7 @@ function summarize({runs = [], counts = {}, openErrors = 0, now = new Date(), in
     if (last.status === 'failed') problems.push({level: 'error', text: `The last run failed: ${last.notes || 'no details'}`});
     if (hrs(last.finished_at || last.started_at) > 26) problems.push({level: 'error', text: `No agenda run in ${Math.round(hrs(last.finished_at || last.started_at))} hours (the workflow may be off).`});
   }
-  if (inboxConfigured && last && !lastInbox) problems.push({level: 'warn', text: 'No inbox check on record yet (sweeps only). Check the POP_* secrets.'});
+  if (inboxConfigured && last && !lastInbox) problems.push({level: 'warn', text: 'No inbox check on record yet (sweeps only). Check RESEND_FULL_KEY (or the POP_* secrets) in GitHub.'});
   if (openErrors) problems.push({level: 'warn', text: `${openErrors} unresolved ingestion error${openErrors === 1 ? '' : 's'} in the last 7 days.`});
   if (counts.unmatched) problems.push({level: 'warn', text: `${counts.unmatched} email${counts.unmatched === 1 ? '' : 's'} in the last 7 days didn’t match any government. Check the sender below.`});
   return {last_run: last, last_inbox: lastInbox, problems};
@@ -75,12 +75,13 @@ async function resolveError(id, all) {
 }
 
 // Ask GitHub to run the watcher now (needs GITHUB_DISPATCH_TOKEN in Vercel: a fine-grained token with Actions: write on the repo).
-async function runNow(mode = 'both', only = '') {
+async function runNow(mode = 'both', only = '', emailId = '') {
   const tok = process.env.GITHUB_DISPATCH_TOKEN;
   if (!tok) throw Object.assign(new Error('Set GITHUB_DISPATCH_TOKEN in Vercel to run the watcher from here, or use the Workflow runs link.'), {status: 409});
   const r = await fetch('https://api.github.com/repos/jeremymcs/baycounty-me/actions/workflows/watch-agendas.yml/dispatches', {
     method: 'POST', headers: {Authorization: `Bearer ${tok}`, Accept: 'application/vnd.github+json', 'User-Agent': 'baycounty-me-admin'},
-    body: JSON.stringify({ref: 'main', inputs: {mode: ['inbox', 'sweep', 'both'].includes(mode) ? mode : 'both', only: String(only).replace(/[^a-z,-]/g, '')}})});
+    body: JSON.stringify({ref: 'main', inputs: {mode: ['inbox', 'sweep', 'both'].includes(mode) ? mode : 'both', only: String(only).replace(/[^a-z,-]/g, ''),
+      email_id: String(emailId || '').replace(/[^A-Za-z0-9-]/g, '').slice(0, 64)}})});
   if (r.status !== 204) throw Object.assign(new Error(`GitHub said ${r.status}: ${(await r.text()).slice(0, 200)}`), {status: 502});
   return {started: true};
 }

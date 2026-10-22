@@ -2,8 +2,10 @@
 # working day and rescans whatever government a notice email points at; sweeps every source twice a day.
 # New or changed files are stored, logged for /admin (Agendas tab), emailed to the admins, and kick off the
 # meetings refresh so the site picks them up.
-# Secrets: DATABASE_URL, POP_HOST, POP_USER, POP_PASS, SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY,
-#          RESEND_FULL_KEY, ADMIN_EMAILS. Optional repository variable POP_DELETE=1.
+# The Resend inbound webhook (api/agenda-inbound.js) also starts this workflow the moment a notice arrives.
+# Secrets: DATABASE_URL, SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, RESEND_FULL_KEY (also reads received mail),
+#          ADMIN_EMAILS. Optional: POP_HOST, POP_USER, POP_PASS (a POP3 mailbox as well as / instead of Resend);
+#          repository variables AGENDA_INBOX (default ingest@baycounty.me) and POP_DELETE=1.
 name: Watch agendas
 on:
   schedule:
@@ -16,6 +18,9 @@ on:
         default: both
       only:
         description: 'Limit to sources (comma list: pc,cw,lh,county,pcb,sp,parker,mb). Blank = all.'
+        default: ''
+      email_id:
+        description: 'Resend received-email id (set by the inbound webhook). Blank = none.'
         default: ''
 permissions:
   contents: read
@@ -49,6 +54,8 @@ jobs:
           SCHEDULE: ${{ github.event.schedule }}
           MODE: ${{ inputs.mode }}
           ONLY: ${{ inputs.only }}
+          EMAIL_ID: ${{ inputs.email_id }}
+          AGENDA_INBOX: ${{ vars.AGENDA_INBOX }}
         run: |
           args=""
           case "${MODE:-}" in
@@ -56,6 +63,7 @@ jobs:
             *) if [ "$SCHEDULE" = "7 12,22 * * *" ]; then args="--sweep"; else args="--inbox"; fi ;;
           esac
           [ -n "$ONLY" ] && args="$args --only $ONLY"
+          [ -n "$EMAIL_ID" ] && args="$args --email-id $EMAIL_ID"
           python data/agendas/watch_agendas.py $args
       - name: Refresh meetings when something new landed
         if: steps.watch.outputs.new_docs != '0' || steps.watch.outputs.updated_docs != '0'
