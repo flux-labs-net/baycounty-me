@@ -302,7 +302,9 @@
     const c = r.counts;
     $('#ag-tiles').innerHTML = [[r.last_inbox ? when(r.last_inbox.finished_at || r.last_inbox.started_at).replace(/<[^>]+>/g, '') : 'Never', 'Last inbox check'],
       [fmt(c.notices_7d), 'Notice emails, 7 days'], [fmt(c.new_7d), 'New documents, 7 days'], [fmt(c.updated_7d), 'Amended documents, 7 days'],
-      [fmt(c.documents), 'Documents tracked'], [fmt(c.open_errors), 'Open errors']].map(([v, l]) => `<div class="tile"><b>${v}</b><span>${l}</span></div>`).join('');
+      [fmt(c.documents), 'Documents tracked'], [fmt(c.open_errors), 'Open errors'],
+      ...(c.extract ? [[fmt(c.extract.items_7d), `Items read from ${fmt(c.extract.read_7d)} agenda${c.extract.read_7d === 1 ? '' : 's'}, 7 days`],
+        [fmt(c.extract.waiting), 'Agendas waiting to be read'], ['$' + Number(c.extract.cost_7d || 0).toFixed(2), 'Reading cost, 7 days (estimate)']] : [])].map(([v, l]) => `<div class="tile"><b>${v}</b><span>${l}</span></div>`).join('');
     if (!agBoardsLoaded && r.boards.length) {
       $('#ag-board').innerHTML = '<option value="">All boards</option>' + r.boards.map(b => `<option value="${esc(b.board)}">${esc(b.board)} (${fmt(b.n)})</option>`).join('');
       $('#ag-board').value = params.board; agBoardsLoaded = true;
@@ -311,7 +313,9 @@
       const files = d.versions.map((v, i) => `<button class="btn" type="button" data-ver="${v.id}" style="min-height:28px;padding:0 8px;font-size:.78rem" title="${esc(stamp(v.fetched_at))} · ${esc(v.sha256.slice(0, 12))}">${i === 0 ? 'Latest' : 'v' + (d.versions.length - i)}${v.stored ? '' : ' ↗'}</button>`).join(' ');
       return `<tr><td class="small" style="white-space:nowrap">${when(d.last_changed_at || d.first_seen_at)}</td><td class="mono small">${esc(d.board || d.source_key)}</td>
         <td><b>${esc(d.title || d.kind)}</b><div class="muted small">${esc(d.kind)}${d.bytes ? ' · ' + kb(d.bytes) : ''} · <a href="${esc(/^https?:/.test(d.url) ? d.url : '#')}" target="_blank" rel="noopener">${esc(shortUrl(d.url))}</a></div>${d.error ? `<div class="small" style="color:var(--bad)">${esc(d.error)}</div>` : ''}</td>
-        <td class="small" style="white-space:nowrap">${day(d.meeting_date)}</td><td><span class="pill ${esc(d.status)}">${AG_STATUS[d.status] || esc(d.status)}</span></td>
+        <td class="small" style="white-space:nowrap">${day(d.meeting_date)}</td><td><span class="pill ${esc(d.status)}">${AG_STATUS[d.status] || esc(d.status)}</span>${d.extraction ? (d.extraction.status === 'ok'
+          ? `<div><button class="btn" type="button" data-ext="${d.extraction.id}" style="min-height:26px;padding:0 8px;font-size:.76rem;margin-top:4px">${fmt(d.extraction.items)} item${d.extraction.items === 1 ? '' : 's'}</button></div>`
+          : `<div class="small muted" title="${esc(d.extraction.error || '')}">${d.extraction.status === 'no_text' ? 'No text (scanned)' : 'Not read: ' + esc(d.extraction.status)}</div>`) : ''}</td>
         <td class="num">${fmt(d.version_count)}</td><td style="white-space:nowrap">${files || '<span class="muted small">None</span>'}</td></tr>`;
     }).join('') || '<tr><td colspan="7" class="empty">No documents in this window.</td></tr>';
     $('#ag-notices tbody').innerHTML = r.notices.map(n => `<tr><td class="small" style="white-space:nowrap">${n.received_at ? stamp(n.received_at) : when(n.pulled_at)}</td>
@@ -334,6 +338,26 @@
     const w = window.open('', '_blank');
     try { const j = await api('agenda_file', {params: {id: b.dataset.ver}}); if (j.url) w.location = j.url; else { w.close(); alert('This file wasn’t stored and has no public link.'); } }
     catch (err) { w.close(); alert(err.message); }
+  });
+
+  const money = n => n == null ? '' : '$' + Number(n).toLocaleString('en-US', {maximumFractionDigits: 0});
+  $('#ag-docs').addEventListener('click', async e => {
+    const b = e.target.closest('[data-ext]'); if (!b) return;
+    const tr = b.closest('tr'), next = tr.nextElementSibling;
+    if (next && next.classList.contains('ag-items')) { next.remove(); return; }
+    const row = document.createElement('tr'); row.className = 'ag-items';
+    row.innerHTML = '<td colspan="7" class="small muted">Loading…</td>'; tr.after(row);
+    try {
+      const r = await api('agenda_items', {params: {id: b.dataset.ext}}), x = r.extraction;
+      const head = [x.meeting_body, x.meeting_date && day(x.meeting_date), x.meeting_time, x.meeting_location].filter(Boolean).map(esc).join(' · ');
+      row.innerHTML = `<td colspan="7" style="background:var(--bg)"><div class="small muted" style="margin-bottom:8px">${head}${x.model ? ` · read by ${esc(x.model)}` : ''}${x.cost_usd != null ? ` · about $${Number(x.cost_usd).toFixed(3)}` : ''}${x.text_truncated ? ' · text was cut short' : ''}</div>
+        <table class="at" data-tt="off"><thead><tr><th>#</th><th>Item</th><th>Kind</th><th class="num">Amount</th><th>Parties / places</th></tr></thead><tbody>${r.items.map(i => `<tr>
+          <td class="mono small" style="white-space:nowrap">${esc(i.item_number || '')}</td>
+          <td><b>${esc(i.title)}</b>${i.summary ? `<div class="small muted">${esc(i.summary)}</div>` : ''}${i.section ? `<div class="small muted">${esc(i.section)}</div>` : ''}</td>
+          <td class="small">${esc((i.kind || '').replace(/_/g, ' '))}</td>
+          <td class="num small" style="white-space:nowrap" title="${esc((i.amounts || []).map(a => a.text).join(', '))}">${money(i.total_amount)}</td>
+          <td class="small">${esc([...(i.parties || []), ...(i.addresses || [])].join('; '))}</td></tr>`).join('') || '<tr><td colspan="5" class="empty">No substantive items.</td></tr>'}</tbody></table></td>`;
+    } catch (err) { row.innerHTML = `<td colspan="7" class="small" style="color:var(--bad)">${esc(err.message)}</td>`; }
   });
   $('#ag-errors').addEventListener('click', async e => {
     const b = e.target.closest('[data-resolve]'); if (!b) return;
