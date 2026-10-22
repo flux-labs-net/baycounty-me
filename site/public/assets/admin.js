@@ -34,7 +34,7 @@
   $('#signout').addEventListener('click', async () => { await api('logout', {method: 'POST'}).catch(() => {}); location.href = '/admin'; });
 
   // ---------- tabs ----------
-  const loaders = {keys: loadKeys, analytics: loadStats, logs: () => loadLogs(true), settings: loadSettings, ingestion: loadIngestion, agendas: loadAgendas, emails: loadEmails};
+  const loaders = {keys: loadKeys, analytics: loadStats, logs: () => loadLogs(true), settings: loadSettings, ingestion: loadIngestion, agendas: loadAgendas, sent: loadSent, emails: loadEmails};
   function tab(name) {
     document.querySelectorAll('[role=tab][data-tab]').forEach(b => b.setAttribute('aria-selected', String(b.dataset.tab === name)));
     document.querySelectorAll('[role=tabpanel]').forEach(p => { p.hidden = p.id !== 'tab-' + name; });
@@ -348,6 +348,56 @@
     try { await api('agenda_run', {method: 'POST', body: {mode: 'both'}}); b.textContent = 'Started'; setTimeout(() => { b.textContent = 'Run now'; b.disabled = false; loadAgendas(); }, 60000); }
     catch (err) { alert(err.message); b.disabled = false; }
   });
+
+  // ---------- sent mail ----------
+  let SE = null, seTimer = null;
+  const seLabel = st => (SE && SE.labels[st]) || st;
+  async function loadSent() {
+    const params = {days: $('#se-days').value, domain: $('#se-domain').value, status: $('#se-status').value, q: $('#se-q').value};
+    try { SE = await api('sent', {params}); }
+    catch (e) { $('#se-banner').innerHTML = `<div class="banner bad"><div><b>Couldn’t load sent mail.</b><div class="small muted">${esc(e.message)}</div></div></div>`; return; }
+    const c = SE.counts, pct = n => c.total ? Math.round(100 * n / c.total) + '%' : '—';
+    $('#se-banner').innerHTML = c.problems
+      ? `<div class="banner bad"><div><b>${fmt(c.problems)} email${c.problems === 1 ? '' : 's'} with a delivery problem</b> <span class="small muted">(bounced, marked as spam, failed, suppressed or delayed). Choose “Problems only” to see them.</span></div></div>`
+      : `<div class="banner good"><div><b>No delivery problems</b> <span class="small muted">in this window. Checked ${when(SE.checked_at)}.</span></div></div>`;
+    $('#se-tiles').innerHTML = [[fmt(c.total), 'Sent'], [fmt(c.reached), `Delivered (${pct(c.reached)})`], [fmt(c.by.bounced || 0), 'Bounced'],
+      [fmt(c.by.complained || 0), 'Marked as spam'], [fmt(c.by.delivery_delayed || 0), 'Delayed'], [fmt((c.by.sent || 0) + (c.by.queued || 0) + (c.by.scheduled || 0)), 'Not yet delivered']]
+      .map(([v, l]) => `<div class="tile"><b>${v}</b><span>${l}</span></div>`).join('');
+    const stSel = $('#se-status'), cur = stSel.value;
+    stSel.innerHTML = '<option value="">Any status</option><option value="problems">Problems only</option>' +
+      Object.entries(c.by).sort((a, b) => b[1] - a[1]).map(([k, n]) => `<option value="${esc(k)}">${esc(seLabel(k))} (${fmt(n)})</option>`).join('');
+    stSel.value = cur;
+    const dSel = $('#se-domain'), dCur = dSel.value;
+    dSel.innerHTML = SE.domains.map(d => `<option value="${esc(d)}">${esc(d)}</option>`).join('') + '<option value="">All domains</option>';
+    dSel.value = dCur;
+    $('#se-table tbody').innerHTML = SE.rows.map(r => `<tr><td class="small" style="white-space:nowrap" title="${esc(new Date(r.created_at).toLocaleString())}">${when(r.created_at)}</td>
+      <td class="small" style="max-width:220px;word-break:break-word">${esc(r.to.join(', '))}</td><td><b>${esc(r.subject || '(no subject)')}</b></td>
+      <td class="small muted" style="max-width:200px;word-break:break-word">${esc(r.from)}</td>
+      <td><span class="pill ${esc(r.status)}">${esc(seLabel(r.status))}</span></td>
+      <td><button class="btn" type="button" data-se="${esc(r.id)}" style="min-height:28px;padding:0 8px;font-size:.78rem">View</button></td></tr>`).join('')
+      || '<tr><td colspan="6" class="empty">No emails match.</td></tr>';
+    $('#se-foot').textContent = `Showing ${fmt(SE.rows.length)} of ${fmt(c.total)} in this window. ` +
+      (SE.capped ? `Only the ${fmt(SE.fetched)} most recent sends are loaded (back to ${new Date(SE.oldest_fetched).toLocaleDateString()}); use the Resend dashboard for older mail.` : '');
+  }
+  async function showSent(id) {
+    const box = $('#se-detail'); box.hidden = false; box.innerHTML = '<p class="muted small" style="margin:0">Loading…</p>';
+    try {
+      const d = await api('sent_detail', {params: {id}});
+      const row = (k, v) => v && (!Array.isArray(v) || v.length) ? `<dt>${k}</dt><dd>${esc(Array.isArray(v) ? v.join(', ') : v)}</dd>` : '';
+      box.innerHTML = `<div class="row" style="margin-bottom:10px"><h3 class="grow" style="font:600 .95rem var(--f-display);margin:0">${esc(d.subject || '(no subject)')}</h3>
+        <span class="pill ${esc(d.status)}">${esc(seLabel(d.status))}</span><button class="btn" type="button" id="se-close" style="min-height:30px">Close</button></div>
+        <dl>${row('Sent', new Date(d.created_at).toLocaleString())}${row('From', d.from)}${row('To', d.to)}${row('Cc', d.cc)}${row('Bcc', d.bcc)}${row('Reply-to', d.reply_to)}
+        ${row('Tags', (d.tags || []).map(t => t.name + '=' + t.value))}${row('Resend id', d.id)}</dl>
+        ${d.html ? '<iframe sandbox="" title="Email preview"></iframe>' : `<pre class="small" style="white-space:pre-wrap">${esc(d.text || '(no body)')}</pre>`}`;
+      if (d.html) box.querySelector('iframe').srcdoc = d.html;
+      $('#se-close').addEventListener('click', () => { box.hidden = true; });
+      box.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+    } catch (e) { box.innerHTML = `<p class="small" style="color:var(--bad);margin:0">${esc(e.message)}</p>`; }
+  }
+  $('#se-table').addEventListener('click', e => { const b = e.target.closest('[data-se]'); if (b) showSent(b.dataset.se); });
+  $('#se-refresh').addEventListener('click', loadSent);
+  ['#se-days', '#se-domain', '#se-status'].forEach(s => $(s).addEventListener('change', loadSent));
+  $('#se-q').addEventListener('input', () => { clearTimeout(seTimer); seTimer = setTimeout(loadSent, 300); });
 
   // ---------- email previews ----------
   let EM = null, emCur = null, emView = 'html', emReq = 0;

@@ -87,6 +87,10 @@ dialog h2{font:600 1.05rem var(--f-display);margin:0}
 .pill.new{color:var(--blue)} .pill.updated{color:var(--warn)} .pill.unchanged{color:var(--muted)} .pill.processed{color:var(--ok)} .pill.unmatched{color:var(--warn)} .pill.pending{color:var(--muted)}
 details.ag summary{cursor:pointer;color:var(--blue)} details.ag pre{white-space:pre-wrap;max-height:260px;overflow:auto;font-size:.8rem;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px;margin:6px 0 0}
 .ag-links{display:flex;flex-direction:column;gap:2px;max-width:420px;word-break:break-all}
+.pill.delivered{color:var(--ok)} .pill.opened,.pill.clicked{color:var(--ok)} .pill.sent,.pill.queued,.pill.scheduled{color:var(--muted)}
+.pill.bounced,.pill.complained,.pill.suppressed{color:var(--bad)} .pill.delivery_delayed{color:var(--warn)} .pill.canceled{color:var(--muted)}
+#se-detail iframe{width:100%;height:520px;border:1px solid var(--line);border-radius:8px;background:#fff}
+#se-detail dl{display:grid;grid-template-columns:max-content 1fr;gap:4px 12px;margin:0 0 12px;font-size:.86rem} #se-detail dt{color:var(--muted)} #se-detail dd{margin:0;word-break:break-word}
 .banner.good{border-left-color:var(--ok)} .banner.bad{border-left-color:var(--bad)}
 .banner ul{margin:6px 0 0;padding-left:18px} .banner li{margin:2px 0}
 .sched{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 16px;font-size:.88rem}
@@ -131,6 +135,7 @@ details.ag summary{cursor:pointer;color:var(--blue)} details.ag pre{white-space:
       <button role="tab" data-tab="settings" aria-selected="false">Throttles &amp; settings</button>
       <button role="tab" data-tab="ingestion" aria-selected="false">Ingestion</button>
       <button role="tab" data-tab="agendas" aria-selected="false">Agendas</button>
+      <button role="tab" data-tab="sent" aria-selected="false">Sent mail</button>
       <button role="tab" data-tab="emails" aria-selected="false">Emails</button>
     </div>
 
@@ -221,6 +226,23 @@ details.ag summary{cursor:pointer;color:var(--blue)} details.ag pre{white-space:
       <div class="tw"><table class="at" id="ag-errors" data-tt="off"><thead><tr><th>Time</th><th>Stage</th><th>Source</th><th>Error</th><th></th></tr></thead><tbody></tbody></table></div>
       <h2 class="h2">Runs</h2>
       <div class="tw"><table class="at" id="ag-runs" data-tt="off"><thead><tr><th>Started</th><th>Status</th><th class="num">Files checked</th><th>Summary</th></tr></thead><tbody></tbody></table></div>
+    </section>
+
+    <section id="tab-sent" role="tabpanel" hidden>
+      <div class="row" style="margin-bottom:12px"><p class="muted small grow" style="margin:0">Every email sent through Resend (alerts, digests, sign-in links, agenda summaries) and its latest delivery status. Resend reports only the most recent event for each email. Open and click tracking are off for baycounty.me, so delivered is the best status you’ll see.</p>
+        <a class="btn" href="https://resend.com/emails" target="_blank" rel="noopener">Resend dashboard</a><button class="btn" id="se-refresh" type="button">Refresh</button></div>
+      <div id="se-banner"></div>
+      <div class="tiles" id="se-tiles"></div>
+      <div class="row" style="gap:8px;flex-wrap:wrap;margin:18px 0 8px">
+        <h2 class="h2 grow" style="margin:0">Emails</h2>
+        <input class="sel" id="se-q" type="search" placeholder="Search to, from, subject" aria-label="Search" style="min-width:200px">
+        <select class="sel" id="se-status" aria-label="Status"><option value="">Any status</option><option value="problems">Problems only</option></select>
+        <select class="sel" id="se-domain" aria-label="Sending domain"><option value="baycounty.me">baycounty.me</option><option value="">All domains</option></select>
+        <select class="sel" id="se-days" aria-label="Window"><option value="1">Last 24 hours</option><option value="7" selected>Last 7 days</option><option value="30">Last 30 days</option><option value="90">Last 90 days</option></select>
+      </div>
+      <div class="card" id="se-detail" hidden style="margin-bottom:14px"></div>
+      <div class="tw"><table class="at" id="se-table" data-tt="off"><thead><tr><th>Sent</th><th>To</th><th>Subject</th><th>From</th><th>Status</th><th></th></tr></thead><tbody></tbody></table></div>
+      <p class="muted small" id="se-foot"></p>
     </section>
 
     <section id="tab-emails" role="tabpanel" hidden>
