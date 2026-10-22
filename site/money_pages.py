@@ -280,7 +280,7 @@ def payments_page():
       <div class="kpi"><span class="eyebrow">Payees</span><span class="v">{a["vendor_count_total"]}</span><span class="s">{e(listed)} shown</span></div>
       <div class="kpi"><span class="eyebrow">Checked</span><span class="v">{e(a["reconciliation_summary"].split(" match")[0])}</span><span class="s">months match the register's printed total</span></div>
       <div class="kpi"><span class="eyebrow">To individuals</span><span class="v">{money(ex.get("total"))}</span><span class="s">{ex.get("n_payments", 0)} payments, not named here</span></div></div>
-    <div class="tablewrap"><table class="tx-table cm-table wp-table" data-sortable data-csv="who-gets-paid-{e(a["gov"]).replace("_", "-")}"><thead><tr><th scope="col">Paid to</th><th scope="col" class="num">Total</th><th scope="col" class="num">Payments</th>{"".join(f'<th scope="col" class="num">{f}</th>' for f in fys)}</tr></thead><tbody>{rows}</tbody></table></div>
+    <div class="tablewrap"><table class="tx-table cm-table wp-table" data-tt-search="off"><thead><tr><th scope="col">Paid to</th><th scope="col" class="num">Total</th><th scope="col" class="num">Payments</th>{"".join(f'<th scope="col" class="num">{f}</th>' for f in fys)}</tr></thead><tbody>{rows}</tbody></table></div>
     <p class="note">Each amount links to that year's registers below. The registers are monthly, so a payee's total for a year comes from one or more of that year's files.</p>
     <details class="tbl-toggle"><summary>Monthly check registers ({sum(len(cov.get(f, [])) for f in fys)})</summary><ul class="plain small">{reglist}</ul><p class="note">The Clerk of Court's monthly "Check Register – Sorted by Dollar Amount," attached to County Commission agendas. Each file has a section for this agency.</p></details>
     <details class="gaps"><summary>Notes on this register ({len(a.get("notes") or [])})</summary><ul>{notes}</ul><p>{" · ".join(f'<a class="src" href="{e(u)}" target="_blank" rel="noopener">{k + 1}</a>' for k, u in enumerate(a.get("source_urls") or []))}</p></details></section>'''
@@ -288,16 +288,16 @@ def payments_page():
     return f'''<div class="page tax">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Accountability · Who gets paid</span><h1>Who gets paid: tourism agencies</h1>
     <p class="lede">Every payment by the three agencies that spend Bay County's tourist development tax on marketing, from the monthly check registers kept by the Clerk of Court. The county's own payments are on the <a href="/public-money/contracts">Contracts</a> page.</p></div>
-    <div class="stamp">{PDF_BTN}<span>Registers through October 2025</span></div></header>
+    <div class="stamp">{PDF_BTN}<span>Registers through July 2026</span></div></header>
   <section class="explain"><div class="ex-txt"><span class="eyebrow">The simple version</span><h2>Where the bed tax goes after the county</h2>
     <ol class="ex-steps"><li><b>Visitors pay a 5% bed tax</b> on hotel and rental stays. Part of it pays three agencies that market each tourism area: Panama City Beach, Panama City and Mexico Beach.</li>
-      <li><b>The Clerk pays their bills.</b> Until November 2025, each agency's payments were listed in the Clerk's monthly check register. That's what this page shows: {money(tot)} in payments over the months covered.</li>
+      <li><b>The Clerk pays their bills.</b> Each agency's payments are listed in the Clerk's monthly check register. That's what this page shows: {money(tot)} in payments over the months covered. A few months were never posted; they're listed under Sources and gaps.</li>
       <li><b>Some bills hide the details.</b> Credit card payments and payroll services show as one payment; what was bought isn't listed. Payments to individual people are counted but not named.</li></ol></div></section>
   <div class="callout">In January 2026 the Clerk of Court published an <a href="https://apps.baycoclerk.com/Web_File_Repo/bocc_finance/Panama_City_Beach_TDC_CVB_Public_CAP.pdf" target="_blank" rel="noopener">action plan for Visit Panama City Beach</a>, describing a criminal investigation and forensic audit and putting the agency's payments under the Clerk's review. The payments here are listed as recorded; this site makes no finding about any of them.</div>
   <div class="vt-filters mt-f two"><label class="vf"><span>Agency</span><select id="wpA" data-param="agency">{tabs}</select></label><label class="vf"><span>Search payees</span><input id="wpQ" type="search" placeholder="e.g. Meta, printing, hotel" data-param="q"></label></div>
   {secs}
   <section class="tx-sec method"><div class="sec-hd"><h2 id="src">Sources and gaps</h2></div>
-    <p>The Bay County Clerk of Court's monthly "Check Register – Sorted by Dollar Amount," attached to County Commission agendas. The pages are scans; they were read by OCR and each month was added up and compared with the register's printed total. A few misread amounts were corrected only where the fix made the month match.</p>
+    <p>The Bay County Clerk of Court's monthly "Check Register – Sorted by Dollar Amount," attached to County Commission agendas. Most months come from the Clerk's public records search as text PDFs; one month (December 2024) was only available as a scan and was read by OCR. Every month was added up and checked against the register's printed totals for each agency.</p>
     <p>No city or the School Board posts a check register. You can <a href="/records-request">request one</a>; the request generator has them ready.</p>
     <details class="gaps"><summary>What we couldn't find ({len(p.get("gaps") or [])})</summary><ul>{gaps}</ul></details></section>
 </div>

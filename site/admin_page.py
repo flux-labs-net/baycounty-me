@@ -93,10 +93,11 @@ def admin_page(out_dir):
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="/assets/site.css">
+<script src="/assets/tables.js" defer></script>
 <style>{CSS}</style>
 </head>
 <body>
-<div class="ad">
+<div class="ad tt-scope">
   <section id="signin" class="signin card" hidden>
     <h1>BayCounty.me admin</h1>
     <p class="muted small">Enter your admin email and we'll send you a sign-in link.</p>

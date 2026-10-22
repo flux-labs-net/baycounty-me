@@ -176,7 +176,7 @@ def who_page():
     <div class="officers">{co}</div></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="govs">Governments</h2><span class="muted">Elected boards and the staff they appoint</span></div><div class="gov-grid">{blocks}</div></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="pay">What officials are paid</h2><span class="muted">From state salary reports, budgets and contracts</span></div>
-    <div class="tablewrap"><table class="tx-table pay-table" data-sortable data-csv="bay-county-official-pay"><thead><tr><th scope="col">Position</th><th scope="col">Government</th><th scope="col" class="num">Annual</th><th scope="col">Basis</th></tr></thead><tbody>{prow}</tbody></table></div>
+    <div class="tablewrap"><table class="tx-table pay-table"><thead><tr><th scope="col">Position</th><th scope="col">Government</th><th scope="col" class="num">Annual</th><th scope="col">Basis</th></tr></thead><tbody>{prow}</tbody></table></div>
     <p class="note">Where a budget shows only one combined line for a whole city commission, that total is listed rather than divided among members.</p></section>
   <section class="tx-sec method"><div class="sec-hd"><h2 id="gaps">What we couldn't find</h2></div><ul class="plain">{gaps}</ul></section>
 </div>

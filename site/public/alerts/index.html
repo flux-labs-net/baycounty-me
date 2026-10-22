@@ -34,6 +34,8 @@
 <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};window.si=window.si||function(){(window.siq=window.siq||[]).push(arguments)};</script>
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/_vercel/speed-insights/script.js"></script>
+<script src="/assets/tables.js" defer></script>
+<script src="/assets/site.js" defer></script>
 
 </head>
 <body>
@@ -58,11 +60,33 @@
     <div class="cf-go"><button type="submit">Sign up</button><p class="cf-msg" id="alMsg" role="status" aria-live="polite"></p></div>
     <p class="cf-note">We'll email you a link to confirm first. Your address is used only for these updates, never shared or published, and every email has a one-click unsubscribe. Emails come from hello@baycounty.me.</p>
   </form>
+  <section class="tx-sec" id="rules"><div class="sec-hd"><h2>Alerts for one thing</h2></div>
+    <p>Get an email only when something specific shows up: a big contract, a vote by a board member, a street name on an agenda, or a new campaign report. We check every morning.</p>
+    <div class="al-status" id="rlStatus" hidden></div>
+    <form class="contact al-form" id="rlForm" novalidate>
+      <label class="cf-f"><span>Tell me about</span><select name="type" id="rlType">
+        <option value="contract">New contracts or change orders over an amount</option>
+        <option value="vote">Votes by a board member</option>
+        <option value="keyword">Meetings that mention a word or street</option>
+        <option value="campaign">New campaign reports for a 2026 candidate</option></select></label>
+      <div class="cf-row" data-for="contract"><label class="cf-f"><span>Government</span><select name="gov"><option value="county">Bay County</option><option value="schools">Bay District Schools</option><option value="pc">Panama City</option><option value="pcb">Panama City Beach</option><option value="lh">Lynn Haven</option><option value="cw">Callaway</option><option value="sp">Springfield</option><option value="parker">Parker</option><option value="mb">Mexico Beach</option></select></label>
+        <label class="cf-f"><span>Over this amount ($)</span><input name="min" inputmode="numeric" placeholder="100000" value="100000" maxlength="12"></label></div>
+      <label class="cf-f" data-for="vote" hidden><span>Board member</span><select name="member"><option value="Allan Branch">Allan Branch</option><option value="Andrew Kelly">Andrew Kelly</option><option value="Ann Leonard">Ann Leonard</option><option value="Bob Pelletier">Bob Pelletier</option><option value="Bobby Birdsell">Bobby Birdsell</option><option value="Brian Grainger">Brian Grainger</option><option value="Chris Moore">Chris Moore</option><option value="Cindy Hamre">Cindy Hamre</option><option value="Clair Pease">Clair Pease</option><option value="Daniel Raffield">Daniel Raffield</option><option value="Dave Lowery">Dave Lowery</option><option value="David Griggs">David Griggs</option><option value="Doug Crosby">Doug Crosby</option><option value="Douglas Moore">Douglas Moore</option><option value="Erik Fosshage">Erik Fosshage</option><option value="Ethan Register">Ethan Register</option><option value="Jack Griffis">Jack Griffis</option><option value="Jackie Kennington">Jackie Kennington</option><option value="Jamie Warrick">Jamie Warrick</option><option value="Janice Lucas">Janice Lucas</option><option value="Jason Adams">Jason Adams</option><option value="Jenna Haligas">Jenna Haligas</option><option value="Jerry Register">Jerry Register</option><option value="Jerry Smith">Jerry Smith</option><option value="Jesse Nelson">Jesse Nelson</option><option value="John Haney">John Haney</option><option value="Josh Street">Josh Street</option><option value="Judy Tinder">Judy Tinder</option><option value="Judy Vandergrift">Judy Vandergrift</option><option value="Katy Bodiford">Katy Bodiford</option><option value="Kenneth L. Ayers, Jr.">Kenneth L. Ayers, Jr.</option><option value="Linda Hamilton">Linda Hamilton</option><option value="Lisa Logan">Lisa Logan</option><option value="Mark Rega">Mark Rega</option><option value="Mark Sheldon">Mark Sheldon</option><option value="Mary Coburn">Mary Coburn</option><option value="Michael Jarman">Michael Jarman</option><option value="Michael Rohan">Michael Rohan</option><option value="Pamn Henderson">Pamn Henderson</option><option value="Pat Perno">Pat Perno</option><option value="Paul Casto">Paul Casto</option><option value="Phil Chester">Phil Chester</option><option value="Ralph Hammond">Ralph Hammond</option><option value="Richard Chval">Richard Chval</option><option value="Richard Wolff">Richard Wolff</option><option value="Robbie Hughes">Robbie Hughes</option><option value="Robert Carroll">Robert Carroll</option><option value="Ron Chaple">Ron Chaple</option><option value="Sam Peebles">Sam Peebles</option><option value="Scott Davis">Scott Davis</option><option value="Steve Cox">Steve Cox</option><option value="Steve Moss">Steve Moss</option><option value="Stuart Tettemer">Stuart Tettemer</option><option value="Tim Linderman">Tim Linderman</option><option value="Tommy Hamm">Tommy Hamm</option><option value="Tonya Barrow">Tonya Barrow</option><option value="William T. Dozier">William T. Dozier</option><option value="Winston Chester">Winston Chester</option></select></label>
+      <div class="cf-row" data-for="keyword" hidden><label class="cf-f"><span>Word or street name</span><input name="keyword" maxlength="60" placeholder="Ohio Ave"></label>
+        <label class="cf-f"><span>Government <em>(optional)</em></span><select name="kgov"><option value="">Any</option><option value="county">Bay County</option><option value="schools">Bay District Schools</option><option value="pc">Panama City</option><option value="pcb">Panama City Beach</option><option value="lh">Lynn Haven</option><option value="cw">Callaway</option><option value="sp">Springfield</option><option value="parker">Parker</option><option value="mb">Mexico Beach</option></select></label></div>
+      <label class="cf-f" data-for="campaign" hidden><span>Candidate</span><select name="candidate"><option value="Alyssa Finneyfrock">Alyssa Finneyfrock</option><option value="Bobby J. Birdsell">Bobby J. Birdsell</option><option value="Brian Rust">Brian Rust</option><option value="Carl Curti">Carl Curti</option><option value="Carlos Sanchez">Carlos Sanchez</option><option value="Carrie Ruscoe">Carrie Ruscoe</option><option value="Chris Moore">Chris Moore</option><option value="Cindy Hamre">Cindy Hamre</option><option value="Colleen Koch">Colleen Koch</option><option value="Dave Lowery">Dave Lowery</option><option value="Ginger Littleton">Ginger Littleton</option><option value="Glenn Manley">Glenn Manley</option><option value="Grant Wittstruck">Grant Wittstruck</option><option value="Greg Porta">Greg Porta</option><option value="Jackie Kennington">Jackie Kennington</option><option value="Jamie Kirkland">Jamie Kirkland</option><option value="John Haley">John Haley</option><option value="Karen Custer">Karen Custer</option><option value="Kenneth Black">Kenneth Black</option><option value="Kevin Williams">Kevin Williams</option><option value="Mary Coburn">Mary Coburn</option><option value="Michael Petty">Michael Petty</option><option value="Nick Atkinson">Nick Atkinson</option><option value="Ralph L. Hammond">Ralph L. Hammond</option><option value="Robert Carroll">Robert Carroll</option><option value="Scott Duvall">Scott Duvall</option><option value="Scott Heilmann">Scott Heilmann</option><option value="Shannon Aufdencamp">Shannon Aufdencamp</option><option value="Spring Overway">Spring Overway</option><option value="Steve Cox">Steve Cox</option><option value="Steve Moss">Steve Moss</option><option value="Sunny Reid">Sunny Reid</option><option value="Suzanne McDowell">Suzanne McDowell</option><option value="Tim Rosson">Tim Rosson</option><option value="Timothy Campbell">Timothy Campbell</option><option value="Tracy A Smith">Tracy A Smith</option></select></label>
+      <label class="cf-f"><span>Email</span><input name="email" type="email" autocomplete="email" required maxlength="200" placeholder="you@example.com"></label>
+      <label class="cf-hp" aria-hidden="true">Website <input name="website" type="text" tabindex="-1" autocomplete="off"></label>
+      <div class="cf-go"><button type="submit">Set up alert</button><p class="cf-msg" id="rlMsg" role="status" aria-live="polite"></p></div>
+      <p class="cf-note">We'll email you a link to confirm first. Keyword alerts read agenda item titles where the board posts them as text; PDF-only agendas are matched on the meeting title. A match only means a record mentions what you asked about.</p>
+    </form></section>
   <section class="tx-sec method"><div class="sec-hd"><h2 id="what">What you'll get</h2></div><ul class="plain">
     <li><b>Weekly, only when there's news.</b> No email in a quiet week.</li>
     <li><b>What's new</b> for each government you follow: votes, contracts, data updates and corrections from the <a href="/updates">change log</a>.</li>
     <li><b>Meetings coming up</b> in the next week, with agenda links when they're posted. See all of them on the <a href="/meetings">meetings page</a>.</li>
     <li>Prefer a feed reader? Use the <a href="/updates.xml">RSS feed</a>.</li></ul></section>
+  <section class="tx-sec method"><div class="sec-hd"><h2 id="manage">Change or stop your emails</h2></div>
+    <p>Every email has a <b>Change what you follow</b> link that lets you add or remove governments, turn off alerts or unsubscribe from everything. Lost it? <a href="/alerts/manage">Get a new link by email</a>.</p></section>
 </div>
 <link rel="stylesheet" href="/assets/tax.css">
 <script>
@@ -70,7 +94,7 @@
   const f = document.getElementById('alForm'), msg = document.getElementById('alMsg'), btn = f.querySelector('button[type=submit]'), st = document.getElementById('alStatus'), t0 = Date.now();
   const q = new URLSearchParams(location.search), boxes = [...f.querySelectorAll('input[name=g]')];
   (q.get('gov') || q.get('g') || '').split(',').forEach(k => { const b = boxes.find(x => x.value === k); if (b) b.checked = true; });
-  const S = {confirmed: ['ok', "You're signed up. Your first update arrives the next week there's news."], expired: ['err', 'That confirmation link has expired or is invalid. Sign up again below.'], error: ['err', 'Something went wrong confirming your sign-up. Please try again.']};
+  const S = {confirmed: ['ok', "You're signed up. Your first update arrives the next week there's news."], rule_confirmed: ['ok', "Your alert is on. We'll email you when something new matches."], expired: ['err', 'That confirmation link has expired or is invalid. Sign up again below.'], error: ['err', 'Something went wrong confirming your sign-up. Please try again.']};
   if (S[q.get('status')]) { st.hidden = false; st.className = 'al-status ' + S[q.get('status')][0]; st.textContent = S[q.get('status')][1]; }
   fetch('/api/subscribe').then(r => r.json()).then(j => { if (!j.ready) { f.querySelectorAll('input,button').forEach(x => x.disabled = true); msg.className = 'cf-msg'; msg.textContent = 'Email alerts are launching soon. Until then, follow the RSS feed or check What’s new.'; } }).catch(() => {});
   document.getElementById('alAll').addEventListener('click', () => boxes.forEach(b => b.checked = true));
@@ -88,6 +112,24 @@
     } catch (err) { msg.className = 'cf-msg err'; msg.textContent = err.message; }
     btn.disabled = false;
   });
+  const rf = document.getElementById('rlForm'), rm = document.getElementById('rlMsg'), rt = document.getElementById('rlType'), rb = rf.querySelector('button[type=submit]');
+  const show = () => rf.querySelectorAll('[data-for]').forEach(x => { x.hidden = x.dataset.for !== rt.value; x.style.display = x.hidden ? 'none' : ''; });
+  rt.addEventListener('change', show); show();
+  if (q.get('status') === 'rule_confirmed') { const rs = document.getElementById('rlStatus'); rs.hidden = false; rs.className = 'al-status ok'; rs.textContent = S.rule_confirmed[1]; st.hidden = true; }
+  rf.addEventListener('submit', async e => {
+    e.preventDefault();
+    const type = rt.value, F = rf.elements;
+    const params = type === 'contract' ? {gov: F.gov.value, min: F.min.value} : type === 'vote' ? {member: F.member.value} : type === 'keyword' ? {keyword: F.keyword.value, gov: F.kgov.value} : {candidate: F.candidate.value};
+    if (!F.email.checkValidity() || !F.email.value) { rm.className = 'cf-msg err'; rm.textContent = 'Please enter a valid email address.'; F.email.focus(); return; }
+    rb.disabled = true; rm.className = 'cf-msg'; rm.textContent = 'Sending…';
+    try {
+      const r = await fetch('/api/subscribe', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({email: F.email.value, rule: {type, params}, website: F.website.value, t: t0})});
+      const j = await r.json().catch(() => ({}));
+      if (!r.ok || !j.ok) throw new Error(j.error || 'Sign-up failed. Please try again.');
+      rm.className = 'cf-msg ok'; rm.textContent = 'Check your email for a link to confirm.'; F.email.value = '';
+    } catch (err) { rm.className = 'cf-msg err'; rm.textContent = err.message; }
+    rb.disabled = false;
+  });
 })();
 </script>
 </main>
@@ -97,7 +139,6 @@
   <p class="muted foot-links">Page updated Oct 20, 2026 · <a href="/updates">What's new</a> · <a href="/updates.xml">RSS</a> · <a href="/about">Sources and method</a></p></div>
   <a class="powered" href="https://fluxlabs.net/" target="_blank" rel="noopener"><span>Powered by</span><img src="/assets/flux-labs.webp" alt="Flux Labs" width="140" height="25"></a>
 </div></footer>
-<script src="/assets/site.js" defer></script>
 <script src="/assets/report.js" defer></script>
 </body>
 </html>

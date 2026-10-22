@@ -20,9 +20,19 @@ const esc = s => String(s??'').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;',
 const fyOf = s => { const m = String(s||'').match(/(19|20)\d{2}/); return m ? +m[0] : null; };
 
 /* ---------- state ---------- */
-const S = { cras:new Set(), status:'all', cat:'all', q:'', nc:true, sel:null, sortK:'amount', sortDir:-1, showAll:false };
-try { const saved = JSON.parse(localStorage.getItem('cra-filters')||'null'); if (saved){ S.status=saved.status||'all'; S.cat=saved.cat||'all'; S.nc=saved.nc!==false; (saved.cras||[]).forEach(c=>CRA[c]&&S.cras.add(c)); } } catch(e){}
-const save = () => { try { localStorage.setItem('cra-filters', JSON.stringify({cras:[...S.cras],status:S.status,cat:S.cat,nc:S.nc})); } catch(e){} };
+const S = { cras:new Set(), status:'all', cat:'all', q:'', nc:true, sel:null, sortK:'when', sortDir:-1, showAll:false };
+/* filters live in the link (?cra=pc,lh&status=Spent&cat=…&q=…&nc=0&id=12) so a view can be shared; with no filters in the link, the last-used filters come back */
+const UP = new URLSearchParams(location.search), UKEYS = ['cra','cras','status','cat','q','nc','id'];
+if (UKEYS.some(k => UP.has(k))){
+  (UP.get('cra')||UP.get('cras')||'').split(',').forEach(c => CRA[c] && S.cras.add(c));
+  if (UP.get('status')) S.status = UP.get('status');
+  if (UP.get('cat')) S.cat = UP.get('cat');
+  S.q = UP.get('q') || ''; S.nc = UP.get('nc') !== '0';
+  const id = UP.get('id'); if (id != null && D.payments[+id]) S.sel = +id;
+} else try { const saved = JSON.parse(localStorage.getItem('cra-filters')||'null'); if (saved){ S.status=saved.status||'all'; S.cat=saved.cat||'all'; S.nc=saved.nc!==false; (saved.cras||[]).forEach(c=>CRA[c]&&S.cras.add(c)); } } catch(e){}
+const save = () => { try { localStorage.setItem('cra-filters', JSON.stringify({cras:[...S.cras],status:S.status,cat:S.cat,nc:S.nc})); } catch(e){}
+  const o = {cra:[...S.cras].join(','), cras:'', status:S.status==='all'?'':S.status, cat:S.cat==='all'?'':S.cat, q:S.q, nc:S.nc?'':'0', id:S.sel==null?'':S.sel};
+  if (window.BCM) BCM.urlState.setLater(o, 300); };
 
 function filtered(){
   const q = S.q.toLowerCase();
@@ -70,7 +80,9 @@ document.getElementById('craChips').addEventListener('click', e => {
 const cats = [...new Set(D.payments.map(p=>p.cat))].sort();
 document.getElementById('fCat').innerHTML += cats.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join('');
 const fStatus = document.getElementById('fStatus'), fCat = document.getElementById('fCat'), fQ = document.getElementById('fQ'), fNC = document.getElementById('fNC');
-fStatus.value = S.status; fCat.value = S.cat; fNC.checked = S.nc;
+if (![...fStatus.options].some(o => o.value === S.status)) S.status = 'all';
+if (![...fCat.options].some(o => o.value === S.cat)) S.cat = 'all';
+fStatus.value = S.status; fCat.value = S.cat; fNC.checked = S.nc; fQ.value = S.q;
 fStatus.onchange = () => { S.status = fStatus.value; update(); };
 fCat.onchange = () => { S.cat = fCat.value; update(); };
 fQ.oninput = () => { S.q = fQ.value; update(); };
@@ -263,8 +275,11 @@ function renderProfiles(){
 const STATUS_RANK = {Spent:0, Committed:1, Budgeted:2, Proposed:3, Incoming:4, 'Not CRA-funded':5};
 function renderLedger(rows){
   const k = S.sortK, d = S.sortDir;
-  const val = p => k==='amount' ? (p.amount??-1) : k==='when' ? (fyOf(p.when)??0) : k==='status' ? STATUS_RANK[p.status] : k==='where' ? SHORT[p.cra]+p.district : (p[k]||'').toLowerCase();
-  const sorted = [...rows].sort((a,b) => { const A=val(a), B=val(b); return (A<B?-1:A>B?1:0)*d; });
+  // the chosen column, then newest first, then payee A to Z
+  const typ = k==='amount'||k==='status' ? 'num' : k==='when' ? 'date' : 'text';
+  const get = p => k==='amount' ? p.amount : k==='when' ? p.when : k==='status' ? STATUS_RANK[p.status] : k==='where' ? SHORT[p.cra]+' '+(p.district||'') : (p[k]||'');
+  const sorted = TT.sortBy(rows, [{get, type:typ, dir:d<0?'desc':'asc'}, {get:p=>p.when, type:'date', dir:'desc'}, {get:p=>p.payee, type:'text', dir:'asc'}]);
+  S.lastSorted = sorted;
   const lim = S.showAll ? sorted.length : 60;
   document.querySelector('#ledger tbody').innerHTML = sorted.slice(0,lim).map(p => `<tr data-id="${p.id}" class="${p.count?'':'nc'}" ${!p.count&&p.overlap?`title="Not in totals: ${esc(p.overlap)}"`:''}>
     <td class="amt">${p.amount!=null?fmt(p.amount):'—'}</td>
@@ -279,8 +294,8 @@ function renderLedger(rows){
   document.querySelectorAll('#ledger thead th').forEach(th => { if (th.dataset.k===k) th.setAttribute('aria-sort', d<0?'descending':'ascending'); else th.removeAttribute('aria-sort'); });
   document.querySelectorAll('#ledger tbody tr').forEach(tr => tr.onclick = e => { if (e.target.closest('a')) return; select(+tr.dataset.id); document.getElementById('mapbox').scrollIntoView({behavior:'smooth', block:'start'}); });
 }
-document.querySelectorAll('#ledger thead th').forEach(th => th.onclick = () => { const k = th.dataset.k; if (k==='src') return;
-  if (S.sortK===k) S.sortDir *= -1; else { S.sortK = k; S.sortDir = k==='amount'||k==='when' ? -1 : 1; } renderLedger(filtered()); });
+TT.attach(document.getElementById('ledger'), {cols:[{key:'amount',type:'num'},{key:'payee',type:'text'},{key:'purpose',type:'text'},{key:'where',type:'text'},{key:'when',type:'date'},{key:'status',type:'text'},null],
+  sort:{key:S.sortK, dir:S.sortDir<0?'desc':'asc'}, onSort: s => { S.sortK = s.key; S.sortDir = s.dir==='desc' ? -1 : 1; renderLedger(filtered()); }});
 document.getElementById('more').onclick = () => { S.showAll = true; renderLedger(filtered()); };
 
 /* ---------- context ---------- */
@@ -304,15 +319,16 @@ function update(refit){
   if (refit) fitView();
 }
 renderProfiles(); renderCtx(); renderLegend();
-requestAnimationFrame(() => update(true));
+requestAnimationFrame(() => { update(true);
+  if (S.sel != null){ select(S.sel); document.getElementById('mapbox').scrollIntoView({block:'start'}); } });
 matchMedia('(prefers-color-scheme: dark)').addEventListener('change', renderLegend);
 new MutationObserver(renderLegend).observe(document.documentElement, {attributes:true, attributeFilter:['data-theme']});
 
 document.getElementById('csv').onclick = () => {
   const cols = ['CRA','District','Amount','Paid to','For what','Type','When','Status','Counted in totals','Why not counted','Location','Source type','Source','Notes'];
   const q = v => { v = v == null ? '' : String(v); return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v; };
-  const rows = filtered().map(p => [CRA[p.cra].name, p.district, p.amount, p.payee, p.purpose, p.cat, p.when, p.status, p.count ? 'Yes' : 'No', p.overlap, p.loc || p.addr, p.conf, p.url, p.notes].map(q).join(','));
-  const blob = new Blob([cols.join(',') + '\n' + rows.join('\n')], {type: 'text/csv'});
+  const rows = (S.lastSorted || filtered()).map(p => [CRA[p.cra].name, p.district, p.amount, p.payee, p.purpose, p.cat, p.when, p.status, p.count ? 'Yes' : 'No', p.overlap, p.loc || p.addr, p.conf, p.url, p.notes].map(q).join(','));
+  const blob = new Blob(['\ufeff' + cols.join(',') + '\n' + rows.join('\n')], {type: 'text/csv;charset=utf-8'});
   const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'bay-county-cra-ledger.csv'; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 2000);
 };
 

@@ -107,7 +107,8 @@
     "total_budget": null,
     "district": "all",
     "source_url": "https://flauditor.gov/pages/specialdistricts_efile%20rpts/2025%20callaway%20community%20redevelopment%20agency.pdf"
-   }
+   },
+   {"fy": "FY2027", "tif_revenue": 3024494, "total_budget": 3114390, "district": "all", "source_url": "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_09172026-422"}
   ],
   "payments": [
    {
@@ -625,7 +626,8 @@
     "total_budget": null,
     "district": "all",
     "source_url": "https://flauditor.gov/pages/specialdistricts_efile%20rpts/2025%20community%20redevelopment%20agency%20of%20the%20city%20of%20parker.pdf"
-   }
+   },
+   {"fy": "FY2027", "tif_revenue": 424195, "total_budget": 424265, "district": "all", "source_url": "https://cityofparker.com/wp-content/uploads/filr/7005/Agenda-Final-Budget-Meeting-Package-09.24.26.pdf"}
   ],
   "payments": [
    {

@@ -52,6 +52,17 @@ git add -A && git commit -m "Update" && git push
 
 Every term on the site lives in `site/glossary.py`. Wrap a word with `term('id', 'text')` in `build_site.py` (or `<span class="term" data-term="id">text</span>` in page JS) and it gets a dotted underline; hover, tap or Tab to it for the simple explanation, with a link to `/glossary#id`. Write the `simple` line so a fifth-grader can follow it.
 
+## Tables and lists
+
+`site/tables.js` loads on every page. Any `<table>` gets sortable headings, a filter box (plus drop-downs for columns
+with a handful of values) and a "Download CSV" of the rows on screen in the order shown. Default order: newest first by
+the table's date column, then A to Z by its first text column. Group rows (`tr.grp`) keep their rows; totals rows stay
+at the bottom; rows a page hides itself (`hidden`) are left out. It re-applies after a page script re-renders a table.
+`data-tt="off"` opts a table out, `data-tt="own"` is for paginated ledgers that sort their own data with `TT.attach()`
+and `TT.sortBy()`, `data-tt-search="off"` drops the filter box when the page has its own, `data-cols="A|B"` names
+columns of a table with no `<thead>`. Card lists use `TT.sortBy()` and `TT.csv()` directly, or `<ol data-tt-list>`
+with `data-d` (date) and `data-n` (name) on each item.
+
 ## Updates feed
 
 Every data change gets an entry at the top of `CHANGES` in `site/updates.py`. That drives the "Page updated" line in each page's footer, the /updates page and the /updates.xml RSS feed.

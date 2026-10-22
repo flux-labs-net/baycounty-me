@@ -144,7 +144,7 @@ section.block{display:flex;flex-direction:column;gap:12px}
 .tablewrap{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
 table{border-collapse:collapse;width:100%;min-width:980px;font-size:.84rem}
 th,td{padding:9px 12px;text-align:left;vertical-align:top;border-top:1px solid var(--line)}
-thead th{border-top:0;font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:500;background:var(--sunken);position:sticky;top:0;white-space:nowrap}
+thead th{border-top:0;font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:500;background:var(--sunken);position:sticky;top:0;cursor:pointer;white-space:nowrap}
 td.amt{font-family:var(--f-data);text-align:right;white-space:nowrap}
 th.amt{text-align:right}
 tbody tr{cursor:pointer}
@@ -220,15 +220,15 @@ details.cx ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:
 
   <section class="block">
     <div class="hd"><h2>Ledger</h2><span class="muted" id="ledgerCount" style="font-size:.82rem"></span></div>
-    <div class="tablewrap"><table id="ledger">
+    <div class="tablewrap"><table id="ledger" data-tt="own">
       <thead><tr>
-        <th data-k="amount" class="amt" aria-sort="descending">Amount</th>
+        <th data-k="amount" class="amt">Amount</th>
         <th data-k="payee">Paid to</th>
         <th data-k="purpose">For what</th>
         <th data-k="where">Where</th>
         <th data-k="when">When</th>
         <th data-k="status">Status</th>
-        <th data-k="src" data-nosort>Source</th>
+        <th data-k="src">Source</th>
       </tr></thead>
       <tbody></tbody>
     </table></div>
@@ -267,7 +267,7 @@ const esc = s => String(s??'').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;',
 const fyOf = s => { const m = String(s||'').match(/(19|20)\d{2}/); return m ? +m[0] : null; };
 
 /* ---------- state ---------- */
-const S = { cras:new Set(), status:'all', cat:'all', q:'', nc:true, sel:null, sortK:'amount', sortDir:-1, showAll:false };
+const S = { cras:new Set(), status:'all', cat:'all', q:'', nc:true, sel:null, sortK:'when', sortDir:-1, showAll:false };
 /* filters live in the link (?cra=pc,lh&status=Spent&cat=…&q=…&nc=0&id=12) so a view can be shared; with no filters in the link, the last-used filters come back */
 const UP = new URLSearchParams(location.search), UKEYS = ['cra','cras','status','cat','q','nc','id'];
 if (UKEYS.some(k => UP.has(k))){
@@ -522,8 +522,11 @@ function renderProfiles(){
 const STATUS_RANK = {Spent:0, Committed:1, Budgeted:2, Proposed:3, Incoming:4, 'Not CRA-funded':5};
 function renderLedger(rows){
   const k = S.sortK, d = S.sortDir;
-  const val = p => k==='amount' ? (p.amount??-1) : k==='when' ? (fyOf(p.when)??0) : k==='status' ? STATUS_RANK[p.status] : k==='where' ? SHORT[p.cra]+p.district : (p[k]||'').toLowerCase();
-  const sorted = [...rows].sort((a,b) => { const A=val(a), B=val(b); return (A<B?-1:A>B?1:0)*d; });
+  // the chosen column, then newest first, then payee A to Z
+  const typ = k==='amount'||k==='status' ? 'num' : k==='when' ? 'date' : 'text';
+  const get = p => k==='amount' ? p.amount : k==='when' ? p.when : k==='status' ? STATUS_RANK[p.status] : k==='where' ? SHORT[p.cra]+' '+(p.district||'') : (p[k]||'');
+  const sorted = TT.sortBy(rows, [{get, type:typ, dir:d<0?'desc':'asc'}, {get:p=>p.when, type:'date', dir:'desc'}, {get:p=>p.payee, type:'text', dir:'asc'}]);
+  S.lastSorted = sorted;
   const lim = S.showAll ? sorted.length : 60;
   document.querySelector('#ledger tbody').innerHTML = sorted.slice(0,lim).map(p => `<tr data-id="${p.id}" class="${p.count?'':'nc'}" ${!p.count&&p.overlap?`title="Not in totals: ${esc(p.overlap)}"`:''}>
     <td class="amt">${p.amount!=null?fmt(p.amount):'—'}</td>
@@ -538,10 +541,8 @@ function renderLedger(rows){
   document.querySelectorAll('#ledger thead th').forEach(th => { if (th.dataset.k===k) th.setAttribute('aria-sort', d<0?'descending':'ascending'); else th.removeAttribute('aria-sort'); });
   document.querySelectorAll('#ledger tbody tr').forEach(tr => tr.onclick = e => { if (e.target.closest('a')) return; select(+tr.dataset.id); document.getElementById('mapbox').scrollIntoView({behavior:'smooth', block:'start'}); });
 }
-// sortable headers are real buttons (keyboard and screen reader friendly) via the shared helper in site.js
-const sortBy = k => { if (S.sortK===k) S.sortDir *= -1; else { S.sortK = k; S.sortDir = k==='amount'||k==='when' ? -1 : 1; } renderLedger(filtered()); return S.sortDir; };
-if (window.BCM) BCM.sortable(document.getElementById('ledger'), {onSort: k => sortBy(k)});
-else document.querySelectorAll('#ledger thead th').forEach(th => th.onclick = () => { if (th.dataset.k !== 'src') sortBy(th.dataset.k); });
+TT.attach(document.getElementById('ledger'), {cols:[{key:'amount',type:'num'},{key:'payee',type:'text'},{key:'purpose',type:'text'},{key:'where',type:'text'},{key:'when',type:'date'},{key:'status',type:'text'},null],
+  sort:{key:S.sortK, dir:S.sortDir<0?'desc':'asc'}, onSort: s => { S.sortK = s.key; S.sortDir = s.dir==='desc' ? -1 : 1; renderLedger(filtered()); }});
 document.getElementById('more').onclick = () => { S.showAll = true; renderLedger(filtered()); };
 
 /* ---------- context ---------- */

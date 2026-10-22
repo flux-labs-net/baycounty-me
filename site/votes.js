@@ -23,7 +23,7 @@ function members() { // members who appear in recorded roll calls, grouped by go
   F.m.value = [...F.m.options].some(o => o.value === keep) ? keep : '';
 }
 
-let shown = 40, view = [];
+let shown = 40, last = [];
 function filt(push = true) {
   const q = F.q.value.trim().toLowerCase(), g = F.g.value, m = F.m.value, c = F.c.value, y = F.y.value, o = F.o.value;
   let cur = D.votes.filter(v => (!g || v.g === g) && (!c || v.c === c) && (!y || (v.d || '').startsWith(y))
@@ -31,9 +31,11 @@ function filt(push = true) {
     && (!o || (o === 'split' ? v.x : o === 'unan' ? !v.x && !failed(v) : failed(v)))
     && (!q || (v.h + ' ' + v.i + ' ' + (v.s || '') + ' ' + Object.keys(v.m).join(' ') + ' ' + (D.bodies[v.b]?.n || '')).toLowerCase().includes(q)));
   const sort = F.sort.value;
-  cur = cur.slice().sort(sort === 'old' ? (a, b) => (a.d || '').localeCompare(b.d || '') : sort === 'amt' ? (a, b) => (b.a || 0) - (a.a || 0) || (b.d || '').localeCompare(a.d || '')
-    : sort === 'close' ? (a, b) => margin(a) - margin(b) || (b.d || '').localeCompare(a.d || '') : (a, b) => (b.d || '').localeCompare(a.d || ''));
-  view = cur;
+  // every order breaks ties newest first, then by item A to Z
+  const az = (a, b) => (a.h || '').localeCompare(b.h || '', 'en', {numeric: true, sensitivity: 'base'}), nw = (a, b) => (b.d || '').localeCompare(a.d || '') || az(a, b);
+  cur = cur.slice().sort(sort === 'old' ? (a, b) => (a.d || '').localeCompare(b.d || '') || az(a, b) : sort === 'amt' ? (a, b) => (b.a || 0) - (a.a || 0) || nw(a, b)
+    : sort === 'close' ? (a, b) => margin(a) - margin(b) || nw(a, b) : sort === 'az' ? (a, b) => az(a, b) || nw(a, b) : nw);
+  last = cur;
   const ns = cur.filter(v => v.x).length;
   $('vtCount').textContent = `${cur.length} vote${cur.length === 1 ? '' : 's'}${ns ? ` · ${ns} split` : ''}`;
   if (m) { const mine = cur.map(v => v.m[m]); const c2 = k => mine.filter(x => x === k).length;
@@ -65,15 +67,13 @@ F.g.addEventListener('change', () => { members(); shown = 40; filt(); });
 ['q', 'm', 'c', 'y', 'o', 'sort'].forEach(k => F[k].addEventListener('input', () => { shown = 40; filt(); }));
 $('vtClear').addEventListener('click', () => { F.q.value = ''; ['g', 'c', 'y', 'o'].forEach(k => F[k].value = ''); F.sort.value = 'new'; members(); F.m.value = ''; shown = 40; filt(); });
 $('vtMore').addEventListener('click', () => { shown += 60; filt(false); });
-$('vtCsv').addEventListener('click', () => { // one row per member per vote, for the votes in the current view
-  const rows = [['date', 'government', 'board', 'item', 'type', 'amount', 'tally', 'outcome', 'split', 'member', 'member_vote', 'source_url']];
-  const mf = F.m.value;
-  view.forEach(v => { const base = [v.d, GN[v.g] || v.g, D.bodies[v.b]?.n || v.b, v.h, D.cat[v.c] || v.c, v.a || '', v.t || '', v.o || '', v.x ? 'yes' : 'no'];
-    const ms = Object.entries(v.m).filter(([n]) => !mf || n === mf);
-    if (!ms.length) rows.push(base.concat(['', '', v.u || '']));
-    ms.forEach(([n, x]) => rows.push(base.concat([n, V[x] || x, v.u || '']))); });
-  if (window.BCM) { BCM.download('bay-county-votes' + (mf ? '-' + mf.toLowerCase().replace(/[^a-z0-9]+/g, '-') : '') + '.csv', BCM.toCSV(rows)); BCM.announce('Downloaded ' + view.length + ' votes'); }
-});
 filt(false);
 if ([...P0.keys()].some(k => ['q', 'g', 'm', 'c', 'y', 'o', 'sort'].includes(k))) $('all').scrollIntoView();
+$('vtCsv').addEventListener('click', () => {
+  const gov = Object.fromEntries(D.govs);
+  TT.csv(`baycounty-votes${F.g.value ? '-' + TT.slug(gov[F.g.value] || F.g.value) : ''}`,
+    ['date', 'government', 'board', 'item', 'summary', 'category', 'amount', 'outcome', 'tally', 'split', 'member_votes', 'source'],
+    last.map(v => [v.d, gov[v.g] || v.g, D.bodies[v.b]?.n || v.b, v.h, v.s, D.cat[v.c] || v.c, v.a ?? '', cap(v.o || ''), v.t, v.x ? 'yes' : 'no',
+      Object.entries(v.m).map(([n, x]) => `${n}: ${x}`).join('; '), v.u]));
+});
 })();

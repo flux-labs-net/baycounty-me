@@ -62,6 +62,9 @@ def gov_page(key):
         kp = [kpi('Residents', f'{pop:,}' if pop else '—', '2025 state estimate' if pop else '')]
     if b.get('total'):
         kp.append(kpi('Budget', money(b['total']), f'{e(b.get("status") or "FY2026")}' + (f' · {money(pr["budget"], 0) if pr.get("budget", 0) >= 1e6 else usd(pr.get("budget"))} per resident' if pr.get('budget') else '')))
+    nx = b.get('next') or {}
+    if nx.get('total'):
+        kp.append(kpi('New budget', money(nx['total']), f"{nx['fy']} · " + ('adopted Sept 2026' if nx.get('adopted') else 'final hearing held')))
     if mills is not None and key != 'schools':
         kp.append(kpi('Property tax rate', f'{mills:g} mills' if mills else 'None', f'${mills*100:,.0f} per $100,000 of taxable value' if mills else 'No city property tax'))
     elif mills:
@@ -108,7 +111,7 @@ def gov_page(key):
         rel = ''.join(f'<li>{e(x["name"])}: {money(x["total"])}</li>' for x in d.get('related') or [] if x.get('total'))
         secs.append(f'''<section class="tx-sec"><div class="sec-hd"><h2 id="debt">Debt</h2><span class="muted">{e(d.get("fy") or "")}</span></div>
           <p><b>{money(d["total"])}</b> owed{f" — about {usd(pr['debt'])} per resident" if pr.get("debt") else ""}. {e(d.get("note") or "")}</p>
-          {f'<div class="tablewrap"><table class="tx-table"><tbody>{bt}</tbody></table></div>' if bt else ''}
+          {f'<div class="tablewrap"><table class="tx-table"><thead><tr><th scope="col">Kind of debt</th><th scope="col" class="num">Owed</th></tr></thead><tbody>{bt}</tbody></table></div>' if bt else ''}
           {f'<p class="small">Related agencies:</p><ul class="plain small">{rel}</ul>' if rel else ''}
           <p class="src-line">{src(d.get("source_url"), "Audited financial statements")} · <a href="/public-money/debt">All local debt</a></p></section>''')
     # audits

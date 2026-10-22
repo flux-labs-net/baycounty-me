@@ -1,5 +1,5 @@
 {
- "_about": "Shared Spanish strings for every /es page: phrase pairs applied to page bodies (no warning when absent), regex pairs, and window.BCM_I18N labels read by site.js (site_helpers.js, theme button) and report.js.",
+ "_about": "Shared Spanish strings for every /es page: phrase pairs applied to page bodies (no warning when absent), and window.BCM_I18N labels read by site.js (theme button). Table filter/sort/CSV labels come from tables.js, which reads the page language.",
  "html": [
   [
    "Export PDF</button>",
@@ -26,19 +26,7 @@
    "aria-label=\"En esta página\""
   ]
  ],
- "re": [],
  "bcm": {
-  "csv": "Descargar esta vista (CSV)",
-  "sortedBy": "Ordenado por ",
-  "az": "de la A a la Z",
-  "za": "de la Z a la A",
-  "desc": "de mayor a menor",
-  "asc": "de menor a mayor",
-  "downloaded": "Se descargaron ",
-  "rows": " filas",
-  "group": "Grupo",
-  "item": "Elemento",
-  "links": "Enlaces",
   "theme": {
    "system": "Sistema",
    "light": "Claro",
@@ -46,8 +34,6 @@
   },
   "themeLabel": "Tema: ",
   "themeSystem": "igual que el sistema",
-  "themeClick": ". Toque para cambiar.",
-  "pdfBuilding": "Creando el PDF…",
-  "pdfFail": "No se pudo crear el PDF. Todavía puede usar Imprimir > Guardar como PDF en su navegador."
+  "themeClick": ". Toque para cambiar."
  }
 }

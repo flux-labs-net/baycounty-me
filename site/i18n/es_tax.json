@@ -490,6 +490,26 @@
    "<h4>En qué se gasta el fondo general <span class=\"muted\">presupuesto del FY2026</span></h4>${barList(g.exp, {empty: 'Este gobierno no pone en internet un presupuesto con este detalle.'})}"
   ],
   [
+   "bits.push(`total ${big(n.total)}${n.excl ? ' (not counting transfers between its own funds)' : ''}`);",
+   "bits.push(`total ${big(n.total)}${n.excl ? ' (sin contar las transferencias entre sus propios fondos)' : ''}`);"
+  ],
+  [
+   "bits.push(`general fund ${big(n.gf)}`);",
+   "bits.push(`fondo general ${big(n.gf)}`);"
+  ],
+  [
+   "bits.push(n.mills ? `${mills(n.mills)} mills` : 'no city property tax');",
+   "bits.push(n.mills ? `${mills(n.mills)} milésimas` : 'sin impuesto municipal a la propiedad');"
+  ],
+  [
+   "<b>New budget, ${esc(n.fy)} (Oct 2026 to Sept 2027):</b> ${bits.join(', ')}. ${n.adopted ? 'Adopted' : 'Final hearing held; adoption not yet confirmed in posted minutes'}.",
+   "<b>Presupuesto nuevo, ${esc(n.fy)} (de octubre de 2026 a septiembre de 2027):</b> ${bits.join(', ')}. ${n.adopted ? 'Aprobado' : 'Ya se hizo la audiencia final; las actas publicadas todavía no confirman la aprobación'}."
+  ],
+  [
+   "rel=\"noopener\">${esc(n.src[0])}</a>. The breakdowns below are still the ${esc('FY2026')} budget.</p>`",
+   "rel=\"noopener\">${esc(n.src[0])}</a> (en inglés). Los detalles de abajo todavía son del presupuesto del ${esc('FY2026')}.</p>`"
+  ],
+  [
    "<summary>School construction, debt and other funds</summary>",
    "<summary>Construcción de escuelas, deuda y otros fondos</summary>"
   ],

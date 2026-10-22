@@ -140,6 +140,13 @@ function renderGov() {
   ];
   let h = `<div class="gov-hd"><h3>${esc(g.name)}</h3><span class="badge ${st}">${st === 'ok' ? '✓' : '!'} ${esc(stText)}</span></div>
   <div class="kpis">${tiles.map(([l, v, s]) => `<div class="kpi"><span class="eyebrow">${l}</span><span class="v">${v}</span><span class="s">${esc(s)}</span></div>`).join('')}</div>`;
+  if (g.next) {
+    const n = g.next, bits = [];
+    if (n.total) bits.push(`total ${big(n.total)}${n.excl ? ' (not counting transfers between its own funds)' : ''}`);
+    if (n.gf) bits.push(`general fund ${big(n.gf)}`);
+    if (n.mills != null) bits.push(n.mills ? `${mills(n.mills)} mills` : 'no city property tax');
+    h += `<p class="note"><b>New budget, ${esc(n.fy)} (Oct 2026 to Sept 2027):</b> ${bits.join(', ')}. ${n.adopted ? 'Adopted' : 'Final hearing held; adoption not yet confirmed in posted minutes'}. <a href="${esc(n.src[1] || '#')}" target="_blank" rel="noopener">${esc(n.src[0])}</a>. The breakdowns below are still the ${esc('FY2026')} budget.</p>`;
+  }
   if (g.mix) h += `<p class="note">Across all funds, the schools expect ${big(g.mix.Local)} from local sources (mostly property tax), ${big(g.mix.State)} from the state and ${big(g.mix.Federal)} from the federal government.</p>`;
   h += `<div class="two">
     <div><h4>Where the general fund money comes from <span class="muted">FY2026 budget</span></h4>${barList(g.rev, {empty: 'This government does not post a budget online with this detail.'})}</div>
@@ -156,7 +163,7 @@ function renderGov() {
         <div><h4>Money in, by source <span class="muted">${cur}${y.rt ? ' · ' + big(y.rt) : ''}</span></h4>${barList(y.rev, {empty: 'The state has not posted this year’s revenue yet.'})}</div>
         <div><h4>Money out, by service <span class="muted">${cur}${y.et ? ' · ' + big(y.et) : ''}</span></h4>${barList(y.exp)}</div>
       </div>
-      <div class="tablewrap"><table class="tx-table"><thead><tr><th scope="col"></th>${g.act.map(a => `<th scope="col" class="num">${a.fy}</th>`).join('')}</tr></thead><tbody>
+      <div class="tablewrap"><table class="tx-table"><thead><tr><th scope="col">Measure</th>${g.act.map(a => `<th scope="col" class="num">${a.fy}</th>`).join('')}</tr></thead><tbody>
         <tr><th scope="row">Money in</th>${g.act.map(a => `<td class="num">${big(a.rt)}</td>`).join('')}</tr>
         <tr><th scope="row">Money out</th>${g.act.map(a => `<td class="num">${big(a.et)}</td>`).join('')}</tr>
         <tr><th scope="row">Property tax collected</th>${g.act.map(a => `<td class="num">${big(a.rev['Property taxes'])}</td>`).join('')}</tr>

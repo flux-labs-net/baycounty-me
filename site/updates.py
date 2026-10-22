@@ -9,6 +9,18 @@ from datetime import datetime, timezone
 import html
 
 CHANGES = [
+    {'date': '2026-10-21', 'title': 'Contracts: how much each contract grew',
+     'text': "Change orders are now added up for each contract and measured against its original amount, instead of listed one by one. Of the 22 contracts whose original amount is known, 12 grew by more than 10%, the point where Bay County and Panama City rules require board approval for the added cost. Each bar opens to its change orders, reasons and sources. Contracts whose original amount wasn't in the agendas are listed separately, and where an agenda states the new contract total, that total is used. Every individual change order is still listed below.",
+     'pages': ['/public-money/contracts']},
+    {'date': '2026-10-21', 'title': 'Contracts: one name per company, and company cards',
+     'text': "Agendas, check registers and campaign reports spell the same company many ways, so the contract winners list was splitting some firms into two or more entries. The 322 contracts used 206 spellings; they now resolve to the companies behind them. Marshall Brothers, for example, had been listed at $11.1M and is now ranked sixth at $24.0M. A new Look up a company section shows everything on the site for one company: contracts by government next to what each government paid it (where a check register shows it), change orders, emergency purchases, campaign gifts from the company, and votes on its contracts by officials it gave to. Insurance pools owned by governments (Florida League of Cities, PGIT) are no longer counted as contractor wins.",
+     'pages': ['/public-money/contracts']},
+    {'date': '2026-10-21', 'title': 'Money map: full roll calls on donor contract votes',
+     'text': "The table of votes on a donor's contract now shows each vote once, with every board member's vote, not only the members who received a gift from the business. Members who got a gift are listed first, with the amount and date. Most of these contracts passed unanimously on the consent agenda. One vote that had been left out was added: Panama City's June 24, 2025 award of the Millville plant generator bid to Marshall Brothers, which the minutes record under an unrelated plat item.",
+     'pages': ['/public-money/money-map']},
+    {'date': '2026-10-21', 'title': 'Sort, filter and download every list',
+     'text': 'Every table and list on the site can now be sorted by clicking a column heading, filtered with a search box (and drop-downs where a column has a few values), and downloaded as a CSV of exactly the rows on screen, in the order shown. Lists open newest first, then A to Z; upcoming meetings open soonest first.',
+     'pages': ['/updates']},
     {'date': '2026-10-21', 'title': 'An API for BayCounty.me',
      'text': 'Every dataset on the site is now available through a free, read-only API with filtering, sorting and CSV output, plus an MCP server so AI assistants can look up and cite these records directly.',
      'pages': ['/developers']},
@@ -169,12 +181,12 @@ def coverage():
 def updates_page():
     launch = nice(CHANGES[-1]['date'])
     cov = ''.join(f'<tr><th scope="row"><a href="{u}">{html.escape(n)}</a></th><td>{html.escape(r)}</td></tr>' for n, r, u in coverage())
-    items = ''.join(f'''<li><span class="tl-d">{nice(c["date"])}</span><span><b>{html.escape(c["title"])}.</b> {html.escape(c["text"])} {" · ".join(f'<a href="{p}">{LABELS.get(p, p)}</a>' for p in c["pages"])}</span></li>''' for c in CHANGES)
+    items = ''.join(f'''<li data-d="{html.escape(c["date"])}" data-n="{html.escape(c["title"])}"><span class="tl-d">{nice(c["date"])}</span><span><b>{html.escape(c["title"])}.</b> {html.escape(c["text"])} {" · ".join(f'<a href="{p}">{LABELS.get(p, p)}</a>' for p in c["pages"])}</span></li>''' for c in CHANGES)
     return f'''<div class="page tax">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">What's new</span><h1>Updates</h1>
     <p class="lede">New pages, new data and corrections, newest first. Subscribe with any feed reader to get them as they happen: <a href="/updates.xml">RSS feed</a>.</p></div></header>
   <aside class="callout launch"><b>BayCounty.me launched on {launch}.</b> The first entries below are the initial pages going live. From here on, each new dataset, data refresh and correction gets its own dated entry.</aside>
-  <section class="tx-sec"><div class="sec-hd"><h2 id="log">Change log</h2></div><ol class="timeline">{items}</ol></section>
+  <section class="tx-sec"><div class="sec-hd"><h2 id="log">Change log</h2></div><ol class="timeline" data-tt-list aria-label="Change log">{items}</ol></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="covers">What the data covers</h2><span class="muted">The site is new; many of the records go back years</span></div>
     <div class="tablewrap"><table class="tx-table cov-table"><thead><tr><th scope="col">Records</th><th scope="col">Period covered</th></tr></thead><tbody>{cov}</tbody></table></div>
     <p class="note">Each page lists its own sources and the date its data was gathered. See <a href="/about">About</a> for how records are collected.</p></section>
