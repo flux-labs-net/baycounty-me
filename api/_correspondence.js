@@ -73,25 +73,32 @@ function fileContacts() {
   try { return JSON.parse(fs.readFileSync(CONTACTS_FILE, 'utf8')); } catch (e) { return null; }
 }
 
-// Adds new seats from the file and refreshes file-origin rows. Rows edited in /admin (origin = 'manual') are left alone.
+// Adds new people from the file and refreshes file-origin rows. Rows edited in /admin (origin = 'manual') are left alone.
+// File-origin rows no longer in the file (someone left the seat) are turned off, not deleted, so their threads keep a name.
 async function seed() {
   const f = fileContacts();
-  if (!f) return {added: 0, updated: 0, note: 'data/civic/official_contacts.json wasn’t found in this deployment.'};
+  if (!f) return {added: 0, updated: 0, retired: 0, note: 'data/civic/official_contacts.json wasn’t found in this deployment.'};
   let added = 0, updated = 0;
+  const keep = [];
   for (const g of f.governments || []) {
     for (const s of g.seats || []) {
       const email = s.email && EMAIL.test(s.email) ? s.email.trim() : null;
+      const name = s.holder || null;
+      keep.push([g.government, s.seat, name || ''].join('\u0001'));
       const r = await q(`insert into corr.contacts (government, government_key, seat, name, email, source_url, elected, notes)
           values ($1, $2, $3, $4, $5, $6, $7, $8)
-          on conflict (government, seat) do update set government_key = excluded.government_key, name = excluded.name, email = excluded.email,
-            source_url = excluded.source_url, elected = excluded.elected, notes = excluded.notes, updated_at = now()
-          where corr.contacts.origin = 'file' and (corr.contacts.name, corr.contacts.email, corr.contacts.source_url) is distinct from (excluded.name, excluded.email, excluded.source_url)
+          on conflict (government, seat, coalesce(name, '')) do update set government_key = excluded.government_key, email = excluded.email,
+            source_url = excluded.source_url, elected = excluded.elected, notes = excluded.notes, active = true, updated_at = now()
+          where corr.contacts.origin = 'file' and (corr.contacts.email, corr.contacts.source_url, corr.contacts.notes, corr.contacts.active)
+            is distinct from (excluded.email, excluded.source_url, excluded.notes, true)
           returning (xmax = 0) inserted`,
-        [g.government, g.key || null, s.seat, s.holder || null, email, s.source_url || null, s.elected !== false, s.notes || null]);
+        [g.government, g.key || null, s.seat, name, email, s.source_url || null, s.elected !== false, s.notes || null]);
       if (r.length) r[0].inserted ? added++ : updated++;
     }
   }
-  return {added, updated};
+  const gone = await q(`update corr.contacts set active = false, updated_at = now()
+      where origin = 'file' and active and not (government || chr(1) || seat || chr(1) || coalesce(name, '') = any($1::text[])) returning id`, [keep]);
+  return {added, updated, retired: gone.length};
 }
 
 async function contacts() {

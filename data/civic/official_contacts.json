@@ -1,0 +1,567 @@
+{
+ "as_of": "2026-10-23",
+ "notes": "Official email addresses for Bay County elected officials and appointed managers, each from a public government page (source_url). No address was guessed from a naming pattern; seats with no published address have email null. Used to seed the /admin correspondence contacts; edits made in /admin are kept.",
+ "governments": [
+  {
+   "government": "Bay County Board of County Commissioners",
+   "key": "county",
+   "shared_email": null,
+   "shared_email_source": null,
+   "contact_form": null,
+   "seats": [
+    {
+     "seat": "District 1",
+     "holder": "Daniel Raffield (Vice Chairman per commission page)",
+     "email": "draffield@baycountyfl.gov",
+     "source_url": "https://www.baycountyfl.gov/directory.aspx?did=42",
+     "elected": true,
+     "notes": "Listed in county directory (City/County Commission dept, did=42). Directory still shows him as 'Commissioner, District 1'."
+    },
+    {
+     "seat": "District 2",
+     "holder": "Robert Carroll",
+     "email": "rcarroll@baycountyfl.gov",
+     "source_url": "https://www.baycountyfl.gov/directory.aspx?did=42",
+     "elected": true,
+     "notes": "Listed in county directory, Commissioner District 2."
+    },
+    {
+     "seat": "District 3",
+     "holder": "Doug Crosby",
+     "email": "dcrosby@baycountyfl.gov",
+     "source_url": "https://www.baycountyfl.gov/directory.aspx?did=42",
+     "elected": true,
+     "notes": "Listed in county directory, Commissioner District 3."
+    },
+    {
+     "seat": "District 4",
+     "holder": "Doug Moore (stepped down as chairman Nov 18, 2025; not seeking re-election)",
+     "email": "dmoore@baycountyfl.gov",
+     "source_url": "https://www.baycountyfl.gov/directory.aspx?did=42",
+     "elected": true,
+     "notes": "Listed in county directory; directory title is stale ('Chairman, District 4')."
+    },
+    {
+     "seat": "District 5",
+     "holder": "Clair Pease (Chairman per commission page)",
+     "email": "cpease@baycountyfl.gov",
+     "source_url": "https://www.baycountyfl.gov/directory.aspx?did=42",
+     "elected": true,
+     "notes": "Listed in county directory; directory title is stale ('Vice Chairman, District 5')."
+    },
+    {
+     "seat": "County Manager",
+     "holder": "Joel Schubert",
+     "email": "jschubert@baycountyfl.gov",
+     "source_url": "https://www.baycountyfl.gov/directory.aspx?did=42",
+     "elected": false,
+     "notes": "Listed in county directory as County Manager."
+    },
+    {
+     "seat": "Deputy County Manager",
+     "holder": "Keith Bryant",
+     "email": "kbryant@baycountyfl.gov",
+     "source_url": "https://www.baycountyfl.gov/directory.aspx?did=42",
+     "elected": false,
+     "notes": "Listed in county directory as Deputy County Manager."
+    }
+   ]
+  },
+  {
+   "government": "City of Panama City",
+   "key": "pc",
+   "shared_email": "cityclerk@panamacity.gov",
+   "shared_email_source": "https://panamacity.gov/Directory.aspx",
+   "contact_form": null,
+   "seats": [
+    {
+     "seat": "Mayor (at-large)",
+     "holder": "Allan Branch",
+     "email": "abranch@panamacity.gov",
+     "source_url": "https://panamacity.gov/Directory.aspx",
+     "elected": true,
+     "notes": "Directory, City Commission. Also on https://panamacity.gov/directory.aspx?EID=260. Media requests go through the Public Affairs Manager."
+    },
+    {
+     "seat": "Ward I",
+     "holder": "Robbie Hughes",
+     "email": "rhughes@panamacity.gov",
+     "source_url": "https://panamacity.gov/Directory.aspx",
+     "elected": true,
+     "notes": "Directory, Commissioner Ward 1."
+    },
+    {
+     "seat": "Ward II",
+     "holder": "Janice Lucas",
+     "email": "jlucas@panamacity.gov",
+     "source_url": "https://panamacity.gov/Directory.aspx",
+     "elected": true,
+     "notes": "Directory, Commissioner Ward 2."
+    },
+    {
+     "seat": "Ward III",
+     "holder": "Brian Grainger",
+     "email": "bgrainger@panamacity.gov",
+     "source_url": "https://panamacity.gov/Directory.aspx",
+     "elected": true,
+     "notes": "Directory, Commissioner Ward 3."
+    },
+    {
+     "seat": "Ward IV",
+     "holder": "Josh Street",
+     "email": "jstreet@panamacity.gov",
+     "source_url": "https://panamacity.gov/Directory.aspx",
+     "elected": true,
+     "notes": "Directory, Commissioner Ward 4."
+    },
+    {
+     "seat": "City Manager",
+     "holder": "Jonathan Hayes",
+     "email": "jhayes@panamacity.gov",
+     "source_url": "https://panamacity.gov/Directory.aspx",
+     "elected": false,
+     "notes": "Directory, City Manager (also CRA Executive Director). Office address citymanager@panamacity.gov is also listed."
+    },
+    {
+     "seat": "City Attorney",
+     "holder": "Nevin Zimmerman (FY26 budget book)",
+     "email": null,
+     "source_url": null,
+     "elected": false,
+     "notes": "Directory lists 'Nevin J. Zimmerman, City Attorney' with no email address. Not guessed."
+    },
+    {
+     "seat": "City Clerk-Treasurer",
+     "holder": "Janette Smith (FY26 budget book)",
+     "email": null,
+     "source_url": null,
+     "elected": false,
+     "notes": "Janette Smith does not appear in the directory. The directory lists Leslie Glaze as City Clerk-Treasurer (lglaze@panamacity.gov), so the roster holder may be out of date. Shared office address cityclerk@panamacity.gov is listed."
+    }
+   ]
+  },
+  {
+   "government": "City of Panama City Beach",
+   "key": "pcb",
+   "shared_email": null,
+   "shared_email_source": null,
+   "contact_form": null,
+   "seats": [
+    {
+     "seat": "Mayor",
+     "holder": "Stuart Tettemer",
+     "email": "stuart.tettemer@pcbfl.gov",
+     "source_url": "https://www.pcbfl.gov/m/directory/department?did=28",
+     "elected": true,
+     "notes": "City Council dept page; address is Cloudflare-obfuscated on the page (decoded)."
+    },
+    {
+     "seat": "Ward 1",
+     "holder": "Paul Casto",
+     "email": "paul.casto@pcbfl.gov",
+     "source_url": "https://www.pcbfl.gov/m/directory/department?did=28",
+     "elected": true,
+     "notes": "City Council dept page (Cloudflare-obfuscated, decoded)."
+    },
+    {
+     "seat": "Ward 2",
+     "holder": "Ethan Register",
+     "email": "ethan.register@pcbfl.gov",
+     "source_url": "https://www.pcbfl.gov/m/directory/department?did=28",
+     "elected": true,
+     "notes": "City Council dept page (Cloudflare-obfuscated, decoded)."
+    },
+    {
+     "seat": "Ward 3",
+     "holder": "Mary Coburn",
+     "email": "mary.coburn@pcbfl.gov",
+     "source_url": "https://www.pcbfl.gov/m/directory/department?did=28",
+     "elected": true,
+     "notes": "City Council dept page (Cloudflare-obfuscated, decoded)."
+    },
+    {
+     "seat": "Ward 4 (Vice Mayor)",
+     "holder": "Michael Jarman",
+     "email": "michael.jarman@pcbfl.gov",
+     "source_url": "https://www.pcbfl.gov/m/directory/department?did=28",
+     "elected": true,
+     "notes": "City Council dept page, listed as Vice Mayor, Ward 4 (Cloudflare-obfuscated, decoded)."
+    },
+    {
+     "seat": "City Manager",
+     "holder": "Drew Whitman",
+     "email": "drew.whitman@pcbfl.gov",
+     "source_url": "https://www.pcbfl.gov/m/directory/department?did=36",
+     "elected": false,
+     "notes": "City Manager dept page (Cloudflare-obfuscated, decoded)."
+    },
+    {
+     "seat": "Assistant City Manager",
+     "holder": "Holly White",
+     "email": "Holly.White@pcbfl.gov",
+     "source_url": "https://www.pcbfl.gov/m/directory/department?did=36",
+     "elected": false,
+     "notes": "City Manager dept page (Cloudflare-obfuscated, decoded). Capitalization as published."
+    }
+   ]
+  },
+  {
+   "government": "City of Lynn Haven",
+   "key": "lh",
+   "shared_email": "cityhall@cityoflynnhaven.com",
+   "shared_email_source": "https://www.cityoflynnhaven.com/directory.aspx",
+   "contact_form": null,
+   "seats": [
+    {
+     "seat": "Mayor",
+     "holder": "David Lowery",
+     "email": "dlowery@cityoflynnhaven.com",
+     "source_url": "https://www.cityoflynnhaven.com/directory.aspx",
+     "elected": true,
+     "notes": "Directory, Board of Commissioners, Mayor."
+    },
+    {
+     "seat": "Commissioner",
+     "holder": "Sam Peebles",
+     "email": "comm_speebles@cityoflynnhaven.com",
+     "source_url": "https://www.cityoflynnhaven.com/directory.aspx",
+     "elected": true,
+     "notes": "Directory, Board of Commissioners."
+    },
+    {
+     "seat": "Commissioner",
+     "holder": "Pat Perno",
+     "email": "pperno@cityoflynnhaven.com",
+     "source_url": "https://www.cityoflynnhaven.com/directory.aspx",
+     "elected": true,
+     "notes": "Directory, Board of Commissioners."
+    },
+    {
+     "seat": "Commissioner",
+     "holder": "Jamie Warrick",
+     "email": "comm_warrick@cityoflynnhaven.com",
+     "source_url": "https://www.cityoflynnhaven.com/directory.aspx",
+     "elected": true,
+     "notes": "Directory, Board of Commissioners."
+    },
+    {
+     "seat": "Commissioner",
+     "holder": "Corey Langford",
+     "email": null,
+     "source_url": null,
+     "elected": true,
+     "notes": "Not in the directory. His page (https://www.cityoflynnhaven.com/593/Corey-Langford) has no email. Other commissioners use mixed patterns (comm_x / first-initial+last), so nothing was guessed. Use cityhall@cityoflynnhaven.com."
+    },
+    {
+     "seat": "City Manager",
+     "holder": "Chris Lightfoot",
+     "email": "clightfoot@cityoflynnhaven.com",
+     "source_url": "https://www.cityoflynnhaven.com/directory.aspx",
+     "elected": false,
+     "notes": "Directory, City Manager."
+    }
+   ]
+  },
+  {
+   "government": "City of Callaway",
+   "key": "cw",
+   "shared_email": null,
+   "shared_email_source": null,
+   "contact_form": null,
+   "seats": [
+    {
+     "seat": "Mayor",
+     "holder": "Pamn Henderson",
+     "email": "mayor@cityofcallaway.com",
+     "source_url": "https://www.cityofcallaway.com/directory.aspx",
+     "elected": true,
+     "notes": "Directory lists this role address under Pamn Henderson, Mayor."
+    },
+    {
+     "seat": "Ward I",
+     "holder": "Bobby J. Birdsell",
+     "email": "commissionerbirdsell@cityofcallaway.com",
+     "source_url": "https://www.cityofcallaway.com/directory.aspx",
+     "elected": true,
+     "notes": "Directory lists this role address under Bobby Birdsell, Commissioner Ward I."
+    },
+    {
+     "seat": "Ward II (Mayor Pro Tem)",
+     "holder": "David Griggs",
+     "email": "commissionergriggs@cityofcallaway.com",
+     "source_url": "https://www.cityofcallaway.com/directory.aspx",
+     "elected": true,
+     "notes": "Directory lists this role address under David Griggs, Commissioner Ward II."
+    },
+    {
+     "seat": "Ward III",
+     "holder": "Bob Pelletier",
+     "email": "commissionerpelletier@cityofcallaway.com",
+     "source_url": "https://www.cityofcallaway.com/directory.aspx",
+     "elected": true,
+     "notes": "Directory lists this role address under Bob Pelletier, Commissioner Ward III."
+    },
+    {
+     "seat": "Ward IV",
+     "holder": "Kenneth L. Ayers, Jr.",
+     "email": "commissionerayers@cityofcallaway.com",
+     "source_url": "https://www.cityofcallaway.com/directory.aspx",
+     "elected": true,
+     "notes": "Directory lists this role address under Kenneth L. Ayers, Jr., Commissioner Ward IV."
+    },
+    {
+     "seat": "City Manager",
+     "holder": "Ed Cook",
+     "email": "citymanager@cityofcallaway.com",
+     "source_url": "https://www.cityofcallaway.com/directory.aspx",
+     "elected": false,
+     "notes": "Directory lists this role address under Ed Cook, City Manager."
+    }
+   ]
+  },
+  {
+   "government": "City of Springfield",
+   "key": "sp",
+   "shared_email": null,
+   "shared_email_source": null,
+   "contact_form": "https://www.springfieldfl.net/contact-us",
+   "seats": [
+    {
+     "seat": "Mayor",
+     "holder": "Ralph Hammond",
+     "email": null,
+     "source_url": null,
+     "elected": true,
+     "notes": "No address published. Web contact form only: https://www.springfieldfl.net/email-contact/node/3765/field_email (linked from /city-commission/directory-listing/ralph-hammond)."
+    },
+    {
+     "seat": "Ward 1",
+     "holder": "Jack Griffis (serving since 2023)",
+     "email": null,
+     "source_url": null,
+     "elected": true,
+     "notes": "No address published. Contact form only: https://www.springfieldfl.net/email-contact/node/3802/field_email"
+    },
+    {
+     "seat": "Ward 2",
+     "holder": "Richard Chval (serving since 2024)",
+     "email": null,
+     "source_url": null,
+     "elected": true,
+     "notes": "No address published. Contact form only: https://www.springfieldfl.net/email-contact/node/3812/field_email"
+    },
+    {
+     "seat": "Ward 3",
+     "holder": "Jackie Kennington (serving since 2016)",
+     "email": null,
+     "source_url": null,
+     "elected": true,
+     "notes": "No address published. Contact form only: https://www.springfieldfl.net/email-contact/node/3822/field_email"
+    },
+    {
+     "seat": "Ward 4",
+     "holder": "Cindy Hamre (serving since 2022)",
+     "email": null,
+     "source_url": null,
+     "elected": true,
+     "notes": "No address published. Contact form only: https://www.springfieldfl.net/email-contact/node/3832/field_email"
+    },
+    {
+     "seat": "City Clerk",
+     "holder": "Teresa Cox",
+     "email": null,
+     "source_url": null,
+     "elected": false,
+     "notes": "No address published. Contact form only: https://www.springfieldfl.net/email-contact/node/3842/field_email"
+    },
+    {
+     "seat": "Finance Director",
+     "holder": "Beth Strobel",
+     "email": null,
+     "source_url": null,
+     "elected": false,
+     "notes": "No address published. Her listing (/finance/directory-listing/beth-strobel) links contact forms only (node 3952/3972/3992)."
+    },
+    {
+     "seat": "Fire Chief",
+     "holder": "Brian Eddins",
+     "email": null,
+     "source_url": null,
+     "elected": false,
+     "notes": "No address published. Contact form only: https://www.springfieldfl.net/email-contact/node/4022/field_email"
+    },
+    {
+     "seat": "Police Chief",
+     "holder": "Barry Roberts",
+     "email": null,
+     "source_url": null,
+     "elected": false,
+     "notes": "No address published. Contact form only: https://www.springfieldfl.net/email-contact/node/4002/field_email"
+    }
+   ]
+  },
+  {
+   "government": "City of Parker",
+   "key": "parker",
+   "shared_email": "clerk@cityofparker.com",
+   "shared_email_source": "https://cityofparker.com/government/city-clerk/",
+   "contact_form": null,
+   "seats": [
+    {
+     "seat": "Mayor",
+     "holder": "Andrew Kelly",
+     "email": "akelly@cityofparker.com",
+     "source_url": "https://cityofparker.com/government/city-council/",
+     "elected": true,
+     "notes": "City Council page."
+    },
+    {
+     "seat": "Mayor Pro Tem",
+     "holder": "Tonya Barrow",
+     "email": "tbarrow@cityofparker.com",
+     "source_url": "https://cityofparker.com/government/city-council/",
+     "elected": true,
+     "notes": "City Council page, Mayor Pro Tem."
+    },
+    {
+     "seat": "Council Member",
+     "holder": "Katy Bodiford",
+     "email": null,
+     "source_url": null,
+     "elected": true,
+     "notes": "Listed on the City Council page with no email or phone."
+    },
+    {
+     "seat": "Council Member",
+     "holder": "Ron Chaple",
+     "email": "rchaple@cityofparker.com",
+     "source_url": "https://cityofparker.com/government/city-council/",
+     "elected": true,
+     "notes": "City Council page."
+    },
+    {
+     "seat": "Council Member",
+     "holder": "Mark Rega",
+     "email": null,
+     "source_url": null,
+     "elected": true,
+     "notes": "Listed on the City Council page with no email or phone."
+    },
+    {
+     "seat": "City Clerk",
+     "holder": "Rachelle Stanley",
+     "email": null,
+     "source_url": null,
+     "elected": false,
+     "notes": "The City Clerk page lists only the office address clerk@cityofparker.com and does not name Rachelle Stanley. Recorded at government level. No personal address found."
+    }
+   ]
+  },
+  {
+   "government": "City of Mexico Beach",
+   "key": "mb",
+   "shared_email": null,
+   "shared_email_source": null,
+   "contact_form": null,
+   "seats": [
+    {
+     "seat": "Mayor (Group 1)",
+     "holder": "Richard Wolff",
+     "email": "r.wolff@mexicobeachfl.gov",
+     "source_url": "https://mexicobeachfl.gov/government/mayor-and-council/",
+     "elected": true,
+     "notes": "Mayor & Council page (Cloudflare-obfuscated, decoded from mailto)."
+    },
+    {
+     "seat": "Group 2",
+     "holder": "Erik Fosshage",
+     "email": "e.fosshage@mexicobeachfl.gov",
+     "source_url": "https://mexicobeachfl.gov/government/mayor-and-council/",
+     "elected": true,
+     "notes": "Mayor & Council page (Cloudflare-obfuscated, decoded)."
+    },
+    {
+     "seat": "Group 3",
+     "holder": "Linda Hamilton",
+     "email": "l.hamilton@mexicobeachfl.gov",
+     "source_url": "https://mexicobeachfl.gov/government/mayor-and-council/",
+     "elected": true,
+     "notes": "Mayor & Council page (Cloudflare-obfuscated, decoded)."
+    },
+    {
+     "seat": "Group 4",
+     "holder": "Lisa Logan (appointed April 2026)",
+     "email": "l.logan@mexicobeachfl.gov",
+     "source_url": "https://mexicobeachfl.gov/government/mayor-and-council/",
+     "elected": true,
+     "notes": "Mayor & Council page; notes she was appointed April 2026 (Cloudflare-obfuscated, decoded)."
+    },
+    {
+     "seat": "Group 5",
+     "holder": "Steve Cox",
+     "email": "s.cox@mexicobeachfl.gov",
+     "source_url": "https://mexicobeachfl.gov/government/mayor-and-council/",
+     "elected": true,
+     "notes": "Mayor & Council page (Cloudflare-obfuscated, decoded)."
+    },
+    {
+     "seat": "City Administrator",
+     "holder": "Mell Smigielski",
+     "email": "mell@mexicobeachfl.gov",
+     "source_url": "https://mexicobeachfl.gov/government/staff-directory/",
+     "elected": false,
+     "notes": "City Staff Directory, City Hall Personnel tab: 'Mell Smigielski, City Administrator'."
+    },
+    {
+     "seat": "City Clerk",
+     "holder": "Tammy Brunson",
+     "email": "t.brunson@mexicobeachfl.gov",
+     "source_url": "https://mexicobeachfl.gov/government/staff-directory/",
+     "elected": false,
+     "notes": "City Staff Directory, City Clerk."
+    }
+   ]
+  },
+  {
+   "government": "Bay District Schools (School Board of Bay County)",
+   "key": "schools",
+   "shared_email": null,
+   "shared_email_source": null,
+   "contact_form": null,
+   "seats": [
+    {
+     "seat": "Superintendent",
+     "holder": "Mark McQueen (appointed by Gov. DeSantis July 2023 to finish Bill Husfelt's term)",
+     "email": "mcquemt@bay.k12.fl.us",
+     "source_url": "https://cdn.fldoe.org/accountability/data-sys/school-dis-data/superintendents.stml",
+     "elected": false,
+     "notes": "Florida DOE superintendent directory (official state page). The bay.k12.fl.us site sits behind a JavaScript bot challenge, so I couldn't confirm it there."
+    },
+    {
+     "seat": "District 2",
+     "holder": "Ann Leonard (not seeking re-election); Ginger Littleton won Aug 18, 2026 primary, term begins Nov 2026",
+     "email": null,
+     "source_url": null,
+     "elected": true,
+     "notes": "Not found. The bay.k12.fl.us school-board/board-members pages sit behind a JS 'Client Challenge' and couldn't be read. No public page found listing her address."
+    },
+    {
+     "seat": "District 3",
+     "holder": null,
+     "email": null,
+     "source_url": null,
+     "elected": true,
+     "notes": "Roster has no holder. Board member pages couldn't be read (JS challenge)."
+    },
+    {
+     "seat": "District 5",
+     "holder": null,
+     "email": null,
+     "source_url": null,
+     "elected": true,
+     "notes": "Roster has no holder. Board member pages couldn't be read (JS challenge)."
+    }
+   ]
+  }
+ ]
+}

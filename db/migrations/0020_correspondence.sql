@@ -19,9 +19,11 @@ create table if not exists corr.contacts (
   notes text,
   origin text not null default 'file',         -- file (from the JSON) or manual (edited in /admin)
   created_at timestamptz not null default now(),
-  updated_at timestamptz not null default now(),
-  unique (government, seat)
+  updated_at timestamptz not null default now()
 );
+-- Seat labels repeat ("Commissioner", "Council Member"), so a person is one government + seat + name.
+-- When a seat changes hands, the old holder's row is turned off rather than overwritten.
+create unique index if not exists contacts_person on corr.contacts (government, seat, coalesce(name, ''));
 
 -- One compose: a subject and body sent to one or more officials. Each recipient gets their own thread.
 create table if not exists corr.batches (
