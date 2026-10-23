@@ -645,3 +645,9 @@ details.el-dec > .el-rh,details.el-dec > .el-cands{padding:0 18px 16px}
 .vd-table .vd-gift{font-size:.66rem;padding:1px 7px;margin-left:6px;vertical-align:2px;letter-spacing:.02em;white-space:nowrap}
 .vd-table td.small{white-space:normal;min-width:9rem;max-width:16rem;color:var(--muted)}
 .vd-table td,.vd-table th{vertical-align:top}
+
+/* sub-headings kept at h4 size after moving to h3 for heading order */
+h3.h4,.tax h3.h4,.page h3.h4{font-family:var(--f-body);letter-spacing:normal;font-size:.95rem;font-weight:500;margin:0 0 10px;line-height:1.35}
+.vp-card h3.h4{margin:18px 0 6px;font-size:.92rem}
+details.el-dec > summary h3.el-dec-h{display:inline;font:inherit;font-weight:600;margin:0}
+.gov h3.h4.roster-h,.tax .gov h3.h4.roster-h{margin:14px 0 0;font-size:.7rem;font-weight:500}

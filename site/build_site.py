@@ -103,7 +103,13 @@ def hreflang(path):
     if not en:
         return ''
     es = EN_TO_ES[en]
-    return f'\n<link rel="alternate" hreflang="en" href="{DOMAIN}{en}">\n<link rel="alternate" hreflang="es" href="{DOMAIN}{es}">'
+    return (f'\n<link rel="alternate" hreflang="en" href="{DOMAIN}{en}">\n<link rel="alternate" hreflang="es" href="{DOMAIN}{es}">'
+            f'\n<link rel="alternate" hreflang="x-default" href="{DOMAIN}{en}">')
+
+
+def alternates(path):
+    en = ES_ALT.get(path) if path.startswith('/es') else (path if path in EN_TO_ES else None)
+    return [('en', en), ('es', EN_TO_ES[en]), ('x-default', en)] if en else []
 
 
 def nav_html(active):
@@ -291,30 +297,30 @@ def layout(title, desc, path, body, extra_head=''):
 
 
 def _layout(title, desc, path, body, extra_head=''):
-    full = f'{title} · {SITE}' if path != '/' else f'{SITE} · {title}'
     import html as _h
     from og import slug as _slug
+    from seo import head_title, meta_desc, jsonld
+    full = _h.escape(head_title(title, path), quote=False)
     pt, pd = PREVIEW.get(path, (title, desc))
     t, d = _h.escape(pt, quote=True), _h.escape(pd, quote=True)
+    md = _h.escape(meta_desc(pd), quote=True)
+    es = path.startswith('/es')
     ver = OG_VER.get(path, '')
     img = f'{DOMAIN}/og/{_slug(path) if path in OG_VER else "home"}.png' + (f'?v={ver}' if ver else '')
-    ld = ''
-    if path == '/':
-        ld = '<script type="application/ld+json">' + json.dumps({'@context': 'https://schema.org', '@graph': [
-            {'@type': 'WebSite', '@id': DOMAIN + '/#site', 'name': 'BayCounty.me', 'url': DOMAIN + '/', 'description': desc, 'inLanguage': 'en-US',
-             'publisher': {'@id': DOMAIN + '/#org'},
-             'potentialAction': {'@type': 'SearchAction', 'target': DOMAIN + '/search?q={search_term_string}', 'query-input': 'required name=search_term_string'}},
-            {'@type': 'Organization', '@id': DOMAIN + '/#org', 'name': 'Flux Labs', 'url': 'https://fluxlabs.net/'}]}) + '</script>'
+    robots = '<meta name="robots" content="noindex, follow">\n' if path == '/404' else '<meta name="robots" content="index, follow, max-image-preview:large">\n'
+    ld = '' if path == '/404' else jsonld(path, pt, pd, PAGE_LABELS, modified=last_updated(es_updated_key(path)), out_dir=OUT,
+                                           kind=page_kind(path), about=page_about(path))
     return f'''<!doctype html>
-<html lang="{'es' if path.startswith('/es') else 'en'}">
+<html lang="{'es-US' if es else 'en-US'}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{full}</title>
-<meta name="description" content="{d}">
-<link rel="canonical" href="{DOMAIN}{path}">{hreflang(path)}
+<meta name="description" content="{md}">
+{robots}<link rel="canonical" href="{DOMAIN}{path}">{hreflang(path)}
 <meta property="og:site_name" content="BayCounty.me">
-<meta property="og:locale" content="en_US">
+<meta property="og:locale" content="{'es_US' if es else 'en_US'}">
+<meta property="og:locale:alternate" content="{'en_US' if es else 'es_US'}">
 <meta property="og:type" content="website">
 <meta property="og:title" content="{t}">
 <meta property="og:description" content="{d}">
@@ -347,7 +353,7 @@ def _layout(title, desc, path, body, extra_head=''):
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
-{nav_html(path).replace('__LANGHREF__', ES_ALT.get(path, '/') if path.startswith('/es') else (EN_TO_ES.get(path) or '/es/')).replace('__LANGCODE__', 'en' if path.startswith('/es') else 'es').replace('__LANGLABEL__', 'English' if path.startswith('/es') else 'Español')}
+{nav_html(path).replace('__LANGHREF__', ES_ALT.get(path, '/') if path.startswith('/es') else (EN_TO_ES.get(path) or '/es')).replace('__LANGCODE__', 'en' if path.startswith('/es') else 'es').replace('__LANGLABEL__', 'English' if path.startswith('/es') else 'Español')}
 <main id="main">
 {body}
 </main>
@@ -659,6 +665,44 @@ prune_es({p[0] for p in PAGES})
 EN_TO_ES = {v: k for k, v in ES_ALT.items()}
 
 
+PAGE_LABELS = {}  # path -> short label for breadcrumbs, filled in main()
+
+
+def _labels():
+    from es_pages import ES_MENU
+    lab = {}
+    for menu in (MENU, ES_MENU):
+        for m in menu:
+            if m.get('href'):
+                lab[m['href']] = m['label']
+            for g in m.get('groups', []):
+                for c in g['items']:
+                    lab.setdefault(c['href'].split('#')[0], c['label'])
+    for p, t, _, _ in PAGES:
+        lab.setdefault(p, t)
+    lab.pop('/', None); lab.pop('/es', None)
+    return lab
+
+
+def page_kind(path):
+    return 'collection' if path in ('/governments', '/public-money/vendors', '/updates', '/open-data', '/glossary', '/es/glosario', '/meetings', '/es/reuniones') else None
+
+
+def page_about(path):
+    """What a profile page is about, so search engines can tie it to the real government or company."""
+    if path.startswith('/governments/'):
+        g = next((g for g in GOVLIST if f'/governments/{g["slug"]}' == path), None)
+        if g:
+            area = 'Bay County, Florida' if g.get('kind') in ('county', 'schools') else g['short'] + ', Florida'
+            return {'@type': 'GovernmentOrganization', 'name': g.get('name') or g['short'],
+                    'areaServed': {'@type': 'AdministrativeArea', 'name': area}}
+    if path.startswith('/public-money/vendors/'):
+        t = next((t for p, t, _, _ in PAGES if p == path), '')
+        n = t.rsplit(': contracts', 1)[0]
+        return {'@type': 'Organization', 'name': n} if n else None
+    return None
+
+
 def main():
     if os.path.exists(OUT):
         shutil.rmtree(OUT)
@@ -678,6 +722,7 @@ def main():
     from og import preview_text
     PREVIEW.update(preview_text())
     OG_VER.update(build_og(OUT, [x for x in PAGES if not x[0].startswith('/public-money/vendors/')], MENU))  # vendor pages use the default card
+    PAGE_LABELS.update(_labels())
     for path, title, desc, fn in PAGES:
         write(path, layout(title, desc, path, fn()))
     print('search index:', build_index(OUT, [x for x in PAGES if not x[0].startswith('/public-money/vendors/')]), 'entries')  # vendors: own indexer
@@ -686,6 +731,8 @@ def main():
         '<div class="page prose"><h1>That page isn\'t here.</h1><p><a href="/">Back to the home page</a></p></div>'))
     from admin_page import admin_page
     admin_page(OUT)
+    from seo import write_robots_and_sitemap
+    print('sitemap:', write_robots_and_sitemap(OUT, [p for p, *_ in PAGES], alternates, lambda p: last_updated(es_updated_key(p))), 'urls')
     for dp, _, fs in os.walk(OUT):
         for f in fs:
             p = os.path.join(dp, f); print(os.path.relpath(p, OUT), os.path.getsize(p))

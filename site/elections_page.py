@@ -206,7 +206,7 @@ def elections_page():
             sub.append(e(lbl) + (f' · {e(r["winner"])}' if r.get('winner') else ''))
         res = f' · <a class="src" href="{e(r["result_url"])}" target="_blank" rel="noopener">Official results</a>' if r.get('result_url') else ''
         return f'''<section class="el-race" data-g="{e(r.get("gov"))}" id="{e(r.get("id"))}"><div class="el-rh"><span class="eyebrow">{e(GOVN.get(r.get("gov"), ""))}</span><h3>{e(r["office"])}</h3><p class="small muted">{" · ".join(sub)}{res}</p>{f'<p class="small">{e(_clean(r["notes"]))}</p>' if r.get("notes") else ""}</div>
-      <div class="el-cands">{cards}</div></section>''' if is_active else f'''<details class="el-race el-dec" data-g="{e(r.get("gov"))}" id="{e(r.get("id"))}"><summary><span class="eyebrow">{e(GOVN.get(r.get("gov"), ""))}</span><b>{e(r["office"])}</b><span class="small muted">{" · ".join(sub[-1:])}</span></summary><div class="el-rh"><p class="small muted">{" · ".join(sub)}{res}</p>{f'<p class="small">{e(_clean(r["notes"]))}</p>' if r.get("notes") else ""}</div>
+      <div class="el-cands">{cards}</div></section>''' if is_active else f'''<details class="el-race el-dec" data-g="{e(r.get("gov"))}" id="{e(r.get("id"))}"><summary><span class="eyebrow">{e(GOVN.get(r.get("gov"), ""))}</span><h3 class="el-dec-h">{e(r["office"])}</h3><span class="small muted">{" · ".join(sub[-1:])}</span></summary><div class="el-rh"><p class="small muted">{" · ".join(sub)}{res}</p>{f'<p class="small">{e(_clean(r["notes"]))}</p>' if r.get("notes") else ""}</div>
       <div class="el-cands">{cards}</div></details>'''
 
     act = ''.join(race_html(r, True) for r in active)

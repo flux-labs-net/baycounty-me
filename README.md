@@ -90,6 +90,16 @@ Env vars: `RESEND_FULL_KEY` (or `RESEND_API_KEY`), a Resend key that can send fr
 Spam guards: hidden honeypot field, 3-second minimum fill time, origin check, 5 messages/hour per IP.
 Link to it with `/about?page=/some/path#contact` to prefill the page.
 
+## Search engines
+
+`site/seo.py` handles what search engines read on every page: the `<title>` (site name dropped when it would pass 60 characters),
+a meta description kept under 160, `robots` meta, en/es/x-default `hreflang`, and one JSON-LD graph (WebPage with breadcrumbs everywhere;
+GovernmentOrganization on government profiles, Organization on vendor pages, a DataCatalog of every download on /open-data,
+a DefinedTermSet on the glossary). The build also writes `robots.txt` and `sitemap.xml` (with `lastmod` and language alternates).
+Run `python3 site/seo_audit.py` after a build: it checks every page for missing or duplicate titles and descriptions, canonicals,
+`lang`, one `<h1>`, heading order, image alt text, valid JSON-LD and broken internal links, and exits non-zero on errors.
+The daily and weekly workflows run it after each rebuild and post a warning if it fails.
+
 ## Link previews
 
 `site/og.py` renders a 1200x630 Open Graph image per page with Playwright (title, headline number from

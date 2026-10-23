@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /api/
+Disallow: /alerts/manage
+
+Sitemap: https://baycounty.me/sitemap.xml

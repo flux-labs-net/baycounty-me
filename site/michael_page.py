@@ -111,8 +111,8 @@ def michael_page(out_dir):
   <section class="tx-sec" aria-labelledby="deb-h">
     <div class="sec-hd"><h2 id="deb-h">Debris cleanup</h2><span class="muted">The single biggest cost</span></div>
     <div class="two">
-      <div><h4>FEMA debris money by government</h4><div class="hbars small" id="debBars"></div></div>
-      <div><h4>Debris contracts we could confirm</h4><ul class="plain">{debris_rows}</ul></div>
+      <div><h3 class="h4">FEMA debris money by government</h3><div class="hbars small" id="debBars"></div></div>
+      <div><h3 class="h4">Debris contracts we could confirm</h3><ul class="plain">{debris_rows}</ul></div>
     </div>
   </section>
 

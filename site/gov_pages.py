@@ -80,16 +80,16 @@ def gov_page(key):
         board = [s for s in seats if s.get('elected') or not STAFF.search(s['seat'])]
         staff = [s for s in seats if s not in board]
         secs.append(f'''<section class="tx-sec"><div class="sec-hd"><h2 id="who">Who's in charge</h2><span class="muted">{e(off.get("form") or "")}</span></div>
-          <div class="two"><div class="card gov"><h4 class="roster-h">Elected</h4><ul class="roster">{"".join(roster_li(s) for s in board)}</ul></div>
-          <div class="card gov">{f'<h4 class="roster-h">Appointed staff</h4><ul class="roster">{"".join(roster_li(s) for s in staff)}</ul>' if staff else ''}
-          {('<h4 class="roster-h">Top pay</h4><ul class="roster">' + ''.join(f'<li><span class="seat">{e(x["title"])}</span><span class="who"><b>{usd(x["annual"])}</b><small>{e(x.get("name") or "")} {e(x.get("year") or "")}</small></span><span class="r-term"></span></li>' for x in p['pay']) + '</ul>') if p.get('pay') else ''}
+          <div class="two"><div class="card gov"><h3 class="h4 roster-h">Elected</h3><ul class="roster">{"".join(roster_li(s) for s in board)}</ul></div>
+          <div class="card gov">{f'<h3 class="h4 roster-h">Appointed staff</h3><ul class="roster">{"".join(roster_li(s) for s in staff)}</ul>' if staff else ''}
+          {('<h3 class="h4 roster-h">Top pay</h3><ul class="roster">' + ''.join(f'<li><span class="seat">{e(x["title"])}</span><span class="who"><b>{usd(x["annual"])}</b><small>{e(x.get("name") or "")} {e(x.get("year") or "")}</small></span><span class="r-term"></span></li>' for x in p['pay']) + '</ul>') if p.get('pay') else ''}
           <p class="gov-ft small">{f'<a href="{e(off["website"])}" target="_blank" rel="noopener">Website</a> · ' if off.get("website") else ""}{f'<a href="{e(off["contact_url"])}" target="_blank" rel="noopener">Contact</a> · ' if off.get("contact_url") else ""}<a href="/who-runs-bay-county">All officials</a></p></div></div></section>''')
     # money
     if b.get('revenue') or b.get('spending'):
         srcs = ' '.join(src(u, t) for t, u in b.get('sources', [])[:2])
         ctx = ''.join(f'<p class="note">{e(t)} {src(u)}</p>' for t, u in (b.get('context') or [])[:2])
         secs.append(f'''<section class="tx-sec"><div class="sec-hd"><h2 id="money">Money in, money out</h2><span class="muted">{e(b.get("status") or "")} budget{" · general fund " + money(b["general_fund"]) if b.get("general_fund") else ""}</span></div>
-          <div class="two"><div><h4>Where the money comes from</h4>{hbars(list((b.get("revenue") or {}).items()), "var(--s3)")}</div><div><h4>What the general fund pays for</h4>{hbars(list((b.get("spending") or {}).items()))}</div></div>
+          <div class="two"><div><h3 class="h4">Where the money comes from</h3>{hbars(list((b.get("revenue") or {}).items()), "var(--s3)")}</div><div><h3 class="h4">What the general fund pays for</h3>{hbars(list((b.get("spending") or {}).items()))}</div></div>
           {ctx}<p class="src-line">{srcs} · <a href="/public-money/tax-dollars">Compare every government's budget</a>{' · <a href="/public-money/budget-explorer?gov=' + key + '">Budget explorer</a>' if p.get("budget_detail") else ''}</p></section>''')
     # tax rate history
     m = p.get('millage')
@@ -128,14 +128,14 @@ def gov_page(key):
     if v:
         rs = ''.join(f'<li class="fd vt"><span class="vt-meta muted">{e(nice(x["date"]))} · {e(re.sub(r"[(].*?[)]", "", x.get("tally") or "").strip())}</span><div class="vt-h">{e(x["headline"])}</div><p class="small">Voted no: {e(", ".join(x["no"]) or "not named in the minutes")}</p></li>' for x in v['recent_split'])
         secs.append(f'''<section class="tx-sec"><div class="sec-hd"><h2 id="votes">How they voted</h2><span class="muted">{v["n"]} money votes recorded · {v["split"]} split ({v["split"]/v["n"]:.0%})</span></div>
-          {f'<h4>Most recent split votes</h4><ol class="findings">{rs}</ol>' if rs else '<p>Every recorded money vote was unanimous.</p>'}
+          {f'<h3 class="h4">Most recent split votes</h3><ol class="findings">{rs}</ol>' if rs else '<p>Every recorded money vote was unanimous.</p>'}
           <p class="src-line"><a href="/public-money/votes?g={key}#all">All {e(p["short"])} votes, by member</a></p></section>''')
     # contracts
     c = p.get('contracts')
     if c:
         big = ''.join(f'<li><b>{e(x["vendor"])}</b> · {money(x["amount"])} <span class="muted small">{e(x.get("purpose") or "")} ({e(x.get("date") or "")})</span> {src(x.get("source_url"))}</li>' for x in c['biggest'])
         secs.append(f'''<section class="tx-sec"><div class="sec-hd"><h2 id="contracts">Contracts</h2><span class="muted">{c["n"]} major contracts since October 2022 · {money(c["total"])}</span></div>
-          <h4>Largest</h4><ul class="plain">{big}</ul>
+          <h3 class="h4">Largest</h3><ul class="plain">{big}</ul>
           <p class="src-line"><a href="/public-money/contracts?gov={e(g["contracts"])}#all">All {e(p["short"])} contracts</a></p></section>''')
     # projects & recovery
     tiles = []
@@ -185,6 +185,7 @@ def govs_index():
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Governments</span><h1>Bay County's local governments</h1>
     <p class="lede">One page for each government: who runs it, its budget and tax rate, debt, audit findings, votes, contracts and projects. Pick yours, or compare them side by side.</p></div>
     <div class="stamp"><a class="pill" href="/compare">Compare governments</a></div></header>
+  <h2 class="sr">Every local government</h2>
   <div class="topics">{cards}</div>
   <p class="note">Bay County residents pay the county and school district, and city residents also pay their city. Unincorporated areas are served by the county alone. <a href="/my-address/">Find yours by address</a>.</p>
 </div>

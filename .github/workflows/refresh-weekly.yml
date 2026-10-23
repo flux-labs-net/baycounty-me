@@ -43,6 +43,11 @@ jobs:
         run: |
           cd data && python build.py && python prep_dash.py
           cd ../site && python build_site.py > /dev/null
+      - name: SEO check
+        working-directory: site
+        run: |
+          if ! python seo_audit.py > "$RUNNER_TEMP/seo.txt"; then echo "::warning title=SEO check::seo_audit.py found errors; see the log"; fi
+          tail -25 "$RUNNER_TEMP/seo.txt"
       - name: Commit if changed
         id: commit_and_push
         run: |
