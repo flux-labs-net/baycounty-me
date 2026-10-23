@@ -46,7 +46,8 @@ function kpis(rows) {
   ].map(([l, v, s]) => `<div class="kpi"><span class="eyebrow">${l}</span><span class="v">${v}</span><span class="s">${s}</span></div>`).join('');
 }
 
-let sim, hl;
+let sim, hl, graphZoom;
+function graphBtn(f) { const svg = d3.select('#crnGraph'); if (!graphZoom) return; if (f === 0) svg.transition().duration(250).call(graphZoom.transform, d3.zoomIdentity); else svg.transition().duration(250).call(graphZoom.scaleBy, f); }
 function graph(rows) {
   const svg = d3.select('#crnGraph'), W = svg.node().clientWidth || 800, H = svg.node().clientHeight || 620;
   svg.attr('viewBox', `0 0 ${W} ${H}`).selectAll('*').remove();
@@ -79,7 +80,8 @@ function graph(rows) {
   N.forEach(n => n.r = n.k === 'cra' ? 17 : n.k === 'official' ? 8 : Math.max(5, rS(n.total)));
   const connected = new Set(L.filter(l => l.type !== 'paid').flatMap(l => [l.source, l.target]));
   const g = svg.append('g');
-  svg.call(d3.zoom().scaleExtent([0.4, 4]).on('zoom', e => g.attr('transform', e.transform)));
+  graphZoom = d3.zoom().scaleExtent([0.3, 5]).on('zoom', e => g.attr('transform', e.transform));
+  svg.call(graphZoom);
   const link = g.append('g').selectAll('line').data(L).join('line')
     .attr('stroke', d => d.type === 'rel' ? 'var(--amber)' : d.type === 'paid' ? 'var(--faint)' : 'var(--salmon)')
     .attr('stroke-opacity', d => d.type === 'paid' ? 0.55 : 0.95)
@@ -217,10 +219,15 @@ function profile() {
 function tip(e, h, id) { const t = $(id), b = t.parentElement.getBoundingClientRect(); t.innerHTML = h; t.hidden = false; let lx = e.clientX - b.left + 12; if (lx > b.width - 250) lx = e.clientX - b.left - 252; t.style.left = Math.max(4, lx) + 'px'; t.style.top = (e.clientY - b.top + 12) + 'px'; }
 function hideTip(id) { $(id).hidden = true; }
 
-function select(id) { st.sel = id; profile(); if (st.view === 'network' && hl) hl(); if (st.view === 'map') map(visible()); if (id && innerWidth <= 900) $('crnProfile').scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+function select(id) {
+  st.sel = id; document.querySelector('.crn-main').classList.toggle('has-sel', !!id); profile();
+  if (st.view === 'network' && hl) hl(); if (st.view === 'map') map(visible());
+  const wide = st.view === 'network' || st.view === 'map';
+  if (id && (innerWidth <= 900 || (wide && innerWidth < 1100))) $('crnProfile').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
 function setView(v) {
   st.view = v;
-  document.querySelector('.crn-main').classList.toggle('wide', v === 'map');
+  document.querySelector('.crn-main').classList.toggle('wide', v === 'map' || v === 'network');
   ['network', 'map', 'payees', 'donations'].forEach(k => { $('v-' + k).hidden = k !== v; $('t-' + k).setAttribute('aria-selected', k === v); });
   if (location.hash.slice(1) !== v) history.replaceState(null, '', '#' + v);
   render();
@@ -234,6 +241,7 @@ function render() {
 function start() {
   controls();
   [['crnZin', 1.6], ['crnZout', 1 / 1.6], ['crnZreset', 0]].forEach(([id, f]) => { const b = $(id); if (b) b.onclick = () => mapBtn(f); });
+  [['crnGin', 1.5], ['crnGout', 1 / 1.5], ['crnGreset', 0]].forEach(([id, f]) => { const b = $(id); if (b) b.onclick = () => graphBtn(f); });
   const h = location.hash.slice(1);
   setView(['network', 'map', 'payees', 'donations'].includes(h) ? h : 'network');
   fetch('/data/cra-geo.json').then(r => r.json()).then(g => { GEO = g; if (st.view === 'map') map(visible()); }).catch(() => { $('crnMap').innerHTML = '<text x="20" y="30" fill="var(--muted)" font-size="13">The map could not load. Try reloading the page.</text>'; });
