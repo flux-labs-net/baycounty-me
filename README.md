@@ -31,6 +31,10 @@ geo/
   *.json          city limits (U.S. Census TIGER) and Bay County outline
 ```
 
+## iOS app
+
+`ios/` holds the native iPhone app. It reads the same `/downloads/*.json` files and `/api/v1/search`, so new data shows up in the app without an app update. Setup and layout: `ios/README.md`. When a dataset is added, give it an entry in `ios/BayCountyKit/Sources/BayCountyKit/DatasetSpec.swift` so it gets a proper title and filters (it shows under "More data" until then). The `iOS data layer tests` workflow checks the app's data layer against every published dataset.
+
 ## Agenda watcher
 
 `data/agendas/watch_agendas.py` reads the agenda inbox (`ingest@baycounty.me` in Resend, triggered instantly by `api/agenda-inbound.js`) and every agenda system, stores each agenda, packet and minutes file with its versions, and reports on /admin → Agendas. Setup and secrets: `data/agendas/README_agendas.md`.

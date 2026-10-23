@@ -1,0 +1,5 @@
+BayCountyMe.xcodeproj/
+.build/
+.swiftpm/
+DerivedData/
+xcuserdata/
