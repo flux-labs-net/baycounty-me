@@ -92,8 +92,9 @@ struct HomeView: View {
 
                 Section("Follow the money") {
                     LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 10) {
+                        // Buttons, not NavigationLinks: several links in one list row all fire the last one.
                         ForEach(topics, id: \.title) { t in
-                            NavigationLink(value: t.route) {
+                            Button { path.append(t.route) } label: {
                                 VStack(alignment: .leading, spacing: 8) {
                                     Image(systemName: t.symbol).font(.title3).foregroundStyle(Brand.navy)
                                     Text(t.title).font(.subheadline.weight(.medium)).foregroundStyle(.primary)
