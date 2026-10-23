@@ -24,7 +24,7 @@
 .crn #crnGraph{width:100%;height:clamp(560px,80vh,920px);display:block;touch-action:none;cursor:grab}
 @media (max-width:600px){.crn #crnGraph{height:560px}}
 .crn #crnMap{width:100%;height:auto;min-height:420px;display:block;touch-action:none;cursor:grab}
-.crn .crn-town{font:600 13px var(--f-body);fill:var(--ink);paint-order:stroke;stroke:var(--surface);stroke-width:4px}
+.crn .crn-town{font-weight:600;font-family:var(--f-body);font-size:13px;fill:var(--ink);paint-order:stroke;stroke:var(--surface);stroke-width:4px}
 .crn .crn-node text{font:500 11px var(--f-body);fill:var(--ink);pointer-events:none;paint-order:stroke;stroke:var(--surface);stroke-width:3px}
 .crn .crn-node circle,#crnMap circle{cursor:pointer}
 .crn .dim{opacity:.12}
@@ -33,7 +33,7 @@
 .crn .crn-pad{padding:14px;display:flex;flex-direction:column;gap:12px}
 .crn .crn-tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--bg);font-size:12px;line-height:1.4;padding:6px 8px;border-radius:6px;max-width:240px;z-index:5}
 .crn .crn-profile{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;display:flex;flex-direction:column;gap:14px;position:sticky;top:calc(env(safe-area-inset-top,0px) + 12px);max-height:calc(100vh - 24px);overflow-y:auto}
-@media (max-width:900px){.crn .crn-profile{position:static;max-height:none}}
+@media (max-width:900px){.crn .crn-profile{position:relative;top:auto;max-height:none}}
 .crn .crn-profile h2{margin:2px 0 0;font-size:19px;line-height:1.25}
 .crn .crn-profile p{margin:0}
 .crn .crn-big{font:500 24px var(--f-data);font-variant-numeric:tabular-nums}
@@ -54,11 +54,33 @@
 .crn td.num,.crn th.num{text-align:right;font-variant-numeric:tabular-nums}
 .crn .crn-profile h3{font-size:11.5px;margin:0 0 4px}
 .crn .crn-main.wide{grid-template-columns:minmax(0,1fr)}
-.crn .crn-main.wide .crn-profile{position:static;max-height:none}
+.crn .crn-main.wide .crn-profile{position:relative;top:auto;max-height:none}
 .crn .crn-zoom{position:absolute;top:10px;left:10px;display:flex;flex-direction:column;gap:4px}
 .crn .crn-zoom button{font:600 15px var(--f-body);min-width:34px;height:34px;padding:0 8px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);cursor:pointer}
 .crn .crn-zoom button#crnZreset{font-size:12px}
 .crn .crn-main.wide{position:relative}
 @media (min-width:1100px){
   .crn .crn-main.wide.has-sel .crn-profile{position:absolute;top:64px;right:12px;width:340px;max-height:calc(100% - 124px);overflow-y:auto;z-index:4;box-shadow:0 10px 28px rgba(15,25,45,.18)}
+}
+.crn .crn-fsbar{display:flex;gap:6px;align-items:center;order:3}
+.crn .crn-fsonly{display:none;gap:6px}
+.crn .crn-x{display:none;position:absolute;top:8px;right:8px;width:32px;height:32px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font:500 20px/1 var(--f-body);cursor:pointer}
+html.crn-locked,html.crn-locked body{overflow:hidden}
+/* full screen: the view fills the viewport; details float over it */
+.crn .crn-main.fs{position:fixed;inset:0;z-index:1000;display:block;background:var(--bg);padding:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px)}
+.crn .crn-main.fs .crn-view{height:100%;border:0;border-radius:0;display:flex;flex-direction:column}
+.crn .crn-main.fs .crn-view>section:not([hidden]){flex:1;display:flex;flex-direction:column;min-height:0}
+.crn .crn-main.fs .crn-wrap{flex:1;min-height:0}
+.crn .crn-main.fs #crnGraph,.crn .crn-main.fs #crnMap{height:100%;min-height:0;background:var(--water)}
+.crn .crn-main.fs #crnGraph{background:var(--surface)}
+.crn .crn-main.fs .crn-view>section>.crn-note{display:none}
+.crn .crn-main.fs .crn-fsonly{display:flex}
+.crn .crn-main.fs .crn-legend{display:none}
+@media (min-width:700px){.crn .crn-main.fs .crn-legend{display:flex}}
+.crn .crn-main.fs .crn-profile{display:none}
+.crn .crn-main.fs.has-sel .crn-profile{display:flex;position:absolute;z-index:5;overflow-y:auto;box-shadow:0 10px 28px rgba(15,25,45,.22);top:calc(env(safe-area-inset-top,0px) + 64px);right:calc(env(safe-area-inset-right,0px) + 12px);width:360px;max-height:calc(100% - 84px)}
+.crn .crn-main.fs .crn-x,.crn .crn-main.wide.has-sel .crn-x{display:block}
+.crn .crn-profile>.crn-x+div{padding-right:36px}
+@media (max-width:699px){
+  .crn .crn-main.fs.has-sel .crn-profile{top:auto;left:0;right:0;bottom:0;width:auto;max-height:55%;border-radius:16px 16px 0 0;padding-bottom:calc(16px + env(safe-area-inset-bottom,0px))}
 }
