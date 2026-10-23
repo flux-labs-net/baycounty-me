@@ -45,6 +45,7 @@ public enum SitePages {
         "/public-money/audits": .dataset("audit-findings"),
         "/public-money/vendors": .native("Companies"),
         "/public-money/map": .web("combined public money map"),
+        "/public-money/cra-network": .web("CRA network graph"),
         "/glossary": .native("Glossary"),
         "/updates": .native("What's new"),
         "/search": .native("Search tab"),
