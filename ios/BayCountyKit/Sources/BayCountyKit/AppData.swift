@@ -260,8 +260,46 @@ public struct PeopleDirectory: Codable, Sendable {
         public let gov_ids: [String]
         public let roles: [Role]
 
+        /// Roles with the duplicates removed. Sources word the same office differently
+        /// ("board member", "County Commissioner", "officeholder: Bay County Commission, District 5"),
+        /// so within one government the generic wordings give way to a specific one,
+        /// and a role that is a shorter form of another ("County Commissioner") is dropped.
+        public var mainRoles: [Role] {
+            func generic(_ r: Role) -> Bool {
+                let t = (r.role ?? "").lowercased()
+                return t == "board member" || t.hasPrefix("officeholder:")
+            }
+            var out: [Role] = []
+            var govs: [String?] = []
+            for r in roles where !govs.contains(r.gov_id) { govs.append(r.gov_id) }
+            for g in govs {
+                let here = roles.filter { $0.gov_id == g }
+                let specific = here.filter { !generic($0) }
+                var keep = specific.isEmpty ? here : specific
+                if specific.isEmpty, keep.contains(where: { ($0.role ?? "").lowercased().hasPrefix("officeholder:") }) {
+                    keep = keep.filter { ($0.role ?? "").lowercased().hasPrefix("officeholder:") }
+                }
+                // Candidate filings and the elections office name some seats two ways.
+                func norm(_ r: Role) -> String {
+                    var t = (r.role ?? "").lowercased()
+                    for w in ["city of ", "bay district ", "residential golf "] { t = t.replacingOccurrences(of: w, with: "") }
+                    return t.replacingOccurrences(of: "commissioner, ward", with: "commission, ward")
+                }
+                let texts = keep.map(norm)
+                var seen = Set<String>()
+                for r in keep {
+                    let t = norm(r)
+                    if texts.contains(where: { $0 != t && $0.hasPrefix(t) }) { continue }
+                    if seen.insert(t).inserted { out.append(r) }
+                }
+            }
+            return out
+        }
+
         public var headline: String {
-            let r = roles.first { !($0.role ?? "").hasPrefix("former") } ?? roles.first
+            let main = mainRoles
+            let r = main.first { r in let t = r.role ?? ""; return !t.hasPrefix("former") && !t.hasPrefix("2026 candidate") }
+                ?? main.first { !($0.role ?? "").hasPrefix("former") } ?? main.first
             let gov = (r?.gov_id ?? gov_ids.first).flatMap { Governments.names[$0] } ?? ""
             let role = (r?.role ?? "").prefix(1).uppercased() + (r?.role ?? "").dropFirst()
             return [role, gov].filter { !$0.isEmpty }.joined(separator: ", ")

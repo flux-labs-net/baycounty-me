@@ -93,6 +93,13 @@ final class WebParityTests: XCTestCase {
         XCTAssertGreaterThan(v.vendors.count, 500)
         let p = try dec.decode(PeopleDirectory.self, from: Data(contentsOf: app.appendingPathComponent("people.json")))
         XCTAssertGreaterThan(p.people.count, 100)
+        // Same office, worded by several sources, shows once.
+        if let pease = p.people.first(where: { $0.id == "clair-pease" }) {
+            XCTAssertEqual(pease.mainRoles.map(\.role), ["County Commissioner, District 5 (Chairman)"])
+            XCTAssertEqual(pease.headline, "County Commissioner, District 5 (Chairman), Bay County")
+        }
+        if let a = p.people.first(where: { $0.id == "nick-atkinson" }) { XCTAssertEqual(a.mainRoles.count, 1) }
+        for person in p.people { XCTAssertFalse(person.mainRoles.isEmpty, person.id) }
         let dc = try dec.decode(DonorContracts.self, from: Data(contentsOf: app.appendingPathComponent("donor-contracts.json")))
         XCTAssertGreaterThan(dc.matches.count, 50)
         let mm = try dec.decode(MoneyMap.self, from: Data(contentsOf: app.appendingPathComponent("money-map.json")))
