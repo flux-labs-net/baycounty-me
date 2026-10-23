@@ -157,6 +157,7 @@ struct HomeView: View {
             "updates": .updates, "about": .about, "cra": .cra, "myaddress": .myAddress, "contracts": .dataset("contracts"),
             "vendor": .vendor("roberts-and-roberts"), "person": .person("clair-pease"), "explore": .explore,
             "votes": .dataset("votes"), "salaries": .dataset("salary-positions"),
+            "accountability": .accountability, "accproject": .accountabilityProject("pcb-fbr-seg3"),
         ]
         if let r = simple[arg] { path = [r]; return }
         let tabs: [String: AppStore.Tab] = ["tab:governments": .governments, "tab:money": .money, "tab:meetings": .meetings, "tab:search": .search]

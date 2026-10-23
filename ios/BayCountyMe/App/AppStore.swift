@@ -38,6 +38,7 @@ final class AppStore {
     private(set) var people: PeopleDirectory?
     private(set) var donorContracts: DonorContracts?
     private(set) var moneyMap: MoneyMap?
+    private(set) var accountability: AccountabilityConsole?
 
     /// The saved home address, kept only on this phone.
     var home: AddressMatch? {
@@ -127,6 +128,16 @@ final class AppStore {
     func loadPeople() async { await loadApp("people.json") { (m: PeopleDirectory) in self.people = m } }
     func loadDonorContracts() async { await loadApp("donor-contracts.json") { (m: DonorContracts) in self.donorContracts = m } }
     func loadMoneyMap() async { await loadApp("money-map.json") { (m: MoneyMap) in self.moneyMap = m } }
+
+    /// The Accountability console reads the site's own /data/accountability.json (errors keyed like app files).
+    func loadAccountability(force: Bool = false) async {
+        let key = "app:accountability.json"
+        guard force || accountability == nil || errors[key] != nil else { return }
+        do {
+            let (c, f) = try await client.accountability()
+            accountability = c; freshness[key] = f; errors[key] = nil
+        } catch { errors[key] = error.localizedDescription }
+    }
 
     func appError(_ name: String) -> String? { errors["app:" + name] }
 

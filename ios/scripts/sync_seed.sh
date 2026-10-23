@@ -13,4 +13,6 @@ done
 for f in tax address amendment3 glossary pages updates vendors people donor-contracts money-map; do
   cp "site/public/data/app/$f.json" "$dst/$f.json"
 done
+# The Accountability console reads the site's own console file.
+cp site/public/data/accountability.json "$dst/accountability.json"
 echo "Seed updated from $src ($(python3 -c "import json;print(json.load(open('$src/index.json'))['updated'])"))"

@@ -29,6 +29,7 @@ struct MoneyView: View {
         .init(title: "Hurricane Michael", symbol: "hurricane", detail: "Every FEMA rebuilding project", route: .dataset("fema-michael-projects")),
     ]
     private let accountability: [Item] = [
+        .init(title: "Accountability console", symbol: "checklist", detail: "Projects from budget to close-out, with open questions", route: .accountability),
         .init(title: "Contracts", symbol: "signature", detail: "Who wins contracts, and how", route: .dataset("contracts")),
         .init(title: "Companies", symbol: "building", detail: "Every company paid, with its contracts and votes", route: .vendors),
         .init(title: "How they voted", symbol: "hand.raised", detail: "Every recorded vote on money decisions", route: .dataset("votes")),
