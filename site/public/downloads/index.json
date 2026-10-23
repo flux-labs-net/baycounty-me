@@ -1,6 +1,6 @@
 {
  "name": "BayCounty.me open data",
- "updated": "2026-10-22",
+ "updated": "2026-10-23",
  "license": "Public records; free to reuse with credit to BayCounty.me",
  "datasets": [
   {
@@ -2048,7 +2048,7 @@
    "id": "meetings",
    "title": "Upcoming meetings",
    "description": "Scheduled and expected meetings for every board.",
-   "rows": 49,
+   "rows": 50,
    "columns": [
     {
      "name": "board",
@@ -2143,7 +2143,6 @@
       "https://mexicobeachfl.gov/uploads/2026/10/November-5-2026-Special-Meeting-LDC-Workshop.pdf",
       "https://mexicobeachfl.gov/uploads/2026/10/October-29-2026-LDC-Workshop-3.pdf",
       "https://mexicobeachfl.gov/uploads/2026/10/October-30-2026-Special-Meeting-LDC-Workshop-2.pdf",
-      "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=419",
       "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=421",
       "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_09172026-423",
       "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_10132026-425",
@@ -2238,6 +2237,7 @@
       "https://lynnhavenfl.portal.civicclerk.com/event/1070/files",
       "https://lynnhavenfl.portal.civicclerk.com/event/1093/files",
       "https://lynnhavenfl.portal.civicclerk.com/event/1094/files",
+      "https://lynnhavenfl.portal.civicclerk.com/event/1095/files",
       "https://lynnhavenfl.portal.civicclerk.com/event/2130/files",
       "https://lynnhavenfl.portal.civicclerk.com/event/2143/files",
       "https://www.bay.k12.fl.us/school-board-meetings",
