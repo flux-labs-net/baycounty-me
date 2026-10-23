@@ -24,6 +24,7 @@ struct SearchView: View {
                         NavigationLink(value: Route.glossary) { Label("Glossary", systemImage: "character.book.closed") }
                         NavigationLink(value: Route.explore) { Label("Every dataset", systemImage: "square.grid.2x2") }
                         NavigationLink(value: Route.vendors) { Label("Companies", systemImage: "building") }
+                        NavigationLink(value: Route.accountability) { Label("Accountability console", systemImage: "checklist") }
                         NavigationLink(value: Route.people) { Label("People", systemImage: "person.3") }
                         NavigationLink(value: Route.updates) { Label("What's new", systemImage: "sparkles") }
                         NavigationLink(value: Route.about) { Label("About and privacy", systemImage: "info.circle") }
