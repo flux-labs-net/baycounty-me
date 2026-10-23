@@ -17,12 +17,28 @@ const KIND = {budget: 'Budget', estimate: 'Estimate', approval: 'Approved', awar
 const SRC = {reviewed: 'Reviewed history', contracts: 'Contract', surtax: 'Sales tax project'};
 const REPLY = {not_sent: 'Not yet sent to the agency', sent: 'Sent to the agency, awaiting a reply', replied: 'Agency replied'};
 const P = D.projects, BY = Object.fromEntries(P.map(p => [p.id, p]));
-const F = {q: $('acQ'), g: $('acG'), f: $('acF'), s: $('acS'), o: $('acO')};
+const F = {y: $('acY'), q: $('acQ'), g: $('acG'), f: $('acF'), s: $('acS'), o: $('acO')};
 const fmtD = d => { if (!d) return 'Date not stated'; const m = /^(\d{4})-(\d{2})(?:-(\d{2}))?$/.exec(d); if (!m) return d;
   const dt = new Date(+m[1], +m[2] - 1, +(m[3] || 1)); return dt.toLocaleDateString('en-US', m[3] ? {month: 'short', day: 'numeric', year: 'numeric'} : {month: 'short', year: 'numeric'}); };
 const yr = s => s && s !== '9999' ? s.slice(0, 4) : '';
 const hay = p => (p.n + ' ' + p.g + ' ' + (p.agency || '') + ' ' + (p.where || '') + ' ' + (p.vn || '') + ' ' + p.ev.map(x => (x.payee || '') + ' ' + x.t).join(' ')).toLowerCase();
 P.forEach(p => { p._h = hay(p); });
+/* year of activity: a project counts in every year it has a dated record up to today (planned dates ahead don't count).
+   The page opens on the newest year with activity; ?y= or ?year= (a year or 'all') picks another. */
+const TODAY = new Date().toISOString().slice(0, 10);
+P.forEach(p => { p._ys = [...new Set(p.ev.filter(x => x.s && x.s !== '9999' && x.s <= TODAY).map(x => +x.s.slice(0, 4)))]; });
+const YRS = [...new Set(P.flatMap(p => p._ys))].sort((a, b) => b - a);
+F.y.innerHTML += YRS.map(y => `<option value="${y}">${y}</option>`).join('');
+F.y.value = String(TT.startYear(YRS, TT.countBy(P.flatMap(p => p._ys))));
+const big0 = big;
+function strip() { // the numbers at the top follow the year picker
+  const y = +F.y.value, ps = y ? P.filter(p => p._ys.includes(y)) : P;
+  $('acsN').textContent = ps.length.toLocaleString(); $('acsNl').textContent = y ? `projects active in ${y}` : 'projects tracked';
+  $('acsM').textContent = big0(ps.reduce((a, p) => a + (p.money || 0), 0));
+  $('acsF').textContent = ps.filter(p => p.flags.length).length.toLocaleString();
+  $('acsG').textContent = ps.reduce((a, p) => a + p.gaps.length, 0).toLocaleString();
+  $('acsR').textContent = ps.filter(p => p.reply.status === 'replied').length.toLocaleString();
+}
 let shown = 30, cur = [];
 
 function chips(p, max = 3) {
@@ -89,14 +105,15 @@ const ORDER = {
   new: (a, b) => (b.last || '').localeCompare(a.last || ''),
   growth: (a, b) => (b.growth ?? -1e9) - (a.growth ?? -1e9)};
 function filt(push = true) {
-  const q = F.q.value.trim().toLowerCase(), g = F.g.value, f = F.f.value, s = F.s.value;
-  cur = P.filter(p => (!g || p.g === g) && (!s || p.src === s) && (!f || (f === 'any' ? p.flags.length : p.flags.some(x => x.r === f))) && (!q || p._h.includes(q)));
+  const q = F.q.value.trim().toLowerCase(), g = F.g.value, f = F.f.value, s = F.s.value, y = +F.y.value;
+  cur = P.filter(p => (!y || p._ys.includes(y)) && (!g || p.g === g) && (!s || p.src === s) && (!f || (f === 'any' ? p.flags.length : p.flags.some(x => x.r === f))) && (!q || p._h.includes(q)));
   cur.sort(ORDER[F.o.value] || ORDER.flags);
   const fl = cur.filter(p => p.flags.length).length;
   $('acCount').textContent = `${cur.length} project${cur.length === 1 ? '' : 's'} · ${fl} with a question · ${big(cur.reduce((a, p) => a + (p.money || 0), 0))}`;
   $('acList').innerHTML = cur.length ? cur.slice(0, shown).map(card).join('') : '<p class="muted">No projects match. Try clearing a filter.</p>';
   $('acMore').hidden = cur.length <= shown;
-  if (push) { const u = new URL(location.href); [['q', q], ['g', g], ['f', f], ['s', s], ['o', F.o.value === 'flags' ? '' : F.o.value]].forEach(([k, v]) => v ? u.searchParams.set(k, v) : u.searchParams.delete(k)); history.replaceState(null, '', u); }
+  strip();
+  if (push) { const u = new URL(location.href); [['y', F.y.value || 'all'], ['q', q], ['g', g], ['f', f], ['s', s], ['o', F.o.value === 'flags' ? '' : F.o.value]].forEach(([k, v]) => v ? u.searchParams.set(k, v) : u.searchParams.delete(k)); history.replaceState(null, '', u); }
 }
 $('acList').addEventListener('click', ev => {
   const sh = ev.target.closest('.acct-share');
@@ -126,6 +143,7 @@ function go(id) { // show one project, clearing filters that would hide it
 }
 const P0 = new URLSearchParams(location.search);
 [['q', 'q'], ['g', 'g'], ['f', 'f'], ['s', 's'], ['o', 'o']].forEach(([k, f]) => { const v = P0.get(k); if (v != null) F[f].value = v; });
+{ const v = P0.get('y'); if (v != null) F.y.value = v === 'all' ? '' : v; else if (P0.get('q')) F.y.value = ''; }
 filt(false);
 if (P0.get('p') && BY[P0.get('p')]) go(P0.get('p'));
 })();

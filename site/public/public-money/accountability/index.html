@@ -55,11 +55,11 @@
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Public Money · Accountability</span><h1>Accountability console</h1>
     <p class="lede">Public projects followed from the first budget to the day they close: what was promised, what was approved, every change order and payment we can find, and what it cost in the end. Where the record raises a question, it's flagged by a published rule and sent to the agency for an answer.</p></div></header>
   <div class="acct-stats" role="list">
-    <div role="listitem"><b>94</b><span>projects tracked</span></div>
-    <div role="listitem"><b>$399.6M</b><span>in those projects</span></div>
-    <div role="listitem"><b>43</b><span>with a question</span></div>
-    <div role="listitem"><b>29</b><span>records still missing</span></div>
-    <div role="listitem"><b>0</b><span>agency replies</span></div>
+    <div role="listitem"><b id="acsN">94</b><span id="acsNl">projects tracked</span></div>
+    <div role="listitem"><b id="acsM">$399.6M</b><span>in those projects</span></div>
+    <div role="listitem"><b id="acsF">43</b><span>with a question</span></div>
+    <div role="listitem"><b id="acsG">29</b><span>records still missing</span></div>
+    <div role="listitem"><b id="acsR">0</b><span>agency replies</span></div>
   </div>
   <section class="explain"><div class="ex-txt"><span class="eyebrow">How it works</span><h2>Four steps for every project</h2>
     <ol class="ex-steps">
@@ -70,6 +70,7 @@
     </ol></div></section>
   <section class="tx-sec" id="list"><div class="sec-hd"><h2>Projects</h2><span class="muted" id="acCount" aria-live="polite"></span></div>
     <div class="filters-row acct-filters">
+      <select id="acY" aria-label="Year of activity"><option value="">All years</option></select>
       <input id="acQ" type="search" placeholder="Search project, company or place" aria-label="Search projects">
       <select id="acG" aria-label="Government"><option value="">All governments</option><option>Bay County</option><option>Callaway</option><option>Lynn Haven</option><option>Mexico Beach</option><option>Panama City</option><option>Panama City Beach</option><option>Springfield</option></select>
       <select id="acF" aria-label="Flag"><option value="">Any flag or none</option><option value="any">Any flag</option><option value="growth">Cost grew more than 10%</option><option value="late">Running late</option><option value="conflict">Figures don&#x27;t agree</option><option value="payee">Who was paid isn&#x27;t public yet</option><option value="mixed">Local share unclear</option><option value="budget">Budgeted, but spending not shown</option><option value="approval">Approval not found in the minutes</option><option value="stack">More than one incentive, same place</option><option value="removed">Dropped from the schedule</option></select>

@@ -76,7 +76,7 @@ def issues_section():
               <td class="wrap small">{e(x.get('purpose') or '')}{'<br><span class="muted">Repaid from: ' + e(x['security']) + '</span>' if x.get('security') else ''}<br>{src}</td></tr>"""
     gaps = ''.join(f'<li>{e(g)}</li>' for g in b.get('gaps') or [])
     return f"""<section class="tx-sec"><div class="sec-hd"><h2 id="issues">Every bond, note and loan</h2><span class="muted">{len(iss)} issues · {money(sum(x.get('outstanding') or 0 for x in iss))} outstanding at the latest audit</span></div>
-    <div class="tablewrap"><table class="tx-table cm-table bond-table"><thead><tr><th scope="col">Issue</th><th scope="col" class="num">Borrowed</th><th scope="col" class="num">Still owed</th><th scope="col">Rate and term</th><th scope="col">What it paid for</th></tr></thead><tbody>{rows}</tbody></table></div>
+    <div class="tablewrap"><table data-tt-year="off" class="tx-table cm-table bond-table"><thead><tr><th scope="col">Issue</th><th scope="col" class="num">Borrowed</th><th scope="col" class="num">Still owed</th><th scope="col">Rate and term</th><th scope="col">What it paid for</th></tr></thead><tbody>{rows}</tbody></table></div>
     <p class="note">From each government's latest audit, with issue dates and terms from the resolutions and loan documents. Most local borrowing here is a private loan from a bank or the state, so there is no public bond document or rating. Issue totals differ from "Who owes what" above, which also counts leases, software subscriptions and bond premiums.</p>
     <details class="gaps"><summary>Gaps in the bond records ({len(b.get('gaps') or [])})</summary><ul>{gaps}</ul></details></section>"""
 
@@ -122,7 +122,7 @@ def debt_page():
         lis = ''.join(f'''<tr><td class="wrap"><b>{e(i.get("name"))}</b><br><span class="muted small">{e(i.get("purpose") or "Purpose not stated in the audit")}</span></td><td class="num">{e(i.get("year_issued") or "—")}</td><td class="num">{money(i.get("original_amount"))}</td><td class="num">{money(i.get("outstanding"))}</td><td class="num">{e(i.get("interest_rate") or "—")}</td><td class="small">{e(i.get("final_maturity") or "—")}</td><td class="wrap small">{e(i.get("repaid_by") or "—")}</td></tr>''' for i in iss)
         slug = re.sub(r'[^a-z0-9]+', '-', short(x['government']).lower()).strip('-')
         det += f'''<details class="tbl-toggle" data-g="{e(short(x["government"]))}"><summary>{e(short(x["government"]))}: {len(iss)} debts, {money(x["total_debt"])}</summary><p class="note">{e(x.get("total_debt_note", ""))} <a href="{e(x["source_url"])}" target="_blank" rel="noopener">Audit ({e(fy_label(x["fy"]))})</a></p>
-        <div class="tablewrap"><table class="tx-table"><thead><tr><th scope="col">Debt</th><th scope="col" class="num">Issued</th><th scope="col" class="num">Original</th><th scope="col" class="num">Owed</th><th scope="col" class="num">Rate</th><th scope="col">Final payment</th><th scope="col">Repaid from</th></tr></thead><tbody>{lis}</tbody></table></div></details>'''
+        <div class="tablewrap"><table data-tt-year="off" class="tx-table"><thead><tr><th scope="col">Debt</th><th scope="col" class="num">Issued</th><th scope="col" class="num">Original</th><th scope="col" class="num">Owed</th><th scope="col" class="num">Rate</th><th scope="col">Final payment</th><th scope="col">Repaid from</th></tr></thead><tbody>{lis}</tbody></table></div></details>'''
 
     T = lambda tid, t: f'<span class="term" data-term="{tid}">{t}</span>'
     return f'''<div class="page tax">

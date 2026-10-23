@@ -133,7 +133,7 @@ def votes_page(out_dir):
       <label class="vf"><span>Government</span><select id="vtG"><option value="">All governments</option></select></label>
       <label class="vf"><span>Member</span><select id="vtM"><option value="">Anyone</option></select></label>
       <label class="vf"><span>Type</span><select id="vtC"><option value="">All types</option></select></label>
-      <label class="vf"><span>Year</span><select id="vtY"><option value="">All years</option></select></label>
+      <label class="vf"><span>Year</span><select id="vtY"><option value="all">All years</option></select></label>
       <label class="vf"><span>Outcome</span><select id="vtO"><option value="">All votes</option><option value="split">Split votes</option><option value="unan">Unanimous</option><option value="failed">Failed motions</option></select></label>
       <label class="vf"><span>Sort</span><select id="vtSort"><option value="new">Newest first</option><option value="old">Oldest first</option><option value="amt">Largest amount</option><option value="close">Closest votes</option><option value="az">Item A to Z</option></select></label>
     </div>

@@ -14,7 +14,10 @@ const F = {q: $('vtQ'), g: $('vtG'), m: $('vtM'), c: $('vtC'), y: $('vtY'), o: $
 // options
 D.govs.forEach(([k, n]) => F.g.insertAdjacentHTML('beforeend', `<option value="${k}">${esc(n)}</option>`));
 Object.entries(D.cat).forEach(([k, n]) => { if (D.votes.some(v => v.c === k)) F.c.insertAdjacentHTML('beforeend', `<option value="${k}">${esc(n)}</option>`); });
-[...new Set(D.votes.map(v => (v.d || '').slice(0, 4)).filter(Boolean))].sort().reverse().forEach(y => F.y.insertAdjacentHTML('beforeend', `<option>${y}</option>`));
+const YRS = [...new Set(D.votes.map(v => (v.d || '').slice(0, 4)).filter(Boolean))].sort().reverse();
+YRS.forEach(y => F.y.insertAdjacentHTML('beforeend', `<option>${y}</option>`));
+// opens on the newest year with votes; a search or member link (?q=, ?m=) looks across every year
+{ const Q = new URLSearchParams(location.search); F.y.value = (Q.get('q') || Q.get('m')) ? 'all' : String(TT.startYear(YRS.map(Number), TT.countBy(D.votes.map(v => +(v.d || '').slice(0, 4) || null))) || 'all'); }
 function members() { // members who appear in recorded roll calls, grouped by government
   const g = F.g.value, by = {};
   D.votes.forEach(v => { if (g && v.g !== g) return; Object.entries(v.m).forEach(([n, x]) => { if (x === 'unknown') return; (by[v.g] ||= new Set()).add(n); }); });
@@ -25,7 +28,7 @@ function members() { // members who appear in recorded roll calls, grouped by go
 
 let shown = 40, last = [];
 function filt(push = true) {
-  const q = F.q.value.trim().toLowerCase(), g = F.g.value, m = F.m.value, c = F.c.value, y = F.y.value, o = F.o.value;
+  const q = F.q.value.trim().toLowerCase(), g = F.g.value, m = F.m.value, c = F.c.value, y = F.y.value === 'all' ? '' : F.y.value, o = F.o.value;
   let cur = D.votes.filter(v => (!g || v.g === g) && (!c || v.c === c) && (!y || (v.d || '').startsWith(y))
     && (!m || (v.m[m] && v.m[m] !== 'unknown'))
     && (!o || (o === 'split' ? v.x : o === 'unan' ? !v.x && !failed(v) : failed(v)))
@@ -55,7 +58,7 @@ function filt(push = true) {
   $('vtMore').textContent = `Show more (${(cur.length - shown).toLocaleString()} left)`;
   if (push) { // keep filters in the link so a view can be shared
     const u = new URL(location.href);
-    [['q', q], ['g', g], ['m', m], ['c', c], ['y', y], ['o', o], ['sort', sort === 'new' ? '' : sort]].forEach(([k, val]) => val ? u.searchParams.set(k, val) : u.searchParams.delete(k));
+    [['q', q], ['g', g], ['m', m], ['c', c], ['y', F.y.value], ['o', o], ['sort', sort === 'new' ? '' : sort]].forEach(([k, val]) => val ? u.searchParams.set(k, val) : u.searchParams.delete(k));
     history.replaceState(null, '', u);
   }
 }
@@ -65,7 +68,7 @@ const P0 = new URLSearchParams(location.search);
 members(); if (P0.get('m')) F.m.value = P0.get('m');
 F.g.addEventListener('change', () => { members(); shown = 40; filt(); });
 ['q', 'm', 'c', 'y', 'o', 'sort'].forEach(k => F[k].addEventListener('input', () => { shown = 40; filt(); }));
-$('vtClear').addEventListener('click', () => { F.q.value = ''; ['g', 'c', 'y', 'o'].forEach(k => F[k].value = ''); F.sort.value = 'new'; members(); F.m.value = ''; shown = 40; filt(); });
+$('vtClear').addEventListener('click', () => { F.q.value = ''; ['g', 'c', 'o'].forEach(k => F[k].value = ''); F.y.value = 'all'; F.sort.value = 'new'; members(); F.m.value = ''; shown = 40; filt(); });
 $('vtMore').addEventListener('click', () => { shown += 60; filt(false); });
 filt(false);
 if ([...P0.keys()].some(k => ['q', 'g', 'm', 'c', 'y', 'o', 'sort'].includes(k))) $('all').scrollIntoView();

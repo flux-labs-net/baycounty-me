@@ -20,7 +20,7 @@ const esc = s => String(s??'').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;',
 const fyOf = s => { const m = String(s||'').match(/(19|20)\d{2}/); return m ? +m[0] : null; };
 
 /* ---------- state ---------- */
-const S = { cras:new Set(), status:'all', cat:'all', q:'', nc:true, sel:null, sortK:'when', sortDir:-1, showAll:false };
+const S = { year:'all', cras:new Set(), status:'all', cat:'all', q:'', nc:true, sel:null, sortK:'when', sortDir:-1, showAll:false };
 /* filters live in the link (?cra=pc,lh&status=Spent&cat=…&q=…&nc=0&id=12) so a view can be shared; with no filters in the link, the last-used filters come back */
 const UP = new URLSearchParams(location.search), UKEYS = ['cra','cras','status','cat','q','nc','id'];
 if (UKEYS.some(k => UP.has(k))){
@@ -30,13 +30,20 @@ if (UKEYS.some(k => UP.has(k))){
   S.q = UP.get('q') || ''; S.nc = UP.get('nc') !== '0';
   const id = UP.get('id'); if (id != null && D.payments[+id]) S.sel = +id;
 } else try { const saved = JSON.parse(localStorage.getItem('cra-filters')||'null'); if (saved){ S.status=saved.status||'all'; S.cat=saved.cat||'all'; S.nc=saved.nc!==false; (saved.cras||[]).forEach(c=>CRA[c]&&S.cras.add(c)); } } catch(e){}
+/* year: every record lists the fiscal or calendar years its "when" names (FY2024-FY2026 counts in all three). The page opens on
+   the newest year with records, never past the current fiscal year; ?year=2024 or ?year=all in the link picks another. Not remembered between visits. */
+D.payments.forEach(p => { p.ys = TT.yearsIn(p.when); });
+const YRS = [...new Set(D.payments.flatMap(p => p.ys))].sort((a,b) => b-a);
+S.year = String(TT.startYear(YRS, TT.countBy(D.payments.flatMap(p => p.ys))) || 'all');
+if (S.sel != null && !UP.has('year')) S.year = 'all'; // a link to one record opens it whatever its year
 const save = () => { try { localStorage.setItem('cra-filters', JSON.stringify({cras:[...S.cras],status:S.status,cat:S.cat,nc:S.nc})); } catch(e){}
-  const o = {cra:[...S.cras].join(','), cras:'', status:S.status==='all'?'':S.status, cat:S.cat==='all'?'':S.cat, q:S.q, nc:S.nc?'':'0', id:S.sel==null?'':S.sel};
+  const o = {year:S.year, cra:[...S.cras].join(','), cras:'', status:S.status==='all'?'':S.status, cat:S.cat==='all'?'':S.cat, q:S.q, nc:S.nc?'':'0', id:S.sel==null?'':S.sel};
   if (window.BCM) BCM.urlState.setLater(o, 300); };
 
 function filtered(){
   const q = S.q.toLowerCase();
   return D.payments.filter(p => {
+    if (S.year !== 'all' && !p.ys.includes(+S.year)) return false;
     if (S.cras.size && !S.cras.has(p.cra)) return false;
     if (S.status !== 'all'){
       if (S.status === 'Other'){ if (!['Incoming','Not CRA-funded'].includes(p.status)) return false; }
@@ -79,6 +86,9 @@ document.getElementById('craChips').addEventListener('click', e => {
 });
 const cats = [...new Set(D.payments.map(p=>p.cat))].sort();
 document.getElementById('fCat').innerHTML += cats.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join('');
+const fYear = document.getElementById('fYear');
+fYear.innerHTML += YRS.map(y => `<option value="${y}">${y}</option>`).join(''); fYear.value = S.year;
+fYear.onchange = () => { S.year = fYear.value; S.sel = null; update(true); };
 const fStatus = document.getElementById('fStatus'), fCat = document.getElementById('fCat'), fQ = document.getElementById('fQ'), fNC = document.getElementById('fNC');
 if (![...fStatus.options].some(o => o.value === S.status)) S.status = 'all';
 if (![...fCat.options].some(o => o.value === S.cat)) S.cat = 'all';
@@ -87,7 +97,7 @@ fStatus.onchange = () => { S.status = fStatus.value; update(); };
 fCat.onchange = () => { S.cat = fCat.value; update(); };
 fQ.oninput = () => { S.q = fQ.value; update(); };
 fNC.onchange = () => { S.nc = fNC.checked; update(); };
-document.getElementById('resetAll').onclick = () => { S.cras.clear(); S.status='all'; S.cat='all'; S.q=''; S.nc=true; S.sel=null;
+document.getElementById('resetAll').onclick = () => { S.year='all'; fYear.value='all'; S.cras.clear(); S.status='all'; S.cat='all'; S.q=''; S.nc=true; S.sel=null;
   fStatus.value='all'; fCat.value='all'; fQ.value=''; fNC.checked=true; update(true); };
 
 /* ---------- map ---------- */
