@@ -368,3 +368,25 @@ struct RecordsMap: View {
         .mapStyle(.standard(pointsOfInterest: .excludingAll))
     }
 }
+
+/// Shown while one of the app's /data/app files loads, or with a retry button when it couldn't be loaded.
+struct AppDataPending: View {
+    @Environment(AppStore.self) private var store
+    let file: String
+    var title = "Couldn't load this page"
+    let retry: () async -> Void
+
+    var body: some View {
+        if let e = store.appError(file) {
+            ContentUnavailableView {
+                Label(title, systemImage: "wifi.slash")
+            } description: {
+                Text(e)
+            } actions: {
+                Button("Try again") { Task { await retry() } }.buttonStyle(.bordered)
+            }
+        } else {
+            ProgressView().frame(maxWidth: .infinity)
+        }
+    }
+}

@@ -29,7 +29,7 @@ struct GlossaryView: View {
                     }
                 }
             } else {
-                ProgressView().frame(maxWidth: .infinity)
+                AppDataPending(file: "glossary.json", title: "Couldn't load the glossary") { await store.loadGlossary() }
             }
         }
         .navigationTitle("Glossary")
@@ -48,6 +48,9 @@ struct UpdatesView: View {
 
     var body: some View {
         List {
+            if store.updates.isEmpty {
+                AppDataPending(file: "updates.json", title: "Couldn't load updates") { await store.loadUpdates() }
+            }
             ForEach(store.updates) { u in
                 Section {
                     VStack(alignment: .leading, spacing: 6) {

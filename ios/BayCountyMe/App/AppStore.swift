@@ -60,9 +60,9 @@ final class AppStore {
         await loadCatalog()
         await loadGovernments()
         await loadMeetings()
-        await loadApp("glossary.json") { (g: Glossary) in self.glossary = g }
+        await loadGlossary()
         await loadApp("pages.json") { (p: [PageInfo]) in self.pages = p }
-        await loadApp("updates.json") { (u: [SiteUpdate]) in self.updates = u }
+        await loadUpdates()
         lastRefresh = Date()
     }
 
@@ -118,6 +118,8 @@ final class AppStore {
     }
     private var loaded: Set<String> = []
 
+    func loadGlossary() async { await loadApp("glossary.json") { (g: Glossary) in self.glossary = g } }
+    func loadUpdates() async { await loadApp("updates.json") { (u: [SiteUpdate]) in self.updates = u } }
     func loadTax() async { await loadApp("tax.json") { (m: TaxModel) in self.taxModel = m } }
     func loadAddressModel() async { await loadApp("address.json") { (m: AddressModel) in self.addressModel = m } }
     func loadAmendment3() async { await loadApp("amendment3.json") { (m: Amendment3Model) in self.amendment3 = m } }

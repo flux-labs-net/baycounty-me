@@ -33,7 +33,7 @@ struct VendorsView: View {
                 }
             }
         }
-        .overlay { if store.vendors == nil { ProgressView() } }
+        .overlay { if store.vendors == nil { AppDataPending(file: "vendors.json", title: "Couldn't load companies") { await store.loadVendors() } } }
         .navigationTitle("Companies")
         .searchable(text: $query, prompt: "Look up a company")
         .toolbar {
@@ -157,7 +157,7 @@ struct PeopleView: View {
                 }
             }
         }
-        .overlay { if store.people == nil { ProgressView() } }
+        .overlay { if store.people == nil { AppDataPending(file: "people.json", title: "Couldn't load people") { await store.loadPeople() } } }
         .navigationTitle("People")
         .searchable(text: $query, prompt: "Find a person")
         .task { await store.loadPeople() }
@@ -340,7 +340,7 @@ struct DonorContractsView: View {
             }
             if let m = store.donorContracts?.method { Section("Method") { Text(m).font(.footnote) } }
         }
-        .overlay { if store.donorContracts == nil { ProgressView() } }
+        .overlay { if store.donorContracts == nil { AppDataPending(file: "donor-contracts.json", title: "Couldn't load donor matches") { await store.loadDonorContracts() } } }
         .navigationTitle("Donors with contracts")
         .task { await store.loadDonorContracts() }
     }

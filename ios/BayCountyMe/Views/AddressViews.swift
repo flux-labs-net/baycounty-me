@@ -190,23 +190,27 @@ struct AddressReportView: View {
                 } footer: {
                     Text("Owner names are not shown here. They're public at the Property Appraiser's site. Representative names come from Bay County's GIS and may lag an election.")
                 }
+            } else if store.addressModel == nil, store.appError("address.json") != nil {
+                Section { AppDataPending(file: "address.json", title: "Couldn't load the address report") { await load() } }
             } else {
                 Section { HStack { ProgressView(); Text("Looking up this address…").foregroundStyle(.secondary) } }
             }
         }
         .navigationTitle("My Address")
         .navigationBarTitleDisplayMode(.inline)
-        .task {
-            await store.loadAddressModel()
-            guard let m = store.addressModel else { return }
-            if report == nil { report = await AddressReport.load(match, gis: store.gis, client: store.client, model: m) }
-            if nearby == nil {
-                do { nearby = try await NearbyMoney.load(near: match.point, client: store.client) } catch { nearbyFailed = true }
-            }
-        }
+        .task { await load() }
         .refreshable {
-            guard let m = store.addressModel else { return }
+            guard let m = store.addressModel else { await load(); return }
             report = await AddressReport.load(match, gis: store.gis, client: store.client, model: m)
+        }
+    }
+
+    private func load() async {
+        await store.loadAddressModel()
+        guard let m = store.addressModel else { return }
+        if report == nil { report = await AddressReport.load(match, gis: store.gis, client: store.client, model: m) }
+        if nearby == nil {
+            do { nearby = try await NearbyMoney.load(near: match.point, client: store.client) } catch { nearbyFailed = true }
         }
     }
 
