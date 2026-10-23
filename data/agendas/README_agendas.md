@@ -21,6 +21,16 @@ After each watch run, `extract_agendas.py` reads new agendas (never packets) wit
 - **Failures:** a failed read is retried after 6 hours, up to 3 attempts. Setup problems (pdftotext missing, a bad key or workspace) stop the run and are logged once, without marking agendas failed.
 - **Limits:** scanned agendas with no text layer are marked "No text (scanned)" (no OCR yet). An amended agenda (new version) is read again.
 
+## Order: newest first
+
+The backlog is worked backwards. Each watch run lists every document link from the sources it scans, then downloads newest meetings first across all governments (agenda before packet before minutes); sources a notice email just pointed at go first. Agenda reading also takes the newest meetings first. So this year's agendas are captured and read before older archives.
+
+## Alerts and search
+
+- **Alerts:** items read from agendas for meetings from 3 days ago onward become `alerts.events` (dataset `agenda-items`). Keyword rules match an item's title, summary, organizations and addresses; contract rules match contract, purchase and change-order items at or over the rule's amount, labeled "on the agenda, not yet approved". An item already matched from the meetings feed in the same run isn't sent twice. Older items (the backfill) don't alert.
+- **Search:** the daily meetings refresh runs `export_items.py`, which writes `data/agendas/agenda_items.json`; `site/search_page.py` indexes it as "Agenda item" results linking to the agenda. Dollar figures are left off budget, resolution, ordinance and hearing items, where the largest printed number is usually a total or taxable value, not spending.
+- **Privacy:** in both, party names that look like a private individual's (for example a homeowner on a code-enforcement item) are dropped; companies, agencies and other organizations are kept. Item titles and summaries are kept as printed on the public agenda.
+
 ## Which sources send notices
 
 | Key | Government | Agenda system | Email notice option |

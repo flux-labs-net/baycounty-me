@@ -19,11 +19,14 @@ const MAX_EVENTS = 5000, MAX_PER_EMAIL = 40;
 function plan(rules, events, seen = new Set()) {
   const out = new Map();
   for (const rule of rules) {
-    const hits = [], keys = new Set();
-    for (const ev of events) {
+    const hits = [], keys = new Set(), items = new Set();
+    // Meetings first: an item already listed from a meeting's agenda isn't sent again from the agenda reader.
+    const ordered = [...events].sort((a, b) => (a.dataset === 'agenda-items') - (b.dataset === 'agenda-items'));
+    for (const ev of ordered) {
       const m = match(rule, ev);
       if (!m || keys.has(m.dedupe) || seen.has(`${rule.id}|${m.dedupe}`)) continue;
-      keys.add(m.dedupe); hits.push(m);
+      if (ev.dataset === 'agenda-items' && (m.itemKeys || []).every(k => items.has(k))) continue;
+      keys.add(m.dedupe); (m.itemKeys || []).forEach(k => items.add(k)); hits.push(m);
     }
     if (!hits.length) continue;
     if (!out.has(rule.email)) out.set(rule.email, []);

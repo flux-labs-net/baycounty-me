@@ -471,24 +471,37 @@ class Run:
         print("  %-8s %-7s %s %s" % (status, kind, board or source_key, title or url))
 
     def scan(self, key, notice_id=None):
+        """List a source's document links without downloading: -> [(meeting date, kind, url, key, board, title)].
+        Downloads happen afterwards, newest meetings first across every source (see capture_all)."""
         today = fm.now_central().date()
         try:
             meetings = SOURCES[key][1](today)
         except Exception as e:
             self.error("scan", e, key, None, notice_id)
-            return 0
+            return []
         for e in fm.ERRORS:  # adapters record their own failures instead of raising
             self.error("scan", "%s: %s" % (e.get("source"), e.get("error")), key, e.get("url"), notice_id)
         del fm.ERRORS[:]
-        n = 0
+        out = []
         for m in meetings:
+            if m.get("expected"):
+                continue
             for kind, field in (("agenda", "agenda_url"), ("packet", "packet_url"), ("minutes", "minutes_url")):
-                u = m.get(field)
-                if u and not m.get("expected"):
-                    n += 1
-                    self.capture(u, key, kind, m.get("board"), m.get("title"), m.get("date"), notice_id)
-        print("scanned %s: %d meetings, %d document links" % (key, len(meetings), n))
-        return n
+                if m.get(field):
+                    out.append((m.get("date"), kind, m[field], key, m.get("board"), m.get("title")))
+        print("scanned %s: %d meetings, %d document links" % (key, len(meetings), len(out)))
+        return out
+
+    def capture_all(self, found, emailed=()):
+        """Work the backlog backwards: sources an email just pointed at first, then newest meeting first across all
+        governments (agenda before packet before minutes), so this year's files land before older archives."""
+        rank = {"agenda": 0, "packet": 1, "minutes": 2}
+        far = dt.date(1900, 1, 1)
+        found.sort(key=lambda f: (f[3] not in emailed, -(f[0] or far).toordinal(), rank.get(f[1], 3)))
+        for date, kind, url, key, board, title in found:
+            self.force = key in emailed
+            self.capture(url, key, kind, board, title, date)
+        self.force = False
 
     # --- inbox -----------------------------------------------------------------------------------------------
     def inbox(self, email_id=None):
@@ -676,9 +689,10 @@ def main(argv):
             keys |= set(SOURCES)
         if only:
             keys &= set(only)
+        found = []
         for k in sorted(keys):
-            run.force = k in emailed
-            run.scan(k)
+            found += run.scan(k)
+        run.capture_all(found, emailed)
     except Exception as e:
         fatal = "%s: %s" % (type(e).__name__, e)
         run.error("run", fatal)

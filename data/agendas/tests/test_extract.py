@@ -101,5 +101,23 @@ class T(unittest.TestCase):
             subprocess.run = real
 
 
+    def test_alert_events_only_for_recent_meetings_and_stable_hash(self):
+        import datetime as dt
+        today = dt.date(2026, 10, 22)
+        self.assertTrue(x.wants_alerts(dt.date(2026, 10, 27), today))
+        self.assertTrue(x.wants_alerts(dt.date(2026, 10, 20), today))
+        self.assertFalse(x.wants_alerts(dt.date(2026, 9, 15), today))
+        self.assertFalse(x.wants_alerts(None, today))
+        it = {'number': '12', 'title': 'Southport  Water Study', 'kind': 'contract', 'summary': None,
+              'amounts': [{'amount': 100, 'text': '$100'}, {'amount': 2500, 'text': '$2,500'}],
+              'parties': ['Black & Veatch', 'Daniel Allen'], 'addresses': ['Southport']}
+        rec = x.alert_record(it, 'county', dt.date(2026, 10, 27), 'https://u', 'BOCC Regular Meeting')
+        self.assertEqual(rec['amount'], 2500)
+        self.assertEqual(rec['parties'], ['Black & Veatch'])   # private individual dropped
+        same = dict(rec, title='southport water study')         # amended agenda, same item
+        self.assertEqual(x.alert_hash(rec), x.alert_hash(same))
+        self.assertNotEqual(x.alert_hash(rec), x.alert_hash(dict(rec, item_number='13')))
+
+
 if __name__ == '__main__':
     unittest.main()

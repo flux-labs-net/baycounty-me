@@ -23,6 +23,8 @@ Usage:
   python3 data/agendas/extract_agendas.py --file x.pdf    # read one local file and print the JSON (no database)
 """
 
+import datetime as dt
+import hashlib
 import json
 import os
 import re
@@ -36,6 +38,7 @@ import urllib.request
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import watch_agendas as wa  # noqa: E402  (DB, Storage, download, fetch_meetings helpers)
+from export_items import keep_party  # noqa: E402
 
 fm = wa.fm
 MODEL = os.environ.get("AGENDA_MODEL") or "claude-sonnet-5-5"
@@ -45,6 +48,29 @@ MAX_CHARS = 120_000          # ~30k tokens; an agenda is far shorter, this only 
 KEEP_TEXT = 200_000
 RETRY_HOURS = 6              # a failed read is tried again after this long ...
 MAX_ATTEMPTS = 3             # ... up to this many times
+
+
+ALERT_DAYS_BACK = 3          # items for meetings older than this don't become alert events (a backfill isn't news)
+
+
+def alert_record(item, board, meeting_date, url, title):
+    """The alerts.events record for one agenda item (dataset 'agenda-items', matched by api/_rules.js)."""
+    return {"board": board, "meeting_date": str(meeting_date) if meeting_date else None, "meeting_title": title,
+            "item_number": item.get("number"), "section": item.get("section"), "title": item.get("title"),
+            "summary": item.get("summary"), "kind": item.get("kind"),
+            "amount": max((a["amount"] for a in item.get("amounts") or [] if isinstance(a.get("amount"), (int, float))), default=None),
+            # same privacy filter as site search: organizations kept, private individuals' names dropped
+            "parties": [p for p in item.get("parties") or [] if keep_party(p)], "addresses": item.get("addresses") or [],
+            "agenda_url": url}
+
+
+def alert_hash(rec):
+    key = "|".join(str(rec.get(k) or "") for k in ("board", "meeting_date", "item_number")) + "|" + re.sub(r"\W+", " ", (rec.get("title") or "").lower()).strip()
+    return hashlib.sha1(key.encode()).hexdigest()[:32]
+
+
+def wants_alerts(meeting_date, today):
+    return meeting_date is not None and meeting_date >= today - dt.timedelta(days=ALERT_DAYS_BACK)
 
 
 class SetupError(RuntimeError):
@@ -217,7 +243,7 @@ def run():
         c.execute(PENDING, (wa.STORE_MAX, MAX_ATTEMPTS, RETRY_HOURS, MAX_DOCS))
         docs = c.fetchall()
     print("extract: %d agenda(s) to read with %s" % (len(docs), MODEL))
-    spent, n_ok, n_items, n_fail = 0.0, 0, 0, 0
+    spent, n_ok, n_items, n_fail, n_events = 0.0, 0, 0, 0, 0
     for doc_id, url, board, title, mdate, sha, ctype, path in docs:
         if spent >= BUDGET:
             print("budget of $%.2f reached; the rest waits for the next run" % BUDGET)
@@ -269,9 +295,24 @@ def run():
         if status == "ok":
             n_ok += 1
             n_items += len(items)
+            # New items for upcoming (or just-held) meetings feed rule alerts: keyword and contract rules.
+            md = mdate or (dt.date.fromisoformat(norm_date(m.get("date"))) if norm_date(m.get("date")) else None)
+            if items and wants_alerts(md, fm.now_central().date()):
+                gov = wa.GOV_OF_BOARD.get(board)
+                for it in items:
+                    rec = alert_record(it, board, md, url, title)
+                    db.one("insert into alerts.events (dataset, record_hash, government_key, record, ingest_run_id) "
+                           "select 'agenda-items', %s, %s, %s, %s where not exists (select 1 from alerts.events "
+                           "where dataset = 'agenda-items' and record_hash = %s)",
+                           (alert_hash(rec), gov, db.j(rec), run_id, alert_hash(rec)))
+                    n_events += 1
         print("  %-8s %-7s %s %s: %d items%s" % (status, board or "", mdate or "", (title or url)[:60], len(items),
                                                  " ($%.3f)" % c_usd if c_usd else ""))
-    notes = "%s: %d read, %d items, %d failed, about $%.2f" % (MODEL, n_ok, n_items, n_fail, spent)
+    notes = "%s: %d read, %d items (%d for alerts), %d failed, about $%.2f" % (MODEL, n_ok, n_items, n_events, n_fail, spent)
+    out = os.environ.get("GITHUB_OUTPUT")
+    if out:
+        with open(out, "a") as f:
+            f.write("items_read=%d\n" % n_items)
     db.one("update ingest_runs set finished_at = now(), rows_in = %s, status = 'ok', notes = %s where id = %s",
            (n_items, notes, run_id))
     print(notes)

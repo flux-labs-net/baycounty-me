@@ -56,6 +56,16 @@ jobs:
         continue-on-error: true
         working-directory: data/elections/scripts
         run: ./refresh.sh "$RUNNER_TEMP/soe"
+      - name: Export agenda items for search
+        # Items read from posted agendas (data/agendas/export_items.py). A database problem keeps the last export.
+        id: export_agenda_items
+        continue-on-error: true
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          SUPABASE_REGION: ${{ vars.SUPABASE_REGION || 'us-east-2' }}
+        run: |
+          pip install -q 'psycopg[binary]'
+          python data/agendas/export_items.py
       - name: Rebuild site
         id: rebuild_site
         working-directory: site
@@ -68,13 +78,13 @@ jobs:
       - name: Commit if changed
         id: commit_and_push
         run: |
-          paths="data/meetings data/elections/finance_2026.json site/public"
+          paths="data/meetings data/elections/finance_2026.json data/agendas/agenda_items.json site/public"
           # git status --porcelain also lists new, untracked files, which git diff --quiet ignores.
           if [ -z "$(git status --porcelain -- $paths)" ]; then echo "No changes"; exit 0; fi
           git config user.name "BayCounty.me bot"
           git config user.email "hello@fluxlabs.net"
           git add -A $paths
-          git commit -m "Daily refresh: meetings and campaign finance ($(date -u +%Y-%m-%d))"
+          git commit -m "Daily refresh: meetings, agenda items and campaign finance ($(date -u +%Y-%m-%d))"
           git push
       - name: Email admins about problems
         if: always()
