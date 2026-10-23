@@ -6,6 +6,8 @@
 # Secrets: DATABASE_URL, SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, RESEND_FULL_KEY (also reads received mail),
 #          ADMIN_EMAILS. Optional: POP_HOST, POP_USER, POP_PASS (a POP3 mailbox as well as / instead of Resend);
 #          repository variables AGENDA_INBOX (default ingest@baycounty.me) and POP_DELETE=1.
+# Agenda reading (extract_agendas.py): secret ANTHROPIC_API_KEY; variables AGENDA_MODEL (default claude-sonnet-5-5),
+#          AGENDA_EXTRACT_MAX (25 per run), AGENDA_EXTRACT_BUDGET_USD (2.00 per run).
 name: Watch agendas
 on:
   schedule:
@@ -38,6 +40,8 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install 'psycopg[binary]'
+      - name: Install pdftotext
+        run: sudo apt-get install -y -qq poppler-utils >/dev/null
       - name: Check the inbox and sources
         id: watch
         env:
@@ -65,6 +69,21 @@ jobs:
           [ -n "$ONLY" ] && args="$args --only $ONLY"
           [ -n "$EMAIL_ID" ] && args="$args --email-id $EMAIL_ID"
           python data/agendas/watch_agendas.py $args
+      - name: Read new agendas into items
+        # Claude model AGENDA_MODEL (repository variable; default claude-sonnet-5-5, or claude-haiku-5-5 to spend less).
+        # Skipped when ANTHROPIC_API_KEY isn't set. Runs even if the watch step logged errors.
+        if: always() && steps.watch.outcome != 'cancelled'
+        continue-on-error: true
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          SUPABASE_REGION: ${{ vars.SUPABASE_REGION || 'us-east-2' }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          AGENDA_MODEL: ${{ vars.AGENDA_MODEL }}
+          AGENDA_EXTRACT_MAX: ${{ vars.AGENDA_EXTRACT_MAX }}
+          AGENDA_EXTRACT_BUDGET_USD: ${{ vars.AGENDA_EXTRACT_BUDGET_USD }}
+        run: python data/agendas/extract_agendas.py
       - name: Refresh meetings when something new landed
         if: steps.watch.outputs.new_docs != '0' || steps.watch.outputs.updated_docs != '0'
         env:

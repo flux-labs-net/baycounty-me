@@ -191,6 +191,20 @@ def classify(parsed):
 # Network
 
 
+class _S3PathStyle(urllib.request.HTTPRedirectHandler):
+    """Granicus (Panama City Beach) redirects files to https://granicus_production_attachments.s3.amazonaws.com/...;
+    an underscore isn't valid in a hostname, so the TLS certificate never matches. Follow the same object at
+    S3's path-style address instead."""
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        m = re.match(r"^https://([^./]+_[^./]*)\.s3(?:[.-][a-z0-9-]+)?\.amazonaws\.com/(.*)$", newurl)
+        if m:
+            newurl = "https://s3.amazonaws.com/%s/%s" % (m.group(1), m.group(2))
+        return super().redirect_request(req, fp, code, msg, headers, newurl)
+
+
+OPENER = urllib.request.build_opener(_S3PathStyle)
+
+
 def download(url, tries=3):
     """Stream a file. -> (data or None, content type, sha256 of the bytes, size). Every file is hashed in full; the
     bytes are kept only up to STORE_MAX (big County/Lynn Haven packets are tracked and versioned, not stored)."""
@@ -198,7 +212,7 @@ def download(url, tries=3):
     for attempt in range(tries):
         try:
             req = urllib.request.Request(url, headers={"User-Agent": fm.UA, "Accept": "*/*"})
-            with urllib.request.urlopen(req, timeout=180) as r:
+            with OPENER.open(req, timeout=180) as r:
                 ctype = r.headers.get_content_type() or "application/octet-stream"
                 h, size, keep = hashlib.sha256(), 0, []
                 while True:

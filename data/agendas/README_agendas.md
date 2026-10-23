@@ -11,6 +11,15 @@ Every agenda, packet and minutes file found is downloaded and hashed. A new URL 
 
 The website account is only for receiving notices. Downloads need no login: AgendaCenter, CivicClerk, PrimeGov and Granicus files are public.
 
+## Reading agendas into items
+
+After each watch run, `extract_agendas.py` reads new agendas (never packets) with a Claude model: the file's text is pulled out (pdftotext for PDFs, visible text for HTML pages) and the model returns, under a strict JSON schema, the meeting details and every substantive item: number, section, title, a one-line summary from the agenda's own words, kind (contract, purchase, change order, budget, grant, rezoning, ordinance ...), dollar amounts, parties and addresses. The prompt forbids guessing anything not printed. Results go to `agendas.extractions` (one per document version, with the text and token cost) and `agendas.items`; the Agendas tab shows them under each document.
+
+- **Model:** repository variable `AGENDA_MODEL`, default `claude-sonnet-5-5` ($2 / $10 per million input/output tokens). Set `claude-haiku-5-5` to spend much less.
+- **Cost:** a typical agenda is 2k–10k tokens in and a few thousand out, about 3–5¢ on Sonnet. Each run reads at most `AGENDA_EXTRACT_MAX` agendas (25) and stops at `AGENDA_EXTRACT_BUDGET_USD` ($2.00), newest meetings first; the backlog drains over a few runs.
+- **Secret:** `ANTHROPIC_API_KEY`. Without it the step is skipped.
+- **Limits:** scanned agendas with no text layer are marked "No text (scanned)" (no OCR yet). An amended agenda (new version) is read again.
+
 ## Which sources send notices
 
 | Key | Government | Agenda system | Email notice option |
