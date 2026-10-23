@@ -3,6 +3,7 @@ import BayCountyKit
 
 struct HomeView: View {
     @Environment(AppStore.self) private var store
+    @State private var path: [Route] = []
 
     private let topics: [(title: String, symbol: String, route: Route)] = [
         ("Tax calculator", "percent", .taxCalculator()),
@@ -16,7 +17,7 @@ struct HomeView: View {
     ]
 
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $path) {
             List {
                 Section {
                     VStack(alignment: .leading, spacing: 10) {
@@ -123,6 +124,25 @@ struct HomeView: View {
             .navigationTitle("BayCounty.me")
             .refreshable { await store.refreshAll() }
             .withRoutes()
+            .task { await openScreenshotRoute() }
+        }
+    }
+
+    /// For automated screenshots: `-screen <name>` opens one screen at launch (see .github/workflows/ios-screenshots.yml).
+    private func openScreenshotRoute() async {
+        let args = ProcessInfo.processInfo.arguments
+        guard let i = args.firstIndex(of: "-screen"), i + 1 < args.count, path.isEmpty else { return }
+        let arg = args[i + 1]
+        let simple: [String: Route] = [
+            "tax": .taxCalculator(districtID: "Lynn Haven", value: 250_000, homestead: true), "amendment3": .amendment3(districtID: "Panama City", value: 300_000, homestead: true),
+            "glossary": .glossary, "vendors": .vendors, "people": .people, "moneymap": .moneyMap, "donors": .donorContracts,
+            "updates": .updates, "about": .about, "cra": .cra, "myaddress": .myAddress, "contracts": .dataset("contracts"),
+            "vendor": .vendor("roberts-and-roberts"), "person": .person("clair-pease"), "explore": .explore,
+        ]
+        if let r = simple[arg] { path = [r]; return }
+        if arg.hasPrefix("address:") {
+            let q = String(arg.dropFirst("address:".count))
+            if let m = try? await store.gis.search(q).matches.first { path = [.address(m)] }
         }
     }
 }
