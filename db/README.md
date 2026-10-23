@@ -37,6 +37,9 @@ DATABASE_URL=postgresql://... python3 db/scripts/load.py --migrate
 
 ## Adding data
 
+**Rule:** every page's data lives here and is served by `/api/v1`. A new page means a new dataset, a migration for its
+table and an entry in `api/_pages.js` (the API test fails otherwise). See `CLAUDE.md` at the repo root.
+
 1. **A few records:** open the table in Supabase and add rows. Leave `origin` as `manual`, fill `source_url`, and set `record_hash` to anything unique (e.g. the source URL plus a row number).
 2. **A spreadsheet:** Supabase table editor > Import data from CSV, into the matching table. Same `origin` and `record_hash` rules.
 3. **A recurring source:** write a script that inserts with `origin = 'scraper:<name>'`, logs an `ingest_runs` row, and upserts on `(origin, record_hash)`.

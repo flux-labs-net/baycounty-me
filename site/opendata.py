@@ -14,7 +14,9 @@ GOV_COLS = {'government-profiles': ['government'], 'votes': ['government'], 'mem
             'property-tax-rates': ['authority_id'], 'fema-michael-projects': ['applicant'], 'officials-pay': ['title', 'government'],
             'meetings': ['gov', 'board'], 'campaign-finance': ['office', 'gov'], 'bonds': ['gov'], 'salary-positions': ['employer_id'],
             'salary-leaders': ['employer_id'], 'candidates-2026': ['office', 'government'], 'campaign-contributions-2026': ['office'],
-            'bed-tax-collections': [], 'property-tax-exemptions': []}
+            'bed-tax-collections': [], 'property-tax-exemptions': [],
+            'cra-network-gifts': ['cra_board', 'office'], 'donor-contracts': ['contract_gov_id'], 'cra-network-payees': [], 'cra-network-links': [],
+            'vendors-directory': [], 'people-directory': [], 'glossary-terms': [], 'site-updates': [], 'tax-districts': ['district']}
 FIXED_GOV = {'bed-tax-collections': 'county', 'property-tax-exemptions': 'county'}  # county bed tax in every zone; the county-wide tax roll
 
 
@@ -152,8 +154,11 @@ def _member_votes():
 
 
 def _cra():
-    return [{k: p.get(k) for k in ('cra', 'city', 'payee', 'amount', 'date_or_fy', 'status', 'category', 'purpose', 'location_name', 'district', 'lat', 'lng', 'count', 'source_title', 'source_url', 'notes')}
-            for p in _j('merged.json')['payments']]
+    from page_datasets import cra_payee_ids
+    pid = cra_payee_ids()  # the CRA network's payee id (cra-network-payees.entity_id), same row order
+    return [{**{k: p.get(k) for k in ('cra', 'city', 'payee', 'amount', 'date_or_fy', 'status', 'category', 'purpose', 'location_name', 'district', 'lat', 'lng', 'count', 'source_title', 'source_url', 'notes')},
+             'payee_entity_id': pid[i]}
+            for i, p in enumerate(_j('merged.json')['payments'])]
 
 
 def _rates():
@@ -337,6 +342,8 @@ def datasets():
     ]
     D += [('accountability-projects', 'Accountability: projects', 'One row per project on the Accountability console: stage, first and latest figures, cost growth, questions raised by the published rules, records still missing and the agency reply.', lambda: _acc('projects')),
           ('accountability-events', 'Accountability: project timelines', 'Every dated event in each project timeline: budgets, approvals, awards, change orders, votes, payments and completion, with sources.', lambda: _acc('events'))]
+    from page_datasets import DATASETS as PAGE_DATASETS  # pages whose data used to live only in the page or the app files
+    D += PAGE_DATASETS
     for path, did, title, desc, fn in extra:
         d = _j(*path)
         if d:

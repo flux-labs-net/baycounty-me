@@ -12,6 +12,7 @@
 //   GET /api/v1/changes?since=&dataset= records added to the database since a time
 //   GET /api/v1/meetings.ics?gov=       calendar of upcoming meetings (one government or all)
 //   GET /api/v1/correspondence?year=    published emails with officials (year=all for every year)
+//   GET /api/v1/pages[?path=]           which datasets and endpoints hold each site page's data
 // Responses carry an ETag (and Last-Modified when the data's date is known); a matching If-None-Match or
 // If-Modified-Since gets 304 Not Modified with no body.
 const crypto = require('crypto');
@@ -122,7 +123,7 @@ function openapi(catalog) {
   const p = (name, desc, schema = {type: 'string'}) => ({name, in: 'query', required: false, description: desc, schema});
   return {
     openapi: '3.1.0',
-    info: {title: 'BayCounty.me API', version: '1.1.0', description: 'Read-only access to Bay County, Florida public records compiled by BayCounty.me: budgets, taxes, votes, contracts, campaign money, salaries, elections and more. No key needed. Every row carries a link to its source record. Individual donors and rank-and-file employees are never named. Responses carry an ETag (and Last-Modified where known); send If-None-Match or If-Modified-Since to get 304 Not Modified.', contact: {url: `${SITE}/about#contact`}},
+    info: {title: 'BayCounty.me API', version: '1.2.0', description: 'Read-only access to Bay County, Florida public records compiled by BayCounty.me: budgets, taxes, votes, contracts, campaign money, salaries, elections and more. No key needed. Every row carries a link to its source record. Individual donors and rank-and-file employees are never named. Responses carry an ETag (and Last-Modified where known); send If-None-Match or If-Modified-Since to get 304 Not Modified.', contact: {url: `${SITE}/about#contact`}},
     servers: [{url: `${SITE}/api/v1`}],
     components: {securitySchemes: {bearer: {type: 'http', scheme: 'bearer', description: 'Optional API key (bcm_...) for higher limits'}, apiKey: {type: 'apiKey', in: 'header', name: 'X-API-Key'}}},
     security: [{}, {bearer: []}, {apiKey: []}],
@@ -146,6 +147,13 @@ function openapi(catalog) {
       '/meetings.ics': {get: {operationId: 'meetingsCalendar', summary: 'Upcoming meetings as an iCalendar feed',
         parameters: [p('gov', 'Government key(s) or board id(s), comma-separated: county, schools, pc, pcb, lh, cw, sp, parker, mb, or a board such as lh-cra. Default: all')],
         responses: {200: {description: 'text/calendar', content: {'text/calendar': {schema: {type: 'string'}}}}}}},
+      '/correspondence': {get: {operationId: 'correspondence', summary: 'Published emails between BayCounty.me and local officials',
+        description: 'Each conversation is one letter sent to one or more officials, with every published reply. Unpublished threads are never returned. Defaults to the latest year that has letters.',
+        parameters: [p('year', 'A year such as 2026, or all for every year. Default: the latest year with letters'), p('government', 'Only letters to this government, as shown in the governments list of the response')],
+        responses: {200: {description: '{year, years, governments, total, conversations: [{subject, sent_at, governments, replies, threads: [{official, seat, government, status, messages: [{direction, text, at}]}]}]}'}}}},
+      '/pages': {get: {operationId: 'pages', summary: 'Which datasets and endpoints hold the data behind each page on BayCounty.me',
+        parameters: [p('page', 'One page path, e.g. /public-money/cra-network. Omit for every page')],
+        responses: {200: {description: '{data: [{page, url, datasets: [{id, api}], endpoints, none, note}]}'}, 404: {description: 'Unknown page'}}}},
       '/search': {get: {operationId: 'searchSite', summary: 'Search every page on BayCounty.me', parameters: [{name: 'q', in: 'query', required: true, schema: {type: 'string'}}, p('limit', 'Results (default 20, max 100)', {type: 'integer'})], responses: {200: {description: 'Results'}}}},
     },
   };
@@ -220,6 +228,19 @@ module.exports = async (req, res) => {
       const g = withSlug.find(r => r.slug === parts[1]);
       return g ? res.status(200).json({data: g}) : res.status(404).json({error: `Unknown government "${parts[1]}".`, governments: withSlug.map(r => r.slug)});
     }
+    if (parts[0] === 'pages') {
+      const {PAGES, PREFIXES} = require('./_pages');
+      const known = new Set(catalog.datasets.map(d => d.id));
+      const one = (page, s) => ({page, url: SITE + page, datasets: (s.datasets || []).filter(id => known.has(id)).map(id => ({id, api: `${SITE}/api/v1/datasets/${id}`})),
+        endpoints: (s.endpoints || []).map(e => `${SITE}/api/v1${e}`), none: s.none || null, note: s.note || null});
+      const all = [...Object.entries(PAGES), ...Object.entries(PREFIXES).map(([k, v]) => [k + '{slug}', v])].map(([k, v]) => one(k, v));
+      const want = String(req.query.page || req.query.p || '').replace(/\/+$/, '') || null;
+      if (want) {
+        const s = require('./_pages').sourceFor(want);
+        return s ? res.status(200).json({data: one(want, s)}) : res.status(404).json({error: `Unknown page "${want}".`});
+      }
+      return res.status(200).json({data: all});
+    }
     if (parts[0] === 'correspondence') {
       // Published emails between BayCounty.me and officials. Unpublished threads are never returned.
       res.locals.lastModified = null;
@@ -249,3 +270,4 @@ module.exports.csvCell = csvCell;
 module.exports.openapi = openapi;
 module.exports.meetingsIcs = meetingsIcs;
 module.exports.conditional = conditional;
+module.exports.openapi = openapi;

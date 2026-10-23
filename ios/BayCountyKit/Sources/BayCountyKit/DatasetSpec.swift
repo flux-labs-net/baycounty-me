@@ -109,6 +109,32 @@ public struct DatasetSpec: Sendable {
         "campaign-contributions-2026": .init(.elections, "envelope", title: ["contributor"], subtitle: ["candidate", "date"],
                                              amount: ["amount"], date: ["date"], badge: "contributor_type",
                                              filters: ["candidate", "contributor_type"], page: "public-money/campaign-money"),
+        "donor-contracts": .init(.elections, "link", title: ["vendor", "contributor"], subtitle: ["candidate", "contract_government"],
+                                 amount: ["contribution_amount"], badge: "match_confidence",
+                                 filters: ["candidate", "contract_government", "match_confidence"], page: "public-money/campaign-money"),
+        "money-map-gifts": .init(.elections, "gift", title: ["donor"], subtitle: ["official", "office"], amount: ["amount"],
+                                 badge: "donor_type", filters: ["official", "donor_type", "donor_holds_contracts_here"], page: "public-money/money-map"),
+        "money-map-contracts": .init(.elections, "doc.text", title: ["donor"], subtitle: ["government"],
+                                     amount: ["awarded_total", "paid_total"], filters: ["government", "likely_match_only"], page: "public-money/money-map"),
+        "money-map-votes": .init(.elections, "hand.raised", title: ["item"], subtitle: ["official", "vote_date"], detail: "donor",
+                                 amount: ["amount"], date: ["vote_date"], badge: "vote", filters: ["official", "vote", "gift_before_or_after_vote"],
+                                 page: "public-money/money-map"),
+        // CRA network
+        "cra-network-payees": .init(.whereItGoes, "point.3.connected.trianglepath.dotted", title: ["name"], subtitle: ["kind", "records"],
+                                    amount: ["counted_total"], filters: ["kind"], page: "public-money/cra-network"),
+        "cra-network-links": .init(.whereItGoes, "arrow.left.arrow.right", title: ["name_a"], subtitle: ["name_b"], detail: "connection",
+                                   page: "public-money/cra-network"),
+        "cra-network-gifts": .init(.whereItGoes, "gift", title: ["donor"], subtitle: ["official", "cra_board"], amount: ["amount"],
+                                   badge: "donor_type", filters: ["official", "cra_board", "donor_type"], page: "public-money/cra-network"),
+        // Reference
+        "tax-districts": .init(.whatYouPay, "map", title: ["label"], subtitle: ["district"], amount: ["total_millage"],
+                               page: "public-money/tax-dollars"),
+        "vendors-directory": .init(.more, "building.2", title: ["name"], subtitle: ["vendor_type"], filters: ["vendor_type"],
+                                   page: "public-money/vendors"),
+        "people-directory": .init(.peopleAndPay, "person.3", title: ["name"], subtitle: ["district"], page: "who-runs-bay-county"),
+        "glossary-terms": .init(.more, "book", title: ["term"], subtitle: ["group_name"], detail: "simple", filters: ["group_name"],
+                                page: "glossary"),
+        "site-updates": .init(.more, "sparkles", title: ["title"], subtitle: ["date"], detail: "text", date: ["date"], page: "updates"),
     ]
 
     /// Datasets the app shows in their own tabs rather than in Explore.

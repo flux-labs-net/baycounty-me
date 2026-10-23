@@ -1,0 +1,11 @@
+district,label,authority_ids,total_millage,tax_district_codes,gov_id
+Panama City,Panama City,bay_county_general; county_mosquito_control; school_rle; school_discretionary; school_capital_outlay; nwfwmd; city_panama_city,15.7938,16,pc
+Panama City - Downtown DIB,"Panama City, downtown improvement district",bay_county_general; county_mosquito_control; school_rle; school_discretionary; school_capital_outlay; nwfwmd; city_panama_city; pc_downtown_improvement_board,18.7938,31,pc
+Panama City Beach,Panama City Beach,bay_county_general; beach_mosquito; school_rle; school_discretionary; school_capital_outlay; nwfwmd,10.9139,13,pcb
+Lynn Haven,Lynn Haven,bay_county_general; county_mosquito_control; school_rle; school_discretionary; school_capital_outlay; nwfwmd; city_lynn_haven,15.0439,6,lh
+Callaway,Callaway,bay_county_general; county_mosquito_control; school_rle; school_discretionary; school_capital_outlay; nwfwmd; city_callaway,13.6939,2,cw
+Springfield,Springfield,bay_county_general; county_mosquito_control; school_rle; school_discretionary; school_capital_outlay; nwfwmd; city_springfield,15.8589,20,sp
+Parker,Parker,bay_county_general; county_mosquito_control; school_rle; school_discretionary; school_capital_outlay; nwfwmd; city_parker,13.9939,10,parker
+Mexico Beach,Mexico Beach,bay_county_general; county_mosquito_control; school_rle; school_discretionary; school_capital_outlay; nwfwmd; city_mexico_beach,16.2439,8,mb
+unincorporated,Unincorporated Bay County (not in a city),bay_county_general; county_fire_mstu; county_mosquito_control; school_rle; school_discretionary; school_capital_outlay; nwfwmd,12.3739,55,
+unincorporated - beach area,Unincorporated beach area (outside PCB city limits),bay_county_general; county_fire_mstu; beach_mosquito; school_rle; school_discretionary; school_capital_outlay; nwfwmd,12.2939,56,
