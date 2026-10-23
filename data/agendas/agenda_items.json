@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-23T11:30:19+00:00",
+ "generated": "2026-10-23T11:46:49+00:00",
  "note": "Agenda items read from posted agendas by a Claude model (data/agendas/extract_agendas.py). Amounts are the largest dollar figure printed on the item, not necessarily spending. Check the agenda itself before relying on an item.",
  "items": [
   {
@@ -5412,6 +5412,3327 @@
     "1624 Moylan Road"
    ],
    "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1912"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-07-07",
+   "meeting": "BOCC Regular Meeting",
+   "number": "1",
+   "section": "CONSENT AGENDA - Clerk of Courts",
+   "title": "Revenues & Expenditures and Check Register",
+   "summary": "Board acknowledges receipt of the revenue and expenditure reports and the check register.",
+   "kind": "consent",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1907"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-07-07",
+   "meeting": "BOCC Regular Meeting",
+   "number": "2",
+   "section": "CONSENT AGENDA - Budget Office",
+   "title": "FY 2026 Budget Amendment",
+   "summary": "Board adopts a resolution amending the Fiscal Year 2025-2026 Budget.",
+   "kind": "budget",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1907"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-07-07",
+   "meeting": "BOCC Regular Meeting",
+   "number": "3",
+   "section": "CONSENT AGENDA - Collaborative Services",
+   "title": "Contract 26-23 Artificial Reef Construction Project",
+   "summary": "Board awards Contract 26-23 Artificial Reef to H.G. Harders and Sons, Inc. and authorizes the chairman to execute the contract.",
+   "kind": "contract",
+   "amount": 395000.0,
+   "parties": [
+    "H.G. Harders and Sons, Inc."
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1907"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-07-07",
+   "meeting": "BOCC Regular Meeting",
+   "number": "4",
+   "section": "CONSENT AGENDA - County Attorney",
+   "title": "Attorney General Opinion Resolution",
+   "summary": "Board adopts a resolution authorizing the County Attorney to seek an Attorney General Opinion on the Clerk of Court's statutory and constitutional pre-audit authority.",
+   "kind": "resolution",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1907"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-07-07",
+   "meeting": "BOCC Regular Meeting",
+   "number": "5",
+   "section": "CONSENT AGENDA - County Attorney",
+   "title": "County Attorney Authorization for Opioid Settlement",
+   "summary": "Board authorizes the County Attorney to approve a settlement in the Opioid litigation.",
+   "kind": "other",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1907"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-07-07",
+   "meeting": "BOCC Regular Meeting",
+   "number": "6",
+   "section": "CONSENT AGENDA - Outside Agencies",
+   "title": "Mexico Beach Community Development Council Appointments",
+   "summary": "Board reviews and approves a board appointment seat.",
+   "kind": "appointment",
+   "amount": null,
+   "parties": [
+    "Mexico Beach Community Development Council"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1907"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-07-07",
+   "meeting": "BOCC Regular Meeting",
+   "number": "7",
+   "section": "CONSENT AGENDA - Public Works",
+   "title": "South Gainer Bayou Drive Drainage Easement",
+   "summary": "Board accepts the drainage easement to Bay County and authorizes the chairman to execute and record the conveyance.",
+   "kind": "other",
+   "amount": null,
+   "parties": [],
+   "addresses": [
+    "South Gainer Bayou Drive"
+   ],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1907"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-07-07",
+   "meeting": "BOCC Regular Meeting",
+   "number": "8",
+   "section": "CONSENT AGENDA - Utility Services",
+   "title": "Fiscal Sustainability Plan for North Bay Wastewater Project",
+   "summary": "Board approves a resolution implementing the Fiscal Sustainability Plan for the North Bay Wastewater Treatment Facility Injection Well Project.",
+   "kind": "resolution",
+   "amount": null,
+   "parties": [],
+   "addresses": [
+    "North Bay Wastewater Treatment Facility"
+   ],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1907"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-07-07",
+   "meeting": "BOCC Regular Meeting",
+   "number": "9",
+   "section": "CONSENT AGENDA - Utility Services",
+   "title": "Agreement for Country Lake Drive Utility Improvements",
+   "summary": "Board approves the Developer's Agreement with 68V Fiddlers Glenn (FL) 2026, LLC for the Country Lake Drive Improvements, including a reimbursement.",
+   "kind": "contract",
+   "amount": 272466.0,
+   "parties": [
+    "68V Fiddlers Glenn (FL) 2026, LLC"
+   ],
+   "addresses": [
+    "Country Lake Drive"
+   ],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1907"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-07-07",
+   "meeting": "BOCC Regular Meeting",
+   "number": "10",
+   "section": "CONSENT AGENDA - Utility Services",
+   "title": "Contract 26-38 Hydrated Lime",
+   "summary": "Board approves a one-year contract with three additional one-year renewal options with Cheney Lime & Cement Company, Inc. to supply Hydrated Lime for the Water Treatment Plant.",
+   "kind": "contract",
+   "amount": null,
+   "parties": [
+    "Cheney Lime & Cement Company, Inc."
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1907"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-07-07",
+   "meeting": "BOCC Regular Meeting",
+   "number": "11",
+   "section": "CONSENT AGENDA - Utility Services",
+   "title": "Programmable Logic Controller Replacement Contract",
+   "summary": "Board awards Contract 26-41, Programmable Logic Controller Replacement, to SJ Electro Systems, LLC dba Primex.",
+   "kind": "contract",
+   "amount": 475000.0,
+   "parties": [
+    "SJ Electro Systems, LLC dba Primex"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1907"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-07-07",
+   "meeting": "BOCC Regular Meeting",
+   "number": "12",
+   "section": "PUBLIC HEARING - Community Development",
+   "title": "Temporary Moratorium on Data Centers",
+   "summary": "Board conducts a quasi-judicial public hearing to approve a temporary moratorium on large scale data centers.",
+   "kind": "public_hearing",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1907"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-07-07",
+   "meeting": "BOCC Regular Meeting",
+   "number": "13",
+   "section": "PUBLIC HEARING - County Attorney",
+   "title": "Tourist Development Tax Collection Ordinance",
+   "summary": "Board holds a public hearing and considers adopting an ordinance amending Section 14-39 of the Bay County Code of Ordinances related to collection of the Tourist Development Tax.",
+   "kind": "ordinance",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1907"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-06-16",
+   "meeting": "BOCC Regular Meeting",
+   "number": null,
+   "section": "PRESENTATIONS",
+   "title": "20 Year Service Award – Christopher Lee, Mosquito Control",
+   "summary": null,
+   "kind": "presentation",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1902"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-06-16",
+   "meeting": "BOCC Regular Meeting",
+   "number": null,
+   "section": "PRESENTATIONS",
+   "title": "Retirement – Chief Wise, Emergency Management Division",
+   "summary": null,
+   "kind": "presentation",
+   "amount": null,
+   "parties": [
+    "Emergency Management Division"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1902"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-06-16",
+   "meeting": "BOCC Regular Meeting",
+   "number": "1",
+   "section": "CONSENT AGENDA - Clerk of Courts",
+   "title": "Revenues & Expenditures and Inventory Deletions",
+   "summary": "Board acknowledges receipt of the reports and approves inventory deletions.",
+   "kind": "consent",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1902"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-06-16",
+   "meeting": "BOCC Regular Meeting",
+   "number": "2",
+   "section": "CONSENT AGENDA - Budget Office",
+   "title": "FY 2026 Budget Amendment",
+   "summary": "Board adopts a resolution amending the Fiscal Year 2025-2026 Budget.",
+   "kind": "budget",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1902"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-06-16",
+   "meeting": "BOCC Regular Meeting",
+   "number": "3",
+   "section": "CONSENT AGENDA - Community Development",
+   "title": "Fees and Fines Amendment - Building Safety Fee Schedule",
+   "summary": "Board approves a resolution amending the Bay County Fees and Fines Schedule to update the Building Safety Division fee schedule related to private provider inspection services.",
+   "kind": "resolution",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1902"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-06-16",
+   "meeting": "BOCC Regular Meeting",
+   "number": "4",
+   "section": "CONSENT AGENDA - County Attorney",
+   "title": "Designated Receiving System Plan and Behavioral Health Transportation Plan Triennial Update",
+   "summary": "Board approves the plans and authorizes the chairman to sign the attestation form.",
+   "kind": "other",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1902"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-06-16",
+   "meeting": "BOCC Regular Meeting",
+   "number": "5",
+   "section": "CONSENT AGENDA - County Attorney",
+   "title": "Pete Edwards Field Cell Tower Lease with Panama City Beach",
+   "summary": "Board approves the Pete Edwards Field cell tower lease with Panama City Beach and authorizes the chairman to sign.",
+   "kind": "contract",
+   "amount": null,
+   "parties": [
+    "Panama City Beach"
+   ],
+   "addresses": [
+    "Pete Edwards Field"
+   ],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1902"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-06-16",
+   "meeting": "BOCC Regular Meeting",
+   "number": "6",
+   "section": "CONSENT AGENDA - County Attorney",
+   "title": "Central Moloney Triumph Grant Agreement Modification",
+   "summary": "Board approves a modification to the grant agreement with Triumph Gulf Coast related to Project 258 (Lightning Strike) and authorizes the chairman to sign.",
+   "kind": "grant",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1902"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-06-16",
+   "meeting": "BOCC Regular Meeting",
+   "number": "7",
+   "section": "CONSENT AGENDA - County Attorney",
+   "title": "Dizoglio/ Costley v. Bay County Litigation Settlement",
+   "summary": "Board approves the settlement agreement in Benjamin Dizoglio, personal representative of the Estate of Kathleen M. Costley v. Bay County and authorizes the chairman to sign.",
+   "kind": "other",
+   "amount": null,
+   "parties": [
+    "Benjamin Dizoglio, personal representative of the Estate of Kathleen M. Costley"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1902"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-06-16",
+   "meeting": "BOCC Regular Meeting",
+   "number": "8",
+   "section": "CONSENT AGENDA - County Manager’s Office",
+   "title": "Memorandum of Agreement with Health Department for Women, Infants & Children Services",
+   "summary": "Board reviews and approves the memorandum of agreement and business associate agreement with the Florida Department of Health for WIC services at Fire Rescue Station 11 in Youngstown.",
+   "kind": "contract",
+   "amount": null,
+   "parties": [
+    "Florida Department of Health"
+   ],
+   "addresses": [
+    "Fire Rescue Station 11, Youngstown"
+   ],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1902"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-06-16",
+   "meeting": "BOCC Regular Meeting",
+   "number": "9",
+   "section": "CONSENT AGENDA - Purchasing Office",
+   "title": "Contract 26-34 Clean Fill Dirt",
+   "summary": "Board awards contract 26-34 Clean Fill Dirt to Johnson Materials Supply, LLC and authorizes the chairman to execute it.",
+   "kind": "contract",
+   "amount": null,
+   "parties": [
+    "Johnson Materials Supply, LLC"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1902"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-06-16",
+   "meeting": "BOCC Regular Meeting",
+   "number": "10",
+   "section": "REGULAR AGENDA - Public Works",
+   "title": "Owenwood Road Dirt Road Stabilization Contract Award",
+   "summary": "Board awards Contract 26-30 Owenwood Road Dirt Road Stabilization to Anderson Columbia and authorizes the chairman to execute the contract.",
+   "kind": "contract",
+   "amount": 1094264.99,
+   "parties": [],
+   "addresses": [
+    "Owenwood Road"
+   ],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1902"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-06-16",
+   "meeting": "BOCC Regular Meeting",
+   "number": "11",
+   "section": "PUBLIC HEARING - Community Development",
+   "title": "PLDPA20260099 & PLZCA20260100 - Small Scale Amendment & Zone Change - 1925 Cauley Avenue",
+   "summary": "Board conducts a quasi-judicial public hearing on a Small-Scale Comprehensive Plan Future Land Use Map amendment and a zone change from R-1 Single-Family to C-3A General Commercial Low.",
+   "kind": "rezoning_land_use",
+   "amount": null,
+   "parties": [],
+   "addresses": [
+    "1925 Cauley Avenue"
+   ],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1902"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-06-16",
+   "meeting": "BOCC Regular Meeting",
+   "number": "12",
+   "section": "PUBLIC HEARING - Community Development",
+   "title": "PZCA20260102 - Zone Change - 903 E. 25th Street & 2520 N. Palo Alto Avenue",
+   "summary": "Board conducts a quasi-judicial public hearing on a zone change from R-1 Single-Family to R-3 Duplex, Triplex, and Quadraplex.",
+   "kind": "rezoning_land_use",
+   "amount": null,
+   "parties": [],
+   "addresses": [
+    "903 East 25th Street",
+    "2520 North Palo Alto Avenue"
+   ],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1902"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-06-16",
+   "meeting": "BOCC Regular Meeting",
+   "number": "13",
+   "section": "PUBLIC HEARING - Community Development",
+   "title": "PLLPTA20260037 - Comprehensive Plan Amendment",
+   "summary": "Board conducts a legislative public hearing and adopts the proposed amendments to the Bay County Comprehensive Plan.",
+   "kind": "public_hearing",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1902"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-06-16",
+   "meeting": "BOCC Regular Meeting",
+   "number": "14",
+   "section": "PUBLIC HEARING - Community Development",
+   "title": "PLLDR20260039 - LDR Amendment",
+   "summary": "Board conducts a legislative public hearing to approve an amendment to Chapter 3 \"Zoning Administration\" and Chapter 7 \"Conservation Zones\" of the Land Development Regulations.",
+   "kind": "ordinance",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1902"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-06-02",
+   "meeting": "BOCC Regular Meeting",
+   "number": "1",
+   "section": "CONSENT AGENDA - Clerk of Courts",
+   "title": "Check Register and Revenues & Expenditures",
+   "summary": "Board to acknowledge receipt of reports.",
+   "kind": "consent",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1897"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-06-02",
+   "meeting": "BOCC Regular Meeting",
+   "number": "2",
+   "section": "CONSENT AGENDA - Budget Office",
+   "title": "FY 2026 Budget Amendment",
+   "summary": "Board adopt a resolution amending the Fiscal Year 2025-2026 Budget.",
+   "kind": "budget",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1897"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-06-02",
+   "meeting": "BOCC Regular Meeting",
+   "number": "3",
+   "section": "CONSENT AGENDA - County Attorney",
+   "title": "Mutual Aid Agreement with Secretary of the Air Force",
+   "summary": "Board approve the renewal of the Mutual Aid Agreement between Bay County and the Secretary of the Air Force for fire protection services, and authorize the chairman to sign.",
+   "kind": "contract",
+   "amount": null,
+   "parties": [
+    "Secretary of the Air Force"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1897"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-06-02",
+   "meeting": "BOCC Regular Meeting",
+   "number": "4",
+   "section": "CONSENT AGENDA - Outside Agencies",
+   "title": "CareerSource Gulf Coast Board Budget FY2026-2027",
+   "summary": "Board to approve and authorize the chairman to sign the CareerSource Gulf Coast FY2026-2027 budget.",
+   "kind": "budget",
+   "amount": null,
+   "parties": [
+    "CareerSource Gulf Coast"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1897"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-06-02",
+   "meeting": "BOCC Regular Meeting",
+   "number": "5",
+   "section": "CONSENT AGENDA - Public Works",
+   "title": "East Pass Feasibility Study Change Order No.2",
+   "summary": "Board to approve change order No. 2 to MRD Associates for the East Pass Feasibility Study and authorize the chairman to execute it.",
+   "kind": "change_order",
+   "amount": 183750.0,
+   "parties": [
+    "MRD Associates"
+   ],
+   "addresses": [
+    "East Pass"
+   ],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1897"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-06-02",
+   "meeting": "BOCC Regular Meeting",
+   "number": "6",
+   "section": "CONSENT AGENDA - Public Works",
+   "title": "Contract 26-31 McKenzie Boat Ramp Project",
+   "summary": "Board award contract 26-31 to Inland Construction and Engineering, Inc. and authorize the chairman to execute the contract.",
+   "kind": "contract",
+   "amount": 592295.0,
+   "parties": [
+    "Inland Construction and Engineering, Inc."
+   ],
+   "addresses": [
+    "McKenzie Boat Ramp"
+   ],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1897"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-06-02",
+   "meeting": "BOCC Regular Meeting",
+   "number": "7",
+   "section": "CONSENT AGENDA - Utility Services",
+   "title": "Contract 26-11 Utility Design Plan Review Consulting Services",
+   "summary": "Board award Contract 26-11 for utility design plan review consulting services for new developments to Arcadis U.S., Inc., and authorize the chairman to execute the contract.",
+   "kind": "contract",
+   "amount": null,
+   "parties": [
+    "Arcadis U.S., Inc."
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1897"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-06-02",
+   "meeting": "BOCC Regular Meeting",
+   "number": "8",
+   "section": "REGULAR AGENDA - County Attorney",
+   "title": "Data Center Resolution",
+   "summary": "Board to approve the Data Center Resolution (proposed resolution for data center moratorium) and authorize the chairman to sign.",
+   "kind": "resolution",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1897"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-05-19",
+   "meeting": "BOCC Regular Meeting",
+   "number": "1",
+   "section": "Consent Agenda - Clerk of Courts",
+   "title": "Check Register, Inventory Deletions, and Revenues & Expenditures",
+   "summary": "Board to acknowledge receipt of reports and approve inventory deletions.",
+   "kind": "consent",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1892"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-05-19",
+   "meeting": "BOCC Regular Meeting",
+   "number": "2",
+   "section": "Consent Agenda - County Attorney",
+   "title": "Traffic Enforcement Agreement with Lake Powell and Wild Heron",
+   "summary": "Board to approve the traffic enforcement agreement between the County, the Bay County Sheriff's Office, Lake Powell Residential Golf Community Development District, and Wild Heron Property Owners Association, and authorize the chairman to sign.",
+   "kind": "contract",
+   "amount": null,
+   "parties": [
+    "Bay County Sheriff's Office",
+    "Lake Powell Residential Golf Community Development District",
+    "Wild Heron Property Owners Association"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1892"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-05-19",
+   "meeting": "BOCC Regular Meeting",
+   "number": "3",
+   "section": "Consent Agenda - County Attorney",
+   "title": "Sale of Surplus Properties",
+   "summary": "Board to approve the sales of Bay County surplus parcels and authorize the chairman to execute closing documents.",
+   "kind": "purchase",
+   "amount": null,
+   "parties": [],
+   "addresses": [
+    "17378-000-000 - E 13th St",
+    "17709-000-000 - Hamilton Ave",
+    "16318-000-000 - Maple Ave"
+   ],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1892"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-05-19",
+   "meeting": "BOCC Regular Meeting",
+   "number": "4",
+   "section": "Consent Agenda - County Attorney",
+   "title": "Ratification of First Amendment to Grant Award for Project Kilowatt",
+   "summary": "Board to ratify the First Amendment to the Grant Award Agreement for Project Kilowatt.",
+   "kind": "grant",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1892"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-05-19",
+   "meeting": "BOCC Regular Meeting",
+   "number": "5",
+   "section": "Consent Agenda - County Attorney",
+   "title": "Termination of Easement for E 7th Street and Harlem Avenue",
+   "summary": "Board to approve the termination of an easement for E 7th Street and Harlem Avenue and authorize the chairman to sign the termination.",
+   "kind": "other",
+   "amount": null,
+   "parties": [],
+   "addresses": [
+    "E 7th Street and Harlem Avenue"
+   ],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1892"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-05-19",
+   "meeting": "BOCC Regular Meeting",
+   "number": "6",
+   "section": "Consent Agenda - County Manager's Office",
+   "title": "Military Connected Schools Grant Letter of Support",
+   "summary": "Board to provide a signed letter of support to North Bay Haven Charter Academy for grant opportunities through the Department of Defense Education Activity.",
+   "kind": "grant",
+   "amount": null,
+   "parties": [
+    "North Bay Haven Charter Academy",
+    "Department of Defense Education Activity"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1892"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-05-19",
+   "meeting": "BOCC Regular Meeting",
+   "number": "7",
+   "section": "Consent Agenda - County Manager's Office",
+   "title": "Chief of Emergency Services Pugh Confirmation",
+   "summary": "Board to confirm the appointment of Austin Pugh as Chief of Emergency Services.",
+   "kind": "appointment",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1892"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-05-19",
+   "meeting": "BOCC Regular Meeting",
+   "number": "8",
+   "section": "Consent Agenda - Emergency Services",
+   "title": "Datamark Services Agreement Amendment",
+   "summary": "Board to approve and authorize the chairman to sign the amended agreement with Datamark.",
+   "kind": "contract",
+   "amount": null,
+   "parties": [
+    "Datamark"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1892"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-05-19",
+   "meeting": "BOCC Regular Meeting",
+   "number": "9",
+   "section": "Consent Agenda - General Services",
+   "title": "Contract 26-32 Utility Services Administration Building Renovation",
+   "summary": "Board to award the contract to Southern Construction Service, Inc. and authorize the chairman to execute it.",
+   "kind": "contract",
+   "amount": 324134.0,
+   "parties": [
+    "Southern Construction Service, Inc."
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1892"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-05-19",
+   "meeting": "BOCC Regular Meeting",
+   "number": "10",
+   "section": "Consent Agenda - General Services",
+   "title": "Contract 26-27 Health Department HVAC Graphics & Control System",
+   "summary": "Board to award the contract to Johnson Controls Building Solutions, LLC and authorize the chairman to execute it.",
+   "kind": "contract",
+   "amount": 184960.37,
+   "parties": [
+    "Johnson Controls Building Solutions, LLC"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1892"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-05-19",
+   "meeting": "BOCC Regular Meeting",
+   "number": "11",
+   "section": "Consent Agenda - Outside Agencies",
+   "title": "CareerSource Gulf Coast Board Appointment",
+   "summary": "Board to appoint Cecil Jackson in the private training representative seat with a term expiring May 19, 2030.",
+   "kind": "appointment",
+   "amount": null,
+   "parties": [
+    "CareerSource Gulf Coast"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1892"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-05-19",
+   "meeting": "BOCC Regular Meeting",
+   "number": "12",
+   "section": "Consent Agenda - Outside Agencies",
+   "title": "US Department of Justice Direct Byrnes Local Grant",
+   "summary": "Board to approve the FY 2025 US Department of Justice Direct Byrnes Local Grant.",
+   "kind": "grant",
+   "amount": 28714.0,
+   "parties": [
+    "US Department of Justice"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1892"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-05-19",
+   "meeting": "BOCC Regular Meeting",
+   "number": "13",
+   "section": "Consent Agenda - Public Works",
+   "title": "Contract 26-16 Pipe Lining and Rehabilitation of Stormwater Structures",
+   "summary": "Board to award the contract to Inliner Solutions, LLC and authorize the chairman to execute it.",
+   "kind": "contract",
+   "amount": null,
+   "parties": [
+    "Inliner Solutions, LLC"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1892"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-05-19",
+   "meeting": "BOCC Regular Meeting",
+   "number": "14",
+   "section": "Consent Agenda - Risk Management",
+   "title": "Renewal of Bay County Property Insurance Program",
+   "summary": "Board to approve the issuance of FY 2026/2027 property insurance for the Board of County Commissioners, Clerk of Court, Property Appraiser, Supervisor of Elections, Tax Collector, and Sheriff's Office.",
+   "kind": "contract",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1892"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-05-19",
+   "meeting": "BOCC Regular Meeting",
+   "number": "15",
+   "section": "Consent Agenda - Utility Services",
+   "title": "Emergency Jail Waterline Change Order #2",
+   "summary": "Board to approve change order with STAline Waterworks, Inc. and Gulf Coast Utility Contractors for materials and labor for the jail waterline contract.",
+   "kind": "change_order",
+   "amount": null,
+   "parties": [
+    "STAline Waterworks, Inc.",
+    "Gulf Coast Utility Contractors"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1892"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-05-19",
+   "meeting": "BOCC Regular Meeting",
+   "number": "16",
+   "section": "Public Hearing - Community Development",
+   "title": "PLDPA20260081 & PLZCA20260082 - Small Scale Amendment & Zone Change - 11425 Highway 231",
+   "summary": "Quasi-judicial public hearing to approve a Small-Scale Amendment to the Comprehensive Plan Future Land Use Map and a zone change from AG-1 General Agriculture to IND-1 Light Industry in the Youngstown area.",
+   "kind": "rezoning_land_use",
+   "amount": null,
+   "parties": [],
+   "addresses": [
+    "11425 Highway 231"
+   ],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1892"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-05-19",
+   "meeting": "BOCC Regular Meeting",
+   "number": "17",
+   "section": "Public Hearing - Community Development",
+   "title": "PLDPA20260055 & PLZCA20260054 - Small Scale Amendment & Zone Change - 1712 & 1714 Maple Avenue",
+   "summary": "Quasi-judicial public hearing to approve a Small-Scale Amendment to the Comprehensive Plan Future Land Use Map and a zone change from R-2 Single-Family & Duplex Dwellings to IND-1 Light Industry.",
+   "kind": "rezoning_land_use",
+   "amount": null,
+   "parties": [],
+   "addresses": [
+    "1712 & 1714 Maple Avenue"
+   ],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1892"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-05-19",
+   "meeting": "BOCC Regular Meeting",
+   "number": "18",
+   "section": "Public Hearing - Community Development",
+   "title": "PLZCA20260057 - Zone Change - 2599 E. Highway 390",
+   "summary": "Quasi-judicial public hearing to approve a zone change from C-1 Neighborhood Commercial to C-3 General Commercial in the unincorporated Lynn Haven area.",
+   "kind": "rezoning_land_use",
+   "amount": null,
+   "parties": [],
+   "addresses": [
+    "2599 E. Highway 390"
+   ],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1892"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-05-19",
+   "meeting": "BOCC Regular Meeting",
+   "number": "19",
+   "section": "Public Hearing - Community Development",
+   "title": "PLLPTA20260013 - Comprehensive Plan Text Amendment - Chapter 12",
+   "summary": "Legislative public hearing to adopt the proposed amendments to the Bay County Comprehensive Plan.",
+   "kind": "public_hearing",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1892"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-05-19",
+   "meeting": "BOCC Regular Meeting",
+   "number": "20",
+   "section": "Public Hearing - Community Development",
+   "title": "PLLDR20260015 - LDR Amendment - Chapter 16",
+   "summary": "Legislative public hearing to approve an amendment to Chapter 16 \"Bay-Walton Sector Plan Zones\" of the Land Development Regulations.",
+   "kind": "public_hearing",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1892"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-05-19",
+   "meeting": "BOCC Regular Meeting",
+   "number": "21",
+   "section": "Public Hearing - Community Development",
+   "title": "PLLPTA20260019 - Comprehensive Plan Amendment - Chapter 3",
+   "summary": "Legislative public hearing to adopt the proposed amendments to the Bay County Comprehensive Plan.",
+   "kind": "public_hearing",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1892"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-05-19",
+   "meeting": "BOCC Regular Meeting",
+   "number": "22",
+   "section": "Public Hearing - Community Development",
+   "title": "PLLDR20260020 - LDR Amendments - Bay Point DRI Revisions",
+   "summary": "Legislative public hearing to approve amendments of the Bay County Land Development Regulations.",
+   "kind": "public_hearing",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1892"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-05-19",
+   "meeting": "BOCC Regular Meeting",
+   "number": "23",
+   "section": "Public Hearing - Community Development",
+   "title": "PLLDR20260074 - LDR Amendments - Chapters 28 & 29",
+   "summary": "Legislative public hearing to approve amendments to Chapter 28 \"Landscaping and Buffers\" and Chapter 29 \"Subdivisions\" of the Land Development Regulations.",
+   "kind": "public_hearing",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1892"
+  },
+  {
+   "board": "mb",
+   "body": "Mexico Beach City Council",
+   "gov": "mb",
+   "date": "2026-05-08",
+   "meeting": "City Council Special Meeting",
+   "number": "II.2",
+   "section": "VACANCY OF COUNCIL SEAT GROUP 4",
+   "title": "Council Comments/Action",
+   "summary": "Council discusses and may act on the vacancy of Council Seat Group 4.",
+   "kind": "appointment",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://mexicobeachfl.gov/uploads/2026/04/May-8-2026-CITY-COUNCIL-SPECIAL-MEETING.pdf"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-05-05",
+   "meeting": "BOCC Regular Meeting",
+   "number": "1",
+   "section": "Consent Agenda - Clerk of Courts",
+   "title": "Revenues & Expenditures and Inventory Deletions",
+   "summary": "Board to acknowledge receipt of reports and approve inventory deletions.",
+   "kind": "consent",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1887"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-05-05",
+   "meeting": "BOCC Regular Meeting",
+   "number": "2",
+   "section": "Consent Agenda - Budget Office",
+   "title": "FY 2026 Budget Amendment",
+   "summary": "Board to adopt a resolution amending the Fiscal Year 2025-2026 Budget.",
+   "kind": "budget",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1887"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-05-05",
+   "meeting": "BOCC Regular Meeting",
+   "number": "3",
+   "section": "Consent Agenda - Budget Office",
+   "title": "Federal Seizure Account",
+   "summary": "Board to approve the Sheriff's request for disbursement of monies from the Federal Seizure Account.",
+   "kind": "budget",
+   "amount": null,
+   "parties": [
+    "Bay County Sheriff's Office"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1887"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-05-05",
+   "meeting": "BOCC Regular Meeting",
+   "number": "4",
+   "section": "Consent Agenda - Collaborative Services",
+   "title": "FFY2025 FTA Section 5310 Capital Assistance Grant",
+   "summary": "Board to adopt the resolution and authorize the chairman to sign the FFY2025 FDOT Section 5310 Capital Assistance Grant with the Florida Department of Transportation.",
+   "kind": "grant",
+   "amount": 350000.0,
+   "parties": [
+    "Florida Department of Transportation"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1887"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-05-05",
+   "meeting": "BOCC Regular Meeting",
+   "number": "5",
+   "section": "Consent Agenda - County Attorney",
+   "title": "Sheriff Agreement with Lake Merial Homeowner's Association",
+   "summary": "Board to approve the agreement between the County, the Bay County Sheriff's Office, and Lake Merial Homeowner's Association and authorize the chairman to sign.",
+   "kind": "contract",
+   "amount": null,
+   "parties": [
+    "Bay County Sheriff's Office",
+    "Lake Merial Homeowner's Association"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1887"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-05-05",
+   "meeting": "BOCC Regular Meeting",
+   "number": "6",
+   "section": "Consent Agenda - County Attorney",
+   "title": "Protocol Resolution for Flags on Bay County Properties",
+   "summary": "Board to approve a resolution adopting a protocol for flags on County properties and authorize the chairman to sign.",
+   "kind": "resolution",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1887"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-05-05",
+   "meeting": "BOCC Regular Meeting",
+   "number": "7",
+   "section": "Consent Agenda - County Attorney",
+   "title": "Interlocal Agreement with City of Lynn Haven",
+   "summary": "Board to approve the Interlocal Agreement with the City of Lynn Haven for the utilization of property for emergency sheltering and authorize the chairman to sign.",
+   "kind": "contract",
+   "amount": null,
+   "parties": [
+    "City of Lynn Haven"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1887"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-05-05",
+   "meeting": "BOCC Regular Meeting",
+   "number": "8",
+   "section": "Consent Agenda - General Services",
+   "title": "First Amendment to Contract 25-03 Athletic Surface Chemical Application",
+   "summary": "Board to approve the first amendment to Contract 25-03 with Brandow's Lawn and Landscape and authorize the chairman to execute it.",
+   "kind": "contract",
+   "amount": null,
+   "parties": [
+    "Brandow's Lawn and Landscape"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1887"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-05-05",
+   "meeting": "BOCC Regular Meeting",
+   "number": "9",
+   "section": "Consent Agenda - Outside Agencies",
+   "title": "Mexico Beach Community Development Council Appointments",
+   "summary": "Board to review and approve the appointments of various board member seats.",
+   "kind": "appointment",
+   "amount": null,
+   "parties": [
+    "Mexico Beach Community Development Council"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1887"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-05-05",
+   "meeting": "BOCC Regular Meeting",
+   "number": "10",
+   "section": "Consent Agenda - Outside Agencies",
+   "title": "CareerSource Gulf Coast Regional Planning Area Rezoning",
+   "summary": "Board to approve and authorize the chairman to sign the CareerSource Gulf Coast Rezoning for the Regional Planning Area.",
+   "kind": "other",
+   "amount": null,
+   "parties": [
+    "CareerSource Gulf Coast"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1887"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-05-05",
+   "meeting": "BOCC Regular Meeting",
+   "number": "11",
+   "section": "Consent Agenda - Public Works",
+   "title": "Fountain Community Northern Region Resiliency Center Change Order",
+   "summary": "Board to approve change order #2 for Florida Architects, LLC for additional design services for the Fountain Community Northern Region Resiliency Center and authorize the chairman to execute it.",
+   "kind": "change_order",
+   "amount": 125000.0,
+   "parties": [
+    "Florida Architects, LLC"
+   ],
+   "addresses": [
+    "Fountain Community Northern Region Resiliency Center"
+   ],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1887"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-05-05",
+   "meeting": "BOCC Regular Meeting",
+   "number": "12",
+   "section": "Consent Agenda - Public Works",
+   "title": "Seawall and Dredging Project Construction, Engineering, and Inspection Services Change Order",
+   "summary": "Board to approve a change order to CDR Maguire, Inc. for CEI services for the Eastern Shipbuilding Seawall and Dredging Project and authorize the chairman to execute it.",
+   "kind": "change_order",
+   "amount": 133650.0,
+   "parties": [
+    "CDR Maguire, Inc."
+   ],
+   "addresses": [
+    "Eastern Shipbuilding Seawall and Dredging Project"
+   ],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1887"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-05-05",
+   "meeting": "BOCC Regular Meeting",
+   "number": "13",
+   "section": "Consent Agenda - Public Works",
+   "title": "Temporary Easement with FDOT Fanning Bayou Bridge Replacement",
+   "summary": "Board to approve the temporary easement and resolution to the Florida Department of Transportation for the replacement of the CR 2302 Bridge over Fanning Bayou and authorize the chairman to sign.",
+   "kind": "resolution",
+   "amount": null,
+   "parties": [
+    "Florida Department of Transportation"
+   ],
+   "addresses": [
+    "CR 2302 Bridge over Fanning Bayou"
+   ],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1887"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-05-05",
+   "meeting": "BOCC Regular Meeting",
+   "number": "14",
+   "section": "Consent Agenda - Utility Services",
+   "title": "Utility Analysis Agreement with the City of Lynn Haven",
+   "summary": "Board to approve and allow the chairman to sign the joint agreement with the City of Lynn Haven allowing Raftelis to evaluate future utility services for an amount not to exceed $62,500.00.",
+   "kind": "contract",
+   "amount": 62500.0,
+   "parties": [
+    "City of Lynn Haven",
+    "Raftelis"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1887"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-05-05",
+   "meeting": "BOCC Regular Meeting",
+   "number": "15",
+   "section": "Consent Agenda - Utility Services",
+   "title": "Utility Billing Software Change Order",
+   "summary": "Board to approve change order number 3 to InHance Utilities Solutions and authorize the chairman to sign and make any necessary modifications.",
+   "kind": "change_order",
+   "amount": 25440.0,
+   "parties": [
+    "InHance Utilities Solutions"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1887"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-05-05",
+   "meeting": "BOCC Regular Meeting",
+   "number": "16",
+   "section": "Consent Agenda - Utility Services",
+   "title": "Emergency Jail Waterline Contract Ratification",
+   "summary": "Board to ratify contract with GCUC Inc. for constructed emergency repairs at the County Jail Facility to provide the required fire flow.",
+   "kind": "contract",
+   "amount": null,
+   "parties": [
+    "GCUC Inc."
+   ],
+   "addresses": [
+    "County Jail Facility"
+   ],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1887"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-05-05",
+   "meeting": "BOCC Regular Meeting",
+   "number": "17",
+   "section": "Consent Agenda - Utility Services",
+   "title": "Lake Merial Sewer Agreement Fulfillment",
+   "summary": "Board to approve the final payment to Lake Merial, Inc., fulfilling the Lake Merial Sewer Agreement approved in 2012.",
+   "kind": "contract",
+   "amount": 914765.76,
+   "parties": [
+    "Lake Merial, Inc."
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1887"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-05-05",
+   "meeting": "BOCC Regular Meeting",
+   "number": "18",
+   "section": "Regular Agenda - Public Works",
+   "title": "Highpoint Boat Ramp Renovation Contract Award",
+   "summary": "Board to approve a contract with BCL Civil Contractors, Inc. for construction of the Highpoint Boat Ramp Project and authorize the chairman to sign.",
+   "kind": "contract",
+   "amount": 679499.5,
+   "parties": [
+    "BCL Civil Contractors, Inc."
+   ],
+   "addresses": [
+    "Highpoint Boat Ramp"
+   ],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1887"
+  },
+  {
+   "board": "mb",
+   "body": "Mexico Beach City Council",
+   "gov": "mb",
+   "date": "2026-04-28",
+   "meeting": "City Council Meeting",
+   "number": "1",
+   "section": "CONSENT AGENDA",
+   "title": "Minutes – April 14, 2026 – City Council Meeting",
+   "summary": null,
+   "kind": "minutes_approval",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://mexicobeachfl.gov/uploads/2026/04/April-28-2026-CITY-COUNCIL-REGULAR-MEETING-AGENDA.pdf"
+  },
+  {
+   "board": "mb",
+   "body": "Mexico Beach City Council",
+   "gov": "mb",
+   "date": "2026-04-28",
+   "meeting": "City Council Meeting",
+   "number": "1",
+   "section": "REGULAR AGENDA",
+   "title": "Ordinance 883 - Duke Energy Franchise Agreement (Second Reading)",
+   "summary": "An ordinance granting Duke Energy Florida, LLC an electric utility rights-of-way utilization franchise and setting the terms for occupying municipal streets and rights of way in the City of Mexico Beach to provide electric service.",
+   "kind": "ordinance",
+   "amount": null,
+   "parties": [
+    "Duke Energy Florida, LLC d/b/a Duke Energy"
+   ],
+   "addresses": [],
+   "url": "https://mexicobeachfl.gov/uploads/2026/04/April-28-2026-CITY-COUNCIL-REGULAR-MEETING-AGENDA.pdf"
+  },
+  {
+   "board": "mb",
+   "body": "Mexico Beach City Council",
+   "gov": "mb",
+   "date": "2026-04-28",
+   "meeting": "City Council Meeting",
+   "number": "2",
+   "section": "REGULAR AGENDA",
+   "title": "Follow-up Request from Casuna",
+   "summary": null,
+   "kind": "other",
+   "amount": null,
+   "parties": [
+    "Casuna"
+   ],
+   "addresses": [],
+   "url": "https://mexicobeachfl.gov/uploads/2026/04/April-28-2026-CITY-COUNCIL-REGULAR-MEETING-AGENDA.pdf"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-04-21",
+   "meeting": "BOCC Regular Meeting",
+   "number": "1",
+   "section": "CONSENT AGENDA - Clerk of Courts",
+   "title": "February 2026 Check Registers and Inventory Deletions",
+   "summary": "Board to acknowledge receipt of reports and approve inventory deletions.",
+   "kind": "consent",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1882"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-04-21",
+   "meeting": "BOCC Regular Meeting",
+   "number": "2",
+   "section": "CONSENT AGENDA - Budget Office",
+   "title": "FY 2026 Budget Amendment",
+   "summary": "Board to adopt a resolution amending the Fiscal Year 2025-2026 Budget.",
+   "kind": "budget",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1882"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-04-21",
+   "meeting": "BOCC Regular Meeting",
+   "number": "3",
+   "section": "CONSENT AGENDA - Budget Office",
+   "title": "26-21 Financial Advisor Services Contract Award",
+   "summary": "Award the contract to PFM Financial Advisors LLC and authorize the Chairman to execute it.",
+   "kind": "contract",
+   "amount": null,
+   "parties": [
+    "PFM Financial Advisors LLC"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1882"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-04-21",
+   "meeting": "BOCC Regular Meeting",
+   "number": "4",
+   "section": "CONSENT AGENDA - Budget Office",
+   "title": "2026 Fees & Fines Schedule Amendment",
+   "summary": "Board to adopt a resolution amending the 2026 Fees & Fines Schedule regarding rounding cents and updating towing ordinance notations.",
+   "kind": "resolution",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1882"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-04-21",
+   "meeting": "BOCC Regular Meeting",
+   "number": "5",
+   "section": "CONSENT AGENDA - Budget Office",
+   "title": "Special Law Enforcement Trust Fund",
+   "summary": "Board to approve the Sheriff's request for expenditure of monies from the Special Law Enforcement Trust Fund.",
+   "kind": "budget",
+   "amount": null,
+   "parties": [
+    "Sheriff"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1882"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-04-21",
+   "meeting": "BOCC Regular Meeting",
+   "number": "6",
+   "section": "CONSENT AGENDA - Budget Office",
+   "title": "Crime Prevention Fund",
+   "summary": "Board to approve the Sheriff's request for expenditure of monies from the Crime Prevention Fund.",
+   "kind": "budget",
+   "amount": null,
+   "parties": [
+    "Sheriff"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1882"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-04-21",
+   "meeting": "BOCC Regular Meeting",
+   "number": "7",
+   "section": "CONSENT AGENDA - Collaborative Services",
+   "title": "Tranquility at Saint Andrews Local Government Contribution Request",
+   "summary": "Board to approve Timshel Multifamily 2, LLC's request to commit SHIP funding to the rental development as a loan and authorize the chairman to sign the Local Government Contribution request.",
+   "kind": "grant",
+   "amount": 340000.0,
+   "parties": [
+    "Timshel Multifamily 2, LLC"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1882"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-04-21",
+   "meeting": "BOCC Regular Meeting",
+   "number": "8",
+   "section": "CONSENT AGENDA - County Attorney",
+   "title": "Project Kilowatt Resolution, Assignment of Lease, and Option to Purchase",
+   "summary": "Board to approve a resolution providing for an economic development lease for 3615 Calhoun Avenue to Voltari Electric, Inc. and authorize the closing transactions under the lease, assignment of purchase agreement, and option to purchase previously approved.",
+   "kind": "rezoning_land_use",
+   "amount": 1.0,
+   "parties": [
+    "Voltari Electric, Inc."
+   ],
+   "addresses": [
+    "3615 Calhoun Avenue",
+    "26658-020-000"
+   ],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1882"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-04-21",
+   "meeting": "BOCC Regular Meeting",
+   "number": "9",
+   "section": "CONSENT AGENDA - Emergency Services",
+   "title": "Managed Emergency Voice Operations (MEVO) Service Agreement",
+   "summary": "Board to approve and authorize the chairman to sign the service agreement with INdigital for MEVO kits.",
+   "kind": "contract",
+   "amount": null,
+   "parties": [
+    "INdigital"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1882"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-04-21",
+   "meeting": "BOCC Regular Meeting",
+   "number": "10",
+   "section": "CONSENT AGENDA - Emergency Services",
+   "title": "Priority Dispatch Agreement-Second Amendment",
+   "summary": "Board to approve and authorize the chairman to sign the amended Priority Dispatch service agreement.",
+   "kind": "contract",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1882"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-04-21",
+   "meeting": "BOCC Regular Meeting",
+   "number": "11",
+   "section": "CONSENT AGENDA - Public Works",
+   "title": "Disaster Consultant Task Order Number 40",
+   "summary": "Approve and authorize the chairman to execute Task Order No. 40 with CDR Maguire under Contract No. 19-04.",
+   "kind": "contract",
+   "amount": 582400.0,
+   "parties": [
+    "CDR Maguire"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1882"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-04-21",
+   "meeting": "BOCC Regular Meeting",
+   "number": "12",
+   "section": "CONSENT AGENDA - Purchasing Office",
+   "title": "Contract 26-20 North Bay Septic to Sewer Phase 1B First Amendment",
+   "summary": "Board to approve the first amendment to Contract 26-20 North Bay Septic to Sewer Conversion Phase 1B.",
+   "kind": "change_order",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1882"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-04-21",
+   "meeting": "BOCC Regular Meeting",
+   "number": "13",
+   "section": "CONSENT AGENDA - Tourist Development Council",
+   "title": "Visit Panama City Beach Ironman Gulf Coast 70.3 Route Authorization",
+   "summary": "Board to authorize use of County road rights-of-way on Saturday, May 09, 2026 for the Ironman Gulf Coast 70.3 triathlon.",
+   "kind": "other",
+   "amount": null,
+   "parties": [
+    "Visit Panama City Beach"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1882"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-04-21",
+   "meeting": "BOCC Regular Meeting",
+   "number": "14",
+   "section": "CONSENT AGENDA - Tourist Development Council",
+   "title": "2026 Turtle Watch and Leave No Trace Wildlife Monitoring",
+   "summary": "Board to approve the 2026 contracts with Panama City Beach Turtle Watch, Inc. for sea turtle and Leave No Trace wildlife monitoring and authorize the chairman to execute them.",
+   "kind": "contract",
+   "amount": null,
+   "parties": [
+    "Panama City Beach Turtle Watch, Inc."
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1882"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-04-21",
+   "meeting": "BOCC Regular Meeting",
+   "number": "15",
+   "section": "CONSENT AGENDA - Utility Services",
+   "title": "Underground Injection Control (UIC) Permit Application Designation",
+   "summary": "Board to designate the Utility Services Director as the authorized representative of Bay County for matters related to the UIC permit application and sign the authorization letter.",
+   "kind": "resolution",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1882"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-04-21",
+   "meeting": "BOCC Regular Meeting",
+   "number": "16",
+   "section": "PUBLIC HEARING - Community Development",
+   "title": "PLDPA20260034 & PLCZA20260033 - Small Scale Amendment & Zone Change - 2630 Highway 2321",
+   "summary": "Quasi-judicial public hearing on a Small-Scale Comprehensive Plan amendment and a zone change of about 1.5 acres from R-2 Single Family & Duplex Dwelling to C-3A General Commercial Low.",
+   "kind": "rezoning_land_use",
+   "amount": null,
+   "parties": [],
+   "addresses": [
+    "2630 Highway 2321"
+   ],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1882"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-04-21",
+   "meeting": "BOCC Regular Meeting",
+   "number": "17",
+   "section": "PUBLIC HEARING - Community Development",
+   "title": "PLDPA20260043 & PLZCA20260044 - Small Scale Amendment & Zone Change - Steel Field Road",
+   "summary": "Quasi-judicial public hearing on a Small-Scale Comprehensive Plan amendment and a zone change from IND-2 Industrial to BC Business Center.",
+   "kind": "rezoning_land_use",
+   "amount": null,
+   "parties": [],
+   "addresses": [
+    "Steel Field Road, approximately 250 feet from the northwest corner of Steel Field Road and Highway 79"
+   ],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1882"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-04-21",
+   "meeting": "BOCC Regular Meeting",
+   "number": "18",
+   "section": "PUBLIC HEARING - Community Development",
+   "title": "PLDPA20260048 & PLZCA20260047 - Small Scale Amendment & Zone Change - 13814 Highway 77",
+   "summary": "Quasi-judicial public hearing on a Small-Scale Comprehensive Plan amendment and a zone change from R-2 Single-Family & Duplex Dwellings to C-3A General Commercial Low.",
+   "kind": "rezoning_land_use",
+   "amount": null,
+   "parties": [],
+   "addresses": [
+    "13814 Highway 77"
+   ],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1882"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-04-21",
+   "meeting": "BOCC Regular Meeting",
+   "number": "19",
+   "section": "PUBLIC HEARING - Community Development",
+   "title": "PLLPTA20260037 - Chapter 3 & Chapter 6 Comprehensive Plan Amendment Transmittal",
+   "summary": "Legislative public hearing to approve transmitting proposed Comprehensive Plan amendments to the Florida Department of Commerce for review.",
+   "kind": "rezoning_land_use",
+   "amount": null,
+   "parties": [
+    "Florida Department of Commerce"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1882"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-04-21",
+   "meeting": "BOCC Regular Meeting",
+   "number": "20",
+   "section": "PUBLIC HEARING - County Attorney",
+   "title": "High Impact Special Event Ordinance",
+   "summary": "Public hearing to adopt an ordinance expanding the special event ordinance to unincorporated Bay County during certain periods and authorize the chairman to sign it.",
+   "kind": "ordinance",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1882"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-04-07",
+   "meeting": "BOCC Regular Meeting",
+   "number": "1",
+   "section": "CONSENT AGENDA - Clerk of Courts",
+   "title": "Check Registers, Inventory Deletions, Revenues & Expenditures Reports",
+   "summary": "Board acknowledges receipt of reports and approves inventory deletions.",
+   "kind": "consent",
+   "amount": null,
+   "parties": [
+    "Mexico Beach Community Development Council",
+    "Panama City Community Development Council",
+    "Panama City Beach Convention and Visitors Bureau"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1877"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-04-07",
+   "meeting": "BOCC Regular Meeting",
+   "number": "2",
+   "section": "CONSENT AGENDA - Budget Office",
+   "title": "FY 2026 Budget Amendment",
+   "summary": "Board adopts a resolution amending the Fiscal Year 2025-2026 Budget.",
+   "kind": "budget",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1877"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-04-07",
+   "meeting": "BOCC Regular Meeting",
+   "number": "3",
+   "section": "CONSENT AGENDA - Collaborative Services",
+   "title": "FFY2025 FTA Section 5310 Grant",
+   "summary": "Board adopts a resolution and authorizes the chairman to execute the FFY2025 FDOT Section 5310 Grant with the Florida Department of Transportation.",
+   "kind": "grant",
+   "amount": 458180.0,
+   "parties": [
+    "Florida Department of Transportation"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1877"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-04-07",
+   "meeting": "BOCC Regular Meeting",
+   "number": "4",
+   "section": "CONSENT AGENDA - Collaborative Services",
+   "title": "FFY2025 FTA Section 5311 Off Cycle Grant",
+   "summary": "Board adopts the authorizing resolution and authorizes the chairman to execute the FFY2025 FTA Section 5311 Off Cycle Grant with the Florida Department of Transportation.",
+   "kind": "grant",
+   "amount": 1307480.0,
+   "parties": [
+    "Florida Department of Transportation"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1877"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-04-07",
+   "meeting": "BOCC Regular Meeting",
+   "number": "5",
+   "section": "CONSENT AGENDA - County Manager's Office",
+   "title": "Chief Infrastructure Officer Chandler Confirmation",
+   "summary": "Board confirms appointment of Scott Chandler from Interim Chief Infrastructure Officer to Chief Infrastructure Officer.",
+   "kind": "appointment",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1877"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-04-07",
+   "meeting": "BOCC Regular Meeting",
+   "number": "6",
+   "section": "CONSENT AGENDA - General Services",
+   "title": "ITB 26-19 Zollie Young Park Improvements",
+   "summary": "Board awards Contract 26-19 for the Zollie Young Park Improvements Project and authorizes the chairman to execute the contract.",
+   "kind": "contract",
+   "amount": 316450.94,
+   "parties": [
+    "850 Construction Services LLC"
+   ],
+   "addresses": [
+    "Zollie Young Park"
+   ],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1877"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-04-07",
+   "meeting": "BOCC Regular Meeting",
+   "number": "7",
+   "section": "CONSENT AGENDA - Public Works",
+   "title": "Star Avenue Bridge over Callaway Bayou Repairs Contract Award",
+   "summary": "Award Contract No. 26-10 for Star Avenue Bridge over Callaway Bayou repairs and authorize the chairman to sign the agreement.",
+   "kind": "contract",
+   "amount": 164400.0,
+   "parties": [
+    "Webber Infrastructure Management, Inc."
+   ],
+   "addresses": [
+    "Star Avenue Bridge over Callaway Bayou"
+   ],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1877"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-04-07",
+   "meeting": "BOCC Regular Meeting",
+   "number": "8",
+   "section": "CONSENT AGENDA - Public Works",
+   "title": "Supplemental Agreement to the Star Avenue Bridge Repair SCOP Grant",
+   "summary": "Approve the resolution and Supplemental Agreement with the Florida Department of Transportation for additional funding for repairs to the Star Avenue Bridge over Callaway Bayou.",
+   "kind": "grant",
+   "amount": null,
+   "parties": [
+    "Florida Department of Transportation"
+   ],
+   "addresses": [
+    "Star Avenue Bridge over Callaway Bayou"
+   ],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1877"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-04-07",
+   "meeting": "BOCC Regular Meeting",
+   "number": "9",
+   "section": "CONSENT AGENDA - Public Works",
+   "title": "Resolution of Support for Front Beach Road and Moylan Road Intersection Improvement Grant Application",
+   "summary": "Approve the Resolution of Support for a County Incentive Grant Program application to the Florida Department of Transportation for the intersection improvements project.",
+   "kind": "resolution",
+   "amount": null,
+   "parties": [
+    "Florida Department of Transportation"
+   ],
+   "addresses": [
+    "Front Beach Road and Moylan Road"
+   ],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1877"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-04-07",
+   "meeting": "BOCC Regular Meeting",
+   "number": "10",
+   "section": "CONSENT AGENDA - Tourist Development Council",
+   "title": "Coastal Protection Engineering Task Order 13 and MRD Task Order 12 with Dewberry",
+   "summary": "Board approves Coastal Protection Engineering Task Order 13 and MRD Task Order 12.",
+   "kind": "contract",
+   "amount": 129864.0,
+   "parties": [
+    "Coastal Protection Engineering",
+    "MRD Associates",
+    "Dewberry"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1877"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-04-07",
+   "meeting": "BOCC Regular Meeting",
+   "number": "11",
+   "section": "CONSENT AGENDA - Tourist Development Council",
+   "title": "2026 Turtle Watch and Leave No Trace Wildlife Monitoring",
+   "summary": "Board approves contracts with Panama City Beach Turtle Watch, Inc. for 2026 sea turtle and Leave No Trace wildlife monitoring on Panama City Beach.",
+   "kind": "contract",
+   "amount": null,
+   "parties": [
+    "Panama City Beach Turtle Watch, Inc."
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1877"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-04-07",
+   "meeting": "BOCC Regular Meeting",
+   "number": "12",
+   "section": "CONSENT AGENDA - Utility Services",
+   "title": "Water Treatment Plant Ferric Sulfate Contract",
+   "summary": "Board approves a one-year contract with three one-year renewal options for supply of Ferric Sulfate for the Water Treatment Plant.",
+   "kind": "contract",
+   "amount": null,
+   "parties": [
+    "Pennco, Inc."
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1877"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-04-07",
+   "meeting": "BOCC Regular Meeting",
+   "number": "13",
+   "section": "CONSENT AGENDA - Utility Services",
+   "title": "Bay County Water Treatment Assessment Grant",
+   "summary": "Board accepts the Bay County Water Assessment Grant Agreement as previously signed by the County Manager.",
+   "kind": "grant",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1877"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-04-07",
+   "meeting": "BOCC Regular Meeting",
+   "number": "14",
+   "section": "PUBLIC HEARING - County Attorney",
+   "title": "High Impact Special Event Ordinance",
+   "summary": "Board holds a public hearing and adopts an ordinance expanding the special event ordinance to unincorporated Bay County during certain periods.",
+   "kind": "ordinance",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1877"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-04-07",
+   "meeting": "BOCC Regular Meeting",
+   "number": "15",
+   "section": "PUBLIC HEARING - Emergency Services",
+   "title": "Certificate of Public Convenience and Necessity Renewal - Lifeguard Ambulance Service of Florida, LLC",
+   "summary": "Board holds a quasi-judicial hearing on the application for the Certificate of Public Convenience and Necessity and authorizes the chairman to sign the MOU and certificate.",
+   "kind": "public_hearing",
+   "amount": null,
+   "parties": [
+    "Lifeguard Ambulance Service of Florida, LLC"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1877"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-03-17",
+   "meeting": "BOCC Regular Meeting",
+   "number": "1",
+   "section": "CONSENT AGENDA - Clerk of Courts",
+   "title": "Revenues and Expenditures",
+   "summary": "Board to acknowledge receipt of reports.",
+   "kind": "consent",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1872"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-03-17",
+   "meeting": "BOCC Regular Meeting",
+   "number": "2",
+   "section": "CONSENT AGENDA - Budget Office",
+   "title": "FY 2026 Budget Amendment",
+   "summary": "Board to adopt a resolution amending the Fiscal Year 2025-2026 Budget.",
+   "kind": "budget",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1872"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-03-17",
+   "meeting": "BOCC Regular Meeting",
+   "number": "3",
+   "section": "CONSENT AGENDA - County Manager's Office",
+   "title": "Deputy County Manager Bryant Confirmation",
+   "summary": "Board to confirm appointment of Keith C. Bryant from Interim Deputy County Manager to Deputy County Manager.",
+   "kind": "appointment",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1872"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-03-17",
+   "meeting": "BOCC Regular Meeting",
+   "number": "4",
+   "section": "CONSENT AGENDA - County Manager's Office",
+   "title": "Tourist Development Council President/CEO Confirmation",
+   "summary": "Board to review the selection proceedings and confirm the appointment of Mr. Griffitts as President & CEO of the Tourist Development Council.",
+   "kind": "appointment",
+   "amount": null,
+   "parties": [
+    "Tourist Development Council"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1872"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-03-17",
+   "meeting": "BOCC Regular Meeting",
+   "number": "5",
+   "section": "CONSENT AGENDA - General Services",
+   "title": "First Amendment to Contract 25-51 Ground Maintenance for County Facilities",
+   "summary": "Board to approve the first amendment to Contract 25-51 with Brandow's Lawn and Landscape and authorize the chairman to execute it.",
+   "kind": "contract",
+   "amount": null,
+   "parties": [
+    "Brandow's Lawn and Landscape"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1872"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-03-17",
+   "meeting": "BOCC Regular Meeting",
+   "number": "6",
+   "section": "CONSENT AGENDA - General Services",
+   "title": "Contract 25-11 Janitorial Services Group B Second Amendment",
+   "summary": "Board to approve the second amendment to Contract 25-11 Janitorial Services with J&H Janitorial Company, LLC and authorize the chairman to execute it.",
+   "kind": "contract",
+   "amount": null,
+   "parties": [
+    "J&H Janitorial Company, LLC"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1872"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-03-17",
+   "meeting": "BOCC Regular Meeting",
+   "number": "7",
+   "section": "CONSENT AGENDA - General Services",
+   "title": "Disaster Debris Removal and Disposal Services Contracts",
+   "summary": "Board to approve the disaster debris removal and disposal contractor list and authorize the chairman to execute a contract with each qualified contractor.",
+   "kind": "contract",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1872"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-03-17",
+   "meeting": "BOCC Regular Meeting",
+   "number": "8",
+   "section": "CONSENT AGENDA - General Services",
+   "title": "Disaster Debris Removal and Disposal Monitoring Services Contracts",
+   "summary": "Board to approve the monitoring services consultant list and authorize the chairman to execute a contract with each qualified consultant.",
+   "kind": "contract",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1872"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-03-17",
+   "meeting": "BOCC Regular Meeting",
+   "number": "9",
+   "section": "CONSENT AGENDA - General Services",
+   "title": "M.B. Miller Pier and Rick Seltzer Park Lease/License/Operations Agreement",
+   "summary": "Board to approve the 5-year Lease/License/Operations contract at M.B. Miller Pier & Rick Seltzer Park with Coastal Parasail, Inc.",
+   "kind": "contract",
+   "amount": null,
+   "parties": [
+    "Coastal Parasail, Inc."
+   ],
+   "addresses": [
+    "M.B. Miller Pier",
+    "Rick Seltzer Park"
+   ],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1872"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-03-17",
+   "meeting": "BOCC Regular Meeting",
+   "number": "10",
+   "section": "CONSENT AGENDA - Human Resources",
+   "title": "Employee Pay Revision for Local Declared State of Emergency/Disaster",
+   "summary": "Board to approve minor revisions regarding employee pay during a local declared state of emergency or disaster at the recommendation of the Florida Department of Emergency Management (FDEM).",
+   "kind": "personnel",
+   "amount": null,
+   "parties": [
+    "Florida Department of Emergency Management"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1872"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-03-17",
+   "meeting": "BOCC Regular Meeting",
+   "number": "11",
+   "section": "CONSENT AGENDA - Outside Agencies",
+   "title": "CareerSource Gulf Coast's Board Appointment",
+   "summary": "Board to appoint Mr. Robert Fedor to the CareerSource Gulf Coast Board of Directors for the private sector seat.",
+   "kind": "appointment",
+   "amount": null,
+   "parties": [
+    "CareerSource Gulf Coast"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1872"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-03-17",
+   "meeting": "BOCC Regular Meeting",
+   "number": "12",
+   "section": "CONSENT AGENDA - Public Works",
+   "title": "Design of Pipeline Road Extension Task Order Approval",
+   "summary": "Board to approve the Design of Pipeline Road Extension Project Task Order with Dewberry Engineers, Inc. and authorize the chairman to sign the agreement.",
+   "kind": "contract",
+   "amount": 490298.0,
+   "parties": [
+    "Dewberry Engineers, Inc."
+   ],
+   "addresses": [
+    "Pipeline Road Extension"
+   ],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1872"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-03-17",
+   "meeting": "BOCC Regular Meeting",
+   "number": "13",
+   "section": "CONSENT AGENDA - Public Works",
+   "title": "Roads & Bridges Department Purchase of Front-end Loader",
+   "summary": "Board to approve purchase of a Caterpillar Front-end Loader under the Florida Sheriff's Association and Florida Association of Counties Contract No. FSA23-EQU21.1.",
+   "kind": "purchase",
+   "amount": 392278.0,
+   "parties": [
+    "Florida Sheriff's Association",
+    "Florida Association of Counties",
+    "Caterpillar"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1872"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-03-17",
+   "meeting": "BOCC Regular Meeting",
+   "number": "14",
+   "section": "CONSENT AGENDA - Utility Services",
+   "title": "Contract 26-20 North Bay Septic to Sewer Conversion Phase 1B",
+   "summary": "Board to award Contract 26-20 to Royal American Construction Company, Inc. and authorize the chairman to execute the contract.",
+   "kind": "contract",
+   "amount": 751518.0,
+   "parties": [
+    "Royal American Construction Company, Inc."
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1872"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-03-17",
+   "meeting": "BOCC Regular Meeting",
+   "number": "15",
+   "section": "PUBLIC HEARING - Community Development",
+   "title": "PLDPA20260002 & PLZCA20260001 - Small-Scale Amendment & Zone Change - 31 W. Baldwin Road",
+   "summary": "Board to conduct a quasi-judicial public hearing and approve a Small-Scale Amendment to the Comprehensive Plan Future Land Use Map and change zoning from R-1 Single Family to C-1 Neighborhood Commercial.",
+   "kind": "rezoning_land_use",
+   "amount": null,
+   "parties": [],
+   "addresses": [
+    "31 W. Baldwin Road"
+   ],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1872"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-03-17",
+   "meeting": "BOCC Regular Meeting",
+   "number": "16",
+   "section": "PUBLIC HEARING - Community Development",
+   "title": "PLLPTA20260013 - Comprehensive Plan Amendment - Chapter 12",
+   "summary": "Board to conduct a legislative public hearing and approve a request to transmit the proposed Comprehensive Plan amendments to the Florida Department of Commerce for review.",
+   "kind": "rezoning_land_use",
+   "amount": null,
+   "parties": [
+    "Florida Department of Commerce"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1872"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-03-17",
+   "meeting": "BOCC Regular Meeting",
+   "number": "17",
+   "section": "PUBLIC HEARING - Community Development",
+   "title": "PLLPTA20260019 - Comprehensive Plan Amendment - Chapter 3",
+   "summary": "Board to conduct a legislative public hearing and approve a request to transmit the proposed Comprehensive Plan amendments to the Florida Department of Commerce for review.",
+   "kind": "rezoning_land_use",
+   "amount": null,
+   "parties": [
+    "Florida Department of Commerce"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1872"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-03-17",
+   "meeting": "BOCC Regular Meeting",
+   "number": "18",
+   "section": "PUBLIC HEARING - Emergency Services",
+   "title": "Certificate of Public Convenience and Necessity for Shoals Ambulance, LLC, dba Sunstate Ambulance",
+   "summary": "Board to hold a quasi-judicial hearing on the application for a COPCN and authorize the chairman to sign the memorandum of understanding and the COPCN certificate.",
+   "kind": "public_hearing",
+   "amount": null,
+   "parties": [
+    "Shoals Ambulance, LLC, dba Sunstate Ambulance"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1872"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-03-03",
+   "meeting": "BOCC Regular Meeting",
+   "number": "1",
+   "section": "CONSENT AGENDA - Clerk of Courts",
+   "title": "Revenues and Expenditures",
+   "summary": "Board acknowledges receipt of the revenues and expenditures report.",
+   "kind": "consent",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1867"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-03-03",
+   "meeting": "BOCC Regular Meeting",
+   "number": "2",
+   "section": "CONSENT AGENDA - Budget Office",
+   "title": "Crime Stoppers Funding Agreement",
+   "summary": "Board authorizes the chairman to sign an approval letter for Panhandle Crime Stoppers to receive funds from the Crime Stoppers Trust Fund.",
+   "kind": "grant",
+   "amount": null,
+   "parties": [
+    "Crime Stoppers Trust Fund"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1867"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-03-03",
+   "meeting": "BOCC Regular Meeting",
+   "number": "3",
+   "section": "CONSENT AGENDA - Budget Office",
+   "title": "FY 2026 Budget Amendment",
+   "summary": "Board adopts a resolution amending the Fiscal Year 2025-2026 Budget and transfers Fund 150 Hurricane Michael funds to Fund 412 Advanced Wastewater Treatment Facility.",
+   "kind": "budget",
+   "amount": 123599.6,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1867"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-03-03",
+   "meeting": "BOCC Regular Meeting",
+   "number": "4",
+   "section": "CONSENT AGENDA - County Attorney",
+   "title": "Amendment to Towing Rate Resolution",
+   "summary": "Board adopts an amendment to the fee and fine schedule to modify maximum towing rates and adopt a fine for violating the County's maximum towing rate ordinance.",
+   "kind": "resolution",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1867"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-03-03",
+   "meeting": "BOCC Regular Meeting",
+   "number": "5",
+   "section": "CONSENT AGENDA - County Attorney",
+   "title": "Revised Project Clear Lease",
+   "summary": "Board approves the revised lease with Project Clear and a separate option to purchase the leased property once the Triumph grant is completed successfully.",
+   "kind": "contract",
+   "amount": null,
+   "parties": [
+    "Triumph"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1867"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-03-03",
+   "meeting": "BOCC Regular Meeting",
+   "number": "6",
+   "section": "CONSENT AGENDA - County Attorney",
+   "title": "Approval of Triumph Grant for Project Kilowatt",
+   "summary": "Board approves the grant agreement with Triumph Gulf Coast, Inc., the lease agreement with Voltari Electric, Inc., related instruments, an option to purchase, and an assignment of a purchase agreement between Marine Transportation Services and Voltari Electric, Inc.",
+   "kind": "grant",
+   "amount": null,
+   "parties": [
+    "Triumph Gulf Coast, Inc.",
+    "Voltari Electric, Inc.",
+    "Marine Transportation Services"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1867"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-03-03",
+   "meeting": "BOCC Regular Meeting",
+   "number": "7",
+   "section": "CONSENT AGENDA - County Manager's Office",
+   "title": "County Manager Majka Employment Agreement Close Out",
+   "summary": "Board affirms the County Manager has 302.5 hours of accrued PTO and authorizes payout at his current rate per Section 4B of the Employment Agreement.",
+   "kind": "personnel",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1867"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-03-03",
+   "meeting": "BOCC Regular Meeting",
+   "number": "8",
+   "section": "CONSENT AGENDA - County Manager's Office",
+   "title": "County Manager Employment Agreement - Joel B. Schubert",
+   "summary": "Board considers promoting Joel Schubert from acting County Manager to County Manager and approves the accompanying employment agreement.",
+   "kind": "personnel",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1867"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-03-03",
+   "meeting": "BOCC Regular Meeting",
+   "number": "9",
+   "section": "CONSENT AGENDA - General Services",
+   "title": "M.B. Miller Pier and Rick Seltzer Park Lease/License Agreement",
+   "summary": "Board authorizes staff to negotiate a lease and license agreement with Coastal Parasail, Inc. for operations at M.B Miller Pier Bait & Tackle Shop and Rick Seltzer Park.",
+   "kind": "contract",
+   "amount": null,
+   "parties": [
+    "Coastal Parasail, Inc."
+   ],
+   "addresses": [
+    "M.B. Miller Pier Bait & Tackle Shop",
+    "Rick Seltzer Park"
+   ],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1867"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-03-03",
+   "meeting": "BOCC Regular Meeting",
+   "number": "10",
+   "section": "CONSENT AGENDA - Public Works",
+   "title": "SCOP Grant Resolution of Support for 2302 Bridge Repairs",
+   "summary": "Board approves a Resolution of Support for a Small County Outreach Program Grant application to the Florida Department of Transportation for repairs to the CR 2302 Bridge over Fanning Bayou.",
+   "kind": "grant",
+   "amount": null,
+   "parties": [
+    "Florida Department of Transportation"
+   ],
+   "addresses": [
+    "CR 2302 Bridge over Fanning Bayou"
+   ],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1867"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-03-03",
+   "meeting": "BOCC Regular Meeting",
+   "number": "11",
+   "section": "CONSENT AGENDA - Public Works",
+   "title": "Resolution of support for Navy Boulevard Resurfacing SCOP Application",
+   "summary": "Board approves a Resolution of Support for a Small County Outreach Program Grant application to the Florida Department of Transportation for resurfacing of Navy Boulevard.",
+   "kind": "grant",
+   "amount": null,
+   "parties": [
+    "Florida Department of Transportation"
+   ],
+   "addresses": [
+    "Navy Boulevard"
+   ],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1867"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-03-03",
+   "meeting": "BOCC Regular Meeting",
+   "number": "12",
+   "section": "CONSENT AGENDA - Public Works",
+   "title": "Resolution of Support for Sherman Avenue SCOP Grant Application",
+   "summary": "Board approves a Resolution of Support for a Small County Outreach Program Grant application to the Florida Department of Transportation for resurfacing of Sherman Avenue.",
+   "kind": "grant",
+   "amount": null,
+   "parties": [
+    "Florida Department of Transportation"
+   ],
+   "addresses": [
+    "Sherman Avenue"
+   ],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1867"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-03-03",
+   "meeting": "BOCC Regular Meeting",
+   "number": "13",
+   "section": "CONSENT AGENDA - Utility Services",
+   "title": "Construction Engineering and Inspection Services Contract 26-07",
+   "summary": "Board awards contract 26-07 for construction engineering and inspection services for three additional filters at the water treatment plant to Dewberry Engineers Inc.",
+   "kind": "contract",
+   "amount": 946410.0,
+   "parties": [
+    "Dewberry Engineers Inc."
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1867"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-03-03",
+   "meeting": "BOCC Regular Meeting",
+   "number": "14",
+   "section": "CONSENT AGENDA - Utility Services",
+   "title": "Certification of Financial Responsibility",
+   "summary": "Board approves the certificate of financial responsibility for local government and authorizes the chairman to sign it.",
+   "kind": "consent",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1867"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-03-03",
+   "meeting": "BOCC Regular Meeting",
+   "number": "15",
+   "section": "CONSENT AGENDA - Utility Services",
+   "title": "Loan Agreement WW0302I0 – Amendment Two",
+   "summary": "Board approves amendment two to the FDEP State Revolving Fund Loan Agreement WW0302I0.",
+   "kind": "bond_debt",
+   "amount": null,
+   "parties": [
+    "Florida Department of Environmental Protection"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1867"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-03-03",
+   "meeting": "BOCC Regular Meeting",
+   "number": "16",
+   "section": "REGULAR AGENDA - County Manager's Office",
+   "title": "Tourist Development Council Non-Collector Board Appointment",
+   "summary": "Board reviews and appoints an applicant to the vacant non-collector county seat for a term expiring 12/30/2028.",
+   "kind": "appointment",
+   "amount": null,
+   "parties": [
+    "Tourist Development Council"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1867"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-03-03",
+   "meeting": "BOCC Regular Meeting",
+   "number": "17",
+   "section": "PUBLIC HEARING - County Attorney",
+   "title": "Towing Rate Fees Ordinance",
+   "summary": "Board holds a public hearing and considers adopting an ordinance revising Section 24-100 to provide a process for investigating and resolving complaints about towing fees charged above the maximum rates.",
+   "kind": "public_hearing",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1867"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-03-03",
+   "meeting": "BOCC Regular Meeting",
+   "number": "18",
+   "section": "PUBLIC HEARING - County Attorney",
+   "title": "Revisions to Chapter 15 of the BOCC Code of Ordinances",
+   "summary": "Board holds a public hearing and considers an ordinance revising a section of the County Code regarding Certificates of Public Convenience and Necessity.",
+   "kind": "public_hearing",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1867"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-02-18",
+   "meeting": "BOCC Regular Meeting",
+   "number": null,
+   "section": "Presentations",
+   "title": "Service Awards: 20 Year (Jerry Walden, Engineering Division; Kevin Shaw, Fire Rescue), 25 Year (Wayne Comeau, Traffic Control), 30 Year (Steve Szulczynski, Facilities Maintenance)",
+   "summary": "Service awards presented to county employees.",
+   "kind": "presentation",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1862"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-02-18",
+   "meeting": "BOCC Regular Meeting",
+   "number": "1",
+   "section": "Consent Agenda - Clerk of Courts",
+   "title": "Revenues and Expenditures",
+   "summary": "Board acknowledges receipt of the report.",
+   "kind": "consent",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1862"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-02-18",
+   "meeting": "BOCC Regular Meeting",
+   "number": "2",
+   "section": "Consent Agenda - Budget Office",
+   "title": "FY 2026 Budget Amendment",
+   "summary": "Board adopts a resolution amending the Fiscal Year 2025-2026 Budget.",
+   "kind": "budget",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1862"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-02-18",
+   "meeting": "BOCC Regular Meeting",
+   "number": "3",
+   "section": "Consent Agenda - Collaborative Services",
+   "title": "FY2026 FDOT Commuter Assistance Grant",
+   "summary": "Board adopts a resolution and authorizes the chairman to sign the FY2026 Commuter Assistance Grant with the Florida Department of Transportation.",
+   "kind": "grant",
+   "amount": 274473.0,
+   "parties": [
+    "Florida Department of Transportation"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1862"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-02-18",
+   "meeting": "BOCC Regular Meeting",
+   "number": "4",
+   "section": "Consent Agenda - County Attorney",
+   "title": "Sufficiency Bonds for County Officers",
+   "summary": "Board reviews and acknowledges the sufficiency of bonds for County officers.",
+   "kind": "consent",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1862"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-02-18",
+   "meeting": "BOCC Regular Meeting",
+   "number": "5",
+   "section": "Consent Agenda - County Attorney",
+   "title": "Renewal of the Clerk's Commercial Lease Agreement",
+   "summary": "Board approves renewal of the Clerk's commercial lease for another one-year term and authorizes the chairman to sign.",
+   "kind": "contract",
+   "amount": null,
+   "parties": [
+    "Century 21"
+   ],
+   "addresses": [
+    "1100 W 26th Street"
+   ],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1862"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-02-18",
+   "meeting": "BOCC Regular Meeting",
+   "number": "6",
+   "section": "Consent Agenda - County Attorney",
+   "title": "Relocation of Pinnacle Port Beach Access Parking Easement",
+   "summary": "Board approves an amendment to the easement with Pinnacle Port Community Association, Inc. to relocate the parking area for Beach Access 98.",
+   "kind": "other",
+   "amount": null,
+   "parties": [
+    "Pinnacle Port Community Association, Inc."
+   ],
+   "addresses": [
+    "Beach Access 98"
+   ],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1862"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-02-18",
+   "meeting": "BOCC Regular Meeting",
+   "number": "7",
+   "section": "Consent Agenda - County Manager's Office",
+   "title": "Airport Authority Board Appointment",
+   "summary": "Board reappoints Holly Melzer to the County seat on the Northwest Florida Beaches International Airport Authority Board with term expiring June 30, 2030.",
+   "kind": "appointment",
+   "amount": null,
+   "parties": [
+    "Northwest Florida Beaches International Airport Authority"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1862"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-02-18",
+   "meeting": "BOCC Regular Meeting",
+   "number": "8",
+   "section": "Consent Agenda - County Manager's Office",
+   "title": "Tourist Development Council Board Appointments",
+   "summary": "Board reviews and approves appointments or re-appointments to the Tourist Development Council with varying expiring terms.",
+   "kind": "appointment",
+   "amount": null,
+   "parties": [
+    "Tourist Development Council"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1862"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-02-18",
+   "meeting": "BOCC Regular Meeting",
+   "number": "9",
+   "section": "Consent Agenda - Outside Agencies",
+   "title": "CareerSource Gulf Coast Workforce Local and Regional Workforce Plan",
+   "summary": "Board approves and authorizes the chairman to sign the plan under the Workforce Innovation and Opportunity Act.",
+   "kind": "other",
+   "amount": null,
+   "parties": [
+    "CareerSource Gulf Coast"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1862"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-02-18",
+   "meeting": "BOCC Regular Meeting",
+   "number": "10",
+   "section": "Consent Agenda - Public Works",
+   "title": "FY26 Annual Resurfacing Ph 1 Contract Award",
+   "summary": "Board awards contract 26-15 FY26 Annual Resurfacing Phase 1 Project to C. W. Roberts Contracting, Inc. and authorizes the chairman to execute related documents.",
+   "kind": "contract",
+   "amount": 1622632.7,
+   "parties": [
+    "C. W. Roberts Contracting, Inc."
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1862"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-02-18",
+   "meeting": "BOCC Regular Meeting",
+   "number": "11",
+   "section": "Consent Agenda - Utility Services",
+   "title": "Florida Power and Light Easement",
+   "summary": "Board approves granting an easement to Florida Power and Light and authorizes the chairman to sign the easement instrument.",
+   "kind": "other",
+   "amount": null,
+   "parties": [
+    "Florida Power and Light"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1862"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-02-18",
+   "meeting": "BOCC Regular Meeting",
+   "number": "12",
+   "section": "Consent Agenda - Utility Services",
+   "title": "Water Treatment Plant Filter Underdrain Replacement",
+   "summary": "Board awards contract 26-12 Filter Underdrain Replacement to NCMC, LLC and authorizes the chairman to sign and make any necessary modifications.",
+   "kind": "contract",
+   "amount": 1682000.0,
+   "parties": [
+    "NCMC, LLC"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1862"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-02-18",
+   "meeting": "BOCC Regular Meeting",
+   "number": "13",
+   "section": "Public Hearing - Community Development",
+   "title": "PLDPA20250222 & PLZCA20250216 - Large Scale Amendment & Zone Change - 13500 Allanton Road",
+   "summary": "Quasi-judicial public hearing to approve a Large-Scale Amendment to the Comprehensive Plan Future Land Use Map and a zone change from \"CSVH\" Conversation Habitation to \"IND-2\" Industrial in the Sandy Creek area.",
+   "kind": "rezoning_land_use",
+   "amount": null,
+   "parties": [],
+   "addresses": [
+    "13500 Allanton Road"
+   ],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1862"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-02-18",
+   "meeting": "BOCC Regular Meeting",
+   "number": "14",
+   "section": "Public Hearing - Community Development",
+   "title": "PLLDR20250273 - Text Amendments to LDR Chapters 17 and 18",
+   "summary": "Legislative public hearing to approve an amendment to Chapter 17 \"Development Code Administration\" and Chapter 18 \"Development Review\" of the Land Development Regulations.",
+   "kind": "public_hearing",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1862"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-02-18",
+   "meeting": "BOCC Regular Meeting",
+   "number": "15",
+   "section": "Public Hearing - Community Development",
+   "title": "PLLDR20250274 - Text Amendments to LDR Chapter 29",
+   "summary": "Legislative public hearing to approve an amendment to Chapter 29 \"Subdivisions\" of the Land Development Regulations.",
+   "kind": "public_hearing",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1862"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-02-03",
+   "meeting": "BOCC Regular Meeting",
+   "number": null,
+   "section": "Presentations",
+   "title": "High Impact Period Presentation",
+   "summary": "Presentation by Major Baldwin on the High Impact Period.",
+   "kind": "presentation",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1857"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-02-03",
+   "meeting": "BOCC Regular Meeting",
+   "number": "1",
+   "section": "Consent Agenda - Clerk of Courts",
+   "title": "Revenues & Expenditures, Annual Investment Report and Inventory Deletions",
+   "summary": "Board acknowledges receipt of the reports and approves inventory deletions.",
+   "kind": "consent",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1857"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-02-03",
+   "meeting": "BOCC Regular Meeting",
+   "number": "2",
+   "section": "Consent Agenda - Budget Office",
+   "title": "FY 2026 Budget Amendment",
+   "summary": "Board adopts a resolution amending the Fiscal Year 2025-2026 Budget.",
+   "kind": "budget",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1857"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-02-03",
+   "meeting": "BOCC Regular Meeting",
+   "number": "3",
+   "section": "Consent Agenda - Community Development",
+   "title": "Mott-MacDonald Consultants, Inc. Task Order Authorization",
+   "summary": "Approve Task Order 26-01PZ for Engineering Support Services with Mott MacDonald Florida LLC for work not to exceed $350,000.",
+   "kind": "contract",
+   "amount": 350000.0,
+   "parties": [
+    "Mott MacDonald Florida LLC"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1857"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-02-03",
+   "meeting": "BOCC Regular Meeting",
+   "number": "4",
+   "section": "Consent Agenda - Community Development",
+   "title": "Halff Associates, Inc. Task Order Authorization",
+   "summary": "Approve Task Order 26-02PZ for Engineering Support Services with Halff Associates, Inc. for work not to exceed $350,000.",
+   "kind": "contract",
+   "amount": 350000.0,
+   "parties": [
+    "Halff Associates, Inc."
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1857"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-02-03",
+   "meeting": "BOCC Regular Meeting",
+   "number": "5",
+   "section": "Consent Agenda - County Attorney",
+   "title": "Interlocal Agreement with City of Panama City Beach for Stormwater Facilities",
+   "summary": "Approve the interlocal agreement with the City of Panama City Beach and authorize the chairman to sign.",
+   "kind": "contract",
+   "amount": null,
+   "parties": [
+    "City of Panama City Beach"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1857"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-02-03",
+   "meeting": "BOCC Regular Meeting",
+   "number": "6",
+   "section": "Consent Agenda - County Attorney",
+   "title": "Amended Easement at Deer Point Reservoir",
+   "summary": "Approve the amended easement and authorize the chairman to execute it.",
+   "kind": "contract",
+   "amount": null,
+   "parties": [],
+   "addresses": [
+    "Deer Point Reservoir"
+   ],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1857"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-02-03",
+   "meeting": "BOCC Regular Meeting",
+   "number": "7",
+   "section": "Consent Agenda - County Attorney",
+   "title": "Lease Modification for the Northwest Florida Fox Hunter's Association, Inc.",
+   "summary": "Approve the lease modification and authorize the chairman to execute it.",
+   "kind": "contract",
+   "amount": null,
+   "parties": [
+    "Northwest Florida Fox Hunters Association, Inc."
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1857"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-02-03",
+   "meeting": "BOCC Regular Meeting",
+   "number": "8",
+   "section": "Consent Agenda - Outside Agencies",
+   "title": "Second Amendment to the Project Lightning Strike Triumph Grant",
+   "summary": "Approve the second amendment to grant award agreement #258 with Triumph Gulf Coast, Inc. and authorize the chairman to execute it.",
+   "kind": "grant",
+   "amount": null,
+   "parties": [
+    "Triumph Gulf Coast, Inc."
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1857"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-02-03",
+   "meeting": "BOCC Regular Meeting",
+   "number": "9",
+   "section": "Consent Agenda - Outside Agencies",
+   "title": "High Impact Period",
+   "summary": "Approve designation of a High Impact Period from March 28, 2026 through April 11, 2026 consistent with Panama City Beach, and enact a nighttime curfew for unaccompanied minors from 8pm to 5 am.",
+   "kind": "resolution",
+   "amount": null,
+   "parties": [
+    "City of Panama City Beach"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1857"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-02-03",
+   "meeting": "BOCC Regular Meeting",
+   "number": "10",
+   "section": "Consent Agenda - Outside Agencies",
+   "title": "CareerSource Gulf Coast Subsequent Designation",
+   "summary": "Approve and authorize the chairman to sign the Subsequent Designation for local workforce development boards under the Workforce Innovation and Opportunity Act.",
+   "kind": "contract",
+   "amount": null,
+   "parties": [
+    "CareerSource Gulf Coast"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1857"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-02-03",
+   "meeting": "BOCC Regular Meeting",
+   "number": "11",
+   "section": "Consent Agenda - Outside Agencies",
+   "title": "CareerSource Gulf Coast Direct Service Extension",
+   "summary": "Approve the extension to provide Direct Services set to expire June 30, 2029.",
+   "kind": "contract",
+   "amount": null,
+   "parties": [
+    "CareerSource Gulf Coast"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1857"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-02-03",
+   "meeting": "BOCC Regular Meeting",
+   "number": "12",
+   "section": "Consent Agenda - Public Works",
+   "title": "Pipeline Road Extension to Nehi Road Grant Agreement",
+   "summary": "Approve the funding agreement with the Florida Department of Transportation for design of the Pipeline Road Extension to Nehi Road and authorize the chairman to execute the agreement and resolution.",
+   "kind": "grant",
+   "amount": null,
+   "parties": [
+    "Florida Department of Transportation"
+   ],
+   "addresses": [
+    "Pipeline Road Extension to Nehi Road"
+   ],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1857"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-02-03",
+   "meeting": "BOCC Regular Meeting",
+   "number": "13",
+   "section": "Consent Agenda - Public Works",
+   "title": "Resolution of Support for Philip Griffitts Sr. Parkway Ph III Right-of-Way TRIP Grant Application",
+   "summary": "Approve a resolution supporting a Transportation Regional Incentive Program grant application for right-of-way acquisition for the Philip Griffitts Sr. Parkway Phase III Project.",
+   "kind": "grant",
+   "amount": null,
+   "parties": [],
+   "addresses": [
+    "Philip Griffitts Sr. Parkway Phase III"
+   ],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1857"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-02-03",
+   "meeting": "BOCC Regular Meeting",
+   "number": "14",
+   "section": "Consent Agenda - Public Works",
+   "title": "Roadway Striping Contract",
+   "summary": "Authorize staff to piggyback on an existing City of Panama City Beach roadway striping contract with Emerald Coast Striping LLC.",
+   "kind": "contract",
+   "amount": null,
+   "parties": [
+    "Emerald Coast Striping LLC",
+    "City of Panama City Beach"
+   ],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1857"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-02-03",
+   "meeting": "BOCC Regular Meeting",
+   "number": "15",
+   "section": "Consent Agenda - Utility Services",
+   "title": "Utility Easement - Faircloth Lane",
+   "summary": "Approve receiving an easement from the Faircloth family and authorize the chairman to sign.",
+   "kind": "contract",
+   "amount": null,
+   "parties": [
+    "Faircloth family"
+   ],
+   "addresses": [
+    "Faircloth Lane"
+   ],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1857"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-02-03",
+   "meeting": "BOCC Regular Meeting",
+   "number": "16",
+   "section": "Public Hearing - County Attorney",
+   "title": "Revision to High Impact Period Ordinance",
+   "summary": "Hold a public hearing and adopt the ordinance revising the High Impact Period ordinance.",
+   "kind": "public_hearing",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1857"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-02-03",
+   "meeting": "BOCC Regular Meeting",
+   "number": "17",
+   "section": "Public Hearing - County Attorney",
+   "title": "Ordinance Regarding County Administration",
+   "summary": "Hold a public hearing and adopt the ordinance created in Chapter 2 of the Code of Ordinances related to County Administration.",
+   "kind": "public_hearing",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1857"
+  },
+  {
+   "board": "county",
+   "body": "Bay County Board of County Commissioners",
+   "gov": "county",
+   "date": "2026-02-03",
+   "meeting": "BOCC Regular Meeting",
+   "number": "18",
+   "section": "Public Hearing - County Attorney",
+   "title": "Revisions to Chapter 25 of the BOCC Code of Ordinances",
+   "summary": "Hold a public hearing and adopt the ordinance revising Chapter 25 of the Code of Ordinances.",
+   "kind": "public_hearing",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1857"
   }
  ]
 }
