@@ -309,7 +309,8 @@ struct AccountabilityProjectView: View {
             if let g = p.growth ?? (first > 0 && latest > 0 ? (latest - first) / first * 100 : nil) {
                 HStack(spacing: 6) {
                     GrowthPill(growth: g)
-                    Text(g > 10 ? "More than the 10% that triggers a question" : "Within 10% of the first figure")
+                    // Only repeat the rule when the site actually raised it; approximate figures don't trigger it.
+                    Text(p.flags.contains { $0.r == "growth" } ? "Past the 10% that raises a question" : "Change from the first figure")
                         .font(.caption).foregroundStyle(.secondary)
                 }
             }
