@@ -479,7 +479,8 @@
   const cleanName = n => String(n || '').replace(/\s*\(.*?\)\s*/g, ' ').trim();
   async function loadCompose(force) {
     if (!CT || force) {
-      try { CT = await api('corr_contacts'); }
+      // Postgres bigint ids arrive as strings; the page compares them as numbers.
+      try { CT = await api('corr_contacts'); CT.contacts.forEach(c => { c.id = Number(c.id); }); }
       catch (e) { $('#co-list').innerHTML = `<p class="empty">${esc(e.message)}</p>`; return; }
       const govs = [...new Set(CT.contacts.map(c => c.government))];
       const cur = $('#co-gov').value;
@@ -553,7 +554,7 @@
     const f = $('#ct-form');
     try {
       const r = await api('corr_contact', {method: 'POST', body: {id: ctEditing.id, name: f.name.value, email: f.email.value, source_url: f.source_url.value, notes: f.notes.value, active: f.active.checked}});
-      Object.assign(ctEditing, r.contact);
+      Object.assign(ctEditing, r.contact, {id: Number(r.contact.id)});
       if (!(r.contact.email && r.contact.active)) coPicked.delete(ctEditing.id);
       $('#ct-dialog').close(); renderCompose();
     } catch (e) { $('#ct-err').textContent = e.message; }
