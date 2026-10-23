@@ -23,7 +23,7 @@
 .crn .crn-wrap{position:relative}
 .crn #crnGraph{width:100%;height:640px;display:block;touch-action:none;cursor:grab}
 @media (max-width:600px){.crn #crnGraph{height:500px}}
-.crn #crnMap{width:100%;height:auto;display:block}
+.crn #crnMap{width:100%;height:auto;min-height:420px;display:block;touch-action:none;cursor:grab}
 .crn .crn-town{font:600 13px var(--f-body);fill:var(--ink);paint-order:stroke;stroke:var(--surface);stroke-width:4px}
 .crn .crn-node text{font:500 11px var(--f-body);fill:var(--ink);pointer-events:none;paint-order:stroke;stroke:var(--surface);stroke-width:3px}
 .crn .crn-node circle,#crnMap circle{cursor:pointer}
@@ -53,3 +53,8 @@
 .crn .crn-row:hover td{background:var(--sunken)}
 .crn td.num,.crn th.num{text-align:right;font-variant-numeric:tabular-nums}
 .crn .crn-profile h3{font-size:11.5px;margin:0 0 4px}
+.crn .crn-main.wide{grid-template-columns:minmax(0,1fr)}
+.crn .crn-main.wide .crn-profile{position:static;max-height:none}
+.crn .crn-zoom{position:absolute;top:10px;right:10px;display:flex;flex-direction:column;gap:4px}
+.crn .crn-zoom button{font:600 15px var(--f-body);min-width:34px;height:34px;padding:0 8px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);cursor:pointer}
+.crn .crn-zoom button#crnZreset{font-size:12px}
