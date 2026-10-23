@@ -4,7 +4,7 @@
 // can run the service-role-only RPCs below. Body: {raw_id} or {all: true}.
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "npm:@supabase/supabase-js@2";
-import { parse } from "jsr:@std/csv@1";
+import { missingColumns, parseRecords } from "./parse.ts";
 
 const URL_ = Deno.env.get("SUPABASE_URL")!;
 const sb = createClient(URL_, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
@@ -56,23 +56,31 @@ const fiscalYear = (iso: string) => { const [y, mo] = iso.split("-").map(Number)
 function pick(row: Record<string, string>, spec: any): string {
   if (!spec) return "";
   const col = typeof spec === "string" ? spec : spec.col;
-  return (row[col] ?? "").toString().trim();
+  const key = col in row ? col : Object.keys(row).find((k) => k.toLowerCase() === String(col).toLowerCase());
+  return (key ? row[key] ?? "" : "").toString().trim();
 }
 
 async function normalizeOne(rawId: string) {
   const { data: ctx, error } = await sb.rpc("ingest_normalize_context", { p_raw_id: rawId });
   if (error || !ctx) return { raw_id: rawId, ok: false, error: error?.message ?? "not found" };
-  if (ctx.status !== "received") return { raw_id: rawId, ok: false, error: `status is ${ctx.status}` };
+  // New files, and failed ones being retried (e.g. after fixing the column map). Normalized files are never redone.
+  if (!["received", "failed"].includes(ctx.status) || !ctx.storage_path) return { raw_id: rawId, ok: false, error: ctx.storage_path ? `already ${ctx.status}` : "no stored file (sender was rejected)" };
   const map = ctx.column_map;
   if (!map) { await sb.rpc("ingest_fail_raw", { p_raw_id: rawId, p_msg: "no column_map for source" }); return { raw_id: rawId, ok: false, error: "no column_map" }; }
 
   const { data: file, error: dlErr } = await sb.storage.from("ingest-raw").download(ctx.storage_path);
   if (dlErr || !file) return { raw_id: rawId, ok: false, error: dlErr?.message ?? "download failed" };
-  const text = (await file.text()).replace(/^﻿/, "");
+  const text = await file.text();
 
-  let records: Record<string, string>[];
-  try { records = parse(text, { skipFirstRow: true, trimLeadingSpace: true }) as Record<string, string>[]; }
+  let records: Record<string, string>[], headers: string[];
+  try { ({ records, headers } = parseRecords(text)); }
   catch (e) { await sb.rpc("ingest_fail_raw", { p_raw_id: rawId, p_msg: `csv parse: ${e}` }); return { raw_id: rawId, ok: false, error: `csv parse: ${e}` }; }
+  const missing = missingColumns(map, headers);
+  if (missing.length) {
+    const msg = `Columns not in this file: ${missing.join(", ")}. File has: ${headers.join(", ") || "(none)"}. Fix the export or the source's column map.`;
+    await sb.rpc("ingest_fail_raw", { p_raw_id: rawId, p_msg: msg });
+    return { raw_id: rawId, ok: false, error: msg };
+  }
 
   const rows: any[] = []; const problems: string[] = []; const seen = new Map<string, number>();
   for (let i = 0; i < records.length; i++) {

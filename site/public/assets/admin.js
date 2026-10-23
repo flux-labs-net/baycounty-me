@@ -314,7 +314,7 @@
       <td class="small">${esc(f.file_name || '(no file)')}${f.error_message ? `<div class="small" style="color:var(--bad)">${esc(f.error_message)}</div>` : ''}</td><td class="small mono">${esc(f.sender || '')}</td>
       <td><span class="pill ${esc(f.status)}">${FILE[f.status] || esc(f.status)}</span></td><td class="num">${fmt(f.row_count)}</td>
       <td class="small">${f.status === 'normalized' ? `${fmt(f.pending)} pending · ${fmt(f.approved)} approved · ${fmt(f.rejected)} rejected` : ''}</td>
-      <td style="white-space:nowrap">${f.status === 'received' ? `<button class="btn" type="button" data-norm="${esc(f.id)}">Normalize</button>` : ''}
+      <td style="white-space:nowrap">${f.status === 'received' ? `<button class="btn" type="button" data-norm="${esc(f.id)}">Normalize</button>` : f.status === 'failed' && f.has_file ? `<button class="btn" type="button" data-norm="${esc(f.id)}">Retry</button>` : ''}
         ${f.status === 'normalized' ? `<button class="btn" type="button" data-rows="${esc(f.id)}">${f.id === LG.raw ? 'All files' : 'Rows'}</button>` : ''}
         ${f.pending ? `<button class="btn primary" type="button" data-approve-file="${esc(f.id)}">Approve ${fmt(f.pending)}</button>` : ''}</td></tr>`).join('') || '<tr><td colspan="8" class="empty">No files in the last 120 days.</td></tr>';
     const file = LG.raw && r.files.find(f => f.id === LG.raw);
