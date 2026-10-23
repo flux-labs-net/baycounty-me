@@ -9,6 +9,9 @@ from datetime import datetime, timezone
 import html
 
 CHANGES = [
+    {'date': '2026-10-22', 'title': 'A privacy page, and data for the iPhone app',
+     'text': "A new privacy page says what the site and the BayCounty.me iPhone app collect: no accounts, no ads and no tracking. The site now also publishes the files the app reads, in /data/app: the tax and Amendment 3 calculators, the glossary, company and people profiles and the money map. They hold the same information the pages already show.",
+     'pages': ['/privacy', '/developers']},
     {'date': '2026-10-21', 'title': 'Company pages, and one map of public money',
      'text': "Every company with more than one record now has its own page: its contracts, change orders, payments, CRA money, gifts from the business to campaigns, and the votes that approved its contracts with how each member voted. A gift near a vote does not show why anyone voted the way they did. A new map shows CRA spending and 1,062 sales tax projects over CRA districts and city limits. Hurricane Michael projects are not on it because FEMA does not publish their locations.",
      'pages': ['/public-money/vendors', '/public-money/map', '/public-money/contracts', '/public-money/who-gets-paid', '/public-money/money-map']},

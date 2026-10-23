@@ -141,7 +141,7 @@ def nav_html(active):
 FOOTER = '''<footer class="site-foot"><div class="site-foot-in">
   <div class="foot-about"><p><b>BayCounty.me</b> puts Bay County, Florida public records in plain view: maps, money, and the documents behind them.</p>
   <p class="muted">Found an error or have a record to add? <a href="/about#contact">Send a correction</a> or email <span class="sel">hello@fluxlabs.net</span>.</p>
-  <p class="muted foot-links">__UPDATED__<a href="/updates">What's new</a> · <a href="/updates.xml">RSS</a> · <a href="/about">Sources and method</a></p></div>
+  <p class="muted foot-links">__UPDATED__<a href="/updates">What's new</a> · <a href="/updates.xml">RSS</a> · <a href="/about">Sources and method</a> · <a href="/privacy">Privacy</a></p></div>
   <a class="powered" href="https://fluxlabs.net/" target="_blank" rel="noopener"><span>Powered by</span><img src="/assets/flux-labs.webp" alt="Flux Labs" width="140" height="25"></a>
 </div></footer>'''
 
@@ -606,6 +606,30 @@ def about_page():
 </div>'''.replace('__PAGE_OPTS__', page_options())
 
 
+def privacy_page():
+    return '''<div class="page prose">
+  <h1>Privacy</h1>
+  <p class="lede">BayCounty.me doesn't sell, share or track you. There are no accounts, no ads and no tracking cookies, on the website or in the iPhone app.</p>
+  <h2>The website</h2>
+  <ul>
+    <li><b>Visits.</b> The site counts page views with Vercel Web Analytics, which uses no cookies and doesn't identify you.</li>
+    <li><b>Email alerts.</b> If you sign up, we keep your email address and what you chose to follow, so we can send the emails. Every email has a link to change or stop them. To have your address deleted entirely, email us.</li>
+    <li><b>Contact form.</b> Your message, name and email come to us by email so we can answer. They aren't added to any list.</li>
+    <li><b>API.</b> Requests to the public API are logged with the caller's IP address for 90 days to stop abuse, then deleted.</li>
+    <li><b>My Address.</b> Address lookups go straight from your browser to Bay County's and FEMA's public map servers. BayCounty.me doesn't receive or store what you look up.</li>
+  </ul>
+  <h2>The iPhone app</h2>
+  <ul>
+    <li><b>No data collected.</b> The app has no accounts, analytics or advertising, and sends nothing about you to BayCounty.me.</li>
+    <li><b>Your address and location.</b> If you save a home address, it stays on your phone. If you tap "Use my location," the app asks permission first and uses your location once to find your address on Bay County's public map server. It isn't stored or sent anywhere else.</li>
+    <li><b>Downloaded data.</b> The app saves copies of the public records it shows so it works offline. Deleting the app deletes them.</li>
+    <li><b>Crash reports.</b> If you've allowed it in your iPhone settings, Apple may share anonymous crash reports with the developer.</li>
+  </ul>
+  <h2>Questions</h2>
+  <p>Email <a href="mailto:hello@fluxlabs.net">hello@fluxlabs.net</a> or use the <a href="/about#contact">contact form</a>. BayCounty.me is run by <a href="https://fluxlabs.net/" target="_blank" rel="noopener">Flux Labs</a> in Panama City, Florida.</p>
+</div>'''
+
+
 PAGES = [
     ('/', 'Bay County public records, mapped', 'Maps, money and public records for Bay County, Florida, with a source on every figure.', home_page),
     ('/my-address', 'My Address', 'Look up any Bay County address: property tax estimate, who represents you, zoned schools, flood and evacuation zones, and whether it is in a redevelopment district.', lambda: addr_page(OUT)),
@@ -650,6 +674,7 @@ PAGES = [
     ('/updates', 'Updates', 'New pages, new data and corrections on BayCounty.me, newest first, with an RSS feed.', updates_page),
     ('/search', 'Search', 'Search every page, glossary term and public-money record on BayCounty.me.', search_page),
     ('/about', 'About', 'What BayCounty.me is, where its information comes from, and how to send a correction.', about_page),
+    ('/privacy', 'Privacy', 'What BayCounty.me and its iPhone app collect: no accounts, no ads, no tracking.', privacy_page),
 ]
 
 
@@ -727,6 +752,8 @@ def main():
         write(path, layout(title, desc, path, fn()))
     print('search index:', build_index(OUT, [x for x in PAGES if not x[0].startswith('/public-money/vendors/')]), 'entries')  # vendors: own indexer
     open(os.path.join(OUT, 'updates.xml'), 'w').write(rss(DOMAIN))
+    from app_data import write_app_data
+    print('app data:', write_app_data(OUT, PAGES), 'files')
     open(os.path.join(OUT, '404.html'), 'w').write(layout('Page not found', 'Page not found', '/404',
         '<div class="page prose"><h1>That page isn\'t here.</h1><p><a href="/">Back to the home page</a></p></div>'))
     from admin_page import admin_page

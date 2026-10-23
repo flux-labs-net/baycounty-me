@@ -99,8 +99,8 @@ def gov_links():
             for g in GOVS}, {v: k for k, v in CRA_NAME.items()}
 
 
-def addr_page(out_dir):
-    write_nav(out_dir)
+def address_data():
+    """Rates, district stacks, CRA totals and links the address lookup needs (also published for the app)."""
     td = build_data()
     L = len(YEARS) - 1
     merged = json.load(open(os.path.join(HERE, '..', 'data', 'merged.json')))
@@ -118,6 +118,12 @@ def addr_page(out_dir):
     data['govs'], data['craId'] = gov_links()
     data['members'] = member_votes()
     data['elections'] = os.path.exists(os.path.join(HERE, '..', 'data', 'elections', 'candidates_2026.json'))
+    return data
+
+
+def addr_page(out_dir):
+    write_nav(out_dir)
+    data = address_data()
     js = open(os.path.join(HERE, 'address.js')).read().replace('__ADDR__', json.dumps(data, ensure_ascii=False, separators=(',', ':')))
     js = js.replace('__ADDR_TXT__', json.dumps(ADDR_TXT, ensure_ascii=False, separators=(',', ':')))
     open(os.path.join(out_dir, 'assets', 'address.js'), 'w').write(js)
