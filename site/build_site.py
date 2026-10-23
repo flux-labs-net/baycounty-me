@@ -73,6 +73,7 @@ MENU = [
             {'label': 'How They Voted', 'href': '/public-money/votes', 'desc': 'Every recorded vote on money decisions'},
             {'label': 'Campaign Money', 'href': '/public-money/campaign-money', 'desc': 'Who funds campaigns, and donor contracts'},
             {'label': 'Money Map', 'href': '/public-money/money-map', 'desc': 'Donors, officials and contracts, mapped'},
+            {'label': 'CRA Network', 'href': '/public-money/cra-network', 'desc': 'Who CRAs paid, and who gave to their boards'},
             {'label': 'Who Gets Paid', 'href': '/public-money/who-gets-paid', 'desc': 'Every payment by the tourism agencies'},
             {'label': 'Vendors', 'href': '/public-money/vendors', 'desc': 'Every company paid, with its contracts and votes'},
             {'label': 'Debt', 'href': '/public-money/debt', 'desc': 'What each government owes'},
@@ -688,6 +689,8 @@ PAGES = [
 
 from vendor_pages import pages as vendor_page_list, index_page as vendors_index  # noqa: E402
 from public_map import public_map_page  # noqa: E402
+from cra_network import cra_network_page  # noqa: E402
+PAGES += [('/public-money/cra-network', 'CRA network: payees, connections and campaign gifts', 'Who Bay County\'s redevelopment agencies paid, how those payees connect, and which businesses gave to the officials who sit as each CRA board.', lambda: cra_network_page(OUT))]
 PAGES += [('/public-money/map', 'Public money map', 'CRA spending and half-cent sales tax projects across Bay County on one map, with CRA district lines and city limits.', lambda: public_map_page(OUT))]
 PAGES += [(p, t, d, fn or (lambda: vendors_index(OUT))) for p, t, d, fn in vendor_page_list()]
 

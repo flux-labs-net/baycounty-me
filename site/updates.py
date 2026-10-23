@@ -9,6 +9,9 @@ from datetime import datetime, timezone
 import html
 
 CHANGES = [
+    {'date': '2026-10-23', 'title': 'CRA network: payees, connections and campaign gifts',
+     'text': "A new page shows every payee in the CRA ledger as a network: who each redevelopment agency paid, payees tied to each other by the same project, address or subcontract, and business campaign gifts to the officials who sit as each CRA's board. Four businesses both received money from a CRA record and gave to a campaign. A map and a ranked payee list use the same filters. Only businesses and PACs are shown as donors, and a gift and a payment together are facts about the records, not evidence of why either happened.",
+     'pages': ['/public-money/cra-network', '/public-money/cra-spending', '/public-money/money-map']},
     {'date': '2026-10-23', 'title': 'Pages now open on the current year',
      'text': "Lists and tables with several years of records now open on the newest year that has records, never past the current fiscal year, with All years one tap away. That covers the Accountability console (and its headline numbers), CRA Spending, Contracts, How They Voted, Sales Tax Projects, the Hurricane Michael FEMA ledger, audit findings and other multi-year tables. A year with only a few stray records is skipped. Who Gets Paid now sorts by FY2026. Add ?year=all (or a year) to any page link to choose. Debt lists still show everything owed today.",
      'pages': ['/public-money/accountability', '/public-money/cra-spending', '/public-money/contracts', '/public-money/votes', '/public-money/sales-tax-projects', '/public-money/hurricane-michael', '/public-money/audits', '/public-money/who-gets-paid']},
