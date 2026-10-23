@@ -21,14 +21,25 @@ struct VendorsView: View {
                 Text("Every company or organization paid by a Bay County government, CRA or tourism agency, with its contracts, payments, the votes that approved them and gifts from the business to campaigns. A gift near a vote does not show why anyone voted the way they did.")
                     .font(.footnote).foregroundStyle(.secondary)
             }
+            Section {
+                RecordKindLegend()
+            }
+            .listRowBackground(Color.clear)
             Section("\(list.count) companies") {
+                let maxCount = list.first?.recordCount ?? 1
                 ForEach(list.prefix(400)) { v in
                     NavigationLink(value: Route.vendor(v.id)) {
-                        VStack(alignment: .leading, spacing: 2) {
-                            Text(v.name).font(.subheadline.weight(.medium))
-                            Text(v.records.sorted { $0.value > $1.value }.map { "\($0.value) \(Self.kind($0.key))" }.joined(separator: " · "))
-                                .font(.caption).foregroundStyle(.secondary)
+                        VStack(alignment: .leading, spacing: 5) {
+                            HStack(alignment: .firstTextBaseline) {
+                                Text(v.name).font(.subheadline.weight(.semibold)).lineLimit(2)
+                                Spacer(minLength: 6)
+                                Text("\(v.recordCount)").font(.subheadline.weight(.semibold).monospacedDigit())
+                            }
+                            RecordKindBar(records: v.records, scale: Double(v.recordCount) / Double(max(maxCount, 1)))
                         }
+                        .padding(.vertical, 2)
+                        .accessibilityElement(children: .ignore)
+                        .accessibilityLabel(v.name + ": " + v.records.sorted { $0.value > $1.value }.map { "\($0.value) \(Self.kind($0.key))" }.joined(separator: ", "))
                     }
                 }
             }
@@ -76,11 +87,23 @@ struct VendorDetailView: View {
                 }
             }
             let recs = RecordLinks.records(forVendor: vendorID, in: store.rows)
+            let deals = recs.filter { ["contracts", "change-orders", "emergency-purchases"].contains($0.dataset) }.flatMap(\.rows)
+            if !deals.isEmpty {
+                Section {
+                    vendorSummary(deals: deals, recs: recs)
+                }
+                .listRowBackground(Color.clear)
+                .listRowInsets(EdgeInsets(top: 6, leading: 0, bottom: 6, trailing: 0))
+                .listRowSeparator(.hidden)
+            }
             ForEach(recs, id: \.dataset) { group in
                 let spec = DatasetSpec.for(group.dataset)
+                let maxAmount = group.rows.compactMap(spec.amount).max() ?? 0
                 Section(store.info(group.dataset)?.title ?? Format.label(group.dataset)) {
                     ForEach(group.rows.prefix(25)) { row in
-                        NavigationLink(value: Route.record(group.dataset, rowID: row.id)) { RecordRow(spec: spec, row: row) }
+                        NavigationLink(value: Route.record(group.dataset, rowID: row.id)) {
+                            CompactRecordRow(spec: spec, row: row, maxAmount: maxAmount, hide: spec.titleKeys.first)
+                        }
                     }
                     if group.rows.count > 25 {
                         NavigationLink(value: Route.dataset(group.dataset, filters: ["vendor_id": vendorID])) { Text("All \(group.rows.count)") }
@@ -91,7 +114,7 @@ struct VendorDetailView: View {
             if !votes.isEmpty {
                 Section {
                     ForEach(votes) { row in
-                        NavigationLink(value: Route.record("votes", rowID: row.id)) { RecordRow(spec: DatasetSpec.for("votes"), row: row) }
+                        NavigationLink(value: Route.record("votes", rowID: row.id)) { VoteRow(row: row, summary: VoteSummary(row)) }
                     }
                 } header: { Text("Votes that approved its contracts") } footer: {
                     Text("Matched from the minutes. A gift near a vote does not show why anyone voted the way they did.")
@@ -116,8 +139,112 @@ struct VendorDetailView: View {
         }
     }
 
+    /// Headline numbers and a chart of approvals by year for one company.
+    private func vendorSummary(deals: [Row], recs: [(dataset: String, rows: [Row])]) -> some View {
+        let contracts = recs.first { $0.dataset == "contracts" }?.rows ?? []
+        let spec = DatasetSpec.for("contracts")
+        let approved = contracts.compactMap(spec.amount).reduce(0, +)
+        let govs = Set(deals.compactMap { $0.string("government") }).count
+        var byYear = [Int: Double]()
+        for r in contracts { if let y = Period.of(r)?.year { byYear[y, default: 0] += spec.amount(r) ?? 0 } }
+        let points = byYear.keys.sorted().map { (label: String($0), value: byYear[$0]!) }
+        return VStack(spacing: 10) {
+            StatStrip(tiles: [
+                .init(title: "Contracts", value: "\(contracts.count)"),
+                .init(title: "Approved", value: Format.compactMoney(approved)),
+                .init(title: govs == 1 ? "Government" : "Governments", value: "\(govs)"),
+            ])
+            if points.count >= 2 { YearBars(title: "Contracts approved each year", points: points) }
+            Text("Approved amounts, often not-to-exceed. Not proof of payment.")
+                .font(.caption2).foregroundStyle(.secondary).frame(maxWidth: .infinity, alignment: .leading)
+        }
+    }
+
     static let agency = ["visit_pcb": "Visit Panama City Beach", "destination_pc": "Destination Panama City", "mb_cdc": "Mexico Beach CDC",
                          "sheriff": "Sheriff", "airport": "Airport", "port": "Port Panama City"]
+}
+
+/// A person with initials, name, office, and a tag when they're a 2026 candidate.
+struct PersonRow: View {
+    let person: PeopleDirectory.Person
+
+    private var isCandidate: Bool { person.mainRoles.contains { ($0.role ?? "").hasPrefix("2026 candidate") } }
+    private var initials: String {
+        person.name.split(separator: " ").filter { $0.first?.isLetter == true }.prefix(2).map { String($0.prefix(1)) }.joined()
+    }
+
+    var body: some View {
+        HStack(spacing: 12) {
+            Text(initials).font(.subheadline.weight(.semibold)).foregroundStyle(Brand.navy)
+                .frame(width: 38, height: 38)
+                .background(Brand.navy.opacity(0.1), in: Circle())
+                .accessibilityHidden(true)
+            VStack(alignment: .leading, spacing: 2) {
+                HStack(spacing: 6) {
+                    Text(person.name).font(.subheadline.weight(.semibold))
+                    if isCandidate { Badge(text: "Candidate", color: Brand.amber) }
+                }
+                Text(person.headline.replacingOccurrences(of: "2026 candidate: ", with: "Running for "))
+                    .font(.caption).foregroundStyle(.secondary).lineLimit(2)
+            }
+        }
+        .padding(.vertical, 1)
+    }
+}
+
+/// Kinds of company records, in a fixed order and color, for the Companies list.
+enum RecordKind {
+    static let order = ["contract", "change_order", "emergency", "cra", "tdc", "register"]
+    static func color(_ k: String) -> Color {
+        switch k {
+        case "contract": Brand.navy
+        case "change_order": Brand.blue
+        case "emergency": Brand.salmon
+        case "cra": Brand.good
+        case "tdc": Brand.amber
+        default: Color.secondary.opacity(0.45)
+        }
+    }
+    static func label(_ k: String) -> String {
+        ["contract": "Contracts", "change_order": "Change orders", "emergency": "Emergency", "register": "Checks",
+         "tdc": "Tourism", "cra": "CRA"][k] ?? k
+    }
+}
+
+/// One company's records as a stacked bar, its length scaled to the busiest company.
+struct RecordKindBar: View {
+    let records: [String: Int]
+    let scale: Double
+
+    var body: some View {
+        let total = Double(records.values.reduce(0, +))
+        let keys = RecordKind.order.filter { (records[$0] ?? 0) > 0 } + records.keys.filter { !RecordKind.order.contains($0) }.sorted()
+        GeometryReader { g in
+            HStack(spacing: 1.5) {
+                ForEach(keys, id: \.self) { k in
+                    Rectangle().fill(RecordKind.color(k))
+                        .frame(width: max(3, g.size.width * max(scale, 0.04) * Double(records[k] ?? 0) / max(total, 1)))
+                }
+                Spacer(minLength: 0)
+            }
+            .clipShape(RoundedRectangle(cornerRadius: 3))
+        }
+        .frame(height: 7)
+    }
+}
+
+struct RecordKindLegend: View {
+    var body: some View {
+        LazyVGrid(columns: [GridItem(.adaptive(minimum: 100), alignment: .leading)], alignment: .leading, spacing: 6) {
+            ForEach(RecordKind.order, id: \.self) { k in
+                HStack(spacing: 5) {
+                    RoundedRectangle(cornerRadius: 2).fill(RecordKind.color(k)).frame(width: 10, height: 10)
+                    Text(RecordKind.label(k)).font(.caption).foregroundStyle(.secondary)
+                }
+            }
+        }
+        .accessibilityHidden(true)
+    }
 }
 
 /// Officials, department leaders and candidates.
@@ -138,12 +265,7 @@ struct PeopleView: View {
                 if !inGov.isEmpty {
                     Section(Governments.names[g] ?? g) {
                         ForEach(inGov.sorted { $0.name < $1.name }) { p in
-                            NavigationLink(value: Route.person(p.id)) {
-                                VStack(alignment: .leading, spacing: 2) {
-                                    Text(p.name).font(.subheadline.weight(.medium))
-                                    Text(p.headline).font(.caption).foregroundStyle(.secondary)
-                                }
-                            }
+                            NavigationLink(value: Route.person(p.id)) { PersonRow(person: p) }
                         }
                     }
                 }
@@ -152,7 +274,7 @@ struct PeopleView: View {
             if !other.isEmpty {
                 Section("Other offices") {
                     ForEach(other.sorted { $0.name < $1.name }) { p in
-                        NavigationLink(value: Route.person(p.id)) { Text(p.name) }
+                        NavigationLink(value: Route.person(p.id)) { PersonRow(person: p) }
                     }
                 }
             }
@@ -188,12 +310,13 @@ struct PersonDetailView: View {
             if let mv = byDS["member-votes"], !mv.isEmpty {
                 let t = RecordLinks.tally(mv)
                 Section {
-                    HStack(spacing: 16) {
-                        StatTile(title: "Yes", value: "\(t.yes)")
-                        StatTile(title: "No", value: "\(t.no)")
-                        StatTile(title: "Other", value: "\(t.other)", caption: "Absent or abstained")
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("\(t.total) recorded votes").font(.subheadline.weight(.semibold))
+                        ShareBar(parts: [.init(label: "Yes", value: Double(t.yes), color: Brand.good),
+                                         .init(label: "No", value: Double(t.no), color: Brand.salmon),
+                                         .init(label: "Absent", value: Double(t.other), color: Color.secondary.opacity(0.35))])
                     }
-                    .listRowInsets(EdgeInsets(top: 8, leading: 12, bottom: 8, trailing: 12))
+                    .padding(.vertical, 4)
                     ForEach(mv.sorted { ($0.string("date") ?? "") > ($1.string("date") ?? "") }.prefix(40)) { row in
                         NavigationLink(value: Route.record("member-votes", rowID: row.id)) {
                             HStack(alignment: .top) {
@@ -202,8 +325,8 @@ struct PersonDetailView: View {
                                     Text(row.string("date").flatMap(Dates.parse).map { Dates.display($0, hasTime: false) } ?? "").font(.caption).foregroundStyle(.secondary)
                                 }
                                 Spacer()
-                                let v = (row.string("vote") ?? "").capitalized
-                                Badge(text: v, color: v == "Yes" ? Brand.good : v == "No" ? Brand.salmon : .secondary)
+                                let v = (row.string("vote") ?? "").lowercased()
+                                VoteMark(choice: v == "yes" ? .yes : v == "no" ? .no : .other)
                             }
                         }
                     }
@@ -234,6 +357,17 @@ struct PersonDetailView: View {
         let pay = (byDS["officials-pay"] ?? []) + (byDS["salary-leaders"] ?? [])
         if !pay.isEmpty {
             Section("Pay") {
+                let points = (byDS["officials-pay"] ?? []).compactMap { r -> (label: String, value: Double)? in
+                    guard let v = r.firstNumber(["annual", "salary"]), let p = Period.of(r), p.fiscal else { return nil }
+                    return (p.label, v)
+                }
+                let byLabel = Dictionary(points.map { ($0.label, $0.value) }, uniquingKeysWith: max)
+                if byLabel.count >= 2 {
+                    YearBars(title: "Pay by year", points: byLabel.keys.sorted().map { (label: $0, value: byLabel[$0]!) },
+                             format: { Format.compactMoney($0) })
+                        .listRowBackground(Color.clear)
+                        .listRowInsets(EdgeInsets(top: 6, leading: 0, bottom: 6, trailing: 0))
+                }
                 ForEach(pay) { row in
                     LabeledContent(row.first(["title", "employer"]) ?? "Pay") {
                         VStack(alignment: .trailing) {
@@ -250,11 +384,24 @@ struct PersonDetailView: View {
                 ForEach(money) { row in
                     VStack(alignment: .leading, spacing: 3) {
                         Text(row.first(["election", "office"]) ?? "Campaign").font(.subheadline.weight(.medium))
-                        HStack {
-                            if let r = row.number("total_raised") { Text("Raised \(Format.money(r))") }
-                            if let s = row.number("total_spent") { Text("· spent \(Format.money(s))") }
+                        if let r = row.number("total_raised") {
+                            let spent = row.number("total_spent") ?? 0
+                            let maxV = max(r, spent, 1)
+                            VStack(alignment: .leading, spacing: 4) {
+                                HStack(spacing: 8) {
+                                    Text("Raised").font(.caption).frame(width: 48, alignment: .leading)
+                                    MagnitudeBar(fraction: r / maxV, height: 8)
+                                    Text(Format.compactMoney(r)).font(.caption.weight(.semibold).monospacedDigit()).frame(width: 60, alignment: .trailing)
+                                }
+                                if row.number("total_spent") != nil {
+                                    HStack(spacing: 8) {
+                                        Text("Spent").font(.caption).frame(width: 48, alignment: .leading)
+                                        MagnitudeBar(fraction: spent / maxV, height: 8)
+                                        Text(Format.compactMoney(spent)).font(.caption.weight(.semibold).monospacedDigit()).frame(width: 60, alignment: .trailing)
+                                    }
+                                }
+                            }
                         }
-                        .font(.caption)
                         if let u = row.url("report_url") ?? row.url("finance_report_url") {
                             Button("Campaign finance reports") { store.open(u) }.font(.caption).buttonStyle(.borderless)
                         }
@@ -328,6 +475,21 @@ struct DonorContractsView: View {
                 Text("Businesses that gave to a local campaign and also hold a contract, grant or payment from a Bay County government. Individual donors are never named. A gift near a vote does not show why anyone voted the way they did.")
                     .font(.footnote).foregroundStyle(.secondary)
                 Toggle("Only where the contract is with the same government", isOn: $sameOnly)
+            }
+            let gs = groups
+            if !gs.isEmpty {
+                Section {
+                    StatStrip(tiles: [
+                        .init(title: "Gifts", value: "\(gs.map(\.matches.count).reduce(0, +))"),
+                        .init(title: "Given", value: Format.compactMoney(gs.map(\.total).reduce(0, +))),
+                        .init(title: "Companies", value: "\(gs.count)"),
+                    ])
+                    CompareBars(title: "Biggest givers", items: gs.prefix(6).map { CompareBars.Item(id: $0.id, label: $0.name, value: $0.total) },
+                                format: { Format.compactMoney($0) })
+                }
+                .listRowBackground(Color.clear)
+                .listRowInsets(EdgeInsets(top: 6, leading: 0, bottom: 6, trailing: 0))
+                .listRowSeparator(.hidden)
             }
             ForEach(groups) { g in
                 Section {

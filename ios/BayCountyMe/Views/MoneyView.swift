@@ -49,35 +49,34 @@ struct MoneyView: View {
 
     var body: some View {
         NavigationStack {
-            List {
-                section("What you pay", pay)
-                section("Where it goes", goes)
-                section("Accountability", accountability)
-                section("Elections", elections)
-                Section {
-                    NavigationLink(value: Route.explore) { Label("Every dataset", systemImage: "square.grid.2x2") }
-                    WebLink(title: "Public money map", symbol: "map", url: URL(string: "https://baycounty.me/public-money/map"))
+            ScrollView {
+                VStack(alignment: .leading, spacing: 22) {
+                    section("What you pay", pay)
+                    section("Where it goes", goes)
+                    section("Accountability", accountability)
+                    section("Elections", elections)
+                    VStack(spacing: 0) {
+                        NavigationLink(value: Route.explore) {
+                            Label("Every dataset", systemImage: "square.grid.2x2").frame(maxWidth: .infinity, alignment: .leading).padding(14)
+                        }
+                        Divider().padding(.leading, 14)
+                        WebLink(title: "Public money map", symbol: "map", url: URL(string: "https://baycounty.me/public-money/map"))
+                            .frame(maxWidth: .infinity, alignment: .leading).padding(14)
+                    }
+                    .background(Brand.surface, in: RoundedRectangle(cornerRadius: 14))
                 }
+                .padding(16)
             }
+            .background(Brand.canvas)
             .navigationTitle("Public Money")
             .withRoutes()
         }
     }
 
     private func section(_ title: String, _ items: [Item]) -> some View {
-        Section(title) {
-            ForEach(items) { item in
-                NavigationLink(value: item.route) {
-                    HStack(spacing: 12) {
-                        Image(systemName: item.symbol).foregroundStyle(Brand.navy).frame(width: 26)
-                        VStack(alignment: .leading, spacing: 2) {
-                            Text(item.title).font(.body.weight(.medium))
-                            Text(item.detail).font(.caption).foregroundStyle(.secondary)
-                        }
-                    }
-                    .padding(.vertical, 1)
-                }
-            }
+        VStack(alignment: .leading, spacing: 10) {
+            Text(title).font(.title3.weight(.bold))
+            TopicGrid(topics: items.map { TopicGrid.Topic(title: $0.title, symbol: $0.symbol, detail: $0.detail, route: $0.route) })
         }
     }
 }
