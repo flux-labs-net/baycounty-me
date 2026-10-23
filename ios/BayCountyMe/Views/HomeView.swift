@@ -43,6 +43,8 @@ struct HomeView: View {
                         .listRowInsets(EdgeInsets(top: 4, leading: 16, bottom: 4, trailing: 16))
                     } header: {
                         Text("Bay County by the numbers")
+                    } footer: {
+                        Text("Totals for the county, the school district and the seven cities.")
                     }
                 }
 

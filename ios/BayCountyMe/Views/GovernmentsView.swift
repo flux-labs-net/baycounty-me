@@ -35,14 +35,15 @@ struct GovernmentsView: View {
                                 HStack(alignment: .firstTextBaseline) {
                                     Text(g.name).font(.body.weight(.semibold))
                                     Spacer()
-                                    if let b = g.budgetTotal { Text(Format.compactMoney(b)).font(.subheadline.weight(.semibold).monospacedDigit()) }
+                                    if let b = g.budgetTotal {
+                                        Text(Format.compactMoney(b)).font(.subheadline.weight(.semibold).monospacedDigit())
+                                            + Text(" budget").font(.caption).foregroundColor(.secondary)
+                                    }
                                 }
                                 if let b = g.budgetTotal, maxBudget > 0 { MagnitudeBar(fraction: b / maxBudget, height: 5) }
                                 HStack(spacing: 6) {
                                     if let p = g.population { Text("\(Format.number(p)) residents") }
                                     if let m = g.millage { Text("· \(Format.number(m)) mills") }
-                                    Spacer()
-                                    Text("budget").foregroundStyle(.tertiary)
                                 }
                                 .font(.caption)
                                 .foregroundStyle(.secondary)

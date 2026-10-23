@@ -33,11 +33,17 @@ final class BrowseTests: XCTestCase {
         XCTAssertEqual(byMonth.map(\.rows.count).reduce(0, +), all.count)
         XCTAssertGreaterThan(byMonth[0].key, byMonth[1].key)
         XCTAssertTrue(byMonth[0].title.hasSuffix(String(byMonth[0].key.prefix(4))))
-        let opts = Browse.groupOptions(sorted, spec: spec, periods: periods, yearChosen: true)
+        let opts = Browse.groupOptions(sorted, spec: spec, periods: periods, period: Period(year: 2026, fiscal: false))
         XCTAssertEqual(opts.first, .month)
         XCTAssertTrue(opts.contains(.column("government")))
         XCTAssertEqual(Browse.GroupKey.column("government").label, "Government")
         XCTAssertEqual(Browse.shortGovernment("City of Panama City Beach"), "PCB")
+        XCTAssertFalse(Browse.groupOptions(sorted, spec: spec, periods: periods, period: nil).contains(.month))
+        XCTAssertEqual(Browse.displayName("pc", column: "government"), "Panama City")
+        XCTAssertEqual(Browse.displayName("special_district", column: "employer"), "Special districts")
+        let votes = try rows("votes")
+        let top = Browse.top(votes, key: "government", spec: DatasetSpec.for("votes"), byAmount: false)
+        XCTAssertTrue(top.allSatisfy { Governments.names[$0.label] == nil }, "labels are names, not ids")
     }
 
     func testVotes() throws {

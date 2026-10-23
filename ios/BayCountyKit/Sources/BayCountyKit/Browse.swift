@@ -14,6 +14,26 @@ public enum Browse {
         "vendor-payments": ("Paid", nil),
     ]
 
+    /// What a list's records are called on its summary ("Contracts", "Votes").
+    public static func noun(_ datasetID: String) -> String {
+        ["contracts": "Contracts", "votes": "Votes", "member-votes": "Votes", "change-orders": "Change orders",
+         "emergency-purchases": "Purchases", "salary-positions": "Positions", "salary-leaders": "Positions",
+         "fema-michael-projects": "Projects", "sales-tax-projects": "Projects", "audit-findings": "Findings",
+         "campaign-contributions-2026": "Gifts", "cra-payments": "Records", "bonds": "Bonds"][datasetID] ?? "Records"
+    }
+
+    /// A readable name for a value: government ids ("pc") become names, codes ("special_district") become words.
+    public static func displayName(_ v: String, column: String) -> String {
+        if let n = Governments.names[v] { return n }
+        let agencies = ["special_district": "Special districts", "visit_pcb": "Visit Panama City Beach",
+                        "destination_pc": "Destination Panama City", "mb_cdc": "Mexico Beach CDC", "sheriff": "Sheriff",
+                        "airport": "Airport", "port": "Port Panama City", "clerk": "Clerk of Court", "tax_collector": "Tax Collector",
+                        "property_appraiser": "Property Appraiser", "supervisor_of_elections": "Supervisor of Elections"]
+        if let a = agencies[v] { return a }
+        if v.contains("_"), v == v.lowercased() { return v.replacingOccurrences(of: "_", with: " ").capitalizingFirstLetter }
+        return v
+    }
+
     /// "2026-09" for a record dated in September 2026, from its single event date.
     public static func monthKey(_ row: Row) -> String? {
         guard let d = row.first(Period.eventKeys), d.count >= 7, d.first?.isNumber == true else { return nil }
@@ -76,7 +96,7 @@ public enum Browse {
             let (x, y) = byAmount ? (amount[a] ?? 0, amount[b] ?? 0) : (Double(count[a]!), Double(count[b]!))
             return x != y ? x > y : a < b
         }
-        return ranked.prefix(limit).map { Bucket(key: $0, label: $0, count: count[$0]!, amount: amount[$0] ?? 0) }
+        return ranked.prefix(limit).map { Bucket(key: $0, label: displayName($0, column: key), count: count[$0]!, amount: amount[$0] ?? 0) }
     }
 
     /// Values like "Not named in agenda recommendation" aren't a real name to rank.
@@ -128,7 +148,7 @@ public enum Browse {
             case .year: return periods[r.id].map { (String(format: "%04d%@", $0.year, $0.fiscal ? "F" : ""), $0.label) }
             case .column(let c):
                 guard let v = r[c].map({ Format.value($0, column: c) }), !v.isEmpty else { return nil }
-                let shown = c == "gov_id" ? (Governments.names[v] ?? v) : v
+                let shown = displayName(v, column: c)
                 return (shown, shown)
             }
         }
@@ -156,10 +176,10 @@ public enum Browse {
 
     /// Ways a list can be grouped, given its records: by month or year when they carry dates, and by any
     /// column with a handful of values (government, category, company when names repeat).
-    public static func groupOptions(_ rows: [Row], spec: DatasetSpec, periods: [Int: Period], yearChosen: Bool) -> [GroupKey] {
+    public static func groupOptions(_ rows: [Row], spec: DatasetSpec, periods: [Int: Period], period: Period?) -> [GroupKey] {
         var out: [GroupKey] = []
-        if rows.contains(where: { monthKey($0) != nil }) && yearChosen { out.append(.month) }
-        if !yearChosen && Set(periods.values).count > 1 { out.append(.year) }
+        if let period, !period.fiscal, rows.contains(where: { monthKey($0) != nil }) { out.append(.month) }
+        if period == nil && Set(periods.values).count > 1 { out.append(.year) }
         var seen = Set<String>()
         let candidates = spec.filterKeys + spec.titleKeys.prefix(1)
         for c in candidates where !seen.contains(c) && c != "member" {
@@ -190,6 +210,7 @@ public enum Browse {
                    "City of Mexico Beach": "Mexico Bch", "Bay District Schools": "Schools", "Bay District School Board": "Schools"]
         if let m = map[s] { return m }
         if let n = Governments.names[s] { return shortGovernment(n) }
+        if s.contains("_"), s == s.lowercased() { return displayName(s, column: "") }
         return s.replacingOccurrences(of: "City of ", with: "")
     }
 }
@@ -264,4 +285,8 @@ public extension Browse {
         }
         .sorted { $0.date != $1.date ? $0.date > $1.date : $0.board < $1.board }
     }
+}
+
+extension String {
+    var capitalizingFirstLetter: String { prefix(1).uppercased() + dropFirst() }
 }

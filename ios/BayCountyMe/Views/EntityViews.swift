@@ -21,14 +21,25 @@ struct VendorsView: View {
                 Text("Every company or organization paid by a Bay County government, CRA or tourism agency, with its contracts, payments, the votes that approved them and gifts from the business to campaigns. A gift near a vote does not show why anyone voted the way they did.")
                     .font(.footnote).foregroundStyle(.secondary)
             }
+            Section {
+                RecordKindLegend()
+            }
+            .listRowBackground(Color.clear)
             Section("\(list.count) companies") {
+                let maxCount = list.first?.recordCount ?? 1
                 ForEach(list.prefix(400)) { v in
                     NavigationLink(value: Route.vendor(v.id)) {
-                        VStack(alignment: .leading, spacing: 2) {
-                            Text(v.name).font(.subheadline.weight(.medium))
-                            Text(v.records.sorted { $0.value > $1.value }.map { "\($0.value) \(Self.kind($0.key))" }.joined(separator: " · "))
-                                .font(.caption).foregroundStyle(.secondary)
+                        VStack(alignment: .leading, spacing: 5) {
+                            HStack(alignment: .firstTextBaseline) {
+                                Text(v.name).font(.subheadline.weight(.semibold)).lineLimit(2)
+                                Spacer(minLength: 6)
+                                Text("\(v.recordCount)").font(.subheadline.weight(.semibold).monospacedDigit())
+                            }
+                            RecordKindBar(records: v.records, scale: Double(v.recordCount) / Double(max(maxCount, 1)))
                         }
+                        .padding(.vertical, 2)
+                        .accessibilityElement(children: .ignore)
+                        .accessibilityLabel(v.name + ": " + v.records.sorted { $0.value > $1.value }.map { "\($0.value) \(Self.kind($0.key))" }.joined(separator: ", "))
                     }
                 }
             }
@@ -153,6 +164,89 @@ struct VendorDetailView: View {
                          "sheriff": "Sheriff", "airport": "Airport", "port": "Port Panama City"]
 }
 
+/// A person with initials, name, office, and a tag when they're a 2026 candidate.
+struct PersonRow: View {
+    let person: PeopleDirectory.Person
+
+    private var isCandidate: Bool { person.mainRoles.contains { ($0.role ?? "").hasPrefix("2026 candidate") } }
+    private var initials: String {
+        person.name.split(separator: " ").filter { $0.first?.isLetter == true }.prefix(2).map { String($0.prefix(1)) }.joined()
+    }
+
+    var body: some View {
+        HStack(spacing: 12) {
+            Text(initials).font(.subheadline.weight(.semibold)).foregroundStyle(Brand.navy)
+                .frame(width: 38, height: 38)
+                .background(Brand.navy.opacity(0.1), in: Circle())
+                .accessibilityHidden(true)
+            VStack(alignment: .leading, spacing: 2) {
+                HStack(spacing: 6) {
+                    Text(person.name).font(.subheadline.weight(.semibold))
+                    if isCandidate { Badge(text: "Candidate", color: Brand.amber) }
+                }
+                Text(person.headline.replacingOccurrences(of: "2026 candidate: ", with: "Running for "))
+                    .font(.caption).foregroundStyle(.secondary).lineLimit(2)
+            }
+        }
+        .padding(.vertical, 1)
+    }
+}
+
+/// Kinds of company records, in a fixed order and color, for the Companies list.
+enum RecordKind {
+    static let order = ["contract", "change_order", "emergency", "cra", "tdc", "register"]
+    static func color(_ k: String) -> Color {
+        switch k {
+        case "contract": Brand.navy
+        case "change_order": Brand.blue
+        case "emergency": Brand.salmon
+        case "cra": Brand.good
+        case "tdc": Brand.amber
+        default: Color.secondary.opacity(0.45)
+        }
+    }
+    static func label(_ k: String) -> String {
+        ["contract": "Contracts", "change_order": "Change orders", "emergency": "Emergency", "register": "Checks",
+         "tdc": "Tourism", "cra": "CRA"][k] ?? k
+    }
+}
+
+/// One company's records as a stacked bar, its length scaled to the busiest company.
+struct RecordKindBar: View {
+    let records: [String: Int]
+    let scale: Double
+
+    var body: some View {
+        let total = Double(records.values.reduce(0, +))
+        let keys = RecordKind.order.filter { (records[$0] ?? 0) > 0 } + records.keys.filter { !RecordKind.order.contains($0) }.sorted()
+        GeometryReader { g in
+            HStack(spacing: 1.5) {
+                ForEach(keys, id: \.self) { k in
+                    Rectangle().fill(RecordKind.color(k))
+                        .frame(width: max(3, g.size.width * max(scale, 0.04) * Double(records[k] ?? 0) / max(total, 1)))
+                }
+                Spacer(minLength: 0)
+            }
+            .clipShape(RoundedRectangle(cornerRadius: 3))
+        }
+        .frame(height: 7)
+    }
+}
+
+struct RecordKindLegend: View {
+    var body: some View {
+        LazyVGrid(columns: [GridItem(.adaptive(minimum: 100), alignment: .leading)], alignment: .leading, spacing: 6) {
+            ForEach(RecordKind.order, id: \.self) { k in
+                HStack(spacing: 5) {
+                    RoundedRectangle(cornerRadius: 2).fill(RecordKind.color(k)).frame(width: 10, height: 10)
+                    Text(RecordKind.label(k)).font(.caption).foregroundStyle(.secondary)
+                }
+            }
+        }
+        .accessibilityHidden(true)
+    }
+}
+
 /// Officials, department leaders and candidates.
 struct PeopleView: View {
     @Environment(AppStore.self) private var store
@@ -171,12 +265,7 @@ struct PeopleView: View {
                 if !inGov.isEmpty {
                     Section(Governments.names[g] ?? g) {
                         ForEach(inGov.sorted { $0.name < $1.name }) { p in
-                            NavigationLink(value: Route.person(p.id)) {
-                                VStack(alignment: .leading, spacing: 2) {
-                                    Text(p.name).font(.subheadline.weight(.medium))
-                                    Text(p.headline).font(.caption).foregroundStyle(.secondary)
-                                }
-                            }
+                            NavigationLink(value: Route.person(p.id)) { PersonRow(person: p) }
                         }
                     }
                 }
@@ -185,7 +274,7 @@ struct PeopleView: View {
             if !other.isEmpty {
                 Section("Other offices") {
                     ForEach(other.sorted { $0.name < $1.name }) { p in
-                        NavigationLink(value: Route.person(p.id)) { Text(p.name) }
+                        NavigationLink(value: Route.person(p.id)) { PersonRow(person: p) }
                     }
                 }
             }
@@ -268,8 +357,8 @@ struct PersonDetailView: View {
         let pay = (byDS["officials-pay"] ?? []) + (byDS["salary-leaders"] ?? [])
         if !pay.isEmpty {
             Section("Pay") {
-                let points = pay.compactMap { r -> (label: String, value: Double)? in
-                    guard let v = r.firstNumber(["annual", "salary"]), let p = Period.of(r) else { return nil }
+                let points = (byDS["officials-pay"] ?? []).compactMap { r -> (label: String, value: Double)? in
+                    guard let v = r.firstNumber(["annual", "salary"]), let p = Period.of(r), p.fiscal else { return nil }
                     return (p.label, v)
                 }
                 let byLabel = Dictionary(points.map { ($0.label, $0.value) }, uniquingKeysWith: max)
@@ -386,6 +475,21 @@ struct DonorContractsView: View {
                 Text("Businesses that gave to a local campaign and also hold a contract, grant or payment from a Bay County government. Individual donors are never named. A gift near a vote does not show why anyone voted the way they did.")
                     .font(.footnote).foregroundStyle(.secondary)
                 Toggle("Only where the contract is with the same government", isOn: $sameOnly)
+            }
+            let gs = groups
+            if !gs.isEmpty {
+                Section {
+                    StatStrip(tiles: [
+                        .init(title: "Gifts", value: "\(gs.map(\.matches.count).reduce(0, +))"),
+                        .init(title: "Given", value: Format.compactMoney(gs.map(\.total).reduce(0, +))),
+                        .init(title: "Companies", value: "\(gs.count)"),
+                    ])
+                    CompareBars(title: "Biggest givers", items: gs.prefix(6).map { CompareBars.Item(id: $0.id, label: $0.name, value: $0.total) },
+                                format: { Format.compactMoney($0) })
+                }
+                .listRowBackground(Color.clear)
+                .listRowInsets(EdgeInsets(top: 6, leading: 0, bottom: 6, trailing: 0))
+                .listRowSeparator(.hidden)
             }
             ForEach(groups) { g in
                 Section {

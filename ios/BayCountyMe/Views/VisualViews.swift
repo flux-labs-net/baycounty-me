@@ -46,7 +46,7 @@ struct CompareBars: View {
                 let on = highlight == nil || highlight == item.id
                 let row = HStack(spacing: 8) {
                     Text(item.label).font(.caption.weight(highlight == item.id ? .bold : .regular))
-                        .foregroundStyle(.primary).lineLimit(1).frame(width: 104, alignment: .leading)
+                        .foregroundStyle(.primary).lineLimit(1).minimumScaleFactor(0.8).frame(width: 122, alignment: .leading)
                     GeometryReader { g in
                         Capsule().fill(on ? Brand.navy : Brand.navy.opacity(0.25))
                             .frame(width: max(4, g.size.width * (maxV > 0 ? item.value / maxV : 0)))

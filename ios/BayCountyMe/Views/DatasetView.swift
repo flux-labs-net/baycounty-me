@@ -134,7 +134,7 @@ struct DatasetView: View {
     // MARK: - List
 
     private var groupOptions: [Browse.GroupKey] {
-        Browse.groupOptions(all, spec: spec, periods: years.byRow, yearChosen: period != nil && period?.fiscal == false)
+        Browse.groupOptions(all, spec: spec, periods: years.byRow, period: period)
     }
 
     private var group: Browse.GroupKey {
@@ -231,7 +231,7 @@ struct DatasetView: View {
     }
 
     private var chartTitle: String {
-        let what = totalInfo.map { "\($0.label) each" } ?? "Records each"
+        let what = totalInfo.map { "\($0.label) each" } ?? "\(Browse.noun(datasetID)) each"
         return period != nil ? "\(what) month" : (years.periods.first?.fiscal == true ? "\(what) fiscal year" : "\(what) year")
     }
 
@@ -255,7 +255,7 @@ struct DatasetView: View {
     }
 
     private func tiles(_ base: [Row]) -> [ListSummary.Tile] {
-        var out = [ListSummary.Tile(title: "Records", value: Format.number(Double(base.count)))]
+        var out = [ListSummary.Tile(title: Browse.noun(datasetID), value: Format.number(Double(base.count)))]
         let amounts = base.compactMap(spec.amount)
         if let t = totalInfo {
             out.append(.init(title: t.label, value: Format.compactMoney(amounts.reduce(0, +))))

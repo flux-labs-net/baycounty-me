@@ -112,6 +112,7 @@ public enum Format {
         case .string(let s):
             if s == "True" || s == "False" { return s == "True" ? "Yes" : "No" }
             if let d = Dates.parse(s), s.count >= 10, s.count <= 25 { return Dates.display(d, hasTime: s.count > 10) }
+            if ["government", "gov", "employer", "gov_id"].contains(column), let n = Governments.names[s] { return n }
             return humanizeCode(s, column: column)
         case .array(let a):
             return a.map { value($0, column: column) }.filter { !$0.isEmpty }.joined(separator: column == "actual_salaries" ? ", " : "\n")

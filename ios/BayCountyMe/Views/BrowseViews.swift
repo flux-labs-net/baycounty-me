@@ -159,7 +159,7 @@ struct TopBars: View {
             Text(title).font(.subheadline.weight(.semibold))
             ForEach(items) { item in
                 let v = byAmount ? item.amount : Double(item.count)
-                Button { onTap(item.label) } label: {
+                Button { onTap(item.key) } label: {
                     VStack(alignment: .leading, spacing: 4) {
                         HStack {
                             Text(item.label).font(.subheadline).lineLimit(1).foregroundStyle(.primary)
