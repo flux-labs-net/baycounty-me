@@ -38,7 +38,7 @@ async function report({status = 'pending', source = '', raw = ''} = {}) {
       (select count(*) from ingest.staging t where t.source_id = s.id and t.review_status = 'pending')::int pending
     from ingest.sources s order by s.entity_name`);
   const files = await db.q(`select r.id, r.source_id, s.entity_name, r.received_at, r.intake_method, r.sender, r.file_name, r.status,
-      r.row_count, r.error_message,
+      r.row_count, r.error_message, r.storage_path is not null as has_file,
       (select count(*) from ingest.staging t where t.raw_id = r.id and t.review_status = 'pending')::int pending,
       (select count(*) from ingest.staging t where t.raw_id = r.id and t.review_status = 'approved')::int approved,
       (select count(*) from ingest.staging t where t.raw_id = r.id and t.review_status = 'rejected')::int rejected
