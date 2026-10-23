@@ -156,11 +156,15 @@
   </url>
   <url>
     <loc>https://baycounty.me/open-data</loc>
-    <lastmod>2026-10-21</lastmod>
+    <lastmod>2026-10-23</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/privacy</loc>
     <lastmod>2026-10-22</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/public-money/accountability</loc>
+    <lastmod>2026-10-23</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/public-money/amendment-3</loc>
@@ -789,7 +793,7 @@
   </url>
   <url>
     <loc>https://baycounty.me/records-request</loc>
-    <lastmod>2026-10-21</lastmod>
+    <lastmod>2026-10-23</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://baycounty.me/records-request"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://baycounty.me/es/solicitar-registros"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://baycounty.me/records-request"/>
@@ -800,7 +804,7 @@
   </url>
   <url>
     <loc>https://baycounty.me/updates</loc>
-    <lastmod>2026-10-22</lastmod>
+    <lastmod>2026-10-23</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/who-runs-bay-county</loc>

@@ -64,4 +64,6 @@ $('rqMail').addEventListener('click', ev => { if (!ready()) ev.preventDefault();
 $('rqCopy').addEventListener('click', async () => { if (!ready()) return; try { await navigator.clipboard.writeText($('rqL').value); $('rqMsg').textContent = L.copied; } catch (e) { $('rqL').select(); $('rqMsg').textContent = L.selectAll; } });
 $('rqPrint').addEventListener('click', () => { if (!ready()) return; const w = window.open('', '_blank'); if (!w) return; w.document.write(`<pre style="font:14px/1.5 Georgia,serif;white-space:pre-wrap;max-width:640px;margin:40px auto">${esc($('rqL').value)}</pre>`); w.document.close(); w.focus(); w.print(); });
 suggestions();
+// ?d= prefills "describe your own" (the Accountability console links each missing record here)
+if (qs.get('d')) { const own = $('rqS').querySelector('input[value="own"]'); if (own) own.checked = true; $('rqD').value = qs.get('d').slice(0, 1500); letter(); }
 })();

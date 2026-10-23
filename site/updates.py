@@ -9,6 +9,9 @@ from datetime import datetime, timezone
 import html
 
 CHANGES = [
+    {'date': '2026-10-23', 'title': 'Accountability console: projects from budget to close-out',
+     'text': "A new page follows public projects from the first budget to the day they close: approvals, contracts, change orders, the votes on them, payments and the final cost, each with its source. Questions are raised only by nine published rules (cost growth over 10%, running late, figures that don't agree, an unnamed payee and others), the same way for every government, and each is a question for the agency rather than a finding. Each project shows the records that would answer its questions, as ready-to-send records requests, and where the agency's reply stands. It starts with 18 project histories reviewed by hand, 37 contracts with change orders and 39 scheduled sales tax projects.",
+     'pages': ['/public-money/accountability', '/records-request', '/open-data']},
     {'date': '2026-10-22', 'title': 'A privacy page, and data for the iPhone app',
      'text': "A new privacy page says what the site and the BayCounty.me iPhone app collect: no accounts, no ads and no tracking. The site now also publishes the files the app reads, in /data/app: the tax and Amendment 3 calculators, the glossary, company and people profiles and the money map. They hold the same information the pages already show.",
      'pages': ['/privacy', '/developers']},

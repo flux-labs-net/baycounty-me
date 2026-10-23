@@ -17,6 +17,7 @@ from tourism_page import bedtax_page, surtax_page
 from fees_page import fees_page, who_page
 from contracts_page import contracts_page
 from votes_page import votes_page
+from accountability_page import accountability_page
 from updates import updates_page, rss, last_updated, nice as nice_date
 OUT = os.path.join(ROOT, 'public')
 SITE = 'BayCounty.me'
@@ -66,6 +67,7 @@ MENU = [
             {'label': 'Hurricane Michael', 'href': '/public-money/hurricane-michael', 'desc': 'FEMA, HUD and state recovery money'},
         ]},
         {'group': 'Accountability', 'items': [
+            {'label': 'Accountability console', 'href': '/public-money/accountability', 'desc': 'Projects start to finish, with open questions'},
             {'label': 'Contracts', 'href': '/public-money/contracts', 'desc': 'Who wins contracts, and how'},
             {'label': 'How They Voted', 'href': '/public-money/votes', 'desc': 'Every recorded vote on money decisions'},
             {'label': 'Campaign Money', 'href': '/public-money/campaign-money', 'desc': 'Who funds campaigns, and donor contracts'},
@@ -667,6 +669,8 @@ PAGES = [
     ('/public-money/money-map', 'Money map: donors, officials and contracts', 'An interactive map and heat maps of which businesses gave to which Bay County officials, and where those donors hold local government contracts.', lambda: money_map_page(OUT)),
     ('/public-money/who-gets-paid', 'Who gets paid: tourism agencies', 'Every payment by Visit Panama City Beach, Destination Panama City and the Mexico Beach CDC, from the Clerk of Court check registers.', payments_page),
     ('/public-money/contracts', 'Who gets the contracts', 'Major contracts approved by Bay County and its cities since 2022: winners, how they were awarded, change orders, emergency purchases and who the county paid most.', lambda: contracts_page(OUT)),
+    ('/public-money/accountability', 'Accountability console: projects from budget to close-out',
+     'Bay County public projects followed from first budget to close-out: approvals, contracts, change orders, votes, payments and final cost, with questions raised by published rules, missing records and each agency\'s reply.', lambda: accountability_page(OUT)),
     ('/public-money/votes', 'How they voted', 'How Bay County commissioners, city officials and school board members voted on budgets, tax rates, contracts, land and borrowing, from official minutes.', lambda: votes_page(OUT)),
     ('/public-money/debt', 'What Bay County governments owe', 'Debt owed by Bay County, the school district and every city: bonds, bank loans, big single payments ahead, and pension promises, from audited statements.', debt_page),
     ('/public-money/audits', 'What the auditors found', 'Three years of audit findings for Bay County governments in plain English, including repeat problems and Florida Auditor General reports.', audits_page),

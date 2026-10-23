@@ -285,6 +285,21 @@ def _exemptions():
              'value_exempted': v['value'], 'estimated_tax_removed': v['tax'], 'roll': d.get('roll'), 'source_url': d.get('source')} for k, v in d['codes'].items()]
 
 
+def _acc(kind):
+    from accountability_page import build, RULES
+    rt = {r['id']: r['title'] for r in RULES}
+    P = build()['projects']
+    if kind == 'projects':
+        return [{'project_id': p['id'], 'project': p['n'], 'government': p['g'], 'agency': p.get('agency'), 'kind': p['src'], 'stage': p['status'],
+                 'first_figure': (p.get('base') or {}).get('a'), 'first_figure_is': (p.get('base') or {}).get('t'), 'latest_figure': (p.get('now') or {}).get('a'),
+                 'latest_figure_is': (p.get('now') or {}).get('t'), 'growth_pct': p.get('growth'), 'project_total': (p.get('total') or {}).get('a'),
+                 'flags': ' | '.join(f"{rt[f['r']]} ({f['sev']}): {f['note']}" for f in p['flags']), 'records_missing': ' | '.join(g['q'] for g in p['gaps']),
+                 'agency_reply': p['reply']['status'], 'first_date': p.get('first'), 'last_date': p.get('last')} for p in P]
+    return [{'project_id': p['id'], 'project': p['n'], 'government': p['g'], 'date': x.get('d'), 'sort_date': x.get('s'), 'event': x['k'], 'amount': x.get('a'),
+             'approximate': bool(x.get('approx')), 'description': x['t'], 'paid_to': x.get('payee'), 'news_report': bool(x.get('news')), 'source_url': x.get('u')}
+            for p in P for x in p['ev']]
+
+
 def datasets():
     ct = _j('contracts', 'contracts.json'); da = _j('debt_audit', 'debt_audit.json'); f = _j('fees', 'fees_pay_officials.json')
     ts = _j('tourism', 'tourism_surtax.json'); pa = _j('michael', 'pa_ledger.json')
@@ -320,6 +335,8 @@ def datasets():
         (('elections', 'finance_2026.json'), 'campaign-contributions-2026', '2026 contributions from organizations', 'Every contribution from a business, committee or party to a 2026 local candidate. Individual donors are not included, and neither is bank interest on campaign accounts.', lambda d: _contributions()),
         (('exemptions', 'exemptions_2026.json'), 'property-tax-exemptions', 'Property tax exemptions (2026 roll)', 'Every exemption type on the 2026 tax roll: parcels, value exempted and estimated tax removed.', lambda d: _exemptions()),
     ]
+    D += [('accountability-projects', 'Accountability: projects', 'One row per project on the Accountability console: stage, first and latest figures, cost growth, questions raised by the published rules, records still missing and the agency reply.', lambda: _acc('projects')),
+          ('accountability-events', 'Accountability: project timelines', 'Every dated event in each project timeline: budgets, approvals, awards, change orders, votes, payments and completion, with sources.', lambda: _acc('events'))]
     for path, did, title, desc, fn in extra:
         d = _j(*path)
         if d:

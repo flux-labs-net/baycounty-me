@@ -1,0 +1,1048 @@
+{
+ "about": "Hand-reviewed project histories for the Accountability console. Each project strings together records that are already on the site (CRA ledger, contracts, change orders, votes) into one timeline from first budget to close-out. Every event cites its source. build_projects.py adds the change-order contracts and sales tax projects automatically and applies the flag rules. 'cos' pulls in a change-order group from data/contracts (government, vendor id, words in its title). 'checks' are flags a person confirmed by reading the documents; they are listed with the rule they fall under.",
+ "projects": [
+  {
+   "id": "pcb-fbr-seg2",
+   "name": "Front Beach Road Segment 2",
+   "gov": "pcb",
+   "agency": "Panama City Beach CRA (Front Beach Road CRA)",
+   "where": "Front Beach Rd, South Thomas Dr to Richard Jackson Blvd",
+   "what": "Roadway, stormwater, underground utilities, sidewalks, lighting and trolley lanes.",
+   "funding": "CRA tax increment and bonds",
+   "status": "closed",
+   "events": [
+    {
+     "d": "FY2015",
+     "k": "milestone",
+     "t": "First bids rejected as over budget",
+     "u": "https://www.pcbfl.gov/home/showpublisheddocument/20389/637915921100900000"
+    },
+    {
+     "d": "2016-09-22",
+     "k": "award",
+     "a": 14222000,
+     "t": "Construction contract awarded to GAC Contractors, Inc.",
+     "payee": "GAC Contractors, Inc.",
+     "u": "https://www.pcbfl.gov/home/showpublisheddocument/20389/637915921100900000"
+    },
+    {
+     "d": "2019",
+     "k": "change",
+     "a": 95363.82,
+     "t": "Change order #17: red asphalt for the trolley lanes (Res. 19-123)",
+     "payee": "GAC Contractors, Inc.",
+     "u": "https://pcbfl.gov/home/showpublisheddocument/14612/637012047594470000"
+    },
+    {
+     "d": "2020-06-29",
+     "k": "change",
+     "a": 13108.3,
+     "t": "Change order #18: underground electrical at Los Rancheros (Res. 20-136). Contract price now $14,752,893.86",
+     "payee": "GAC Contractors, Inc.",
+     "u": "https://pcbfl.gov/home/showpublisheddocument/16813/637299759305930000",
+     "contract_total": 14752893.86
+    },
+    {
+     "d": "FY2022",
+     "k": "complete",
+     "a": 15988162,
+     "t": "Closed out. Total project cost in the city's Capital Improvements Schedule (includes design and other costs, not only the construction contract)",
+     "u": "https://www.pcbfl.gov/home/showpublisheddocument/27668/638887882812000000"
+    }
+   ],
+   "baseline": {
+    "a": 14222000,
+    "t": "construction contract at award"
+   },
+   "contract": {
+    "orig": 14222000,
+    "now": 14752893.86
+   },
+   "final": {
+    "a": 15988162,
+    "t": "total project cost at close-out"
+   },
+   "gaps": [
+    {
+     "q": "Change orders #1 through #16 on the Front Beach Road Segment 2 construction contract with GAC Contractors, Inc. (awarded 2016-09-22), with the amount and reason for each",
+     "gov": "pcb"
+    }
+   ]
+  },
+  {
+   "id": "pcb-fbr-seg3",
+   "name": "Front Beach Road Segment 3 / South Arnold Road (SR 79)",
+   "gov": "pcb",
+   "agency": "Panama City Beach CRA (Front Beach Road CRA)",
+   "where": "Front Beach Rd and S Arnold Rd, with the roundabout at their intersection",
+   "what": "Added lanes, a roundabout, sidewalks, lighting, underground utilities and stormwater.",
+   "funding": "CRA, FDOT and a property-owner share",
+   "status": "complete",
+   "events": [
+    {
+     "d": "2019-07-11",
+     "k": "milestone",
+     "t": "Eminent domain approved for right-of-way at the SR 79 / Front Beach Rd intersection (Res. 19-110). Compensation not stated",
+     "u": "https://pcbfl.gov/home/showpublisheddocument/14481/637153770711070000"
+    },
+    {
+     "d": "2021-03",
+     "k": "award",
+     "a": 28000000,
+     "approx": true,
+     "t": "Construction bid awarded (Res. 21-127). The city's Segment 3 page puts the low bid at about $28 million",
+     "payee": "GAC Contractors (later CWR Contracting, Inc.)",
+     "u": "https://www.pcbfl.gov/home/showpublisheddocument/27668/638887882812000000"
+    },
+    {
+     "d": "2021-03",
+     "k": "award",
+     "a": 524820,
+     "t": "Dewberry Engineers task order: construction administration and night/weekend inspection (Res. 21-121), maximum",
+     "payee": "Dewberry Engineers, Inc.",
+     "u": "https://pcbfl.gov/home/showpublisheddocument/24562/638512727553430000",
+     "side": true
+    },
+    {
+     "d": "2022-04-28",
+     "k": "payment",
+     "a": 31882.5,
+     "t": "Land settlement for right-of-way (Res. 22-138)",
+     "payee": "PCBH",
+     "u": "https://pcbfl.gov/home/showpublisheddocument/20080/637862365752130000",
+     "side": true
+    },
+    {
+     "d": "2023-07-13",
+     "k": "change",
+     "a": 28738.18,
+     "t": "Change order #7: reconnect sewer for Muy Wayne O's (Res. 23-195). Change orders 4, 5 and 6 exist but their amounts could not be read",
+     "payee": "CWR Contracting, Inc.",
+     "u": "https://d3n9y02raazwpg.cloudfront.net/pcbgov/0d86e393-7c8e-11ed-9024-0050569183fa-b95fcb69-f19b-4652-8495-9f0a506dc971-1688747339.pdf"
+    },
+    {
+     "d": "2024-09-30",
+     "k": "spent",
+     "a": 25425499,
+     "t": "Spent to date in the Capital Improvements Schedule, against a total project cost of $30,895,199",
+     "u": "https://www.pcbfl.gov/home/showpublisheddocument/27668/638887882812000000",
+     "estimate": 30895199
+    },
+    {
+     "d": "2026-03",
+     "k": "payment",
+     "a": 1900000,
+     "t": "Council approves the final payment to CWR Contracting. WJHG reports about 375 days over schedule (utility conflicts, storm drain redesign) and a total near $32 million",
+     "payee": "CWR Contracting, Inc.",
+     "u": "https://www.wjhg.com/2026/03/13/front-beach-road-construction-project-is-complete-faced-delays/",
+     "news": true
+    },
+    {
+     "d": "2026-03",
+     "k": "complete",
+     "a": 32000000,
+     "approx": true,
+     "t": "Project complete. Reported total about $32 million (WMBB quoted the mayor at $32.5 million)",
+     "u": "https://www.wjhg.com/2026/03/13/front-beach-road-construction-project-is-complete-faced-delays/",
+     "news": true
+    }
+   ],
+   "baseline": {
+    "a": 28000000,
+    "t": "low bid at award (about)"
+   },
+   "final": {
+    "a": 32000000,
+    "t": "reported total at completion (about)"
+   },
+   "late_days": 375,
+   "cos": [
+    [
+     "Panama City Beach",
+     "cwr-contracting",
+     "segment 3"
+    ]
+   ],
+   "checks": [
+    {
+     "rule": "conflict",
+     "note": "Three different totals: $30,895,199 (city Capital Improvements Schedule), about $32 million (WJHG) and $32.5 million (the mayor, quoted by WMBB)."
+    }
+   ],
+   "gaps": [
+    {
+     "q": "All change orders (with amounts) on the Front Beach Road Segment 3 / SR 79 construction contract, including change orders 4, 5 and 6 (Res. 22-177, 22-191, 23-135), and the final contract reconciliation",
+     "gov": "pcb"
+    },
+    {
+     "q": "The final cost of Front Beach Road Segment 3 / SR 79 by funding source (CRA, FDOT, property-owner share) and the compensation paid in each right-of-way condemnation",
+     "gov": "pcb"
+    }
+   ]
+  },
+  {
+   "id": "pcb-fbr-seg41",
+   "name": "Front Beach Road Segment 4.1 (Lullwater Dr to Hills Rd)",
+   "gov": "pcb",
+   "agency": "Panama City Beach CRA (Front Beach Road CRA)",
+   "where": "Front Beach Rd along Pier Park",
+   "what": "Design, right-of-way and utility relocation; construction to be design-build.",
+   "funding": "CRA with state and federal grants (FDEM HMGP for undergrounding)",
+   "status": "design",
+   "events": [
+    {
+     "d": "2019",
+     "k": "award",
+     "a": 1303389,
+     "t": "Dewberry Engineers design task order (Res. 19-65)",
+     "payee": "Dewberry Engineers, Inc.",
+     "u": "https://pcbfl.gov/home/showpublisheddocument/13909/636870324888970000"
+    },
+    {
+     "d": "2019",
+     "k": "award",
+     "a": 200000,
+     "t": "Dewberry utility relocation design (Res. 19-66), paid from reserves",
+     "payee": "Dewberry Engineers, Inc.",
+     "u": "https://pcbfl.gov/home/showpublisheddocument/13911/636870324908030000"
+    },
+    {
+     "d": "2021-02",
+     "k": "payment",
+     "a": 22239.36,
+     "t": "Right-of-way purchase at Powell Adams Rd (Res. 21-87); amended in 2022, amended amount not found",
+     "payee": "Palmetto Hospitality of PCB, LLC",
+     "u": "https://pcbfl.gov/home/showpublisheddocument/17572/637492468223200000"
+    },
+    {
+     "d": "2021-07",
+     "k": "award",
+     "a": 59910,
+     "t": "Dewberry construction administration at Powell Adams Rd (Res. 21-186), not to exceed",
+     "payee": "Dewberry Engineers, Inc.",
+     "u": "https://pcbfl.gov/home/showpublisheddocument/18386/637629761850100000"
+    },
+    {
+     "d": "2023",
+     "k": "estimate",
+     "a": 14000000,
+     "approx": true,
+     "t": "News Herald estimate: more than $14 million",
+     "news": true,
+     "u": "https://www.pcbfl.gov/home/showpublisheddocument/27668/638887882812000000",
+     "via": true
+    },
+    {
+     "d": "2024-09-30",
+     "k": "spent",
+     "a": 3372491,
+     "t": "Spent to date, against a total project cost of $59,780,491 in the Capital Improvements Schedule",
+     "u": "https://www.pcbfl.gov/home/showpublisheddocument/27668/638887882812000000",
+     "estimate": 59780491
+    },
+    {
+     "d": "2026-10",
+     "k": "milestone",
+     "t": "Design-build proposals due (bid #27)",
+     "u": "https://www.pcbfl.gov/home/showpublisheddocument/27668/638887882812000000",
+     "via": true
+    }
+   ],
+   "checks": [
+    {
+     "rule": "conflict",
+     "note": "A 2023 News Herald estimate of more than $14 million and a $59.8 million total project cost in the city's own schedule. The two may not count the same things; the city's breakdown would settle it."
+    },
+    {
+     "rule": "mixed",
+     "note": "The schedule lists CRA money alongside state and federal grants, so the CRA's own share is smaller than the totals shown."
+    }
+   ],
+   "gaps": [
+    {
+     "q": "The current cost estimate for Front Beach Road Segment 4.1, broken down by design, right-of-way, utilities and construction, and by funding source",
+     "gov": "pcb"
+    }
+   ]
+  },
+  {
+   "id": "pcb-fbr-seg42",
+   "name": "Front Beach Road Segment 4.2 (Hills Rd to Lantana St)",
+   "gov": "pcb",
+   "agency": "Panama City Beach CRA (Front Beach Road CRA)",
+   "where": "Front Beach Rd, east of Hills Rd to Hutchison Blvd, with a roundabout at Lantana/Hutchison",
+   "what": "Design, right-of-way and utility relocation.",
+   "funding": "CRA with state and federal grants",
+   "status": "design",
+   "events": [
+    {
+     "d": "2020-05-14",
+     "k": "award",
+     "a": 1551128.46,
+     "t": "Dewberry design task order (Res. 20-108); construction inspection not included",
+     "payee": "Dewberry Engineers, Inc.",
+     "u": "https://pcbfl.gov/home/showpublisheddocument/16673/637266931768470000"
+    },
+    {
+     "d": "2021-05-13",
+     "k": "award",
+     "a": 222940,
+     "t": "Dewberry utility relocation design (Res. 21-157)",
+     "payee": "Dewberry Engineers, Inc.",
+     "u": "https://pcbfl.gov/home/showpublisheddocument/18097/637574690484470000"
+    },
+    {
+     "d": "2023",
+     "k": "award",
+     "a": 47250,
+     "t": "Appraisals of seven right-of-way parcels (Res. 23-145)",
+     "payee": "Chandler and Associates",
+     "u": "https://news.yahoo.com/panama-city-beach-city-council-090510078.html",
+     "news": true
+    },
+    {
+     "d": "2024-09-30",
+     "k": "spent",
+     "a": 2943496,
+     "t": "Spent to date, against a total project cost of $60,333,496",
+     "u": "https://www.pcbfl.gov/home/showpublisheddocument/27668/638887882812000000",
+     "estimate": 60333496
+    }
+   ],
+   "checks": [
+    {
+     "rule": "mixed",
+     "note": "CRA money is listed alongside state and federal grants, so the CRA share is smaller than the totals shown."
+    }
+   ]
+  },
+  {
+   "id": "pcb-fbr-seg43",
+   "name": "Front Beach Road Segment 4.3 (Hutchison Blvd to Richard Jackson Blvd)",
+   "gov": "pcb",
+   "agency": "Panama City Beach CRA (Front Beach Road CRA)",
+   "where": "Front Beach Rd, Hutchison Blvd to Richard Jackson Blvd",
+   "what": "Design and right-of-way; construction bids expected late FY2027.",
+   "funding": "CRA with state and federal grants",
+   "status": "design",
+   "events": [
+    {
+     "d": "2021-07",
+     "k": "award",
+     "a": 1608711.02,
+     "t": "Volkert design task order (Res. 21-187), ranked first ahead of Mott MacDonald and Kimley-Horn",
+     "payee": "Volkert, Inc.",
+     "u": "https://pcbfl.gov/home/showpublisheddocument/18302/637617846736370000"
+    },
+    {
+     "d": "2023",
+     "k": "award",
+     "a": 246180,
+     "t": "Design and bidding services (Res. 23-146)",
+     "payee": "McKim & Creed",
+     "u": "https://news.yahoo.com/panama-city-beach-city-council-090510078.html",
+     "news": true
+    },
+    {
+     "d": "2024-09-30",
+     "k": "spent",
+     "a": 1741811,
+     "t": "Spent to date, against a total project cost of $64,569,811",
+     "u": "https://www.pcbfl.gov/home/showpublisheddocument/27668/638887882812000000",
+     "estimate": 64569811
+    },
+    {
+     "d": "FY2027",
+     "k": "milestone",
+     "t": "Construction bids expected (late FY2027)",
+     "u": "https://www.pcbfl.gov/home/showpublisheddocument/27668/638887882812000000"
+    }
+   ],
+   "checks": [
+    {
+     "rule": "mixed",
+     "note": "CRA money is listed alongside state and federal grants, so the CRA share is smaller than the totals shown."
+    }
+   ]
+  },
+  {
+   "id": "pcb-south-thomas",
+   "name": "South Thomas Drive and Front Beach Road Segment 1",
+   "gov": "pcb",
+   "agency": "Panama City Beach CRA (Front Beach Road CRA)",
+   "where": "South Thomas Dr and the east end of Front Beach Rd",
+   "what": "Reconstruction of the east end of the corridor.",
+   "funding": "CRA tax increment and bonds",
+   "status": "closed",
+   "events": [
+    {
+     "d": "2009-09",
+     "k": "award",
+     "a": 11313787,
+     "t": "Construction contract; 15 change orders totaling $197,835 had been added when the city presented it (contractor not named in the source)",
+     "u": "https://pcbfl.gov/home/showpublisheddocument/262/635288586904330000"
+    },
+    {
+     "d": "2011-11",
+     "k": "milestone",
+     "t": "Construction period ends (Sep 2009 to Nov 2011)",
+     "u": "https://pcbfl.gov/home/showpublisheddocument/262/635288586904330000"
+    },
+    {
+     "d": "2013",
+     "k": "complete",
+     "a": 15363787,
+     "t": "Completed. Total project cost in the Capital Improvements Schedule",
+     "u": "https://www.pcbfl.gov/home/showpublisheddocument/27668/638887882812000000"
+    },
+    {
+     "d": "2025",
+     "k": "payment",
+     "a": 1442752.96,
+     "t": "Streetlights on Segment 1 and South Thomas Dr replaced with a state CDBG grant (not CRA money)",
+     "u": "https://www.pcbfl.gov/Archive.aspx?ADID=184",
+     "side": true
+    }
+   ],
+   "baseline": {
+    "a": 11313787,
+    "t": "construction contract"
+   },
+   "final": {
+    "a": 15363787,
+    "t": "total project cost"
+   },
+   "checks": [
+    {
+     "rule": "payee",
+     "note": "The $11.3 million construction contractor is not named in the city's presentation."
+    }
+   ],
+   "gaps": [
+    {
+     "q": "The construction contract, contractor name and full change-order list for the South Thomas Drive / Front Beach Road Segment 1 reconstruction (2009-2013)",
+     "gov": "pcb"
+    }
+   ]
+  },
+  {
+   "id": "pcb-alf-coleman",
+   "name": "Alf Coleman Road Phase I",
+   "gov": "pcb",
+   "agency": "Panama City Beach (managed by the CRA)",
+   "where": "Alf Coleman Rd, PCB Parkway to Hutchison Blvd",
+   "what": "Road reconstruction.",
+   "funding": "Grants (FDEM HMGP, FDOT LAP); the city did not expect to use CRA money",
+   "status": "construction",
+   "events": [
+    {
+     "d": "2021-03-25",
+     "k": "award",
+     "a": 198354.82,
+     "t": "Inspection (CEI) for sidewalk, lighting and resurfacing (Res. 21-120), not to exceed",
+     "payee": "Atkins North America, Inc.",
+     "u": "https://pcbfl.gov/home/showpublisheddocument/17736/637517765381570000",
+     "side": true
+    },
+    {
+     "d": "2023-04-13",
+     "k": "award",
+     "a": 5307600.65,
+     "t": "Construction contract awarded (Res. 23-156); CWR had bid about $6.7 million",
+     "payee": "Gulf Coast Utility Contractors, LLC",
+     "u": "https://pcbfl.gov/home/showpublisheddocument/24401/638472373123930000"
+    },
+    {
+     "d": "2024-09-30",
+     "k": "spent",
+     "a": 5020072,
+     "t": "Spent to date, against a total project cost of $6,277,759 in the Capital Improvements Schedule",
+     "u": "https://pcbfl.gov/home/showpublisheddocument/24401/638472373123930000",
+     "estimate": 6277759
+    }
+   ],
+   "baseline": {
+    "a": 5307600.65,
+    "t": "construction contract at award"
+   },
+   "final": {
+    "a": 6277759,
+    "t": "current total project cost",
+    "open": true
+   },
+   "checks": [
+    {
+     "rule": "mixed",
+     "note": "Reported as grant-funded; the total project cost may include design and inspection as well as construction."
+    }
+   ]
+  },
+  {
+   "id": "pc-millville-park",
+   "name": "Millville Waterfront Park (Watson Bayou)",
+   "gov": "pc",
+   "agency": "Panama City CRA, Millville district",
+   "where": "Watson Bayou waterfront, Millville",
+   "what": "4.2-acre park site bought in 2008; Phase II adds a playground, amphitheater, trees and restrooms.",
+   "funding": "CRA tax increment (land repaid through rent to the City)",
+   "status": "construction",
+   "events": [
+    {
+     "d": "2008-09",
+     "k": "payment",
+     "a": 2500000,
+     "approx": true,
+     "t": "City buys the park site for about $2.5 million with a bank loan and leases it to the CRA, which repays it through rent",
+     "payee": "City of Panama City",
+     "u": "https://www.panamacity.gov/DocumentCenter/View/7666",
+     "side": true
+    },
+    {
+     "d": "FY2022",
+     "k": "milestone",
+     "t": "Final loan payment on the land",
+     "u": "https://www.panamacity.gov/DocumentCenter/View/7666"
+    },
+    {
+     "d": "2024-05-28",
+     "k": "award",
+     "t": "Phase II bid awarded to Inland Construction & Engineering (amount not in our records)",
+     "payee": "Inland Construction & Engineering",
+     "u": "https://panamacity.gov/785/Current-Projects"
+    },
+    {
+     "d": "FY2024",
+     "k": "budget",
+     "a": 1500000,
+     "t": "Phase II budgeted from the FY2024-FY2026 Millville district budgets",
+     "u": "https://panamacity.gov/785/Current-Projects"
+    }
+   ],
+   "checks": [
+    {
+     "rule": "budget",
+     "note": "The $1.5 million is a three-year budget, not confirmed spending, and the bid amount isn't stated."
+    }
+   ],
+   "gaps": [
+    {
+     "q": "The Millville Waterfront Park Phase II construction contract with Inland Construction & Engineering (bid awarded May 28, 2024): contract amount, change orders and payments to date",
+     "gov": "pc"
+    }
+   ]
+  },
+  {
+   "id": "pc-bayview-boardwalk",
+   "name": "Bayview Boardwalk (St. Andrews)",
+   "gov": "pc",
+   "agency": "Panama City CRA, St. Andrews district",
+   "where": "Bayview Ave boardwalk, St. Andrews",
+   "what": "Boardwalk rebuild; a $2.4 million project with a Rebuild Florida grant paying half.",
+   "funding": "CRA share plus a Rebuild Florida Hometown Revitalization grant",
+   "status": "budgeted",
+   "events": [
+    {
+     "d": "FY2014",
+     "k": "payment",
+     "a": 68000,
+     "t": "Earlier boardwalk improvement and signage",
+     "u": "https://panamacity.gov/DocumentCenter/View/1206/FY2014-Annual-Report-PDF",
+     "side": true
+    },
+    {
+     "d": "FY2024",
+     "k": "budget",
+     "a": 1200000,
+     "t": "Current Projects page: CRA share $1.2 million of a $2.4 million project, FY2024-FY2026",
+     "u": "https://panamacity.gov/785/Current-Projects"
+    },
+    {
+     "d": "FY2025",
+     "k": "budget",
+     "a": 800000,
+     "t": "FY2025-26 work plan shows $800,000 continuing",
+     "u": "https://panamacity.gov/785/Current-Projects"
+    },
+    {
+     "d": "2025",
+     "k": "budget",
+     "a": 300000,
+     "t": "2025 news coverage of FY2026 proposals shows $300,000",
+     "news": true,
+     "u": "https://panamacity.gov/785/Current-Projects",
+     "via": true
+    }
+   ],
+   "checks": [
+    {
+     "rule": "conflict",
+     "note": "Three figures for the CRA's share in three documents: $1.2 million, $800,000 and $300,000. They may be different slices of the same commitment; the city's breakdown would settle it."
+    },
+    {
+     "rule": "payee",
+     "note": "No contractor named yet."
+    }
+   ],
+   "gaps": [
+    {
+     "q": "The Bayview Boardwalk (St. Andrews) project budget by fiscal year and funding source (CRA share and Rebuild Florida grant), the construction contract and payments to date",
+     "gov": "pc"
+    }
+   ]
+  },
+  {
+   "id": "pc-breezeway",
+   "name": "Harrison Avenue breezeway (447 Harrison Ave)",
+   "gov": "pc",
+   "agency": "Panama City CRA, Downtown district",
+   "where": "400 block of Harrison Ave",
+   "what": "A walk-through between Harrison Ave and the parking behind it, on land the City got in a swap.",
+   "funding": "CRA tax increment",
+   "status": "phase-done",
+   "events": [
+    {
+     "d": "before 2023",
+     "s": "2022-12-31",
+     "k": "milestone",
+     "t": "City swaps a Mulberry St parcel (appraised $534,000) for 447 Harrison Ave (appraised $500,000); the company pays the City the $34,000 difference",
+     "payee": "Beach Drive PC Holdings LLC",
+     "u": "https://news.yahoo.com/city-approves-land-swap-harrison-110017462.html?fr=sycsrp_catchall",
+     "news": true
+    },
+    {
+     "d": "FY2024",
+     "k": "spent",
+     "a": 81000,
+     "t": "2024 annual report lists an $81,000 renovation",
+     "u": "https://panamacity.gov/813/Completed-Projects",
+     "via": true
+    },
+    {
+     "d": "FY2025",
+     "k": "budget",
+     "a": 700000,
+     "t": "FY2025 work plan budgets $700,000",
+     "u": "https://panamacity.gov/813/Completed-Projects"
+    },
+    {
+     "d": "FY2025",
+     "k": "complete",
+     "a": 100000,
+     "t": "Phase 1 complete: CRA share $100,000 of $500,000",
+     "u": "https://panamacity.gov/813/Completed-Projects"
+    },
+    {
+     "d": "FY2026",
+     "k": "budget",
+     "a": 220000,
+     "t": "FY2026 work plan budgets $220,000; FY2026 proposals show $500,000 over three years",
+     "u": "https://panamacity.gov/813/Completed-Projects",
+     "via": true
+    }
+   ],
+   "checks": [
+    {
+     "rule": "conflict",
+     "note": "Figures of $81,000, $100,000, $220,000, $500,000 and $700,000 across five documents, with no single breakdown of what has been spent and what is planned."
+    }
+   ],
+   "gaps": [
+    {
+     "q": "All spending to date on the Harrison Avenue walk-through (breezeway) at 447 Harrison Ave, by phase and funding source, and the planned budget for later phases",
+     "gov": "pc"
+    }
+   ]
+  },
+  {
+   "id": "pc-mckenzie-restrooms",
+   "name": "McKenzie Park public restrooms",
+   "gov": "pc",
+   "agency": "Panama City CRA, Downtown district",
+   "where": "McKenzie Park, downtown",
+   "what": "New public restrooms.",
+   "funding": "CRA and the Downtown Improvement Board ($100,000)",
+   "status": "complete",
+   "events": [
+    {
+     "d": "FY2024",
+     "k": "budget",
+     "a": 265000,
+     "t": "Project total $265,000: CRA $165,000, Downtown Improvement Board $100,000",
+     "u": "https://panamacity.gov/813/Completed-Projects"
+    },
+    {
+     "d": "2025-01",
+     "k": "complete",
+     "a": 229000,
+     "t": "WMBB reports $229,000 at completion",
+     "u": "https://digital-release.mypanhandle.com/news/local-news/bay-county/panama-city/panama-city-cra-board-provides-progress-updates-on-various-projects/amp/",
+     "news": true
+    }
+   ],
+   "checks": [
+    {
+     "rule": "conflict",
+     "note": "The city's page shows $265,000 ($165,000 CRA); news coverage at completion reported $229,000. The final cost and contractor would settle it."
+    },
+    {
+     "rule": "payee",
+     "note": "Contractor not named."
+    }
+   ],
+   "gaps": [
+    {
+     "q": "The final cost, contractor and payments for the McKenzie Park public restrooms (completed January 2025), and the CRA and Downtown Improvement Board shares",
+     "gov": "pc"
+    }
+   ]
+  },
+  {
+   "id": "pc-glenwood-land",
+   "name": "Glenwood land: 2017 purchase to Glenwood Town Center sale",
+   "gov": "pc",
+   "agency": "Panama City CRA, Downtown North district",
+   "where": "Downtown North (Glenwood), MLK Blvd and E 15th St",
+   "what": "Land the City and CRA bought, then offered to a developer for a roughly $30 million town center.",
+   "funding": "CRA tax increment",
+   "status": "sale",
+   "events": [
+    {
+     "d": "2017-04",
+     "k": "payment",
+     "t": "City/CRA closes on 37 lots with 35 homes on 6.5 acres. Price not in the annual report",
+     "u": "https://panamacity.gov/DocumentCenter/View/3827/FY2017-Annual-Report-PDF"
+    },
+    {
+     "d": "FY2018",
+     "k": "milestone",
+     "t": "Downtown North operating expenses jump to $1.7 million, which may be related",
+     "u": "https://panamacity.gov/DocumentCenter/View/3827/FY2017-Annual-Report-PDF",
+     "via": true
+    },
+    {
+     "d": "FY2024",
+     "k": "budget",
+     "a": 460000,
+     "t": "Glenwood Entrance Redevelopment, including land at 15th St & MLK Blvd, budgeted FY2024-FY2026",
+     "u": "https://panamacity.gov/785/Current-Projects"
+    },
+    {
+     "d": "2025-02-27",
+     "k": "sale",
+     "a": 667099.62,
+     "t": "Sankofa Group, LLC offers to buy 15 CRA parcels for the Glenwood Town Center (money to the CRA)",
+     "payee": "Sankofa Group, LLC",
+     "u": "https://panamacity.gov/DocumentCenter/View/10082"
+    },
+    {
+     "d": "2025-07",
+     "k": "approval",
+     "t": "Agreement approved; the CRA can buy the land back if deadlines are missed. Final sale price not confirmed",
+     "u": "https://panamacity.gov/DocumentCenter/View/10082"
+    }
+   ],
+   "checks": [
+    {
+     "rule": "payee",
+     "note": "What the City and CRA paid for the land in 2017, and to whom, is not in any record we have, so the public's cost can't be compared with the sale price."
+    }
+   ],
+   "gaps": [
+    {
+     "q": "The deed(s) and closing statement for the City/CRA purchase of 37 lots with 35 homes on 6.5 acres in Downtown North (closed April 2017), including the price and seller",
+     "gov": "pc"
+    },
+    {
+     "q": "The final purchase and development agreement with Sankofa Group, LLC for the Glenwood Town Center (approved July 2025), including the sale price, deadlines and buy-back terms",
+     "gov": "pc"
+    }
+   ]
+  },
+  {
+   "id": "pc-road-resurfacing",
+   "name": "CRA road resurfacing program (FY2027 onward)",
+   "gov": "pc",
+   "agency": "Panama City CRA (Millville, Downtown North, St. Andrews)",
+   "where": "Streets in Millville, Downtown North and St. Andrews",
+   "what": "Millville $450,000 a year for 5 years, Downtown North $250,000 a year for 5 years, St. Andrews $250,000 a year for 4 years.",
+   "funding": "CRA tax increment",
+   "status": "committed",
+   "events": [
+    {
+     "d": "2026-03",
+     "k": "approval",
+     "a": 4500000,
+     "t": "CRA board approves the multi-year commitment, 3-2",
+     "u": "https://www.yahoo.com/news/articles/panama-city-cra-board-finalizes-040831032.html",
+     "news": true
+    },
+    {
+     "d": "FY2027",
+     "k": "milestone",
+     "t": "First year of spending (starts Oct 1, 2026)",
+     "u": "https://www.yahoo.com/news/articles/panama-city-cra-board-finalizes-040831032.html"
+    }
+   ],
+   "checks": [
+    {
+     "rule": "payee",
+     "note": "Paid through the City; the outside contractors doing the work aren't named yet. Worth tracking street by street as it's spent."
+    }
+   ],
+   "gaps": [
+    {
+     "q": "The list of streets to be resurfaced with CRA money starting FY2027 in Millville, Downtown North and St. Andrews, with the estimated cost of each and the contract(s) used",
+     "gov": "pc"
+    }
+   ]
+  },
+  {
+   "id": "pc-401-e-6th",
+   "name": "401 E 6th St (Acorns to Oaks Academy site): two incentives",
+   "gov": "pc",
+   "agency": "Panama City CRA, Downtown district",
+   "where": "401 E 6th St",
+   "what": "A commercial improvement grant and a multi-year tax increment rebate for the same address.",
+   "funding": "CRA tax increment",
+   "status": "committed",
+   "events": [
+    {
+     "d": "FY2024",
+     "k": "payment",
+     "a": 50000,
+     "t": "Commercial improvement grant: paint, mural, parking, playground, turf ($103,242 project)",
+     "payee": "Acorns to Oaks Academy",
+     "u": "https://www.panamacity.gov/DocumentCenter/View/9865"
+    },
+    {
+     "d": "2024-12",
+     "k": "approval",
+     "a": 107798.34,
+     "t": "Tax increment rebate award, paid yearly over up to 15 years once the tax bill is paid (owner not named)",
+     "u": "https://www.panamacity.gov/DocumentCenter/View/10977"
+    }
+   ],
+   "checks": [
+    {
+     "rule": "stack",
+     "note": "Two CRA incentives for one address. Both programs may allow this; the point is that the total public support ($157,798 at most) is easy to miss when each is reported on its own."
+    }
+   ],
+   "gaps": [
+    {
+     "q": "The TIF rebate agreement for 401 E 6th St (approved December 2024), including the property owner, the yearly cap, the term and any payments made",
+     "gov": "pc"
+    }
+   ]
+  },
+  {
+   "id": "lh-tennessee-sidewalk",
+   "name": "Tennessee Avenue sidewalk (W 5th St to W 14th St)",
+   "gov": "lh",
+   "agency": "Lynn Haven CRA (run by the CRA Director)",
+   "where": "East side of Tennessee Ave, W 5th St to W 14th St",
+   "what": "A 5-foot ADA sidewalk (IFB 25.26-02).",
+   "funding": "Mostly an FDOT Transportation Alternatives grant; CRA share not stated",
+   "status": "contract",
+   "events": [
+    {
+     "d": "FY2024",
+     "k": "estimate",
+     "a": 1200000,
+     "approx": true,
+     "t": "FY2024 annual report puts the project at about $1.2 million, FDOT-funded",
+     "u": "https://www.cityoflynnhaven.com/DocumentCenter/View/4018"
+    },
+    {
+     "d": "FY2026",
+     "k": "budget",
+     "a": 90304,
+     "t": "CRA fund (Fund 701) budgets a $90,304 FDOT grant for the project",
+     "u": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_01132026-1110"
+    },
+    {
+     "d": "2026-01-13",
+     "k": "award",
+     "a": 623137.69,
+     "t": "Construction contract awarded",
+     "payee": "BCL Civil Contractors",
+     "u": "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_01132026-1110"
+    }
+   ],
+   "checks": [
+    {
+     "rule": "mixed",
+     "note": "The resolution doesn't say how much of the $623,138 comes from CRA tax increment and how much from the FDOT grant."
+    }
+   ],
+   "gaps": [
+    {
+     "q": "The funding split for the Tennessee Avenue sidewalk contract with BCL Civil Contractors (awarded January 13, 2026): FDOT grant amount, CRA tax increment amount, and payments to date",
+     "gov": "lh"
+    }
+   ]
+  },
+  {
+   "id": "lh-sharon-sheffield",
+   "name": "Sharon Sheffield Park, Master Plan Phase II",
+   "gov": "lh",
+   "agency": "Lynn Haven CRA",
+   "where": "Sharon Sheffield Park",
+   "what": "Courtyard and stage; the amphitheater named for former Commissioner Roger Schad opened in spring 2018.",
+   "funding": "CRA, with a $100,000 state FRDAP grant",
+   "status": "unknown",
+   "events": [
+    {
+     "d": "2016",
+     "k": "estimate",
+     "a": 1000000,
+     "approx": true,
+     "t": "WJHG: the CRA planned to fund the roughly $1 million renovation, with a $100,000 FRDAP grant saving it that amount",
+     "news": true,
+     "u": "https://www.cityoflynnhaven.com/Archive.aspx?ADID=123",
+     "via": true
+    },
+    {
+     "d": "2017",
+     "k": "milestone",
+     "t": "WJHG: work waiting on a state grant",
+     "news": true,
+     "u": "https://www.cityoflynnhaven.com/Archive.aspx?ADID=123",
+     "via": true
+    },
+    {
+     "d": "2018",
+     "k": "milestone",
+     "t": "Amphitheater opens (spring 2018)",
+     "u": "https://www.cityoflynnhaven.com/Archive.aspx?ADID=123",
+     "via": true
+    },
+    {
+     "d": "FY2018",
+     "k": "budget",
+     "a": 380000,
+     "t": "Phase II budgeted as CRA capital outlay (carry-over)",
+     "u": "https://www.cityoflynnhaven.com/Archive.aspx?ADID=123"
+    }
+   ],
+   "checks": [
+    {
+     "rule": "budget",
+     "note": "Budgeted $380,000 in FY2018; we found no record of what was actually spent."
+    }
+   ],
+   "gaps": [
+    {
+     "q": "Actual spending on Sharon Sheffield Park Master Plan Phase I and Phase II (2016-2019), by contractor and funding source (CRA and FRDAP grant)",
+     "gov": "lh"
+    }
+   ]
+  },
+  {
+   "id": "cw-capital-fy2025",
+   "name": "Callaway CRA capital projects, FY2025 (Berthe and Rogers Pond spillways)",
+   "gov": "cw",
+   "agency": "Callaway CRA",
+   "where": "Berthe Avenue spillway and Rogers Pond spillway",
+   "what": "Stormwater spillway replacements.",
+   "funding": "CRA tax increment; a stormwater grant was pending",
+   "status": "delayed",
+   "events": [
+    {
+     "d": "FY2024",
+     "k": "spent",
+     "a": 221428,
+     "t": "FY2024 capital spending $221,428 against an $889,406 budget",
+     "u": "https://flauditor.gov/pages/specialdistricts_efile%20rpts/2024%20callaway%20community%20redevelopment%20agency.pdf",
+     "budget": 889406
+    },
+    {
+     "d": "FY2025",
+     "k": "budget",
+     "a": 3144257,
+     "t": "FY2025 capital outlay budget",
+     "u": "https://flauditor.gov/pages/specialdistricts_efile%20rpts/2025%20callaway%20community%20redevelopment%20agency.pdf"
+    },
+    {
+     "d": "FY2025",
+     "k": "spent",
+     "a": 315715,
+     "t": "FY2025 actual capital spending: $315,715, about $2.86 million under budget, mainly because the Berthe spillway was delayed",
+     "u": "https://flauditor.gov/pages/specialdistricts_efile%20rpts/2025%20callaway%20community%20redevelopment%20agency.pdf",
+     "budget": 3144257
+    },
+    {
+     "d": "FY2025",
+     "k": "payment",
+     "a": 129010,
+     "t": "Rogers Pond spillway: $129,010 spent so far",
+     "u": "https://flauditor.gov/pages/specialdistricts_efile%20rpts/2025%20callaway%20community%20redevelopment%20agency.pdf"
+    },
+    {
+     "d": "2025-10-01",
+     "k": "milestone",
+     "t": "Rogers Pond construction set to begin on or after this date",
+     "u": "https://flauditor.gov/pages/specialdistricts_efile%20rpts/2025%20callaway%20community%20redevelopment%20agency.pdf"
+    }
+   ],
+   "checks": [
+    {
+     "rule": "payee",
+     "note": "No contractor named for either spillway."
+    }
+   ],
+   "gaps": [
+    {
+     "q": "The contracts, contractors and current schedule for the Berthe Avenue and Rogers Pond spillway projects funded by the Callaway CRA, and the status of the pending stormwater grant",
+     "gov": "cw"
+    }
+   ]
+  },
+  {
+   "id": "sp-capital-fy2025",
+   "name": "Springfield CRA capital budget, FY2025-FY2027 (parks and sidewalks)",
+   "gov": "sp",
+   "agency": "Springfield CRA",
+   "where": "Springfield Gardens Walking Park, Nature Park, Carrie Bell Shaw Park, Buddy McLemore Park, 2nd St",
+   "what": "Park improvements, playgrounds, restrooms and sidewalks.",
+   "funding": "CRA tax increment",
+   "status": "budgeted",
+   "events": [
+    {
+     "d": "FY2025",
+     "k": "spent",
+     "a": 0,
+     "t": "FY2025 capital outlay: $0 spent against a $1,130,434 final budget. Total CRA spending that year was $60,017, the first on record after none in FY2023-2024",
+     "u": "https://www.springfieldfl.net/media/10746",
+     "budget": 1130434
+    },
+    {
+     "d": "FY2026",
+     "k": "budget",
+     "a": 921693.83,
+     "t": "FY2026 amended budget, five park and sidewalk lines added together: Nature Park, Carrie Bell Shaw Park, Springfield Gardens Walking Park (improvements and playground) and the 2nd St sidewalk",
+     "u": "https://www.springfieldfl.net/media/10801"
+    },
+    {
+     "d": "FY2027",
+     "k": "budget",
+     "a": 786347.55,
+     "t": "FY2027 budget, two lines added together: $606,348 for Springfield Gardens Walking Park and $180,000 for Buddy McLemore Park playground equipment (other FY2027 lines, such as $235,000 for Nature Park, not included)",
+     "u": "https://www.springfieldfl.net/media/10806"
+    }
+   ],
+   "checks": [
+    {
+     "rule": "payee",
+     "note": "No contractors named for any of the budgeted park projects."
+    }
+   ],
+   "gaps": [
+    {
+     "q": "Actual Springfield CRA capital spending in FY2026 by project (Nature Park, Carrie Bell Shaw Park, Springfield Gardens Walking Park, 2nd Street sidewalk), with contractors and contracts",
+     "gov": "sp"
+    }
+   ]
+  }
+ ]
+}
