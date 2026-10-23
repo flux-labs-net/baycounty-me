@@ -1,0 +1,22 @@
+name: iOS UI tests
+# Runs the app in the iPhone simulator and taps through it (BayCountyMeUITests).
+on:
+  workflow_dispatch:
+  pull_request:
+    paths: ["ios/BayCountyMe/**", "ios/BayCountyMeUITests/**", "ios/project.yml", ".github/workflows/ios-ui-tests.yml"]
+jobs:
+  ui-tests:
+    runs-on: macos-15
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - run: brew install xcodegen
+      - name: Run the UI tests
+        working-directory: ios
+        run: |
+          xcodegen
+          DEV=$(xcrun simctl list devices available | grep -E "iPhone 1[5-9] Pro \(" | head -1 | grep -oE "[0-9A-F-]{36}")
+          set -o pipefail
+          xcodebuild -project BayCountyMe.xcodeproj -scheme BayCountyMe -destination "id=$DEV" \
+            -only-testing:BayCountyMeUITests CODE_SIGNING_ALLOWED=NO test | tee test.log | grep -E "error:|Test Case|passed|failed|TEST (SUCCEEDED|FAILED)" || true
+          grep -q "TEST SUCCEEDED" test.log
