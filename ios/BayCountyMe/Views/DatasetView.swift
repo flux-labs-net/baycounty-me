@@ -276,10 +276,7 @@ struct RecordDetailView: View {
         let people = datasetID == "votes" ? [] : RecordLinks.personIDs(row)
         let voteIDs = Set(RecordLinks.voteIDs(row))
         let votes = datasetID == "votes" ? [] : (store.rows["votes"] ?? []).filter { v in v.string("vote_id").map(voteIDs.contains) ?? false }
-        let roll: [(name: String, pid: String?, vote: String?)] = datasetID == "votes" ? (row["members"]?.arrayValue ?? []).compactMap { m in
-            guard case .object(let o) = m, let n = o["name"]?.stringValue else { return nil }
-            return (n, o["person_id"]?.stringValue, o["vote"]?.stringValue)
-        } : []
+        let roll = datasetID == "votes" ? RollCall.members(row) : []
         let gov = row.string("gov_id").flatMap { store.government($0) }
         if !vendors.isEmpty || !people.isEmpty || !votes.isEmpty || !roll.isEmpty || gov != nil {
             Section("Linked records") {
@@ -312,4 +309,18 @@ struct RecordDetailView: View {
         }
     }
 
+}
+
+/// One member's vote on a recorded vote.
+struct RollCall: Hashable {
+    let name: String
+    let pid: String?
+    let vote: String?
+
+    static func members(_ row: Row) -> [RollCall] {
+        (row["members"]?.arrayValue ?? []).compactMap { m -> RollCall? in
+            guard case .object(let o) = m, let n = o["name"]?.stringValue else { return nil }
+            return RollCall(name: n, pid: o["person_id"]?.stringValue, vote: o["vote"]?.stringValue)
+        }
+    }
 }

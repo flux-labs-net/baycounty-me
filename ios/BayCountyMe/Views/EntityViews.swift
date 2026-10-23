@@ -301,24 +301,41 @@ struct DonorContractsView: View {
     @Environment(AppStore.self) private var store
     @State private var sameOnly = false
 
-    var body: some View {
+    private struct Group: Identifiable {
+        let id: String
+        let name: String
+        let vendorID: String?
+        let matches: [DonorContracts.Match]
+        let total: Double
+    }
+
+    private var groups: [Group] {
         let all = store.donorContracts?.matches ?? []
         let list = sameOnly ? all.filter { $0.same_government_as_office == true } : all
-        let byVendor = Dictionary(grouping: list) { $0.vendor_id ?? $0.contributor ?? "" }
-            .sorted { $0.value.compactMap(\.contribution_amount).reduce(0, +) > $1.value.compactMap(\.contribution_amount).reduce(0, +) }
+        let grouped = Dictionary(grouping: list) { (m: DonorContracts.Match) -> String in m.vendor_id ?? m.contributor ?? "" }
+        var out: [Group] = []
+        for (key, ms) in grouped {
+            let total: Double = ms.compactMap { $0.contribution_amount }.reduce(0, +)
+            let name: String = ms.first?.vendor ?? ms.first?.contributor ?? key
+            out.append(Group(id: key, name: name, vendorID: ms.first?.vendor_id, matches: ms, total: total))
+        }
+        return out.sorted { $0.total > $1.total }
+    }
+
+    var body: some View {
         List {
             Section {
                 Text("Businesses that gave to a local campaign and also hold a contract, grant or payment from a Bay County government. Individual donors are never named. A gift near a vote does not show why anyone voted the way they did.")
                     .font(.footnote).foregroundStyle(.secondary)
                 Toggle("Only where the contract is with the same government", isOn: $sameOnly)
             }
-            ForEach(byVendor, id: \.key) { key, ms in
+            ForEach(groups) { g in
                 Section {
-                    ForEach(ms) { DonorMatchRow(match: $0) }
+                    ForEach(g.matches) { DonorMatchRow(match: $0) }
                 } header: {
-                    if let vid = ms.first?.vendor_id {
-                        NavigationLink(value: Route.vendor(vid)) { Text(ms.first?.vendor ?? key) }
-                    } else { Text(ms.first?.contributor ?? key) }
+                    if let vid = g.vendorID {
+                        NavigationLink(value: Route.vendor(vid)) { Text(g.name) }
+                    } else { Text(g.name) }
                 }
             }
             if let m = store.donorContracts?.method { Section("Method") { Text(m).font(.footnote) } }
