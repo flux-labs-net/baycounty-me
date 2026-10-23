@@ -5,6 +5,9 @@
   "functions": {
     "api/mcp.js": {
       "includeFiles": "data/campaign/vendor_matches.json"
+    },
+    "api/finance.js": {
+      "maxDuration": 60
     }
   },
   "crons": [
