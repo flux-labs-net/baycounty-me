@@ -69,7 +69,7 @@ struct AccountabilityView: View {
                     if !ruleCounts.isEmpty {
                         CompareBars(title: "Questions by rule", caption: "Projects flagged by each rule. Tap one to see them.",
                                     items: ruleCounts, highlight: rule, format: { "\(Int($0))" },
-                                    onTap: { id in rule = rule == id ? nil : id })
+                                    onTap: { id in rule = rule == id ? nil : id }, labelsAbove: true)
                     }
                 }
                 Picker("Stage", selection: $phase) {
@@ -306,7 +306,7 @@ struct AccountabilityProjectView: View {
         return VStack(alignment: .leading, spacing: 10) {
             if let a = p.base?.a { costLine("First", a, p.base?.t, fraction: a / maxV, color: Brand.blue) }
             if let a = p.latest?.a { costLine("Latest", a, p.latest?.t, fraction: a / maxV, color: Brand.navy) }
-            if let g = p.growth {
+            if let g = p.growth ?? (first > 0 && latest > 0 ? (latest - first) / first * 100 : nil) {
                 HStack(spacing: 6) {
                     GrowthPill(growth: g)
                     Text(g > 10 ? "More than the 10% that triggers a question" : "Within 10% of the first figure")

@@ -36,6 +36,8 @@ struct CompareBars: View {
     var highlight: String? = nil
     let format: (Double) -> String
     var onTap: ((String) -> Void)? = nil
+    /// Put each label on its own line above its bar, for long names.
+    var labelsAbove = false
 
     var body: some View {
         let maxV = items.map(\.value).max() ?? 1
@@ -44,9 +46,16 @@ struct CompareBars: View {
             if let caption { Text(caption).font(.caption).foregroundStyle(.secondary) }
             ForEach(items) { item in
                 let on = highlight == nil || highlight == item.id
-                let row = HStack(spacing: 8) {
+                let row = VStack(alignment: .leading, spacing: 3) {
+                  if labelsAbove {
                     Text(item.label).font(.caption.weight(highlight == item.id ? .bold : .regular))
-                        .foregroundStyle(.primary).lineLimit(1).minimumScaleFactor(0.8).frame(width: 122, alignment: .leading)
+                        .foregroundStyle(.primary).lineLimit(2)
+                  }
+                  HStack(spacing: 8) {
+                    if !labelsAbove {
+                        Text(item.label).font(.caption.weight(highlight == item.id ? .bold : .regular))
+                            .foregroundStyle(.primary).lineLimit(1).minimumScaleFactor(0.8).frame(width: 122, alignment: .leading)
+                    }
                     GeometryReader { g in
                         Capsule().fill(on ? Brand.navy : Brand.navy.opacity(0.25))
                             .frame(width: max(4, g.size.width * (maxV > 0 ? item.value / maxV : 0)))
@@ -54,6 +63,7 @@ struct CompareBars: View {
                     .frame(height: 10)
                     Text(format(item.value)).font(.caption.weight(.semibold).monospacedDigit())
                         .foregroundStyle(.primary).frame(width: 58, alignment: .trailing)
+                  }
                 }
                 .accessibilityElement(children: .ignore)
                 .accessibilityLabel("\(item.label): \(format(item.value))")
