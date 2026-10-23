@@ -44,6 +44,8 @@ DATABASE_URL=postgresql://... python3 db/scripts/load.py --migrate
 
 If a site dataset gains a column, the sync fails with a message naming it: add a migration with `alter table ... add column`.
 
+**How migrations reach production:** the Sync database workflow runs `load.py --migrate` after every push to main that touches `data/`, `db/` or the downloads. It applies every `db/migrations/*.sql` file not yet in `schema_migrations`, in filename order, all in one transaction. Files must be named `NNNN_short_name.sql` with a number nobody else has used; the Checks workflow (`db/scripts/check_migrations.py`) applies the whole chain to an empty Postgres on every pull request and fails on a bad name, a reused number or a migration that errors.
+
 ## Privacy
 
 The same rules as the site apply: individual campaign donors and rank-and-file employees are never stored by name. Only elected officials and top leaders are named in salary data.
