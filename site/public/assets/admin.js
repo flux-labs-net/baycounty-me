@@ -34,7 +34,7 @@
   $('#signout').addEventListener('click', async () => { await api('logout', {method: 'POST'}).catch(() => {}); location.href = '/admin'; });
 
   // ---------- tabs ----------
-  const loaders = {keys: loadKeys, analytics: loadStats, logs: () => loadLogs(true), settings: loadSettings, ingestion: loadIngestion, agendas: loadAgendas, sent: loadSent, emails: loadEmails};
+  const loaders = {keys: loadKeys, analytics: loadStats, logs: () => loadLogs(true), settings: loadSettings, ingestion: loadIngestion, agendas: loadAgendas, sent: loadSent, emails: loadEmails, compose: () => loadCompose(), correspondence: loadCorr};
   function tab(name) {
     document.querySelectorAll('[role=tab][data-tab]').forEach(b => b.setAttribute('aria-selected', String(b.dataset.tab === name)));
     document.querySelectorAll('[role=tabpanel]').forEach(p => { p.hidden = p.id !== 'tab-' + name; });
@@ -470,6 +470,198 @@
     catch (e) { $('#em-test-msg').textContent = e.message; }
     btn.disabled = false;
   });
+
+  // ---------- write to officials ----------
+  let CT = null; const coPicked = new Set();
+  const STAFF_RE = /manager|attorney|clerk|director|superintendent|administrator|chief|finance|treasurer/i;
+  const isStaff = c => !c.elected || STAFF_RE.test(c.seat);
+  const dLabel = st => ({sent: 'Sent', delivered: 'Delivered', opened: 'Opened', clicked: 'Clicked', bounced: 'Bounced', complained: 'Marked as spam', failed: 'Failed', delivery_delayed: 'Delayed', suppressed: 'Suppressed', queued: 'Queued'}[st] || st);
+  const cleanName = n => String(n || '').replace(/\s*\(.*?\)\s*/g, ' ').trim();
+  async function loadCompose(force) {
+    if (!CT || force) {
+      try { CT = await api('corr_contacts'); }
+      catch (e) { $('#co-list').innerHTML = `<p class="empty">${esc(e.message)}</p>`; return; }
+      const govs = [...new Set(CT.contacts.map(c => c.government))];
+      const cur = $('#co-gov').value;
+      $('#co-gov').innerHTML = '<option value="">All governments</option>' + govs.map(g => `<option>${esc(g)}</option>`).join('');
+      $('#co-gov').value = cur;
+    }
+    renderCompose();
+  }
+  function shownContacts() {
+    const g = $('#co-gov').value, k = $('#co-kind').value;
+    return CT.contacts.filter(c => (!g || c.government === g) && (!k || (k === 'staff') === isStaff(c)));
+  }
+  function renderCompose() {
+    const rows = shownContacts(), byGov = new Map();
+    rows.forEach(c => (byGov.get(c.government) || byGov.set(c.government, []).get(c.government)).push(c));
+    $('#co-list').innerHTML = [...byGov].map(([g, cs]) => {
+      const sendable = cs.filter(c => c.email && c.active);
+      const allOn = sendable.length && sendable.every(c => coPicked.has(c.id));
+      const shared = (CT.shared || []).find(s => s.government === g);
+      return `<div class="co-gov"><span class="grow">${esc(g)}</span>${sendable.length ? `<button class="linkish" type="button" data-allgov="${esc(g)}">${allOn ? 'Clear' : 'Select all'}</button>` : ''}</div>` +
+        (shared && (shared.shared_email || shared.contact_form) ? `<div class="co-p"><span></span><span class="sub" style="grid-column:2">Shared: ${shared.shared_email ? esc(shared.shared_email) : ''}${shared.contact_form ? ` <a href="${esc(shared.contact_form)}" target="_blank" rel="noopener">contact form</a>` : ''}</span><span></span></div>` : '') +
+        cs.map(c => {
+          const ok = c.email && c.active;
+          return `<label class="co-p${ok ? '' : ' off'}"><input type="checkbox" data-pick="${c.id}"${coPicked.has(c.id) ? ' checked' : ''}${ok ? '' : ' disabled'}>
+            <span class="nm">${esc(cleanName(c.name) || '(vacant)')} <span class="muted" style="font-weight:400">· ${esc(c.seat)}</span></span>
+            <button class="linkish" type="button" data-edit="${c.id}">Edit</button>
+            <span class="sub">${c.email ? esc(c.email) : 'No address on file'}${c.active ? '' : ' · turned off'}${c.source_url ? ` · <a href="${esc(c.source_url)}" target="_blank" rel="noopener">source</a>` : ''}</span></label>`;
+        }).join('');
+    }).join('') || '<p class="empty">No officials match.</p>';
+    const sendableShown = rows.filter(c => c.email && c.active);
+    $('#co-all').checked = sendableShown.length > 0 && sendableShown.every(c => coPicked.has(c.id));
+    const noAddr = CT.contacts.filter(c => !c.email).length;
+    $('#co-foot').textContent = `${fmt(CT.contacts.length - noAddr)} of ${fmt(CT.contacts.length)} seats have an address. Use Edit to add or correct one.`;
+    updatePicked();
+  }
+  function updatePicked() {
+    const ppl = CT.contacts.filter(c => coPicked.has(c.id));
+    $('#co-count').textContent = `${ppl.length} selected`;
+    $('#co-to').innerHTML = ppl.length ? ppl.map(c => `<span class="co-chip">${esc(cleanName(c.name))} · ${esc(c.seat)}<button class="linkish" type="button" data-unpick="${c.id}" aria-label="Remove">×</button></span>`).join('') : 'Pick officials on the left.';
+    $('#co-send').disabled = !ppl.length;
+    $('#co-send').textContent = ppl.length ? `Send to ${ppl.length} official${ppl.length === 1 ? '' : 's'}` : 'Send';
+  }
+  $('#co-list').addEventListener('change', e => {
+    const id = Number(e.target.dataset.pick); if (!id) return;
+    e.target.checked ? coPicked.add(id) : coPicked.delete(id); renderCompose();
+  });
+  $('#co-list').addEventListener('click', e => {
+    const g = e.target.closest('[data-allgov]');
+    if (g) {
+      e.preventDefault();
+      const cs = shownContacts().filter(c => c.government === g.dataset.allgov && c.email && c.active);
+      const allOn = cs.every(c => coPicked.has(c.id));
+      cs.forEach(c => allOn ? coPicked.delete(c.id) : coPicked.add(c.id)); renderCompose(); return;
+    }
+    const ed = e.target.closest('[data-edit]');
+    if (ed) { e.preventDefault(); editContact(Number(ed.dataset.edit)); }
+  });
+  $('#co-to').addEventListener('click', e => { const b = e.target.closest('[data-unpick]'); if (b) { coPicked.delete(Number(b.dataset.unpick)); renderCompose(); } });
+  $('#co-all').addEventListener('change', e => { shownContacts().filter(c => c.email && c.active).forEach(c => e.target.checked ? coPicked.add(c.id) : coPicked.delete(c.id)); renderCompose(); });
+  ['#co-gov', '#co-kind'].forEach(s => $(s).addEventListener('change', renderCompose));
+
+  let ctEditing = null;
+  function editContact(id) {
+    const c = CT.contacts.find(x => x.id === id); if (!c) return;
+    ctEditing = c; const f = $('#ct-form');
+    $('#ct-title').textContent = `${c.seat}, ${c.government}`;
+    f.name.value = c.name || ''; f.email.value = c.email || ''; f.source_url.value = c.source_url || ''; f.notes.value = c.notes || ''; f.active.checked = !!c.active;
+    $('#ct-err').textContent = ''; $('#ct-dialog').showModal();
+  }
+  $('#ct-save').addEventListener('click', async () => {
+    const f = $('#ct-form');
+    try {
+      const r = await api('corr_contact', {method: 'POST', body: {id: ctEditing.id, name: f.name.value, email: f.email.value, source_url: f.source_url.value, notes: f.notes.value, active: f.active.checked}});
+      Object.assign(ctEditing, r.contact);
+      if (!(r.contact.email && r.contact.active)) coPicked.delete(ctEditing.id);
+      $('#ct-dialog').close(); renderCompose();
+    } catch (e) { $('#ct-err').textContent = e.message; }
+  });
+
+  $('#co-test').addEventListener('click', async () => {
+    const btn = $('#co-test'); btn.disabled = true; $('#co-msg').textContent = 'Sending a test…';
+    try { const r = await api('corr_send', {method: 'POST', body: {test: true, subject: $('#co-subj').value, body: $('#co-body').value, ids: [...coPicked]}}); $('#co-msg').textContent = `Test sent to ${r.to}. Its subject starts with [Test]; nothing was saved.`; }
+    catch (e) { $('#co-msg').textContent = e.message; }
+    btn.disabled = false;
+  });
+  $('#co-send').addEventListener('click', () => {
+    if (!$('#co-subj').value.trim() || $('#co-body').value.trim().length < 10) { $('#co-msg').textContent = 'Add a subject and a message first.'; return; }
+    const ppl = CT.contacts.filter(c => coPicked.has(c.id));
+    $('#co-confirm-text').innerHTML = `<b>${esc($('#co-subj').value)}</b> goes to ${ppl.length} official${ppl.length === 1 ? '' : 's'}, each as a separate email. This can’t be unsent.`;
+    $('#co-confirm-list').innerHTML = '<ul style="margin:0;padding-left:18px">' + ppl.map(c => `<li>${esc(cleanName(c.name))}, ${esc(c.seat)} (${esc(c.government)}) <span class="muted">${esc(c.email)}</span></li>`).join('') + '</ul>';
+    $('#co-confirm').showModal();
+  });
+  $('#co-confirm-go').addEventListener('click', async () => {
+    const btn = $('#co-confirm-go'); btn.disabled = true; btn.textContent = 'Sending…';
+    try {
+      const r = await api('corr_send', {method: 'POST', body: {subject: $('#co-subj').value, body: $('#co-body').value, ids: [...coPicked]}});
+      $('#co-confirm').close();
+      $('#co-msg').innerHTML = `Sent ${r.sent} email${r.sent === 1 ? '' : 's'}.` + (r.failed.length ? ` <span style="color:var(--bad)">${r.failed.length} failed: ${esc(r.failed.map(f => f.name + ' (' + f.error + ')').join('; '))}</span>` : '') +
+        (r.skipped ? ` ${r.skipped} skipped (no address or turned off).` : '') + ' <button class="linkish" type="button" id="co-goto">View in Correspondence</button>';
+      $('#co-goto').addEventListener('click', () => tab('correspondence'));
+      coPicked.clear(); $('#co-subj').value = ''; $('#co-body').value = ''; renderCompose();
+    } catch (e) { $('#co-confirm').close(); $('#co-msg').textContent = e.message; }
+    btn.disabled = false; btn.textContent = 'Send now';
+  });
+
+  // ---------- correspondence ----------
+  let CR = null, crOpen = null, crTimer = null, crYearSet = false;
+  const crLabel = {awaiting: 'Awaiting reply', replied: 'Replied', closed: 'Closed'};
+  async function loadCorr() {
+    const params = {q: $('#cr-q').value, government: $('#cr-gov').value, status: $('#cr-status').value, published: $('#cr-pub').value, year: $('#cr-year').value};
+    try { CR = await api('corr_threads', {params}); }
+    catch (e) { $('#cr-table tbody').innerHTML = `<tr><td colspan="7" class="empty">${esc(e.message)}</td></tr>`; return; }
+    if (!crYearSet) {
+      // Opens on the latest year with mail; older years are one choice away.
+      $('#cr-year').innerHTML = CR.years.map(y => `<option value="${y}">${y}</option>`).join('') + '<option value="">All years</option>';
+      $('#cr-year').value = CR.years.length ? String(CR.years[0]) : '';
+      crYearSet = true;
+      if (CR.years.length > 1) return loadCorr();
+    }
+    const gSel = $('#cr-gov'), gCur = gSel.value;
+    gSel.innerHTML = '<option value="">All governments</option>' + CR.governments.map(g => `<option>${esc(g)}</option>`).join(''); gSel.value = gCur;
+    const t = CR.totals;
+    $('#cr-tiles').innerHTML = [[fmt(t.threads), 'Conversations'], [fmt(t.awaiting), 'Awaiting reply'], [fmt(t.replied), 'Replied'], [fmt(t.published), 'Published']]
+      .map(([v, l]) => `<div class="tile"><b>${v}</b><span>${l}</span></div>`).join('');
+    const opts = CR.threads.map(x => `<option value="${x.id}">${esc(cleanName(x.official_name))} · ${esc(x.subject)}</option>`).join('');
+    $('#cr-unmatched').innerHTML = CR.unmatched.length ? `<div class="banner bad"><div style="flex:1"><b>${CR.unmatched.length} email${CR.unmatched.length === 1 ? '' : 's'} to hello@ didn’t match a conversation.</b>
+      <div class="small muted">Match each one to the conversation it belongs to, or dismiss it if it isn’t correspondence.</div>
+      ${CR.unmatched.map(m => `<div class="row small" style="margin-top:8px;align-items:flex-start"><div class="grow" style="min-width:220px"><b>${esc(m.from_addr)}</b> · ${esc(m.subject || '(no subject)')} · ${when(m.at)}<div class="muted">${esc((m.snippet || '').slice(0, 160))}</div></div>
+        <select class="sel" data-um="${m.id}" aria-label="Conversation"><option value="">Match to…</option>${opts}</select><button class="btn" type="button" data-dismiss="${m.id}">Dismiss</button></div>`).join('')}</div></div>` : '';
+    $('#cr-table tbody').innerHTML = CR.threads.map(x => `<tr class="click" data-th="${x.id}"><td class="small" style="white-space:nowrap">${when(x.last_at)}</td>
+      <td><b>${esc(cleanName(x.official_name))}</b><div class="small muted">${esc(x.official_seat)} · ${esc(x.government)}</div></td><td>${esc(x.subject)}</td>
+      <td class="num">${x.sent}</td><td class="num">${x.received}</td><td><span class="pill ${esc(x.status)}">${esc(crLabel[x.status] || x.status)}</span>${x.delivery && x.delivery !== 'delivered' && x.delivery !== 'sent' ? ` <span class="pill ${esc(x.delivery)}">${esc(dLabel(x.delivery))}</span>` : ''}</td>
+      <td>${x.published ? '<span class="pill public">Public</span>' : '<span class="muted small">Private</span>'}</td></tr>`).join('')
+      || '<tr><td colspan="7" class="empty">No conversations yet. Start one under “Write to officials.”</td></tr>';
+    if (crOpen) showThread(crOpen, true);
+  }
+  async function showThread(id, quiet) {
+    crOpen = id;
+    const box = $('#cr-detail'); box.hidden = false;
+    if (!quiet) box.innerHTML = '<p class="muted small" style="margin:0">Loading…</p>';
+    let d;
+    try { d = await api('corr_thread', {params: {id}}); } catch (e) { box.innerHTML = `<p class="err">${esc(e.message)}</p>`; return; }
+    const t = d.thread;
+    box.innerHTML = `<div class="row" style="margin-bottom:12px;align-items:flex-start"><div class="grow"><h3 style="font:600 1rem var(--f-display);margin:0 0 2px">${esc(t.subject)}</h3>
+        <div class="small muted">${esc(cleanName(t.official_name))}, ${esc(t.official_seat)} · ${esc(t.government)} · ${esc(t.email || '')}</div></div>
+        <label class="toggle small"><input type="checkbox" id="th-pub"${t.published ? ' checked' : ''}> Public</label>
+        <select class="sel" id="th-status" aria-label="Status">${Object.entries(crLabel).map(([k, v]) => `<option value="${k}"${k === t.status ? ' selected' : ''}>${v}</option>`).join('')}</select>
+        <button class="btn" type="button" id="th-close">Close</button></div>
+      ${t.batch_id ? `<p class="small muted" style="margin:0 0 10px">Part of a send to several officials. <button class="linkish" type="button" id="th-pub-batch">Publish every conversation from that send</button></p>` : ''}
+      ${d.messages.map(m => `<div class="th-msg ${m.direction}"><header><b>${m.direction === 'out' ? 'BayCounty.me' : esc(m.from_addr)}</b><span>${m.direction === 'out' ? 'to ' + esc(m.to_addr) : 'replied'}</span><span>${esc(stamp(m.at))}</span>
+        ${m.direction === 'out' ? `<span class="pill ${esc(m.status)}">${esc(dLabel(m.status))}</span>` : (m.matched_by ? `<span class="small">matched by ${esc(m.matched_by)}</span>` : '')}
+        ${(m.attachments || []).length ? `<span>📎 ${esc(m.attachments.map(a => a.filename).join(', '))}</span>` : ''}</header>
+        <div class="body">${esc(m.shown.text || '(no text)')}</div>
+        ${m.shown.quoted ? `<details class="ag" style="margin-top:6px"><summary class="small">Show quoted text</summary><pre>${esc(m.body_text)}</pre></details>` : ''}</div>`).join('')}
+      <label class="f" style="margin-top:6px">Reply to ${esc(cleanName(t.official_name))}<textarea id="th-reply" placeholder="Sent as a reply in the same email thread"></textarea></label>
+      <div class="row" style="margin-top:8px"><button class="btn primary" type="button" id="th-send">Send reply</button><span class="small" id="th-msg" role="status"></span></div>`;
+    $('#th-close').addEventListener('click', () => { box.hidden = true; crOpen = null; });
+    $('#th-pub').addEventListener('change', async e => {
+      try { await api('corr_publish', {method: 'POST', body: {id, published: e.target.checked}}); loadCorr(); } catch (err) { e.target.checked = !e.target.checked; alert(err.message); }
+    });
+    const pb = $('#th-pub-batch');
+    if (pb) pb.addEventListener('click', async () => { if (!confirm('Publish every conversation from this send?')) return; await api('corr_publish', {method: 'POST', body: {batch: t.batch_id, published: true}}); loadCorr(); });
+    $('#th-status').addEventListener('change', async e => { await api('corr_status', {method: 'POST', body: {id, status: e.target.value}}); loadCorr(); });
+    $('#th-send').addEventListener('click', async () => {
+      const b = $('#th-send'); b.disabled = true; $('#th-msg').textContent = 'Sending…';
+      try { await api('corr_reply', {method: 'POST', body: {thread_id: id, body: $('#th-reply').value}}); $('#th-msg').textContent = 'Sent.'; showThread(id, true); loadCorr(); }
+      catch (e) { $('#th-msg').textContent = e.message; }
+      b.disabled = false;
+    });
+    if (!quiet) box.scrollIntoView({behavior: 'smooth', block: 'nearest'});
+  }
+  $('#cr-table').addEventListener('click', e => { const r = e.target.closest('[data-th]'); if (r) showThread(Number(r.dataset.th)); });
+  $('#cr-unmatched').addEventListener('change', async e => {
+    const s = e.target.closest('[data-um]'); if (!s || !s.value) return;
+    try { await api('corr_assign', {method: 'POST', body: {message_id: s.dataset.um, thread_id: s.value}}); loadCorr(); } catch (err) { alert(err.message); }
+  });
+  $('#cr-unmatched').addEventListener('click', async e => {
+    const b = e.target.closest('[data-dismiss]'); if (!b || !confirm('Dismiss this email? It stays in the Resend inbox.')) return;
+    await api('corr_dismiss', {method: 'POST', body: {message_id: b.dataset.dismiss}}); loadCorr();
+  });
+  ['#cr-year', '#cr-gov', '#cr-status', '#cr-pub'].forEach(s => $(s).addEventListener('change', loadCorr));
+  $('#cr-q').addEventListener('input', () => { clearTimeout(crTimer); crTimer = setTimeout(loadCorr, 300); });
 
   // ---------- start ----------
   (async () => {

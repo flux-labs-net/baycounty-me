@@ -108,6 +108,23 @@ details.ag summary{cursor:pointer;color:var(--blue)} details.ag pre{white-space:
 .em-frame iframe{border:0;width:100%;height:720px;background:#F6F8FB;transition:width .2s}
 .em-frame.mobile iframe{width:375px;max-width:100%}
 .em-text{white-space:pre-wrap;font-family:var(--f-data);font-size:.82rem;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;margin:0;max-height:720px;overflow:auto}
+.co{display:grid;grid-template-columns:minmax(0,420px) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:900px){.co{grid-template-columns:1fr}}
+.co-list{max-height:560px;overflow:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+.co-gov{font:600 .78rem var(--f-body);text-transform:uppercase;letter-spacing:.04em;color:var(--muted);padding:10px 12px 6px;background:var(--sunken);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px;position:sticky;top:0}
+.co-gov .grow{flex:1}
+.co-p{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:2px 10px;align-items:start;padding:9px 12px;border-bottom:1px solid var(--line);font-size:.88rem}
+.co-p:last-child{border-bottom:0}
+.co-p input{margin-top:3px;width:16px;height:16px}
+.co-p .nm{font-weight:500} .co-p .sub{grid-column:2;color:var(--muted);font-size:.8rem;word-break:break-all}
+.co-p.off .nm,.co-p.off .sub,.co-p.off input{opacity:.55}
+.co-chip{display:inline-flex;gap:4px;align-items:center;font-size:.78rem;border:1px solid var(--line);border-radius:999px;padding:2px 8px;margin:2px 4px 2px 0;background:var(--sunken)}
+.pill.awaiting{color:var(--warn)} .pill.replied{color:var(--ok)} .pill.closed{color:var(--muted)} .pill.public{color:var(--blue)}
+.th-msg{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:10px;background:var(--bg)}
+.th-msg.in{border-left:4px solid var(--ok)} .th-msg.out{border-left:4px solid var(--bar)}
+.th-msg header{display:flex;gap:8px;flex-wrap:wrap;align-items:center;font-size:.8rem;color:var(--muted);margin-bottom:6px}
+.th-msg header b{color:var(--ink);font-weight:500}
+.th-msg .body{white-space:pre-wrap;font-size:.9rem;line-height:1.5;word-break:break-word}
 [hidden]{display:none!important}
 </style>
 </head>
@@ -137,6 +154,8 @@ details.ag summary{cursor:pointer;color:var(--blue)} details.ag pre{white-space:
       <button role="tab" data-tab="agendas" aria-selected="false">Agendas</button>
       <button role="tab" data-tab="sent" aria-selected="false">Sent mail</button>
       <button role="tab" data-tab="emails" aria-selected="false">Emails</button>
+      <button role="tab" data-tab="compose" aria-selected="false">Write to officials</button>
+      <button role="tab" data-tab="correspondence" aria-selected="false">Correspondence</button>
     </div>
 
     <section id="tab-keys" role="tabpanel">
@@ -268,8 +287,64 @@ details.ag summary{cursor:pointer;color:var(--blue)} details.ag pre{white-space:
         </div>
       </div>
     </section>
+
+    <section id="tab-compose" role="tabpanel" hidden>
+      <p class="muted small" style="margin:0 0 12px">Each person gets their own email from hello@baycounty.me, addressed to them alone, so no one can reply-all to other board members (Sunshine Law). Replies come back to hello@ and show up under Correspondence. Nothing is public until you publish it.</p>
+      <div class="co">
+        <div>
+          <div class="row" style="margin-bottom:8px">
+            <select class="sel" id="co-gov" aria-label="Government" style="flex:1;min-width:0;width:auto"><option value="">All governments</option></select>
+            <select class="sel" id="co-kind" aria-label="Who" style="width:auto"><option value="">Everyone</option><option value="elected">Elected only</option><option value="staff">Staff only</option></select>
+          </div>
+          <div class="row small" style="margin-bottom:8px"><label class="toggle"><input type="checkbox" id="co-all"> Select everyone shown</label><span class="grow"></span><span class="muted" id="co-count">0 selected</span></div>
+          <div class="co-list" id="co-list"><p class="empty">Loading…</p></div>
+          <p class="muted small" id="co-foot" style="margin:8px 0 0"></p>
+        </div>
+        <div class="card" style="display:flex;flex-direction:column;gap:12px">
+          <div><div class="small muted" style="margin-bottom:4px">To</div><div id="co-to" class="small muted">Pick officials on the left.</div></div>
+          <label class="f">Subject<input id="co-subj" maxlength="200" placeholder="e.g. Request: FY2026 bank reconciliations"></label>
+          <label class="f">Message<textarea id="co-body" style="min-height:240px" placeholder="Write the message. Each email starts with “Dear [name],” and ends with a line saying replies may be published, plus a reference number."></textarea></label>
+          <div class="row"><button class="btn" type="button" id="co-test">Send a test to me</button><span class="grow"></span><button class="btn primary" type="button" id="co-send" disabled>Send</button></div>
+          <p class="small" id="co-msg" role="status" style="margin:0"></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="tab-correspondence" role="tabpanel" hidden>
+      <div class="tiles" id="cr-tiles"></div>
+      <div id="cr-unmatched"></div>
+      <div class="row" style="gap:8px;flex-wrap:wrap;margin:6px 0 8px">
+        <h2 class="h2 grow" style="margin:0">Conversations</h2>
+        <input class="sel" id="cr-q" type="search" placeholder="Search name, subject" aria-label="Search" style="min-width:180px">
+        <select class="sel" id="cr-year" aria-label="Year"></select>
+        <select class="sel" id="cr-gov" aria-label="Government"><option value="">All governments</option></select>
+        <select class="sel" id="cr-status" aria-label="Status"><option value="">Any status</option><option value="awaiting">Awaiting reply</option><option value="replied">Replied</option><option value="closed">Closed</option></select>
+        <select class="sel" id="cr-pub" aria-label="Published"><option value="">Public or not</option><option value="yes">Published</option><option value="no">Not published</option></select>
+      </div>
+      <div class="card" id="cr-detail" hidden style="margin-bottom:14px"></div>
+      <div class="tw"><table class="at" id="cr-table" data-tt="off"><thead><tr><th>Last activity</th><th>Official</th><th>Subject</th><th class="num">Sent</th><th class="num">Replies</th><th>Status</th><th>Public</th></tr></thead><tbody></tbody></table></div>
+      <p class="muted small" style="margin-top:8px">The public page is <a href="/correspondence" target="_blank" rel="noopener">baycounty.me/correspondence</a>. It shows only published threads, by official name and seat, without email addresses.</p>
+    </section>
   </div>
 </div>
+
+<dialog id="ct-dialog"><form method="dialog" id="ct-form">
+  <h2 id="ct-title">Contact</h2>
+  <label class="f">Name<input name="name" maxlength="200"></label>
+  <label class="f">Email<input type="email" name="email" maxlength="200" placeholder="Leave blank if there's no official address"></label>
+  <label class="f">Where it's published<input type="url" name="source_url" maxlength="500" placeholder="https://"></label>
+  <label class="f">Notes<textarea name="notes" maxlength="1000"></textarea></label>
+  <label class="toggle"><input type="checkbox" name="active"> Can be written to</label>
+  <p class="err" id="ct-err" role="alert"></p>
+  <div class="row"><button class="btn primary" type="button" id="ct-save">Save</button><span class="grow"></span><button class="btn" value="cancel">Close</button></div>
+</form></dialog>
+
+<dialog id="co-confirm"><form method="dialog">
+  <h2>Send this email?</h2>
+  <p class="small" id="co-confirm-text" style="margin:0"></p>
+  <div id="co-confirm-list" class="small" style="max-height:240px;overflow:auto"></div>
+  <div class="row"><button class="btn primary" type="button" id="co-confirm-go">Send now</button><span class="grow"></span><button class="btn" value="cancel">Cancel</button></div>
+</form></dialog>
 
 <dialog id="key-dialog"><form method="dialog" id="key-form">
   <h2 id="kd-title">New API key</h2>
