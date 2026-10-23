@@ -23,13 +23,12 @@ const KINDS = ['All', ...new Set(O.map(o => o.lever))];
 const params = new URLSearchParams(location.search);
 let kind = KINDS.includes(params.get('k')) ? params.get('k') : 'All';
 
-function bar(label, inner, outer, text, title, hl) {
-  const w = outer ? Math.max(0, Math.min(100, inner / outer * 100)) : 0;
-  return `<div class="sav-bar" title="${esc(title || label)}"><span>${esc(label)}</span><i class="${hl ? 'hl' : ''}"><em style="width:${w.toFixed(1)}%"></em></i><b>${text}</b></div>`;
-}
-function single(label, v, max, text, title) {
-  const w = max ? Math.max(1, v / max * 100) : 0;
-  return `<div class="sav-bar" title="${esc(title || label)}"><span>${esc(label)}</span><i><em style="width:${w.toFixed(1)}%"></em></i><b>${text}</b></div>`;
+// One record: full label and figure on top, bar underneath. `inner` is the dark part, as a share of `outer`;
+// `outer` is the bar's own length, as a share of the longest bar in the group.
+function row(label, inner, outer, text, title) {
+  const o = Math.max(0, Math.min(1, outer)), w = Math.max(0, Math.min(1, inner));
+  return `<div class="sav-row" title="${esc(title || label)}"><div class="sav-row-hd"><span>${esc(label)}</span><b>${text}</b></div>`
+    + `<i class="sav-track" style="width:${(o * 100).toFixed(1)}%"><em style="width:${(w * 100).toFixed(1)}%"></em></i></div>`;
 }
 
 function group(o, g) {
@@ -39,23 +38,23 @@ function group(o, g) {
   if (g.kind === 'project_progress') {
     const mx = Math.max(...rows.map(r => r.compare || 0));
     key = '<div class="sav-key"><span><i></i>Spent so far</span><span><i class="out"></i>Total project cost</span></div>';
-    body = rows.map(r => `<div class="sav-bar" title="${esc(r.label)}"><span>${esc(r.label)}</span><i style="width:${(r.compare / mx * 100).toFixed(1)}%"><em style="width:${(r.amount / r.compare * 100).toFixed(1)}%"></em></i><b>${big(r.amount)} <small>of ${big(r.compare)}</small></b></div>`).join('');
+    body = rows.map(r => row(r.label, r.amount / r.compare, r.compare / mx, `${big(r.amount)} <small>of ${big(r.compare)}</small>`)).join('');
   } else if (g.kind === 'project_growth') {
     const mx = Math.max(...rows.map(r => r.compare || 0));
     key = '<div class="sav-key"><span><i></i>First firm figure</span><span><i class="out"></i>Final figure</span></div>';
-    body = rows.map(r => `<div class="sav-bar" title="${esc(r.amount_is)} → ${esc(r.compare_is)}"><span>${esc(r.label)}</span><i style="width:${(r.compare / mx * 100).toFixed(1)}%"><em style="width:${(r.amount / r.compare * 100).toFixed(1)}%"></em></i><b>${big(r.amount)} → ${big(r.compare)} <small>${r.compare >= r.amount ? '+' : '−'}${pct(Math.abs(r.compare / r.amount - 1))}</small></b></div>`).join('');
+    body = rows.map(r => row(r.label, r.amount / r.compare, r.compare / mx, `${big(r.amount)} → ${big(r.compare)} <small>${r.compare >= r.amount ? '+' : '−'}${pct(Math.abs(r.compare / r.amount - 1))}</small>`, `${r.amount_is} → ${r.compare_is}`)).join('');
   } else if (g.kind === 'budget_vs_spent') {
     key = '<div class="sav-key"><span><i></i>Spent</span><span><i class="out"></i>Budget</span></div>';
-    body = rows.map(r => bar(r.label, r.amount, r.compare, `${pct(r.ratio)} <small>of ${big(r.compare)} spent</small>`)).join('');
+    body = rows.map(r => row(r.label, r.ratio, 1, `${pct(r.ratio)} <small>of ${big(r.compare)} spent</small>`)).join('');
   } else if (g.kind === 'ledger_share') {
     key = '<div class="sav-key"><span><i></i>CRA share</span><span><i class="out"></i>Total project cost</span></div>';
-    body = rows.slice().sort((a, b) => a.ratio - b.ratio).map(r => bar(r.label, r.amount, r.compare, `${pct(r.ratio)} <small>of ${big(r.compare)}</small>`, `CRA paid ${big(r.amount)} of ${big(r.compare)}`)).join('');
+    body = rows.slice().sort((a, b) => a.ratio - b.ratio).map(r => row(r.label, r.ratio, 1, `${pct(r.ratio)} <small>of ${big(r.compare)}</small>`, `CRA paid ${big(r.amount)} of ${big(r.compare)}`)).join('');
   } else if (rows.some(r => r.per_unit != null)) {
     const mx = Math.max(...rows.map(r => r.per_unit || 0));
-    body = rows.slice().sort((a, b) => b.per_unit - a.per_unit).map(r => single(r.label, r.per_unit, mx, `${big(r.per_unit)} <small>/ ${esc(r.unit)}</small>`, `${big(r.amount)} over ${r.units} ${r.unit}s`)).join('');
+    body = rows.slice().sort((a, b) => b.per_unit - a.per_unit).map(r => row(r.label, 1, r.per_unit / mx, `${big(r.per_unit)} <small>/ ${esc(r.unit)}</small>`, `${big(r.amount)} over ${r.units} ${r.unit}s`)).join('');
   } else {
     const mx = Math.max(...rows.map(r => r.amount || 0));
-    body = rows.slice().sort((a, b) => b.amount - a.amount).map(r => single(r.paid_to && r.paid_to.length < 40 ? `${r.paid_to}: ${r.label}` : r.label, r.amount, mx, big(r.amount), r.amount_is)).join('');
+    body = rows.slice().sort((a, b) => b.amount - a.amount).map(r => row(r.paid_to && r.paid_to.length < 40 ? `${r.paid_to}: ${r.label}` : r.label, 1, r.amount / mx, big(r.amount), r.amount_is)).join('');
   }
   return `<div class="sav-g"><h4>${esc(g.title)}</h4>${key}${body}${g.note ? `<p class="note">${esc(g.note)}</p>` : ''}</div>`;
 }
