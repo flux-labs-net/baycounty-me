@@ -1,4 +1,5 @@
-# Runs the serverless function tests (api/__tests__) on every pull request and every push to main.
+# Runs the serverless function tests (api/__tests__) on every pull request and every push to main,
+# and applies every db/migrations/*.sql file in order to an empty Postgres so a broken migration fails here, not in the production sync.
 # A throwaway Postgres lets the finance API tests apply migration 0015 and run files end to end.
 # Pull requests are merged only after this check is green.
 name: Checks
@@ -29,3 +30,25 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm test
+  migrations:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: migrationtest
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U postgres" --health-interval 5s --health-timeout 5s --health-retries 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install 'psycopg[binary]>=3.2'
+      - name: Apply all migrations to an empty database
+        env:
+          DATABASE_URL: postgresql://postgres:postgres@localhost:5432/migrationtest
+        run: python db/scripts/check_migrations.py
