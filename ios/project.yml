@@ -26,6 +26,9 @@ targets:
       path: BayCountyMe/Info.plist
       properties:
         CFBundleDisplayName: BayCounty.me
+        # XcodeGen otherwise writes a fixed 1.0 (1), ignoring the version and build settings above.
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
         UILaunchScreen:
           UIColorName: Canvas
         UISupportedInterfaceOrientations:
