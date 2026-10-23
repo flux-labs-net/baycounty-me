@@ -2,17 +2,20 @@ import Foundation
 import Observation
 import BayCountyKit
 
-/// App-wide state: the catalog, governments, meetings and any dataset rows loaded so far.
+/// App-wide state: the catalog, governments, meetings, any dataset rows loaded so far, and the site's /data/app files.
 @MainActor
 @Observable
 final class AppStore {
-    enum Tab: Hashable { case home, governments, meetings, explore, search }
+    enum Tab: Hashable { case home, governments, money, meetings, search }
 
     let client = BayCountyClient(seedBundle: .main)
+    let gis = GISClient()
 
     var tab: Tab = .home
     /// A page the app is showing in the in-app browser.
     var presentedPage: PresentedPage?
+    /// A glossary term shown in a sheet.
+    var presentedTerm: Glossary.Term?
 
     private(set) var catalog: Catalog?
     private(set) var governments: [Government] = []
@@ -24,6 +27,32 @@ final class AppStore {
     private(set) var loading: Set<String> = []
     private(set) var lastRefresh: Date?
 
+    // /data/app files
+    private(set) var taxModel: TaxModel?
+    private(set) var addressModel: AddressModel?
+    private(set) var amendment3: Amendment3Model?
+    private(set) var glossary: Glossary?
+    private(set) var pages: [PageInfo] = []
+    private(set) var updates: [SiteUpdate] = []
+    private(set) var vendors: VendorDirectory?
+    private(set) var people: PeopleDirectory?
+    private(set) var donorContracts: DonorContracts?
+    private(set) var moneyMap: MoneyMap?
+
+    /// The saved home address, kept only on this phone.
+    var home: AddressMatch? {
+        didSet {
+            do {
+                if let home { UserDefaults.standard.set(try JSONEncoder().encode(home), forKey: "home") }
+                else { UserDefaults.standard.removeObject(forKey: "home") }
+            } catch {}
+        }
+    }
+
+    init() {
+        if let d = UserDefaults.standard.data(forKey: "home") { home = try? JSONDecoder().decode(AddressMatch.self, from: d) }
+    }
+
     /// True when anything on screen came from a saved or bundled copy rather than the live site.
     var isShowingSavedData: Bool { freshness.values.contains { $0 != .live } }
 
@@ -31,6 +60,9 @@ final class AppStore {
         await loadCatalog()
         await loadGovernments()
         await loadMeetings()
+        await loadApp("glossary.json") { (g: Glossary) in self.glossary = g }
+        await loadApp("pages.json") { (p: [PageInfo]) in self.pages = p }
+        await loadApp("updates.json") { (u: [SiteUpdate]) in self.updates = u }
         lastRefresh = Date()
     }
 
@@ -71,8 +103,37 @@ final class AppStore {
         } catch { errors[id] = error.localizedDescription }
     }
 
+    func load(_ ids: [String]) async {
+        await withTaskGroup(of: Void.self) { g in
+            for id in ids { g.addTask { await self.load(id) } }
+        }
+    }
+
+    private func loadApp<T: Decodable>(_ name: String, force: Bool = false, _ assign: (T) -> Void) async {
+        guard force || errors["app:" + name] != nil || !loaded.contains(name) else { return }
+        do {
+            let (v, f): (T, BayCountyClient.Freshness) = try await client.appData(name)
+            assign(v); freshness["app:" + name] = f; errors["app:" + name] = nil; loaded.insert(name)
+        } catch { errors["app:" + name] = error.localizedDescription }
+    }
+    private var loaded: Set<String> = []
+
+    func loadTax() async { await loadApp("tax.json") { (m: TaxModel) in self.taxModel = m } }
+    func loadAddressModel() async { await loadApp("address.json") { (m: AddressModel) in self.addressModel = m } }
+    func loadAmendment3() async { await loadApp("amendment3.json") { (m: Amendment3Model) in self.amendment3 = m } }
+    func loadVendors() async { await loadApp("vendors.json") { (m: VendorDirectory) in self.vendors = m } }
+    func loadPeople() async { await loadApp("people.json") { (m: PeopleDirectory) in self.people = m } }
+    func loadDonorContracts() async { await loadApp("donor-contracts.json") { (m: DonorContracts) in self.donorContracts = m } }
+    func loadMoneyMap() async { await loadApp("money-map.json") { (m: MoneyMap) in self.moneyMap = m } }
+
+    func appError(_ name: String) -> String? { errors["app:" + name] }
+
     func info(_ id: String) -> DatasetInfo? { catalog?.dataset(id) }
     func government(_ govID: String) -> Government? { governments.first { $0.govID == govID } }
+    func page(_ path: String?) -> PageInfo? { path.flatMap { p in pages.first { $0.path == "/" + p || $0.path == p } } }
+    func vendor(_ id: String) -> VendorDirectory.Vendor? { vendors?.vendors.first { $0.id == id } }
+    func person(_ id: String) -> PeopleDirectory.Person? { people?.people.first { $0.id == id } }
+    func term(_ id: String) -> Glossary.Term? { glossary?.terms.first { $0.id == id } }
 
     func matches(_ id: String, row: Row, query: String) -> Bool {
         guard !query.isEmpty else { return true }
@@ -90,4 +151,6 @@ final class AppStore {
     }
 
     func open(_ url: URL?) { presentedPage = url.map(PresentedPage.init(url:)) }
+    func openSite(_ path: String) { open(URL(string: "https://baycounty.me" + (path.hasPrefix("/") ? path : "/" + path))) }
+    func explain(_ termID: String) { presentedTerm = term(termID) }
 }

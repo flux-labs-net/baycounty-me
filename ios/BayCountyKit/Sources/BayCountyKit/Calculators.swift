@@ -33,12 +33,24 @@ public enum TaxCalculator {
         }
     }
 
+    public struct GroupAmount: Identifiable, Hashable, Sendable {
+        public let group: String
+        public let amount: Double
+        public var id: String { group }
+    }
+
+    public struct YearTotal: Identifiable, Hashable, Sendable {
+        public let fy: String
+        public let total: Double
+        public var id: String { fy }
+    }
+
     public struct Estimate: Sendable {
         public let lines: [Line]
         public let total: Double
-        public let byGroup: [(group: String, amount: Double)]
+        public let byGroup: [GroupAmount]
         /// Same home at each year's rates, oldest first.
-        public let trend: [(fy: String, total: Double)]
+        public let trend: [YearTotal]
     }
 
     public static func estimate(model: TaxModel, district: TaxModel.District, value: Double, homestead: Bool) -> Estimate {
@@ -47,11 +59,11 @@ public enum TaxCalculator {
         let lines = bill(model: model, district: district, year: L, taxable: tv)
         let shown = lines.filter { $0.mills > 0 }
         let total = shown.reduce(0) { $0 + $1.amount }
-        let byGroup = model.groupIDs.map { g in (group: g, amount: shown.filter { $0.group == g }.reduce(0) { $0 + $1.amount }) }
+        let byGroup = model.groupIDs.map { g in GroupAmount(group: g, amount: shown.filter { $0.group == g }.reduce(0) { $0 + $1.amount }) }
             .filter { $0.amount > 0 }
-        let trend = model.years.indices.map { i -> (fy: String, total: Double) in
+        let trend = model.years.indices.map { i -> YearTotal in
             let t = bill(model: model, district: district, year: i, taxable: taxable(value: value, homestead: homestead, second: model.second[i]))
-            return (model.fy[i], t.reduce(0) { $0 + $1.amount })
+            return YearTotal(fy: model.fy[i], total: t.reduce(0) { $0 + $1.amount })
         }
         return Estimate(lines: lines, total: total, byGroup: byGroup, trend: trend)
     }

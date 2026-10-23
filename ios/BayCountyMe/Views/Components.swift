@@ -34,6 +34,20 @@ enum Route: Hashable {
     case government(String)
     case meeting(String)
     case cra
+    case myAddress
+    case address(AddressMatch)
+    case taxCalculator(districtID: String? = nil, value: Double? = nil, homestead: Bool? = nil)
+    case amendment3(districtID: String? = nil, value: Double? = nil, homestead: Bool? = nil)
+    case glossary
+    case vendors
+    case vendor(String)
+    case people
+    case person(String)
+    case donorContracts
+    case moneyMap
+    case updates
+    case about
+    case explore
 }
 
 extension View {
@@ -45,8 +59,151 @@ extension View {
             case .government(let govID): GovernmentDetailView(govID: govID)
             case .meeting(let id): MeetingDetailView(meetingID: id)
             case .cra: CRAView()
+            case .myAddress: MyAddressView()
+            case .address(let m): AddressReportView(match: m)
+            case .taxCalculator(let d, let v, let h): TaxCalculatorView(districtID: d, value: v, homestead: h)
+            case .amendment3(let d, let v, let h): Amendment3View(districtID: d, value: v, homestead: h)
+            case .glossary: GlossaryView()
+            case .vendors: VendorsView()
+            case .vendor(let id): VendorDetailView(vendorID: id)
+            case .people: PeopleView()
+            case .person(let id): PersonDetailView(personID: id)
+            case .donorContracts: DonorContractsView()
+            case .moneyMap: MoneyMapView()
+            case .updates: UpdatesView()
+            case .about: AboutView()
+            case .explore: ExploreView()
             }
         }
+    }
+}
+
+/// The website page's lead paragraph and "how it works" explainer, with its glossary terms as chips.
+struct PageIntro: View {
+    @Environment(AppStore.self) private var store
+    let path: String?
+    @State private var expanded = false
+
+    var body: some View {
+        if let page = store.page(path), page.lede != nil || page.explainer != nil {
+            VStack(alignment: .leading, spacing: 8) {
+                if let lede = page.lede { Text(lede).font(.subheadline) }
+                if let ex = page.explainer {
+                    DisclosureGroup(isExpanded: $expanded) {
+                        VStack(alignment: .leading, spacing: 6) {
+                            ForEach(ex.paragraphs, id: \.self) { Text($0).font(.footnote).foregroundStyle(.secondary) }
+                        }
+                        .padding(.top, 4)
+                    } label: {
+                        Text(ex.heading).font(.footnote.weight(.semibold))
+                    }
+                }
+                TermChips(text: ([page.lede ?? ""] + (page.explainer?.paragraphs ?? [])).joined(separator: " "))
+            }
+            .padding(.vertical, 4)
+        }
+    }
+}
+
+/// Glossary terms that appear in some text, as tappable chips that open the plain-English explanation.
+struct TermChips: View {
+    @Environment(AppStore.self) private var store
+    let text: String
+    var limit = 6
+
+    var body: some View {
+        let terms = Array((store.glossary?.terms(in: text) ?? []).prefix(limit))
+        if !terms.isEmpty {
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 6) {
+                    Image(systemName: "character.book.closed").font(.caption).foregroundStyle(.secondary)
+                        .accessibilityHidden(true)
+                    ForEach(terms) { t in
+                        Button { store.presentedTerm = t } label: {
+                            Text(t.matchWords.last ?? t.term)
+                                .font(.caption.weight(.medium))
+                                .padding(.horizontal, 10).padding(.vertical, 5)
+                                .foregroundStyle(Brand.navy)
+                                .background(Brand.navy.opacity(0.1), in: Capsule())
+                        }
+                        .buttonStyle(.plain)
+                        .accessibilityLabel("Explain \(t.term)")
+                    }
+                }
+            }
+        }
+    }
+}
+
+/// A glossary term in a sheet: the simple version, then the detail and an example.
+struct TermSheet: View {
+    let term: Glossary.Term
+    @Environment(\.dismiss) private var dismiss
+
+    var body: some View {
+        NavigationStack {
+            List {
+                Section { Text(term.simple).font(.body) }
+                if let more = term.more { Section("More detail") { Text(more).font(.callout) } }
+                if let ex = term.example { Section("Example") { Text(ex).font(.callout) } }
+            }
+            .navigationTitle(term.term)
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar { ToolbarItem(placement: .confirmationAction) { Button("Done") { dismiss() } } }
+        }
+        .presentationDetents([.medium, .large])
+    }
+}
+
+/// A horizontal bar split into colored parts (the site's stack bar).
+struct StackBar: View {
+    let parts: [(label: String, value: Double, color: Color)]
+
+    var body: some View {
+        let total = max(parts.reduce(0) { $0 + $1.value }, 1)
+        GeometryReader { geo in
+            HStack(spacing: 2) {
+                ForEach(Array(parts.enumerated()), id: \.offset) { _, p in
+                    Rectangle().fill(p.color).frame(width: max(2, geo.size.width * p.value / total - 2))
+                }
+            }
+        }
+        .frame(height: 14)
+        .clipShape(RoundedRectangle(cornerRadius: 4))
+        .accessibilityElement()
+        .accessibilityLabel(parts.map { "\($0.label) \(Format.money($0.value))" }.joined(separator: ", "))
+    }
+}
+
+/// Group colors, matching the website's --s1...--s5 series.
+enum TaxColors {
+    static func color(_ group: String) -> Color {
+        switch group {
+        case "school": Brand.navy
+        case "county": Brand.blue
+        case "city": Brand.salmon
+        case "countysvc": Brand.amber
+        default: Brand.good
+        }
+    }
+}
+
+/// A labelled amount row with a colored dot.
+struct LegendRow: View {
+    let color: Color
+    let label: String
+    let value: String
+    var detail: String? = nil
+
+    var body: some View {
+        HStack {
+            Circle().fill(color).frame(width: 9, height: 9).accessibilityHidden(true)
+            Text(label)
+            Spacer()
+            if let detail { Text(detail).font(.caption).foregroundStyle(.secondary) }
+            Text(value).monospacedDigit()
+        }
+        .font(.subheadline)
     }
 }
 

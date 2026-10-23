@@ -87,8 +87,8 @@ public struct AddressReport: Sendable {
         public let parts: TaxParts
         public let lines: [TaxCalculator.Line]
         public var total: Double { lines.reduce(0) { $0 + $1.amount } }
-        public func byGroup(_ groups: [String]) -> [(group: String, amount: Double)] {
-            groups.map { g in (g, lines.filter { $0.group == g }.reduce(0) { $0 + $1.amount }) }.filter { $0.1 > 0.5 }
+        public func byGroup(_ groups: [String]) -> [TaxCalculator.GroupAmount] {
+            groups.map { g in TaxCalculator.GroupAmount(group: g, amount: lines.filter { $0.group == g }.reduce(0) { $0 + $1.amount }) }.filter { $0.amount > 0.5 }
         }
         public var cityName: String? { lines.first { $0.group == "city" }?.name }
     }

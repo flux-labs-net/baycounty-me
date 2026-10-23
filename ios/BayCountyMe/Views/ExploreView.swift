@@ -5,8 +5,7 @@ struct ExploreView: View {
     @Environment(AppStore.self) private var store
 
     var body: some View {
-        NavigationStack {
-            List {
+        List {
                 if store.catalog == nil {
                     if let e = store.errors["catalog"] {
                         ContentUnavailableView("Couldn't load the data list", systemImage: "wifi.slash", description: Text(e))
@@ -48,9 +47,7 @@ struct ExploreView: View {
                     }
                 }
             }
-            .navigationTitle("Explore")
+            .navigationTitle("Every dataset")
             .refreshable { await store.loadCatalog() }
-            .withRoutes()
-        }
     }
 }

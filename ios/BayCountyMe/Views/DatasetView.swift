@@ -89,6 +89,9 @@ struct DatasetView: View {
                 .safeAreaInset(edge: .bottom) { summary.padding().background(.bar) }
         } else {
             List {
+                if query.isEmpty, store.page(spec.page) != nil {
+                    Section { PageIntro(path: spec.page.map { "/" + $0 }) }
+                }
                 Section {
                     ForEach(filtered) { row in
                         NavigationLink(value: Route.record(datasetID, rowID: row.id)) { RecordRow(spec: spec, row: row) }
@@ -234,6 +237,8 @@ struct RecordDetailView: View {
                     }
                 }
 
+                linksSection(row)
+
                 if row.number("lat") != nil {
                     Section("Location") {
                         RecordsMap(datasetID: datasetID, rows: [row])
@@ -264,4 +269,47 @@ struct RecordDetailView: View {
             ContentUnavailableView("Record not found", systemImage: "doc")
         }
     }
+
+    /// The record's company, people, approving votes and government, as the website links them.
+    @ViewBuilder private func linksSection(_ row: Row) -> some View {
+        let vendors = RecordLinks.vendorIDs(row)
+        let people = datasetID == "votes" ? [] : RecordLinks.personIDs(row)
+        let voteIDs = Set(RecordLinks.voteIDs(row))
+        let votes = datasetID == "votes" ? [] : (store.rows["votes"] ?? []).filter { v in v.string("vote_id").map(voteIDs.contains) ?? false }
+        let roll: [(name: String, pid: String?, vote: String?)] = datasetID == "votes" ? (row["members"]?.arrayValue ?? []).compactMap { m in
+            guard case .object(let o) = m, let n = o["name"]?.stringValue else { return nil }
+            return (n, o["person_id"]?.stringValue, o["vote"]?.stringValue)
+        } : []
+        let gov = row.string("gov_id").flatMap { store.government($0) }
+        if !vendors.isEmpty || !people.isEmpty || !votes.isEmpty || !roll.isEmpty || gov != nil {
+            Section("Linked records") {
+                ForEach(vendors, id: \.self) { id in
+                    NavigationLink(value: Route.vendor(id)) { Label(store.vendor(id)?.name ?? id, systemImage: "building") }
+                }
+                ForEach(people, id: \.self) { id in
+                    NavigationLink(value: Route.person(id)) { Label(store.person(id)?.name ?? id, systemImage: "person") }
+                }
+                ForEach(votes) { v in
+                    NavigationLink(value: Route.record("votes", rowID: v.id)) { Label(v.string("headline") ?? "Vote", systemImage: "hand.raised") }
+                }
+                ForEach(Array(roll.enumerated()), id: \.offset) { _, m in
+                    let vote = (m.vote ?? "").capitalized
+                    if let pid = m.pid {
+                        NavigationLink(value: Route.person(pid)) {
+                            HStack { Text(m.name); Spacer(); Badge(text: vote, color: vote == "Yes" ? Brand.good : vote == "No" ? Brand.salmon : .secondary) }
+                        }
+                    } else {
+                        HStack { Text(m.name); Spacer(); Badge(text: vote, color: vote == "Yes" ? Brand.good : vote == "No" ? Brand.salmon : .secondary) }
+                    }
+                }
+                if let gov { NavigationLink(value: Route.government(gov.govID)) { Label(gov.name, systemImage: "building.columns") } }
+            }
+            .task {
+                await store.loadVendors()
+                await store.loadPeople()
+                if !voteIDs.isEmpty { await store.load("votes") }
+            }
+        }
+    }
+
 }
