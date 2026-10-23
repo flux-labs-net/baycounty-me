@@ -16,10 +16,10 @@
  },
  "summary": {
   "candidates": 42,
-  "total_raised_all": 382456.43,
-  "total_monetary_all": 373402.75,
-  "total_in_kind_all": 9053.68,
-  "total_spent_all": 298638.86,
+  "total_raised_all": 392794.63,
+  "total_monetary_all": 383640.95,
+  "total_in_kind_all": 9153.68,
+  "total_spent_all": 321231.26,
   "reconciled": 30,
   "no_activity": 12
  },
@@ -1402,8 +1402,8 @@
    "cand_id": 732,
    "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=732&rellevel=4&committee=N",
    "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=732&dhc=0&county=bay",
-   "latest_report": "G4 / period 2026-09-19 to 2026-10-02 / due 2026-10-09",
-   "through": "2026-10-02",
+   "latest_report": "G5 / period 2026-10-03 to 2026-10-16 / due 2026-10-23",
+   "through": "2026-10-16",
    "total_raised": 302.23,
    "monetary": 0.0,
    "in_kind": 302.23,
@@ -2050,22 +2050,22 @@
    "cand_id": 739,
    "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=739&rellevel=4&committee=N",
    "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=739&dhc=0&county=bay",
-   "latest_report": "G4 / period 2026-09-19 to 2026-10-02 / due 2026-10-09",
-   "through": "2026-10-02",
-   "total_raised": 29585.72,
-   "monetary": 29189.91,
+   "latest_report": "G5 / period 2026-10-03 to 2026-10-16 / due 2026-10-23",
+   "through": "2026-10-16",
+   "total_raised": 29660.72,
+   "monetary": 29264.91,
    "in_kind": 395.81,
    "loans": 10000.0,
-   "total_spent": 15101.2,
-   "cash_on_hand_estimate": 14088.71,
-   "n_contributions": 133,
+   "total_spent": 18406.69,
+   "cash_on_hand_estimate": 10858.22,
+   "n_contributions": 134,
    "from_individuals": {
-    "count": 127,
-    "total": 18285.72,
+    "count": 128,
+    "total": 18360.72,
     "bands": {
      "under_100": {
-      "count": 38,
-      "total": 1539.91
+      "count": 39,
+      "total": 1614.91
      },
      "100_499": {
       "count": 81,
@@ -2085,17 +2085,17 @@
      "total": 4690.81
     },
     "out_of_county": {
-     "count": 98,
-     "total": 13594.91
+     "count": 99,
+     "total": 13669.91
     },
-    "unique_donors_approx": 124
+    "unique_donors_approx": 125
    },
    "candidate_self": {
     "contributions": 0.0,
     "loans": 10000.0
    },
    "by_type_total": {
-    "individual": 18285.72,
+    "individual": 18360.72,
     "business": 1300.0,
     "pac": 0.0,
     "party": 0.0,
@@ -2154,16 +2154,22 @@
    ],
    "top_expenditures": [
     {
+     "payee": "Trailhead Media",
+     "total": 3900.0,
+     "payments": 3,
+     "purpose": "Advertising Media"
+    },
+    {
      "payee": "Lamar Advertising",
      "total": 3750.0,
      "payments": 1,
      "purpose": "Advertising Media"
     },
     {
-     "payee": "Trailhead Media",
-     "total": 2400.0,
+     "payee": "PrintPlace",
+     "total": 2368.97,
      "payments": 2,
-     "purpose": "Advertising Media"
+     "purpose": "Mailers"
     },
     {
      "payee": "Vistaprint",
@@ -2172,10 +2178,10 @@
      "purpose": "Campaign Handouts; Campaign Materials; Shirts; Business Cards"
     },
     {
-     "payee": "PrintPlace",
-     "total": 1158.28,
-     "payments": 1,
-     "purpose": "Mailers"
+     "payee": "Facebook (Meta)",
+     "total": 1090.26,
+     "payments": 27,
+     "purpose": "Advertising"
     },
     {
      "payee": "Super Cheap Signs",
@@ -2193,12 +2199,6 @@
      "payee": "PCB Life",
      "total": 720.0,
      "payments": 1,
-     "purpose": "Advertising"
-    },
-    {
-     "payee": "Facebook (Meta)",
-     "total": 713.26,
-     "payments": 23,
      "purpose": "Advertising"
     },
     {
@@ -2260,18 +2260,18 @@
    "cand_id": 730,
    "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=730&rellevel=4&committee=N",
    "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=730&dhc=0&county=bay",
-   "latest_report": "G4 / period 2026-09-19 to 2026-10-02 / due 2026-10-09",
-   "through": "2026-10-02",
-   "total_raised": 58114.35,
-   "monetary": 57797.2,
+   "latest_report": "G5 / period 2026-10-03 to 2026-10-16 / due 2026-10-23",
+   "through": "2026-10-16",
+   "total_raised": 59094.65,
+   "monetary": 58777.5,
    "in_kind": 317.15,
    "loans": 1000.0,
-   "total_spent": 36965.39,
-   "cash_on_hand_estimate": 20831.81,
-   "n_contributions": 118,
+   "total_spent": 47889.15,
+   "cash_on_hand_estimate": 10888.35,
+   "n_contributions": 120,
    "from_individuals": {
-    "count": 68,
-    "total": 24253.75,
+    "count": 69,
+    "total": 24753.75,
     "bands": {
      "under_100": {
       "count": 12,
@@ -2282,8 +2282,8 @@
       "total": 4827.75
      },
      "500_999": {
-      "count": 21,
-      "total": 10500.0
+      "count": 22,
+      "total": 11000.0
      },
      "1000_plus": {
       "count": 9,
@@ -2291,8 +2291,8 @@
      }
     },
     "in_county": {
-     "count": 49,
-     "total": 17368.45
+     "count": 50,
+     "total": 17868.45
     },
     "out_of_county": {
      "count": 12,
@@ -2303,15 +2303,15 @@
      "total": 3980.3
     },
     "refunds_to_individuals": -500.0,
-    "unique_donors_approx": 62
+    "unique_donors_approx": 63
    },
    "candidate_self": {
     "contributions": 0.0,
     "loans": 1000.0
    },
    "by_type_total": {
-    "individual": 24253.75,
-    "business": 31110.6,
+    "individual": 24753.75,
+    "business": 31590.9,
     "pac": 1500.0,
     "party": 0.0,
     "candidate_self": 1000.0,
@@ -2749,26 +2749,40 @@
      "amount": 500.0,
      "date": "2026-09-24",
      "kind": "check"
+    },
+    {
+     "name": "Albert J. Sauline, III - Attor",
+     "city": "Panama City Beach",
+     "type": "business",
+     "amount": 480.3,
+     "date": "2026-10-14",
+     "kind": "check"
     }
    ],
    "top_expenditures": [
     {
      "payee": "Payments to individuals",
-     "total": 9250.0,
-     "payments": 6,
+     "total": 11250.0,
+     "payments": 7,
      "purpose": "Consulting; Consultant; consulting; Sign Stands; and 1 other descriptions"
     },
     {
      "payee": "LAT30 Strategic Partners",
-     "total": 4696.56,
-     "payments": 5,
-     "purpose": "Adverting; Advertising Spend; Advertising; Media Spend Reimbursement"
+     "total": 8597.26,
+     "payments": 6,
+     "purpose": "Advertising; Adverting; Advertising Spend; Media Spend Reimbursement"
     },
     {
      "payee": "Lamar Advertising",
      "total": 3867.0,
      "payments": 1,
      "purpose": "Billboard"
+    },
+    {
+     "payee": "Creative Printing",
+     "total": 3225.77,
+     "payments": 4,
+     "purpose": "Advertising; Marketing Materials; Marketing Collateral; Printed Material"
     },
     {
      "payee": "Watts Up Media",
@@ -2795,6 +2809,12 @@
      "purpose": "Advertising"
     },
     {
+     "payee": "Engagement Strategies",
+     "total": 1577.49,
+     "payments": 2,
+     "purpose": "Communication"
+    },
+    {
      "payee": "Revolt Ministries",
      "total": 1255.65,
      "payments": 1,
@@ -2807,16 +2827,16 @@
      "purpose": "Advertising"
     },
     {
+     "payee": "Coates Law Firm",
+     "total": 1055.09,
+     "payments": 1,
+     "purpose": "Legal"
+    },
+    {
      "payee": "Ink Trax",
      "total": 802.41,
      "payments": 1,
      "purpose": "Shirts"
-    },
-    {
-     "payee": "Engagement Strategies",
-     "total": 762.12,
-     "payments": 1,
-     "purpose": "Communication"
     },
     {
      "payee": "Constant Contact",
@@ -2825,22 +2845,10 @@
      "purpose": "Communication; Communications"
     },
     {
-     "payee": "iHeart Media",
-     "total": 500.0,
-     "payments": 1,
-     "purpose": "Marketing"
-    },
-    {
-     "payee": "L2 Inc",
-     "total": 500.0,
-     "payments": 1,
-     "purpose": "Data"
-    },
-    {
-     "payee": "Inside Drive",
-     "total": 500.0,
-     "payments": 1,
-     "purpose": "Advertising"
+     "payee": "Three Part Films",
+     "total": 600.0,
+     "payments": 2,
+     "purpose": "Video; Creative Services"
     }
    ],
    "reconciliation": "itemized matches summary",
@@ -2966,30 +2974,30 @@
    "cand_id": 727,
    "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=727&rellevel=4&committee=N",
    "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=727&dhc=0&county=bay",
-   "latest_report": "G4 / period 2026-09-19 to 2026-10-02 / due 2026-10-09",
-   "through": "2026-10-02",
-   "total_raised": 6061.71,
-   "monetary": 5667.2,
-   "in_kind": 394.51,
+   "latest_report": "G5 / period 2026-10-03 to 2026-10-16 / due 2026-10-23",
+   "through": "2026-10-16",
+   "total_raised": 6886.71,
+   "monetary": 6392.2,
+   "in_kind": 494.51,
    "loans": 964.2,
-   "total_spent": 3790.72,
-   "cash_on_hand_estimate": 1876.48,
-   "n_contributions": 30,
+   "total_spent": 3859.64,
+   "cash_on_hand_estimate": 2532.56,
+   "n_contributions": 36,
    "from_individuals": {
-    "count": 21,
-    "total": 3226.01,
+    "count": 26,
+    "total": 3951.01,
     "bands": {
      "under_100": {
-      "count": 16,
-      "total": 526.01
+      "count": 19,
+      "total": 651.01
      },
      "100_499": {
-      "count": 2,
-      "total": 200.0
+      "count": 3,
+      "total": 300.0
      },
      "500_999": {
-      "count": 1,
-      "total": 500.0
+      "count": 2,
+      "total": 1000.0
      },
      "1000_plus": {
       "count": 2,
@@ -2997,22 +3005,22 @@
      }
     },
     "in_county": {
-     "count": 20,
-     "total": 2226.01
+     "count": 25,
+     "total": 2951.01
     },
     "out_of_county": {
      "count": 1,
      "total": 1000.0
     },
-    "unique_donors_approx": 21
+    "unique_donors_approx": 26
    },
    "candidate_self": {
     "contributions": 78.5,
     "loans": 964.2
    },
    "by_type_total": {
-    "individual": 3226.01,
-    "business": 793.0,
+    "individual": 3951.01,
+    "business": 893.0,
     "pac": 1000.0,
     "party": 0.0,
     "candidate_self": 1042.7,
@@ -3090,6 +3098,14 @@
      "amount": 1000.0,
      "date": "2026-09-26",
      "kind": "check"
+    },
+    {
+     "name": "Golf Cart Kingdom",
+     "city": "Panama City Beach",
+     "type": "business",
+     "amount": 100.0,
+     "date": "2026-10-15",
+     "kind": "in-kind"
     }
    ],
    "top_expenditures": [
@@ -3130,6 +3146,12 @@
      "purpose": "Advertising"
     },
     {
+     "payee": "Sam's Club",
+     "total": 68.92,
+     "payments": 1,
+     "purpose": "Meet & Greet Supplies-10/16"
+    },
+    {
      "payee": "Hancock Whitney Bank",
      "total": 12.0,
      "payments": 3,
@@ -3153,8 +3175,8 @@
    "cand_id": 743,
    "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=743&rellevel=4&committee=N",
    "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=743&dhc=0&county=bay",
-   "latest_report": "G4 / period 2026-09-19 to 2026-10-02 / due 2026-10-09",
-   "through": "2026-10-02",
+   "latest_report": "G5 / period 2026-10-03 to 2026-10-16 / due 2026-10-23",
+   "through": "2026-10-16",
    "total_raised": 17300.0,
    "monetary": 17300.0,
    "in_kind": 0.0,
@@ -3757,14 +3779,14 @@
    "cand_id": 738,
    "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=738&rellevel=4&committee=N",
    "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=738&dhc=0&county=bay",
-   "latest_report": "G4 / period 2026-09-19 to 2026-10-02 / due 2026-10-09",
-   "through": "2026-10-02",
+   "latest_report": "G5 (amended) / period 2026-10-03 to 2026-10-16 / due 2026-10-23",
+   "through": "2026-10-16",
    "total_raised": 10900.0,
    "monetary": 10900.0,
    "in_kind": 0.0,
    "loans": 3000.0,
-   "total_spent": 7848.82,
-   "cash_on_hand_estimate": 3051.18,
+   "total_spent": 9200.82,
+   "cash_on_hand_estimate": 1699.18,
    "n_contributions": 19,
    "from_individuals": {
     "count": 17,
@@ -3839,16 +3861,16 @@
      "purpose": "Yard signs; Signs"
     },
     {
+     "payee": "iHeart Media",
+     "total": 2372.0,
+     "payments": 2,
+     "purpose": "Radio ads; Radio advertisement"
+    },
+    {
      "payee": "Bay County Supervisor of Elections",
      "total": 1878.8,
      "payments": 1,
      "purpose": "Qualifying fee"
-    },
-    {
-     "payee": "iHeart Media",
-     "total": 1020.0,
-     "payments": 1,
-     "purpose": "Radio advertisement"
     },
     {
      "payee": "Burnie Thompson LLC",
@@ -4106,30 +4128,30 @@
    "cand_id": 728,
    "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=728&rellevel=4&committee=N",
    "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=728&dhc=0&county=bay",
-   "latest_report": "G4 / period 2026-09-19 to 2026-10-02 / due 2026-10-09",
-   "through": "2026-10-02",
-   "total_raised": 54786.62,
-   "monetary": 54786.62,
+   "latest_report": "G5 / period 2026-10-03 to 2026-10-16 / due 2026-10-23",
+   "through": "2026-10-16",
+   "total_raised": 63244.52,
+   "monetary": 63244.52,
    "in_kind": 0.0,
-   "loans": 45461.92,
-   "total_spent": 44758.53,
-   "cash_on_hand_estimate": 10028.09,
-   "n_contributions": 83,
+   "loans": 52399.82,
+   "total_spent": 51700.76,
+   "cash_on_hand_estimate": 11543.76,
+   "n_contributions": 97,
    "from_individuals": {
-    "count": 40,
-    "total": 9224.7,
+    "count": 49,
+    "total": 10744.7,
     "bands": {
      "under_100": {
-      "count": 14,
-      "total": 540.0
+      "count": 15,
+      "total": 560.0
      },
      "100_499": {
-      "count": 16,
-      "total": 2725.0
+      "count": 23,
+      "total": 3725.0
      },
      "500_999": {
-      "count": 9,
-      "total": 4959.7
+      "count": 10,
+      "total": 5459.7
      },
      "1000_plus": {
       "count": 1,
@@ -4137,29 +4159,29 @@
      }
     },
     "in_county": {
-     "count": 34,
-     "total": 7399.7
+     "count": 42,
+     "total": 8819.7
     },
     "out_of_county": {
-     "count": 5,
-     "total": 1795.0
+     "count": 6,
+     "total": 1895.0
     },
     "location_unknown": {
      "count": 1,
      "total": 30.0
     },
-    "unique_donors_approx": 36
+    "unique_donors_approx": 44
    },
    "candidate_self": {
     "contributions": 0.0,
-    "loans": 45461.92
+    "loans": 52399.82
    },
    "by_type_total": {
-    "individual": 9224.7,
+    "individual": 10744.7,
     "business": 0.0,
     "pac": 0.0,
     "party": 0.0,
-    "candidate_self": 45461.92,
+    "candidate_self": 52399.82,
     "other": 100.0
    },
    "contributors": [
@@ -4506,9 +4528,55 @@
      "amount": 2000.0,
      "date": "2026-10-02",
      "kind": "loan"
+    },
+    {
+     "name": "Dr. John L. Haley (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 2840.0,
+     "date": "2026-10-06",
+     "kind": "loan"
+    },
+    {
+     "name": "Dr. John L. Haley (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 295.7,
+     "date": "2026-10-12",
+     "kind": "loan"
+    },
+    {
+     "name": "Dr. John L. Haley (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 2200.0,
+     "date": "2026-10-15",
+     "kind": "loan"
+    },
+    {
+     "name": "Dr. John L. Haley (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 1100.0,
+     "date": "2026-10-15",
+     "kind": "loan"
+    },
+    {
+     "name": "Dr. John L. Haley (candidate)",
+     "city": null,
+     "type": "candidate",
+     "amount": 502.2,
+     "date": "2026-10-15",
+     "kind": "loan"
     }
    ],
    "top_expenditures": [
+    {
+     "payee": "Lamar Advertising",
+     "total": 11550.0,
+     "payments": 7,
+     "purpose": "advertising; digital bullletin; Billboard; Billboards; and 2 other descriptions"
+    },
     {
      "payee": "Political Marketing Int'l Inc",
      "total": 10592.22,
@@ -4516,15 +4584,9 @@
      "purpose": "on line ads and text messages; Website/Facebook Setup; On-line Advertising; on-line campaign; and 4 other descriptions"
     },
     {
-     "payee": "Lamar Advertising",
-     "total": 9800.0,
-     "payments": 6,
-     "purpose": "advertising; digital bullletin; Billboard; Digital Sign; and 1 other descriptions"
-    },
-    {
      "payee": "Signs Unlimited",
-     "total": 6334.14,
-     "payments": 11,
+     "total": 7586.04,
+     "payments": 12,
      "purpose": "signs; coroplast signs; Yard signs; coroplast; and 4 other descriptions"
     },
     {
@@ -4532,6 +4594,12 @@
      "total": 5800.0,
      "payments": 8,
      "purpose": "campaign manager; campaign advisor; video production; videographer; and 2 other descriptions"
+    },
+    {
+     "payee": "PMI",
+     "total": 3500.0,
+     "payments": 2,
+     "purpose": "CTV"
     },
     {
      "payee": "iHeart Media",
@@ -4592,17 +4660,11 @@
      "total": 300.0,
      "payments": 1,
      "purpose": "Photos"
-    },
-    {
-     "payee": "Delta",
-     "total": 250.0,
-     "payments": 1,
-     "purpose": "Ad in anniversary souvenir booklet"
     }
    ],
    "reconciliation": "itemized matches summary",
    "notes": [
-    "Includes 45,461.92 in loans; loans count in SOE monetary contributions.",
+    "Includes 52,399.82 in loans; loans count in SOE monetary contributions.",
     "The 2026 P7 amended report contains a deletion line with every field blank (rpt 5796, line 1) that could not be matched to an earlier item. The SOE summary counts both the original 8/12/2026 $1,000 candidate loan (coded I) and the amended re-filing of that loan (coded S, rpt 5796 line 2), so the $1,000 loan may be double-counted in the SOE totals. Figures here follow the SOE summary."
    ]
   },

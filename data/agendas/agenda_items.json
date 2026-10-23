@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-23T12:52:36+00:00",
+ "generated": "2026-10-23T22:26:00+00:00",
  "note": "Agenda items read from posted agendas by a Claude model (data/agendas/extract_agendas.py). Amounts are the largest dollar figure printed on the item, not necessarily spending. Check the agenda itself before relying on an item.",
  "items": [
   {
@@ -704,6 +704,64 @@
     "Hannah Avenue"
    ],
    "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10272026-902"
+  },
+  {
+   "board": "cw",
+   "body": "Callaway City Commission",
+   "gov": "cw",
+   "date": "2026-10-27",
+   "meeting": "Regular Meeting",
+   "number": null,
+   "section": "Approval of Minutes",
+   "title": "Approval of minutes of October 13, 2026 Regular Meeting",
+   "summary": null,
+   "kind": "minutes_approval",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_10272026-427"
+  },
+  {
+   "board": "cw",
+   "body": "Callaway City Commission",
+   "gov": "cw",
+   "date": "2026-10-27",
+   "meeting": "Regular Meeting",
+   "number": "1",
+   "section": "Regular Agenda",
+   "title": "Development Order (DO) Application – Whitaker/Douglas Subdivision",
+   "summary": "TJP Engineers, on behalf of FM Pros Inc, requests a Development Order for a 12-lot single-family subdivision on 1.912 acres zoned Residential R-5; the Planning Board recommended approval and staff asks for approval to execute the order and allow construction to begin.",
+   "kind": "rezoning_land_use",
+   "amount": null,
+   "parties": [
+    "FM Pros Inc",
+    "TJP Engineers, LLC"
+   ],
+   "addresses": [
+    "Whitaker & Douglas, Panama City, FL 32404",
+    "Parcel ID 24393-010-010"
+   ],
+   "url": "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_10272026-427"
+  },
+  {
+   "board": "cw",
+   "body": "Callaway City Commission",
+   "gov": "cw",
+   "date": "2026-10-27",
+   "meeting": "Regular Meeting",
+   "number": "2",
+   "section": "Regular Agenda",
+   "title": "EOR Change Order #2 Task Order T/M Increase - Cherry Street Drainage & Resurfacing - DHG",
+   "summary": "Donovan Hill Group requests a renewed time-and-materials, not-to-exceed task order increase of $50,000 to continue utility coordination on the Cherry Street project, to be paid from 1/2 cent infrastructure funds.",
+   "kind": "change_order",
+   "amount": 50000.0,
+   "parties": [
+    "Donovan Hill Group, Inc."
+   ],
+   "addresses": [
+    "Cherry Street (Tyndall Parkway to Star Avenue)"
+   ],
+   "url": "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_10272026-427"
   },
   {
    "board": "pcb",
