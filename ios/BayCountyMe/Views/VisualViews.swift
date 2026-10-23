@@ -150,19 +150,20 @@ struct WeekStrip: View {
     let meetings: [Meeting]
     let onPick: (String) -> Void
 
+    static let weekday: DateFormatter = { let f = DateFormatter(); f.dateFormat = "EEEEE"; return f }()
+
     var body: some View {
         let cal = Calendar.current
         let today = cal.startOfDay(for: Date())
         let days = (0..<14).compactMap { cal.date(byAdding: .day, value: $0, to: today) }
         let counts = Dictionary(grouping: meetings.compactMap { $0.start }, by: { cal.startOfDay(for: $0) }).mapValues(\.count)
-        let wd = DateFormatter(); wd.dateFormat = "EEEEE"
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 6) {
                 ForEach(days, id: \.self) { d in
                     let n = counts[d] ?? 0
                     Button { if n > 0 { onPick(Dates.dayKey(d)) } } label: {
                         VStack(spacing: 4) {
-                            Text(wd.string(from: d)).font(.caption2).foregroundStyle(.secondary)
+                            Text(Self.weekday.string(from: d)).font(.caption2).foregroundStyle(.secondary)
                             Text("\(cal.component(.day, from: d))").font(.subheadline.weight(d == today ? .bold : .regular))
                                 .foregroundStyle(d == today ? Color.white : .primary)
                                 .frame(width: 30, height: 30)
