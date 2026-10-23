@@ -8,4 +8,9 @@ dst=ios/BayCountyMe/Resources/Seed
 for f in index government-profiles meetings cra-payments; do
   cp "$src/$f.json" "$dst/$f.json"
 done
+# App files the first screens need offline (calculators, glossary, page intros, updates).
+# The client looks seeds up by file name, so these must not share a name with a dataset.
+for f in tax address amendment3 glossary pages updates; do
+  cp "site/public/data/app/$f.json" "$dst/$f.json"
+done
 echo "Seed updated from $src ($(python3 -c "import json;print(json.load(open('$src/index.json'))['updated'])"))"
