@@ -1,0 +1,50 @@
+/* Savings finder (/public-money/savings). Colors come from tokens.css, so dark mode follows. */
+.sav-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:18px 0 8px}
+.sav-stats>div{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.sav-stats b{font-family:var(--f-data);font-size:1.35rem;color:var(--navy);line-height:1.2}
+.sav-stats span{font-size:.8rem;color:var(--muted)}
+
+.sav-filters{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 14px}
+.sav-list{display:flex;flex-direction:column;gap:12px}
+.sav-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;display:flex;flex-direction:column;gap:10px;scroll-margin-top:80px}
+.sav-top{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;font-size:.72rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+.sav-rank{font-family:var(--f-data);font-weight:600;color:var(--navy)}
+.sav-n{font-weight:600;font-size:1.05rem;color:var(--ink);line-height:1.35;margin:0}
+.sav-chip{display:inline-block;font-size:.72rem;line-height:1.5;padding:1px 9px;border-radius:999px;border:1px solid var(--line);color:var(--muted);text-transform:none;letter-spacing:0;white-space:nowrap}
+.sav-chip.c-medium{color:var(--navy);border-color:color-mix(in srgb,var(--navy) 45%,transparent)}
+.sav-chip.c-records{color:var(--ink);border-color:var(--amber);background:color-mix(in srgb,var(--amber) 14%,transparent)}
+
+.sav-figs{display:flex;flex-wrap:wrap;gap:8px 28px}
+.sav-fig span{display:block;font-size:.75rem;color:var(--muted)}
+.sav-fig b{font-family:var(--f-data);font-weight:500;font-size:1.05rem;color:var(--ink)}
+.sav-fig small{display:block;font-size:.75rem;color:var(--muted);max-width:22rem}
+.sav-p{margin:0;font-size:.9rem;line-height:1.55;color:var(--ink)}
+.sav-p.muted{color:var(--muted)}
+.sav-p b{font-weight:600}
+
+.sav-ev{border-top:1px solid var(--line);padding-top:10px;display:flex;flex-direction:column;gap:12px}
+.sav-g h4{margin:0 0 6px;font-size:.82rem;font-weight:600;color:var(--ink)}
+.sav-g .note{margin:4px 0 0;font-size:.75rem;color:var(--muted)}
+.sav-bar{display:grid;grid-template-columns:minmax(0,15rem) minmax(0,1fr) auto;gap:4px 10px;align-items:center;font-size:.8rem;margin:3px 0}
+.sav-bar>span{color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sav-bar i{position:relative;display:block;height:12px;border-radius:0 4px 4px 0;background:var(--sunken)}
+.sav-bar i em{position:absolute;inset:0 auto 0 0;border-radius:0 4px 4px 0;background:var(--navy)}
+.sav-bar i.full{background:var(--navy)}
+.sav-bar i.hl em,.sav-bar i.full.hl{background:var(--blue)}
+.sav-bar b{font-family:var(--f-data);font-weight:500;white-space:nowrap;color:var(--ink)}
+.sav-bar b small{font-weight:400;color:var(--muted);margin-left:4px}
+.sav-key{font-size:.72rem;color:var(--muted);display:flex;gap:12px;margin:0 0 4px}
+.sav-key i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:-1px;background:var(--navy)}
+.sav-key i.out{background:var(--sunken);border:1px solid var(--line)}
+
+.sav-more{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.8rem;align-items:center}
+.sav-more a{color:var(--blue)}
+.sav-reqs li{padding:10px 0;border-bottom:1px solid var(--line);font-size:.9rem;line-height:1.5}
+.sav-reqs li:last-child{border-bottom:0}
+.sav-reqs .pill{margin-top:4px}
+
+@media (max-width:760px){
+  .sav-stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .sav-bar{grid-template-columns:minmax(0,1fr) auto}
+  .sav-bar i{grid-column:1 / -1;grid-row:2}
+}

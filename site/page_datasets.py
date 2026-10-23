@@ -145,6 +145,18 @@ def tax_districts():
             for k, d in a['districts'].items()]
 
 
+# --- Savings finder (/public-money/savings) ----------------------------------------------------------------------------
+
+def savings_opportunities():
+    from savings_page import opportunity_rows
+    return opportunity_rows()
+
+
+def savings_evidence():
+    from savings_page import evidence_rows
+    return evidence_rows()
+
+
 DATASETS = [
     ('cra-network-payees', 'CRA network: payees', 'Every payee in the CRA ledger as one entity (businesses, governments, property owners; unnamed grant recipients grouped), with the CRAs that paid it and the counted total.', cra_network_payees),
     ('cra-network-links', 'CRA network: documented connections', 'Documented links between CRA payees that are not payments (shared project, address or subcontract), each with its source.', cra_network_links),
@@ -157,5 +169,7 @@ DATASETS = [
     ('people-directory', 'People', 'Elected officials, department leaders and 2026 candidates named in BayCounty.me records, with their roles.', people_directory),
     ('glossary-terms', 'Glossary', 'Plain-English definitions of the government and tax terms used on the site.', glossary_terms),
     ('site-updates', 'What\'s new', 'Each change to the site\'s data and pages, newest first.', site_updates),
+    ('savings-opportunities', 'Savings finder: opportunities', 'Places Bay County governments could spend less: the spending each touches, a low and high estimate with its stated assumption, the next step and the records still needed. Every figure is computed from the Accountability projects and the CRA ledger.', savings_opportunities),
+    ('savings-evidence', 'Savings finder: evidence', 'The records behind each savings opportunity, one row per project or CRA ledger record: the figure, what it is compared with, the gap or share, cost per unit where one applies, and the source.', savings_evidence),
     ('tax-districts', 'Tax districts', 'Which taxing authorities levy property tax in each tax district, and the combined millage. Rates by year are in property-tax-rates (authority_id).', tax_districts),
 ]

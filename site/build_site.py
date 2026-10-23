@@ -18,6 +18,7 @@ from fees_page import fees_page, who_page
 from contracts_page import contracts_page
 from votes_page import votes_page
 from accountability_page import accountability_page
+from savings_page import savings_page
 from correspondence_page import correspondence_page
 from updates import updates_page, rss, last_updated, nice as nice_date
 OUT = os.path.join(ROOT, 'public')
@@ -69,6 +70,7 @@ MENU = [
         ]},
         {'group': 'Accountability', 'items': [
             {'label': 'Accountability console', 'href': '/public-money/accountability', 'desc': 'Projects start to finish, with open questions'},
+            {'label': 'Savings finder', 'href': '/public-money/savings', 'desc': 'Where governments could spend less'},
             {'label': 'Contracts', 'href': '/public-money/contracts', 'desc': 'Who wins contracts, and how'},
             {'label': 'How They Voted', 'href': '/public-money/votes', 'desc': 'Every recorded vote on money decisions'},
             {'label': 'Campaign Money', 'href': '/public-money/campaign-money', 'desc': 'Who funds campaigns, and donor contracts'},
@@ -676,6 +678,8 @@ PAGES = [
      'Emails BayCounty.me sent to Bay County elected officials and managers, and their replies, published as public records.', lambda: correspondence_page(OUT)),
     ('/public-money/accountability', 'Accountability console: projects from budget to close-out',
      'Bay County public projects followed from first budget to close-out: approvals, contracts, change orders, votes, payments and final cost, with questions raised by published rules, missing records and each agency\'s reply.', lambda: accountability_page(OUT)),
+    ('/public-money/savings', 'Savings finder: where Bay County governments could spend less',
+     'Places Bay County and its cities could spend less, from records already on BayCounty.me: projects that ran over, CRA money budgeted but not spent, and services bought separately. Each shows its records, an estimate with its assumption, and the next question to ask.', lambda: savings_page(OUT)),
     ('/public-money/votes', 'How they voted', 'How Bay County commissioners, city officials and school board members voted on budgets, tax rates, contracts, land and borrowing, from official minutes.', lambda: votes_page(OUT)),
     ('/public-money/debt', 'What Bay County governments owe', 'Debt owed by Bay County, the school district and every city: bonds, bank loans, big single payments ahead, and pension promises, from audited statements.', debt_page),
     ('/public-money/audits', 'What the auditors found', 'Three years of audit findings for Bay County governments in plain English, including repeat problems and Florida Auditor General reports.', audits_page),
