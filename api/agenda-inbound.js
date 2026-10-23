@@ -49,6 +49,16 @@ async function handler(req, res) {
   try { evt = JSON.parse(body); } catch (e) { return res.status(400).json({ok: false, error: 'bad json'}); }
   const data = evt.data || {};
   if (evt.type !== 'email.received' || !data.email_id) return res.status(200).json({ok: true, ignored: evt.type});
+  // Replies from officials to hello@baycounty.me go to the correspondence log, not the agenda watcher.
+  const corr = require('./_correspondence');
+  if (!forInbox(data) && corr.forInbox(data)) {
+    try { return res.status(200).json(await corr.inbound(data.email_id)); }
+    catch (e) {
+      // 500 so Resend retries; inbound() skips emails it has already stored.
+      console.error('correspondence inbound', e.message);
+      return res.status(500).json({ok: false, error: 'not stored yet'});
+    }
+  }
   if (!forInbox(data)) return res.status(200).json({ok: true, ignored: 'other address'});
   try {
     await runNow('inbox', '', data.email_id);

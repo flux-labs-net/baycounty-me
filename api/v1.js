@@ -11,6 +11,7 @@
 //   GET /api/v1/status                  per-dataset rows, last database sync and errors
 //   GET /api/v1/changes?since=&dataset= records added to the database since a time
 //   GET /api/v1/meetings.ics?gov=       calendar of upcoming meetings (one government or all)
+//   GET /api/v1/correspondence?year=    published emails with officials (year=all for every year)
 // Responses carry an ETag (and Last-Modified when the data's date is known); a matching If-None-Match or
 // If-Modified-Since gets 304 Not Modified with no body.
 const crypto = require('crypto');
@@ -218,6 +219,13 @@ module.exports = async (req, res) => {
       if (parts.length === 1) return res.status(200).json({data: withSlug});
       const g = withSlug.find(r => r.slug === parts[1]);
       return g ? res.status(200).json({data: g}) : res.status(404).json({error: `Unknown government "${parts[1]}".`, governments: withSlug.map(r => r.slug)});
+    }
+    if (parts[0] === 'correspondence') {
+      // Published emails between BayCounty.me and officials. Unpublished threads are never returned.
+      res.locals.lastModified = null;
+      const r = await require('./_correspondence').publicFeed({year: String(req.query.year || ''), government: String(req.query.government || '').slice(0, 120)});
+      info.rows = r.conversations.length;
+      return res.status(200).json(r);
     }
     if (parts[0] === 'search') {
       const q = String(req.query.q || '').trim().toLowerCase();

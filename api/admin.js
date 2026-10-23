@@ -187,6 +187,21 @@ async function route(req, res, action, me) {
       await audit(me.e, 'agenda_run', null, {mode: body.mode || 'both', only: body.only || ''});
       return r;
     }
+    // ---------- correspondence with officials ----------
+    case 'corr_contacts': return require('./_correspondence').contacts();
+    case 'corr_contact': case 'corr_seed': case 'corr_send': case 'corr_reply': case 'corr_publish': case 'corr_status': case 'corr_assign': case 'corr_dismiss': {
+      if (req.method !== 'POST') throw Object.assign(new Error('Use POST.'), {status: 405});
+      const C = require('./_correspondence');
+      const fn = {corr_contact: C.saveContact, corr_seed: C.seed, corr_send: C.send, corr_reply: C.reply, corr_publish: C.publish,
+        corr_status: C.setStatus, corr_assign: C.assign, corr_dismiss: C.dismiss}[action];
+      const r = await fn(body, me.e);
+      await audit(me.e, action, null, action === 'corr_send' ? {subject: body.subject, recipients: (body.ids || []).length, test: !!body.test, batch: r.batch_id || null}
+        : {id: body.id || body.thread_id || body.message_id || body.batch || null}).catch(() => {});
+      return r;
+    }
+    case 'corr_threads': return require('./_correspondence').threads({status: String(Q.status || '').slice(0, 20), government: String(Q.government || '').slice(0, 120),
+      published: String(Q.published || ''), q: String(Q.q || '').slice(0, 100), year: String(Q.year || '')});
+    case 'corr_thread': return require('./_correspondence').thread(Q.id);
     case 'email_previews': return {templates: PREVIEWS, govs: Object.entries(GOVS).map(([key, [name]]) => ({key, name}))};
     case 'email_preview': return preview(String(Q.template || ''), {gov: Q.gov, source: Q.source});
     case 'email_test': {
