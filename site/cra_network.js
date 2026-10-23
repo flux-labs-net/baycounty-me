@@ -114,14 +114,22 @@ function graph(rows) {
   hl();
 }
 
-let GEO = null;
+let GEO = null, mapT = null, mapZoom = null;
+function zoomMap(svg) {
+  const g = d3.select('#crnMapG');
+  if (!mapZoom) mapZoom = d3.zoom().scaleExtent([1, 12]).on('zoom', e => { mapT = e.transform; d3.select('#crnMapG').attr('transform', mapT).selectAll('circle').attr('stroke-width', function () { return (+this.dataset.sw || 1) / mapT.k; }); });
+  d3.select(svg).call(mapZoom);
+  g.selectAll('circle').each(function () { this.dataset.sw = this.getAttribute('stroke-width'); });
+  if (mapT) d3.select(svg).call(mapZoom.transform, mapT);
+}
+function mapBtn(f) { const svg = d3.select('#crnMap'); if (!mapZoom) return; if (f === 0) svg.transition().duration(250).call(mapZoom.transform, d3.zoomIdentity); else svg.transition().duration(250).call(mapZoom.scaleBy, f); }
 function map(rows) {
   const svg = $('crnMap');
   if (!GEO) { svg.innerHTML = '<text x="20" y="30" fill="var(--muted)" font-size="13">Loading the map…</text>'; return; }
   const pts = rows.filter(r => r.a && r.lat != null);
   const xs = pts.map(r => r.lng), ys = pts.map(r => r.lat);
-  const pad = 0.02, x0 = Math.min(...xs, -85.9) - pad, x1 = Math.max(...xs, -85.56) + pad, y0 = Math.min(...ys, 30.12) - pad, y1 = Math.max(...ys, 30.26) + pad;
-  const W = 900, k = Math.cos(30.2 * Math.PI / 180), H = Math.round(W * (y1 - y0) / ((x1 - x0) * k));
+  const pad = 0.012, x0 = Math.min(...xs) - pad, x1 = Math.max(...xs) + pad, y0 = Math.min(...ys) - pad, y1 = Math.max(...ys) + pad;
+  const W = 1200, k = Math.cos(30.2 * Math.PI / 180), H = Math.round(W * (y1 - y0) / ((x1 - x0) * k));
   const P = ([x, y]) => [(x - x0) / (x1 - x0) * W, (y1 - y) / (y1 - y0) * H];
   const path = mp => mp.map(poly => poly.map(ring => 'M' + ring.map(p => P(p).map(v => v.toFixed(1)).join(',')).join('L') + 'Z').join('')).join('');
   const rS = d3.scaleSqrt().domain([0, d3.max(pts, r => r.a) || 1]).range([3, 30]);
@@ -136,7 +144,8 @@ function map(rows) {
   });
   [['Panama City', -85.66, 30.159], ['Lynn Haven', -85.648, 30.245], ['Panama City Beach', -85.83, 30.197], ['Callaway', -85.57, 30.153], ['Springfield', -85.611, 30.163], ['Parker', -85.602, 30.13]]
     .forEach(([n, x, y]) => { const [a, b] = P([x, y]); if (a > 0 && a < W && b > 0 && b < H) s += `<text x="${a.toFixed(0)}" y="${(b - 20).toFixed(0)}" text-anchor="middle" class="crn-town">${n}</text>`; });
-  svg.setAttribute('viewBox', `0 0 ${W} ${H}`); svg.innerHTML = s;
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`); svg.innerHTML = `<g id="crnMapG">${s}</g>`;
+  zoomMap(svg);
   const byI = new Map(rows.map(r => [r.i, r]));
   svg.querySelectorAll('circle[data-i]').forEach(c => {
     const r = byI.get(+c.dataset.i);
@@ -211,6 +220,7 @@ function hideTip(id) { $(id).hidden = true; }
 function select(id) { st.sel = id; profile(); if (st.view === 'network' && hl) hl(); if (st.view === 'map') map(visible()); if (id && innerWidth <= 900) $('crnProfile').scrollIntoView({ behavior: 'smooth', block: 'start' }); }
 function setView(v) {
   st.view = v;
+  document.querySelector('.crn-main').classList.toggle('wide', v === 'map');
   ['network', 'map', 'payees', 'donations'].forEach(k => { $('v-' + k).hidden = k !== v; $('t-' + k).setAttribute('aria-selected', k === v); });
   if (location.hash.slice(1) !== v) history.replaceState(null, '', '#' + v);
   render();
@@ -223,6 +233,7 @@ function render() {
 
 function start() {
   controls();
+  [['crnZin', 1.6], ['crnZout', 1 / 1.6], ['crnZreset', 0]].forEach(([id, f]) => { const b = $(id); if (b) b.onclick = () => mapBtn(f); });
   const h = location.hash.slice(1);
   setView(['network', 'map', 'payees', 'donations'].includes(h) ? h : 'network');
   fetch('/data/cra-geo.json').then(r => r.json()).then(g => { GEO = g; if (st.view === 'map') map(visible()); }).catch(() => { $('crnMap').innerHTML = '<text x="20" y="30" fill="var(--muted)" font-size="13">The map could not load. Try reloading the page.</text>'; });
