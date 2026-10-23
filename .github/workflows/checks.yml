@@ -1,0 +1,19 @@
+# Runs the serverless function tests (api/__tests__) on every pull request and every push to main.
+# Pull requests are merged only after this check is green.
+name: Checks
+on:
+  pull_request:
+  push:
+    branches: [main]
+jobs:
+  api-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+      - run: npm ci
+      - run: npm test
