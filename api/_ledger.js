@@ -32,17 +32,18 @@ async function report({status = 'pending', source = '', raw = ''} = {}) {
   if (source && !UUID.test(source)) source = '';
   if (raw && !UUID.test(raw)) raw = '';
   const sources = await db.q(`select s.id, s.entity_name, s.entity_type, s.erp_system, s.intake_method, s.inbound_address, s.allowed_senders,
-      s.auto_normalize, s.active, s.column_map is not null as has_map,
+      s.auto_normalize, s.active, s.column_map is not null as has_map, s.finance_workspace_id, w.name finance_workspace,
       (select count(*) from ingest.raw r where r.source_id = s.id)::int files,
       (select max(received_at) from ingest.raw r where r.source_id = s.id) last_file,
       (select count(*) from ingest.staging t where t.source_id = s.id and t.review_status = 'pending')::int pending
-    from ingest.sources s order by s.entity_name`);
+    from ingest.sources s left join finance.workspaces w on w.id = s.finance_workspace_id order by s.entity_name`);
   const files = await db.q(`select r.id, r.source_id, s.entity_name, r.received_at, r.intake_method, r.sender, r.file_name, r.status,
-      r.row_count, r.error_message, r.storage_path is not null as has_file,
+      r.row_count, r.error_message, r.storage_path is not null as has_file, s.finance_workspace_id,
+      r.finance_status, r.finance_shape, r.finance_error, r.finance_upload_id, fu.status finance_upload_status,
       (select count(*) from ingest.staging t where t.raw_id = r.id and t.review_status = 'pending')::int pending,
       (select count(*) from ingest.staging t where t.raw_id = r.id and t.review_status = 'approved')::int approved,
       (select count(*) from ingest.staging t where t.raw_id = r.id and t.review_status = 'rejected')::int rejected
-    from ingest.raw r join ingest.sources s on s.id = r.source_id
+    from ingest.raw r join ingest.sources s on s.id = r.source_id left join finance.uploads fu on fu.id = r.finance_upload_id
     where r.received_at > now() - interval '120 days' ${source ? 'and r.source_id = $1' : ''}
     order by r.received_at desc limit 100`, source ? [source] : []);
   const p = []; const w = [];
@@ -104,4 +105,13 @@ async function updateSource(body = {}) {
   return rows[0];
 }
 
-module.exports = {report, normalize, review, updateSource, cleanSenders, cleanIds};
+// Send (or re-send) one file to its source's /finance workspace as an unreviewed import.
+async function toFinance(body = {}) {
+  if (!UUID.test(String(body.raw_id || ''))) throw bad('Pick a file.');
+  const r = await require('./_finance/intake').fromRaw(String(body.raw_id), {retry: true});
+  if (r.error) throw bad(`Couldn’t send it to /finance: ${r.error}`, 502);
+  if (r.skipped) throw bad(r.reason ? `Not sent: ${r.reason}.` : 'Already sent to /finance, or no stored file.', 409);
+  return r;
+}
+
+module.exports = {report, normalize, review, updateSource, toFinance, cleanSenders, cleanIds};

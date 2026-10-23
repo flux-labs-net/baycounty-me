@@ -171,13 +171,15 @@ async function route(req, res, action, me) {
     case 'ingestion': return require('./_health').report();
     // ---------- accounting-system files (ingest schema) ----------
     case 'ledger': return require('./_ledger').report({status: String(Q.status || 'pending'), source: String(Q.source || ''), raw: String(Q.raw || '')});
-    case 'ledger_normalize': case 'ledger_approve': case 'ledger_reject': case 'ledger_source': {
+    case 'ledger_normalize': case 'ledger_approve': case 'ledger_reject': case 'ledger_source': case 'ledger_finance': {
       if (req.method !== 'POST') throw Object.assign(new Error('Use POST.'), {status: 405});
       const L = require('./_ledger');
       const r = action === 'ledger_normalize' ? await L.normalize(body)
+        : action === 'ledger_finance' ? await L.toFinance(body)
         : action === 'ledger_source' ? await L.updateSource(body)
         : await L.review(action === 'ledger_approve' ? 'approved' : 'rejected', body, me.e);
       await audit(me.e, action, null, action === 'ledger_normalize' ? {raw_id: body.raw_id || null, all: !!body.all, processed: r.processed}
+        : action === 'ledger_finance' ? {raw_id: body.raw_id, workspace: r.workspace, upload_id: r.upload_id}
         : action === 'ledger_source' ? {source: body.id, auto_normalize: body.auto_normalize, active: body.active, senders: 'allowed_senders' in body ? r.allowed_senders.length : undefined}
         : {raw_id: body.raw_id || null, rows: r.changed, note: body.note || null}).catch(() => {});
       return r;

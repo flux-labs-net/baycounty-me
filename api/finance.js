@@ -15,6 +15,7 @@
 //   POST ?action=flag-status {workspace, id, status, note}   open | explained | follow_up | referred
 //   POST ?action=run-rules   {workspace}
 //   GET  ?action=members&workspace=lh  /  POST ?action=members {workspace, email, role}   (owners)
+//   POST ?action=intake  {raw_id | raw_ids}        emailed files -> unreviewed imports (service-role key only; see _finance/intake.js)
 const db = require('./_db');
 const storage = require('./_finance/storage');
 const store = require('./_finance/store');
@@ -107,6 +108,18 @@ async function route(deps, req, res, action) {
     if (req.method !== 'POST') throw bad('Use POST.', 405);
     return action === 'login' ? startLogin(q, req, b, deps.sendEmail) : finishLogin(q, req, res, b);
   }
+  // Called by the ingest-email edge function right after a file arrives (bearer: the project's service-role key).
+  if (action === 'intake') {
+    if (req.method !== 'POST') throw bad('Use POST.', 405);
+    const presented = String((req.headers || {}).authorization || '').replace(/^Bearer\s+/i, '').trim();
+    const intake = deps.intake || require('./_finance/intake');
+    if (!(await intake.isServiceKey(presented))) throw bad('Not allowed.', 401);
+    const ids = (Array.isArray(b.raw_ids) ? b.raw_ids : [b.raw_id]).map(String).filter(id => /^[0-9a-f-]{36}$/i.test(id)).slice(0, 20);
+    if (!ids.length) throw bad('Send raw_id or raw_ids.');
+    const results = [];
+    for (const id of ids) results.push(await intake.fromRaw(id, {}, {q, storage: deps.storage}));
+    return {results};
+  }
   const who = await deps.caller(req, q);
   if (action === 'logout') {
     if (req.method !== 'POST') throw bad('Use POST.', 405);
@@ -127,7 +140,7 @@ async function route(deps, req, res, action) {
   switch (action) {
     case 'overview': return {role, ...(await store.overview(q, ws))};
     case 'uploads': return {uploads: await q(`select id, original_name, shape, source_system, uploaded_by, uploaded_at, period_start::text period_start, period_end::text period_end,
-        row_count, parsed_total::float8 parsed_total, printed_total::float8 printed_total, tie_status, tie_difference::float8 tie_difference, status, warnings, error
+        row_count, parsed_total::float8 parsed_total, printed_total::float8 printed_total, tie_status, tie_difference::float8 tie_difference, status, warnings, error, storage_path
         from finance.uploads where workspace_id = $1 order by uploaded_at desc limit 200`, [ws])};
     case 'upload-url': {
       if (!deps.storage.configured()) throw bad('File storage isn’t configured on this deployment; send the file as base64 "content" instead.', 501);
@@ -193,4 +206,5 @@ async function sendEmail(to, m) {
 
 module.exports = createHandler({q: db.q, hasDb: db.hasDb, storage, caller, sendEmail});
 module.exports.createHandler = createHandler;
+module.exports.ingest = ingest; // also used by email intake (api/_finance/intake.js)
 module.exports.config = {api: {bodyParser: {sizeLimit: '4.5mb'}}};
