@@ -73,6 +73,7 @@ jobs:
           [ -n "$EMAIL_ID" ] && args="$args --email-id $EMAIL_ID"
           python data/agendas/watch_agendas.py $args
       - name: Read new agendas into items
+        id: extract
         # Claude model AGENDA_MODEL (repository variable; default claude-sonnet-5-5, or claude-haiku-5-5 to spend less).
         # Skipped when ANTHROPIC_API_KEY isn't set. Runs even if the watch step logged errors.
         if: always() && steps.watch.outcome != 'cancelled'
@@ -89,7 +90,8 @@ jobs:
           AGENDA_EXTRACT_BUDGET_USD: ${{ vars.AGENDA_EXTRACT_BUDGET_USD }}
         run: python data/agendas/extract_agendas.py
       - name: Refresh meetings when something new landed
-        if: steps.watch.outputs.new_docs != '0' || steps.watch.outputs.updated_docs != '0'
+        # also after new items were read, so they reach site search
+        if: always() && (steps.watch.outputs.new_docs > 0 || steps.watch.outputs.updated_docs > 0 || steps.extract.outputs.items_read > 0)
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: gh workflow run refresh-meetings.yml --repo "$GITHUB_REPOSITORY"

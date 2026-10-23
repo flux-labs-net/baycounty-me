@@ -81,7 +81,22 @@ def _votes():
              'u': '/public-money/votes?q=' + __import__('urllib.parse').parse.quote((v.get('headline') or '')[:40]) + '#all'} for v in d['votes']]
 
 
-INDEXERS = [_glossary, _cra, _fema, _surtax, _audits, _contracts, _votes]
+def _agenda_items():
+    """Items read from posted agendas (data/agendas/agenda_items.json, written by data/agendas/export_items.py)."""
+    d = json.load(open(os.path.join(DATA, 'agendas', 'agenda_items.json')))
+    out = []
+    for i in d['items']:
+        if not i.get('url') or not i.get('title'):
+            continue
+        amt = f"${i['amount']:,.0f} · " if i.get('amount') is not None and (i.get('kind') or '') not in ('budget', 'resolution', 'ordinance', 'public_hearing') else ''
+        who = ', '.join(i.get('parties') or [])
+        out.append({'k': 'Agenda item', 't': i['title'],
+                    's': f"{i.get('body') or i.get('board')} · {i.get('date') or ''} · {amt}{(i.get('kind') or '').replace('_', ' ')}{' · ' + who if who else ''}",
+                    'u': i['url']})
+    return out
+
+
+INDEXERS = [_glossary, _cra, _fema, _surtax, _audits, _contracts, _votes, _agenda_items]
 
 
 def _vendors():
