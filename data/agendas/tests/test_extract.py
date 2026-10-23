@@ -61,5 +61,45 @@ class T(unittest.TestCase):
         walk(x.SCHEMA)
 
 
+    def test_setup_errors_and_workspace_header(self):
+        import urllib.error
+        def err(code, msg):
+            def f(req, timeout=0):
+                raise urllib.error.HTTPError(req.full_url, code, 'x', {}, io.BytesIO(msg.encode()))
+            return f
+        urllib.request.urlopen = err(400, '{"error":{"message":"This API key is not scoped to a workspace"}}')
+        with self.assertRaises(x.SetupError):
+            x.claude('x')
+        urllib.request.urlopen = err(401, 'invalid x-api-key')
+        with self.assertRaises(x.SetupError):
+            x.claude('x')
+        urllib.request.urlopen = err(400, '{"error":{"message":"prompt is too long"}}')
+        with self.assertRaises(RuntimeError) as cm:
+            x.claude('x')
+        self.assertNotIsInstance(cm.exception, x.SetupError)
+        seen = {}
+        def ok(req, timeout=0):
+            seen.update(dict(req.header_items()))
+            return FakeResp(json.dumps({'content': [{'type': 'text', 'text': '{"meeting":{},"items":[]}'}], 'stop_reason': 'end_turn', 'usage': {}}).encode())
+        urllib.request.urlopen = ok
+        os.environ['ANTHROPIC_WORKSPACE_ID'] = 'wrkspc_test'
+        try:
+            x.claude('x')
+        finally:
+            del os.environ['ANTHROPIC_WORKSPACE_ID']
+        self.assertEqual(seen.get('Anthropic-workspace-id'), 'wrkspc_test')
+
+    def test_missing_pdftotext_is_setup_error(self):
+        import subprocess
+        real = subprocess.run
+        def boom(*a, **k): raise FileNotFoundError('pdftotext')
+        subprocess.run = boom
+        try:
+            with self.assertRaises(x.SetupError):
+                x.to_text(b'%PDF-1.4 x', 'application/pdf')
+        finally:
+            subprocess.run = real
+
+
 if __name__ == '__main__':
     unittest.main()

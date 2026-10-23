@@ -13,7 +13,10 @@ and the agenda already lists every item. Scanned agendas with no text layer are 
 Each run reads at most AGENDA_EXTRACT_MAX documents (default 25), newest meetings first, and stops early if the
 run's estimated cost passes AGENDA_EXTRACT_BUDGET_USD (default 2.00).
 
-Environment: DATABASE_URL, ANTHROPIC_API_KEY, SUPABASE_URL + SUPABASE_SERVICE_ROLE_KEY (to read stored copies),
+A failed read is retried after RETRY_HOURS (6), up to MAX_ATTEMPTS (3). A setup problem (pdftotext missing, a bad
+key, a key that needs ANTHROPIC_WORKSPACE_ID) stops the run without marking agendas failed.
+
+Environment: DATABASE_URL, ANTHROPIC_API_KEY, ANTHROPIC_WORKSPACE_ID (only if the key isn't scoped to a workspace), SUPABASE_URL + SUPABASE_SERVICE_ROLE_KEY (to read stored copies),
 AGENDA_MODEL, AGENDA_EXTRACT_MAX, AGENDA_EXTRACT_BUDGET_USD.
 Usage:
   python3 data/agendas/extract_agendas.py                 # the scheduled step
@@ -40,6 +43,13 @@ MAX_DOCS = int(os.environ.get("AGENDA_EXTRACT_MAX") or 25)
 BUDGET = float(os.environ.get("AGENDA_EXTRACT_BUDGET_USD") or 2.0)
 MAX_CHARS = 120_000          # ~30k tokens; an agenda is far shorter, this only guards against a mislabeled packet
 KEEP_TEXT = 200_000
+RETRY_HOURS = 6              # a failed read is tried again after this long ...
+MAX_ATTEMPTS = 3             # ... up to this many times
+
+
+class SetupError(RuntimeError):
+    """A problem with the run's setup (missing tool, bad key or workspace), not with one agenda: stop the run and
+    record nothing per agenda, so every agenda isn't marked failed and retried for no reason."""
 # Published prices per million tokens (input, output). Haiku is listed "from" this price, so its estimate is a floor.
 PRICES = {"claude-sonnet-5-5": (2.0, 10.0), "claude-haiku-5-5": (0.10, 0.50), "claude-opus-5-5": (4.0, 20.0)}
 KINDS = ["contract", "purchase", "change_order", "budget", "grant", "bond_debt", "rezoning_land_use", "ordinance",
@@ -104,7 +114,10 @@ def pdf_text(data):
     with tempfile.NamedTemporaryFile(suffix=".pdf") as f:
         f.write(data)
         f.flush()
-        r = subprocess.run(["pdftotext", "-layout", "-enc", "UTF-8", f.name, "-"], capture_output=True, timeout=120)
+        try:
+            r = subprocess.run(["pdftotext", "-layout", "-enc", "UTF-8", f.name, "-"], capture_output=True, timeout=120)
+        except FileNotFoundError:
+            raise SetupError("pdftotext isn't installed (poppler-utils)")
         if r.returncode != 0:
             raise RuntimeError("pdftotext: " + r.stderr.decode("utf-8", "replace")[:200])
         return r.stdout.decode("utf-8", "replace")
@@ -124,21 +137,25 @@ def to_text(data, ctype, url=""):
 def claude(text):
     key = os.environ.get("ANTHROPIC_API_KEY")
     if not key:
-        raise RuntimeError("ANTHROPIC_API_KEY is not set")
+        raise SetupError("ANTHROPIC_API_KEY is not set")
+    headers = {"x-api-key": key, "anthropic-version": "2023-06-01", "content-type": "application/json", "User-Agent": fm.UA}
+    if os.environ.get("ANTHROPIC_WORKSPACE_ID"):  # needed when the key isn't scoped to a workspace
+        headers["anthropic-workspace-id"] = os.environ["ANTHROPIC_WORKSPACE_ID"]
     body = json.dumps({"model": MODEL, "max_tokens": 16000,
                        "messages": [{"role": "user", "content": PROMPT + text}],
                        "output_config": {"format": {"type": "json_schema", "schema": SCHEMA}}}).encode()
     last = None
     for attempt in range(3):
-        req = urllib.request.Request("https://api.anthropic.com/v1/messages", data=body, method="POST",
-                                     headers={"x-api-key": key, "anthropic-version": "2023-06-01",
-                                              "content-type": "application/json", "User-Agent": fm.UA})
+        req = urllib.request.Request("https://api.anthropic.com/v1/messages", data=body, method="POST", headers=headers)
         try:
             with urllib.request.urlopen(req, timeout=300) as r:
                 j = json.loads(r.read().decode("utf-8"))
             break
         except urllib.error.HTTPError as e:
-            last = RuntimeError("Claude API %s: %s" % (e.code, e.read()[:300].decode("utf-8", "replace")))
+            msg = e.read()[:400].decode("utf-8", "replace")
+            if e.code in (401, 403) or (e.code == 400 and re.search(r"api key|workspace|credit|billing", msg, re.I)):
+                raise SetupError("Claude API %s: %s" % (e.code, msg))
+            last = RuntimeError("Claude API %s: %s" % (e.code, msg))
             if e.code not in (429, 500, 502, 503, 529):
                 raise last
         except Exception as e:
@@ -184,7 +201,8 @@ select d.id, d.url, d.board, d.title, d.meeting_date, d.current_sha256, d.conten
  where d.kind in ('agenda', 'linked', 'attachment')
    and d.current_sha256 is not null
    and (d.bytes is null or d.bytes <= %s)
-   and not exists (select 1 from agendas.extractions e where e.document_id = d.id and e.sha256 = d.current_sha256)
+   and not exists (select 1 from agendas.extractions e where e.document_id = d.id and e.sha256 = d.current_sha256
+                   and (e.status <> 'failed' or e.attempts >= %s or e.extracted_at > now() - make_interval(hours => %s)))
  order by d.meeting_date desc nulls last, d.id desc
  limit %s"""
 
@@ -196,7 +214,7 @@ def run():
                ("model: " + MODEL,))
     run_id = r[0]
     with db.conn.cursor() as c:
-        c.execute(PENDING, (wa.STORE_MAX, MAX_DOCS))
+        c.execute(PENDING, (wa.STORE_MAX, MAX_ATTEMPTS, RETRY_HOURS, MAX_DOCS))
         docs = c.fetchall()
     print("extract: %d agenda(s) to read with %s" % (len(docs), MODEL))
     spent, n_ok, n_items, n_fail = 0.0, 0, 0, 0
@@ -212,6 +230,12 @@ def run():
                 status = "no_text"
             else:
                 parsed, tin, tout = claude(text[:MAX_CHARS])
+        except SetupError as e:
+            msg = str(e)[:500]
+            print("setup problem, stopping: " + msg)
+            db.one("insert into agendas.errors (stage, url, message, ingest_run_id) values ('extract', null, %s, %s)", (msg, run_id))
+            db.one("update ingest_runs set finished_at = now(), status = 'failed', notes = %s where id = %s", ("FAILED: " + msg, run_id))
+            return 1
         except Exception as e:
             status, err = "failed", str(e)[:500]
             n_fail += 1
@@ -225,7 +249,11 @@ def run():
                 meeting_time, meeting_location, item_count, text_chars, text_truncated, input_tokens, output_tokens, cost_usd, text,
                 ingest_run_id) values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
                 on conflict (document_id, sha256) do update set status = excluded.status, error = excluded.error,
-                model = excluded.model, extracted_at = now() returning id""",
+                model = excluded.model, meeting_body = excluded.meeting_body, meeting_date = excluded.meeting_date,
+                meeting_time = excluded.meeting_time, meeting_location = excluded.meeting_location, item_count = excluded.item_count,
+                text_chars = excluded.text_chars, text_truncated = excluded.text_truncated, input_tokens = excluded.input_tokens,
+                output_tokens = excluded.output_tokens, cost_usd = excluded.cost_usd, text = excluded.text,
+                ingest_run_id = excluded.ingest_run_id, attempts = agendas.extractions.attempts + 1, extracted_at = now() returning id""",
                      (doc_id, sha, status, err, MODEL if tin else None, m.get("body"), norm_date(m.get("date")), m.get("time"),
                       m.get("location"), len(items), len(text) if text else None, bool(text and len(text) > MAX_CHARS),
                       tin or None, tout or None, c_usd, text[:KEEP_TEXT] if text else None, run_id))

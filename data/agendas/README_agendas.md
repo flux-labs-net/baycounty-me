@@ -17,7 +17,8 @@ After each watch run, `extract_agendas.py` reads new agendas (never packets) wit
 
 - **Model:** repository variable `AGENDA_MODEL`, default `claude-sonnet-5-5` ($2 / $10 per million input/output tokens). Set `claude-haiku-5-5` to spend much less.
 - **Cost:** a typical agenda is 2k–10k tokens in and a few thousand out, about 3–5¢ on Sonnet. Each run reads at most `AGENDA_EXTRACT_MAX` agendas (25) and stops at `AGENDA_EXTRACT_BUDGET_USD` ($2.00), newest meetings first; the backlog drains over a few runs.
-- **Secret:** `ANTHROPIC_API_KEY`. Without it the step is skipped.
+- **Secret:** `ANTHROPIC_API_KEY`. Without it the step is skipped. If the key isn't scoped to a workspace, also set the repository variable `ANTHROPIC_WORKSPACE_ID` (or use a workspace-scoped key).
+- **Failures:** a failed read is retried after 6 hours, up to 3 attempts. Setup problems (pdftotext missing, a bad key or workspace) stop the run and are logged once, without marking agendas failed.
 - **Limits:** scanned agendas with no text layer are marked "No text (scanned)" (no OCR yet). An amended agenda (new version) is read again.
 
 ## Which sources send notices
