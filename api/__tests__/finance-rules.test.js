@@ -58,20 +58,27 @@ test('rule 4: a check not cleared after 180 days; cleared ones and voids are not
   assert.equal(f[0].severity, 'review');
 });
 
-test('rules 5 and 6: over budget, unbudgeted, burn rate; revenue lines ignored', () => {
-  const b = (account, description, budget, actual, enc = 0) => ({id: nextId++, fiscal_year: 2026, as_of: '2026-03-31', department: 'Police', account, description, amended_budget: budget, actual_ytd: actual, encumbered: enc});
+test('rules 5 and 6 work per department: over budget, unbudgeted, burn rate; revenue lines ignored', () => {
+  const b = (department, account, description, budget, actual, enc = 0) => ({id: nextId++, fiscal_year: 2026, as_of: '2026-03-31', department, account, description, amended_budget: budget, actual_ytd: actual, encumbered: enc});
   const f = run({budget: [
-    b('001-0521-552.10', 'Fuel', 80000, 70000, 15000),           // over by 5,000 with encumbrance
-    b('001-0521-512.12', 'Salaries', 1200000, 600000),           // on pace
-    b('001-0521-545.00', 'Insurance', 100000, 90000),            // 90% used at 50% of the year
-    b('001-0521-549.00', 'Misc', 0, 12000),                      // unbudgeted
-    b('001-0000-311.10', 'Ad valorem taxes', 5000000, 6000000),  // revenue: collected more, not overspent
+    b('Fleet', '001-0590-552.10', 'Fuel', 80000, 70000, 15000),          // department over by 5,000 with encumbrance
+    b('Police', '001-0521-512.12', 'Salaries', 1200000, 600000),         // on pace
+    b('IT', '001-0516-545.00', 'Licenses', 100000, 90000),               // 90% used at 50% of the year
+    b('Grants', '001-0599-549.00', 'Misc', 0, 12000),                    // unbudgeted department
+    b('Revenue', '001-0000-311.10', 'Ad valorem taxes', 5000000, 6000000), // revenue: collected more, not overspent
   ]});
   const over = only(f, 'over_budget');
   assert.deepEqual(over.map(x => x.amount_at_risk).sort((a, c) => a - c), [5000, 12000]);
+  assert.ok(over.find(x => x.title.startsWith('Fleet')).detail.includes('Fuel ($5,000 over)'));
   const burn = only(f, 'burn_rate');
   assert.equal(burn.length, 1);
-  assert.ok(burn[0].title.startsWith('Police · Insurance'));
+  assert.ok(burn[0].title.startsWith('IT:'));
+});
+
+test('a line over budget inside a department that is within budget is not flagged', () => {
+  const b = (description, budget, actual) => ({id: nextId++, fiscal_year: 2026, as_of: '2026-03-31', department: 'Parks', account: '001-0572', description, amended_budget: budget, actual_ytd: actual});
+  const f = run({budget: [b('Supplies', 10000, 14000), b('Salaries', 400000, 190000)]});
+  assert.equal(only(f, 'over_budget').length, 0);
 });
 
 test('budget rules only read the latest snapshot of each fiscal year', () => {

@@ -102,7 +102,7 @@ test('a saved mapping is reused for the next file with the same columns', opts, 
 test('budget upload takes its as-of date from the title line and feeds the overview', opts, async () => {
   const budget = `Budget vs Actual - Period ending 03/31/2026
 Department,Account,Description,Amended Budget,YTD Actual,Encumbrances
-Police,001-0521-552.10,Fuel,"80,000.00","70,000.00","15,000.00"
+Fleet,001-0590-552.10,Fuel,"80,000.00","70,000.00","15,000.00"
 Police,001-0521-512.12,Salaries,"1,200,000.00","600,000.00",0
 Revenue,001-0000-311.10,Ad valorem,"5,000,000.00","4,900,000.00",0
 ,,Grand Total,,"5,570,000.00",

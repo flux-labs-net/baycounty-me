@@ -1,6 +1,7 @@
 User-agent: *
 Allow: /
 Disallow: /admin
+Disallow: /finance
 Disallow: /api/
 Disallow: /alerts/manage
 

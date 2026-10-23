@@ -15,6 +15,8 @@ const DEFAULTS = {
   duplicate_window_days: 30,
   duplicate_min_amount: 100,
   split_window_days: 14,
+  split_window_days_small: 7,     // the City Manager level: tighter window
+  split_min_share_small: 0.7,     // and each payment at least 70% of it, i.e. just under
   round_dollar_min: 5000,
   weekend_min: 1000,
   spike_multiple: 3,
@@ -39,11 +41,15 @@ const RULES = {
 };
 
 const fp = (...parts) => crypto.createHash('sha1').update(parts.map(p => String(p ?? '')).join('|')).digest('hex').slice(0, 20);
-const usd = n => (n === null || n === undefined ? '—' : (n < 0 ? '-' : '') + '$' + Math.abs(n).toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}));
+const usd = n => (n === null || n === undefined ? '—' : (n < 0 ? '-' : '') + '$' + Math.abs(n).toLocaleString('en-US', Number.isInteger(n) ? {} : {minimumFractionDigits: 2, maximumFractionDigits: 2}));
 const days = (a, b) => Math.round((Date.parse(b) - Date.parse(a)) / 864e5);
 const addDays = (d, n) => new Date(Date.parse(d) + n * 864e5).toISOString().slice(0, 10);
 const monthEnd = ym => new Date(Date.UTC(+ym.slice(0, 4), +ym.slice(5, 7), 0)).toISOString().slice(0, 10);
 const nextMonth = ym => { const y = +ym.slice(0, 4), m = +ym.slice(5, 7); return m === 12 ? `${y + 1}-01` : `${y}-${String(m + 1).padStart(2, '0')}`; };
+const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const niceDate = d => `${MONTHS[+d.slice(5, 7) - 1].slice(0, 3)} ${+d.slice(8, 10)}, ${d.slice(0, 4)}`;
+const monthName = ym => `${MONTHS[+ym.slice(5, 7) - 1]} ${ym.slice(0, 4)}`;
+const monthList = yms => yms.map(monthName).join(', ');
 const median = xs => { if (!xs.length) return 0; const s = [...xs].sort((a, b) => a - b), h = s.length >> 1; return s.length % 2 ? s[h] : (s[h - 1] + s[h]) / 2; };
 
 function flag(rule, severity, key, f) {
@@ -115,8 +121,8 @@ function bankRecs({bankTxns, bankRecs, today, s}) {
         if (rec.reconciled_on && rec.reconciled_on > due) {
           const late = days(due, rec.reconciled_on);
           out.push(flag('rec_overdue', late > 60 ? 'urgent' : 'review', [hash, ym, 'late'], {
-            title: `${monthEnd(ym).slice(0, 7)} rec for ${label} finished ${late} days late`,
-            detail: `The ${ym} reconciliation was completed ${rec.reconciled_on}, ${late} days after its ${s.rec_due_days}-day due date (${due}).`,
+            title: `${monthName(ym)} rec for ${label} finished ${late} days late`,
+            detail: `The ${monthName(ym)} reconciliation was completed ${rec.reconciled_on}, ${late} days after its ${s.rec_due_days}-day due date (${due}).`,
             amount_at_risk: a.months.get(ym)?.activity ?? null, refs: [{table: 'bank_recs', id: rec.id}], facts: {account: label, month: ym, reconciled_on: rec.reconciled_on, due}}));
         }
       }
@@ -125,7 +131,7 @@ function bankRecs({bankTxns, bankRecs, today, s}) {
         const oldest = missing[0], overdue = days(addDays(monthEnd(oldest), s.rec_due_days), today);
         out.push(flag('rec_overdue', overdue > 60 ? 'urgent' : 'review', [hash, 'missing', missing.join(',')], {
           title: `No reconciliation on file for ${label}: ${missing.length} month${missing.length === 1 ? '' : 's'}`,
-          detail: `Months with no rec uploaded: ${missing.join(', ')}. The oldest is ${overdue} days past due. ` +
+          detail: `Months with no rec uploaded: ${monthList(missing)}. The oldest is ${overdue} days past due. ` +
             `${usd(activity)} of bank activity in those months hasn't been tied to the books. Upload the rec summaries if they were done.`,
           amount_at_risk: activity, refs: missing.flatMap(ym => (a.months.get(ym)?.ids || []).slice(0, 50).map(id => ({table: 'bank_transactions', id}))),
           facts: {account: label, months: missing}}));
@@ -138,7 +144,7 @@ function bankRecs({bankTxns, bankRecs, today, s}) {
       const diff = round2(adjusted - r.book_balance);
       if (Math.abs(diff) < 0.01) continue;
       out.push(flag('rec_difference', Math.abs(diff) >= 1000 ? 'urgent' : 'review', [hash, r.period_end, diff], {
-        title: `${label} ${r.period_end}: unreconciled difference of ${usd(diff)}`,
+        title: `${label}, ${monthName(r.period_end.slice(0, 7))}: reconciliation off by ${usd(diff)}`,
         detail: `Bank ${usd(r.statement_balance)} − outstanding checks ${usd(r.outstanding_checks || 0)} + deposits in transit ${usd(r.deposits_in_transit || 0)}` +
           `${r.other_adjustments ? ` + adjustments ${usd(r.other_adjustments)}` : ''} = ${usd(adjusted)}, but the books show ${usd(r.book_balance)}.`,
         amount_at_risk: diff, refs: [{table: 'bank_recs', id: r.id}], facts: {account: label, period_end: r.period_end, adjusted, book: r.book_balance}}));
@@ -172,7 +178,7 @@ function staleChecks({disb, bankTxns, s}) {
     if (byAmount.get(k)) { byAmount.set(k, byAmount.get(k) - 1); continue; } // cleared without a check number
     out.push(flag('stale_check', d.amount >= 5000 ? 'review' : 'info', [d.doc_no, d.amount, d.paid_on], {
       title: `Check ${d.doc_no} to ${d.payee} (${usd(d.amount)}) hasn't cleared in ${age} days`,
-      detail: `Written ${d.paid_on}; the bank data runs through ${end} with no matching check. Stale checks should be voided and, ` +
+      detail: `Written ${niceDate(d.paid_on)}; the bank data runs through ${niceDate(end)} with no matching check. Stale checks should be voided and, ` +
         'if the payee can’t be reached, reported as unclaimed property.',
       amount_at_risk: d.amount, refs: [{table: 'disbursements', id: d.id}], facts: {doc_no: d.doc_no, payee: d.payee, age_days: age}}));
   }
@@ -180,45 +186,58 @@ function staleChecks({disb, bankTxns, s}) {
 }
 
 // ---- Rules 5 and 6: budget vs actual, latest snapshot per fiscal year ----
+// Checked per department (fund when there's no department): Florida cities adopt and control budgets at that level,
+// so one line running over inside a department that's within budget is a transfer, not overspending. The lines
+// driving a department's number are listed on the flag.
 function budgetRules({budget, s, fyStartMonth}) {
   const out = [];
   const latest = new Map();
   for (const l of budget) { const k = l.fiscal_year; if (!latest.has(k) || (l.as_of || '') > latest.get(k)) latest.set(k, l.as_of || ''); }
+  const groups = new Map();
   for (const l of budget) {
     if ((l.as_of || '') !== latest.get(l.fiscal_year) || isRevenue(l)) continue;
-    const budgetAmt = l.amended_budget ?? l.original_budget, spent = round2((l.actual_ytd || 0) + (l.encumbered || 0));
-    const name = [l.department, l.description || l.account].filter(Boolean).join(' · ') || l.account;
-    const key = [l.fiscal_year, l.fund, l.department, l.account, l.description];
-    if (budgetAmt === null || budgetAmt === undefined) continue;
-    if (budgetAmt <= 0 && spent > 0) {
+    const unit = l.department || l.fund || 'Unassigned';
+    const k = [l.fiscal_year, l.fund || '', unit].join('|');
+    if (!groups.has(k)) groups.set(k, {fy: l.fiscal_year, fund: l.fund, unit, as_of: l.as_of, budget: 0, actual: 0, enc: 0, lines: []});
+    const g = groups.get(k);
+    g.budget += l.amended_budget ?? l.original_budget ?? 0; g.actual += l.actual_ytd || 0; g.enc += l.encumbered || 0; g.lines.push(l);
+  }
+  const lineList = (g, n = 4) => g.lines.map(l => ({l, over: (l.actual_ytd || 0) + (l.encumbered || 0) - (l.amended_budget ?? l.original_budget ?? 0)}))
+    .sort((a, b) => b.over - a.over).slice(0, n).filter(x => x.over > 0.5)
+    .map(x => `${x.l.description || x.l.account} (${usd(round2(x.over))} over)`).join('; ');
+  for (const g of groups.values()) {
+    const b = round2(g.budget), spent = round2(g.actual + g.enc), key = [g.fy, g.fund, g.unit];
+    const refs = g.lines.slice(0, 60).map(l => ({table: 'budget_lines', id: l.id}));
+    if (b <= 0 && spent > 0) {
       out.push(flag('over_budget', spent >= 10000 ? 'urgent' : 'review', [...key, 'unbudgeted', spent], {
-        title: `${name}: ${usd(spent)} spent with no budget`, detail: `FY${l.fiscal_year} as of ${l.as_of}: no appropriation for this line, but ${usd(spent)} is spent or encumbered.`,
-        amount_at_risk: spent, refs: [{table: 'budget_lines', id: l.id}], facts: {fiscal_year: l.fiscal_year, budget: budgetAmt, spent}}));
+        title: `${g.unit}: ${usd(spent)} spent with no budget`, detail: `FY${g.fy} as of ${g.as_of}: no appropriation, but ${usd(spent)} is spent or encumbered.`,
+        amount_at_risk: spent, refs, facts: {fiscal_year: g.fy, budget: b, spent}}));
       continue;
     }
-    if (budgetAmt <= 0) continue;
-    if (spent > budgetAmt + 0.5) {
-      const over = round2(spent - budgetAmt), pct = over / budgetAmt;
-      out.push(flag('over_budget', over >= 10000 || pct >= 0.1 ? 'urgent' : 'review', [...key, over], {
-        title: `${name}: ${usd(over)} over budget (${Math.round(pct * 100)}%)`,
-        detail: `FY${l.fiscal_year} as of ${l.as_of}: budget ${usd(budgetAmt)}; actual ${usd(l.actual_ytd || 0)}` +
-          `${l.encumbered ? ` + encumbered ${usd(l.encumbered)}` : ''} = ${usd(spent)}. Spending past the adopted amount needs a budget amendment approved by the Commission.`,
-        amount_at_risk: over, refs: [{table: 'budget_lines', id: l.id}], facts: {fiscal_year: l.fiscal_year, budget: budgetAmt, spent, over}}));
+    if (b <= 0) continue;
+    if (spent > b + 0.5) {
+      const over = round2(spent - b), pct = over / b, top = lineList(g);
+      out.push(flag('over_budget', over >= 10000 || pct >= 0.05 ? 'urgent' : 'review', [...key, over], {
+        title: `${g.unit}: ${usd(over)} over budget (${Math.round(pct * 100)}%)`,
+        detail: `FY${g.fy} as of ${g.as_of}: budget ${usd(b)}; spent ${usd(round2(g.actual))}${g.enc ? ` plus ${usd(round2(g.enc))} on open purchase orders` : ''} = ${usd(spent)}. ` +
+          `Spending past the adopted amount needs a budget amendment approved by the Commission.${top ? ` Lines over: ${top}.` : ''}`,
+        amount_at_risk: over, refs, facts: {fiscal_year: g.fy, budget: b, spent, over}}));
       continue;
     }
     // Rule 6: share of budget used vs share of the fiscal year elapsed.
-    if (!l.as_of || budgetAmt < s.burn_rate_min_budget) continue;
-    const fyStart = `${l.fiscal_year - (fyStartMonth > 1 ? 1 : 0)}-${String(fyStartMonth).padStart(2, '0')}-01`;
-    const elapsed = Math.min(1, Math.max(0, (days(fyStart, l.as_of) + 1) / 365));
+    if (!g.as_of || b < s.burn_rate_min_budget) continue;
+    if (/debt\s*service/i.test(`${g.unit} ${g.fund || ''}`)) continue; // paid on a fixed schedule, often once a year
+    const fyStart = `${g.fy - (fyStartMonth > 1 ? 1 : 0)}-${String(fyStartMonth).padStart(2, '0')}-01`;
+    const elapsed = Math.min(1, Math.max(0, (days(fyStart, g.as_of) + 1) / 365));
     if (elapsed < 1 / 12 || elapsed >= 0.95) continue;
-    const used = spent / budgetAmt;
+    const used = spent / b;
     if (used - elapsed > s.burn_rate_points) {
-      const ahead = round2((used - elapsed) * budgetAmt);
-      out.push(flag('burn_rate', 'review', [...key, Math.round(used * 100), l.as_of.slice(0, 7)], {
-        title: `${name}: ${Math.round(used * 100)}% used, ${Math.round(elapsed * 100)}% of the year gone`,
-        detail: `FY${l.fiscal_year} as of ${l.as_of}: ${usd(spent)} of ${usd(budgetAmt)} spent or encumbered. At this pace the line runs out early. ` +
-          'Lines paid once a year (insurance, annual contracts) look like this legitimately: mark them explained.',
-        amount_at_risk: ahead, refs: [{table: 'budget_lines', id: l.id}], facts: {fiscal_year: l.fiscal_year, used: round2(used), elapsed: round2(elapsed)}}));
+      const ahead = round2((used - elapsed) * b);
+      out.push(flag('burn_rate', 'review', [...key, Math.round(used * 100), g.as_of.slice(0, 7)], {
+        title: `${g.unit}: ${Math.round(used * 100)}% used, ${Math.round(elapsed * 100)}% of the year gone`,
+        detail: `FY${g.fy} as of ${g.as_of}: ${usd(spent)} of ${usd(b)} spent or encumbered. At this pace the budget runs out before the year ends. ` +
+          'Costs paid once a year (insurance, software licenses, debt payments) look like this legitimately: mark those explained.',
+        amount_at_risk: ahead, refs, facts: {fiscal_year: g.fy, used: round2(used), elapsed: round2(elapsed)}}));
     }
   }
   return out;
@@ -245,7 +264,7 @@ function paymentRules({disb, s}) {
         const id = [a.id, b.id].join('-'); if (seen.has(id)) continue; seen.add(id);
         out.push(flag('duplicate_payment', sameInvoice ? 'urgent' : 'review', [key, a.amount, a.paid_on, b.paid_on, a.doc_no, b.doc_no], {
           title: `${a.payee}: ${usd(b.amount)} paid twice${sameInvoice ? ` on invoice ${a.invoice_no}` : ` within ${days(a.paid_on, b.paid_on)} days`}`,
-          detail: `${a.doc_no || 'payment'} on ${a.paid_on} (${usd(a.amount)}) and ${b.doc_no || 'payment'} on ${b.paid_on} (${usd(b.amount)}).` +
+          detail: `${a.doc_no ? 'Check ' + a.doc_no : 'A payment'} on ${niceDate(a.paid_on)} (${usd(a.amount)}) and ${b.doc_no ? 'check ' + b.doc_no : 'another'} on ${niceDate(b.paid_on)} (${usd(b.amount)}).` +
             (sameInvoice ? ' Same invoice number on both.' : ' Recurring bills of the same amount (rent, utilities) trip this rule; mark those explained.'),
           amount_at_risk: Math.min(a.amount, b.amount), refs: [{table: 'disbursements', id: a.id}, {table: 'disbursements', id: b.id}],
           facts: {payee: a.payee, same_invoice: !!sameInvoice}}));
@@ -256,17 +275,18 @@ function paymentRules({disb, s}) {
   // Rule 8: two or more payments to one vendor, each under an approval threshold (and at least half of it),
   // inside the window, adding up past the threshold.
   for (const [key, list] of byPayee) {
-    for (const [T, sev, who] of [[s.bid_threshold, 'review', 'Commission approval and formal bids'], [s.manager_threshold, 'info', 'City Manager approval']]) {
-      const near = list.filter(d => d.amount < T && d.amount >= T / 2);
+    for (const [T, sev, who, win, share] of [[s.bid_threshold, 'review', 'need Commission approval and formal bids', s.split_window_days, 0.5],
+                                              [s.manager_threshold, 'info', 'need City Manager approval', s.split_window_days_small, s.split_min_share_small]]) {
+      const near = list.filter(d => d.amount < T && d.amount >= T * share);
       let i = 0;
       while (i < near.length) {
         let j = i, sum = 0;
-        while (j < near.length && days(near[i].paid_on, near[j].paid_on) <= s.split_window_days) { sum += near[j].amount; j++; }
+        while (j < near.length && days(near[i].paid_on, near[j].paid_on) <= win) { sum += near[j].amount; j++; }
         if (j - i >= 2 && sum >= T) {
           const grp = near.slice(i, j);
           out.push(flag('split_purchase', sev, [key, T, grp.map(d => d.id).join(',')], {
             title: `${grp[0].payee}: ${grp.length} payments under ${usd(T)} total ${usd(round2(sum))} in ${days(grp[0].paid_on, grp[grp.length - 1].paid_on)} days`,
-            detail: `${who} is required at ${usd(T)} and up. Payments: ${grp.map(d => `${d.paid_on} ${usd(d.amount)}`).join('; ')}. ` +
+            detail: `Purchases of ${usd(T)} and up ${who}. Payments: ${grp.map(d => `${niceDate(d.paid_on)}, ${usd(d.amount)}`).join('; ')}. ` +
               'Check whether these were one purchase split up, or separate needs.',
             amount_at_risk: sum, refs: grp.map(d => ({table: 'disbursements', id: d.id})), facts: {payee: grp[0].payee, threshold: T, count: grp.length}}));
           i = j;
@@ -287,11 +307,11 @@ function paymentRules({disb, s}) {
     if (!reasons.length) continue;
     out.push(flag('round_or_weekend', 'info', [d.id, d.amount, d.paid_on], {
       title: `${d.payee}: ${usd(d.amount)}, ${reasons.join(' and ')}`,
-      detail: `${d.doc_no || 'Payment'} on ${d.paid_on}. Round amounts and off-day payments are common in fraud cases but usually have ordinary explanations (deposits, retainers, grants, batch dates).`,
+      detail: `${d.doc_no ? 'Check ' + d.doc_no : 'Payment'} on ${niceDate(d.paid_on)}. Round amounts and off-day payments are common in fraud cases but usually have ordinary explanations (deposits, retainers, grants, batch dates).`,
       amount_at_risk: d.amount, refs: [{table: 'disbursements', id: d.id}], facts: {payee: d.payee, reasons}}));
   }
 
-  // Rule 10: a vendor's month far above its own history.
+  // Rule 10: a vendor's month far above its usual paid month (median of the months it was paid in the prior year).
   const months = [...new Set(live.map(d => d.paid_on.slice(0, 7)))].sort();
   if (months.length) {
     const all = []; for (let ym = months[0]; ym <= months[months.length - 1]; ym = nextMonth(ym)) all.push(ym);
@@ -301,20 +321,22 @@ function paymentRules({disb, s}) {
       all.forEach((ym, idx) => {
         const cur = tot.get(ym) || 0;
         if (!cur || idx < s.spike_history_months) return;
-        const prior = all.slice(Math.max(0, idx - 12), idx).map(m => tot.get(m) || 0);
-        const med = median(prior), first = list.find(d => d.paid_on.slice(0, 7) === ym);
+        const window = all.slice(Math.max(0, idx - 12), idx), paid = window.map(m => tot.get(m) || 0).filter(x => x > 0);
+        const first = list.find(d => d.paid_on.slice(0, 7) === ym);
         const refs = list.filter(d => d.paid_on.slice(0, 7) === ym).map(d => ({table: 'disbursements', id: d.id}));
-        if (med === 0 && prior.every(x => x === 0)) {
+        if (!paid.length) {
           if (cur >= s.new_vendor_large) out.push(flag('payee_spike', 'info', [key, ym, round2(cur), 'new'], {
-            title: `${first.payee}: ${usd(cur)} in ${ym}, first payment in ${prior.length} months of records`,
-            detail: 'A large first payment to a vendor. Confirm the vendor record, W-9 and the contract or PO behind it.',
+            title: `${first.payee}: ${usd(cur)} in ${monthName(ym)}, first payment in ${window.length} months of records`,
+            detail: 'A large first payment to a vendor. Confirm the vendor record, W-9 and the contract or purchase order behind it.',
             amount_at_risk: cur, refs, facts: {payee: first.payee, month: ym, total: round2(cur)}}));
           return;
         }
+        if (paid.length < 3) return; // too little history to call anything usual
+        const med = median(paid);
         if (cur > s.spike_multiple * med && cur - med >= s.spike_min_increase) {
           out.push(flag('payee_spike', 'review', [key, ym, round2(cur)], {
-            title: `${first.payee}: ${usd(cur)} in ${ym}, ${(cur / Math.max(med, 0.01)).toFixed(1)}× its usual month`,
-            detail: `Median month over the prior ${prior.length} months: ${usd(med)}.`,
+            title: `${first.payee}: ${usd(cur)} in ${monthName(ym)}, ${(cur / med).toFixed(1)}× its usual month`,
+            detail: `In the ${paid.length} months it was paid during the prior year, its typical month was ${usd(med)}.`,
             amount_at_risk: cur - med, refs, facts: {payee: first.payee, month: ym, total: round2(cur), median: round2(med)}}));
         }
       });
