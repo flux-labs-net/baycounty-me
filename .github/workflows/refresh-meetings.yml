@@ -82,7 +82,7 @@ jobs:
           # git status --porcelain also lists new, untracked files, which git diff --quiet ignores.
           if [ -z "$(git status --porcelain -- $paths)" ]; then echo "No changes"; exit 0; fi
           git config user.name "BayCounty.me bot"
-          git config user.email "hello@fluxlabs.net"
+          git config user.email "211150+jeremymcs@users.noreply.github.com"
           git add -A $paths
           git commit -m "Daily refresh: meetings, agenda items and campaign finance ($(date -u +%Y-%m-%d))"
           git push
