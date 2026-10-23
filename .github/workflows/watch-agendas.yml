@@ -41,7 +41,9 @@ jobs:
           python-version: '3.12'
       - run: pip install 'psycopg[binary]'
       - name: Install pdftotext
-        run: sudo apt-get install -y -qq poppler-utils >/dev/null
+        run: |
+          sudo apt-get update -qq >/dev/null
+          sudo apt-get install -y -qq --no-install-recommends poppler-utils >/dev/null
       - name: Check the inbox and sources
         id: watch
         env:
