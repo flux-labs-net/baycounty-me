@@ -32,7 +32,7 @@ test.before(async () => {
   pool = new Pool({connectionString: URL_});
   q = async (t, p = []) => (await pool.query(t, p)).rows;
   await q('drop schema if exists finance cascade');
-  await pool.query(fs.readFileSync(path.join(__dirname, '../../db/migrations/0015_finance.sql'), 'utf8'));
+  for (const f of ['0015_finance.sql', '0016_finance_signin.sql']) await pool.query(fs.readFileSync(path.join(__dirname, '../../db/migrations', f), 'utf8'));
   await q(`insert into finance.members (workspace_id, email, role) values ('lh', 'viewer@city.test', 'viewer')`);
   const {createHandler} = require('../finance');
   handler = createHandler({q, hasDb: () => true, storage: fakeStorage, caller: async () => as});
@@ -159,4 +159,72 @@ test('owners manage members; app users get linked to their membership by id', op
   assert.equal(m.user_id, '11111111-1111-4111-8111-111111111111');
   assert.equal((await post('members', {email: 'x@y.test', role: 'owner'})).status, 403);
   as = {email: 'jeremy@fluxlabs.net', userId: null, via: 'cookie'};
+});
+
+// ---- Sign-in with an emailed code, through the real caller() ----
+const sent = [];
+function realCall(action, {method = 'POST', body, headers = {}} = {}) {
+  const {createHandler} = require('../finance');
+  const {caller} = require('../_finance/auth');
+  const h = createHandler({q, hasDb: () => true, storage: fakeStorage, caller, sendEmail: async (to, m) => { sent.push({to, m}); }});
+  return new Promise((resolve, reject) => {
+    const res = {code: 200, headers: {}, setHeader(k, v) { this.headers[k] = v; }, status(c) { this.code = c; return this; },
+      json(o) { resolve({status: this.code, body: o, headers: this.headers}); return this; }};
+    h({method, query: {action, ...(method === 'GET' ? body : {})}, headers: {'x-real-ip': '10.0.0.' + (sent.length + 1), ...headers}, body: method === 'GET' ? undefined : body}, res).catch(reject);
+  });
+}
+const codeFrom = m => m.text.match(/\b(\d{6})\b/)[1];
+
+test('sign-in: members get a code, strangers get the same answer and no email', opts, async () => {
+  const a = await realCall('login', {body: {email: 'viewer@city.test'}});
+  const b = await realCall('login', {body: {email: 'nobody@city.test'}});
+  assert.equal(a.status, 200);
+  assert.deepEqual(a.body, b.body);
+  assert.equal(sent.length, 1);
+  assert.equal(sent[0].to, 'viewer@city.test');
+  assert.match(sent[0].m.subject, /^\d{6} is your/);
+});
+
+test('sign-in: wrong codes count, the right one opens a web session cookie, and it works only once', opts, async () => {
+  const code = codeFrom(sent[0].m), wrong = code === '000000' ? '111111' : '000000';
+  assert.equal((await realCall('verify', {body: {email: 'viewer@city.test', code: wrong}})).status, 400);
+  const ok = await realCall('verify', {body: {email: 'Viewer@City.test', code}});
+  assert.equal(ok.status, 200, JSON.stringify(ok.body));
+  assert.equal(ok.body.token, undefined, 'web sign-in does not return the token in the body');
+  const cookie = ok.headers['Set-Cookie'].split(';')[0];
+  assert.match(cookie, /^bcm_fin=bcmf_/);
+  assert.match(ok.headers['Set-Cookie'], /HttpOnly; Secure; SameSite=Lax/);
+  assert.equal((await realCall('verify', {body: {email: 'viewer@city.test', code}})).status, 400, 'code is single-use');
+
+  const ov = await realCall('overview', {method: 'GET', body: {workspace: 'lh'}, headers: {cookie}});
+  assert.equal(ov.status, 200, JSON.stringify(ov.body));
+  assert.equal(ov.body.role, 'viewer');
+  const noHeader = await realCall('run-rules', {body: {workspace: 'lh'}, headers: {cookie}});
+  assert.equal(noHeader.status, 403, 'cookie POST without X-BCM-Finance is refused');
+  const viewerWrite = await realCall('flag-status', {body: {workspace: 'lh', id: 1, status: 'explained', note: 'x'}, headers: {cookie, 'x-bcm-finance': '1'}});
+  assert.equal(viewerWrite.status, 403, 'viewers cannot review flags');
+
+  const out = await realCall('logout', {body: {}, headers: {cookie, 'x-bcm-finance': '1'}});
+  assert.equal(out.status, 200);
+  assert.equal((await realCall('overview', {method: 'GET', body: {workspace: 'lh'}, headers: {cookie}})).status, 401, 'session revoked');
+});
+
+test('sign-in: the app gets a bearer token; five wrong guesses burn the code', opts, async () => {
+  await realCall('login', {body: {email: 'jeremy@fluxlabs.net'}});
+  const code = codeFrom(sent[sent.length - 1].m);
+  const app = await realCall('verify', {body: {email: 'jeremy@fluxlabs.net', code, client: 'app'}});
+  assert.match(app.body.token, /^bcmf_/);
+  const ws = await realCall('workspaces', {method: 'GET', body: {}, headers: {authorization: 'Bearer ' + app.body.token}});
+  assert.deepEqual(ws.body.workspaces.map(w => w.id), ['lh']);
+  assert.equal(ws.body.via, 'app');
+  const post = await realCall('run-rules', {body: {workspace: 'lh'}, headers: {authorization: 'Bearer ' + app.body.token}});
+  assert.equal(post.status, 200, 'bearer requests need no CSRF header');
+
+  await q('delete from finance.login_codes');
+  await realCall('login', {body: {email: 'jeremy@fluxlabs.net'}});
+  const fresh = codeFrom(sent[sent.length - 1].m), bad = fresh === '999999' ? '888888' : '999999';
+  for (let i = 0; i < 5; i++) await realCall('verify', {body: {email: 'jeremy@fluxlabs.net', code: bad}});
+  const late = await realCall('verify', {body: {email: 'jeremy@fluxlabs.net', code: fresh}});
+  assert.equal(late.status, 400);
+  assert.match(late.body.error, /expired/);
 });
