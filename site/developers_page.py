@@ -36,6 +36,8 @@ def developers_page(out_dir):
       <tr><th scope="row"><code>GET /api/v1/status</code></th><td>Rows in each dataset, when the database last loaded it, and any load errors</td></tr>
       <tr><th scope="row"><code>GET /api/v1/changes?since=</code></th><td>Records added since a date or time, e.g. <a href="/api/v1/changes?since=2026-10-01&amp;dataset=contracts">new contracts since Oct. 1</a>. Add <code>dataset=</code> to pick datasets</td></tr>
       <tr><th scope="row"><code>GET /api/v1/meetings.ics?gov=</code></th><td>Calendar feed of upcoming meetings for one government, e.g. <a href="/api/v1/meetings.ics?gov=lh">Lynn Haven</a>. Keys: county, schools, pc, pcb, lh, cw, sp, parker, mb; a board such as <code>lh-cra</code> works too, and commas combine them. Paste the link into Google Calendar, Outlook or Apple Calendar ("subscribe by URL"). Every board at once: <a href="/meetings.ics">/meetings.ics</a></td></tr>
+      <tr><th scope="row"><code>GET /api/v1/correspondence?year=</code></th><td>Published letters BayCounty.me sent to officials, with their replies, e.g. <a href="/api/v1/correspondence?year=all">every year</a>. Add <code>government=</code> for one government. Only threads approved for publication are included</td></tr>
+      <tr><th scope="row"><code>GET /api/v1/pages</code></th><td>Which datasets and endpoints hold the data behind each page on the site, e.g. <a href="/api/v1/pages?page=/public-money/cra-network">the CRA network</a></td></tr>
       <tr><th scope="row"><code>GET /api/v1/search?q=</code></th><td>Search every page on the site, e.g. <a href="/api/v1/search?q=martin%20theatre">martin theatre</a></td></tr>
       <tr><th scope="row"><code>GET /downloads/{{id}}.json</code></th><td>The whole dataset as one file, for bulk use</td></tr>
     </tbody></table></div></section>
@@ -69,7 +71,7 @@ def developers_page(out_dir):
     <ul class="plain">
       <li><b>Claude:</b> add a custom connector and paste the address above.</li>
       <li><b>Other assistants and tools:</b> add it as a remote MCP server using the "Streamable HTTP" transport.</li>
-      <li><b>Tools it offers:</b> <code>list_datasets</code>, <code>query_dataset</code>, <code>get_government</code>, <code>search_site</code>, <code>upcoming_meetings</code> (by government, days ahead or a keyword such as a street name), <code>member_voting_record</code> (one board member's votes, including when they were in the minority) and <code>vendor_profile</code> (one company's contracts, change orders, payments, CRA payments and business campaign contributions; a match doesn't show why anything happened).</li>
+      <li><b>Tools it offers:</b> <code>list_datasets</code>, <code>query_dataset</code>, <code>get_government</code>, <code>search_site</code>, <code>upcoming_meetings</code> (by government, days ahead or a keyword such as a street name), <code>member_voting_record</code> (one board member's votes, including when they were in the minority) and <code>vendor_profile</code> (one company's contracts, change orders, payments, CRA payments and business campaign contributions; a match doesn't show why anything happened) and <code>official_correspondence</code> (published letters to officials and their replies).</li>
       <li><b>Resources:</b> each dataset is also an MCP resource at <code>baycounty://datasets/&lt;id&gt;</code> (up to 2,000 rows; the full file is linked).</li>
       <li><b>Example question:</b> "Which Bay County contracts over $5 million went to campaign donors, and how did commissioners vote?"</li>
     </ul></section>

@@ -47,6 +47,13 @@ const TOOLS = [
      vendor: {type: 'string', description: 'Company name, e.g. "GAC Contractors" or "Roberts & Roberts"'},
      limit: {type: 'integer', minimum: 1, maximum: 200, default: 50, description: 'Rows per section'}}},
    annotations: {readOnlyHint: true}},
+  {name: 'official_correspondence', title: 'Letters to officials',
+   description: 'Published emails BayCounty.me sent to local officials, and their replies, grouped by letter. Only threads approved for publication are returned.',
+   inputSchema: {type: 'object', additionalProperties: false, properties: {
+     year: {type: 'string', description: 'A year such as 2026, or "all". Omit for the latest year with letters.'},
+     government: {type: 'string', description: 'Only letters to this government (as listed in the governments field of a previous result)'},
+     limit: {type: 'integer', minimum: 1, maximum: 100, default: 25, description: 'Conversations to return'}}},
+   annotations: {readOnlyHint: true}},
   {name: 'search_site', title: 'Search BayCounty.me',
    description: 'Full-text search across every page and record on BayCounty.me. Returns titles, summaries and links.',
    inputSchema: {type: 'object', required: ['q'], additionalProperties: false, properties: {q: {type: 'string'}, limit: {type: 'integer', minimum: 1, maximum: 50, default: 10}}},
@@ -112,6 +119,13 @@ async function call(req, name, a = {}) {
       agenda_url: m.agenda_url || null, packet_url: m.packet_url || null, money_items: Array.isArray(m.items) ? m.items : [], agenda_items: Array.isArray(m.agenda_items) ? m.agenda_items.slice(0, 40) : [], source: m.source}));
     return {total: rows.length, returned: page.length, days, meetings: page, calendar: `${SITE}/api/v1/meetings.ics${gov ? '?gov=' + encodeURIComponent(gov) : ''}`,
       note: 'Times are US Central. expected=true means generated from the regular schedule; confirm before going.'};
+  }
+  if (name === 'official_correspondence') {
+    const r = await require('./_correspondence').publicFeed({year: String(a.year || ''), government: String(a.government || '').slice(0, 120)});
+    const lim = Math.min(Math.max(a.limit || 25, 1), 100);
+    const page = r.conversations.slice(0, lim);
+    return {year: r.year, years: r.years, governments: r.governments, total: r.conversations.length, returned: page.length, conversations: page,
+      page: `${SITE}/correspondence`};
   }
   if (name === 'member_voting_record') {
     const c = await load(req, '/downloads/index.json');
@@ -220,7 +234,7 @@ async function handle0(req, msg) {
     const v = VERSIONS.includes(params.protocolVersion) ? params.protocolVersion : VERSIONS[0];
     return ok(id, {protocolVersion: v, capabilities: {tools: {listChanged: false}, resources: {listChanged: false, subscribe: false}},
       serverInfo: {name: 'baycounty-me', title: 'BayCounty.me', version: '1.0.0', websiteUrl: SITE},
-      instructions: 'Public records for Bay County, Florida: local budgets, property taxes and exemptions, recorded votes, contracts, campaign money, 2026 candidates, public salaries, debt, audits and Hurricane Michael recovery. Use list_datasets, then query_dataset; upcoming_meetings, member_voting_record and vendor_profile answer common questions directly, and each dataset is also a resource (baycounty://datasets/<id>). Always cite the source link on each row. BayCounty.me is neutral and does not endorse candidates.'});
+      instructions: 'Public records for Bay County, Florida: local budgets, property taxes and exemptions, recorded votes, contracts, campaign money, 2026 candidates, public salaries, debt, audits and Hurricane Michael recovery. Use list_datasets, then query_dataset; upcoming_meetings, member_voting_record, vendor_profile and official_correspondence answer common questions directly, and each dataset is also a resource (baycounty://datasets/<id>). Always cite the source link on each row. BayCounty.me is neutral and does not endorse candidates.'});
   }
   if (method === 'ping') return ok(id, {});
   if (method === 'tools/list') return ok(id, {tools: TOOLS});

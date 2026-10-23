@@ -23,7 +23,7 @@ test('normVendor and vendorMatch', () => {
 test('tools/list and resources/list', {skip: !built}, async () => {
   const t = await mcp.handle({}, {jsonrpc: '2.0', id: 1, method: 'tools/list'});
   const names = t.result.tools.map(x => x.name);
-  for (const n of ['upcoming_meetings', 'member_voting_record', 'vendor_profile']) assert.ok(names.includes(n), n);
+  for (const n of ['upcoming_meetings', 'member_voting_record', 'vendor_profile', 'official_correspondence']) assert.ok(names.includes(n), n);
   const r = await mcp.handle({}, {jsonrpc: '2.0', id: 2, method: 'resources/list'});
   assert.ok(r.result.resources.some(x => x.uri === 'baycounty://datasets/contracts'));
   const rd = await mcp.handle({}, {jsonrpc: '2.0', id: 3, method: 'resources/read', params: {uri: 'baycounty://datasets/debt'}});
