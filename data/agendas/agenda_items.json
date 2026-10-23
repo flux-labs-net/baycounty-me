@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-23T12:28:18+00:00",
+ "generated": "2026-10-23T12:39:20+00:00",
  "note": "Agenda items read from posted agendas by a Claude model (data/agendas/extract_agendas.py). Amounts are the largest dollar figure printed on the item, not necessarily spending. Check the agenda itself before relying on an item.",
  "items": [
   {
@@ -291,6 +291,1050 @@
    ],
    "addresses": [],
    "url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1145,plainText=false)"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-10-27",
+   "meeting": "City Commission Meeting of October 27, 2026.",
+   "number": "3.a",
+   "section": "Roll Call and approval of Minutes",
+   "title": "Approval of the Amended Minutes for the September 22, 2026, Commission Meeting",
+   "summary": null,
+   "kind": "minutes_approval",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10272026-902"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-10-27",
+   "meeting": "City Commission Meeting of October 27, 2026.",
+   "number": "3.b",
+   "section": "Roll Call and approval of Minutes",
+   "title": "Approval of the Minutes for the October 13, 2026, Commission Meeting",
+   "summary": null,
+   "kind": "minutes_approval",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10272026-902"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-10-27",
+   "meeting": "City Commission Meeting of October 27, 2026.",
+   "number": "5.a",
+   "section": "Community Announcements & Presentations",
+   "title": "Presentation by Hera Property Registration regarding registration of foreclosure(s) properties",
+   "summary": null,
+   "kind": "presentation",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10272026-902"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-10-27",
+   "meeting": "City Commission Meeting of October 27, 2026.",
+   "number": "5.b",
+   "section": "Community Announcements & Presentations",
+   "title": "Presentation by Huron Consulting Group regarding zero-based budget process",
+   "summary": null,
+   "kind": "presentation",
+   "amount": null,
+   "parties": [
+    "Huron Consulting Group"
+   ],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10272026-902"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-10-27",
+   "meeting": "City Commission Meeting of October 27, 2026.",
+   "number": "6.a",
+   "section": "Public Hearings",
+   "title": "Ordinance 3315 amending sec. 104-39.B, Allowable Uses in Light Industrial (LI) of the Unified Land Development Code (ULDC)",
+   "summary": "Second and final of two public hearings on an ordinance amending allowable uses in the Light Industrial district.",
+   "kind": "ordinance",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10272026-902"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-10-27",
+   "meeting": "City Commission Meeting of October 27, 2026.",
+   "number": "6.b",
+   "section": "Public Hearings",
+   "title": "Ordinance 3318 to vacate and abandon an unimproved portion of Fairy Avenue",
+   "summary": "Second and final of two public hearings on vacating and abandoning an unimproved portion of Fairy Avenue.",
+   "kind": "ordinance",
+   "amount": null,
+   "parties": [],
+   "addresses": [
+    "Fairy Avenue"
+   ],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10272026-902"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-10-27",
+   "meeting": "City Commission Meeting of October 27, 2026.",
+   "number": "6.c",
+   "section": "Public Hearings",
+   "title": "Ordinance 3320 amending Chapter 23 Section 23-21, Separate Meter Required of the Unified Land Development Code, exempting ADUs",
+   "summary": "Second and final of two public hearings on an ordinance exempting ADUs from the separate meter requirement.",
+   "kind": "ordinance",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10272026-902"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-10-27",
+   "meeting": "City Commission Meeting of October 27, 2026.",
+   "number": "6.d",
+   "section": "Public Hearings",
+   "title": "Gateway Overlay Special Exception for 1023 E 15th Street (Parcel ID 14450-000-000)",
+   "summary": "First and only public hearing on approval of the proposed Gateway Overlay Special Exception.",
+   "kind": "public_hearing",
+   "amount": null,
+   "parties": [],
+   "addresses": [
+    "1023 E 15th Street",
+    "Parcel ID 14450-000-000"
+   ],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10272026-902"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-10-27",
+   "meeting": "City Commission Meeting of October 27, 2026.",
+   "number": "7.a",
+   "section": "Quasi-Judicial Hearings",
+   "title": "Ordinance 3316.1 amending the Future Land Use Map to a designation of Mixed Use for a property at 803 Oak Ave",
+   "summary": "Second and final of two public hearings on a Future Land Use Map amendment to Mixed Use.",
+   "kind": "rezoning_land_use",
+   "amount": null,
+   "parties": [],
+   "addresses": [
+    "803 Oak Ave"
+   ],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10272026-902"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-10-27",
+   "meeting": "City Commission Meeting of October 27, 2026.",
+   "number": "7.b",
+   "section": "Quasi-Judicial Hearings",
+   "title": "Ordinance 3316.2 amending the Zoning Map to a zoning designation of Mixed Use-2 for a property at 803 Oak Ave",
+   "summary": "Second and final of two public hearings on rezoning to Mixed Use-2.",
+   "kind": "rezoning_land_use",
+   "amount": null,
+   "parties": [],
+   "addresses": [
+    "803 Oak Ave"
+   ],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10272026-902"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-10-27",
+   "meeting": "City Commission Meeting of October 27, 2026.",
+   "number": "9.a",
+   "section": "Consent Agenda",
+   "title": "Change Order No. 1 to Break-N-Ground on CDBG-DR Hurricane Sally Voluntary Home Buyout Demolition project",
+   "summary": null,
+   "kind": "change_order",
+   "amount": 8020.66,
+   "parties": [
+    "Break-N-Ground"
+   ],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10272026-902"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-10-27",
+   "meeting": "City Commission Meeting of October 27, 2026.",
+   "number": "9.b",
+   "section": "Consent Agenda",
+   "title": "Approval of eleven firms for Bid PC25-052 Professional Services Contract for Panama City - Continuing Basis",
+   "summary": null,
+   "kind": "contract",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10272026-902"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-10-27",
+   "meeting": "City Commission Meeting of October 27, 2026.",
+   "number": "9.c",
+   "section": "Consent Agenda",
+   "title": "Task Order Amendment 4 to Mott MacDonald Florida, LLC for SRF Lead Engineer Program Management Plan",
+   "summary": null,
+   "kind": "contract",
+   "amount": 100000.0,
+   "parties": [
+    "Mott MacDonald Florida, LLC"
+   ],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10272026-902"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-10-27",
+   "meeting": "City Commission Meeting of October 27, 2026.",
+   "number": "10.a",
+   "section": "Commissioners' Report(s)",
+   "title": "Commissioner Grainger – Discussion and Consideration to move the Utility Billing Division to be under the City Manager",
+   "summary": null,
+   "kind": "other",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10272026-902"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-10-27",
+   "meeting": "City Commission Meeting of October 27, 2026.",
+   "number": "10.b",
+   "section": "Commissioners' Report(s)",
+   "title": "Commissioner Street - Discussion of City Paving Plan",
+   "summary": null,
+   "kind": "other",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10272026-902"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-10-27",
+   "meeting": "City Commission Meeting of October 27, 2026.",
+   "number": "11.a",
+   "section": "City Manager",
+   "title": "After School Assistance Program (ASAP) Advisory Board",
+   "summary": null,
+   "kind": "appointment",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10272026-902"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-10-27",
+   "meeting": "City Commission Meeting of October 27, 2026.",
+   "number": "11.b",
+   "section": "City Manager",
+   "title": "Approval for City Manager to sign a letter of support on behalf of the City Commission for amending the special act regarding port operations",
+   "summary": null,
+   "kind": "other",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10272026-902"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-10-27",
+   "meeting": "City Commission Meeting of October 27, 2026.",
+   "number": "11.c",
+   "section": "City Manager",
+   "title": "Revised draft scope of work for competitive Invitation to Bid for the Downtown Panama City Wet Slips",
+   "summary": null,
+   "kind": "other",
+   "amount": null,
+   "parties": [],
+   "addresses": [
+    "Downtown Panama City Wet Slips"
+   ],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10272026-902"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-10-27",
+   "meeting": "City Commission Meeting of October 27, 2026.",
+   "number": "11.d",
+   "section": "City Manager",
+   "title": "Budget Amendment Resolution 20261027.1 to budget and expend funds from the 2025 CIP loan for the St. Andrews Marina Partners contract",
+   "summary": null,
+   "kind": "budget",
+   "amount": null,
+   "parties": [
+    "St. Andrews Marina Partners"
+   ],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10272026-902"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-10-27",
+   "meeting": "City Commission Meeting of October 27, 2026.",
+   "number": "11.e",
+   "section": "City Manager",
+   "title": "Budget Amendment Resolution 20261027.2 to transfer auction proceeds for Police Department repairs and maintenance",
+   "summary": null,
+   "kind": "budget",
+   "amount": 35055.0,
+   "parties": [
+    "Police Department"
+   ],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10272026-902"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-10-27",
+   "meeting": "City Commission Meeting of October 27, 2026.",
+   "number": "11.f",
+   "section": "City Manager",
+   "title": "Purchase of a Kaiser S8 Walking Telescopic Excavator",
+   "summary": null,
+   "kind": "purchase",
+   "amount": 693834.87,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10272026-902"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-10-27",
+   "meeting": "City Commission Meeting of October 27, 2026.",
+   "number": "11.g",
+   "section": "City Manager",
+   "title": "Award of Bid PC26-038 West Beach Drive Road Improvements in between 6th Street and 4th Street to Extreme Land Restoration",
+   "summary": null,
+   "kind": "contract",
+   "amount": 2344112.0,
+   "parties": [],
+   "addresses": [
+    "West Beach Drive between 6th Street and 4th Street"
+   ],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10272026-902"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-10-27",
+   "meeting": "City Commission Meeting of October 27, 2026.",
+   "number": "11.h",
+   "section": "City Manager",
+   "title": "Award of Bid PC26-046 Area P-11 to Mainline Construction for the Alternate Schedule Water and Sewer",
+   "summary": null,
+   "kind": "contract",
+   "amount": 6173449.43,
+   "parties": [
+    "Mainline Construction"
+   ],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10272026-902"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-10-27",
+   "meeting": "City Commission Meeting of October 27, 2026.",
+   "number": "11.i",
+   "section": "City Manager",
+   "title": "Right-of-Way Use Agreement with the Panama City Port Authority for the Hannah Avenue Right-of-Way",
+   "summary": null,
+   "kind": "contract",
+   "amount": null,
+   "parties": [
+    "Panama City Port Authority"
+   ],
+   "addresses": [
+    "Hannah Avenue"
+   ],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10272026-902"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-10-22",
+   "meeting": "City Council",
+   "number": "E.1",
+   "section": "APPROVAL OF MEETING MINUTES",
+   "title": "September 24, 2026 Regular Meeting Minutes",
+   "summary": null,
+   "kind": "minutes_approval",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=421"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-10-22",
+   "meeting": "City Council",
+   "number": "G.1",
+   "section": "PRESENTATIONS",
+   "title": "Employee Years of Service Awards",
+   "summary": null,
+   "kind": "presentation",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=421"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-10-22",
+   "meeting": "City Council",
+   "number": "G.2",
+   "section": "PRESENTATIONS",
+   "title": "Presentation by CP2 Consulting, Inc. Introduced by Public Information Officer Arin Thrower",
+   "summary": null,
+   "kind": "presentation",
+   "amount": null,
+   "parties": [
+    "CP2 Consulting, Inc."
+   ],
+   "addresses": [],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=421"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-10-22",
+   "meeting": "City Council",
+   "number": "I.1",
+   "section": "CONSENT AGENDA",
+   "title": "Resolution No. 27-01 - Purchase of Elgin Pelican mechanical street sweeper from Sansom Equipment Company, Inc.",
+   "summary": "Approves buying one street sweeper for the Front Beach Road Community Redevelopment Area under the Sourcewell contract.",
+   "kind": "purchase",
+   "amount": 301802.0,
+   "parties": [
+    "Sansom Equipment Company, Inc.",
+    "Sourcewell"
+   ],
+   "addresses": [
+    "Front Beach Road Community Redevelopment Area"
+   ],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=421"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-10-22",
+   "meeting": "City Council",
+   "number": "I.2",
+   "section": "CONSENT AGENDA",
+   "title": "Resolution No. 27-02 - Purchase of Volvo EC140EL crawler excavator from Cowin Equipment Company, Inc.",
+   "summary": "Approves buying one crawler excavator for the Stormwater Department under the Sourcewell contract.",
+   "kind": "purchase",
+   "amount": 168003.0,
+   "parties": [
+    "Cowin Equipment Company, Inc.",
+    "Sourcewell"
+   ],
+   "addresses": [],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=421"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-10-22",
+   "meeting": "City Council",
+   "number": "I.3",
+   "section": "CONSENT AGENDA",
+   "title": "Resolution No. 27-03 - Purchase of MowerMax prime mover and attachments from MowerMax Equipment Co.",
+   "summary": "Approves buying one prime mover and attachments for Public Works under the Sourcewell contract.",
+   "kind": "purchase",
+   "amount": 292193.3,
+   "parties": [
+    "MowerMax Equipment Co.",
+    "Sourcewell"
+   ],
+   "addresses": [],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=421"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-10-22",
+   "meeting": "City Council",
+   "number": "I.4",
+   "section": "CONSENT AGENDA",
+   "title": "Resolution No. 27-04 - Purchase of Caterpillar 420XE backhoe loader and attachments from Thompson Tractor Company",
+   "summary": "Approves buying one backhoe loader and attachments for Public Works under the Sourcewell contract.",
+   "kind": "purchase",
+   "amount": 186273.76,
+   "parties": [
+    "Thompson Tractor Company",
+    "Sourcewell"
+   ],
+   "addresses": [],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=421"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-10-22",
+   "meeting": "City Council",
+   "number": "I.5",
+   "section": "CONSENT AGENDA",
+   "title": "Resolution No. 27-05 - Agreement with Let There Be Light for exterior soffit lighting",
+   "summary": "Approves purchase and installation of exterior soffit lighting for the police, public services, and water billing facilities and ratifies the City Manager's down payment.",
+   "kind": "contract",
+   "amount": 73000.0,
+   "parties": [
+    "Let There Be Light"
+   ],
+   "addresses": [],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=421"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-10-22",
+   "meeting": "City Council",
+   "number": "I.6",
+   "section": "CONSENT AGENDA",
+   "title": "Resolution No. 27-06 - Negotiate agreement with Atlas Engineering Services, LLC for CRA program manager services",
+   "summary": "Authorizes the City to negotiate an agreement for professional CRA program manager services.",
+   "kind": "contract",
+   "amount": null,
+   "parties": [
+    "Atlas Engineering Services, LLC"
+   ],
+   "addresses": [],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=421"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-10-22",
+   "meeting": "City Council",
+   "number": "I.7",
+   "section": "CONSENT AGENDA",
+   "title": "Resolution No. 27-07 - Purchases of medical supplies from Bound Tree Medical, LLC",
+   "summary": "Authorizes fire department medical supply purchases for fiscal year 2027 under the Okaloosa County contract.",
+   "kind": "purchase",
+   "amount": 90000.0,
+   "parties": [
+    "Bound Tree Medical, LLC",
+    "Okaloosa County, Florida"
+   ],
+   "addresses": [],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=421"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-10-22",
+   "meeting": "City Council",
+   "number": "I.8",
+   "section": "CONSENT AGENDA",
+   "title": "Resolution No. 27-08 - Purchases of liquid sodium hypochlorite from Odyssey Manufacturing Co.",
+   "summary": "Approves purchases for the Utilities Department at a set unit price under the Bay County contract.",
+   "kind": "purchase",
+   "amount": 550000.0,
+   "parties": [
+    "Odyssey Manufacturing Co.",
+    "Bay County, Florida"
+   ],
+   "addresses": [],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=421"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-10-22",
+   "meeting": "City Council",
+   "number": "I.9",
+   "section": "CONSENT AGENDA",
+   "title": "Resolution No. 27-10 - Task order with Southeastern Surveying and Mapping Corporation for stormwater asset inventory",
+   "summary": "Approves a combined task order and notice to proceed for surveying and GIS services for the stormwater asset inventory.",
+   "kind": "contract",
+   "amount": 400400.0,
+   "parties": [
+    "Southeastern Surveying and Mapping Corporation"
+   ],
+   "addresses": [],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=421"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-10-22",
+   "meeting": "City Council",
+   "number": "I.10",
+   "section": "CONSENT AGENDA",
+   "title": "Resolution No. 27-11 - Task order with Gortemoller Engineering, Inc. for stormwater asset inventory",
+   "summary": "Approves a task order and notice to proceed for professional stormwater engineering services.",
+   "kind": "contract",
+   "amount": 270935.0,
+   "parties": [
+    "Gortemoller Engineering, Inc."
+   ],
+   "addresses": [],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=421"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-10-22",
+   "meeting": "City Council",
+   "number": "I.11",
+   "section": "CONSENT AGENDA",
+   "title": "Resolution No. 27-12 - Agreement with Environmental Systems Research Institute, Inc. for GIS database and software maintenance",
+   "summary": "Approves a GIS database and software maintenance package payable ratably over three years.",
+   "kind": "contract",
+   "amount": 90600.0,
+   "parties": [
+    "Environmental Systems Research Institute, Inc."
+   ],
+   "addresses": [],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=421"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-10-22",
+   "meeting": "City Council",
+   "number": "I.12",
+   "section": "CONSENT AGENDA",
+   "title": "Resolution No. 27-13 - Routine annual purchases for fiscal year 2027 and half-cent sales tax for roadway striping",
+   "summary": "Authorizes routine annual purchases under existing City contracts up to the limits in Exhibit A and authorizes half-cent infrastructure sales tax use for striping and pavement marking under the contract with Emerald Coast Striping.",
+   "kind": "purchase",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=421"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-10-22",
+   "meeting": "City Council",
+   "number": "I.13",
+   "section": "CONSENT AGENDA",
+   "title": "Resolution No. 27-14 - Ironman Florida event road closures",
+   "summary": "Consents to temporary closure of portions of several roads for the annual Visit Panama City Beach Ironman Florida event.",
+   "kind": "resolution",
+   "amount": null,
+   "parties": [
+    "Ironman Florida"
+   ],
+   "addresses": [
+    "Thomas Drive",
+    "West Pier Park Drive",
+    "South Pier Park Drive",
+    "Longboard Way",
+    "Sea Monkey Way",
+    "Front Beach Road",
+    "Panama City Beach Parkway"
+   ],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=421"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-10-22",
+   "meeting": "City Council",
+   "number": "I.14",
+   "section": "CONSENT AGENDA",
+   "title": "Resolution No. 27-15 - Agreement with Core & Main, LP for water meters",
+   "summary": "Approves an agreement for water meters and related appurtenances at set unit prices for the Utilities Department.",
+   "kind": "purchase",
+   "amount": 500000.0,
+   "parties": [
+    "Core & Main, LP"
+   ],
+   "addresses": [],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=421"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-10-22",
+   "meeting": "City Council",
+   "number": "I.15",
+   "section": "CONSENT AGENDA",
+   "title": "Resolution No. 27-16 - Task order with Kimley-Horn and Associates, Inc. for Griffin Boulevard and Ashley Drive Improvements",
+   "summary": "Approves a task order for professional engineering services and designates use of the half-cent infrastructure sales tax.",
+   "kind": "contract",
+   "amount": 453841.0,
+   "parties": [
+    "Kimley-Horn and Associates, Inc."
+   ],
+   "addresses": [
+    "Griffin Boulevard",
+    "Ashley Drive"
+   ],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=421"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-10-22",
+   "meeting": "City Council",
+   "number": "I.16",
+   "section": "CONSENT AGENDA",
+   "title": "Resolution No. 27-17 - Agreements for concrete, asphalt, and aggregate materials",
+   "summary": "Approves agreements with four suppliers at set unit prices and authorizes purchases for fiscal year 2027.",
+   "kind": "purchase",
+   "amount": 200000.0,
+   "parties": [
+    "Anderson Columbia Co., Inc.",
+    "Dig In Mining, LLC",
+    "Gulf Coast Utility Contractors, LLC",
+    "Vulcan Materials Company"
+   ],
+   "addresses": [],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=421"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-10-22",
+   "meeting": "City Council",
+   "number": "I.17",
+   "section": "CONSENT AGENDA",
+   "title": "Resolution No. 27-18 - Purchase of stop loss insurance from ISU via Blue Cross and Blue Shield of Florida, Inc.",
+   "summary": null,
+   "kind": "purchase",
+   "amount": 887054.0,
+   "parties": [
+    "ISU",
+    "Blue Cross and Blue Shield of Florida, Inc."
+   ],
+   "addresses": [],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=421"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-10-22",
+   "meeting": "City Council",
+   "number": "I.18",
+   "section": "CONSENT AGENDA",
+   "title": "Resolution No. 27-19 - Purchase of three Grasshopper 725DT mowers from Moridge Manufacturing, Inc.",
+   "summary": "Approves buying three mowers for the Street Department under the State of Florida Department of Management Services contract.",
+   "kind": "purchase",
+   "amount": 65117.65,
+   "parties": [
+    "Moridge Manufacturing, Inc.",
+    "State of Florida, Department of Management Services"
+   ],
+   "addresses": [],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=421"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-10-22",
+   "meeting": "City Council",
+   "number": "I.19",
+   "section": "CONSENT AGENDA",
+   "title": "Resolution No. 27-20 - Purchase of dewatering pump from Thompson Pump and Manufacturing Company, Inc.",
+   "summary": "Approves buying a dewatering pump for the Stormwater Department under the Sourcewell contract.",
+   "kind": "purchase",
+   "amount": 77425.87,
+   "parties": [
+    "Thompson Pump and Manufacturing Company, Inc.",
+    "Sourcewell"
+   ],
+   "addresses": [],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=421"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-10-22",
+   "meeting": "City Council",
+   "number": "I.20",
+   "section": "CONSENT AGENDA",
+   "title": "Resolution No. 27-21 - Purchase of police vehicles from Alan Jay Fleet Sales",
+   "summary": "Approves buying one Dodge Durango police pursuit truck and five Ford F-150 police responder trucks under the City of Tallahassee agreement.",
+   "kind": "purchase",
+   "amount": 423014.0,
+   "parties": [
+    "Alan Jay Fleet Sales",
+    "City of Tallahassee"
+   ],
+   "addresses": [],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=421"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-10-22",
+   "meeting": "City Council",
+   "number": "I.21",
+   "section": "CONSENT AGENDA",
+   "title": "Resolution No. 27-22 - Purchase of two 2026 Butler tilt bed trailers from Global Rental Co., Inc.",
+   "summary": "Approves buying two trailers for the Utilities Department under the Sourcewell contract.",
+   "kind": "purchase",
+   "amount": 71118.0,
+   "parties": [
+    "Global Rental Co., Inc.",
+    "Sourcewell"
+   ],
+   "addresses": [],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=421"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-10-22",
+   "meeting": "City Council",
+   "number": "I.22",
+   "section": "CONSENT AGENDA",
+   "title": "Resolution No. 27-23 - Reallocation of American Rescue Plan Act funds",
+   "summary": "Approves reallocating Coronavirus State and Local Fiscal Recovery Funds from parks and recreation projects to public safety projects.",
+   "kind": "budget",
+   "amount": 115573.71,
+   "parties": [],
+   "addresses": [],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=421"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-10-22",
+   "meeting": "City Council",
+   "number": "I.23",
+   "section": "CONSENT AGENDA",
+   "title": "Resolution No. 27-24 - Task order with Pennoni Associates Inc. for Front Beach Road box culvert repair and replacement",
+   "summary": "Approves a combined task order and notice to proceed for structural engineering services.",
+   "kind": "contract",
+   "amount": 248525.0,
+   "parties": [
+    "Pennoni Associates Inc."
+   ],
+   "addresses": [
+    "Front Beach Road"
+   ],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=421"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-10-22",
+   "meeting": "City Council",
+   "number": "I.24",
+   "section": "CONSENT AGENDA",
+   "title": "Resolution No. 27-25 - Task order with Johnson, Mirmiran & Thompson, Inc. for Cobb Road resurfacing and sidewalk improvements",
+   "summary": "Approves a combined task order and notice to proceed for engineering services.",
+   "kind": "contract",
+   "amount": 119853.44,
+   "parties": [
+    "Johnson, Mirmiran & Thompson, Inc"
+   ],
+   "addresses": [
+    "Cobb Road"
+   ],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=421"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-10-22",
+   "meeting": "City Council",
+   "number": "I.25",
+   "section": "CONSENT AGENDA",
+   "title": "Resolution No. 27-26 - Task order with George & Associates, Consulting Engineers, Inc. for Clara Avenue resurfacing and sidewalk improvements",
+   "summary": "Approves a combined task order and notice to proceed for professional engineering services.",
+   "kind": "contract",
+   "amount": 185466.0,
+   "parties": [
+    "George & Associates, Consulting Engineers, Inc."
+   ],
+   "addresses": [
+    "Clara Avenue"
+   ],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=421"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-10-22",
+   "meeting": "City Council",
+   "number": "I.26",
+   "section": "CONSENT AGENDA",
+   "title": "Resolution No. 27-27 - Purchase of filter press belts from GSM Engineered Fabrics, LLC",
+   "summary": "Approves purchase of replacement upper and lower filter press belts for the wastewater treatment facility at set unit prices.",
+   "kind": "purchase",
+   "amount": 50000.0,
+   "parties": [
+    "GSM Engineered Fabrics, LLC"
+   ],
+   "addresses": [],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=421"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-10-22",
+   "meeting": "City Council",
+   "number": "I.27",
+   "section": "CONSENT AGENDA",
+   "title": "Resolution No. 27-28 - Agreement with Invoice Cloud, Inc. for electronic payment processing",
+   "summary": "Approves an agreement for electronic payment processing services and authorizes expenditures for fiscal year 2027.",
+   "kind": "contract",
+   "amount": 200000.0,
+   "parties": [
+    "Invoice Cloud, Inc."
+   ],
+   "addresses": [],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=421"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-10-22",
+   "meeting": "City Council",
+   "number": "I.28",
+   "section": "CONSENT AGENDA",
+   "title": "Revision of the Master Audit List to remove obsolete items",
+   "summary": "Approval makes a finding of surplus for the items, removes them from the Master Audit List, and authorizes disposal in any lawful manner.",
+   "kind": "other",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=421"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-10-22",
+   "meeting": "City Council",
+   "number": "J.1",
+   "section": "REGULAR AGENDA AND DISCUSSION / ACTION ITEMS",
+   "title": "Ordinance No. 1692 - Amending City Code Chapter 30, Police Pension Plan, Sections 30-54 and 30-55 (First Reading)",
+   "summary": "Amends the contributions and the benefit amounts and eligibility sections of the City of Panama City Beach Police Pension Plan.",
+   "kind": "ordinance",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=421"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-10-22",
+   "meeting": "City Council",
+   "number": "J.2",
+   "section": "REGULAR AGENDA AND DISCUSSION / ACTION ITEMS",
+   "title": "Resolution No. 27-29 - Purchase of a fire aerial truck from Ten-8 Fire & Safety, LLC",
+   "summary": "Approves the purchase of a fire aerial truck for the Fire Department.",
+   "kind": "purchase",
+   "amount": null,
+   "parties": [
+    "Ten-8 Fire & Safety, LLC"
+   ],
+   "addresses": [],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=421"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-10-22",
+   "meeting": "City Council",
+   "number": "J.3",
+   "section": "REGULAR AGENDA AND DISCUSSION / ACTION ITEMS",
+   "title": "Discussion Item, CARES Program",
+   "summary": null,
+   "kind": "other",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=421"
   },
   {
    "board": "county",
@@ -607,6 +1651,24 @@
    "parties": [],
    "addresses": [],
    "url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1137,plainText=false)"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-10-20",
+   "meeting": "Virtual Workshop Meeting of October 20, 2026.",
+   "number": "1",
+   "section": null,
+   "title": "Virtual Workshop",
+   "summary": "The City Commission will hold a non-voting virtual workshop to discuss various topics, with no official actions taken.",
+   "kind": "presentation",
+   "amount": null,
+   "parties": [],
+   "addresses": [
+    "501 Harrison Avenue, Panama City, 32401"
+   ],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10202026-915"
   },
   {
    "board": "cw",
@@ -1105,6 +2167,726 @@
    "url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1130,plainText=false)"
   },
   {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-10-13",
+   "meeting": "City Commission Meeting of October 13, 2026.",
+   "number": "3",
+   "section": null,
+   "title": "Approval of Minutes for the August 19, 2026 Special Call City Commission Meeting and the September 22, 2026 Commission Meeting",
+   "summary": null,
+   "kind": "minutes_approval",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-901"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-10-13",
+   "meeting": "City Commission Meeting of October 13, 2026.",
+   "number": "6.a",
+   "section": "Public Hearings",
+   "title": "Ordinance 3318 - vacate and abandon an unimproved portion of Fairy Avenue (first of two public hearings)",
+   "summary": "First of two public hearings on an ordinance to vacate and abandon an unimproved portion of Fairy Avenue.",
+   "kind": "public_hearing",
+   "amount": null,
+   "parties": [],
+   "addresses": [
+    "Fairy Avenue"
+   ],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-901"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-10-13",
+   "meeting": "City Commission Meeting of October 13, 2026.",
+   "number": "6.b",
+   "section": "Public Hearings",
+   "title": "Ordinance 3319 - vacate and abandon a portion of Grace Avenue (first of two public hearings)",
+   "summary": "First of two public hearings on an ordinance to vacate and abandon a portion of Grace Avenue north of W. 6th Street and south of W. 7th Street.",
+   "kind": "public_hearing",
+   "amount": null,
+   "parties": [],
+   "addresses": [
+    "Grace Avenue north of W. 6th Street and south of W. 7th Street"
+   ],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-901"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-10-13",
+   "meeting": "City Commission Meeting of October 13, 2026.",
+   "number": "6.c",
+   "section": "Public Hearings",
+   "title": "Ordinance 3320 - amending ULDC Chapter 23 Section 23-21, Separate Meter Required (first of two public hearings)",
+   "summary": "First of two public hearings on an ordinance amending the Unified Land Development Code to exempt ADUs from the separate meter requirement.",
+   "kind": "public_hearing",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-901"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-10-13",
+   "meeting": "City Commission Meeting of October 13, 2026.",
+   "number": "7.a",
+   "section": "Quasi-Judicial Hearings",
+   "title": "Ordinance 3316.1 - Future Land Use Map amendment to Mixed Use for 803 Oak Ave (first of two public hearings)",
+   "summary": "First of two public hearings on an ordinance amending the Future Land Use Map to a Mixed Use designation for a property at 803 Oak Ave.",
+   "kind": "rezoning_land_use",
+   "amount": null,
+   "parties": [],
+   "addresses": [
+    "803 Oak Ave"
+   ],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-901"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-10-13",
+   "meeting": "City Commission Meeting of October 13, 2026.",
+   "number": "7.b",
+   "section": "Quasi-Judicial Hearings",
+   "title": "Ordinance 3316.2 - Zoning Map amendment to Mixed Use-2 for 803 Oak Ave (first of two public hearings)",
+   "summary": "First of two public hearings on an ordinance amending the Zoning Map to a Mixed Use-2 designation for a property at 803 Oak Ave.",
+   "kind": "rezoning_land_use",
+   "amount": null,
+   "parties": [],
+   "addresses": [
+    "803 Oak Ave"
+   ],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-901"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-10-13",
+   "meeting": "City Commission Meeting of October 13, 2026.",
+   "number": "9.a",
+   "section": "Consent Agenda",
+   "title": "Monthly Financial Statement and General Fund Balance Report - August 2026",
+   "summary": null,
+   "kind": "consent",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-901"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-10-13",
+   "meeting": "City Commission Meeting of October 13, 2026.",
+   "number": "9.b",
+   "section": "Consent Agenda",
+   "title": "Change Order 1 to Marshall Brothers on CDBG Disaster Recovery Project STORM Group I",
+   "summary": null,
+   "kind": "change_order",
+   "amount": 74978.0,
+   "parties": [
+    "Marshall Brothers"
+   ],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-901"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-10-13",
+   "meeting": "City Commission Meeting of October 13, 2026.",
+   "number": "9.c",
+   "section": "Consent Agenda",
+   "title": "Agreement with Struthers Recreation, LLC for purchase and installation of a playground for Joe Moody Harris Park",
+   "summary": "Approval of an agreement for a playground at Joe Moody Harris Park and authorizing the City Manager to sign.",
+   "kind": "contract",
+   "amount": null,
+   "parties": [
+    "Struthers Recreation, LLC"
+   ],
+   "addresses": [
+    "Joe Moody Harris Park"
+   ],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-901"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-10-13",
+   "meeting": "City Commission Meeting of October 13, 2026.",
+   "number": "9.d",
+   "section": "Consent Agenda",
+   "title": "Change Order 1 to Mainline Construction on SRF Project Area H, \"Remove and Replace Project Sidewalk\"",
+   "summary": null,
+   "kind": "change_order",
+   "amount": 196358.1,
+   "parties": [
+    "Mainline Construction"
+   ],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-901"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-10-13",
+   "meeting": "City Commission Meeting of October 13, 2026.",
+   "number": "9.e",
+   "section": "Consent Agenda",
+   "title": "Award of Bid PC26-040 Mathison Force Main Reroute Project to CBC Construction",
+   "summary": "Award of bid and authorization for the City Manager to execute the contract.",
+   "kind": "contract",
+   "amount": 199382.93,
+   "parties": [
+    "CBC Construction"
+   ],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-901"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-10-13",
+   "meeting": "City Commission Meeting of October 13, 2026.",
+   "number": "9.f",
+   "section": "Consent Agenda",
+   "title": "Purchase of a 10' by ± 195' easement at 2129 E 7th Street for the Sherman Avenue Stormwater Drainage project",
+   "summary": "Purchase of an easement to allow for stormwater drainage as part of the Sherman Avenue Stormwater Drainage project.",
+   "kind": "purchase",
+   "amount": 20000.0,
+   "parties": [],
+   "addresses": [
+    "2129 E 7th Street"
+   ],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-901"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-10-13",
+   "meeting": "City Commission Meeting of October 13, 2026.",
+   "number": "10.a",
+   "section": "Mayor's Report",
+   "title": "Discussion of the City Pension Plans",
+   "summary": null,
+   "kind": "other",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-901"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-10-13",
+   "meeting": "City Commission Meeting of October 13, 2026.",
+   "number": "11.a",
+   "section": "City Clerk-Treasurer",
+   "title": "Update on the Fiscal Year 2025 Audit",
+   "summary": null,
+   "kind": "presentation",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-901"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-10-13",
+   "meeting": "City Commission Meeting of October 13, 2026.",
+   "number": "12.a",
+   "section": "City Manager",
+   "title": "Budget Amendment Resolution 20261013.1 and increase to existing contract with T K Vandy LLC",
+   "summary": "Approve a budget amendment resolution and increase the existing contract with T K Vandy LLC.",
+   "kind": "budget",
+   "amount": 2000.86,
+   "parties": [
+    "T K Vandy LLC"
+   ],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-901"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-10-13",
+   "meeting": "City Commission Meeting of October 13, 2026.",
+   "number": "12.b",
+   "section": "City Manager",
+   "title": "Budget Amendment Resolution 20261013.2 to accept state funded grant for a Stormwater Master Plan",
+   "summary": "Authorizes the City of Panama City to accept a state funded grant for a Stormwater Master Plan.",
+   "kind": "grant",
+   "amount": 800000.0,
+   "parties": [
+    "City of Panama City"
+   ],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-901"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-10-13",
+   "meeting": "City Commission Meeting of October 13, 2026.",
+   "number": "12.c",
+   "section": "City Manager",
+   "title": "Budget Amendment Resolution 20261013.3 for Allocation of Reimbursement Revenue to the Division Expense Accounts",
+   "summary": null,
+   "kind": "budget",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-901"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-10-13",
+   "meeting": "City Commission Meeting of October 13, 2026.",
+   "number": "12.d",
+   "section": "City Manager",
+   "title": "Resolution 20261013.4 adopting the Parks, Culture and Recreation Capital Improvement Plan",
+   "summary": "Adopts the plan for the purpose of applying to grant programs for funding assistance.",
+   "kind": "resolution",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-901"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-10-13",
+   "meeting": "City Commission Meeting of October 13, 2026.",
+   "number": "12.e",
+   "section": "City Manager",
+   "title": "Award for Cottage Court Development on vacant property at 2215 E 3rd Street",
+   "summary": null,
+   "kind": "contract",
+   "amount": null,
+   "parties": [],
+   "addresses": [
+    "2215 E 3rd Street"
+   ],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-901"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-10-13",
+   "meeting": "City Commission Meeting of October 13, 2026.",
+   "number": "12.f",
+   "section": "City Manager",
+   "title": "Projects and efforts update",
+   "summary": null,
+   "kind": "presentation",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-901"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-10-13",
+   "meeting": "City Commission Meeting of October 13, 2026.",
+   "number": "12.g",
+   "section": "City Manager",
+   "title": "Waive Special Event and Police Fees for Bay County Veteran's Day Parade",
+   "summary": "Approve and waive all applicable Special Event and Police Fees for the parade to be held on November 11, 2026.",
+   "kind": "other",
+   "amount": 5220.0,
+   "parties": [
+    "Bay County Veteran's Day Parade"
+   ],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-901"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-10-13",
+   "meeting": "City Commission Meeting of October 13, 2026.",
+   "number": "13.a",
+   "section": "City Attorney",
+   "title": "Ground lease with Canaan Development Group, LLC for redevelopment of City-owned property at 1332 Martin Luther King Jr. Blvd.",
+   "summary": "Approval and authorization to execute a ground lease for redevelopment of City-owned property.",
+   "kind": "contract",
+   "amount": null,
+   "parties": [
+    "Canaan Development Group, LLC"
+   ],
+   "addresses": [
+    "1332 Martin Luther King Jr. Blvd."
+   ],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-901"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-10-13",
+   "meeting": "City Commission Meeting of October 13, 2026.",
+   "number": "13.b",
+   "section": "City Attorney",
+   "title": "Contract with American Legion Post 424 for redevelopment of CRA-owned property at 1342 Martin Luther King Jr. Blvd.",
+   "summary": "Approval and authorization to execute the contract for redevelopment of CRA-owned property.",
+   "kind": "contract",
+   "amount": null,
+   "parties": [
+    "American Legion Post 424"
+   ],
+   "addresses": [
+    "1342 Martin Luther King Jr. Blvd."
+   ],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-901"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-10-13",
+   "meeting": "City Commission Meeting of October 13, 2026.",
+   "number": "13.c",
+   "section": "City Attorney",
+   "title": "Executive Session pursuant to s.286.011(8), F.S. regarding Art Marine, LLC vs. City of Panama City, Florida and H.G. Harders and Son, Inc., Case No. 26001131CA",
+   "summary": "Executive session to discuss and receive advice regarding litigation.",
+   "kind": "other",
+   "amount": null,
+   "parties": [
+    "Art Marine, LLC",
+    "H.G. Harders and Son, Inc."
+   ],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-901"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-10-13",
+   "meeting": "City Commission Meeting of October 13, 2026.",
+   "number": "13.e",
+   "section": "City Attorney",
+   "title": "Discussion and possible action regarding litigation",
+   "summary": null,
+   "kind": "other",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-901"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-10-13",
+   "meeting": "Panama City Community Fund Board of Directors Meeting of October 13, 2026.",
+   "number": "1",
+   "section": null,
+   "title": "Approval of Minutes for the July 14, 2026 Board of Directors Meeting and the September 8, 2026 Special Call Board of Directors Meeting",
+   "summary": null,
+   "kind": "minutes_approval",
+   "amount": null,
+   "parties": [
+    "Panama City Community Fund, Inc."
+   ],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-903"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-10-13",
+   "meeting": "Panama City Community Fund Board of Directors Meeting of October 13, 2026.",
+   "number": "3",
+   "section": null,
+   "title": "Approval of Quarterly Financial Reports",
+   "summary": null,
+   "kind": "other",
+   "amount": null,
+   "parties": [
+    "Panama City Community Fund, Inc."
+   ],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-903"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-10-13",
+   "meeting": "Panama City Community Fund Board of Directors Meeting of October 13, 2026.",
+   "number": "4",
+   "section": null,
+   "title": "Ratify the Panama City Disaster Relief Fund, Inc.'s fourth quarter expenditures",
+   "summary": "Board is asked to ratify the Panama City Disaster Relief Fund, Inc.'s fourth quarter expenditures of $3,801.62.",
+   "kind": "budget",
+   "amount": 3801.62,
+   "parties": [
+    "Panama City Disaster Relief Fund, Inc."
+   ],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-903"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-10-13",
+   "meeting": "Panama City Community Fund Board of Directors Meeting of October 13, 2026.",
+   "number": "5",
+   "section": null,
+   "title": "Confirmation of Officers for the remainder of Calendar Year 2026 and all of Calendar Year 2027",
+   "summary": null,
+   "kind": "appointment",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-903"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-10-13",
+   "meeting": "Panama City Community Fund Board of Directors Meeting of October 13, 2026.",
+   "number": "6",
+   "section": null,
+   "title": "Approval of meeting dates for Calendar Year 2027 (1/12, 4/13, 7/13, 10/12)",
+   "summary": null,
+   "kind": "other",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-903"
+  },
+  {
+   "board": "pc-cra",
+   "body": "Panama City Community Redevelopment Agency (CRA) Board",
+   "gov": "pc",
+   "date": "2026-10-13",
+   "meeting": "Community Redevelopment Agency Board Meeting for October 13, 2026",
+   "number": "4",
+   "section": null,
+   "title": "Approval Of Meeting Minutes",
+   "summary": "Approval of the draft minutes of the 09.01.26 CRA board meeting.",
+   "kind": "minutes_approval",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-912"
+  },
+  {
+   "board": "pc-cra",
+   "body": "Panama City Community Redevelopment Agency (CRA) Board",
+   "gov": "pc",
+   "date": "2026-10-13",
+   "meeting": "Community Redevelopment Agency Board Meeting for October 13, 2026",
+   "number": "7",
+   "section": null,
+   "title": "Redevelopment Site Preparation (RSP) Grant Agreement With Boys & Girls Clubs Of Bay County",
+   "summary": "Authorize an RSP grant agreement in an amount set by the board, up to the requested amount, for eligible site preparation costs at 265 Everitt Avenue in the Millville CRA District.",
+   "kind": "grant",
+   "amount": 372166.0,
+   "parties": [
+    "Boys & Girls Clubs Of Bay County"
+   ],
+   "addresses": [
+    "265 Everitt Avenue, Panama City, Florida",
+    "Parcel ID 23379-010-000"
+   ],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-912"
+  },
+  {
+   "board": "pc-cra",
+   "body": "Panama City Community Redevelopment Agency (CRA) Board",
+   "gov": "pc",
+   "date": "2026-10-13",
+   "meeting": "Community Redevelopment Agency Board Meeting for October 13, 2026",
+   "number": "8",
+   "section": null,
+   "title": "Redevelopment Site Preparation (RSP) Grant Agreement With Angel's Place Of Bay County LLC",
+   "summary": "Authorize an RSP grant agreement in an amount set by the board, up to the requested amount, for eligible site preparation costs at 2509 W. 13th St in the St. Andrews CRA District.",
+   "kind": "grant",
+   "amount": 35360.92,
+   "parties": [
+    "Angel's Place Of Bay County LLC"
+   ],
+   "addresses": [
+    "2509 W. 13th St, Panama City, Florida",
+    "Parcel ID 29788-000-000"
+   ],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-912"
+  },
+  {
+   "board": "pc-cra",
+   "body": "Panama City Community Redevelopment Agency (CRA) Board",
+   "gov": "pc",
+   "date": "2026-10-13",
+   "meeting": "Community Redevelopment Agency Board Meeting for October 13, 2026",
+   "number": "9",
+   "section": null,
+   "title": "Redevelopment Site Preparation (RSP) Grant Agreement With Jenks & Oak, LLC",
+   "summary": "Authorize an RSP grant agreement in an amount set by the board, up to the requested amount, for eligible site preparation costs at 402 Jenks Avenue in the Downtown CRA District.",
+   "kind": "grant",
+   "amount": 192000.0,
+   "parties": [
+    "Jenks & Oak, LLC"
+   ],
+   "addresses": [
+    "402 Jenks Avenue, Panama City, FL",
+    "Parcel 19595-000-000"
+   ],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-912"
+  },
+  {
+   "board": "pc-cra",
+   "body": "Panama City Community Redevelopment Agency (CRA) Board",
+   "gov": "pc",
+   "date": "2026-10-13",
+   "meeting": "Community Redevelopment Agency Board Meeting for October 13, 2026",
+   "number": "10",
+   "section": null,
+   "title": "Performance Agreement For The Panama City Tax Increment Rebate Program Application Submitted By Jenks & Oaks, LLC",
+   "summary": "Authorize a performance agreement for the Tax Increment Rebate Program application for the property at 402 Jenks Avenue in the Downtown CRA District.",
+   "kind": "contract",
+   "amount": null,
+   "parties": [
+    "Jenks & Oaks, LLC"
+   ],
+   "addresses": [
+    "402 Jenks Avenue",
+    "Parcel ID 19595-000-000"
+   ],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-912"
+  },
+  {
+   "board": "pc-cra",
+   "body": "Panama City Community Redevelopment Agency (CRA) Board",
+   "gov": "pc",
+   "date": "2026-10-13",
+   "meeting": "Community Redevelopment Agency Board Meeting for October 13, 2026",
+   "number": "11",
+   "section": null,
+   "title": "Performance Agreement For The Panama City Tax Increment Rebate Program Application Submitted By Robert Blackerby",
+   "summary": "Authorize a performance agreement for the Tax Increment Rebate Program application for the property at 300 Luverne Avenue in the Downtown CRA District.",
+   "kind": "contract",
+   "amount": null,
+   "parties": [],
+   "addresses": [
+    "300 Luverne Avenue",
+    "Parcel ID 19640-000-000",
+    "Parcel ID 19644-010-000"
+   ],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-912"
+  },
+  {
+   "board": "pc-cra",
+   "body": "Panama City Community Redevelopment Agency (CRA) Board",
+   "gov": "pc",
+   "date": "2026-10-13",
+   "meeting": "Community Redevelopment Agency Board Meeting for October 13, 2026",
+   "number": "12",
+   "section": null,
+   "title": "Amended Panama City Community Redevelopment Agency (CRA) Commercial Property Improvement (CPI) Grant Program",
+   "summary": "Approval of the amended CPI Grant Program.",
+   "kind": "grant",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-912"
+  },
+  {
+   "board": "pc-cra",
+   "body": "Panama City Community Redevelopment Agency (CRA) Board",
+   "gov": "pc",
+   "date": "2026-10-13",
+   "meeting": "Community Redevelopment Agency Board Meeting for October 13, 2026",
+   "number": "13",
+   "section": null,
+   "title": "Task Order With Panhandle Engineering, Inc. For Survey And Design Services For The 16th Street Sidewalk Project",
+   "summary": "Authorize a task order for survey and design services for the 16th Street Sidewalk Project in the St. Andrews CRA District East Expansion Area, and authorize staff to pursue FDOT Safe Routes To School grant funding.",
+   "kind": "contract",
+   "amount": 67215.0,
+   "parties": [
+    "Panhandle Engineering, Inc.",
+    "Florida Department of Transportation (FDOT)"
+   ],
+   "addresses": [
+    "16th Street Sidewalk Project"
+   ],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-912"
+  },
+  {
+   "board": "pc-cra",
+   "body": "Panama City Community Redevelopment Agency (CRA) Board",
+   "gov": "pc",
+   "date": "2026-10-13",
+   "meeting": "Community Redevelopment Agency Board Meeting for October 13, 2026",
+   "number": "14",
+   "section": null,
+   "title": "Award ITB No. PC26-048, Lisenby Avenue Sidewalk Improvements, To Break-N-Ground, LLC",
+   "summary": "Award the bid and authorize execution of the associated contract.",
+   "kind": "contract",
+   "amount": 156388.63,
+   "parties": [
+    "Break-N-Ground, LLC"
+   ],
+   "addresses": [
+    "Lisenby Avenue"
+   ],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-912"
+  },
+  {
+   "board": "pc-cra",
+   "body": "Panama City Community Redevelopment Agency (CRA) Board",
+   "gov": "pc",
+   "date": "2026-10-13",
+   "meeting": "Community Redevelopment Agency Board Meeting for October 13, 2026",
+   "number": "15",
+   "section": null,
+   "title": "Incremental Development Alliance Summary Report",
+   "summary": null,
+   "kind": "presentation",
+   "amount": null,
+   "parties": [
+    "Incremental Development Alliance"
+   ],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-912"
+  },
+  {
    "board": "county",
    "body": "Bay County Board of County Commissioners",
    "gov": "county",
@@ -1262,6 +3044,214 @@
    "parties": [],
    "addresses": [],
    "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1937"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-09-24",
+   "meeting": "City Council",
+   "number": "E.1",
+   "section": "APPROVAL OF MEETING MINUTES",
+   "title": "September 10, 2026 Regular Meeting Minutes",
+   "summary": null,
+   "kind": "minutes_approval",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=419"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-09-24",
+   "meeting": "City Council",
+   "number": "G.1",
+   "section": "PRESENTATIONS",
+   "title": "Employee Years of Service Awards",
+   "summary": null,
+   "kind": "presentation",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=419"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-09-24",
+   "meeting": "City Council",
+   "number": "G.2",
+   "section": "PRESENTATIONS",
+   "title": "Utilities Department Update by Director Mark Shaeffer",
+   "summary": null,
+   "kind": "presentation",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=419"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-09-24",
+   "meeting": "City Council",
+   "number": "G.3",
+   "section": "PRESENTATIONS",
+   "title": "Potential Transit Applications Along Front Beach Road by Director John Adair",
+   "summary": null,
+   "kind": "presentation",
+   "amount": null,
+   "parties": [],
+   "addresses": [
+    "Front Beach Road"
+   ],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=419"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-09-24",
+   "meeting": "City Council",
+   "number": "I.1",
+   "section": "CONSENT AGENDA",
+   "title": "Resolution No. 26-166, approving an agreement with Live Flyer, Inc. for the purchase of pier blowout panels for the Russell-Fields City Pier at set unit prices",
+   "summary": "Approves an agreement with Live Flyer, Inc. to purchase pier blowout panels for the Russell-Fields City Pier at set unit prices.",
+   "kind": "purchase",
+   "amount": null,
+   "parties": [
+    "Live Flyer, Inc."
+   ],
+   "addresses": [
+    "Russell-Fields City Pier"
+   ],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=419"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-09-24",
+   "meeting": "City Council",
+   "number": "I.2",
+   "section": "CONSENT AGENDA",
+   "title": "Resolution No. 26-167, renewing all perils property, general and professional liability, cyber liability, workers' compensation, and automobile insurance from Florida League of Cities, Inc.",
+   "summary": "Renews the city's insurance coverages with an annual premium not to exceed $2,701,992.00 and authorizes the City Manager to add, delete, and modify coverage of city assets in the total amount of $200,000.00.",
+   "kind": "purchase",
+   "amount": 2701992.0,
+   "parties": [
+    "Florida League of Cities, Inc."
+   ],
+   "addresses": [],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=419"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-09-24",
+   "meeting": "City Council",
+   "number": "I.3",
+   "section": "CONSENT AGENDA",
+   "title": "Resolution No. 26-168, approving the purchase of non-medical benefit products and insurance coverage and services from Metropolitan Life Insurance Company, Florida Blue via HealthEquity, and Teladoc Health, Inc.",
+   "summary": null,
+   "kind": "purchase",
+   "amount": null,
+   "parties": [
+    "Metropolitan Life Insurance Company",
+    "Florida Blue",
+    "HealthEquity",
+    "Teladoc Health, Inc."
+   ],
+   "addresses": [],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=419"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-09-24",
+   "meeting": "City Council",
+   "number": "J.1",
+   "section": "REGULAR AGENDA AND DISCUSSION / ACTION ITEMS",
+   "title": "Ordinance No. 1686, amending Section 22-05 and creating Section 22-6 of the City's Code regarding micromobility devices, including electric bicycles; second reading / public hearing",
+   "summary": "Adds definitions, regulations, and prohibitions related to micromobility devices, including electric bicycles.",
+   "kind": "ordinance",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=419"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-09-24",
+   "meeting": "City Council",
+   "number": "J.2",
+   "section": "REGULAR AGENDA AND DISCUSSION / ACTION ITEMS",
+   "title": "Ordinance No. 1689, revising water, sewer, sewer availability, and reclaimed water rates, second reading / public hearing",
+   "summary": null,
+   "kind": "ordinance",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=419"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-09-24",
+   "meeting": "City Council",
+   "number": "J.3",
+   "section": "REGULAR AGENDA AND DISCUSSION / ACTION ITEMS",
+   "title": "Resolution No. 26-169, approving agreements with David Malki related to the City's purchase of his properties",
+   "summary": "Approves agreements with David Malki related to the city's purchase of his properties at 13500 and 13508 Front Beach Road.",
+   "kind": "resolution",
+   "amount": null,
+   "parties": [],
+   "addresses": [
+    "13500 Front Beach Road",
+    "13508 Front Beach Road"
+   ],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=419"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-09-24",
+   "meeting": "City Council",
+   "number": "J.4",
+   "section": "REGULAR AGENDA AND DISCUSSION / ACTION ITEMS",
+   "title": "Resolution No. 26-170, approving the recommendation of Mindy Lawyer as City Clerk and the employment agreement",
+   "summary": "Approves Mindy Lawyer as City Clerk and her employment agreement for an annual salary of $72,500.00.",
+   "kind": "personnel",
+   "amount": 72500.0,
+   "parties": [],
+   "addresses": [],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=419"
+  },
+  {
+   "board": "pcb",
+   "body": "Panama City Beach City Council",
+   "gov": "pcb",
+   "date": "2026-09-24",
+   "meeting": "City Council",
+   "number": "J.5",
+   "section": "REGULAR AGENDA AND DISCUSSION / ACTION ITEMS",
+   "title": "Discussion / Action Item, Traditional Neighborhood Overlay District (TNOD)",
+   "summary": null,
+   "kind": "other",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=419"
   },
   {
    "board": "county",
@@ -1507,6 +3497,426 @@
    "url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1113,plainText=false)"
   },
   {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-09-22",
+   "meeting": "City Commission Meeting of September 22, 2026.",
+   "number": "3",
+   "section": null,
+   "title": "Approval of Minutes for the September 8, 2026, Commission Meeting and September 8, 2026, Budget Hearing",
+   "summary": null,
+   "kind": "minutes_approval",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09222026-891"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-09-22",
+   "meeting": "City Commission Meeting of September 22, 2026.",
+   "number": "5.a",
+   "section": "Community Announcements",
+   "title": "Approval of the 2026/2027 Fiscal Year Operating and Capital Budgets for the Panama City Port Authority",
+   "summary": null,
+   "kind": "budget",
+   "amount": null,
+   "parties": [
+    "Panama City Port Authority"
+   ],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09222026-891"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-09-22",
+   "meeting": "City Commission Meeting of September 22, 2026.",
+   "number": "6.a",
+   "section": "Public Hearings",
+   "title": "Resolution 20260922.3 to adopt the final millage rates for the City of Panama City and Downtown Improvement District for Fiscal Year 2027",
+   "summary": null,
+   "kind": "resolution",
+   "amount": null,
+   "parties": [
+    "City of Panama City",
+    "Downtown Improvement District"
+   ],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09222026-891"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-09-22",
+   "meeting": "City Commission Meeting of September 22, 2026.",
+   "number": "6.b",
+   "section": "Public Hearings",
+   "title": "Resolution 20260922.4 to adopt the final Fiscal Year 2027 Budget for the City of Panama City and Downtown Improvement District",
+   "summary": null,
+   "kind": "budget",
+   "amount": null,
+   "parties": [
+    "City of Panama City",
+    "Downtown Improvement District"
+   ],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09222026-891"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-09-22",
+   "meeting": "City Commission Meeting of September 22, 2026.",
+   "number": "6.c",
+   "section": "Public Hearings",
+   "title": "Second and final public hearing on Ordinance 3313, temporary moratorium on large-scale data centers",
+   "summary": "An ordinance adopting a temporary moratorium on large-scale data centers.",
+   "kind": "ordinance",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09222026-891"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-09-22",
+   "meeting": "City Commission Meeting of September 22, 2026.",
+   "number": "6.d",
+   "section": "Public Hearings",
+   "title": "Second and final public hearing on Ordinance 3315, amending sec. 104-39.B, Allowable Uses in Light Industrial (LI) of the Unified Land Development Code",
+   "summary": null,
+   "kind": "ordinance",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09222026-891"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-09-22",
+   "meeting": "City Commission Meeting of September 22, 2026.",
+   "number": "6.e",
+   "section": "Public Hearings",
+   "title": "First and only Public Hearing on the proposed Conceptual Plan for a property on Highway 390",
+   "summary": null,
+   "kind": "rezoning_land_use",
+   "amount": null,
+   "parties": [],
+   "addresses": [
+    "Highway 390",
+    "Parcel ID #: 13000-000-000"
+   ],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09222026-891"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-09-22",
+   "meeting": "City Commission Meeting of September 22, 2026.",
+   "number": "6.f",
+   "section": "Public Hearings",
+   "title": "First and only Public Hearing on the proposed Gateway Overlay Special Exception for 1023 E 15th Street",
+   "summary": null,
+   "kind": "rezoning_land_use",
+   "amount": null,
+   "parties": [],
+   "addresses": [
+    "1023 E 15th Street",
+    "Parcel ID 14450-000-000"
+   ],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09222026-891"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-09-22",
+   "meeting": "City Commission Meeting of September 22, 2026.",
+   "number": "6.g",
+   "section": "Public Hearings",
+   "title": "Introduction hearing on the 2046 Comprehensive Plan Update",
+   "summary": null,
+   "kind": "public_hearing",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09222026-891"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-09-22",
+   "meeting": "City Commission Meeting of September 22, 2026.",
+   "number": "7.a",
+   "section": "Quasi-Judicial Hearings",
+   "title": "Second and final Public Hearing on Ordinance 3312",
+   "summary": "Agenda documents indicate a rezoning for 2913 E 5th Court.",
+   "kind": "rezoning_land_use",
+   "amount": null,
+   "parties": [],
+   "addresses": [
+    "2913 E 5th Court"
+   ],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09222026-891"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-09-22",
+   "meeting": "City Commission Meeting of September 22, 2026.",
+   "number": "9.a",
+   "section": "Consent Agenda",
+   "title": "Amendment 1 to State Revolving Fund (SRF) Loan Agreement LS0302H0",
+   "summary": "The amendment extends the repayment schedule.",
+   "kind": "bond_debt",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09222026-891"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-09-22",
+   "meeting": "City Commission Meeting of September 22, 2026.",
+   "number": "9.b",
+   "section": "Consent Agenda",
+   "title": "Interlocal Agreement between City of Panama City and Bay County Clerk of Court for Processing and Collection of Parking Citations in accordance with Ordinance 3271",
+   "summary": null,
+   "kind": "contract",
+   "amount": null,
+   "parties": [
+    "Bay County Clerk of Court"
+   ],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09222026-891"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-09-22",
+   "meeting": "City Commission Meeting of September 22, 2026.",
+   "number": "9.c",
+   "section": "Consent Agenda",
+   "title": "Amendment No. 2 to DEO Agreement No. M0166",
+   "summary": null,
+   "kind": "contract",
+   "amount": null,
+   "parties": [
+    "DEO"
+   ],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09222026-891"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-09-22",
+   "meeting": "City Commission Meeting of September 22, 2026.",
+   "number": "9.d",
+   "section": "Consent Agenda",
+   "title": "Continue suspension of Transportation Impact Fees through January 2027",
+   "summary": null,
+   "kind": "other",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09222026-891"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-09-22",
+   "meeting": "City Commission Meeting of September 22, 2026.",
+   "number": "9.e",
+   "section": "Consent Agenda",
+   "title": "Renewal proposal from Preferred Governmental Insurance Trust (PGIT) for the City's FY27 insurance coverage",
+   "summary": null,
+   "kind": "contract",
+   "amount": 3165849.0,
+   "parties": [
+    "Preferred Governmental Insurance Trust (PGIT)"
+   ],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09222026-891"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-09-22",
+   "meeting": "City Commission Meeting of September 22, 2026.",
+   "number": "9.f",
+   "section": "Consent Agenda",
+   "title": "Award bid PC26-025 Project Hometown Revitalization - Fitzsimmons Holdings to T K Vandy LLC and execute contract",
+   "summary": null,
+   "kind": "contract",
+   "amount": 236109.14,
+   "parties": [
+    "T K Vandy LLC"
+   ],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09222026-891"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-09-22",
+   "meeting": "City Commission Meeting of September 22, 2026.",
+   "number": "10.a",
+   "section": "Mayor's Report",
+   "title": "Discussion and consideration of establishing an After School Assistance Program (ASAP) Board",
+   "summary": null,
+   "kind": "other",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09222026-891"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-09-22",
+   "meeting": "City Commission Meeting of September 22, 2026.",
+   "number": "11.a",
+   "section": "Commissioners' Report(s)",
+   "title": "Commissioner Hughes - Discussion of Business Licenses and Business Regulations (Chapter 7 of Municipal Code)",
+   "summary": null,
+   "kind": "other",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09222026-891"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-09-22",
+   "meeting": "City Commission Meeting of September 22, 2026.",
+   "number": "12.a",
+   "section": "City Manager",
+   "title": "Approval of the amended SHIP LHAP prepared for FHFC",
+   "summary": "The amendment is due to SB 594 passing during the 2026 legislative session regarding Manufactured Housing assistance.",
+   "kind": "other",
+   "amount": null,
+   "parties": [
+    "FHFC"
+   ],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09222026-891"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-09-22",
+   "meeting": "City Commission Meeting of September 22, 2026.",
+   "number": "12.b",
+   "section": "City Manager",
+   "title": "Engage Emergency Medical Solutions, LLC to conduct a Fire Department Operational Assessment",
+   "summary": null,
+   "kind": "contract",
+   "amount": null,
+   "parties": [
+    "Emergency Medical Solutions, LLC"
+   ],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09222026-891"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-09-22",
+   "meeting": "City Commission Meeting of September 22, 2026.",
+   "number": "12.c",
+   "section": "City Manager",
+   "title": "Resolution 20260922.1 to accept a state funded grant for a Water Storage Tank and approve budget amendment resolution 20260922.2",
+   "summary": "The grant is $650,000 with an additional City match of $650,000.",
+   "kind": "grant",
+   "amount": 650000.0,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09222026-891"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-09-22",
+   "meeting": "City Commission Meeting of September 22, 2026.",
+   "number": "12.d",
+   "section": "City Manager",
+   "title": "Agreement with CBC Construction (CBC) to perform road reconstruction for Frankford Avenue and South Discovery Loop",
+   "summary": null,
+   "kind": "contract",
+   "amount": 1718585.0,
+   "parties": [
+    "CBC Construction"
+   ],
+   "addresses": [
+    "Frankford Avenue",
+    "South Discovery Loop"
+   ],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09222026-891"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-09-22",
+   "meeting": "City Commission Meeting of September 22, 2026.",
+   "number": "13.a",
+   "section": "City Attorney",
+   "title": "Executive Session pursuant to s.286.011(8), F.S. regarding H.G. Harders and Son, Inc. vs. City of Panama City and D.R. Horton, Inc. vs. City of Panama City",
+   "summary": "Closed session to discuss and receive advice on two lawsuits, Case Nos. 26001029CA and 25000865CA.",
+   "kind": "other",
+   "amount": null,
+   "parties": [
+    "H.G. Harders and Son, Inc.",
+    "D.R. Horton, Inc."
+   ],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09222026-891"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-09-22",
+   "meeting": "City Commission Meeting of September 22, 2026.",
+   "number": "13.c",
+   "section": "City Attorney",
+   "title": "Discussion and possible action regarding litigation",
+   "summary": null,
+   "kind": "other",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09222026-891"
+  },
+  {
    "board": "lh",
    "body": "Lynn Haven City Commission",
    "gov": "lh",
@@ -1521,6 +3931,24 @@
    "parties": [],
    "addresses": [],
    "url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1115,plainText=false)"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-09-21",
+   "meeting": "Virtual Workshop Meeting of September 21, 2026.",
+   "number": "1",
+   "section": null,
+   "title": "Virtual Workshop",
+   "summary": "The City Commission will hold a non-voting virtual workshop to discuss various topics, with no official actions taken and no audience participation.",
+   "kind": "presentation",
+   "amount": null,
+   "parties": [],
+   "addresses": [
+    "501 Harrison Avenue, Panama City, 32401"
+   ],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09212026-911"
   },
   {
    "board": "cw",
@@ -2160,6 +4588,24 @@
    "url": "https://mexicobeachfl.gov/uploads/2026/08/September-11-2026-First-Public-Budget-Hearing.pdf"
   },
   {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-09-10",
+   "meeting": "Virtual Workshop Meeting of September 10, 2026.",
+   "number": "1",
+   "section": null,
+   "title": "Virtual Workshop",
+   "summary": "The City Commission will hold a non-voting virtual workshop to discuss various topics, with no official actions taken.",
+   "kind": "presentation",
+   "amount": null,
+   "parties": [],
+   "addresses": [
+    "501 Harrison Avenue, Panama City, 32401"
+   ],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09102026-906"
+  },
+  {
    "board": "cw",
    "body": "Callaway City Commission",
    "gov": "cw",
@@ -2614,6 +5060,383 @@
    "url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1101,plainText=false)"
   },
   {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-09-08",
+   "meeting": "Budget Hearing September 8, 2026.",
+   "number": "5",
+   "section": null,
+   "title": "Resolution 20260908.6 to adopt the tentative millage rates for the City of Panama City and Downtown Improvement Board for Fiscal Year 2027",
+   "summary": "Consideration and approval of a resolution adopting the tentative millage rates for the City and the Downtown Improvement Board for Fiscal Year 2027.",
+   "kind": "resolution",
+   "amount": null,
+   "parties": [
+    "City of Panama City",
+    "Downtown Improvement Board"
+   ],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09082026-897"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-09-08",
+   "meeting": "Budget Hearing September 8, 2026.",
+   "number": "6",
+   "section": null,
+   "title": "Resolution 20260908.7 to adopt the tentative Fiscal Year 2027 Budget for the City of Panama City and Downtown Improvement Board",
+   "summary": "Consideration and approval of a resolution adopting the tentative Fiscal Year 2027 budget for the City and the Downtown Improvement Board.",
+   "kind": "budget",
+   "amount": null,
+   "parties": [
+    "City of Panama City",
+    "Downtown Improvement Board"
+   ],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09082026-897"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-09-08",
+   "meeting": "City Commission Meeting of September 8, 2026.",
+   "number": "3",
+   "section": null,
+   "title": "Approval of Minutes for the August 25, 2026, Commission Meeting",
+   "summary": null,
+   "kind": "minutes_approval",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09082026-890"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-09-08",
+   "meeting": "City Commission Meeting of September 8, 2026.",
+   "number": "6.a",
+   "section": "Public Hearings",
+   "title": "Final Assessment Resolution for Fire Services No. 20260908.2 and public hearing",
+   "summary": null,
+   "kind": "public_hearing",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09082026-890"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-09-08",
+   "meeting": "City Commission Meeting of September 8, 2026.",
+   "number": "6.b",
+   "section": "Public Hearings",
+   "title": "Second and final public hearing on Ordinance 3314 amending Ordinance 3305 regarding the Panama City North Community Development District",
+   "summary": "The ordinance corrects a scrivener's error in the legal description.",
+   "kind": "ordinance",
+   "amount": null,
+   "parties": [
+    "Panama City North Community Development District"
+   ],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09082026-890"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-09-08",
+   "meeting": "City Commission Meeting of September 8, 2026.",
+   "number": "6.c",
+   "section": "Public Hearings",
+   "title": "First of two public hearings on Ordinance 3313 adopting a temporary moratorium on large-scale data centers",
+   "summary": null,
+   "kind": "ordinance",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09082026-890"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-09-08",
+   "meeting": "City Commission Meeting of September 8, 2026.",
+   "number": "6.d",
+   "section": "Public Hearings",
+   "title": "First of two public hearings on Ordinance 3315 amending sec. 104-39.B, Allowable Uses in Light Industrial (LI) of the Unified Land Development Code (ULDC)",
+   "summary": null,
+   "kind": "ordinance",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09082026-890"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-09-08",
+   "meeting": "City Commission Meeting of September 8, 2026.",
+   "number": "7.a",
+   "section": "Quasi-Judicial Hearings",
+   "title": "First of two Public Hearings on Ordinance 3312 amending the Zoning Map to designate Neighborhood General (NG)",
+   "summary": "The ordinance would rezone a property to Neighborhood General, NG.",
+   "kind": "rezoning_land_use",
+   "amount": null,
+   "parties": [],
+   "addresses": [
+    "2913 E 5th Court",
+    "Parcel ID 23267-000-000"
+   ],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09082026-890"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-09-08",
+   "meeting": "City Commission Meeting of September 8, 2026.",
+   "number": "9.a",
+   "section": "Consent Agenda",
+   "title": "Monthly Financial Statement and General Fund Balance Report - July 2026",
+   "summary": null,
+   "kind": "consent",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09082026-890"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-09-08",
+   "meeting": "City Commission Meeting of September 8, 2026.",
+   "number": "9.b",
+   "section": "Consent Agenda",
+   "title": "Award bid PC26-032 Improvements to Panama City Massalina Bayou HDD Water Main project to Mainline Construction LLC",
+   "summary": "Approve a contract with Mainline Construction LLC and authorize the City Manager to approve change orders up to the cumulative amount within his authority without further Commission approval.",
+   "kind": "contract",
+   "amount": 558581.96,
+   "parties": [
+    "Mainline Construction LLC"
+   ],
+   "addresses": [
+    "Massalina Bayou"
+   ],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09082026-890"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-09-08",
+   "meeting": "City Commission Meeting of September 8, 2026.",
+   "number": "9.c",
+   "section": "Consent Agenda",
+   "title": "Amendment No 2 to Agreement No. LPA0204, \"Panama City Relocation of Lift Station 79\"",
+   "summary": "Approve and sign the amendment between the City of Panama City and the Florida Department of Environmental Protection.",
+   "kind": "contract",
+   "amount": null,
+   "parties": [
+    "Florida Department of Environmental Protection"
+   ],
+   "addresses": [
+    "Lift Station 79"
+   ],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09082026-890"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-09-08",
+   "meeting": "City Commission Meeting of September 8, 2026.",
+   "number": "10.a",
+   "section": "City Attorney",
+   "title": "Approval of the Employment Contract for the City Clerk-Treasurer",
+   "summary": null,
+   "kind": "personnel",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09082026-890"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-09-08",
+   "meeting": "City Commission Meeting of September 8, 2026.",
+   "number": "10.b",
+   "section": "City Attorney",
+   "title": "Approval of 6th Street and Harmon Avenue contract",
+   "summary": null,
+   "kind": "contract",
+   "amount": null,
+   "parties": [],
+   "addresses": [
+    "6th Street and Harmon Avenue"
+   ],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09082026-890"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-09-08",
+   "meeting": "City Commission Meeting of September 8, 2026.",
+   "number": "11.a",
+   "section": "City Clerk-Treasurer",
+   "title": "Appointment to the Panama City Planning Board",
+   "summary": null,
+   "kind": "appointment",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09082026-890"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-09-08",
+   "meeting": "City Commission Meeting of September 8, 2026.",
+   "number": "11.b",
+   "section": "City Clerk-Treasurer",
+   "title": "Notice of Term Expirations on the Board of Architects",
+   "summary": null,
+   "kind": "appointment",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09082026-890"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-09-08",
+   "meeting": "City Commission Meeting of September 8, 2026.",
+   "number": "11.c",
+   "section": "City Clerk-Treasurer",
+   "title": "Notice of Term Expiration on the City of Panama City Municipal Firefighters' Pension Trust Fund Board",
+   "summary": null,
+   "kind": "appointment",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09082026-890"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-09-08",
+   "meeting": "City Commission Meeting of September 8, 2026.",
+   "number": "12.a",
+   "section": "City Manager",
+   "title": "Utilize Fire Protection Service permitting fees to purchase supplies and equipment for the fire department and approve Budget Amendment Resolution 20260908.1",
+   "summary": null,
+   "kind": "budget",
+   "amount": 290681.0,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09082026-890"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-09-08",
+   "meeting": "City Commission Meeting of September 8, 2026.",
+   "number": "12.b",
+   "section": "City Manager",
+   "title": "Budget Amendment Resolution 20260908.5 to receive and utilize donations for Parks, Culture and Recreation",
+   "summary": null,
+   "kind": "budget",
+   "amount": 1310.0,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09082026-890"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-09-08",
+   "meeting": "City Commission Meeting of September 8, 2026.",
+   "number": "12.c",
+   "section": "City Manager",
+   "title": "Resolution 20260908.8 to accept state funded grant for Robinson Bayou Bridge Refurbishment and approve Budget Amendment Resolution 20260908.9",
+   "summary": "The grant of $700,000 comes with an additional match amount of $149,515.",
+   "kind": "grant",
+   "amount": 700000.0,
+   "parties": [],
+   "addresses": [
+    "Robinson Bayou Bridge"
+   ],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09082026-890"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-09-08",
+   "meeting": "City Commission Meeting of September 8, 2026.",
+   "number": "12.d",
+   "section": "City Manager",
+   "title": "Modify meeting and workshop schedule(s) for Fiscal Year 2027",
+   "summary": null,
+   "kind": "other",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09082026-890"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-09-08",
+   "meeting": "City Commission Meeting of September 8, 2026.",
+   "number": "12.e",
+   "section": "City Manager",
+   "title": "Projects and efforts update",
+   "summary": null,
+   "kind": "presentation",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09082026-890"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-09-08",
+   "meeting": "Special Call Panama City Community Fund Board of Directors Meeting of September 8, 2026.",
+   "number": "3",
+   "section": null,
+   "title": "Approval of FY27 Budget",
+   "summary": null,
+   "kind": "budget",
+   "amount": null,
+   "parties": [
+    "Panama City Community Fund, Inc."
+   ],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09082026-900"
+  },
+  {
    "board": "cw",
    "body": "Callaway City Commission",
    "gov": "cw",
@@ -2850,6 +5673,24 @@
    "parties": [],
    "addresses": [],
    "url": "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_09032026-419"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-09-02",
+   "meeting": "Virtual Workshop Meeting of September 2, 2026.",
+   "number": "1",
+   "section": null,
+   "title": "Virtual Workshop",
+   "summary": "The City Commission will hold a non-voting virtual workshop to discuss the Fiscal Year 2027 budget, with no official actions taken.",
+   "kind": "budget",
+   "amount": null,
+   "parties": [],
+   "addresses": [
+    "501 Harrison Ave. Room 10"
+   ],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09022026-905"
   },
   {
    "board": "county",
@@ -3153,6 +5994,151 @@
    ],
    "addresses": [],
    "url": "https://baycountyfl.primegov.com/Portal/Meeting?meetingTemplateId=1927"
+  },
+  {
+   "board": "pc-cra",
+   "body": "Panama City Community Redevelopment Agency (CRA) Board",
+   "gov": "pc",
+   "date": "2026-09-01",
+   "meeting": "Community Redevelopment Agency Board Meeting of September 1, 2026",
+   "number": "4",
+   "section": null,
+   "title": "Approval Of Meeting Minutes",
+   "summary": null,
+   "kind": "minutes_approval",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09012026-904"
+  },
+  {
+   "board": "pc-cra",
+   "body": "Panama City Community Redevelopment Agency (CRA) Board",
+   "gov": "pc",
+   "date": "2026-09-01",
+   "meeting": "Community Redevelopment Agency Board Meeting of September 1, 2026",
+   "number": "7",
+   "section": null,
+   "title": "Performance Agreement For The Panama City Tax Increment Rebate Program Application Submitted By Angel's Place Of Bay County LLC",
+   "summary": "Approve and authorize execution of a performance agreement for a Tax Increment Rebate Program application for a property in the St. Andrews CRA District.",
+   "kind": "contract",
+   "amount": null,
+   "parties": [
+    "Angel's Place Of Bay County LLC"
+   ],
+   "addresses": [
+    "2509 W. 13th Street",
+    "Parcel ID 29788-000-000"
+   ],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09012026-904"
+  },
+  {
+   "board": "pc-cra",
+   "body": "Panama City Community Redevelopment Agency (CRA) Board",
+   "gov": "pc",
+   "date": "2026-09-01",
+   "meeting": "Community Redevelopment Agency Board Meeting of September 1, 2026",
+   "number": "8",
+   "section": null,
+   "title": "Commercial Property Improvement (CPI) Grant To Daniel W. Davis II On Behalf Of Eastside Vault LLC",
+   "summary": "Approve a CPI grant for exterior improvements to a commercial property in the Millville CRA District.",
+   "kind": "grant",
+   "amount": 15000.0,
+   "parties": [
+    "Eastside Vault LLC"
+   ],
+   "addresses": [
+    "2621 E. 5th Street",
+    "Parcel ID 22597-010-000"
+   ],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09012026-904"
+  },
+  {
+   "board": "pc-cra",
+   "body": "Panama City Community Redevelopment Agency (CRA) Board",
+   "gov": "pc",
+   "date": "2026-09-01",
+   "meeting": "Community Redevelopment Agency Board Meeting of September 1, 2026",
+   "number": "9",
+   "section": null,
+   "title": "Commercial Property Improvement (CPI) Grant To Latesha Steele, Owner Of The Spot On 98 LLC",
+   "summary": "Approve a CPI grant for a commercial property in the Millville CRA District.",
+   "kind": "grant",
+   "amount": 15000.0,
+   "parties": [
+    "The Spot On 98 LLC"
+   ],
+   "addresses": [
+    "1813 E. 5th Street"
+   ],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09012026-904"
+  },
+  {
+   "board": "pc-cra",
+   "body": "Panama City Community Redevelopment Agency (CRA) Board",
+   "gov": "pc",
+   "date": "2026-09-01",
+   "meeting": "Community Redevelopment Agency Board Meeting of September 1, 2026",
+   "number": "10",
+   "section": null,
+   "title": "FY2025-2026 CRA Goals, Objectives And Performance Measures Results Report And FY2026-2027 Goals, Objectives, Performance Measures, Standards And Annual Work Plan",
+   "summary": "Presentation of last year's results report and approval of the FY2026-2027 goals, objectives, performance measures, standards and annual work plan.",
+   "kind": "presentation",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09012026-904"
+  },
+  {
+   "board": "pc-cra",
+   "body": "Panama City Community Redevelopment Agency (CRA) Board",
+   "gov": "pc",
+   "date": "2026-09-01",
+   "meeting": "Community Redevelopment Agency Board Meeting of September 1, 2026",
+   "number": "11",
+   "section": null,
+   "title": "Resolution CRA20260901.1 Adopting The Panama City Community Redevelopment Agency Fiscal Year 2026-2027 Annual Budget",
+   "summary": "Approve and authorize execution of a resolution adopting the CRA's FY2026-2027 annual budget.",
+   "kind": "budget",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09012026-904"
+  },
+  {
+   "board": "pc-cra",
+   "body": "Panama City Community Redevelopment Agency (CRA) Board",
+   "gov": "pc",
+   "date": "2026-09-01",
+   "meeting": "Community Redevelopment Agency Board Meeting of September 1, 2026",
+   "number": "12",
+   "section": null,
+   "title": "Small-Business Property Activation & Redevelopment Kickstart (SPARK) Pilot Program In Downtown North CRA District",
+   "summary": null,
+   "kind": "other",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09012026-904"
+  },
+  {
+   "board": "pc-cra",
+   "body": "Panama City Community Redevelopment Agency (CRA) Board",
+   "gov": "pc",
+   "date": "2026-09-01",
+   "meeting": "Community Redevelopment Agency Board Meeting of September 1, 2026",
+   "number": "13",
+   "section": null,
+   "title": "Proposed Developer Agreement With Zachary Seymour And CRA Redevelopment Site Preparation Grant Award",
+   "summary": "Approve a developer agreement and a site preparation grant award for a property in the Downtown CRA District.",
+   "kind": "grant",
+   "amount": null,
+   "parties": [],
+   "addresses": [
+    "101 E 7th Street",
+    "Parcel ID 20075-000-000"
+   ],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_09012026-904"
   },
   {
    "board": "lh",
