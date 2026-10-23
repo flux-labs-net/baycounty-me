@@ -179,7 +179,7 @@ struct PersonDetailView: View {
                     Text(p?.name ?? "Person").font(.title3.weight(.semibold))
                     if let p { Text(p.headline).font(.subheadline).foregroundStyle(.secondary) }
                 }
-                ForEach(Array((p?.mainRoles ?? []).enumerated()), id: \.offset) { _, r in
+                ForEach(Array((p.map { $0.mainRoles.count > 1 ? $0.mainRoles : [] } ?? []).enumerated()), id: \.offset) { _, r in
                     Text([r.role.map { $0.prefix(1).uppercased() + $0.dropFirst() }, r.gov_id.flatMap { Governments.names[$0] }, r.seat.map { "seat \($0)" }]
                         .compactMap { $0 }.joined(separator: ", ")).font(.caption)
                 }
