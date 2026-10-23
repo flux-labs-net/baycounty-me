@@ -240,7 +240,8 @@
     for (const k of ['anon_per_minute', 'anon_per_day', 'default_per_minute', 'default_per_day']) f[k].value = s.settings[k] ?? '';
     f.require_key.checked = !!s.settings.require_key;
     const name = id => (KEYS.find(k => k.id === id) || {}).name;
-    const WHAT = {email_test: 'Sent a test email', create_key: 'Created a key', update_key: 'Changed a key', rotate_key: 'Replaced a key', update_settings: 'Changed settings', block_ip: 'Blocked an address', unblock_ip: 'Removed a block', login: 'Signed in', login_requested: 'Asked for a sign-in link'};
+    const WHAT = {email_test: 'Sent a test email', create_key: 'Created a key', update_key: 'Changed a key', rotate_key: 'Replaced a key', update_settings: 'Changed settings', block_ip: 'Blocked an address', unblock_ip: 'Removed a block', login: 'Signed in', login_requested: 'Asked for a sign-in link',
+      ledger_normalize: 'Normalized accounting files', ledger_approve: 'Approved ledger rows', ledger_reject: 'Rejected ledger rows', ledger_source: 'Changed an accounting source'};
     $('#audit-table tbody').innerHTML = a.audit.map(x => `<tr><td class="small" style="white-space:nowrap">${stamp(x.at)}</td><td class="small">${esc(x.admin)}</td><td class="small">${esc(WHAT[x.action] || x.action)}${x.key_id && name(x.key_id) ? ': ' + esc(name(x.key_id)) : ''}</td>
       <td class="small muted mono" style="word-break:break-all">${x.detail && x.action !== 'login' ? esc(JSON.stringify(x.detail)) : ''}</td></tr>`).join('') || '<tr><td colspan="4" class="empty">Nothing yet.</td></tr>';
   }
@@ -264,6 +265,7 @@
   const central = (h, m) => { const d = new Date(); d.setUTCHours(h, m, 0, 0); return d.toLocaleTimeString('en-US', {hour: 'numeric', minute: '2-digit', timeZone: 'America/Chicago'}); };
   const RUN = {ok: 'OK', failed: 'Failed', running: 'Running'};
   async function loadIngestion() {
+    loadLedger();
     $('#in-sched').innerHTML = SCHED.map(([what, days, h, m]) => `<span>${esc(what)}</span><span>${esc(days)}, ${central(h, m)}</span>`).join('');
     let r;
     try { r = await api('ingestion'); }
@@ -283,6 +285,96 @@
       <td class="mono small">${f.git_sha ? `<a href="https://github.com/jeremymcs/baycounty-me/commit/${esc(f.git_sha)}" target="_blank" rel="noopener">${esc(String(f.git_sha).slice(0, 7))}</a>` : ''}</td></tr>`).join('') || '<tr><td colspan="4" class="empty">No failures.</td></tr>';
   }
   $('#in-refresh').addEventListener('click', loadIngestion);
+
+  // ---------- accounting-system files (ingest schema, api/_ledger.js) ----------
+  const ERP = {new_world: 'Tyler New World', bsa: 'BS&A', springbrook: 'Springbrook', other: 'Other'};
+  const FILE = {received: 'New', normalized: 'Normalized', failed: 'Failed', duplicate: 'Duplicate'};
+  const REV = {pending: 'Pending', approved: 'Approved', rejected: 'Rejected'};
+  const usd = n => n == null ? '—' : Number(n).toLocaleString('en-US', {style: 'currency', currency: 'USD'});
+  const LG = {raw: '', picked: new Set(), rows: [], sources: []};
+  function lgMsg(html, good) { $('#ac-banner').innerHTML = html ? `<div class="banner ${good ? 'good' : 'bad'}"><div>${html}</div></div>` : ''; }
+  async function loadLedger(keepMsg) {
+    let r;
+    try { r = await api('ledger', {params: {status: $('#ac-status').value, source: $('#ac-source').value, raw: LG.raw}}); }
+    catch (e) { lgMsg(`<b>Couldn’t load accounting files.</b><div class="small muted">${esc(e.message)}</div>`); return; }
+    if (!keepMsg) lgMsg('');
+    LG.sources = r.sources; LG.rows = r.rows; LG.picked.clear();
+    const t = r.totals;
+    $('#ac-tiles').innerHTML = [[fmt(t.waiting), 'Files waiting to normalize'], [fmt(t.pending), 'Rows waiting for review'], [usd(t.pending_amount), 'Pending amount'],
+      [fmt(t.approved), 'Rows approved'], [fmt(t.failed_14d), 'Failed files, 14 days']].map(([v, l]) => `<div class="tile"><b>${v}</b><span>${l}</span></div>`).join('');
+    const sel = $('#ac-source'), cur = sel.value;
+    sel.innerHTML = '<option value="">All governments</option>' + r.sources.map(s => `<option value="${esc(s.id)}">${esc(s.entity_name)}</option>`).join('');
+    sel.value = cur;
+    $('#ac-sources tbody').innerHTML = r.sources.map(s => `<tr data-src="${esc(s.id)}"><td>${esc(s.entity_name)}${s.active ? '' : ' <span class="pill revoked">Off</span>'}${s.has_map ? '' : '<div class="small" style="color:var(--warn)">No column map yet</div>'}</td>
+      <td class="small">${esc(ERP[s.erp_system] || s.erp_system)}</td><td class="mono small">${esc(s.inbound_address || '')}</td>
+      <td><div class="ac-snd"><input value="${esc((s.allowed_senders || []).join(', '))}" placeholder="name@city.gov, @city.gov" aria-label="Allowed senders for ${esc(s.entity_name)}"><button class="btn" type="button" data-save-snd>Save</button></div></td>
+      <td class="num">${fmt(s.files)}</td><td class="small">${when(s.last_file)}</td><td class="num">${fmt(s.pending)}</td>
+      <td><label class="sw"><input type="checkbox" data-auto ${s.auto_normalize ? 'checked' : ''}> ${s.auto_normalize ? 'On' : 'Off'}</label></td></tr>`).join('') || '<tr><td colspan="8" class="empty">No sources yet.</td></tr>';
+    $('#ac-files tbody').innerHTML = r.files.map(f => `<tr${f.id === LG.raw ? ' class="sel-row"' : ''}><td class="small" style="white-space:nowrap">${when(f.received_at)}</td><td class="small">${esc(f.entity_name)}</td>
+      <td class="small">${esc(f.file_name || '(no file)')}${f.error_message ? `<div class="small" style="color:var(--bad)">${esc(f.error_message)}</div>` : ''}</td><td class="small mono">${esc(f.sender || '')}</td>
+      <td><span class="pill ${esc(f.status)}">${FILE[f.status] || esc(f.status)}</span></td><td class="num">${fmt(f.row_count)}</td>
+      <td class="small">${f.status === 'normalized' ? `${fmt(f.pending)} pending · ${fmt(f.approved)} approved · ${fmt(f.rejected)} rejected` : ''}</td>
+      <td style="white-space:nowrap">${f.status === 'received' ? `<button class="btn" type="button" data-norm="${esc(f.id)}">Normalize</button>` : ''}
+        ${f.status === 'normalized' ? `<button class="btn" type="button" data-rows="${esc(f.id)}">${f.id === LG.raw ? 'All files' : 'Rows'}</button>` : ''}
+        ${f.pending ? `<button class="btn primary" type="button" data-approve-file="${esc(f.id)}">Approve ${fmt(f.pending)}</button>` : ''}</td></tr>`).join('') || '<tr><td colspan="8" class="empty">No files in the last 120 days.</td></tr>';
+    const file = LG.raw && r.files.find(f => f.id === LG.raw);
+    $('#ac-qscope').textContent = file ? `· ${file.file_name} (${file.entity_name})` : '';
+    $('#ac-queue tbody').innerHTML = r.rows.map(x => `<tr><td>${x.review_status === 'pending' ? `<input type="checkbox" data-pick="${esc(x.id)}" aria-label="Select row">` : ''}</td>
+      <td class="small" style="white-space:nowrap">${esc(x.txn_date || '')}</td><td class="small">${esc(x.entity_name)}</td><td class="mono small">${esc(x.fund_code || '')}</td>
+      <td class="mono small">${esc(x.account_code || '')}</td><td class="small">${esc(x.vendor_name || '')}</td><td class="small" style="min-width:200px">${esc(x.description || '')}</td>
+      <td class="num">${usd(x.amount)}</td><td><span class="pill ${esc(x.review_status)}">${REV[x.review_status] || esc(x.review_status)}</span>${x.review_note ? `<div class="small muted">${esc(x.review_note)}</div>` : ''}${x.reviewed_by_email ? `<div class="small muted">${esc(x.reviewed_by_email)}</div>` : ''}</td></tr>`).join('')
+      || `<tr><td colspan="9" class="empty">${$('#ac-status').value === 'pending' ? 'Nothing waiting for review.' : 'No rows.'}</td></tr>`;
+    $('#ac-all').checked = false; lgPicked();
+  }
+  function lgPicked() {
+    const n = LG.picked.size;
+    $('#ac-bulk').hidden = n === 0;
+    const sum = LG.rows.filter(x => LG.picked.has(x.id)).reduce((a, x) => a + Number(x.amount || 0), 0);
+    $('#ac-picked').textContent = `${fmt(n)} selected · ${usd(sum)}`;
+  }
+  async function lgDo(action, body, done) {
+    try { const r = await api(action, {method: 'POST', body}); lgMsg(done(r), true); }
+    catch (e) { lgMsg(`<b>That didn’t work.</b> <span class="small">${esc(e.message)}</span>`); }
+    await loadLedger(true);
+  }
+  const normSummary = r => {
+    const ok = (r.results || []).filter(x => x.ok), bad = (r.results || []).filter(x => !x.ok);
+    if (!r.processed) return '<b>No new files to normalize.</b>';
+    return `<b>Normalized ${ok.length} of ${r.processed} file${r.processed === 1 ? '' : 's'}.</b> <span class="small">${ok.map(x => `${fmt(x.inserted)} new rows${x.duplicates ? `, ${fmt(x.duplicates)} already queued` : ''}${x.skipped && x.skipped.length ? `, ${x.skipped.length} skipped` : ''}`).join('; ')}${bad.length ? ` · Failed: ${bad.map(x => esc(x.error)).join('; ')}` : ''}</span>`;
+  };
+  $('#ac-refresh').addEventListener('click', () => loadLedger());
+  $('#ac-norm-all').addEventListener('click', e => { e.target.disabled = true; lgDo('ledger_normalize', {all: true}, normSummary).finally(() => { e.target.disabled = false; }); });
+  $('#ac-status').addEventListener('change', () => loadLedger());
+  $('#ac-source').addEventListener('change', () => { LG.raw = ''; loadLedger(); });
+  $('#ac-files').addEventListener('click', e => {
+    const b = e.target.closest('button'); if (!b) return;
+    if (b.dataset.norm) { b.disabled = true; lgDo('ledger_normalize', {raw_id: b.dataset.norm}, normSummary); }
+    else if (b.dataset.rows) { LG.raw = LG.raw === b.dataset.rows ? '' : b.dataset.rows; $('#ac-status').value = LG.raw ? 'all' : 'pending'; loadLedger(); }
+    else if (b.dataset.approveFile) { b.disabled = true; lgDo('ledger_approve', {raw_id: b.dataset.approveFile}, r => `<b>Approved ${fmt(r.changed)} row${r.changed === 1 ? '' : 's'}.</b> <span class="small">They’re now in the public ledger.</span>`); }
+  });
+  $('#ac-sources').addEventListener('change', e => {
+    const box = e.target.closest('[data-auto]'); if (!box) return;
+    const id = box.closest('tr').dataset.src;
+    lgDo('ledger_source', {id, auto_normalize: box.checked}, r => `<b>Auto-normalize is ${r.auto_normalize ? 'on' : 'off'} for ${esc(r.entity_name)}.</b> <span class="small">${r.auto_normalize ? 'New files from this source are mapped into the review queue as soon as they arrive. Rows still need approval.' : 'New files wait for you to click Normalize.'}</span>`);
+  });
+  $('#ac-sources').addEventListener('click', e => {
+    const b = e.target.closest('[data-save-snd]'); if (!b) return;
+    const tr = b.closest('tr');
+    lgDo('ledger_source', {id: tr.dataset.src, allowed_senders: tr.querySelector('.ac-snd input').value},
+      r => `<b>Saved ${fmt(r.allowed_senders.length)} allowed sender${r.allowed_senders.length === 1 ? '' : 's'} for ${esc(r.entity_name)}.</b>`);
+  });
+  $('#ac-queue').addEventListener('change', e => {
+    if (e.target.id === 'ac-all') {
+      document.querySelectorAll('#ac-queue [data-pick]').forEach(c => { c.checked = e.target.checked; c.checked ? LG.picked.add(c.dataset.pick) : LG.picked.delete(c.dataset.pick); });
+    } else if (e.target.dataset.pick) { e.target.checked ? LG.picked.add(e.target.dataset.pick) : LG.picked.delete(e.target.dataset.pick); }
+    lgPicked();
+  });
+  $('#ac-approve').addEventListener('click', () => lgDo('ledger_approve', {ids: [...LG.picked], note: $('#ac-note').value},
+    r => `<b>Approved ${fmt(r.changed)} row${r.changed === 1 ? '' : 's'}.</b> <span class="small">They’re now in the public ledger.</span>`));
+  $('#ac-reject').addEventListener('click', () => {
+    if (!$('#ac-note').value.trim()) { lgMsg('<b>Add a note saying why before rejecting.</b>'); $('#ac-note').focus(); return; }
+    lgDo('ledger_reject', {ids: [...LG.picked], note: $('#ac-note').value}, r => `<b>Rejected ${fmt(r.changed)} row${r.changed === 1 ? '' : 's'}.</b>`).then(() => { $('#ac-note').value = ''; });
+  });
 
   // ---------- agendas ----------
   const AG_STATUS = {new: 'New', updated: 'Updated', unchanged: 'Unchanged', failed: 'Failed', pending: 'Pending', processed: 'Processed', unmatched: 'Unmatched', ok: 'OK', running: 'Running'};
