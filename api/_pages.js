@@ -30,6 +30,7 @@ const PAGES = {
   '/public-money/who-gets-paid': {datasets: ['vendor-payments']},
   '/public-money/contracts': {datasets: ['contracts', 'change-orders', 'emergency-purchases']},
   '/public-money/accountability': {datasets: ['accountability-projects', 'accountability-events']},
+  '/public-money/savings': {datasets: ['savings-opportunities', 'savings-evidence']},
   '/public-money/votes': {datasets: ['votes', 'member-votes']},
   '/public-money/debt': {datasets: ['debt', 'bonds']},
   '/public-money/audits': {datasets: ['audit-findings']},

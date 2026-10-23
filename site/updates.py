@@ -9,6 +9,9 @@ from datetime import datetime, timezone
 import html
 
 CHANGES = [
+    {'date': '2026-10-23', 'title': 'Savings finder: where governments could spend less',
+     'text': "A new page lists places Bay County's local governments could spend less, found in records already on the site: Front Beach Road segments still ahead after the finished ones ran over, CRA capital budgets left mostly unspent, engineering bought in many separate task orders, and services such as plate readers and paving bought separately. Each opportunity shows the projects or ledger rows it rests on, a low and high estimate with its stated assumption, the next question to ask and a ready-to-send records request. Estimates are illustrative, not findings that money was wasted.",
+     'pages': ['/public-money/savings', '/public-money/accountability', '/public-money/cra-spending']},
     {'date': '2026-10-23', 'title': 'CRA network: payees, connections and campaign gifts',
      'text': "A new page shows every payee in the CRA ledger as a network: who each redevelopment agency paid, payees tied to each other by the same project, address or subcontract, and business campaign gifts to the officials who sit as each CRA's board. Four businesses both received money from a CRA record and gave to a campaign. A map and a ranked payee list use the same filters. Only businesses and PACs are shown as donors, and a gift and a payment together are facts about the records, not evidence of why either happened.",
      'pages': ['/public-money/cra-network', '/public-money/cra-spending', '/public-money/money-map']},

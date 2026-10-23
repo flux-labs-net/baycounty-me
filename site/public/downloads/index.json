@@ -3584,7 +3584,7 @@
    "id": "site-updates",
    "title": "What's new",
    "description": "Each change to the site's data and pages, newest first.",
-   "rows": 47,
+   "rows": 48,
    "columns": [
     {
      "name": "date",
@@ -3616,6 +3616,366 @@
    "json": "/downloads/site-updates.json",
    "csv": "/downloads/site-updates.csv",
    "api": "/api/v1/datasets/site-updates"
+  },
+  {
+   "id": "savings-opportunities",
+   "title": "Savings finder: opportunities",
+   "description": "Places Bay County governments could spend less: the spending each touches, a low and high estimate with its stated assumption, the next step and the records still needed. Every figure is computed from the Accountability projects and the CRA ledger.",
+   "rows": 10,
+   "columns": [
+    {
+     "name": "opportunity_id",
+     "type": "string"
+    },
+    {
+     "name": "rank",
+     "type": "number"
+    },
+    {
+     "name": "title",
+     "type": "string"
+    },
+    {
+     "name": "government",
+     "type": "string",
+     "values": [
+      "Callaway, Springfield",
+      "Lynn Haven",
+      "Panama City",
+      "Panama City Beach",
+      "Panama City, Lynn Haven"
+     ]
+    },
+    {
+     "name": "gov_ids",
+     "type": "array"
+    },
+    {
+     "name": "lever",
+     "type": "string",
+     "values": [
+      "Avoid cost",
+      "Copy what works",
+      "Recover",
+      "Reduce rate",
+      "Verify"
+     ]
+    },
+    {
+     "name": "confidence",
+     "type": "string",
+     "values": [
+      "Low",
+      "Medium",
+      "Model",
+      "Needs records"
+     ]
+    },
+    {
+     "name": "in_play",
+     "type": "number"
+    },
+    {
+     "name": "in_play_is",
+     "type": "string",
+     "values": [
+      "FY2025 capital budget left unspent",
+      "Front Beach Road engineering task orders",
+      "a year of CRA debt service (FY2024 amended budget)",
+      "approved multi-year resurfacing",
+      "cost still ahead on Segments 4.1 to 4.3",
+      "plate-reader and camera purchases",
+      "the annual landscape contract",
+      "the three sidewalk projects",
+      "the two reported grants"
+     ]
+    },
+    {
+     "name": "rate_low",
+     "type": "number"
+    },
+    {
+     "name": "rate_high",
+     "type": "number"
+    },
+    {
+     "name": "savings_low",
+     "type": "number"
+    },
+    {
+     "name": "savings_high",
+     "type": "number"
+    },
+    {
+     "name": "estimate",
+     "type": "string",
+     "values": [
+      "none",
+      "range",
+      "records"
+     ]
+    },
+    {
+     "name": "basis",
+     "type": "string"
+    },
+    {
+     "name": "assumption",
+     "type": "string",
+     "values": [
+      "A rebid against current per-acre rates lowers the annual cost.",
+      "Bundling related design work and benchmarking fees against FDOT norms lowers the fees.",
+      "Buying at the county's paving unit prices, or bidding together, costs less than buying alone.",
+      "Mapping underground utilities and signing utility agreements before construction trims the cost still ahead on Segment 4.",
+      "One shared contract for plate readers and cameras costs less per unit than separate purchases.",
+      "The low end assumes all of it is already committed to projects; the high end assumes every unspent dollar goes back to the taxing authorities."
+     ]
+    },
+    {
+     "name": "next_step",
+     "type": "string"
+    },
+    {
+     "name": "overlaps",
+     "type": "array"
+    },
+    {
+     "name": "records_needed",
+     "type": "array"
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "lh",
+      "pc",
+      "pcb"
+     ]
+    }
+   ],
+   "json": "/downloads/savings-opportunities.json",
+   "csv": "/downloads/savings-opportunities.csv",
+   "api": "/api/v1/datasets/savings-opportunities"
+  },
+  {
+   "id": "savings-evidence",
+   "title": "Savings finder: evidence",
+   "description": "The records behind each savings opportunity, one row per project or CRA ledger record: the figure, what it is compared with, the gap or share, cost per unit where one applies, and the source.",
+   "rows": 35,
+   "columns": [
+    {
+     "name": "opportunity_id",
+     "type": "string",
+     "values": [
+      "fbr-engineering-task-orders",
+      "fbr-landscape-rebid",
+      "fbr-seg4-utilities",
+      "idle-cra-increment",
+      "lh-sidewalk-unit-cost",
+      "lh-storefront-double-report",
+      "pc-grant-leverage",
+      "pc-joint-paving-bid",
+      "pcb-cra-bond-refunding",
+      "shared-lpr-camera-contract"
+     ]
+    },
+    {
+     "name": "group_id",
+     "type": "string",
+     "values": [
+      "ahead",
+      "blocks",
+      "debt",
+      "done",
+      "fy2025",
+      "grants",
+      "landscape",
+      "lpr",
+      "orders",
+      "paving",
+      "share"
+     ]
+    },
+    {
+     "name": "group_title",
+     "type": "string",
+     "values": [
+      "Annual landscape maintenance",
+      "Approved resurfacing",
+      "CRA debt service",
+      "CRA share of each project's total cost",
+      "Cost per block",
+      "Design and construction-administration task orders",
+      "FY2025 capital budget vs. actual spending",
+      "Finished segments: first firm figure vs. final project cost",
+      "Plate-reader and camera purchases",
+      "Segments ahead: spent so far vs. total project cost",
+      "Storefront grants as reported"
+     ]
+    },
+    {
+     "name": "kind",
+     "type": "string",
+     "values": [
+      "budget_vs_spent",
+      "ledger",
+      "ledger_share",
+      "project_growth",
+      "project_progress"
+     ]
+    },
+    {
+     "name": "label",
+     "type": "string"
+    },
+    {
+     "name": "amount",
+     "type": "number"
+    },
+    {
+     "name": "amount_is",
+     "type": "string",
+     "values": [
+      "2019 (Res. 19-65, Task Order 2019-01)",
+      "2019 (Res. 19-66, Task Order 2019-02)",
+      "2020-05-14 (Res. 20-108, Task Order 2020-01)",
+      "2020-05-28 (Res. 20-112), per year",
+      "2021-03 (Res. 21-121, Task Order 2021-03)",
+      "2021-05-13 (Res. 21-157, Task Order 2021-05)",
+      "2021-07 (Res. 21-186, Task Order 2021-04)",
+      "2021-07 (Res. 21-187, Task Order CRA2021-07-V)",
+      "2023 (Res. 23-146)",
+      "Approved March 2026; runs FY2027 onward",
+      "Awarded 2026-01-13 (FY2026)",
+      "CRA share",
+      "FY2021",
+      "FY2021-22",
+      "FY2022",
+      "FY2024",
+      "FY2024 (amended budget)",
+      "FY2024 (budgeted)",
+      "construction contract at award",
+      "low bid at award (about)",
+      "spent",
+      "spent to date"
+     ]
+    },
+    {
+     "name": "compare",
+     "type": "number"
+    },
+    {
+     "name": "compare_is",
+     "type": "string",
+     "values": [
+      "capital budget",
+      "current total project cost",
+      "reported total at completion (about)",
+      "total project cost",
+      "total project cost at close-out"
+     ]
+    },
+    {
+     "name": "gap",
+     "type": "number"
+    },
+    {
+     "name": "ratio",
+     "type": "number"
+    },
+    {
+     "name": "units",
+     "type": "number"
+    },
+    {
+     "name": "unit",
+     "type": "string",
+     "values": [
+      "block"
+     ]
+    },
+    {
+     "name": "per_unit",
+     "type": "number"
+    },
+    {
+     "name": "paid_to",
+     "type": "string",
+     "values": [
+      "BCL Civil Contractors",
+      "Bondholders (Series 2015 and 2020 bonds)",
+      "City of Panama City (paid by the CRA; much of the work goes to outside contractors)",
+      "Contractor not named",
+      "Dewberry Engineers, Inc.",
+      "FUSUS (camera program) / 20 participating businesses",
+      "Local business (not named)",
+      "Lynn Haven Police Department",
+      "McKim & Creed",
+      "Not stated",
+      "Not stated (FDOT grant $250,000)",
+      "Not stated (FDOT grant $300,000)",
+      "Not stated (Kiwanis contributed $175,000)",
+      "Not stated (contractor)",
+      "Piney Grove Nursery and Landscaping, Inc. (PC24-038)",
+      "Rotolo Consultants, Inc.",
+      "Volkert, Inc."
+     ]
+    },
+    {
+     "name": "project_id",
+     "type": "string",
+     "values": [
+      "cw-capital-fy2025",
+      "pcb-fbr-seg2",
+      "pcb-fbr-seg3",
+      "pcb-fbr-seg41",
+      "pcb-fbr-seg42",
+      "pcb-fbr-seg43",
+      "sp-capital-fy2025"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://flauditor.gov/pages/specialdistricts_efile%20rpts/2021%20panama%20city%20community%20redevelopment%20agency.pdf",
+      "https://flauditor.gov/pages/specialdistricts_efile%20rpts/2025%20callaway%20community%20redevelopment%20agency.pdf",
+      "https://news.yahoo.com/panama-city-beach-city-council-090510078.html",
+      "https://panamacity.gov/785/Current-Projects",
+      "https://panamacity.gov/813/Completed-Projects",
+      "https://pcbfl.gov/home/showpublisheddocument/13909/636870324888970000",
+      "https://pcbfl.gov/home/showpublisheddocument/13911/636870324908030000",
+      "https://pcbfl.gov/home/showpublisheddocument/16673/637266931768470000",
+      "https://pcbfl.gov/home/showpublisheddocument/16795/637296339292530000",
+      "https://pcbfl.gov/home/showpublisheddocument/18097/637574690484470000",
+      "https://pcbfl.gov/home/showpublisheddocument/18302/637617846736370000",
+      "https://pcbfl.gov/home/showpublisheddocument/18386/637629761850100000",
+      "https://pcbfl.gov/home/showpublisheddocument/24562/638512727553430000",
+      "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_01132026-1110",
+      "https://www.cityoflynnhaven.com/DocumentCenter/View/2108",
+      "https://www.cityoflynnhaven.com/DocumentCenter/View/2498",
+      "https://www.cityoflynnhaven.com/DocumentCenter/View/2686",
+      "https://www.cityoflynnhaven.com/DocumentCenter/View/4018",
+      "https://www.panamacity.gov/DocumentCenter/View/7666",
+      "https://www.pcbfl.gov/Archive/ViewFile/Item/129",
+      "https://www.pcbfl.gov/home/showpublisheddocument/27668/638887882812000000",
+      "https://www.springfieldfl.net/media/10746",
+      "https://www.wjhg.com/2026/03/13/front-beach-road-construction-project-is-complete-faced-delays/",
+      "https://www.yahoo.com/news/articles/panama-city-cra-board-finalizes-040831032.html"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/savings-evidence.json",
+   "csv": "/downloads/savings-evidence.csv",
+   "api": "/api/v1/datasets/savings-evidence"
   },
   {
    "id": "tax-districts",

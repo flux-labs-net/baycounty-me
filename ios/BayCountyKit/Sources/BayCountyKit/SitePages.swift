@@ -40,6 +40,7 @@ public enum SitePages {
         "/public-money/who-gets-paid": .dataset("vendor-payments"),
         "/public-money/contracts": .dataset("contracts"),
         "/public-money/accountability": .native("Accountability console"),
+        "/public-money/savings": .dataset("savings-opportunities"),
         "/public-money/votes": .native("Votes by meeting"),
         "/public-money/debt": .dataset("debt"),
         "/public-money/audits": .dataset("audit-findings"),

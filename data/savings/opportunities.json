@@ -1,0 +1,216 @@
+{
+ "about": "Reviewed savings opportunities for the Savings finder (/public-money/savings). Each opportunity names the records it rests on: projects on the Accountability console (data/projects/seed.json, by id) or rows of the CRA ledger (data/merged.json payments, matched by the fields below). Every dollar figure on the page is computed from those records by site/savings_page.py. The only numbers kept here are the estimate rates (the stated assumption) and reviewed unit counts such as blocks. A selector that stops matching the expected number of records fails the build, so a change to the ledger can't silently change a finding.",
+ "opportunities": [
+  {
+   "id": "fbr-seg4-utilities",
+   "title": "Clear utility conflicts before Front Beach Road Segment 4",
+   "govs": ["pcb"],
+   "lever": "Avoid cost",
+   "confidence": "Medium",
+   "basis": "Both finished Front Beach Road segments ended above their first firm figure, and Segment 3 ran about a year late because of utility conflicts and a storm drain redesign. Segments 4.1, 4.2 and 4.3 are almost entirely still ahead.",
+   "assumption": "Mapping underground utilities and signing utility agreements before construction trims the cost still ahead on Segment 4.",
+   "next_step": "Ask the city to fund subsurface utility mapping and utility agreements before the Segment 4.1 design-build award.",
+   "in_play": {"group": "ahead", "field": "gap", "is": "cost still ahead on Segments 4.1 to 4.3"},
+   "rate": {"low": 0.03, "high": 0.05},
+   "groups": [
+    {"id": "ahead", "title": "Segments ahead: spent so far vs. total project cost", "kind": "project_progress",
+     "projects": ["pcb-fbr-seg41", "pcb-fbr-seg42", "pcb-fbr-seg43"]},
+    {"id": "done", "title": "Finished segments: first firm figure vs. final project cost", "kind": "project_growth",
+     "projects": ["pcb-fbr-seg2", "pcb-fbr-seg3"],
+     "note": "The final figure is the whole project cost (design, land and construction); the first is the construction award or low bid."}
+   ],
+   "records_needed": [
+    {"q": "Any subsurface utility engineering (SUE) study, utility conflict matrix or utility agreements for Front Beach Road Segments 4.1, 4.2 and 4.3, and the scope of the Segment 4.1 design-build solicitation", "gov": "pcb"}
+   ]
+  },
+  {
+   "id": "fbr-engineering-task-orders",
+   "title": "Bundle and benchmark Front Beach Road engineering",
+   "govs": ["pcb"],
+   "lever": "Reduce rate",
+   "confidence": "Low",
+   "basis": "Front Beach Road design and construction administration is bought through a string of task orders, and utility relocation design was bought separately from roadway design on Segments 4.1 and 4.2. The CRA's program manager has also changed several times.",
+   "assumption": "Bundling related design work and benchmarking fees against FDOT norms lowers the fees.",
+   "next_step": "Compare design fees as a share of construction cost against FDOT norms, and price an in-house CRA engineer or program manager against continued task orders.",
+   "in_play": {"group": "orders", "field": "amount", "is": "Front Beach Road engineering task orders"},
+   "rate": {"low": 0.05, "high": 0.10},
+   "overlaps": ["fbr-seg4-utilities"],
+   "groups": [
+    {"id": "orders", "title": "Design and construction-administration task orders", "kind": "ledger",
+     "match": {"cra": "Panama City Beach CRA", "payee_has": ["Dewberry", "Volkert", "McKim"], "purpose_has": ["Segment"]}, "expect": 8}
+   ],
+   "records_needed": [
+    {"q": "The program management and engineering contracts for the Front Beach Road CRA (Corradino, DRMP and others), with fees paid by year, and the fee schedule under the 2018 Dewberry master services agreement", "gov": "pcb"}
+   ]
+  },
+  {
+   "id": "pcb-cra-bond-refunding",
+   "title": "Review the Front Beach Road CRA bonds for refunding",
+   "govs": ["pcb"],
+   "lever": "Reduce rate",
+   "confidence": "Needs records",
+   "basis": "The Front Beach Road CRA carries Series 2015 and Series 2020 bonds. The original FY2025 budget also carried interest on 2024 bonds that the amended budget removed, so it is not clear whether those bonds were issued before the money was needed.",
+   "assumption": "",
+   "next_step": "Get the official statements (coupons and call dates) and run a refunding analysis once the bonds can be called.",
+   "in_play": {"group": "debt", "field": "amount", "is": "a year of CRA debt service (FY2024 amended budget)"},
+   "rate": null,
+   "groups": [
+    {"id": "debt", "title": "CRA debt service", "kind": "ledger",
+     "items": [{"match": {"cra": "Panama City Beach CRA", "purpose_starts": "Debt service: 2015 principal"}, "label": "Debt service, FY2024 amended budget"}]}
+   ],
+   "records_needed": [
+    {"q": "The official statements for the Front Beach Road CRA Series 2015, 2020 and any 2024 revenue bonds, including coupons, call dates and the date and amount of any 2024 issue", "gov": "pcb"}
+   ]
+  },
+  {
+   "id": "idle-cra-increment",
+   "title": "Recover or commit idle CRA money",
+   "govs": ["cw", "sp"],
+   "lever": "Recover",
+   "confidence": "Medium",
+   "basis": "Callaway's and Springfield's CRAs spent a small share of their FY2025 capital budgets. Money a CRA neither spends nor commits to a project can be questioned by the governments that pay into it.",
+   "assumption": "The low end assumes all of it is already committed to projects; the high end assumes every unspent dollar goes back to the taxing authorities.",
+   "next_step": "Confirm Florida's rule on unspent tax increment, and ask each CRA which project each year-end balance is committed to.",
+   "in_play": {"group": "fy2025", "field": "gap", "is": "FY2025 capital budget left unspent"},
+   "rate": {"low": 0, "high": 1},
+   "groups": [
+    {"id": "fy2025", "title": "FY2025 capital budget vs. actual spending", "kind": "budget_vs_spent",
+     "projects": ["cw-capital-fy2025", "sp-capital-fy2025"], "fy": "FY2025"}
+   ],
+   "records_needed": [
+    {"q": "The Callaway CRA fund balance at the end of FY2025, with the project each part of it is committed to", "gov": "cw"},
+    {"q": "The Springfield CRA fund balance at the end of FY2025, with the project each part of it is committed to", "gov": "sp"}
+   ]
+  },
+  {
+   "id": "pc-joint-paving-bid",
+   "title": "Bid Panama City CRA paving with the county",
+   "govs": ["pc"],
+   "lever": "Reduce rate",
+   "confidence": "Low",
+   "basis": "The Panama City CRA approved several years of road resurfacing across three districts in March 2026, on a split vote.",
+   "assumption": "Buying at the county's paving unit prices, or bidding together, costs less than buying alone.",
+   "next_step": "Ask whether the county's paving unit prices can be used through an interlocal agreement or a piggyback contract.",
+   "in_play": {"group": "paving", "field": "amount", "is": "approved multi-year resurfacing"},
+   "rate": {"low": 0.05, "high": 0.10},
+   "groups": [
+    {"id": "paving", "title": "Approved resurfacing", "kind": "ledger",
+     "items": [{"match": {"cra": "Panama City CRA", "purpose_starts": "Road resurfacing/repair"}, "label": "Road resurfacing, FY2027 onward"}]}
+   ],
+   "records_needed": [
+    {"q": "The unit prices in Bay County's current road resurfacing contract, and whether the city can use them through an interlocal agreement", "gov": "county"}
+   ]
+  },
+  {
+   "id": "lh-sidewalk-unit-cost",
+   "title": "Compare Lynn Haven sidewalk costs per block",
+   "govs": ["lh"],
+   "lever": "Verify",
+   "confidence": "Needs records",
+   "basis": "Recent Lynn Haven CRA sidewalk projects cost very different amounts per block. Drainage, driveways or ADA work may explain the gap, but the records don't say.",
+   "assumption": "",
+   "next_step": "Get the bid tabulations and linear footage for each project and compare cost per linear foot.",
+   "in_play": {"group": "blocks", "field": "amount", "is": "the three sidewalk projects"},
+   "rate": null,
+   "groups": [
+    {"id": "blocks", "title": "Cost per block", "kind": "ledger", "unit": "block",
+     "note": "Blocks are counted from the street limits in each record.",
+     "items": [
+      {"match": {"cra": "Lynn Haven CRA", "purpose_starts": "New sidewalk on Minnesota Ave from 14th St"}, "label": "Minnesota Ave, 14th to 17th St", "units": 3},
+      {"match": {"cra": "Lynn Haven CRA", "purpose_starts": "Tennessee Avenue Sidewalk"}, "label": "Tennessee Ave, W 5th to W 14th St", "units": 9},
+      {"match": {"cra": "Lynn Haven CRA", "purpose_starts": "New sidewalk on West 7th St"}, "label": "W 7th St, Florida to Tennessee Ave", "units": 4.5}
+     ]}
+   ],
+   "records_needed": [
+    {"q": "The bid tabulations, linear footage and scope (drainage, driveways, ADA ramps) for the Minnesota Ave, W 7th St and Tennessee Ave CRA sidewalk projects", "gov": "lh"}
+   ]
+  },
+  {
+   "id": "shared-lpr-camera-contract",
+   "title": "One countywide plate-reader and camera contract",
+   "govs": ["pc", "lh"],
+   "lever": "Reduce rate",
+   "confidence": "Low",
+   "basis": "Panama City's CRA bought a license plate reader program and a camera integration program, and Lynn Haven's CRA pays its police department to lease plate readers. Each agency buys its own.",
+   "assumption": "One shared contract for plate readers and cameras costs less per unit than separate purchases.",
+   "next_step": "List every plate-reader and camera contract in the county, including the Sheriff's Office, with unit counts and annual costs.",
+   "in_play": {"group": "lpr", "field": "amount", "is": "plate-reader and camera purchases"},
+   "rate": {"low": 0.10, "high": 0.20},
+   "groups": [
+    {"id": "lpr", "title": "Plate-reader and camera purchases", "kind": "ledger",
+     "items": [
+      {"match": {"cra": "Panama City CRA", "purpose_starts": "License plate reader recognition program"}, "label": "Panama City CRA plate readers"},
+      {"match": {"cra": "Panama City CRA", "purpose_starts": "Security camera integration"}, "label": "Panama City CRA camera integration"},
+      {"match": {"cra": "Lynn Haven CRA", "purpose_starts": "Aid to Police Department"}, "label": "Lynn Haven CRA police aid for plate readers"}
+     ]}
+   ],
+   "records_needed": [
+    {"q": "The license plate reader and camera contracts paid by the CRA, with vendor, number of units and annual cost", "gov": "pc"},
+    {"q": "The license plate reader lease paid with CRA aid to the police department, with vendor, number of units and annual cost", "gov": "lh"}
+   ]
+  },
+  {
+   "id": "fbr-landscape-rebid",
+   "title": "Rebid Front Beach Road landscape maintenance",
+   "govs": ["pcb"],
+   "lever": "Reduce rate",
+   "confidence": "Low",
+   "basis": "The Front Beach Road CRA's landscape maintenance contract was awarded in 2020 and is paid every year.",
+   "assumption": "A rebid against current per-acre rates lowers the annual cost.",
+   "next_step": "Check the contract term and renewal history, and benchmark per-acre maintenance rates.",
+   "in_play": {"group": "landscape", "field": "amount", "is": "the annual landscape contract"},
+   "rate": {"low": 0.05, "high": 0.10},
+   "groups": [
+    {"id": "landscape", "title": "Annual landscape maintenance", "kind": "ledger",
+     "items": [{"match": {"cra": "Panama City Beach CRA", "purpose_starts": "Landscape maintenance within the Front Beach Road CRA"}, "label": "Landscape maintenance, per year"}]}
+   ],
+   "records_needed": [
+    {"q": "The Front Beach Road CRA landscape maintenance contract with Rotolo Consultants, its renewals, and payments by year", "gov": "pcb"}
+   ]
+  },
+  {
+   "id": "lh-storefront-double-report",
+   "title": "Check a storefront grant reported twice",
+   "govs": ["lh"],
+   "lever": "Verify",
+   "confidence": "Needs records",
+   "basis": "Two years of Lynn Haven CRA annual reports each show one storefront grant with the same private investment. It may be one grant reported twice, or a final payment.",
+   "assumption": "",
+   "next_step": "Request the storefront grant files for both years.",
+   "in_play": {"group": "grants", "field": "amount", "is": "the two reported grants"},
+   "rate": null,
+   "groups": [
+    {"id": "grants", "title": "Storefront grants as reported", "kind": "ledger",
+     "items": [
+      {"match": {"cra": "Lynn Haven CRA", "purpose_starts": "Storefront Assistance Program façade grant, 1 application"}, "label": "FY2021 annual report"},
+      {"match": {"cra": "Lynn Haven CRA", "purpose_starts": "Storefront Assistance Program façade grant to one business"}, "label": "FY2022 annual report"}
+     ]}
+   ],
+   "records_needed": [
+    {"q": "The Storefront Assistance Program grant files for FY2021 and FY2022, including the approval, payments and the property", "gov": "lh"}
+   ]
+  },
+  {
+   "id": "pc-grant-leverage",
+   "title": "Copy Panama City's grant leverage",
+   "govs": ["pc"],
+   "lever": "Copy what works",
+   "confidence": "Model",
+   "basis": "On some Panama City CRA projects a state or partner grant paid most of the cost, and the CRA paid a small share. Other projects were paid mostly with CRA money. Chasing matching grants first stretches every CRA dollar.",
+   "assumption": "",
+   "next_step": "Before funding a project mostly with CRA money, check FDOT, Rebuild Florida and partner programs for a match.",
+   "in_play": null,
+   "rate": null,
+   "groups": [
+    {"id": "share", "title": "CRA share of each project's total cost", "kind": "ledger_share", "match": {"cra": "Panama City CRA"},
+     "note": "Totals are read from the CRA ledger's own description of each project's full cost."}
+   ],
+   "records_needed": []
+  }
+ ],
+ "general_requests": [
+  {"q": "Accounts payable check register or vendor payment history for the last three fiscal years, as a CSV or spreadsheet export", "why": "Finds duplicate payments, the same vendor at different prices, and charges that grew with no contract change."},
+  {"q": "A list of software, license, subscription and telecom contracts, with vendor, annual cost and renewal date", "why": "Finds overlapping subscriptions across departments and between cities."},
+  {"q": "Year-end CRA fund balances, with the project each balance is committed to", "why": "Shows how much tax increment is sitting idle."}
+ ]
+}
