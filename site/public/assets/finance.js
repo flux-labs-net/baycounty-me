@@ -384,5 +384,18 @@
   }
   $('#print').addEventListener('click', () => window.print());
 
+  // ---------- theme: same three-way setting as the rest of BayCounty.me (localStorage "theme") ----------
+  const NAMES = {system: 'System', light: 'Light', dark: 'Dark'}, NEXT = {system: 'light', light: 'dark', dark: 'system'};
+  const root = document.documentElement, mode = () => root.getAttribute('data-theme') || 'system';
+  const showTheme = m => $$('.theme-btn').forEach(b => { b.dataset.mode = m; b.querySelector('.theme-lbl').textContent = NAMES[m];
+    b.setAttribute('aria-label', 'Theme: ' + (m === 'system' ? 'match system' : NAMES[m].toLowerCase()) + '. Click to change.'); });
+  $$('.theme-btn').forEach(b => b.addEventListener('click', () => {
+    const m = NEXT[mode()];
+    if (m === 'system') root.removeAttribute('data-theme'); else root.setAttribute('data-theme', m);
+    try { if (m === 'system') localStorage.removeItem('theme'); else localStorage.setItem('theme', m); } catch (e) {}
+    showTheme(m);
+  }));
+  showTheme(mode());
+
   start();
 })();
