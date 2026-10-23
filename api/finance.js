@@ -1,5 +1,8 @@
 // /api/finance: the budget anomaly dashboard's backend (Phase 1). Private: every call needs a signed-in member of the
 // workspace (see api/_finance/auth.js). Actions, all JSON:
+//   POST ?action=login   {email}                    emails a 6-digit code to a workspace member
+//   POST ?action=verify  {email, code, client}      starts a session: a cookie for the web, {token} for client "app"
+//   POST ?action=logout                             ends this session
 //   GET  ?action=workspaces                         workspaces you can see, with your role
 //   GET  ?action=overview&workspace=lh              budget by department, payments by month, bank accounts, open flags
 //   GET  ?action=uploads&workspace=lh               uploaded files, newest first
@@ -15,7 +18,8 @@
 const db = require('./_db');
 const storage = require('./_finance/storage');
 const store = require('./_finance/store');
-const {caller, requireRole, ROLES} = require('./_finance/auth');
+const {caller, requireRole, startLogin, finishLogin, logout, ROLES} = require('./_finance/auth');
+const {FROM, resend} = require('./_alerts');
 const {prepare, sha256, safeName} = require('./_finance/pipeline');
 
 const MAX_INLINE = 3 * 1024 * 1024; // base64 uploads through the function (Vercel caps bodies at 4.5 MB); bigger files go to storage first
@@ -97,9 +101,17 @@ async function ingest(deps, ws, b, who) {
   return {upload_id: id, committed: true, rules: r, ...preview};
 }
 
-async function route(deps, req, action) {
+async function route(deps, req, res, action) {
   const {q} = deps, Q = req.query || {}, b = body(req);
-  const who = await deps.caller(req);
+  if (action === 'login' || action === 'verify') {
+    if (req.method !== 'POST') throw bad('Use POST.', 405);
+    return action === 'login' ? startLogin(q, req, b, deps.sendEmail) : finishLogin(q, req, res, b);
+  }
+  const who = await deps.caller(req, q);
+  if (action === 'logout') {
+    if (req.method !== 'POST') throw bad('Use POST.', 405);
+    return logout(q, req, res, who && !who.csrf ? who : null);
+  }
   if (action === 'workspaces') {
     if (!who) throw bad('Sign in first.', 401);
     return {email: who.email, via: who.via, workspaces: await store.workspacesFor(q, who)};
@@ -162,7 +174,7 @@ function createHandler(deps) {
     if (!deps.hasDb()) return res.status(500).json({error: 'The finance workspace isn’t configured on this deployment.'});
     const action = String((req.query || {}).action || '');
     try {
-      return res.status(200).json(await route(deps, req, action));
+      return res.status(200).json(await route(deps, req, res, action));
     } catch (e) {
       const status = e.status || 500;
       if (status >= 500) console.error('finance', action, e);
@@ -171,6 +183,14 @@ function createHandler(deps) {
   };
 }
 
-module.exports = createHandler({q: db.q, hasDb: db.hasDb, storage, caller});
+// Sign-in codes go out through Resend (the same sender as BayCounty.me alerts).
+async function sendEmail(to, m) {
+  const key = process.env.RESEND_FULL_KEY || process.env.RESEND_API_KEY;
+  if (!key) throw bad('Email isn’t configured on this deployment.', 500);
+  const r = await resend('/emails', 'POST', {from: FROM, to: [to], subject: m.subject, text: m.text, html: m.html}, key);
+  if (!r.ok) { console.error('finance sign-in email', r.status, JSON.stringify(r.body)); throw bad('The sign-in email didn’t send. Try again in a minute.', 502); }
+}
+
+module.exports = createHandler({q: db.q, hasDb: db.hasDb, storage, caller, sendEmail});
 module.exports.createHandler = createHandler;
 module.exports.config = {api: {bodyParser: {sizeLimit: '4.5mb'}}};
