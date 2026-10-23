@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Finance · BayCounty.me</title>
+<script>try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+:root{--urgent:#B3261E;--review:#9A5B00;--info:#5A6372;--ok:#1F7A4D;--pace:#161B24;--bar:#3F6FB0;--bar-over:#B3261E}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--urgent:#FF8C82;--review:#F2B661;--info:#A1AABA;--ok:#5BC98E;--pace:#E7ECF3;--bar:#7FA6DA;--bar-over:#FF8C82}}
+:root[data-theme="dark"]{--urgent:#FF8C82;--review:#F2B661;--info:#A1AABA;--ok:#5BC98E;--pace:#E7ECF3;--bar:#7FA6DA;--bar-over:#FF8C82}
+body{display:block}
+[hidden]{display:none!important}
+.fw{max-width:1120px;margin:0 auto;padding:18px 16px 72px}
+.top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding-bottom:12px;border-bottom:1px solid var(--line);margin-bottom:6px}
+.top h1{font:600 1.1rem var(--f-display);margin:0}
+.top .ws{color:var(--muted);font-size:.9rem}
+.who{margin-left:auto;display:flex;align-items:center;gap:10px;color:var(--muted);font-size:.84rem}
+.tabs{display:flex;gap:2px;overflow-x:auto;margin:0 -16px 20px;padding:0 16px;border-bottom:1px solid var(--line);scrollbar-width:none}
+.tabs button{flex:none;border:0;border-bottom:2px solid transparent;background:none;color:var(--muted);font:500 .9rem var(--f-body);padding:12px 12px 10px;cursor:pointer}
+.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--navy)}
+.tabs .count{font-variant-numeric:tabular-nums;color:var(--urgent);margin-left:4px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:38px;padding:0 14px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:500 .88rem var(--f-body);cursor:pointer;text-decoration:none}
+.btn:hover{border-color:var(--blue)}
+.btn.primary{background:var(--navy);border-color:var(--navy);color:#fff}
+:root[data-theme="dark"] .btn.primary{color:#0E131B}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn.primary{color:#0E131B}}
+.btn:disabled{opacity:.5;cursor:default}
+.btn.quiet{border-color:transparent;background:none;color:var(--muted)}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.muted{color:var(--muted)} .small{font-size:.84rem} .num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.lead{font:400 1.12rem/1.55 var(--f-display);margin:4px 0 22px;max-width:62ch}
+.lead b{font-weight:600}
+.h2{font:600 1rem var(--f-display);margin:30px 0 4px}
+.sub{color:var(--muted);font-size:.86rem;margin:0 0 12px;max-width:70ch}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px}
+.cols{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:16px}
+@media (max-width:860px){.cols{grid-template-columns:1fr}}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.grow{flex:1;min-width:0}
+/* Pace chart */
+.pace{position:relative;padding-top:26px;--nm:200px;--am:8.5em}
+.pace-rule{position:absolute;top:0;bottom:0;width:0;border-left:2px solid var(--pace);pointer-events:none;z-index:1;left:calc(var(--nm) + 14px + (100% - var(--nm) - var(--am) - 28px) * var(--el))}
+.pace-rule span{position:absolute;top:0;left:6px;white-space:nowrap;font:500 .78rem var(--f-body);color:var(--ink);background:var(--surface);padding:0 4px}
+.pace-rule.flip span{left:auto;right:6px}
+.dept{display:grid;grid-template-columns:var(--nm) minmax(0,1fr) var(--am);gap:4px 14px;align-items:center;padding:7px 0;border-top:1px solid var(--line)}
+.dept:first-of-type{border-top:0}
+.dept .nm{font-size:.88rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dept .track{position:relative;height:14px;background:var(--sunken);border-radius:3px}
+.dept .used{position:absolute;left:0;top:0;bottom:0;background:var(--bar);border-radius:3px}
+.dept .enc{position:absolute;top:0;bottom:0;background:var(--bar);opacity:.35}
+.dept.ahead .used,.dept.ahead .enc{background:var(--bar-over)}
+.dept .amt{font-size:.82rem;color:var(--muted);text-align:right;font-variant-numeric:tabular-nums}
+.dept .amt b{color:var(--ink);font-weight:500}
+.dept.ahead .amt b{color:var(--urgent)}
+@media (max-width:620px){.dept{grid-template-columns:minmax(0,1fr) auto}.dept .track{grid-column:1/-1;grid-row:2}}
+.dept .mark{display:none;position:absolute;top:-3px;bottom:-3px;width:2px;margin-left:-1px;background:var(--pace);border-radius:1px}
+@media (max-width:620px){.pace{padding-top:0}.pace-rule{display:none}.dept .mark{display:block}}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:.8rem;color:var(--muted);margin-top:12px}
+.legend i{display:inline-block;width:12px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px;background:var(--bar)}
+.legend i.e{opacity:.35} .legend i.r{background:none;border-left:2px solid var(--pace);width:0;height:12px;border-radius:0}
+/* Flags */
+.sev{display:inline-flex;align-items:center;gap:6px;font:500 .8rem var(--f-body);white-space:nowrap}
+.sev::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor}
+.sev.urgent{color:var(--urgent)} .sev.review{color:var(--review)} .sev.info{color:var(--info)}
+.flags{list-style:none;margin:0;padding:0;border:1px solid var(--line);border-radius:12px;background:var(--surface);overflow:hidden}
+.flags li{border-top:1px solid var(--line)} .flags li:first-child{border-top:0}
+.flags button{display:grid;grid-template-columns:7.5em minmax(0,1fr) auto;gap:4px 14px;align-items:baseline;width:100%;text-align:left;background:none;border:0;color:var(--ink);font:inherit;padding:12px 14px;cursor:pointer}
+.flags button:hover{background:var(--sunken)}
+.flags .t{font-size:.92rem}
+.flags .m{grid-column:2/-1;font-size:.8rem;color:var(--muted)}
+.flags .d{font-variant-numeric:tabular-nums;font-size:.9rem}
+@media (max-width:620px){.flags button{grid-template-columns:minmax(0,1fr) auto}.flags .sev{grid-column:1/-1}.flags .m{grid-column:1/-1}}
+.st{font-size:.76rem;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:1px 8px;margin-left:6px;white-space:nowrap}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.sel,label.f input,label.f select,label.f textarea{font:400 .9rem var(--f-body);color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:8px 10px;min-height:38px}
+label.f{display:flex;flex-direction:column;gap:5px;font:500 .82rem var(--f-body);color:var(--muted)}
+label.f textarea{min-height:80px;resize:vertical}
+/* Tables */
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+table.t{width:100%;border-collapse:collapse;font-size:.86rem}
+.t th{text-align:left;font:500 .8rem var(--f-body);color:var(--muted);padding:9px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+.t td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+.t tr:last-child td{border-bottom:0}
+.vendors{list-style:none;margin:0;padding:0}
+.vendors li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:3px 10px;font-size:.86rem;margin-bottom:10px}
+.vendors .nm{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.vendors .bar{grid-column:1/-1;height:5px;background:var(--sunken);border-radius:3px}
+.vendors .bar i{display:block;height:100%;background:var(--bar);border-radius:3px}
+.chart svg{display:block;width:100%;height:auto}
+.chart text{font:400 11px var(--f-body);fill:var(--muted)}
+/* Detail drawer */
+dialog.drawer{margin:0 0 0 auto;height:100vh;max-height:100vh;width:min(720px,100vw);border:0;border-left:1px solid var(--line);padding:0;background:var(--surface);color:var(--ink)}
+dialog.drawer::backdrop{background:rgba(10,14,20,.4)}
+.dr{display:flex;flex-direction:column;height:100%}
+.dr-h{display:flex;gap:12px;align-items:flex-start;padding:18px 20px;border-bottom:1px solid var(--line)}
+.dr-h h2{font:600 1.05rem/1.4 var(--f-display);margin:6px 0 0}
+.dr-b{padding:18px 20px;overflow:auto;flex:1}
+.dr-b p{line-height:1.55;max-width:70ch}
+.notes{list-style:none;margin:0 0 14px;padding:0;border-left:2px solid var(--line)}
+.notes li{padding:0 0 12px 14px;font-size:.86rem}
+.notes .by{color:var(--muted);font-size:.78rem}
+.rv-box{margin-top:18px;display:flex;flex-direction:column;gap:10px;padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--bg)}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:6px 12px;font:500 .84rem var(--f-body);cursor:pointer}
+.seg button[aria-pressed="true"]{border-color:var(--navy);box-shadow:inset 0 0 0 1px var(--navy)}
+.readonly{font-size:.84rem;color:var(--muted);border-left:3px solid var(--line);padding:4px 0 4px 12px}
+/* Upload */
+.drop{display:flex;flex-direction:column;align-items:center;gap:8px;justify-content:center;text-align:center;border:2px dashed var(--line);border-radius:14px;padding:36px 16px;background:var(--surface);cursor:pointer}
+.drop.over{border-color:var(--blue);background:var(--sunken)}
+.drop b{font:600 1rem var(--f-display)}
+.tie{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-radius:10px;border:1px solid var(--line);border-left-width:4px;background:var(--surface);margin:14px 0}
+.tie.ties{border-left-color:var(--ok)} .tie.mismatch{border-left-color:var(--urgent)} .tie.no_total{border-left-color:var(--review)}
+.map{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin:12px 0}
+.err{color:var(--urgent);font-size:.86rem}
+.ok{color:var(--ok)}
+.empty{padding:32px 16px;text-align:center;color:var(--muted)}
+/* Sign in */
+.signin{max-width:400px;margin:12vh auto 0}
+.signin h1{font:600 1.35rem var(--f-display);margin:0 0 6px}
+.signin p{line-height:1.5}
+.code{font:500 1.6rem var(--f-data);letter-spacing:.35em;text-align:center}
+/* Board packet: on screen a page preview; printed it is the whole page */
+.packet{background:#fff;color:#161B24;border:1px solid var(--line);border-radius:4px;padding:40px 44px;max-width:820px;margin:0 auto}
+.packet h1{font:600 1.4rem var(--f-display);margin:0}
+.packet .pm{color:#5A6372;font-size:.86rem;margin:4px 0 18px}
+.packet .lead{color:#161B24}
+.packet .panel{border:0;padding:0;background:none}
+.packet table.t td,.packet table.t th{border-color:#E1E6ED;color:#161B24}
+.packet .dept .track{background:#EEF2F7}
+.packet .pace-rule{border-left-color:#161B24} .packet .pace-rule span{background:#fff;color:#161B24}
+.packet .dept .used,.packet .dept .enc{background:#3F6FB0} .packet .dept.ahead .used,.packet .dept.ahead .enc{background:#B3261E}
+.packet .foot{margin-top:24px;padding-top:10px;border-top:1px solid #E1E6ED;color:#5A6372;font-size:.78rem}
+@media print{
+  @page{margin:14mm}
+  body{background:#fff}
+  .top,.tabs,.no-print,dialog{display:none!important}
+  .fw{padding:0;max-width:none}
+  section[data-panel]:not(#p-packet){display:none!important}
+  .packet{border:0;padding:0;max-width:none}
+  .dept,.t tr{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<main class="fw">
+  <section id="signin" class="signin" hidden>
+    <h1>Sign in to city finances</h1>
+    <p class="muted small">For city staff and commissioners with access. We'll email you a 6-digit code.</p>
+    <form id="email-form" class="row" style="margin-top:14px">
+      <label class="f grow"><span>Email</span><input type="email" name="email" required autocomplete="email" placeholder="you@cityoflynnhaven.com"></label>
+      <button class="btn primary" type="submit" style="align-self:flex-end">Email me a code</button>
+    </form>
+    <form id="code-form" hidden style="margin-top:14px;display:flex;flex-direction:column;gap:10px">
+      <p class="small" id="code-sent"></p>
+      <label class="f"><span>6-digit code</span><input class="code" name="code" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9 ]*" maxlength="7" required></label>
+      <div class="row"><button class="btn primary" type="submit">Sign in</button><button class="btn quiet" type="button" id="code-back">Use a different email</button></div>
+    </form>
+    <p id="signin-msg" class="small" role="status" style="margin-top:12px"></p>
+  </section>
+
+  <div id="app" hidden>
+    <header class="top">
+      <h1>City finances</h1><span class="ws" id="ws-name"></span>
+      <select class="sel" id="ws-pick" aria-label="Workspace" hidden></select>
+      <div class="who"><span id="who"></span><button class="btn quiet" id="signout" type="button">Sign out</button></div>
+    </header>
+    <nav class="tabs" role="tablist" aria-label="Sections">
+      <button role="tab" data-tab="overview" aria-selected="true">Overview</button>
+      <button role="tab" data-tab="flags" aria-selected="false">Flags<span class="count" id="flag-count"></span></button>
+      <button role="tab" data-tab="upload" aria-selected="false" data-min="uploader">Add a file</button>
+      <button role="tab" data-tab="files" aria-selected="false">Files</button>
+      <button role="tab" data-tab="people" aria-selected="false" data-min="owner">People</button>
+      <button role="tab" data-tab="packet" aria-selected="false">Board packet</button>
+    </nav>
+
+    <section id="p-overview" data-panel>
+      <p class="lead" id="ov-lead"></p>
+      <div id="ov-budget"></div>
+      <div class="cols" style="margin-top:8px">
+        <div><h2 class="h2">Payments by month</h2><p class="sub" id="ov-pay-sub"></p><div class="panel chart" id="ov-pay"></div></div>
+        <div><h2 class="h2">Largest vendors</h2><p class="sub">Last 12 months of payments.</p><div class="panel"><ul class="vendors" id="ov-vendors"></ul></div></div>
+      </div>
+      <h2 class="h2">Bank accounts</h2>
+      <p class="sub">Each account's latest reconciliation on file. Reconciliations are due within 30 days of month end.</p>
+      <div id="ov-bank"></div>
+      <div class="row" style="margin-top:30px"><h2 class="h2 grow" style="margin:0">Needs attention</h2><button class="btn" type="button" data-go="flags">All flags</button></div>
+      <p class="sub" style="margin-top:4px">Ranked by dollars at stake and how serious the issue is.</p>
+      <ul class="flags" id="ov-flags"></ul>
+    </section>
+
+    <section id="p-flags" data-panel hidden>
+      <div class="filters">
+        <select class="sel" id="f-status" aria-label="Status"><option value="open,follow_up">Open and follow-up</option><option value="open">Open</option><option value="follow_up">Follow-up</option><option value="referred">Referred to auditor</option><option value="explained">Explained</option><option value="cleared">Cleared</option><option value="all">All</option></select>
+        <select class="sel" id="f-sev" aria-label="Severity"><option value="">Any severity</option><option value="urgent">Urgent</option><option value="review">Review</option><option value="info">Info</option></select>
+        <select class="sel" id="f-rule" aria-label="Kind of flag"><option value="">All kinds</option></select>
+      </div>
+      <p class="sub" id="f-sum"></p>
+      <ul class="flags" id="f-list"></ul>
+      <div class="row" style="margin-top:12px"><button class="btn" id="f-more" type="button" hidden>Show more</button></div>
+    </section>
+
+    <section id="p-upload" data-panel hidden>
+      <p class="sub">Add an export from the accounting system or the bank: budget vs. actual, check register, bank statement, or bank reconciliation summary. Excel or CSV. You'll see how it reads before anything is saved.</p>
+      <label class="drop" id="drop" tabindex="0"><b>Choose a file or drop it here</b><span class="muted small">.xlsx or .csv, up to 50 MB</span>
+        <input type="file" id="file" accept=".csv,.tsv,.txt,.xlsx" hidden></label>
+      <div id="pv" hidden>
+        <div class="row" style="margin-top:18px"><h2 class="h2 grow" style="margin:0" id="pv-title"></h2><button class="btn quiet" type="button" id="pv-reset">Start over</button></div>
+        <div id="pv-tie"></div>
+        <div class="grid-in row" style="align-items:flex-end">
+          <label class="f">What this file is<select id="pv-shape"><option value="budget">Budget vs. actual</option><option value="disbursements">Check register / payments</option><option value="bank_transactions">Bank statement transactions</option><option value="bank_recs">Bank reconciliation summary</option></select></label>
+          <label class="f" id="pv-asof-l" hidden>Report as of<input type="date" id="pv-asof"></label>
+          <label class="f" id="pv-acct-l" hidden>Bank account<input id="pv-acct" placeholder="Account number or name"></label>
+          <label class="f">Report total (optional)<input id="pv-total" inputmode="decimal" placeholder="From the last page"></label>
+          <label class="f">System<input id="pv-system" placeholder="e.g. Tyler Incode"></label>
+          <button class="btn" type="button" id="pv-recheck">Check again</button>
+        </div>
+        <details style="margin-top:14px"><summary class="small" style="cursor:pointer">Columns: <span id="pv-mapsum"></span></summary><div class="map" id="pv-map"></div></details>
+        <h2 class="h2">First rows as read</h2>
+        <div class="tw" id="pv-sample"></div>
+        <p class="err" id="pv-err" role="alert"></p>
+        <div class="row" style="margin-top:14px"><button class="btn primary" type="button" id="pv-commit">Add to the ledger</button><span class="small muted" id="pv-note"></span></div>
+      </div>
+      <p class="small" id="up-msg" role="status"></p>
+    </section>
+
+    <section id="p-files" data-panel hidden>
+      <p class="sub">Every file added, newest first. The original is kept unchanged. A held file didn't add up to its own total, so none of its rows are used.</p>
+      <div class="tw"><table class="t" id="files-t"><thead><tr><th>File</th><th>Kind</th><th>Period</th><th class="num">Rows</th><th class="num">Total</th><th>Status</th><th>Added</th><th></th></tr></thead><tbody></tbody></table></div>
+    </section>
+
+    <section id="p-people" data-panel hidden>
+      <p class="sub">Who can sign in to this workspace. Viewers (commissioners) can see everything but can't change anything or leave notes. Uploaders add files. Reviewers also mark flags. Owners also manage this list.</p>
+      <form id="pp-form" class="panel row" style="align-items:flex-end;margin-bottom:12px">
+        <label class="f grow">Email<input type="email" name="email" required placeholder="name@cityoflynnhaven.com"></label>
+        <label class="f">Access<select name="role"><option value="viewer">Viewer</option><option value="uploader">Uploader</option><option value="reviewer">Reviewer</option><option value="owner">Owner</option><option value="auditor">Auditor (read only)</option></select></label>
+        <button class="btn primary" type="submit">Give access</button>
+      </form>
+      <p class="small" id="pp-msg" role="status"></p>
+      <div class="tw"><table class="t" id="pp-t"><thead><tr><th>Email</th><th>Access</th><th>Since</th><th></th></tr></thead><tbody></tbody></table></div>
+    </section>
+
+    <section id="p-packet" data-panel hidden>
+      <div class="row no-print" style="margin-bottom:14px"><p class="sub grow" style="margin:0">A one-page summary for a commission meeting. Print it or save it as a PDF.</p><button class="btn primary" type="button" id="print">Print or save as PDF</button></div>
+      <article class="packet" id="packet"></article>
+    </section>
+  </div>
+</main>
+
+<dialog class="drawer" id="drawer" aria-labelledby="dr-title"><div class="dr">
+  <div class="dr-h"><div class="grow"><span id="dr-sev"></span><h2 id="dr-title"></h2></div><button class="btn quiet" type="button" id="dr-close" aria-label="Close">Close</button></div>
+  <div class="dr-b" id="dr-body"></div>
+</div></dialog>
+<script src="/assets/finance.js" defer></script>
+</body>
+</html>

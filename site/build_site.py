@@ -758,6 +758,8 @@ def main():
         '<div class="page prose"><h1>That page isn\'t here.</h1><p><a href="/">Back to the home page</a></p></div>'))
     from admin_page import admin_page
     admin_page(OUT)
+    from finance_page import finance_page
+    finance_page(OUT)
     from seo import write_robots_and_sitemap
     print('sitemap:', write_robots_and_sitemap(OUT, [p for p, *_ in PAGES], alternates, lambda p: last_updated(es_updated_key(p))), 'urls')
     for dp, _, fs in os.walk(OUT):
