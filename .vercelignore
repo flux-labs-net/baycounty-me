@@ -1,2 +1,4 @@
 # Keep the iOS app out of Vercel deploys (the site is site/public).
 ios/
+# Edge function source deploys to Supabase, not Vercel.
+supabase/

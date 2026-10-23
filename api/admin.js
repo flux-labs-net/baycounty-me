@@ -169,6 +169,19 @@ async function route(req, res, action, me) {
     }
     case 'audit': return {audit: await q('select at, admin, action, key_id, detail from apiadmin.audit order by id desc limit 100')};
     case 'ingestion': return require('./_health').report();
+    // ---------- accounting-system files (ingest schema) ----------
+    case 'ledger': return require('./_ledger').report({status: String(Q.status || 'pending'), source: String(Q.source || ''), raw: String(Q.raw || '')});
+    case 'ledger_normalize': case 'ledger_approve': case 'ledger_reject': case 'ledger_source': {
+      if (req.method !== 'POST') throw Object.assign(new Error('Use POST.'), {status: 405});
+      const L = require('./_ledger');
+      const r = action === 'ledger_normalize' ? await L.normalize(body)
+        : action === 'ledger_source' ? await L.updateSource(body)
+        : await L.review(action === 'ledger_approve' ? 'approved' : 'rejected', body, me.e);
+      await audit(me.e, action, null, action === 'ledger_normalize' ? {raw_id: body.raw_id || null, all: !!body.all, processed: r.processed}
+        : action === 'ledger_source' ? {source: body.id, auto_normalize: body.auto_normalize, active: body.active, senders: 'allowed_senders' in body ? r.allowed_senders.length : undefined}
+        : {raw_id: body.raw_id || null, rows: r.changed, note: body.note || null}).catch(() => {});
+      return r;
+    }
     case 'agendas': return require('./_agendas').report({days: parseInt(Q.days || '14', 10) || 14, board: String(Q.board || '').slice(0, 40), status: String(Q.status || '').slice(0, 20)});
     case 'sent': return require('./_sent').list({days: Math.min(Math.max(parseInt(Q.days || '7', 10) || 7, 1), 90),
       domain: Q.domain === undefined ? 'baycounty.me' : String(Q.domain).slice(0, 100), status: String(Q.status || '').slice(0, 30), q: String(Q.q || '').slice(0, 100)});
