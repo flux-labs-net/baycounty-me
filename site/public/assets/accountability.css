@@ -1,5 +1,5 @@
 /* Accountability console (/public-money/accountability). Colors come from tokens.css, so dark mode follows. */
-.acct{--hi:#C2392D;--wa:#A86A00}
+.acct{--hi:#C2392D;--wa:#8A5600}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .acct{--hi:var(--salmon);--wa:#F2C94C}}
 :root[data-theme="dark"] .acct{--hi:var(--salmon);--wa:#F2C94C}
 
