@@ -1,0 +1,34 @@
+# Sends a test admin alert through the same script the ingestion workflows use (.github/scripts/notify_admins.py),
+# to check that the RESEND_FULL_KEY and ADMIN_EMAILS repository secrets work. Run it from the Actions tab.
+# The run fails if Resend doesn't accept the email, so a green run means the email went out.
+name: Send test alert
+on:
+  workflow_dispatch: {}
+  push:
+    branches: [test-alert]
+    paths: ['.github/workflows/test-alert.yml']
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check secrets
+        env:
+          RESEND_KEY: ${{ secrets.RESEND_FULL_KEY }}
+          ADMIN_EMAILS: ${{ secrets.ADMIN_EMAILS }}
+        run: |
+          [ -n "$RESEND_KEY" ] || { echo "::error::RESEND_FULL_KEY secret is empty or missing"; exit 1; }
+          [ -n "$ADMIN_EMAILS" ] || { echo "::error::ADMIN_EMAILS secret is empty or missing"; exit 1; }
+          echo "Both secrets are set; ADMIN_EMAILS has $(echo "$ADMIN_EMAILS" | tr ',;' '\n\n' | grep -c @) address(es)."
+      - name: Send test alert
+        env:
+          STEPS: '{"test_alert":{"outcome":"success","outputs":{"alert":"This is a test alert. Nothing is wrong; this checks that admin alerts reach you."}}}'
+          JOB_STATUS: success
+          RESEND_KEY: ${{ secrets.RESEND_FULL_KEY }}
+          ADMIN_EMAILS: ${{ secrets.ADMIN_EMAILS }}
+        run: |
+          python3 .github/scripts/notify_admins.py | tee "$RUNNER_TEMP/out.txt"
+          grep -q "^Admin alert sent: 2" "$RUNNER_TEMP/out.txt" || { echo "::error::Resend did not accept the test email (see the warning above)"; exit 1; }
