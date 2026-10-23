@@ -8,6 +8,7 @@ final class MoneyTabTests: XCTestCase {
         ("Budgets", "Budgets by fund and department"),
         ("CRA spending", "CRA Spending"),
         ("Contracts", "Contracts"),
+        ("Accountability console", "Accountability"),
         ("Debt", "Debt by government"),
         ("Audit findings", "Audit findings"),
         ("2026 candidates", "2026 local candidates"),

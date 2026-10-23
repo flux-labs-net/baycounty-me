@@ -1,9 +1,9 @@
 name: iOS data layer tests
 on:
   push:
-    paths: ["ios/**", "site/public/downloads/**"]
+    paths: ["ios/**", "site/public/downloads/**", "site/public/data/app/**", "site/public/data/accountability.json", ".github/workflows/ios-kit-tests.yml"]
   pull_request:
-    paths: ["ios/**", "site/public/downloads/**"]
+    paths: ["ios/**", "site/public/downloads/**", "site/public/data/app/**", "site/public/data/accountability.json", ".github/workflows/ios-kit-tests.yml"]
 jobs:
   test:
     runs-on: ubuntu-latest
