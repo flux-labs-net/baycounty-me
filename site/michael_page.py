@@ -82,6 +82,7 @@ def michael_page(out_dir):
     <div class="sec-hd"><h2 id="led-h">Every FEMA project in Bay County</h2><span class="muted" id="ledCount" aria-live="polite">Loading projects…</span></div>
     <div class="filters-row">
       <input id="ledQ" type="search" data-param="q" placeholder="Search projects (e.g. school, pier, debris)" aria-label="Search projects">
+      <select id="ledY" aria-label="Year first funded"><option value="">All years</option></select>
       <select id="ledA" aria-label="Applicant" data-param="a"><option value="">All applicants</option></select>
       <select id="ledC" aria-label="Type" data-param="c"><option value="">All types</option></select>
       <button type="button" class="pill sm" id="ledCsv">Download CSV</button>

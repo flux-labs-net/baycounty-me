@@ -62,8 +62,8 @@ function fitView() {
   return {...HOME};
 }
 function filt() {
-  const q = $('stQ').value.trim().toLowerCase(), g = $('stG').value, c = $('stC').value, st = $('stS').value;
-  cur = P.filter(p => (!g || p.g === g) && (!c || p.c === c) && (!st || p.s === st) && (!q || (p.n + ' ' + p.d).toLowerCase().includes(q)));
+  const q = $('stQ').value.trim().toLowerCase(), g = $('stG').value, c = $('stC').value, st = $('stS').value, fy = +$('stY').value;
+  cur = P.filter(p => (!fy || p._ys.includes(fy)) && (!g || p.g === g) && (!c || p.c === c) && (!st || p.s === st) && (!q || (p.n + ' ' + p.d).toLowerCase().includes(q)));
   // newest first (by fiscal year), then name A to Z; projects with no year go last
   const o = $('stO').value, byNew = {get: p => p.y, type: 'date', dir: 'desc'}, byName = {get: p => p.n, type: 'text', dir: 'asc'};
   cur = TT.sortBy(cur, o === 'az' ? [byName, byNew] : o === 'big' ? [{get: p => p.k, type: 'num', dir: 'desc'}, byNew, byName] : [byNew, byName]);
@@ -119,7 +119,12 @@ $('stCsv').addEventListener('click', () => TT.csv('baycounty-sales-tax-projects'
 $('stLeg').innerHTML = ['completed', 'in_progress', 'not_started'].map(s => `<li><i style="background:${ST[s][1]};border-radius:50%"></i><span>${ST[s][0]}</span></li>`).join('');
 addEventListener('resize', () => { if (P.length) draw(); });
 Promise.all([fetch('/data/surtax-projects.json').then(r => r.json()), fetch('/data/cra-geo.json').then(r => r.json()).catch(() => null)]).then(([p, g]) => {
-  P = p; G = g; P.forEach((x, i) => x._i = i);
+  P = p; G = g; P.forEach((x, i) => { x._i = i; x._ys = TT.yearsIn(x.y); });
+  // fiscal year: opens on the newest year with projects; ?year= (a year or 'all') picks another. Projects with no year show under All years.
+  const YRS = [...new Set(P.flatMap(x => x._ys))].sort((a, b) => b - a);
+  $('stY').innerHTML += YRS.map(y => `<option value="${y}">FY${y}</option>`).join('');
+  $('stY').value = String(U0.get('q') && !U0.has('year') ? '' : TT.startYear(YRS, TT.countBy(P.flatMap(x => x._ys))));
+  $('stY').addEventListener('input', () => { clearSel(false); if (window.BCM) BCM.urlState.set({year: $('stY').value || 'all'}); filt(); });
   [...new Set(P.map(x => x.g))].sort().forEach(v => $('stG').insertAdjacentHTML('beforeend', `<option>${esc(v)}</option>`));
   [...new Set(P.map(x => x.c))].sort().forEach(v => $('stC').insertAdjacentHTML('beforeend', `<option>${esc(v)}</option>`));
   // filters from the link (?gov=&type=&status=&q=) are set before the first draw; the shared helper keeps them in the link
@@ -128,6 +133,6 @@ Promise.all([fetch('/data/surtax-projects.json').then(r => r.json()), fetch('/da
     if (el.tagName === 'SELECT') { const o = window.BCM ? BCM.findOption(el, v) : [...el.options].find(o => o.value === v); if (o) el.value = o.value; } else el.value = v; });
   filt();
   const want = U.get('p'), hit = want && P.find(x => x.id === want);
-  if (hit) { if (!cur.includes(hit)) { ['stQ', 'stG', 'stC', 'stS'].forEach(id => $(id).value = ''); filt(); } select(hit, 'map'); $('map-h').scrollIntoView(); }
+  if (hit) { if (!cur.includes(hit)) { ['stQ', 'stG', 'stC', 'stS', 'stY'].forEach(id => $(id).value = ''); filt(); } select(hit, 'map'); $('map-h').scrollIntoView(); }
 });
 })();

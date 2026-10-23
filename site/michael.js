@@ -24,20 +24,25 @@ const A = [...new Set(D.rows.map(r => r.a))].sort((a, b) => nice(a).localeCompar
 $('ledA').innerHTML += A.map(a => `<option value="${esc(a)}">${esc(nice(a))}</option>`).join('');
 $('ledC').innerHTML += Object.entries(D.cats).map(([k, v]) => `<option value="${k}">${k}: ${esc(v)}</option>`).join('');
 let shown = 50, cur = [];
+// year first funded: opens on the newest year with FEMA awards; ?year= (a year or 'all') or a search link picks otherwise
+const YRS = [...new Set(D.rows.map(r => +(r.d1 || '').slice(0, 4)).filter(Boolean))].sort((a, b) => b - a);
+$('ledY').innerHTML += YRS.map(y => `<option value="${y}">${y}</option>`).join('');
+{ const Q = new URLSearchParams(location.search); $('ledY').value = String(!Q.has('year') && (Q.get('q') || Q.get('a')) ? '' : TT.startYear(YRS, TT.countBy(D.rows.map(r => +(r.d1 || '').slice(0, 4) || null)))); }
 /* sort: newest first, then applicant A to Z; any heading re-sorts */
 const LCOLS = [{key: 'a', type: 'text', get: r => nice(r.a)}, {key: 't', type: 'text'}, {key: 'c', type: 'text'}, {key: 'f', type: 'num'}, {key: 'd1', type: 'date'}, {key: 'st', type: 'text'}];
 const lsort = TT.attach($('ledT'), {cols: LCOLS, sort: {key: 'd1', dir: 'desc'}, onSort: () => filt()});
 const lorder = rows => { const s = lsort.sort, c = LCOLS.find(x => x.key === s.key); return TT.sortBy(rows, [{get: c.get || (r => r[s.key]), type: c.type, dir: s.dir}, {get: r => r.d1, type: 'date', dir: 'desc'}, {get: r => nice(r.a), type: 'text', dir: 'asc'}, {get: r => r.t, type: 'text', dir: 'asc'}]); };
 function filt() {
-  const q = $('ledQ').value.trim().toLowerCase(), a = $('ledA').value, c = $('ledC').value;
-  cur = D.rows.filter(r => (!a || r.a === a) && (!c || r.c === c) && (!q || (r.t + ' ' + r.a + ' ' + r.pw).toLowerCase().includes(q)));
+  const q = $('ledQ').value.trim().toLowerCase(), a = $('ledA').value, c = $('ledC').value, y = $('ledY').value;
+  cur = D.rows.filter(r => (!y || (r.d1 || '').startsWith(y)) && (!a || r.a === a) && (!c || r.c === c) && (!q || (r.t + ' ' + r.a + ' ' + r.pw).toLowerCase().includes(q)));
   cur = lorder(cur);
   const s = cur.reduce((x, r) => x + r.f, 0);
-  $('ledCount').textContent = `${cur.length.toLocaleString()} projects · ${big(s)} federal`;
+  $('ledCount').textContent = `${cur.length.toLocaleString()} projects${y ? ' first funded in ' + y : ''} · ${big(s)} federal`;
   $('ledT').tBodies[0].innerHTML = cur.slice(0, shown).map(r => `<tr><td>${esc(nice(r.a))}</td><td class="wrap">${esc(r.t || '—')} <span class="muted small">#${esc(r.pw)}</span></td><td>${esc(r.c)}</td><td class="num">${usd(r.f)}</td><td class="num">${esc(r.d1 || '—')}</td><td class="small">${esc(r.st.replace('Project ', ''))}</td></tr>`).join('') || '<tr><td colspan="6" class="muted">No projects match.</td></tr>';
   $('ledMore').hidden = cur.length <= shown;
 }
 ['ledQ', 'ledA', 'ledC'].forEach(id => $(id).addEventListener('input', () => { shown = 50; filt(); }));
+$('ledY').addEventListener('input', () => { shown = 50; if (window.BCM) BCM.urlState.set({year: $('ledY').value || 'all'}); filt(); });
 $('ledMore').addEventListener('click', () => { shown += 100; filt(); });
 $('ledCsv').addEventListener('click', () => {
   const head = ['applicant', 'project_number', 'title', 'category', 'federal_obligated', 'eligible_cost', 'first_obligation', 'last_obligation', 'status'];

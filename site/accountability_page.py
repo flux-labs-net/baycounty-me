@@ -330,11 +330,11 @@ def accountability_page(out_dir):
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Public Money · Accountability</span><h1>Accountability console</h1>
     <p class="lede">Public projects followed from the first budget to the day they close: what was promised, what was approved, every change order and payment we can find, and what it cost in the end. Where the record raises a question, it's flagged by a published rule and sent to the agency for an answer.</p></div></header>
   <div class="acct-stats" role="list">
-    <div role="listitem"><b>{S["projects"]:,}</b><span>projects tracked</span></div>
-    <div role="listitem"><b>{money(S["money"])}</b><span>in those projects</span></div>
-    <div role="listitem"><b>{S["flagged"]:,}</b><span>with a question</span></div>
-    <div role="listitem"><b>{S["gaps"]:,}</b><span>records still missing</span></div>
-    <div role="listitem"><b>{S["replied"]:,}</b><span>agency replies</span></div>
+    <div role="listitem"><b id="acsN">{S["projects"]:,}</b><span id="acsNl">projects tracked</span></div>
+    <div role="listitem"><b id="acsM">{money(S["money"])}</b><span>in those projects</span></div>
+    <div role="listitem"><b id="acsF">{S["flagged"]:,}</b><span>with a question</span></div>
+    <div role="listitem"><b id="acsG">{S["gaps"]:,}</b><span>records still missing</span></div>
+    <div role="listitem"><b id="acsR">{S["replied"]:,}</b><span>agency replies</span></div>
   </div>
   <section class="explain"><div class="ex-txt"><span class="eyebrow">How it works</span><h2>Four steps for every project</h2>
     <ol class="ex-steps">
@@ -345,6 +345,7 @@ def accountability_page(out_dir):
     </ol></div></section>
   <section class="tx-sec" id="list"><div class="sec-hd"><h2>Projects</h2><span class="muted" id="acCount" aria-live="polite"></span></div>
     <div class="filters-row acct-filters">
+      <select id="acY" aria-label="Year of activity"><option value="">All years</option></select>
       <input id="acQ" type="search" placeholder="Search project, company or place" aria-label="Search projects">
       <select id="acG" aria-label="Government"><option value="">All governments</option>{''.join(f'<option>{e(g)}</option>' for g in govs)}</select>
       <select id="acF" aria-label="Flag"><option value="">Any flag or none</option><option value="any">Any flag</option>{ropts}</select>

@@ -9,6 +9,9 @@ from datetime import datetime, timezone
 import html
 
 CHANGES = [
+    {'date': '2026-10-23', 'title': 'Pages now open on the current year',
+     'text': "Lists and tables with several years of records now open on the newest year that has records, never past the current fiscal year, with All years one tap away. That covers the Accountability console (and its headline numbers), CRA Spending, Contracts, How They Voted, Sales Tax Projects, the Hurricane Michael FEMA ledger, audit findings and other multi-year tables. A year with only a few stray records is skipped. Who Gets Paid now sorts by FY2026. Add ?year=all (or a year) to any page link to choose. Debt lists still show everything owed today.",
+     'pages': ['/public-money/accountability', '/public-money/cra-spending', '/public-money/contracts', '/public-money/votes', '/public-money/sales-tax-projects', '/public-money/hurricane-michael', '/public-money/audits', '/public-money/who-gets-paid']},
     {'date': '2026-10-23', 'title': 'Accountability console: projects from budget to close-out',
      'text': "A new page follows public projects from the first budget to the day they close: approvals, contracts, change orders, the votes on them, payments and the final cost, each with its source. Questions are raised only by nine published rules (cost growth over 10%, running late, figures that don't agree, an unnamed payee and others), the same way for every government, and each is a question for the agency rather than a finding. Each project shows the records that would answer its questions, as ready-to-send records requests, and where the agency's reply stands. It starts with 18 project histories reviewed by hand, 37 contracts with change orders and 39 scheduled sales tax projects.",
      'pages': ['/public-money/accountability', '/records-request', '/open-data']},

@@ -17,12 +17,16 @@
               it calls TT.attach() for the sortable headings and TT.csv() to export.
    Search:    <table data-tt-search="off">   page already has its own search box for this table.
    Headings:  <table data-cols="Name|Amount"> names columns for a table with no <thead>.
-   Order:     <table data-tt-sort="2:desc"> overrides the default order. */
+   Order:     <table data-tt-sort="2:desc"> overrides the default order.
+   Year:      a table with a date column covering several years gets a Year picker that opens on the
+              newest year with records (never past the current fiscal year), with "All years" one tap
+              away. ?year=2024 or ?year=all in the link picks for every table. <table data-tt-year="off">
+              opts out; tables with about one row per year (a yearly series) are left showing every year. */
 (() => {
 const ES = (document.documentElement.lang || '').startsWith('es');
 const L = ES
-  ? {filter: 'Filtrar filas', all: 'Todo', of: 'de', rows: 'filas', row: 'fila', csv: 'Descargar CSV', sort: 'Ordenar por', none: 'Ninguna fila coincide.', clear: 'Borrar'}
-  : {filter: 'Filter rows', all: 'All', of: 'of', rows: 'rows', row: 'row', csv: 'Download CSV', sort: 'Sort by', none: 'No rows match.', clear: 'Clear'};
+  ? {filter: 'Filtrar filas', all: 'Todo', of: 'de', rows: 'filas', row: 'fila', csv: 'Descargar CSV', sort: 'Ordenar por', none: 'Ninguna fila coincide.', clear: 'Borrar', year: 'Año', allYears: 'Todos los años'}
+  : {filter: 'Filter rows', all: 'All', of: 'of', rows: 'rows', row: 'row', csv: 'Download CSV', sort: 'Sort by', none: 'No rows match.', clear: 'Clear', year: 'Year', allYears: 'All years'};
 
 /* ---------- values ---------- */
 const MON = {jan: 1, feb: 2, mar: 3, apr: 4, may: 5, jun: 6, jul: 7, aug: 8, sep: 9, sept: 9, oct: 10, nov: 11, dec: 12,
@@ -69,6 +73,35 @@ function dateKey(s) {
   if (best == null && /[A-Za-z\/]/.test(s) && /\b(18|19|20|21)\d{2}\b/.test(s)) { const t = Date.parse(s); if (!isNaN(t)) { const d = new Date(t); put(d.getFullYear(), d.getMonth() + 1, d.getDate(), (d.getHours() * 60 + d.getMinutes()) / 1440); } }
   return best;
 }
+
+/* ---------- years ---------- */
+/* Florida local fiscal years start Oct 1, so from October the current fiscal year is next calendar year. */
+const curFY = () => { const d = new Date(); return d.getFullYear() + (d.getMonth() >= 9 ? 1 : 0); };
+const yearOf = v => { const k = typeof v === 'number' ? v : dateKey(v); return k == null ? null : Math.floor(k / 1e4); };
+/* The year a page opens on: the newest year that has records, not past the current fiscal year.
+   ?year=2024 or ?year=all in the page link overrides it. '' means all years. */
+function startYear(years, counts) {
+  const ys = [...years].filter(y => y != null).map(Number).sort((a, b) => b - a);
+  const u = new URLSearchParams(location.search).get('year');
+  if (u === 'all') return '';
+  if (u && ys.includes(+u)) return +u;
+  // with counts ({year: rows}), skip a year holding only a few stray records: it needs 3, or a tenth of the busiest year
+  const top = counts ? Math.max(...Object.values(counts)) : 0;
+  const enough = y => !counts || (counts[y] || 0) >= Math.min(top, Math.max(3, Math.ceil(top / 10)));
+  const y = ys.find(x => x <= curFY() && enough(x)) ?? ys.find(x => x <= curFY());
+  return y ?? ys[ys.length - 1] ?? '';
+}
+const countBy = arr => arr.reduce((m, y) => { if (y != null) m[y] = (m[y] || 0) + 1; return m; }, {});
+/* Every year a free-text date names: "FY2024-FY2026" is 2024, 2025 and 2026; "2008 purchase; final payment FY2022" is 2008 and 2022. */
+function yearsIn(s) {
+  s = String(s ?? ''); const out = new Set();
+  const rng = /(?:FY\s?)?(?<!\d)((?:19|20)\d{2})\s?(?:-|–|to|through)\s?(?:FY\s?)?((?:19|20)?\d{2})\b/gi; let r;
+  while ((r = rng.exec(s))) { const a = +r[1]; let b = +r[2]; if (b < 100) b += Math.floor(a / 100) * 100; if (b >= a && b - a <= 30) for (let y = a; y <= b; y++) out.add(y); }
+  (s.match(/(?<!\d)(?:19|20)\d{2}(?!\d)/g) || []).forEach(y => out.add(+y));
+  return [...out];
+}
+/* <select> markup for a year picker; fy labels the years FY2026 instead of 2026. */
+const yearOptions = (years, cur, fy) => `<option value="">${L.allYears}</option>` + years.map(y => `<option value="${y}"${cur === y ? ' selected' : ''}>${fy ? 'FY' : ''}${y}</option>`).join('');
 
 const coll = new Intl.Collator(ES ? 'es' : 'en', {numeric: true, sensitivity: 'base'});
 /* Compare two values of one type; empty values always sort last, whichever the direction. */
@@ -259,11 +292,12 @@ function applyFilter(st) {
     total++;
     let ok = true;
     if (words.length) { const txt = (r.tr.textContent || '').toLowerCase() + ' ' + (r.g ? r.g.name.toLowerCase() : ''); ok = words.every(w => txt.includes(w)); }
+    if (ok && st.yr !== '' && st.yr != null && r.y !== st.yr) ok = false;
     if (ok) for (const [i, v] of sel) { if (v && prim(r.c[i]) !== v) { ok = false; break; } }
     r.tr.classList.toggle('tt-off', !ok);
     if (ok) { shown++; if (r.g) groupHit.set(r.g.i, true); }
   });
-  const filtering = words.length || [...sel.values()].some(Boolean);
+  const filtering = words.length || [...sel.values()].some(Boolean) || (st.yr !== '' && st.yr != null);
   st.rows.forEach(r => {
     if (r.k === 'group') r.tr.classList.toggle('tt-off', !!filtering && !groupHit.get(r.g.i));
     if (r.k === 'total') r.tr.classList.toggle('tt-off', !!filtering);
@@ -289,15 +323,30 @@ function buildBar(st) {
   const big = body.length >= 8, search = big && t.dataset.ttSearch !== 'off';
   const label = st.label;
   const filters = big ? st.cols.filter(c => c && c.type === 'text' && c.sortable && c.distinct.size >= 2 && c.distinct.size <= 15 && c.distinct.size < body.length * .7 && [...c.distinct].every(v => v.length <= 60)) : [];
-  bar.innerHTML = (search ? `<label class="tt-q"><span class="sr">${L.filter}</span><input type="search" placeholder="${L.filter}" aria-label="${L.filter}${label ? ': ' + esc(label) : ''}" value="${esc(st.q)}"></label>` : '')
+  // year picker: a date column spanning several years, with more than one row per year on average
+  const dc = st.cols.find(c => c && c.sortable && c.type === 'date');
+  let years = null, fy = false;
+  if (dc && big && t.dataset.ttYear !== 'off') {
+    body.forEach(r => { r.y = r.c[dc.i] ? yearOf(prim(r.c[dc.i])) : null; });
+    const ys = new Set(body.map(r => r.y).filter(y => y != null));
+    if (ys.size >= 2 && body.length >= ys.size * 1.5) years = [...ys].sort((a, b) => b - a);
+    st.ycount = countBy(body.map(r => r.y));
+    fy = [...dc.distinct].filter(v => /\bFY/i.test(v)).length > dc.distinct.size / 2;
+  }
+  if (!years) st.yr = '';
+  else if (st.yr === undefined || (st.yr !== '' && !years.includes(st.yr))) st.yr = startYear(years, st.ycount);
+  bar.innerHTML = (years ? `<label class="tt-f tt-y"><span class="sr">${L.year}</span><select class="tt-ysel" aria-label="${L.year}${label ? ': ' + esc(label) : ''}">${yearOptions(years, st.yr, fy)}</select></label>` : '')
+    + (search ? `<label class="tt-q"><span class="sr">${L.filter}</span><input type="search" placeholder="${L.filter}" aria-label="${L.filter}${label ? ': ' + esc(label) : ''}" value="${esc(st.q)}"></label>` : '')
     + filters.map(c => `<label class="tt-f"><span class="sr">${esc(c.name)}</span><select data-col="${c.i}" aria-label="${esc(c.name)}"><option value="">${esc(c.name)}: ${L.all}</option>${[...c.distinct].sort(coll.compare).map(v => `<option${st.sel.get(c.i) === v ? ' selected' : ''}>${esc(v)}</option>`).join('')}</select></label>`).join('')
     + `<button type="button" class="tt-clear" hidden>${L.clear}</button><span class="tt-count" aria-live="polite"></span><button type="button" class="tt-csv">${L.csv}</button>`;
   // forget a filter whose value is gone after a re-render
   for (const [i, v] of st.sel) { const c = st.cols[i]; if (!c || !c.distinct.has(v) || !filters.includes(c)) st.sel.delete(i); }
   const inp = bar.querySelector('.tt-q input');
   if (inp) inp.addEventListener('input', () => { st.q = inp.value; applyFilter(st); });
-  bar.querySelectorAll('select').forEach(s => s.addEventListener('change', () => { st.sel.set(+s.dataset.col, s.value); applyFilter(st); }));
-  bar.querySelector('.tt-clear').addEventListener('click', () => { st.q = ''; st.sel.clear(); if (inp) inp.value = ''; bar.querySelectorAll('select').forEach(s => s.value = ''); applyFilter(st); });
+  bar.querySelectorAll('select[data-col]').forEach(s => s.addEventListener('change', () => { st.sel.set(+s.dataset.col, s.value); applyFilter(st); }));
+  const ysel = bar.querySelector('.tt-ysel');
+  if (ysel) ysel.addEventListener('change', () => { st.yr = ysel.value ? +ysel.value : ''; applyFilter(st); });
+  bar.querySelector('.tt-clear').addEventListener('click', () => { st.q = ''; st.sel.clear(); st.yr = ''; if (inp) inp.value = ''; bar.querySelectorAll('select').forEach(s => s.value = ''); applyFilter(st); });
   bar.querySelector('.tt-csv').addEventListener('click', () => exportTable(st));
   if (!st.empty) { st.empty = document.createElement('p'); st.empty.className = 'tt-empty muted'; st.empty.textContent = L.none; st.empty.hidden = true; wrap.parentNode.insertBefore(st.empty, wrap.nextSibling); }
 }
@@ -434,21 +483,26 @@ function enhanceList(ol) {
   ol.dataset.ttOn = '1';
   const bar = document.createElement('div'); bar.className = 'tt-bar'; bar.dataset.report = 'skip';
   const lab = ol.getAttribute('aria-label') || '';
-  bar.innerHTML = `<label class="tt-q"><span class="sr">${L.filter}</span><input type="search" placeholder="${ES ? 'Filtrar' : 'Filter'}" aria-label="${L.filter}${lab ? ': ' + esc(lab) : ''}"></label>`
+  items.forEach(li => { li._y = li.dataset.d ? yearOf(li.dataset.d) : null; });
+  const ys = [...new Set(items.map(li => li._y).filter(y => y != null))].sort((a, b) => b - a);
+  const useY = ys.length >= 2 && items.length >= 8 && items.length >= ys.length * 1.5 && ol.dataset.ttYear !== 'off';
+  let yr = useY ? startYear(ys, countBy(items.map(li => li._y))) : '';
+  bar.innerHTML = (useY ? `<label class="tt-f tt-y"><span class="sr">${L.year}</span><select class="tt-ysel" aria-label="${L.year}">${yearOptions(ys, yr, false)}</select></label>` : '') + `<label class="tt-q"><span class="sr">${L.filter}</span><input type="search" placeholder="${ES ? 'Filtrar' : 'Filter'}" aria-label="${L.filter}${lab ? ': ' + esc(lab) : ''}"></label>`
     + `<label class="tt-f"><span class="sr">${L.sort}</span><select aria-label="${L.sort}"><option value="new">${ES ? 'Más recientes' : 'Newest first'}</option><option value="old">${ES ? 'Más antiguos' : 'Oldest first'}</option><option value="az">${ES ? 'A a la Z' : 'A to Z'}</option></select></label>`
     + `<span class="tt-count" aria-live="polite"></span><button type="button" class="tt-csv">${L.csv}</button>`;
   ol.parentNode.insertBefore(bar, ol);
-  const inp = bar.querySelector('input'), sel = bar.querySelector('select'), cnt = bar.querySelector('.tt-count');
+  const inp = bar.querySelector('input'), sel = bar.querySelector('select:not(.tt-ysel)'), cnt = bar.querySelector('.tt-count'), ysel = bar.querySelector('.tt-ysel');
   const name = li => li.dataset.n || prim(li.querySelector('b, strong, .vt-h') || li);
   const run = () => {
     const w = clean(inp.value).toLowerCase().split(' ').filter(Boolean); let n = 0;
-    items.forEach(li => { const ok = w.every(x => li.textContent.toLowerCase().includes(x)); li.classList.toggle('tt-off', !ok); if (ok) n++; });
+    items.forEach(li => { const ok = w.every(x => li.textContent.toLowerCase().includes(x)) && (yr === '' || li._y === yr); li.classList.toggle('tt-off', !ok); if (ok) n++; });
     const d = {get: li => li.dataset.d, type: 'date', dir: sel.value === 'old' ? 'asc' : 'desc'}, a = {get: name, type: 'text', dir: 'asc'};
     sortBy(items, sel.value === 'az' ? [a, d] : [d, a]).forEach(li => ol.appendChild(li));
-    cnt.textContent = w.length ? `${n} ${L.of} ${items.length}` : `${items.length}`;
+    cnt.textContent = w.length || yr !== '' ? `${n} ${L.of} ${items.length}` : `${items.length}`;
     mo.takeRecords();
   };
   inp.addEventListener('input', run); sel.addEventListener('change', run);
+  if (ysel) ysel.addEventListener('change', () => { yr = ysel.value ? +ysel.value : ''; run(); });
   bar.querySelector('.tt-csv').addEventListener('click', () => {
     const rows = [...ol.children].filter(li => li.tagName === 'LI' && !li.classList.contains('tt-off') && !li.hidden).map(li => {
       const a = li.querySelector('a[href]');
@@ -460,7 +514,7 @@ function enhanceList(ol) {
   run();
 }
 
-window.TT = {num, dateKey, cmp, sortBy, csv, slug, pageSlug, attach, enhance, enhanceList, prim, L};
+window.TT = {num, dateKey, cmp, sortBy, csv, slug, pageSlug, attach, enhance, enhanceList, prim, L, curFY, yearOf, startYear, yearOptions, yearsIn, countBy};
 
 const start = () => { scan(); mo.observe(document.body, {childList: true, subtree: true, attributes: true, attributeFilter: ['hidden']}); };
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
