@@ -69,6 +69,8 @@ module.exports = async (req, res) => {
   if (!db.hasDb()) return res.status(500).json({ok: false, error: 'DATABASE_URL missing'});
   const autosend = process.env.ALERTS_AUTOSEND === '1';
   const reviewer = process.env.DIGEST_REVIEWER || 'hello@fluxlabs.net';
+  // Emailed accounting files that never reached /finance (the edge function's call failed or was missed).
+  await require('./_finance/intake').sweep().catch(e => console.error('finance intake sweep', e.message));
   // Ingestion health check (see _health.js): emails the admins (ADMIN_EMAILS) only when something is wrong.
   // Runs first and on its own, so a problem in the alerts run below can't hide it. ?health=1 runs only the check.
   let health = null;

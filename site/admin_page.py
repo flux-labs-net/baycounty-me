@@ -246,13 +246,13 @@ def admin_page(out_dir):
       </div>
       <div class="row ac-head"><h2 class="h2 grow" style="margin:0">Accounting system files</h2>
         <button class="btn" id="ac-norm-all" type="button">Normalize all new files</button><button class="btn" id="ac-refresh" type="button">Refresh</button></div>
-      <p class="muted small" style="margin:0 0 12px">City and county ERP exports (New World, BS&amp;A, Springbrook) emailed to each government’s address at ingest.baycounty.me. Only senders on a source’s list are accepted. Normalize maps a file into rows; approved rows go to the public ledger, rejected rows don’t.</p>
+      <p class="muted small" style="margin:0 0 12px">City and county ERP exports (New World, BS&amp;A, Springbrook) emailed to each government’s address at ingest.baycounty.me. Only senders on a source’s list are accepted. Every file also goes to its government’s private /finance workspace as an unreviewed import. Check registers are normalized into rows here; approved rows go to the public ledger. Budget and bank files stay in /finance only.</p>
       <div id="ac-banner"></div>
       <div class="tiles" id="ac-tiles"></div>
       <h3 class="h3">Sources</h3>
-      <div class="tw"><table class="at" id="ac-sources" data-tt="off"><thead><tr><th>Government</th><th>System</th><th>Inbound address</th><th>Allowed senders</th><th class="num">Files</th><th>Last file</th><th class="num">Pending</th><th>Auto-normalize</th></tr></thead><tbody></tbody></table></div>
+      <div class="tw"><table class="at" id="ac-sources" data-tt="off"><thead><tr><th>Government</th><th>System</th><th>Inbound address</th><th>/finance</th><th>Allowed senders</th><th class="num">Files</th><th>Last file</th><th class="num">Pending</th><th>Auto-normalize</th></tr></thead><tbody></tbody></table></div>
       <h3 class="h3">Files</h3>
-      <div class="tw"><table class="at" id="ac-files" data-tt="off"><thead><tr><th>Received</th><th>Government</th><th>File</th><th>From</th><th>Status</th><th class="num">Rows</th><th>Review</th><th></th></tr></thead><tbody></tbody></table></div>
+      <div class="tw"><table class="at" id="ac-files" data-tt="off"><thead><tr><th>Received</th><th>Government</th><th>File</th><th>From</th><th>Status</th><th class="num">Rows</th><th>Review</th><th>/finance</th><th></th></tr></thead><tbody></tbody></table></div>
       <div class="row ac-qhead"><h3 class="h3 grow" style="margin:0">Review queue <span class="muted small" id="ac-qscope" style="font-weight:400"></span></h3>
         <select class="sel" id="ac-status" aria-label="Review status"><option value="pending" selected>Pending</option><option value="approved">Approved</option><option value="rejected">Rejected</option><option value="all">All</option></select>
         <select class="sel" id="ac-source" aria-label="Government"><option value="">All governments</option></select></div>

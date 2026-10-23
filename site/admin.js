@@ -241,7 +241,7 @@
     f.require_key.checked = !!s.settings.require_key;
     const name = id => (KEYS.find(k => k.id === id) || {}).name;
     const WHAT = {email_test: 'Sent a test email', create_key: 'Created a key', update_key: 'Changed a key', rotate_key: 'Replaced a key', update_settings: 'Changed settings', block_ip: 'Blocked an address', unblock_ip: 'Removed a block', login: 'Signed in', login_requested: 'Asked for a sign-in link',
-      ledger_normalize: 'Normalized accounting files', ledger_approve: 'Approved ledger rows', ledger_reject: 'Rejected ledger rows', ledger_source: 'Changed an accounting source'};
+      ledger_normalize: 'Normalized accounting files', ledger_approve: 'Approved ledger rows', ledger_reject: 'Rejected ledger rows', ledger_source: 'Changed an accounting source', ledger_finance: 'Sent a file to /finance'};
     $('#audit-table tbody').innerHTML = a.audit.map(x => `<tr><td class="small" style="white-space:nowrap">${stamp(x.at)}</td><td class="small">${esc(x.admin)}</td><td class="small">${esc(WHAT[x.action] || x.action)}${x.key_id && name(x.key_id) ? ': ' + esc(name(x.key_id)) : ''}</td>
       <td class="small muted mono" style="word-break:break-all">${x.detail && x.action !== 'login' ? esc(JSON.stringify(x.detail)) : ''}</td></tr>`).join('') || '<tr><td colspan="4" class="empty">Nothing yet.</td></tr>';
   }
@@ -288,7 +288,16 @@
 
   // ---------- accounting-system files (ingest schema, api/_ledger.js) ----------
   const ERP = {new_world: 'Tyler New World', bsa: 'BS&A', springbrook: 'Springbrook', other: 'Other'};
-  const FILE = {received: 'New', normalized: 'Normalized', failed: 'Failed', duplicate: 'Duplicate'};
+  const FILE = {received: 'New', normalized: 'Normalized', failed: 'Failed', duplicate: 'Duplicate', finance_only: '/finance only'};
+  const FSHAPE = {budget: 'Budget', disbursements: 'Check register', bank_transactions: 'Bank statement', bank_recs: 'Bank rec'};
+  const FUP = {preview: 'waiting for review', committed: 'added', held: 'held (doesn’t tie)', replaced: 'withdrawn', failed: 'failed'};
+  const finCell = f => {
+    if (!f.finance_workspace_id) return '<span class="muted small">Not linked</span>';
+    if (f.finance_status === 'imported') return `<span class="small">${esc(FSHAPE[f.finance_shape] || 'Unrecognized')}, ${esc(FUP[f.finance_upload_status] || f.finance_upload_status || 'sent')}</span>`;
+    if (f.finance_status === 'importing') return '<span class="small muted">Sending…</span>';
+    if (f.finance_status === 'failed') return `<span class="small" style="color:var(--bad)">${esc(f.finance_error || 'Failed')}</span>`;
+    return f.has_file ? '<span class="small muted">Not sent yet</span>' : '<span class="muted small">—</span>';
+  };
   const REV = {pending: 'Pending', approved: 'Approved', rejected: 'Rejected'};
   const usd = n => n == null ? '—' : Number(n).toLocaleString('en-US', {style: 'currency', currency: 'USD'});
   const LG = {raw: '', picked: new Set(), rows: [], sources: []};
@@ -307,16 +316,19 @@
     sel.value = cur;
     $('#ac-sources tbody').innerHTML = r.sources.map(s => `<tr data-src="${esc(s.id)}"><td>${esc(s.entity_name)}${s.active ? '' : ' <span class="pill revoked">Off</span>'}${s.has_map ? '' : '<div class="small" style="color:var(--warn)">No column map yet</div>'}</td>
       <td class="small">${esc(ERP[s.erp_system] || s.erp_system)}</td><td class="mono small">${esc(s.inbound_address || '')}</td>
+      <td class="small">${s.finance_workspace ? esc(s.finance_workspace) : '<span class="muted">Not linked</span>'}</td>
       <td><div class="ac-snd"><input value="${esc((s.allowed_senders || []).join(', '))}" placeholder="name@city.gov, @city.gov" aria-label="Allowed senders for ${esc(s.entity_name)}"><button class="btn" type="button" data-save-snd>Save</button></div></td>
       <td class="num">${fmt(s.files)}</td><td class="small">${when(s.last_file)}</td><td class="num">${fmt(s.pending)}</td>
-      <td><label class="sw"><input type="checkbox" data-auto ${s.auto_normalize ? 'checked' : ''}> ${s.auto_normalize ? 'On' : 'Off'}</label></td></tr>`).join('') || '<tr><td colspan="8" class="empty">No sources yet.</td></tr>';
+      <td><label class="sw"><input type="checkbox" data-auto ${s.auto_normalize ? 'checked' : ''}> ${s.auto_normalize ? 'On' : 'Off'}</label></td></tr>`).join('') || '<tr><td colspan="9" class="empty">No sources yet.</td></tr>';
     $('#ac-files tbody').innerHTML = r.files.map(f => `<tr${f.id === LG.raw ? ' class="sel-row"' : ''}><td class="small" style="white-space:nowrap">${when(f.received_at)}</td><td class="small">${esc(f.entity_name)}</td>
       <td class="small">${esc(f.file_name || '(no file)')}${f.error_message ? `<div class="small" style="color:var(--bad)">${esc(f.error_message)}</div>` : ''}</td><td class="small mono">${esc(f.sender || '')}</td>
       <td><span class="pill ${esc(f.status)}">${FILE[f.status] || esc(f.status)}</span></td><td class="num">${fmt(f.row_count)}</td>
       <td class="small">${f.status === 'normalized' ? `${fmt(f.pending)} pending · ${fmt(f.approved)} approved · ${fmt(f.rejected)} rejected` : ''}</td>
-      <td style="white-space:nowrap">${f.status === 'received' ? `<button class="btn" type="button" data-norm="${esc(f.id)}">Normalize</button>` : f.status === 'failed' && f.has_file ? `<button class="btn" type="button" data-norm="${esc(f.id)}">Retry</button>` : ''}
+      <td>${finCell(f)}</td>
+      <td style="white-space:nowrap">${f.finance_workspace_id && f.has_file && !f.finance_upload_id && f.finance_status !== 'importing' ? `<button class="btn" type="button" data-fin="${esc(f.id)}">Send to /finance</button>` : ''}
+        ${f.status === 'received' ? `<button class="btn" type="button" data-norm="${esc(f.id)}">Normalize</button>` : f.status === 'failed' && f.has_file ? `<button class="btn" type="button" data-norm="${esc(f.id)}">Retry</button>` : ''}
         ${f.status === 'normalized' ? `<button class="btn" type="button" data-rows="${esc(f.id)}">${f.id === LG.raw ? 'All files' : 'Rows'}</button>` : ''}
-        ${f.pending ? `<button class="btn primary" type="button" data-approve-file="${esc(f.id)}">Approve ${fmt(f.pending)}</button>` : ''}</td></tr>`).join('') || '<tr><td colspan="8" class="empty">No files in the last 120 days.</td></tr>';
+        ${f.pending ? `<button class="btn primary" type="button" data-approve-file="${esc(f.id)}">Approve ${fmt(f.pending)}</button>` : ''}</td></tr>`).join('') || '<tr><td colspan="9" class="empty">No files in the last 120 days.</td></tr>';
     const file = LG.raw && r.files.find(f => f.id === LG.raw);
     $('#ac-qscope').textContent = file ? `· ${file.file_name} (${file.entity_name})` : '';
     $('#ac-queue tbody').innerHTML = r.rows.map(x => `<tr><td>${x.review_status === 'pending' ? `<input type="checkbox" data-pick="${esc(x.id)}" aria-label="Select row">` : ''}</td>
@@ -349,6 +361,7 @@
   $('#ac-files').addEventListener('click', e => {
     const b = e.target.closest('button'); if (!b) return;
     if (b.dataset.norm) { b.disabled = true; lgDo('ledger_normalize', {raw_id: b.dataset.norm}, normSummary); }
+    else if (b.dataset.fin) { b.disabled = true; lgDo('ledger_finance', {raw_id: b.dataset.fin}, r => `<b>Sent to /finance${r.shape ? ' as ' + esc(FSHAPE[r.shape] || r.shape) : ''}.</b> <span class="small">It’s waiting under “Emailed in” on the workspace’s Add a file tab.</span>`); }
     else if (b.dataset.rows) { LG.raw = LG.raw === b.dataset.rows ? '' : b.dataset.rows; $('#ac-status').value = LG.raw ? 'all' : 'pending'; loadLedger(); }
     else if (b.dataset.approveFile) { b.disabled = true; lgDo('ledger_approve', {raw_id: b.dataset.approveFile}, r => `<b>Approved ${fmt(r.changed)} row${r.changed === 1 ? '' : 's'}.</b> <span class="small">They’re now in the public ledger.</span>`); }
   });

@@ -57,7 +57,7 @@
   $('#signout').addEventListener('click', async () => { await api('logout', {method: 'POST'}).catch(() => {}); location.reload(); });
 
   // ---------- tabs ----------
-  const loaders = {overview: loadOverview, flags: () => loadFlags(true), upload: () => {}, files: loadFiles, people: loadPeople, packet: loadPacket};
+  const loaders = {overview: loadOverview, flags: () => loadFlags(true), upload: () => loadEmailed(), files: loadFiles, people: loadPeople, packet: loadPacket};
   function tab(name, push = true) {
     if (!loaders[name]) name = 'overview';
     const b = $(`[role=tab][data-tab="${name}"]`);
@@ -243,7 +243,7 @@
   drop.addEventListener('drop', e => { if (e.dataTransfer.files[0]) choose(e.dataTransfer.files[0]); });
   input.addEventListener('change', () => { if (input.files[0]) choose(input.files[0]); });
   $('#pv-reset').addEventListener('click', resetUpload);
-  function resetUpload() { up = null; input.value = ''; $('#pv').hidden = true; drop.hidden = false; $('#up-msg').textContent = ''; }
+  function resetUpload() { up = null; input.value = ''; $('#pv').hidden = true; drop.hidden = false; $('#up-msg').textContent = ''; loadEmailed(); }
 
   const toB64 = file => new Promise((res, rej) => { const r = new FileReader(); r.onload = () => res(String(r.result).split(',')[1]); r.onerror = rej; r.readAsDataURL(file); });
   async function choose(file) {
@@ -318,6 +318,29 @@
       resetUpload();
       $('#up-msg').innerHTML = j.held ? `<span class="err">${esc(j.message)}</span>` : `<span class="ok">Added ${j.row_count.toLocaleString()} rows. The checks ran again: ${j.rules.flags} flags in total.</span> <button class="linkish btn quiet" data-go="flags" type="button">See flags</button>`;
     } catch (e) { $('#pv-err').textContent = e.message; btn.disabled = false; }
+  });
+
+  // ---------- emailed in (unreviewed imports from ingest.baycounty.me) ----------
+  let emailed = [];
+  async function loadEmailed() {
+    if (!can('upload')) return;
+    try {
+      const {uploads} = await api('uploads');
+      emailed = uploads.filter(u => u.status === 'preview' && /^email: /.test(u.uploaded_by || '') && u.storage_path);
+    } catch (e) { emailed = []; }
+    $('#em').hidden = !emailed.length;
+    $('#em-t tbody').innerHTML = emailed.map(u => `<tr><td>${esc(u.original_name)}${u.error ? `<div class="small err">${esc(u.error)}</div>` : ''}</td>
+      <td>${esc(SHAPES[u.shape] || 'Not recognized')}</td><td class="num">${u.row_count != null ? u.row_count.toLocaleString() : '—'}</td><td class="num">${usd(u.parsed_total, true)}</td>
+      <td style="white-space:nowrap">${day(u.uploaded_at)}<br><span class="muted small">${esc(String(u.uploaded_by).replace(/^email: /, ''))}</span></td>
+      <td><button class="btn" type="button" data-em="${u.id}">Review</button></td></tr>`).join('');
+  }
+  $('#em-t').addEventListener('click', async e => {
+    const btn = e.target.closest('[data-em]'); if (!btn) return;
+    const u = emailed.find(x => String(x.id) === btn.dataset.em); if (!u) return;
+    up = {file: {name: u.original_name}, path: u.storage_path, preview: {upload_id: u.id}};
+    btn.disabled = true;
+    try { await preview({}); $('#em').hidden = true; } catch (err) { $('#up-msg').innerHTML = `<span class="err">${esc(err.message)}</span>`; }
+    btn.disabled = false;
   });
 
   // ---------- files ----------

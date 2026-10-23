@@ -237,6 +237,12 @@ def finance_page(out_dir):
 
     <section id="p-upload" data-panel hidden>
       <p class="sub">Add an export from the accounting system or the bank: budget vs. actual, check register, bank statement, or bank reconciliation summary. Excel or CSV. You'll see how it reads before anything is saved.</p>
+      <div id="em" hidden>
+        <h2 class="h2">Emailed in, waiting for review</h2>
+        <p class="small muted" style="margin:0 0 8px">Sent to this government’s address at ingest.baycounty.me. Open one to check how it reads, then add it. Nothing counts until it’s added.</p>
+        <div class="tw"><table class="t" id="em-t"><thead><tr><th>File</th><th>Read as</th><th class="num">Rows</th><th class="num">Total</th><th>Received</th><th></th></tr></thead><tbody></tbody></table></div>
+        <h2 class="h2">Or add a file yourself</h2>
+      </div>
       <label class="drop" id="drop" tabindex="0"><b>Choose a file or drop it here</b><span class="muted small">.xlsx or .csv, up to 50 MB</span>
         <input type="file" id="file" accept=".csv,.tsv,.txt,.xlsx" hidden></label>
       <div id="pv" hidden>

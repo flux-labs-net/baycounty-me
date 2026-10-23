@@ -1,7 +1,9 @@
 // ingest-email: Resend "email.received" webhook for <city>@ingest.baycounty.me. Verifies the Svix signature, picks the
 // source from the To address, checks the sender against that source's allowed_senders, then downloads each CSV
 // attachment from Resend, stores it in the private ingest-raw bucket and logs it in ingest.raw (duplicates skipped).
-// If the source has auto_normalize on, the new files are handed to ingest-normalize right away (rows still need approval).
+// New files are then sent to the site's /finance importer (POST /api/finance?action=intake), which files them as unreviewed
+// imports in the source's finance workspace; after that, if the source has auto_normalize on, they go to ingest-normalize
+// (rows still need approval). Finance first, so budget and bank files are marked finance-only before normalizing.
 // Deployed with verify_jwt off: the Svix signature is the authentication.
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "npm:@supabase/supabase-js@2";
@@ -12,6 +14,7 @@ const SERVICE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
 const supabase = createClient(SUPABASE_URL, SERVICE_KEY);
 const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY") ?? "";
 const WEBHOOK_SECRET = Deno.env.get("RESEND_WEBHOOK_SECRET") ?? "";
+const SITE_URL = (Deno.env.get("SITE_URL") ?? "https://baycounty.me").replace(/\/$/, "");
 
 const json = (b: unknown, s = 200) => new Response(JSON.stringify(b), { status: s, headers: { "Content-Type": "application/json" } });
 const addr = (v: string) => (v.match(/<([^>]+)>/)?.[1] ?? v).trim().toLowerCase();
@@ -25,6 +28,17 @@ async function resend(path: string) {
   const r = await fetch(`https://api.resend.com${path}`, { headers: { Authorization: `Bearer ${RESEND_API_KEY}` } });
   if (!r.ok) throw new Error(`Resend ${path} ${r.status}`);
   return r.json();
+}
+
+async function toFinance(rawIds: string[]) {
+  try {
+    const r = await fetch(`${SITE_URL}/api/finance?action=intake`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${SERVICE_KEY}` },
+      body: JSON.stringify({ raw_ids: rawIds }),
+    });
+    if (!r.ok) console.error("finance intake", r.status, await r.text()); // the daily sweep picks these up
+  } catch (e) { console.error("finance intake", String(e)); }
 }
 
 async function autoNormalize(rawIds: string[]) {
@@ -96,8 +110,8 @@ Deno.serve(async (req) => {
 
   const fresh = results.filter((r) => r.raw_id).map((r) => r.raw_id as string);
   const auto = !!source.auto_normalize && fresh.length > 0;
-  if (auto) {
-    const job = autoNormalize(fresh);
+  if (fresh.length) {
+    const job = (async () => { await toFinance(fresh); if (auto) await autoNormalize(fresh); })();
     // Answer Resend right away; finish normalizing in the background where the runtime allows it.
     // deno-lint-ignore no-explicit-any
     const rt = (globalThis as any).EdgeRuntime;
