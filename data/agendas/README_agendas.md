@@ -11,6 +11,26 @@ Every agenda, packet and minutes file found is downloaded and hashed. A new URL 
 
 The website account is only for receiving notices. Downloads need no login: AgendaCenter, CivicClerk, PrimeGov and Granicus files are public.
 
+## Reading agendas into items
+
+After each watch run, `extract_agendas.py` reads new agendas (never packets) with a Claude model: the file's text is pulled out (pdftotext for PDFs, visible text for HTML pages) and the model returns, under a strict JSON schema, the meeting details and every substantive item: number, section, title, a one-line summary from the agenda's own words, kind (contract, purchase, change order, budget, grant, rezoning, ordinance ...), dollar amounts, parties and addresses. The prompt forbids guessing anything not printed. Results go to `agendas.extractions` (one per document version, with the text and token cost) and `agendas.items`; the Agendas tab shows them under each document.
+
+- **Model:** repository variable `AGENDA_MODEL`, default `claude-sonnet-5-5` ($2 / $10 per million input/output tokens). Set `claude-haiku-5-5` to spend much less.
+- **Cost:** a typical agenda is 2k–10k tokens in and a few thousand out, about 3–5¢ on Sonnet. Each run reads at most `AGENDA_EXTRACT_MAX` agendas (25) and stops at `AGENDA_EXTRACT_BUDGET_USD` ($2.00), newest meetings first; the backlog drains over a few runs.
+- **Secret:** `ANTHROPIC_API_KEY`. Without it the step is skipped. If the key isn't scoped to a workspace, also set the repository variable `ANTHROPIC_WORKSPACE_ID` (or use a workspace-scoped key).
+- **Failures:** a failed read is retried after 6 hours, up to 3 attempts. Setup problems (pdftotext missing, a bad key or workspace) stop the run and are logged once, without marking agendas failed.
+- **Limits:** scanned agendas with no text layer are marked "No text (scanned)" (no OCR yet). An amended agenda (new version) is read again.
+
+## Order: newest first
+
+The backlog is worked backwards. Each watch run lists every document link from the sources it scans, then downloads newest meetings first across all governments (agenda before packet before minutes); sources a notice email just pointed at go first. Agenda reading also takes the newest meetings first. So this year's agendas are captured and read before older archives.
+
+## Alerts and search
+
+- **Alerts:** items read from agendas for meetings from 3 days ago onward become `alerts.events` (dataset `agenda-items`). Keyword rules match an item's title, summary, organizations and addresses; contract rules match contract, purchase and change-order items at or over the rule's amount, labeled "on the agenda, not yet approved". An item already matched from the meetings feed in the same run isn't sent twice. Older items (the backfill) don't alert.
+- **Search:** the daily meetings refresh runs `export_items.py`, which writes `data/agendas/agenda_items.json`; `site/search_page.py` indexes it as "Agenda item" results linking to the agenda. Dollar figures are left off budget, resolution, ordinance and hearing items, where the largest printed number is usually a total or taxable value, not spending.
+- **Privacy:** in both, party names that look like a private individual's (for example a homeowner on a code-enforcement item) are dropped; companies, agencies and other organizations are kept. Item titles and summaries are kept as printed on the public agenda.
+
 ## Which sources send notices
 
 | Key | Government | Agenda system | Email notice option |

@@ -37,6 +37,15 @@ async function report({days = 14, board = '', status = ''} = {}) {
       (select count(*) from agendas.documents)::int documents,
       (select count(*) from agendas.documents where status = 'failed')::int failing,
       (select count(*) from agendas.errors where resolved_at is null and at > now() - interval '7 days')::int open_errors`);
+  const [ex] = (await safe(`select count(*) filter (where status = 'ok')::int read_7d,
+      coalesce(sum(item_count) filter (where status = 'ok'), 0)::int items_7d,
+      count(*) filter (where status in ('failed', 'no_text'))::int unread_7d,
+      coalesce(sum(cost_usd), 0)::float cost_7d,
+      (select count(*) from agendas.documents d where d.kind in ('agenda', 'linked', 'attachment') and d.current_sha256 is not null
+         and not exists (select 1 from agendas.extractions e where e.document_id = d.id and e.sha256 = d.current_sha256))::int waiting
+      from agendas.extractions where extracted_at > now() - interval '7 days'`)) || [];
+  c.extract = ex || null;
+  const hasEx = !!ex;
   const params = [Math.min(Math.max(days, 1), 120)];
   let where = `coalesce(d.last_changed_at, d.first_seen_at) > now() - make_interval(days => $1)`;
   if (board) { params.push(board); where += ` and (d.board = $${params.length} or d.source_key = $${params.length})`; }
@@ -44,7 +53,9 @@ async function report({days = 14, board = '', status = ''} = {}) {
   const documents = await db.q(`select d.id, d.url, d.source_key, d.board, d.kind, d.title, d.meeting_date, d.first_seen_at, d.last_checked_at,
       d.last_changed_at, d.version_count, d.status, d.error, d.bytes, d.content_type, d.notice_id,
       coalesce((select json_agg(json_build_object('id', v.id, 'sha256', v.sha256, 'bytes', v.bytes, 'fetched_at', v.fetched_at, 'stored', v.storage_path is not null)
-        order by v.fetched_at desc) from agendas.versions v where v.document_id = d.id), '[]') versions
+        order by v.fetched_at desc) from agendas.versions v where v.document_id = d.id), '[]') versions${hasEx ? `,
+      (select json_build_object('id', e.id, 'status', e.status, 'items', e.item_count, 'error', e.error, 'model', e.model, 'cost', e.cost_usd)
+         from agendas.extractions e where e.document_id = d.id order by e.extracted_at desc limit 1) extraction` : ''}
       from agendas.documents d where ${where} order by coalesce(d.last_changed_at, d.first_seen_at) desc limit 300`, params);
   const notices = await db.q(`select id, received_at, pulled_at, from_addr, subject, left(body_text, 4000) body_text, links, attachments, sources, status, error
       from agendas.notices order by id desc limit 60`);
@@ -86,4 +97,14 @@ async function runNow(mode = 'both', only = '', emailId = '') {
   return {started: true};
 }
 
-module.exports = {summarize, report, fileLink, resolveError, runNow};
+// The items read from one extraction (agendas.items), for the expandable row on the Agendas tab.
+async function items(extractionId) {
+  const [e] = await db.q(`select e.id, e.status, e.model, e.meeting_body, e.meeting_date, e.meeting_time, e.meeting_location, e.item_count,
+      e.input_tokens, e.output_tokens, e.cost_usd, e.extracted_at, e.text_truncated from agendas.extractions e where e.id = $1`, [extractionId]);
+  if (!e) throw Object.assign(new Error('No such extraction.'), {status: 404});
+  const rows = await db.q(`select position, item_number, section, title, summary, kind, amounts, total_amount, parties, addresses
+      from agendas.items where extraction_id = $1 order by position`, [extractionId]);
+  return {extraction: e, items: rows};
+}
+
+module.exports = {summarize, report, fileLink, resolveError, runNow, items};

@@ -56,6 +56,16 @@ jobs:
         continue-on-error: true
         working-directory: data/elections/scripts
         run: ./refresh.sh "$RUNNER_TEMP/soe"
+      - name: Export agenda items for search
+        # Items read from posted agendas (data/agendas/export_items.py). A database problem keeps the last export.
+        id: export_agenda_items
+        continue-on-error: true
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          SUPABASE_REGION: ${{ vars.SUPABASE_REGION || 'us-east-2' }}
+        run: |
+          pip install -q 'psycopg[binary]'
+          python data/agendas/export_items.py
       - name: Rebuild site
         id: rebuild_site
         working-directory: site
@@ -68,14 +78,25 @@ jobs:
       - name: Commit if changed
         id: commit_and_push
         run: |
-          paths="data/meetings data/elections/finance_2026.json site/public"
+          paths="data/meetings data/elections/finance_2026.json data/agendas/agenda_items.json site/public"
           # git status --porcelain also lists new, untracked files, which git diff --quiet ignores.
           if [ -z "$(git status --porcelain -- $paths)" ]; then echo "No changes"; exit 0; fi
           git config user.name "BayCounty.me bot"
           git config user.email "hello@fluxlabs.net"
           git add -A $paths
-          git commit -m "Daily refresh: meetings and campaign finance ($(date -u +%Y-%m-%d))"
+          git commit -m "Daily refresh: meetings, agenda items and campaign finance ($(date -u +%Y-%m-%d))"
           git push
+          echo "pushed=true" >> "$GITHUB_OUTPUT"
+      - name: Deploy the refresh to Vercel
+        # Vercel blocks Git deploys of commits whose author isn't on the Vercel team, which includes this bot's commits.
+        # A deploy hook (Vercel > Project > Settings > Git > Deploy Hooks, branch main) builds main regardless; store
+        # its URL as the repository secret VERCEL_DEPLOY_HOOK. Skipped when nothing was pushed or the secret isn't set.
+        if: steps.commit_and_push.outputs.pushed == 'true'
+        env:
+          HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
+        run: |
+          if [ -z "$HOOK" ]; then echo "::warning title=Vercel::VERCEL_DEPLOY_HOOK isn't set, so this refresh waits for the next merge to deploy."; exit 0; fi
+          curl -fsS -X POST "$HOOK" > /dev/null && echo "Vercel deploy started"
       - name: Email admins about problems
         if: always()
         env:

@@ -37,7 +37,7 @@ function validate(type, p = {}) {
 
 function describe(type, p = {}) {
   const g = p.gov && GOVS[p.gov] ? GOVS[p.gov][0] : null;
-  if (type === 'contract') return `New contracts and change orders over ${money(p.min)} for ${g || 'a government'}`;
+  if (type === 'contract') return `Contracts and change orders over ${money(p.min)} for ${g || 'a government'}, including ones on upcoming agendas`;
   if (type === 'vote') return `Recorded votes by ${p.member}`;
   if (type === 'keyword') return `Meetings and agenda items that mention “${p.keyword}”${g ? ` (${g})` : ''}`;
   if (type === 'campaign') return `New campaign finance reports for ${p.candidate}`;
@@ -47,6 +47,18 @@ function describe(type, p = {}) {
 // Board id from meetings.json ('lh', 'pc-cra', 'county-planning') -> government key.
 const govOfBoard = b => { const k = String(b || '').split('-')[0]; return GOVS[k] ? k : null; };
 const h = s => crypto.createHash('sha1').update(s).digest('hex').slice(0, 16);
+
+// Agenda items read from posted agendas (data/agendas/extract_agendas.py, dataset 'agenda-items').
+const AGENDA_SPEND = new Set(['contract', 'purchase', 'change_order']);
+const itemKey = (board, date, title) => `${String(board || '').split('-')[0]}|${String(date || '').slice(0, 10)}|${norm(title)}`;
+const govName = board => (govOfBoard(board) ? GOVS[govOfBoard(board)][0] : board || 'A board');
+function agendaHit(r, why) {
+  const num_ = r.item_number ? `Item ${r.item_number}: ` : '';
+  return {dedupe: 'ai:' + h(itemKey(r.board, r.meeting_date, r.title)), itemKeys: [itemKey(r.board, r.meeting_date, r.title)],
+    title: `${govName(r.board)} agenda, ${String(r.meeting_date || '').slice(0, 10)}: ${clip(r.title, 160)}`,
+    detail: [num_ && num_.slice(0, -2), r.amount != null ? money(r.amount) : null, (r.parties || []).slice(0, 2).join(', ') || null, why, r.summary ? clip(r.summary, 200) : null].filter(Boolean).join(' · '),
+    url: r.agenda_url || 'https://baycounty.me/meetings'};
+}
 
 // Does one event match one rule? Returns null, or {dedupe, title, detail, url} for the email.
 // ev: {dataset, record_hash, government_key, record}.
@@ -59,6 +71,11 @@ function match(rule, ev) {
       if (a === null || a < p.min) return null;
       return {dedupe: 'c:' + ev.record_hash, title: `${money(a)} contract: ${r.vendor || 'vendor not listed'}`, detail: [r.purpose, r.date].filter(Boolean).join(' · '), url: r.source_url};
     }
+    if (ev.dataset === 'agenda-items') {
+      const a = num(r.amount);
+      if (!AGENDA_SPEND.has(r.kind) || a === null || a < p.min) return null;
+      return agendaHit(r, 'on the agenda, not yet approved');
+    }
     if (ev.dataset === 'change-orders') {
       const a = num(r.change_amount);
       if (a === null || Math.abs(a) < p.min) return null;
@@ -70,6 +87,13 @@ function match(rule, ev) {
     if (ev.dataset !== 'member-votes' || norm(r.member) !== norm(p.member)) return null;
     return {dedupe: 'v:' + ev.record_hash, title: `${r.member} voted ${String(r.vote || '').toUpperCase() || '(not listed)'}: ${r.headline || 'vote'}`, detail: [r.board, r.date].filter(Boolean).join(' · '), url: r.source_url};
   }
+  if (rule.rule_type === 'keyword' && ev.dataset === 'agenda-items') {
+    if (p.gov && govOfBoard(r.board) !== p.gov) return null;
+    const kw = norm(p.keyword);
+    const fields = [r.title, r.summary, ...(r.parties || []), ...(r.addresses || [])].filter(Boolean);
+    if (!fields.some(t => norm(t).includes(kw))) return null;
+    return agendaHit(r, null);
+  }
   if (rule.rule_type === 'keyword') {
     if (ev.dataset !== 'meetings' || r.past || r.cancelled) return null;
     if (p.gov && govOfBoard(r.board) !== p.gov) return null;
@@ -78,7 +102,7 @@ function match(rule, ev) {
     const hits = [...new Set(texts.filter(t => (' ' + norm(t) + ' ').includes(' ' + kw + ' ') || norm(t).includes(kw)))];
     if (!hits.length) return null;
     const gname = govOfBoard(r.board) ? GOVS[govOfBoard(r.board)][0] : r.board;
-    return {dedupe: 'k:' + h(`${r.board}|${String(r.start || '').slice(0, 10)}|${hits.join('|')}`), title: `${gname}: ${r.title || 'meeting'} (${String(r.start || '').slice(0, 10)})`,
+    return {dedupe: 'k:' + h(`${r.board}|${String(r.start || '').slice(0, 10)}|${hits.join('|')}`), itemKeys: hits.map(t => itemKey(r.board, r.start, t)), title: `${gname}: ${r.title || 'meeting'} (${String(r.start || '').slice(0, 10)})`,
       detail: hits.filter(t => t !== r.title).slice(0, 3).map(t => clip(t, 240)).join(' · ') || 'The meeting title mentions it.', url: r.agenda_url || r.detail_url || 'https://baycounty.me/meetings'};
   }
   if (rule.rule_type === 'campaign') {
