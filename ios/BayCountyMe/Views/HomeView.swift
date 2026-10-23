@@ -138,6 +138,7 @@ struct HomeView: View {
             "glossary": .glossary, "vendors": .vendors, "people": .people, "moneymap": .moneyMap, "donors": .donorContracts,
             "updates": .updates, "about": .about, "cra": .cra, "myaddress": .myAddress, "contracts": .dataset("contracts"),
             "vendor": .vendor("roberts-and-roberts"), "person": .person("clair-pease"), "explore": .explore,
+            "votes": .dataset("votes"), "salaries": .dataset("salary-positions"),
         ]
         if let r = simple[arg] { path = [r]; return }
         if arg.hasPrefix("address:") {

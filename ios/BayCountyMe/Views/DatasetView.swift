@@ -2,6 +2,7 @@ import SwiftUI
 import BayCountyKit
 
 /// Any dataset on the site: search, filter, sort, total, map (when rows have locations) and record detail.
+/// Lists open on the current year (or fiscal year), newest first, with a menu to step back to earlier years.
 struct DatasetView: View {
     @Environment(AppStore.self) private var store
     let datasetID: String
@@ -19,7 +20,10 @@ struct DatasetView: View {
 
     @State private var query = ""
     @State private var filters: [String: String] = [:]
-    @State private var sort: Sort = .standard
+    @State private var sortChoice: Sort?
+    /// Year the list shows; nil means every year.
+    @State private var period: Period?
+    @State private var years = YearIndex()
     @State private var mode: Mode = .list
     @State private var path: Route?
 
@@ -33,16 +37,21 @@ struct DatasetView: View {
     private var info: DatasetInfo? { store.info(datasetID) }
     private var all: [Row] { store.rows[datasetID] ?? [] }
 
+    /// Newest first whenever the records carry dates.
+    private var sort: Sort { sortChoice ?? (years.periods.isEmpty ? .standard : .newest) }
+    private var sortBinding: Binding<Sort> { Binding(get: { sort }, set: { sortChoice = $0 }) }
+
     private var filtered: [Row] {
         let q = query.trimmingCharacters(in: .whitespaces)
         let rows = all.filter { row in
+            (period == nil || years.byRow[row.id] == period) &&
             filters.allSatisfy { key, value in row.string(key) == value || (row[key].map { Format.value($0, column: key) } == value) }
                 && store.matches(datasetID, row: row, query: q)
         }
         switch sort {
         case .standard: return rows
         case .amount: return rows.sorted { (spec.amount($0) ?? -.infinity) > (spec.amount($1) ?? -.infinity) }
-        case .newest: return rows.sorted { (spec.sortDate($0) ?? "") > (spec.sortDate($1) ?? "") }
+        case .newest: return rows.sorted { spec.newestKey($0) > spec.newestKey($1) }
         case .name: return rows.sorted { spec.title($0).localizedCaseInsensitiveCompare(spec.title($1)) == .orderedAscending }
         }
     }
@@ -70,8 +79,9 @@ struct DatasetView: View {
             .navigationBarTitleDisplayMode(.inline)
             .searchable(text: $query, prompt: "Search \(info?.title.lowercased() ?? "records")")
             .toolbar { toolbar }
-            .task { await store.load(datasetID) }
-            .refreshable { await store.load(datasetID, force: true) }
+            .task { await store.load(datasetID); indexYears() }
+            .refreshable { await store.load(datasetID, force: true); indexYears() }
+            .onChange(of: all.count) { indexYears() }
             .navigationDestination(item: $path) { route in
                 if case .record(let id, let rowID) = route { RecordDetailView(datasetID: id, rowID: rowID) }
             }
@@ -109,15 +119,63 @@ struct DatasetView: View {
                 }
             }
             .listStyle(.plain)
-            .overlay { if filtered.isEmpty { ContentUnavailableView.search(text: query) } }
+            .overlay {
+                if filtered.isEmpty {
+                    if query.isEmpty, let p = period {
+                        ContentUnavailableView {
+                            Label("Nothing from \(p.label)", systemImage: "calendar")
+                        } description: {
+                            Text("No records match for this year.")
+                        } actions: {
+                            Button("Show all years") { period = nil }.buttonStyle(.bordered)
+                        }
+                    } else {
+                        ContentUnavailableView.search(text: query)
+                    }
+                }
+            }
         }
+    }
+
+    /// Works out each record's year once per load, and opens the list on the default year the first time.
+    private func indexYears() {
+        guard !all.isEmpty, years.count != all.count else { return }
+        let idx = Period.Index(all)
+        var map = [Int: Period]()
+        for r in all { if let p = idx.period(r) { map[r.id] = p } }
+        let first = years.count == 0
+        years = YearIndex(periods: idx.periods, byRow: map, count: all.count)
+        if first { period = idx.defaultPeriod() }
+    }
+
+    private var yearMenu: some View {
+        Menu {
+            Picker("Year", selection: $period) {
+                Text("All years").tag(Period?.none)
+                ForEach(years.periods) { p in Text(p.label).tag(Period?.some(p)) }
+            }
+        } label: {
+            HStack(spacing: 4) {
+                Text(period?.label ?? "All years")
+                Image(systemName: "chevron.up.chevron.down").font(.caption2.weight(.semibold))
+            }
+            .font(.subheadline.weight(.semibold))
+            .padding(.horizontal, 10).padding(.vertical, 5)
+            .foregroundStyle(Brand.navy)
+            .background(Brand.navy.opacity(0.12), in: Capsule())
+        }
+        .accessibilityLabel("Year: \(period?.label ?? "All years")")
+        .accessibilityHint("Shows records from another year")
     }
 
     private var summary: some View {
         let rows = filtered
         let total = spec.summable ? rows.compactMap { spec.amount($0) }.reduce(0, +) : nil
         return HStack {
-            Text("\(Format.number(Double(rows.count))) of \(Format.number(Double(all.count))) records")
+            if years.periods.count > 1 { yearMenu }
+            Text(period == nil
+                 ? "\(Format.number(Double(rows.count))) of \(Format.number(Double(all.count))) records"
+                 : "\(Format.number(Double(rows.count))) records · \(Format.number(Double(all.count))) in all")
             Spacer()
             if let total, total > 0 { Text("\(Format.compactMoney(total)) total").monospacedDigit() }
         }
@@ -158,11 +216,11 @@ struct DatasetView: View {
                 .frame(width: 110)
             }
             Menu {
-                Picker("Sort", selection: $sort) {
+                Picker("Sort", selection: sortBinding) {
                     ForEach(Sort.allCases.filter { s in
                         switch s {
                         case .amount: !spec.amountKeys.isEmpty
-                        case .newest: !spec.dateKeys.isEmpty
+                        case .newest: !years.periods.isEmpty
                         default: true
                         }
                     }) { Text($0.rawValue).tag($0) }
@@ -323,4 +381,11 @@ struct RollCall: Hashable {
             return RollCall(name: n, pid: o["person_id"]?.stringValue, vote: o["vote"]?.stringValue)
         }
     }
+}
+
+/// Each record's year for one list, worked out once per load.
+struct YearIndex {
+    var periods: [Period] = []
+    var byRow: [Int: Period] = [:]
+    var count = 0
 }
