@@ -73,14 +73,14 @@
   </div>
   <div class="crn-main">
     <div class="crn-view">
-      <section id="v-network"><div class="crn-vh"><h2>Who the agencies paid</h2><div class="crn-legend">
+      <section id="v-network"><div class="crn-vh"><h2>Who the agencies paid</h2><div class="crn-fsbar"><span class="crn-fsonly"><button type="button" class="crn-chip crn-fsv" data-v="network">Network</button><button type="button" class="crn-chip crn-fsv" data-v="map">Map</button></span><button type="button" class="crn-btn crn-fs" aria-pressed="false">Full screen</button></div><div class="crn-legend">
         <span><i style="background:var(--navy)"></i>Agency</span><span><i style="background:var(--blue)"></i>Business or nonprofit</span>
         <span><i style="background:var(--muted)"></i>Government or bondholders</span><span><i style="background:var(--amber)"></i>Property owner</span>
         <span><i class="hollow"></i>Not named</span><span><i style="background:var(--salmon)"></i>Elected official</span>
         <span><i class="ln dash"></i>Shared project, address or sub</span><span><i class="ln red"></i>Campaign gift</span></div></div>
-        <div class="crn-wrap"><svg id="crnGraph" role="img" aria-label="Network of CRAs, the payees they paid, and business campaign gifts to CRA board members"></svg><div class="crn-tip" id="crnTip" hidden></div></div>
-        <p class="crn-note">Drag to rearrange, pinch or scroll to zoom. Names show on larger and connected nodes; tap any node for its record.</p></section>
-      <section id="v-map" hidden><div class="crn-vh"><h2>Where the money went</h2><div class="crn-legend" id="crnMapLegend"></div></div>
+        <div class="crn-wrap"><svg id="crnGraph" role="img" aria-label="Network of CRAs, the payees they paid, and business campaign gifts to CRA board members"></svg><div class="crn-zoom"><button type="button" id="crnGin" aria-label="Zoom in">+</button><button type="button" id="crnGout" aria-label="Zoom out">−</button><button type="button" id="crnGreset">Reset</button></div><div class="crn-tip" id="crnTip" hidden></div></div>
+        <p class="crn-note">Drag a circle to move it, drag the background to pan, and scroll, pinch or use the buttons to zoom. Names show on larger and connected nodes; tap any node for its record.</p></section>
+      <section id="v-map" hidden><div class="crn-vh"><h2>Where the money went</h2><div class="crn-fsbar"><span class="crn-fsonly"><button type="button" class="crn-chip crn-fsv" data-v="network">Network</button><button type="button" class="crn-chip crn-fsv" data-v="map">Map</button></span><button type="button" class="crn-btn crn-fs" aria-pressed="false">Full screen</button></div><div class="crn-legend" id="crnMapLegend"></div></div>
         <div class="crn-wrap"><svg id="crnMap" role="img" aria-label="Map of CRA spending by location"></svg><div class="crn-zoom"><button type="button" id="crnZin" aria-label="Zoom in">+</button><button type="button" id="crnZout" aria-label="Zoom out">−</button><button type="button" id="crnZreset">Reset</button></div><div class="crn-tip" id="crnTip2" hidden></div></div>
         <p class="crn-note">Scroll or pinch to zoom, drag to pan. Circle area scales with dollars. Many records are placed at a district or corridor point rather than a street address. Select a payee to highlight its records.</p></section>
       <section id="v-payees" hidden><div class="crn-vh"><h2>Every payee, ranked</h2><span class="crn-note" id="crnPayCount"></span></div>
