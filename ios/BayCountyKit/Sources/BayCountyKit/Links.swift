@@ -27,12 +27,17 @@ public enum RecordLinks {
         row.strings("vote_ids") + (row.string("vote_id").map { [$0] } ?? [])
     }
 
-    /// Rows in each dataset that name this company, in the order of `vendorDatasets`.
+    /// Rows in each dataset that name this company, in the order of `vendorDatasets`, newest first.
     public static func records(forVendor id: String, in rows: [String: [Row]]) -> [(dataset: String, rows: [Row])] {
         vendorDatasets.compactMap { ds in
-            let hits = (rows[ds] ?? []).filter { vendorIDs($0).contains(id) }
+            let hits = newestFirst((rows[ds] ?? []).filter { vendorIDs($0).contains(id) }, ds)
             return hits.isEmpty ? nil : (ds, hits)
         }
+    }
+
+    static func newestFirst(_ rows: [Row], _ dataset: String) -> [Row] {
+        let spec = DatasetSpec.for(dataset)
+        return rows.sorted { spec.newestKey($0) > spec.newestKey($1) }
     }
 
     /// Recorded votes that approved this company's contracts, change orders or emergency purchases.
@@ -48,7 +53,7 @@ public enum RecordLinks {
 
     public static func records(forPerson id: String, in rows: [String: [Row]]) -> [(dataset: String, rows: [Row])] {
         personDatasets.compactMap { ds in
-            let hits = (rows[ds] ?? []).filter { personIDs($0).contains(id) }
+            let hits = newestFirst((rows[ds] ?? []).filter { personIDs($0).contains(id) }, ds)
             return hits.isEmpty ? nil : (ds, hits)
         }
     }
