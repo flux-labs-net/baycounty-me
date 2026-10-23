@@ -29,9 +29,11 @@ struct GovernmentsView: View {
                     }
                 }
                 Section {
+                    NavigationLink(value: Route.people) { Label("People: officials, leaders and candidates", systemImage: "person.3") }
+                    NavigationLink(value: Route.dataset("officials-pay")) { Label("What officials are paid", systemImage: "person.text.rectangle") }
                     WebLink(title: "Compare governments side by side", symbol: "chart.bar.xaxis",
                             url: URL(string: "https://baycounty.me/compare"))
-                    WebLink(title: "Who runs Bay County", symbol: "person.3", url: URL(string: "https://baycounty.me/who-runs-bay-county"))
+                    WebLink(title: "Who runs Bay County", symbol: "building.columns", url: URL(string: "https://baycounty.me/who-runs-bay-county"))
                 }
             }
             .navigationTitle("Governments")
@@ -90,6 +92,7 @@ struct GovernmentDetailView: View {
                 }
 
                 Section {
+                    NavigationLink(value: Route.taxCalculator()) { Label("Budget and where the money comes from", systemImage: "chart.pie") }
                     WebLink(title: "Full profile on BayCounty.me", url: g.pageURL)
                 }
             }

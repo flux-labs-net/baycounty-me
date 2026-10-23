@@ -21,7 +21,7 @@
   </url>
   <url>
     <loc>https://baycounty.me/developers</loc>
-    <lastmod>2026-10-21</lastmod>
+    <lastmod>2026-10-22</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/elections</loc>
@@ -157,6 +157,10 @@
   <url>
     <loc>https://baycounty.me/open-data</loc>
     <lastmod>2026-10-21</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/privacy</loc>
+    <lastmod>2026-10-22</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/public-money/amendment-3</loc>
@@ -796,7 +800,7 @@
   </url>
   <url>
     <loc>https://baycounty.me/updates</loc>
-    <lastmod>2026-10-21</lastmod>
+    <lastmod>2026-10-22</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/who-runs-bay-county</loc>

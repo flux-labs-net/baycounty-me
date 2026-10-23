@@ -22,7 +22,8 @@ public struct DatasetSpec: Sendable {
     public let amountKeys: [String]
     public let dateKeys: [String]
     public let badgeKey: String?
-    /// True when adding up the amount column is meaningful (no overlapping rows).
+    /// True when adding up the amount column is meaningful. Off everywhere for now: the site warns that contracts,
+    /// change orders, FEMA projects and payments can overlap, so the app shows counts, not totals (CRA has its own rules).
     public let summable: Bool
     /// Columns that usually make good filters, in order.
     public let filterKeys: [String]
@@ -61,15 +62,15 @@ public struct DatasetSpec: Sendable {
                                     filters: ["government", "category", "status"], page: "public-money/sales-tax-projects"),
         "fema-michael-projects": .init(.whereItGoes, "hurricane", title: ["title"], subtitle: ["applicant", "category"],
                                        amount: ["federal_share", "eligible_amount"], date: ["last_obligated", "first_obligated"],
-                                       badge: "status", summable: true, filters: ["applicant", "status", "category"], page: "public-money/hurricane-michael"),
+                                       badge: "status", filters: ["applicant", "status", "category"], page: "public-money/hurricane-michael"),
         // Accountability
         "contracts": .init(.accountability, "signature", title: ["vendor"], subtitle: ["government", "date"], detail: "purpose",
-                           amount: ["amount"], date: ["date"], summable: true, filters: ["government", "method"], page: "public-money/contracts"),
+                           amount: ["amount"], date: ["date"], filters: ["government", "method"], page: "public-money/contracts"),
         "change-orders": .init(.accountability, "arrow.triangle.2.circlepath", title: ["project"], subtitle: ["vendor", "date"],
-                               detail: "reason", amount: ["change_amount"], date: ["date"], summable: true,
+                               detail: "reason", amount: ["change_amount"], date: ["date"],
                                filters: ["government"], page: "public-money/contracts"),
         "emergency-purchases": .init(.accountability, "exclamationmark.triangle", title: ["purpose"], subtitle: ["vendor", "date"],
-                                     detail: "basis", amount: ["amount"], date: ["date"], summable: true,
+                                     detail: "basis", amount: ["amount"], date: ["date"],
                                      filters: ["government"], page: "public-money/contracts"),
         "votes": .init(.accountability, "hand.raised", title: ["headline"], subtitle: ["board", "date"], detail: "summary",
                        amount: ["amount"], date: ["date"], badge: "tally", filters: ["board", "category", "outcome", "split"],
@@ -77,7 +78,7 @@ public struct DatasetSpec: Sendable {
         "member-votes": .init(.accountability, "person.crop.square", title: ["headline"], subtitle: ["member", "date"],
                               date: ["date"], badge: "vote", filters: ["board", "member", "vote"], page: "public-money/votes"),
         "vendor-payments": .init(.accountability, "dollarsign.circle", title: ["vendor"], subtitle: ["government", "payments"],
-                                 amount: ["total"], summable: true, filters: ["government"], page: "public-money/who-gets-paid"),
+                                 amount: ["total"], filters: ["government"], page: "public-money/who-gets-paid"),
         "debt": .init(.accountability, "creditcard", title: ["government"], subtitle: ["fy"], detail: "total_debt_note",
                       amount: ["total_debt"], page: "public-money/debt"),
         "bonds": .init(.accountability, "banknote", title: ["series"], subtitle: ["issuer", "dated_date"], detail: "purpose",
@@ -100,7 +101,7 @@ public struct DatasetSpec: Sendable {
         "campaign-finance": .init(.elections, "chart.bar", title: ["official"], subtitle: ["office", "election"],
                                   amount: ["total_raised"], filters: ["gov", "election"], page: "public-money/campaign-money"),
         "campaign-contributions-2026": .init(.elections, "envelope", title: ["contributor"], subtitle: ["candidate", "date"],
-                                             amount: ["amount"], date: ["date"], badge: "contributor_type", summable: true,
+                                             amount: ["amount"], date: ["date"], badge: "contributor_type",
                                              filters: ["candidate", "contributor_type"], page: "public-money/campaign-money"),
     ]
 

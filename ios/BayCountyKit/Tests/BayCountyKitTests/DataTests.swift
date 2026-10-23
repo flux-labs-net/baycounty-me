@@ -132,3 +132,34 @@ final class DataTests: XCTestCase {
         XCTAssertEqual(f3, .cached)
     }
 }
+
+final class LinkTests: XCTestCase {
+    func rows(_ ids: [String]) throws -> [String: [Row]] {
+        var out = [String: [Row]]()
+        for id in ids { out[id] = try Row.decodeList(Data(contentsOf: DataTests.downloads.appendingPathComponent("\(id).json"))) }
+        return out
+    }
+
+    func testVendorLinksFindContractsAndVotes() throws {
+        let all = try rows(RecordLinks.vendorDatasets + ["votes"])
+        let recs = RecordLinks.records(forVendor: "roberts-and-roberts", in: all)
+        XCTAssertTrue(recs.contains { $0.dataset == "contracts" }, "\(recs.map(\.dataset))")
+        let votes = RecordLinks.votes(forVendor: "roberts-and-roberts", in: all)
+        XCTAssertFalse(votes.isEmpty)
+        XCTAssertTrue(votes.allSatisfy { $0.string("vote_id") != nil })
+    }
+
+    func testPersonLinksFindVotesAndPay() throws {
+        let all = try rows(RecordLinks.personDatasets)
+        let recs = RecordLinks.records(forPerson: "clair-pease", in: all)
+        let ds = Set(recs.map(\.dataset))
+        XCTAssertTrue(ds.contains("member-votes"), "\(ds)")
+        XCTAssertTrue(ds.contains("votes"), "\(ds)")
+        let mv = try XCTUnwrap(recs.first { $0.dataset == "member-votes" }?.rows)
+        let t = RecordLinks.tally(mv)
+        XCTAssertEqual(t.total, mv.count)
+        XCTAssertGreaterThan(t.yes, 0)
+        let v = try XCTUnwrap(recs.first { $0.dataset == "votes" }?.rows.first)
+        XCTAssertNotNil(RecordLinks.vote(of: "clair-pease", in: v))
+    }
+}

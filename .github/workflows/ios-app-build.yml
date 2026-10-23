@@ -1,0 +1,24 @@
+name: iOS app build
+on:
+  push:
+    paths: ["ios/**", ".github/workflows/ios-app-build.yml"]
+  pull_request:
+    paths: ["ios/**", ".github/workflows/ios-app-build.yml"]
+jobs:
+  build:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install XcodeGen
+        run: brew install xcodegen
+      - name: Generate the Xcode project
+        working-directory: ios
+        run: xcodegen
+      - name: Build the app (simulator, unsigned)
+        working-directory: ios
+        run: |
+          set -o pipefail
+          xcodebuild -project BayCountyMe.xcodeproj -scheme BayCountyMe \
+            -destination 'generic/platform=iOS Simulator' \
+            CODE_SIGNING_ALLOWED=NO build | tee build.log | grep -E "error:|warning: .*(deprecated|unreachable)|BUILD (SUCCEEDED|FAILED)" || true
+          grep -q "BUILD SUCCEEDED" build.log

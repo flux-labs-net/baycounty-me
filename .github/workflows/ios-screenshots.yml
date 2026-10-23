@@ -1,0 +1,41 @@
+name: iOS screenshots
+# Runs the app in the iPhone simulator and screenshots each main screen, so changes can be checked by eye.
+on:
+  workflow_dispatch:
+  pull_request:
+    paths: ["ios/BayCountyMe/**"]
+jobs:
+  screenshots:
+    runs-on: macos-15
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - run: brew install xcodegen
+      - name: Build for the simulator
+        working-directory: ios
+        run: |
+          xcodegen
+          xcodebuild -project BayCountyMe.xcodeproj -scheme BayCountyMe -sdk iphonesimulator \
+            -destination 'generic/platform=iOS Simulator' -derivedDataPath build CODE_SIGNING_ALLOWED=NO build -quiet
+      - name: Screenshot each screen
+        working-directory: ios
+        run: |
+          DEV=$(xcrun simctl list devices available | grep -E "iPhone 1[5-9] Pro \(" | head -1 | grep -oE "[0-9A-F-]{36}")
+          xcrun simctl boot "$DEV"; xcrun simctl bootstatus "$DEV" -b
+          xcrun simctl status_bar "$DEV" override --time 9:41 --batteryState charged --batteryLevel 100 || true
+          APP=$(find build/Build/Products -name "BayCountyMe.app" -maxdepth 3 | head -1)
+          xcrun simctl install "$DEV" "$APP"
+          mkdir -p shots
+          for s in home "address:825 Ohio Ave" tax amendment3 glossary vendors vendor people person moneymap donors contracts cra updates; do
+            xcrun simctl terminate "$DEV" me.baycounty.app 2>/dev/null || true
+            if [ "$s" = home ]; then xcrun simctl launch "$DEV" me.baycounty.app; else xcrun simctl launch "$DEV" me.baycounty.app -screen "$s"; fi
+            sleep 14
+            xcrun simctl io "$DEV" screenshot "shots/$(echo "$s" | tr ': ' '__').png"
+          done
+          xcrun simctl ui "$DEV" appearance dark
+          xcrun simctl terminate "$DEV" me.baycounty.app; xcrun simctl launch "$DEV" me.baycounty.app -screen tax; sleep 12
+          xcrun simctl io "$DEV" screenshot shots/tax_dark.png
+      - uses: actions/upload-artifact@v4
+        with:
+          name: screenshots
+          path: ios/shots

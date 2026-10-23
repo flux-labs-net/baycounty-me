@@ -13,18 +13,21 @@ struct RootView: View {
             GovernmentsView()
                 .tabItem { Label("Governments", systemImage: "building.columns") }
                 .tag(AppStore.Tab.governments)
+            MoneyView()
+                .tabItem { Label("Money", systemImage: "dollarsign.circle") }
+                .tag(AppStore.Tab.money)
             MeetingsView()
                 .tabItem { Label("Meetings", systemImage: "calendar") }
                 .tag(AppStore.Tab.meetings)
-            ExploreView()
-                .tabItem { Label("Explore", systemImage: "square.grid.2x2") }
-                .tag(AppStore.Tab.explore)
             SearchView()
                 .tabItem { Label("Search", systemImage: "magnifyingglass") }
                 .tag(AppStore.Tab.search)
         }
         .sheet(item: $store.presentedPage) { page in
             SafariView(url: page.url).ignoresSafeArea()
+        }
+        .sheet(item: $store.presentedTerm) { term in
+            TermSheet(term: term)
         }
     }
 }

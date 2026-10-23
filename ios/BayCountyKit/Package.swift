@@ -9,6 +9,6 @@ let package = Package(
     products: [.library(name: "BayCountyKit", targets: ["BayCountyKit"])],
     targets: [
         .target(name: "BayCountyKit"),
-        .testTarget(name: "BayCountyKitTests", dependencies: ["BayCountyKit"]),
+        .testTarget(name: "BayCountyKitTests", dependencies: ["BayCountyKit"], resources: [.copy("Fixtures")]),
     ]
 )

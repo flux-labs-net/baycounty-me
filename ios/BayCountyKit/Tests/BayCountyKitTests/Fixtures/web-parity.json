@@ -1,0 +1,2115 @@
+{
+ "tax": [
+  {
+   "d": "Panama City",
+   "v": 0,
+   "h": true,
+   "total": 0,
+   "trend": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "d": "Panama City",
+   "v": 0,
+   "h": false,
+   "total": 0,
+   "trend": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "d": "Panama City",
+   "v": 40000,
+   "h": true,
+   "total": 236.907,
+   "trend": [
+    234.52800000000002,
+    231.1875,
+    224.49300000000002,
+    239.13750000000002,
+    236.5335,
+    236.907
+   ]
+  },
+  {
+   "d": "Panama City",
+   "v": 40000,
+   "h": false,
+   "total": 631.7520000000001,
+   "trend": [
+    625.4080000000001,
+    616.5,
+    598.648,
+    637.7,
+    630.7560000000001,
+    631.7520000000001
+   ]
+  },
+  {
+   "d": "Panama City",
+   "v": 180000,
+   "h": true,
+   "total": 2179.0691904,
+   "trend": [
+    2181.776,
+    2149.7999999999997,
+    2083.206,
+    2209.6,
+    2182.732,
+    2179.0691904
+   ]
+  },
+  {
+   "d": "Panama City",
+   "v": 180000,
+   "h": false,
+   "total": 2842.884,
+   "trend": [
+    2814.336,
+    2774.25,
+    2693.916,
+    2869.65,
+    2838.402,
+    2842.884
+   ]
+  },
+  {
+   "d": "Panama City",
+   "v": 425000,
+   "h": true,
+   "total": 6048.550190399999,
+   "trend": [
+    6012.4,
+    5925.8625,
+    5749.924999999999,
+    6115.512499999999,
+    6046.112499999999,
+    6048.550190399999
+   ]
+  },
+  {
+   "d": "Panama City",
+   "v": 425000,
+   "h": false,
+   "total": 6712.365,
+   "trend": [
+    6644.959999999999,
+    6550.3125,
+    6360.635,
+    6775.5625,
+    6701.782500000001,
+    6712.365
+   ]
+  },
+  {
+   "d": "Panama City",
+   "v": 2500000,
+   "h": true,
+   "total": 38820.6851904,
+   "trend": [
+    38455.44,
+    37906.799999999996,
+    36804.79,
+    39196.200000000004,
+    38766.58,
+    38820.6851904
+   ]
+  },
+  {
+   "d": "Panama City",
+   "v": 2500000,
+   "h": false,
+   "total": 39484.5,
+   "trend": [
+    39088,
+    38531.25,
+    37415.5,
+    39856.25,
+    39422.25,
+    39484.5
+   ]
+  },
+  {
+   "d": "Panama City - Downtown DIB",
+   "v": 0,
+   "h": true,
+   "total": 0,
+   "trend": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "d": "Panama City - Downtown DIB",
+   "v": 0,
+   "h": false,
+   "total": 0,
+   "trend": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "d": "Panama City - Downtown DIB",
+   "v": 40000,
+   "h": true,
+   "total": 281.90700000000004,
+   "trend": [
+    279.528,
+    276.1875,
+    269.49300000000005,
+    284.13750000000005,
+    281.5335,
+    281.90700000000004
+   ]
+  },
+  {
+   "d": "Panama City - Downtown DIB",
+   "v": 40000,
+   "h": false,
+   "total": 751.7520000000001,
+   "trend": [
+    745.4080000000001,
+    736.5,
+    718.648,
+    757.7,
+    750.7560000000001,
+    751.7520000000001
+   ]
+  },
+  {
+   "d": "Panama City - Downtown DIB",
+   "v": 180000,
+   "h": true,
+   "total": 2566.9031904,
+   "trend": [
+    2571.776,
+    2539.7999999999997,
+    2473.206,
+    2599.6,
+    2572.732,
+    2566.9031904
+   ]
+  },
+  {
+   "d": "Panama City - Downtown DIB",
+   "v": 180000,
+   "h": false,
+   "total": 3382.884,
+   "trend": [
+    3354.336,
+    3314.25,
+    3233.916,
+    3409.65,
+    3378.402,
+    3382.884
+   ]
+  },
+  {
+   "d": "Panama City - Downtown DIB",
+   "v": 425000,
+   "h": true,
+   "total": 7171.384190399999,
+   "trend": [
+    7137.4,
+    7050.8625,
+    6874.924999999999,
+    7240.512499999999,
+    7171.112499999999,
+    7171.384190399999
+   ]
+  },
+  {
+   "d": "Panama City - Downtown DIB",
+   "v": 425000,
+   "h": false,
+   "total": 7987.365,
+   "trend": [
+    7919.959999999999,
+    7825.3125,
+    7635.635,
+    8050.5625,
+    7976.782500000001,
+    7987.365
+   ]
+  },
+  {
+   "d": "Panama City - Downtown DIB",
+   "v": 2500000,
+   "h": true,
+   "total": 46168.519190399995,
+   "trend": [
+    45805.44,
+    45256.799999999996,
+    44154.79,
+    46546.200000000004,
+    46116.58,
+    46168.519190399995
+   ]
+  },
+  {
+   "d": "Panama City - Downtown DIB",
+   "v": 2500000,
+   "h": false,
+   "total": 46984.5,
+   "trend": [
+    46588,
+    46031.25,
+    44915.5,
+    47356.25,
+    46922.25,
+    46984.5
+   ]
+  },
+  {
+   "d": "Panama City Beach",
+   "v": 0,
+   "h": true,
+   "total": 0,
+   "trend": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "d": "Panama City Beach",
+   "v": 0,
+   "h": false,
+   "total": 0,
+   "trend": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "d": "Panama City Beach",
+   "v": 40000,
+   "h": true,
+   "total": 163.7085,
+   "trend": [
+    161.7795,
+    159.18900000000002,
+    152.7945,
+    166.839,
+    163.635,
+    163.7085
+   ]
+  },
+  {
+   "d": "Panama City Beach",
+   "v": 40000,
+   "h": false,
+   "total": 436.556,
+   "trend": [
+    431.4120000000001,
+    424.504,
+    407.452,
+    444.904,
+    436.36,
+    436.556
+   ]
+  },
+  {
+   "d": "Panama City Beach",
+   "v": 180000,
+   "h": true,
+   "total": 1548.2054782000002,
+   "trend": [
+    1551.289,
+    1525.8129999999999,
+    1461.819,
+    1583.013,
+    1550.9450000000002,
+    1548.2054782000002
+   ]
+  },
+  {
+   "d": "Panama City Beach",
+   "v": 180000,
+   "h": false,
+   "total": 1964.502,
+   "trend": [
+    1941.3539999999998,
+    1910.268,
+    1833.5339999999999,
+    2002.0679999999998,
+    1963.62,
+    1964.502
+   ]
+  },
+  {
+   "d": "Panama City Beach",
+   "v": 425000,
+   "h": true,
+   "total": 4222.110978199999,
+   "trend": [
+    4193.6875,
+    4125.9,
+    3957.4624999999996,
+    4308.049999999999,
+    4223.650000000001,
+    4222.110978199999
+   ]
+  },
+  {
+   "d": "Panama City Beach",
+   "v": 425000,
+   "h": false,
+   "total": 4638.4075,
+   "trend": [
+    4583.7525,
+    4510.3550000000005,
+    4329.177500000001,
+    4727.105,
+    4636.325000000001,
+    4638.4075
+   ]
+  },
+  {
+   "d": "Panama City Beach",
+   "v": 2500000,
+   "h": true,
+   "total": 26868.4534782,
+   "trend": [
+    26573.185,
+    26147.045,
+    25094.035,
+    27387.445000000003,
+    26859.825,
+    26868.4534782
+   ]
+  },
+  {
+   "d": "Panama City Beach",
+   "v": 2500000,
+   "h": false,
+   "total": 27284.75,
+   "trend": [
+    26963.25,
+    26531.5,
+    25465.75,
+    27806.5,
+    27272.5,
+    27284.75
+   ]
+  },
+  {
+   "d": "Lynn Haven",
+   "v": 0,
+   "h": true,
+   "total": 0,
+   "trend": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "d": "Lynn Haven",
+   "v": 0,
+   "h": false,
+   "total": 0,
+   "trend": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "d": "Lynn Haven",
+   "v": 40000,
+   "h": true,
+   "total": 225.6585,
+   "trend": [
+    224.0295,
+    219.18900000000002,
+    213.99450000000002,
+    227.139,
+    225.285,
+    225.6585
+   ]
+  },
+  {
+   "d": "Lynn Haven",
+   "v": 40000,
+   "h": false,
+   "total": 601.7560000000001,
+   "trend": [
+    597.412,
+    584.504,
+    570.652,
+    605.704,
+    600.76,
+    601.7560000000001
+   ]
+  },
+  {
+   "d": "Lynn Haven",
+   "v": 180000,
+   "h": true,
+   "total": 2082.1236182000002,
+   "trend": [
+    2090.7889999999998,
+    2045.8129999999999,
+    1992.219,
+    2105.613,
+    2085.245,
+    2082.1236182000002
+   ]
+  },
+  {
+   "d": "Lynn Haven",
+   "v": 180000,
+   "h": false,
+   "total": 2707.902,
+   "trend": [
+    2688.354,
+    2630.268,
+    2567.9339999999997,
+    2725.668,
+    2703.42,
+    2707.902
+   ]
+  },
+  {
+   "d": "Lynn Haven",
+   "v": 425000,
+   "h": true,
+   "total": 5767.8791181999995,
+   "trend": [
+    5749.9375,
+    5625.9,
+    5487.4625,
+    5815.549999999999,
+    5764.9,
+    5767.8791181999995
+   ]
+  },
+  {
+   "d": "Lynn Haven",
+   "v": 425000,
+   "h": false,
+   "total": 6393.6575,
+   "trend": [
+    6347.5025,
+    6210.3550000000005,
+    6063.177500000001,
+    6435.605,
+    6383.075000000001,
+    6393.6575
+   ]
+  },
+  {
+   "d": "Lynn Haven",
+   "v": 2500000,
+   "h": true,
+   "total": 36983.9716182,
+   "trend": [
+    36740.685,
+    35947.045,
+    35090.035,
+    37236.44500000001,
+    36929.325,
+    36983.9716182
+   ]
+  },
+  {
+   "d": "Lynn Haven",
+   "v": 2500000,
+   "h": false,
+   "total": 37609.75,
+   "trend": [
+    37338.25,
+    36531.5,
+    35665.75,
+    37856.5,
+    37547.5,
+    37609.75
+   ]
+  },
+  {
+   "d": "Callaway",
+   "v": 0,
+   "h": true,
+   "total": 0,
+   "trend": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "d": "Callaway",
+   "v": 0,
+   "h": false,
+   "total": 0,
+   "trend": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "d": "Callaway",
+   "v": 40000,
+   "h": true,
+   "total": 205.4085,
+   "trend": [
+    200.7795,
+    198.93900000000002,
+    193.74450000000002,
+    208.389,
+    205.785,
+    205.4085
+   ]
+  },
+  {
+   "d": "Callaway",
+   "v": 40000,
+   "h": false,
+   "total": 547.7560000000001,
+   "trend": [
+    535.412,
+    530.504,
+    516.652,
+    555.704,
+    548.76,
+    547.7560000000001
+   ]
+  },
+  {
+   "d": "Callaway",
+   "v": 180000,
+   "h": true,
+   "total": 1907.5983182000002,
+   "trend": [
+    1889.289,
+    1870.3129999999999,
+    1816.719,
+    1943.1129999999998,
+    1916.2450000000001,
+    1907.5983182000002
+   ]
+  },
+  {
+   "d": "Callaway",
+   "v": 180000,
+   "h": false,
+   "total": 2464.902,
+   "trend": [
+    2409.354,
+    2387.268,
+    2324.934,
+    2500.668,
+    2469.42,
+    2464.902
+   ]
+  },
+  {
+   "d": "Callaway",
+   "v": 425000,
+   "h": true,
+   "total": 5262.6038182,
+   "trend": [
+    5168.6875,
+    5119.65,
+    4981.2125,
+    5346.799999999999,
+    5277.4,
+    5262.6038182
+   ]
+  },
+  {
+   "d": "Callaway",
+   "v": 425000,
+   "h": false,
+   "total": 5819.9075,
+   "trend": [
+    5688.7525,
+    5636.6050000000005,
+    5489.427500000001,
+    5904.355,
+    5830.575000000001,
+    5819.9075
+   ]
+  },
+  {
+   "d": "Callaway",
+   "v": 2500000,
+   "h": true,
+   "total": 33677.4463182,
+   "trend": [
+    32943.185,
+    32639.545,
+    31782.535,
+    34173.94500000001,
+    33744.325,
+    33677.4463182
+   ]
+  },
+  {
+   "d": "Callaway",
+   "v": 2500000,
+   "h": false,
+   "total": 34234.75,
+   "trend": [
+    33463.25,
+    33156.5,
+    32290.75,
+    34731.5,
+    34297.5,
+    34234.75
+   ]
+  },
+  {
+   "d": "Springfield",
+   "v": 0,
+   "h": true,
+   "total": 0,
+   "trend": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "d": "Springfield",
+   "v": 0,
+   "h": false,
+   "total": 0,
+   "trend": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "d": "Springfield",
+   "v": 40000,
+   "h": true,
+   "total": 237.88350000000003,
+   "trend": [
+    211.5045,
+    224.66400000000002,
+    225.46950000000004,
+    240.11400000000003,
+    237.51,
+    237.88350000000003
+   ]
+  },
+  {
+   "d": "Springfield",
+   "v": 40000,
+   "h": false,
+   "total": 634.356,
+   "trend": [
+    564.0120000000001,
+    599.104,
+    601.252,
+    640.3040000000001,
+    633.3600000000001,
+    634.356
+   ]
+  },
+  {
+   "d": "Springfield",
+   "v": 180000,
+   "h": true,
+   "total": 2187.4851882000003,
+   "trend": [
+    1982.239,
+    2093.263,
+    2091.669,
+    2218.063,
+    2191.195,
+    2187.4851882000003
+   ]
+  },
+  {
+   "d": "Springfield",
+   "v": 180000,
+   "h": false,
+   "total": 2854.602,
+   "trend": [
+    2538.0539999999996,
+    2695.968,
+    2705.634,
+    2881.3680000000004,
+    2850.12,
+    2854.602
+   ]
+  },
+  {
+   "d": "Springfield",
+   "v": 425000,
+   "h": true,
+   "total": 6072.9156882,
+   "trend": [
+    5436.8125,
+    5762.775,
+    5774.3375,
+    6139.924999999999,
+    6070.525,
+    6072.9156882
+   ]
+  },
+  {
+   "d": "Springfield",
+   "v": 425000,
+   "h": false,
+   "total": 6740.0325,
+   "trend": [
+    5992.6275,
+    6365.4800000000005,
+    6388.302500000001,
+    6803.23,
+    6729.450000000001,
+    6740.0325
+   ]
+  },
+  {
+   "d": "Springfield",
+   "v": 2500000,
+   "h": true,
+   "total": 38980.1331882,
+   "trend": [
+    34694.935,
+    36841.295,
+    36964.285,
+    39355.69500000001,
+    38926.075,
+    38980.1331882
+   ]
+  },
+  {
+   "d": "Springfield",
+   "v": 2500000,
+   "h": false,
+   "total": 39647.25,
+   "trend": [
+    35250.75,
+    37444,
+    37578.25,
+    40019,
+    39585,
+    39647.25
+   ]
+  },
+  {
+   "d": "Parker",
+   "v": 0,
+   "h": true,
+   "total": 0,
+   "trend": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "d": "Parker",
+   "v": 0,
+   "h": false,
+   "total": 0,
+   "trend": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "d": "Parker",
+   "v": 40000,
+   "h": true,
+   "total": 209.9085,
+   "trend": [
+    159.5295,
+    157.68900000000002,
+    152.49450000000002,
+    212.139,
+    209.535,
+    209.9085
+   ]
+  },
+  {
+   "d": "Parker",
+   "v": 40000,
+   "h": false,
+   "total": 559.7560000000001,
+   "trend": [
+    425.4120000000001,
+    420.504,
+    406.652,
+    565.704,
+    558.76,
+    559.7560000000001
+   ]
+  },
+  {
+   "d": "Parker",
+   "v": 180000,
+   "h": true,
+   "total": 1946.3817182000003,
+   "trend": [
+    1531.789,
+    1512.8129999999999,
+    1459.219,
+    1975.6129999999998,
+    1948.7450000000001,
+    1946.3817182000003
+   ]
+  },
+  {
+   "d": "Parker",
+   "v": 180000,
+   "h": false,
+   "total": 2518.902,
+   "trend": [
+    1914.3539999999998,
+    1892.268,
+    1829.934,
+    2545.668,
+    2514.42,
+    2518.902
+   ]
+  },
+  {
+   "d": "Parker",
+   "v": 425000,
+   "h": true,
+   "total": 5374.8872182,
+   "trend": [
+    4137.4375,
+    4088.4,
+    3949.9624999999996,
+    5440.549999999999,
+    5371.15,
+    5374.8872182
+   ]
+  },
+  {
+   "d": "Parker",
+   "v": 425000,
+   "h": false,
+   "total": 5947.4075,
+   "trend": [
+    4520.0025,
+    4467.8550000000005,
+    4320.677500000001,
+    6010.605,
+    5936.825000000001,
+    5947.4075
+   ]
+  },
+  {
+   "d": "Parker",
+   "v": 2500000,
+   "h": true,
+   "total": 34412.229718200004,
+   "trend": [
+    26205.685,
+    25902.045,
+    25045.035,
+    34786.44500000001,
+    34356.825,
+    34412.229718200004
+   ]
+  },
+  {
+   "d": "Parker",
+   "v": 2500000,
+   "h": false,
+   "total": 34984.75,
+   "trend": [
+    26588.25,
+    26281.5,
+    25415.75,
+    35356.5,
+    34922.5,
+    34984.75
+   ]
+  },
+  {
+   "d": "Mexico Beach",
+   "v": 0,
+   "h": true,
+   "total": 0,
+   "trend": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "d": "Mexico Beach",
+   "v": 0,
+   "h": false,
+   "total": 0,
+   "trend": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "d": "Mexico Beach",
+   "v": 40000,
+   "h": true,
+   "total": 243.6585,
+   "trend": [
+    279.5295,
+    262.689,
+    249.99450000000002,
+    257.13750000000005,
+    250.785,
+    243.6585
+   ]
+  },
+  {
+   "d": "Mexico Beach",
+   "v": 40000,
+   "h": false,
+   "total": 649.7560000000001,
+   "trend": [
+    745.412,
+    700.504,
+    666.652,
+    685.7,
+    668.76,
+    649.7560000000001
+   ]
+  },
+  {
+   "d": "Mexico Beach",
+   "v": 180000,
+   "h": true,
+   "total": 2237.2572182000004,
+   "trend": [
+    2571.7889999999998,
+    2422.813,
+    2304.219,
+    2365.6,
+    2306.245,
+    2237.2572182000004
+   ]
+  },
+  {
+   "d": "Mexico Beach",
+   "v": 180000,
+   "h": false,
+   "total": 2923.902,
+   "trend": [
+    3354.354,
+    3152.268,
+    2999.934,
+    3085.65,
+    3009.42,
+    2923.902
+   ]
+  },
+  {
+   "d": "Mexico Beach",
+   "v": 425000,
+   "h": true,
+   "total": 6217.0127182,
+   "trend": [
+    7137.4375,
+    6713.4,
+    6387.4625,
+    6565.512499999999,
+    6402.4,
+    6217.0127182
+   ]
+  },
+  {
+   "d": "Mexico Beach",
+   "v": 425000,
+   "h": false,
+   "total": 6903.6575,
+   "trend": [
+    7920.0025,
+    7442.8550000000005,
+    7083.177500000001,
+    7285.5625,
+    7105.575000000001,
+    6903.6575
+   ]
+  },
+  {
+   "d": "Mexico Beach",
+   "v": 2500000,
+   "h": true,
+   "total": 39923.1052182,
+   "trend": [
+    45805.685,
+    43052.045,
+    40970.035,
+    42136.200000000004,
+    41094.325,
+    39923.1052182
+   ]
+  },
+  {
+   "d": "Mexico Beach",
+   "v": 2500000,
+   "h": false,
+   "total": 40609.75,
+   "trend": [
+    46588.25,
+    43781.5,
+    41665.75,
+    42856.25,
+    41797.5,
+    40609.75
+   ]
+  },
+  {
+   "d": "unincorporated",
+   "v": 0,
+   "h": true,
+   "total": 0,
+   "trend": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "d": "unincorporated",
+   "v": 0,
+   "h": false,
+   "total": 0,
+   "trend": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "d": "unincorporated",
+   "v": 40000,
+   "h": true,
+   "total": 185.6085,
+   "trend": [
+    180.2295,
+    178.389,
+    173.1945,
+    187.839,
+    185.235,
+    185.6085
+   ]
+  },
+  {
+   "d": "unincorporated",
+   "v": 40000,
+   "h": false,
+   "total": 494.956,
+   "trend": [
+    480.612,
+    475.704,
+    461.852,
+    500.904,
+    493.96000000000004,
+    494.956
+   ]
+  },
+  {
+   "d": "unincorporated",
+   "v": 180000,
+   "h": true,
+   "total": 1736.9513582000002,
+   "trend": [
+    1711.189,
+    1692.213,
+    1638.6190000000001,
+    1765.013,
+    1738.1450000000002,
+    1736.9513582000002
+   ]
+  },
+  {
+   "d": "unincorporated",
+   "v": 180000,
+   "h": false,
+   "total": 2227.302,
+   "trend": [
+    2162.754,
+    2140.668,
+    2078.334,
+    2254.068,
+    2222.82,
+    2227.302
+   ]
+  },
+  {
+   "d": "unincorporated",
+   "v": 425000,
+   "h": true,
+   "total": 4768.5568582,
+   "trend": [
+    4654.9375,
+    4605.9,
+    4467.4625,
+    4833.049999999999,
+    4763.65,
+    4768.5568582
+   ]
+  },
+  {
+   "d": "unincorporated",
+   "v": 425000,
+   "h": false,
+   "total": 5258.907499999999,
+   "trend": [
+    5106.5025,
+    5054.355,
+    4907.1775,
+    5322.105,
+    5248.325,
+    5258.907499999999
+   ]
+  },
+  {
+   "d": "unincorporated",
+   "v": 2500000,
+   "h": true,
+   "total": 30444.399358199997,
+   "trend": [
+    29586.685,
+    29283.045,
+    28426.035,
+    30817.445,
+    30387.824999999997,
+    30444.399358199997
+   ]
+  },
+  {
+   "d": "unincorporated",
+   "v": 2500000,
+   "h": false,
+   "total": 30934.75,
+   "trend": [
+    30038.25,
+    29731.5,
+    28865.75,
+    31306.5,
+    30872.5,
+    30934.75
+   ]
+  },
+  {
+   "d": "unincorporated - beach area",
+   "v": 0,
+   "h": true,
+   "total": 0,
+   "trend": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "d": "unincorporated - beach area",
+   "v": 0,
+   "h": false,
+   "total": 0,
+   "trend": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "d": "unincorporated - beach area",
+   "v": 40000,
+   "h": true,
+   "total": 184.4085,
+   "trend": [
+    182.4795,
+    179.889,
+    173.49450000000002,
+    187.53900000000002,
+    184.335,
+    184.4085
+   ]
+  },
+  {
+   "d": "unincorporated - beach area",
+   "v": 40000,
+   "h": false,
+   "total": 491.75600000000003,
+   "trend": [
+    486.612,
+    479.704,
+    462.652,
+    500.10400000000004,
+    491.56000000000006,
+    491.75600000000003
+   ]
+  },
+  {
+   "d": "unincorporated - beach area",
+   "v": 180000,
+   "h": true,
+   "total": 1726.6091182000002,
+   "trend": [
+    1730.689,
+    1705.213,
+    1641.219,
+    1762.413,
+    1730.3450000000003,
+    1726.6091182000002
+   ]
+  },
+  {
+   "d": "unincorporated - beach area",
+   "v": 180000,
+   "h": false,
+   "total": 2212.902,
+   "trend": [
+    2189.754,
+    2158.668,
+    2081.9339999999997,
+    2250.4680000000003,
+    2212.02,
+    2212.902
+   ]
+  },
+  {
+   "d": "unincorporated - beach area",
+   "v": 425000,
+   "h": true,
+   "total": 4738.6146182,
+   "trend": [
+    4711.1875,
+    4643.4,
+    4474.9625,
+    4825.549999999999,
+    4741.15,
+    4738.6146182
+   ]
+  },
+  {
+   "d": "unincorporated - beach area",
+   "v": 425000,
+   "h": false,
+   "total": 5224.907499999999,
+   "trend": [
+    5170.2525,
+    5096.855,
+    4915.6775,
+    5313.605,
+    5222.825,
+    5224.907499999999
+   ]
+  },
+  {
+   "d": "unincorporated - beach area",
+   "v": 2500000,
+   "h": true,
+   "total": 30248.4571182,
+   "trend": [
+    29954.185,
+    29528.045,
+    28475.035,
+    30768.445,
+    30240.824999999997,
+    30248.4571182
+   ]
+  },
+  {
+   "d": "unincorporated - beach area",
+   "v": 2500000,
+   "h": false,
+   "total": 30734.75,
+   "trend": [
+    30413.25,
+    29981.5,
+    28915.75,
+    31256.5,
+    30722.5,
+    30734.75
+   ]
+  }
+ ],
+ "a3": [
+  {
+   "d": "Panama City",
+   "v": 60000,
+   "k": "home",
+   "totals": [
+    448.215,
+    186.795,
+    186.795
+   ]
+  },
+  {
+   "d": "Panama City",
+   "v": 60000,
+   "k": "new",
+   "totals": [
+    448.215,
+    291.363,
+    278.605704
+   ]
+  },
+  {
+   "d": "Panama City",
+   "v": 60000,
+   "k": "non",
+   "totals": [
+    947.628,
+    947.628,
+    947.628
+   ]
+  },
+  {
+   "d": "Panama City",
+   "v": 300000,
+   "k": "home",
+   "totals": [
+    4074.3251904,
+    3036.1950000000006,
+    1990.5150000000003
+   ]
+  },
+  {
+   "d": "Panama City",
+   "v": 300000,
+   "k": "new",
+   "totals": [
+    4074.3251904,
+    4081.875,
+    4069.1177040000002
+   ]
+  },
+  {
+   "d": "Panama City",
+   "v": 300000,
+   "k": "non",
+   "totals": [
+    4738.14,
+    4738.14,
+    4738.14
+   ]
+  },
+  {
+   "d": "Panama City",
+   "v": 900000,
+   "k": "home",
+   "totals": [
+    13550.6051904,
+    12512.474999999999,
+    11466.795
+   ]
+  },
+  {
+   "d": "Panama City",
+   "v": 900000,
+   "k": "new",
+   "totals": [
+    13550.6051904,
+    13558.154999999999,
+    13545.397703999999
+   ]
+  },
+  {
+   "d": "Panama City",
+   "v": 900000,
+   "k": "non",
+   "totals": [
+    14214.42,
+    14214.42,
+    14214.42
+   ]
+  },
+  {
+   "d": "Panama City - Downtown DIB",
+   "v": 60000,
+   "k": "home",
+   "totals": [
+    523.2149999999999,
+    186.795,
+    186.795
+   ]
+  },
+  {
+   "d": "Panama City - Downtown DIB",
+   "v": 60000,
+   "k": "new",
+   "totals": [
+    523.2149999999999,
+    321.363,
+    304.945704
+   ]
+  },
+  {
+   "d": "Panama City - Downtown DIB",
+   "v": 60000,
+   "k": "non",
+   "totals": [
+    1127.6280000000002,
+    1127.6280000000002,
+    1127.6280000000002
+   ]
+  },
+  {
+   "d": "Panama City - Downtown DIB",
+   "v": 300000,
+   "k": "home",
+   "totals": [
+    4822.1591904,
+    3486.1950000000006,
+    2140.5150000000003
+   ]
+  },
+  {
+   "d": "Panama City - Downtown DIB",
+   "v": 300000,
+   "k": "new",
+   "totals": [
+    4822.1591904,
+    4831.875,
+    4815.457704
+   ]
+  },
+  {
+   "d": "Panama City - Downtown DIB",
+   "v": 300000,
+   "k": "non",
+   "totals": [
+    5638.14,
+    5638.14,
+    5638.14
+   ]
+  },
+  {
+   "d": "Panama City - Downtown DIB",
+   "v": 900000,
+   "k": "home",
+   "totals": [
+    16098.4391904,
+    14762.474999999999,
+    13416.795
+   ]
+  },
+  {
+   "d": "Panama City - Downtown DIB",
+   "v": 900000,
+   "k": "new",
+   "totals": [
+    16098.4391904,
+    16108.154999999999,
+    16091.737704
+   ]
+  },
+  {
+   "d": "Panama City - Downtown DIB",
+   "v": 900000,
+   "k": "non",
+   "totals": [
+    16914.42,
+    16914.42,
+    16914.42
+   ]
+  },
+  {
+   "d": "Panama City Beach",
+   "v": 60000,
+   "k": "home",
+   "totals": [
+    326.2175,
+    186.795,
+    186.795
+   ]
+  },
+  {
+   "d": "Panama City Beach",
+   "v": 60000,
+   "k": "new",
+   "totals": [
+    326.2175,
+    242.564,
+    235.76018200000001
+   ]
+  },
+  {
+   "d": "Panama City Beach",
+   "v": 60000,
+   "k": "non",
+   "totals": [
+    654.834,
+    654.834,
+    654.834
+   ]
+  },
+  {
+   "d": "Panama City Beach",
+   "v": 300000,
+   "k": "home",
+   "totals": [
+    2857.8734781999997,
+    2304.2100000000005,
+    1746.5200000000002
+   ]
+  },
+  {
+   "d": "Panama City Beach",
+   "v": 300000,
+   "k": "new",
+   "totals": [
+    2857.8734781999997,
+    2861.9,
+    2855.0961819999998
+   ]
+  },
+  {
+   "d": "Panama City Beach",
+   "v": 300000,
+   "k": "non",
+   "totals": [
+    3274.1700000000005,
+    3274.1700000000005,
+    3274.1700000000005
+   ]
+  },
+  {
+   "d": "Panama City Beach",
+   "v": 900000,
+   "k": "home",
+   "totals": [
+    9406.2134782,
+    8852.55,
+    8294.86
+   ]
+  },
+  {
+   "d": "Panama City Beach",
+   "v": 900000,
+   "k": "new",
+   "totals": [
+    9406.2134782,
+    9410.24,
+    9403.436182
+   ]
+  },
+  {
+   "d": "Panama City Beach",
+   "v": 900000,
+   "k": "non",
+   "totals": [
+    9822.51,
+    9822.51,
+    9822.51
+   ]
+  },
+  {
+   "d": "Lynn Haven",
+   "v": 60000,
+   "k": "home",
+   "totals": [
+    429.4675,
+    186.795,
+    186.795
+   ]
+  },
+  {
+   "d": "Lynn Haven",
+   "v": 60000,
+   "k": "new",
+   "totals": [
+    429.4675,
+    283.86400000000003,
+    272.02158199999997
+   ]
+  },
+  {
+   "d": "Lynn Haven",
+   "v": 60000,
+   "k": "non",
+   "totals": [
+    902.634,
+    902.634,
+    902.634
+   ]
+  },
+  {
+   "d": "Lynn Haven",
+   "v": 300000,
+   "k": "home",
+   "totals": [
+    3887.3916182,
+    2923.7100000000005,
+    1953.0200000000002
+   ]
+  },
+  {
+   "d": "Lynn Haven",
+   "v": 300000,
+   "k": "new",
+   "totals": [
+    3887.3916182,
+    3894.4,
+    3882.5575820000004
+   ]
+  },
+  {
+   "d": "Lynn Haven",
+   "v": 300000,
+   "k": "non",
+   "totals": [
+    4513.17,
+    4513.17,
+    4513.17
+   ]
+  },
+  {
+   "d": "Lynn Haven",
+   "v": 900000,
+   "k": "home",
+   "totals": [
+    12913.7316182,
+    11950.05,
+    10979.36
+   ]
+  },
+  {
+   "d": "Lynn Haven",
+   "v": 900000,
+   "k": "new",
+   "totals": [
+    12913.7316182,
+    12920.74,
+    12908.897581999998
+   ]
+  },
+  {
+   "d": "Lynn Haven",
+   "v": 900000,
+   "k": "non",
+   "totals": [
+    13539.51,
+    13539.51,
+    13539.51
+   ]
+  }
+ ],
+ "parse": [
+  {
+   "input": "825 Ohio Ave",
+   "parsed": {
+    "house": "825",
+    "unit": "",
+    "place": "",
+    "toks": [
+     {
+      "alts": [
+       "OHIO"
+      ],
+      "kind": "name",
+      "partial": false
+     },
+     {
+      "alts": [
+       "AVE"
+      ],
+      "kind": "type"
+     }
+    ]
+   },
+   "where": [
+    "ADDRESS LIKE '825 %' AND ((ADDRESS LIKE '% OHIO %' OR ADDRESS LIKE '% OHIO')) AND ((ADDRESS LIKE '% AVE %' OR ADDRESS LIKE '% AVE'))",
+    "ADDRESS LIKE '825 %' AND ((ADDRESS LIKE '% OHIO %' OR ADDRESS LIKE '% OHIO'))"
+   ]
+  },
+  {
+   "input": "825 ohio avenue, Lynn Haven FL 32444",
+   "parsed": {
+    "house": "825",
+    "unit": "",
+    "place": "LYNN HAVEN",
+    "toks": [
+     {
+      "alts": [
+       "OHIO"
+      ],
+      "kind": "name",
+      "partial": false
+     },
+     {
+      "alts": [
+       "AVE"
+      ],
+      "kind": "type"
+     }
+    ]
+   },
+   "where": [
+    "ADDRESS LIKE '825 %' AND ((ADDRESS LIKE '% OHIO %' OR ADDRESS LIKE '% OHIO')) AND ((ADDRESS LIKE '% AVE %' OR ADDRESS LIKE '% AVE'))",
+    "ADDRESS LIKE '825 %' AND ((ADDRESS LIKE '% OHIO %' OR ADDRESS LIKE '% OHIO'))"
+   ]
+  },
+  {
+   "input": "1614 N Ohio",
+   "parsed": {
+    "house": "1614",
+    "unit": "",
+    "place": "",
+    "toks": [
+     {
+      "alts": [
+       "OHIO"
+      ],
+      "kind": "name",
+      "partial": true
+     }
+    ]
+   },
+   "where": [
+    "ADDRESS LIKE '1614 %' AND (ADDRESS LIKE '% OHIO%')",
+    "ADDRESS LIKE '1614 %' AND (ADDRESS LIKE '% OHIO%')"
+   ]
+  },
+  {
+   "input": "100 W 11th Street",
+   "parsed": {
+    "house": "100",
+    "unit": "",
+    "place": "",
+    "toks": [
+     {
+      "alts": [
+       "11TH"
+      ],
+      "kind": "name",
+      "partial": false
+     },
+     {
+      "alts": [
+       "ST"
+      ],
+      "kind": "type"
+     }
+    ]
+   },
+   "where": [
+    "ADDRESS LIKE '100 %' AND ((ADDRESS LIKE '% 11TH %' OR ADDRESS LIKE '% 11TH')) AND ((ADDRESS LIKE '% ST %' OR ADDRESS LIKE '% ST'))",
+    "ADDRESS LIKE '100 %' AND ((ADDRESS LIKE '% 11TH %' OR ADDRESS LIKE '% 11TH'))"
+   ]
+  },
+  {
+   "input": "4800 US Hwy 98 #12",
+   "parsed": {
+    "house": "4800",
+    "unit": "12",
+    "place": "",
+    "toks": [
+     {
+      "alts": [
+       "HIGHWAY"
+      ],
+      "kind": "name",
+      "partial": false
+     },
+     {
+      "alts": [
+       "98"
+      ],
+      "kind": "name",
+      "partial": true
+     }
+    ]
+   },
+   "where": [
+    "ADDRESS LIKE '4800 %' AND ((ADDRESS LIKE '% HIGHWAY %' OR ADDRESS LIKE '% HIGHWAY')) AND (ADDRESS LIKE '% 98%') AND (UNIT = '12' OR UNIT LIKE '12%')",
+    "ADDRESS LIKE '4800 %' AND ((ADDRESS LIKE '% HIGHWAY %' OR ADDRESS LIKE '% HIGHWAY')) AND (ADDRESS LIKE '% 98%') AND (UNIT = '12' OR UNIT LIKE '12%')"
+   ]
+  },
+  {
+   "input": "17007 Panama City Beach Pkwy",
+   "parsed": {
+    "house": "17007",
+    "unit": "",
+    "place": "",
+    "toks": [
+     {
+      "alts": [
+       "PANAMA"
+      ],
+      "kind": "name",
+      "partial": false
+     },
+     {
+      "alts": [
+       "CITY"
+      ],
+      "kind": "name",
+      "partial": false
+     },
+     {
+      "alts": [
+       "BEACH"
+      ],
+      "kind": "name",
+      "partial": false
+     },
+     {
+      "alts": [
+       "PKWY"
+      ],
+      "kind": "type"
+     }
+    ]
+   },
+   "where": [
+    "ADDRESS LIKE '17007 %' AND ((ADDRESS LIKE '% PANAMA %' OR ADDRESS LIKE '% PANAMA')) AND ((ADDRESS LIKE '% CITY %' OR ADDRESS LIKE '% CITY')) AND ((ADDRESS LIKE '% BEACH %' OR ADDRESS LIKE '% BEACH')) AND ((ADDRESS LIKE '% PKWY %' OR ADDRESS LIKE '% PKWY'))",
+    "ADDRESS LIKE '17007 %' AND ((ADDRESS LIKE '% PANAMA %' OR ADDRESS LIKE '% PANAMA')) AND ((ADDRESS LIKE '% CITY %' OR ADDRESS LIKE '% CITY')) AND ((ADDRESS LIKE '% BEACH %' OR ADDRESS LIKE '% BEACH'))"
+   ]
+  },
+  {
+   "input": "600 MLK Blvd",
+   "parsed": {
+    "house": "600",
+    "unit": "",
+    "place": "",
+    "toks": [
+     {
+      "alts": [
+       "MARTIN"
+      ],
+      "kind": "name",
+      "partial": false
+     },
+     {
+      "alts": [
+       "LUTHER"
+      ],
+      "kind": "name",
+      "partial": false
+     },
+     {
+      "alts": [
+       "KING"
+      ],
+      "kind": "name",
+      "partial": false
+     },
+     {
+      "alts": [
+       "JR"
+      ],
+      "kind": "name",
+      "partial": false
+     },
+     {
+      "alts": [
+       "BLVD"
+      ],
+      "kind": "type"
+     }
+    ]
+   },
+   "where": [
+    "ADDRESS LIKE '600 %' AND ((ADDRESS LIKE '% MARTIN %' OR ADDRESS LIKE '% MARTIN')) AND ((ADDRESS LIKE '% LUTHER %' OR ADDRESS LIKE '% LUTHER')) AND ((ADDRESS LIKE '% KING %' OR ADDRESS LIKE '% KING')) AND ((ADDRESS LIKE '% JR %' OR ADDRESS LIKE '% JR')) AND ((ADDRESS LIKE '% BLVD %' OR ADDRESS LIKE '% BLVD'))",
+    "ADDRESS LIKE '600 %' AND ((ADDRESS LIKE '% MARTIN %' OR ADDRESS LIKE '% MARTIN')) AND ((ADDRESS LIKE '% LUTHER %' OR ADDRESS LIKE '% LUTHER')) AND ((ADDRESS LIKE '% KING %' OR ADDRESS LIKE '% KING')) AND ((ADDRESS LIKE '% JR %' OR ADDRESS LIKE '% JR'))"
+   ]
+  },
+  {
+   "input": "23 Saint Andrews Blvd",
+   "parsed": {
+    "house": "23",
+    "unit": "",
+    "place": "",
+    "toks": [
+     {
+      "alts": [
+       "ST",
+       "SAINT"
+      ],
+      "kind": "name",
+      "word": true
+     },
+     {
+      "alts": [
+       "ANDREWS"
+      ],
+      "kind": "name",
+      "partial": false
+     },
+     {
+      "alts": [
+       "BLVD"
+      ],
+      "kind": "type"
+     }
+    ]
+   },
+   "where": [
+    "ADDRESS LIKE '23 %' AND ((ADDRESS LIKE '% ST %' OR ADDRESS LIKE '% ST') OR (ADDRESS LIKE '% SAINT %' OR ADDRESS LIKE '% SAINT')) AND ((ADDRESS LIKE '% ANDREWS %' OR ADDRESS LIKE '% ANDREWS')) AND ((ADDRESS LIKE '% BLVD %' OR ADDRESS LIKE '% BLVD'))",
+    "ADDRESS LIKE '23 %' AND ((ADDRESS LIKE '% ST %' OR ADDRESS LIKE '% ST') OR (ADDRESS LIKE '% SAINT %' OR ADDRESS LIKE '% SAINT')) AND ((ADDRESS LIKE '% ANDREWS %' OR ADDRESS LIKE '% ANDREWS'))"
+   ]
+  },
+  {
+   "input": "9 Seventh St Apt 3B",
+   "parsed": {
+    "house": "9",
+    "unit": "3B",
+    "place": "",
+    "toks": [
+     {
+      "alts": [
+       "7TH"
+      ],
+      "kind": "name"
+     },
+     {
+      "alts": [
+       "ST"
+      ],
+      "kind": "type"
+     }
+    ]
+   },
+   "where": [
+    "ADDRESS LIKE '9 %' AND ((ADDRESS LIKE '% 7TH %' OR ADDRESS LIKE '% 7TH')) AND ((ADDRESS LIKE '% ST %' OR ADDRESS LIKE '% ST')) AND (UNIT = '3B' OR UNIT LIKE '3B%')",
+    "ADDRESS LIKE '9 %' AND ((ADDRESS LIKE '% 7TH %' OR ADDRESS LIKE '% 7TH')) AND (UNIT = '3B' OR UNIT LIKE '3B%')"
+   ]
+  },
+  {
+   "input": "1234 Thomas Dr Unit 1402",
+   "parsed": {
+    "house": "1234",
+    "unit": "1402",
+    "place": "",
+    "toks": [
+     {
+      "alts": [
+       "THOMAS"
+      ],
+      "kind": "name",
+      "partial": false
+     },
+     {
+      "alts": [
+       "DR"
+      ],
+      "kind": "type"
+     }
+    ]
+   },
+   "where": [
+    "ADDRESS LIKE '1234 %' AND ((ADDRESS LIKE '% THOMAS %' OR ADDRESS LIKE '% THOMAS')) AND ((ADDRESS LIKE '% DR %' OR ADDRESS LIKE '% DR')) AND (UNIT = '1402' OR UNIT LIKE '1402%')",
+    "ADDRESS LIKE '1234 %' AND ((ADDRESS LIKE '% THOMAS %' OR ADDRESS LIKE '% THOMAS')) AND (UNIT = '1402' OR UNIT LIKE '1402%')"
+   ]
+  },
+  {
+   "input": "no number here",
+   "parsed": null,
+   "where": null
+  },
+  {
+   "input": "42",
+   "parsed": {
+    "house": "42",
+    "unit": "",
+    "place": "",
+    "toks": []
+   },
+   "where": [
+    "ADDRESS LIKE '42 %'",
+    "ADDRESS LIKE '42 %'"
+   ]
+  }
+ ],
+ "shards": [
+  {
+   "p": "00349-010-000",
+   "ex": "h0",
+   "nav": "h32"
+  },
+  {
+   "p": "12345-678-000",
+   "ex": "h25",
+   "nav": "h25"
+  },
+  {
+   "p": "30123-100-000",
+   "ex": "h25",
+   "nav": "h57"
+  },
+  {
+   "p": "A-1",
+   "ex": "h70",
+   "nav": "h38"
+  }
+ ]
+}

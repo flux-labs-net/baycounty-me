@@ -41,7 +41,8 @@ REC_MAP = {
 }
 
 
-def amend_page(out_dir):
+def amend_data():
+    """Amendment 3 calculator data (also published for the app)."""
     td = build_data()
     rec = json.load(open(os.path.join(A3, 'rec_bay.json')))
     gov_gf = {g['id']: g['gf'] for g in td['govs']}
@@ -55,6 +56,12 @@ def amend_page(out_dir):
     govs.sort(key=lambda g: -g['imp'][1])
     data = {'districts': td['districts'], 'auth': td['auth'], 'groups': td['groups'], 'second': td['second'][L], 'govs': govs,
             'state': [-v for v in rec['statewide'].values()]}
+    return data
+
+
+def amend_page(out_dir):
+    data = amend_data()
+    govs = data['govs']
     js = open(os.path.join(HERE, 'amend.js')).read().replace('__A3__', json.dumps(data, ensure_ascii=False, separators=(',', ':')))
     open(os.path.join(out_dir, 'assets', 'amend.js'), 'w').write(js)
 

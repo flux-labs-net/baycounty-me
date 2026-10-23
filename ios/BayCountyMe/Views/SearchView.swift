@@ -20,6 +20,14 @@ struct SearchView: View {
                             Button { query = s } label: { Label(s, systemImage: "magnifyingglass") }
                         }
                     }
+                    Section("Browse") {
+                        NavigationLink(value: Route.glossary) { Label("Glossary", systemImage: "character.book.closed") }
+                        NavigationLink(value: Route.explore) { Label("Every dataset", systemImage: "square.grid.2x2") }
+                        NavigationLink(value: Route.vendors) { Label("Companies", systemImage: "building") }
+                        NavigationLink(value: Route.people) { Label("People", systemImage: "person.3") }
+                        NavigationLink(value: Route.updates) { Label("What's new", systemImage: "sparkles") }
+                        NavigationLink(value: Route.about) { Label("About and privacy", systemImage: "info.circle") }
+                    }
                 } else if let error {
                     ContentUnavailableView("Search isn't available", systemImage: "wifi.slash", description: Text(error))
                 } else if results.isEmpty && !searching {
@@ -46,6 +54,7 @@ struct SearchView: View {
             .searchable(text: $query, placement: .navigationBarDrawer(displayMode: .always), prompt: "Names, projects, streets, terms")
             .overlay { if searching && results.isEmpty { ProgressView() } }
             .task(id: query) { await run() }
+            .withRoutes()
         }
     }
 
