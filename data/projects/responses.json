@@ -1,0 +1,4 @@
+{
+ "about": "Right of reply. Before flags are treated as final, each agency is sent its project flags and the records behind them. status: not_sent | sent | replied. sent: date sent; date: date of reply; text: the reply (or a summary marked as such); url: the reply itself if published.",
+ "responses": {}
+}
