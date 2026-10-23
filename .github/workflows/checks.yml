@@ -1,4 +1,5 @@
 # Runs the serverless function tests (api/__tests__) on every pull request and every push to main.
+# A throwaway Postgres lets the finance API tests apply migration 0015 and run files end to end.
 # Pull requests are merged only after this check is green.
 name: Checks
 on:
@@ -9,6 +10,17 @@ jobs:
   api-tests:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: financetest
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U postgres" --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      FINANCE_TEST_DATABASE_URL: postgresql://postgres:postgres@localhost:5432/financetest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
