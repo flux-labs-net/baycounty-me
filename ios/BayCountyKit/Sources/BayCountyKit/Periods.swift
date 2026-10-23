@@ -37,7 +37,7 @@ public struct Period: Hashable, Comparable, Sendable, Identifiable {
     }
 
     /// Columns holding the single date a record happened on.
-    static let eventKeys = ["date", "dated_date", "last_obligated", "as_of"]
+    public static let eventKeys = ["date", "dated_date", "last_obligated", "as_of"]
     /// Columns that name a fiscal year directly.
     static let fiscalKeys = ["fy", "fiscal_year", "date_or_fy", "year"]
     /// Columns that name a calendar year directly.

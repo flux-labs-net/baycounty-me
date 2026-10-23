@@ -3,6 +3,7 @@ import BayCountyKit
 
 struct GovernmentsView: View {
     @Environment(AppStore.self) private var store
+    @State private var metric: GovMetric = .perResident
 
     var body: some View {
         NavigationStack {
@@ -13,19 +14,41 @@ struct GovernmentsView: View {
                     } else {
                         ProgressView().frame(maxWidth: .infinity)
                     }
-                }
-                ForEach(store.governments) { g in
-                    NavigationLink(value: Route.government(g.govID)) {
-                        VStack(alignment: .leading, spacing: 3) {
-                            Text(g.name).font(.body.weight(.medium))
-                            HStack(spacing: 6) {
-                                if let p = g.population { Text("\(Format.number(p)) residents") }
-                                if let b = g.budgetTotal { Text("· \(Format.compactMoney(b)) budget") }
-                            }
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
+                } else {
+                    Section {
+                        Picker("Compare", selection: $metric) {
+                            ForEach(GovMetric.allCases) { Text($0.short).tag($0) }
                         }
-                        .padding(.vertical, 2)
+                        .pickerStyle(.segmented)
+                        CompareBars(title: metric.title, caption: metric.caption,
+                                    items: metric.items(store.governments), format: metric.format)
+                    }
+                    .listRowBackground(Color.clear)
+                    .listRowInsets(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 16))
+                    .listRowSeparator(.hidden)
+                }
+                let maxBudget = store.governments.compactMap(\.budgetTotal).max() ?? 0
+                Section("Every government") {
+                    ForEach(store.governments) { g in
+                        NavigationLink(value: Route.government(g.govID)) {
+                            VStack(alignment: .leading, spacing: 5) {
+                                HStack(alignment: .firstTextBaseline) {
+                                    Text(g.name).font(.body.weight(.semibold))
+                                    Spacer()
+                                    if let b = g.budgetTotal { Text(Format.compactMoney(b)).font(.subheadline.weight(.semibold).monospacedDigit()) }
+                                }
+                                if let b = g.budgetTotal, maxBudget > 0 { MagnitudeBar(fraction: b / maxBudget, height: 5) }
+                                HStack(spacing: 6) {
+                                    if let p = g.population { Text("\(Format.number(p)) residents") }
+                                    if let m = g.millage { Text("· \(Format.number(m)) mills") }
+                                    Spacer()
+                                    Text("budget").foregroundStyle(.tertiary)
+                                }
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                            }
+                            .padding(.vertical, 3)
+                        }
                     }
                 }
                 Section {
@@ -40,6 +63,53 @@ struct GovernmentsView: View {
             .refreshable { await store.loadGovernments() }
             .withRoutes()
         }
+    }
+}
+
+/// Ways to compare the governments side by side.
+enum GovMetric: String, CaseIterable, Identifiable {
+    case perResident, budget, millage, debt
+    var id: String { rawValue }
+
+    var short: String {
+        switch self { case .perResident: "Per resident"; case .budget: "Budget"; case .millage: "Tax rate"; case .debt: "Debt" }
+    }
+    var title: String {
+        switch self {
+        case .perResident: "Budget per resident"
+        case .budget: "Total budget"
+        case .millage: "Property tax rate"
+        case .debt: "Debt per resident"
+        }
+    }
+    var caption: String? {
+        switch self {
+        case .millage: "Mills: dollars per $1,000 of taxable value"
+        case .perResident: "Total budget divided by 2025 population"
+        default: nil
+        }
+    }
+
+    func value(_ g: Government) -> Double? {
+        switch self {
+        case .perResident: g.budgetPerResident
+        case .budget: g.budgetTotal
+        case .millage: g.millage
+        case .debt: g.debtPerResident
+        }
+    }
+
+    func format(_ v: Double) -> String {
+        switch self {
+        case .perResident, .debt: Format.money(v.rounded())
+        case .budget: Format.compactMoney(v)
+        case .millage: Format.number(v)
+        }
+    }
+
+    func items(_ govs: [Government]) -> [CompareBars.Item] {
+        govs.compactMap { g in value(g).map { CompareBars.Item(id: g.govID, label: g.name, value: $0) } }
+            .sorted { $0.value > $1.value }
     }
 }
 
@@ -75,6 +145,29 @@ struct GovernmentDetailView: View {
                         Text("\(Format.number(p)) residents (2025 estimate)").font(.footnote).foregroundStyle(.secondary)
                     }
                 }
+
+                Section {
+                    ForEach([GovMetric.perResident, .millage, .debt], id: \.self) { m in
+                        let items = m.items(store.governments)
+                        if items.contains(where: { $0.id == govID }) {
+                            CompareBars(title: m.title, caption: m.caption, items: items, highlight: govID, format: m.format)
+                        }
+                    }
+                    if let v = g.votesRecorded, let sv = g.splitVotes, v > 0 {
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text("Recorded votes").font(.subheadline.weight(.semibold))
+                            ShareBar(parts: [.init(label: "Unanimous", value: Double(v - sv), color: Brand.good),
+                                             .init(label: "Split", value: Double(sv), color: Brand.amber)])
+                        }
+                        .padding(14)
+                        .background(Brand.surface, in: RoundedRectangle(cornerRadius: 12))
+                    }
+                } header: {
+                    Text("Compared with the others")
+                }
+                .listRowBackground(Color.clear)
+                .listRowInsets(EdgeInsets(top: 6, leading: 0, bottom: 6, trailing: 0))
+                .listRowSeparator(.hidden)
 
                 let upcoming = Array(Meeting.upcoming(store.meetings).filter { $0.govID == govID }.prefix(3))
                 if !upcoming.isEmpty {

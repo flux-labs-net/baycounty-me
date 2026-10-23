@@ -16,7 +16,15 @@ struct MeetingsView: View {
 
     var body: some View {
         NavigationStack {
+            ScrollViewReader { proxy in
             List {
+                if !upcoming.isEmpty {
+                    Section {
+                        WeekStrip(meetings: upcoming) { key in withAnimation { proxy.scrollTo(key, anchor: .top) } }
+                    } header: {
+                        Text("Next two weeks")
+                    }
+                }
                 Section {
                     FreshnessNote(key: "meetings")
                     Link(destination: BayCountyClient.meetingsCalendarURL(gov: gov)) {
@@ -34,7 +42,9 @@ struct MeetingsView: View {
                             NavigationLink(value: Route.meeting(m.id)) { MeetingRow(meeting: m, showDate: false) }
                         }
                     }
+                    .id(day.key)
                 }
+            }
             }
             .navigationTitle("Meetings")
             .refreshable { await store.loadMeetings() }

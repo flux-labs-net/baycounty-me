@@ -452,11 +452,25 @@ struct RecordDetailView: View {
                                 Label("Left out of totals so no dollar is counted twice.", systemImage: "minus.circle")
                                     .font(.footnote).foregroundStyle(.secondary)
                             }
+                        } else if datasetID == "votes" {
+                            let v = VoteSummary(row)
+                            if v.hasTally {
+                                HStack(spacing: 10) {
+                                    VoteDots(summary: v, size: 16)
+                                    Text(v.passed == false ? "Failed \(v.tallyText)" : v.passed == true ? "Passed \(v.tallyText)" : v.tallyText)
+                                        .font(.subheadline.weight(.semibold))
+                                    if v.split { Badge(text: "Split", color: Brand.amber) }
+                                }
+                            }
                         } else if let b = spec.badge(row) {
                             Badge(text: b, color: Brand.status(b))
                         }
                     }
                     .padding(.vertical, 4)
+                }
+
+                if let a = spec.amount(row), datasetID != "votes" {
+                    compareSection(row, amount: a, spec: spec)
                 }
 
                 if let detail = spec.detail(row) {
@@ -509,6 +523,50 @@ struct RecordDetailView: View {
         }
     }
 
+    /// Where this amount sits among the same list's records from the same year: a dot on a line from smallest to largest.
+    @ViewBuilder private func compareSection(_ row: Row, amount: Double, spec: DatasetSpec) -> some View {
+        let all = store.rows[datasetID] ?? []
+        let idx = Period.Index(all)
+        let period = idx.period(row)
+        let peers = all.filter { period == nil || idx.period($0) == period }.compactMap(spec.amount).sorted()
+        if peers.count >= 5, let lo = peers.first, let hi = peers.last, hi > lo {
+            let rank = peers.filter { $0 < amount }.count
+            let pct = Int((Double(rank) / Double(peers.count) * 100).rounded())
+            let median = peers[peers.count / 2]
+            Section {
+                VStack(alignment: .leading, spacing: 10) {
+                    Text(pct >= 50 ? "Larger than \(pct)% of \(period?.label ?? "all") records in this list"
+                                   : "Smaller than \(100 - pct)% of \(period?.label ?? "all") records in this list")
+                        .font(.subheadline.weight(.semibold))
+                    GeometryReader { g in
+                        let x = { (v: Double) in g.size.width * CGFloat(log10(max(v, 1) / max(lo, 1)) / max(log10(max(hi, 1) / max(lo, 1)), 0.0001)) }
+                        ZStack(alignment: .leading) {
+                            Capsule().fill(Brand.sunken).frame(height: 6)
+                            ForEach(Array(peers.enumerated()), id: \.offset) { _, v in
+                                Circle().fill(Brand.blue.opacity(0.25)).frame(width: 6, height: 6).offset(x: x(v) - 3)
+                            }
+                            Rectangle().fill(Color.secondary).frame(width: 1.5, height: 16).offset(x: x(median))
+                            Circle().fill(Brand.navy).frame(width: 16, height: 16).offset(x: x(amount) - 8)
+                        }
+                    }
+                    .frame(height: 18)
+                    .accessibilityHidden(true)
+                    HStack {
+                        Text("Smallest \(Format.compactMoney(lo))")
+                        Spacer()
+                        Text("Middle \(Format.compactMoney(median))")
+                        Spacer()
+                        Text("Largest \(Format.compactMoney(hi))")
+                    }
+                    .font(.caption2).foregroundStyle(.secondary)
+                }
+                .padding(.vertical, 4)
+            } header: {
+                Text("How it compares")
+            }
+        }
+    }
+
     /// The record's company, people, approving votes and government, as the website links them.
     @ViewBuilder private func linksSection(_ row: Row) -> some View {
         let vendors = RecordLinks.vendorIDs(row)
@@ -529,13 +587,12 @@ struct RecordDetailView: View {
                     NavigationLink(value: Route.record("votes", rowID: v.id)) { Label(v.string("headline") ?? "Vote", systemImage: "hand.raised") }
                 }
                 ForEach(Array(roll.enumerated()), id: \.offset) { _, m in
-                    let vote = (m.vote ?? "").capitalized
+                    let vote = (m.vote ?? "").lowercased()
+                    let mark = VoteMark(choice: vote == "yes" ? .yes : vote == "no" ? .no : .other)
                     if let pid = m.pid {
-                        NavigationLink(value: Route.person(pid)) {
-                            HStack { Text(m.name); Spacer(); Badge(text: vote, color: vote == "Yes" ? Brand.good : vote == "No" ? Brand.salmon : .secondary) }
-                        }
+                        NavigationLink(value: Route.person(pid)) { HStack { Text(m.name); Spacer(); mark } }
                     } else {
-                        HStack { Text(m.name); Spacer(); Badge(text: vote, color: vote == "Yes" ? Brand.good : vote == "No" ? Brand.salmon : .secondary) }
+                        HStack { Text(m.name); Spacer(); mark }
                     }
                 }
                 if let gov { NavigationLink(value: Route.government(gov.govID)) { Label(gov.name, systemImage: "building.columns") } }

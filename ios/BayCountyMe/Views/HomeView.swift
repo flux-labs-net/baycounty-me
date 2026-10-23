@@ -31,6 +31,21 @@ struct HomeView: View {
                     .padding(.vertical, 6)
                 }
 
+                if !store.governments.isEmpty {
+                    let g = store.governments
+                    Section {
+                        StatStrip(tiles: [
+                            .init(title: "Property tax levied", value: Format.compactMoney(g.compactMap(\.propertyTaxLevy).reduce(0, +))),
+                            .init(title: "FEMA after Michael", value: Format.compactMoney(g.compactMap(\.femaMichael).reduce(0, +))),
+                            .init(title: "Owed by governments", value: Format.compactMoney(g.compactMap(\.debtTotal).reduce(0, +))),
+                        ])
+                        .listRowBackground(Color.clear)
+                        .listRowInsets(EdgeInsets(top: 4, leading: 16, bottom: 4, trailing: 16))
+                    } header: {
+                        Text("Bay County by the numbers")
+                    }
+                }
+
                 Section {
                     if let home = store.home {
                         NavigationLink(value: Route.address(home)) {
@@ -141,6 +156,18 @@ struct HomeView: View {
             "votes": .dataset("votes"), "salaries": .dataset("salary-positions"),
         ]
         if let r = simple[arg] { path = [r]; return }
+        let tabs: [String: AppStore.Tab] = ["tab:governments": .governments, "tab:money": .money, "tab:meetings": .meetings, "tab:search": .search]
+        if let t = tabs[arg] { store.tab = t; return }
+        if arg.hasPrefix("gov:") { path = [.government(String(arg.dropFirst(4)))]; return }
+        if arg == "record:contract" || arg == "record:vote" {
+            let ds = arg == "record:contract" ? "contracts" : "votes"
+            await store.load(ds)
+            let rows = store.rows[ds] ?? []
+            let pick = ds == "contracts" ? rows.first { $0.string("vendor") == "Ten-8 Fire & Safety, LLC" }
+                                         : rows.first { $0.string("headline") == "Approved $62.45 million FY2027 general fund budget" }
+            if let r = pick ?? rows.first { path = [.record(ds, rowID: r.id)] }
+            return
+        }
         if arg.hasPrefix("address:") {
             let q = String(arg.dropFirst("address:".count))
             if let m = try? await store.gis.search(q).matches.first { path = [.address(m)] }

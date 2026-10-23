@@ -417,6 +417,23 @@ struct VoteDots: View {
     }
 }
 
+/// One member's vote as a single mark, with the word beside it.
+struct VoteMark: View {
+    let choice: VoteSummary.Choice
+
+    var body: some View {
+        HStack(spacing: 5) {
+            switch choice {
+            case .yes: Circle().fill(Brand.good).frame(width: 12, height: 12)
+            case .no: Circle().strokeBorder(Brand.salmon, lineWidth: 2.5).frame(width: 12, height: 12)
+            case .other: Circle().fill(Color.secondary.opacity(0.3)).frame(width: 12, height: 12)
+            }
+            Text(choice == .yes ? "Yes" : choice == .no ? "No" : "Absent").font(.caption.weight(.medium)).foregroundStyle(.secondary)
+        }
+        .accessibilityElement(children: .combine)
+    }
+}
+
 struct VoteLegend: View {
     var body: some View {
         HStack(spacing: 14) {

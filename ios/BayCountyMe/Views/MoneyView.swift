@@ -66,18 +66,9 @@ struct MoneyView: View {
 
     private func section(_ title: String, _ items: [Item]) -> some View {
         Section(title) {
-            ForEach(items) { item in
-                NavigationLink(value: item.route) {
-                    HStack(spacing: 12) {
-                        Image(systemName: item.symbol).foregroundStyle(Brand.navy).frame(width: 26)
-                        VStack(alignment: .leading, spacing: 2) {
-                            Text(item.title).font(.body.weight(.medium))
-                            Text(item.detail).font(.caption).foregroundStyle(.secondary)
-                        }
-                    }
-                    .padding(.vertical, 1)
-                }
-            }
+            TopicGrid(topics: items.map { TopicGrid.Topic(title: $0.title, symbol: $0.symbol, detail: $0.detail, route: $0.route) })
+                .listRowBackground(Color.clear)
+                .listRowInsets(EdgeInsets(top: 4, leading: 16, bottom: 4, trailing: 16))
         }
     }
 }

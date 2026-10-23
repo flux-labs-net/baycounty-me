@@ -76,11 +76,23 @@ struct VendorDetailView: View {
                 }
             }
             let recs = RecordLinks.records(forVendor: vendorID, in: store.rows)
+            let deals = recs.filter { ["contracts", "change-orders", "emergency-purchases"].contains($0.dataset) }.flatMap(\.rows)
+            if !deals.isEmpty {
+                Section {
+                    vendorSummary(deals: deals, recs: recs)
+                }
+                .listRowBackground(Color.clear)
+                .listRowInsets(EdgeInsets(top: 6, leading: 0, bottom: 6, trailing: 0))
+                .listRowSeparator(.hidden)
+            }
             ForEach(recs, id: \.dataset) { group in
                 let spec = DatasetSpec.for(group.dataset)
+                let maxAmount = group.rows.compactMap(spec.amount).max() ?? 0
                 Section(store.info(group.dataset)?.title ?? Format.label(group.dataset)) {
                     ForEach(group.rows.prefix(25)) { row in
-                        NavigationLink(value: Route.record(group.dataset, rowID: row.id)) { RecordRow(spec: spec, row: row) }
+                        NavigationLink(value: Route.record(group.dataset, rowID: row.id)) {
+                            CompactRecordRow(spec: spec, row: row, maxAmount: maxAmount, hide: spec.titleKeys.first)
+                        }
                     }
                     if group.rows.count > 25 {
                         NavigationLink(value: Route.dataset(group.dataset, filters: ["vendor_id": vendorID])) { Text("All \(group.rows.count)") }
@@ -91,7 +103,7 @@ struct VendorDetailView: View {
             if !votes.isEmpty {
                 Section {
                     ForEach(votes) { row in
-                        NavigationLink(value: Route.record("votes", rowID: row.id)) { RecordRow(spec: DatasetSpec.for("votes"), row: row) }
+                        NavigationLink(value: Route.record("votes", rowID: row.id)) { VoteRow(row: row, summary: VoteSummary(row)) }
                     }
                 } header: { Text("Votes that approved its contracts") } footer: {
                     Text("Matched from the minutes. A gift near a vote does not show why anyone voted the way they did.")
@@ -113,6 +125,27 @@ struct VendorDetailView: View {
             await store.loadVendors()
             await store.loadDonorContracts()
             await store.load(RecordLinks.vendorDatasets + ["votes"])
+        }
+    }
+
+    /// Headline numbers and a chart of approvals by year for one company.
+    private func vendorSummary(deals: [Row], recs: [(dataset: String, rows: [Row])]) -> some View {
+        let contracts = recs.first { $0.dataset == "contracts" }?.rows ?? []
+        let spec = DatasetSpec.for("contracts")
+        let approved = contracts.compactMap(spec.amount).reduce(0, +)
+        let govs = Set(deals.compactMap { $0.string("government") }).count
+        var byYear = [Int: Double]()
+        for r in contracts { if let y = Period.of(r)?.year { byYear[y, default: 0] += spec.amount(r) ?? 0 } }
+        let points = byYear.keys.sorted().map { (label: String($0), value: byYear[$0]!) }
+        return VStack(spacing: 10) {
+            StatStrip(tiles: [
+                .init(title: "Contracts", value: "\(contracts.count)"),
+                .init(title: "Approved", value: Format.compactMoney(approved)),
+                .init(title: govs == 1 ? "Government" : "Governments", value: "\(govs)"),
+            ])
+            if points.count >= 2 { YearBars(title: "Contracts approved each year", points: points) }
+            Text("Approved amounts, often not-to-exceed. Not proof of payment.")
+                .font(.caption2).foregroundStyle(.secondary).frame(maxWidth: .infinity, alignment: .leading)
         }
     }
 
@@ -188,12 +221,13 @@ struct PersonDetailView: View {
             if let mv = byDS["member-votes"], !mv.isEmpty {
                 let t = RecordLinks.tally(mv)
                 Section {
-                    HStack(spacing: 16) {
-                        StatTile(title: "Yes", value: "\(t.yes)")
-                        StatTile(title: "No", value: "\(t.no)")
-                        StatTile(title: "Other", value: "\(t.other)", caption: "Absent or abstained")
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("\(t.total) recorded votes").font(.subheadline.weight(.semibold))
+                        ShareBar(parts: [.init(label: "Yes", value: Double(t.yes), color: Brand.good),
+                                         .init(label: "No", value: Double(t.no), color: Brand.salmon),
+                                         .init(label: "Absent", value: Double(t.other), color: Color.secondary.opacity(0.35))])
                     }
-                    .listRowInsets(EdgeInsets(top: 8, leading: 12, bottom: 8, trailing: 12))
+                    .padding(.vertical, 4)
                     ForEach(mv.sorted { ($0.string("date") ?? "") > ($1.string("date") ?? "") }.prefix(40)) { row in
                         NavigationLink(value: Route.record("member-votes", rowID: row.id)) {
                             HStack(alignment: .top) {
@@ -202,8 +236,8 @@ struct PersonDetailView: View {
                                     Text(row.string("date").flatMap(Dates.parse).map { Dates.display($0, hasTime: false) } ?? "").font(.caption).foregroundStyle(.secondary)
                                 }
                                 Spacer()
-                                let v = (row.string("vote") ?? "").capitalized
-                                Badge(text: v, color: v == "Yes" ? Brand.good : v == "No" ? Brand.salmon : .secondary)
+                                let v = (row.string("vote") ?? "").lowercased()
+                                VoteMark(choice: v == "yes" ? .yes : v == "no" ? .no : .other)
                             }
                         }
                     }
@@ -234,6 +268,17 @@ struct PersonDetailView: View {
         let pay = (byDS["officials-pay"] ?? []) + (byDS["salary-leaders"] ?? [])
         if !pay.isEmpty {
             Section("Pay") {
+                let points = pay.compactMap { r -> (label: String, value: Double)? in
+                    guard let v = r.firstNumber(["annual", "salary"]), let p = Period.of(r) else { return nil }
+                    return (p.label, v)
+                }
+                let byLabel = Dictionary(points.map { ($0.label, $0.value) }, uniquingKeysWith: max)
+                if byLabel.count >= 2 {
+                    YearBars(title: "Pay by year", points: byLabel.keys.sorted().map { (label: $0, value: byLabel[$0]!) },
+                             format: { Format.compactMoney($0) })
+                        .listRowBackground(Color.clear)
+                        .listRowInsets(EdgeInsets(top: 6, leading: 0, bottom: 6, trailing: 0))
+                }
                 ForEach(pay) { row in
                     LabeledContent(row.first(["title", "employer"]) ?? "Pay") {
                         VStack(alignment: .trailing) {
@@ -250,11 +295,24 @@ struct PersonDetailView: View {
                 ForEach(money) { row in
                     VStack(alignment: .leading, spacing: 3) {
                         Text(row.first(["election", "office"]) ?? "Campaign").font(.subheadline.weight(.medium))
-                        HStack {
-                            if let r = row.number("total_raised") { Text("Raised \(Format.money(r))") }
-                            if let s = row.number("total_spent") { Text("· spent \(Format.money(s))") }
+                        if let r = row.number("total_raised") {
+                            let spent = row.number("total_spent") ?? 0
+                            let maxV = max(r, spent, 1)
+                            VStack(alignment: .leading, spacing: 4) {
+                                HStack(spacing: 8) {
+                                    Text("Raised").font(.caption).frame(width: 48, alignment: .leading)
+                                    MagnitudeBar(fraction: r / maxV, height: 8)
+                                    Text(Format.compactMoney(r)).font(.caption.weight(.semibold).monospacedDigit()).frame(width: 60, alignment: .trailing)
+                                }
+                                if row.number("total_spent") != nil {
+                                    HStack(spacing: 8) {
+                                        Text("Spent").font(.caption).frame(width: 48, alignment: .leading)
+                                        MagnitudeBar(fraction: spent / maxV, height: 8)
+                                        Text(Format.compactMoney(spent)).font(.caption.weight(.semibold).monospacedDigit()).frame(width: 60, alignment: .trailing)
+                                    }
+                                }
+                            }
                         }
-                        .font(.caption)
                         if let u = row.url("report_url") ?? row.url("finance_report_url") {
                             Button("Campaign finance reports") { store.open(u) }.font(.caption).buttonStyle(.borderless)
                         }
