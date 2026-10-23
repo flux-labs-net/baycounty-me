@@ -59,6 +59,17 @@ jobs:
           git add -A $paths
           git commit -m "Weekly refresh: FEMA projects and sales tax project map ($(date -u +%Y-%m-%d))"
           git push
+          echo "pushed=true" >> "$GITHUB_OUTPUT"
+      - name: Deploy the refresh to Vercel
+        # Vercel blocks Git deploys of commits whose author isn't on the Vercel team, which includes this bot's commits.
+        # A deploy hook (Vercel > Project > Settings > Git > Deploy Hooks, branch main) builds main regardless; store
+        # its URL as the repository secret VERCEL_DEPLOY_HOOK. Skipped when nothing was pushed or the secret isn't set.
+        if: steps.commit_and_push.outputs.pushed == 'true'
+        env:
+          HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
+        run: |
+          if [ -z "$HOOK" ]; then echo "::warning title=Vercel::VERCEL_DEPLOY_HOOK isn't set, so this refresh waits for the next merge to deploy."; exit 0; fi
+          curl -fsS -X POST "$HOOK" > /dev/null && echo "Vercel deploy started"
       - name: Email admins about problems
         if: always()
         env:
