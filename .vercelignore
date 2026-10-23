@@ -1,0 +1,2 @@
+# Keep the iOS app out of Vercel deploys (the site is site/public).
+ios/
