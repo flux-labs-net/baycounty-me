@@ -526,7 +526,8 @@ def build(county_key='bay', sunbiz_res=None):
     return {'county': county_key, 'orgs': orgs, 'seats': all_seats, 'people': bp, 'payments': pays, 'grants': grants, 'sunbiz': res}
 
 
-HOA = re.compile(r'\b(HOMEOWNERS?|HOME OWNERS?|PROPERTY OWNERS?|OWNERS|CONDOMINIUMS?|CONDO|TOWNHOMES?|TOWNHOUSES?|VILLAS?|MASTER ASSOCIATION|POA|HOA)\b')
+HOA = re.compile(r"\b(HOMEOWNERS?|HOME OWNERS?|PROPERTY OWNERS?|OWNERS|OWNER'?S|CONDOMINIUMS?|CONDO|TOWNHOMES?|TOWNHOUSES?|VILLAS?|MASTER ASSOCIATION|POA|HOA|"
+                 r"(COMMUNITY|NEIGHBORHOOD|RESIDENCES?|AMENITY|AMENITIES|IMPROVEMENT|COMMERCIAL|MANAGEMENT|RESORT|BUSINESS PARK|PHASE [IVX\d]+) ASSOCIATION)\b")
 CHURCH = re.compile(r'\b(CHURCH|MINISTR(Y|IES)|BAPTIST|METHODIST|EPISCOPAL|PRESBYTERIAN|LUTHERAN|CATHOLIC|PARISH|ASSEMBLY OF GOD|ASSEMBLIES|TABERNACLE|'
                     r'CONGREGATION|SYNAGOGUE|TEMPLE|MOSQUE|FELLOWSHIP|GOSPEL|APOSTOLIC|PENTECOSTAL|KINGDOM HALL|DIOCESE|CHAPEL)\b')
 
@@ -539,7 +540,7 @@ def kind(o, r):
     IRS activity category."""
     name = o['name'].upper()
     sub, fnd, ntee = (r or {}).get('SUBSECTION'), (r or {}).get('FOUNDATION'), ((r or {}).get('NTEE_CD') or '')
-    if HOA.search(name) and 'ASSOC' in name or ntee.startswith('S22') or ntee.startswith('L5'):
+    if HOA.search(name) and 'ASSOC' in name or re.search(r'\b(HOA|POA|CONDOMINIUM)\b', name) or ntee.startswith('S22') or ntee.startswith('L5'):
         return HOA_KIND
     if fnd == '10' or ntee.startswith('X') or CHURCH.search(name):
         return 'Church or religious group'
