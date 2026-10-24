@@ -26,7 +26,9 @@ Steps
 
 Outputs
   build() returns everything, names included, for the private `registry` schema (db/scripts/load_registry.py).
-  main() writes data/nonprofits/<county>/nonprofits.json: organization-level rows only (no board member names).
+  main() writes data/nonprofits/<county>/nonprofits.json: organizations, payments, grants and board members (names as
+  filed with the IRS and the state, which are public records). Official matches and Sunbiz business links stay private
+  until reviewed.
 """
 import collections, csv, datetime, gzip, hashlib, json, os, re, sys
 
@@ -541,7 +543,42 @@ def public(res):
                'purpose': g['purpose'], 'county': res['county'],
                'source_url': f"https://gt990datalake-rawdata.s3.amazonaws.com/EfileData/XmlFiles/{g['object_id']}_public.xml"} for g in res['grants']
               if g['grantor_id']]  # recipients' grants from outside the county are in the private tables only
-    return orgs, pays, grants
+    return orgs, pays, grants, board_rows(res)
+
+
+SOURCE_LABEL = {'irs_990': 'IRS 990', 'irs_990ez': 'IRS 990-EZ', 'irs_990pf': 'IRS 990-PF', 'irs_990n': 'IRS 990-N', 'sunbiz': 'State filing'}
+
+
+def board_rows(res):
+    """One row per person per nonprofit: titles, years on file, latest pay and hours, sources, and how many other
+    current boards (homeowner associations aside) the same name sits on."""
+    names = {o['id']: o for o in res['orgs'].values()}
+    P = res['people']
+    agg = collections.OrderedDict()
+    for st in sorted(res['seats'], key=lambda x: (x['tax_year'] or 0)):
+        a = agg.setdefault((st['board_key'], st['nonprofit_id']), {'seats': []})
+        a['seats'].append(st)
+    rows = []
+    for (bk, nid), a in agg.items():
+        ss = a['seats']
+        last = ss[-1]
+        o = names[nid]
+        p = P[bk]
+        cur = [x for x in ss if x['current']]
+        board = any(x['board'] for x in (cur or ss))
+        role = ('Board' if board else 'Staff') if cur else ('Past board' if any(x['board'] for x in ss) else 'Past staff')
+        paid = [x for x in ss if x['compensation']]
+        yrs = [x['tax_year'] for x in ss if x['tax_year']]
+        other = p['n_current_civic'] - (1 if (cur and board and o['kind'] != HOA_KIND) else 0)
+        rows.append({'person_id': bk, 'person': p['display_name'], 'nonprofit_id': nid, 'nonprofit': o['name'], 'ein': o['ein'] or None,
+                     'role': role, 'titles': ', '.join(dict.fromkeys(x['title'] for x in reversed(ss) if x['title']))[:200] or None,
+                     'first_year': min(yrs) if yrs else None, 'last_year': max(yrs) if yrs else None, 'current': bool(cur),
+                     'hours_per_week': last['hours'], 'compensation': paid[-1]['compensation'] if paid else None,
+                     'compensation_year': paid[-1]['tax_year'] if paid else None,
+                     'sources': ', '.join(dict.fromkeys(SOURCE_LABEL.get(x['source'], x['source']) for x in ss)),
+                     'other_current_boards': max(other, 0), 'county': res['county'], 'source_url': last['source_url']})
+    rows.sort(key=lambda r: (r['nonprofit'], not r['current'], r['role'] != 'Board', r['person']))
+    return rows
 
 
 def summary(res):
@@ -565,12 +602,13 @@ def main():
         print(f'nonprofits: no IRS data for {key} (run fetch_irs.py)')
         return
     res = build(key)
-    orgs, pays, grants = public(res)
+    orgs, pays, grants, board = public(res)
     out = {'as_of': datetime.date.today().isoformat(), 'county': key,
            'method': ('Organizations recognized by the IRS with an address in ' + county(key)['name'] + ' (EO Business Master File), plus active Florida '
                       'nonprofit corporations (Sunbiz) with a principal address there. Financials are from the latest 990, 990-EZ or 990-PF e-filed with the IRS; '
-                      'government payment records are matched by exact name. Board members are not listed here. Built by data/nonprofits/build_nonprofits.py.'),
-           'summary': summary(res), 'nonprofits': orgs, 'payments': pays, 'grants': grants}
+                      'government payment records are matched by exact name. Board members are the officers, directors, trustees and key employees '
+                      'listed on IRS returns, 990-N postcards and state filings, grouped by name across boards. Built by data/nonprofits/build_nonprofits.py.'),
+           'summary': summary(res), 'nonprofits': orgs, 'payments': pays, 'grants': grants, 'board_members': board}
     json.dump(out, open(os.path.join(HERE, key, 'nonprofits.json'), 'w'), indent=1, ensure_ascii=False, default=str)
     print('nonprofits:', json.dumps(summary(res)))
 

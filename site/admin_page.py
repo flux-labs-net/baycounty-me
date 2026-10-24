@@ -399,7 +399,7 @@ def admin_page(out_dir):
     </section>
 
     <section id="tab-boards" role="tabpanel" hidden>
-      <div class="banner"><div><b>Private research. Do not publish names from this tab.</b> <span class="small muted">Officers, directors and trustees of every county nonprofit, from IRS 990 returns (2019 on), 990-N postcards and state corporate filings (Sunbiz), grouped into people by name. Name matches are leads: check the filing before confirming. Only officials you mark confirmed appear on the public Nonprofits page; nothing else here is published.</span></div></div>
+      <div class="banner"><div><b>Board members are public; the links on this tab are not.</b> <span class="small muted">Officers, directors and trustees of every county nonprofit, from IRS 990 returns (2019 on), 990-N postcards and state corporate filings (Sunbiz), grouped into people by name, are listed on the public Nonprofits page. The official name matches and Sunbiz business links here are leads: check the filing before confirming. Only officials you mark confirmed are tagged as officials on the public page.</span></div></div>
       <div class="tiles" id="bd-tiles"></div>
       <div class="row" style="gap:8px;flex-wrap:wrap;margin:18px 0 8px">
         <h2 class="h2 grow" style="margin:0">Officials, department leaders and candidates on nonprofit boards</h2>

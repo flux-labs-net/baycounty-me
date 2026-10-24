@@ -1,5 +1,6 @@
 // /connections/nonprofits: reads the nonprofits, nonprofit-payments, nonprofit-grants and nonprofit-officials datasets
-// from /api/v1. Board members are never named here, only officials an admin confirmed.
+// from /api/v1, and nonprofit-board-members per nonprofit or person when a row opens. Officials are tagged only when an
+// admin confirmed the name match.
 (() => {
   const $ = s => document.querySelector(s);
   const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
@@ -21,6 +22,14 @@
     }
     return out;
   }
+  const people = new Map();  // person_id -> rows (every board that name sits on)
+  async function boardOf(q) {
+    const r = await fetch(`/api/v1/datasets/nonprofit-board-members?${q}&limit=1000`);
+    if (!r.ok) throw new Error('board');
+    return (await r.json()).data || [];
+  }
+  const years = r => r.first_year && r.last_year && r.first_year !== r.last_year ? `${r.first_year}–${r.last_year}` : (r.last_year || '');
+  const pname = s => String(s || '').replace(/\b([A-Z])([A-Z']+)\b/g, (m, a, b) => a + b.toLowerCase());
   const group = (rows, key) => rows.reduce((m, r) => (r[key] && (m.get(r[key]) || m.set(r[key], []).get(r[key])).push(r), m), new Map());
 
   async function load() {
@@ -39,6 +48,7 @@
       [num(new Set(f.map(x => x.official_id)).size), 'officials on boards (checked)']]
       .map(([v, l]) => `<div class="np-kpi"><b>${v}</b><span>${l}</span></div>`).join('');
     renderOfficials(f);
+    renderInterlocks();
     const want = new URLSearchParams(location.search).get('id');
     if (want) { const x = orgs.find(r => r.nonprofit_id === want); if (x) { $('#npQ').value = x.ein || x.name; if (x.kind === HOA) $('#npHoa').checked = true; } }
     render(want);
@@ -50,6 +60,35 @@
       <h3>${esc(rs[0].official)}</h3><div class="m">${esc(String(rs[0].official_roles || '').replace(/[[\]"]/g, '').split(',').slice(0, 1).join(''))}</div>
       <ul class="plain">${rs.map(r => `<li><a href="?id=${encodeURIComponent(r.nonprofit_id)}#npList">${esc(title(r.nonprofit))}</a> <span class="muted small">${esc(r.titles || '')}${r.last_year ? ' · ' + esc(r.first_year && r.first_year !== r.last_year ? r.first_year + '–' + r.last_year : r.last_year) : ''}${r.current ? '' : ' · past'} · <a href="${esc(r.source_url)}" target="_blank" rel="noopener">${esc(r.sources || 'source')}</a></span></li>`).join('')}</ul></article>`).join('')
       || '<p class="muted">No board seats have been checked and listed yet.</p>';
+  }
+
+  async function renderInterlocks() {
+    let rows = [];
+    try { rows = await boardOf('current=true&role=Board&other_current_boards_min=1'); } catch (e) { $('#npMulti').innerHTML = ''; return; }
+    const hoa = new Set(orgs.filter(x => x.kind === HOA).map(x => x.nonprofit_id));
+    const by = group(rows.filter(r => !hoa.has(r.nonprofit_id)), 'person_id');
+    const list = [...by.values()].filter(rs => rs.length >= 2).sort((a, b) => b.length - a.length || a[0].person.localeCompare(b[0].person)).slice(0, 40);
+    $('#npMulti').innerHTML = list.map(rs => `<article><h3><button type="button" class="np-p" data-person="${esc(rs[0].person_id)}">${esc(pname(rs[0].person))}</button></h3><div class="m">${rs.length} current boards</div>
+      <ul class="plain">${rs.map(r => `<li><a href="?id=${encodeURIComponent(r.nonprofit_id)}#npList">${esc(title(r.nonprofit))}</a> <span class="muted small">${esc(r.titles || '')}</span></li>`).join('')}</ul></article>`).join('')
+      || '<p class="muted">No one sits on more than one current board.</p>';
+  }
+
+  async function showPerson(btn) {
+    const id = btn.dataset.person;
+    const host = btn.closest('li, tr, article');
+    const tr = host.tagName === 'TR';
+    const old = tr ? (host.nextElementSibling && host.nextElementSibling.classList.contains('np-ppr') ? host.nextElementSibling : null) : host.querySelector('.np-pp');
+    if (old) { old.remove(); return; }
+    let rs = people.get(id);
+    if (!rs) { try { rs = await boardOf('person_id=' + encodeURIComponent(id)); people.set(id, rs); } catch (e) { return; } }
+    const d = document.createElement('div'); d.className = 'np-pp small';
+    d.innerHTML = `<b>${esc(pname(rs[0] && rs[0].person))}</b> on ${rs.length} nonprofit${rs.length === 1 ? '' : 's'}: ` + rs.map(r => `<a href="?id=${encodeURIComponent(r.nonprofit_id)}#npList">${esc(title(r.nonprofit))}</a> <span class="muted">(${esc(r.titles || r.role)}${years(r) ? ', ' + esc(years(r)) : ''}${r.current ? '' : ', past'})</span>`).join(' · ')
+      + '<div class="muted">Grouped by name, so two people with the same name can show up together.</div>';
+    if (!tr) { host.appendChild(d); return; }
+    // a row of its own under the person, so a long list wraps instead of stretching the table
+    const row = document.createElement('tr'); row.className = 'np-ppr';
+    const td = document.createElement('td'); td.colSpan = host.children.length; td.appendChild(d);
+    row.appendChild(td); host.after(row);
   }
 
   function filtered() {
@@ -101,8 +140,24 @@
       ${g.length ? `<b>Grants it reported giving</b><table data-tt="off"><tbody>${g.sort((a, b) => (b.cash || 0) - (a.cash || 0)).slice(0, 25).map(r => `<tr><td>${r.recipient_id ? `<a href="?id=${encodeURIComponent(r.recipient_id)}#npList">${esc(title(r.recipient))}</a>` : esc(title(r.recipient))}<div class="muted small">${esc(r.purpose || '')} · ${esc(r.tax_year || '')}</div></td><td class="num"><a href="${esc(r.source_url)}" target="_blank" rel="noopener">${usd(r.cash)}</a></td></tr>`).join('')}</tbody></table>${g.length > 25 ? `<p class="muted small">${g.length - 25} more in the dataset.</p>` : ''}` : ''}
       <p class="small"><a href="${esc(x.source_url)}" target="_blank" rel="noopener">${x.ein ? 'IRS filings on ProPublica' : 'State corporate record'}</a></p>`;
     row.appendChild(d);
+    if (x.board_members_listed || x.latest_return_form) loadBoard(x, d);
   }
 
+  async function loadBoard(x, d) {
+    const box = document.createElement('div');
+    box.innerHTML = '<p class="muted small">Loading board…</p>';
+    d.insertBefore(box, d.querySelector('dl').nextSibling);
+    let rs;
+    try { rs = await boardOf('nonprofit_id=' + encodeURIComponent(x.nonprofit_id)); } catch (e) { box.innerHTML = ''; return; }
+    const offIds = new Set((offs.get(x.nonprofit_id) || []).map(o => o.person_id));
+    const cur = rs.filter(r => r.current), past = rs.filter(r => !r.current);
+    const tr = r => `<tr><td><button type="button" class="np-p" data-person="${esc(r.person_id)}">${esc(pname(r.person))}</button>${offIds.has(r.person_id) ? ' <span class="np-tag hot">official</span>' : ''}${r.other_current_boards ? ` <span class="np-tag">+${r.other_current_boards} board${r.other_current_boards === 1 ? '' : 's'}</span>` : ''}<div class="muted small">${esc(r.titles || r.role)}${r.role.includes('Staff') ? ' · staff' : ''} · ${esc(years(r))}</div></td>
+      <td class="num small">${r.compensation ? usd(r.compensation) + '<div class="muted">pay ' + esc(r.compensation_year || '') + '</div>' : ''}<a href="${esc(r.source_url)}" target="_blank" rel="noopener">${esc(r.sources)}</a></td></tr>`;
+    box.innerHTML = rs.length ? `<b>Board and officers</b><table data-tt="off"><tbody>${cur.map(tr).join('')}</tbody></table>`
+      + (past.length ? `<details><summary class="small">${past.length} earlier board member${past.length === 1 ? '' : 's'}</summary><table data-tt="off"><tbody>${past.map(tr).join('')}</tbody></table></details>` : '') : '';
+  }
+
+  document.addEventListener('click', e => { const p = e.target.closest('.np-p'); if (p) { e.preventDefault(); showPerson(p); } });
   $('#npList').addEventListener('click', e => { const b = e.target.closest('.np-row>button'); if (b) toggle(b.parentElement); });
   ['#npQ', '#npK', '#npC', '#npS', '#npHoa', '#npGov'].forEach(s => $(s).addEventListener(s === '#npQ' ? 'input' : 'change', () => { shown = PAGE; render(); }));
   $('#npMore').addEventListener('click', () => { shown += PAGE * 2; render(); });

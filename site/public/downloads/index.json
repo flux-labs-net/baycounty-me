@@ -4755,7 +4755,7 @@
   {
    "id": "nonprofits",
    "title": "Nonprofits",
-   "description": "Every nonprofit in the county: organizations recognized by the IRS with a local address, and active Florida nonprofit corporations (Sunbiz) based here. Type, IRS subsection, latest 990 revenue, expenses and assets, how many board members its filings list, how many of those sit on another local board, government payment records and grants. Board members are not named.",
+   "description": "Every nonprofit in the county: organizations recognized by the IRS with a local address, and active Florida nonprofit corporations (Sunbiz) based here. Type, IRS subsection, latest 990 revenue, expenses and assets, how many board members its filings list, how many of those sit on another local board, government payment records and grants. Board members are in nonprofit-board-members.",
    "rows": 1927,
    "columns": [
     {
@@ -5437,6 +5437,102 @@
    "api": "/api/v1/datasets/nonprofit-grants"
   },
   {
+   "id": "nonprofit-board-members",
+   "title": "Nonprofits: board members",
+   "description": "Officers, directors, trustees and key employees of local nonprofits as listed on their IRS returns (2019 on), 990-N postcards and state corporate filings: one row per person per nonprofit with titles, years on file, reported pay and hours, and how many other current local boards the same name sits on (homeowner associations aside). person_id groups the same name across boards; two people with a common name can share one.",
+   "rows": 9181,
+   "columns": [
+    {
+     "name": "person_id",
+     "type": "string"
+    },
+    {
+     "name": "person",
+     "type": "string"
+    },
+    {
+     "name": "nonprofit_id",
+     "type": "string"
+    },
+    {
+     "name": "nonprofit",
+     "type": "string"
+    },
+    {
+     "name": "ein",
+     "type": "string"
+    },
+    {
+     "name": "role",
+     "type": "string",
+     "values": [
+      "Board",
+      "Past board",
+      "Past staff",
+      "Staff"
+     ]
+    },
+    {
+     "name": "titles",
+     "type": "string"
+    },
+    {
+     "name": "first_year",
+     "type": "number"
+    },
+    {
+     "name": "last_year",
+     "type": "number"
+    },
+    {
+     "name": "current",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "hours_per_week",
+     "type": "number"
+    },
+    {
+     "name": "compensation",
+     "type": "number"
+    },
+    {
+     "name": "compensation_year",
+     "type": "number"
+    },
+    {
+     "name": "sources",
+     "type": "string"
+    },
+    {
+     "name": "other_current_boards",
+     "type": "number"
+    },
+    {
+     "name": "county",
+     "type": "string",
+     "values": [
+      "bay"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/nonprofit-board-members.json",
+   "csv": "/downloads/nonprofit-board-members.csv",
+   "api": "/api/v1/datasets/nonprofit-board-members"
+  },
+  {
    "id": "nonprofit-officials",
    "title": "Officials on nonprofit boards",
    "description": "Elected officials, department leaders and candidates listed as an officer or director of a local nonprofit in its IRS returns or state corporate filings. Only matches checked by hand are listed.",
@@ -5444,6 +5540,10 @@
    "columns": [
     {
      "name": "official_id",
+     "type": "string"
+    },
+    {
+     "name": "person_id",
      "type": "string"
     },
     {

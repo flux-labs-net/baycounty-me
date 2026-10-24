@@ -1,12 +1,13 @@
 -- Nonprofits (data/nonprofits): every nonprofit in a county, who sits on its board, and how they connect to the rest of
 -- the site's records.
 --
--- Public datasets (organization-level only; same standard columns, public read policy and trigger as 0021):
---   nonprofits, nonprofit_payments, nonprofit_grants   written by the dataset sync from the site build
+-- Public datasets (same standard columns, public read policy and trigger as 0021), written by the dataset sync:
+--   nonprofits, nonprofit_payments, nonprofit_grants, nonprofit_board_members (names as filed with the IRS and the state;
+--   the site owner decided on 2026-10-24 that board members are public)
 --   nonprofit_officials                                 written by registry.publish_board_officials() (below), only for
 --                                                       official/board matches an admin confirmed
--- Private (schema registry, from 0031; no public policy, admin API only): board people, their seats, and the
--- official name matches waiting for review. Loaded by db/scripts/load_registry.py. Keyed by county.
+-- Private (schema registry, from 0031; no public policy, admin API only): board people with their Sunbiz business
+-- links, every seat, and the official name matches waiting for review. Loaded by db/scripts/load_registry.py. Keyed by county.
 
 create table if not exists nonprofits (
   id bigint generated always as identity primary key,
@@ -66,7 +67,7 @@ create index if not exists nonprofits_nonprofit_id_idx on nonprofits ("nonprofit
 create index if not exists nonprofits_ein_idx on nonprofits ("ein");
 create index if not exists nonprofits_sunbiz_doc_number_idx on nonprofits ("sunbiz_doc_number");
 
-insert into datasets (id, table_name, title, description) values ('nonprofits', 'nonprofits', $t$Nonprofits$t$, $d$Every nonprofit in the county: organizations recognized by the IRS with a local address, and active Florida nonprofit corporations (Sunbiz) based here. Type, IRS subsection, latest 990 revenue, expenses and assets, how many board members its filings list, how many of those sit on another local board, government payment records and grants. Board members are not named.$d$)
+insert into datasets (id, table_name, title, description) values ('nonprofits', 'nonprofits', $t$Nonprofits$t$, $d$Every nonprofit in the county: organizations recognized by the IRS with a local address, and active Florida nonprofit corporations (Sunbiz) based here. Type, IRS subsection, latest 990 revenue, expenses and assets, how many board members its filings list, how many of those sit on another local board, government payment records and grants. Board members are in nonprofit-board-members.$d$)
   on conflict (id) do update set title = excluded.title, description = excluded.description, updated_at = now();
 
 alter table nonprofits enable row level security;
@@ -153,9 +154,53 @@ create policy "public read" on nonprofit_grants for select using (true);
 drop trigger if exists nonprofit_grants_touch on nonprofit_grants;
 create trigger nonprofit_grants_touch before update on nonprofit_grants for each row execute function touch_updated_at();
 
+create table if not exists nonprofit_board_members (
+  id bigint generated always as identity primary key,
+  "person_id" text,
+  "person" text,
+  "nonprofit_id" text,
+  "nonprofit" text,
+  "ein" text,
+  "role" text,
+  "titles" text,
+  "first_year" bigint,
+  "last_year" bigint,
+  "current" boolean,
+  "hours_per_week" numeric,
+  "compensation" numeric,
+  "compensation_year" bigint,
+  "sources" text,
+  "other_current_boards" bigint,
+  "county" text,
+  "source_url" text,
+  gov_id text,
+  government_key text references governments(key),
+  origin text not null default 'manual',
+  ingest_run_id bigint references ingest_runs(id),
+  record_hash text not null,
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now(),
+  unique (origin, record_hash)
+);
+create index if not exists nonprofit_board_members_gov_idx on nonprofit_board_members (government_key);
+create index if not exists nonprofit_board_members_gov_id_idx on nonprofit_board_members (gov_id);
+create index if not exists nonprofit_board_members_person_id_idx on nonprofit_board_members ("person_id");
+create index if not exists nonprofit_board_members_nonprofit_id_idx on nonprofit_board_members ("nonprofit_id");
+
+insert into datasets (id, table_name, title, description) values ('nonprofit-board-members', 'nonprofit_board_members', $t$Nonprofits: board members$t$, $d$Officers, directors, trustees and key employees of local nonprofits as listed on their IRS returns (2019 on), 990-N postcards and state corporate filings: one row per person per nonprofit with titles, years on file, reported pay and hours, and how many other current local boards the same name sits on (homeowner associations aside). person_id groups the same name across boards; two people with a common name can share one.$d$)
+  on conflict (id) do update set title = excluded.title, description = excluded.description, updated_at = now();
+
+alter table nonprofit_board_members enable row level security;
+drop policy if exists "public read" on nonprofit_board_members;
+create policy "public read" on nonprofit_board_members for select using (true);
+
+drop trigger if exists nonprofit_board_members_touch on nonprofit_board_members;
+create trigger nonprofit_board_members_touch before update on nonprofit_board_members for each row execute function touch_updated_at();
+
 create table if not exists nonprofit_officials (
   id bigint generated always as identity primary key,
   "official_id" text,
+  "person_id" text,
   "official" text,
   "official_roles" text,
   "nonprofit_id" text,
@@ -277,9 +322,9 @@ language plpgsql as $$
 declare n integer := 0;
 begin
   delete from public.nonprofit_officials where origin = 'registry' and county = p_county;
-  insert into public.nonprofit_officials (official_id, official, official_roles, nonprofit_id, nonprofit, ein, titles, first_year, last_year,
+  insert into public.nonprofit_officials (official_id, person_id, official, official_roles, nonprofit_id, nonprofit, ein, titles, first_year, last_year,
       current, sources, county, source_url, origin, record_hash)
-    select m.official_id, max(m.official_name), max(p.official_roles::text), s.nonprofit_id, max(s.nonprofit_name), max(s.ein),
+    select m.official_id, min(m.board_key), max(m.official_name), max(p.official_roles::text), s.nonprofit_id, max(s.nonprofit_name), max(s.ein),
       string_agg(distinct s.title, ', '), min(s.tax_year), max(s.tax_year), bool_or(s.current),
       string_agg(distinct case s.source when 'sunbiz' then 'State corporate filing' when 'irs_990n' then 'IRS 990-N' else 'IRS ' || upper(replace(s.source, 'irs_', '')) end, ', '),
       p_county, (array_agg(s.source_url order by s.tax_year desc nulls last))[1], 'registry',
