@@ -34,7 +34,7 @@
   $('#signout').addEventListener('click', async () => { await api('logout', {method: 'POST'}).catch(() => {}); location.href = '/admin'; });
 
   // ---------- tabs ----------
-  const loaders = {keys: loadKeys, analytics: loadStats, logs: () => loadLogs(true), settings: loadSettings, ingestion: loadIngestion, agendas: loadAgendas, sent: loadSent, emails: loadEmails, compose: () => loadCompose(), correspondence: loadCorr, owners: loadOwners};
+  const loaders = {keys: loadKeys, analytics: loadStats, logs: () => loadLogs(true), settings: loadSettings, ingestion: loadIngestion, agendas: loadAgendas, sent: loadSent, emails: loadEmails, compose: () => loadCompose(), correspondence: loadCorr, owners: loadOwners, ties: loadTies};
   function tab(name) {
     document.querySelectorAll('[role=tab][data-tab]').forEach(b => b.setAttribute('aria-selected', String(b.dataset.tab === name)));
     document.querySelectorAll('[role=tabpanel]').forEach(p => { p.hidden = p.id !== 'tab-' + name; });
@@ -834,6 +834,44 @@
       } catch (err) { box.innerHTML = `<p class="small">${esc(err.message)}</p>`; }
     }, 300);
   });
+
+  // ---------- business ties: officials matched to Sunbiz (private careers schema, api/_careers.js) ----------
+  const BT_LINK = {shared_business: 'Same business as another official', own_business_gift: 'Business gave to a campaign',
+    partner_business_gift: 'Donor shares an officer with their business', public_payee: 'Business paid by a government'};
+  async function loadTies() {
+    let r;
+    try { r = await api('careers', {params: {status: $('#bt-status').value, confidence: $('#bt-confidence').value, q: $('#bt-q').value.trim()}}); }
+    catch (e) { $('#bt-tiles').innerHTML = `<div class="banner bad"><div><b>Couldn’t load business ties.</b><div class="small muted">${esc(e.message)}</div></div></div>`; return; }
+    const s = (r.load && r.load.summary) || {};
+    const n = st => (r.review || []).filter(x => x.review_status === st).reduce((a, x) => a + x.n, 0);
+    $('#bt-tiles').innerHTML = r.load ? [[fmt(s.officials_with_a_match), 'Officials with a name match'], [fmt(r.load.matches), 'Matches'],
+      [fmt(n('unreviewed')), 'Not yet reviewed'], [fmt(n('confirmed')), 'Confirmed'], [fmt(r.published.businesses), 'Businesses published'],
+      [fmt(r.published.links), 'Links published'], [when(r.load.loaded_at).replace(/<[^>]+>/g, ''), 'Last loaded']]
+      .map(([v, l]) => `<div class="tile"><b>${v}</b><span>${l}</span></div>`).join('') : '<div class="banner"><div>Not loaded yet. The Sync database workflow loads it after the next push to main.</div></div>';
+    $('#bt-table tbody').innerHTML = r.matches.map(m => `<tr>
+      <td><b>${esc(m.official_name)}</b><div class="muted small">${esc(m.label || '')}</div></td>
+      <td class="small"><a href="#" data-person="${esc(m.person_key)}">${owNm(m.sunbiz_name)}</a> <span class="muted">${esc(m.sunbiz_city || '')}</span>
+        <div><span class="pill">${esc(m.confidence)} (${m.score})</span>${m.corporate_officer ? ' <span class="pill">corporate officer</span>' : ''}${m.agent_service ? ' <span class="pill">agent service</span>' : ''}</div>
+        <div class="muted">${(m.reasons || []).map(esc).join('; ')}</div></td>
+      <td class="small">${m.businesses.map(b => `<div><a href="${owSunbiz(b.doc_number)}" target="_blank" rel="noopener">${owNm(b.name)}</a> <span class="muted">${esc(b.titles || '')}${b.file_date ? ', filed ' + esc(String(b.file_date).slice(0, 4)) : ''}</span>${b.status === 'I' ? ' <span class="pill">Inactive</span>' : ''}${b.nonprofit ? ' <span class="pill">nonprofit</span>' : ''}</div>`).join('')}</td>
+      <td class="small">${m.links.map(l => `<div>${l.own_government ? '<b>' : ''}${esc(BT_LINK[l.link_type] || l.link_type)}${l.own_government ? ' (own government)</b>' : ''}: <span class="muted">${esc(l.detail || '')}${l.amount != null ? ', ' + owUsd(l.amount) : ''}</span></div>`).join('') || '<span class="muted">None</span>'}</td>
+      <td><select class="sel" data-bt-id="${esc(m.person_id)}" data-bt-key="${esc(m.person_key)}" aria-label="Review">${Object.entries(OW_REV).map(([k, v]) => `<option value="${k}"${k === m.review_status ? ' selected' : ''}>${v}</option>`).join('')}</select>
+        ${m.reviewed_by ? `<div class="muted small">${esc(m.reviewed_by)}</div>` : ''}</td></tr>`).join('') || '<tr><td colspan="5" class="empty">No matches with these filters.</td></tr>';
+  }
+  $('#bt-table').addEventListener('change', async e => {
+    const s = e.target.closest('[data-bt-id]'); if (!s) return;
+    s.disabled = true;
+    try { await api('careers_review', {method: 'POST', body: {person_id: s.dataset.btId, person_key: s.dataset.btKey, status: s.value}}); }
+    catch (err) { alert(err.message); }
+    s.disabled = false;
+  });
+  $('#bt-table').addEventListener('click', e => {
+    const a = e.target.closest('[data-person]'); if (!a) return;
+    e.preventDefault(); tab('owners'); owDetail('person', a.dataset.person);
+  });
+  ['#bt-status', '#bt-confidence'].forEach(s => $(s).addEventListener('change', loadTies));
+  let btTimer;
+  $('#bt-q').addEventListener('input', () => { clearTimeout(btTimer); btTimer = setTimeout(loadTies, 300); });
 
   // ---------- start ----------
   (async () => {

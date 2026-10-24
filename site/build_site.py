@@ -21,6 +21,7 @@ from accountability_page import accountability_page
 from savings_page import savings_page
 from correspondence_page import correspondence_page
 from shared_owners_page import shared_owners_page
+from business_ties_page import business_ties_page
 from updates import updates_page, rss, last_updated, nice as nice_date
 OUT = os.path.join(ROOT, 'public')
 from place import SITE, DOMAIN, LABEL as PLACE_LABEL, EMAIL, OPERATOR, OFFICIALS, wordmark_html, governments as _place_govs
@@ -79,6 +80,7 @@ MENU = [
             {'label': 'Campaign Gifts', 'href': '/connections/campaign-gifts', 'desc': 'Who funds campaigns, and donors with contracts'},
             {'label': 'Money Map', 'href': '/connections/money-map', 'desc': 'Donors, officials and votes on their contracts'},
             {'label': 'Shared Owners', 'href': '/connections/shared-owners', 'desc': 'Businesses with a shared owner that gave to the same candidate'},
+            {'label': 'Business Ties', 'href': '/connections/business-ties', 'desc': "Officials' and candidates' businesses, and where they meet campaigns"},
         ]},
     ]},
     {'label': 'Get Involved', 'groups': [
@@ -686,6 +688,8 @@ PAGES = [
      'Emails BayCounty.me sent to Bay County elected officials and managers, and their replies, published as public records.', lambda: correspondence_page(OUT)),
     ('/connections/shared-owners', 'Shared-owner campaign gifts',
      'Groups of Bay County businesses that share an owner or officer in state corporate records and each gave to the same local candidate, checked by hand. People are not named.', lambda: shared_owners_page(OUT)),
+    ('/connections/business-ties', "Officials' businesses",
+     'Registered businesses and nonprofits that list a Bay County official, department leader or candidate, checked by hand, and where those businesses meet campaigns and public money.', lambda: business_ties_page(OUT)),
     ('/public-money/accountability', 'Accountability console: projects from budget to close-out',
      'Bay County public projects followed from first budget to close-out: approvals, contracts, change orders, votes, payments and final cost, with questions raised by published rules, missing records and each agency\'s reply.', lambda: accountability_page(OUT)),
     ('/public-money/savings', 'Savings finder: where Bay County governments could spend less',
