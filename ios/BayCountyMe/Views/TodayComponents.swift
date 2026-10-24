@@ -24,7 +24,7 @@ struct CardList<Content: View>: View {
 
     var body: some View {
         VStack(spacing: 0) { content }
-            .background(Brand.surface, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+            .card(16)
     }
 }
 
@@ -94,7 +94,7 @@ struct NumberTile: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding(14)
-            .background(Brand.surface, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+            .card(16)
         }
         .buttonStyle(.plain)
         .accessibilityLabel("\(label), \(value)")
@@ -196,7 +196,8 @@ struct ChipRow<ID: Hashable>: View {
                             .padding(.horizontal, 14)
                             .frame(minHeight: 38)
                             .foregroundStyle(on ? Color.white : .primary)
-                            .background(on ? Brand.navy : Brand.surface, in: Capsule())
+                            .background(on ? Brand.navyFill : Brand.surface, in: Capsule())
+                            .overlay { if !on { Capsule().strokeBorder(Brand.hairline) } }
                     }
                     .buttonStyle(.plain)
                     .accessibilityAddTraits(on ? .isSelected : [])
@@ -263,5 +264,13 @@ struct FlowLayout: Layout {
             rows[rows.count - 1].height = max(rows[rows.count - 1].height, size.height)
         }
         return rows
+    }
+}
+
+extension View {
+    /// A white card with a hairline edge, so it stays distinct from the canvas in dark mode.
+    func card(_ radius: CGFloat = 16) -> some View {
+        background(Brand.surface, in: RoundedRectangle(cornerRadius: radius, style: .continuous))
+            .overlay { RoundedRectangle(cornerRadius: radius, style: .continuous).strokeBorder(Brand.hairline) }
     }
 }

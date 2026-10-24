@@ -14,6 +14,11 @@ enum Brand {
     static let canvas = Color("Canvas")
     static let surface = Color("Surface")
     static let sunken = Color("Sunken")
+    /// Solid backgrounds that carry white text (selected chips, buttons, banners). Darker than navy in dark mode.
+    static let navyFill = Color("NavyFill")
+    static let salmonFill = Color("SalmonFill")
+    /// Card edges, so cards stay visible on the dark canvas.
+    static let hairline = Color("Hairline")
 
     /// Matches the CRA Spending page: Spent green, Committed blue, Budgeted amber, Proposed salmon.
     static func status(_ s: String) -> Color {

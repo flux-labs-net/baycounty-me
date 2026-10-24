@@ -45,7 +45,7 @@ struct GovernmentsView: View {
                         highlight: items.first?.id, format: metric.format) { path.append(.government($0)) }
         }
         .padding(16)
-        .background(Brand.surface, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+        .card(18)
     }
 
     private var governmentsSection: some View {
@@ -203,7 +203,7 @@ struct GovernmentDetailView: View {
                                              .init(label: "Split", value: Double(sv), color: Brand.amber)])
                         }
                         .padding(14)
-                        .background(Brand.surface, in: RoundedRectangle(cornerRadius: 12))
+                        .card(12)
                     }
                 } header: {
                     Text("Compared with the others")
