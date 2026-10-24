@@ -62,6 +62,82 @@ NTEE = {'A': 'Arts and culture', 'B': 'Education', 'C': 'Environment', 'D': 'Ani
 SUNBIZ_TITLE = {'P': 'President', 'VP': 'Vice President', 'S': 'Secretary', 'T': 'Treasurer', 'D': 'Director', 'C': 'Chair', 'CEO': 'CEO', 'CFO': 'CFO',
                 'CHAIR': 'Chair', 'VC': 'Vice Chair', 'ST': 'Secretary/Treasurer', 'TR': 'Trustee', 'PT': 'President/Treasurer', 'DIR': 'Director',
                 'PRES': 'President', 'SEC': 'Secretary', 'TREA': 'Treasurer', 'TRUS': 'Trustee', 'EXEC': 'Executive Director', 'ED': 'Executive Director'}
+# Sunbiz officer titles are a 4-character field: letter codes ("TD" = Treasurer and Director) or the start of a word ("DIRE").
+SUNBIZ_LETTER = {'P': 'President', 'V': 'Vice President', 'VP': 'Vice President', 'S': 'Secretary', 'T': 'Treasurer', 'D': 'Director',
+                 'C': 'Chair', 'CH': 'Chair', 'VC': 'Vice Chair', 'O': 'Officer', 'M': 'Member', 'B': 'Board Member'}
+SUNBIZ_WORD = {'DIRE': 'Director', 'DIREC': 'Director', 'SECR': 'Secretary', 'SECT': 'Secretary', 'SEC.': 'Secretary', 'TRES': 'Treasurer',
+               'TRE': 'Treasurer', 'TRS': 'Treasurer', 'BOAR': 'Board Member', 'BD': 'Board Member', 'BM': 'Board Member', 'BRD': 'Board Member',
+               'DMBR': 'Director', 'MBR': 'Member', 'MEM': 'Member', 'MEMB': 'Member', 'OFFI': 'Officer', 'CHAI': 'Chair', 'VCHM': 'Vice Chair',
+               'VICE': 'Vice President', 'DEAC': 'Deacon', 'ELDE': 'Elder', 'PAST': 'Past Officer', 'OTHE': 'Officer', 'ASST': 'Assistant Officer',
+               'ASSI': 'Assistant Officer', 'CAM': 'Community Association Manager', 'MGR': 'Manager', 'MANA': 'Manager', 'MGRM': 'Managing Member',
+               'AMBR': 'Authorized Member', 'AUTH': 'Authorized Representative', 'AT L': 'Director at Large', 'ATL': 'Director at Large',
+               'AL': 'Director at Large', 'FINA': 'Finance Officer', 'CORR': 'Corresponding Secretary', 'ADJU': 'Adjutant', 'SERG': 'Sergeant at Arms',
+               'CLER': 'Clerk', 'ADMI': 'Administrator', 'PARL': 'Parliamentarian', 'QUAR': 'Quartermaster', 'COO': 'COO', 'CEO': 'CEO', 'CFO': 'CFO',
+               'CO-T': 'Co-Treasurer', 'CO-P': 'Co-President', 'REGI': 'Registered Agent', 'ADVI': 'Advisor', 'STEW': 'Steward', 'CHAP': 'Chaplain',
+               'EXEC': 'Executive Director', 'ED': 'Executive Director', 'TR': 'Trustee', 'TRUS': 'Trustee'}
+
+
+def sunbiz_title(raw):
+    """A readable title from a Sunbiz officer code: "TD" -> "Treasurer, Director", "DIRE" -> "Director", "D-VP" -> "Director, Vice President".
+    Unknown codes come back title-cased, as before."""
+    t = ' '.join((raw or '').upper().split()).strip(' ,;.')
+    if not t:
+        return 'Officer'
+    if t in SUNBIZ_TITLE:
+        return SUNBIZ_TITLE[t]
+    if t in SUNBIZ_WORD:
+        return SUNBIZ_WORD[t]
+    parts = []
+    for tok in filter(None, re.split(r'[\s,;/\\&-]+', t)):
+        if tok in SUNBIZ_WORD:
+            parts.append(SUNBIZ_WORD[tok])
+            continue
+        i, got = 0, []
+        while i < len(tok):  # greedy: two-letter codes (VP, VC, CH) first, then single letters
+            two = tok[i:i + 2]
+            if two in ('VP', 'VC', 'CH') and two in SUNBIZ_LETTER:
+                got.append(SUNBIZ_LETTER[two]); i += 2
+            elif tok[i] in SUNBIZ_LETTER:
+                got.append(SUNBIZ_LETTER[tok[i]]); i += 1
+            else:
+                got = None
+                break
+        if not got:
+            return t.title()
+        parts += got
+    return ', '.join(dict.fromkeys(parts)) or t.title()
+
+
+TITLE_WORDS = ['President', 'Director', 'Chairman', 'Chairperson', 'Secretary', 'Treasurer', 'Executive', 'Elect', 'Communications',
+               'Operations', 'Development', 'Administrator', 'Administration', 'Coordinator', 'Officer', 'Member', 'Commander', 'Committee',
+               'Finance', 'Financial', 'Programs', 'Marketing', 'Membership', 'Emeritus', 'Large']
+TITLE_ACRONYMS = {'Ceo': 'CEO', 'Cfo': 'CFO', 'Coo': 'COO', 'Vp': 'VP', 'Svp': 'SVP', 'Evp': 'EVP', 'Cpa': 'CPA', 'Hoa': 'HOA', 'Pta': 'PTA', 'Ed': 'ED'}
+
+
+def clean_title(title):
+    """IRS and FDACS titles: title case for all-caps text, acronyms kept (CEO, VP), and words the IRS's 12-character field cut off
+    completed when only one common title word fits ("Executive Di" -> "Executive Director", "Secretary/Tr" -> "Secretary/Treasurer")."""
+    t = ' '.join((title or '').split())
+    if not t:
+        return t
+    u = t.upper().strip(' ,.')
+    if len(u) <= 4 and (u in SUNBIZ_TITLE or u in SUNBIZ_WORD):
+        return SUNBIZ_TITLE.get(u) or SUNBIZ_WORD[u]
+    if t.isupper():
+        t = t.title()
+    t = re.sub(r"\b(\w+)\b", lambda m: TITLE_ACRONYMS.get(m.group(1), m.group(1)), t)
+    t = re.sub(r"\bOf\b|\bAnd\b|\bThe\b|\bFor\b", lambda m: m.group(0).lower(), t)
+    if t in ('VP', 'D'):
+        return {'VP': 'Vice President', 'D': 'Director'}[t]
+    m = re.search(r"([A-Za-z]+)$", t)
+    if m and len(m.group(1)) >= 2 and len(t) == 12:  # the IRS title field holds 12 characters
+        w = m.group(1).lower()
+        hits = [x for x in TITLE_WORDS if x.lower().startswith(w)]
+        if len(hits) == 1 and hits[0].lower() != w:
+            t = t[:m.start(1)] + hits[0]
+    return t
+
+
 HONORIFIC = re.compile(r'\b(DR|MR|MRS|MS|MISS|REV|REVEREND|PASTOR|HON|HONORABLE|FR|FATHER|SR\.? PASTOR|BISHOP|ELDER|DEACON|ATTY|COL|LTC|MAJ|CAPT|SGT|CMDR|RET|USAF|USN|USMC|USA)\b\.?')
 POST_TITLE = re.compile(r'\s+(PRESIDENT|VICE PRESIDENT|TREASURER|SECRETARY|DIRECTOR|EXECUTIVE DIRECTOR|CHAIRMAN|CHAIR|CHAIRPERSON|CEO|CFO|PASTOR|'
                         r'TRUSTEE|COMMANDER|MANAGER|OWNER|FOUNDER|MEMBER|OFFICER|AGENT|PRES|SEC|TREAS|ADMINISTRATOR|COORDINATOR)\b.*$')
@@ -289,7 +365,7 @@ def seats(orgs, roles, people, county_key):
                     continue
                 t = r['title'].upper().strip()
                 out.append({'nonprofit_id': oid, 'source': 'sunbiz', 'raw_name': ' '.join(r['raw_name'].split()), 'name': nm,
-                            'title': SUNBIZ_TITLE.get(t, t.title() or 'Officer'), 'tax_year': e['last_report_year'], 'board': True, 'roles': 'officer',
+                            'title': sunbiz_title(t), 'tax_year': e['last_report_year'], 'board': True, 'roles': 'officer',
                             'hours': None, 'compensation': None, 'object_id': None, 'registry_person_key': r.get('person_key'),
                             'source_url': SUNBIZ_URL + e['doc_number']})
         fy = {f['object_id']: f for f in o['filings']}
@@ -304,7 +380,7 @@ def seats(orgs, roles, people, county_key):
             board = bool(rs & BOARD_ROLES) or (not rs and r['form'] in ('990EZ', '990PF'))
             if 'former' in rs:
                 board = False
-            out.append({'nonprofit_id': oid, 'source': 'irs_' + r['form'].lower(), 'raw_name': r['name'].strip(), 'name': nm, 'title': title.title() if title.isupper() else title,
+            out.append({'nonprofit_id': oid, 'source': 'irs_' + r['form'].lower(), 'raw_name': r['name'].strip(), 'name': nm, 'title': clean_title(title),
                         'tax_year': _int(r['tax_year']), 'board': board, 'roles': r['roles'], 'hours': _num(r['hours']),
                         'compensation': (_num(r['compensation']) or 0) + (_num(r['related_comp']) or 0) if r['compensation'] or r['related_comp'] else None,
                         'object_id': r['object_id'], 'registry_person_key': None,
@@ -324,7 +400,7 @@ def seats(orgs, roles, people, county_key):
             yr = (_iso(fd.get('fiscal_year_end')) or _iso(fd.get('registration_date')) or (fd.get('fetched_at') or ''))[:4]
             title = (r.get('title') or '').strip()
             out.append({'nonprofit_id': oid, 'source': 'fdacs', 'raw_name': ' '.join(r['name'].split()), 'name': nm,
-                        'title': (title.title() if title.isupper() else title) or 'Officer or director', 'tax_year': int(yr) if yr.isdigit() else None,
+                        'title': clean_title(title) or 'Officer or director', 'tax_year': int(yr) if yr.isdigit() else None,
                         'board': True, 'roles': 'officer', 'hours': None, 'compensation': None, 'object_id': None, 'registry_person_key': None,
                         'source_url': fd.get('detail_url') or FDACS_URL})
     # a seat is current when it is on the organization's latest filing of its kind
@@ -700,7 +776,7 @@ def board_rows(res):
         yrs = [x['tax_year'] for x in ss if x['tax_year']]
         other = p['n_current_civic'] - (1 if (cur and board and o['kind'] != HOA_KIND) else 0)
         rows.append({'person_id': bk, 'person': p['display_name'], 'nonprofit_id': nid, 'nonprofit': o['name'], 'ein': o['ein'] or None,
-                     'role': role, 'titles': ', '.join(dict.fromkeys(x['title'] for x in reversed(ss) if x['title']))[:200] or None,
+                     'role': role, 'titles': ', '.join(dict.fromkeys(p.strip() for x in reversed(ss) if x['title'] for p in x['title'].split(', ') if p.strip()))[:200] or None,
                      'first_year': min(yrs) if yrs else None, 'last_year': max(yrs) if yrs else None, 'current': bool(cur),
                      'hours_per_week': last['hours'], 'compensation': paid[-1]['compensation'] if paid else None,
                      'compensation_year': paid[-1]['tax_year'] if paid else None,

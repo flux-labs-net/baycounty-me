@@ -286,6 +286,14 @@ struct HomeView: View {
             if let r = pick ?? rows.first { path = [.record(ds, rowID: r.id)] }
             return
         }
+        if arg == "record:board" || arg == "record:nonprofit" {
+            let ds = arg == "record:board" ? "nonprofit-board-members" : "nonprofits"
+            await store.load(ds)
+            let rows = store.rows[ds] ?? []
+            let pick = rows.first { $0.string("nonprofit_id") == "np-sb-n01000008288" && (ds == "nonprofits" || $0.string("person") == "Kathy Bass") }
+            if let r = pick ?? rows.first { path = [.record(ds, rowID: r.id)] }
+            return
+        }
         if arg.hasPrefix("address:") {
             let q = String(arg.dropFirst("address:".count))
             if let m = try? await store.gis.search(q).matches.first { path = [.address(m)] }

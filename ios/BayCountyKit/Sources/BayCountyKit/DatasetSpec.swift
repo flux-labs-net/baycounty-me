@@ -200,13 +200,23 @@ public struct DatasetSpec: Sendable {
 
     // MARK: - Reading a row
 
-    public func title(_ row: Row) -> String { row.first(titleKeys) ?? "Record" }
+    /// The row's title. Organization names that filings write in ALL CAPS read in normal case.
+    public func title(_ row: Row) -> String {
+        guard let key = titleKeys.first(where: { row.string($0) != nil }), let t = row.string(key) else { return "Record" }
+        return isOrgColumn(key) ? Format.orgName(t) : t
+    }
+
+    /// Columns holding an organization's name (and `name` in the nonprofit lists).
+    func isOrgColumn(_ key: String) -> Bool {
+        RecordProfile.orgColumns.contains(key) || (key == "name" && page == "connections/nonprofits")
+    }
 
     public func subtitle(_ row: Row) -> String {
         subtitleKeys.filter { !titleKeys.prefix(1).contains($0) }
             .compactMap { key -> String? in
                 guard let v = row[key], !v.isEmpty else { return nil }
-                return Format.value(v, column: key)
+                let s = Format.value(v, column: key)
+                return isOrgColumn(key) ? Format.orgName(s) : s
             }
             .joined(separator: " · ")
     }
