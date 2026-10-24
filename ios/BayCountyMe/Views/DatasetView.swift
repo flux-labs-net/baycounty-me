@@ -953,7 +953,7 @@ struct YearsStrip: View {
             HStack(alignment: .firstTextBaseline) {
                 Text("Years on file").font(.subheadline.weight(.semibold))
                 Spacer()
-                Text(years.count == 1 ? "\(years.lowerBound)" : "\(years.lowerBound)–\(years.upperBound)")
+                Text(years.count == 1 ? String(years.lowerBound) : String(years.lowerBound) + "–" + String(years.upperBound))
                     .font(.footnote.monospacedDigit()).foregroundStyle(.secondary)
             }
             HStack(spacing: 4) {
@@ -972,7 +972,7 @@ struct YearsStrip: View {
         .padding(16)
         .card(20)
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel(years.count == 1 ? "On file in \(years.lowerBound)" : "On file from \(years.lowerBound) to \(years.upperBound)")
+        .accessibilityLabel(years.count == 1 ? "On file in " + String(years.lowerBound) : "On file from " + String(years.lowerBound) + " to " + String(years.upperBound))
     }
 }
 

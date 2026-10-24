@@ -153,7 +153,8 @@ public enum RecordProfile {
         for s in (row.string("sources") ?? "").components(separatedBy: ", ") where !s.isEmpty && !s.hasPrefix("http") {
             out.append(Chip(text: s, tone: .neutral))
         }
-        for key in ["status", "sunbiz_status", "fdacs_status", "kind", "match"] where key != DatasetSpec.for(datasetID).badgeKey {
+        let spec = DatasetSpec.for(datasetID)
+        for key in ["status", "sunbiz_status", "fdacs_status", "kind", "match"] where key != spec.badgeKey && !spec.subtitleKeys.contains(key) {
             if let v = row.string(key), v.count < 32 {
                 let t = Format.value(row[key]!, column: key)
                 if !out.contains(where: { $0.text == t }) { out.append(Chip(text: t, tone: .neutral)) }
