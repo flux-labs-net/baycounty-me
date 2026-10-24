@@ -17,7 +17,7 @@ struct ChipLabel: View {
         .font(.subheadline.weight(.semibold))
         .padding(.horizontal, 12).padding(.vertical, 6)
         .foregroundStyle(filled ? Color.white : Brand.navy)
-        .background(filled ? AnyShapeStyle(Brand.navy) : AnyShapeStyle(Brand.surface), in: Capsule())
+        .background(filled ? AnyShapeStyle(Brand.navyFill) : AnyShapeStyle(Brand.surface), in: Capsule())
         .overlay { if !filled { Capsule().strokeBorder(Brand.navy.opacity(0.2)) } }
     }
 }
@@ -74,7 +74,7 @@ struct ListSummary: View {
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.horizontal, 12).padding(.vertical, 10)
-                        .background(Brand.surface, in: RoundedRectangle(cornerRadius: 12))
+                        .card(12)
                         .accessibilityElement(children: .combine)
                     }
                 }
@@ -142,7 +142,7 @@ struct BucketChart: View {
             }
         }
         .padding(14)
-        .background(Brand.surface, in: RoundedRectangle(cornerRadius: 12))
+        .card(12)
     }
 }
 
@@ -175,7 +175,7 @@ struct TopBars: View {
             }
         }
         .padding(14)
-        .background(Brand.surface, in: RoundedRectangle(cornerRadius: 12))
+        .card(12)
     }
 }
 

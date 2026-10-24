@@ -143,7 +143,7 @@ struct MoneyView: View {
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(18)
-                .background(Brand.navy, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+                .background(Brand.navyFill, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
             }
             .buttonStyle(.plain)
             .accessibilityElement(children: .combine)

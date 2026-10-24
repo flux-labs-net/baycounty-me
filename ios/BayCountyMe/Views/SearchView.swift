@@ -33,6 +33,7 @@ struct SearchView: View {
                                     Text(s).font(.subheadline.weight(.medium)).foregroundStyle(.primary)
                                         .padding(.horizontal, 14).frame(minHeight: 38)
                                         .background(Brand.surface, in: Capsule())
+                                        .overlay { Capsule().strokeBorder(Brand.hairline) }
                                 }
                                 .buttonStyle(.plain)
                                 .accessibilityLabel("Search for \(s)")

@@ -15,7 +15,7 @@ struct StatStrip: View {
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.horizontal, 12).padding(.vertical, 10)
-                .background(Brand.surface, in: RoundedRectangle(cornerRadius: 12))
+                .card(12)
                 .accessibilityElement(children: .combine)
             }
         }
@@ -76,7 +76,7 @@ struct CompareBars: View {
         }
         .padding(14)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Brand.surface, in: RoundedRectangle(cornerRadius: 12))
+        .card(12)
     }
 }
 
@@ -147,7 +147,7 @@ struct TopicGrid: View {
                     }
                     .frame(maxWidth: .infinity, minHeight: 128, alignment: .topLeading)
                     .padding(12)
-                    .background(Brand.surface, in: RoundedRectangle(cornerRadius: 14))
+                    .card(14)
                 }
                 .buttonStyle(.plain)
             }
@@ -176,6 +176,6 @@ struct YearBars: View {
             .accessibilityValue(points.map { "\($0.label) \(format($0.value))" }.joined(separator: ", "))
         }
         .padding(14)
-        .background(Brand.surface, in: RoundedRectangle(cornerRadius: 12))
+        .card(12)
     }
 }

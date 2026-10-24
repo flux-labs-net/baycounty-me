@@ -74,7 +74,7 @@ struct HomeView: View {
             .foregroundStyle(.secondary)
             .padding(.horizontal, 14)
             .frame(height: 46)
-            .background(Brand.surface, in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+            .card(14)
         }
         .buttonStyle(.plain)
         .accessibilityLabel("Search")
@@ -93,7 +93,7 @@ struct HomeView: View {
                     }
                     .foregroundStyle(.white)
                     .frame(width: 46, height: 46)
-                    .background(Brand.salmon, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+                    .background(Brand.salmonFill, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
                     VStack(alignment: .leading, spacing: 2) {
                         Text("Amendment 3 is on the ballot").font(.subheadline.weight(.bold)).foregroundStyle(.primary)
                         Text("−\(Format.compactMoney(a3.localImpact(year))) to local budgets by \(Amendment3Model.fiscalYears[year]) · needs 60%")
@@ -139,7 +139,7 @@ struct HomeView: View {
                             }
                             .frame(maxWidth: .infinity, minHeight: 64)
                             .foregroundStyle(on ? Color.white : .primary)
-                            .background(on ? Brand.navy : Brand.surface, in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+                            .background(on ? Brand.navyFill : Brand.surface, in: RoundedRectangle(cornerRadius: 14, style: .continuous))
                         }
                         .buttonStyle(.plain)
                         .accessibilityLabel("\(Dates.display(d.date, hasTime: false)), \(d.meetings.count) meetings")
@@ -192,7 +192,7 @@ struct HomeView: View {
                         }
                     }
                     .padding(18)
-                    .background(Brand.surface, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+                    .card(18)
                 }
                 .buttonStyle(.plain)
                 if let home = store.home {

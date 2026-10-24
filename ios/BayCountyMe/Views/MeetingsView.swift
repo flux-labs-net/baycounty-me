@@ -39,7 +39,7 @@ struct MeetingsView: View {
                         .multilineTextAlignment(.center)
                         .frame(maxWidth: .infinity)
                         .padding(32)
-                        .background(Brand.surface, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+                        .card(16)
                     }
                     ForEach(days, id: \.key) { day in
                         VStack(alignment: .leading, spacing: 8) {
@@ -152,12 +152,12 @@ struct MeetingDetailView: View {
             HStack(spacing: 8) {
                 Link(destination: BayCountyClient.meetingsCalendarURL(gov: m.govID)) {
                     Text("Add to Calendar").frame(maxWidth: .infinity, minHeight: 44)
-                        .foregroundStyle(.white).background(Brand.navy, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+                        .foregroundStyle(.white).background(Brand.navyFill, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
                 }
                 if let a = m.agendaURL {
                     Button { store.open(a) } label: {
                         Text("Agenda").frame(maxWidth: .infinity, minHeight: 44)
-                            .foregroundStyle(Brand.navy).background(Brand.surface, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+                            .foregroundStyle(Brand.navy).card(12)
                     }
                 }
             }
@@ -194,7 +194,7 @@ struct MeetingDetailView: View {
             }
         }
         .padding(16)
-        .background(Brand.surface, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+        .card(18)
     }
 
     private func agendaSection(_ agenda: [AgendaItem], hasMoney: Bool) -> some View {
@@ -214,7 +214,7 @@ struct MeetingDetailView: View {
                                     .font(.subheadline.weight(.semibold))
                                     .padding(.horizontal, 12).frame(minHeight: 36)
                                     .foregroundStyle(on ? Color.white : .primary)
-                                    .background(on ? Brand.navy : Brand.surface, in: Capsule())
+                                    .background(on ? Brand.navyFill : Brand.surface, in: Capsule())
                             }
                             .buttonStyle(.plain)
                             .accessibilityAddTraits(on ? .isSelected : [])
