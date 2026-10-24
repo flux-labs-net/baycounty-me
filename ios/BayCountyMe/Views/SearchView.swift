@@ -1,7 +1,7 @@
 import SwiftUI
 import BayCountyKit
 
-/// Searches every page, record and glossary term on BayCounty.me (`/api/v1/search`).
+/// Searches every page, record and glossary term on BayCounty.me (`/api/v1/search`). Opens from the field on Today.
 struct SearchView: View {
     @Environment(AppStore.self) private var store
     @State private var query = ""
@@ -12,51 +12,48 @@ struct SearchView: View {
     private let suggestions = ["Millville", "Front Beach Road", "stormwater", "homestead", "Lynn Haven CRA", "FEMA debris"]
 
     var body: some View {
-        NavigationStack {
-            List {
-                if query.trimmingCharacters(in: .whitespaces).count < 2 {
-                    Section("Try") {
-                        ForEach(suggestions, id: \.self) { s in
-                            Button { query = s } label: { Label(s, systemImage: "magnifyingglass") }
-                        }
+        List {
+            if query.trimmingCharacters(in: .whitespaces).count < 2 {
+                Section("Try") {
+                    ForEach(suggestions, id: \.self) { s in
+                        Button { query = s } label: { Label(s, systemImage: "magnifyingglass") }
                     }
-                    Section("Browse") {
-                        NavigationLink(value: Route.glossary) { Label("Glossary", systemImage: "character.book.closed") }
-                        NavigationLink(value: Route.explore) { Label("Every dataset", systemImage: "square.grid.2x2") }
-                        NavigationLink(value: Route.vendors) { Label("Companies", systemImage: "building") }
-                        NavigationLink(value: Route.accountability) { Label("Accountability console", systemImage: "checklist") }
-                        NavigationLink(value: Route.people) { Label("People", systemImage: "person.3") }
-                        NavigationLink(value: Route.updates) { Label("What's new", systemImage: "sparkles") }
-                        NavigationLink(value: Route.about) { Label("About and privacy", systemImage: "info.circle") }
-                    }
-                } else if let error {
-                    ContentUnavailableView("Search isn't available", systemImage: "wifi.slash", description: Text(error))
-                } else if results.isEmpty && !searching {
-                    ContentUnavailableView.search(text: query)
-                } else {
-                    ForEach(results) { r in
-                        Button { store.open(r.link) } label: {
-                            VStack(alignment: .leading, spacing: 4) {
-                                HStack {
-                                    Text(r.title ?? "Result").font(.subheadline.weight(.medium)).foregroundStyle(.primary)
-                                    Spacer()
-                                    if let t = r.type { Badge(text: t, color: Brand.blue) }
-                                }
-                                if let s = r.summary {
-                                    Text(s).font(.caption).foregroundStyle(.secondary).lineLimit(3)
-                                }
+                }
+                Section("Browse") {
+                    NavigationLink(value: Route.glossary) { Label("Glossary", systemImage: "character.book.closed") }
+                    NavigationLink(value: Route.explore) { Label("Every dataset", systemImage: "square.grid.2x2") }
+                    NavigationLink(value: Route.vendors) { Label("Companies", systemImage: "building") }
+                    NavigationLink(value: Route.accountability) { Label("Accountability console", systemImage: "checklist") }
+                    NavigationLink(value: Route.people) { Label("People", systemImage: "person.3") }
+                    NavigationLink(value: Route.updates) { Label("What's new", systemImage: "sparkles") }
+                    NavigationLink(value: Route.about) { Label("About and privacy", systemImage: "info.circle") }
+                }
+            } else if let error {
+                ContentUnavailableView("Search isn't available", systemImage: "wifi.slash", description: Text(error))
+            } else if results.isEmpty && !searching {
+                ContentUnavailableView.search(text: query)
+            } else {
+                ForEach(results) { r in
+                    Button { store.open(r.link) } label: {
+                        VStack(alignment: .leading, spacing: 4) {
+                            HStack {
+                                Text(r.title ?? "Result").font(.subheadline.weight(.medium)).foregroundStyle(.primary)
+                                Spacer()
+                                if let t = r.type { Badge(text: t, color: Brand.blue) }
                             }
-                            .padding(.vertical, 2)
+                            if let s = r.summary {
+                                Text(s).font(.caption).foregroundStyle(.secondary).lineLimit(3)
+                            }
                         }
+                        .padding(.vertical, 2)
                     }
                 }
             }
-            .navigationTitle("Search")
-            .searchable(text: $query, placement: .navigationBarDrawer(displayMode: .always), prompt: "Names, projects, streets, terms")
-            .overlay { if searching && results.isEmpty { ProgressView() } }
-            .task(id: query) { await run() }
-            .withRoutes()
         }
+        .navigationTitle("Search")
+        .searchable(text: $query, placement: .navigationBarDrawer(displayMode: .always), prompt: "Names, projects, streets, terms")
+        .overlay { if searching && results.isEmpty { ProgressView() } }
+        .task(id: query) { await run() }
     }
 
     private func run() async {

@@ -50,6 +50,7 @@ enum Route: Hashable {
     case explore
     case accountability
     case accountabilityProject(String)
+    case search
 }
 
 extension View {
@@ -77,6 +78,7 @@ extension View {
             case .explore: ExploreView()
             case .accountability: AccountabilityView()
             case .accountabilityProject(let id): AccountabilityProjectView(projectID: id)
+            case .search: SearchView()
             }
         }
     }
