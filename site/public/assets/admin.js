@@ -34,7 +34,7 @@
   $('#signout').addEventListener('click', async () => { await api('logout', {method: 'POST'}).catch(() => {}); location.href = '/admin'; });
 
   // ---------- tabs ----------
-  const loaders = {keys: loadKeys, analytics: loadStats, logs: () => loadLogs(true), settings: loadSettings, ingestion: loadIngestion, agendas: loadAgendas, sent: loadSent, emails: loadEmails, compose: () => loadCompose(), correspondence: loadCorr, owners: loadOwners, ties: loadTies, boards: loadBoards};
+  const loaders = {keys: loadKeys, analytics: loadStats, logs: () => loadLogs(true), settings: loadSettings, ingestion: loadIngestion, agendas: loadAgendas, sent: loadSent, emails: loadEmails, compose: () => loadCompose(), correspondence: loadCorr, owners: () => { loadOwners(); loadLimits(); }, ties: loadTies, boards: loadBoards};
   function tab(name) {
     document.querySelectorAll('[role=tab][data-tab]').forEach(b => b.setAttribute('aria-selected', String(b.dataset.tab === name)));
     document.querySelectorAll('[role=tabpanel]').forEach(p => { p.hidden = p.id !== 'tab-' + name; });
@@ -821,6 +821,44 @@
     s.disabled = false;
   });
   $('#ow-status').addEventListener('change', loadOwners);
+  // gifts over the per-election limit (registry.limit_cases)
+  const OL_REV = {unreviewed: 'Unreviewed', confirmed: 'Confirmed (open)', resolved: 'Resolved', rejected: 'Rejected'};
+  const OL_RES = {reporting_error: 'Reporting error', amended_report: 'Amended report', refunded: 'Refunded', designated_general: 'Designated for the general', elections_commission: 'Elections Commission ruling', other: 'Other'};
+  async function loadLimits() {
+    let r;
+    try { r = await api('registry_limits', {params: {status: $('#ol-status').value}}); }
+    catch (e) { $('#ol-cases tbody').innerHTML = `<tr><td colspan="5" class="empty">Couldn’t load: ${esc(e.message)}</td></tr>`; return; }
+    $('#ol-cases tbody').innerHTML = r.cases.map(c => {
+      const res = c.resolution || c.auto_resolution || '';
+      return `<tr data-case="${esc(c.case_id)}">
+      <td><b>${esc(c.candidate)}</b><div class="muted small">${esc(c.office || '')}</div><div class="muted small">${esc(c.election || '')}${c.election_phase ? ' · ' + esc(c.election_phase) : ''}</div>${c.report_url ? `<a class="small" href="${esc(c.report_url)}" target="_blank" rel="noopener">Campaign report</a>` : ''}</td>
+      <td>${owNm(c.contributor)}<div class="muted small">${esc(c.contributor_type || '')}${(c.spellings || []).length > 1 ? ' · filed as ' + esc(c.spellings.join(' / ')) : ''}</div>${c.possible_double_entry ? '<span class="pill">same amount, same day</span>' : ''}${c.in_current_data ? '' : ' <span class="pill">no longer in the reports</span>'}</td>
+      <td class="small">${(c.items || []).map(i => `<div>${esc(i.date || '')} <b>${owUsd(i.amount)}</b> <span class="muted">${esc(i.kind || '')}</span></div>`).join('')}</td>
+      <td class="num"><b>${owUsd(c.net_amount)}</b>${c.refunds ? `<div class="muted small">${owUsd(c.refunds)} refunded</div>` : ''}<div class="small">${c.over_by ? owUsd(c.over_by) + ' over' : 'at the limit'}</div></td>
+      <td style="min-width:240px"><select class="sel" data-ol="status" aria-label="Review">${Object.entries(OL_REV).map(([k, l]) => `<option value="${k}"${k === c.review_status ? ' selected' : ''}>${l}</option>`).join('')}</select>
+        <div data-ol-res style="margin-top:6px;gap:4px;display:${c.review_status === 'resolved' ? 'grid' : 'none'}">
+          <select class="sel" data-ol="resolution" aria-label="How it was resolved"><option value="">How was it resolved?</option>${Object.entries(OL_RES).map(([k, l]) => `<option value="${k}"${k === res ? ' selected' : ''}>${l}</option>`).join('')}</select>
+          <input class="sel" data-ol="note" placeholder="What happened (shown publicly)" value="${esc(c.resolution_note || '')}">
+          <input class="sel" data-ol="url" placeholder="Source link (amended report, ruling…)" value="${esc(c.resolution_url || '')}">
+        </div>
+        <div class="row" style="gap:6px;margin-top:6px"><button class="btn" data-ol-save style="min-height:30px;padding:0 10px">Save</button><span class="small muted" data-ol-msg>${c.reviewed_by ? 'by ' + esc(c.reviewed_by) : ''}</span></div></td></tr>`;
+    }).join('') || '<tr><td colspan="5" class="empty">No cases.</td></tr>';
+  }
+  $('#ol-cases').addEventListener('change', e => {
+    const s = e.target.closest('[data-ol="status"]'); if (!s) return;
+    s.closest('tr').querySelector('[data-ol-res]').style.display = s.value === 'resolved' ? 'grid' : 'none';
+  });
+  $('#ol-cases').addEventListener('click', async e => {
+    const b = e.target.closest('[data-ol-save]'); if (!b) return;
+    const tr = b.closest('tr'), v = k => tr.querySelector(`[data-ol="${k}"]`).value, msg = tr.querySelector('[data-ol-msg]');
+    b.disabled = true; msg.textContent = 'Saving…';
+    try {
+      const r = await api('registry_limit_review', {method: 'POST', body: {case_id: tr.dataset.case, status: v('status'), resolution: v('resolution'), resolution_note: v('note'), resolution_url: v('url')}});
+      msg.textContent = r.published ? 'Saved, published' : 'Saved, not public';
+    } catch (err) { msg.textContent = err.message; }
+    b.disabled = false;
+  });
+  $('#ol-status').addEventListener('change', loadLimits);
   let owTimer;
   $('#ow-q').addEventListener('input', () => {
     clearTimeout(owTimer);

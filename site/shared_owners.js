@@ -59,8 +59,33 @@
     </article>`).join('') || '<p class="muted">No groups have been checked and listed yet.</p>';
   }
 
+  // gifts over the per-election limit, confirmed or resolved by an admin (/api/v1/datasets/over-limit-gifts)
+  const RES = {reporting_error: 'Reporting error', amended_report: 'Corrected in an amended report', refunded: 'Refunded', designated_general: 'Designated for the general election',
+    elections_commission: 'Florida Elections Commission ruling', other: 'Explained'};
+  async function loadLimits() {
+    let rows = [];
+    try {
+      const r = await fetch('/api/v1/datasets/over-limit-gifts?limit=1000');
+      if (!r.ok) throw new Error();
+      rows = (await r.json()).data || [];
+    } catch (e) { $('#olList').innerHTML = '<p class="muted">Couldn’t load this list. Try again in a moment.</p>'; return; }
+    rows.sort((a, b) => (a.status === 'Open' ? 0 : 1) - (b.status === 'Open' ? 0 : 1) || String(b.last_date).localeCompare(String(a.last_date)));
+    const ud = t => window.BCM_usDate ? BCM_usDate(t) : t;
+    $('#olList').innerHTML = rows.map(c => `<article class="ol-c">
+      <div style="display:flex;justify-content:space-between;gap:12px;align-items:baseline;flex-wrap:wrap">
+        <div><h3>${esc(title(c.contributor))} to ${esc(c.candidate)}<span class="ol-st ${c.status === 'Resolved' ? 'res' : 'open'}">${c.status === 'Resolved' ? 'Resolved' : 'Open'}</span></h3>
+          <div class="so-meta">${esc(c.office || '')}${c.election ? ' · ' + esc(c.election) : ''}${c.election_phase ? ' · ' + esc(c.election_phase) + ' election' : ''}</div></div>
+        <div style="text-align:right"><div class="so-total">${usd(c.net_amount)}</div><div class="small muted">${Number(c.over_by) > 0 ? usd(c.over_by) + ' over the limit as reported' : 'within the limit after refunds'}</div></div></div>
+      <div class="small">${esc(ud(String(c.gift_list || ''))).split('; ').join('<br>')}</div>
+      ${Number(c.refunds) > 0 ? `<div class="small muted">${usd(c.refunds)} refunded</div>` : ''}
+      ${c.status === 'Resolved' ? `<div class="ol-res"><b>${esc(RES[c.resolution] || 'Explained')}.</b> ${esc(c.resolution_note || '')}${c.resolution_url ? ` <a href="${esc(c.resolution_url)}" target="_blank" rel="noopener">Source</a>` : ''}</div>` : ''}
+      ${c.source_url ? `<p class="small" style="margin:10px 0 0"><a href="${esc(c.source_url)}" target="_blank" rel="noopener">Campaign finance report</a></p>` : ''}
+    </article>`).join('') || '<p class="muted">No cases have been checked and listed yet.</p>';
+  }
+
   $('#soC').addEventListener('change', render);
   $('#soY').addEventListener('change', render);
   $('#soYears').addEventListener('click', e => { const b = e.target.closest('.so-yr'); if (!b || b.dataset.y === 'Other') return; $('#soY').value = b.dataset.y; render(); });
   load();
+  loadLimits();
 })();
