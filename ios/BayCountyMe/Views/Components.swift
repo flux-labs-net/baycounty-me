@@ -128,21 +128,19 @@ struct TermChips: View {
     var body: some View {
         let terms = Array((store.glossary?.terms(in: text) ?? []).prefix(limit))
         if !terms.isEmpty {
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 6) {
-                    Image(systemName: "character.book.closed").font(.caption).foregroundStyle(.secondary)
-                        .accessibilityHidden(true)
-                    ForEach(terms) { t in
-                        Button { store.presentedTerm = t } label: {
-                            Text(t.matchWords.last ?? t.term)
-                                .font(.caption.weight(.medium))
-                                .padding(.horizontal, 10).padding(.vertical, 5)
-                                .foregroundStyle(Brand.navy)
-                                .background(Brand.navy.opacity(0.1), in: Capsule())
-                        }
-                        .buttonStyle(.plain)
-                        .accessibilityLabel("Explain \(t.term)")
+            FlowLayout(spacing: 6) {
+                Image(systemName: "character.book.closed").font(.caption).foregroundStyle(.secondary)
+                    .accessibilityHidden(true)
+                ForEach(terms) { t in
+                    Button { store.presentedTerm = t } label: {
+                        Text(t.matchWords.last ?? t.term)
+                            .font(.caption.weight(.medium))
+                            .padding(.horizontal, 10).padding(.vertical, 5)
+                            .foregroundStyle(Brand.navy)
+                            .background(Brand.navy.opacity(0.1), in: Capsule())
                     }
+                    .buttonStyle(.plain)
+                    .accessibilityLabel("Explain \(t.term)")
                 }
             }
         }

@@ -522,7 +522,7 @@ struct MoneyMapView: View {
     var body: some View {
         List {
             Section {
-                Picker("View", selection: $mode) { ForEach(Mode.allCases) { Text($0.rawValue).tag($0) } }.pickerStyle(.segmented)
+                ChipRow(chips: Mode.allCases.map { (id: $0, label: $0.rawValue) }, selected: mode) { mode = $0 }
                 Text("Gifts from businesses and organizations to the campaigns of current officials, and where those donors hold local government contracts. Individual donors are never named. A gift near a vote does not show why anyone voted the way they did.")
                     .font(.footnote).foregroundStyle(.secondary)
             }
