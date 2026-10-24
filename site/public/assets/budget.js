@@ -8,7 +8,6 @@ const R = (n, pop) => { if (!pop || n == null) return ''; const v = n / pop; ret
 const med = a => { if (a.length < 3) return null; const s = [...a].sort((x, y) => x - y), m = s.length >> 1; return s.length ? (s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2) : null; };
 $('beG').innerHTML = B.map(b => `<option value="${b.gov}">${esc(b.short)}</option>`).join('');
 const P = new URLSearchParams(location.search);
-if (P.get('gov') && B.some(b => b.gov === P.get('gov'))) $('beG').value = P.get('gov');
 let svc = SV.some(s => s[0] === P.get('svc')) ? P.get('svc') : 'police';
 function bars(list, total, pop, note) {
   if (!list || !list.length) return `<p class="muted">${note || 'Not broken out in the published budget.'}</p>`;
@@ -37,7 +36,8 @@ function bench(b) {
 }
 function run() {
   const b = B.find(x => x.gov === $('beG').value), pop = b.pop;
-  history.replaceState(null, '', '?gov=' + b.gov + (svc !== 'police' ? '&svc=' + svc : ''));
+  const u = new URL(location.href); if (svc !== 'police') u.searchParams.set('svc', svc); else u.searchParams.delete('svc');
+  history.replaceState(history.state, '', u.pathname + u.search + u.hash); // the city bar keeps ?gov=
   const gf = (b.funds || []).find(f => /general/i.test(f.type || '') || /general fund/i.test(f.name));
   const gfd = (b.general_fund_departments || []).reduce((s, x) => s + x.amount, 0), gfv = gf ? gf.amount : gfd || null;
   $('beKpis').innerHTML = `<div class="kpi"><span class="eyebrow">Total budget</span><span class="v">${M(b.total)}</span><span class="s">${pop ? R(b.total, pop) + ' per resident · ' : ''}${esc(b.fiscal_year)}</span></div>
@@ -55,5 +55,8 @@ function run() {
   bench(b);
 }
 $('bnChips').addEventListener('click', ev => { const c = ev.target.closest('[data-s]'); if (c) { svc = c.dataset.s; run(); } });
-$('beG').addEventListener('change', run); run();
+$('beG').addEventListener('change', run);
+// the city bar at the top picks the budget; "All governments" opens Bay County's, the countywide budget
+const pick = k => { $('beG').value = B.some(b => b.gov === k) ? k : B[0].gov; run(); };
+if (window.BCM && BCM.city) BCM.city.on(pick); else pick(P.get('gov'));
 })();

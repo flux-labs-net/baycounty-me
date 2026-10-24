@@ -26,11 +26,29 @@ function radio(groupId, opts, cur, set) {
   opts.forEach(([k, l]) => g.appendChild(chip(l, cur === k, b => { set(k); g.querySelectorAll('.crn-chip').forEach(x => x.setAttribute('aria-pressed', x === b)); }, groupId + '-' + k)));
 }
 function controls() {
-  document.querySelectorAll('[data-cra]').forEach(b => b.onclick = () => { const k = b.dataset.cra; st.cra.has(k) ? st.cra.delete(k) : st.cra.add(k); b.setAttribute('aria-pressed', st.cra.has(k)); render(); });
+  document.querySelectorAll('[data-cra]').forEach(b => b.onclick = () => { const k = b.dataset.cra; st.cra.has(k) ? st.cra.delete(k) : st.cra.add(k); b.setAttribute('aria-pressed', st.cra.has(k)); chipsToBar(); render(); });
   STATUS.forEach(k => $('crnStatus').appendChild(chip(k, st.status.has(k), b => { st.status.has(k) ? st.status.delete(k) : st.status.add(k); b.setAttribute('aria-pressed', st.status.has(k)); render(); })));
   radio('crnDon', [['payees', 'Donors who were paid'], ['all', 'All business donors'], ['off', 'Hide']], st.don, k => { st.don = k; render(); });
   radio('crnBoards', [['all', 'All'], ...['PC', 'PCB', 'LH', 'CW'].filter(k => D.cras[k]).map(k => [k, craName(k).replace(' CRA', '')]), ['none', 'Not on a CRA board']], st.board, k => { st.board = k; donTable(); });
   document.querySelectorAll('.crn-tab').forEach(b => b.onclick = () => setView(b.dataset.v));
+}
+
+/* The city bar at the top drives the agency chips (one city = that city's CRA only). A chip change sets the bar
+   when exactly one agency is left on, and clears it otherwise; the chips the reader picked stay as they are. */
+let fromChips = false;
+function chipsToBar() {
+  const on = [...st.cra];
+  fromChips = true;
+  BCM.city.set(on.length === 1 ? BCM.city.key(on[0]) : '');
+  fromChips = false;
+}
+function barToChips(k) {
+  if (fromChips) return;
+  const code = (BCM.city.cra(k) || '').toUpperCase();
+  st.cra = new Set(k && D.cras[code] ? [code] : Object.keys(D.cras));
+  document.querySelectorAll('[data-cra]').forEach(b => b.setAttribute('aria-pressed', st.cra.has(b.dataset.cra)));
+  const bd = k && ['PC', 'PCB', 'LH', 'CW'].includes(code) && D.cras[code] ? code : 'all';
+  if (bd !== st.board) { st.board = bd; document.querySelectorAll('#crnBoards .crn-chip').forEach(x => x.setAttribute('aria-pressed', x.id === 'crnBoards-' + bd)); }
 }
 
 function kpis(rows) {
@@ -297,6 +315,7 @@ function start() {
   document.addEventListener('fullscreenchange', () => { if (!document.fullscreenElement && fsOn) setFull(false); });
   [['crnZin', 1.6], ['crnZout', 1 / 1.6], ['crnZreset', 0]].forEach(([id, f]) => { const b = $(id); if (b) b.onclick = () => mapBtn(f); });
   [['crnGin', 1.5], ['crnGout', 1 / 1.5], ['crnGreset', 0]].forEach(([id, f]) => { const b = $(id); if (b) b.onclick = () => graphBtn(f); });
+  BCM.city.on((k, d) => { barToChips(k); if (d.why !== 'now' && !fromChips) { if (st.sel && !visible().some(r => r.e === st.sel)) st.sel = null; render(); } });
   const h = location.hash.slice(1);
   setView(['network', 'map', 'payees', 'donations'].includes(h) ? h : 'network');
   fetch('/data/cra-geo.json').then(r => r.json()).then(g => { GEO = g; if (st.view === 'map') map(visible()); }).catch(() => { $('crnMap').innerHTML = '<text x="20" y="30" fill="var(--muted)" font-size="13">The map could not load. Try reloading the page.</text>'; });

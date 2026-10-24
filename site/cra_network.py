@@ -13,6 +13,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(HERE, '..', 'data')
 sys.path.insert(0, os.path.join(DATA, 'entities'))
 import ids  # noqa: E402
+from city_filter import city_bar  # noqa: E402
 
 CRA_CODE = {'Panama City CRA': 'PC', 'Panama City Beach CRA': 'PCB', 'Lynn Haven CRA': 'LH',
             'Callaway CRA': 'CW', 'Springfield CRA': 'SF', 'Parker CRA': 'PK'}
@@ -172,6 +173,7 @@ def cra_network_page(out_dir):
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Accountability · CRA network</span><h1>Who the redevelopment agencies paid, and who gave to their boards</h1>
     <p class="lede">Every payment, contract and grant in the CRA ledger, linked to who received it, to other payees on the same project or address, and to business gifts to the officials who sit as each CRA's board. Tap any name to follow its connections.</p></div>
     <div class="stamp"><a class="pill" href="/public-money/cra-spending">CRA spending ledger</a><a class="pill" href="/public-money/money-map">Money map</a><span>Campaign reports as of {D.get("as_of") or ""}</span></div></header>
+  {city_bar([CRA_GOV[k] for k in D['cras']], label='City')}
   <section class="explain"><div class="ex-txt"><span class="eyebrow">Read this first</span><h2>What a line means</h2>
     <ol class="ex-steps"><li><b>A gray line is money from a CRA.</b> Thicker lines carry more dollars. Contract records that sit inside a larger project total are shown on the payee, but counted once in the totals.</li>
       <li><b>A dashed line is a documented link between two payees:</b> the same project, the same address, or one working as the other's subconsultant. Each one cites its record.</li>

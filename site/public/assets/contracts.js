@@ -34,6 +34,8 @@ $('ctCsv').addEventListener('click', () => {
   TT.csv('baycounty-contracts', rows[0], rows.slice(1)); if (window.BCM) BCM.announce('Downloaded ' + cur.length + ' contracts');
 });
 filt();
+// the city bar at the top picks the government (#ctG follows it); keep the year on one that city has contracts for
+if (window.BCM && BCM.city) BCM.city.on(k => BCM.city.fitYear($('ctY'), R.filter(r => BCM.city.has(k, r.g)).map(r => +(r.d || '').slice(0, 4) || null)));
 
 /* company cards: every record for one company, whatever spelling each record used */
 const VBY = Object.fromEntries(VP.map(p => [p.id, p]));

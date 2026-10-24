@@ -9,6 +9,7 @@ Built from data/campaign and data/votes. Individual donors are never named.
 import json, os, re
 from collections import defaultdict
 import campaign_page as cp
+from city_filter import city_bar, by_city, KEYS
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(HERE, '..', 'data')
@@ -174,23 +175,38 @@ def money_map_page(out_dir):
     k_gift = sum(g['a'] for g in D['gifts'] if g['d'] in k_ids)
     same = [g for g in D['gifts'] if g['same']]
     voted = {(v['d'], v['o']) for v in D['votes']}
+    city = lambda g: cp.CITY(g)  # county officers count with Bay County
+    ck = [k for k in KEYS if any(city(o['g']) == k for o in D['officials'])]
+
+    def per(fn):  # a headline figure per city: fn(official ids, vote groups)
+        return by_city({'': fn({o['id'] for o in D['officials']}, D['vgroups']),
+                        **{k: fn({o['id'] for o in D['officials'] if city(o['g']) == k}, [v for v in D['vgroups'] if city(v['g']) == k]) for k in ck}})
+    usd = lambda n: f'${n:,.0f}'
+    k_donors = lambda os_, vg: len({g['d'] for g in D['gifts'] if g['o'] in os_})
+    k_off = lambda os_, vg: f"gave to {len({g['o'] for g in D['gifts'] if g['o'] in os_})} current officials"
+    k_k = lambda os_, vg: len({g['d'] for g in D['gifts'] if g['o'] in os_ and g['d'] in k_ids})
+    k_kg = lambda os_, vg: f"gave {usd(sum(g['a'] for g in D['gifts'] if g['o'] in os_ and g['d'] in k_ids))} in all"
+    k_same = lambda os_, vg: len([g for g in same if g['o'] in os_])
+    k_sameg = lambda os_, vg: f"gifts totaling {usd(sum(g['a'] for g in same if g['o'] in os_))}"
+    k_voted = lambda os_, vg: len({(d, o) for d, o in voted if o in os_})
+    k_votedn = lambda os_, vg: f"official–donor pairs, {len(vg)} recorded votes"
     return f'''<div class="page tax mm">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Accountability · Money map</span><h1>Money map</h1>
     <p class="lede">Which businesses and groups gave to which officials' campaigns, and which of those donors are paid by a local government. Tap any name to follow its connections.</p></div>
     <div class="stamp"><a class="pill" href="/public-money/campaign-money">Campaign money tables</a><button type="button" class="pdf-btn" id="pdf"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 12v2h10v-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Export PDF</button><span>Reports as of {e(D.get("as_of"))}</span></div></header>
+  {city_bar(ck, label='Officials of', note='Bay County includes the county officers')}
   <section class="explain"><div class="ex-txt"><span class="eyebrow">Read this first</span><h2>What the map does and doesn't show</h2>
     <ol class="ex-steps"><li><b>A gift and a contract are two separate facts.</b> A line to an official is a campaign gift. A line to a government is that government's contracts or payments to the same business. The map never adds contract dollars to an official.</li>
       <li><b>Officials only vote on their own government's contracts.</b> A county commissioner has no say in a city's contracts. The connections that can matter are marked: a gift to an official whose own government pays that donor.</li>
       <li><b>None of this shows wrongdoing.</b> Contracts are usually bid, and most are approved by the full board, often on a consent agenda with routine items. The dates are shown so you can see what came first.</li></ol></div></section>
   <div class="kpis">
-    <div class="kpi"><span class="eyebrow">Donor organizations</span><span class="v">{len(D["donors"])}</span><span class="s">gave to {len(D["officials"])} current officials</span></div>
-    <div class="kpi"><span class="eyebrow">Also paid by a local government</span><span class="v">{len(k_ids)}</span><span class="s">gave ${k_gift:,.0f} in all</span></div>
-    <div class="kpi"><span class="eyebrow">Gift to the official's own government's contractor</span><span class="v">{len(same)}</span><span class="s">gifts totaling ${sum(g["a"] for g in same):,.0f}</span></div>
-    <div class="kpi"><span class="eyebrow">Voted on that donor's contract</span><span class="v">{len(voted)}</span><span class="s">official–donor pairs, {len(D["vgroups"])} recorded votes</span></div>
+    <div class="kpi"><span class="eyebrow">Donor organizations</span><span class="v"{per(k_donors)}>{len(D["donors"])}</span><span class="s"{per(k_off)}>gave to {len(D["officials"])} current officials</span></div>
+    <div class="kpi"><span class="eyebrow">Also paid by a local government</span><span class="v"{per(k_k)}>{len(k_ids)}</span><span class="s"{per(k_kg)}>gave ${k_gift:,.0f} in all</span></div>
+    <div class="kpi"><span class="eyebrow">Gift to the official's own government's contractor</span><span class="v"{per(k_same)}>{len(same)}</span><span class="s"{per(k_sameg)}>gifts totaling ${sum(g["a"] for g in same):,.0f}</span></div>
+    <div class="kpi"><span class="eyebrow">Voted on that donor's contract</span><span class="v"{per(k_voted)}>{len(voted)}</span><span class="s"{per(k_votedn)}>official–donor pairs, {len(D["vgroups"])} recorded votes</span></div>
   </div>
   <div class="vt-filters mm-f">
     <label class="vf"><span>Show donors</span><select id="mmShow"><option value="same">Gave to an official whose government pays them</option><option value="k">Paid by any local government</option><option value="top">Top 40 by amount given</option><option value="all">All organizations</option></select></label>
-    <label class="vf"><span>Officials of</span><select id="mmGov"><option value="">Every government</option></select></label>
     <label class="vf"><span>Find</span><input id="mmQ" type="search" placeholder="Donor or official"></label>
   </div>
   <section class="tx-sec"><div class="sec-hd"><h2 id="map">Relationship map</h2><span class="muted" id="mmCount"></span></div>
@@ -208,4 +224,5 @@ def money_map_page(out_dir):
     <p>Gifts come from the officials' most recent campaign reports with the Supervisor of Elections. Contracts and payments come from the contracts, change orders and check registers on this site, matched by organization name; each donor's contracts with a government are counted once. Only organizations are shown; gifts from individual people, including a company's owners or employees, are counted on the <a href="/public-money/campaign-money">Campaign Money</a> page but not named or linked to a company.</p></section>
 </div>
 <link rel="stylesheet" href="/assets/tax.css">
+<script>(() => {{ const u = new URL(location.href); if (u.searchParams.get('gov') === 'constitutional') {{ u.searchParams.set('gov', 'county'); history.replaceState(history.state, '', u); }} }})(); /* old links for the county officers: before the city bar reads ?gov= */</script>
 <script src="/assets/money_map.js" defer></script>'''

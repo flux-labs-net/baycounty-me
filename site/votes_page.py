@@ -1,6 +1,7 @@
 """How They Voted page for baycounty.me (data: data/votes/votes.json)."""
 import json, os, html, shutil
 from collections import defaultdict, Counter
+from city_filter import city_bar, data_g, by_city
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 SRC = os.path.join(HERE, '..', 'data', 'votes', 'votes.json')
@@ -99,21 +100,32 @@ def votes_page(out_dir):
             c = mem.get((k, m['name']), Counter())
             rec = sum(c.values())
             rows += f'<tr><th scope="row">{e(m["name"])}</th><td class="small">{e(m.get("seat"))}</td><td class="small">{e(m.get("term_end"))}</td><td class="num">{rec or "—"}</td><td class="num">{c["no"] or ("0" if rec else "—")}</td></tr>'
-        roster += f'''<details class="tbl-toggle"{" open" if cnt[k] else ""}><summary>{e(board_name(b["name"]))} <span class="muted">· {cnt[k]} votes recorded</span></summary><div class="tablewrap"><table class="tx-table"><thead><tr><th scope="col">Member</th><th scope="col">Seat</th><th scope="col">Term</th><th scope="col" class="num">Recorded votes</th><th scope="col" class="num">Voted no</th></tr></thead><tbody>{rows}</tbody></table></div>{f'<p class="note"><a class="src" href="{e(b["source_url"])}" target="_blank" rel="noopener">Roster source</a></p>' if b.get("source_url") else ""}</details>'''
+        roster += f'''<details class="tbl-toggle"{data_g(gov_of(k))}{" open" if cnt[k] else ""}><summary>{e(board_name(b["name"]))} <span class="muted">· {cnt[k]} votes recorded</span></summary><div class="tablewrap"><table class="tx-table"><thead><tr><th scope="col">Member</th><th scope="col">Seat</th><th scope="col">Term</th><th scope="col" class="num">Recorded votes</th><th scope="col" class="num">Voted no</th></tr></thead><tbody>{rows}</tbody></table></div>{f'<p class="note"><a class="src" href="{e(b["source_url"])}" target="_blank" rel="noopener">Roster source</a></p>' if b.get("source_url") else ""}</details>'''
     def card(v):
         meta = ' · '.join(x for x in [nice(v.get('date')), CAT.get(v.get('category'), v.get('category') or ''), ('$' + format(v['amount'], ',.0f')) if v.get('amount') else ''] if x)
-        return f'''<li class="fd vt" data-d="{e(v.get("date") or "")}" data-n="{e(v.get("headline") or v.get("item") or "")}"><div class="vt-top"><span class="vt-board">{e(board_name(bodies.get(v["body"], {}).get("name", v["body"])))}</span><span class="badge warn">{e(tally(v.get("tally")))} {e((v.get("outcome") or "").capitalize())}</span></div>
+        return f'''<li class="fd vt"{data_g(gov_of(v["body"]))} data-d="{e(v.get("date") or "")}" data-n="{e(v.get("headline") or v.get("item") or "")}"><div class="vt-top"><span class="vt-board">{e(board_name(bodies.get(v["body"], {}).get("name", v["body"])))}</span><span class="badge warn">{e(tally(v.get("tally")))} {e((v.get("outcome") or "").capitalize())}</span></div>
       <span class="vt-meta muted">{e(meta)}</span>
       <div class="vt-h">{e(v.get("headline") or v.get("item"))}</div>
       <p class="vt-s">{e(v.get("summary") or v.get("plain_summary") or "")}</p>
       {f'<p class="votes-row">{chips(v.get("by_member"))}</p>' if v.get("by_member") else ""}
       <a class="src" href="{e(v.get("source_url"))}" target="_blank" rel="noopener" title="{e(v.get("source_title") or "")}">{e(src_label(v))}</a></li>'''
-    sp_html = ''.join(card(v) for v in split[:25])
+    # the 25 newest split votes, plus each government's own newest, so the list still has content for one city
+    keep = {id(v) for v in split[:25]}
+    for g in {gov_of(v['body']) for v in split}:
+        keep |= {id(v) for v in [x for x in split if gov_of(x['body']) == g][:10]}
+    sp_html = ''.join(card(v) for v in split if id(v) in keep)
+    gk = [k for k, _, _ in GOVS if any(gov_of(v['body']) == k for v in vs)]
+    def per(fn):
+        return by_city({'': fn(vs, None), **{k: fn([v for v in vs if gov_of(v['body']) == k], k) for k in gk}})
+    def boards(xs, k):
+        bs = [b for b in bodies if not b.endswith('-cra') and (k is None or gov_of(b) == k)]
+        return f'{sum(1 for b in bs if cnt[b] or cnt[b.split("-")[0] + "-cra"])} of {len(bs)}'
     missing = [board_name(bodies[k]['name']) for k in bodies if not cnt[k] and not k.endswith('-cra')]
     return f'''<div class="page tax">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Accountability · Votes</span><h1>How they voted</h1>
     <p class="lede">Budgets, tax rates, big contracts, land deals and borrowing are decided by recorded votes. Here's how each elected official voted on the money decisions since 2024, from official minutes.</p></div>
     <div class="stamp"><button type="button" class="pdf-btn" id="pdf"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 12v2h10v-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Export PDF</button><span>Minutes Jan 2024 to Oct 2026<br>Data updated Oct 20, 2026</span></div></header>
+  {city_bar(gk, legacy='g', hide=True)}
   <section class="explain"><div class="ex-txt"><span class="eyebrow">The simple version</span><h2>Reading the votes</h2>
     <ol class="ex-steps">
       <li><b>Most votes are unanimous.</b> Many items pass 5-0, often together on a "consent agenda" with no discussion. A unanimous vote still means every member approved it.</li>
@@ -121,16 +133,16 @@ def votes_page(out_dir):
       <li><b>Absent isn't a no.</b> Members who missed a meeting are shown as absent.</li>
     </ol></div></section>
   <div class="kpis">
-    <div class="kpi"><span class="eyebrow">Votes recorded</span><span class="v">{len(vs)}</span><span class="s">Money decisions with a source</span></div>
-    <div class="kpi"><span class="eyebrow">Split votes</span><span class="v">{len(split)}</span><span class="s">Not unanimous</span></div>
-    <div class="kpi"><span class="eyebrow">Tax rate votes</span><span class="v">{sum(1 for v in vs if v.get("category") == "millage")}</span><span class="s">Millage adoptions</span></div>
-    <div class="kpi"><span class="eyebrow">Boards covered so far</span><span class="v">{sum(1 for k in bodies if not k.endswith("-cra") and (cnt[k] or cnt[k.split("-")[0] + "-cra"]))} of {len([k for k in bodies if not k.endswith("-cra")])}</span><span class="s">Every county, city and School Board</span></div>
+    <div class="kpi"><span class="eyebrow">Votes recorded</span><span class="v"{per(lambda xs, k: len(xs))}>{len(vs)}</span><span class="s">Money decisions with a source</span></div>
+    <div class="kpi"><span class="eyebrow">Split votes</span><span class="v"{per(lambda xs, k: sum(1 for v in xs if is_split(v)))}>{len(split)}</span><span class="s">Not unanimous</span></div>
+    <div class="kpi"><span class="eyebrow">Tax rate votes</span><span class="v"{per(lambda xs, k: sum(1 for v in xs if v.get("category") == "millage"))}>{sum(1 for v in vs if v.get("category") == "millage")}</span><span class="s">Millage adoptions</span></div>
+    <div class="kpi"><span class="eyebrow">Boards covered so far</span><span class="v"{per(boards)}>{boards(vs, None)}</span><span class="s">Every county, city and School Board</span></div>
   </div>
-  <section class="tx-sec"><div class="sec-hd"><h2 id="split">Split votes</h2><span class="muted">Most recent first</span></div><ol class="findings" data-tt-list aria-label="Split votes">{sp_html}</ol></section>
+  <section class="tx-sec"><div class="sec-hd"><h2 id="split">Split votes</h2><span class="muted">Most recent first</span></div><ol class="findings" data-tt-list data-city-empty="No split votes recorded for {{city}} yet." aria-label="Split votes">{sp_html}</ol></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="all">Every recorded vote</h2><span class="muted">Filter by government, member, year or outcome</span></div>
     <div class="vt-filters">
       <input id="vtQ" type="search" placeholder="Search votes, vendors or names" aria-label="Search votes" class="vf-q">
-      <label class="vf"><span>Government</span><select id="vtG"><option value="">All governments</option></select></label>
+      <label class="vf" hidden><span>Government</span><select id="vtG" data-city-link><option value="">All governments</option></select></label>
       <label class="vf"><span>Member</span><select id="vtM"><option value="">Anyone</option></select></label>
       <label class="vf"><span>Type</span><select id="vtC"><option value="">All types</option></select></label>
       <label class="vf"><span>Year</span><select id="vtY"><option value="all">All years</option></select></label>

@@ -97,6 +97,14 @@
   const f = document.getElementById('alForm'), msg = document.getElementById('alMsg'), btn = f.querySelector('button[type=submit]'), st = document.getElementById('alStatus'), t0 = Date.now();
   const q = new URLSearchParams(location.search), boxes = [...f.querySelectorAll('input[name=g]')];
   (q.get('gov') || q.get('g') || '').split(',').forEach(k => { const b = boxes.find(x => x.value === k); if (b) b.checked = true; });
+  // no government in the link: start with the city picked on other pages (site.js loads after this inline script)
+  if (!q.has('gov') && !q.has('g')) document.addEventListener('DOMContentLoaded', () => {
+    const k = window.BCM && BCM.city.remembered && BCM.city.remembered();
+    if (!k || boxes.some(x => x.checked)) return;
+    const b = boxes.find(x => x.value === k); if (b) b.checked = true;
+    const sel = [document.querySelector('#rlForm select[name=gov]')]; // the keyword alert's government stays "Any"
+    sel.forEach(s => { if (s && [...s.options].some(o => o.value === k)) s.value = k; });
+  });
   const S = {confirmed: ['ok', "You're signed up. Your first update arrives the next week there's news."], rule_confirmed: ['ok', "Your alert is on. We'll email you when something new matches."], expired: ['err', 'That confirmation link has expired or is invalid. Sign up again below.'], error: ['err', 'Something went wrong confirming your sign-up. Please try again.']};
   if (S[q.get('status')]) { st.hidden = false; st.className = 'al-status ' + S[q.get('status')][0]; st.textContent = S[q.get('status')][1]; }
   fetch('/api/subscribe').then(r => r.json()).then(j => { if (!j.ready) { f.querySelectorAll('input,button').forEach(x => x.disabled = true); msg.className = 'cf-msg'; msg.textContent = 'Email alerts are launching soon. Until then, follow the RSS feed or check What’s new.'; } }).catch(() => {});

@@ -15,6 +15,7 @@ DATA = os.path.join(HERE, '..', 'data')
 sys.path.insert(0, os.path.join(DATA, 'entities'))
 import ids  # noqa: E402
 import records  # noqa: E402
+from city_filter import city_bar, data_g, by_city, gkey, KEYS  # noqa: E402
 
 e = lambda s: html.escape(str(s if s is not None else ''))
 BASE = '/public-money/vendors'
@@ -100,6 +101,7 @@ def build():
         p['paid'] = tot.get('register', 0) + tot.get('tdc', 0)
         p['sort'] = max(p['awarded'], p['paid']) + tot.get('cra', 0)
         p['govs'] = sorted({r['gov_id'] for r in recs if r['gov_id']}, key=gname)
+        p['gk'] = [k for k in KEYS if any(gkey(g) == k for g in p['govs'])]  # city-bar keys (tourism agencies -> county)
     _CACHE['P'] = keep
     _CACHE['V'] = V
     return keep
@@ -137,21 +139,24 @@ def index_page(out_dir):
     rows = []
     for vid, p in sorted(P.items(), key=lambda kv: -kv[1]['sort']):
         srcs = ', '.join(SHORT[k] for k, _, _ in SRC if p['cnt'].get(k))
-        rows.append(f'''<tr data-n="{e((p["v"]["name"] + " " + " ".join(p["v"]["aliases"])).lower())}"><th scope="row"><a href="{BASE}/{vid}">{e(p["v"]["name"])}</a>{' <span class="badge warn vd-gift" title="This business gave to a local campaign">campaign gifts</span>' if p['gifts'] else ''}<small>{e(", ".join(gname(g) for g in p["govs"]))}</small></th>
+        rows.append(f'''<tr{data_g(*p["gk"])} data-n="{e((p["v"]["name"] + " " + " ".join(p["v"]["aliases"])).lower())}"><th scope="row"><a href="{BASE}/{vid}">{e(p["v"]["name"])}</a>{' <span class="badge warn vd-gift" title="This business gave to a local campaign">campaign gifts</span>' if p['gifts'] else ''}<small>{e(", ".join(gname(g) for g in p["govs"]))}</small></th>
       <td class="num">{money(p["awarded"]) if p["awarded"] else "—"}</td><td class="num">{money(p["paid"]) if p["paid"] else "—"}</td><td class="num">{money(p["tot"].get("cra")) if p["tot"].get("cra") else "—"}</td>
       <td class="num">{len(p["recs"])}</td><td class="small">{e(srcs)}</td></tr>''')
     ng = sum(1 for p in P.values() if p['gifts'])
+    gk = [k for k in KEYS if any(k in p['gk'] for p in P.values())]
+    per = lambda f: by_city({'': f(list(P.values())), **{k: f([p for p in P.values() if k in p['gk']]) for k in gk}})
     return f'''<div class="page tax">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Public Money · Vendors</span><h1>Who the money goes to</h1>
     <p class="lede">One page for each company or group that Bay County, its cities, their redevelopment agencies or the tourism agencies paid or hired, with every record on this site behind it.</p></div></header>
+  {city_bar(gk, hide=True, note='Vendors with a record from that government')}
   <section class="explain"><div class="ex-txt"><span class="eyebrow">The simple version</span><h2>Reading a vendor page</h2>
     <ol class="ex-steps"><li><b>Awarded is not paid.</b> A contract award is a promise to pay up to an amount. Payments come from check registers, which only some governments publish.</li>
       <li><b>One company, many spellings.</b> Agendas, registers and campaign reports spell names differently. We combine spellings only when they are clearly the same company.</li>
       <li><b>Gifts are listed only for businesses.</b> {e(NOTE)}</li></ol></div></section>
-  <div class="kpis"><div class="kpi"><span class="eyebrow">Vendors with a page</span><span class="v">{len(P)}</span><span class="s">2 or more records, or a campaign gift</span></div>
-    <div class="kpi"><span class="eyebrow">Gave to a campaign</span><span class="v">{ng}</span><span class="s">businesses that also hold local money</span></div></div>
+  <div class="kpis"><div class="kpi"><span class="eyebrow">Vendors with a page</span><span class="v"{per(len)}>{len(P)}</span><span class="s">2 or more records, or a campaign gift</span></div>
+    <div class="kpi"><span class="eyebrow">Gave to a campaign</span><span class="v"{per(lambda ps: sum(1 for p in ps if p['gifts']))}>{ng}</span><span class="s">businesses that also hold local money</span></div></div>
   <section class="tx-sec"><div class="sec-hd"><h2 id="all">Every vendor</h2><span class="muted">Largest first</span></div>
-    <div class="tablewrap"><table class="tx-table vd-table" id="vdT" data-tt-sort="1:desc"><thead><tr><th scope="col">Vendor</th><th scope="col" class="num">Awarded</th><th scope="col" class="num">Paid (registers)</th><th scope="col" class="num">CRA</th><th scope="col" class="num">Records</th><th scope="col">Found in</th></tr></thead><tbody>{"".join(rows)}</tbody></table></div>
+    <div class="tablewrap"><table class="tx-table vd-table" id="vdT" data-tt-sort="1:desc"><thead><tr><th scope="col">Vendor</th><th scope="col" class="num">Awarded</th><th scope="col" class="num">Paid (registers)</th><th scope="col" class="num">CRA</th><th scope="col" class="num">Records</th><th scope="col">Found in</th></tr></thead><tbody data-city-empty="No vendors with records from {{city}} yet.">{"".join(rows)}</tbody></table></div>
     <p class="note">Awarded adds contract awards and emergency purchases. Paid adds the check-register and tourism-agency payment totals shown in each source; those lists cover only part of each year. CRA counts only records that the CRA ledger includes in its totals. Change orders are on each vendor's page.</p></section>
 </div>
 <link rel="stylesheet" href="/assets/tax.css">'''
@@ -168,28 +173,43 @@ def _rec_line(r):
     if r['src'] == 'tdc':
         extra = f' <span class="muted small">by fiscal year: {e(", ".join(f"{k} {money(v)}" for k, v in sorted((r["extra"].get("by_fy") or {}).items())))}</span>'
     src = f' <a class="src" href="{e(r["url"])}" target="_blank" rel="noopener">Source</a>' if r['url'] else ''
-    return f'<tr><td>{e(r["date"] or "")}</td><td>{e(gname(r["gov_id"]))}</td><td class="wrap">{e(r["what"] or "")}{extra}<br><span class="muted small">As written: {e(r["name"])}</span></td><td class="num">{amt}</td><td>{src}</td></tr>'
+    return f'<tr{data_g(r["gov_id"])}><td>{e(r["date"] or "")}</td><td>{e(gname(r["gov_id"]))}</td><td class="wrap">{e(r["what"] or "")}{extra}<br><span class="muted small">As written: {e(r["name"])}</span></td><td class="num">{amt}</td><td>{src}</td></tr>'
 
 
 def vendor_page(vid):
     p = build()[vid]
     v = p['v']
     kpi = lambda lbl, val, sub: f'<div class="kpi"><span class="eyebrow">{e(lbl)}</span><span class="v">{val}</span><span class="s">{e(sub)}</span></div>'
-    kp = ''.join(kpi(n, money(p['tot'].get(k)) if k in p['tot'] else '—', f'{p["cnt"][k]} record{"s" if p["cnt"][k] != 1 else ""}') for k, n, _ in SRC if p['cnt'].get(k))
+    gk = p['gk']
+
+    def tot(k, rs):  # the same sum as build(), for one source and a set of records
+        xs = [r for r in rs if r['src'] == k]
+        if not xs:
+            return '—', '0 records'
+        am = [r['amount'] for r in xs if r['amount'] is not None and not (k == 'cra' and not r['extra'].get('count'))]
+        return (money(sum(am)) if am else '—'), f'{len(xs)} record{"s" if len(xs) != 1 else ""}'
+    def kv(k):
+        cs = {g: tot(k, [r for r in p['recs'] if gkey(r['gov_id']) == g]) for g in gk} if len(gk) > 1 else {}
+        return (f'<span class="v"{by_city({"": money(p["tot"].get(k)) if k in p["tot"] else "—", **{g: c[0] for g, c in cs.items()}})}>{money(p["tot"].get(k)) if k in p["tot"] else "—"}</span>'
+                f'<span class="s"{by_city({"": tot(k, p["recs"])[1], **{g: c[1] for g, c in cs.items()}})}>{tot(k, p["recs"])[1]}</span>')
+    # a section (or KPI) hides when none of its rows is from the chosen city; one with a countywide row always shows
+    secg = lambda xs: data_g(*xs) if len(gk) > 1 and all(xs) else ''
+    srcg = lambda k: secg({r['gov_id'] for r in p['recs'] if r['src'] == k})
+    kp = ''.join(f'<div class="kpi"{srcg(k)}><span class="eyebrow">{e(n)}</span>{kv(k)}</div>' for k, n, _ in SRC if p['cnt'].get(k))
     secs = ''
     for k, n, sub in SRC:
         rs = sorted([r for r in p['recs'] if r['src'] == k], key=lambda r: str(r['date'] or ''), reverse=True)
         if not rs:
             continue
-        secs += f'''<section class="tx-sec"><div class="sec-hd"><h2 id="{k}">{e(n)}</h2><span class="muted">{e(sub)}</span></div>
+        secs += f'''<section class="tx-sec"{secg({r["gov_id"] for r in rs})}><div class="sec-hd"><h2 id="{k}">{e(n)}</h2><span class="muted">{e(sub)}</span></div>
     <div class="tablewrap"><table class="tx-table"><thead><tr><th scope="col">Date</th><th scope="col">Government</th><th scope="col">What</th><th scope="col" class="num">Amount</th><th scope="col">Source</th></tr></thead><tbody>{"".join(_rec_line(r) for r in rs)}</tbody></table></div></section>'''
     gifts = ''
     if p['gifts']:
-        gr = ''.join(f'''<tr><th scope="row">{e(g["candidate"])}<small>{e(g["office"])} · {e("current officeholder" if g["gift_source"].startswith("current") else "2026 candidate")}</small></th>
+        gr = ''.join(f'''<tr{data_g(g.get("office_gov_id"))}><th scope="row">{e(g["candidate"])}<small>{e(g["office"])} · {e("current officeholder" if g["gift_source"].startswith("current") else "2026 candidate")}</small></th>
       <td class="num">{usd(g["contribution_amount"])}{f'<small>{usd(g["refunded_by_campaign"])} refunded</small>' if g.get("refunded_by_campaign") else ""}</td><td>{e(", ".join(g["contribution_dates"]))}</td>
       <td class="small">{"<span class='badge warn'>Same government</span> " if any(m == g.get("office_gov_id") for m in g["_govs"]) else ""}{e(", ".join(gname(x) for x in g["_govs"]))}</td>
       <td class="small">{e(g["contributor"])}{" (spelled differently in the filing)" if g["match_confidence"] == "likely" else ""} <a class="src" href="{e(g["campaign_report_url"])}" target="_blank" rel="noopener">Report</a></td></tr>''' for g in sorted(p['gifts'], key=lambda g: (-g['contribution_amount'], g['candidate'])))
-        gifts = f'''<section class="tx-sec"><div class="sec-hd"><h2 id="gifts">Campaign gifts from the business</h2><span class="muted">Business contributions only</span></div>
+        gifts = f'''<section class="tx-sec"{secg({g.get("office_gov_id") for g in p["gifts"]})}><div class="sec-hd"><h2 id="gifts">Campaign gifts from the business</h2><span class="muted">Business contributions only</span></div>
     <div class="tablewrap"><table class="tx-table vd-table"><thead><tr><th scope="col">To</th><th scope="col" class="num">Gave</th><th scope="col">Dates</th><th scope="col">Governments that pay this vendor</th><th scope="col">Filed as</th></tr></thead><tbody>{gr}</tbody></table></div>
     <p class="note">From the Supervisor of Elections reports of current officeholders and 2026 candidates. Gifts from the company's owners or employees as individuals are not linked to it, and individual donors are never named on this site. "Same government" means the official serves on (or the candidate is running for) a government that pays this vendor. {e(NOTE)}</p></section>'''
     votes = ''
@@ -199,9 +219,9 @@ def vendor_page(vid):
         for x in sorted(p['votes'], key=lambda x: x['vote']['date'], reverse=True):
             v_, l = x['vote'], x['link']
             roll = ' · '.join((f'<b>{e(n)}</b> {e(val)} (got a gift)' if ids.person_id(n) in gave else f'{e(n)} {e(val)}') for n, val in (v_.get('by_member') or {}).items()) or '<span class="muted">roll call not recorded</span>'
-            vr += f'''<li><b>{e(v_["date"])}</b> · {e(x["board"])}: {e(v_.get("headline") or v_.get("item"))}{(" · " + money(v_["amount"])) if v_.get("amount") else ""} · {e(v_.get("outcome") or "")} {e(v_.get("tally") or "")}
+            vr += f'''<li{data_g(v_["body"])}><b>{e(v_["date"])}</b> · {e(x["board"])}: {e(v_.get("headline") or v_.get("item"))}{(" · " + money(v_["amount"])) if v_.get("amount") else ""} · {e(v_.get("outcome") or "")} {e(v_.get("tally") or "")}
         <a class="src" href="{e(v_.get("source_url"))}" target="_blank" rel="noopener">Minutes</a><br><span class="small">{roll}</span><br><span class="muted small">Approves: {e(l["record_what"])} ({money(l["record_amount"])}, {e(l["record_date"])}). Matched by {e(l["match_method"].replace("_", " ").replace("+", ", "))}.</span></li>'''
-        votes = f'''<section class="tx-sec"><div class="sec-hd"><h2 id="votes">Votes that approved its contracts</h2><span class="muted">How each member voted, from the minutes</span></div>
+        votes = f'''<section class="tx-sec"{secg({x["vote"]["body"] for x in p["votes"]})}><div class="sec-hd"><h2 id="votes">Votes that approved its contracts</h2><span class="muted">How each member voted, from the minutes</span></div>
     <ul class="plain mm-list">{vr}</ul>
     <p class="note">Votes are linked to a contract when the same government voted within 45 days and the minutes agree with the agenda record in at least two ways (company name, bid number, project words or amount). Many contracts are approved on a consent agenda with routine items in one vote. {e(NOTE)}</p></section>'''
     aka = [a for a in v['aliases'] if a != v['name'] and not a.isupper()]
@@ -211,6 +231,7 @@ def vendor_page(vid):
     <p class="lede">Every record on this site that names {e(v["name"])}: {len(p["recs"])} money record{"s" if len(p["recs"]) != 1 else ""}{f", {len(p['gifts'])} campaign gift match{'es' if len(p['gifts']) != 1 else ''}" if p['gifts'] else ""}{f" and {len(p['votes'])} recorded vote{'s' if len(p['votes']) != 1 else ''} on its contracts" if p['votes'] else ""}.</p>
     {f'<p class="small muted">Also written as: {e(" · ".join(aka))}</p>' if aka else ""}</div>
     {f'<div class="stamp"><a class="pill" href="/public-money/contracts?company={e(vid)}#company">Company card on Contracts</a></div>' if any(p['cnt'].get(k) for k in ('contract', 'change_order', 'emergency', 'register')) else ''}</header>
+  {city_bar(gk, hide=True) if len(gk) > 1 else ''}
   <div class="kpis">{kp}</div>
   {secs}{gifts}{votes}
   <section class="tx-sec method"><div class="sec-hd"><h2 id="src">About this page</h2></div><ul class="plain">

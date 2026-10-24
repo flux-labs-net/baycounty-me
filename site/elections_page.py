@@ -6,6 +6,7 @@ Individual donors are counted, never named (site policy).
 """
 import html, json, os, re
 from collections import defaultdict
+from city_filter import city_bar, data_g, by_city, KEYS
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(HERE, '..', 'data', 'elections')
@@ -144,6 +145,9 @@ def _soe_status(st, active):
     return 'filed'
 
 
+# county offices (sheriff, judges...) belong to Bay County; special districts have no city and always show
+CITY = lambda g: 'county' if g == 'constitutional' else g if g in KEYS else ''
+
 GOV_OF_OFFICE = [('panama city beach', 'pcb'), ('panama city', 'pc'), ('lynn haven', 'lh'), ('callaway', 'cw'), ('springfield', 'sp'), ('parker', 'parker'), ('mexico beach', 'mb')]
 
 
@@ -205,8 +209,8 @@ def elections_page():
             lbl = {'decided_primary': 'Decided in the Aug. 18 primary', 'elected_unopposed': 'Elected unopposed', 'decided_earlier_2026': 'Decided earlier in 2026'}.get(r.get('status'), r.get('status'))
             sub.append(e(lbl) + (f' · {e(r["winner"])}' if r.get('winner') else ''))
         res = f' · <a class="src" href="{e(r["result_url"])}" target="_blank" rel="noopener">Official results</a>' if r.get('result_url') else ''
-        return f'''<section class="el-race" data-g="{e(r.get("gov"))}" id="{e(r.get("id"))}"><div class="el-rh"><span class="eyebrow">{e(GOVN.get(r.get("gov"), ""))}</span><h3>{e(r["office"])}</h3><p class="small muted">{" · ".join(sub)}{res}</p>{f'<p class="small">{e(_clean(r["notes"]))}</p>' if r.get("notes") else ""}</div>
-      <div class="el-cands">{cards}</div></section>''' if is_active else f'''<details class="el-race el-dec" data-g="{e(r.get("gov"))}" id="{e(r.get("id"))}"><summary><span class="eyebrow">{e(GOVN.get(r.get("gov"), ""))}</span><h3 class="el-dec-h">{e(r["office"])}</h3><span class="small muted">{" · ".join(sub[-1:])}</span></summary><div class="el-rh"><p class="small muted">{" · ".join(sub)}{res}</p>{f'<p class="small">{e(_clean(r["notes"]))}</p>' if r.get("notes") else ""}</div>
+        return f'''<section class="el-race"{data_g(CITY(r.get("gov")))} id="{e(r.get("id"))}"><div class="el-rh"><span class="eyebrow">{e(GOVN.get(r.get("gov"), ""))}</span><h3>{e(r["office"])}</h3><p class="small muted">{" · ".join(sub)}{res}</p>{f'<p class="small">{e(_clean(r["notes"]))}</p>' if r.get("notes") else ""}</div>
+      <div class="el-cands">{cards}</div></section>''' if is_active else f'''<details class="el-race el-dec"{data_g(CITY(r.get("gov")))} id="{e(r.get("id"))}"><summary><span class="eyebrow">{e(GOVN.get(r.get("gov"), ""))}</span><h3 class="el-dec-h">{e(r["office"])}</h3><span class="small muted">{" · ".join(sub[-1:])}</span></summary><div class="el-rh"><p class="small muted">{" · ".join(sub)}{res}</p>{f'<p class="small">{e(_clean(r["notes"]))}</p>' if r.get("notes") else ""}</div>
       <div class="el-cands">{cards}</div></details>'''
 
     act = ''.join(race_html(r, True) for r in active)
@@ -220,27 +224,32 @@ def elections_page():
         up_races.append({'id': 'up-' + re.sub(r'[^a-z0-9]+', '-', office.lower()), 'gov': g, 'office': office, 'status': 'upcoming', 'candidates': cands,
                          'notes': info.get('notes') or 'Filed with the Supervisor of Elections for the April 20, 2027 city election. Qualifying hasn\'t happened yet, so more candidates may file.'})
     up = ''.join(race_html(r, True) for r in up_races)
-    up_html = f'<section class="tx-sec" id="next"><div class="sec-hd"><h2>Already running for April 2027</h2><span class="muted">City elections: candidates who have opened a campaign</span></div>{up}</section>' if up else ''
+    up_html = f'<section class="tx-sec" id="next" data-city-empty="No {{city}} candidates have filed for April 2027."><div class="sec-hd"><h2>Already running for April 2027</h2><span class="muted">City elections: candidates who have opened a campaign</span></div>{up}</section>' if up else ''
     dec = ''.join(race_html(r, False) for r in decided)
-    opts = ''.join(f'<option value="{k}">{e(v)}</option>' for k, v in GOVN.items() if any(r.get('gov') == k for r in races))
+    gk = [k for k in KEYS if any(CITY(r.get('gov')) == k for r in races + up_races)]
     ncand = sum(len(r.get('candidates') or []) for r in active)
-    raised = sum((m.get('total_raised') or 0) for m in fin if any(match_finance(c, r.get('office'), [m]) for r in active for c in r.get('candidates') or []))
+    raised_in = lambda rs: sum((m.get('total_raised') or 0) for m in fin if any(match_finance(c, r.get('office'), [m]) for r in rs for c in r.get('candidates') or []))
+    raised = raised_in(active)
+
+    def per(fn):  # a headline figure per city: fn(races on the ballot, races decided); special districts count only countywide
+        pick = lambda rs, k: [r for r in rs if CITY(r.get('gov')) == k]
+        return by_city({'': fn(active, decided), **{k: fn(pick(active, k), pick(decided, k)) for k in gk}})
     gaps = ''.join(f'<li>{e(g)}</li>' for g in (C.get('gaps') or []) + (F.get('gaps') or []))
     return f'''<div class="page tax el">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Get involved · 2026 elections</span><h1>Who's running in 2026</h1>
     <p class="lede">Every local race on Bay County ballots this year: the candidates, what they say they'll do in their own words, links to their campaigns, and where their campaign money comes from. BayCounty.me doesn't endorse or rate candidates.</p></div>
     <div class="stamp"><a class="pill" href="https://www.bayvotesfl.gov/" target="_blank" rel="noopener">Supervisor of Elections ↗</a><button type="button" class="pdf-btn" id="pdf"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 12v2h10v-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Export PDF</button><span>Campaign reports checked {e(F.get("as_of") or C.get("as_of"))}</span></div></header>
+  {city_bar(gk, hide=True, note='Bay County includes county offices; special districts always show')}
   <div class="kpis">
-    <div class="kpi"><span class="eyebrow">On the Nov. 3 ballot</span><span class="v">{len(active)}</span><span class="s">local races · {ncand} candidates</span></div>
-    <div class="kpi"><span class="eyebrow">Raised so far</span><span class="v">${raised/1e3:,.0f}K</span><span class="s">by candidates in those races</span></div>
-    <div class="kpi"><span class="eyebrow">Already decided</span><span class="v">{len(decided)}</span><span class="s">won in the primary, unopposed or earlier in 2026</span></div>
+    <div class="kpi"><span class="eyebrow">On the Nov. 3 ballot</span><span class="v"{per(lambda a, d: len(a))}>{len(active)}</span><span class="s">local races · <span{per(lambda a, d: sum(len(r.get('candidates') or []) for r in a))}>{ncand}</span> candidates</span></div>
+    <div class="kpi"><span class="eyebrow">Raised so far</span><span class="v"{per(lambda a, d: f"${raised_in(a)/1e3:,.0f}K" if raised_in(a) else "$0")}>${raised/1e3:,.0f}K</span><span class="s">by candidates in those races</span></div>
+    <div class="kpi"><span class="eyebrow">Already decided</span><span class="v"{per(lambda a, d: len(d))}>{len(decided)}</span><span class="s">won in the primary, unopposed or earlier in 2026</span></div>
   </div>
   <div class="callout">To check your registration, find your polling place or see your sample ballot, use the <a href="https://www.bayvotesfl.gov/" target="_blank" rel="noopener">Bay County Supervisor of Elections</a> or <a href="https://vote.gov" target="_blank" rel="noopener">vote.gov</a>. <a href="/my-address">My Address</a> shows your County Commission and School Board districts.</div>
   <nav class="jump" aria-label="On this page"><a href="#active">On the ballot</a>{'<a href="#next">April 2027</a>' if upcoming else ''}<a href="#decided">Already decided</a><a href="#how">How we did this</a></nav>
-  <div class="vt-filters mt-f"><label class="vf"><span>Government</span><select id="elG"><option value="">All races</option>{opts}</select></label></div>
-  <section class="tx-sec" id="active"><div class="sec-hd"><h2>On the November 3 ballot</h2><span class="muted">Candidates in alphabetical order</span></div>{act or '<p class="muted">No local races found on the ballot.</p>'}</section>
+  <section class="tx-sec" id="active" data-city-empty="No {{city}} races on the November ballot."><div class="sec-hd"><h2>On the November 3 ballot</h2><span class="muted">Candidates in alphabetical order</span></div>{act or '<p class="muted">No local races found on the ballot.</p>'}</section>
   {up_html}
-  <section class="tx-sec el-past" id="decided"><div class="sec-hd"><h2>Already decided in 2026</h2><span class="muted">Shown separately: these campaigns are over</span></div>{dec or '<p class="muted">None.</p>'}</section>
+  <section class="tx-sec el-past" id="decided" data-city-empty="No {{city}} races decided yet in 2026."><div class="sec-hd"><h2>Already decided in 2026</h2><span class="muted">Shown separately: these campaigns are over</span></div>{dec or '<p class="muted">None.</p>'}</section>
   <section class="tx-sec method" id="how"><div class="sec-hd"><h2>How we did this</h2></div>
     <p><b>Platforms</b> are summarized only from each candidate's own campaign website, campaign social pages or questionnaire answers they wrote, with links to each source. If we couldn't find a statement from the candidate, we say so rather than fill in from news coverage. Candidates are listed alphabetically.</p>
     <p><b>Money</b> comes from the campaign reports candidates file with the Bay County Supervisor of Elections, through the date shown. Organizations are listed by name; gifts from individual people are counted and totaled, and every name is in the linked report. Florida caps gifts to local candidates at $1,000 per person or business per election.</p>
@@ -248,8 +257,5 @@ def elections_page():
     {f'<details class="gaps"><summary>What we couldn\'t find</summary><ul>{gaps}</ul></details>' if gaps else ''}</section>
 </div>
 <link rel="stylesheet" href="/assets/tax.css">
-<script>
-(() => {{ const s = document.getElementById('elG'), q = new URLSearchParams(location.search).get('gov');
-  const run = () => document.querySelectorAll('.el-race').forEach(r => r.hidden = !!s.value && r.dataset.g !== s.value);
-  if (q) s.value = q; s.addEventListener('input', () => {{ history.replaceState(null, '', s.value ? '?gov=' + s.value : location.pathname); run(); }}); run(); }})();
-</script>'''
+<script>(() => {{ const u = new URL(location.href); if (u.searchParams.get('gov') === 'constitutional') {{ u.searchParams.set('gov', 'county'); history.replaceState(history.state, '', u); }} }})(); /* old links for the county officers: before the city bar reads ?gov= */</script>
+'''

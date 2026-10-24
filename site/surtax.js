@@ -131,7 +131,12 @@ Promise.all([fetch('/data/surtax-projects.json').then(r => r.json()), fetch('/da
   const U = U0;
   [['stG', 'gov'], ['stC', 'type'], ['stS', 'status'], ['stQ', 'q']].forEach(([id, k]) => { const v = U.get(k); if (!v) return; const el = $(id);
     if (el.tagName === 'SELECT') { const o = window.BCM ? BCM.findOption(el, v) : [...el.options].find(o => o.value === v); if (o) el.value = o.value; } else el.value = v; });
+  // the city bar at the top owns the government (#stG has data-city-link): start on its city
+  const C = window.BCM && BCM.city;
+  if (C && C.get()) { const o = [...$('stG').options].find(o => C.key(o.value) === C.get()); if (o) $('stG').value = o.value; }
   filt();
+  // keep the fiscal year on one the chosen city has projects in
+  if (C) C.on(k => C.fitYear($('stY'), P.filter(x => C.has(k, x.g)).flatMap(x => x._ys)));
   const want = U.get('p'), hit = want && P.find(x => x.id === want);
   if (hit) { if (!cur.includes(hit)) { ['stQ', 'stG', 'stC', 'stS', 'stY'].forEach(id => $(id).value = ''); filt(); } select(hit, 'map'); $('map-h').scrollIntoView(); }
 });

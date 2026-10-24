@@ -15,6 +15,7 @@ from datetime import datetime, timezone
 
 import vendors as V
 import change_growth as CG
+from city_filter import city_bar, scope
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(HERE, '..', 'data')
@@ -325,10 +326,13 @@ def accountability_page(out_dir):
     govs = sorted({p['g'] for p in D['projects']}, key=lambda g: (g != 'Bay County', g))
     rules = ''.join(f'''<details class="acct-rule" id="rule-{r["id"]}"><summary><b>{e(r["title"])}</b></summary>
       <dl><dt>When it's raised</dt><dd>{e(r["when"])}</dd><dt>What it means</dt><dd>{e(r["means"])}</dd><dt>What it doesn't mean</dt><dd>{e(r["not"])}</dd></dl></details>''' for r in RULES)
+    ORDER = ['county', 'schools', 'pc', 'pcb', 'lh', 'cw', 'sp', 'parker', 'mb']
+    gk = sorted({p['gk'] for p in D['projects'] if p.get('gk') in ORDER}, key=ORDER.index)
     ropts = ''.join(f'<option value="{r["id"]}">{e(r["title"])}</option>' for r in RULES)
     return f'''<div class="page tax acct">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Public Money · Accountability</span><h1>Accountability console</h1>
     <p class="lede">Public projects followed from the first budget to the day they close: what was promised, what was approved, every change order and payment we can find, and what it cost in the end. Where the record raises a question, it's flagged by a published rule and sent to the agency for an answer.</p></div></header>
+  {city_bar(gk, legacy='g')}
   <div class="acct-stats" role="list">
     <div role="listitem"><b id="acsN">{S["projects"]:,}</b><span id="acsNl">projects tracked</span></div>
     <div role="listitem"><b id="acsM">{money(S["money"])}</b><span>in those projects</span></div>
@@ -345,9 +349,9 @@ def accountability_page(out_dir):
     </ol></div></section>
   <section class="tx-sec" id="list"><div class="sec-hd"><h2>Projects</h2><span class="muted" id="acCount" aria-live="polite"></span></div>
     <div class="filters-row acct-filters">
-      <select id="acY" aria-label="Year of activity"><option value="">All years</option></select>
+      {scope('<select id="acY" aria-label="Year of activity"><option value="">All years</option></select>', 'Year')}
       <input id="acQ" type="search" placeholder="Search project, company or place" aria-label="Search projects">
-      <select id="acG" aria-label="Government"><option value="">All governments</option>{''.join(f'<option>{e(g)}</option>' for g in govs)}</select>
+      <select id="acG" aria-label="Government" data-city-link hidden><option value="">All governments</option>{''.join(f'<option>{e(g)}</option>' for g in govs)}</select>
       <select id="acF" aria-label="Flag"><option value="">Any flag or none</option><option value="any">Any flag</option>{ropts}</select>
       <select id="acS" aria-label="Source"><option value="">All projects</option><option value="reviewed">Reviewed project histories</option><option value="contracts">Contracts with change orders</option><option value="surtax">Sales tax projects</option></select>
       <select id="acO" aria-label="Sort"><option value="flags">Most questions first</option><option value="money">Biggest first</option><option value="new">Latest activity first</option><option value="growth">Most cost growth</option></select>

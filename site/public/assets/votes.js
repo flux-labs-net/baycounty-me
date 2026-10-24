@@ -71,6 +71,8 @@ F.g.addEventListener('change', () => { members(); shown = 40; filt(); });
 $('vtClear').addEventListener('click', () => { F.q.value = ''; ['g', 'c', 'o'].forEach(k => F[k].value = ''); F.y.value = 'all'; F.sort.value = 'new'; members(); F.m.value = ''; shown = 40; filt(); });
 $('vtMore').addEventListener('click', () => { shown += 60; filt(false); });
 filt(false);
+// the city bar at the top: keep the year on one this government has votes for
+BCM.city.on(k => BCM.city.fitYear(F.y, D.votes.filter(v => !k || v.g === k).map(v => +(v.d || '').slice(0, 4) || null)));
 if ([...P0.keys()].some(k => ['q', 'g', 'm', 'c', 'y', 'o', 'sort'].includes(k))) $('all').scrollIntoView();
 $('vtCsv').addEventListener('click', () => {
   const gov = Object.fromEntries(D.govs);

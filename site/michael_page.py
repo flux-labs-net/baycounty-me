@@ -1,8 +1,23 @@
 """'Hurricane Michael money' page for baycounty.me."""
-import json, os
+import json, os, html
+from city_filter import city_bar, data_g, by_city, gkey, KEYS
+
+def big(n):
+    return f'${n/1e9:,.2f}B' if n >= 1e9 else f'${n/1e6:,.1f}M' if n >= 1e6 else f'${n/1e3:,.0f}K' if n >= 1e3 else f'${n:,.0f}'
+
+
+def nice(s):  # same as michael.js
+    import re
+    s = re.sub(r', City [Oo]f$', '', str(s or ''))
+    return 'Bay District Schools' if s == 'School Board of Bay County Florida' else s
+
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DIR = os.path.join(HERE, '..', 'data', 'michael')
+
+
+# FEMA's household data is by mailing city, typed as people wrote it
+IA_CITY = {'P C BEACH': 'pcb', 'PANAMA BEACH': 'pcb', 'LYNNHAVEN': 'lh', 'CALLAWAY CITY': 'cw'}
 
 
 def michael_page(out_dir):
@@ -14,13 +29,13 @@ def michael_page(out_dir):
     cdbg_sum = sum(a['amount'] for a in cdbg_bay if a.get('amount'))
     sba = next((f for f in oth['sba_and_nfip']['figures'] if f['item'].startswith('SBA')), None)
     data = {
-        'rows': led['rows'], 'cats': led['categories'],
-        'apps': [{'n': a['applicant'], 'p': a['projects'], 'f': a['federal_obligated']} for a in pa['by_applicant']],
+        'rows': [{**r, 'k': gkey(r['a']) or ''} for r in led['rows']], 'cats': led['categories'],
+        'apps': [{'n': a['applicant'], 'k': gkey(a['applicant']) or '', 'p': a['projects'], 'f': a['federal_obligated']} for a in pa['by_applicant']],
         'catsum': [{'c': c['category'], 'n': c['description'], 'p': c['projects'], 'f': c['federal_obligated']} for c in pa['by_category']],
-        'ia': [{'city': c['city'], 'oreg': c.get('owners_validRegistrations'), 'oapp': c.get('owners_approvedForFemaAssistance'), 'oamt': c.get('owners_totalApprovedIhpAmount'),
+        'ia': [{'city': c['city'], 'k': IA_CITY.get(c['city']) or gkey(c['city']) or '', 'oreg': c.get('owners_validRegistrations'), 'oapp': c.get('owners_approvedForFemaAssistance'), 'oamt': c.get('owners_totalApprovedIhpAmount'),
                 'rreg': c.get('renters_validRegistrations'), 'rapp': c.get('renters_approvedForFemaAssistance'), 'ramt': c.get('renters_totalApprovedIhpAmount'), 't': c.get('total_approved_ihp')} for c in ia['by_city']],
-        'cdbg': [{'prog': a['program'].replace('Rebuild Florida ', ''), 'r': a['recipient'], 'amt': a.get('amount'), 'p': a.get('project', ''), 'd': a.get('announced', ''), 'rounded': a.get('amount_is_rounded', False), 'u': a['source_url']} for a in cdbg_bay],
-        'debris': [{'g': x['government'], 'p': x['fema_pa_category_A_projects'], 'f': x['fema_pa_category_A_federal_obligated']} for x in m['debris_fema_pa_category_a_by_government']],
+        'cdbg': [{'k': gkey(a['recipient']) or '', 'prog': a['program'].replace('Rebuild Florida ', ''), 'r': a['recipient'], 'amt': a.get('amount'), 'p': a.get('project', ''), 'd': a.get('announced', ''), 'rounded': a.get('amount_is_rounded', False), 'u': a['source_url']} for a in cdbg_bay],
+        'debris': [{'g': x['government'], 'k': gkey(x['government']) or '', 'p': x['fema_pa_category_A_projects'], 'f': x['fema_pa_category_A_federal_obligated']} for x in m['debris_fema_pa_category_a_by_government']],
     }
     json.dump(data, open(os.path.join(out_dir, 'data', 'michael-page.json'), 'w'), ensure_ascii=False, separators=(',', ':'))
     open(os.path.join(out_dir, 'assets', 'michael.js'), 'w').write(open(os.path.join(HERE, 'michael.js')).read())
@@ -29,13 +44,23 @@ def michael_page(out_dir):
         return f'<a href="{u}" target="_blank" rel="noopener">{t}</a>'
 
     st = oth['state_appropriations_2019_session']
-    state_rows = ''.join(f'<li>{x["recipient"]}: <b>${x["amount"]:,.0f}</b>{(" (" + x["detail"] + ")") if x.get("detail") else ""}</li>'
+    state_rows = ''.join(f'<li{"" if "regional" in x["recipient"] else data_g(x["recipient"].split(" (")[0])}>{x["recipient"]}: <b>${x["amount"]:,.0f}</b>{(" (" + x["detail"] + ")") if x.get("detail") else ""}</li>'
                          for x in st['items'] if not x['recipient'].startswith('Bay County -') and not x['recipient'].startswith('East Bay'))
-    debris_rows = ''.join(f'<li><b>{x["government"]}</b>: {x["contractor"]}{": $" + format(x["amount"], ",.0f") if x.get("amount") else ""} <span class="muted">({x["amount_type"]})</span> {a(x["source_url"], "Source")}</li>' for x in m['debris_contracts'])
+    debris_rows = ''.join(f'<li{data_g(x["government"])}><b>{x["government"]}</b>: {x["contractor"]}{": $" + format(x["amount"], ",.0f") if x.get("amount") else ""} <span class="muted">({x["amount_type"]})</span> {a(x["source_url"], "Source")}</li>' for x in m['debris_contracts'])
     case = ''.join(f'<li><span class="tl-d">{e["date"]}</span><span>{e["event"]} {a(e["source_url"], "Source")}</span></li>' for e in m['lynn_haven_case'])
     tyn = [t for t in oth['tyndall_afb']['figures'] if 'estimate' in t['item'].lower()]
     share = tot['federal_obligated'] / tot['project_amount']
     ia_total = ia['bay_total_approved_ihp_owners_plus_renters']
+    # per-government figures for the city bar at the top
+    gk = [k for k in KEYS if any(r['k'] == k for r in data['rows'])]
+    apps_k = lambda k: [x for x in data['apps'] if x['k'] == k]
+    pa_v = by_city({'': f"${tot['federal_obligated']/1e6:,.0f}M", **{k: big(sum(x['f'] for x in apps_k(k))) for k in gk}})
+    pa_s = by_city({'': f"{tot['projects']} projects for {tot['applicants']} Bay County applicants",
+                    **{k: f"{sum(x['p'] for x in apps_k(k))} projects for {html.escape(', '.join(nice(x['n']) for x in apps_k(k)))}" for k in gk}})
+    ia_v = by_city({'': f"${ia_total/1e6:,.1f}M", **{k: big(sum(c['t'] or 0 for c in data['ia'] if c['k'] == k)) for k in gk if any(c['k'] == k for c in data['ia'])}})
+    ia_s = by_city({'': 'Approved for owners and renters', **{k: 'Approved for owners and renters with a mailing address there' for k in gk if any(c['k'] == k for c in data['ia'])}})
+    cd_v = by_city({'': f"${cdbg_sum/1e6:,.1f}M", **{k: big(sum(x['amt'] or 0 for x in data['cdbg'] if x['k'] == k)) for k in gk}})
+    cd_s = by_city({'': 'HUD money to Bay governments, as announced', **{k: 'HUD money announced for this government' for k in gk}})
 
     return f'''<div class="page tax mi">
   <header class="tx-top">
@@ -46,6 +71,7 @@ def michael_page(out_dir):
     </div>
     <div class="stamp"><button type="button" id="pdf" class="pdf-btn"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 12v2h10v-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Export PDF</button><span>FEMA data refreshed {pa.get('data_refreshed', '2026')[:10]}<br>Data updated Oct 20, 2026</span></div>
   </header>
+  {city_bar(gk, hide=True, legacy='a')}
 
   <section class="explain" aria-labelledby="how-h">
     <div class="ex-txt">
@@ -61,10 +87,10 @@ def michael_page(out_dir):
   </section>
 
   <div class="kpis">
-    <div class="kpi"><span class="eyebrow">FEMA Public Assistance</span><span class="v">${tot['federal_obligated']/1e6:,.0f}M</span><span class="s">{tot['projects']} projects for {tot['applicants']} Bay County applicants</span></div>
-    <div class="kpi"><span class="eyebrow">FEMA aid to households</span><span class="v">${ia_total/1e6:,.1f}M</span><span class="s">Approved for owners and renters</span></div>
-    <div class="kpi"><span class="eyebrow">Rebuild Florida awards</span><span class="v">${cdbg_sum/1e6:,.1f}M</span><span class="s">HUD money to Bay governments, as announced</span></div>
-    <div class="kpi"><span class="eyebrow">SBA disaster loans</span><span class="v">${(sba['amount'] if sba else 0)/1e6:,.0f}M</span><span class="s">Approved by Jan 2019 (early snapshot)</span></div>
+    <div class="kpi"><span class="eyebrow">FEMA Public Assistance</span><span class="v"{pa_v}>${tot['federal_obligated']/1e6:,.0f}M</span><span class="s"{pa_s}>{tot['projects']} projects for {tot['applicants']} Bay County applicants</span></div>
+    <div class="kpi"><span class="eyebrow">FEMA aid to households</span><span class="v"{ia_v}>${ia_total/1e6:,.1f}M</span><span class="s"{ia_s}>Approved for owners and renters</span></div>
+    <div class="kpi"><span class="eyebrow">Rebuild Florida awards</span><span class="v"{cd_v}>${cdbg_sum/1e6:,.1f}M</span><span class="s"{cd_s}>HUD money to Bay governments, as announced</span></div>
+    <div class="kpi"><span class="eyebrow">SBA disaster loans</span><span class="v">${(sba['amount'] if sba else 0)/1e6:,.0f}M</span><span class="s">Countywide, approved by Jan 2019 (early snapshot)</span></div>
   </div>
 
   <section class="tx-sec" aria-labelledby="who-h">
@@ -105,7 +131,7 @@ def michael_page(out_dir):
 
   <section class="tx-sec" aria-labelledby="st-h">
     <div class="sec-hd"><h2 id="st-h">State money</h2><span class="muted">2019 legislative session, as reported</span></div>
-    <ul class="plain">{state_rows}</ul>
+    <ul class="plain" data-city-empty="No 2019 state money was reported for {{city}}.">{state_rows}</ul>
     <p class="note">From a news summary of the 2019 budget, not the budget law itself. The housing and grant-pool amounts covered the whole region. {a(st['source_url'] if st.get('source_url') else st['items'][0]['source_url'], 'Source')}</p>
   </section>
 
@@ -113,11 +139,11 @@ def michael_page(out_dir):
     <div class="sec-hd"><h2 id="deb-h">Debris cleanup</h2><span class="muted">The single biggest cost</span></div>
     <div class="two">
       <div><h3 class="h4">FEMA debris money by government</h3><div class="hbars small" id="debBars"></div></div>
-      <div><h3 class="h4">Debris contracts we could confirm</h3><ul class="plain">{debris_rows}</ul></div>
+      <div><h3 class="h4">Debris contracts we could confirm</h3><ul class="plain" data-city-empty="No debris contracts confirmed for {{city}}.">{debris_rows}</ul></div>
     </div>
   </section>
 
-  <section class="tx-sec" aria-labelledby="lh-h">
+  <section class="tx-sec" aria-labelledby="lh-h"{data_g('lh')}>
     <div class="sec-hd"><h2 id="lh-h">The Lynn Haven cleanup corruption case</h2><span class="muted">From federal court filings and news coverage</span></div>
     <p class="note">Federal prosecutors charged Lynn Haven officials and contractors over storm cleanup billing after Michael. This is a timeline of what the Justice Department announced and what courts decided.</p>
     <ol class="timeline">{case}</ol>

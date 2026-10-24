@@ -5,6 +5,7 @@ const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;
 const qs = new URLSearchParams(location.search);
 $('rqG').innerHTML = R.map(r => `<option value="${r.k}">${esc(r.n)}</option>`).join('');
 if (qs.get('gov') && R.some(r => r.k === qs.get('gov'))) $('rqG').value = qs.get('gov');
+else if (!qs.has('gov') && window.BCM && BCM.city.remembered() && R.some(r => r.k === BCM.city.remembered())) $('rqG').value = BCM.city.remembered(); // the city picked on other pages
 const cur = () => R.find(r => r.k === $('rqG').value);
 function suggestions() {
   const r = cur();

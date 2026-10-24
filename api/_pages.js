@@ -44,7 +44,9 @@ const PAGES = {
   '/public-money/vendors': {datasets: ['vendors-directory', 'contracts', 'vendor-payments', 'cra-payments', 'campaign-contributions-2026']},
 };
 // Page families: each government's profile page.
-const PREFIXES = {'/governments/': {datasets: ['government-profiles', 'budget-detail', 'officials-pay', 'votes', 'meetings'], endpoints: ['/governments/{slug}']}};
+// a government's page carries the dashboards' records for that government (gov.js narrows them by city and year)
+const PREFIXES = {'/governments/': {datasets: ['government-profiles', 'budget-detail', 'officials-pay', 'votes', 'meetings', 'contracts', 'cra-payments',
+  'accountability-projects', 'sales-tax-projects', 'fema-michael-projects', 'savings-opportunities', 'debt', 'audit-findings'], endpoints: ['/governments/{slug}']}};
 
 function sourceFor(path) {
   if (PAGES[path]) return PAGES[path];

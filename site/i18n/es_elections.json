@@ -265,10 +265,6 @@
    "<a href=\"#how\">Cómo lo hicimos</a>"
   ],
   [
-   "<option value=\"\">All races</option>",
-   "<option value=\"\">Todas las contiendas</option>"
-  ],
-  [
    "<h2>On the November 3 ballot</h2><span class=\"muted\">Candidates in alphabetical order</span>",
    "<h2>En la boleta del 3 de noviembre</h2><span class=\"muted\">Candidatos en orden alfabético</span>"
   ],
@@ -447,6 +443,42 @@
   [
    "Filed with the Supervisor of Elections for the April 20, 2027 city election. Qualifying hasn't happened yet, so more candidates may file.",
    "Se inscribió ante el Supervisor de Elecciones para la elección de la ciudad del 20 de abril de 2027. La inscripción final todavía no ha pasado, así que pueden llegar más candidatos."
+  ],
+  [
+   "aria-label=\"Filter this page\"",
+   "aria-label=\"Filtros\""
+  ],
+  [
+   "aria-label=\"Government\"",
+   "aria-label=\"Gobierno\""
+  ],
+  [
+   "<option value=\"\">All governments</option>",
+   "<option value=\"\">Todos los gobiernos</option>"
+  ],
+  [
+   "<option value=\"county\">Bay County</option>",
+   "<option value=\"county\">Condado de Bay</option>"
+  ],
+  [
+   "<option value=\"schools\">Bay District Schools</option>",
+   "<option value=\"schools\">Escuelas del Distrito de Bay</option>"
+  ],
+  [
+   "Bay County includes county offices; special districts always show",
+   "El Condado de Bay incluye los cargos del condado; los distritos especiales siempre se muestran"
+  ],
+  [
+   "data-city-empty=\"No {city} races on the November ballot.\"",
+   "data-city-empty=\"No hay contiendas de {city} en la boleta de noviembre.\""
+  ],
+  [
+   "data-city-empty=\"No {city} candidates have filed for April 2027.\"",
+   "data-city-empty=\"Ningún candidato de {city} se ha inscrito para abril de 2027.\""
+  ],
+  [
+   "data-city-empty=\"No {city} races decided yet in 2026.\"",
+   "data-city-empty=\"Ninguna contienda de {city} se ha decidido aún en 2026.\""
   ]
  ],
  "re": [

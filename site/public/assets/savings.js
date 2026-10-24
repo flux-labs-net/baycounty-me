@@ -11,9 +11,15 @@ const big = n => n == null ? '—' : (n < 0 ? '−' : '') + (Math.abs(n) >= 1e6 
 const pct = r => r == null ? '—' : (Math.abs(r) < 0.1 ? +(r * 100).toFixed(1) : Math.round(r * 100)) + '%';
 const conf = c => ({Medium: 'c-medium', 'Needs records': 'c-records'}[c] || '');
 
-const S = D.stats;
-$('svM').textContent = big(S.in_play); $('svL').textContent = big(S.savings_low); $('svH').textContent = big(S.savings_high);
-$('svN').textContent = S.needs_records.toLocaleString('en-US');
+// the city bar at the top: only opportunities for that government, and the totals above add up just those
+const C = window.BCM && BCM.city;
+let city = C ? C.get() : '';
+const mine = o => !city || o.govs.includes(city);
+function stats() {
+  const xs = D.opportunities.filter(mine), sum = k => xs.reduce((a, o) => a + (o[k] || 0), 0);
+  $('svM').textContent = big(sum('in_play')); $('svL').textContent = big(sum('savings_low')); $('svH').textContent = big(sum('savings_high'));
+  $('svN').textContent = xs.filter(o => o.estimate === 'records').length.toLocaleString('en-US');
+}
 
 const EV = {};
 D.evidence.forEach(r => { (EV[r.opportunity_id + '/' + r.group_id] ||= []).push(r); });
@@ -81,13 +87,15 @@ function card(o) {
 }
 
 function filters() {
-  $('svF').innerHTML = KINDS.map(k => `<button type="button" class="pill sm" aria-pressed="${k === kind}" data-k="${esc(k)}">${esc(k)}</button>`).join('');
+  const ks = ['All', ...new Set(O.filter(mine).map(o => o.lever))];
+  if (!ks.includes(kind)) kind = 'All';
+  $('svF').innerHTML = ks.map(k => `<button type="button" class="pill sm" aria-pressed="${k === kind}" data-k="${esc(k)}">${esc(k)}</button>`).join('');
 }
 function draw() {
-  const list = O.filter(o => kind === 'All' || o.lever === kind);
-  $('svList').innerHTML = list.map(card).join('') || '<p class="muted">None of this kind yet.</p>';
-  $('svCount').textContent = `${list.length} of ${O.length}`;
-  filters();
+  const all = O.filter(mine), list = all.filter(o => kind === 'All' || o.lever === kind);
+  $('svList').innerHTML = list.map(card).join('') || `<p class="muted">${all.length ? 'None of this kind yet.' : `No opportunities found for ${esc(C.label(city))} yet.`}</p>`;
+  $('svCount').textContent = `${list.length} of ${all.length}`;
+  filters(); stats();
 }
 $('svF').addEventListener('click', ev => {
   const b = ev.target.closest('button[data-k]'); if (!b) return;
@@ -97,9 +105,12 @@ $('svF').addEventListener('click', ev => {
 });
 $('svList').addEventListener('click', ev => {
   const a = ev.target.closest('a[data-go]'); if (!a) return;
-  const o = BY[a.dataset.go]; if (o && kind !== 'All' && o.lever !== kind) { kind = 'All'; draw(); }
+  const o = BY[a.dataset.go]; if (o && !mine(o) && C) C.set('');
+  if (o && kind !== 'All' && o.lever !== kind) { kind = 'All'; draw(); }
 });
 draw();
+if (C) C.on(k => { if (k !== city) { city = k; draw(); } });
 const h = decodeURIComponent(location.hash.slice(1));
+if (BY[h] && !mine(BY[h]) && C) C.set('');
 if (BY[h]) { if (kind !== 'All' && BY[h].lever !== kind) { kind = 'All'; draw(); } $(h)?.scrollIntoView(); }
 })();

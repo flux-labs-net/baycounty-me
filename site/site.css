@@ -266,3 +266,30 @@ tr.tt-off{display:none}
 details > .tt-bar{margin-top:8px}
 @media (max-width:560px){.tt-q{flex-basis:100%}.tt-f{flex:1 1 140px}.tt-f select{width:100%;max-width:none}}
 @media print{.tt-bar,.tt-ar,.tt-empty{display:none!important}}
+
+/* Page filter bar (city_filter.city_bar): the city picker first, then the page's own year and filters */
+.scope{position:sticky;top:var(--head-h,57px);z-index:30;display:flex;flex-wrap:wrap;align-items:flex-end;gap:10px 12px;
+  margin-block:-16px -8px;padding:10px 0 12px;background:color-mix(in srgb,var(--bg) 92%,transparent);
+  backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--line)}
+.sc-slot{display:contents}
+.sc-f{display:flex;flex-direction:column;gap:4px;min-width:0;flex:0 1 200px}
+.sc-f.sc-city{flex-basis:230px}
+.sc-f.sc-q{flex:1 1 260px}
+.sc-f > span{font-size:.72rem;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.sc-f select,.sc-f input:not([type=checkbox]){width:100%;min-height:40px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);font:400 .9rem var(--f-body);padding:0 12px}
+.sc-f.sc-city select{font-weight:500;border-color:color-mix(in srgb,var(--blue) 45%,var(--line))}
+:root[data-city]:not([data-city=""]) .sc-f.sc-city select{border-color:var(--blue);box-shadow:inset 0 0 0 1px var(--blue)}
+.sc-note{font-size:.82rem;align-self:center;margin-left:auto}
+.sc-empty{margin:6px 0}
+@media (max-width:640px){
+  .scope{position:static;margin-block:-12px -4px}
+  .sc-f,.sc-f.sc-city{flex:1 1 calc(50% - 6px)}
+  .sc-f.sc-q{flex-basis:100%}
+  .sc-note{margin-left:0;flex-basis:100%}
+}
+@media print{.scope{position:static;border:0;backdrop-filter:none}.scope select{border:0;padding:0;appearance:none}}
+.sc-chk{display:inline-flex;align-items:center;gap:7px;font-size:.86rem;min-height:40px;color:var(--ink)}
+.sc-chk input{width:16px;height:16px;margin:0}
+.scope .sc-reset{align-self:center;min-height:0}
+.filters:not(:has(> :not([hidden]))){display:none}
+label[hidden],.vf[hidden],.sc-f[hidden]{display:none!important}
