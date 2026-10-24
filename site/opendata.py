@@ -17,7 +17,7 @@ GOV_COLS = {'government-profiles': ['government'], 'government-years': ['gov_id'
             'bed-tax-collections': [], 'property-tax-exemptions': [],
             'connections-gifts': ['official_gov_id', 'office'], 'connections-payments': ['payer_gov_id'], 'donor-contracts': ['contract_gov_id'], 'connections-payees': [], 'connections-links': [],
             'vendors-directory': [], 'people-directory': [], 'glossary-terms': [], 'site-updates': [], 'tax-districts': ['district'],
-            'savings-opportunities': ['government'], 'savings-evidence': [], 'business-donor-sunbiz': ['gov_id', 'office'], 'shared-owner-groups': [], 'official-businesses': ['gov_id'], 'official-business-links': ['gov_id']}
+            'savings-opportunities': ['government'], 'savings-evidence': [], 'business-donor-sunbiz': ['gov_id', 'office'], 'shared-owner-groups': [], 'over-limit-gifts': [], 'official-businesses': ['gov_id'], 'official-business-links': ['gov_id']}
 FIXED_GOV = {'bed-tax-collections': 'county', 'property-tax-exemptions': 'county'}  # county bed tax in every zone; the county-wide tax roll
 
 

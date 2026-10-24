@@ -10,6 +10,9 @@ rewritten to the public shared_owner_groups table (business names only).
 Then, when data/nonprofits/<county>/orgs.csv.gz exists, loads nonprofit board members (migration 0034): board people
 and seats are replaced, official name matches are upserted so their review survives, and confirmed matches are
 rewritten to public.nonprofit_officials.
+Then gifts over the per-election limit (data/campaign/over_limit.py, migration 0038) are upserted into
+registry.limit_cases so an admin's review and resolution survive; confirmed and resolved cases are rewritten to
+public.over_limit_gifts.
 Officer and agent names go only to this private schema. Street addresses are never stored.
 Run by .github/workflows/sync-db.yml after load.py.
 """
@@ -20,7 +23,9 @@ from psycopg.types.json import Jsonb
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 sys.path.insert(0, os.path.join(ROOT, 'data', 'sunbiz'))
 sys.path.insert(0, os.path.join(ROOT, 'data', 'nonprofits'))
+sys.path.insert(0, os.path.join(ROOT, 'data', 'campaign'))
 import build_sunbiz  # noqa: E402
+import over_limit  # noqa: E402
 import build_nonprofits  # noqa: E402
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -100,6 +105,42 @@ def load_county(conn, county):
     print(f'registry {county}: {len(E)} entities, {len(P)} people, {len(role_rows)} roles, {len(G)} gift lines, {len(F)} shared-owner groups')
     if os.path.exists(os.path.join(ROOT, 'data', 'nonprofits', county, 'orgs.csv.gz')):
         load_boards(conn, county, res)
+    load_limits(conn, county)
+
+
+LIMIT_COLS = ['candidate', 'office', 'government_key', 'election', 'election_year', 'election_phase', 'contributor', 'contributor_type', 'spellings',
+              'n_items', 'gross_amount', 'refunds', 'net_amount', 'over_by', 'possible_double_entry', 'auto_resolution', 'items', 'first_date',
+              'last_date', 'report_url']
+
+
+def load_limits(conn, county):
+    cur = conn.cursor()
+    cur.execute("select to_regclass('registry.limit_cases') is not null")
+    if not cur.fetchone()[0]:
+        print('registry: limit_cases missing (migration 0038), over-limit gifts skipped')
+        return
+    cs = over_limit.cases(county)
+    with conn.transaction():
+        for c in cs:
+            vals = [Jsonb(c[k]) if k in ('spellings', 'items') else c[k] for k in LIMIT_COLS]
+            cur.execute(f'''insert into registry.limit_cases (county, case_id, {', '.join(LIMIT_COLS)}, loaded_at)
+                            values (%s, %s, {', '.join(['%s'] * len(LIMIT_COLS))}, now())
+                            on conflict (county, case_id) do update set {', '.join(f'{k} = excluded.{k}' for k in LIMIT_COLS)}, in_current_data = true, loaded_at = now()''',
+                        [county, c['case_id']] + vals)
+        keep = {c['case_id'] for c in cs}
+        # a case the reports no longer show (an amended report, a corrected file) is kept once reviewed, so its
+        # resolution stays on record; unreviewed ones are dropped
+        cur.execute('select case_id, review_status from registry.limit_cases where county = %s', (county,))
+        for cid, st in cur.fetchall():
+            if cid in keep:
+                continue
+            if st == 'unreviewed':
+                cur.execute('delete from registry.limit_cases where county = %s and case_id = %s', (county, cid))
+            else:
+                cur.execute('update registry.limit_cases set in_current_data = false where county = %s and case_id = %s', (county, cid))
+        cur.execute('select registry.publish_limit_all(%s)', (county,))
+        published = cur.fetchone()[0]
+    print(f'registry {county}: {len(cs)} over-limit cases, {published} published')
 
 
 def load_boards(conn, county, sunbiz_res):

@@ -4757,6 +4757,113 @@
    "api": "/api/v1/datasets/shared-owner-groups"
   },
   {
+   "id": "over-limit-gifts",
+   "title": "Gifts over the contribution limit",
+   "description": "Organizations that gave one local candidate more than Florida's $1,000-per-election limit, as the campaign reported it (s. 106.08, F.S.), net of reported refunds. The primary and general are separate elections. Each case was checked by hand. status is Open (over the limit as reported, no explanation found) or Resolved (resolution says why: a reporting error, an amended report, a refund, a check designated for the general election, or a Florida Elections Commission ruling). A reported overage is not a finding of wrongdoing. Individual donors are not listed.",
+   "rows": 0,
+   "columns": [
+    {
+     "name": "case_id",
+     "type": "string"
+    },
+    {
+     "name": "candidate",
+     "type": "string"
+    },
+    {
+     "name": "office",
+     "type": "string"
+    },
+    {
+     "name": "election",
+     "type": "string"
+    },
+    {
+     "name": "election_phase",
+     "type": "string"
+    },
+    {
+     "name": "contributor",
+     "type": "string"
+    },
+    {
+     "name": "contributor_type",
+     "type": "string"
+    },
+    {
+     "name": "gifts",
+     "type": "number"
+    },
+    {
+     "name": "gross_amount",
+     "type": "number"
+    },
+    {
+     "name": "refunds",
+     "type": "number"
+    },
+    {
+     "name": "net_amount",
+     "type": "number"
+    },
+    {
+     "name": "over_by",
+     "type": "number"
+    },
+    {
+     "name": "gift_list",
+     "type": "string"
+    },
+    {
+     "name": "first_date",
+     "type": "string"
+    },
+    {
+     "name": "last_date",
+     "type": "string"
+    },
+    {
+     "name": "possible_double_entry",
+     "type": "boolean"
+    },
+    {
+     "name": "status",
+     "type": "string"
+    },
+    {
+     "name": "resolution",
+     "type": "string"
+    },
+    {
+     "name": "resolution_note",
+     "type": "string"
+    },
+    {
+     "name": "resolution_url",
+     "type": "string"
+    },
+    {
+     "name": "reviewed_on",
+     "type": "string"
+    },
+    {
+     "name": "county",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/over-limit-gifts.json",
+   "csv": "/downloads/over-limit-gifts.csv",
+   "api": "/api/v1/datasets/over-limit-gifts"
+  },
+  {
    "id": "nonprofits",
    "title": "Nonprofits",
    "description": "Every nonprofit in the county: organizations recognized by the IRS with a local address, and active Florida nonprofit corporations (Sunbiz) based here. Type, IRS subsection, latest 990 revenue, expenses and assets, how many board members its filings list, how many of those sit on another local board, government payment records and grants. Board members are in nonprofit-board-members.",

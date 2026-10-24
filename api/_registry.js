@@ -109,4 +109,47 @@ async function review(body, admin) {
   return {updated: rows.length, published, by: admin, rows};
 }
 
-module.exports = {cleanCounty, cleanQuery, summary, groups, person, entity, search, review};
+// ---------- gifts over the per-election limit (registry.limit_cases, migration 0038) ----------
+const LIMIT_REVIEW = ['unreviewed', 'confirmed', 'resolved', 'rejected'];
+const RESOLUTIONS = ['reporting_error', 'amended_report', 'refunded', 'designated_general', 'elections_commission', 'other'];
+
+async function limits({county = 'bay', status = ''} = {}) {
+  county = cleanCounty(county);
+  const p = [county]; let w = 'county = $1';
+  if (LIMIT_REVIEW.includes(status)) { p.push(status); w += ` and review_status = $${p.length}`; }
+  const cases = await db.q(`select case_id, candidate, office, election, election_phase, contributor, contributor_type, spellings, n_items,
+      gross_amount::float gross_amount, refunds::float refunds, net_amount::float net_amount, over_by::float over_by, possible_double_entry,
+      auto_resolution, items, report_url, in_current_data, review_status, resolution, resolution_note, resolution_url, reviewed_by, reviewed_at
+    from registry.limit_cases where ${w} order by (review_status = 'unreviewed') desc, over_by desc, candidate limit 500`, p);
+  return {county, cases, resolutions: RESOLUTIONS};
+}
+
+// Pure: check a review body. A resolved case needs a resolution; the note and link are optional, the link must be http(s).
+function cleanLimitReview(body) {
+  const status = String(body.status || '');
+  if (!LIMIT_REVIEW.includes(status)) throw bad('Unknown review status.');
+  const id = String(body.case_id || '');
+  if (!/^l_[0-9a-f]{10}$/.test(id)) throw bad('Unknown case.');
+  let resolution = null, note = null, url = null;
+  if (status === 'resolved') {
+    resolution = String(body.resolution || '');
+    if (!RESOLUTIONS.includes(resolution)) throw bad('Pick how it was resolved.');
+    note = String(body.resolution_note || '').trim().slice(0, 600) || null;
+    url = String(body.resolution_url || '').trim().slice(0, 500) || null;
+    if (url && !/^https?:\/\/[^\s]+$/i.test(url)) throw bad('The source link must start with http:// or https://.');
+  }
+  return {county: cleanCounty(body.county), status, id, resolution, note, url};
+}
+
+async function reviewLimit(body, admin) {
+  const c = cleanLimitReview(body);
+  const rows = await db.q(`update registry.limit_cases set review_status = $1, resolution = $2, resolution_note = $3, resolution_url = $4,
+      reviewed_by = $5, reviewed_at = now() where county = $6 and case_id = $7 returning case_id, review_status`,
+    [c.status, c.resolution, c.note, c.url, admin, c.county, c.id]);
+  if (!rows.length) throw bad('Unknown case.', 404);
+  // confirmed and resolved cases appear on /connections/shared-owners; anything else is taken down
+  const [x] = await db.q('select registry.publish_limit_case($1, $2) n', [c.county, c.id]);
+  return {updated: rows.length, published: Number(x && x.n) || 0, by: admin};
+}
+
+module.exports = {cleanCounty, cleanQuery, summary, groups, person, entity, search, review, limits, cleanLimitReview, reviewLimit, RESOLUTIONS};
