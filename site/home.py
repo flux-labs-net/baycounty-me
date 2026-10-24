@@ -85,7 +85,27 @@ def money_data():
     da = _j('debt_audit', 'debt_audit.json')
     short = lambda name: next((g['short'] for g in GOVS if g['debt'] and name.startswith(g['debt'])), name.split(' (')[0])
     debt = sorted(((short(x['government']), x['total_debt']) for x in da['debt'] if x['total_debt']), key=lambda r: -r[1])
-    return {'fema': [(c['description'], c['federal_obligated']) for c in cats], 'debt': debt}
+    return {'fema': [(c['description'], c['federal_obligated']) for c in cats], 'debt': debt, 'budget': budget_data()}
+
+
+def budget_data():
+    """This year's adopted budgets: the total for every government, and the everyday General Fund
+    spending of the county and cities grouped by service (same grouping as the budget explorer)."""
+    from money_pages import SERVICES, _bench
+    from govs import GOVS
+    d = _j('civic', 'budgets_detail.json')
+    kind = {g['key']: g['kind'] for g in GOVS}
+    svc = {}
+    for g in d['governments']:
+        if kind.get(g['gov']) == 'schools':
+            continue
+        for k, v in _bench(g.get('general_fund_departments')).items():
+            if k != 'total':
+                svc[k] = svc.get(k, 0) + v['amount']
+    names = dict(SERVICES)
+    fy = d['governments'][0]['fiscal_year'].split(' ')[0]
+    return {'fy': fy, 'total': sum(g['total'] for g in d['governments']), 'n': len(d['governments']),
+            'services': sorted(((names[k], v) for k, v in svc.items()), key=lambda r: -r[1])}
 
 
 def _money(v):
@@ -123,7 +143,10 @@ def home_page():
         for a in sorted(b['areas'], key=lambda a: -a['t']))
     news = ''.join(f'<li><span class="hn-d">{nice(c["date"])}</span><a href="{c["pages"][0]}">{html.escape(c["title"])}</a></li>' for c in CHANGES[:4])
     govchips = ''.join(f'<a href="/governments/{g["slug"]}">{html.escape(g["short"])}</a>' for g in GOVS)
-    fema_bars = _bars(md['fema'], ['--navy', '--blue', '--blue', '--bar', '--bar'])
+    bd = md['budget']
+    budget_bars = _bars(bd['services'], ['--navy', '--blue', '--blue', '--bar', '--bar'])
+    short = {'Police / law enforcement': 'police', 'Administration & support': 'administration', 'Parks & recreation': 'parks', 'Fire': 'fire', 'Streets & public works': 'streets'}
+    top2 = ', '.join(f'{short.get(n, n.lower())} {M(v)}' for n, v in bd['services'][:2])
     debt_bars = _bars(md['debt'], ['--salmon', '--salmon', '--gold', '--gold', '--bar'])
     data = json.dumps(b, separators=(',', ':'))
     return f'''<div class="page home h-home">
@@ -162,10 +185,10 @@ def home_page():
   <section class="h-follow" aria-labelledby="follow">
     <div class="h-sec-hd"><div><span class="eyebrow">Step 2 · Follow it</span><h2 id="follow">Where it went, and who's checking.</h2></div><a href="/public-money/accountability">Accountability console →</a></div>
     <div class="h-tiles">
-      <a class="h-tile t-blue" href="/public-money/hurricane-michael">
-        <span class="eyebrow">Spending</span>
-        <span class="mini" aria-hidden="true">{fema_bars}</span>
-        <b class="fig">{M(s['fema'], 0)}</b><span class="h-tl">Rebuilding after Hurricane Michael</span><span class="muted">{s['fema_n']} FEMA projects · CRA {M(s['cra_spent'])}</span>
+      <a class="h-tile t-blue" href="/public-money/budget-explorer">
+        <span class="eyebrow">Spending · {bd['fy']}</span>
+        <span class="mini" aria-hidden="true">{budget_bars}</span>
+        <b class="fig">{M(bd['total'])}</b><span class="h-tl">Budgeted this year</span><span class="muted">{bd['n']} governments · biggest everyday costs: {html.escape(top2)}</span>
       </a>
       <a class="h-tile t-salmon" href="/public-money/debt">
         <span class="eyebrow">Debt</span>
@@ -184,7 +207,7 @@ def home_page():
       <a href="/public-money/campaign-money">Campaign money</a>
       <a href="/public-money/savings">Savings finder</a>
       <a href="/public-money/tourist-tax">Bed tax {M(s['bt25'])}</a>
-      <a href="/public-money/budget-explorer">Budgets</a>
+      <a href="/public-money/hurricane-michael">Hurricane Michael {M(s['fema'], 0)}</a>
       {f'<a class="hot" href="/public-money/amendment-3">Amendment 3 · −{M(s["a3"])} FY2029</a>' if election else ''}
     </nav>
   </section>
