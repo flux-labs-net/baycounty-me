@@ -111,7 +111,8 @@ final class AppStore {
         }
     }
 
-    private func loadApp<T: Decodable>(_ name: String, force: Bool = false, _ assign: (T) -> Void) async {
+    /// T is Sendable so its Decodable conformance can be used off the main actor (Xcode 26 warns otherwise).
+    private func loadApp<T: Decodable & Sendable>(_ name: String, force: Bool = false, _ assign: (T) -> Void) async {
         guard force || errors["app:" + name] != nil || !loaded.contains(name) else { return }
         do {
             let (v, f): (T, BayCountyClient.Freshness) = try await client.appData(name)
