@@ -1,6 +1,9 @@
 """Government profile pages: /governments and /governments/<slug>."""
 import html, json, os, re
 from datetime import date
+from city_filter import city_bar
+from govs import CRA_NAME
+_dumps = json.dumps
 
 
 def nice(d):
@@ -123,32 +126,8 @@ def gov_page(key):
         secs.append(f'''<section class="tx-sec"><div class="sec-hd"><h2 id="audits">What the auditors found</h2><span class="muted">{e(counts)}</span></div>
           {f'<ol class="findings">{fl}</ol>' if fl else '<p>No findings in the latest audit.</p>'}
           <p class="src-line">{src(last.get("source_url"), last["fy"] + " audit")} · <a href="/public-money/audits">All audit findings</a></p></section>''')
-    # votes
-    v = p.get('votes')
-    if v:
-        rs = ''.join(f'<li class="fd vt"><span class="vt-meta muted">{e(nice(x["date"]))} · {e(re.sub(r"[(].*?[)]", "", x.get("tally") or "").strip())}</span><div class="vt-h">{e(x["headline"])}</div><p class="small">Voted no: {e(", ".join(x["no"]) or "not named in the minutes")}</p></li>' for x in v['recent_split'])
-        secs.append(f'''<section class="tx-sec"><div class="sec-hd"><h2 id="votes">How they voted</h2><span class="muted">{v["n"]} money votes recorded · {v["split"]} split ({v["split"]/v["n"]:.0%})</span></div>
-          {f'<h3 class="h4">Most recent split votes</h3><ol class="findings">{rs}</ol>' if rs else '<p>Every recorded money vote was unanimous.</p>'}
-          <p class="src-line"><a href="/public-money/votes?g={key}#all">All {e(p["short"])} votes, by member</a></p></section>''')
-    # contracts
-    c = p.get('contracts')
-    if c:
-        big = ''.join(f'<li><b>{e(x["vendor"])}</b> · {money(x["amount"])} <span class="muted small">{e(x.get("purpose") or "")} ({e(x.get("date") or "")})</span> {src(x.get("source_url"))}</li>' for x in c['biggest'])
-        secs.append(f'''<section class="tx-sec"><div class="sec-hd"><h2 id="contracts">Contracts</h2><span class="muted">{c["n"]} major contracts since October 2022 · {money(c["total"])}</span></div>
-          <h3 class="h4">Largest</h3><ul class="plain">{big}</ul>
-          <p class="src-line"><a href="/public-money/contracts?gov={e(g["contracts"])}#all">All {e(p["short"])} contracts</a></p></section>''')
-    # projects & recovery
-    tiles = []
-    if p.get('surtax'):
-        s = p['surtax']; tiles.append(kpi('Sales tax projects', f'{s["completed"]:,} of {s["n"]:,}', f'completed · {s["in_progress"]} in progress · <a href="/public-money/sales-tax-projects?gov={e(g["surtax"])}">map</a>'))
-    if p.get('fema'):
-        f = p['fema']; tiles.append(kpi('Hurricane Michael', money(f['federal_obligated']), f'FEMA rebuilding money, {f["projects"]} projects · <a href="/public-money/hurricane-michael">details</a>'))
-    if p.get('cra'):
-        r = p['cra']; tiles.append(kpi(r['name'], money(r['spent']), f'documented spending, {r["records"]} records · <a href="/public-money/cra-spending?cra={r["id"]}">map and ledger</a>'))
     if p.get('utility_bill'):
-        u = p['utility_bill']; tiles.append(kpi('Typical utility bill', f'${u["total"]:,.2f}', f'a month at 5,000 gallons{"" if u.get("garbage") else ", garbage not included"} · <a href="/public-money/fees-and-bills">compare</a>'))
-    if tiles:
-        secs.append(f'<section class="tx-sec"><div class="sec-hd"><h2 id="projects">Projects, recovery and bills</h2></div><div class="kpis">{"".join(tiles)}</div></section>')
+        u = p['utility_bill']; kp.append(kpi('Typical utility bill', f'${u["total"]:,.2f}', f'a month at 5,000 gallons{"" if u.get("garbage") else ", garbage not included"} · <a href="/public-money/fees-and-bills?gov={key}">compare</a>'))
     # meetings
     if p.get('meetings'):
         up = [x for x in p['meetings'] if not x.get('past')][:5]
@@ -159,16 +138,36 @@ def gov_page(key):
       <div class="cols"><div><h3>Get updates</h3><p>Email when {e(p["short"])} has new votes, contracts or corrections on this site.</p><p><a class="pill" href="/alerts?gov={key}">Follow {e(p["short"])}</a></p></div>
       <div><h3>Ask for a record</h3><p>Something missing here? Request it from {e(p["short"])} under Florida's public records law.</p><p><a class="pill" href="/records-request?gov={key}">Request a record</a></p></div>
       <div><h3>Compare</h3><p>See {e(p["short"])} side by side with other Bay County governments.</p><p><a class="pill" href="/compare?g={key}">Compare</a></p></div></div></section>''')
-    nav = ''.join(f'<a href="#{i}">{t}</a>' for i, t in [('who', 'Officials'), ('money', 'Budget'), ('rate', 'Tax rate'), ('debt', 'Debt'), ('audits', 'Audits'), ('votes', 'Votes'), ('contracts', 'Contracts'), ('projects', 'Projects')] if f'id="{i}"' in ''.join(secs))
+    # sections filled in the browser by gov.js from the dashboards' published data, for the year in the bar
+    def live(i, title, more=''):
+        return (f'<section class="tx-sec gx" id="{i}" hidden><div class="sec-hd"><h2>{title}</h2><span class="muted" data-gx-sub></span></div>'
+                f'<div class="kpis gx-kpis" data-gx-kpis></div><div data-gx-body></div><p class="src-line" data-gx-link></p>{more}</section>')
+    by_id = {re.search(r'id="([a-z]+)"', x).group(1): x for x in secs}
+    cra = g.get('cra')
+    live_secs = {'contracts': live('contracts', 'Contracts'), 'cra': live('cra', 'Redevelopment (CRA) spending') if cra else '',
+                 'projects': live('projects', 'Projects'), 'votes': live('votes', 'How they voted'), 'savings': live('savings', 'Where it could spend less')}
+    order = ['who', 'money', 'rate', 'contracts', 'cra', 'projects', 'votes', 'meet', 'debt', 'audits', 'savings', 'act']
+    body = ''.join(by_id.get(i) or live_secs.get(i) or '' for i in order)
+    labels = [('who', 'Officials'), ('money', 'Budget'), ('contracts', 'Contracts'), ('cra', 'CRA'), ('projects', 'Projects'), ('votes', 'Votes'),
+              ('meet', 'Meetings'), ('debt', 'Debt'), ('audits', 'Audits'), ('savings', 'Savings')]
+    nav = ''.join(f'<a href="#{i}">{t}</a>' for i, t in labels if f'id="{i}"' in body)
+    glance = ('<section class="tx-sec gx-glance" hidden><div class="sec-hd"><h2 id="year">At a glance</h2><span class="muted" id="gxGlanceH"></span></div>'
+              '<div class="kpis" id="gxGlance"></div><p class="muted small" data-gx-loading>Loading this government\'s records…</p></section>')
+    cfg = {'key': key, 'short': p['short'], 'cra': cra or '', 'craName': CRA_NAME.get(cra, '') if cra else ''}
+    year = '<label class="sc-f sc-year" data-scope><span>Year</span><select id="gxYear" aria-label="Year"><option value="all">All years</option></select></label>'
+    bar = city_bar(None, fixed=key, extra=f'{year}<nav class="gx-jump" aria-label="On this page">{nav}</nav>')
     lede = g.get('blurb') or f'{e(p["name"])}: who runs it, what it spends and owes, how its commission votes, and what the auditors found, all from public records.'
     return f'''<div class="page tax gov-page">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow"><a href="/governments">Governments</a> · {e("County" if key == "county" else "Schools" if key == "schools" else "City")}</span><h1>{e(p["short"])}</h1>
     <p class="lede">{e(lede)}</p></div>{PDF}</header>
-  <nav class="jump" aria-label="On this page">{nav}</nav>
+  {bar}
   <div class="kpis">{"".join(kp)}</div>
-  {"".join(secs)}
+  {glance}
+  {body}
 </div>
-<link rel="stylesheet" href="/assets/tax.css">'''
+<link rel="stylesheet" href="/assets/tax.css">
+<script>window.GOVPAGE={_dumps(cfg)};</script>
+<script src="/assets/gov.js" defer></script>'''
 
 
 def govs_index():

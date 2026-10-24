@@ -13,6 +13,7 @@ datasets (site/page_datasets.py), so the page's data is in the database and /api
 An opportunity is a question worth asking, with an illustrative estimate, not a finding that money was wasted.
 """
 import json, os, re, html
+from city_filter import city_bar
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(HERE, '..', 'data')
@@ -192,10 +193,12 @@ def savings_page(out_dir):
     for f in ('savings.js', 'savings.css'):
         open(os.path.join(out_dir, 'assets', f), 'w').write(open(os.path.join(HERE, f)).read())
     S = D['stats']
+    gk = [k for k in ('county', 'schools', 'pc', 'pcb', 'lh', 'cw', 'sp', 'parker', 'mb') if any(k in o['govs'] for o in D['opportunities'])]
     reqs = ''.join(f'<li><b>{e(r["q"])}</b><br><span class="muted small">{e(r["why"])}</span> <a class="pill sm" href="/records-request?d={e(r["q"])}">Request this record</a></li>' for r in D['general_requests'])
     return f'''<div class="page tax sav">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Public Money · Accountability</span><h1>Savings finder</h1>
     <p class="lede">Places Bay County's local governments could spend less, found in records already on this site: projects that ran over, money budgeted but not spent, services bought separately that could be bought together. Each one shows the records it rests on, an estimate with its assumption, and the question to ask next.</p></div></header>
+  {city_bar(gk)}
   <div class="sav-stats" role="list">
     <div role="listitem"><b id="svM">{money(S["in_play"])}</b><span>spending these touch</span></div>
     <div role="listitem"><b id="svL">{money(S["savings_low"])}</b><span>potential savings, low estimate</span></div>

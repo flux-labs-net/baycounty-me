@@ -1,6 +1,7 @@
 """Tourist (bed) tax and sales tax project pages for baycounty.me."""
 import json, os, html, re
 from collections import defaultdict
+from city_filter import city_bar, data_g, by_city, gkey
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DIR = os.path.join(HERE, '..', 'data', 'tourism')
@@ -57,15 +58,20 @@ def bedtax_page(out_dir):
             fund[f][s['fy']] += s['amount'] or 0
     FN = {'125': 'Tourism promotion and administration (PCB zone)', '127': 'Beach nourishment (PCB zone)', '128': '5th cent, incl. Sports Park debt (PCB zone)',
           '124': 'Publix Sports Park operations', '129': 'Panama City zone', '126': 'Mexico Beach zone'}
-    ftbl = ''.join(f'<tr><th scope="row">{e(FN.get(k, "Fund " + k))} <span class="muted small">Fund {k}</span></th>' + ''.join(f'<td class="num">{money(fund[k].get(y))}</td>' for y in (2024, 2025, 2026, 2027)) + '</tr>' for k in ('125', '127', '128', '124', '129'))
+    FZ = {'125': 'pcb', '127': 'pcb', '128': 'pcb', '124': 'pcb', '129': 'pc', '126': 'mb'}  # the zone each fund serves
+    ftbl = ''.join(f'<tr{data_g("county", FZ.get(k))}><th scope="row">{e(FN.get(k, "Fund " + k))} <span class="muted small">Fund {k}</span></th>' + ''.join(f'<td class="num">{money(fund[k].get(y))}</td>' for y in (2024, 2025, 2026, 2027)) + '</tr>' for k in ('125', '127', '128', '124', '129'))
     gov = ''.join(f'<li><b>{e(g["item"])}.</b> {e(g["text"])} {a(g["source_url"])}</li>' for g in b['governance'])
-    con = ''.join(f'<li><b>{e(c["party"])}</b>: {e(c["type"])}. {e(c.get("detail", ""))} {a(c["source_url"])}</li>' for c in b['contracts'])
+    con = ''.join(f'<li{data_g("county", "mb" if "Mexico Beach" in c["party"] else "pcb")}><b>{e(c["party"])}</b>: {e(c["type"])}. {e(c.get("detail", ""))} {a(c["source_url"])}</li>' for c in b['contracts'])
     ctx = ''.join(f'<li><span class="tl-d">{e(c["date"])}</span><span><b>{e(c["topic"])}.</b> {e(c["text"])} {a(c["source_url"])}</span></li>' for c in b['context'] if not c['date'].startswith('SFY'))
     linelist = ''.join(f'<tr><td>{e(n)}</td><td class="small muted">{e(g)}</td><td class="num">{money(v)}</td></tr>' for n, v, g in lines)
     T = lambda tid, t: f'<span class="term" data-term="{tid}">{t}</span>'
+    ZK = {gkey(z): z for z in ZN}  # pcb, pc, mb: the three tax zones
+    zk = ['county'] + [k for k in ('pc', 'pcb', 'mb') if k in ZK]
+    zone = lambda k, fn, dflt: by_city({'': dflt, **{kk: fn(ZK[kk]) for kk in ZK}})
     return f'''<div class="page tax bt">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Public Money · Tourist Tax</span><h1>The bed tax: what visitors pay and where it goes</h1>
     <p class="lede">Visitors who rent a hotel room, condo or house for six months or less pay a 5% tourist development tax on top of sales tax. It brings in tens of millions a year, almost all from Panama City Beach, and state law limits what it can be spent on.</p></div>{PDF}</header>
+  {city_bar(zk, hide=True, label='Zone or government', note='Bay County runs the tax for all three zones')}
   <section class="explain"><div class="ex-txt"><span class="eyebrow">The simple version</span><h2>How the bed tax works</h2>
     <ol class="ex-steps">
       <li><b>Visitors pay it, not residents.</b> It's added to short-term rentals in a taxing area covering Panama City Beach, Panama City, Mexico Beach and nearby areas.</li>
@@ -75,25 +81,25 @@ def bedtax_page(out_dir):
     <ul class="plain">{rates}</ul><p class="muted small">State law would allow a 6th cent. Bay County doesn't levy it; the County Commission declined to add it in 2023.</p></div>
     <svg class="ex-fig" id="tdcMap" viewBox="0 0 400 260" role="img" aria-label="Map of the three tourist tax zones"></svg></section>
   <div class="kpis">
-    <div class="kpi"><span class="eyebrow">Collected, FY2025</span><span class="v">{money(fy25)}</span><span class="s">All three zones</span></div>
-    <div class="kpi"><span class="eyebrow">From the PCB zone</span><span class="v">{pcb_share:.0%}</span><span class="s">{money(col[2025]["Panama City Beach"])}</span></div>
-    <div class="kpi"><span class="eyebrow">Visit PCB budget, FY2026</span><span class="v">{money(data["total26"])}</span><span class="s">Including money carried over</span></div>
-    <div class="kpi"><span class="eyebrow">Beach nourishment reserves</span><span class="v">{money(next((x["amount"] for x in b["spending"] if "reserves" in x["category"] and x["fy"] == 2026), None))}</span><span class="s">Budgeted reserves, FY2026 (Fund 127)</span></div>
+    <div class="kpi"><span class="eyebrow">Collected, FY2025</span><span class="v"{zone(0, lambda z: money(col[2025][z]), money(fy25))}>{money(fy25)}</span><span class="s"{zone(0, lambda z: f"{e(z)} zone", "All three zones")}>All three zones</span></div>
+    <div class="kpi"><span class="eyebrow"{zone(0, lambda z: f"Share of all collections", "From the PCB zone")}>From the PCB zone</span><span class="v"{zone(0, lambda z: f"{col[2025][z] / fy25:.0%}" if col[2025][z] / fy25 >= .01 else f"{col[2025][z] / fy25:.1%}", f"{pcb_share:.0%}")}>{pcb_share:.0%}</span><span class="s"{zone(0, lambda z: f"of {money(fy25)}, FY2025", money(col[2025]["Panama City Beach"]))}>{money(col[2025]["Panama City Beach"])}</span></div>
+    <div class="kpi"{data_g("county", "pcb")}><span class="eyebrow">Visit PCB budget, FY2026</span><span class="v">{money(data["total26"])}</span><span class="s">Including money carried over</span></div>
+    <div class="kpi"{data_g("county", "pcb")}><span class="eyebrow">Beach nourishment reserves</span><span class="v">{money(next((x["amount"] for x in b["spending"] if "reserves" in x["category"] and x["fy"] == 2026), None))}</span><span class="s">Budgeted reserves, FY2026 (Fund 127)</span></div>
   </div>
-  <section class="tx-sec"><div class="sec-hd"><h2 id="coll">Ten years of collections</h2><span class="muted">By zone, county fiscal years</span></div>
+  <section class="tx-sec"><div class="sec-hd"><h2 id="coll">Ten years of collections</h2><span class="muted"{zone(0, lambda z: f"{e(z)} zone, county fiscal years", "By zone, county fiscal years")}>By zone, county fiscal years</span></div>
     <div class="vbars stacked bt-bars" id="btBars"></div><ul class="leg" id="btLeg"></ul>
     <p class="note">Hurricane Michael (October 2018) shows in FY2019–FY2020 for Mexico Beach and Panama City; FY2020 also reflects the pandemic. {f"FY{partial} so far (through July): {money(sum(col[partial].values()))}. " if partial else ""}Collections include penalties and interest, as reported by the Clerk. {a(b["collections"][-1]["source_url"], "Clerk reports")}</p></section>
-  <section class="tx-sec"><div class="sec-hd"><h2 id="split">How the 5 cents are split in the PCB zone</h2></div>
+  <section class="tx-sec"{data_g("county", "pcb")}><div class="sec-hd"><h2 id="split">How the 5 cents are split in the PCB zone</h2></div>
     <p class="note">In FY2024 the PCB zone's tax revenue went about <b>60% to tourism promotion</b> (3 cents), <b>20% to beach nourishment</b> (1 cent) and <b>20% to the "5th cent"</b> fund that pays the Publix Sports Park debt and other projects (1 cent). This is worked out from the county's budget book; the ordinance itself wasn't available to check. {a(b["pcb_zone_penny_split_observed"]["source_url"])}</p></section>
-  <section class="tx-sec"><div class="sec-hd"><h2 id="cvb">What Visit Panama City Beach spends it on</h2><span class="muted">FY2026 budget, {money(data["total26"])}</span></div>
+  <section class="tx-sec"{data_g("county", "pcb")}><div class="sec-hd"><h2 id="cvb">What Visit Panama City Beach spends it on</h2><span class="muted">FY2026 budget, {money(data["total26"])}</span></div>
     <div class="hbars" id="cvbBars"></div>
     <details class="tbl-toggle"><summary>Largest line items</summary><div class="tablewrap"><table class="tx-table"><thead><tr><th scope="col">Item</th><th scope="col">Department</th><th scope="col" class="num">FY2026</th></tr></thead><tbody>{linelist}</tbody></table></div></details>
     <p class="note">"Tourism development projects" is mostly the SABRE indoor event center at the Publix Sports Park ($26.3M budgeted), which the TDC paused in June 2026.</p></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="funds">The county's tourist tax funds</h2><span class="muted">Spending and reserves by fund</span></div>
-    <div class="tablewrap"><table class="tx-table"><thead><tr><th scope="col">Fund</th><th scope="col" class="num">FY2024 actual</th><th scope="col" class="num">FY2025 actual</th><th scope="col" class="num">FY2026 adopted</th><th scope="col" class="num">FY2027 tentative</th></tr></thead><tbody>{ftbl}</tbody></table></div>
+    <div class="tablewrap" data-city-empty="The {{city}} zone's fund isn't in this table; see the note below."><table class="tx-table"><thead><tr><th scope="col">Fund</th><th scope="col" class="num">FY2024 actual</th><th scope="col" class="num">FY2025 actual</th><th scope="col" class="num">FY2026 adopted</th><th scope="col" class="num">FY2027 tentative</th></tr></thead><tbody>{ftbl}</tbody></table></div>
     <p class="note">Budget columns include reserves (for example, $53.5M of beach nourishment reserves in FY2026), so they are much larger than actual spending. Mexico Beach's zone fund (126) is left out because its FY2025 lines include large one-time transfers we couldn't reconcile; its CVB contract was $1.1M in FY2026. Fund-level sums of the line items in the county budget book. {a("https://www.baycountyfl.gov/DocumentCenter/View/21090/FY-2027-Tentative-Budget-Commissioner-Book---09-15-26", "FY2027 budget book")}</p></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="gov">Who decides</h2></div><ul class="plain">{gov}</ul></section>
-  <section class="tx-sec"><div class="sec-hd"><h2 id="con">Major contracts</h2></div><ul class="plain">{con}</ul></section>
+  <section class="tx-sec"><div class="sec-hd"><h2 id="con">Major contracts</h2></div><ul class="plain" data-city-empty="No tourist tax contracts specific to the {{city}} zone in these records.">{con}</ul></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="news">Recent decisions and news</h2></div><ol class="timeline">{ctx}</ol>
     <p class="note">Criminal charges described above are allegations, not convictions.</p></section>
   <section class="tx-sec method"><div class="sec-hd"><h2 id="src">Gaps</h2></div><ul class="plain">{''.join(f"<li>{e(g)}</li>" for g in d["gaps"] if any(w in g for w in ("TDT", "TDC", "bed", "ad agency", "CVB")))}</ul></section>
@@ -146,17 +152,21 @@ def surtax_page(out_dir):
     rules = inf['rules']
     cols = {c['fy']: c['amount'] for c in inf['collections']}
     fin = inf['county_program_finance']
-    shares = ''.join(f'<tr><th scope="row">{e(s["government"])}</th><td class="num">{s["percent"]:.1f}%</td></tr>' for s in sorted(inf['allocation']['shares_percent'], key=lambda x: -x['percent']))
+    shares = ''.join(f'<tr{data_g(s["government"])}><th scope="row">{e(s["government"])}</th><td class="num">{s["percent"]:.1f}%</td></tr>' for s in sorted(inf['allocation']['shares_percent'], key=lambda x: -x['percent']))
     fin_rows = ''.join(f'<tr><th scope="row">FY{f["fy"]}</th><td class="num">{money(f["surtax_received"])}</td><td class="num">{money(f.get("grants_other"))}</td><td class="num">{money(f["expenditures"])}</td></tr>' for f in fin)
     scol = ''.join(f'<tr><th scope="row">FY{c["fy"]}</th><td class="num">{money(c["amount"])}</td></tr>' for c in sch['collections'])
     sproj = ''.join(f'<li><b>{e(p["name"])}</b>: {e(p.get("status", "status not stated"))}{", about " + money(p["promised_cost"]) if p.get("promised_cost") else ""}. {a(p["source_url"])}</li>' for p in sch['projects'])
-    hl = ''.join(f'<li><b>{e(p["name"])}</b>: {e(p.get("status", "status not stated"))}{", " + money(p["total_cost"]) + " total" if p.get("total_cost") else ""}{", " + money(p["county_surtax_share"]) + " from the surtax" if p.get("county_surtax_share") else ""}. {e(p.get("note", ""))} {a(p["source_url"])}</li>' for p in inf['project_highlights'])
+    hl = ''.join(f'<li{data_g("county", *(["pcb"] if "PCB" in (p.get("government") or "") else []))}><b>{e(p["name"])}</b>: {e(p.get("status", "status not stated"))}{", " + money(p["total_cost"]) + " total" if p.get("total_cost") else ""}{", " + money(p["county_surtax_share"]) + " from the surtax" if p.get("county_surtax_share") else ""}. {e(p.get("note", ""))} {a(p["source_url"])}</li>' for p in inf['project_highlights'])
     js = open(os.path.join(HERE, 'surtax.js')).read()
     open(os.path.join(out_dir, 'assets', 'surtax.js'), 'w').write(js)
     tot_fin = sum(f['surtax_received'] for f in fin)
+    ORDER = ['county', 'schools', 'pc', 'pcb', 'lh', 'cw', 'sp', 'parker', 'mb']
+    from city_filter import LABEL as LBL
+    st_keys = sorted({gkey(p['g']) for p in projs} - {None}, key=ORDER.index)
     return f'''<div class="page tax st addr">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Public Money · Sales Tax Projects</span><h1>The half-cent sales taxes: what was promised, what got built</h1>
     <p class="lede">Bay County has two extra half-cent sales taxes that voters approved: one for roads and infrastructure, one for school buildings. Here is every infrastructure project on the county's map, and what we could find about the school tax.</p></div>{PDF}</header>
+  {city_bar(st_keys, hide=True, note='The school half-cent is countywide')}
   <section class="explain"><div class="ex-txt"><span class="eyebrow">The simple version</span><h2>How the half-cent taxes work</h2>
     <ol class="ex-steps">
       <li><b>Everyone who shops here pays.</b> Each adds half a cent to every dollar of taxable purchases in Bay County, including purchases by tourists.</li>
@@ -168,7 +178,7 @@ def surtax_page(out_dir):
     <div class="filters-row">
       <input id="stQ" type="search" placeholder="Search projects or roads" aria-label="Search projects" data-param="q">
       <select id="stY" aria-label="Fiscal year"><option value="">All years</option></select>
-      <select id="stG" aria-label="Government" data-param="gov"><option value="">All governments</option></select>
+      <select id="stG" aria-label="Government" data-city-link hidden><option value="">All governments</option></select>
       <select id="stC" aria-label="Type" data-param="type"><option value="">All types</option></select>
       <select id="stS" aria-label="Status" data-param="status"><option value="">Any status</option><option value="completed">Completed</option><option value="in_progress">In progress</option><option value="not_started">Not started</option></select>
       <select id="stO" aria-label="Sort"><option value="new">Newest first</option><option value="az">Name A to Z</option><option value="big">Largest cost</option></select>
@@ -180,11 +190,11 @@ def surtax_page(out_dir):
       <ol class="st-list" id="stList"></ol></div>
     <ul class="leg mini" id="stLeg"></ul>
     <p class="note">From the county's sales tax project map service. Status comes from each project's "percent complete" field, which the county maintains; some records haven't been updated in years. Road projects are shown at the middle of the segment. {a(inf.get("projects_source_url") or "https://bayhalfcent.com/", "bayhalfcent.com")}</p></section>
-  <section class="tx-sec"><div class="sec-hd"><h2 id="money-h">The county's share, year by year</h2><span class="muted">Surtax received, grants and spending on the county's program</span></div>
-    <div class="two"><div class="tablewrap"><table class="tx-table"><thead><tr><th scope="col">Year</th><th scope="col" class="num">Surtax received</th><th scope="col" class="num">Grants</th><th scope="col" class="num">Spent</th></tr></thead><tbody>{fin_rows}</tbody></table></div>
+  <section class="tx-sec"><div class="sec-hd"><h2 id="money-h">The county's share, year by year</h2><span class="muted"{by_city({'': "Surtax received, grants and spending on the county's program", **{k: f"Year-by-year figures are for the county's own program; this is {e(LBL[k])}'s share of the tax" for k in st_keys if k != 'county'}})}>Surtax received, grants and spending on the county's program</span></div>
+    <div class="two"><div class="tablewrap"{data_g("county")}><table class="tx-table"><thead><tr><th scope="col">Year</th><th scope="col" class="num">Surtax received</th><th scope="col" class="num">Grants</th><th scope="col" class="num">Spent</th></tr></thead><tbody>{fin_rows}</tbody></table></div>
     <div><h3 class="h4">How the tax is split</h3><div class="tablewrap"><table class="tx-table"><thead><tr><th scope="col">Government</th><th scope="col" class="num">Share</th></tr></thead><tbody>{shares}</tbody></table></div><p class="note">State formula shares, local FY2027. {a(inf["allocation"]["source_url"])}</p></div></div>
     <p class="note">{e(inf["county_program_finance_note"])} {a(fin[0]["source_url"])}</p></section>
-  <section class="tx-sec"><div class="sec-hd"><h2 id="hl-h">Big projects</h2></div><ul class="plain">{hl}</ul></section>
+  <section class="tx-sec"><div class="sec-hd"><h2 id="hl-h">Big projects</h2></div><ul class="plain" data-city-empty="No big-project write-ups for {{city}} yet; its projects are on the map above.">{hl}</ul></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="sch-h">The school half-cent</h2></div>
     <div class="two"><div><h3 class="h4">Collected by Bay District Schools</h3><div class="tablewrap"><table class="tx-table"><thead><tr><th scope="col">Year</th><th scope="col" class="num">Collected</th></tr></thead><tbody>{scol}</tbody></table></div><p class="note">From the district's audited statements (school years end June 30).</p></div>
     <div><h3 class="h4">Projects tied to the tax by a source</h3><ul class="plain">{sproj}</ul><p class="note">{e(sch["promised_project_list_note"])} The district had ${sch["construction_commitments_total"]["total_contract"]/1e6:,.1f}M in construction contracts open at June 30, 2025, paid from all sources, not only the surtax. {a(sch["construction_commitments_total"]["source_url"])}</p></div></div></section>

@@ -1,5 +1,6 @@
 """Budget explorer (/public-money/budget-explorer) and tourism-agency payments (/public-money/who-gets-paid)."""
 import html, json, os, re
+from city_filter import city_bar, data_g, by_city, KEYS
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(HERE, '..', 'data')
@@ -63,7 +64,6 @@ const R = (n, pop) => { if (!pop || n == null) return ''; const v = n / pop; ret
 const med = a => { if (a.length < 3) return null; const s = [...a].sort((x, y) => x - y), m = s.length >> 1; return s.length ? (s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2) : null; };
 $('beG').innerHTML = B.map(b => `<option value="${b.gov}">${esc(b.short)}</option>`).join('');
 const P = new URLSearchParams(location.search);
-if (P.get('gov') && B.some(b => b.gov === P.get('gov'))) $('beG').value = P.get('gov');
 let svc = SV.some(s => s[0] === P.get('svc')) ? P.get('svc') : 'police';
 function bars(list, total, pop, note) {
   if (!list || !list.length) return `<p class="muted">${note || 'Not broken out in the published budget.'}</p>`;
@@ -92,7 +92,8 @@ function bench(b) {
 }
 function run() {
   const b = B.find(x => x.gov === $('beG').value), pop = b.pop;
-  history.replaceState(null, '', '?gov=' + b.gov + (svc !== 'police' ? '&svc=' + svc : ''));
+  const u = new URL(location.href); if (svc !== 'police') u.searchParams.set('svc', svc); else u.searchParams.delete('svc');
+  history.replaceState(history.state, '', u.pathname + u.search + u.hash); // the city bar keeps ?gov=
   const gf = (b.funds || []).find(f => /general/i.test(f.type || '') || /general fund/i.test(f.name));
   const gfd = (b.general_fund_departments || []).reduce((s, x) => s + x.amount, 0), gfv = gf ? gf.amount : gfd || null;
   $('beKpis').innerHTML = `<div class="kpi"><span class="eyebrow">Total budget</span><span class="v">${M(b.total)}</span><span class="s">${pop ? R(b.total, pop) + ' per resident · ' : ''}${esc(b.fiscal_year)}</span></div>
@@ -110,7 +111,10 @@ function run() {
   bench(b);
 }
 $('bnChips').addEventListener('click', ev => { const c = ev.target.closest('[data-s]'); if (c) { svc = c.dataset.s; run(); } });
-$('beG').addEventListener('change', run); run();
+$('beG').addEventListener('change', run);
+// the city bar at the top picks the budget; "All governments" opens Bay County's, the countywide budget
+const pick = k => { $('beG').value = B.some(b => b.gov === k) ? k : B[0].gov; run(); };
+if (window.BCM && BCM.city) BCM.city.on(pick); else pick(P.get('gov'));
 })();
 """
 
@@ -198,7 +202,8 @@ def budget_page(out_dir):
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Public Money · Budgets</span><h1 id="beTitle">Budget explorer</h1>
     <p class="lede">Open up any local government's FY2026 budget: how much goes into each fund, what the General Fund spends by department, and what each service costs per resident, side by side with the other cities.</p></div>
     <div class="stamp">{PDF_BTN}<a class="pill" id="beGov" href="/governments">Overview →</a></div></header>
-  <div class="vt-filters mt-f"><label class="vf"><span>Government</span><select id="beG"></select></label></div>
+  {city_bar([b['gov'] for b in B], note='All governments shows Bay County\'s budget')}
+  <div class="vt-filters mt-f" hidden><label class="vf"><span>Government</span><select id="beG"></select></label></div>
   <div class="kpis" id="beKpis"></div>
   <section class="explain"><div class="ex-txt"><span class="eyebrow">The simple version</span><h2>How a government budget is organized</h2>
     <ol class="ex-steps"><li><b>Funds are separate bank accounts.</b> Money raised for one purpose, like water bills or a sales tax, goes into its own fund and can only be spent on that purpose.</li>
@@ -230,6 +235,8 @@ def budget_page(out_dir):
 
 # ---------------- Who gets paid (tourism agencies) ----------------
 SHORT = {'visit_pcb_cvb': 'Visit Panama City Beach', 'destination_panama_city_cdc': 'Destination Panama City', 'mexico_beach_cdc': 'Mexico Beach CDC'}
+# the city each county tourist-tax agency markets (they are county agencies, not city departments)
+AG_CITY = {'visit_pcb_cvb': 'pcb', 'destination_panama_city_cdc': 'pc', 'mexico_beach_cdc': 'mb'}
 CAT = {'payroll/benefit/tax pass-through': 'Payroll or benefits', 'government': 'Government', 'credit card payment (underlying merchants not itemized)': 'Credit card bill'}
 
 
@@ -266,7 +273,7 @@ def payments_page():
     tabs, secs = '', ''
     for i, a in enumerate(A):
         nm = SHORT.get(a['gov'], a['name'])
-        tabs += f'<option value="{a["gov"]}">{e(nm)}</option>'
+        tabs += f'<option value="{a["gov"]}"{data_g(AG_CITY.get(a["gov"]))}>{e(nm)}</option>'
         rows = ''
         for v in a['vendors']:
             cat = v.get('category')
@@ -282,7 +289,7 @@ def payments_page():
         notes = ''.join(f'<li>{e(n)}</li>' for n in a.get('notes') or [])
         ex = a.get('excluded_individuals') or {}
         listed = f'Top {a["vendors_listed"]} of {a["vendor_count_total"]} payees' if a['vendors_listed'] < a['vendor_count_total'] else f'All {a["vendor_count_total"]} payees'
-        secs += f'''<section class="tx-sec wp-ag" data-ag="{a["gov"]}"{"" if i == 0 else " hidden"}>
+        secs += f'''<section class="tx-sec wp-ag" data-ag="{a["gov"]}" data-c="{AG_CITY.get(a["gov"], '')}"{"" if i == 0 else " hidden"}>
     <div class="sec-hd"><h2>{e(a["name"])}</h2><span class="muted">{e(covtxt)}</span></div>
     <div class="kpis"><div class="kpi"><span class="eyebrow">Paid out</span><span class="v">{money(a["parsed_total_all_payees"])}</span><span class="s">{a["parsed_payments"]:,} payments in the months covered</span></div>
       <div class="kpi"><span class="eyebrow">Payees</span><span class="v">{a["vendor_count_total"]}</span><span class="s">{e(listed)} shown</span></div>
@@ -297,9 +304,10 @@ def payments_page():
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Accountability · Who gets paid</span><h1>Who gets paid: tourism agencies</h1>
     <p class="lede">Every payment by the three agencies that spend Bay County's tourist development tax on marketing, from the monthly check registers kept by the Clerk of Court. The county's own payments are on the <a href="/public-money/contracts">Contracts</a> page.</p></div>
     <div class="stamp">{PDF_BTN}<span>Registers through July 2026</span></div></header>
+  {city_bar([k for k in KEYS if k in AG_CITY.values()], note='County tourism agencies, by the city each one markets')}
   <section class="explain"><div class="ex-txt"><span class="eyebrow">The simple version</span><h2>Where the bed tax goes after the county</h2>
     <ol class="ex-steps"><li><b>Visitors pay a 5% bed tax</b> on hotel and rental stays. Part of it pays three agencies that market each tourism area: Panama City Beach, Panama City and Mexico Beach.</li>
-      <li><b>The Clerk pays their bills.</b> Each agency's payments are listed in the Clerk's monthly check register. That's what this page shows: {money(tot)} in payments over the months covered. A few months were never posted; they're listed under Sources and gaps.</li>
+      <li><b>The Clerk pays their bills.</b> Each agency's payments are listed in the Clerk's monthly check register. That's what this page shows: <span{by_city({'': money(tot), **{AG_CITY[a['gov']]: money(a['parsed_total_all_payees']) for a in A if a['gov'] in AG_CITY}})}>{money(tot)}</span> in payments over the months covered. A few months were never posted; they're listed under Sources and gaps.</li>
       <li><b>Some bills hide the details.</b> Credit card payments and payroll services show as one payment; what was bought isn't listed. Payments to individual people are counted but not named.</li></ol></div></section>
   <div class="callout">In January 2026 the Clerk of Court published an <a href="https://apps.baycoclerk.com/Web_File_Repo/bocc_finance/Panama_City_Beach_TDC_CVB_Public_CAP.pdf" target="_blank" rel="noopener">action plan for Visit Panama City Beach</a>, describing a criminal investigation and forensic audit and putting the agency's payments under the Clerk's review. The payments here are listed as recorded; this site makes no finding about any of them.</div>
   <div class="vt-filters mt-f two"><label class="vf"><span>Agency</span><select id="wpA" data-param="agency">{tabs}</select></label><label class="vf"><span>Search payees</span><input id="wpQ" type="search" placeholder="e.g. Meta, printing, hotel" data-param="q"></label></div>
@@ -312,10 +320,17 @@ def payments_page():
 <link rel="stylesheet" href="/assets/tax.css">
 <script>
 (() => {{ const a = document.getElementById('wpA'), q = document.getElementById('wpQ'), u = new URLSearchParams(location.search);
-  if (u.get('agency')) a.value = u.get('agency');
+  if (u.get('agency') && [...a.options].some(o => o.value === u.get('agency'))) a.value = u.get('agency');
   addEventListener('hashchange', () => {{ const t = document.getElementById(location.hash.slice(1)); if (t && t.closest('details')) {{ t.closest('details').open = true; t.scrollIntoView({{block: 'center'}}); }} }});
   const run = () => {{ document.querySelectorAll('.wp-ag').forEach(s => s.hidden = s.dataset.ag !== a.value); const t = q.value.trim().toLowerCase();
     document.querySelectorAll('.wp-ag:not([hidden]) tbody tr').forEach(tr => tr.hidden = !!t && !tr.dataset.v.includes(t)); }};
   if (u.get('q')) q.value = u.get('q');
-  a.addEventListener('change', run); q.addEventListener('input', run); run(); }})();
+  a.addEventListener('change', run); q.addEventListener('input', run);
+  // the city bar: show the agency that markets that city, and offer only it
+  const ag = u.get('agency') && [...a.options].find(o => o.value === u.get('agency'));
+  const city = k => {{ const m = k && [...a.options].find(o => o.dataset.g === k); [...a.options].forEach(o => o.hidden = !!m && o !== m); if (m) a.value = m.value; run(); }};
+  const go = () => {{ if (!(window.BCM && BCM.city)) return run();
+    if (ag && !u.get('gov') && BCM.city.get() !== ag.dataset.g) BCM.city.set(ag.dataset.g); // an old ?agency= link picks its city
+    BCM.city.on(city); }};
+  if (window.BCM) go(); else addEventListener('DOMContentLoaded', go); }})();
 </script>'''

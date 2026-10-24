@@ -8,15 +8,17 @@ const NS = 'http://www.w3.org/2000/svg';
 const OFF = D.officials, DON = D.donors, GIFTS = D.gifts, CON = D.contracts, GN = D.govs, VOTES = D.votes;
 const GORDER = Object.keys(GN);
 const qs = new URLSearchParams(location.search);
-$('mmGov').innerHTML += GORDER.filter(g => OFF.some(o => o.g === g)).map(g => `<option value="${g}">${esc(GN[g])}</option>`).join('');
+// the city bar at the top picks the government; county officers (sheriff, clerk...) count with Bay County
+const CITY = g => g === 'constitutional' ? 'county' : g;
+const GOV = () => (window.BCM && BCM.city ? BCM.city.get() : '') || '';
+const inGov = (g, k = GOV()) => !k || CITY(g) === k;
 if (qs.get('show')) $('mmShow').value = qs.get('show');
-if (qs.get('gov')) $('mmGov').value = qs.get('gov');
 if (qs.get('q')) $('mmQ').value = qs.get('q');
 let sel = null; // {t:'d'|'o'|'g', id}
 { const m = /^([dog])-(.+)$/.exec(qs.get('sel') || ''); if (m) sel = {t: m[1], id: m[1] === 'g' ? m[2] : +m[2]}; }
-function writeURL(later) { // keep the view in the link: ?show=&gov=&q=&sel=d-12
+function writeURL(later) { // keep the view in the link: ?show=&q=&sel=d-12 (the city bar keeps ?gov=)
   const u = new URL(location.href), set = (k, v) => v ? u.searchParams.set(k, v) : u.searchParams.delete(k);
-  set('show', $('mmShow').value !== 'same' ? $('mmShow').value : ''); set('gov', $('mmGov').value); set('q', $('mmQ').value.trim()); set('sel', sel ? sel.t + '-' + sel.id : '');
+  set('show', $('mmShow').value !== 'same' ? $('mmShow').value : ''); set('q', $('mmQ').value.trim()); set('sel', sel ? sel.t + '-' + sel.id : '');
   clearTimeout(writeURL.t); const go = () => history.replaceState(history.state, '', u.pathname + u.search + u.hash);
   if (later) writeURL.t = setTimeout(go, 350); else go();
 }
@@ -24,8 +26,8 @@ const conAmt = c => c.a || c.p;
 const sameDon = new Set(GIFTS.filter(g => g.same).map(g => g.d));
 
 function filtered() {
-  const show = $('mmShow').value, gov = $('mmGov').value, q = $('mmQ').value.trim().toLowerCase();
-  const offs = new Set(OFF.filter(o => !gov || o.g === gov).map(o => o.id));
+  const show = $('mmShow').value, q = $('mmQ').value.trim().toLowerCase();
+  const offs = new Set(OFF.filter(o => inGov(o.g)).map(o => o.id));
   let gifts = GIFTS.filter(g => offs.has(g.o));
   let dset;
   if (show === 'same') dset = sameDon;
@@ -149,8 +151,12 @@ function detail() {
 }
 
 function votesTable() {
-  const t = $('mmVotes'), VG = D.vgroups || [];
-  if (!VG.length) { t.outerHTML = '<p class="muted">No recorded votes found.</p>'; return; }
+  const t = $('mmVotes'), VG = (D.vgroups || []).filter(v => inGov(v.g));
+  let none = $('mmVotesNone');
+  if (!none) { none = document.createElement('p'); none.id = 'mmVotesNone'; none.className = 'muted'; t.after(none); }
+  t.hidden = !VG.length; none.hidden = !!VG.length; if (!VG.length) t.innerHTML = '';
+  none.textContent = GOV() ? `No recorded votes by ${BCM.city.label(GOV())} officials on their donors' contracts.` : 'No recorded votes found.';
+  if (!VG.length) return;
   const member = m => {
     const name = m.gift ? `<b>${esc(m.n)}</b>` : esc(m.n);
     const vote = m.vote === 'yes' ? 'yes' : `<b>${esc(m.vote)}</b>`;
@@ -166,18 +172,21 @@ function votesTable() {
 
 function shade(v, max) { if (!v) return ''; const t = Math.pow(v / max, 0.5); return `style="--h:${(12 + t * 78).toFixed(0)}%"${t > 0.55 ? ' data-hi' : ''}`; }
 function heat1() {
-  const govs = GORDER.filter(g => OFF.some(o => o.g === g));
-  const tot = {}; GIFTS.forEach(g => tot[g.d] = (tot[g.d] || 0) + g.a);
+  const govs = GORDER.filter(g => inGov(g) && OFF.some(o => o.g === g)), GIFTS_ = GIFTS.filter(g => inGov(OFF[g.o].g));
+  const tot = {}; GIFTS_.forEach(g => tot[g.d] = (tot[g.d] || 0) + g.a);
   const top = Object.keys(tot).map(Number).sort((a, b) => tot[b] - tot[a]).slice(0, 30);
   const cell = {}; let mx = 1;
-  GIFTS.forEach(g => { if (!top.includes(g.d)) return; const k = g.d + '|' + OFF[g.o].g; cell[k] = (cell[k] || 0) + g.a; mx = Math.max(mx, cell[k]); });
+  GIFTS_.forEach(g => { if (!top.includes(g.d)) return; const k = g.d + '|' + OFF[g.o].g; cell[k] = (cell[k] || 0) + g.a; mx = Math.max(mx, cell[k]); });
   const ring = new Set(CON.map(c => c.d + '|' + c.g));
+  if (!top.length) { $('mmHeat1').innerHTML = `<tbody><tr><td class="muted">No organization gave to ${esc(BCM.city.label(GOV()))} officials' campaigns.</td></tr></tbody>`; return; }
   $('mmHeat1').innerHTML = `<thead><tr><th scope="col">Donor</th>${govs.map(g => `<th scope="col"><span>${esc(GN[g])}</span></th>`).join('')}<th scope="col" class="num">Total</th></tr></thead><tbody>${top.map(d => `<tr><th scope="row">${esc(DON[d].n)}</th>${govs.map(g => { const v = cell[d + '|' + g]; const offs = GIFTS.filter(x => x.d === d && OFF[x.o].g === g).map(x => `${OFF[x.o].n} ${M(x.a)}`).join(', '); return `<td class="hc${v ? ' v' : ''}${v && ring.has(d + '|' + g) ? ' ring' : ''}" ${shade(v, mx)}${v ? ` title="${esc(DON[d].n)} → ${esc(offs)}"` : ''}>${v ? M(v) : ''}</td>`; }).join('')}<td class="num">${M(tot[d])}</td></tr>`).join('')}</tbody>`;
 }
 
-['mmShow', 'mmGov'].forEach(id => $(id).addEventListener('change', () => { sel = null; render(); }));
+$('mmShow').addEventListener('change', () => { sel = null; render(); });
 $('mmQ').addEventListener('input', render);
 let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(render, 150); });
-render(); votesTable(); heat1();
+let first = true;
+const all = () => { if (!first) sel = null; first = false; render(); votesTable(); heat1(); };
+if (window.BCM && BCM.city) BCM.city.on(all); else all();
 if (sel && qs.get('sel')) $('map').scrollIntoView();
 })();

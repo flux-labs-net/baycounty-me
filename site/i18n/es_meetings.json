@@ -163,6 +163,22 @@
   [
    "'baycounty-meetings'",
    "'baycounty-reuniones'"
+  ],
+  [
+   "aria-label=\"Filter this page\"",
+   "aria-label=\"Filtros\""
+  ],
+  [
+   "aria-label=\"Government\"",
+   "aria-label=\"Gobierno\""
+  ],
+  [
+   "data-city-empty=\"No upcoming meetings found for {city}.\"",
+   "data-city-empty=\"No encontramos próximas reuniones de {city}.\""
+  ],
+  [
+   "data-city-empty=\"No recent meetings found for {city}.\"",
+   "data-city-empty=\"No encontramos reuniones recientes de {city}.\""
   ]
  ]
 }

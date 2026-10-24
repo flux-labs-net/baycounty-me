@@ -219,6 +219,30 @@
   [
    "<h2 id=\"gaps\">What we couldn't find</h2>",
    "<h2 id=\"gaps\">Lo que no pudimos encontrar</h2>"
+  ],
+  [
+   "aria-label=\"Filter this page\"",
+   "aria-label=\"Filtros\""
+  ],
+  [
+   "aria-label=\"Government\"",
+   "aria-label=\"Gobierno\""
+  ],
+  [
+   "<option value=\"\">All governments</option>",
+   "<option value=\"\">Todos los gobiernos</option>"
+  ],
+  [
+   "<option value=\"county\">Bay County</option>",
+   "<option value=\"county\">Condado de Bay</option>"
+  ],
+  [
+   "data-city-empty=\"No fees on the tax bill from {city}.\"",
+   "data-city-empty=\"{city} no cobra tarifas en la factura de impuestos.\""
+  ],
+  [
+   "data-city-empty=\"No utility rates found online for {city}.\"",
+   "data-city-empty=\"No encontramos en línea las tarifas de servicios de {city}.\""
   ]
  ]
 }

@@ -22,7 +22,7 @@ function draw() {
   if (G) {
     s += `<path d="${path(G.land)}" fill="var(--land)" stroke="var(--landline)" stroke-width="${sw}"/>`;
     if (on('pmLCity')) Object.values(G.cities).forEach(g => s += `<path d="${path(g)}" fill="var(--city)" stroke="var(--cityline)" stroke-width="${sw * .8}"/>`);
-    if (on('pmLDist')) G.districts.forEach(d => s += `<path d="${path(d.geom)}" fill="var(--c-${d.cra})" fill-opacity=".16" stroke="var(--c-${d.cra})" stroke-width="${sw}"><title>${esc(d.name)} (est. ${d.est})</title></path>`);
+    if (on('pmLDist')) G.districts.filter(d => BCM.city.has(BCM.city.get(), d.cra)).forEach(d => s += `<path d="${path(d.geom)}" fill="var(--c-${d.cra})" fill-opacity=".16" stroke="var(--c-${d.cra})" stroke-width="${sw}"><title>${esc(d.name)} (est. ${d.est})</title></path>`);
   }
   const r = Math.max(2.2, Math.min(4.5, 1.4 / view.span));
   cur.forEach(p => { if (p === sel) return; const [x, y] = proj([p.x, p.y]); if (!inView([x, y], 5)) return;
@@ -35,7 +35,8 @@ function draw() {
 }
 function filt() {
   const q = $('pmQ').value.trim().toLowerCase(), st = $('pmS').value, cra = on('pmLCra'), tax = on('pmLTax');
-  cur = ITEMS.filter(p => ((p.t === 'cra' && cra) || (p.t === 'tax' && tax)) && (!st || p.st === st) && (!q || p.q.includes(q)));
+  const ck = BCM.city.get();
+  cur = ITEMS.filter(p => ((p.t === 'cra' && cra) || (p.t === 'tax' && tax)) && (!ck || p.g === ck) && (!st || p.st === st) && (!q || p.q.includes(q)));
   const n = t => cur.filter(p => p.t === t).length;
   $('pmCount').textContent = `${n('cra').toLocaleString()} CRA records · ${n('tax').toLocaleString()} sales tax projects`;
   if (sel && !cur.includes(sel)) clear(false);
@@ -66,6 +67,18 @@ const zoom = f => { view = {...view, span: Math.min(HOME.span * 1.2, Math.max(0.
 $('pmIn').addEventListener('click', () => zoom(0.6));
 $('pmOut').addEventListener('click', () => zoom(1.6));
 $('pmAll').addEventListener('click', () => { clear(false); view = {...HOME}; draw(); });
+/* the city bar: show only that government's marks and fit the map to its city limits and marks */
+function fitCity(ck) {
+  if (!ck) { view = {...HOME}; return; }
+  let x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity;
+  const add = (x, y) => { x0 = Math.min(x0, x); x1 = Math.max(x1, x); y0 = Math.min(y0, y); y1 = Math.max(y1, y); };
+  const lim = G && G.cities && G.cities[BCM.city.label(ck)];
+  if (lim) lim.forEach(poly => poly.forEach(ring => ring.forEach(([x, y]) => add(x, y))));
+  ITEMS.forEach(p => { if (p.g === ck) add(p.x, p.y); });
+  if (!isFinite(x0)) { view = {...HOME}; return; }
+  const span = Math.min(HOME.span, Math.max(0.04, (y1 - y0) * 1.15, (x1 - x0) * k * H / W * 1.15));
+  view = {x: (x0 + x1) / 2, y: (y0 + y1) / 2, span};
+}
 $('pmSel').addEventListener('click', ev => { if (ev.target.closest('.st-x')) clear(); });
 $('pmMap').addEventListener('click', ev => { const c = ev.target.closest('[data-i]'); if (c) select(ITEMS[+c.dataset.i]); });
 const tt = $('tt');
@@ -81,9 +94,9 @@ addEventListener('resize', () => { if (ITEMS.length) draw(); });
 Promise.all(['/data/cra-geo.json', '/data/cra-pay-1.json', '/data/cra-pay-2.json', '/data/surtax-projects.json', '/data/vendor-slugs.json'].map(u => fetch(u).then(r => r.json()).catch(() => null)))
   .then(([geo, p1, p2, tax, slugs]) => {
     G = geo; SLUG = (slugs && slugs.names) || {};
-    (p1 || []).concat(p2 || []).forEach(r => { if (r.lat == null) return; ITEMS.push({t: 'cra', x: r.lng, y: r.lat, st: craSt(r.status), r, q: (r.payee + ' ' + r.purpose + ' ' + r.loc + ' ' + (CRA_N[r.cra] || '')).toLowerCase()}); });
-    (tax || []).forEach(r => ITEMS.push({t: 'tax', x: r.x, y: r.yy, st: taxSt(r.s), r, q: (r.n + ' ' + r.g + ' ' + r.c + ' ' + (r.d || '')).toLowerCase()}));
+    (p1 || []).concat(p2 || []).forEach(r => { if (r.lat == null) return; ITEMS.push({t: 'cra', x: r.lng, y: r.lat, st: craSt(r.status), r, g: BCM.city.key(r.cra), q: (r.payee + ' ' + r.purpose + ' ' + r.loc + ' ' + (CRA_N[r.cra] || '')).toLowerCase()}); });
+    (tax || []).forEach(r => ITEMS.push({t: 'tax', x: r.x, y: r.yy, st: taxSt(r.s), r, g: BCM.city.key(r.g), q: (r.n + ' ' + r.g + ' ' + r.c + ' ' + (r.d || '')).toLowerCase()}));
     ITEMS.forEach((p, i) => p.i = i);
-    filt();
+    BCM.city.on(ck => { clear(false); fitCity(ck); filt(); });
   });
 })();

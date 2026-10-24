@@ -5,6 +5,7 @@ and finances.json (EDR audited actuals), builds one compact dataset, and writes
 assets/tax.js. Returns the page body.
 """
 import json, os
+from city_filter import city_bar
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(HERE, '..', 'data', 'tax')
@@ -225,6 +226,7 @@ def tax_page(out_dir):
     </div>
     <div class="stamp"><button type="button" id="pdf" class="pdf-btn"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 12v2h10v-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Export PDF</button><span>Rates for {FY[last]} (Oct 2025 to Sept 2026)<br>Data updated Oct 20, 2026</span></div>
   </header>
+  {city_bar(['county', 'schools', 'pc', 'pcb', 'lh', 'cw', 'sp', 'parker', 'mb'], note='Opens that government in "Each government\'s money" and sets the calculator to its city')}
 
   <section class="explain" aria-labelledby="howbill">
     <div class="ex-txt">

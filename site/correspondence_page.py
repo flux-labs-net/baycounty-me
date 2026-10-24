@@ -4,7 +4,8 @@ The page holds no data. assets/correspondence.js reads /api/v1/correspondence, w
 in /admin, by official name and seat (no email addresses). It opens on the latest year with mail; All years is one
 choice away.
 """
-import os
+import json, os
+from city_filter import city_bar, gkey, KEYS
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 
@@ -28,16 +29,27 @@ CSS = r"""
 """
 
 
+def _keys():
+    """Governments that can have letters here (the contact list); the script drops the ones with nothing published."""
+    try:
+        f = json.load(open(os.path.join(HERE, '..', 'data', 'civic', 'official_contacts.json')))
+        ks = {g.get('key') or gkey(g['government']) for g in f['governments']}
+        return [k for k in KEYS if k in ks]
+    except (OSError, ValueError, KeyError):
+        return None
+
+
 def correspondence_page(out_dir):
     open(os.path.join(out_dir, 'assets', 'correspondence.js'), 'w').write(open(os.path.join(HERE, 'correspondence.js')).read())
     return f'''<style>{CSS}</style>
 <div class="page tax">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Get involved · Correspondence</span><h1>Letters to officials</h1>
     <p class="lede">Emails BayCounty.me has sent to Bay County's elected officials and managers, and what they wrote back. Each email goes to one person, never a whole board, so officials can't reply to each other outside a public meeting.</p></div></header>
+  {city_bar(_keys())}
   <section class="tx-sec">
     <div class="filters-row">
       <select id="crY" aria-label="Year"></select>
-      <select id="crG" aria-label="Government"><option value="">All governments</option></select>
+      <select id="crG" aria-label="Government" data-city-link hidden><option value="">All governments</option></select>
       </div>
     <p class="muted small" id="crCount" aria-live="polite" style="margin:10px 0 0"></p>
     <div id="crList" class="cr-list"><p class="muted">Loading…</p></div>

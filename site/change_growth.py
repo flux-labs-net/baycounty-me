@@ -7,6 +7,7 @@ one (PC24-037, ITB 23-25, contract 25-42, Task Order 32), otherwise by the proje
 import re
 import html
 import vendors as V
+from city_filter import data_g, by_city, gkey
 
 e = lambda s: html.escape(str(s if s is not None else ''))
 SHORT = {'Bay County BOCC': 'Bay County', 'City of Panama City': 'Panama City', 'City of Panama City Beach': 'Panama City Beach', 'City of Lynn Haven': 'Lynn Haven',
@@ -80,7 +81,7 @@ def _row(r, mx):
     tick = f'<i class="cg-tick" style="left:{10 / mx * 100:.2f}%"></i>' if r['rule'] else ''
     flag = ' <span class="badge warn">over 10%</span>' if r['pct'] > 10 else ''
     n = len(r['cos'])
-    return (f'<details class="cg{" neg" if neg else ""}"><summary>'
+    return (f'<details class="cg{" neg" if neg else ""}"{data_g(r["g"])}><summary>'
             f'<span class="cg-n"><b>{e(r["vn"])}</b> <em>{e(r["g"])} · {e(r["title"])}</em></span>'
             f'<span class="cg-track">{tick}<span class="cg-bar" style="width:{max(.6, abs(r["pct"]) / mx * 100):.2f}%"></span></span>'
             f'<span class="cg-v"><b>{sign}{abs(r["pct"]):.0f}%{"+" if r["atleast"] else ""}</b>{flag}<em>{sign}{money(abs(r["added"])).lstrip(chr(0x2212))} on {money(r["orig"])}</em></span></summary>'
@@ -97,13 +98,14 @@ def growth_section(d, all_table):
     why = lambda r: ("Another government's agreement, not a contractor" if r['public'] else "The agenda doesn't say which contract it changed" if r['unsure']
                      else 'Original amount not in the agendas reviewed')
     name = lambda r: (f'<button type="button" class="vbtn" data-v="{e(r["vid"])}">{e(r["vn"])}</button>' if r['vid'] != 'unnamed' else '<span class="muted">Contractor not named</span>')
-    unk = ''.join(f'<tr><td>{e(r["g"])}</td><td class="wrap">{name(r)}<br><span class="small muted">{e(r["title"])}</span></td><td class="num">{len(r["cos"])}</td>'
+    unk = ''.join(f'<tr{data_g(r["g"])}><td>{e(r["g"])}</td><td class="wrap">{name(r)}<br><span class="small muted">{e(r["title"])}</span></td><td class="num">{len(r["cos"])}</td>'
                   f'<td class="num">{money(r["added"])}</td><td class="small muted wrap">{why(r)}</td></tr>' for r in unknown)
     govs = ' and '.join(CO_RULE)
+    per = lambda fn: by_city({'': fn(ranked), **{k: fn([r for r in ranked if gkey(r['g']) == k]) for k in {gkey(r['g']) for r in G} - {None}}})
     return f'''<section class="tx-sec"><div class="sec-hd"><h2 id="co">How much contracts grew</h2><span class="muted">Each contract's change orders added up, against its original amount</span></div>
-    <p class="cg-lede">Of the {len(ranked)} contracts whose original amount is known, <b>{len(over)} grew by more than 10%</b>. The thin line on a bar marks 10%: in {govs}, change orders that add up past it (or past a dollar limit) need the board's approval. These all went to the board, so passing the line means the board was asked to approve the extra cost, not that a rule was broken. Tap a row for each change order, its reason and source.</p>
-    <div class="cgs">{''.join(_row(r, mx) for r in ranked)}</div>
-    <h3 class="cg-h">Change orders that can't be measured yet <span class="muted">{len(unknown)} contracts · {money(sum(r["added"] for r in unknown))} added</span></h3>
-    <div class="tablewrap"><table class="tx-table"><thead><tr><th scope="col">Gov.</th><th scope="col">Contractor and project</th><th scope="col" class="num">Change orders</th><th scope="col" class="num">Added</th><th scope="col">Why</th></tr></thead><tbody>{unk}</tbody></table></div>
+    <p class="cg-lede">Of the <span{per(lambda xs: len(xs))}>{len(ranked)}</span> contracts whose original amount is known, <b><span{per(lambda xs: sum(1 for r in xs if r["pct"] > 10))}>{len(over)}</span> grew by more than 10%</b>. The thin line on a bar marks 10%: in {govs}, change orders that add up past it (or past a dollar limit) need the board's approval. These all went to the board, so passing the line means the board was asked to approve the extra cost, not that a rule was broken. Tap a row for each change order, its reason and source.</p>
+    <div class="cgs" data-city-empty="No measurable contract growth recorded for {{city}} yet.">{''.join(_row(r, mx) for r in ranked)}</div>
+    <h3 class="cg-h">Change orders that can't be measured yet <span class="muted"{by_city({'': f'{len(unknown)} contracts · {money(sum(r["added"] for r in unknown))} added', **{k: f'{len(u)} contract{"s" if len(u) != 1 else ""} · {money(sum(r["added"] for r in u))} added' for k in {gkey(r['g']) for r in G} - {None} for u in [[r for r in unknown if gkey(r['g']) == k]]}})}>{len(unknown)} contracts · {money(sum(r["added"] for r in unknown))} added</span></h3>
+    <div class="tablewrap" data-city-empty="None for {{city}}."><table class="tx-table"><thead><tr><th scope="col">Gov.</th><th scope="col">Contractor and project</th><th scope="col" class="num">Change orders</th><th scope="col" class="num">Added</th><th scope="col">Why</th></tr></thead><tbody>{unk}</tbody></table></div>
     <p class="note">A <a href="/records-request">public records request</a> for the original contract and its change orders would fill these in.</p>
     {all_table}</section>'''

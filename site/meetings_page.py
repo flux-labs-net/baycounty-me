@@ -2,6 +2,7 @@
 import html, json, os, re
 from datetime import datetime, timedelta, timezone
 from govs import GOVS, _load
+from city_filter import city_bar, data_g
 
 e = lambda s: html.escape(str(s if s is not None else ''))
 GN = {g['key']: g['short'] for g in GOVS}
@@ -67,20 +68,22 @@ def meetings_page(out_dir):
           <div class="vt-h">{e(_when(m["start"]))}</div><p class="small">{e(m.get("title") or "")}{(" · " + e(m.get("location"))) if m.get("location") else ""}</p>
           {f'<details class="mt-items"><summary>{len(m["items"])} money item{"s" if len(m["items"]) != 1 else ""} on the agenda</summary><ul class="plain small">{items}</ul></details>' if m.get("items") else ""}
           {f'<p class="small">{links}</p>' if links else ('<p class="small muted">From the regular schedule; the agenda isn\'t posted yet.</p>' if m.get("expected") else '<p class="small muted">On the government\'s calendar; the agenda isn\'t posted yet.</p>' if not m.get("past") else '')}</li>'''
-    sched = ''.join(f'<tr><th scope="row">{e(b["name"])}<small>{e(GN.get(b.get("gov"), ""))}</small></th><td class="small">{e(b.get("schedule"))}{(" · " + e(b.get("location"))) if b.get("location") else ""}</td><td class="small">{f"<a class=src href={json.dumps(b.get("calendar_url") or b.get("source_url"))} target=_blank rel=noopener>Calendar</a>" if (b.get("calendar_url") or b.get("source_url")) else ""}</td></tr>' for b in md.get('boards', []))
-    opts = ''.join(f'<option value="{g["key"]}">{e(g["short"])}</option>' for g in GOVS if any(b.get('gov') == g['key'] for b in boards.values()))
+    sched = ''.join(f'<tr{data_g(b.get("gov"))}><th scope="row">{e(b["name"])}<small>{e(GN.get(b.get("gov"), ""))}</small></th><td class="small">{e(b.get("schedule"))}{(" · " + e(b.get("location"))) if b.get("location") else ""}</td><td class="small">{f"<a class=src href={json.dumps(b.get("calendar_url") or b.get("source_url"))} target=_blank rel=noopener>Calendar</a>" if (b.get("calendar_url") or b.get("source_url")) else ""}</td></tr>' for b in md.get('boards', []))
+    gk = [g['key'] for g in GOVS if any(b.get('gov') == g['key'] for b in boards.values())]
+    opts = ''.join(f'<option value="{k}">{e(GN[k])}</option>' for k in gk)
     gen = md.get('generated', '')[:10]
     return f'''<div class="page tax">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Get involved</span><h1>Upcoming public meetings</h1>
     <p class="lede">When and where every Bay County board meets, with agenda links and the money items on each agenda. Public comment is open at regular meetings; check the agenda for how to speak.</p></div>
     <div class="stamp"><a class="pill" href="/meetings.ics">Add to my calendar</a><button type="button" class="pdf-btn" id="pdf"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 12v2h10v-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Export PDF</button><span>Checked {e(gen)}</span></div></header>
-  <div class="vt-filters mt-f mt-tools"><label class="vf"><span>Government</span><select id="mtG" data-param="gov"><option value="">All governments</option>{opts}</select></label>
+  {city_bar(gk, hide=True)}
+  <div class="vt-filters mt-f mt-tools"><label class="vf" hidden><span>Government</span><select id="mtG" data-city-link><option value="">All governments</option>{opts}</select></label>
     <label class="vf"><span>Search</span><input id="mtQ" type="search" placeholder="Board, place or agenda item"></label>
     <label class="vf"><span>Sort</span><select id="mtS"><option value="date">By date</option><option value="az">Board A to Z</option></select></label>
     <div class="vf"><span>&nbsp;</span><button type="button" class="tt-csv" id="mtCsv">Download CSV</button></div></div>
   <section class="tx-sec"><div class="sec-hd"><h2 id="next">Coming up</h2><span class="muted" id="mtCount" aria-live="polite">{len(up)} meetings in the next 60 days</span></div>
-    <ol class="findings" id="mtList">{"".join(card(m) for m in up) or '<li class="muted">No upcoming meetings found.</li>'}</ol></section>
-  <section class="tx-sec"><div class="sec-hd"><h2 id="recent">Most recent meeting of each board</h2></div><ol class="findings" id="mtPast">{"".join(card(m) for m in past)}</ol></section>
+    <ol class="findings" id="mtList" data-city-empty="No upcoming meetings found for {{city}}.">{"".join(card(m) for m in up) or '<li class="muted">No upcoming meetings found.</li>'}</ol></section>
+  <section class="tx-sec"><div class="sec-hd"><h2 id="recent">Most recent meeting of each board</h2></div><ol class="findings" id="mtPast" data-city-empty="No recent meetings found for {{city}}.">{"".join(card(m) for m in past)}</ol></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="sched">Regular schedules</h2></div>
     <div class="tablewrap"><table class="tx-table mt-sched"><thead><tr><th scope="col">Board</th><th scope="col">When and where</th><th scope="col"></th></tr></thead><tbody>{sched}</tbody></table></div>
     <p class="note">"Expected" meetings are projected from a board's regular schedule because no agenda is posted yet. Boards cancel and move meetings, so confirm on the agenda before you go. The School Board's site couldn't be read by our tools; check bay.k12.fl.us. The calendar link works with Apple, Google and Outlook calendars.</p></section>
@@ -88,7 +91,7 @@ def meetings_page(out_dir):
 <link rel="stylesheet" href="/assets/tax.css">
 <script>
 (() => {{
-  const $ = id => document.getElementById(id), s = $('mtG'), qs = $('mtQ'), so = $('mtS'), q = new URLSearchParams(location.search).get('gov');
+  const $ = id => document.getElementById(id), s = $('mtG'), qs = $('mtQ'), so = $('mtS');
   const lists = [['mtList', 'asc'], ['mtPast', 'desc']];  // coming up: soonest first; recent: newest first
   const run = () => {{
     let n = 0; const w = qs.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
@@ -101,7 +104,7 @@ def meetings_page(out_dir):
     }});
     $('mtCount').textContent = n + ' meeting' + (n === 1 ? '' : 's') + ' in the next 60 days';
   }};
-  if (q && [...s.options].some(o => o.value === q)) s.value = q; [s, qs, so].forEach(x => {{ x.addEventListener('input', run); x.addEventListener('change', run); }});
+  [s, qs, so].forEach(x => {{ x.addEventListener('input', run); x.addEventListener('change', run); }});
   $('mtCsv').addEventListener('click', () => {{
     const rows = [];
     lists.forEach(([id]) => $(id).querySelectorAll(':scope > li[data-g]:not([hidden])').forEach(li => {{ const d = li.dataset; rows.push([id === 'mtList' ? 'Coming up' : 'Most recent', d.d, d.b, d.gn, d.t, d.l, d.s, d.a, d.m]); }}));

@@ -35,11 +35,13 @@ function bindTips(root, fn) {
 /* ---------- calculator ---------- */
 const sel = $('cDist');
 sel.innerHTML = D.districts.map(d => `<option value="${esc(d.id)}">${esc(d.label)} · ${mills(d.total[L])} mills</option>`).join('');
-try { const s = localStorage.getItem('taxDist'); if (s && D.districts.some(d => d.id === s)) sel.value = s; } catch (e) {}
+// distPicked: the reader (or a shared link, or an earlier visit) chose the district; the city bar only fills a default
+let distPicked = false;
+try { const s = localStorage.getItem('taxDist'); if (s && D.districts.some(d => d.id === s)) { sel.value = s; distPicked = true; } } catch (e) {}
 const valIn = $('cVal'), home = $('cHome');
 // inputs live in the link (?v=value&d=district&h=1|0) so an estimate can be shared, e.g. from My Address
 const P0 = new URLSearchParams(location.search);
-if (P0.get('d') && D.districts.some(d => d.id === P0.get('d'))) sel.value = P0.get('d');
+if (P0.get('d') && D.districts.some(d => d.id === P0.get('d'))) { sel.value = P0.get('d'); distPicked = true; }
 if (/^\d+$/.test(P0.get('v') || '')) valIn.value = Math.min(+P0.get('v'), 1e9).toLocaleString('en-US');
 if (P0.has('h')) home.checked = P0.get('h') !== '0';
 function saveUrl(v) {
@@ -63,8 +65,7 @@ function readVal() { const n = parseInt(String(valIn.value).replace(/[^0-9]/g, '
 
 function calc() {
   const dist = D.districts.find(d => d.id === sel.value), v = readVal(), tv = taxable(v, home.checked);
-  try { localStorage.setItem('taxDist', dist.id); } catch (e) {}
-  if (calc.ready) saveUrl(v);
+  if (calc.ready) { try { localStorage.setItem('taxDist', dist.id); } catch (e) {} saveUrl(v); }
   const rows = billAt(dist, L, tv).filter(r => r.m > 0), tot = rows.reduce((a, r) => a + r.amt, 0);
   $('bTotal').textContent = usd(tot);
   $('bSub').textContent = tot ? `about ${usd(tot / 12)} a month · ${mills(dist.total[L])} mills in all` : 'Enter a value to see your estimate';
@@ -92,7 +93,7 @@ valIn.addEventListener('input', () => {
   const p = Math.max(0, valIn.value.length - pos); valIn.setSelectionRange(p, p);
   calc();
 });
-sel.addEventListener('change', calc); home.addEventListener('change', calc);
+sel.addEventListener('change', e => { if (e.isTrusted) distPicked = true; calc(); }); home.addEventListener('change', calc);
 calc(); calc.ready = true; // don't add params to a plain visit until someone changes an input
 if (['v', 'd', 'h'].some(k => P0.has(k))) { saveUrl(readVal()); if (!location.hash) $('calc')?.scrollIntoView(); }
 
@@ -176,15 +177,23 @@ function renderGov() {
   h += `<p class="src-line">Budget source: ${g.src.filter(s => s[1]).map(([t, u]) => `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(t)}</a>`).join(' · ')}</p>`;
   $('govBody').innerHTML = h;
 }
-$('govPills').addEventListener('click', e => { const b = e.target.closest('[data-g]'); if (b) { govSel = b.dataset.g; renderGov(); b && $('govPills').querySelector(`[data-g="${govSel}"]`).focus(); } });
+// a pill click moves the city bar too (and the bar moves the pills, below)
+const pickGov = id => { govSel = id; renderGov(); BCM.city.set(BCM.city.key(id) || ''); $('govPills').querySelector(`[data-g="${govSel}"]`).focus(); };
+$('govPills').addEventListener('click', e => { const b = e.target.closest('[data-g]'); if (b) pickGov(b.dataset.g); });
 $('govPills').addEventListener('keydown', e => {
   if (!['ArrowRight', 'ArrowLeft'].includes(e.key)) return;
   const i = D.govs.findIndex(x => x.id === govSel), n = D.govs.length;
-  govSel = D.govs[(i + (e.key === 'ArrowRight' ? 1 : n - 1)) % n].id; renderGov();
-  $('govPills').querySelector(`[data-g="${govSel}"]`).focus();
+  pickGov(D.govs[(i + (e.key === 'ArrowRight' ? 1 : n - 1)) % n].id);
 });
 $('govBody').addEventListener('click', e => { const b = e.target.closest('[data-y]'); if (b) { actYear[govSel] = b.dataset.y; renderGov(); } });
 renderGov();
+/* the city bar: open that government's tab, and point the calculator at its city while the reader hasn't picked one */
+BCM.city.on(k => {
+  const g = k && D.govs.find(x => BCM.city.key(x.id) === k);
+  if (g && g.id !== govSel) { govSel = g.id; renderGov(); }
+  const d = k && !distPicked && D.districts.find(x => BCM.city.key(x.id) === k);
+  if (d && sel.value !== d.id) { sel.value = d.id; const r = calc.ready; calc.ready = false; calc(); calc.ready = r; }
+});
 
 /* ---------- PDF ---------- */
 $('pdf').addEventListener('click', () => {

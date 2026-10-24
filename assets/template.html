@@ -182,10 +182,9 @@ details.cx ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:
   <div class="kpis" id="kpis"></div>
 
   <div class="filters" role="group" aria-label="Filters">
-    <div class="chips" id="craChips"></div>
-    <span class="spacer"></span>
-    <div class="ctl"><label for="fYear">Year</label><select id="fYear"><option value="all">All years</option></select></div>
-    <div class="ctl"><label for="fStatus">Status</label>
+    <div class="chips" id="craChips" hidden></div>
+    <label class="sc-f" data-scope><span>Year</span><select id="fYear"><option value="all">All years</option></select></label>
+    <label class="sc-f" data-scope><span>Status</span>
       <select id="fStatus">
         <option value="all">All statuses</option>
         <option value="Spent">Spent</option>
@@ -193,11 +192,11 @@ details.cx ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:
         <option value="Budgeted">Budgeted</option>
         <option value="Proposed">Proposed</option>
         <option value="Other">Incoming / not CRA-funded</option>
-      </select></div>
-    <div class="ctl"><label for="fCat">Type</label><select id="fCat"><option value="all">All types</option></select></div>
-    <div class="ctl"><input type="search" id="fQ" placeholder="Search payee, project, street" aria-label="Search records"></div>
-    <div class="ctl"><label><input type="checkbox" id="fNC" checked> Show rows left out of totals</label></div>
-    <button class="reset" id="resetAll" type="button">Clear filters</button>
+      </select></label>
+    <label class="sc-f" data-scope><span>Type</span><select id="fCat"><option value="all">All types</option></select></label>
+    <label class="sc-f sc-q" data-scope><span>Search</span><input type="search" id="fQ" placeholder="Payee, project, street" aria-label="Search records"></label>
+    <label class="sc-chk" data-scope><input type="checkbox" id="fNC" checked> Show rows left out of totals</label>
+    <button class="reset sc-reset" id="resetAll" type="button" data-scope>Clear filters</button>
   </div>
 
   <div class="stage">
@@ -272,20 +271,25 @@ const S = { year:'all', cras:new Set(), status:'all', cat:'all', q:'', nc:true, 
 /* filters live in the link (?cra=pc,lh&status=Spent&cat=…&q=…&nc=0&id=12) so a view can be shared; with no filters in the link, the last-used filters come back */
 const UP = new URLSearchParams(location.search), UKEYS = ['cra','cras','status','cat','q','nc','id'];
 if (UKEYS.some(k => UP.has(k))){
-  (UP.get('cra')||UP.get('cras')||'').split(',').forEach(c => CRA[c] && S.cras.add(c));
   if (UP.get('status')) S.status = UP.get('status');
   if (UP.get('cat')) S.cat = UP.get('cat');
   S.q = UP.get('q') || ''; S.nc = UP.get('nc') !== '0';
   const id = UP.get('id'); if (id != null && D.payments[+id]) S.sel = +id;
-} else try { const saved = JSON.parse(localStorage.getItem('cra-filters')||'null'); if (saved){ S.status=saved.status||'all'; S.cat=saved.cat||'all'; S.nc=saved.nc!==false; (saved.cras||[]).forEach(c=>CRA[c]&&S.cras.add(c)); } } catch(e){}
+} else try { const saved = JSON.parse(localStorage.getItem('cra-filters')||'null'); if (saved){ S.status=saved.status||'all'; S.cat=saved.cat||'all'; S.nc=saved.nc!==false; } } catch(e){}
+/* the government picker at the top of the page (BCM.city) chooses the CRA: one city, or all six */
+const craOf = k => (window.BCM && k) ? BCM.city.cra(k) : '';
+{ const c0 = craOf(window.BCM ? BCM.city.get() : ''); if (CRA[c0]) S.cras.add(c0); }
+const pick = id => { if (window.BCM) BCM.city.set(id ? BCM.city.key(id) : ''); else { S.cras = id ? new Set([id]) : new Set(); S.sel = null; update(true); } };
 /* year: every record lists the fiscal or calendar years its "when" names (FY2024-FY2026 counts in all three). The page opens on
    the newest year with records, never past the current fiscal year; ?year=2024 or ?year=all in the link picks another. Not remembered between visits. */
 D.payments.forEach(p => { p.ys = TT.yearsIn(p.when); });
 const YRS = [...new Set(D.payments.flatMap(p => p.ys))].sort((a,b) => b-a);
-S.year = String(TT.startYear(YRS, TT.countBy(D.payments.flatMap(p => p.ys))) || 'all');
+const yearsFor = () => D.payments.filter(p => !S.cras.size || S.cras.has(p.cra)).flatMap(p => p.ys);
+/* the opening year is the newest one the chosen CRA has records for, so a city never opens on an empty year */
+S.year = String(TT.startYear([...new Set(yearsFor())], TT.countBy(yearsFor())) || 'all');
 if (S.sel != null && !UP.has('year')) S.year = 'all'; // a link to one record opens it whatever its year
-const save = () => { try { localStorage.setItem('cra-filters', JSON.stringify({cras:[...S.cras],status:S.status,cat:S.cat,nc:S.nc})); } catch(e){}
-  const o = {year:S.year, cra:[...S.cras].join(','), cras:'', status:S.status==='all'?'':S.status, cat:S.cat==='all'?'':S.cat, q:S.q, nc:S.nc?'':'0', id:S.sel==null?'':S.sel};
+const save = () => { try { localStorage.setItem('cra-filters', JSON.stringify({status:S.status,cat:S.cat,nc:S.nc})); } catch(e){}
+  const o = {year:S.year, cra:'', cras:'', status:S.status==='all'?'':S.status, cat:S.cat==='all'?'':S.cat, q:S.q, nc:S.nc?'':'0', id:S.sel==null?'':S.sel};
   if (window.BCM) BCM.urlState.setLater(o, 300); };
 
 function filtered(){
@@ -329,8 +333,7 @@ function renderChips(){
 document.getElementById('craChips').addEventListener('click', e => {
   const b = e.target.closest('.chip'); if (!b) return;
   const c = b.dataset.c;
-  if (!c) S.cras.clear(); else if (S.cras.has(c)) S.cras.delete(c); else S.cras.add(c);
-  S.sel = null; update(true);
+  pick(c);
 });
 const cats = [...new Set(D.payments.map(p=>p.cat))].sort();
 document.getElementById('fCat').innerHTML += cats.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join('');
@@ -345,7 +348,7 @@ fStatus.onchange = () => { S.status = fStatus.value; update(); };
 fCat.onchange = () => { S.cat = fCat.value; update(); };
 fQ.oninput = () => { S.q = fQ.value; update(); };
 fNC.onchange = () => { S.nc = fNC.checked; update(); };
-document.getElementById('resetAll').onclick = () => { S.year='all'; fYear.value='all'; S.cras.clear(); S.status='all'; S.cat='all'; S.q=''; S.nc=true; S.sel=null;
+document.getElementById('resetAll').onclick = () => { if (window.BCM) BCM.city.set(''); S.year='all'; fYear.value='all'; S.cras.clear(); S.status='all'; S.cat='all'; S.q=''; S.nc=true; S.sel=null;
   fStatus.value='all'; fCat.value='all'; fQ.value=''; fNC.checked=true; update(true); };
 
 /* ---------- map ---------- */
@@ -362,7 +365,7 @@ el('path', {d: pathOf(D.county), class:'county'}, gBase);
 const distEls = D.districts.map(d => {
   const p = el('path', {d: pathOf(d.geom), class:'dist', style:`--dc:${colorVar(d.cra)}`}, gDist);
   const t = el('title', {}, p); t.textContent = `${d.name} · est. ${d.est} · ~${d.acres.toLocaleString()} acres`;
-  p.addEventListener('click', () => { S.cras = new Set([d.cra]); S.sel = null; update(true); });
+  p.addEventListener('click', () => pick(d.cra));
   return {d, p};
 });
 // city labels
@@ -525,7 +528,7 @@ function renderProfiles(){
       <span class="muted" style="font-size:.7rem;margin-top:-6px">Tax increment, FY${yrs.replace('–','–FY')}</span>
       <p>${esc(c.overview)}</p></button>`;
   }).join('');
-  document.querySelectorAll('.prof').forEach(b => b.onclick = () => { S.cras = new Set([b.dataset.c]); S.sel=null; update(true);
+  document.querySelectorAll('.prof').forEach(b => b.onclick = () => { pick(b.dataset.c);
     document.getElementById('mapbox').scrollIntoView({behavior:'smooth', block:'start'}); });
 }
 
@@ -578,7 +581,13 @@ function update(refit){
 }
 renderProfiles(); renderCtx(); renderLegend();
 requestAnimationFrame(() => { update(true);
-  if (S.sel != null){ select(S.sel); document.getElementById('mapbox').scrollIntoView({block:'start'}); } });
+  if (S.sel != null){ select(S.sel); document.getElementById('mapbox').scrollIntoView({block:'start'}); }
+  if (window.BCM) BCM.city.on((k, d) => {
+    const c = craOf(k), same = c ? (S.cras.size === 1 && S.cras.has(c)) : !S.cras.size;
+    if (same && d.why !== 'user') return;
+    S.cras = CRA[c] ? new Set([c]) : new Set(); S.sel = null;
+    if (!BCM.city.fitYear(fYear, yearsFor())) update(true);
+  }); });
 matchMedia('(prefers-color-scheme: dark)').addEventListener('change', renderLegend);
 new MutationObserver(renderLegend).observe(document.documentElement, {attributes:true, attributeFilter:['data-theme']});
 </script>

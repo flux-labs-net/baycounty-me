@@ -72,10 +72,14 @@
 <div class="page tax">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Get involved · Correspondence</span><h1>Letters to officials</h1>
     <p class="lede">Emails BayCounty.me has sent to Bay County's elected officials and managers, and what they wrote back. Each email goes to one person, never a whole board, so officials can't reply to each other outside a public meeting.</p></div></header>
+  <div class="scope" data-scope role="group" aria-label="Filter this page">
+  <label class="sc-f sc-city"><span>Government</span><select id="scCity" data-city aria-label="Government"><option value="">All governments</option><option value="county">Bay County</option><option value="schools">Bay District Schools</option><option value="pc">Panama City</option><option value="pcb">Panama City Beach</option><option value="lh">Lynn Haven</option><option value="cw">Callaway</option><option value="sp">Springfield</option><option value="parker">Parker</option><option value="mb">Mexico Beach</option></select></label>
+  <div class="sc-slot" data-scope-slot></div>
+</div>
   <section class="tx-sec">
     <div class="filters-row">
       <select id="crY" aria-label="Year"></select>
-      <select id="crG" aria-label="Government"><option value="">All governments</option></select>
+      <select id="crG" aria-label="Government" data-city-link hidden><option value="">All governments</option></select>
       </div>
     <p class="muted small" id="crCount" aria-live="polite" style="margin:10px 0 0"></p>
     <div id="crList" class="cr-list"><p class="muted">Loading…</p></div>

@@ -4,9 +4,10 @@
   const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
   const day = t => new Date(t).toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'});
   const clean = n => String(n || '').replace(/\s*\(.*?\)\s*/g, ' ').trim();
-  let first = true;
+  let first = true, stuck = false; // stuck: showing "no letters" for a bar city with none, #crG still on All
 
   async function load() {
+    stuck = false;
     const qs = new URLSearchParams();
     if (!first) { qs.set('year', $('#crY').value || 'all'); if ($('#crG').value) qs.set('government', $('#crG').value); }
     let d;
@@ -21,6 +22,15 @@
       $('#crY').value = d.year ? String(d.year) : 'all';
       $('#crG').innerHTML = '<option value="">All governments</option>' + d.governments.map(g => `<option>${esc(g)}</option>`).join('');
       first = false;
+      // the city bar at the top drives #crG (full names, sent as ?government=); offer only governments with mail
+      const has = new Set(d.governments.map(g => BCM.city.key(g)).filter(Boolean)), bar = document.getElementById('scCity'), k = BCM.city.get();
+      if (bar) [...bar.options].forEach(o => { if (o.value && o.value !== k && !has.has(o.value)) o.remove(); });
+      if (k && !has.has(k)) { stuck = true; $('#crList').innerHTML = `<p class="muted">No letters to ${esc(BCM.city.label(k))} officials have been published yet.</p>`; $('#crCount').textContent = ''; return; }
+      const o = k && [...$('#crG').options].find(x => BCM.city.key(x.value) === k);
+      if (o) { $('#crG').value = o.value; return load(); } // open on the city in the bar
+    } else if (!d.conversations.length && d.years.length && $('#crY').value !== 'all' && !d.years.includes(+$('#crY').value)) {
+      // this government has no mail in the chosen year: move to its latest year instead of opening empty
+      $('#crY').value = String(d.years[0]); return load();
     }
     render(d);
   }
@@ -53,5 +63,7 @@
   });
   $('#crY').addEventListener('change', load);
   $('#crG').addEventListener('change', load);
+  // back to All from a city with no letters: #crG doesn't change, so reload here (other cities change #crG, which loads)
+  BCM.city.on(k => { if (stuck && !k) { stuck = false; load(); } });
   load();
 })();

@@ -5,6 +5,7 @@ already publish (/data/cra-geo.json, cra-pay-*.json, surtax-projects.json), so i
 Hurricane Michael projects have no locations in the FEMA data and are left off.
 """
 import json, os, shutil
+from city_filter import city_bar, gkey
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(HERE, '..', 'data')
@@ -16,9 +17,12 @@ def public_map_page(out_dir):
     cra = json.load(open(os.path.join(DATA, 'merged.json')))['payments']
     ncra = sum(1 for p in cra if p.get('lat') is not None)
     ntax = sum(1 for p in ts if p.get('lat') is not None)
+    # the governments with a mark on the map: CRA records map to their city, tax projects name their government
+    gk = {gkey(p.get('cra')) for p in cra if p.get('lat') is not None} | {gkey(p.get('government')) for p in ts if p.get('lat') is not None}
     return f'''<div class="page tax st addr pm">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Public Money · Map</span><h1>Public money on one map</h1>
     <p class="lede">Redevelopment agency (CRA) spending and half-cent sales tax projects across Bay County, with the CRA district lines and city limits. Tap any mark to see the record and where it came from.</p></div></header>
+  {city_bar(gk)}
   <section class="explain"><div class="ex-txt"><span class="eyebrow">The simple version</span><h2>What the marks mean</h2>
     <ol class="ex-steps"><li><b>Diamonds are CRA records:</b> money a city's redevelopment agency spent, committed or budgeted inside its districts. Records with no address sit at the middle of their district.</li>
       <li><b>Dots are sales tax projects:</b> roads, bridges, drainage and sidewalks paid for with the infrastructure half-cent, from the county's project map. Road projects sit at the middle of the road segment.</li>

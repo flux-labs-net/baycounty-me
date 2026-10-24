@@ -31,8 +31,9 @@ const YRS = [...new Set(P.flatMap(p => p._ys))].sort((a, b) => b - a);
 F.y.innerHTML += YRS.map(y => `<option value="${y}">${y}</option>`).join('');
 F.y.value = String(TT.startYear(YRS, TT.countBy(P.flatMap(p => p._ys))));
 const big0 = big;
-function strip() { // the numbers at the top follow the year picker
-  const y = +F.y.value, ps = y ? P.filter(p => p._ys.includes(y)) : P;
+const inCity = p => !F.g.value || p.g === F.g.value;
+function strip() { // the numbers at the top follow the city bar and the year picker
+  const y = +F.y.value, ps = P.filter(p => inCity(p) && (!y || p._ys.includes(y)));
   $('acsN').textContent = ps.length.toLocaleString(); $('acsNl').textContent = y ? `projects active in ${y}` : 'projects tracked';
   $('acsM').textContent = big0(ps.reduce((a, p) => a + (p.money || 0), 0));
   $('acsF').textContent = ps.filter(p => p.flags.length).length.toLocaleString();
@@ -112,8 +113,8 @@ function filt(push = true) {
   $('acCount').textContent = `${cur.length} project${cur.length === 1 ? '' : 's'} · ${fl} with a question · ${big(cur.reduce((a, p) => a + (p.money || 0), 0))}`;
   $('acList').innerHTML = cur.length ? cur.slice(0, shown).map(card).join('') : '<p class="muted">No projects match. Try clearing a filter.</p>';
   $('acMore').hidden = cur.length <= shown;
-  strip();
-  if (push) { const u = new URL(location.href); [['y', F.y.value || 'all'], ['q', q], ['g', g], ['f', f], ['s', s], ['o', F.o.value === 'flags' ? '' : F.o.value]].forEach(([k, v]) => v ? u.searchParams.set(k, v) : u.searchParams.delete(k)); history.replaceState(null, '', u); }
+  strip(); gapList();
+  if (push) { const u = new URL(location.href); [['y', F.y.value || 'all'], ['q', q], ['g', ''], ['f', f], ['s', s], ['o', F.o.value === 'flags' ? '' : F.o.value]].forEach(([k, v]) => v ? u.searchParams.set(k, v) : u.searchParams.delete(k)); history.replaceState(null, '', u); }
 }
 $('acList').addEventListener('click', ev => {
   const sh = ev.target.closest('.acct-share');
@@ -128,22 +129,28 @@ $('acCsv').addEventListener('click', () => {
   TT.csv('baycounty-accountability', head, cur.map(p => [p.n, p.g, p.agency, SRC[p.src], STAGE[p.status] || p.status, p.base?.a ?? '', p.base?.t ?? '', p.now?.a ?? '', p.now?.t ?? '', p.growth ?? '', p.total?.a ?? '',
     p.flags.map(f => RULE[f.r].title + ': ' + f.note).join(' | '), p.gaps.length, REPLY[p.reply.status], location.origin + location.pathname + '?p=' + p.id]));
 });
-// missing records, all projects
-const G = P.flatMap(p => p.gaps.map(g => ({...g, p})));
-$('acGapCount').textContent = `${G.length} request${G.length === 1 ? '' : 's'}`;
-$('acGaps').innerHTML = G.map(g => `<li><span class="muted small">${esc(g.p.g)} · <a href="?p=${esc(g.p.id)}#list" data-go="${esc(g.p.id)}">${esc(g.p.n)}</a></span><br>${esc(g.q)} <a class="pill sm" href="/records-request?gov=${encodeURIComponent(g.gk)}&d=${encodeURIComponent(g.q)}">Request this record</a></li>`).join('');
+// missing records, for the projects the city bar and the year picker show
+const GALL = P.flatMap(p => p.gaps.map(g => ({...g, p})));
+function gapList() {
+  const y = +F.y.value, G = GALL.filter(g => inCity(g.p) && (!y || g.p._ys.includes(y)));
+  $('acGapCount').textContent = `${G.length} request${G.length === 1 ? '' : 's'}`;
+  $('acGaps').innerHTML = G.length ? G.map(g => `<li><span class="muted small">${esc(g.p.g)} · <a href="?p=${esc(g.p.id)}#list" data-go="${esc(g.p.id)}">${esc(g.p.n)}</a></span><br>${esc(g.q)} <a class="pill sm" href="/records-request?gov=${encodeURIComponent(g.gk)}&d=${encodeURIComponent(g.q)}">Request this record</a></li>`).join('') : '<li class="muted">No records outstanding for these projects.</li>';
+}
 $('acGaps').addEventListener('click', ev => { const a = ev.target.closest('[data-go]'); if (!a) return; ev.preventDefault(); go(a.dataset.go); });
-function go(id) { // show one project, clearing filters that would hide it
+function go(id) { // show one project, clearing filters that would hide it (the city only when it's another city's project)
   const p = BY[id]; if (!p) return;
-  Object.entries(F).forEach(([k, x]) => { if (k !== 'o') x.value = ''; });
+  Object.entries(F).forEach(([k, x]) => { if (k !== 'o' && k !== 'g') x.value = ''; });
+  if (F.g.value && F.g.value !== p.g) { if (window.BCM && BCM.city) BCM.city.set(''); F.g.value = ''; }
   shown = Math.max(shown, cur.length); filt(false);
   let el = document.querySelector(`.acct-card[data-id="${CSS.escape(id)}"]`);
   if (!el) { shown = P.length; filt(false); el = document.querySelector(`.acct-card[data-id="${CSS.escape(id)}"]`); }
   if (el) open(el, true, true);
 }
 const P0 = new URLSearchParams(location.search);
-[['q', 'q'], ['g', 'g'], ['f', 'f'], ['s', 's'], ['o', 'o']].forEach(([k, f]) => { const v = P0.get(k); if (v != null) F[f].value = v; });
+[['q', 'q'], ['f', 'f'], ['s', 's'], ['o', 'o']].forEach(([k, f]) => { const v = P0.get(k); if (v != null) F[f].value = v; });
 { const v = P0.get('y'); if (v != null) F.y.value = v === 'all' ? '' : v; else if (P0.get('q')) F.y.value = ''; }
 filt(false);
+// the city bar at the top sets #acG (data-city-link; old ?g= links are read by the bar); keep the year on one the city has projects in
+if (window.BCM && BCM.city) BCM.city.on(k => BCM.city.fitYear(F.y, P.filter(p => BCM.city.has(k, p.gk)).flatMap(p => p._ys)));
 if (P0.get('p') && BY[P0.get('p')]) go(P0.get('p'));
 })();

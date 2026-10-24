@@ -54,6 +54,10 @@
 <div class="page tax acct">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Public Money · Accountability</span><h1>Accountability console</h1>
     <p class="lede">Public projects followed from the first budget to the day they close: what was promised, what was approved, every change order and payment we can find, and what it cost in the end. Where the record raises a question, it's flagged by a published rule and sent to the agency for an answer.</p></div></header>
+  <div class="scope" data-scope role="group" aria-label="Filter this page">
+  <label class="sc-f sc-city"><span>Government</span><select id="scCity" data-city data-legacy="g" aria-label="Government"><option value="">All governments</option><option value="county">Bay County</option><option value="pc">Panama City</option><option value="pcb">Panama City Beach</option><option value="lh">Lynn Haven</option><option value="cw">Callaway</option><option value="sp">Springfield</option><option value="mb">Mexico Beach</option></select></label>
+  <div class="sc-slot" data-scope-slot></div>
+</div>
   <div class="acct-stats" role="list">
     <div role="listitem"><b id="acsN">94</b><span id="acsNl">projects tracked</span></div>
     <div role="listitem"><b id="acsM">$399.6M</b><span>in those projects</span></div>
@@ -70,9 +74,9 @@
     </ol></div></section>
   <section class="tx-sec" id="list"><div class="sec-hd"><h2>Projects</h2><span class="muted" id="acCount" aria-live="polite"></span></div>
     <div class="filters-row acct-filters">
-      <select id="acY" aria-label="Year of activity"><option value="">All years</option></select>
+      <label class="sc-f" data-scope><span>Year</span><select id="acY" aria-label="Year of activity"><option value="">All years</option></select></label>
       <input id="acQ" type="search" placeholder="Search project, company or place" aria-label="Search projects">
-      <select id="acG" aria-label="Government"><option value="">All governments</option><option>Bay County</option><option>Callaway</option><option>Lynn Haven</option><option>Mexico Beach</option><option>Panama City</option><option>Panama City Beach</option><option>Springfield</option></select>
+      <select id="acG" aria-label="Government" data-city-link hidden><option value="">All governments</option><option>Bay County</option><option>Callaway</option><option>Lynn Haven</option><option>Mexico Beach</option><option>Panama City</option><option>Panama City Beach</option><option>Springfield</option></select>
       <select id="acF" aria-label="Flag"><option value="">Any flag or none</option><option value="any">Any flag</option><option value="growth">Cost grew more than 10%</option><option value="late">Running late</option><option value="conflict">Figures don&#x27;t agree</option><option value="payee">Who was paid isn&#x27;t public yet</option><option value="mixed">Local share unclear</option><option value="budget">Budgeted, but spending not shown</option><option value="approval">Approval not found in the minutes</option><option value="stack">More than one incentive, same place</option><option value="removed">Dropped from the schedule</option></select>
       <select id="acS" aria-label="Source"><option value="">All projects</option><option value="reviewed">Reviewed project histories</option><option value="contracts">Contracts with change orders</option><option value="surtax">Sales tax projects</option></select>
       <select id="acO" aria-label="Sort"><option value="flags">Most questions first</option><option value="money">Biggest first</option><option value="new">Latest activity first</option><option value="growth">Most cost growth</option></select>
