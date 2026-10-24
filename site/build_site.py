@@ -73,7 +73,7 @@ def _section(m, active):
         st = m['start']
         cur = ' aria-current="page"' if st['href'] == active else ''
         card = (f'<a class="nav-start" href="{st["href"]}"{cur}><span class="ns-e">Start here</span><span class="ns-t">{st["label"]}</span>'
-                f'<span class="ns-d">{st["desc"]}</span></a>')
+                f'<span class="ns-d">{st["desc"]}</span><span class="ns-go" aria-hidden="true">Open →</span></a>')
         cols = ''.join(f'<div class="nav-col"><span class="nav-gh">{g["group"]}</span><ul class="nav-links">'
                        + ''.join(_link(c, active) for c in g['items']) + '</ul></div>' for g in m['groups'])
         sub = f'<div class="nav-sub nav-mega has-start">{card}{cols}</div>'
