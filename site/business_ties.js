@@ -78,8 +78,8 @@
       const lo = Math.min(NOW - 10, ...years);
       const bs = p.businesses.slice().sort((a, b) => (a.business_status === 'Active' ? 0 : 1) - (b.business_status === 'Active' ? 0 : 1) || String(a.filed_date).localeCompare(String(b.filed_date)));
       return `<article class="bt-c"><h3>${esc(p.name)}</h3><div class="bt-meta">${esc(p.role)}</div>
-        ${bs.map(b => `<div class="bt-row"><div><a href="${esc(b.source_url)}" target="_blank" rel="noopener">${esc(title(b.business))}</a>
-          <small>${esc(b.titles || '')}${b.nonprofit ? ' · nonprofit' : ''} · ${esc(b.business_status || '')}${b.filed_date ? ' · filed ' + esc(String(b.filed_date).slice(0, 4)) : ''}${b.principal_city ? ' · ' + esc(b.principal_city) : ''}</small></div>
+        ${bs.map(b => `<div class="bt-row"><div><a href="${esc(b.source_url)}" target="_blank" rel="noopener">${esc(title(b.business))}</a>${window.BCM_bizOff ? BCM_bizOff(b.business_status, b.closed_year) : ''}
+          <small>${esc(b.titles || '')}${b.nonprofit ? ' · nonprofit' : ''}${b.business_status === 'Active' ? ' · Active' : ''}${b.filed_date ? ' · filed ' + esc(String(b.filed_date).slice(0, 4)) : ''}${b.principal_city ? ' · ' + esc(b.principal_city) : ''}</small></div>
           ${bar(b, lo)}</div>`).join('')}
         ${bs.length ? `<div class="bt-axis"><span>${lo}</span><span>${NOW}</span></div>` : ''}
         ${p.links.length ? `<ul class="bt-links">${linkItems(p)}</ul>` : ''}

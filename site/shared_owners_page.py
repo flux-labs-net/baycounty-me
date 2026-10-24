@@ -37,6 +37,7 @@ def shared_owners_page(out_dir):
   <section class="tx-sec method"><div class="sec-hd"><h2>About this list</h2></div><ul class="plain">
     <li><b>This is legal.</b> Under Florida law each corporation or LLC is its own contributor with its own limit ($1,000 per election for local offices), so one owner's companies can each give. Giving in someone else's name is what the law forbids (s. 106.08(5), F.S.). A group here is a pattern in public records, not a finding of wrongdoing.</li>
     <li><b>How businesses are linked.</b> Business contributors in the Supervisor of Elections reports are matched to the Florida Division of Corporations (Sunbiz) file. Businesses are grouped when they list the same person as an officer, manager or registered agent, matched by name and address. Corporate officers on 25 or more companies and registered-agent services are left out.</li>
+    <li><b>Inactive businesses are flagged.</b> A business marked <span class="biz-off" style="cursor:auto">Inactive</span> is dissolved, revoked or no longer filing annual reports with the state; "since" is the last year it filed. Its gift was made while it was still filing.</li>
     <li><b>People aren't named.</b> BayCounty.me doesn't name individual donors. Each business links to its public Sunbiz record.</li>
     <li><b>Something wrong?</b> If a business is grouped by mistake, <a href="/about#contact">tell us</a> and we'll correct it. The data is also at <a href="/api/v1/datasets/shared-owner-groups">/api/v1/datasets/shared-owner-groups</a>.</li>
   </ul></section>

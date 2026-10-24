@@ -37,7 +37,7 @@
         <span class="so-tag">linked by ${g.shared_people} shared ${g.shared_people === 1 ? 'person' : 'people'}</span>
         ${g.all_checks_1000 ? '<span class="so-tag">every check $1,000</span>' : ''}${g.same_day ? '<span class="so-tag">all the same day</span>' : ''}</div>
       <table class="so-biz"><tbody>${g.businesses.sort((a, b) => b.business_amount - a.business_amount).map(b => `<tr>
-        <td><a href="${esc(b.source_url)}" target="_blank" rel="noopener">${esc(title(b.business))}</a><small>${esc(b.business_status || '')}${b.business_dates ? ' · ' + esc(b.business_dates) : ''}</small></td>
+        <td><a href="${esc(b.source_url)}" target="_blank" rel="noopener">${esc(title(b.business))}</a>${window.BCM_bizOff ? BCM_bizOff(b.business_status, b.business_last_filed) : ''}<small>${b.business_status === 'Active' ? 'Active' : ''}${b.business_dates ? (b.business_status === 'Active' ? ' · ' : '') + 'gave ' + esc(window.BCM_usDate ? BCM_usDate(b.business_dates) : b.business_dates) : ''}</small></td>
         <td class="num">${usd(b.business_amount)}</td></tr>`).join('')}</tbody></table>
       ${g.campaign_report_url ? `<p class="small" style="margin:10px 0 0"><a href="${esc(g.campaign_report_url)}" target="_blank" rel="noopener">Campaign finance report</a></p>` : ''}
     </article>`).join('') || '<p class="muted">No groups have been checked and listed yet.</p>';
