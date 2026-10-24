@@ -20,6 +20,10 @@ CSS = r"""
 .so-biz td{padding:7px 0;border-top:1px solid var(--line);vertical-align:top}
 .so-biz td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;padding-left:12px}
 .so-biz small{color:var(--muted);display:block}
+.so-years{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.so-yr{display:flex;flex-direction:column;align-items:flex-start;gap:1px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:8px 12px;color:var(--ink);cursor:pointer;font:inherit;min-width:96px}
+.so-yr:hover{border-color:var(--muted)}
+.so-yr b{font:600 .95rem var(--f-display)}.so-yr span{font-variant-numeric:tabular-nums}.so-yr small{color:var(--muted);font-size:.76rem}
 """
 
 
@@ -30,13 +34,15 @@ def shared_owners_page(out_dir):
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Connections · Shared owners</span><h1>One owner, several checks</h1>
     <p class="lede">Groups of businesses that list the same officer, manager or registered agent in state corporate records and each gave to the same local candidate. Each group was checked by hand against the state's records before it was listed here.</p></div></header>
   <section class="tx-sec">
-    <div class="filters-row"><select id="soC" aria-label="Candidate"><option value="">All candidates</option></select></div>
+    <div class="filters-row"><select id="soY" aria-label="Election year"><option value="">All elections</option></select> <select id="soC" aria-label="Candidate"><option value="">All candidates</option></select></div>
+    <div id="soYears" class="so-years" aria-label="Totals by election year"></div>
     <p class="muted small" id="soCount" aria-live="polite" style="margin:10px 0 0"></p>
     <div id="soList" class="so-list"><p class="muted">Loading…</p></div>
   </section>
   <section class="tx-sec method"><div class="sec-hd"><h2>About this list</h2></div><ul class="plain">
     <li><b>This is legal.</b> Under Florida law each corporation or LLC is its own contributor with its own limit ($1,000 per election for local offices), so one owner's companies can each give. Giving in someone else's name is what the law forbids (s. 106.08(5), F.S.). A group here is a pattern in public records, not a finding of wrongdoing.</li>
     <li><b>How businesses are linked.</b> Business contributors in the Supervisor of Elections reports are matched to the Florida Division of Corporations (Sunbiz) file. Businesses are grouped when they list the same person as an officer, manager or registered agent, matched by name and address. Corporate officers on 25 or more companies and registered-agent services are left out.</li>
+    <li><b>Years.</b> Groups are listed by the election the checks were for, newest first. Candidates often raise money a year or more ahead, so checks for a 2024 race can be dated 2023; each card says when its checks were written.</li>
     <li><b>Inactive businesses are flagged.</b> A business marked <span class="biz-off" style="cursor:auto">Inactive</span> is dissolved, revoked or no longer filing annual reports with the state; "since" is the last year it filed. Its gift was made while it was still filing.</li>
     <li><b>People aren't named.</b> BayCounty.me doesn't name individual donors. Each business links to its public Sunbiz record.</li>
     <li><b>Something wrong?</b> If a business is grouped by mistake, <a href="/about#contact">tell us</a> and we'll correct it. The data is also at <a href="/api/v1/datasets/shared-owner-groups">/api/v1/datasets/shared-owner-groups</a>.</li>
