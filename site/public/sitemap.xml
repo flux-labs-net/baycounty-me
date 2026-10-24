@@ -20,6 +20,18 @@
     <lastmod>2026-10-21</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/connections</loc>
+    <lastmod>2026-10-24</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/connections/campaign-gifts</loc>
+    <lastmod>2026-10-24</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/connections/money-map</loc>
+    <lastmod>2026-10-24</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/connections/shared-owners</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
@@ -187,20 +199,12 @@
     <lastmod>2026-10-21</lastmod>
   </url>
   <url>
-    <loc>https://baycounty.me/public-money/campaign-money</loc>
-    <lastmod>2026-10-21</lastmod>
-  </url>
-  <url>
     <loc>https://baycounty.me/public-money/contracts</loc>
     <lastmod>2026-10-23</lastmod>
   </url>
   <url>
-    <loc>https://baycounty.me/public-money/cra-network</loc>
-    <lastmod>2026-10-23</lastmod>
-  </url>
-  <url>
     <loc>https://baycounty.me/public-money/cra-spending</loc>
-    <lastmod>2026-10-23</lastmod>
+    <lastmod>2026-10-24</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/public-money/debt</loc>
@@ -227,10 +231,6 @@
   <url>
     <loc>https://baycounty.me/public-money/map</loc>
     <lastmod>2026-10-21</lastmod>
-  </url>
-  <url>
-    <loc>https://baycounty.me/public-money/money-map</loc>
-    <lastmod>2026-10-23</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/public-money/sales-tax-projects</loc>
@@ -820,7 +820,7 @@
   </url>
   <url>
     <loc>https://baycounty.me/updates</loc>
-    <lastmod>2026-10-23</lastmod>
+    <lastmod>2026-10-24</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/who-runs-bay-county</loc>

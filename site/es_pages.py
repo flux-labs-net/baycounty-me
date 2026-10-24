@@ -376,7 +376,8 @@ ES_SECTIONS = [
     ('/public-money/cra-spending', 'Gastos de las CRA', 'Qué pagaron las agencias de reurbanización con el dinero de impuestos.'),
     ('/public-money/votes', 'Votos', 'Cómo votó cada funcionario en las decisiones de dinero, según las actas.'),
     ('/meetings', 'Reuniones públicas', 'Cuándo y dónde se reúne cada junta, con enlaces a las agendas.'),
-    ('/public-money/campaign-money', 'Dinero de campaña', 'Quién financió las campañas de los funcionarios y qué donantes tienen contratos.'),
+    ('/connections', 'Conexiones', 'A quién pagó cada gobierno local, y qué empresas donaron a los funcionarios que aprueban ese gasto.'),
+    ('/connections/campaign-gifts', 'Donaciones de campaña', 'Quién financió las campañas de los funcionarios y qué donantes tienen contratos.'),
     ('/open-data', 'Datos abiertos', 'Descargue los datos de este sitio en CSV y JSON.'),
 ]
 

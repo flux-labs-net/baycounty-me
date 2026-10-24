@@ -9,12 +9,15 @@ from datetime import datetime, timezone
 import html
 
 CHANGES = [
+    {'date': '2026-10-24', 'title': 'Connections: one network for every government',
+     'text': "Campaign gifts and payee connections now have their own section, Connections, instead of sitting under the CRA pages. The network covers every government and agency with payment records: the county, the cities, the redevelopment agencies and the tourism agencies, across contracts, change orders, emergency purchases, check registers, tourism payments and the CRA ledger. It shows business gifts to every official who approves that spending, not only CRA board members, so 29 businesses that were paid and gave to a campaign now appear, up from 4. Campaign Money is now Campaign Gifts, and it and the Money map moved into the section; old links still work. Only businesses, PACs and committees are named as donors.",
+     'pages': ['/connections', '/connections/campaign-gifts', '/connections/money-map', '/public-money/cra-spending']},
     {'date': '2026-10-23', 'title': 'Savings finder: where governments could spend less',
      'text': "A new page lists places Bay County's local governments could spend less, found in records already on the site: Front Beach Road segments still ahead after the finished ones ran over, CRA capital budgets left mostly unspent, engineering bought in many separate task orders, and services such as plate readers and paving bought separately. Each opportunity shows the projects or ledger rows it rests on, a low and high estimate with its stated assumption, the next question to ask and a ready-to-send records request. Estimates are illustrative, not findings that money was wasted.",
      'pages': ['/public-money/savings', '/public-money/accountability', '/public-money/cra-spending']},
     {'date': '2026-10-23', 'title': 'CRA network: payees, connections and campaign gifts',
      'text': "A new page shows every payee in the CRA ledger as a network: who each redevelopment agency paid, payees tied to each other by the same project, address or subcontract, and business campaign gifts to the officials who sit as each CRA's board. Four businesses both received money from a CRA record and gave to a campaign. A map and a ranked payee list use the same filters. Only businesses and PACs are shown as donors, and a gift and a payment together are facts about the records, not evidence of why either happened.",
-     'pages': ['/public-money/cra-network', '/public-money/cra-spending', '/public-money/money-map']},
+     'pages': ['/connections', '/public-money/cra-spending', '/connections/money-map']},
     {'date': '2026-10-23', 'title': 'Pages now open on the current year',
      'text': "Lists and tables with several years of records now open on the newest year that has records, never past the current fiscal year, with All years one tap away. That covers the Accountability console (and its headline numbers), CRA Spending, Contracts, How They Voted, Sales Tax Projects, the Hurricane Michael FEMA ledger, audit findings and other multi-year tables. A year with only a few stray records is skipped. Who Gets Paid now sorts by FY2026. Add ?year=all (or a year) to any page link to choose. Debt lists still show everything owed today.",
      'pages': ['/public-money/accountability', '/public-money/cra-spending', '/public-money/contracts', '/public-money/votes', '/public-money/sales-tax-projects', '/public-money/hurricane-michael', '/public-money/audits', '/public-money/who-gets-paid']},
@@ -26,7 +29,7 @@ CHANGES = [
      'pages': ['/privacy', '/developers']},
     {'date': '2026-10-21', 'title': 'Company pages, and one map of public money',
      'text': "Every company with more than one record now has its own page: its contracts, change orders, payments, CRA money, gifts from the business to campaigns, and the votes that approved its contracts with how each member voted. A gift near a vote does not show why anyone voted the way they did. A new map shows CRA spending and 1,062 sales tax projects over CRA districts and city limits. Hurricane Michael projects are not on it because FEMA does not publish their locations.",
-     'pages': ['/public-money/vendors', '/public-money/map', '/public-money/contracts', '/public-money/who-gets-paid', '/public-money/money-map']},
+     'pages': ['/public-money/vendors', '/public-money/map', '/public-money/contracts', '/public-money/who-gets-paid', '/connections/money-map']},
     {'date': '2026-10-21', 'title': 'New votes, FY2027 budgets, contracts and tourism payments',
      'text': "Added 30 votes (Panama City CRA and Commission, Callaway Commission and CRA) with each member's vote; the FY2027 budgets adopted in September for all nine governments; 17 contracts, mostly Springfield and Callaway; and tourism agency payments for 18 more months, each checked against the register's printed totals. Bay County Commission minutes after June 16 are not posted yet.",
      'pages': ['/public-money/votes', '/public-money/tax-dollars', '/public-money/contracts', '/public-money/who-gets-paid', '/public-money/cra-spending']},
@@ -44,7 +47,7 @@ CHANGES = [
      'pages': ['/public-money/contracts']},
     {'date': '2026-10-21', 'title': 'Money map: full roll calls on donor contract votes',
      'text': "The table of votes on a donor's contract now shows each vote once, with every board member's vote, not only the members who received a gift from the business. Members who got a gift are listed first, with the amount and date. Most of these contracts passed unanimously on the consent agenda. One vote that had been left out was added: Panama City's June 24, 2025 award of the Millville plant generator bid to Marshall Brothers, which the minutes record under an unrelated plat item.",
-     'pages': ['/public-money/money-map']},
+     'pages': ['/connections/money-map']},
     {'date': '2026-10-21', 'title': 'Sort, filter and download every list',
      'text': 'Every table and list on the site can now be sorted by clicking a column heading, filtered with a search box (and drop-downs where a column has a few values), and downloaded as a CSV of exactly the rows on screen, in the order shown. Lists open newest first, then A to Z; upcoming meetings open soonest first.',
      'pages': ['/updates']},
@@ -53,7 +56,7 @@ CHANGES = [
      'pages': ['/developers']},
     {'date': '2026-10-21', 'title': 'Correction: Money map',
      'text': "The first version of the Money map overstated connections. It counted a donor's contracts again for every official the donor gave to, which roughly doubled the government totals, and it drew lines from officials to governments they don't serve on. The map now puts each donor in the middle: campaign gifts on one side, the governments that pay the donor on the other, each counted once. It marks only gifts to an official whose own government pays that donor, and lists the recorded votes those officials cast on that donor's contracts. The heat map that credited contract dollars to individual officials was removed.",
-     'pages': ['/public-money/money-map']},
+     'pages': ['/connections/money-map']},
     {'date': '2026-10-21', 'title': "Who's running in 2026",
      'text': "Every local race on Bay County ballots this year, with each candidate's platform in their own words, links to their campaigns, and their campaign money: what they raised and spent, how much came from individuals, organizations and their own pockets, and every business or committee that gave. Races already decided are shown separately.",
      'pages': ['/elections']},
@@ -65,7 +68,7 @@ CHANGES = [
      'pages': ['/public-money/votes']},
     {'date': '2026-10-21', 'title': 'Money map',
      'text': 'An interactive map of which businesses and groups gave to which officials, and where those same donors hold contracts with a local government, plus heat maps of giving by government and of contract dollars held by each official\'s donors.',
-     'pages': ['/public-money/money-map']},
+     'pages': ['/connections/money-map']},
     {'date': '2026-10-21', 'title': 'Budget explorer',
      'text': "Open any government's FY2026 budget: spending by fund, General Fund spending by department, and revenue by source. Includes Callaway's and Parker's adopted budgets, which weren't on the site before.",
      'pages': ['/public-money/budget-explorer']},
@@ -86,7 +89,7 @@ CHANGES = [
      'pages': ['/meetings']},
     {'date': '2026-10-21', 'title': 'Campaign money and contracts',
      'text': "The most recent campaign of each current elected official: how much they raised, from individuals and organizations, and which donors also hold contracts with local governments. Individual donors are counted, not named; each official's full report is linked.",
-     'pages': ['/public-money/campaign-money']},
+     'pages': ['/connections/campaign-gifts']},
     {'date': '2026-10-21', 'title': 'Request a public record',
      'text': "Pick a government and a record this site is missing, or describe your own, and get a ready-to-send Florida public records request with the right office's contact details.",
      'pages': ['/records-request']},
@@ -162,8 +165,8 @@ LABELS = {'/': 'Home', '/my-address': 'My Address', '/public-money/tax-dollars':
           '/public-money/contracts': 'Contracts', '/public-money/votes': 'How They Voted', '/public-money/debt': 'Debt',
           '/public-money/audits': 'Audit Findings', '/who-runs-bay-county': 'Officials', '/glossary': 'Glossary', '/search': 'Search',
           '/about': 'About', '/updates': "What's new", '/governments': 'Governments', '/compare': 'Compare', '/meetings': 'Meetings',
-          '/public-money/campaign-money': 'Campaign Money', '/records-request': 'Records Request', '/open-data': 'Open Data', '/alerts': 'Email Alerts',
-          '/es': 'En español', '/public-money/budget-explorer': 'Budget Explorer', '/public-money/who-gets-paid': 'Who Gets Paid', '/public-money/money-map': 'Money Map', '/elections': '2026 Elections', '/developers': 'API', '/public-money/exemptions': 'Exemptions'}
+          '/connections': 'Connections', '/connections/campaign-gifts': 'Campaign Gifts', '/records-request': 'Records Request', '/open-data': 'Open Data', '/alerts': 'Email Alerts',
+          '/es': 'En español', '/public-money/budget-explorer': 'Budget Explorer', '/public-money/who-gets-paid': 'Who Gets Paid', '/connections/money-map': 'Money Map', '/elections': '2026 Elections', '/developers': 'API', '/public-money/exemptions': 'Exemptions'}
 
 
 def last_updated(path):

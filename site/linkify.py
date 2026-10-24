@@ -13,7 +13,7 @@ PATHS = [
     (r'data/contracts/contracts\.json', '/public-money/contracts', 'the Contracts page'),
     (r'data/tax/budgets\.json', '/public-money/tax-dollars', 'the Tax Dollars page'),
     (r'data/votes/votes\.json', '/public-money/votes', 'the How They Voted page'),
-    (r'data/campaign/[a-z_]+\.json', '/public-money/campaign-money', 'the Campaign Money page'),
+    (r'data/campaign/[a-z_]+\.json', '/connections/campaign-gifts', 'the Campaign Gifts page'),
     (r'data/[a-z_]+/[a-z_0-9]+\.(?:json|csv)', '/open-data', "this site's open data"),
 ]
 SKIP = {'a', 'script', 'style', 'textarea', 'title', 'head', 'option', 'svg', 'code', 'pre'}
@@ -60,7 +60,7 @@ LINKIFY_JS = r"""
 (() => {
   const URLRE = /https?:\/\/[^\s<>"']+/g, SKIP = new Set(['A','SCRIPT','STYLE','TEXTAREA','TITLE','OPTION','INPUT','SELECT','CODE','PRE']);
   const PATHS = [[/data\/contracts\/contracts\.json/g, '/public-money/contracts', 'the Contracts page'], [/data\/tax\/budgets\.json/g, '/public-money/tax-dollars', 'the Tax Dollars page'],
-    [/data\/votes\/votes\.json/g, '/public-money/votes', 'the How They Voted page'], [/data\/campaign\/[a-z_]+\.json/g, '/public-money/campaign-money', 'the Campaign Money page'],
+    [/data\/votes\/votes\.json/g, '/public-money/votes', 'the How They Voted page'], [/data\/campaign\/[a-z_]+\.json/g, '/connections/campaign-gifts', 'the Campaign Gifts page'],
     [/data\/[a-z_]+\/[a-z_0-9]+\.(?:json|csv)/g, '/open-data', "this site's open data"]];
   const host = u => u.replace(/^https?:\/\/(www\.)?/, '').split(/[/?#]/)[0] || 'source';
   function fix(node) {

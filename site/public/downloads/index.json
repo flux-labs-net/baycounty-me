@@ -2333,10 +2333,10 @@
    "api": "/api/v1/datasets/accountability-events"
   },
   {
-   "id": "cra-network-payees",
-   "title": "CRA network: payees",
-   "description": "Every payee in the CRA ledger as one entity (businesses, governments, property owners; unnamed grant recipients grouped), with the CRAs that paid it and the counted total.",
-   "rows": 72,
+   "id": "connections-payees",
+   "title": "Connections: payees",
+   "description": "Every payee in the payment records of every local government and agency (contracts, change orders, emergency purchases, check registers, tourism agency payments and the CRA ledger) as one entity, with who paid it and whether it gave to a campaign. dollars_in_records adds every record, and an award and the payments on it can both be records, so it is not a deduplicated total. Unnamed grant recipients are grouped.",
+   "rows": 647,
    "columns": [
     {
      "name": "entity_id",
@@ -2366,7 +2366,11 @@
      ]
     },
     {
-     "name": "cras",
+     "name": "paid_by",
+     "type": "array"
+    },
+    {
+     "name": "record_types",
      "type": "array"
     },
     {
@@ -2374,43 +2378,191 @@
      "type": "number"
     },
     {
-     "name": "counted_total",
+     "name": "dollars_in_records",
      "type": "number"
     },
     {
-     "name": "vendor_page",
-     "type": "string",
+     "name": "gave_to_campaigns",
+     "type": "boolean",
      "values": [
-      "/public-money/vendors/art-construction-northwest-florida",
-      "/public-money/vendors/bcl",
-      "/public-money/vendors/carr-riggs-ingram",
-      "/public-money/vendors/charlie-coram-s-place",
-      "/public-money/vendors/cwr-contracting",
-      "/public-money/vendors/dewberry",
-      "/public-money/vendors/gac-contractors",
-      "/public-money/vendors/gcuc",
-      "/public-money/vendors/historic-st-andrews-waterfront-partnership",
-      "/public-money/vendors/inland",
-      "/public-money/vendors/mainline",
-      "/public-money/vendors/piney-grove-nursery-landscaping",
-      "/public-money/vendors/rotolo-consultants",
-      "/public-money/vendors/volkert",
-      "/public-money/vendors/world-changers-first-baptist-church-panama-city"
+      false,
+      true
      ]
+    },
+    {
+     "name": "vendor_page",
+     "type": "string"
     },
     {
      "name": "gov_id",
      "type": "string"
     }
    ],
-   "json": "/downloads/cra-network-payees.json",
-   "csv": "/downloads/cra-network-payees.csv",
-   "api": "/api/v1/datasets/cra-network-payees"
+   "json": "/downloads/connections-payees.json",
+   "csv": "/downloads/connections-payees.csv",
+   "api": "/api/v1/datasets/connections-payees"
   },
   {
-   "id": "cra-network-links",
-   "title": "CRA network: documented connections",
-   "description": "Documented links between CRA payees that are not payments (shared project, address or subcontract), each with its source.",
+   "id": "connections-payments",
+   "title": "Connections: payment records",
+   "description": "One row per payment record behind the Connections network: which government or agency paid which payee, the record type, amount, date and source. CRA ledger items that are only proposed or planned are not included.",
+   "rows": 1149,
+   "columns": [
+    {
+     "name": "record_id",
+     "type": "string"
+    },
+    {
+     "name": "payer_id",
+     "type": "string",
+     "values": [
+      "cra:CW",
+      "cra:LH",
+      "cra:PC",
+      "cra:PCB",
+      "cra:PK",
+      "cra:SF",
+      "g:county",
+      "g:cw",
+      "g:destination_pc",
+      "g:lh",
+      "g:mb",
+      "g:mb_cdc",
+      "g:parker",
+      "g:pc",
+      "g:pcb",
+      "g:sp",
+      "g:visit_pcb"
+     ]
+    },
+    {
+     "name": "payer",
+     "type": "string",
+     "values": [
+      "Bay County",
+      "Callaway",
+      "Callaway CRA",
+      "Destination Panama City",
+      "Lynn Haven",
+      "Lynn Haven CRA",
+      "Mexico Beach",
+      "Mexico Beach CDC",
+      "Panama City",
+      "Panama City Beach",
+      "Panama City Beach CRA",
+      "Panama City CRA",
+      "Parker",
+      "Parker CRA",
+      "Springfield",
+      "Springfield CRA",
+      "Visit Panama City Beach"
+     ]
+    },
+    {
+     "name": "payer_kind",
+     "type": "string",
+     "values": [
+      "government",
+      "redevelopment agency",
+      "tourism agency"
+     ]
+    },
+    {
+     "name": "payer_gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "destination_pc",
+      "lh",
+      "mb",
+      "mb_cdc",
+      "parker",
+      "pc",
+      "pcb",
+      "sp",
+      "visit_pcb"
+     ]
+    },
+    {
+     "name": "entity_id",
+     "type": "string"
+    },
+    {
+     "name": "payee",
+     "type": "string"
+    },
+    {
+     "name": "record_type",
+     "type": "string",
+     "values": [
+      "CRA ledger",
+      "Change orders",
+      "Check registers",
+      "Contracts",
+      "Emergency purchases",
+      "Tourism agency payments"
+     ]
+    },
+    {
+     "name": "amount",
+     "type": "number"
+    },
+    {
+     "name": "date",
+     "type": "string"
+    },
+    {
+     "name": "what",
+     "type": "string"
+    },
+    {
+     "name": "cra_status",
+     "type": "string",
+     "values": [
+      "Budgeted",
+      "Committed",
+      "Spent"
+     ]
+    },
+    {
+     "name": "inside_project_total",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "destination_pc",
+      "lh",
+      "mb",
+      "mb_cdc",
+      "parker",
+      "pc",
+      "pcb",
+      "sp",
+      "visit_pcb"
+     ]
+    }
+   ],
+   "json": "/downloads/connections-payments.json",
+   "csv": "/downloads/connections-payments.csv",
+   "api": "/api/v1/datasets/connections-payments"
+  },
+  {
+   "id": "connections-links",
+   "title": "Connections: documented links",
+   "description": "Documented links between payees that are not payments (shared project, address or subcontract), each with its source.",
    "rows": 7,
    "columns": [
     {
@@ -2470,15 +2622,15 @@
      "type": "string"
     }
    ],
-   "json": "/downloads/cra-network-links.json",
-   "csv": "/downloads/cra-network-links.csv",
-   "api": "/api/v1/datasets/cra-network-links"
+   "json": "/downloads/connections-links.json",
+   "csv": "/downloads/connections-links.csv",
+   "api": "/api/v1/datasets/connections-links"
   },
   {
-   "id": "cra-network-gifts",
-   "title": "CRA network: campaign gifts",
-   "description": "Business and committee campaign gifts to the officials who sit as each CRA's board, and gifts from donors who are CRA payees. Individual donors are not included.",
-   "rows": 225,
+   "id": "connections-gifts",
+   "title": "Connections: business gifts to officials",
+   "description": "Gifts from businesses, PACs and committees to current officeholders and 2026 candidates, one row per donor and official, with the payee id when the donor was also paid by a local government. Individual donors are never included.",
+   "rows": 689,
    "columns": [
     {
      "name": "donor",
@@ -2489,74 +2641,47 @@
      "type": "string",
      "values": [
       "business",
+      "committee",
+      "other",
       "pac"
      ]
     },
     {
      "name": "official",
-     "type": "string",
-     "values": [
-      "Allan Branch",
-      "Bob Pelletier",
-      "Bobby J. Birdsell",
-      "Brian Grainger",
-      "Daniel Raffield",
-      "David Griggs",
-      "Doug Crosby",
-      "Ethan Register",
-      "Glenn Manley",
-      "Jamie Warrick",
-      "Janice Lucas",
-      "Josh Street",
-      "Kenneth L. Ayers, Jr.",
-      "Mary Coburn",
-      "Michael Jarman",
-      "Pat Perno",
-      "Paul Casto",
-      "Robbie Hughes",
-      "Sam Peebles",
-      "Scott Duvall",
-      "Stuart Tettemer",
-      "Tommy Ford"
-     ]
+     "type": "string"
     },
     {
      "name": "office",
+     "type": "string"
+    },
+    {
+     "name": "official_gov_id",
      "type": "string",
      "values": [
-      "Bay County Commission, District 1",
-      "Bay County Commission, District 3",
-      "Bay County Commission, District 4 (2026 candidate)",
-      "Callaway Commissioner, Ward 1",
-      "Callaway Commissioner, Ward 2",
-      "Callaway Commissioner, Ward 3",
-      "Callaway Commissioner, Ward 4",
-      "Lynn Haven Commissioner, Seat 1",
-      "Lynn Haven Commissioner, Seat 2",
-      "Lynn Haven Commissioner, Seat 3",
-      "Panama City Beach Council, Ward 1",
-      "Panama City Beach Council, Ward 2",
-      "Panama City Beach Council, Ward 3",
-      "Panama City Beach Council, Ward 4",
-      "Panama City Beach Mayor",
-      "Panama City Commission, Ward I",
-      "Panama City Commission, Ward II",
-      "Panama City Commission, Ward III",
-      "Panama City Commission, Ward IV",
-      "Panama City Mayor",
-      "School Board, District 3 (2026 candidate)",
-      "Sheriff"
+      "clerk",
+      "county",
+      "cw",
+      "lh",
+      "pc",
+      "pcb",
+      "schools",
+      "sheriff",
+      "soe",
+      "sp",
+      "tax_collector"
      ]
     },
     {
-     "name": "cra_board",
-     "type": "string",
+     "name": "candidate_2026",
+     "type": "boolean",
      "values": [
-      "Callaway CRA",
-      "Lynn Haven CRA",
-      "Panama City Beach CRA",
-      "Panama City CRA"
+      false,
+      true
      ]
+    },
+    {
+     "name": "sits_on",
+     "type": "array"
     },
     {
      "name": "amount",
@@ -2574,10 +2699,35 @@
      "name": "payee_entity_id",
      "type": "string",
      "values": [
+      "v:aaron-rich-marketing",
+      "v:american-sand",
+      "v:anderson-columbia",
+      "v:bay-point-billfish",
+      "v:bgn",
       "v:charlie-coram-s-place",
+      "v:coastal-parasail",
+      "v:culpepper",
+      "v:cw-roberts",
+      "v:dag-architects",
       "v:dewberry",
+      "v:disposal-services",
+      "v:ecsc",
+      "v:florida-architects",
       "v:gcuc",
-      "v:mainline"
+      "v:grand-slam-sports-tournaments",
+      "v:mainline",
+      "v:marshall-brothers",
+      "v:mr-fence",
+      "v:panhandle-engineering",
+      "v:pg-environmental-fl",
+      "v:press-print-graphics",
+      "v:rj-gorman-contracting",
+      "v:rj-gorman-marine",
+      "v:roberts-and-roberts",
+      "v:southeastern-outdoor",
+      "v:timmins-consulting",
+      "v:tk-vandy",
+      "v:williams-communications"
      ]
     },
     {
@@ -2590,31 +2740,7 @@
     },
     {
      "name": "report_url",
-     "type": "string",
-     "values": [
-      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=26&c=bay&ca=638&rellevel=4&committee=N",
-      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=26&c=bay&ca=650&rellevel=4&committee=N",
-      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=26&c=bay&ca=660&rellevel=4&committee=N",
-      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=28&c=bay&ca=577&rellevel=4&committee=N",
-      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=28&c=bay&ca=584&rellevel=4&committee=N",
-      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=30&c=bay&ca=600&rellevel=4&committee=N",
-      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=30&c=bay&ca=609&rellevel=4&committee=N",
-      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=30&c=bay&ca=615&rellevel=4&committee=N",
-      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=30&c=bay&ca=621&rellevel=4&committee=N",
-      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=31&c=bay&ca=645&rellevel=4&committee=N",
-      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=31&c=bay&ca=652&rellevel=4&committee=N",
-      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=31&c=bay&ca=654&rellevel=4&committee=N",
-      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=31&c=bay&ca=655&rellevel=4&committee=N",
-      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=31&c=bay&ca=665&rellevel=4&committee=N",
-      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=32&c=bay&ca=691&rellevel=4&committee=N",
-      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=32&c=bay&ca=692&rellevel=4&committee=N",
-      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=32&c=bay&ca=694&rellevel=4&committee=N",
-      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=32&c=bay&ca=701&rellevel=4&committee=N",
-      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=719&rellevel=4&committee=N",
-      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=727&rellevel=4&committee=N",
-      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=729&rellevel=4&committee=N",
-      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=735&rellevel=4&committee=N"
-     ]
+     "type": "string"
     },
     {
      "name": "as_of",
@@ -2627,19 +2753,23 @@
      "name": "gov_id",
      "type": "string",
      "values": [
+      "clerk",
       "county",
       "cw",
       "lh",
       "pc",
       "pcb",
       "schools",
-      "sheriff"
+      "sheriff",
+      "soe",
+      "sp",
+      "tax_collector"
      ]
     }
    ],
-   "json": "/downloads/cra-network-gifts.json",
-   "csv": "/downloads/cra-network-gifts.csv",
-   "api": "/api/v1/datasets/cra-network-gifts"
+   "json": "/downloads/connections-gifts.json",
+   "csv": "/downloads/connections-gifts.csv",
+   "api": "/api/v1/datasets/connections-gifts"
   },
   {
    "id": "money-map-gifts",
@@ -3584,7 +3714,7 @@
    "id": "site-updates",
    "title": "What's new",
    "description": "Each change to the site's data and pages, newest first.",
-   "rows": 48,
+   "rows": 49,
    "columns": [
     {
      "name": "date",
@@ -3593,7 +3723,8 @@
       "2026-10-20",
       "2026-10-21",
       "2026-10-22",
-      "2026-10-23"
+      "2026-10-23",
+      "2026-10-24"
      ]
     },
     {

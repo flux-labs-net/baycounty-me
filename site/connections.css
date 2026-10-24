@@ -1,0 +1,102 @@
+/* Connections page (/connections). Uses the site tokens in tokens.css. */
+.cn .cn-bar{display:flex;flex-wrap:wrap;gap:10px 20px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:10px 14px;margin:18px 0 12px}
+.cn .cn-grp{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.cn .cn-lbl{font-size:12px;color:var(--muted);margin-right:2px}
+.cn .cn-chip{font:500 13px var(--f-body);border:1px solid var(--line);background:transparent;color:var(--muted);border-radius:999px;padding:4px 11px;cursor:pointer}
+.cn .cn-chip[aria-pressed="true"]{background:var(--sunken);border-color:var(--blue);color:var(--ink)}
+.cn .cn-chip:focus-visible,.cn .cn-tab:focus-visible,.cn button:focus-visible,.cn [tabindex]:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.cn .cn-tabs{display:flex;gap:2px;border-bottom:1px solid var(--line);overflow-x:auto;margin-bottom:14px}
+.cn .cn-tab{font:600 14px var(--f-body);background:none;border:0;border-bottom:2px solid transparent;color:var(--muted);padding:9px 14px;cursor:pointer;white-space:nowrap}
+.cn .cn-tab[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--salmon)}
+.cn .cn-main{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:18px;align-items:start}
+@media (max-width:900px){.cn .cn-main{grid-template-columns:minmax(0,1fr)}}
+.cn .cn-view{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);min-width:0;overflow:hidden}
+.cn .cn-vh{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px 16px;padding:12px 14px;border-bottom:1px solid var(--line)}
+.cn .cn-vh h2{margin:0;font-size:17px}
+.cn .cn-legend{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12px;color:var(--muted)}
+.cn .cn-legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+.cn .cn-legend i.hollow{background:var(--surface);border:1.5px solid var(--faint)}
+.cn .cn-legend i.sq{border-radius:2px;background:var(--navy);opacity:.25}
+.cn .cn-legend i.ln{width:18px;height:0;border-radius:0;border-top:2px solid var(--faint);vertical-align:3px}
+.cn .cn-legend i.ln.dash{border-top:2px dashed var(--amber)}
+.cn .cn-legend i.ln.red{border-top-color:var(--salmon)}
+.cn .cn-wrap{position:relative}
+.cn #cnGraph{width:100%;height:clamp(560px,80vh,920px);display:block;touch-action:none;cursor:grab}
+@media (max-width:600px){.cn #cnGraph{height:560px}}
+.cn .cn-node text{font:500 10.5px var(--f-body);fill:var(--ink);pointer-events:none;paint-order:stroke;stroke:var(--surface);stroke-width:3px}
+.cn .cn-node circle{cursor:pointer}
+.cn .dim{opacity:.12}
+.cn .cn-note{font-size:12.5px;color:var(--muted);margin:0}
+.cn section>.cn-note{padding:10px 14px}
+.cn .cn-pad{padding:14px;display:flex;flex-direction:column;gap:12px}
+.cn .cn-tip{position:absolute;pointer-events:none;background:var(--ink);color:var(--bg);font-size:12px;line-height:1.4;padding:6px 8px;border-radius:6px;max-width:240px;z-index:5}
+.cn .cn-profile{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;display:flex;flex-direction:column;gap:14px;position:sticky;top:calc(env(safe-area-inset-top,0px) + 12px);max-height:calc(100vh - 24px);overflow-y:auto}
+@media (max-width:900px){.cn .cn-profile{position:relative;top:auto;max-height:none}}
+.cn .cn-profile h2{margin:2px 0 0;font-size:19px;line-height:1.25}
+.cn .cn-profile p{margin:0}
+.cn .cn-big{font:500 24px var(--f-data);font-variant-numeric:tabular-nums}
+.cn .cn-recs{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.cn .cn-rec{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;padding:9px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+.cn .cn-rec .num{font-family:var(--f-data);font-variant-numeric:tabular-nums}
+.cn .cn-meta{grid-column:1/-1;font-size:12px;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 10px}
+.cn .cn-pill{font:500 11px var(--f-data);border:1px solid currentColor;border-radius:4px;padding:0 6px}
+.cn .cn-flag{font:500 11px var(--f-data);color:var(--faint);white-space:nowrap}
+.cn .cn-flag.red{color:var(--salmon)}
+.cn .cn-rel{display:flex;flex-direction:column;gap:8px;font-size:13.5px}
+.cn .cn-starts{display:flex;flex-wrap:wrap;gap:6px}
+.cn .cn-link{all:unset;cursor:pointer;color:var(--blue);font-weight:600}
+.cn .cn-link:hover{text-decoration:underline}
+.cn .cn-btn{align-self:flex-start;font:600 13px var(--f-body);border:1px solid var(--blue);color:var(--blue);background:transparent;border-radius:8px;padding:6px 12px;cursor:pointer}
+.cn .cn-row{cursor:pointer}
+.cn .cn-row:hover td{background:var(--sunken)}
+.cn td.num,.cn th.num{text-align:right;font-variant-numeric:tabular-nums}
+.cn .cn-profile h3{font-size:11.5px;margin:0 0 4px}
+.cn .cn-main.wide{grid-template-columns:minmax(0,1fr)}
+.cn .cn-main.wide .cn-profile{position:relative;top:auto;max-height:none}
+.cn .cn-zoom{position:absolute;top:10px;left:10px;display:flex;flex-direction:column;gap:4px}
+.cn .cn-zoom button{font:600 15px var(--f-body);min-width:34px;height:34px;padding:0 8px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);cursor:pointer}
+.cn .cn-main.wide{position:relative}
+@media (min-width:1100px){
+  .cn .cn-main.wide.has-sel .cn-profile{position:absolute;top:64px;right:12px;width:340px;max-height:calc(100% - 124px);overflow-y:auto;z-index:4;box-shadow:0 10px 28px rgba(15,25,45,.18)}
+}
+.cn .cn-fsbar{display:flex;gap:6px;align-items:center;order:3}
+.cn .cn-fsonly{display:none;gap:6px}
+.cn .cn-x{display:none;position:absolute;top:8px;right:8px;width:32px;height:32px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);font:500 20px/1 var(--f-body);cursor:pointer}
+html.cn-locked,html.cn-locked body{overflow:hidden}
+/* full screen: the view fills the viewport; details float over it */
+.cn .cn-main.fs{position:fixed;inset:0;z-index:1000;display:block;background:var(--bg);padding:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px)}
+.cn .cn-main.fs .cn-view{height:100%;border:0;border-radius:0;display:flex;flex-direction:column}
+.cn .cn-main.fs .cn-view>section:not([hidden]){flex:1;display:flex;flex-direction:column;min-height:0}
+.cn .cn-main.fs .cn-wrap{flex:1;min-height:0}
+.cn .cn-main.fs #cnGraph{height:100%;min-height:0;background:var(--water)}
+.cn .cn-main.fs #cnGraph{background:var(--surface)}
+.cn .cn-main.fs .cn-view>section>.cn-note{display:none}
+.cn .cn-main.fs .cn-fsonly{display:flex}
+.cn .cn-main.fs .cn-legend{display:none}
+@media (min-width:700px){.cn .cn-main.fs .cn-legend{display:flex}}
+.cn .cn-main.fs .cn-profile{display:none}
+.cn .cn-main.fs.has-sel .cn-profile{display:flex;position:absolute;z-index:5;overflow-y:auto;box-shadow:0 10px 28px rgba(15,25,45,.22);top:calc(env(safe-area-inset-top,0px) + 64px);right:calc(env(safe-area-inset-right,0px) + 12px);width:360px;max-height:calc(100% - 84px)}
+.cn .cn-main.fs .cn-x,.cn .cn-main.wide.has-sel .cn-x{display:block}
+.cn .cn-profile>.cn-x+div{padding-right:36px}
+@media (max-width:699px){
+  .cn .cn-main.fs.has-sel .cn-profile{top:auto;left:0;right:0;bottom:0;width:auto;max-height:55%;border-radius:16px 16px 0 0;padding-bottom:calc(16px + env(safe-area-inset-bottom,0px))}
+}
+.cn .cn-node text.cn-pl{font-weight:700;font-size:12px}
+/* Money trail */
+.cn .cn-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.cn #cnTrail{display:block;margin:0 auto}
+.cn .cn-th text{font:600 11px var(--f-data);letter-spacing:.06em;text-transform:uppercase;fill:var(--muted)}
+.cn .cn-tn{cursor:pointer}
+.cn .cn-tn text{font:500 12px var(--f-body);fill:var(--ink)}
+.cn .cn-tp text{font-weight:700}
+.cn .cn-tb text{font-weight:600}
+.cn .cn-tn:hover text,.cn .cn-tn.on text{fill:var(--blue);text-decoration:underline}
+.cn .cn-tn:focus-visible{outline:none}
+.cn .cn-tn:focus-visible text{fill:var(--blue);text-decoration:underline}
+.cn .cn-tl{font:500 13px var(--f-body);fill:var(--muted)}
+/* Network: start from a name */
+.cn .cn-find input{font:500 13px var(--f-body);border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:8px;padding:6px 10px;width:min(320px,70vw)}
+.cn .cn-prompt text{font:500 14px var(--f-body);fill:var(--muted)}
+.cn .cn-node circle.cn-focus{stroke:var(--ink);stroke-width:2.5}
+.cn .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.cn .cn-tn text.cn-ts{font:400 11px var(--f-body);fill:var(--muted);text-decoration:none}

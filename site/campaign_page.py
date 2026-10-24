@@ -1,4 +1,4 @@
-"""Campaign money and contracts (/campaign-money)."""
+"""Campaign gifts and contracts (/connections/campaign-gifts). Formerly /public-money/campaign-money."""
 import html, json, os, re
 from collections import defaultdict
 from city_filter import city_bar, by_city, KEYS
@@ -168,9 +168,9 @@ def campaign_page():
     k_split = lambda cs, ps: f"{usd(sum((c.get('from_individuals') or {}).get('total') or 0 for c in cs))} from individuals · {usd(sum(sum(v for k, v in (c.get('by_type_total') or {}).items() if k not in ('individual', 'candidate_self')) for c in cs))} from organizations"
     gaps = ''.join(f'<li>{e(g)}</li>' for g in d.get('gaps') or [])
     return f'''<div class="page tax">
-  <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Accountability · Campaign money</span><h1>Campaign money and contracts</h1>
+  <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Connections · Campaign gifts</span><h1>Campaign gifts and contracts</h1>
     <p class="lede">Who paid for the most recent campaigns of Bay County's current elected officials, from the reports they file with the Supervisor of Elections, and which donors also hold local government contracts.</p></div>
-    <div class="stamp"><a class="pill" href="/public-money/money-map">See the money map</a><button type="button" class="pdf-btn" id="pdf"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 12v2h10v-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Export PDF</button><span>Reports as of {e(d.get("as_of"))}</span></div></header>
+    <div class="stamp"><a class="pill" href="/connections">See the network</a><a class="pill" href="/connections/money-map">See the money map</a><button type="button" class="pdf-btn" id="pdf"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 12v2h10v-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Export PDF</button><span>Reports as of {e(d.get("as_of"))}</span></div></header>
   {city_bar(ck, hide=True, note='Bay County includes the county officers (sheriff, clerk and others)')}
   <section class="explain"><div class="ex-txt"><span class="eyebrow">The simple version</span><h2>Reading campaign money</h2>
     <ol class="ex-steps">

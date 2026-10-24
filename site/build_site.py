@@ -67,13 +67,18 @@ MENU = [
             {'label': 'Savings finder', 'href': '/public-money/savings', 'desc': 'Where governments could spend less'},
             {'label': 'Contracts', 'href': '/public-money/contracts', 'desc': 'Who wins contracts, and how'},
             {'label': 'How They Voted', 'href': '/public-money/votes', 'desc': 'Every recorded vote on money decisions'},
-            {'label': 'Campaign Money', 'href': '/public-money/campaign-money', 'desc': 'Who funds campaigns, and donor contracts'},
-            {'label': 'Money Map', 'href': '/public-money/money-map', 'desc': 'Donors, officials and contracts, mapped'},
-            {'label': 'CRA Network', 'href': '/public-money/cra-network', 'desc': 'Who CRAs paid, and who gave to their boards'},
             {'label': 'Who Gets Paid', 'href': '/public-money/who-gets-paid', 'desc': 'Every payment by the tourism agencies'},
             {'label': 'Vendors', 'href': '/public-money/vendors', 'desc': 'Every company paid, with its contracts and votes'},
             {'label': 'Debt', 'href': '/public-money/debt', 'desc': 'What each government owes'},
             {'label': 'Audit Findings', 'href': '/public-money/audits', 'desc': 'What outside auditors flagged'},
+        ]},
+    ]},
+    {'label': 'Connections', 'groups': [
+        {'group': 'Follow the connections', 'items': [
+            {'label': 'Network', 'href': '/connections', 'desc': 'Who every government paid, and who gave to officials'},
+            {'label': 'Campaign Gifts', 'href': '/connections/campaign-gifts', 'desc': 'Who funds campaigns, and donors with contracts'},
+            {'label': 'Money Map', 'href': '/connections/money-map', 'desc': 'Donors, officials and votes on their contracts'},
+            {'label': 'Shared Owners', 'href': '/connections/shared-owners', 'desc': 'Businesses with a shared owner that gave to the same candidate'},
         ]},
     ]},
     {'label': 'Get Involved', 'groups': [
@@ -144,7 +149,7 @@ FOOTER = f'''<footer class="site-foot"><div class="site-foot-in">
   <p>Public records for {PLACE_LABEL}, in plain view: what governments collect, what they spend, what they owe and what the auditors found.</p></div>
   <nav class="foot-cols" aria-label="Footer">
     <div><b>Follow the money</b><a href="/public-money/tax-dollars">Tax dollars</a><a href="/public-money/budget-explorer">Budgets</a><a href="/public-money/debt">Debt</a><a href="/public-money/contracts">Contracts</a></div>
-    <div><b>Accountability</b><a href="/public-money/accountability">Accountability console</a><a href="/public-money/audits">Audit findings</a><a href="/public-money/votes">How they voted</a><a href="/public-money/savings">Savings finder</a></div>
+    <div><b>Accountability</b><a href="/public-money/accountability">Accountability console</a><a href="/public-money/audits">Audit findings</a><a href="/public-money/votes">How they voted</a><a href="/public-money/savings">Savings finder</a><a href="/connections">Connections</a></div>
     <div><b>Take part</b><a href="/meetings">Meetings</a><a href="/alerts">Email alerts</a><a href="/records-request">Request a record</a><a href="/open-data">Open data &amp; API</a></div>
   </nav>
   <div class="foot-base">
@@ -669,12 +674,12 @@ PAGES = [
     ('/records-request', 'Request a public record', 'Write a Florida public records request to any Bay County government in a minute: pick a record the site is missing or describe your own.', lambda: records_page(OUT)),
     ('/alerts', 'Get BayCounty.me updates by email', 'Follow Bay County, the school district or your city and get a short weekly email with new votes, data, corrections and upcoming meetings.', lambda: alerts_page(OUT)),
     ('/meetings', 'Upcoming public meetings in Bay County', 'When and where the County Commission, School Board and every city commission meet, with agenda links and the money items on each agenda.', lambda: meetings_page(OUT)),
-    ('/public-money/campaign-money', 'Campaign money and contracts', "Who funded the campaigns of Bay County's current elected officials, from Supervisor of Elections reports, and which donors also hold local government contracts.", campaign_page),
+    ('/connections/campaign-gifts', 'Campaign gifts and contracts', "Who funded the campaigns of Bay County's current elected officials, from Supervisor of Elections reports, and which donors also hold local government contracts.", campaign_page),
     ('/who-runs-bay-county', 'Who runs Bay County', 'Every elected seat and appointed manager for Bay County, its cities and the school district, plus what top officials are paid.', who_page),
     ('/public-money/budget-explorer', 'Budget explorer', "Open up any Bay County government's FY2026 budget: spending by fund and department, and where the money comes from.", lambda: budget_page(OUT)),
     *([('/elections', "Who's running in 2026", 'Every local race on Bay County ballots in 2026: the candidates, their platforms in their own words, links to their campaigns, and where their campaign money comes from.', elections_page)] if ELECTIONS_READY else []),
     ('/public-money/exemptions', 'Property tax exemptions', 'Who gets a property tax exemption in Bay County, from homestead to disabled veterans, how many homes, and how much tax each one takes off bills, from the 2026 tax roll.', lambda: exemptions_page(OUT)),
-    ('/public-money/money-map', 'Money map: donors, officials and contracts', 'An interactive map and heat maps of which businesses gave to which Bay County officials, and where those donors hold local government contracts.', lambda: money_map_page(OUT)),
+    ('/connections/money-map', 'Money map: donors, officials and contracts', 'An interactive map and heat maps of which businesses gave to which Bay County officials, and where those donors hold local government contracts.', lambda: money_map_page(OUT)),
     ('/public-money/who-gets-paid', 'Who gets paid: tourism agencies', 'Every payment by Visit Panama City Beach, Destination Panama City and the Mexico Beach CDC, from the Clerk of Court check registers.', payments_page),
     ('/public-money/contracts', 'Who gets the contracts', 'Major contracts approved by Bay County and its cities since 2022: winners, how they were awarded, change orders, emergency purchases and who the county paid most.', lambda: contracts_page(OUT)),
     ('/correspondence', 'Letters to officials',
@@ -698,8 +703,8 @@ PAGES = [
 
 from vendor_pages import pages as vendor_page_list, index_page as vendors_index  # noqa: E402
 from public_map import public_map_page  # noqa: E402
-from cra_network import cra_network_page  # noqa: E402
-PAGES += [('/public-money/cra-network', 'CRA network: payees, connections and campaign gifts', 'Who Bay County\'s redevelopment agencies paid, how those payees connect, and which businesses gave to the officials who sit as each CRA board.', lambda: cra_network_page(OUT))]
+from connections import connections_page  # noqa: E402
+PAGES += [('/connections', 'Connections: who governments paid, and who gave to officials', 'Who every Bay County government and agency paid, how those payees connect, and which businesses gave to the officials who approve the spending.', lambda: connections_page(OUT))]
 PAGES += [('/public-money/map', 'Public money map', 'CRA spending and half-cent sales tax projects across Bay County on one map, with CRA district lines and city limits.', lambda: public_map_page(OUT))]
 PAGES += [(p, t, d, fn or (lambda: vendors_index(OUT))) for p, t, d, fn in vendor_page_list()]
 

@@ -24,6 +24,23 @@
       "schedule": "40 13 * * *"
     }
   ],
+  "redirects": [
+    {
+      "source": "/public-money/cra-network",
+      "destination": "/connections",
+      "permanent": true
+    },
+    {
+      "source": "/public-money/campaign-money",
+      "destination": "/connections/campaign-gifts",
+      "permanent": true
+    },
+    {
+      "source": "/public-money/money-map",
+      "destination": "/connections/money-map",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/alerts/manage",
