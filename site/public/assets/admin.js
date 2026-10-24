@@ -34,7 +34,7 @@
   $('#signout').addEventListener('click', async () => { await api('logout', {method: 'POST'}).catch(() => {}); location.href = '/admin'; });
 
   // ---------- tabs ----------
-  const loaders = {keys: loadKeys, analytics: loadStats, logs: () => loadLogs(true), settings: loadSettings, ingestion: loadIngestion, agendas: loadAgendas, sent: loadSent, emails: loadEmails, compose: () => loadCompose(), correspondence: loadCorr};
+  const loaders = {keys: loadKeys, analytics: loadStats, logs: () => loadLogs(true), settings: loadSettings, ingestion: loadIngestion, agendas: loadAgendas, sent: loadSent, emails: loadEmails, compose: () => loadCompose(), correspondence: loadCorr, owners: loadOwners};
   function tab(name) {
     document.querySelectorAll('[role=tab][data-tab]').forEach(b => b.setAttribute('aria-selected', String(b.dataset.tab === name)));
     document.querySelectorAll('[role=tabpanel]').forEach(p => { p.hidden = p.id !== 'tab-' + name; });
@@ -768,6 +768,72 @@
   });
   ['#cr-year', '#cr-gov', '#cr-status', '#cr-pub'].forEach(s => $(s).addEventListener('change', loadCorr));
   $('#cr-q').addEventListener('input', () => { clearTimeout(crTimer); crTimer = setTimeout(loadCorr, 300); });
+
+  // ---------- business owners (private registry, api/_registry.js) ----------
+  const owUsd = n => n == null ? '—' : '$' + Number(n).toLocaleString('en-US', {maximumFractionDigits: 0});
+  const owNm = s => esc(String(s || '').replace(/\s+/g, ' ').trim());
+  const owSunbiz = doc => `https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResultDetail?inquirytype=DocumentNumber&directionType=Initial&searchTerm=${encodeURIComponent(doc)}`;
+  const OW_REV = {unreviewed: 'Unreviewed', confirmed: 'Confirmed', rejected: 'Rejected'};
+  async function loadOwners() {
+    let r;
+    try { r = await api('registry', {params: {status: $('#ow-status').value}}); }
+    catch (e) { $('#ow-tiles').innerHTML = `<div class="banner bad"><div><b>Couldn’t load the registry.</b><div class="small muted">${esc(e.message)}</div></div></div>`; return; }
+    const s = (r.load && r.load.summary) || {};
+    const rv = Object.fromEntries((r.review || []).map(x => [x.review_status, x.n]));
+    $('#ow-tiles').innerHTML = r.load ? [[fmt(s.entities), 'Registered entities'], [fmt(s.residents_on_2plus_active), 'Residents running 2+ active businesses'],
+      [`${fmt(s.matched_entities)}`, 'Businesses matched to campaign gifts'], [fmt(r.load.groups), 'Shared-owner groups'], [owUsd(s.shared_owner_dollars), 'Given by those groups'],
+      [fmt(rv.unreviewed || 0), 'Not yet reviewed'], [when(r.load.loaded_at).replace(/<[^>]+>/g, ''), 'Last loaded']]
+      .map(([v, l]) => `<div class="tile"><b>${v}</b><span>${l}</span></div>`).join('') : '<div class="banner"><div>Not loaded yet. The Sync database workflow loads it after the next push to main.</div></div>';
+    $('#ow-groups tbody').innerHTML = r.groups.map(g => `<tr>
+      <td><b>${esc(g.candidate)}</b><div class="muted small">${esc(g.office || '')}</div>${g.report_url ? `<a class="small" href="${esc(g.report_url)}" target="_blank" rel="noopener">Campaign report</a>` : ''}</td>
+      <td class="small">${g.businesses.map(b => `<div><a href="#" data-doc="${esc(b.doc_number)}">${owNm(b.entity_name)}</a> ${b.status === 'I' ? '<span class="pill">Inactive</span> ' : ''}<span class="muted">${owUsd(b.amount)}${b.dates.length ? ', ' + esc(b.dates.join(', ')) : ''}</span></div>`).join('')}</td>
+      <td class="small">${g.people.map(p => `<div><a href="#" data-person="${esc(p.person_key)}">${owNm(p.name)}</a> <span class="muted">${esc(p.city || '')}${p.resident ? '' : ', outside the county'}</span></div>`).join('')}</td>
+      <td class="num">${fmt(g.n_checks)}${g.all_at_1000 ? '<div class="muted small">all $1,000</div>' : ''}${g.same_day ? '<div class="muted small">same day</div>' : ''}</td>
+      <td class="num"><b>${owUsd(g.combined_amount)}</b></td>
+      <td><select class="sel" data-review="${esc(g.group_id)}" data-cand="${esc(g.candidate)}" aria-label="Review">${Object.entries(OW_REV).map(([k, l]) => `<option value="${k}"${k === g.review_status ? ' selected' : ''}>${l}</option>`).join('')}</select></td></tr>`).join('')
+      || '<tr><td colspan="6" class="empty">No groups.</td></tr>';
+  }
+  async function owDetail(kind, id) {
+    const box = $('#ow-detail'); box.innerHTML = '<p class="muted small">Loading…</p>';
+    try {
+      if (kind === 'person') {
+        const r = await api('registry_person', {params: {key: id}}); const p = r.person;
+        box.innerHTML = `<h3 class="h2">${owNm(p.display_name)}</h3><p class="muted small">${esc(p.city || '')} ${esc(p.zip5 || '')}${p.resident ? '' : ' (outside the county)'} · ${fmt(p.active_entities_as_officer)} active of ${fmt(p.entities_as_officer)} entities as officer · ${fmt(p.entities_as_agent)} as registered agent${p.corporate_officer ? ' · <b>corporate officer</b> (left out of groups)' : ''}${p.agent_service ? ' · <b>agent service</b>' : ''}</p>
+          <div class="tw"><table class="at" data-tt="off"><thead><tr><th>Business</th><th>Status</th><th>Role</th><th>City</th><th class="num">Matched gifts</th><th>To</th></tr></thead><tbody>${r.businesses.map(b => `<tr><td><a href="#" data-doc="${esc(b.doc_number)}">${owNm(b.name)}</a></td><td>${b.status === 'A' ? 'Active' : 'Inactive'}</td><td class="small">${esc(b.titles || '')}</td><td class="small">${esc(b.principal_city || '')}</td><td class="num">${b.gifts_total ? owUsd(b.gifts_total) : '<span class="muted">—</span>'}</td><td class="small">${esc((b.candidates || []).join(', '))}</td></tr>`).join('')}</tbody></table></div>`;
+      } else {
+        const r = await api('registry_entity', {params: {doc: id}}); const e = r.entity;
+        box.innerHTML = `<h3 class="h2">${owNm(e.name)}</h3><p class="muted small">${esc(e.doc_number)} · ${e.status === 'A' ? 'Active' : 'Inactive'} · ${esc(e.filing_type || '')} · ${esc(e.principal_city || '')} · <a href="${owSunbiz(e.doc_number)}" target="_blank" rel="noopener">Sunbiz record</a></p>
+          <div class="tw"><table class="at" data-tt="off"><thead><tr><th>Person</th><th>Role</th><th>City</th><th class="num">Active businesses</th></tr></thead><tbody>${r.people.map(p => `<tr><td><a href="#" data-person="${esc(p.person_key)}">${owNm(p.display_name)}</a>${p.agent_service ? ' <span class="pill">agent service</span>' : ''}${p.corporate_officer ? ' <span class="pill">corporate officer</span>' : ''}</td><td class="small">${esc(p.titles || '')}</td><td class="small">${esc(p.city || '')}</td><td class="num">${fmt(p.active_entities_as_officer)}</td></tr>`).join('') || '<tr><td colspan="4" class="empty">No people listed.</td></tr>'}</tbody></table></div>
+          <div class="tw" style="margin-top:10px"><table class="at" data-tt="off"><thead><tr><th>Date</th><th>Candidate</th><th>Filed as</th><th class="num">Amount</th><th>Match</th></tr></thead><tbody>${r.gifts.map(g => `<tr><td class="small">${esc(String(g.gift_date || '').slice(0, 10))}</td><td>${esc(g.candidate)}</td><td class="small">${esc(g.contributor)}</td><td class="num">${owUsd(g.amount)}</td><td class="small muted">${esc(g.match_method || '')}</td></tr>`).join('') || '<tr><td colspan="5" class="empty">No matched campaign gifts.</td></tr>'}</tbody></table></div>`;
+      }
+      box.scrollIntoView({behavior: 'smooth', block: 'start'});
+    } catch (err) { box.innerHTML = `<div class="banner bad"><div>${esc(err.message)}</div></div>`; }
+  }
+  $('#tab-owners').addEventListener('click', e => {
+    const a = e.target.closest('[data-doc],[data-person]'); if (!a) return;
+    e.preventDefault(); a.dataset.doc ? owDetail('entity', a.dataset.doc) : owDetail('person', a.dataset.person);
+  });
+  $('#ow-groups').addEventListener('change', async e => {
+    const s = e.target.closest('[data-review]'); if (!s) return;
+    s.disabled = true;
+    try { await api('registry_review', {method: 'POST', body: {group_id: s.dataset.review, candidate: s.dataset.cand, status: s.value}}); }
+    catch (err) { alert(err.message); }
+    s.disabled = false;
+  });
+  $('#ow-status').addEventListener('change', loadOwners);
+  let owTimer;
+  $('#ow-q').addEventListener('input', () => {
+    clearTimeout(owTimer);
+    owTimer = setTimeout(async () => {
+      const q = $('#ow-q').value.trim(); const box = $('#ow-results');
+      if (q.length < 3) { box.innerHTML = ''; return; }
+      try {
+        const r = await api('registry_search', {params: {q}});
+        box.innerHTML = `<div class="tw"><table class="at" data-tt="off"><tbody>${r.people.map(p => `<tr><td>Person</td><td><a href="#" data-person="${esc(p.person_key)}">${owNm(p.display_name)}</a></td><td class="small muted">${esc(p.city || '')}</td><td class="num small">${fmt(p.active_entities_as_officer)} active businesses</td></tr>`).join('')}${r.entities.map(b => `<tr><td>Business</td><td><a href="#" data-doc="${esc(b.doc_number)}">${owNm(b.name)}</a></td><td class="small muted">${esc(b.principal_city || '')}</td><td class="small">${b.status === 'A' ? 'Active' : 'Inactive'}</td></tr>`).join('') || ''}</tbody></table></div>`
+          + (r.people.length || r.entities.length ? '' : '<p class="muted small">No matches.</p>');
+      } catch (err) { box.innerHTML = `<p class="small">${esc(err.message)}</p>`; }
+    }, 300);
+  });
 
   // ---------- start ----------
   (async () => {

@@ -28,6 +28,7 @@ public enum SitePages {
         "/open-data": .native("Every dataset (Explore)"),
         "/developers": .web("API documentation for developers"),
         "/records-request": .web("records request writer"),
+        "/connections/shared-owners": .web("confirmed shared-owner groups, read live from /api/v1/datasets/shared-owner-groups"),
         "/correspondence": .web("published letters to officials, read live from /api/v1/correspondence"),
         "/alerts": .web("email alert sign-up; push alerts are planned for the app"),
         "/meetings": .native("Meetings tab"),

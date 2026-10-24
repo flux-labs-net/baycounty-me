@@ -272,6 +272,32 @@ def government_years():
     return out
 
 
+# --- Business donors matched to the state corporate registry (data/sunbiz) ----------------------------------------
+
+def business_donor_sunbiz():
+    """Business campaign contributors matched to Sunbiz entities, every county with a build. Business-level only:
+    no officer, owner or agent names and no addresses (those stay in the private registry schema)."""
+    import glob, json
+    rows = []
+    for fp in sorted(glob.glob(os.path.join(HERE, '..', 'data', 'sunbiz', '*', 'business_donor_sunbiz.json'))):
+        rows += json.load(open(fp))['rows']
+    return rows
+
+
+# Shared-owner groups: rows are written to the database by registry.publish_group() when an admin confirms a group
+# (migration 0032), not by the site build, so the published file is empty and the columns are listed here.
+SHARED_OWNER_COLUMNS = ['group_id', 'candidate', 'office', 'election', 'business', 'sunbiz_doc_number', 'business_status', 'business_amount',
+                        'business_dates', 'group_businesses', 'group_checks', 'group_total', 'all_checks_1000', 'same_day', 'shared_people',
+                        'county', 'source_url', 'campaign_report_url', 'gov_id']
+_NUM = {'business_amount', 'group_businesses', 'group_checks', 'group_total', 'shared_people'}
+DB_ONLY_COLUMNS = {'shared-owner-groups': {c: ('number' if c in _NUM else 'boolean' if c in ('all_checks_1000', 'same_day') else 'string')
+                                           for c in SHARED_OWNER_COLUMNS}}
+
+
+def shared_owner_groups():
+    return []
+
+
 DATASETS = [
     ('cra-network-payees', 'CRA network: payees', 'Every payee in the CRA ledger as one entity (businesses, governments, property owners; unnamed grant recipients grouped), with the CRAs that paid it and the counted total.', cra_network_payees),
     ('cra-network-links', 'CRA network: documented connections', 'Documented links between CRA payees that are not payments (shared project, address or subcontract), each with its source.', cra_network_links),
@@ -287,5 +313,7 @@ DATASETS = [
     ('savings-opportunities', 'Savings finder: opportunities', 'Places Bay County governments could spend less: the spending each touches, a low and high estimate with its stated assumption, the next step and the records still needed. Every figure is computed from the Accountability projects and the CRA ledger.', savings_opportunities),
     ('savings-evidence', 'Savings finder: evidence', 'The records behind each savings opportunity, one row per project or CRA ledger record: the figure, what it is compared with, the gap or share, cost per unit where one applies, and the source.', savings_evidence),
     ('government-years', 'Governments by year', 'One row per government per fiscal year: adopted budget and its status, general fund, property tax rate and levy, audited actual revenue and spending, residents, audited debt and staff count. A blank means no record for that year. fiscal_year is the year the fiscal year ends (FY2026 = Oct 2025 to Sep 2026; schools Jul to Jun).', government_years),
+    ('business-donor-sunbiz', 'Business donors in the state corporate registry', 'Each business that gave to a current officeholder or 2026 local candidate, matched to its Florida Division of Corporations (Sunbiz) record: document number, registered name, status and principal city, with the match method. Business-level only; no owner or officer names.', business_donor_sunbiz),
+    ('shared-owner-groups', 'Shared-owner campaign gifts', 'Businesses that share an officer, manager or registered agent (state corporate records) and gave to the same local candidate, one row per business. Only groups checked by hand are listed. People are not named. Each company is its own contributor under Florida law, so a group is legal when each company is a real contributor.', shared_owner_groups),
     ('tax-districts', 'Tax districts', 'Which taxing authorities levy property tax in each tax district, and the combined millage. Rates by year are in property-tax-rates (authority_id).', tax_districts),
 ]

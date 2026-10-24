@@ -20,6 +20,7 @@ from votes_page import votes_page
 from accountability_page import accountability_page
 from savings_page import savings_page
 from correspondence_page import correspondence_page
+from shared_owners_page import shared_owners_page
 from updates import updates_page, rss, last_updated, nice as nice_date
 OUT = os.path.join(ROOT, 'public')
 from place import SITE, DOMAIN, LABEL as PLACE_LABEL, EMAIL, OPERATOR, OFFICIALS, wordmark_html, governments as _place_govs
@@ -678,6 +679,8 @@ PAGES = [
     ('/public-money/contracts', 'Who gets the contracts', 'Major contracts approved by Bay County and its cities since 2022: winners, how they were awarded, change orders, emergency purchases and who the county paid most.', lambda: contracts_page(OUT)),
     ('/correspondence', 'Letters to officials',
      'Emails BayCounty.me sent to Bay County elected officials and managers, and their replies, published as public records.', lambda: correspondence_page(OUT)),
+    ('/connections/shared-owners', 'Shared-owner campaign gifts',
+     'Groups of Bay County businesses that share an owner or officer in state corporate records and each gave to the same local candidate, checked by hand. People are not named.', lambda: shared_owners_page(OUT)),
     ('/public-money/accountability', 'Accountability console: projects from budget to close-out',
      'Bay County public projects followed from first budget to close-out: approvals, contracts, change orders, votes, payments and final cost, with questions raised by published rules, missing records and each agency\'s reply.', lambda: accountability_page(OUT)),
     ('/public-money/savings', 'Savings finder: where Bay County governments could spend less',

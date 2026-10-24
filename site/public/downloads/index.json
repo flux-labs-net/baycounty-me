@@ -4315,6 +4315,282 @@
    "api": "/api/v1/datasets/government-years"
   },
   {
+   "id": "business-donor-sunbiz",
+   "title": "Business donors in the state corporate registry",
+   "description": "Each business that gave to a current officeholder or 2026 local candidate, matched to its Florida Division of Corporations (Sunbiz) record: document number, registered name, status and principal city, with the match method. Business-level only; no owner or officer names.",
+   "rows": 679,
+   "columns": [
+    {
+     "name": "contributor",
+     "type": "string"
+    },
+    {
+     "name": "candidate",
+     "type": "string"
+    },
+    {
+     "name": "office",
+     "type": "string"
+    },
+    {
+     "name": "election",
+     "type": "string",
+     "values": [
+      "2022 municipal (Apr 19, 2022)",
+      "2022 primary/general",
+      "2023 municipal (Apr 18, 2023)",
+      "2024 municipal (Apr 16, 2024)",
+      "2024 primary/general",
+      "2025 municipal (Apr 22, 2025)",
+      "2026 Municipal Super Tuesday (Apr 21, 2026)",
+      "2026 Primary/General (Aug 18 / Nov 3, 2026)",
+      "2026 primary/general (in progress)",
+      "2027 Municipal Super Tuesday (Apr 20, 2027)"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "clerk",
+      "county",
+      "cw",
+      "lh",
+      "pc",
+      "pcb",
+      "schools",
+      "sheriff",
+      "soe",
+      "sp",
+      "tax_collector"
+     ]
+    },
+    {
+     "name": "contribution_amount",
+     "type": "number"
+    },
+    {
+     "name": "contribution_items",
+     "type": "number"
+    },
+    {
+     "name": "first_date",
+     "type": "string"
+    },
+    {
+     "name": "last_date",
+     "type": "string"
+    },
+    {
+     "name": "sunbiz_doc_number",
+     "type": "string"
+    },
+    {
+     "name": "sunbiz_entity_name",
+     "type": "string"
+    },
+    {
+     "name": "sunbiz_status",
+     "type": "string",
+     "values": [
+      "Active",
+      "Inactive"
+     ]
+    },
+    {
+     "name": "sunbiz_filing_type",
+     "type": "string",
+     "values": [
+      "DOMLP",
+      "DOMP",
+      "FLAL",
+      "FORL"
+     ]
+    },
+    {
+     "name": "sunbiz_principal_city",
+     "type": "string",
+     "values": [
+      "Altamonte Springs",
+      "Callaway",
+      "Destin",
+      "Florida",
+      "Fountain",
+      "Inlet Beach",
+      "Lynn Haven",
+      "Niceville",
+      "Pamana City Beach",
+      "Panama City",
+      "Panama City Bch",
+      "Panama City Beach",
+      "Panama City Beach,",
+      "Pensacola",
+      "Southport",
+      "Tallahassee",
+      "Youngstown"
+     ]
+    },
+    {
+     "name": "match_method",
+     "type": "string",
+     "values": [
+      "exact",
+      "plural_variant",
+      "truncated_name",
+      "vendor_alias"
+     ]
+    },
+    {
+     "name": "county",
+     "type": "string",
+     "values": [
+      "bay"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "campaign_report_url",
+     "type": "string"
+    },
+    {
+     "name": "vendor_id",
+     "type": "string",
+     "values": [
+      "aaron-rich-marketing",
+      "american-sand",
+      "anderson-columbia",
+      "bay-point-billfish",
+      "bgn",
+      "charlie-coram-s-place",
+      "coastal-parasail",
+      "culpepper",
+      "cw-roberts",
+      "dag-architects",
+      "dewberry",
+      "disposal-services",
+      "ecsc",
+      "florida-architects",
+      "gcuc",
+      "grand-slam-sports-tournaments",
+      "mainline",
+      "marshall-brothers",
+      "mr-fence",
+      "panhandle-engineering",
+      "pg-environmental-fl",
+      "press-print-graphics",
+      "rj-gorman-contracting",
+      "rj-gorman-marine",
+      "roberts-and-roberts",
+      "southeastern-outdoor",
+      "timmins-consulting",
+      "tk-vandy",
+      "williams-communications"
+     ]
+    },
+    {
+     "name": "vendor_ids",
+     "type": "string"
+    },
+    {
+     "name": "person_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/business-donor-sunbiz.json",
+   "csv": "/downloads/business-donor-sunbiz.csv",
+   "api": "/api/v1/datasets/business-donor-sunbiz"
+  },
+  {
+   "id": "shared-owner-groups",
+   "title": "Shared-owner campaign gifts",
+   "description": "Businesses that share an officer, manager or registered agent (state corporate records) and gave to the same local candidate, one row per business. Only groups checked by hand are listed. People are not named. Each company is its own contributor under Florida law, so a group is legal when each company is a real contributor.",
+   "rows": 0,
+   "columns": [
+    {
+     "name": "group_id",
+     "type": "string"
+    },
+    {
+     "name": "candidate",
+     "type": "string"
+    },
+    {
+     "name": "office",
+     "type": "string"
+    },
+    {
+     "name": "election",
+     "type": "string"
+    },
+    {
+     "name": "business",
+     "type": "string"
+    },
+    {
+     "name": "sunbiz_doc_number",
+     "type": "string"
+    },
+    {
+     "name": "business_status",
+     "type": "string"
+    },
+    {
+     "name": "business_amount",
+     "type": "number"
+    },
+    {
+     "name": "business_dates",
+     "type": "string"
+    },
+    {
+     "name": "group_businesses",
+     "type": "number"
+    },
+    {
+     "name": "group_checks",
+     "type": "number"
+    },
+    {
+     "name": "group_total",
+     "type": "number"
+    },
+    {
+     "name": "all_checks_1000",
+     "type": "boolean"
+    },
+    {
+     "name": "same_day",
+     "type": "boolean"
+    },
+    {
+     "name": "shared_people",
+     "type": "number"
+    },
+    {
+     "name": "county",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "campaign_report_url",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/shared-owner-groups.json",
+   "csv": "/downloads/shared-owner-groups.csv",
+   "api": "/api/v1/datasets/shared-owner-groups"
+  },
+  {
    "id": "tax-districts",
    "title": "Tax districts",
    "description": "Which taxing authorities levy property tax in each tax district, and the combined millage. Rates by year are in property-tax-rates (authority_id).",
