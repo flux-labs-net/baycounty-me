@@ -60,7 +60,7 @@ struct GovernmentsView: View {
                     WebLink(title: "Who runs Bay County", symbol: "building.columns", url: URL(string: "https://baycounty.me/who-runs-bay-county"))
                 }
             }
-            .navigationTitle("Governments")
+            .navigationTitle("Places")
             .refreshable { await store.loadGovernments() }
             .withRoutes()
         }

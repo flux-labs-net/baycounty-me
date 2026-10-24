@@ -110,8 +110,24 @@ public struct Amendment3Model: Codable, Sendable {
     public let second: Double
     public let govs: [Gov]
     public let state: [Double]
+    /// Election day ("2026-11-03"); older files don't carry it.
+    public let vote: String?
 
     public static let fiscalYears = ["FY2028", "FY2029", "FY2030", "FY2031", "FY2032"]
+
+    /// Revenue Bay County's local governments would lose in one fiscal year (index into `fiscalYears`), state estimate.
+    public func localImpact(_ year: Int) -> Double {
+        govs.compactMap { $0.imp.indices.contains(year) ? $0.imp[year] : nil }.reduce(0, +)
+    }
+
+    /// True until the end of election day, in Bay County time.
+    public func isBeforeVote(now: Date = Date()) -> Bool {
+        guard let vote, let day = Dates.parse(vote) else { return false }
+        var cal = Calendar(identifier: .gregorian)
+        cal.timeZone = TimeZone(identifier: "America/Chicago")!
+        guard let end = cal.date(byAdding: .day, value: 1, to: cal.startOfDay(for: day)) else { return false }
+        return now < end
+    }
 }
 
 // MARK: - Address lookup tables (/data/app/address.json)

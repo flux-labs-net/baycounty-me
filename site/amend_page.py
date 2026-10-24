@@ -55,7 +55,9 @@ def amend_data():
                      'imp': [-r['impact'][k] for k in ('FY2028', 'FY2029', 'FY2030', 'FY2031', 'FY2032')]})
     govs.sort(key=lambda g: -g['imp'][1])
     data = {'districts': td['districts'], 'auth': td['auth'], 'groups': td['groups'], 'second': td['second'][L], 'govs': govs,
-            'state': [-v for v in rec['statewide'].values()]}
+            'state': [-v for v in rec['statewide'].values()],
+            # Election day, so the app can show the ballot reminder only until the vote.
+            'vote': json.load(open(os.path.join(os.path.dirname(A3), 'elections', 'candidates_2026.json')))['election_date']}
     return data
 
 

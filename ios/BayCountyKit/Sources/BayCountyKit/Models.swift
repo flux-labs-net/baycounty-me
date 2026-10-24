@@ -16,6 +16,12 @@ public enum Governments {
         "parker": "Parker City Council", "mb": "Mexico Beach City Council",
     ]
 
+    /// Two letters for a government's badge.
+    public static func initials(_ govID: String) -> String {
+        let known = ["county": "BC", "schools": "SB", "pc": "PC", "pcb": "PB", "lh": "LH", "cw": "CW", "sp": "SP", "parker": "PK", "mb": "MB"]
+        return known[govID] ?? String(govID.prefix(2)).uppercased()
+    }
+
     /// Meeting board id ("lh-cra", "county-planning", "pc") to a readable name.
     public static func boardName(_ board: String) -> String {
         if let known = boards[board] { return known }
@@ -89,6 +95,31 @@ public struct Meeting: Identifiable, Hashable, Sendable {
     public var isExpected: Bool { row.bool("expected") ?? false }
     public var agendaItems: [String] { row.strings("agenda_items") + row.strings("items") }
 
+    /// Agenda items that mention money (`items`), with the first dollar amount in each title.
+    public var moneyItems: [AgendaItem] {
+        (row["items"]?.arrayValue ?? []).compactMap { v -> AgendaItem? in
+            guard case .object(let o) = v, let t = o["title"]?.stringValue, !t.isEmpty else { return nil }
+            return AgendaItem(title: t, amount: o["amount"]?.stringValue.flatMap(AgendaItem.parseAmount))
+        }
+    }
+
+    /// Every agenda item, each with its dollar amount when the money list has one. Falls back to the money list
+    /// when the full agenda wasn't read.
+    public var agenda: [AgendaItem] {
+        let money = moneyItems
+        let titles = row.strings("agenda_items").filter { !AgendaItem.isProcedural($0) }
+        guard !titles.isEmpty else { return money }
+        var amounts: [String: Double] = [:]
+        for m in money { if let a = m.amount { amounts[AgendaItem.key(m.title)] = a } }
+        var out = titles.map { AgendaItem(title: $0, amount: amounts[AgendaItem.key($0)]) }
+        let seen = Set(out.map { AgendaItem.key($0.title) })
+        out += money.filter { $0.amount != nil && !seen.contains(AgendaItem.key($0.title)) }
+        return out
+    }
+
+    /// Dollars in the agenda's money items.
+    public var moneyTotal: Double { moneyItems.compactMap(\.amount).reduce(0, +) }
+
     public var whenText: String {
         guard let start else { return "Date not set" }
         return Dates.display(start, hasTime: hasTime)
@@ -101,6 +132,70 @@ public struct Meeting: Identifiable, Hashable, Sendable {
             return s >= Calendar(identifier: .gregorian).startOfDay(for: now) || (m.hasTime && s >= now)
         }
         .sorted { ($0.start ?? .distantFuture) < ($1.start ?? .distantFuture) }
+    }
+}
+
+/// One item on a meeting agenda.
+public struct AgendaItem: Identifiable, Hashable, Sendable {
+    public enum Kind: String, CaseIterable, Identifiable, Sendable {
+        case spending, hearing, other
+        public var id: String { rawValue }
+        public var label: String {
+            switch self { case .spending: "Spending"; case .hearing: "Public hearing"; case .other: "Business" }
+        }
+    }
+
+    public let title: String
+    public let amount: Double?
+    public init(title: String, amount: Double?) { self.title = title; self.amount = amount }
+    public var id: String { title }
+
+    private static let hearingWords = try! NSRegularExpression(
+        pattern: #"\b(ordinance|public hearing|rezon\w*|zoning|land use|quasi|variance|special exception|annex\w*|comprehensive plan)\b"#,
+        options: [.caseInsensitive])
+
+    public var kind: Kind {
+        if amount != nil { return .spending }
+        let r = NSRange(title.startIndex..., in: title)
+        return Self.hearingWords.firstMatch(in: title, range: r) != nil ? .hearing : .other
+    }
+
+    private static let lead = try! NSRegularExpression(
+        pattern: #"^(discussion,? and )?(consideration|request)(,? (and )?possible)?(,? and)?( approval)?(,? approval,? and authorization)?( of| to| for)?( the)?( approval( of| for)?| approve| award of)?[\s,:]*"#,
+        options: [.caseInsensitive])
+
+    /// The title without "Consideration of approval of…" and the trailing period, for scanning.
+    public var shortTitle: String {
+        var t = title.trimmingCharacters(in: .whitespaces)
+        let r = NSRange(t.startIndex..., in: t)
+        let cut = Self.lead.stringByReplacingMatches(in: t, range: r, withTemplate: "")
+        if cut.count >= 8 { t = cut.prefix(1).uppercased() + cut.dropFirst() }
+        if t.hasSuffix(".") { t.removeLast() }
+        return t
+    }
+
+    private static let procedural = try! NSRegularExpression(
+        pattern: #"^(agenda\b|opening prayer|invocation|pledge|audience participation|public (comment|participation)|motion to adjourn|adjourn)"#,
+        options: [.caseInsensitive])
+
+    /// Section headings ("Consent Agenda", "City Manager") and procedural steps, which the agenda list leaves out.
+    public static func isProcedural(_ t: String) -> Bool {
+        if t.split(separator: " ").count <= 4 { return true }
+        return procedural.firstMatch(in: t, range: NSRange(t.startIndex..., in: t)) != nil
+    }
+
+    /// "$6,173,449.43" -> 6173449.43
+    public static func parseAmount(_ s: String) -> Double? {
+        let digits = s.filter { $0.isNumber || $0 == "." }
+        guard let v = Double(digits), v > 0 else { return nil }
+        let lower = s.lowercased()
+        if lower.contains("million") || lower.hasSuffix("m") { return v * 1_000_000 }
+        return v
+    }
+
+    /// Matches an item between the full agenda and the money list (titles can differ in spacing and the last period).
+    static func key(_ t: String) -> String {
+        String(t.lowercased().filter { $0.isLetter || $0.isNumber }.prefix(80))
     }
 }
 
