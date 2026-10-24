@@ -4,6 +4,9 @@ the site's records.
 Inputs (per county)
   data/nonprofits/<county>/*.csv.gz   from fetch_irs.py: IRS master file rows, 990-N postcards, 990 returns, their
                                       officer/director lists and Schedule I grants
+  data/nonprofits/<county>/fdacs_*.csv.gz
+                                      from fetch_fdacs.py: Florida charitable solicitation registrations (FDACS
+                                      Check-A-Charity) with their financial summary and officers and directors
   data/sunbiz/<county>/*.csv.gz       Sunbiz nonprofit corporations and their officers (build_sunbiz.py)
   data/entities/people.json           elected officials, department leaders and 2026 candidates
   data/entities/records.py            every payment record on the site (contracts, registers, CRA ledger ...)
@@ -13,8 +16,11 @@ Steps
      principal address is in the county and that is active (or recognized by the IRS). IRS and Sunbiz records join on
      the EIN the corporation lists with the state, then on an exact name match. An EIN whose IRS address is outside the
      county (a national parent's group exemption) is not joined: the local corporation stays a state-only record.
+     Florida charity registrations (FDACS) join on the FEIN, then on an exact name (or DBA) match. A registration with a
+     county address that matches neither becomes its own record (np-fd-<registration number>).
   2. Board seats. Officers and directors from each 990 / 990-EZ / 990-PF return (every year on file), the officers in
-     the Sunbiz file (latest annual report) and the principal officer on a 990-N postcard. Paid staff who are not
+     the Sunbiz file (latest annual report), the principal officer on a 990-N postcard and the officers and directors
+     on the FDACS charity registration. Paid staff who are not
      officers or directors (key employees, highest paid) are kept with their role, not counted as board.
   3. Board people. Seats are grouped into one person by last + first name (and middle initial when two differ) across
      the county. Each person is checked against people.json (officials, department leaders, candidates) and against the
@@ -62,6 +68,7 @@ POST_TITLE = re.compile(r'\s+(PRESIDENT|VICE PRESIDENT|TREASURER|SECRETARY|DIREC
 IN_NAME_TITLE = re.compile(r'\b(MAYOR|COMMISSIONER|COUNCILMAN|COUNCILWOMAN|CHAIRMAN|CHAIR|PRESIDENT|PRES|DIRECTOR|DIR|LDR|LEADER|SUPT|SHERIFF|JUDGE|TRUSTEE)\b\.?')
 BOARD_ROLES = {'director', 'institutional_trustee', 'officer'}
 PROPUBLICA = 'https://projects.propublica.org/nonprofits/organizations/'
+FDACS_URL = 'https://csapp.fdacs.gov/CSPublicApp/CheckACharity/CheckACharity.aspx'
 SUNBIZ_URL = 'https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResultDetail?inquirytype=DocumentNumber&directionType=Initial&searchTerm='
 
 
@@ -179,15 +186,84 @@ def organizations(county_key, entities):
         if dn in used_docs or not e['in_county_principal'] or e['status'] != 'A':
             continue
         orgs['np-sb-' + dn.lower()] = {'irs': None, 'sunbiz': e, 'ein': '', 'doc_number': dn, 'filings': [], 'postcard': None}
+    attach_fdacs(orgs, county_key)
     for oid, o in orgs.items():
         o['id'] = oid
-        r, e = o['irs'], o['sunbiz']
+        r, e, fd = o['irs'], o['sunbiz'], o.get('fdacs')
         latest = o['filings'][-1] if o['filings'] else None
         o['latest'] = latest
-        o['name'] = (r['NAME'] if r else e['name']).strip()
-        o['city'] = city_name(r['CITY'] if r else e['city'])
-        o['zip'] = ((r['ZIP'] if r else e['zip5']) or '')[:5]
+        o['name'] = (r['NAME'] if r else e['name'] if e else fd['name']).strip()
+        o['city'] = city_name(r['CITY'] if r else e['city'] if e else fd['city'])
+        o['zip'] = ((r['ZIP'] if r else e['zip5'] if e else fd['zip']) or '')[:5]
         o['key'] = sb.biz_key(o['name'])
+    return orgs
+
+
+def _iso(s):
+    """'2026-06-30', '06/30/2026' or '6/30/26' -> '2026-06-30' (None when it isn't a date)."""
+    s = (s or '').strip()
+    if re.match(r'^\d{4}-\d{2}-\d{2}', s):
+        return s[:10]
+    m = re.match(r'^(\d{1,2})/(\d{1,2})/(\d{2}|\d{4})$', s)
+    if m:
+        y = int(m.group(3))
+        y = y + 2000 if y < 70 else y + 1900 if y < 100 else y
+        return f'{y:04d}-{int(m.group(1)):02d}-{int(m.group(2)):02d}'
+    return None
+
+
+def fdacs_rows(county_key):
+    """Registrations (latest one per registration number) and their officers, from fetch_fdacs.py."""
+    d = os.path.join(HERE, county_key)
+    regs = {}
+    for r in _rows(os.path.join(d, 'fdacs_registrations.csv.gz')):
+        n = (r.get('registration_number') or '').strip().upper()
+        if not n:
+            continue
+        r['registration_number'] = n
+        r['fein'] = re.sub(r'\D', '', r.get('fein') or '')
+        r['fein'] = r['fein'] if len(r['fein']) == 9 else ''
+        r['name'] = ' '.join((r.get('name') or '').split())
+        r['city'] = r.get('city') or ''
+        r['zip'] = (r.get('zip') or '')[:5]
+        if n not in regs or (r.get('fetched_at') or '') >= (regs[n].get('fetched_at') or ''):
+            regs[n] = r
+    offs = collections.defaultdict(list)
+    for r in _rows(os.path.join(d, 'fdacs_officers.csv.gz')):
+        n = (r.get('registration_number') or '').strip().upper()
+        if n in regs and (r.get('name') or '').strip():
+            offs[n].append(r)
+    return regs, offs
+
+
+def attach_fdacs(orgs, county_key):
+    """Give each organization its FDACS charity registration: same FEIN, else the same name or DBA (only when one
+    organization has it). Registrations that match nothing are added as their own organizations."""
+    regs, offs = fdacs_rows(county_key)
+    by_ein = {o['ein']: oid for oid, o in orgs.items() if o['ein']}
+    by_key = collections.defaultdict(set)
+    for oid, o in orgs.items():
+        for nm in filter(None, [(o['irs'] or {}).get('NAME'), (o['sunbiz'] or {}).get('name')]):
+            by_key[sb.biz_key(nm)].add(oid)
+    # active registrations first, so an organization with an old lapsed registration and a current one keeps the current
+    for n, r in sorted(regs.items(), key=lambda kv: ((kv[1].get('status') or '').lower() != 'active', kv[0])):
+        oid, how = by_ein.get(r['fein']), 'fein'
+        if not oid:
+            how = 'name'
+            for nm in filter(None, [r['name'], r.get('dba')]):
+                hit = by_key.get(sb.biz_key(nm))
+                if hit and len(hit) == 1:
+                    oid = next(iter(hit))
+                    break
+        if oid and orgs[oid].get('fdacs'):
+            orgs[oid].setdefault('fdacs_other', []).append(n)
+            continue
+        if not oid:
+            oid, how = 'np-fd-' + n.lower(), 'new'
+            orgs[oid] = {'irs': None, 'sunbiz': None, 'ein': r['fein'], 'doc_number': '', 'filings': [], 'postcard': None}
+        orgs[oid]['fdacs'] = r
+        orgs[oid]['fdacs_join'] = how
+        orgs[oid]['fdacs_officers'] = offs.get(n, [])
     return orgs
 
 
@@ -240,6 +316,17 @@ def seats(orgs, roles, people, county_key):
                 out.append({'nonprofit_id': oid, 'source': 'irs_990n', 'raw_name': p['principal_officer'].strip(), 'name': nm, 'title': 'Principal officer',
                             'tax_year': _int(p['tax_year']), 'board': True, 'roles': 'officer', 'hours': None, 'compensation': None, 'object_id': None,
                             'registry_person_key': None, 'source_url': PROPUBLICA + o['ein']})
+        fd = o.get('fdacs')
+        for r in o.get('fdacs_officers') or []:
+            nm = person_name(r['name'])
+            if not nm:
+                continue
+            yr = (_iso(fd.get('fiscal_year_end')) or _iso(fd.get('registration_date')) or (fd.get('fetched_at') or ''))[:4]
+            title = (r.get('title') or '').strip()
+            out.append({'nonprofit_id': oid, 'source': 'fdacs', 'raw_name': ' '.join(r['name'].split()), 'name': nm,
+                        'title': (title.title() if title.isupper() else title) or 'Officer or director', 'tax_year': int(yr) if yr.isdigit() else None,
+                        'board': True, 'roles': 'officer', 'hours': None, 'compensation': None, 'object_id': None, 'registry_person_key': None,
+                        'source_url': fd.get('detail_url') or FDACS_URL})
     # a seat is current when it is on the organization's latest filing of its kind
     latest = {}
     for s in out:
@@ -248,6 +335,9 @@ def seats(orgs, roles, people, county_key):
     for s in out:
         k = (s['nonprofit_id'], s['source'] if s['source'] not in ('irs_990ez', 'irs_990pf') else 'irs_990')
         s['current'] = (s['tax_year'] or 0) == latest[k]
+        if s['source'] == 'fdacs':  # officers on a lapsed or withdrawn registration are not a current board
+            st = (orgs[s['nonprofit_id']]['fdacs'].get('status') or '').lower()
+            s['current'] = s['current'] and st in ('active', 'registered')
     return out
 
 
@@ -502,6 +592,7 @@ def org_row(o, res, gov_names):
                     shared.add(s['nonprofit_id'])
     given, got = ix['given'][o['id']], ix['got'][o['id']]
     gd = o.get('gift_docs') or {}
+    fd = o.get('fdacs') or {}
     ntee = (r.get('NTEE_CD') or '').strip()
     return {
         'nonprofit_id': o['id'], 'name': o['name'], 'ein': o['ein'] or None, 'sunbiz_doc_number': o['doc_number'] or None,
@@ -523,7 +614,12 @@ def org_row(o, res, gov_names):
         'grants_given_count': len(given), 'grants_given_cash': round(sum(g['cash'] or 0 for g in given), 2) or None,
         'grants_from_local_nonprofits': round(sum(g['cash'] or 0 for g in got), 2) or None,
         'campaign_gifts_total': round(gd.get('amount', 0), 2) or None, 'campaign_gift_candidates': ', '.join(sorted(gd.get('candidates', []))) or None,
-        'source_url': (PROPUBLICA + o['ein']) if o['ein'] else (SUNBIZ_URL + o['doc_number']),
+        'fdacs_registration': fd.get('registration_number'), 'fdacs_status': fd.get('status') or None,
+        'fdacs_expires': _iso(fd.get('expiration_date')), 'fdacs_fiscal_year_end': _iso(fd.get('fiscal_year_end')),
+        'fdacs_revenue': _num(fd.get('total_revenue')), 'fdacs_program_expenses': _num(fd.get('program_expenses')),
+        'fdacs_fundraising_expenses': _num(fd.get('fundraising_expenses')), 'fdacs_management_expenses': _num(fd.get('management_expenses')),
+        'fdacs_url': (fd.get('detail_url') or FDACS_URL) if fd else None,
+        'source_url': (PROPUBLICA + o['ein']) if o['ein'] and o['irs'] else (SUNBIZ_URL + o['doc_number']) if o['doc_number'] else (fd.get('detail_url') or FDACS_URL),
         'sunbiz_url': (SUNBIZ_URL + o['doc_number']) if o['doc_number'] else None,
     }
 
@@ -543,10 +639,43 @@ def public(res):
                'purpose': g['purpose'], 'county': res['county'],
                'source_url': f"https://gt990datalake-rawdata.s3.amazonaws.com/EfileData/XmlFiles/{g['object_id']}_public.xml"} for g in res['grants']
               if g['grantor_id']]  # recipients' grants from outside the county are in the private tables only
-    return orgs, pays, grants, board_rows(res), business_rows(res)
+    return orgs, pays, grants, board_rows(res), business_rows(res), registration_rows(res)
 
 
-SOURCE_LABEL = {'irs_990': 'IRS 990', 'irs_990ez': 'IRS 990-EZ', 'irs_990pf': 'IRS 990-PF', 'irs_990n': 'IRS 990-N', 'sunbiz': 'State filing'}
+def _pct(part, whole):
+    return round(100 * part / whole, 1) if part is not None and whole else None
+
+
+def registration_rows(res):
+    """One row per FDACS charity registration with a county address: status, dates, the financial summary the charity
+    reported to the state, its fundraising consultants (firms) and how many officers and directors it lists."""
+    rows = []
+    for o in res['orgs'].values():
+        regs = [o['fdacs']] if o.get('fdacs') else []
+        for fd in regs:
+            rev, prog, fr, mg = (_num(fd.get(k)) for k in ('total_revenue', 'program_expenses', 'fundraising_expenses', 'management_expenses'))
+            tot = _num(fd.get('total_expenses'))
+            if tot is None and any(v is not None for v in (prog, fr, mg)):
+                tot = sum(v or 0 for v in (prog, fr, mg))
+            rows.append({'registration_number': fd['registration_number'], 'nonprofit_id': o['id'], 'name': fd['name'] or o['name'],
+                         'dba': fd.get('dba') or None, 'fein': fd['fein'] or None, 'matched_by': o.get('fdacs_join'),
+                         'status': fd.get('status') or None, 'status_detail': fd.get('status_detail') or None,
+                         'registration_date': _iso(fd.get('registration_date')), 'expiration_date': _iso(fd.get('expiration_date')),
+                         'city': city_name(fd.get('city')) or None, 'zip': fd['zip'] or None, 'website': fd.get('website') or None,
+                         'fiscal_year_end': _iso(fd.get('fiscal_year_end')), 'total_revenue': rev, 'contributions': _num(fd.get('contributions')),
+                         'government_grants': _num(fd.get('government_grants')), 'program_expenses': prog, 'fundraising_expenses': fr,
+                         'management_expenses': mg, 'total_expenses': tot,
+                         'program_percent': (_num(fd.get('program_percent')) if fd.get('program_percent') else _pct(prog, tot)) if tot else None,
+                         'fundraising_percent': _pct(fr, tot),
+                         'fundraising_consultants': '; '.join(x.strip() for x in (fd.get('fundraising_consultants') or '').split(';') if x.strip()) or None,
+                         'officers_listed': len(o.get('fdacs_officers') or []), 'other_registrations': ', '.join(o.get('fdacs_other', [])) or None,
+                         'county': res['county'], 'source_url': fd.get('detail_url') or FDACS_URL})
+    rows.sort(key=lambda r: (-(r['total_revenue'] or 0), r['name']))
+    return rows
+
+
+SOURCE_LABEL = {'irs_990': 'IRS 990', 'irs_990ez': 'IRS 990-EZ', 'irs_990pf': 'IRS 990-PF', 'irs_990n': 'IRS 990-N', 'sunbiz': 'State filing',
+                'fdacs': 'FDACS charity registration'}
 
 
 def board_rows(res):
@@ -611,6 +740,10 @@ def summary(res):
         'linked_to_donor_businesses': sum(1 for p in P.values() if p['n_donor_businesses']),
         'payment_records': len(res['payments']), 'nonprofits_paid': len({p['nonprofit_id'] for p in res['payments']}),
         'grants': len(res['grants']),
+        'fdacs_registrations': sum(1 for o in res['orgs'].values() if o.get('fdacs')),
+        'fdacs_joined_by_fein': sum(1 for o in res['orgs'].values() if o.get('fdacs_join') == 'fein'),
+        'fdacs_joined_by_name': sum(1 for o in res['orgs'].values() if o.get('fdacs_join') == 'name'),
+        'fdacs_only': sum(1 for o in res['orgs'].values() if o.get('fdacs_join') == 'new'),
     }
 
 
@@ -620,13 +753,16 @@ def main():
         print(f'nonprofits: no IRS data for {key} (run fetch_irs.py)')
         return
     res = build(key)
-    orgs, pays, grants, board, biz = public(res)
+    orgs, pays, grants, board, biz, regs = public(res)
     out = {'as_of': datetime.date.today().isoformat(), 'county': key,
            'method': ('Organizations recognized by the IRS with an address in ' + county(key)['name'] + ' (EO Business Master File), plus active Florida '
                       'nonprofit corporations (Sunbiz) with a principal address there. Financials are from the latest 990, 990-EZ or 990-PF e-filed with the IRS; '
                       'government payment records are matched by exact name. Board members are the officers, directors, trustees and key employees '
-                      'listed on IRS returns, 990-N postcards and state filings, grouped by name across boards. Built by data/nonprofits/build_nonprofits.py.'),
-           'summary': summary(res), 'nonprofits': orgs, 'payments': pays, 'grants': grants, 'board_members': board, 'board_businesses': biz}
+                      'listed on IRS returns, 990-N postcards, state corporate filings and Florida charity registrations (FDACS), grouped by name '
+                      'across boards. Charity registrations are the county\'s registrations in the FDACS Check-A-Charity database, with the financial '
+                      'summary each charity reported to the state. Built by data/nonprofits/build_nonprofits.py.'),
+           'summary': summary(res), 'nonprofits': orgs, 'payments': pays, 'grants': grants, 'board_members': board, 'board_businesses': biz,
+           'charity_registrations': regs}
     json.dump(out, open(os.path.join(HERE, key, 'nonprofits.json'), 'w'), indent=1, ensure_ascii=False, default=str)
     print('nonprofits:', json.dumps(summary(res)))
 

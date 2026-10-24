@@ -135,6 +135,8 @@ public struct DatasetSpec: Sendable {
                                     badge: "record_type", filters: ["payer", "record_type"], page: "connections/nonprofits"),
         "nonprofit-grants": .init(.accountability, "gift", title: ["recipient"], subtitle: ["grantor", "purpose"], amount: ["cash"],
                                   filters: ["grantor", "tax_year"], page: "connections/nonprofits"),
+        "charity-registrations": .init(.accountability, "checkmark.seal", title: ["name"], subtitle: ["status", "city"], detail: "fiscal_year_end",
+                                       amount: ["total_revenue"], badge: "status", filters: ["status", "city"], page: "connections/nonprofits"),
         "nonprofit-officials": .init(.accountability, "person.crop.square", title: ["official"], subtitle: ["nonprofit", "titles"],
                                      badge: "sources", filters: ["official", "nonprofit"], page: "connections/nonprofits"),
         "official-businesses": .init(.elections, "briefcase", title: ["business"], subtitle: ["official", "official_role"],
