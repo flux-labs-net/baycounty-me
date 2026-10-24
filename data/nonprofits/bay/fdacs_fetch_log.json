@@ -1,0 +1,19 @@
+{
+  "fetched_at": "2026-10-24",
+  "county": "Bay",
+  "listing_results": 218,
+  "details_fetched": 218,
+  "errors": [
+    "https://csapp.fdacs.gov/CSPublicApp/CheckACharity/CheckACharity.aspx <urlopen error _ssl.c:993: The handshake operation timed out>"
+  ],
+  "seconds_between_requests": 3.0,
+  "notes": [
+    "One TLS handshake timeout during the run was retried successfully; all 218 records fetched.",
+    "Listing: Business License Lookup, program CH, all statuses. registration_date is the \"Issued\" date shown there (the current registration period start, not the first registration).",
+    "Financials: Check-A-Charity latest report; management_expenses is its \"Administrative Expenses\"; fiscal_year_end is the period end shown after \"Revenue Source\". The page shows one year only.",
+    "Not shown on the public pages: FEIN, website, contributions, government grants, officers. Officers and directors appear only inside uploaded application PDFs, which are not downloaded.",
+    "detail_url is the Check-A-Charity search page (records have no direct link; search the registration number).",
+    "Street and email addresses are read but never stored.",
+    "Check-A-Charity section captions seen: {'Statement Of Purpose': 178, 'Uploaded Documents': 178, 'Branches': 7, 'Solicitors': 1}"
+  ]
+}
