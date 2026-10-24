@@ -40,7 +40,16 @@ About 700 mentions of Bay County live in page copy, data paths and the API. The 
    `place.json`, so a page only builds where its data exists.
 4. **Database and API by place.** Add a `place_id` column to every dataset table (a migration plus `load.py`),
    and accept `?place=fl-bay` on `/api/v1` with Bay County as the default so current clients keep working.
-5. **Address lookups by place.** Each county's parcel and district map servers go in `place.json`.
+5. **Address lookups by place.** Start from the statewide parcel layer, then add county map servers only where it
+   falls short. [Florida Statewide Parcels](https://www.arcgis.com/home/item.html?id=efa909d6b1c841d298b0a649e7f71cf2)
+   (FloridaGIO, from DOR's yearly collection of all 67 property appraisers' files joined to the NAL roll) is one
+   public feature service:
+   `https://services9.arcgis.com/Gh9awoU677aKree0/arcgis/rest/services/Florida_Statewide_Cadastral/FeatureServer/0`.
+   Useful fields: `CO_NO` (county), `PARCEL_ID`, `PHY_ADDR1`/`PHY_CITY`/`PHY_ZIPCD` (search), `TAX_AUTH_C` (taxing
+   district, which picks the millage stack), `JV`/`AV_SD`/`TV_SD`/`TV_NSD` (just, assessed and taxable values),
+   `JV_HMSTD` (homestead), `DOR_UC` (land use), `ASMNT_YR`. Query returns up to 2,000 records per call.
+   Privacy: never show `OWN_*` or `FIDU_*` (owner names and mailing addresses); request only the fields above.
+   Each county's district layers (commission, school board, city wards) still go in `place.json`.
 6. **Hosting.** Two options, to decide before the second county ships:
    - one site per county (e.g. a domain per county, same code, `PLACE` set per Vercel project), or
    - one statewide site with each county under a path (e.g. `/fl/bay/...`) and a state landing page.
