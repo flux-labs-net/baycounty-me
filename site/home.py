@@ -57,91 +57,152 @@ def topics(s):
     ]
 
 
+# ---- Home page (2026 redesign): start with your bill, then follow the money ----
+
+AREA_SHORT = {'Panama City - Downtown DIB': 'Downtown Panama City', 'unincorporated': 'Unincorporated',
+              'unincorporated - beach area': 'Unincorporated beach'}
+DEFAULT_AREA = 'Lynn Haven'
+DEFAULT_VALUE = 200000
+
+
+def bill_data():
+    """Rates by taxing authority and the stack each area pays, latest tax year (tax/millage.json via tax_page).
+    The same numbers are in the property-tax-rates and tax-districts datasets."""
+    from tax_page import build_data, FY
+    td = build_data()
+    i = len(td['years']) - 1
+    used = {a for d in td['districts'] for a in d['stack']}
+    auth = {a: {'n': v['n'], 'g': v['g'], 'm': v['m'][i]} for a, v in td['auth'].items() if a in used}
+    areas = [{'id': d['id'], 'n': AREA_SHORT.get(d['id'], d['label']), 'stack': d['stack'], 't': d['total'][i]} for d in td['districts']]
+    return {'year': td['years'][i], 'fy': FY[i], 'auth': auth, 'areas': areas, 'value': DEFAULT_VALUE, 'area': DEFAULT_AREA}
+
+
+def money_data():
+    """Small breakdowns for the follow-the-money tiles."""
+    from govs import GOVS
+    mi = _j('michael', 'michael.json')
+    cats = sorted(mi['fema_pa']['by_category'], key=lambda c: -c['federal_obligated'])
+    da = _j('debt_audit', 'debt_audit.json')
+    short = lambda name: next((g['short'] for g in GOVS if g['debt'] and name.startswith(g['debt'])), name.split(' (')[0])
+    debt = sorted(((short(x['government']), x['total_debt']) for x in da['debt'] if x['total_debt']), key=lambda r: -r[1])
+    return {'fema': [(c['description'], c['federal_obligated']) for c in cats], 'debt': debt}
+
+
+def _money(v):
+    return f'${round(v):,}'
+
+
+def _bars(rows, colors):
+    top = rows[0][1]
+    return ''.join(f'<span style="height:{max(4, v / top * 100):.0f}%;background:var({colors[min(k, len(colors) - 1)]})" title="{html.escape(n)}: {M(v)}"></span>'
+                   for k, (n, v) in enumerate(rows[:5]))
+
+
 def home_page():
     s = stats()
     from updates import CHANGES, nice
-    news = ''.join(f'<li><span class="tl-d">{nice(c["date"])}</span><span><a href="{c["pages"][0]}"><b>{html.escape(c["title"])}</b></a> {html.escape(c["text"])}</span></li>' for c in CHANGES[:4])
-    election = date.today() <= date(2026, 11, 3)
-    topics_ = topics(s)
-    cards = ''.join(f'''<a class="topic" href="{u}"><span class="eyebrow">{e}</span><h3>{h}</h3><p>{p}</p><span class="t-stat"><b>{v}</b> {l}</span></a>''' for u, e, h, p, v, l in topics_)
     from govs import GOVS
-    GOVCHIPS = ''.join(f'<a href="/governments/{g["slug"]}">{html.escape(g["short"])}</a>' for g in GOVS)
-    return f'''<div class="page home">
-  <section class="hero">
-    <span class="eyebrow">Bay County, Florida</span>
-    <h1>Local government, in plain view.</h1>
-    <p class="lede">Maps, money and the public records behind them, for Panama City, Panama City Beach, Lynn Haven, Callaway, Springfield, Parker, Mexico Beach and the rest of Bay County. Every figure links to its source.</p>
-    <form class="home-search" action="/my-address/" method="get" role="search">
-      <label for="hq">Look up your address</label>
-      <div><input id="hq" name="q" type="search" placeholder="e.g. 825 Ohio Ave" autocomplete="off"><button type="submit">Look up</button></div>
-      <small class="muted">Your tax estimate, who represents you, your schools, flood zone and more.</small>
-    </form>
-  </section>
-
-  <section class="section" aria-labelledby="nums">
-    <div class="sec-hd"><h2 id="nums">Bay County by the numbers</h2><span class="muted">From the latest public records</span></div>
-    <div class="numbers">
-      <a href="/public-money/tax-dollars"><b>{M(s['lv_tot'])}</b><span>property tax levied by all local governments, FY2026</span></a>
-      <a href="/public-money/tax-dollars"><b>{s['school_share']:.0%}</b><span>of that goes to the schools</span></a>
-      <a href="/public-money/hurricane-michael"><b>{M(s['fema'], 0)}</b><span>in FEMA money to rebuild after Hurricane Michael</span></a>
-      <a href="/public-money/debt"><b>{M(s['debt'])}</b><span>owed by the county, schools, cities and authorities</span></a>
-      <a href="/public-money/tourist-tax"><b>{M(s['bt25'])}</b><span>bed tax paid by visitors in FY2025</span></a>
+    from place import NAME
+    b = bill_data()
+    md = money_data()
+    election = date.today() <= date(2026, 11, 3)
+    area = next(a for a in b['areas'] if a['id'] == b['area'])
+    val = b['value']
+    # server-rendered first state; home.js redraws on every change
+    lines = ''.join(
+        f'<li class="g-{b["auth"][a]["g"]}"><span class="rl-n"><i></i>{html.escape(b["auth"][a]["n"])}</span>'
+        f'<span class="rl-m">{b["auth"][a]["m"]:.4f}</span><span class="rl-v">{_money(b["auth"][a]["m"] * val / 1000)}</span></li>'
+        for a in area['stack'])
+    segs = ''.join(f'<span class="g-{b["auth"][a]["g"]}" style="flex:{b["auth"][a]["m"]}"></span>' for a in area['stack'])
+    chips = ''.join(f'<button type="button" data-area="{html.escape(a["id"])}" aria-pressed="{"true" if a["id"] == b["area"] else "false"}">{html.escape(a["n"])}</button>'
+                    for a in b['areas'])
+    tmax = max(a['t'] for a in b['areas'])
+    ranked = ''.join(
+        f'<li{" class=on" if a["id"] == b["area"] else ""}><button type="button" data-area="{html.escape(a["id"])}"><span class="cb-n">{html.escape(a["n"])}</span>'
+        f'<span class="cb-t"><span style="width:{a["t"] / tmax * 100:.1f}%"></span></span><span class="cb-v">{_money(a["t"] * val / 1000)}</span></button></li>'
+        for a in sorted(b['areas'], key=lambda a: -a['t']))
+    news = ''.join(f'<li><span class="hn-d">{nice(c["date"])}</span><a href="{c["pages"][0]}">{html.escape(c["title"])}</a></li>' for c in CHANGES[:4])
+    govchips = ''.join(f'<a href="/governments/{g["slug"]}">{html.escape(g["short"])}</a>' for g in GOVS)
+    fema_bars = _bars(md['fema'], ['--navy', '--blue', '--blue', '--bar', '--bar'])
+    debt_bars = _bars(md['debt'], ['--salmon', '--salmon', '--gold', '--gold', '--bar'])
+    data = json.dumps(b, separators=(',', ':'))
+    return f'''<div class="page home h-home">
+  <section class="h-hero" aria-labelledby="h1">
+    <div class="h-intro">
+      <span class="eyebrow">Step 1 · What you pay</span>
+      <h1 id="h1">Your money.<br>Their decisions.<br><span class="hl">Follow it.</span></h1>
+      <p class="lede">Start with your tax bill, then follow the spending, the debt and the audits for {html.escape(NAME)}. Every figure links to its source.</p>
+      <div class="h-ctl">
+        <span class="h-lbl" id="areaLbl">Where you live</span>
+        <div class="h-chips" role="group" aria-labelledby="areaLbl">{chips}</div>
+        <label class="h-lbl h-val" for="hVal"><span>Taxable value</span><output id="hValOut" for="hVal">{_money(val)}</output></label>
+        <input id="hVal" type="range" min="50000" max="600000" step="10000" value="{val}">
+      </div>
     </div>
-  </section>
 
-  <section class="section" aria-labelledby="govs">
-    <div class="sec-hd"><h2 id="govs">Pick your government</h2><a class="muted" href="/compare">Compare them side by side</a></div>
-    <nav class="gov-chips" aria-label="Governments">{GOVCHIPS}</nav>
-  </section>
-
-  <section class="section" aria-labelledby="inv">
-    <div class="sec-hd"><h2 id="inv">Take part</h2><span class="muted">Tools for following and asking</span></div>
-    <div class="tools">
-      <a href="/meetings"><b>Upcoming meetings</b><span>When every board meets, with agendas and the money items on them. Add them to your calendar.</span></a>
-      <a href="/elections"><b>2026 elections</b><span>Who's running, what they say they'll do, and where their campaign money comes from.</span></a>
-      <a href="/records-request"><b>Request a record</b><span>Write a Florida public records request in a minute.</span></a>
-      <a href="/public-money/campaign-money"><b>Campaign money</b><span>Who funds local officials' campaigns, and which donors hold contracts.</span></a>
-      <a href="/open-data"><b>Open data</b><span>Download everything on this site as CSV or JSON.</span></a>
-      <a href="/es" hreflang="es" lang="es"><b>En español</b><span>Mi dirección, solicitudes de registros y el glosario, en español.</span></a>
+    <div class="h-bill">
+      <div class="hb-hd"><div><span class="eyebrow mute">Who you pay · tax year {b["year"]}</span><b id="billArea">{html.escape(area["n"])}</b></div><span class="hb-fy">{b["fy"]}<br>rates</span></div>
+      <div class="hb-stack" id="billStack" aria-hidden="true">{segs}</div>
+      <div class="hb-cols"><span>Levied by</span><span>Mills</span><span>You pay</span></div>
+      <ul class="hb-lines" id="billLines">{lines}</ul>
+      <div class="hb-total" aria-live="polite"><b>Total</b><span id="billMills">{area["t"]:.4f}</span><span id="billTotal">{_money(area["t"] * val / 1000)}</span></div>
+      <p class="hb-note">Rate × taxable value, before exemptions. Flat fees (fire, stormwater, garbage) are billed separately. <a href="/public-money/tax-dollars">Full calculator →</a></p>
+      <form class="hb-addr" action="/my-address/" method="get" role="search">
+        <label class="sr" for="hq">Your address</label>
+        <input id="hq" name="q" type="search" placeholder="Use your exact address" autocomplete="off">
+        <button type="submit">Look up</button>
+      </form>
     </div>
+    <div class="h-card h-compare">
+        <div class="h-card-hd"><b>Same home, every area</b><span class="muted">at <span data-val>{_money(val)}</span></span></div>
+        <ol class="cmp-bars" id="cmpBars">{ranked}</ol>
+      </div>
   </section>
 
-  {f"""<aside class="banner"><div><span class="eyebrow">On the November 3 ballot</span><h2>Amendment 3: what it would change here</h2><p>The property tax amendment needs 60% to pass. See your own bill before and after, and the state's estimate of what each Bay County government would collect. BayCounty.me takes no position.</p></div><a class="banner-go" href="/public-money/amendment-3">See what changes →</a></aside>""" if election else ""}
-
-  <section class="section" aria-labelledby="pm">
-    <div class="sec-hd"><h2 id="pm">Public Money</h2><span class="muted">Where tax dollars come from, where they go, and who receives them</span></div>
-    <div class="topics">{cards}</div>
-  </section>
-
-  <section class="section" aria-labelledby="new">
-    <div class="sec-hd"><h2 id="new">What's new</h2><a class="muted" href="/updates">All updates</a><a class="muted" href="/updates.xml">RSS</a></div>
-    <ol class="timeline">{news}</ol>
-  </section>
-
-  <section class="section" aria-labelledby="soon">
-    <div class="sec-hd"><h2 id="soon">In the works</h2><span class="muted">Research underway now</span></div>
-    <div class="cols">
-      <div><h3>2026 County Commission minutes</h3><p>The Clerk hasn't posted Commission minutes after June 16, including the September budget hearings. Votes will be added when they are.</p></div>
-      <div><h3>City check registers</h3><p>No city posts its vendor payments. The county's and the <a href="/public-money/who-gets-paid">tourism agencies'</a> are up; the cities' are being requested.</p></div>
+  <section class="h-follow" aria-labelledby="follow">
+    <div class="h-sec-hd"><div><span class="eyebrow">Step 2 · Follow it</span><h2 id="follow">Where it went, and who's checking.</h2></div><a href="/public-money/accountability">Accountability console →</a></div>
+    <div class="h-tiles">
+      <a class="h-tile t-blue" href="/public-money/hurricane-michael">
+        <span class="eyebrow">Spending</span>
+        <span class="mini" aria-hidden="true">{fema_bars}</span>
+        <b class="fig">{M(s['fema'], 0)}</b><span class="h-tl">Rebuilding after Hurricane Michael</span><span class="muted">{s['fema_n']} FEMA projects · CRA {M(s['cra_spent'])}</span>
+      </a>
+      <a class="h-tile t-salmon" href="/public-money/debt">
+        <span class="eyebrow">Debt</span>
+        <span class="mini" aria-hidden="true">{debt_bars}</span>
+        <b class="fig">{M(s['debt'])}</b><span class="h-tl">Owed by local governments</span><span class="muted">County, cities, schools and authorities</span>
+      </a>
+      <a class="h-tile t-amber" href="/public-money/audits">
+        <span class="eyebrow">Accountability</span>
+        <span class="prog" aria-hidden="true"><span class="p-a"><i style="width:{(s['findings'] - s['repeats']) / s['findings'] * 100:.0f}%"></i></span><span class="p-b"><i style="width:{s['sp_done'] / s['sp_n'] * 100:.0f}%"></i></span></span>
+        <b class="fig">{s['findings']} findings</b><span class="h-tl">{s['repeats']} repeat audit findings</span><span class="muted">{s['sp_done']:,} of {s['sp_n']:,} sales tax projects done</span>
+      </a>
     </div>
+    <nav class="h-links" aria-label="More public money">
+      <a href="/public-money/contracts">{s['ct_n']} contracts</a>
+      <a href="/public-money/votes">How they voted</a>
+      <a href="/public-money/campaign-money">Campaign money</a>
+      <a href="/public-money/savings">Savings finder</a>
+      <a href="/public-money/tourist-tax">Bed tax {M(s['bt25'])}</a>
+      <a href="/public-money/budget-explorer">Budgets</a>
+      {f'<a class="hot" href="/public-money/amendment-3">Amendment 3 · −{M(s["a3"])} FY2029</a>' if election else ''}
+    </nav>
   </section>
 
-  <section class="section how" aria-labelledby="how">
-    <div class="sec-hd"><h2 id="how">How this site works</h2></div>
-    <div class="cols">
-      <div><h3>Public records only</h3><p>Figures come from audits, adopted budgets, state data, annual reports and council records. If a number isn't in a record, it isn't on the site.</p></div>
-      <div><h3>Sources on every row</h3><p>Each payment, project or finding links to the document it came from, so you can check it yourself. Download reports as PDF or data as CSV.</p></div>
-      <div><h3>Gaps stated plainly</h3><p>Where a government doesn't publish something, the page says so and names the record to request.</p></div>
+  <section class="h-row" aria-label="Governments and updates">
+    <div class="h-card">
+      <div class="h-card-hd"><b>Pick a government</b><a href="/compare">Compare →</a></div>
+      <nav class="gov-chips" aria-label="Governments">{govchips}</nav>
     </div>
-  </section>
-
-  <section class="section">
-    <a class="guide-cta" href="/glossary">
-      <span class="eyebrow">New to this?</span>
-      <h3>Government money, explained simply</h3>
-      <p>What's a CRA? What's a mill? What does "rolled-back rate" mean? The plain-English guide explains every term on this site. Words with a dotted underline can also be tapped anywhere for a quick answer.</p>
-      <span class="go">Read the guide →</span>
-    </a>
+    <div class="h-card">
+      <div class="h-card-hd"><b>What's new</b><a href="/updates">All updates →</a></div>
+      <ol class="h-news">{news}</ol>
+    </div>
+    <div class="h-card">
+      <div class="h-card-hd"><b>Take part</b></div>
+      <nav class="h-take" aria-label="Take part"><a href="/meetings">Meetings</a><a href="/elections">2026 elections</a><a href="/records-request">Request a record</a><a href="/alerts">Email alerts</a><a href="/open-data">Open data</a><a href="/glossary">Plain-English guide</a><a href="/es" hreflang="es" lang="es">En español</a></nav>
+    </div>
   </section>
 </div>
-<link rel="stylesheet" href="/assets/tax.css">'''
+<script type="application/json" id="homeData">{data}</script>
+<script src="/assets/home.js" defer></script>'''

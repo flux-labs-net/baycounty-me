@@ -1,15 +1,27 @@
-/* BayCounty.me tokens: Flux Labs palette (navy, blue, salmon, amber), Poppins + IBM Plex Mono. */
+/* Design tokens: Flux Labs palette (navy, blue, salmon, amber, teal), Poppins + IBM Plex Mono.
+   Light and dark share names; pages use only these variables. */
 :root{
-  --bg:#F6F8FB; --surface:#FFFFFF; --sunken:#EEF2F7; --ink:#161B24; --muted:#5A6372; --faint:#8A93A1; --line:#E1E6ED;
-  --navy:#1E3A76; --blue:#3F6FB0; --salmon:#E5564A; --amber:#FFB84D;
+  --bg:#EEF3FA; --surface:#FFFFFF; --sunken:#F4F8FC; --ink:#161B24; --muted:#5A6372; --faint:#8A93A1; --line:#DCE4EE;
+  --navy:#1E3A76; --blue:#3F6FB0; --salmon:#E5564A; --amber:#FFB84D; --gold:#E8A33D; --teal:#1F8A7A;
+  --accent-ink:#B23A2F;                       /* salmon text that passes 4.5:1 on light grounds */
+  --on-navy:#FFFFFF;                          /* text on a --navy button */
+  --bar:#B9CBE6;                              /* an unselected bar in a chart */
+  --tint-blue:#F4F8FC; --tint-salmon:#FFF1EE; --tint-amber:#FDF5E6; --tint-teal:#E9F5F2;
+  --shadow:0 1px 2px rgba(22,27,36,.04),0 12px 32px rgba(30,58,118,.08);
   --f-display:"Poppins", "Segoe UI", system-ui, sans-serif;
   --f-body:"Poppins", "Segoe UI", system-ui, sans-serif;
   --f-data:"IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
-  --r:10px; color-scheme:light;
+  --r:14px; --r-lg:20px; color-scheme:light;
 }
 @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
   --bg:#0E131B; --surface:#151C27; --sunken:#1B2431; --ink:#E7ECF3; --muted:#A1AABA; --faint:#768092; --line:#263142;
-  --navy:#9DB8EA; --blue:#7FA6DA; --salmon:#FF8C82; --amber:#FFC36B; color-scheme:dark }}
+  --navy:#9DB8EA; --blue:#7FA6DA; --salmon:#FF8C82; --amber:#FFC36B; --gold:#E8A33D; --teal:#4CC2B2;
+  --accent-ink:#FF8C82; --on-navy:#0E131B; --bar:#34445A;
+  --tint-blue:#18212E; --tint-salmon:#2A1B1D; --tint-amber:#2A2215; --tint-teal:#132723;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 16px 40px rgba(0,0,0,.35); color-scheme:dark }}
 :root[data-theme="dark"]{
   --bg:#0E131B; --surface:#151C27; --sunken:#1B2431; --ink:#E7ECF3; --muted:#A1AABA; --faint:#768092; --line:#263142;
-  --navy:#9DB8EA; --blue:#7FA6DA; --salmon:#FF8C82; --amber:#FFC36B; color-scheme:dark }
+  --navy:#9DB8EA; --blue:#7FA6DA; --salmon:#FF8C82; --amber:#FFC36B; --gold:#E8A33D; --teal:#4CC2B2;
+  --accent-ink:#FF8C82; --on-navy:#0E131B; --bar:#34445A;
+  --tint-blue:#18212E; --tint-salmon:#2A1B1D; --tint-amber:#2A2215; --tint-teal:#132723;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 16px 40px rgba(0,0,0,.35); color-scheme:dark }

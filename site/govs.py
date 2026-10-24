@@ -17,38 +17,9 @@ def _j(*p):
         return None
 
 
-# key, slug, short name, full name, kind, and how each dataset names it
-GOVS = [
-    dict(key='county', slug='bay-county', short='Bay County', name='Bay County Board of County Commissioners', kind='county',
-         tax='bay_county', auth='bay_county_general', debt='Bay County (Board', audit='Bay County', contracts='Bay County BOCC',
-         fees='Bay County Board of County Commissioners', surtax='Bay County', fema=['Bay County'], cra=None, util='Bay County Utility Services',
-         blurb='The County Commission sets the countywide property tax, runs county roads, utilities, parks, libraries and emergency services, and funds the five elected county officers.'),
-    dict(key='schools', slug='bay-district-schools', short='Bay District Schools', name='Bay District Schools (School Board of Bay County)', kind='schools',
-         tax='bay_district_schools', auth=None, debt='Bay District Schools', audit='Bay District Schools', contracts=None,
-         fees='Bay District Schools (School Board of Bay County)', surtax=None, fema=['School Board of Bay County Florida'], cra=None, util=None,
-         blurb='The elected School Board and superintendent run Bay County\'s public schools. School property taxes are the largest slice of most Bay County tax bills; most of the rate is set by the state.'),
-    dict(key='pc', slug='panama-city', short='Panama City', name='City of Panama City', kind='city',
-         tax='panama_city', auth='city_panama_city', debt='City of Panama City (primary', audit='City of Panama City', contracts='City of Panama City',
-         fees='City of Panama City', surtax='City of Panama City', fema=['Panama City, City of'], cra='pc', util='City of Panama City'),
-    dict(key='pcb', slug='panama-city-beach', short='Panama City Beach', name='City of Panama City Beach', kind='city',
-         tax='panama_city_beach', auth='city_panama_city_beach', debt='City of Panama City Beach', audit='City of Panama City Beach', contracts='City of Panama City Beach',
-         fees='City of Panama City Beach', surtax='City of Panama City Beach', fema=['Panama City Beach, City of'], cra='pcb', util='City of Panama City Beach'),
-    dict(key='lh', slug='lynn-haven', short='Lynn Haven', name='City of Lynn Haven', kind='city',
-         tax='lynn_haven', auth='city_lynn_haven', debt='City of Lynn Haven', audit='City of Lynn Haven', contracts='City of Lynn Haven',
-         fees='City of Lynn Haven', surtax='City of Lynn Haven', fema=['Lynn Haven, City of'], cra='lh', util='City of Lynn Haven'),
-    dict(key='cw', slug='callaway', short='Callaway', name='City of Callaway', kind='city',
-         tax='callaway', auth='city_callaway', debt='City of Callaway', audit='City of Callaway', contracts='City of Callaway',
-         fees='City of Callaway', surtax='City of Callaway', fema=['Callaway, City of'], cra='cw', util='City of Callaway'),
-    dict(key='sp', slug='springfield', short='Springfield', name='City of Springfield', kind='city',
-         tax='springfield', auth='city_springfield', debt='City of Springfield', audit='City of Springfield', contracts='City of Springfield',
-         fees='City of Springfield', surtax='City of Springfield', fema=['Springfield, City of'], cra='sf', util='City of Springfield'),
-    dict(key='parker', slug='parker', short='Parker', name='City of Parker', kind='city',
-         tax='parker', auth='city_parker', debt='City of Parker', audit='City of Parker', contracts='City of Parker',
-         fees='City of Parker', surtax='City of Parker', fema=['Parker, City Of'], cra='pk', util='City of Parker'),
-    dict(key='mb', slug='mexico-beach', short='Mexico Beach', name='City of Mexico Beach', kind='city',
-         tax='mexico_beach', auth='city_mexico_beach', debt='City of Mexico Beach', audit='City of Mexico Beach', contracts='City of Mexico Beach',
-         fees='City of Mexico Beach', surtax='City of Mexico Beach', fema=['Mexico Beach, City Of'], cra=None, util='City of Mexico Beach'),
-]
+# key, slug, short name, full name, kind, and how each dataset names it: from places/<id>/place.json
+from place import governments as _governments, NAME as PLACE_NAME
+GOVS = _governments()
 BY_KEY = {g['key']: g for g in GOVS}
 BY_SLUG = {g['slug']: g for g in GOVS}
 CRA_NAME = {'pc': 'Panama City CRA', 'pcb': 'Panama City Beach CRA', 'lh': 'Lynn Haven CRA', 'cw': 'Callaway CRA', 'sf': 'Springfield CRA', 'pk': 'Parker CRA'}
@@ -120,7 +91,7 @@ def profile(key):
     pop_src = next((x.get('population_source_url') for x in debt if x.get('population_2025_estimate')), None)
     cp = D.get('civic_pop')
     if cp and cp.get('places'):
-        nm = {'county': 'Bay County', 'schools': 'Bay County'}.get(key, g['short'])
+        nm = PLACE_NAME if g['kind'] in ('county', 'schools') else g['short']
         pl = cp['places'].get(nm)
         if pl and pl.get('est'):
             pop, pop_src = pl['est'], cp.get('source_url')
@@ -213,7 +184,8 @@ def profile(key):
 
 def profile_pop_county():
     D = _load()
-    d = next((x for x in D['da']['debt'] if x['government'].startswith('Bay County (Board')), {})
+    county = next(g for g in GOVS if g['kind'] == 'county')
+    d = next((x for x in D['da']['debt'] if x['government'].startswith(county['debt'])), {})
     return d.get('population_2025_estimate')
 
 

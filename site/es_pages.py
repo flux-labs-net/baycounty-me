@@ -41,8 +41,21 @@ ES_ALT = {'/es': '/', '/es/mi-direccion': '/my-address', '/es/glosario': '/gloss
           '/es/impuestos': '/public-money/tax-dollars', '/es/tarifas-y-facturas': '/public-money/fees-and-bills',
           '/es/exenciones': '/public-money/exemptions', '/es/elecciones': '/elections', '/es/reuniones': '/meetings'}
 
+from place import PLACE as _PLACE
 ES_FOOTER = [
-    ('puts Bay County, Florida public records in plain view: maps, money, and the documents behind them.', 'reúne los registros públicos del condado de Bay, Florida, en un solo lugar: mapas, dinero y los documentos que los respaldan.'),
+    (f'Public records for {_PLACE["place_label"]}, in plain view: what governments collect, what they spend, what they owe and what the auditors found.',
+     f'Registros públicos de {_PLACE["place_label_es"]}, a la vista: lo que los gobiernos cobran, gastan y deben, y lo que encontraron los auditores.'),
+    ('<b>Follow the money</b>', '<b>Siga el dinero</b>'),
+    ('<b>Accountability</b>', '<b>Rendición de cuentas</b>'),
+    ('<b>Take part</b>', '<b>Participe</b>'),
+    ('<a href="/public-money/tax-dollars">Tax dollars</a><a href="/public-money/budget-explorer">Budgets</a><a href="/public-money/debt">Debt</a><a href="/public-money/contracts">Contracts</a>',
+     '<a href="/es/impuestos">Impuestos</a><a href="/public-money/budget-explorer">Presupuestos</a><a href="/public-money/debt">Deuda</a><a href="/public-money/contracts">Contratos</a>'),
+    ('<a href="/public-money/accountability">Accountability console</a><a href="/public-money/audits">Audit findings</a><a href="/public-money/votes">How they voted</a><a href="/public-money/savings">Savings finder</a>',
+     '<a href="/public-money/accountability">Seguimiento de proyectos</a><a href="/public-money/audits">Hallazgos de auditoría</a><a href="/public-money/votes">Cómo votaron</a><a href="/public-money/savings">Posibles ahorros</a>'),
+    ('<a href="/meetings">Meetings</a><a href="/alerts">Email alerts</a><a href="/records-request">Request a record</a><a href="/open-data">Open data &amp; API</a>',
+     '<a href="/es/reuniones">Reuniones</a><a href="/alerts">Alertas por correo</a><a href="/es/solicitar-registros">Solicitar un registro</a><a href="/open-data">Datos abiertos y API</a>'),
+    ('aria-label="Footer"', 'aria-label="Pie de página"'),
+    ('>Send a correction</a>', '>Envíe una corrección</a> (en inglés)'),
     ('Found an error or have a record to add?', '¿Encontró un error o tiene un registro que agregar?'),
     ('Send a correction</a> or email', 'Envíe una corrección</a> (en inglés) o escriba a'),
     ("What's new", 'Novedades'),

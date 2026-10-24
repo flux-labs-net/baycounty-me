@@ -22,8 +22,7 @@ from savings_page import savings_page
 from correspondence_page import correspondence_page
 from updates import updates_page, rss, last_updated, nice as nice_date
 OUT = os.path.join(ROOT, 'public')
-SITE = 'BayCounty.me'
-DOMAIN = 'https://baycounty.me'
+from place import SITE, DOMAIN, LABEL as PLACE_LABEL, EMAIL, OPERATOR, OFFICIALS, wordmark_html, governments as _place_govs
 PREVIEW = {}  # path -> (title, summary) for link previews, filled from og.preview_text()
 from es_pages import ES_ALT, updated_key as es_updated_key  # Spanish page -> English twin (hreflang, language switch)
 EN_TO_ES = {v: k for k, v in ES_ALT.items()}
@@ -35,22 +34,16 @@ MENU = [
     {'label': 'My Address', 'href': '/my-address'},
     {'label': 'Governments', 'groups': [
         {'group': 'County and schools', 'items': [
-            {'label': 'Bay County', 'href': '/governments/bay-county', 'desc': 'County Commission, budget, debt, votes'},
-            {'label': 'Bay District Schools', 'href': '/governments/bay-district-schools', 'desc': 'School Board, budget, debt, audits'},
+            *[{'label': g['short'], 'href': f"/governments/{g['slug']}", 'desc': g.get('menu_desc') or ''}
+              for g in _place_govs() if g['kind'] != 'city'],
             {'label': 'All governments', 'href': '/governments', 'desc': 'Every local government at a glance'},
         ]},
         {'group': 'Cities', 'items': [
-            {'label': 'Panama City', 'href': '/governments/panama-city', 'desc': ''},
-            {'label': 'Panama City Beach', 'href': '/governments/panama-city-beach', 'desc': ''},
-            {'label': 'Lynn Haven', 'href': '/governments/lynn-haven', 'desc': ''},
-            {'label': 'Callaway', 'href': '/governments/callaway', 'desc': ''},
-            {'label': 'Springfield', 'href': '/governments/springfield', 'desc': ''},
-            {'label': 'Parker', 'href': '/governments/parker', 'desc': ''},
-            {'label': 'Mexico Beach', 'href': '/governments/mexico-beach', 'desc': ''},
-        ]},
+            {'label': g['short'], 'href': f"/governments/{g['slug']}", 'desc': g.get('menu_desc') or ''}
+            for g in _place_govs() if g['kind'] == 'city']},
         {'group': 'Side by side', 'items': [
             {'label': 'Compare governments', 'href': '/compare', 'desc': 'Budgets, taxes and debt per resident'},
-            {'label': 'Who runs Bay County', 'href': '/who-runs-bay-county', 'desc': 'Every elected seat and top salary'},
+            {'label': OFFICIALS['label'], 'href': OFFICIALS['href'], 'desc': OFFICIALS['desc']},
         ]},
     ]},
     {'label': 'Public Money', 'groups': [
@@ -137,7 +130,7 @@ def nav_html(active):
             cur = ' aria-current="page"' if m['href'] == active else ''
             items.append(f'<li><a href="{m["href"]}"{cur}>{m["label"]}</a></li>')
     return f'''<header class="site-head"><div class="site-head-in">
-  <a class="wordmark" href="{'/es' if active.startswith('/es') else '/'}" aria-label="{SITE} {'inicio' if active.startswith('/es') else 'home'}"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C7.6 2 4 5.5 4 9.9 4 15.6 12 22 12 22s8-6.4 8-12.1C20 5.5 16.4 2 12 2z" fill="var(--blue)"/><circle cx="12" cy="10" r="3.2" fill="var(--bg)"/></svg><span>BayCounty<b>.me</b></span></a>
+  <a class="wordmark" href="{'/es' if active.startswith('/es') else '/'}" aria-label="{SITE} {'inicio' if active.startswith('/es') else 'home'}"><span>{wordmark_html()}</span></a>
   <a class="lang-link" href="__LANGHREF__" lang="__LANGCODE__" hreflang="__LANGCODE__">__LANGLABEL__</a>
   <button type="button" class="theme-btn" id="themeBtn" aria-label="Theme: match system"><svg class="ti ti-system" width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="6.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 3.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/></svg><svg class="ti ti-light" width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 2v2.2M10 15.8V18M2 10h2.2M15.8 10H18M4.3 4.3l1.6 1.6M14.1 14.1l1.6 1.6M4.3 15.7l1.6-1.6M14.1 5.9l1.6-1.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><svg class="ti ti-dark" width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path d="M16 12.6A6.6 6.6 0 0 1 7.4 4a6.6 6.6 0 1 0 8.6 8.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="theme-lbl">System</span></button>
   <button type="button" class="menu-btn" aria-expanded="false" aria-controls="site-menu"><span class="sr">Menu</span><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14" stroke="currentColor" stroke-width="1.8"/></svg></button>
@@ -145,11 +138,18 @@ def nav_html(active):
 </div></header>'''
 
 
-FOOTER = '''<footer class="site-foot"><div class="site-foot-in">
-  <div class="foot-about"><p><b>BayCounty.me</b> puts Bay County, Florida public records in plain view: maps, money, and the documents behind them.</p>
-  <p class="muted">Found an error or have a record to add? <a href="/about#contact">Send a correction</a> or email <span class="sel">hello@fluxlabs.net</span>.</p>
-  <p class="muted foot-links">__UPDATED__<a href="/updates">What's new</a> · <a href="/updates.xml">RSS</a> · <a href="/about">Sources and method</a> · <a href="/privacy">Privacy</a></p></div>
-  <a class="powered" href="https://fluxlabs.net/" target="_blank" rel="noopener"><span>Powered by</span><img src="/assets/flux-labs.webp" alt="Flux Labs" width="140" height="25"></a>
+FOOTER = f'''<footer class="site-foot"><div class="site-foot-in">
+  <div class="foot-brand"><a class="wordmark" href="/"><span>{wordmark_html()}</span></a>
+  <p>Public records for {PLACE_LABEL}, in plain view: what governments collect, what they spend, what they owe and what the auditors found.</p></div>
+  <nav class="foot-cols" aria-label="Footer">
+    <div><b>Follow the money</b><a href="/public-money/tax-dollars">Tax dollars</a><a href="/public-money/budget-explorer">Budgets</a><a href="/public-money/debt">Debt</a><a href="/public-money/contracts">Contracts</a></div>
+    <div><b>Accountability</b><a href="/public-money/accountability">Accountability console</a><a href="/public-money/audits">Audit findings</a><a href="/public-money/votes">How they voted</a><a href="/public-money/savings">Savings finder</a></div>
+    <div><b>Take part</b><a href="/meetings">Meetings</a><a href="/alerts">Email alerts</a><a href="/records-request">Request a record</a><a href="/open-data">Open data &amp; API</a></div>
+  </nav>
+  <div class="foot-base">
+    <p class="muted foot-links">__UPDATED__<a href="/updates">What's new</a> · <a href="/updates.xml">RSS</a> · <a href="/about">Sources and method</a> · <a href="/privacy">Privacy</a> · <a href="/about#contact">Send a correction</a> · <span class="sel">{EMAIL}</span></p>
+    <a class="powered" href="{OPERATOR['url']}" target="_blank" rel="noopener"><span>Powered by</span><img src="{OPERATOR['logo']}" alt="{OPERATOR['name']}" width="140" height="25"></a>
+  </div>
 </div></footer>'''
 
 MENU_JS = '''(() => {
@@ -325,7 +325,7 @@ def _layout(title, desc, path, body, extra_head=''):
 <title>{full}</title>
 <meta name="description" content="{md}">
 {robots}<link rel="canonical" href="{DOMAIN}{path}">{hreflang(path)}
-<meta property="og:site_name" content="BayCounty.me">
+<meta property="og:site_name" content="{SITE}">
 <meta property="og:locale" content="{'es_US' if es else 'en_US'}">
 <meta property="og:locale:alternate" content="{'en_US' if es else 'es_US'}">
 <meta property="og:type" content="website">
@@ -336,21 +336,22 @@ def _layout(title, desc, path, body, extra_head=''):
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="{t}: BayCounty.me, public records for Bay County, Florida">
+<meta property="og:image:alt" content="{t}: {SITE}, public records for {PLACE_LABEL}">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{t}">
 <meta name="twitter:description" content="{d}">
 <meta name="twitter:image" content="{img}">
-<meta name="twitter:image:alt" content="{t}: BayCounty.me, public records for Bay County, Florida">
-{ld}<meta name="theme-color" content="#1E3A76">
+<meta name="twitter:image:alt" content="{t}: {SITE}, public records for {PLACE_LABEL}">
+{ld}<meta name="theme-color" content="#1E3A76" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0E131B" media="(prefers-color-scheme: dark)">
 <script>try{{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}}catch(e){{}}</script>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="/assets/site.css">
-<link rel="alternate" type="application/rss+xml" title="BayCounty.me updates" href="/updates.xml">
+<link rel="alternate" type="application/rss+xml" title="{SITE} updates" href="/updates.xml">
 <script>window.va=window.va||function(){{(window.vaq=window.vaq||[]).push(arguments)}};window.si=window.si||function(){{(window.siq=window.siq||[]).push(arguments)}};</script>
 <script defer src="/_vercel/insights/script.js"></script>
 <script defer src="/_vercel/speed-insights/script.js"></script>
@@ -758,6 +759,7 @@ def main():
     shutil.copy(os.path.join(ROOT, 'favicon.svg'), os.path.join(OUT, 'favicon.svg'))
     shutil.copy(os.path.join(ROOT, 'tax.css'), os.path.join(OUT, 'assets', 'tax.css'))
     shutil.copy(os.path.join(ROOT, 'gov.js'), os.path.join(OUT, 'assets', 'gov.js'))
+    shutil.copy(os.path.join(ROOT, 'home.js'), os.path.join(OUT, 'assets', 'home.js'))
     shutil.copy(os.path.join(ROOT, 'report.js'), os.path.join(OUT, 'assets', 'report.js'))
     write_report_es(OUT)
     shutil.copy(os.path.join(ROOT, 'tables.js'), os.path.join(OUT, 'assets', 'tables.js'))
