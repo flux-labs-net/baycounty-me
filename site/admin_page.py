@@ -133,6 +133,12 @@ details.ag summary{cursor:pointer;color:var(--blue)} details.ag pre{white-space:
 #ac-queue td:first-child,#ac-queue th:first-child{width:28px}
 #ac-queue input[type=checkbox]{width:16px;height:16px}
 #ac-files tr.sel-row td{background:var(--sunken)}
+.bk{position:sticky;top:0;z-index:2;padding:8px 12px;margin-bottom:8px;border:1px solid var(--line);border-radius:10px;background:var(--surface);display:flex;flex-direction:column;gap:6px}
+.bk-top{gap:8px 12px} .bk-top .btn{min-height:32px;padding:0 12px}
+.bk-n{font:600 .86rem var(--f-body);min-width:84px}
+.bk-sure{gap:8px;padding-top:6px;border-top:1px dashed var(--line)} .bk-sure .btn{min-height:32px;padding:0 12px}
+.bk-note{margin:0} .bk-msg .banner{margin:0}
+.at td.pk,.at th.pk{width:28px;padding-right:0} .at .pk input{width:16px;height:16px;margin:2px 0 0;cursor:pointer}
 [hidden]{display:none!important}
 """
 
@@ -379,7 +385,7 @@ def admin_page(out_dir):
         <select class="sel" id="bt-confidence" aria-label="Confidence"><option value="">Any confidence</option><option value="high">High</option><option value="medium">Medium</option><option value="low">Low</option></select>
         <select class="sel" id="bt-status" aria-label="Review status"><option value="unreviewed">Unreviewed</option><option value="">Any review status</option><option value="confirmed">Confirmed</option><option value="rejected">Rejected</option></select>
       </div>
-      <div class="tw"><table class="at" id="bt-table" data-tt="off"><thead><tr><th>Official</th><th>Sunbiz person</th><th>Businesses</th><th>Links</th><th>Review</th></tr></thead><tbody></tbody></table></div>
+      <div class="tw"><table class="at" id="bt-table" data-tt="off"><thead><tr><th class="pk"><input type="checkbox" data-bk-all aria-label="Select all shown"></th><th>Official</th><th>Sunbiz person</th><th>Businesses</th><th>Links</th><th>Review</th></tr></thead><tbody></tbody></table></div>
     </section>
 
     <section id="tab-owners" role="tabpanel" hidden>
@@ -389,13 +395,13 @@ def admin_page(out_dir):
         <h2 class="h2 grow" style="margin:0">Businesses that share a person and gave to the same candidate</h2>
         <select class="sel" id="ow-status" aria-label="Review status"><option value="">Any review status</option><option value="unreviewed">Unreviewed</option><option value="confirmed">Confirmed</option><option value="rejected">Rejected</option></select>
       </div>
-      <div class="tw"><table class="at" id="ow-groups" data-tt="off"><thead><tr><th>Candidate</th><th>Businesses</th><th>Linked by</th><th class="num">Checks</th><th class="num">Total</th><th>Review</th></tr></thead><tbody></tbody></table></div>
+      <div class="tw"><table class="at" id="ow-groups" data-tt="off"><thead><tr><th class="pk"><input type="checkbox" data-bk-all aria-label="Select all shown"></th><th>Candidate</th><th>Businesses</th><th>Linked by</th><th class="num">Checks</th><th class="num">Total</th><th>Review</th></tr></thead><tbody></tbody></table></div>
       <div class="row" style="gap:8px;flex-wrap:wrap;margin:24px 0 8px">
         <h2 class="h2 grow" style="margin:0">Gifts over the $1,000 limit</h2>
         <select class="sel" id="ol-status" aria-label="Review status"><option value="">Any review status</option><option value="unreviewed">Unreviewed</option><option value="confirmed">Confirmed (open)</option><option value="resolved">Resolved</option><option value="rejected">Rejected</option></select>
       </div>
       <p class="small muted" style="margin:0 0 8px">One organization giving one candidate more than $1,000 in the same election, as the campaign reported it, net of refunds. The primary and general count separately. <b>Confirmed</b> publishes it as an open case. <b>Resolved</b> publishes it with your explanation and source (for example a reporting error by the campaign or the Supervisor of Elections, an amended report, a refund, a check designated for the general, or an Elections Commission ruling). <b>Rejected</b> keeps it private (not the same contributor, or a data mistake on our side).</p>
-      <div class="tw"><table class="at" id="ol-cases" data-tt="off"><thead><tr><th>Candidate</th><th>Contributor</th><th>Gifts as reported</th><th class="num">Net</th><th>Review</th></tr></thead><tbody></tbody></table></div>
+      <div class="tw"><table class="at" id="ol-cases" data-tt="off"><thead><tr><th class="pk"><input type="checkbox" data-bk-all aria-label="Select all shown"></th><th>Candidate</th><th>Contributor</th><th>Gifts as reported</th><th class="num">Net</th><th>Review</th></tr></thead><tbody></tbody></table></div>
       <div class="row" style="gap:8px;flex-wrap:wrap;margin:24px 0 8px">
         <h2 class="h2 grow" style="margin:0">Look up a person or business</h2>
         <input class="sel" id="ow-q" type="search" placeholder="Last name first, business name or Sunbiz document number" aria-label="Search" style="min-width:320px">
@@ -411,7 +417,7 @@ def admin_page(out_dir):
         <h2 class="h2 grow" style="margin:0">Officials, department leaders and candidates on nonprofit boards</h2>
         <select class="sel" id="bd-status" aria-label="Review status"><option value="">Any review status</option><option value="unreviewed">Unreviewed</option><option value="confirmed">Confirmed</option><option value="rejected">Rejected</option></select>
       </div>
-      <div class="tw"><table class="at" id="bd-officials" data-tt="off"><thead><tr><th>Official</th><th>Board member as filed</th><th>Boards</th><th class="num">Same name in Sunbiz</th><th>Review</th></tr></thead><tbody></tbody></table></div>
+      <div class="tw"><table class="at" id="bd-officials" data-tt="off"><thead><tr><th class="pk"><input type="checkbox" data-bk-all aria-label="Select all shown"></th><th>Official</th><th>Board member as filed</th><th>Boards</th><th class="num">Same name in Sunbiz</th><th>Review</th></tr></thead><tbody></tbody></table></div>
       <div class="row" style="gap:8px;flex-wrap:wrap;margin:24px 0 8px"><h2 class="h2 grow" style="margin:0">People on the most boards</h2></div>
       <div class="tw"><table class="at" id="bd-interlocks" data-tt="off"><thead><tr><th>Person</th><th class="num">Current boards (not HOAs)</th><th>Boards</th><th>Also</th></tr></thead><tbody></tbody></table></div>
       <div class="row" style="gap:8px;flex-wrap:wrap;margin:24px 0 8px"><h2 class="h2 grow" style="margin:0">Board members who run businesses that gave to campaigns</h2></div>

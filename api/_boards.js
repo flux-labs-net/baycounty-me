@@ -5,6 +5,7 @@
 // nonprofit-grants) and confirmed official matches (nonprofit-officials). Files starting with _ are not routes.
 const db = require('./_db');
 const {cleanCounty, cleanQuery} = require('./_registry');
+const bulk = require('./_bulk');
 
 const bad = (msg, status = 400) => Object.assign(new Error(msg), {status});
 const REVIEW = ['unreviewed', 'confirmed', 'rejected'];
@@ -94,20 +95,30 @@ async function search(county, q) {
   return {people, nonprofits};
 }
 
+// Pure: the matches named in a review body (one, or `items` for a bulk change).
+function cleanMatches(body) {
+  return bulk.items(body, x => {
+    const key = String(x.board_key || '');
+    if (!BOARD_KEY.test(key)) throw bad('Unknown person.');
+    const oid = String(x.official_id || '').slice(0, 80);
+    if (!/^[a-z0-9-]{2,80}$/.test(oid)) throw bad('Unknown official.');
+    return {board_key: key, official_id: oid};
+  });
+}
+
 async function review(body, admin) {
   const county = cleanCounty(body.county);
   const status = String(body.status || '');
   if (!REVIEW.includes(status)) throw bad('Unknown review status.');
-  const key = String(body.board_key || '');
-  if (!BOARD_KEY.test(key)) throw bad('Unknown person.');
-  const oid = String(body.official_id || '').slice(0, 80);
-  if (!/^[a-z0-9-]{2,80}$/.test(oid)) throw bad('Unknown official.');
-  const rows = await db.q(`update registry.board_official_matches set review_status = $1, reviewed_by = $2, reviewed_at = now()
-    where county = $3 and board_key = $4 and official_id = $5 returning board_key, official_id, review_status`, [status, admin, county, key, oid]);
+  const matches = cleanMatches(body);
+  const rows = await db.q(`update registry.board_official_matches m set review_status = $1, reviewed_by = $2, reviewed_at = now()
+    from jsonb_to_recordset($4::jsonb) as x(board_key text, official_id text)
+    where m.county = $3 and m.board_key = x.board_key and m.official_id = x.official_id
+    returning m.board_key, m.official_id, m.review_status`, [status, admin || null, county, JSON.stringify(matches)]);
   if (!rows.length) throw bad('Unknown match.', 404);
   // confirmed matches appear on /connections/nonprofits; anything else is taken down
   const [x] = await db.q('select registry.publish_board_officials($1) n', [county]);
   return {updated: rows.length, published: Number(x && x.n) || 0, by: admin, rows};
 }
 
-module.exports = {summary, officials, interlocks, donors, person, nonprofit, search, review};
+module.exports = {summary, officials, interlocks, donors, person, nonprofit, search, cleanMatches, review};

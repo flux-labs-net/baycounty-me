@@ -6,6 +6,7 @@
 // Files starting with _ are not routes.
 const db = require('./_db');
 const {cleanCounty} = require('./_registry');
+const bulk = require('./_bulk');
 
 const bad = (msg, status = 400) => Object.assign(new Error(msg), {status});
 const REVIEW = ['unreviewed', 'confirmed', 'rejected'];
@@ -13,15 +14,13 @@ const CONFIDENCE = ['high', 'medium', 'low'];
 const PERSON_ID = /^[a-z0-9][a-z0-9-]{1,80}$/;
 const PERSON_KEY = /^p_[0-9a-f]{12}$/;
 
-// Pure: a list of {person_id, person_key} pairs from a review body (one pair, or `pairs` for a bulk change).
+// Pure: a list of {person_id, person_key} pairs from a review body (one pair, or `pairs` / `items` for a bulk change).
 function cleanPairs(body) {
-  const raw = Array.isArray(body.pairs) ? body.pairs : [{person_id: body.person_id, person_key: body.person_key}];
-  if (!raw.length || raw.length > 500) throw bad('Send 1 to 500 matches.');
-  return raw.map(p => {
-    const id = String(p && p.person_id || ''), key = String(p && p.person_key || '');
+  return bulk.items(body, p => {
+    const id = String(p.person_id || ''), key = String(p.person_key || '');
     if (!PERSON_ID.test(id) || !PERSON_KEY.test(key)) throw bad('Unknown match.');
     return {person_id: id, person_key: key};
-  });
+  }, 'pairs');
 }
 
 async function summary(county) {
