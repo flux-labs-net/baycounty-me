@@ -213,6 +213,18 @@ async function route(req, res, action, me) {
       await audit(me.e, action, null, {group_id: body.group_id, candidate: body.candidate || null, status: body.status});
       return r;
     }
+    case 'boards': return require('./_boards').officials({county: Q.county, status: String(Q.status || '')});
+    case 'boards_interlocks': return require('./_boards').interlocks(Q.county, Q.min);
+    case 'boards_donors': return require('./_boards').donors(Q.county);
+    case 'boards_search': return require('./_boards').search(Q.county, Q.q);
+    case 'boards_person': return require('./_boards').person(Q.county, Q.key);
+    case 'boards_nonprofit': return require('./_boards').nonprofit(Q.county, Q.id);
+    case 'boards_review': {
+      if (req.method !== 'POST') throw Object.assign(new Error('Use POST.'), {status: 405});
+      const r = await require('./_boards').review(body, me.e);
+      await audit(me.e, action, null, {board_key: body.board_key, official_id: body.official_id, status: body.status});
+      return r;
+    }
     case 'corr_contacts': return require('./_correspondence').contacts();
     case 'corr_contact': case 'corr_seed': case 'corr_send': case 'corr_reply': case 'corr_publish': case 'corr_status': case 'corr_assign': case 'corr_dismiss': {
       if (req.method !== 'POST') throw Object.assign(new Error('Use POST.'), {status: 405});

@@ -2394,6 +2394,37 @@
      "type": "string"
     },
     {
+     "name": "nonprofit_id",
+     "type": "string",
+     "values": [
+      "np-201568457",
+      "np-237393003",
+      "np-371945053",
+      "np-460814301",
+      "np-463023902",
+      "np-465391786",
+      "np-473791305",
+      "np-590391375",
+      "np-590791014",
+      "np-591375195",
+      "np-591682455",
+      "np-591850105",
+      "np-592323037",
+      "np-592857564",
+      "np-593094842",
+      "np-593623103",
+      "np-597604357",
+      "np-812762071",
+      "np-822407490",
+      "np-831080685",
+      "np-843264244",
+      "np-862534565",
+      "np-931911204",
+      "np-sb-n15000002757",
+      "np-sb-n97000001854"
+     ]
+    },
+    {
      "name": "gov_id",
      "type": "string"
     }
@@ -4720,6 +4751,757 @@
    "json": "/downloads/shared-owner-groups.json",
    "csv": "/downloads/shared-owner-groups.csv",
    "api": "/api/v1/datasets/shared-owner-groups"
+  },
+  {
+   "id": "nonprofits",
+   "title": "Nonprofits",
+   "description": "Every nonprofit in the county: organizations recognized by the IRS with a local address, and active Florida nonprofit corporations (Sunbiz) based here. Type, IRS subsection, latest 990 revenue, expenses and assets, how many board members its filings list, how many of those sit on another local board, government payment records and grants. Board members are not named.",
+   "rows": 1927,
+   "columns": [
+    {
+     "name": "nonprofit_id",
+     "type": "string"
+    },
+    {
+     "name": "name",
+     "type": "string"
+    },
+    {
+     "name": "ein",
+     "type": "string"
+    },
+    {
+     "name": "sunbiz_doc_number",
+     "type": "string"
+    },
+    {
+     "name": "city",
+     "type": "string",
+     "values": [
+      "Apopka",
+      "Bay Point",
+      "Callaway",
+      "Carillon Beach",
+      "Florida",
+      "Fountain",
+      "Inlet Beach",
+      "Jacksonville",
+      "Lynn Haven",
+      "Lynnhaven",
+      "Mexico Beach",
+      "Panama City",
+      "Panama City Beach",
+      "Pananma City",
+      "Parker",
+      "Rosemary Beach",
+      "Sea Crest",
+      "Seacrest Beach",
+      "Southport",
+      "Springfield",
+      "Tyndall AFB",
+      "Youngstown"
+     ]
+    },
+    {
+     "name": "zip",
+     "type": "string",
+     "values": [
+      "32401",
+      "32402",
+      "32403",
+      "32404",
+      "32405",
+      "32406",
+      "32407",
+      "32408",
+      "32409",
+      "32410",
+      "32411",
+      "32412",
+      "32413",
+      "32417",
+      "32438",
+      "32444",
+      "32466"
+     ]
+    },
+    {
+     "name": "county",
+     "type": "string",
+     "values": [
+      "bay"
+     ]
+    },
+    {
+     "name": "kind",
+     "type": "string",
+     "values": [
+      "Animals",
+      "Arts and culture",
+      "Business league or chamber",
+      "Church or religious group",
+      "Civil rights and advocacy",
+      "Club, lodge or veterans group",
+      "Community improvement",
+      "Crime and legal",
+      "Disease and disorders",
+      "Education",
+      "Employment",
+      "Environment",
+      "Food and agriculture",
+      "Health care",
+      "Homeowner or condo association",
+      "Housing",
+      "Human services",
+      "International",
+      "Mental health",
+      "Other nonprofit",
+      "Philanthropy and grantmaking",
+      "Private foundation",
+      "Public and societal benefit",
+      "Public safety and disaster",
+      "Recreation and sports",
+      "Unknown",
+      "Youth development"
+     ]
+    },
+    {
+     "name": "irs_recognized",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "subsection",
+     "type": "string",
+     "values": [
+      "4947(a)(1) charitable trust",
+      "501(c)(10) fraternal",
+      "501(c)(14) credit union",
+      "501(c)(19) veterans",
+      "501(c)(2) title-holding",
+      "501(c)(3) charity",
+      "501(c)(4) social welfare",
+      "501(c)(5) labor or agricultural",
+      "501(c)(6) business league",
+      "501(c)(7) social club",
+      "501(c)(8) fraternal benefit"
+     ]
+    },
+    {
+     "name": "foundation_type",
+     "type": "string",
+     "values": [
+      "church",
+      "hospital",
+      "medical research",
+      "private foundation",
+      "public charity",
+      "school",
+      "supporting org"
+     ]
+    },
+    {
+     "name": "ntee_code",
+     "type": "string"
+    },
+    {
+     "name": "category",
+     "type": "string",
+     "values": [
+      "Animals",
+      "Arts and culture",
+      "Civil rights and advocacy",
+      "Community improvement",
+      "Crime and legal",
+      "Disease and disorders",
+      "Education",
+      "Employment",
+      "Environment",
+      "Food and agriculture",
+      "Health care",
+      "Housing",
+      "Human services",
+      "International",
+      "Mental health",
+      "Mutual and membership benefit",
+      "Philanthropy and grantmaking",
+      "Public and societal benefit",
+      "Public safety and disaster",
+      "Recreation and sports",
+      "Religion",
+      "Unknown",
+      "Youth development"
+     ]
+    },
+    {
+     "name": "ruling_year",
+     "type": "number"
+    },
+    {
+     "name": "irs_filing_requirement",
+     "type": "string",
+     "values": [
+      "990 or 990-EZ",
+      "990-N postcard",
+      "group return",
+      "not required",
+      "not required (church)",
+      "not required (instrumentality)",
+      "not required (religious)"
+     ]
+    },
+    {
+     "name": "sunbiz_status",
+     "type": "string",
+     "values": [
+      "Active",
+      "Inactive"
+     ]
+    },
+    {
+     "name": "sunbiz_filed",
+     "type": "string"
+    },
+    {
+     "name": "irs_assets",
+     "type": "number"
+    },
+    {
+     "name": "irs_income",
+     "type": "number"
+    },
+    {
+     "name": "irs_revenue",
+     "type": "number"
+    },
+    {
+     "name": "latest_return_form",
+     "type": "string",
+     "values": [
+      "990",
+      "990EZ",
+      "990N",
+      "990PF"
+     ]
+    },
+    {
+     "name": "latest_return_year",
+     "type": "number"
+    },
+    {
+     "name": "total_revenue",
+     "type": "number"
+    },
+    {
+     "name": "total_expenses",
+     "type": "number"
+    },
+    {
+     "name": "total_assets",
+     "type": "number"
+    },
+    {
+     "name": "employees",
+     "type": "number"
+    },
+    {
+     "name": "returns_on_file",
+     "type": "number"
+    },
+    {
+     "name": "website",
+     "type": "string"
+    },
+    {
+     "name": "mission",
+     "type": "string"
+    },
+    {
+     "name": "board_members_listed",
+     "type": "number"
+    },
+    {
+     "name": "shares_board_with",
+     "type": "number"
+    },
+    {
+     "name": "gov_payment_records",
+     "type": "number"
+    },
+    {
+     "name": "gov_dollars_in_records",
+     "type": "number"
+    },
+    {
+     "name": "paid_by",
+     "type": "string",
+     "values": [
+      "Destination Panama City",
+      "Destination Panama City, Mexico Beach CDC",
+      "Destination Panama City, Panama City CRA",
+      "Destination Panama City, Visit Panama City Beach",
+      "Mexico Beach CDC",
+      "Panama City CRA",
+      "Visit Panama City Beach"
+     ]
+    },
+    {
+     "name": "grants_given_count",
+     "type": "number"
+    },
+    {
+     "name": "grants_given_cash",
+     "type": "number"
+    },
+    {
+     "name": "grants_from_local_nonprofits",
+     "type": "number"
+    },
+    {
+     "name": "campaign_gifts_total",
+     "type": "string"
+    },
+    {
+     "name": "campaign_gift_candidates",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "sunbiz_url",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/nonprofits.json",
+   "csv": "/downloads/nonprofits.csv",
+   "api": "/api/v1/datasets/nonprofits"
+  },
+  {
+   "id": "nonprofit-payments",
+   "title": "Nonprofits: government payment records",
+   "description": "Payment records on the site (contracts, check registers, tourism agency payments, CRA ledger) whose payee is a local nonprofit, matched by name.",
+   "rows": 30,
+   "columns": [
+    {
+     "name": "nonprofit_id",
+     "type": "string",
+     "values": [
+      "np-201568457",
+      "np-237393003",
+      "np-371945053",
+      "np-460814301",
+      "np-463023902",
+      "np-465391786",
+      "np-473791305",
+      "np-590391375",
+      "np-590791014",
+      "np-591375195",
+      "np-591682455",
+      "np-591850105",
+      "np-592323037",
+      "np-592857564",
+      "np-593094842",
+      "np-593623103",
+      "np-597604357",
+      "np-812762071",
+      "np-822407490",
+      "np-831080685",
+      "np-843264244",
+      "np-862534565",
+      "np-931911204",
+      "np-sb-n15000002757",
+      "np-sb-n97000001854"
+     ]
+    },
+    {
+     "name": "nonprofit",
+     "type": "string",
+     "values": [
+      "ANCHORAGE CHILDRENS HOME OF BAY COUNTY INC",
+      "BAY ARTS ALLIANCE INC",
+      "BAY COUNTY CHAMBER OF COMMERCE INC",
+      "BAY YOUTH MUSIC ASSOCIATION INC",
+      "DANCE KRAZE ALL CHARMED UP",
+      "EMERALD & FORGOTTEN COAST ADVENTURES INC",
+      "FLORIOPOLIS",
+      "GIRLS INCORPORATED OF BAY COUNTY",
+      "GULF COAST CHILDRENS ADVOCACY",
+      "GULF COAST STATE COLLEGE FOUNDATION INC",
+      "HEARTLAND RESCUE RANCH INC",
+      "HISTORIC ST ANDREWS WATERFRONT PARTNERSHIP INC",
+      "KODY FOUNDATION INC",
+      "KREWE OF ST ANDREWS INC",
+      "LIFE MANAGEMENT CENTER OF NORTHWEST FLORIDA INC",
+      "MEXICO BEACH ARTIFICIAL REEF ASSOCIATION, INC.",
+      "PANAMA CITY A CAPPELLA CHORUS LLC",
+      "PANAMA CITY BEACHES CHAMBER OF COMMERCE INCORPORATED",
+      "PANAMA CITY DOWNTOWN IMPROVEMENT BOARD, INC.",
+      "PANAMA CITY FIRST BAPTIST CHURCH",
+      "PANAMA CITY MUSIC ASSOCIATION INC",
+      "PUBLIC EYE SOAR INC",
+      "ROOMS WITH A PURPOSE INC",
+      "SALTY CATS OF ST ANDREWS RESCUE",
+      "SECOND CHANCE OF NORTHWEST FLORIDA INC"
+     ]
+    },
+    {
+     "name": "payer",
+     "type": "string",
+     "values": [
+      "Destination Panama City",
+      "Mexico Beach CDC",
+      "Panama City CRA",
+      "Visit Panama City Beach"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    },
+    {
+     "name": "record_type",
+     "type": "string",
+     "values": [
+      "cra",
+      "tdc"
+     ]
+    },
+    {
+     "name": "record_id",
+     "type": "string"
+    },
+    {
+     "name": "payee_as_filed",
+     "type": "string",
+     "values": [
+      "Anchorage Children's Home of Bay County, Inc",
+      "Bay Arts Alliance",
+      "Bay County Chamber of Commerce",
+      "Bay Youth Music Association, Inc",
+      "Dance Kraze All Charmed Up, Inc",
+      "Emerald and Forgotten Coast Adventures, Inc",
+      "Floriopolis",
+      "Girls Inc. of Bay County",
+      "Gulf Coast Children's Advocacy Center, Inc",
+      "Gulf Coast State College Foundation, Inc",
+      "Heartland Rescue Ranch, Inc",
+      "Historic St. Andrews Waterfront Partnership",
+      "Kody Foundation, Inc",
+      "Krewe of St. Andrews Inc.",
+      "Life Management Center of Northwest FL, Inc",
+      "Mexico Beach Artificial Reef Association",
+      "Panama City A Cappella Chorus, Inc",
+      "Panama City Beach Chamber of Commerce",
+      "Panama City Downtown Improvement Board, Inc",
+      "Panama City Music Association",
+      "Public Eye Soar, Inc",
+      "Rooms with a Purpose",
+      "Salty Cats of St. Andrews Rescue, Inc",
+      "Second Chance of Northwest Florida, Inc",
+      "World Changers / First Baptist Church of Panama City"
+     ]
+    },
+    {
+     "name": "amount",
+     "type": "number"
+    },
+    {
+     "name": "date",
+     "type": "string",
+     "values": [
+      "FY2015",
+      "FY2017",
+      "FY2018",
+      "FY2024",
+      "FY2024, FY2025",
+      "FY2024, FY2025, FY2026",
+      "FY2025",
+      "FY2026"
+     ]
+    },
+    {
+     "name": "what",
+     "type": "string",
+     "values": [
+      "Mexico Beach Community Development Council: 1 payments",
+      "Mexico Beach Community Development Council: 4 payments",
+      "Operation of the St. Andrews Publishing Museum, tours and the Saturday farmers market",
+      "Panama City Beach Convention & Visitors Bureau (Visit Panama City Beach): 1 payments",
+      "Panama City Beach Convention & Visitors Bureau (Visit Panama City Beach): 7 payments",
+      "Panama City Beach Convention & Visitors Bureau (Visit Panama City Beach): 8 payments",
+      "Panama City Community Development Council (Destination Panama City): 1 payments",
+      "Panama City Community Development Council (Destination Panama City): 17 payments",
+      "Panama City Community Development Council (Destination Panama City): 2 payments",
+      "Panama City Community Development Council (Destination Panama City): 3 payments",
+      "Panama City Community Development Council (Destination Panama City): 4 payments",
+      "Panama City Community Development Council (Destination Panama City): 6 payments",
+      "Panama City Community Development Council (Destination Panama City): 7 payments",
+      "Print/Publishing Museum operation agreement",
+      "Volunteer home repairs ($70K from Downtown North, $10K from Millville); 41 homes renovated",
+      "Volunteer home repairs MOU ($70K Downtown North, $10K Millville)"
+     ]
+    },
+    {
+     "name": "cra_status",
+     "type": "string",
+     "values": [
+      "Budgeted",
+      "Spent"
+     ]
+    },
+    {
+     "name": "county",
+     "type": "string",
+     "values": [
+      "bay"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://bayforms.baycoclerk.com/PublicAccess/PublicRecordSearch/",
+      "https://panamacity.gov/DocumentCenter/View/1853/FY2015-Annual-Report-PDF",
+      "https://panamacity.gov/DocumentCenter/View/3827/FY2017-Annual-Report-PDF",
+      "https://panamacity.gov/DocumentCenter/View/4570/FY2018-Annual-Report-PDF",
+      "https://www.panamacity.gov/DocumentCenter/View/9865"
+     ]
+    }
+   ],
+   "json": "/downloads/nonprofit-payments.json",
+   "csv": "/downloads/nonprofit-payments.csv",
+   "api": "/api/v1/datasets/nonprofit-payments"
+  },
+  {
+   "id": "nonprofit-grants",
+   "title": "Nonprofits: grants they gave",
+   "description": "Grants to organizations reported on Schedule I of local nonprofits' 990 returns, with the recipient linked when it is also a local nonprofit.",
+   "rows": 373,
+   "columns": [
+    {
+     "name": "grantor_id",
+     "type": "string",
+     "values": [
+      "np-201568457",
+      "np-270930552",
+      "np-311532217",
+      "np-371595973",
+      "np-460814301",
+      "np-562350462",
+      "np-590863698",
+      "np-591375195",
+      "np-591682455",
+      "np-592203798",
+      "np-592278702",
+      "np-592853138",
+      "np-593321453",
+      "np-593394998",
+      "np-593455773",
+      "np-593671791",
+      "np-636118056",
+      "np-841692486",
+      "np-852880457",
+      "np-880932683"
+     ]
+    },
+    {
+     "name": "grantor",
+     "type": "string",
+     "values": [
+      "AMERICAN LEGION",
+      "EASTERN SHIPBUILDING CHARITIES INC",
+      "GRAND CHAPTER OF FLORIDA ORDER OF THE EASTERN STAR CHARITABLE",
+      "GULF COAST STATE COLLEGE FOUNDATION INC",
+      "GULF COAST WORKFORCE DEVELOPMENT BOARD INC",
+      "HISTORIC ST ANDREWS WATERFRONT PARTNERSHIP INC",
+      "HOLY NATIVITY SCHOOL FOUNDATION INC",
+      "HOMELESS & HUNGER COALITION OF NWFL DBA DOORWAYS OF NWFL",
+      "KREWE OF ST ANDREWS INC",
+      "LIFE MANAGEMENT CENTER OF NORTHWEST FLORIDA INC",
+      "MELISSA RENEE BIGGS MEMORIAL TRUST",
+      "ONE POSITIVE PLACE INC",
+      "PANAMA CITY ADVANCED SCHOOL CORPORATION",
+      "ST ANDREWS EPISCOPAL CHURCH FOUNDATION INC",
+      "UNITED WAY OF NORTHWEST FLORIDA",
+      "VETERANS OF FOREIGN WARS OF THE UNITED STATES DEPT OF FLORIDA",
+      "WOMENS CIVIC CLUB OF PANAMA CITY BEACH INC",
+      "WORLD CHANGERS STUDENT MISSIONS",
+      "ZOOLOGICAL ASSOCIATION OF AMERICA INCORPORATED"
+     ]
+    },
+    {
+     "name": "grantor_ein",
+     "type": "string",
+     "values": [
+      "201568457",
+      "270930552",
+      "311532217",
+      "371595973",
+      "460814301",
+      "562350462",
+      "590863698",
+      "591375195",
+      "591682455",
+      "592203798",
+      "592278702",
+      "592853138",
+      "593321453",
+      "593394998",
+      "593455773",
+      "593671791",
+      "636118056",
+      "841692486",
+      "852880457",
+      "880932683"
+     ]
+    },
+    {
+     "name": "recipient_id",
+     "type": "string"
+    },
+    {
+     "name": "recipient",
+     "type": "string"
+    },
+    {
+     "name": "recipient_ein",
+     "type": "string"
+    },
+    {
+     "name": "recipient_city",
+     "type": "string"
+    },
+    {
+     "name": "recipient_state",
+     "type": "string",
+     "values": [
+      "AL",
+      "CA",
+      "FL",
+      "IL",
+      "KS",
+      "LA",
+      "ME",
+      "MO",
+      "NY",
+      "OK",
+      "PA",
+      "TN",
+      "TX",
+      "VA"
+     ]
+    },
+    {
+     "name": "tax_year",
+     "type": "number"
+    },
+    {
+     "name": "cash",
+     "type": "number"
+    },
+    {
+     "name": "noncash",
+     "type": "number"
+    },
+    {
+     "name": "purpose",
+     "type": "string"
+    },
+    {
+     "name": "county",
+     "type": "string",
+     "values": [
+      "bay"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/nonprofit-grants.json",
+   "csv": "/downloads/nonprofit-grants.csv",
+   "api": "/api/v1/datasets/nonprofit-grants"
+  },
+  {
+   "id": "nonprofit-officials",
+   "title": "Officials on nonprofit boards",
+   "description": "Elected officials, department leaders and candidates listed as an officer or director of a local nonprofit in its IRS returns or state corporate filings. Only matches checked by hand are listed.",
+   "rows": 0,
+   "columns": [
+    {
+     "name": "official_id",
+     "type": "string"
+    },
+    {
+     "name": "official",
+     "type": "string"
+    },
+    {
+     "name": "official_roles",
+     "type": "string"
+    },
+    {
+     "name": "nonprofit_id",
+     "type": "string"
+    },
+    {
+     "name": "nonprofit",
+     "type": "string"
+    },
+    {
+     "name": "ein",
+     "type": "string"
+    },
+    {
+     "name": "titles",
+     "type": "string"
+    },
+    {
+     "name": "first_year",
+     "type": "number"
+    },
+    {
+     "name": "last_year",
+     "type": "number"
+    },
+    {
+     "name": "current",
+     "type": "boolean"
+    },
+    {
+     "name": "sources",
+     "type": "string"
+    },
+    {
+     "name": "county",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/nonprofit-officials.json",
+   "csv": "/downloads/nonprofit-officials.csv",
+   "api": "/api/v1/datasets/nonprofit-officials"
   },
   {
    "id": "tax-districts",

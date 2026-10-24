@@ -162,6 +162,15 @@ def network_data():
                 rec['x'] = 1  # inside a larger project total in the CRA ledger
         recs.append(rec)
 
+    # payees that are local nonprofits (data/nonprofits matches payment records to organizations by name)
+    np_of = {}
+    for fp in sorted(__import__('glob').glob(os.path.join(DATA, 'nonprofits', '*', 'nonprofits.json'))):
+        for p in json.load(open(fp))['payments']:
+            np_of[p['record_id']] = p['nonprofit_id']
+    for r in recs:
+        if r['id'] in np_of and r['e'] in ents:
+            ents[r['e']]['np'] = np_of[r['id']]
+
     rel = []
     for a, b, t, u in RELATED:
         for k in (a, b):
@@ -261,7 +270,7 @@ def connections_page(out_dir):
     return f'''<div class="page tax cn">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Connections · Network</span><h1>Who local governments paid, and who gave to the officials in charge</h1>
     <p class="lede">Every contract, payment and grant on the site, linked to who received it, to other payees on the same project or address, and to business gifts to the officials who approve the spending. Tap any name to follow its connections.</p></div>
-    <div class="stamp"><a class="pill" href="/connections/campaign-gifts">Campaign gifts</a><a class="pill" href="/connections/money-map">Money map</a><span>Campaign reports as of {D.get("as_of") or ""}</span></div></header>
+    <div class="stamp"><a class="pill" href="/connections/campaign-gifts">Campaign gifts</a><a class="pill" href="/connections/money-map">Money map</a><a class="pill" href="/connections/nonprofits">Nonprofits</a><span>Campaign reports as of {D.get("as_of") or ""}</span></div></header>
   {city_bar(cities, label='Government')}
   <section class="explain"><div class="ex-txt"><span class="eyebrow">Read this first</span><h2>What a line means</h2>
     <ol class="ex-steps"><li><b>A gray line is money from a government or agency.</b> Thicker lines carry more dollars in the records. A contract award and the check register payments on it can describe the same money, so record types are never added together.</li>

@@ -7,6 +7,9 @@ For each county with data/sunbiz/<county>/entities.csv.gz, runs data/sunbiz/buil
 that county's entities, people, roles and gift matches in one transaction. Shared-owner groups are upserted so an
 admin's review_status survives a reload; groups that no longer appear are deleted. Confirmed groups are then
 rewritten to the public shared_owner_groups table (business names only).
+Then, when data/nonprofits/<county>/orgs.csv.gz exists, loads nonprofit board members (migration 0033): board people
+and seats are replaced, official name matches are upserted so their review survives, and confirmed matches are
+rewritten to public.nonprofit_officials.
 Officer and agent names go only to this private schema. Street addresses are never stored.
 Run by .github/workflows/sync-db.yml after load.py.
 """
@@ -16,7 +19,9 @@ from psycopg.types.json import Jsonb
 
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 sys.path.insert(0, os.path.join(ROOT, 'data', 'sunbiz'))
+sys.path.insert(0, os.path.join(ROOT, 'data', 'nonprofits'))
 import build_sunbiz  # noqa: E402
+import build_nonprofits  # noqa: E402
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
@@ -93,6 +98,50 @@ def load_county(conn, county):
         cur.execute('insert into registry.loads (county, git_sha, entities, people, roles, gifts, groups, summary) values (%s,%s,%s,%s,%s,%s,%s,%s)',
                     (county, git_sha(), len(E), len(P), len(role_rows), len(G), len(F), Jsonb(s)))
     print(f'registry {county}: {len(E)} entities, {len(P)} people, {len(role_rows)} roles, {len(G)} gift lines, {len(F)} shared-owner groups')
+    if os.path.exists(os.path.join(ROOT, 'data', 'nonprofits', county, 'orgs.csv.gz')):
+        load_boards(conn, county, res)
+
+
+def load_boards(conn, county, sunbiz_res):
+    cur = conn.cursor()
+    cur.execute("select to_regclass('registry.board_people') is not null")
+    if not cur.fetchone()[0]:
+        print('registry: board tables missing (migration 0033), nonprofit boards skipped')
+        return
+    res = build_nonprofits.build(county, sunbiz_res)
+    O, S, P = res['orgs'], res['seats'], res['people']
+    with conn.transaction():
+        cur.execute('delete from registry.board_seats where county = %s', (county,))
+        cur.execute('delete from registry.board_people where county = %s', (county,))
+        _copy(cur, 'registry.board_people', ['county', 'board_key', 'display_name', 'name_key', 'middle_initial', 'n_nonprofits', 'n_current', 'n_current_civic', 'n_seats',
+                                             'official_id', 'official_name', 'official_roles', 'same_name_people', 'registry_person_keys', 'linked_person_keys',
+                                             'n_businesses', 'n_donor_businesses', 'donor_gifts_total', 'businesses'],
+              ((county, p['board_key'], p['display_name'], p['name_key'], p['mid'] or None, p['n_nonprofits'], p['n_current'], p['n_current_civic'], p['n_seats'],
+                p['official_id'], p['official_name'], Jsonb(p['official_roles']), p['same_name_people'], Jsonb(p['registry_person_keys']),
+                Jsonb(p['linked_person_keys']), p['n_businesses'], p['n_donor_businesses'], p['donor_gifts_total'], Jsonb(p['businesses'])) for p in P.values()))
+        _copy(cur, 'registry.board_seats', ['county', 'board_key', 'nonprofit_id', 'nonprofit_name', 'ein', 'source', 'name_as_filed', 'title', 'tax_year',
+                                            'board', 'current', 'roles', 'hours', 'compensation', 'object_id', 'source_url'],
+              ((county, s['board_key'], s['nonprofit_id'], O[s['nonprofit_id']]['name'], O[s['nonprofit_id']]['ein'] or None, s['source'], s['raw_name'],
+                s['title'] or None, s['tax_year'], s['board'], s['current'], s['roles'] or None, s['hours'], s['compensation'], s['object_id'], s['source_url'])
+               for s in S))
+        keep = set()
+        for p in P.values():
+            if p['official_id']:
+                keep.add((p['board_key'], p['official_id']))
+                cur.execute('''insert into registry.board_official_matches (county, board_key, official_id, official_name, loaded_at) values (%s,%s,%s,%s, now())
+                               on conflict (county, board_key, official_id) do update set official_name = excluded.official_name, loaded_at = now()''',
+                            (county, p['board_key'], p['official_id'], p['official_name']))
+        cur.execute('select board_key, official_id from registry.board_official_matches where county = %s', (county,))
+        for bk, oid in [tuple(x) for x in cur.fetchall()]:
+            if (bk, oid) not in keep:
+                cur.execute('delete from registry.board_official_matches where county = %s and board_key = %s and official_id = %s', (county, bk, oid))
+        cur.execute('select registry.publish_board_officials(%s)', (county,))
+        published = cur.fetchone()[0]
+        s = build_nonprofits.summary(res)
+        s['published_official_rows'] = published
+        cur.execute('insert into registry.loads (county, git_sha, entities, people, roles, gifts, groups, summary) values (%s,%s,%s,%s,%s,%s,%s,%s)',
+                    (county + ':nonprofits', git_sha(), len(O), len(P), len(S), None, len(keep), Jsonb(s)))
+    print(f'registry {county} nonprofits: {len(O)} organizations, {len(P)} board people, {len(S)} seats, {len(keep)} official matches, {published} published')
 
 
 def main():

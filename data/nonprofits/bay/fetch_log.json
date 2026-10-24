@@ -1,0 +1,10 @@
+{
+ "bmf": "EfileData/BMF/IRS_BMF_2026_5_28_raw.csv",
+ "postcards": "EfileData/Postcards/990N_Postcards_2026_6_8_raw.txt",
+ "years": "2019-2025",
+ "orgs": 1180,
+ "returns": 1877,
+ "officers": 15014,
+ "grants": 891,
+ "postcards_n": 506
+}
