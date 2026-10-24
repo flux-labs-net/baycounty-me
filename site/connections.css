@@ -82,3 +82,21 @@ html.cn-locked,html.cn-locked body{overflow:hidden}
   .cn .cn-main.fs.has-sel .cn-profile{top:auto;left:0;right:0;bottom:0;width:auto;max-height:55%;border-radius:16px 16px 0 0;padding-bottom:calc(16px + env(safe-area-inset-bottom,0px))}
 }
 .cn .cn-node text.cn-pl{font-weight:700;font-size:12px}
+/* Money trail */
+.cn .cn-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.cn #cnTrail{display:block;margin:0 auto}
+.cn .cn-th text{font:600 11px var(--f-data);letter-spacing:.06em;text-transform:uppercase;fill:var(--muted)}
+.cn .cn-tn{cursor:pointer}
+.cn .cn-tn text{font:500 13px var(--f-body);fill:var(--ink)}
+.cn .cn-tp text{font-weight:700}
+.cn .cn-tb text{font-weight:600}
+.cn .cn-tn:hover text,.cn .cn-tn.on text{fill:var(--blue);text-decoration:underline}
+.cn .cn-tn:focus-visible{outline:none}
+.cn .cn-tn:focus-visible text{fill:var(--blue);text-decoration:underline}
+.cn .cn-tl{font:500 13px var(--f-body);fill:var(--muted)}
+/* Network: start from a name */
+.cn .cn-find input{font:500 13px var(--f-body);border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:8px;padding:6px 10px;width:min(320px,70vw)}
+.cn .cn-prompt text{font:500 14px var(--f-body);fill:var(--muted)}
+.cn .cn-node circle.cn-focus{stroke:var(--ink);stroke-width:2.5}
+.cn .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.cn .cn-tn text.cn-ts{font:400 11px var(--f-body);fill:var(--muted);text-decoration:none}

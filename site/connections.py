@@ -275,19 +275,23 @@ def connections_page(out_dir):
     <div class="cn-grp" id="cnDon"><span class="cn-lbl">Gifts</span></div>
   </div>
   <div class="cn-tabs" role="tablist" aria-label="Views">
+    <button type="button" role="tab" class="cn-tab" id="t-trail" data-v="trail">Money trail</button>
     <button type="button" role="tab" class="cn-tab" id="t-network" data-v="network">Network</button>
     <button type="button" role="tab" class="cn-tab" id="t-payees" data-v="payees">Payees</button>
     <button type="button" role="tab" class="cn-tab" id="t-gifts" data-v="gifts">Campaign gifts</button>
   </div>
   <div class="cn-main">
     <div class="cn-view">
-      <section id="v-network"><div class="cn-vh"><h2>Who the governments paid</h2><div class="cn-fsbar"><button type="button" class="cn-btn cn-fs" aria-pressed="false">Full screen</button></div><div class="cn-legend">
+      <section id="v-trail"><div class="cn-vh"><h2>Paid by a government, and gave to a campaign</h2><span class="cn-note" id="cnTrailCount"></span></div>
+        <div class="cn-wrap cn-scroll"><svg id="cnTrail" role="img" aria-label="Governments that paid each business, and the officials each business gave to"></svg><div class="cn-tip" id="cnTip3" hidden></div></div>
+        <p class="cn-note">Each business in the middle was paid in the records on the left and gave to the campaigns on the right. Gray lines are payments (thicker means more dollars in the records), red lines are campaign gifts. Tap any name to highlight its lines and see its records. A gift and a payment together are facts about the records, not evidence of why either happened.</p></section>
+      <section id="v-network" hidden><div class="cn-vh"><h2>Who the governments paid</h2><label class="cn-find"><span class="sr">Find a name</span><input id="cnQ" list="cnFind" type="search" placeholder="Find a business, official or government" autocomplete="off"><datalist id="cnFind"></datalist></label><button type="button" class="cn-btn" id="cnClear">Clear</button><div class="cn-fsbar"><button type="button" class="cn-btn cn-fs" aria-pressed="false">Full screen</button></div><div class="cn-legend">
         <span><i style="background:var(--navy)"></i>Government or agency</span><span><i style="background:var(--blue)"></i>Business or nonprofit</span>
         <span><i style="background:var(--muted)"></i>Public body, fund or bondholders</span><span><i style="background:var(--amber)"></i>Property owner</span>
         <span><i class="hollow"></i>Not named</span><span><i style="background:var(--salmon)"></i>Official or candidate</span>
         <span><i class="ln dash"></i>Shared project, address or sub</span><span><i class="ln red"></i>Campaign gift</span></div></div>
         <div class="cn-wrap"><svg id="cnGraph" role="img" aria-label="Network of local governments, the payees they paid, and business campaign gifts to the officials who oversee them"></svg><div class="cn-zoom"><button type="button" id="cnGin" aria-label="Zoom in">+</button><button type="button" id="cnGout" aria-label="Zoom out">−</button><button type="button" id="cnGreset">Reset</button></div><div class="cn-tip" id="cnTip" hidden></div></div>
-        <p class="cn-note">Drag a circle to move it, drag the background to pan, and scroll, pinch or use the buttons to zoom. By default the graph shows every payee that gave to a campaign or has a documented link, plus the {TOP} largest; pick "Every payee" for all of them. Tap any node for its record.</p></section>
+        <p class="cn-note">Drag a circle to move it, drag the background to pan, and scroll, pinch or use the buttons to zoom. The graph starts from one name: search above or tap a name anywhere on the page, then tap any circle to add its connections. "Donors and top payees" shows every payee that gave to a campaign or has a documented link plus the {TOP} largest, and "Every payee" shows all of them.</p></section>
       <section id="v-payees" hidden><div class="cn-vh"><h2>Every payee, ranked</h2><span class="cn-note" id="cnPayCount"></span></div>
         <div class="tablewrap"><table class="tx-table" id="cnPay"></table></div></section>
       <section id="v-gifts" hidden><div class="cn-vh"><h2>Business gifts to officials and candidates</h2><span class="cn-note" id="cnDonCount"></span></div>
