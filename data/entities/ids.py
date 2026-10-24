@@ -76,9 +76,17 @@ def biz_case(name):
 # People's names from Sunbiz, IRS filings, the elections office and FDACS are often in all caps. person_case gives them
 # normal name casing. Matching never uses the display form (person_key, name_key and the like work on upper or lower
 # case), so recasing a name changes only how it reads.
-_NAME_UPPER = {'II', 'III', 'IV', 'VI', 'VII', 'VIII', 'MD', 'DDS', 'DMD', 'DVM', 'PHD', 'CPA', 'ESQ', 'PA', 'PE', 'RN', 'USN', 'USAF', 'USMC',
-               'RET', 'JD', 'LCSW', 'CFP', 'MBA', 'EDD'}
-_NAME_FIXED = {'JR': 'Jr', 'SR': 'Sr', 'PHD': 'PhD', 'EDD': 'EdD', 'RET': 'Ret', 'MR': 'Mr', 'MRS': 'Mrs', 'MS': 'Ms', 'DR': 'Dr'}
+# Suffixes and credentials stay in caps: ESQ, DDS, DMD, MD, CPA ...
+_NAME_UPPER = {'II', 'III', 'IV', 'VI', 'VII', 'VIII', 'MD', 'DDS', 'DMD', 'DVM', 'CPA', 'ESQ', 'PA', 'PE', 'RN', 'USN', 'USAF', 'USMC',
+               'JD', 'LCSW', 'CFP', 'MBA', 'APRN', 'ARNP', 'CRNA', 'LPN', 'BSN', 'MSN', 'DNP', 'FNP', 'MPH', 'MSW', 'MSA', 'MHA',
+               'LMHC', 'LMFT', 'AIA', 'CFA', 'CLU', 'CHFC', 'CPCU', 'CCIM', 'GRI', 'PMP', 'SPHR', 'CFRE', 'FACS', 'FACP', 'RPH',
+               'AICP', 'LEED', 'CGC', 'CBC', 'CPM', 'CMA', 'EA', 'USA', 'USCG'}
+# credentials no name is spelled like, safe to recase in a mixed-case name ('Jane Doe Dds')
+_TITLED_CRED = {'MD', 'DDS', 'DMD', 'DVM', 'CPA', 'ESQ', 'APRN', 'ARNP', 'CRNA', 'LCSW', 'LMHC', 'LMFT', 'MBA', 'MPH', 'MSW', 'JD', 'RN'}
+# credentials that are also names (Anh Thi Do, Lin Ma): kept in caps only after a comma ('JOHN SMITH, DO')
+_NAME_UPPER_LATE = {'DO', 'OD', 'DC', 'NP', 'MA', 'MS', 'BS', 'PT', 'OT'}
+_NAME_FIXED = {'JR': 'Jr', 'SR': 'Sr', 'PHD': 'PhD', 'EDD': 'EdD', 'PSYD': 'PsyD', 'PHARMD': 'PharmD', 'DMIN': 'DMin', 'RET': 'Ret',
+               'MR': 'Mr', 'MRS': 'Mrs', 'DR': 'Dr'}
 # Mac is a prefix only in these names (Mack, Macy, Mace and Machado are not Mac-names)
 _MAC = {'macdonald', 'macdougall', 'macgregor', 'mackenzie', 'mackinnon', 'mackay', 'maclean', 'macleod', 'macmillan', 'macneil',
         'macpherson', 'macarthur', 'macaulay', 'macfarlane', 'macintosh', 'macinnis', 'macrae', 'macqueen', 'maclaren', 'macintyre',
@@ -94,13 +102,17 @@ def _name_piece(p):
     return lo.capitalize()
 
 
-def _name_word(w, first):
+def _name_word(w, first, after_comma=False):
     core = re.sub(r'[^A-Za-z]', '', w)
     up = core.upper()
     if not core:
         return w
     if len(core) == 1:  # an initial: J, J.
         return w.upper()
+    if up in _NAME_UPPER_LATE and after_comma:
+        return re.sub(core, up, w, flags=re.I)
+    if up == 'MS' and first:
+        return w.replace(core, 'Ms')
     if up in _NAME_FIXED:
         return w.replace(core, _NAME_FIXED[up])
     if up in _NAME_UPPER and not first:
@@ -121,9 +133,11 @@ def person_case(name):
     s = re.sub(r'\s+', ' ', name).strip()
     words = s.split(' ')
     if s.isupper() or s.islower():
-        return ' '.join(_name_word(w, i == 0) for i, w in enumerate(words))
+        return ' '.join(_name_word(w, i == 0, i > 0 and words[i - 1].endswith(',')) for i, w in enumerate(words))
     # a name typed partly in caps ('Kathy LAWSON', 'McVICAR'): recase the words with three capitals in a row
-    s = ' '.join(_name_word(w, i == 0) if re.search(r'[A-Z]{3}', w) else w for i, w in enumerate(words))
+    s = ' '.join(_name_word(w, i == 0, words[i - 1].endswith(',')) if re.search(r'[A-Z]{3}', w) else w for i, w in enumerate(words))
+    # credentials a plain .title() turned into 'Dds' or 'Esq', after a full name
+    s = re.sub(r"(?<=\S )([A-Z][a-z]{1,4})\b(\.?)$", lambda m: m.group(1).upper() + m.group(2) if m.group(1).upper() in _TITLED_CRED and len(s.split()) >= 3 else m.group(0), s)
     s = re.sub(r"\bMc([a-z])", lambda m: 'Mc' + m.group(1).upper(), s)
     s = re.sub(r"\b(O|D)'([a-z])", lambda m: m.group(1) + "'" + m.group(2).upper(), s)
     return re.sub(r"(?<=\s)(Ii|Iii|Iv)\b", lambda m: m.group(1).upper(), s)
@@ -147,7 +161,7 @@ def sunbiz_person(raw):
                 v = v[:m.start()]
                 middle, last = (v, last) if part == 'middle' else (middle, v)
         raw = ' '.join(x for x in (first, middle, last.rstrip(','), sfx) if x)
-    elif raw.count(',') == 1 and raw.split(',')[1].strip().upper().rstrip('.') not in _NAME_UPPER | set(_NAME_FIXED):
+    elif raw.count(',') == 1 and raw.split(',')[1].strip().upper().rstrip('.') not in _NAME_UPPER | _NAME_UPPER_LATE | set(_NAME_FIXED):
         last, rest = raw.split(',')  # 'SMITH, JOHN A'
         raw = rest.strip() + ' ' + last.strip()
     return person_case(raw)
