@@ -158,49 +158,23 @@ def search_page():
 </div>
 <link rel="stylesheet" href="/assets/tax.css">
 <script>
-(() => {
-  const inp = document.getElementById('sq'), res = document.getElementById('sRes'), cnt = document.getElementById('sCount');
-  const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-  const norm = s => String(s || '').toLowerCase().normalize('NFKD').replace(/[\\u0300-\\u036f]/g, '');
-  let IDX = null, t, pending = 0;
-  const W = {Page: 6, Section: 4, Glossary: 5};
-  const prep = r => ({...r, _t: norm(r.t), _s: norm(r.s), _x: norm(r.x)});
-  // The index comes in pieces: core.json (pages, sections, glossary) first, then page text and each dataset.
-  // Results show as soon as core.json arrives and refresh as the rest lands; once all is in, IDX matches search.json in order.
-  let coreP = null;
-  function load() {
-    if (coreP) return coreP;
-    coreP = fetch('/data/search/core.json').then(r => r.json()).then(c => {
-      const core = c.rows.map(prep), parts = c.parts.map(() => []);
-      const rebuild = () => { IDX = core.concat(...parts); };
-      rebuild(); pending = c.parts.length + 1;
-      const done = () => { pending--; rebuild(); if (inp.value.trim()) run(); };
-      fetch('/data/search/text.json').then(r => r.json()).then(tx => { let i = 0; core.forEach(r => { if (r.k === 'Page') { r.x = tx[i++] || ''; r._x = norm(r.x); } }); }).catch(() => {}).finally(done);
-      c.parts.forEach((n, i) => fetch('/data/search/' + n + '.json').then(r => r.json()).then(p => { parts[i] = p.k ? p.rows.map(([t, s, u]) => prep({k: p.k, t, s, u})) : p.rows.map(prep); }).catch(() => {}).finally(done));
-      return IDX;
-    });
-    return coreP;
-  }
-  const getIdx = async () => { await load(); return IDX; };
-  function hl(s, words) { let h = esc(s); words.forEach(w => { if (w.length > 1) h = h.replace(new RegExp('(' + w.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&') + ')', 'ig'), '<mark>$1</mark>'); }); return h; }
+// Uses the shared engine in site.js (window.BCSearch, site/search.js), which loads after this inline script.
+addEventListener('DOMContentLoaded', () => {
+  const S = window.BCSearch, inp = document.getElementById('sq'), res = document.getElementById('sRes'), cnt = document.getElementById('sCount');
+  let t;
   async function run() {
-    const q = inp.value.trim(), words = norm(q).split(/\\s+/).filter(Boolean);
+    const q = inp.value.trim();
     const u = new URL(location.href); if (q) u.searchParams.set('q', q); else u.searchParams.delete('q'); history.replaceState(null, '', u);
-    if (!words.length) { res.innerHTML = ''; cnt.textContent = ''; return; }
-    const idx = await getIdx();
-    const hits = [];
-    for (const r of idx) {
-      let sc = 0, ok = true;
-      for (const w of words) { const it = r._t.indexOf(w), is = r._s.indexOf(w), ix = r._x ? r._x.indexOf(w) : -1; if (it < 0 && is < 0 && ix < 0) { ok = false; break; } sc += it >= 0 ? (it === 0 ? 4 : 3) : is >= 0 ? 1 : 0.5; }
-      if (ok) hits.push([sc + (W[r.k] || 0), r]);
-    }
-    hits.sort((a, b) => b[0] - a[0]);
+    if (!q) { res.innerHTML = ''; cnt.textContent = ''; return; }
+    await S.load();
+    const {words, hits} = S.query(q), pending = S.pending();
     cnt.textContent = (hits.length ? `${hits.length.toLocaleString()} result${hits.length === 1 ? '' : 's'}${hits.length > 100 ? ', showing the top 100' : ''}` : pending ? 'No results yet.' : 'No results. Try fewer or different words.') + (pending ? ' Still loading records…' : '');
     const snip = r => { if (!r.x || words.some(w => r._s.includes(w))) return r.s; const i = r._x.indexOf(words[0]); return i < 0 ? r.s : '…' + r.x.slice(Math.max(0, i - 80), i + 140) + '…'; };
-    res.innerHTML = hits.slice(0, 100).map(([, r]) => `<li><a href="${esc(r.u)}"><span class="r-k">${esc(r.k)}</span><b>${hl(r.t, words)}</b><span class="r-s">${hl(snip(r), words)}</span></a></li>`).join('');
+    res.innerHTML = hits.slice(0, 100).map(([, r]) => `<li><a href="${S.esc(r.u)}"><span class="r-k">${S.esc(r.k)}</span><b>${S.hl(r.t, words)}</b><span class="r-s">${S.hl(snip(r), words)}</span></a></li>`).join('');
   }
+  S.onUpdate(() => { if (inp.value.trim()) run(); });
   inp.addEventListener('input', () => { clearTimeout(t); t = setTimeout(run, 150); });
-  inp.addEventListener('focus', load, {once: true}); // start fetching the small core file before the first keystroke
+  inp.addEventListener('focus', S.load, {once: true}); // start fetching the small core file before the first keystroke
   const q0 = new URL(location.href).searchParams.get('q'); if (q0) { inp.value = q0; run(); } else inp.focus({preventScroll: true});
-})();
+});
 </script>'''
