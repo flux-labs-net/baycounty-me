@@ -130,12 +130,16 @@ function graph(rows) {
     L = L.filter(l => keepN.has(l.source) && keepN.has(l.target) && (st.focus.has(l.source) || st.focus.has(l.target) || l.type !== 'paid'));
   }
   if (!N.length) { svg.append('text').attr('x', 20).attr('y', 30).attr('fill', 'var(--muted)').attr('font-size', 13).text('Nothing matches these filters.'); hl = null; return; }
-  const rS = d3.scaleSqrt().domain([0, d3.max(N.filter(n => n.k !== 'payer'), d => d.total) || 1]).range([4, 30]);
+  const rS = d3.scaleSqrt().domain([0, d3.max(N.filter(n => n.k !== 'payer'), d => d.total) || 1]).range([4, 22]);
   const wS = d3.scaleSqrt().domain([0, d3.max(L.filter(l => l.type === 'paid'), d => d.amt) || 1]).range([0.8, 7]);
   N.forEach(n => n.r = n.k === 'payer' ? 17 : n.k === 'official' || n.k === 'candidate' ? 8 : Math.max(5, rS(n.total)));
   const connected = new Set(L.filter(l => l.type !== 'paid').flatMap(l => [l.source, l.target]));  // labelled when the graph is small
   const g = svg.append('g');
-  graphZoom = d3.zoom().scaleExtent([0.2, 5]).on('zoom', e => g.attr('transform', e.transform));
+  // labels keep the same on-screen size at every zoom level
+  graphZoom = d3.zoom().scaleExtent([0.2, 5]).on('zoom', e => {
+    const k = e.transform.k; g.attr('transform', e.transform);
+    g.selectAll('.cn-node text').style('font-size', d => (d.k === 'payer' ? 12 : 10.5) / k + 'px').style('stroke-width', 3 / k + 'px').attr('dy', d => d.r + 11 / k);
+  });
   svg.call(graphZoom);
   const link = g.append('g').selectAll('line').data(L).join('line')
     .attr('stroke', d => d.type === 'rel' ? 'var(--amber)' : d.type === 'paid' ? 'var(--faint)' : d.type === 'board' ? 'var(--navy)' : 'var(--salmon)')
@@ -231,7 +235,7 @@ function trail(rows) {
   const H = top + Math.max(biz.length, offs.length, phone ? 0 : pays.length) * row + 16;
   svg.attr('viewBox', `0 0 ${W} ${H}`).attr('width', W).attr('height', H);
   const colW = phone ? W * 0.44 : Math.min(250, W * 0.26), xL = colW, xM0 = phone ? 0 : W / 2 - colW / 2, xM1 = phone ? W * 0.45 : W / 2 + colW / 2, xR = phone ? W * 0.64 : W - colW;
-  const fit = (t, w) => { const n = Math.max(8, Math.floor(w / 7.4)); return t.length > n ? t.slice(0, n - 1) + '…' : t; };
+  const fit = (t, w) => { const n = Math.max(8, Math.floor(w / 6.8)); return t.length > n ? t.slice(0, n - 1) + '…' : t; };
   const yOf = (n, i) => top + (H - top - 16) * (i + 0.5) / n;
   const Y = new Map();
   pays.forEach((p, i) => Y.set('p:' + p, yOf(pays.length, i)));
