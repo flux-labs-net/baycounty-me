@@ -1,6 +1,6 @@
 {
  "name": "BayCounty.me open data",
- "updated": "2026-10-23",
+ "updated": "2026-10-24",
  "license": "Public records; free to reuse with credit to BayCounty.me",
  "datasets": [
   {
@@ -865,6 +865,10 @@
     },
     {
      "name": "notes",
+     "type": "string"
+    },
+    {
+     "name": "payee_entity_id",
      "type": "string"
     },
     {
@@ -2329,17 +2333,3888 @@
    "api": "/api/v1/datasets/accountability-events"
   },
   {
+   "id": "connections-payees",
+   "title": "Connections: payees",
+   "description": "Every payee in the payment records of every local government and agency (contracts, change orders, emergency purchases, check registers, tourism agency payments and the CRA ledger) as one entity, with who paid it and whether it gave to a campaign. dollars_in_records adds every record, and an award and the payments on it can both be records, so it is not a deduplicated total. Unnamed grant recipients are grouped.",
+   "rows": 647,
+   "columns": [
+    {
+     "name": "entity_id",
+     "type": "string"
+    },
+    {
+     "name": "name",
+     "type": "string"
+    },
+    {
+     "name": "kind",
+     "type": "string",
+     "values": [
+      "business",
+      "government",
+      "grant recipients (grouped)",
+      "payee not named",
+      "property owner"
+     ]
+    },
+    {
+     "name": "subconsultant_only",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "paid_by",
+     "type": "array"
+    },
+    {
+     "name": "record_types",
+     "type": "array"
+    },
+    {
+     "name": "records",
+     "type": "number"
+    },
+    {
+     "name": "dollars_in_records",
+     "type": "number"
+    },
+    {
+     "name": "gave_to_campaigns",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "vendor_page",
+     "type": "string"
+    },
+    {
+     "name": "nonprofit_id",
+     "type": "string",
+     "values": [
+      "np-201568457",
+      "np-237393003",
+      "np-371945053",
+      "np-460814301",
+      "np-463023902",
+      "np-465391786",
+      "np-473791305",
+      "np-590391375",
+      "np-590791014",
+      "np-591375195",
+      "np-591682455",
+      "np-591850105",
+      "np-592323037",
+      "np-592857564",
+      "np-593094842",
+      "np-593623103",
+      "np-597604357",
+      "np-812762071",
+      "np-822407490",
+      "np-831080685",
+      "np-843264244",
+      "np-862534565",
+      "np-931911204",
+      "np-sb-n15000002757",
+      "np-sb-n97000001854"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/connections-payees.json",
+   "csv": "/downloads/connections-payees.csv",
+   "api": "/api/v1/datasets/connections-payees"
+  },
+  {
+   "id": "connections-payments",
+   "title": "Connections: payment records",
+   "description": "One row per payment record behind the Connections network: which government or agency paid which payee, the record type, amount, date and source. CRA ledger items that are only proposed or planned are not included.",
+   "rows": 1149,
+   "columns": [
+    {
+     "name": "record_id",
+     "type": "string"
+    },
+    {
+     "name": "payer_id",
+     "type": "string",
+     "values": [
+      "cra:CW",
+      "cra:LH",
+      "cra:PC",
+      "cra:PCB",
+      "cra:PK",
+      "cra:SF",
+      "g:county",
+      "g:cw",
+      "g:destination_pc",
+      "g:lh",
+      "g:mb",
+      "g:mb_cdc",
+      "g:parker",
+      "g:pc",
+      "g:pcb",
+      "g:sp",
+      "g:visit_pcb"
+     ]
+    },
+    {
+     "name": "payer",
+     "type": "string",
+     "values": [
+      "Bay County",
+      "Callaway",
+      "Callaway CRA",
+      "Destination Panama City",
+      "Lynn Haven",
+      "Lynn Haven CRA",
+      "Mexico Beach",
+      "Mexico Beach CDC",
+      "Panama City",
+      "Panama City Beach",
+      "Panama City Beach CRA",
+      "Panama City CRA",
+      "Parker",
+      "Parker CRA",
+      "Springfield",
+      "Springfield CRA",
+      "Visit Panama City Beach"
+     ]
+    },
+    {
+     "name": "payer_kind",
+     "type": "string",
+     "values": [
+      "government",
+      "redevelopment agency",
+      "tourism agency"
+     ]
+    },
+    {
+     "name": "payer_gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "destination_pc",
+      "lh",
+      "mb",
+      "mb_cdc",
+      "parker",
+      "pc",
+      "pcb",
+      "sp",
+      "visit_pcb"
+     ]
+    },
+    {
+     "name": "entity_id",
+     "type": "string"
+    },
+    {
+     "name": "payee",
+     "type": "string"
+    },
+    {
+     "name": "record_type",
+     "type": "string",
+     "values": [
+      "CRA ledger",
+      "Change orders",
+      "Check registers",
+      "Contracts",
+      "Emergency purchases",
+      "Tourism agency payments"
+     ]
+    },
+    {
+     "name": "amount",
+     "type": "number"
+    },
+    {
+     "name": "date",
+     "type": "string"
+    },
+    {
+     "name": "what",
+     "type": "string"
+    },
+    {
+     "name": "cra_status",
+     "type": "string",
+     "values": [
+      "Budgeted",
+      "Committed",
+      "Spent"
+     ]
+    },
+    {
+     "name": "inside_project_total",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "destination_pc",
+      "lh",
+      "mb",
+      "mb_cdc",
+      "parker",
+      "pc",
+      "pcb",
+      "sp",
+      "visit_pcb"
+     ]
+    }
+   ],
+   "json": "/downloads/connections-payments.json",
+   "csv": "/downloads/connections-payments.csv",
+   "api": "/api/v1/datasets/connections-payments"
+  },
+  {
+   "id": "connections-links",
+   "title": "Connections: documented links",
+   "description": "Documented links between payees that are not payments (shared project, address or subcontract), each with its source.",
+   "rows": 7,
+   "columns": [
+    {
+     "name": "entity_a",
+     "type": "string",
+     "values": [
+      "v:acorns-to-oaks-academy",
+      "v:dewberry",
+      "v:gac-contractors",
+      "v:pbs-j",
+      "v:volkert"
+     ]
+    },
+    {
+     "name": "name_a",
+     "type": "string",
+     "values": [
+      "Acorns to Oaks Academy",
+      "Dewberry Engineers",
+      "GAC Contractors, Inc.",
+      "PBS&J",
+      "Volkert, Inc."
+     ]
+    },
+    {
+     "name": "entity_b",
+     "type": "string",
+     "values": [
+      "o:owner-of-401-e-6th-st",
+      "s:gortemoller-engineering",
+      "s:southern-earth-sciences",
+      "v:cwr-contracting",
+      "v:dewberry"
+     ]
+    },
+    {
+     "name": "name_b",
+     "type": "string",
+     "values": [
+      "CWR Contracting, Inc.",
+      "Dewberry Engineers",
+      "Gortemoller Engineering",
+      "Owner of 401 E 6th St",
+      "Southern Earth Sciences"
+     ]
+    },
+    {
+     "name": "connection",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/connections-links.json",
+   "csv": "/downloads/connections-links.csv",
+   "api": "/api/v1/datasets/connections-links"
+  },
+  {
+   "id": "connections-gifts",
+   "title": "Connections: business gifts to officials",
+   "description": "Gifts from businesses, PACs and committees to current officeholders and 2026 candidates, one row per donor and official, with the payee id when the donor was also paid by a local government. Individual donors are never included.",
+   "rows": 689,
+   "columns": [
+    {
+     "name": "donor",
+     "type": "string"
+    },
+    {
+     "name": "donor_type",
+     "type": "string",
+     "values": [
+      "business",
+      "committee",
+      "other",
+      "pac"
+     ]
+    },
+    {
+     "name": "official",
+     "type": "string"
+    },
+    {
+     "name": "office",
+     "type": "string"
+    },
+    {
+     "name": "official_gov_id",
+     "type": "string",
+     "values": [
+      "clerk",
+      "county",
+      "cw",
+      "lh",
+      "pc",
+      "pcb",
+      "schools",
+      "sheriff",
+      "soe",
+      "sp",
+      "tax_collector"
+     ]
+    },
+    {
+     "name": "candidate_2026",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "sits_on",
+     "type": "array"
+    },
+    {
+     "name": "amount",
+     "type": "number"
+    },
+    {
+     "name": "gifts",
+     "type": "number"
+    },
+    {
+     "name": "dates",
+     "type": "string"
+    },
+    {
+     "name": "payee_entity_id",
+     "type": "string",
+     "values": [
+      "v:aaron-rich-marketing",
+      "v:american-sand",
+      "v:anderson-columbia",
+      "v:bay-point-billfish",
+      "v:bgn",
+      "v:charlie-coram-s-place",
+      "v:coastal-parasail",
+      "v:culpepper",
+      "v:cw-roberts",
+      "v:dag-architects",
+      "v:dewberry",
+      "v:disposal-services",
+      "v:ecsc",
+      "v:florida-architects",
+      "v:gcuc",
+      "v:grand-slam-sports-tournaments",
+      "v:mainline",
+      "v:marshall-brothers",
+      "v:mr-fence",
+      "v:panhandle-engineering",
+      "v:pg-environmental-fl",
+      "v:press-print-graphics",
+      "v:rj-gorman-contracting",
+      "v:rj-gorman-marine",
+      "v:roberts-and-roberts",
+      "v:southeastern-outdoor",
+      "v:timmins-consulting",
+      "v:tk-vandy",
+      "v:williams-communications"
+     ]
+    },
+    {
+     "name": "match_confidence",
+     "type": "string",
+     "values": [
+      "exact",
+      "likely"
+     ]
+    },
+    {
+     "name": "report_url",
+     "type": "string"
+    },
+    {
+     "name": "as_of",
+     "type": "string",
+     "values": [
+      "2026-10-21"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "clerk",
+      "county",
+      "cw",
+      "lh",
+      "pc",
+      "pcb",
+      "schools",
+      "sheriff",
+      "soe",
+      "sp",
+      "tax_collector"
+     ]
+    }
+   ],
+   "json": "/downloads/connections-gifts.json",
+   "csv": "/downloads/connections-gifts.csv",
+   "api": "/api/v1/datasets/connections-gifts"
+  },
+  {
+   "id": "money-map-gifts",
+   "title": "Money map: gifts to officials",
+   "description": "Gifts from businesses and committees to each current officeholder, and whether the donor holds contracts with that official's government. Individuals appear only as totals.",
+   "rows": 548,
+   "columns": [
+    {
+     "name": "donor",
+     "type": "string"
+    },
+    {
+     "name": "donor_type",
+     "type": "string",
+     "values": [
+      "business",
+      "other",
+      "pac"
+     ]
+    },
+    {
+     "name": "official",
+     "type": "string",
+     "values": [
+      "Allan Branch",
+      "Ann Leonard",
+      "Bill Kinsaul",
+      "Bob Pelletier",
+      "Bobby J. Birdsell",
+      "Brian Grainger",
+      "Cindy Hamre",
+      "Clair Pease",
+      "Daniel Raffield",
+      "David Griggs",
+      "Doug Crosby",
+      "Doug Moore",
+      "Ethan Register",
+      "Jamie Warrick",
+      "Janice Lucas",
+      "Jerry L. Register",
+      "Josh Street",
+      "Kenneth L. Ayers, Jr.",
+      "Mary Coburn",
+      "Michael Jarman",
+      "Nina Ward",
+      "Pat Perno",
+      "Paul Casto",
+      "Robbie Hughes",
+      "Sam Peebles",
+      "Stuart Tettemer",
+      "Tommy Ford",
+      "William (Chuck) Perdue",
+      "Winston Chester"
+     ]
+    },
+    {
+     "name": "office",
+     "type": "string",
+     "values": [
+      "Bay County Commission, District 1",
+      "Bay County Commission, District 3",
+      "Bay County Commission, District 4",
+      "Bay County Commission, District 5",
+      "Callaway Commissioner, Ward 1",
+      "Callaway Commissioner, Ward 2",
+      "Callaway Commissioner, Ward 3",
+      "Callaway Commissioner, Ward 4",
+      "Clerk of Circuit Court & Comptroller",
+      "Lynn Haven Commissioner, Seat 1",
+      "Lynn Haven Commissioner, Seat 2",
+      "Lynn Haven Commissioner, Seat 3",
+      "Panama City Beach Council, Ward 1",
+      "Panama City Beach Council, Ward 2",
+      "Panama City Beach Council, Ward 3",
+      "Panama City Beach Council, Ward 4",
+      "Panama City Beach Mayor",
+      "Panama City Commission, Ward I",
+      "Panama City Commission, Ward II",
+      "Panama City Commission, Ward III",
+      "Panama City Commission, Ward IV",
+      "Panama City Mayor",
+      "School Board, District 1",
+      "School Board, District 2",
+      "School Board, District 4",
+      "Sheriff",
+      "Springfield Commissioner, Ward 4",
+      "Supervisor of Elections",
+      "Tax Collector"
+     ]
+    },
+    {
+     "name": "gov",
+     "type": "string",
+     "values": [
+      "constitutional",
+      "county",
+      "cw",
+      "lh",
+      "pc",
+      "pcb",
+      "schools",
+      "sp"
+     ]
+    },
+    {
+     "name": "amount",
+     "type": "number"
+    },
+    {
+     "name": "dates",
+     "type": "array"
+    },
+    {
+     "name": "donor_holds_contracts_here",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "official_total_raised",
+     "type": "number"
+    },
+    {
+     "name": "official_from_individuals",
+     "type": "number"
+    },
+    {
+     "name": "official_individual_gifts",
+     "type": "number"
+    },
+    {
+     "name": "report_url",
+     "type": "string",
+     "values": [
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=26&c=bay&ca=580&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=26&c=bay&ca=637&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=26&c=bay&ca=638&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=26&c=bay&ca=650&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=26&c=bay&ca=651&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=26&c=bay&ca=657&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=26&c=bay&ca=658&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=26&c=bay&ca=660&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=26&c=bay&ca=661&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=27&c=bay&ca=589&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=27&c=bay&ca=593&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=28&c=bay&ca=577&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=28&c=bay&ca=584&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=30&c=bay&ca=600&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=30&c=bay&ca=609&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=30&c=bay&ca=615&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=30&c=bay&ca=621&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=31&c=bay&ca=645&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=31&c=bay&ca=652&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=31&c=bay&ca=654&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=31&c=bay&ca=655&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=31&c=bay&ca=665&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=32&c=bay&ca=691&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=32&c=bay&ca=692&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=32&c=bay&ca=694&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=32&c=bay&ca=701&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=727&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=729&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=36&c=bay&ca=717&rellevel=4&committee=N"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "pc",
+      "pcb",
+      "schools",
+      "sp"
+     ]
+    }
+   ],
+   "json": "/downloads/money-map-gifts.json",
+   "csv": "/downloads/money-map-gifts.csv",
+   "api": "/api/v1/datasets/money-map-gifts"
+  },
+  {
+   "id": "money-map-contracts",
+   "title": "Money map: donor contracts",
+   "description": "Contracts, awards and payments held by campaign donors, per donor and government.",
+   "rows": 57,
+   "columns": [
+    {
+     "name": "donor",
+     "type": "string",
+     "values": [
+      "American Sand & Asphalt Paving",
+      "Anderson Columbia Co., Inc.",
+      "BGN Contractors",
+      "CW Roberts",
+      "Charlie Coram's Place",
+      "Coastal Parasail Inc",
+      "Culpepper",
+      "Dewberry",
+      "ECSC, LLC",
+      "Florida Architects, Inc.",
+      "Gulf Coast Utility Contractors",
+      "Mainline Construction",
+      "Marshall Brothers",
+      "Mr Fence",
+      "Panhandle Engineering Inc.",
+      "RJ Gorman Marine",
+      "RJ Gorman Marine Construction",
+      "Roberts and Roberts, Inc.",
+      "Southeastern Outdoor Mgmt",
+      "TK Vandy LLC",
+      "Williams Communications"
+     ]
+    },
+    {
+     "name": "donor_type",
+     "type": "string",
+     "values": [
+      "business"
+     ]
+    },
+    {
+     "name": "gov",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "pc",
+      "pcb",
+      "sp"
+     ]
+    },
+    {
+     "name": "government",
+     "type": "string",
+     "values": [
+      "Bay County",
+      "Callaway",
+      "Lynn Haven",
+      "Mexico Beach",
+      "Panama City",
+      "Panama City Beach",
+      "Springfield"
+     ]
+    },
+    {
+     "name": "awarded_total",
+     "type": "number"
+    },
+    {
+     "name": "paid_total",
+     "type": "number"
+    },
+    {
+     "name": "awards",
+     "type": "number"
+    },
+    {
+     "name": "other_records",
+     "type": "number"
+    },
+    {
+     "name": "records",
+     "type": "array"
+    },
+    {
+     "name": "source_urls",
+     "type": "array"
+    },
+    {
+     "name": "likely_match_only",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "vendor",
+     "type": "string",
+     "values": [
+      "American Sand & Asphalt Paving",
+      "Anderson Columbia Co.",
+      "BGN Contractors (Gage Golden Construction)",
+      "C.W. Roberts Contracting",
+      "Charlie Coram's Place",
+      "Coastal Parasail",
+      "Culpepper Construction",
+      "Dewberry Engineers",
+      "ECSC (Emerald Coast Site Construction)",
+      "Florida Architects",
+      "Gulf Coast Utility Contractors",
+      "Mainline Construction",
+      "Marshall Brothers Construction & Engineering",
+      "Mr. Fence of Florida",
+      "Panhandle Engineering",
+      "RJ Gorman Marine Construction",
+      "Roberts and Roberts",
+      "Southeastern Outdoor Management",
+      "TK Vandy",
+      "Williams Communications"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "pc",
+      "pcb",
+      "sp"
+     ]
+    }
+   ],
+   "json": "/downloads/money-map-contracts.json",
+   "csv": "/downloads/money-map-contracts.csv",
+   "api": "/api/v1/datasets/money-map-contracts"
+  },
+  {
+   "id": "money-map-votes",
+   "title": "Money map: votes on donors' contracts",
+   "description": "Recorded votes by an official on a contract with one of their own donors, and whether the gift came before or after.",
+   "rows": 18,
+   "columns": [
+    {
+     "name": "donor",
+     "type": "string",
+     "values": [
+      "Anderson Columbia Co., Inc.",
+      "CW Roberts",
+      "Culpepper",
+      "Dewberry",
+      "ECSC, LLC",
+      "Marshall Brothers",
+      "RJ Gorman Marine Construction",
+      "Roberts and Roberts, Inc."
+     ]
+    },
+    {
+     "name": "official",
+     "type": "string",
+     "values": [
+      "Allan Branch",
+      "Clair Pease",
+      "Daniel Raffield",
+      "Doug Crosby",
+      "Jamie Warrick"
+     ]
+    },
+    {
+     "name": "office",
+     "type": "string",
+     "values": [
+      "Bay County Commission, District 1",
+      "Bay County Commission, District 3",
+      "Bay County Commission, District 5",
+      "Lynn Haven Commissioner, Seat 3",
+      "Panama City Mayor"
+     ]
+    },
+    {
+     "name": "gov",
+     "type": "string",
+     "values": [
+      "county",
+      "lh",
+      "pc"
+     ]
+    },
+    {
+     "name": "gift_amount",
+     "type": "number"
+    },
+    {
+     "name": "gift_dates",
+     "type": "array"
+    },
+    {
+     "name": "vote_date",
+     "type": "string",
+     "values": [
+      "2024-04-16",
+      "2024-11-19",
+      "2024-12-17",
+      "2025-02-04",
+      "2025-04-01",
+      "2025-06-24",
+      "2025-07-15",
+      "2025-08-19",
+      "2025-10-14",
+      "2026-01-06",
+      "2026-01-13",
+      "2026-02-18",
+      "2026-06-16",
+      "2026-08-25"
+     ]
+    },
+    {
+     "name": "item",
+     "type": "string",
+     "values": [
+      "Approved Dewberry Engineers task order for Merrick entrance drainage",
+      "Approved Dewberry task order for 5th St. and Pennsylvania Ave. sidewalk",
+      "Approved consent items including a $1.2 million stormwater contract",
+      "Awarded FY25 dirt road paving contract to Anderson Columbia",
+      "Awarded FY25 road resurfacing phase 1 contract",
+      "Awarded FY26 road resurfacing phase 1 contract",
+      "Awarded Millville plant generator bid to Marshall Brothers",
+      "Awarded Nelson Facility seawall and dredging contract",
+      "Awarded North Bay wastewater reactor improvements contract",
+      "Awarded Owenwood Road dirt road stabilization contract",
+      "Awarded Redwood Avenue drainage contract to ECSC, LLC",
+      "Awarded Rollohome Road paving contract to Anderson Columbia",
+      "Awarded Titus Road and CR 2321 intersection work",
+      "Awarded water distribution hardening contract to Marshall Brothers",
+      "Awarded water treatment plant generator contract to Culpepper Construction"
+     ]
+    },
+    {
+     "name": "amount",
+     "type": "number"
+    },
+    {
+     "name": "vote",
+     "type": "string",
+     "values": [
+      "yes"
+     ]
+    },
+    {
+     "name": "outcome",
+     "type": "string",
+     "values": [
+      "passed"
+     ]
+    },
+    {
+     "name": "tally",
+     "type": "string",
+     "values": [
+      "3-1",
+      "4-0",
+      "5-0"
+     ]
+    },
+    {
+     "name": "consent_agenda",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "gift_before_or_after_vote",
+     "type": "string",
+     "values": [
+      "after"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://bayforms.baycoclerk.com/PublicAccess/PublicRecordSearch/",
+      "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Minutes/_01132026-1082",
+      "https://www.cityoflynnhaven.gov/AgendaCenter/ViewFile/Minutes/_10142025-1032",
+      "https://www.panamacity.gov/AgendaCenter/ViewFile/Minutes/_06242025-751",
+      "https://www.panamacity.gov/AgendaCenter/ViewFile/Minutes/_08252026-880"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "lh",
+      "pc"
+     ]
+    }
+   ],
+   "json": "/downloads/money-map-votes.json",
+   "csv": "/downloads/money-map-votes.csv",
+   "api": "/api/v1/datasets/money-map-votes"
+  },
+  {
+   "id": "donor-contracts",
+   "title": "Donors with government contracts",
+   "description": "Each business donor matched to a local government contract, award or payment, with the match method and confidence.",
+   "rows": 177,
+   "columns": [
+    {
+     "name": "contributor",
+     "type": "string"
+    },
+    {
+     "name": "vendor",
+     "type": "string"
+    },
+    {
+     "name": "vendor_id",
+     "type": "string",
+     "values": [
+      "aaron-rich-marketing",
+      "american-sand",
+      "anderson-columbia",
+      "bay-point-billfish",
+      "bgn",
+      "charlie-coram-s-place",
+      "coastal-parasail",
+      "culpepper",
+      "cw-roberts",
+      "dag-architects",
+      "dewberry",
+      "disposal-services",
+      "ecsc",
+      "florida-architects",
+      "gcuc",
+      "grand-slam-sports-tournaments",
+      "mainline",
+      "marshall-brothers",
+      "mr-fence",
+      "panhandle-engineering",
+      "pg-environmental-fl",
+      "press-print-graphics",
+      "rj-gorman-contracting",
+      "rj-gorman-marine",
+      "roberts-and-roberts",
+      "southeastern-outdoor",
+      "timmins-consulting",
+      "tk-vandy",
+      "williams-communications"
+     ]
+    },
+    {
+     "name": "candidate",
+     "type": "string",
+     "values": [
+      "Allan Branch",
+      "Ann Leonard",
+      "Bill Kinsaul",
+      "Brian Grainger",
+      "Clair Pease",
+      "Daniel Raffield",
+      "David Griggs",
+      "Doug Crosby",
+      "Ethan Register",
+      "Glenn Manley",
+      "Grant Wittstruck",
+      "Jamie Warrick",
+      "Mary Coburn",
+      "Michael Petty",
+      "Nick Atkinson",
+      "Paul Casto",
+      "Robbie Hughes",
+      "Scott Duvall",
+      "Tommy Ford",
+      "Winston Chester"
+     ]
+    },
+    {
+     "name": "person_id",
+     "type": "string",
+     "values": [
+      "allan-branch",
+      "ann-leonard",
+      "bill-kinsaul",
+      "brian-grainger",
+      "clair-pease",
+      "daniel-raffield",
+      "david-griggs",
+      "doug-crosby",
+      "ethan-register",
+      "glenn-manley",
+      "grant-wittstruck",
+      "jamie-warrick",
+      "mary-coburn",
+      "michael-petty",
+      "nick-atkinson",
+      "paul-casto",
+      "robbie-hughes",
+      "scott-duvall",
+      "tommy-ford",
+      "winston-chester"
+     ]
+    },
+    {
+     "name": "office",
+     "type": "string",
+     "values": [
+      "Bay County Commission, District 1",
+      "Bay County Commission, District 3",
+      "Bay County Commission, District 4",
+      "Bay County Commission, District 5",
+      "Callaway Commissioner, Ward 2",
+      "Clerk of Circuit Court & Comptroller",
+      "Lynn Haven Commissioner, Seat 3",
+      "Panama City Beach Council, Ward 1",
+      "Panama City Beach Council, Ward 2",
+      "Panama City Beach Council, Ward 3",
+      "Panama City Commission, Ward I",
+      "Panama City Commission, Ward III",
+      "Panama City Mayor",
+      "School Board, District 2",
+      "School Board, District 3",
+      "School Board, District 4",
+      "Sheriff"
+     ]
+    },
+    {
+     "name": "office_gov_id",
+     "type": "string",
+     "values": [
+      "clerk",
+      "county",
+      "cw",
+      "lh",
+      "pc",
+      "pcb",
+      "schools",
+      "sheriff"
+     ]
+    },
+    {
+     "name": "election",
+     "type": "string",
+     "values": [
+      "2022 municipal (Apr 19, 2022)",
+      "2022 primary/general",
+      "2023 municipal (Apr 18, 2023)",
+      "2024 municipal (Apr 16, 2024)",
+      "2024 primary/general",
+      "2025 municipal (Apr 22, 2025)",
+      "2026 Primary/General (Aug 18 / Nov 3, 2026)",
+      "2026 primary/general (in progress)"
+     ]
+    },
+    {
+     "name": "contribution_amount",
+     "type": "number"
+    },
+    {
+     "name": "contribution_dates",
+     "type": "array"
+    },
+    {
+     "name": "contract_ids_or_descriptions",
+     "type": "array"
+    },
+    {
+     "name": "record_ids",
+     "type": "array"
+    },
+    {
+     "name": "contract_source_urls",
+     "type": "array"
+    },
+    {
+     "name": "contract_government",
+     "type": "string",
+     "values": [
+      "Bay County BOCC",
+      "City of Callaway",
+      "City of Lynn Haven",
+      "City of Mexico Beach",
+      "City of Panama City",
+      "City of Panama City Beach",
+      "City of Springfield",
+      "Mexico Beach Community Development Council",
+      "Panama City Beach Convention & Visitors Bureau (Visit Panama City Beach)",
+      "Panama City Community Development Council (Destination Panama City)"
+     ]
+    },
+    {
+     "name": "contract_gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "destination_pc",
+      "lh",
+      "mb",
+      "mb_cdc",
+      "pc",
+      "pcb",
+      "sp",
+      "visit_pcb"
+     ]
+    },
+    {
+     "name": "record_types",
+     "type": "array"
+    },
+    {
+     "name": "match_confidence",
+     "type": "string",
+     "values": [
+      "exact",
+      "likely"
+     ]
+    },
+    {
+     "name": "note",
+     "type": "string",
+     "values": [
+      "Names match after removing punctuation and legal suffixes.",
+      "The filing spells the name \"American Sand and Asphalt Pavi\"; matched to American Sand & Asphalt Paving by a hand-checked spelling join. \"AMERICAN SAND &\" is the Lynn Haven warrant list cut at 15 characters; \"American Sand and Asphalt Pavi\" is a campaign filing cut at 30 characters.",
+      "The filing spells the name \"Culpepper\"; matched to Culpepper Construction by a hand-checked spelling join. \"CULPEPPER CONST\" is the Lynn Haven warrant list cut at 15 characters; one campaign filing lists just \"Culpepper\".",
+      "The filing spells the name \"Dewberry\"; matched to Dewberry Engineers by a hand-checked spelling join. Panama City awarded Project RESTORE Glenwood task orders to \"Dewberry Engineering Inc.\" (2023-11-28 agenda) and the CEI task order for the same project to \"Dewberry Engineers Inc.\" (2025-06-10); Dewberry's Panhandle offices came from its 2016 purchase of Preble-Rish (dewberry.com). \"DEWBERRY\" is the Lynn Haven warrant list; \"Dewberry\" is how two campaign filings list it.",
+      "The filing spells the name \"Marshall Bothers\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing.",
+      "The filing spells the name \"RJ Gorman Marine\"; matched to RJ Gorman Marine Construction by a hand-checked spelling join. Register spelling \"R.J. Gorman Marine Construction LLC\"; one campaign filing cuts it to \"RJ Gorman Marine\". Kept separate from RJ Gorman Contracting, LLC (a different LLC that built the Mexico Beach and PCB piers).",
+      "The filing spells the name \"Robers and Roberts, Inc\"; matched to Roberts and Roberts by a hand-checked spelling join. \"ROBERTS & ROBER\" is the Lynn Haven warrant list cut at 15 characters; \"Robers and Roberts, Inc\" is a typo in one 2026 campaign filing.",
+      "The filing spells the name \"Southeastern Outdoor Mgmt\"; matched to Southeastern Outdoor Management by a hand-checked spelling join. \"Southeastern Outdoor Met Inc\" is how the scanned Visit PCB register reads; \"Southeastern Outdoor Mgmt\" is a campaign filing."
+     ]
+    },
+    {
+     "name": "campaign_report_url",
+     "type": "string",
+     "values": [
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=26&c=bay&ca=580&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=26&c=bay&ca=638&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=26&c=bay&ca=650&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=26&c=bay&ca=651&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=26&c=bay&ca=658&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=26&c=bay&ca=660&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=27&c=bay&ca=589&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=28&c=bay&ca=577&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=28&c=bay&ca=584&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=30&c=bay&ca=621&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=31&c=bay&ca=654&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=32&c=bay&ca=691&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=32&c=bay&ca=694&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=32&c=bay&ca=701&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=719&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=727&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=730&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=734&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=735&rellevel=4&committee=N",
+      "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=743&rellevel=4&committee=N"
+     ]
+    },
+    {
+     "name": "same_government_as_office",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "refunded_by_campaign",
+     "type": "number"
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "destination_pc",
+      "lh",
+      "mb",
+      "mb_cdc",
+      "pc",
+      "pcb",
+      "sp",
+      "visit_pcb"
+     ]
+    }
+   ],
+   "json": "/downloads/donor-contracts.json",
+   "csv": "/downloads/donor-contracts.csv",
+   "api": "/api/v1/datasets/donor-contracts"
+  },
+  {
+   "id": "vendors-directory",
+   "title": "Companies",
+   "description": "Every company in BayCounty.me records, with its other spellings, the governments it works with and how many records name it.",
+   "rows": 598,
+   "columns": [
+    {
+     "name": "vendor_id",
+     "type": "string"
+    },
+    {
+     "name": "name",
+     "type": "string"
+    },
+    {
+     "name": "aliases",
+     "type": "array"
+    },
+    {
+     "name": "gov_ids",
+     "type": "array"
+    },
+    {
+     "name": "records",
+     "type": "object"
+    },
+    {
+     "name": "vendor_type",
+     "type": "string",
+     "values": [
+      "business",
+      "public"
+     ]
+    },
+    {
+     "name": "page",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/vendors-directory.json",
+   "csv": "/downloads/vendors-directory.csv",
+   "api": "/api/v1/datasets/vendors-directory"
+  },
+  {
+   "id": "people-directory",
+   "title": "People",
+   "description": "Elected officials, department leaders and 2026 candidates named in BayCounty.me records, with their roles.",
+   "rows": 136,
+   "columns": [
+    {
+     "name": "person_id",
+     "type": "string"
+    },
+    {
+     "name": "name",
+     "type": "string"
+    },
+    {
+     "name": "district",
+     "type": "string",
+     "values": [
+      "District 1",
+      "District 2",
+      "District 3",
+      "District 4",
+      "District 5"
+     ]
+    },
+    {
+     "name": "gov_ids",
+     "type": "array"
+    },
+    {
+     "name": "roles",
+     "type": "array"
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/people-directory.json",
+   "csv": "/downloads/people-directory.csv",
+   "api": "/api/v1/datasets/people-directory"
+  },
+  {
+   "id": "glossary-terms",
+   "title": "Glossary",
+   "description": "Plain-English definitions of the government and tax terms used on the site.",
+   "rows": 45,
+   "columns": [
+    {
+     "name": "term_id",
+     "type": "string"
+    },
+    {
+     "name": "group_id",
+     "type": "string",
+     "values": [
+      "budget",
+      "cra",
+      "deals",
+      "records",
+      "status",
+      "tax"
+     ]
+    },
+    {
+     "name": "group_name",
+     "type": "string",
+     "values": [
+      "Budgets and where money comes from",
+      "Community Redevelopment Agencies",
+      "Contracts, land and borrowing",
+      "How we label spending on this site",
+      "Property taxes and your bill",
+      "Public records"
+     ]
+    },
+    {
+     "name": "term",
+     "type": "string"
+    },
+    {
+     "name": "simple",
+     "type": "string"
+    },
+    {
+     "name": "more",
+     "type": "string"
+    },
+    {
+     "name": "example",
+     "type": "string",
+     "values": [
+      "5 mills on a home taxed at $200,000 is $1,000 a year.",
+      "FY2026 runs from October 1, 2025 to September 30, 2026.",
+      "For Amendment 3, it estimated the loss for every county, city and special district.",
+      "If a district was worth $100 million when it started and is worth $150 million now, the taxes on the $50 million difference go to the CRA.",
+      "In 2025, a homestead assessed at $200,000 was taxed on $149,278 by the city and county and on $175,000 by the school board.",
+      "Lynn Haven's CRA covers about 695 acres around Ohio and Florida Avenues.",
+      "Panama City approved five TIF rebate awards downtown in December 2024."
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/glossary-terms.json",
+   "csv": "/downloads/glossary-terms.csv",
+   "api": "/api/v1/datasets/glossary-terms"
+  },
+  {
+   "id": "site-updates",
+   "title": "What's new",
+   "description": "Each change to the site's data and pages, newest first.",
+   "rows": 49,
+   "columns": [
+    {
+     "name": "date",
+     "type": "string",
+     "values": [
+      "2026-10-20",
+      "2026-10-21",
+      "2026-10-22",
+      "2026-10-23",
+      "2026-10-24"
+     ]
+    },
+    {
+     "name": "title",
+     "type": "string"
+    },
+    {
+     "name": "text",
+     "type": "string"
+    },
+    {
+     "name": "pages",
+     "type": "array"
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/site-updates.json",
+   "csv": "/downloads/site-updates.csv",
+   "api": "/api/v1/datasets/site-updates"
+  },
+  {
+   "id": "savings-opportunities",
+   "title": "Savings finder: opportunities",
+   "description": "Places Bay County governments could spend less: the spending each touches, a low and high estimate with its stated assumption, the next step and the records still needed. Every figure is computed from the Accountability projects and the CRA ledger.",
+   "rows": 10,
+   "columns": [
+    {
+     "name": "opportunity_id",
+     "type": "string"
+    },
+    {
+     "name": "rank",
+     "type": "number"
+    },
+    {
+     "name": "title",
+     "type": "string"
+    },
+    {
+     "name": "government",
+     "type": "string",
+     "values": [
+      "Callaway, Springfield",
+      "Lynn Haven",
+      "Panama City",
+      "Panama City Beach",
+      "Panama City, Lynn Haven"
+     ]
+    },
+    {
+     "name": "gov_ids",
+     "type": "array"
+    },
+    {
+     "name": "lever",
+     "type": "string",
+     "values": [
+      "Avoid cost",
+      "Copy what works",
+      "Recover",
+      "Reduce rate",
+      "Verify"
+     ]
+    },
+    {
+     "name": "confidence",
+     "type": "string",
+     "values": [
+      "Low",
+      "Medium",
+      "Model",
+      "Needs records"
+     ]
+    },
+    {
+     "name": "in_play",
+     "type": "number"
+    },
+    {
+     "name": "in_play_is",
+     "type": "string",
+     "values": [
+      "FY2025 capital budget left unspent",
+      "Front Beach Road engineering task orders",
+      "a year of CRA debt service (FY2024 amended budget)",
+      "approved multi-year resurfacing",
+      "cost still ahead on Segments 4.1 to 4.3",
+      "plate-reader and camera purchases",
+      "the annual landscape contract",
+      "the three sidewalk projects",
+      "the two reported grants"
+     ]
+    },
+    {
+     "name": "rate_low",
+     "type": "number"
+    },
+    {
+     "name": "rate_high",
+     "type": "number"
+    },
+    {
+     "name": "savings_low",
+     "type": "number"
+    },
+    {
+     "name": "savings_high",
+     "type": "number"
+    },
+    {
+     "name": "estimate",
+     "type": "string",
+     "values": [
+      "none",
+      "range",
+      "records"
+     ]
+    },
+    {
+     "name": "basis",
+     "type": "string"
+    },
+    {
+     "name": "assumption",
+     "type": "string",
+     "values": [
+      "A rebid against current per-acre rates lowers the annual cost.",
+      "Bundling related design work and benchmarking fees against FDOT norms lowers the fees.",
+      "Buying at the county's paving unit prices, or bidding together, costs less than buying alone.",
+      "Mapping underground utilities and signing utility agreements before construction trims the cost still ahead on Segment 4.",
+      "One shared contract for plate readers and cameras costs less per unit than separate purchases.",
+      "The low end assumes all of it is already committed to projects; the high end assumes every unspent dollar goes back to the taxing authorities."
+     ]
+    },
+    {
+     "name": "next_step",
+     "type": "string"
+    },
+    {
+     "name": "overlaps",
+     "type": "array"
+    },
+    {
+     "name": "records_needed",
+     "type": "array"
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "lh",
+      "pc",
+      "pcb"
+     ]
+    }
+   ],
+   "json": "/downloads/savings-opportunities.json",
+   "csv": "/downloads/savings-opportunities.csv",
+   "api": "/api/v1/datasets/savings-opportunities"
+  },
+  {
+   "id": "savings-evidence",
+   "title": "Savings finder: evidence",
+   "description": "The records behind each savings opportunity, one row per project or CRA ledger record: the figure, what it is compared with, the gap or share, cost per unit where one applies, and the source.",
+   "rows": 35,
+   "columns": [
+    {
+     "name": "opportunity_id",
+     "type": "string",
+     "values": [
+      "fbr-engineering-task-orders",
+      "fbr-landscape-rebid",
+      "fbr-seg4-utilities",
+      "idle-cra-increment",
+      "lh-sidewalk-unit-cost",
+      "lh-storefront-double-report",
+      "pc-grant-leverage",
+      "pc-joint-paving-bid",
+      "pcb-cra-bond-refunding",
+      "shared-lpr-camera-contract"
+     ]
+    },
+    {
+     "name": "group_id",
+     "type": "string",
+     "values": [
+      "ahead",
+      "blocks",
+      "debt",
+      "done",
+      "fy2025",
+      "grants",
+      "landscape",
+      "lpr",
+      "orders",
+      "paving",
+      "share"
+     ]
+    },
+    {
+     "name": "group_title",
+     "type": "string",
+     "values": [
+      "Annual landscape maintenance",
+      "Approved resurfacing",
+      "CRA debt service",
+      "CRA share of each project's total cost",
+      "Cost per block",
+      "Design and construction-administration task orders",
+      "FY2025 capital budget vs. actual spending",
+      "Finished segments: first firm figure vs. final project cost",
+      "Plate-reader and camera purchases",
+      "Segments ahead: spent so far vs. total project cost",
+      "Storefront grants as reported"
+     ]
+    },
+    {
+     "name": "kind",
+     "type": "string",
+     "values": [
+      "budget_vs_spent",
+      "ledger",
+      "ledger_share",
+      "project_growth",
+      "project_progress"
+     ]
+    },
+    {
+     "name": "label",
+     "type": "string"
+    },
+    {
+     "name": "amount",
+     "type": "number"
+    },
+    {
+     "name": "amount_is",
+     "type": "string",
+     "values": [
+      "2019 (Res. 19-65, Task Order 2019-01)",
+      "2019 (Res. 19-66, Task Order 2019-02)",
+      "2020-05-14 (Res. 20-108, Task Order 2020-01)",
+      "2020-05-28 (Res. 20-112), per year",
+      "2021-03 (Res. 21-121, Task Order 2021-03)",
+      "2021-05-13 (Res. 21-157, Task Order 2021-05)",
+      "2021-07 (Res. 21-186, Task Order 2021-04)",
+      "2021-07 (Res. 21-187, Task Order CRA2021-07-V)",
+      "2023 (Res. 23-146)",
+      "Approved March 2026; runs FY2027 onward",
+      "Awarded 2026-01-13 (FY2026)",
+      "CRA share",
+      "FY2021",
+      "FY2021-22",
+      "FY2022",
+      "FY2024",
+      "FY2024 (amended budget)",
+      "FY2024 (budgeted)",
+      "construction contract at award",
+      "low bid at award (about)",
+      "spent",
+      "spent to date"
+     ]
+    },
+    {
+     "name": "compare",
+     "type": "number"
+    },
+    {
+     "name": "compare_is",
+     "type": "string",
+     "values": [
+      "capital budget",
+      "current total project cost",
+      "reported total at completion (about)",
+      "total project cost",
+      "total project cost at close-out"
+     ]
+    },
+    {
+     "name": "gap",
+     "type": "number"
+    },
+    {
+     "name": "ratio",
+     "type": "number"
+    },
+    {
+     "name": "units",
+     "type": "number"
+    },
+    {
+     "name": "unit",
+     "type": "string",
+     "values": [
+      "block"
+     ]
+    },
+    {
+     "name": "per_unit",
+     "type": "number"
+    },
+    {
+     "name": "paid_to",
+     "type": "string",
+     "values": [
+      "BCL Civil Contractors",
+      "Bondholders (Series 2015 and 2020 bonds)",
+      "City of Panama City (paid by the CRA; much of the work goes to outside contractors)",
+      "Contractor not named",
+      "Dewberry Engineers, Inc.",
+      "FUSUS (camera program) / 20 participating businesses",
+      "Local business (not named)",
+      "Lynn Haven Police Department",
+      "McKim & Creed",
+      "Not stated",
+      "Not stated (FDOT grant $250,000)",
+      "Not stated (FDOT grant $300,000)",
+      "Not stated (Kiwanis contributed $175,000)",
+      "Not stated (contractor)",
+      "Piney Grove Nursery and Landscaping, Inc. (PC24-038)",
+      "Rotolo Consultants, Inc.",
+      "Volkert, Inc."
+     ]
+    },
+    {
+     "name": "project_id",
+     "type": "string",
+     "values": [
+      "cw-capital-fy2025",
+      "pcb-fbr-seg2",
+      "pcb-fbr-seg3",
+      "pcb-fbr-seg41",
+      "pcb-fbr-seg42",
+      "pcb-fbr-seg43",
+      "sp-capital-fy2025"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://flauditor.gov/pages/specialdistricts_efile%20rpts/2021%20panama%20city%20community%20redevelopment%20agency.pdf",
+      "https://flauditor.gov/pages/specialdistricts_efile%20rpts/2025%20callaway%20community%20redevelopment%20agency.pdf",
+      "https://news.yahoo.com/panama-city-beach-city-council-090510078.html",
+      "https://panamacity.gov/785/Current-Projects",
+      "https://panamacity.gov/813/Completed-Projects",
+      "https://pcbfl.gov/home/showpublisheddocument/13909/636870324888970000",
+      "https://pcbfl.gov/home/showpublisheddocument/13911/636870324908030000",
+      "https://pcbfl.gov/home/showpublisheddocument/16673/637266931768470000",
+      "https://pcbfl.gov/home/showpublisheddocument/16795/637296339292530000",
+      "https://pcbfl.gov/home/showpublisheddocument/18097/637574690484470000",
+      "https://pcbfl.gov/home/showpublisheddocument/18302/637617846736370000",
+      "https://pcbfl.gov/home/showpublisheddocument/18386/637629761850100000",
+      "https://pcbfl.gov/home/showpublisheddocument/24562/638512727553430000",
+      "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_01132026-1110",
+      "https://www.cityoflynnhaven.com/DocumentCenter/View/2108",
+      "https://www.cityoflynnhaven.com/DocumentCenter/View/2498",
+      "https://www.cityoflynnhaven.com/DocumentCenter/View/2686",
+      "https://www.cityoflynnhaven.com/DocumentCenter/View/4018",
+      "https://www.panamacity.gov/DocumentCenter/View/7666",
+      "https://www.pcbfl.gov/Archive/ViewFile/Item/129",
+      "https://www.pcbfl.gov/home/showpublisheddocument/27668/638887882812000000",
+      "https://www.springfieldfl.net/media/10746",
+      "https://www.wjhg.com/2026/03/13/front-beach-road-construction-project-is-complete-faced-delays/",
+      "https://www.yahoo.com/news/articles/panama-city-cra-board-finalizes-040831032.html"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/savings-evidence.json",
+   "csv": "/downloads/savings-evidence.csv",
+   "api": "/api/v1/datasets/savings-evidence"
+  },
+  {
+   "id": "government-years",
+   "title": "Governments by year",
+   "description": "One row per government per fiscal year: adopted budget and its status, general fund, property tax rate and levy, audited actual revenue and spending, residents, audited debt and staff count. A blank means no record for that year. fiscal_year is the year the fiscal year ends (FY2026 = Oct 2025 to Sep 2026; schools Jul to Jun).",
+   "rows": 59,
+   "columns": [
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "schools",
+      "sp"
+     ]
+    },
+    {
+     "name": "government",
+     "type": "string",
+     "values": [
+      "Bay County Board of County Commissioners",
+      "Bay District Schools (School Board of Bay County)",
+      "City of Callaway",
+      "City of Lynn Haven",
+      "City of Mexico Beach",
+      "City of Panama City",
+      "City of Panama City Beach",
+      "City of Parker",
+      "City of Springfield"
+     ]
+    },
+    {
+     "name": "fiscal_year",
+     "type": "number"
+    },
+    {
+     "name": "fy",
+     "type": "string",
+     "values": [
+      "FY2021",
+      "FY2022",
+      "FY2023",
+      "FY2024",
+      "FY2025",
+      "FY2026",
+      "FY2027"
+     ]
+    },
+    {
+     "name": "period",
+     "type": "string",
+     "values": [
+      "Jul 2024 to Jun 2025",
+      "Jul 2025 to Jun 2026",
+      "Jul 2026 to Jun 2027",
+      "Oct 2020 to Sep 2021",
+      "Oct 2021 to Sep 2022",
+      "Oct 2022 to Sep 2023",
+      "Oct 2023 to Sep 2024",
+      "Oct 2024 to Sep 2025",
+      "Oct 2025 to Sep 2026",
+      "Oct 2026 to Sep 2027"
+     ]
+    },
+    {
+     "name": "budget_total",
+     "type": "number"
+    },
+    {
+     "name": "general_fund",
+     "type": "number"
+    },
+    {
+     "name": "budget_status",
+     "type": "string",
+     "values": [
+      "adopted",
+      "amended",
+      "approximate",
+      "draft",
+      "final hearing held",
+      "tentative"
+     ]
+    },
+    {
+     "name": "budget_note",
+     "type": "string",
+     "values": [
+      "DRAFT (department-requested, Aug 22, 2025); final adopted budget not posted. Millage final per DOR.",
+      "Total is the tentative figure (July 31, 2025 hearing). Fund-level detail comes from the FLDOE district budget data file (run date Feb 23, 2026), which does not say whether it is the final adopted version. The district's 'Final Budget FY 25-26' PDF could not be downloaded.",
+      "adopted",
+      "adopted (council approval Aug 28, 2025)",
+      "adopted Aug 27, 2026 (Resolution 26-134, 5-0 roll call; CRA budget Resolution 26-135, 5-0)",
+      "adopted Sept 17, 2026 (Resolution 26-13 budget and 26-12 millage, both unanimous roll call per minutes approved Oct 13, 2026)",
+      "adopted Sept 22, 2026 (Resolution 20260922.4 budget, 5-0; Resolution 20260922.3 millage, 5-0)",
+      "adopted Sept 22, 2026 (Resolution 26-12 budget and 26-11 millage, both 5-0)",
+      "adopted at final hearing Sept 10, 2026 (Resolution 27-03 millage and 27-04 budget, both 5-0 per BoardDocs minutes)",
+      "adopted at final hearing Sept 16, 2025 (budget book still labels columns 'Tentative/Recommended'; final hearing presentation confirms these totals were adopted)",
+      "adopted at final hearing Sept 22, 2026 (budget document dated 9/22/2026; WJHG reports millage passed 4-1 and budget unanimously; minutes not yet posted)",
+      "adopted: FY 2021-2022 Final Approved Budget, footer 'FY 22 Approved Budget 9/28/21'; grand total of expenditures by fund",
+      "adopted: FY 2022-2023 Final Approved Budget, pages stamped 'Approved 9-27-22'; grand total of expenditures by fund, including disaster recovery",
+      "adopted: FY 2023-2024 Final Approved Budget, pages stamped 'Approved 9-26-23' (tables still headed 'FY 2024 Proposed Budget'); grand total of expenditures by fund",
+      "amended budget expenditures as shown in FY26 draft",
+      "amended/adjusted (Dec 2024), not original adopted",
+      "approximate per news ('more than $49.878 million')",
+      "approximate per news: 'more than $121.413 million' operating budget, general fund 'almost $55 million'",
+      "approximate, as reported at final approval",
+      "final approved Sept 23, 2025 (columns in document are labeled 'FY 2026 Proposed')",
+      "final hearing Sept 23, 2026. The county's final-hearing presentation still labels the budget and millage columns 'Tentative'; the minutes for that hearing are not posted yet, so the roll call is not confirmed.",
+      "final hearing Sept 24, 2026; figures are from Resolution 2026-416 as presented in the final-hearing agenda package. The Sept 24 minutes are not posted yet, so adoption and any changes are unconfirmed.",
+      "tentative total (first public hearing); millage final per DOR"
+     ]
+    },
+    {
+     "name": "budget_excludes_transfers",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "budget_source_url",
+     "type": "string",
+     "values": [
+      "https://cityoflynnhaven.com/DocumentCenter/View/2294",
+      "https://cityoflynnhaven.com/DocumentCenter/View/2684",
+      "https://cityoflynnhaven.com/DocumentCenter/View/4411",
+      "https://cityofparker.com/wp-content/uploads/filr/6232/Draft-Budget-FY-25-26.pdf",
+      "https://cityofparker.com/wp-content/uploads/filr/7005/Agenda-Final-Budget-Meeting-Package-09.24.26.pdf",
+      "https://d3n9y02raazwpg.cloudfront.net/pcbgov/5d4380bb-142d-11f1-bb28-005056a89546-04aedbdd-c4a1-451f-a9ec-a282396c227d-1787341864.pdf",
+      "https://go.boarddocs.com/fl/bcsdfl/Board.nsf/goto?open&id=DUPKP552C7CB",
+      "https://news.yahoo.com/panama-city-approves-millage-rate-110025312.html",
+      "https://www.baycountyfl.gov/Archive.aspx?ADID=259",
+      "https://www.baycountyfl.gov/Archive.aspx?ADID=310",
+      "https://www.baycountyfl.gov/Archive.aspx?ADID=329",
+      "https://www.baycountyfl.gov/DocumentCenter/View/18382/FY-2026-Final-Budget-Commissioners-Book-09-16-2025",
+      "https://www.baycountyfl.gov/DocumentCenter/View/21155/FY-2027-Final-Budget-Hearing-Presentation---09-23-26",
+      "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_09172026-422",
+      "https://www.cityoflynnhaven.com/DocumentCenter/View/4110/FY-2025-MID-YEAR-BUDGET-Approved-04-21-25",
+      "https://www.cityoflynnhaven.gov/DocumentCenter/View/1828/FY-2021-2022-Final-Approved-Budget-PDF",
+      "https://www.cityoflynnhaven.gov/DocumentCenter/View/5091/FY2026-27-Final-Approved-Budget",
+      "https://www.fldoe.org/file/7507/BayTotalBUD2526.pdf",
+      "https://www.panamacity.gov/AgendaCenter/ViewFile/Item/17544?fileID=37527",
+      "https://www.panamacity.gov/ArchiveCenter/ViewFile/Item/1562",
+      "https://www.pcbfl.gov/Archive.aspx?ADID=151",
+      "https://www.springfieldfl.net/media/10891",
+      "https://www.wjhg.com/2024/09/11/bay-district-schools-approves-2024-2025-budget/",
+      "https://www.yahoo.com/news/articles/city-callaway-passes-possible-budget-033441301.html"
+     ]
+    },
+    {
+     "name": "tax_year",
+     "type": "number"
+    },
+    {
+     "name": "millage",
+     "type": "number"
+    },
+    {
+     "name": "rolled_back_rate",
+     "type": "number"
+    },
+    {
+     "name": "property_tax_levy",
+     "type": "number"
+    },
+    {
+     "name": "millage_source_url",
+     "type": "string",
+     "values": [
+      "https://cityofparker.com/wp-content/uploads/filr/7005/Agenda-Final-Budget-Meeting-Package-09.24.26.pdf",
+      "https://d3n9y02raazwpg.cloudfront.net/pcbgov/5d4380bb-142d-11f1-bb28-005056a89546-04aedbdd-c4a1-451f-a9ec-a282396c227d-1787341864.pdf",
+      "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/20table1/Bay_Table%201.pdf",
+      "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/21table1/Bay_Table%201.pdf",
+      "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/22table1/Bay%20Table%201.pdf",
+      "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/23table1/Bay%20Table%201.pdf",
+      "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/24table1/Bay%20Table%201.pdf",
+      "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/25table1/Bay%20Table%201.pdf",
+      "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/TACD%20History/2020%20Taxing%20Authority%20Code%20Descriptions/2020%20Bay%20TACD.pdf",
+      "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/TACD%20History/2021%20Taxing%20Authority%20Code%20Descriptions/2021%20Bay%20TACD.pdf",
+      "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/TACD%20History/2022%20Taxing%20Authority%20Code%20Descriptions/PDF/2022%20Bay%20TACD.pdf",
+      "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/TACD%20History/2023%20Taxing%20Authority%20Code%20Descrptions/PDF/2023%20Bay%20TACD.pdf",
+      "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/TACD%20History/2024%20Taxing%20Authority%20Code%20Descriptions/PDF/2024%20Bay%20TACD.pdf",
+      "https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/TACD%20History/2025%20Taxing%20Authority%20Code%20Descriptions/2025%20Bay%20TACD.pdf",
+      "https://go.boarddocs.com/fl/bcsdfl/Board.nsf/goto?open&id=DUPKP552C7CB",
+      "https://mexicobeachfl.gov/uploads/2026/08/September-21-2026-Final-Budget-Hearing-Minutes.pdf",
+      "https://www.baycountyfl.gov/DocumentCenter/View/21155/FY-2027-Final-Budget-Hearing-Presentation---09-23-26",
+      "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_09172026-422",
+      "https://www.cityoflynnhaven.gov/DocumentCenter/View/5091/FY2026-27-Final-Approved-Budget",
+      "https://www.fldoe.org/file/7507/BayTotalBUD2526.pdf",
+      "https://www.panamacity.gov/AgendaCenter/ViewFile/Item/17543?fileID=37529",
+      "https://www.springfieldfl.net/media/10881"
+     ]
+    },
+    {
+     "name": "actual_revenue",
+     "type": "number"
+    },
+    {
+     "name": "actual_spending",
+     "type": "number"
+    },
+    {
+     "name": "actuals_source_url",
+     "type": "string",
+     "values": [
+      "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/cntyfiscal/baycountyexpenditures.xlsx",
+      "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/callawayexpenditures.xlsx",
+      "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/lynnhavenexpenditures.xlsx",
+      "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/mexicobeachexpenditures.xlsx",
+      "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/panamacitybeachexpenditures.xlsx",
+      "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/panamacityexpenditures.xlsx",
+      "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/parkerexpenditures.xlsx",
+      "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/springfieldexpenditures.xlsx"
+     ]
+    },
+    {
+     "name": "population",
+     "type": "number"
+    },
+    {
+     "name": "population_year",
+     "type": "number"
+    },
+    {
+     "name": "population_source",
+     "type": "string",
+     "values": [
+      "State population used in the audited financial report",
+      "https://bebr.ufl.edu/wp-content/uploads/2025/12/estimates_2025.xlsx"
+     ]
+    },
+    {
+     "name": "debt_total",
+     "type": "number"
+    },
+    {
+     "name": "debt_source_url",
+     "type": "string",
+     "values": [
+      "https://flauditor.gov/pages/county_efile%20rpts/2024%20bay%20county.pdf",
+      "https://flauditor.gov/pages/dsb_efile%20rpts/2025%20bay%20county%20district%20school%20board.pdf",
+      "https://flauditor.gov/pages/mun_efile%20rpts/2024%20panama%20city.pdf",
+      "https://flauditor.gov/pages/mun_efile%20rpts/2025%20callaway.pdf",
+      "https://flauditor.gov/pages/mun_efile%20rpts/2025%20lynn%20haven.pdf",
+      "https://flauditor.gov/pages/mun_efile%20rpts/2025%20mexico%20beach.pdf",
+      "https://flauditor.gov/pages/mun_efile%20rpts/2025%20panama%20city%20beach.pdf",
+      "https://flauditor.gov/pages/mun_efile%20rpts/2025%20parker.pdf",
+      "https://flauditor.gov/pages/mun_efile%20rpts/2025%20springfield.pdf"
+     ]
+    },
+    {
+     "name": "employees_fte",
+     "type": "number"
+    },
+    {
+     "name": "employees_note",
+     "type": "string",
+     "values": [
+      "FY2026 authorized positions: 791 full-time + 44 part-time (BOCC only; excludes constitutional officers)",
+      "FY2027 'Final' authorized positions, BOCC only (excludes constitutional officers).",
+      "Total budgeted FTEs FY2026-27 (General Fund 78, enterprise funds 21)",
+      "Total city FTEs in the FY2027 budget (General Fund 142.1, CRA 0.8, enterprise funds 47.5), down 30 from 221.197 at FY2026 mid-year.",
+      "Total city FTEs, FY2025-26 approved budget (General Fund 168.20, CRA 0.803, Enterprise 50.5)",
+      "Total funded employees, FY2026 proposed (648 in FY2024 and FY2025)"
+     ]
+    },
+    {
+     "name": "employees_source_url",
+     "type": "string",
+     "values": [
+      "https://cityoflynnhaven.com/DocumentCenter/View/4411",
+      "https://www.baycountyfl.gov/DocumentCenter/View/18735/FY-2026-Final-Budget-Hearing-Presentation-09-16-2025",
+      "https://www.baycountyfl.gov/DocumentCenter/View/21155/FY-2027-Final-Budget-Hearing-Presentation---09-23-26",
+      "https://www.cityofcallaway.com/DocumentCenter/View/5704/Final-Budget-2627",
+      "https://www.cityoflynnhaven.gov/DocumentCenter/View/5091/FY2026-27-Final-Approved-Budget",
+      "https://www.panamacity.gov/DocumentCenter/View/10236/Tentative-Budget-FY-26---Digital-book"
+     ]
+    },
+    {
+     "name": "budget_per_resident",
+     "type": "number"
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "date_start",
+     "type": "string",
+     "values": [
+      "2020-10-01",
+      "2021-10-01",
+      "2022-10-01",
+      "2023-10-01",
+      "2024-07-01",
+      "2024-10-01",
+      "2025-07-01",
+      "2025-10-01",
+      "2026-07-01",
+      "2026-10-01"
+     ]
+    },
+    {
+     "name": "date_end",
+     "type": "string",
+     "values": [
+      "2021-09-30",
+      "2022-09-30",
+      "2023-09-30",
+      "2024-09-30",
+      "2025-06-30",
+      "2025-09-30",
+      "2026-06-30",
+      "2026-09-30",
+      "2027-06-30",
+      "2027-09-30"
+     ]
+    },
+    {
+     "name": "date_precision",
+     "type": "string",
+     "values": [
+      "fiscal_year"
+     ]
+    }
+   ],
+   "json": "/downloads/government-years.json",
+   "csv": "/downloads/government-years.csv",
+   "api": "/api/v1/datasets/government-years"
+  },
+  {
+   "id": "business-donor-sunbiz",
+   "title": "Business donors in the state corporate registry",
+   "description": "Each business that gave to a current officeholder or 2026 local candidate, matched to its Florida Division of Corporations (Sunbiz) record: document number, registered name, status and principal city, with the match method. Business-level only; no owner or officer names.",
+   "rows": 679,
+   "columns": [
+    {
+     "name": "contributor",
+     "type": "string"
+    },
+    {
+     "name": "candidate",
+     "type": "string"
+    },
+    {
+     "name": "office",
+     "type": "string"
+    },
+    {
+     "name": "election",
+     "type": "string",
+     "values": [
+      "2022 municipal (Apr 19, 2022)",
+      "2022 primary/general",
+      "2023 municipal (Apr 18, 2023)",
+      "2024 municipal (Apr 16, 2024)",
+      "2024 primary/general",
+      "2025 municipal (Apr 22, 2025)",
+      "2026 Municipal Super Tuesday (Apr 21, 2026)",
+      "2026 Primary/General (Aug 18 / Nov 3, 2026)",
+      "2026 primary/general (in progress)",
+      "2027 Municipal Super Tuesday (Apr 20, 2027)"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "clerk",
+      "county",
+      "cw",
+      "lh",
+      "pc",
+      "pcb",
+      "schools",
+      "sheriff",
+      "soe",
+      "sp",
+      "tax_collector"
+     ]
+    },
+    {
+     "name": "contribution_amount",
+     "type": "number"
+    },
+    {
+     "name": "contribution_items",
+     "type": "number"
+    },
+    {
+     "name": "first_date",
+     "type": "string"
+    },
+    {
+     "name": "last_date",
+     "type": "string"
+    },
+    {
+     "name": "sunbiz_doc_number",
+     "type": "string"
+    },
+    {
+     "name": "sunbiz_entity_name",
+     "type": "string"
+    },
+    {
+     "name": "sunbiz_status",
+     "type": "string",
+     "values": [
+      "Active",
+      "Inactive"
+     ]
+    },
+    {
+     "name": "sunbiz_filing_type",
+     "type": "string",
+     "values": [
+      "DOMLP",
+      "DOMP",
+      "FLAL",
+      "FORL"
+     ]
+    },
+    {
+     "name": "sunbiz_principal_city",
+     "type": "string",
+     "values": [
+      "Altamonte Springs",
+      "Callaway",
+      "Destin",
+      "Florida",
+      "Fountain",
+      "Inlet Beach",
+      "Lynn Haven",
+      "Niceville",
+      "Pamana City Beach",
+      "Panama City",
+      "Panama City Bch",
+      "Panama City Beach",
+      "Panama City Beach,",
+      "Pensacola",
+      "Southport",
+      "Tallahassee",
+      "Youngstown"
+     ]
+    },
+    {
+     "name": "match_method",
+     "type": "string",
+     "values": [
+      "exact",
+      "plural_variant",
+      "truncated_name",
+      "vendor_alias"
+     ]
+    },
+    {
+     "name": "county",
+     "type": "string",
+     "values": [
+      "bay"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "campaign_report_url",
+     "type": "string"
+    },
+    {
+     "name": "vendor_id",
+     "type": "string",
+     "values": [
+      "aaron-rich-marketing",
+      "american-sand",
+      "anderson-columbia",
+      "bay-point-billfish",
+      "bgn",
+      "charlie-coram-s-place",
+      "coastal-parasail",
+      "culpepper",
+      "cw-roberts",
+      "dag-architects",
+      "dewberry",
+      "disposal-services",
+      "ecsc",
+      "florida-architects",
+      "gcuc",
+      "grand-slam-sports-tournaments",
+      "mainline",
+      "marshall-brothers",
+      "mr-fence",
+      "panhandle-engineering",
+      "pg-environmental-fl",
+      "press-print-graphics",
+      "rj-gorman-contracting",
+      "rj-gorman-marine",
+      "roberts-and-roberts",
+      "southeastern-outdoor",
+      "timmins-consulting",
+      "tk-vandy",
+      "williams-communications"
+     ]
+    },
+    {
+     "name": "vendor_ids",
+     "type": "string"
+    },
+    {
+     "name": "person_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/business-donor-sunbiz.json",
+   "csv": "/downloads/business-donor-sunbiz.csv",
+   "api": "/api/v1/datasets/business-donor-sunbiz"
+  },
+  {
+   "id": "shared-owner-groups",
+   "title": "Shared-owner campaign gifts",
+   "description": "Businesses that share an officer, manager or registered agent (state corporate records) and gave to the same local candidate, one row per business. Only groups checked by hand are listed. People are not named. Each company is its own contributor under Florida law, so a group is legal when each company is a real contributor.",
+   "rows": 0,
+   "columns": [
+    {
+     "name": "group_id",
+     "type": "string"
+    },
+    {
+     "name": "candidate",
+     "type": "string"
+    },
+    {
+     "name": "office",
+     "type": "string"
+    },
+    {
+     "name": "election",
+     "type": "string"
+    },
+    {
+     "name": "business",
+     "type": "string"
+    },
+    {
+     "name": "sunbiz_doc_number",
+     "type": "string"
+    },
+    {
+     "name": "business_status",
+     "type": "string"
+    },
+    {
+     "name": "business_amount",
+     "type": "number"
+    },
+    {
+     "name": "business_dates",
+     "type": "string"
+    },
+    {
+     "name": "group_businesses",
+     "type": "number"
+    },
+    {
+     "name": "group_checks",
+     "type": "number"
+    },
+    {
+     "name": "group_total",
+     "type": "number"
+    },
+    {
+     "name": "all_checks_1000",
+     "type": "boolean"
+    },
+    {
+     "name": "same_day",
+     "type": "boolean"
+    },
+    {
+     "name": "shared_people",
+     "type": "number"
+    },
+    {
+     "name": "county",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "campaign_report_url",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/shared-owner-groups.json",
+   "csv": "/downloads/shared-owner-groups.csv",
+   "api": "/api/v1/datasets/shared-owner-groups"
+  },
+  {
+   "id": "nonprofits",
+   "title": "Nonprofits",
+   "description": "Every nonprofit in the county: organizations recognized by the IRS with a local address, and active Florida nonprofit corporations (Sunbiz) based here. Type, IRS subsection, latest 990 revenue, expenses and assets, how many board members its filings list, how many of those sit on another local board, government payment records and grants. Board members are in nonprofit-board-members.",
+   "rows": 1972,
+   "columns": [
+    {
+     "name": "nonprofit_id",
+     "type": "string"
+    },
+    {
+     "name": "name",
+     "type": "string"
+    },
+    {
+     "name": "ein",
+     "type": "string"
+    },
+    {
+     "name": "sunbiz_doc_number",
+     "type": "string"
+    },
+    {
+     "name": "city",
+     "type": "string",
+     "values": [
+      "Apopka",
+      "Bay Point",
+      "Callaway",
+      "Carillon Beach",
+      "Dunedin",
+      "Florida",
+      "Fountain",
+      "Inlet Beach",
+      "Jacksonville",
+      "Lynn Haven",
+      "Lynnhaven",
+      "Mexico Beach",
+      "Panama City",
+      "Panama City Beach",
+      "Pananma City",
+      "Parker",
+      "Port St Joe",
+      "Rosemary Beach",
+      "Sea Crest",
+      "Seacrest Beach",
+      "Southport",
+      "Springfield",
+      "Tyndall AFB",
+      "Wellborn",
+      "Youngstown"
+     ]
+    },
+    {
+     "name": "zip",
+     "type": "string",
+     "values": [
+      "32094",
+      "32401",
+      "32402",
+      "32403",
+      "32404",
+      "32405",
+      "32406",
+      "32407",
+      "32408",
+      "32409",
+      "32410",
+      "32411",
+      "32412",
+      "32413",
+      "32417",
+      "32438",
+      "32444",
+      "32456",
+      "32461",
+      "32466",
+      "34698"
+     ]
+    },
+    {
+     "name": "county",
+     "type": "string",
+     "values": [
+      "bay"
+     ]
+    },
+    {
+     "name": "kind",
+     "type": "string",
+     "values": [
+      "Animals",
+      "Arts and culture",
+      "Business league or chamber",
+      "Church or religious group",
+      "Civil rights and advocacy",
+      "Club, lodge or veterans group",
+      "Community improvement",
+      "Crime and legal",
+      "Disease and disorders",
+      "Education",
+      "Employment",
+      "Environment",
+      "Food and agriculture",
+      "Health care",
+      "Homeowner or condo association",
+      "Housing",
+      "Human services",
+      "International",
+      "Mental health",
+      "Other nonprofit",
+      "Philanthropy and grantmaking",
+      "Private foundation",
+      "Public and societal benefit",
+      "Public safety and disaster",
+      "Recreation and sports",
+      "Unknown",
+      "Youth development"
+     ]
+    },
+    {
+     "name": "irs_recognized",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "subsection",
+     "type": "string",
+     "values": [
+      "4947(a)(1) charitable trust",
+      "501(c)(10) fraternal",
+      "501(c)(14) credit union",
+      "501(c)(19) veterans",
+      "501(c)(2) title-holding",
+      "501(c)(3) charity",
+      "501(c)(4) social welfare",
+      "501(c)(5) labor or agricultural",
+      "501(c)(6) business league",
+      "501(c)(7) social club",
+      "501(c)(8) fraternal benefit"
+     ]
+    },
+    {
+     "name": "foundation_type",
+     "type": "string",
+     "values": [
+      "church",
+      "hospital",
+      "medical research",
+      "private foundation",
+      "public charity",
+      "school",
+      "supporting org"
+     ]
+    },
+    {
+     "name": "ntee_code",
+     "type": "string"
+    },
+    {
+     "name": "category",
+     "type": "string",
+     "values": [
+      "Animals",
+      "Arts and culture",
+      "Civil rights and advocacy",
+      "Community improvement",
+      "Crime and legal",
+      "Disease and disorders",
+      "Education",
+      "Employment",
+      "Environment",
+      "Food and agriculture",
+      "Health care",
+      "Housing",
+      "Human services",
+      "International",
+      "Mental health",
+      "Mutual and membership benefit",
+      "Philanthropy and grantmaking",
+      "Public and societal benefit",
+      "Public safety and disaster",
+      "Recreation and sports",
+      "Religion",
+      "Unknown",
+      "Youth development"
+     ]
+    },
+    {
+     "name": "ruling_year",
+     "type": "number"
+    },
+    {
+     "name": "irs_filing_requirement",
+     "type": "string",
+     "values": [
+      "990 or 990-EZ",
+      "990-N postcard",
+      "group return",
+      "not required",
+      "not required (church)",
+      "not required (instrumentality)",
+      "not required (religious)"
+     ]
+    },
+    {
+     "name": "sunbiz_status",
+     "type": "string",
+     "values": [
+      "Active",
+      "Inactive"
+     ]
+    },
+    {
+     "name": "sunbiz_filed",
+     "type": "string"
+    },
+    {
+     "name": "irs_assets",
+     "type": "number"
+    },
+    {
+     "name": "irs_income",
+     "type": "number"
+    },
+    {
+     "name": "irs_revenue",
+     "type": "number"
+    },
+    {
+     "name": "latest_return_form",
+     "type": "string",
+     "values": [
+      "990",
+      "990EZ",
+      "990N",
+      "990PF"
+     ]
+    },
+    {
+     "name": "latest_return_year",
+     "type": "number"
+    },
+    {
+     "name": "total_revenue",
+     "type": "number"
+    },
+    {
+     "name": "total_expenses",
+     "type": "number"
+    },
+    {
+     "name": "total_assets",
+     "type": "number"
+    },
+    {
+     "name": "employees",
+     "type": "number"
+    },
+    {
+     "name": "returns_on_file",
+     "type": "number"
+    },
+    {
+     "name": "website",
+     "type": "string"
+    },
+    {
+     "name": "mission",
+     "type": "string"
+    },
+    {
+     "name": "board_members_listed",
+     "type": "number"
+    },
+    {
+     "name": "shares_board_with",
+     "type": "number"
+    },
+    {
+     "name": "gov_payment_records",
+     "type": "number"
+    },
+    {
+     "name": "gov_dollars_in_records",
+     "type": "number"
+    },
+    {
+     "name": "paid_by",
+     "type": "string",
+     "values": [
+      "Destination Panama City",
+      "Destination Panama City, Mexico Beach CDC",
+      "Destination Panama City, Panama City CRA",
+      "Destination Panama City, Visit Panama City Beach",
+      "Mexico Beach CDC",
+      "Panama City CRA",
+      "Visit Panama City Beach"
+     ]
+    },
+    {
+     "name": "grants_given_count",
+     "type": "number"
+    },
+    {
+     "name": "grants_given_cash",
+     "type": "number"
+    },
+    {
+     "name": "grants_from_local_nonprofits",
+     "type": "number"
+    },
+    {
+     "name": "campaign_gifts_total",
+     "type": "string"
+    },
+    {
+     "name": "campaign_gift_candidates",
+     "type": "string"
+    },
+    {
+     "name": "fdacs_registration",
+     "type": "string"
+    },
+    {
+     "name": "fdacs_status",
+     "type": "string",
+     "values": [
+      "Active",
+      "Closed",
+      "Denied",
+      "Exempt",
+      "Expired",
+      "Law NA",
+      "Not Soliciting",
+      "Registered",
+      "Suspended"
+     ]
+    },
+    {
+     "name": "fdacs_expires",
+     "type": "string"
+    },
+    {
+     "name": "fdacs_fiscal_year_end",
+     "type": "string",
+     "values": [
+      "2022-08-31",
+      "2022-12-31",
+      "2023-06-30",
+      "2024-12-31",
+      "2025-01-31",
+      "2025-02-28",
+      "2025-03-31",
+      "2025-04-30",
+      "2025-05-31",
+      "2025-06-30",
+      "2025-07-31",
+      "2025-09-30",
+      "2025-10-31",
+      "2025-11-30",
+      "2025-12-31",
+      "2026-01-31",
+      "2026-04-30",
+      "2026-05-31",
+      "2026-06-30",
+      "2026-07-31",
+      "2026-12-31",
+      "2027-02-28",
+      "2027-06-30"
+     ]
+    },
+    {
+     "name": "fdacs_revenue",
+     "type": "number"
+    },
+    {
+     "name": "fdacs_program_expenses",
+     "type": "number"
+    },
+    {
+     "name": "fdacs_fundraising_expenses",
+     "type": "number"
+    },
+    {
+     "name": "fdacs_management_expenses",
+     "type": "number"
+    },
+    {
+     "name": "fdacs_url",
+     "type": "string",
+     "values": [
+      "https://csapp.fdacs.gov/CSPublicApp/CheckACharity/CheckACharity.aspx"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "sunbiz_url",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/nonprofits.json",
+   "csv": "/downloads/nonprofits.csv",
+   "api": "/api/v1/datasets/nonprofits"
+  },
+  {
+   "id": "nonprofit-payments",
+   "title": "Nonprofits: government payment records",
+   "description": "Payment records on the site (contracts, check registers, tourism agency payments, CRA ledger) whose payee is a local nonprofit, matched by name.",
+   "rows": 30,
+   "columns": [
+    {
+     "name": "nonprofit_id",
+     "type": "string",
+     "values": [
+      "np-201568457",
+      "np-237393003",
+      "np-371945053",
+      "np-460814301",
+      "np-463023902",
+      "np-465391786",
+      "np-473791305",
+      "np-590391375",
+      "np-590791014",
+      "np-591375195",
+      "np-591682455",
+      "np-591850105",
+      "np-592323037",
+      "np-592857564",
+      "np-593094842",
+      "np-593623103",
+      "np-597604357",
+      "np-812762071",
+      "np-822407490",
+      "np-831080685",
+      "np-843264244",
+      "np-862534565",
+      "np-931911204",
+      "np-sb-n15000002757",
+      "np-sb-n97000001854"
+     ]
+    },
+    {
+     "name": "nonprofit",
+     "type": "string",
+     "values": [
+      "ANCHORAGE CHILDRENS HOME OF BAY COUNTY INC",
+      "BAY ARTS ALLIANCE INC",
+      "BAY COUNTY CHAMBER OF COMMERCE INC",
+      "BAY YOUTH MUSIC ASSOCIATION INC",
+      "DANCE KRAZE ALL CHARMED UP",
+      "EMERALD & FORGOTTEN COAST ADVENTURES INC",
+      "FLORIOPOLIS",
+      "GIRLS INCORPORATED OF BAY COUNTY",
+      "GULF COAST CHILDRENS ADVOCACY",
+      "GULF COAST STATE COLLEGE FOUNDATION INC",
+      "HEARTLAND RESCUE RANCH INC",
+      "HISTORIC ST ANDREWS WATERFRONT PARTNERSHIP INC",
+      "KODY FOUNDATION INC",
+      "KREWE OF ST ANDREWS INC",
+      "LIFE MANAGEMENT CENTER OF NORTHWEST FLORIDA INC",
+      "MEXICO BEACH ARTIFICIAL REEF ASSOCIATION, INC.",
+      "PANAMA CITY A CAPPELLA CHORUS LLC",
+      "PANAMA CITY BEACHES CHAMBER OF COMMERCE INCORPORATED",
+      "PANAMA CITY DOWNTOWN IMPROVEMENT BOARD, INC.",
+      "PANAMA CITY FIRST BAPTIST CHURCH",
+      "PANAMA CITY MUSIC ASSOCIATION INC",
+      "PUBLIC EYE SOAR INC",
+      "ROOMS WITH A PURPOSE INC",
+      "SALTY CATS OF ST ANDREWS RESCUE",
+      "SECOND CHANCE OF NORTHWEST FLORIDA INC"
+     ]
+    },
+    {
+     "name": "payer",
+     "type": "string",
+     "values": [
+      "Destination Panama City",
+      "Mexico Beach CDC",
+      "Panama City CRA",
+      "Visit Panama City Beach"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    },
+    {
+     "name": "record_type",
+     "type": "string",
+     "values": [
+      "cra",
+      "tdc"
+     ]
+    },
+    {
+     "name": "record_id",
+     "type": "string"
+    },
+    {
+     "name": "payee_as_filed",
+     "type": "string",
+     "values": [
+      "Anchorage Children's Home of Bay County, Inc",
+      "Bay Arts Alliance",
+      "Bay County Chamber of Commerce",
+      "Bay Youth Music Association, Inc",
+      "Dance Kraze All Charmed Up, Inc",
+      "Emerald and Forgotten Coast Adventures, Inc",
+      "Floriopolis",
+      "Girls Inc. of Bay County",
+      "Gulf Coast Children's Advocacy Center, Inc",
+      "Gulf Coast State College Foundation, Inc",
+      "Heartland Rescue Ranch, Inc",
+      "Historic St. Andrews Waterfront Partnership",
+      "Kody Foundation, Inc",
+      "Krewe of St. Andrews Inc.",
+      "Life Management Center of Northwest FL, Inc",
+      "Mexico Beach Artificial Reef Association",
+      "Panama City A Cappella Chorus, Inc",
+      "Panama City Beach Chamber of Commerce",
+      "Panama City Downtown Improvement Board, Inc",
+      "Panama City Music Association",
+      "Public Eye Soar, Inc",
+      "Rooms with a Purpose",
+      "Salty Cats of St. Andrews Rescue, Inc",
+      "Second Chance of Northwest Florida, Inc",
+      "World Changers / First Baptist Church of Panama City"
+     ]
+    },
+    {
+     "name": "amount",
+     "type": "number"
+    },
+    {
+     "name": "date",
+     "type": "string",
+     "values": [
+      "FY2015",
+      "FY2017",
+      "FY2018",
+      "FY2024",
+      "FY2024, FY2025",
+      "FY2024, FY2025, FY2026",
+      "FY2025",
+      "FY2026"
+     ]
+    },
+    {
+     "name": "what",
+     "type": "string",
+     "values": [
+      "Mexico Beach Community Development Council: 1 payments",
+      "Mexico Beach Community Development Council: 4 payments",
+      "Operation of the St. Andrews Publishing Museum, tours and the Saturday farmers market",
+      "Panama City Beach Convention & Visitors Bureau (Visit Panama City Beach): 1 payments",
+      "Panama City Beach Convention & Visitors Bureau (Visit Panama City Beach): 7 payments",
+      "Panama City Beach Convention & Visitors Bureau (Visit Panama City Beach): 8 payments",
+      "Panama City Community Development Council (Destination Panama City): 1 payments",
+      "Panama City Community Development Council (Destination Panama City): 17 payments",
+      "Panama City Community Development Council (Destination Panama City): 2 payments",
+      "Panama City Community Development Council (Destination Panama City): 3 payments",
+      "Panama City Community Development Council (Destination Panama City): 4 payments",
+      "Panama City Community Development Council (Destination Panama City): 6 payments",
+      "Panama City Community Development Council (Destination Panama City): 7 payments",
+      "Print/Publishing Museum operation agreement",
+      "Volunteer home repairs ($70K from Downtown North, $10K from Millville); 41 homes renovated",
+      "Volunteer home repairs MOU ($70K Downtown North, $10K Millville)"
+     ]
+    },
+    {
+     "name": "cra_status",
+     "type": "string",
+     "values": [
+      "Budgeted",
+      "Spent"
+     ]
+    },
+    {
+     "name": "county",
+     "type": "string",
+     "values": [
+      "bay"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://bayforms.baycoclerk.com/PublicAccess/PublicRecordSearch/",
+      "https://panamacity.gov/DocumentCenter/View/1853/FY2015-Annual-Report-PDF",
+      "https://panamacity.gov/DocumentCenter/View/3827/FY2017-Annual-Report-PDF",
+      "https://panamacity.gov/DocumentCenter/View/4570/FY2018-Annual-Report-PDF",
+      "https://www.panamacity.gov/DocumentCenter/View/9865"
+     ]
+    }
+   ],
+   "json": "/downloads/nonprofit-payments.json",
+   "csv": "/downloads/nonprofit-payments.csv",
+   "api": "/api/v1/datasets/nonprofit-payments"
+  },
+  {
+   "id": "nonprofit-grants",
+   "title": "Nonprofits: grants they gave",
+   "description": "Grants to organizations reported on Schedule I of local nonprofits' 990 returns, with the recipient linked when it is also a local nonprofit.",
+   "rows": 373,
+   "columns": [
+    {
+     "name": "grantor_id",
+     "type": "string",
+     "values": [
+      "np-201568457",
+      "np-270930552",
+      "np-311532217",
+      "np-371595973",
+      "np-460814301",
+      "np-562350462",
+      "np-590863698",
+      "np-591375195",
+      "np-591682455",
+      "np-592203798",
+      "np-592278702",
+      "np-592853138",
+      "np-593321453",
+      "np-593394998",
+      "np-593455773",
+      "np-593671791",
+      "np-636118056",
+      "np-841692486",
+      "np-852880457",
+      "np-880932683"
+     ]
+    },
+    {
+     "name": "grantor",
+     "type": "string",
+     "values": [
+      "AMERICAN LEGION",
+      "EASTERN SHIPBUILDING CHARITIES INC",
+      "GRAND CHAPTER OF FLORIDA ORDER OF THE EASTERN STAR CHARITABLE",
+      "GULF COAST STATE COLLEGE FOUNDATION INC",
+      "GULF COAST WORKFORCE DEVELOPMENT BOARD INC",
+      "HISTORIC ST ANDREWS WATERFRONT PARTNERSHIP INC",
+      "HOLY NATIVITY SCHOOL FOUNDATION INC",
+      "HOMELESS & HUNGER COALITION OF NWFL DBA DOORWAYS OF NWFL",
+      "KREWE OF ST ANDREWS INC",
+      "LIFE MANAGEMENT CENTER OF NORTHWEST FLORIDA INC",
+      "MELISSA RENEE BIGGS MEMORIAL TRUST",
+      "ONE POSITIVE PLACE INC",
+      "PANAMA CITY ADVANCED SCHOOL CORPORATION",
+      "ST ANDREWS EPISCOPAL CHURCH FOUNDATION INC",
+      "UNITED WAY OF NORTHWEST FLORIDA",
+      "VETERANS OF FOREIGN WARS OF THE UNITED STATES DEPT OF FLORIDA",
+      "WOMENS CIVIC CLUB OF PANAMA CITY BEACH INC",
+      "WORLD CHANGERS STUDENT MISSIONS",
+      "ZOOLOGICAL ASSOCIATION OF AMERICA INCORPORATED"
+     ]
+    },
+    {
+     "name": "grantor_ein",
+     "type": "string",
+     "values": [
+      "201568457",
+      "270930552",
+      "311532217",
+      "371595973",
+      "460814301",
+      "562350462",
+      "590863698",
+      "591375195",
+      "591682455",
+      "592203798",
+      "592278702",
+      "592853138",
+      "593321453",
+      "593394998",
+      "593455773",
+      "593671791",
+      "636118056",
+      "841692486",
+      "852880457",
+      "880932683"
+     ]
+    },
+    {
+     "name": "recipient_id",
+     "type": "string"
+    },
+    {
+     "name": "recipient",
+     "type": "string"
+    },
+    {
+     "name": "recipient_ein",
+     "type": "string"
+    },
+    {
+     "name": "recipient_city",
+     "type": "string"
+    },
+    {
+     "name": "recipient_state",
+     "type": "string",
+     "values": [
+      "AL",
+      "CA",
+      "FL",
+      "IL",
+      "KS",
+      "LA",
+      "ME",
+      "MO",
+      "NY",
+      "OK",
+      "PA",
+      "TN",
+      "TX",
+      "VA"
+     ]
+    },
+    {
+     "name": "tax_year",
+     "type": "number"
+    },
+    {
+     "name": "cash",
+     "type": "number"
+    },
+    {
+     "name": "noncash",
+     "type": "number"
+    },
+    {
+     "name": "purpose",
+     "type": "string"
+    },
+    {
+     "name": "county",
+     "type": "string",
+     "values": [
+      "bay"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/nonprofit-grants.json",
+   "csv": "/downloads/nonprofit-grants.csv",
+   "api": "/api/v1/datasets/nonprofit-grants"
+  },
+  {
+   "id": "nonprofit-board-members",
+   "title": "Nonprofits: board members",
+   "description": "Officers, directors, trustees and key employees of local nonprofits as listed on their IRS returns (2019 on), 990-N postcards and state corporate filings: one row per person per nonprofit with titles, years on file, reported pay and hours, and how many other current local boards the same name sits on (homeowner associations aside). person_id groups the same name across boards; two people with a common name can share one.",
+   "rows": 9181,
+   "columns": [
+    {
+     "name": "person_id",
+     "type": "string"
+    },
+    {
+     "name": "person",
+     "type": "string"
+    },
+    {
+     "name": "nonprofit_id",
+     "type": "string"
+    },
+    {
+     "name": "nonprofit",
+     "type": "string"
+    },
+    {
+     "name": "ein",
+     "type": "string"
+    },
+    {
+     "name": "role",
+     "type": "string",
+     "values": [
+      "Board",
+      "Past board",
+      "Past staff",
+      "Staff"
+     ]
+    },
+    {
+     "name": "titles",
+     "type": "string"
+    },
+    {
+     "name": "first_year",
+     "type": "number"
+    },
+    {
+     "name": "last_year",
+     "type": "number"
+    },
+    {
+     "name": "current",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "hours_per_week",
+     "type": "number"
+    },
+    {
+     "name": "compensation",
+     "type": "number"
+    },
+    {
+     "name": "compensation_year",
+     "type": "number"
+    },
+    {
+     "name": "sources",
+     "type": "string"
+    },
+    {
+     "name": "other_current_boards",
+     "type": "number"
+    },
+    {
+     "name": "county",
+     "type": "string",
+     "values": [
+      "bay"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/nonprofit-board-members.json",
+   "csv": "/downloads/nonprofit-board-members.csv",
+   "api": "/api/v1/datasets/nonprofit-board-members"
+  },
+  {
+   "id": "nonprofit-board-businesses",
+   "title": "Nonprofits: board members' businesses",
+   "description": "Businesses that local nonprofit board members run, from Florida corporate filings (Sunbiz officers and registered agents), with each business's gifts to local campaigns. match is \"Name and address\" when the person on the nonprofit's own state filing is the same Sunbiz person, or \"Name\" when only one Sunbiz person in the county has that name. person_id matches nonprofit-board-members.",
+   "rows": 4259,
+   "columns": [
+    {
+     "name": "person_id",
+     "type": "string"
+    },
+    {
+     "name": "person",
+     "type": "string"
+    },
+    {
+     "name": "doc_number",
+     "type": "string"
+    },
+    {
+     "name": "business",
+     "type": "string"
+    },
+    {
+     "name": "business_status",
+     "type": "string",
+     "values": [
+      "Active",
+      "Inactive"
+     ]
+    },
+    {
+     "name": "match",
+     "type": "string",
+     "values": [
+      "Name",
+      "Name and address"
+     ]
+    },
+    {
+     "name": "campaign_gifts_total",
+     "type": "number"
+    },
+    {
+     "name": "candidates",
+     "type": "string"
+    },
+    {
+     "name": "county",
+     "type": "string",
+     "values": [
+      "bay"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/nonprofit-board-businesses.json",
+   "csv": "/downloads/nonprofit-board-businesses.csv",
+   "api": "/api/v1/datasets/nonprofit-board-businesses"
+  },
+  {
+   "id": "charity-registrations",
+   "title": "Nonprofits: Florida charity registrations",
+   "description": "Charities with a county address registered with the Florida Department of Agriculture and Consumer Services to ask the public for donations (Check-A-Charity): registration status and dates, the revenue and the program, fundraising and management spending each reported to the state, and the professional fundraising firms it uses. nonprofit_id links to the nonprofits dataset (joined by FEIN, then by exact name); the officers and directors each registration lists are in nonprofit-board-members.",
+   "rows": 218,
+   "columns": [
+    {
+     "name": "registration_number",
+     "type": "string"
+    },
+    {
+     "name": "nonprofit_id",
+     "type": "string"
+    },
+    {
+     "name": "name",
+     "type": "string"
+    },
+    {
+     "name": "dba",
+     "type": "string"
+    },
+    {
+     "name": "fein",
+     "type": "string"
+    },
+    {
+     "name": "matched_by",
+     "type": "string",
+     "values": [
+      "name",
+      "new"
+     ]
+    },
+    {
+     "name": "status",
+     "type": "string",
+     "values": [
+      "Active",
+      "Closed",
+      "Denied",
+      "Exempt",
+      "Expired",
+      "Law NA",
+      "Not Soliciting",
+      "Registered",
+      "Suspended"
+     ]
+    },
+    {
+     "name": "status_detail",
+     "type": "string",
+     "values": [
+      "Active Small Charity",
+      "Closed - Out of Business",
+      "Denied",
+      "Exempt",
+      "Exempt - Membership Only",
+      "Exempt: Title 36 - Veterans",
+      "Expired",
+      "Law NA - Educational",
+      "Law NA - Governmental",
+      "Law NA - Religious",
+      "Not Soliciting",
+      "Registered",
+      "Suspended"
+     ]
+    },
+    {
+     "name": "registration_date",
+     "type": "string"
+    },
+    {
+     "name": "expiration_date",
+     "type": "string"
+    },
+    {
+     "name": "city",
+     "type": "string",
+     "values": [
+      "Callaway",
+      "Dunedin",
+      "Fountain",
+      "Lynn Haven",
+      "Panama City",
+      "Panama City Beach",
+      "Port St Joe",
+      "Rosemary Beach",
+      "Southport",
+      "Wellborn",
+      "Youngstown"
+     ]
+    },
+    {
+     "name": "zip",
+     "type": "string",
+     "values": [
+      "32094",
+      "32401",
+      "32402",
+      "32403",
+      "32404",
+      "32405",
+      "32407",
+      "32408",
+      "32409",
+      "32412",
+      "32413",
+      "32438",
+      "32444",
+      "32456",
+      "32461",
+      "32466",
+      "34698"
+     ]
+    },
+    {
+     "name": "website",
+     "type": "string"
+    },
+    {
+     "name": "fiscal_year_end",
+     "type": "string",
+     "values": [
+      "2022-08-31",
+      "2022-12-31",
+      "2023-06-30",
+      "2024-12-31",
+      "2025-01-31",
+      "2025-02-28",
+      "2025-03-31",
+      "2025-04-30",
+      "2025-05-31",
+      "2025-06-30",
+      "2025-07-31",
+      "2025-09-30",
+      "2025-10-31",
+      "2025-11-30",
+      "2025-12-31",
+      "2026-01-31",
+      "2026-04-30",
+      "2026-05-31",
+      "2026-06-30",
+      "2026-07-31",
+      "2026-12-31",
+      "2027-02-28",
+      "2027-06-30"
+     ]
+    },
+    {
+     "name": "total_revenue",
+     "type": "number"
+    },
+    {
+     "name": "contributions",
+     "type": "number"
+    },
+    {
+     "name": "government_grants",
+     "type": "number"
+    },
+    {
+     "name": "program_expenses",
+     "type": "number"
+    },
+    {
+     "name": "fundraising_expenses",
+     "type": "number"
+    },
+    {
+     "name": "management_expenses",
+     "type": "number"
+    },
+    {
+     "name": "total_expenses",
+     "type": "number"
+    },
+    {
+     "name": "program_percent",
+     "type": "number"
+    },
+    {
+     "name": "fundraising_percent",
+     "type": "number"
+    },
+    {
+     "name": "fundraising_consultants",
+     "type": "string",
+     "values": [
+      "Atlantic Development Associates, Llc"
+     ]
+    },
+    {
+     "name": "officers_listed",
+     "type": "number"
+    },
+    {
+     "name": "other_registrations",
+     "type": "string"
+    },
+    {
+     "name": "county",
+     "type": "string",
+     "values": [
+      "bay"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://csapp.fdacs.gov/CSPublicApp/CheckACharity/CheckACharity.aspx"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/charity-registrations.json",
+   "csv": "/downloads/charity-registrations.csv",
+   "api": "/api/v1/datasets/charity-registrations"
+  },
+  {
+   "id": "nonprofit-officials",
+   "title": "Officials on nonprofit boards",
+   "description": "Elected officials, department leaders and candidates listed as an officer or director of a local nonprofit in its IRS returns or state corporate filings. Only matches checked by hand are listed.",
+   "rows": 0,
+   "columns": [
+    {
+     "name": "official_id",
+     "type": "string"
+    },
+    {
+     "name": "person_id",
+     "type": "string"
+    },
+    {
+     "name": "official",
+     "type": "string"
+    },
+    {
+     "name": "official_roles",
+     "type": "string"
+    },
+    {
+     "name": "nonprofit_id",
+     "type": "string"
+    },
+    {
+     "name": "nonprofit",
+     "type": "string"
+    },
+    {
+     "name": "ein",
+     "type": "string"
+    },
+    {
+     "name": "titles",
+     "type": "string"
+    },
+    {
+     "name": "first_year",
+     "type": "number"
+    },
+    {
+     "name": "last_year",
+     "type": "number"
+    },
+    {
+     "name": "current",
+     "type": "boolean"
+    },
+    {
+     "name": "sources",
+     "type": "string"
+    },
+    {
+     "name": "county",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/nonprofit-officials.json",
+   "csv": "/downloads/nonprofit-officials.csv",
+   "api": "/api/v1/datasets/nonprofit-officials"
+  },
+  {
+   "id": "official-businesses",
+   "title": "Officials' businesses",
+   "description": "Registered businesses (Florida Division of Corporations) that list an elected official, department leader or local candidate as an officer, manager or registered agent, with the filing date and status. Each official-to-record match was checked by hand. Only officials and candidates are named.",
+   "rows": 0,
+   "columns": [
+    {
+     "name": "person_id",
+     "type": "string"
+    },
+    {
+     "name": "official",
+     "type": "string"
+    },
+    {
+     "name": "official_role",
+     "type": "string"
+    },
+    {
+     "name": "business",
+     "type": "string"
+    },
+    {
+     "name": "sunbiz_doc_number",
+     "type": "string"
+    },
+    {
+     "name": "titles",
+     "type": "string"
+    },
+    {
+     "name": "role_kind",
+     "type": "string"
+    },
+    {
+     "name": "business_status",
+     "type": "string"
+    },
+    {
+     "name": "filing_type",
+     "type": "string"
+    },
+    {
+     "name": "nonprofit",
+     "type": "boolean"
+    },
+    {
+     "name": "principal_city",
+     "type": "string"
+    },
+    {
+     "name": "filed_date",
+     "type": "string"
+    },
+    {
+     "name": "closed_year",
+     "type": "number"
+    },
+    {
+     "name": "role_first_seen",
+     "type": "string"
+    },
+    {
+     "name": "county",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/official-businesses.json",
+   "csv": "/downloads/official-businesses.csv",
+   "api": "/api/v1/datasets/official-businesses"
+  },
+  {
+   "id": "official-business-links",
+   "title": "Officials' business ties",
+   "description": "How officials' and candidates' registered businesses connect to public life: two officials on the same business, an official's business giving to a campaign, a donor business that shares an officer with a candidate's business (the shared person is counted, not named), and an official's business paid by a local government. Published only for hand-checked matches.",
+   "rows": 0,
+   "columns": [
+    {
+     "name": "link_type",
+     "type": "string"
+    },
+    {
+     "name": "person_id",
+     "type": "string"
+    },
+    {
+     "name": "official",
+     "type": "string"
+    },
+    {
+     "name": "other_person_id",
+     "type": "string"
+    },
+    {
+     "name": "other_official",
+     "type": "string"
+    },
+    {
+     "name": "candidate",
+     "type": "string"
+    },
+    {
+     "name": "office",
+     "type": "string"
+    },
+    {
+     "name": "business",
+     "type": "string"
+    },
+    {
+     "name": "sunbiz_doc_number",
+     "type": "string"
+    },
+    {
+     "name": "related_business",
+     "type": "string"
+    },
+    {
+     "name": "related_doc_number",
+     "type": "string"
+    },
+    {
+     "name": "shared_people",
+     "type": "number"
+    },
+    {
+     "name": "payer",
+     "type": "string"
+    },
+    {
+     "name": "own_government",
+     "type": "boolean"
+    },
+    {
+     "name": "self_gift",
+     "type": "boolean"
+    },
+    {
+     "name": "amount",
+     "type": "number"
+    },
+    {
+     "name": "items",
+     "type": "number"
+    },
+    {
+     "name": "first_date",
+     "type": "string"
+    },
+    {
+     "name": "last_date",
+     "type": "string"
+    },
+    {
+     "name": "detail",
+     "type": "string"
+    },
+    {
+     "name": "county",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "report_url",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/official-business-links.json",
+   "csv": "/downloads/official-business-links.csv",
+   "api": "/api/v1/datasets/official-business-links"
+  },
+  {
+   "id": "tax-districts",
+   "title": "Tax districts",
+   "description": "Which taxing authorities levy property tax in each tax district, and the combined millage. Rates by year are in property-tax-rates (authority_id).",
+   "rows": 10,
+   "columns": [
+    {
+     "name": "district",
+     "type": "string"
+    },
+    {
+     "name": "label",
+     "type": "string"
+    },
+    {
+     "name": "authority_ids",
+     "type": "array"
+    },
+    {
+     "name": "total_millage",
+     "type": "number"
+    },
+    {
+     "name": "tax_district_codes",
+     "type": "array"
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "sp"
+     ]
+    }
+   ],
+   "json": "/downloads/tax-districts.json",
+   "csv": "/downloads/tax-districts.csv",
+   "api": "/api/v1/datasets/tax-districts"
+  },
+  {
    "id": "meetings",
    "title": "Upcoming meetings",
    "description": "Scheduled and expected meetings for every board.",
-   "rows": 50,
+   "rows": 44,
    "columns": [
     {
      "name": "board",
      "type": "string",
      "values": [
       "county",
-      "county-planning",
       "cw",
       "cw-cra",
       "lh",
@@ -2361,7 +6236,6 @@
       "10/20/26 Special Executive Session - Case No. 5:26-cv-00032-AW-MJF (Vickie Gainer v. City of Lynn Ha",
       "3rd LDC Workshop",
       "BOCC Regular Meeting",
-      "Bay County Board of County Commissioners Meeting",
       "Budget Hearing",
       "CANCELLED - ELECTION DAY*** Agenda Regular Meeting",
       "CRA Board Meeting",
@@ -2373,7 +6247,6 @@
       "Commission Workshop",
       "Community Redevelopment Agency Board Meeting for October 13, 2026",
       "LDC 5th Workshop",
-      "Planning Commission Meeting",
       "Regular Meeting",
       "Regular Meeting (expected)",
       "School Board Meeting",
@@ -2395,14 +6268,12 @@
       "825 Ohio Avenue, Lynn Haven",
       "Bay County Government Center - 840 W 11th St. Panama City FL 32401",
       "Bay County Government Center, 840 W. 11th St., Panama City, FL",
-      "Bay County Government Center, 840 W. 11th St., Panama City, FL 32401",
       "Bay County Government Center, 840 W. 11th St., Panama City, FL 32401 (workshops are virtual)",
       "Bay County Govt. Center - 840 W. 11th St Panama City FL 32401",
       "Callaway Arts & Conference Center - 500 Callaway Park Way Callaway FL 32404",
       "Callaway Arts & Conference Center, 500 Callaway Pkwy, Callaway, FL 32404",
       "Callaway Arts & Conference Center, 500 Callaway Pkwy, Callaway, FL 32404 (typical; confirm on agenda)",
       "City Hall Council Chambers, 17007 Panama City Beach Pkwy, Panama City Beach, FL 32413",
-      "Government Center - 840 W. 11th st. Panama City FL 32401",
       "Live Stream on City website - https://www.panamacity.gov/369/Live-Stream - Panama City FL 3240",
       "Parker City Hall, 1001 West Park Street, Parker, FL 32404 (city contact address; confirm venue on agenda)",
       "Springfield City Hall Commission Room, 408 School Ave., Springfield, FL",
@@ -2430,6 +6301,7 @@
       "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=421",
       "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_09172026-423",
       "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_10132026-425",
+      "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_10272026-427",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-912?html=true",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10202026-915?html=true",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10272026-902?html=true",
@@ -2443,7 +6315,7 @@
       "https://baycountyfl.primegov.com/Public/CompiledDocument?meetingTemplateId=1942&compileOutputType=1",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1131,plainText=false)",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1138,plainText=false)",
-      "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1146,plainText=false)",
+      "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1149,plainText=false)",
       "https://mexicobeachfl.gov/uploads/2026/09/October-13-2026-CIty-Council-Meeting-Agenda-Packet.pdf",
       "https://mexicobeachfl.gov/uploads/2026/09/October-27-2026-City-Council-Meeting-Packet.pdf",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-912?packet=true",
@@ -2473,8 +6345,6 @@
       "Springfield:https://www.springfieldfl.net/meetings",
       "Springfield:https://www.springfieldfl.net/meetings/recent",
       "Thrillshare:https://thrillshare-cmsv2.services.thrillshare.com/api/v4/o/31249/cms/events",
-      "calendar:https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=26&feed=calendar",
-      "calendar:https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=38&feed=calendar",
       "calendar:https://www.cityofcallaway.com/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar",
       "calendar:https://www.panamacity.gov/common/modules/iCalendar/iCalendar.aspx?catID=22&feed=calendar",
       "schedule:pattern observed in posted agendas (no published schedule found)",
@@ -2525,12 +6395,6 @@
       "https://lynnhavenfl.portal.civicclerk.com/event/2130/files",
       "https://lynnhavenfl.portal.civicclerk.com/event/2143/files",
       "https://www.bay.k12.fl.us/school-board-meetings",
-      "https://www.baycountyfl.gov/calendar.aspx?EID=1594",
-      "https://www.baycountyfl.gov/calendar.aspx?EID=1595",
-      "https://www.baycountyfl.gov/calendar.aspx?EID=1604",
-      "https://www.baycountyfl.gov/calendar.aspx?EID=1605",
-      "https://www.baycountyfl.gov/calendar.aspx?EID=1685",
-      "https://www.baycountyfl.gov/calendar.aspx?EID=1686",
       "https://www.cityofcallaway.com/calendar.aspx?EID=2696",
       "https://www.cityofcallaway.com/calendar.aspx?EID=2697",
       "https://www.cityofcallaway.com/calendar.aspx?EID=2707",
@@ -2559,6 +6423,7 @@
      "name": "calendar_source",
      "type": "string",
      "values": [
+      "calendar:https://www.cityofcallaway.com/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar",
       "calendar:https://www.cityoflynnhaven.gov/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar",
       "calendar:https://www.panamacity.gov/common/modules/iCalendar/iCalendar.aspx?catID=22&feed=calendar"
      ]
@@ -3813,7 +7678,6 @@
       "2026-08-09",
       "2026-08-13",
       "2026-09-10",
-      "2026-10-02",
       "2026-10-16"
      ]
     },
@@ -3849,7 +7713,7 @@
    "id": "campaign-contributions-2026",
    "title": "2026 contributions from organizations",
    "description": "Every contribution from a business, committee or party to a 2026 local candidate. Individual donors are not included, and neither is bank interest on campaign accounts.",
-   "rows": 154,
+   "rows": 156,
    "columns": [
     {
      "name": "candidate",
