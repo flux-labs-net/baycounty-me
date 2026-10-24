@@ -29,6 +29,16 @@ class PersonCase(unittest.TestCase):
         self.assertEqual(ids.person_case('Kathy LAWSON'), 'Kathy Lawson')
         self.assertEqual(ids.person_case('MAC McVICAR'), 'Mac McVicar')
 
+    def test_credentials_stay_caps(self):
+        cases = {
+            'JOHN SMITH ESQ': 'John Smith ESQ', 'JANE DOE, DDS': 'Jane Doe, DDS', 'BOB LEE DMD': 'Bob Lee DMD',
+            'AMY POE PHD': 'Amy Poe PhD', 'TOM RAY APRN': 'Tom Ray APRN', 'JOHN SMITH, DO': 'John Smith, DO',
+            'Jane Doe Dds': 'Jane Doe DDS', 'John Smith Esq.': 'John Smith ESQ.',
+            'ANH THI DO': 'Anh Thi Do', 'LIN MA': 'Lin Ma', 'Mary Ann Gri': 'Mary Ann Gri',  # names, not credentials
+        }
+        for raw, want in cases.items():
+            self.assertEqual(ids.person_case(raw), want)
+
     def test_sunbiz_fixed_width(self):
         self.assertEqual(ids.sunbiz_person('SELLICK             DAVID         E'), 'David E Sellick')
         self.assertEqual(ids.sunbiz_person('DOE                 JANE          JR'), 'Jane Doe Jr')
