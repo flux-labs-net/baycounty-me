@@ -17,6 +17,7 @@
   const STATUS = {open: 'Open', follow_up: 'Follow-up', referred: 'Referred to auditor', explained: 'Explained', cleared: 'Cleared'};
 
   let me = null, ws = null, role = 'viewer', overview = null;
+  const PAGE_TITLE = document.title;
   const NEED = {read: 1, upload: 2, review: 3, manage: 4, viewer: 1, uploader: 2, reviewer: 3, owner: 4};
   const can = need => (ROLE[role] || 0) >= NEED[need];
 
@@ -65,6 +66,7 @@
     $$('[role=tab]').forEach(x => x.setAttribute('aria-selected', String(x.dataset.tab === name)));
     $$('[data-panel]').forEach(p => { p.hidden = p.id !== 'p-' + name; });
     if (push) history.replaceState(null, '', '#' + name);
+    if (name !== 'packet') document.title = PAGE_TITLE;
     loaders[name]();
   }
   $$('[role=tab]').forEach(b => b.addEventListener('click', () => tab(b.dataset.tab)));
@@ -91,6 +93,11 @@
   }
 
   // ---------- overview ----------
+  // A department is "ahead" when spending plus open POs runs more than 10 points past the share of the year gone, or
+  // past its budget. Debt service is paid once a year, so it is never ahead.
+  const usedShare = d => (d.actual + d.encumbered) / d.budget;
+  const isOver = d => d.budget > 0 && !/debt\s*service/i.test(d.department) && usedShare(d) > 1.0001;
+  const isAhead = (d, el) => d.budget > 0 && !/debt\s*service/i.test(d.department) && (usedShare(d) > 1.0001 || usedShare(d) - (el || 0) > 0.10);
   function paceChart(b, {compact = false} = {}) {
     if (!b || !b.departments.length) return '';
     const el = b.elapsed ?? 0;
@@ -98,13 +105,13 @@
     const mx = Math.max(1, ...rows.map(d => (d.actual + d.encumbered) / d.budget)) * 1.04;
     const html = rows.map(d => {
       const u = d.actual / d.budget, e = d.encumbered / d.budget, used = u + e;
-      const ahead = !/debt\s*service/i.test(d.department) && (used > 1.0001 || used - el > 0.10);
+      const ahead = isAhead(d, el);
       return `<div class="dept${ahead ? ' ahead' : ''}"><span class="nm" title="${esc(d.department)}">${esc(d.department)}</span>
         <span class="track" role="img" aria-label="${esc(d.department)}: ${pct(used)} of ${usd(d.budget)} used"><span class="used" style="width:${(Math.min(u, mx) / mx * 100).toFixed(2)}%"></span><span class="enc" style="left:${(u / mx * 100).toFixed(2)}%;width:${(Math.max(0, Math.min(e, mx - u)) / mx * 100).toFixed(2)}%"></span><i class="mark" style="left:${(el / mx * 100).toFixed(2)}%"></i></span>
         <span class="amt"><b>${pct(used)}</b> of ${compact ? short(d.budget) : usd(d.budget)}</span></div>`;
     }).join('');
     return `<div class="pace" style="--el:${(el / mx).toFixed(5)}">${html}<span class="pace-rule${el / mx > 0.8 ? ' flip' : ''}"><span>${pct(el)} of the year</span></span></div>
-      <div class="legend"><span><i></i>Spent</span><span><i class="e"></i>On open purchase orders</span><span><i class="r"></i>Share of the fiscal year gone</span></div>`;
+      <div class="legend"><span><i></i>Spent</span><span><i class="e"></i>On open purchase orders</span>${rows.some(d => isAhead(d, el)) ? '<span><i class="o"></i>More than 10 points ahead of the year, or over budget</span>' : ''}<span><i class="r"></i>Share of the fiscal year gone</span></div>`;
   }
   function flagItem(f) {
     return `<li><button type="button" data-flag="${f.id}"><span class="sev ${f.severity}">${f.severity === 'urgent' ? 'Urgent' : f.severity === 'review' ? 'Review' : 'Info'}</span>
@@ -387,22 +394,103 @@
   });
 
   // ---------- board packet ----------
+  // Laid out like the branded sample report ("Monthly finance summary"): masthead with a navy rule, a one-paragraph
+  // summary, the pace chart, the items needing attention, bank reconciliation status and the open audit finding.
+  // Every name it prints (site, operator, government) comes from the place config the page was built with.
+  const BRAND = (() => { try { return JSON.parse($('#brand').textContent); } catch (e) { return {}; } })();
+  const SITE = BRAND.site || location.hostname, OPERATOR = BRAND.operator || '';
+  const monthYear = s => new Date(String(s).slice(0, 7) + '-15T12:00:00Z').toLocaleDateString('en-US', {month: 'short', year: 'numeric', timeZone: 'UTC'});
+  const monthLong = s => new Date(String(s).slice(0, 7) + '-15T12:00:00Z').toLocaleDateString('en-US', {month: 'long', timeZone: 'UTC'});
+  const nextMonth = s => { const d = new Date(String(s).slice(0, 7) + '-15T12:00:00Z'); d.setUTCMonth(d.getUTCMonth() + 1); return d.toISOString().slice(0, 10); };
+  const listAnd = a => a.length < 2 ? a.join('') : a.length === 2 ? a.join(' and ') : a.slice(0, -1).join(', ') + ', and ' + a[a.length - 1];
+  const fyRange = m => { const n = k => new Date(Date.UTC(2000, k - 1, 1)).toLocaleDateString('en-US', {month: 'short', timeZone: 'UTC'});
+    const end = new Date(Date.UTC(2001, m - 1, 0)); return `${n(m)} 1–${n(end.getUTCMonth() + 1)} ${end.getUTCDate()}`; };
+  // Latest month whose reconciliation is due (30 days after month end) as of the report date.
+  function dueMonth(asOf) {
+    const t = Date.parse(String(asOf).slice(0, 10) + 'T12:00:00Z') - 30 * 864e5, d = new Date(t);
+    const end = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + 1, 0));
+    return (end.getTime() <= t ? end : new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), 0))).toISOString().slice(0, 10);
+  }
+  function recStatus(a, due) {
+    if (!a.last_rec) return {cls: 'urgent', text: 'None on file'};
+    if (a.last_rec.slice(0, 7) < due.slice(0, 7)) return {cls: 'urgent', text: `${monthLong(nextMonth(a.last_rec))} not on file`};
+    const ob = (a.out_of_balance || []).slice(-1)[0];
+    if (ob) return {cls: 'urgent', text: `${monthLong(ob)} out of balance`};
+    if (a.late) return {cls: 'review', text: `${a.late} late this year`};
+    return {cls: 'ok', text: 'Current'};
+  }
+  function packetLead(o, b, items) {
+    const f = o.flags, parts = [];
+    if (b) {
+      const done = b.total_actual + b.total_encumbered, el = b.elapsed || 0;
+      const rows = b.departments.filter(d => d.budget > 0);
+      const over = rows.filter(isOver).map(d => d.department), ahead = rows.filter(d => isAhead(d, el) && !isOver(d));
+      parts.push(`Through ${monthLong(b.as_of)}, departments have spent or committed <b>${usd(done)}</b> of their <b>${usd(b.total_budget)}</b> budgets (${pct(done / (b.total_budget || 1))}) with ${pct(el)} of the fiscal year gone.`);
+      const bits = [];
+      if (ahead.length) bits.push(`<b>${ahead.length} ${ahead.length === 1 ? 'department is' : 'departments are'}</b> running well ahead of the year`);
+      if (over.length) bits.push(over.length > 3 ? `<b>${over.length} departments</b> are over budget` : `${esc(listAnd(over))} ${over.length === 1 ? 'is' : 'are'} over budget`);
+      if (f.open) bits.push(`<b>${f.open} ${f.open === 1 ? 'item needs' : 'items need'} attention</b>${f.urgent ? `, ${f.urgent} urgent` : ''}`);
+      if (bits.length) parts.push(listAnd(bits).replace(/^./, c => c.toUpperCase()) + '.');
+      else parts.push('Nothing needs attention right now.');
+    } else {
+      parts.push(o.payments ? 'No budget-vs-actual report has been added yet.' : 'No files have been added yet.');
+      parts.push(f.open ? `<b>${f.open} ${f.open === 1 ? 'item needs' : 'items need'} attention</b>${f.urgent ? `, ${f.urgent} urgent` : ''}.` : 'Nothing needs attention right now.');
+    }
+    return parts.join(' ');
+  }
+  function setPrintFooter(title) {
+    // Running footer on every printed page (Chrome and Edge print these; other browsers skip it and keep the
+    // closing note at the end of the packet).
+    const q = t => '"' + String(t).replace(/["\\]/g, '\\$&').replace(/\n/g, ' ') + '"';
+    let st = $('#pk-page'); if (!st) { st = document.createElement('style'); st.id = 'pk-page'; document.head.appendChild(st); }
+    st.textContent = `@media print{@page{
+      @bottom-left{content:${q(`${SITE}${OPERATOR ? ' · powered by ' + OPERATOR : ''}`)};font:400 7pt Poppins,sans-serif;color:#5A6372}
+      @bottom-right{content:${q(title + ' · page ')} counter(page) " of " counter(pages);font:400 7pt Poppins,sans-serif;color:#5A6372}}}`;
+  }
   async function loadPacket() {
     const el = $('#packet'); el.innerHTML = '<p class="muted">Preparing…</p>';
     try {
       const o = overview || (overview = await api('overview'));
       const fl = await api('flags', {params: {status: 'all', limit: 15}});
-      const items = fl.flags.filter(f => f.status !== 'cleared').slice(0, 12);
-      const b = o.budget;
-      el.innerHTML = `<h1>${esc(o.workspace.name)}: finance summary</h1>
-        <p class="pm">${b ? `FY${b.fiscal_year} through ${day(b.as_of)}` : ''} · Prepared ${day(new Date().toISOString())} · BayCounty.me, powered by Flux Labs</p>
-        <p class="lead">${$('#ov-lead').innerHTML}</p>
-        ${b ? `<h2 class="h2">Departments: spending against the year</h2><div class="panel">${paceChart(b, {compact: true})}</div>` : ''}
-        <h2 class="h2">Needs attention</h2>
-        <table class="t"><thead><tr><th>Severity</th><th>What the review found</th><th class="num">At stake</th><th>Status</th></tr></thead><tbody>
-        ${items.map(f => `<tr><td><span class="sev ${f.severity}">${f.severity === 'urgent' ? 'Urgent' : f.severity === 'review' ? 'Review' : 'Info'}</span></td><td>${esc(f.title)}</td><td class="num">${f.amount_at_risk ? usd(f.amount_at_risk) : '—'}</td><td>${esc(STATUS[f.status] || f.status)}</td></tr>`).join('') || '<tr><td colspan="4" class="muted">No open items.</td></tr>'}
-        </tbody></table>
-        <p class="foot">Figures come from the city’s own exports, each tied to its printed total before use. Flags are patterns worth a second look, not findings of wrongdoing.</p>`;
+      // Most serious first, then dollars at stake.
+      const SEV = {urgent: 0, review: 1, info: 2};
+      const items = fl.flags.filter(f => f.status !== 'cleared').slice(0, 12)
+        .sort((x, y) => (SEV[x.severity] ?? 3) - (SEV[y.severity] ?? 3) || (Math.abs(y.amount_at_risk || 0) - Math.abs(x.amount_at_risk || 0)));
+      const b = o.budget, w = o.workspace;
+      const gov = (BRAND.governments || {})[w.government_key] || w.name.replace(/\s*\(sample data\)\s*$/i, '');
+      const title = 'Monthly finance summary';
+      const asOf = (b && b.as_of) || o.as_of, due = dueMonth(asOf);
+      const fyStart = w.fy_start_month || 10;
+      const accts = o.bank_accounts || [], finds = o.audit_findings || [];
+      setPrintFooter(title);
+      document.title = `${gov} · ${title} · ${SITE}`;
+      el.innerHTML = `<header class="pk-head">
+          <div><p class="pk-kicker">${esc(gov)} · Finance review</p><h1>${title}</h1></div>
+          <div class="pk-meta">${b ? `FY${b.fiscal_year} through ${day(b.as_of)}<br>` : ''}Prepared ${day(new Date().toISOString())}<br>${esc(SITE)}${OPERATOR ? ` · powered by ${esc(OPERATOR)}` : ''}</div>
+        </header>
+        ${w.sample ? `<p class="pk-note"><b>Sample.</b> This shows what the report looks like once the city’s monthly exports are loaded. The figures in this workspace are illustrative sample data, not the city’s records.</p>` : ''}
+        <p class="pk-lead">${packetLead(o, b, items)}</p>
+        ${b ? `<section class="pk-sec"><h2 class="h2">Departments: spending against the year</h2>
+          <p class="sub">Year-to-date spending plus open purchase orders, as a share of each department’s budget. The line marks how much of the fiscal year (${fyRange(fyStart)}) has passed. Debt service is paid once a year, so 100% is expected.</p>
+          <div class="panel">${paceChart(b)}</div></section>` : ''}
+        <section class="pk-sec"><h2 class="h2">Needs attention</h2>
+          <p class="sub">Ranked by dollars at stake and seriousness. Staff mark each item explained, follow-up or referred to the auditor. Each is a pattern worth a second look, not a finding of wrongdoing.</p>
+          <table class="t na"><thead><tr><th>Severity</th><th>What the review found</th><th class="num">At stake</th><th>Status</th></tr></thead><tbody>
+          ${items.map(f => `<tr><td><span class="sev ${f.severity}">${f.severity === 'urgent' ? 'Urgent' : f.severity === 'review' ? 'Review' : 'Info'}</span></td><td>${esc(f.title)}</td><td class="num">${f.amount_at_risk ? usd(f.amount_at_risk) : '—'}</td><td><span class="pill">${esc(STATUS[f.status] || f.status)}</span></td></tr>`).join('') || '<tr><td colspan="4" class="muted">No open items.</td></tr>'}
+          </tbody></table></section>
+        ${accts.length || finds.length ? `<div class="pk-cols">
+          ${accts.length ? `<section class="pk-sec pk-keep"><h2 class="h2">Bank reconciliations</h2>
+            <p class="sub">Each account’s latest reconciliation on file. Due within 30 days of month end.</p>
+            <table class="t"><thead><tr><th>Account</th><th>Latest rec</th><th>Status</th></tr></thead><tbody>
+            ${accts.map(a => { const s = recStatus(a, due); return `<tr><td>${esc(a.account || 'Account')}</td><td>${a.last_rec ? monthYear(a.last_rec) : '—'}</td><td><span class="sev ${s.cls}">${esc(s.text)}</span></td></tr>`; }).join('')}
+            </tbody></table></section>` : '<div></div>'}
+          ${finds.length ? `<section class="pk-sec pk-keep"><h2 class="h2">Open audit finding${finds.length > 1 ? 's' : ''}</h2>
+            <p class="sub">From the city’s annual audits.</p>
+            ${finds.map(x => `<div class="pk-find"><b>${esc(x.finding_id)}: ${esc(x.title)}.</b> Reported in ${listAnd((x.years || [x.fiscal_year]).map(y => 'FY' + y))}.${x.mgmt_response ? ' ' + esc(x.mgmt_response.replace(/\.*$/, '.')) : ''}</div>`).join('')}
+            ${finds.some(x => x.topic === 'reconciliation') ? '<p class="pk-small">This report marks a reconciliation finding as improving once three straight months of reconciliations are on file, on time and in balance.</p>' : ''}
+            </section>` : ''}
+        </div>` : ''}
+        <p class="foot">Prepared with ${esc(SITE)}${OPERATOR ? `, powered by ${esc(OPERATOR)}` : ''}. Figures come from the city’s own exports, each tied to its printed total before use.</p>`;
     } catch (e) { el.innerHTML = `<p class="err">${esc(e.message)}</p>`; }
   }
   $('#print').addEventListener('click', () => window.print());

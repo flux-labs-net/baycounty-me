@@ -114,6 +114,11 @@ Revenue,001-0000-311.10,Ad valorem,"5,000,000.00","4,900,000.00",0
   assert.equal(o.body.budget.as_of, '2026-03-31');
   assert.equal(o.body.budget.total_budget, 1280000, 'revenue line left out');
   assert.ok(o.body.payments.top_vendors.length > 0);
+  // What the board packet prints: the government key (for the place config's name), sample marker, audit findings.
+  assert.equal(o.body.workspace.government_key, 'lh');
+  assert.equal(o.body.workspace.sample, false);
+  assert.ok(Array.isArray(o.body.audit_findings) && o.body.audit_findings.length > 0, 'Lynn Haven audit findings');
+  assert.ok(o.body.audit_findings.every(f => f.years.includes(f.fiscal_year)));
   const over = (await get('flags', {rule: 'over_budget'})).body.flags;
   assert.equal(over.length, 1);
   assert.equal(over[0].amount_at_risk, 5000);

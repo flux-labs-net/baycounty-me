@@ -125,41 +125,81 @@ dialog.drawer::backdrop{background:rgba(10,14,20,.4)}
 .signin h1{font:600 1.35rem var(--f-display);margin:0 0 6px}
 .signin p{line-height:1.5}
 .code{font:500 1.6rem var(--f-data);letter-spacing:.35em;text-align:center}
-/* Board packet: on screen a page preview; printed it is the whole page. Always light, whatever the site theme,
-   because it is a paper document: every color the packet uses is redefined here. */
+/* Board packet: matches the branded sample reports (Monthly finance summary). On screen it is a page preview;
+   printed it is the whole page. Always light, whatever the site theme, because it is a paper document: every color
+   the packet uses is redefined here. Brand colors come from the site tokens (navy, gold); names come from the place
+   config (see BRAND in finance_page.py). */
 .packet{--bg:#FFFFFF;--surface:#FFFFFF;--sunken:#EEF2F7;--ink:#161B24;--muted:#5A6372;--faint:#8A93A1;--line:#E1E6ED;
+  --navy:#1E3A76;--gold:#E8A33D;--tint-amber:#FDF5E6;--tint-blue:#F4F8FC;
   --urgent:#B3261E;--review:#9A5B00;--info:#5A6372;--pace:#161B24;--bar:#3F6FB0;--bar-over:#B3261E;
-  background:#fff;color:var(--ink);border:1px solid var(--line);border-radius:4px;padding:40px 44px;max-width:820px;margin:0 auto;color-scheme:light}
-.packet h1{font:600 1.4rem var(--f-display);margin:0}
-.packet .pm{color:var(--muted);font-size:.86rem;margin:4px 0 18px}
-.packet .lead{color:var(--ink)}
+  background:#fff;color:var(--ink);border:1px solid var(--line);border-radius:4px;padding:44px 48px;max-width:860px;margin:0 auto;color-scheme:light;
+  font:400 .9rem/1.5 var(--f-body)}
+.pk-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;padding-bottom:12px;border-bottom:2px solid var(--navy);margin-bottom:18px}
+.pk-kicker{font:600 .82rem var(--f-display);color:var(--navy);margin:0 0 2px}
+.packet h1{font:700 1.65rem/1.2 var(--f-display);margin:0;letter-spacing:-.01em}
+.pk-meta{text-align:right;color:var(--muted);font-size:.8rem;line-height:1.55;white-space:nowrap}
+.pk-note{background:var(--tint-amber);border:1px solid #EDCB8B;border-radius:6px;padding:9px 12px;font-size:.78rem;color:#6B4A0F;margin:0 0 18px}
+.pk-note b{font-weight:600}
+.packet .pk-lead{font:400 1.04rem/1.55 var(--f-display);color:var(--ink);margin:0 0 18px;max-width:none}
+.packet .pk-lead b{font-weight:600}
+.packet .h2{font:600 1rem var(--f-display);margin:22px 0 2px}
+.packet .sub{color:var(--muted);font-size:.8rem;margin:0 0 10px;max-width:none}
 .packet .panel{border:0;padding:0;background:none}
-.packet .pace-rule span{background:#fff}
+.packet .pace{--nm:196px;--am:9.5em}
+.packet .dept{padding:1.5px 0}
+.packet .dept .nm{font-size:.78rem}
+.packet .dept .track{height:8px;background:var(--sunken)}
+.packet .dept .amt{font-size:.78rem}
+.packet .dept .amt b{font-weight:600}
+.packet .pace-rule{border-left-width:1px}
+.packet .pace-rule span{background:#fff;font-size:.74rem}
+.packet .legend{font-size:.7rem;gap:6px 12px;margin-top:8px}
+.packet .legend i.o{background:var(--bar-over)}
+.packet table.t{font-size:.8rem}
+.packet .t th{font-size:.74rem;padding:7px 8px;border-bottom:1px solid #C9D2DE}
+.packet .t td{padding:6px 8px;vertical-align:middle}
+.packet .t tr:last-child td{border-bottom:1px solid var(--line)}
+.packet .sev{font-size:.78rem}
+.pill{display:inline-block;font-size:.72rem;color:var(--ink);border:1px solid #B9C3D0;border-radius:999px;padding:0 8px;white-space:nowrap;line-height:1.6}
+.pk-cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;margin-top:4px}
+.pk-cols .sev.ok{color:var(--info)}
+.pk-find{background:var(--tint-blue);border-left:3px solid var(--navy);padding:10px 12px;font-size:.8rem;margin:0 0 10px}
+.pk-find b{font-weight:600}
+.pk-find+.pk-find{margin-top:8px}
+.packet .pk-small{font-size:.78rem;color:var(--muted);margin:0}
+.packet .foot{margin-top:26px;padding-top:10px;border-top:1px solid var(--line);color:var(--muted);font-size:.72rem}
+.packet .foot a{color:inherit}
 @media (max-width:620px){
   .packet{padding:22px 16px;border-radius:10px}
-  .packet h1{font-size:1.2rem}
-  .packet .lead{font-size:1rem}
-  /* The attention table stacks: severity and status on one line, the finding, then the amount. */
-  .packet table.t,.packet table.t tbody{display:block}
-  .packet table.t thead{display:none}
-  .packet table.t tr{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;padding:12px 0;border-bottom:1px solid var(--line)}
-  .packet table.t td{border:0;padding:0}
-  .packet table.t td:nth-child(1){grid-column:1;grid-row:1}
-  .packet table.t td:nth-child(4){grid-column:2;grid-row:1;text-align:right;color:var(--muted);font-size:.8rem}
-  .packet table.t td:nth-child(2){grid-column:1/-1;grid-row:2}
-  .packet table.t td:nth-child(3){grid-column:1/-1;grid-row:3;text-align:left;color:var(--muted);font-size:.84rem}
-  .packet table.t td:nth-child(3)::before{content:"At stake: "}
-  .packet table.t td[colspan]{grid-column:1/-1}
+  .pk-head{flex-direction:column;align-items:flex-start;gap:8px}
+  .pk-meta{text-align:left;white-space:normal}
+  .packet h1{font-size:1.3rem}
+  .packet .pk-lead{font-size:1rem}
+  .pk-cols{grid-template-columns:1fr}
+  /* Needs-attention table: one stacked item per row so nothing runs off a phone screen. */
+  .packet table.t.na,.packet table.t.na tbody{display:block}
+  .packet table.t.na thead{display:none}
+  .packet table.t.na tr{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;padding:12px 0;border-bottom:1px solid var(--line)}
+  .packet table.t.na td{border:0;padding:0}
+  .packet table.t.na td:nth-child(1){grid-column:1;grid-row:1}
+  .packet table.t.na td:nth-child(4){grid-column:2;grid-row:1;text-align:right}
+  .packet table.t.na td:nth-child(2){grid-column:1/-1;grid-row:2}
+  .packet table.t.na td:nth-child(3){grid-column:1/-1;grid-row:3;text-align:left;color:var(--muted);font-size:.84rem}
+  .packet table.t.na td:nth-child(3)::before{content:"At stake: "}
+  .packet table.t.na td[colspan]{grid-column:1/-1}
 }
-.packet .foot{margin-top:24px;padding-top:10px;border-top:1px solid #E1E6ED;color:#5A6372;font-size:.78rem}
 @media print{
-  @page{margin:14mm}
-  body{background:#fff}
+  @page{size:letter;margin:14mm 14mm 16mm}
+  html,body{background:#fff!important}
   .top,.tabs,.no-print,dialog{display:none!important}
   .fw{padding:0;max-width:none}
   section[data-panel]:not(#p-packet){display:none!important}
-  .packet{border:0;padding:0;max-width:none}
-  .dept,.t tr{break-inside:avoid}
+  .packet{border:0;padding:0;max-width:none;font-size:10pt}
+  .packet *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .pk-keep,.dept,.t tr,.pk-find{break-inside:avoid}
+  .packet .h2{break-after:avoid}
+  .packet .legend{break-before:avoid;flex-wrap:nowrap;white-space:nowrap}
+  .packet .foot{display:none}
 }
 </style>
 </head>
@@ -279,6 +319,7 @@ dialog.drawer::backdrop{background:rgba(10,14,20,.4)}
   <div class="dr-h"><div class="grow"><span id="dr-sev"></span><h2 id="dr-title"></h2></div><button class="btn quiet" type="button" id="dr-close" aria-label="Close">Close</button></div>
   <div class="dr-b" id="dr-body"></div>
 </div></dialog>
+<script type="application/json" id="brand">{"site": "BayCounty.me", "domain": "https://baycounty.me", "operator": "Flux Labs", "governments": {"county": "Bay County Board of County Commissioners", "schools": "Bay District Schools (School Board of Bay County)", "pc": "City of Panama City", "pcb": "City of Panama City Beach", "lh": "City of Lynn Haven", "cw": "City of Callaway", "sp": "City of Springfield", "parker": "City of Parker", "mb": "City of Mexico Beach"}}</script>
 <script src="/assets/finance.js" defer></script>
 </body>
 </html>

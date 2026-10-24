@@ -198,16 +198,37 @@ async function overview(q, ws, today = new Date().toISOString().slice(0, 10)) {
       by_month: [...months].sort().map(([month, total]) => ({month, total: Math.round(total * 100) / 100})),
       top_vendors: [...vendors.values()].sort((a, b) => b.total - a.total).slice(0, 10).map(v => ({...v, total: Math.round(v.total * 100) / 100}))};
   }
+  // Bank accounts: latest rec on file, plus what the board packet reports for the last 12 months of recs:
+  // months that didn't balance and recs finished more than 30 days after month end.
   const accounts = new Map();
-  for (const r of data.bankRecs) { const a = accounts.get(r.account_hash) || {account: r.account_label, last_rec: null, last_reconciled_on: null}; if (!a.last_rec || r.period_end > a.last_rec) { a.last_rec = r.period_end; a.last_reconciled_on = r.reconciled_on; } accounts.set(r.account_hash, a); }
-  for (const t of data.bankTxns) if (!accounts.has(t.account_hash)) accounts.set(t.account_hash, {account: t.account_label, last_rec: null, last_reconciled_on: null});
+  const blank = label => ({account: label, last_rec: null, last_reconciled_on: null, out_of_balance: [], late: 0});
+  const recs = [...data.bankRecs].filter(r => r.period_end).sort((a, b) => a.period_end.localeCompare(b.period_end));
+  const lastPeriod = recs.length ? recs[recs.length - 1].period_end : null;
+  const yearBack = lastPeriod ? new Date(Date.parse(lastPeriod) - 365 * 864e5).toISOString().slice(0, 10) : null;
+  for (const r of recs) {
+    const a = accounts.get(r.account_hash) || blank(r.account_label);
+    a.last_rec = r.period_end; a.last_reconciled_on = r.reconciled_on;
+    if (r.period_end > yearBack) {
+      const adjusted = (r.statement_balance || 0) - (r.outstanding_checks || 0) + (r.deposits_in_transit || 0) + (r.other_adjustments || 0);
+      if (r.book_balance != null && Math.abs(adjusted - r.book_balance) >= 0.01) a.out_of_balance.push(r.period_end);
+      if (r.reconciled_on && (Date.parse(r.reconciled_on) - Date.parse(r.period_end)) / 864e5 > 30) a.late++;
+    }
+    accounts.set(r.account_hash, a);
+  }
+  for (const t of data.bankTxns) if (!accounts.has(t.account_hash)) accounts.set(t.account_hash, blank(t.account_label));
+  // Prior audit findings: the latest year's, each with every year the same finding was reported.
+  const latestFy = Math.max(0, ...data.findings.map(f => f.fiscal_year));
+  const audit_findings = data.findings.filter(f => f.fiscal_year === latestFy).map(f => ({
+    finding_id: f.finding_id, title: f.title, topic: f.topic, fiscal_year: f.fiscal_year, repeat: f.repeat, mgmt_response: f.mgmt_response, source_url: f.source_url,
+    years: [...new Set(data.findings.filter(x => x.topic === f.topic).map(x => x.fiscal_year))].sort()}));
   const [flagSum] = await q(`select count(*)::int open, coalesce(sum(amount_at_risk), 0)::float8 dollars,
       count(*) filter (where severity = 'urgent')::int urgent, count(*) filter (where severity = 'review')::int review, count(*) filter (where severity = 'info')::int info
       from finance.flags where workspace_id = $1 and status in ('open', 'follow_up')`, [ws]);
   const top = (await listFlags(q, ws, {status: 'open,follow_up', limit: 10})).flags;
   const sources = await q(`select shape, count(*)::int files, max(uploaded_at) last_upload, min(period_start)::text period_start, max(period_end)::text period_end,
       count(*) filter (where status = 'held')::int held from finance.uploads where workspace_id = $1 and status in ('committed', 'held') group by shape`, [ws]);
-  return {workspace: {id: w.id, name: w.name}, as_of: today, budget, payments, bank_accounts: [...accounts.values()], flags: {...flagSum, top}, sources};
+  return {workspace: {id: w.id, name: w.name, government_key: w.government_key, fy_start_month: fyStart, sample: /-sample$/.test(w.id)}, as_of: today, budget, payments,
+    bank_accounts: [...accounts.values()], audit_findings, flags: {...flagSum, top}, sources};
 }
 
 module.exports = {COLUMNS, workspace, workspacesFor, log, saveUpload, getUpload, insertRows, committedDuplicate, savedMapping, saveMapping,
