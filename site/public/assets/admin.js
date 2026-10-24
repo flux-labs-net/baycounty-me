@@ -836,7 +836,7 @@
   });
 
   // ---------- nonprofit boards (private registry, api/_boards.js) ----------
-  const BD_SRC = {irs_990: 'IRS 990', irs_990ez: 'IRS 990-EZ', irs_990pf: 'IRS 990-PF', irs_990n: 'IRS 990-N', sunbiz: 'Sunbiz'};
+  const BD_SRC = {irs_990: 'IRS 990', irs_990ez: 'IRS 990-EZ', irs_990pf: 'IRS 990-PF', irs_990n: 'IRS 990-N', sunbiz: 'Sunbiz', fdacs: 'FDACS'};
   const bdSrc = s => String(s || '').split(', ').map(x => BD_SRC[x] || x).join(', ');
   const bdYears = b => b.first_year && b.last_year && b.first_year !== b.last_year ? `${b.first_year}–${b.last_year}` : (b.last_year || b.first_year || '');
   const bdBoards = list => (list || []).map(n => `<div>${owNm(n)}</div>`).join('');

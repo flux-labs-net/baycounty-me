@@ -325,7 +325,7 @@ def _nonprofit_files(part):
     import glob, json
     rows = []
     for fp in sorted(glob.glob(os.path.join(HERE, '..', 'data', 'nonprofits', '*', 'nonprofits.json'))):
-        rows += json.load(open(fp))[part]
+        rows += json.load(open(fp)).get(part, [])
     return rows
 
 
@@ -343,6 +343,23 @@ def nonprofit_grants():
 
 def nonprofit_board_members():
     return _nonprofit_files('board_members')
+
+
+# Florida charitable solicitation registrations (FDACS Check-A-Charity, data/nonprofits/fetch_fdacs.py). Column types
+# are listed so the table and catalog stay right in a county with no registrations fetched yet.
+CHARITY_REGISTRATION_COLUMNS = {c: 'string' for c in (
+    'registration_number', 'nonprofit_id', 'name', 'dba', 'fein', 'matched_by', 'status', 'status_detail', 'registration_date', 'expiration_date',
+    'city', 'zip', 'website', 'fiscal_year_end')}
+CHARITY_REGISTRATION_COLUMNS.update({c: 'number' for c in (
+    'total_revenue', 'contributions', 'government_grants', 'program_expenses', 'fundraising_expenses', 'management_expenses', 'total_expenses',
+    'program_percent', 'fundraising_percent')})
+CHARITY_REGISTRATION_COLUMNS.update({'fundraising_consultants': 'string', 'officers_listed': 'number', 'other_registrations': 'string', 'county': 'string',
+                                     'source_url': 'string'})
+DB_ONLY_COLUMNS['charity-registrations'] = CHARITY_REGISTRATION_COLUMNS
+
+
+def charity_registrations():
+    return _nonprofit_files('charity_registrations')
 
 
 # Officials on nonprofit boards: written by registry.publish_board_officials() when an admin confirms a name match
@@ -401,6 +418,7 @@ DATASETS = [
     ('nonprofit-payments', 'Nonprofits: government payment records', 'Payment records on the site (contracts, check registers, tourism agency payments, CRA ledger) whose payee is a local nonprofit, matched by name.', nonprofit_payments),
     ('nonprofit-grants', 'Nonprofits: grants they gave', 'Grants to organizations reported on Schedule I of local nonprofits\' 990 returns, with the recipient linked when it is also a local nonprofit.', nonprofit_grants),
     ('nonprofit-board-members', 'Nonprofits: board members', 'Officers, directors, trustees and key employees of local nonprofits as listed on their IRS returns (2019 on), 990-N postcards and state corporate filings: one row per person per nonprofit with titles, years on file, reported pay and hours, and how many other current local boards the same name sits on (homeowner associations aside). person_id groups the same name across boards; two people with a common name can share one.', nonprofit_board_members),
+    ('charity-registrations', 'Nonprofits: Florida charity registrations', 'Charities with a county address registered with the Florida Department of Agriculture and Consumer Services to ask the public for donations (Check-A-Charity): registration status and dates, the revenue and the program, fundraising and management spending each reported to the state, and the professional fundraising firms it uses. nonprofit_id links to the nonprofits dataset (joined by FEIN, then by exact name); the officers and directors each registration lists are in nonprofit-board-members.', charity_registrations),
     ('nonprofit-officials', 'Officials on nonprofit boards', 'Elected officials, department leaders and candidates listed as an officer or director of a local nonprofit in its IRS returns or state corporate filings. Only matches checked by hand are listed.', nonprofit_officials),
     ('official-businesses', "Officials' businesses", 'Registered businesses (Florida Division of Corporations) that list an elected official, department leader or local candidate as an officer, manager or registered agent, with the filing date and status. Each official-to-record match was checked by hand. Only officials and candidates are named.', official_businesses),
     ('official-business-links', "Officials' business ties", "How officials' and candidates' registered businesses connect to public life: two officials on the same business, an official's business giving to a campaign, a donor business that shares an officer with a candidate's business (the shared person is counted, not named), and an official's business paid by a local government. Published only for hand-checked matches.", official_business_links),

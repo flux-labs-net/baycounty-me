@@ -1,5 +1,5 @@
-// /connections/nonprofits: reads the nonprofits, nonprofit-payments, nonprofit-grants and nonprofit-officials datasets
-// from /api/v1, and nonprofit-board-members per nonprofit or person when a row opens. Officials are tagged only when an
+// /connections/nonprofits: reads the nonprofits, nonprofit-payments, nonprofit-grants, nonprofit-officials and
+// charity-registrations (FDACS) datasets from /api/v1, and nonprofit-board-members per nonprofit or person when a row opens. Officials are tagged only when an
 // admin confirmed the name match.
 (() => {
   const $ = s => document.querySelector(s);
@@ -9,7 +9,9 @@
   const title = s => String(s || '').toLowerCase().replace(/\b([a-z])/g, m => m.toUpperCase()).replace(/\b(Llc|Inc|Pa|Usa|Us|Ymca|Ywca|Vfw|Pta|Pto|Cra|Cdc|Ii|Iii)\b/g, m => m.toUpperCase());
   const HOA = 'Homeowner or condo association';
   const PAGE = 60;
-  let orgs = [], pays = new Map(), grants = new Map(), offs = new Map(), shown = PAGE;
+  let orgs = [], pays = new Map(), grants = new Map(), offs = new Map(), regs = new Map(), shown = PAGE;
+  const active = s => /active/i.test(s || '') && !/inactive/i.test(s || '');
+  const pct = (a, b) => a != null && b ? ` (${Math.round(100 * a / b)}%)` : '';
 
   async function all(id) {
     let out = [], url = `/api/v1/datasets/${id}?limit=1000`;
@@ -33,10 +35,12 @@
   const group = (rows, key) => rows.reduce((m, r) => (r[key] && (m.get(r[key]) || m.set(r[key], []).get(r[key])).push(r), m), new Map());
 
   async function load() {
-    let o, p, g, f;
-    try { [o, p, g, f] = await Promise.all([all('nonprofits'), all('nonprofit-payments'), all('nonprofit-grants'), all('nonprofit-officials').catch(() => [])]); }
+    let o, p, g, f, c;
+    try { [o, p, g, f, c] = await Promise.all([all('nonprofits'), all('nonprofit-payments'), all('nonprofit-grants'), all('nonprofit-officials').catch(() => []),
+      all('charity-registrations').catch(() => [])]); }
     catch (e) { $('#npList').innerHTML = '<p class="muted">Couldn’t load the list. Try again in a moment.</p>'; $('#npOff').innerHTML = ''; return; }
     orgs = o; pays = group(p, 'nonprofit_id'); grants = group(g, 'grantor_id'); offs = group(f, 'nonprofit_id');
+    regs = new Map(c.map(r => [r.nonprofit_id, r]));
     const kinds = [...new Set(orgs.map(x => x.kind).filter(k => k && k !== HOA))].sort();
     $('#npK').innerHTML = '<option value="">All types</option>' + kinds.map(k => `<option>${esc(k)}</option>`).join('') + `<option>${HOA}</option>`;
     const cities = [...new Set(orgs.map(x => x.city).filter(Boolean))].sort();
@@ -44,7 +48,8 @@
     const irs = orgs.filter(x => x.irs_recognized);
     const paid = orgs.filter(x => x.gov_payment_records > 0);
     $('#npKpis').innerHTML = [[num(orgs.length), 'nonprofits'], [num(irs.length), 'recognized by the IRS'],
-      [usd(orgs.reduce((a, x) => a + Number(x.total_revenue || 0), 0)), 'revenue on latest 990s'], [num(paid.length), 'paid in government records'],
+      [usd(orgs.reduce((a, x) => a + Number(x.total_revenue || 0), 0)), 'revenue on latest 990s'],
+      ...(c.length ? [[num(orgs.filter(x => active(x.fdacs_status)).length), 'registered Florida charities']] : []), [num(paid.length), 'paid in government records'],
       [num(new Set(f.map(x => x.official_id)).size), 'officials on boards (checked)']]
       .map(([v, l]) => `<div class="np-kpi"><b>${v}</b><span>${l}</span></div>`).join('');
     renderOfficials(f);
@@ -93,11 +98,11 @@
 
   function filtered() {
     const q = $('#npQ').value.trim().toLowerCase(), k = $('#npK').value, c = $('#npC').value, s = $('#npS').value;
-    const hoa = $('#npHoa').checked || k === HOA, gov = $('#npGov').checked;
+    const hoa = $('#npHoa').checked || k === HOA, gov = $('#npGov').checked, fd = $('#npFd').checked;
     const digits = q.replace(/\D/g, '');
-    let rs = orgs.filter(x => (!k || x.kind === k) && (!c || x.city === c) && (hoa || x.kind !== HOA) && (!gov || x.gov_payment_records > 0)
+    let rs = orgs.filter(x => (!k || x.kind === k) && (!c || x.city === c) && (hoa || x.kind !== HOA) && (!gov || x.gov_payment_records > 0) && (!fd || x.fdacs_registration)
       && (!q || x.name.toLowerCase().includes(q) || String(x.city || '').toLowerCase().includes(q) || (digits.length >= 4 && String(x.ein || '').includes(digits))));
-    const rev = x => Number(x.total_revenue ?? x.irs_revenue ?? 0);
+    const rev = x => Number(x.total_revenue ?? x.irs_revenue ?? x.fdacs_revenue ?? 0);
     const cmp = {rev: (a, b) => rev(b) - rev(a), gov: (a, b) => (b.gov_dollars_in_records || 0) - (a.gov_dollars_in_records || 0) || rev(b) - rev(a),
       board: (a, b) => (b.shares_board_with || 0) - (a.shares_board_with || 0) || rev(b) - rev(a), name: (a, b) => a.name.localeCompare(b.name)}[s];
     return rs.sort(cmp);
@@ -108,12 +113,13 @@
     $('#npCount').textContent = `${num(rs.length)} nonprofit${rs.length === 1 ? '' : 's'}`;
     $('#npList').innerHTML = rs.slice(0, shown).map(x => {
       const o = offs.get(x.nonprofit_id) || [];
-      const tags = [x.kind, x.subsection, x.gov_payment_records ? 'paid by ' + x.paid_by : '', o.length ? `${o.length} official${o.length === 1 ? '' : 's'} on board` : '',
+      const fdTag = x.fdacs_registration ? (active(x.fdacs_status) ? 'registered FL charity' : 'FL charity registration ' + String(x.fdacs_status || 'lapsed').toLowerCase()) : '';
+      const tags = [x.kind, x.subsection, fdTag, x.gov_payment_records ? 'paid by ' + x.paid_by : '', o.length ? `${o.length} official${o.length === 1 ? '' : 's'} on board` : '',
         x.shares_board_with ? `shares board members with ${x.shares_board_with} other${x.shares_board_with === 1 ? '' : 's'}` : ''].filter(Boolean);
-      const rev = x.total_revenue ?? x.irs_revenue;
+      const rev = x.total_revenue ?? x.irs_revenue ?? x.fdacs_revenue;
       return `<div class="np-row" data-id="${esc(x.nonprofit_id)}"><button type="button" aria-expanded="false">
         <div><h3>${esc(title(x.name))}</h3><div class="m">${esc(x.city || '')}${x.latest_return_form ? ' · ' + esc(x.latest_return_form) + ' ' + esc(x.latest_return_year || '') : ''}</div>
-          <div class="np-tags">${tags.map((t, i) => `<span class="np-tag${(i >= 2 && /paid|official/.test(t)) ? ' hot' : ''}">${esc(t)}</span>`).join('')}</div></div>
+          <div class="np-tags">${tags.map((t, i) => `<span class="np-tag${(/^paid|official/.test(t)) ? ' hot' : ''}">${esc(t)}</span>`).join('')}</div></div>
         <div class="v">${rev ? usd(rev) : '<span class="muted">—</span>'}<div class="m">${rev ? 'revenue' : ''}</div></div></button></div>`;
     }).join('') || '<p class="muted">No nonprofits match.</p>';
     $('#npMore').hidden = rs.length <= shown;
@@ -125,9 +131,14 @@
     btn.setAttribute('aria-expanded', String(!open));
     const old = row.querySelector('.np-d'); if (old) { old.remove(); return; }
     const x = orgs.find(r => r.nonprofit_id === row.dataset.id); if (!x) return;
-    const p = pays.get(x.nonprofit_id) || [], g = grants.get(x.nonprofit_id) || [], o = offs.get(x.nonprofit_id) || [];
+    const p = pays.get(x.nonprofit_id) || [], g = grants.get(x.nonprofit_id) || [], o = offs.get(x.nonprofit_id) || [], c = regs.get(x.nonprofit_id);
+    const cx = c ? (c.total_expenses ?? null) : null;
     const dl = [['Type', x.kind], ['IRS status', x.subsection ? x.subsection + (x.foundation_type ? ', ' + x.foundation_type : '') + (x.ruling_year ? ' (since ' + x.ruling_year + ')' : '') : 'Not in the IRS master file'],
       ['EIN', x.ein], ['State filing', x.sunbiz_doc_number ? `<a href="${esc(x.sunbiz_url)}" target="_blank" rel="noopener">${esc(x.sunbiz_doc_number)}</a> · ${esc(x.sunbiz_status || '')}` : ''],
+      ['Florida charity registration', x.fdacs_registration ? `<a href="${esc(x.fdacs_url)}" target="_blank" rel="noopener">${esc(x.fdacs_registration)}</a> · ${esc(x.fdacs_status || '')}${x.fdacs_expires ? (active(x.fdacs_status) ? ' until ' : ', expired ') + esc(x.fdacs_expires) : ''}` : ''],
+      ['Reported to Florida', c && (c.total_revenue != null || cx != null) ? `${c.fiscal_year_end ? 'Year ending ' + esc(c.fiscal_year_end) + ': ' : ''}${c.total_revenue != null ? usd(c.total_revenue) + ' revenue' : ''}${cx != null ? (c.total_revenue != null ? ', ' : '') + usd(cx) + ' spent' : ''}`
+        + (c.program_expenses != null || c.fundraising_expenses != null ? `<div class="muted small">Programs ${usd(c.program_expenses)}${pct(c.program_expenses, cx)} · fundraising ${usd(c.fundraising_expenses)}${pct(c.fundraising_expenses, cx)} · management ${usd(c.management_expenses)}${pct(c.management_expenses, cx)}</div>` : '') : ''],
+      ['Fundraising firms', c && c.fundraising_consultants ? esc(c.fundraising_consultants) : ''],
       ['Latest return', x.latest_return_form ? `${esc(x.latest_return_form)} for ${esc(x.latest_return_year || '')}` : (x.irs_filing_requirement ? esc(x.irs_filing_requirement) : '')],
       ['Revenue', x.total_revenue != null ? usd(x.total_revenue) : ''], ['Expenses', x.total_expenses != null ? usd(x.total_expenses) : ''], ['Assets', x.total_assets != null ? usd(x.total_assets) : (x.irs_assets ? usd(x.irs_assets) : '')],
       ['Employees', x.employees ? num(x.employees) : ''], ['Board members listed', x.board_members_listed ? num(x.board_members_listed) : ''],
@@ -138,9 +149,9 @@
       ${o.length ? `<b>Officials on the board</b><table data-tt="off"><tbody>${o.map(r => `<tr><td>${esc(r.official)}<div class="muted small">${esc(r.titles || '')}</div></td><td class="num small"><a href="${esc(r.source_url)}" target="_blank" rel="noopener">${esc(r.sources || 'source')} ${esc(r.last_year || '')}</a></td></tr>`).join('')}</tbody></table>` : ''}
       ${p.length ? `<b>Government payment records</b><table data-tt="off"><tbody>${p.sort((a, b) => (b.amount || 0) - (a.amount || 0)).map(r => `<tr><td>${esc(r.payer)}<div class="muted small">${esc(r.what || r.record_type)}${r.date ? ' · ' + esc(r.date) : ''}</div></td><td class="num">${r.source_url ? `<a href="${esc(r.source_url)}" target="_blank" rel="noopener">${usd(r.amount)}</a>` : usd(r.amount)}</td></tr>`).join('')}</tbody></table>` : ''}
       ${g.length ? `<b>Grants it reported giving</b><table data-tt="off"><tbody>${g.sort((a, b) => (b.cash || 0) - (a.cash || 0)).slice(0, 25).map(r => `<tr><td>${r.recipient_id ? `<a href="?id=${encodeURIComponent(r.recipient_id)}#npList">${esc(title(r.recipient))}</a>` : esc(title(r.recipient))}<div class="muted small">${esc(r.purpose || '')} · ${esc(r.tax_year || '')}</div></td><td class="num"><a href="${esc(r.source_url)}" target="_blank" rel="noopener">${usd(r.cash)}</a></td></tr>`).join('')}</tbody></table>${g.length > 25 ? `<p class="muted small">${g.length - 25} more in the dataset.</p>` : ''}` : ''}
-      <p class="small"><a href="${esc(x.source_url)}" target="_blank" rel="noopener">${x.ein ? 'IRS filings on ProPublica' : 'State corporate record'}</a></p>`;
+      <p class="small"><a href="${esc(x.source_url)}" target="_blank" rel="noopener">${x.irs_recognized ? 'IRS filings on ProPublica' : x.sunbiz_doc_number ? 'State corporate record' : 'FDACS Check-A-Charity'}</a></p>`;
     row.appendChild(d);
-    if (x.board_members_listed || x.latest_return_form) loadBoard(x, d);
+    if (x.board_members_listed || x.latest_return_form || x.fdacs_registration) loadBoard(x, d);
   }
 
   async function loadBoard(x, d) {
@@ -159,7 +170,7 @@
 
   document.addEventListener('click', e => { const p = e.target.closest('.np-p'); if (p) { e.preventDefault(); showPerson(p); } });
   $('#npList').addEventListener('click', e => { const b = e.target.closest('.np-row>button'); if (b) toggle(b.parentElement); });
-  ['#npQ', '#npK', '#npC', '#npS', '#npHoa', '#npGov'].forEach(s => $(s).addEventListener(s === '#npQ' ? 'input' : 'change', () => { shown = PAGE; render(); }));
+  ['#npQ', '#npK', '#npC', '#npS', '#npHoa', '#npGov', '#npFd'].forEach(s => $(s).addEventListener(s === '#npQ' ? 'input' : 'change', () => { shown = PAGE; render(); }));
   $('#npMore').addEventListener('click', () => { shown += PAGE * 2; render(); });
   load();
 })();

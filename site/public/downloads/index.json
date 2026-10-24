@@ -5069,6 +5069,42 @@
      "type": "string"
     },
     {
+     "name": "fdacs_registration",
+     "type": "string"
+    },
+    {
+     "name": "fdacs_status",
+     "type": "string"
+    },
+    {
+     "name": "fdacs_expires",
+     "type": "string"
+    },
+    {
+     "name": "fdacs_fiscal_year_end",
+     "type": "string"
+    },
+    {
+     "name": "fdacs_revenue",
+     "type": "string"
+    },
+    {
+     "name": "fdacs_program_expenses",
+     "type": "string"
+    },
+    {
+     "name": "fdacs_fundraising_expenses",
+     "type": "string"
+    },
+    {
+     "name": "fdacs_management_expenses",
+     "type": "string"
+    },
+    {
+     "name": "fdacs_url",
+     "type": "string"
+    },
+    {
      "name": "source_url",
      "type": "string"
     },
@@ -5531,6 +5567,129 @@
    "json": "/downloads/nonprofit-board-members.json",
    "csv": "/downloads/nonprofit-board-members.csv",
    "api": "/api/v1/datasets/nonprofit-board-members"
+  },
+  {
+   "id": "charity-registrations",
+   "title": "Nonprofits: Florida charity registrations",
+   "description": "Charities with a county address registered with the Florida Department of Agriculture and Consumer Services to ask the public for donations (Check-A-Charity): registration status and dates, the revenue and the program, fundraising and management spending each reported to the state, and the professional fundraising firms it uses. nonprofit_id links to the nonprofits dataset (joined by FEIN, then by exact name); the officers and directors each registration lists are in nonprofit-board-members.",
+   "rows": 0,
+   "columns": [
+    {
+     "name": "registration_number",
+     "type": "string"
+    },
+    {
+     "name": "nonprofit_id",
+     "type": "string"
+    },
+    {
+     "name": "name",
+     "type": "string"
+    },
+    {
+     "name": "dba",
+     "type": "string"
+    },
+    {
+     "name": "fein",
+     "type": "string"
+    },
+    {
+     "name": "matched_by",
+     "type": "string"
+    },
+    {
+     "name": "status",
+     "type": "string"
+    },
+    {
+     "name": "status_detail",
+     "type": "string"
+    },
+    {
+     "name": "registration_date",
+     "type": "string"
+    },
+    {
+     "name": "expiration_date",
+     "type": "string"
+    },
+    {
+     "name": "city",
+     "type": "string"
+    },
+    {
+     "name": "zip",
+     "type": "string"
+    },
+    {
+     "name": "website",
+     "type": "string"
+    },
+    {
+     "name": "fiscal_year_end",
+     "type": "string"
+    },
+    {
+     "name": "total_revenue",
+     "type": "number"
+    },
+    {
+     "name": "contributions",
+     "type": "number"
+    },
+    {
+     "name": "government_grants",
+     "type": "number"
+    },
+    {
+     "name": "program_expenses",
+     "type": "number"
+    },
+    {
+     "name": "fundraising_expenses",
+     "type": "number"
+    },
+    {
+     "name": "management_expenses",
+     "type": "number"
+    },
+    {
+     "name": "total_expenses",
+     "type": "number"
+    },
+    {
+     "name": "program_percent",
+     "type": "number"
+    },
+    {
+     "name": "fundraising_percent",
+     "type": "number"
+    },
+    {
+     "name": "fundraising_consultants",
+     "type": "string"
+    },
+    {
+     "name": "officers_listed",
+     "type": "number"
+    },
+    {
+     "name": "other_registrations",
+     "type": "string"
+    },
+    {
+     "name": "county",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/charity-registrations.json",
+   "csv": "/downloads/charity-registrations.csv",
+   "api": "/api/v1/datasets/charity-registrations"
   },
   {
    "id": "nonprofit-officials",
