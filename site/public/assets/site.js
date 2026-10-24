@@ -341,6 +341,30 @@ B.enhance = (root = document) => B.bindParams(root);
 B.enhance();
 })();
 
+/* Phone tables: no sideways scrolling. Each body cell gets data-label (its column heading) and the table gets
+   class "stk"; site.css turns rows into cards under 640px. Opt out with <table data-stack="off">. */
+(() => {
+  const colsOf = tr => { const out = []; for (const c of tr.cells) { const n = Math.max(1, c.colSpan || 1); out.push(c); for (let i = 1; i < n; i++) out.push(null); } return out; };
+  const label = t => {
+    if (t.dataset.stack === 'off' || t.closest('[data-stack="off"]')) return;
+    const h = t.tHead && t.tHead.rows.length ? t.tHead.rows[t.tHead.rows.length - 1] : null;
+    const names = h ? colsOf(h).map(c => c ? c.textContent.replace(/\s+/g, ' ').trim() : '') : (t.dataset.cols || '').split('|');
+    let n = names.length; for (const b of t.tBodies) for (const r of b.rows) n = Math.max(n, colsOf(r).length);
+    if (n < 3) { t.classList.add('stk2'); return; }   // two columns fit a phone once they may wrap
+    t.classList.add('stk');
+    for (const part of [...t.tBodies, t.tFoot].filter(Boolean)) for (const tr of part.rows) {
+      const cs = colsOf(tr);
+      if (tr.cells.length === 1 && (tr.cells[0].colSpan || 1) > 1) { tr.classList.add('stk-span'); continue; }
+      cs.forEach((c, i) => { if (c && !c.hasAttribute('data-label') && names[i]) c.setAttribute('data-label', names[i]); });
+    }
+  };
+  let q = false;
+  const run = () => { q = false; document.querySelectorAll('table').forEach(label); };
+  const go = () => { run(); new MutationObserver(ms => { if (q) return; if (ms.some(m => m.addedNodes.length)) { q = true; requestAnimationFrame(run); } }).observe(document.body, {childList: true, subtree: true}); };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go); else go();
+})();
+
+
 (() => {
   const URLRE = /https?:\/\/[^\s<>"']+/g, SKIP = new Set(['A','SCRIPT','STYLE','TEXTAREA','TITLE','OPTION','INPUT','SELECT','CODE','PRE']);
   const PATHS = [[/data\/contracts\/contracts\.json/g, '/public-money/contracts', 'the Contracts page'], [/data\/tax\/budgets\.json/g, '/public-money/tax-dollars', 'the Tax Dollars page'],

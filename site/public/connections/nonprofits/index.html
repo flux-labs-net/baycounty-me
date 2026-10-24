@@ -114,8 +114,7 @@
 .np-empty{color:var(--muted);padding:24px 6px}
 @media (max-width:860px){
   .np-lay{grid-template-columns:minmax(0,1fr)}
-  .np-cards{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 16px;margin:0 -16px 18px;padding:0 16px}
-  .np-card{flex:0 0 78%;scroll-snap-align:start}
+  .np-cards{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
   .np-panel{display:none;position:fixed;inset:0;top:0;max-height:none;border-radius:0;z-index:50;padding:16px 16px 40px}
   .np-panel.open{display:block}
   .np-panel .np-x{display:inline-flex;margin:0 0 10px}
