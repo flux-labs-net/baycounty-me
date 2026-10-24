@@ -106,7 +106,9 @@ The daily and weekly workflows run it after each rebuild and post a warning if i
 
 ## Link previews
 
-`site/og.py` renders a 1200x630 Open Graph image per page with Playwright (title, headline number from
-`home.topics()`, Bay County map) into `site/og-cache/`, copied to `public/og/` on build. Images re-render only
+`site/og.py` renders a 1200x630 Open Graph image for every page, profiles included, with Playwright: navy card,
+page title, and one big figure from the page's own data (topic pages: `home.topics()`; governments: adopted budget;
+officials: recorded votes, else campaign money or pay; vendors: contracts awarded, else payments). Cards are cut to a
+128-color palette with Pillow when it is installed. Output goes to `site/og-cache/`, copied to `public/og/` on build. Images re-render only
 when their content changes; the `?v=` hash on `og:image` busts link-preview caches. Pages also carry Twitter
 card tags, an apple-touch-icon, and WebSite/Organization JSON-LD on the home page.

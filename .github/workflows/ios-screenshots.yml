@@ -26,14 +26,14 @@ jobs:
           APP=$(find build/Build/Products -name "BayCountyMe.app" -maxdepth 3 | head -1)
           xcrun simctl install "$DEV" "$APP"
           mkdir -p shots
-          for s in home "address:825 Ohio Ave" tax amendment3 glossary vendors vendor people person moneymap donors contracts votes salaries accountability accproject cra updates tab:governments gov:county tab:money tab:meetings record:contract record:vote; do
+          for s in home "address:825 Ohio Ave" tax amendment3 glossary vendors vendor people person moneymap donors contracts votes salaries accountability accproject cra updates tab:governments gov:county tab:money tab:meetings record:contract record:vote record:board record:nonprofit; do
             xcrun simctl terminate "$DEV" me.baycounty.app 2>/dev/null || true
             if [ "$s" = home ]; then xcrun simctl launch "$DEV" me.baycounty.app; else xcrun simctl launch "$DEV" me.baycounty.app -screen "$s"; fi
             sleep 14
             xcrun simctl io "$DEV" screenshot "shots/$(echo "$s" | tr ': ' '__').png"
           done
           xcrun simctl ui "$DEV" appearance dark
-          for s in home tab:governments tab:money tab:meetings gov:county tax; do
+          for s in home tab:governments tab:money tab:meetings gov:county tax record:board; do
             xcrun simctl terminate "$DEV" me.baycounty.app 2>/dev/null || true
             if [ "$s" = home ]; then xcrun simctl launch "$DEV" me.baycounty.app; else xcrun simctl launch "$DEV" me.baycounty.app -screen "$s"; fi
             sleep 12
