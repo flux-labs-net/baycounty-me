@@ -4867,7 +4867,7 @@
    "id": "nonprofits",
    "title": "Nonprofits",
    "description": "Every nonprofit in the county: organizations recognized by the IRS with a local address, and active Florida nonprofit corporations (Sunbiz) based here. Type, IRS subsection, latest 990 revenue, expenses and assets, how many board members its filings list, how many of those sit on another local board, government payment records and grants. Board members are in nonprofit-board-members.",
-   "rows": 1972,
+   "rows": 1963,
    "columns": [
     {
      "name": "nonprofit_id",
@@ -5633,7 +5633,7 @@
    "id": "nonprofit-board-members",
    "title": "Nonprofits: board members",
    "description": "Officers, directors, trustees and key employees of local nonprofits as listed on their IRS returns (2019 on), 990-N postcards and state corporate filings: one row per person per nonprofit with titles, years on file, reported pay and hours, and how many other current local boards the same name sits on (homeowner associations aside). person_id groups the same name across boards; two people with a common name can share one.",
-   "rows": 9181,
+   "rows": 9320,
    "columns": [
     {
      "name": "person_id",
@@ -5729,7 +5729,7 @@
    "id": "nonprofit-board-businesses",
    "title": "Nonprofits: board members' businesses",
    "description": "Businesses that local nonprofit board members run, from Florida corporate filings (Sunbiz officers and registered agents), with each business's gifts to local campaigns. match is \"Name and address\" when the person on the nonprofit's own state filing is the same Sunbiz person, or \"Name\" when only one Sunbiz person in the county has that name. person_id matches nonprofit-board-members.",
-   "rows": 4259,
+   "rows": 4275,
    "columns": [
     {
      "name": "person_id",
@@ -5821,6 +5821,7 @@
      "name": "matched_by",
      "type": "string",
      "values": [
+      "fein",
       "name",
       "new"
      ]
@@ -6403,7 +6404,7 @@
    "id": "entity-profiles",
    "title": "Profiles: people, companies and organizations",
    "description": "Every company, elected official, candidate, nonprofit, nonprofit board member, registered business, committee and government named in BayCounty.me records, one row each, with its profile page and how many documented connections it has. entity_id (kind:key) joins entity-connections. Board members are named as their nonprofits' public filings list them; individual campaign donors are included only when they run a registered business (owner-gifts).",
-   "rows": 15267,
+   "rows": 15381,
    "columns": [
     {
      "name": "entity_id",
@@ -6514,7 +6515,7 @@
    "id": "entity-connections",
    "title": "Connections between people, companies and organizations",
    "description": "Every documented connection between two entities in entity-profiles, totalled per pair and kind: a government paid a payee, an organization gave to an official's or candidate's campaign, an official voted on a company's contracts, a person sits on a nonprofit's board or runs a business, a nonprofit gave a grant, two payees share a project. Each row has its source. Individual campaign donors are included only when they run a registered business (owner-gifts); officials' board seats and businesses are added by the API once checked by hand.",
-   "rows": 16784,
+   "rows": 16939,
    "columns": [
     {
      "name": "link_id",

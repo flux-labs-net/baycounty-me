@@ -19,8 +19,10 @@ Where the data goes:
   (`np-fd-<registration number>`). `nonprofits` carries the registration number, status, expiration and reported figures
   (`fdacs_*`). The officers and directors listed on a registration are board seats (source "FDACS charity registration") in
   `nonprofit-board-members`; on a lapsed or withdrawn registration they count as past, not current.
-  As of the first fetch (2026-10-24, 218 registrations) Check-A-Charity shows no FEIN and no officers: officers are only in
-  each registration's uploaded application PDF, which isn't parsed yet, so every join is by name and no FDACS seats exist.
+  Check-A-Charity pages show no FEIN and no officers; `fetch_fdacs.py --officers` reads both from each registration's latest
+  uploaded application PDF (text layer or form fields; people marked removed or exempt from public records are skipped,
+  names and titles only). First run (2026-10-24): 177 PDFs, 134 readable, 43 scans skipped (no OCR yet), 476 officers on
+  127 registrations, 127 FEINs. Counts are in `bay/fdacs_pdf_log.json`.
   Registrations outside Check-A-Charity (Law NA, Exempt, Closed, Denied, Not Soliciting) have no financials.
 - **Public after review**: `nonprofit-officials`, officials, department leaders and candidates on nonprofit boards. Rows
   are written by `registry.publish_board_officials()` only for name matches an admin confirmed in /admin → Nonprofit boards.
