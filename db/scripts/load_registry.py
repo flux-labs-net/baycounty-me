@@ -5,7 +5,8 @@ Usage:
 
 For each county with data/sunbiz/<county>/entities.csv.gz, runs data/sunbiz/build_sunbiz.py's build() and replaces
 that county's entities, people, roles and gift matches in one transaction. Shared-owner groups are upserted so an
-admin's review_status survives a reload; groups that no longer appear are deleted.
+admin's review_status survives a reload; groups that no longer appear are deleted. Confirmed groups are then
+rewritten to the public shared_owner_groups table (business names only).
 Officer and agent names go only to this private schema. Street addresses are never stored.
 Run by .github/workflows/sync-db.yml after load.py.
 """
@@ -85,7 +86,10 @@ def load_county(conn, county):
         gone = [x for x in cur.fetchall() if tuple(x) not in set(keep)]
         for gid, cand in gone:
             cur.execute('delete from registry.shared_owner_groups where county = %s and group_id = %s and candidate = %s', (county, gid, cand))
+        cur.execute('select registry.publish_all(%s)', (county,))  # public rows for groups an admin confirmed (migration 0032)
+        published = cur.fetchone()[0]
         s = build_sunbiz.summary(res)
+        s['published_rows'] = published
         cur.execute('insert into registry.loads (county, git_sha, entities, people, roles, gifts, groups, summary) values (%s,%s,%s,%s,%s,%s,%s,%s)',
                     (county, git_sha(), len(E), len(P), len(role_rows), len(G), len(F), Jsonb(s)))
     print(f'registry {county}: {len(E)} entities, {len(P)} people, {len(role_rows)} roles, {len(G)} gift lines, {len(F)} shared-owner groups')

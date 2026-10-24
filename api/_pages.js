@@ -20,6 +20,7 @@ const PAGES = {
   '/developers': {endpoints: ['/openapi.json'], none: 'API documentation'},
   '/records-request': {none: 'a form that writes a records request'},
   '/correspondence': {endpoints: ['/correspondence']},
+  '/connections/shared-owners': {datasets: ['shared-owner-groups']},
   '/alerts': {none: 'email alert sign-up form'},
   '/meetings': {datasets: ['meetings'], endpoints: ['/meetings.ics']},
   '/public-money/campaign-money': {datasets: ['campaign-finance', 'donor-contracts', 'campaign-contributions-2026', 'business-donor-sunbiz']},

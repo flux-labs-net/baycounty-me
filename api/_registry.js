@@ -100,7 +100,13 @@ async function review(body, admin) {
   const rows = await db.q(`update registry.shared_owner_groups set review_status = $1 where county = $2 and group_id = $3
     and ($4::text is null or candidate = $4) returning group_id, candidate, review_status`, [status, county, gid, body.candidate ? String(body.candidate) : null]);
   if (!rows.length) throw bad('Unknown group.', 404);
-  return {updated: rows.length, by: admin, rows};
+  // confirmed groups appear on /connections/shared-owners (business names only); anything else is taken down
+  let published = 0;
+  for (const r of rows) {
+    const [x] = await db.q('select registry.publish_group($1, $2, $3) n', [county, r.group_id, r.candidate]);
+    published += Number(x && x.n) || 0;
+  }
+  return {updated: rows.length, published, by: admin, rows};
 }
 
 module.exports = {cleanCounty, cleanQuery, summary, groups, person, entity, search, review};

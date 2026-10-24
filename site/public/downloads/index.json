@@ -4504,6 +4504,93 @@
    "api": "/api/v1/datasets/business-donor-sunbiz"
   },
   {
+   "id": "shared-owner-groups",
+   "title": "Shared-owner campaign gifts",
+   "description": "Businesses that share an officer, manager or registered agent (state corporate records) and gave to the same local candidate, one row per business. Only groups checked by hand are listed. People are not named. Each company is its own contributor under Florida law, so a group is legal when each company is a real contributor.",
+   "rows": 0,
+   "columns": [
+    {
+     "name": "group_id",
+     "type": "string"
+    },
+    {
+     "name": "candidate",
+     "type": "string"
+    },
+    {
+     "name": "office",
+     "type": "string"
+    },
+    {
+     "name": "election",
+     "type": "string"
+    },
+    {
+     "name": "business",
+     "type": "string"
+    },
+    {
+     "name": "sunbiz_doc_number",
+     "type": "string"
+    },
+    {
+     "name": "business_status",
+     "type": "string"
+    },
+    {
+     "name": "business_amount",
+     "type": "number"
+    },
+    {
+     "name": "business_dates",
+     "type": "string"
+    },
+    {
+     "name": "group_businesses",
+     "type": "number"
+    },
+    {
+     "name": "group_checks",
+     "type": "number"
+    },
+    {
+     "name": "group_total",
+     "type": "number"
+    },
+    {
+     "name": "all_checks_1000",
+     "type": "boolean"
+    },
+    {
+     "name": "same_day",
+     "type": "boolean"
+    },
+    {
+     "name": "shared_people",
+     "type": "number"
+    },
+    {
+     "name": "county",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "campaign_report_url",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/shared-owner-groups.json",
+   "csv": "/downloads/shared-owner-groups.csv",
+   "api": "/api/v1/datasets/shared-owner-groups"
+  },
+  {
    "id": "tax-districts",
    "title": "Tax districts",
    "description": "Which taxing authorities levy property tax in each tax district, and the combined millage. Rates by year are in property-tax-rates (authority_id).",

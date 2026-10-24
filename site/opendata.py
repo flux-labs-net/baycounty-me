@@ -17,7 +17,7 @@ GOV_COLS = {'government-profiles': ['government'], 'government-years': ['gov_id'
             'bed-tax-collections': [], 'property-tax-exemptions': [],
             'cra-network-gifts': ['cra_board', 'office'], 'donor-contracts': ['contract_gov_id'], 'cra-network-payees': [], 'cra-network-links': [],
             'vendors-directory': [], 'people-directory': [], 'glossary-terms': [], 'site-updates': [], 'tax-districts': ['district'],
-            'savings-opportunities': ['government'], 'savings-evidence': [], 'business-donor-sunbiz': ['gov_id', 'office']}
+            'savings-opportunities': ['government'], 'savings-evidence': [], 'business-donor-sunbiz': ['gov_id', 'office'], 'shared-owner-groups': []}
 FIXED_GOV = {'bed-tax-collections': 'county', 'property-tax-exemptions': 'county'}  # county bed tax in every zone; the county-wide tax roll
 
 
@@ -354,11 +354,12 @@ def datasets():
 
 
 def write_downloads(out_dir):
+    from page_datasets import DB_ONLY_COLUMNS  # datasets whose rows are written to the database directly
     dest = os.path.join(out_dir, 'downloads'); os.makedirs(dest, exist_ok=True)
     meta, catalog = [], []
     for did, title, desc, fn in datasets():
         rows = add_gov_id(did, fn() or [])
-        keys = list(dict.fromkeys(k for r in rows for k in r))
+        keys = list(dict.fromkeys(k for r in rows for k in r)) or list(DB_ONLY_COLUMNS.get(did, []))
         buf = io.StringIO(); w = csv.DictWriter(buf, fieldnames=keys, extrasaction='ignore'); w.writeheader()
         for r in rows:
             w.writerow({k: ('; '.join(map(str, v)) if isinstance(v, list) else json.dumps(v) if isinstance(v, dict) else v) for k, v in r.items()})
@@ -367,7 +368,7 @@ def write_downloads(out_dir):
         meta.append((did, title, desc, len(rows), keys, os.path.getsize(os.path.join(dest, did + '.csv'))))
         def typ(k):
             vals = [r.get(k) for r in rows if r.get(k) is not None][:200]
-            if not vals: return 'string'
+            if not vals: return DB_ONLY_COLUMNS.get(did, {}).get(k, 'string')
             if all(isinstance(v, bool) for v in vals): return 'boolean'
             if all(isinstance(v, (int, float)) and not isinstance(v, bool) for v in vals): return 'number'
             if all(isinstance(v, list) for v in vals): return 'array'

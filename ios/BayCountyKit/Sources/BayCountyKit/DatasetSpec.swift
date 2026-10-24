@@ -123,6 +123,8 @@ public struct DatasetSpec: Sendable {
         "business-donor-sunbiz": .init(.elections, "building.2", title: ["contributor"], subtitle: ["candidate", "sunbiz_entity_name"],
                                        detail: "sunbiz_doc_number", amount: ["contribution_amount"], date: ["last_date"], badge: "match_method",
                                        filters: ["candidate", "sunbiz_status", "match_method"], page: "public-money/campaign-money"),
+        "shared-owner-groups": .init(.elections, "person.2", title: ["business"], subtitle: ["candidate", "office"],
+                                     detail: "business_dates", badge: "business_status", filters: ["candidate"], page: "connections/shared-owners"),
         "money-map-gifts": .init(.elections, "gift", title: ["donor"], subtitle: ["official", "office"], amount: ["amount"],
                                  badge: "donor_type", filters: ["official", "donor_type", "donor_holds_contracts_here"], page: "public-money/money-map"),
         "money-map-contracts": .init(.elections, "doc.text", title: ["donor"], subtitle: ["government"],

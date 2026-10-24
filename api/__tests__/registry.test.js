@@ -35,8 +35,12 @@ test('review: only known statuses and group ids', async () => {
   await assert.rejects(R.review({group_id: 'g_0123456789', status: 'published'}, 'a@x'), /Unknown review status/);
   await assert.rejects(R.review({group_id: 'x', status: 'confirmed'}, 'a@x'), /Unknown group/);
   reply = () => [{group_id: 'g_0123456789', candidate: 'A', review_status: 'confirmed'}];
+  calls.length = 0;
   const r = await R.review({group_id: 'g_0123456789', candidate: 'A', status: 'confirmed'}, 'a@x');
   assert.equal(r.updated, 1);
+  // every review rewrites the public rows for that group (published if confirmed, removed otherwise)
+  const pub = calls.find(c => c.sql.includes('registry.publish_group'));
+  assert.deepEqual(pub.p, ['bay', 'g_0123456789', 'A']);
 });
 
 test('person and entity lookups reject malformed ids before touching the database', async () => {
