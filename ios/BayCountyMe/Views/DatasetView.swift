@@ -306,15 +306,13 @@ struct DatasetView: View {
     }
 
     private var activeFilters: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 6) {
-                if let b = bucket {
-                    FilterChip(text: b.count == 7 ? Browse.monthName(b) : b) { bucket = nil }
-                }
-                ForEach(filters.sorted { $0.key < $1.key }, id: \.key) { pair in
-                    FilterChip(text: pair.key == "gov_id" ? (Governments.names[pair.value] ?? pair.value) : pair.value) {
-                        filters[pair.key] = nil
-                    }
+        FlowLayout(spacing: 6) {
+            if let b = bucket {
+                FilterChip(text: b.count == 7 ? Browse.monthName(b) : b) { bucket = nil }
+            }
+            ForEach(filters.sorted { $0.key < $1.key }, id: \.key) { pair in
+                FilterChip(text: pair.key == "gov_id" ? (Governments.names[pair.value] ?? pair.value) : pair.value) {
+                    filters[pair.key] = nil
                 }
             }
         }

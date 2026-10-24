@@ -180,51 +180,90 @@ struct RowDivider: View {
     var body: some View { Divider().padding(.leading, inset) }
 }
 
-/// The app's one switcher: a row of pill buttons, one selected (navy), scrolling sideways when they don't fit.
-/// Every chip is at least 44pt tall. `counts` adds a number after a label ("Split 6").
-/// `bleed` lets the row scroll out to the screen edge past the parent's side padding.
+/// The app's one switcher: a set of pill buttons, one selected (navy), filling the width. Chips that don't fit
+/// wrap into evenly split lines (4 become 2 + 2), so every choice is always in view with no sideways scrolling.
+/// Every chip is at least 44pt tall.
+/// `counts` adds a number after a label ("Split 6").
 struct ChipRow<ID: Hashable>: View {
     let chips: [(id: ID, label: String)]
     let selected: ID
     var counts: [ID: Int] = [:]
-    var bleed: CGFloat = 16
     let onPick: (ID) -> Void
 
     var body: some View {
-        ScrollViewReader { proxy in
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 8) {
-                    ForEach(chips, id: \.id) { c in
-                        let on = c.id == selected
-                        Button { onPick(c.id) } label: {
-                            HStack(spacing: 5) {
-                                Text(c.label)
-                                if let n = counts[c.id] {
-                                    Text("\(n)").fontWeight(.medium).monospacedDigit()
-                                        .foregroundStyle(on ? Color.white.opacity(0.75) : .secondary)
-                                }
-                            }
-                            .font(.subheadline.weight(.semibold))
-                            .lineLimit(1)
-                            .padding(.horizontal, 18)
-                            .frame(minHeight: 44)
-                            .foregroundStyle(on ? Color.white : .primary)
-                            .background(on ? Brand.navyFill : Brand.surface, in: Capsule())
-                            .overlay { Capsule().strokeBorder(on ? Color.clear : Brand.hairline) }
-                            .contentShape(Capsule())
+        ChipLayout(spacing: 8) {
+            ForEach(chips, id: \.id) { c in
+                let on = c.id == selected
+                Button { onPick(c.id) } label: {
+                    HStack(spacing: 5) {
+                        Text(c.label)
+                        if let n = counts[c.id] {
+                            Text("\(n)").fontWeight(.medium).monospacedDigit()
+                                .foregroundStyle(on ? Color.white.opacity(0.75) : .secondary)
                         }
-                        .buttonStyle(PressScale())
-                        .id(c.id)
-                        .accessibilityLabel(counts[c.id].map { "\(c.label), \($0)" } ?? c.label)
-                        .accessibilityAddTraits(on ? .isSelected : [])
                     }
+                    .font(.subheadline.weight(.semibold))
+                    .lineLimit(1)
+                    .padding(.horizontal, 16)
+                    .frame(maxWidth: .infinity, minHeight: 44)
+                    .foregroundStyle(on ? Color.white : .primary)
+                    .background(on ? Brand.navyFill : Brand.surface, in: Capsule())
+                    .overlay { Capsule().strokeBorder(on ? Color.clear : Brand.hairline) }
+                    .contentShape(Capsule())
                 }
-                .padding(.horizontal, bleed)
+                .buttonStyle(PressScale())
+                .accessibilityLabel(counts[c.id].map { "\(c.label), \($0)" } ?? c.label)
+                .accessibilityAddTraits(on ? .isSelected : [])
             }
-            .padding(.horizontal, -bleed)
-            // Keep the picked chip in view when a long row (tax years) opens on a choice off screen.
-            .onAppear { proxy.scrollTo(selected, anchor: .center) }
         }
+    }
+}
+
+/// Lays chips out in as few lines as fit, splitting them evenly across lines (5 become 3 + 2, never 4 + 1),
+/// and stretches each line to the full width, sharing the spare room equally between its chips.
+struct ChipLayout: Layout {
+    var spacing: CGFloat = 8
+
+    func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
+        let width = proposal.width ?? subviews.map { $0.sizeThatFits(.unspecified).width }.reduce(0, +)
+            + spacing * CGFloat(max(subviews.count - 1, 0))
+        let lines = arrange(width: width, subviews: subviews)
+        let height = lines.map { line in line.map { subviews[$0].sizeThatFits(.unspecified).height }.max() ?? 0 }.reduce(0, +)
+            + spacing * CGFloat(max(lines.count - 1, 0))
+        return CGSize(width: width, height: height)
+    }
+
+    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
+        var y = bounds.minY
+        for line in arrange(width: bounds.width, subviews: subviews) {
+            let sizes = line.map { subviews[$0].sizeThatFits(.unspecified) }
+            let used = sizes.map(\.width).reduce(0, +) + spacing * CGFloat(line.count - 1)
+            let extra = max(0, bounds.width - used) / CGFloat(line.count)
+            let height = sizes.map(\.height).max() ?? 0
+            var x = bounds.minX
+            for (i, size) in zip(line, sizes) {
+                let w = min(size.width + extra, bounds.width)
+                subviews[i].place(at: CGPoint(x: x, y: y), proposal: ProposedViewSize(width: w, height: height))
+                x += w + spacing
+            }
+            y += height + spacing
+        }
+    }
+
+    /// The fewest lines whose even split fits the width.
+    private func arrange(width: CGFloat, subviews: Subviews) -> [[Int]] {
+        let n = subviews.count
+        guard n > 0 else { return [] }
+        let widths = subviews.map { $0.sizeThatFits(.unspecified).width }
+        for lines in 1...n {
+            let per = Int((Double(n) / Double(lines)).rounded(.up))
+            let split = stride(from: 0, to: n, by: per).map { Array($0..<min($0 + per, n)) }
+            let fits = split.allSatisfy { line in
+                line.map { widths[$0] }.reduce(0, +) + spacing * CGFloat(line.count - 1) <= width
+            }
+            if fits { return split }
+        }
+        return (0..<n).map { [$0] }
     }
 }
 
