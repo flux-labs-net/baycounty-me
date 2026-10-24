@@ -1,20 +1,22 @@
 // /connections/nonprofits: reads the nonprofits, nonprofit-payments, nonprofit-grants and nonprofit-officials datasets
-// from /api/v1, and nonprofit-board-members per nonprofit or person when a row opens. Officials are tagged only when an
+// from /api/v1, and nonprofit-board-members / nonprofit-board-businesses per nonprofit or person when a row opens. Officials are tagged only when an
 // admin confirmed the name match.
 (() => {
   const $ = s => document.querySelector(s);
   const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
   const usd = n => n == null || n === '' ? '—' : '$' + Number(n).toLocaleString('en-US', {maximumFractionDigits: 0});
   const num = n => Number(n || 0).toLocaleString('en-US');
-  const title = s => String(s || '').toLowerCase().replace(/\b([a-z])/g, m => m.toUpperCase()).replace(/\b(Llc|Inc|Pa|Usa|Us|Ymca|Ywca|Vfw|Pta|Pto|Cra|Cdc|Ii|Iii)\b/g, m => m.toUpperCase());
+  const title = s => String(s || '').toLowerCase().replace(/(^|[^a-z'’])([a-z])/g, (m, a, b) => a + b.toUpperCase()).replace(/\b(Llc|Inc|Pa|Usa|Us|Ymca|Ywca|Vfw|Pta|Pto|Cra|Cdc|Ii|Iii)\b/g, m => m.toUpperCase());
   const HOA = 'Homeowner or condo association';
   const PAGE = 60;
   let orgs = [], pays = new Map(), grants = new Map(), offs = new Map(), shown = PAGE;
 
-  async function all(id) {
+  async function fromApi(id) {
     let out = [], url = `/api/v1/datasets/${id}?limit=1000`;
     for (let i = 0; url && i < 20; i++) {
-      const r = await fetch(url);
+      const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), 20000);
+      let r;
+      try { r = await fetch(url, {signal: ctl.signal}); } finally { clearTimeout(t); }
       if (!r.ok) throw new Error(id);
       const j = await r.json();
       out = out.concat(j.data || []);
@@ -22,12 +24,24 @@
     }
     return out;
   }
+  // The API first; if it fails, is slow or comes back empty (e.g. mid-sync), the published download of the same dataset.
+  async function all(id) {
+    try { const rows = await fromApi(id); if (rows.length) return rows; } catch (e) { /* fall through */ }
+    const r = await fetch(`/downloads/${id}.json`);
+    if (!r.ok) throw new Error(id);
+    const d = await r.json();
+    return Array.isArray(d) ? d : (d.rows || d.data || []);
+  }
   const people = new Map();  // person_id -> rows (every board that name sits on)
-  async function boardOf(q) {
-    const r = await fetch(`/api/v1/datasets/nonprofit-board-members?${q}&limit=1000`);
-    if (!r.ok) throw new Error('board');
+  async function rowsOf(ds, q) {
+    const r = await fetch(`/api/v1/datasets/${ds}?${q}&limit=1000`);
+    if (!r.ok) throw new Error(ds);
     return (await r.json()).data || [];
   }
+  const boardOf = q => rowsOf('nonprofit-board-members', q);
+  const bizLine = b => `<a href="${esc(b.source_url)}" target="_blank" rel="noopener">${esc(title(b.business))}</a>${b.business_status === 'Active' ? '' : ' <span class="muted">(inactive)</span>'}`
+    + (Number(b.campaign_gifts_total) > 0 ? ` <span class="muted">gave ${usd(b.campaign_gifts_total)} to campaigns${b.candidates ? ' (' + esc(b.candidates) + ')' : ''}</span>` : '')
+    + (b.match === 'Name' ? ' <span class="muted">· name match</span>' : '');
   const years = r => r.first_year && r.last_year && r.first_year !== r.last_year ? `${r.first_year}–${r.last_year}` : (r.last_year || '');
   const pname = s => String(s || '').replace(/\b([A-Z])([A-Z']+)\b/g, (m, a, b) => a + b.toLowerCase());
   const group = (rows, key) => rows.reduce((m, r) => (r[key] && (m.get(r[key]) || m.set(r[key], []).get(r[key])).push(r), m), new Map());
@@ -49,6 +63,7 @@
       .map(([v, l]) => `<div class="np-kpi"><b>${v}</b><span>${l}</span></div>`).join('');
     renderOfficials(f);
     renderInterlocks();
+    renderDonors();
     const want = new URLSearchParams(location.search).get('id');
     if (want) { const x = orgs.find(r => r.nonprofit_id === want); if (x) { $('#npQ').value = x.ein || x.name; if (x.kind === HOA) $('#npHoa').checked = true; } }
     render(want);
@@ -73,6 +88,17 @@
       || '<p class="muted">No one sits on more than one current board.</p>';
   }
 
+  async function renderDonors() {
+    let rows = [];
+    try { rows = await rowsOf('nonprofit-board-businesses', 'campaign_gifts_total_min=1'); } catch (e) { $('#npDon').innerHTML = ''; return; }
+    const by = group(rows, 'person_id');
+    const tot = rs => rs.reduce((a, b) => a + Number(b.campaign_gifts_total || 0), 0);
+    const list = [...by.values()].sort((a, b) => tot(b) - tot(a) || a[0].person.localeCompare(b[0].person)).slice(0, 60);
+    $('#npDon').innerHTML = list.map(rs => `<article><h3><button type="button" class="np-p" data-person="${esc(rs[0].person_id)}">${esc(pname(rs[0].person))}</button></h3><div class="m">${usd(tot(rs))} from ${rs.length} business${rs.length === 1 ? '' : 'es'}</div>
+      <ul class="plain">${rs.map(b => `<li>${bizLine(b)}</li>`).join('')}</ul></article>`).join('')
+      || '<p class="muted">No board member’s business gave to a local campaign.</p>';
+  }
+
   async function showPerson(btn) {
     const id = btn.dataset.person;
     const host = btn.closest('li, tr, article');
@@ -80,9 +106,15 @@
     const old = tr ? (host.nextElementSibling && host.nextElementSibling.classList.contains('np-ppr') ? host.nextElementSibling : null) : host.querySelector('.np-pp');
     if (old) { old.remove(); return; }
     let rs = people.get(id);
-    if (!rs) { try { rs = await boardOf('person_id=' + encodeURIComponent(id)); people.set(id, rs); } catch (e) { return; } }
+    if (!rs) {
+      try {
+        const [b, z] = await Promise.all([boardOf('person_id=' + encodeURIComponent(id)), rowsOf('nonprofit-board-businesses', 'person_id=' + encodeURIComponent(id)).catch(() => [])]);
+        rs = Object.assign(b, {biz: z}); people.set(id, rs);
+      } catch (e) { return; }
+    }
     const d = document.createElement('div'); d.className = 'np-pp small';
     d.innerHTML = `<b>${esc(pname(rs[0] && rs[0].person))}</b> on ${rs.length} nonprofit${rs.length === 1 ? '' : 's'}: ` + rs.map(r => `<a href="?id=${encodeURIComponent(r.nonprofit_id)}#npList">${esc(title(r.nonprofit))}</a> <span class="muted">(${esc(r.titles || r.role)}${years(r) ? ', ' + esc(years(r)) : ''}${r.current ? '' : ', past'})</span>`).join(' · ')
+      + (rs.biz && rs.biz.length ? `<div>Businesses (state filings): ${rs.biz.filter(b => b.business_status === 'Active' || Number(b.campaign_gifts_total) > 0).concat(rs.biz.filter(b => b.business_status !== 'Active' && !(Number(b.campaign_gifts_total) > 0))).slice(0, 12).map(bizLine).join(' · ')}${rs.biz.length > 12 ? ` <span class="muted">and ${rs.biz.length - 12} more</span>` : ''}</div>` : '')
       + '<div class="muted">Grouped by name, so two people with the same name can show up together.</div>';
     if (!tr) { host.appendChild(d); return; }
     // a row of its own under the person, so a long list wraps instead of stretching the table

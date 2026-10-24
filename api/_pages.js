@@ -21,7 +21,7 @@ const PAGES = {
   '/records-request': {none: 'a form that writes a records request'},
   '/correspondence': {endpoints: ['/correspondence']},
   '/connections/shared-owners': {datasets: ['shared-owner-groups']},
-  '/connections/nonprofits': {datasets: ['nonprofits', 'nonprofit-board-members', 'nonprofit-payments', 'nonprofit-grants', 'nonprofit-officials']},
+  '/connections/nonprofits': {datasets: ['nonprofits', 'nonprofit-board-members', 'nonprofit-board-businesses', 'nonprofit-payments', 'nonprofit-grants', 'nonprofit-officials']},
   '/connections/business-ties': {datasets: ['official-businesses', 'official-business-links']},
   '/alerts': {none: 'email alert sign-up form'},
   '/meetings': {datasets: ['meetings'], endpoints: ['/meetings.ics']},
