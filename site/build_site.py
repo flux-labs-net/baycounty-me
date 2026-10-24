@@ -762,7 +762,7 @@ def main():
     from og import build_og
     from og import preview_text
     PREVIEW.update(preview_text())
-    OG_VER.update(build_og(OUT, [x for x in PAGES if not x[0].startswith(PROFILE_PREFIXES)], MENU))  # profile pages use the default card
+    OG_VER.update(build_og(OUT, [x for x in PAGES if x[0] != '/profile'], MENU))  # /profile is a client-side shell: it uses the home card
     PAGE_LABELS.update(_labels())
     for path, title, desc, fn in PAGES:
         write(path, layout(title, desc, path, fn()))
