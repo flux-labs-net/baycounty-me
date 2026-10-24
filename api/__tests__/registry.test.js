@@ -49,3 +49,23 @@ test('person and entity lookups reject malformed ids before touching the databas
   await assert.rejects(R.entity('bay', 'bad doc!'), /Unknown document/);
   assert.equal(calls.length, 0);
 });
+
+test('limit review: statuses, case ids, resolution and source link are checked', () => {
+  assert.throws(() => R.cleanLimitReview({case_id: 'l_0123456789', status: 'published'}), /Unknown review status/);
+  assert.throws(() => R.cleanLimitReview({case_id: 'g_0123456789', status: 'confirmed'}), /Unknown case/);
+  assert.throws(() => R.cleanLimitReview({case_id: 'l_0123456789', status: 'resolved'}), /how it was resolved/);
+  assert.throws(() => R.cleanLimitReview({case_id: 'l_0123456789', status: 'resolved', resolution: 'refunded', resolution_url: 'javascript:alert(1)'}), /http/);
+  const ok = R.cleanLimitReview({case_id: 'l_0123456789', status: 'resolved', resolution: 'amended_report', resolution_note: ' SOE typo ', resolution_url: 'https://example.org/r.pdf'});
+  assert.deepEqual(ok, {county: 'bay', status: 'resolved', id: 'l_0123456789', resolution: 'amended_report', note: 'SOE typo', url: 'https://example.org/r.pdf'});
+  // a resolution is only stored with a resolved status
+  assert.equal(R.cleanLimitReview({case_id: 'l_0123456789', status: 'confirmed', resolution: 'refunded'}).resolution, null);
+});
+
+test('limit review rewrites the public row for that case', async () => {
+  reply = sql => sql.includes('update registry.limit_cases') ? [{case_id: 'l_0123456789', review_status: 'confirmed'}] : [{n: 1}];
+  calls.length = 0;
+  const r = await R.reviewLimit({case_id: 'l_0123456789', status: 'confirmed'}, 'a@x');
+  assert.equal(r.published, 1);
+  const pub = calls.find(c => c.sql.includes('registry.publish_limit_case'));
+  assert.deepEqual(pub.p, ['bay', 'l_0123456789']);
+});

@@ -20,7 +20,7 @@ const PAGES = {
   '/developers': {endpoints: ['/openapi.json'], none: 'API documentation'},
   '/records-request': {none: 'a form that writes a records request'},
   '/correspondence': {endpoints: ['/correspondence']},
-  '/connections/shared-owners': {datasets: ['shared-owner-groups']},
+  '/connections/shared-owners': {datasets: ['shared-owner-groups', 'over-limit-gifts']},
   '/connections/nonprofits': {datasets: ['nonprofits', 'nonprofit-board-members', 'nonprofit-board-businesses', 'nonprofit-payments', 'nonprofit-grants', 'nonprofit-officials', 'charity-registrations']},
   '/connections/business-ties': {datasets: ['official-businesses', 'official-business-links']},
   '/alerts': {none: 'email alert sign-up form'},

@@ -204,6 +204,7 @@ async function route(req, res, action, me) {
     }
     // ---------- correspondence with officials ----------
     case 'registry': return require('./_registry').groups({county: Q.county, status: String(Q.status || ''), candidate: String(Q.candidate || '')});
+    case 'registry_limits': return require('./_registry').limits({county: Q.county, status: String(Q.status || '')});
     case 'registry_search': return require('./_registry').search(Q.county, Q.q);
     case 'registry_person': return require('./_registry').person(Q.county, Q.key);
     case 'registry_entity': return require('./_registry').entity(Q.county, Q.doc);
@@ -211,6 +212,12 @@ async function route(req, res, action, me) {
       if (req.method !== 'POST') throw Object.assign(new Error('Use POST.'), {status: 405});
       const r = await require('./_registry').review(body, me.e);
       await audit(me.e, action, null, {group_id: body.group_id, candidate: body.candidate || null, status: body.status});
+      return r;
+    }
+    case 'registry_limit_review': {
+      if (req.method !== 'POST') throw Object.assign(new Error('Use POST.'), {status: 405});
+      const r = await require('./_registry').reviewLimit(body, me.e);
+      await audit(me.e, action, null, {case_id: body.case_id, status: body.status, resolution: body.resolution || null});
       return r;
     }
     case 'boards': return require('./_boards').officials({county: Q.county, status: String(Q.status || '')});

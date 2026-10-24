@@ -125,6 +125,8 @@ public struct DatasetSpec: Sendable {
                                        filters: ["candidate", "sunbiz_status", "match_method"], page: "connections/campaign-gifts"),
         "shared-owner-groups": .init(.elections, "person.2", title: ["business"], subtitle: ["candidate", "office"],
                                      detail: "business_dates", badge: "business_status", filters: ["candidate"], page: "connections/shared-owners"),
+        "over-limit-gifts": .init(.elections, "exclamationmark.triangle", title: ["contributor"], subtitle: ["candidate", "election"],
+                                  detail: "gift_list", badge: "status", filters: ["candidate", "status"], page: "connections/shared-owners"),
         "nonprofits": .init(.accountability, "heart.text.square", title: ["name"], subtitle: ["kind", "city"], detail: "subsection",
                             amount: ["total_revenue", "irs_revenue"], badge: "latest_return_form", filters: ["kind", "city", "subsection"], page: "connections/nonprofits"),
         "nonprofit-board-members": .init(.accountability, "person.3", title: ["person"], subtitle: ["nonprofit", "titles"], detail: "sources",

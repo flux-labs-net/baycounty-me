@@ -319,6 +319,19 @@ def shared_owner_groups():
     return []
 
 
+# Gifts over the per-election limit: rows are written by registry.publish_limit_case() when an admin confirms or
+# resolves a case (migration 0038), not by the site build.
+OVER_LIMIT_COLUMNS = ['case_id', 'candidate', 'office', 'election', 'election_phase', 'contributor', 'contributor_type', 'gifts', 'gross_amount',
+                      'refunds', 'net_amount', 'over_by', 'gift_list', 'first_date', 'last_date', 'possible_double_entry', 'status', 'resolution',
+                      'resolution_note', 'resolution_url', 'reviewed_on', 'county', 'source_url', 'gov_id']
+DB_ONLY_COLUMNS['over-limit-gifts'] = {c: ('number' if c in ('gifts', 'gross_amount', 'refunds', 'net_amount', 'over_by') else
+                                           'boolean' if c == 'possible_double_entry' else 'string') for c in OVER_LIMIT_COLUMNS}
+
+
+def over_limit_gifts():
+    return []
+
+
 # --- Nonprofits (data/nonprofits): organizations, money and board members (public IRS and state filings) ----------
 
 def _nonprofit_files(part):
@@ -430,6 +443,7 @@ DATASETS = [
     ('government-years', 'Governments by year', 'One row per government per fiscal year: adopted budget and its status, general fund, property tax rate and levy, audited actual revenue and spending, residents, audited debt and staff count. A blank means no record for that year. fiscal_year is the year the fiscal year ends (FY2026 = Oct 2025 to Sep 2026; schools Jul to Jun).', government_years),
     ('business-donor-sunbiz', 'Business donors in the state corporate registry', 'Each business that gave to a current officeholder or 2026 local candidate, matched to its Florida Division of Corporations (Sunbiz) record: document number, registered name, status and principal city, with the match method. Business-level only; no owner or officer names.', business_donor_sunbiz),
     ('shared-owner-groups', 'Shared-owner campaign gifts', 'Businesses that share an officer, manager or registered agent (state corporate records) and gave to the same local candidate, one row per business. Only groups checked by hand are listed. People are not named. Each company is its own contributor under Florida law, so a group is legal when each company is a real contributor.', shared_owner_groups),
+    ('over-limit-gifts', 'Gifts over the contribution limit', "Organizations that gave one local candidate more than Florida's $1,000-per-election limit, as the campaign reported it (s. 106.08, F.S.), net of reported refunds. The primary and general are separate elections. Each case was checked by hand. status is Open (over the limit as reported, no explanation found) or Resolved (resolution says why: a reporting error, an amended report, a refund, a check designated for the general election, or a Florida Elections Commission ruling). A reported overage is not a finding of wrongdoing. Individual donors are not listed.", over_limit_gifts),
     ('nonprofits', 'Nonprofits', 'Every nonprofit in the county: organizations recognized by the IRS with a local address, and active Florida nonprofit corporations (Sunbiz) based here. Type, IRS subsection, latest 990 revenue, expenses and assets, how many board members its filings list, how many of those sit on another local board, government payment records and grants. Board members are in nonprofit-board-members.', nonprofits),
     ('nonprofit-payments', 'Nonprofits: government payment records', 'Payment records on the site (contracts, check registers, tourism agency payments, CRA ledger) whose payee is a local nonprofit, matched by name.', nonprofit_payments),
     ('nonprofit-grants', 'Nonprofits: grants they gave', 'Grants to organizations reported on Schedule I of local nonprofits\' 990 returns, with the recipient linked when it is also a local nonprofit.', nonprofit_grants),
