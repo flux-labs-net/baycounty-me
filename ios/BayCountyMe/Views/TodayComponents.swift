@@ -180,33 +180,60 @@ struct RowDivider: View {
     var body: some View { Divider().padding(.leading, inset) }
 }
 
-/// A row of pill buttons, one selected (navy), scrolling sideways when they don't fit.
+/// The app's one switcher: a row of pill buttons, one selected (navy), scrolling sideways when they don't fit.
+/// Every chip is at least 44pt tall. `counts` adds a number after a label ("Split 6").
+/// `bleed` lets the row scroll out to the screen edge past the parent's side padding.
 struct ChipRow<ID: Hashable>: View {
     let chips: [(id: ID, label: String)]
     let selected: ID
+    var counts: [ID: Int] = [:]
+    var bleed: CGFloat = 16
     let onPick: (ID) -> Void
 
     var body: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 6) {
-                ForEach(chips, id: \.id) { c in
-                    let on = c.id == selected
-                    Button { onPick(c.id) } label: {
-                        Text(c.label)
+        ScrollViewReader { proxy in
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 8) {
+                    ForEach(chips, id: \.id) { c in
+                        let on = c.id == selected
+                        Button { onPick(c.id) } label: {
+                            HStack(spacing: 5) {
+                                Text(c.label)
+                                if let n = counts[c.id] {
+                                    Text("\(n)").fontWeight(.medium).monospacedDigit()
+                                        .foregroundStyle(on ? Color.white.opacity(0.75) : .secondary)
+                                }
+                            }
                             .font(.subheadline.weight(.semibold))
-                            .padding(.horizontal, 14)
-                            .frame(minHeight: 38)
+                            .lineLimit(1)
+                            .padding(.horizontal, 18)
+                            .frame(minHeight: 44)
                             .foregroundStyle(on ? Color.white : .primary)
                             .background(on ? Brand.navyFill : Brand.surface, in: Capsule())
-                            .overlay { if !on { Capsule().strokeBorder(Brand.hairline) } }
+                            .overlay { Capsule().strokeBorder(on ? Color.clear : Brand.hairline) }
+                            .contentShape(Capsule())
+                        }
+                        .buttonStyle(PressScale())
+                        .id(c.id)
+                        .accessibilityLabel(counts[c.id].map { "\(c.label), \($0)" } ?? c.label)
+                        .accessibilityAddTraits(on ? .isSelected : [])
                     }
-                    .buttonStyle(.plain)
-                    .accessibilityAddTraits(on ? .isSelected : [])
                 }
+                .padding(.horizontal, bleed)
             }
-            .padding(.horizontal, 16)
+            .padding(.horizontal, -bleed)
+            // Keep the picked chip in view when a long row (tax years) opens on a choice off screen.
+            .onAppear { proxy.scrollTo(selected, anchor: .center) }
         }
-        .padding(.horizontal, -16)
+    }
+}
+
+/// Press feedback for chips and buttons: a quick shrink to 96%, released as soon as the finger lifts.
+struct PressScale: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .scaleEffect(configuration.isPressed ? 0.96 : 1)
+            .animation(.easeOut(duration: 0.15), value: configuration.isPressed)
     }
 }
 

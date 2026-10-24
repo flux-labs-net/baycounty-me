@@ -203,25 +203,11 @@ struct MeetingDetailView: View {
         let chips: [(label: String, kind: AgendaItem.Kind?)] = [("All", nil), ("Spending", .spending), ("Hearings", .hearing), ("Other", .other)]
         return VStack(alignment: .leading, spacing: 12) {
             Text("Agenda").font(.title3.weight(.bold))
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 6) {
-                    ForEach(chips, id: \.label) { c in
-                        let n = c.kind == nil ? agenda.count : agenda.filter { $0.kind == c.kind }.count
-                        let on = filter == c.kind
-                        if n > 0 || c.kind == nil {
-                            Button { withAnimation(.snappy) { filter = c.kind } } label: {
-                                (Text(c.label) + Text(" \(n)").foregroundColor(on ? Color.white.opacity(0.75) : .secondary))
-                                    .font(.subheadline.weight(.semibold))
-                                    .padding(.horizontal, 12).frame(minHeight: 36)
-                                    .foregroundStyle(on ? Color.white : .primary)
-                                    .background(on ? Brand.navyFill : Brand.surface, in: Capsule())
-                            }
-                            .buttonStyle(.plain)
-                            .accessibilityAddTraits(on ? .isSelected : [])
-                        }
-                    }
-                }
-            }
+            let counts = Dictionary(uniqueKeysWithValues: chips.map { c in
+                (c.kind, c.kind == nil ? agenda.count : agenda.filter { $0.kind == c.kind }.count)
+            })
+            ChipRow(chips: chips.filter { $0.kind == nil || (counts[$0.kind] ?? 0) > 0 }.map { (id: $0.kind, label: $0.label) },
+                    selected: filter, counts: counts) { k in withAnimation(.snappy) { filter = k } }
             CardList {
                 ForEach(ordered) { it in
                     HStack(alignment: .top, spacing: 12) {

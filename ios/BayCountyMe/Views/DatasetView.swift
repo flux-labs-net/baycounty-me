@@ -350,12 +350,9 @@ struct DatasetView: View {
         List {
             Section {
                 controls(rows)
-                Picker("Show", selection: $voteFilter) {
-                    Text("All \(rows.count)").tag(VoteFilter.all)
-                    Text("Split \(splitCount)").tag(VoteFilter.split)
-                    Text("Failed \(failedCount)").tag(VoteFilter.failed)
-                }
-                .pickerStyle(.segmented)
+                ChipRow(chips: [(id: VoteFilter.all, label: "All"), (id: VoteFilter.split, label: "Split"), (id: VoteFilter.failed, label: "Failed")],
+                        selected: voteFilter,
+                        counts: [.all: rows.count, .split: splitCount, .failed: failedCount]) { voteFilter = $0 }
                 VoteLegend()
                 if query.isEmpty && voteFilter == .all { summaryCard(base) }
             }

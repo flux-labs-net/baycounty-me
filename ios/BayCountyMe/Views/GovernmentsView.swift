@@ -36,16 +36,13 @@ struct GovernmentsView: View {
     /// Pick a measure, see every government ranked on it. Tapping a bar opens that government.
     private var compareCard: some View {
         let items = metric.items(store.governments)
-        return VStack(alignment: .leading, spacing: 14) {
-            Picker("Compare", selection: $metric) {
-                ForEach(GovMetric.allCases) { Text($0.short).tag($0) }
+        return VStack(alignment: .leading, spacing: 12) {
+            ChipRow(chips: GovMetric.allCases.map { (id: $0, label: $0.short) }, selected: metric) { m in
+                withAnimation(.snappy) { metric = m }
             }
-            .pickerStyle(.segmented)
             CompareBars(title: metric.title, caption: metric.caption, items: items,
                         highlight: items.first?.id, format: metric.format) { path.append(.government($0)) }
         }
-        .padding(16)
-        .card(18)
     }
 
     private var governmentsSection: some View {

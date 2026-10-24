@@ -183,10 +183,7 @@ struct GovBudgetView: View {
                 let cur = year.flatMap { y in years.contains(y) ? y : nil } ?? years.last { y in !(act.first { $0.fy == y }?.rev.isEmpty ?? true) } ?? years.last!
                 let a = act.first { $0.fy == cur }!
                 Section {
-                    Picker("Year", selection: Binding(get: { cur }, set: { year = $0 })) {
-                        ForEach(years, id: \.self) { Text($0).tag($0) }
-                    }
-                    .pickerStyle(.segmented)
+                    ChipRow(chips: years.map { (id: $0, label: $0) }, selected: cur) { year = $0 }
                     if let rt = a.rt { LabeledContent("Money in", value: Format.compactMoney(rt)) }
                     if let et = a.et { LabeledContent("Money out", value: Format.compactMoney(et)) }
                     if let p = a.pop { LabeledContent("Residents", value: Format.number(p)) }

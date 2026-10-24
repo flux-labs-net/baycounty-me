@@ -72,11 +72,9 @@ struct AccountabilityView: View {
                                     onTap: { id in rule = rule == id ? nil : id }, labelsAbove: true)
                     }
                 }
-                Picker("Stage", selection: $phase) {
-                    Text("All").tag(AccountabilityConsole.Phase?.none)
-                    ForEach(AccountabilityConsole.Phase.allCases) { Text($0.rawValue).tag(Optional($0)) }
-                }
-                .pickerStyle(.segmented)
+                ChipRow(chips: [(id: AccountabilityConsole.Phase?.none, label: "All")]
+                            + AccountabilityConsole.Phase.allCases.map { (id: Optional($0), label: $0.rawValue) },
+                        selected: phase) { phase = $0 }
                 activeFilters(c, count: rows.count)
             }
             .listRowSeparator(.hidden)
