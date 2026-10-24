@@ -1,7 +1,7 @@
 """Static site generator for baycounty.me.
 
 Pages share one layout: head, top menu (with sub-menus), and a 'Powered by Flux Labs' footer.
-Add a new page by adding an entry to MENU (for the menu) and to PAGES (for the file).
+Add a new page by adding it to site/site_menu.py (for the menu) and to PAGES (for the file).
 """
 import json, os, re, shutil, base64, sys
 
@@ -31,78 +31,9 @@ from es_pages import ES_ALT, updated_key as es_updated_key  # Spanish page -> En
 EN_TO_ES = {v: k for k, v in ES_ALT.items()}
 OG_VER = {}  # path -> image content hash, filled by og.build_og before pages are written
 
-# Menu: top-level items; an item with 'children' becomes a drop-down.
-MENU = [
-    {'label': 'Home', 'href': '/'},
-    {'label': 'My Address', 'href': '/my-address'},
-    {'label': 'Governments', 'groups': [
-        {'group': 'County and schools', 'items': [
-            *[{'label': g['short'], 'href': f"/governments/{g['slug']}", 'desc': g.get('menu_desc') or ''}
-              for g in _place_govs() if g['kind'] != 'city'],
-            {'label': 'All governments', 'href': '/governments', 'desc': 'Every local government at a glance'},
-        ]},
-        {'group': 'Cities', 'items': [
-            {'label': g['short'], 'href': f"/governments/{g['slug']}", 'desc': g.get('menu_desc') or ''}
-            for g in _place_govs() if g['kind'] == 'city']},
-        {'group': 'Side by side', 'items': [
-            {'label': 'Compare governments', 'href': '/compare', 'desc': 'Budgets, taxes and debt per resident'},
-            {'label': OFFICIALS['label'], 'href': OFFICIALS['href'], 'desc': OFFICIALS['desc']},
-        ]},
-    ]},
-    {'label': 'Public Money', 'groups': [
-        {'group': 'What you pay', 'items': [
-            {'label': 'Tax Dollars', 'href': '/public-money/tax-dollars', 'desc': 'Your property tax bill, slice by slice'},
-            {'label': 'Fees & Bills', 'href': '/public-money/fees-and-bills', 'desc': 'Fees on your tax bill, water and garbage'},
-            {'label': 'Tourist Tax', 'href': '/public-money/tourist-tax', 'desc': 'The 5% bed tax visitors pay'},
-            {'label': 'Exemptions', 'href': '/public-money/exemptions', 'desc': 'Homestead, veterans, seniors and more'},
-            {'label': 'Amendment 3', 'href': '/public-money/amendment-3', 'desc': 'What the ballot amendment would change'},
-        ]},
-        {'group': 'Where it goes', 'items': [
-            {'label': 'Budget Explorer', 'href': '/public-money/budget-explorer', 'desc': 'Each budget by fund and department'},
-            {'label': 'CRA Spending', 'href': '/public-money/cra-spending', 'desc': 'What redevelopment agencies paid for'},
-            {'label': 'Sales Tax Projects', 'href': '/public-money/sales-tax-projects', 'desc': 'Half-cent projects: promised vs built'},
-            {'label': 'Public Money Map', 'href': '/public-money/map', 'desc': 'CRA spending and sales tax projects, mapped'},
-            {'label': 'Hurricane Michael', 'href': '/public-money/hurricane-michael', 'desc': 'FEMA, HUD and state recovery money'},
-        ]},
-        {'group': 'Accountability', 'items': [
-            {'label': 'Accountability console', 'href': '/public-money/accountability', 'desc': 'Projects start to finish, with open questions'},
-            {'label': 'Savings finder', 'href': '/public-money/savings', 'desc': 'Where governments could spend less'},
-            {'label': 'Contracts', 'href': '/public-money/contracts', 'desc': 'Who wins contracts, and how'},
-            {'label': 'How They Voted', 'href': '/public-money/votes', 'desc': 'Every recorded vote on money decisions'},
-            {'label': 'Who Gets Paid', 'href': '/public-money/who-gets-paid', 'desc': 'Every payment by the tourism agencies'},
-            {'label': 'Vendors', 'href': '/public-money/vendors', 'desc': 'Every company paid, with its contracts and votes'},
-            {'label': 'Debt', 'href': '/public-money/debt', 'desc': 'What each government owes'},
-            {'label': 'Audit Findings', 'href': '/public-money/audits', 'desc': 'What outside auditors flagged'},
-        ]},
-    ]},
-    {'label': 'Connections', 'groups': [
-        {'group': 'Follow the connections', 'items': [
-            {'label': 'Network', 'href': '/connections', 'desc': 'Who every government paid, and who gave to officials'},
-            {'label': 'Campaign Gifts', 'href': '/connections/campaign-gifts', 'desc': 'Who funds campaigns, and donors with contracts'},
-            {'label': 'Money Map', 'href': '/connections/money-map', 'desc': 'Donors, officials and votes on their contracts'},
-            {'label': 'Shared Owners', 'href': '/connections/shared-owners', 'desc': 'Businesses with a shared owner that gave to the same candidate'},
-            {'label': 'Nonprofits', 'href': '/connections/nonprofits', 'desc': 'Every local nonprofit, its public money, and officials on its board'},
-            {'label': 'Business Ties', 'href': '/connections/business-ties', 'desc': "Officials' and candidates' businesses, and where they meet campaigns"},
-        ]},
-    ]},
-    {'label': 'Get Involved', 'groups': [
-        {'group': 'Take part', 'items': [
-            {'label': 'Meetings', 'href': '/meetings', 'desc': 'When every board meets, with agendas'},
-            {'label': 'Email alerts', 'href': '/alerts', 'desc': 'Weekly updates for your government'},
-            {'label': 'Request a record', 'href': '/records-request', 'desc': 'Write a public records request'},
-            {'label': 'Letters to officials', 'href': '/correspondence', 'desc': 'What we asked, and what they said'},
-            {'label': 'Send a correction', 'href': '/about#contact', 'desc': 'Tell us what we got wrong'},
-        ]},
-        {'group': 'Learn and reuse', 'items': [
-            {'label': 'Glossary', 'href': '/glossary', 'desc': 'Government money, explained simply'},
-            {'label': 'Open data', 'href': '/open-data', 'desc': 'Download every dataset'},
-            {'label': 'API', 'href': '/developers', 'desc': 'Connect apps and AI assistants'},
-            {'label': "What's new", 'href': '/updates', 'desc': 'New pages, data and corrections'},
-        ]},
-    ]},
-    {'label': 'Search', 'href': '/search'},
-    {'label': 'About', 'href': '/about'},
-]
+# Menu: six question-named sections (site/site_menu.py, also published as the site-menu dataset).
+from site_menu import menu, links as menu_links, ELECTIONS_READY
+MENU = menu()
 
 TOKENS = open(os.path.join(ROOT, 'tokens.css')).read()
 SITE_CSS = open(os.path.join(ROOT, 'site.css')).read()
@@ -122,30 +53,75 @@ def alternates(path):
     return [('en', en), ('es', EN_TO_ES[en]), ('x-default', en)] if en else []
 
 
+CHEV = '<svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 3.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>'
+SEARCH_ICON = '<svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><circle cx="9" cy="9" r="5.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M13.2 13.2L17 17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>'
+
+
+def _link(c, active):
+    cur = ' aria-current="page"' if c['href'] == active else ''
+    kd = f'<span class="kd">{c["desc"]}</span>' if c.get('desc') else ''
+    return f'<li><a href="{c["href"]}"{cur}><span class="k">{c["label"]}</span>{kd}</a></li>'
+
+
+def _section(m, active):
+    """One drop-down. A section with a start page gets the compact layout: its links in two columns and the start page
+    as a card (first in the phone menu). The Spanish menu's sections keep the column-per-group layout."""
+    on = any(c['href'] == active for c in menu_links(m))
+    q = f'<span class="st-q">{m["question"]}</span>' if m.get('question') else ''
+    btn = f'<button type="button" class="sub-toggle" aria-expanded="false"><span class="st-l">{m["label"]}{q}</span>{CHEV}</button>'
+    if m.get('start'):
+        st = m['start']
+        cur = ' aria-current="page"' if st['href'] == active else ''
+        card = (f'<a class="nav-start" href="{st["href"]}"{cur}><span class="ns-e">Start here</span><span class="ns-t">{st["label"]}</span>'
+                f'<span class="ns-d">{st["desc"]}</span></a>')
+        cols = ''.join(f'<div class="nav-col"><span class="nav-gh">{g["group"]}</span><ul class="nav-links">'
+                       + ''.join(_link(c, active) for c in g['items']) + '</ul></div>' for g in m['groups'])
+        sub = f'<div class="nav-sub nav-mega has-start">{card}{cols}</div>'
+    else:
+        sub = '<ul class="nav-sub nav-mega">' + ''.join(
+            f'<li class="nav-grp"><span class="nav-gh">{g["group"]}</span><ul>' + ''.join(_link(c, active) for c in g['items']) + '</ul></li>'
+            for g in m['groups']) + '</ul>'
+    return f'<li class="has-sub{" on" if on else ""}">{btn}{sub}</li>'
+
+
+def search_dialog():
+    """The full-screen search dialog the header's search icon opens (site/search.js). Before typing it lists each
+    section's start page."""
+    pop = ''.join(f'<li><a href="{m["start"]["href"]}"><b>{m["start"]["label"]}</b><span>{m["label"]} · {m["start"]["desc"]}</span></a></li>'
+                  for m in MENU if m.get('start'))
+    return f'''<div class="sx" id="sx" role="dialog" aria-modal="true" aria-label="Search {SITE}" hidden>
+  <div class="sx-top"><span class="wordmark" aria-hidden="true"><span>{wordmark_html()}</span></span>
+    <button type="button" class="sx-x" aria-label="Close search"><kbd>Esc</kbd><svg width="16" height="16" viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button></div>
+  <div class="sx-body">
+    <label class="sx-box">{SEARCH_ICON}<input id="sxq" type="search" autocomplete="off" enterkeyhint="search" aria-label="Search" placeholder="Search BayCounty.me"></label>
+    <p class="sx-n" id="sxn" aria-live="polite"></p>
+    <div class="sx-res" id="sxr"></div>
+    <section class="sx-g sx-e" id="sxe"><h2>Start here</h2><ul>{pop}</ul></section>
+    <p class="sx-keys"><span><kbd>↑</kbd> <kbd>↓</kbd> to move</span><span><kbd>Enter</kbd> to open</span><span><kbd>/</kbd> or <kbd>Ctrl K</kbd> opens search on any page</span></p>
+  </div>
+</div>'''
+
+
 def nav_html(active):
+    es = active.startswith('/es')
     items = []
-    for m in (ES_MENU if active.startswith('/es') else MENU):
+    for m in (ES_MENU if es else MENU):
         if 'groups' in m:
-            on = any(c['href'] == active for g in m['groups'] for c in g['items'])
-            cols = ''.join(
-                f'<li class="nav-grp"><span class="nav-gh">{g["group"]}</span><ul>' + ''.join(
-                    f'<li><a href="{c["href"]}"{" aria-current=\"page\"" if c["href"] == active else ""}>'
-                    f'<span class="k">{c["label"]}</span><span class="kd">{c["desc"]}</span></a></li>' for c in g['items']) + '</ul></li>'
-                for g in m['groups'])
-            items.append(
-                f'<li class="has-sub{" on" if on else ""}"><button type="button" class="sub-toggle" aria-expanded="false">'
-                f'{m["label"]}<svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 3.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>'
-                f'<ul class="nav-sub nav-mega">{cols}</ul></li>')
+            items.append(_section(m, active))
         else:
             cur = ' aria-current="page"' if m['href'] == active else ''
             items.append(f'<li><a href="{m["href"]}"{cur}>{m["label"]}</a></li>')
+    # The Spanish pages keep a way back to English; the English pages have no language link for now (Jeremy, 2026-10-24).
+    lang = '<a class="lang-link" href="__LANGHREF__" lang="__LANGCODE__" hreflang="__LANGCODE__">__LANGLABEL__</a>' if es else ''
     return f'''<header class="site-head"><div class="site-head-in">
-  <a class="wordmark" href="{'/es' if active.startswith('/es') else '/'}" aria-label="{SITE} {'inicio' if active.startswith('/es') else 'home'}"><span>{wordmark_html()}</span></a>
-  <a class="lang-link" href="__LANGHREF__" lang="__LANGCODE__" hreflang="__LANGCODE__">__LANGLABEL__</a>
+  <a class="wordmark" href="{'/es' if es else '/'}" aria-label="{SITE} {'inicio' if es else 'home'}"><span>{wordmark_html()}</span></a>
+  <nav aria-label="Main"><ul id="site-menu" class="menu">{"".join(items)}</ul></nav>
+  {lang}
+  <a class="search-btn" href="/search" aria-label="Search" aria-keyshortcuts="/ Control+K">{SEARCH_ICON}</a>
   <button type="button" class="theme-btn" id="themeBtn" aria-label="Theme: match system"><svg class="ti ti-system" width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="6.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 3.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/></svg><svg class="ti ti-light" width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 2v2.2M10 15.8V18M2 10h2.2M15.8 10H18M4.3 4.3l1.6 1.6M14.1 14.1l1.6 1.6M4.3 15.7l1.6-1.6M14.1 5.9l1.6-1.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><svg class="ti ti-dark" width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path d="M16 12.6A6.6 6.6 0 0 1 7.4 4a6.6 6.6 0 1 0 8.6 8.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="theme-lbl">System</span></button>
   <button type="button" class="menu-btn" aria-expanded="false" aria-controls="site-menu"><span class="sr">Menu</span><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14" stroke="currentColor" stroke-width="1.8"/></svg></button>
-  <nav aria-label="Main"><ul id="site-menu" class="menu">{"".join(items)}</ul></nav>
-</div></header>'''
+</div></header>
+{search_dialog()}'''
 
 
 FOOTER = f'''<footer class="site-foot"><div class="site-foot-in">
@@ -175,7 +151,9 @@ MENU_JS = '''(() => {
     show(m);
   });
   const btn = document.querySelector('.menu-btn'), menu = document.getElementById('site-menu');
-  const setMenu = o => { btn.setAttribute('aria-expanded', o); menu.classList.toggle('open', o); document.documentElement.classList.toggle('nav-locked', o); if (o) menu.scrollTop = 0; };
+  const setMenu = o => { btn.setAttribute('aria-expanded', o); menu.classList.toggle('open', o); document.documentElement.classList.toggle('nav-locked', o); if (o) menu.scrollTop = 0;
+    // phone menu: open on the section that holds this page
+    const here = o && menu.querySelector('.has-sub.on > .sub-toggle'); if (here && !menu.querySelector('.sub-toggle[aria-expanded="true"]')) here.setAttribute('aria-expanded', 'true'); };
   btn.addEventListener('click', () => setMenu(btn.getAttribute('aria-expanded') !== 'true'));
   menu.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false); });
   const mq = matchMedia('(min-width:981px)'), onMq = e => { if (e.matches) setMenu(false); };
@@ -189,7 +167,7 @@ MENU_JS = '''(() => {
     const l = li.getBoundingClientRect().left, w = Math.min(760, innerWidth - 32);
     m.style.setProperty('--mx', Math.max(16 - l, Math.min(0, innerWidth - 16 - w - l)) + 'px'); };
   document.querySelectorAll('.has-sub').forEach(li => ['mouseenter', 'focusin', 'click'].forEach(ev => li.addEventListener(ev, () => placeMega(li))));
-  document.addEventListener('click', e => { if (!e.target.closest('.has-sub')) document.querySelectorAll('.sub-toggle').forEach(x => x.setAttribute('aria-expanded', 'false')); });
+  document.addEventListener('click', e => { if (!e.target.closest('.has-sub, .menu-btn')) document.querySelectorAll('.sub-toggle').forEach(x => x.setAttribute('aria-expanded', 'false')); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') { document.querySelectorAll('.sub-toggle').forEach(x => x.setAttribute('aria-expanded', 'false')); if (menu.classList.contains('open')) { setMenu(false); btn.focus(); } } });
 })();
 '''
@@ -197,6 +175,7 @@ MENU_JS = '''(() => {
 
 # Shared helpers (window.BCM): URL state for data-param controls (?gov= etc.) and announce. Tables use tables.js.
 DEEPLINK_JS = open(os.path.join(ROOT, 'site_helpers.js')).read()
+SEARCH_JS = open(os.path.join(ROOT, 'search.js')).read()  # header search dialog + the engine the /search page uses
 
 
 TERM_JS = r"""
@@ -546,23 +525,15 @@ from dates import us_dates_html, DATES_JS  # noqa: E402
 from developers_page import developers_page
 from elections_page import elections_page
 from exemptions_page import exemptions_page
-ELECTIONS_READY = os.path.exists(os.path.join(ROOT, '..', 'data', 'elections', 'candidates_2026.json'))
-if ELECTIONS_READY:
-    for _m in MENU:
-        for _g in _m.get('groups', []):
-            if _g['group'] == 'Take part':
-                _g['items'].insert(0, {'label': '2026 Elections', 'href': '/elections', 'desc': "Who's running, their platforms and money"})
 from es_pages import ES_MENU, localize_chrome, es_home, es_addr_page, es_glossary_page, es_records_page, glossary_es_terms, write_report_es, es_tax_page, es_fees_page, es_exemptions_page, es_elections_page, es_meetings_page, prune as prune_es
 from govs import GOVS as GOVLIST  # noqa: E402
 
 def page_options():
     import html
     def o(h, l): return f'<option value="{h}">{html.escape(l)}</option>'
-    top = [m for m in MENU if 'href' in m]
-    out = '<option value="">Not about a specific page</option><optgroup label="Main pages">' + ''.join(o(m['href'], m['label']) for m in top) + o('/updates', "What's new") + '</optgroup>'
+    out = '<option value="">Not about a specific page</option><optgroup label="Main pages">' + o('/', 'Home') + o('/search', 'Search') + '</optgroup>'
     for m in MENU:
-        for g in m.get('groups', []):
-            out += f'<optgroup label="{html.escape(m["label"] + " · " + g["group"])}">' + ''.join(o(i['href'], i['label']) for i in g['items']) + '</optgroup>'
+        out += f'<optgroup label="{html.escape(m["label"])}">' + ''.join(o(i['href'], i['label']) for i in menu_links(m)) + '</optgroup>'
     return out
 
 
@@ -740,9 +711,8 @@ def _labels():
         for m in menu:
             if m.get('href'):
                 lab[m['href']] = m['label']
-            for g in m.get('groups', []):
-                for c in g['items']:
-                    lab.setdefault(c['href'].split('#')[0], c['label'])
+            for c in menu_links(m):
+                lab.setdefault(c['href'].split('#')[0], c['label'])
     for p, t, _, _ in PAGES:
         lab.setdefault(p, t)
     lab.pop('/', None); lab.pop('/es', None)
@@ -777,7 +747,7 @@ def main():
     from glossary import TERMS
     gl = {t['id']: {'term': t['term'], 'simple': t['simple']} for t in TERMS}
     from city_filter import js_table as _city_js
-    open(os.path.join(OUT, 'assets', 'site.js'), 'w').write(_city_js() + MENU_JS + DEEPLINK_JS + LINKIFY_JS + entity_js() + DATES_JS + TERM_JS.replace('__GLOSSARY_ES__', json.dumps(glossary_es_terms(), ensure_ascii=False)).replace('__GLOSSARY__', json.dumps(gl, ensure_ascii=False)))
+    open(os.path.join(OUT, 'assets', 'site.js'), 'w').write(_city_js() + MENU_JS + SEARCH_JS + DEEPLINK_JS + LINKIFY_JS + entity_js() + DATES_JS + TERM_JS.replace('__GLOSSARY_ES__', json.dumps(glossary_es_terms(), ensure_ascii=False)).replace('__GLOSSARY__', json.dumps(gl, ensure_ascii=False)))
     shutil.copy(os.path.join(ROOT, '..', 'assets', 'logo_small.webp'), os.path.join(OUT, 'assets', 'flux-labs.webp'))
     shutil.copy(os.path.join(ROOT, 'favicon.svg'), os.path.join(OUT, 'favicon.svg'))
     shutil.copy(os.path.join(ROOT, 'tax.css'), os.path.join(OUT, 'assets', 'tax.css'))

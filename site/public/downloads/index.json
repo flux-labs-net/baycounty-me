@@ -6640,6 +6640,107 @@
    "api": "/api/v1/datasets/entity-connections"
   },
   {
+   "id": "site-menu",
+   "title": "Site menu",
+   "description": "Every link in the site's main menu, one row per link, in English and Spanish: the section and the question it answers, the link's place in the section, and the section's start-here page. place_id is the place the menu belongs to (fl-bay = Bay County), so a menu for another place sits beside it.",
+   "rows": 56,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "lang",
+     "type": "string",
+     "values": [
+      "en",
+      "es"
+     ]
+    },
+    {
+     "name": "section",
+     "type": "string",
+     "values": [
+      "Dinero público",
+      "Glosario",
+      "Governments",
+      "Inicio",
+      "Mi dirección",
+      "Participe",
+      "People",
+      "Spending",
+      "Take part",
+      "Taxes",
+      "Watchdog"
+     ]
+    },
+    {
+     "name": "section_order",
+     "type": "number"
+    },
+    {
+     "name": "question",
+     "type": "string",
+     "values": [
+      "Is it spent well?",
+      "Show up, ask, reuse",
+      "What you pay",
+      "Where it goes",
+      "Who decides, and who's connected",
+      "Who runs what"
+     ]
+    },
+    {
+     "name": "item_group",
+     "type": "string",
+     "values": [
+      "Impuestos y tarifas",
+      "Is it spent well?",
+      "Local governments",
+      "Show up, ask, reuse",
+      "Su voz",
+      "What you pay",
+      "Where it goes",
+      "Who decides, and who's connected"
+     ]
+    },
+    {
+     "name": "item_order",
+     "type": "number"
+    },
+    {
+     "name": "label",
+     "type": "string"
+    },
+    {
+     "name": "href",
+     "type": "string"
+    },
+    {
+     "name": "description",
+     "type": "string"
+    },
+    {
+     "name": "start_here",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/site-menu.json",
+   "csv": "/downloads/site-menu.csv",
+   "api": "/api/v1/datasets/site-menu"
+  },
+  {
    "id": "tax-districts",
    "title": "Tax districts",
    "description": "Which taxing authorities levy property tax in each tax district, and the combined millage. Rates by year are in property-tax-rates (authority_id).",

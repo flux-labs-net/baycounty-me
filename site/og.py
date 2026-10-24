@@ -88,7 +88,8 @@ def cards_for(pages, MENU):
     from home import stats, topics
     s = stats()
     tp = {t[0]: t for t in topics(s)}
-    grp = {i['href']: f'{m["label"]} · {i["label"]}' for m in MENU for g in m.get('groups', []) for i in g['items']}
+    from site_menu import links
+    grp = {i['href']: f'{m["label"]} · {i["label"]}' for m in MENU for i in links(m)}
     v = json.load(open(os.path.join(ROOT, 'data', 'votes', 'votes.json')))
     out = {}
     for path, title, desc, _ in pages:
