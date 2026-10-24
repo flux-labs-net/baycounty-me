@@ -58,7 +58,7 @@ def connections_payees():
         rows.append({'entity_id': key, 'name': e['n'], 'kind': KIND.get(e['k'], e['k']), 'subconsultant_only': bool(e.get('sub')),
                      'paid_by': [D['payers'][p]['n'] for p in a['payers']], 'record_types': [D['types'][t] for t in a['types']],
                      'records': a['records'], 'dollars_in_records': round(a['total'], 2), 'gave_to_campaigns': key in gave,
-                     'vendor_page': f"/public-money/vendors/{e['vp']}" if e.get('vp') else None})
+                     'vendor_page': f"/public-money/vendors/{e['vp']}" if e.get('vp') else None, 'nonprofit_id': e.get('np')})
     rows.sort(key=lambda r: (-r['dollars_in_records'], r['name']))
     return rows
 
@@ -319,6 +319,44 @@ def shared_owner_groups():
     return []
 
 
+# --- Nonprofits (data/nonprofits): organizations, money and board members (public IRS and state filings) ----------
+
+def _nonprofit_files(part):
+    import glob, json
+    rows = []
+    for fp in sorted(glob.glob(os.path.join(HERE, '..', 'data', 'nonprofits', '*', 'nonprofits.json'))):
+        rows += json.load(open(fp))[part]
+    return rows
+
+
+def nonprofits():
+    return _nonprofit_files('nonprofits')
+
+
+def nonprofit_payments():
+    return _nonprofit_files('payments')
+
+
+def nonprofit_grants():
+    return _nonprofit_files('grants')
+
+
+def nonprofit_board_members():
+    return _nonprofit_files('board_members')
+
+
+# Officials on nonprofit boards: written by registry.publish_board_officials() when an admin confirms a name match
+# (migration 0034), not by the site build.
+NONPROFIT_OFFICIAL_COLUMNS = ['official_id', 'person_id', 'official', 'official_roles', 'nonprofit_id', 'nonprofit', 'ein', 'titles', 'first_year', 'last_year',
+                              'current', 'sources', 'county', 'source_url', 'gov_id']
+DB_ONLY_COLUMNS['nonprofit-officials'] = {c: ('number' if c in ('first_year', 'last_year') else 'boolean' if c == 'current' else 'string')
+                                          for c in NONPROFIT_OFFICIAL_COLUMNS}
+
+
+def nonprofit_officials():
+    return []
+
+
 # Officials' business ties: rows are written by careers.publish() when an admin confirms a match (migration 0033).
 OFFICIAL_BUSINESS_COLUMNS = {'person_id': 'string', 'official': 'string', 'official_role': 'string', 'business': 'string', 'sunbiz_doc_number': 'string',
                              'titles': 'string', 'role_kind': 'string', 'business_status': 'string', 'filing_type': 'string', 'nonprofit': 'boolean',
@@ -359,6 +397,11 @@ DATASETS = [
     ('government-years', 'Governments by year', 'One row per government per fiscal year: adopted budget and its status, general fund, property tax rate and levy, audited actual revenue and spending, residents, audited debt and staff count. A blank means no record for that year. fiscal_year is the year the fiscal year ends (FY2026 = Oct 2025 to Sep 2026; schools Jul to Jun).', government_years),
     ('business-donor-sunbiz', 'Business donors in the state corporate registry', 'Each business that gave to a current officeholder or 2026 local candidate, matched to its Florida Division of Corporations (Sunbiz) record: document number, registered name, status and principal city, with the match method. Business-level only; no owner or officer names.', business_donor_sunbiz),
     ('shared-owner-groups', 'Shared-owner campaign gifts', 'Businesses that share an officer, manager or registered agent (state corporate records) and gave to the same local candidate, one row per business. Only groups checked by hand are listed. People are not named. Each company is its own contributor under Florida law, so a group is legal when each company is a real contributor.', shared_owner_groups),
+    ('nonprofits', 'Nonprofits', 'Every nonprofit in the county: organizations recognized by the IRS with a local address, and active Florida nonprofit corporations (Sunbiz) based here. Type, IRS subsection, latest 990 revenue, expenses and assets, how many board members its filings list, how many of those sit on another local board, government payment records and grants. Board members are in nonprofit-board-members.', nonprofits),
+    ('nonprofit-payments', 'Nonprofits: government payment records', 'Payment records on the site (contracts, check registers, tourism agency payments, CRA ledger) whose payee is a local nonprofit, matched by name.', nonprofit_payments),
+    ('nonprofit-grants', 'Nonprofits: grants they gave', 'Grants to organizations reported on Schedule I of local nonprofits\' 990 returns, with the recipient linked when it is also a local nonprofit.', nonprofit_grants),
+    ('nonprofit-board-members', 'Nonprofits: board members', 'Officers, directors, trustees and key employees of local nonprofits as listed on their IRS returns (2019 on), 990-N postcards and state corporate filings: one row per person per nonprofit with titles, years on file, reported pay and hours, and how many other current local boards the same name sits on (homeowner associations aside). person_id groups the same name across boards; two people with a common name can share one.', nonprofit_board_members),
+    ('nonprofit-officials', 'Officials on nonprofit boards', 'Elected officials, department leaders and candidates listed as an officer or director of a local nonprofit in its IRS returns or state corporate filings. Only matches checked by hand are listed.', nonprofit_officials),
     ('official-businesses', "Officials' businesses", 'Registered businesses (Florida Division of Corporations) that list an elected official, department leader or local candidate as an officer, manager or registered agent, with the filing date and status. Each official-to-record match was checked by hand. Only officials and candidates are named.', official_businesses),
     ('official-business-links', "Officials' business ties", "How officials' and candidates' registered businesses connect to public life: two officials on the same business, an official's business giving to a campaign, a donor business that shares an officer with a candidate's business (the shared person is counted, not named), and an official's business paid by a local government. Published only for hand-checked matches.", official_business_links),
     ('tax-districts', 'Tax districts', 'Which taxing authorities levy property tax in each tax district, and the combined millage. Rates by year are in property-tax-rates (authority_id).', tax_districts),

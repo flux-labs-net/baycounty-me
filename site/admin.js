@@ -34,7 +34,7 @@
   $('#signout').addEventListener('click', async () => { await api('logout', {method: 'POST'}).catch(() => {}); location.href = '/admin'; });
 
   // ---------- tabs ----------
-  const loaders = {keys: loadKeys, analytics: loadStats, logs: () => loadLogs(true), settings: loadSettings, ingestion: loadIngestion, agendas: loadAgendas, sent: loadSent, emails: loadEmails, compose: () => loadCompose(), correspondence: loadCorr, owners: loadOwners, ties: loadTies};
+  const loaders = {keys: loadKeys, analytics: loadStats, logs: () => loadLogs(true), settings: loadSettings, ingestion: loadIngestion, agendas: loadAgendas, sent: loadSent, emails: loadEmails, compose: () => loadCompose(), correspondence: loadCorr, owners: loadOwners, ties: loadTies, boards: loadBoards};
   function tab(name) {
     document.querySelectorAll('[role=tab][data-tab]').forEach(b => b.setAttribute('aria-selected', String(b.dataset.tab === name)));
     document.querySelectorAll('[role=tabpanel]').forEach(p => { p.hidden = p.id !== 'tab-' + name; });
@@ -835,6 +835,81 @@
     }, 300);
   });
 
+  // ---------- nonprofit boards (private registry, api/_boards.js) ----------
+  const BD_SRC = {irs_990: 'IRS 990', irs_990ez: 'IRS 990-EZ', irs_990pf: 'IRS 990-PF', irs_990n: 'IRS 990-N', sunbiz: 'Sunbiz'};
+  const bdSrc = s => String(s || '').split(', ').map(x => BD_SRC[x] || x).join(', ');
+  const bdYears = b => b.first_year && b.last_year && b.first_year !== b.last_year ? `${b.first_year}–${b.last_year}` : (b.last_year || b.first_year || '');
+  const bdBoards = list => (list || []).map(n => `<div>${owNm(n)}</div>`).join('');
+  async function loadBoards() {
+    let r;
+    try { r = await api('boards', {params: {status: $('#bd-status').value}}); }
+    catch (e) { $('#bd-tiles').innerHTML = `<div class="banner bad"><div><b>Couldn’t load nonprofit boards.</b><div class="small muted">${esc(e.message)}</div></div></div>`; return; }
+    const s = (r.load && r.load.summary) || {};
+    const rv = Object.fromEntries((r.review || []).map(x => [x.review_status, x.n]));
+    $('#bd-tiles').innerHTML = r.load ? [[fmt(s.nonprofits), 'Nonprofits'], [fmt(s.with_board_list), 'With a board list'], [fmt(s.board_people), 'Board members'],
+      [fmt(s.on_2plus_current_boards), 'On 2+ current boards (not HOAs)'], [fmt(s.official_name_matches), 'Match an official by name'], [fmt(rv.unreviewed || 0), 'Not yet reviewed'],
+      [fmt(rv.confirmed || 0), 'Confirmed (public)'], [fmt(s.linked_to_donor_businesses), 'Run a business that gave'], [when(r.load.loaded_at).replace(/<[^>]+>/g, ''), 'Last loaded']]
+      .map(([v, l]) => `<div class="tile"><b>${v}</b><span>${l}</span></div>`).join('') : '<div class="banner"><div>Not loaded yet. The Sync database workflow loads it after the next push to main.</div></div>';
+    $('#bd-officials tbody').innerHTML = r.officials.map(m => `<tr>
+      <td><b>${esc(m.official_name)}</b><div class="muted small">${esc((m.official_roles || []).slice(0, 2).join('; '))}</div></td>
+      <td><a href="#" data-board="${esc(m.board_key)}">${owNm(m.display_name)}</a></td>
+      <td class="small">${m.boards.map(b => `<div><a href="#" data-np="${esc(b.nonprofit_id)}">${owNm(b.nonprofit)}</a> <span class="muted">${esc(b.titles || '')} · ${esc(bdYears(b))} · ${esc(bdSrc(b.sources))}${b.current ? '' : ' · past'}</span></div>`).join('')}</td>
+      <td class="num">${fmt(m.same_name_people)}</td>
+      <td><select class="sel" data-bdreview="${esc(m.board_key)}" data-official="${esc(m.official_id)}" aria-label="Review">${Object.entries(OW_REV).map(([k, l]) => `<option value="${k}"${k === m.review_status ? ' selected' : ''}>${l}</option>`).join('')}</select></td></tr>`).join('')
+      || '<tr><td colspan="5" class="empty">No matches.</td></tr>';
+    const [il, dn] = await Promise.all([api('boards_interlocks').catch(() => []), api('boards_donors').catch(() => [])]);
+    $('#bd-interlocks tbody').innerHTML = il.slice(0, 100).map(p => `<tr><td><a href="#" data-board="${esc(p.board_key)}">${owNm(p.display_name)}</a></td><td class="num">${fmt(p.n_current_civic)}${p.n_current > p.n_current_civic ? `<div class="muted small">+${fmt(p.n_current - p.n_current_civic)} HOA</div>` : ''}</td>
+      <td class="small">${bdBoards(p.boards)}</td><td class="small">${p.official_name ? 'Name matches ' + esc(p.official_name) + '<br>' : ''}${p.n_donor_businesses ? fmt(p.n_donor_businesses) + ' donor business(es)' : ''}</td></tr>`).join('')
+      || '<tr><td colspan="4" class="empty">None.</td></tr>';
+    $('#bd-donors tbody').innerHTML = dn.map(p => `<tr><td><a href="#" data-board="${esc(p.board_key)}">${owNm(p.display_name)}</a>${p.official_name ? `<div class="muted small">Name matches ${esc(p.official_name)}</div>` : ''}</td>
+      <td class="small">${bdBoards(p.boards)}</td>
+      <td class="small">${(p.businesses || []).map(b => `<div><a href="#" data-doc="${esc(b.doc_number)}">${owNm(b.name)}</a> <span class="pill">${b.via === 'same_person' ? 'same person' : 'same name'}</span> <span class="muted">${owUsd(b.gifts_total)} to ${esc((b.candidates || []).join(', '))}</span></div>`).join('')}</td>
+      <td class="num"><b>${owUsd(p.donor_gifts_total)}</b></td></tr>`).join('') || '<tr><td colspan="4" class="empty">None.</td></tr>';
+  }
+  async function bdDetail(kind, id) {
+    const box = $('#bd-detail'); box.innerHTML = '<p class="muted small">Loading…</p>';
+    const pay = n => n ? owUsd(n) : '<span class="muted">—</span>';
+    try {
+      if (kind === 'person') {
+        const r = await api('boards_person', {params: {key: id}}); const p = r.person;
+        box.innerHTML = `<h3 class="h2">${owNm(p.display_name)}</h3><p class="muted small">${fmt(p.n_current)} current boards, ${fmt(p.n_nonprofits)} in all${p.official_name ? ` · name matches <b>${esc(p.official_name)}</b>` : ''} · ${fmt(p.same_name_people)} Sunbiz people share this name</p>
+          <div class="tw"><table class="at" data-tt="off"><thead><tr><th>Nonprofit</th><th>Title</th><th>Year</th><th>Source</th><th class="num">Hours</th><th class="num">Pay</th></tr></thead><tbody>${r.seats.map(s => `<tr><td><a href="#" data-np="${esc(s.nonprofit_id)}">${owNm(s.nonprofit_name)}</a>${s.board ? '' : ' <span class="pill">staff or former</span>'}</td><td class="small">${esc(s.title || '')}</td><td>${esc(s.tax_year || '')}</td><td class="small">${s.source_url ? `<a href="${esc(s.source_url)}" target="_blank" rel="noopener">${esc(bdSrc(s.source))}</a>` : esc(bdSrc(s.source))}</td><td class="num">${s.hours == null ? '' : fmt(s.hours)}</td><td class="num">${pay(s.compensation)}</td></tr>`).join('')}</tbody></table></div>
+          ${(p.businesses || []).length ? `<div class="tw" style="margin-top:10px"><table class="at" data-tt="off"><thead><tr><th>Business (Sunbiz name match)</th><th>Status</th><th>Link</th><th class="num">Campaign gifts</th><th>To</th></tr></thead><tbody>${p.businesses.map(b => `<tr><td><a href="#" data-doc="${esc(b.doc_number)}">${owNm(b.name)}</a></td><td>${b.status === 'A' ? 'Active' : 'Inactive'}</td><td class="small">${b.via === 'same_person' ? 'Same person' : 'Same name'}</td><td class="num">${pay(b.gifts_total)}</td><td class="small">${esc((b.candidates || []).join(', '))}</td></tr>`).join('')}</tbody></table></div>` : ''}`;
+      } else {
+        const r = await api('boards_nonprofit', {params: {id}});
+        box.innerHTML = `<h3 class="h2">${owNm(r.name)}</h3><p class="muted small">${r.ein ? 'EIN ' + esc(r.ein) + ' · <a href="https://projects.propublica.org/nonprofits/organizations/' + esc(r.ein) + '" target="_blank" rel="noopener">990s on ProPublica</a>' : 'State corporate filing only'}</p>
+          <div class="tw"><table class="at" data-tt="off"><thead><tr><th>Person</th><th>Title</th><th>Year</th><th>Source</th><th class="num">Pay</th><th>Also</th></tr></thead><tbody>${r.seats.map(s => `<tr${s.current ? '' : ' class="muted"'}><td><a href="#" data-board="${esc(s.board_key)}">${owNm(s.display_name)}</a>${s.board ? '' : ' <span class="pill">staff or former</span>'}</td><td class="small">${esc(s.title || '')}</td><td>${esc(s.tax_year || '')}</td><td class="small">${s.source_url ? `<a href="${esc(s.source_url)}" target="_blank" rel="noopener">${esc(bdSrc(s.source))}</a>` : esc(bdSrc(s.source))}</td><td class="num">${pay(s.compensation)}</td><td class="small">${s.n_current > 1 ? fmt(s.n_current) + ' boards' : ''}${s.official_name ? ' · matches ' + esc(s.official_name) : ''}${s.n_donor_businesses ? ' · donor business' : ''}</td></tr>`).join('')}</tbody></table></div>`;
+      }
+      box.scrollIntoView({behavior: 'smooth', block: 'start'});
+    } catch (err) { box.innerHTML = `<div class="banner bad"><div>${esc(err.message)}</div></div>`; }
+  }
+  $('#tab-boards').addEventListener('click', e => {
+    const a = e.target.closest('[data-board],[data-np],[data-doc]'); if (!a) return;
+    e.preventDefault();
+    if (a.dataset.doc) { tab('owners'); owDetail('entity', a.dataset.doc); return; }
+    a.dataset.board ? bdDetail('person', a.dataset.board) : bdDetail('nonprofit', a.dataset.np);
+  });
+  $('#bd-officials').addEventListener('change', async e => {
+    const s = e.target.closest('[data-bdreview]'); if (!s) return;
+    s.disabled = true;
+    try { await api('boards_review', {method: 'POST', body: {board_key: s.dataset.bdreview, official_id: s.dataset.official, status: s.value}}); }
+    catch (err) { alert(err.message); }
+    s.disabled = false;
+  });
+  $('#bd-status').addEventListener('change', loadBoards);
+  let bdTimer;
+  $('#bd-q').addEventListener('input', () => {
+    clearTimeout(bdTimer);
+    bdTimer = setTimeout(async () => {
+      const q = $('#bd-q').value.trim(); const box = $('#bd-results');
+      if (q.length < 3) { box.innerHTML = ''; return; }
+      try {
+        const r = await api('boards_search', {params: {q}});
+        box.innerHTML = `<div class="tw"><table class="at" data-tt="off"><tbody>${r.people.map(p => `<tr><td>Person</td><td><a href="#" data-board="${esc(p.board_key)}">${owNm(p.display_name)}</a></td><td class="small muted">${p.official_name ? 'matches ' + esc(p.official_name) : ''}</td><td class="num small">${fmt(p.n_current)} current boards</td></tr>`).join('')}${r.nonprofits.map(n => `<tr><td>Nonprofit</td><td><a href="#" data-np="${esc(n.nonprofit_id)}">${owNm(n.nonprofit_name)}</a></td><td class="small muted">${esc(n.ein || '')}</td><td class="num small">${n.people ? fmt(n.people) + ' people listed' : ''}</td></tr>`).join('')}</tbody></table></div>`
+          + (r.people.length || r.nonprofits.length ? '' : '<p class="muted small">No matches.</p>');
+      } catch (err) { box.innerHTML = `<p class="small">${esc(err.message)}</p>`; }
+    }, 300);
+  });
   // ---------- business ties: officials matched to Sunbiz (private careers schema, api/_careers.js) ----------
   const BT_LINK = {shared_business: 'Same business as another official', own_business_gift: 'Business gave to a campaign',
     partner_business_gift: 'Donor shares an officer with their business', public_payee: 'Business paid by a government'};

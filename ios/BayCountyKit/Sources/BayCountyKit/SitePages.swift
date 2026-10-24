@@ -29,6 +29,7 @@ public enum SitePages {
         "/developers": .web("API documentation for developers"),
         "/records-request": .web("records request writer"),
         "/connections/shared-owners": .web("confirmed shared-owner groups, read live from /api/v1/datasets/shared-owner-groups"),
+        "/connections/nonprofits": .dataset("nonprofits"),
         "/connections/business-ties": .web("confirmed official-to-business matches, read live from /api/v1/datasets/official-businesses and official-business-links"),
         "/correspondence": .web("published letters to officials, read live from /api/v1/correspondence"),
         "/alerts": .web("email alert sign-up; push alerts are planned for the app"),

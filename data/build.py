@@ -211,4 +211,5 @@ subprocess.run([sys.executable, os.path.join('entities', 'build_entities.py')], 
 subprocess.run([sys.executable, os.path.join('campaign', 'build_vendor_matches.py')], check=True)
 subprocess.run([sys.executable, os.path.join('campaign', 'build_contract_votes.py')], check=True)
 subprocess.run([sys.executable, os.path.join('sunbiz', 'build_sunbiz.py'), 'bay'], check=True)  # business donors -> Sunbiz entities
+subprocess.run([sys.executable, os.path.join('nonprofits', 'build_nonprofits.py'), 'bay'], check=True)  # nonprofits, their money and boards (names stay private)
 subprocess.run([sys.executable, os.path.join('surtax', 'match_schedule.py')], check=True)

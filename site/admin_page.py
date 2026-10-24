@@ -181,6 +181,7 @@ def admin_page(out_dir):
       <button role="tab" data-tab="compose" aria-selected="false">Write to officials</button>
       <button role="tab" data-tab="correspondence" aria-selected="false">Correspondence</button>
       <button role="tab" data-tab="owners" aria-selected="false">Business owners</button>
+      <button role="tab" data-tab="boards" aria-selected="false">Nonprofit boards</button>
       <button role="tab" data-tab="ties" aria-selected="false">Business ties</button>
     </div>
 
@@ -395,6 +396,27 @@ def admin_page(out_dir):
       </div>
       <div id="ow-results"></div>
       <div id="ow-detail"></div>
+    </section>
+
+    <section id="tab-boards" role="tabpanel" hidden>
+      <div class="banner"><div><b>Board members are public; the links on this tab are not.</b> <span class="small muted">Officers, directors and trustees of every county nonprofit, from IRS 990 returns (2019 on), 990-N postcards and state corporate filings (Sunbiz), grouped into people by name, are listed on the public Nonprofits page. The official name matches and Sunbiz business links here are leads: check the filing before confirming. Only officials you mark confirmed are tagged as officials on the public page.</span></div></div>
+      <div class="tiles" id="bd-tiles"></div>
+      <div class="row" style="gap:8px;flex-wrap:wrap;margin:18px 0 8px">
+        <h2 class="h2 grow" style="margin:0">Officials, department leaders and candidates on nonprofit boards</h2>
+        <select class="sel" id="bd-status" aria-label="Review status"><option value="">Any review status</option><option value="unreviewed">Unreviewed</option><option value="confirmed">Confirmed</option><option value="rejected">Rejected</option></select>
+      </div>
+      <div class="tw"><table class="at" id="bd-officials" data-tt="off"><thead><tr><th>Official</th><th>Board member as filed</th><th>Boards</th><th class="num">Same name in Sunbiz</th><th>Review</th></tr></thead><tbody></tbody></table></div>
+      <div class="row" style="gap:8px;flex-wrap:wrap;margin:24px 0 8px"><h2 class="h2 grow" style="margin:0">People on the most boards</h2></div>
+      <div class="tw"><table class="at" id="bd-interlocks" data-tt="off"><thead><tr><th>Person</th><th class="num">Current boards (not HOAs)</th><th>Boards</th><th>Also</th></tr></thead><tbody></tbody></table></div>
+      <div class="row" style="gap:8px;flex-wrap:wrap;margin:24px 0 8px"><h2 class="h2 grow" style="margin:0">Board members who run businesses that gave to campaigns</h2></div>
+      <p class="muted small" style="margin:0 0 8px">Matched by name to Sunbiz officers. "Same person" means the Sunbiz officer with that name and address is also on the nonprofit's own state filing; "same name" is a name match only, so check it.</p>
+      <div class="tw"><table class="at" id="bd-donors" data-tt="off"><thead><tr><th>Person</th><th>Boards</th><th>Businesses that gave</th><th class="num">Gifts</th></tr></thead><tbody></tbody></table></div>
+      <div class="row" style="gap:8px;flex-wrap:wrap;margin:24px 0 8px">
+        <h2 class="h2 grow" style="margin:0">Look up a person or nonprofit</h2>
+        <input class="sel" id="bd-q" type="search" placeholder="Name, nonprofit name or EIN" aria-label="Search" style="min-width:320px">
+      </div>
+      <div id="bd-results"></div>
+      <div id="bd-detail"></div>
     </section>
   </div>
 </div>
