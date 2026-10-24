@@ -46,7 +46,7 @@ const PAGES = {
 };
 // Page families: each government's profile page.
 // a government's page carries the dashboards' records for that government (gov.js narrows them by city and year)
-const PREFIXES = {'/governments/': {datasets: ['government-profiles', 'budget-detail', 'officials-pay', 'votes', 'meetings', 'contracts', 'cra-payments',
+const PREFIXES = {'/governments/': {datasets: ['government-profiles', 'government-years', 'budget-detail', 'officials-pay', 'votes', 'meetings', 'contracts', 'cra-payments',
   'accountability-projects', 'sales-tax-projects', 'fema-michael-projects', 'savings-opportunities', 'debt', 'audit-findings'], endpoints: ['/governments/{slug}']}};
 
 function sourceFor(path) {

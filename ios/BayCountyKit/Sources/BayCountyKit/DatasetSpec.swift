@@ -52,6 +52,8 @@ public struct DatasetSpec: Sendable {
         // Where it goes
         "budget-detail": .init(.whereItGoes, "chart.pie", title: ["name"], subtitle: ["government", "level"], amount: ["amount"],
                                filters: ["government", "level"], page: "public-money/budget-explorer"),
+        "government-years": .init(.whereItGoes, "calendar", title: ["government"], subtitle: ["fy", "budget_status"], detail: "budget_note",
+                                  amount: ["budget_total"], filters: ["government", "fy"], page: "governments"),
         "budget-per-resident": .init(.whereItGoes, "person.2", title: ["service"], subtitle: ["government"],
                                      amount: ["per_resident"], filters: ["government", "service"], page: "compare"),
         "cra-payments": .init(.whereItGoes, "building.2", title: ["purpose"], subtitle: ["cra", "date_or_fy"], detail: "payee",

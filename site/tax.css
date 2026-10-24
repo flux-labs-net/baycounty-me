@@ -674,3 +674,5 @@ a.kpi.gx-k .v{color:var(--ink)}
 .gx-t td.nowrap{white-space:nowrap}
 .gx .gx-more{margin-top:8px}
 @media (max-width:640px){.gx-jump{flex-basis:100%;order:9}}
+.gov-page .gx-top-h{font:500 .8rem/1.3 var(--f-body, inherit);margin:0 0 6px;letter-spacing:.01em}
+.gov-page .kpi-none .v{color:var(--muted);font-size:1.1rem}

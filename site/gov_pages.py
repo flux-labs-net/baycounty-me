@@ -42,8 +42,54 @@ def hbars(rows, color='var(--s1)'):
     return '<div class="hbars">' + ''.join(f'<div class="hb"><span class="hb-n">{e(k)}</span><span class="hb-track"><span class="hb-bar" style="width:{v/mx*100:.1f}%;background:{color}"></span></span><span class="hb-v">{money(v)}</span></div>' for k, v in sorted(rows, key=lambda kv: -kv[1])) + '</div>'
 
 
-def kpi(label, value, sub=''):
-    return f'<div class="kpi"><span class="eyebrow">{e(label)}</span><span class="v">{value}</span><span class="s">{sub}</span></div>'
+def kpi(label, value, sub='', static=False, none=False):
+    cls = 'kpi' + (' kpi-none' if none else '')
+    return f'<div class="{cls}"{" data-static" if static else ""}><span class="eyebrow">{e(label)}</span><span class="v">{value}</span><span class="s">{sub}</span></div>'
+
+
+def year_cards(key, rows, fy):
+    """The top cards for fiscal year fy, from the government-years rows. Mirrors topCards() in gov.js, which redraws
+    them when the Year picker changes. A card whose figure has no record that year says so, never another year's number."""
+    has = lambda k: any(r.get(k) is not None for r in rows)
+    by = {r['fiscal_year']: r for r in rows}
+    if fy not in by and rows:
+        fy = max(by)
+    r, prev = by.get(fy) or {}, by.get(fy - 1) or {}
+    none = lambda label, why: kpi(label, 'No data', why, none=True)
+    out = []
+    if key != 'schools' and has('population'):
+        out.append(kpi('Residents', f"{r['population']:,}", f"FY{fy} state figure" if r.get('population_year') == fy else f"{r.get('population_year')} state estimate")
+                   if r.get('population') else none('Residents', f'No count for FY{fy}'))
+    if r.get('budget_total'):
+        bits = [f"FY{fy} · {e(r.get('budget_status') or 'adopted')}"]
+        if r.get('budget_per_resident'):
+            bits.append(f"{usd(r['budget_per_resident'])} per resident")
+        if prev.get('budget_total'):
+            ch = (r['budget_total'] / prev['budget_total'] - 1) * 100
+            bits.append(f"{'up' if ch >= 0 else 'down'} {abs(ch):.0f}% from FY{fy - 1}")
+        out.append(kpi('Budget', money(r['budget_total']), ' · '.join(bits) + ' ' + src(r.get('budget_source_url'))))
+    elif r.get('actual_spending'):
+        out.append(kpi('Spent (audited)', money(r['actual_spending']), f'FY{fy} actual spending; no adopted budget on file ' + src(r.get('actuals_source_url'))))
+    elif has('budget_total') or has('actual_spending'):
+        out.append(none('Budget', f'No FY{fy} budget on file'))
+    if has('millage'):
+        lbl = 'School tax rate' if key == 'schools' else 'Property tax rate'
+        m = r.get('millage')
+        if m is None:
+            out.append(none(lbl, f'No FY{fy} rate on file'))
+        elif not m:
+            out.append(kpi(lbl, 'None', 'No city property tax'))
+        else:
+            out.append(kpi(lbl, f'{m:g} mills', f'${m * 100:,.0f} per $100,000 of taxable value' + (f" · tax year {r['tax_year']}" if r.get('tax_year') else '')))
+    if has('debt_total'):
+        if r.get('debt_total'):
+            per = f"{usd(r['debt_total'] / r['population'])} per resident · " if r.get('population') and key != 'schools' else ''
+            out.append(kpi('Debt', money(r['debt_total']), f'{per}audited, end of FY{fy} ' + src(r.get('debt_source_url'))))
+        else:
+            out.append(none('Debt', 'Audited total on file for ' + ', '.join(f"FY{x['fiscal_year']}" for x in rows if x.get('debt_total')) + ' only'))
+    if has('employees_fte'):
+        out.append(kpi('Employees', f"{r['employees_fte']:,g}", f'FY{fy} budget, staff positions') if r.get('employees_fte') else none('Employees', f'No FY{fy} count on file'))
+    return out, fy, r.get('period') or ''
 
 
 def gov_page(key):
@@ -55,27 +101,19 @@ def gov_page(key):
     pr = p.get('per_resident') or {}
     off = p.get('officials') or {}
     mills = b.get('mills')
-    # header facts
+    # top cards: this government's figures for one fiscal year (government-years dataset; gov.js redraws them for the year in the bar)
+    from page_datasets import government_years
+    gy = [r for r in government_years() if r['gov_id'] == key]
+    fy_start = 7 if key == 'schools' else 10
+    today = date.today()
+    cur_fy = today.year + 1 if today.month >= fy_start else today.year
+    kp, fy_shown, period = year_cards(key, gy, cur_fy)
+    static = []
     if key == 'schools':
-        import json, os
         st = json.load(open(os.path.join(os.path.dirname(__file__), '..', 'data', 'salaries', 'schools.json'))).get('stats') or {}
         n = st.get('total_employees_approx')
-        kp = [kpi('Employees', f'About {n:,}' if n else '—', 'per the superintendent, Oct 2025' if n else '')]
-    else:
-        kp = [kpi('Residents', f'{pop:,}' if pop else '—', '2025 state estimate' if pop else '')]
-    if b.get('total'):
-        kp.append(kpi('Budget', money(b['total']), f'{e(b.get("status") or "FY2026")}' + (f' · {money(pr["budget"], 0) if pr.get("budget", 0) >= 1e6 else usd(pr.get("budget"))} per resident' if pr.get('budget') else '')))
-    nx = b.get('next') or {}
-    if nx.get('total'):
-        kp.append(kpi('New budget', money(nx['total']), f"{nx['fy']} · " + ('adopted Sept 2026' if nx.get('adopted') else 'final hearing held')))
-    if mills is not None and key != 'schools':
-        kp.append(kpi('Property tax rate', f'{mills:g} mills' if mills else 'None', f'${mills*100:,.0f} per $100,000 of taxable value' if mills else 'No city property tax'))
-    elif mills:
-        kp.append(kpi('School tax rate', f'{mills:g} mills', 'most of it set by the state'))
-    if p.get('debt'):
-        kp.append(kpi('Debt', money(p['debt']['total']), (usd(pr['debt']) + ' per resident · ' if pr.get('debt') else '') + e((p['debt'].get('fy') or '')[:6])))
-    if off.get('employees'):
-        kp.append(kpi('Employees', f'{off["employees"]:,g}', 'full-time equivalent'))
+        if n:
+            static.append(kpi('Employees', f'About {n:,}', 'per the superintendent, Oct 2025', static=True))
     secs = []
     # who's in charge
     if off.get('seats'):
@@ -127,7 +165,7 @@ def gov_page(key):
           {f'<ol class="findings">{fl}</ol>' if fl else '<p>No findings in the latest audit.</p>'}
           <p class="src-line">{src(last.get("source_url"), last["fy"] + " audit")} · <a href="/public-money/audits">All audit findings</a></p></section>''')
     if p.get('utility_bill'):
-        u = p['utility_bill']; kp.append(kpi('Typical utility bill', f'${u["total"]:,.2f}', f'a month at 5,000 gallons{"" if u.get("garbage") else ", garbage not included"} · <a href="/public-money/fees-and-bills?gov={key}">compare</a>'))
+        u = p['utility_bill']; static.append(kpi('Typical utility bill', f'${u["total"]:,.2f}', f'a month at 5,000 gallons at today\'s rates{"" if u.get("garbage") else ", garbage not included"} · <a href="/public-money/fees-and-bills?gov={key}">compare</a>', static=True))
     # meetings
     if p.get('meetings'):
         up = [x for x in p['meetings'] if not x.get('past')][:5]
@@ -153,7 +191,7 @@ def gov_page(key):
     nav = ''.join(f'<a href="#{i}">{t}</a>' for i, t in labels if f'id="{i}"' in body)
     glance = ('<section class="tx-sec gx-glance" hidden><div class="sec-hd"><h2 id="year">At a glance</h2><span class="muted" id="gxGlanceH"></span></div>'
               '<div class="kpis" id="gxGlance"></div><p class="muted small" data-gx-loading>Loading this government\'s records…</p></section>')
-    cfg = {'key': key, 'short': p['short'], 'cra': cra or '', 'craName': CRA_NAME.get(cra, '') if cra else ''}
+    cfg = {'key': key, 'short': p['short'], 'cra': cra or '', 'craName': CRA_NAME.get(cra, '') if cra else '', 'fyStart': fy_start}
     year = '<label class="sc-f sc-year" data-scope><span>Year</span><select id="gxYear" aria-label="Year"><option value="all">All years</option></select></label>'
     bar = city_bar(None, fixed=key, extra=f'{year}<nav class="gx-jump" aria-label="On this page">{nav}</nav>')
     lede = g.get('blurb') or f'{e(p["name"])}: who runs it, what it spends and owes, how its commission votes, and what the auditors found, all from public records.'
@@ -161,7 +199,8 @@ def gov_page(key):
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow"><a href="/governments">Governments</a> · {e("County" if key == "county" else "Schools" if key == "schools" else "City")}</span><h1>{e(p["short"])}</h1>
     <p class="lede">{e(lede)}</p></div>{PDF}</header>
   {bar}
-  <div class="kpis">{"".join(kp)}</div>
+  <section class="gx-top" aria-labelledby="gxTopH"><h2 class="gx-top-h muted" id="gxTopH">Fiscal year {fy_shown}{f" · {e(period)}" if period else ""}</h2>
+  <div class="kpis" id="gxTop">{"".join(kp + static)}</div>{'' if gy else '<p class="muted small">No yearly figures on file for this government yet.</p>'}</section>
   {glance}
   {body}
 </div>

@@ -137,7 +137,7 @@ function openapi(catalog) {
         responses: {200: {description: '{data: [...], meta: {total, limit, offset, next}}'}, 404: {description: 'Unknown dataset'}}}},
       '/datasets/{id}/schema': {get: {operationId: 'datasetSchema', summary: 'Columns and types for one dataset', parameters: [{name: 'id', in: 'path', required: true, schema: {type: 'string', enum: ids}}], responses: {200: {description: 'Schema'}}}},
       '/governments': {get: {operationId: 'listGovernments', summary: 'Profile of every local government', responses: {200: {description: 'Profiles'}}}},
-      '/governments/{slug}': {get: {operationId: 'getGovernment', summary: 'One government profile', parameters: [{name: 'slug', in: 'path', required: true, schema: {type: 'string', example: 'lynn-haven'}}], responses: {200: {description: 'Profile'}, 404: {description: 'Unknown government'}}}},
+      '/governments/{slug}': {get: {operationId: 'getGovernment', summary: 'One government profile, with its budget, tax rate, audited actuals, residents, debt and staff for each fiscal year on record (years)', parameters: [{name: 'slug', in: 'path', required: true, schema: {type: 'string', example: 'lynn-haven'}}], responses: {200: {description: 'Profile'}, 404: {description: 'Unknown government'}}}},
       '/status': {get: {operationId: 'status', summary: 'Rows per dataset, last database sync and load errors', responses: {200: {description: '{database, last_sync, errors: [...], datasets: [{id, rows_published, rows_in_database, last_ingest, error}]}'}}}},
       '/changes': {get: {operationId: 'changes', summary: 'Records added to the database since a time',
         description: 'Uses each record\'s created_at (when the database first saw it). An edited record counts as new; removed records are not listed.',
@@ -226,6 +226,11 @@ module.exports = async (req, res) => {
       const withSlug = rows.map(r => ({slug: (r.page || '').split('/').pop(), ...r}));
       if (parts.length === 1) return res.status(200).json({data: withSlug});
       const g = withSlug.find(r => r.slug === parts[1]);
+      if (g) {  // the profile plus its figures for every fiscal year on record (the page's top cards, by year)
+        const gy = catalog.datasets.find(d => d.id === 'government-years');
+        const all = gy ? (await datasetRows(req, gy)).rows : await load(req, '/downloads/government-years.json').catch(() => []);
+        g.years = (all || []).filter(r => r.gov_id === g.gov_id).sort((a, b) => a.fiscal_year - b.fiscal_year);
+      }
       return g ? res.status(200).json({data: g}) : res.status(404).json({error: `Unknown government "${parts[1]}".`, governments: withSlug.map(r => r.slug)});
     }
     if (parts[0] === 'pages') {
