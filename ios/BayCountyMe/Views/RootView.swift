@@ -8,10 +8,10 @@ struct RootView: View {
         @Bindable var store = store
         TabView(selection: $store.tab) {
             HomeView()
-                .tabItem { Label("Home", systemImage: "house") }
+                .tabItem { Label("Today", systemImage: "house") }
                 .tag(AppStore.Tab.home)
             GovernmentsView()
-                .tabItem { Label("Governments", systemImage: "building.columns") }
+                .tabItem { Label("Places", systemImage: "mappin.and.ellipse") }
                 .tag(AppStore.Tab.governments)
             MoneyView()
                 .tabItem { Label("Money", systemImage: "dollarsign.circle") }
@@ -19,9 +19,6 @@ struct RootView: View {
             MeetingsView()
                 .tabItem { Label("Meetings", systemImage: "calendar") }
                 .tag(AppStore.Tab.meetings)
-            SearchView()
-                .tabItem { Label("Search", systemImage: "magnifyingglass") }
-                .tag(AppStore.Tab.search)
         }
         .sheet(item: $store.presentedPage) { page in
             SafariView(url: page.url).ignoresSafeArea()

@@ -6,7 +6,8 @@ import BayCountyKit
 @MainActor
 @Observable
 final class AppStore {
-    enum Tab: Hashable { case home, governments, money, meetings, search }
+    /// Today, Places, Money and Meetings. Search opens from the field on Today.
+    enum Tab: Hashable { case home, governments, money, meetings }
 
     let client = BayCountyClient(seedBundle: .main)
     let gis = GISClient()
