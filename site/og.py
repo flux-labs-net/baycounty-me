@@ -45,40 +45,130 @@ def _map_svg():
             f'<path class="county" d="{path(polys)}"/><g class="city">{cities}</g></svg>')
 
 
-def _card(eyebrow, title, stat, label, desc, mapsvg, logo):
-    t = html.escape(title)
-    size = 66 if len(title) <= 26 else 58 if len(title) <= 40 else 50
-    stat_html = (f'<div class="stat"><b>{html.escape(stat)}</b><span>{html.escape(label)}</span></div>' if stat
-                 else f'<p class="desc">{html.escape(desc)}</p>')
-    return f'''<!doctype html><html><head><meta charset="utf-8"><style>
+TONE = {'gov': 'Government', 'person': 'Official', 'vendor': 'Vendor', 'money': 'Public money', 'page': 'BayCounty.me'}
+
+
+def _fit(t, sizes):
+    for n, px in sizes:
+        if len(t) <= n:
+            return px
+    return sizes[-1][1]
+
+
+def _card(c, mapsvg):
+    """Direction A: deep navy, one big amber figure, faint county outline, four-color strip."""
+    e = html.escape
+    stat = c.get('stat') or ''
+    ss = _fit(stat, [(6, 168), (9, 140), (13, 110), (99, 84)])
+    title = c['title']
+    ts = _fit(title, [(18, 76), (28, 60), (44, 50), (70, 44), (999, 38)]) if stat else _fit(title, [(28, 76), (44, 64), (70, 54), (999, 46)])
+    body = (f'<div class="stat"><b class="num">{e(stat)}</b><span>{e(c.get("label") or "")}</span></div>' if stat
+            else f'<p class="desc">{e(c.get("desc") or "")}</p>')
+    return f"""<!doctype html><html><head><meta charset="utf-8"><style>
 @font-face{{font-family:P;src:url(file://{FONT}/Poppins-Regular.ttf);font-weight:400}}
 @font-face{{font-family:P;src:url(file://{FONT}/Poppins-Medium.ttf);font-weight:500}}
-@font-face{{font-family:P;src:url(file://{FONT}/Poppins-Bold.ttf);font-weight:600}}
+@font-face{{font-family:P;src:url(file://{FONT}/Poppins-SemiBold.ttf);font-weight:600}}
+@font-face{{font-family:P;src:url(file://{FONT}/Poppins-Bold.ttf);font-weight:700}}
 *{{box-sizing:border-box;margin:0}}
-body{{width:{W}px;height:{H}px;overflow:hidden;background:#F6F8FB;font-family:P,sans-serif;color:#161B24;position:relative}}
-.bar{{position:absolute;left:0;top:0;bottom:0;width:14px;background:#1E3A76}}
-.l{{position:absolute;left:78px;top:62px;bottom:100px;width:640px;display:flex;flex-direction:column}}
-.brand{{display:flex;align-items:center;gap:12px;font-weight:600;font-size:30px;letter-spacing:-.01em}}
-.brand i{{font-style:normal;color:#E5564A}}
-.eb{{margin-top:50px;font-size:20px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:#3F6FB0}}
-h1{{margin-top:12px;font-size:{size}px;line-height:1.1;font-weight:600;letter-spacing:-.025em;color:#1E3A76}}
-.stat{{margin-top:auto;display:flex;flex-direction:column;gap:2px}}
-.stat b{{font-size:54px;font-weight:600;letter-spacing:-.02em;color:#161B24;line-height:1.1}}
-.stat span{{font-size:22px;color:#5A6372}}
-.desc{{margin-top:auto;font-size:25px;line-height:1.45;color:#5A6372;max-width:620px}}
-.r{{position:absolute;right:70px;top:62px}}
-.r svg{{display:block}}
-.county{{fill:#DCE6F3;stroke:#3F6FB0;stroke-width:2.2;stroke-linejoin:round}}
-.city path{{fill:#3F6FB0;opacity:.55}}
-.foot{{position:absolute;left:78px;right:70px;bottom:0;height:72px;border-top:1px solid #E1E6ED;display:flex;justify-content:space-between;align-items:center;font-size:18px;color:#8A93A1}}
-.foot img{{height:22px}}
-.foot span b{{color:#5A6372;font-weight:500}}
-</style></head><body><div class="bar"></div>
-<div class="l"><div class="brand"><svg width="30" height="30" viewBox="0 0 24 24"><path d="M12 2C7.6 2 4 5.5 4 9.9 4 15.6 12 22 12 22s8-6.4 8-12.1C20 5.5 16.4 2 12 2z" fill="#3F6FB0"/><circle cx="12" cy="10" r="3.2" fill="#fff"/></svg><span>BayCounty<i>.me</i></span></div>
-<div class="eb">{html.escape(eyebrow)}</div><h1>{t}</h1>{stat_html}</div>
-<div class="r">{mapsvg}</div>
-<div class="foot"><span><b>Public records, in plain view</b> · baycounty.me</span>{f'<img src="{logo}">' if logo else ''}</div>
-</body></html>'''
+body{{width:{W}px;height:{H}px;overflow:hidden;background:#14295A;color:#fff;font-family:P,sans-serif;position:relative;-webkit-font-smoothing:antialiased}}
+.glow{{position:absolute;inset:0;background:radial-gradient(900px 500px at 85% 20%,#24488F 0%,transparent 60%)}}
+.map{{position:absolute;right:-30px;top:60px;opacity:.13;transform:scale(1.35);transform-origin:top right}}
+.map .county{{fill:#fff;stroke:none}} .map .city path{{fill:#14295A}}
+.in{{position:absolute;inset:56px 72px 0 72px;display:flex;flex-direction:column}}
+.top{{display:flex;justify-content:space-between;align-items:center;gap:24px}}
+.wm{{display:flex;align-items:center;gap:10px;font-weight:700;font-size:30px;letter-spacing:-.01em;flex:none}} .wm i{{font-style:normal;color:#E5564A}}
+.chip{{font-size:19px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:#14295A;background:#E8A33D;padding:8px 16px;border-radius:999px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:640px}}
+h1{{margin-top:44px;font-size:{ts}px;line-height:1.1;font-weight:600;letter-spacing:-.02em;max-width:{'900' if stat else '960'}px;text-wrap:balance}}
+.sub{{margin-top:14px;font-size:28px;line-height:1.3;font-weight:500;color:#fff;opacity:.9;max-width:900px;text-wrap:balance;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}}
+.stat{{margin-top:auto;margin-bottom:58px}}
+.stat b{{display:block;font-size:{ss}px;line-height:.95;font-weight:700;letter-spacing:-.035em;color:#E8A33D;font-variant-numeric:tabular-nums;white-space:nowrap}}
+.stat span{{display:block;margin-top:16px;font-size:26px;line-height:1.3;color:#C9D6EE;max-width:820px}}
+.desc{{margin-top:auto;margin-bottom:64px;font-size:30px;line-height:1.4;color:#C9D6EE;max-width:820px;text-wrap:pretty}}
+.bar{{position:absolute;left:0;right:0;bottom:0;height:12px;display:flex}} .bar i{{flex:1}}
+</style></head><body><div class="glow"></div><div class="map">{mapsvg}</div>
+<div class="in"><div class="top"><div class="wm"><svg width="30" height="30" viewBox="0 0 24 24"><path d="M12 2C7.6 2 4 5.5 4 9.9 4 15.6 12 22 12 22s8-6.4 8-12.1C20 5.5 16.4 2 12 2z" fill="#fff"/><circle cx="12" cy="10" r="3.2" fill="#14295A"/></svg><span>BayCounty<i>.me</i></span></div><div class="chip">{e(c['eyebrow'])}</div></div>
+<h1>{e(title)}</h1>{f'<p class="sub">{e(c["sub"])}</p>' if c.get('sub') else ''}{body}</div>
+<div class="bar"><i style="background:#E5564A"></i><i style="background:#E8A33D"></i><i style="background:#1F8A7A"></i><i style="background:#3F6FB0"></i></div>
+</body></html>"""
+
+
+def _money(n):
+    return f'${n/1e9:,.2f}B' if n >= 1e9 else f'${n/1e6:,.1f}M' if n >= 1e6 else f'${n/1e3:,.0f}K' if n >= 1e3 else f'${n:,.0f}'
+
+
+def _short(desc, n=150):
+    return desc if len(desc) <= n else desc[:desc.rfind(' ', 0, n - 3)] + '…'
+
+
+def gov_cards():
+    """Government profiles: the adopted budget, else debt, else population."""
+    from govs import GOVS, profile
+    out = {}
+    for g in GOVS:
+        p = profile(g['key'])
+        b = p.get('budget') or {}
+        pr = (p.get('per_resident') or {}).get('budget')
+        debt = (p.get('debt') or {}).get('total')
+        if b.get('total'):
+            stat, label = _money(b['total']), 'FY2026 budget' + (f', about ${pr:,.0f} per resident' if pr else '')
+        elif debt:
+            stat, label = _money(debt), 'owed in bonds, loans and other debt'
+        else:
+            stat, label = f"{p['population']:,}", 'residents'
+        out[f"/governments/{g['slug']}"] = dict(kind='gov', eyebrow=g['short'] if g['kind'] != 'city' else f"City of {g['short']}",
+                                                 title=f"{g['short']}: budget, taxes, debt and votes", stat=stat, label=label)
+    return out
+
+
+def person_cards():
+    """Officials and candidates: recorded votes, else campaign money, else pay, else just their role."""
+    import entity_graph as EG
+    import people_pages as PP
+    G = EG.build()
+    mv, fin, cand = PP._by_person('member-votes'), PP._by_person('campaign-finance'), PP._by_person('candidates-2026')
+    pay = {k: PP._by_person('officials-pay').get(k, []) + PP._by_person('salary-leaders').get(k, []) for k in [p['id'] for p in PP._people()]}
+    out = {}
+    for p in PP._people():
+        pid = p['id']
+        x = G.ents['person:' + pid]
+        votes = mv.get(pid, [])
+        raised = next((r['total_raised'] for r in cand.get(pid, []) + fin.get(pid, []) if r.get('total_raised')), None)
+        sal = next((r.get('annual') or r.get('salary') for r in pay[pid] if (r.get('annual') or r.get('salary'))), None)
+        if len(votes) >= 3:
+            no = sum(1 for r in votes if str(r.get('vote')).lower() == 'no')
+            stat, label = f'{len(votes):,} votes', 'recorded on budgets, taxes and contracts' + (f', {no} of them no' if no else ', every one shown')
+        elif raised:
+            stat, label = _money(raised), 'raised in their most recent campaign on file'
+        elif sal:
+            stat, label = _money(sal), 'annual pay, latest on file'
+        else:
+            stat, label = '', ''
+        role = x.get('subtitle') or ''
+        chip = '2026 candidate' if role.lower().startswith('2026 candidate') else 'Official'
+        out[f'/people/{pid}'] = dict(kind='person', eyebrow=chip, title=x['name'], sub=role, stat=stat, label=label,
+                                     desc=('Campaign money, platform and connections, from public records.' if chip != 'Official'
+                                           else 'Where they serve, campaign gifts from businesses and groups, recorded votes and connections.'))
+    return out
+
+
+def vendor_cards():
+    """Vendors: contracts awarded, else payments found."""
+    import vendor_pages as VP
+    from govs import BY_KEY
+    out = {}
+    for vid, p in VP.build().items():
+        n = len(p.get('gk') or p.get('govs') or [])
+        where = f'{n} Bay County governments' if n > 1 else (BY_KEY[p['gk'][0]]['short'] if p.get('gk') and p['gk'][0] in BY_KEY else 'Bay County governments')
+        nc = p['cnt'].get('contract', 0)
+        if p.get('awarded'):
+            stat, label = _money(p['awarded']), f"in {nc} contract{'s' if nc != 1 else ''} from {where}"
+        elif p.get('paid'):
+            stat, label = _money(p['paid']), f'in payments from {where}'
+        else:
+            stat, label = '', ''
+        out[f'{VP.BASE}/{vid}'] = dict(kind='vendor', eyebrow='Vendor', title=p['v']['name'], stat=stat, label=label,
+                                       desc='Contracts, payments, campaign gifts and how officials voted on its contracts.')
+    return out
 
 
 def cards_for(pages, MENU):
@@ -89,15 +179,22 @@ def cards_for(pages, MENU):
     s = stats()
     tp = {t[0]: t for t in topics(s)}
     from site_menu import links
-    grp = {i['href']: f'{m["label"]} · {i["label"]}' for m in MENU for i in links(m)}
+    grp = {i['href']: i['label'] for m in MENU for i in links(m)}
     v = json.load(open(os.path.join(ROOT, 'data', 'votes', 'votes.json')))
+    paths = {p for p, *_ in pages}
+    extra = {}
+    for f in (gov_cards, person_cards, vendor_cards):
+        extra.update({k: c for k, c in f().items() if k in paths})
     out = {}
     for path, title, desc, _ in pages:
+        if path in extra:
+            out[path] = extra[path]
+            continue
         t = tp.get(path)
         stat, label = (t[4], t[5]) if t else ('', '')
         head = t[2] if t else title
         if path == '/':
-            head, stat, label = 'Local government, in plain view.', f'${s["lv_tot"]/1e6:,.0f}M', 'in property tax levied by Bay County governments, FY2026'
+            head, stat, label = 'Your money. Their decisions. Follow it.', f'${s["lv_tot"]/1e6:,.1f}M', 'in property tax levied by Bay County governments, FY2026'
         elif path == '/who-runs-bay-county':
             head, stat, label = 'Who runs Bay County', '9 governments', 'every elected seat, appointed manager and top salary'
         elif path == '/public-money/votes':
@@ -105,9 +202,19 @@ def cards_for(pages, MENU):
         elif path == '/my-address':
             head = 'What does your address pay, and who represents it?'
         sub = SUBTITLE.get(path)
-        out[path] = dict(eyebrow=grp.get(path, SECTION.get(path, 'BayCounty.me')), title=head, stat=stat, label=label,
-                         desc=sub or (desc if len(desc) < 110 else desc[:desc.rfind(' ', 0, 107)] + '…'))
+        out[path] = dict(kind='money' if path.startswith('/public-money') else 'page', eyebrow=grp.get(path, SECTION.get(path, 'En español' if path.startswith('/es') else 'BayCounty.me')),
+                         title=head, stat=stat, label=label, desc=sub or _short(desc))
     return out
+
+
+def _shrink(fn):
+    """Cut the PNG to a 128-color palette (about a third of the size, no visible change on these flat cards)."""
+    try:
+        from PIL import Image
+    except ImportError:
+        return
+    im = Image.open(fn).convert('RGB')
+    im.quantize(colors=128, method=Image.Quantize.MEDIANCUT, dither=Image.Dither.FLOYDSTEINBERG).save(fn, optimize=True)
 
 
 def build_og(out_dir, pages, menu):
@@ -120,7 +227,7 @@ def build_og(out_dir, pages, menu):
     cards = cards_for(pages, menu)
     todo = {}
     for path, c in cards.items():
-        h = hashlib.sha1(json.dumps(c, sort_keys=True).encode() + b'v5').hexdigest()[:12]
+        h = hashlib.sha1(json.dumps(c, sort_keys=True).encode() + b'v6').hexdigest()[:12]
         fn = os.path.join(dest, slug(path) + '.png')
         if cache.get(path) != h or not os.path.exists(fn):
             todo[path] = (c, fn, h)
@@ -130,19 +237,17 @@ def build_og(out_dir, pages, menu):
         except ImportError:
             print('og: playwright not installed, keeping existing images'); todo = {}
     if todo:
-        import base64
-        lp = os.path.join(out_dir, 'assets', 'flux-labs.webp')
-        logo = 'data:image/webp;base64,' + base64.b64encode(open(lp, 'rb').read()).decode() if os.path.exists(lp) else ''
         mapsvg = _map_svg()
         tmp = os.path.join(dest, '_card.html')
         with sync_playwright() as p:
             b = p.chromium.launch(); pg = b.new_page(viewport={'width': W, 'height': H})
             for path, (c, fn, h) in todo.items():
-                open(tmp, 'w').write(_card(c['eyebrow'], c['title'], c['stat'], c['label'], c['desc'], mapsvg, logo))
-                pg.goto('file://' + tmp); pg.wait_for_timeout(150)
-                pg.screenshot(path=fn); cache[path] = h
+                open(tmp, 'w').write(_card(c, mapsvg))
+                pg.goto('file://' + tmp); pg.evaluate('document.fonts.ready')
+                pg.screenshot(path=fn); _shrink(fn); cache[path] = h
             b.close()
         os.remove(tmp)
+        cache = {k: v for k, v in cache.items() if k in cards}
         json.dump(cache, open(cache_f, 'w'), indent=0, sort_keys=True)
     icon = os.path.join(dest, 'apple-touch-icon.png')
     if not os.path.exists(icon):
