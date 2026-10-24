@@ -1,0 +1,41 @@
+{
+  "fetched_at": "2026-10-24",
+  "county": "Bay",
+  "counts": {
+    "registrations_checked": 178,
+    "pdfs_found": 178,
+    "pdfs_downloaded": 0,
+    "pdfs_cached": 177,
+    "text_extracted": 134,
+    "ocr": 0,
+    "skipped_no_text_layer": 43,
+    "skipped_download_failed": 1,
+    "no_application_listed": 0,
+    "no_officer_table": 7,
+    "form_fields_read": 6,
+    "people_skipped_removed": 76,
+    "people_skipped_exempt": 14,
+    "people_skipped_blank": 0,
+    "officer_rows": 476,
+    "registrations_with_officers": 127,
+    "feins_found": 127
+  },
+  "unparsed": [
+    "CH82406 (Application, 2026-02-25): no officers kept (no officer table found)",
+    "CH76244 (Application, 2026-08-03): no officers kept (no officer table found)",
+    "CH14238 (Application, 2026-07-08): no officers kept (1 removed, 3 exempt)",
+    "CH58776: application PDF did not download",
+    "CH53885 (Application, 2026-02-26): no officers kept (3 exempt)",
+    "CH79951 (Application, 2026-08-13): no officers kept (no officer table found)",
+    "CH43405 (Application, 2026-04-13): no officers kept (1 exempt)",
+    "CH44594 (Application, 2026-07-06): no officers kept (1 removed, 1 exempt)"
+  ],
+  "errors": [],
+  "seconds_between_requests": 3.0,
+  "notes": [
+    "One PDF per registration: the most recent uploaded Application (or renewal) on Check-A-Charity.",
+    "Only names and titles as filed are kept. Addresses, phones, emails and answers are not stored.",
+    "People marked \"- Removed\" on the application and anyone marked exempt from public records are left out.",
+    "Scanned PDFs with no text layer are skipped (no OCR)."
+  ]
+}

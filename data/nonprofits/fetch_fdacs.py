@@ -8,17 +8,27 @@ Sources (both ASP.NET WebForms pages, fetched with plain HTTP postbacks):
     and when present the professional solicitors / fundraising consultants, branches and uploaded documents.
 
 The public pages do not show FEIN, website, contributions, government grants or officers. Officers and directors
-are only inside the uploaded application PDFs, which this script does not download, so fdacs_officers.csv.gz is
-written with the header only unless a record ever lists people on the page.
+are only inside the uploaded application PDFs. A second step, --officers, downloads each registration's latest
+application PDF (cached in --work, never committed), reads the officers' names and titles and the FEIN, and rewrites
+fdacs_officers.csv.gz and the fein column of fdacs_registrations.csv.gz. Its counts go to fdacs_pdf_log.json.
 
 Street addresses and email addresses are read from the listing but never written.
 
-Usage: python data/nonprofits/fetch_fdacs.py --county bay [--work DIR] [--limit N]
+Usage: python data/nonprofits/fetch_fdacs.py --county bay [--work DIR] [--limit N] [--officers]
 Raw HTML is cached in --work (default: a fixed folder under the system temp dir) so a rerun resumes.
 Writes data/nonprofits/<county>/{fdacs_registrations,fdacs_officers}.csv.gz and fdacs_fetch_log.json.
 """
 import argparse, csv, datetime as dt, gzip, html, http.cookiejar, io, json, os, random, re, sys, tempfile, time
 import urllib.error, urllib.parse, urllib.request
+
+try:
+    import pdfplumber  # only needed for --officers
+except ImportError:
+    pdfplumber = None
+try:
+    import pypdf  # form fields of the fillable application
+except ImportError:
+    pypdf = None
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 BASE = 'https://csapp.fdacs.gov/CSPublicApp'
@@ -53,6 +63,10 @@ class Client:
         self.errors = []
 
     def fetch(self, url, form=None):
+        return self.fetch_raw(url, form)[1].decode('utf-8', 'replace')
+
+    def fetch_raw(self, url, form=None):
+        """(content type, body bytes)."""
         tries = 0
         while True:
             wait = self.delay + random.uniform(0.2, 1.2) - (time.time() - self.last)
@@ -63,7 +77,7 @@ class Client:
             try:
                 data = urllib.parse.urlencode(form).encode() if form is not None else None
                 with self.op.open(url, data, timeout=90) as r:
-                    return r.read().decode('utf-8', 'replace')
+                    return r.headers.get('Content-Type', ''), r.read()
             except (urllib.error.URLError, TimeoutError, ConnectionError) as e:
                 code = getattr(e, 'code', None)
                 tries += 1
@@ -271,6 +285,215 @@ def parse_detail(page, reg):
     return d
 
 
+# ---------- officers from uploaded application PDFs (--officers) ----------
+
+DOC_RE = re.compile(r"__doPostBack\(&#39;([^&]+gvDocuments[^&]+lnkBtn)&#39;,&#39;&#39;\)\">\s*Document ([^<]*?), "
+                    r"received on (\d{1,2}/\d{1,2}/\d{4}) for tracking number \(DTN\): (\d+)\s*</a>")
+PHONE_RE = re.compile(r'^\(?\d{3}\)?[-. ]?\d{3}-\d{4}')
+ADDRESSY_RE = re.compile(r'^\d|@|\bP\.?\s?O\.? Box\b|\b\d{5}(-\d{4})?$', re.I)  # never keep address lines
+SECTION_ENDS = ('Branch offices', 'Professional Solicitors', 'Fundraising Consultants', 'Commercial Co-venturers',
+                'Financial Statement', 'Attached Documents', 'Application Questionnaire', 'Signature')
+
+
+def documents(page):
+    """Uploaded documents on an expanded record: [{target, kind, received, dtn}]."""
+    return [{'target': t, 'kind': k.strip(), 'received': iso(d), 'dtn': n} for t, k, d, n in DOC_RE.findall(page)]
+
+
+def latest_application(docs):
+    apps = [d for d in docs if re.search(r'application|renewal', d['kind'], re.I)]
+    return max(apps, key=lambda d: (d['received'], d['dtn']), default=None)
+
+
+def download_pdf(cl, ch, reg, doc, path):
+    """Post back the document link on the record page. Retries once with a freshly fetched record."""
+    for fresh in (False, True):
+        if fresh:
+            cached = os.path.join(ch.dir, f'{reg}.html')
+            if os.path.exists(cached):
+                os.remove(cached)
+        page = ch.get(reg)
+        target = next((d['target'] for d in documents(page) if d['dtn'] == doc['dtn'] and d['kind'] == doc['kind']
+                       and d['received'] == doc['received']), None)
+        if not target:
+            continue
+        form = hidden(page)
+        form.update({P + 'BusinessNameTb': '', P + 'LicenseTb': reg, P + 'SortDl': 'HONEST_SERVICE_REG_2',
+                     P + 'PagesizeDl': '20', '__EVENTTARGET': target, '__EVENTARGUMENT': ''})
+        ctype, body = cl.fetch_raw(CAC_URL, form)
+        if 'pdf' in ctype.lower() or body[:5] == b'%PDF-':
+            with open(path, 'wb') as f:
+                f.write(body)
+            return True
+    return False
+
+
+def clean_name(name):
+    """Name as filed, minus stray punctuation at either end."""
+    return re.sub(r"^[^\w(]+|[^\w.)]+$", '', re.sub(r'\s+', ' ', name)).strip()
+
+
+def parse_form_fields(path):
+    """(fein, [(name, title)]) from the fillable "small charitable organizations" form. Only the officer name and
+    title fields and the FEI number are read."""
+    if pypdf is None:
+        return '', []
+    try:
+        fields = pypdf.PdfReader(path).get_fields() or {}
+    except Exception:
+        return '', []
+    val = lambda k: str((fields.get(k) or {}).get('/V') or '').strip()
+    fein = val('FEI prefix') + val('FEI number')
+    fein = fein if re.fullmatch(r'\d{9}', fein) else ''
+    people = []
+    for k in fields:
+        m = re.fullmatch(r'Name of (\w+) individual or officer', k)
+        name = re.sub(r'\s+', ' ', val(k)) if m else ''
+        if name and re.search(r'[A-Za-z]', name):
+            people.append((name, val(f'Title of {m.group(1)} individual or officer')))
+    return fein, list(dict.fromkeys((clean_name(n), t) for n, t in people))
+
+
+def pdf_text(path):
+    with pdfplumber.open(path) as pdf:
+        return '\n'.join(pg.extract_text() or '' for pg in pdf.pages)
+
+
+def parse_application(txt):
+    """(fein, [(name, title)], skipped counts) from an application's text. People marked "- Removed" and anyone exempt from public
+    records are left out. Only names and titles are kept."""
+    m = re.search(r'FEIN:\s*(\d{2})-?(\d{7})\b', txt)
+    fein = m.group(1) + m.group(2) if m else ''
+    # Small-organization forms say "Personnel Information", the full form "Owner/Management Information".
+    starts = [j for j in (txt.find('Personnel Information'), txt.find('Owner/Management Information')) if j >= 0]
+    lines = [l.strip() for l in txt[min(starts):].split('\n')] if starts else []
+    people, removed, cur = [], False, None
+    for line in lines:
+        if line.startswith(SECTION_ENDS):
+            break  # branches, solicitors, consultants and documents also use "Name:" lines
+        if line.startswith('- Removed'):
+            removed = True
+        elif line.startswith('Name:'):
+            cur = {'name': line[5:].strip(), 'title': [], 'removed': removed, 'open': True, 'exempt': False}
+            removed = False
+            people.append(cur)
+        elif cur and cur['open']:
+            if line.startswith(('Phone:', 'Address:', 'Additional Information')):
+                cur['open'] = False
+            elif not PHONE_RE.match(line) and not ADDRESSY_RE.search(line):
+                t = line[6:].strip() if line.startswith('Title:') else line
+                if t:
+                    cur['title'].append(t)
+        if cur and re.search(r'exempt from Public Records\?.*\bYes\s*$', line):
+            cur['exempt'] = True
+    out, skipped = [], {'removed': 0, 'exempt': 0, 'blank': 0}
+    for p in people:
+        name = re.sub(r'\s+', ' ', p['name']).strip()
+        if p['removed'] or p['exempt'] or not name or not re.search(r'[A-Za-z]', name) or name.startswith('Name:'):
+            skipped['removed' if p['removed'] else 'exempt' if p['exempt'] else 'blank'] += 1
+            continue
+        name = clean_name(name)
+        title = '; '.join(dict.fromkeys(p['title']))
+        if (name, title) not in out:
+            out.append((name, title))
+    return fein, out, skipped
+
+
+def officers_pass(a, county, work, out, today):
+    if pdfplumber is None:
+        sys.exit('--officers needs pdfplumber (pip install pdfplumber)')
+    reg_path = os.path.join(out, 'fdacs_registrations.csv.gz')
+    with gzip.open(reg_path, 'rt', encoding='utf-8', newline='') as f:
+        regs = list(csv.DictReader(f))
+    pdir = os.path.join(work, 'pdf')
+    os.makedirs(pdir, exist_ok=True)
+    cl = Client()
+    ch = Charity(cl, work)
+    todo = [r for r in regs if r['detail_url']]  # only records with a Check-A-Charity page have documents
+    if a.limit:
+        todo = todo[:a.limit]
+    c = {'registrations_checked': 0, 'pdfs_found': 0, 'pdfs_downloaded': 0, 'pdfs_cached': 0, 'text_extracted': 0,
+         'ocr': 0, 'skipped_no_text_layer': 0, 'skipped_download_failed': 0, 'no_application_listed': 0,
+         'no_officer_table': 0, 'form_fields_read': 0, 'people_skipped_removed': 0,
+         'people_skipped_exempt': 0, 'people_skipped_blank': 0, 'officer_rows': 0, 'registrations_with_officers': 0, 'feins_found': 0}
+    officers, feins, unparsed, stopped = [], {}, [], None
+    for n, r in enumerate(todo, 1):
+        reg = r['registration_number']
+        try:
+            doc = latest_application(documents(ch.get(reg)))
+            c['registrations_checked'] += 1
+            if not doc:
+                c['no_application_listed'] += 1
+                print(f'[{n}/{len(todo)}] {reg} no application document', file=sys.stderr)
+                continue
+            c['pdfs_found'] += 1
+            path = os.path.join(pdir, f'{reg}_{doc["dtn"]}.pdf')
+            if os.path.exists(path) and os.path.getsize(path) > 0:
+                c['pdfs_cached'] += 1
+            elif download_pdf(cl, ch, reg, doc, path):
+                c['pdfs_downloaded'] += 1
+            else:
+                c['skipped_download_failed'] += 1
+                unparsed.append(f'{reg}: application PDF did not download')
+                print(f'[{n}/{len(todo)}] {reg} download failed', file=sys.stderr)
+                continue
+        except Stop as e:
+            stopped = str(e)
+            print(f'STOP: {e}', file=sys.stderr)
+            break
+        try:
+            txt = pdf_text(path)
+        except Exception as e:
+            txt = ''
+            unparsed.append(f'{reg}: unreadable PDF ({e.__class__.__name__})')
+        if len(txt.strip()) < 50:
+            c['skipped_no_text_layer'] += 1  # Tesseract is not installed here: scans are counted and skipped
+            print(f'[{n}/{len(todo)}] {reg} no text layer', file=sys.stderr)
+            continue
+        c['text_extracted'] += 1
+        fein, people, skipped = parse_application(txt)
+        if not people and not any(skipped.values()):
+            ffein, people = parse_form_fields(path)  # the fillable paper form keeps answers in form fields
+            fein = fein or ffein
+            if people:
+                c['form_fields_read'] += 1
+        for k, v in skipped.items():
+            c[f'people_skipped_{k}'] += v
+        if fein:
+            feins[reg] = fein
+        if not people:
+            c['no_officer_table'] += 1
+            why = ', '.join(f'{v} {k}' for k, v in skipped.items() if v) or 'no officer table found'
+            unparsed.append(f'{reg} ({doc["kind"]}, {doc["received"]}): no officers kept ({why})')
+        for name, title in people:
+            officers.append({'registration_number': reg, 'name': name, 'title': title, 'fetched_at': today})
+        print(f'[{n}/{len(todo)}] {reg} {doc["kind"]} {doc["received"]}: {len(people)} people, '
+              f'FEIN {"yes" if fein else "no"}', file=sys.stderr)
+    c['officer_rows'] = len(officers)
+    c['registrations_with_officers'] = len({o['registration_number'] for o in officers})
+    c['feins_found'] = len(feins)
+    for r in regs:
+        if r['registration_number'] in feins:
+            r['fein'] = feins[r['registration_number']]
+    write_gz(reg_path, REG_COLS, regs)
+    write_gz(os.path.join(out, 'fdacs_officers.csv.gz'), OFF_COLS, officers)
+    log = {'fetched_at': today, 'county': county.title(), 'counts': c, 'unparsed': unparsed,
+           'errors': cl.errors, 'seconds_between_requests': DELAY,
+           'notes': ['One PDF per registration: the most recent uploaded Application (or renewal) on Check-A-Charity.',
+                     'Only names and titles as filed are kept. Addresses, phones, emails and answers are not stored.',
+                     'People marked "- Removed" on the application and anyone marked exempt from public records '
+                     'are left out.',
+                     'Scanned PDFs with no text layer are skipped (no OCR).']}
+    if stopped:
+        log['stopped_early'] = stopped
+    with open(os.path.join(out, 'fdacs_pdf_log.json'), 'w', encoding='utf-8') as f:
+        json.dump(log, f, indent=2)
+        f.write('\n')
+    print(json.dumps(c), file=sys.stderr)
+    if stopped:
+        sys.exit(1)
+
+
 # ---------- main ----------
 
 def write_gz(path, cols, rows):
@@ -289,6 +512,8 @@ def main():
     ap.add_argument('--work', default=os.path.join(tempfile.gettempdir(), 'fdacs_work'))
     ap.add_argument('--limit', type=int)
     ap.add_argument('--out', help='output folder (default data/nonprofits/<county>)')
+    ap.add_argument('--officers', action='store_true',
+                    help='read officers and FEIN from uploaded application PDFs into the existing outputs')
     a = ap.parse_args()
     county = a.county.lower()
     if county not in COUNTY_CODES:
@@ -298,6 +523,8 @@ def main():
     out = a.out or os.path.join(HERE, county)
     os.makedirs(out, exist_ok=True)
     today = dt.date.today().isoformat()
+    if a.officers:
+        return officers_pass(a, county, work, out, today)
     t0 = time.time()
     cl = Client()
     notes = []
