@@ -43,6 +43,10 @@
   ],
   "rewrites": [
     {
+      "source": "/profile/:kind/:id",
+      "destination": "/profile"
+    },
+    {
       "source": "/alerts/manage",
       "destination": "/api/manage"
     },

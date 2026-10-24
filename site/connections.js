@@ -299,6 +299,13 @@ function donTable() {
   });
 }
 
+// the entity's profile (site/entity_graph.py ids): companies, businesses and nonprofits without a vendor page
+function profileLink(id, e) {
+  if (!window.BC) return '';
+  const k = id.slice(0, 2), key = id.slice(2);
+  const pid = e.np && k !== 'v:' ? 'nonprofit:' + e.np : k === 'v:' ? 'vendor:' + key : (k === 'b:' || k === 's:') ? 'business:' + key : null;
+  return pid ? `<p><a href="${esc(BC.href(pid))}">Profile: every connection in the records</a></p>` : '';
+}
 const src = u => u ? ` · <a href="${esc(u)}" target="_blank" rel="noopener">Source</a>` : '';
 function recList(rs) {
   return `<div class="cn-recs">${rs.map(r => `<div class="cn-rec"><span>${esc(r.w || D.types[r.t])}</span><span class="num">${full(r.a)}</span><span class="cn-meta"><span class="cn-pill">${esc(D.types[r.t])}</span>${r.s ? `<span>${esc(r.s)}</span>` : ''}<span>${esc(r.when)}</span><span>${esc(payerName(r.p))}</span>${r.x ? '<span class="cn-flag">inside a project total</span>' : ''}${url(r.u) ? `<a href="${esc(url(r.u))}" target="_blank" rel="noopener">Source</a>` : ''}</span></div>`).join('')}</div>`;
@@ -318,14 +325,15 @@ function profile() {
   } else if (id.startsWith('p:')) {
     const k = id.slice(2), P = D.payers[k], rows = visible().filter(r => r.p === k), named = new Set(rows.filter(r => /^[vb]:/.test(r.e)).map(r => r.e));
     const offs = Object.entries(D.off).filter(([, o]) => (o.gp || []).includes(k));
-    p.innerHTML = `${close}<div><span class="eyebrow">${PKIND[P.k]}</span><h2>${esc(P.n)}</h2></div>
+    const gp = window.BC && k.startsWith('g:') ? BC.href('gov:' + k.slice(2)) : null;
+    p.innerHTML = `${close}<div><span class="eyebrow">${PKIND[P.k]}</span><h2>${esc(P.n)}</h2>${gp ? `<p><a href="${esc(gp)}">Profile: officials, budget and every payee</a></p>` : ''}</div>
       <div><span class="cn-note">${rows.length} records in the current filters, ${named.size} named payees. Contract awards and check register payments can describe the same money, so the types are not added together.</span></div>
       <div class="cn-recs">${byType(rows)}</div>
       ${offs.length ? `<div class="cn-rel"><h3 class="eyebrow">Elected board</h3>${offs.map(([oid, o]) => `<div><button type="button" class="cn-link" data-sel="${esc(oid)}">${esc(o.n)}</button> <span class="cn-note">${esc(o.off)}</span></div>`).join('')}</div>` : ''}
       ${P.k === 'cra' ? '<p><a href="/public-money/cra-spending">Open the full CRA ledger</a></p>' : P.k === 'tourism' ? '<p><a href="/public-money/who-gets-paid">Every tourism agency payment</a></p>' : '<p><a href="/public-money/contracts">Contracts and awards</a></p>'}${clear}`;
   } else if (id.startsWith('m:')) {
     const o = D.off[id] || {}, ds = D.don.filter(d => d.o === id);
-    p.innerHTML = `${close}<div><span class="eyebrow">${o.cand ? '2026 candidate' : 'Elected official'}</span><h2>${esc(o.n)}</h2><p class="cn-note">${esc(o.off)}</p></div>
+    p.innerHTML = `${close}<div><span class="eyebrow">${o.cand ? '2026 candidate' : 'Elected official'}</span><h2>${esc(o.n)}</h2><p class="cn-note">${esc(o.off)}</p>${o.pid ? `<p><a href="/people/${esc(o.pid)}">Full profile: votes, campaign money and connections</a></p>` : ''}</div>
       <div><div class="cn-big">${money(ds.reduce((a, d) => a + d.a, 0))}</div><span class="cn-note">from businesses, PACs and committees. Gifts from individual people are never named.</span></div>
       ${(o.gp || []).length ? `<p class="cn-note">Sits on: ${o.gp.map(k => `<button type="button" class="cn-link" data-sel="p:${esc(k)}">${esc(payerName(k))}</button>`).join(', ')}</p>` : ''}
       <div class="cn-recs">${ds.map(d => `<div class="cn-rec"><span>${d.e ? `<button type="button" class="cn-link" data-sel="${esc(d.e)}">${esc(d.dn)}</button> <span class="cn-flag red">paid by a government</span>` : esc(d.dn)}</span><span class="num">${full(d.a)}</span><span class="cn-meta">${esc(d.date)}${url(d.u) ? ` · <a href="${esc(url(d.u))}" target="_blank" rel="noopener">Campaign report</a>` : ''}</span></div>`).join('')}</div>${clear}`;
@@ -334,7 +342,7 @@ function profile() {
     const rel = D.rel.filter(x => x.a === id || x.b === id).map(x => { const o = x.a === id ? x.b : x.a; return `<div><button type="button" class="cn-link" data-sel="${esc(o)}">${esc(ent(o).n)}</button><div class="cn-note">${esc(x.t)}${src(x.u)}</div></div>`; });
     const dons = D.don.filter(d => d.e === id || 'd:' + d.dn === id);
     const by = [...new Set(all.map(r => payerName(r.p)))];
-    p.innerHTML = `${close}<div><span class="eyebrow">${KIND[e.k] || ''}</span><h2>${esc(e.n)}</h2>${by.length ? `<p class="cn-note">Paid by ${esc(by.join(' · '))}</p>` : ''}${e.vp ? `<p><a href="/public-money/vendors/${esc(e.vp)}">Vendor profile: every contract, payment and vote</a></p>` : ''}${e.np ? `<p><a href="/connections/nonprofits?id=${encodeURIComponent(e.np)}#npList">Nonprofit profile: IRS filings, grants and officials on its board</a></p>` : ''}</div>
+    p.innerHTML = `${close}<div><span class="eyebrow">${KIND[e.k] || ''}</span><h2>${esc(e.n)}</h2>${by.length ? `<p class="cn-note">Paid by ${esc(by.join(' · '))}</p>` : ''}${e.vp ? `<p><a href="/public-money/vendors/${esc(e.vp)}">Vendor profile: every contract, payment and vote</a></p>` : profileLink(id, e)}${e.np ? `<p><a href="/connections/nonprofits?id=${encodeURIComponent(e.np)}#npList">Nonprofit details: IRS filings, grants and board</a></p>` : ''}</div>
       ${all.length ? `<div><span class="cn-note">${all.length} record${all.length === 1 ? '' : 's'}${shown.length < all.length ? `, ${shown.length} in the current filters` : ''}. An award and the payments on it can both appear, so the types are not added together.</span><div class="cn-recs">${byType(all)}</div></div>` : ''}
       ${rel.length ? `<div class="cn-rel"><h3 class="eyebrow">Connected payees</h3>${rel.join('')}</div>` : ''}
       ${e.k === 'biz' ? `<div class="cn-rel"><h3 class="eyebrow">Campaign gifts</h3>${dons.length ? dons.map(d => { const o = D.off[d.o] || {}; return `<div>${full(d.a)} to <button type="button" class="cn-link" data-sel="${esc(d.o)}">${esc(o.n)}</button>, ${esc(o.off)}${o.cand ? ' (2026 candidate)' : ''} · ${esc(d.date)}${url(d.u) ? ` · <a href="${esc(url(d.u))}" target="_blank" rel="noopener">Report</a>` : ''}${d.cf === 'likely' ? ' <span class="cn-flag">likely match</span>' : ''}</div>`; }).join('') : '<div class="cn-note">None in the campaign data.</div>'}</div>` : ''}

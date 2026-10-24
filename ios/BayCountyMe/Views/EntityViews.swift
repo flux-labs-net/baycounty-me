@@ -129,6 +129,7 @@ struct VendorDetailView: View {
                 Section { ProgressView() }
             }
             if let url = v?.pageURL { Section { WebLink(title: "Company page on BayCounty.me", url: url) } }
+            else { Section { WebLink(title: "Profile and connections on BayCounty.me", url: URL(string: "https://baycounty.me/profile/vendor/\(vendorID)")) } }
         }
         .navigationTitle(v?.name ?? "Company")
         .navigationBarTitleDisplayMode(.inline)
@@ -342,6 +343,9 @@ struct PersonDetailView: View {
                 } header: { Text("Business donors that hold local contracts") } footer: {
                     Text("A gift near a vote does not show why anyone voted the way they did.")
                 }
+            }
+            Section {
+                WebLink(title: "Profile and connections on BayCounty.me", symbol: "point.3.connected.trianglepath.dotted", url: URL(string: "https://baycounty.me/people/\(personID)"))
             }
         }
         .navigationTitle(p?.name ?? "Person")

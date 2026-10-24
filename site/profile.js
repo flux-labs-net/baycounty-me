@@ -1,0 +1,116 @@
+// Entity profiles: the mini network and the connection list on every profile page (/people/<id>, vendor and government
+// pages, and /profile/<kind>/<id> for every other company, nonprofit, board member, business and committee).
+// Data: GET /api/v1/entities/<id> (api/_entities.js). A static page also embeds its build-time connections in
+// #pfData, so the map draws at once and then gains any hand-checked connections the API adds.
+(() => {
+  const root = document.getElementById('pf'); if (!root) return;
+  const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
+  const money = n => n == null ? '' : (n < 0 ? '−' : '') + (Math.abs(n) >= 1e6 ? '$' + (Math.abs(n) / 1e6).toFixed(2) + 'M' : '$' + Math.round(Math.abs(n)).toLocaleString('en-US'));
+  const KIND = {gov: 'Government', vendor: 'Company', person: 'Official or candidate', nonprofit: 'Nonprofit', member: 'Board member', business: 'Business', committee: 'Committee or PAC'};
+  const COLOR = {gov: 'var(--navy)', vendor: 'var(--blue)', business: 'var(--blue)', person: 'var(--salmon)', nonprofit: 'var(--teal)', member: 'var(--amber)', committee: 'var(--muted)'};
+  const LINE = {gift: 'pf-l-gift', paid: 'pf-l-paid', board: 'pf-l-board', runs: 'pf-l-runs', voted: 'pf-l-voted', serves: 'pf-l-board', grant: 'pf-l-paid', related: 'pf-l-runs', same: 'pf-l-runs'};
+  const ORDER = ['serves', 'paid', 'gift', 'voted', 'board', 'runs', 'grant', 'related', 'same'];
+  let id = root.dataset.id;
+  if (!id) {  // /profile/<kind>/<key> or /profile?id=<kind>:<key>
+    const m = location.pathname.match(/^\/profile\/([a-z]+)\/(.+?)\/?$/);
+    id = m ? m[1] + ':' + decodeURIComponent(m[2]) : new URLSearchParams(location.search).get('id');
+  }
+  const embedded = document.getElementById('pfData');
+  let D = embedded ? JSON.parse(embedded.textContent) : null;
+
+  function header(e) {
+    const h = document.getElementById('pfHead'); if (!h) return;
+    document.title = e.name + ' · BayCounty.me';
+    const kp = (l, v, s) => v ? `<div class="kpi"><span class="eyebrow">${l}</span><span class="v">${v}</span><span class="s">${s}</span></div>` : '';
+    h.innerHTML = `<header class="tx-top"><div class="tx-brand"><span class="eyebrow"><a href="/connections">Connections</a> · ${esc(e.kind_label || KIND[e.kind])}</span><h1>${esc(e.name)}</h1>
+      ${e.subtitle ? `<p class="lede">${esc(e.subtitle)}</p>` : ''}${e.aliases && e.aliases.length ? `<p class="small muted">Also written as: ${esc(e.aliases.join(' · '))}</p>` : ''}</div>
+      ${e.source_url ? `<div class="stamp"><a class="pill" href="${esc(e.source_url)}" target="_blank" rel="noopener">Public record</a></div>` : ''}</header>
+      <div class="kpis">${kp('Connections', (e.connections || 0).toLocaleString('en-US'), 'in public records')}${kp('Received', money(e.amount_received), 'payments, gifts and grants in the records')}${kp('Gave or paid', money(e.amount_given), 'payments, gifts and grants in the records')}</div>`;
+  }
+
+  // ---------- mini network ----------
+  function net(d) {
+    const box = document.getElementById('pfNet'); if (!box) return;
+    const cs = d.connections.filter(c => c.other && c.other.entity_id);
+    if (!cs.length) { box.innerHTML = '<p class="muted small">No connections in the records yet.</p>'; return; }
+    const narrow = box.clientWidth < 560, W = narrow ? 420 : 900, max = narrow ? 16 : 30;
+    // one node per other entity, keeping its largest connection; a few of each kind of connection, then the largest
+    const by = new Map();
+    cs.forEach(c => { const k = c.other.entity_id, o = by.get(k); if (!o || (c.amount || 0) > (o.amount || 0)) by.set(k, c); });
+    const all = [...by.values()];
+    const pick = [], seen = new Set();
+    ORDER.forEach(r => all.filter(c => c.relation === r).slice(0, 3).forEach(c => { pick.push(c); seen.add(c); }));
+    all.sort((a, b) => (b.amount || 0) - (a.amount || 0)).forEach(c => { if (pick.length < max && !seen.has(c)) { pick.push(c); seen.add(c); } });
+    const nodes = pick.slice(0, max).sort((a, b) => ORDER.indexOf(a.relation) - ORDER.indexOf(b.relation) || (b.amount || 0) - (a.amount || 0));
+    const top = Math.max(1, ...nodes.map(c => c.amount || 0));
+    // two arcs, right then left, so every label has its own line and room beside its circle
+    const half = Math.ceil(nodes.length / 2), step = narrow ? 30 : 26;
+    const H = Math.max(narrow ? 300 : 280, Math.max(half, 1) * step + 60), cx = W / 2, cy = H / 2;
+    const rx = narrow ? 62 : 230, ry = (H - 60) / 2, span = Math.min(1.25, 0.35 + half * 0.08);
+    const pts = nodes.map((c, i) => {
+      const right = i < half, j = right ? i : i - half, n = right ? half : nodes.length - half;
+      const f = n > 1 ? j / (n - 1) : 0.5, a = -span + 2 * span * f;
+      const t = right ? a : Math.PI - a;
+      return {c, right, x: cx + rx * Math.cos(t), y: cy + ry * Math.sin(a), r: 4 + 8 * Math.sqrt((c.amount || 0) / top)};
+    });
+    let svg = '';
+    pts.forEach(p => { svg += `<line class="pf-l ${LINE[p.c.relation] || ''}" x1="${cx}" y1="${cy}" x2="${p.x.toFixed(1)}" y2="${p.y.toFixed(1)}"/>`; });
+    const lab = (s, n) => s.length > n ? s.slice(0, n - 1) + '…' : s;
+    pts.forEach(p => {
+      const dx = p.right ? p.r + 5 : -p.r - 5;
+      const o = p.c.other, tip = `${o.name} (${KIND[o.kind] || o.kind}): ${p.c.label}${p.c.amount ? ' · ' + money(p.c.amount) : ''}`;
+      const inner = `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="${p.r.toFixed(1)}" fill="${COLOR[o.kind] || 'var(--muted)'}"/><text x="${(p.x + dx).toFixed(1)}" y="${(p.y + 4).toFixed(1)}" text-anchor="${p.right ? 'start' : 'end'}">${esc(lab(o.name, narrow ? 15 : 30))}</text><title>${esc(tip)}</title>`;
+      svg += o.page_url ? `<a href="${esc(o.page_url)}">${inner}</a>` : `<g>${inner}</g>`;
+    });
+    const me = d.entity;
+    svg += `<circle class="pf-me" cx="${cx}" cy="${cy}" r="16" fill="${COLOR[me.kind] || 'var(--navy)'}"/><text class="pf-me-t" x="${cx}" y="${cy + 34}" text-anchor="middle">${esc(lab(me.name, narrow ? 22 : 34))}</text>`;
+    const kinds = [...new Set(nodes.map(c => c.other.kind === 'business' ? 'vendor' : c.other.kind).concat([me.kind === 'business' ? 'vendor' : me.kind]))];
+    const rels = [...new Set(nodes.map(c => c.relation))];
+    box.innerHTML = `<svg viewBox="0 0 ${W} ${H}"${narrow ? ' class="pf-sm"' : ''} role="img" aria-label="${esc(me.name)} and ${nodes.length} of its connections">${svg}</svg>
+      <div class="pf-legend">${kinds.map(k => `<span><i style="background:${COLOR[k]}"></i>${k === 'vendor' ? 'Company or business' : KIND[k]}</span>`).join('')}${rels.map(r => `<span><i class="ln ${LINE[r] || ''}"></i>${esc(labelOf(r))}</span>`).join('')}</div>
+      <p class="cn-note">${all.length > nodes.length ? `Showing ${nodes.length} of ${all.length} connections, the largest of each kind first. ` : ''}Tap a name to open its profile. Bigger circles carry more dollars in the records.</p>`;
+  }
+  const labelOf = r => ({serves: 'Serves', paid: 'Payments', gift: 'Campaign gifts', voted: 'Votes on contracts', board: 'Board seats', runs: 'Runs a business', grant: 'Grants', related: 'Shared project or tie', same: 'Same organization'}[r] || r);
+
+  // ---------- connection list ----------
+  function list(d) {
+    const box = document.getElementById('pfList'); if (!box) return;
+    const groups = new Map();
+    d.connections.forEach(c => { const k = c.relation + ':' + c.direction; (groups.get(k) || groups.set(k, []).get(k)).push(c); });
+    const keys = [...groups.keys()].sort((a, b) => ORDER.indexOf(a.split(':')[0]) - ORDER.indexOf(b.split(':')[0]));
+    const SHOW = 25;
+    box.innerHTML = keys.map(k => {
+      const rs = groups.get(k), lbl = rs[0].label, tot = rs.reduce((t, c) => t + (c.amount || 0), 0);
+      const row = c => `<tr><th scope="row">${c.other.page_url ? `<a href="${esc(c.other.page_url)}">${esc(c.other.name)}</a>` : esc(c.other.name)}<small>${esc(KIND[c.other.kind] || '')}${c.checked_by_hand ? ' · checked by hand' : ''}</small></th>
+        <td class="wrap small">${esc(c.detail || '')}</td><td class="num">${c.amount ? money(c.amount) : ''}${c.records > 1 ? `<small>${c.records} records</small>` : ''}</td>
+        <td class="small">${esc([c.first_date, c.last_date].filter((x, i, a) => x && a.indexOf(x) === i).join(' to '))}</td><td>${c.source_url ? `<a class="src" href="${esc(c.source_url)}" target="_blank" rel="noopener">Source</a>` : ''}</td></tr>`;
+      return `<section class="pf-grp"><div class="sec-hd"><h3>${esc(lbl.charAt(0).toUpperCase() + lbl.slice(1))}</h3><span class="muted">${rs.length.toLocaleString('en-US')}${tot ? ' · ' + money(tot) + ' in the records' : ''}</span></div>
+        <div class="tablewrap"><table class="tx-table vd-table" data-tt="off"><tbody>${rs.slice(0, SHOW).map(row).join('')}</tbody></table></div>
+        ${rs.length > SHOW ? `<button type="button" class="pill pf-more" data-k="${esc(k)}">Show all ${rs.length.toLocaleString('en-US')}</button>` : ''}</section>`;
+    }).join('') || '<p class="muted">No connections in the records yet.</p>';
+    box.querySelectorAll('.pf-more').forEach(b => b.addEventListener('click', () => {
+      const rs = groups.get(b.dataset.k), tb = b.previousElementSibling.querySelector('tbody');
+      tb.innerHTML = rs.map(c => `<tr><th scope="row">${c.other.page_url ? `<a href="${esc(c.other.page_url)}">${esc(c.other.name)}</a>` : esc(c.other.name)}<small>${esc(KIND[c.other.kind] || '')}</small></th><td class="wrap small">${esc(c.detail || '')}</td><td class="num">${c.amount ? money(c.amount) : ''}</td><td class="small">${esc(c.first_date || '')}</td><td>${c.source_url ? `<a class="src" href="${esc(c.source_url)}" target="_blank" rel="noopener">Source</a>` : ''}</td></tr>`).join('');
+      b.remove();
+    }));
+    const live = d.connections.filter(c => c.checked_by_hand);
+    const lb = document.getElementById('pfLive');
+    if (lb) lb.hidden = !live.length;
+  }
+
+  function draw() { if (!D) return; if (!embedded) header(D.entity); net(D); list(D); }
+  draw();
+  let t; addEventListener('resize', () => { clearTimeout(t); t = setTimeout(() => D && net(D), 200); });
+  if (!id) return;
+  fetch('/api/v1/entities/' + encodeURIComponent(id)).then(r => r.ok ? r.json() : Promise.reject(r.status)).then(j => {
+    const e = j.data.entity;
+    if (!embedded && e.page_url && decodeURIComponent(location.pathname.replace(/\/$/, '')) !== decodeURIComponent(e.page_url)) { location.replace(e.page_url); return; }
+    D = j.data; draw();
+  }).catch(s => {
+    if (D) return;
+    const h = document.getElementById('pfHead');
+    if (h) h.innerHTML = `<header class="tx-top"><div class="tx-brand"><span class="eyebrow"><a href="/connections">Connections</a></span><h1>${s === 404 ? 'No profile with that name' : 'This profile could not load'}</h1>
+      <p class="lede">${s === 404 ? 'The link may be out of date.' : 'Try again in a moment.'} <a href="/search">Search the site</a> or start from the <a href="/connections">Connections network</a>.</p></div></header>`;
+    const n = document.getElementById('pfNet'); if (n) n.innerHTML = '';
+  });
+})();

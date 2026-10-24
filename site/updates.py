@@ -9,6 +9,9 @@ from datetime import datetime, timezone
 import html
 
 CHANGES = [
+    {'date': '2026-10-24', 'title': 'Profiles for every name, linked everywhere',
+     'text': "Every elected official, department leader and 2026 candidate now has a profile page with where they serve, campaign gifts from businesses and groups, recorded votes, votes on donors' contracts, pay and a map of their connections. Every other company, nonprofit, nonprofit board member, registered business and committee in the records has a profile too, with every documented connection and its source. Vendor and government pages gained the same connection map. Names of officials, companies and nonprofits are now links to their profiles across the site. Individual campaign donors are still never named, and officials' board seats and businesses appear only after an editor checks the match.",
+     'pages': ['/people', '/connections', '/connections/nonprofits', '/public-money/vendors', '/governments', '/developers', '/open-data']},
     {'date': '2026-10-24', 'title': 'Connections: one network for every government',
      'text': "Campaign gifts and payee connections now have their own section, Connections, instead of sitting under the CRA pages. The network covers every government and agency with payment records: the county, the cities, the redevelopment agencies and the tourism agencies, across contracts, change orders, emergency purchases, check registers, tourism payments and the CRA ledger. It shows business gifts to every official who approves that spending, not only CRA board members, so 29 businesses that were paid and gave to a campaign now appear, up from 4. Campaign Money is now Campaign Gifts, and it and the Money map moved into the section; old links still work. Only businesses, PACs and committees are named as donors.",
      'pages': ['/connections', '/connections/campaign-gifts', '/connections/money-map', '/public-money/cra-spending']},

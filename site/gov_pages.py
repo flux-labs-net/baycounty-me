@@ -203,10 +203,16 @@ def gov_page(key):
   <div class="kpis" id="gxTop">{"".join(kp + static)}</div>{'' if gy else '<p class="muted small">No yearly figures on file for this government yet.</p>'}</section>
   {glance}
   {body}
+  {_connections(key, p["short"])}
 </div>
 <link rel="stylesheet" href="/assets/tax.css">
 <script>window.GOVPAGE={_dumps(cfg)};</script>
 <script src="/assets/gov.js" defer></script>'''
+
+
+def _connections(key, short):
+    from people_pages import profile_section, ASSETS
+    return profile_section('gov:' + key, 'Connections', f'Officials who serve {short} and who it paid, from every record on the site') + ASSETS
 
 
 def govs_index():

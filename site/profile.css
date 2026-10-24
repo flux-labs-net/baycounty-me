@@ -1,0 +1,31 @@
+/* Entity profiles: mini network and connection list (site/profile.js) */
+.pf-net{border:1px solid var(--line);border-radius:var(--r-lg);background:var(--surface);padding:12px}
+.pf-net svg{width:100%;height:auto;display:block}
+.pf-net text{font:500 12px var(--f-body);fill:var(--ink);paint-order:stroke;stroke:var(--surface);stroke-width:3px;stroke-linejoin:round}
+.pf-net a:hover text,.pf-net a:focus text{fill:var(--blue);text-decoration:underline}
+.pf-net a:hover circle{stroke:var(--ink);stroke-width:2}
+.pf-net .pf-me{stroke:var(--surface);stroke-width:3}
+.pf-net .pf-me-t{font:600 13px var(--f-body)}
+.pf-l{stroke:var(--faint);stroke-width:1.3;opacity:.8}
+.pf-l-gift{stroke:var(--salmon);stroke-width:1.8}
+.pf-l-paid{stroke:var(--muted)}
+.pf-l-board{stroke-dasharray:2 3}
+.pf-l-runs{stroke-dasharray:6 4}
+.pf-l-voted{stroke:var(--navy);stroke-dasharray:1 3;stroke-width:1.8}
+.pf-legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.8rem;color:var(--muted);margin-top:8px}
+.pf-legend span{display:inline-flex;align-items:center;gap:6px}
+.pf-legend i{display:inline-block;width:10px;height:10px;border-radius:50%}
+.pf-legend i.ln{width:18px;height:0;border-radius:0;border-top:2px solid var(--muted)}
+.pf-legend i.ln.pf-l-gift{border-top-color:var(--salmon)}
+.pf-legend i.ln.pf-l-board{border-top-style:dotted}
+.pf-legend i.ln.pf-l-runs{border-top-style:dashed}
+.pf-legend i.ln.pf-l-voted{border-top:2px dotted var(--navy)}
+.pf-grp{display:flex;flex-direction:column;gap:10px;margin-top:18px}
+.pf-grp h3{margin:0;font-size:1.02rem}
+.pf-grp .pill{align-self:flex-start}
+.pf-live{border-left:3px solid var(--teal);padding-left:12px}
+.pp-roles{display:flex;flex-wrap:wrap;gap:8px}
+.pp-plat{margin:0;padding-left:1.1em}
+.pp-plat li{margin:4px 0}
+.pf-net svg.pf-sm text{font-size:14.5px}
+.pf-net svg.pf-sm .pf-me-t{font-size:15px}

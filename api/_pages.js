@@ -45,12 +45,22 @@ const PAGES = {
   '/privacy': {none: 'privacy policy'},
   '/connections': {datasets: ['connections-payees', 'connections-payments', 'connections-links', 'connections-gifts']},
   '/public-money/map': {datasets: ['cra-payments', 'sales-tax-projects', 'fema-michael-projects']},
-  '/public-money/vendors': {datasets: ['vendors-directory', 'contracts', 'vendor-payments', 'cra-payments', 'campaign-contributions-2026']},
+  '/public-money/vendors': {datasets: ['vendors-directory', 'contracts', 'vendor-payments', 'cra-payments', 'campaign-contributions-2026', 'entity-profiles', 'entity-connections'],
+    endpoints: ['/entities/{id}']},
+  '/people': {datasets: ['entity-profiles', 'people-directory'], endpoints: ['/entities']},
+  // one shell page for every other profile: /profile/<kind>/<id> (vercel.json rewrite), filled from the API
+  '/profile': {datasets: ['entity-profiles', 'entity-connections', 'nonprofit-officials', 'official-businesses', 'official-business-links', 'shared-owner-groups'],
+    endpoints: ['/entities/{id}']},
 };
 // Page families: each government's profile page.
 // a government's page carries the dashboards' records for that government (gov.js narrows them by city and year)
 const PREFIXES = {'/governments/': {datasets: ['government-profiles', 'government-years', 'budget-detail', 'officials-pay', 'votes', 'meetings', 'contracts', 'cra-payments',
-  'accountability-projects', 'sales-tax-projects', 'fema-michael-projects', 'savings-opportunities', 'debt', 'audit-findings'], endpoints: ['/governments/{slug}']}};
+  'accountability-projects', 'sales-tax-projects', 'fema-michael-projects', 'savings-opportunities', 'debt', 'audit-findings', 'entity-connections'], endpoints: ['/governments/{slug}', '/entities/{id}']},
+  // each official's and candidate's profile (site/people_pages.py)
+  '/people/': {datasets: ['entity-profiles', 'entity-connections', 'people-directory', 'member-votes', 'campaign-finance', 'candidates-2026', 'officials-pay', 'salary-leaders',
+    'money-map-votes', 'nonprofit-officials', 'official-businesses', 'official-business-links', 'shared-owner-groups'], endpoints: ['/entities/{id}']},
+  '/public-money/vendors/': {datasets: ['vendors-directory', 'contracts', 'change-orders', 'emergency-purchases', 'vendor-payments', 'cra-payments', 'campaign-contributions-2026', 'votes',
+    'entity-profiles', 'entity-connections'], endpoints: ['/entities/{id}']}};
 
 function sourceFor(path) {
   if (PAGES[path]) return PAGES[path];

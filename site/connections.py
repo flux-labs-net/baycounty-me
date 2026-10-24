@@ -219,6 +219,7 @@ def network_data():
         don.append(x)
     don.sort(key=lambda x: (-(x['e'] is not None), -x['a']))
     for o in officials.values():
+        o['pid'] = ids.person_id(o['n'])  # /people/<pid>
         o['gid'] = o['g'] or ''
         o['g'] = gkey(o['g']) or '' if o['g'] else ''  # city filter key (county officers count with the county)
         o['gp'] = [] if o['cand'] else [k for k, p in payers.items() if p['k'] != 'tourism' and k[k.index(':') + 1:] in (o['gid'], CRA_OF.get(o['gid']))]  # boards they sit on

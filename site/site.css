@@ -440,3 +440,5 @@ label[hidden],.vf[hidden],.sc-f[hidden]{display:none!important}
 
 /* Business status from state corporate records (Sunbiz). Inactive = dissolved, revoked or no longer filing. */
 .biz-off{display:inline-block;font-size:.74rem;font-weight:600;letter-spacing:.02em;line-height:1.5;color:var(--salmon);border:1px solid currentColor;border-radius:999px;padding:0 7px;margin-left:6px;vertical-align:1px;white-space:nowrap;cursor:help}
+a.ent{color:inherit;text-decoration:underline;text-decoration-color:color-mix(in srgb,var(--blue) 45%,transparent);text-underline-offset:2px}
+a.ent:hover{color:var(--blue);text-decoration-color:var(--blue)}

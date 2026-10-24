@@ -18,6 +18,14 @@ For a new page:
    common question, and the endpoint table on `site/developers_page.py`.
 5. The iOS app covers the page in `ios/BayCountyKit/.../SitePages.swift` (native, dataset or web).
 
+## Every name links to its profile
+
+Every company, official, candidate, nonprofit, board member, business and government has one entity id (`kind:key`) and
+one profile URL, from `site/entity_graph.py` (`page_url`). Link names with `site/entity_links.py` (`a`, `person`,
+`vendor`, `gov`) in Python and `BC.href(id)` / `BC.a(id, text)` in page scripts; known names in page text are linked
+automatically. A new dataset that names people or organizations should add its connections in `entity_graph.build()`
+(public rows only; hand-checked, database-only rows go in `api/_entities.js` `liveConnections`).
+
 ## Privacy
 
 Individual campaign donors are never named (summed totals only). Salary data names only elected officials and

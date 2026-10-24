@@ -261,6 +261,61 @@ B.enhance();
   let t; new MutationObserver(() => { clearTimeout(t); t = setTimeout(() => walk(main), 60); }).observe(main, {childList: true, subtree: true});
 })();
 
+(() => {
+  const R = {"gov":{"county":"bay-county","schools":"bay-district-schools","pc":"panama-city","pcb":"panama-city-beach","lh":"lynn-haven","cw":"callaway","sp":"springfield","parker":"parker","mb":"mexico-beach"},"vp":["850-construction","a-c-schultes-florida","aaron-rich-marketing","abentras","accurate-drilling-systems","action-truck-center","ajr-publishing","alan-jay-automotive-management-alan-jay-fleet-sales","american-sand","anderson-columbia","anderson-construction","annett-bus-lines","arris","arrivalist","art-construction-northwest-florida","barge","bay-county-chamber-commerce","bay-point-billfish","bayou-builders","bcl","beard-equipment","behar-peteranecz","bgn","black-veatch","brock-lawn-pest-control","burke-blue","burke-construction-group","carollo-engineers","carr-riggs-ingram","carvertise","cbc","cdr-maguire","charles-white","charlie-coram-s-place","coastal-parasail","coastal-protection-engineering","construction-services","core-main","cri","crowdriff","culpepper","cw-roberts","cwr-contracting","dag-architects","davison","destinations-florida","destinations-international","dewberry","disposal-services","dominguez-design-build","ecsc","empire-pipe","emr","energreen-ameri","first-transit","flc","florida-architects","florida-blue-blue-cross-blue-shield-florida","fpl","gac-contractors","gcuc","gortemoller","grand-slam-sports-tournaments","greensouth-solu","gypsy-belle-photo-bus","hagerty-consulting","halff","hall-contracting","harders","historic-st-andrews-waterfront-partnership","hmx-productions","hydra","iheart-media","imageworks","infrastructure-solution-services","ingram-signalization","inland","j-v-gander-distributors","jbj-productions","kemira-water-solutions","lamar-companies","lawnscapes","leake-landscapes","madden-media","mainline","marsh-usa","marshall-brothers","metric","miles-partnership","mott-macdonald","mr-fence","ncmc","ovivo","panache-tent-event","panama-city-beach-chamber-commerce","panama-city-symphony-orchestra","panhandle-engineering","pg-environmental-fl","pgit","phoenix","pineapple-public-relations","piney-grove-nursery-landscaping","press-print-graphics","public-risk-mgm","pyro-shows","quillian-powell","rategain-adara","razorback","reeves-shaw","reliantsouth","rj-gorman-contracting","rj-gorman-marine","roberts-and-roberts","rotolo-consultants","royal-american","sj-electro","southeast-tourism-society","southeastern-outdoor","southern-construction","staline-waterworks","styleblueprint","sunbelt-rentals","tb-landmark","telemetry","ten-8","tetra-tech","timmins-consulting","tk-vandy","travelscape","us-relay","visit-florida","volkert","waste-pro","weeks-marine","williams-communications","world-changers-first-baptist-church-panama-city"]}, VP = new Set(R.vp);
+  const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
+  // the profile URL for an entity id: same rule as site/entity_graph.py page_url()
+  function href(id) {
+    const i = String(id || '').indexOf(':'); if (i < 0) return null;
+    const k = id.slice(0, i), v = id.slice(i + 1);
+    if (k === 'gov' && R.gov[v]) return '/governments/' + R.gov[v];
+    if (k === 'vendor' && VP.has(v)) return '/public-money/vendors/' + v;
+    if (k === 'person') return '/people/' + encodeURIComponent(v);
+    return '/profile/' + k + '/' + encodeURIComponent(v);
+  }
+  const a = (id, text, cls) => { const u = href(id); return u ? `<a${cls ? ` class="${cls}"` : ''} href="${esc(u)}">${esc(text)}</a>` : esc(text); };
+  window.BC = Object.assign(window.BC || {}, {href, a});
+  // names in text that page scripts fill in: same rules as entity_links.link_names()
+  const main = document.getElementById('main'); if (!main || document.documentElement.lang.startsWith('es')) return;
+  const noPeople = /^\/(connections\/nonprofits|profile\/)/.test(location.pathname);
+  const SKIP = new Set(['A', 'SCRIPT', 'STYLE', 'TEXTAREA', 'TITLE', 'OPTION', 'INPUT', 'SELECT', 'CODE', 'PRE', 'BUTTON', 'LABEL', 'H1', 'NAV', 'SUMMARY', 'svg']);
+  const SMALL = new Set(['of', 'and', 'the', 'for', 'in', 'on', 'at', 'to', 'by', 'a', 'an', 'or', 'de', '&']);
+  const proper = s => { const ws = s.match(/[A-Za-z0-9&][A-Za-z0-9&'’.-]*/g) || []; return ws.length > 0 && /^[A-Z0-9]/.test(ws[0]) && ws.every(w => /^[A-Z0-9]/.test(w) || SMALL.has(w.toLowerCase())); };
+  const WORD = /[A-Za-z0-9&][A-Za-z0-9&'’.-]*/g, norm = s => (s.match(WORD) || []).map(w => w.toLowerCase().replace(/’/g, "'").replace(/^[.'-]+|[.'-]+$/g, '')).filter(Boolean).join(' ');
+  let N = null, busy = false; const done = new WeakSet();
+  function fix(node) {
+    const t = node.nodeValue; if (!t || t.length < 6) return;
+    const ws = []; let m; WORD.lastIndex = 0; while ((m = WORD.exec(t))) ws.push([m.index, m.index + m[0].length]);
+    const frag = []; let i = 0, last = 0;
+    while (i < ws.length) {
+      let hit = 0, id = -1;
+      for (let L = Math.min(N.max, ws.length - i); L > 0; L--) {
+        const seg = t.slice(ws[i][0], ws[i + L - 1][1]); if (!proper(seg)) continue; const x = N.n[norm(seg)];
+        if (x !== undefined && !(noPeople && N.k[x] === 'person') && N.u[x] !== location.pathname) { hit = L; id = x; break; }
+      }
+      if (hit) { let s = ws[i][0], e = ws[i + hit - 1][1]; while (e > s && ".'’-".includes(t[e - 1])) e--; frag.push([last, s, e, id]); last = e; i += hit; } else i++;
+    }
+    if (!frag.length) return;
+    const f = document.createDocumentFragment(); let p = 0;
+    frag.forEach(([l, s, e, id]) => { f.appendChild(document.createTextNode(t.slice(p, s))); const el = document.createElement('a'); el.className = 'ent'; el.href = N.u[id]; el.textContent = t.slice(s, e); f.appendChild(el); p = e; });
+    f.appendChild(document.createTextNode(t.slice(p)));
+    f.childNodes.forEach(c => done.add(c.nodeType === 3 ? c : c.firstChild));
+    node.parentNode.replaceChild(f, node);
+  }
+  function walk() {
+    if (!N || busy) return; busy = true;
+    const w = document.createTreeWalker(main, NodeFilter.SHOW_TEXT, {acceptNode: n => {
+      if (done.has(n)) return NodeFilter.FILTER_REJECT;
+      for (let p = n.parentNode; p && p !== main.parentNode; p = p.parentNode) if (SKIP.has(p.nodeName) || (p.hasAttribute && p.hasAttribute('data-nolink'))) return NodeFilter.FILTER_REJECT;
+      return NodeFilter.FILTER_ACCEPT; }});
+    const list = []; while (w.nextNode()) list.push(w.currentNode);
+    list.forEach(n => { done.add(n); fix(n); });
+    busy = false;
+  }
+  const start = () => fetch('/data/entity-names.json').then(r => r.ok ? r.json() : null).then(d => { N = d; walk(); let t; new MutationObserver(() => { clearTimeout(t); t = setTimeout(walk, 120); }).observe(main, {childList: true, subtree: true}); }).catch(() => {});
+  if ('requestIdleCallback' in window) requestIdleCallback(start, {timeout: 2500}); else setTimeout(start, 400);
+})();
+
 // A clear flag for a business the state lists as inactive (dissolved, revoked or no longer filing). Active returns ''.
 window.BCM_bizOff = (status, lastYear) => {
   const s = String(status || '').trim();

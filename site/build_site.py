@@ -324,7 +324,7 @@ def _layout(title, desc, path, body, extra_head=''):
     es = path.startswith('/es')
     ver = OG_VER.get(path, '')
     img = f'{DOMAIN}/og/{_slug(path) if path in OG_VER else "home"}.png' + (f'?v={ver}' if ver else '')
-    robots = '<meta name="robots" content="noindex, follow">\n' if path == '/404' else '<meta name="robots" content="index, follow, max-image-preview:large">\n'
+    robots = '<meta name="robots" content="noindex, follow">\n' if path in ('/404', '/profile') else '<meta name="robots" content="index, follow, max-image-preview:large">\n'
     ld = '' if path == '/404' else jsonld(path, pt, pd, PAGE_LABELS, modified=last_updated(es_updated_key(path)), out_dir=OUT,
                                            kind=page_kind(path), about=page_about(path))
     return f'''<!doctype html>
@@ -386,6 +386,7 @@ def write(path, html):
     # keep each page's 'Data updated' stamp in step with its latest What's new entry
     html = re.sub(r'Data updated [A-Z][a-z]{2} \d{1,2}, \d{4}', 'Data updated ' + nice_date(last_updated(path)), html)
     html = linkify_html(html)
+    html = link_names(html, path)  # official, company and nonprofit names -> their profiles (site/entity_links.py)
     html = us_dates_html(html, es=path.startswith('/es'))  # 2025-02-10 -> Feb 10, 2025 in page text (site/dates.py)
     fp = os.path.join(OUT, path.strip('/'), 'index.html') if path != '/' else os.path.join(OUT, 'index.html')
     os.makedirs(os.path.dirname(fp), exist_ok=True)
@@ -717,6 +718,9 @@ from connections import connections_page  # noqa: E402
 PAGES += [('/connections', 'Connections: who governments paid, and who gave to officials', 'Who every Bay County government and agency paid, how those payees connect, and which businesses gave to the officials who approve the spending.', lambda: connections_page(OUT))]
 PAGES += [('/public-money/map', 'Public money map', 'CRA spending and half-cent sales tax projects across Bay County on one map, with CRA district lines and city limits.', lambda: public_map_page(OUT))]
 PAGES += [(p, t, d, fn or (lambda: vendors_index(OUT))) for p, t, d, fn in vendor_page_list()]
+from people_pages import pages as people_page_list, copy_assets as copy_profile_assets  # noqa: E402
+from entity_links import link_names, write_names as write_entity_names, entity_js  # noqa: E402
+PAGES += people_page_list()
 
 PAGES += [(f'/governments/{g["slug"]}', g['short'] + ': budget, taxes, debt, votes and more',
            f'{g["short"]}, Florida: who runs it, the budget and property tax rate, debt, audit findings, how officials voted, contracts and projects, from public records.',
@@ -725,6 +729,7 @@ prune_es({p[0] for p in PAGES})
 EN_TO_ES = {v: k for k, v in ES_ALT.items()}
 
 
+PROFILE_PREFIXES = ('/public-money/vendors/', '/people/', '/profile')
 PAGE_LABELS = {}  # path -> short label for breadcrumbs, filled in main()
 
 
@@ -772,7 +777,7 @@ def main():
     from glossary import TERMS
     gl = {t['id']: {'term': t['term'], 'simple': t['simple']} for t in TERMS}
     from city_filter import js_table as _city_js
-    open(os.path.join(OUT, 'assets', 'site.js'), 'w').write(_city_js() + MENU_JS + DEEPLINK_JS + LINKIFY_JS + DATES_JS + TERM_JS.replace('__GLOSSARY_ES__', json.dumps(glossary_es_terms(), ensure_ascii=False)).replace('__GLOSSARY__', json.dumps(gl, ensure_ascii=False)))
+    open(os.path.join(OUT, 'assets', 'site.js'), 'w').write(_city_js() + MENU_JS + DEEPLINK_JS + LINKIFY_JS + entity_js() + DATES_JS + TERM_JS.replace('__GLOSSARY_ES__', json.dumps(glossary_es_terms(), ensure_ascii=False)).replace('__GLOSSARY__', json.dumps(gl, ensure_ascii=False)))
     shutil.copy(os.path.join(ROOT, '..', 'assets', 'logo_small.webp'), os.path.join(OUT, 'assets', 'flux-labs.webp'))
     shutil.copy(os.path.join(ROOT, 'favicon.svg'), os.path.join(OUT, 'favicon.svg'))
     shutil.copy(os.path.join(ROOT, 'tax.css'), os.path.join(OUT, 'assets', 'tax.css'))
@@ -781,14 +786,16 @@ def main():
     shutil.copy(os.path.join(ROOT, 'report.js'), os.path.join(OUT, 'assets', 'report.js'))
     write_report_es(OUT)
     shutil.copy(os.path.join(ROOT, 'tables.js'), os.path.join(OUT, 'assets', 'tables.js'))
+    copy_profile_assets(OUT)
+    print('entity names:', write_entity_names(OUT))
     from og import build_og
     from og import preview_text
     PREVIEW.update(preview_text())
-    OG_VER.update(build_og(OUT, [x for x in PAGES if not x[0].startswith('/public-money/vendors/')], MENU))  # vendor pages use the default card
+    OG_VER.update(build_og(OUT, [x for x in PAGES if not x[0].startswith(PROFILE_PREFIXES)], MENU))  # profile pages use the default card
     PAGE_LABELS.update(_labels())
     for path, title, desc, fn in PAGES:
         write(path, layout(title, desc, path, fn()))
-    print('search index:', build_index(OUT, [x for x in PAGES if not x[0].startswith('/public-money/vendors/')]), 'entries')  # vendors: own indexer
+    print('search index:', build_index(OUT, [x for x in PAGES if not x[0].startswith(PROFILE_PREFIXES)]), 'entries')  # profiles: own indexers
     open(os.path.join(OUT, 'updates.xml'), 'w').write(rss(DOMAIN))
     from app_data import write_app_data
     print('app data:', write_app_data(OUT, PAGES), 'files')
@@ -799,7 +806,7 @@ def main():
     from finance_page import finance_page
     finance_page(OUT)
     from seo import write_robots_and_sitemap
-    print('sitemap:', write_robots_and_sitemap(OUT, [p for p, *_ in PAGES], alternates, lambda p: last_updated(es_updated_key(p))), 'urls')
+    print('sitemap:', write_robots_and_sitemap(OUT, [p for p, *_ in PAGES if p != '/profile'], alternates, lambda p: last_updated(es_updated_key(p))), 'urls')
     for dp, _, fs in os.walk(OUT):
         for f in fs:
             p = os.path.join(dp, f); print(os.path.relpath(p, OUT), os.path.getsize(p))

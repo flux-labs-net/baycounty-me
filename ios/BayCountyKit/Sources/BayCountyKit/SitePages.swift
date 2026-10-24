@@ -55,11 +55,15 @@ public enum SitePages {
         "/search": .native("Search tab"),
         "/about": .native("About"),
         "/privacy": .web("privacy page"),
+        "/people": .native("People"),
+        "/profile": .web("profile of a company, nonprofit, board member or business, read live from /api/v1/entities"),
     ]
 
     /// Page families covered by one native screen (each government's profile).
     public static let prefixes: [String: Coverage] = [
         "/governments/": .native("Government profile"),
+        "/people/": .native("Person detail, with a link to the web profile and its connection map"),
+        "/profile/": .web("entity profile and connection map, read live from /api/v1/entities/{id}"),
     ]
 
     public static func coverage(_ path: String) -> Coverage? {
