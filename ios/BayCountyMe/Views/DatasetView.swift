@@ -429,6 +429,9 @@ struct DatasetView: View {
     }
 }
 
+/// One record, laid out as a profile: who or what it is, its tags and headline numbers, the years it covers,
+/// the people and organizations it names (each opening its own record or profile), related records from the
+/// same lists, and the source. The layout comes from `RecordProfile`, so every list gets it.
 struct RecordDetailView: View {
     @Environment(AppStore.self) private var store
     let datasetID: String
@@ -437,80 +440,34 @@ struct RecordDetailView: View {
     var body: some View {
         let spec = DatasetSpec.for(datasetID)
         if let row = store.rows[datasetID]?.first(where: { $0.id == rowID }) {
-            List {
-                Section {
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text(spec.title(row)).font(.title3.weight(.semibold))
-                        if let a = spec.amount(row) {
-                            Text(Format.money(a)).font(.largeTitle.weight(.semibold).monospacedDigit())
-                                .minimumScaleFactor(0.6).lineLimit(1)
-                            if let key = spec.amountKey(row) { Text(Format.label(key)).font(.caption).foregroundStyle(.secondary) }
-                        }
-                        if let status = row.string("status"), datasetID == "cra-payments" {
-                            HStack { Badge(text: status, color: Brand.status(status)); Text(CRALedger.explain(status: status)).font(.footnote).foregroundStyle(.secondary) }
-                            if row.bool("count") == false {
-                                Label("Left out of totals so no dollar is counted twice.", systemImage: "minus.circle")
-                                    .font(.footnote).foregroundStyle(.secondary)
-                            }
-                        } else if datasetID == "votes" {
-                            let v = VoteSummary(row)
-                            if v.hasTally {
-                                HStack(spacing: 10) {
-                                    VoteDots(summary: v, size: 16)
-                                    Text(v.passed == false ? "Failed \(v.tallyText)" : v.passed == true ? "Passed \(v.tallyText)" : v.tallyText)
-                                        .font(.subheadline.weight(.semibold))
-                                    if v.split { Badge(text: "Split", color: Brand.amber) }
-                                }
-                            }
-                        } else if let b = spec.badge(row) {
-                            Badge(text: b, color: Brand.status(b))
-                        }
+            ScrollView {
+                VStack(alignment: .leading, spacing: 16) {
+                    hero(row, spec: spec)
+                    factsGrid(row)
+                    if let years = RecordProfile.years(row) { YearsStrip(years: years, current: row.bool("current")) }
+                    if let detail = spec.detail(row), spec.detailKey != "sources" {
+                        Text(detail).font(.callout).frame(maxWidth: .infinity, alignment: .leading).padding(16).card(20)
                     }
-                    .padding(.vertical, 4)
-                }
-
-                if let a = spec.amount(row), datasetID != "votes" {
-                    compareSection(row, amount: a, spec: spec)
-                }
-
-                if let detail = spec.detail(row) {
-                    Section { Text(detail) }
-                }
-
-                Section("Details") {
-                    ForEach(Array(DatasetSpec.fields(row, columns: store.info(datasetID)?.columns ?? []).enumerated()), id: \.offset) { _, f in
-                        if f.value.count > 60 || f.value.contains("\n") {
-                            VStack(alignment: .leading, spacing: 4) {
-                                Text(f.label).font(.caption).foregroundStyle(.secondary)
-                                Text(f.value).font(.callout).textSelection(.enabled)
-                            }
-                        } else {
-                            LabeledContent(f.label) { Text(f.value).multilineTextAlignment(.trailing).textSelection(.enabled) }
-                        }
-                    }
-                }
-
-                linksSection(row)
-
-                if row.number("lat") != nil {
-                    Section("Location") {
+                    if let a = spec.amount(row), datasetID != "votes" { compareCard(row, amount: a, spec: spec) }
+                    connections(row)
+                    ForEach(RecordProfile.groups(datasetID, row), id: \.self) { g in groupCard(g, row: row) }
+                    if let me = RecordProfile.subject(datasetID, row) { profileButton(me) }
+                    if row.number("lat") != nil {
                         RecordsMap(datasetID: datasetID, rows: [row])
                             .frame(height: 180)
-                            .listRowInsets(EdgeInsets())
+                            .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+                            .overlay { RoundedRectangle(cornerRadius: 20, style: .continuous).strokeBorder(Brand.hairline) }
                     }
-                }
-
-                Section {
-                    if let url = DatasetSpec.sourceURL(row) {
-                        WebLink(title: row.string("source_title") ?? "Source record", symbol: "doc.text.magnifyingglass", url: url)
-                    }
-                    WebLink(title: "Send a correction", symbol: "exclamationmark.bubble",
-                            url: URL(string: "https://baycounty.me/about?page=\(spec.page.map { "/" + $0 } ?? "/")#contact"))
-                } footer: {
+                    sourceCard(row, spec: spec)
                     Text("From public records compiled by BayCounty.me. Check the original before relying on a single figure.")
+                        .font(.caption).foregroundStyle(.secondary).padding(.horizontal, 4)
                 }
+                .padding(.horizontal, 16)
+                .padding(.top, 8)
+                .padding(.bottom, 24)
             }
-            .navigationTitle(store.info(datasetID)?.title ?? "Record")
+            .background(Brand.canvas)
+            .navigationTitle(Self.noun[datasetID] ?? store.info(datasetID)?.title ?? "Record")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 if let url = DatasetSpec.sourceURL(row) {
@@ -518,13 +475,134 @@ struct RecordDetailView: View {
                               message: Text([spec.title(row), spec.amount(row).map { Format.money($0) }].compactMap { $0 }.joined(separator: " · ")))
                 }
             }
+            .task { await loadRelated(row) }
         } else {
             ContentUnavailableView("Record not found", systemImage: "doc")
         }
     }
 
+    /// What one record of a list is called, for the screen title.
+    static let noun: [String: String] = [
+        "nonprofit-board-members": "Board member", "nonprofits": "Nonprofit", "nonprofit-board-businesses": "Board member's business",
+        "charity-registrations": "Charity registration", "nonprofit-grants": "Grant", "nonprofit-payments": "Payment",
+        "nonprofit-officials": "Official on a board", "entity-profiles": "Profile", "entity-connections": "Connection",
+        "contracts": "Contract", "change-orders": "Change order", "votes": "Vote", "member-votes": "Vote", "cra-payments": "CRA record",
+    ]
+
+    /// The other lists this record's links and groups read from.
+    private func loadRelated(_ row: Row) async {
+        await store.loadVendors()
+        await store.loadPeople()
+        var ids = Set(RecordProfile.groups(datasetID, row).map(\.datasetID)).subtracting([datasetID])
+        if RecordProfile.refs(datasetID, row).contains(where: { $0.kind == "nonprofit" }) { ids.insert("nonprofits") }
+        if !RecordLinks.voteIDs(row).isEmpty, datasetID != "votes" { ids.insert("votes") }
+        for id in ids.sorted() { await store.load(id) }
+    }
+
+    // MARK: - Header
+
+    @ViewBuilder private func hero(_ row: Row, spec: DatasetSpec) -> some View {
+        let org: EntityRef? = datasetID == "nonprofits" ? nil : RecordProfile.refs(datasetID, row).first(where: { $0.kind == "nonprofit" })
+        let chips = RecordProfile.chips(datasetID, row)
+        VStack(alignment: .leading, spacing: 14) {
+            HStack(alignment: .center, spacing: 14) {
+                if let ini = RecordProfile.initials(datasetID, row) {
+                    Text(ini)
+                        .font(.title3.weight(.semibold))
+                        .foregroundStyle(.white)
+                        .frame(width: 56, height: 56)
+                        .background(Brand.navyFill, in: Circle())
+                        .accessibilityHidden(true)
+                } else {
+                    Image(systemName: spec.symbol)
+                        .font(.title2)
+                        .foregroundStyle(Brand.navy)
+                        .frame(width: 56, height: 56)
+                        .background(Brand.navy.opacity(0.1), in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+                        .accessibilityHidden(true)
+                }
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(spec.title(row)).font(.title2.weight(.semibold)).fixedSize(horizontal: false, vertical: true)
+                    if let role = RecordProfile.roleLine(datasetID, row) {
+                        Text(role).font(.subheadline).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
+                    }
+                }
+            }
+            if let org {
+                orgLink(org) {
+                    Label { Text("at \(org.name)").multilineTextAlignment(.leading) } icon: { Image(systemName: "building.2") }
+                        .font(.subheadline.weight(.medium))
+                        .foregroundStyle(Brand.navy)
+                        .frame(minHeight: 44, alignment: .leading)
+                        .contentShape(Rectangle())
+                }
+                .padding(.vertical, -6)
+            }
+            if let a = spec.amount(row) {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(Format.money(a)).font(.largeTitle.weight(.semibold).monospacedDigit())
+                        .minimumScaleFactor(0.6).lineLimit(1)
+                    if let key = spec.amountKey(row) { Text(Format.label(key)).font(.caption).foregroundStyle(.secondary) }
+                }
+            }
+            statusLine(row, spec: spec)
+            if !chips.isEmpty {
+                FlowLayout(spacing: 8) {
+                    ForEach(chips, id: \.self) { c in TagChip(chip: c) }
+                }
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(20)
+        .card(20)
+    }
+
+    /// CRA status, a vote's tally, or the list's own badge.
+    @ViewBuilder private func statusLine(_ row: Row, spec: DatasetSpec) -> some View {
+        if let status = row.string("status"), datasetID == "cra-payments" {
+            HStack { Badge(text: status, color: Brand.status(status)); Text(CRALedger.explain(status: status)).font(.footnote).foregroundStyle(.secondary) }
+            if row.bool("count") == false {
+                Label("Left out of totals so no dollar is counted twice.", systemImage: "minus.circle")
+                    .font(.footnote).foregroundStyle(.secondary)
+            }
+        } else if datasetID == "votes" {
+            let v = VoteSummary(row)
+            if v.hasTally {
+                HStack(spacing: 10) {
+                    VoteDots(summary: v, size: 16)
+                    Text(v.passed == false ? "Failed \(v.tallyText)" : v.passed == true ? "Passed \(v.tallyText)" : v.tallyText)
+                        .font(.subheadline.weight(.semibold))
+                    if v.split { Badge(text: "Split", color: Brand.amber) }
+                }
+            }
+        } else if let b = spec.badge(row), !RecordProfile.chips(datasetID, row).contains(where: { $0.text == b }) {
+            Badge(text: b, color: Brand.status(b))
+        }
+    }
+
+    // MARK: - Numbers
+
+    @ViewBuilder private func factsGrid(_ row: Row) -> some View {
+        let facts = RecordProfile.facts(datasetID, row)
+        if !facts.isEmpty {
+            let cols = Array(repeating: GridItem(.flexible(), spacing: 10, alignment: .top), count: facts.count == 4 ? 2 : facts.count)
+            LazyVGrid(columns: cols, alignment: .leading, spacing: 10) {
+                ForEach(facts, id: \.self) { f in
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(f.value).font(.title2.weight(.semibold).monospacedDigit()).minimumScaleFactor(0.6).lineLimit(1)
+                        Text(f.label).font(.caption).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
+                    }
+                    .frame(maxWidth: .infinity, minHeight: 64, alignment: .topLeading)
+                    .padding(14)
+                    .card(16)
+                    .accessibilityElement(children: .combine)
+                }
+            }
+        }
+    }
+
     /// Where this amount sits among the same list's records from the same year: a dot on a line from smallest to largest.
-    @ViewBuilder private func compareSection(_ row: Row, amount: Double, spec: DatasetSpec) -> some View {
+    @ViewBuilder private func compareCard(_ row: Row, amount: Double, spec: DatasetSpec) -> some View {
         let all = store.rows[datasetID] ?? []
         let idx = Period.Index(all)
         let period = idx.period(row)
@@ -533,78 +611,414 @@ struct RecordDetailView: View {
             let rank = peers.filter { $0 < amount }.count
             let pct = Int((Double(rank) / Double(peers.count) * 100).rounded())
             let median = peers[peers.count / 2]
-            Section {
-                VStack(alignment: .leading, spacing: 10) {
-                    Text(pct >= 50 ? "Larger than \(pct)% of \(period?.label ?? "all") records in this list"
-                                   : "Smaller than \(100 - pct)% of \(period?.label ?? "all") records in this list")
-                        .font(.subheadline.weight(.semibold))
-                    GeometryReader { g in
-                        let x = { (v: Double) in g.size.width * CGFloat(log10(max(v, 1) / max(lo, 1)) / max(log10(max(hi, 1) / max(lo, 1)), 0.0001)) }
-                        ZStack(alignment: .leading) {
-                            Capsule().fill(Brand.sunken).frame(height: 6)
-                            ForEach(Array(peers.enumerated()), id: \.offset) { _, v in
-                                Circle().fill(Brand.blue.opacity(0.25)).frame(width: 6, height: 6).offset(x: x(v) - 3)
-                            }
-                            Rectangle().fill(Color.secondary).frame(width: 1.5, height: 16).offset(x: x(median))
-                            Circle().fill(Brand.navy).frame(width: 16, height: 16).offset(x: x(amount) - 8)
+            VStack(alignment: .leading, spacing: 10) {
+                EyebrowHeader(text: "How it compares")
+                Text(pct >= 50 ? "Larger than \(pct)% of \(period?.label ?? "all") records in this list"
+                               : "Smaller than \(100 - pct)% of \(period?.label ?? "all") records in this list")
+                    .font(.subheadline.weight(.semibold))
+                GeometryReader { g in
+                    let x = { (v: Double) in g.size.width * CGFloat(log10(max(v, 1) / max(lo, 1)) / max(log10(max(hi, 1) / max(lo, 1)), 0.0001)) }
+                    ZStack(alignment: .leading) {
+                        Capsule().fill(Brand.sunken).frame(height: 6)
+                        ForEach(Array(peers.enumerated()), id: \.offset) { _, v in
+                            Circle().fill(Brand.blue.opacity(0.25)).frame(width: 6, height: 6).offset(x: x(v) - 3)
                         }
+                        Rectangle().fill(Color.secondary).frame(width: 1.5, height: 16).offset(x: x(median))
+                        Circle().fill(Brand.navy).frame(width: 16, height: 16).offset(x: x(amount) - 8)
                     }
-                    .frame(height: 18)
-                    .accessibilityHidden(true)
-                    HStack {
-                        Text("Smallest \(Format.compactMoney(lo))")
-                        Spacer()
-                        Text("Middle \(Format.compactMoney(median))")
-                        Spacer()
-                        Text("Largest \(Format.compactMoney(hi))")
-                    }
-                    .font(.caption2).foregroundStyle(.secondary)
                 }
-                .padding(.vertical, 4)
-            } header: {
-                Text("How it compares")
+                .frame(height: 18)
+                .accessibilityHidden(true)
+                HStack {
+                    Text("Smallest \(Format.compactMoney(lo))")
+                    Spacer()
+                    Text("Middle \(Format.compactMoney(median))")
+                    Spacer()
+                    Text("Largest \(Format.compactMoney(hi))")
+                }
+                .font(.caption2).foregroundStyle(.secondary)
             }
+            .padding(16)
+            .card(20)
         }
     }
 
-    /// The record's company, people, approving votes and government, as the website links them.
-    @ViewBuilder private func linksSection(_ row: Row) -> some View {
+    // MARK: - Connections
+
+    /// The organization, companies, officials, votes and government the record names, each as a tappable card row.
+    @ViewBuilder private func connections(_ row: Row) -> some View {
+        let me: EntityRef? = datasetID == "entity-connections" ? nil : RecordProfile.subject(datasetID, row)
+        let refs = RecordProfile.refs(datasetID, row).filter { r in r.kind != "member" && r != me }
         let vendors = RecordLinks.vendorIDs(row)
-        let people = datasetID == "votes" ? [] : RecordLinks.personIDs(row)
+        let people = RecordLinks.personDatasets.contains(datasetID) && datasetID != "votes" ? RecordLinks.personIDs(row) : []
         let voteIDs = Set(RecordLinks.voteIDs(row))
         let votes = datasetID == "votes" ? [] : (store.rows["votes"] ?? []).filter { v in v.string("vote_id").map(voteIDs.contains) ?? false }
         let roll = datasetID == "votes" ? RollCall.members(row) : []
         let gov = row.string("gov_id").flatMap { store.government($0) }
-        if !vendors.isEmpty || !people.isEmpty || !votes.isEmpty || !roll.isEmpty || gov != nil {
-            Section("Linked records") {
-                ForEach(vendors, id: \.self) { id in
-                    NavigationLink(value: Route.vendor(id)) { Label(store.vendor(id)?.name ?? id, systemImage: "building") }
-                }
-                ForEach(people, id: \.self) { id in
-                    NavigationLink(value: Route.person(id)) { Label(store.person(id)?.name ?? id, systemImage: "person") }
-                }
-                ForEach(votes) { v in
-                    NavigationLink(value: Route.record("votes", rowID: v.id)) { Label(v.string("headline") ?? "Vote", systemImage: "hand.raised") }
-                }
-                ForEach(Array(roll.enumerated()), id: \.offset) { _, m in
-                    let vote = (m.vote ?? "").lowercased()
-                    let mark = VoteMark(choice: vote == "yes" ? .yes : vote == "no" ? .no : .other)
-                    if let pid = m.pid {
-                        NavigationLink(value: Route.person(pid)) { HStack { Text(m.name); Spacer(); mark } }
-                    } else {
-                        HStack { Text(m.name); Spacer(); mark }
+        if !refs.isEmpty || !vendors.isEmpty || !people.isEmpty || !votes.isEmpty || gov != nil {
+            VStack(alignment: .leading, spacing: 8) {
+                EyebrowHeader(text: refs.contains { $0.kind == "nonprofit" } && refs.count == 1 ? "Organization" : "Connected to").padding(.horizontal, 4)
+                VStack(spacing: 0) {
+                    let items = linkItems(refs: refs, vendors: vendors, people: people, votes: votes, gov: gov)
+                    ForEach(Array(items.enumerated()), id: \.offset) { i, item in
+                        if i > 0 { RowDivider(inset: 70) }
+                        item
                     }
                 }
-                if let gov { NavigationLink(value: Route.government(gov.govID)) { Label(gov.name, systemImage: "building.columns") } }
+                .card(20)
             }
-            .task {
-                await store.loadVendors()
-                await store.loadPeople()
-                if !voteIDs.isEmpty { await store.load("votes") }
+        }
+        if !roll.isEmpty {
+            VStack(alignment: .leading, spacing: 8) {
+                EyebrowHeader(text: "How each member voted").padding(.horizontal, 4)
+                CardList {
+                    ForEach(Array(roll.enumerated()), id: \.offset) { i, m in
+                        if i > 0 { RowDivider() }
+                        let vote = (m.vote ?? "").lowercased()
+                        let mark = VoteMark(choice: vote == "yes" ? .yes : vote == "no" ? .no : .other)
+                        if let pid = m.pid {
+                            NavigationLink(value: Route.person(pid)) { rollRow(m.name, mark: mark, chevron: true) }.buttonStyle(.plain)
+                        } else {
+                            rollRow(m.name, mark: mark, chevron: false)
+                        }
+                    }
+                }
             }
         }
     }
 
+    private func rollRow(_ name: String, mark: VoteMark, chevron: Bool) -> some View {
+        HStack {
+            Text(name)
+            Spacer()
+            mark
+            if chevron { Image(systemName: "chevron.right").font(.caption.weight(.semibold)).foregroundStyle(.tertiary) }
+        }
+        .padding(.horizontal, 16).frame(minHeight: 48).contentShape(Rectangle())
+    }
+
+    private func linkItems(refs: [EntityRef], vendors: [String], people: [String], votes: [Row], gov: Government?) -> [AnyView] {
+        var out = [AnyView]()
+        for r in refs { out.append(AnyView(entityRow(r))) }
+        for id in vendors {
+            out.append(AnyView(NavigationLink(value: Route.vendor(id)) {
+                LinkCardLabel(symbol: "building.2", tint: Brand.navy, title: store.vendor(id)?.name ?? "Company", detail: "Company")
+            }.buttonStyle(PressRowStyle())))
+        }
+        for id in people {
+            if let p = store.person(id) {
+                out.append(AnyView(NavigationLink(value: Route.person(id)) {
+                    LinkCardLabel(symbol: "person", tint: Brand.navy, title: p.name, detail: p.headline)
+                }.buttonStyle(PressRowStyle())))
+            }
+        }
+        for v in votes {
+            out.append(AnyView(NavigationLink(value: Route.record("votes", rowID: v.id)) {
+                LinkCardLabel(symbol: "hand.raised", tint: Brand.amber, title: v.string("headline") ?? "Vote", detail: "Recorded vote")
+            }.buttonStyle(PressRowStyle())))
+        }
+        if let gov {
+            out.append(AnyView(NavigationLink(value: Route.government(gov.govID)) {
+                LinkCardLabel(symbol: "building.columns", tint: Brand.navy, title: gov.name, detail: "Government")
+            }.buttonStyle(PressRowStyle())))
+        }
+        return out
+    }
+
+    /// A named person or organization: its own record in the app when there is one, else its profile on BayCounty.me.
+    @ViewBuilder private func entityRow(_ r: EntityRef) -> some View {
+        let label = LinkCardLabel(symbol: r.symbol, tint: r.kind == "nonprofit" ? Brand.good : Brand.navy, title: r.name,
+                                  detail: r.kind == "nonprofit" ? nonprofitMeta(r.key) ?? r.label : r.label)
+        switch r.kind {
+        case "nonprofit": orgLink(r) { label }
+        case "person" where store.person(r.key) != nil:
+            NavigationLink(value: Route.person(r.key)) { label }.buttonStyle(PressRowStyle())
+        case "vendor" where store.vendor(r.key) != nil:
+            NavigationLink(value: Route.vendor(r.key)) { label }.buttonStyle(PressRowStyle())
+        case "gov" where store.government(r.key) != nil:
+            NavigationLink(value: Route.government(r.key)) { label }.buttonStyle(PressRowStyle())
+        default:
+            Button { store.open(r.profileURL) } label: { label }.buttonStyle(PressRowStyle())
+        }
+    }
+
+    /// A nonprofit opens its own record in the app when the nonprofits list has it, else its web profile.
+    @ViewBuilder private func orgLink<L: View>(_ r: EntityRef, @ViewBuilder label: () -> L) -> some View {
+        if let np = nonprofitRow(r.key) {
+            NavigationLink(value: Route.record("nonprofits", rowID: np.id)) { label() }.buttonStyle(PressRowStyle())
+        } else {
+            Button { store.open(r.profileURL) } label: { label() }.buttonStyle(PressRowStyle())
+        }
+    }
+
+    private func nonprofitRow(_ id: String) -> Row? {
+        store.rows["nonprofits"]?.first { $0.string("nonprofit_id") == id }
+    }
+
+    /// "Nonprofit · Panama City · Active since 2001 · 4 board members"
+    private func nonprofitMeta(_ id: String) -> String? {
+        guard let n = nonprofitRow(id) else { return nil }
+        var parts = [n.string("kind") ?? "Nonprofit"]
+        if let c = n.string("city") { parts.append(c) }
+        if n.string("sunbiz_status") == "Active", let f = n.string("sunbiz_filed") { parts.append("Active since \(f.prefix(4))") }
+        if let b = n.number("board_members_listed"), b > 0 { parts.append("\(Int(b)) board member" + (b == 1 ? "" : "s")) }
+        return parts.joined(separator: " · ")
+    }
+
+    // MARK: - Related records
+
+    @ViewBuilder private func groupCard(_ g: RecordProfile.Group, row: Row) -> some View {
+        let same = g.datasetID == datasetID
+        let rows = RecordProfile.members(of: g, in: store.rows[g.datasetID] ?? [], excluding: row.id, sameDataset: same)
+        if !rows.isEmpty {
+            let people = g.datasetID == "nonprofit-board-members" && g.column != "person_id"
+            VStack(alignment: .leading, spacing: 8) {
+                HStack(alignment: .firstTextBaseline) {
+                    EyebrowHeader(text: g.title)
+                    Spacer()
+                    Text("\(rows.count)").font(.footnote.weight(.semibold).monospacedDigit()).foregroundStyle(.secondary)
+                }
+                .padding(.horizontal, 4)
+                CardList {
+                    ForEach(Array(rows.prefix(6).enumerated()), id: \.offset) { i, r in
+                        if i > 0 { RowDivider(inset: 64) }
+                        NavigationLink(value: Route.record(g.datasetID, rowID: r.id)) {
+                            groupRowLabel(g, r, people: people)
+                        }
+                        .buttonStyle(PressRowStyle())
+                    }
+                    if rows.count > 6 {
+                        RowDivider()
+                        RouteRow(route: .dataset(g.datasetID, filters: [g.column: g.value]), title: "See all \(rows.count)")
+                    }
+                }
+            }
+        }
+    }
+
+    private func groupRowLabel(_ g: RecordProfile.Group, _ r: Row, people: Bool) -> LinkCardLabel {
+        let title = RecordProfile.groupRowTitle(g, r)
+        let detail = RecordProfile.groupRowDetail(g, r)
+        if people {
+            return LinkCardLabel(initials: Self.initials(title), tint: Brand.navy, title: title, detail: detail, compact: true)
+        }
+        let symbol = g.datasetID == "nonprofit-board-members" ? "heart" : DatasetSpec.for(g.datasetID).symbol
+        return LinkCardLabel(symbol: symbol, tint: Brand.good, title: title, detail: detail, compact: true)
+    }
+
+    static func initials(_ name: String) -> String {
+        let w = name.split(separator: " ").filter { $0.first?.isLetter == true }
+        return ((w.first?.first.map(String.init) ?? "") + (w.count > 1 ? w.last?.first.map(String.init) ?? "" : "")).uppercased()
+    }
+
+    // MARK: - Profile and source
+
+    private func profileButton(_ me: EntityRef) -> some View {
+        Button { store.open(me.profileURL) } label: {
+            HStack(spacing: 12) {
+                Image(systemName: "point.3.connected.trianglepath.dotted").font(.title3).accessibilityHidden(true)
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("\(me.name): profile and connections").font(.subheadline.weight(.semibold)).multilineTextAlignment(.leading)
+                    Text("People, money and links on one map").font(.caption).opacity(0.85)
+                }
+                Spacer(minLength: 4)
+                Image(systemName: "chevron.right").font(.caption.weight(.bold)).accessibilityHidden(true)
+            }
+            .foregroundStyle(.white)
+            .padding(.horizontal, 18)
+            .frame(maxWidth: .infinity, minHeight: 64)
+            .background(Brand.navyFill, in: RoundedRectangle(cornerRadius: 20, style: .continuous))
+            .contentShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+        }
+        .buttonStyle(PressScaleStyle())
+    }
+
+    @ViewBuilder private func sourceCard(_ row: Row, spec: DatasetSpec) -> some View {
+        let fields = RecordProfile.otherFields(datasetID, row, columns: store.info(datasetID)?.columns ?? [])
+        CardList {
+            if let url = DatasetSpec.sourceURL(row) {
+                WebRow(title: row.string("source_title") ?? Self.sourceName(url), symbol: "doc.text.magnifyingglass", url: url)
+                RowDivider(inset: 50)
+            }
+            WebRow(title: "Send a correction", symbol: "exclamationmark.bubble",
+                   url: URL(string: "https://baycounty.me/about?page=\(spec.page.map { "/" + $0 } ?? "/")#contact"))
+            if !fields.isEmpty {
+                RowDivider(inset: 50)
+                AllFields(fields: fields)
+            }
+        }
+    }
+
+    /// "Florida corporate filing (Sunbiz)" for a sunbiz.org link, and so on.
+    static func sourceName(_ url: URL) -> String {
+        let host = url.host() ?? ""
+        if host.contains("sunbiz") { return "Florida corporate filing (Sunbiz)" }
+        if host.contains("gt990datalake") || host.contains("irs.gov") { return "IRS return" }
+        if host.contains("propublica") { return "IRS filings (ProPublica)" }
+        if host.contains("fdacs") { return "Florida charity registration" }
+        return "Source record"
+    }
+}
+
+/// A tag in a record's header.
+struct TagChip: View {
+    let chip: RecordProfile.Chip
+
+    var body: some View {
+        let color: Color = switch chip.tone {
+        case .good: Brand.good
+        case .accent: Brand.navy
+        case .warn: Brand.amber
+        case .neutral: .secondary
+        }
+        HStack(spacing: 6) {
+            if chip.tone == .good { Circle().fill(color).frame(width: 7, height: 7).accessibilityHidden(true) }
+            Text(chip.text).font(.footnote.weight(.semibold)).lineLimit(1)
+        }
+        .foregroundStyle(color)
+        .padding(.horizontal, 12)
+        .frame(minHeight: 28)
+        .background(chip.tone == .neutral ? AnyShapeStyle(Brand.sunken) : AnyShapeStyle(color.opacity(0.14)), in: Capsule())
+    }
+}
+
+/// A row on a card that leads somewhere: an icon tile (or initials), a name, a detail line and a chevron.
+struct LinkCardLabel: View {
+    var symbol: String? = nil
+    var initials: String? = nil
+    var tint: Color = Brand.navy
+    let title: String
+    var detail: String? = nil
+    var compact = false
+
+    var body: some View {
+        HStack(spacing: 12) {
+            Group {
+                if let initials {
+                    Text(initials).font(.footnote.weight(.semibold)).foregroundStyle(tint)
+                        .frame(width: 36, height: 36).background(tint.opacity(0.12), in: Circle())
+                } else if let symbol {
+                    Image(systemName: symbol).font(compact ? .body : .title3).foregroundStyle(tint)
+                        .frame(width: compact ? 36 : 44, height: compact ? 36 : 44)
+                        .background(tint.opacity(0.12), in: RoundedRectangle(cornerRadius: compact ? 10 : 12, style: .continuous))
+                }
+            }
+            .accessibilityHidden(true)
+            VStack(alignment: .leading, spacing: 2) {
+                Text(title).font(.subheadline.weight(.semibold)).foregroundStyle(.primary).multilineTextAlignment(.leading)
+                if let detail, !detail.isEmpty {
+                    Text(detail).font(.caption).foregroundStyle(.secondary).multilineTextAlignment(.leading).lineLimit(3)
+                }
+            }
+            Spacer(minLength: 4)
+            Image(systemName: "chevron.right").font(.caption.weight(.semibold)).foregroundStyle(.tertiary).accessibilityHidden(true)
+        }
+        .padding(.horizontal, 14)
+        .padding(.vertical, compact ? 8 : 12)
+        .frame(minHeight: 56)
+        .contentShape(Rectangle())
+    }
+}
+
+/// Rows fade slightly while pressed.
+struct PressRowStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .opacity(configuration.isPressed ? 0.55 : 1)
+            .animation(.easeOut(duration: 0.12), value: configuration.isPressed)
+    }
+}
+
+/// Buttons shrink a touch while pressed.
+struct PressScaleStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .scaleEffect(configuration.isPressed ? 0.96 : 1)
+            .animation(.easeOut(duration: 0.15), value: configuration.isPressed)
+    }
+}
+
+/// The years a record covers, as a strip of year cells (filled for the years on file).
+struct YearsStrip: View {
+    let years: ClosedRange<Int>
+    var current: Bool? = nil
+
+    private var cells: [Int] {
+        let lo = min(years.lowerBound, years.upperBound - 7)
+        return Array(max(lo, years.upperBound - 11)...years.upperBound)
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack(alignment: .firstTextBaseline) {
+                Text("Years on file").font(.subheadline.weight(.semibold))
+                Spacer()
+                Text(years.count == 1 ? "\(years.lowerBound)" : "\(years.lowerBound)–\(years.upperBound)")
+                    .font(.footnote.monospacedDigit()).foregroundStyle(.secondary)
+            }
+            HStack(spacing: 4) {
+                ForEach(cells, id: \.self) { y in
+                    let on = years.contains(y)
+                    VStack(spacing: 6) {
+                        Capsule().fill(on ? Brand.navyFill : Brand.sunken).frame(height: 10)
+                        Text("’" + String(y % 100).leftPad(2)).font(.caption2.monospacedDigit())
+                            .foregroundStyle(on ? .primary : .tertiary)
+                    }
+                    .frame(maxWidth: .infinity)
+                }
+            }
+            .accessibilityHidden(true)
+        }
+        .padding(16)
+        .card(20)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(years.count == 1 ? "On file in \(years.lowerBound)" : "On file from \(years.lowerBound) to \(years.upperBound)")
+    }
+}
+
+private extension String {
+    func leftPad(_ n: Int) -> String { count >= n ? self : String(repeating: "0", count: n - count) + self }
+}
+
+/// Every remaining field, folded away under one row.
+struct AllFields: View {
+    let fields: [(label: String, value: String)]
+    @State private var open = false
+
+    var body: some View {
+        VStack(spacing: 0) {
+            Button { withAnimation(.easeOut(duration: 0.2)) { open.toggle() } } label: {
+                HStack(spacing: 12) {
+                    Image(systemName: "list.bullet.rectangle").foregroundStyle(Brand.navy).frame(width: 24).accessibilityHidden(true)
+                    Text("All fields").foregroundStyle(.primary)
+                    Spacer()
+                    Text("\(fields.count)").font(.footnote.monospacedDigit()).foregroundStyle(.secondary)
+                    Image(systemName: "chevron.down").font(.caption.weight(.semibold)).foregroundStyle(.tertiary)
+                        .rotationEffect(.degrees(open ? 180 : 0))
+                        .accessibilityHidden(true)
+                }
+                .padding(.horizontal, 14)
+                .frame(minHeight: 50)
+                .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            .accessibilityValue(open ? "Shown" : "Hidden")
+            if open {
+                VStack(alignment: .leading, spacing: 12) {
+                    ForEach(Array(fields.enumerated()), id: \.offset) { _, f in
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text(f.label).font(.caption).foregroundStyle(.secondary)
+                            Text(f.value).font(.callout).textSelection(.enabled).fixedSize(horizontal: false, vertical: true)
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                }
+                .padding(.horizontal, 14)
+                .padding(.bottom, 14)
+                .transition(.opacity)
+            }
+        }
+    }
 }
 
 /// One member's vote on a recorded vote.
