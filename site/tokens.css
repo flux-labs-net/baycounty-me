@@ -12,16 +12,19 @@
   --f-body:"Poppins", "Segoe UI", system-ui, sans-serif;
   --f-data:"IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
   --r:14px; --r-lg:20px; color-scheme:light;
+  --chev:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235A6372' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
 }
 @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
   --bg:#0E131B; --surface:#151C27; --sunken:#1B2431; --ink:#E7ECF3; --muted:#A1AABA; --faint:#768092; --line:#263142;
   --navy:#9DB8EA; --blue:#7FA6DA; --salmon:#FF8C82; --amber:#FFC36B; --gold:#E8A33D; --teal:#4CC2B2;
   --accent-ink:#FF8C82; --on-navy:#0E131B; --bar:#34445A;
   --tint-blue:#18212E; --tint-salmon:#2A1B1D; --tint-amber:#2A2215; --tint-teal:#132723;
-  --shadow:0 1px 2px rgba(0,0,0,.3),0 16px 40px rgba(0,0,0,.35); color-scheme:dark }}
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 16px 40px rgba(0,0,0,.35); color-scheme:dark;
+  --chev:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23A1AABA' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E"); }}
 :root[data-theme="dark"]{
   --bg:#0E131B; --surface:#151C27; --sunken:#1B2431; --ink:#E7ECF3; --muted:#A1AABA; --faint:#768092; --line:#263142;
   --navy:#9DB8EA; --blue:#7FA6DA; --salmon:#FF8C82; --amber:#FFC36B; --gold:#E8A33D; --teal:#4CC2B2;
   --accent-ink:#FF8C82; --on-navy:#0E131B; --bar:#34445A;
   --tint-blue:#18212E; --tint-salmon:#2A1B1D; --tint-amber:#2A2215; --tint-teal:#132723;
-  --shadow:0 1px 2px rgba(0,0,0,.3),0 16px 40px rgba(0,0,0,.35); color-scheme:dark }
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 16px 40px rgba(0,0,0,.35); color-scheme:dark;
+  --chev:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23A1AABA' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E"); }

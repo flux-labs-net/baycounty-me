@@ -752,6 +752,7 @@ def main():
     shutil.copy(os.path.join(ROOT, 'favicon.svg'), os.path.join(OUT, 'favicon.svg'))
     shutil.copy(os.path.join(ROOT, 'tax.css'), os.path.join(OUT, 'assets', 'tax.css'))
     shutil.copy(os.path.join(ROOT, 'gov.js'), os.path.join(OUT, 'assets', 'gov.js'))
+    shutil.copy(os.path.join(ROOT, 'gov.css'), os.path.join(OUT, 'assets', 'gov.css'))
     shutil.copy(os.path.join(ROOT, 'home.js'), os.path.join(OUT, 'assets', 'home.js'))
     shutil.copy(os.path.join(ROOT, 'report.js'), os.path.join(OUT, 'assets', 'report.js'))
     write_report_es(OUT)

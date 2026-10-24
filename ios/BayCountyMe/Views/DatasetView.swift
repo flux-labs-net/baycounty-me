@@ -306,15 +306,13 @@ struct DatasetView: View {
     }
 
     private var activeFilters: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 6) {
-                if let b = bucket {
-                    FilterChip(text: b.count == 7 ? Browse.monthName(b) : b) { bucket = nil }
-                }
-                ForEach(filters.sorted { $0.key < $1.key }, id: \.key) { pair in
-                    FilterChip(text: pair.key == "gov_id" ? (Governments.names[pair.value] ?? pair.value) : pair.value) {
-                        filters[pair.key] = nil
-                    }
+        FlowLayout(spacing: 6) {
+            if let b = bucket {
+                FilterChip(text: b.count == 7 ? Browse.monthName(b) : b) { bucket = nil }
+            }
+            ForEach(filters.sorted { $0.key < $1.key }, id: \.key) { pair in
+                FilterChip(text: pair.key == "gov_id" ? (Governments.names[pair.value] ?? pair.value) : pair.value) {
+                    filters[pair.key] = nil
                 }
             }
         }
@@ -350,12 +348,9 @@ struct DatasetView: View {
         List {
             Section {
                 controls(rows)
-                Picker("Show", selection: $voteFilter) {
-                    Text("All \(rows.count)").tag(VoteFilter.all)
-                    Text("Split \(splitCount)").tag(VoteFilter.split)
-                    Text("Failed \(failedCount)").tag(VoteFilter.failed)
-                }
-                .pickerStyle(.segmented)
+                ChipRow(chips: [(id: VoteFilter.all, label: "All"), (id: VoteFilter.split, label: "Split"), (id: VoteFilter.failed, label: "Failed")],
+                        selected: voteFilter,
+                        counts: [.all: rows.count, .split: splitCount, .failed: failedCount]) { voteFilter = $0 }
                 VoteLegend()
                 if query.isEmpty && voteFilter == .all { summaryCard(base) }
             }

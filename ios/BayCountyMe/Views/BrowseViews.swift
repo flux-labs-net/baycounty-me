@@ -15,7 +15,8 @@ struct ChipLabel: View {
             Image(systemName: "chevron.up.chevron.down").font(.caption2.weight(.semibold))
         }
         .font(.subheadline.weight(.semibold))
-        .padding(.horizontal, 12).padding(.vertical, 6)
+        .padding(.horizontal, 16)
+        .frame(minHeight: 40)
         .foregroundStyle(filled ? Color.white : Brand.navy)
         .background(filled ? AnyShapeStyle(Brand.navyFill) : AnyShapeStyle(Brand.surface), in: Capsule())
         .overlay { if !filled { Capsule().strokeBorder(Brand.navy.opacity(0.2)) } }
@@ -33,12 +34,15 @@ struct FilterChip: View {
                 Text(text).lineLimit(1)
                 Image(systemName: "xmark").font(.caption2.weight(.bold))
             }
-            .font(.caption.weight(.medium))
-            .padding(.horizontal, 10).padding(.vertical, 5)
+            .font(.footnote.weight(.medium))
+            .padding(.horizontal, 12)
+            .frame(minHeight: 34)
             .foregroundStyle(Brand.navy)
             .background(Brand.navy.opacity(0.12), in: Capsule())
+            .padding(.vertical, 5)
+            .contentShape(Rectangle())
         }
-        .buttonStyle(.plain)
+        .buttonStyle(PressScale())
         .accessibilityLabel("Remove filter \(text)")
     }
 }

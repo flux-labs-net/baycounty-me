@@ -21,8 +21,11 @@ final class MoneyTabTests: XCTestCase {
         XCTAssertTrue(app.navigationBars["Money"].waitForExistence(timeout: 5))
         for c in cards {
             let card = app.buttons.matching(NSPredicate(format: "label BEGINSWITH %@", c.card)).firstMatch
+            // Slow swipes so a card isn't flung past the top; if one still is, come back down for it.
             var tries = 0
-            while !(card.exists && card.isHittable) && tries < 10 { app.swipeUp(); tries += 1 }
+            while !(card.exists && card.isHittable) && tries < 12 { app.swipeUp(velocity: .slow); tries += 1 }
+            tries = 0
+            while !(card.exists && card.isHittable) && tries < 6 { app.swipeDown(velocity: .slow); tries += 1 }
             XCTAssertTrue(card.isHittable, "Card \(c.card) not found")
             card.tap()
             XCTAssertTrue(app.navigationBars[c.title].waitForExistence(timeout: 8),

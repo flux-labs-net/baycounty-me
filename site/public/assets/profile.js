@@ -85,7 +85,7 @@
         <td class="wrap small">${esc(c.detail || '')}</td><td class="num">${c.amount ? money(c.amount) : ''}${c.records > 1 ? `<small>${c.records} records</small>` : ''}</td>
         <td class="small">${esc([c.first_date, c.last_date].filter((x, i, a) => x && a.indexOf(x) === i).join(' to '))}</td><td>${c.source_url ? `<a class="src" href="${esc(c.source_url)}" target="_blank" rel="noopener">Source</a>` : ''}</td></tr>`;
       return `<section class="pf-grp"><div class="sec-hd"><h3>${esc(lbl.charAt(0).toUpperCase() + lbl.slice(1))}</h3><span class="muted">${rs.length.toLocaleString('en-US')}${tot ? ' · ' + money(tot) + ' in the records' : ''}</span></div>
-        <div class="tablewrap"><table class="tx-table vd-table" data-tt="off"><tbody>${rs.slice(0, SHOW).map(row).join('')}</tbody></table></div>
+        <div class="tablewrap"><table class="tx-table vd-table" data-tt="off" data-cols="|What|Amount|Dates|"><tbody>${rs.slice(0, SHOW).map(row).join('')}</tbody></table></div>
         ${rs.length > SHOW ? `<button type="button" class="pill pf-more" data-k="${esc(k)}">Show all ${rs.length.toLocaleString('en-US')}</button>` : ''}</section>`;
     }).join('') || '<p class="muted">No connections in the records yet.</p>';
     box.querySelectorAll('.pf-more').forEach(b => b.addEventListener('click', () => {
