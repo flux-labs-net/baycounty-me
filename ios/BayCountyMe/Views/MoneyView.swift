@@ -48,36 +48,118 @@ struct MoneyView: View {
         .init(title: "Gifts from organizations", symbol: "envelope", detail: "2026 contributions from businesses and groups", route: .dataset("campaign-contributions-2026")),
     ]
 
+    private enum MoneySection: String, CaseIterable { case pay, goes, accountability, elections }
+
+    private func title(_ s: MoneySection) -> String {
+        switch s { case .pay: "What you pay"; case .goes: "Where it goes"; case .accountability: "Accountability"; case .elections: "Elections" }
+    }
+    private func items(_ s: MoneySection) -> [Item] {
+        switch s { case .pay: pay; case .goes: goes; case .accountability: accountability; case .elections: elections }
+    }
+
+    @State private var picked: MoneySection = .pay
+
+    /// Running totals shown beside a row, from the government profiles and the Amendment 3 model.
+    private func value(_ item: Item) -> String? {
+        let g = store.governments
+        switch item.title {
+        case "Amendment 3":
+            guard let a3 = store.amendment3 else { return nil }
+            let v = a3.localImpact(1)
+            return v > 0 ? "−" + Format.compactMoney(v) : nil
+        case "Hurricane Michael": return total(g.compactMap(\.femaMichael))
+        case "Debt": return total(g.compactMap(\.debtTotal))
+        case "Audit findings":
+            let n = g.compactMap(\.auditFindings).reduce(0, +)
+            return n > 0 ? "\(n)" : nil
+        default: return nil
+        }
+    }
+
+    private func total(_ v: [Double]) -> String? {
+        let t = v.reduce(0, +)
+        return t > 0 ? Format.compactMoney(t) : nil
+    }
+
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 22) {
-                    section("What you pay", pay)
-                    section("Where it goes", goes)
-                    section("Accountability", accountability)
-                    section("Elections", elections)
-                    VStack(spacing: 0) {
-                        NavigationLink(value: Route.explore) {
-                            Label("Every dataset", systemImage: "square.grid.2x2").frame(maxWidth: .infinity, alignment: .leading).padding(14)
+            ScrollViewReader { proxy in
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 22) {
+                        levyCard
+                        ChipRow(chips: MoneySection.allCases.map { (id: $0, label: title($0)) }, selected: picked) { s in
+                            picked = s
+                            withAnimation { proxy.scrollTo(s, anchor: .top) }
                         }
-                        Divider().padding(.leading, 14)
-                        WebLink(title: "Public money map", symbol: "map", url: URL(string: "https://baycounty.me/public-money/map"))
-                            .frame(maxWidth: .infinity, alignment: .leading).padding(14)
+                        ForEach(MoneySection.allCases, id: \.self) { s in
+                            section(title(s), items(s)).id(s)
+                        }
+                        CardList {
+                            RouteRow(route: .explore, title: "Every dataset", symbol: "square.grid.2x2")
+                            RowDivider(inset: 50)
+                            WebRow(title: "Public money map", symbol: "map", url: URL(string: "https://baycounty.me/public-money/map"))
+                        }
                     }
-                    .background(Brand.surface, in: RoundedRectangle(cornerRadius: 14))
+                    .padding(.horizontal, 16)
+                    .padding(.bottom, 24)
                 }
-                .padding(16)
             }
             .background(Brand.canvas)
-            .navigationTitle("Public Money")
+            .navigationTitle("Money")
+            .refreshable { await store.loadGovernments() }
+            .task { await store.loadAmendment3() }
             .withRoutes()
         }
     }
 
+    /// Property tax levied this year across every government, split by who levies it.
+    @ViewBuilder private var levyCard: some View {
+        let g = store.governments
+        let county = g.filter { $0.kind == "county" }.compactMap(\.propertyTaxLevy).reduce(0, +)
+        let schools = g.filter { $0.kind == "schools" }.compactMap(\.propertyTaxLevy).reduce(0, +)
+        let cities = g.filter { $0.kind == "city" }.compactMap(\.propertyTaxLevy).reduce(0, +)
+        let total = county + schools + cities
+        if total > 0 {
+            let parts: [(label: String, value: Double, color: Color)] = [
+                ("Schools", schools, Color(red: 0.56, green: 0.70, blue: 0.89)),
+                ("County", county, Color(red: 1.0, green: 0.55, blue: 0.51)),
+                ("Cities", cities, Brand.amber),
+            ]
+            NavigationLink(value: Route.taxCalculator()) {
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("Property tax levied this year").font(.footnote).foregroundStyle(.white.opacity(0.8))
+                    Text(Format.compactMoney(total)).font(.largeTitle.weight(.heavy).monospacedDigit()).foregroundStyle(.white)
+                    StackBar(parts: parts)
+                    HStack(spacing: 14) {
+                        ForEach(parts, id: \.label) { p in
+                            HStack(spacing: 5) {
+                                RoundedRectangle(cornerRadius: 2).fill(p.color).frame(width: 8, height: 8)
+                                Text("\(p.label) \(Int((p.value / total * 100).rounded()))%")
+                            }
+                        }
+                    }
+                    .font(.caption)
+                    .foregroundStyle(.white.opacity(0.8))
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(18)
+                .background(Brand.navy, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+            }
+            .buttonStyle(.plain)
+            .accessibilityElement(children: .combine)
+            .accessibilityHint("Opens the tax calculator")
+        }
+    }
+
     private func section(_ title: String, _ items: [Item]) -> some View {
-        VStack(alignment: .leading, spacing: 10) {
-            Text(title).font(.title3.weight(.bold))
-            TopicGrid(topics: items.map { TopicGrid.Topic(title: $0.title, symbol: $0.symbol, detail: $0.detail, route: $0.route) })
+        VStack(alignment: .leading, spacing: 12) {
+            SectionHeader(title: title)
+            CardList {
+                ForEach(items) { i in
+                    RouteRow(route: i.route, title: i.title, detail: i.detail, symbol: i.symbol, value: value(i))
+                    if i.id != items.last?.id { RowDivider(inset: 50) }
+                }
+            }
         }
     }
 }

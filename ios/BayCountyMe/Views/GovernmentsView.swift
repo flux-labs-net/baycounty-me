@@ -4,65 +4,100 @@ import BayCountyKit
 struct GovernmentsView: View {
     @Environment(AppStore.self) private var store
     @State private var metric: GovMetric = .perResident
+    @State private var path: [Route] = []
 
     var body: some View {
-        NavigationStack {
-            List {
-                if store.governments.isEmpty {
-                    if let e = store.errors["government-profiles"] {
-                        ContentUnavailableView("Couldn't load governments", systemImage: "wifi.slash", description: Text(e))
+        NavigationStack(path: $path) {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 24) {
+                    if store.governments.isEmpty {
+                        if let e = store.errors["government-profiles"] {
+                            ContentUnavailableView("Couldn't load governments", systemImage: "wifi.slash", description: Text(e))
+                        } else {
+                            ProgressView().frame(maxWidth: .infinity, minHeight: 200)
+                        }
                     } else {
-                        ProgressView().frame(maxWidth: .infinity)
+                        compareCard
+                        governmentsSection
                     }
-                } else {
-                    Section {
-                        Picker("Compare", selection: $metric) {
-                            ForEach(GovMetric.allCases) { Text($0.short).tag($0) }
-                        }
-                        .pickerStyle(.segmented)
-                        CompareBars(title: metric.title, caption: metric.caption,
-                                    items: metric.items(store.governments), format: metric.format)
-                    }
-                    .listRowBackground(Color.clear)
-                    .listRowInsets(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 16))
-                    .listRowSeparator(.hidden)
+                    peopleSection
+                    FreshnessNote(key: "government-profiles")
                 }
-                let maxBudget = store.governments.compactMap(\.budgetTotal).max() ?? 0
-                Section("Every government") {
-                    ForEach(store.governments) { g in
-                        NavigationLink(value: Route.government(g.govID)) {
-                            VStack(alignment: .leading, spacing: 5) {
-                                HStack(alignment: .firstTextBaseline) {
-                                    Text(g.name).font(.body.weight(.semibold))
-                                    Spacer()
-                                    if let b = g.budgetTotal {
-                                        Text(Format.compactMoney(b)).font(.subheadline.weight(.semibold).monospacedDigit())
-                                            + Text(" budget").font(.caption).foregroundColor(.secondary)
-                                    }
-                                }
-                                if let b = g.budgetTotal, maxBudget > 0 { MagnitudeBar(fraction: b / maxBudget, height: 5) }
-                                HStack(spacing: 6) {
-                                    if let p = g.population { Text("\(Format.number(p)) residents") }
-                                    if let m = g.millage { Text("· \(Format.number(m)) mills") }
-                                }
-                                .font(.caption)
-                                .foregroundStyle(.secondary)
-                            }
-                            .padding(.vertical, 3)
-                        }
-                    }
-                }
-                Section {
-                    NavigationLink(value: Route.people) { Label("People: officials, leaders and candidates", systemImage: "person.3") }
-                    NavigationLink(value: Route.dataset("officials-pay")) { Label("What officials are paid", systemImage: "person.text.rectangle") }
-                    WebLink(title: "Compare governments side by side", symbol: "chart.bar.xaxis",
-                            url: URL(string: "https://baycounty.me/compare"))
-                    WebLink(title: "Who runs Bay County", symbol: "building.columns", url: URL(string: "https://baycounty.me/who-runs-bay-county"))
-                }
+                .padding(.horizontal, 16)
+                .padding(.bottom, 24)
             }
+            .background(Brand.canvas)
             .navigationTitle("Places")
             .refreshable { await store.loadGovernments() }
             .withRoutes()
+        }
+    }
+
+    /// Pick a measure, see every government ranked on it. Tapping a bar opens that government.
+    private var compareCard: some View {
+        let items = metric.items(store.governments)
+        return VStack(alignment: .leading, spacing: 14) {
+            Picker("Compare", selection: $metric) {
+                ForEach(GovMetric.allCases) { Text($0.short).tag($0) }
+            }
+            .pickerStyle(.segmented)
+            CompareBars(title: metric.title, caption: metric.caption, items: items,
+                        highlight: items.first?.id, format: metric.format) { path.append(.government($0)) }
+        }
+        .padding(16)
+        .background(Brand.surface, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+    }
+
+    private var governmentsSection: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            SectionHeader(title: "Every government")
+            CardList {
+                ForEach(store.governments) { g in
+                    NavigationLink(value: Route.government(g.govID)) {
+                        HStack(spacing: 12) {
+                            GovBadge(govID: g.govID)
+                            VStack(alignment: .leading, spacing: 2) {
+                                Text(g.name).font(.subheadline.weight(.semibold)).foregroundStyle(.primary)
+                                Text(subtitle(g)).font(.caption.monospacedDigit()).foregroundStyle(.secondary).lineLimit(1)
+                            }
+                            Spacer(minLength: 4)
+                            if let b = g.budgetTotal {
+                                Text(Format.compactMoney(b)).font(.subheadline.weight(.bold).monospacedDigit())
+                                    .foregroundStyle(.primary)
+                                    .accessibilityLabel("\(Format.compactMoney(b)) budget")
+                            }
+                            Image(systemName: "chevron.right").font(.caption.weight(.semibold)).foregroundStyle(.tertiary)
+                        }
+                        .padding(.horizontal, 14)
+                        .frame(minHeight: 64)
+                        .contentShape(Rectangle())
+                    }
+                    .buttonStyle(.plain)
+                    if g.id != store.governments.last?.id { RowDivider(inset: 66) }
+                }
+            }
+        }
+    }
+
+    private func subtitle(_ g: Government) -> String {
+        [g.kind == "schools" ? "School district" : Format.label(g.kind),
+         g.population.map { "\(Format.number($0)) residents" },
+         g.millage.flatMap { $0 > 0 ? "\(Format.number($0)) mills" : nil }]
+            .compactMap { $0 }.filter { !$0.isEmpty }.joined(separator: " · ")
+    }
+
+    private var peopleSection: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            SectionHeader(title: "People")
+            CardList {
+                RouteRow(route: .people, title: "Officials, leaders and candidates", symbol: "person.3")
+                RowDivider(inset: 50)
+                RouteRow(route: .dataset("officials-pay"), title: "What officials are paid", symbol: "person.text.rectangle")
+                RowDivider(inset: 50)
+                WebRow(title: "Compare side by side", symbol: "chart.bar.xaxis", url: URL(string: "https://baycounty.me/compare"))
+                RowDivider(inset: 50)
+                WebRow(title: "Who runs Bay County", symbol: "building.columns", url: URL(string: "https://baycounty.me/who-runs-bay-county"))
+            }
         }
     }
 }
@@ -129,6 +164,16 @@ struct GovernmentDetailView: View {
         if let g = store.government(govID) {
             List {
                 Section {
+                    HStack(spacing: 12) {
+                        GovBadge(govID: g.govID)
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text(g.name).font(.title3.weight(.bold))
+                            if let p = g.population {
+                                Text("\(Format.number(p)) residents (2025 estimate)").font(.caption).foregroundStyle(.secondary)
+                            }
+                        }
+                    }
+                    .padding(.vertical, 4)
                     LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 10) {
                         if let v = g.budgetTotal { StatTile(title: "Total budget", value: Format.compactMoney(v), caption: g.budgetStatus) }
                         if let v = g.budgetPerResident { StatTile(title: "Budget per resident", value: Format.money(v.rounded())) }
@@ -142,9 +187,6 @@ struct GovernmentDetailView: View {
                         if let v = g.femaMichael { StatTile(title: "FEMA, Hurricane Michael", value: Format.compactMoney(v)) }
                     }
                     .listRowInsets(EdgeInsets(top: 8, leading: 12, bottom: 8, trailing: 12))
-                    if let p = g.population {
-                        Text("\(Format.number(p)) residents (2025 estimate)").font(.footnote).foregroundStyle(.secondary)
-                    }
                 }
 
                 Section {

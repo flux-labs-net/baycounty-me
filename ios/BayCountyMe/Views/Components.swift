@@ -27,7 +27,7 @@ enum Brand {
     }
 }
 
-/// Places a row can lead to. Every tab's NavigationStack resolves these the same way.
+/// Places a row can lead to. Every tab's NavigationStack resolves these the same way, on the same canvas.
 enum Route: Hashable {
     case dataset(String, filters: [String: String] = [:])
     case record(String, rowID: Int)
@@ -56,30 +56,33 @@ enum Route: Hashable {
 extension View {
     func withRoutes() -> some View {
         navigationDestination(for: Route.self) { route in
-            switch route {
-            case .dataset(let id, let filters): DatasetView(datasetID: id, preset: filters)
-            case .record(let id, let rowID): RecordDetailView(datasetID: id, rowID: rowID)
-            case .government(let govID): GovernmentDetailView(govID: govID)
-            case .meeting(let id): MeetingDetailView(meetingID: id)
-            case .cra: CRAView()
-            case .myAddress: MyAddressView()
-            case .address(let m): AddressReportView(match: m)
-            case .taxCalculator(let d, let v, let h): TaxCalculatorView(districtID: d, value: v, homestead: h)
-            case .amendment3(let d, let v, let h): Amendment3View(districtID: d, value: v, homestead: h)
-            case .glossary: GlossaryView()
-            case .vendors: VendorsView()
-            case .vendor(let id): VendorDetailView(vendorID: id)
-            case .people: PeopleView()
-            case .person(let id): PersonDetailView(personID: id)
-            case .donorContracts: DonorContractsView()
-            case .moneyMap: MoneyMapView()
-            case .updates: UpdatesView()
-            case .about: AboutView()
-            case .explore: ExploreView()
-            case .accountability: AccountabilityView()
-            case .accountabilityProject(let id): AccountabilityProjectView(projectID: id)
-            case .search: SearchView()
+            Group {
+                switch route {
+                case .dataset(let id, let filters): DatasetView(datasetID: id, preset: filters)
+                case .record(let id, let rowID): RecordDetailView(datasetID: id, rowID: rowID)
+                case .government(let govID): GovernmentDetailView(govID: govID)
+                case .meeting(let id): MeetingDetailView(meetingID: id)
+                case .cra: CRAView()
+                case .myAddress: MyAddressView()
+                case .address(let m): AddressReportView(match: m)
+                case .taxCalculator(let d, let v, let h): TaxCalculatorView(districtID: d, value: v, homestead: h)
+                case .amendment3(let d, let v, let h): Amendment3View(districtID: d, value: v, homestead: h)
+                case .glossary: GlossaryView()
+                case .vendors: VendorsView()
+                case .vendor(let id): VendorDetailView(vendorID: id)
+                case .people: PeopleView()
+                case .person(let id): PersonDetailView(personID: id)
+                case .donorContracts: DonorContractsView()
+                case .moneyMap: MoneyMapView()
+                case .updates: UpdatesView()
+                case .about: AboutView()
+                case .explore: ExploreView()
+                case .accountability: AccountabilityView()
+                case .accountabilityProject(let id): AccountabilityProjectView(projectID: id)
+                case .search: SearchView()
+                }
             }
+            .pageBackground()
         }
     }
 }

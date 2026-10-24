@@ -3,10 +3,14 @@ import BayCountyKit
 
 struct MeetingsView: View {
     @Environment(AppStore.self) private var store
-    @State private var gov: String? = nil
+    @State private var gov: String = "all"
+
+    /// Chips in the order the site lists governments.
+    private static let govOrder = ["county", "schools", "pc", "pcb", "lh", "cw", "sp", "parker", "mb"]
+    private static let short = ["county": "County", "schools": "Schools"]
 
     private var upcoming: [Meeting] {
-        Meeting.upcoming(store.meetings).filter { gov == nil || $0.govID == gov }
+        Meeting.upcoming(store.meetings).filter { gov == "all" || $0.govID == gov }
     }
 
     private var days: [(key: String, meetings: [Meeting])] {
@@ -14,53 +18,56 @@ struct MeetingsView: View {
         return grouped.keys.sorted().map { ($0, grouped[$0]!) }
     }
 
+    /// Only governments that have something coming up, so no chip leads to an empty list.
+    private var chips: [(id: String, label: String)] {
+        let has = Set(Meeting.upcoming(store.meetings).map(\.govID))
+        return [(id: "all", label: "All")] + Self.govOrder.filter(has.contains).map { (id: $0, label: Self.short[$0] ?? Governments.names[$0] ?? $0) }
+    }
+
     var body: some View {
         NavigationStack {
-            ScrollViewReader { proxy in
-            List {
-                if !upcoming.isEmpty {
-                    Section {
-                        WeekStrip(meetings: upcoming) { key in withAnimation { proxy.scrollTo(key, anchor: .top) } }
-                    } header: {
-                        Text("Next two weeks")
-                    }
-                }
-                Section {
+            ScrollView {
+                VStack(alignment: .leading, spacing: 18) {
+                    ChipRow(chips: chips, selected: gov) { id in withAnimation(.snappy) { gov = id } }
                     FreshnessNote(key: "meetings")
-                    Link(destination: BayCountyClient.meetingsCalendarURL(gov: gov)) {
-                        Label(gov == nil ? "Add every meeting to Calendar" : "Add \(Governments.names[gov!] ?? "these") meetings to Calendar",
-                              systemImage: "calendar.badge.plus")
+                    if upcoming.isEmpty {
+                        VStack(spacing: 6) {
+                            Image(systemName: "calendar").font(.title2).foregroundStyle(.secondary)
+                            Text("No upcoming meetings").font(.headline)
+                            Text("New agendas appear here as soon as they're posted.").font(.subheadline).foregroundStyle(.secondary)
+                        }
+                        .multilineTextAlignment(.center)
+                        .frame(maxWidth: .infinity)
+                        .padding(32)
+                        .background(Brand.surface, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
                     }
-                }
-                if upcoming.isEmpty {
-                    ContentUnavailableView("No upcoming meetings", systemImage: "calendar",
-                                           description: Text("New agendas appear here as soon as they're posted."))
-                }
-                ForEach(days, id: \.key) { day in
-                    Section(day.meetings.first.map { Dates.display($0.start!, hasTime: false) } ?? "") {
-                        ForEach(day.meetings) { m in
-                            NavigationLink(value: Route.meeting(m.id)) { MeetingRow(meeting: m, showDate: false) }
+                    ForEach(days, id: \.key) { day in
+                        VStack(alignment: .leading, spacing: 8) {
+                            Text(day.meetings.first?.start.map { Dates.display($0, hasTime: false) } ?? "")
+                                .font(.subheadline.weight(.bold)).foregroundStyle(.secondary)
+                                .accessibilityAddTraits(.isHeader)
+                            CardList {
+                                ForEach(day.meetings) { m in
+                                    NavigationLink(value: Route.meeting(m.id)) { TodayMeetingRow(meeting: m) }
+                                        .buttonStyle(.plain)
+                                    if m.id != day.meetings.last?.id { RowDivider(inset: 66) }
+                                }
+                            }
                         }
                     }
-                    .id(day.key)
                 }
+                .padding(.horizontal, 16)
+                .padding(.bottom, 24)
             }
-            }
+            .background(Brand.canvas)
             .navigationTitle("Meetings")
             .refreshable { await store.loadMeetings() }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Menu {
-                        Picker("Government", selection: $gov) {
-                            Text("All governments").tag(String?.none)
-                            ForEach(Governments.names.sorted { $0.value < $1.value }, id: \.key) { pair in
-                                Text(pair.value).tag(String?.some(pair.key))
-                            }
-                        }
-                    } label: {
-                        Image(systemName: gov == nil ? "line.3.horizontal.decrease.circle" : "line.3.horizontal.decrease.circle.fill")
+                    Link(destination: BayCountyClient.meetingsCalendarURL(gov: gov == "all" ? nil : gov)) {
+                        Image(systemName: "calendar.badge.plus")
                     }
-                    .accessibilityLabel("Filter by government")
+                    .accessibilityLabel(gov == "all" ? "Add every meeting to Calendar" : "Add \(Governments.names[gov] ?? "these") meetings to Calendar")
                 }
             }
             .withRoutes()

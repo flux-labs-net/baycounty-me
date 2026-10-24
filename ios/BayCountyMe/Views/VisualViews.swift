@@ -155,46 +155,6 @@ struct TopicGrid: View {
     }
 }
 
-/// The next two weeks as a strip of days, each with a dot per meeting. Tapping a day jumps to it.
-struct WeekStrip: View {
-    let meetings: [Meeting]
-    let onPick: (String) -> Void
-
-    static let weekday: DateFormatter = { let f = DateFormatter(); f.dateFormat = "EEEEE"; return f }()
-
-    var body: some View {
-        let cal = Calendar.current
-        let today = cal.startOfDay(for: Date())
-        let days = (0..<14).compactMap { cal.date(byAdding: .day, value: $0, to: today) }
-        let counts = Dictionary(grouping: meetings.compactMap { $0.start }, by: { cal.startOfDay(for: $0) }).mapValues(\.count)
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 6) {
-                ForEach(days, id: \.self) { d in
-                    let n = counts[d] ?? 0
-                    Button { if n > 0 { onPick(Dates.dayKey(d)) } } label: {
-                        VStack(spacing: 4) {
-                            Text(Self.weekday.string(from: d)).font(.caption2).foregroundStyle(.secondary)
-                            Text("\(cal.component(.day, from: d))").font(.subheadline.weight(d == today ? .bold : .regular))
-                                .foregroundStyle(d == today ? Color.white : .primary)
-                                .frame(width: 30, height: 30)
-                                .background(d == today ? AnyShapeStyle(Brand.navy) : AnyShapeStyle(Color.clear), in: Circle())
-                            HStack(spacing: 2) {
-                                ForEach(0..<min(n, 3), id: \.self) { _ in Circle().fill(Brand.blue).frame(width: 5, height: 5) }
-                            }
-                            .frame(height: 5)
-                        }
-                        .frame(width: 38)
-                    }
-                    .buttonStyle(.plain)
-                    .disabled(n == 0)
-                    .accessibilityLabel("\(Dates.display(d, hasTime: false)), \(n) \(n == 1 ? "meeting" : "meetings")")
-                }
-            }
-            .padding(.vertical, 4)
-        }
-    }
-}
-
 /// A small bar chart of amounts by year (a company's contracts, an official's pay).
 struct YearBars: View {
     let title: String
