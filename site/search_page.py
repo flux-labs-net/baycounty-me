@@ -107,6 +107,14 @@ def _vendors():
 INDEXERS.append(_vendors)
 
 
+def _people():
+    from people_pages import search_rows
+    return search_rows()
+
+
+INDEXERS.append(_people)
+
+
 def build_index(out_dir, pages):
     """Write data/search.json (the full index, read by the API) and data/search/*.json for the search page.
 

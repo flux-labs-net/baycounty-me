@@ -219,6 +219,7 @@ def network_data():
         don.append(x)
     don.sort(key=lambda x: (-(x['e'] is not None), -x['a']))
     for o in officials.values():
+        o['pid'] = ids.person_id(o['n'])  # /people/<pid>
         o['gid'] = o['g'] or ''
         o['g'] = gkey(o['g']) or '' if o['g'] else ''  # city filter key (county officers count with the county)
         o['gp'] = [] if o['cand'] else [k for k, p in payers.items() if p['k'] != 'tourism' and k[k.index(':') + 1:] in (o['gid'], CRA_OF.get(o['gid']))]  # boards they sit on
@@ -305,7 +306,7 @@ def connections_page(out_dir):
         <div class="tablewrap"><table class="tx-table" id="cnPay"></table></div></section>
       <section id="v-gifts" hidden><div class="cn-vh"><h2>Business gifts to officials and candidates</h2><span class="cn-note" id="cnDonCount"></span></div>
         <div class="cn-pad"><div class="tablewrap"><table class="tx-table" id="cnDonT"></table></div>
-        <p class="cn-note">Each row totals one business or group's gifts to one official's most recent campaign, or to a 2026 candidate, from Supervisor of Elections reports. Donors that were also paid by a local government are listed first. "Likely" means the names matched after a hand check rather than exactly. Gifts from individual people are counted on <a href="/connections/campaign-gifts">Campaign gifts</a> but never named.</p></div></section>
+        <p class="cn-note">Each row totals one business or group's gifts to one official's most recent campaign, or to a 2026 candidate, from Supervisor of Elections reports. Donors that were also paid by a local government are listed first. "Likely" means the names matched after a hand check rather than exactly. Gifts from individual people are counted on <a href="/connections/campaign-gifts">Campaign gifts</a>, where people who run a registered business are named.</p></div></section>
     </div>
     <aside class="cn-profile" id="cnProfile" aria-live="polite"></aside>
   </div>

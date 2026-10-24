@@ -235,12 +235,18 @@ def vendor_page(vid):
   {city_bar(gk, hide=True) if len(gk) > 1 else ''}
   <div class="kpis">{kp}</div>
   {secs}{gifts}{votes}
+  {_connections(vid, v["name"])}
   <section class="tx-sec method"><div class="sec-hd"><h2 id="src">About this page</h2></div><ul class="plain">
     <li>Awards are agenda amounts, not money paid. Register and tourism-agency payments come from the lists each source publishes, which cover only part of each year.</li>
     <li>CRA records that the ledger leaves out of its totals (parts of a larger project, or not CRA money) are listed but not added up.</li>
     <li>Vendor id <code>{e(vid)}</code> in the <a href="/open-data">downloads</a> (column vendor_id).</li></ul>{ev}</section>
 </div>
-<link rel="stylesheet" href="/assets/tax.css">'''
+<link rel="stylesheet" href="/assets/tax.css"><link rel="stylesheet" href="/assets/connections.css"><link rel="stylesheet" href="/assets/profile.css"><script src="/assets/profile.js" defer></script>'''
+
+
+def _connections(vid, name):
+    from people_pages import profile_section
+    return profile_section('vendor:' + vid, 'Connections', f'Governments, officials, nonprofits and businesses linked to {name} in the records')
 
 
 def pages():

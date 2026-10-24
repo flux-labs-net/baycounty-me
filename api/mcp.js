@@ -54,6 +54,19 @@ const TOOLS = [
      government: {type: 'string', description: 'Only letters to this government (as listed in the governments field of a previous result)'},
      limit: {type: 'integer', minimum: 1, maximum: 100, default: 25, description: 'Conversations to return'}}},
    annotations: {readOnlyHint: true}},
+  {name: 'find_entity', title: 'Find a person, company or organization',
+   description: 'Find a company, elected official, candidate, nonprofit, nonprofit board member, business owner who gave to a campaign, business, committee or government by name. Returns entity ids for get_entity, with each profile page.',
+   inputSchema: {type: 'object', required: ['q'], additionalProperties: false, properties: {
+     q: {type: 'string', description: 'Part of a name, e.g. "Dewberry" or "Doug Moore"'},
+     kind: {type: 'string', enum: ['gov', 'vendor', 'person', 'nonprofit', 'member', 'owner', 'business', 'committee'], description: 'Only this kind'},
+     limit: {type: 'integer', minimum: 1, maximum: 50, default: 10}}},
+   annotations: {readOnlyHint: true}},
+  {name: 'get_entity', title: 'Connections of a person, company or organization',
+   description: 'Everything one entity is connected to in public records: governments that paid it, campaign gifts from organizations, votes on its contracts, nonprofit board seats, businesses, grants and documented shared projects, each with a source link. Officials on nonprofit boards, officials\' businesses and shared-owner gifts appear only after a hand check. Individual campaign donors are never named. A connection is a fact in two records, not evidence of why anything happened.',
+   inputSchema: {type: 'object', required: ['id'], additionalProperties: false, properties: {
+     id: {type: 'string', description: 'Entity id from find_entity, e.g. "vendor:dewberry" or "person:douglas-moore"'},
+     limit: {type: 'integer', minimum: 1, maximum: 500, default: 100, description: 'Connections to return, largest amounts first'}}},
+   annotations: {readOnlyHint: true}},
   {name: 'search_site', title: 'Search BayCounty.me',
    description: 'Full-text search across every page and record on BayCounty.me. Returns titles, summaries and links.',
    inputSchema: {type: 'object', required: ['q'], additionalProperties: false, properties: {q: {type: 'string'}, limit: {type: 'integer', minimum: 1, maximum: 50, default: 10}}},
@@ -198,6 +211,20 @@ async function call(req, name, a = {}) {
     const all = gy ? (await datasetRows(req, gy)).rows : await load(req, '/downloads/government-years.json').catch(() => []);
     g.years = (all || []).filter(r => r.gov_id === g.gov_id).sort((x, y) => x.fiscal_year - y.fiscal_year);
     return g;
+  }
+  if (name === 'find_entity' || name === 'get_entity') {
+    const E = require('./_entities');
+    const c = await load(req, '/downloads/index.json');
+    if (name === 'find_entity') {
+      const rows = await E.searchEntities(req, c, {q: a.q, kind: a.kind, limit: Math.min(a.limit || 10, 50)});
+      req._rows = rows.length;
+      return {query: a.q, results: rows.map(r => ({id: r.entity_id, kind: r.kind_label, name: r.name, subtitle: r.subtitle, connections: r.connections, url: SITE + r.page_url}))};
+    }
+    const d = await E.getEntity(req, c, String(a.id || ''));
+    const lim = Math.min(Math.max(a.limit || 100, 1), 500);
+    req._rows = Math.min(d.connections.length, lim);
+    return {entity: {...d.entity, url: SITE + d.entity.page_url}, counts: d.counts, total: d.connections.length,
+      connections: d.connections.slice(0, lim).map(x => ({...x, other: {...x.other, url: x.other.page_url ? SITE + x.other.page_url : null}})), note: d.note};
   }
   if (name === 'search_site') {
     const idx = await load(req, '/data/search.json');

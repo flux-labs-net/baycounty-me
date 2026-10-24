@@ -192,7 +192,7 @@
   async function openOrg(id, scroll) {
     let x = S.byId.get(id); if (!x) return;
     S.sel = id; setUrl('id', id);
-    const head = () => `<h2>${esc(title(x.name))}</h2><div class="m">${esc([x.city, x.kind].filter(Boolean).join(' · '))}</div>`;
+    const head = () => `<h2>${esc(title(x.name))}</h2><div class="m">${esc([x.city, x.kind].filter(Boolean).join(' · '))} · <a href="/profile/nonprofit/${encodeURIComponent(id)}">Full profile and network</a></div>`;
     showPanel(head() + '<p class="muted small">Loading…</p>');
     if (scroll) { const el = document.querySelector(`.np-row[data-org="${CSS.escape(id)}"]`); if (el) el.scrollIntoView({block: 'center'}); }
     const q = 'nonprofit_id=' + encodeURIComponent(id);
@@ -206,7 +206,7 @@
     // Connections
     const ties = [];
     for (const py of payers(x)) { const ps = p.filter(r => r.payer === py); ties.push(`<div class="np-tie"><b>Paid ${big(ps.reduce((a, r) => a + Number(r.amount || 0), 0))} by ${esc(py)}</b><div class="m">${esc(ps[0].what || ps[0].record_type)}${ps[0].date ? ' · ' + esc(ps[0].date) : ''}</div></div>`); }
-    for (const r of o) ties.push(`<div class="np-tie"><b>${esc(r.official)}</b> is on the board<div class="m">${esc(r.titles || '')}${years(r) ? ' · ' + esc(years(r)) : ''} · <a href="${esc(r.source_url)}" target="_blank" rel="noopener">${esc(r.sources || 'source')}</a></div></div>`);
+    for (const r of o) ties.push(`<div class="np-tie"><b>${r.person_id ? `<a href="/people/${encodeURIComponent(r.person_id)}">${esc(r.official)}</a>` : esc(r.official)}</b> is on the board<div class="m">${esc(r.titles || '')}${years(r) ? ' · ' + esc(years(r)) : ''} · <a href="${esc(r.source_url)}" target="_blank" rel="noopener">${esc(r.sources || 'source')}</a></div></div>`);
     if (d) for (const [pid, g] of [...d.entries()].sort((a, b) => b[1] - a[1])) {
       const seat = S.donorSeats.find(r => r.person_id === pid && r.nonprofit_id === id) || {};
       const bz = (S.donorBiz.get(pid) || []).slice(0, 3).map(b => esc(title(b.business))).join(', ');
@@ -254,10 +254,10 @@
     const seat = r => `<div class="np-tie">${S.byId.has(r.nonprofit_id) ? `<button type="button" class="np-p" data-org="${esc(r.nonprofit_id)}">${esc(title(r.nonprofit))}</button>` : esc(title(r.nonprofit))}${S.pays.has(r.nonprofit_id) ? ' <span class="np-chip hot">public money</span>' : ''}
       <div class="m">${esc(r.titles || r.role)}${years(r) ? ' · ' + esc(years(r)) : ''}${r.compensation ? ' · paid ' + usd(r.compensation) + ' (' + esc(r.compensation_year || '') + ')' : ''} · <a href="${esc(r.source_url)}" target="_blank" rel="noopener">${esc(r.sources)}</a></div></div>`;
     const bz = biz.slice().sort((a, b) => Number(b.campaign_gifts_total || 0) - Number(a.campaign_gifts_total || 0) || (a.business_status === 'Active' ? -1 : 1));
-    const bline = b => `<div class="np-tie"><a href="${esc(b.source_url)}" target="_blank" rel="noopener">${esc(title(b.business))}</a>${window.BCM_bizOff ? BCM_bizOff(b.business_status, b.closed_year) : (b.business_status === 'Active' ? '' : ' (inactive)')}
+    const bline = b => `<div class="np-tie"><a href="/profile/business/${encodeURIComponent(String(b.doc_number || '').toLowerCase())}">${esc(title(b.business))}</a> · <a class="src" href="${esc(b.source_url)}" target="_blank" rel="noopener">State record</a>${window.BCM_bizOff ? BCM_bizOff(b.business_status, b.closed_year) : (b.business_status === 'Active' ? '' : ' (inactive)')}
       <div class="m">${Number(b.campaign_gifts_total) > 0 ? `Gave ${usd(b.campaign_gifts_total)} to campaigns${b.candidates ? ': ' + esc(b.candidates) : ''} · ` : ''}${b.match === 'Name' ? 'matched by name' : 'matched by name and address'}</div></div>`;
     const on = 'boards';
-    showPanel(`<h2>${esc(pname(seats[0].person))}</h2><div class="m">${plural(cur.length, 'current board')}${biz.length ? ' · ' + plural(biz.length, 'business', 'businesses') : ''}</div>`
+    showPanel(`<h2>${esc(pname(seats[0].person))}</h2><div class="m">${plural(cur.length, 'current board')}${biz.length ? ' · ' + plural(biz.length, 'business', 'businesses') : ''} · <a href="/profile/member/${encodeURIComponent(id)}">Full profile and network</a></div>`
       + `<div class="np-kv"><div><b>${num(cur.length)}</b><span>boards now</span></div><div><b>${num(biz.length)}</b><span>businesses</span></div><div><b>${gifts ? big(gifts) : '—'}</b><span>business gifts to campaigns</span></div></div>`
       + tabsHtml([['boards', `Boards (${seats.length})`], ['biz', `Businesses (${biz.length})`]], on)
       + pane('boards', on, cur.map(seat).join('') + (past.length ? `<details><summary class="small">${plural(past.length, 'earlier seat')}</summary>${past.map(seat).join('')}</details>` : ''))

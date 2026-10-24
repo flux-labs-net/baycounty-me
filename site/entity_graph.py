@@ -1,0 +1,403 @@
+"""One registry of every named entity on the site, and every documented connection between them.
+
+Every company, official, candidate, nonprofit, board member, business and government gets one entity id and one
+profile URL, so every page links a name the same way (site/entity_links.py, and BC.href in site.js for page scripts).
+
+    entity_id      kind        profile page
+    gov:pc         government  /governments/panama-city (the nine main governments), else /profile/gov/<id>
+    vendor:<id>    company     /public-money/vendors/<id> when it has a vendor page, else /profile/vendor/<id>
+    person:<id>    official or candidate (data/entities/people.json)           /people/<id>
+    nonprofit:<id> nonprofit (data/nonprofits)                                 /profile/nonprofit/<id>
+    member:<id>    nonprofit board member, as named in public filings          /profile/member/<id>
+    owner:<id>     person who runs a registered business and gave to a campaign  /profile/owner/<id>
+    business:<id>  registered business (Sunbiz document number, lowercased), or a named payee with no vendor id
+    committee:<id> PAC, party or campaign committee that gave to a campaign
+
+Only rows already published in public datasets are used, so nothing here is more private than the open data:
+individual campaign donors appear only when they run a registered business (dataset owner-gifts: same name and
+street address as a Sunbiz officer or agent), shared-owner groups and official name
+matches are added by the API from their database-only datasets after an admin confirms them (api/_entities.js), and
+unnamed grant recipients and property owners are left out.
+
+Published as two datasets (site/page_datasets.py): entity-profiles (one row per entity) and entity-connections
+(one row per documented connection, totalled per pair and kind of connection).
+"""
+import hashlib, os, re, sys
+from collections import defaultdict
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, HERE)
+sys.path.insert(0, os.path.join(HERE, '..', 'data', 'entities'))
+import ids  # noqa: E402
+
+try:
+    from place import PLACE_ID
+except Exception:  # pragma: no cover
+    PLACE_ID = 'fl-bay'
+COUNTY = PLACE_ID.split('-', 1)[-1]
+
+KIND_LABEL = {'gov': 'Government', 'vendor': 'Company', 'person': 'Official or candidate', 'nonprofit': 'Nonprofit',
+              'member': 'Nonprofit board member', 'owner': 'Business owner', 'business': 'Business', 'committee': 'Committee or PAC'}
+# relation -> (label from the "from" side, label from the "to" side)
+RELATION = {
+    'paid': ('paid', 'was paid by'),
+    'gift': ('gave to the campaign of', 'got campaign gifts from'),
+    'voted': ('voted on contracts with', 'had contracts voted on by'),
+    'serves': ('serves', 'is served by'),
+    'board': ('sits on the board of', 'has on its board'),
+    'runs': ('runs', 'is run by'),
+    'grant': ('gave a grant to', 'got a grant from'),
+    'related': ('shares a project or address with', 'shares a project or address with'),
+    'same': ('is the same organization as', 'is the same organization as'),
+}
+MAIN_GOVS = None
+_C = {}
+
+
+def _slug(s):
+    return re.sub(r'[^a-z0-9]+', '-', (s or '').lower()).strip('-')[:80]
+
+
+def _norm(s):
+    s = re.sub(r"[.,'&]", '', (s or '').lower())
+    return ' '.join(w for w in s.split() if w not in ('inc', 'llc', 'co', 'corp', 'company', 'the', 'pa', 'pllc'))
+
+
+def pcase(name):
+    """'BARRY S WILSON' -> 'Barry S Wilson'; names already in mixed case are left alone."""
+    if not name or re.search(r'[a-z]', name):
+        return name
+    return re.sub(r"\b([A-Z])([A-Z']+)\b", lambda m: m.group(1) + m.group(2).lower(), name)
+
+
+def _main_govs():
+    global MAIN_GOVS
+    if MAIN_GOVS is None:
+        try:
+            from govs import GOVS
+            MAIN_GOVS = {g['key']: g['slug'] for g in GOVS}
+        except Exception:
+            MAIN_GOVS = {}
+    return MAIN_GOVS
+
+
+def _vendor_pages():
+    if 'vp' not in _C:
+        try:
+            from vendor_pages import build
+            _C['vp'] = set(build())
+        except Exception:
+            _C['vp'] = set()
+    return _C['vp']
+
+
+def page_url(entity_id):
+    """The profile URL for any entity id (the rule every page and script follows)."""
+    kind, _, key = entity_id.partition(':')
+    if kind == 'gov' and key in _main_govs():
+        return f'/governments/{_main_govs()[key]}'
+    if kind == 'vendor' and key in _vendor_pages():
+        return f'/public-money/vendors/{key}'
+    if kind == 'person':
+        return f'/people/{key}'
+    return f'/profile/{kind}/{key}'
+
+
+def _ds(did):
+    """Rows of one published dataset, with the same ids added as in the downloads."""
+    if did not in _C:
+        import opendata
+        fn = {d[0]: d[3] for d in opendata.datasets()}[did]
+        _C[did] = opendata.add_gov_id(did, fn() or [])
+    return _C[did]
+
+
+class Graph:
+    def __init__(self):
+        self.ents = {}
+        self.links = {}
+        self.alias = {}  # entity id -> (the entity it is the same as, name as written)
+
+    def ent(self, eid, name, sub=None, gov_id=None, source_url=None, aliases=None):
+        e = self.ents.get(eid)
+        if not e:
+            e = self.ents[eid] = {'entity_id': eid, 'kind': eid.split(':', 1)[0], 'name': name, 'subtitle': sub, 'gov_id': gov_id,
+                                  'source_url': source_url, 'aliases': []}
+        else:
+            e['subtitle'] = e['subtitle'] or sub
+            e['gov_id'] = e['gov_id'] or gov_id
+            e['source_url'] = e['source_url'] or source_url
+        for a in aliases or []:
+            if a and a != e['name'] and a not in e['aliases']:
+                e['aliases'].append(a)
+        return eid
+
+    def link(self, a, b, rel, amount=None, date=None, detail=None, source_url=None, key=''):
+        if a == b or a not in self.ents or b not in self.ents:
+            return
+        k = (a, b, rel, key)
+        x = self.links.get(k)
+        if not x:
+            x = self.links[k] = {'from_id': a, 'to_id': b, 'relation': rel, 'amount': None, 'records': 0, 'dates': [], 'detail': [],
+                                 'source_url': source_url}
+        x['records'] += 1
+        if isinstance(amount, (int, float)):
+            x['amount'] = (x['amount'] or 0) + amount
+        if date:
+            x['dates'].append(str(date))
+        if detail and detail not in x['detail']:
+            x['detail'].append(detail)
+        x['source_url'] = x['source_url'] or source_url
+
+
+def _gov(G, gid):
+    g = ids.gov(gid)
+    if not g:
+        return None
+    return G.ent('gov:' + gid, g['short'], {'county': 'County government', 'city': 'City', 'schools': 'School district'}.get(g['kind'], g['kind'].replace('_', ' ').capitalize()), gid)
+
+
+def person_title(p):
+    """'Mayor, Panama City · 2026 candidate for Panama City Commission, Ward 2' from people.json roles."""
+    roles = p.get('roles') or []
+    short = lambda g: (ids.gov(g or '') or {}).get('short', g or '')
+    def first(src, pre=None):
+        for r in roles:
+            if r.get('source') == src and (pre is None or (r.get('role') or '').startswith(pre)):
+                return r
+    t = None
+    r = first('salaries') or first('officials-pay')
+    if r:
+        t = f"{r['role']}, {short(r['gov_id'])}" if short(r['gov_id']).lower() not in r['role'].lower() else r['role']
+    elif first('campaign', 'officeholder'):
+        t = first('campaign', 'officeholder')['role'].split(':', 1)[1].strip()
+    elif first('votes', 'board member'):
+        r = first('votes', 'board member')
+        t = f"Board member, {short(r['gov_id'])}" + (f" ({r['seat']})" if r.get('seat') and not str(r['seat']).isdigit() else '')
+    elif first('votes', 'former'):
+        t = f"Former board member, {short(first('votes', 'former')['gov_id'])}"
+    c = first('candidates_2026') or first('finance_2026')
+    if c:
+        race = c['role'].split(':', 1)[1].strip() if ':' in c['role'] else short(c['gov_id'])
+        t = (t + ' · ' if t else '') + f'2026 candidate for {race}'
+    return t
+
+
+def build():
+    if 'G' in _C:
+        return _C['G']
+    G = Graph()
+    for g in ids.governments():
+        _gov(G, g['id'])
+
+    # officials, department leaders and candidates
+    for p in (ids._load('people.json') or {'people': []})['people']:
+        roles = p.get('roles') or []
+        sub = person_title(p)
+        G.ent('person:' + p['id'], p['name'], sub, (p.get('gov_ids') or [None])[0], aliases=p.get('aliases'))
+        seen = set()
+        for r in roles:
+            gid = r.get('gov_id')
+            if gid and (gid, r.get('role')) not in seen and 'former' not in (r.get('role') or ''):
+                seen.add((gid, r.get('role')))
+                G.link('person:' + p['id'], 'gov:' + gid, 'serves', detail=(r.get('role') or '').capitalize() + (f", {r['seat']}" if r.get('seat') and not str(r['seat']).isdigit() else ''), key=r.get('role') or '')
+
+    # companies (every vendor id, with or without a vendor page)
+    for v in (ids._load('vendors.json') or {'vendors': []})['vendors']:
+        G.ent('vendor:' + v['id'], v['name'], 'Company paid or hired by local governments', (v.get('gov_ids') or [None])[0], aliases=[a for a in v['aliases'] if not a.isupper()])
+
+    # nonprofits
+    np_names = {}
+    for n in _ds('nonprofits'):
+        nid = 'nonprofit:' + n['nonprofit_id']
+        np_names[n['nonprofit_id']] = nid
+        G.ent(nid, ids.biz_case(n['name']), ' · '.join(x for x in [n.get('kind') or n.get('category'), n.get('city')] if x) or 'Nonprofit', None,
+              n.get('source_url') or n.get('sunbiz_url'))
+
+    # payments: every government and agency payment record (connections-payments), totalled per payer, payee and type
+    payee_np = {r['entity_id']: r['nonprofit_id'] for r in _ds('connections-payees') if r.get('nonprofit_id')}
+
+    def payee(eid, name):
+        kind, _, key = eid.partition(':')
+        if kind == 'v':
+            return 'vendor:' + key
+        if kind in ('b', 's'):
+            if payee_np.get(eid) and payee_np[eid] in np_names:
+                return np_names[payee_np[eid]]
+            return G.ent('business:' + key, name, 'Business paid by a local government')
+        if kind == 'g':
+            gid = ids.gov_id(name)
+            return 'gov:' + gid if gid and 'gov:' + gid in G.ents else None
+        return None  # property owners, unnamed and grouped grant recipients stay off profiles
+    for r in _ds('connections-payments'):
+        to = payee(r['entity_id'], r['payee'])
+        gid = r.get('payer_gov_id')
+        if not to or not gid or 'gov:' + gid not in G.ents:
+            continue
+        via = r['payer'] if r['payer_kind'] != 'government' else None  # a CRA or tourism agency pays as itself
+        G.link('gov:' + gid, to, 'paid', r.get('amount') if not r.get('inside_project_total') else None, r.get('date'),
+               r['record_type'] + (f' ({via})' if via else ''), r.get('source_url'), key=r['record_type'] + (via or ''))
+    for eid, npid in payee_np.items():  # a payee that is also a local nonprofit
+        if eid.startswith('v:') and npid in np_names:
+            G.link('vendor:' + eid[2:], np_names[npid], 'same', detail='Matched by name to the nonprofit record')
+
+    for r in _ds('connections-links'):
+        a, b = payee(r['entity_a'], r['name_a']), payee(r['entity_b'], r['name_b'])
+        if a and b:
+            G.link(a, b, 'related', detail=r['connection'], source_url=r.get('source_url'), key=r['connection'][:40])
+
+    # business donors: Sunbiz document numbers (and vendor ids) for donor names, so a donor, a board member's business
+    # and a vendor are one entity
+    doc_of, doc_vendor = {}, {}
+    for r in _ds('business-donor-sunbiz'):
+        if r.get('sunbiz_doc_number'):
+            doc_of[_norm(r['contributor'])] = r['sunbiz_doc_number'].lower()
+            if r.get('vendor_id'):
+                doc_vendor[r['sunbiz_doc_number'].lower()] = r['vendor_id']
+
+    def business(doc, name, sub=None, url=None):
+        doc = doc.lower()
+        if doc in doc_vendor and 'vendor:' + doc_vendor[doc] in G.ents:
+            G.alias['business:' + doc] = ('vendor:' + doc_vendor[doc], ids.biz_case(name))  # /profile/business/<doc> still finds it
+            return 'vendor:' + doc_vendor[doc]
+        return G.ent('business:' + doc, ids.biz_case(name), sub or 'Registered business', None, url or
+                     f'https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResultDetail?inquirytype=DocumentNumber&directionType=Initial&searchTerm={doc.upper()}')
+
+    # campaign gifts from organizations (never individuals) to officials and candidates
+    for r in _ds('connections-gifts'):
+        pid = ids.person_id(r['official'])
+        if not pid or 'person:' + pid not in G.ents:
+            continue
+        if r.get('payee_entity_id'):
+            frm = payee(r['payee_entity_id'], r['donor'])
+        elif r['donor_type'] == 'business':
+            doc = doc_of.get(_norm(r['donor']))
+            frm = business(doc, r['donor']) if doc else G.ent('business:' + _slug(r['donor']), ids.biz_case(r['donor']), 'Business that gave to a local campaign')
+        else:
+            frm = G.ent('committee:' + _slug(r['donor']), ids.biz_case(r['donor']), {'pac': 'Political committee', 'committee': 'Committee'}.get(r['donor_type'], 'Organization') + ' that gave to a local campaign')
+        if frm:
+            G.link(frm, 'person:' + pid, 'gift', r.get('amount'), r.get('dates'), (r.get('office') or '') + (' (2026 candidate)' if r.get('candidate_2026') else ''),
+                   r.get('report_url'), key=r.get('office') or '')
+
+    # recorded votes on a vendor's contracts (data/votes/contract_votes.json), per member and vendor
+    try:
+        import json
+        cv = json.load(open(os.path.join(HERE, '..', 'data', 'votes', 'contract_votes.json')))['links']
+        votes = json.load(open(os.path.join(HERE, '..', 'data', 'votes', 'votes.json')))['votes']
+    except FileNotFoundError:
+        cv, votes = [], []
+    tally = defaultdict(lambda: defaultdict(int))
+    meta = {}
+    for l in cv:
+        v = votes[l['vote_index']]
+        for name, val in (v.get('by_member') or {}).items():
+            pid = ids.person_id(name)
+            for vid in l['vendor_ids']:
+                if pid and 'person:' + pid in G.ents and 'vendor:' + vid in G.ents:
+                    k = (pid, vid)
+                    tally[k][str(val).lower()] += 1
+                    meta.setdefault(k, []).append((v['date'], v.get('source_url'), l.get('record_amount')))
+    for (pid, vid), t in tally.items():
+        m = sorted(meta[(pid, vid)])
+        for d, u, a in m:
+            G.link('person:' + pid, 'vendor:' + vid, 'voted', None, d, None, u)
+        G.links[('person:' + pid, 'vendor:' + vid, 'voted', '')]['detail'] = [', '.join(f'{n} {k}' for k, n in sorted(t.items(), key=lambda kv: -kv[1]))]
+
+    # nonprofit boards (public IRS and state filings) and board members' businesses
+    for r in _ds('nonprofit-board-members'):
+        nid = np_names.get(r['nonprofit_id'])
+        if not nid:
+            continue
+        mid = G.ent('member:' + r['person_id'], pcase(r['person']), 'Nonprofit board member', None)
+        yrs = f"{r['first_year']}" + (f"–{r['last_year']}" if r.get('last_year') and r['last_year'] != r['first_year'] else '') if r.get('first_year') else None
+        G.link(mid, nid, 'board', r.get('compensation'), yrs, ' · '.join(x for x in [r.get('titles') or r.get('role'), 'current' if r.get('current') else None] if x),
+               r.get('source_url'), key=r.get('titles') or '')
+    for r in _ds('nonprofit-board-businesses'):
+        mid = 'member:' + r['person_id']
+        if mid not in G.ents:
+            continue
+        b = business(r['doc_number'], r['business'], 'Registered business' + (f" ({r['business_status'].lower()})" if r.get('business_status') and r['business_status'] != 'Active' else ''), r.get('source_url'))
+        G.link(mid, b, 'runs', detail='Matched by ' + (r.get('match') or 'name').lower(), source_url=r.get('source_url'))
+
+    # people who run a registered business and gave to a campaign personally (data/campaign/owner_gifts.py)
+    for r in _ds('owner-gifts'):
+        pid = r.get('candidate_id')
+        if not pid or 'person:' + pid not in G.ents:
+            continue
+        oid = G.ent(r['donor_id'], r['donor'], 'Runs a registered business · gave to a local campaign')
+        for doc, name in zip(r['business_doc_numbers'].split('; '), r['businesses'].split('; ')):
+            b = business(doc, name) if doc else None
+            if b and (oid, b, 'runs', 'sunbiz') not in G.links:  # once per business, not once per campaign row
+                G.link(oid, b, 'runs', detail='Same name and address on Sunbiz', key='sunbiz')
+        G.link(oid, 'person:' + pid, 'gift', r.get('amount'), r.get('first_date'), r.get('office'), r.get('source_url'), key=r.get('office') or '')
+        if r.get('last_date') and r['last_date'] != r.get('first_date'):
+            G.links[(oid, 'person:' + pid, 'gift', r.get('office') or '')]['dates'].append(r['last_date'])
+
+    for r in _ds('nonprofit-grants'):
+        a, b = np_names.get(r['grantor_id']), np_names.get(r.get('recipient_id'))
+        if a and b:
+            G.link(a, b, 'grant', r.get('cash'), r.get('tax_year'), r.get('purpose'), r.get('source_url'))
+
+    _C['G'] = G
+    return G
+
+
+def _dates(ds):
+    toks = sorted(t for d in ds for t in re.findall(r'\d{4}(?:-\d{2}(?:-\d{2})?)?', d))
+    return (toks[0], toks[-1]) if toks else (None, None)
+
+
+def connection_rows():
+    G = build()
+    out = []
+    for x in G.links.values():
+        a, b = G.ents[x['from_id']], G.ents[x['to_id']]
+        first, last = _dates(x['dates'])
+        lid = hashlib.md5('|'.join([x['from_id'], x['to_id'], x['relation'], '; '.join(x['detail'])]).encode()).hexdigest()[:16]
+        out.append({'link_id': lid, 'from_id': x['from_id'], 'from_name': a['name'], 'from_kind': a['kind'], 'from_url': page_url(x['from_id']),
+                    'to_id': x['to_id'], 'to_name': b['name'], 'to_kind': b['kind'], 'to_url': page_url(x['to_id']), 'relation': x['relation'], 'relation_label': RELATION[x['relation']][0],
+                    'amount': round(x['amount'], 2) if x['amount'] is not None else None, 'records': x['records'], 'first_date': first, 'last_date': last,
+                    'detail': '; '.join(x['detail'])[:500] or None, 'source_url': x['source_url'], 'county': COUNTY})
+    out.sort(key=lambda r: (r['from_id'], r['relation'], -(r['amount'] or 0), r['to_id']))
+    return out
+
+
+def profile_rows():
+    G = build()
+    deg, got, gave = defaultdict(int), defaultdict(float), defaultdict(float)
+    for x in G.links.values():
+        deg[x['from_id']] += 1
+        deg[x['to_id']] += 1
+        if x['relation'] in ('paid', 'gift', 'grant') and x['amount']:
+            gave[x['from_id']] += x['amount']
+            got[x['to_id']] += x['amount']
+    out = []
+    for eid, e in G.ents.items():
+        keep = e['kind'] in ('gov', 'person', 'nonprofit') or deg[eid] or (e['kind'] == 'vendor' and eid[7:] in _vendor_pages())
+        if not keep:
+            continue
+        out.append({'entity_id': eid, 'kind': e['kind'], 'kind_label': KIND_LABEL[e['kind']], 'name': e['name'], 'subtitle': e['subtitle'],
+                    'page_url': page_url(eid), 'aliases': e['aliases'] or None, 'connections': deg[eid],
+                    'amount_received': round(got[eid], 2) or None, 'amount_given': round(gave[eid], 2) or None,
+                    'gov_id': e['gov_id'], 'county': COUNTY, 'source_url': e['source_url']})
+    for aid, (target, name) in G.alias.items():  # the same organization under another id: a row that points at the real profile
+        t = G.ents[target]
+        out.append({'entity_id': aid, 'kind': aid.split(':')[0], 'kind_label': KIND_LABEL[aid.split(':')[0]], 'name': name, 'subtitle': f"Same organization as {t['name']}",
+                    'page_url': page_url(target), 'aliases': None, 'connections': 0, 'amount_received': None, 'amount_given': None,
+                    'gov_id': None, 'county': COUNTY, 'source_url': None})
+    out.sort(key=lambda r: (r['kind'], r['entity_id']))
+    return out
+
+
+def neighbors(eid, limit=None):
+    """[(link, other_entity, direction)] for one entity, largest amounts first (used by the static profile pages)."""
+    G = build()
+    if 'adj' not in _C:
+        adj = defaultdict(list)
+        for x in G.links.values():
+            adj[x['from_id']].append((x, 'out'))
+            adj[x['to_id']].append((x, 'in'))
+        _C['adj'] = adj
+    rows = [(x, G.ents[x['to_id'] if d == 'out' else x['from_id']], d) for x, d in _C['adj'].get(eid, [])]
+    rows.sort(key=lambda t: (-(t[0]['amount'] or 0), t[1]['name']))
+    return rows[:limit] if limit else rows

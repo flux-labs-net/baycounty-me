@@ -5,6 +5,7 @@ As of 2026-10-21. This folder covers who gave money to the most recent campaign 
 ## Files
 
 - `campaign.json`: one record per officeholder. Each record has totals from the Supervisor of Elections (SOE) summary, a count and total for contributions from individuals, contributions from organizations listed item by item, and links to the source report and the itemized CSV export.
+- `owner_gifts.json`: personal gifts from people who run a registered business, matched by name and street address to Sunbiz. Built by `owner_gifts.py`, which downloads the itemized exports; refreshed daily by `data/elections/scripts/refresh.sh`.
 - `vendor_matches.json`: business contributors (to current officeholders and to 2026 candidates) that are also paid by a local government: contracts, change orders, emergency purchases, check registers, tourism agency payments and the CRA ledger. One row per vendor, candidate and paying government, with `vendor_id` from `../entities/vendors.json`. Built by `build_vendor_matches.py` (run from `data/build.py`); do not edit it by hand.
 
 ## Coverage
@@ -39,7 +40,7 @@ Not covered:
    - A personal name, personal trust or estate coded as a business was changed to an individual.
    - "Friends of ..." accounts were marked as candidate committees.
    - Realtors committees were marked as PACs.
-5. Privacy: individual people are never named. Each candidate has only `from_individuals` (count and total). Organizations are listed by name, with city as filed. Street addresses and occupations are not stored. The candidate's own money appears as one aggregate line.
+5. Privacy: individual people are not named in `campaign.json`. The one exception is `owner_gifts.json` (built by `owner_gifts.py`, dataset `owner-gifts`): a donor whose name and street address on the filing match a Sunbiz officer, manager or registered agent of a for-profit business is listed by name with their businesses, per the site owner (2026-10-24). No addresses or occupations are stored, and nobody else's gifts are kept. Each candidate has only `from_individuals` (count and total). Organizations are listed by name, with city as filed. Street addresses and occupations are not stored. The candidate's own money appears as one aggregate line.
 6. Vendor matching (`build_vendor_matches.py`): every business contributor and every payee on the site is resolved to a vendor id in `../entities/vendors.json`. Names match after lowercasing and removing punctuation, "&"/"and" and legal suffixes such as Inc/LLC/Co/Corp/PA, plus hand-checked joins of truncated or misspelled names (each join's evidence is in `vendors.json`; look-alikes deliberately kept apart are in `vendor_review.json`).
    - `exact`: the filed name matches the vendor's name once punctuation and suffixes are removed.
    - `likely`: the filing truncates, abbreviates or misspells an otherwise identical name, for example "American Sand and Asphalt Pavi", "Marshall Bothers", "Mr Fence", "Southeastern Outdoor Mgmt" or "Dewberry".
@@ -57,7 +58,7 @@ Not covered:
 - `total_spent` is the SOE's "Total Expenditures & Distributions". For closed campaigns, Florida law requires surplus funds to be disposed of (returned, donated or moved to an office account), so this figure often equals the amount raised.
 - Ethan Register's 2024 campaign reported pro-rata refunds to many contributors. These appear as negative amounts and as `refunded_by_campaign` in the matches.
 - The contract data covers the Bay County BOCC and the seven cities from FY2023 to FY2026. It does not cover Bay District Schools or the constitutional officers' own purchasing. Lynn Haven warrant-list names are cut off at 15 characters in the source.
-- Contributions from business owners or employees acting as individuals are not matched.
+- Business owners' personal gifts are matched only on the same name and street address (`owner_gifts.py`); employees are not matched.
 - Possible matches left out as unclear:
   - "Halls Contracting" (Ford) vs "Hall Contracting & Construction, Inc."
   - "ESCS LLC" (Ford) vs "ECSC, LLC"

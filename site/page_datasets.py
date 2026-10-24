@@ -2,8 +2,8 @@
 
 Every page's data is published as an open-data dataset so it reaches the database (db/scripts/load.py) and the API
 (/api/v1/datasets/<id>). Rows are flat, one record per row, with plain column names. Same privacy rules as the site:
-individual campaign donors are never named (they appear only as summed totals), and grant programs' unnamed
-recipients stay grouped.
+individual campaign donors are named only when they run a registered business (owner-gifts); everyone else appears
+only in summed totals. Grant programs' unnamed recipients stay grouped.
 """
 import os, sys
 
@@ -305,6 +305,37 @@ def business_donor_sunbiz():
     return rows
 
 
+def owner_gifts():
+    """Personal campaign gifts from people who run a registered business (data/campaign/owner_gifts.py), one row per
+    person and campaign. The person is named, with the businesses they run; no addresses or occupations."""
+    import json
+    sys.path.insert(0, os.path.join(HERE, '..', 'data', 'entities'))
+    import ids
+    fp = os.path.join(HERE, '..', 'data', 'campaign', 'owner_gifts.json')
+    if not os.path.exists(fp):
+        return []
+    d = json.load(open(fp))
+    agg = {}
+    for g in d['gifts']:
+        r = agg.setdefault((g['person_key'], g['cand_id']), {'n': 0, 'amt': 0.0, 'dates': []})
+        r['n'] += 1
+        r['amt'] += g['amount']
+        if g.get('date'):
+            r['dates'].append(g['date'])
+    rows = []
+    for (pk, cid), r in agg.items():
+        o, c = d['owners'][pk], d['campaigns'][cid]
+        biz = o['businesses']
+        rows.append({'donor_id': 'owner:' + pk, 'donor': o['name'], 'businesses': '; '.join(ids.biz_case(b['name']) for b in biz),
+                     'business_doc_numbers': '; '.join(b['doc_number'] for b in biz), 'active_businesses': sum(1 for b in biz if b['status'] == 'active'),
+                     'candidate': c['candidate'], 'candidate_id': ids.person_id(c['candidate']), 'office': c['office'], 'election': c['election'],
+                     'gifts': r['n'], 'amount': round(r['amt'], 2), 'first_date': min(r['dates']) if r['dates'] else None,
+                     'last_date': max(r['dates']) if r['dates'] else None, 'match': 'same name and street address as a Sunbiz officer, manager or registered agent',
+                     'source_url': c['report_url']})
+    rows.sort(key=lambda r: (-r['amount'], r['donor'], r['candidate']))
+    return rows
+
+
 # Shared-owner groups: rows are written to the database by registry.publish_group() when an admin confirms a group
 # (migration 0032), not by the site build, so the published file is empty and the columns are listed here.
 SHARED_OWNER_COLUMNS = ['group_id', 'candidate', 'office', 'election', 'business', 'sunbiz_doc_number', 'business_status', 'business_amount',
@@ -413,6 +444,18 @@ def official_business_links():
     return []
 
 
+# --- Entity profiles (site/entity_graph.py): every named entity and every documented connection -----------------------
+
+def entity_profiles():
+    from entity_graph import profile_rows
+    return profile_rows()
+
+
+def entity_connections():
+    from entity_graph import connection_rows
+    return connection_rows()
+
+
 DATASETS = [
     ('connections-payees', 'Connections: payees', 'Every payee in the payment records of every local government and agency (contracts, change orders, emergency purchases, check registers, tourism agency payments and the CRA ledger) as one entity, with who paid it and whether it gave to a campaign. dollars_in_records adds every record, and an award and the payments on it can both be records, so it is not a deduplicated total. Unnamed grant recipients are grouped.', connections_payees),
     ('connections-payments', 'Connections: payment records', 'One row per payment record behind the Connections network: which government or agency paid which payee, the record type, amount, date and source. CRA ledger items that are only proposed or planned are not included.', connections_payments),
@@ -441,5 +484,8 @@ DATASETS = [
     ('nonprofit-officials', 'Officials on nonprofit boards', 'Elected officials, department leaders and candidates listed as an officer or director of a local nonprofit in its IRS returns or state corporate filings. Only matches checked by hand are listed.', nonprofit_officials),
     ('official-businesses', "Officials' businesses", 'Registered businesses (Florida Division of Corporations) that list an elected official, department leader or local candidate as an officer, manager or registered agent, with the filing date and status. Each official-to-record match was checked by hand. Only officials and candidates are named.', official_businesses),
     ('official-business-links', "Officials' business ties", "How officials' and candidates' registered businesses connect to public life: two officials on the same business, an official's business giving to a campaign, a donor business that shares an officer with a candidate's business (the shared person is counted, not named), and an official's business paid by a local government. Published only for hand-checked matches.", official_business_links),
+    ('owner-gifts', 'Campaign gifts from business owners', "Personal gifts to local campaigns from people who run a registered Florida business, one row per person and campaign. A contributor filed as an individual is listed when the name and street address on the Supervisor of Elections filing are the same as an officer, manager or registered agent of a for-profit business on Sunbiz that was active around the gift; middle initials and Jr/Sr must agree, and protected voters are never matched. Other individual donors are never named. No addresses or occupations.", owner_gifts),
+    ('entity-profiles', 'Profiles: people, companies and organizations', 'Every company, elected official, candidate, nonprofit, nonprofit board member, registered business, committee and government named in BayCounty.me records, one row each, with its profile page and how many documented connections it has. entity_id (kind:key) joins entity-connections. Board members are named as their nonprofits\' public filings list them; individual campaign donors are included only when they run a registered business (owner-gifts).', entity_profiles),
+    ('entity-connections', 'Connections between people, companies and organizations', "Every documented connection between two entities in entity-profiles, totalled per pair and kind: a government paid a payee, an organization gave to an official's or candidate's campaign, an official voted on a company's contracts, a person sits on a nonprofit's board or runs a business, a nonprofit gave a grant, two payees share a project. Each row has its source. Individual campaign donors are included only when they run a registered business (owner-gifts); officials' board seats and businesses are added by the API once checked by hand.", entity_connections),
     ('tax-districts', 'Tax districts', 'Which taxing authorities levy property tax in each tax district, and the combined millage. Rates by year are in property-tax-rates (authority_id).', tax_districts),
 ]
