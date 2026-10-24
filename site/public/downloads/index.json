@@ -4756,7 +4756,7 @@
    "id": "nonprofits",
    "title": "Nonprofits",
    "description": "Every nonprofit in the county: organizations recognized by the IRS with a local address, and active Florida nonprofit corporations (Sunbiz) based here. Type, IRS subsection, latest 990 revenue, expenses and assets, how many board members its filings list, how many of those sit on another local board, government payment records and grants. Board members are in nonprofit-board-members.",
-   "rows": 1927,
+   "rows": 1972,
    "columns": [
     {
      "name": "nonprofit_id",
@@ -4782,6 +4782,7 @@
       "Bay Point",
       "Callaway",
       "Carillon Beach",
+      "Dunedin",
       "Florida",
       "Fountain",
       "Inlet Beach",
@@ -4793,12 +4794,14 @@
       "Panama City Beach",
       "Pananma City",
       "Parker",
+      "Port St Joe",
       "Rosemary Beach",
       "Sea Crest",
       "Seacrest Beach",
       "Southport",
       "Springfield",
       "Tyndall AFB",
+      "Wellborn",
       "Youngstown"
      ]
     },
@@ -4806,6 +4809,7 @@
      "name": "zip",
      "type": "string",
      "values": [
+      "32094",
       "32401",
       "32402",
       "32403",
@@ -4822,7 +4826,10 @@
       "32417",
       "32438",
       "32444",
-      "32466"
+      "32456",
+      "32461",
+      "32466",
+      "34698"
      ]
     },
     {
@@ -5074,7 +5081,18 @@
     },
     {
      "name": "fdacs_status",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "Active",
+      "Closed",
+      "Denied",
+      "Exempt",
+      "Expired",
+      "Law NA",
+      "Not Soliciting",
+      "Registered",
+      "Suspended"
+     ]
     },
     {
      "name": "fdacs_expires",
@@ -5082,27 +5100,55 @@
     },
     {
      "name": "fdacs_fiscal_year_end",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "2022-08-31",
+      "2022-12-31",
+      "2023-06-30",
+      "2024-12-31",
+      "2025-01-31",
+      "2025-02-28",
+      "2025-03-31",
+      "2025-04-30",
+      "2025-05-31",
+      "2025-06-30",
+      "2025-07-31",
+      "2025-09-30",
+      "2025-10-31",
+      "2025-11-30",
+      "2025-12-31",
+      "2026-01-31",
+      "2026-04-30",
+      "2026-05-31",
+      "2026-06-30",
+      "2026-07-31",
+      "2026-12-31",
+      "2027-02-28",
+      "2027-06-30"
+     ]
     },
     {
      "name": "fdacs_revenue",
-     "type": "string"
+     "type": "number"
     },
     {
      "name": "fdacs_program_expenses",
-     "type": "string"
+     "type": "number"
     },
     {
      "name": "fdacs_fundraising_expenses",
-     "type": "string"
+     "type": "number"
     },
     {
      "name": "fdacs_management_expenses",
-     "type": "string"
+     "type": "number"
     },
     {
      "name": "fdacs_url",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "https://csapp.fdacs.gov/CSPublicApp/CheckACharity/CheckACharity.aspx"
+     ]
     },
     {
      "name": "source_url",
@@ -5572,7 +5618,7 @@
    "id": "charity-registrations",
    "title": "Nonprofits: Florida charity registrations",
    "description": "Charities with a county address registered with the Florida Department of Agriculture and Consumer Services to ask the public for donations (Check-A-Charity): registration status and dates, the revenue and the program, fundraising and management spending each reported to the state, and the professional fundraising firms it uses. nonprofit_id links to the nonprofits dataset (joined by FEIN, then by exact name); the officers and directors each registration lists are in nonprofit-board-members.",
-   "rows": 0,
+   "rows": 218,
    "columns": [
     {
      "name": "registration_number",
@@ -5596,15 +5642,45 @@
     },
     {
      "name": "matched_by",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "name",
+      "new"
+     ]
     },
     {
      "name": "status",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "Active",
+      "Closed",
+      "Denied",
+      "Exempt",
+      "Expired",
+      "Law NA",
+      "Not Soliciting",
+      "Registered",
+      "Suspended"
+     ]
     },
     {
      "name": "status_detail",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "Active Small Charity",
+      "Closed - Out of Business",
+      "Denied",
+      "Exempt",
+      "Exempt - Membership Only",
+      "Exempt: Title 36 - Veterans",
+      "Expired",
+      "Law NA - Educational",
+      "Law NA - Governmental",
+      "Law NA - Religious",
+      "Not Soliciting",
+      "Registered",
+      "Suspended"
+     ]
     },
     {
      "name": "registration_date",
@@ -5616,11 +5692,43 @@
     },
     {
      "name": "city",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "Callaway",
+      "Dunedin",
+      "Fountain",
+      "Lynn Haven",
+      "Panama City",
+      "Panama City Beach",
+      "Port St Joe",
+      "Rosemary Beach",
+      "Southport",
+      "Wellborn",
+      "Youngstown"
+     ]
     },
     {
      "name": "zip",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "32094",
+      "32401",
+      "32402",
+      "32403",
+      "32404",
+      "32405",
+      "32407",
+      "32408",
+      "32409",
+      "32412",
+      "32413",
+      "32438",
+      "32444",
+      "32456",
+      "32461",
+      "32466",
+      "34698"
+     ]
     },
     {
      "name": "website",
@@ -5628,7 +5736,32 @@
     },
     {
      "name": "fiscal_year_end",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "2022-08-31",
+      "2022-12-31",
+      "2023-06-30",
+      "2024-12-31",
+      "2025-01-31",
+      "2025-02-28",
+      "2025-03-31",
+      "2025-04-30",
+      "2025-05-31",
+      "2025-06-30",
+      "2025-07-31",
+      "2025-09-30",
+      "2025-10-31",
+      "2025-11-30",
+      "2025-12-31",
+      "2026-01-31",
+      "2026-04-30",
+      "2026-05-31",
+      "2026-06-30",
+      "2026-07-31",
+      "2026-12-31",
+      "2027-02-28",
+      "2027-06-30"
+     ]
     },
     {
      "name": "total_revenue",
@@ -5668,7 +5801,10 @@
     },
     {
      "name": "fundraising_consultants",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "Atlantic Development Associates, Llc"
+     ]
     },
     {
      "name": "officers_listed",
@@ -5680,10 +5816,20 @@
     },
     {
      "name": "county",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "bay"
+     ]
     },
     {
      "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://csapp.fdacs.gov/CSPublicApp/CheckACharity/CheckACharity.aspx"
+     ]
+    },
+    {
+     "name": "gov_id",
      "type": "string"
     }
    ],

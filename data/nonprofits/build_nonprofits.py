@@ -337,7 +337,7 @@ def seats(orgs, roles, people, county_key):
         s['current'] = (s['tax_year'] or 0) == latest[k]
         if s['source'] == 'fdacs':  # officers on a lapsed or withdrawn registration are not a current board
             st = (orgs[s['nonprofit_id']]['fdacs'].get('status') or '').lower()
-            s['current'] = s['current'] and 'active' in st and 'inactive' not in st
+            s['current'] = s['current'] and st in ('active', 'registered')
     return out
 
 
@@ -665,7 +665,7 @@ def registration_rows(res):
                          'fiscal_year_end': _iso(fd.get('fiscal_year_end')), 'total_revenue': rev, 'contributions': _num(fd.get('contributions')),
                          'government_grants': _num(fd.get('government_grants')), 'program_expenses': prog, 'fundraising_expenses': fr,
                          'management_expenses': mg, 'total_expenses': tot,
-                         'program_percent': _num(fd.get('program_percent')) if fd.get('program_percent') else _pct(prog, tot),
+                         'program_percent': (_num(fd.get('program_percent')) if fd.get('program_percent') else _pct(prog, tot)) if tot else None,
                          'fundraising_percent': _pct(fr, tot),
                          'fundraising_consultants': '; '.join(x.strip() for x in (fd.get('fundraising_consultants') or '').split(';') if x.strip()) or None,
                          'officers_listed': len(o.get('fdacs_officers') or []), 'other_registrations': ', '.join(o.get('fdacs_other', [])) or None,

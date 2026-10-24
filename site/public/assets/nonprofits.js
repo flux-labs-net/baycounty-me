@@ -10,7 +10,7 @@
   const HOA = 'Homeowner or condo association';
   const PAGE = 60;
   let orgs = [], pays = new Map(), grants = new Map(), offs = new Map(), regs = new Map(), shown = PAGE;
-  const active = s => /active/i.test(s || '') && !/inactive/i.test(s || '');
+  const active = s => /^(active|registered)\b/i.test(s || '');  // FDACS: small charities are Active, larger ones Registered
   const pct = (a, b) => a != null && b ? ` (${Math.round(100 * a / b)}%)` : '';
 
   async function all(id) {
