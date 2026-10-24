@@ -4722,6 +4722,192 @@
    "api": "/api/v1/datasets/shared-owner-groups"
   },
   {
+   "id": "official-businesses",
+   "title": "Officials' businesses",
+   "description": "Registered businesses (Florida Division of Corporations) that list an elected official, department leader or local candidate as an officer, manager or registered agent, with the filing date and status. Each official-to-record match was checked by hand. Only officials and candidates are named.",
+   "rows": 0,
+   "columns": [
+    {
+     "name": "person_id",
+     "type": "string"
+    },
+    {
+     "name": "official",
+     "type": "string"
+    },
+    {
+     "name": "official_role",
+     "type": "string"
+    },
+    {
+     "name": "business",
+     "type": "string"
+    },
+    {
+     "name": "sunbiz_doc_number",
+     "type": "string"
+    },
+    {
+     "name": "titles",
+     "type": "string"
+    },
+    {
+     "name": "role_kind",
+     "type": "string"
+    },
+    {
+     "name": "business_status",
+     "type": "string"
+    },
+    {
+     "name": "filing_type",
+     "type": "string"
+    },
+    {
+     "name": "nonprofit",
+     "type": "boolean"
+    },
+    {
+     "name": "principal_city",
+     "type": "string"
+    },
+    {
+     "name": "filed_date",
+     "type": "string"
+    },
+    {
+     "name": "closed_year",
+     "type": "number"
+    },
+    {
+     "name": "role_first_seen",
+     "type": "string"
+    },
+    {
+     "name": "county",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/official-businesses.json",
+   "csv": "/downloads/official-businesses.csv",
+   "api": "/api/v1/datasets/official-businesses"
+  },
+  {
+   "id": "official-business-links",
+   "title": "Officials' business ties",
+   "description": "How officials' and candidates' registered businesses connect to public life: two officials on the same business, an official's business giving to a campaign, a donor business that shares an officer with a candidate's business (the shared person is counted, not named), and an official's business paid by a local government. Published only for hand-checked matches.",
+   "rows": 0,
+   "columns": [
+    {
+     "name": "link_type",
+     "type": "string"
+    },
+    {
+     "name": "person_id",
+     "type": "string"
+    },
+    {
+     "name": "official",
+     "type": "string"
+    },
+    {
+     "name": "other_person_id",
+     "type": "string"
+    },
+    {
+     "name": "other_official",
+     "type": "string"
+    },
+    {
+     "name": "candidate",
+     "type": "string"
+    },
+    {
+     "name": "office",
+     "type": "string"
+    },
+    {
+     "name": "business",
+     "type": "string"
+    },
+    {
+     "name": "sunbiz_doc_number",
+     "type": "string"
+    },
+    {
+     "name": "related_business",
+     "type": "string"
+    },
+    {
+     "name": "related_doc_number",
+     "type": "string"
+    },
+    {
+     "name": "shared_people",
+     "type": "number"
+    },
+    {
+     "name": "payer",
+     "type": "string"
+    },
+    {
+     "name": "own_government",
+     "type": "boolean"
+    },
+    {
+     "name": "self_gift",
+     "type": "boolean"
+    },
+    {
+     "name": "amount",
+     "type": "number"
+    },
+    {
+     "name": "items",
+     "type": "number"
+    },
+    {
+     "name": "first_date",
+     "type": "string"
+    },
+    {
+     "name": "last_date",
+     "type": "string"
+    },
+    {
+     "name": "detail",
+     "type": "string"
+    },
+    {
+     "name": "county",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "report_url",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/official-business-links.json",
+   "csv": "/downloads/official-business-links.csv",
+   "api": "/api/v1/datasets/official-business-links"
+  },
+  {
    "id": "tax-districts",
    "title": "Tax districts",
    "description": "Which taxing authorities levy property tax in each tax district, and the combined millage. Rates by year are in property-tax-rates (authority_id).",
