@@ -27,6 +27,7 @@ ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
 sys.path.insert(0, HERE)
 sys.path.insert(0, os.path.join(ROOT, 'data', 'entities'))
 from counties import county  # noqa: E402
+from ids import sunbiz_person  # noqa: E402
 
 CORPORATE_OFFICER_MIN = 25   # active entities
 AGENT_SERVICE_MIN = 20       # entities as registered agent
@@ -209,7 +210,8 @@ def group_people(entities, roles, county_key='bay'):
         cities = collections.Counter(r['city'] for r in rs if r['city'])
         zips = collections.Counter(r['zip5'] for r in rs if r['zip5'])
         people[pkey] = {
-            'person_key': pkey, 'county': county_key, 'display_name': names.most_common(1)[0][0], 'name_key': rs[0]['name_key'],
+            'person_key': pkey, 'county': county_key, 'raw_name': names.most_common(1)[0][0],
+            'display_name': sunbiz_person(names.most_common(1)[0][0]), 'name_key': rs[0]['name_key'],
             'city': cities.most_common(1)[0][0] if cities else '', 'zip5': zips.most_common(1)[0][0] if zips else '',
             'resident': any(r['zip5'] in c['zips'] for r in rs),
             'address_hash': hashlib.sha1(('|'.join(key_src)).encode()).hexdigest()[:16],
