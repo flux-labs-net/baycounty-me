@@ -21,6 +21,13 @@ struct SearchView: View {
         ("About and privacy", "info.circle", .about),
     ]
 
+    /// The site's Get Involved pages, opened in the in-app browser.
+    private let takePart: [(title: String, detail: String, symbol: String, path: String)] = [
+        ("Letters to officials", "What we asked, and what they said", "envelope.open", "/correspondence"),
+        ("Request a record", "Write a public records request", "doc.badge.plus", "/records-request"),
+        ("Email alerts", "Weekly updates for your government", "bell", "/alerts"),
+    ]
+
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 22) {
@@ -46,6 +53,15 @@ struct SearchView: View {
                             ForEach(browse, id: \.title) { b in
                                 RouteRow(route: b.route, title: b.title, symbol: b.symbol)
                                 if b.title != browse.last?.title { RowDivider(inset: 50) }
+                            }
+                        }
+                    }
+                    VStack(alignment: .leading, spacing: 10) {
+                        EyebrowHeader(text: "Take part")
+                        CardList {
+                            ForEach(takePart, id: \.title) { t in
+                                WebRow(title: t.title, detail: t.detail, symbol: t.symbol, url: URL(string: "https://baycounty.me" + t.path))
+                                if t.title != takePart.last?.title { RowDivider(inset: 50) }
                             }
                         }
                     }

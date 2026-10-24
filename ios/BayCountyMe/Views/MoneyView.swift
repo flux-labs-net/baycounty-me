@@ -9,7 +9,9 @@ struct MoneyView: View {
         let title: String
         let symbol: String
         let detail: String
-        let route: Route
+        /// A native screen, or nil for a site page opened in the in-app browser.
+        var route: Route? = nil
+        var site: String? = nil
         var id: String { title }
     }
 
@@ -30,12 +32,10 @@ struct MoneyView: View {
     ]
     private let accountability: [Item] = [
         .init(title: "Accountability console", symbol: "checklist", detail: "Projects from budget to close-out, with open questions", route: .accountability),
+        .init(title: "Savings finder", symbol: "dollarsign.arrow.circlepath", detail: "Where governments could spend less", route: .dataset("savings-opportunities")),
         .init(title: "Contracts", symbol: "signature", detail: "Who wins contracts, and how", route: .dataset("contracts")),
         .init(title: "Companies", symbol: "building", detail: "Every company paid, with its contracts and votes", route: .vendors),
         .init(title: "How they voted", symbol: "hand.raised", detail: "Every recorded vote on money decisions", route: .dataset("votes")),
-        .init(title: "Campaign money", symbol: "chart.bar", detail: "What each official raised", route: .dataset("campaign-finance")),
-        .init(title: "Donors with contracts", symbol: "link", detail: "Businesses that gave and also hold contracts", route: .donorContracts),
-        .init(title: "Money map", symbol: "point.3.connected.trianglepath.dotted", detail: "Donors, officials and contracts", route: .moneyMap),
         .init(title: "Who gets paid", symbol: "dollarsign.circle", detail: "Payments by the tourism agencies", route: .dataset("vendor-payments")),
         .init(title: "Change orders", symbol: "arrow.triangle.2.circlepath", detail: "How much contracts grew", route: .dataset("change-orders")),
         .init(title: "Emergency purchases", symbol: "exclamationmark.triangle", detail: "Bought without bidding", route: .dataset("emergency-purchases")),
@@ -43,18 +43,29 @@ struct MoneyView: View {
         .init(title: "Bonds and loans", symbol: "banknote", detail: "Every bond, note and loan", route: .dataset("bonds")),
         .init(title: "Audit findings", symbol: "magnifyingglass", detail: "What outside auditors flagged", route: .dataset("audit-findings")),
     ]
+    /// The site's Connections menu.
+    private let connections: [Item] = [
+        .init(title: "Network", symbol: "point.3.filled.connected.trianglepath.dotted", detail: "Who every government paid, and who gave to officials", site: "/connections"),
+        .init(title: "Campaign gifts", symbol: "chart.bar", detail: "What each official raised, and from whom", route: .dataset("campaign-finance")),
+        .init(title: "Donors with contracts", symbol: "link", detail: "Businesses that gave and also hold contracts", route: .donorContracts),
+        .init(title: "Money map", symbol: "point.3.connected.trianglepath.dotted", detail: "Donors, officials and votes on their contracts", route: .moneyMap),
+        .init(title: "Shared owners", symbol: "person.2", detail: "Businesses with a shared owner that gave to the same candidate", site: "/connections/shared-owners"),
+        .init(title: "Nonprofits", symbol: "heart.text.square", detail: "Every local nonprofit, its public money, and its board", route: .dataset("nonprofits")),
+        .init(title: "Nonprofit boards", symbol: "person.3", detail: "Who sits on each nonprofit's board", route: .dataset("nonprofit-board-members")),
+        .init(title: "Business ties", symbol: "briefcase", detail: "Officials' and candidates' businesses", site: "/connections/business-ties"),
+    ]
     private let elections: [Item] = [
         .init(title: "2026 candidates", symbol: "checkmark.seal", detail: "Who's running, and what they raised", route: .dataset("candidates-2026")),
         .init(title: "Gifts from organizations", symbol: "envelope", detail: "2026 contributions from businesses and groups", route: .dataset("campaign-contributions-2026")),
     ]
 
-    private enum MoneySection: String, CaseIterable { case pay, goes, accountability, elections }
+    private enum MoneySection: String, CaseIterable { case pay, goes, accountability, connections, elections }
 
     private func title(_ s: MoneySection) -> String {
-        switch s { case .pay: "What you pay"; case .goes: "Where it goes"; case .accountability: "Accountability"; case .elections: "Elections" }
+        switch s { case .pay: "What you pay"; case .goes: "Where it goes"; case .accountability: "Accountability"; case .connections: "Connections"; case .elections: "Elections" }
     }
     private func items(_ s: MoneySection) -> [Item] {
-        switch s { case .pay: pay; case .goes: goes; case .accountability: accountability; case .elections: elections }
+        switch s { case .pay: pay; case .goes: goes; case .accountability: accountability; case .connections: connections; case .elections: elections }
     }
 
     @State private var picked: MoneySection = .pay
@@ -156,7 +167,11 @@ struct MoneyView: View {
             SectionHeader(title: title)
             CardList {
                 ForEach(items) { i in
-                    RouteRow(route: i.route, title: i.title, detail: i.detail, symbol: i.symbol, value: value(i))
+                    if let route = i.route {
+                        RouteRow(route: route, title: i.title, detail: i.detail, symbol: i.symbol, value: value(i))
+                    } else if let site = i.site {
+                        WebRow(title: i.title, detail: i.detail, symbol: i.symbol, url: URL(string: "https://baycounty.me" + site))
+                    }
                     if i.id != items.last?.id { RowDivider(inset: 50) }
                 }
             }

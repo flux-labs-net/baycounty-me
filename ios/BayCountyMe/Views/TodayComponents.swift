@@ -162,12 +162,13 @@ struct RouteRow: View {
 struct WebRow: View {
     @Environment(AppStore.self) private var store
     let title: String
+    var detail: String? = nil
     var symbol: String? = nil
     let url: URL?
 
     var body: some View {
         if let url {
-            Button { store.open(url) } label: { RowLabel(title: title, symbol: symbol) }
+            Button { store.open(url) } label: { RowLabel(title: title, detail: detail, symbol: symbol) }
                 .buttonStyle(.plain)
         }
     }
