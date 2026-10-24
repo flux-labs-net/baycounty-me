@@ -365,7 +365,7 @@ def group_board_people(all_seats, people, entities, gift_docs, county_key):
     reg_by_name = collections.defaultdict(list)
     for p in people.values():
         if not p['agent_service']:
-            nm = sunbiz_name(p['display_name'])
+            nm = sunbiz_name(p.get('raw_name') or p['display_name'])
             if nm:
                 reg_by_name[group_key(nm)].append(p)
     ids = officials_index()
@@ -384,8 +384,7 @@ def group_board_people(all_seats, people, entities, gift_docs, county_key):
             first, last = (first[0][0] if first else ''), (last[0][0] if last else nk.split()[0])
             display = collections.Counter(s['raw_name'] for s in gs if s['source'] != 'sunbiz' and ',' not in s['raw_name']).most_common(1)
             display = ' '.join(display[0][0].split()) if display else ' '.join(filter(None, [first, m, last]))
-            if display.isupper() or display.islower():
-                display = display.title()
+            display = ids.person_case(display)
             for s in gs:
                 s['board_key'] = key
             # Sunbiz people with this name (and a compatible middle initial): the businesses they run

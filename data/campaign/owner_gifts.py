@@ -26,6 +26,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
 sys.path.insert(0, os.path.join(ROOT, 'data', 'sunbiz'))
 import build_sunbiz as B  # noqa: E402
+from ids import person_case  # noqa: E402  (build_sunbiz puts data/entities on the path)
 
 OUT = os.path.join(HERE, 'owner_gifts.json')
 SUFFIX = {'JR', 'SR', 'II', 'III', 'IV'}
@@ -103,10 +104,8 @@ def suffix(raw):
 
 
 def display(name):
-    """Name as filed, with only all-caps or all-lowercase names recased."""
-    if name.isupper() or name.islower():
-        return ' '.join(w if len(w) <= 3 and w.upper() in SUFFIX else w.capitalize() for w in name.split())
-    return name
+    """Name as filed, recased when it is in all caps (ids.person_case)."""
+    return person_case(name)
 
 
 def same_person(name):

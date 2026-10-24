@@ -73,6 +73,86 @@ def biz_case(name):
     return ' '.join(_case_word(w, i == 0) for i, w in enumerate(words))
 
 
+# People's names from Sunbiz, IRS filings, the elections office and FDACS are often in all caps. person_case gives them
+# normal name casing. Matching never uses the display form (person_key, name_key and the like work on upper or lower
+# case), so recasing a name changes only how it reads.
+_NAME_UPPER = {'II', 'III', 'IV', 'VI', 'VII', 'VIII', 'MD', 'DDS', 'DMD', 'DVM', 'PHD', 'CPA', 'ESQ', 'PA', 'PE', 'RN', 'USN', 'USAF', 'USMC',
+               'RET', 'JD', 'LCSW', 'CFP', 'MBA', 'EDD'}
+_NAME_FIXED = {'JR': 'Jr', 'SR': 'Sr', 'PHD': 'PhD', 'EDD': 'EdD', 'RET': 'Ret', 'MR': 'Mr', 'MRS': 'Mrs', 'MS': 'Ms', 'DR': 'Dr'}
+# Mac is a prefix only in these names (Mack, Macy, Mace and Machado are not Mac-names)
+_MAC = {'macdonald', 'macdougall', 'macgregor', 'mackenzie', 'mackinnon', 'mackay', 'maclean', 'macleod', 'macmillan', 'macneil',
+        'macpherson', 'macarthur', 'macaulay', 'macfarlane', 'macintosh', 'macinnis', 'macrae', 'macqueen', 'maclaren', 'macintyre',
+        'maclachlan', 'macnamara', 'macdonell', 'maccallum', 'mackintosh', 'macivor'}
+
+
+def _name_piece(p):
+    lo = p.lower()
+    if len(lo) > 2 and lo.startswith('mc'):
+        return 'Mc' + lo[2:].capitalize()
+    if lo in _MAC:
+        return 'Mac' + lo[3:].capitalize()
+    return lo.capitalize()
+
+
+def _name_word(w, first):
+    core = re.sub(r'[^A-Za-z]', '', w)
+    up = core.upper()
+    if not core:
+        return w
+    if len(core) == 1:  # an initial: J, J.
+        return w.upper()
+    if up in _NAME_FIXED:
+        return w.replace(core, _NAME_FIXED[up])
+    if up in _NAME_UPPER and not first:
+        return re.sub(core, up, w, flags=re.I)
+    # each piece split by apostrophes and hyphens: O'NEAL -> O'Neal, SMITH-JONES -> Smith-Jones, MCDANIEL -> McDaniel
+    out = re.sub(r"[A-Za-z]+", lambda m: _name_piece(m.group(0)), w)
+    return re.sub(r"(?<=[a-z])'S\b", "'s", out)
+
+
+def person_case(name):
+    """'JOHN A MCDANIEL III' -> 'John A McDaniel III', "MARY O'NEAL-SMITH" -> "Mary O'Neal-Smith".
+
+    Names in all caps or all lower case are recased. Names a person typed in mixed case keep their casing, except for
+    words in all caps ('Kathy LAWSON') and the slips a plain .title() leaves behind: 'Mcdaniel' -> 'McDaniel',
+    'Iii' -> 'III', "O'neal" -> "O'Neal"."""
+    if not isinstance(name, str) or not re.search(r'[A-Za-z]', name):
+        return name
+    s = re.sub(r'\s+', ' ', name).strip()
+    words = s.split(' ')
+    if s.isupper() or s.islower():
+        return ' '.join(_name_word(w, i == 0) for i, w in enumerate(words))
+    # a name typed partly in caps ('Kathy LAWSON', 'McVICAR'): recase the words with three capitals in a row
+    s = ' '.join(_name_word(w, i == 0) if re.search(r'[A-Z]{3}', w) else w for i, w in enumerate(words))
+    s = re.sub(r"\bMc([a-z])", lambda m: 'Mc' + m.group(1).upper(), s)
+    s = re.sub(r"\b(O|D)'([a-z])", lambda m: m.group(1) + "'" + m.group(2).upper(), s)
+    return re.sub(r"(?<=\s)(Ii|Iii|Iv)\b", lambda m: m.group(1).upper(), s)
+
+
+def sunbiz_person(raw):
+    """A Sunbiz officer or agent name, which is fixed width ('SELLICK             DAVID         E'), as it reads:
+    'David E Sellick'. Names that are not fixed width are only recased."""
+    raw = (raw or '').rstrip()
+    if len(raw) > 20 and raw[:20].strip() and ' ' not in raw[:20].strip() or re.search(r'\S\s{2,}\S', raw):
+        if raw[20:34].strip():
+            last, first, middle = raw[:20].strip(), raw[20:34].strip(), raw[34:].strip()
+        else:
+            last, first, middle = (re.split(r'\s{2,}', raw.strip()) + ['', ''])[:3]
+        sfx = ''
+        for part in ('middle', 'last'):  # a suffix can sit at the end of the middle or the last name field
+            v = middle if part == 'middle' else last
+            m = re.search(r'(^|[\s,]+)(JR|SR|II|III|IV)\.?$', v, re.I)
+            if m:
+                sfx = sfx or m.group(2)
+                v = v[:m.start()]
+                middle, last = (v, last) if part == 'middle' else (middle, v)
+        raw = ' '.join(x for x in (first, middle, last.rstrip(','), sfx) if x)
+    elif raw.count(',') == 1 and raw.split(',')[1].strip().upper().rstrip('.') not in _NAME_UPPER | set(_NAME_FIXED):
+        last, rest = raw.split(',')  # 'SMITH, JOHN A'
+        raw = rest.strip() + ' ' + last.strip()
+    return person_case(raw)
+
+
 # ---------- governments ----------
 def _gn(s):
     return re.sub(r'\s+', ' ', (s or '').strip().lower())
