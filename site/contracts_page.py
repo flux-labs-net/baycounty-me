@@ -153,7 +153,7 @@ def contracts_page(out_dir):
         rm = tv[0]['amount']
         cover = f'{len(r.get("months_covered", []))} of 12 months' if r.get('months_covered') else ''
         regs += f'''<details class="tbl-toggle"{data_g(r["government"])}{" open" if r is d["registers"][-1] or r.get("fy") == 2025 else ""}><summary>{e(SHORT.get(r["government"], r["government"]))}, FY{e(r["fy"])} {("· " + cover) if cover else ""}</summary><div class="hbars small">''' + ''.join(
-            f'''<div class="hb"><span class="hb-n">{e(v["vendor"])}</span><span class="hb-track"><span class="hb-bar" style="width:{max(.5, v["amount"]/rm*100):.1f}%"></span></span><span class="hb-v">{money(v["amount"])}</span></div>''' for v in tv[:15]) + \
+            f'''<div class="hb"><span class="hb-n">{e(V.ids.biz_case(v["vendor"]))}</span><span class="hb-track"><span class="hb-bar" style="width:{max(.5, v["amount"]/rm*100):.1f}%"></span></span><span class="hb-v">{money(v["amount"])}</span></div>''' for v in tv[:15]) + \
             f'''</div><p class="note">{"Lynn Haven's warrant lists in its agenda packets, which show only checks of about $10,000 or more and cut payee names short; smaller checks and electronic payments aren't included. No purpose is given for individual checks." if "Lynn Haven" in r["government"] else "The Bay County Clerk of Court's monthly check register, attached to County Commission agendas."} {f'Missing months: {", ".join(r["months_missing"])}.' if r.get("months_missing") else ""} <a class="src" href="{e(r["url"])}" target="_blank" rel="noopener">Source</a></p></details>'''
     # change orders
     co = sorted(d['change_orders'], key=lambda x: -(x.get('change_amount') or 0))

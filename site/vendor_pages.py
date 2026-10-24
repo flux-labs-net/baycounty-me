@@ -121,11 +121,12 @@ def slugs():
 def link(name, text=None):
     """Build-time link for any spelling of a vendor name ('' when it has no profile)."""
     vids = ids.vendor_ids(name)
+    text = ids.biz_case(text if text is not None else name)
     P = build()
     vid = next((v for v in vids if v in P), None)
     if not vid:
-        return e(text if text is not None else name)
-    return f'<a href="{BASE}/{vid}">{e(text if text is not None else name)}</a>'
+        return e(text)
+    return f'<a href="{BASE}/{vid}">{e(text)}</a>'
 
 
 def write_slugs(out_dir):
@@ -208,7 +209,7 @@ def vendor_page(vid):
         gr = ''.join(f'''<tr{data_g(g.get("office_gov_id"))}><th scope="row">{e(g["candidate"])}<small>{e(g["office"])} · {e("current officeholder" if g["gift_source"].startswith("current") else "2026 candidate")}</small></th>
       <td class="num">{usd(g["contribution_amount"])}{f'<small>{usd(g["refunded_by_campaign"])} refunded</small>' if g.get("refunded_by_campaign") else ""}</td><td>{e(", ".join(g["contribution_dates"]))}</td>
       <td class="small">{"<span class='badge warn'>Same government</span> " if any(m == g.get("office_gov_id") for m in g["_govs"]) else ""}{e(", ".join(gname(x) for x in g["_govs"]))}</td>
-      <td class="small">{e(g["contributor"])}{" (spelled differently in the filing)" if g["match_confidence"] == "likely" else ""} <a class="src" href="{e(g["campaign_report_url"])}" target="_blank" rel="noopener">Report</a></td></tr>''' for g in sorted(p['gifts'], key=lambda g: (-g['contribution_amount'], g['candidate'])))
+      <td class="small">{e(ids.biz_case(g["contributor"]))}{" (spelled differently in the filing)" if g["match_confidence"] == "likely" else ""} <a class="src" href="{e(g["campaign_report_url"])}" target="_blank" rel="noopener">Report</a></td></tr>''' for g in sorted(p['gifts'], key=lambda g: (-g['contribution_amount'], g['candidate'])))
         gifts = f'''<section class="tx-sec"{secg({g.get("office_gov_id") for g in p["gifts"]})}><div class="sec-hd"><h2 id="gifts">Campaign gifts from the business</h2><span class="muted">Business contributions only</span></div>
     <div class="tablewrap"><table class="tx-table vd-table"><thead><tr><th scope="col">To</th><th scope="col" class="num">Gave</th><th scope="col">Dates</th><th scope="col">Governments that pay this vendor</th><th scope="col">Filed as</th></tr></thead><tbody>{gr}</tbody></table></div>
     <p class="note">From the Supervisor of Elections reports of current officeholders and 2026 candidates. Gifts from the company's owners or employees as individuals are not linked to it, and individual donors are never named on this site. "Same government" means the official serves on (or the candidate is running for) a government that pays this vendor. {e(NOTE)}</p></section>'''

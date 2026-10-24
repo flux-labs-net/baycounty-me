@@ -238,7 +238,7 @@ def _pick_display(names):
         cnt = names[n]
         return (not n.isupper(), bool(re.search(r'\b(inc|llc|co|corp|company|lp)\b\.?', n, re.I)), cnt, len(n))
     best = max(names, key=score)
-    return re.sub(r'\s*\((bid awarded|consultant|buyer|camera|program)[^)]*\)', '', best).strip()
+    return ids.biz_case(re.sub(r'\s*\((bid awarded|consultant|buyer|camera|program)[^)]*\)', '', best).strip())
 
 
 # ---- people: elected officials, department leaders and 2026 candidates only ----

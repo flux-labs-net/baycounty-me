@@ -174,9 +174,10 @@
   },
   {
    "id": "abentras",
-   "name": "ABENTRAS",
+   "name": "Abentras",
    "aliases": [
-    "ABENTRAS"
+    "ABENTRAS",
+    "Abentras"
    ],
    "keys": [
     "abentras"
@@ -239,9 +240,10 @@
   },
   {
    "id": "ach-pmt-amex-epayment",
-   "name": "ACH PMT AMEX EPAYMENT",
+   "name": "ACH PMT Amex Epayment",
    "aliases": [
-    "ACH PMT AMEX EPAYMENT"
+    "ACH PMT AMEX EPAYMENT",
+    "ACH PMT Amex Epayment"
    ],
    "keys": [
     "achpmtamexepayment"
@@ -528,9 +530,10 @@
   },
   {
    "id": "amex",
-   "name": "AMEX",
+   "name": "Amex",
    "aliases": [
-    "AMEX"
+    "AMEX",
+    "Amex"
    ],
    "keys": [
     "amex"
@@ -544,9 +547,10 @@
   },
   {
    "id": "ampersand",
-   "name": "AMPERSAND",
+   "name": "Ampersand",
    "aliases": [
-    "AMPERSAND"
+    "AMPERSAND",
+    "Ampersand"
    ],
    "keys": [
     "ampersand"
@@ -1014,9 +1018,10 @@
   },
   {
    "id": "baldwin-contain",
-   "name": "BALDWIN CONTAIN",
+   "name": "Baldwin Contain",
    "aliases": [
-    "BALDWIN CONTAIN"
+    "BALDWIN CONTAIN",
+    "Baldwin Contain"
    ],
    "keys": [
     "baldwincontain"
@@ -1052,9 +1057,10 @@
   },
   {
    "id": "barron-redding",
-   "name": "BARRON & REDDING PA",
+   "name": "Barron & Redding PA",
    "aliases": [
-    "BARRON & REDDING PA"
+    "BARRON & REDDING PA",
+    "Barron & Redding PA"
    ],
    "keys": [
     "barronredding"
@@ -1619,9 +1625,10 @@
   },
   {
    "id": "bowring-marsh-bermuda-l",
-   "name": "BOWRING MARSH BERMUDA L",
+   "name": "Bowring Marsh Bermuda L",
    "aliases": [
-    "BOWRING MARSH BERMUDA L"
+    "BOWRING MARSH BERMUDA L",
+    "Bowring Marsh Bermuda L"
    ],
    "keys": [
     "bowringmarshbermudal"
@@ -2081,9 +2088,10 @@
   },
   {
    "id": "ck-contractors-develo",
-   "name": "CK CONTRACTORS AND DEVELO",
+   "name": "CK Contractors and Develo",
    "aliases": [
-    "CK CONTRACTORS AND DEVELO"
+    "CK CONTRACTORS AND DEVELO",
+    "CK Contractors and Develo"
    ],
    "keys": [
     "ckcontractorsdevelo"
@@ -2282,9 +2290,10 @@
   },
   {
    "id": "container-syste",
-   "name": "CONTAINER SYSTE",
+   "name": "Container Syste",
    "aliases": [
-    "CONTAINER SYSTE"
+    "CONTAINER SYSTE",
+    "Container Syste"
    ],
    "keys": [
     "containersyste"
@@ -3124,9 +3133,10 @@
   },
   {
    "id": "energreen-ameri",
-   "name": "ENERGREEN AMERI",
+   "name": "Energreen Ameri",
    "aliases": [
-    "ENERGREEN AMERI"
+    "ENERGREEN AMERI",
+    "Energreen Ameri"
    ],
    "keys": [
     "energreenameri"
@@ -3140,9 +3150,10 @@
   },
   {
    "id": "energy-systems",
-   "name": "ENERGY SYSTEMS",
+   "name": "Energy Systems",
    "aliases": [
-    "ENERGY SYSTEMS"
+    "ENERGY SYSTEMS",
+    "Energy Systems"
    ],
    "keys": [
     "energysystems"
@@ -3621,9 +3632,10 @@
   },
   {
    "id": "frazer",
-   "name": "FRAZER LTD",
+   "name": "Frazer Ltd",
    "aliases": [
-    "FRAZER LTD"
+    "FRAZER LTD",
+    "Frazer Ltd"
    ],
    "keys": [
     "frazer"
@@ -3701,9 +3713,10 @@
   },
   {
    "id": "fusus",
-   "name": "FUSUS",
+   "name": "Fusus",
    "aliases": [
-    "FUSUS"
+    "FUSUS",
+    "Fusus"
    ],
    "keys": [
     "fusus"
@@ -3797,9 +3810,10 @@
   },
   {
    "id": "garber-fleet-sa",
-   "name": "GARBER FLEET SA",
+   "name": "Garber Fleet SA",
    "aliases": [
-    "GARBER FLEET SA"
+    "GARBER FLEET SA",
+    "Garber Fleet SA"
    ],
    "keys": [
     "garberfleetsa"
@@ -3996,9 +4010,10 @@
   },
   {
    "id": "greensouth-solu",
-   "name": "GREENSOUTH SOLU",
+   "name": "Greensouth Solu",
    "aliases": [
-    "GREENSOUTH SOLU"
+    "GREENSOUTH SOLU",
+    "Greensouth Solu"
    ],
    "keys": [
     "greensouthsolu"
@@ -4265,9 +4280,10 @@
   },
   {
    "id": "hancock-bank",
-   "name": "HANCOCK BANK",
+   "name": "Hancock Bank",
    "aliases": [
-    "HANCOCK BANK"
+    "HANCOCK BANK",
+    "Hancock Bank"
    ],
    "keys": [
     "hancockbank"
@@ -4400,9 +4416,10 @@
   },
   {
    "id": "helms-briscoe-performance-group",
-   "name": "HELMS BRISCOE PERFORMANCE GROUP INC",
+   "name": "Helms Briscoe Performance Group Inc",
    "aliases": [
-    "HELMS BRISCOE PERFORMANCE GROUP INC"
+    "HELMS BRISCOE PERFORMANCE GROUP INC",
+    "Helms Briscoe Performance Group Inc"
    ],
    "keys": [
     "helmsbriscoeperformancegroup"
@@ -5023,9 +5040,10 @@
   },
   {
    "id": "jdf-rvoc-tr",
-   "name": "JDF RVOC TR OF",
+   "name": "JDF Rvoc TR of",
    "aliases": [
-    "JDF RVOC TR OF"
+    "JDF RVOC TR OF",
+    "JDF Rvoc TR of"
    ],
    "keys": [
     "jdfrvoctr"
@@ -5071,9 +5089,10 @@
   },
   {
    "id": "js-s-water-holdings",
-   "name": "JS&S WATER HOLDINGS INC",
+   "name": "JS&S Water Holdings Inc",
    "aliases": [
-    "JS&S WATER HOLDINGS INC"
+    "JS&S WATER HOLDINGS INC",
+    "JS&S Water Holdings Inc"
    ],
    "keys": [
     "jsswaterholdings"
@@ -7318,9 +7337,10 @@
   },
   {
    "id": "premium-bluecrossflorida",
-   "name": "PREMIUM BLUECROSSFLORIDA",
+   "name": "Premium Bluecrossflorida",
    "aliases": [
-    "PREMIUM BLUECROSSFLORIDA"
+    "PREMIUM BLUECROSSFLORIDA",
+    "Premium Bluecrossflorida"
    ],
    "keys": [
     "premiumbluecrossflorida"
@@ -7510,9 +7530,10 @@
   },
   {
    "id": "public-risk-mgm",
-   "name": "PUBLIC RISK MGM",
+   "name": "Public Risk Mgmt",
    "aliases": [
-    "PUBLIC RISK MGM"
+    "PUBLIC RISK MGM",
+    "Public Risk Mgmt"
    ],
    "keys": [
     "publicriskmgm"
@@ -7655,9 +7676,10 @@
   },
   {
    "id": "quillian-powell",
-   "name": "QUILLIAN POWELL",
+   "name": "Quillian Powell",
    "aliases": [
-    "QUILLIAN POWELL"
+    "QUILLIAN POWELL",
+    "Quillian Powell"
    ],
    "keys": [
     "quillianpowell"
@@ -7850,9 +7872,10 @@
   },
   {
    "id": "rdk-assets",
-   "name": "RDK ASSETS INC",
+   "name": "RDK Assets Inc",
    "aliases": [
-    "RDK ASSETS INC"
+    "RDK ASSETS INC",
+    "RDK Assets Inc"
    ],
    "keys": [
     "rdkassets"
@@ -7866,9 +7889,10 @@
   },
   {
    "id": "ready-mix-usa",
-   "name": "READY MIX USA",
+   "name": "Ready Mix USA",
    "aliases": [
-    "READY MIX USA"
+    "READY MIX USA",
+    "Ready Mix USA"
    ],
    "keys": [
     "readymixusa"
@@ -7918,9 +7942,10 @@
   },
   {
    "id": "regions-bank",
-   "name": "REGIONS BANK",
+   "name": "Regions Bank",
    "aliases": [
-    "REGIONS BANK"
+    "REGIONS BANK",
+    "Regions Bank"
    ],
    "keys": [
     "regionsbank"
@@ -8723,9 +8748,10 @@
   },
   {
    "id": "sportaflex",
-   "name": "SPORTAFLEX",
+   "name": "Sportaflex",
    "aliases": [
-    "SPORTAFLEX"
+    "SPORTAFLEX",
+    "Sportaflex"
    ],
    "keys": [
     "sportaflex"
@@ -8868,9 +8894,10 @@
   },
   {
    "id": "stryker-sales",
-   "name": "STRYKER SALES LLC",
+   "name": "Stryker Sales LLC",
    "aliases": [
-    "STRYKER SALES LLC"
+    "STRYKER SALES LLC",
+    "Stryker Sales LLC"
    ],
    "keys": [
     "strykersales"
@@ -9200,9 +9227,10 @@
   },
   {
    "id": "trade-press-media-group",
-   "name": "TRADE PRESS MEDIA GROUP, INC",
+   "name": "Trade Press Media Group, Inc",
    "aliases": [
-    "TRADE PRESS MEDIA GROUP, INC"
+    "TRADE PRESS MEDIA GROUP, INC",
+    "Trade Press Media Group, Inc"
    ],
    "keys": [
     "tradepressmediagroup"
@@ -9506,9 +9534,10 @@
   },
   {
    "id": "visa",
-   "name": "VISA",
+   "name": "Visa",
    "aliases": [
-    "VISA"
+    "VISA",
+    "Visa"
    ],
    "keys": [
     "visa"
@@ -9607,9 +9636,10 @@
   },
   {
    "id": "wage-pay-adp-wage-pay",
-   "name": "WAGE PAY ADP WAGE PAY",
+   "name": "Wage Pay ADP Wage Pay",
    "aliases": [
-    "WAGE PAY ADP WAGE PAY"
+    "WAGE PAY ADP WAGE PAY",
+    "Wage Pay ADP Wage Pay"
    ],
    "keys": [
     "wagepayadpwagepay"
@@ -9671,9 +9701,10 @@
   },
   {
    "id": "waste-pro",
-   "name": "WASTE PRO",
+   "name": "Waste Pro",
    "aliases": [
-    "WASTE PRO"
+    "WASTE PRO",
+    "Waste Pro"
    ],
    "keys": [
     "wastepro"
