@@ -203,6 +203,16 @@ async function route(req, res, action, me) {
       return r;
     }
     // ---------- correspondence with officials ----------
+    case 'registry': return require('./_registry').groups({county: Q.county, status: String(Q.status || ''), candidate: String(Q.candidate || '')});
+    case 'registry_search': return require('./_registry').search(Q.county, Q.q);
+    case 'registry_person': return require('./_registry').person(Q.county, Q.key);
+    case 'registry_entity': return require('./_registry').entity(Q.county, Q.doc);
+    case 'registry_review': {
+      if (req.method !== 'POST') throw Object.assign(new Error('Use POST.'), {status: 405});
+      const r = await require('./_registry').review(body, me.e);
+      await audit(me.e, action, null, {group_id: body.group_id, candidate: body.candidate || null, status: body.status});
+      return r;
+    }
     case 'corr_contacts': return require('./_correspondence').contacts();
     case 'corr_contact': case 'corr_seed': case 'corr_send': case 'corr_reply': case 'corr_publish': case 'corr_status': case 'corr_assign': case 'corr_dismiss': {
       if (req.method !== 'POST') throw Object.assign(new Error('Use POST.'), {status: 405});

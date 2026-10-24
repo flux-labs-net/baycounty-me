@@ -22,7 +22,7 @@ const PAGES = {
   '/correspondence': {endpoints: ['/correspondence']},
   '/alerts': {none: 'email alert sign-up form'},
   '/meetings': {datasets: ['meetings'], endpoints: ['/meetings.ics']},
-  '/public-money/campaign-money': {datasets: ['campaign-finance', 'donor-contracts', 'campaign-contributions-2026']},
+  '/public-money/campaign-money': {datasets: ['campaign-finance', 'donor-contracts', 'campaign-contributions-2026', 'business-donor-sunbiz']},
   '/who-runs-bay-county': {datasets: ['people-directory', 'officials-pay', 'salary-leaders']},
   '/public-money/budget-explorer': {datasets: ['budget-detail', 'budget-per-resident']},
   '/elections': {datasets: ['candidates-2026', 'campaign-contributions-2026']},

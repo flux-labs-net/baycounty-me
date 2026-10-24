@@ -17,12 +17,12 @@ GOV_COLS = {'government-profiles': ['government'], 'government-years': ['gov_id'
             'bed-tax-collections': [], 'property-tax-exemptions': [],
             'cra-network-gifts': ['cra_board', 'office'], 'donor-contracts': ['contract_gov_id'], 'cra-network-payees': [], 'cra-network-links': [],
             'vendors-directory': [], 'people-directory': [], 'glossary-terms': [], 'site-updates': [], 'tax-districts': ['district'],
-            'savings-opportunities': ['government'], 'savings-evidence': []}
+            'savings-opportunities': ['government'], 'savings-evidence': [], 'business-donor-sunbiz': ['gov_id', 'office']}
 FIXED_GOV = {'bed-tax-collections': 'county', 'property-tax-exemptions': 'county'}  # county bed tax in every zone; the county-wide tax roll
 
 
 VENDOR_COL = {'contracts': 'vendor', 'change-orders': 'vendor', 'emergency-purchases': 'vendor', 'cra-payments': 'payee', 'vendor-payments': 'vendor',
-              'campaign-contributions-2026': 'contributor'}
+              'campaign-contributions-2026': 'contributor', 'business-donor-sunbiz': 'contributor'}
 
 
 def add_vendor_id(did, rows):
@@ -37,7 +37,8 @@ def add_vendor_id(did, rows):
     return rows
 
 
-PERSON_COL = {'member-votes': 'member', 'officials-pay': 'name', 'salary-leaders': 'name', 'campaign-finance': 'official', 'candidates-2026': 'candidate'}
+PERSON_COL = {'member-votes': 'member', 'officials-pay': 'name', 'salary-leaders': 'name', 'campaign-finance': 'official', 'candidates-2026': 'candidate',
+              'business-donor-sunbiz': 'candidate'}
 
 
 def add_person_id(did, rows):
