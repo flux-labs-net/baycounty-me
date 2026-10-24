@@ -1,0 +1,228 @@
+{
+  "id": "fl-bay",
+  "state": "FL",
+  "state_name": "Florida",
+  "name": "Bay County",
+  "place_label": "Bay County, Florida",
+  "site_name": "BayCounty.me",
+  "place_label_es": "el condado de Bay, Florida",
+  "wordmark": [
+    "BayCounty",
+    ".me"
+  ],
+  "domain": "https://baycounty.me",
+  "contact_email": "hello@fluxlabs.net",
+  "operator": {
+    "name": "Flux Labs",
+    "url": "https://fluxlabs.net/",
+    "logo": "/assets/flux-labs.webp",
+    "about": "a managed IT services company in Panama City"
+  },
+  "officials": {
+    "href": "/who-runs-bay-county",
+    "label": "Who runs Bay County",
+    "desc": "Every elected seat and top salary"
+  },
+  "governments": [
+    {
+      "key": "county",
+      "slug": "bay-county",
+      "short": "Bay County",
+      "name": "Bay County Board of County Commissioners",
+      "kind": "county",
+      "blurb": "The County Commission sets the countywide property tax, runs county roads, utilities, parks, libraries and emergency services, and funds the five elected county officers.",
+      "menu_desc": "County Commission, budget, debt, votes",
+      "match": {
+        "tax": "bay_county",
+        "auth": "bay_county_general",
+        "debt": "Bay County (Board",
+        "audit": "Bay County",
+        "contracts": "Bay County BOCC",
+        "fees": "Bay County Board of County Commissioners",
+        "surtax": "Bay County",
+        "fema": [
+          "Bay County"
+        ],
+        "cra": null,
+        "util": "Bay County Utility Services"
+      }
+    },
+    {
+      "key": "schools",
+      "slug": "bay-district-schools",
+      "short": "Bay District Schools",
+      "name": "Bay District Schools (School Board of Bay County)",
+      "kind": "schools",
+      "blurb": "The elected School Board and superintendent run Bay County's public schools. School property taxes are the largest slice of most Bay County tax bills; most of the rate is set by the state.",
+      "menu_desc": "School Board, budget, debt, audits",
+      "match": {
+        "tax": "bay_district_schools",
+        "auth": null,
+        "debt": "Bay District Schools",
+        "audit": "Bay District Schools",
+        "contracts": null,
+        "fees": "Bay District Schools (School Board of Bay County)",
+        "surtax": null,
+        "fema": [
+          "School Board of Bay County Florida"
+        ],
+        "cra": null,
+        "util": null
+      }
+    },
+    {
+      "key": "pc",
+      "slug": "panama-city",
+      "short": "Panama City",
+      "name": "City of Panama City",
+      "kind": "city",
+      "menu_desc": "",
+      "match": {
+        "tax": "panama_city",
+        "auth": "city_panama_city",
+        "debt": "City of Panama City (primary",
+        "audit": "City of Panama City",
+        "contracts": "City of Panama City",
+        "fees": "City of Panama City",
+        "surtax": "City of Panama City",
+        "fema": [
+          "Panama City, City of"
+        ],
+        "cra": "pc",
+        "util": "City of Panama City"
+      }
+    },
+    {
+      "key": "pcb",
+      "slug": "panama-city-beach",
+      "short": "Panama City Beach",
+      "name": "City of Panama City Beach",
+      "kind": "city",
+      "menu_desc": "",
+      "match": {
+        "tax": "panama_city_beach",
+        "auth": "city_panama_city_beach",
+        "debt": "City of Panama City Beach",
+        "audit": "City of Panama City Beach",
+        "contracts": "City of Panama City Beach",
+        "fees": "City of Panama City Beach",
+        "surtax": "City of Panama City Beach",
+        "fema": [
+          "Panama City Beach, City of"
+        ],
+        "cra": "pcb",
+        "util": "City of Panama City Beach"
+      }
+    },
+    {
+      "key": "lh",
+      "slug": "lynn-haven",
+      "short": "Lynn Haven",
+      "name": "City of Lynn Haven",
+      "kind": "city",
+      "menu_desc": "",
+      "match": {
+        "tax": "lynn_haven",
+        "auth": "city_lynn_haven",
+        "debt": "City of Lynn Haven",
+        "audit": "City of Lynn Haven",
+        "contracts": "City of Lynn Haven",
+        "fees": "City of Lynn Haven",
+        "surtax": "City of Lynn Haven",
+        "fema": [
+          "Lynn Haven, City of"
+        ],
+        "cra": "lh",
+        "util": "City of Lynn Haven"
+      }
+    },
+    {
+      "key": "cw",
+      "slug": "callaway",
+      "short": "Callaway",
+      "name": "City of Callaway",
+      "kind": "city",
+      "menu_desc": "",
+      "match": {
+        "tax": "callaway",
+        "auth": "city_callaway",
+        "debt": "City of Callaway",
+        "audit": "City of Callaway",
+        "contracts": "City of Callaway",
+        "fees": "City of Callaway",
+        "surtax": "City of Callaway",
+        "fema": [
+          "Callaway, City of"
+        ],
+        "cra": "cw",
+        "util": "City of Callaway"
+      }
+    },
+    {
+      "key": "sp",
+      "slug": "springfield",
+      "short": "Springfield",
+      "name": "City of Springfield",
+      "kind": "city",
+      "menu_desc": "",
+      "match": {
+        "tax": "springfield",
+        "auth": "city_springfield",
+        "debt": "City of Springfield",
+        "audit": "City of Springfield",
+        "contracts": "City of Springfield",
+        "fees": "City of Springfield",
+        "surtax": "City of Springfield",
+        "fema": [
+          "Springfield, City of"
+        ],
+        "cra": "sf",
+        "util": "City of Springfield"
+      }
+    },
+    {
+      "key": "parker",
+      "slug": "parker",
+      "short": "Parker",
+      "name": "City of Parker",
+      "kind": "city",
+      "menu_desc": "",
+      "match": {
+        "tax": "parker",
+        "auth": "city_parker",
+        "debt": "City of Parker",
+        "audit": "City of Parker",
+        "contracts": "City of Parker",
+        "fees": "City of Parker",
+        "surtax": "City of Parker",
+        "fema": [
+          "Parker, City Of"
+        ],
+        "cra": "pk",
+        "util": "City of Parker"
+      }
+    },
+    {
+      "key": "mb",
+      "slug": "mexico-beach",
+      "short": "Mexico Beach",
+      "name": "City of Mexico Beach",
+      "kind": "city",
+      "menu_desc": "",
+      "match": {
+        "tax": "mexico_beach",
+        "auth": "city_mexico_beach",
+        "debt": "City of Mexico Beach",
+        "audit": "City of Mexico Beach",
+        "contracts": "City of Mexico Beach",
+        "fees": "City of Mexico Beach",
+        "surtax": "City of Mexico Beach",
+        "fema": [
+          "Mexico Beach, City Of"
+        ],
+        "cra": null,
+        "util": "City of Mexico Beach"
+      }
+    }
+  ]
+}
