@@ -359,7 +359,7 @@ def _layout(title, desc, path, body, extra_head=''):
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="/assets/site.css">
 <link rel="alternate" type="application/rss+xml" title="{SITE} updates" href="/updates.xml">
 <script>window.va=window.va||function(){{(window.vaq=window.vaq||[]).push(arguments)}};window.si=window.si||function(){{(window.siq=window.siq||[]).push(arguments)}};</script>
