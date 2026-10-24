@@ -15,7 +15,7 @@ GOV_COLS = {'government-profiles': ['government'], 'government-years': ['gov_id'
             'meetings': ['gov', 'board'], 'campaign-finance': ['office', 'gov'], 'bonds': ['gov'], 'salary-positions': ['employer_id'],
             'salary-leaders': ['employer_id'], 'candidates-2026': ['office', 'government'], 'campaign-contributions-2026': ['office'],
             'bed-tax-collections': [], 'property-tax-exemptions': [],
-            'cra-network-gifts': ['cra_board', 'office'], 'donor-contracts': ['contract_gov_id'], 'cra-network-payees': [], 'cra-network-links': [],
+            'connections-gifts': ['official_gov_id', 'office'], 'connections-payments': ['payer_gov_id'], 'donor-contracts': ['contract_gov_id'], 'connections-payees': [], 'connections-links': [],
             'vendors-directory': [], 'people-directory': [], 'glossary-terms': [], 'site-updates': [], 'tax-districts': ['district'],
             'savings-opportunities': ['government'], 'savings-evidence': []}
 FIXED_GOV = {'bed-tax-collections': 'county', 'property-tax-exemptions': 'county'}  # county bed tax in every zone; the county-wide tax roll
@@ -156,7 +156,7 @@ def _member_votes():
 
 def _cra():
     from page_datasets import cra_payee_ids
-    pid = cra_payee_ids()  # the CRA network's payee id (cra-network-payees.entity_id), same row order
+    pid = cra_payee_ids()  # the Connections payee id (connections-payees.entity_id), same row order
     return [{**{k: p.get(k) for k in ('cra', 'city', 'payee', 'amount', 'date_or_fy', 'status', 'category', 'purpose', 'location_name', 'district', 'lat', 'lng', 'count', 'source_title', 'source_url', 'notes')},
              'payee_entity_id': pid[i]}
             for i, p in enumerate(_j('merged.json')['payments'])]

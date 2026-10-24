@@ -11,20 +11,22 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 
 
-# --- CRA network (/public-money/cra-network) -------------------------------------------------------------------------
+# --- Connections (/connections) ----------------------------------------------------------------------------------------
 
 def _network():
-    from cra_network import network_data
+    from connections import network_data
     return network_data()
 
 
 KIND = {'biz': 'business', 'gov': 'government', 'prop': 'property owner', 'unnamed': 'payee not named', 'grants': 'grant recipients (grouped)'}
+PAYER_KIND = {'gov': 'government', 'cra': 'redevelopment agency', 'tourism': 'tourism agency'}
 
 
 def cra_payee_ids():
-    """payee_entity_id for each cra-payments row (same order as data/merged.json payments), or None."""
-    import json, re
-    from cra_network import _entity, CRA_CODE, DATA
+    """payee_entity_id for each cra-payments row (same order as data/merged.json payments), or None.
+    The ids are the Connections payee ids (connections-payees.entity_id)."""
+    import json
+    from connections import _entity, CRA_CODE, DATA
     M = json.load(open(os.path.join(DATA, 'merged.json')))
     V = {v['id']: v for v in json.load(open(os.path.join(DATA, 'entities', 'vendors.json')))['vendors']}
     out = []
@@ -34,41 +36,60 @@ def cra_payee_ids():
     return out
 
 
-def cra_network_payees():
+def _payer_gov(D, pk):
+    return pk[2:] if pk.startswith('g:') else D['payers'][pk]['g']
+
+
+def connections_payees():
     D = _network()
+    gave = {d['e'] for d in D['don'] if d['e']}
     agg = {}
     for r in D['recs']:
-        a = agg.setdefault(r['e'], {'cras': [], 'records': 0, 'counted_total': 0.0})
-        if r['c'] not in a['cras']:
-            a['cras'].append(r['c'])
+        a = agg.setdefault(r['e'], {'payers': [], 'types': [], 'records': 0, 'total': 0.0})
+        if r['p'] not in a['payers']:
+            a['payers'].append(r['p'])
+        if r['t'] not in a['types']:
+            a['types'].append(r['t'])
         a['records'] += 1
-        if r['k'] and isinstance(r['a'], (int, float)):
-            a['counted_total'] += r['a']
+        a['total'] += r['a'] or 0
     rows = []
     for key, e in D['ents'].items():
-        a = agg.get(key, {'cras': [], 'records': 0, 'counted_total': 0.0})
+        a = agg.get(key, {'payers': [], 'types': [], 'records': 0, 'total': 0.0})
         rows.append({'entity_id': key, 'name': e['n'], 'kind': KIND.get(e['k'], e['k']), 'subconsultant_only': bool(e.get('sub')),
-                     'cras': [D['cras'][c]['n'] for c in a['cras']], 'records': a['records'], 'counted_total': round(a['counted_total'], 2),
+                     'paid_by': [D['payers'][p]['n'] for p in a['payers']], 'record_types': [D['types'][t] for t in a['types']],
+                     'records': a['records'], 'dollars_in_records': round(a['total'], 2), 'gave_to_campaigns': key in gave,
                      'vendor_page': f"/public-money/vendors/{e['vp']}" if e.get('vp') else None})
-    rows.sort(key=lambda r: (-r['counted_total'], r['name']))
+    rows.sort(key=lambda r: (-r['dollars_in_records'], r['name']))
     return rows
 
 
-def cra_network_links():
+def connections_payments():
+    D = _network()
+    return [{'record_id': r['id'], 'payer_id': r['p'], 'payer': D['payers'][r['p']]['n'], 'payer_kind': PAYER_KIND[D['payers'][r['p']]['k']],
+             'payer_gov_id': _payer_gov(D, r['p']), 'entity_id': r['e'], 'payee': D['ents'][r['e']]['n'], 'record_type': D['types'][r['t']],
+             'amount': r['a'], 'date': r['when'] or None, 'what': r['w'] or None, 'cra_status': r.get('s'),
+             'inside_project_total': bool(r.get('x')), 'source_url': D['urls'][r['u']] if r.get('u') is not None else None} for r in D['recs']]
+
+
+def connections_links():
     D = _network()
     return [{'entity_a': x['a'], 'name_a': D['ents'][x['a']]['n'], 'entity_b': x['b'], 'name_b': D['ents'][x['b']]['n'],
              'connection': x['t'], 'source_url': x['u']} for x in D['rel']]
 
 
-def cra_network_gifts():
+def connections_gifts():
     D = _network()
-    board = lambda b: (D['cras'].get(b) or {}).get('n') if b else None
-    return [{'donor': d['dn'], 'donor_type': d['ty'], 'official': d['o'], 'office': d['off'], 'cra_board': board(d['b']),
-             'amount': d['a'], 'gifts': d['n'], 'dates': d['date'] or None, 'payee_entity_id': d['e'], 'match_confidence': d['cf'],
-             'report_url': d['u'], 'as_of': D.get('as_of')} for d in D['don']]
+    out = []
+    for d in D['don']:
+        o = D['off'][d['o']]
+        out.append({'donor': d['dn'], 'donor_type': d['ty'], 'official': o['n'], 'office': o['off'], 'official_gov_id': o['gid'] or None,
+                    'candidate_2026': o['cand'], 'sits_on': [D['payers'][p]['n'] for p in o['gp']] or None,
+                    'amount': d['a'], 'gifts': d['n'], 'dates': d['date'] or None, 'payee_entity_id': d['e'], 'match_confidence': d['cf'],
+                    'report_url': D['urls'][d['u']] if d.get('u') is not None else None, 'as_of': D.get('as_of')})
+    return out
 
 
-# --- Money map (/public-money/money-map) -------------------------------------------------------------------------------
+# --- Money map (/connections/money-map) -------------------------------------------------------------------------------
 
 def _mm():
     from money_map import map_data
@@ -273,9 +294,10 @@ def government_years():
 
 
 DATASETS = [
-    ('cra-network-payees', 'CRA network: payees', 'Every payee in the CRA ledger as one entity (businesses, governments, property owners; unnamed grant recipients grouped), with the CRAs that paid it and the counted total.', cra_network_payees),
-    ('cra-network-links', 'CRA network: documented connections', 'Documented links between CRA payees that are not payments (shared project, address or subcontract), each with its source.', cra_network_links),
-    ('cra-network-gifts', 'CRA network: campaign gifts', 'Business and committee campaign gifts to the officials who sit as each CRA\'s board, and gifts from donors who are CRA payees. Individual donors are not included.', cra_network_gifts),
+    ('connections-payees', 'Connections: payees', 'Every payee in the payment records of every local government and agency (contracts, change orders, emergency purchases, check registers, tourism agency payments and the CRA ledger) as one entity, with who paid it and whether it gave to a campaign. dollars_in_records adds every record, and an award and the payments on it can both be records, so it is not a deduplicated total. Unnamed grant recipients are grouped.', connections_payees),
+    ('connections-payments', 'Connections: payment records', 'One row per payment record behind the Connections network: which government or agency paid which payee, the record type, amount, date and source. CRA ledger items that are only proposed or planned are not included.', connections_payments),
+    ('connections-links', 'Connections: documented links', 'Documented links between payees that are not payments (shared project, address or subcontract), each with its source.', connections_links),
+    ('connections-gifts', 'Connections: business gifts to officials', 'Gifts from businesses, PACs and committees to current officeholders and 2026 candidates, one row per donor and official, with the payee id when the donor was also paid by a local government. Individual donors are never included.', connections_gifts),
     ('money-map-gifts', 'Money map: gifts to officials', 'Gifts from businesses and committees to each current officeholder, and whether the donor holds contracts with that official\'s government. Individuals appear only as totals.', money_map_gifts),
     ('money-map-contracts', 'Money map: donor contracts', 'Contracts, awards and payments held by campaign donors, per donor and government.', money_map_contracts),
     ('money-map-votes', 'Money map: votes on donors\' contracts', 'Recorded votes by an official on a contract with one of their own donors, and whether the gift came before or after.', money_map_votes),

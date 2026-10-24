@@ -1,6 +1,6 @@
 """2026 local races (/elections): candidates on the ballot, their platforms in their own words, and their campaign money.
 
-Kept separate from /public-money/campaign-money, which covers sitting officials' past campaigns.
+Kept separate from /connections/campaign-gifts, which covers sitting officials' past campaigns.
 Data: data/elections/candidates_2026.json (roster, platforms) + finance_2026.json (SOE filings).
 Individual donors are counted, never named (site policy).
 """
@@ -253,7 +253,7 @@ def elections_page():
   <section class="tx-sec method" id="how"><div class="sec-hd"><h2>How we did this</h2></div>
     <p><b>Platforms</b> are summarized only from each candidate's own campaign website, campaign social pages or questionnaire answers they wrote, with links to each source. If we couldn't find a statement from the candidate, we say so rather than fill in from news coverage. Candidates are listed alphabetically.</p>
     <p><b>Money</b> comes from the campaign reports candidates file with the Bay County Supervisor of Elections, through the date shown. Organizations are listed by name; gifts from individual people are counted and totaled, and every name is in the linked report. Florida caps gifts to local candidates at $1,000 per person or business per election.</p>
-    <p>Sitting officials' past campaigns are on the <a href="/public-money/campaign-money">Campaign Money</a> page.</p>
+    <p>Sitting officials' past campaigns are on the <a href="/connections/campaign-gifts">Campaign Gifts</a> page.</p>
     {f'<details class="gaps"><summary>What we couldn\'t find</summary><ul>{gaps}</ul></details>' if gaps else ''}</section>
 </div>
 <link rel="stylesheet" href="/assets/tax.css">

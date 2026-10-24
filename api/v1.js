@@ -152,7 +152,7 @@ function openapi(catalog) {
         parameters: [p('year', 'A year such as 2026, or all for every year. Default: the latest year with letters'), p('government', 'Only letters to this government, as shown in the governments list of the response')],
         responses: {200: {description: '{year, years, governments, total, conversations: [{subject, sent_at, governments, replies, threads: [{official, seat, government, status, messages: [{direction, text, at}]}]}]}'}}}},
       '/pages': {get: {operationId: 'pages', summary: 'Which datasets and endpoints hold the data behind each page on BayCounty.me',
-        parameters: [p('page', 'One page path, e.g. /public-money/cra-network. Omit for every page')],
+        parameters: [p('page', 'One page path, e.g. /connections. Omit for every page')],
         responses: {200: {description: '{data: [{page, url, datasets: [{id, api}], endpoints, none, note}]}'}, 404: {description: 'Unknown page'}}}},
       '/search': {get: {operationId: 'searchSite', summary: 'Search every page on BayCounty.me', parameters: [{name: 'q', in: 'query', required: true, schema: {type: 'string'}}, p('limit', 'Results (default 20, max 100)', {type: 'integer'})], responses: {200: {description: 'Results'}}}},
     },

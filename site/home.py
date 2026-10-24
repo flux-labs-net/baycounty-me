@@ -204,7 +204,7 @@ def home_page():
     <nav class="h-links" aria-label="More public money">
       <a href="/public-money/contracts">{s['ct_n']} contracts</a>
       <a href="/public-money/votes">How they voted</a>
-      <a href="/public-money/campaign-money">Campaign money</a>
+      <a href="/connections">Connections</a>
       <a href="/public-money/savings">Savings finder</a>
       <a href="/public-money/tourist-tax">Bed tax {M(s['bt25'])}</a>
       <a href="/public-money/hurricane-michael">Hurricane Michael {M(s['fema'], 0)}</a>

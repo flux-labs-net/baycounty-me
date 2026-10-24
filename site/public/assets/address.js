@@ -413,7 +413,7 @@ function repLine(x, gov) {
   const name = m ? `<a href="/public-money/votes?m=${encodeURIComponent(m[0])}#all">${esc(a.REPNAME)}</a>` : a.DISTRICTURL ? `<a href="${esc(a.DISTRICTURL)}" target="_blank" rel="noopener">${esc(a.REPNAME || '—')}</a>` : esc(a.REPNAME || '—');
   const site = m && a.DISTRICTURL ? ` <a class="small" href="${esc(a.DISTRICTURL)}" target="_blank" rel="noopener">${esc(X.website)}</a>` : '';
   const tal = m ? `<br><span class="muted small">${esc(fmt(X.tally, {y: m[1], n: m[2]}))}</span>` : '';
-  const cm = gov ? ` <a class="small" href="/public-money/campaign-money?gov=${gov}">${esc(X.campaign)}</a>` : '';
+  const cm = gov ? ` <a class="small" href="/connections/campaign-gifts?gov=${gov}">${esc(X.campaign)}</a>` : '';
   return `${name} <span class="muted small">${esc(a.NAME || '')}</span>${site}${tal}${gov ? (tal ? ' ·' : '<br>') + cm : ''}`;
 }
 function renderReps(comm, local, sb, house, senate, ush, cityName) {
@@ -421,7 +421,7 @@ function renderReps(comm, local, sb, house, senate, ush, cityName) {
   const ballot = D.elections ? [...new Set([ck || 'county', 'county', 'schools'])].map(k => `<a href="/elections?gov=${k}">${esc(D.govs[k]?.s || k)}</a>`).join(' · ') : '';
   $('repBody').innerHTML = kv([
     ['County Commission', repLine(comm, 'county')],
-    cityName ? ['City', `City of ${esc(cityName)}${local?.[0] ? ' · ' + repLine(local, ck !== 'county' ? ck : null) : ck !== 'county' ? ` <a class="small" href="/public-money/campaign-money?gov=${ck}">${esc(X.campaign)}</a>` : ''}`] : ['City', '<span class="muted">None (unincorporated). The County Commission is your local government.</span>'],
+    cityName ? ['City', `City of ${esc(cityName)}${local?.[0] ? ' · ' + repLine(local, ck !== 'county' ? ck : null) : ck !== 'county' ? ` <a class="small" href="/connections/campaign-gifts?gov=${ck}">${esc(X.campaign)}</a>` : ''}`] : ['City', '<span class="muted">None (unincorporated). The County Commission is your local government.</span>'],
     ['School Board', repLine(sb, 'schools')],
     ['Florida House', repLine(house)],
     ['Florida Senate', repLine(senate)],

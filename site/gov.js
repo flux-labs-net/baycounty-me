@@ -100,7 +100,7 @@ function cra() {
     body: table(['Paid to', 'For', 'District', 'Status', 'Amount'], top.map(p =>
       `<td class="wrap">${esc(p.payee)}</td><td class="wrap small">${esc(p.purpose)}${src(p.url)}</td><td class="small">${esc(p.district)}</td><td class="small">${esc(p.status)}${p.count ? '' : ' <span class="muted">(not in totals)</span>'}</td><td class="num">${p.amount ? usd(p.amount) : '—'}</td>`)),
     empty: `No CRA records for ${ylabel()}.`,
-    link: `<a href="${dash('/public-money/cra-spending')}">Map and full ledger</a> · <a href="/public-money/cra-network?gov=${K}">Who the CRA paid, and their campaign gifts</a>`,
+    link: `<a href="${dash('/public-money/cra-spending')}">Map and full ledger</a> · <a href="/connections?gov=${K}">Who the city and its CRA paid, and campaign gifts</a>`,
   });
 }
 const STL = {closed: 'Closed out', complete: 'Complete', completed: 'Completed', under_construction: 'Under construction', under_contract: 'Under contract', budgeted: 'Budgeted', planned: 'Planned', in_progress: 'In progress', not_started: 'Not started', unknown: 'Status unknown'};

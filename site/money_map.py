@@ -1,4 +1,4 @@
-"""Money map (/public-money/money-map): officials <- donor organizations -> governments that pay those donors.
+"""Money map (/connections/money-map): officials <- donor organizations -> governments that pay those donors.
 
 The donor sits in the middle so each fact is shown once and attached to who it belongs to:
 a gift links a donor to the official who received it; a contract links the donor to the government that awarded it.
@@ -191,9 +191,9 @@ def money_map_page(out_dir):
     k_voted = lambda os_, vg: len({(d, o) for d, o in voted if o in os_})
     k_votedn = lambda os_, vg: f"official–donor pairs, {len(vg)} recorded votes"
     return f'''<div class="page tax mm">
-  <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Accountability · Money map</span><h1>Money map</h1>
+  <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Connections · Money map</span><h1>Money map</h1>
     <p class="lede">Which businesses and groups gave to which officials' campaigns, and which of those donors are paid by a local government. Tap any name to follow its connections.</p></div>
-    <div class="stamp"><a class="pill" href="/public-money/campaign-money">Campaign money tables</a><button type="button" class="pdf-btn" id="pdf"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 12v2h10v-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Export PDF</button><span>Reports as of {e(D.get("as_of"))}</span></div></header>
+    <div class="stamp"><a class="pill" href="/connections">See the network</a><a class="pill" href="/connections/campaign-gifts">Campaign gift tables</a><button type="button" class="pdf-btn" id="pdf"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 12v2h10v-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Export PDF</button><span>Reports as of {e(D.get("as_of"))}</span></div></header>
   {city_bar(ck, label='Officials of', note='Bay County includes the county officers')}
   <section class="explain"><div class="ex-txt"><span class="eyebrow">Read this first</span><h2>What the map does and doesn't show</h2>
     <ol class="ex-steps"><li><b>A gift and a contract are two separate facts.</b> A line to an official is a campaign gift. A line to a government is that government's contracts or payments to the same business. The map never adds contract dollars to an official.</li>
@@ -221,7 +221,7 @@ def money_map_page(out_dir):
     <div class="tablewrap"><table data-tt="off" class="heat" id="mmHeat1"></table></div>
     <p class="note">Each cell is what the organization gave to the campaigns of that government's current officials. Darker means more. A ring marks a cell where that same government also pays the donor.</p></section>
   <section class="tx-sec method"><div class="sec-hd"><h2 id="src">Sources and method</h2></div>
-    <p>Gifts come from the officials' most recent campaign reports with the Supervisor of Elections. Contracts and payments come from the contracts, change orders and check registers on this site, matched by organization name; each donor's contracts with a government are counted once. Only organizations are shown; gifts from individual people, including a company's owners or employees, are counted on the <a href="/public-money/campaign-money">Campaign Money</a> page but not named or linked to a company.</p></section>
+    <p>Gifts come from the officials' most recent campaign reports with the Supervisor of Elections. Contracts and payments come from the contracts, change orders and check registers on this site, matched by organization name; each donor's contracts with a government are counted once. Only organizations are shown; gifts from individual people, including a company's owners or employees, are counted on the <a href="/connections/campaign-gifts">Campaign Money</a> page but not named or linked to a company.</p></section>
 </div>
 <link rel="stylesheet" href="/assets/tax.css">
 <script>(() => {{ const u = new URL(location.href); if (u.searchParams.get('gov') === 'constitutional') {{ u.searchParams.set('gov', 'county'); history.replaceState(history.state, '', u); }} }})(); /* old links for the county officers: before the city bar reads ?gov= */</script>
