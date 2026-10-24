@@ -4,6 +4,7 @@
 // here; public pages and /api/v1 get business-level data (dataset business-donor-sunbiz). Files starting with _ are
 // not routes.
 const db = require('./_db');
+const bulk = require('./_bulk');
 
 const bad = (msg, status = 400) => Object.assign(new Error(msg), {status});
 const COUNTY = /^[a-z][a-z_]{1,30}$/;
@@ -40,7 +41,7 @@ async function groups({county = 'bay', status = '', candidate = ''} = {}) {
   if (REVIEW.includes(status)) { p.push(status); w += ` and g.review_status = $${p.length}`; }
   if (candidate) { p.push(String(candidate).slice(0, 80)); w += ` and g.candidate = $${p.length}`; }
   const rows = await db.q(`select g.group_id, g.candidate, g.office, g.government_key, g.election, g.n_businesses, g.n_checks, g.n_people,
-      g.combined_amount::float combined_amount, g.all_at_1000, g.same_day, g.businesses, g.report_url, g.review_status,
+      g.combined_amount::float combined_amount, g.all_at_1000, g.same_day, g.businesses, g.report_url, g.review_status, g.reviewed_by, g.reviewed_at,
       coalesce((select json_agg(json_build_object('person_key', pe.person_key, 'name', pe.display_name, 'city', pe.city, 'resident', pe.resident,
         'active_entities', pe.active_entities_as_officer) order by pe.display_name)
         from registry.people pe where pe.county = g.county and g.person_keys ? pe.person_key), '[]') people
@@ -91,20 +92,34 @@ async function search(county, q) {
   return {people, entities};
 }
 
+// Pure: the groups named in a review body (one, or `items` for a bulk change). No candidate means every candidate of that group.
+function cleanGroups(body) {
+  return bulk.items(body, x => {
+    const gid = String(x.group_id || '');
+    if (!/^g_[0-9a-f]{10}$/.test(gid)) throw bad('Unknown group.');
+    return {group_id: gid, candidate: x.candidate ? String(x.candidate).slice(0, 200) : null};
+  });
+}
+
 async function review(body, admin) {
   const county = cleanCounty(body.county);
   const status = String(body.status || '');
   if (!REVIEW.includes(status)) throw bad('Unknown review status.');
-  const gid = String(body.group_id || '');
-  if (!/^g_[0-9a-f]{10}$/.test(gid)) throw bad('Unknown group.');
-  const rows = await db.q(`update registry.shared_owner_groups set review_status = $1 where county = $2 and group_id = $3
-    and ($4::text is null or candidate = $4) returning group_id, candidate, review_status`, [status, county, gid, body.candidate ? String(body.candidate) : null]);
+  const groups = cleanGroups(body);
+  const rows = await db.q(`update registry.shared_owner_groups g set review_status = $1, reviewed_by = $2, reviewed_at = now()
+    from jsonb_to_recordset($4::jsonb) as x(group_id text, candidate text)
+    where g.county = $3 and g.group_id = x.group_id and (x.candidate is null or g.candidate = x.candidate)
+    returning g.group_id, g.candidate, g.review_status`, [status, admin || null, county, JSON.stringify(groups)]);
   if (!rows.length) throw bad('Unknown group.', 404);
-  // confirmed groups appear on /connections/shared-owners (business names only); anything else is taken down
+  // confirmed groups appear on /connections/shared-owners (business names only); anything else is taken down.
+  // One group is rewritten on its own; a bulk change rewrites the county's public rows in one call.
   let published = 0;
-  for (const r of rows) {
-    const [x] = await db.q('select registry.publish_group($1, $2, $3) n', [county, r.group_id, r.candidate]);
-    published += Number(x && x.n) || 0;
+  if (rows.length === 1) {
+    const [x] = await db.q('select registry.publish_group($1, $2, $3) n', [county, rows[0].group_id, rows[0].candidate]);
+    published = Number(x && x.n) || 0;
+  } else {
+    const [x] = await db.q('select registry.publish_all($1) n', [county]);
+    published = Number(x && x.n) || 0;
   }
   return {updated: rows.length, published, by: admin, rows};
 }
@@ -125,11 +140,15 @@ async function limits({county = 'bay', status = ''} = {}) {
 }
 
 // Pure: check a review body. A resolved case needs a resolution; the note and link are optional, the link must be http(s).
+// `case_ids` names several cases for a bulk change; they all get the same status (and resolution).
 function cleanLimitReview(body) {
   const status = String(body.status || '');
   if (!LIMIT_REVIEW.includes(status)) throw bad('Unknown review status.');
-  const id = String(body.case_id || '');
-  if (!/^l_[0-9a-f]{10}$/.test(id)) throw bad('Unknown case.');
+  const ids = bulk.items(body, x => {
+    const id = String(x.case_id || x.value || '');
+    if (!/^l_[0-9a-f]{10}$/.test(id)) throw bad('Unknown case.');
+    return id;
+  }, 'case_ids');
   let resolution = null, note = null, url = null;
   if (status === 'resolved') {
     resolution = String(body.resolution || '');
@@ -138,18 +157,19 @@ function cleanLimitReview(body) {
     url = String(body.resolution_url || '').trim().slice(0, 500) || null;
     if (url && !/^https?:\/\/[^\s]+$/i.test(url)) throw bad('The source link must start with http:// or https://.');
   }
-  return {county: cleanCounty(body.county), status, id, resolution, note, url};
+  return {county: cleanCounty(body.county), status, id: ids[0], ids, resolution, note, url};
 }
 
 async function reviewLimit(body, admin) {
   const c = cleanLimitReview(body);
   const rows = await db.q(`update registry.limit_cases set review_status = $1, resolution = $2, resolution_note = $3, resolution_url = $4,
-      reviewed_by = $5, reviewed_at = now() where county = $6 and case_id = $7 returning case_id, review_status`,
-    [c.status, c.resolution, c.note, c.url, admin, c.county, c.id]);
+      reviewed_by = $5, reviewed_at = now() where county = $6 and case_id = any($7::text[]) returning case_id, review_status`,
+    [c.status, c.resolution, c.note, c.url, admin, c.county, c.ids]);
   if (!rows.length) throw bad('Unknown case.', 404);
   // confirmed and resolved cases appear on /connections/shared-owners; anything else is taken down
-  const [x] = await db.q('select registry.publish_limit_case($1, $2) n', [c.county, c.id]);
-  return {updated: rows.length, published: Number(x && x.n) || 0, by: admin};
+  const [x] = rows.length === 1 ? await db.q('select registry.publish_limit_case($1, $2) n', [c.county, rows[0].case_id])
+    : await db.q('select registry.publish_limit_all($1) n', [c.county]);
+  return {updated: rows.length, published: Number(x && x.n) || 0, by: admin, rows};
 }
 
-module.exports = {cleanCounty, cleanQuery, summary, groups, person, entity, search, review, limits, cleanLimitReview, reviewLimit, RESOLUTIONS};
+module.exports = {cleanCounty, cleanQuery, summary, groups, person, entity, search, cleanGroups, review, limits, cleanLimitReview, reviewLimit, RESOLUTIONS};

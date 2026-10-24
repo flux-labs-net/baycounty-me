@@ -19,8 +19,21 @@ test('review: only known statuses, board keys and official ids; every review rep
   assert.equal(r.updated, 1);
   assert.equal(r.published, 2);
   const upd = calls.find(c => c.sql.includes('update registry.board_official_matches'));
-  assert.deepEqual(upd.p, ['confirmed', 'a@x', 'bay', 'b_0123456789ab', 'jane-doe']);
+  assert.deepEqual(upd.p, ['confirmed', 'a@x', 'bay', JSON.stringify([{board_key: 'b_0123456789ab', official_id: 'jane-doe'}])]);
   assert.deepEqual(calls.find(c => c.sql.includes('publish_board_officials')).p, ['bay']);
+});
+
+test('bulk review: many matches in one update, duplicates dropped, one bad id rejects the lot', async () => {
+  const items = [{board_key: 'b_0123456789ab', official_id: 'jane-doe'}, {board_key: 'b_ba9876543210', official_id: 'john-roe'}, {board_key: 'b_0123456789ab', official_id: 'jane-doe'}];
+  assert.equal(B.cleanMatches({items}).length, 2);
+  assert.throws(() => B.cleanMatches({items: [...items, {board_key: 'b_0123456789ab', official_id: "x'; drop"}]}), /Unknown official/);
+  assert.throws(() => B.cleanMatches({items: Array.from({length: 501}, () => items[0])}), /1 to 500/);
+  reply = sql => sql.includes('publish_board_officials') ? [{n: 5}] : items.slice(0, 2).map(x => ({...x, review_status: 'confirmed'}));
+  calls.length = 0;
+  const r = await B.review({status: 'confirmed', items}, 'a@x');
+  assert.equal(r.updated, 2);
+  assert.equal(calls.filter(c => c.sql.includes('update registry.board_official_matches')).length, 1);
+  assert.equal(calls.filter(c => c.sql.includes('publish_board_officials')).length, 1);
 });
 
 test('lookups reject malformed ids before touching the database', async () => {

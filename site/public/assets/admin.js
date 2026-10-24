@@ -233,6 +233,8 @@
   });
 
   // ---------- settings ----------
+  // Long bulk-review details (up to 500 ids) are cut short; the full list is in the tooltip.
+  const auditDetail = d => { const t = JSON.stringify(d); return t.length > 400 ? `<span title="${esc(t)}">${esc(t.slice(0, 400))}…</span>` : esc(t); };
   async function loadSettings() {
     loadBlocks().catch(() => {});
     const [s, a] = await Promise.all([api('settings'), api('audit')]);
@@ -241,9 +243,10 @@
     f.require_key.checked = !!s.settings.require_key;
     const name = id => (KEYS.find(k => k.id === id) || {}).name;
     const WHAT = {email_test: 'Sent a test email', create_key: 'Created a key', update_key: 'Changed a key', rotate_key: 'Replaced a key', update_settings: 'Changed settings', block_ip: 'Blocked an address', unblock_ip: 'Removed a block', login: 'Signed in', login_requested: 'Asked for a sign-in link',
-      ledger_normalize: 'Normalized accounting files', ledger_approve: 'Approved ledger rows', ledger_reject: 'Rejected ledger rows', ledger_source: 'Changed an accounting source', ledger_finance: 'Sent a file to /finance'};
+      ledger_normalize: 'Normalized accounting files', ledger_approve: 'Approved ledger rows', ledger_reject: 'Rejected ledger rows', ledger_source: 'Changed an accounting source', ledger_finance: 'Sent a file to /finance',
+      registry_review: 'Reviewed shared-owner groups', registry_limit_review: 'Reviewed over-limit cases', boards_review: 'Reviewed board matches', careers_review: 'Reviewed business ties'};
     $('#audit-table tbody').innerHTML = a.audit.map(x => `<tr><td class="small" style="white-space:nowrap">${stamp(x.at)}</td><td class="small">${esc(x.admin)}</td><td class="small">${esc(WHAT[x.action] || x.action)}${x.key_id && name(x.key_id) ? ': ' + esc(name(x.key_id)) : ''}</td>
-      <td class="small muted mono" style="word-break:break-all">${x.detail && x.action !== 'login' ? esc(JSON.stringify(x.detail)) : ''}</td></tr>`).join('') || '<tr><td colspan="4" class="empty">Nothing yet.</td></tr>';
+      <td class="small muted mono" style="word-break:break-all">${x.detail && x.action !== 'login' ? auditDetail(x.detail) : ''}</td></tr>`).join('') || '<tr><td colspan="4" class="empty">Nothing yet.</td></tr>';
   }
   $('#settings-form').addEventListener('submit', async e => {
     e.preventDefault();
@@ -769,11 +772,102 @@
   ['#cr-year', '#cr-gov', '#cr-status', '#cr-pub'].forEach(s => $(s).addEventListener('change', loadCorr));
   $('#cr-q').addEventListener('input', () => { clearTimeout(crTimer); crTimer = setTimeout(loadCorr, 300); });
 
+  // ---------- bulk review (shared by every review queue) ----------
+  // Adds a bar above a review table: tick rows (shift-click for a range), select all shown, unreviewed or high-confidence,
+  // then confirm, reject or reset them in one go. The loader puts b.cell(row) in the first column and calls b.set(rows)
+  // after rendering. Requests go out in batches of 500; the server records who reviewed what in the audit log.
+  const BULK_MAX = 500;
+  function bulkReview(o) {
+    const table = $(o.table), picked = new Set();
+    let rows = [], last = null, msg = '';
+    const bar = document.createElement('div');
+    bar.className = 'bk'; bar.setAttribute('role', 'region'); bar.setAttribute('aria-label', 'Review several at once');
+    table.closest('.tw').before(bar);
+    const plural = n => n === 1 ? o.noun[0] : o.noun[1];
+    const sure = r => !!(o.confident && r.review_status === 'unreviewed' && o.confident(r));
+    const shown = () => rows.filter(r => !o.canPick || o.canPick(r));
+    function render() {
+      const n = picked.size, all = shown(), un = all.filter(r => r.review_status === 'unreviewed').length, hi = all.filter(sure).length;
+      bar.innerHTML = `<div class="row bk-top">
+          <b class="bk-n">${n ? fmt(n) + ' selected' : 'Select'}</b>
+          <button type="button" class="linkish" data-bk-sel="all">All shown (${fmt(all.length)})</button>
+          <button type="button" class="linkish" data-bk-sel="unreviewed">Unreviewed (${fmt(un)})</button>
+          ${o.confident ? `<button type="button" class="linkish" data-bk-sel="sure" title="${esc(o.confidentHelp || '')}">${esc(o.confidentLabel)} (${fmt(hi)})</button>` : ''}
+          ${n ? '<button type="button" class="linkish" data-bk-sel="none">Clear</button>' : ''}
+          <span class="grow"></span>
+          ${o.statuses.map(([st, label, cls]) => `<button type="button" class="btn ${cls || ''}" data-bk-do="${st}"${n ? '' : ' disabled'}>${esc(label)}${n ? ' ' + fmt(n) : ''}</button>`).join('')}
+        </div>
+        ${o.confident && hi ? `<div class="row bk-sure"><span class="small muted grow">${esc(o.confidentHelp || '')}</span><button type="button" class="btn primary" data-bk-sure>Confirm all ${fmt(hi)} ${esc(o.confidentLabel.toLowerCase())}</button></div>` : ''}
+        ${o.note ? `<p class="small muted bk-note">${o.note}</p>` : ''}
+        ${msg ? `<div class="bk-msg">${msg}</div>` : ''}`;
+      const boxes = table.querySelectorAll('[data-bk]');
+      boxes.forEach(c => { c.checked = picked.has(c.dataset.bk); });
+      const head = table.querySelector('[data-bk-all]');
+      if (head) { head.checked = boxes.length > 0 && n >= boxes.length && [...boxes].every(c => c.checked); head.indeterminate = n > 0 && !head.checked; }
+    }
+    function pick(list, on = true) { list.forEach(r => on ? picked.add(o.key(r)) : picked.delete(o.key(r))); msg = ''; render(); }
+    async function run(status, list) {
+      if (!list.length) return;
+      const [, label] = o.statuses.find(x => x[0] === status) || [status, status];
+      const warn = (o.warn && o.warn(status)) || '';
+      if (!confirm(`${label} ${fmt(list.length)} ${plural(list.length)}?${warn ? '\n\n' + warn : ''}`)) return;
+      bar.querySelectorAll('button').forEach(b => { b.disabled = true; });
+      msg = '<span class="small muted">Saving…</span>'; render();
+      let done = 0, published = null;
+      try {
+        for (let i = 0; i < list.length; i += BULK_MAX) {
+          const r = await api(o.action, {method: 'POST', body: {status, ...o.body(list.slice(i, i + BULK_MAX))}});
+          done += r.updated || 0; if (r.published != null) published = r.published;
+        }
+        picked.clear();
+        msg = `<div class="banner good"><div><b>${esc(label)}: ${fmt(done)} ${plural(done)}.</b>${published != null && o.published ? ` <span class="small">${esc(o.published(published))}</span>` : ''} <span class="small muted">Logged under Throttles &amp; settings → Admin activity.</span></div></div>`;
+      } catch (e) {
+        msg = `<div class="banner bad"><div><b>Stopped after ${fmt(done)}.</b> <span class="small">${esc(e.message)}</span></div></div>`;
+      }
+      await o.reload();
+    }
+    bar.addEventListener('click', e => {
+      const b = e.target.closest('button'); if (!b) return;
+      if (b.dataset.bkSel === 'all') pick(shown());
+      else if (b.dataset.bkSel === 'unreviewed') { picked.clear(); pick(shown().filter(r => r.review_status === 'unreviewed')); }
+      else if (b.dataset.bkSel === 'sure') { picked.clear(); pick(shown().filter(sure)); }
+      else if (b.dataset.bkSel === 'none') { picked.clear(); msg = ''; render(); }
+      else if (b.dataset.bkDo) { const by = new Map(rows.map(r => [o.key(r), r])); run(b.dataset.bkDo, [...picked].map(k => by.get(k)).filter(Boolean)); }
+      else if (b.dataset.bkSure !== undefined) run('confirmed', shown().filter(sure));
+    });
+    table.addEventListener('click', e => {
+      const c = e.target.closest('[data-bk]'); if (!c) return;
+      const boxes = [...table.querySelectorAll('[data-bk]')];
+      if (e.shiftKey && last && last !== c) {
+        const [a, z] = [boxes.indexOf(last), boxes.indexOf(c)].sort((x, y) => x - y);
+        boxes.slice(a, z + 1).forEach(x => { x.checked = c.checked; c.checked ? picked.add(x.dataset.bk) : picked.delete(x.dataset.bk); });
+      } else c.checked ? picked.add(c.dataset.bk) : picked.delete(c.dataset.bk);
+      last = c; msg = ''; render();
+    });
+    table.addEventListener('change', e => {
+      if (!e.target.matches('[data-bk-all]')) return;
+      const keys = [...table.querySelectorAll('[data-bk]')].map(c => c.dataset.bk);
+      keys.forEach(k => e.target.checked ? picked.add(k) : picked.delete(k));
+      msg = ''; render();
+    });
+    return {
+      cell: r => (!o.canPick || o.canPick(r)) ? `<td class="pk"><input type="checkbox" data-bk="${esc(o.key(r))}" aria-label="Select"${picked.has(o.key(r)) ? ' checked' : ''}></td>` : '<td class="pk"></td>',
+      set(list) { rows = list || []; const keys = new Set(rows.map(o.key)); [...picked].forEach(k => { if (!keys.has(k)) picked.delete(k); }); last = null; render(); },
+      mark(key, status) { const r = rows.find(x => o.key(x) === key); if (r) { r.review_status = status; render(); } },
+    };
+  }
+  const REVIEW_BTNS = [['confirmed', 'Confirm', 'primary'], ['rejected', 'Reject', 'danger'], ['unreviewed', 'Back to unreviewed']];
+
   // ---------- business owners (private registry, api/_registry.js) ----------
   const owUsd = n => n == null ? '—' : '$' + Number(n).toLocaleString('en-US', {maximumFractionDigits: 0});
   const owNm = s => esc(String(s || '').replace(/\s+/g, ' ').trim());
   const owSunbiz = doc => `https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResultDetail?inquirytype=DocumentNumber&directionType=Initial&searchTerm=${encodeURIComponent(doc)}`;
   const OW_REV = {unreviewed: 'Unreviewed', confirmed: 'Confirmed', rejected: 'Rejected'};
+  const owKey = g => g.group_id + '|' + g.candidate;
+  const owBulk = bulkReview({table: '#ow-groups', noun: ['group', 'groups'], action: 'registry_review', statuses: REVIEW_BTNS, key: owKey,
+    body: list => ({items: list.map(g => ({group_id: g.group_id, candidate: g.candidate}))}),
+    warn: st => st === 'confirmed' ? 'Confirmed groups are published on /connections/shared-owners (business names only). Check each on Sunbiz first.' : 'Anything not confirmed is taken off the public page.',
+    published: n => `${fmt(n)} business rows are now public.`, reload: () => loadOwners()});
   async function loadOwners() {
     let r;
     try { r = await api('registry', {params: {status: $('#ow-status').value}}); }
@@ -784,14 +878,15 @@
       [`${fmt(s.matched_entities)}`, 'Businesses matched to campaign gifts'], [fmt(r.load.groups), 'Shared-owner groups'], [owUsd(s.shared_owner_dollars), 'Given by those groups'],
       [fmt(rv.unreviewed || 0), 'Not yet reviewed'], [when(r.load.loaded_at).replace(/<[^>]+>/g, ''), 'Last loaded']]
       .map(([v, l]) => `<div class="tile"><b>${v}</b><span>${l}</span></div>`).join('') : '<div class="banner"><div>Not loaded yet. The Sync database workflow loads it after the next push to main.</div></div>';
-    $('#ow-groups tbody').innerHTML = r.groups.map(g => `<tr>
+    $('#ow-groups tbody').innerHTML = r.groups.map(g => `<tr>${owBulk.cell(g)}
       <td><b>${esc(g.candidate)}</b><div class="muted small">${esc(g.office || '')}</div>${g.report_url ? `<a class="small" href="${esc(g.report_url)}" target="_blank" rel="noopener">Campaign report</a>` : ''}</td>
       <td class="small">${g.businesses.map(b => `<div><a href="#" data-doc="${esc(b.doc_number)}">${owNm(b.entity_name)}</a> ${b.status === 'I' ? '<span class="pill">Inactive</span> ' : ''}<span class="muted">${owUsd(b.amount)}${b.dates.length ? ', ' + esc(b.dates.join(', ')) : ''}</span></div>`).join('')}</td>
       <td class="small">${g.people.map(p => `<div><a href="#" data-person="${esc(p.person_key)}">${owNm(p.name)}</a> <span class="muted">${esc(p.city || '')}${p.resident ? '' : ', outside the county'}</span></div>`).join('')}</td>
       <td class="num">${fmt(g.n_checks)}${g.all_at_1000 ? '<div class="muted small">all $1,000</div>' : ''}${g.same_day ? '<div class="muted small">same day</div>' : ''}</td>
       <td class="num"><b>${owUsd(g.combined_amount)}</b></td>
-      <td><select class="sel" data-review="${esc(g.group_id)}" data-cand="${esc(g.candidate)}" aria-label="Review">${Object.entries(OW_REV).map(([k, l]) => `<option value="${k}"${k === g.review_status ? ' selected' : ''}>${l}</option>`).join('')}</select></td></tr>`).join('')
-      || '<tr><td colspan="6" class="empty">No groups.</td></tr>';
+      <td><select class="sel" data-review="${esc(g.group_id)}" data-cand="${esc(g.candidate)}" aria-label="Review">${Object.entries(OW_REV).map(([k, l]) => `<option value="${k}"${k === g.review_status ? ' selected' : ''}>${l}</option>`).join('')}</select>${g.reviewed_by ? `<div class="muted small">${esc(g.reviewed_by)}</div>` : ''}</td></tr>`).join('')
+      || '<tr><td colspan="7" class="empty">No groups.</td></tr>';
+    owBulk.set(r.groups);
   }
   async function owDetail(kind, id) {
     const box = $('#ow-detail'); box.innerHTML = '<p class="muted small">Loading…</p>';
@@ -816,7 +911,7 @@
   $('#ow-groups').addEventListener('change', async e => {
     const s = e.target.closest('[data-review]'); if (!s) return;
     s.disabled = true;
-    try { await api('registry_review', {method: 'POST', body: {group_id: s.dataset.review, candidate: s.dataset.cand, status: s.value}}); }
+    try { await api('registry_review', {method: 'POST', body: {group_id: s.dataset.review, candidate: s.dataset.cand, status: s.value}}); owBulk.mark(s.dataset.review + '|' + s.dataset.cand, s.value); }
     catch (err) { alert(err.message); }
     s.disabled = false;
   });
@@ -824,13 +919,19 @@
   // gifts over the per-election limit (registry.limit_cases)
   const OL_REV = {unreviewed: 'Unreviewed', confirmed: 'Confirmed (open)', resolved: 'Resolved', rejected: 'Rejected'};
   const OL_RES = {reporting_error: 'Reporting error', amended_report: 'Amended report', refunded: 'Refunded', designated_general: 'Designated for the general', elections_commission: 'Elections Commission ruling', other: 'Other'};
+  const olBulk = bulkReview({table: '#ol-cases', noun: ['case', 'cases'], action: 'registry_limit_review', key: c => c.case_id,
+    statuses: [['confirmed', 'Confirm (open)', 'primary'], ['rejected', 'Reject', 'danger'], ['unreviewed', 'Back to unreviewed']],
+    body: list => ({case_ids: list.map(c => c.case_id)}),
+    warn: st => st === 'confirmed' ? 'Confirmed cases are published on /connections/shared-owners as open cases ("Over the limit as reported").' : 'Anything not confirmed or resolved is taken off the public page.',
+    note: 'Resolve cases one at a time below, since each needs its own explanation and source.',
+    published: n => `${fmt(n)} cases are now public.`, reload: () => loadLimits()});
   async function loadLimits() {
     let r;
     try { r = await api('registry_limits', {params: {status: $('#ol-status').value}}); }
-    catch (e) { $('#ol-cases tbody').innerHTML = `<tr><td colspan="5" class="empty">Couldn’t load: ${esc(e.message)}</td></tr>`; return; }
+    catch (e) { $('#ol-cases tbody').innerHTML = `<tr><td colspan="6" class="empty">Couldn’t load: ${esc(e.message)}</td></tr>`; return; }
     $('#ol-cases tbody').innerHTML = r.cases.map(c => {
       const res = c.resolution || c.auto_resolution || '';
-      return `<tr data-case="${esc(c.case_id)}">
+      return `<tr data-case="${esc(c.case_id)}">${olBulk.cell(c)}
       <td><b>${esc(c.candidate)}</b><div class="muted small">${esc(c.office || '')}</div><div class="muted small">${esc(c.election || '')}${c.election_phase ? ' · ' + esc(c.election_phase) : ''}</div>${c.report_url ? `<a class="small" href="${esc(c.report_url)}" target="_blank" rel="noopener">Campaign report</a>` : ''}</td>
       <td>${owNm(c.contributor)}<div class="muted small">${esc(c.contributor_type || '')}${(c.spellings || []).length > 1 ? ' · filed as ' + esc(c.spellings.join(' / ')) : ''}</div>${c.possible_double_entry ? '<span class="pill">same amount, same day</span>' : ''}${c.in_current_data ? '' : ' <span class="pill">no longer in the reports</span>'}</td>
       <td class="small">${(c.items || []).map(i => `<div>${esc(i.date || '')} <b>${owUsd(i.amount)}</b> <span class="muted">${esc(i.kind || '')}</span></div>`).join('')}</td>
@@ -842,7 +943,8 @@
           <input class="sel" data-ol="url" placeholder="Source link (amended report, ruling…)" value="${esc(c.resolution_url || '')}">
         </div>
         <div class="row" style="gap:6px;margin-top:6px"><button class="btn" data-ol-save style="min-height:30px;padding:0 10px">Save</button><span class="small muted" data-ol-msg>${c.reviewed_by ? 'by ' + esc(c.reviewed_by) : ''}</span></div></td></tr>`;
-    }).join('') || '<tr><td colspan="5" class="empty">No cases.</td></tr>';
+    }).join('') || '<tr><td colspan="6" class="empty">No cases.</td></tr>';
+    olBulk.set(r.cases);
   }
   $('#ol-cases').addEventListener('change', e => {
     const s = e.target.closest('[data-ol="status"]'); if (!s) return;
@@ -855,6 +957,7 @@
     try {
       const r = await api('registry_limit_review', {method: 'POST', body: {case_id: tr.dataset.case, status: v('status'), resolution: v('resolution'), resolution_note: v('note'), resolution_url: v('url')}});
       msg.textContent = r.published ? 'Saved, published' : 'Saved, not public';
+      olBulk.mark(tr.dataset.case, v('status'));
     } catch (err) { msg.textContent = err.message; }
     b.disabled = false;
   });
@@ -878,6 +981,12 @@
   const bdSrc = s => String(s || '').split(', ').map(x => BD_SRC[x] || x).join(', ');
   const bdYears = b => b.first_year && b.last_year && b.first_year !== b.last_year ? `${b.first_year}–${b.last_year}` : (b.last_year || b.first_year || '');
   const bdBoards = list => (list || []).map(n => `<div>${owNm(n)}</div>`).join('');
+  const bdBulk = bulkReview({table: '#bd-officials', noun: ['match', 'matches'], action: 'boards_review', statuses: REVIEW_BTNS,
+    key: m => m.board_key + '|' + m.official_id, body: list => ({items: list.map(m => ({board_key: m.board_key, official_id: m.official_id}))}),
+    confident: m => Number(m.same_name_people) <= 1, confidentLabel: 'Unique names',
+    confidentHelp: 'Unique names: no other person with this name in the state corporate file (Sunbiz), so the board member is most likely the official.',
+    warn: st => st === 'confirmed' ? 'Confirmed matches are tagged as officials on /connections/nonprofits.' : 'Anything not confirmed loses its official tag on the public page.',
+    published: n => `${fmt(n)} official tags are now public.`, reload: () => loadBoards()});
   async function loadBoards() {
     let r;
     try { r = await api('boards', {params: {status: $('#bd-status').value}}); }
@@ -888,13 +997,14 @@
       [fmt(s.on_2plus_current_boards), 'On 2+ current boards (not HOAs)'], [fmt(s.official_name_matches), 'Match an official by name'], [fmt(rv.unreviewed || 0), 'Not yet reviewed'],
       [fmt(rv.confirmed || 0), 'Confirmed (public)'], [fmt(s.linked_to_donor_businesses), 'Run a business that gave'], [when(r.load.loaded_at).replace(/<[^>]+>/g, ''), 'Last loaded']]
       .map(([v, l]) => `<div class="tile"><b>${v}</b><span>${l}</span></div>`).join('') : '<div class="banner"><div>Not loaded yet. The Sync database workflow loads it after the next push to main.</div></div>';
-    $('#bd-officials tbody').innerHTML = r.officials.map(m => `<tr>
+    $('#bd-officials tbody').innerHTML = r.officials.map(m => `<tr>${bdBulk.cell(m)}
       <td><b>${esc(m.official_name)}</b><div class="muted small">${esc((m.official_roles || []).slice(0, 2).join('; '))}</div></td>
       <td><a href="#" data-board="${esc(m.board_key)}">${owNm(m.display_name)}</a></td>
       <td class="small">${m.boards.map(b => `<div><a href="#" data-np="${esc(b.nonprofit_id)}">${owNm(b.nonprofit)}</a> <span class="muted">${esc(b.titles || '')} · ${esc(bdYears(b))} · ${esc(bdSrc(b.sources))}${b.current ? '' : ' · past'}</span></div>`).join('')}</td>
       <td class="num">${fmt(m.same_name_people)}</td>
-      <td><select class="sel" data-bdreview="${esc(m.board_key)}" data-official="${esc(m.official_id)}" aria-label="Review">${Object.entries(OW_REV).map(([k, l]) => `<option value="${k}"${k === m.review_status ? ' selected' : ''}>${l}</option>`).join('')}</select></td></tr>`).join('')
-      || '<tr><td colspan="5" class="empty">No matches.</td></tr>';
+      <td><select class="sel" data-bdreview="${esc(m.board_key)}" data-official="${esc(m.official_id)}" aria-label="Review">${Object.entries(OW_REV).map(([k, l]) => `<option value="${k}"${k === m.review_status ? ' selected' : ''}>${l}</option>`).join('')}</select>${m.reviewed_by ? `<div class="muted small">${esc(m.reviewed_by)}</div>` : ''}</td></tr>`).join('')
+      || '<tr><td colspan="6" class="empty">No matches.</td></tr>';
+    bdBulk.set(r.officials);
     const [il, dn] = await Promise.all([api('boards_interlocks').catch(() => []), api('boards_donors').catch(() => [])]);
     $('#bd-interlocks tbody').innerHTML = il.slice(0, 100).map(p => `<tr><td><a href="#" data-board="${esc(p.board_key)}">${owNm(p.display_name)}</a></td><td class="num">${fmt(p.n_current_civic)}${p.n_current > p.n_current_civic ? `<div class="muted small">+${fmt(p.n_current - p.n_current_civic)} HOA</div>` : ''}</td>
       <td class="small">${bdBoards(p.boards)}</td><td class="small">${p.official_name ? 'Name matches ' + esc(p.official_name) + '<br>' : ''}${p.n_donor_businesses ? fmt(p.n_donor_businesses) + ' donor business(es)' : ''}</td></tr>`).join('')
@@ -930,7 +1040,7 @@
   $('#bd-officials').addEventListener('change', async e => {
     const s = e.target.closest('[data-bdreview]'); if (!s) return;
     s.disabled = true;
-    try { await api('boards_review', {method: 'POST', body: {board_key: s.dataset.bdreview, official_id: s.dataset.official, status: s.value}}); }
+    try { await api('boards_review', {method: 'POST', body: {board_key: s.dataset.bdreview, official_id: s.dataset.official, status: s.value}}); bdBulk.mark(s.dataset.bdreview + '|' + s.dataset.official, s.value); }
     catch (err) { alert(err.message); }
     s.disabled = false;
   });
@@ -951,6 +1061,12 @@
   // ---------- business ties: officials matched to Sunbiz (private careers schema, api/_careers.js) ----------
   const BT_LINK = {shared_business: 'Same business as another official', own_business_gift: 'Business gave to a campaign',
     partner_business_gift: 'Donor shares an officer with their business', public_payee: 'Business paid by a government'};
+  const btBulk = bulkReview({table: '#bt-table', noun: ['match', 'matches'], action: 'careers_review', statuses: REVIEW_BTNS,
+    key: m => m.person_id + '|' + m.person_key, body: list => ({pairs: list.map(m => ({person_id: m.person_id, person_key: m.person_key}))}),
+    confident: m => m.confidence === 'high', confidentLabel: 'High confidence',
+    confidentHelp: 'High confidence: the name match scored high (county address, city matches the office, same first name, no corporate-board flags).',
+    warn: st => st === 'confirmed' ? 'Confirming publishes each official’s businesses and links on /connections/business-ties.' : 'Anything not confirmed is taken off the public page.',
+    published: n => `${fmt(n)} public rows rewritten.`, reload: () => loadTies()});
   async function loadTies() {
     let r;
     try { r = await api('careers', {params: {status: $('#bt-status').value, confidence: $('#bt-confidence').value, q: $('#bt-q').value.trim()}}); }
@@ -961,7 +1077,7 @@
       [fmt(n('unreviewed')), 'Not yet reviewed'], [fmt(n('confirmed')), 'Confirmed'], [fmt(r.published.businesses), 'Businesses published'],
       [fmt(r.published.links), 'Links published'], [when(r.load.loaded_at).replace(/<[^>]+>/g, ''), 'Last loaded']]
       .map(([v, l]) => `<div class="tile"><b>${v}</b><span>${l}</span></div>`).join('') : '<div class="banner"><div>Not loaded yet. The Sync database workflow loads it after the next push to main.</div></div>';
-    $('#bt-table tbody').innerHTML = r.matches.map(m => `<tr>
+    $('#bt-table tbody').innerHTML = r.matches.map(m => `<tr>${btBulk.cell(m)}
       <td><b>${esc(m.official_name)}</b><div class="muted small">${esc(m.label || '')}</div></td>
       <td class="small"><a href="#" data-person="${esc(m.person_key)}">${owNm(m.sunbiz_name)}</a> <span class="muted">${esc(m.sunbiz_city || '')}</span>
         <div><span class="pill">${esc(m.confidence)} (${m.score})</span>${m.corporate_officer ? ' <span class="pill">corporate officer</span>' : ''}${m.agent_service ? ' <span class="pill">agent service</span>' : ''}</div>
@@ -969,12 +1085,13 @@
       <td class="small">${m.businesses.map(b => `<div><a href="${owSunbiz(b.doc_number)}" target="_blank" rel="noopener">${owNm(b.name)}</a> <span class="muted">${esc(b.titles || '')}${b.file_date ? ', filed ' + esc(String(b.file_date).slice(0, 4)) : ''}</span>${b.status === 'I' ? ' <span class="pill">Inactive</span>' : ''}${b.nonprofit ? ' <span class="pill">nonprofit</span>' : ''}</div>`).join('')}</td>
       <td class="small">${m.links.map(l => `<div>${l.own_government ? '<b>' : ''}${esc(BT_LINK[l.link_type] || l.link_type)}${l.own_government ? ' (own government)</b>' : ''}: <span class="muted">${esc(l.detail || '')}${l.amount != null ? ', ' + owUsd(l.amount) : ''}</span></div>`).join('') || '<span class="muted">None</span>'}</td>
       <td><select class="sel" data-bt-id="${esc(m.person_id)}" data-bt-key="${esc(m.person_key)}" aria-label="Review">${Object.entries(OW_REV).map(([k, v]) => `<option value="${k}"${k === m.review_status ? ' selected' : ''}>${v}</option>`).join('')}</select>
-        ${m.reviewed_by ? `<div class="muted small">${esc(m.reviewed_by)}</div>` : ''}</td></tr>`).join('') || '<tr><td colspan="5" class="empty">No matches with these filters.</td></tr>';
+        ${m.reviewed_by ? `<div class="muted small">${esc(m.reviewed_by)}</div>` : ''}</td></tr>`).join('') || '<tr><td colspan="6" class="empty">No matches with these filters.</td></tr>';
+    btBulk.set(r.matches);
   }
   $('#bt-table').addEventListener('change', async e => {
     const s = e.target.closest('[data-bt-id]'); if (!s) return;
     s.disabled = true;
-    try { await api('careers_review', {method: 'POST', body: {person_id: s.dataset.btId, person_key: s.dataset.btKey, status: s.value}}); }
+    try { await api('careers_review', {method: 'POST', body: {person_id: s.dataset.btId, person_key: s.dataset.btKey, status: s.value}}); btBulk.mark(s.dataset.btId + '|' + s.dataset.btKey, s.value); }
     catch (err) { alert(err.message); }
     s.disabled = false;
   });

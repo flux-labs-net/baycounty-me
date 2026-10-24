@@ -211,13 +211,13 @@ async function route(req, res, action, me) {
     case 'registry_review': {
       if (req.method !== 'POST') throw Object.assign(new Error('Use POST.'), {status: 405});
       const r = await require('./_registry').review(body, me.e);
-      await audit(me.e, action, null, {group_id: body.group_id, candidate: body.candidate || null, status: body.status});
+      await audit(me.e, action, null, {status: body.status, n: r.updated, groups: r.rows.map(x => x.group_id + '|' + x.candidate)});
       return r;
     }
     case 'registry_limit_review': {
       if (req.method !== 'POST') throw Object.assign(new Error('Use POST.'), {status: 405});
       const r = await require('./_registry').reviewLimit(body, me.e);
-      await audit(me.e, action, null, {case_id: body.case_id, status: body.status, resolution: body.resolution || null});
+      await audit(me.e, action, null, {status: body.status, resolution: body.resolution || null, n: r.updated, cases: r.rows.map(x => x.case_id)});
       return r;
     }
     case 'boards': return require('./_boards').officials({county: Q.county, status: String(Q.status || '')});
@@ -229,14 +229,14 @@ async function route(req, res, action, me) {
     case 'boards_review': {
       if (req.method !== 'POST') throw Object.assign(new Error('Use POST.'), {status: 405});
       const r = await require('./_boards').review(body, me.e);
-      await audit(me.e, action, null, {board_key: body.board_key, official_id: body.official_id, status: body.status});
+      await audit(me.e, action, null, {status: body.status, n: r.updated, matches: r.rows.map(x => x.board_key + '|' + x.official_id)});
       return r;
     }
     case 'careers': return require('./_careers').matches({county: Q.county, status: String(Q.status || ''), confidence: String(Q.confidence || ''), q: String(Q.q || '')});
     case 'careers_review': {
       if (req.method !== 'POST') throw Object.assign(new Error('Use POST.'), {status: 405});
       const r = await require('./_careers').review(body, me.e);
-      await audit(me.e, action, null, {status: body.status, pairs: r.rows.map(x => x.person_id + '|' + x.person_key)});
+      await audit(me.e, action, null, {status: body.status, n: r.updated, pairs: r.rows.map(x => x.person_id + '|' + x.person_key)});
       return r;
     }
     case 'corr_contacts': return require('./_correspondence').contacts();

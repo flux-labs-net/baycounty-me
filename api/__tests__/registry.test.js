@@ -56,7 +56,7 @@ test('limit review: statuses, case ids, resolution and source link are checked',
   assert.throws(() => R.cleanLimitReview({case_id: 'l_0123456789', status: 'resolved'}), /how it was resolved/);
   assert.throws(() => R.cleanLimitReview({case_id: 'l_0123456789', status: 'resolved', resolution: 'refunded', resolution_url: 'javascript:alert(1)'}), /http/);
   const ok = R.cleanLimitReview({case_id: 'l_0123456789', status: 'resolved', resolution: 'amended_report', resolution_note: ' SOE typo ', resolution_url: 'https://example.org/r.pdf'});
-  assert.deepEqual(ok, {county: 'bay', status: 'resolved', id: 'l_0123456789', resolution: 'amended_report', note: 'SOE typo', url: 'https://example.org/r.pdf'});
+  assert.deepEqual(ok, {county: 'bay', status: 'resolved', id: 'l_0123456789', ids: ['l_0123456789'], resolution: 'amended_report', note: 'SOE typo', url: 'https://example.org/r.pdf'});
   // a resolution is only stored with a resolved status
   assert.equal(R.cleanLimitReview({case_id: 'l_0123456789', status: 'confirmed', resolution: 'refunded'}).resolution, null);
 });
@@ -68,4 +68,30 @@ test('limit review rewrites the public row for that case', async () => {
   assert.equal(r.published, 1);
   const pub = calls.find(c => c.sql.includes('registry.publish_limit_case'));
   assert.deepEqual(pub.p, ['bay', 'l_0123456789']);
+});
+
+test('bulk group review: one update, the county is republished once', async () => {
+  const items = [{group_id: 'g_0123456789', candidate: 'A'}, {group_id: 'g_abcdef0123', candidate: 'B'}];
+  assert.throws(() => R.cleanGroups({items: [...items, {group_id: 'nope'}]}), /Unknown group/);
+  reply = sql => sql.includes('update registry.shared_owner_groups') ? items.map(x => ({...x, review_status: 'rejected'})) : [{n: 7}];
+  calls.length = 0;
+  const r = await R.review({status: 'rejected', items}, 'a@x');
+  assert.equal(r.updated, 2);
+  const upd = calls.filter(c => c.sql.includes('update registry.shared_owner_groups'));
+  assert.equal(upd.length, 1);
+  assert.deepEqual(upd[0].p, ['rejected', 'a@x', 'bay', JSON.stringify(items)]);
+  assert.ok(upd[0].sql.includes('reviewed_by'));
+  assert.deepEqual(calls.find(c => c.sql.includes('registry.publish_all')).p, ['bay']);
+  assert.ok(!calls.some(c => c.sql.includes('registry.publish_group')));
+});
+
+test('bulk limit review: case_ids share one status; bad ids are rejected', async () => {
+  assert.throws(() => R.cleanLimitReview({case_ids: ['l_0123456789', 'x'], status: 'confirmed'}), /Unknown case/);
+  assert.deepEqual(R.cleanLimitReview({case_ids: ['l_0123456789', 'l_abcdef0123', 'l_0123456789'], status: 'rejected'}).ids, ['l_0123456789', 'l_abcdef0123']);
+  reply = sql => sql.includes('update registry.limit_cases') ? [{case_id: 'l_0123456789'}, {case_id: 'l_abcdef0123'}] : [{n: 4}];
+  calls.length = 0;
+  const r = await R.reviewLimit({case_ids: ['l_0123456789', 'l_abcdef0123'], status: 'confirmed'}, 'a@x');
+  assert.equal(r.updated, 2);
+  assert.deepEqual(calls.find(c => c.sql.includes('update registry.limit_cases')).p.slice(-1)[0], ['l_0123456789', 'l_abcdef0123']);
+  assert.ok(calls.some(c => c.sql.includes('registry.publish_limit_all')));
 });
