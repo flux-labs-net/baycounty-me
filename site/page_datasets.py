@@ -342,7 +342,7 @@ def nonprofit_grants():
 
 
 # Officials on nonprofit boards: written by registry.publish_board_officials() when an admin confirms a name match
-# (migration 0033), not by the site build.
+# (migration 0034), not by the site build.
 NONPROFIT_OFFICIAL_COLUMNS = ['official_id', 'official', 'official_roles', 'nonprofit_id', 'nonprofit', 'ein', 'titles', 'first_year', 'last_year',
                               'current', 'sources', 'county', 'source_url', 'gov_id']
 DB_ONLY_COLUMNS['nonprofit-officials'] = {c: ('number' if c in ('first_year', 'last_year') else 'boolean' if c == 'current' else 'string')
@@ -350,6 +350,28 @@ DB_ONLY_COLUMNS['nonprofit-officials'] = {c: ('number' if c in ('first_year', 'l
 
 
 def nonprofit_officials():
+    return []
+
+
+# Officials' business ties: rows are written by careers.publish() when an admin confirms a match (migration 0033).
+OFFICIAL_BUSINESS_COLUMNS = {'person_id': 'string', 'official': 'string', 'official_role': 'string', 'business': 'string', 'sunbiz_doc_number': 'string',
+                             'titles': 'string', 'role_kind': 'string', 'business_status': 'string', 'filing_type': 'string', 'nonprofit': 'boolean',
+                             'principal_city': 'string', 'filed_date': 'string', 'closed_year': 'number', 'role_first_seen': 'string',
+                             'county': 'string', 'source_url': 'string', 'gov_id': 'string'}
+OFFICIAL_LINK_COLUMNS = {'link_type': 'string', 'person_id': 'string', 'official': 'string', 'other_person_id': 'string', 'other_official': 'string',
+                         'candidate': 'string', 'office': 'string', 'business': 'string', 'sunbiz_doc_number': 'string', 'related_business': 'string',
+                         'related_doc_number': 'string', 'shared_people': 'number', 'payer': 'string', 'own_government': 'boolean', 'self_gift': 'boolean',
+                         'amount': 'number', 'items': 'number', 'first_date': 'string', 'last_date': 'string', 'detail': 'string', 'county': 'string',
+                         'source_url': 'string', 'report_url': 'string', 'gov_id': 'string'}
+DB_ONLY_COLUMNS['official-businesses'] = OFFICIAL_BUSINESS_COLUMNS
+DB_ONLY_COLUMNS['official-business-links'] = OFFICIAL_LINK_COLUMNS
+
+
+def official_businesses():
+    return []
+
+
+def official_business_links():
     return []
 
 
@@ -375,5 +397,7 @@ DATASETS = [
     ('nonprofit-payments', 'Nonprofits: government payment records', 'Payment records on the site (contracts, check registers, tourism agency payments, CRA ledger) whose payee is a local nonprofit, matched by name.', nonprofit_payments),
     ('nonprofit-grants', 'Nonprofits: grants they gave', 'Grants to organizations reported on Schedule I of local nonprofits\' 990 returns, with the recipient linked when it is also a local nonprofit.', nonprofit_grants),
     ('nonprofit-officials', 'Officials on nonprofit boards', 'Elected officials, department leaders and candidates listed as an officer or director of a local nonprofit in its IRS returns or state corporate filings. Only matches checked by hand are listed.', nonprofit_officials),
+    ('official-businesses', "Officials' businesses", 'Registered businesses (Florida Division of Corporations) that list an elected official, department leader or local candidate as an officer, manager or registered agent, with the filing date and status. Each official-to-record match was checked by hand. Only officials and candidates are named.', official_businesses),
+    ('official-business-links', "Officials' business ties", "How officials' and candidates' registered businesses connect to public life: two officials on the same business, an official's business giving to a campaign, a donor business that shares an officer with a candidate's business (the shared person is counted, not named), and an official's business paid by a local government. Published only for hand-checked matches.", official_business_links),
     ('tax-districts', 'Tax districts', 'Which taxing authorities levy property tax in each tax district, and the combined millage. Rates by year are in property-tax-rates (authority_id).', tax_districts),
 ]

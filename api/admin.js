@@ -223,6 +223,11 @@ async function route(req, res, action, me) {
       if (req.method !== 'POST') throw Object.assign(new Error('Use POST.'), {status: 405});
       const r = await require('./_boards').review(body, me.e);
       await audit(me.e, action, null, {board_key: body.board_key, official_id: body.official_id, status: body.status});
+    case 'careers': return require('./_careers').matches({county: Q.county, status: String(Q.status || ''), confidence: String(Q.confidence || ''), q: String(Q.q || '')});
+    case 'careers_review': {
+      if (req.method !== 'POST') throw Object.assign(new Error('Use POST.'), {status: 405});
+      const r = await require('./_careers').review(body, me.e);
+      await audit(me.e, action, null, {status: body.status, pairs: r.rows.map(x => x.person_id + '|' + x.person_key)});
       return r;
     }
     case 'corr_contacts': return require('./_correspondence').contacts();

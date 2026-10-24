@@ -13,7 +13,7 @@ Where the data goes:
   `/connections/nonprofits`. Connections payees that are nonprofits carry `nonprofit_id`.
 - **Public after review**: `nonprofit-officials`, officials, department leaders and candidates on nonprofit boards. Rows
   are written by `registry.publish_board_officials()` only for name matches an admin confirmed in /admin → Nonprofit boards.
-- **Private** (schema `registry`, migration 0033, loaded by `db/scripts/load_registry.py`): board people, every seat on
+- **Private** (schema `registry`, migration 0034, loaded by `db/scripts/load_registry.py`): board people, every seat on
   every filing, official name matches with their review status, and the businesses each person's name matches in Sunbiz.
 
 Name matching is a lead, not a finding. People are grouped by last + first name (nicknames folded, split by middle

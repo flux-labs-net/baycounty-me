@@ -78,7 +78,15 @@ def zip5(z):
 
 
 def split_name(raw):
-    """Sunbiz person names are fixed width: last (20), first (14), middle. Free-text names fall back to word order."""
+    """Sunbiz person names are fixed width: last (20), first (14), middle. Free-text names fall back to word order.
+    Returns ('LAST FIRST' without suffixes, middle initial)."""
+    last, first, mid = split_name_parts(raw)
+    words = [w for w in (last + ' ' + first).split() if w not in NAME_SUFFIX]
+    return ' '.join(words), mid
+
+
+def split_name_parts(raw):
+    """(last, first, middle initial), upper case, punctuation removed."""
     raw = (raw or '').rstrip()
     if len(raw) > 20 and raw[:20].strip() and ' ' not in raw[:20].strip() or re.search(r'\S\s{2,}\S', raw):
         last, first, middle = raw[:20].strip(), raw[20:34].strip(), raw[34:].strip()
@@ -96,10 +104,9 @@ def split_name(raw):
         else:
             last, first, middle = raw.strip(), '', ''
     last, first = _clean(last), _clean(first)
-    words = [w for w in (last + ' ' + first).split() if w not in NAME_SUFFIX]
     mid = _clean(middle)
     mid = mid.split()[0][:1] if mid and mid.split()[0] not in NAME_SUFFIX else ''
-    return ' '.join(words), mid
+    return last, first, mid
 
 
 def looks_like_org(name):

@@ -7,7 +7,7 @@ For each county with data/sunbiz/<county>/entities.csv.gz, runs data/sunbiz/buil
 that county's entities, people, roles and gift matches in one transaction. Shared-owner groups are upserted so an
 admin's review_status survives a reload; groups that no longer appear are deleted. Confirmed groups are then
 rewritten to the public shared_owner_groups table (business names only).
-Then, when data/nonprofits/<county>/orgs.csv.gz exists, loads nonprofit board members (migration 0033): board people
+Then, when data/nonprofits/<county>/orgs.csv.gz exists, loads nonprofit board members (migration 0034): board people
 and seats are replaced, official name matches are upserted so their review survives, and confirmed matches are
 rewritten to public.nonprofit_officials.
 Officer and agent names go only to this private schema. Street addresses are never stored.
@@ -106,7 +106,7 @@ def load_boards(conn, county, sunbiz_res):
     cur = conn.cursor()
     cur.execute("select to_regclass('registry.board_people') is not null")
     if not cur.fetchone()[0]:
-        print('registry: board tables missing (migration 0033), nonprofit boards skipped')
+        print('registry: board tables missing (migration 0034), nonprofit boards skipped')
         return
     res = build_nonprofits.build(county, sunbiz_res)
     O, S, P = res['orgs'], res['seats'], res['people']

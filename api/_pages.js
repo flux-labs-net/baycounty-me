@@ -22,6 +22,7 @@ const PAGES = {
   '/correspondence': {endpoints: ['/correspondence']},
   '/connections/shared-owners': {datasets: ['shared-owner-groups']},
   '/connections/nonprofits': {datasets: ['nonprofits', 'nonprofit-payments', 'nonprofit-grants', 'nonprofit-officials']},
+  '/connections/business-ties': {datasets: ['official-businesses', 'official-business-links']},
   '/alerts': {none: 'email alert sign-up form'},
   '/meetings': {datasets: ['meetings'], endpoints: ['/meetings.ics']},
   '/connections/campaign-gifts': {datasets: ['campaign-finance', 'donor-contracts', 'campaign-contributions-2026', 'business-donor-sunbiz']},

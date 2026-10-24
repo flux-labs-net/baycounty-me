@@ -1,5 +1,5 @@
 // Nonprofit board research for the "Nonprofit boards" tab on /admin (admin only). Reads the private `registry` schema
-// (migration 0033, loaded by db/scripts/load_registry.py from data/nonprofits): who sits on which nonprofit board, who
+// (migration 0034, loaded by db/scripts/load_registry.py from data/nonprofits): who sits on which nonprofit board, who
 // sits on several, which board members match an official by name, and which run businesses that gave to campaigns.
 // Board member names live only here; public pages get organization-level data (datasets nonprofits, nonprofit-payments,
 // nonprofit-grants) and confirmed official matches (nonprofit-officials). Files starting with _ are not routes.

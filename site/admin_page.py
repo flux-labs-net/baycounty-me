@@ -182,6 +182,7 @@ def admin_page(out_dir):
       <button role="tab" data-tab="correspondence" aria-selected="false">Correspondence</button>
       <button role="tab" data-tab="owners" aria-selected="false">Business owners</button>
       <button role="tab" data-tab="boards" aria-selected="false">Nonprofit boards</button>
+      <button role="tab" data-tab="ties" aria-selected="false">Business ties</button>
     </div>
 
     <section id="tab-keys" role="tabpanel">
@@ -367,6 +368,18 @@ def admin_page(out_dir):
       <div class="card" id="cr-detail" hidden style="margin-bottom:14px"></div>
       <div class="tw"><table class="at" id="cr-table" data-tt="off"><thead><tr><th>Last activity</th><th>Official</th><th>Subject</th><th class="num">Sent</th><th class="num">Replies</th><th>Status</th><th>Public</th></tr></thead><tbody></tbody></table></div>
       <p class="muted small" style="margin-top:8px">The public page is <a href="/correspondence" target="_blank" rel="noopener">baycounty.me/correspondence</a>. It shows only published threads, by official name and seat, without email addresses.</p>
+    </section>
+
+    <section id="tab-ties" role="tabpanel" hidden>
+      <div class="banner"><div><b>Check each match before confirming it.</b> <span class="small muted">Officials, department leaders and candidates paired by name with people in the state corporate file (Sunbiz). A name match can be a different person: open the Sunbiz record and check the address, middle initial or business before you confirm. Confirming publishes that official's businesses and links on <a href="/connections/business-ties" target="_blank" rel="noopener">/connections/business-ties</a>; rejecting or setting it back to unreviewed takes them down. Other people on those businesses are never named publicly.</span></div></div>
+      <div class="tiles" id="bt-tiles"></div>
+      <div class="row" style="gap:8px;flex-wrap:wrap;margin:18px 0 8px">
+        <h2 class="h2 grow" style="margin:0">Name matches</h2>
+        <input class="sel" id="bt-q" type="search" placeholder="Official's name" aria-label="Official's name">
+        <select class="sel" id="bt-confidence" aria-label="Confidence"><option value="">Any confidence</option><option value="high">High</option><option value="medium">Medium</option><option value="low">Low</option></select>
+        <select class="sel" id="bt-status" aria-label="Review status"><option value="unreviewed">Unreviewed</option><option value="">Any review status</option><option value="confirmed">Confirmed</option><option value="rejected">Rejected</option></select>
+      </div>
+      <div class="tw"><table class="at" id="bt-table" data-tt="off"><thead><tr><th>Official</th><th>Sunbiz person</th><th>Businesses</th><th>Links</th><th>Review</th></tr></thead><tbody></tbody></table></div>
     </section>
 
     <section id="tab-owners" role="tabpanel" hidden>

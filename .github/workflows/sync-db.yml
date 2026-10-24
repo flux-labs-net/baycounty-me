@@ -56,6 +56,13 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
           SUPABASE_REGION: us-east-2
         run: python db/scripts/load_registry.py
+      - name: Load officials' business ties (private schema)
+        id: load_careers
+        if: steps.database_secret.outputs.ok == 'true'
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          SUPABASE_REGION: us-east-2
+        run: python db/scripts/load_careers.py
       - name: Email admins about problems
         if: always()
         env:
