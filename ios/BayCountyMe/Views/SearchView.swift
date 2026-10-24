@@ -11,45 +11,78 @@ struct SearchView: View {
 
     private let suggestions = ["Millville", "Front Beach Road", "stormwater", "homestead", "Lynn Haven CRA", "FEMA debris"]
 
+    private let browse: [(title: String, symbol: String, route: Route)] = [
+        ("Glossary", "character.book.closed", .glossary),
+        ("Every dataset", "square.grid.2x2", .explore),
+        ("Companies", "building", .vendors),
+        ("Accountability console", "checklist", .accountability),
+        ("People", "person.3", .people),
+        ("What's new", "sparkles", .updates),
+        ("About and privacy", "info.circle", .about),
+    ]
+
     var body: some View {
-        List {
-            if query.trimmingCharacters(in: .whitespaces).count < 2 {
-                Section("Try") {
-                    ForEach(suggestions, id: \.self) { s in
-                        Button { query = s } label: { Label(s, systemImage: "magnifyingglass") }
-                    }
-                }
-                Section("Browse") {
-                    NavigationLink(value: Route.glossary) { Label("Glossary", systemImage: "character.book.closed") }
-                    NavigationLink(value: Route.explore) { Label("Every dataset", systemImage: "square.grid.2x2") }
-                    NavigationLink(value: Route.vendors) { Label("Companies", systemImage: "building") }
-                    NavigationLink(value: Route.accountability) { Label("Accountability console", systemImage: "checklist") }
-                    NavigationLink(value: Route.people) { Label("People", systemImage: "person.3") }
-                    NavigationLink(value: Route.updates) { Label("What's new", systemImage: "sparkles") }
-                    NavigationLink(value: Route.about) { Label("About and privacy", systemImage: "info.circle") }
-                }
-            } else if let error {
-                ContentUnavailableView("Search isn't available", systemImage: "wifi.slash", description: Text(error))
-            } else if results.isEmpty && !searching {
-                ContentUnavailableView.search(text: query)
-            } else {
-                ForEach(results) { r in
-                    Button { store.open(r.link) } label: {
-                        VStack(alignment: .leading, spacing: 4) {
-                            HStack {
-                                Text(r.title ?? "Result").font(.subheadline.weight(.medium)).foregroundStyle(.primary)
-                                Spacer()
-                                if let t = r.type { Badge(text: t, color: Brand.blue) }
-                            }
-                            if let s = r.summary {
-                                Text(s).font(.caption).foregroundStyle(.secondary).lineLimit(3)
+        ScrollView {
+            VStack(alignment: .leading, spacing: 22) {
+                if query.trimmingCharacters(in: .whitespaces).count < 2 {
+                    VStack(alignment: .leading, spacing: 10) {
+                        EyebrowHeader(text: "Try")
+                        FlowLayout(spacing: 8) {
+                            ForEach(suggestions, id: \.self) { s in
+                                Button { query = s } label: {
+                                    Text(s).font(.subheadline.weight(.medium)).foregroundStyle(.primary)
+                                        .padding(.horizontal, 14).frame(minHeight: 38)
+                                        .background(Brand.surface, in: Capsule())
+                                }
+                                .buttonStyle(.plain)
+                                .accessibilityLabel("Search for \(s)")
                             }
                         }
-                        .padding(.vertical, 2)
+                    }
+                    VStack(alignment: .leading, spacing: 10) {
+                        EyebrowHeader(text: "Browse")
+                        CardList {
+                            ForEach(browse, id: \.title) { b in
+                                RouteRow(route: b.route, title: b.title, symbol: b.symbol)
+                                if b.title != browse.last?.title { RowDivider(inset: 50) }
+                            }
+                        }
+                    }
+                } else if let error {
+                    ContentUnavailableView("Search isn't available", systemImage: "wifi.slash", description: Text(error))
+                } else if results.isEmpty && !searching {
+                    ContentUnavailableView.search(text: query)
+                } else if !results.isEmpty {
+                    VStack(alignment: .leading, spacing: 10) {
+                        EyebrowHeader(text: results.count == 1 ? "1 result" : "\(results.count) results")
+                        CardList {
+                            ForEach(results) { r in
+                                Button { store.open(r.link) } label: {
+                                    HStack(alignment: .top, spacing: 10) {
+                                        VStack(alignment: .leading, spacing: 4) {
+                                            Text(r.title ?? "Result").font(.subheadline.weight(.semibold)).foregroundStyle(.primary)
+                                            if let s = r.summary {
+                                                Text(s).font(.caption).foregroundStyle(.secondary).lineLimit(3)
+                                            }
+                                        }
+                                        Spacer(minLength: 4)
+                                        if let t = r.type { Badge(text: t, color: Brand.blue) }
+                                    }
+                                    .multilineTextAlignment(.leading)
+                                    .padding(14)
+                                    .contentShape(Rectangle())
+                                }
+                                .buttonStyle(.plain)
+                                if r.id != results.last?.id { RowDivider() }
+                            }
+                        }
                     }
                 }
             }
+            .padding(.horizontal, 16)
+            .padding(.bottom, 24)
         }
+        .background(Brand.canvas)
         .navigationTitle("Search")
         .searchable(text: $query, placement: .navigationBarDrawer(displayMode: .always), prompt: "Names, projects, streets, terms")
         .overlay { if searching && results.isEmpty { ProgressView() } }
