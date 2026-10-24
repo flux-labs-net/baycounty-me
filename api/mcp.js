@@ -55,10 +55,10 @@ const TOOLS = [
      limit: {type: 'integer', minimum: 1, maximum: 100, default: 25, description: 'Conversations to return'}}},
    annotations: {readOnlyHint: true}},
   {name: 'find_entity', title: 'Find a person, company or organization',
-   description: 'Find a company, elected official, candidate, nonprofit, nonprofit board member, business, committee or government by name. Returns entity ids for get_entity, with each profile page.',
+   description: 'Find a company, elected official, candidate, nonprofit, nonprofit board member, business owner who gave to a campaign, business, committee or government by name. Returns entity ids for get_entity, with each profile page.',
    inputSchema: {type: 'object', required: ['q'], additionalProperties: false, properties: {
      q: {type: 'string', description: 'Part of a name, e.g. "Dewberry" or "Doug Moore"'},
-     kind: {type: 'string', enum: ['gov', 'vendor', 'person', 'nonprofit', 'member', 'business', 'committee'], description: 'Only this kind'},
+     kind: {type: 'string', enum: ['gov', 'vendor', 'person', 'nonprofit', 'member', 'owner', 'business', 'committee'], description: 'Only this kind'},
      limit: {type: 'integer', minimum: 1, maximum: 50, default: 10}}},
    annotations: {readOnlyHint: true}},
   {name: 'get_entity', title: 'Connections of a person, company or organization',

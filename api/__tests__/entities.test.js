@@ -33,9 +33,17 @@ test('every connection points at entities that have a profile', () => {
   for (const p of profiles) assert.ok(p.page_url && p.page_url.startsWith('/'), `${p.entity_id} has no page`);
 });
 
-test('no individual campaign donor is an entity', () => {
+test('individual donors appear only when they run a business', () => {
   const links = JSON.parse(fs.readFileSync(path.join(PUB, 'downloads', 'entity-connections.json'), 'utf8'));
-  for (const l of links.filter(x => x.relation === 'gift')) assert.ok(['vendor', 'business', 'committee', 'nonprofit', 'gov'].includes(l.from_kind), `gift from a ${l.from_kind}: ${l.from_name}`);
+  const runs = new Set(links.filter(x => x.relation === 'runs' && x.from_kind === 'owner').map(x => x.from_id));
+  const gifts = links.filter(x => x.relation === 'gift');
+  for (const l of gifts) assert.ok(['vendor', 'business', 'committee', 'nonprofit', 'gov', 'owner'].includes(l.from_kind), `gift from a ${l.from_kind}: ${l.from_name}`);
+  for (const l of gifts.filter(x => x.from_kind === 'owner')) assert.ok(runs.has(l.from_id), `${l.from_id} gave but runs no business`);
+  const rows = JSON.parse(fs.readFileSync(path.join(PUB, 'downloads', 'owner-gifts.json'), 'utf8'));
+  for (const r of rows) {
+    assert.ok(r.businesses && r.business_doc_numbers, `${r.donor_id} has no business`);
+    for (const k of Object.keys(r)) assert.ok(!/address|occupation|zip|street/i.test(k), `owner-gifts must not publish ${k}`);
+  }
 });
 
 test('getEntity returns a profile and its connections from either side', async () => {

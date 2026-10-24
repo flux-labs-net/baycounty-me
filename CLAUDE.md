@@ -28,7 +28,9 @@ automatically. A new dataset that names people or organizations should add its c
 
 ## Privacy
 
-Individual campaign donors are never named (summed totals only). Salary data names only elected officials and
+Individual campaign donors are never named (summed totals only), except people who run a registered business: a
+donor whose name and street address match a Sunbiz officer, manager or registered agent is listed by name with their
+businesses (`data/campaign/owner_gifts.py`, dataset `owner-gifts`; Jeremy, 2026-10-24). Never their address or occupation. Salary data names only elected officials and
 department leaders. Unnamed grant recipients stay grouped. Private home addresses are not shown.
 
 ## Checks

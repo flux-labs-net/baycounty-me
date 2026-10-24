@@ -6,3 +6,4 @@ python3 "$HERE/fetch.py" "$W" || { echo "SOE campaign finance site unavailable; 
 python3 "$HERE/pages.py" "$W" >/dev/null
 python3 "$HERE/build.py" "$W" "$W/out.json" | grep -E "REVIEW|MISMATCH" || true
 python3 "$HERE/final.py" "$W/out.json" "$HERE/../finance_2026.json"
+python3 "$HERE/../../campaign/owner_gifts.py" "$W/owner_exports" || echo "Business-owner gift match failed; keeping existing data"

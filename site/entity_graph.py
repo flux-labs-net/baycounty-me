@@ -9,11 +9,13 @@ profile URL, so every page links a name the same way (site/entity_links.py, and 
     person:<id>    official or candidate (data/entities/people.json)           /people/<id>
     nonprofit:<id> nonprofit (data/nonprofits)                                 /profile/nonprofit/<id>
     member:<id>    nonprofit board member, as named in public filings          /profile/member/<id>
+    owner:<id>     person who runs a registered business and gave to a campaign  /profile/owner/<id>
     business:<id>  registered business (Sunbiz document number, lowercased), or a named payee with no vendor id
     committee:<id> PAC, party or campaign committee that gave to a campaign
 
 Only rows already published in public datasets are used, so nothing here is more private than the open data:
-individual campaign donors never appear (gifts come from organizations only), shared-owner groups and official name
+individual campaign donors appear only when they run a registered business (dataset owner-gifts: same name and
+street address as a Sunbiz officer or agent), shared-owner groups and official name
 matches are added by the API from their database-only datasets after an admin confirms them (api/_entities.js), and
 unnamed grant recipients and property owners are left out.
 
@@ -35,7 +37,7 @@ except Exception:  # pragma: no cover
 COUNTY = PLACE_ID.split('-', 1)[-1]
 
 KIND_LABEL = {'gov': 'Government', 'vendor': 'Company', 'person': 'Official or candidate', 'nonprofit': 'Nonprofit',
-              'member': 'Nonprofit board member', 'business': 'Business', 'committee': 'Committee or PAC'}
+              'member': 'Nonprofit board member', 'owner': 'Business owner', 'business': 'Business', 'committee': 'Committee or PAC'}
 # relation -> (label from the "from" side, label from the "to" side)
 RELATION = {
     'paid': ('paid', 'was paid by'),
@@ -316,6 +318,20 @@ def build():
             continue
         b = business(r['doc_number'], r['business'], 'Registered business' + (f" ({r['business_status'].lower()})" if r.get('business_status') and r['business_status'] != 'Active' else ''), r.get('source_url'))
         G.link(mid, b, 'runs', detail='Matched by ' + (r.get('match') or 'name').lower(), source_url=r.get('source_url'))
+
+    # people who run a registered business and gave to a campaign personally (data/campaign/owner_gifts.py)
+    for r in _ds('owner-gifts'):
+        pid = r.get('candidate_id')
+        if not pid or 'person:' + pid not in G.ents:
+            continue
+        oid = G.ent(r['donor_id'], r['donor'], 'Runs a registered business · gave to a local campaign')
+        for doc, name in zip(r['business_doc_numbers'].split('; '), r['businesses'].split('; ')):
+            b = business(doc, name) if doc else None
+            if b and (oid, b, 'runs', 'sunbiz') not in G.links:  # once per business, not once per campaign row
+                G.link(oid, b, 'runs', detail='Same name and address on Sunbiz', key='sunbiz')
+        G.link(oid, 'person:' + pid, 'gift', r.get('amount'), r.get('first_date'), r.get('office'), r.get('source_url'), key=r.get('office') or '')
+        if r.get('last_date') and r['last_date'] != r.get('first_date'):
+            G.links[(oid, 'person:' + pid, 'gift', r.get('office') or '')]['dates'].append(r['last_date'])
 
     for r in _ds('nonprofit-grants'):
         a, b = np_names.get(r['grantor_id']), np_names.get(r.get('recipient_id'))

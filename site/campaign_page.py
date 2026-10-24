@@ -167,6 +167,7 @@ def campaign_page():
     k_raised = lambda cs, ps: f"${sum(c.get('total_raised') or 0 for c in cs)/1e6:,.2f}M"
     k_split = lambda cs, ps: f"{usd(sum((c.get('from_individuals') or {}).get('total') or 0 for c in cs))} from individuals · {usd(sum(sum(v for k, v in (c.get('by_type_total') or {}).items() if k not in ('individual', 'candidate_self')) for c in cs))} from organizations"
     gaps = ''.join(f'<li>{e(g)}</li>' for g in d.get('gaps') or [])
+    osec = owner_section()
     return f'''<div class="page tax">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Connections · Campaign gifts</span><h1>Campaign gifts and contracts</h1>
     <p class="lede">Who paid for the most recent campaigns of Bay County's current elected officials, from the reports they file with the Supervisor of Elections, and which donors also hold local government contracts.</p></div>
@@ -176,7 +177,7 @@ def campaign_page():
     <ol class="ex-steps">
       <li><b>Candidates must report every contribution.</b> Florida caps gifts to local candidates at $1,000 per person or business per election, and every report is public.</li>
       <li><b>Businesses that work with government often give.</b> It's legal and common. A donor that also has a contract is a fact in the records, not proof that one led to the other.</li>
-      <li><b>We name organizations, not people.</b> Gifts from individuals are shown only as a count and total. The full reports, with every name, are linked for each official.</li>
+      <li><b>We name organizations, and people who run a business.</b> Other gifts from individuals are shown only as a count and total. The full reports, with every name, are linked for each official.</li>
     </ol></div></section>
   <div class="kpis">
     <div class="kpi"><span class="eyebrow">Officials covered</span><span class="v"{per(lambda cs, ps: len(cs))}>{len(cands)}</span><span class="s">current officeholders' latest campaigns</span></div>
@@ -186,7 +187,8 @@ def campaign_page():
   </div>
   <section class="tx-sec"><div class="sec-hd"><h2 id="matches">Donors who also hold local contracts</h2><span class="muted">Same-government matches first</span></div>
     <div class="tablewrap" data-city-empty="No donors with local contracts found for {{city}}'s officials."><table class="tx-table cm-table" id="cmM"><thead><tr><th scope="col">Contributor</th><th scope="col" class="num">Gave</th><th scope="col">To</th><th scope="col">Local contracts and payments</th></tr></thead><tbody>{mrows}</tbody></table></div>
-    <p class="note">Matched by organization name against the contracts and payments on this site. Contracts can come before or after a gift; the dates are shown so you can compare. Gifts from a company's owners or employees as individuals are not matched.</p></section>
+    <p class="note">Matched by organization name against the contracts and payments on this site. Contracts can come before or after a gift; the dates are shown so you can compare. Gifts from people who run a business are listed under <a href="#owners">Business owners who gave</a>.</p></section>
+  {osec}
   <section class="tx-sec"><div class="sec-hd"><h2 id="officials">Every official</h2><span class="muted">Most recent campaign for the seat they hold</span></div>
     <div class="tablewrap"><table class="tx-table cm-table" id="cmO"><thead><tr><th scope="col">Official</th><th scope="col" class="num">Raised</th><th scope="col" class="num">From individuals</th><th scope="col" class="num">From organizations</th><th scope="col" class="num">Own money</th><th scope="col">Donors</th></tr></thead><tbody>{rows}</tbody></table></div>
     <p class="note">"Raised" is the Supervisor of Elections' total of monetary contributions, which includes loans from the candidate. In-kind gifts (goods or services) are counted by type. For finished campaigns, spending includes leftover money given away or returned.</p></section>
@@ -197,3 +199,37 @@ def campaign_page():
 <link rel="stylesheet" href="/assets/tax.css">
 <script>(() => {{ const u = new URL(location.href); if (u.searchParams.get('gov') === 'constitutional') {{ u.searchParams.set('gov', 'county'); history.replaceState(history.state, '', u); }} }})(); /* old links for the county officers: before the city bar reads ?gov= */</script>
 '''
+
+
+def owner_section():
+    """Personal gifts from people who run a registered business (dataset owner-gifts), one row per person."""
+    import entity_graph as EG
+    from entity_links import a as link
+    from city_filter import KEYS
+    rows = EG._ds('owner-gifts')
+    if not rows:
+        return ''
+    G = EG.build()
+    by = defaultdict(list)
+    for r in rows:
+        by[r['donor_id']].append(r)
+    people = sorted(by.items(), key=lambda kv: (-sum(r['amount'] for r in kv[1]), kv[1][0]['donor']))
+    out = []
+    for oid, rs in people:
+        if oid not in G.ents:
+            continue
+        biz = [o for l, o, dr in EG.neighbors(oid) if l['relation'] == 'runs' and dr == 'out']
+        more = f' and {len(biz) - 3} more' if len(biz) > 3 else ''
+        to = '<br>'.join(f'{link("person:" + r["candidate_id"]) if r.get("candidate_id") else e(r["candidate"])} <span class="muted small">{usd(r["amount"])}</span>'
+                         for r in sorted(rs, key=lambda r: -r['amount']))
+        gs = sorted({r['gov_id'] for r in rs if r.get('gov_id') in KEYS})
+        dg = f' data-g="{" ".join(gs)}"' if gs else ''
+        out.append(f'<tr{dg}><th scope="row">{link(oid)}</th><td class="wrap small">{", ".join(link(b["entity_id"]) for b in biz[:3])}{more}</td>'
+                   f'<td class="small">{to}</td><td class="num">{usd(sum(r["amount"] for r in rs))}</td></tr>')
+    head = '<thead><tr><th scope="col">Person</th><th scope="col">Runs</th><th scope="col">Gave to</th><th scope="col" class="num">Total</th></tr></thead>'
+    first, rest = ''.join(out[:25]), ''.join(out[25:])
+    tot = sum(r['amount'] for r in rows)
+    return f'''<section class="tx-sec"><div class="sec-hd"><h2 id="owners">Business owners who gave</h2><span class="muted">{len(out)} people · {usd(tot)}</span></div>
+    <div class="tablewrap" data-city-empty="No business owners gave to {{city}}'s officials."><table class="tx-table vd-table" id="cmB">{head}<tbody>{first}</tbody></table></div>
+    {f'<details class="flds"><summary>Show all {len(out)} people</summary><div class="tablewrap"><table class="tx-table vd-table">{head}<tbody>{rest}</tbody></table></div></details>' if rest else ''}
+    <p class="note">Personal gifts from people whose name and street address on the campaign filing are the same as an officer, manager or registered agent of a for-profit business on Sunbiz that was active around the gift. Middle initials and Jr/Sr must agree, protected voters are never matched, and a name that only matches inside the same ZIP code is left out. Addresses are not shown. A gift from someone who runs a business is a fact in the records; it does not show that the business wanted anything.</p></section>'''

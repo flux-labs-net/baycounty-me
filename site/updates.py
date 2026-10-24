@@ -9,6 +9,9 @@ from datetime import datetime, timezone
 import html
 
 CHANGES = [
+    {'date': '2026-10-24', 'title': 'Business owners who gave are now named',
+     'text': "People who run a registered business and gave to a local campaign are now listed by name, with the businesses they run and every campaign they gave to. A donor is listed only when the name and street address on the campaign filing are the same as an officer, manager or registered agent on the state business registry. Other individual donors are still counted only in totals, and addresses are never shown.",
+     'pages': ['/connections/campaign-gifts', '/people']},
     {'date': '2026-10-24', 'title': 'Profiles for every name, linked everywhere',
      'text': "Every elected official, department leader and 2026 candidate now has a profile page with where they serve, campaign gifts from businesses and groups, recorded votes, votes on donors' contracts, pay and a map of their connections. Every other company, nonprofit, nonprofit board member, registered business and committee in the records has a profile too, with every documented connection and its source. Vendor and government pages gained the same connection map. Names of officials, companies and nonprofits are now links to their profiles across the site. Individual campaign donors are still never named, and officials' board seats and businesses appear only after an editor checks the match.",
      'pages': ['/people', '/connections', '/connections/nonprofits', '/public-money/vendors', '/governments', '/developers', '/open-data']},

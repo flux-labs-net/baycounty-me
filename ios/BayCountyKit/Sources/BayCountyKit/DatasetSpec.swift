@@ -161,6 +161,8 @@ public struct DatasetSpec: Sendable {
                                    page: "connections"),
         "connections-gifts": .init(.elections, "gift", title: ["donor"], subtitle: ["official", "office"], amount: ["amount"],
                                    badge: "donor_type", filters: ["official", "donor_type", "candidate_2026"], page: "connections"),
+        "owner-gifts": .init(.elections, "person.text.rectangle", title: ["donor"], subtitle: ["candidate", "businesses"], amount: ["amount"],
+                             date: ["last_date"], filters: ["candidate", "office"], page: "connections/campaign-gifts"),
         // Entity profiles (every person, company, nonprofit and government, and how they connect)
         "entity-profiles": .init(.more, "person.crop.circle", title: ["name"], subtitle: ["kind_label", "subtitle"],
                                  amount: ["amount_received", "amount_given"], badge: "kind_label", filters: ["kind_label"], page: "people"),

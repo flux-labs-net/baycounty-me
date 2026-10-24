@@ -3745,7 +3745,7 @@
    "id": "site-updates",
    "title": "What's new",
    "description": "Each change to the site's data and pages, newest first.",
-   "rows": 50,
+   "rows": 51,
    "columns": [
     {
      "name": "date",
@@ -6272,10 +6272,138 @@
    "api": "/api/v1/datasets/official-business-links"
   },
   {
+   "id": "owner-gifts",
+   "title": "Campaign gifts from business owners",
+   "description": "Personal gifts to local campaigns from people who run a registered Florida business, one row per person and campaign. A contributor filed as an individual is listed when the name and street address on the Supervisor of Elections filing are the same as an officer, manager or registered agent of a for-profit business on Sunbiz that was active around the gift; middle initials and Jr/Sr must agree, and protected voters are never matched. Other individual donors are never named. No addresses or occupations.",
+   "rows": 326,
+   "columns": [
+    {
+     "name": "donor_id",
+     "type": "string"
+    },
+    {
+     "name": "donor",
+     "type": "string"
+    },
+    {
+     "name": "businesses",
+     "type": "string"
+    },
+    {
+     "name": "business_doc_numbers",
+     "type": "string"
+    },
+    {
+     "name": "active_businesses",
+     "type": "number"
+    },
+    {
+     "name": "candidate",
+     "type": "string"
+    },
+    {
+     "name": "candidate_id",
+     "type": "string"
+    },
+    {
+     "name": "office",
+     "type": "string",
+     "values": [
+      "Bay County Commission, District 1",
+      "Bay County Commission, District 3",
+      "Bay County Commission, District 4",
+      "Bay County Commission, District 5",
+      "Callaway Commission, Ward 1",
+      "Callaway Commissioner, Ward 3",
+      "Lynn Haven Commissioner, Seat 1",
+      "Lynn Haven Commissioner, Seat 2",
+      "Panama City Beach Council, Ward 1",
+      "Panama City Beach Council, Ward 2",
+      "Panama City Beach Council, Ward 3",
+      "Panama City Beach Council, Ward 4",
+      "Panama City Beach Mayor",
+      "Panama City Commission, Ward I",
+      "Panama City Commission, Ward II",
+      "Panama City Commission, Ward III",
+      "Panama City Commission, Ward IV",
+      "Panama City Mayor",
+      "School Board, District 1",
+      "School Board, District 2",
+      "School Board, District 3",
+      "School Board, District 4",
+      "Sheriff",
+      "Springfield Mayor",
+      "Superintendent of Schools",
+      "Supervisor of Elections"
+     ]
+    },
+    {
+     "name": "election",
+     "type": "string",
+     "values": [
+      "2022 municipal (Apr 19, 2022)",
+      "2022 primary/general",
+      "2023 municipal (Apr 18, 2023)",
+      "2024 municipal (Apr 16, 2024)",
+      "2024 primary/general",
+      "2025 municipal (Apr 22, 2025)",
+      "2026 Municipal Super Tuesday (Apr 21, 2026)",
+      "2026 Primary/General (Aug 18 / Nov 3, 2026)",
+      "2026 primary/general (in progress)"
+     ]
+    },
+    {
+     "name": "gifts",
+     "type": "number"
+    },
+    {
+     "name": "amount",
+     "type": "number"
+    },
+    {
+     "name": "first_date",
+     "type": "string"
+    },
+    {
+     "name": "last_date",
+     "type": "string"
+    },
+    {
+     "name": "match",
+     "type": "string",
+     "values": [
+      "same name and street address as a Sunbiz officer, manager or registered agent"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "pc",
+      "pcb",
+      "schools",
+      "sheriff",
+      "soe",
+      "sp"
+     ]
+    }
+   ],
+   "json": "/downloads/owner-gifts.json",
+   "csv": "/downloads/owner-gifts.csv",
+   "api": "/api/v1/datasets/owner-gifts"
+  },
+  {
    "id": "entity-profiles",
    "title": "Profiles: people, companies and organizations",
-   "description": "Every company, elected official, candidate, nonprofit, nonprofit board member, registered business, committee and government named in BayCounty.me records, one row each, with its profile page and how many documented connections it has. entity_id (kind:key) joins entity-connections. Board members are named as their nonprofits' public filings list them; individual campaign donors are never included.",
-   "rows": 14575,
+   "description": "Every company, elected official, candidate, nonprofit, nonprofit board member, registered business, committee and government named in BayCounty.me records, one row each, with its profile page and how many documented connections it has. entity_id (kind:key) joins entity-connections. Board members are named as their nonprofits' public filings list them; individual campaign donors are included only when they run a registered business (owner-gifts).",
+   "rows": 15267,
    "columns": [
     {
      "name": "entity_id",
@@ -6290,6 +6418,7 @@
       "gov",
       "member",
       "nonprofit",
+      "owner",
       "person",
       "vendor"
      ]
@@ -6299,6 +6428,7 @@
      "type": "string",
      "values": [
       "Business",
+      "Business owner",
       "Committee or PAC",
       "Company",
       "Government",
@@ -6383,8 +6513,8 @@
   {
    "id": "entity-connections",
    "title": "Connections between people, companies and organizations",
-   "description": "Every documented connection between two entities in entity-profiles, totalled per pair and kind: a government paid a payee, an organization gave to an official's or candidate's campaign, an official voted on a company's contracts, a person sits on a nonprofit's board or runs a business, a nonprofit gave a grant, two payees share a project. Each row has its source. Individual campaign donors are never included; officials' board seats and businesses are added by the API once checked by hand.",
-   "rows": 15650,
+   "description": "Every documented connection between two entities in entity-profiles, totalled per pair and kind: a government paid a payee, an organization gave to an official's or candidate's campaign, an official voted on a company's contracts, a person sits on a nonprofit's board or runs a business, a nonprofit gave a grant, two payees share a project. Each row has its source. Individual campaign donors are included only when they run a registered business (owner-gifts); officials' board seats and businesses are added by the API once checked by hand.",
+   "rows": 16784,
    "columns": [
     {
      "name": "link_id",
@@ -6407,6 +6537,7 @@
       "gov",
       "member",
       "nonprofit",
+      "owner",
       "person",
       "vendor"
      ]

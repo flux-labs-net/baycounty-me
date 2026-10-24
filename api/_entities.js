@@ -20,9 +20,9 @@ const RELATION = {
   related: ['is connected to', 'is connected to'],
   same: ['is the same organization as', 'is the same organization as'],
 };
-const KIND_LABEL = {gov: 'Government', vendor: 'Company', person: 'Official or candidate', nonprofit: 'Nonprofit', member: 'Nonprofit board member',
+const KIND_LABEL = {gov: 'Government', vendor: 'Company', person: 'Official or candidate', nonprofit: 'Nonprofit', member: 'Nonprofit board member', owner: 'Business owner',
   business: 'Business', committee: 'Committee or PAC'};
-const ID_RE = /^(gov|vendor|person|nonprofit|member|business|committee):[A-Za-z0-9_.-]{1,100}$/;
+const ID_RE = /^(gov|vendor|person|nonprofit|member|owner|business|committee):[A-Za-z0-9_.-]{1,100}$/;
 const q = v => '"' + String(v).replace(/["\\]/g, '') + '"';
 const PROFILE_COLS = 'entity_id,kind,kind_label,name,subtitle,page_url,aliases,connections,amount_received,amount_given,gov_id,county,source_url';
 const LINK_COLS = 'link_id,from_id,from_name,from_kind,from_url,to_id,to_name,to_kind,to_url,relation,relation_label,amount,records,first_date,last_date,detail,source_url,county';

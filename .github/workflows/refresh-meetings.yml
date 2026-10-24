@@ -78,7 +78,7 @@ jobs:
       - name: Commit if changed
         id: commit_and_push
         run: |
-          paths="data/meetings data/elections/finance_2026.json data/agendas/agenda_items.json site/public"
+          paths="data/meetings data/elections/finance_2026.json data/campaign/owner_gifts.json data/agendas/agenda_items.json site/public"
           # git status --porcelain also lists new, untracked files, which git diff --quiet ignores.
           if [ -z "$(git status --porcelain -- $paths)" ]; then echo "No changes"; exit 0; fi
           git config user.name "BayCounty.me bot"

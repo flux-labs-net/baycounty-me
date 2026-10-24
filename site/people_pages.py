@@ -8,7 +8,8 @@
                             GET /api/v1/entities/<kind>:<id>
 
 profile_section() is the "Connections" block (mini network + every connection) that vendor and government pages reuse.
-Individual campaign donors are never named; gifts listed here are from businesses, PACs and committees.
+Individual campaign donors are named only when they run a registered business (dataset owner-gifts); everyone else
+is counted in totals only.
 """
 import html, json, os, shutil
 from collections import Counter, defaultdict
@@ -66,7 +67,7 @@ def profile_section(eid, heading='Connections', sub='Everyone and everything thi
     <div class="pf-net" id="pfNet" data-nolink></div>
     <div id="pfLive" class="pf-live small" hidden>Rows marked "checked by hand" come from name matches an editor confirmed against the public filing.</div>
     <details class="pf-all"><summary>Every connection ({len(d["connections"]):,})</summary><div id="pfList" data-nolink></div></details>
-    <p class="note">{e(NOTE)} Individual campaign donors are never named. <a href="/api/v1/entities/{e(eid)}">This profile in the API</a>.</p>
+    <p class="note">{e(NOTE)} Individual campaign donors are named only when they run a registered business; others are counted in totals. <a href="/api/v1/entities/{e(eid)}">This profile in the API</a>.</p>
     <script type="application/json" id="pfData">{data}</script></section>'''
 
 
@@ -103,7 +104,8 @@ def person_page(pid):
     names = {x['name']} | set(x['aliases'])
     mm = [r for r in EG._ds('money-map-votes') if r.get('official') in names]
     nb = EG.neighbors(eid)
-    gifts = [(l, o) for l, o, d in nb if l['relation'] == 'gift' and d == 'in']
+    gifts = [(l, o) for l, o, d in nb if l['relation'] == 'gift' and d == 'in' and o['kind'] != 'owner']
+    owner_gifts = [(l, o) for l, o, d in nb if l['relation'] == 'gift' and d == 'in' and o['kind'] == 'owner']
     voted = [(l, o) for l, o, d in nb if l['relation'] == 'voted']
     govs = list(dict.fromkeys(g for g in (p.get('gov_ids') or [])))
     kpi = lambda lbl, val, s: f'<div class="kpi"><span class="eyebrow">{e(lbl)}</span><span class="v">{val}</span><span class="s">{e(s)}</span></div>'
@@ -113,6 +115,7 @@ def person_page(pid):
     kp = ''.join([kpi('Recorded votes', f'{len(mv):,}', ', '.join(f'{n} {k}' for k, n in tally.most_common(3)) or 'money votes on file') if mv else '',
                   kpi('Campaign raised', money(raised), 'most recent campaign on file') if raised else '',
                   kpi('From businesses and groups', money(sum(l['amount'] or 0 for l, _ in gifts)), f'{len(gifts)} donors named on this page') if gifts else '',
+                  kpi('From business owners', money(sum(l['amount'] or 0 for l, _ in owner_gifts)), f'{len(owner_gifts)} people who run a business, named') if owner_gifts else '',
                   kpi('Pay', money(sal), 'annual, latest on file') if sal else ''])
     secs = ''
     # roles
@@ -138,7 +141,19 @@ def person_page(pid):
         secs += f'''<section class="tx-sec"><div class="sec-hd"><h2 id="gifts">Campaign gifts from businesses and groups</h2><span class="muted">Supervisor of Elections reports</span></div>
     {f'<ul class="plain">{tot}</ul>' if tot else ''}
     {f'<div class="tablewrap"><table class="tx-table vd-table"><thead><tr><th scope="col">From</th><th scope="col" class="num">Gave</th><th scope="col">Dates</th><th scope="col">Campaign</th><th scope="col">Source</th></tr></thead><tbody>{gr}</tbody></table></div>' if gr else '<p class="muted small">No gifts from businesses, PACs or committees in the reports on file.</p>'}
-    <p class="note">Only businesses, PACs and committees are named. Gifts from individual people are counted in the totals but never named. <a href="/connections/campaign-gifts">Campaign gifts</a> has every official.</p></section>'''
+    <p class="note">Businesses, PACs and committees are named here, and people who run a registered business are listed below. Other gifts from individual people are counted in the totals but never named. <a href="/connections/campaign-gifts">Campaign gifts</a> has every official.</p></section>'''
+    if owner_gifts:
+        def runs(oid):
+            return [o for l, o, d in EG.neighbors(oid) if l['relation'] == 'runs' and d == 'out']
+        orow = ''
+        for l, o in sorted(owner_gifts, key=lambda t: (-(t[0]['amount'] or 0), t[1]['name'])):
+            bs = runs(o['entity_id'])
+            more = f' and {len(bs) - 4} more' if len(bs) > 4 else ''
+            orow += (f'<tr><th scope="row">{link(o["entity_id"])}</th><td class="wrap small">{", ".join(link(b["entity_id"]) for b in bs[:4])}{more}</td>'
+                     f'<td class="num">{money(l["amount"])}</td><td class="small">{e(", ".join(sorted(set(l["dates"]))))}</td><td>{src(l["source_url"], "Report")}</td></tr>')
+        secs += f'''<section class="tx-sec"><div class="sec-hd"><h2 id="owner-gifts">Personal gifts from business owners</h2><span class="muted">{len(owner_gifts)} people</span></div>
+    <div class="tablewrap"><table class="tx-table vd-table"><thead><tr><th scope="col">Person</th><th scope="col">Runs</th><th scope="col" class="num">Gave</th><th scope="col">Dates</th><th scope="col">Source</th></tr></thead><tbody>{orow}</tbody></table></div>
+    <p class="note">People who gave as individuals and whose name and street address on the filing are the same as an officer, manager or registered agent of a for-profit business on Sunbiz. Addresses are not shown. A gift from a business owner is a fact in the records, not a sign that the business wanted anything.</p></section>'''
     # votes on donors' contracts
     if mm:
         rows = ''.join(f'<li><b>{e(r["vote_date"])}</b>: voted {e(r["vote"])} on {e(r["item"])}{" · " + money(r["amount"]) if r.get("amount") else ""} ({e(r["outcome"])} {e(r["tally"])}{", consent agenda" if r.get("consent_agenda") else ""}). {link_name_vendor(r["donor"])} gave {money(r["gift_amount"])} {e(r["gift_before_or_after_vote"])} the vote. <a class="src" href="{e(r["source_url"])}" target="_blank" rel="noopener">Minutes</a></li>' for r in sorted(mm, key=lambda r: r['vote_date'], reverse=True))
@@ -189,7 +204,7 @@ def people_index():
     <div class="stamp"><a class="pill" href="/who-runs-bay-county">Who runs Bay County</a><a class="pill" href="/connections">Connections network</a></div></header>
   <section class="tx-sec"><div class="sec-hd"><h2 id="all">Everyone</h2><span class="muted">{len(rows)} people</span></div>
     <div class="tablewrap"><table class="tx-table vd-table" data-tt-sort="0:asc"><thead><tr><th scope="col">Person</th><th scope="col">Government</th><th scope="col" class="num">Connections</th></tr></thead><tbody>{"".join(rows)}</tbody></table></div>
-    <p class="note">Only elected officials, department leaders and candidates have a page here. Nonprofit board members and businesses have a profile reached from the nonprofit, company or <a href="/connections">Connections</a> pages. Individual campaign donors are never named.</p></section>
+    <p class="note">Only elected officials, department leaders and candidates have a page here. Nonprofit board members and businesses have a profile reached from the nonprofit, company or <a href="/connections">Connections</a> pages. Individual campaign donors are named only when they run a registered business; others are counted in totals.</p></section>
 </div>
 {ASSETS}'''
 
@@ -201,7 +216,7 @@ def profile_shell():
     <div class="pf-net" id="pfNet" data-nolink><p class="muted small">Loading…</p></div>
     <div id="pfLive" class="pf-live small" hidden>Rows marked "checked by hand" come from name matches an editor confirmed against the public filing.</div>
     <div id="pfList" data-nolink></div>
-    <p class="note">{e(NOTE)} Board members are named as their nonprofits' public filings list them. Individual campaign donors are never named. Found an error? <a href="/about#contact">Send a correction</a>.</p></section>
+    <p class="note">{e(NOTE)} Board members are named as their nonprofits' public filings list them. Individual campaign donors are named only when they run a registered business; others are counted in totals. Found an error? <a href="/about#contact">Send a correction</a>.</p></section>
 </div>
 {ASSETS}'''
 

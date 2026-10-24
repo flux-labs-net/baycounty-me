@@ -6,8 +6,8 @@
   const root = document.getElementById('pf'); if (!root) return;
   const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
   const money = n => n == null ? '' : (n < 0 ? '−' : '') + (Math.abs(n) >= 1e6 ? '$' + (Math.abs(n) / 1e6).toFixed(2) + 'M' : '$' + Math.round(Math.abs(n)).toLocaleString('en-US'));
-  const KIND = {gov: 'Government', vendor: 'Company', person: 'Official or candidate', nonprofit: 'Nonprofit', member: 'Board member', business: 'Business', committee: 'Committee or PAC'};
-  const COLOR = {gov: 'var(--navy)', vendor: 'var(--blue)', business: 'var(--blue)', person: 'var(--salmon)', nonprofit: 'var(--teal)', member: 'var(--amber)', committee: 'var(--muted)'};
+  const KIND = {gov: 'Government', vendor: 'Company', person: 'Official or candidate', nonprofit: 'Nonprofit', member: 'Board member', owner: 'Business owner', business: 'Business', committee: 'Committee or PAC'};
+  const COLOR = {gov: 'var(--navy)', vendor: 'var(--blue)', business: 'var(--blue)', person: 'var(--salmon)', nonprofit: 'var(--teal)', member: 'var(--amber)', owner: 'var(--amber)', committee: 'var(--muted)'};
   const LINE = {gift: 'pf-l-gift', paid: 'pf-l-paid', board: 'pf-l-board', runs: 'pf-l-runs', voted: 'pf-l-voted', serves: 'pf-l-board', grant: 'pf-l-paid', related: 'pf-l-runs', same: 'pf-l-runs'};
   const ORDER = ['serves', 'paid', 'gift', 'voted', 'board', 'runs', 'grant', 'related', 'same'];
   let id = root.dataset.id;
