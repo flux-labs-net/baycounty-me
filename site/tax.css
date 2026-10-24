@@ -653,11 +653,6 @@ details.el-dec > summary h3.el-dec-h{display:inline;font:inherit;font-weight:600
 .gov h3.h4.roster-h,.tax .gov h3.h4.roster-h{margin:14px 0 0;font-size:.7rem;font-weight:500}
 
 /* Government pages: the dashboards' data for one government and year (gov.js) */
-.gx-jump{display:flex;gap:4px;align-items:center;align-self:flex-end;min-height:40px;overflow-x:auto;scrollbar-width:none;flex:1 1 320px;min-width:0}
-.gx-jump::-webkit-scrollbar{display:none}
-.gx-jump a{flex:none;font-size:.82rem;padding:6px 11px;border-radius:999px;text-decoration:none;color:var(--muted);white-space:nowrap}
-.gx-jump a:hover{color:var(--ink);background:var(--sunken)}
-.gx-jump a.on{color:var(--ink);background:var(--sunken)}
 a.kpi.gx-k{text-decoration:none;color:inherit;transition:border-color .15s}
 a.kpi.gx-k:hover{box-shadow:inset 0 0 0 1px var(--blue)}
 a.kpi.gx-k .v{color:var(--ink)}
@@ -673,6 +668,5 @@ a.kpi.gx-k .v{color:var(--ink)}
 .gx-none{margin:0}
 .gx-t td.nowrap{white-space:nowrap}
 .gx .gx-more{margin-top:8px}
-@media (max-width:640px){.gx-jump{flex-basis:100%;order:9}}
 .gov-page .gx-top-h{font:500 .8rem/1.3 var(--f-body, inherit);margin:0 0 6px;letter-spacing:.01em}
 .gov-page .kpi-none .v{color:var(--muted);font-size:1.1rem}

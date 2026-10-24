@@ -71,7 +71,7 @@ function fill(id, {sub, kpis, body, link, empty}) {
   $('[data-gx-link]', sec).innerHTML = link || '';
   $$('.gx-more', sec).forEach(b => b.onclick = () => { $$('tr[data-more]', sec).forEach(t => t.hidden = false); b.remove(); });
 }
-const gone = id => { const s = document.getElementById(id); if (s) s.remove(); $$(`.scope a[href="#${id}"], .gx-jump a[href="#${id}"]`).forEach(a => a.remove()); };
+const gone = id => { const s = document.getElementById(id); if (s) s.remove(); $$(`.gx-tiles a[href="#${id}"], .gx-mini a[href="#${id}"]`).forEach(a => a.remove()); };
 
 /* ---------- renderers ---------- */
 function contracts() {
@@ -155,6 +155,12 @@ function savingsSec() {
    Year 2026 in the picker means fiscal year 2026 (Oct 2025 to Sep 2026; schools Jul to Jun). "All years" shows the
    current fiscal year. A figure with no record for that year says so; it never falls back to another year's number.
    Mirrors year_cards() in site/gov_pages.py, which draws the same cards for the current fiscal year before this runs. */
+// icon and tint per card label: the same table as KPI_ICON in site/gov_pages.py
+const KPI_ICON = {'Residents': ['users', 'teal'], 'Budget': ['wallet', 'blue'], 'Spent (audited)': ['wallet', 'blue'], 'Property tax rate': ['percent', 'amber'],
+  'School tax rate': ['percent', 'amber'], 'Debt': ['dollar', 'salmon'], 'Employees': ['briefcase', 'blue'], 'Typical utility bill': ['drop', 'teal']};
+const ico = (n, t) => { const i = `<span class="ico i-${n}" aria-hidden="true"></span>`; return t ? `<span class="gv-ti t-${t}">${i}</span>` : i; };
+const topKpi = (l, v, s = '', no = false) => { const [n, t] = KPI_ICON[l] || ['grid', 'blue'];
+  return `<div class="kpi gv-k${no ? ' kpi-none' : ''}"><span class="kh">${ico(n, t)}<span class="eyebrow">${l}</span></span><span class="v">${v}</span><span class="s">${s}</span></div>`; };
 const topBox = $('#gxTop'), keep = topBox ? $$('[data-static]', topBox).map(x => x.outerHTML).join('') : '';
 const curFY = (() => { const d = new Date(), st = G.fyStart || 10; return d.getMonth() + 1 >= st ? d.getFullYear() + 1 : d.getFullYear(); })();
 function topCards() {
@@ -163,7 +169,8 @@ function topCards() {
   let fy = ysel.value === 'all' ? curFY : +ysel.value;
   if (ysel.value === 'all' && !by[fy]) fy = GY[GY.length - 1].fiscal_year;
   const r = by[fy] || {}, prev = by[fy - 1] || {}, has = k => GY.some(x => x[k] != null), schools = K === 'schools';
-  const none = (l, why) => `<div class="kpi kpi-none"><span class="eyebrow">${l}</span><span class="v">No data</span><span class="s">${why}</span></div>`;
+  const none = (l, why) => topKpi(l, 'No data', why, true);
+  const kpi = topKpi;
   const out = [];
   if (!schools && has('population')) out.push(r.population ? kpi('Residents', r.population.toLocaleString('en-US'), r.population_year === fy ? `FY${fy} state figure` : `${r.population_year} state estimate`) : none('Residents', `No count for FY${fy}`));
   if (r.budget_total) {
@@ -191,12 +198,19 @@ function glance() {
   const c = S.contracts.filter(inYear), ra = S.cra.filter(inYear), r = ra.filter(p => p.count && /^(Spent|Committed)$/.test(p.status)), v = S.votes.filter(inYear);
   const pr = S.projects.filter(inYear).length + S.salestax.filter(inYear).length;
   const t = [];
-  if (S.contracts.length) t.push(['#contracts', 'Contracts awarded', money(c.reduce((s, x) => s + (x.a || 0), 0)), plural(c.length, 'contract')]);
-  if (G.cra) t.push(['#cra', 'CRA spent or committed', money(r.reduce((s, x) => s + (x.amount || 0), 0)), plural(ra.length, 'CRA record')]);
-  if (S.votes.length) t.push(['#votes', 'Money votes', v.length.toLocaleString('en-US'), `${v.filter(x => x.x).length} split`]);
-  if (S.projects.length || S.salestax.length) t.push(['#projects', 'Projects active', pr.toLocaleString('en-US'), 'tracked and sales tax']);
+  const ct = money(c.reduce((s, x) => s + (x.a || 0), 0)), cr = money(r.reduce((s, x) => s + (x.amount || 0), 0)), splits = v.filter(x => x.x).length;
+  if (S.contracts.length) t.push(['#contracts', 'Contracts awarded', ct, plural(c.length, 'contract'), 'file', 'blue']);
+  if (G.cra) t.push(['#cra', 'CRA spent or committed', cr, plural(ra.length, 'CRA record'), 'columns', 'teal']);
+  if (S.votes.length) t.push(['#votes', 'Money votes', v.length.toLocaleString('en-US'), `${splits} split`, 'vote', 'amber']);
+  if (S.projects.length || S.salestax.length) t.push(['#projects', 'Projects active', pr.toLocaleString('en-US'), 'tracked and sales tax', 'crane', 'salmon']);
   $('#gxGlanceH').textContent = ysel.value === 'all' ? 'Across every year on record' : `In ${ysel.value}`;
-  box.innerHTML = t.map(([h, l, v2, s]) => `<a class="kpi gx-k" href="${h}"><span class="eyebrow">${l}</span><span class="v">${v2}</span><span class="s">${s}</span></a>`).join('');
+  box.innerHTML = t.map(([h, l, v2, s, n, tn]) => `<a class="kpi gx-k" href="${h}">${ico(n, tn)}<span class="eyebrow">${l}</span><span class="v">${v2}</span><span class="s">${s}</span></a>`).join('');
+  // the one-line previews in the section tiles follow the year too
+  const tip = (id, txt) => { const el = $(`.gx-tiles [data-jump="${id}"] small`); if (el) el.textContent = txt; };
+  if (S.contracts.length) tip('contracts', `${ct} · ${plural(c.length, 'contract')}`);
+  if (G.cra) tip('cra', `${cr} spent`);
+  if (S.votes.length) tip('votes', `${plural(v.length, 'vote')} · ${splits} split`);
+  if (S.projects.length || S.salestax.length) tip('projects', `${pr.toLocaleString('en-US')} active`);
   box.closest('section').hidden = !t.length;
 }
 
@@ -211,8 +225,24 @@ document.addEventListener('click', e => {
   if (f && [...ysel.options].some(o => o.value === f.dataset.fy)) { ysel.value = f.dataset.fy; render(); }
 });
 savingsSec(); render();
+if (savings.length) { const el = $('.gx-tiles [data-jump="savings"] small'); if (el) el.textContent = plural(savings.length, 'idea'); }
+
+/* ---------- meetings: drop ones that have passed since the page was built; say how soon the next one is ---------- */
+(() => {
+  const now = Date.now(), cards = $$('[data-start]');
+  cards.forEach(c => { if (Date.parse(c.dataset.start) + 3 * 3600e3 < now) c.hidden = true; });
+  const next = cards.find(c => !c.hidden), when = $('[data-when]');
+  if (!when) return;
+  if (!next || next !== cards[0]) { when.hidden = true; return; }  // the big card has passed; the date cards carry on
+  const day = s => { const d = new Date(s); d.setHours(0, 0, 0, 0); return d; };
+  const n = Math.round((day(next.dataset.start) - day(now)) / 864e5);
+  when.textContent = 'Next meeting · ' + (n <= 0 ? 'today' : n === 1 ? 'tomorrow' : `in ${n} days`);
+})();
 $$('[data-gx-loading]').forEach(el => el.remove());
-// the section links in the bar follow the reader down the page
-const links = $$('.gx-jump a'), io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) links.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + (en.target.id || en.target.querySelector('h2[id]')?.id))); }), {rootMargin: '-35% 0px -60% 0px'});
+// the compact section bar shows once the tiles have scrolled away, and marks the section in view
+const mini = $('.gx-mini'), tiles = $('.gx-tiles');
+if (mini && tiles) new IntersectionObserver(([en]) => { if (en.isIntersecting) mini.setAttribute('data-off', ''); else if (en.boundingClientRect.top < 0) mini.removeAttribute('data-off'); },
+  {rootMargin: `-${parseInt(getComputedStyle(document.documentElement).getPropertyValue('--head-h')) || 57}px 0px 0px 0px`}).observe(tiles);
+const links = $$('.gx-mini a'), io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) links.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + (en.target.id || en.target.querySelector('h2[id]')?.id))); }), {rootMargin: '-35% 0px -60% 0px'});
 links.forEach(a => { const t = document.getElementById(a.getAttribute('href').slice(1)); const sec = t && (t.closest('section') || t); if (sec) io.observe(sec); });
 })();
