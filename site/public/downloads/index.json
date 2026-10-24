@@ -5533,6 +5533,72 @@
    "api": "/api/v1/datasets/nonprofit-board-members"
   },
   {
+   "id": "nonprofit-board-businesses",
+   "title": "Nonprofits: board members' businesses",
+   "description": "Businesses that local nonprofit board members run, from Florida corporate filings (Sunbiz officers and registered agents), with each business's gifts to local campaigns. match is \"Name and address\" when the person on the nonprofit's own state filing is the same Sunbiz person, or \"Name\" when only one Sunbiz person in the county has that name. person_id matches nonprofit-board-members.",
+   "rows": 4259,
+   "columns": [
+    {
+     "name": "person_id",
+     "type": "string"
+    },
+    {
+     "name": "person",
+     "type": "string"
+    },
+    {
+     "name": "doc_number",
+     "type": "string"
+    },
+    {
+     "name": "business",
+     "type": "string"
+    },
+    {
+     "name": "business_status",
+     "type": "string",
+     "values": [
+      "Active",
+      "Inactive"
+     ]
+    },
+    {
+     "name": "match",
+     "type": "string",
+     "values": [
+      "Name",
+      "Name and address"
+     ]
+    },
+    {
+     "name": "campaign_gifts_total",
+     "type": "number"
+    },
+    {
+     "name": "candidates",
+     "type": "string"
+    },
+    {
+     "name": "county",
+     "type": "string",
+     "values": [
+      "bay"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/nonprofit-board-businesses.json",
+   "csv": "/downloads/nonprofit-board-businesses.csv",
+   "api": "/api/v1/datasets/nonprofit-board-businesses"
+  },
+  {
    "id": "nonprofit-officials",
    "title": "Officials on nonprofit boards",
    "description": "Elected officials, department leaders and candidates listed as an officer or director of a local nonprofit in its IRS returns or state corporate filings. Only matches checked by hand are listed.",

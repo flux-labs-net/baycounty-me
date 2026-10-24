@@ -529,7 +529,7 @@ def org_row(o, res, gov_names):
 
 
 def public(res):
-    """Organization-level rows (no person names): nonprofits, their government payment records, and grants."""
+    """Public rows: nonprofits, government payment records, grants, board members and their businesses."""
     import ids
     gov_names = {g['id']: g.get('short') or g.get('name') for g in ids.governments()}
     orgs = sorted((org_row(o, res, gov_names) for o in res['orgs'].values()), key=lambda r: (-(r['total_revenue'] or r['irs_revenue'] or 0), r['name']))
@@ -543,7 +543,7 @@ def public(res):
                'purpose': g['purpose'], 'county': res['county'],
                'source_url': f"https://gt990datalake-rawdata.s3.amazonaws.com/EfileData/XmlFiles/{g['object_id']}_public.xml"} for g in res['grants']
               if g['grantor_id']]  # recipients' grants from outside the county are in the private tables only
-    return orgs, pays, grants, board_rows(res)
+    return orgs, pays, grants, board_rows(res), business_rows(res)
 
 
 SOURCE_LABEL = {'irs_990': 'IRS 990', 'irs_990ez': 'IRS 990-EZ', 'irs_990pf': 'IRS 990-PF', 'irs_990n': 'IRS 990-N', 'sunbiz': 'State filing'}
@@ -581,6 +581,24 @@ def board_rows(res):
     return rows
 
 
+def business_rows(res):
+    """One row per board member per Sunbiz business they appear on, with the business's campaign gifts. A match by name
+    alone is kept only when one Sunbiz person in the county has that name; a match on the nonprofit's own Sunbiz filing
+    (name and address) is always kept."""
+    rows = []
+    for bk, p in res['people'].items():
+        for b in p.get('businesses', []):
+            if b['via'] != 'same_person' and p['same_name_people'] != 1:
+                continue
+            rows.append({'person_id': bk, 'person': p['display_name'], 'doc_number': b['doc_number'], 'business': b['name'],
+                         'business_status': 'Active' if b['status'] == 'A' else 'Inactive',
+                         'match': 'Name and address' if b['via'] == 'same_person' else 'Name',
+                         'campaign_gifts_total': b['gifts_total'] or 0, 'candidates': ', '.join(b['candidates']) or None,
+                         'county': res['county'], 'source_url': SUNBIZ_URL + b['doc_number']})
+    rows.sort(key=lambda r: (r['person'], -r['campaign_gifts_total'], r['business']))
+    return rows
+
+
 def summary(res):
     S, P = res['seats'], res['people']
     return {
@@ -602,13 +620,13 @@ def main():
         print(f'nonprofits: no IRS data for {key} (run fetch_irs.py)')
         return
     res = build(key)
-    orgs, pays, grants, board = public(res)
+    orgs, pays, grants, board, biz = public(res)
     out = {'as_of': datetime.date.today().isoformat(), 'county': key,
            'method': ('Organizations recognized by the IRS with an address in ' + county(key)['name'] + ' (EO Business Master File), plus active Florida '
                       'nonprofit corporations (Sunbiz) with a principal address there. Financials are from the latest 990, 990-EZ or 990-PF e-filed with the IRS; '
                       'government payment records are matched by exact name. Board members are the officers, directors, trustees and key employees '
                       'listed on IRS returns, 990-N postcards and state filings, grouped by name across boards. Built by data/nonprofits/build_nonprofits.py.'),
-           'summary': summary(res), 'nonprofits': orgs, 'payments': pays, 'grants': grants, 'board_members': board}
+           'summary': summary(res), 'nonprofits': orgs, 'payments': pays, 'grants': grants, 'board_members': board, 'board_businesses': biz}
     json.dump(out, open(os.path.join(HERE, key, 'nonprofits.json'), 'w'), indent=1, ensure_ascii=False, default=str)
     print('nonprofits:', json.dumps(summary(res)))
 

@@ -129,6 +129,8 @@ public struct DatasetSpec: Sendable {
                             amount: ["total_revenue", "irs_revenue"], badge: "latest_return_form", filters: ["kind", "city", "subsection"], page: "connections/nonprofits"),
         "nonprofit-board-members": .init(.accountability, "person.3", title: ["person"], subtitle: ["nonprofit", "titles"], detail: "sources",
                                          badge: "role", filters: ["nonprofit", "role"], page: "connections/nonprofits"),
+        "nonprofit-board-businesses": .init(.accountability, "building.2", title: ["business"], subtitle: ["person", "match"], amount: ["campaign_gifts_total"],
+                                            badge: "business_status", filters: ["person", "business_status"], page: "connections/nonprofits"),
         "nonprofit-payments": .init(.accountability, "banknote", title: ["nonprofit"], subtitle: ["payer", "what"], amount: ["amount"],
                                     badge: "record_type", filters: ["payer", "record_type"], page: "connections/nonprofits"),
         "nonprofit-grants": .init(.accountability, "gift", title: ["recipient"], subtitle: ["grantor", "purpose"], amount: ["cash"],

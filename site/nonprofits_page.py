@@ -18,6 +18,7 @@ CSS = r"""
 .np-off article{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px}
 .np-off h3{font:600 1rem var(--f-display);margin:0}
 .np-off .m{color:var(--muted);font-size:.84rem;margin:2px 0 8px}
+.np-off ul{list-style:none;padding:0;margin:0}
 .np-off li{font-size:.9rem;margin:4px 0}
 .np-off>p{grid-column:1/-1}
 .np-list{margin-top:10px}
@@ -61,6 +62,9 @@ def nonprofits_page(out_dir):
   <section class="tx-sec"><div class="sec-hd"><h2>People on several boards</h2></div>
     <p class="muted small" style="margin:0">Names listed on the latest filings of two or more local nonprofits (homeowner associations aside). Tap a name to see every board it appears on. People are matched by name, so check the filing before drawing conclusions.</p>
     <div id="npMulti" class="np-off"><p class="muted">Loading…</p></div></section>
+  <section class="tx-sec"><div class="sec-hd"><h2>Board members whose businesses gave to campaigns</h2></div>
+    <p class="muted small" style="margin:0">Nonprofit board members who are officers or registered agents of a business (Florida corporate filings) that gave to a local campaign. Tap a name to see every board it appears on.</p>
+    <div id="npDon" class="np-off"><p class="muted">Loading…</p></div></section>
   <section class="tx-sec"><div class="sec-hd"><h2>Find a nonprofit</h2></div>
     <div class="filters-row">
       <input id="npQ" type="search" placeholder="Name, city or EIN" aria-label="Search nonprofits" autocomplete="off">
@@ -77,8 +81,8 @@ def nonprofits_page(out_dir):
   <section class="tx-sec method"><div class="sec-hd"><h2>Sources and method</h2></div><ul class="plain">
     <li><b>Which organizations.</b> Every organization the IRS recognizes as tax-exempt with an address in Bay County (the IRS Exempt Organizations Business Master File), plus active Florida nonprofit corporations (Sunbiz) whose principal address is in the county. IRS and state records are joined by the EIN the corporation gives the state, then by exact name.</li>
     <li><b>Money.</b> Revenue, expenses and assets come from the latest 990, 990-EZ or 990-PF the organization e-filed (2019 on). Small organizations file a 990-N postcard with no figures, and churches don't have to file. Government payment records are the site's contracts, check registers, tourism agency payments and CRA ledger, matched to the nonprofit by name. Grants are from Schedule I of local nonprofits' returns.</li>
-    <li><b>Board members.</b> 990 and 990-EZ returns list officers, directors, trustees and key employees with their hours and pay; 990-N postcards name a principal officer; the state lists up to six officers. Names are shown as filed and grouped across boards by last and first name (nicknames such as Bob and Robert count as one), so two people with a common name can be grouped together. "Shares board members" counts other local nonprofits whose latest filings list the same name. An "official" tag means the name was checked by hand against an elected official, department leader or candidate.</li>
-    <li><b>Something wrong?</b> <a href="/about#contact">Tell us</a>. The data is at <a href="/api/v1/datasets/nonprofits">/api/v1/datasets/nonprofits</a>, <a href="/api/v1/datasets/nonprofit-board-members">nonprofit-board-members</a>, <a href="/api/v1/datasets/nonprofit-payments">nonprofit-payments</a>, <a href="/api/v1/datasets/nonprofit-grants">nonprofit-grants</a> and <a href="/api/v1/datasets/nonprofit-officials">nonprofit-officials</a>. IRS e-file data comes through the GivingTuesday 990 data lake.</li>
+    <li><b>Board members.</b> 990 and 990-EZ returns list officers, directors, trustees and key employees with their hours and pay; 990-N postcards name a principal officer; the state lists up to six officers. Names are shown as filed and grouped across boards by last and first name (nicknames such as Bob and Robert count as one), so two people with a common name can be grouped together. "Shares board members" counts other local nonprofits whose latest filings list the same name. Businesses come from Florida corporate filings (Sunbiz officers and registered agents): "name and address" means the person on the nonprofit's own state filing is the same Sunbiz person; "name" means only one Sunbiz person in the county has that name. Campaign gifts are the business's own gifts in Supervisor of Elections reports. An "official" tag means the name was checked by hand against an elected official, department leader or candidate.</li>
+    <li><b>Something wrong?</b> <a href="/about#contact">Tell us</a>. The data is at <a href="/api/v1/datasets/nonprofits">/api/v1/datasets/nonprofits</a>, <a href="/api/v1/datasets/nonprofit-board-members">nonprofit-board-members</a>, <a href="/api/v1/datasets/nonprofit-board-businesses">nonprofit-board-businesses</a>, <a href="/api/v1/datasets/nonprofit-payments">nonprofit-payments</a>, <a href="/api/v1/datasets/nonprofit-grants">nonprofit-grants</a> and <a href="/api/v1/datasets/nonprofit-officials">nonprofit-officials</a>. IRS e-file data comes through the GivingTuesday 990 data lake.</li>
   </ul></section>
 </div>
 <link rel="stylesheet" href="/assets/tax.css">
