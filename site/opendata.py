@@ -10,7 +10,7 @@ _sys.path.insert(0, os.path.join(DATA, 'entities'))
 import ids  # noqa: E402  shared government / vendor / person ids (data/entities)
 
 # which columns name the government, per dataset, tried in order (office titles are matched by contained name)
-GOV_COLS = {'government-profiles': ['government'], 'votes': ['government'], 'member-votes': ['gov_id'], 'cra-payments': ['city'],
+GOV_COLS = {'government-profiles': ['government'], 'government-years': ['gov_id', 'government'], 'votes': ['government'], 'member-votes': ['gov_id'], 'cra-payments': ['city'],
             'property-tax-rates': ['authority_id'], 'fema-michael-projects': ['applicant'], 'officials-pay': ['title', 'government'],
             'meetings': ['gov', 'board'], 'campaign-finance': ['office', 'gov'], 'bonds': ['gov'], 'salary-positions': ['employer_id'],
             'salary-leaders': ['employer_id'], 'candidates-2026': ['office', 'government'], 'campaign-contributions-2026': ['office'],
@@ -62,7 +62,7 @@ def add_person_id(did, rows):
 # free-text date column -> structured date_start / date_end / date_precision next to it (the text is kept)
 DATE_COL = {'cra-payments': 'date_or_fy', 'sales-tax-projects': 'fiscal_years', 'officials-pay': 'year', 'debt': 'fy', 'audit-findings': 'fy',
             'salary-positions': 'fiscal_year', 'salary-leaders': ('fiscal_year', 'as_of'), 'budget-detail': 'fiscal_year', 'budget-per-resident': 'fiscal_year',
-            'fees-assessments': 'fiscal_year', 'bed-tax-collections': 'fy'}
+            'fees-assessments': 'fiscal_year', 'bed-tax-collections': 'fy', 'government-years': 'fy'}
 
 
 def add_dates(did, rows):

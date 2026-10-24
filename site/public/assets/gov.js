@@ -15,8 +15,17 @@ const nice = d => { if (!d) return ''; const t = new Date(d.slice(0, 10) + 'T12:
 const get = u => fetch(u).then(r => r.ok ? r.json() : null).catch(() => null);
 const K = G.key, has = v => BCM.city.has(K, v);
 
-const [CT, P1, P2, AC, ST, FM, VT, SV] = await Promise.all(['/data/contracts-page.json', '/data/cra-pay-1.json', '/data/cra-pay-2.json',
-  '/data/accountability.json', '/data/surtax-projects.json', '/data/michael-page.json', '/data/votes-page.json', '/data/savings.json'].map(get));
+// this government's budget, tax rate, actuals, residents, debt and staff by fiscal year: from the database through the API,
+// or the same dataset's published file if the API can't be reached
+const yearsFor = async () => {
+  const api = await get(`/api/v1/datasets/government-years?gov_id=${encodeURIComponent(K)}&sort=fiscal_year&limit=200`);
+  if (api && Array.isArray(api.data)) return api.data;
+  const f = await get('/downloads/government-years.json');
+  return (Array.isArray(f) ? f : []).filter(r => r.gov_id === K);
+};
+const [CT, P1, P2, AC, ST, FM, VT, SV, GYr] = await Promise.all([...['/data/contracts-page.json', '/data/cra-pay-1.json', '/data/cra-pay-2.json',
+  '/data/accountability.json', '/data/surtax-projects.json', '/data/michael-page.json', '/data/votes-page.json', '/data/savings.json'].map(get), yearsFor()]);
+const GY = (GYr || []).slice().sort((a, b) => a.fiscal_year - b.fiscal_year);
 
 /* ---------- this government's rows, each with the years it counts in ---------- */
 const S = {};
@@ -31,7 +40,7 @@ const savings = (SV?.opportunities || []).filter(o => (o.govs || []).includes(K)
 
 /* ---------- the year picker ---------- */
 const ysel = $('#gxYear');
-const allYs = Object.values(S).flatMap(rs => rs.flatMap(r => r.ys));
+const allYs = [...Object.values(S).flatMap(rs => rs.flatMap(r => r.ys)), ...GY.map(r => r.fiscal_year)];
 const YRS = [...new Set(allYs)].filter(y => y >= 2000).sort((a, b) => b - a);
 ysel.innerHTML = '<option value="all">All years</option>' + YRS.map(y => `<option value="${y}">${y}</option>`).join('');
 // opens on the newest year this government has a good share of records for
@@ -142,6 +151,40 @@ function savingsSec() {
   });
 }
 
+/* ---------- top cards: budget, tax rate, residents, debt, staff for the fiscal year in the bar ----------
+   Year 2026 in the picker means fiscal year 2026 (Oct 2025 to Sep 2026; schools Jul to Jun). "All years" shows the
+   current fiscal year. A figure with no record for that year says so; it never falls back to another year's number.
+   Mirrors year_cards() in site/gov_pages.py, which draws the same cards for the current fiscal year before this runs. */
+const topBox = $('#gxTop'), keep = topBox ? $$('[data-static]', topBox).map(x => x.outerHTML).join('') : '';
+const curFY = (() => { const d = new Date(), st = G.fyStart || 10; return d.getMonth() + 1 >= st ? d.getFullYear() + 1 : d.getFullYear(); })();
+function topCards() {
+  if (!topBox || !GY.length) return;
+  const by = Object.fromEntries(GY.map(r => [r.fiscal_year, r]));
+  let fy = ysel.value === 'all' ? curFY : +ysel.value;
+  if (ysel.value === 'all' && !by[fy]) fy = GY[GY.length - 1].fiscal_year;
+  const r = by[fy] || {}, prev = by[fy - 1] || {}, has = k => GY.some(x => x[k] != null), schools = K === 'schools';
+  const none = (l, why) => `<div class="kpi kpi-none"><span class="eyebrow">${l}</span><span class="v">No data</span><span class="s">${why}</span></div>`;
+  const out = [];
+  if (!schools && has('population')) out.push(r.population ? kpi('Residents', r.population.toLocaleString('en-US'), r.population_year === fy ? `FY${fy} state figure` : `${r.population_year} state estimate`) : none('Residents', `No count for FY${fy}`));
+  if (r.budget_total) {
+    const bits = [`FY${fy} · ${esc(r.budget_status || 'adopted')}`];
+    if (r.budget_per_resident) bits.push(`${usd(r.budget_per_resident)} per resident`);
+    if (prev.budget_total) { const ch = (r.budget_total / prev.budget_total - 1) * 100; bits.push(`${ch >= 0 ? 'up' : 'down'} ${Math.abs(ch).toFixed(0)}% from FY${fy - 1}`); }
+    out.push(kpi('Budget', money(r.budget_total), bits.join(' · ') + src(r.budget_source_url)));
+  } else if (r.actual_spending) out.push(kpi('Spent (audited)', money(r.actual_spending), `FY${fy} actual spending; no adopted budget on file` + src(r.actuals_source_url)));
+  else if (has('budget_total') || has('actual_spending')) out.push(none('Budget', `No FY${fy} budget on file`));
+  if (has('millage')) {
+    const l = schools ? 'School tax rate' : 'Property tax rate', m = r.millage;
+    out.push(m == null ? none(l, `No FY${fy} rate on file`) : !m ? kpi(l, 'None', 'No city property tax')
+      : kpi(l, `${+m} mills`, `$${Math.round(m * 100).toLocaleString('en-US')} per $100,000 of taxable value${r.tax_year ? ' · tax year ' + r.tax_year : ''}`));
+  }
+  if (has('debt_total')) out.push(r.debt_total ? kpi('Debt', money(r.debt_total), `${r.population && !schools ? usd(r.debt_total / r.population) + ' per resident · ' : ''}audited, end of FY${fy}` + src(r.debt_source_url))
+    : none('Debt', `Audited total on file for ${GY.filter(x => x.debt_total).map(x => `<button type="button" class="linkbtn" data-fy="${x.fiscal_year}">FY${x.fiscal_year}</button>`).join(', ')} only`));
+  if (has('employees_fte')) out.push(r.employees_fte ? kpi('Employees', (+r.employees_fte).toLocaleString('en-US'), `FY${fy} budget, staff positions`) : none('Employees', `No FY${fy} count on file`));
+  topBox.innerHTML = out.join('') + keep;
+  $('#gxTopH').textContent = `Fiscal year ${fy}${r.period ? ' · ' + r.period : ''}`;
+}
+
 /* ---------- "this year" strip at the top ---------- */
 function glance() {
   const box = $('#gxGlance'); if (!box) return;
@@ -158,11 +201,15 @@ function glance() {
 }
 
 function render() {
-  contracts(); cra(); projects(); votes(); glance();
+  topCards(); contracts(); cra(); projects(); votes(); glance();
   BCM.urlState.set({year: ysel.value});
 }
 ysel.addEventListener('change', render);
-document.addEventListener('click', e => { if (e.target.closest('[data-allyears]')) { ysel.value = 'all'; render(); } });
+document.addEventListener('click', e => {
+  if (e.target.closest('[data-allyears]')) { ysel.value = 'all'; render(); }
+  const f = e.target.closest('[data-fy]');
+  if (f && [...ysel.options].some(o => o.value === f.dataset.fy)) { ysel.value = f.dataset.fy; render(); }
+});
 savingsSec(); render();
 $$('[data-gx-loading]').forEach(el => el.remove());
 // the section links in the bar follow the reader down the page

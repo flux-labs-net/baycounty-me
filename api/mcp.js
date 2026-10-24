@@ -23,7 +23,7 @@ const TOOLS = [
      offset: {type: 'integer', minimum: 0, default: 0}}},
    annotations: {readOnlyHint: true}},
   {name: 'get_government', title: 'Government profile',
-   description: 'Profile of a Bay County local government: population, budget, tax rate, debt, audit findings, votes recorded, staff, utility bill and FEMA money. Omit slug to list all.',
+   description: 'Profile of a Bay County local government: population, budget, tax rate, debt, audit findings, votes recorded, staff, utility bill and FEMA money, plus years: budget, tax rate, audited actuals, residents, debt and staff for each fiscal year on record. Omit slug to list all.',
    inputSchema: {type: 'object', additionalProperties: false, properties: {slug: {type: 'string', description: 'bay-county, bay-district-schools, panama-city, panama-city-beach, lynn-haven, callaway, springfield, parker or mexico-beach'}}},
    annotations: {readOnlyHint: true}},
   {name: 'upcoming_meetings', title: 'Upcoming meetings',
@@ -194,6 +194,9 @@ async function call(req, name, a = {}) {
     if (!a.slug) return {governments: rows};
     const g = rows.find(r => r.slug === a.slug);
     if (!g) throw new Error(`Unknown government "${a.slug}". Valid: ${rows.map(r => r.slug).join(', ')}`);
+    const gy = c.datasets.find(d => d.id === 'government-years');  // budget, tax rate, actuals, residents, debt, staff by fiscal year
+    const all = gy ? (await datasetRows(req, gy)).rows : await load(req, '/downloads/government-years.json').catch(() => []);
+    g.years = (all || []).filter(r => r.gov_id === g.gov_id).sort((x, y) => x.fiscal_year - y.fiscal_year);
     return g;
   }
   if (name === 'search_site') {

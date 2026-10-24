@@ -157,6 +157,121 @@ def savings_evidence():
     return evidence_rows()
 
 
+# --- Government profile pages (/governments/<slug>): the top cards, one row per government per fiscal year ----------
+
+def _fy(text):
+    """'FY2025', 'FY2025 (2024-25)', 'FY2025-26' -> the year the fiscal year ends in."""
+    import re
+    m = re.search(r'FY\s?(\d{4})(?:\s?-\s?(\d{2,4}))?', str(text or ''))
+    if not m:
+        return None
+    y = int(m.group(1))
+    if m.group(2):
+        e = int(m.group(2))
+        e = e + 2000 if e < 100 else e
+        if e == y + 1:  # 'FY2025-26' names both calendar years
+            y = e
+    return y
+
+
+def _budget_status(text):
+    s = str(text or '').strip().lower()
+    for pre, lbl in (('adopted', 'adopted'), ('final approved', 'adopted'), ('final hearing', 'final hearing held'), ('amended', 'amended'),
+                     ('tentative', 'tentative'), ('total is the tentative', 'tentative'), ('draft', 'draft'), ('approximate', 'approximate'),
+                     ('county-funded', 'county-funded share')):
+        if s.startswith(pre):
+            return lbl
+    return 'adopted' if 'adopted' in s and 'not' not in s else ('on file' if s else 'adopted')
+
+
+def government_years():
+    """Budget, tax rate, audited actuals, residents, debt and staff for each government in each fiscal year on record.
+
+    One row per government per fiscal year. A blank value means no record for that year (never carried over from
+    another year). fiscal_year is the year the fiscal year ends in (FY2026 = Oct 2025 to Sep 2026; schools Jul to Jun).
+    """
+    import json
+    from govs import GOVS
+    D = os.path.join(HERE, '..', 'data')
+    J = lambda *p: json.load(open(os.path.join(D, *p)))
+    bud = {g['id']: g for g in J('tax', 'budgets.json')['governments']}
+    fin = {g['id']: g for g in J('tax', 'finances.json')['governments']}
+    mil = {a['id']: a for a in J('tax', 'millage.json')['authorities']}
+    da = J('debt_audit', 'debt_audit.json')
+    fees = {g['name']: g for g in J('fees', 'fees_pay_officials.json')['governments']}
+    pop = J('civic', 'population.json')
+    from place import NAME as PLACE_NAME
+    out = []
+    for g in GOVS:
+        rows = {}
+        row = lambda y: rows.setdefault(y, {})
+        b = bud.get(g['tax']) or {}
+        # budgets: history, FY2026, FY2027
+        entries = [(h.get('fy'), h, h.get('note') or 'adopted') for h in b.get('history') or []]
+        entries += [('FY2026', b.get('fy2026') or {}, (b.get('fy2026') or {}).get('status')), ('FY2027', b.get('fy2027') or {}, (b.get('fy2027') or {}).get('status'))]
+        for fy, x, st in entries:
+            y = _fy(fy)
+            tot = x.get('total_budget') or x.get('total_budget_less_transfers') or x.get('total_budget_less_interfund_transfers')
+            if not y or not (tot or x.get('general_fund')):
+                continue
+            r = row(y)
+            r.update({'budget_total': round(tot) if tot else None, 'general_fund': round(x['general_fund']) if x.get('general_fund') else None,
+                      'budget_status': _budget_status(st), 'budget_note': str(st or '')[:300] or None,
+                      'budget_excludes_transfers': bool(not x.get('total_budget') and tot),
+                      'budget_source_url': x.get('source_url')})
+            if isinstance(x.get('millage'), (int, float)):  # the budget's own rate; replaced below by the state's figure where there is one
+                r.update({'millage': x['millage'], 'millage_source_url': x.get('source_url')})
+            if x.get('employees_fte'):
+                r.update({'employees_fte': x['employees_fte'], 'employees_note': x.get('employees_fte_note'), 'employees_source_url': x.get('source_url')})
+            elif (x.get('employees_positions') or {}).get('total'):
+                r.update({'employees_fte': x['employees_positions']['total'], 'employees_note': x['employees_positions'].get('note'), 'employees_source_url': x.get('source_url')})
+        # property tax rate (tax year T pays for FY T+1)
+        for t in (mil.get(g['auth']) or {}).get('years') or [] if g.get('auth') else []:
+            y = _fy(t.get('fiscal_year')) or (t['tax_year'] + 1)
+            if t.get('millage') is None:
+                continue
+            row(y).update({'tax_year': t['tax_year'], 'millage': t['millage'], 'rolled_back_rate': t.get('rolled_back'), 'property_tax_levy': t.get('levy'),
+                           'millage_source_url': t.get('source_url')})
+        # audited actuals (state Local Government Financial Reports) and residents that year
+        for a in (fin.get(g['tax']) or {}).get('years') or []:
+            y = _fy(a['fy'])
+            r = row(y)
+            r.update({'actual_revenue': round(a['revenue_total']) if a.get('revenue_total') else None,
+                      'actual_spending': round(a['expenditure_total_excl_transfers']) if a.get('expenditure_total_excl_transfers') else None,
+                      'actuals_source_url': a.get('expenditure_source_url') or a.get('revenue_source_url') or a.get('source_url')})
+            if a.get('population'):
+                r.update({'population': a['population'], 'population_year': y, 'population_source': 'State population used in the audited financial report'})
+        # residents: the April 1, 2025 state estimate counts for FY2025 on; earlier years only from the yearly reports above
+        nm = PLACE_NAME if g['kind'] in ('county', 'schools') else g['short']
+        est = ((pop.get('places') or {}).get(nm) or {}).get('est')
+        if est:
+            for y in [y for y in rows if y >= 2025]:
+                if not rows[y].get('population'):
+                    rows[y].update({'population': est, 'population_year': 2025, 'population_source': pop.get('source_url')})
+        # debt: audited total for the fiscal year the audit covers
+        d = next((x for x in da['debt'] if g.get('debt') and x['government'].startswith(g['debt'])), None)
+        if d and d.get('total_debt') and _fy(d.get('fy')):
+            row(_fy(d['fy'])).update({'debt_total': d['total_debt'], 'debt_source_url': d.get('source_url')})
+        # staff count from the officials file, in the year its source names
+        ft = (fees.get(g.get('fees')) or {}).get('ftes')
+        if isinstance(ft, dict) and ft.get('value') and _fy(ft.get('detail')):
+            r = row(_fy(ft['detail']))
+            if not r.get('employees_fte'):
+                r.update({'employees_fte': ft['value'], 'employees_note': ft.get('detail'), 'employees_source_url': ft.get('source_url')})
+        start = 7 if g['kind'] == 'schools' else 10
+        for y in sorted(rows):
+            r = rows[y]
+            per = round(r['budget_total'] / r['population']) if r.get('budget_total') and r.get('population') and g['kind'] != 'schools' else None
+            out.append({'gov_id': g['key'], 'government': g['name'], 'fiscal_year': y, 'fy': f'FY{y}',
+                        'period': f"{['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][start]} {y - 1} to {['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][start - 1]} {y}",
+                        **{k: r.get(k) for k in ('budget_total', 'general_fund', 'budget_status', 'budget_note', 'budget_excludes_transfers', 'budget_source_url',
+                                                 'tax_year', 'millage', 'rolled_back_rate', 'property_tax_levy', 'millage_source_url',
+                                                 'actual_revenue', 'actual_spending', 'actuals_source_url', 'population', 'population_year', 'population_source',
+                                                 'debt_total', 'debt_source_url', 'employees_fte', 'employees_note', 'employees_source_url')},
+                        'budget_per_resident': per, 'source_url': r.get('budget_source_url') or r.get('actuals_source_url') or r.get('millage_source_url')})
+    return out
+
+
 DATASETS = [
     ('cra-network-payees', 'CRA network: payees', 'Every payee in the CRA ledger as one entity (businesses, governments, property owners; unnamed grant recipients grouped), with the CRAs that paid it and the counted total.', cra_network_payees),
     ('cra-network-links', 'CRA network: documented connections', 'Documented links between CRA payees that are not payments (shared project, address or subcontract), each with its source.', cra_network_links),
@@ -171,5 +286,6 @@ DATASETS = [
     ('site-updates', 'What\'s new', 'Each change to the site\'s data and pages, newest first.', site_updates),
     ('savings-opportunities', 'Savings finder: opportunities', 'Places Bay County governments could spend less: the spending each touches, a low and high estimate with its stated assumption, the next step and the records still needed. Every figure is computed from the Accountability projects and the CRA ledger.', savings_opportunities),
     ('savings-evidence', 'Savings finder: evidence', 'The records behind each savings opportunity, one row per project or CRA ledger record: the figure, what it is compared with, the gap or share, cost per unit where one applies, and the source.', savings_evidence),
+    ('government-years', 'Governments by year', 'One row per government per fiscal year: adopted budget and its status, general fund, property tax rate and levy, audited actual revenue and spending, residents, audited debt and staff count. A blank means no record for that year. fiscal_year is the year the fiscal year ends (FY2026 = Oct 2025 to Sep 2026; schools Jul to Jun).', government_years),
     ('tax-districts', 'Tax districts', 'Which taxing authorities levy property tax in each tax district, and the combined millage. Rates by year are in property-tax-rates (authority_id).', tax_districts),
 ]
