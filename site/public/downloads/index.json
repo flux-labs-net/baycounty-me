@@ -4746,6 +4746,10 @@
     {
      "name": "gov_id",
      "type": "string"
+    },
+    {
+     "name": "business_last_filed",
+     "type": "number"
     }
    ],
    "json": "/downloads/shared-owner-groups.json",

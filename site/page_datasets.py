@@ -309,8 +309,8 @@ def business_donor_sunbiz():
 # (migration 0032), not by the site build, so the published file is empty and the columns are listed here.
 SHARED_OWNER_COLUMNS = ['group_id', 'candidate', 'office', 'election', 'business', 'sunbiz_doc_number', 'business_status', 'business_amount',
                         'business_dates', 'group_businesses', 'group_checks', 'group_total', 'all_checks_1000', 'same_day', 'shared_people',
-                        'county', 'source_url', 'campaign_report_url', 'gov_id']
-_NUM = {'business_amount', 'group_businesses', 'group_checks', 'group_total', 'shared_people'}
+                        'county', 'source_url', 'campaign_report_url', 'gov_id', 'business_last_filed']
+_NUM = {'business_amount', 'group_businesses', 'group_checks', 'group_total', 'shared_people', 'business_last_filed'}
 DB_ONLY_COLUMNS = {'shared-owner-groups': {c: ('number' if c in _NUM else 'boolean' if c in ('all_checks_1000', 'same_day') else 'string')
                                            for c in SHARED_OWNER_COLUMNS}}
 

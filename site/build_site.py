@@ -386,6 +386,7 @@ def write(path, html):
     # keep each page's 'Data updated' stamp in step with its latest What's new entry
     html = re.sub(r'Data updated [A-Z][a-z]{2} \d{1,2}, \d{4}', 'Data updated ' + nice_date(last_updated(path)), html)
     html = linkify_html(html)
+    html = us_dates_html(html, es=path.startswith('/es'))  # 2025-02-10 -> Feb 10, 2025 in page text (site/dates.py)
     fp = os.path.join(OUT, path.strip('/'), 'index.html') if path != '/' else os.path.join(OUT, 'index.html')
     os.makedirs(os.path.dirname(fp), exist_ok=True)
     open(fp, 'w').write(html)
@@ -540,6 +541,7 @@ from campaign_page import campaign_page
 from money_pages import budget_page, payments_page
 from money_map import money_map_page
 from linkify import linkify_html, LINKIFY_JS
+from dates import us_dates_html, DATES_JS  # noqa: E402
 from developers_page import developers_page
 from elections_page import elections_page
 from exemptions_page import exemptions_page
@@ -770,7 +772,7 @@ def main():
     from glossary import TERMS
     gl = {t['id']: {'term': t['term'], 'simple': t['simple']} for t in TERMS}
     from city_filter import js_table as _city_js
-    open(os.path.join(OUT, 'assets', 'site.js'), 'w').write(_city_js() + MENU_JS + DEEPLINK_JS + LINKIFY_JS + TERM_JS.replace('__GLOSSARY_ES__', json.dumps(glossary_es_terms(), ensure_ascii=False)).replace('__GLOSSARY__', json.dumps(gl, ensure_ascii=False)))
+    open(os.path.join(OUT, 'assets', 'site.js'), 'w').write(_city_js() + MENU_JS + DEEPLINK_JS + LINKIFY_JS + DATES_JS + TERM_JS.replace('__GLOSSARY_ES__', json.dumps(glossary_es_terms(), ensure_ascii=False)).replace('__GLOSSARY__', json.dumps(gl, ensure_ascii=False)))
     shutil.copy(os.path.join(ROOT, '..', 'assets', 'logo_small.webp'), os.path.join(OUT, 'assets', 'flux-labs.webp'))
     shutil.copy(os.path.join(ROOT, 'favicon.svg'), os.path.join(OUT, 'favicon.svg'))
     shutil.copy(os.path.join(ROOT, 'tax.css'), os.path.join(OUT, 'assets', 'tax.css'))

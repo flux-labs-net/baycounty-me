@@ -231,7 +231,7 @@
     // Filings
     const filings = `<dl>${[['IRS status', x.subsection ? esc(x.subsection + (x.foundation_type ? ', ' + x.foundation_type : '') + (x.ruling_year ? ' (since ' + x.ruling_year + ')' : '')) : 'Not in the IRS master file'],
       ['EIN', x.ein ? esc(x.ein) : ''], ['Latest return', x.latest_return_form ? `${esc(x.latest_return_form)} for ${esc(x.latest_return_year || '')}` : (x.irs_filing_requirement ? esc(x.irs_filing_requirement) : '')],
-      ['State filing', x.sunbiz_doc_number ? `<a href="${esc(x.sunbiz_url)}" target="_blank" rel="noopener">${esc(x.sunbiz_doc_number)}</a> · ${esc(x.sunbiz_status || '')}` : ''],
+      ['State filing', x.sunbiz_doc_number ? `<a href="${esc(x.sunbiz_url)}" target="_blank" rel="noopener">${esc(x.sunbiz_doc_number)}</a> ${x.sunbiz_status && x.sunbiz_status !== 'Active' && window.BCM_bizOff ? BCM_bizOff(x.sunbiz_status) : (x.sunbiz_status ? ' · ' + esc(x.sunbiz_status) : '')}` : ''],
       ['Florida charity', x.fdacs_registration ? `<a href="${esc(x.fdacs_url)}" target="_blank" rel="noopener">${esc(x.fdacs_registration)}</a> · ${esc(x.fdacs_status || '')}${x.fdacs_expires ? (active(x.fdacs_status) ? ' until ' : ', expired ') + esc(x.fdacs_expires) : ''}` : ''],
       ['Mission', x.mission ? esc(x.mission) : ''], ['Website', x.website ? `<a href="${esc(/^https?:/i.test(x.website) ? x.website : 'https://' + x.website)}" target="_blank" rel="noopener nofollow">${esc(x.website)}</a>` : '']]
       .filter(([, v]) => v).map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl>
@@ -254,7 +254,7 @@
     const seat = r => `<div class="np-tie">${S.byId.has(r.nonprofit_id) ? `<button type="button" class="np-p" data-org="${esc(r.nonprofit_id)}">${esc(title(r.nonprofit))}</button>` : esc(title(r.nonprofit))}${S.pays.has(r.nonprofit_id) ? ' <span class="np-chip hot">public money</span>' : ''}
       <div class="m">${esc(r.titles || r.role)}${years(r) ? ' · ' + esc(years(r)) : ''}${r.compensation ? ' · paid ' + usd(r.compensation) + ' (' + esc(r.compensation_year || '') + ')' : ''} · <a href="${esc(r.source_url)}" target="_blank" rel="noopener">${esc(r.sources)}</a></div></div>`;
     const bz = biz.slice().sort((a, b) => Number(b.campaign_gifts_total || 0) - Number(a.campaign_gifts_total || 0) || (a.business_status === 'Active' ? -1 : 1));
-    const bline = b => `<div class="np-tie"><a href="${esc(b.source_url)}" target="_blank" rel="noopener">${esc(title(b.business))}</a>${b.business_status === 'Active' ? '' : ' <span class="muted small">(inactive)</span>'}
+    const bline = b => `<div class="np-tie"><a href="${esc(b.source_url)}" target="_blank" rel="noopener">${esc(title(b.business))}</a>${window.BCM_bizOff ? BCM_bizOff(b.business_status, b.closed_year) : (b.business_status === 'Active' ? '' : ' (inactive)')}
       <div class="m">${Number(b.campaign_gifts_total) > 0 ? `Gave ${usd(b.campaign_gifts_total)} to campaigns${b.candidates ? ': ' + esc(b.candidates) : ''} · ` : ''}${b.match === 'Name' ? 'matched by name' : 'matched by name and address'}</div></div>`;
     const on = 'boards';
     showPanel(`<h2>${esc(pname(seats[0].person))}</h2><div class="m">${plural(cur.length, 'current board')}${biz.length ? ' · ' + plural(biz.length, 'business', 'businesses') : ''}</div>`
