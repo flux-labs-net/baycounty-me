@@ -210,4 +210,5 @@ import subprocess, sys
 subprocess.run([sys.executable, os.path.join('entities', 'build_entities.py')], check=True)
 subprocess.run([sys.executable, os.path.join('campaign', 'build_vendor_matches.py')], check=True)
 subprocess.run([sys.executable, os.path.join('campaign', 'build_contract_votes.py')], check=True)
+subprocess.run([sys.executable, os.path.join('sunbiz', 'build_sunbiz.py'), 'bay'], check=True)  # business donors -> Sunbiz entities
 subprocess.run([sys.executable, os.path.join('surtax', 'match_schedule.py')], check=True)

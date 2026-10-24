@@ -180,6 +180,7 @@ def admin_page(out_dir):
       <button role="tab" data-tab="emails" aria-selected="false">Emails</button>
       <button role="tab" data-tab="compose" aria-selected="false">Write to officials</button>
       <button role="tab" data-tab="correspondence" aria-selected="false">Correspondence</button>
+      <button role="tab" data-tab="owners" aria-selected="false">Business owners</button>
     </div>
 
     <section id="tab-keys" role="tabpanel">
@@ -365,6 +366,22 @@ def admin_page(out_dir):
       <div class="card" id="cr-detail" hidden style="margin-bottom:14px"></div>
       <div class="tw"><table class="at" id="cr-table" data-tt="off"><thead><tr><th>Last activity</th><th>Official</th><th>Subject</th><th class="num">Sent</th><th class="num">Replies</th><th>Status</th><th>Public</th></tr></thead><tbody></tbody></table></div>
       <p class="muted small" style="margin-top:8px">The public page is <a href="/correspondence" target="_blank" rel="noopener">baycounty.me/correspondence</a>. It shows only published threads, by official name and seat, without email addresses.</p>
+    </section>
+
+    <section id="tab-owners" role="tabpanel" hidden>
+      <div class="banner"><div><b>Private research. Do not publish names from this tab.</b> <span class="small muted">Officers, managers and registered agents from the state corporate file (Sunbiz), grouped into people by name and address, and business campaign gifts matched to those businesses. Public pages show business names only. Mark a group confirmed after checking it on Sunbiz; nothing here is published automatically. Giving through several companies is legal in Florida when each company is a real contributor.</span></div></div>
+      <div class="tiles" id="ow-tiles"></div>
+      <div class="row" style="gap:8px;flex-wrap:wrap;margin:18px 0 8px">
+        <h2 class="h2 grow" style="margin:0">Businesses that share a person and gave to the same candidate</h2>
+        <select class="sel" id="ow-status" aria-label="Review status"><option value="">Any review status</option><option value="unreviewed">Unreviewed</option><option value="confirmed">Confirmed</option><option value="rejected">Rejected</option></select>
+      </div>
+      <div class="tw"><table class="at" id="ow-groups" data-tt="off"><thead><tr><th>Candidate</th><th>Businesses</th><th>Linked by</th><th class="num">Checks</th><th class="num">Total</th><th>Review</th></tr></thead><tbody></tbody></table></div>
+      <div class="row" style="gap:8px;flex-wrap:wrap;margin:24px 0 8px">
+        <h2 class="h2 grow" style="margin:0">Look up a person or business</h2>
+        <input class="sel" id="ow-q" type="search" placeholder="Last name first, business name or Sunbiz document number" aria-label="Search" style="min-width:320px">
+      </div>
+      <div id="ow-results"></div>
+      <div id="ow-detail"></div>
     </section>
   </div>
 </div>
