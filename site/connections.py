@@ -53,7 +53,7 @@ def _slug(s):
 
 
 def _strip(s):
-    return re.sub(r'\s*\(.*?\)\s*', ' ', s).strip(' ,;')
+    return ids.biz_case(re.sub(r'\s*\(.*?\)\s*', ' ', s).strip(' ,;'))
 
 
 def _norm(s):
@@ -196,7 +196,7 @@ def network_data():
         k = _norm(d['name'])
         ent, conf = paid.get(k, (None, None))
         dk = ent or 'd:' + k
-        x = agg.setdefault((dk, oid), {'dn': d['name'], 'ty': _gift_type(d), 'o': oid, 'a': 0.0, 'n': 0, 'ds': [],
+        x = agg.setdefault((dk, oid), {'dn': ids.biz_case(d['name']), 'ty': _gift_type(d), 'o': oid, 'a': 0.0, 'n': 0, 'ds': [],
                                        'e': ent, 'cf': conf, 'u': d.get('report_url'), 'cand': cand})
         x['a'] += d.get('amount') or 0
         x['n'] += 1

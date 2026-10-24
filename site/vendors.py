@@ -12,7 +12,10 @@ a word (Anderson Columbia vs Anderson Construction, RJ Gorman Marine vs RJ Gorma
 type: 'business' (default), 'public' (another government, or a public risk pool owned by governments),
 'unnamed' (the record doesn't say who got the work).
 """
-import re
+import os, re, sys
+
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'data', 'entities'))
+import ids  # noqa: E402
 
 SUFFIX = r'\b(inc|llc|co|corp|corporation|company|the|of|lp|llp|pa|pllc|ltd|dba|d b a)\b'
 
@@ -131,4 +134,4 @@ def resolve(raw):
     if ent:
         return ent
     clean = re.sub(r'\s*\(.*?\)\s*', ' ', raw).strip()
-    return (re.sub(r'[^a-z0-9]+', '-', k).strip('-') or 'unknown', clean, 'public' if _PUBLIC.search(raw) else 'business')
+    return (re.sub(r'[^a-z0-9]+', '-', k).strip('-') or 'unknown', ids.biz_case(clean), 'public' if _PUBLIC.search(raw) else 'business')

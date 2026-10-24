@@ -29,6 +29,50 @@ def reset():
     _C.clear()
 
 
+# ---------- display casing ----------
+# Check registers and some agendas print names in all caps. biz_case gives those a normal business casing; names that
+# already have lower-case letters were typed by a person and are left alone.
+_UPPER_KEEP = {'LLC', 'LLP', 'LP', 'PA', 'PLLC', 'PC', 'NA', 'USA', 'US', 'FL', 'II', 'III', 'IV', 'ADP', 'AT&T', 'FPL', 'CSX', 'UPS',
+               'HVAC', 'AC', 'TV', 'FM', 'AM', 'DBA', 'GIS', 'IT', 'PCB', 'PCBH', 'EMR', 'EMS', 'RV', 'ACH', 'CPA', 'PE', 'DDA',
+               'PMT', 'ECSC', 'CRI', 'MWB', 'USFA', 'WSL', 'EPCI', 'EJHG', 'FTS', 'NCMC', 'JDF', 'RDK', 'CK', 'JS&S', 'PBS&J'}
+_LOWER = {'and', 'of', 'the', 'for', 'in', 'on', 'at', 'to', 'by', 'a', 'an', 'or', 'de'}
+_WORDS3 = set('bay sea oak sun pro air one new top ace all big red car art law lab dog day way old gas oil ice tax box van bus cab fix '
+               'net web map pet eye joe bob tom jim ann sam dan ray lee kim fun hot joy key max mix now own pay run sky tee toy two six '
+               'ten bar inn spa tan tin mr dr st mt ft go my we me so up oh hi pc ma pa'.split()) - {'pc', 'pa'}
+_FIXED = {'INC': 'Inc', 'CO': 'Co', 'CORP': 'Corp', 'LTD': 'Ltd', 'MGM': 'Mgmt', 'MGMT': 'Mgmt', 'SVCS': 'Svcs', 'AMEX': 'Amex', 'VISA': 'Visa',
+          'MCDONALD': 'McDonald', 'MCKIM': 'McKim', 'MCMAHON': 'McMahon'}
+
+
+def _case_word(w, first):
+    if re.fullmatch(r'[WK][A-Z]{2,3}-(TV|FM|AM),?', w):  # TV and radio call signs: WJHG-TV
+        return w
+    core = re.sub(r'[^A-Za-z&]', '', w)
+    up = core.upper()
+    if not core:
+        return w
+    if up in _FIXED:
+        return w.replace(core, _FIXED[up])
+    if up in _UPPER_KEEP or '&' in core or re.search(r'\d', w):
+        return w
+    if not first and core.lower() in _LOWER:
+        return w.lower()
+    if len(core) <= 3 and core.lower() not in _WORDS3:  # short initials: CW, RJ, GAC, BGN
+        return w
+    # Title-case each piece split by apostrophes and hyphens, and keep 's lower: O'NEAL -> O'Neal, HALL'S -> Hall's
+    out = re.sub(r"[A-Za-z]+", lambda m: m.group(0).capitalize(), w.lower())
+    return re.sub(r"'S\b", "'s", out)
+
+
+def biz_case(name):
+    """'BALDWIN CONTAINER SYSTEMS INC' -> 'Baldwin Container Systems Inc'. Leaves names with lower-case letters as they are."""
+    if not name or re.search(r'[a-z]', name) or not re.search(r'[A-Z]', name):
+        return name
+    words = name.split(' ')
+    if len(words) == 1 and len(re.sub(r'[^A-Z]', '', name)) <= 4:  # a lone short acronym: CRI, AMEX, WSL
+        return _FIXED.get(name, name)
+    return ' '.join(_case_word(w, i == 0) for i, w in enumerate(words))
+
+
 # ---------- governments ----------
 def _gn(s):
     return re.sub(r'\s+', ' ', (s or '').strip().lower())

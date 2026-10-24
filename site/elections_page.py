@@ -7,6 +7,7 @@ Individual donors are counted, never named (site policy).
 import html, json, os, re
 from collections import defaultdict
 from city_filter import city_bar, data_g, by_city, KEYS
+from vendors import ids
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(HERE, '..', 'data', 'elections')
@@ -104,9 +105,9 @@ def money_block(r, raised_max):
       <div class="el-raised"><b>{usd(r.get("total_raised"))}</b> raised · {usd(r.get("total_spent"))} spent <span class="muted small">through {e(r.get("through") or r.get("latest_report") or "latest report")}</span></div>
       <div class="el-bar" aria-hidden="true"><span class="i" style="width:{w(fi.get('total'))}"></span><span class="o" style="width:{w(org_tot)}"></span><span class="s" style="width:{w(self_tot)}"></span></div>
       <ul class="el-split small"><li><i class="i"></i>{usd(fi.get("total"))} from {fi.get("count") or 0} individuals</li><li><i class="o"></i>{usd(org_tot)} from organizations</li><li><i class="s"></i>{usd(self_tot)} own money{" (incl. " + usd(selfm.get("loans")) + " in loans)" if selfm.get("loans") else ""}</li>{f'<li>{usd(r.get("in_kind"))} of the total is in-kind (goods or services)</li>' if r.get("in_kind") else ""}</ul>
-      <details class="flds"><summary>Every organization donor ({len(top)})</summary>{('<div class="tablewrap"><table class="tx-table el-dt"><thead><tr><th scope="col">Organization</th><th scope="col" class="num">Gave</th></tr></thead><tbody>' + "".join(f'<tr><th scope="row">{e(n)}<small>{e(TYPE.get(t, t or ""))}</small></th><td class="num">{usd(v)}</td></tr>' for (n, t), v in top) + '</tbody></table></div>') if top else '<p class="small muted">None reported.</p>'}
+      <details class="flds"><summary>Every organization donor ({len(top)})</summary>{('<div class="tablewrap"><table class="tx-table el-dt"><thead><tr><th scope="col">Organization</th><th scope="col" class="num">Gave</th></tr></thead><tbody>' + "".join(f'<tr><th scope="row">{e(ids.biz_case(n))}<small>{e(TYPE.get(t, t or ""))}</small></th><td class="num">{usd(v)}</td></tr>' for (n, t), v in top) + '</tbody></table></div>') if top else '<p class="small muted">None reported.</p>'}
         <p class="small muted">Individual donors are counted, not named, on this site.{(" By size: " + band_txt + ".") if band_txt else ""}{f" {inc.get('count', 0)} gave from inside Bay County ({usd(inc.get('total'))}), {outc.get('count', 0)} from outside ({usd(outc.get('total'))})." if inc else ""} Every name is in the <a href="{e(r.get("report_url"))}" target="_blank" rel="noopener">full report</a>.</p></details>
-      {f'<details class="flds"><summary>Where the money went</summary><div class="tablewrap"><table class="tx-table el-dt"><thead><tr><th scope="col">Paid to</th><th scope="col" class="num">Amount</th></tr></thead><tbody>' + "".join(f'<tr><th scope="row">{e(x["payee"])}<small>{e(x.get("purpose") or "")}</small></th><td class="num">{usd(x.get("total"))}</td></tr>' for x in exp) + '</tbody></table></div></details>' if exp else ''}
+      {f'<details class="flds"><summary>Where the money went</summary><div class="tablewrap"><table class="tx-table el-dt"><thead><tr><th scope="col">Paid to</th><th scope="col" class="num">Amount</th></tr></thead><tbody>' + "".join(f'<tr><th scope="row">{e(ids.biz_case(x["payee"]))}<small>{e(x.get("purpose") or "")}</small></th><td class="num">{usd(x.get("total"))}</td></tr>' for x in exp) + '</tbody></table></div></details>' if exp else ''}
       {"".join(f'<p class="small muted">{e(n)}</p>' for n in _notes(r))}
       <p class="small"><a class="src" href="{e(r.get("report_url"))}" target="_blank" rel="noopener">Campaign finance report</a>{f' · <a class="src" href="{e(r["export_url"])}" target="_blank" rel="noopener">Itemized download</a>' if r.get("export_url") else ""}</p>
     </div>'''
