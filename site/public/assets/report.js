@@ -126,6 +126,8 @@ function svgNode(svg, maxW) {
   src.forEach((el, i) => { const d = dst[i]; if (!d || el.tagName === 'svg') return; const cs = getComputedStyle(el);
     if (cs.display === 'none' || cs.visibility === 'hidden') { d.setAttribute('data-x', '1'); return; }
     SVGP.forEach(pr => { const v = cs.getPropertyValue(pr); if (v && v !== 'none' || pr === 'fill' || pr === 'stroke') d.setAttribute(pr, v.startsWith('rgb') ? rgb2hex(v) : v.startsWith('color(') ? srgbHex(v) : v); });
+    // Label halos (a white stroke drawn under the text on screen) print over the letters in the PDF, so labels drop the stroke.
+    if (el.tagName === 'text' || el.tagName === 'tspan') d.setAttribute('stroke', 'none');
     d.removeAttribute('class'); d.removeAttribute('style'); });
   c.querySelectorAll('[data-x]').forEach(x => x.remove());
   const vb = (svg.getAttribute('viewBox') || '').split(/[\s,]+/).map(Number);
@@ -138,7 +140,7 @@ function svgNode(svg, maxW) {
        .replace(/<title>.*?<\/title>/g, '');
   let w = Math.min(maxW, vw * 1.4);
   if (w * vh / vw > PAGE_H * .62) w = PAGE_H * .62 * vw / vh;
-  return {svg: s, width: w, margin: [0, 4, 0, 6]};
+  return {svg: s, width: w, margin: [0, 4, 0, 6], _h: w * vh / vw};
 }
 function bar(frac, color, w = 170, h = 7) {
   return {canvas: [{type: 'rect', x: 0, y: 0, w, h, color: '#EEF2F7', r: 2}, {type: 'rect', x: 0, y: 0, w: Math.max(1, w * Math.min(1, frac)), h, color: color || C.blue, r: 2}], margin: [0, 3, 0, 0]};
@@ -157,7 +159,7 @@ function hbars(el) {
     const sb = !b && r.querySelector('.stackbar');
     return [{text: clean(inline(n)), fontSize: 8}, sb ? stackMini(sb, BW) : bar(b ? pct(b, 'width') : 0, (b && bgOf(b)) || (r.classList.contains('save') ? '#C9CED6' : C.blue), BW), {text: oneLine(clean(inline(v))), fontSize: 8, alignment: 'right', noWrap: true}];
   });
-  return rows.length ? {table: {widths: ['*', BW, 'auto'], body: rows, dontBreakRows: true}, layout: 'noBorders', margin: [0, 2, 0, 8]} : null;
+  return rows.length ? {table: {widths: ['*', BW, 'auto'], body: rows, dontBreakRows: true}, layout: 'noBorders', margin: [0, 2, 0, 8], unbreakable: rows.length <= 14} : null;
 }
 function vbars(el) {
   const items = [...el.querySelectorAll(':scope > .vb')];
@@ -414,6 +416,33 @@ function keepWithNext(body) {
     body.splice(i, j - i, glued);
   }
 }
+// Each top-level heading carries the room it needs at the bottom of a page: itself, a short subtitle and the start of
+// what follows (a few lines, a table's header and first rows, or a whole chart). pdfmake reports unreliable positions
+// for content inside blocks it keeps together, so the test uses only the heading's own position. The number travels in
+// the node id ("hb:<points>:<index>") because pageBreakBefore sees only a few fields of each node.
+function needH(n) {
+  if (!n) return 0;
+  if (n.svg) return (n._h || 200) + 10;
+  if (n.table) return 50;
+  if (n.ul || n.ol || n.columns) return 40;
+  if (n.stack) return needH(n.stack[0]);
+  if (typeof n.text !== 'undefined') { const len = JSON.stringify(n.text).length; return Math.min(3, Math.ceil(len / 110)) * 12 + 6; }
+  return 36;
+}
+function linkHeadings(body) {
+  body.forEach((n, i) => {
+    if (!n.headlineLevel || n.id) return;
+    let need = 22, j = i + 1;
+    while (body[j] && !body[j].headlineLevel && typeof body[j].text !== 'undefined' && !body[j].table && JSON.stringify(body[j].text).length < 300 && j - i < 4) { need += 13; j++; }
+    need += body[j] && body[j].headlineLevel ? 40 : needH(body[j]);
+    n.id = 'hb:' + Math.round(Math.min(need, PAGE_H * .6)) + ':' + i; // ids must be unique
+  });
+}
+function headingBreak(node, after, next) {
+  if (!node.headlineLevel || !next.length || !node.startPosition) return false;
+  const need = +((node.id || '').split(':')[1]) || 60;
+  return (1 - node.startPosition.verticalRatio) * PAGE_H < need;
+}
 function landscapeSections(body) {
   const isHead = n => n.headlineLevel && n.headlineLevel <= 2;
   for (let i = 0; i < body.length; i++) {
@@ -442,6 +471,7 @@ async function compose(orientation) {
   const strip = n => { if (Array.isArray(n)) n.forEach(strip); else if (n && typeof n === 'object') { delete n.headlineLevel; Object.values(n).forEach(strip); } };
   body.forEach(n => { const h = n.headlineLevel; strip(n); if (h) n.headlineLevel = h; });
   keepWithNext(body);
+  linkHeadings(body);
   const date = new Date().toLocaleDateString('en-US', {month: 'long', day: 'numeric', year: 'numeric'});
   const url = location.host + location.pathname.replace(/\/$/, '') + location.search;
   const lg = await logo();
@@ -456,7 +486,7 @@ async function compose(orientation) {
   return {
     pageSize: 'LETTER', pageOrientation: orientation, pageMargins: [40, 58, 40, 52],
     // A heading never ends a page: if what follows it starts on the next page, the heading moves there too.
-    pageBreakBefore: (node, after, next) => !!node.headlineLevel && next.length > 0 && (after.filter(n => !n.headlineLevel).length < 2 || (node.startPosition && node.startPosition.verticalRatio > .86)),
+    pageBreakBefore: headingBreak,
     info: {title: title + ' · BayCounty.me', author: 'BayCounty.me (Flux Labs)', subject: lede, creator: 'BayCounty.me'},
     defaultStyle: {font: 'Roboto', fontSize: 9, color: C.ink, lineHeight: 1.2},
     styles: {h2: {fontSize: 13, bold: true, color: C.navy, margin: [0, 10, 0, 5]}, h3: {fontSize: 10.5, bold: true, color: C.ink, margin: [0, 6, 0, 3]}, h4: {fontSize: 9, bold: true, color: C.ink, margin: [0, 5, 0, 3]}},
