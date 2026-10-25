@@ -15,6 +15,7 @@
 //   GET /api/v1/pages[?path=]           which datasets and endpoints hold each site page's data
 //   GET /api/v1/entities?q=&kind=       find a company, official, candidate, nonprofit, board member or business
 //   GET /api/v1/entities/{id}           one entity's profile and every documented connection (api/_entities.js)
+//   GET /api/v1/budget-compare?gov=&from=&to=&basis=   one government's budget in two fiscal years, line by line (api/_budget.js)
 // Responses carry an ETag (and Last-Modified when the data's date is known); a matching If-None-Match or
 // If-Modified-Since gets 304 Not Modified with no body.
 const crypto = require('crypto');
@@ -163,6 +164,12 @@ function openapi(catalog) {
         description: 'Ids look like kind:key: gov:pc, vendor:dewberry, person:douglas-moore, nonprofit:np-912189932, member:b_082417524d2f, owner:p_386a78b32ad7, business:p20000052616, committee:<slug>. Officials on nonprofit boards, officials\' businesses and shared-owner gifts appear only after an admin checks the match by hand (checked_by_hand). Individual campaign donors are named only when they run a registered business (owner: ids, same name and street address on Sunbiz).',
         parameters: [{name: 'id', in: 'path', required: true, schema: {type: 'string', example: 'vendor:dewberry'}}],
         responses: {200: {description: '{data: {entity, connections: [{relation, label, direction, other: {entity_id, name, kind, page_url}, amount, records, first_date, last_date, detail, source_url, dataset}], counts}}'}, 404: {description: 'Unknown entity'}}}},
+      '/budget-compare': {get: {operationId: 'compareBudgetYears', summary: 'Compare one government\'s budget in two fiscal years: totals, funds, General Fund departments and services (or audited revenue and spending), with dollar and percent changes',
+        description: 'Without gov, lists every government and the years on record (adopted_totals, adopted_detail, actual). With gov, compares two years; from and to default to the latest year with line-by-line detail and the one before it. Each line: {key, name, from, to, change, pct, status: both|added|removed}. Lines are matched across years by department or fund number where the budget gives one, else by name. Data: the budget-years dataset.',
+        parameters: [p('gov', 'Government id: county, schools, pc, pcb, lh, cw, sp, parker, mb'), p('from', 'Earlier fiscal year, e.g. 2025 (the year the fiscal year ends)', {type: 'integer'}), p('to', 'Later fiscal year, e.g. 2026', {type: 'integer'}),
+          p('basis', 'adopted (default): adopted budgets. actual: audited revenue and spending', {type: 'string', enum: ['adopted', 'actual']})],
+        responses: {200: {description: '{government, gov_id, basis, from, to, years, detail_years, totals: [line], sections: {department, fund, service} or {spending, revenue}: [line], history: [{fiscal_year, total, general_fund}], biggest_increase, biggest_decrease, notes, sources: {from, to}} or, without gov, {governments: [...]}'},
+          400: {description: 'A year with no budget on record'}, 404: {description: 'Unknown government, or fewer than two years on record'}}}},
       '/search': {get: {operationId: 'searchSite', summary: 'Search every page on BayCounty.me', parameters: [{name: 'q', in: 'query', required: true, schema: {type: 'string'}}, p('limit', 'Results (default 20, max 100)', {type: 'integer'})], responses: {200: {description: 'Results'}}}},
     },
   };
@@ -190,7 +197,7 @@ module.exports = async (req, res) => {
     if (!parts.length) return res.status(200).json({
       name: 'BayCounty.me API', version: 'v1', updated: catalog.updated, docs: `${SITE}/developers`, openapi: `${SITE}/api/v1/openapi.json`, mcp: `${SITE}/api/mcp`,
       endpoints: {datasets: `${SITE}/api/v1/datasets`, governments: `${SITE}/api/v1/governments`, search: `${SITE}/api/v1/search?q=`,
-        entities: `${SITE}/api/v1/entities?q=`, status: `${SITE}/api/v1/status`, changes: `${SITE}/api/v1/changes?since=`, meetings_calendar: `${SITE}/api/v1/meetings.ics?gov=`},
+        entities: `${SITE}/api/v1/entities?q=`, budget_compare: `${SITE}/api/v1/budget-compare?gov=lh&from=2025&to=2026`, status: `${SITE}/api/v1/status`, changes: `${SITE}/api/v1/changes?since=`, meetings_calendar: `${SITE}/api/v1/meetings.ics?gov=`},
       license: catalog.license, datasets: catalog.datasets.map(d => ({id: d.id, title: d.title, rows: d.rows, url: `${SITE}/api/v1/datasets/${d.id}`}))});
     if (parts[0] === 'openapi.json') return res.status(200).json(openapi(catalog));
     if (parts[0] === 'status') { res.locals.lastModified = null; return res.status(200).json(await status(catalog)); }
@@ -266,6 +273,14 @@ module.exports = async (req, res) => {
       const d = await E.getEntity(req, catalog, decodeURIComponent(parts.slice(1).join('/')));
       info.rows = d.connections.length;
       return res.status(200).json({data: d});
+    }
+    if (parts[0] === 'budget-compare') {
+      const B = require('./_budget');
+      const meta = catalog.datasets.find(d => d.id === 'budget-years');
+      const rows = meta ? (await datasetRows(req, meta)).rows : await load(req, '/downloads/budget-years.json');
+      if (!req.query.gov && !req.query.government) return res.status(200).json({data: B.coverage(rows), note: 'Add ?gov=<gov_id>&from=<year>&to=<year> to compare two years.'});
+      try { const r = B.compare(rows, req.query); info.rows = r.sections ? Object.values(r.sections).reduce((a, s) => a + s.length, 0) : 0; return res.status(200).json({data: r}); }
+      catch (e) { if (e.expose) return res.status(e.status).json({error: e.message, ...e.extra}); throw e; }
     }
     if (parts[0] === 'correspondence') {
       // Published emails between BayCounty.me and officials. Unpublished threads are never returned.

@@ -107,6 +107,7 @@ function run() {
   const notes = Array.isArray(b.notes) ? b.notes : (b.notes ? [b.notes] : []);
   $('beNotes').innerHTML = notes.map(n => `<p>${esc(n)}</p>`).join('') + (b.source_url ? `<p><a class="src" href="${esc(b.source_url)}" target="_blank" rel="noopener">Budget document</a></p>` : '');
   $('beGov').href = '/governments/' + b.slug; $('beGov').textContent = b.short + ' overview →';
+  $('beCmp').href = '/public-money/budget-compare?gov=' + b.gov;
   $('beTitle').textContent = b.short + ' budget';
   bench(b);
 }
@@ -201,7 +202,7 @@ def budget_page(out_dir):
     return f'''<div class="page tax">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Public Money · Budgets</span><h1 id="beTitle">Budget explorer</h1>
     <p class="lede">Open up any local government's FY2026 budget: how much goes into each fund, what the General Fund spends by department, and what each service costs per resident, side by side with the other cities.</p></div>
-    <div class="stamp">{PDF_BTN}<a class="pill" id="beGov" href="/governments">Overview →</a></div></header>
+    <div class="stamp">{PDF_BTN}<a class="pill" id="beGov" href="/governments">Overview →</a><a class="pill" id="beCmp" href="/public-money/budget-compare">Compare years →</a></div></header>
   {city_bar([b['gov'] for b in B], note='All governments shows Bay County\'s budget')}
   <div class="vt-filters mt-f" hidden><label class="vf"><span>Government</span><select id="beG"></select></label></div>
   <div class="kpis" id="beKpis"></div>
