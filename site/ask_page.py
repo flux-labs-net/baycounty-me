@@ -51,6 +51,7 @@ CSS = '''
 .ask-foot{display:flex;flex-direction:column;gap:8px;padding:12px 14px 14px;border-top:1px solid var(--line)}
 .ask-form{display:flex;gap:8px;align-items:flex-end}
 .ask-form textarea{flex:1;resize:none;min-height:48px;max-height:180px;padding:12px 14px;border-radius:14px;border:1px solid var(--line);background:var(--sunken);color:var(--ink);font:400 1rem/1.45 var(--f-body)}
+.ask-form textarea::placeholder{color:var(--faint);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ask-form textarea:focus{outline:none;border-color:var(--blue);box-shadow:var(--ui-ring)}
 .ask-send{flex:none;width:48px;height:48px;border-radius:14px;border:0;background:var(--navy);color:var(--on-navy);display:grid;place-items:center;cursor:pointer}
 .ask-send:disabled{opacity:.45;cursor:default}
@@ -202,7 +203,9 @@ JS = r'''
       if (failed) b.insertAdjacentHTML('beforeend', `<p class="ask-err">${esc(failed)}</p>`);
     } catch (e) {
       msgs.pop(); save();
-      b.innerHTML = `<p class="ask-err">${esc(e.message)}</p>`;
+      // fetch() throws a TypeError ("Load failed" in Safari) when the connection drops, often because the phone left the page
+      const m = e instanceof TypeError ? 'The connection dropped before the answer came back. This can happen if you switch apps or lock your phone while Ask is working. Keep this page open and tap send to try again.' : e.message;
+      b.innerHTML = `<p class="ask-err">${esc(m)}</p>`;
       box.value = q; fit();
     }
     busy = false; send.disabled = false; box.focus({preventScroll: true});
@@ -240,13 +243,13 @@ def ask_page():
       <div class="ask-foot">
         <form class="ask-form" id="askForm">
           <label class="sr" for="askQ">Your question</label>
-          <textarea id="askQ" rows="1" maxlength="600" enterkeyhint="send" placeholder="Ask about Bay County public records"></textarea>
+          <textarea id="askQ" rows="1" maxlength="600" enterkeyhint="send" placeholder="Ask a question"></textarea>
           <button class="ask-send" id="askSend" type="submit" aria-label="Send">{SEND_ICON}</button>
         </form>
         <div class="ask-meta"><span id="askLeft" aria-live="polite"></span><button type="button" id="askNew">New chat</button></div>
       </div>
     </section>
-    <p class="ask-note">Answers are written by AI (Claude, from Anthropic) and can be wrong, so check the linked records before relying on one. BayCounty.me is neutral and doesn't take sides. Your questions aren't saved, but please don't type personal information. <a href="/privacy">Privacy</a></p>
+    <p class="ask-note">Answers are written by AI and can be wrong, so check the linked records before relying on one. BayCounty.me is neutral and doesn't take sides. Your questions aren't saved, but please don't type personal information. <a href="/privacy">Privacy</a></p>
   </div>
 </div>
 <style>{CSS}</style>

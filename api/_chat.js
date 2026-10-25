@@ -10,7 +10,8 @@ const PRICES = {
   'claude-sonnet-5-5': [2, 10, 0.20, 2.5],
   'claude-opus-5-5': [4, 20, 0.20, 5],
 };
-const MAX_ROUNDS = 6;               // tool rounds per question
+const MAX_ROUNDS = 5;               // tool rounds per question
+const MAX_CALLS = 4;                // tool calls run per round (more are sent back unrun, to keep answers quick)
 const MAX_OUTPUT = 8000;            // tokens per model call (thinking counts toward it)
 const MAX_QUESTION = 600;           // characters in the visitor's message
 const MAX_HISTORY = 10;             // earlier messages kept (5 back-and-forths)
@@ -26,6 +27,7 @@ How to answer:
 - If the tools don't have it, say so plainly and suggest where it might be found (a page on the site, or a public records request at ${SITE}/records-request).
 - Link your sources. Use markdown links to the page or source URL given in the tool results (fields such as url, page, source_url, source, report_url). Only use URLs that appear in tool results, or pages on ${SITE}. Name the fiscal year or date for every figure.
 - Link people and organizations to their profile URL from find_entity or get_entity when you have it.
+- Be quick: use as few tool calls as you can, at most a few per step. For rankings and totals, ask query_dataset for the top rows with sort and a small limit (or use government_checkbook / vendor_profile) instead of paging through many rows.
 - Keep answers short and plain: a direct answer first, then a few bullet points or a small table if it helps. No more than about 250 words unless the visitor asks for detail.
 - Fiscal years run October to September and are named for the year they end (FY2026 = Oct 2025 to Sep 2026).
 - Government keys for tools: county, schools, pc (Panama City), pcb (Panama City Beach), lh (Lynn Haven), cw (Callaway), sp (Springfield), parker, mb (Mexico Beach).
@@ -178,8 +180,9 @@ async function answer({client, model, messages, mcpTools, callTool, emit = () =>
       continue;
     }
     convo.push({role: 'assistant', content: msg.content});
-    const results = await Promise.all(calls.map(async b => {
+    const results = await Promise.all(calls.map(async (b, i) => {
       const tool = byName.get(b.name);
+      if (i >= MAX_CALLS) return {type: 'tool_result', tool_use_id: b.id, is_error: true, content: `Not run: only ${MAX_CALLS} tool calls run per step. Answer from what you have, or make fewer, broader calls.`};
       if (!tool) return {type: 'tool_result', tool_use_id: b.id, is_error: true, content: `Unknown tool ${b.name}`};
       const bad = invalidInput(tool, b.input);
       if (bad) return {type: 'tool_result', tool_use_id: b.id, is_error: true, content: JSON.stringify({INVALID_INPUT: bad, input: b.input})};
@@ -196,7 +199,7 @@ async function answer({client, model, messages, mcpTools, callTool, emit = () =>
     }));
     convo.push({role: 'user', content: results});
   }
-  return {text: text.trim(), sources: [...sources].slice(0, 400), usage, cost: costOf(model, usage), tools: used, rounds, status, model};
+  return {text: text.trim(), sources: [...sources].filter(u => text.includes(u)).slice(0, 100), usage, cost: costOf(model, usage), tools: used, rounds, status, model};
 }
 
 module.exports = {answer, cleanHistory, chatTools, invalidInput, collectUrls, costOf, SYSTEM, DEFAULT_MODEL, PRICES, MAX_QUESTION};

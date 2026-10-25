@@ -617,7 +617,7 @@ def privacy_page():
     <li><b>Email alerts.</b> If you sign up, we keep your email address and what you chose to follow, so we can send the emails. Every email has a link to change or stop them. To have your address deleted entirely, email us.</li>
     <li><b>Contact form.</b> Your message, name and email come to us by email so we can answer. They aren't added to any list.</li>
     <li><b>API.</b> Requests to the public API are logged with the caller's IP address for 90 days to stop abuse, then deleted.</li>
-    <li><b>Ask.</b> Questions you type on the <a href="/ask">Ask</a> page are sent to Anthropic's Claude AI to write the answer, along with the public records it looks up. BayCounty.me doesn't save your questions or the answers; it logs only how many were asked (with a scrambled form of your IP address, to enforce limits) and what they cost. Anthropic's handling is covered by its <a href="https://www.anthropic.com/legal/privacy" target="_blank" rel="noopener">privacy policy</a>. Please don't type personal information.</li>
+    <li><b>Ask.</b> Questions you type on the <a href="/ask">Ask</a> page are sent to an AI service to write the answer, along with the public records it looks up. BayCounty.me doesn't save your questions or the answers; it logs only how many were asked (with a scrambled form of your IP address, to enforce limits) and what they cost. Please don't type personal information.</li>
     <li><b>My Address.</b> Address lookups go straight from your browser to Bay County's and FEMA's public map servers. BayCounty.me doesn't receive or store what you look up.</li>
   </ul>
   <h2>The iPhone app</h2>
