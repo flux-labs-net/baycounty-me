@@ -3,6 +3,9 @@
 //        because email security scanners open links before people do.
 //   POST (form) does one action: save (governments to follow), unsubscribe (everything), remove_rule, or
 //        send_link (email a fresh manage link; used when a link has no token, e.g. an older digest).
+//   POST with body List-Unsubscribe=One-Click and ?t= is the one-click unsubscribe that Gmail, Yahoo and Outlook send
+//        from the List-Unsubscribe header (RFC 8058). It comes from the mail provider, so it has no Origin header;
+//        the signed token is what authorizes it.
 // The token is signed with ALERTS_SECRET and tied to the address (_alerts.prefsToken). It doesn't expire, so the
 // link in every email keeps working; changing ALERTS_SECRET invalidates all of them.
 const {GOVS, ALL_SEGMENT, FROM, resend, esc, emailShell, button, sameOrigin, claimConfirmSend, readPrefsToken, prefsUrl, setPrefsProperty, page} = require('./_alerts');
@@ -96,8 +99,14 @@ module.exports = async (req, res) => {
     return html(200, await manageView(raw, p, req.query.m));
   }
   if (req.method !== 'POST') return res.status(405).json({ok: false, error: 'Method not allowed'});
-  if (!sameOrigin(req)) return html(403, page('Not allowed', '<h1>Not allowed</h1><p>Please use the form on BayCounty.me.</p>'));
   const b = typeof req.body === 'string' ? Object.fromEntries(new URLSearchParams(req.body)) : req.body || {};
+  if (b['List-Unsubscribe'] === 'One-Click') {
+    const p = readPrefsToken((req.query && req.query.t) || '');
+    if (!p) return res.status(400).json({ok: false, error: 'bad token'});
+    try { await unsubscribeAll(p.e, KEY()); } catch (e) { console.error('manage: one-click', e.message); return res.status(500).json({ok: false}); }
+    return res.status(200).json({ok: true, unsubscribed: true});
+  }
+  if (!sameOrigin(req)) return html(403, page('Not allowed', '<h1>Not allowed</h1><p>Please use the form on BayCounty.me.</p>'));
   const back = (t, m) => { res.setHeader('Location', `/alerts/manage?t=${enc(t)}&m=${m}`); return res.status(303).end(); };
   if (b.action === 'send_link') {
     const email = String(b.email || '').trim().toLowerCase().slice(0, 200);
@@ -131,3 +140,4 @@ module.exports = async (req, res) => {
   return back(b.t, 'error');
 };
 module.exports.setGovs = setGovs;
+module.exports.unsubscribeAll = unsubscribeAll;

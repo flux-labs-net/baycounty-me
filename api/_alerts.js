@@ -25,6 +25,7 @@ function readToken(tok) {
   try { const p = JSON.parse(Buffer.from(body, 'base64url').toString()); return Date.now() - p.t < 7 * 864e5 ? p : null; } catch (e) { return null; }
 }
 async function resend(path, method, body, key) {
+  if (path === '/emails' && method === 'POST' && body) body = finishEmail(body);
   const r = await fetch('https://api.resend.com' + path, {method, headers: {Authorization: `Bearer ${key}`, 'Content-Type': 'application/json'}, body: body ? JSON.stringify(body) : undefined});
   let j = null; try { j = await r.json(); } catch (e) {}
   return {ok: r.ok, status: r.status, body: j};
@@ -38,6 +39,25 @@ function emailShell(title, inner, footer) {
 <tr><td style="padding-top:20px;padding-bottom:8px;padding-left:24px;padding-right:24px;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:22px;color:#161B24">${inner}</td></tr>
 <tr><td style="padding-top:16px;padding-bottom:20px;padding-left:24px;padding-right:24px;border-top:1px solid #E1E6ED;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:18px;color:#5A6372">${footer}</td></tr>
 </table></td></tr></table></body></html>`;
+}
+// Every email leaves as a full HTML document with a plain-text part. Spam filters (Microsoft and Sophos most of all)
+// score bare HTML fragments and HTML-only mail as spam-like, so a builder that passes a fragment gets the site shell
+// and a footer, and one that passes no text gets text made from its HTML.
+const DEFAULT_FOOTER = 'BayCounty.me puts Bay County, Florida public records in plain view. Built by Flux Labs, Panama City, Florida.';
+function htmlToText(html) {
+  return String(html)
+    .replace(/<(style|script|head)[^>]*>[\s\S]*?<\/\1>/gi, '')
+    .replace(/<a\s[^>]*href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/gi, (m, href, label) => { const l = label.replace(/<[^>]+>/g, '').trim(); return l && l !== href ? `${l} (${href})` : href; })
+    .replace(/<br\s*\/?>/gi, '\n').replace(/<\/(p|div|tr|h[1-6]|li|table)>/gi, '\n')
+    .replace(/<[^>]+>/g, '')
+    .replace(/&nbsp;/g, ' ').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;|&rsquo;|&lsquo;/g, "'").replace(/&amp;/g, '&')
+    .replace(/[ \t]+\n/g, '\n').replace(/\n{3,}/g, '\n\n').trim();
+}
+function finishEmail(body) {
+  const out = {...body};
+  if (out.html && !/<html[\s>]/i.test(out.html)) out.html = emailShell(out.subject || 'BayCounty.me', out.html, DEFAULT_FOOTER);
+  if (!out.text && out.html) out.text = htmlToText(out.html);
+  return out;
 }
 const button = (href, label) => `<table cellpadding="0" cellspacing="0" border="0" style="margin-top:8px;margin-bottom:16px"><tr><td bgcolor="#1E3A76" style="background-color:#1E3A76;border-radius:6px;padding-top:12px;padding-bottom:12px;padding-left:20px;padding-right:20px"><a href="${esc(href)}" style="font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:18px;color:#FFFFFF;text-decoration:none;font-weight:bold">${esc(label)}</a></td></tr></table>`;
 
@@ -109,6 +129,6 @@ function page(title, body) {
 <body><div class="b">${body}</div></body></html>`;
 }
 
-module.exports = {GOVS, ALL_SEGMENT, FROM, SITE, makeToken, readToken, resend, esc, emailShell, button,
+module.exports = {GOVS, ALL_SEGMENT, FROM, SITE, makeToken, readToken, resend, finishEmail, htmlToText, esc, emailShell, button,
   sameOrigin, claimConfirmSend, emailHash, prefsToken, readPrefsToken, prefsUrl, COOLDOWN_MIN,
   PREFS_PROP, PREFS_LINK_TEMPLATE, ensurePrefsProperty, setPrefsProperty, page};

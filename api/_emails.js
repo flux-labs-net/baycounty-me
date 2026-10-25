@@ -29,9 +29,11 @@ function manageLinkEmail(link) {
 
 // Admin sign-in link (admin.js).
 function adminSignInEmail(link) {
-  return {subject: 'Sign in to BayCounty.me admin',
+  const subject = 'Sign in to BayCounty.me admin';
+  return {subject,
     text: `Sign in to the BayCounty.me admin:\n\n${link}\n\nThe link works once and expires in 15 minutes. If you didn't ask for it, ignore this email.`,
-    html: `<p>Sign in to the BayCounty.me admin:</p><p><a href="${link}" style="display:inline-block;padding:10px 18px;background:#1E3A76;color:#fff;border-radius:8px;text-decoration:none">Sign in</a></p><p style="color:#5A6372;font-size:13px">The link works once and expires in 15 minutes. If you didn't ask for it, ignore this email.</p>`};
+    html: emailShell(subject, `<p style="${P}">Sign in to the BayCounty.me admin:</p>${button(link, 'Sign in')}<p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#5A6372">The link works once and expires in 15 minutes. If you didn't ask for it, ignore this email.</p>`,
+      'You’re getting this because someone asked to sign in to the BayCounty.me admin with this address.')};
 }
 
 // Weekly digest for one government (digest.js), from one entry of /data/digest.json. Returns null when there's

@@ -56,7 +56,7 @@ function compose(email, groups) {
 
 async function sendOne(key, o) {
   const r = await resend('/emails', 'POST', {from: FROM, to: [o.email], reply_to: 'hello@fluxlabs.net', subject: o.subject, html: o.html, text: o.text,
-    headers: {'List-Unsubscribe': `<${prefsUrl(o.email)}>`}}, key);
+    headers: {'List-Unsubscribe': `<${prefsUrl(o.email)}>`, 'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click'}}, key);
   await db.q(`update alerts.outbox set status = $2, sent_at = case when $2 = 'sent' then now() end, error = $3 where id = $1`,
     [o.id, r.ok ? 'sent' : 'failed', r.ok ? null : JSON.stringify(r.body).slice(0, 500)]);
   return r.ok;
