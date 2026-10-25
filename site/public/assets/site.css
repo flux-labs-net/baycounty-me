@@ -804,8 +804,10 @@ a.ui-person:hover b{color:var(--blue)}
 :root .tx-top.ui-hero{border-bottom:0;flex-direction:row;align-items:flex-start;padding-bottom:4px}
 .ui-hd{display:flex;flex-direction:column;min-width:0}
 /* the kicker above the title: the menu section in its tone */
-:root .ui-hero .eyebrow.ui-kick{display:inline-flex;align-items:center;gap:6px;min-height:24px;font:600 .84rem/1.3 var(--f-body);letter-spacing:0;text-transform:none;color:var(--muted)}
+:root .ui-hero .eyebrow.ui-kick{display:block;min-height:24px;text-wrap:pretty;font:600 .84rem/1.3 var(--f-body);letter-spacing:0;text-transform:none;color:var(--muted)}
 :root .ui-hero .ui-kick a{color:inherit;text-decoration:none}
+/* one inline line that wraps like text (a flex row put the link and the rest in two columns) */
+:root .ui-hero .ui-kick .ico{vertical-align:-3px;margin-right:6px}
 :root .ui-hero .ui-kick a:hover{color:var(--ink);text-decoration:underline}
 .ui-kick.k-blue .ico{color:var(--blue)}.ui-kick.k-teal .ico{color:var(--teal)}.ui-kick.k-amber .ico{color:var(--gold)}.ui-kick.k-salmon .ico{color:var(--salmon)}
 .ui-hero .ui-hd > p:not(.lede),.ui-hero .ui-hd > .small{margin:10px 0 0;font-size:.84rem;color:var(--muted);text-wrap:pretty}
