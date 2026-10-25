@@ -268,6 +268,8 @@ a.ui-person:hover b{color:var(--blue)}
 @media (max-width:560px){.ui:not(.gov-page) > .ui-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}.ui:not(.gov-page) > .ui-tiles small{-webkit-line-clamp:1}}
 /* phones: the badge sits above the title instead of beside it, so the text gets the full width */
 @media (max-width:560px){
+  .ui-vc{flex-direction:column;gap:6px}
+  .ui-vc .ui-pill{min-width:0}
   .ui-id{flex-direction:column;gap:10px}
   :root .ui-badge,:root .tx-top.ui-hero .ui-badge{width:44px;height:44px;border-radius:13px;font-size:22px;margin-top:0}
 }

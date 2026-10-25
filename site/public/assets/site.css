@@ -588,7 +588,16 @@ select:not([multiple]):not([size])::-ms-expand{display:none}
   table.stk td:empty{display:none}
   table.stk tbody th[data-label],table.stk tbody td:first-child{font-weight:500}
   table.stk tr.stk-span > *{padding-left:0 !important;font-weight:600}
+  table.stk td::before,table.stk tbody th::before,table.stk tfoot th::before{overflow-wrap:break-word;hyphens:auto}
+  table.stk .badge{display:inline-block;white-space:nowrap;margin-right:4px;padding:0 8px;font-size:.72rem;line-height:1.6}
+  table.stk td:not(.up):not(.down)::after{content:none !important}
   pre{white-space:pre-wrap;overflow-wrap:anywhere}
+}
+/* Phones: the label sits on its own line above the value, so the value gets the full card width */
+@media (max-width:480px){
+  table.stk td,table.stk tbody th,table.stk tfoot th{padding:5px 0 !important;overflow-wrap:break-word}
+  table.stk td::before,table.stk tbody th::before,table.stk tfoot th::before{position:static;display:block;width:auto;margin-bottom:1px;font-weight:500}
+  table.stk tr{padding:12px 14px}
 }
 
 /* Shared page pieces (first built for the government pages): header with the picker card, section tiles, icon stat cards,
@@ -861,6 +870,8 @@ a.ui-person:hover b{color:var(--blue)}
 @media (max-width:560px){.ui:not(.gov-page) > .ui-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}.ui:not(.gov-page) > .ui-tiles small{-webkit-line-clamp:1}}
 /* phones: the badge sits above the title instead of beside it, so the text gets the full width */
 @media (max-width:560px){
+  .ui-vc{flex-direction:column;gap:6px}
+  .ui-vc .ui-pill{min-width:0}
   .ui-id{flex-direction:column;gap:10px}
   :root .ui-badge,:root .tx-top.ui-hero .ui-badge{width:44px;height:44px;border-radius:13px;font-size:22px;margin-top:0}
 }
