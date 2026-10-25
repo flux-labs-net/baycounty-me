@@ -6649,12 +6649,15 @@
      "values": [
       "Business",
       "Business owner",
+      "Candidate",
       "Committee or PAC",
       "Company",
+      "Department leader",
+      "Elected official",
+      "Former official",
       "Government",
       "Nonprofit",
-      "Nonprofit board member",
-      "Official or candidate"
+      "Nonprofit board member"
      ]
     },
     {
@@ -6734,7 +6737,7 @@
    "id": "entity-connections",
    "title": "Connections between people, companies and organizations",
    "description": "Every documented connection between two entities in entity-profiles, totalled per pair and kind: a government paid a payee, an organization gave to an official's or candidate's campaign, an official voted on a company's contracts, a person sits on a nonprofit's board or runs a business, a nonprofit gave a grant, two payees share a project. Each row has its source. Individual campaign donors are included only when they run a registered business (owner-gifts); officials' board seats and businesses are added by the API once checked by hand.",
-   "rows": 15986,
+   "rows": 15771,
    "columns": [
     {
      "name": "link_id",
@@ -6794,6 +6797,7 @@
      "type": "string",
      "values": [
       "board",
+      "candidate",
       "gift",
       "grant",
       "paid",
@@ -6811,6 +6815,7 @@
      "values": [
       "gave a grant to",
       "gave to the campaign of",
+      "is a candidate for office in",
       "is the same organization as",
       "paid",
       "runs",

@@ -85,3 +85,23 @@ test('a board member or business officer confirmed as an official shows once, as
   assert.equal(allan.amount, 500, 'keeps the pay from the filing');
   assert.equal(allan.first_date, '2025');
 });
+
+test('each person has one row per government, with every role folded in', async () => {
+  const links = JSON.parse(fs.readFileSync(path.join(PUB, 'downloads', 'entity-connections.json'), 'utf8'));
+  const seen = new Map();
+  for (const l of links.filter(x => ['serves', 'served', 'candidate'].includes(x.relation))) {
+    const k = l.from_id + '|' + l.to_id;
+    assert.ok(!seen.has(k), `${l.from_name} is listed twice for ${l.to_name}: "${seen.get(k)}" and "${l.detail}"`);
+    seen.set(k, l.detail);
+  }
+  const hamre = links.find(l => l.from_id === 'person:cindy-hamre' && l.to_id === 'gov:sp');
+  if (hamre) {
+    assert.equal(hamre.relation, 'serves');
+    assert.match(hamre.detail, /Ward 4 \(2022–now\)/);
+    assert.match(hamre.detail, /Running again in 2026/);
+    assert.doesNotMatch(hamre.detail, /springfield/);  // no lowercased place names
+  }
+  const r = await E().getEntity({}, catalog(), 'gov:sp');
+  const people = r.connections.filter(c => c.other.kind === 'person');
+  assert.ok(people.length && people.every(c => c.other.kind_label && c.other.kind_label !== 'Official or candidate'), 'people on a government page say what they are');
+});
