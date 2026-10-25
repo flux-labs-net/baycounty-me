@@ -27,7 +27,7 @@ ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
 sys.path.insert(0, HERE)
 sys.path.insert(0, os.path.join(ROOT, 'data', 'entities'))
 from counties import county  # noqa: E402
-from ids import sunbiz_person  # noqa: E402
+from ids import sunbiz_person, sunbiz_url  # noqa: E402
 
 CORPORATE_OFFICER_MIN = 25   # active entities
 AGENT_SERVICE_MIN = 20       # entities as registered agent
@@ -430,8 +430,7 @@ def public_rows(res, county_key='bay'):
             'sunbiz_status': ({'A': 'Active', 'I': 'Inactive'}.get(e['status'], e['status']) if e else None),
             'sunbiz_filing_type': e['filing_type'] if e else None, 'sunbiz_principal_city': e['city'].title() if e else None,
             'match_method': g['match_method'], 'county': county_key,
-            'source_url': ('https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResultDetail?inquirytype=DocumentNumber&directionType=Initial&searchTerm='
-                           + e['doc_number']) if e else g.get('report_url'),
+            'source_url': sunbiz_url(e['name'], e['doc_number']) if e else g.get('report_url'),
             'campaign_report_url': g.get('report_url'),
         })
     rows.sort(key=lambda r: (r['candidate'], r['contributor']))
