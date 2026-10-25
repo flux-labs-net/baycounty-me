@@ -168,6 +168,7 @@ async function route(req, res, action, me) {
       return {ok: true};
     }
     case 'audit': return {audit: await q('select at, admin, action, key_id, detail from apiadmin.audit order by id desc limit 100')};
+    case 'summary': return require('./_summary').summary();
     case 'ingestion': return require('./_health').report();
     // ---------- accounting-system files (ingest schema) ----------
     case 'ledger': return require('./_ledger').report({status: String(Q.status || 'pending'), source: String(Q.source || ''), raw: String(Q.raw || '')});

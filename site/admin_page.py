@@ -1,4 +1,4 @@
-"""Admin section (/admin): API keys, throttles, request logs, analytics, ingestion health (incl. accounting-system files) and email previews.
+"""Admin section (/admin): a To do page, review queues, outreach, data and email health, and API keys, grouped in one menu (MENU below).
 
 A standalone page (no site menu, not in search or the sitemap, noindex). Everything it shows comes from
 /api/admin after an emailed sign-in link; the page itself holds no data.
@@ -11,10 +11,6 @@ CSS = r"""
 :root[data-theme="dark"]{--bar:#5F92E0;--ok:#5BC98E;--warn:#F2B661;--bad:#FF8C82}
 body{display:block}
 .ad{max-width:1180px;margin:0 auto;padding:20px 16px 64px}
-.ad-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding-bottom:14px;border-bottom:1px solid var(--line);margin-bottom:18px}
-.ad-top h1{font:600 1.15rem var(--f-display);margin:0;display:flex;align-items:center;gap:8px}
-.ad-top h1 span{font:500 .72rem var(--f-body);color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:2px 8px}
-.ad-who{margin-left:auto;display:flex;align-items:center;gap:10px;color:var(--muted);font-size:.86rem}
 .tabs{display:flex;gap:4px;flex-wrap:wrap;margin:0 0 18px}
 .tabs button{border:1px solid transparent;background:none;color:var(--muted);font:500 .9rem var(--f-body);padding:8px 14px;border-radius:8px;cursor:pointer}
 .tabs button[aria-selected="true"]{background:var(--surface);border-color:var(--line);color:var(--ink)}
@@ -144,10 +140,144 @@ details.ag summary{cursor:pointer;color:var(--blue)} details.ag pre{white-space:
 .bk-note{margin:0} .bk-msg .banner{margin:0}
 .at td.pk,.at th.pk{width:28px;padding-right:0} .at .pk input{width:16px;height:16px;margin:2px 0 0;cursor:pointer}
 [hidden]{display:none!important}
+
+/* layout + menu: side menu from 960px, top bar and full-screen menu below */
+.ad{max-width:1320px}
+.ad-shell{display:grid;grid-template-columns:236px minmax(0,1fr);gap:32px;align-items:start}
+.ad-main{min-width:0}
+.ad-h{font:600 1.45rem var(--f-display);letter-spacing:-.015em;margin:4px 0 16px}
+.an{position:sticky;top:16px;max-height:calc(100vh - 32px);overflow-y:auto;display:flex;flex-direction:column;gap:2px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 10px}
+.an-head{display:flex;align-items:center;gap:10px;padding:0 6px 12px}
+.an-logo{width:32px;height:32px;flex-shrink:0;border-radius:9px;background:var(--navy);color:var(--surface);display:inline-flex;align-items:center;justify-content:center;font:600 .78rem var(--f-body)}
+.an-brand{display:flex;flex-direction:column;line-height:1.2;flex:1}
+.an-brand b{font-size:.9rem} .an-brand span{font-size:.76rem;color:var(--muted)}
+.an-btn{width:44px;height:44px;flex-shrink:0;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
+.an-x,.an-top{display:none}
+.an-find{display:flex;align-items:center;gap:8px;min-height:38px;padding:0 10px;border:1px solid var(--line);border-radius:8px;color:var(--muted);margin:0 0 8px;background:var(--bg)}
+.an-find input{border:0;outline:0;background:none;font:400 .86rem var(--f-body);color:var(--ink);width:100%;min-width:0}
+.an a{display:flex;align-items:center;gap:10px;min-height:34px;padding:0 10px;border-radius:8px;color:var(--ink);text-decoration:none;font:400 .88rem var(--f-body)}
+.an a span{flex:1;min-width:0}
+.an a:hover{background:var(--sunken)}
+.an a[aria-current="page"]{background:color-mix(in srgb,var(--blue) 14%,transparent);color:var(--navy);font-weight:600}
+.an-todo{font-weight:500!important}
+.an-total{font:600 .72rem var(--f-body);font-style:normal;background:var(--navy);color:var(--surface);border-radius:999px;padding:1px 8px}
+.an-n{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.an-n.on{background:var(--gold)}
+.an-g{display:flex;flex-direction:column;gap:2px}
+.an-h{display:flex;align-items:center;gap:8px;font:600 .68rem var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:12px 10px 3px}
+.an-teal svg{color:var(--teal)} .an-blue svg{color:var(--blue)} .an-amber svg{color:var(--gold)} .an-gray svg{color:var(--muted)}
+.an-items{display:flex;flex-direction:column;gap:2px}
+.an-items a{padding-left:32px}
+.an a.an-hide{display:none}
+.an-foot{margin-top:14px;border-top:1px solid var(--line);padding-top:10px;display:flex;flex-direction:column;gap:2px}
+.an-foot svg{color:var(--muted)}
+.an-who{display:flex;align-items:center;gap:8px;padding:8px 10px 2px;font-size:.78rem;color:var(--muted)}
+.an-who span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis}
+.td{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px}
+.td a{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:6px;text-decoration:none;color:var(--ink)}
+.td a:hover{border-color:var(--blue)}
+.td .k{display:flex;align-items:center;justify-content:space-between;font:600 .7rem var(--f-body);text-transform:uppercase;letter-spacing:.06em}
+.td .k b{font:600 1.5rem var(--f-display);letter-spacing:0;color:var(--ink);font-variant-numeric:tabular-nums}
+.td .t{font-weight:600} .td .d{font-size:.84rem;color:var(--muted)} .td .go{font-size:.84rem;color:var(--blue);margin-top:auto;padding-top:4px}
+.td .teal{color:var(--teal)} .td .blue{color:var(--blue)} .td .amber{color:var(--salmon)}
+@media (max-width:959px){
+  .ad{padding-top:0}
+  .an-top{display:flex;position:sticky;top:0;z-index:30;align-items:center;gap:10px;margin:0 -16px 14px;padding:8px 8px 8px 16px;min-height:60px;box-sizing:border-box;background:var(--surface);border-bottom:1px solid var(--line)}
+  .an-cur{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.15}
+  .an-cur span{font-size:.72rem;color:var(--muted)} .an-cur b{font-size:.95rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .ad-shell{display:block}
+  .an{display:none;position:fixed;inset:0;z-index:60;max-height:none;border:0;border-radius:0;padding:12px 16px 24px;background:var(--bg)}
+  .an.open{display:flex}
+  .an-x{display:inline-flex}
+  .an a{min-height:44px}
+  .an a.an-todo,.an a.an-todo[aria-current="page"],.an a.an-todo:hover{background:var(--navy);color:var(--surface);border-radius:12px;margin-bottom:4px}
+  .an-todo .an-total{background:var(--surface);color:var(--navy)}
+  .an-items{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+  .an-items a{padding:0 12px;border:1px solid var(--line);background:var(--surface);font-size:.84rem;line-height:1.2}
+  .an-h{padding:12px 2px 6px}
+  .ad-h{font-size:1.25rem;margin:0 0 12px}
+  body.an-lock{overflow:hidden}
+}
+/* phones: nothing in a pane may push the page sideways; wide tables scroll inside their own box */
+@media (max-width:600px){
+  .pane .row > .sel,.pane .row > input.sel,.pane .row > select.sel{min-width:0!important;flex:1 1 150px;max-width:100%}
+  .pane .row > .h2.grow{flex-basis:100%}
+  .ac-snd{min-width:0}
+  .td{grid-template-columns:1fr}
+}
 """
 
 
+# The admin menu: (group, tone, icon, [(tab, label, count key or None)]). A tab is a <section id="tab-NAME" class="pane">.
+# Count keys match api/_summary.js; an item with waiting work shows a dot.
+MENU = [
+    ('Review', 'teal', 'shield', [('owners', 'Business owners', 'owners'), ('limits', 'Gifts over the limit', 'limits'),
+                                  ('boards', 'Nonprofit boards', 'boards'), ('ties', 'Business ties', 'ties'),
+                                  ('accounting', 'Accounting files', 'accounting')]),
+    ('Outreach', 'blue', 'send', [('compose', 'Write to officials', None), ('correspondence', 'Conversations', 'replies'),
+                                  ('records', 'Records requests', 'records')]),
+    ('Data & email', 'amber', 'db', [('ingestion', 'Data health', 'syncs'), ('agendas', 'Agendas', 'agendas'),
+                                     ('sent', 'Sent mail', None), ('emails', 'Email templates', None)]),
+    ('API', 'gray', 'key', [('keys', 'Keys', None), ('analytics', 'Usage & request log', None), ('settings', 'Limits & activity', None)]),
+]
+TITLES = {'todo': 'To do', **{t: label for _, _, _, items in MENU for t, label, _ in items}}
+
+_ICONS = {
+    'todo': '<path d="M9 6h11M9 12h11M9 18h11M4 6l1 1 2-2M4 12l1 1 2-2M4 18l1 1 2-2"/>',
+    'shield': '<path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/>',
+    'send': '<path d="M21 3L10 14"/><path d="M21 3l-7 18-4-7-7-4z"/>',
+    'db': '<ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/>',
+    'key': '<circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M16 7l3 3"/>',
+    'out': '<path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 01-1 1H5a1 1 0 01-1-1V7a1 1 0 011-1h5"/>',
+    'menu': '<path d="M4 7h16M4 12h16M4 17h16"/>',
+    'close': '<path d="M6 6l12 12M18 6L6 18"/>',
+    'search': '<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/>',
+}
+
+
+def _svg(name, size=18):
+    return (f'<svg width="{size}" height="{size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" '
+            f'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{_ICONS[name]}</svg>')
+
+
+def _esc(t):
+    return t.replace('&', '&amp;')
+
+
+def shell_html():
+    """Top bar (phones), the grouped menu (side menu on wide screens, full-screen sheet on phones) and the page title."""
+    groups = []
+    for group, tone, icon, items in MENU:
+        links = ''.join(f'<a href="#{t}" data-tab="{t}"{f" data-count={k}" if k else ""}><span>{_esc(label)}</span><i class="an-n"></i></a>'
+                        for t, label, k in items)
+        groups.append(f'<div class="an-g"><div class="an-h an-{tone}">{_svg(icon, 14)}{_esc(group)}</div><div class="an-items">{links}</div></div>')
+    return f"""    <header class="an-top">
+      <span class="an-logo" aria-hidden="true">BC</span>
+      <div class="an-cur"><span>Admin</span><b id="an-cur">To do</b></div>
+      <button class="an-btn" id="an-open" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="an-nav">{_svg('menu', 20)}</button>
+    </header>
+    <div class="ad-shell">
+    <nav class="an" id="an-nav" aria-label="Admin">
+      <div class="an-head">
+        <span class="an-logo" aria-hidden="true">BC</span>
+        <div class="an-brand"><b>BayCounty.me</b><span>Admin</span></div>
+        <button class="an-btn an-x" id="an-close" type="button" aria-label="Close menu">{_svg('close', 20)}</button>
+      </div>
+      <label class="an-find">{_svg('search', 16)}<input type="search" id="an-find" placeholder="Jump to…" aria-label="Jump to a section" autocomplete="off"></label>
+      <a href="#todo" data-tab="todo" class="an-todo">{_svg('todo')}<span>To do</span><i class="an-total" id="an-total" hidden></i></a>
+      {''.join(groups)}
+      <div class="an-foot">
+        <a href="/finance" target="_blank" rel="noopener"><span>Finance workspace</span>{_svg('out', 14)}</a>
+        <a href="/" target="_blank" rel="noopener"><span>Public site</span>{_svg('out', 14)}</a>
+        <div class="an-who"><span id="who"></span><button class="linkish" id="signout" type="button">Sign out</button></div>
+      </div>
+    </nav>
+    <main class="ad-main">
+    <h1 class="ad-h" id="ad-h">To do</h1>"""
+
+
 def admin_page(out_dir):
+    shell = shell_html()
     html = f'''<!doctype html>
 <html lang="en">
 <head>
@@ -175,34 +305,20 @@ def admin_page(out_dir):
   </section>
 
   <div id="app" hidden>
-    <header class="ad-top">
-      <h1>BayCounty.me admin <span>API</span></h1>
-      <div class="ad-who"><span id="who"></span><button class="btn" id="signout" type="button">Sign out</button></div>
-    </header>
-    <div class="tabs" role="tablist">
-      <button role="tab" data-tab="keys" aria-selected="true">API keys</button>
-      <button role="tab" data-tab="analytics" aria-selected="false">Analytics</button>
-      <button role="tab" data-tab="logs" aria-selected="false">Request log</button>
-      <button role="tab" data-tab="settings" aria-selected="false">Throttles &amp; settings</button>
-      <button role="tab" data-tab="ingestion" aria-selected="false">Ingestion</button>
-      <button role="tab" data-tab="agendas" aria-selected="false">Agendas</button>
-      <button role="tab" data-tab="sent" aria-selected="false">Sent mail</button>
-      <button role="tab" data-tab="emails" aria-selected="false">Emails</button>
-      <button role="tab" data-tab="compose" aria-selected="false">Write to officials</button>
-      <button role="tab" data-tab="correspondence" aria-selected="false">Correspondence</button>
-      <button role="tab" data-tab="records" aria-selected="false">Records requests</button>
-      <button role="tab" data-tab="owners" aria-selected="false">Business owners</button>
-      <button role="tab" data-tab="boards" aria-selected="false">Nonprofit boards</button>
-      <button role="tab" data-tab="ties" aria-selected="false">Business ties</button>
-    </div>
+{shell}
+    <section id="tab-todo" class="pane">
+      <div id="td-banner"></div>
+      <div class="td" id="td-list"><p class="empty">Loading…</p></div>
+      <p class="muted small" id="td-quiet" style="margin:14px 0 0"></p>
+    </section>
 
-    <section id="tab-keys" role="tabpanel">
-      <div class="row" style="margin-bottom:12px"><p class="muted small grow" style="margin:0">Each key belongs to one person or app. Limits apply per key; requests without a key use the keyless limits in Throttles &amp; settings.</p>
+    <section id="tab-keys" class="pane" hidden>
+      <div class="row" style="margin-bottom:12px"><p class="muted small grow" style="margin:0">Each key belongs to one person or app. Limits apply per key; requests without a key use the keyless limits in Limits &amp; activity.</p>
         <button class="btn primary" id="new-key" type="button">New key</button></div>
       <div class="tw"><table class="at" id="keys-table"><thead><tr><th>Name</th><th>Assigned to</th><th>Key</th><th class="num">Per minute</th><th class="num">Per day</th><th>Status</th><th class="num">24 hours</th><th class="num">30 days</th><th>Last used</th></tr></thead><tbody></tbody></table></div>
     </section>
 
-    <section id="tab-analytics" role="tabpanel" hidden>
+    <section id="tab-analytics" class="pane" hidden>
       <div class="row" style="margin-bottom:12px">
         <select class="sel" id="an-scope" aria-label="Traffic to show"></select>
         <select class="sel" id="an-days" aria-label="Date range"><option value="7">Last 7 days</option><option value="30" selected>Last 30 days</option><option value="90">Last 90 days</option></select>
@@ -210,9 +326,7 @@ def admin_page(out_dir):
       <div class="tiles" id="an-tiles"></div>
       <div class="card"><div class="row" style="margin-bottom:6px"><b class="grow">Requests per day</b><span class="muted small">Central time</span></div><div class="chart" id="an-chart"></div></div>
       <div class="lists" id="an-lists"></div>
-    </section>
-
-    <section id="tab-logs" role="tabpanel" hidden>
+      <h2 class="h2" id="logs" style="margin-top:28px">Request log</h2>
       <div class="row" style="margin-bottom:12px">
         <select class="sel" id="lg-scope" aria-label="Traffic to show"></select>
         <input class="sel mono" id="lg-ip" placeholder="Filter by IP or range" aria-label="Filter by IP address or range" style="min-width:200px">
@@ -223,7 +337,7 @@ def admin_page(out_dir):
       <div class="row" style="margin-top:12px"><button class="btn" id="lg-more" type="button" hidden>Load older</button></div>
     </section>
 
-    <section id="tab-settings" role="tabpanel" hidden>
+    <section id="tab-settings" class="pane" hidden>
       <form id="settings-form" class="card" style="display:flex;flex-direction:column;gap:14px">
         <div><b>Requests without a key</b><p class="muted small" style="margin:4px 0 0">Counted per connection. Leave a box empty for no limit.</p></div>
         <div class="grid2"><label class="f">Per minute<input type="number" min="0" name="anon_per_minute"></label><label class="f">Per day<input type="number" min="0" name="anon_per_day"></label></div>
@@ -246,7 +360,7 @@ def admin_page(out_dir):
       <div class="tw"><table class="at" id="audit-table"><thead><tr><th>Time</th><th>Who</th><th>What</th><th>Details</th></tr></thead><tbody></tbody></table></div>
     </section>
 
-    <section id="tab-ingestion" role="tabpanel" hidden>
+    <section id="tab-ingestion" class="pane" hidden>
       <div class="row" style="margin-bottom:12px"><p class="muted small grow" style="margin:0">Each database sync logs one run per dataset. Admins (ADMIN_EMAILS) are emailed when a workflow fails and by the daily check below.</p>
         <a class="btn" href="https://github.com/jeremymcs/baycounty-me/actions" target="_blank" rel="noopener">Workflow runs</a><button class="btn" id="in-refresh" type="button">Refresh</button></div>
       <div id="in-banner"></div>
@@ -258,30 +372,13 @@ def admin_page(out_dir):
           <div><b>Daily check</b> <span class="muted">(failed or stuck loads, no sync in 36 hours, failed alert emails, unprocessed alert backlog): an email only when something is wrong.</span></div>
           <div><b>Weekly digest</b> <span class="muted">drafts or failures: the digest reviewer.</span></div></div></div>
       </div>
-      <div class="row ac-head"><h2 class="h2 grow" style="margin:0">Accounting system files</h2>
-        <button class="btn" id="ac-norm-all" type="button">Normalize all new files</button><button class="btn" id="ac-refresh" type="button">Refresh</button></div>
-      <p class="muted small" style="margin:0 0 12px">City and county ERP exports (New World, BS&amp;A, Springbrook) emailed to each government’s address at ingest.baycounty.me. Only senders on a source’s list are accepted. Every file also goes to its government’s private /finance workspace as an unreviewed import. Check registers are normalized into rows here; approved rows go to the public ledger. Budget and bank files stay in /finance only.</p>
-      <div id="ac-banner"></div>
-      <div class="tiles" id="ac-tiles"></div>
-      <h3 class="h3">Sources</h3>
-      <div class="tw"><table class="at" id="ac-sources" data-tt="off"><thead><tr><th>Government</th><th>System</th><th>Inbound address</th><th>/finance</th><th>Allowed senders</th><th class="num">Files</th><th>Last file</th><th class="num">Pending</th><th>Auto-normalize</th></tr></thead><tbody></tbody></table></div>
-      <h3 class="h3">Files</h3>
-      <div class="tw"><table class="at" id="ac-files" data-tt="off"><thead><tr><th>Received</th><th>Government</th><th>File</th><th>From</th><th>Status</th><th class="num">Rows</th><th>Review</th><th>/finance</th><th></th></tr></thead><tbody></tbody></table></div>
-      <div class="row ac-qhead"><h3 class="h3 grow" style="margin:0">Review queue <span class="muted small" id="ac-qscope" style="font-weight:400"></span></h3>
-        <select class="sel" id="ac-status" aria-label="Review status"><option value="pending" selected>Pending</option><option value="approved">Approved</option><option value="rejected">Rejected</option><option value="all">All</option></select>
-        <select class="sel" id="ac-source" aria-label="Government"><option value="">All governments</option></select></div>
-      <div class="row ac-bulk" id="ac-bulk" hidden><span class="small" id="ac-picked">0 selected</span>
-        <input class="sel grow" id="ac-note" maxlength="500" placeholder="Note (required to reject)" aria-label="Review note">
-        <button class="btn danger" id="ac-reject" type="button">Reject selected</button><button class="btn primary" id="ac-approve" type="button">Approve selected</button></div>
-      <div class="tw"><table class="at" id="ac-queue" data-tt="off"><thead><tr><th><input type="checkbox" id="ac-all" aria-label="Select all"></th><th>Date</th><th>Government</th><th>Fund</th><th>Account</th><th>Vendor</th><th>Description</th><th class="num">Amount</th><th>Status</th></tr></thead><tbody></tbody></table></div>
-
       <h2 class="h2">Datasets</h2>
       <div class="tw"><table class="at" id="in-table"><thead><tr><th>Dataset</th><th>Status</th><th>Last run</th><th>Last success</th><th class="num">Rows</th><th class="num">Added</th><th class="num">Removed</th><th>Notes</th></tr></thead><tbody></tbody></table></div>
       <h2 class="h2">Failures, last 14 days</h2>
       <div class="tw"><table class="at" id="in-fail"><thead><tr><th>Time</th><th>Dataset</th><th>Error</th><th>Commit</th></tr></thead><tbody></tbody></table></div>
     </section>
 
-    <section id="tab-agendas" role="tabpanel" hidden>
+    <section id="tab-agendas" class="pane" hidden>
       <div class="row" style="margin-bottom:12px"><p class="muted small grow" style="margin:0">Notice emails (CivicPlus Notify Me and similar) arrive at ingest@baycounty.me. Each one triggers a rescan of that government’s agenda system; every agenda, packet and minutes file is downloaded and hashed. A changed file is a new version.</p>
         <a class="btn" href="https://github.com/jeremymcs/baycounty-me/actions/workflows/watch-agendas.yml" target="_blank" rel="noopener">Workflow runs</a>
         <button class="btn" id="ag-run" type="button">Run now</button><button class="btn" id="ag-refresh" type="button">Refresh</button></div>
@@ -302,7 +399,7 @@ def admin_page(out_dir):
       <div class="tw"><table class="at" id="ag-runs" data-tt="off"><thead><tr><th>Started</th><th>Status</th><th class="num">Files checked</th><th>Summary</th></tr></thead><tbody></tbody></table></div>
     </section>
 
-    <section id="tab-sent" role="tabpanel" hidden>
+    <section id="tab-sent" class="pane" hidden>
       <div class="row" style="margin-bottom:12px"><p class="muted small grow" style="margin:0">Every email sent through Resend (alerts, digests, sign-in links, agenda summaries) and its latest delivery status. Resend reports only the most recent event for each email. Open and click tracking are off for baycounty.me, so delivered is the best status you’ll see.</p>
         <a class="btn" href="https://resend.com/emails" target="_blank" rel="noopener">Resend dashboard</a><button class="btn" id="se-refresh" type="button">Refresh</button></div>
       <div id="se-banner"></div>
@@ -319,7 +416,7 @@ def admin_page(out_dir):
       <p class="muted small" id="se-foot"></p>
     </section>
 
-    <section id="tab-emails" role="tabpanel" hidden>
+    <section id="tab-emails" class="pane" hidden>
       <div class="em">
         <div>
           <div class="em-list" id="em-list"></div>
@@ -343,8 +440,8 @@ def admin_page(out_dir):
       </div>
     </section>
 
-    <section id="tab-compose" role="tabpanel" hidden>
-      <p class="muted small" style="margin:0 0 12px">Each person gets their own email from hello@baycounty.me, addressed to them alone, so no one can reply-all to other board members (Sunshine Law). Replies come back to hello@ and show up under Correspondence. Nothing is public until you publish it.</p>
+    <section id="tab-compose" class="pane" hidden>
+      <p class="muted small" style="margin:0 0 12px">Each person gets their own email from hello@baycounty.me, addressed to them alone, so no one can reply-all to other board members (Sunshine Law). Replies come back to hello@ and show up under Conversations. Nothing is public until you publish it.</p>
       <div class="co">
         <div>
           <div class="row" style="margin-bottom:8px">
@@ -365,7 +462,7 @@ def admin_page(out_dir):
       </div>
     </section>
 
-    <section id="tab-correspondence" role="tabpanel" hidden>
+    <section id="tab-correspondence" class="pane" hidden>
       <div class="tiles" id="cr-tiles"></div>
       <div id="cr-unmatched"></div>
       <div class="row" style="gap:8px;flex-wrap:wrap;margin:6px 0 8px">
@@ -381,8 +478,8 @@ def admin_page(out_dir):
       <p class="muted small" style="margin-top:8px">The public page is <a href="/correspondence" target="_blank" rel="noopener">baycounty.me/correspondence</a>. It shows only published threads, by official name and seat, without email addresses.</p>
     </section>
 
-    <section id="tab-records" role="tabpanel" hidden>
-      <p class="muted small" style="margin:0 0 12px">Public records requests (Chapter 119) for the budget years the site is missing, one draft per government. Nothing is sent until you press Send on a request. Each goes to one address from hello@baycounty.me, and the reply shows up under Correspondence.</p>
+    <section id="tab-records" class="pane" hidden>
+      <p class="muted small" style="margin:0 0 12px">Public records requests (Chapter 119) for the budget years the site is missing, one draft per government. Nothing is sent until you press Send on a request. Each goes to one address from hello@baycounty.me, and the reply shows up under Conversations.</p>
       <div class="tiles" id="rr-tiles"></div>
       <div class="co">
         <div class="co-list" id="rr-list"><p class="empty">Loading…</p></div>
@@ -390,7 +487,7 @@ def admin_page(out_dir):
       </div>
     </section>
 
-    <section id="tab-ties" role="tabpanel" hidden>
+    <section id="tab-ties" class="pane" hidden>
       <div class="banner"><div><b>Check each match before confirming it.</b> <span class="small muted">Officials, department leaders and candidates paired by name with people in the state corporate file (Sunbiz). A name match can be a different person: open the Sunbiz record and check the address, middle initial or business before you confirm. Confirming publishes that official's businesses and links on <a href="/connections/business-ties" target="_blank" rel="noopener">/connections/business-ties</a>; rejecting or setting it back to unreviewed takes them down. Other people on those businesses are never named publicly.</span></div></div>
       <div class="tiles" id="bt-tiles"></div>
       <div class="row" style="gap:8px;flex-wrap:wrap;margin:18px 0 8px">
@@ -402,7 +499,7 @@ def admin_page(out_dir):
       <div class="tw"><table class="at" id="bt-table" data-tt="off"><thead><tr><th class="pk"><input type="checkbox" data-bk-all aria-label="Select all shown"></th><th>Official</th><th>Sunbiz person</th><th>Businesses</th><th>Links</th><th>Review</th></tr></thead><tbody></tbody></table></div>
     </section>
 
-    <section id="tab-owners" role="tabpanel" hidden>
+    <section id="tab-owners" class="pane" hidden>
       <div class="banner"><div><b>Private research. Do not publish names from this tab.</b> <span class="small muted">Officers, managers and registered agents from the state corporate file (Sunbiz), grouped into people by name and address, and business campaign gifts matched to those businesses. Public pages show business names only. Mark a group confirmed after checking it on Sunbiz; nothing here is published automatically. Giving through several companies is legal in Florida when each company is a real contributor.</span></div></div>
       <div class="tiles" id="ow-tiles"></div>
       <div class="row" style="gap:8px;flex-wrap:wrap;margin:18px 0 8px">
@@ -411,12 +508,6 @@ def admin_page(out_dir):
       </div>
       <div class="tw"><table class="at" id="ow-groups" data-tt="off"><thead><tr><th class="pk"><input type="checkbox" data-bk-all aria-label="Select all shown"></th><th>Candidate</th><th>Businesses</th><th>Linked by</th><th class="num">Checks</th><th class="num">Total</th><th>Review</th></tr></thead><tbody></tbody></table></div>
       <div class="row" style="gap:8px;flex-wrap:wrap;margin:24px 0 8px">
-        <h2 class="h2 grow" style="margin:0">Gifts over the $1,000 limit</h2>
-        <select class="sel" id="ol-status" aria-label="Review status"><option value="">Any review status</option><option value="unreviewed">Unreviewed</option><option value="confirmed">Confirmed (open)</option><option value="resolved">Resolved</option><option value="rejected">Rejected</option></select>
-      </div>
-      <p class="small muted" style="margin:0 0 8px">One organization giving one candidate more than $1,000 in the same election, as the campaign reported it, net of refunds. The primary and general count separately. <b>Confirmed</b> publishes it as an open case. <b>Resolved</b> publishes it with your explanation and source (for example a reporting error by the campaign or the Supervisor of Elections, an amended report, a refund, a check designated for the general, or an Elections Commission ruling). <b>Rejected</b> keeps it private (not the same contributor, or a data mistake on our side).</p>
-      <div class="tw"><table class="at" id="ol-cases" data-tt="off"><thead><tr><th class="pk"><input type="checkbox" data-bk-all aria-label="Select all shown"></th><th>Candidate</th><th>Contributor</th><th>Gifts as reported</th><th class="num">Net</th><th>Review</th></tr></thead><tbody></tbody></table></div>
-      <div class="row" style="gap:8px;flex-wrap:wrap;margin:24px 0 8px">
         <h2 class="h2 grow" style="margin:0">Look up a person or business</h2>
         <input class="sel" id="ow-q" type="search" placeholder="Last name first, business name or Sunbiz document number" aria-label="Search" style="min-width:320px">
       </div>
@@ -424,7 +515,35 @@ def admin_page(out_dir):
       <div id="ow-detail"></div>
     </section>
 
-    <section id="tab-boards" role="tabpanel" hidden>
+    <section id="tab-limits" class="pane" hidden>
+      <div class="row" style="gap:8px;flex-wrap:wrap;margin:0 0 8px">
+        <h2 class="h2 grow" style="margin:0">Gifts over the $1,000 limit</h2>
+        <select class="sel" id="ol-status" aria-label="Review status"><option value="">Any review status</option><option value="unreviewed">Unreviewed</option><option value="confirmed">Confirmed (open)</option><option value="resolved">Resolved</option><option value="rejected">Rejected</option></select>
+      </div>
+      <p class="small muted" style="margin:0 0 8px">One organization giving one candidate more than $1,000 in the same election, as the campaign reported it, net of refunds. The primary and general count separately. <b>Confirmed</b> publishes it as an open case. <b>Resolved</b> publishes it with your explanation and source (for example a reporting error by the campaign or the Supervisor of Elections, an amended report, a refund, a check designated for the general, or an Elections Commission ruling). <b>Rejected</b> keeps it private (not the same contributor, or a data mistake on our side).</p>
+      <div class="tw"><table class="at" id="ol-cases" data-tt="off"><thead><tr><th class="pk"><input type="checkbox" data-bk-all aria-label="Select all shown"></th><th>Candidate</th><th>Contributor</th><th>Gifts as reported</th><th class="num">Net</th><th>Review</th></tr></thead><tbody></tbody></table></div>
+    </section>
+
+    <section id="tab-accounting" class="pane" hidden>
+      <div class="row" style="margin-bottom:12px"><span class="grow"></span>
+        <button class="btn" id="ac-norm-all" type="button">Normalize all new files</button><button class="btn" id="ac-refresh" type="button">Refresh</button></div>
+      <p class="muted small" style="margin:0 0 12px">City and county ERP exports (New World, BS&amp;A, Springbrook) emailed to each government’s address at ingest.baycounty.me. Only senders on a source’s list are accepted. Every file also goes to its government’s private /finance workspace as an unreviewed import. Check registers are normalized into rows here; approved rows go to the public ledger. Budget and bank files stay in /finance only.</p>
+      <div id="ac-banner"></div>
+      <div class="tiles" id="ac-tiles"></div>
+      <h3 class="h3">Sources</h3>
+      <div class="tw"><table class="at" id="ac-sources" data-tt="off"><thead><tr><th>Government</th><th>System</th><th>Inbound address</th><th>/finance</th><th>Allowed senders</th><th class="num">Files</th><th>Last file</th><th class="num">Pending</th><th>Auto-normalize</th></tr></thead><tbody></tbody></table></div>
+      <h3 class="h3">Files</h3>
+      <div class="tw"><table class="at" id="ac-files" data-tt="off"><thead><tr><th>Received</th><th>Government</th><th>File</th><th>From</th><th>Status</th><th class="num">Rows</th><th>Review</th><th>/finance</th><th></th></tr></thead><tbody></tbody></table></div>
+      <div class="row ac-qhead"><h3 class="h3 grow" style="margin:0">Review queue <span class="muted small" id="ac-qscope" style="font-weight:400"></span></h3>
+        <select class="sel" id="ac-status" aria-label="Review status"><option value="pending" selected>Pending</option><option value="approved">Approved</option><option value="rejected">Rejected</option><option value="all">All</option></select>
+        <select class="sel" id="ac-source" aria-label="Government"><option value="">All governments</option></select></div>
+      <div class="row ac-bulk" id="ac-bulk" hidden><span class="small" id="ac-picked">0 selected</span>
+        <input class="sel grow" id="ac-note" maxlength="500" placeholder="Note (required to reject)" aria-label="Review note">
+        <button class="btn danger" id="ac-reject" type="button">Reject selected</button><button class="btn primary" id="ac-approve" type="button">Approve selected</button></div>
+      <div class="tw"><table class="at" id="ac-queue" data-tt="off"><thead><tr><th><input type="checkbox" id="ac-all" aria-label="Select all"></th><th>Date</th><th>Government</th><th>Fund</th><th>Account</th><th>Vendor</th><th>Description</th><th class="num">Amount</th><th>Status</th></tr></thead><tbody></tbody></table></div>
+    </section>
+
+    <section id="tab-boards" class="pane" hidden>
       <div class="banner"><div><b>Board members are public; the links on this tab are not.</b> <span class="small muted">Officers, directors and trustees of every county nonprofit, from IRS 990 returns (2019 on), 990-N postcards and state corporate filings (Sunbiz), grouped into people by name, are listed on the public Nonprofits page. The official name matches and Sunbiz business links here are leads: check the filing before confirming. Only officials you mark confirmed are tagged as officials on the public page.</span></div></div>
       <div class="tiles" id="bd-tiles"></div>
       <div class="row" style="gap:8px;flex-wrap:wrap;margin:18px 0 8px">
@@ -444,6 +563,7 @@ def admin_page(out_dir):
       <div id="bd-results"></div>
       <div id="bd-detail"></div>
     </section>
+    </main>
   </div>
 </div>
 
