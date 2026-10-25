@@ -85,7 +85,7 @@ def connections_gifts():
     for d in D['don']:
         o = D['off'][d['o']]
         out.append({'donor': d['dn'], 'donor_type': d['ty'], 'official': o['n'], 'office': o['off'], 'official_gov_id': o['gid'] or None,
-                    'candidate_2026': o['cand'], 'sits_on': [D['payers'][p]['n'] for p in o['gp']] or None,
+                    'candidate_2026': bool(o['cand'] and not o.get('yr')), 'past_campaign_year': o.get('yr'), 'sits_on': [D['payers'][p]['n'] for p in o['gp']] or None,
                     'amount': d['a'], 'gifts': d['n'], 'dates': d['date'] or None, 'payee_entity_id': d['e'], 'match_confidence': d['cf'],
                     'report_url': D['urls'][d['u']] if d.get('u') is not None else None, 'as_of': D.get('as_of')})
     return out

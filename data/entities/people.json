@@ -1,6 +1,6 @@
 {
- "about": "Elected officials, department leaders and 2026 local candidates named in the site's datasets, one id per person. Names are matched on first and last name with common nicknames (Doug = Douglas, Chris = Christopher, Dave = David ...), ignoring middle initials, titles and notes in parentheses; \"(D2)\" style suffixes become the district field. People who appear under more than one government are listed in multi_government for checking. No other people are included.",
- "count": 201,
+ "about": "Elected officials, department leaders, 2026 local candidates and local candidates since 2016 named in the site's datasets, one id per person. Names are matched on first and last name with common nicknames (Doug = Douglas, Chris = Christopher, Dave = David ...), ignoring middle initials, titles and notes in parentheses; \"(D2)\" style suffixes become the district field. People who appear under more than one government are listed in multi_government for checking. No other people are included.",
+ "count": 329,
  "people": [
   {
    "id": "adrian-welle",
@@ -25,6 +25,14 @@
      "source": "votes"
     },
     {
+     "role": "2022 candidate: Mexico Beach Council, Group 4",
+     "gov_id": "mb",
+     "office": "Mexico Beach Council, Group 4",
+     "year": 2022,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
      "role": "former council member, Group 4",
      "gov_id": "mb",
      "seat": "Group 4",
@@ -44,6 +52,38 @@
     "mb"
    ],
    "roles": [
+    {
+     "role": "2023 candidate: Mexico Beach Mayor",
+     "gov_id": "mb",
+     "office": "Mexico Beach Mayor",
+     "year": 2023,
+     "outcome": "lost",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2021 candidate: Mexico Beach Mayor",
+     "gov_id": "mb",
+     "office": "Mexico Beach Mayor",
+     "year": 2021,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2019 candidate: Mexico Beach Mayor",
+     "gov_id": "mb",
+     "office": "Mexico Beach Mayor",
+     "year": 2019,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2017 candidate: Mexico Beach Mayor",
+     "gov_id": "mb",
+     "office": "Mexico Beach Mayor",
+     "year": 2017,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
     {
      "role": "former mayor",
      "gov_id": "mb",
@@ -106,6 +146,14 @@
      "source": "campaign"
     },
     {
+     "role": "2025 candidate: Panama City Mayor",
+     "gov_id": "pc",
+     "office": "Panama City Mayor",
+     "year": 2025,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
      "role": "Mayor",
      "gov_id": "pc",
      "seat": "Mayor",
@@ -138,10 +186,32 @@
    ]
   },
   {
+   "id": "amy-baker",
+   "name": "Amy Baker",
+   "aliases": [
+    "Amy Baker"
+   ],
+   "district": null,
+   "gov_ids": [
+    "tax_collector"
+   ],
+   "roles": [
+    {
+     "role": "2016 candidate: Tax Collector",
+     "gov_id": "tax_collector",
+     "office": "Tax Collector",
+     "year": 2016,
+     "outcome": "lost",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
    "id": "andrew-kelly",
    "name": "Andrew Kelly",
    "aliases": [
-    "Andrew Kelly"
+    "Andrew Kelly",
+    "Andrew M Kelly"
    ],
    "district": null,
    "gov_ids": [
@@ -170,11 +240,56 @@
      "source": "campaign"
     },
     {
+     "role": "2025 candidate: Parker Mayor",
+     "gov_id": "parker",
+     "office": "Parker Mayor",
+     "year": 2025,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2023 candidate: Parker Mayor",
+     "gov_id": "parker",
+     "office": "Parker Mayor",
+     "year": 2023,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2021 candidate: Parker Mayor",
+     "gov_id": "parker",
+     "office": "Parker Mayor",
+     "year": 2021,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
      "role": "Mayor",
      "gov_id": "parker",
      "seat": "Mayor",
      "years": "since 2021",
      "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "andy-husar",
+   "name": "Andy Husar",
+   "aliases": [
+    "Andy Husar"
+   ],
+   "district": null,
+   "gov_ids": [
+    "sheriff"
+   ],
+   "roles": [
+    {
+     "role": "2024 candidate: Sheriff",
+     "gov_id": "sheriff",
+     "office": "Sheriff",
+     "year": 2024,
+     "outcome": "lost",
+     "source": "campaign_history"
     }
    ]
   },
@@ -211,6 +326,14 @@
      "source": "campaign"
     },
     {
+     "role": "2022 candidate: School Board, District 2",
+     "gov_id": "schools",
+     "office": "School Board, District 2",
+     "year": 2022,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
      "role": "School board member, District 2",
      "gov_id": "schools",
      "seat": "District 2",
@@ -223,13 +346,22 @@
    "id": "antonius-barnes",
    "name": "Antonius Barnes",
    "aliases": [
-    "Antonius Barnes"
+    "Antonius Barnes",
+    "Antonius G. Barnes"
    ],
    "district": null,
    "gov_ids": [
     "lh"
    ],
    "roles": [
+    {
+     "role": "2019 candidate: Lynn Haven Mayor",
+     "gov_id": "lh",
+     "office": "Lynn Haven Mayor",
+     "year": 2019,
+     "outcome": "withdrew",
+     "source": "campaign_history"
+    },
     {
      "role": "former city commissioner, Seat 2",
      "gov_id": "lh",
@@ -243,13 +375,22 @@
    "id": "april-gibson",
    "name": "April Gibson",
    "aliases": [
-    "April Gibson"
+    "April Gibson",
+    "April L. Gibson"
    ],
    "district": null,
    "gov_ids": [
     "parker"
    ],
    "roles": [
+    {
+     "role": "2021 candidate: Parker Council, Seat 3",
+     "gov_id": "parker",
+     "office": "Parker Council, Seat 3",
+     "year": 2021,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
     {
      "role": "former council member, Seat 3",
      "gov_id": "parker",
@@ -296,6 +437,27 @@
    ]
   },
   {
+   "id": "beth-mclean",
+   "name": "Beth McLean",
+   "aliases": [
+    "Beth McLean"
+   ],
+   "district": null,
+   "gov_ids": [
+    "sp"
+   ],
+   "roles": [
+    {
+     "role": "2018 candidate: Springfield Commission, Ward 3",
+     "gov_id": "sp",
+     "office": "Springfield Commission, Ward 3",
+     "year": 2018,
+     "outcome": "lost",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
    "id": "beth-strobel",
    "name": "Beth Strobel",
    "aliases": [
@@ -314,16 +476,54 @@
    ]
   },
   {
+   "id": "bill-busch",
+   "name": "Bill Busch",
+   "aliases": [
+    "Bill Busch"
+   ],
+   "district": null,
+   "gov_ids": [
+    "county"
+   ],
+   "roles": [
+    {
+     "role": "2020 candidate: Bay County Commission, District 4",
+     "gov_id": "county",
+     "office": "Bay County Commission, District 4",
+     "year": 2020,
+     "outcome": "did not qualify",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
    "id": "bill-husfelt",
    "name": "Bill Husfelt",
    "aliases": [
-    "Bill Husfelt"
+    "Bill Husfelt",
+    "William Husfelt"
    ],
    "district": null,
    "gov_ids": [
     "schools"
    ],
    "roles": [
+    {
+     "role": "2020 candidate: Superintendent of Schools",
+     "gov_id": "schools",
+     "office": "Superintendent of Schools",
+     "year": 2020,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2016 candidate: Superintendent of Schools",
+     "gov_id": "schools",
+     "office": "Superintendent of Schools",
+     "year": 2016,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
     {
      "role": "former superintendent",
      "gov_id": "schools",
@@ -358,6 +558,80 @@
      "role": "officeholder: Clerk of Circuit Court & Comptroller",
      "gov_id": "clerk",
      "source": "campaign"
+    },
+    {
+     "role": "2024 candidate: Clerk of Court and Comptroller",
+     "gov_id": "clerk",
+     "office": "Clerk of Court and Comptroller",
+     "year": 2024,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2020 candidate: Clerk of Court and Comptroller",
+     "gov_id": "clerk",
+     "office": "Clerk of Court and Comptroller",
+     "year": 2020,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2016 candidate: Clerk of Court and Comptroller",
+     "gov_id": "clerk",
+     "office": "Clerk of Court and Comptroller",
+     "year": 2016,
+     "outcome": "won",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
+   "id": "bill-mcglothlin",
+   "name": "Bill McGlothlin",
+   "aliases": [
+    "Bill McGlothlin"
+   ],
+   "district": null,
+   "gov_ids": [
+    "mb"
+   ],
+   "roles": [
+    {
+     "role": "2019 candidate: Mexico Beach Council, Group 2",
+     "gov_id": "mb",
+     "office": "Mexico Beach Council, Group 2",
+     "year": 2019,
+     "outcome": "lost",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2017 candidate: Mexico Beach Council, Group 2",
+     "gov_id": "mb",
+     "office": "Mexico Beach Council, Group 2",
+     "year": 2017,
+     "outcome": "won",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
+   "id": "bill-musgrove",
+   "name": "Bill Musgrove",
+   "aliases": [
+    "Bill Musgrove"
+   ],
+   "district": null,
+   "gov_ids": [
+    "lake_powell_cdd"
+   ],
+   "roles": [
+    {
+     "role": "2016 candidate: Lake Powell Community Development District, Seat 1",
+     "gov_id": "lake_powell_cdd",
+     "office": "Lake Powell Community Development District, Seat 1",
+     "year": 2016,
+     "outcome": "won",
+     "source": "campaign_history"
     }
    ]
   },
@@ -373,11 +647,48 @@
    ],
    "roles": [
     {
+     "role": "2023 candidate: Panama City Commission, Ward 3",
+     "gov_id": "pc",
+     "office": "Panama City Commission, Ward 3",
+     "year": 2023,
+     "outcome": "lost",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2019 candidate: Panama City Commission, Ward 3",
+     "gov_id": "pc",
+     "office": "Panama City Commission, Ward 3",
+     "year": 2019,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
      "role": "former city commissioner, Ward 3",
      "gov_id": "pc",
      "seat": "Ward 3",
      "years": "until 2023",
      "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "bob-fletcher",
+   "name": "Bob Fletcher",
+   "aliases": [
+    "Bob Fletcher"
+   ],
+   "district": null,
+   "gov_ids": [
+    "lake_powell_cdd"
+   ],
+   "roles": [
+    {
+     "role": "2018 candidate: Lake Powell Community Development District, Seat 5",
+     "gov_id": "lake_powell_cdd",
+     "office": "Lake Powell Community Development District, Seat 5",
+     "year": 2018,
+     "outcome": "lost",
+     "source": "campaign_history"
     }
    ]
   },
@@ -441,6 +752,30 @@
      "source": "campaign"
     },
     {
+     "role": "2024 candidate: Callaway Commission, Ward 3",
+     "gov_id": "cw",
+     "office": "Callaway Commission, Ward 3",
+     "year": 2024,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2020 candidate: Callaway Commission, Ward 3",
+     "gov_id": "cw",
+     "office": "Callaway Commission, Ward 3",
+     "year": 2020,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2016 candidate: Callaway Mayor",
+     "gov_id": "cw",
+     "office": "Callaway Mayor",
+     "year": 2016,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
      "role": "former mayor",
      "gov_id": "cw",
      "seat": "Mayor",
@@ -460,6 +795,27 @@
      "seat": "Ward 3",
      "years": "since 2020",
      "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "bob-schultz",
+   "name": "Bob Schultz",
+   "aliases": [
+    "Bob Schultz"
+   ],
+   "district": null,
+   "gov_ids": [
+    "lh"
+   ],
+   "roles": [
+    {
+     "role": "2019 candidate: Lynn Haven Commission, Seat 1",
+     "gov_id": "lh",
+     "office": "Lynn Haven Commission, Seat 1",
+     "year": 2019,
+     "outcome": "lost",
+     "source": "campaign_history"
     }
    ]
   },
@@ -519,13 +875,38 @@
    "id": "bobby-pollock",
    "name": "Bobby Pollock",
    "aliases": [
-    "Bobby Pollock"
+    "Bobby Pollock",
+    "Robert Pollock"
    ],
    "district": null,
    "gov_ids": [
     "mb"
    ],
    "roles": [
+    {
+     "role": "2023 candidate: Mexico Beach Council, Group 3",
+     "gov_id": "mb",
+     "office": "Mexico Beach Council, Group 3",
+     "year": 2023,
+     "outcome": "lost",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2021 candidate: Mexico Beach Council, Group 3",
+     "gov_id": "mb",
+     "office": "Mexico Beach Council, Group 3",
+     "year": 2021,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2019 candidate: Mexico Beach Council, Group 3",
+     "gov_id": "mb",
+     "office": "Mexico Beach Council, Group 3",
+     "year": 2019,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
     {
      "role": "former council member, Group 3",
      "gov_id": "mb",
@@ -543,15 +924,94 @@
    ],
    "district": null,
    "gov_ids": [
+    "county",
     "lh"
    ],
    "roles": [
+    {
+     "role": "2024 candidate: Bay County Commission, District 1",
+     "gov_id": "county",
+     "office": "Bay County Commission, District 1",
+     "year": 2024,
+     "outcome": "withdrew",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2019 candidate: Lynn Haven Commission, Seat 1",
+     "gov_id": "lh",
+     "office": "Lynn Haven Commission, Seat 1",
+     "year": 2019,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2016 candidate: Bay County Commission, District 1",
+     "gov_id": "county",
+     "office": "Bay County Commission, District 1",
+     "year": 2016,
+     "outcome": "lost",
+     "source": "campaign_history"
+    },
     {
      "role": "former city commissioner, Seat 1",
      "gov_id": "lh",
      "seat": "Seat 1",
      "years": "2019–2023",
      "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "brandon-caldwell",
+   "name": "Brandon Caldwell",
+   "aliases": [
+    "Brandon Caldwell"
+   ],
+   "district": null,
+   "gov_ids": [
+    "beach_mosquito",
+    "pcb"
+   ],
+   "roles": [
+    {
+     "role": "2024 candidate: Beach Mosquito Control District, Seat 2",
+     "gov_id": "beach_mosquito",
+     "office": "Beach Mosquito Control District, Seat 2",
+     "year": 2024,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2020 candidate: Beach Mosquito Control District, Seat 3",
+     "gov_id": "beach_mosquito",
+     "office": "Beach Mosquito Control District, Seat 3",
+     "year": 2020,
+     "outcome": "lost",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2016 candidate: Panama City Beach Mayor",
+     "gov_id": "pcb",
+     "office": "Panama City Beach Mayor",
+     "year": 2016,
+     "outcome": "withdrew",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2016 candidate: Panama City Beach Mayor",
+     "gov_id": "pcb",
+     "office": "Panama City Beach Mayor",
+     "year": 2016,
+     "outcome": "did not qualify",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2016 candidate: Beach Mosquito Control District, Seat 3",
+     "gov_id": "beach_mosquito",
+     "office": "Beach Mosquito Control District, Seat 3",
+     "year": 2016,
+     "outcome": "won",
+     "source": "campaign_history"
     }
    ]
   },
@@ -581,6 +1041,27 @@
    ]
   },
   {
+   "id": "brenda-lewis-williams",
+   "name": "Brenda Lewis-Williams",
+   "aliases": [
+    "Brenda Lewis-Williams"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pc"
+   ],
+   "roles": [
+    {
+     "role": "2023 candidate: Panama City Mayor",
+     "gov_id": "pc",
+     "office": "Panama City Mayor",
+     "year": 2023,
+     "outcome": "lost",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
    "id": "brenda-ruthven",
    "name": "Brenda Ruthven",
    "aliases": [
@@ -592,11 +1073,48 @@
    ],
    "roles": [
     {
+     "role": "2022 candidate: School Board, District 2",
+     "gov_id": "schools",
+     "office": "School Board, District 2",
+     "year": 2022,
+     "outcome": "withdrew",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2020 candidate: School Board, District 2",
+     "gov_id": "schools",
+     "office": "School Board, District 2",
+     "year": 2020,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
      "role": "former school board member, District 2",
      "gov_id": "schools",
      "seat": "District 2",
      "years": "2020–2022",
      "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "brian-dick",
+   "name": "Brian Dick",
+   "aliases": [
+    "Brian Dick"
+   ],
+   "district": null,
+   "gov_ids": [
+    "lh"
+   ],
+   "roles": [
+    {
+     "role": "2021 candidate: Lynn Haven Commission, Seat 4",
+     "gov_id": "lh",
+     "office": "Lynn Haven Commission, Seat 4",
+     "year": 2021,
+     "outcome": "lost",
+     "source": "campaign_history"
     }
    ]
   },
@@ -651,11 +1169,49 @@
      "source": "campaign"
     },
     {
+     "role": "2023 candidate: Panama City Commission, Ward 3",
+     "gov_id": "pc",
+     "office": "Panama City Commission, Ward 3",
+     "year": 2023,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
      "role": "City commissioner, Ward 3",
      "gov_id": "pc",
      "seat": "Ward 3",
      "years": "since 2023",
      "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "brian-gray",
+   "name": "Brian Gray",
+   "aliases": [
+    "Brian Gray",
+    "Brian Lee Gray"
+   ],
+   "district": null,
+   "gov_ids": [
+    "lh"
+   ],
+   "roles": [
+    {
+     "role": "2023 candidate: Lynn Haven Commission, Seat 1",
+     "gov_id": "lh",
+     "office": "Lynn Haven Commission, Seat 1",
+     "year": 2023,
+     "outcome": "lost",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2021 candidate: Lynn Haven Commission, Seat 4",
+     "gov_id": "lh",
+     "office": "Lynn Haven Commission, Seat 4",
+     "year": 2021,
+     "outcome": "withdrew",
+     "source": "campaign_history"
     }
    ]
   },
@@ -676,9 +1232,152 @@
      "source": "finance_2026"
     },
     {
+     "role": "2016 candidate: Bay County Commission, District 5",
+     "gov_id": "county",
+     "office": "Bay County Commission, District 5",
+     "year": 2016,
+     "outcome": "lost",
+     "source": "campaign_history"
+    },
+    {
      "role": "2026 candidate: Bay County Commission, District 4",
      "gov_id": "county",
      "source": "candidates_2026"
+    }
+   ]
+  },
+  {
+   "id": "bruce-lang",
+   "name": "Bruce Lang",
+   "aliases": [
+    "Bruce Lang"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pc"
+   ],
+   "roles": [
+    {
+     "role": "2023 candidate: Panama City Commission, Ward 3",
+     "gov_id": "pc",
+     "office": "Panama City Commission, Ward 3",
+     "year": 2023,
+     "outcome": "lost",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
+   "id": "burnie-thompson",
+   "name": "Burnie Thompson",
+   "aliases": [
+    "Burnie Thompson"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pcb"
+   ],
+   "roles": [
+    {
+     "role": "2018 candidate: Panama City Beach Council, Ward 3",
+     "gov_id": "pcb",
+     "office": "Panama City Beach Council, Ward 3",
+     "year": 2018,
+     "outcome": "lost",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
+   "id": "calvin-chester",
+   "name": "Calvin Chester",
+   "aliases": [
+    "Calvin Chester"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pcb"
+   ],
+   "roles": [
+    {
+     "role": "2016 candidate: Panama City Beach Mayor",
+     "gov_id": "pcb",
+     "office": "Panama City Beach Mayor",
+     "year": 2016,
+     "outcome": "lost",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
+   "id": "calvin-starlin",
+   "name": "Calvin Starlin",
+   "aliases": [
+    "Calvin Starlin"
+   ],
+   "district": null,
+   "gov_ids": [
+    "lake_powell_cdd"
+   ],
+   "roles": [
+    {
+     "role": "2018 candidate: Lake Powell Community Development District, Seat 5",
+     "gov_id": "lake_powell_cdd",
+     "office": "Lake Powell Community Development District, Seat 5",
+     "year": 2018,
+     "outcome": "won",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
+   "id": "cameron-fuqua",
+   "name": "Cameron Fuqua",
+   "aliases": [
+    "Cameron Fuqua",
+    "Cameron Knox Fuqua"
+   ],
+   "district": null,
+   "gov_ids": [
+    "parker"
+   ],
+   "roles": [
+    {
+     "role": "2023 candidate: Parker Council, Seat 2",
+     "gov_id": "parker",
+     "office": "Parker Council, Seat 2",
+     "year": 2023,
+     "outcome": "lost",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2023 candidate: Parker Council, Seat 4",
+     "gov_id": "parker",
+     "office": "Parker Council, Seat 4",
+     "year": 2023,
+     "outcome": "withdrew",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
+   "id": "capt-james-pic",
+   "name": "Capt. James Pic",
+   "aliases": [
+    "Capt. James Pic"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pc"
+   ],
+   "roles": [
+    {
+     "role": "2017 candidate: Panama City Mayor",
+     "gov_id": "pc",
+     "office": "Panama City Mayor",
+     "year": 2017,
+     "outcome": "withdrew",
+     "source": "campaign_history"
     }
    ]
   },
@@ -699,6 +1398,22 @@
      "source": "finance_2026"
     },
     {
+     "role": "2022 candidate: Springfield Mayor",
+     "gov_id": "sp",
+     "office": "Springfield Mayor",
+     "year": 2022,
+     "outcome": "lost",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2016 candidate: Springfield Commission, Ward 1",
+     "gov_id": "sp",
+     "office": "Springfield Commission, Ward 1",
+     "year": 2016,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
      "role": "2026 candidate: City of Springfield Mayor",
      "gov_id": "sp",
      "source": "candidates_2026"
@@ -709,6 +1424,27 @@
      "seat": "Ward 1",
      "years": "2016–2023",
      "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "carl-sauls",
+   "name": "Carl Sauls",
+   "aliases": [
+    "Carl Sauls"
+   ],
+   "district": null,
+   "gov_ids": [
+    "cw"
+   ],
+   "roles": [
+    {
+     "role": "2020 candidate: Callaway Mayor",
+     "gov_id": "cw",
+     "office": "Callaway Mayor",
+     "year": 2020,
+     "outcome": "lost",
+     "source": "campaign_history"
     }
    ]
   },
@@ -773,6 +1509,48 @@
      "role": "Chief Administrative Deputy",
      "gov_id": "soe",
      "source": "salaries"
+    }
+   ]
+  },
+  {
+   "id": "cherie-crim",
+   "name": "Cherie Crim",
+   "aliases": [
+    "Cherie Crim"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pcb"
+   ],
+   "roles": [
+    {
+     "role": "2020 candidate: Panama City Beach Council, Ward 4",
+     "gov_id": "pcb",
+     "office": "Panama City Beach Council, Ward 4",
+     "year": 2020,
+     "outcome": "lost",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
+   "id": "chris-eaves",
+   "name": "Chris Eaves",
+   "aliases": [
+    "Chris Eaves"
+   ],
+   "district": null,
+   "gov_ids": [
+    "sheriff"
+   ],
+   "roles": [
+    {
+     "role": "2016 candidate: Sheriff",
+     "gov_id": "sheriff",
+     "office": "Sheriff",
+     "year": 2016,
+     "outcome": "did not qualify",
+     "source": "campaign_history"
     }
    ]
   },
@@ -865,6 +1643,14 @@
      "source": "finance_2026"
     },
     {
+     "role": "2022 candidate: School Board, District 3",
+     "gov_id": "schools",
+     "office": "School Board, District 3",
+     "year": 2022,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
      "role": "2026 candidate: Bay District School Board, District 3",
      "gov_id": "schools",
      "source": "candidates_2026"
@@ -895,6 +1681,80 @@
      "seat": "City Administrator",
      "years": "2024–2025",
      "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "christine-smallwood",
+   "name": "Christine Smallwood",
+   "aliases": [
+    "Christine Smallwood"
+   ],
+   "district": null,
+   "gov_ids": [
+    "cw"
+   ],
+   "roles": [
+    {
+     "role": "2024 candidate: Callaway Commission, Ward 3",
+     "gov_id": "cw",
+     "office": "Callaway Commission, Ward 3",
+     "year": 2024,
+     "outcome": "lost",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
+   "id": "chuck-perdue",
+   "name": "Chuck Perdue",
+   "aliases": [
+    "Chuck Perdue",
+    "William (Chuck) Perdue"
+   ],
+   "district": null,
+   "gov_ids": [
+    "tax_collector"
+   ],
+   "roles": [
+    {
+     "role": "Tax Collector",
+     "gov_id": "tax_collector",
+     "source": "salaries"
+    },
+    {
+     "role": "Tax Collector",
+     "gov_id": "tax_collector",
+     "source": "officials-pay"
+    },
+    {
+     "role": "officeholder: Tax Collector",
+     "gov_id": "tax_collector",
+     "source": "campaign"
+    },
+    {
+     "role": "2024 candidate: Tax Collector",
+     "gov_id": "tax_collector",
+     "office": "Tax Collector",
+     "year": 2024,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2020 candidate: Tax Collector",
+     "gov_id": "tax_collector",
+     "office": "Tax Collector",
+     "year": 2020,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2016 candidate: Tax Collector",
+     "gov_id": "tax_collector",
+     "office": "Tax Collector",
+     "year": 2016,
+     "outcome": "won",
+     "source": "campaign_history"
     }
    ]
   },
@@ -936,6 +1796,14 @@
      "source": "finance_2026"
     },
     {
+     "role": "2022 candidate: Springfield Commission, Ward 4",
+     "gov_id": "sp",
+     "office": "Springfield Commission, Ward 4",
+     "year": 2022,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
      "role": "2026 candidate: City of Springfield Commissioner, Ward 4",
      "gov_id": "sp",
      "source": "candidates_2026"
@@ -946,6 +1814,27 @@
      "seat": "Ward 4",
      "years": "since 2022",
      "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "cindy-jolley",
+   "name": "Cindy Jolley",
+   "aliases": [
+    "Cindy Jolley"
+   ],
+   "district": null,
+   "gov_ids": [
+    "mb"
+   ],
+   "roles": [
+    {
+     "role": "2024 candidate: Mexico Beach Council, Group 4",
+     "gov_id": "mb",
+     "office": "Mexico Beach Council, Group 4",
+     "year": 2024,
+     "outcome": "lost",
+     "source": "campaign_history"
     }
    ]
   },
@@ -985,6 +1874,14 @@
      "role": "officeholder: Bay County Commission, District 5",
      "gov_id": "county",
      "source": "campaign"
+    },
+    {
+     "role": "2024 candidate: Bay County Commission, District 5",
+     "gov_id": "county",
+     "office": "Bay County Commission, District 5",
+     "year": 2024,
+     "outcome": "won",
+     "source": "campaign_history"
     },
     {
      "role": "County commissioner, District 5",
@@ -1037,6 +1934,35 @@
    ]
   },
   {
+   "id": "colleen-swab",
+   "name": "Colleen Swab",
+   "aliases": [
+    "Colleen Swab"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pcb"
+   ],
+   "roles": [
+    {
+     "role": "2018 candidate: Panama City Beach Council, Ward 3",
+     "gov_id": "pcb",
+     "office": "Panama City Beach Council, Ward 3",
+     "year": 2018,
+     "outcome": "withdrew",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2016 candidate: Panama City Beach Council, Ward 2",
+     "gov_id": "pcb",
+     "office": "Panama City Beach Council, Ward 2",
+     "year": 2016,
+     "outcome": "did not qualify",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
    "id": "corey-langford",
    "name": "Corey Langford",
    "aliases": [
@@ -1068,16 +1994,46 @@
    ]
   },
   {
-   "id": "dan-russell",
-   "name": "Dan Russell",
+   "id": "dale-robitaille",
+   "name": "Dale Robitaille",
    "aliases": [
-    "Dan Russell"
+    "Dale Robitaille"
    ],
    "district": null,
    "gov_ids": [
     "lh"
    ],
    "roles": [
+    {
+     "role": "2019 candidate: Lynn Haven Commission, Seat 1",
+     "gov_id": "lh",
+     "office": "Lynn Haven Commission, Seat 1",
+     "year": 2019,
+     "outcome": "lost",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
+   "id": "dan-russell",
+   "name": "Dan Russell",
+   "aliases": [
+    "Dan Russell",
+    "Daniel Russell"
+   ],
+   "district": null,
+   "gov_ids": [
+    "lh"
+   ],
+   "roles": [
+    {
+     "role": "2017 candidate: Lynn Haven Commission, Seat 3",
+     "gov_id": "lh",
+     "office": "Lynn Haven Commission, Seat 3",
+     "year": 2017,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
     {
      "role": "former city commissioner, Seat 3",
      "gov_id": "lh",
@@ -1112,6 +2068,72 @@
      "role": "officeholder: Property Appraiser",
      "gov_id": "property_appraiser",
      "source": "campaign"
+    },
+    {
+     "role": "2024 candidate: Property Appraiser",
+     "gov_id": "property_appraiser",
+     "office": "Property Appraiser",
+     "year": 2024,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2020 candidate: Property Appraiser",
+     "gov_id": "property_appraiser",
+     "office": "Property Appraiser",
+     "year": 2020,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2016 candidate: Property Appraiser",
+     "gov_id": "property_appraiser",
+     "office": "Property Appraiser",
+     "year": 2016,
+     "outcome": "won",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
+   "id": "dana-morris",
+   "name": "Dana Morris",
+   "aliases": [
+    "Dana Morris"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pc"
+   ],
+   "roles": [
+    {
+     "role": "2025 candidate: Panama City Commission, Ward 1",
+     "gov_id": "pc",
+     "office": "Panama City Commission, Ward 1",
+     "year": 2025,
+     "outcome": "withdrew",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
+   "id": "dane-messick",
+   "name": "Dane Messick",
+   "aliases": [
+    "Dane Messick"
+   ],
+   "district": null,
+   "gov_ids": [
+    "lh"
+   ],
+   "roles": [
+    {
+     "role": "2021 candidate: Lynn Haven Commission, Seat 3",
+     "gov_id": "lh",
+     "office": "Lynn Haven Commission, Seat 3",
+     "year": 2021,
+     "outcome": "lost",
+     "source": "campaign_history"
     }
    ]
   },
@@ -1153,11 +2175,61 @@
      "source": "campaign"
     },
     {
+     "role": "2024 candidate: Bay County Commission, District 1",
+     "gov_id": "county",
+     "office": "Bay County Commission, District 1",
+     "year": 2024,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
      "role": "County commissioner, District 1",
      "gov_id": "county",
      "seat": "District 1",
      "years": "since 2024",
      "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "daniel-robert-schultz",
+   "name": "Daniel Robert Schultz",
+   "aliases": [
+    "Daniel Robert Schultz"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pc"
+   ],
+   "roles": [
+    {
+     "role": "2025 candidate: Panama City Commission, Ward 1",
+     "gov_id": "pc",
+     "office": "Panama City Commission, Ward 1",
+     "year": 2025,
+     "outcome": "lost",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
+   "id": "darrell-key",
+   "name": "Darrell Key",
+   "aliases": [
+    "Darrell Key"
+   ],
+   "district": null,
+   "gov_ids": [
+    "mb"
+   ],
+   "roles": [
+    {
+     "role": "2020 candidate: Mexico Beach Council, Group 4",
+     "gov_id": "mb",
+     "office": "Mexico Beach Council, Group 4",
+     "year": 2020,
+     "outcome": "won",
+     "source": "campaign_history"
     }
    ]
   },
@@ -1214,6 +2286,27 @@
    ]
   },
   {
+   "id": "david-agosta",
+   "name": "David Agosta",
+   "aliases": [
+    "David Agosta"
+   ],
+   "district": null,
+   "gov_ids": [
+    "cw"
+   ],
+   "roles": [
+    {
+     "role": "2024 candidate: Callaway Commission, Ward 4",
+     "gov_id": "cw",
+     "office": "Callaway Commission, Ward 4",
+     "year": 2024,
+     "outcome": "lost",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
    "id": "david-baldwin",
    "name": "David Baldwin",
    "aliases": [
@@ -1250,6 +2343,35 @@
    ]
   },
   {
+   "id": "david-dean",
+   "name": "David Dean",
+   "aliases": [
+    "David Dean"
+   ],
+   "district": null,
+   "gov_ids": [
+    "lake_powell_cdd"
+   ],
+   "roles": [
+    {
+     "role": "2022 candidate: Lake Powell Community Development District, Seat 2",
+     "gov_id": "lake_powell_cdd",
+     "office": "Lake Powell Community Development District, Seat 2",
+     "year": 2022,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2018 candidate: Lake Powell Community Development District, Seat 2",
+     "gov_id": "lake_powell_cdd",
+     "office": "Lake Powell Community Development District, Seat 2",
+     "year": 2018,
+     "outcome": "won",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
    "id": "david-griggs",
    "name": "David Griggs",
    "aliases": [
@@ -1282,11 +2404,140 @@
      "source": "campaign"
     },
     {
+     "role": "2022 candidate: Callaway Commission, Ward 2",
+     "gov_id": "cw",
+     "office": "Callaway Commission, Ward 2",
+     "year": 2022,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2018 candidate: Callaway Commission, Ward 2",
+     "gov_id": "cw",
+     "office": "Callaway Commission, Ward 2",
+     "year": 2018,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
      "role": "City commissioner, Ward 2",
      "gov_id": "cw",
      "seat": "Ward 2",
      "years": "since 2018",
      "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "david-haight",
+   "name": "David Haight",
+   "aliases": [
+    "David Haight"
+   ],
+   "district": null,
+   "gov_ids": [
+    "schools"
+   ],
+   "roles": [
+    {
+     "role": "2018 candidate: School Board, District 5",
+     "gov_id": "schools",
+     "office": "School Board, District 5",
+     "year": 2018,
+     "outcome": "lost",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
+   "id": "david-holt",
+   "name": "David Holt",
+   "aliases": [
+    "David Holt"
+   ],
+   "district": null,
+   "gov_ids": [
+    "lake_powell_cdd"
+   ],
+   "roles": [
+    {
+     "role": "2024 candidate: Lake Powell Community Development District, Seat 1",
+     "gov_id": "lake_powell_cdd",
+     "office": "Lake Powell Community Development District, Seat 1",
+     "year": 2024,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2020 candidate: Lake Powell Community Development District, Seat 1",
+     "gov_id": "lake_powell_cdd",
+     "office": "Lake Powell Community Development District, Seat 1",
+     "year": 2020,
+     "outcome": "won",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
+   "id": "david-lanier",
+   "name": "David Lanier",
+   "aliases": [
+    "David Lanier"
+   ],
+   "district": null,
+   "gov_ids": [
+    "county"
+   ],
+   "roles": [
+    {
+     "role": "2016 candidate: Bay County Commission, District 5",
+     "gov_id": "county",
+     "office": "Bay County Commission, District 5",
+     "year": 2016,
+     "outcome": "withdrew",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
+   "id": "david-masters",
+   "name": "David Masters",
+   "aliases": [
+    "David Masters"
+   ],
+   "district": null,
+   "gov_ids": [
+    "mb"
+   ],
+   "roles": [
+    {
+     "role": "2022 candidate: Mexico Beach Council, Group 4",
+     "gov_id": "mb",
+     "office": "Mexico Beach Council, Group 4",
+     "year": 2022,
+     "outcome": "lost",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
+   "id": "demetrius-rease",
+   "name": "Demetrius Rease",
+   "aliases": [
+    "Demetrius Rease"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pc"
+   ],
+   "roles": [
+    {
+     "role": "2025 candidate: Panama City Commission, Ward 4",
+     "gov_id": "pc",
+     "office": "Panama City Commission, Ward 4",
+     "year": 2025,
+     "outcome": "lost",
+     "source": "campaign_history"
     }
    ]
   },
@@ -1305,6 +2556,48 @@
      "role": "Deputy Superintendent - Teaching & Learning",
      "gov_id": "schools",
      "source": "salaries"
+    }
+   ]
+  },
+  {
+   "id": "dennis-haddock",
+   "name": "Dennis Haddock",
+   "aliases": [
+    "Dennis Haddock"
+   ],
+   "district": null,
+   "gov_ids": [
+    "sp"
+   ],
+   "roles": [
+    {
+     "role": "2020 candidate: Springfield Commission, Ward 1",
+     "gov_id": "sp",
+     "office": "Springfield Commission, Ward 1",
+     "year": 2020,
+     "outcome": "won",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
+   "id": "donny-walker",
+   "name": "Donny Walker",
+   "aliases": [
+    "Donny Walker"
+   ],
+   "district": null,
+   "gov_ids": [
+    "mb"
+   ],
+   "roles": [
+    {
+     "role": "2022 candidate: Mexico Beach Council, Group 4",
+     "gov_id": "mb",
+     "office": "Mexico Beach Council, Group 4",
+     "year": 2022,
+     "outcome": "lost",
+     "source": "campaign_history"
     }
    ]
   },
@@ -1366,6 +2659,14 @@
      "source": "campaign"
     },
     {
+     "role": "2024 candidate: Bay County Commission, District 3",
+     "gov_id": "county",
+     "office": "Bay County Commission, District 3",
+     "year": 2024,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
      "role": "County commissioner, District 3",
      "gov_id": "county",
      "seat": "District 3",
@@ -1411,6 +2712,22 @@
      "role": "officeholder: Bay County Commission, District 4",
      "gov_id": "county",
      "source": "campaign"
+    },
+    {
+     "role": "2022 candidate: Bay County Commission, District 4",
+     "gov_id": "county",
+     "office": "Bay County Commission, District 4",
+     "year": 2022,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2020 candidate: Bay County Commission, District 4",
+     "gov_id": "county",
+     "office": "Bay County Commission, District 4",
+     "year": 2020,
+     "outcome": "won",
+     "source": "campaign_history"
     },
     {
      "role": "County commissioner, District 4",
@@ -1475,6 +2792,27 @@
    ]
   },
   {
+   "id": "ed-young",
+   "name": "Ed Young",
+   "aliases": [
+    "Ed Young"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pc"
+   ],
+   "roles": [
+    {
+     "role": "2025 candidate: Panama City Commission, Ward 1",
+     "gov_id": "pc",
+     "office": "Panama City Commission, Ward 1",
+     "year": 2025,
+     "outcome": "lost",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
    "id": "eddie-cook",
    "name": "Eddie Cook",
    "aliases": [
@@ -1491,6 +2829,85 @@
      "seat": "City Manager",
      "years": "since 2017",
      "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "ellyne-fields",
+   "name": "Ellyne Fields",
+   "aliases": [
+    "Ellyne Fields"
+   ],
+   "district": null,
+   "gov_ids": [
+    "lh"
+   ],
+   "roles": [
+    {
+     "role": "2023 candidate: Lynn Haven Commission, Seat 4",
+     "gov_id": "lh",
+     "office": "Lynn Haven Commission, Seat 4",
+     "year": 2023,
+     "outcome": "lost",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2023 candidate: Lynn Haven Mayor",
+     "gov_id": "lh",
+     "office": "Lynn Haven Mayor",
+     "year": 2023,
+     "outcome": "withdrew",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2021 candidate: Lynn Haven Mayor",
+     "gov_id": "lh",
+     "office": "Lynn Haven Mayor",
+     "year": 2021,
+     "outcome": "lost",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
+   "id": "emmett-singleton",
+   "name": "Emmett F Singleton",
+   "aliases": [
+    "Emmett F Singleton"
+   ],
+   "district": null,
+   "gov_ids": [
+    "cw"
+   ],
+   "roles": [
+    {
+     "role": "2020 candidate: Callaway Mayor",
+     "gov_id": "cw",
+     "office": "Callaway Mayor",
+     "year": 2020,
+     "outcome": "lost",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
+   "id": "eric-orme",
+   "name": "Eric Orme",
+   "aliases": [
+    "Eric Orme"
+   ],
+   "district": null,
+   "gov_ids": [
+    "county"
+   ],
+   "roles": [
+    {
+     "role": "2020 candidate: Bay County Commission, District 4",
+     "gov_id": "county",
+     "office": "Bay County Commission, District 4",
+     "year": 2020,
+     "outcome": "lost",
+     "source": "campaign_history"
     }
    ]
   },
@@ -1525,6 +2942,22 @@
      "role": "officeholder: Mexico Beach Council, Group 2",
      "gov_id": "mb",
      "source": "campaign"
+    },
+    {
+     "role": "2025 candidate: Mexico Beach Council, Group 2",
+     "gov_id": "mb",
+     "office": "Mexico Beach Council, Group 2",
+     "year": 2025,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2024 candidate: Mexico Beach Mayor (special election)",
+     "gov_id": "mb",
+     "office": "Mexico Beach Mayor (special election)",
+     "year": 2024,
+     "outcome": "lost",
+     "source": "campaign_history"
     },
     {
      "role": "Council member, Group 2",
@@ -1568,11 +3001,70 @@
      "source": "campaign"
     },
     {
+     "role": "2024 candidate: Panama City Beach Council, Ward 2",
+     "gov_id": "pcb",
+     "office": "Panama City Beach Council, Ward 2",
+     "year": 2024,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
      "role": "Council member, Ward 2",
      "gov_id": "pcb",
      "seat": "Ward 2",
      "years": "since 2024",
      "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "frances-gordon",
+   "name": "Frances Gordon",
+   "aliases": [
+    "Frances Gordon",
+    "Frances Keys Gordon"
+   ],
+   "district": null,
+   "gov_ids": [
+    "schools"
+   ],
+   "roles": [
+    {
+     "role": "2022 candidate: School Board, District 2",
+     "gov_id": "schools",
+     "office": "School Board, District 2",
+     "year": 2022,
+     "outcome": "lost",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2020 candidate: School Board, District 2",
+     "gov_id": "schools",
+     "office": "School Board, District 2",
+     "year": 2020,
+     "outcome": "lost",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
+   "id": "frank-luke",
+   "name": "Frank Luke",
+   "aliases": [
+    "Frank Luke"
+   ],
+   "district": null,
+   "gov_ids": [
+    "schools"
+   ],
+   "roles": [
+    {
+     "role": "2020 candidate: Superintendent of Schools",
+     "gov_id": "schools",
+     "office": "Superintendent of Schools",
+     "year": 2020,
+     "outcome": "withdrew",
+     "source": "campaign_history"
     }
    ]
   },
@@ -1588,11 +3080,111 @@
    ],
    "roles": [
     {
+     "role": "2020 candidate: Callaway Commission, Ward 4",
+     "gov_id": "cw",
+     "office": "Callaway Commission, Ward 4",
+     "year": 2020,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
      "role": "former city commissioner, Ward 4",
      "gov_id": "cw",
      "seat": "Ward 4",
      "years": "2020–2022",
      "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "frank-mckeithen",
+   "name": "Frank McKeithen",
+   "aliases": [
+    "Frank McKeithen"
+   ],
+   "district": null,
+   "gov_ids": [
+    "sheriff"
+   ],
+   "roles": [
+    {
+     "role": "2016 candidate: Sheriff",
+     "gov_id": "sheriff",
+     "office": "Sheriff",
+     "year": 2016,
+     "outcome": "withdrew",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
+   "id": "frank-self",
+   "name": "Frank Self",
+   "aliases": [
+    "Frank Self"
+   ],
+   "district": null,
+   "gov_ids": [
+    "lake_powell_cdd"
+   ],
+   "roles": [
+    {
+     "role": "2022 candidate: Lake Powell Community Development District, Seat 5",
+     "gov_id": "lake_powell_cdd",
+     "office": "Lake Powell Community Development District, Seat 5",
+     "year": 2022,
+     "outcome": "won",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
+   "id": "fred-broussard",
+   "name": "Fred Broussard",
+   "aliases": [
+    "Fred Broussard"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pcb"
+   ],
+   "roles": [
+    {
+     "role": "2020 candidate: Panama City Beach Council, Ward 2",
+     "gov_id": "pcb",
+     "office": "Panama City Beach Council, Ward 2",
+     "year": 2020,
+     "outcome": "lost",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
+   "id": "gary-cox",
+   "name": "Gary Cox",
+   "aliases": [
+    "Gary Cox"
+   ],
+   "district": null,
+   "gov_ids": [
+    "mb"
+   ],
+   "roles": [
+    {
+     "role": "2025 candidate: Mexico Beach Council, Group 2",
+     "gov_id": "mb",
+     "office": "Mexico Beach Council, Group 2",
+     "year": 2025,
+     "outcome": "lost",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2023 candidate: Mexico Beach Council, Group 2",
+     "gov_id": "mb",
+     "office": "Mexico Beach Council, Group 2",
+     "year": 2023,
+     "outcome": "lost",
+     "source": "campaign_history"
     }
    ]
   },
@@ -1628,6 +3220,22 @@
    ],
    "roles": [
     {
+     "role": "2022 candidate: Panama City Beach Council, Ward 3",
+     "gov_id": "pcb",
+     "office": "Panama City Beach Council, Ward 3",
+     "year": 2022,
+     "outcome": "lost",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2018 candidate: Panama City Beach Council, Ward 3",
+     "gov_id": "pcb",
+     "office": "Panama City Beach Council, Ward 3",
+     "year": 2018,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
      "role": "former council member, Ward 3",
      "gov_id": "pcb",
      "seat": "Ward 3",
@@ -1657,6 +3265,48 @@
    ]
   },
   {
+   "id": "george-hines",
+   "name": "George H. Hines Jr.",
+   "aliases": [
+    "George H. Hines Jr."
+   ],
+   "district": null,
+   "gov_ids": [
+    "lh"
+   ],
+   "roles": [
+    {
+     "role": "2021 candidate: Lynn Haven Commission, Seat 3",
+     "gov_id": "lh",
+     "office": "Lynn Haven Commission, Seat 3",
+     "year": 2021,
+     "outcome": "lost",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
+   "id": "george-record",
+   "name": "George Record II",
+   "aliases": [
+    "George Record II"
+   ],
+   "district": null,
+   "gov_ids": [
+    "sheriff"
+   ],
+   "roles": [
+    {
+     "role": "2020 candidate: Sheriff",
+     "gov_id": "sheriff",
+     "office": "Sheriff",
+     "year": 2020,
+     "outcome": "withdrew",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
    "id": "ginger-littleton",
    "name": "Ginger Littleton",
    "aliases": [
@@ -1671,6 +3321,14 @@
      "role": "2026 candidate: School Board, District 2",
      "gov_id": "schools",
      "source": "finance_2026"
+    },
+    {
+     "role": "2018 candidate: School Board, District 2",
+     "gov_id": "schools",
+     "office": "School Board, District 2",
+     "year": 2018,
+     "outcome": "won",
+     "source": "campaign_history"
     },
     {
      "role": "2026 candidate: Bay District School Board, District 2",
@@ -1744,6 +3402,38 @@
    ],
    "roles": [
     {
+     "role": "2023 candidate: Panama City Mayor",
+     "gov_id": "pc",
+     "office": "Panama City Mayor",
+     "year": 2023,
+     "outcome": "lost",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2021 candidate: Panama City Mayor",
+     "gov_id": "pc",
+     "office": "Panama City Mayor",
+     "year": 2021,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2019 candidate: Panama City Mayor",
+     "gov_id": "pc",
+     "office": "Panama City Mayor",
+     "year": 2019,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2017 candidate: Panama City Mayor",
+     "gov_id": "pc",
+     "office": "Panama City Mayor",
+     "year": 2017,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
      "role": "former mayor",
      "gov_id": "pc",
      "seat": "Mayor",
@@ -1776,6 +3466,27 @@
    ]
   },
   {
+   "id": "gregory-laplante",
+   "name": "Gregory LaPlante",
+   "aliases": [
+    "Gregory LaPlante"
+   ],
+   "district": null,
+   "gov_ids": [
+    "property_appraiser"
+   ],
+   "roles": [
+    {
+     "role": "2016 candidate: Property Appraiser",
+     "gov_id": "property_appraiser",
+     "office": "Property Appraiser",
+     "year": 2016,
+     "outcome": "lost",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
    "id": "guy-tunnell",
    "name": "Guy Tunnell",
    "aliases": [
@@ -1796,6 +3507,27 @@
    ]
   },
   {
+   "id": "hal-grant",
+   "name": "Hal Grant",
+   "aliases": [
+    "Hal Grant"
+   ],
+   "district": null,
+   "gov_ids": [
+    "sheriff"
+   ],
+   "roles": [
+    {
+     "role": "2020 candidate: Sheriff",
+     "gov_id": "sheriff",
+     "office": "Sheriff",
+     "year": 2020,
+     "outcome": "did not qualify",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
    "id": "hector-solis",
    "name": "Hector Solis",
    "aliases": [
@@ -1806,6 +3538,14 @@
     "pcb"
    ],
    "roles": [
+    {
+     "role": "2016 candidate: Panama City Beach Council, Ward 4",
+     "gov_id": "pcb",
+     "office": "Panama City Beach Council, Ward 4",
+     "year": 2016,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
     {
      "role": "former council member, Ward 4",
      "gov_id": "pcb",
@@ -1852,6 +3592,27 @@
    ]
   },
   {
+   "id": "hoot-crawford",
+   "name": "Hoot Crawford",
+   "aliases": [
+    "Hoot Crawford"
+   ],
+   "district": null,
+   "gov_ids": [
+    "county_court"
+   ],
+   "roles": [
+    {
+     "role": "2020 candidate: Bay County Judge, Group 1",
+     "gov_id": "county_court",
+     "office": "Bay County Judge, Group 1",
+     "year": 2020,
+     "outcome": "lost",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
    "id": "jack-griffis",
    "name": "Jack Griffis",
    "aliases": [
@@ -1884,11 +3645,40 @@
      "source": "campaign"
     },
     {
+     "role": "2024 candidate: Springfield Commission, Ward 1",
+     "gov_id": "sp",
+     "office": "Springfield Commission, Ward 1",
+     "year": 2024,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
      "role": "City commissioner, Ward 1",
      "gov_id": "sp",
      "seat": "Ward 1",
      "years": "since 2023",
      "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "jack-kennington",
+   "name": "Jack Kennington",
+   "aliases": [
+    "Jack Kennington"
+   ],
+   "district": null,
+   "gov_ids": [
+    "sp"
+   ],
+   "roles": [
+    {
+     "role": "2018 candidate: Springfield Commission, Ward 3",
+     "gov_id": "sp",
+     "office": "Springfield Commission, Ward 3",
+     "year": 2018,
+     "outcome": "won",
+     "source": "campaign_history"
     }
    ]
   },
@@ -1930,6 +3720,14 @@
      "source": "finance_2026"
     },
     {
+     "role": "2022 candidate: Springfield Commission, Ward 3",
+     "gov_id": "sp",
+     "office": "Springfield Commission, Ward 3",
+     "year": 2022,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
      "role": "2026 candidate: City of Springfield Commissioner, Ward 3",
      "gov_id": "sp",
      "source": "candidates_2026"
@@ -1938,7 +3736,7 @@
      "role": "City commissioner, Ward 3",
      "gov_id": "sp",
      "seat": "Ward 3",
-     "years": "since before 2015",
+     "years": "since before 2016",
      "source": "officeholders"
     }
    ]
@@ -1962,9 +3760,73 @@
    ]
   },
   {
+   "id": "james-haddock",
+   "name": "James Haddock",
+   "aliases": [
+    "James Haddock"
+   ],
+   "district": null,
+   "gov_ids": [
+    "sp"
+   ],
+   "roles": [
+    {
+     "role": "2016 candidate: Springfield Commission, Ward 1",
+     "gov_id": "sp",
+     "office": "Springfield Commission, Ward 1",
+     "year": 2016,
+     "outcome": "lost",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
+   "id": "james-mccalister",
+   "name": "James E. McCalister",
+   "aliases": [
+    "James E. McCalister"
+   ],
+   "district": null,
+   "gov_ids": [
+    "schools"
+   ],
+   "roles": [
+    {
+     "role": "2016 candidate: Superintendent of Schools",
+     "gov_id": "schools",
+     "office": "Superintendent of Schools",
+     "year": 2016,
+     "outcome": "lost",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
+   "id": "james-morris",
+   "name": "James Morris",
+   "aliases": [
+    "James Morris"
+   ],
+   "district": null,
+   "gov_ids": [
+    "county"
+   ],
+   "roles": [
+    {
+     "role": "2016 candidate: Bay County Commission, District 2",
+     "gov_id": "county",
+     "office": "Bay County Commission, District 2",
+     "year": 2016,
+     "outcome": "lost",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
    "id": "jamie-kirkland",
    "name": "Jamie Kirkland",
    "aliases": [
+    "James Kirkland",
     "Jamie Kirkland"
    ],
    "district": null,
@@ -1976,6 +3838,14 @@
      "role": "2026 candidate: Callaway Commission, Ward 2",
      "gov_id": "cw",
      "source": "finance_2026"
+    },
+    {
+     "role": "2022 candidate: Callaway Commission, Ward 2",
+     "gov_id": "cw",
+     "office": "Callaway Commission, Ward 2",
+     "year": 2022,
+     "outcome": "lost",
+     "source": "campaign_history"
     },
     {
      "role": "2026 candidate: City of Callaway Commissioner, Ward 2",
@@ -1999,6 +3869,14 @@
      "role": "2026 candidate: Lynn Haven Commissioner Seat 2",
      "gov_id": "lh",
      "source": "finance_2026"
+    },
+    {
+     "role": "2025 candidate: Lynn Haven Commission, Seat 4",
+     "gov_id": "lh",
+     "office": "Lynn Haven Commission, Seat 4",
+     "year": 2025,
+     "outcome": "lost",
+     "source": "campaign_history"
     }
    ]
   },
@@ -2033,6 +3911,22 @@
      "role": "officeholder: Lynn Haven Commissioner, Seat 3",
      "gov_id": "lh",
      "source": "campaign"
+    },
+    {
+     "role": "2025 candidate: Lynn Haven Commission, Seat 3",
+     "gov_id": "lh",
+     "office": "Lynn Haven Commission, Seat 3",
+     "year": 2025,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2021 candidate: Lynn Haven Commission, Seat 3",
+     "gov_id": "lh",
+     "office": "Lynn Haven Commission, Seat 3",
+     "year": 2021,
+     "outcome": "won",
+     "source": "campaign_history"
     },
     {
      "role": "City commissioner, Seat 3",
@@ -2094,6 +3988,14 @@
      "source": "campaign"
     },
     {
+     "role": "2023 candidate: Panama City Commission, Ward 2",
+     "gov_id": "pc",
+     "office": "Panama City Commission, Ward 2",
+     "year": 2023,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
      "role": "City commissioner, Ward 2",
      "gov_id": "pc",
      "seat": "Ward 2",
@@ -2128,6 +4030,27 @@
    ]
   },
   {
+   "id": "jarod-leighton",
+   "name": "Jarod Leighton",
+   "aliases": [
+    "Jarod Leighton"
+   ],
+   "district": null,
+   "gov_ids": [
+    "county"
+   ],
+   "roles": [
+    {
+     "role": "2020 candidate: Bay County Commission, District 3",
+     "gov_id": "county",
+     "office": "Bay County Commission, District 3",
+     "year": 2020,
+     "outcome": "lost",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
    "id": "jason-adams",
    "name": "Jason Adams",
    "aliases": [
@@ -2148,6 +4071,14 @@
      "role": "board member",
      "gov_id": "mb",
      "source": "votes"
+    },
+    {
+     "role": "2024 candidate: Mexico Beach Council, Group 4",
+     "gov_id": "mb",
+     "office": "Mexico Beach Council, Group 4",
+     "year": 2024,
+     "outcome": "won",
+     "source": "campaign_history"
     },
     {
      "role": "former council member, Group 4",
@@ -2175,6 +4106,27 @@
      "seat": "City Manager",
      "years": "until 2018",
      "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "jeff-snyder",
+   "name": "Jeff Snyder",
+   "aliases": [
+    "Jeff Snyder"
+   ],
+   "district": null,
+   "gov_ids": [
+    "lh"
+   ],
+   "roles": [
+    {
+     "role": "2025 candidate: Lynn Haven Commission, Seat 4",
+     "gov_id": "lh",
+     "office": "Lynn Haven Commission, Seat 4",
+     "year": 2025,
+     "outcome": "lost",
+     "source": "campaign_history"
     }
    ]
   },
@@ -2220,6 +4172,7 @@
    "id": "jenna-haligas",
    "name": "Jenna Haligas",
    "aliases": [
+    "Jenna Flint Haligas",
     "Jenna Haligas"
    ],
    "district": null,
@@ -2239,6 +4192,22 @@
      "source": "votes"
     },
     {
+     "role": "2021 candidate: Panama City Commission, Ward 1",
+     "gov_id": "pc",
+     "office": "Panama City Commission, Ward 1",
+     "year": 2021,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2017 candidate: Panama City Commission, Ward 1",
+     "gov_id": "pc",
+     "office": "Panama City Commission, Ward 1",
+     "year": 2017,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
      "role": "former city commissioner, Ward 1",
      "gov_id": "pc",
      "seat": "Ward 1",
@@ -2251,6 +4220,7 @@
    "id": "jerry-register",
    "name": "Jerry Register",
    "aliases": [
+    "Jerry L Register",
     "Jerry L. Register",
     "Jerry Register"
    ],
@@ -2281,11 +4251,56 @@
      "source": "campaign"
     },
     {
+     "role": "2024 candidate: School Board, District 1",
+     "gov_id": "schools",
+     "office": "School Board, District 1",
+     "year": 2024,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2020 candidate: School Board, District 1",
+     "gov_id": "schools",
+     "office": "School Board, District 1",
+     "year": 2020,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2016 candidate: School Board, District 1",
+     "gov_id": "schools",
+     "office": "School Board, District 1",
+     "year": 2016,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
      "role": "School board member, District 1",
      "gov_id": "schools",
      "seat": "District 1",
-     "years": "since before 2015",
+     "years": "since before 2016",
      "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "jerry-robinson",
+   "name": "Jerry Robinson",
+   "aliases": [
+    "Jerry Robinson"
+   ],
+   "district": null,
+   "gov_ids": [
+    "lake_powell_cdd"
+   ],
+   "roles": [
+    {
+     "role": "2020 candidate: Lake Powell Community Development District, Seat 4",
+     "gov_id": "lake_powell_cdd",
+     "office": "Lake Powell Community Development District, Seat 4",
+     "year": 2020,
+     "outcome": "won",
+     "source": "campaign_history"
     }
    ]
   },
@@ -2312,11 +4327,80 @@
      "source": "votes"
     },
     {
+     "role": "2023 candidate: Mexico Beach Council, Group 2",
+     "gov_id": "mb",
+     "office": "Mexico Beach Council, Group 2",
+     "year": 2023,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2021 candidate: Mexico Beach Council, Group 2",
+     "gov_id": "mb",
+     "office": "Mexico Beach Council, Group 2",
+     "year": 2021,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2019 candidate: Mexico Beach Council, Group 2",
+     "gov_id": "mb",
+     "office": "Mexico Beach Council, Group 2",
+     "year": 2019,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
      "role": "former council member, Group 2",
      "gov_id": "mb",
      "seat": "Group 2",
      "years": "2019–2025",
      "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "jerry-wallace",
+   "name": "Jerry Wallace",
+   "aliases": [
+    "Jerry Wallace"
+   ],
+   "district": null,
+   "gov_ids": [
+    "mb"
+   ],
+   "roles": [
+    {
+     "role": "2020 candidate: Mexico Beach Council, Group 4",
+     "gov_id": "mb",
+     "office": "Mexico Beach Council, Group 4",
+     "year": 2020,
+     "outcome": "withdrew",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2018 candidate: Mexico Beach Council, Group 4",
+     "gov_id": "mb",
+     "office": "Mexico Beach Council, Group 4",
+     "year": 2018,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2016 candidate: Mexico Beach Council, Group 4",
+     "gov_id": "mb",
+     "office": "Mexico Beach Council, Group 4",
+     "year": 2016,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2016 candidate: Mexico Beach Council, Group 5",
+     "gov_id": "mb",
+     "office": "Mexico Beach Council, Group 5",
+     "year": 2016,
+     "outcome": "withdrew",
+     "source": "campaign_history"
     }
    ]
   },
@@ -2343,11 +4427,56 @@
      "source": "votes"
     },
     {
+     "role": "2023 candidate: Lynn Haven Mayor",
+     "gov_id": "lh",
+     "office": "Lynn Haven Mayor",
+     "year": 2023,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2021 candidate: Lynn Haven Mayor",
+     "gov_id": "lh",
+     "office": "Lynn Haven Mayor",
+     "year": 2021,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
      "role": "former mayor",
      "gov_id": "lh",
      "seat": "Mayor",
      "years": "2021–2026",
      "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "jim-barr",
+   "name": "Jim Barr",
+   "aliases": [
+    "Jim Barr"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pcb"
+   ],
+   "roles": [
+    {
+     "role": "2020 candidate: Panama City Beach Mayor",
+     "gov_id": "pcb",
+     "office": "Panama City Beach Mayor",
+     "year": 2020,
+     "outcome": "did not qualify",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2016 candidate: Panama City Beach Mayor",
+     "gov_id": "pcb",
+     "office": "Panama City Beach Mayor",
+     "year": 2016,
+     "outcome": "lost",
+     "source": "campaign_history"
     }
    ]
   },
@@ -2370,6 +4499,118 @@
    ]
   },
   {
+   "id": "joan-campbell",
+   "name": "Joan A Campbell",
+   "aliases": [
+    "Joan A Campbell"
+   ],
+   "district": null,
+   "gov_ids": [
+    "schools"
+   ],
+   "roles": [
+    {
+     "role": "2016 candidate: School Board, District 1",
+     "gov_id": "schools",
+     "office": "School Board, District 1",
+     "year": 2016,
+     "outcome": "did not qualify",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
+   "id": "joe-brown",
+   "name": "Joe Brown",
+   "aliases": [
+    "Joe Brown"
+   ],
+   "district": null,
+   "gov_ids": [
+    "lh"
+   ],
+   "roles": [
+    {
+     "role": "2023 candidate: Lynn Haven Commission, Seat 1",
+     "gov_id": "lh",
+     "office": "Lynn Haven Commission, Seat 1",
+     "year": 2023,
+     "outcome": "lost",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2021 candidate: Lynn Haven Mayor",
+     "gov_id": "lh",
+     "office": "Lynn Haven Mayor",
+     "year": 2021,
+     "outcome": "lost",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
+   "id": "joe-grammer",
+   "name": "Joe Grammer",
+   "aliases": [
+    "Joe Grammer"
+   ],
+   "district": null,
+   "gov_ids": [
+    "county_court"
+   ],
+   "roles": [
+    {
+     "role": "2020 candidate: Bay County Judge, Group 4",
+     "gov_id": "county_court",
+     "office": "Bay County Judge, Group 4",
+     "year": 2020,
+     "outcome": "won",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
+   "id": "joe-moore",
+   "name": "Joe Moore",
+   "aliases": [
+    "Joe Moore"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pcb"
+   ],
+   "roles": [
+    {
+     "role": "2016 candidate: Panama City Beach Mayor",
+     "gov_id": "pcb",
+     "office": "Panama City Beach Mayor",
+     "year": 2016,
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
+   "id": "joe-townsend",
+   "name": "Joe Townsend",
+   "aliases": [
+    "Joe Townsend"
+   ],
+   "district": null,
+   "gov_ids": [
+    "cw"
+   ],
+   "roles": [
+    {
+     "role": "2016 candidate: Callaway Commission, Ward 4",
+     "gov_id": "cw",
+     "office": "Callaway Commission, Ward 4",
+     "year": 2016,
+     "outcome": "won",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
    "id": "joe-wayne-walker",
    "name": "Joe Wayne Walker",
    "aliases": [
@@ -2380,6 +4621,14 @@
     "schools"
    ],
    "roles": [
+    {
+     "role": "2018 candidate: School Board, District 3",
+     "gov_id": "schools",
+     "office": "School Board, District 3",
+     "year": 2018,
+     "outcome": "lost",
+     "source": "campaign_history"
+    },
     {
      "role": "former school board member, District 3",
      "gov_id": "schools",
@@ -2447,6 +4696,90 @@
    ]
   },
   {
+   "id": "joel-stephens",
+   "name": "Joel Stephens",
+   "aliases": [
+    "Joel Stephens"
+   ],
+   "district": null,
+   "gov_ids": [
+    "lake_powell_cdd"
+   ],
+   "roles": [
+    {
+     "role": "2024 candidate: Lake Powell Community Development District, Seat 4",
+     "gov_id": "lake_powell_cdd",
+     "office": "Lake Powell Community Development District, Seat 4",
+     "year": 2024,
+     "outcome": "won",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
+   "id": "john-curci",
+   "name": "John Curci",
+   "aliases": [
+    "John Curci"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pcb"
+   ],
+   "roles": [
+    {
+     "role": "2016 candidate: Panama City Beach Mayor",
+     "gov_id": "pcb",
+     "office": "Panama City Beach Mayor",
+     "year": 2016,
+     "outcome": "did not qualify",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
+   "id": "john-delonjay",
+   "name": "John DeLonjay",
+   "aliases": [
+    "John DeLonjay"
+   ],
+   "district": null,
+   "gov_ids": [
+    "lh"
+   ],
+   "roles": [
+    {
+     "role": "2025 candidate: Lynn Haven Commission, Seat 4",
+     "gov_id": "lh",
+     "office": "Lynn Haven Commission, Seat 4",
+     "year": 2025,
+     "outcome": "withdrew",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
+   "id": "john-hagan",
+   "name": "John Hagan",
+   "aliases": [
+    "John Hagan"
+   ],
+   "district": null,
+   "gov_ids": [
+    "cw"
+   ],
+   "roles": [
+    {
+     "role": "2020 candidate: Callaway Commission, Ward 3",
+     "gov_id": "cw",
+     "office": "Callaway Commission, Ward 3",
+     "year": 2020,
+     "outcome": "lost",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
    "id": "john-haley",
    "name": "John Haley",
    "aliases": [
@@ -2487,6 +4820,14 @@
      "source": "votes"
     },
     {
+     "role": "2017 candidate: Parker Council, Seats 1 and 3",
+     "gov_id": "parker",
+     "office": "Parker Council, Seats 1 and 3",
+     "year": 2017,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
      "role": "former council member, Seat 3",
      "gov_id": "parker",
      "seat": "Seat 3",
@@ -2514,11 +4855,61 @@
    ],
    "roles": [
     {
+     "role": "2017 candidate: Panama City Commission, Ward 1",
+     "gov_id": "pc",
+     "office": "Panama City Commission, Ward 1",
+     "year": 2017,
+     "outcome": "lost",
+     "source": "campaign_history"
+    },
+    {
      "role": "former city commissioner, Ward 1",
      "gov_id": "pc",
      "seat": "Ward 1",
      "years": "until 2017",
      "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "john-lincoln",
+   "name": "John D Lincoln III",
+   "aliases": [
+    "John D Lincoln III"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pcb"
+   ],
+   "roles": [
+    {
+     "role": "2016 candidate: Panama City Beach Mayor",
+     "gov_id": "pcb",
+     "office": "Panama City Beach Mayor",
+     "year": 2016,
+     "outcome": "lost",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
+   "id": "john-michalik",
+   "name": "John Michalik",
+   "aliases": [
+    "John Michalik"
+   ],
+   "district": null,
+   "gov_ids": [
+    "lake_powell_cdd"
+   ],
+   "roles": [
+    {
+     "role": "2020 candidate: Lake Powell Community Development District, Seat 1",
+     "gov_id": "lake_powell_cdd",
+     "office": "Lake Powell Community Development District, Seat 1",
+     "year": 2020,
+     "outcome": "lost",
+     "source": "campaign_history"
     }
    ]
   },
@@ -2543,6 +4934,44 @@
    ]
   },
   {
+   "id": "john-smith",
+   "name": "John Smith",
+   "aliases": [
+    "John P. Smith",
+    "John Smith"
+   ],
+   "district": null,
+   "gov_ids": [
+    "beach_mosquito"
+   ],
+   "roles": [
+    {
+     "role": "2024 candidate: Beach Mosquito Control District, Seat 3",
+     "gov_id": "beach_mosquito",
+     "office": "Beach Mosquito Control District, Seat 3",
+     "year": 2024,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2020 candidate: Beach Mosquito Control District, Seat 3",
+     "gov_id": "beach_mosquito",
+     "office": "Beach Mosquito Control District, Seat 3",
+     "year": 2020,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2016 candidate: Beach Mosquito Control District, Seat 3",
+     "gov_id": "beach_mosquito",
+     "office": "Beach Mosquito Control District, Seat 3",
+     "year": 2016,
+     "outcome": "lost",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
    "id": "johnnie-beshearse",
    "name": "Johnnie Beshearse",
    "aliases": [
@@ -2557,6 +4986,14 @@
      "role": "2026 candidate: Lynn Haven Mayor (recall election)",
      "gov_id": "lh",
      "source": "finance_2026"
+    },
+    {
+     "role": "2025 candidate: Lynn Haven Commission, Seat 3",
+     "gov_id": "lh",
+     "office": "Lynn Haven Commission, Seat 3",
+     "year": 2025,
+     "outcome": "lost",
+     "source": "campaign_history"
     }
    ]
   },
@@ -2601,6 +5038,14 @@
     "lh"
    ],
    "roles": [
+    {
+     "role": "2017 candidate: Lynn Haven Commission, Seat 4",
+     "gov_id": "lh",
+     "office": "Lynn Haven Commission, Seat 4",
+     "year": 2017,
+     "outcome": "lost",
+     "source": "campaign_history"
+    },
     {
      "role": "former city commissioner, Seat 4",
      "gov_id": "lh",
@@ -2681,11 +5126,48 @@
      "source": "campaign"
     },
     {
+     "role": "2025 candidate: Panama City Commission, Ward 4",
+     "gov_id": "pc",
+     "office": "Panama City Commission, Ward 4",
+     "year": 2025,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2021 candidate: Panama City Commission, Ward 4",
+     "gov_id": "pc",
+     "office": "Panama City Commission, Ward 4",
+     "year": 2021,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
      "role": "City commissioner, Ward 4",
      "gov_id": "pc",
      "seat": "Ward 4",
      "years": "since 2021",
      "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "joshua-verville",
+   "name": "Joshua Verville",
+   "aliases": [
+    "Joshua Verville"
+   ],
+   "district": null,
+   "gov_ids": [
+    "lake_powell_cdd"
+   ],
+   "roles": [
+    {
+     "role": "2020 candidate: Lake Powell Community Development District, Seat 4",
+     "gov_id": "lake_powell_cdd",
+     "office": "Lake Powell Community Development District, Seat 4",
+     "year": 2020,
+     "outcome": "lost",
+     "source": "campaign_history"
     }
    ]
   },
@@ -2701,11 +5183,91 @@
    ],
    "roles": [
     {
+     "role": "2020 candidate: Panama City Beach Mayor",
+     "gov_id": "pcb",
+     "office": "Panama City Beach Mayor",
+     "year": 2020,
+     "outcome": "lost",
+     "source": "campaign_history"
+    },
+    {
      "role": "former council member, Ward 3",
      "gov_id": "pcb",
      "seat": "Ward 3",
      "years": "until 2018",
      "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "joyce-dean",
+   "name": "Joyce B Dean",
+   "aliases": [
+    "Joyce B Dean",
+    "Joyce B. Dean"
+   ],
+   "district": null,
+   "gov_ids": [
+    "beach_mosquito"
+   ],
+   "roles": [
+    {
+     "role": "2020 candidate: Beach Mosquito Control District, Seat 2",
+     "gov_id": "beach_mosquito",
+     "office": "Beach Mosquito Control District, Seat 2",
+     "year": 2020,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2016 candidate: Beach Mosquito Control District, Seat 2",
+     "gov_id": "beach_mosquito",
+     "office": "Beach Mosquito Control District, Seat 2",
+     "year": 2016,
+     "outcome": "won",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
+   "id": "judith-tinder",
+   "name": "Judith Tinder",
+   "aliases": [
+    "Judith Tinder"
+   ],
+   "district": null,
+   "gov_ids": [
+    "lh"
+   ],
+   "roles": [
+    {
+     "role": "2021 candidate: Lynn Haven Commission, Seat 4",
+     "gov_id": "lh",
+     "office": "Lynn Haven Commission, Seat 4",
+     "year": 2021,
+     "outcome": "won",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
+   "id": "judith-vandergrift",
+   "name": "Judith Vandergrift",
+   "aliases": [
+    "Judith Vandergrift"
+   ],
+   "district": null,
+   "gov_ids": [
+    "schools"
+   ],
+   "roles": [
+    {
+     "role": "2020 candidate: Superintendent of Schools",
+     "gov_id": "schools",
+     "office": "Superintendent of Schools",
+     "year": 2020,
+     "outcome": "lost",
+     "source": "campaign_history"
     }
    ]
   },
@@ -2735,6 +5297,30 @@
      "role": "2026 candidate: Lynn Haven Commissioner Seat 1",
      "gov_id": "lh",
      "source": "finance_2026"
+    },
+    {
+     "role": "2025 candidate: Lynn Haven Commission, Seat 4",
+     "gov_id": "lh",
+     "office": "Lynn Haven Commission, Seat 4",
+     "year": 2025,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2023 candidate: Lynn Haven Mayor",
+     "gov_id": "lh",
+     "office": "Lynn Haven Mayor",
+     "year": 2023,
+     "outcome": "lost",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2017 candidate: Lynn Haven Commission, Seat 4",
+     "gov_id": "lh",
+     "office": "Lynn Haven Commission, Seat 4",
+     "year": 2017,
+     "outcome": "won",
+     "source": "campaign_history"
     },
     {
      "role": "former city commissioner, Seat 4",
@@ -2773,6 +5359,14 @@
      "role": "board member",
      "gov_id": "lh",
      "source": "votes"
+    },
+    {
+     "role": "2023 candidate: Lynn Haven Commission, Seat 4",
+     "gov_id": "lh",
+     "office": "Lynn Haven Commission, Seat 4",
+     "year": 2023,
+     "outcome": "won",
+     "source": "campaign_history"
     },
     {
      "role": "former city commissioner, Seat 4",
@@ -2839,6 +5433,14 @@
      "source": "campaign"
     },
     {
+     "role": "2025 candidate: Parker Council, Seat 3",
+     "gov_id": "parker",
+     "office": "Parker Council, Seat 3",
+     "year": 2025,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
      "role": "Council member, Seat 3",
      "gov_id": "parker",
      "seat": "Seat 3",
@@ -2858,6 +5460,14 @@
     "county"
    ],
    "roles": [
+    {
+     "role": "2018 candidate: Bay County Commission, District 4",
+     "gov_id": "county",
+     "office": "Bay County Commission, District 4",
+     "year": 2018,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
     {
      "role": "former county commissioner, District 4",
      "gov_id": "county",
@@ -2886,6 +5496,27 @@
    ]
   },
   {
+   "id": "keith-curry",
+   "name": "Keith Curry",
+   "aliases": [
+    "Keith Curry"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pcb"
+   ],
+   "roles": [
+    {
+     "role": "2016 candidate: Panama City Beach Council, Ward 4",
+     "gov_id": "pcb",
+     "office": "Panama City Beach Council, Ward 4",
+     "year": 2016,
+     "outcome": "lost",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
    "id": "keith-mefford",
    "name": "Keith Mefford",
    "aliases": [
@@ -2904,6 +5535,27 @@
    ]
   },
   {
+   "id": "keith-whitaker",
+   "name": "Keith E. Whitaker",
+   "aliases": [
+    "Keith E. Whitaker"
+   ],
+   "district": null,
+   "gov_ids": [
+    "county"
+   ],
+   "roles": [
+    {
+     "role": "2020 candidate: Bay County Commission, District 4",
+     "gov_id": "county",
+     "office": "Bay County Commission, District 4",
+     "year": 2020,
+     "outcome": "lost",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
    "id": "ken-jones",
    "name": "Ken Jones",
    "aliases": [
@@ -2915,11 +5567,70 @@
    ],
    "roles": [
     {
+     "role": "2017 candidate: Parker Council, Seats 1 and 3",
+     "gov_id": "parker",
+     "office": "Parker Council, Seats 1 and 3",
+     "year": 2017,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
      "role": "former council member, Seat 1",
      "gov_id": "parker",
      "seat": "Seat 1",
      "years": "until 2020",
      "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "ken-nelson",
+   "name": "Ken Nelson",
+   "aliases": [
+    "Ken Nelson"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pcb"
+   ],
+   "roles": [
+    {
+     "role": "2016 candidate: Panama City Beach Mayor",
+     "gov_id": "pcb",
+     "office": "Panama City Beach Mayor",
+     "year": 2016,
+     "outcome": "lost",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
+   "id": "ken-thomas",
+   "name": "Ken Thomas Jr",
+   "aliases": [
+    "Ken Thomas Jr",
+    "Ken Thomas Jr."
+   ],
+   "district": null,
+   "gov_ids": [
+    "parker"
+   ],
+   "roles": [
+    {
+     "role": "2021 candidate: Parker Council, Seat 3",
+     "gov_id": "parker",
+     "office": "Parker Council, Seat 3",
+     "year": 2021,
+     "outcome": "lost",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2019 candidate: Parker Council, Seat 4",
+     "gov_id": "parker",
+     "office": "Parker Council, Seat 4",
+     "year": 2019,
+     "outcome": "lost",
+     "source": "campaign_history"
     }
    ]
   },
@@ -2955,6 +5666,14 @@
      "role": "officeholder: Callaway Commissioner, Ward 4",
      "gov_id": "cw",
      "source": "campaign"
+    },
+    {
+     "role": "2024 candidate: Callaway Commission, Ward 4",
+     "gov_id": "cw",
+     "office": "Callaway Commission, Ward 4",
+     "year": 2024,
+     "outcome": "won",
+     "source": "campaign_history"
     },
     {
      "role": "City commissioner, Ward 4",
@@ -3000,11 +5719,48 @@
    ],
    "roles": [
     {
+     "role": "2023 candidate: Panama City Commission, Ward 2",
+     "gov_id": "pc",
+     "office": "Panama City Commission, Ward 2",
+     "year": 2023,
+     "outcome": "withdrew",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2019 candidate: Panama City Commission, Ward 2",
+     "gov_id": "pc",
+     "office": "Panama City Commission, Ward 2",
+     "year": 2019,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
      "role": "former city commissioner, Ward 2",
      "gov_id": "pc",
      "seat": "Ward 2",
      "years": "until 2023",
      "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "kevin-ridge",
+   "name": "Kevin Ridge",
+   "aliases": [
+    "Kevin Ridge"
+   ],
+   "district": null,
+   "gov_ids": [
+    "lh"
+   ],
+   "roles": [
+    {
+     "role": "2017 candidate: Lynn Haven Commission, Seat 3",
+     "gov_id": "lh",
+     "office": "Lynn Haven Commission, Seat 3",
+     "year": 2017,
+     "outcome": "lost",
+     "source": "campaign_history"
     }
    ]
   },
@@ -3028,6 +5784,87 @@
      "role": "2026 candidate: Lake Powell Residential Golf Community Development District, Seat 5",
      "gov_id": "lake_powell_cdd",
      "source": "candidates_2026"
+    }
+   ]
+  },
+  {
+   "id": "kimberly-smith",
+   "name": "Kimberly Smith",
+   "aliases": [
+    "Kimberly Smith"
+   ],
+   "district": null,
+   "gov_ids": [
+    "schools"
+   ],
+   "roles": [
+    {
+     "role": "2016 candidate: Superintendent of Schools",
+     "gov_id": "schools",
+     "office": "Superintendent of Schools",
+     "year": 2016,
+     "outcome": "lost",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
+   "id": "larry-couch",
+   "name": "Larry Couch",
+   "aliases": [
+    "Larry Couch",
+    "Larry J Couch",
+    "Larry J. Couch"
+   ],
+   "district": null,
+   "gov_ids": [
+    "beach_mosquito"
+   ],
+   "roles": [
+    {
+     "role": "2024 candidate: Beach Mosquito Control District, Seat 1",
+     "gov_id": "beach_mosquito",
+     "office": "Beach Mosquito Control District, Seat 1",
+     "year": 2024,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2020 candidate: Beach Mosquito Control District, Seat 1",
+     "gov_id": "beach_mosquito",
+     "office": "Beach Mosquito Control District, Seat 1",
+     "year": 2020,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2016 candidate: Beach Mosquito Control District, Seat 1",
+     "gov_id": "beach_mosquito",
+     "office": "Beach Mosquito Control District, Seat 1",
+     "year": 2016,
+     "outcome": "won",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
+   "id": "larry-henderson",
+   "name": "Larry Henderson",
+   "aliases": [
+    "Larry Henderson"
+   ],
+   "district": null,
+   "gov_ids": [
+    "mb"
+   ],
+   "roles": [
+    {
+     "role": "2024 candidate: Mexico Beach Council, Group 5",
+     "gov_id": "mb",
+     "office": "Mexico Beach Council, Group 5",
+     "year": 2024,
+     "outcome": "lost",
+     "source": "campaign_history"
     }
    ]
   },
@@ -3068,10 +5905,40 @@
    ]
   },
   {
+   "id": "linda-albrecht",
+   "name": "Linda Albrecht",
+   "aliases": [
+    "Linda Albrecht"
+   ],
+   "district": null,
+   "gov_ids": [
+    "mb"
+   ],
+   "roles": [
+    {
+     "role": "2019 candidate: Mexico Beach Council, Group 3",
+     "gov_id": "mb",
+     "office": "Mexico Beach Council, Group 3",
+     "year": 2019,
+     "outcome": "lost",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2017 candidate: Mexico Beach Council, Group 3",
+     "gov_id": "mb",
+     "office": "Mexico Beach Council, Group 3",
+     "year": 2017,
+     "outcome": "won",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
    "id": "linda-hamilton",
    "name": "Linda Hamilton",
    "aliases": [
-    "Linda Hamilton"
+    "Linda Hamilton",
+    "Linda W Hamilton"
    ],
    "district": null,
    "gov_ids": [
@@ -3098,6 +5965,22 @@
      "role": "officeholder: Mexico Beach Council, Group 3",
      "gov_id": "mb",
      "source": "campaign"
+    },
+    {
+     "role": "2025 candidate: Mexico Beach Council, Group 3",
+     "gov_id": "mb",
+     "office": "Mexico Beach Council, Group 3",
+     "year": 2025,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2023 candidate: Mexico Beach Council, Group 3",
+     "gov_id": "mb",
+     "office": "Mexico Beach Council, Group 3",
+     "year": 2023,
+     "outcome": "won",
+     "source": "campaign_history"
     },
     {
      "role": "Council member, Group 3",
@@ -3136,11 +6019,69 @@
      "source": "salaries"
     },
     {
+     "role": "2024 candidate: Mexico Beach Council, Group 4",
+     "gov_id": "mb",
+     "office": "Mexico Beach Council, Group 4",
+     "year": 2024,
+     "outcome": "lost",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2023 candidate: Mexico Beach Council, Group 2",
+     "gov_id": "mb",
+     "office": "Mexico Beach Council, Group 2",
+     "year": 2023,
+     "outcome": "lost",
+     "source": "campaign_history"
+    },
+    {
      "role": "Council member, Group 4",
      "gov_id": "mb",
      "seat": "Group 4",
      "years": "since 2026",
      "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "lynne-schneider",
+   "name": "Lynne Schneider",
+   "aliases": [
+    "Lynne Schneider"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pc"
+   ],
+   "roles": [
+    {
+     "role": "2019 candidate: Panama City Mayor",
+     "gov_id": "pc",
+     "office": "Panama City Mayor",
+     "year": 2019,
+     "outcome": "lost",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
+   "id": "mackie-owens",
+   "name": "Mackie Owens",
+   "aliases": [
+    "Mackie Owens"
+   ],
+   "district": null,
+   "gov_ids": [
+    "schools"
+   ],
+   "roles": [
+    {
+     "role": "2016 candidate: Superintendent of Schools",
+     "gov_id": "schools",
+     "office": "Superintendent of Schools",
+     "year": 2016,
+     "outcome": "lost",
+     "source": "campaign_history"
     }
    ]
   },
@@ -3155,6 +6096,14 @@
     "lh"
    ],
    "roles": [
+    {
+     "role": "2019 candidate: Lynn Haven Mayor",
+     "gov_id": "lh",
+     "office": "Lynn Haven Mayor",
+     "year": 2019,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
     {
      "role": "former mayor",
      "gov_id": "lh",
@@ -3181,6 +6130,56 @@
      "seat": "City Manager",
      "years": "until 2020",
      "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "mark-andersen",
+   "name": "Mark Andersen",
+   "aliases": [
+    "Mark Andersen"
+   ],
+   "district": null,
+   "gov_ids": [
+    "soe"
+   ],
+   "roles": [
+    {
+     "role": "2020 candidate: Supervisor of Elections",
+     "gov_id": "soe",
+     "office": "Supervisor of Elections",
+     "year": 2020,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2016 candidate: Supervisor of Elections",
+     "gov_id": "soe",
+     "office": "Supervisor of Elections",
+     "year": 2016,
+     "outcome": "won",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
+   "id": "mark-big-chief-strickland",
+   "name": "Mark \"Big Chief\" Strickland",
+   "aliases": [
+    "Mark \"Big Chief\" Strickland"
+   ],
+   "district": null,
+   "gov_ids": [
+    "schools"
+   ],
+   "roles": [
+    {
+     "role": "2020 candidate: School Board, District 1",
+     "gov_id": "schools",
+     "office": "School Board, District 1",
+     "year": 2020,
+     "outcome": "lost",
+     "source": "campaign_history"
     }
    ]
   },
@@ -3213,6 +6212,14 @@
      "source": "campaign"
     },
     {
+     "role": "2024 candidate: Superintendent of Schools",
+     "gov_id": "schools",
+     "office": "Superintendent of Schools",
+     "year": 2024,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
      "role": "Superintendent",
      "gov_id": "schools",
      "seat": "Superintendent",
@@ -3225,6 +6232,35 @@
      "seat": "City Manager",
      "years": "2018–2023",
      "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "mark-meade",
+   "name": "Mark Meade",
+   "aliases": [
+    "Mark Meade"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pcb"
+   ],
+   "roles": [
+    {
+     "role": "2024 candidate: Panama City Beach Mayor",
+     "gov_id": "pcb",
+     "office": "Panama City Beach Mayor",
+     "year": 2024,
+     "outcome": "withdrew",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2022 candidate: Panama City Beach Council, Ward 1",
+     "gov_id": "pcb",
+     "office": "Panama City Beach Council, Ward 1",
+     "year": 2022,
+     "outcome": "lost",
+     "source": "campaign_history"
     }
    ]
   },
@@ -3287,6 +6323,22 @@
      "source": "votes"
     },
     {
+     "role": "2024 candidate: Panama City Beach Mayor",
+     "gov_id": "pcb",
+     "office": "Panama City Beach Mayor",
+     "year": 2024,
+     "outcome": "lost",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2020 candidate: Panama City Beach Mayor",
+     "gov_id": "pcb",
+     "office": "Panama City Beach Mayor",
+     "year": 2020,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
      "role": "former mayor",
      "gov_id": "pcb",
      "seat": "Mayor",
@@ -3310,6 +6362,27 @@
      "role": "Police Chief",
      "gov_id": "pc",
      "source": "salaries"
+    }
+   ]
+  },
+  {
+   "id": "marquis-tyson",
+   "name": "Marquis Tyson",
+   "aliases": [
+    "Marquis Tyson"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pc"
+   ],
+   "roles": [
+    {
+     "role": "2019 candidate: Panama City Commission, Ward 2",
+     "gov_id": "pc",
+     "office": "Panama City Commission, Ward 2",
+     "year": 2019,
+     "outcome": "lost",
+     "source": "campaign_history"
     }
    ]
   },
@@ -3371,6 +6444,14 @@
      "source": "finance_2026"
     },
     {
+     "role": "2022 candidate: Panama City Beach Council, Ward 3",
+     "gov_id": "pcb",
+     "office": "Panama City Beach Council, Ward 3",
+     "year": 2022,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
      "role": "2026 candidate: City of Panama City Beach Council, Ward 3",
      "gov_id": "pcb",
      "source": "candidates_2026"
@@ -3395,6 +6476,14 @@
     "cw"
    ],
    "roles": [
+    {
+     "role": "2018 candidate: Callaway Commission, Ward 1",
+     "gov_id": "cw",
+     "office": "Callaway Commission, Ward 1",
+     "year": 2018,
+     "outcome": "lost",
+     "source": "campaign_history"
+    },
     {
      "role": "former city commissioner, Ward 1",
      "gov_id": "cw",
@@ -3433,6 +6522,27 @@
      "seat": "City Administrator",
      "years": "since 2025",
      "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "michael-delonjay",
+   "name": "Michael DeLonjay",
+   "aliases": [
+    "Michael DeLonjay"
+   ],
+   "district": null,
+   "gov_ids": [
+    "parker"
+   ],
+   "roles": [
+    {
+     "role": "2017 candidate: Parker Council, Seats 1 and 3",
+     "gov_id": "parker",
+     "office": "Parker Council, Seats 1 and 3",
+     "year": 2017,
+     "outcome": "withdrew",
+     "source": "campaign_history"
     }
    ]
   },
@@ -3493,6 +6603,22 @@
      "role": "officeholder: Panama City Beach Council, Ward 4",
      "gov_id": "pcb",
      "source": "campaign"
+    },
+    {
+     "role": "2024 candidate: Panama City Beach Council, Ward 4",
+     "gov_id": "pcb",
+     "office": "Panama City Beach Council, Ward 4",
+     "year": 2024,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2020 candidate: Panama City Beach Council, Ward 4",
+     "gov_id": "pcb",
+     "office": "Panama City Beach Council, Ward 4",
+     "year": 2020,
+     "outcome": "won",
+     "source": "campaign_history"
     },
     {
      "role": "Council member, Ward 4",
@@ -3570,6 +6696,7 @@
    "id": "michael-rohan",
    "name": "Michael Rohan",
    "aliases": [
+    "Michael \"Doc\" Rohan",
     "Michael Rohan"
    ],
    "district": null,
@@ -3587,6 +6714,30 @@
      "role": "board member",
      "gov_id": "pc",
      "source": "votes"
+    },
+    {
+     "role": "2025 candidate: Panama City Mayor",
+     "gov_id": "pc",
+     "office": "Panama City Mayor",
+     "year": 2025,
+     "outcome": "lost",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2023 candidate: Panama City Mayor",
+     "gov_id": "pc",
+     "office": "Panama City Mayor",
+     "year": 2023,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2019 candidate: Panama City Mayor",
+     "gov_id": "pc",
+     "office": "Panama City Mayor",
+     "year": 2019,
+     "outcome": "lost",
+     "source": "campaign_history"
     },
     {
      "role": "former mayor",
@@ -3640,11 +6791,48 @@
      "source": "votes"
     },
     {
+     "role": "2023 candidate: Mexico Beach Mayor",
+     "gov_id": "mb",
+     "office": "Mexico Beach Mayor",
+     "year": 2023,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2022 candidate: Mexico Beach Council, Group 5",
+     "gov_id": "mb",
+     "office": "Mexico Beach Council, Group 5",
+     "year": 2022,
+     "outcome": "lost",
+     "source": "campaign_history"
+    },
+    {
      "role": "former mayor",
      "gov_id": "mb",
      "seat": "Mayor (Group 1)",
      "years": "2023–2024",
      "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "michelle-bryant",
+   "name": "Michelle Bryant",
+   "aliases": [
+    "Michelle Bryant"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pc"
+   ],
+   "roles": [
+    {
+     "role": "2023 candidate: Panama City Commission, Ward 2",
+     "gov_id": "pc",
+     "office": "Panama City Commission, Ward 2",
+     "year": 2023,
+     "outcome": "lost",
+     "source": "campaign_history"
     }
    ]
   },
@@ -3698,6 +6886,14 @@
    ],
    "roles": [
     {
+     "role": "2016 candidate: Bay County Commission, District 1",
+     "gov_id": "county",
+     "office": "Bay County Commission, District 1",
+     "year": 2016,
+     "outcome": "lost",
+     "source": "campaign_history"
+    },
+    {
      "role": "former county commissioner, District 1",
      "gov_id": "county",
      "seat": "District 1",
@@ -3710,6 +6906,7 @@
    "id": "mike-nichols",
    "name": "Mike Nichols",
    "aliases": [
+    "Michael Nichols",
     "Mike Nichols"
    ],
    "district": null,
@@ -3718,11 +6915,56 @@
    ],
    "roles": [
     {
+     "role": "2021 candidate: Panama City Commission, Ward 4",
+     "gov_id": "pc",
+     "office": "Panama City Commission, Ward 4",
+     "year": 2021,
+     "outcome": "lost",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2017 candidate: Panama City Commission, Ward 4",
+     "gov_id": "pc",
+     "office": "Panama City Commission, Ward 4",
+     "year": 2017,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
      "role": "former city commissioner, Ward 4",
      "gov_id": "pc",
      "seat": "Ward 4",
      "years": "until 2021",
      "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "mike-riddle",
+   "name": "Mike Riddle",
+   "aliases": [
+    "Mike Riddle"
+   ],
+   "district": null,
+   "gov_ids": [
+    "lake_powell_cdd"
+   ],
+   "roles": [
+    {
+     "role": "2016 candidate: Lake Powell Community Development District, Seat 1",
+     "gov_id": "lake_powell_cdd",
+     "office": "Lake Powell Community Development District, Seat 1",
+     "year": 2016,
+     "outcome": "withdrew",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2016 candidate: Lake Powell Community Development District, Seat 3",
+     "gov_id": "lake_powell_cdd",
+     "office": "Lake Powell Community Development District, Seat 3",
+     "year": 2016,
+     "outcome": "withdrew",
+     "source": "campaign_history"
     }
    ]
   },
@@ -3738,6 +6980,14 @@
     "pcb"
    ],
    "roles": [
+    {
+     "role": "2016 candidate: Panama City Beach Mayor",
+     "gov_id": "pcb",
+     "office": "Panama City Beach Mayor",
+     "year": 2016,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
     {
      "role": "former county commissioner, District 5",
      "gov_id": "county",
@@ -3769,6 +7019,27 @@
      "role": "City Attorney",
      "gov_id": "pc",
      "source": "salaries"
+    }
+   ]
+  },
+  {
+   "id": "nichole-phipps",
+   "name": "Nichole Phipps",
+   "aliases": [
+    "Nichole Phipps"
+   ],
+   "district": null,
+   "gov_ids": [
+    "schools"
+   ],
+   "roles": [
+    {
+     "role": "2024 candidate: School Board, District 4",
+     "gov_id": "schools",
+     "office": "School Board, District 4",
+     "year": 2024,
+     "outcome": "did not qualify",
+     "source": "campaign_history"
     }
    ]
   },
@@ -3820,6 +7091,35 @@
      "role": "officeholder: Supervisor of Elections",
      "gov_id": "soe",
      "source": "campaign"
+    },
+    {
+     "role": "2024 candidate: Supervisor of Elections",
+     "gov_id": "soe",
+     "office": "Supervisor of Elections",
+     "year": 2024,
+     "outcome": "won",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
+   "id": "pamela-hiller",
+   "name": "Pamela Hiller",
+   "aliases": [
+    "Pamela Hiller"
+   ],
+   "district": null,
+   "gov_ids": [
+    "lh"
+   ],
+   "roles": [
+    {
+     "role": "2019 candidate: Lynn Haven Commission, Seat 2",
+     "gov_id": "lh",
+     "office": "Lynn Haven Commission, Seat 2",
+     "year": 2019,
+     "outcome": "lost",
+     "source": "campaign_history"
     }
    ]
   },
@@ -3834,6 +7134,14 @@
     "schools"
    ],
    "roles": [
+    {
+     "role": "2018 candidate: School Board, District 3",
+     "gov_id": "schools",
+     "office": "School Board, District 3",
+     "year": 2018,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
     {
      "role": "former school board member, District 3",
      "gov_id": "schools",
@@ -3874,6 +7182,30 @@
      "role": "officeholder: Callaway Mayor",
      "gov_id": "cw",
      "source": "campaign"
+    },
+    {
+     "role": "2024 candidate: Callaway Mayor",
+     "gov_id": "cw",
+     "office": "Callaway Mayor",
+     "year": 2024,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2020 candidate: Callaway Mayor",
+     "gov_id": "cw",
+     "office": "Callaway Mayor",
+     "year": 2020,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2018 candidate: Callaway Mayor",
+     "gov_id": "cw",
+     "office": "Callaway Mayor",
+     "year": 2018,
+     "outcome": "won",
+     "source": "campaign_history"
     },
     {
      "role": "Mayor",
@@ -3942,11 +7274,69 @@
      "source": "campaign"
     },
     {
+     "role": "2023 candidate: Lynn Haven Commission, Seat 2",
+     "gov_id": "lh",
+     "office": "Lynn Haven Commission, Seat 2",
+     "year": 2023,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2019 candidate: Lynn Haven Commission, Seat 2",
+     "gov_id": "lh",
+     "office": "Lynn Haven Commission, Seat 2",
+     "year": 2019,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
      "role": "City commissioner, Seat 2",
      "gov_id": "lh",
      "seat": "Seat 2",
      "years": "since 2019",
      "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "patricia-fousek",
+   "name": "Patricia Fousek",
+   "aliases": [
+    "Patricia Fousek"
+   ],
+   "district": null,
+   "gov_ids": [
+    "parker"
+   ],
+   "roles": [
+    {
+     "role": "2023 candidate: Parker Mayor",
+     "gov_id": "parker",
+     "office": "Parker Mayor",
+     "year": 2023,
+     "outcome": "lost",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
+   "id": "paul-bohac",
+   "name": "Paul Bohac",
+   "aliases": [
+    "Paul Bohac"
+   ],
+   "district": null,
+   "gov_ids": [
+    "cw"
+   ],
+   "roles": [
+    {
+     "role": "2016 candidate: Callaway Commission, Ward 3",
+     "gov_id": "cw",
+     "office": "Callaway Commission, Ward 3",
+     "year": 2016,
+     "outcome": "lost",
+     "source": "campaign_history"
     }
    ]
   },
@@ -3983,11 +7373,48 @@
      "source": "campaign"
     },
     {
+     "role": "2022 candidate: Panama City Beach Council, Ward 1",
+     "gov_id": "pcb",
+     "office": "Panama City Beach Council, Ward 1",
+     "year": 2022,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2018 candidate: Panama City Beach Council, Ward 1",
+     "gov_id": "pcb",
+     "office": "Panama City Beach Council, Ward 1",
+     "year": 2018,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
      "role": "Council member, Ward 1",
      "gov_id": "pcb",
      "seat": "Ward 1",
      "years": "since 2018",
      "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "paul-davis",
+   "name": "Paul Davis",
+   "aliases": [
+    "Paul Davis"
+   ],
+   "district": null,
+   "gov_ids": [
+    "county"
+   ],
+   "roles": [
+    {
+     "role": "2020 candidate: Bay County Commission, District 4",
+     "gov_id": "county",
+     "office": "Bay County Commission, District 4",
+     "year": 2020,
+     "outcome": "lost",
+     "source": "campaign_history"
     }
    ]
   },
@@ -3999,6 +7426,7 @@
    ],
    "district": null,
    "gov_ids": [
+    "beach_mosquito",
     "pcb"
    ],
    "roles": [
@@ -4014,6 +7442,30 @@
      "source": "votes"
     },
     {
+     "role": "2024 candidate: Beach Mosquito Control District, Seat 2",
+     "gov_id": "beach_mosquito",
+     "office": "Beach Mosquito Control District, Seat 2",
+     "year": 2024,
+     "outcome": "lost",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2020 candidate: Panama City Beach Council, Ward 2",
+     "gov_id": "pcb",
+     "office": "Panama City Beach Council, Ward 2",
+     "year": 2020,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2016 candidate: Panama City Beach Council, Ward 2",
+     "gov_id": "pcb",
+     "office": "Panama City Beach Council, Ward 2",
+     "year": 2016,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
      "role": "former council member, Ward 2",
      "gov_id": "pcb",
      "seat": "Ward 2",
@@ -4026,6 +7478,8 @@
    "id": "philip-griffitts",
    "name": "Philip Griffitts",
    "aliases": [
+    "Philip \"Griff\" Griffitts",
+    "Philip 'Griff ' Griffitts",
     "Philip Griffitts"
    ],
    "district": null,
@@ -4033,6 +7487,22 @@
     "county"
    ],
    "roles": [
+    {
+     "role": "2020 candidate: Bay County Commission, District 5",
+     "gov_id": "county",
+     "office": "Bay County Commission, District 5",
+     "year": 2020,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2016 candidate: Bay County Commission, District 5",
+     "gov_id": "county",
+     "office": "Bay County Commission, District 5",
+     "year": 2016,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
     {
      "role": "former county commissioner, District 5",
      "gov_id": "county",
@@ -4046,13 +7516,30 @@
    "id": "phillip-dykes",
    "name": "Phillip Dykes",
    "aliases": [
-    "Phillip Dykes"
+    "Phillip Dykes",
+    "Phillip Russell Dykes"
    ],
    "district": null,
    "gov_ids": [
     "sp"
    ],
    "roles": [
+    {
+     "role": "2020 candidate: Springfield Commission, Ward 2",
+     "gov_id": "sp",
+     "office": "Springfield Commission, Ward 2",
+     "year": 2020,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2016 candidate: Springfield Commission, Ward 2",
+     "gov_id": "sp",
+     "office": "Springfield Commission, Ward 2",
+     "year": 2016,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
     {
      "role": "former city commissioner, Ward 2",
      "gov_id": "sp",
@@ -4119,6 +7606,22 @@
      "source": "finance_2026"
     },
     {
+     "role": "2022 candidate: Springfield Mayor",
+     "gov_id": "sp",
+     "office": "Springfield Mayor",
+     "year": 2022,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2018 candidate: Springfield Mayor",
+     "gov_id": "sp",
+     "office": "Springfield Mayor",
+     "year": 2018,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
      "role": "2026 candidate: City of Springfield Mayor",
      "gov_id": "sp",
      "source": "candidates_2026"
@@ -4127,7 +7630,7 @@
      "role": "Mayor",
      "gov_id": "sp",
      "seat": "Mayor",
-     "years": "since before 2015",
+     "years": "since before 2016",
      "source": "officeholders"
     }
    ]
@@ -4149,6 +7652,64 @@
      "seat": "Ward 4",
      "years": "until 2016",
      "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "rex-putnal",
+   "name": "Rex Putnal",
+   "aliases": [
+    "Rex Putnal"
+   ],
+   "district": null,
+   "gov_ids": [
+    "mb"
+   ],
+   "roles": [
+    {
+     "role": "2018 candidate: Mexico Beach Council, Group 5",
+     "gov_id": "mb",
+     "office": "Mexico Beach Council, Group 5",
+     "year": 2018,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2016 candidate: Mexico Beach Council, Group 5",
+     "gov_id": "mb",
+     "office": "Mexico Beach Council, Group 5",
+     "year": 2016,
+     "outcome": "won",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
+   "id": "rich-musgrave",
+   "name": "Rich Musgrave",
+   "aliases": [
+    "Rich Musgrave"
+   ],
+   "district": null,
+   "gov_ids": [
+    "parker"
+   ],
+   "roles": [
+    {
+     "role": "2021 candidate: Parker Mayor",
+     "gov_id": "parker",
+     "office": "Parker Mayor",
+     "year": 2021,
+     "outcome": "lost",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2017 candidate: Parker Mayor",
+     "gov_id": "parker",
+     "office": "Parker Mayor",
+     "year": 2017,
+     "outcome": "won",
+     "source": "campaign_history"
     }
    ]
   },
@@ -4185,6 +7746,14 @@
      "source": "campaign"
     },
     {
+     "role": "2024 candidate: Springfield Commission, Ward 2",
+     "gov_id": "sp",
+     "office": "Springfield Commission, Ward 2",
+     "year": 2024,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
      "role": "City commissioner, Ward 2",
      "gov_id": "sp",
      "seat": "Ward 2",
@@ -4212,10 +7781,32 @@
    ]
   },
   {
+   "id": "richard-mccoy",
+   "name": "Richard McCoy",
+   "aliases": [
+    "Richard McCoy"
+   ],
+   "district": null,
+   "gov_ids": [
+    "mb"
+   ],
+   "roles": [
+    {
+     "role": "2020 candidate: Mexico Beach Council, Group 5",
+     "gov_id": "mb",
+     "office": "Mexico Beach Council, Group 5",
+     "year": 2020,
+     "outcome": "lost",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
    "id": "richard-musgrave",
    "name": "Richard Musgrave",
    "aliases": [
-    "Richard Musgrave"
+    "Richard Musgrave",
+    "Richard P. Musgrave"
    ],
    "district": null,
    "gov_ids": [
@@ -4223,11 +7814,40 @@
    ],
    "roles": [
     {
+     "role": "2019 candidate: Parker Mayor",
+     "gov_id": "parker",
+     "office": "Parker Mayor",
+     "year": 2019,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
      "role": "former mayor",
      "gov_id": "parker",
      "seat": "Mayor",
      "years": "until 2021",
      "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "richard-walker",
+   "name": "Richard Walker",
+   "aliases": [
+    "Richard Walker"
+   ],
+   "district": null,
+   "gov_ids": [
+    "lh"
+   ],
+   "roles": [
+    {
+     "role": "2023 candidate: Lynn Haven Commission, Seat 2",
+     "gov_id": "lh",
+     "office": "Lynn Haven Commission, Seat 2",
+     "year": 2023,
+     "outcome": "lost",
+     "source": "campaign_history"
     }
    ]
   },
@@ -4264,6 +7884,37 @@
      "source": "campaign"
     },
     {
+     "role": "2025 candidate: Mexico Beach Mayor",
+     "gov_id": "mb",
+     "office": "Mexico Beach Mayor",
+     "year": 2025,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2024 candidate: Mexico Beach Council, Group 5",
+     "gov_id": "mb",
+     "office": "Mexico Beach Council, Group 5",
+     "year": 2024,
+     "source": "campaign_history"
+    },
+    {
+     "role": "2024 candidate: Mexico Beach Mayor (special election)",
+     "gov_id": "mb",
+     "office": "Mexico Beach Mayor (special election)",
+     "year": 2024,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2022 candidate: Mexico Beach Council, Group 5",
+     "gov_id": "mb",
+     "office": "Mexico Beach Council, Group 5",
+     "year": 2022,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
      "role": "Mayor",
      "gov_id": "mb",
      "seat": "Mayor (Group 1)",
@@ -4294,6 +7945,27 @@
      "role": "Major - Jail, Warrants & Court Security",
      "gov_id": "sheriff",
      "source": "salaries"
+    }
+   ]
+  },
+  {
+   "id": "rick-russell",
+   "name": "Rick Russell Jr.",
+   "aliases": [
+    "Rick Russell Jr."
+   ],
+   "district": null,
+   "gov_ids": [
+    "pcb"
+   ],
+   "roles": [
+    {
+     "role": "2016 candidate: Panama City Beach Mayor",
+     "gov_id": "pcb",
+     "office": "Panama City Beach Mayor",
+     "year": 2016,
+     "outcome": "lost",
+     "source": "campaign_history"
     }
    ]
   },
@@ -4330,11 +8002,40 @@
      "source": "campaign"
     },
     {
+     "role": "2025 candidate: Panama City Commission, Ward 1",
+     "gov_id": "pc",
+     "office": "Panama City Commission, Ward 1",
+     "year": 2025,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
      "role": "City commissioner, Ward 1",
      "gov_id": "pc",
      "seat": "Ward 1",
      "years": "since 2025",
      "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "robert-benjamin-smith",
+   "name": "Robert Benjamin Smith",
+   "aliases": [
+    "Robert Benjamin Smith"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pcb"
+   ],
+   "roles": [
+    {
+     "role": "2016 candidate: Panama City Beach Council, Ward 4",
+     "gov_id": "pcb",
+     "office": "Panama City Beach Council, Ward 4",
+     "year": 2016,
+     "outcome": "lost",
+     "source": "campaign_history"
     }
    ]
   },
@@ -4381,6 +8082,30 @@
      "source": "finance_2026"
     },
     {
+     "role": "2022 candidate: Bay County Commission, District 2",
+     "gov_id": "county",
+     "office": "Bay County Commission, District 2",
+     "year": 2022,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2018 candidate: Bay County Commission, District 2",
+     "gov_id": "county",
+     "office": "Bay County Commission, District 2",
+     "year": 2018,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2016 candidate: Bay County Commission, District 2",
+     "gov_id": "county",
+     "office": "Bay County Commission, District 2",
+     "year": 2016,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
      "role": "2026 candidate: Bay County Commission, District 2",
      "gov_id": "county",
      "source": "candidates_2026"
@@ -4391,6 +8116,48 @@
      "seat": "District 2",
      "years": "since 2016",
      "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "robert-merritt",
+   "name": "Robert Merritt III",
+   "aliases": [
+    "Robert Merritt III"
+   ],
+   "district": null,
+   "gov_ids": [
+    "county"
+   ],
+   "roles": [
+    {
+     "role": "2024 candidate: Bay County Commission, District 5",
+     "gov_id": "county",
+     "office": "Bay County Commission, District 5",
+     "year": 2024,
+     "outcome": "withdrew",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
+   "id": "robert-wright",
+   "name": "Robert Wright",
+   "aliases": [
+    "Robert Wright"
+   ],
+   "district": null,
+   "gov_ids": [
+    "county"
+   ],
+   "roles": [
+    {
+     "role": "2020 candidate: Bay County Commission, District 4",
+     "gov_id": "county",
+     "office": "Bay County Commission, District 4",
+     "year": 2020,
+     "outcome": "lost",
+     "source": "campaign_history"
     }
    ]
   },
@@ -4425,6 +8192,14 @@
     "lh"
    ],
    "roles": [
+    {
+     "role": "2017 candidate: Lynn Haven Commission, Seat 3",
+     "gov_id": "lh",
+     "office": "Lynn Haven Commission, Seat 3",
+     "year": 2017,
+     "outcome": "lost",
+     "source": "campaign_history"
+    },
     {
      "role": "former city commissioner, Seat 3",
      "gov_id": "lh",
@@ -4467,6 +8242,30 @@
      "source": "campaign"
     },
     {
+     "role": "2025 candidate: Parker Council, Seat 1",
+     "gov_id": "parker",
+     "office": "Parker Council, Seat 1",
+     "year": 2025,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2021 candidate: Parker Council, Seat 1",
+     "gov_id": "parker",
+     "office": "Parker Council, Seat 1",
+     "year": 2021,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2019 candidate: Parker Council, Seat 2",
+     "gov_id": "parker",
+     "office": "Parker Council, Seat 2",
+     "year": 2019,
+     "outcome": "lost",
+     "source": "campaign_history"
+    },
+    {
      "role": "Council member, Seat 1",
      "gov_id": "parker",
      "seat": "Seat 1",
@@ -4494,6 +8293,22 @@
    ],
    "roles": [
     {
+     "role": "2020 candidate: Callaway Commission, Ward 3",
+     "gov_id": "cw",
+     "office": "Callaway Commission, Ward 3",
+     "year": 2020,
+     "outcome": "withdrew",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2016 candidate: Callaway Commission, Ward 3",
+     "gov_id": "cw",
+     "office": "Callaway Commission, Ward 3",
+     "year": 2016,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
      "role": "former city commissioner, Ward 3",
      "gov_id": "cw",
      "seat": "Ward 3",
@@ -4503,16 +8318,46 @@
    ]
   },
   {
+   "id": "ron-keel",
+   "name": "Ron Keel",
+   "aliases": [
+    "Ron Keel"
+   ],
+   "district": null,
+   "gov_ids": [
+    "county"
+   ],
+   "roles": [
+    {
+     "role": "2024 candidate: Bay County Commission, District 1",
+     "gov_id": "county",
+     "office": "Bay County Commission, District 1",
+     "year": 2024,
+     "outcome": "lost",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
    "id": "ryan-neves",
    "name": "Ryan Neves",
    "aliases": [
-    "Ryan Neves"
+    "Ryan Neves",
+    "Ryan Scott Neves"
    ],
    "district": null,
    "gov_ids": [
     "schools"
    ],
    "roles": [
+    {
+     "role": "2016 candidate: School Board, District 4",
+     "gov_id": "schools",
+     "office": "School Board, District 4",
+     "year": 2016,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
     {
      "role": "former school board member, District 4",
      "gov_id": "schools",
@@ -4553,6 +8398,14 @@
      "role": "officeholder: Lynn Haven Commissioner, Seat 1",
      "gov_id": "lh",
      "source": "campaign"
+    },
+    {
+     "role": "2023 candidate: Lynn Haven Commission, Seat 1",
+     "gov_id": "lh",
+     "office": "Lynn Haven Commission, Seat 1",
+     "year": 2023,
+     "outcome": "won",
+     "source": "campaign_history"
     },
     {
      "role": "City commissioner, Seat 1",
@@ -4602,6 +8455,22 @@
      "role": "board member",
      "gov_id": "cw",
      "source": "votes"
+    },
+    {
+     "role": "2022 candidate: Callaway Commission, Ward 1",
+     "gov_id": "cw",
+     "office": "Callaway Commission, Ward 1",
+     "year": 2022,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2018 candidate: Callaway Commission, Ward 1",
+     "gov_id": "cw",
+     "office": "Callaway Commission, Ward 1",
+     "year": 2018,
+     "outcome": "won",
+     "source": "campaign_history"
     },
     {
      "role": "former city commissioner, Ward 1",
@@ -4659,6 +8528,35 @@
    ]
   },
   {
+   "id": "shane-vann",
+   "name": "Shane Vann",
+   "aliases": [
+    "Shane Vann"
+   ],
+   "district": null,
+   "gov_ids": [
+    "county_court"
+   ],
+   "roles": [
+    {
+     "role": "2024 candidate: Bay County Judge, Group 2",
+     "gov_id": "county_court",
+     "office": "Bay County Judge, Group 2",
+     "year": 2024,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2018 candidate: Bay County Judge, Group 2",
+     "gov_id": "county_court",
+     "office": "Bay County Judge, Group 2",
+     "year": 2018,
+     "outcome": "won",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
    "id": "shannon-aufdencamp",
    "name": "Shannon Aufdencamp",
    "aliases": [
@@ -4692,6 +8590,14 @@
     "mb"
    ],
    "roles": [
+    {
+     "role": "2020 candidate: Mexico Beach Council, Group 5",
+     "gov_id": "mb",
+     "office": "Mexico Beach Council, Group 5",
+     "year": 2020,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
     {
      "role": "former council member, Group 5",
      "gov_id": "mb",
@@ -4738,6 +8644,27 @@
    ]
   },
   {
+   "id": "skip-stoltz",
+   "name": "Skip Stoltz",
+   "aliases": [
+    "Skip Stoltz"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pcb"
+   ],
+   "roles": [
+    {
+     "role": "2018 candidate: Panama City Beach Council, Ward 3",
+     "gov_id": "pcb",
+     "office": "Panama City Beach Council, Ward 3",
+     "year": 2018,
+     "outcome": "lost",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
    "id": "spring-overway",
    "name": "Spring Overway",
    "aliases": [
@@ -4772,11 +8699,48 @@
    ],
    "roles": [
     {
+     "role": "2023 candidate: Parker Council, Seat 4",
+     "gov_id": "parker",
+     "office": "Parker Council, Seat 4",
+     "year": 2023,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2019 candidate: Parker Council, Seat 4",
+     "gov_id": "parker",
+     "office": "Parker Council, Seat 4",
+     "year": 2019,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
      "role": "former council member, Seat 4",
      "gov_id": "parker",
      "seat": "Seat 4",
      "years": "2019–2023",
      "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "stacie-houchins",
+   "name": "Stacie Houchins",
+   "aliases": [
+    "Stacie Houchins"
+   ],
+   "district": null,
+   "gov_ids": [
+    "lh"
+   ],
+   "roles": [
+    {
+     "role": "2021 candidate: Lynn Haven Commission, Seat 3",
+     "gov_id": "lh",
+     "office": "Lynn Haven Commission, Seat 3",
+     "year": 2021,
+     "outcome": "lost",
+     "source": "campaign_history"
     }
    ]
   },
@@ -4832,6 +8796,27 @@
    ]
   },
   {
+   "id": "steve-george",
+   "name": "Steve George",
+   "aliases": [
+    "Steve George"
+   ],
+   "district": null,
+   "gov_ids": [
+    "schools"
+   ],
+   "roles": [
+    {
+     "role": "2016 candidate: Superintendent of Schools",
+     "gov_id": "schools",
+     "office": "Superintendent of Schools",
+     "year": 2016,
+     "outcome": "withdrew",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
    "id": "steve-moss",
    "name": "Steve Moss",
    "aliases": [
@@ -4869,6 +8854,22 @@
      "source": "finance_2026"
     },
     {
+     "role": "2022 candidate: School Board, District 5",
+     "gov_id": "schools",
+     "office": "School Board, District 5",
+     "year": 2022,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2018 candidate: School Board, District 5",
+     "gov_id": "schools",
+     "office": "School Board, District 5",
+     "year": 2018,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
      "role": "2026 candidate: Bay District School Board, District 5",
      "gov_id": "schools",
      "source": "candidates_2026"
@@ -4877,8 +8878,29 @@
      "role": "School board member, District 5",
      "gov_id": "schools",
      "seat": "District 5",
-     "years": "since before 2015",
+     "years": "since before 2016",
      "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "steve-thomas",
+   "name": "Steve Thomas",
+   "aliases": [
+    "Steve Thomas"
+   ],
+   "district": null,
+   "gov_ids": [
+    "county"
+   ],
+   "roles": [
+    {
+     "role": "2016 candidate: Bay County Commission, District 3",
+     "gov_id": "county",
+     "office": "Bay County Commission, District 3",
+     "year": 2016,
+     "outcome": "lost",
+     "source": "campaign_history"
     }
    ]
   },
@@ -4913,6 +8935,14 @@
      "role": "officeholder: Panama City Beach Mayor",
      "gov_id": "pcb",
      "source": "campaign"
+    },
+    {
+     "role": "2024 candidate: Panama City Beach Mayor",
+     "gov_id": "pcb",
+     "office": "Panama City Beach Mayor",
+     "year": 2024,
+     "outcome": "won",
+     "source": "campaign_history"
     },
     {
      "role": "Mayor",
@@ -5026,6 +9056,27 @@
    ]
   },
   {
+   "id": "theresa-evans",
+   "name": "Theresa Evans",
+   "aliases": [
+    "Theresa Evans"
+   ],
+   "district": null,
+   "gov_ids": [
+    "parker"
+   ],
+   "roles": [
+    {
+     "role": "2021 candidate: Parker Council, Seat 1",
+     "gov_id": "parker",
+     "office": "Parker Council, Seat 1",
+     "year": 2021,
+     "outcome": "lost",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
    "id": "thien-cao",
    "name": "Thien Cao",
    "aliases": [
@@ -5047,19 +9098,88 @@
    "id": "thomas-abbott",
    "name": "Thomas Abbott",
    "aliases": [
-    "Thomas Abbott"
+    "Thomas Abbott",
+    "Thomas W. Abbott"
    ],
    "district": null,
    "gov_ids": [
+    "county",
     "cw"
    ],
    "roles": [
+    {
+     "role": "2020 candidate: Bay County Commission, District 4",
+     "gov_id": "county",
+     "office": "Bay County Commission, District 4",
+     "year": 2020,
+     "outcome": "did not qualify",
+     "source": "campaign_history"
+    },
     {
      "role": "former mayor",
      "gov_id": "cw",
      "seat": "Mayor",
      "years": "until 2016",
      "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "thomas-balduf",
+   "name": "Thomas Balduf",
+   "aliases": [
+    "Thomas Balduf",
+    "Tom Balduf"
+   ],
+   "district": null,
+   "gov_ids": [
+    "lake_powell_cdd"
+   ],
+   "roles": [
+    {
+     "role": "2024 candidate: Lake Powell Community Development District, Seat 3",
+     "gov_id": "lake_powell_cdd",
+     "office": "Lake Powell Community Development District, Seat 3",
+     "year": 2024,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2020 candidate: Lake Powell Community Development District, Seat 3",
+     "gov_id": "lake_powell_cdd",
+     "office": "Lake Powell Community Development District, Seat 3",
+     "year": 2020,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2016 candidate: Lake Powell Community Development District, Seat 3",
+     "gov_id": "lake_powell_cdd",
+     "office": "Lake Powell Community Development District, Seat 3",
+     "year": 2016,
+     "outcome": "won",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
+   "id": "thomas-cook",
+   "name": "Thomas H. Cook",
+   "aliases": [
+    "Thomas H. Cook"
+   ],
+   "district": null,
+   "gov_ids": [
+    "county"
+   ],
+   "roles": [
+    {
+     "role": "2020 candidate: Bay County Commission, District 4",
+     "gov_id": "county",
+     "office": "Bay County Commission, District 4",
+     "year": 2020,
+     "outcome": "lost",
+     "source": "campaign_history"
     }
    ]
   },
@@ -5154,9 +9274,80 @@
      "source": "finance_2026"
     },
     {
+     "role": "2020 candidate: Bay County Judge, Group 1",
+     "gov_id": "county_court",
+     "office": "Bay County Judge, Group 1",
+     "year": 2020,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
      "role": "2026 candidate: Bay County Judge, Group 1",
      "gov_id": "county_court",
      "source": "candidates_2026"
+    }
+   ]
+  },
+  {
+   "id": "timothy-linderman",
+   "name": "Timothy Linderman",
+   "aliases": [
+    "Timothy Linderman"
+   ],
+   "district": null,
+   "gov_ids": [
+    "mb"
+   ],
+   "roles": [
+    {
+     "role": "2024 candidate: Mexico Beach Council, Group 5",
+     "gov_id": "mb",
+     "office": "Mexico Beach Council, Group 5",
+     "year": 2024,
+     "outcome": "won",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
+   "id": "tom-bailey",
+   "name": "Tom Bailey",
+   "aliases": [
+    "Tom Bailey"
+   ],
+   "district": null,
+   "gov_ids": [
+    "mb"
+   ],
+   "roles": [
+    {
+     "role": "2017 candidate: Mexico Beach Mayor",
+     "gov_id": "mb",
+     "office": "Mexico Beach Mayor",
+     "year": 2017,
+     "outcome": "lost",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
+   "id": "tom-hedges",
+   "name": "Tom Hedges",
+   "aliases": [
+    "Tom Hedges"
+   ],
+   "district": null,
+   "gov_ids": [
+    "schools"
+   ],
+   "roles": [
+    {
+     "role": "2020 candidate: School Board, District 4",
+     "gov_id": "schools",
+     "office": "School Board, District 4",
+     "year": 2020,
+     "outcome": "lost",
+     "source": "campaign_history"
     }
    ]
   },
@@ -5185,6 +9376,30 @@
      "role": "officeholder: Sheriff",
      "gov_id": "sheriff",
      "source": "campaign"
+    },
+    {
+     "role": "2024 candidate: Sheriff",
+     "gov_id": "sheriff",
+     "office": "Sheriff",
+     "year": 2024,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2020 candidate: Sheriff",
+     "gov_id": "sheriff",
+     "office": "Sheriff",
+     "year": 2020,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2016 candidate: Sheriff",
+     "gov_id": "sheriff",
+     "office": "Sheriff",
+     "year": 2016,
+     "outcome": "won",
+     "source": "campaign_history"
     }
    ]
   },
@@ -5211,11 +9426,77 @@
      "source": "votes"
     },
     {
+     "role": "2024 candidate: Bay County Commission, District 1",
+     "gov_id": "county",
+     "office": "Bay County Commission, District 1",
+     "year": 2024,
+     "outcome": "lost",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2020 candidate: Bay County Commission, District 1",
+     "gov_id": "county",
+     "office": "Bay County Commission, District 1",
+     "year": 2020,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2016 candidate: Bay County Commission, District 1",
+     "gov_id": "county",
+     "office": "Bay County Commission, District 1",
+     "year": 2016,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
      "role": "former county commissioner, District 1",
      "gov_id": "county",
      "seat": "District 1",
      "years": "2016–2024",
      "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "tommy-welch",
+   "name": "Tommy Welch",
+   "aliases": [
+    "Tommy Welch"
+   ],
+   "district": null,
+   "gov_ids": [
+    "county_court"
+   ],
+   "roles": [
+    {
+     "role": "2016 candidate: Bay County Judge, Group 3",
+     "gov_id": "county_court",
+     "office": "Bay County Judge, Group 3",
+     "year": 2016,
+     "outcome": "won",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
+   "id": "toni-shamplain",
+   "name": "Toni Shamplain",
+   "aliases": [
+    "Toni Shamplain"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pc"
+   ],
+   "roles": [
+    {
+     "role": "2019 candidate: Panama City Commission, Ward 2",
+     "gov_id": "pc",
+     "office": "Panama City Commission, Ward 2",
+     "year": 2019,
+     "outcome": "lost",
+     "source": "campaign_history"
     }
    ]
   },
@@ -5236,6 +9517,27 @@
      "seat": "City Manager",
      "years": "2020–2021",
      "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "tony-super",
+   "name": "Tony Super",
+   "aliases": [
+    "Tony Super"
+   ],
+   "district": null,
+   "gov_ids": [
+    "lh"
+   ],
+   "roles": [
+    {
+     "role": "2017 candidate: Lynn Haven Commission, Seat 3",
+     "gov_id": "lh",
+     "office": "Lynn Haven Commission, Seat 3",
+     "year": 2017,
+     "outcome": "lost",
+     "source": "campaign_history"
     }
    ]
   },
@@ -5272,6 +9574,22 @@
      "source": "campaign"
     },
     {
+     "role": "2023 candidate: Parker Council, Seat 2",
+     "gov_id": "parker",
+     "office": "Parker Council, Seat 2",
+     "year": 2023,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2019 candidate: Parker Council, Seat 2",
+     "gov_id": "parker",
+     "office": "Parker Council, Seat 2",
+     "year": 2019,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
      "role": "Council member, Seat 2",
      "gov_id": "parker",
      "seat": "Seat 2",
@@ -5291,6 +9609,14 @@
     "sp"
    ],
    "roles": [
+    {
+     "role": "2018 candidate: Springfield Commission, Ward 4",
+     "gov_id": "sp",
+     "office": "Springfield Commission, Ward 4",
+     "year": 2018,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
     {
      "role": "former city commissioner, Ward 4",
      "gov_id": "sp",
@@ -5320,6 +9646,27 @@
      "role": "2026 candidate: Bay County Judge, Group 4",
      "gov_id": "county_court",
      "source": "candidates_2026"
+    }
+   ]
+  },
+  {
+   "id": "ty-kennon",
+   "name": "Ty Kennon",
+   "aliases": [
+    "Ty Kennon"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pc"
+   ],
+   "roles": [
+    {
+     "role": "2025 candidate: Panama City Mayor",
+     "gov_id": "pc",
+     "office": "Panama City Mayor",
+     "year": 2025,
+     "outcome": "withdrew",
+     "source": "campaign_history"
     }
    ]
   },
@@ -5362,6 +9709,27 @@
    ]
   },
   {
+   "id": "walter-kelley",
+   "name": "Walter Kelley",
+   "aliases": [
+    "Walter Kelley"
+   ],
+   "district": null,
+   "gov_ids": [
+    "county"
+   ],
+   "roles": [
+    {
+     "role": "2016 candidate: Bay County Commission, District 1",
+     "gov_id": "county",
+     "office": "Bay County Commission, District 1",
+     "year": 2016,
+     "outcome": "withdrew",
+     "source": "campaign_history"
+    }
+   ]
+  },
+  {
    "id": "wayne-mcleod",
    "name": "Wayne McLeod",
    "aliases": [
@@ -5373,11 +9741,40 @@
    ],
    "roles": [
     {
+     "role": "2018 candidate: Callaway Commission, Ward 2",
+     "gov_id": "cw",
+     "office": "Callaway Commission, Ward 2",
+     "year": 2018,
+     "outcome": "lost",
+     "source": "campaign_history"
+    },
+    {
      "role": "former city commissioner, Ward 2",
      "gov_id": "cw",
      "seat": "Ward 2",
      "years": "2017–2018",
      "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "whitney-nieves",
+   "name": "Whitney N. Nieves",
+   "aliases": [
+    "Whitney N. Nieves"
+   ],
+   "district": null,
+   "gov_ids": [
+    "schools"
+   ],
+   "roles": [
+    {
+     "role": "2024 candidate: School Board, District 1",
+     "gov_id": "schools",
+     "office": "School Board, District 1",
+     "year": 2024,
+     "outcome": "lost",
+     "source": "campaign_history"
     }
    ]
   },
@@ -5405,6 +9802,22 @@
      "source": "votes"
     },
     {
+     "role": "2020 candidate: Bay County Commission, District 3",
+     "gov_id": "county",
+     "office": "Bay County Commission, District 3",
+     "year": 2020,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2016 candidate: Bay County Commission, District 3",
+     "gov_id": "county",
+     "office": "Bay County Commission, District 3",
+     "year": 2016,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
      "role": "former county commissioner, District 3",
      "gov_id": "county",
      "seat": "District 3",
@@ -5414,31 +9827,23 @@
    ]
   },
   {
-   "id": "william-perdue",
-   "name": "William (Chuck) Perdue",
+   "id": "william-dyer",
+   "name": "William Dyer",
    "aliases": [
-    "Chuck Perdue",
-    "William (Chuck) Perdue"
+    "William Dyer"
    ],
    "district": null,
    "gov_ids": [
-    "tax_collector"
+    "county_court"
    ],
    "roles": [
     {
-     "role": "Tax Collector",
-     "gov_id": "tax_collector",
-     "source": "salaries"
-    },
-    {
-     "role": "Tax Collector",
-     "gov_id": "tax_collector",
-     "source": "officials-pay"
-    },
-    {
-     "role": "officeholder: Tax Collector",
-     "gov_id": "tax_collector",
-     "source": "campaign"
+     "role": "2022 candidate: Bay County Judge, Group 3",
+     "gov_id": "county_court",
+     "office": "Bay County Judge, Group 3",
+     "year": 2022,
+     "outcome": "won",
+     "source": "campaign_history"
     }
    ]
   },
@@ -5475,6 +9880,22 @@
      "source": "campaign"
     },
     {
+     "role": "2024 candidate: School Board, District 4",
+     "gov_id": "schools",
+     "office": "School Board, District 4",
+     "year": 2024,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2020 candidate: School Board, District 4",
+     "gov_id": "schools",
+     "office": "School Board, District 4",
+     "year": 2020,
+     "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
      "role": "School board member, District 4",
      "gov_id": "schools",
      "seat": "District 4",
@@ -5500,6 +9921,16 @@
   }
  ],
  "multi_government": [
+  {
+   "person_id": "phil-chester",
+   "governments": [
+    "beach_mosquito",
+    "pcb"
+   ],
+   "names": [
+    "Phil Chester"
+   ]
+  },
   {
    "person_id": "joel-schubert",
    "governments": [
@@ -5541,6 +9972,37 @@
    ],
    "names": [
     "Mark McQueen"
+   ]
+  },
+  {
+   "person_id": "brandon-caldwell",
+   "governments": [
+    "beach_mosquito",
+    "pcb"
+   ],
+   "names": [
+    "Brandon Caldwell"
+   ]
+  },
+  {
+   "person_id": "brandon-aldridge",
+   "governments": [
+    "county",
+    "lh"
+   ],
+   "names": [
+    "Brandon Aldridge"
+   ]
+  },
+  {
+   "person_id": "thomas-abbott",
+   "governments": [
+    "county",
+    "cw"
+   ],
+   "names": [
+    "Thomas Abbott",
+    "Thomas W. Abbott"
    ]
   },
   {

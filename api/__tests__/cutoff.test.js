@@ -27,12 +27,13 @@ test('yearOf reads fiscal years, dates and spans', () => {
 
 // the column that dates each row (site/opendata.py FIRST_YEAR_COL), plus date_end where a dataset has structured dates
 const COLS = ['fiscal_year', 'tax_year', 'end_date', 'last_year', 'last_date', 'expiration_date', 'closed_year', 'sort_date', 'date_end'];
+const DATED = {'campaign-contributions-history': 'date', 'campaign-contributions-2026': 'date', 'cra-payments': 'date_end'};
 test('no published dataset has a row from before 2016', {skip: !fs.existsSync(path.join(DL, 'index.json'))}, () => {
   const idx = JSON.parse(fs.readFileSync(path.join(DL, 'index.json'), 'utf8'));
   const bad = [];
   for (const d of idx.datasets) {
     const rows = JSON.parse(fs.readFileSync(path.join(DL, d.id + '.json'), 'utf8'));
-    for (const r of rows) for (const c of COLS) if (c in r && !C.keep(r[c])) { bad.push(`${d.id}.${c}=${r[c]}`); break; }
+    for (const r of rows) for (const c of [...COLS, DATED[d.id]].filter(Boolean)) if (c in r && !C.keep(r[c])) { bad.push(`${d.id}.${c}=${r[c]}`); break; }
   }
   assert.deepEqual(bad.slice(0, 10), []);
 });

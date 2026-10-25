@@ -239,7 +239,7 @@ def elections_page():
     return f'''<div class="page tax el">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Get involved · 2026 elections</span><h1>Who's running in 2026</h1>
     <p class="lede">Every local race on Bay County ballots this year: the candidates, what they say they'll do in their own words, links to their campaigns, and where their campaign money comes from. BayCounty.me doesn't endorse or rate candidates.</p></div>
-    <div class="stamp"><a class="pill" href="https://www.bayvotesfl.gov/" target="_blank" rel="noopener">Supervisor of Elections ↗</a><button type="button" class="pdf-btn" id="pdf"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 12v2h10v-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Export PDF</button><span>Campaign reports checked {e(F.get("as_of") or C.get("as_of"))}</span></div></header>
+    <div class="stamp"><a class="pill" href="/elections/past">Past elections</a><a class="pill" href="https://www.bayvotesfl.gov/" target="_blank" rel="noopener">Supervisor of Elections ↗</a><button type="button" class="pdf-btn" id="pdf"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 12v2h10v-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Export PDF</button><span>Campaign reports checked {e(F.get("as_of") or C.get("as_of"))}</span></div></header>
   {city_bar(gk, hide=True, note='Bay County includes county offices; special districts always show')}
   <div class="kpis">
     <div class="kpi"><span class="eyebrow">On the Nov. 3 ballot</span><span class="v"{per(lambda a, d: len(a))}>{len(active)}</span><span class="s">local races · <span{per(lambda a, d: sum(len(r.get('candidates') or []) for r in a))}>{ncand}</span> candidates</span></div>
@@ -254,7 +254,7 @@ def elections_page():
   <section class="tx-sec method" id="how"><div class="sec-hd"><h2>How we did this</h2></div>
     <p><b>Platforms</b> are summarized only from each candidate's own campaign website, campaign social pages or questionnaire answers they wrote, with links to each source. If we couldn't find a statement from the candidate, we say so rather than fill in from news coverage. Candidates are listed alphabetically.</p>
     <p><b>Money</b> comes from the campaign reports candidates file with the Bay County Supervisor of Elections, through the date shown. Organizations are listed by name; gifts from individual people are counted and totaled, and every name is in the linked report. Florida caps gifts to local candidates at $1,000 per person or business per election.</p>
-    <p>Sitting officials' past campaigns are on the <a href="/connections/campaign-gifts">Campaign Gifts</a> page.</p>
+    <p>Sitting officials' past campaigns are on the <a href="/connections/campaign-gifts">Campaign Gifts</a> page, and every local race from 2016 to 2025 is on <a href="/elections/past">Past elections</a>.</p>
     {f'<details class="gaps"><summary>What we couldn\'t find</summary><ul>{gaps}</ul></details>' if gaps else ''}</section>
 </div>
 <link rel="stylesheet" href="/assets/tax.css">

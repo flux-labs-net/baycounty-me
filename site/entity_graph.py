@@ -45,6 +45,8 @@ RELATION = {
     'voted': ('voted on contracts with', 'had contracts voted on by'),
     'serves': ('serves', 'is served by'),
     'served': ('served', 'was served by'),
+    'candidate': ('is a candidate for office in', 'has candidates for office'),
+    'ran': ('ran for office in', 'had on the ballot'),
     'board': ('sits on the board of', 'has on its board'),
     'runs': ('runs', 'is run by'),
     'grant': ('gave a grant to', 'got a grant from'),
@@ -172,7 +174,7 @@ def person_title(p):
         t = f"{r['role']}, {short(r['gov_id'])}" if short(r['gov_id']).lower() not in r['role'].lower() else r['role']
     elif first('campaign', 'officeholder'):
         t = first('campaign', 'officeholder')['role'].split(':', 1)[1].strip()
-    elif first('officeholders'):  # an elected seat since 2014 (officeholder-terms): more exact than the vote records' member lists
+    elif first('officeholders'):  # an elected seat since 2016 (officeholder-terms): more exact than the vote records' member lists
         oh = [x for x in roles if x.get('source') == 'officeholders']
         r = next((x for x in oh if not x['role'].startswith('former')), oh[-1])  # the seat held now, else the latest one
         t = r['role'][:1].upper() + r['role'][1:] + f', {short(r["gov_id"])}'
@@ -181,11 +183,123 @@ def person_title(p):
         t = f"Board member, {short(r['gov_id'])}" + (f" ({r['seat']})" if r.get('seat') and not str(r['seat']).isdigit() else '')
     elif first('votes', 'former'):
         t = f"Former board member, {short(first('votes', 'former')['gov_id'])}"
+    past = [r for r in roles if r.get('source') == 'campaign_history']
+    if past and not t:  # someone known here only from a past campaign (campaign-history): their latest race
+        r = max(past, key=lambda r: r.get('year') or 0)
+        t = f"Ran for {r['office']} in {r['year']}" + (' (won)' if r.get('outcome') == 'won' else '')
     c = first('candidates_2026') or first('finance_2026')
     if c:
-        race = c['role'].split(':', 1)[1].strip() if ':' in c['role'] else short(c['gov_id'])
-        t = (t + ' · ' if t else '') + f'2026 candidate for {race}'
+        race = _race(c['role'], c.get('gov_id')) if ':' in c['role'] else ''
+        race = f'{race}, {short(c["gov_id"])}' if race and short(c['gov_id']).lower() not in race.lower() else race or short(c['gov_id'])
+        again = t and _seat(race) and _seat(race) == _seat(t) and short(c['gov_id']).lower() in t.lower()
+        t = t + ' · running again in 2026' if again else (t + ' · ' if t else '') + f'2026 candidate for {race}'
     return t
+
+
+# what a person is, by their strongest current role (shown where a list would otherwise say "Official or candidate")
+PERSON_LABEL = {'elected': 'Elected official', 'staff': 'Department leader', 'candidate': 'Candidate', 'former': 'Former official'}
+ROMAN = {'i': '1', 'ii': '2', 'iii': '3', 'iv': '4', 'v': '5', 'vi': '6', 'vii': '7', 'viii': '8', 'ix': '9', 'x': '10'}
+SEAT_RE = re.compile(r'\b(ward|district|seat|group|zone|place)\s+(\d+|[ivx]+)\b|\b(mayor|at[- ]large|chair)\b')
+
+
+def _seat(text):
+    """'Commissioner, Ward III' and 'City Commission, Ward 3' -> 'ward 3'; 'Springfield Mayor' -> 'mayor'."""
+    m = SEAT_RE.search((text or '').lower())
+    if not m:
+        return None
+    return f"{m.group(1)} {ROMAN.get(m.group(2), m.group(2))}" if m.group(1) else m.group(3).replace('-', ' ')
+
+
+def _sentence(t):
+    """'Police Chief' -> 'Police chief', keeping acronyms and words after a comma ('CRA Director', 'Ward 4')."""
+    t = re.sub(r'\b(Ward|District|Seat|Group) ([IVX]+)\b', lambda m: f"{m.group(1)} {ROMAN[m.group(2).lower()]}", (t or '').strip())
+    words = t.split(' ')
+    out = [words[0][:1].upper() + words[0][1:]] if words else []
+    for i, w in enumerate(words[1:], 1):
+        keep = w.isupper() or words[i - 1].endswith((',', '(')) or w[:1].isdigit() or w.lower() in ROMAN
+        out.append(w if keep or not w[:1].isupper() else w.lower())
+    return ' '.join(out)
+
+
+def _race(text, gid):
+    """A race or office as written in the filings, without the government's name: 'City of Springfield Mayor' -> 'Mayor'."""
+    t = (text or '').split(':', 1)[-1].strip()
+    g = ids.gov(gid or '') or {}
+    for pre in sorted({g.get('name') or '', 'City of ' + (g.get('short') or ''), 'Town of ' + (g.get('short') or ''), g.get('short') or ''}, key=len, reverse=True):
+        if pre.strip() and t.lower().startswith(pre.lower() + ' '):
+            t = t[len(pre):].strip(' ,')
+            break
+    return t[:1].upper() + t[1:]
+
+
+def _term_label(t):
+    seat = t.get('seat') or ''
+    if t.get('appointed') or not re.match(r'(?i)(ward|district|seat|group|zone|place|at[- ]large|\d)', seat):
+        return seat  # 'Mayor', 'City Manager'
+    return f"{re.sub(r' and Superintendent$', '', t.get('body') or '')}, {seat}"
+
+
+def service(p, gid, terms):
+    """Everything one person does or did for one government, as one connection: relation, detail, dates, kind.
+
+    'Commissioner, Ward 4 (2022–now) · Running again in 2026' instead of one row per record that names them."""
+    roles = [r for r in p.get('roles') or [] if r.get('gov_id') == gid and r.get('source') != 'campaign_history']
+    now = [t for t in terms if not t.get('end_date')]
+    past = sorted((t for t in terms if t.get('end_date')), key=lambda t: t['end_date'], reverse=True)
+    def yrs(t):
+        a, b = (t.get('start_date') or '')[:4], (t.get('end_date') or '')[:4]
+        return (a if a == b else f"{a}–{b or 'now'}") if a else f'until {b}' if b else 'current'
+    parts, seats, kind = [], set(), None
+    pay = [r for r in roles if r.get('source') in ('salaries', 'officials-pay') and r.get('role')]
+    for t in now:
+        seat = _seat(t.get('seat')) or (t.get('seat') or '').lower()
+        title = next((r['role'] for r in pay if _seat(r['role']) == seat), None)  # 'Commissioner, Ward 4' from the pay record
+        parts.append(f'{_sentence(title) if title else _term_label(t)} ({yrs(t)})')
+        seats.add(seat)
+        kind = kind or ('staff' if t.get('appointed') else 'elected')
+    # pay records: department leaders, and elected officials' titles when the seat isn't already listed
+    jobs = {}
+    elected_now = any(not t.get('appointed') for t in now)
+    for r in pay:
+        k = _seat(r['role']) or r['role'].lower()
+        if k in seats or any(s and s in r['role'].lower() for s in seats):
+            continue
+        if elected_now and not _seat(r['role']) and re.search(r'(?i)commission|council|board|mayor', r['role']):
+            continue  # 'County Commissioner' from the state pay list, already shown with its district
+        jobs.setdefault(re.sub(r'[^a-z0-9]+', ' ', r['role'].lower()).strip(), r)
+    # the campaign filing and vote records are older than the seat terms, so they count only when there are no terms
+    elected_title = None if terms else next((r for r in roles if r.get('source') == 'campaign' and (r.get('role') or '').startswith('officeholder')), None)
+    for r in jobs.values():
+        parts.append(_sentence(r['role']))
+        kind = kind or ('elected' if elected_title else 'staff')
+    if not terms and not jobs:  # no seat or pay record: the campaign filing, else the vote records
+        board = next((r for r in roles if r.get('source') == 'votes' and r.get('role') == 'board member'), None)
+        if elected_title:
+            parts.append(_race(elected_title['role'], gid))
+            kind = 'elected'
+        elif board:
+            parts.append('Board member' + (f", {board['seat']}" if board.get('seat') and not str(board['seat']).isdigit() else ''))
+            kind = 'elected'
+    if elected_title and kind == 'staff':
+        kind = 'elected'
+    cand = next((r for r in roles if r.get('source') == 'candidates_2026'), None) or next((r for r in roles if r.get('source') == 'finance_2026'), None)
+    if cand:
+        race = _race(cand['role'], gid)
+        same = _seat(race) and (_seat(race) in seats or (elected_title and _seat(race) == _seat(elected_title['role'])))
+        parts.append('Running again in 2026' if same else f'2026 candidate for {race}')
+        kind = kind or 'candidate'
+    for t in past:
+        parts.append(f'{_term_label(t)} ({yrs(t)})')
+    if not past and not parts and any('former' in (r.get('role') or '') for r in roles):
+        parts.append(_sentence(next(r['role'] for r in roles if 'former' in (r.get('role') or ''))))
+    if not parts:
+        return None
+    if not kind:
+        kind = 'former'
+    rel = {'elected': 'serves', 'staff': 'serves', 'candidate': 'candidate', 'former': 'served'}[kind]
+    dates = sorted({d for t in terms for d in (t.get('start_date'), t.get('end_date')) if d})
+    src = next((t.get('source_url') for t in now + past if t.get('source_url')), None)
+    return {'relation': rel, 'detail': ' · '.join(dict.fromkeys(p for p in parts if p)), 'dates': dates, 'source_url': src, 'kind': kind}
 
 
 def build():
@@ -200,19 +314,31 @@ def build():
         roles = p.get('roles') or []
         sub = person_title(p)
         G.ent('person:' + p['id'], p['name'], sub, (p.get('gov_ids') or [None])[0], aliases=p.get('aliases'))
-        seen = set()
-        for r in roles:
-            gid = r.get('gov_id')
-            if gid and (gid, r.get('role')) not in seen and 'former' not in (r.get('role') or '') and r.get('source') != 'officeholders':
-                seen.add((gid, r.get('role')))
-                G.link('person:' + p['id'], 'gov:' + gid, 'serves', detail=(r.get('role') or '').capitalize() + (f", {r['seat']}" if r.get('seat') and not str(r['seat']).isdigit() else ''), key=r.get('role') or '')
 
-    # elected seats held since 2016 (the site's first year), one link per person, government and seat, dated by the term (officeholder-terms)
+    # one "serves" row per person and government, with every role from every source folded in (pay records, elected
+    # seats from officeholder-terms, vote records, campaign filings and 2026 candidate lists all name the same people)
+    terms = defaultdict(list)
     for t in _ds('officeholder-terms'):
         if t.get('person_id') and 'person:' + t['person_id'] in G.ents:
-            yrs = f"{(t['start_date'] or '')[:4] or 'before 2016'}–{(t['end_date'] or '')[:4] or 'now'}"
-            G.link('person:' + t['person_id'], 'gov:' + t['gov_id'], 'served' if t.get('end_date') else 'serves', None,
-                   t.get('end_date') or t.get('start_date'), f"{t['seat'] if t.get('appointed') else t['body'] + ', ' + t['seat']} ({yrs})", t.get('source_url'), key='seat:' + t['seat'])
+            terms[(t['person_id'], t['gov_id'])].append(t)
+    for p in (ids._load('people.json') or {'people': []})['people']:
+        pid = 'person:' + p['id']
+        govs = list(dict.fromkeys([r['gov_id'] for r in p.get('roles') or [] if r.get('gov_id')] + [g for (i, g) in terms if i == p['id']]))
+        kinds = set()
+        for gid in govs:
+            sv = service(p, gid, terms.get((p['id'], gid), []))
+            if sv and 'gov:' + gid in G.ents:
+                kinds.add(sv['kind'])
+                G.link(pid, 'gov:' + gid, sv['relation'], None, None, sv['detail'], sv['source_url'])
+                G.links[(pid, 'gov:' + gid, sv['relation'], '')]['dates'] = sv['dates']
+        G.ents[pid]['label'] = next((PERSON_LABEL[k] for k in PERSON_LABEL if k in kinds), None)
+
+    # every local race they ran in since 2016 (campaign-history), one link per person, government and office
+    for r in _ds('campaign-history'):
+        if r.get('person_id') and 'person:' + r['person_id'] in G.ents and r.get('gov_id') and 'gov:' + r['gov_id'] in G.ents:
+            G.link('person:' + r['person_id'], 'gov:' + r['gov_id'], 'ran', r.get('total_raised'), r.get('election_date'),
+                   f"{_race(r['office'], r['gov_id'])}, {r['election_year']}" + (f" ({r['outcome']})" if r.get('outcome') else ''), r.get('report_url'), key=f"ran:{r['office']}:{r['election_year']}")
+            G.ents['person:' + r['person_id']]['label'] = G.ents['person:' + r['person_id']].get('label') or 'Past candidate'
 
     # companies (every vendor id, with or without a vendor page)
     for v in (ids._load('vendors.json') or {'vendors': []})['vendors']:
@@ -288,7 +414,7 @@ def build():
         else:
             frm = G.ent('committee:' + _slug(r['donor']), ids.biz_case(r['donor']), {'pac': 'Political committee', 'committee': 'Committee'}.get(r['donor_type'], 'Organization') + ' that gave to a local campaign')
         if frm:
-            G.link(frm, 'person:' + pid, 'gift', r.get('amount'), r.get('dates'), (r.get('office') or '') + (' (2026 candidate)' if r.get('candidate_2026') else ''),
+            G.link(frm, 'person:' + pid, 'gift', r.get('amount'), r.get('dates'), (r.get('office') or '') + (' (2026 candidate)' if r.get('candidate_2026') else f" ({r['past_campaign_year']} campaign)" if r.get('past_campaign_year') else ''),
                    r.get('report_url'), key=r.get('office') or '')
 
     # recorded votes on a vendor's contracts (data/votes/contract_votes.json), per member and vendor
@@ -388,7 +514,7 @@ def profile_rows():
         keep = e['kind'] in ('gov', 'person', 'nonprofit', 'vendor') or deg[eid]  # every vendor: page names link to them
         if not keep:
             continue
-        out.append({'entity_id': eid, 'kind': e['kind'], 'kind_label': KIND_LABEL[e['kind']], 'name': e['name'], 'subtitle': e['subtitle'],
+        out.append({'entity_id': eid, 'kind': e['kind'], 'kind_label': e.get('label') or KIND_LABEL[e['kind']], 'name': e['name'], 'subtitle': e['subtitle'],
                     'page_url': page_url(eid), 'aliases': e['aliases'] or None, 'connections': deg[eid],
                     'amount_received': round(got[eid], 2) or None, 'amount_given': round(gave[eid], 2) or None,
                     'gov_id': e['gov_id'], 'county': COUNTY, 'source_url': e['source_url']})

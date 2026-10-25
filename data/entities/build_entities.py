@@ -293,11 +293,16 @@ def build_people():
     fin = _j('elections', 'finance_2026.json')
     for r in fin['candidates']:
         seen.append((r['name'], {'role': '2026 candidate: ' + (r.get('office') or ''), 'gov_id': ids.gov_id(r.get('office'), contains=True), 'source': 'finance_2026'}))
+    # every other local candidate since 2016 (data/campaign/campaign_history.json), winners and losers
+    hist = _j('campaign', 'campaign_history.json') or {'candidates': []}
+    for r in hist['candidates']:
+        seen.append((r['name'], {'role': f"{r['year']} candidate: {r['office']}", 'gov_id': r.get('gov_id'), 'office': r['office'], 'year': r['year'],
+                                 'outcome': r.get('outcome'), 'source': 'campaign_history'}))
     cand = _j('elections', 'candidates_2026.json')
     for race in cand['races']:
         for k in race.get('candidates') or []:
             seen.append((k['name'], {'role': '2026 candidate: ' + race['office'], 'gov_id': ids.gov_id(race['office'], contains=True) or race.get('gov'), 'source': 'candidates_2026'}))
-    # every elected officeholder and appointed manager since 2014, current and former (data/civic/officeholders.json)
+    # every elected officeholder and appointed manager since 2016, current and former (data/civic/officeholders.json)
     oh = _j('civic', 'officeholders.json')
     for g in oh['governments']:
         for st in g['seats']:
@@ -307,7 +312,7 @@ def build_people():
                     office = st['seat'].split(' (')[0] if st.get('appointed') or st['seat'].startswith(('Mayor', 'Superintendent')) else f"{member}, {st['seat']}"
                     a, b = (t.get('start') or '')[:4], (t.get('end') or '')[:4]
                     seen.append((t['name'], {'role': ('former ' + (office.lower() if st.get('appointed') else office[0].lower() + office[1:])) if b else office, 'gov_id': g['gov_id'], 'seat': st['seat'],
-                                             'years': f'{a}–{b}' if a and b else f'until {b}' if b else f'since {a}' if a else 'since before 2015', 'source': 'officeholders'}))
+                                             'years': f'{a}–{b}' if a and b else f'until {b}' if b else f'since {a}' if a else 'since before 2016', 'source': 'officeholders'}))
     join = {}
     for a, b, _ in SAME_PERSON:
         join[b] = a
@@ -342,7 +347,7 @@ def build_people():
         out.append({'id': pid, 'name': disp, 'aliases': sorted(g['names']), 'district': sorted(g['districts'])[0] if len(g['districts']) == 1 else (sorted(g['districts']) or None),
                     'gov_ids': sorted(g['govs']), 'roles': g['roles']})
     out.sort(key=lambda p: p['id'])
-    return {'about': 'Elected officials, department leaders and 2026 local candidates named in the site\'s datasets, one id per person. Names are matched on first and last name with common nicknames '
+    return {'about': 'Elected officials, department leaders, 2026 local candidates and local candidates since 2016 named in the site\'s datasets, one id per person. Names are matched on first and last name with common nicknames '
                      '(Doug = Douglas, Chris = Christopher, Dave = David ...), ignoring middle initials, titles and notes in parentheses; "(D2)" style suffixes become the district field. '
                      'People who appear under more than one government are listed in multi_government for checking. No other people are included.',
             'count': len(out), 'people': out, 'same_person_by_hand': [{'keys': [list(a), list(b)], 'why': w} for a, b, w in SAME_PERSON], 'multi_government': review}

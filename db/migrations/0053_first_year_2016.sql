@@ -24,7 +24,7 @@ begin
     ('official_business_links', 'last_date'), ('business_donor_sunbiz', 'last_date'), ('over_limit_gifts', 'last_date'),
     ('owner_gifts', 'last_date'), ('checkbook_payments', 'fiscal_year'), ('budget_actuals', 'fiscal_year'),
     ('property_tax_rates', 'tax_year'), ('votes', 'date'), ('member_votes', 'date'), ('contracts', 'date'),
-    ('change_orders', 'date'), ('emergency_purchases', 'date'), ('campaign_contributions_2026', 'date'), ('meetings', 'start'),
+    ('change_orders', 'date'), ('emergency_purchases', 'date'), ('campaign_contributions_2026', 'date'), ('campaign_contributions_history', 'date'), ('meetings', 'start'),
     ('debt', 'date_end'), ('audit_findings', 'date_end'), ('sales_tax_projects', 'date_end'), ('bed_tax_collections', 'date_end'),
     ('fees_assessments', 'date_end'), ('officials_pay', 'date_end'), ('salary_positions', 'date_end'),
     ('salary_leaders', 'date_end'), ('budget_detail', 'date_end'), ('budget_per_resident', 'date_end')

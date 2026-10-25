@@ -33,7 +33,7 @@
   </url>
   <url>
     <loc>https://baycounty.me/connections/campaign-gifts</loc>
-    <lastmod>2026-10-24</lastmod>
+    <lastmod>2026-10-25</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/connections/nonprofits</loc>
@@ -53,10 +53,14 @@
   </url>
   <url>
     <loc>https://baycounty.me/elections</loc>
-    <lastmod>2026-10-21</lastmod>
+    <lastmod>2026-10-25</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://baycounty.me/elections"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://baycounty.me/es/elecciones"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://baycounty.me/elections"/>
+  </url>
+  <url>
+    <loc>https://baycounty.me/elections/past</loc>
+    <lastmod>2026-10-25</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/es</loc>
@@ -67,7 +71,7 @@
   </url>
   <url>
     <loc>https://baycounty.me/es/elecciones</loc>
-    <lastmod>2026-10-21</lastmod>
+    <lastmod>2026-10-25</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://baycounty.me/elections"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://baycounty.me/es/elecciones"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://baycounty.me/elections"/>
@@ -211,7 +215,15 @@
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/people/amy-baker</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/people/andrew-kelly</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/andy-husar</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
@@ -235,7 +247,15 @@
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/people/beth-mclean</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/people/beth-strobel</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/bill-busch</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
@@ -247,7 +267,19 @@
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/people/bill-mcglothlin</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/bill-musgrove</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/people/billy-rader</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/bob-fletcher</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
@@ -256,6 +288,10 @@
   </url>
   <url>
     <loc>https://baycounty.me/people/bob-pelletier</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/bob-schultz</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
@@ -271,11 +307,23 @@
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/people/brandon-caldwell</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/people/brandy-waldron</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/people/brenda-lewis-williams</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/people/brenda-ruthven</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/brian-dick</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
@@ -287,11 +335,43 @@
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/people/brian-gray</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/people/brian-rust</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/people/bruce-lang</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/burnie-thompson</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/calvin-chester</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/calvin-starlin</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/cameron-fuqua</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/capt-james-pic</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/people/carl-curti</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/carl-sauls</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
@@ -304,6 +384,14 @@
   </url>
   <url>
     <loc>https://baycounty.me/people/chelsea-hitt</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/cherie-crim</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/chris-eaves</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
@@ -323,7 +411,19 @@
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/people/christine-smallwood</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/chuck-perdue</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/people/cindy-hamre</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/cindy-jolley</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
@@ -339,7 +439,15 @@
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/people/colleen-swab</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/people/corey-langford</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/dale-robitaille</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
@@ -351,11 +459,31 @@
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/people/dana-morris</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/dane-messick</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/people/daniel-raffield</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/people/daniel-robert-schultz</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/darrell-key</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/people/dave-lowery</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/david-agosta</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
@@ -367,11 +495,43 @@
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/people/david-dean</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/people/david-griggs</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/people/david-haight</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/david-holt</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/david-lanier</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/david-masters</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/demetrius-rease</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/people/denise-kelley</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/dennis-haddock</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/donny-walker</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
@@ -395,7 +555,23 @@
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/people/ed-young</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/people/eddie-cook</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/ellyne-fields</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/emmett-singleton</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/eric-orme</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
@@ -407,7 +583,31 @@
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/people/frances-gordon</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/frank-luke</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/people/frank-mancinelli</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/frank-mckeithen</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/frank-self</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/fred-broussard</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/gary-cox</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
@@ -420,6 +620,14 @@
   </url>
   <url>
     <loc>https://baycounty.me/people/george-gainer</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/george-hines</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/george-record</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
@@ -443,7 +651,15 @@
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/people/gregory-laplante</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/people/guy-tunnell</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/hal-grant</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
@@ -459,7 +675,15 @@
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/people/hoot-crawford</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/people/jack-griffis</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/jack-kennington</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
@@ -468,6 +692,18 @@
   </url>
   <url>
     <loc>https://baycounty.me/people/james-baxley</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/james-haddock</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/james-mccalister</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/james-morris</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
@@ -495,11 +731,19 @@
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/people/jarod-leighton</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/people/jason-adams</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/people/jeff-brown</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/jeff-snyder</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
@@ -519,7 +763,15 @@
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/people/jerry-robinson</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/people/jerry-smith</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/jerry-wallace</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
@@ -527,7 +779,31 @@
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/people/jim-barr</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/people/jim-loyed</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/joan-campbell</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/joe-brown</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/joe-grammer</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/joe-moore</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/joe-townsend</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
@@ -543,6 +819,22 @@
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/people/joel-stephens</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/john-curci</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/john-delonjay</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/john-hagan</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/people/john-haley</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
@@ -555,7 +847,19 @@
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/people/john-lincoln</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/john-michalik</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/people/john-reichard</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/john-smith</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
@@ -583,7 +887,23 @@
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/people/joshua-verville</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/people/josie-strange</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/joyce-dean</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/judith-tinder</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/judith-vandergrift</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
@@ -611,11 +931,27 @@
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/people/keith-curry</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/people/keith-mefford</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/people/keith-whitaker</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/people/ken-jones</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/ken-nelson</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/ken-thomas</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
@@ -631,7 +967,23 @@
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/people/kevin-ridge</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/people/kevin-williams</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/kimberly-smith</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/larry-couch</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/larry-henderson</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
@@ -643,11 +995,23 @@
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/people/linda-albrecht</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/people/linda-hamilton</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/people/lisa-logan</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/lynne-schneider</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/mackie-owens</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
@@ -659,7 +1023,19 @@
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/people/mark-andersen</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/mark-big-chief-strickland</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/people/mark-mcqueen</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/mark-meade</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
@@ -672,6 +1048,10 @@
   </url>
   <url>
     <loc>https://baycounty.me/people/mark-smith</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/marquis-tyson</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
@@ -688,6 +1068,10 @@
   </url>
   <url>
     <loc>https://baycounty.me/people/mell-smigielski</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/michael-delonjay</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
@@ -723,6 +1107,10 @@
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/people/michelle-bryant</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/people/michelle-smith</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
@@ -739,6 +1127,10 @@
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/people/mike-riddle</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/people/mike-thomas</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
@@ -747,11 +1139,19 @@
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/people/nichole-phipps</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/people/nick-atkinson</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/people/nina-ward</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/pamela-hiller</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
@@ -771,7 +1171,19 @@
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/people/patricia-fousek</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/paul-bohac</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/people/paul-casto</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/paul-davis</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
@@ -799,6 +1211,14 @@
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/people/rex-putnal</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/rich-musgrave</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/people/richard-chval</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
@@ -807,7 +1227,15 @@
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/people/richard-mccoy</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/people/richard-musgrave</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/richard-walker</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
@@ -819,11 +1247,27 @@
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/people/rick-russell</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/people/robbie-hughes</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/people/robert-benjamin-smith</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/people/robert-carroll</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/robert-merritt</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/robert-wright</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
@@ -840,6 +1284,10 @@
   </url>
   <url>
     <loc>https://baycounty.me/people/ron-fairbanks</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/ron-keel</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
@@ -867,6 +1315,10 @@
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/people/shane-vann</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/people/shannon-aufdencamp</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
@@ -883,6 +1335,10 @@
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/people/skip-stoltz</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/people/spring-overway</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
@@ -891,11 +1347,23 @@
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/people/stacie-houchins</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/people/steve-cox</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/people/steve-george</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/people/steve-moss</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/steve-thomas</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
@@ -923,11 +1391,23 @@
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/people/theresa-evans</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/people/thien-cao</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/people/thomas-abbott</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/thomas-balduf</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/thomas-cook</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
@@ -947,6 +1427,18 @@
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/people/timothy-linderman</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/tom-bailey</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/tom-hedges</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/people/tommy-ford</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
@@ -955,7 +1447,19 @@
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/people/tommy-welch</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/toni-shamplain</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/people/tony-o-rourke</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/tony-super</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
@@ -971,6 +1475,10 @@
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/people/ty-kennon</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/people/vickie-gainer</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
@@ -979,7 +1487,15 @@
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/people/walter-kelley</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/people/wayne-mcleod</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/people/whitney-nieves</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
@@ -987,7 +1503,7 @@
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
-    <loc>https://baycounty.me/people/william-perdue</loc>
+    <loc>https://baycounty.me/people/william-dyer</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
@@ -1057,7 +1573,11 @@
   </url>
   <url>
     <loc>https://baycounty.me/public-money/vendors</loc>
-    <lastmod>2026-10-24</lastmod>
+    <lastmod>2026-10-25</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/public-money/vendors/814-sand</loc>
+    <lastmod>2026-10-20</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/public-money/vendors/850-construction</loc>
@@ -1196,6 +1716,10 @@
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/public-money/vendors/coast-2-coast-printing</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/public-money/vendors/coastal-parasail</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
@@ -1316,6 +1840,10 @@
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/public-money/vendors/gts-entertainment-group</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/public-money/vendors/gypsy-belle-photo-bus</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
@@ -1341,6 +1869,10 @@
   </url>
   <url>
     <loc>https://baycounty.me/public-money/vendors/hmx-productions</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/public-money/vendors/hutt-insurance-agency</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
@@ -1380,6 +1912,10 @@
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/public-money/vendors/l-r-contracting</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/public-money/vendors/lamar-companies</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
@@ -1388,11 +1924,19 @@
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/public-money/vendors/lawnscapes-bay-county</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/public-money/vendors/leake-landscapes</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/public-money/vendors/madden-media</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/public-money/vendors/magnum-engineering</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
@@ -1448,6 +1992,14 @@
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/public-money/vendors/pcb-entertainment</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/public-money/vendors/pcb-map</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/public-money/vendors/pg-environmental-fl</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
@@ -1496,6 +2048,10 @@
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/public-money/vendors/regions-bank</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/public-money/vendors/reliantsouth</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
@@ -1517,6 +2073,10 @@
   </url>
   <url>
     <loc>https://baycounty.me/public-money/vendors/royal-american</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/public-money/vendors/sam-s-club</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
@@ -1597,6 +2157,14 @@
   </url>
   <url>
     <loc>https://baycounty.me/public-money/vendors/williams-communications</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/public-money/vendors/wjhg-tv</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/public-money/vendors/wmbb</loc>
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>

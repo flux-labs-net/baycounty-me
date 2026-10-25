@@ -590,6 +590,7 @@
    "id": "anderson-construction",
    "name": "Anderson Construction Co. of North Florida",
    "aliases": [
+    "Anderson Construction",
     "Anderson Construction Co. of North Florida",
     "Anderson Construction Company",
     "Anderson Construction Company of North Florida"
@@ -2010,7 +2011,9 @@
    "name": "Charlie Coram's Place",
    "aliases": [
     "Charlie Coram's Place",
-    "Charlie Coram's place"
+    "Charlie Coram's Place, Inc",
+    "Charlie Coram's place",
+    "Charlie Corams Place"
    ],
    "keys": [
     "charliecoramsplace"
@@ -2107,7 +2110,8 @@
    "id": "coast-2-coast-printing",
    "name": "Coast 2 Coast Printing",
    "aliases": [
-    "Coast 2 Coast Printing"
+    "Coast 2 Coast Printing",
+    "Coast2Coast Printing"
    ],
    "keys": [
     "coast2coastprinting"
@@ -2431,6 +2435,7 @@
     "C.W. Roberts Contracting",
     "C.W. Roberts Contracting Inc.",
     "C.W. Roberts Contracting, Inc.",
+    "C.W.Roberts Contracting, inc",
     "CW ROBERTS CONT",
     "CW Roberts"
    ],
@@ -2505,6 +2510,7 @@
    "id": "dag-architects",
    "name": "DAG Architects Inc",
    "aliases": [
+    "DAG ARCHITECTS",
     "DAG Architects",
     "DAG Architects Inc"
    ],
@@ -2728,6 +2734,7 @@
    "id": "disposal-services",
    "name": "Disposal Services LLC",
    "aliases": [
+    "Disposal Services",
     "Disposal Services LLC",
     "Disposal Services, LLC"
    ],
@@ -2892,6 +2899,7 @@
    "aliases": [
     "ECSC",
     "ECSC (Emerald Coast Site Construction)",
+    "ECSC LLC",
     "ECSC, LLC",
     "ECSC, LLC (Emerald Coast Site Construction)",
     "ECSC,LLC",
@@ -3299,6 +3307,7 @@
    "id": "florida-architects",
    "name": "Florida Architects",
    "aliases": [
+    "FLORIDA ARCHITECTS, INC",
     "Florida Architects",
     "Florida Architects Inc",
     "Florida Architects, Inc."
@@ -3688,6 +3697,9 @@
    "id": "gac-contractors",
    "name": "GAC Contractors, Inc.",
    "aliases": [
+    "GAC CONTRACTORS",
+    "GAC Contractors",
+    "GAC Contractors Inc",
     "GAC Contractors, Inc."
    ],
    "keys": [
@@ -3770,7 +3782,9 @@
    "name": "Gulf Coast Utility Contractors",
    "aliases": [
     "GULF COAST UTIL",
+    "GULF COAST UTILITY CONTRACTORS",
     "Gulf Coast Utility Construction",
+    "Gulf Coast Utility Contractor",
     "Gulf Coast Utility Contractor, LLC (GCUC)",
     "Gulf Coast Utility Contractors",
     "Gulf Coast Utility Contractors (GCUC)",
@@ -4555,7 +4569,8 @@
    "id": "hutt-insurance-agency",
    "name": "Hutt Insurance Agency, Inc",
    "aliases": [
-    "Hutt Insurance Agency, Inc"
+    "Hutt Insurance Agency, Inc",
+    "Hutt Insurance Agency, Inc."
    ],
    "keys": [
     "huttinsuranceagency"
@@ -4798,8 +4813,11 @@
    "aliases": [
     "Inland Construction",
     "Inland Construction & Engineering (bid awarded May 28, 2024)",
+    "Inland Construction Inc",
+    "Inland Construction Inc.",
     "Inland Construction and Engineering",
-    "Inland Construction and Engineering, Inc."
+    "Inland Construction and Engineering, Inc.",
+    "Inland Construction inc"
    ],
    "keys": [
     "inlandconstruction",
@@ -5304,6 +5322,7 @@
    "id": "l-r-contracting",
    "name": "L&R Contracting",
    "aliases": [
+    "L & R Contracting LLC",
     "L&R Contracting"
    ],
    "keys": [
@@ -5417,7 +5436,9 @@
    "id": "lawnscapes",
    "name": "Lawnscapes, Inc",
    "aliases": [
-    "Lawnscapes, Inc"
+    "Lawnscapes",
+    "Lawnscapes, Inc",
+    "Lawnscapes, Inc."
    ],
    "keys": [
     "lawnscapes"
@@ -5434,6 +5455,7 @@
    "id": "lawnscapes-bay-county",
    "name": "Lawnscapes of Bay County, Inc.",
    "aliases": [
+    "Lawnscapes of Bay County Inc",
     "Lawnscapes of Bay County, Inc."
    ],
    "keys": [
@@ -5757,7 +5779,9 @@
    "id": "magnum-engineering",
    "name": "Magnum Engineering",
    "aliases": [
-    "Magnum Engineering"
+    "Magnum Engineering",
+    "Magnum Engineering Inc",
+    "Magnum Engineering, Inc."
    ],
    "keys": [
     "magnumengineering"
@@ -5848,7 +5872,9 @@
    "id": "marshall-brothers",
    "name": "Marshall Brothers Construction & Engineering",
    "aliases": [
+    "MARSHALL BROTHERS",
     "Marshall Bothers",
+    "Marshall Brother\\'s",
     "Marshall Brothers",
     "Marshall Brothers Construction",
     "Marshall Brothers Construction & Engineering",
@@ -6727,10 +6753,12 @@
    "aliases": [
     "PANHANDLE ENGIN",
     "PANHANDLE ENGINEERING",
+    "PANHANDLE ENGINEERING, INC",
     "Panhandle Engineering",
     "Panhandle Engineering Inc",
     "Panhandle Engineering Inc.",
-    "Panhandle Engineering, Inc"
+    "Panhandle Engineering, Inc",
+    "Panhandle Engineering, Inc."
    ],
    "keys": [
     "panhandleengin",
@@ -6879,6 +6907,7 @@
    "id": "pcb-map",
    "name": "PCB Map Company, Inc",
    "aliases": [
+    "PCB Map",
     "PCB Map Company, Inc"
    ],
    "keys": [
@@ -7232,6 +7261,7 @@
    "id": "press-print-graphics",
    "name": "Press Print Graphics",
    "aliases": [
+    "PRESS PRINT GRAPHICS",
     "Press Print Graphics"
    ],
    "keys": [
@@ -7946,9 +7976,13 @@
     "ROBERTS & ROBER",
     "ROBERTS & ROBERTS INC",
     "Robers and Roberts, Inc",
+    "Roberts & Roberts INC",
+    "Roberts & Roberts, Inc",
     "Roberts & Roberts, Inc.",
+    "Roberts Roberts",
     "Roberts and Roberts",
     "Roberts and Roberts Inc",
+    "Roberts and Roberts Inc.",
     "Roberts and Roberts, Inc."
    ],
    "keys": [
@@ -8057,6 +8091,7 @@
    "name": "Royal American Construction",
    "aliases": [
     "Royal American Construction",
+    "Royal American Construction Co",
     "Royal American Construction Co.",
     "Royal American Construction Co., Inc.",
     "Royal American Construction Company",
@@ -8176,7 +8211,9 @@
    "id": "sam-s-club",
    "name": "Sam's Club",
    "aliases": [
-    "Sam's Club"
+    "SAM\\'S CLUB",
+    "Sam's Club",
+    "Sam\\'s Club"
    ],
    "keys": [
     "samsclub"
@@ -9056,10 +9093,12 @@
    "name": "TK Vandy",
    "aliases": [
     "T K Vandy LLC",
+    "T.K. Vandy LLC",
     "TK Vandy",
     "TK Vandy LLC",
     "TKVANDY LLC",
-    "TKVandy LLC"
+    "TKVandy LLC",
+    "TKVandy, LLC"
    ],
    "keys": [
     "tkvandy"
@@ -9767,6 +9806,7 @@
    "id": "wjhg-tv",
    "name": "WJHG-TV",
    "aliases": [
+    "WJHG TV",
     "WJHG-TV"
    ],
    "keys": [
@@ -9783,7 +9823,8 @@
    "id": "wmbb",
    "name": "WMBB",
    "aliases": [
-    "WMBB"
+    "WMBB",
+    "Wmbb"
    ],
    "keys": [
     "wmbb"

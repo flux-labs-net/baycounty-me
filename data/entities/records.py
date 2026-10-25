@@ -74,7 +74,7 @@ ORG_TYPES = ('business', 'pac', 'committee', 'party', 'other')
 
 
 def donations(types=('business',)):
-    """Organization contributions (individuals are never listed), from officeholders' campaigns and 2026 candidates.
+    """Organization contributions (individuals are never listed), from officeholders' campaigns, 2026 candidates and every other local campaign since 2016.
     Default: businesses only. Bank interest on a campaign account is not a contribution and is skipped."""
     out = []
     c = _j('campaign', 'campaign.json')
@@ -89,4 +89,16 @@ def donations(types=('business',)):
             if x.get('type') in types and x.get('kind') != 'interest':
                 out.append({'src': 'candidates_2026', 'cand_idx': ci, 'idx': i, 'name': x['name'], 'type': x.get('type'), 'amount': x.get('amount'), 'date': x.get('date'), 'kind': x.get('kind'),
                             'candidate': cd['name'], 'office': cd.get('office'), 'gov': None, 'election': cd.get('election'), 'report_url': cd.get('report_url')})
+    # every other local campaign since 2016 (campaign_history.json); a campaign already in the two files above is skipped
+    have = {str(cd.get('cand_id')) for cd in (f['candidates'] if f else [])}
+    have |= {m.group(1) for cd in (c['candidates'] if c else []) for m in [re.search(r'cand_id=(\d+)', cd.get('export_url') or '')] if m}
+    h = _j('campaign', 'campaign_history.json')
+    for ci, cd in enumerate(h['candidates'] if h else []):
+        if str(cd.get('cand_id')) in have:
+            continue
+        for i, x in enumerate(cd.get('contributors') or []):
+            if x.get('type') in types and x.get('kind') != 'interest':
+                out.append({'src': 'history', 'cand_idx': ci, 'idx': i, 'name': x['name'], 'type': x.get('type'), 'amount': x.get('amount'), 'date': x.get('date'), 'kind': x.get('kind'),
+                            'candidate': cd['name'], 'office': cd.get('office'), 'gov': cd.get('gov_id'), 'election': cd.get('election'), 'report_url': cd.get('report_url'),
+                            'year': cd.get('year'), 'outcome': cd.get('outcome')})
     return out

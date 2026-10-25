@@ -8,8 +8,8 @@
   const money = n => n == null ? '' : (n < 0 ? '−' : '') + (Math.abs(n) >= 1e6 ? '$' + (Math.abs(n) / 1e6).toFixed(2) + 'M' : '$' + Math.round(Math.abs(n)).toLocaleString('en-US'));
   const KIND = {gov: 'Government', vendor: 'Company', person: 'Official or candidate', nonprofit: 'Nonprofit', member: 'Board member', owner: 'Business owner', business: 'Business', committee: 'Committee or PAC'};
   const COLOR = {gov: 'var(--navy)', vendor: 'var(--blue)', business: 'var(--blue)', person: 'var(--salmon)', nonprofit: 'var(--teal)', member: 'var(--amber)', owner: 'var(--amber)', committee: 'var(--muted)'};
-  const LINE = {gift: 'pf-l-gift', paid: 'pf-l-paid', board: 'pf-l-board', runs: 'pf-l-runs', voted: 'pf-l-voted', serves: 'pf-l-board', served: 'pf-l-board', grant: 'pf-l-paid', related: 'pf-l-runs', same: 'pf-l-runs'};
-  const ORDER = ['serves', 'served', 'paid', 'gift', 'voted', 'board', 'runs', 'grant', 'related', 'same'];
+  const LINE = {gift: 'pf-l-gift', paid: 'pf-l-paid', board: 'pf-l-board', runs: 'pf-l-runs', voted: 'pf-l-voted', serves: 'pf-l-board', served: 'pf-l-board', candidate: 'pf-l-board', ran: 'pf-l-board', grant: 'pf-l-paid', related: 'pf-l-runs', same: 'pf-l-runs'};
+  const ORDER = ['serves', 'candidate', 'served', 'ran', 'paid', 'gift', 'voted', 'board', 'runs', 'grant', 'related', 'same'];
   let id = root.dataset.id;
   if (!id) {  // /profile/<kind>/<key> or /profile?id=<kind>:<key>
     const m = location.pathname.match(/^\/profile\/([a-z]+)\/(.+?)\/?$/);
@@ -81,18 +81,42 @@
       <div class="pf-legend">${kinds.map(k => `<span><i style="background:${COLOR[k]}"></i>${k === 'vendor' ? 'Company or business' : KIND[k]}</span>`).join('')}${rels.map(r => `<span><i class="ln ${LINE[r] || ''}"></i>${esc(labelOf(r))}</span>`).join('')}</div>
       <p class="cn-note">${all.length > nodes.length ? `Showing ${nodes.length} of ${all.length} connections, the largest of each kind first. ` : ''}Tap a name to open its profile. Bigger circles carry more dollars in the records.</p>`;
   }
-  const labelOf = r => ({serves: 'Serves', paid: 'Payments', gift: 'Campaign gifts', voted: 'Votes on contracts', board: 'Board seats', runs: 'Runs a business', grant: 'Grants', related: 'Shared project or tie', same: 'Same organization'}[r] || r);
+  const labelOf = r => ({serves: 'Serves', served: 'Served', candidate: 'Candidates', ran: 'Ran for office', paid: 'Payments', gift: 'Campaign gifts', voted: 'Votes on contracts', board: 'Board seats', runs: 'Runs a business', grant: 'Grants', related: 'Shared project or tie', same: 'Same organization'}[r] || r);
 
   // ---------- connection list ----------
+  // One row per name and kind of connection. The records can name the same pair more than once (a company in both the
+  // contracts and the check registers, a donor giving under two office names), so those rows are folded together.
+  // Contracts and checks can describe the same dollars, so a folded payment row shows the largest amount, with each
+  // record type's amount in the detail; gifts and grants add up.
+  function fold(cs) {
+    const by = new Map();
+    cs.forEach(c => {
+      const k = c.relation + '|' + c.direction + '|' + (c.other.entity_id || c.other.name);
+      const o = by.get(k);
+      if (!o) { by.set(k, {...c, parts: [c]}); return; }
+      o.parts.push(c);
+    });
+    return [...by.values()].map(o => {
+      if (o.parts.length === 1) return o;
+      const ps = o.parts, amts = ps.map(c => c.amount || 0), sum = o.relation !== 'paid';
+      const dates = ps.flatMap(c => [c.first_date, c.last_date]).filter(Boolean).sort();
+      const detail = [...new Set(ps.map(c => (c.detail || '') + (!sum && c.amount && ps.filter(x => x.amount).length > 1 ? ': ' + money(c.amount) : '')).filter(Boolean))].join(' · ');
+      return {...o, amount: amts.some(Boolean) ? (sum ? amts.reduce((a, b) => a + b, 0) : Math.max(...amts)) : null,
+        records: ps.reduce((t, c) => t + (c.records || 1), 0), first_date: dates[0] || null, last_date: dates[dates.length - 1] || null, detail: detail || null,
+        source_url: (ps.find(c => c.source_url) || {}).source_url || null, checked_by_hand: ps.some(c => c.checked_by_hand) || undefined,
+        merged_from: (ps.find(c => c.merged_from) || {}).merged_from};
+    }).sort((a, b) => (b.amount || 0) - (a.amount || 0) || String(a.other.name).localeCompare(String(b.other.name)));
+  }
   // A hand-checked official gets an "Official" badge. When the build also listed the same person (as a board member
   // or business officer on the same record), the API has already merged the two into this one row.
-  const rowHtml = c => `<tr><th scope="row">${c.other.page_url ? `<a href="${esc(c.other.page_url)}">${esc(c.other.name)}</a>` : esc(c.other.name)}${c.other.kind === 'person' && c.checked_by_hand ? ' <span class="pf-badge">Official</span>' : ''}<small>${esc(c.merged_from && c.relation === 'board' ? 'Board member' : (KIND[c.other.kind] || ''))}${c.checked_by_hand ? ' · checked by hand' : ''}</small></th>
+  const what = c => c.merged_from && c.relation === 'board' ? 'Board member' : (c.other.kind_label || KIND[c.other.kind] || '');
+  const rowHtml = c => `<tr><th scope="row">${c.other.page_url ? `<a href="${esc(c.other.page_url)}">${esc(c.other.name)}</a>` : esc(c.other.name)}${c.other.kind === 'person' && c.checked_by_hand ? ' <span class="pf-badge">Official</span>' : ''}<small>${esc(what(c))}${c.checked_by_hand ? ' · checked by hand' : ''}</small></th>
         <td class="wrap small">${esc(c.detail || '')}</td><td class="num">${c.amount ? money(c.amount) : ''}${c.records > 1 ? `<small>${c.records} records</small>` : ''}</td>
         <td class="small">${esc([c.first_date, c.last_date].filter((x, i, a) => x && a.indexOf(x) === i).join(' to '))}</td><td>${c.source_url ? `<a class="src" href="${esc(c.source_url)}" target="_blank" rel="noopener">Source</a>` : ''}</td></tr>`;
   function list(d) {
     const box = document.getElementById('pfList'); if (!box) return;
     const groups = new Map();
-    d.connections.forEach(c => { const k = c.relation + ':' + c.direction; (groups.get(k) || groups.set(k, []).get(k)).push(c); });
+    fold(d.connections).forEach(c => { const k = c.relation + ':' + c.direction; (groups.get(k) || groups.set(k, []).get(k)).push(c); });
     const keys = [...groups.keys()].sort((a, b) => ORDER.indexOf(a.split(':')[0]) - ORDER.indexOf(b.split(':')[0]));
     const SHOW = 25;
     box.innerHTML = keys.map(k => {

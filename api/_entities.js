@@ -25,6 +25,8 @@ const RELATION = {
   voted: ['voted on contracts with', 'had contracts voted on by'],
   serves: ['serves', 'is served by'],
   served: ['served', 'was served by'],
+  candidate: ['is a candidate for office in', 'has candidates for office'],
+  ran: ['ran for office in', 'had on the ballot'],
   board: ['sits on the board of', 'has on its board'],
   runs: ['runs', 'is run by'],
   grant: ['gave a grant to', 'got a grant from'],
@@ -46,14 +48,14 @@ function urlFor(id, known) {
   return k === 'person' ? `/people/${v}` : `/profile/${k}/${v}`;
 }
 
-function shape(id, rows) {
+function shape(id, rows, labels = new Map()) {
   // one connection, from this entity's side
   return rows.map(r => {
     const out = r.from_id === id;
     const rel = r.relation;
     return {link_id: r.link_id, relation: rel, label: (RELATION[rel] || [rel, rel])[out ? 0 : 1], direction: out ? 'out' : 'in',
       other: {entity_id: out ? r.to_id : r.from_id, name: out ? r.to_name : r.from_name, kind: out ? r.to_kind : r.from_kind,
-        kind_label: KIND_LABEL[out ? r.to_kind : r.from_kind] || null, page_url: out ? r.to_url : r.from_url},
+        kind_label: labels.get(out ? r.to_id : r.from_id) || KIND_LABEL[out ? r.to_kind : r.from_kind] || null, page_url: out ? r.to_url : r.from_url},
       amount: r.amount ?? null, records: r.records ?? null, first_date: r.first_date || null, last_date: r.last_date || null, detail: r.detail || null,
       source_url: r.source_url || null, dataset: r.dataset || 'entity-connections', checked_by_hand: r.checked_by_hand || undefined,
       merged_from: r.merged_from || undefined};
@@ -147,6 +149,22 @@ function mergeConfirmed(links, live) {
   return links.filter(l => !drop.has(l)).concat(add);
 }
 
+// What each linked person is ("Elected official", "Department leader", "Candidate", "Former official"), from their
+// profile row, so a list says more than "Official or candidate".
+async function personLabels(req, pm, links, id, source) {
+  const ids = [...new Set(links.flatMap(r => [r.from_id, r.to_id]).filter(x => x !== id && String(x).startsWith('person:')))].slice(0, 300);
+  if (!ids.length) return new Map();
+  let rows = [];
+  try {
+    if (source !== 'database') throw new Error('file');
+    rows = (await rest(`entity_profiles?select=entity_id,kind_label&entity_id=in.(${ids.map(x => encodeURIComponent(q(x))).join(',')})`, {timeout: 6000})).rows;
+  } catch (e) {
+    const want = new Set(ids);
+    rows = await datasetRows(req, pm).then(r => r.rows.filter(p => want.has(p.entity_id))).catch(() => []);
+  }
+  return new Map(rows.map(r => [r.entity_id, r.kind_label]));
+}
+
 // A board member an editor confirmed as an official: the profile says so and links the official's page.
 async function withOfficial(req, catalog, ent) {
   const rs = await rowsWhere(req, catalog, 'nonprofit-officials', {person_id: ent.entity_id.slice(7)}).catch(() => []);
@@ -179,7 +197,8 @@ async function getEntity(req, catalog, id) {
   live = live || await liveConnections(req, catalog, ent);
   if (ent.kind === 'member') ent = await withOfficial(req, catalog, ent);
   const all = mergeConfirmed(links, live);
-  const connections = shape(id, all).sort((a, b) => (b.amount || 0) - (a.amount || 0) || String(a.other.name).localeCompare(String(b.other.name)));
+  const labels = await personLabels(req, pm, all, id, source);
+  const connections = shape(id, all, labels).sort((a, b) => (b.amount || 0) - (a.amount || 0) || String(a.other.name).localeCompare(String(b.other.name)));
   if (live.length) ent = {...ent, connections: connections.length};
   const counts = {};
   connections.forEach(c => { counts[c.relation] = (counts[c.relation] || 0) + 1; });
@@ -205,4 +224,4 @@ async function searchEntities(req, catalog, {q: text = '', kind = '', limit = 20
   return rows;
 }
 
-module.exports = {getEntity, searchEntities, mergeConfirmed, RELATION, KIND_LABEL, ID_RE};
+module.exports = {getEntity, searchEntities, mergeConfirmed, shape, RELATION, KIND_LABEL, ID_RE};
