@@ -3743,7 +3743,7 @@
    "id": "site-updates",
    "title": "What's new",
    "description": "Each change to the site's data and pages, newest first.",
-   "rows": 53,
+   "rows": 54,
    "columns": [
     {
      "name": "date",
@@ -6863,7 +6863,7 @@
    "id": "site-menu",
    "title": "Site menu",
    "description": "Every link in the site's main menu, one row per link, in English and Spanish: the section and the question it answers, the link's place in the section, and the section's start-here page. place_id is the place the menu belongs to (fl-bay = Bay County), so a menu for another place sits beside it.",
-   "rows": 57,
+   "rows": 59,
    "columns": [
     {
      "name": "place_id",
@@ -6959,6 +6959,168 @@
    "json": "/downloads/site-menu.json",
    "csv": "/downloads/site-menu.csv",
    "api": "/api/v1/datasets/site-menu"
+  },
+  {
+   "id": "checkbook-payments",
+   "title": "Checkbook: every payment",
+   "description": "Every payment in each government's own check register (checks, ACH, wires and cards), as published from the files the government sends: date, payee, amount, check number, invoice, fund, account and description. fiscal_year is the year the fiscal year ends. Voided checks are left out. Payments to private individuals (refunds, reimbursements) are listed as \"Individual (name withheld)\" with payee_kind individual and a category instead of the description. payee_entity_id links a payee to its profile (entity-profiles) when the site knows it. Bank statements and reconciliations are never published.",
+   "rows": 0,
+   "columns": [
+    {
+     "name": "government",
+     "type": "string"
+    },
+    {
+     "name": "fiscal_year",
+     "type": "number"
+    },
+    {
+     "name": "paid_on",
+     "type": "string"
+    },
+    {
+     "name": "payee",
+     "type": "string"
+    },
+    {
+     "name": "payee_kind",
+     "type": "string"
+    },
+    {
+     "name": "payee_entity_id",
+     "type": "string"
+    },
+    {
+     "name": "amount",
+     "type": "number"
+    },
+    {
+     "name": "method",
+     "type": "string"
+    },
+    {
+     "name": "doc_no",
+     "type": "string"
+    },
+    {
+     "name": "invoice_no",
+     "type": "string"
+    },
+    {
+     "name": "fund",
+     "type": "string"
+    },
+    {
+     "name": "account",
+     "type": "string"
+    },
+    {
+     "name": "description",
+     "type": "string"
+    },
+    {
+     "name": "source_file",
+     "type": "string"
+    },
+    {
+     "name": "upload_id",
+     "type": "number"
+    },
+    {
+     "name": "published_at",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/checkbook-payments.json",
+   "csv": "/downloads/checkbook-payments.csv",
+   "api": "/api/v1/datasets/checkbook-payments"
+  },
+  {
+   "id": "budget-actuals",
+   "title": "Budget vs. actual, month by month",
+   "description": "Each government's budget-vs-actual report as of each month end (as_of), line by line: fund, department, account, the original and amended budget, actual_ytd (spending, or revenue collected, to date) and encumbered (open purchase orders). line_type is expense or revenue. One report per month end, so a fiscal year has a row per line per report. fiscal_year is the year the fiscal year ends (FY2026 = Oct 2025 to Sep 2026).",
+   "rows": 0,
+   "columns": [
+    {
+     "name": "government",
+     "type": "string"
+    },
+    {
+     "name": "fiscal_year",
+     "type": "number"
+    },
+    {
+     "name": "as_of",
+     "type": "string"
+    },
+    {
+     "name": "line_type",
+     "type": "string"
+    },
+    {
+     "name": "fund",
+     "type": "string"
+    },
+    {
+     "name": "department",
+     "type": "string"
+    },
+    {
+     "name": "account",
+     "type": "string"
+    },
+    {
+     "name": "description",
+     "type": "string"
+    },
+    {
+     "name": "original_budget",
+     "type": "number"
+    },
+    {
+     "name": "amended_budget",
+     "type": "number"
+    },
+    {
+     "name": "actual_ytd",
+     "type": "number"
+    },
+    {
+     "name": "encumbered",
+     "type": "number"
+    },
+    {
+     "name": "source_file",
+     "type": "string"
+    },
+    {
+     "name": "upload_id",
+     "type": "number"
+    },
+    {
+     "name": "published_at",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/budget-actuals.json",
+   "csv": "/downloads/budget-actuals.csv",
+   "api": "/api/v1/datasets/budget-actuals"
   },
   {
    "id": "tax-districts",

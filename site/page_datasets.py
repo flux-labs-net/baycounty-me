@@ -471,6 +471,26 @@ def over_limit_gifts():
     return []
 
 
+# --- Open books (/public-money/checkbook, /public-money/budget-tracker) ------------------------------------------------
+# Each government's own accounting: rows are written to the database when an admin publishes a finance file
+# (api/_finance/publish.js, migration 0047), not by the site build, so the build's files hold only the columns.
+CHECKBOOK_COLUMNS = ['government', 'fiscal_year', 'paid_on', 'payee', 'payee_kind', 'payee_entity_id', 'amount', 'method', 'doc_no', 'invoice_no',
+                     'fund', 'account', 'description', 'source_file', 'upload_id', 'published_at', 'source_url', 'gov_id']
+DB_ONLY_COLUMNS['checkbook-payments'] = {c: ('number' if c in ('fiscal_year', 'amount', 'upload_id') else 'string') for c in CHECKBOOK_COLUMNS}
+BUDGET_ACTUAL_COLUMNS = ['government', 'fiscal_year', 'as_of', 'line_type', 'fund', 'department', 'account', 'description', 'original_budget',
+                         'amended_budget', 'actual_ytd', 'encumbered', 'source_file', 'upload_id', 'published_at', 'source_url', 'gov_id']
+DB_ONLY_COLUMNS['budget-actuals'] = {c: ('number' if c in ('fiscal_year', 'original_budget', 'amended_budget', 'actual_ytd', 'encumbered', 'upload_id') else 'string')
+                                     for c in BUDGET_ACTUAL_COLUMNS}
+
+
+def checkbook_payments():
+    return []
+
+
+def budget_actuals():
+    return []
+
+
 # --- Nonprofits (data/nonprofits): organizations, money and board members (public IRS and state filings) ----------
 
 def _nonprofit_files(part):
@@ -602,5 +622,7 @@ DATASETS = [
     ('entity-profiles', 'Profiles: people, companies and organizations', 'Every company, elected official, candidate, nonprofit, nonprofit board member, registered business, committee and government named in BayCounty.me records, one row each, with its profile page and how many documented connections it has. entity_id (kind:key) joins entity-connections. Board members are named as their nonprofits\' public filings list them; individual campaign donors are included only when they run a registered business (owner-gifts).', entity_profiles),
     ('entity-connections', 'Connections between people, companies and organizations', "Every documented connection between two entities in entity-profiles, totalled per pair and kind: a government paid a payee, an organization gave to an official's or candidate's campaign, an official voted on a company's contracts, a person sits on a nonprofit's board or runs a business, a nonprofit gave a grant, two payees share a project. Each row has its source. Individual campaign donors are included only when they run a registered business (owner-gifts); officials' board seats and businesses are added by the API once checked by hand.", entity_connections),
     ('site-menu', 'Site menu', "Every link in the site's main menu, one row per link, in English and Spanish: the section and the question it answers, the link's place in the section, and the section's start-here page. place_id is the place the menu belongs to (fl-bay = Bay County), so a menu for another place sits beside it.", site_menu),
+    ('checkbook-payments', 'Checkbook: every payment', "Every payment in each government's own check register (checks, ACH, wires and cards), as published from the files the government sends: date, payee, amount, check number, invoice, fund, account and description. fiscal_year is the year the fiscal year ends. Voided checks are left out. Payments to private individuals (refunds, reimbursements) are listed as \"Individual (name withheld)\" with payee_kind individual and a category instead of the description. payee_entity_id links a payee to its profile (entity-profiles) when the site knows it. Bank statements and reconciliations are never published.", checkbook_payments),
+    ('budget-actuals', 'Budget vs. actual, month by month', "Each government's budget-vs-actual report as of each month end (as_of), line by line: fund, department, account, the original and amended budget, actual_ytd (spending, or revenue collected, to date) and encumbered (open purchase orders). line_type is expense or revenue. One report per month end, so a fiscal year has a row per line per report. fiscal_year is the year the fiscal year ends (FY2026 = Oct 2025 to Sep 2026).", budget_actuals),
     ('tax-districts', 'Tax districts', 'Which taxing authorities levy property tax in each tax district, and the combined millage. Rates by year are in property-tax-rates (authority_id).', tax_districts),
 ]

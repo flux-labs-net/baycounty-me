@@ -57,19 +57,34 @@
   $('#code-back').addEventListener('click', () => { $('#code-form').hidden = true; $('#email-form').hidden = false; $('#signin-msg').textContent = ''; });
   $('#signout').addEventListener('click', async () => { await api('logout', {method: 'POST'}).catch(() => {}); location.reload(); });
 
-  // ---------- tabs ----------
+  // ---------- menu + panes (laid out like /admin) ----------
   const loaders = {overview: loadOverview, flags: () => loadFlags(true), upload: () => loadEmailed(), files: loadFiles, people: loadPeople, packet: loadPacket};
+  const nav = $('#an-nav'), menuBtn = $('#an-open');
+  let current = 'overview';
+  function menu(open) {
+    nav.classList.toggle('open', open); document.body.classList.toggle('an-lock', open);
+    menuBtn.setAttribute('aria-expanded', String(open));
+  }
+  menuBtn.addEventListener('click', () => menu(true));
+  $('#an-close').addEventListener('click', () => menu(false));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && nav.classList.contains('open')) menu(false); });
   function tab(name, push = true) {
     if (!loaders[name]) name = 'overview';
-    const b = $(`[role=tab][data-tab="${name}"]`);
-    if (!b || b.hidden) name = 'overview';
-    $$('[role=tab]').forEach(x => x.setAttribute('aria-selected', String(x.dataset.tab === name)));
+    const link = nav.querySelector(`[data-tab="${name}"]`);
+    if (!link || link.hidden) name = 'overview';
+    current = name;
+    nav.querySelectorAll('[data-tab]').forEach(a => a.dataset.tab === name ? a.setAttribute('aria-current', 'page') : a.removeAttribute('aria-current'));
     $$('[data-panel]').forEach(p => { p.hidden = p.id !== 'p-' + name; });
+    const title = nav.querySelector(`[data-tab="${name}"] span`).textContent;
+    $('#fw-h').textContent = title; $('#an-cur').textContent = title;
     if (push) history.replaceState(null, '', '#' + name);
-    if (name !== 'packet') document.title = PAGE_TITLE;
+    if (name !== 'packet') document.title = title + ' · ' + PAGE_TITLE;
+    menu(false);
+    if (push) window.scrollTo(0, 0);
     loaders[name]();
   }
-  $$('[role=tab]').forEach(b => b.addEventListener('click', () => tab(b.dataset.tab)));
+  nav.addEventListener('click', e => { const a = e.target.closest('a[data-tab]'); if (!a) return; e.preventDefault(); tab(a.dataset.tab); });
+  window.addEventListener('hashchange', () => { if (!$('#app').hidden) tab(location.hash.slice(1)); });
   document.addEventListener('click', e => { const g = e.target.closest('[data-go]'); if (g) tab(g.dataset.go); });
 
   async function start() {
@@ -84,12 +99,15 @@
       const sel = $('#ws-pick'); sel.hidden = false;
       sel.innerHTML = j.workspaces.map(x => `<option value="${esc(x.id)}"${x.id === ws ? ' selected' : ''}>${esc(x.name)}</option>`).join('');
       sel.onchange = () => { try { localStorage.setItem('fin-ws', sel.value); } catch (e) {} location.reload(); };
-    } else $('#ws-name').textContent = w.name;
+    }
+    $('#ws-name').textContent = w.name;
     $('#who').textContent = `${j.email} · ${role === 'auditor' ? 'auditor' : role}`;
-    $$('[role=tab][data-min]').forEach(b => { b.hidden = !can(b.dataset.min); });
+    nav.querySelectorAll('[data-min]').forEach(a => { a.hidden = !can(a.dataset.min); });
+    nav.querySelectorAll('.an-g').forEach(g => { g.hidden = !g.querySelector('a[data-tab]:not([hidden])'); });
     $('#signin').hidden = true; $('#app').hidden = false;
     const want = location.hash.slice(1);
     tab(want || 'overview', false);
+    if (current !== 'overview') api('overview').then(o => { overview = overview || o; flagCount(o.flags.open); }).catch(() => {});
   }
 
   // ---------- overview ----------
@@ -120,11 +138,15 @@
       <span class="m">${esc(RULES[f.rule] || f.rule)} · first seen ${day(f.first_seen_at)}</span></button></li>`;
   }
 
+  function flagCount(n) {
+    $('#flag-count').hidden = !n; $('#flag-count').textContent = n > 999 ? '999+' : (n || '');
+    const dot = nav.querySelector('[data-count="flags"] .an-n'); if (dot) dot.classList.toggle('on', n > 0);
+  }
   async function loadOverview() {
     $('#ov-lead').textContent = 'Loading…';
     try { overview = await api('overview'); } catch (e) { if (e.message !== 'Signed out') $('#ov-lead').textContent = e.message; return; }
     const o = overview, b = o.budget, f = o.flags;
-    $('#flag-count').textContent = f.open ? ' ' + f.open : '';
+    flagCount(f.open);
     const parts = [];
     if (b) {
       const used = (b.total_actual + b.total_encumbered) / (b.total_budget || 1);
@@ -234,7 +256,7 @@
       try {
         await api('flag-status', {method: 'POST', body: {id: Number(id), status: st, note: form.note.value}});
         $('#rv-msg').innerHTML = '<span class="ok">Saved.</span>';
-        setTimeout(() => { d.close(); const cur = $('[role=tab][aria-selected=true]').dataset.tab; loaders[cur](); }, 500);
+        setTimeout(() => { d.close(); loaders[current](); }, 500);
       } catch (err) { $('#rv-msg').innerHTML = `<span class="err">${esc(err.message)}</span>`; }
       btn.disabled = false;
     });
@@ -355,20 +377,41 @@
     const tb = $('#files-t tbody'); tb.innerHTML = '<tr><td colspan="8" class="muted">Loading…</td></tr>';
     try {
       const {uploads} = await api('uploads');
+      if (!overview) overview = await api('overview').catch(() => null);  // the publish buttons need the workspace
       const shown = uploads.filter(u => u.status !== 'preview');
       tb.innerHTML = shown.length ? shown.map(u => `<tr><td>${esc(u.original_name)}</td><td>${esc(SHAPES[u.shape] || '—')}</td>
         <td style="white-space:nowrap">${u.period_start ? day(u.period_start) + (u.period_end && u.period_end !== u.period_start ? ' – ' + day(u.period_end) : '') : (u.period_end ? day(u.period_end) : '—')}</td>
         <td class="num">${u.row_count != null ? u.row_count.toLocaleString() : '—'}</td><td class="num">${usd(u.parsed_total, true)}</td>
         <td>${u.status === 'committed' ? (u.tie_status === 'ties' ? '<span class="ok">Added, ties</span>' : 'Added, no total') : u.status === 'held' ? `<span class="err">Held: off by ${usd(u.tie_difference, true)}</span>` : u.status === 'replaced' ? '<span class="muted">Withdrawn</span>' : esc(u.status)}</td>
         <td style="white-space:nowrap">${day(u.uploaded_at)}<br><span class="muted small">${esc(u.uploaded_by || '')}</span></td>
-        <td style="white-space:nowrap"><button class="btn quiet" type="button" data-dl="${u.id}">Original</button>${can('upload') && ['committed', 'held'].includes(u.status) ? `<button class="btn quiet" type="button" data-rm="${u.id}">Withdraw</button>` : ''}</td></tr>`).join('')
+        <td style="white-space:nowrap"><button class="btn quiet" type="button" data-dl="${u.id}">Original</button>${can('upload') && ['committed', 'held'].includes(u.status) ? `<button class="btn quiet" type="button" data-rm="${u.id}">Withdraw</button>` : ''}${pubCell(u)}</td></tr>`).join('')
         : `<tr><td colspan="8" class="empty">No files yet.${can('upload') ? ' <button class="btn" data-go="upload" type="button">Add a file</button>' : ''}</td></tr>`;
     } catch (e) { tb.innerHTML = `<tr><td colspan="8" class="err">${esc(e.message)}</td></tr>`; }
   }
+  // Publishing: an owner copies a check register or budget report to the public checkbook and budget tracker pages.
+  const PUBLIC = {disbursements: '/public-money/checkbook', budget: '/public-money/budget-tracker'};
+  function pubCell(u) {
+    if (!PUBLIC[u.shape] || u.status !== 'committed' || overview?.workspace?.sample) return '';
+    const page = `${PUBLIC[u.shape]}?gov=${encodeURIComponent(overview?.workspace?.government_key || '')}`;
+    if (u.published_at) return `<br><span class="ok small">Public since ${day(u.published_at)}</span> <a class="small" href="${page}" target="_blank" rel="noopener">View</a>${can('manage') ? ` <button class="btn quiet" type="button" data-unpub="${u.id}">Unpublish</button>` : ''}`;
+    return can('manage') && u.tie_status !== 'mismatch' ? `<br><button class="btn" type="button" data-pub="${u.id}">Publish</button>` : '';
+  }
+  document.addEventListener('click', async e => {
+    const pb = e.target.closest('[data-pub]'), up = e.target.closest('[data-unpub]');
+    if (pb) {
+      pb.disabled = true; pb.textContent = 'Publishing…';
+      try { const r = await api('publish', {method: 'POST', body: {upload_id: Number(pb.dataset.pub)}});
+        alert(`Published ${r.rows.toLocaleString()} rows${r.individuals_withheld ? `, with ${r.individuals_withheld} payments to private individuals unnamed` : ''}. They appear on ${r.page} within five minutes.`); loadFiles(); }
+      catch (err) { alert(err.message); pb.disabled = false; pb.textContent = 'Publish'; }
+    }
+    if (up && confirm('Take this file off the public pages? You can publish it again later.')) {
+      try { await api('unpublish', {method: 'POST', body: {upload_id: Number(up.dataset.unpub)}}); loadFiles(); } catch (err) { alert(err.message); }
+    }
+  });
   document.addEventListener('click', async e => {
     const dl = e.target.closest('[data-dl]'), rm = e.target.closest('[data-rm]');
     if (dl) { try { const j = await api('file', {params: {upload_id: dl.dataset.dl}}); location.href = j.url; } catch (err) { alert(err.message); } }
-    if (rm && confirm('Withdraw this file? Its rows stop counting and the checks run again. The original stays on record.')) {
+    if (rm && confirm('Withdraw this file? Its rows stop counting, it comes off the public pages if it was published, and the checks run again. The original stays on record.')) {
       try { await api('replace', {method: 'POST', body: {upload_id: Number(rm.dataset.rm)}}); loadFiles(); } catch (err) { alert(err.message); }
     }
   });

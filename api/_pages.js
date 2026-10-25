@@ -29,6 +29,8 @@ const PAGES = {
   '/who-runs-bay-county': {datasets: ['people-directory', 'officials-pay', 'salary-leaders']},
   '/public-money/budget-explorer': {datasets: ['budget-detail', 'budget-per-resident']},
   '/public-money/budget-compare': {datasets: ['budget-years', 'government-years'], endpoints: ['/budget-compare']},
+  '/public-money/checkbook': {datasets: ['checkbook-payments'], endpoints: ['/checkbook']},
+  '/public-money/budget-tracker': {datasets: ['budget-actuals'], endpoints: ['/budget-actual']},
   '/elections': {datasets: ['candidates-2026', 'campaign-contributions-2026']},
   '/public-money/exemptions': {datasets: ['property-tax-exemptions']},
   '/connections/money-map': {datasets: ['money-map-gifts', 'money-map-contracts', 'money-map-votes']},

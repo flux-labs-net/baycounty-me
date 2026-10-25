@@ -14,6 +14,8 @@
 //   GET  ?action=flag&workspace=lh&id=1             one flag, the rows behind it, review notes
 //   POST ?action=flag-status {workspace, id, status, note}   open | explained | follow_up | referred
 //   POST ?action=run-rules   {workspace}
+//   POST ?action=publish     {workspace, upload_id}   copy a check register or budget report to the public open-books pages (owners)
+//   POST ?action=unpublish   {workspace, upload_id}   take its rows off the public pages (owners)
 //   GET  ?action=members&workspace=lh  /  POST ?action=members {workspace, email, role}   (owners)
 //   POST ?action=intake  {raw_id | raw_ids}        emailed files -> unreviewed imports (service-role key only; see _finance/intake.js)
 const db = require('./_db');
@@ -22,6 +24,7 @@ const store = require('./_finance/store');
 const {caller, requireRole, startLogin, finishLogin, logout, ROLES} = require('./_finance/auth');
 const {FROM, resend} = require('./_alerts');
 const {prepare, sha256, safeName} = require('./_finance/pipeline');
+const publisher = require('./_finance/publish');
 
 const MAX_INLINE = 3 * 1024 * 1024; // base64 uploads through the function (Vercel caps bodies at 4.5 MB); bigger files go to storage first
 const bad = (msg, status = 400) => Object.assign(new Error(msg), {status});
@@ -131,17 +134,17 @@ async function route(deps, req, res, action) {
   }
   const ws = String(b.workspace || Q.workspace || '');
   const need = {overview: 'read', uploads: 'read', file: 'read', flags: 'read', flag: 'read', 'upload-url': 'upload', ingest: 'upload',
-    replace: 'upload', 'flag-status': 'review', 'run-rules': 'upload', members: req.method === 'GET' ? 'read' : 'manage'}[action];
+    replace: 'upload', 'flag-status': 'review', 'run-rules': 'upload', publish: 'manage', unpublish: 'manage', members: req.method === 'GET' ? 'read' : 'manage'}[action];
   if (!need) throw bad('Unknown action.', 404);
-  const post = ['upload-url', 'ingest', 'replace', 'flag-status', 'run-rules'].includes(action) || (action === 'members' && req.method !== 'GET');
+  const post = ['upload-url', 'ingest', 'replace', 'flag-status', 'run-rules', 'publish', 'unpublish'].includes(action) || (action === 'members' && req.method !== 'GET');
   if (post && req.method !== 'POST') throw bad('Use POST.', 405);
   const role = await requireRole(q, who, ws, need);
 
   switch (action) {
     case 'overview': return {role, ...(await store.overview(q, ws))};
     case 'uploads': return {uploads: await q(`select id, original_name, shape, source_system, uploaded_by, uploaded_at, period_start::text period_start, period_end::text period_end,
-        row_count, parsed_total::float8 parsed_total, printed_total::float8 printed_total, tie_status, tie_difference::float8 tie_difference, status, warnings, error, storage_path
-        from finance.uploads where workspace_id = $1 order by uploaded_at desc limit 200`, [ws])};
+        row_count, parsed_total::float8 parsed_total, printed_total::float8 printed_total, tie_status, tie_difference::float8 tie_difference, status, warnings, error, storage_path,
+        published_at, published_by from finance.uploads where workspace_id = $1 order by uploaded_at desc limit 200`, [ws])};
     case 'upload-url': {
       if (!deps.storage.configured()) throw bad('File storage isn’t configured on this deployment; send the file as base64 "content" instead.', 501);
       const name = safeName(b.filename), stamp = new Date().toISOString().replace(/[-:T.Z]/g, '').slice(0, 14);
@@ -150,6 +153,7 @@ async function route(deps, req, res, action) {
     }
     case 'ingest': return ingest(deps, ws, b, who);
     case 'replace': {
+      await publisher.unpublish(q, ws, Number(b.upload_id));  // a withdrawn file comes off the public pages too
       await store.replaceUpload(q, ws, Number(b.upload_id));
       await store.log(q, ws, who.email, 'upload_replaced', {upload_id: Number(b.upload_id)});
       return {ok: true, rules: await store.refreshFlags(q, ws)};
@@ -167,6 +171,16 @@ async function route(deps, req, res, action) {
       return {ok: true};
     }
     case 'run-rules': return {ok: true, rules: await store.refreshFlags(q, ws)};
+    case 'publish': {
+      const r = await publisher.publish(q, ws, Number(b.upload_id), who.email);
+      await store.log(q, ws, who.email, 'upload_published', {upload_id: Number(b.upload_id), rows: r.rows});
+      return r;
+    }
+    case 'unpublish': {
+      const r = await publisher.unpublish(q, ws, Number(b.upload_id));
+      await store.log(q, ws, who.email, 'upload_unpublished', {upload_id: Number(b.upload_id), rows: r.removed});
+      return r;
+    }
     case 'members': {
       if (req.method === 'GET') return {members: await q('select email, role, (user_id is not null) app_linked, created_at from finance.members where workspace_id = $1 order by role, email', [ws])};
       const email = String(b.email || '').trim().toLowerCase(), newRole = String(b.role || '');

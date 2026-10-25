@@ -33,6 +33,6 @@ test('every dataset has a database migration', () => {
 
 test('OpenAPI documents every endpoint the API serves', () => {
   const spec = openapi(read('downloads/index.json'));
-  for (const p of ['/datasets', '/datasets/{id}', '/governments', '/status', '/changes', '/meetings.ics', '/correspondence', '/pages', '/search', '/entities', '/entities/{id}', '/budget-compare'])
+  for (const p of ['/datasets', '/datasets/{id}', '/governments', '/status', '/changes', '/meetings.ics', '/correspondence', '/pages', '/search', '/entities', '/entities/{id}', '/budget-compare', '/checkbook', '/budget-actual'])
     assert.ok(spec.paths[p], `OpenAPI is missing ${p}`);
 });
