@@ -5,7 +5,7 @@ calendar 2016 for dated records. A record is kept when it reaches FIRST_YEAR: a 
 later, a date in 2016 or later, or a span (a term in office, a loan) that runs into 2016. Records with no date are kept.
 
 Every ingestion script and the open-data build call these helpers, so older rows are dropped where data comes in.
-The API's copy of the number is api/_cutoff.js (a test keeps the two equal); db/migrations/0052_first_year_2016.sql
+The API's copy of the number is api/_cutoff.js (a test keeps the two equal); db/migrations/0053_first_year_2016.sql
 removed the older rows already in the database.
 """
 import re
