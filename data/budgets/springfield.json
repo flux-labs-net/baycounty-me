@@ -1,0 +1,61 @@
+{
+ "gov": "sp",
+ "name": "City of Springfield",
+ "as_of": "2026-10-25",
+ "notes": [
+  "General Fund only: the original (adopted) budget from the General Fund budget-and-actual schedule in each year's audited financial report, filed with the Florida Auditor General.",
+  "The Auditor General keeps the last five years of reports; earlier years need the reports from the government itself."
+ ],
+ "years": [
+  {
+   "fiscal_year": 2021,
+   "status": "adopted",
+   "source_title": "FY2021 annual financial audit report, General Fund budget and actual schedule (original budget)",
+   "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2021%20springfield.pdf",
+   "total": null,
+   "general_fund": 8520589,
+   "funds": [],
+   "general_fund_departments": []
+  },
+  {
+   "fiscal_year": 2022,
+   "status": "adopted",
+   "source_title": "FY2022 annual financial audit report, General Fund budget and actual schedule (original budget)",
+   "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2022%20springfield.pdf",
+   "total": null,
+   "general_fund": 8873879,
+   "funds": [],
+   "general_fund_departments": []
+  },
+  {
+   "fiscal_year": 2023,
+   "status": "adopted",
+   "source_title": "FY2023 annual financial audit report, General Fund budget and actual schedule (original budget)",
+   "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2023%20springfield.pdf",
+   "total": null,
+   "general_fund": 13852200,
+   "funds": [],
+   "general_fund_departments": []
+  },
+  {
+   "fiscal_year": 2024,
+   "status": "adopted",
+   "source_title": "FY2024 annual financial audit report, General Fund budget and actual schedule (original budget)",
+   "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2024%20springfield.pdf",
+   "total": null,
+   "general_fund": 15003819,
+   "funds": [],
+   "general_fund_departments": []
+  },
+  {
+   "fiscal_year": 2025,
+   "status": "adopted",
+   "source_title": "FY2025 annual financial audit report, General Fund budget and actual schedule (original budget)",
+   "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2025%20springfield.pdf",
+   "total": null,
+   "general_fund": 13529841,
+   "funds": [],
+   "general_fund_departments": []
+  }
+ ]
+}

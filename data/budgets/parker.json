@@ -1,0 +1,111 @@
+{
+ "gov": "parker",
+ "name": "City of Parker",
+ "as_of": "2026-10-25",
+ "notes": [
+  "General Fund only: the original (adopted) budget from the General Fund budget-and-actual schedule in each year's audited financial report, filed with the Florida Auditor General.",
+  "The Auditor General keeps the last five years of reports; earlier years need the reports from the government itself."
+ ],
+ "years": [
+  {
+   "fiscal_year": 2015,
+   "status": "adopted",
+   "source_title": "FY2015 annual financial audit report, General Fund budget and actual schedule (original budget)",
+   "source_url": "https://cityofparker.com/wp-content/uploads/filr/3181/September%2030,%202015%20Audited%20Financial%20Statements.pdf",
+   "total": null,
+   "general_fund": 2447688,
+   "funds": [],
+   "general_fund_departments": []
+  },
+  {
+   "fiscal_year": 2016,
+   "status": "adopted",
+   "source_title": "FY2016 annual financial audit report, General Fund budget and actual schedule (original budget)",
+   "source_url": "https://cityofparker.com/wp-content/uploads/filr/2674/2016%20FINANCIAL%20STATEMENT.pdf",
+   "total": null,
+   "general_fund": 2609730,
+   "funds": [],
+   "general_fund_departments": []
+  },
+  {
+   "fiscal_year": 2017,
+   "status": "adopted",
+   "source_title": "FY2017 annual financial audit report, General Fund budget and actual schedule (original budget)",
+   "source_url": "https://cityofparker.com/wp-content/uploads/filr/1063/2017%20AUDIT%20REPORT.pdf",
+   "total": null,
+   "general_fund": 2579696,
+   "funds": [],
+   "general_fund_departments": []
+  },
+  {
+   "fiscal_year": 2018,
+   "status": "adopted",
+   "source_title": "FY2018 annual financial audit report, General Fund budget and actual schedule (original budget)",
+   "source_url": "https://cityofparker.com/wp-content/uploads/filr/3182/September%2030,%202018%20Audited%20Financial%20Statements.pdf",
+   "total": null,
+   "general_fund": 2878321,
+   "funds": [],
+   "general_fund_departments": []
+  },
+  {
+   "fiscal_year": 2019,
+   "status": "adopted",
+   "source_title": "FY2019 annual financial audit report, General Fund budget and actual schedule (original budget)",
+   "source_url": "https://cityofparker.com/wp-content/uploads/filr/3183/September%2030,%202019%20Audited%20Financial%20Statements.pdf",
+   "total": null,
+   "general_fund": 2869940,
+   "funds": [],
+   "general_fund_departments": []
+  },
+  {
+   "fiscal_year": 2021,
+   "status": "adopted",
+   "source_title": "FY2021 annual financial audit report, General Fund budget and actual schedule (original budget)",
+   "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2021%20parker.pdf",
+   "total": null,
+   "general_fund": 4682926,
+   "funds": [],
+   "general_fund_departments": []
+  },
+  {
+   "fiscal_year": 2022,
+   "status": "adopted",
+   "source_title": "FY2022 annual financial audit report, General Fund budget and actual schedule (original budget)",
+   "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2022%20parker.pdf",
+   "total": null,
+   "general_fund": 3017158,
+   "funds": [],
+   "general_fund_departments": []
+  },
+  {
+   "fiscal_year": 2023,
+   "status": "adopted",
+   "source_title": "FY2023 annual financial audit report, General Fund budget and actual schedule (original budget)",
+   "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2023%20parker.pdf",
+   "total": null,
+   "general_fund": 3525131,
+   "funds": [],
+   "general_fund_departments": []
+  },
+  {
+   "fiscal_year": 2024,
+   "status": "adopted",
+   "source_title": "FY2024 annual financial audit report, General Fund budget and actual schedule (original budget)",
+   "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2024%20parker.pdf",
+   "total": null,
+   "general_fund": 3802000,
+   "funds": [],
+   "general_fund_departments": []
+  },
+  {
+   "fiscal_year": 2025,
+   "status": "adopted",
+   "source_title": "FY2025 annual financial audit report, General Fund budget and actual schedule (original budget)",
+   "source_url": "https://flauditor.gov/pages/mun_efile%20rpts/2025%20parker.pdf",
+   "total": null,
+   "general_fund": 4698141,
+   "funds": [],
+   "general_fund_departments": []
+  }
+ ]
+}
