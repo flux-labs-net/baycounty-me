@@ -9,6 +9,16 @@
 // campaign donors are never in any of these datasets.
 const {datasetRows, rest} = require('./_data');
 
+const SUNBIZ_SEARCH = 'https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults';
+// Sunbiz record pages need an internal id the state files don't carry, so link the entity-name search (business listed
+// first). Same rule as data/entities/ids.py sunbiz_url().
+const sunbizUrl = (name, doc) => {
+  const nm = String(name || '').trim().replace(/\s+/g, ' ');
+  if (!nm) return doc ? `${SUNBIZ_SEARCH}?inquiryType=DocumentNumber&searchTerm=${encodeURIComponent(String(doc).trim().toUpperCase())}` : null;
+  const enc = s => encodeURIComponent(s).replace(/[!'()*]/g, c => '%' + c.charCodeAt(0).toString(16).toUpperCase());
+  return /[\/\\&*%:<>?]/.test(nm) ? `${SUNBIZ_SEARCH}?inquiryType=EntityName&searchTerm=${enc(nm)}` : `${SUNBIZ_SEARCH}/EntityName/${enc(nm)}/Page1`;
+};
+
 const RELATION = {
   paid: ['paid', 'was paid by'],
   gift: ['gave to the campaign of', 'got campaign gifts from'],
@@ -128,9 +138,9 @@ async function getEntity(req, catalog, id) {
   if (!ent && id.startsWith('business:')) {  // a business named only in a hand-checked, database-only row
     const kind = 'business', stub = {entity_id: id, kind, kind_label: KIND_LABEL[kind], name: id.slice(9).toUpperCase(), subtitle: 'Registered business', page_url: urlFor(id),
       aliases: null, connections: 0, amount_received: null, amount_given: null, gov_id: null, county: null,
-      source_url: `https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResultDetail?inquirytype=DocumentNumber&directionType=Initial&searchTerm=${encodeURIComponent(id.slice(9).toUpperCase())}`};
+      source_url: sunbizUrl(null, id.slice(9))};
     live = await liveConnections(req, catalog, stub);
-    if (live.length) { ent = stub; const r = live[0]; ent.name = r.from_id === id ? r.from_name : r.to_name; ent.connections = live.length; }
+    if (live.length) { ent = stub; const r = live[0]; ent.name = r.from_id === id ? r.from_name : r.to_name; ent.source_url = sunbizUrl(ent.name, id.slice(9)); ent.connections = live.length; }
   }
   if (!ent) throw Object.assign(new Error(`No entity "${id}".`), {status: 404, expose: true});
   live = live || await liveConnections(req, catalog, ent);

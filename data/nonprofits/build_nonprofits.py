@@ -42,6 +42,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
 sys.path.insert(0, os.path.join(ROOT, 'data', 'sunbiz'))
 sys.path.insert(0, os.path.join(ROOT, 'data', 'entities'))
+import ids  # noqa: E402
 import build_sunbiz as sb  # noqa: E402
 from counties import county  # noqa: E402
 
@@ -145,7 +146,6 @@ IN_NAME_TITLE = re.compile(r'\b(MAYOR|COMMISSIONER|COUNCILMAN|COUNCILWOMAN|CHAIR
 BOARD_ROLES = {'director', 'institutional_trustee', 'officer'}
 PROPUBLICA = 'https://projects.propublica.org/nonprofits/organizations/'
 FDACS_URL = 'https://csapp.fdacs.gov/CSPublicApp/CheckACharity/CheckACharity.aspx'
-SUNBIZ_URL = 'https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResultDetail?inquirytype=DocumentNumber&directionType=Initial&searchTerm='
 
 
 def _rows(path):
@@ -367,7 +367,7 @@ def seats(orgs, roles, people, county_key):
                 out.append({'nonprofit_id': oid, 'source': 'sunbiz', 'raw_name': ' '.join(r['raw_name'].split()), 'name': nm,
                             'title': sunbiz_title(t), 'tax_year': e['last_report_year'], 'board': True, 'roles': 'officer',
                             'hours': None, 'compensation': None, 'object_id': None, 'registry_person_key': r.get('person_key'),
-                            'source_url': SUNBIZ_URL + e['doc_number']})
+                            'source_url': ids.sunbiz_url(e['name'], e['doc_number'])})
         fy = {f['object_id']: f for f in o['filings']}
         for r in off990.get(o['ein'], []):
             if r['is_person'] != 'True' or r['object_id'] not in fy:
@@ -695,8 +695,8 @@ def org_row(o, res, gov_names):
         'fdacs_revenue': _num(fd.get('total_revenue')), 'fdacs_program_expenses': _num(fd.get('program_expenses')),
         'fdacs_fundraising_expenses': _num(fd.get('fundraising_expenses')), 'fdacs_management_expenses': _num(fd.get('management_expenses')),
         'fdacs_url': (fd.get('detail_url') or FDACS_URL) if fd else None,
-        'source_url': (PROPUBLICA + o['ein']) if o['ein'] and o['irs'] else (SUNBIZ_URL + o['doc_number']) if o['doc_number'] else (fd.get('detail_url') or FDACS_URL),
-        'sunbiz_url': (SUNBIZ_URL + o['doc_number']) if o['doc_number'] else None,
+        'source_url': (PROPUBLICA + o['ein']) if o['ein'] and o['irs'] else ids.sunbiz_url((e or o)['name'], o['doc_number']) if o['doc_number'] else (fd.get('detail_url') or FDACS_URL),
+        'sunbiz_url': ids.sunbiz_url((e or o)['name'], o['doc_number']) if o['doc_number'] else None,
     }
 
 
@@ -799,7 +799,7 @@ def business_rows(res):
                          'business_status': 'Active' if b['status'] == 'A' else 'Inactive',
                          'match': 'Name and address' if b['via'] == 'same_person' else 'Name',
                          'campaign_gifts_total': b['gifts_total'] or 0, 'candidates': ', '.join(b['candidates']) or None,
-                         'county': res['county'], 'source_url': SUNBIZ_URL + b['doc_number']})
+                         'county': res['county'], 'source_url': ids.sunbiz_url(b['name'], b['doc_number'])})
     rows.sort(key=lambda r: (r['person'], -r['campaign_gifts_total'], r['business']))
     return rows
 
