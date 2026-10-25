@@ -9,6 +9,7 @@ import json
 import os
 
 import place
+from site_menu import OPEN_BOOKS_PUBLIC
 
 CSS = r"""
 :root{--urgent:#B3261E;--review:#9A5B00;--info:#5A6372;--ok:#1F7A4D;--pace:#161B24;--bar:#3F6FB0;--bar-over:#B3261E}
@@ -28,7 +29,10 @@ body{display:block}
 .an-brand b{font-size:.9rem} .an-brand span{font-size:.76rem;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .an-btn{width:44px;height:44px;flex-shrink:0;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
 .an-x,.an-top{display:none}
-.an-ws{margin:0 0 8px;width:100%}
+.an-ws{display:flex;flex-direction:column;gap:2px;margin:0 0 10px;padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:var(--bg)}
+.an-ws span{font:600 .66rem var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.an-ws b{font:500 .88rem var(--f-body);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.an-ws select{width:100%;margin-top:2px}
 .an a{display:flex;align-items:center;gap:10px;min-height:34px;padding:0 10px;border-radius:8px;color:var(--ink);text-decoration:none;font:400 .88rem var(--f-body)}
 .an a span{flex:1;min-width:0}
 .an a:hover{background:var(--sunken)}
@@ -45,9 +49,9 @@ body{display:block}
 .an-foot{margin-top:14px;border-top:1px solid var(--line);padding-top:10px;display:flex;flex-direction:column;gap:2px}
 .an-foot svg{color:var(--muted)}
 .an-foot .theme-btn{margin:6px 10px 0;align-self:flex-start}
-.an-who{display:flex;align-items:center;gap:8px;padding:8px 10px 2px;font-size:.78rem;color:var(--muted)}
-.an-who span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis}
-.an-who .btn{min-height:28px;padding:0 6px;font-size:.78rem}
+.an-who{display:flex;flex-direction:column;gap:0;padding:8px 10px 2px;font-size:.78rem;color:var(--muted)}
+.an-who b{font-weight:500;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.an-who .btn{min-height:28px;padding:0 6px;font-size:.78rem;margin-right:-6px}
 @media (max-width:959px){
   .fw{padding-top:0}
   .an-top{display:flex;position:sticky;top:0;z-index:30;align-items:center;gap:10px;margin:0 -16px 14px;padding:8px 8px 8px 16px;min-height:60px;box-sizing:border-box;background:var(--surface);border-bottom:1px solid var(--line)}
@@ -271,6 +275,11 @@ def _svg(name, size=18):
             f'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{_ICONS[name]}</svg>')
 
 
+PUBLIC_LINKS = f"""        <a href="/public-money/checkbook" target="_blank" rel="noopener"><span>Public checkbook</span>{_svg('out', 14)}</a>
+        <a href="/public-money/budget-tracker" target="_blank" rel="noopener"><span>Public budget tracker</span>{_svg('out', 14)}</a>
+"""
+
+
 def shell_html():
     """Top bar (phones), the grouped menu (side menu on wide screens, full-screen sheet on phones) and the page title."""
     groups = []
@@ -280,25 +289,23 @@ def shell_html():
         groups.append(f'<div class="an-g"><div class="an-h an-{tone}">{_svg(icon, 14)}{group}</div><div class="an-items">{links}</div></div>')
     return f"""    <header class="an-top">
       <span class="an-logo" aria-hidden="true">BC</span>
-      <div class="an-cur"><span>City finances</span><b id="an-cur">Overview</b></div>
+      <div class="an-cur"><span id="an-ws-cur">Finance</span><b id="an-cur">Overview</b></div>
       <button class="an-btn" id="an-open" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="an-nav">{_svg('menu', 20)}</button>
     </header>
     <div class="fw-shell">
     <nav class="an" id="an-nav" aria-label="Finance">
       <div class="an-head">
         <span class="an-logo" aria-hidden="true">BC</span>
-        <div class="an-brand"><b>City finances</b><span id="ws-name"></span></div>
+        <div class="an-brand"><b>BayCounty.me</b><span>Finance</span></div>
         <button class="an-btn an-x" id="an-close" type="button" aria-label="Close menu">{_svg('close', 20)}</button>
       </div>
-      <select class="sel an-ws" id="ws-pick" aria-label="Workspace" hidden></select>
+      <div class="an-ws"><span>Workspace</span><b id="ws-name"></b><select class="sel" id="ws-pick" aria-label="Workspace" hidden></select></div>
       <a href="#overview" data-tab="overview" class="an-home">{_svg('home')}<span>Overview</span><i class="an-total" id="flag-count" hidden></i></a>
       {''.join(groups)}
       <div class="an-foot">
-        <a href="/public-money/checkbook" target="_blank" rel="noopener"><span>Public checkbook</span>{_svg('out', 14)}</a>
-        <a href="/public-money/budget-tracker" target="_blank" rel="noopener"><span>Public budget tracker</span>{_svg('out', 14)}</a>
-        <a href="/" target="_blank" rel="noopener"><span>Public site</span>{_svg('out', 14)}</a>
+{PUBLIC_LINKS if OPEN_BOOKS_PUBLIC else ''}        <a href="/" target="_blank" rel="noopener"><span>Public site</span>{_svg('out', 14)}</a>
         {THEME_BTN}
-        <div class="an-who"><span id="who"></span><button class="btn quiet" id="signout" type="button">Sign out</button></div>
+        <div class="an-who"><b id="who"></b><div class="row"><span id="who-role" class="grow"></span><button class="btn quiet" id="signout" type="button">Sign out</button></div></div>
       </div>
     </nav>
     <main class="fw-main">
@@ -308,7 +315,7 @@ def shell_html():
 def brand():
     """Names the board packet prints, from the place config, so another county's build brands its own packet."""
     return {'site': place.SITE, 'domain': place.DOMAIN, 'operator': place.OPERATOR['name'],
-            'governments': {g['key']: g['name'] for g in place.governments()}}
+            'governments': {g['key']: g['name'] for g in place.governments()}, 'open_books': OPEN_BOOKS_PUBLIC}
 
 
 def finance_page(out_dir):
@@ -331,8 +338,8 @@ def finance_page(out_dir):
 <div class="fw">
   <section id="signin" class="signin" hidden>
     <div class="row" style="justify-content:flex-end;margin-bottom:24px">{THEME_BTN}</div>
-    <h1>Sign in to city finances</h1>
-    <p class="muted small">For city staff and commissioners with access. We'll email you a 6-digit code.</p>
+    <h1>Sign in to Finance</h1>
+    <p class="muted small">For finance staff and elected officials with access. We'll email you a 6-digit code.</p>
     <form id="email-form" class="row" style="margin-top:14px">
       <label class="f grow"><span>Email</span><input type="email" name="email" required autocomplete="email" placeholder="you@cityoflynnhaven.com"></label>
       <button class="btn primary" type="submit" style="align-self:flex-end">Email me a code</button>

@@ -9,9 +9,6 @@ from datetime import datetime, timezone
 import html
 
 CHANGES = [
-    {'date': '2026-10-25', 'title': 'Open books: checkbook and budget tracker',
-     'text': "Two new pages publish a government's own accounting, from the monthly files it sends. The checkbook lists every payment from the government's check register: who got paid, how much, when and from which fund, searchable, with totals by month and payee. The budget tracker shows each department's spending and open purchase orders against its budget, with the share of the fiscal year gone, plus revenue collected. A file is published only after it adds up to its own printed total. Payments to private individuals, such as refunds, are counted but not named. Lynn Haven is first; its pages fill in once its files are published.",
-     'pages': ['/public-money/checkbook', '/public-money/budget-tracker', '/developers', '/open-data']},
     {'date': '2026-10-25', 'title': 'Budgets back to 2015',
      'text': "The budget comparison now reaches back further. Bay County has every adopted budget from FY2015 to FY2027, fund by fund, from the county's budget archive. Panama City has FY2017 to FY2022 by fund group, read from its scanned budget books, and its General Fund for every year from FY2015 using the city's audited financial reports, and Lynn Haven adds FY2020 with every fund and department. Audited revenue and spending for the county and all seven cities now go back to FY2015. For Panama City Beach, Callaway, Springfield, Parker, Mexico Beach and the school district, the General Fund budget for FY2021 to FY2025 comes from each year's audited financial report (Parker back to FY2015); their older budget books aren't posted online. The page lists which years each government has.",
      'pages': ['/public-money/budget-compare', '/governments', '/open-data']},

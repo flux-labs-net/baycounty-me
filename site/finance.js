@@ -78,7 +78,7 @@
     const title = nav.querySelector(`[data-tab="${name}"] span`).textContent;
     $('#fw-h').textContent = title; $('#an-cur').textContent = title;
     if (push) history.replaceState(null, '', '#' + name);
-    if (name !== 'packet') document.title = title + ' · ' + PAGE_TITLE;
+    if (name !== 'packet') document.title = `${title} · ${$('#ws-name').textContent || 'Finance'} · ${PAGE_TITLE}`;
     menu(false);
     if (push) window.scrollTo(0, 0);
     loaders[name]();
@@ -100,8 +100,10 @@
       sel.innerHTML = j.workspaces.map(x => `<option value="${esc(x.id)}"${x.id === ws ? ' selected' : ''}>${esc(x.name)}</option>`).join('');
       sel.onchange = () => { try { localStorage.setItem('fin-ws', sel.value); } catch (e) {} location.reload(); };
     }
-    $('#ws-name').textContent = w.name;
-    $('#who').textContent = `${j.email} · ${role === 'auditor' ? 'auditor' : role}`;
+    $('#ws-name').textContent = w.name; $('#ws-name').hidden = j.workspaces.length > 1;
+    $('#an-ws-cur').textContent = w.name;
+    $('#who').textContent = j.email; $('#who').title = j.email;
+    $('#who-role').textContent = {viewer: 'Viewer', auditor: 'Auditor', uploader: 'Uploader', reviewer: 'Reviewer', owner: 'Owner'}[role] || role;
     nav.querySelectorAll('[data-min]').forEach(a => { a.hidden = !can(a.dataset.min); });
     nav.querySelectorAll('.an-g').forEach(g => { g.hidden = !g.querySelector('a[data-tab]:not([hidden])'); });
     $('#signin').hidden = true; $('#app').hidden = false;
@@ -391,6 +393,7 @@
   // Publishing: an owner copies a check register or budget report to the public checkbook and budget tracker pages.
   const PUBLIC = {disbursements: '/public-money/checkbook', budget: '/public-money/budget-tracker'};
   function pubCell(u) {
+    if (!BRAND.open_books) return '';  // the public pages are hidden for now (site_menu.OPEN_BOOKS_PUBLIC)
     if (!PUBLIC[u.shape] || u.status !== 'committed' || overview?.workspace?.sample) return '';
     const page = `${PUBLIC[u.shape]}?gov=${encodeURIComponent(overview?.workspace?.government_key || '')}`;
     if (u.published_at) return `<br><span class="ok small">Public since ${day(u.published_at)}</span> <a class="small" href="${page}" target="_blank" rel="noopener">View</a>${can('manage') ? ` <button class="btn quiet" type="button" data-unpub="${u.id}">Unpublish</button>` : ''}`;

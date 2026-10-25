@@ -9,6 +9,9 @@ import os
 from place import PLACE, OFFICIALS, governments
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
+# Checkbook and budget tracker: hidden until a government sends its registers (Jeremy, 2026-10-25). The pages aren't
+# built or linked, but the datasets, /api/v1/checkbook, /api/v1/budget-actual and publishing from /finance keep working.
+OPEN_BOOKS_PUBLIC = False
 ELECTIONS_READY = os.path.exists(os.path.join(ROOT, '..', 'data', 'elections', 'candidates_2026.json'))
 
 
@@ -39,8 +42,8 @@ def menu():
         {'label': 'Spending', 'question': 'Where it goes',
          'start': _i('Budget explorer', '/public-money/budget-explorer', 'Each budget by fund and department, per resident'),
          'groups': [{'group': 'Where it goes', 'items': [
-             _i('Budget tracker', '/public-money/budget-tracker', 'Spending against the budget, month by month'),
-             _i('Checkbook', '/public-money/checkbook', 'Every payment, from the government\'s own books'),
+             *([_i('Budget tracker', '/public-money/budget-tracker', 'Spending against the budget, month by month'),
+                _i('Checkbook', '/public-money/checkbook', 'Every payment, from the government\'s own books')] if OPEN_BOOKS_PUBLIC else []),
              _i('Budgets by year', '/public-money/budget-compare', 'Compare any two years, line by line'),
              _i('CRA spending', '/public-money/cra-spending', 'What redevelopment agencies paid for'),
              _i('Sales tax projects', '/public-money/sales-tax-projects', 'Half-cent projects: promised vs built'),

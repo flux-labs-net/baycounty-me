@@ -10,6 +10,7 @@ the checkbook-payments and budget-actuals datasets, whose rows an admin publishe
 import os
 from city_filter import city_bar, scope
 from money_pages import PDF_BTN
+from site_menu import OPEN_BOOKS_PUBLIC as PUBLIC  # pages built and linked only when True
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 
