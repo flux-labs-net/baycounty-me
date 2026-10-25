@@ -358,7 +358,7 @@ function profile() {
       <div><span class="cn-note">${rows.length} records in the current filters, ${named.size} named payees. Contract awards and check register payments can describe the same money, so the types are not added together.</span></div>
       <div class="cn-recs">${byType(rows)}</div>
       ${offs.length ? `<div class="cn-rel"><h3 class="eyebrow">Elected board</h3>${offs.map(([oid, o]) => `<div><button type="button" class="cn-link" data-sel="${esc(oid)}">${esc(o.n)}</button> <span class="cn-note">${esc(o.off)}</span></div>`).join('')}</div>` : ''}
-      ${P.k === 'cra' ? '<p><a href="/public-money/cra-spending">Open the full CRA ledger</a></p>' : P.k === 'tourism' ? '<p><a href="/public-money/who-gets-paid">Every tourism agency payment</a></p>' : '<p><a href="/public-money/contracts">Contracts and awards</a></p>'}${clear}`;
+      ${P.k === 'cra' ? '<p><a href="/public-money/cra-spending">Open the full CRA ledger</a></p>' : P.k === 'tourism' ? '<p><a href="/public-money/tourist-tax#paid">Every tourism agency payment</a></p>' : '<p><a href="/public-money/contracts">Contracts and awards</a></p>'}${clear}`;
   } else if (id.startsWith('m:')) {
     const o = D.off[id] || {}, ds = D.don.filter(d => d.o === id);
     p.innerHTML = `${close}<div><span class="eyebrow">${o.cand ? '2026 candidate' : 'Elected official'}</span><h2>${esc(o.n)}</h2><p class="cn-note">${esc(o.off)}</p>${o.pid ? `<p><a href="/people/${esc(o.pid)}">Full profile: votes, campaign money and connections</a></p>` : ''}</div>
@@ -414,11 +414,11 @@ function setFull(on) {
   } catch (e) {}
   requestAnimationFrame(() => { if (st.view === 'network') graph(visible()); });
 }
-const VIEWS = ['trail', 'network', 'payees', 'gifts'];
+const VIEWS = ['trail', 'network', 'payees', 'gifts', 'donors'];
 function setView(v) {
   if (fsOn && v !== 'network') setFull(false);
   st.view = v;
-  document.querySelector('.cn-main').classList.toggle('wide', v === 'network');
+  document.querySelector('.cn-main').classList.toggle('wide', v === 'network' || v === 'donors');
   VIEWS.forEach(k => { $('v-' + k).hidden = k !== v; $('t-' + k).setAttribute('aria-selected', k === v); });
   filterGroups();
   if (location.hash.slice(1) !== v) history.replaceState(null, '', location.pathname + location.search + '#' + v);
@@ -426,7 +426,7 @@ function setView(v) {
 }
 function render() {
   const rows = visible(); kpis(rows);
-  if (st.view === 'trail') trail(rows); else if (st.view === 'network') graph(rows); else if (st.view === 'payees') payees(rows); else donTable(rows);
+  if (st.view === 'trail') trail(rows); else if (st.view === 'network') graph(rows); else if (st.view === 'payees') payees(rows); else if (st.view === 'donors') { if (window.MM) MM.render(); } else donTable(rows);
   profile(); panelTop();
 }
 
@@ -439,7 +439,7 @@ function start() {
   [['cnGin', 1.5], ['cnGout', 1 / 1.5], ['cnGreset', 0]].forEach(([id, f]) => { const b = $(id); if (b) b.onclick = () => graphBtn(f); });
   BCM.city.on((k, d) => { cityToPayers(k); if (d.why !== 'now') { if (st.sel && !st.sel.startsWith('m:') && !st.sel.startsWith('p:') && !visible().some(r => r.e === st.sel)) st.sel = null; render(); } });
   const h = location.hash.slice(1);
-  setView(VIEWS.includes(h) ? h : h === 'donations' ? 'gifts' : 'trail');
+  setView(VIEWS.includes(h) ? h : h === 'donations' ? 'gifts' : ['map', 'votes', 'heat1'].includes(h) ? 'donors' : 'trail');  // #map etc.: links to the old money map page
   let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { if (st.view === 'network') graph(visible()); else if (st.view === 'trail') trail(visible()); }, 250); });
 }
 if (window.d3) start(); else addEventListener('load', start);

@@ -93,7 +93,7 @@ struct GovernmentsView: View {
                 RowDivider(inset: 50)
                 WebRow(title: "Compare side by side", symbol: "chart.bar.xaxis", url: URL(string: "https://baycounty.me/compare"))
                 RowDivider(inset: 50)
-                WebRow(title: "Who runs Bay County", symbol: "building.columns", url: URL(string: "https://baycounty.me/who-runs-bay-county"))
+                WebRow(title: "Officials and pay", symbol: "building.columns", url: URL(string: "https://baycounty.me/people"))
             }
         }
     }

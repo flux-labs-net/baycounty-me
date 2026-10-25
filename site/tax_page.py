@@ -207,7 +207,30 @@ def build_data():
     }
 
 
-def tax_page(out_dir):
+GOV_PANEL = '''  <section class="tx-sec" id="govs" aria-labelledby="gov-h">
+    <div class="sec-hd"><h2 id="gov-h">Each government's money</h2><span class="muted">Where it comes from, and what it pays for</span></div>
+    <div class="pills" id="govPills" role="tablist" aria-label="Choose a government"></div>
+    <div id="govBody"></div>
+  </section>'''
+
+
+def gov_links():
+    """Each government's budget is on its own page: one card per government, with its budget and tax rate."""
+    from govs import all_profiles
+    import html as _h
+    cards = ''.join(f'<li><a href="/governments/{p["slug"]}#money"><b>{_h.escape(p["short"])}</b></a> <span class="muted small">'
+                    + ' · '.join(x for x in [f'${(p.get("budget") or {}).get("total")/1e6:,.1f}M budget' if (p.get('budget') or {}).get('total') else '',
+                                             (f'{p["budget"]["mills"]:g} mills' if (p.get('budget') or {}).get('mills') else '')] if x) + '</span></li>' for p in all_profiles())
+    return f'''  <section class="tx-sec" id="govs" aria-labelledby="gov-h">
+    <div class="sec-hd"><h2 id="gov-h">Each government's money</h2><span class="muted">Where it comes from, what it pays for, and what it owes</span></div>
+    <p>Each government's page has its whole budget: every fund and department, where the money comes from, what each service costs per resident, its debt and its audits. <a href="/compare">Compare them side by side</a> or <a href="/public-money/budget-compare">compare any two years</a>, including audited actuals.</p>
+    <ul class="plain cols-2">{cards}</ul>
+  </section>'''
+
+
+def tax_page(out_dir, gov_panel=True):
+    """gov_panel: the per-government budget panel. English links to each government's page instead (it carries the
+    same budget); the Spanish page keeps the panel, as there are no Spanish government pages."""
     d = build_data()
     last = len(YEARS) - 1
     total26 = sum(d['levy'][g][last] for g, _ in GROUPS)
@@ -283,11 +306,7 @@ def tax_page(out_dir):
     <p class="note">Bay County raised its rate from 4.4362 to 5.4362 mills in FY2024. Parker started a city property tax in FY2024. Panama City Beach has no city property tax. A rate that stays the same can still be a tax increase under Florida law if it's above the {T('rolled-back', 'rolled-back rate')}, because rising values bring in more money.</p>
   </section>
 
-  <section class="tx-sec" id="govs" aria-labelledby="gov-h">
-    <div class="sec-hd"><h2 id="gov-h">Each government's money</h2><span class="muted">Where it comes from, and what it pays for</span></div>
-    <div class="pills" id="govPills" role="tablist" aria-label="Choose a government"></div>
-    <div id="govBody"></div>
-  </section>
+{GOV_PANEL if gov_panel else gov_links()}
 
   <section class="tx-sec method" aria-labelledby="src-h">
     <div class="sec-hd"><h2 id="src-h">Sources and gaps</h2></div>

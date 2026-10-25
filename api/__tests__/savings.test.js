@@ -1,4 +1,4 @@
-// Savings finder (/public-money/savings): every figure is computed from records, never typed in. Run: npm test
+// Savings ideas (on each government page, built by site/savings_page.py): every figure is computed from records, never typed in. Run: npm test
 // Needs a site build (python3 site/build_site.py).
 const test = require('node:test');
 const assert = require('node:assert/strict');

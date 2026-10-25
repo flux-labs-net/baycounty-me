@@ -21,11 +21,11 @@
   </url>
   <url>
     <loc>https://baycounty.me/compare</loc>
-    <lastmod>2026-10-21</lastmod>
+    <lastmod>2026-10-25</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/connections</loc>
-    <lastmod>2026-10-24</lastmod>
+    <lastmod>2026-10-25</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/connections/business-ties</loc>
@@ -33,10 +33,6 @@
   </url>
   <url>
     <loc>https://baycounty.me/connections/campaign-gifts</loc>
-    <lastmod>2026-10-24</lastmod>
-  </url>
-  <url>
-    <loc>https://baycounty.me/connections/money-map</loc>
     <lastmod>2026-10-24</lastmod>
   </url>
   <url>
@@ -92,7 +88,7 @@
   </url>
   <url>
     <loc>https://baycounty.me/es/impuestos</loc>
-    <lastmod>2026-10-21</lastmod>
+    <lastmod>2026-10-25</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://baycounty.me/public-money/tax-dollars"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://baycounty.me/es/impuestos"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://baycounty.me/public-money/tax-dollars"/>
@@ -192,7 +188,7 @@
   </url>
   <url>
     <loc>https://baycounty.me/people</loc>
-    <lastmod>2026-10-24</lastmod>
+    <lastmod>2026-10-25</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/people/adrian-welle</loc>
@@ -767,15 +763,7 @@
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
-    <loc>https://baycounty.me/public-money/audits</loc>
-    <lastmod>2026-10-23</lastmod>
-  </url>
-  <url>
     <loc>https://baycounty.me/public-money/budget-compare</loc>
-    <lastmod>2026-10-25</lastmod>
-  </url>
-  <url>
-    <loc>https://baycounty.me/public-money/budget-explorer</loc>
     <lastmod>2026-10-25</lastmod>
   </url>
   <url>
@@ -785,10 +773,6 @@
   <url>
     <loc>https://baycounty.me/public-money/cra-spending</loc>
     <lastmod>2026-10-24</lastmod>
-  </url>
-  <url>
-    <loc>https://baycounty.me/public-money/debt</loc>
-    <lastmod>2026-10-21</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/public-money/exemptions</loc>
@@ -809,27 +793,19 @@
     <lastmod>2026-10-23</lastmod>
   </url>
   <url>
-    <loc>https://baycounty.me/public-money/map</loc>
-    <lastmod>2026-10-21</lastmod>
-  </url>
-  <url>
     <loc>https://baycounty.me/public-money/sales-tax-projects</loc>
     <lastmod>2026-10-23</lastmod>
   </url>
   <url>
-    <loc>https://baycounty.me/public-money/savings</loc>
-    <lastmod>2026-10-23</lastmod>
-  </url>
-  <url>
     <loc>https://baycounty.me/public-money/tax-dollars</loc>
-    <lastmod>2026-10-21</lastmod>
+    <lastmod>2026-10-25</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://baycounty.me/public-money/tax-dollars"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://baycounty.me/es/impuestos"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://baycounty.me/public-money/tax-dollars"/>
   </url>
   <url>
     <loc>https://baycounty.me/public-money/tourist-tax</loc>
-    <lastmod>2026-10-20</lastmod>
+    <lastmod>2026-10-25</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/public-money/vendors</loc>
@@ -1384,10 +1360,6 @@
     <lastmod>2026-10-23</lastmod>
   </url>
   <url>
-    <loc>https://baycounty.me/public-money/who-gets-paid</loc>
-    <lastmod>2026-10-23</lastmod>
-  </url>
-  <url>
     <loc>https://baycounty.me/records-request</loc>
     <lastmod>2026-10-23</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://baycounty.me/records-request"/>
@@ -1401,9 +1373,5 @@
   <url>
     <loc>https://baycounty.me/updates</loc>
     <lastmod>2026-10-25</lastmod>
-  </url>
-  <url>
-    <loc>https://baycounty.me/who-runs-bay-county</loc>
-    <lastmod>2026-10-21</lastmod>
   </url>
 </urlset>
