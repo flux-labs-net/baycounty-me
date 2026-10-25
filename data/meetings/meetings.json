@@ -1,8 +1,8 @@
 {
-  "generated": "2026-10-24T06:25:04-05:00",
+  "generated": "2026-10-25T06:25:21-05:00",
   "window": {
-    "from": "2026-10-24",
-    "to": "2026-12-23"
+    "from": "2026-10-25",
+    "to": "2026-12-24"
   },
   "timezone": "America/Chicago",
   "boards": [
@@ -17,11 +17,11 @@
       "schedule_source_url": "https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=38&feed=calendar",
       "sources": {
         "PrimeGov": "ok (22 records)",
-        "calendar (iCal cat 38)": "error: HTTPError: HTTP Error 503: Service Unavailable"
+        "calendar (iCal cat 38)": "ok (4 records)"
       },
       "coverage": {
         "agenda_feed": 0,
-        "calendar": 0,
+        "calendar": 4,
         "expected": 0
       }
     },
@@ -35,11 +35,11 @@
       "calendar_url": "https://www.baycountyfl.gov/Calendar.aspx",
       "schedule_source_url": "https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=26&feed=calendar",
       "sources": {
-        "calendar (iCal cat 26)": "error: HTTPError: HTTP Error 503: Service Unavailable"
+        "calendar (iCal cat 26)": "ok (2 records)"
       },
       "coverage": {
         "agenda_feed": 0,
-        "calendar": 0,
+        "calendar": 2,
         "expected": 0
       }
     },
@@ -719,6 +719,18 @@
       "detail_url": "https://www.springfieldfl.net/community/meeting/commission-meeting-76"
     },
     {
+      "board": "county",
+      "title": "Bay County Board of County Commissioners Meeting",
+      "start": "2026-11-03T09:00:00-06:00",
+      "location": "Government Center - 840 W. 11th st. Panama City FL 32401",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "calendar:https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=38&feed=calendar",
+      "status": "calendar",
+      "detail_url": "https://www.baycountyfl.gov/calendar.aspx?EID=1594"
+    },
+    {
       "board": "parker",
       "title": "CANCELLED - ELECTION DAY*** Agenda Regular Meeting",
       "start": "2026-11-03",
@@ -816,6 +828,30 @@
       "detail_url": "https://www.springfieldfl.net/community/meeting/commission-workshop-54"
     },
     {
+      "board": "county",
+      "title": "Bay County Board of County Commissioners Meeting",
+      "start": "2026-11-17T09:00:00-06:00",
+      "location": "Government Center - 840 W. 11th st. Panama City FL 32401",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "calendar:https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=38&feed=calendar",
+      "status": "calendar",
+      "detail_url": "https://www.baycountyfl.gov/calendar.aspx?EID=1604"
+    },
+    {
+      "board": "county-planning",
+      "title": "Planning Commission Meeting",
+      "start": "2026-11-17T13:30:00-06:00",
+      "location": "Bay County Government Center, 840 W. 11th St., Panama City, FL 32401",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "calendar:https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=26&feed=calendar",
+      "status": "calendar",
+      "detail_url": "https://www.baycountyfl.gov/calendar.aspx?EID=1685"
+    },
+    {
       "board": "parker",
       "title": "Regular Meeting (expected)",
       "start": "2026-11-17T17:30:00-06:00",
@@ -874,6 +910,18 @@
       "source": "schedule:published schedule (mexicobeachfl.gov council-meetings page)",
       "status": "expected",
       "expected": true
+    },
+    {
+      "board": "county",
+      "title": "Bay County Board of County Commissioners Meeting",
+      "start": "2026-12-01T09:00:00-06:00",
+      "location": "Government Center - 840 W. 11th st. Panama City FL 32401",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "calendar:https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=38&feed=calendar",
+      "status": "calendar",
+      "detail_url": "https://www.baycountyfl.gov/calendar.aspx?EID=1595"
     },
     {
       "board": "parker",
@@ -949,6 +997,30 @@
       "expected": true
     },
     {
+      "board": "county",
+      "title": "Bay County Board of County Commissioners Meeting",
+      "start": "2026-12-15T09:00:00-06:00",
+      "location": "Government Center - 840 W. 11th st. Panama City FL 32401",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "calendar:https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=38&feed=calendar",
+      "status": "calendar",
+      "detail_url": "https://www.baycountyfl.gov/calendar.aspx?EID=1605"
+    },
+    {
+      "board": "county-planning",
+      "title": "Planning Commission Meeting",
+      "start": "2026-12-15T13:30:00-06:00",
+      "location": "Bay County Government Center, 840 W. 11th St., Panama City, FL 32401",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "calendar:https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=26&feed=calendar",
+      "status": "calendar",
+      "detail_url": "https://www.baycountyfl.gov/calendar.aspx?EID=1686"
+    },
+    {
       "board": "parker",
       "title": "Regular Meeting (expected)",
       "start": "2026-12-15T17:30:00-06:00",
@@ -1009,20 +1081,7 @@
       "expected": true
     }
   ],
-  "errors": [
-    {
-      "board": "county",
-      "source": "calendar (iCal cat 38)",
-      "url": "https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=38&feed=calendar",
-      "error": "HTTPError: HTTP Error 503: Service Unavailable"
-    },
-    {
-      "board": "county-planning",
-      "source": "calendar (iCal cat 26)",
-      "url": "https://www.baycountyfl.gov/common/modules/iCalendar/iCalendar.aspx?catID=26&feed=calendar",
-      "error": "HTTPError: HTTP Error 503: Service Unavailable"
-    }
-  ],
+  "errors": [],
   "notes": [
     "status=posted: listed by an official agenda system or the board's own meetings page (agenda_url is set once an agenda is published); status=calendar: posted on the government's website calendar, agenda not yet linked; expected=true: generated from the regular schedule, not an official posting - confirm before relying on it.",
     "Each board also includes its most recent past meeting, flagged past=true."

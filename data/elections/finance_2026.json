@@ -1,5 +1,5 @@
 {
- "as_of": "2026-10-24",
+ "as_of": "2026-10-25",
  "source": "Bay County Supervisor of Elections campaign finance system (VoterFocus), https://www.voterfocus.com/ws/WScand/candidate_pr.php?c=Bay, embedded at https://www.bayvotesfl.gov/candidates/candidate-committee-finances/. Reporting groups: 2026 Primary/General Election (el=35), 2026 Municipal Super Tuesday (el=36), Lynn Haven Recall 1/20/2026 (el=34). Per-candidate itemized CSV export: https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id={id}&dhc=0&county=bay",
  "field_notes": {
   "total_raised": "SOE monetary contributions plus SOE in-kind contributions. Monetary includes candidate loans and bank interest as filed.",
