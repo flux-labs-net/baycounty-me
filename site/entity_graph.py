@@ -261,7 +261,7 @@ def build():
             G.alias['business:' + doc] = ('vendor:' + doc_vendor[doc], ids.biz_case(name))  # /profile/business/<doc> still finds it
             return 'vendor:' + doc_vendor[doc]
         return G.ent('business:' + doc, ids.biz_case(name), sub or 'Registered business', None, url or
-                     f'https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResultDetail?inquirytype=DocumentNumber&directionType=Initial&searchTerm={doc.upper()}')
+                     ids.sunbiz_url(name, doc))
 
     # campaign gifts from organizations (never individuals) to officials and candidates
     for r in _ds('connections-gifts'):

@@ -484,3 +484,21 @@ def vote_ids(votes):
         seen[base] = seen.get(base, 0) + 1
         out.append(base if seen[base] == 1 else f'{base}-{seen[base]}')
     return out
+
+
+# Sunbiz link for a business. Sunbiz's record pages need an internal id that isn't in the state's data files, and a
+# document-number link without it lands on "not a functioning page". The entity-name search results page works from a
+# plain link (search engines index it) and lists the business first, with its document number to confirm.
+SUNBIZ_SEARCH = 'https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults'
+_SUNBIZ_PATH_UNSAFE = re.compile(r'[/\\&*%:<>?]')
+
+
+def sunbiz_url(name, doc=None):
+    from urllib.parse import quote
+    nm = ' '.join(str(name or '').split())
+    if not nm:
+        nm = str(doc or '').strip().upper()
+        return f'{SUNBIZ_SEARCH}?inquiryType=DocumentNumber&searchTerm={quote(nm, safe="")}' if nm else None
+    if _SUNBIZ_PATH_UNSAFE.search(nm):  # characters the server rejects in a path segment
+        return f'{SUNBIZ_SEARCH}?inquiryType=EntityName&searchTerm={quote(nm, safe="")}'
+    return f'{SUNBIZ_SEARCH}/EntityName/{quote(nm, safe="")}/Page1'

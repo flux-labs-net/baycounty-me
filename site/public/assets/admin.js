@@ -861,7 +861,15 @@
   // ---------- business owners (private registry, api/_registry.js) ----------
   const owUsd = n => n == null ? '—' : '$' + Number(n).toLocaleString('en-US', {maximumFractionDigits: 0});
   const owNm = s => esc(String(s || '').replace(/\s+/g, ' ').trim());
-  const owSunbiz = doc => `https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResultDetail?inquirytype=DocumentNumber&directionType=Initial&searchTerm=${encodeURIComponent(doc)}`;
+  const SUNBIZ_SEARCH = 'https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults';
+  // Sunbiz record pages need an internal id the state files don't carry, so link the entity-name search (business listed
+  // first). Same rule as data/entities/ids.py sunbiz_url().
+  const owSunbiz = (name, doc) => {
+    const nm = String(name || '').trim().replace(/\s+/g, ' ');
+    if (!nm) return doc ? `${SUNBIZ_SEARCH}?inquiryType=DocumentNumber&searchTerm=${encodeURIComponent(String(doc).trim().toUpperCase())}` : null;
+    const enc = s => encodeURIComponent(s).replace(/[!'()*]/g, c => '%' + c.charCodeAt(0).toString(16).toUpperCase());
+    return /[\/\\&*%:<>?]/.test(nm) ? `${SUNBIZ_SEARCH}?inquiryType=EntityName&searchTerm=${enc(nm)}` : `${SUNBIZ_SEARCH}/EntityName/${enc(nm)}/Page1`;
+  };
   const OW_REV = {unreviewed: 'Unreviewed', confirmed: 'Confirmed', rejected: 'Rejected'};
   const owKey = g => g.group_id + '|' + g.candidate;
   const owBulk = bulkReview({table: '#ow-groups', noun: ['group', 'groups'], action: 'registry_review', statuses: REVIEW_BTNS, key: owKey,
@@ -897,7 +905,7 @@
           <div class="tw"><table class="at" data-tt="off"><thead><tr><th>Business</th><th>Status</th><th>Role</th><th>City</th><th class="num">Matched gifts</th><th>To</th></tr></thead><tbody>${r.businesses.map(b => `<tr><td><a href="#" data-doc="${esc(b.doc_number)}">${owNm(b.name)}</a></td><td>${b.status === 'A' ? 'Active' : 'Inactive'}</td><td class="small">${esc(b.titles || '')}</td><td class="small">${esc(b.principal_city || '')}</td><td class="num">${b.gifts_total ? owUsd(b.gifts_total) : '<span class="muted">—</span>'}</td><td class="small">${esc((b.candidates || []).join(', '))}</td></tr>`).join('')}</tbody></table></div>`;
       } else {
         const r = await api('registry_entity', {params: {doc: id}}); const e = r.entity;
-        box.innerHTML = `<h3 class="h2">${owNm(e.name)}</h3><p class="muted small">${esc(e.doc_number)} · ${e.status === 'A' ? 'Active' : 'Inactive'} · ${esc(e.filing_type || '')} · ${esc(e.principal_city || '')} · <a href="${owSunbiz(e.doc_number)}" target="_blank" rel="noopener">Sunbiz record</a></p>
+        box.innerHTML = `<h3 class="h2">${owNm(e.name)}</h3><p class="muted small">${esc(e.doc_number)} · ${e.status === 'A' ? 'Active' : 'Inactive'} · ${esc(e.filing_type || '')} · ${esc(e.principal_city || '')} · <a href="${owSunbiz(e.name, e.doc_number)}" target="_blank" rel="noopener">Sunbiz record</a></p>
           <div class="tw"><table class="at" data-tt="off"><thead><tr><th>Person</th><th>Role</th><th>City</th><th class="num">Active businesses</th></tr></thead><tbody>${r.people.map(p => `<tr><td><a href="#" data-person="${esc(p.person_key)}">${owNm(p.display_name)}</a>${p.agent_service ? ' <span class="pill">agent service</span>' : ''}${p.corporate_officer ? ' <span class="pill">corporate officer</span>' : ''}</td><td class="small">${esc(p.titles || '')}</td><td class="small">${esc(p.city || '')}</td><td class="num">${fmt(p.active_entities_as_officer)}</td></tr>`).join('') || '<tr><td colspan="4" class="empty">No people listed.</td></tr>'}</tbody></table></div>
           <div class="tw" style="margin-top:10px"><table class="at" data-tt="off"><thead><tr><th>Date</th><th>Candidate</th><th>Filed as</th><th class="num">Amount</th><th>Match</th></tr></thead><tbody>${r.gifts.map(g => `<tr><td class="small">${esc(String(g.gift_date || '').slice(0, 10))}</td><td>${esc(g.candidate)}</td><td class="small">${esc(g.contributor)}</td><td class="num">${owUsd(g.amount)}</td><td class="small muted">${esc(g.match_method || '')}</td></tr>`).join('') || '<tr><td colspan="5" class="empty">No matched campaign gifts.</td></tr>'}</tbody></table></div>`;
       }
@@ -1082,7 +1090,7 @@
       <td class="small"><a href="#" data-person="${esc(m.person_key)}">${owNm(m.sunbiz_name)}</a> <span class="muted">${esc(m.sunbiz_city || '')}</span>
         <div><span class="pill">${esc(m.confidence)} (${m.score})</span>${m.corporate_officer ? ' <span class="pill">corporate officer</span>' : ''}${m.agent_service ? ' <span class="pill">agent service</span>' : ''}</div>
         <div class="muted">${(m.reasons || []).map(esc).join('; ')}</div></td>
-      <td class="small">${m.businesses.map(b => `<div><a href="${owSunbiz(b.doc_number)}" target="_blank" rel="noopener">${owNm(b.name)}</a> <span class="muted">${esc(b.titles || '')}${b.file_date ? ', filed ' + esc(String(b.file_date).slice(0, 4)) : ''}</span>${b.status === 'I' ? ' <span class="pill">Inactive</span>' : ''}${b.nonprofit ? ' <span class="pill">nonprofit</span>' : ''}</div>`).join('')}</td>
+      <td class="small">${m.businesses.map(b => `<div><a href="${owSunbiz(b.name, b.doc_number)}" target="_blank" rel="noopener">${owNm(b.name)}</a> <span class="muted">${esc(b.titles || '')}${b.file_date ? ', filed ' + esc(String(b.file_date).slice(0, 4)) : ''}</span>${b.status === 'I' ? ' <span class="pill">Inactive</span>' : ''}${b.nonprofit ? ' <span class="pill">nonprofit</span>' : ''}</div>`).join('')}</td>
       <td class="small">${m.links.map(l => `<div>${l.own_government ? '<b>' : ''}${esc(BT_LINK[l.link_type] || l.link_type)}${l.own_government ? ' (own government)</b>' : ''}: <span class="muted">${esc(l.detail || '')}${l.amount != null ? ', ' + owUsd(l.amount) : ''}</span></div>`).join('') || '<span class="muted">None</span>'}</td>
       <td><select class="sel" data-bt-id="${esc(m.person_id)}" data-bt-key="${esc(m.person_key)}" aria-label="Review">${Object.entries(OW_REV).map(([k, v]) => `<option value="${k}"${k === m.review_status ? ' selected' : ''}>${v}</option>`).join('')}</select>
         ${m.reviewed_by ? `<div class="muted small">${esc(m.reviewed_by)}</div>` : ''}</td></tr>`).join('') || '<tr><td colspan="6" class="empty">No matches with these filters.</td></tr>';
