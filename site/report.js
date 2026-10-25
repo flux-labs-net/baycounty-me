@@ -39,7 +39,7 @@ function inline(el, base = {}) {
     if (n.nodeType !== 1 || skip(n, true)) return;
     const tag = n.tagName, cls = n.classList, st = {...base};
     if (tag === 'BR') { out.push({text: '\n'}); return; }
-    if (tag === 'SVG' || tag === 'BUTTON' || tag === 'INPUT' || tag === 'SELECT') return;
+    if (tag === 'SVG' || (tag === 'BUTTON' && !cls.contains('tt-h')) || tag === 'INPUT' || tag === 'SELECT') return;
     if (tag === 'B' || tag === 'STRONG' || tag === 'TH') st.bold = true;
     if (tag === 'EM' || tag === 'I') { if (!cls.length) st.italics = true; else st.color = C.muted; }
     if (tag === 'SMALL' || cls.contains('muted') || cls.contains('small') || cls.contains('src') || cls.contains('r-s')) st.color = C.muted;
@@ -53,11 +53,12 @@ function inline(el, base = {}) {
   });
   return out;
 }
-const textOf = el => el.textContent.replace(/\s+/g, ' ').trim();
+// Roboto in pdfmake has no arrow glyphs, so "$1.2M → $1.4M" reads "$1.2M to $1.4M".
+const textOf = el => el.textContent.replace(/\s+/g, ' ').replace(/\s*\u2192\s*/g, ' to ').replace(/[\u2197\u2190]/g, '').trim();
 function clean(runs) { while (runs.length && /^\s*$/.test(runs[runs.length - 1].text || 'x')) runs.pop(); while (runs.length && typeof runs[0].text === 'string' && !runs[0].text.trim()) runs.shift(); if (runs[0]) runs[0] = {...runs[0], text: runs[0].text.replace(/^\s+/, '')}; return runs; }
 
 /* ---------- what to leave out ---------- */
-const SKIP = '.stamp,.pdf-btn,.print-hide,.addr-hd,.tt,.filters-row,.pills,.addr-search,.home-search,.ac-list,.menu-btn,.theme-btn,script,style,noscript,button:not(.prof),input,.filters,.maptools,.tip,.rail,#more,#csv,.prof p,select,form,.print-meta,.skip,.term-pop,#ledMore,.addr-act,[data-report="skip"]';
+const SKIP = '.stamp,.pdf-btn,.print-hide,.addr-hd,.tt,.filters-row,.pills,.addr-search,.home-search,.ac-list,.menu-btn,.theme-btn,script,style,noscript,button:not(.prof):not(.tt-h),input,.filters,.maptools,.tip,.rail,#more,#csv,.prof p,select,form,.print-meta,.skip,.term-pop,#ledMore,.addr-act,[data-report="skip"]';
 function skip(el, inInline) {
   if (el.matches && el.matches(SKIP)) return true;
   if (el.hidden) return true;
@@ -125,6 +126,52 @@ function stackbar(el) {
   const segs = [...el.children].map(x => ({f: parseFloat((x.getAttribute('style') || '').match(/flex:\s*([\d.]+)/)?.[1] || 0), c: bgOf(x)}));
   const tot = segs.reduce((a, s) => a + s.f, 0) || 1; let x = 0; const w = Math.min(300, MAXW - 12);
   return {canvas: segs.map(s => { const r = {type: 'rect', x, y: 0, w: Math.max(0, s.f / tot * w - 1), h: 10, color: s.c || C.blue}; x += s.f / tot * w; return r; }), margin: [0, 4, 0, 6]};
+}
+// The element's painted background as #hex (handles rgb() and the color(srgb ...) that color-mix() computes to).
+function colorOf(el, fallback) {
+  const v = getComputedStyle(el).backgroundColor || '';
+  const m = v.match(/^color\(srgb\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)/);
+  if (m) return '#' + m.slice(1, 4).map(x => Math.round(+x * 255).toString(16).padStart(2, '0')).join('');
+  const h = v.startsWith('rgb') ? rgb2hex(v) : null;
+  return h && h !== 'none' ? h : fallback || C.blue;
+}
+function dvbars(el) { // diverging bars: increases to the right of a center line, decreases to the left
+  const BW = MAXW < 400 ? 90 : 170, H = 8;
+  const rows = [...el.querySelectorAll(':scope > .dv-r')].filter(r => !skip(r)).map(r => {
+    const b = r.querySelector('.dv-b'), half = BW / 2, w = b ? Math.min(half, pct(b, 'width') * BW) : 0, up = b && b.classList.contains('up');
+    const canvas = [{type: 'line', x1: half, y1: -2, x2: half, y2: H + 2, lineWidth: .6, lineColor: '#C9CED6'}];
+    if (b) canvas.push({type: 'rect', x: up ? half : half - w, y: 0, w: Math.max(.8, w), h: H, color: colorOf(b), r: 1.5});
+    const n = r.querySelector('.dv-n'), v = r.querySelector('.dv-v'), own = x => [...x.childNodes].filter(c => c.nodeType === 3).map(c => c.textContent).join('').trim();
+    const tag = n.querySelector('.dv-tag'), sub = n.querySelector('small'), vs = v ? [...v.children].filter(c => c.tagName !== 'SMALL') : [], vsmall = v && v.querySelector('small');
+    const name = [{text: own(n), fontSize: 8}].concat(tag ? [{text: '  ' + textOf(tag).toUpperCase(), fontSize: 6, bold: true, color: tag.classList.contains('add') ? '#1F7A4D' : C.muted}] : []).concat(sub ? [{text: '\n' + textOf(sub), fontSize: 6.8, color: C.muted}] : []);
+    const val = vs.map((c, k) => ({text: (k ? ' ' : '') + textOf(c), fontSize: 8, bold: !k, color: k ? C.muted : C.ink})).concat(vsmall ? [{text: '\n' + textOf(vsmall), fontSize: 6.8, color: C.muted}] : []);
+    return [{text: name}, {canvas, margin: [0, 3, 0, 0]}, {text: val.length ? val : '', alignment: 'right'}];
+  });
+  if (!rows.length) { const r = clean(inline(el)); return r.length ? {text: r, fontSize: 9, color: C.muted, margin: [0, 0, 0, 6]} : null; }
+  return {table: {widths: ['*', BW, 'auto'], body: rows, dontBreakRows: true}, layout: {hLineWidth: (i, n) => i > 0 && i < n.table.body.length ? .4 : 0, vLineWidth: () => 0, hLineColor: () => C.line, paddingLeft: i => i ? 6 : 0, paddingRight: (i, n) => i === n.table.widths.length - 1 ? 0 : 6, paddingTop: () => 3, paddingBottom: () => 3}, margin: [0, 2, 0, 8]};
+}
+function yhbars(el) { // one column per year, each with one or more bars (total and General Fund)
+  const items = [...el.querySelectorAll(':scope > .yh-c')].filter(i => !i.hidden); // year columns are buttons, which skip() drops
+  if (!items.length) return null;
+  const H = 80, cw = Math.min(40, (MAXW - 4) / items.length - 3);
+  const cols = items.map(i => {
+    const bars = [...i.querySelectorAll('.yh-bar')], n = Math.max(1, bars.length), gap = 1.5, bw = Math.min(14, (cw - gap * (n - 1)) / n), x0 = (cw - (bw * n + gap * (n - 1))) / 2;
+    const canvas = [{type: 'line', x1: 0, y1: H, x2: cw, y2: H, lineWidth: .5, lineColor: C.line}];
+    bars.forEach((b, k) => { const h = pct(b, 'height') * H; canvas.push({type: 'rect', x: x0 + k * (bw + gap), y: H - h, w: bw, h: Math.max(.5, h), color: colorOf(b)}); });
+    const on = i.classList.contains('on'), note = i.querySelector('small') ? textOf(i.querySelector('small')) : '';
+    return {width: cw + 3, stack: [{text: textOf(i.querySelector('.yh-v') || {textContent: ''}), fontSize: 5.6, alignment: 'center', color: C.ink},
+      {canvas, margin: [0, 2, 0, 2]}, {text: textOf(i.querySelector('.yh-y') || {textContent: ''}), fontSize: 6.2, bold: on, color: on ? C.blue : C.muted, alignment: 'center'},
+      note ? {text: note, fontSize: 5, color: C.faint, alignment: 'center'} : null].filter(Boolean)};
+  });
+  return {stack: [{columns: cols, columnGap: 0}], unbreakable: true, margin: [0, 4, 0, 10]};
+}
+function swatches(el) { // an inline legend: <span><i style="background:..."></i>Label</span> ...
+  const items = [...el.children].filter(x => !skip(x)).map(sp => {
+    const sw = sp.querySelector('i'), label = textOf(sp);
+    return sw ? [{canvas: [{type: 'rect', x: 0, y: 1.5, w: 7, h: 7, color: colorOf(sw), r: 1.5}], width: 10}, {text: label, fontSize: 7.5, color: C.muted, width: 'auto', margin: [0, 0, 12, 0]}]
+      : [{text: label, fontSize: 7.5, color: C.muted, width: 'auto', margin: [0, 0, 12, 0]}];
+  }).flat();
+  return items.length ? {columns: items, columnGap: 0, margin: [0, 0, 0, 4]} : null;
 }
 function legend(el) {
   const rows = [...el.querySelectorAll(':scope > li')].map(li => {
@@ -207,6 +254,9 @@ function walk(el, out, inGrid) {
   if (cl.contains('kpis')) { out.push(kpis(el)); return; }
   if (cl.contains('bill-hd')) { const sp = [...el.children]; out.push({stack: sp.map(x => x.classList.contains('eyebrow') ? {text: textOf(x).toUpperCase(), fontSize: 6.8, color: C.muted, characterSpacing: .6} : x.classList.contains('bill-v') ? {text: clean(inline(x)), fontSize: 18, bold: true, margin: [0, 1, 0, 1]} : {text: clean(inline(x)), fontSize: 7.8, color: C.muted}), margin: [0, 0, 0, 4]}); return; }
   if (cl.contains('hbars')) { const x = hbars(el); if (x) out.push(x); return; }
+  if (cl.contains('dv')) { const x = dvbars(el); if (x) out.push(x); return; }
+  if (cl.contains('yh')) { const x = yhbars(el); if (x) out.push(x); return; }
+  if (cl.contains('dv-legend')) { const x = swatches(el); if (x) out.push(x); return; }
   if (cl.contains('vbars')) { out.push(vbars(el)); return; }
   if (cl.contains('stackbar')) { out.push(stackbar(el)); return; }
   if (cl.contains('cmp')) { out.push({columns: [...el.querySelectorAll('.cmp-col')].map(c => ({stack: [{text: textOf(c.querySelector('.eyebrow')).toUpperCase(), fontSize: 6.5, color: C.muted}, {text: textOf(c.querySelector('.bill-v')), fontSize: 15, bold: true}, {text: textOf(c.querySelector('.cmp-save')), fontSize: 7.5, color: C.muted}]})), columnGap: 10, margin: [0, 2, 0, 8]}); return; }
