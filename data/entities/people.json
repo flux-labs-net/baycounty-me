@@ -1,6 +1,6 @@
 {
  "about": "Elected officials, department leaders and 2026 local candidates named in the site's datasets, one id per person. Names are matched on first and last name with common nicknames (Doug = Douglas, Chris = Christopher, Dave = David ...), ignoring middle initials, titles and notes in parentheses; \"(D2)\" style suffixes become the district field. People who appear under more than one government are listed in multi_government for checking. No other people are included.",
- "count": 202,
+ "count": 201,
  "people": [
   {
    "id": "adrian-welle",
@@ -44,13 +44,6 @@
     "mb"
    ],
    "roles": [
-    {
-     "role": "former mayor",
-     "gov_id": "mb",
-     "seat": "Mayor (Group 1)",
-     "years": "until 2015",
-     "source": "officeholders"
-    },
     {
      "role": "former mayor",
      "gov_id": "mb",
@@ -410,7 +403,7 @@
      "role": "former county manager",
      "gov_id": "county",
      "seat": "County Manager",
-     "years": "2015–2026",
+     "years": "until 2026",
      "source": "officeholders"
     }
    ]
@@ -1945,7 +1938,7 @@
      "role": "City commissioner, Ward 3",
      "gov_id": "sp",
      "seat": "Ward 3",
-     "years": "since 2015",
+     "years": "since before 2015",
      "source": "officeholders"
     }
    ]
@@ -2180,7 +2173,7 @@
      "role": "former city manager",
      "gov_id": "pc",
      "seat": "City Manager",
-     "years": "2015–2018",
+     "years": "until 2018",
      "source": "officeholders"
     }
    ]
@@ -2200,7 +2193,7 @@
      "role": "former council member, Group 5",
      "gov_id": "mb",
      "seat": "Group 5",
-     "years": "2014–2016",
+     "years": "until 2016",
      "source": "officeholders"
     }
    ]
@@ -3166,7 +3159,7 @@
      "role": "former mayor",
      "gov_id": "lh",
      "seat": "Mayor",
-     "years": "2015–2020",
+     "years": "until 2020",
      "source": "officeholders"
     }
    ]
@@ -3335,7 +3328,7 @@
      "role": "former council member, Group 2",
      "gov_id": "mb",
      "seat": "Group 2",
-     "years": "2014–2016",
+     "years": "until 2016",
      "source": "officeholders"
     }
    ]
@@ -4134,7 +4127,7 @@
      "role": "Mayor",
      "gov_id": "sp",
      "seat": "Mayor",
-     "years": "since 2013",
+     "years": "since before 2015",
      "source": "officeholders"
     }
    ]
@@ -5009,7 +5002,7 @@
      "role": "former council member, Group 4",
      "gov_id": "mb",
      "seat": "Group 4",
-     "years": "2014–2016",
+     "years": "until 2016",
      "source": "officeholders"
     }
    ]
@@ -5365,26 +5358,6 @@
      "role": "Director of Human Resources/Risk Management",
      "gov_id": "pc",
      "source": "salaries"
-    }
-   ]
-  },
-  {
-   "id": "walter-kelley",
-   "name": "Walter Kelley",
-   "aliases": [
-    "Walter Kelley"
-   ],
-   "district": null,
-   "gov_ids": [
-    "lh"
-   ],
-   "roles": [
-    {
-     "role": "former mayor",
-     "gov_id": "lh",
-     "seat": "Mayor",
-     "years": "until 2015",
-     "source": "officeholders"
     }
    ]
   },

@@ -1,4 +1,4 @@
-"""Panama City adopted budgets by fund group, FY2017 to FY2022, and the General Fund for FY2015-16 and FY2023-24.
+"""Panama City adopted budgets by fund group, FY2017 to FY2022, and the General Fund for FY2016 and FY2023-24.
 
 The city's Annual Budget books for FY2018 to FY2022 (Archive Center, https://www.panamacity.gov/Archive.aspx) are
 scanned images with no text layer. Each book's Executive Budget Summary prints a "BUDGET SUMMARY" table of the
@@ -36,7 +36,6 @@ YEARS = {
 # exactly in the years both exist (FY2017: $32,448,627 + $7,220,410; FY2022: $47,295,136 + $7,684,981).
 # fiscal year -> (archive item, report title, original expenditures, original transfers out)
 ACFR_GF = {
-    2015: ('267', '2015 Comprehensive Annual Financial Report', 31520730, 8054592),
     2016: ('305', '2016 Comprehensive Annual Financial Report', 33153951, 7656706),
     2023: ('1536', '2023 Annual Comprehensive Financial Report', 50823188, 9762870),
     2024: ('1550', '2024 Annual Comprehensive Financial Report', 58537667, 4960413),
@@ -59,7 +58,7 @@ def main():
         'Adopted budgets by fund group from the BUDGET SUMMARY table in each Annual Budget book (scanned; figures read from the page images and checked against the printed grand total).',
         'The grand total includes transfers between funds and appropriated reserves.',
         'FY2025 onward come from the city\'s newer budget books, which list individual funds, so only the General Fund lines up line for line with these years.',
-        'FY2015, FY2016, FY2023 and FY2024 have the General Fund only, from the original budget in that year\'s Annual Comprehensive Financial Report (original expenditures plus transfers out, which matches the budget book in FY2017 and FY2022). The budget books for those years are not posted.',
+        'FY2016, FY2023 and FY2024 have the General Fund only, from the original budget in that year\'s Annual Comprehensive Financial Report (original expenditures plus transfers out, which matches the budget book in FY2017 and FY2022). The budget books for those years are not posted.',
         'FY2017 is the prior-year column of the FY2018 book.'], 'years': years},
         open(OUT, 'w'), indent=1)
     for y in years:

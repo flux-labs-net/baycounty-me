@@ -8,6 +8,7 @@ e = lambda s: html.escape(str(s if s is not None else ''))
 import sys as _sys
 _sys.path.insert(0, os.path.join(DATA, 'entities'))
 import ids  # noqa: E402  shared government / vendor / person ids (data/entities)
+import cutoff  # noqa: E402  the site's first year (data/entities/cutoff.py)
 
 # which columns name the government, per dataset, tried in order (office titles are matched by contained name)
 GOV_COLS = {'owner-gifts': ['office'], 'entity-profiles': ['gov_id'], 'entity-connections': [], 'government-profiles': ['government'], 'government-years': ['gov_id', 'government'], 'budget-years': ['gov_id'], 'cra-agencies': ['gov_id'], 'cra-tax-increment': ['gov_id'], 'cra-increment-checks': [], 'officeholder-terms': ['gov_id'], 'votes': ['government'], 'member-votes': ['gov_id'], 'cra-payments': ['city'],
@@ -114,6 +115,31 @@ def add_vote_links(did, rows):
     return rows
 
 
+# The site's first year (2016, data/entities/cutoff.py). Ingestion already leaves older records out; this is the last
+# check before rows reach the downloads, the API and the database. A row is dropped when the column below (or, for
+# datasets with structured dates, date_end) is before 2016. Empty values are kept: a term or business with no end is
+# still going.
+FIRST_YEAR_COL = {'votes': 'date', 'member-votes': 'date', 'contracts': 'date', 'change-orders': 'date', 'emergency-purchases': 'date',
+                  'property-tax-rates': 'tax_year', 'accountability-events': 'sort_date', 'connections-payments': 'date',
+                  'nonprofit-payments': 'date', 'nonprofit-grants': 'tax_year', 'nonprofit-board-members': 'last_year',
+                  'nonprofit-officials': 'last_year', 'charity-registrations': 'expiration_date', 'entity-connections': 'last_date',
+                  'officeholder-terms': 'end_date', 'official-businesses': 'closed_year', 'official-business-links': 'last_date',
+                  'business-donor-sunbiz': 'last_date', 'over-limit-gifts': 'last_date', 'owner-gifts': 'last_date',
+                  'checkbook-payments': 'fiscal_year', 'budget-actuals': 'fiscal_year', 'cra-tax-increment': 'fiscal_year',
+                  'cra-increment-checks': 'fiscal_year', 'campaign-contributions-2026': 'date', 'meetings': 'start'}
+DROPPED_BEFORE_FIRST_YEAR = {}  # dataset -> rows the last check dropped (should stay empty: fix the ingestion instead)
+
+
+def first_year_rows(did, rows):
+    col = FIRST_YEAR_COL.get(did) or ('date_end' if did in DATE_COL else None)
+    if not col:
+        return rows
+    kept = [r for r in rows if cutoff.keep(r.get(col))]
+    if len(kept) < len(rows):
+        DROPPED_BEFORE_FIRST_YEAR[did] = len(rows) - len(kept)
+    return kept
+
+
 def add_gov_id(did, rows):
     cols = GOV_COLS.get(did, ['government', 'gov'])
     add_vote_links(did, rows)
@@ -129,7 +155,7 @@ def add_gov_id(did, rows):
             if g:
                 break
         r['gov_id'] = g
-    return add_dates(did, rows)
+    return first_year_rows(did, add_dates(did, rows))
 
 
 def _j(*p):
@@ -382,6 +408,8 @@ def write_downloads(out_dir):
             return c
         catalog.append({'id': did, 'title': title, 'description': desc, 'rows': len(rows), 'columns': [col(k) for k in keys],
                         'json': f'/downloads/{did}.json', 'csv': f'/downloads/{did}.csv', 'api': f'/api/v1/datasets/{did}'})
+    if DROPPED_BEFORE_FIRST_YEAR:
+        print(f'open data: rows before {cutoff.FIRST_YEAR} dropped at the last check (leave them out at ingestion):', DROPPED_BEFORE_FIRST_YEAR, file=__import__('sys').stderr)
     import datetime
     json.dump({'name': 'BayCounty.me open data', 'updated': datetime.date.today().isoformat(), 'license': 'Public records; free to reuse with credit to BayCounty.me',
                'datasets': catalog}, open(os.path.join(dest, 'index.json'), 'w'), ensure_ascii=False, indent=1)

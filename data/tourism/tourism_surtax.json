@@ -1632,23 +1632,7 @@
     "approved": "Nov 5, 2024 general election (WMBB reported 60% Yes)",
     "new_expiration": "2036-12-31"
    },
-   "prior_levies": [
-    {
-     "rate_percent": 0.5,
-     "effective": "1988-06-01",
-     "expires": "1993-12-31"
-    },
-    {
-     "rate_percent": 1.0,
-     "effective": "1994-01-01",
-     "expires": "1994-12-31"
-    },
-    {
-     "rate_percent": 0.5,
-     "effective": "1995-01-01",
-     "expires": "2003-05-31"
-    }
-   ],
+   "prior_levies": [],
    "allowed_uses_ballot_2016": [
     "resurface roads",
     "repair bridges",
@@ -26504,10 +26488,6 @@
    "name": "Bay District Schools School Capital Outlay Surtax (s.212.055(6) F.S.)",
    "rate_percent": 0.5,
    "levies": [
-    {
-     "effective": "1998-05-01",
-     "expires": "2008-04-30"
-    },
     {
      "effective": "2011-01-01",
      "expires": "2020-12-31",

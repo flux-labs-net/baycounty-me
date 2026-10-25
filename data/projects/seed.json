@@ -12,12 +12,6 @@
    "status": "closed",
    "events": [
     {
-     "d": "FY2015",
-     "k": "milestone",
-     "t": "First bids rejected as over budget",
-     "u": "https://www.pcbfl.gov/home/showpublisheddocument/20389/637915921100900000"
-    },
-    {
      "d": "2016-09-22",
      "k": "award",
      "a": 14222000,
@@ -366,66 +360,6 @@
    ]
   },
   {
-   "id": "pcb-south-thomas",
-   "name": "South Thomas Drive and Front Beach Road Segment 1",
-   "gov": "pcb",
-   "agency": "Panama City Beach CRA (Front Beach Road CRA)",
-   "where": "South Thomas Dr and the east end of Front Beach Rd",
-   "what": "Reconstruction of the east end of the corridor.",
-   "funding": "CRA tax increment and bonds",
-   "status": "closed",
-   "events": [
-    {
-     "d": "2009-09",
-     "k": "award",
-     "a": 11313787,
-     "t": "Construction contract; 15 change orders totaling $197,835 had been added when the city presented it (contractor not named in the source)",
-     "u": "https://pcbfl.gov/home/showpublisheddocument/262/635288586904330000"
-    },
-    {
-     "d": "2011-11",
-     "k": "milestone",
-     "t": "Construction period ends (Sep 2009 to Nov 2011)",
-     "u": "https://pcbfl.gov/home/showpublisheddocument/262/635288586904330000"
-    },
-    {
-     "d": "2013",
-     "k": "complete",
-     "a": 15363787,
-     "t": "Completed. Total project cost in the Capital Improvements Schedule",
-     "u": "https://www.pcbfl.gov/home/showpublisheddocument/27668/638887882812000000"
-    },
-    {
-     "d": "2025",
-     "k": "payment",
-     "a": 1442752.96,
-     "t": "Streetlights on Segment 1 and South Thomas Dr replaced with a state CDBG grant (not CRA money)",
-     "u": "https://www.pcbfl.gov/Archive.aspx?ADID=184",
-     "side": true
-    }
-   ],
-   "baseline": {
-    "a": 11313787,
-    "t": "construction contract"
-   },
-   "final": {
-    "a": 15363787,
-    "t": "total project cost"
-   },
-   "checks": [
-    {
-     "rule": "payee",
-     "note": "The $11.3 million construction contractor is not named in the city's presentation."
-    }
-   ],
-   "gaps": [
-    {
-     "q": "The construction contract, contractor name and full change-order list for the South Thomas Drive / Front Beach Road Segment 1 reconstruction (2009-2013)",
-     "gov": "pcb"
-    }
-   ]
-  },
-  {
    "id": "pcb-alf-coleman",
    "name": "Alf Coleman Road Phase I",
    "gov": "pcb",
@@ -488,16 +422,6 @@
    "status": "construction",
    "events": [
     {
-     "d": "2008-09",
-     "k": "payment",
-     "a": 2500000,
-     "approx": true,
-     "t": "City buys the park site for about $2.5 million with a bank loan and leases it to the CRA, which repays it through rent",
-     "payee": "City of Panama City",
-     "u": "https://www.panamacity.gov/DocumentCenter/View/7666",
-     "side": true
-    },
-    {
      "d": "FY2022",
      "k": "milestone",
      "t": "Final loan payment on the land",
@@ -541,14 +465,6 @@
    "funding": "CRA share plus a Rebuild Florida Hometown Revitalization grant",
    "status": "budgeted",
    "events": [
-    {
-     "d": "FY2014",
-     "k": "payment",
-     "a": 68000,
-     "t": "Earlier boardwalk improvement and signage",
-     "u": "https://panamacity.gov/DocumentCenter/View/1206/FY2014-Annual-Report-PDF",
-     "side": true
-    },
     {
      "d": "FY2024",
      "k": "budget",

@@ -187,55 +187,6 @@
  ],
  "budget_by_year": [
   {
-   "fy": "FY2010",
-   "tif_revenue": null,
-   "total_budget": 772277,
-   "district": "Downtown",
-   "source_url": "https://panamacity.gov/DocumentCenter/View/1202/FY2010-Annual-Report-PDF"
-  },
-  {
-   "fy": "FY2011",
-   "tif_revenue": 1574961,
-   "total_budget": 5700876,
-   "district": "all",
-   "source_url": "https://www.panamacity.gov/DocumentCenter/View/68/FY2011-Annual-Report-PDF"
-  },
-  {
-   "fy": "FY2011",
-   "tif_revenue": 268659,
-   "total_budget": 820591,
-   "district": "Downtown",
-   "source_url": "https://www.panamacity.gov/DocumentCenter/View/68/FY2011-Annual-Report-PDF"
-  },
-  {
-   "fy": "FY2011",
-   "tif_revenue": 588805,
-   "total_budget": 3498005,
-   "district": "Downtown North (Glenwood)",
-   "source_url": "https://www.panamacity.gov/DocumentCenter/View/68/FY2011-Annual-Report-PDF"
-  },
-  {
-   "fy": "FY2011",
-   "tif_revenue": 409890,
-   "total_budget": 544573,
-   "district": "St. Andrews",
-   "source_url": "https://www.panamacity.gov/DocumentCenter/View/68/FY2011-Annual-Report-PDF"
-  },
-  {
-   "fy": "FY2011",
-   "tif_revenue": 307607,
-   "total_budget": 837707,
-   "district": "Millville",
-   "source_url": "https://www.panamacity.gov/DocumentCenter/View/68/FY2011-Annual-Report-PDF"
-  },
-  {
-   "fy": "FY2015",
-   "tif_revenue": 2333244,
-   "total_budget": 2333213,
-   "district": "all",
-   "source_url": "https://panamacity.gov/DocumentCenter/View/1853/FY2015-Annual-Report-PDF"
-  },
-  {
    "fy": "FY2016",
    "tif_revenue": 2306065,
    "total_budget": 2360265,
@@ -502,7 +453,7 @@
    "source_title": "CRA Annual Report FY2021-22; CRA audited financial statements (Note 7)",
    "source_url": "https://www.panamacity.gov/DocumentCenter/View/7666",
    "confidence": "documented (from official record)",
-   "notes": "The annual report says 'about $2.5 million'. The audit says the purchase is capped at 'not more than $2.5 million'. Millville debt service was $168,503 in FY2011 and the debt line was $157,989 in FY2015."
+   "notes": "The annual report says 'about $2.5 million'. The audit says the purchase is capped at 'not more than $2.5 million'."
   },
   {
    "payee": "Not stated",
@@ -1233,7 +1184,7 @@
    "source_title": "Panama City CRA 2024 Annual Report",
    "source_url": "https://www.panamacity.gov/DocumentCenter/View/9865",
    "confidence": "documented (from official record)",
-   "notes": "FY2015 was $24,000 and FY2025 was $30,000."
+   "notes": "FY2025 was $30,000."
   },
   {
    "payee": "Historic St. Andrews Waterfront Partnership",
@@ -1505,7 +1456,7 @@
    "source_title": "2025 CRA Plan Amendments and Comprehensive Updates",
    "source_url": "https://www.panamacity.gov/DocumentCenter/View/10636",
    "confidence": "documented (from official record)",
-   "notes": "The contract amount was not found. AECOM was also the consultant for the Marina Master Plan update (FY2010-11), fee not stated."
+   "notes": "The contract amount was not found."
   },
   {
    "payee": "Not stated",
@@ -1637,7 +1588,7 @@
   }
  ],
  "data_gaps": [
-  "No district-level TIF or budget figures were found for FY1984-FY2009, FY2012-FY2013 or FY2019-FY2020 (the FY2019 and FY2020 audits on flauditor.gov were unreadable or failed to load). Older annual reports and audits likely sit in the panamacity.gov Document Center or Archive Center, or can be had by records request.",
+  "No district-level TIF or budget figures were found for FY2019-FY2020 (the FY2019 and FY2020 audits on flauditor.gov were unreadable or failed to load). Those annual reports and audits likely sit in the panamacity.gov Document Center or Archive Center, or can be had by records request.",
   "Grant recipient names are mostly missing before FY2024. Annual reports give aggregate 50/50 grant totals. Grant agreements and check registers would require a public records request to the CRA (cras@panamacity.gov).",
   "Price and seller for the April 2017 purchase of 37 lots and 35 homes on 6.5 acres in Downtown North. Check Bay County property appraiser and clerk deed records.",
   "The CRA's share of the roughly $7M Harrison Ave streetscape (2021-2025). Public sources cite a $5.7M state agreement and $5.6M CDBG-DR Project HEART but no CRA amount. Check CRA board agendas for 2021-2025.",

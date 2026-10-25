@@ -207,10 +207,10 @@ def build():
                 seen.add((gid, r.get('role')))
                 G.link('person:' + p['id'], 'gov:' + gid, 'serves', detail=(r.get('role') or '').capitalize() + (f", {r['seat']}" if r.get('seat') and not str(r['seat']).isdigit() else ''), key=r.get('role') or '')
 
-    # elected seats held since 2014, one link per person, government and seat, dated by the term (officeholder-terms)
+    # elected seats held since 2016 (the site's first year), one link per person, government and seat, dated by the term (officeholder-terms)
     for t in _ds('officeholder-terms'):
         if t.get('person_id') and 'person:' + t['person_id'] in G.ents:
-            yrs = f"{(t['start_date'] or '')[:4] or 'before 2015'}–{(t['end_date'] or '')[:4] or 'now'}"
+            yrs = f"{(t['start_date'] or '')[:4] or 'before 2016'}–{(t['end_date'] or '')[:4] or 'now'}"
             G.link('person:' + t['person_id'], 'gov:' + t['gov_id'], 'served' if t.get('end_date') else 'serves', None,
                    t.get('end_date') or t.get('start_date'), f"{t['seat'] if t.get('appointed') else t['body'] + ', ' + t['seat']} ({yrs})", t.get('source_url'), key='seat:' + t['seat'])
 

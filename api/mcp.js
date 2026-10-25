@@ -35,7 +35,7 @@ const TOOLS = [
      basis: {type: 'string', enum: ['adopted', 'actual'], default: 'adopted'}}},
    annotations: {readOnlyHint: true}},
   {name: 'officials_in_office', title: 'Officials in office',
-   description: 'Who held each elected seat on a Bay County government in a fiscal year, on a date, or today: mayor, commissioners or council members, school board members and the superintendent, and the appointed county or city manager, with each person\'s profile id, how they got the seat (elected, special election, appointed), their term dates and the source. part_of_period marks someone who joined or left during the year; vacant means nobody held the seat and confirmed false is a stretch nobody could confirm. Covers 2014 on. Omit gov to list the governments.',
+   description: 'Who held each elected seat on a Bay County government in a fiscal year, on a date, or today: mayor, commissioners or council members, school board members and the superintendent, and the appointed county or city manager, with each person\'s profile id, how they got the seat (elected, special election, appointed), their term dates and the source. part_of_period marks someone who joined or left during the year; vacant means nobody held the seat and confirmed false is a stretch nobody could confirm. Covers 2016 on, the first year the site covers. Omit gov to list the governments.',
    inputSchema: {type: 'object', additionalProperties: false, properties: {
      gov: {type: 'string', description: 'county, schools, pc, pcb, lh (Lynn Haven), cw (Callaway), sp (Springfield), parker or mb (Mexico Beach)'},
      year: {type: 'integer', description: 'Fiscal year, the year it ends (2019 = Oct 2018 to Sep 2019; schools Jul to Jun)'},

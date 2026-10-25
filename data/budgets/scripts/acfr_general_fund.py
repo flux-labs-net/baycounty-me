@@ -64,7 +64,7 @@ AUD = 'https://flauditor.gov/pages/'
 MUN = lambda name: lambda y: f'{AUD}mun_efile%20rpts/{y}%20{name.replace(" ", "%20")}.pdf'
 # Parker posts its own older audits on https://cityofparker.com/government/budget/ (FY2020 is not posted)
 PK = 'https://cityofparker.com/wp-content/uploads/filr/'
-PARKER = {2015: PK + '3181/September%2030,%202015%20Audited%20Financial%20Statements.pdf', 2016: PK + '2674/2016%20FINANCIAL%20STATEMENT.pdf',
+PARKER = {2016: PK + '2674/2016%20FINANCIAL%20STATEMENT.pdf',
           2017: PK + '1063/2017%20AUDIT%20REPORT.pdf', 2018: PK + '3182/September%2030,%202018%20Audited%20Financial%20Statements.pdf',
           2019: PK + '3183/September%2030,%202019%20Audited%20Financial%20Statements.pdf'}
 SCH = {2019: 'dsb_efile%20rpts/2019%20bay%20county%20dsb.pdf'}
@@ -76,7 +76,7 @@ GOVS = {
     'sp': ('City of Springfield', 'springfield', MUN('springfield'),
            {2021: 8520589, 2022: 8873879, 2023: 13852200, 2024: 15003819, 2025: 13529841}),
     'parker': ('City of Parker', 'parker', lambda y: PARKER.get(y) or MUN('parker')(y),
-               {2015: 2447688, 2016: 2609730, 2017: 2579696, 2018: 2878321, 2019: 2869940, 2021: 4682926, 2022: 3017158, 2023: 3525131, 2024: 3802000, 2025: 4698141}),
+               {2016: 2609730, 2017: 2579696, 2018: 2878321, 2019: 2869940, 2021: 4682926, 2022: 3017158, 2023: 3525131, 2024: 3802000, 2025: 4698141}),
     'mb': ('City of Mexico Beach', 'mexico_beach', MUN('mexico beach'),
            {2021: 3435691, 2022: 3192315, 2023: 4158845, 2024: 5598085, 2025: 8003671}),
     'schools': ('Bay District Schools', 'bay_district_schools',

@@ -6,20 +6,10 @@
   "Adopted budgets by fund group from the BUDGET SUMMARY table in each Annual Budget book (scanned; figures read from the page images and checked against the printed grand total).",
   "The grand total includes transfers between funds and appropriated reserves.",
   "FY2025 onward come from the city's newer budget books, which list individual funds, so only the General Fund lines up line for line with these years.",
-  "FY2015, FY2016, FY2023 and FY2024 have the General Fund only, from the original budget in that year's Annual Comprehensive Financial Report (original expenditures plus transfers out, which matches the budget book in FY2017 and FY2022). The budget books for those years are not posted.",
+  "FY2016, FY2023 and FY2024 have the General Fund only, from the original budget in that year's Annual Comprehensive Financial Report (original expenditures plus transfers out, which matches the budget book in FY2017 and FY2022). The budget books for those years are not posted.",
   "FY2017 is the prior-year column of the FY2018 book."
  ],
  "years": [
-  {
-   "fiscal_year": 2015,
-   "status": "adopted",
-   "source_title": "2015 Comprehensive Annual Financial Report (General Fund original budget)",
-   "source_url": "https://www.panamacity.gov/ArchiveCenter/ViewFile/Item/267",
-   "total": null,
-   "general_fund": 39575322,
-   "general_fund_departments": [],
-   "funds": []
-  },
   {
    "fiscal_year": 2016,
    "status": "adopted",

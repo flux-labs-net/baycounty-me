@@ -43,6 +43,7 @@ ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
 sys.path.insert(0, os.path.join(ROOT, 'data', 'sunbiz'))
 sys.path.insert(0, os.path.join(ROOT, 'data', 'entities'))
 import ids  # noqa: E402
+import cutoff  # noqa: E402  the site's first year: filings, registrations and seats before 2016 are left out
 import build_sunbiz as sb  # noqa: E402
 from counties import county  # noqa: E402
 
@@ -234,8 +235,9 @@ def organizations(county_key, entities):
     irs = {r['EIN']: r for r in _rows(os.path.join(d, 'orgs.csv.gz'))}
     filings = collections.defaultdict(list)
     for f in _rows(os.path.join(d, 'filings.csv.gz')):
-        filings[f['ein']].append(f)
-    posts = {p['ein']: p for p in _rows(os.path.join(d, 'postcards.csv.gz'))}
+        if cutoff.keep(f['tax_year']):
+            filings[f['ein']].append(f)
+    posts = {p['ein']: p for p in _rows(os.path.join(d, 'postcards.csv.gz')) if cutoff.keep(p['tax_year'])}
     sb_np = {dn: e for dn, e in entities.items() if e['nonprofit']}
     by_key = collections.defaultdict(list)
     for e in sb_np.values():
@@ -302,6 +304,8 @@ def fdacs_rows(county_key):
         r['name'] = ' '.join((r.get('name') or '').split())
         r['city'] = r.get('city') or ''
         r['zip'] = (r.get('zip') or '')[:5]
+        if not cutoff.keep(_iso(r.get('expiration_date'))):
+            continue  # lapsed before the site's first year
         if n not in regs or (r.get('fetched_at') or '') >= (regs[n].get('fetched_at') or ''):
             regs[n] = r
     offs = collections.defaultdict(list)
@@ -406,6 +410,7 @@ def seats(orgs, roles, people, county_key):
                         'title': clean_title(title) or 'Officer or director', 'tax_year': int(yr) if yr.isdigit() else None,
                         'board': True, 'roles': 'officer', 'hours': None, 'compensation': None, 'object_id': None, 'registry_person_key': None,
                         'source_url': fd.get('detail_url') or FDACS_URL})
+    out = [s for s in out if cutoff.keep(s['tax_year'])]  # seats on filings from before the site's first year
     # a seat is current when it is on the organization's latest filing of its kind
     latest = {}
     for s in out:
@@ -551,6 +556,8 @@ def payments_to(orgs):
             for vid in ids.vendor_ids(part):
                 if len(by_key.get('v:' + vid, ())) == 1:
                     hits |= by_key['v:' + vid]
+        if not cutoff.keep(r['date']):
+            continue
         for oid in hits:
             out.append({'nonprofit_id': oid, 'record_id': f"{r['src']}:{r['idx']}", 'record_type': r['src'], 'gov_id': r['gov_id'], 'payee_as_filed': name,
                         'amount': r['amount'] if isinstance(r['amount'], (int, float)) else None, 'date': str(r['date'] or ''),
@@ -567,6 +574,8 @@ def grants_between(orgs, county_key):
         by_key[o['key']].add(oid)
     out = []
     for g in _rows(os.path.join(HERE, county_key, 'grants.csv.gz')):
+        if not cutoff.keep(g['tax_year']):
+            continue
         rein = re.sub(r'\D', '', g['recipient_ein'] or '')
         rid = by_ein.get(rein)
         if not rid and not rein and (g['recipient_state'] or 'FL') == 'FL':  # a different EIN is a different org

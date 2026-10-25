@@ -48,13 +48,13 @@ S.votes = (VT?.votes || []).filter(v => v.g === K).map(v => ({...v, ys: [yr(v.d)
 /* ---------- the year picker ---------- */
 const ysel = $('#gxYear');
 const allYs = [...Object.values(S).flatMap(rs => rs.flatMap(r => r.ys)), ...GY.map(r => r.fiscal_year)];
-// every fiscal year the officeholder terms cover is pickable too, so each year back to 2015 shows who was in office
-const ohYs = OH.length ? Array.from({length: new Date().getFullYear() - 2014}, (_, i) => 2015 + i) : [];
-const YRS = [...new Set([...allYs, ...ohYs])].filter(y => y >= 2000).sort((a, b) => b - a);
+// every fiscal year the officeholder terms cover is pickable too, so each year back to the site's first year (2016) shows who was in office
+const ohYs = OH.length ? Array.from({length: new Date().getFullYear() - TT.FIRST_YEAR + 1}, (_, i) => TT.FIRST_YEAR + i) : [];
+const YRS = [...new Set([...allYs, ...ohYs])].filter(y => y >= TT.FIRST_YEAR).sort((a, b) => b - a);
 ysel.innerHTML = '<option value="all">All years</option>' + YRS.map(y => `<option value="${y}">${y}</option>`).join('');
 // opens on the newest year this government has a good share of records for
 // (planned project years run into the future, so they don't pick the year; a dated record does)
-const doneYs = [...S.contracts, ...S.cra, ...S.votes].flatMap(r => r.ys).filter(y => y >= 2000 && y <= new Date().getFullYear());
+const doneYs = [...S.contracts, ...S.cra, ...S.votes].flatMap(r => r.ys).filter(y => y >= TT.FIRST_YEAR && y <= new Date().getFullYear());
 ysel.value = String(doneYs.length ? TT.startYear([...new Set(doneYs)], TT.countBy(doneYs)) : TT.startYear(YRS, TT.countBy(allYs)) || 'all');
 const inYear = r => ysel.value === 'all' || r.ys.includes(+ysel.value);
 const ylabel = () => ysel.value === 'all' ? 'all years' : ysel.value;

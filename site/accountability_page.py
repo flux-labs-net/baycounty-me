@@ -17,6 +17,9 @@ import vendors as V
 import change_growth as CG
 from city_filter import city_bar, scope
 from entity_graph import build as entity_graph
+import sys as _sys
+_sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'data', 'entities'))
+import cutoff  # noqa: E402  the site's first year (2016)
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(HERE, '..', 'data')
@@ -127,6 +130,8 @@ def curated():
     for p in S['projects']:
         ev = []
         for x in p['events']:
+            if x.get('d') and not cutoff.keep(x['d']):
+                continue  # before the site's first year
             y = dict(x)
             if y.get('payee'):
                 vid, vn, vt = V.resolve(y['payee'])

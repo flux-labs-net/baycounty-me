@@ -9,6 +9,7 @@
 const crypto = require('crypto');
 const {isRevenue} = require('./rules');
 const {fiscalYear} = require('./normalize');
+const cutoff = require('../_cutoff');  // nothing before FY2016 is published
 
 const bad = (msg, status = 400) => Object.assign(new Error(msg), {status});
 const PUBLISHABLE = ['disbursements', 'budget'];
@@ -84,6 +85,7 @@ function checkbookRows(disb, {upload, workspace, index = new Map()}) {
   for (const d of disb) {
     const amount = num(d.amount), paid = day(d.paid_on);
     if (d.is_void || !(amount > 0) || !paid || (d.doc_no && voided.has(d.doc_no))) continue;
+    if (!cutoff.keep(fiscalYear(paid, fy))) continue;  // before the site's first year
     const entity = index.get(orgKey(d.payee)) || null;
     const org = isOrganization(d.payee, entity, (invoiced.get(d.payee) || 0) >= 3);
     out.push({government: GOV_NAME[gov] || workspace.name, fiscal_year: fiscalYear(paid, fy), paid_on: paid,
@@ -98,7 +100,7 @@ function checkbookRows(disb, {upload, workspace, index = new Map()}) {
 // Pure: one budget-vs-actual report's lines -> public budget_actuals rows.
 function budgetRows(lines, {upload, workspace}) {
   const gov = workspace.government_key;
-  return lines.map(l => ({government: GOV_NAME[gov] || workspace.name, fiscal_year: l.fiscal_year, as_of: day(l.as_of), line_type: isRevenue(l) ? 'revenue' : 'expense',
+  return lines.filter(l => cutoff.keep(l.fiscal_year)).map(l => ({government: GOV_NAME[gov] || workspace.name, fiscal_year: l.fiscal_year, as_of: day(l.as_of), line_type: isRevenue(l) ? 'revenue' : 'expense',
     fund: l.fund || null, department: l.department || null, account: l.account || null, description: l.description || null,
     original_budget: num(l.original_budget), amended_budget: num(l.amended_budget), actual_ytd: num(l.actual_ytd), encumbered: num(l.encumbered),
     source_file: upload.original_name, upload_id: upload.id, source_url: null, gov_id: gov,

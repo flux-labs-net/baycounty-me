@@ -59,7 +59,7 @@ def cra_increment_page(out_dir):
 
   <section class="tx-sec"><div class="sec-hd"><h2 id="cras" data-tile="Each CRA">Each CRA at a glance</h2><span class="muted">FY2025, the last year reported for all seven</span></div>
     <div class="tablewrap"><table class="tx-table ci-tbl" id="ciTbl"><tbody><tr><td class="muted">Loading…</td></tr></tbody></table></div>
-    <p class="note">"Paid on record" adds the years we have figures for, with gaps filled; the earliest years are missing for several CRAs. "Still to come" runs from FY2026 to the sunset under the growth rate picked above.</p>
+    <p class="note">"Paid on record" adds the years we have figures for since FY2016, with gaps filled; the earliest of those years are missing for several CRAs. "Still to come" runs from FY2026 to the sunset under the growth rate picked above.</p>
     <details class="tbl-toggle"><summary>Sunset dates and what they rest on</summary><ul class="plain" id="ciSunsets"></ul></details></section>
 
   <section class="tx-sec"><div class="ci-two">
@@ -89,9 +89,10 @@ def cra_increment_page(out_dir):
       </ul></div>
     <div><div class="sec-hd"><h2 id="gaps">What's missing</h2></div>
       <ul class="plain">
-        <li>Panama City: no yearly figures for FY1985 to FY2010 (the CRA's first 26 years), FY2012 to FY2014 or FY2019 to FY2020.</li>
-        <li>Lynn Haven: none for FY2005 to FY2016. Callaway: none before FY2021. Springfield: none before FY2023. Parker reports no positive increment before FY2024.</li>
-        <li>Pier Park: none for FY2003 to FY2008, FY2012 to FY2016 or FY2018, and no end date found.</li>
+        <li>The site starts at FY2016, so nothing paid before then is counted, even where a CRA is decades older.</li>
+        <li>Panama City: no yearly figures for FY2019 to FY2020.</li>
+        <li>Lynn Haven: none for FY2016. Callaway: none before FY2021. Springfield: none before FY2023. Parker reports no positive increment before FY2024.</li>
+        <li>Pier Park: none for FY2016 or FY2018, and no end date found.</li>
         <li>Callaway's FY2027 budget shows $3.02M of increment, nearly three times FY2025. It is used as published.</li>
         <li>We could not confirm whether Front Beach Road's yearly figures are before or after the county's 20% rebate.</li>
         <li>Mexico Beach has no CRA.</li>

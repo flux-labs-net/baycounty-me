@@ -1,17 +1,4 @@
 cra_id,cra,gov_id,fiscal_year,fy,basis,scenario,increment,county_share,county_amount,city_amount,source_url
-pcb-fbr,Front Beach Road CRA,pcb,2003,FY2003,reported,history,923154,1.0,923154,0,https://www.pcbfl.gov/Archive.aspx?ADID=177
-pcb-fbr,Front Beach Road CRA,pcb,2004,FY2004,reported,history,1848987,1.0,1848987,0,https://www.pcbfl.gov/Archive.aspx?ADID=177
-pcb-fbr,Front Beach Road CRA,pcb,2005,FY2005,reported,history,2494974,1.0,2494974,0,https://www.pcbfl.gov/Archive.aspx?ADID=177
-pcb-fbr,Front Beach Road CRA,pcb,2006,FY2006,reported,history,6940002,1.0,6940002,0,https://www.pcbfl.gov/Archive.aspx?ADID=177
-pcb-fbr,Front Beach Road CRA,pcb,2007,FY2007,reported,history,9234244,1.0,9234244,0,https://www.pcbfl.gov/Archive.aspx?ADID=177
-pcb-fbr,Front Beach Road CRA,pcb,2008,FY2008,reported,history,8522456,1.0,8522456,0,https://www.pcbfl.gov/Archive.aspx?ADID=177
-pcb-fbr,Front Beach Road CRA,pcb,2009,FY2009,reported,history,10019940,1.0,10019940,0,https://www.pcbfl.gov/Archive.aspx?ADID=177
-pcb-fbr,Front Beach Road CRA,pcb,2010,FY2010,reported,history,8246840,1.0,8246840,0,https://www.pcbfl.gov/home/showpublisheddocument/210/635343538872330000
-pcb-fbr,Front Beach Road CRA,pcb,2011,FY2011,reported,history,7263322,1.0,7263322,0,https://www.pcbfl.gov/Archive.aspx?ADID=177
-pcb-fbr,Front Beach Road CRA,pcb,2012,FY2012,reported,history,6396058,1.0,6396058,0,https://www.pcbfl.gov/Archive.aspx?ADID=177
-pcb-fbr,Front Beach Road CRA,pcb,2013,FY2013,reported,history,5719481,1.0,5719481,0,https://www.pcbfl.gov/Archive.aspx?ADID=177
-pcb-fbr,Front Beach Road CRA,pcb,2014,FY2014,reported,history,5710445,1.0,5710445,0,https://www.pcbfl.gov/Archive.aspx?ADID=177
-pcb-fbr,Front Beach Road CRA,pcb,2015,FY2015,reported,history,7829110,1.0,7829110,0,https://www.pcbfl.gov/Archive.aspx?ADID=177
 pcb-fbr,Front Beach Road CRA,pcb,2016,FY2016,reported,history,8632890,1.0,8632890,0,https://www.pcbfl.gov/Archive.aspx?ADID=177
 pcb-fbr,Front Beach Road CRA,pcb,2017,FY2017,reported,history,9425307,1.0,9425307,0,https://pcbfl.gov/home/showpublisheddocument/8381/636836843370370000
 pcb-fbr,Front Beach Road CRA,pcb,2018,FY2018,reported,history,9509593,1.0,9509593,0,https://pcbfl.gov/home/showpublisheddocument/8381/636836843370370000
@@ -94,14 +81,6 @@ pcb-fbr,Front Beach Road CRA,pcb,2046,FY2046,projected 9% a year,high,30000000,1
 pcb-fbr,Front Beach Road CRA,pcb,2047,FY2047,projected 9% a year,high,30000000,1.0,30000000,0,
 pcb-fbr,Front Beach Road CRA,pcb,2048,FY2048,projected 9% a year,high,30000000,1.0,30000000,0,
 pcb-fbr,Front Beach Road CRA,pcb,2049,FY2049,projected 9% a year,high,30000000,1.0,30000000,0,
-pcb-pier,Pier Park CRA,pcb,2009,FY2009,reported,history,146209,1.0,146209,0,https://www.pcbfl.gov/home/showpublisheddocument/210/635343538872330000
-pcb-pier,Pier Park CRA,pcb,2010,FY2010,reported,history,337788,1.0,337788,0,https://www.pcbfl.gov/home/showpublisheddocument/210/635343538872330000
-pcb-pier,Pier Park CRA,pcb,2011,FY2011,reported,history,344835,1.0,344835,0,https://www.pcbfl.gov/home/showpublisheddocument/20431/637915993743700000
-pcb-pier,Pier Park CRA,pcb,2012,FY2012,filled gap,history,364338,1.0,364338,0,
-pcb-pier,Pier Park CRA,pcb,2013,FY2013,filled gap,history,384943,1.0,384943,0,
-pcb-pier,Pier Park CRA,pcb,2014,FY2014,filled gap,history,406714,1.0,406714,0,
-pcb-pier,Pier Park CRA,pcb,2015,FY2015,filled gap,history,429716,1.0,429716,0,
-pcb-pier,Pier Park CRA,pcb,2016,FY2016,filled gap,history,454019,1.0,454019,0,
 pcb-pier,Pier Park CRA,pcb,2017,FY2017,reported,history,479697,1.0,479697,0,https://pcbfl.gov/home/showpublisheddocument/8381/636836843370370000
 pcb-pier,Pier Park CRA,pcb,2018,FY2018,filled gap,history,471013,1.0,471013,0,
 pcb-pier,Pier Park CRA,pcb,2019,FY2019,reported,history,462487,1.0,462487,0,https://pcbfl.gov/home/showpublisheddocument/17019/637390543060100000
@@ -153,11 +132,6 @@ pcb-pier,Pier Park CRA,pcb,2036,FY2036,projected 9% a year,high,1840618,1.0,1840
 pcb-pier,Pier Park CRA,pcb,2037,FY2037,projected 9% a year,high,2006274,1.0,2006274,0,
 pcb-pier,Pier Park CRA,pcb,2038,FY2038,projected 9% a year,high,2186838,1.0,2186838,0,
 pcb-pier,Pier Park CRA,pcb,2039,FY2039,projected 9% a year,high,2383654,1.0,2383654,0,
-pc,Panama City CRA,pc,2011,FY2011,reported,history,1574961,0.4701,740437,834524,https://www.panamacity.gov/DocumentCenter/View/68/FY2011-Annual-Report-PDF
-pc,Panama City CRA,pc,2012,FY2012,filled gap,history,1737570,0.4701,816885,920685,
-pc,Panama City CRA,pc,2013,FY2013,filled gap,history,1916969,0.4701,901226,1015743,
-pc,Panama City CRA,pc,2014,FY2014,filled gap,history,2114889,0.4701,994274,1120615,
-pc,Panama City CRA,pc,2015,FY2015,reported,history,2333244,0.4701,1096930,1236314,https://panamacity.gov/DocumentCenter/View/1853/FY2015-Annual-Report-PDF
 pc,Panama City CRA,pc,2016,FY2016,reported,history,2306065,0.4701,1084152,1221913,https://www.panamacity.gov/DocumentCenter/View/8687/FY2016
 pc,Panama City CRA,pc,2017,FY2017,reported,history,2239989,0.4701,1053088,1186901,https://panamacity.gov/DocumentCenter/View/3827/FY2017-Annual-Report-PDF
 pc,Panama City CRA,pc,2018,FY2018,reported,history,2172012,0.4701,1021129,1150883,https://panamacity.gov/DocumentCenter/View/4570/FY2018-Annual-Report-PDF

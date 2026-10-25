@@ -201,6 +201,14 @@ import ids
 for q in out['payments']:
     q.update(ids.date_fields(q.get('date_or_fy')))
 
+# the site's first year (entities/cutoff.py): payments that ended before 2016 and older yearly figures are left out.
+# This runs after the (cra, index) overrides above, which count every payment in the research files.
+import cutoff
+n_all = len(out['payments'])
+out['payments'] = [q for q in out['payments'] if cutoff.keep_span(q.get('date_start'), q.get('date_end') or q.get('date_start'))]
+out['budgets'] = [b for b in out['budgets'] if cutoff.keep(b.get('fy'))]
+print('payments before', cutoff.FIRST_YEAR, 'left out:', n_all - len(out['payments']))
+
 json.dump(out, open('merged.json', 'w'), indent=1)
 from collections import Counter
 print(len(out['payments']), Counter((p['cra'], p['status'], p['count']) for p in out['payments']))
