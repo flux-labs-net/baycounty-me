@@ -3,6 +3,7 @@
 A standalone page (no site menu, not in search or the sitemap, noindex). Everything it shows comes from
 /api/admin after an emailed sign-in link; the page itself holds no data.
 """
+import hashlib
 import os
 
 CSS = r"""
@@ -278,6 +279,8 @@ def shell_html():
 
 def admin_page(out_dir):
     shell = shell_html()
+    # A new admin.js gets a new URL, so a cached old copy can never run against new page markup.
+    js_ver = hashlib.sha1(open(os.path.join(os.path.dirname(__file__), 'admin.js'), 'rb').read()).hexdigest()[:10]
     html = f'''<!doctype html>
 <html lang="en">
 <head>
@@ -612,7 +615,7 @@ def admin_page(out_dir):
     <span class="grow"></span><button class="btn" value="cancel" id="kd-close">Close</button>
   </div>
 </form></dialog>
-<script src="/assets/admin.js" defer></script>
+<script src="/assets/admin.js?v={js_ver}" defer></script>
 </body>
 </html>
 '''
