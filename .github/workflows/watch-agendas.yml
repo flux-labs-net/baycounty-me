@@ -12,8 +12,10 @@
 name: Watch agendas
 on:
   schedule:
-    - cron: '*/30 11-23 * * 1-5'   # inbox: every 30 min, 6 a.m.-6:30 p.m. Central (daylight time), weekdays
-    - cron: '7 12,22 * * *'        # sweep: every source, 7 a.m. and 5 p.m. Central
+    # GitHub cron is UTC. CDT = UTC-5 (until Nov 1), CST = UTC-6.
+    - cron: '*/30 11-23 * * 1-5'   # inbox: every 30 min, 11:00-23:30 UTC weekdays (6 a.m.-6:30 p.m. CDT, 5 a.m.-5:30 p.m. CST)
+    - cron: '*/30 0 * * 2-6'       # inbox: 00:00-00:30 UTC, so the window still reaches 6:30 p.m. in standard time
+    - cron: '7 12,22 * * *'        # sweep: every source, 12:07 and 22:07 UTC. The step below matches this exact string.
   workflow_dispatch:
     inputs:
       mode:
@@ -96,7 +98,10 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: gh workflow run refresh-meetings.yml --repo "$GITHUB_REPOSITORY"
       - name: Email admins about problems
-        if: failure()
+        # Also checks on sweeps and hand runs: the install and agenda-reading steps are continue-on-error, so a broken
+        # key or package mirror never fails the job. notify_admins.py only emails when a step failed. Inbox runs
+        # (every 30 min) skip this unless the job failed, so one problem doesn't send 26 emails a day.
+        if: always() && (failure() || github.event.schedule == '7 12,22 * * *' || github.event_name == 'workflow_dispatch')
         env:
           STEPS: ${{ toJSON(steps) }}
           JOB_STATUS: ${{ job.status }}

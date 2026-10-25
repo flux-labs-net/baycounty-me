@@ -25,7 +25,7 @@ The loader only deletes and reloads `site_build` rows, so anything else you add 
 
 ## Sync
 
-`.github/workflows/sync-db.yml` runs `db/scripts/load.py --migrate` after every push to `main` that touches data, after the daily refresh, or by hand from the Actions tab. It needs the `DATABASE_URL` repository secret (Supabase > Connect > Session pooler URI).
+`.github/workflows/sync-db.yml` runs `db/scripts/load.py --migrate` after every push to `main` that touches data, when a refresh workflow starts it after pushing, or by hand from the Actions tab. It needs the `DATABASE_URL` repository secret (Supabase > Connect > Session pooler URI).
 
 Run it locally:
 
@@ -99,3 +99,27 @@ Run it by hand with `select apiadmin.prune_requests(180);`.
   `GET /api/alerts-run?health=1` with the `CRON_SECRET` runs just the check.
 - **/admin:** the Ingestion tab shows the same report; the Emails tab previews every subscriber email (built by the same
   code that sends them, `api/_emails.js`) and can send a test to the signed-in admin.
+
+## Secrets and settings
+
+Where each secret lives. Values are never committed.
+
+| Name | Where | Used by |
+|---|---|---|
+| `DATABASE_URL` | GitHub secret, Vercel env | sync-db, watch-agendas, refresh-meetings (agenda export), API |
+| `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` | GitHub secret | watch-agendas (file storage) |
+| `RESEND_FULL_KEY` | GitHub secret | admin emails from every workflow; watch-agendas reads the agenda inbox |
+| `ADMIN_EMAILS` | GitHub secret | who gets workflow problem emails |
+| `VERCEL_DEPLOY_HOOK` | GitHub secret | refresh workflows deploy bot commits (Vercel skips Git deploys by non-members) |
+| `ANTHROPIC_API_KEY` | GitHub secret | watch-agendas reads posted agendas into items |
+| `POP_HOST`, `POP_USER`, `POP_PASS` | GitHub secret (optional) | a POP3 agenda mailbox |
+| `SUPABASE_REGION`, `AGENDA_INBOX`, `AGENDA_MODEL`, `AGENDA_EXTRACT_MAX`, `AGENDA_EXTRACT_BUDGET_USD`, `ANTHROPIC_WORKSPACE_ID`, `POP_DELETE` | GitHub variables | workflow settings |
+| `CRON_SECRET` | Vercel env | `/api/digest` and `/api/alerts-run` crons |
+| `ALERTS_SECRET` | Vercel env | signs alert subscribe/manage links |
+| `FINANCE_HASH_SECRET` | Vercel env | /finance sign-in hashing |
+| `GITHUB_DISPATCH_TOKEN` | Vercel env | `api/agenda-inbound.js` starts watch-agendas |
+| `RESEND_WEBHOOK_SECRET` | Vercel env | verifies the Resend inbound webhook |
+| `DIGEST_REVIEWER`, `DIGEST_AUTOSEND`, `ALERTS_AUTOSEND` | Vercel env | weekly digest and alert sending |
+
+`load.py` refuses a sync that would empty a dataset, or drop more than 60% of a dataset with 100+ rows, and logs it
+as failed. If the drop is real, run the Sync database workflow by hand and put the dataset id in its `allow_shrink` box.

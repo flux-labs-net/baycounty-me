@@ -373,7 +373,7 @@ def profile_rows():
             got[x['to_id']] += x['amount']
     out = []
     for eid, e in G.ents.items():
-        keep = e['kind'] in ('gov', 'person', 'nonprofit') or deg[eid] or (e['kind'] == 'vendor' and eid[7:] in _vendor_pages())
+        keep = e['kind'] in ('gov', 'person', 'nonprofit', 'vendor') or deg[eid]  # every vendor: page names link to them
         if not keep:
             continue
         out.append({'entity_id': eid, 'kind': e['kind'], 'kind_label': KIND_LABEL[e['kind']], 'name': e['name'], 'subtitle': e['subtitle'],

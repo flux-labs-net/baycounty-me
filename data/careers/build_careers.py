@@ -226,7 +226,7 @@ def build(county_key='bay', res=None, payees=None):
                           'entity_status': e['status'], 'filing_type': e['filing_type'], 'nonprofit': e['nonprofit'], 'principal_city': e['city'],
                           'file_date': e['file_date'],
                           'closed_year': _end_year(e),
-                          'source_url': ids.sunbiz_url(e['name'], dn)})
+                          'source_url': ids.sunbiz_url(E[dn]['name'], dn)})
             docs_of[pair].add(dn)
             pairs_on_doc[dn].add(pair)
 
@@ -244,7 +244,7 @@ def build(county_key='bay', res=None, payees=None):
                 pa = [x for x in pairs if x[0] == a]
                 pb = [x for x in pairs if x[0] == b]
                 links.append({'link_type': 'shared_business', 'person_id': a, 'other_person_id': b, 'doc_number': dn, 'entity_name': e['name'],
-                              'requires': req(*pa, *pb), 'detail': f"Both listed on {e['name']}", 'source_url': ids.sunbiz_url(e['name'], dn)})
+                              'requires': req(*pa, *pb), 'detail': f"Both listed on {e['name']}", 'source_url': ids.sunbiz_url(E[dn]['name'], dn)})
 
     # gifts by person_id of the candidate
     cand_pid = {}
@@ -271,7 +271,7 @@ def build(county_key='bay', res=None, payees=None):
                           'office': gs[0].get('office'), 'doc_number': dn, 'entity_name': E[dn]['name'], 'amount': amt, 'items': n,
                           'first_date': d1, 'last_date': d2, 'self_gift': cp == pair[0], 'requires': req(pair),
                           'detail': f"{E[dn]['name']} gave {'to their own campaign' if cp == pair[0] else 'to ' + cand}",
-                          'source_url': ids.sunbiz_url(e['name'], dn), 'report_url': gs[0].get('report_url')})
+                          'source_url': ids.sunbiz_url(E[dn]['name'], dn), 'report_url': gs[0].get('report_url')})
 
     # partner_business_gift: donor business D shares a (non-corporate) person with a business of the candidate
     for (dn, cand), gs in gifts_by.items():
@@ -296,7 +296,7 @@ def build(county_key='bay', res=None, payees=None):
                               'shared_people': len(shared), 'shared_person_keys': sorted(shared), 'amount': amt, 'items': n,
                               'first_date': d1, 'last_date': d2, 'requires': req(pr),
                               'detail': f"{E[dn]['name']} gave to {cand}; it shares {len(shared)} officer{'s' if len(shared) > 1 else ''} with {E[od]['name']}",
-                              'source_url': ids.sunbiz_url(e['name'], dn), 'report_url': gs[0].get('report_url')})
+                              'source_url': ids.sunbiz_url(E[dn]['name'], dn), 'report_url': gs[0].get('report_url')})
 
     # public_payee
     if payees is None:
@@ -320,7 +320,7 @@ def build(county_key='bay', res=None, payees=None):
                           'last_date': max((str(x['date']) for x in rs if x.get('date')), default=None),
                           'record_types': srcs, 'requires': req(pair),
                           'detail': f"{E[dn]['name']} paid by {g['short'] if g else 'a local government'} ({', '.join(srcs)})",
-                          'source_url': next((x['url'] for x in rs if x.get('url')), ids.sunbiz_url(e['name'], dn))})
+                          'source_url': next((x['url'] for x in rs if x.get('url')), ids.sunbiz_url(E[dn]['name'], dn))})
     return {'matches': matches, 'roles': roles, 'links': links, 'people': pmap, 'registry': res}
 
 

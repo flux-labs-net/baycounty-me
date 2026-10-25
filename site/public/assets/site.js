@@ -478,8 +478,9 @@ if (document.readyState === 'loading') document.addEventListener('DOMContentLoad
       let hit = 0, id = -1;
       for (let L = Math.min(N.max, ws.length - i); L > 0; L--) {
         const seg = t.slice(ws[i][0], ws[i + L - 1][1]); if (!proper(seg)) continue; const x = N.n[norm(seg)];
-        if (x !== undefined && !(noPeople && N.k[x] === 'person') && N.u[x] !== location.pathname) { hit = L; id = x; break; }
+        if (x !== undefined && !(noPeople && N.k[x] === 'person')) { hit = L; id = x; break; }
       }
+      if (hit && N.u[id] === location.pathname) { i += hit; continue; }  // this page's own name: skip it whole
       if (hit) { let s = ws[i][0], e = ws[i + hit - 1][1]; while (e > s && ".'’-".includes(t[e - 1])) e--; frag.push([last, s, e, id]); last = e; i += hit; } else i++;
     }
     if (!frag.length) return;

@@ -62,6 +62,7 @@ public enum SitePages {
     /// Page families covered by one native screen (each government's profile).
     public static let prefixes: [String: Coverage] = [
         "/governments/": .native("Government profile"),
+        "/public-money/vendors/": .native("Company detail, opened from the Companies list"),
         "/people/": .native("Person detail, with a link to the web profile and its connection map"),
         "/profile/": .web("entity profile and connection map, read live from /api/v1/entities/{id}"),
     ]

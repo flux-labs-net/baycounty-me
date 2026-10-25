@@ -48,7 +48,7 @@ function cityToPayers(k) {
 
 function payeeTotals(rows) {
   const m = new Map();
-  rows.forEach(r => { const o = m.get(r.e) || { e: r.e, tot: 0, n: 0, p: new Set(), t: new Set(), unk: 0 }; o.tot += r.a || 0; o.n++; o.p.add(r.p); o.t.add(r.t); if (r.a == null) o.unk++; m.set(r.e, o); });
+  rows.forEach(r => { const o = m.get(r.e) || { e: r.e, tot: 0, n: 0, p: new Set(), t: new Set(), unk: 0 }; o.tot += r.x ? 0 : (r.a || 0); o.n++; o.p.add(r.p); o.t.add(r.t); if (r.a == null) o.unk++; m.set(r.e, o); });
   return m;
 }
 function shownPayees(rows) {
@@ -93,9 +93,9 @@ function graph(rows) {
   rows.forEach(r => {
     if (!keep.has(r.e)) return;
     add('p:' + r.p, { n: payerName(r.p), k: 'payer' });
-    const e = ent(r.e); add(r.e, { n: e.n, k: e.k }).total += r.a || 0;
+    const e = ent(r.e); add(r.e, { n: e.n, k: e.k }).total += r.x ? 0 : (r.a || 0);
     const key = 'p:' + r.p + '|' + r.e, l = links.get(key) || { source: 'p:' + r.p, target: r.e, type: 'paid', amt: 0 };
-    l.amt += r.a || 0; links.set(key, l);
+    l.amt += r.x ? 0 : (r.a || 0); links.set(key, l);
   });
   D.rel.forEach(x => {
     const sub = id => D.ents[id] && D.ents[id].sub;
@@ -211,7 +211,7 @@ let trailHl = () => {};
 function trail(rows) {
   const svg = d3.select('#cnTrail'); svg.selectAll('*').remove();
   const paid = new Map();  // business -> payer -> dollars in records
-  rows.forEach(r => { if (!gaveSet.has(r.e)) return; const m = paid.get(r.e) || new Map(); m.set(r.p, (m.get(r.p) || 0) + (r.a || 0)); paid.set(r.e, m); });
+  rows.forEach(r => { if (!gaveSet.has(r.e)) return; const m = paid.get(r.e) || new Map(); m.set(r.p, (m.get(r.p) || 0) + (r.x ? 0 : (r.a || 0))); paid.set(r.e, m); });
   const gifts = new Map();  // business -> official -> dollars
   D.don.forEach(d => { if (!d.e || !paid.has(d.e) || !offShown(D.off[d.o] || {})) return; const m = gifts.get(d.e) || new Map(); m.set(d.o, (m.get(d.o) || 0) + d.a); gifts.set(d.e, m); });
   const biz = [...gifts.keys()];
@@ -311,7 +311,7 @@ function recList(rs) {
   return `<div class="cn-recs">${rs.map(r => `<div class="cn-rec"><span>${esc(r.w || D.types[r.t])}</span><span class="num">${full(r.a)}</span><span class="cn-meta"><span class="cn-pill">${esc(D.types[r.t])}</span>${r.s ? `<span>${esc(r.s)}</span>` : ''}<span>${esc(r.when)}</span><span>${esc(payerName(r.p))}</span>${r.x ? '<span class="cn-flag">inside a project total</span>' : ''}${url(r.u) ? `<a href="${esc(url(r.u))}" target="_blank" rel="noopener">Source</a>` : ''}</span></div>`).join('')}</div>`;
 }
 function byType(rs) {
-  const m = {}; rs.forEach(r => { m[r.t] = (m[r.t] || 0) + (r.a || 0); });
+  const m = {}; rs.forEach(r => { m[r.t] = (m[r.t] || 0) + (r.x ? 0 : (r.a || 0)); });  // x: already inside a project total
   return Object.keys(D.types).filter(t => t in m).map(t => `<div class="cn-rec"><span>${esc(D.types[t])}</span><span class="num">${full(m[t])}</span></div>`).join('');
 }
 function profile() {

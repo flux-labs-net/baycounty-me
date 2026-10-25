@@ -79,8 +79,9 @@ async function liveConnections(req, catalog, ent) {
   const out = [], tasks = [];
   const add = r => out.push({county: r.county, checked_by_hand: true, records: 1, ...r});
   if (kind === 'person' || kind === 'nonprofit') {
-    tasks.push(rowsWhere(req, catalog, 'nonprofit-officials', kind === 'person' ? {person_id: key} : {nonprofit_id: key}).then(rs => rs.forEach(r => r.person_id && add({
-      link_id: 'no:' + (r.official_id || r.person_id + r.nonprofit_id), from_id: 'person:' + r.person_id, from_name: r.official, from_kind: 'person', from_url: `/people/${r.person_id}`,
+    tasks.push(rowsWhere(req, catalog, 'nonprofit-officials', kind === 'person' ? {official_id: key} : {nonprofit_id: key}).then(rs => rs.forEach(r => r.official_id && add({
+      // official_id is the official's person id; person_id in this table is the board-member key (b_...)
+      link_id: 'no:' + r.official_id + ':' + r.nonprofit_id, from_id: 'person:' + r.official_id, from_name: r.official, from_kind: 'person', from_url: `/people/${r.official_id}`,
       to_id: 'nonprofit:' + r.nonprofit_id, to_name: r.nonprofit, to_kind: 'nonprofit', to_url: `/profile/nonprofit/${r.nonprofit_id}`, relation: 'board',
       first_date: r.first_year ? String(r.first_year) : null, last_date: r.last_year ? String(r.last_year) : null,
       detail: [r.titles, r.current ? 'current' : null].filter(Boolean).join(' · ') || null, source_url: r.source_url, dataset: 'nonprofit-officials'}))));

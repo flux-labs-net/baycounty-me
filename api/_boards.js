@@ -10,7 +10,7 @@ const bulk = require('./_bulk');
 const bad = (msg, status = 400) => Object.assign(new Error(msg), {status});
 const REVIEW = ['unreviewed', 'confirmed', 'rejected'];
 const BOARD_KEY = /^b_[0-9a-f]{12}$/;
-const NP_ID = /^np-(\d{9}|sb-[a-z0-9]{5,12})$/;
+const NP_ID = /^np-(\d{9}|sb-[a-z0-9]{5,12}|fd-[a-z0-9]{3,12})$/;  // fd-: FDACS-only charities
 
 async function summary(county) {
   const [load] = await db.q(`select loaded_at, git_sha, summary from registry.loads where county = $1 order by id desc limit 1`, [county + ':nonprofits']);

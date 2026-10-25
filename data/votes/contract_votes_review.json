@@ -1,6 +1,6 @@
 {
  "about": "Possible contract-vote links that were NOT used: amount-only matches, matches more than 14 days apart, votes that also name another vendor, and second-best votes. For a person to check.",
- "count": 57,
+ "count": 58,
  "review": [
   {
    "record_id": "contract:1",
@@ -420,7 +420,7 @@
     "restore",
     "subsection"
    ],
-   "reason": "another vote matched more closely in time"
+   "reason": "weak: item_number+agenda_item, 0 days apart, vote also names another vendor, amounts differ"
   },
   {
    "record_id": "contract:222",
@@ -438,7 +438,7 @@
     "restore",
     "subsection"
    ],
-   "reason": "another vote matched more closely in time"
+   "reason": "weak: item_number+agenda_item, 0 days apart, vote also names another vendor, amounts differ"
   },
   {
    "record_id": "contract:223",
@@ -456,7 +456,7 @@
     "restore",
     "subsection"
    ],
-   "reason": "another vote matched more closely in time"
+   "reason": "weak: item_number+agenda_item, 0 days apart, vote also names another vendor, amounts differ"
   },
   {
    "record_id": "contract:228",
@@ -665,6 +665,24 @@
     "revitalization"
    ],
    "reason": "weak: description words only"
+  },
+  {
+   "record_id": "contract:288",
+   "record": "C.W. Roberts Contracting, Inc. · 2026-07-14 · Bid PC26-036, Chestnut parking lot (HS015), plus 10% contingency",
+   "record_amount": 336545.0,
+   "vote_id": "pc-commission:2026-07-14:9-h-consideration-of-approval-for-award",
+   "vote": "2026-07-14 · 9.h. Consideration of approval for award of Bid PC26-036 for the Chestnut Parking Lot Project – HS015 in the amount of $336,545",
+   "vote_amount": 64500000.0,
+   "days_apart": 0,
+   "match_method": "item_number+agenda_item",
+   "shared_words": [
+    "chestnut",
+    "hs015",
+    "lot",
+    "parking",
+    "pc26"
+   ],
+   "reason": "weak: item_number+agenda_item, 0 days apart, amounts differ"
   },
   {
    "record_id": "contract:304",

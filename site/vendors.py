@@ -55,7 +55,7 @@ VENDORS = {
     'ecsc': ('ECSC (Emerald Coast Site Construction)', ['ecsc', 'emerald coast site construction'], 'business'),
     'empire-pipe': ('Empire Pipe and Supply', ['empire pipe supply'], 'business'),
     'emr': ('EMR', ['emr'], 'business'),
-    'fpl': ('Florida Power & Light', ['florida power light', 'fpl - florida p'], 'business'),
+    'fpl': ('Florida Power & Light', ['florida power light', 'fpl - florida p', 'fpl'], 'business'),
     'gcuc': ('Gulf Coast Utility Contractors', ['gulf coast util', 'gulf coast utility construction', 'gulf coast utility contractor',
                                                 'gulf coast utility contractors', 'gulf coast utility contractors staline waterworks'], 'business'),
     'gortemoller': ('Gortemoller Engineering', ['gortemoller engineering'], 'business'),

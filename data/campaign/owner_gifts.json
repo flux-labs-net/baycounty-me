@@ -1,13 +1,13 @@
 {
- "as_of": "2026-10-24",
+ "as_of": "2026-10-25",
  "source": "Bay County Supervisor of Elections itemized campaign finance exports (VoterFocus); Florida Division of Corporations (Sunbiz)",
  "method": "A contributor filed as an individual is listed when the name and the street address on the filing are the same as an officer, manager or registered agent of a for-profit business on Sunbiz that was active or still filing around the gift. Middle initials and Jr/Sr must agree. Protected voters are never matched. Name-only matches are not published.",
  "counts": {
-  "individual_lines": 1969,
-  "published_lines": 349,
+  "individual_lines": 1963,
   "protected_skipped": 147,
-  "published_donors": 257,
-  "held_zip_only": 194
+  "published_lines": 342,
+  "published_donors": 251,
+  "held_zip_only": 198
  },
  "campaigns": {
   "577": {
@@ -296,20 +296,6 @@
      "name": "STAY CLASSY SAN DIEGO LLC",
      "status": "active",
      "titles": [
-      "RA"
-     ]
-    }
-   ]
-  },
-  "p_02dfe87609d2": {
-   "name": "Joey Ginn",
-   "businesses": [
-    {
-     "doc_number": "P25000032200",
-     "name": "GINN FINANCIAL CONSULTING,  LLC",
-     "status": "active",
-     "titles": [
-      "P",
       "RA"
      ]
     }
@@ -1068,19 +1054,6 @@
     }
    ]
   },
-  "p_1a6f4d0ffcff": {
-   "name": "Mitch and Sarah Dever",
-   "businesses": [
-    {
-     "doc_number": "L22000295952",
-     "name": "B & R HOLDINGS OF BAY COUNTY, LLC",
-     "status": "inactive",
-     "titles": [
-      "RA"
-     ]
-    }
-   ]
-  },
   "p_1ad58d4e2d8b": {
    "name": "David Chapman",
    "businesses": [
@@ -1106,14 +1079,6 @@
      "status": "active",
      "titles": [
       "AMBR"
-     ]
-    },
-    {
-     "doc_number": "L26000151573",
-     "name": "CIV BOATS LLC",
-     "status": "active",
-     "titles": [
-      "MGR"
      ]
     },
     {
@@ -3183,22 +3148,6 @@
       "CEO",
       "CHMN"
      ]
-    },
-    {
-     "doc_number": "L24000365661",
-     "name": "GULF LIFE REFERRALS, LLC",
-     "status": "active",
-     "titles": [
-      "MGR"
-     ]
-    },
-    {
-     "doc_number": "L25000524944",
-     "name": "SNOWBIRD SANCTUARY LLC",
-     "status": "active",
-     "titles": [
-      "RA"
-     ]
     }
    ]
   },
@@ -3921,15 +3870,6 @@
    "name": "Martha Blackmon Milligan",
    "businesses": [
     {
-     "doc_number": "P26000003610",
-     "name": "HILLTOP FARM OF NORTHWEST FLORIDA, INC.",
-     "status": "active",
-     "titles": [
-      "P",
-      "RA"
-     ]
-    },
-    {
      "doc_number": "P05000145032",
      "name": "HILLTOP FARM OF NORTHWEST FLORIDA, INC.",
      "status": "active",
@@ -4178,14 +4118,6 @@
      "titles": [
       "MBR"
      ]
-    },
-    {
-     "doc_number": "L24000192457",
-     "name": "ST. ANDREWS BREWHOUSE ON THE BAY, LLC",
-     "status": "active",
-     "titles": [
-      "MGR"
-     ]
     }
    ]
   },
@@ -4215,19 +4147,6 @@
      "status": "inactive",
      "titles": [
       "MGR"
-     ]
-    }
-   ]
-  },
-  "p_806a40c89762": {
-   "name": "Michael Lawhorn",
-   "businesses": [
-    {
-     "doc_number": "L17000156247",
-     "name": "MY MAINTENANCE MAN MIKE, LLC",
-     "status": "inactive",
-     "titles": [
-      "AMBR"
      ]
     }
    ]
@@ -5275,19 +5194,6 @@
     }
    ]
   },
-  "p_a9dc924f96f2": {
-   "name": "Riddhi Kothari",
-   "businesses": [
-    {
-     "doc_number": "L26000342966",
-     "name": "KRISHNA VENTURES OF TLH LLC",
-     "status": "active",
-     "titles": [
-      "AMBR"
-     ]
-    }
-   ]
-  },
   "p_aa5ae89e449c": {
    "name": "Ellen Mapelsden",
    "businesses": [
@@ -5509,14 +5415,6 @@
      ]
     },
     {
-     "doc_number": "L26000371352",
-     "name": "RS3 HOLDINGS, LLC",
-     "status": "active",
-     "titles": [
-      "ST"
-     ]
-    },
-    {
      "doc_number": "P12000037730",
      "name": "NWF LIVING, INC.",
      "status": "inactive",
@@ -5651,19 +5549,6 @@
      "doc_number": "L21000393233",
      "name": "BUNKERS COVE, LLC",
      "status": "inactive",
-     "titles": [
-      "AMBR"
-     ]
-    }
-   ]
-  },
-  "p_b16852ecbe58": {
-   "name": "Andrew A Lewis",
-   "businesses": [
-    {
-     "doc_number": "L25000254943",
-     "name": "SELQOR PRECISION LLC",
-     "status": "active",
      "titles": [
       "AMBR"
      ]
@@ -6157,37 +6042,6 @@
     }
    ]
   },
-  "p_cb8c2d8737c7": {
-   "name": "David Scott Helms",
-   "businesses": [
-    {
-     "doc_number": "L24000335997",
-     "name": "DOUBLE DANGLE, LLC",
-     "status": "active",
-     "titles": [
-      "AP",
-      "RA"
-     ]
-    },
-    {
-     "doc_number": "L24000325359",
-     "name": "FRANCIS MARION, LLC",
-     "status": "active",
-     "titles": [
-      "AP",
-      "RA"
-     ]
-    },
-    {
-     "doc_number": "P93000004878",
-     "name": "TRANSPORTATION CONSULTING & ACCOUNTING, INC.",
-     "status": "active",
-     "titles": [
-      "P"
-     ]
-    }
-   ]
-  },
   "p_cbb97b3e50e3": {
    "name": "Larry Mixon",
    "businesses": [
@@ -6416,24 +6270,8 @@
    "name": "Mark T Godwin",
    "businesses": [
     {
-     "doc_number": "L24000267901",
-     "name": "AGW SERVICES, LLC",
-     "status": "active",
-     "titles": [
-      "RA"
-     ]
-    },
-    {
      "doc_number": "L94354",
      "name": "MARK T. GODWIN, C.P.A., P.A.",
-     "status": "active",
-     "titles": [
-      "RA"
-     ]
-    },
-    {
-     "doc_number": "L25000002740",
-     "name": "WORLDWIDE WEBER LLC",
      "status": "active",
      "titles": [
       "RA"
@@ -6663,14 +6501,6 @@
      ]
     },
     {
-     "doc_number": "L26000151573",
-     "name": "CIV BOATS LLC",
-     "status": "active",
-     "titles": [
-      "MGR"
-     ]
-    },
-    {
      "doc_number": "P00000007823",
      "name": "FIRST LINKS, INC.",
      "status": "active",
@@ -6709,14 +6539,6 @@
      "status": "active",
      "titles": [
       "AMBR",
-      "MGR"
-     ]
-    },
-    {
-     "doc_number": "L26000280418",
-     "name": "PAMM C, LLC",
-     "status": "active",
-     "titles": [
       "MGR"
      ]
     },
@@ -7271,15 +7093,6 @@
      ]
     },
     {
-     "doc_number": "L26000247623",
-     "name": "DIRT PERFECT LLC",
-     "status": "active",
-     "titles": [
-      "MGR",
-      "RA"
-     ]
-    },
-    {
      "doc_number": "L04000051462",
      "name": "DIXIELAND FARMS OF MARIANNA, LLC",
      "status": "active",
@@ -7615,14 +7428,6 @@
      "status": "active",
      "titles": [
       "Pres"
-     ]
-    },
-    {
-     "doc_number": "L26000288716",
-     "name": "LUXURY OUTDOOR TRAVEL, LLC",
-     "status": "active",
-     "titles": [
-      "RA"
      ]
     },
     {
@@ -7962,33 +7767,6 @@
      ]
     },
     {
-     "doc_number": "L26000491850",
-     "name": "RAEP CENTURY WOODS PRESERVATION, LLC",
-     "status": "active",
-     "titles": [
-      "AMBR",
-      "MGR"
-     ]
-    },
-    {
-     "doc_number": "L26000491793",
-     "name": "RAEP COLLEGE PRESERVATION, LLC",
-     "status": "active",
-     "titles": [
-      "AMBR",
-      "MGR"
-     ]
-    },
-    {
-     "doc_number": "L26000491808",
-     "name": "RAEP HARBOUR PLACE PRESERVATION, LLC",
-     "status": "active",
-     "titles": [
-      "AMBR",
-      "MGR"
-     ]
-    },
-    {
      "doc_number": "L24000152503",
      "name": "RAEP HERITAGE, LLC",
      "status": "active",
@@ -8000,42 +7778,6 @@
     {
      "doc_number": "L24000152489",
      "name": "RAEP PRAIRIE OAKS, LLC",
-     "status": "active",
-     "titles": [
-      "AMBR",
-      "MGR"
-     ]
-    },
-    {
-     "doc_number": "L25000264190",
-     "name": "RAEP SHERWOOD OAKS, LLC",
-     "status": "active",
-     "titles": [
-      "AMBR",
-      "MGR"
-     ]
-    },
-    {
-     "doc_number": "L26000491901",
-     "name": "RAEP TIMBERS PRESERVATION, LLC",
-     "status": "active",
-     "titles": [
-      "AMBR",
-      "MGR"
-     ]
-    },
-    {
-     "doc_number": "L26000491885",
-     "name": "RAEP TRENTON PRESERVATION, LLC",
-     "status": "active",
-     "titles": [
-      "AMBR",
-      "MGR"
-     ]
-    },
-    {
-     "doc_number": "L26000491866",
-     "name": "RAEP WILSON WEST PRESERVATION, LLC",
      "status": "active",
      "titles": [
       "AMBR",
@@ -8415,13 +8157,6 @@
    "item": "check"
   },
   {
-   "person_key": "p_02dfe87609d2",
-   "cand_id": "615",
-   "date": "2023-03-23",
-   "amount": 250.0,
-   "item": "check"
-  },
-  {
    "person_key": "p_078b7fd312ce",
    "cand_id": "580",
    "date": "2022-01-28",
@@ -8608,13 +8343,6 @@
    "cand_id": "719",
    "date": "2026-03-05",
    "amount": 1000.0,
-   "item": "check"
-  },
-  {
-   "person_key": "p_1a6f4d0ffcff",
-   "cand_id": "577",
-   "date": "2022-01-04",
-   "amount": 500.0,
    "item": "check"
   },
   {
@@ -8882,13 +8610,6 @@
    "date": "2023-03-28",
    "amount": 50.0,
    "item": "cash"
-  },
-  {
-   "person_key": "p_392c8dd0bfe6",
-   "cand_id": "577",
-   "date": "2022-01-17",
-   "amount": 500.0,
-   "item": "check"
   },
   {
    "person_key": "p_392c8dd0bfe6",
@@ -9654,13 +9375,6 @@
    "item": "check"
   },
   {
-   "person_key": "p_806a40c89762",
-   "cand_id": "654",
-   "date": "2024-03-13",
-   "amount": -27.74,
-   "item": "refund"
-  },
-  {
    "person_key": "p_81a88a3a1c2d",
    "cand_id": "589",
    "date": "2022-05-03",
@@ -10039,13 +9753,6 @@
    "item": "check"
   },
   {
-   "person_key": "p_a9dc924f96f2",
-   "cand_id": "580",
-   "date": "2022-02-07",
-   "amount": 111.0,
-   "item": "check"
-  },
-  {
    "person_key": "p_aa5ae89e449c",
    "cand_id": "692",
    "date": "2025-03-03",
@@ -10120,13 +9827,6 @@
    "cand_id": "694",
    "date": "2025-02-18",
    "amount": 500.0,
-   "item": "check"
-  },
-  {
-   "person_key": "p_b16852ecbe58",
-   "cand_id": "638",
-   "date": "2023-10-22",
-   "amount": 100.0,
    "item": "check"
   },
   {
@@ -10331,13 +10031,6 @@
    "date": "2024-03-21",
    "amount": 1000.0,
    "item": "check"
-  },
-  {
-   "person_key": "p_cb8c2d8737c7",
-   "cand_id": "654",
-   "date": "2024-03-13",
-   "amount": -554.79,
-   "item": "refund"
   },
   {
    "person_key": "p_cbb97b3e50e3",
