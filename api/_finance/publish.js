@@ -171,8 +171,9 @@ async function publish(q, ws, uploadId, who) {
 }
 
 async function unpublish(q, ws, uploadId) {
-  const [u] = await q('select id, shape from finance.uploads where id = $1 and workspace_id = $2', [uploadId, ws]);
+  const [u] = await q('select id, shape, published_at from finance.uploads where id = $1 and workspace_id = $2', [uploadId, ws]);
   if (!u) throw bad('Upload not found.', 404);
+  if (!u.published_at) return {ok: true, removed: 0};  // never published: nothing public to take down
   const table = TABLE[u.shape];
   let n = 0;
   if (table) n = (await q(`delete from ${table} where upload_id = $1 returning id`, [u.id])).length;

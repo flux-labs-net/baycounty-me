@@ -90,6 +90,4 @@ create policy "public read" on budget_actuals for select using (true);
 drop trigger if exists budget_actuals_touch on budget_actuals;
 create trigger budget_actuals_touch before update on budget_actuals for each row execute function touch_updated_at();
 
--- Which finance files are published, and by whom.
-alter table finance.uploads add column if not exists published_at timestamptz;
-alter table finance.uploads add column if not exists published_by text;
+-- Which finance files are published, and by whom: 0048_finance_publish.sql (finance schema only, so the finance tests can apply it).
