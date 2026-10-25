@@ -402,3 +402,38 @@ struct AppDataPending: View {
         }
     }
 }
+
+/// The app icon's mark: Bay County's outline with a salmon dot for Panama City. Navy in light mode, light blue in dark.
+struct BayMark: View {
+    var body: some View {
+        ZStack {
+            BayOutline().fill(Brand.navy)
+            GeometryReader { g in
+                // Dot centre and size as fractions of the outline's box (traced from icon-1024.png).
+                let d = g.size.width * 0.16
+                Circle().fill(Brand.salmon)
+                    .frame(width: d, height: d)
+                    .position(x: g.size.width * 0.548, y: g.size.height * 0.633)
+            }
+        }
+        .aspectRatio(563.0 / 685.0, contentMode: .fit)
+        .accessibilityHidden(true)
+    }
+}
+
+/// Bay County's outline, traced from the app icon and scaled to fill its frame.
+struct BayOutline: Shape {
+    private static let traced: [(CGFloat, CGFloat)] = [
+        (698, 170), (793, 170), (790, 855), (775, 838), (760, 828), (720, 815), (700, 815), (680, 805),
+        (650, 780), (612, 735), (605, 715), (590, 712), (545, 690), (505, 670), (470, 645), (435, 610),
+        (400, 585), (350, 555), (300, 525), (230, 488), (233, 358), (360, 303), (696, 308),
+    ]
+    private static let points: [CGPoint] = traced.map { CGPoint(x: ($0.0 - 230) / 563, y: ($0.1 - 170) / 685) }
+
+    func path(in rect: CGRect) -> Path {
+        Path { p in
+            p.addLines(Self.points.map { CGPoint(x: rect.minX + $0.x * rect.width, y: rect.minY + $0.y * rect.height) })
+            p.closeSubpath()
+        }
+    }
+}

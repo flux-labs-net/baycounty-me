@@ -42,9 +42,9 @@ struct HomeView: View {
             .navigationTitle("Today")
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
-                    (Text("BayCounty").foregroundColor(.primary) + Text(".me").foregroundColor(Brand.salmon))
-                        .font(.headline.weight(.bold))
-                        .accessibilityLabel("BayCounty.me")
+                    // The app icon's mark, sized like an SF Symbol so it fits the toolbar's round button.
+                    Button { path.append(.about) } label: { BayMark().frame(height: 24) }
+                        .accessibilityLabel("About BayCounty.me")
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button { store.openSite("/alerts") } label: { Image(systemName: "bell") }
