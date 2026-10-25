@@ -42,7 +42,8 @@ def embed(eid):
     for l, o, d in EG.neighbors(eid):
         out = d == 'out'
         conns.append({'relation': l['relation'], 'label': EG.RELATION[l['relation']][0 if out else 1], 'direction': d,
-                      'other': {'entity_id': o['entity_id'], 'name': o['name'], 'kind': o['kind'], 'page_url': EG.page_url(o['entity_id'])},
+                      'other': {'entity_id': o['entity_id'], 'name': o['name'], 'kind': o['kind'], 'kind_label': o.get('label') or EG.KIND_LABEL[o['kind']],
+                                'page_url': EG.page_url(o['entity_id'])},
                       'amount': round(l['amount'], 2) if l['amount'] is not None else None, 'records': l['records'],
                       'first_date': EG._dates(l['dates'])[0], 'last_date': EG._dates(l['dates'])[1], 'detail': '; '.join(l['detail']) or None,
                       'source_url': l['source_url']})
@@ -66,7 +67,7 @@ def profile_section(eid, heading='Connections', sub='Everyone and everything thi
     return f'''<section class="tx-sec" id="pf" data-id="{e(eid)}"><div class="sec-hd"><h2 id="connections">{e(heading)}</h2><span class="muted">{e(sub)}</span></div>
     <div class="pf-net" id="pfNet" data-nolink></div>
     <div id="pfLive" class="pf-live small" hidden>Rows marked "checked by hand" come from name matches an editor confirmed against the public filing.</div>
-    <details class="pf-all"><summary>Every connection ({len(d["connections"]):,})</summary><div id="pfList" data-nolink></div></details>
+    <details class="pf-all"><summary>Every connection ({len({(c['relation'], c['direction'], c['other']['entity_id']) for c in d['connections']}):,})</summary><div id="pfList" data-nolink></div></details>
     <p class="note">{e(NOTE)} Individual campaign donors are named only when they run a registered business; others are counted in totals. <a href="/api/v1/entities/{e(eid)}">This profile in the API</a>.</p>
     <script type="application/json" id="pfData">{data}</script></section>'''
 
