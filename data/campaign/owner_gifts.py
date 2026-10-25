@@ -19,8 +19,13 @@ Registered-agent services (agents for 20+ businesses they don't run) don't count
 A name that matches only inside the same ZIP is counted (`held_zip_only`) but not published: it needs a person's check.
 
 Only matched gifts are written. Street addresses, occupations and the gifts of everyone else are never stored.
+
+Public ids. The Sunbiz person key is a hash of name + ZIP + street, so publishing it would let anyone who knows the
+name try Bay County's streets until one fits. Each owner is published under `o_` + HMAC-SHA256(OWNER_ID_KEY, person
+key) instead. OWNER_ID_KEY is a secret (GitHub repository secret of the same name; keep the same value or every
+/profile/owner/ link changes). Without it the script keeps the existing file rather than publish guessable ids.
 """
-import collections, csv, datetime, io, json, os, re, sys, time, urllib.request
+import collections, csv, datetime, hashlib, hmac, io, json, os, re, sys, time, urllib.request
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
@@ -30,6 +35,14 @@ from ids import person_case  # noqa: E402  (build_sunbiz puts data/entities on t
 
 OUT = os.path.join(HERE, 'owner_gifts.json')
 SUFFIX = {'JR', 'SR', 'II', 'III', 'IV'}
+KEY_ENV = 'OWNER_ID_KEY'
+
+
+def public_id(person_key, key):
+    """The owner's public id: keyed, so it can't be traced back to the address that went into the person key."""
+    return 'o_' + hmac.new(key.encode(), person_key.encode(), hashlib.sha256).hexdigest()[:16]
+
+
 ITEM = {'CH': 'check', 'CA': 'cash', 'IK': 'in-kind', 'MO': 'money order', 'LO': 'loan', 'RE': 'refund'}
 
 
@@ -210,15 +223,28 @@ def build(work):
     }
 
 
+def publish(res, key):
+    """Swap Sunbiz person keys for keyed public ids before anything is written."""
+    m = {pk: public_id(pk, key) for pk in res['owners']}
+    res['owners'] = dict(sorted((m[pk], o) for pk, o in res['owners'].items()))
+    gifts = [dict({'owner_id': m[g.pop('person_key')]}, **g) for g in res['gifts']]
+    res['gifts'] = sorted(gifts, key=lambda g: (g['owner_id'], int(g['cand_id']), g['date'] or ''))
+    return res
+
+
 def main():
     work = sys.argv[1] if len(sys.argv) > 1 else os.path.join(os.environ.get('RUNNER_TEMP', '/tmp'), 'soe_exports')
+    key = os.environ.get(KEY_ENV) or ''
+    if len(key) < 32:
+        print(f'::warning title=Owner gifts::{KEY_ENV} is not set (or shorter than 32 characters); keeping {os.path.relpath(OUT, ROOT)}')
+        return
     camps = campaigns()
     try:
         fetch(work, camps)
     except Exception as e:
         print(f'SOE exports unavailable ({e}); keeping {os.path.relpath(OUT, ROOT)}')
         return
-    res = build(work)
+    res = publish(build(work), key)
     if not res['gifts'] and os.path.exists(OUT):
         print('No matches (exports empty?); keeping the existing file')
         return

@@ -110,6 +110,7 @@ Where each secret lives. Values are never committed.
 | `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` | GitHub secret | watch-agendas (file storage) |
 | `RESEND_FULL_KEY` | GitHub secret | admin emails from every workflow; watch-agendas reads the agenda inbox |
 | `ADMIN_EMAILS` | GitHub secret | who gets workflow problem emails |
+| `OWNER_ID_KEY` | GitHub secret | keys public business-owner ids (`owner:o_…`) so they can't be traced to an address; never change it (every owner profile link would change) |
 | `VERCEL_DEPLOY_HOOK` | GitHub secret | refresh workflows deploy bot commits (Vercel skips Git deploys by non-members) |
 | `ANTHROPIC_API_KEY` | GitHub secret | watch-agendas reads posted agendas into items |
 | `POP_HOST`, `POP_USER`, `POP_PASS` | GitHub secret (optional) | a POP3 agenda mailbox |

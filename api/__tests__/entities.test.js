@@ -42,6 +42,8 @@ test('individual donors appear only when they run a business', () => {
   const rows = JSON.parse(fs.readFileSync(path.join(PUB, 'downloads', 'owner-gifts.json'), 'utf8'));
   for (const r of rows) {
     assert.ok(r.businesses && r.business_doc_numbers, `${r.donor_id} has no business`);
+    // keyed ids only: the Sunbiz person key (p_...) is a hash of name + ZIP + street and can be traced to an address
+    assert.match(r.donor_id, /^owner:o_[0-9a-f]{16}$/, `${r.donor_id} is not a keyed owner id`);
     for (const k of Object.keys(r)) assert.ok(!/address|occupation|zip|street/i.test(k), `owner-gifts must not publish ${k}`);
   }
 });
