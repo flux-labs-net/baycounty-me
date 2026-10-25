@@ -32,6 +32,7 @@ CSS = '''
 .ask-m{display:flex;gap:10px;align-items:flex-start;max-width:100%}
 .ask-m.me{justify-content:flex-end}
 .ask-m.me .ask-b{background:var(--navy);color:var(--on-navy);border-radius:16px 16px 4px 16px;padding:10px 14px;max-width:85%;white-space:pre-wrap}
+.ask-m.me .ask-b a{color:inherit;text-decoration:underline}
 .ask-m.bot .ask-b{flex:1;min-width:0;line-height:1.6;font-size:.95rem}
 .ask-av{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--tint-teal);color:var(--teal)}
 .ask-b p{margin:0 0 .7em}.ask-b p:last-child{margin-bottom:0}
@@ -158,7 +159,7 @@ JS = r'''
   function bubble(role, html) {
     const d = document.createElement('div');
     d.className = 'ask-m ' + (role === 'user' ? 'me' : 'bot');
-    d.innerHTML = role === 'user' ? `<div class="ask-b">${esc(html)}</div>` : `${AV}<div class="ask-b">${html}</div>`;
+    d.innerHTML = role === 'user' ? `<div class="ask-b" data-nolink>${esc(html)}</div>` : `${AV}<div class="ask-b">${html}</div>`;
     log.appendChild(d);
     return d.querySelector('.ask-b');
   }
