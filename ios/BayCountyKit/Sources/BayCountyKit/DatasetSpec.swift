@@ -67,6 +67,8 @@ public struct DatasetSpec: Sendable {
                               filters: ["cra", "status", "category", "district"], page: "public-money/cra-spending"),
         "cra-agencies": .init(.whereItGoes, "percent", title: ["cra"], subtitle: ["city", "base_year"], detail: "sunset_basis",
                               amount: ["increment_fy2025"], filters: ["city"], page: "public-money/cra-tax-increment"),
+        "cra-increment-checks": .init(.whereItGoes, "checkmark.seal", title: ["figure"], subtitle: ["fiscal_year"],
+                                      amount: ["official_figure", "estimate"], page: "public-money/cra-tax-increment"),
         "cra-tax-increment": .init(.whereItGoes, "chart.bar.xaxis", title: ["cra"], subtitle: ["fy", "basis"],
                                    amount: ["increment"], badge: "scenario", filters: ["cra", "scenario", "fy"], page: "public-money/cra-tax-increment"),
         "sales-tax-projects": .init(.whereItGoes, "road.lanes", title: ["name"], subtitle: ["government", "category"],
