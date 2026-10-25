@@ -8,7 +8,7 @@ donors are never named) and the recorded votes that approved its contracts with 
 Also writes /data/vendor-slugs.json ({"names": {spelling: id}, "ids": {id: name}}) for page scripts.
 """
 import html, json, os, re, sys
-from collections import defaultdict
+from collections import Counter, defaultdict
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(HERE, '..', 'data')
@@ -137,12 +137,17 @@ def write_slugs(out_dir):
 def index_page(out_dir):
     write_slugs(out_dir)
     P = build()
-    rows = []
+    from ui import dir_card, directory, avatar, tone_of
+    cards, kinds = [], Counter()
     for vid, p in sorted(P.items(), key=lambda kv: -kv[1]['sort']):
-        srcs = ', '.join(SHORT[k] for k, _, _ in SRC if p['cnt'].get(k))
-        rows.append(f'''<tr{data_g(*p["gk"])} data-n="{e((p["v"]["name"] + " " + " ".join(p["v"]["aliases"])).lower())}"><th scope="row"><a href="{BASE}/{vid}">{e(p["v"]["name"])}</a>{' <span class="badge warn vd-gift" title="This business gave to a local campaign">campaign gifts</span>' if p['gifts'] else ''}<small>{e(", ".join(gname(g) for g in p["govs"]))}</small></th>
-      <td class="num">{money(p["awarded"]) if p["awarded"] else "—"}</td><td class="num">{money(p["paid"]) if p["paid"] else "—"}</td><td class="num">{money(p["tot"].get("cra")) if p["tot"].get("cra") else "—"}</td>
-      <td class="num">{len(p["recs"])}</td><td class="small">{e(srcs)}</td></tr>''')
+        line = ' · '.join(x for x in [f'Awarded {money(p["awarded"])}' if p['awarded'] else '', f'Paid {money(p["paid"])}' if p['paid'] else '',
+                                      f'CRA {money(p["tot"]["cra"])}' if p['tot'].get('cra') else '', 'Gave to campaigns' if p['gifts'] else ''] if x)
+        ks = [k for k, ok in (('contract', p['awarded']), ('paid', p['paid']), ('cra', p['tot'].get('cra')), ('gift', p['gifts'])) if ok]
+        kinds.update(ks)
+        n = len(p['recs'])
+        cards.append(dir_card(f'{BASE}/{vid}', p['v']['name'], line, e(', '.join(gname(g) for g in p['govs'][:2])) + (f' <b class="ui-more">+{len(p["govs"]) - 2} more</b>' if len(p['govs']) > 2 else ''), f'{n} record{"s" if n != 1 else ""}',
+                              ' '.join(ks), '', int(p['sort']), av=avatar(p['v']['name'], tone_of(p['v']['name']), 'store'),
+                              also=' '.join(p['v']['aliases']), city=data_g(*p['gk'])))
     ng = sum(1 for p in P.values() if p['gifts'])
     gk = [k for k in KEYS if any(k in p['gk'] for p in P.values())]
     per = lambda f: by_city({'': f(list(P.values())), **{k: f([p for p in P.values() if k in p['gk']]) for k in gk}})
@@ -156,8 +161,8 @@ def index_page(out_dir):
       <li><b>Gifts are listed only for businesses.</b> {e(NOTE)}</li></ol></div></section>
   <div class="kpis"><div class="kpi"><span class="eyebrow">Vendors with a page</span><span class="v"{per(len)}>{len(P)}</span><span class="s">2 or more records, or a campaign gift</span></div>
     <div class="kpi"><span class="eyebrow">Gave to a campaign</span><span class="v"{per(lambda ps: sum(1 for p in ps if p['gifts']))}>{ng}</span><span class="s">businesses that also hold local money</span></div></div>
-  <section class="tx-sec"><div class="sec-hd"><h2 id="all">Every vendor</h2><span class="muted">Largest first</span></div>
-    <div class="tablewrap"><table class="tx-table vd-table" id="vdT" data-tt-sort="1:desc"><thead><tr><th scope="col">Vendor</th><th scope="col" class="num">Awarded</th><th scope="col" class="num">Paid (registers)</th><th scope="col" class="num">CRA</th><th scope="col" class="num">Records</th><th scope="col">Found in</th></tr></thead><tbody data-city-empty="No vendors with records from {{city}} yet.">{"".join(rows)}</tbody></table></div>
+  <section class="tx-sec"><div class="sec-hd"><h2 id="all">Every vendor</h2><span class="muted">{len(cards)} companies and groups</span></div>
+    <div data-city-empty="No vendors with records from {{city}} yet.">{directory(cards, "Vendors", [('', 'Every vendor', len(cards)), ('contract', 'Contracts', kinds['contract']), ('paid', 'Paid', kinds['paid']), ('cra', 'CRA', kinds['cra']), ('gift', 'Gave to campaigns', kinds['gift'])], (), 'Search a company or any spelling of it', (('c', 'Largest first'), ('name', 'A to Z')), csv='baycounty-vendors', csv_head='vendor,money,governments,records,link')}</div>
     <p class="note">Awarded adds contract awards and emergency purchases. Paid adds the check-register and tourism-agency payment totals shown in each source; those lists cover only part of each year. CRA counts only records that the CRA ledger includes in its totals. Change orders are on each vendor's page.</p></section>
 </div>
 <link rel="stylesheet" href="/assets/tax.css">'''

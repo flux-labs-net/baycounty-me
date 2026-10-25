@@ -864,3 +864,51 @@ a.ui-person:hover b{color:var(--blue)}
   .ui-id{flex-direction:column;gap:10px}
   :root .ui-badge,:root .tx-top.ui-hero .ui-badge{width:44px;height:44px;border-radius:13px;font-size:22px;margin-top:0}
 }
+
+/* directories: search, filters and chips over a grid of cards (ui.directory) */
+.ui-find{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.ui-q{flex:1 1 280px;display:flex;align-items:center;gap:10px;min-height:48px;padding:0 16px;border-radius:14px;background:var(--surface);box-shadow:var(--ui-shadow);color:var(--muted);min-width:0}
+.ui-q:focus-within{box-shadow:var(--ui-ring)}
+.ui-q input{flex:1;min-width:0;border:0;background:none;color:var(--ink);font:400 .95rem var(--f-body);min-height:46px;outline:none}
+.ui-find select{flex:0 1 220px;min-width:0;min-height:48px;padding:0 40px 0 14px;border-radius:14px;border:0;box-shadow:var(--ui-shadow);background-color:var(--surface);font:500 .9rem var(--f-body);color:var(--ink)}
+.ui-chips{display:flex;flex-wrap:wrap;gap:8px}
+.ui-chip{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 14px;border-radius:999px;border:0;background:var(--surface);box-shadow:var(--ui-shadow);color:var(--ink);font:500 .88rem var(--f-body);cursor:pointer;transition:background-color .15s ease-out,scale .15s ease-out}
+.ui-chip b{font-weight:600;color:var(--muted);font-size:.8rem;font-variant-numeric:tabular-nums}
+.ui-chip:hover{background:color-mix(in srgb,var(--blue) 8%,var(--surface))}
+.ui-chip:active{scale:.96}
+.ui-chip[aria-pressed="true"]{background:var(--navy);color:var(--on-navy)}
+.ui-chip[aria-pressed="true"] b{color:inherit;opacity:.75}
+.ui-dir-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:32px}
+.ui-link{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:0 10px;margin-right:-10px;border:0;border-radius:10px;background:none;color:var(--blue);font:500 .86rem var(--f-body);cursor:pointer}
+.ui-link:hover{background:var(--sunken)}
+.ui-dir{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:12px}
+.ui-dc{position:relative;display:flex;align-items:center;gap:14px;min-width:0;padding:14px 16px;border-radius:20px;background:var(--surface);box-shadow:var(--ui-shadow);transition:box-shadow .15s ease-out}
+.ui-dc[hidden],.ui-dc.ui-off{display:none}
+.ui-dc:hover{box-shadow:var(--ui-ring)}
+.ui-dc .ui-av{margin:0;width:46px;height:46px;flex:none;font-size:16px}
+.ui-dc-t{display:flex;flex-direction:column;min-width:0;flex:1}
+.ui-dc-a{font-weight:600;font-size:.98rem;color:var(--ink);text-decoration:none;overflow-wrap:anywhere}
+.ui-dc-a::after{content:"";position:absolute;inset:0;border-radius:inherit}
+.ui-dc-a:focus-visible{outline:none}.ui-dc:has(.ui-dc-a:focus-visible){box-shadow:var(--ui-ring)}
+.ui-dc:hover .ui-dc-a{color:var(--blue)}
+.ui-dc-t small{font-size:.82rem;color:var(--muted);line-height:1.4;text-wrap:pretty}
+.ui-dc-w{display:flex;gap:5px;align-items:flex-start;margin-top:4px;font-size:.8rem;color:var(--muted)}
+.ui-dc-w .ico{margin-top:.12em;color:var(--blue)}
+.ui-dc-w a{position:relative;z-index:1;color:var(--blue);text-decoration:none}
+.ui-dc-w a:hover{text-decoration:underline}
+.ui-dc-n{flex:none;align-self:center;font:600 .76rem var(--f-body);padding:4px 9px;border-radius:999px;background:var(--sunken);color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+@media (max-width:560px){.ui-dir{grid-template-columns:minmax(0,1fr);gap:8px}.ui-find select{flex:1 1 calc(50% - 5px)}.ui-dc{padding:12px 14px}}
+/* a simple-version box without a figure: on wide screens the steps sit side by side and fill the card */
+@media (min-width:900px){
+  :root .ui .explain:not(:has(.ex-fig)) .ex-txt{max-width:none}
+  .ui .explain:not(:has(.ex-fig)) .ex-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px 24px;max-width:none}
+  .ui .explain:not(:has(.ex-fig)) .ex-steps > li{padding:40px 0 0}
+  .ui .explain:not(:has(.ex-fig)) .ex-steps > li::before{top:0}
+}
+.ui-dirbox{display:flex;flex-direction:column;gap:12px}
+.ui-dc{align-items:flex-start}
+.ui-dc .ui-av{align-self:center}
+.ui-dc-n{align-self:flex-start;margin-top:2px}
+.ui-dc .ui-av{align-self:flex-start}
+.ui-more{font-weight:500;white-space:nowrap;color:var(--muted)}
+.ui-dir-govs{margin:8px 0 20px}

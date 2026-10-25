@@ -190,20 +190,48 @@ def link_name_vendor(name):
     return vendor(name)
 
 
+def _kinds(p):
+    """elected / candidate / staff, from where each role came from (a person can be several)."""
+    ks = []
+    for r in p.get('roles') or []:
+        src, role = r.get('source'), (r.get('role') or '').lower()
+        if src == 'candidates_2026' or role.startswith('2026 candidate'):
+            ks.append('candidate')
+        elif src in ('votes', 'officials-pay', 'campaign') and not role.startswith('former'):
+            ks.append('elected')
+        elif src == 'salaries':
+            ks.append('staff')
+    if 'elected' in ks:
+        ks = [k for k in ks if k != 'staff']  # an official's pay row is not a staff job
+    return [k for k in ('elected', 'candidate', 'staff') if k in ks] or ['elected']
+
+
 def people_index():
+    from ui import dir_card, directory, ico
     G = EG.build()
-    rows = []
+    cards, kinds, govs = [], Counter(), {}
+    total_links = 0
     for p in sorted(_people(), key=lambda p: (p['name'].split()[-1], p['name'])):
         x = G.ents['person:' + p['id']]
         n = len(EG.neighbors('person:' + p['id']))
-        rows.append(f'<tr data-n="{e((x["name"] + " " + " ".join(x["aliases"]) + " " + (x["subtitle"] or "")).lower())}"><th scope="row"><a href="/people/{e(p["id"])}">{e(x["name"])}</a><small>{e(x["subtitle"] or "")}</small></th>'
-                    f'<td>{" · ".join(gov_link(g) for g in (p.get("gov_ids") or []))}</td><td class="num">{n}</td></tr>')
+        total_links += n
+        ks = _kinds(p)
+        kinds.update(ks)
+        gids = [g for g in (p.get('gov_ids') or []) if g]
+        for g in gids:
+            if 'gov:' + g in G.ents:
+                govs[g] = G.ents['gov:' + g]['name']
+        cards.append(dir_card(f'/people/{p["id"]}', x['name'], x['subtitle'] or '', ' · '.join(gov_link(g) for g in gids),
+                              f'{n} link{"s" if n != 1 else ""}', ' '.join(ks), ' '.join(gids), n, also=' '.join(x['aliases'])))
+    chips = [('', 'Everyone', len(cards)), ('elected', 'Elected', kinds['elected']), ('candidate', '2026 candidates', kinds['candidate']), ('staff', 'Department leaders', kinds['staff'])]
+    k = lambda icon, tone, label, v, sub: f'<div class="kpi ui-k"><span class="kh">{ico(icon, tone)}<span class="eyebrow">{label}</span></span><span class="v">{v}</span><span class="s">{sub}</span></div>'
     return f'''<div class="page tax">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Connections · People</span><h1>Officials and candidates</h1>
     <p class="lede">One page for each elected official, department leader and 2026 candidate in these records: where they serve, campaign money from businesses and groups, how they voted, and who they connect to.</p></div>
     <div class="stamp"><a class="pill" href="/who-runs-bay-county">Who runs Bay County</a><a class="pill" href="/connections">Connections network</a></div></header>
-  <section class="tx-sec"><div class="sec-hd"><h2 id="all">Everyone</h2><span class="muted">{len(rows)} people</span></div>
-    <div class="tablewrap"><table class="tx-table vd-table" data-tt-sort="0:asc"><thead><tr><th scope="col">Person</th><th scope="col">Government</th><th scope="col" class="num">Connections</th></tr></thead><tbody>{"".join(rows)}</tbody></table></div>
+  <div class="kpis">{k("users", "blue", "Elected officials", kinds["elected"], f"On {len(govs)} boards and offices")}{k("flag", "salmon", "2026 candidates", kinds["candidate"], "On the November 3 ballot")}{k("briefcase", "teal", "Department leaders", kinds["staff"], "Managers, clerks and chiefs")}{k("network", "amber", "Connections", f"{total_links:,}", "Companies, donors, boards and votes")}</div>
+  <section class="tx-sec"><div class="sec-hd"><h2 id="all">Everyone</h2><span class="muted">{len(cards)} people</span></div>
+    {directory(cards, "People", chips, sorted(govs.items(), key=lambda kv: kv[1]), "Search a name, seat or government", csv="baycounty-people")}
     <p class="note">Only elected officials, department leaders and candidates have a page here. Nonprofit board members and businesses have a profile reached from the nonprofit, company or <a href="/connections">Connections</a> pages. Individual campaign donors are named only when they run a registered business; others are counted in totals.</p></section>
 </div>
 {ASSETS}'''

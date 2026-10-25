@@ -18,6 +18,8 @@
   const group = (rows, key) => rows.reduce((m, r) => (r[key] && (m.get(r[key]) || m.set(r[key], []).get(r[key])).push(r), m), new Map());
   const HOA = 'Homeowner or condo association';
   const PAGE = 25;
+  const ti = (i, t) => `<span class="ui-ti t-${t}"><span class="ico i-${i}" aria-hidden="true"></span></span>`;
+  const ICON = {gov: ti('receipt', 'salmon'), donor: ti('megaphone', 'amber'), multi: ti('network', 'teal'), off: ti('user', 'blue')};
   const LIST_FIELDS = 'nonprofit_id,name,ein,city,kind,total_revenue,irs_revenue,fdacs_revenue,gov_payment_records,gov_dollars_in_records,paid_by,shares_board_with,fdacs_registration,fdacs_status,board_members_listed';
 
   // ---------- data ----------
@@ -101,7 +103,7 @@
       {id: 'donor', n: num(don.length), t: 'Board ties to campaign money', s: 'Board members run businesses that gave ' + big(S.people.reduce((a, p) => a + p.gifts, 0)) + ' to local campaigns'},
       {id: 'multi', n: num(multiN), t: 'People on several boards', s: 'Names on two or more current boards'}];
     if (S.offRows.length) cards.push({id: 'off', n: num(new Set(S.offRows.map(r => r.official_id)).size), t: 'Officials on boards', s: 'Checked by hand against officials and candidates'});
-    $('#npCards').innerHTML = cards.map(c => `<button type="button" class="np-card" data-card="${c.id}" aria-pressed="false"><b>${c.n}</b><strong>${esc(c.t)}</strong><span>${esc(c.s)}</span></button>`).join('');
+    $('#npCards').innerHTML = cards.map(c => `<button type="button" class="np-card" data-card="${c.id}" aria-pressed="false">${ICON[c.id] || ''}<b>${c.n}</b><strong>${esc(c.t)}</strong><span>${esc(c.s)}</span></button>`).join('');
     const kinds = [...new Set(S.orgs.map(x => x.kind).filter(k => k && k !== HOA))].sort();
     $('#npK').innerHTML = '<option value="">All types</option>' + kinds.map(k => `<option>${esc(k)}</option>`).join('') + `<option>${HOA}</option>`;
     $('#npC').innerHTML = '<option value="">All cities</option>' + [...new Set(S.orgs.map(x => x.city).filter(Boolean))].sort().map(c => `<option>${esc(c)}</option>`).join('');

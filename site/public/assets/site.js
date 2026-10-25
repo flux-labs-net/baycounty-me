@@ -381,6 +381,44 @@ const go = () => {
 };
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go); else go();
 })();
+/* Directories (ui.directory): search box, government filter, sort, chips and CSV over a grid of cards. */
+(() => {
+const go = () => document.querySelectorAll('[data-ui-dir]').forEach(grid => {
+  const root = grid.closest('section') || grid.parentNode;
+  const q = root.querySelector('[data-dir-q]'), g = root.querySelector('[data-dir-g]'), s = root.querySelector('[data-dir-s]');
+  const chips = [...root.querySelectorAll('.ui-chip[data-k]')], count = root.querySelector('[data-dir-count]'), none = root.querySelector('[data-dir-none]');
+  const cards = [...grid.children];
+  let kind = '';
+  const words = t => (t || '').toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g, '').split(/\s+/).filter(Boolean);
+  const run = () => {
+    const w = words(q && q.value), gv = g ? g.value : '';
+    cards.forEach(c => {
+      const ok = w.every(x => (c.dataset.s || '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '').includes(x))
+        && (!kind || (' ' + c.dataset.k + ' ').includes(' ' + kind + ' ')) && (!gv || (' ' + c.dataset.gv + ' ').includes(' ' + gv + ' '));
+      c.classList.toggle('ui-off', !ok);
+    });
+    const by = s ? s.value : 'c';
+    cards.slice().sort((a, b) => by === 'name' ? a.dataset.n.localeCompare(b.dataset.n) : by === 'az' ? a.dataset.n.split(' ').pop().localeCompare(b.dataset.n.split(' ').pop()) || a.dataset.n.localeCompare(b.dataset.n)
+      : (+b.dataset.c - +a.dataset.c) || a.dataset.n.localeCompare(b.dataset.n)).forEach(c => grid.appendChild(c));
+    count_();
+  };
+  const count_ = () => {
+    const n = cards.filter(c => !c.hidden && !c.classList.contains('ui-off')).length;
+    if (count) count.textContent = n === cards.length ? `${cards.length.toLocaleString('en-US')} shown` : `${n.toLocaleString('en-US')} of ${cards.length.toLocaleString('en-US')} shown`;
+    if (none) none.hidden = n > 0;
+  };
+  chips.forEach(b => b.addEventListener('click', () => { kind = b.dataset.k; chips.forEach(x => x.setAttribute('aria-pressed', x === b)); run(); }));
+  [q, g, s].forEach(el => el && el.addEventListener(el.tagName === 'INPUT' ? 'input' : 'change', run));
+  const csvBtn = root.querySelector('[data-dir-csv]');
+  if (csvBtn) csvBtn.addEventListener('click', () => {
+    const rows = cards.filter(c => !c.hidden && !c.classList.contains('ui-off')).map(c => { const a = c.querySelector('.ui-dc-a'); return [a.textContent.trim(), (c.querySelector('small') || {}).textContent || '', ((c.querySelector('.ui-dc-w') || {}).textContent || '').trim(), c.dataset.c, a.href]; });
+    if (window.TT) window.TT.csv(csvBtn.dataset.dirCsv, csvBtn.dataset.head.split(','), rows);
+  });
+  new MutationObserver(count_).observe(grid, {subtree: true, attributes: true, attributeFilter: ['hidden']});  // the government bar hides cards too
+  run();
+});
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go); else go();
+})();
 
 (() => {
   const URLRE = /https?:\/\/[^\s<>"']+/g, SKIP = new Set(['A','SCRIPT','STYLE','TEXTAREA','TITLE','OPTION','INPUT','SELECT','CODE','PRE']);

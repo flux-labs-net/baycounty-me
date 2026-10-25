@@ -333,21 +333,27 @@ def _connections(key, short):
 
 
 def govs_index():
+    from ui import dir_card, avatar
     ps = all_profiles()
-    cards = ''
+    cards = []
+    look = {'county': ('Bay County government', 'map', 'blue'), 'schools': ('School district', 'book', 'amber'), 'city': ('City', 'city', 'teal')}
     for p in ps:
         b = p.get('budget') or {}
+        kind, icon, tone = look.get(p['kind'], look['city'])
         facts = [f'{p["population"]:,} residents' if p.get('population') and p['kind'] == 'city' else '',
                  f'{money(b["total"])} budget' if b.get('total') else '',
                  (f'{b["mills"]:g} mills' if b.get('mills') else 'no city property tax') if p['kind'] == 'city' else '',
-                 f'{(p.get("votes") or {}).get("n", 0)} votes recorded']
-        cards += f'''<a class="topic" href="/governments/{p["slug"]}"><span class="eyebrow">{e("County" if p["kind"] == "county" else "Schools" if p["kind"] == "schools" else "City")}</span><h3>{e(p["short"])}</h3><p>{e(" · ".join(x for x in facts if x))}</p><span class="t-stat"><b>{money((p.get("debt") or {}).get("total"))}</b> in debt</span></a>'''
+                 f'{money((p.get("debt") or {}).get("total"))} in debt' if (p.get("debt") or {}).get("total") else '']
+        n = (p.get("votes") or {}).get("n", 0)
+        cards.append(dir_card(f'/governments/{p["slug"]}', p['short'], ' · '.join(x for x in facts if x), '', f'{n:,} votes' if n else kind,
+                              av=avatar(p['short'], tone, icon)))
+    cards = ''.join(cards)
     return f'''<div class="page tax">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Governments</span><h1>Bay County's local governments</h1>
     <p class="lede">One page for each government: who runs it, its budget and tax rate, debt, audit findings, votes, contracts and projects. Pick yours, or compare them side by side.</p></div>
     <div class="stamp"><a class="pill" href="/compare">Compare governments</a></div></header>
   <h2 class="sr">Every local government</h2>
-  <div class="topics">{cards}</div>
+  <div class="ui-dir ui-dir-govs">{cards}</div>
   <p class="note">Bay County residents pay the county and school district, and city residents also pay their city. Unincorporated areas are served by the county alone. <a href="/my-address/">Find yours by address</a>.</p>
 </div>
 <link rel="stylesheet" href="/assets/tax.css">'''
