@@ -89,7 +89,7 @@ SECTION_LOOK = {'Governments': ('county', 'blue'), 'Taxes': ('receipt', 'amber')
 # each page's badge icon (its tone comes from its menu section)
 PAGE_ICON = {
     '/who-runs-bay-county': 'users', '/governments': 'county', '/compare': 'compare',
-    '/my-address': 'pin', '/public-money/tax-dollars': 'receipt', '/public-money/fees-and-bills': 'drop',
+    '/my-address': 'pin', '/ask': 'bulb', '/public-money/tax-dollars': 'receipt', '/public-money/fees-and-bills': 'drop',
     '/public-money/exemptions': 'home', '/public-money/tourist-tax': 'sun', '/public-money/amendment-3': 'vote',
     '/public-money/budget-explorer': 'wallet', '/public-money/budget-compare': 'trend', '/public-money/checkbook': 'wallet', '/public-money/budget-tracker': 'columns', '/public-money/cra-spending': 'columns', '/public-money/sales-tax-projects': 'crane',
     '/public-money/hurricane-michael': 'storm', '/public-money/debt': 'dollar', '/public-money/map': 'map',

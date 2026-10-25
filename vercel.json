@@ -6,6 +6,10 @@
     "api/mcp.js": {
       "includeFiles": "data/campaign/vendor_matches.json"
     },
+    "api/chat.js": {
+      "maxDuration": 60,
+      "includeFiles": "data/campaign/vendor_matches.json"
+    },
     "api/finance.js": {
       "maxDuration": 60
     },

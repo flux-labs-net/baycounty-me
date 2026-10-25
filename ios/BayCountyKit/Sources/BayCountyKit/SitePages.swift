@@ -54,6 +54,7 @@ public enum SitePages {
         "/glossary": .native("Glossary"),
         "/updates": .native("What's new"),
         "/search": .native("Search tab"),
+        "/ask": .web("Ask chatbot; answers stream from /api/chat, which uses the MCP tools"),
         "/about": .native("About"),
         "/privacy": .web("privacy page"),
         "/people": .native("People"),

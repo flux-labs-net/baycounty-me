@@ -391,4 +391,5 @@ module.exports = async (req, res) => {
 module.exports.normVendor = normVendor;
 module.exports.vendorMatch = vendorMatch;
 module.exports.call = call;
+module.exports.TOOLS = TOOLS;
 module.exports.handle = handle;
