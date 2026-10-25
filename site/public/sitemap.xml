@@ -1008,7 +1008,7 @@
   </url>
   <url>
     <loc>https://baycounty.me/public-money/amendment-3</loc>
-    <lastmod>2026-10-20</lastmod>
+    <lastmod>2026-10-25</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/public-money/budget-compare</loc>
@@ -1021,6 +1021,10 @@
   <url>
     <loc>https://baycounty.me/public-money/cra-spending</loc>
     <lastmod>2026-10-24</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/public-money/cra-tax-increment</loc>
+    <lastmod>2026-10-25</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/public-money/exemptions</loc>

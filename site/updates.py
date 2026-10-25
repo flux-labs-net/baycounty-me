@@ -9,6 +9,9 @@ from datetime import datetime, timezone
 import html
 
 CHANGES = [
+    {'date': '2026-10-25', 'title': 'How much property tax goes to the CRAs',
+     'text': "A new page estimates how much property tax Bay County and the cities pay to the seven Community Redevelopment Agencies each year: about $28.7M in FY2025, $25.8M of it from Bay County and three-quarters of it to Panama City Beach's Front Beach Road CRA. It shows who pays, what has been paid since FY2003, sunset dates and what could still be paid under three growth scenarios, checked against the county's own budget figures. The method and the missing years are on the page.",
+     'pages': ['/public-money/cra-tax-increment', '/public-money/tax-dollars', '/public-money/amendment-3', '/governments', '/open-data', '/developers']},
     {'date': '2026-10-25', 'title': 'Fewer pages, more on each government',
      'text': "Each government's page now carries its whole budget (every fund and department, and what each service costs per resident), every debt and bond, every audit finding from the last three years, and its savings ideas. Compare shows the side-by-side totals, including cost per resident by service. Tourism agency payments moved onto the Tourist tax page, county officers and officials' pay onto People, and the money map into Connections as Donors and votes. The old pages send you to the new spot.",
      'pages': ['/governments', '/compare', '/public-money/tourist-tax', '/people', '/connections', '/public-money/tax-dollars']},

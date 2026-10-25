@@ -8,6 +8,7 @@ const PAGES = {
   '/my-address': {datasets: ['tax-districts', 'property-tax-rates', 'fees-assessments', 'cra-payments', 'property-tax-exemptions', 'meetings'],
     note: 'Per-parcel lookups (exemptions, districts) are not in the API yet.'},
   '/public-money/cra-spending': {datasets: ['cra-payments']},
+  '/public-money/cra-tax-increment': {datasets: ['cra-agencies', 'cra-tax-increment', 'cra-increment-checks', 'property-tax-rates']},
   '/public-money/tax-dollars': {datasets: ['property-tax-rates', 'tax-districts', 'budget-detail']},
   '/public-money/amendment-3': {datasets: ['property-tax-rates', 'tax-districts', 'property-tax-exemptions']},
   '/public-money/hurricane-michael': {datasets: ['fema-michael-projects']},
