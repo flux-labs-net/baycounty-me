@@ -11,7 +11,7 @@ CSS = r"""
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bar:#5F92E0;--ok:#5BC98E;--warn:#F2B661;--bad:#FF8C82}}
 :root[data-theme="dark"]{--bar:#5F92E0;--ok:#5BC98E;--warn:#F2B661;--bad:#FF8C82}
 body{display:block}
-.ad{max-width:1180px;margin:0 auto;padding:20px 16px 64px}
+.cp{max-width:1180px;margin:0 auto;padding:20px 16px 64px}
 .tabs{display:flex;gap:4px;flex-wrap:wrap;margin:0 0 18px}
 .tabs button{border:1px solid transparent;background:none;color:var(--muted);font:500 .9rem var(--f-body);padding:8px 14px;border-radius:8px;cursor:pointer}
 .tabs button[aria-selected="true"]{background:var(--surface);border-color:var(--line);color:var(--ink)}
@@ -143,10 +143,10 @@ details.ag summary{cursor:pointer;color:var(--blue)} details.ag pre{white-space:
 [hidden]{display:none!important}
 
 /* layout + menu: side menu from 960px, top bar and full-screen menu below */
-.ad{max-width:1320px}
-.ad-shell{display:grid;grid-template-columns:236px minmax(0,1fr);gap:32px;align-items:start}
-.ad-main{min-width:0}
-.ad-h{font:600 1.45rem var(--f-display);letter-spacing:-.015em;margin:4px 0 16px}
+.cp{max-width:1320px}
+.cp-shell{display:grid;grid-template-columns:236px minmax(0,1fr);gap:32px;align-items:start}
+.cp-main{min-width:0}
+.cp-h{font:600 1.45rem var(--f-display);letter-spacing:-.015em;margin:4px 0 16px}
 .an{position:sticky;top:16px;max-height:calc(100vh - 32px);overflow-y:auto;display:flex;flex-direction:column;gap:2px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 10px}
 .an-head{display:flex;align-items:center;gap:10px;padding:0 6px 12px}
 .an-logo{width:32px;height:32px;flex-shrink:0;border-radius:9px;background:var(--navy);color:var(--surface);display:inline-flex;align-items:center;justify-content:center;font:600 .78rem var(--f-body)}
@@ -182,11 +182,11 @@ details.ag summary{cursor:pointer;color:var(--blue)} details.ag pre{white-space:
 .td .t{font-weight:600} .td .d{font-size:.84rem;color:var(--muted)} .td .go{font-size:.84rem;color:var(--blue);margin-top:auto;padding-top:4px}
 .td .teal{color:var(--teal)} .td .blue{color:var(--blue)} .td .amber{color:var(--salmon)}
 @media (max-width:959px){
-  .ad{padding-top:0}
+  .cp{padding-top:0}
   .an-top{display:flex;position:sticky;top:0;z-index:30;align-items:center;gap:10px;margin:0 -16px 14px;padding:8px 8px 8px 16px;min-height:60px;box-sizing:border-box;background:var(--surface);border-bottom:1px solid var(--line)}
   .an-cur{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.15}
   .an-cur span{font-size:.72rem;color:var(--muted)} .an-cur b{font-size:.95rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .ad-shell{display:block}
+  .cp-shell{display:block}
   .an{display:none;position:fixed;inset:0;z-index:60;max-height:none;border:0;border-radius:0;padding:12px 16px 24px;background:var(--bg)}
   .an.open{display:flex}
   .an-x{display:inline-flex}
@@ -196,7 +196,7 @@ details.ag summary{cursor:pointer;color:var(--blue)} details.ag pre{white-space:
   .an-items{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
   .an-items a{padding:0 12px;border:1px solid var(--line);background:var(--surface);font-size:.84rem;line-height:1.2}
   .an-h{padding:12px 2px 6px}
-  .ad-h{font-size:1.25rem;margin:0 0 12px}
+  .cp-h{font-size:1.25rem;margin:0 0 12px}
   body.an-lock{overflow:hidden}
 }
 /* phones: nothing in a pane may push the page sideways; wide tables scroll inside their own box */
@@ -257,7 +257,7 @@ def shell_html():
       <div class="an-cur"><span>Admin</span><b id="an-cur">To do</b></div>
       <button class="an-btn" id="an-open" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="an-nav">{_svg('menu', 20)}</button>
     </header>
-    <div class="ad-shell">
+    <div class="cp-shell">
     <nav class="an" id="an-nav" aria-label="Admin">
       <div class="an-head">
         <span class="an-logo" aria-hidden="true">BC</span>
@@ -273,8 +273,8 @@ def shell_html():
         <div class="an-who"><span id="who"></span><button class="linkish" id="signout" type="button">Sign out</button></div>
       </div>
     </nav>
-    <div class="ad-main" id="ad-main">
-    <h1 class="ad-h" id="ad-h">To do</h1>"""
+    <div class="cp-main" id="cp-main">
+    <h1 class="cp-h" id="cp-h">To do</h1>"""
 
 
 def admin_page(out_dir):
@@ -296,7 +296,7 @@ def admin_page(out_dir):
 <style>{CSS}</style>
 </head>
 <body>
-<div class="ad tt-scope">
+<div class="cp tt-scope">
   <section id="signin" class="signin card" hidden>
     <h1>BayCounty.me admin</h1>
     <p class="muted small">Enter your admin email and we'll send you a sign-in link.</p>

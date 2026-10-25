@@ -3,9 +3,9 @@
   const $ = s => document.querySelector(s);
   // Show script errors on the page itself, so a broken tab says why instead of staying blank.
   const oops = msg => {
-    let box = document.getElementById('ad-oops');
+    let box = document.getElementById('cp-oops');
     if (!box) {
-      box = document.createElement('div'); box.id = 'ad-oops'; box.className = 'banner bad';
+      box = document.createElement('div'); box.id = 'cp-oops'; box.className = 'banner bad';
       box.style.cssText = 'position:fixed;z-index:100;left:16px;right:16px;bottom:16px;max-width:720px;margin:0 auto;box-shadow:0 8px 30px rgba(0,0,0,.18)';
       document.body.append(box);
     }
@@ -67,7 +67,7 @@
     nav.querySelectorAll('[data-tab]').forEach(a => a.dataset.tab === name ? a.setAttribute('aria-current', 'page') : a.removeAttribute('aria-current'));
     document.querySelectorAll('.pane').forEach(p => { p.hidden = p.id !== 'tab-' + name; });
     const link = nav.querySelector(`[data-tab="${name}"]`), title = link ? link.querySelector('span').textContent : 'To do';
-    $('#ad-h').textContent = title; $('#an-cur').textContent = title; document.title = title + ' · Admin · BayCounty.me';
+    $('#cp-h').textContent = title; $('#an-cur').textContent = title; document.title = title + ' · Admin · BayCounty.me';
     history.replaceState(null, '', '#' + name);
     menu(false); window.scrollTo(0, 0);
     loaders[name]();
