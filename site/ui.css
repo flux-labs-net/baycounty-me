@@ -353,3 +353,31 @@ ul.ui-votes{display:flex;flex-direction:column;gap:8px;margin:0;padding:0;list-s
 .ui-mtc-b{display:flex;flex-direction:column;gap:6px;min-width:0;flex:1}
 @media (max-width:560px){:root .fd.ui-mtc{gap:12px;padding:14px}.ui-mtc .ui-date{width:50px}}
 .addr-out[hidden]{display:none}
+
+/* ---- spacing: one rhythm for everything stacked in a section (cards, drop-down boxes, tables, notes, sub-headings) ----
+   A section is a column with a 16px gap. Wrappers inside it use the same gap, plain paragraphs and lists lose the
+   browser margins that doubled it, drop-down boxes that follow each other sit a little closer as one group, and a
+   sub-heading gets extra room above so it reads with what follows it. */
+:root .ui .tx-sec > :is(p,ul,ol,dl,pre,form,blockquote){margin-block:0}
+:root .ui :is(.tx-sec > div:not([class]),.two > div:not([class]),.wp-ag):not([hidden]){display:flex;flex-direction:column;gap:16px;min-width:0}
+:root .ui :is(.tx-sec > div:not([class]),.two > div:not([class]),.wp-ag) > :is(p,ul,ol,dl,h3,h4){margin-block:0}
+:root .ui :is(.tx-sec,.tx-sec > div:not([class]),.wp-ag) > :is(h3,h4):not(:first-child,.sec-hd + *){margin-top:10px}
+:root .ui .tx-sec > :is(div:not([class]),.wp-ag):not(:first-child,.sec-hd + *) > :is(h3,h4):first-child{margin-top:10px}
+:root .ui :is(.tx-sec,.tx-sec > div:not([class]),.two > div:not([class]),.wp-ag) > :is(h3,h4) + *{margin-top:-6px}
+:root .ui :is(details.tbl-toggle,details.gaps) + :is(details.tbl-toggle,details.gaps){margin-top:-6px}
+:root .ui .tx-sec > .ui-links{margin-top:0}
+/* "Notes" and "Where the data comes from" boxes look like the other drop-down boxes */
+:root .ui details.gaps{border:0;border-radius:18px;box-shadow:var(--ui-shadow);background:var(--surface);padding:0 20px}
+:root .ui details.gaps > summary{padding:13px 0;margin:0;color:var(--blue);font-size:.88rem;font-weight:500}
+:root .ui details.gaps[open]{padding-bottom:16px}
+:root .ui details.gaps > :not(summary){font-size:.9rem}
+/* inside an open box: the same 12px between its table tools, table, notes and sub-headings */
+:root .ui details:is(.tbl-toggle,.gaps)[open] > :not(summary){margin-block:0}
+:root .ui details:is(.tbl-toggle,.gaps)[open] > :not(summary) + :not(summary){margin-top:12px}
+:root .ui details:is(.tbl-toggle,.gaps)[open] > :not(summary) + :is(h3,h4){margin-top:24px}
+:root .ui details:is(.tbl-toggle,.gaps)[open] > :is(h3,h4) + *{margin-top:8px}
+:root .ui details:is(.tbl-toggle,.gaps)[open] > summary + *{margin-top:2px}
+/* the warning box: a card with its colored edge */
+:root .ui .callout{border:0;border-radius:18px;box-shadow:inset 4px 0 0 var(--amber),var(--ui-shadow);padding:14px 18px 14px 22px}
+:root .ui .callout.launch{box-shadow:inset 4px 0 0 var(--blue),var(--ui-shadow)}
+@media (max-width:560px){:root .ui details:is(.tbl-toggle,.gaps){padding-inline:16px}}
