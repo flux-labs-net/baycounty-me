@@ -4477,7 +4477,7 @@
    "id": "budget-years",
    "title": "Budgets by year, line by line",
    "description": "Every budget line on record for each government and fiscal year, to compare one year with another. basis adopted: the adopted budget's total and General Fund, each fund and each General Fund department. basis actual: audited revenue by source and spending by function from the state's Local Government Financial Reports (in_total is false for transfers and borrowing, which the audited totals leave out). line_key lines the same fund or department up across years; service groups departments into common services. fiscal_year is the year the fiscal year ends (FY2026 = Oct 2025 to Sep 2026; schools Jul to Jun).",
-   "rows": 2516,
+   "rows": 2526,
    "columns": [
     {
      "name": "gov_id",

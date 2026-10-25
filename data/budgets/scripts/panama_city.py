@@ -1,10 +1,10 @@
-"""Panama City adopted budgets by fund group, FY2018 to FY2022.
+"""Panama City adopted budgets by fund group, FY2017 to FY2022.
 
-The city's Annual Budget books for FY2019 to FY2022 (Archive Center, https://www.panamacity.gov/Archive.aspx) are
+The city's Annual Budget books for FY2018 to FY2022 (Archive Center, https://www.panamacity.gov/Archive.aspx) are
 scanned images with no text layer. Each book's Executive Budget Summary prints a "BUDGET SUMMARY" table of the
 adopted year and the year before, by fund group. The figures below were read from those tables (OCR, then checked by
-eye) and every year adds up to the printed GRAND TOTAL. FY2018 is the prior-year column of the FY2019 book.
-The FY2018 book itself (Item 326) and FY2023/FY2024 books are not posted.
+eye) and every year adds up to the printed GRAND TOTAL. FY2017 is the prior-year column of the FY2018 book.
+The FY2023 and FY2024 books are not posted.
 Run: python3 data/budgets/scripts/panama_city.py
 """
 import json, os
@@ -17,7 +17,9 @@ GROUPS = [('General Fund', 'general'), ('Special Revenue Funds', 'special revenu
           ('Utilities Fund', 'enterprise (utilities)'), ('Internal Service Funds', 'internal service')]
 # fiscal year -> (archive item, book title, printed grand total, amounts in GROUPS order)
 YEARS = {
-    2018: ('379', 'Annual Budget Fiscal Year 2019 (prior-year column)', 100117973,
+    2017: ('326', 'Annual Budget Fiscal Year 2018 (prior-year column)', 92795990,
+           [39669038, 4430018, 1870258, 2844000, 4918978, 8779953, 22344770, 7938975]),
+    2018: ('326', 'Annual Budget Fiscal Year 2018, adopted Sept 25, 2017', 100117973,
            [41385849, 8462214, 2120553, 1334500, 3294141, 8894582, 25008355, 9617779]),
     2019: ('379', 'Annual Budget Fiscal Year 2019, adopted Sept 25, 2018', 108690082,
            [44872653, 7786311, 2969654, 1849000, 3856812, 8226864, 29146778, 9982010]),
@@ -41,7 +43,7 @@ def main():
         'Adopted budgets by fund group from the BUDGET SUMMARY table in each Annual Budget book (scanned; figures read from the page images and checked against the printed grand total).',
         'The grand total includes transfers between funds and appropriated reserves.',
         'FY2025 onward come from the city\'s newer budget books, which list individual funds, so only the General Fund lines up line for line with these years.',
-        'Not posted online: the FY2023 and FY2024 budget books, and the FY2018 book (its figures here are the prior-year column of the FY2019 book).'], 'years': years},
+        'Not posted online: the FY2023 and FY2024 budget books. FY2017 is the prior-year column of the FY2018 book.'], 'years': years},
         open(OUT, 'w'), indent=1)
     for y in years:
         print(y['fiscal_year'], y['total'], y['general_fund'])

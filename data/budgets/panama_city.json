@@ -6,14 +6,65 @@
   "Adopted budgets by fund group from the BUDGET SUMMARY table in each Annual Budget book (scanned; figures read from the page images and checked against the printed grand total).",
   "The grand total includes transfers between funds and appropriated reserves.",
   "FY2025 onward come from the city's newer budget books, which list individual funds, so only the General Fund lines up line for line with these years.",
-  "Not posted online: the FY2023 and FY2024 budget books, and the FY2018 book (its figures here are the prior-year column of the FY2019 book)."
+  "Not posted online: the FY2023 and FY2024 budget books. FY2017 is the prior-year column of the FY2018 book."
  ],
  "years": [
   {
+   "fiscal_year": 2017,
+   "status": "adopted",
+   "source_title": "Annual Budget Fiscal Year 2018 (prior-year column)",
+   "source_url": "https://www.panamacity.gov/ArchiveCenter/ViewFile/Item/326",
+   "total": 92795990,
+   "general_fund": 39669038,
+   "general_fund_departments": [],
+   "funds": [
+    {
+     "name": "General Fund",
+     "type": "general",
+     "amount": 39669038
+    },
+    {
+     "name": "Special Revenue Funds",
+     "type": "special revenue",
+     "amount": 4430018
+    },
+    {
+     "name": "Debt Service Fund",
+     "type": "debt service",
+     "amount": 1870258
+    },
+    {
+     "name": "Capital Projects Fund",
+     "type": "capital",
+     "amount": 2844000
+    },
+    {
+     "name": "Marinas Fund",
+     "type": "enterprise",
+     "amount": 4918978
+    },
+    {
+     "name": "Solid Waste Fund",
+     "type": "enterprise",
+     "amount": 8779953
+    },
+    {
+     "name": "Utilities Fund",
+     "type": "enterprise (utilities)",
+     "amount": 22344770
+    },
+    {
+     "name": "Internal Service Funds",
+     "type": "internal service",
+     "amount": 7938975
+    }
+   ]
+  },
+  {
    "fiscal_year": 2018,
    "status": "adopted",
-   "source_title": "Annual Budget Fiscal Year 2019 (prior-year column)",
-   "source_url": "https://www.panamacity.gov/ArchiveCenter/ViewFile/Item/379",
+   "source_title": "Annual Budget Fiscal Year 2018, adopted Sept 25, 2017",
+   "source_url": "https://www.panamacity.gov/ArchiveCenter/ViewFile/Item/326",
    "total": 100117973,
    "general_fund": 41385849,
    "general_fund_departments": [],
