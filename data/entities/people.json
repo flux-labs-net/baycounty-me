@@ -1,6 +1,6 @@
 {
  "about": "Elected officials, department leaders and 2026 local candidates named in the site's datasets, one id per person. Names are matched on first and last name with common nicknames (Doug = Douglas, Chris = Christopher, Dave = David ...), ignoring middle initials, titles and notes in parentheses; \"(D2)\" style suffixes become the district field. People who appear under more than one government are listed in multi_government for checking. No other people are included.",
- "count": 136,
+ "count": 140,
  "people": [
   {
    "id": "adrian-welle",
@@ -1349,6 +1349,24 @@
    ]
   },
   {
+   "id": "jamie-marler",
+   "name": "Jamie Marler",
+   "aliases": [
+    "Jamie Marler"
+   ],
+   "district": null,
+   "gov_ids": [
+    "lh"
+   ],
+   "roles": [
+    {
+     "role": "2026 candidate: Lynn Haven Commissioner Seat 2",
+     "gov_id": "lh",
+     "source": "finance_2026"
+    }
+   ]
+  },
+  {
    "id": "jamie-warrick",
    "name": "Jamie Warrick",
    "aliases": [
@@ -1473,6 +1491,24 @@
      "role": "board member",
      "gov_id": "mb",
      "source": "votes"
+    }
+   ]
+  },
+  {
+   "id": "jeffrey-snyder",
+   "name": "Jeffrey Snyder",
+   "aliases": [
+    "Jeffrey Snyder"
+   ],
+   "district": null,
+   "gov_ids": [
+    "lh"
+   ],
+   "roles": [
+    {
+     "role": "2026 candidate: Lynn Haven Commissioner Seat 2",
+     "gov_id": "lh",
+     "source": "finance_2026"
     }
    ]
   },
@@ -1686,6 +1722,24 @@
    ]
   },
   {
+   "id": "johnnie-beshearse",
+   "name": "Johnnie Beshearse",
+   "aliases": [
+    "Johnnie Beshearse"
+   ],
+   "district": null,
+   "gov_ids": [
+    "lh"
+   ],
+   "roles": [
+    {
+     "role": "2026 candidate: Lynn Haven Mayor (recall election)",
+     "gov_id": "lh",
+     "source": "finance_2026"
+    }
+   ]
+  },
+  {
    "id": "jonathan-hayes",
    "name": "Jonathan Hayes",
    "aliases": [
@@ -1781,6 +1835,11 @@
      "role": "board member",
      "gov_id": "lh",
      "source": "votes"
+    },
+    {
+     "role": "2026 candidate: Lynn Haven Commissioner Seat 1",
+     "gov_id": "lh",
+     "source": "finance_2026"
     }
    ]
   },
@@ -2362,6 +2421,24 @@
      "role": "board member",
      "gov_id": "mb",
      "source": "votes"
+    }
+   ]
+  },
+  {
+   "id": "michelle-smith",
+   "name": "Michelle Smith",
+   "aliases": [
+    "Michelle Smith"
+   ],
+   "district": null,
+   "gov_ids": [
+    "lh"
+   ],
+   "roles": [
+    {
+     "role": "2026 candidate: Lynn Haven Commissioner Seat 2",
+     "gov_id": "lh",
+     "source": "finance_2026"
     }
    ]
   },

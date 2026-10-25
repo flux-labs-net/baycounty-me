@@ -149,7 +149,7 @@ def adapt(v, typ):
         return None
     if typ == 'jsonb':
         return Jsonb(v)
-    if typ in ('bigint', 'numeric'):
+    if typ in ('bigint', 'integer', 'numeric'):
         try:
             return float(v) if typ == 'numeric' else int(float(v))
         except (TypeError, ValueError):
@@ -168,7 +168,7 @@ def load_dataset(conn, d, aliases, sha):
         cur = conn.cursor()
         cols = table_columns(cur, table)
         if not cols:
-            raise SystemExit(f'Table {table} is missing: add a migration for dataset "{d["id"]}".')
+            raise SchemaGap(f'Table {table} is missing: add a migration for dataset "{d["id"]}".')
         missing = [c['name'] for c in d['columns'] if c['name'] not in cols]
         if missing:
             raise SchemaGap(f'Dataset "{d["id"]}" has columns the table lacks: {missing}. Add a migration.')
@@ -198,6 +198,12 @@ def load_dataset(conn, d, aliases, sha):
             g = gov_key(r, aliases)
             batch.append([adapt(r.get(n), cols[n]) for n in names] + [g, 'site_build', run, h])
             added.append((h, g, r))
+        # A source that failed and wrote an empty or cut-off file would otherwise wipe the live table. Refuse a load
+        # that empties a dataset, or drops more than 60% of a large one, unless ALLOW_SHRINK names it (comma list).
+        allowed = d['id'] in (os.environ.get('ALLOW_SHRINK') or '').split(',')
+        if old and not allowed and (not seen or (len(old) >= 100 and len(seen) < 0.4 * len(old))):
+            raise SchemaGap(f'Dataset "{d["id"]}" shrank from {len(old)} to {len(seen)} rows; kept the old rows. '
+                            f'If that is right, run the sync with ALLOW_SHRINK={d["id"]}.')
         cur.execute(f"delete from {table} where origin = 'site_build' and not (record_hash = any(%s::text[]))", (list(seen),))
         deleted = cur.rowcount
         cur.executemany(sql, batch)
@@ -306,9 +312,7 @@ def main():
         for d in cat['datasets']:
             try:
                 n, dl, new, ev = load_dataset(conn, d, aliases, sha)
-            except SystemExit:
-                raise
-            except (psycopg.Error, SchemaGap) as e:
+            except (psycopg.Error, SchemaGap, OSError, ValueError) as e:
                 # One bad dataset shouldn't stop the rest; the failure is recorded for /api/v1/status.
                 msg = str(e).splitlines()[0][:300]
                 print(f'{d["id"]:32s} FAILED: {msg}')

@@ -62,6 +62,10 @@ def fetch(work, camps):
                 if i == 3:
                     raise
                 time.sleep(5 * (i + 1))
+        # A maintenance or error page saved as an export would quietly drop that campaign's owners; stop instead, so
+        # main() keeps the last good file. Campaigns with no records answer with a "No records found" alert.
+        if not (b.lstrip(b'\xef\xbb\xbf').startswith(b'"rpt code"') or b'No records found' in b[:200]):
+            raise RuntimeError(f'export for campaign {cid} is not a CSV')
         open(p, 'wb').write(b)
         time.sleep(0.3)
 
@@ -142,7 +146,8 @@ def build(work):
             if r['Cont/Exp'] != 'C' or r['cont. type'] != 'I':
                 continue
             name = clean(r['name'])
-            if not name or B.looks_like_org(name):
+            # joint filings ("A and B Smith") would name a second person who may not run anything
+            if not name or B.looks_like_org(name) or re.search(r'&|\bAND\b', name, re.I):
                 continue
             counts['individual_lines'] += 1
             if 'protected' in (r['address 1'] or '').lower():
@@ -175,6 +180,15 @@ def build(work):
             amt = round(float(r['amount'] or 0), 2)
             gifts.append({'person_key': pk, 'cand_id': cid, 'date': r['item date'], 'amount': amt, 'item': ITEM.get(r['item type'], r['item type'] or '')})
             counts['published_lines'] += 1
+
+    # a person whose lines to a campaign net to zero or less (refunds only) did not give: don't name them for it
+    net = collections.defaultdict(float)
+    for g in gifts:
+        net[(g['person_key'], g['cand_id'])] += g['amount']
+    gifts = [g for g in gifts if net[(g['person_key'], g['cand_id'])] > 0]
+    keep = {g['person_key'] for g in gifts}
+    owners = {pk: o for pk, o in owners.items() if pk in keep}
+    counts['published_lines'] = len(gifts)
 
     for pk, o in owners.items():
         o['businesses'] = sorted(({'doc_number': d, 'name': ents[d]['name'], 'status': 'active' if ents[d]['status'] == 'A' else 'inactive',

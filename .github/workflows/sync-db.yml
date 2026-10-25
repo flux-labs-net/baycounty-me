@@ -1,5 +1,6 @@
 # Load the site's public datasets into the Supabase database.
-# Runs after every push to main that changes data or the built site, after the daily refresh, or by hand.
+# Runs after every push to main that changes data or the built site, when a refresh workflow starts it after its
+# own push (bot pushes don't fire the push trigger), or by hand.
 # Needs one repository secret: DATABASE_URL (Supabase > Connect > Session pooler connection string).
 # Problems (failed load, missing secret) email the admins: repository secrets RESEND_FULL_KEY and ADMIN_EMAILS.
 # Only rows with origin = 'site_build' are replaced; rows added by hand or by scrapers are never touched.
@@ -8,17 +9,16 @@ on:
   push:
     branches: [main]
     paths: ['data/**', 'site/public/downloads/**', 'db/**']
-  workflow_run:
-    workflows: ['Refresh meetings', 'Refresh weekly sources']
-    types: [completed]
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      allow_shrink:
+        description: 'Dataset ids allowed to lose most of their rows this run (comma list). Blank = none.'
+        default: ''
 concurrency:
   group: sync-db
   cancel-in-progress: false
 jobs:
   sync:
-    # After a refresh workflow, run only if it succeeded.
-    if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -47,21 +47,24 @@ jobs:
         if: steps.database_secret.outputs.ok == 'true'
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          SUPABASE_REGION: us-east-2
+          SUPABASE_REGION: ${{ vars.SUPABASE_REGION || 'us-east-2' }}
+          ALLOW_SHRINK: ${{ inputs.allow_shrink }}
         run: python db/scripts/load.py --migrate
       - name: Load business registry (private schema)
         id: load_registry
-        if: steps.database_secret.outputs.ok == 'true'
+        # Runs even if one public dataset failed, so review-queue rows still republish.
+        if: always() && steps.database_secret.outputs.ok == 'true'
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          SUPABASE_REGION: us-east-2
+          SUPABASE_REGION: ${{ vars.SUPABASE_REGION || 'us-east-2' }}
         run: python db/scripts/load_registry.py
       - name: Load officials' business ties (private schema)
         id: load_careers
-        if: steps.database_secret.outputs.ok == 'true'
+        # Runs even if one public dataset failed, so review-queue rows still republish.
+        if: always() && steps.database_secret.outputs.ok == 'true'
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          SUPABASE_REGION: us-east-2
+          SUPABASE_REGION: ${{ vars.SUPABASE_REGION || 'us-east-2' }}
         run: python db/scripts/load_careers.py
       - name: Email admins about problems
         if: always()

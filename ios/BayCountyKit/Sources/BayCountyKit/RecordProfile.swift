@@ -66,7 +66,7 @@ public enum RecordProfile {
             ("doc_number", "business", "business"),
         ]
         if member { cols.insert(("person_id", "person", "member"), at: 0) }
-        if datasetID == "nonprofit-officials" { cols.insert(("person_id", "official", "person"), at: 0) }
+        if datasetID == "nonprofit-officials" { cols.insert(("official_id", "official", "person"), at: 0) }  // person_id there is the board key
         return cols
     }
 

@@ -6,13 +6,15 @@
 name: Refresh weekly sources
 on:
   schedule:
-    - cron: '41 11 * * 2'   # Tuesdays 6:41 a.m. Central (daylight time)
+    - cron: '41 11 * * 2'   # Tuesdays 11:41 UTC: 6:41 a.m. CDT, 5:41 a.m. CST
   workflow_dispatch: {}
 permissions:
   contents: write
+  actions: write   # start the database sync after a push
 concurrency:
-  group: refresh-weekly
-  cancel-in-progress: true
+  # Shared with refresh-meetings.yml: both push to main, so they take turns.
+  group: main-writer
+  cancel-in-progress: false
 jobs:
   refresh:
     runs-on: ubuntu-latest
@@ -51,15 +53,10 @@ jobs:
       - name: Commit if changed
         id: commit_and_push
         run: |
-          # Commit only when a fetched source file changed; then include whatever the rebuild regenerated.
-          if [ -z "$(git status --porcelain -- data/michael/pa_ledger.json data/surtax/gis_projects.json)" ]; then echo "No source changes"; exit 0; fi
-          paths="data site/public"
-          git config user.name "BayCounty.me bot"
-          git config user.email "211150+jeremymcs@users.noreply.github.com"
-          git add -A $paths
-          git commit -m "Weekly refresh: FEMA projects and sales tax project map ($(date -u +%Y-%m-%d))"
-          git push
-          echo "pushed=true" >> "$GITHUB_OUTPUT"
+          # Commit whenever the rebuild changed anything, not only the two fetched files: data/build.py also
+          # rebuilds people, vendor matches and other derived files from the daily inputs.
+          if [ -z "$(git status --porcelain -- data site/public)" ]; then echo "No changes"; exit 0; fi
+          .github/scripts/push_refresh.sh "Weekly refresh: FEMA projects, sales tax map and derived data ($(date -u +%Y-%m-%d))" data/michael/pa_ledger.json data/surtax/gis_projects.json
       - name: Deploy the refresh to Vercel
         # Vercel blocks Git deploys of commits whose author isn't on the Vercel team, which includes this bot's commits.
         # A deploy hook (Vercel > Project > Settings > Git > Deploy Hooks, branch main) builds main regardless; store
@@ -70,6 +67,11 @@ jobs:
         run: |
           if [ -z "$HOOK" ]; then echo "::warning title=Vercel::VERCEL_DEPLOY_HOOK isn't set, so this refresh waits for the next merge to deploy."; exit 0; fi
           curl -fsS -X POST "$HOOK" > /dev/null && echo "Vercel deploy started"
+      - name: Sync the database
+        if: steps.commit_and_push.outputs.pushed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh workflow run sync-db.yml --repo "$GITHUB_REPOSITORY" --ref main
       - name: Email admins about problems
         if: always()
         env:

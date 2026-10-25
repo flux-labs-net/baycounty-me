@@ -145,17 +145,6 @@
    }
   },
   {
-   "shared_words": "southeastern outdoor",
-   "vendors": [
-    "southeastern-outdoor",
-    "southeastern-outdoor-mgt"
-   ],
-   "names": {
-    "southeastern-outdoor": "Southeastern Outdoor Management",
-    "southeastern-outdoor-mgt": "Southeastern Outdoor Mgt Inc"
-   }
-  },
-  {
    "shared_words": "walter marine",
    "vendors": [
     "walter-marine",
@@ -222,6 +211,13 @@
    "joined": [
     "floridapowerlight",
     "fplfloridap"
+   ]
+  },
+  {
+   "company": "fpl",
+   "joined": [
+    "floridapowerlight",
+    "fpl"
    ]
   }
  ],
@@ -385,9 +381,10 @@
    "spellings_joined": [
     "southeasternoutdoormanagement",
     "southeasternoutdoormet",
+    "southeasternoutdoormgt",
     "southeasternoutdoormgmt"
    ],
-   "evidence": "\"Southeastern Outdoor Met Inc\" is how the scanned Visit PCB register reads; \"Southeastern Outdoor Mgmt\" is a campaign filing."
+   "evidence": "\"Southeastern Outdoor Met Inc\" and \"Mgt Inc\" are how the scanned Visit PCB register reads; \"Southeastern Outdoor Mgmt\" is a campaign filing."
   },
   {
    "name": "Halff Associates, Inc.",

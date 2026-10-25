@@ -1,12 +1,14 @@
 name: iOS app build
 on:
   push:
+    branches: [main]   # pull requests are built by the pull_request trigger; don't build every branch push twice
     paths: ["ios/**", ".github/workflows/ios-app-build.yml"]
   pull_request:
     paths: ["ios/**", ".github/workflows/ios-app-build.yml"]
 jobs:
   build:
     runs-on: macos-15
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - name: Install XcodeGen

@@ -208,7 +208,7 @@
     // Connections
     const ties = [];
     for (const py of payers(x)) { const ps = p.filter(r => r.payer === py); ties.push(`<div class="np-tie"><b>Paid ${big(ps.reduce((a, r) => a + Number(r.amount || 0), 0))} by ${esc(py)}</b><div class="m">${esc(ps[0].what || ps[0].record_type)}${ps[0].date ? ' · ' + esc(ps[0].date) : ''}</div></div>`); }
-    for (const r of o) ties.push(`<div class="np-tie"><b>${r.person_id ? `<a href="/people/${encodeURIComponent(r.person_id)}">${esc(r.official)}</a>` : esc(r.official)}</b> is on the board<div class="m">${esc(r.titles || '')}${years(r) ? ' · ' + esc(years(r)) : ''} · <a href="${esc(r.source_url)}" target="_blank" rel="noopener">${esc(r.sources || 'source')}</a></div></div>`);
+    for (const r of o) ties.push(`<div class="np-tie"><b>${r.official_id ? `<a href="/people/${encodeURIComponent(r.official_id)}">${esc(r.official)}</a>` : esc(r.official)}</b> is on the board<div class="m">${esc(r.titles || '')}${years(r) ? ' · ' + esc(years(r)) : ''} · <a href="${esc(r.source_url)}" target="_blank" rel="noopener">${esc(r.sources || 'source')}</a></div></div>`);
     if (d) for (const [pid, g] of [...d.entries()].sort((a, b) => b[1] - a[1])) {
       const seat = S.donorSeats.find(r => r.person_id === pid && r.nonprofit_id === id) || {};
       const bz = (S.donorBiz.get(pid) || []).slice(0, 3).map(b => esc(title(b.business))).join(', ');

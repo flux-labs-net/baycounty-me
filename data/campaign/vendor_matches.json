@@ -1,7 +1,7 @@
 {
- "as_of": "2026-10-21",
+ "as_of": "2026-10-25",
  "method": "Business contributors to current officeholders (campaign.json) and 2026 local candidates (../elections/finance_2026.json) were compared with every payee on this site: contracts, change orders and emergency purchases (../contracts/contracts.json), Bay County and Lynn Haven check registers, payments by the three tourism agencies (../money/payments.json) and the CRA ledger (../merged.json). Both sides are resolved to vendor ids in ../entities/vendors.json: names are matched after removing punctuation, \"&\"/\"and\" and legal suffixes, plus hand-checked joins of truncated or misspelled names (each with its evidence in vendors.json). Nothing is fuzzy-matched. \"exact\" = the filed name matches the vendor's name; \"likely\" = the filing truncates, abbreviates or misspells it. One row per contributor spelling, candidate and paying government. A match shows only that an organization with the same name appears in both public records; it does not show why a gift was made or how a contract was awarded. Built by build_vendor_matches.py.",
- "count_rows": 177,
+ "count_rows": 178,
  "count_contributor_candidate_pairs": 66,
  "count_distinct_vendors": 29,
  "count_by_confidence_pairs": {
@@ -18,7 +18,7 @@
   "change_order": 35,
   "contract": 146,
   "register": 54,
-  "tdc": 18,
+  "tdc": 19,
   "emergency": 17
  },
  "matches": [
@@ -6355,10 +6355,49 @@
     "contract"
    ],
    "match_confidence": "likely",
-   "note": "The filing spells the name \"Southeastern Outdoor Mgmt\"; matched to Southeastern Outdoor Management by a hand-checked spelling join. \"Southeastern Outdoor Met Inc\" is how the scanned Visit PCB register reads; \"Southeastern Outdoor Mgmt\" is a campaign filing.",
+   "note": "The filing spells the name \"Southeastern Outdoor Mgmt\"; matched to Southeastern Outdoor Management by a hand-checked spelling join. \"Southeastern Outdoor Met Inc\" and \"Mgt Inc\" are how the scanned Visit PCB register reads; \"Southeastern Outdoor Mgmt\" is a campaign filing.",
    "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=26&c=bay&ca=638&rellevel=4&committee=N",
    "office_gov_id": "county",
    "same_government_as_office": true
+  },
+  {
+   "contributor": "Southeastern Outdoor Mgmt",
+   "contributor_spellings": null,
+   "vendor": "Southeastern Outdoor Mgt Inc",
+   "vendor_id": "southeastern-outdoor",
+   "vendor_entity": "Southeastern Outdoor Management",
+   "candidate": "Doug Crosby",
+   "person_id": "doug-crosby",
+   "office": "Bay County Commission, District 3",
+   "election": "2024 primary/general",
+   "gift_source": "current officeholders (campaign.json)",
+   "contribution_amount": 600.0,
+   "refunded_by_campaign": null,
+   "contribution_dates": [
+    "2023-10-21"
+   ],
+   "contribution_items": [
+    "check"
+   ],
+   "contract_ids_or_descriptions": [
+    "Panama City Beach Convention & Visitors Bureau (Visit Panama City Beach) check register (FY2024, FY2025, FY2026): $290,108.83 paid in 21 payments"
+   ],
+   "record_ids": [
+    "tdc:0/40"
+   ],
+   "contract_source_urls": [
+    "https://bayforms.baycoclerk.com/PublicAccess/PublicRecordSearch/"
+   ],
+   "contract_government": "Panama City Beach Convention & Visitors Bureau (Visit Panama City Beach)",
+   "contract_gov_id": "visit_pcb",
+   "record_types": [
+    "tdc"
+   ],
+   "match_confidence": "likely",
+   "note": "The filing spells the name \"Southeastern Outdoor Mgmt\"; matched to Southeastern Outdoor Management by a hand-checked spelling join. \"Southeastern Outdoor Met Inc\" and \"Mgt Inc\" are how the scanned Visit PCB register reads; \"Southeastern Outdoor Mgmt\" is a campaign filing.",
+   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=26&c=bay&ca=638&rellevel=4&committee=N",
+   "office_gov_id": "county",
+   "same_government_as_office": false
   },
   {
    "contributor": "Anderson Columbia Co., Inc.",

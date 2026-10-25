@@ -296,4 +296,3 @@ module.exports.csvCell = csvCell;
 module.exports.openapi = openapi;
 module.exports.meetingsIcs = meetingsIcs;
 module.exports.conditional = conditional;
-module.exports.openapi = openapi;

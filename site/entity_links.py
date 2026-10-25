@@ -63,7 +63,10 @@ WORD = re.compile(r"[A-Za-z0-9&][A-Za-z0-9&'’.-]*")
 GENERIC = {'city', 'county', 'state', 'florida', 'bay', 'school', 'schools', 'board', 'church', 'foundation', 'association', 'inc',
            'the', 'united way', 'habitat', 'american legion', 'rotary club',
            # company names that are also places or plain phrases in page text
-           'pier park', 'key data', 'bag tags', 'stow away', 'leasing 2', 'who dey', '814 sand', 'port engr', 'mr fence', 'boo media'}
+           'pier park', 'key data', 'bag tags', 'stow away', 'leasing 2', 'who dey', '814 sand', 'port engr', 'mr fence', 'boo media',
+           # plain phrases that match a short company or nonprofit name ("For Bay County items...", "direct deposit")
+           'for bay county', 'construction services', 'blue shield', 'direct deposit', 'university of florida', 'energy systems',
+           'disposal services', 'hope project', 'print source'}
 SMALL = {'of', 'and', 'the', 'for', 'in', 'on', 'at', 'to', 'by', 'a', 'an', 'or', 'de', '&'}
 
 
@@ -140,11 +143,12 @@ VOID = {'br', 'img', 'input', 'meta', 'link', 'hr', 'wbr', 'source', 'col', 'are
 NO_PEOPLE = ('/connections/nonprofits', '/profile/')
 
 
-def _link_text(t, path, people_ok):
+def _link_text(html_text, path, people_ok):
     n, mx = _index()
+    t = H.unescape(html_text)  # match names as written ("Sam's Club", "Roberts & Roberts"), not as escaped HTML
     words = [(m.start(), m.end(), m.group(0)) for m in WORD.finditer(t)]
     if not words:
-        return t
+        return html_text
     out, i, last = [], 0, 0
     while i < len(words):
         hit = None
@@ -153,21 +157,25 @@ def _link_text(t, path, people_ok):
             if '\n' in seg:
                 continue
             eid = n.get(norm(seg))
-            if eid and proper(seg) and (people_ok or not eid.startswith('person:')) and page_url(eid) != path:
+            if eid and proper(seg) and (people_ok or not eid.startswith('person:')):
                 hit = (L, eid)
                 break
-        if hit:
+        if hit and page_url(hit[1]) == path:  # this page's own name: leave it, and don't link a shorter name inside it
+            i += hit[0]
+        elif hit:
             L, eid = hit
             s, en = words[i][0], words[i + L - 1][1]
             while en > s and t[en - 1] in ".'’-":  # keep sentence punctuation outside the link
                 en -= 1
-            out.append(t[last:s])
-            out.append(f'<a class="ent" href="{e(page_url(eid))}">{t[s:en]}</a>')
+            out.append(e(t[last:s]))
+            out.append(f'<a class="ent" href="{e(page_url(eid))}">{e(t[s:en])}</a>')
             last = en
             i += L
         else:
             i += 1
-    out.append(t[last:])
+    if not out:
+        return html_text
+    out.append(e(t[last:]))
     return ''.join(out)
 
 
@@ -256,8 +264,9 @@ ENTITY_JS = r"""
       let hit = 0, id = -1;
       for (let L = Math.min(N.max, ws.length - i); L > 0; L--) {
         const seg = t.slice(ws[i][0], ws[i + L - 1][1]); if (!proper(seg)) continue; const x = N.n[norm(seg)];
-        if (x !== undefined && !(noPeople && N.k[x] === 'person') && N.u[x] !== location.pathname) { hit = L; id = x; break; }
+        if (x !== undefined && !(noPeople && N.k[x] === 'person')) { hit = L; id = x; break; }
       }
+      if (hit && N.u[id] === location.pathname) { i += hit; continue; }  // this page's own name: skip it whole
       if (hit) { let s = ws[i][0], e = ws[i + hit - 1][1]; while (e > s && ".'’-".includes(t[e - 1])) e--; frag.push([last, s, e, id]); last = e; i += hit; } else i++;
     }
     if (!frag.length) return;

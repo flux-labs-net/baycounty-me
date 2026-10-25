@@ -51,7 +51,7 @@ def connections_payees():
         if r['t'] not in a['types']:
             a['types'].append(r['t'])
         a['records'] += 1
-        a['total'] += r['a'] or 0
+        a['total'] += 0 if r.get('x') else (r['a'] or 0)  # x: already counted inside a project total
     rows = []
     for key, e in D['ents'].items():
         a = agg.get(key, {'payers': [], 'types': [], 'records': 0, 'total': 0.0})

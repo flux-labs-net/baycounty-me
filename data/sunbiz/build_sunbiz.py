@@ -247,11 +247,13 @@ def _gift_year(g):
 
 def _usable(e, year):
     """An entity can be the donor if it's active, or was still filing around the gift year."""
-    if year is None or e['status'] == 'A':
+    if year is None:
+        return True
+    if e['file_date'] and e['file_date'].year > year + 1:  # formed more than a year after the gift, even if active now
+        return False
+    if e['status'] == 'A':
         return True
     last = e['last_report_year'] or (e['last_txn_date'].year if e['last_txn_date'] else None) or (e['file_date'].year if e['file_date'] else None)
-    if e['file_date'] and e['file_date'].year > year + 1:
-        return False
     return last is not None and last >= year - STALE_YEARS
 
 

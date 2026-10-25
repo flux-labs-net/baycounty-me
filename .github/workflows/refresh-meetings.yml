@@ -4,14 +4,16 @@
 name: Refresh meetings
 on:
   schedule:
-    - cron: '17 11 * * *'   # 6:17 a.m. Central (daylight time)
+    - cron: '17 11 * * *'   # 11:17 UTC: 6:17 a.m. CDT, 5:17 a.m. CST (GitHub cron is always UTC)
   workflow_dispatch: {}
 permissions:
   contents: write
   issues: write
+  actions: write   # start the database sync after a push (bot-started runs don't trigger workflow_run)
 concurrency:
-  group: refresh-meetings
-  cancel-in-progress: true
+  # Shared with refresh-weekly.yml: both push to main, so they take turns. Never cancel a run that may have pushed.
+  group: main-writer
+  cancel-in-progress: false
 jobs:
   refresh:
     runs-on: ubuntu-latest
@@ -35,7 +37,14 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           n=$(python -c "import json;print(len(json.load(open('data/meetings/meetings.json')).get('errors') or []))")
-          if [ "$n" = "0" ]; then echo "No meeting source errors"; exit 0; fi
+          title="Meetings refresh: source errors"
+          if [ "$n" = "0" ]; then
+            echo "No meeting source errors"
+            # Close the open issue so the next new error opens a fresh one (and emails the admins again).
+            num=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --search "in:title \"$title\"" --json number --jq '.[0].number // empty' || true)
+            if [ -n "$num" ]; then gh issue close "$num" --repo "$GITHUB_REPOSITORY" --comment "All meeting sources answered on this run." || true; fi
+            exit 0
+          fi
           python - > "$RUNNER_TEMP/body.md" <<'PY'
           import json, os
           e = json.load(open('data/meetings/meetings.json'))['errors']
@@ -44,7 +53,6 @@ jobs:
               print(f"- **{x.get('board')}** ({x.get('source')}): {x.get('error')}  \n  {x.get('url')}")
           print(f"\nRun: {os.environ['GITHUB_SERVER_URL']}/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{os.environ['GITHUB_RUN_ID']}")
           PY
-          title="Meetings refresh: source errors"
           num=$(gh issue list --repo "$GITHUB_REPOSITORY" --state open --search "in:title \"$title\"" --json number --jq '.[0].number // empty' || true)
           # Admins are emailed when the issue is first opened; daily repeats only add a comment (notify=false).
           if [ -n "$num" ]; then gh issue comment "$num" --repo "$GITHUB_REPOSITORY" --body-file "$RUNNER_TEMP/body.md"; echo "notify=false" >> "$GITHUB_OUTPUT"
@@ -56,6 +64,17 @@ jobs:
         continue-on-error: true
         working-directory: data/elections/scripts
         run: ./refresh.sh "$RUNNER_TEMP/soe"
+      - name: Check campaign finance freshness
+        # refresh.sh keeps the old file when the Elections Office site is down, so a long outage would be silent.
+        id: finance_freshness
+        run: |
+          python - >> "$GITHUB_OUTPUT" <<'PY'
+          import json, datetime as d
+          a = d.date.fromisoformat(json.load(open('data/elections/finance_2026.json'))['as_of'][:10])
+          age = (d.date.today() - a).days
+          if age > 3:
+              print(f"alert=Campaign finance data is {age} days old: the Elections Office fetch keeps failing or finding nothing.")
+          PY
       - name: Export agenda items for search
         # Items read from posted agendas (data/agendas/export_items.py). A database problem keeps the last export.
         id: export_agenda_items
@@ -66,6 +85,13 @@ jobs:
         run: |
           pip install -q 'psycopg[binary]'
           python data/agendas/export_items.py
+      - name: Rebuild derived datasets
+        # People, vendor matches, contract votes, Sunbiz donor links and nonprofit links are built from the files
+        # fetched above (data/build.py). Without this, new candidates and gifts got no profile until someone rebuilt.
+        id: rebuild_derived
+        run: |
+          pip install -q shapely
+          cd data && python build.py > /dev/null && python prep_dash.py > /dev/null
       - name: Rebuild site
         id: rebuild_site
         working-directory: site
@@ -78,15 +104,10 @@ jobs:
       - name: Commit if changed
         id: commit_and_push
         run: |
-          paths="data/meetings data/elections/finance_2026.json data/campaign/owner_gifts.json data/agendas/agenda_items.json site/public"
+          src="data/meetings data/elections/finance_2026.json data/campaign/owner_gifts.json data/agendas/agenda_items.json"
           # git status --porcelain also lists new, untracked files, which git diff --quiet ignores.
-          if [ -z "$(git status --porcelain -- $paths)" ]; then echo "No changes"; exit 0; fi
-          git config user.name "BayCounty.me bot"
-          git config user.email "211150+jeremymcs@users.noreply.github.com"
-          git add -A $paths
-          git commit -m "Daily refresh: meetings, agenda items and campaign finance ($(date -u +%Y-%m-%d))"
-          git push
-          echo "pushed=true" >> "$GITHUB_OUTPUT"
+          if [ -z "$(git status --porcelain -- data site/public)" ]; then echo "No changes"; exit 0; fi
+          .github/scripts/push_refresh.sh "Daily refresh: meetings, agenda items and campaign finance ($(date -u +%Y-%m-%d))" $src
       - name: Deploy the refresh to Vercel
         # Vercel blocks Git deploys of commits whose author isn't on the Vercel team, which includes this bot's commits.
         # A deploy hook (Vercel > Project > Settings > Git > Deploy Hooks, branch main) builds main regardless; store
@@ -97,6 +118,12 @@ jobs:
         run: |
           if [ -z "$HOOK" ]; then echo "::warning title=Vercel::VERCEL_DEPLOY_HOOK isn't set, so this refresh waits for the next merge to deploy."; exit 0; fi
           curl -fsS -X POST "$HOOK" > /dev/null && echo "Vercel deploy started"
+      - name: Sync the database
+        # sync-db.yml's push trigger doesn't fire for this bot's pushes, so start it here.
+        if: steps.commit_and_push.outputs.pushed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh workflow run sync-db.yml --repo "$GITHUB_REPOSITORY" --ref main
       - name: Email admins about problems
         if: always()
         env:

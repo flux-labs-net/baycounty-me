@@ -317,10 +317,11 @@ def attach_fdacs(orgs, county_key):
     organization has it). Registrations that match nothing are added as their own organizations."""
     regs, offs = fdacs_rows(county_key)
     by_ein = {o['ein']: oid for oid, o in orgs.items() if o['ein']}
-    by_key = collections.defaultdict(set)
+    by_key, by_loose = collections.defaultdict(set), collections.defaultdict(set)
     for oid, o in orgs.items():
         for nm in filter(None, [(o['irs'] or {}).get('NAME'), (o['sunbiz'] or {}).get('name')]):
             by_key[sb.biz_key(nm)].add(oid)
+            by_loose[sb.loose_key(nm)].add(oid)
     # active registrations first, so an organization with an old lapsed registration and a current one keeps the current
     for n, r in sorted(regs.items(), key=lambda kv: ((kv[1].get('status') or '').lower() != 'active', kv[0])):
         oid, how = by_ein.get(r['fein']), 'fein'
@@ -328,6 +329,8 @@ def attach_fdacs(orgs, county_key):
             how = 'name'
             for nm in filter(None, [r['name'], r.get('dba')]):
                 hit = by_key.get(sb.biz_key(nm))
+                if not hit:  # "Bay/Bays", "Booster/Boosters": the plural-insensitive key, still only when one org has it
+                    hit = by_loose.get(sb.loose_key(nm))
                 if hit and len(hit) == 1:
                     oid = next(iter(hit))
                     break
@@ -411,6 +414,8 @@ def seats(orgs, roles, people, county_key):
     for s in out:
         k = (s['nonprofit_id'], s['source'] if s['source'] not in ('irs_990ez', 'irs_990pf') else 'irs_990')
         s['current'] = (s['tax_year'] or 0) == latest[k]
+        if s['source'] == 'sunbiz' and ((orgs[s['nonprofit_id']].get('sunbiz') or {}).get('status') or 'A') != 'A':
+            s['current'] = False  # officers of a dissolved corporation are not a current board
         if s['source'] == 'fdacs':  # officers on a lapsed or withdrawn registration are not a current board
             st = (orgs[s['nonprofit_id']]['fdacs'].get('status') or '').lower()
             s['current'] = s['current'] and st in ('active', 'registered')
@@ -488,7 +493,8 @@ def businesses_of(bp, roles, entities, gift_docs):
     """For each board person: the for-profit businesses their Sunbiz name-matches run, and which gave to campaigns."""
     by_person = collections.defaultdict(set)
     for r in roles:
-        if r.get('person_key'):
+        # officer roles only: being a company's registered agent (often an accountant or lawyer) is not running it
+        if r.get('person_key') and r.get('role') == 'officer':
             by_person[r['person_key']].add(r['doc_number'])
     for p in bp.values():
         docs, strong = set(), set()
@@ -563,7 +569,7 @@ def grants_between(orgs, county_key):
     for g in _rows(os.path.join(HERE, county_key, 'grants.csv.gz')):
         rein = re.sub(r'\D', '', g['recipient_ein'] or '')
         rid = by_ein.get(rein)
-        if not rid and (g['recipient_state'] or 'FL') == 'FL':
+        if not rid and not rein and (g['recipient_state'] or 'FL') == 'FL':  # a different EIN is a different org
             hit = by_key.get(sb.biz_key(g['recipient']))
             rid = next(iter(hit)) if hit and len(hit) == 1 else None
         gid = by_ein.get(g['ein'])
@@ -615,7 +621,9 @@ def kind(o, r):
     IRS activity category."""
     name = o['name'].upper()
     sub, fnd, ntee = (r or {}).get('SUBSECTION'), (r or {}).get('FOUNDATION'), ((r or {}).get('NTEE_CD') or '')
-    if HOA.search(name) and 'ASSOC' in name or re.search(r'\b(HOA|POA|CONDOMINIUM)\b', name) or ntee.startswith('S22') or ntee.startswith('L5'):
+    # "Resource/Deer/Emergency Management Association" are not property owners' associations
+    mgmt_only = 'MANAGEMENT ASSOCIATION' in name and not re.search(r'\b(OWNERS?|HOMEOWNERS?|CONDOMINIUMS?)\b', name)
+    if HOA.search(name) and 'ASSOC' in name and not mgmt_only or re.search(r'\b(HOA|POA|CONDOMINIUM)\b', name) or ntee.startswith('S22') or ntee.startswith('L5'):
         return HOA_KIND
     if fnd == '10' or ntee.startswith('X') or CHURCH.search(name):
         return 'Church or religious group'
@@ -800,7 +808,7 @@ def business_rows(res):
                          'match': 'Name and address' if b['via'] == 'same_person' else 'Name',
                          'campaign_gifts_total': b['gifts_total'] or 0, 'candidates': ', '.join(b['candidates']) or None,
                          'county': res['county'], 'source_url': ids.sunbiz_url(b['name'], b['doc_number'])})
-    rows.sort(key=lambda r: (r['person'], -r['campaign_gifts_total'], r['business']))
+    rows.sort(key=lambda r: (r['person'], -r['campaign_gifts_total'], r['business'], r['doc_number']))
     return rows
 
 

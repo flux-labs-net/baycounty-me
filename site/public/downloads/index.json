@@ -299,7 +299,6 @@
      "type": "string",
      "values": [
       "agenda_item+amount",
-      "item_number+agenda_item",
       "item_number+agenda_item+amount",
       "vendor_name",
       "vendor_name+agenda_item",
@@ -473,7 +472,6 @@
      "type": "string",
      "values": [
       "agenda_item+amount",
-      "item_number+agenda_item",
       "item_number+agenda_item+amount",
       "vendor_name",
       "vendor_name+agenda_item",
@@ -2336,7 +2334,7 @@
    "id": "connections-payees",
    "title": "Connections: payees",
    "description": "Every payee in the payment records of every local government and agency (contracts, change orders, emergency purchases, check registers, tourism agency payments and the CRA ledger) as one entity, with who paid it and whether it gave to a campaign. dollars_in_records adds every record, and an award and the payments on it can both be records, so it is not a deduplicated total. Unnamed grant recipients are grouped.",
-   "rows": 647,
+   "rows": 645,
    "columns": [
     {
      "name": "entity_id",
@@ -3299,7 +3297,7 @@
    "id": "donor-contracts",
    "title": "Donors with government contracts",
    "description": "Each business donor matched to a local government contract, award or payment, with the match method and confidence.",
-   "rows": 177,
+   "rows": 178,
    "columns": [
     {
      "name": "contributor",
@@ -3522,7 +3520,7 @@
       "The filing spells the name \"Marshall Bothers\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing.",
       "The filing spells the name \"RJ Gorman Marine\"; matched to RJ Gorman Marine Construction by a hand-checked spelling join. Register spelling \"R.J. Gorman Marine Construction LLC\"; one campaign filing cuts it to \"RJ Gorman Marine\". Kept separate from RJ Gorman Contracting, LLC (a different LLC that built the Mexico Beach and PCB piers).",
       "The filing spells the name \"Robers and Roberts, Inc\"; matched to Roberts and Roberts by a hand-checked spelling join. \"ROBERTS & ROBER\" is the Lynn Haven warrant list cut at 15 characters; \"Robers and Roberts, Inc\" is a typo in one 2026 campaign filing.",
-      "The filing spells the name \"Southeastern Outdoor Mgmt\"; matched to Southeastern Outdoor Management by a hand-checked spelling join. \"Southeastern Outdoor Met Inc\" is how the scanned Visit PCB register reads; \"Southeastern Outdoor Mgmt\" is a campaign filing."
+      "The filing spells the name \"Southeastern Outdoor Mgmt\"; matched to Southeastern Outdoor Management by a hand-checked spelling join. \"Southeastern Outdoor Met Inc\" and \"Mgt Inc\" are how the scanned Visit PCB register reads; \"Southeastern Outdoor Mgmt\" is a campaign filing."
      ]
     },
     {
@@ -3588,7 +3586,7 @@
    "id": "vendors-directory",
    "title": "Companies",
    "description": "Every company in BayCounty.me records, with its other spellings, the governments it works with and how many records name it.",
-   "rows": 598,
+   "rows": 596,
    "columns": [
     {
      "name": "vendor_id",
@@ -3635,7 +3633,7 @@
    "id": "people-directory",
    "title": "People",
    "description": "Elected officials, department leaders and 2026 candidates named in BayCounty.me records, with their roles.",
-   "rows": 136,
+   "rows": 140,
    "columns": [
     {
      "name": "person_id",
@@ -4867,7 +4865,7 @@
    "id": "nonprofits",
    "title": "Nonprofits",
    "description": "Every nonprofit in the county: organizations recognized by the IRS with a local address, and active Florida nonprofit corporations (Sunbiz) based here. Type, IRS subsection, latest 990 revenue, expenses and assets, how many board members its filings list, how many of those sit on another local board, government payment records and grants. Board members are in nonprofit-board-members.",
-   "rows": 1963,
+   "rows": 1961,
    "columns": [
     {
      "name": "nonprofit_id",
@@ -5633,7 +5631,7 @@
    "id": "nonprofit-board-members",
    "title": "Nonprofits: board members",
    "description": "Officers, directors, trustees and key employees of local nonprofits as listed on their IRS returns (2019 on), 990-N postcards and state corporate filings: one row per person per nonprofit with titles, years on file, reported pay and hours, and how many other current local boards the same name sits on (homeowner associations aside). person_id groups the same name across boards; two people with a common name can share one.",
-   "rows": 9320,
+   "rows": 9315,
    "columns": [
     {
      "name": "person_id",
@@ -5729,7 +5727,7 @@
    "id": "nonprofit-board-businesses",
    "title": "Nonprofits: board members' businesses",
    "description": "Businesses that local nonprofit board members run, from Florida corporate filings (Sunbiz officers and registered agents), with each business's gifts to local campaigns. match is \"Name and address\" when the person on the nonprofit's own state filing is the same Sunbiz person, or \"Name\" when only one Sunbiz person in the county has that name. person_id matches nonprofit-board-members.",
-   "rows": 4275,
+   "rows": 3213,
    "columns": [
     {
      "name": "person_id",
@@ -6276,7 +6274,7 @@
    "id": "owner-gifts",
    "title": "Campaign gifts from business owners",
    "description": "Personal gifts to local campaigns from people who run a registered Florida business, one row per person and campaign. A contributor filed as an individual is listed when the name and street address on the Supervisor of Elections filing are the same as an officer, manager or registered agent of a for-profit business on Sunbiz that was active around the gift; middle initials and Jr/Sr must agree, and protected voters are never matched. Other individual donors are never named. No addresses or occupations.",
-   "rows": 326,
+   "rows": 319,
    "columns": [
     {
      "name": "donor_id",
@@ -6404,7 +6402,7 @@
    "id": "entity-profiles",
    "title": "Profiles: people, companies and organizations",
    "description": "Every company, elected official, candidate, nonprofit, nonprofit board member, registered business, committee and government named in BayCounty.me records, one row each, with its profile page and how many documented connections it has. entity_id (kind:key) joins entity-connections. Board members are named as their nonprofits' public filings list them; individual campaign donors are included only when they run a registered business (owner-gifts).",
-   "rows": 15381,
+   "rows": 14395,
    "columns": [
     {
      "name": "entity_id",
@@ -6515,7 +6513,7 @@
    "id": "entity-connections",
    "title": "Connections between people, companies and organizations",
    "description": "Every documented connection between two entities in entity-profiles, totalled per pair and kind: a government paid a payee, an organization gave to an official's or candidate's campaign, an official voted on a company's contracts, a person sits on a nonprofit's board or runs a business, a nonprofit gave a grant, two payees share a project. Each row has its source. Individual campaign donors are included only when they run a registered business (owner-gifts); officials' board seats and businesses are added by the API once checked by hand.",
-   "rows": 16939,
+   "rows": 15841,
    "columns": [
     {
      "name": "link_id",

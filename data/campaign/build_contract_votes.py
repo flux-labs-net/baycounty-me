@@ -128,7 +128,9 @@ def build():
                 if methods:
                     cands.append({'vote': v, 'gap': gap, 'methods': methods, 'confident': False, 'shared': sorted(shared)})
                 continue
-            confident = ((by_num and (by_name or amt_eq or by_item or gap == 0)) or (by_name and (amt_eq or (by_item and (gap == 0 or amt_ok)))) or (by_name and gap == 0 and amt_ok and not other_vendor and r['amount'] is not None and v.get('amount') is not None)
+            # an item-number match must also name the vendor or agree on the amount: minutes can file another motion under
+            # the same item number (a budget vote once landed on a parking-lot contract)
+            confident = ((by_num and (by_name or amt_eq or by_item or gap == 0) and (by_name or amt_ok)) or (by_name and (amt_eq or (by_item and (gap == 0 or amt_ok)))) or (by_name and gap == 0 and amt_ok and not other_vendor and r['amount'] is not None and v.get('amount') is not None)
                          or (by_item and amt_eq))
             cands.append({'vote': v, 'gap': gap, 'methods': methods, 'confident': confident, 'shared': sorted(shared)})
         conf = [c for c in cands if c['confident']]

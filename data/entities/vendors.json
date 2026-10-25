@@ -1,6 +1,6 @@
 {
  "about": "One record per vendor (business or organization paid by a Bay County government, CRA or tourism agency). aliases are every spelling found in contracts, change orders, emergency purchases, check registers (including 15-character truncations), TDC payments, the CRA ledger and business campaign contributions. Built by data/entities/build_entities.py; hand-reviewed joins carry merge_evidence. Look-alike names that were not joined are in vendor_review.json.",
- "count": 598,
+ "count": 596,
  "vendors": [
   {
    "id": "12elevenband",
@@ -3581,38 +3581,26 @@
    "id": "fpl",
    "name": "Florida Power & Light",
    "aliases": [
+    "FPL",
     "FPL - FLORIDA P",
     "Florida Power & Light",
     "Florida Power & Light Company"
    ],
    "keys": [
     "floridapowerlight",
+    "fpl",
     "fplfloridap"
    ],
    "records": {
-    "register": 6
-   },
-   "gov_ids": [
-    "county",
-    "lh"
-   ],
-   "site_vendor_type": "business"
-  },
-  {
-   "id": "fpl-2",
-   "name": "FPL",
-   "aliases": [
-    "FPL"
-   ],
-   "keys": [
-    "fpl"
-   ],
-   "records": {
+    "register": 6,
     "tdc": 1
    },
    "gov_ids": [
+    "county",
+    "lh",
     "visit_pcb"
-   ]
+   ],
+   "site_vendor_type": "business"
   },
   {
    "id": "fpl-northwest-fl",
@@ -8674,35 +8662,23 @@
    "name": "Southeastern Outdoor Management",
    "aliases": [
     "Southeastern Outdoor Management",
-    "Southeastern Outdoor Mgmt"
-   ],
-   "keys": [
-    "southeasternoutdoormanagement"
-   ],
-   "records": {
-    "contract": 1
-   },
-   "gov_ids": [
-    "county"
-   ],
-   "site_vendor_type": "business",
-   "merge_evidence": "\"Southeastern Outdoor Met Inc\" is how the scanned Visit PCB register reads; \"Southeastern Outdoor Mgmt\" is a campaign filing."
-  },
-  {
-   "id": "southeastern-outdoor-mgt",
-   "name": "Southeastern Outdoor Mgt Inc",
-   "aliases": [
+    "Southeastern Outdoor Mgmt",
     "Southeastern Outdoor Mgt Inc"
    ],
    "keys": [
+    "southeasternoutdoormanagement",
     "southeasternoutdoormgt"
    ],
    "records": {
+    "contract": 1,
     "tdc": 1
    },
    "gov_ids": [
+    "county",
     "visit_pcb"
-   ]
+   ],
+   "site_vendor_type": "business",
+   "merge_evidence": "\"Southeastern Outdoor Met Inc\" and \"Mgt Inc\" are how the scanned Visit PCB register reads; \"Southeastern Outdoor Mgmt\" is a campaign filing."
   },
   {
    "id": "southern-construction",
