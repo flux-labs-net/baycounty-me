@@ -95,7 +95,7 @@ PAGE_ICON = {
     '/public-money/hurricane-michael': 'storm', '/public-money/debt': 'dollar', '/public-money/map': 'map',
     '/public-money/accountability': 'shield', '/public-money/contracts': 'file', '/public-money/vendors': 'store',
     '/public-money/who-gets-paid': 'dollar', '/public-money/votes': 'vote', '/public-money/savings': 'piggy',
-    '/public-money/audits': 'search', '/connections': 'network', '/elections': 'flag', '/connections/campaign-gifts': 'heart',
+    '/public-money/audits': 'search', '/connections': 'network', '/elections': 'flag', '/elections/past': 'flag', '/connections/campaign-gifts': 'heart',
     '/connections/money-map': 'link', '/connections/business-ties': 'store', '/connections/shared-owners': 'network',
     '/connections/nonprofits': 'heart', '/meetings': 'calendar', '/alerts': 'bell', '/records-request': 'mail',
     '/correspondence': 'mail', '/glossary': 'book', '/open-data': 'download', '/developers': 'code', '/updates': 'news',

@@ -4,7 +4,7 @@ to the officials who approve that spending.
 Covers every government and agency with payment records (the county, cities, school district, CRAs and tourism
 agencies) and every kind of record: contracts, change orders, emergency purchases, check registers, tourism agency
 payments and the CRA ledger (data/entities/records.py). A CRA is its own payer here, but it is one filter among many,
-not the frame. Gifts come from data/entities/records.py donations() (officeholders and 2026 candidates); a donor is
+not the frame. Gifts come from data/entities/records.py donations() (officeholders, 2026 candidates and past campaigns since 2016); a donor is
 "paid" when data/campaign/vendor_matches.json resolves it to the same vendor as a payment record.
 
 Individual donors are never shown, only businesses, PACs and committees. Unnamed recipients of grant programs
@@ -195,13 +195,18 @@ def network_data():
     officials = {}
     agg = {}
     for d in records.donations(GIFT_TYPES):
-        cand = d['src'] == 'candidates_2026'
+        cand = d['src'] in ('candidates_2026', 'history')
         oid = 'm:' + d['candidate']  # m: an elected official or candidate (o: is a property owner)
         o = officials.setdefault(oid, {'n': d['candidate'], 'off': d.get('office') or '', 'g': None, 'cand': cand, 'u': d.get('report_url')})
+        if d['src'] == 'history' and o['cand'] and not o.get('cand26'):
+            o['yr'] = max(o.get('yr') or 0, d.get('year') or 0) or None  # a past campaign (2016-2025) by someone not in office now
+        if d['src'] == 'candidates_2026':
+            o['cand26'] = True; o.pop('yr', None)
         if not o['g']:
             o['g'] = office_gov({'gov': d.get('gov'), 'office': d.get('office')})
         if not cand:
             o['cand'] = False  # a sitting official who is also on the 2026 ballot
+            o.pop('yr', None)
         k = _norm(d['name'])
         ent, conf = paid.get(k, (None, None))
         dk = ent or 'd:' + k
@@ -219,6 +224,7 @@ def network_data():
         don.append(x)
     don.sort(key=lambda x: (-(x['e'] is not None), -x['a']))
     for o in officials.values():
+        o.pop('cand26', None)
         o['pid'] = ids.person_id(o['n'])  # /people/<pid>
         o['gid'] = o['g'] or ''
         o['g'] = gkey(o['g']) or '' if o['g'] else ''  # city filter key (county officers count with the county)
@@ -248,7 +254,8 @@ def _gift_type(d):
     if not _TYPE_OF:
         c = records._j('campaign', 'campaign.json') or {}
         f = records._j('elections', 'finance_2026.json') or {}
-        for src in (c, f):
+        h = records._j('campaign', 'campaign_history.json') or {}
+        for src in (h, c, f):
             for cd in src.get('candidates') or []:
                 for x in cd.get('contributors') or []:
                     _TYPE_OF[x['name']] = x.get('type')

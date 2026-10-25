@@ -11,9 +11,9 @@
   "seats": 16871,
   "board_people": 7966,
   "on_2plus_current_boards": 520,
-  "official_name_matches": 59,
+  "official_name_matches": 103,
   "linked_to_businesses": 1705,
-  "linked_to_donor_businesses": 107,
+  "linked_to_donor_businesses": 215,
   "payment_records": 30,
   "nonprofits_paid": 25,
   "grants": 373,
@@ -4793,8 +4793,8 @@
    "grants_given_count": 0,
    "grants_given_cash": null,
    "grants_from_local_nonprofits": null,
-   "campaign_gifts_total": null,
-   "campaign_gift_candidates": null,
+   "campaign_gifts_total": 100.0,
+   "campaign_gift_candidates": "Josh Street",
    "fdacs_registration": null,
    "fdacs_status": null,
    "fdacs_expires": null,
@@ -285901,14 +285901,62 @@
   {
    "person_id": "b_b0a8b115cb7f",
    "person": "Allan Bense",
+   "doc_number": "214578",
+   "business": "GAC CONTRACTORS, INC.",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 22000.0,
+   "candidates": "Bill Dozier, Bill Husfelt, Brandon Aldridge, Chuck Perdue, Dan Sowell, Daniel Russell, Greg Brudnicki, Jerry L Register, Joe Wayne Walker, Joseph Ashbrook, Kenneth Brown, Mike Nelson, Phil Chester, Robert Benjamin Smith, Robert Carroll, Scott Davis, Stacie Galbreath, Timothy Campbell, Tommy Hamm, William (Bill) Husfelt, Winston Chester",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/GAC%20CONTRACTORS%2C%20INC./Page1"
+  },
+  {
+   "person_id": "b_b0a8b115cb7f",
+   "person": "Allan Bense",
+   "doc_number": "L14000192492",
+   "business": "BENSE PROPERTIES, LLC",
+   "business_status": "Inactive",
+   "match": "Name and address",
+   "campaign_gifts_total": 3500.0,
+   "candidates": "Bill Husfelt, Brandon Aldridge, Greg Brudnicki, William (Bill) Husfelt",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/BENSE%20PROPERTIES%2C%20LLC/Page1"
+  },
+  {
+   "person_id": "b_b0a8b115cb7f",
+   "person": "Allan Bense",
+   "doc_number": "L13000112176",
+   "business": "BAYOU GEORGE FARMS, LLC",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 2000.0,
+   "candidates": "Chuck Perdue, Keith Baker, Robert Carroll",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/BAYOU%20GEORGE%20FARMS%2C%20LLC/Page1"
+  },
+  {
+   "person_id": "b_b0a8b115cb7f",
+   "person": "Allan Bense",
    "doc_number": "P01000113955",
    "business": "BENSE ENTERPRISES, INC.",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 1000.0,
-   "candidates": "Daniel Raffield",
+   "campaign_gifts_total": 2000.0,
+   "candidates": "Brandon Aldridge, Daniel Raffield",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/BENSE%20ENTERPRISES%2C%20INC./Page1"
+  },
+  {
+   "person_id": "b_b0a8b115cb7f",
+   "person": "Allan Bense",
+   "doc_number": "L19000091473",
+   "business": "THREE B'S FARM LLC",
+   "business_status": "Inactive",
+   "match": "Name and address",
+   "campaign_gifts_total": 1000.0,
+   "candidates": "Bill Husfelt",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/THREE%20B%27S%20FARM%20LLC/Page1"
   },
   {
    "person_id": "b_b0a8b115cb7f",
@@ -285921,18 +285969,6 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/455%20HARRISON%20AVENUE%20RENTALS%2C%20LLC/Page1"
-  },
-  {
-   "person_id": "b_b0a8b115cb7f",
-   "person": "Allan Bense",
-   "doc_number": "L13000112176",
-   "business": "BAYOU GEORGE FARMS, LLC",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/BAYOU%20GEORGE%20FARMS%2C%20LLC/Page1"
   },
   {
    "person_id": "b_b0a8b115cb7f",
@@ -285961,18 +285997,6 @@
   {
    "person_id": "b_b0a8b115cb7f",
    "person": "Allan Bense",
-   "doc_number": "L14000192492",
-   "business": "BENSE PROPERTIES, LLC",
-   "business_status": "Inactive",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/BENSE%20PROPERTIES%2C%20LLC/Page1"
-  },
-  {
-   "person_id": "b_b0a8b115cb7f",
-   "person": "Allan Bense",
    "doc_number": "P00000034669",
    "business": "BENSE RENTALS, INC.",
    "business_status": "Inactive",
@@ -285981,18 +286005,6 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/BENSE%20RENTALS%2C%20INC./Page1"
-  },
-  {
-   "person_id": "b_b0a8b115cb7f",
-   "person": "Allan Bense",
-   "doc_number": "214578",
-   "business": "GAC CONTRACTORS, INC.",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/GAC%20CONTRACTORS%2C%20INC./Page1"
   },
   {
    "person_id": "b_b0a8b115cb7f",
@@ -286029,18 +286041,6 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/STANFORD%20CORNER%2C%20LLC/Page1"
-  },
-  {
-   "person_id": "b_b0a8b115cb7f",
-   "person": "Allan Bense",
-   "doc_number": "L19000091473",
-   "business": "THREE B'S FARM LLC",
-   "business_status": "Inactive",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/THREE%20B%27S%20FARM%20LLC/Page1"
   },
   {
    "person_id": "b_b0a8b115cb7f",
@@ -286145,8 +286145,8 @@
    "business": "ALVIN L. PETERS, P.A.",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
+   "campaign_gifts_total": 250.0,
+   "candidates": "Jenna Flint Haligas",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/ALVIN%20L.%20PETERS%2C%20P.A./Page1"
   },
@@ -286541,8 +286541,8 @@
    "business": "GULF COAST EAGLE INVESTMENTS LLC",
    "business_status": "Inactive",
    "match": "Name",
-   "campaign_gifts_total": 0,
-   "candidates": null,
+   "campaign_gifts_total": 250.0,
+   "candidates": "Jenna Flint Haligas",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/GULF%20COAST%20EAGLE%20INVESTMENTS%20LLC/Page1"
   },
@@ -286589,10 +286589,34 @@
    "business": "CASONCO, LLC",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 5000.0,
-   "candidates": "Daniel Raffield, Josh Street, Robbie Hughes, Sam Peebles, Scott Duvall",
+   "campaign_gifts_total": 9500.0,
+   "candidates": "Bill Dozier, Billy Rader, Daniel Raffield, Greg Brudnicki, Jamie Marler, Jesse Nelson, Josh Street, Robbie Hughes, Sam Peebles, Scott Duvall",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/CASONCO%2C%20LLC/Page1"
+  },
+  {
+   "person_id": "b_cb12d6e4f86f",
+   "person": "Angel Forehand",
+   "doc_number": "L04000025571",
+   "business": "MAC DADDY HOLDINGS, LLC",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 2000.0,
+   "candidates": "Billy Rader, Jeff Snyder, Josh Street",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/MAC%20DADDY%20HOLDINGS%2C%20LLC/Page1"
+  },
+  {
+   "person_id": "b_cb12d6e4f86f",
+   "person": "Angel Forehand",
+   "doc_number": "L17000235159",
+   "business": "THE CANTRELL ASSOCIATE, LLC",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 2000.0,
+   "candidates": "Jeff Snyder, Jesse Nelson, Stacie Houchins",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/THE%20CANTRELL%20ASSOCIATE%2C%20LLC/Page1"
   },
   {
    "person_id": "b_cb12d6e4f86f",
@@ -286605,30 +286629,6 @@
    "candidates": "Daniel Raffield",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/ASHLEY%27S%20PLACE%2C%20L.L.C./Page1"
-  },
-  {
-   "person_id": "b_cb12d6e4f86f",
-   "person": "Angel Forehand",
-   "doc_number": "L04000025571",
-   "business": "MAC DADDY HOLDINGS, LLC",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 1000.0,
-   "candidates": "Josh Street",
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/MAC%20DADDY%20HOLDINGS%2C%20LLC/Page1"
-  },
-  {
-   "person_id": "b_cb12d6e4f86f",
-   "person": "Angel Forehand",
-   "doc_number": "L17000235159",
-   "business": "THE CANTRELL ASSOCIATE, LLC",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/THE%20CANTRELL%20ASSOCIATE%2C%20LLC/Page1"
   },
   {
    "person_id": "b_a726380a1c61",
@@ -286781,8 +286781,8 @@
    "business": "SOUTHERN HOSPITALITY, L.L.C.",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
+   "campaign_gifts_total": 402.0,
+   "candidates": "Greg Brudnicki, Philip 'Griff ' Griffitts",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/SOUTHERN%20HOSPITALITY%2C%20L.L.C./Page1"
   },
@@ -287657,8 +287657,8 @@
    "business": "PINEAPPLE WILLY'S. INC.",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
+   "campaign_gifts_total": 1000.0,
+   "candidates": "Phil Chester, Philip 'Griff ' Griffitts",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/PINEAPPLE%20WILLY%27S.%20INC./Page1"
   },
@@ -289297,14 +289297,98 @@
   {
    "person_id": "b_4617faf53c4a",
    "person": "Chapman IV",
+   "doc_number": "P97000027498",
+   "business": "RAFS OF PENSACOLA, INC.",
+   "business_status": "Inactive",
+   "match": "Name and address",
+   "campaign_gifts_total": 1750.0,
+   "candidates": "Pamm Chapman, Tommy Hamm",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/RAFS%20OF%20PENSACOLA%2C%20INC./Page1"
+  },
+  {
+   "person_id": "b_4617faf53c4a",
+   "person": "Chapman IV",
+   "doc_number": "P03000021337",
+   "business": "RAFS OF FWB, INC.",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 1500.0,
+   "candidates": "Pamm Chapman, Tommy Hamm",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/RAFS%20OF%20FWB%2C%20INC./Page1"
+  },
+  {
+   "person_id": "b_4617faf53c4a",
+   "person": "Chapman IV",
    "doc_number": "L16000005886",
    "business": "JEN III, LLC",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 250.0,
-   "candidates": "Josh Street",
+   "campaign_gifts_total": 1000.0,
+   "candidates": "Josh Street, Pamm Chapman",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/JEN%20III%2C%20LLC/Page1"
+  },
+  {
+   "person_id": "b_4617faf53c4a",
+   "person": "Chapman IV",
+   "doc_number": "L08000117094",
+   "business": "PEOPLES FIRST INSURANCE SERVICES, LLC",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 1000.0,
+   "candidates": "Tommy Hamm",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/PEOPLES%20FIRST%20INSURANCE%20SERVICES%2C%20LLC/Page1"
+  },
+  {
+   "person_id": "b_4617faf53c4a",
+   "person": "Chapman IV",
+   "doc_number": "P18000097287",
+   "business": "SOUTHERN COASTAL CONTAINERS, INC.",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 1000.0,
+   "candidates": "Doug Moore",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/SOUTHERN%20COASTAL%20CONTAINERS%2C%20INC./Page1"
+  },
+  {
+   "person_id": "b_4617faf53c4a",
+   "person": "Chapman IV",
+   "doc_number": "695060",
+   "business": "ITC HOLDINGS, INC.",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 500.0,
+   "candidates": "Daniel Robert Schultz",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/ITC%20HOLDINGS%2C%20INC./Page1"
+  },
+  {
+   "person_id": "b_4617faf53c4a",
+   "person": "Chapman IV",
+   "doc_number": "P05000150294",
+   "business": "RAFS OF DOTHAN, INC.",
+   "business_status": "Inactive",
+   "match": "Name and address",
+   "campaign_gifts_total": 500.0,
+   "candidates": "Pamm Chapman",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/RAFS%20OF%20DOTHAN%2C%20INC./Page1"
+  },
+  {
+   "person_id": "b_4617faf53c4a",
+   "person": "Chapman IV",
+   "doc_number": "L15000183296",
+   "business": "ROYAL AMERICAN TITLE, LLC",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 250.0,
+   "candidates": "Pamm Chapman",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/ROYAL%20AMERICAN%20TITLE%2C%20LLC/Page1"
   },
   {
    "person_id": "b_4617faf53c4a",
@@ -289465,18 +289549,6 @@
   {
    "person_id": "b_4617faf53c4a",
    "person": "Chapman IV",
-   "doc_number": "695060",
-   "business": "ITC HOLDINGS, INC.",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/ITC%20HOLDINGS%2C%20INC./Page1"
-  },
-  {
-   "person_id": "b_4617faf53c4a",
-   "person": "Chapman IV",
    "doc_number": "A09767",
    "business": "LITTLE OAKS APARTMENTS, LTD.",
    "business_status": "Inactive",
@@ -289561,18 +289633,6 @@
   {
    "person_id": "b_4617faf53c4a",
    "person": "Chapman IV",
-   "doc_number": "L08000117094",
-   "business": "PEOPLES FIRST INSURANCE SERVICES, LLC",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/PEOPLES%20FIRST%20INSURANCE%20SERVICES%2C%20LLC/Page1"
-  },
-  {
-   "person_id": "b_4617faf53c4a",
-   "person": "Chapman IV",
    "doc_number": "P99000100851",
    "business": "PEOPLES FIRST INSURANCE, INC.",
    "business_status": "Inactive",
@@ -289633,30 +289693,6 @@
   {
    "person_id": "b_4617faf53c4a",
    "person": "Chapman IV",
-   "doc_number": "P05000150294",
-   "business": "RAFS OF DOTHAN, INC.",
-   "business_status": "Inactive",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/RAFS%20OF%20DOTHAN%2C%20INC./Page1"
-  },
-  {
-   "person_id": "b_4617faf53c4a",
-   "person": "Chapman IV",
-   "doc_number": "P03000021337",
-   "business": "RAFS OF FWB, INC.",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/RAFS%20OF%20FWB%2C%20INC./Page1"
-  },
-  {
-   "person_id": "b_4617faf53c4a",
-   "person": "Chapman IV",
    "doc_number": "P97000027492",
    "business": "RAFS OF PANAMA CITY, INC.",
    "business_status": "Active",
@@ -289677,18 +289713,6 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/RAFS%20OF%20PCB%2C%20INC./Page1"
-  },
-  {
-   "person_id": "b_4617faf53c4a",
-   "person": "Chapman IV",
-   "doc_number": "P97000027498",
-   "business": "RAFS OF PENSACOLA, INC.",
-   "business_status": "Inactive",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/RAFS%20OF%20PENSACOLA%2C%20INC./Page1"
   },
   {
    "person_id": "b_4617faf53c4a",
@@ -289845,30 +289869,6 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/ROYAL%20AMERICAN%20TENANT%20SCREENING%2C%20LLC/Page1"
-  },
-  {
-   "person_id": "b_4617faf53c4a",
-   "person": "Chapman IV",
-   "doc_number": "L15000183296",
-   "business": "ROYAL AMERICAN TITLE, LLC",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/ROYAL%20AMERICAN%20TITLE%2C%20LLC/Page1"
-  },
-  {
-   "person_id": "b_4617faf53c4a",
-   "person": "Chapman IV",
-   "doc_number": "P18000097287",
-   "business": "SOUTHERN COASTAL CONTAINERS, INC.",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/SOUTHERN%20COASTAL%20CONTAINERS%2C%20INC./Page1"
   },
   {
    "person_id": "b_4617faf53c4a",
@@ -290045,10 +290045,34 @@
    "business": "CENTURY 21 COMMANDER REALTY, INC.",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 500.0,
-   "candidates": "Tommy Ford",
+   "campaign_gifts_total": 4450.0,
+   "candidates": "Bill Dozier, Bill Husfelt, Brian Dick, James E. McCalister, Jamie Marler, Joe Brown, Pamm Chapman, Tommy Ford, Tommy Hamm, William (Bill) Husfelt",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/CENTURY%2021%20COMMANDER%20REALTY%2C%20INC./Page1"
+  },
+  {
+   "person_id": "b_63d47121bfce",
+   "person": "Charles J Commander",
+   "doc_number": "P05000006455",
+   "business": "CHARLES WILLIAM COMMANDER, JR., P.A.",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 1000.0,
+   "candidates": "Bill Husfelt",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/CHARLES%20WILLIAM%20COMMANDER%2C%20JR.%2C%20P.A./Page1"
+  },
+  {
+   "person_id": "b_63d47121bfce",
+   "person": "Charles J Commander",
+   "doc_number": "L01000011956",
+   "business": "COMMAN HOLDINGS, L.C.",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 500.0,
+   "candidates": "Bill Husfelt",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/COMMAN%20HOLDINGS%2C%20L.C./Page1"
   },
   {
    "person_id": "b_63d47121bfce",
@@ -290113,18 +290137,6 @@
   {
    "person_id": "b_63d47121bfce",
    "person": "Charles J Commander",
-   "doc_number": "P05000006455",
-   "business": "CHARLES WILLIAM COMMANDER, JR., P.A.",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/CHARLES%20WILLIAM%20COMMANDER%2C%20JR.%2C%20P.A./Page1"
-  },
-  {
-   "person_id": "b_63d47121bfce",
-   "person": "Charles J Commander",
    "doc_number": "L11000127648",
    "business": "CHEESE BARN 390 LLC",
    "business_status": "Inactive",
@@ -290145,18 +290157,6 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/CHOCTAW%20RENTAL%20INVESTORS%2C%20LLC/Page1"
-  },
-  {
-   "person_id": "b_63d47121bfce",
-   "person": "Charles J Commander",
-   "doc_number": "L01000011956",
-   "business": "COMMAN HOLDINGS, L.C.",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/COMMAN%20HOLDINGS%2C%20L.C./Page1"
   },
   {
    "person_id": "b_63d47121bfce",
@@ -290297,10 +290297,34 @@
    "business": "CENTURY 21 COMMANDER REALTY, INC.",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 500.0,
-   "candidates": "Tommy Ford",
+   "campaign_gifts_total": 4450.0,
+   "candidates": "Bill Dozier, Bill Husfelt, Brian Dick, James E. McCalister, Jamie Marler, Joe Brown, Pamm Chapman, Tommy Ford, Tommy Hamm, William (Bill) Husfelt",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/CENTURY%2021%20COMMANDER%20REALTY%2C%20INC./Page1"
+  },
+  {
+   "person_id": "b_dbaf11d813d5",
+   "person": "Charles S Commander",
+   "doc_number": "P05000006455",
+   "business": "CHARLES WILLIAM COMMANDER, JR., P.A.",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 1000.0,
+   "candidates": "Bill Husfelt",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/CHARLES%20WILLIAM%20COMMANDER%2C%20JR.%2C%20P.A./Page1"
+  },
+  {
+   "person_id": "b_dbaf11d813d5",
+   "person": "Charles S Commander",
+   "doc_number": "L01000011956",
+   "business": "COMMAN HOLDINGS, L.C.",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 500.0,
+   "candidates": "Bill Husfelt",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/COMMAN%20HOLDINGS%2C%20L.C./Page1"
   },
   {
    "person_id": "b_dbaf11d813d5",
@@ -290365,18 +290389,6 @@
   {
    "person_id": "b_dbaf11d813d5",
    "person": "Charles S Commander",
-   "doc_number": "P05000006455",
-   "business": "CHARLES WILLIAM COMMANDER, JR., P.A.",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/CHARLES%20WILLIAM%20COMMANDER%2C%20JR.%2C%20P.A./Page1"
-  },
-  {
-   "person_id": "b_dbaf11d813d5",
-   "person": "Charles S Commander",
    "doc_number": "L11000127648",
    "business": "CHEESE BARN 390 LLC",
    "business_status": "Inactive",
@@ -290397,18 +290409,6 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/CHOCTAW%20RENTAL%20INVESTORS%2C%20LLC/Page1"
-  },
-  {
-   "person_id": "b_dbaf11d813d5",
-   "person": "Charles S Commander",
-   "doc_number": "L01000011956",
-   "business": "COMMAN HOLDINGS, L.C.",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/COMMAN%20HOLDINGS%2C%20L.C./Page1"
   },
   {
    "person_id": "b_dbaf11d813d5",
@@ -290669,8 +290669,8 @@
    "business": "SAGE DEVCO, LLC",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 1000.0,
-   "candidates": "Clair Pease",
+   "campaign_gifts_total": 1500.0,
+   "candidates": "Clair Pease, Geoff McConnell",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/SAGE%20DEVCO%2C%20LLC/Page1"
   },
@@ -290685,6 +290685,30 @@
    "candidates": "Ann Leonard, Doug Crosby",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/SAGE%20LAND%20HOLDINGS%20II%2C%20LLC/Page1"
+  },
+  {
+   "person_id": "b_45497abef263",
+   "person": "Chetan Patel",
+   "doc_number": "L12000111830",
+   "business": "SAGE MANAGEMENT CONSULTANTS, LLC",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 1000.0,
+   "candidates": "Phil Chester",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/SAGE%20MANAGEMENT%20CONSULTANTS%2C%20LLC/Page1"
+  },
+  {
+   "person_id": "b_45497abef263",
+   "person": "Chetan Patel",
+   "doc_number": "L07000009705",
+   "business": "RAJESHWER HOSPITALITY, LLC",
+   "business_status": "Inactive",
+   "match": "Name and address",
+   "campaign_gifts_total": 500.0,
+   "candidates": "Robert Carroll",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/RAJESHWER%20HOSPITALITY%2C%20LLC/Page1"
   },
   {
    "person_id": "b_45497abef263",
@@ -290749,18 +290773,6 @@
   {
    "person_id": "b_45497abef263",
    "person": "Chetan Patel",
-   "doc_number": "L07000009705",
-   "business": "RAJESHWER HOSPITALITY, LLC",
-   "business_status": "Inactive",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/RAJESHWER%20HOSPITALITY%2C%20LLC/Page1"
-  },
-  {
-   "person_id": "b_45497abef263",
-   "person": "Chetan Patel",
    "doc_number": "L19000036893",
    "business": "SAGE INVESCO II, LLC",
    "business_status": "Active",
@@ -290769,18 +290781,6 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/SAGE%20INVESCO%20II%2C%20LLC/Page1"
-  },
-  {
-   "person_id": "b_45497abef263",
-   "person": "Chetan Patel",
-   "doc_number": "L12000111830",
-   "business": "SAGE MANAGEMENT CONSULTANTS, LLC",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/SAGE%20MANAGEMENT%20CONSULTANTS%2C%20LLC/Page1"
   },
   {
    "person_id": "b_45497abef263",
@@ -290897,8 +290897,8 @@
    "business": "UNCLE BUCK'S STORAGE, LLC",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 5750.0,
-   "candidates": "Bob Pelletier, Bobby J. Birdsell, Daniel Raffield, Doug Crosby, Grant Wittstruck, Pat Perno, Robbie Hughes",
+   "campaign_gifts_total": 10750.0,
+   "candidates": "Bob Pelletier, Bobby J. Birdsell, Brandon Aldridge, Bruce Lang, Daniel Raffield, Doug Crosby, Grant Wittstruck, Greg Brudnicki, Jesse Nelson, Pat Perno, Robbie Hughes",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/UNCLE%20BUCK%27S%20STORAGE%2C%20LLC/Page1"
   },
@@ -290909,10 +290909,22 @@
    "business": "CASONCO, LLC",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 5000.0,
-   "candidates": "Daniel Raffield, Josh Street, Robbie Hughes, Sam Peebles, Scott Duvall",
+   "campaign_gifts_total": 9500.0,
+   "candidates": "Bill Dozier, Billy Rader, Daniel Raffield, Greg Brudnicki, Jamie Marler, Jesse Nelson, Josh Street, Robbie Hughes, Sam Peebles, Scott Duvall",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/CASONCO%2C%20LLC/Page1"
+  },
+  {
+   "person_id": "b_319ea2f0354f",
+   "person": "Chris Forehand",
+   "doc_number": "L04000025571",
+   "business": "MAC DADDY HOLDINGS, LLC",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 2000.0,
+   "candidates": "Billy Rader, Jeff Snyder, Josh Street",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/MAC%20DADDY%20HOLDINGS%2C%20LLC/Page1"
   },
   {
    "person_id": "b_319ea2f0354f",
@@ -290929,14 +290941,14 @@
   {
    "person_id": "b_319ea2f0354f",
    "person": "Chris Forehand",
-   "doc_number": "L04000025571",
-   "business": "MAC DADDY HOLDINGS, LLC",
+   "doc_number": "L12000125131",
+   "business": "CBF CONSULTING ENGINEERS, LLC",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 1000.0,
-   "candidates": "Josh Street",
+   "campaign_gifts_total": 500.0,
+   "candidates": "William (Bill) Husfelt",
    "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/MAC%20DADDY%20HOLDINGS%2C%20LLC/Page1"
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/CBF%20CONSULTING%20ENGINEERS%2C%20LLC/Page1"
   },
   {
    "person_id": "b_319ea2f0354f",
@@ -290961,18 +290973,6 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/ANGEL%27S%20PLACE%20OF%20BAY%20COUNTY%2C%20LLC/Page1"
-  },
-  {
-   "person_id": "b_319ea2f0354f",
-   "person": "Chris Forehand",
-   "doc_number": "L12000125131",
-   "business": "CBF CONSULTING ENGINEERS, LLC",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/CBF%20CONSULTING%20ENGINEERS%2C%20LLC/Page1"
   },
   {
    "person_id": "b_319ea2f0354f",
@@ -291365,8 +291365,8 @@
    "business": "CLUBBS REAL ESTATE GROUP, LLC",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 1500.0,
-   "candidates": "Sam Peebles, Stuart Tettemer, Tommy Ford",
+   "campaign_gifts_total": 2250.0,
+   "candidates": "Greg Brudnicki, Michael Nichols, Sam Peebles, Stuart Tettemer, Tommy Ford",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/CLUBBS%20REAL%20ESTATE%20GROUP%2C%20LLC/Page1"
   },
@@ -291385,6 +291385,18 @@
   {
    "person_id": "b_ce0542715b0d",
    "person": "Christopher Clubbs",
+   "doc_number": "L13000113558",
+   "business": "CHRISTOPHER CLUBBS, LLC",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 500.0,
+   "candidates": "Bill Husfelt",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/CHRISTOPHER%20CLUBBS%2C%20LLC/Page1"
+  },
+  {
+   "person_id": "b_ce0542715b0d",
+   "person": "Christopher Clubbs",
    "doc_number": "L24000361577",
    "business": "CCC AVIATION, LLC",
    "business_status": "Active",
@@ -291393,18 +291405,6 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/CCC%20AVIATION%2C%20LLC/Page1"
-  },
-  {
-   "person_id": "b_ce0542715b0d",
-   "person": "Christopher Clubbs",
-   "doc_number": "L13000113558",
-   "business": "CHRISTOPHER CLUBBS, LLC",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/CHRISTOPHER%20CLUBBS%2C%20LLC/Page1"
   },
   {
    "person_id": "b_ce0542715b0d",
@@ -291605,8 +291605,8 @@
    "business": "HILTON INC.",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 4000.0,
-   "candidates": "Daniel Raffield, Nick Atkinson, Paul Casto, Tommy Ford",
+   "campaign_gifts_total": 6000.0,
+   "candidates": "Dan Sowell, Daniel Raffield, Geoff McConnell, Nick Atkinson, Paul Casto, Tommy Ford",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/HILTON%20INC./Page1"
   },
@@ -291625,6 +291625,30 @@
   {
    "person_id": "b_4b9353c1ae91",
    "person": "Cody Khan",
+   "doc_number": "L04000035991",
+   "business": "BAY WEST DEVELOPERS, L.L.C.",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 1500.0,
+   "candidates": "Rick Russell Jr., William (Bill) Husfelt",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/BAY%20WEST%20DEVELOPERS%2C%20L.L.C./Page1"
+  },
+  {
+   "person_id": "b_4b9353c1ae91",
+   "person": "Cody Khan",
+   "doc_number": "P99000095214",
+   "business": "HILTON TIMBER COMPANY",
+   "business_status": "Inactive",
+   "match": "Name and address",
+   "campaign_gifts_total": 1000.0,
+   "candidates": "Geoff McConnell",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/HILTON%20TIMBER%20COMPANY/Page1"
+  },
+  {
+   "person_id": "b_4b9353c1ae91",
+   "person": "Cody Khan",
    "doc_number": "L05000108542",
    "business": "BAY  WEST INVESTORS, L.L.C.",
    "business_status": "Active",
@@ -291633,18 +291657,6 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/BAY%20WEST%20INVESTORS%2C%20L.L.C./Page1"
-  },
-  {
-   "person_id": "b_4b9353c1ae91",
-   "person": "Cody Khan",
-   "doc_number": "L04000035991",
-   "business": "BAY WEST DEVELOPERS, L.L.C.",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/BAY%20WEST%20DEVELOPERS%2C%20L.L.C./Page1"
   },
   {
    "person_id": "b_4b9353c1ae91",
@@ -291705,18 +291717,6 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/HILTON%20HOSPITALITY%2C%20LLC/Page1"
-  },
-  {
-   "person_id": "b_4b9353c1ae91",
-   "person": "Cody Khan",
-   "doc_number": "P99000095214",
-   "business": "HILTON TIMBER COMPANY",
-   "business_status": "Inactive",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/HILTON%20TIMBER%20COMPANY/Page1"
   },
   {
    "person_id": "b_4b9353c1ae91",
@@ -291817,6 +291817,18 @@
   {
    "person_id": "b_c65b351e9bf7",
    "person": "Colleen swab",
+   "doc_number": "P09000047870",
+   "business": "RCR CARS, INC.",
+   "business_status": "Inactive",
+   "match": "Name and address",
+   "campaign_gifts_total": 1500.0,
+   "candidates": "Colleen Swab",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/RCR%20CARS%2C%20INC./Page1"
+  },
+  {
+   "person_id": "b_c65b351e9bf7",
+   "person": "Colleen swab",
    "doc_number": "P10000041055",
    "business": "CALIFORNIA CYCLES AUTO PLAZA, INC.",
    "business_status": "Inactive",
@@ -291849,18 +291861,6 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/OUTLAW%20ADVENTURES%20INC./Page1"
-  },
-  {
-   "person_id": "b_c65b351e9bf7",
-   "person": "Colleen swab",
-   "doc_number": "P09000047870",
-   "business": "RCR CARS, INC.",
-   "business_status": "Inactive",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/RCR%20CARS%2C%20INC./Page1"
   },
   {
    "person_id": "b_859640e01100",
@@ -292717,6 +292717,18 @@
   {
    "person_id": "b_a074ae7fbd9c",
    "person": "Darrell Sellers",
+   "doc_number": "P94000007831",
+   "business": "PINEAPPLE WILLY'S. INC.",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 1000.0,
+   "candidates": "Phil Chester, Philip 'Griff ' Griffitts",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/PINEAPPLE%20WILLY%27S.%20INC./Page1"
+  },
+  {
+   "person_id": "b_a074ae7fbd9c",
+   "person": "Darrell Sellers",
    "doc_number": "L25000419246",
    "business": "PINEAPPLE GIVES LLC",
    "business_status": "Active",
@@ -292725,18 +292737,6 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/PINEAPPLE%20GIVES%20LLC/Page1"
-  },
-  {
-   "person_id": "b_a074ae7fbd9c",
-   "person": "Darrell Sellers",
-   "doc_number": "P94000007831",
-   "business": "PINEAPPLE WILLY'S. INC.",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/PINEAPPLE%20WILLY%27S.%20INC./Page1"
   },
   {
    "person_id": "b_5d6b613e78be",
@@ -293561,8 +293561,8 @@
    "business": "BENNETT'S REEF, INCORPORATED",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 3500.0,
-   "candidates": "Clair Pease, Grant Wittstruck, Paul Casto",
+   "campaign_gifts_total": 6750.0,
+   "candidates": "Bill Husfelt, Clair Pease, David Haight, Geoff McConnell, Grant Wittstruck, Mark Sheldon, Michael Jarman, Paul Casto",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/BENNETT%27S%20REEF%2C%20INCORPORATED/Page1"
   },
@@ -293573,8 +293573,8 @@
    "business": "BRI SHARKY'S, LLC",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 3000.0,
-   "candidates": "Clair Pease, Grant Wittstruck, Paul Casto",
+   "campaign_gifts_total": 5150.0,
+   "candidates": "Bill Husfelt, Clair Pease, Grant Wittstruck, Mark Sheldon, Michael Jarman, Paul Casto, Timothy Campbell, Tommy Hamm",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/BRI%20SHARKY%27S%2C%20LLC/Page1"
   },
@@ -293585,8 +293585,8 @@
    "business": "SEAHAVEN RESIDENTIAL MANAGEMENT, LLC",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 500.0,
-   "candidates": "Grant Wittstruck",
+   "campaign_gifts_total": 1500.0,
+   "candidates": "Grant Wittstruck, Michael Jarman, Rick Russell Jr.",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/SEAHAVEN%20RESIDENTIAL%20MANAGEMENT%2C%20LLC/Page1"
   },
@@ -294977,8 +294977,8 @@
    "business": "ANCHOR CONSULTING ENGINEERING AND INSPECTION, INC.",
    "business_status": "Active",
    "match": "Name",
-   "campaign_gifts_total": 1000.0,
-   "candidates": "Clair Pease",
+   "campaign_gifts_total": 2950.0,
+   "candidates": "Clair Pease, Mike Nelson, Paul Davis, Philip 'Griff ' Griffitts, Robert Carroll",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/ANCHOR%20CONSULTING%20ENGINEERING%20AND%20INSPECTION%2C%20INC./Page1"
   },
@@ -295001,8 +295001,8 @@
    "business": "THE ST. JOE COMPANY",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 3000.0,
-   "candidates": "Grant Wittstruck, Scott Duvall, Tommy Ford",
+   "campaign_gifts_total": 18400.0,
+   "candidates": "Bill Dozier, Christopher Moore, Chuck Perdue, Doug Moore, Geoff McConnell, Grant Wittstruck, Joe Wayne Walker, Mark Sheldon, Michael \"Doc\" Rohan, Mike Thomas, Pamm Chapman, Phil Chester, Robert Carroll, Scott Duvall, Steve Moss, Tommy Ford, Tommy Hamm, William (Bill) Husfelt",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/THE%20ST.%20JOE%20COMPANY/Page1"
   },
@@ -296581,6 +296581,18 @@
   {
    "person_id": "b_3b8877f88d8a",
    "person": "Ethan Messer",
+   "doc_number": "488127",
+   "business": "JOHN DOUGLAS INSURANCE AGENCY, INCORPORATED",
+   "business_status": "Active",
+   "match": "Name",
+   "campaign_gifts_total": 450.0,
+   "candidates": "Michael Nichols, Mike Nelson",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/JOHN%20DOUGLAS%20INSURANCE%20AGENCY%2C%20INCORPORATED/Page1"
+  },
+  {
+   "person_id": "b_3b8877f88d8a",
+   "person": "Ethan Messer",
    "doc_number": "L19000263485",
    "business": "BLUE MARKETING GROUP, LLC",
    "business_status": "Active",
@@ -296601,18 +296613,6 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/JOHN%20DOUGLAS%20FINANCIAL%20GROUP%2C%20INC./Page1"
-  },
-  {
-   "person_id": "b_3b8877f88d8a",
-   "person": "Ethan Messer",
-   "doc_number": "488127",
-   "business": "JOHN DOUGLAS INSURANCE AGENCY, INCORPORATED",
-   "business_status": "Active",
-   "match": "Name",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/JOHN%20DOUGLAS%20INSURANCE%20AGENCY%2C%20INCORPORATED/Page1"
   },
   {
    "person_id": "b_3b8877f88d8a",
@@ -297013,14 +297013,38 @@
   {
    "person_id": "b_6a5e241531dd",
    "person": "Floyd Skinner",
+   "doc_number": "P94000001501",
+   "business": "SKINNER TAX CONSULTING, INC.",
+   "business_status": "Active",
+   "match": "Name",
+   "campaign_gifts_total": 1500.0,
+   "candidates": "Chuck Perdue, Philip 'Griff ' Griffitts",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/SKINNER%20TAX%20CONSULTING%2C%20INC./Page1"
+  },
+  {
+   "person_id": "b_6a5e241531dd",
+   "person": "Floyd Skinner",
    "doc_number": "L09000029332",
    "business": "390 PARTNERS, LLC",
    "business_status": "Inactive",
    "match": "Name",
-   "campaign_gifts_total": 0,
-   "candidates": null,
+   "campaign_gifts_total": 1000.0,
+   "candidates": "Chuck Perdue",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/390%20PARTNERS%2C%20LLC/Page1"
+  },
+  {
+   "person_id": "b_6a5e241531dd",
+   "person": "Floyd Skinner",
+   "doc_number": "L09000084565",
+   "business": "STCO LLC",
+   "business_status": "Active",
+   "match": "Name",
+   "campaign_gifts_total": 1000.0,
+   "candidates": "Chuck Perdue",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/STCO%20LLC/Page1"
   },
   {
    "person_id": "b_6a5e241531dd",
@@ -297033,30 +297057,6 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/EA-RESOLUTION%2C%20INC./Page1"
-  },
-  {
-   "person_id": "b_6a5e241531dd",
-   "person": "Floyd Skinner",
-   "doc_number": "P94000001501",
-   "business": "SKINNER TAX CONSULTING, INC.",
-   "business_status": "Active",
-   "match": "Name",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/SKINNER%20TAX%20CONSULTING%2C%20INC./Page1"
-  },
-  {
-   "person_id": "b_6a5e241531dd",
-   "person": "Floyd Skinner",
-   "doc_number": "L09000084565",
-   "business": "STCO LLC",
-   "business_status": "Active",
-   "match": "Name",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/STCO%20LLC/Page1"
   },
   {
    "person_id": "b_ad536a94b13d",
@@ -297185,8 +297185,8 @@
    "business": "BEACH TIME REALTY, INC",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
+   "campaign_gifts_total": 250.0,
+   "candidates": "James E. McCalister",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/BEACH%20TIME%20REALTY%2C%20INC/Page1"
   },
@@ -297289,6 +297289,18 @@
   {
    "person_id": "b_23886aba0265",
    "person": "Garrett Anderson",
+   "doc_number": "P03000004598",
+   "business": "ANDERSON CONSTRUCTION COMPANY OF NORTH FLORIDA",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 700.0,
+   "candidates": "Joe Wayne Walker, Philip 'Griff ' Griffitts, William (Bill) Husfelt",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/ANDERSON%20CONSTRUCTION%20COMPANY%20OF%20NORTH%20FLORIDA/Page1"
+  },
+  {
+   "person_id": "b_23886aba0265",
+   "person": "Garrett Anderson",
    "doc_number": "P93000076854",
    "business": "ADEEVA, INC.",
    "business_status": "Inactive",
@@ -297297,18 +297309,6 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/ADEEVA%2C%20INC./Page1"
-  },
-  {
-   "person_id": "b_23886aba0265",
-   "person": "Garrett Anderson",
-   "doc_number": "P03000004598",
-   "business": "ANDERSON CONSTRUCTION COMPANY OF NORTH FLORIDA",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/ANDERSON%20CONSTRUCTION%20COMPANY%20OF%20NORTH%20FLORIDA/Page1"
   },
   {
    "person_id": "b_23886aba0265",
@@ -297333,6 +297333,18 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/CHESNUT%20CONSTRUCTION%2C%20LLC/Page1"
+  },
+  {
+   "person_id": "b_dd97c57ce51c",
+   "person": "Gary Hall",
+   "doc_number": "560341",
+   "business": "BROWARD HALL, AGENCY, INC.",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 250.0,
+   "candidates": "Mike Nelson",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/BROWARD%20HALL%2C%20AGENCY%2C%20INC./Page1"
   },
   {
    "person_id": "b_dd97c57ce51c",
@@ -297393,18 +297405,6 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/BROWARD%20HALL%20AGENCY%20OF%20NW%20FL%2C%20LLC/Page1"
-  },
-  {
-   "person_id": "b_dd97c57ce51c",
-   "person": "Gary Hall",
-   "doc_number": "560341",
-   "business": "BROWARD HALL, AGENCY, INC.",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/BROWARD%20HALL%2C%20AGENCY%2C%20INC./Page1"
   },
   {
    "person_id": "b_dd97c57ce51c",
@@ -297577,6 +297577,42 @@
   {
    "person_id": "b_e9d927e85872",
    "person": "George Fleming",
+   "doc_number": "V31235",
+   "business": "FLEMING LAND COMPANY, INC.",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 1500.0,
+   "candidates": "Bill Dozier, Mike Nelson, Robert Carroll",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/FLEMING%20LAND%20COMPANY%2C%20INC./Page1"
+  },
+  {
+   "person_id": "b_e9d927e85872",
+   "person": "George Fleming",
+   "doc_number": "P93000064403",
+   "business": "DEERPOINT COVE LAND COMPANY, INC.",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 500.0,
+   "candidates": "Mike Nelson",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/DEERPOINT%20COVE%20LAND%20COMPANY%2C%20INC./Page1"
+  },
+  {
+   "person_id": "b_e9d927e85872",
+   "person": "George Fleming",
+   "doc_number": "P03000058070",
+   "business": "NORTH SPRINGS TIMBER AND LAND COMPANY, INC.",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 500.0,
+   "candidates": "Mike Nelson",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/NORTH%20SPRINGS%20TIMBER%20AND%20LAND%20COMPANY%2C%20INC./Page1"
+  },
+  {
+   "person_id": "b_e9d927e85872",
+   "person": "George Fleming",
    "doc_number": "P99000066444",
    "business": "CEDAR CREEK RANCH, INC.",
    "business_status": "Active",
@@ -297589,18 +297625,6 @@
   {
    "person_id": "b_e9d927e85872",
    "person": "George Fleming",
-   "doc_number": "P93000064403",
-   "business": "DEERPOINT COVE LAND COMPANY, INC.",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/DEERPOINT%20COVE%20LAND%20COMPANY%2C%20INC./Page1"
-  },
-  {
-   "person_id": "b_e9d927e85872",
-   "person": "George Fleming",
    "doc_number": "P99000014723",
    "business": "EMERALD POND, INC.",
    "business_status": "Inactive",
@@ -297609,18 +297633,6 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/EMERALD%20POND%2C%20INC./Page1"
-  },
-  {
-   "person_id": "b_e9d927e85872",
-   "person": "George Fleming",
-   "doc_number": "V31235",
-   "business": "FLEMING LAND COMPANY, INC.",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/FLEMING%20LAND%20COMPANY%2C%20INC./Page1"
   },
   {
    "person_id": "b_e9d927e85872",
@@ -297657,18 +297669,6 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/LAKE%20MERIAL%2C%20INC./Page1"
-  },
-  {
-   "person_id": "b_e9d927e85872",
-   "person": "George Fleming",
-   "doc_number": "P03000058070",
-   "business": "NORTH SPRINGS TIMBER AND LAND COMPANY, INC.",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/NORTH%20SPRINGS%20TIMBER%20AND%20LAND%20COMPANY%2C%20INC./Page1"
   },
   {
    "person_id": "b_e9d927e85872",
@@ -298933,6 +298933,18 @@
   {
    "person_id": "b_8e18063e96da",
    "person": "Jacalyn Kolk",
+   "doc_number": "L00000011207",
+   "business": "JAPELED, L.L.C.",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 100.0,
+   "candidates": "Keith Baker",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/JAPELED%2C%20L.L.C./Page1"
+  },
+  {
+   "person_id": "b_8e18063e96da",
+   "person": "Jacalyn Kolk",
    "doc_number": "P18000096359",
    "business": "HILTON SERENITY, INC.",
    "business_status": "Inactive",
@@ -298941,18 +298953,6 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/HILTON%20SERENITY%2C%20INC./Page1"
-  },
-  {
-   "person_id": "b_8e18063e96da",
-   "person": "Jacalyn Kolk",
-   "doc_number": "L00000011207",
-   "business": "JAPELED, L.L.C.",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/JAPELED%2C%20L.L.C./Page1"
   },
   {
    "person_id": "b_8e18063e96da",
@@ -299161,6 +299161,42 @@
   {
    "person_id": "b_fe62ddabb029",
    "person": "James Finch",
+   "doc_number": "J65047",
+   "business": "J.D.F. CONSTRUCTION, INC.",
+   "business_status": "Active",
+   "match": "Name",
+   "campaign_gifts_total": 5000.0,
+   "candidates": "Bill Dozier, Dan Sowell, Greg Brudnicki, Keith Baker, Rick Russell Jr., Tommy Ford",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/J.D.F.%20CONSTRUCTION%2C%20INC./Page1"
+  },
+  {
+   "person_id": "b_fe62ddabb029",
+   "person": "James Finch",
+   "doc_number": "G18646",
+   "business": "PHOENIX CONSTRUCTION SERVICES, INC.",
+   "business_status": "Active",
+   "match": "Name",
+   "campaign_gifts_total": 4500.0,
+   "candidates": "Dan Sowell, Greg Brudnicki, Keith Baker, Rick Russell Jr., Tommy Ford",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/PHOENIX%20CONSTRUCTION%20SERVICES%2C%20INC./Page1"
+  },
+  {
+   "person_id": "b_fe62ddabb029",
+   "person": "James Finch",
+   "doc_number": "P92000010659",
+   "business": "PHOENIX RACING, INC.",
+   "business_status": "Active",
+   "match": "Name",
+   "campaign_gifts_total": 1000.0,
+   "candidates": "Tommy Ford",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/PHOENIX%20RACING%2C%20INC./Page1"
+  },
+  {
+   "person_id": "b_fe62ddabb029",
+   "person": "James Finch",
    "doc_number": "S25359",
    "business": "ALF ASSOCIATES, INC.",
    "business_status": "Inactive",
@@ -299193,18 +299229,6 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults?inquiryType=EntityName&searchTerm=BAY%20COUNTY%20CONTRACTORS%20%26%20ASSOCIATES%20LLC"
-  },
-  {
-   "person_id": "b_fe62ddabb029",
-   "person": "James Finch",
-   "doc_number": "J65047",
-   "business": "J.D.F. CONSTRUCTION, INC.",
-   "business_status": "Active",
-   "match": "Name",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/J.D.F.%20CONSTRUCTION%2C%20INC./Page1"
   },
   {
    "person_id": "b_fe62ddabb029",
@@ -299281,18 +299305,6 @@
   {
    "person_id": "b_fe62ddabb029",
    "person": "James Finch",
-   "doc_number": "G18646",
-   "business": "PHOENIX CONSTRUCTION SERVICES, INC.",
-   "business_status": "Active",
-   "match": "Name",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/PHOENIX%20CONSTRUCTION%20SERVICES%2C%20INC./Page1"
-  },
-  {
-   "person_id": "b_fe62ddabb029",
-   "person": "James Finch",
    "doc_number": "S47982",
    "business": "PHOENIX ENVIRONMENTAL, INC.",
    "business_status": "Inactive",
@@ -299313,18 +299325,6 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/PHOENIX%20EQUIPMENT%20REPAIRS%2C%20LLC/Page1"
-  },
-  {
-   "person_id": "b_fe62ddabb029",
-   "person": "James Finch",
-   "doc_number": "P92000010659",
-   "business": "PHOENIX RACING, INC.",
-   "business_status": "Active",
-   "match": "Name",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/PHOENIX%20RACING%2C%20INC./Page1"
   },
   {
    "person_id": "b_fe62ddabb029",
@@ -299413,26 +299413,26 @@
   {
    "person_id": "b_9f7d2f72998a",
    "person": "James Maulden",
-   "doc_number": "P16000024498",
-   "business": "CEDAR CREEK AT DEERPOINT LAKE, INC.",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 1000.0,
-   "candidates": "Doug Crosby",
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/CEDAR%20CREEK%20AT%20DEERPOINT%20LAKE%2C%20INC./Page1"
-  },
-  {
-   "person_id": "b_9f7d2f72998a",
-   "person": "James Maulden",
    "doc_number": "P04000161965",
    "business": "72 LAND DEVELOPMENT, INC.",
    "business_status": "Inactive",
    "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
+   "campaign_gifts_total": 4000.0,
+   "candidates": "Bill Dozier, Chuck Perdue, Joe Wayne Walker, Mike Nelson",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/72%20LAND%20DEVELOPMENT%2C%20INC./Page1"
+  },
+  {
+   "person_id": "b_9f7d2f72998a",
+   "person": "James Maulden",
+   "doc_number": "P16000024498",
+   "business": "CEDAR CREEK AT DEERPOINT LAKE, INC.",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 2000.0,
+   "candidates": "Doug Crosby, Tommy Hamm",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/CEDAR%20CREEK%20AT%20DEERPOINT%20LAKE%2C%20INC./Page1"
   },
   {
    "person_id": "b_9f7d2f72998a",
@@ -300013,6 +300013,30 @@
   {
    "person_id": "b_820ccc129106",
    "person": "Jason Roberts",
+   "doc_number": "P16000075588",
+   "business": "HOLIDAY BEACH RENTALS DEVELOPMENT, INC.",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 1000.0,
+   "candidates": "Mark Sheldon",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/HOLIDAY%20BEACH%20RENTALS%20DEVELOPMENT%2C%20INC./Page1"
+  },
+  {
+   "person_id": "b_820ccc129106",
+   "person": "Jason Roberts",
+   "doc_number": "P13000102280",
+   "business": "HOLIDAY BEACH RENTALS, INC.",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 500.0,
+   "candidates": "Tommy Hamm",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/HOLIDAY%20BEACH%20RENTALS%2C%20INC./Page1"
+  },
+  {
+   "person_id": "b_820ccc129106",
+   "person": "Jason Roberts",
    "doc_number": "L22000145542",
    "business": "BASE CAMP 2022, LLC",
    "business_status": "Active",
@@ -300141,30 +300165,6 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/HOLIDAY%20BEACH%20MECHANICAL%2C%20INC./Page1"
-  },
-  {
-   "person_id": "b_820ccc129106",
-   "person": "Jason Roberts",
-   "doc_number": "P16000075588",
-   "business": "HOLIDAY BEACH RENTALS DEVELOPMENT, INC.",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/HOLIDAY%20BEACH%20RENTALS%20DEVELOPMENT%2C%20INC./Page1"
-  },
-  {
-   "person_id": "b_820ccc129106",
-   "person": "Jason Roberts",
-   "doc_number": "P13000102280",
-   "business": "HOLIDAY BEACH RENTALS, INC.",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/HOLIDAY%20BEACH%20RENTALS%2C%20INC./Page1"
   },
   {
    "person_id": "b_820ccc129106",
@@ -300389,22 +300389,10 @@
    "business": "HILTON SUN, INC.",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 4000.0,
-   "candidates": "Ethan Register, Grant Wittstruck, Nick Atkinson, Paul Casto",
+   "campaign_gifts_total": 8500.0,
+   "candidates": "Ethan Register, Geoff McConnell, Grant Wittstruck, Mark Sheldon, Nick Atkinson, Paul Casto, Phil Chester",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/HILTON%20SUN%2C%20INC./Page1"
-  },
-  {
-   "person_id": "b_5c7600117f27",
-   "person": "Jason W Branks",
-   "doc_number": "P13000001184",
-   "business": "CASA LOMA PCB, INC.",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 1000.0,
-   "candidates": "Paul Casto",
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/CASA%20LOMA%20PCB%2C%20INC./Page1"
   },
   {
    "person_id": "b_5c7600117f27",
@@ -300413,10 +300401,22 @@
    "business": "DAYS PCB, INC.",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 1000.0,
-   "candidates": "Paul Casto",
+   "campaign_gifts_total": 3500.0,
+   "candidates": "Mark Sheldon, Paul Casto, Phil Chester",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/DAYS%20PCB%2C%20INC./Page1"
+  },
+  {
+   "person_id": "b_5c7600117f27",
+   "person": "Jason W Branks",
+   "doc_number": "P13000001184",
+   "business": "CASA LOMA PCB, INC.",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 1500.0,
+   "candidates": "Paul Casto, Phil Chester",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/CASA%20LOMA%20PCB%2C%20INC./Page1"
   },
   {
    "person_id": "b_5c7600117f27",
@@ -300485,8 +300485,8 @@
    "business": "TRUMBULL BOTTLED WATER, INC.",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 4000.0,
-   "candidates": "Ann Leonard, Daniel Raffield, Robbie Hughes, Tommy Ford",
+   "campaign_gifts_total": 8100.0,
+   "candidates": "Ann Leonard, Daniel Raffield, Doug Moore, Greg Brudnicki, Jenna Flint Haligas, Mike Nelson, Robbie Hughes, Tommy Ford, William (Bill) Husfelt",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/TRUMBULL%20BOTTLED%20WATER%2C%20INC./Page1"
   },
@@ -300757,6 +300757,18 @@
   {
    "person_id": "b_9e0d8a59afda",
    "person": "Jean McDougall",
+   "doc_number": "L19000147419",
+   "business": "JEAN ELLEN MCDOUGALL LLC",
+   "business_status": "Active",
+   "match": "Name",
+   "campaign_gifts_total": 50.0,
+   "candidates": "Ron Keel",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/JEAN%20ELLEN%20MCDOUGALL%20LLC/Page1"
+  },
+  {
+   "person_id": "b_9e0d8a59afda",
+   "person": "Jean McDougall",
    "doc_number": "L11000095741",
    "business": "FRIENDSHIP AUTO SALES, LLC",
    "business_status": "Inactive",
@@ -300765,18 +300777,6 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/FRIENDSHIP%20AUTO%20SALES%2C%20LLC/Page1"
-  },
-  {
-   "person_id": "b_9e0d8a59afda",
-   "person": "Jean McDougall",
-   "doc_number": "L19000147419",
-   "business": "JEAN ELLEN MCDOUGALL LLC",
-   "business_status": "Active",
-   "match": "Name",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/JEAN%20ELLEN%20MCDOUGALL%20LLC/Page1"
   },
   {
    "person_id": "b_9e0d8a59afda",
@@ -301661,8 +301661,8 @@
    "business": "JERRY WILSON ROOFING, LLC",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 2000.0,
-   "candidates": "Carl Curti, Tommy Ford",
+   "campaign_gifts_total": 12000.0,
+   "candidates": "Amy Baker, Bill Dozier, Carl Curti, Eric Orme, Greg Brudnicki, Mark Sheldon, Michael Jarman, Mike Nelson, Phil Chester, Tommy Ford",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/JERRY%20WILSON%20ROOFING%2C%20LLC/Page1"
   },
@@ -301673,8 +301673,8 @@
    "business": "JERRY WILSON BUILDING CONTRACTOR LLC",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 1000.0,
-   "candidates": "Carl Curti",
+   "campaign_gifts_total": 3000.0,
+   "candidates": "Carl Curti, Greg Brudnicki, Tommy Ford",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/JERRY%20WILSON%20BUILDING%20CONTRACTOR%20LLC/Page1"
   },
@@ -302737,6 +302737,30 @@
   {
    "person_id": "b_fa39468901fd",
    "person": "John Lewis",
+   "doc_number": "P13000015589",
+   "business": "SOUTHERN COASTAL HOMES, INC.",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 2500.0,
+   "candidates": "Doug Moore, Pamm Chapman, Tommy Hamm",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/SOUTHERN%20COASTAL%20HOMES%2C%20INC./Page1"
+  },
+  {
+   "person_id": "b_fa39468901fd",
+   "person": "John Lewis",
+   "doc_number": "332908",
+   "business": "ROYAL AMERICAN CONSTRUCTION COMPANY, INC.",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 1000.0,
+   "candidates": "Pamm Chapman, Steve Moss",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/ROYAL%20AMERICAN%20CONSTRUCTION%20COMPANY%2C%20INC./Page1"
+  },
+  {
+   "person_id": "b_fa39468901fd",
+   "person": "John Lewis",
    "doc_number": "L12000055863",
    "business": "30-A CUSTOM HOMES, LLC",
    "business_status": "Inactive",
@@ -302833,18 +302857,6 @@
   {
    "person_id": "b_fa39468901fd",
    "person": "John Lewis",
-   "doc_number": "332908",
-   "business": "ROYAL AMERICAN CONSTRUCTION COMPANY, INC.",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/ROYAL%20AMERICAN%20CONSTRUCTION%20COMPANY%2C%20INC./Page1"
-  },
-  {
-   "person_id": "b_fa39468901fd",
-   "person": "John Lewis",
    "doc_number": "F08000001823",
    "business": "ROYAL AMERICAN CONSTRUCTION OF N.C., INC.",
    "business_status": "Inactive",
@@ -302853,18 +302865,6 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/ROYAL%20AMERICAN%20CONSTRUCTION%20OF%20N.C.%2C%20INC./Page1"
-  },
-  {
-   "person_id": "b_fa39468901fd",
-   "person": "John Lewis",
-   "doc_number": "P13000015589",
-   "business": "SOUTHERN COASTAL HOMES, INC.",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/SOUTHERN%20COASTAL%20HOMES%2C%20INC./Page1"
   },
   {
    "person_id": "b_fa39468901fd",
@@ -302909,8 +302909,8 @@
    "business": "ADVANTAGE HAULING, LLC",
    "business_status": "Inactive",
    "match": "Name",
-   "campaign_gifts_total": 0,
-   "candidates": null,
+   "campaign_gifts_total": 500.0,
+   "candidates": "Brandon Aldridge, Scott Davis",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/ADVANTAGE%20HAULING%2C%20LLC/Page1"
   },
@@ -302933,8 +302933,8 @@
    "business": "PC DEVELOPMENT GROUP, LLC",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 100.0,
-   "candidates": "Janice Lucas",
+   "campaign_gifts_total": 1100.0,
+   "candidates": "Janice Lucas, Michael Nichols",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/PC%20DEVELOPMENT%20GROUP%2C%20LLC/Page1"
   },
@@ -303341,8 +303341,8 @@
    "business": "THE ST. JOE COMPANY",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 3000.0,
-   "candidates": "Grant Wittstruck, Scott Duvall, Tommy Ford",
+   "campaign_gifts_total": 18400.0,
+   "candidates": "Bill Dozier, Christopher Moore, Chuck Perdue, Doug Moore, Geoff McConnell, Grant Wittstruck, Joe Wayne Walker, Mark Sheldon, Michael \"Doc\" Rohan, Mike Thomas, Pamm Chapman, Phil Chester, Robert Carroll, Scott Duvall, Steve Moss, Tommy Ford, Tommy Hamm, William (Bill) Husfelt",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/THE%20ST.%20JOE%20COMPANY/Page1"
   },
@@ -303593,8 +303593,8 @@
    "business": "EASTERN SHIPBUILDING GROUP, INC.",
    "business_status": "Active",
    "match": "Name",
-   "campaign_gifts_total": 0,
-   "candidates": null,
+   "campaign_gifts_total": 1500.0,
+   "candidates": "Bill Dozier, Dan Sowell",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/EASTERN%20SHIPBUILDING%20GROUP%2C%20INC./Page1"
   },
@@ -303881,22 +303881,10 @@
    "business": "HILTON SUN, INC.",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 4000.0,
-   "candidates": "Ethan Register, Grant Wittstruck, Nick Atkinson, Paul Casto",
+   "campaign_gifts_total": 8500.0,
+   "candidates": "Ethan Register, Geoff McConnell, Grant Wittstruck, Mark Sheldon, Nick Atkinson, Paul Casto, Phil Chester",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/HILTON%20SUN%2C%20INC./Page1"
-  },
-  {
-   "person_id": "b_a6a99ca2b283",
-   "person": "Julie K Hilton",
-   "doc_number": "P13000001184",
-   "business": "CASA LOMA PCB, INC.",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 1000.0,
-   "candidates": "Paul Casto",
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/CASA%20LOMA%20PCB%2C%20INC./Page1"
   },
   {
    "person_id": "b_a6a99ca2b283",
@@ -303905,10 +303893,34 @@
    "business": "DAYS PCB, INC.",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 1000.0,
-   "candidates": "Paul Casto",
+   "campaign_gifts_total": 3500.0,
+   "candidates": "Mark Sheldon, Paul Casto, Phil Chester",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/DAYS%20PCB%2C%20INC./Page1"
+  },
+  {
+   "person_id": "b_a6a99ca2b283",
+   "person": "Julie K Hilton",
+   "doc_number": "P13000001184",
+   "business": "CASA LOMA PCB, INC.",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 1500.0,
+   "candidates": "Paul Casto, Phil Chester",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/CASA%20LOMA%20PCB%2C%20INC./Page1"
+  },
+  {
+   "person_id": "b_a6a99ca2b283",
+   "person": "Julie K Hilton",
+   "doc_number": "P99000095214",
+   "business": "HILTON TIMBER COMPANY",
+   "business_status": "Inactive",
+   "match": "Name and address",
+   "campaign_gifts_total": 1000.0,
+   "candidates": "Geoff McConnell",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/HILTON%20TIMBER%20COMPANY/Page1"
   },
   {
    "person_id": "b_a6a99ca2b283",
@@ -304017,18 +304029,6 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/HILTON%20SERENITY%2C%20INC./Page1"
-  },
-  {
-   "person_id": "b_a6a99ca2b283",
-   "person": "Julie K Hilton",
-   "doc_number": "P99000095214",
-   "business": "HILTON TIMBER COMPANY",
-   "business_status": "Inactive",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/HILTON%20TIMBER%20COMPANY/Page1"
   },
   {
    "person_id": "b_a6a99ca2b283",
@@ -304441,6 +304441,18 @@
   {
    "person_id": "b_cd89570cdcd6",
    "person": "Karen Kirkland",
+   "doc_number": "P09000035883",
+   "business": "KIRKLAND INSURANCE AGENCY, INC.",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 200.0,
+   "candidates": "Tommy Hamm",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/KIRKLAND%20INSURANCE%20AGENCY%2C%20INC./Page1"
+  },
+  {
+   "person_id": "b_cd89570cdcd6",
+   "person": "Karen Kirkland",
    "doc_number": "L26000439631",
    "business": "HPC FOCUSED LLC",
    "business_status": "Active",
@@ -304461,18 +304473,6 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/HPC%20INVESTMENTS%20LLC/Page1"
-  },
-  {
-   "person_id": "b_cd89570cdcd6",
-   "person": "Karen Kirkland",
-   "doc_number": "P09000035883",
-   "business": "KIRKLAND INSURANCE AGENCY, INC.",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/KIRKLAND%20INSURANCE%20AGENCY%2C%20INC./Page1"
   },
   {
    "person_id": "b_cd89570cdcd6",
@@ -304853,8 +304853,8 @@
    "business": "COASTAL PALMS PARTNERS, LLC",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
+   "campaign_gifts_total": 1000.0,
+   "candidates": "Timothy Campbell",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/COASTAL%20PALMS%20PARTNERS%2C%20LLC/Page1"
   },
@@ -305317,6 +305317,18 @@
   {
    "person_id": "b_45eef14bf84c",
    "person": "Kerrie Beasley",
+   "doc_number": "449732",
+   "business": "MARINE TRANSPORTATION SERVICES, INC.",
+   "business_status": "Active",
+   "match": "Name",
+   "campaign_gifts_total": 3000.0,
+   "candidates": "Billy Rader, Greg Brudnicki, Michael Nichols, Mike Nelson, Pamm Chapman, William (Bill) Husfelt",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/MARINE%20TRANSPORTATION%20SERVICES%2C%20INC./Page1"
+  },
+  {
+   "person_id": "b_45eef14bf84c",
+   "person": "Kerrie Beasley",
    "doc_number": "L26000143558",
    "business": "BEASLEY FAMILY HOLDINGS, LLC",
    "business_status": "Active",
@@ -305361,18 +305373,6 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/GWD%20FAMILY%20HOLDINGS%2C%20LLC/Page1"
-  },
-  {
-   "person_id": "b_45eef14bf84c",
-   "person": "Kerrie Beasley",
-   "doc_number": "449732",
-   "business": "MARINE TRANSPORTATION SERVICES, INC.",
-   "business_status": "Active",
-   "match": "Name",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/MARINE%20TRANSPORTATION%20SERVICES%2C%20INC./Page1"
   },
   {
    "person_id": "b_c05d34fe1911",
@@ -305425,6 +305425,18 @@
   {
    "person_id": "b_6c2d5a6c83e4",
    "person": "Kevin Nelson",
+   "doc_number": "L23000257968",
+   "business": "THE BIKE RACK LLC",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 200.0,
+   "candidates": "Daniel Robert Schultz",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/THE%20BIKE%20RACK%20LLC/Page1"
+  },
+  {
+   "person_id": "b_6c2d5a6c83e4",
+   "person": "Kevin Nelson",
    "doc_number": "L18000254048",
    "business": "HIP SQUARE FENCE CONSTRUCTION LLC",
    "business_status": "Active",
@@ -305469,18 +305481,6 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/NELSON%27S%20SERVICES%20PCB%20LLC/Page1"
-  },
-  {
-   "person_id": "b_6c2d5a6c83e4",
-   "person": "Kevin Nelson",
-   "doc_number": "L23000257968",
-   "business": "THE BIKE RACK LLC",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/THE%20BIKE%20RACK%20LLC/Page1"
   },
   {
    "person_id": "b_88e0ebdbabcc",
@@ -305557,6 +305557,18 @@
   {
    "person_id": "b_800338f2996b",
    "person": "Kevin Wattenbarger",
+   "doc_number": "L17000059554",
+   "business": "FIVE BRIDGES REAL ESTATE SERVICES COMPANY, LLC",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 500.0,
+   "candidates": "Jamie Marler",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/FIVE%20BRIDGES%20REAL%20ESTATE%20SERVICES%20COMPANY%2C%20LLC/Page1"
+  },
+  {
+   "person_id": "b_800338f2996b",
+   "person": "Kevin Wattenbarger",
    "doc_number": "L19000053570",
    "business": "HARRISON & LUVERNE, LLC",
    "business_status": "Active",
@@ -305577,6 +305589,18 @@
    "candidates": "Glenn Manley",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/651%20WEST%2014TH%20STREET%2C%20LLC/Page1"
+  },
+  {
+   "person_id": "b_800338f2996b",
+   "person": "Kevin Wattenbarger",
+   "doc_number": "L13000178378",
+   "business": "WATTENBARGER MANAGEMENT, LLC",
+   "business_status": "Inactive",
+   "match": "Name and address",
+   "campaign_gifts_total": 100.0,
+   "candidates": "Tommy Ford",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/WATTENBARGER%20MANAGEMENT%2C%20LLC/Page1"
   },
   {
    "person_id": "b_800338f2996b",
@@ -305613,18 +305637,6 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/EAST%20AVENUE%20REAL%20ESTATE%20PARTNERS%2C%20LLC/Page1"
-  },
-  {
-   "person_id": "b_800338f2996b",
-   "person": "Kevin Wattenbarger",
-   "doc_number": "L17000059554",
-   "business": "FIVE BRIDGES REAL ESTATE SERVICES COMPANY, LLC",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/FIVE%20BRIDGES%20REAL%20ESTATE%20SERVICES%20COMPANY%2C%20LLC/Page1"
   },
   {
    "person_id": "b_800338f2996b",
@@ -305709,18 +305721,6 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/TURTLE%20PROPERTY%20GROUP%2C%20LLC/Page1"
-  },
-  {
-   "person_id": "b_800338f2996b",
-   "person": "Kevin Wattenbarger",
-   "doc_number": "L13000178378",
-   "business": "WATTENBARGER MANAGEMENT, LLC",
-   "business_status": "Inactive",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/WATTENBARGER%20MANAGEMENT%2C%20LLC/Page1"
   },
   {
    "person_id": "b_a0479ebf3a59",
@@ -305917,6 +305917,18 @@
   {
    "person_id": "b_e95126384009",
    "person": "Kirit Bhula",
+   "doc_number": "L12000115378",
+   "business": "FERNWOOD LAND, LLC",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 300.0,
+   "candidates": "Robert Benjamin Smith",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/FERNWOOD%20LAND%2C%20LLC/Page1"
+  },
+  {
+   "person_id": "b_e95126384009",
+   "person": "Kirit Bhula",
    "doc_number": "L22000393965",
    "business": "CHASE ME HOME, LLC",
    "business_status": "Active",
@@ -305925,18 +305937,6 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/CHASE%20ME%20HOME%2C%20LLC/Page1"
-  },
-  {
-   "person_id": "b_e95126384009",
-   "person": "Kirit Bhula",
-   "doc_number": "L12000115378",
-   "business": "FERNWOOD LAND, LLC",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/FERNWOOD%20LAND%2C%20LLC/Page1"
   },
   {
    "person_id": "b_4e603d1de754",
@@ -306097,6 +306097,30 @@
   {
    "person_id": "b_d4fa8ca65a54",
    "person": "Kristian Chapman",
+   "doc_number": "L08000117094",
+   "business": "PEOPLES FIRST INSURANCE SERVICES, LLC",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 1000.0,
+   "candidates": "Tommy Hamm",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/PEOPLES%20FIRST%20INSURANCE%20SERVICES%2C%20LLC/Page1"
+  },
+  {
+   "person_id": "b_d4fa8ca65a54",
+   "person": "Kristian Chapman",
+   "doc_number": "L15000183296",
+   "business": "ROYAL AMERICAN TITLE, LLC",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 250.0,
+   "candidates": "Pamm Chapman",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/ROYAL%20AMERICAN%20TITLE%2C%20LLC/Page1"
+  },
+  {
+   "person_id": "b_d4fa8ca65a54",
+   "person": "Kristian Chapman",
    "doc_number": "L18000060603",
    "business": "4SP, LLC",
    "business_status": "Inactive",
@@ -306193,18 +306217,6 @@
   {
    "person_id": "b_d4fa8ca65a54",
    "person": "Kristian Chapman",
-   "doc_number": "L08000117094",
-   "business": "PEOPLES FIRST INSURANCE SERVICES, LLC",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/PEOPLES%20FIRST%20INSURANCE%20SERVICES%2C%20LLC/Page1"
-  },
-  {
-   "person_id": "b_d4fa8ca65a54",
-   "person": "Kristian Chapman",
    "doc_number": "P99000100851",
    "business": "PEOPLES FIRST INSURANCE, INC.",
    "business_status": "Inactive",
@@ -306237,18 +306249,6 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/ROYAL%20AMERICAN%20REAL%20ESTATE%2C%20INC./Page1"
-  },
-  {
-   "person_id": "b_d4fa8ca65a54",
-   "person": "Kristian Chapman",
-   "doc_number": "L15000183296",
-   "business": "ROYAL AMERICAN TITLE, LLC",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/ROYAL%20AMERICAN%20TITLE%2C%20LLC/Page1"
   },
   {
    "person_id": "b_64ac0916d455",
@@ -306749,8 +306749,8 @@
    "business": "PINEAPPLE WILLY'S. INC.",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
+   "campaign_gifts_total": 1000.0,
+   "candidates": "Phil Chester, Philip 'Griff ' Griffitts",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/PINEAPPLE%20WILLY%27S.%20INC./Page1"
   },
@@ -306865,6 +306865,54 @@
   {
    "person_id": "b_7b6de2181e19",
    "person": "Lauretta Pippin",
+   "doc_number": "P13000015589",
+   "business": "SOUTHERN COASTAL HOMES, INC.",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 2500.0,
+   "candidates": "Doug Moore, Pamm Chapman, Tommy Hamm",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/SOUTHERN%20COASTAL%20HOMES%2C%20INC./Page1"
+  },
+  {
+   "person_id": "b_7b6de2181e19",
+   "person": "Lauretta Pippin",
+   "doc_number": "P03000021337",
+   "business": "RAFS OF FWB, INC.",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 1500.0,
+   "candidates": "Pamm Chapman, Tommy Hamm",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/RAFS%20OF%20FWB%2C%20INC./Page1"
+  },
+  {
+   "person_id": "b_7b6de2181e19",
+   "person": "Lauretta Pippin",
+   "doc_number": "695060",
+   "business": "ITC HOLDINGS, INC.",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 500.0,
+   "candidates": "Daniel Robert Schultz",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/ITC%20HOLDINGS%2C%20INC./Page1"
+  },
+  {
+   "person_id": "b_7b6de2181e19",
+   "person": "Lauretta Pippin",
+   "doc_number": "P05000150294",
+   "business": "RAFS OF DOTHAN, INC.",
+   "business_status": "Inactive",
+   "match": "Name and address",
+   "campaign_gifts_total": 500.0,
+   "candidates": "Pamm Chapman",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/RAFS%20OF%20DOTHAN%2C%20INC./Page1"
+  },
+  {
+   "person_id": "b_7b6de2181e19",
+   "person": "Lauretta Pippin",
    "doc_number": "P94000059377",
    "business": "BAY POINT CLUB, INC.",
    "business_status": "Active",
@@ -306933,18 +306981,6 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/GREENFIELD%20VILLAGE%2C%20L.L.C./Page1"
-  },
-  {
-   "person_id": "b_7b6de2181e19",
-   "person": "Lauretta Pippin",
-   "doc_number": "695060",
-   "business": "ITC HOLDINGS, INC.",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/ITC%20HOLDINGS%2C%20INC./Page1"
   },
   {
    "person_id": "b_7b6de2181e19",
@@ -307053,30 +307089,6 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/PIPELINE%20ROAD%2C%20INC./Page1"
-  },
-  {
-   "person_id": "b_7b6de2181e19",
-   "person": "Lauretta Pippin",
-   "doc_number": "P05000150294",
-   "business": "RAFS OF DOTHAN, INC.",
-   "business_status": "Inactive",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/RAFS%20OF%20DOTHAN%2C%20INC./Page1"
-  },
-  {
-   "person_id": "b_7b6de2181e19",
-   "person": "Lauretta Pippin",
-   "doc_number": "P03000021337",
-   "business": "RAFS OF FWB, INC.",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/RAFS%20OF%20FWB%2C%20INC./Page1"
   },
   {
    "person_id": "b_7b6de2181e19",
@@ -307197,18 +307209,6 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/ROYAL%20AMERICAN%20RESIDENTIAL%2C%20INC./Page1"
-  },
-  {
-   "person_id": "b_7b6de2181e19",
-   "person": "Lauretta Pippin",
-   "doc_number": "P13000015589",
-   "business": "SOUTHERN COASTAL HOMES, INC.",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/SOUTHERN%20COASTAL%20HOMES%2C%20INC./Page1"
   },
   {
    "person_id": "b_7b6de2181e19",
@@ -307361,8 +307361,8 @@
    "business": "OASIS RESORTS, INC.",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 6000.0,
-   "candidates": "Daniel Raffield, Grant Wittstruck, Nick Atkinson, Paul Casto, Scott Heilmann, Tommy Ford",
+   "campaign_gifts_total": 7000.0,
+   "candidates": "Daniel Raffield, Geoff McConnell, Grant Wittstruck, Nick Atkinson, Paul Casto, Scott Heilmann, Tommy Ford",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/OASIS%20RESORTS%2C%20INC./Page1"
   },
@@ -307373,8 +307373,8 @@
    "business": "HILTON INC.",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 4000.0,
-   "candidates": "Daniel Raffield, Nick Atkinson, Paul Casto, Tommy Ford",
+   "campaign_gifts_total": 6000.0,
+   "candidates": "Dan Sowell, Daniel Raffield, Geoff McConnell, Nick Atkinson, Paul Casto, Tommy Ford",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/HILTON%20INC./Page1"
   },
@@ -308489,8 +308489,8 @@
    "business": "SHRI GAUTAM SWAMI, INC.",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 251.0,
-   "candidates": "Clair Pease",
+   "campaign_gifts_total": 1101.0,
+   "candidates": "Clair Pease, Mark Sheldon, Philip 'Griff ' Griffitts, Robert Benjamin Smith",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/SHRI%20GAUTAM%20SWAMI%2C%20INC./Page1"
   },
@@ -308921,8 +308921,8 @@
    "business": "THE ST. JOE COMPANY",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 3000.0,
-   "candidates": "Grant Wittstruck, Scott Duvall, Tommy Ford",
+   "campaign_gifts_total": 18400.0,
+   "candidates": "Bill Dozier, Christopher Moore, Chuck Perdue, Doug Moore, Geoff McConnell, Grant Wittstruck, Joe Wayne Walker, Mark Sheldon, Michael \"Doc\" Rohan, Mike Thomas, Pamm Chapman, Phil Chester, Robert Carroll, Scott Duvall, Steve Moss, Tommy Ford, Tommy Hamm, William (Bill) Husfelt",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/THE%20ST.%20JOE%20COMPANY/Page1"
   },
@@ -310061,8 +310061,8 @@
    "business": "TEACHABLE MOMENTS CONSULTING, INCORPORATED",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
+   "campaign_gifts_total": 1000.0,
+   "candidates": "James E. McCalister",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/TEACHABLE%20MOMENTS%20CONSULTING%2C%20INCORPORATED/Page1"
   },
@@ -310969,6 +310969,18 @@
   {
    "person_id": "b_ca05e73af731",
    "person": "Mary Millett",
+   "doc_number": "S72067",
+   "business": "MERRICK INDUSTRIES, INC.",
+   "business_status": "Active",
+   "match": "Name",
+   "campaign_gifts_total": 6000.0,
+   "candidates": "Bill Dozier, Mike Nelson, Mike Thomas, Philip 'Griff ' Griffitts, Robert Carroll",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/MERRICK%20INDUSTRIES%2C%20INC./Page1"
+  },
+  {
+   "person_id": "b_ca05e73af731",
+   "person": "Mary Millett",
    "doc_number": "P08000021526",
    "business": "CONTROL PANELS, INC.",
    "business_status": "Active",
@@ -311001,18 +311013,6 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/MERRICK%20ENVIRONMENTAL%20TECHNOLOGY%2C%20INC./Page1"
-  },
-  {
-   "person_id": "b_ca05e73af731",
-   "person": "Mary Millett",
-   "doc_number": "S72067",
-   "business": "MERRICK INDUSTRIES, INC.",
-   "business_status": "Active",
-   "match": "Name",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/MERRICK%20INDUSTRIES%2C%20INC./Page1"
   },
   {
    "person_id": "b_ca05e73af731",
@@ -312845,8 +312845,8 @@
    "business": "BENNETT'S REEF, INCORPORATED",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 3500.0,
-   "candidates": "Clair Pease, Grant Wittstruck, Paul Casto",
+   "campaign_gifts_total": 6750.0,
+   "candidates": "Bill Husfelt, Clair Pease, David Haight, Geoff McConnell, Grant Wittstruck, Mark Sheldon, Michael Jarman, Paul Casto",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/BENNETT%27S%20REEF%2C%20INCORPORATED/Page1"
   },
@@ -312857,10 +312857,34 @@
    "business": "BRI SHARKY'S, LLC",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 3000.0,
-   "candidates": "Clair Pease, Grant Wittstruck, Paul Casto",
+   "campaign_gifts_total": 5150.0,
+   "candidates": "Bill Husfelt, Clair Pease, Grant Wittstruck, Mark Sheldon, Michael Jarman, Paul Casto, Timothy Campbell, Tommy Hamm",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/BRI%20SHARKY%27S%2C%20LLC/Page1"
+  },
+  {
+   "person_id": "b_0617e3e0d804",
+   "person": "Mike Bennett",
+   "doc_number": "L11000141359",
+   "business": "PCB RESORT, LLC",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 1500.0,
+   "candidates": "Mike Nelson, Rick Russell Jr., Tommy Hamm",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/PCB%20RESORT%2C%20LLC/Page1"
+  },
+  {
+   "person_id": "b_0617e3e0d804",
+   "person": "Mike Bennett",
+   "doc_number": "L07000064885",
+   "business": "SEAHAVEN RESIDENTIAL MANAGEMENT, LLC",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 1500.0,
+   "candidates": "Grant Wittstruck, Michael Jarman, Rick Russell Jr.",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/SEAHAVEN%20RESIDENTIAL%20MANAGEMENT%2C%20LLC/Page1"
   },
   {
    "person_id": "b_0617e3e0d804",
@@ -312877,18 +312901,6 @@
   {
    "person_id": "b_0617e3e0d804",
    "person": "Mike Bennett",
-   "doc_number": "L07000064885",
-   "business": "SEAHAVEN RESIDENTIAL MANAGEMENT, LLC",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 500.0,
-   "candidates": "Grant Wittstruck",
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/SEAHAVEN%20RESIDENTIAL%20MANAGEMENT%2C%20LLC/Page1"
-  },
-  {
-   "person_id": "b_0617e3e0d804",
-   "person": "Mike Bennett",
    "doc_number": "L03000033764",
    "business": "SEAHAVEN, LLC",
    "business_status": "Active",
@@ -312897,6 +312909,18 @@
    "candidates": "Paul Casto",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/SEAHAVEN%2C%20LLC/Page1"
+  },
+  {
+   "person_id": "b_0617e3e0d804",
+   "person": "Mike Bennett",
+   "doc_number": "L03000002000",
+   "business": "SEAHAVEN CONSTRUCTION, LLC",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 250.0,
+   "candidates": "William (Bill) Husfelt",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/SEAHAVEN%20CONSTRUCTION%2C%20LLC/Page1"
   },
   {
    "person_id": "b_0617e3e0d804",
@@ -312949,18 +312973,6 @@
   {
    "person_id": "b_0617e3e0d804",
    "person": "Mike Bennett",
-   "doc_number": "L11000141359",
-   "business": "PCB RESORT, LLC",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/PCB%20RESORT%2C%20LLC/Page1"
-  },
-  {
-   "person_id": "b_0617e3e0d804",
-   "person": "Mike Bennett",
    "doc_number": "L08000076824",
    "business": "R&D GROUP INVESTMENTS, LLC",
    "business_status": "Inactive",
@@ -312981,18 +312993,6 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/SEAHAVEN%20BEACH%20REALTY%2C%20INC./Page1"
-  },
-  {
-   "person_id": "b_0617e3e0d804",
-   "person": "Mike Bennett",
-   "doc_number": "L03000002000",
-   "business": "SEAHAVEN CONSTRUCTION, LLC",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/SEAHAVEN%20CONSTRUCTION%2C%20LLC/Page1"
   },
   {
    "person_id": "b_0617e3e0d804",
@@ -313089,6 +313089,18 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/JC%20HERON%20LLC/Page1"
+  },
+  {
+   "person_id": "b_f6f851bbd60b",
+   "person": "Mike Madewell",
+   "doc_number": "L02000008069",
+   "business": "PANAMA CITY SURGERY CENTER, LLC",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 250.0,
+   "candidates": "John Kady",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/PANAMA%20CITY%20SURGERY%20CENTER%2C%20LLC/Page1"
   },
   {
    "person_id": "b_f6f851bbd60b",
@@ -313249,18 +313261,6 @@
   {
    "person_id": "b_f6f851bbd60b",
    "person": "Mike Madewell",
-   "doc_number": "L02000008069",
-   "business": "PANAMA CITY SURGERY CENTER, LLC",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/PANAMA%20CITY%20SURGERY%20CENTER%2C%20LLC/Page1"
-  },
-  {
-   "person_id": "b_f6f851bbd60b",
-   "person": "Mike Madewell",
    "doc_number": "L21000065726",
    "business": "RENEE PERRY HOLDINGS LLC",
    "business_status": "Inactive",
@@ -313405,6 +313405,18 @@
   {
    "person_id": "b_cc2e5a97e9ea",
    "person": "Mohammed Chaudhry",
+   "doc_number": "L16000121720",
+   "business": "BLUSCAPE CONSTRUCTION GROUP, LLC",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 250.0,
+   "candidates": "Phil Chester",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/BLUSCAPE%20CONSTRUCTION%20GROUP%2C%20LLC/Page1"
+  },
+  {
+   "person_id": "b_cc2e5a97e9ea",
+   "person": "Mohammed Chaudhry",
    "doc_number": "L19000124408",
    "business": "BALBOA HOLDINGS OF PANAMA CITY, LLC",
    "business_status": "Inactive",
@@ -313413,18 +313425,6 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/BALBOA%20HOLDINGS%20OF%20PANAMA%20CITY%2C%20LLC/Page1"
-  },
-  {
-   "person_id": "b_cc2e5a97e9ea",
-   "person": "Mohammed Chaudhry",
-   "doc_number": "L16000121720",
-   "business": "BLUSCAPE CONSTRUCTION GROUP, LLC",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/BLUSCAPE%20CONSTRUCTION%20GROUP%2C%20LLC/Page1"
   },
   {
    "person_id": "b_cc2e5a97e9ea",
@@ -313645,6 +313645,18 @@
   {
    "person_id": "b_25b150ac726d",
    "person": "Mughis Chaudhry",
+   "doc_number": "L16000121720",
+   "business": "BLUSCAPE CONSTRUCTION GROUP, LLC",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 250.0,
+   "candidates": "Phil Chester",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/BLUSCAPE%20CONSTRUCTION%20GROUP%2C%20LLC/Page1"
+  },
+  {
+   "person_id": "b_25b150ac726d",
+   "person": "Mughis Chaudhry",
    "doc_number": "L19000124408",
    "business": "BALBOA HOLDINGS OF PANAMA CITY, LLC",
    "business_status": "Inactive",
@@ -313653,18 +313665,6 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/BALBOA%20HOLDINGS%20OF%20PANAMA%20CITY%2C%20LLC/Page1"
-  },
-  {
-   "person_id": "b_25b150ac726d",
-   "person": "Mughis Chaudhry",
-   "doc_number": "L16000121720",
-   "business": "BLUSCAPE CONSTRUCTION GROUP, LLC",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/BLUSCAPE%20CONSTRUCTION%20GROUP%2C%20LLC/Page1"
   },
   {
    "person_id": "b_25b150ac726d",
@@ -313921,12 +313921,24 @@
   {
    "person_id": "b_e00aa5faa649",
    "person": "Nareshkumar Patel",
+   "doc_number": "L03000003037",
+   "business": "TRI STAR HOSPITALITY, L.L.C.",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 3250.0,
+   "candidates": "Mark Sheldon, Mike Thomas, Robert Benjamin Smith, Robert Carroll",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/TRI%20STAR%20HOSPITALITY%2C%20L.L.C./Page1"
+  },
+  {
+   "person_id": "b_e00aa5faa649",
+   "person": "Nareshkumar Patel",
    "doc_number": "L06000015441",
    "business": "JDH HOSPITALITY, LLC",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 200.0,
-   "candidates": "Clair Pease",
+   "campaign_gifts_total": 550.0,
+   "candidates": "Clair Pease, Greg Brudnicki, Philip 'Griff ' Griffitts",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/JDH%20HOSPITALITY%2C%20LLC/Page1"
   },
@@ -313977,18 +313989,6 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/SUN%20BUSINESSES%2C%20LLC/Page1"
-  },
-  {
-   "person_id": "b_e00aa5faa649",
-   "person": "Nareshkumar Patel",
-   "doc_number": "L03000003037",
-   "business": "TRI STAR HOSPITALITY, L.L.C.",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/TRI%20STAR%20HOSPITALITY%2C%20L.L.C./Page1"
   },
   {
    "person_id": "b_e80da281f3d0",
@@ -314165,8 +314165,8 @@
    "business": "BENNETT'S REEF, INCORPORATED",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 3500.0,
-   "candidates": "Clair Pease, Grant Wittstruck, Paul Casto",
+   "campaign_gifts_total": 6750.0,
+   "candidates": "Bill Husfelt, Clair Pease, David Haight, Geoff McConnell, Grant Wittstruck, Mark Sheldon, Michael Jarman, Paul Casto",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/BENNETT%27S%20REEF%2C%20INCORPORATED/Page1"
   },
@@ -314177,8 +314177,8 @@
    "business": "BRI SHARKY'S, LLC",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 3000.0,
-   "candidates": "Clair Pease, Grant Wittstruck, Paul Casto",
+   "campaign_gifts_total": 5150.0,
+   "candidates": "Bill Husfelt, Clair Pease, Grant Wittstruck, Mark Sheldon, Michael Jarman, Paul Casto, Timothy Campbell, Tommy Hamm",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/BRI%20SHARKY%27S%2C%20LLC/Page1"
   },
@@ -314189,10 +314189,22 @@
    "business": "RI BEACH, LLC",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 1500.0,
-   "candidates": "Clair Pease, Grant Wittstruck",
+   "campaign_gifts_total": 3500.0,
+   "candidates": "Bill Husfelt, Clair Pease, Geoff McConnell, Grant Wittstruck, Mark Sheldon, Michael Jarman, Tommy Hamm",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/RI%20BEACH%2C%20LLC/Page1"
+  },
+  {
+   "person_id": "b_7a33d0aaaf31",
+   "person": "Neel Bennett",
+   "doc_number": "L07000064885",
+   "business": "SEAHAVEN RESIDENTIAL MANAGEMENT, LLC",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 1500.0,
+   "candidates": "Grant Wittstruck, Michael Jarman, Rick Russell Jr.",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/SEAHAVEN%20RESIDENTIAL%20MANAGEMENT%2C%20LLC/Page1"
   },
   {
    "person_id": "b_7a33d0aaaf31",
@@ -314233,6 +314245,18 @@
   {
    "person_id": "b_7a33d0aaaf31",
    "person": "Neel Bennett",
+   "doc_number": "L00000010782",
+   "business": "ANDREWS HILL, L.L.C.",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 500.0,
+   "candidates": "Rick Russell Jr.",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/ANDREWS%20HILL%2C%20L.L.C./Page1"
+  },
+  {
+   "person_id": "b_7a33d0aaaf31",
+   "person": "Neel Bennett",
    "doc_number": "L17000159590",
    "business": "BEACH MOVEMENT EVENT MANAGEMENT, LLC",
    "business_status": "Active",
@@ -314241,18 +314265,6 @@
    "candidates": "Grant Wittstruck",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/BEACH%20MOVEMENT%20EVENT%20MANAGEMENT%2C%20LLC/Page1"
-  },
-  {
-   "person_id": "b_7a33d0aaaf31",
-   "person": "Neel Bennett",
-   "doc_number": "L07000064885",
-   "business": "SEAHAVEN RESIDENTIAL MANAGEMENT, LLC",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 500.0,
-   "candidates": "Grant Wittstruck",
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/SEAHAVEN%20RESIDENTIAL%20MANAGEMENT%2C%20LLC/Page1"
   },
   {
    "person_id": "b_7a33d0aaaf31",
@@ -314269,14 +314281,14 @@
   {
    "person_id": "b_7a33d0aaaf31",
    "person": "Neel Bennett",
-   "doc_number": "L00000010782",
-   "business": "ANDREWS HILL, L.L.C.",
+   "doc_number": "L03000002000",
+   "business": "SEAHAVEN CONSTRUCTION, LLC",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
+   "campaign_gifts_total": 250.0,
+   "candidates": "William (Bill) Husfelt",
    "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/ANDREWS%20HILL%2C%20L.L.C./Page1"
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/SEAHAVEN%20CONSTRUCTION%2C%20LLC/Page1"
   },
   {
    "person_id": "b_7a33d0aaaf31",
@@ -314421,18 +314433,6 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/SEAHAVEN%20COMMERCIAL%20VILLAGE%2C%20LLC/Page1"
-  },
-  {
-   "person_id": "b_7a33d0aaaf31",
-   "person": "Neel Bennett",
-   "doc_number": "L03000002000",
-   "business": "SEAHAVEN CONSTRUCTION, LLC",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/SEAHAVEN%20CONSTRUCTION%2C%20LLC/Page1"
   },
   {
    "person_id": "b_7a33d0aaaf31",
@@ -314645,8 +314645,8 @@
    "business": "SOUTHERN HOSPITALITY, L.L.C.",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
+   "campaign_gifts_total": 402.0,
+   "candidates": "Greg Brudnicki, Philip 'Griff ' Griffitts",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/SOUTHERN%20HOSPITALITY%2C%20L.L.C./Page1"
   },
@@ -315193,6 +315193,18 @@
   {
    "person_id": "b_3a5e6ed295ec",
    "person": "Paul Sims",
+   "doc_number": "G61399",
+   "business": "PAUL SIMS CONSTRUCTION, INC.",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 650.0,
+   "candidates": "Chuck Perdue, Dan Sowell, Mackie Owens",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/PAUL%20SIMS%20CONSTRUCTION%2C%20INC./Page1"
+  },
+  {
+   "person_id": "b_3a5e6ed295ec",
+   "person": "Paul Sims",
    "doc_number": "L24000527136",
    "business": "CAMP TREETOP, LLC",
    "business_status": "Active",
@@ -315201,18 +315213,6 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/CAMP%20TREETOP%2C%20LLC/Page1"
-  },
-  {
-   "person_id": "b_3a5e6ed295ec",
-   "person": "Paul Sims",
-   "doc_number": "G61399",
-   "business": "PAUL SIMS CONSTRUCTION, INC.",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/PAUL%20SIMS%20CONSTRUCTION%2C%20INC./Page1"
   },
   {
    "person_id": "b_3a5e6ed295ec",
@@ -315389,8 +315389,8 @@
    "business": "ADISHVAR, INC.",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 1500.0,
-   "candidates": "Clair Pease, Paul Casto",
+   "campaign_gifts_total": 3000.0,
+   "candidates": "Clair Pease, Geoff McConnell, Mark Sheldon, Paul Casto",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/ADISHVAR%2C%20INC./Page1"
   },
@@ -315629,8 +315629,8 @@
    "business": "COASTALMED OF FLORIDA, LLC",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 4000.0,
-   "candidates": "Allan Branch, Ann Leonard, Robbie Hughes, Tommy Ford",
+   "campaign_gifts_total": 8000.0,
+   "candidates": "Allan Branch, Ann Leonard, Bill Husfelt, Brenda Ruthven, Greg Brudnicki, Robbie Hughes, Tommy Ford, William (Bill) Husfelt",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/COASTALMED%20OF%20FLORIDA%2C%20LLC/Page1"
   },
@@ -315641,10 +315641,22 @@
    "business": "MCELHENEY PROPERTIES, LLC",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 4000.0,
-   "candidates": "Allan Branch, Ann Leonard, Robbie Hughes, Tommy Ford",
+   "campaign_gifts_total": 7500.0,
+   "candidates": "Allan Branch, Ann Leonard, Bill Husfelt, Greg Brudnicki, Robbie Hughes, Tommy Ford, William (Bill) Husfelt",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/MCELHENEY%20PROPERTIES%2C%20LLC/Page1"
+  },
+  {
+   "person_id": "b_2549bdfdee52",
+   "person": "Randall McElheney",
+   "doc_number": "L13000174043",
+   "business": "PHARMACY EQUITY PARTNERS, LLC",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 4000.0,
+   "candidates": "Ann Leonard, Philip 'Griff ' Griffitts, Tommy Ford, William (Bill) Husfelt",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/PHARMACY%20EQUITY%20PARTNERS%2C%20LLC/Page1"
   },
   {
    "person_id": "b_2549bdfdee52",
@@ -315665,22 +315677,10 @@
    "business": "FLORIDA PHARMACY VENTURES LLC",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 2000.0,
-   "candidates": "Ann Leonard, Tommy Ford",
+   "campaign_gifts_total": 3000.0,
+   "candidates": "Ann Leonard, Jenna Flint Haligas, Tommy Ford",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/FLORIDA%20PHARMACY%20VENTURES%20LLC/Page1"
-  },
-  {
-   "person_id": "b_2549bdfdee52",
-   "person": "Randall McElheney",
-   "doc_number": "L13000174043",
-   "business": "PHARMACY EQUITY PARTNERS, LLC",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 2000.0,
-   "candidates": "Ann Leonard, Tommy Ford",
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/PHARMACY%20EQUITY%20PARTNERS%2C%20LLC/Page1"
   },
   {
    "person_id": "b_2549bdfdee52",
@@ -315689,8 +315689,8 @@
    "business": "QUALITY CARE PROPERTIES, LLC",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 2000.0,
-   "candidates": "Ann Leonard, Tommy Ford",
+   "campaign_gifts_total": 2500.0,
+   "candidates": "Ann Leonard, Greg Brudnicki, Tommy Ford",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/QUALITY%20CARE%20PROPERTIES%2C%20LLC/Page1"
   },
@@ -316397,8 +316397,8 @@
    "business": "THE ST. JOE COMPANY",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 3000.0,
-   "candidates": "Grant Wittstruck, Scott Duvall, Tommy Ford",
+   "campaign_gifts_total": 18400.0,
+   "candidates": "Bill Dozier, Christopher Moore, Chuck Perdue, Doug Moore, Geoff McConnell, Grant Wittstruck, Joe Wayne Walker, Mark Sheldon, Michael \"Doc\" Rohan, Mike Thomas, Pamm Chapman, Phil Chester, Robert Carroll, Scott Duvall, Steve Moss, Tommy Ford, Tommy Hamm, William (Bill) Husfelt",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/THE%20ST.%20JOE%20COMPANY/Page1"
   },
@@ -316805,8 +316805,8 @@
    "business": "ADISHVAR, INC.",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 1500.0,
-   "candidates": "Clair Pease, Paul Casto",
+   "campaign_gifts_total": 3000.0,
+   "candidates": "Clair Pease, Geoff McConnell, Mark Sheldon, Paul Casto",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/ADISHVAR%2C%20INC./Page1"
   },
@@ -316857,6 +316857,18 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/SHRI%20GOYAM%20MOTELS%2C%20LLC/Page1"
+  },
+  {
+   "person_id": "b_9805ed2ae8f6",
+   "person": "Riyad Albibi",
+   "doc_number": "H20148",
+   "business": "RASHDA ALBIBI, M.D., P.A.",
+   "business_status": "Inactive",
+   "match": "Name and address",
+   "campaign_gifts_total": 150.0,
+   "candidates": "Chuck Perdue",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/RASHDA%20ALBIBI%2C%20M.D.%2C%20P.A./Page1"
   },
   {
    "person_id": "b_9805ed2ae8f6",
@@ -316917,18 +316929,6 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/MEDPARTNERS%20LLC/Page1"
-  },
-  {
-   "person_id": "b_9805ed2ae8f6",
-   "person": "Riyad Albibi",
-   "doc_number": "H20148",
-   "business": "RASHDA ALBIBI, M.D., P.A.",
-   "business_status": "Inactive",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/RASHDA%20ALBIBI%2C%20M.D.%2C%20P.A./Page1"
   },
   {
    "person_id": "b_4a555a81f71c",
@@ -317101,6 +317101,78 @@
   {
    "person_id": "b_912f729df005",
    "person": "Robert Henry",
+   "doc_number": "P13000015589",
+   "business": "SOUTHERN COASTAL HOMES, INC.",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 2500.0,
+   "candidates": "Doug Moore, Pamm Chapman, Tommy Hamm",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/SOUTHERN%20COASTAL%20HOMES%2C%20INC./Page1"
+  },
+  {
+   "person_id": "b_912f729df005",
+   "person": "Robert Henry",
+   "doc_number": "P97000027498",
+   "business": "RAFS OF PENSACOLA, INC.",
+   "business_status": "Inactive",
+   "match": "Name and address",
+   "campaign_gifts_total": 1750.0,
+   "candidates": "Pamm Chapman, Tommy Hamm",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/RAFS%20OF%20PENSACOLA%2C%20INC./Page1"
+  },
+  {
+   "person_id": "b_912f729df005",
+   "person": "Robert Henry",
+   "doc_number": "P03000021337",
+   "business": "RAFS OF FWB, INC.",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 1500.0,
+   "candidates": "Pamm Chapman, Tommy Hamm",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/RAFS%20OF%20FWB%2C%20INC./Page1"
+  },
+  {
+   "person_id": "b_912f729df005",
+   "person": "Robert Henry",
+   "doc_number": "695060",
+   "business": "ITC HOLDINGS, INC.",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 500.0,
+   "candidates": "Daniel Robert Schultz",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/ITC%20HOLDINGS%2C%20INC./Page1"
+  },
+  {
+   "person_id": "b_912f729df005",
+   "person": "Robert Henry",
+   "doc_number": "P05000150294",
+   "business": "RAFS OF DOTHAN, INC.",
+   "business_status": "Inactive",
+   "match": "Name and address",
+   "campaign_gifts_total": 500.0,
+   "candidates": "Pamm Chapman",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/RAFS%20OF%20DOTHAN%2C%20INC./Page1"
+  },
+  {
+   "person_id": "b_912f729df005",
+   "person": "Robert Henry",
+   "doc_number": "P96000055706",
+   "business": "ROYAL AMERICAN FOOD SERVICES, INC.",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 500.0,
+   "candidates": "Jenna Flint Haligas",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/ROYAL%20AMERICAN%20FOOD%20SERVICES%2C%20INC./Page1"
+  },
+  {
+   "person_id": "b_912f729df005",
+   "person": "Robert Henry",
    "doc_number": "P94000059377",
    "business": "BAY POINT CLUB, INC.",
    "business_status": "Active",
@@ -317169,18 +317241,6 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/GREENFIELD%20VILLAGE%2C%20L.L.C./Page1"
-  },
-  {
-   "person_id": "b_912f729df005",
-   "person": "Robert Henry",
-   "doc_number": "695060",
-   "business": "ITC HOLDINGS, INC.",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/ITC%20HOLDINGS%2C%20INC./Page1"
   },
   {
    "person_id": "b_912f729df005",
@@ -317365,30 +317425,6 @@
   {
    "person_id": "b_912f729df005",
    "person": "Robert Henry",
-   "doc_number": "P05000150294",
-   "business": "RAFS OF DOTHAN, INC.",
-   "business_status": "Inactive",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/RAFS%20OF%20DOTHAN%2C%20INC./Page1"
-  },
-  {
-   "person_id": "b_912f729df005",
-   "person": "Robert Henry",
-   "doc_number": "P03000021337",
-   "business": "RAFS OF FWB, INC.",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/RAFS%20OF%20FWB%2C%20INC./Page1"
-  },
-  {
-   "person_id": "b_912f729df005",
-   "person": "Robert Henry",
    "doc_number": "P97000027492",
    "business": "RAFS OF PANAMA CITY, INC.",
    "business_status": "Active",
@@ -317409,18 +317445,6 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/RAFS%20OF%20PCB%2C%20INC./Page1"
-  },
-  {
-   "person_id": "b_912f729df005",
-   "person": "Robert Henry",
-   "doc_number": "P97000027498",
-   "business": "RAFS OF PENSACOLA, INC.",
-   "business_status": "Inactive",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/RAFS%20OF%20PENSACOLA%2C%20INC./Page1"
   },
   {
    "person_id": "b_912f729df005",
@@ -317485,18 +317509,6 @@
   {
    "person_id": "b_912f729df005",
    "person": "Robert Henry",
-   "doc_number": "P96000055706",
-   "business": "ROYAL AMERICAN FOOD SERVICES, INC.",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/ROYAL%20AMERICAN%20FOOD%20SERVICES%2C%20INC./Page1"
-  },
-  {
-   "person_id": "b_912f729df005",
-   "person": "Robert Henry",
    "doc_number": "P93000083972",
    "business": "ROYAL AMERICAN HOSPITALITY, INC.",
    "business_status": "Inactive",
@@ -317517,18 +317529,6 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/ROYAL%20AMERICAN%20MANAGEMENT%2C%20INC./Page1"
-  },
-  {
-   "person_id": "b_912f729df005",
-   "person": "Robert Henry",
-   "doc_number": "P13000015589",
-   "business": "SOUTHERN COASTAL HOMES, INC.",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/SOUTHERN%20COASTAL%20HOMES%2C%20INC./Page1"
   },
   {
    "person_id": "b_912f729df005",
@@ -318913,6 +318913,18 @@
   {
    "person_id": "b_c1eda0ee6b91",
    "person": "Sean Carruth",
+   "doc_number": "L17000248031",
+   "business": "FUN PASS ENTERTAINMENT, LLC",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 1000.0,
+   "candidates": "Mark Sheldon",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/FUN%20PASS%20ENTERTAINMENT%2C%20LLC/Page1"
+  },
+  {
+   "person_id": "b_c1eda0ee6b91",
+   "person": "Sean Carruth",
    "doc_number": "L25000529562",
    "business": "210PCB, LLC",
    "business_status": "Active",
@@ -318933,18 +318945,6 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults?inquiryType=EntityName&searchTerm=CARRUTH%20%26%20CARRUTH%2C%20LLC"
-  },
-  {
-   "person_id": "b_c1eda0ee6b91",
-   "person": "Sean Carruth",
-   "doc_number": "L17000248031",
-   "business": "FUN PASS ENTERTAINMENT, LLC",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/FUN%20PASS%20ENTERTAINMENT%2C%20LLC/Page1"
   },
   {
    "person_id": "b_c1eda0ee6b91",
@@ -319141,6 +319141,18 @@
   {
    "person_id": "b_025d2e549d6a",
    "person": "Shayne Jensen",
+   "doc_number": "P02000134063",
+   "business": "GULF COAST PODIATRY, P.A.",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 100.0,
+   "candidates": "Tommy Ford",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/GULF%20COAST%20PODIATRY%2C%20P.A./Page1"
+  },
+  {
+   "person_id": "b_025d2e549d6a",
+   "person": "Shayne Jensen",
    "doc_number": "L21000437194",
    "business": "1016 BLR, LLC",
    "business_status": "Active",
@@ -319221,18 +319233,6 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/EMERALD%20ISLE%20VENTURES%2C%20LLC/Page1"
-  },
-  {
-   "person_id": "b_025d2e549d6a",
-   "person": "Shayne Jensen",
-   "doc_number": "P02000134063",
-   "business": "GULF COAST PODIATRY, P.A.",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/GULF%20COAST%20PODIATRY%2C%20P.A./Page1"
   },
   {
    "person_id": "b_025d2e549d6a",
@@ -319837,6 +319837,30 @@
   {
    "person_id": "b_e73366fdadb4",
    "person": "Steven Clements",
+   "doc_number": "L16000056211",
+   "business": "EXTREME LAND CLEARING & EXCAVATION, LLC",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 7250.0,
+   "candidates": "Brandon Aldridge, Brenda Ruthven, Daniel Russell, Greg Brudnicki, Jenna Flint Haligas, Keith Baker, Margo Anderson, Michael Nichols, Mike Nelson, Stacie Galbreath, Tommy Hamm",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults?inquiryType=EntityName&searchTerm=EXTREME%20LAND%20CLEARING%20%26%20EXCAVATION%2C%20LLC"
+  },
+  {
+   "person_id": "b_e73366fdadb4",
+   "person": "Steven Clements",
+   "doc_number": "L18000287513",
+   "business": "HCE, LLC",
+   "business_status": "Inactive",
+   "match": "Name and address",
+   "campaign_gifts_total": 3750.0,
+   "candidates": "Bill Dozier, Brenda Ruthven, Greg Brudnicki, Margo Anderson, Michael Nichols, Tommy Hamm",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/HCE%2C%20LLC/Page1"
+  },
+  {
+   "person_id": "b_e73366fdadb4",
+   "person": "Steven Clements",
    "doc_number": "L26000392973",
    "business": "CEDAR CREEK CHASE LLC",
    "business_status": "Active",
@@ -319849,18 +319873,6 @@
   {
    "person_id": "b_e73366fdadb4",
    "person": "Steven Clements",
-   "doc_number": "L16000056211",
-   "business": "EXTREME LAND CLEARING & EXCAVATION, LLC",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults?inquiryType=EntityName&searchTerm=EXTREME%20LAND%20CLEARING%20%26%20EXCAVATION%2C%20LLC"
-  },
-  {
-   "person_id": "b_e73366fdadb4",
-   "person": "Steven Clements",
    "doc_number": "L20000062991",
    "business": "EXTREME LAND DEVELOPMENT & INVESTMENTS, LLC",
    "business_status": "Active",
@@ -319869,18 +319881,6 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults?inquiryType=EntityName&searchTerm=EXTREME%20LAND%20DEVELOPMENT%20%26%20INVESTMENTS%2C%20LLC"
-  },
-  {
-   "person_id": "b_e73366fdadb4",
-   "person": "Steven Clements",
-   "doc_number": "L18000287513",
-   "business": "HCE, LLC",
-   "business_status": "Inactive",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/HCE%2C%20LLC/Page1"
   },
   {
    "person_id": "b_e73366fdadb4",
@@ -320945,8 +320945,8 @@
    "business": "TKVANDY LLC",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 2700.0,
-   "candidates": "Allan Branch, Glenn Manley, Michael Petty, Robbie Hughes, Tommy Ford",
+   "campaign_gifts_total": 3900.0,
+   "candidates": "Allan Branch, Glenn Manley, Johnnie Beshearse, Judy Vandergrift, Michael Petty, Robbie Hughes, Tommy Ford",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/TKVANDY%20LLC/Page1"
   },
@@ -321325,6 +321325,18 @@
   {
    "person_id": "b_66ac7c0ae7a5",
    "person": "Tina Nelson",
+   "doc_number": "L23000257968",
+   "business": "THE BIKE RACK LLC",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 200.0,
+   "candidates": "Daniel Robert Schultz",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/THE%20BIKE%20RACK%20LLC/Page1"
+  },
+  {
+   "person_id": "b_66ac7c0ae7a5",
+   "person": "Tina Nelson",
    "doc_number": "L26000379430",
    "business": "HIP SQUARE FENCE LLC",
    "business_status": "Active",
@@ -321357,18 +321369,6 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/NELSON%27S%20SERVICES%20PCB%20LLC/Page1"
-  },
-  {
-   "person_id": "b_66ac7c0ae7a5",
-   "person": "Tina Nelson",
-   "doc_number": "L23000257968",
-   "business": "THE BIKE RACK LLC",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/THE%20BIKE%20RACK%20LLC/Page1"
   },
   {
    "person_id": "b_c09b99e8da0d",
@@ -321541,12 +321541,24 @@
   {
    "person_id": "b_6a09e0b7deb2",
    "person": "Tonie Bense",
+   "doc_number": "590756",
+   "business": "TDW, INC.",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 3500.0,
+   "candidates": "Brandon Aldridge, Keith Baker, Phil Chester, William (Bill) Husfelt",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/TDW%2C%20INC./Page1"
+  },
+  {
+   "person_id": "b_6a09e0b7deb2",
+   "person": "Tonie Bense",
    "doc_number": "P01000113955",
    "business": "BENSE ENTERPRISES, INC.",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 1000.0,
-   "candidates": "Daniel Raffield",
+   "campaign_gifts_total": 2000.0,
+   "candidates": "Brandon Aldridge, Daniel Raffield",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/BENSE%20ENTERPRISES%2C%20INC./Page1"
   },
@@ -321561,18 +321573,6 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/BENSE%20RENTALS%2C%20INC./Page1"
-  },
-  {
-   "person_id": "b_6a09e0b7deb2",
-   "person": "Tonie Bense",
-   "doc_number": "590756",
-   "business": "TDW, INC.",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/TDW%2C%20INC./Page1"
   },
   {
    "person_id": "b_9e7c6028cc13",
@@ -322069,6 +322069,18 @@
   {
    "person_id": "b_fc0d8d1a07ce",
    "person": "Victoria Williams",
+   "doc_number": "P12000068778",
+   "business": "VBA DESIGN, INC.",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 500.0,
+   "candidates": "Mike Nelson",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/VBA%20DESIGN%2C%20INC./Page1"
+  },
+  {
+   "person_id": "b_fc0d8d1a07ce",
+   "person": "Victoria Williams",
    "doc_number": "P16000089792",
    "business": "JFAP, INC.",
    "business_status": "Inactive",
@@ -322077,18 +322089,6 @@
    "candidates": null,
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/JFAP%2C%20INC./Page1"
-  },
-  {
-   "person_id": "b_fc0d8d1a07ce",
-   "person": "Victoria Williams",
-   "doc_number": "P12000068778",
-   "business": "VBA DESIGN, INC.",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 0,
-   "candidates": null,
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/VBA%20DESIGN%2C%20INC./Page1"
   },
   {
    "person_id": "b_69e43bc99c61",
@@ -322957,12 +322957,24 @@
   {
    "person_id": "b_eca5ac25d5e6",
    "person": "William Cramer",
+   "doc_number": "L19000186570",
+   "business": "PFN INVESTMENTS, LLC",
+   "business_status": "Active",
+   "match": "Name and address",
+   "campaign_gifts_total": 4000.0,
+   "candidates": "Doug Moore, Greg Brudnicki, Tommy Ford, Tommy Hamm",
+   "county": "bay",
+   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/PFN%20INVESTMENTS%2C%20LLC/Page1"
+  },
+  {
+   "person_id": "b_eca5ac25d5e6",
+   "person": "William Cramer",
    "doc_number": "L21000065244",
    "business": "CRAMER BEACH PROPERTIES, LLC",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 1000.0,
-   "candidates": "Tommy Ford",
+   "campaign_gifts_total": 2000.0,
+   "candidates": "Geoff McConnell, Tommy Ford",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/CRAMER%20BEACH%20PROPERTIES%2C%20LLC/Page1"
   },
@@ -322973,22 +322985,10 @@
    "business": "CRAMER PROPERTIES, INC.",
    "business_status": "Active",
    "match": "Name and address",
-   "campaign_gifts_total": 1000.0,
-   "candidates": "Tommy Ford",
+   "campaign_gifts_total": 2000.0,
+   "candidates": "Greg Brudnicki, Tommy Ford",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/CRAMER%20PROPERTIES%2C%20INC./Page1"
-  },
-  {
-   "person_id": "b_eca5ac25d5e6",
-   "person": "William Cramer",
-   "doc_number": "L19000186570",
-   "business": "PFN INVESTMENTS, LLC",
-   "business_status": "Active",
-   "match": "Name and address",
-   "campaign_gifts_total": 1000.0,
-   "candidates": "Tommy Ford",
-   "county": "bay",
-   "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/PFN%20INVESTMENTS%2C%20LLC/Page1"
   },
   {
    "person_id": "b_eca5ac25d5e6",

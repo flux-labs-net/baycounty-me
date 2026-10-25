@@ -31,6 +31,7 @@ const PAGES = {
   '/public-money/checkbook': {datasets: ['checkbook-payments'], endpoints: ['/checkbook']},
   '/public-money/budget-tracker': {datasets: ['budget-actuals'], endpoints: ['/budget-actual']},
   '/elections': {datasets: ['candidates-2026', 'campaign-contributions-2026']},
+  '/elections/past': {datasets: ['campaign-history', 'campaign-contributions-history']},
   '/public-money/exemptions': {datasets: ['property-tax-exemptions']},
   '/public-money/contracts': {datasets: ['contracts', 'change-orders', 'emergency-purchases']},
   '/public-money/accountability': {datasets: ['accountability-projects', 'accountability-events']},
@@ -55,9 +56,9 @@ const PAGES = {
 const PREFIXES = {'/governments/': {datasets: ['government-profiles', 'government-years', 'budget-detail', 'officials-pay', 'votes', 'meetings', 'contracts', 'cra-payments',
   'accountability-projects', 'sales-tax-projects', 'fema-michael-projects', 'savings-opportunities', 'savings-evidence', 'debt', 'bonds', 'audit-findings', 'budget-per-resident', 'entity-connections', 'officeholder-terms'], endpoints: ['/governments/{slug}', '/entities/{id}', '/officials']},
   // each official's and candidate's profile (site/people_pages.py)
-  '/people/': {datasets: ['entity-profiles', 'entity-connections', 'people-directory', 'member-votes', 'campaign-finance', 'candidates-2026', 'officials-pay', 'salary-leaders',
+  '/people/': {datasets: ['entity-profiles', 'entity-connections', 'people-directory', 'member-votes', 'campaign-finance', 'campaign-history', 'candidates-2026', 'officials-pay', 'salary-leaders',
     'money-map-votes', 'nonprofit-officials', 'official-businesses', 'official-business-links', 'shared-owner-groups', 'owner-gifts', 'officeholder-terms'], endpoints: ['/entities/{id}']},
-  '/public-money/vendors/': {datasets: ['vendors-directory', 'contracts', 'change-orders', 'emergency-purchases', 'vendor-payments', 'cra-payments', 'campaign-contributions-2026', 'votes',
+  '/public-money/vendors/': {datasets: ['vendors-directory', 'contracts', 'change-orders', 'emergency-purchases', 'vendor-payments', 'cra-payments', 'campaign-contributions-2026', 'campaign-contributions-history', 'votes',
     'entity-profiles', 'entity-connections'], endpoints: ['/entities/{id}']}};
 
 function sourceFor(path) {

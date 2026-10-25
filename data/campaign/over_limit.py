@@ -22,7 +22,7 @@ sys.path.insert(0, os.path.join(ROOT, 'data', 'sunbiz'))
 
 LIMIT = 1000.0
 # Florida primary election days (the general follows in November)
-PRIMARY_DAY = {'2018': '2018-08-28', '2020': '2020-08-18', '2022': '2022-08-23', '2024': '2024-08-20', '2026': '2026-08-18', '2028': '2028-08-22'}
+PRIMARY_DAY = {'2016': '2016-08-30', '2018': '2018-08-28', '2020': '2020-08-18', '2022': '2022-08-23', '2024': '2024-08-20', '2026': '2026-08-18', '2028': '2028-08-22'}
 TYPES = ('business', 'pac', 'committee', 'other')
 LEGAL = r'\b(llc|l l c|inc|incorporated|corp|corporation|co|company|pa|p a|ltd|lp|llp|pllc|the|of)\b'
 

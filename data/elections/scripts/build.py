@@ -5,6 +5,11 @@ from overrides import *
 L = json.load(open(D + '/lists.json')); P = json.load(open(D + '/pages.json'))
 ELEC = {'37': '2027 Municipal Super Tuesday (Apr 20, 2027)', '34': '2026 Lynn Haven Recall (Jan 20, 2026)', '35': '2026 Primary/General (Aug 18 / Nov 3, 2026)', '36': '2026 Municipal Super Tuesday (Apr 21, 2026)'}
 def money(s): return round(float(s.replace('$', '').replace(',', '')), 2)
+def elec_name(e):
+    """Election title for a reporting group: the known ones above, else the title on the saved SOE list page."""
+    if e in ELEC: return ELEC[e]
+    m = re.search(r'<h\d[^>]*>\s*([^<]*\(\d+/\d+/\d{4}\))\s*</h\d>', open(f'{D}/list_{e}.html', encoding='utf-8', errors='replace').read())
+    return re.sub(r'\s+', ' ', m.group(1)).strip() if m else f'SOE reporting group {e}'
 def clean(n):
     n = (n or '').replace('<br>', ' ').replace('&amp;', '&').replace('’', "'")
     return re.sub(r'\s+', ' ', n).strip()
@@ -201,7 +206,7 @@ for o in L:
     if interest: notes.append(f'Includes {interest:,.2f} bank interest (filed as a contribution item).')
     notes += NOTES.get(ca, [])
     cands.append({
-        'name': name, 'office': OFFICE_LABEL.get(o['office'], o['office']), 'soe_office': o['office'], 'election': ELEC[e], 'party': PARTY.get(pcode, pcode),
+        'name': name, 'office': OFFICE_LABEL.get(o['office'], o['office']), 'soe_office': o['office'], 'election': elec_name(e), 'election_id': int(e), 'party': PARTY.get(pcode, pcode),
         'soe_status': status, 'soe_campaign_name': nm, 'cand_id': int(ca),
         'report_url': 'https://www.voterfocus.com' + o['href'],
         'export_url': f'https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id={ca}&dhc=0&county=bay',

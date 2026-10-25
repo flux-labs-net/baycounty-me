@@ -13,7 +13,7 @@ import ids  # noqa: E402  shared government / vendor / person ids (data/entities
 GOV_COLS = {'owner-gifts': ['office'], 'entity-profiles': ['gov_id'], 'entity-connections': [], 'government-profiles': ['government'], 'government-years': ['gov_id', 'government'], 'budget-years': ['gov_id'], 'cra-agencies': ['gov_id'], 'cra-tax-increment': ['gov_id'], 'cra-increment-checks': [], 'officeholder-terms': ['gov_id'], 'votes': ['government'], 'member-votes': ['gov_id'], 'cra-payments': ['city'],
             'property-tax-rates': ['authority_id'], 'fema-michael-projects': ['applicant'], 'officials-pay': ['title', 'government'],
             'meetings': ['gov', 'board'], 'campaign-finance': ['office', 'gov'], 'bonds': ['gov'], 'salary-positions': ['employer_id'],
-            'salary-leaders': ['employer_id'], 'candidates-2026': ['office', 'government'], 'campaign-contributions-2026': ['office'],
+            'salary-leaders': ['employer_id'], 'candidates-2026': ['office', 'government'], 'campaign-contributions-2026': ['office'], 'campaign-history': ['gov_id'], 'campaign-contributions-history': ['gov_id'],
             'bed-tax-collections': [], 'property-tax-exemptions': [],
             'connections-gifts': ['official_gov_id', 'office'], 'connections-payments': ['payer_gov_id'], 'donor-contracts': ['contract_gov_id'], 'connections-payees': [], 'connections-links': [],
             'vendors-directory': [], 'people-directory': [], 'glossary-terms': [], 'site-updates': [], 'tax-districts': ['district'],
@@ -22,7 +22,7 @@ FIXED_GOV = {'bed-tax-collections': 'county', 'property-tax-exemptions': 'county
 
 
 VENDOR_COL = {'contracts': 'vendor', 'change-orders': 'vendor', 'emergency-purchases': 'vendor', 'cra-payments': 'payee', 'vendor-payments': 'vendor',
-              'campaign-contributions-2026': 'contributor', 'business-donor-sunbiz': 'contributor'}
+              'campaign-contributions-2026': 'contributor', 'campaign-contributions-history': 'contributor', 'business-donor-sunbiz': 'contributor'}
 
 
 def add_vendor_id(did, rows):
@@ -31,14 +31,14 @@ def add_vendor_id(did, rows):
     if not col:
         return rows
     for r in rows:
-        v = [] if did == 'campaign-contributions-2026' and r.get('contributor_type') != 'business' else ids.vendor_ids(r.get(col))
+        v = [] if did in ('campaign-contributions-2026', 'campaign-contributions-history') and r.get('contributor_type') != 'business' else ids.vendor_ids(r.get(col))
         r['vendor_id'] = v[0] if v else None
         r['vendor_ids'] = v if len(v) > 1 else None
     return rows
 
 
 PERSON_COL = {'member-votes': 'member', 'officials-pay': 'name', 'salary-leaders': 'name', 'campaign-finance': 'official', 'candidates-2026': 'candidate',
-              'business-donor-sunbiz': 'candidate'}
+              'business-donor-sunbiz': 'candidate', 'campaign-history': 'candidate'}
 
 
 def add_person_id(did, rows):
@@ -251,6 +251,33 @@ def _contributions():
             if x.get('type') not in ('candidate', 'individual', 'self') and x.get('kind') != 'interest']
 
 
+def _history():
+    """campaign-history: one row per local campaign 2016-2025 (data/campaign/campaign_history.json). Individuals summed only."""
+    h = _j('campaign', 'campaign_history.json')
+    out = []
+    for c in (h or {}).get('candidates') or []:
+        bt = c.get('by_type_total') or {}; fi = c.get('from_individuals') or {}; me = c.get('candidate_self') or {}
+        out.append({'election_year': c['year'], 'election': c['election'], 'election_date': c['election_date'], 'primary_date': c.get('primary_date'),
+                    'government': (ids.gov(c['gov_id']) or {}).get('short'), 'gov_id': c['gov_id'], 'office': c['office'], 'candidate': c['name'], 'party': c.get('party'),
+                    'outcome': c.get('outcome'), 'soe_status': c.get('soe_status'), 'total_raised': c.get('total_raised'), 'monetary': c.get('monetary'), 'in_kind': c.get('in_kind'),
+                    'loans': c.get('loans'), 'total_spent': c.get('total_spent'), 'n_contributions': c.get('n_contributions'),
+                    'from_individuals_total': fi.get('total'), 'from_individuals_count': fi.get('count'), 'from_individuals_in_county': (fi.get('in_county') or {}).get('total'),
+                    'from_businesses': bt.get('business'), 'from_pacs_and_committees': bt.get('pac'), 'from_parties': bt.get('party'), 'from_other': bt.get('other'),
+                    'own_money': bt.get('candidate_self'), 'own_loans': me.get('loans') or None, 'reports_through': c.get('through'), 'reconciliation': c.get('reconciliation'),
+                    'soe_candidate_id': c.get('cand_id'), 'report_url': c.get('report_url'), 'source_url': c.get('export_url')})
+    return out
+
+
+def _history_contributions():
+    """campaign-contributions-history: every gift from an organization to a 2016-2025 local campaign. No individuals, no bank interest."""
+    h = _j('campaign', 'campaign_history.json')
+    return [{'election_year': c['year'], 'election': c['election'], 'gov_id': c['gov_id'], 'office': c['office'], 'candidate': c['name'], 'outcome': c.get('outcome'),
+             'contributor': x.get('name'), 'contributor_type': x.get('type'), 'city': x.get('city'), 'amount': x.get('amount'), 'date': x.get('date'), 'kind': x.get('kind'),
+             'report_url': c.get('report_url')}
+            for c in (h or {}).get('candidates') or [] for x in c.get('contributors') or []
+            if x.get('type') not in ('candidate', 'individual', 'self') and x.get('kind') != 'interest']
+
+
 def _officials_pay(f):
     """A row with no name is a whole board's pay (e.g. 'Mayor and 4 Commissioners (combined)' or 'each of 5'): say so."""
     out = _flat(f['pay'], ['government', 'title', 'name', 'annual', 'year', 'basis', 'source_url'])
@@ -340,6 +367,8 @@ def datasets():
         (('salaries', 'bocc.json'), 'salary-leaders', 'Salaries of officials and leaders', 'Named salaries of elected officials and top appointed leaders only.', lambda d: _salaries('leaders')),
         (('elections', 'candidates_2026.json'), 'candidates-2026', '2026 local candidates', 'Every 2026 local race and candidate with status, platform in their own words and campaign money totals.', lambda d: _candidates()),
         (('elections', 'finance_2026.json'), 'campaign-contributions-2026', '2026 contributions from organizations', 'Every contribution from a business, committee or party to a 2026 local candidate. Individual donors are not included, and neither is bank interest on campaign accounts.', lambda d: _contributions()),
+        (('campaign', 'campaign_history.json'), 'campaign-history', 'Local campaigns since 2016', 'Every candidate who opened a campaign account with the Bay County Supervisor of Elections for a local race from 2016 through 2025, winners and losers: what each raised and spent, and how much came from individuals (summed, never named), businesses, committees, parties and the candidate. The 2026 races are in candidates-2026.', lambda d: _history()),
+        (('campaign', 'campaign_history.json'), 'campaign-contributions-history', 'Contributions from organizations, 2016-2025', 'Every contribution from a business, committee or party to a local candidate in the 2016 to 2025 elections, as filed. Individual donors are not included, and neither is bank interest on campaign accounts.', lambda d: _history_contributions()),
         (('exemptions', 'exemptions_2026.json'), 'property-tax-exemptions', 'Property tax exemptions (2026 roll)', 'Every exemption type on the 2026 tax roll: parcels, value exempted and estimated tax removed.', lambda d: _exemptions()),
     ]
     D += [('accountability-projects', 'Accountability: projects', 'One row per project on the Accountability console: stage, first and latest figures, cost growth, questions raised by the published rules, records still missing and the agency reply.', lambda: _acc('projects')),

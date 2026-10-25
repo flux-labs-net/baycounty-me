@@ -9,6 +9,9 @@ from datetime import datetime, timezone
 import html
 
 CHANGES = [
+    {'date': '2026-10-25', 'title': 'Every local campaign since 2016',
+     'text': "Campaign money now goes back to 2016. A new Past elections page lists every candidate who ran for a local office in Bay County from 2016 through 2025, winners and losers (342 campaigns that raised $5.2M), with what each raised and spent and every business, committee and party that gave. Those gifts also feed the Connections network, the vendor pages' donor matches and people's profiles, and each past candidate has a profile. Gifts from individual people are still counted only in totals. The Supervisor of Elections' online records start in 2016, so 2015 is not included.",
+     'pages': ['/elections/past', '/elections', '/connections', '/connections/campaign-gifts', '/people', '/public-money/vendors', '/open-data', '/developers']},
     {'date': '2026-10-25', 'title': 'How much property tax goes to the CRAs',
      'text': "A new page estimates how much property tax Bay County and the cities pay to the seven Community Redevelopment Agencies each year: about $28.7M in FY2025, $25.8M of it from Bay County and three-quarters of it to Panama City Beach's Front Beach Road CRA. It shows who pays, what has been paid since FY2003, sunset dates and what could still be paid under three growth scenarios, checked against the county's own budget figures. The method and the missing years are on the page.",
      'pages': ['/public-money/cra-tax-increment', '/public-money/tax-dollars', '/public-money/amendment-3', '/governments', '/open-data', '/developers']},
@@ -191,7 +194,7 @@ LABELS = {'/people': 'People', '/': 'Home', '/my-address': 'My Address', '/publi
           '/public-money/audits': 'Audit Findings', '/who-runs-bay-county': 'Officials', '/glossary': 'Glossary', '/search': 'Search',
           '/about': 'About', '/updates': "What's new", '/governments': 'Governments', '/compare': 'Compare', '/meetings': 'Meetings',
           '/connections': 'Connections', '/connections/campaign-gifts': 'Campaign Gifts', '/records-request': 'Records Request', '/open-data': 'Open Data', '/alerts': 'Email Alerts',
-          '/es': 'En español', '/public-money/budget-explorer': 'Budget Explorer', '/public-money/who-gets-paid': 'Who Gets Paid', '/connections/money-map': 'Money Map', '/elections': '2026 Elections', '/developers': 'API', '/public-money/exemptions': 'Exemptions'}
+          '/es': 'En español', '/public-money/budget-explorer': 'Budget Explorer', '/public-money/who-gets-paid': 'Who Gets Paid', '/connections/money-map': 'Money Map', '/elections': '2026 Elections', '/elections/past': 'Past Elections', '/developers': 'API', '/public-money/exemptions': 'Exemptions'}
 
 
 def last_updated(path):
