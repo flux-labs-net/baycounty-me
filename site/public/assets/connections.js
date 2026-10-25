@@ -30,6 +30,15 @@ function radio(groupId, opts, cur, set) {
   const g = $(groupId);
   opts.forEach(([k, l]) => g.appendChild(chip(l, cur === k, b => { set(k); g.querySelectorAll('.cn-chip').forEach(x => x.setAttribute('aria-pressed', x === b)); }, groupId + '-' + k)));
 }
+/* Only the filters that change the current view are shown: "Payees" (how many to draw) is for the network,
+   "Gifts" for the network and the gifts table, where "Hide" means nothing. */
+function filterGroups() {
+  $('cnScope').hidden = st.view !== 'network';
+  $('cnDon').hidden = st.view !== 'network' && st.view !== 'gifts';
+  const hide = $('cnDon-off'); if (hide) hide.hidden = st.view !== 'network';
+  if (st.view === 'gifts' && st.don === 'off') setDon('all');
+}
+function setDon(k) { st.don = k; document.querySelectorAll('#cnDon .cn-chip').forEach(x => x.setAttribute('aria-pressed', x.id === 'cnDon-' + k)); }
 function controls() {
   document.querySelectorAll('[data-payer]').forEach(b => b.onclick = () => { const k = b.dataset.payer; st.pay.has(k) ? st.pay.delete(k) : st.pay.add(k); b.setAttribute('aria-pressed', st.pay.has(k)); render(); });
   Object.entries(D.types).forEach(([k, l]) => $('cnTypes').appendChild(chip(l, st.types.has(k), b => { st.types.has(k) ? st.types.delete(k) : st.types.add(k); b.setAttribute('aria-pressed', st.types.has(k)); render(); })));
@@ -62,9 +71,10 @@ function shownPayees(rows) {
 
 function kpis(rows) {
   const m = payeeTotals(rows), named = [...m.keys()].filter(e => /^[vb]:/.test(e));
-  const paidDon = named.filter(e => gaveSet.has(e));
   const gifts = D.don.filter(d => offShown(D.off[d.o] || {}));
   const paidGifts = gifts.filter(d => d.e && m.has(d.e));
+  // businesses paid in these filters that gave to an official in them: the same set the money trail draws
+  const paidDon = [...new Set(paidGifts.map(d => d.e))];
   $('cnKpis').innerHTML = [
     ['Named payees', named.length.toLocaleString(), `paid by ${new Set(rows.map(r => r.p)).size} governments and agencies in the current filters`],
     ['Paid and gave', paidDon.length, 'businesses paid in these records that gave to a campaign'],
@@ -134,6 +144,7 @@ function graph(rows) {
   const wS = d3.scaleSqrt().domain([0, d3.max(L.filter(l => l.type === 'paid'), d => d.amt) || 1]).range([0.8, 7]);
   N.forEach(n => n.r = n.k === 'payer' ? 17 : n.k === 'official' || n.k === 'candidate' ? 8 : Math.max(5, rS(n.total)));
   const connected = new Set(L.filter(l => l.type !== 'paid').flatMap(l => [l.source, l.target]));  // labelled when the graph is small
+  N.forEach(d => { d.lbl = d.k === 'payer' ? d.n : (d.r > 13 || N.length < 60 || (N.length < 90 && (connected.has(d.id) || d.k === 'official'))) ? (d.n.length > 30 ? d.n.slice(0, 29) + '…' : d.n) : ''; });
   const g = svg.append('g');
   // labels keep the same on-screen size at every zoom level
   graphZoom = d3.zoom().scaleExtent([0.2, 5]).on('zoom', e => {
@@ -158,7 +169,7 @@ function graph(rows) {
     .on('click', (e, d) => select(d.id)).on('keydown', (e, d) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); select(d.id); } })
     .on('mousemove', (e, d) => tip(e, `<b>${esc(d.n)}</b><br>${d.k === 'payer' ? PKIND[D.payers[d.id.slice(2)].k] : KIND[d.k]}${d.total ? ' · ' + money(d.total) + ' in records' : ''}`, 'cnTip')).on('mouseleave', () => hideTip('cnTip'));
   node.append('text').attr('dy', d => d.r + 12).attr('text-anchor', 'middle')
-    .text(d => d.k === 'payer' ? d.n : (d.r > 13 || N.length < 60 || (N.length < 90 && (connected.has(d.id) || d.k === 'official'))) ? (d.n.length > 30 ? d.n.slice(0, 29) + '…' : d.n) : '')
+    .text(d => d.lbl)
     .attr('class', d => d.k === 'payer' ? 'cn-pl' : null);
   sim = d3.forceSimulation(N)
     .force('link', d3.forceLink(L).id(d => d.id).distance(d => (N.length < 60 ? 1.7 : 1) * (d.type === 'rel' ? 60 : d.type === 'board' ? 90 : 95)).strength(d => d.type === 'paid' ? 0.5 : d.type === 'board' ? 0.15 : 0.8))
@@ -168,9 +179,17 @@ function graph(rows) {
     .on('tick', () => { link.attr('x1', d => d.source.x).attr('y1', d => d.source.y).attr('x2', d => d.target.x).attr('y2', d => d.target.y); node.attr('transform', d => `translate(${d.x},${d.y})`); });
   for (let i = 0; i < 260; i++) sim.tick();
   {  // start with the whole network in view
-    const xs = N.map(n => n.x), ys = N.map(n => n.y), bx0 = Math.min(...xs) - 30, bx1 = Math.max(...xs) + 30, by0 = Math.min(...ys) - 30, by1 = Math.max(...ys) + 40;
-    const k = Math.min(1.4, W / (bx1 - bx0), H / (by1 - by0));
-    svg.call(graphZoom.transform, d3.zoomIdentity.translate(W / 2 - k * (bx0 + bx1) / 2, H / 2 - k * (by0 + by1) / 2).scale(k));
+    // labels keep their on-screen size, so their width in graph units depends on the zoom: settle it in a few passes
+    const side = st.sel && (fsOn ? innerWidth >= 700 : innerWidth >= 1100) ? 380 * (W / (svg.node().getBoundingClientRect().width || W)) : 0;  // the details panel covers the right side
+    const Wf = W - side;
+    let k = 1, bx0, bx1, by0, by1;
+    for (let i = 0; i < 4; i++) {
+      const half = n => Math.max(n.r, n.lbl.length * (n.k === 'payer' ? 3.9 : 3.3) / k);
+      bx0 = Math.min(...N.map(n => n.x - half(n))) - 10; bx1 = Math.max(...N.map(n => n.x + half(n))) + 10;
+      by0 = Math.min(...N.map(n => n.y - n.r)) - 10; by1 = Math.max(...N.map(n => n.y + n.r + (n.lbl ? 16 / k : 0))) + 10;
+      k = Math.min(1.4, Wf / (bx1 - bx0), H / (by1 - by0));
+    }
+    svg.call(graphZoom.transform, d3.zoomIdentity.translate(Wf / 2 - k * (bx0 + bx1) / 2, H / 2 - k * (by0 + by1) / 2).scale(k));
   }
   if (matchMedia('(prefers-reduced-motion: reduce)').matches) sim.stop(); else sim.alpha(0.05).restart();
   hl = () => {
@@ -194,8 +213,16 @@ function searchBox() {
   const has = new Set(D.recs.map(r => r.e));
   Object.entries(D.ents).forEach(([k, e]) => { if (has.has(k) && /^[vb]:/.test(k)) opts.set(e.n, k); });
   $('cnFind').innerHTML = [...opts.keys()].sort().map(n => `<option value="${esc(n)}">`).join('');
+  const names = [...opts.keys()], low = names.map(n => n.toLowerCase());
+  // an exact pick from the list, else the same name in any case, else the first name that starts with or contains the text
+  const find = q => {
+    if (opts.has(q)) return opts.get(q);
+    const t = q.toLowerCase(); if (t.length < 2) return null;
+    let i = low.indexOf(t); if (i < 0) i = low.findIndex(n => n.startsWith(t)); if (i < 0) i = low.findIndex(n => n.includes(t));
+    return i < 0 ? null : opts.get(names[i]);
+  };
   const go = () => {
-    const id = opts.get($('cnQ').value.trim()); if (!id) return; $('cnQ').value = '';
+    const id = find($('cnQ').value.trim()); if (!id) return; $('cnQ').value = '';
     if (st.scope !== 'focus') { st.scope = 'focus'; document.querySelectorAll('#cnScope .cn-chip').forEach(x => x.setAttribute('aria-pressed', x.id === 'cnScope-focus')); }
     if (st.view !== 'network') setView('network');
     select(id);
@@ -282,19 +309,20 @@ function payees(rows) {
   const list = [...payeeTotals(rows).values()].sort((a, b) => b.tot - a.tot);
   $('cnPayCount').textContent = `${list.length} payees · tap a row for its records`;
   $('cnPay').innerHTML = `<thead><tr><th>Payee</th><th>Type</th><th>Paid by</th><th>Records</th><th class="num">Count</th><th class="num">Dollars in records</th></tr></thead><tbody>` +
-    list.map(o => { const e = ent(o.e); return `<tr class="cn-row" tabindex="0" data-e="${esc(o.e)}"><td><b>${esc(e.n)}</b>${gaveSet.has(o.e) ? ' <span class="cn-flag red">gave</span>' : ''}</td><td>${KIND[e.k]}</td><td>${[...o.p].map(payerName).map(esc).join(', ')}</td><td>${[...o.t].map(t => esc(D.types[t])).join(', ')}</td><td class="num">${o.n}${o.unk ? ` <span class="cn-flag">${o.unk} no $</span>` : ''}</td><td class="num">${full(o.tot)}</td></tr>`; }).join('') + '</tbody>';
+    list.map(o => { const e = ent(o.e); return `<tr class="cn-row" data-tt-role="row" tabindex="0" data-e="${esc(o.e)}"><td><b>${esc(e.n)}</b>${gaveSet.has(o.e) ? ' <span class="cn-flag red">gave</span>' : ''}</td><td>${KIND[e.k]}</td><td>${[...o.p].map(payerName).map(esc).join(', ')}</td><td>${[...o.t].map(t => esc(D.types[t])).join(', ')}</td><td class="num">${o.n}${o.unk ? ` <span class="cn-flag">${o.unk} no $</span>` : ''}</td><td class="num">${full(o.tot)}</td></tr>`; }).join('') + '</tbody>';
   $('cnPay').querySelectorAll('tr.cn-row').forEach(t => { t.onclick = () => select(t.dataset.e); t.onkeydown = e => { if (e.key === 'Enter') select(t.dataset.e); }; });
 }
 
-function donTable() {
-  const rows = D.don.filter(d => offShown(D.off[d.o] || {}));
-  $('cnDonCount').textContent = `${rows.length} donor and official pairs · ${money(rows.reduce((a, d) => a + d.a, 0))}`;
+function donTable(vis) {
+  const paidNow = new Set(vis.map(r => r.e));
+  const rows = D.don.filter(d => offShown(D.off[d.o] || {}) && (st.don !== 'payees' || (d.e && paidNow.has(d.e))));
+  $('cnDonCount').textContent = `${rows.length} donor and official pairs · ${money(rows.reduce((a, d) => a + d.a, 0))}` + (st.don === 'payees' ? ' · donors paid in the current filters; pick "All business donors" for every gift' : '');
   $('cnDonT').innerHTML = `<thead><tr><th>Business or group</th><th>Official</th><th>Office</th><th class="num">Amount</th><th>Date</th><th>Also paid by a government</th></tr></thead><tbody>` +
-    rows.map((d, i) => { const o = D.off[d.o] || {}; return `<tr><td>${esc(d.dn)}${d.ty === 'pac' || d.ty === 'committee' ? ` <span class="cn-flag">${d.ty.toUpperCase() === 'PAC' ? 'PAC' : 'committee'}</span>` : ''}</td><td><button type="button" class="cn-link" data-off="${i}">${esc(o.n)}</button>${o.cand ? ' <span class="cn-flag">2026 candidate</span>' : ''}</td><td>${esc(o.off)}</td><td class="num">${full(d.a)}${d.n > 1 ? ` <span class="cn-flag">${d.n} gifts</span>` : ''}</td><td class="num">${esc(d.date)}</td><td>${d.e ? `<button type="button" class="cn-link" data-ent="${esc(d.e)}">${esc(ent(d.e).n)}</button>${d.cf === 'likely' ? ' <span class="cn-flag">likely</span>' : ''}` : '—'}</td></tr>`; }).join('') + '</tbody>';
+    rows.map((d, i) => { const o = D.off[d.o] || {}; return `<tr data-tt-role="row"><td>${esc(d.dn)}${d.ty === 'pac' || d.ty === 'committee' ? ` <span class="cn-flag">${d.ty.toUpperCase() === 'PAC' ? 'PAC' : 'committee'}</span>` : ''}</td><td><button type="button" class="cn-link" data-off="${i}">${esc(o.n)}</button>${o.cand ? ' <span class="cn-flag">2026 candidate</span>' : ''}</td><td>${esc(o.off)}</td><td class="num">${full(d.a)}${d.n > 1 ? ` <span class="cn-flag">${d.n} gifts</span>` : ''}</td><td class="num">${esc(d.date)}</td><td>${d.e ? `<button type="button" class="cn-link" data-ent="${esc(d.e)}">${esc(ent(d.e).n)}</button>${d.cf === 'likely' ? ' <span class="cn-flag">likely</span>' : ''}` : '—'}</td></tr>`; }).join('') + '</tbody>';
   $('cnDonT').querySelectorAll('[data-ent]').forEach(b => b.onclick = () => { setView('network'); select(b.dataset.ent); });
   $('cnDonT').querySelectorAll('[data-off]').forEach(b => b.onclick = () => {
     const d = rows[+b.dataset.off];
-    if (st.don !== 'all') { st.don = 'all'; document.querySelectorAll('#cnDon .cn-chip').forEach(x => x.setAttribute('aria-pressed', x.id === 'cnDon-all')); }
+    if (st.don === 'off' || (st.don === 'payees' && !d.e)) setDon('all');
     setView('network'); select(d.o);
   });
 }
@@ -356,7 +384,7 @@ function tip(e, h, id) { const t = $(id), b = t.parentElement.getBoundingClientR
 function hideTip(id) { $(id).hidden = true; }
 
 function select(id) {
-  st.sel = id; document.querySelector('.cn-main').classList.toggle('has-sel', !!id); profile();
+  st.sel = id; document.querySelector('.cn-main').classList.toggle('has-sel', !!id); profile(); panelTop();
   if (st.view === 'network') {
     // a payee outside the "key payees" set joins the graph when picked
     if (id && st.scope === 'focus') { if (!st.focus.has(id)) { st.focus.add(id); graph(visible()); } }
@@ -366,6 +394,14 @@ function select(id) {
   }
   if (st.view === 'trail') trailHl();
   if (id && !fsOn && (innerWidth <= 900 || (st.view === 'network' && innerWidth < 1100))) $('cnProfile').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+/* On a wide screen the details float over the network: start them at the top of the graph, below its header and legend. */
+function panelTop() {
+  const p = $('cnProfile'), m = document.querySelector('.cn-main');
+  if (st.view === 'network' && !fsOn && st.sel && innerWidth >= 1100) {
+    const g = $('cnGraph').getBoundingClientRect();
+    p.style.top = (g.top - m.getBoundingClientRect().top + 12) + 'px'; p.style.maxHeight = (g.height - 24) + 'px';
+  } else { p.style.top = ''; p.style.maxHeight = ''; }
 }
 let fsOn = false;
 function setFull(on) {
@@ -384,13 +420,14 @@ function setView(v) {
   st.view = v;
   document.querySelector('.cn-main').classList.toggle('wide', v === 'network');
   VIEWS.forEach(k => { $('v-' + k).hidden = k !== v; $('t-' + k).setAttribute('aria-selected', k === v); });
+  filterGroups();
   if (location.hash.slice(1) !== v) history.replaceState(null, '', location.pathname + location.search + '#' + v);
   render();
 }
 function render() {
   const rows = visible(); kpis(rows);
-  if (st.view === 'trail') trail(rows); else if (st.view === 'network') graph(rows); else if (st.view === 'payees') payees(rows); else donTable();
-  profile();
+  if (st.view === 'trail') trail(rows); else if (st.view === 'network') graph(rows); else if (st.view === 'payees') payees(rows); else donTable(rows);
+  profile(); panelTop();
 }
 
 function start() {
