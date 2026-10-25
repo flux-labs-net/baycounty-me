@@ -993,3 +993,12 @@ ul.ui-votes{display:flex;flex-direction:column;gap:8px;margin:0;padding:0;list-s
 :root .ui .callout{border:0;border-radius:18px;box-shadow:inset 4px 0 0 var(--amber),var(--ui-shadow);padding:14px 18px 14px 22px}
 :root .ui .callout.launch{box-shadow:inset 4px 0 0 var(--blue),var(--ui-shadow)}
 @media (max-width:560px){:root .ui details:is(.tbl-toggle,.gaps){padding-inline:16px}}
+/* audit findings on government pages: one block per year, no bullets, the findings as soft cards under the year line */
+:root .ui ul.au-list{list-style:none;padding:0;gap:22px}
+.ui .au-yr{display:flex;flex-direction:column;gap:10px;min-width:0}
+.ui .au-yr > .fd-hd{font-size:.92rem;gap:6px 10px}
+.ui .au-yr > .fd-hd > b{font-size:1rem}
+:root .ui .au-yr .findings{gap:8px}
+:root .ui .au-yr .fd{border:0;border-radius:14px;background:var(--sunken);padding:14px 16px;gap:8px}
+.ui .au-yr .fd > .fd-hd b{font-size:.95rem;line-height:1.35}
+@media (max-width:560px){:root .ui .au-yr .fd{padding:12px 14px}}
