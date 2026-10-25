@@ -35,7 +35,7 @@
     const kp = (i, t, l, v, s) => v ? `<div class="kpi ui-k"><span class="kh">${ico(i, t)}<span class="eyebrow">${l}</span></span><span class="v">${v}</span><span class="s">${s}</span></div>` : '';
     const tags = e.source_url ? `<div class="ui-tags"><a class="ui-tag" href="${esc(e.source_url)}" target="_blank" rel="noopener">${ico('link')}Public record</a></div>` : '';
     h.innerHTML = `<header class="tx-top ui-hero"><div class="ui-id">${badge}<div class="ui-hd"><div class="tx-brand"><span class="eyebrow ui-kick k-blue"><a href="/connections">Connections</a> · ${esc(e.kind_label || KIND[e.kind])}</span><h1>${esc(e.name)}</h1>
-      ${e.subtitle ? `<p class="lede">${esc(e.subtitle)}</p>` : ''}${e.aliases && e.aliases.length ? `<p class="small muted">Also written as: ${esc(e.aliases.join(' · '))}</p>` : ''}</div>${tags}</div></div></header>
+      ${e.subtitle ? `<p class="lede">${esc(e.subtitle)}</p>` : ''}${e.aliases && e.aliases.length ? `<p class="small muted">Also written as: ${esc(e.aliases.join(' · '))}</p>` : ''}${e.same_as && e.same_as.page_url ? `<p class="small">Checked by hand: this board member is <a href="${esc(e.same_as.page_url)}">${esc(e.same_as.name)}</a> <span class="pf-badge">Official</span></p>` : ''}</div>${tags}</div></div></header>
       <div class="kpis">${kp('network', 'blue', 'Connections', (e.connections || 0).toLocaleString('en-US'), 'in public records')}${kp('dollar', 'teal', 'Received', money(e.amount_received), 'payments, gifts and grants in the records')}${kp('wallet', 'amber', 'Gave or paid', money(e.amount_given), 'payments, gifts and grants in the records')}</div>`;
   }
 
@@ -84,6 +84,11 @@
   const labelOf = r => ({serves: 'Serves', paid: 'Payments', gift: 'Campaign gifts', voted: 'Votes on contracts', board: 'Board seats', runs: 'Runs a business', grant: 'Grants', related: 'Shared project or tie', same: 'Same organization'}[r] || r);
 
   // ---------- connection list ----------
+  // A hand-checked official gets an "Official" badge. When the build also listed the same person (as a board member
+  // or business officer on the same record), the API has already merged the two into this one row.
+  const rowHtml = c => `<tr><th scope="row">${c.other.page_url ? `<a href="${esc(c.other.page_url)}">${esc(c.other.name)}</a>` : esc(c.other.name)}${c.other.kind === 'person' && c.checked_by_hand ? ' <span class="pf-badge">Official</span>' : ''}<small>${esc(c.merged_from && c.relation === 'board' ? 'Board member' : (KIND[c.other.kind] || ''))}${c.checked_by_hand ? ' · checked by hand' : ''}</small></th>
+        <td class="wrap small">${esc(c.detail || '')}</td><td class="num">${c.amount ? money(c.amount) : ''}${c.records > 1 ? `<small>${c.records} records</small>` : ''}</td>
+        <td class="small">${esc([c.first_date, c.last_date].filter((x, i, a) => x && a.indexOf(x) === i).join(' to '))}</td><td>${c.source_url ? `<a class="src" href="${esc(c.source_url)}" target="_blank" rel="noopener">Source</a>` : ''}</td></tr>`;
   function list(d) {
     const box = document.getElementById('pfList'); if (!box) return;
     const groups = new Map();
@@ -92,16 +97,14 @@
     const SHOW = 25;
     box.innerHTML = keys.map(k => {
       const rs = groups.get(k), lbl = rs[0].label, tot = rs.reduce((t, c) => t + (c.amount || 0), 0);
-      const row = c => `<tr><th scope="row">${c.other.page_url ? `<a href="${esc(c.other.page_url)}">${esc(c.other.name)}</a>` : esc(c.other.name)}<small>${esc(KIND[c.other.kind] || '')}${c.checked_by_hand ? ' · checked by hand' : ''}</small></th>
-        <td class="wrap small">${esc(c.detail || '')}</td><td class="num">${c.amount ? money(c.amount) : ''}${c.records > 1 ? `<small>${c.records} records</small>` : ''}</td>
-        <td class="small">${esc([c.first_date, c.last_date].filter((x, i, a) => x && a.indexOf(x) === i).join(' to '))}</td><td>${c.source_url ? `<a class="src" href="${esc(c.source_url)}" target="_blank" rel="noopener">Source</a>` : ''}</td></tr>`;
+      const row = rowHtml;
       return `<section class="pf-grp"><div class="sec-hd"><h3>${esc(lbl.charAt(0).toUpperCase() + lbl.slice(1))}</h3><span class="muted">${rs.length.toLocaleString('en-US')}${tot ? ' · ' + money(tot) + ' in the records' : ''}</span></div>
         <div class="tablewrap"><table class="tx-table vd-table" data-tt="off" data-cols="|What|Amount|Dates|"><tbody>${rs.slice(0, SHOW).map(row).join('')}</tbody></table></div>
         ${rs.length > SHOW ? `<button type="button" class="pill pf-more" data-k="${esc(k)}">Show all ${rs.length.toLocaleString('en-US')}</button>` : ''}</section>`;
     }).join('') || '<p class="muted">No connections in the records yet.</p>';
     box.querySelectorAll('.pf-more').forEach(b => b.addEventListener('click', () => {
       const rs = groups.get(b.dataset.k), tb = b.previousElementSibling.querySelector('tbody');
-      tb.innerHTML = rs.map(c => `<tr><th scope="row">${c.other.page_url ? `<a href="${esc(c.other.page_url)}">${esc(c.other.name)}</a>` : esc(c.other.name)}<small>${esc(KIND[c.other.kind] || '')}</small></th><td class="wrap small">${esc(c.detail || '')}</td><td class="num">${c.amount ? money(c.amount) : ''}</td><td class="small">${esc(c.first_date || '')}</td><td>${c.source_url ? `<a class="src" href="${esc(c.source_url)}" target="_blank" rel="noopener">Source</a>` : ''}</td></tr>`).join('');
+      tb.innerHTML = rs.map(rowHtml).join('');
       b.remove();
     }));
     const live = d.connections.filter(c => c.checked_by_hand);

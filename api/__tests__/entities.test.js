@@ -63,3 +63,23 @@ test('searchEntities finds by name', async () => {
   const rows = await E().searchEntities({}, catalog(), {q: 'dewberry'});
   assert.ok(rows.some(r => r.entity_id === 'vendor:dewberry'));
 });
+
+test('a board member or business officer confirmed as an official shows once, as the official', () => {
+  const {mergeConfirmed} = E();
+  const links = [
+    {from_id: 'member:b_1', from_name: 'Allan Branch', from_kind: 'member', to_id: 'nonprofit:np-1', relation: 'board', amount: 500, first_date: '2025', detail: 'Director · current'},
+    {from_id: 'member:b_2', from_name: 'Jane Doe', from_kind: 'member', to_id: 'nonprofit:np-1', relation: 'board'},
+    {from_id: 'member:b_3', from_name: 'Brian Q. Rust', from_kind: 'member', to_id: 'business:l1', relation: 'runs'},
+    {from_id: 'owner:o_4', from_name: 'Pat Smith', from_kind: 'owner', to_id: 'business:l1', relation: 'runs'},
+  ];
+  const live = [
+    {from_id: 'person:allan-branch', from_name: 'Allan Branch', from_kind: 'person', to_id: 'nonprofit:np-1', relation: 'board', detail: 'Director · current', same_as: 'member:b_1', checked_by_hand: true},
+    {from_id: 'person:brian-rust', from_name: 'Brian Rust', from_kind: 'person', to_id: 'business:l1', relation: 'runs', checked_by_hand: true},
+  ];
+  const all = mergeConfirmed(links, live);
+  assert.deepEqual(all.map(r => r.from_id).sort(), ['member:b_2', 'owner:o_4', 'person:allan-branch', 'person:brian-rust']);
+  const allan = all.find(r => r.from_id === 'person:allan-branch');
+  assert.equal(allan.merged_from, 'member:b_1');
+  assert.equal(allan.amount, 500, 'keeps the pay from the filing');
+  assert.equal(allan.first_date, '2025');
+});

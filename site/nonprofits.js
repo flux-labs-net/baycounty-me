@@ -204,7 +204,7 @@
     if (full) x = Object.assign({}, x, full);
     const p = S.pays.get(id) || [], o = S.offs.get(id) || [], d = donorsOf(x);
     const cur = board.filter(r => r.current), past = board.filter(r => !r.current);
-    const offIds = new Set(o.map(r => r.person_id));
+    const offIds = new Map(o.filter(r => r.official_id).map(r => [r.person_id, r.official_id]));
     // Connections
     const ties = [];
     for (const py of payers(x)) { const ps = p.filter(r => r.payer === py); ties.push(`<div class="np-tie"><b>Paid ${big(ps.reduce((a, r) => a + Number(r.amount || 0), 0))} by ${esc(py)}</b><div class="m">${esc(ps[0].what || ps[0].record_type)}${ps[0].date ? ' · ' + esc(ps[0].date) : ''}</div></div>`); }
@@ -217,7 +217,7 @@
     const shared = cur.filter(r => r.other_current_boards > 0);
     if (shared.length) ties.push(`<div class="np-tie"><b>Shares board members with ${plural(x.shares_board_with || shared.length, 'other nonprofit')}</b><div class="m">${shared.slice(0, 6).map(r => `<button type="button" class="np-p" data-person="${esc(r.person_id)}">${esc(pname(r.person))}</button> (+${r.other_current_boards})`).join(' · ')}</div></div>`);
     // Board
-    const tr = r => `<tr><td><button type="button" class="np-p" data-person="${esc(r.person_id)}">${esc(pname(r.person))}</button>${offIds.has(r.person_id) ? ' <span class="np-chip hot">official</span>' : ''}${r.other_current_boards ? ` <span class="np-chip">+${r.other_current_boards}</span>` : ''}<div class="m">${esc(r.titles || r.role)} · ${esc(years(r))}</div></td>
+    const tr = r => `<tr><td><button type="button" class="np-p" data-person="${esc(r.person_id)}">${esc(pname(r.person))}</button>${offIds.has(r.person_id) ? ` <a class="np-chip hot" href="/people/${encodeURIComponent(offIds.get(r.person_id))}" title="Checked by hand: open the official's page">official</a>` : ''}${r.other_current_boards ? ` <span class="np-chip">+${r.other_current_boards}</span>` : ''}<div class="m">${esc(r.titles || r.role)} · ${esc(years(r))}</div></td>
       <td class="num">${r.compensation ? usd(r.compensation) + '<div class="m">pay ' + esc(r.compensation_year || '') + '</div>' : ''}<a class="small" href="${esc(r.source_url)}" target="_blank" rel="noopener">${esc(r.sources)}</a></td></tr>`;
     const boardHtml = board.length ? `<table data-tt="off"><tbody>${cur.map(tr).join('')}</tbody></table>${past.length ? `<details><summary class="small">${plural(past.length, 'earlier board member')}</summary><table data-tt="off"><tbody>${past.map(tr).join('')}</tbody></table></details>` : ''}<p class="m">Grouped by name across boards, so two people with the same name can show up together.</p>`
       : '<p class="muted small">No board listed in its filings.</p>';
