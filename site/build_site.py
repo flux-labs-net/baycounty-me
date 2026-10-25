@@ -522,6 +522,7 @@ from alerts_page import alerts_page
 from meetings_page import meetings_page
 from campaign_page import campaign_page
 from budget_compare_page import budget_compare_page
+from cra_increment_page import cra_increment_page
 import open_books_page
 from open_books_page import checkbook_page, budget_tracker_page
 from linkify import linkify_html, LINKIFY_JS
@@ -633,6 +634,8 @@ PAGES = [
     ('/my-address', 'My Address', 'Look up any Bay County address: property tax estimate, who represents you, zoned schools, flood and evacuation zones, and whether it is in a redevelopment district.', lambda: addr_page(OUT)),
     ('/public-money/cra-spending', 'CRA Spending',
      'Interactive map and ledger of Bay County, Florida\'s six Community Redevelopment Agencies: who was paid, where, and for what.', cra_page),
+    ('/public-money/cra-tax-increment', 'How much property tax goes to the CRAs',
+     "How much property tax Bay County and the cities pay to the seven Community Redevelopment Agencies each year, who pays it, what has been paid so far and what it could add up to before each CRA ends, with the method and the missing years.", lambda: cra_increment_page(OUT)),
     ('/public-money/tax-dollars', 'How your tax dollars are allocated',
      'Estimate your Bay County property tax bill and see who gets each slice, plus where the county, schools and every city get their money and what they spend it on.', lambda: tax_page(OUT, gov_panel=False)),
     ('/public-money/amendment-3', 'Amendment 3: what changes in Bay County',

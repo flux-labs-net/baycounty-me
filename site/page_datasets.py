@@ -154,6 +154,99 @@ def donor_contracts():
     return [{k: (v if v not in ([], '') else None) for k, v in m.items()} for m in dc()['matches']]
 
 
+# --- CRA tax increment (/public-money/cra-tax-increment) -----------------------------------------------------------------
+
+def _cra_increment():
+    """Yearly tax increment for each CRA (reported, gap-filled, adopted budget, projected) and the county/city split.
+    Facts in data/cra/tax_increment.json; yearly figures from each CRA's budget_by_year; millage from data/tax/millage.json.
+    Split: both the county and the city pay 95% of their own levy on the same growth in value, so the county's share is
+    county millage / (county + city millage) for the tax year that funds the fiscal year (TY = FY - 1)."""
+    import json
+    data = os.path.join(HERE, '..', 'data')
+    F = json.load(open(os.path.join(data, 'cra', 'tax_increment.json')))
+    mill = json.load(open(os.path.join(data, 'tax', 'millage.json')))
+    M = {a['id']: {y['tax_year']: y['millage'] for y in a['years'] if y['millage'] is not None} for a in mill['authorities']}
+
+    def rate(aid, ty):
+        if not aid:
+            return 0.0
+        r = M[aid]
+        return r.get(ty, r[min(r)] if ty < min(r) else r[max(r)])  # before 2020: the 2020 rate (assumption)
+
+    def share(c, fy):
+        cm, km = rate('bay_county_general', fy - 1), rate(c.get('city_millage'), fy - 1)
+        return cm / (cm + km) if cm + km else 1.0
+
+    last = F['last_reported_fy']
+    files = {}
+    agencies, years = [], []
+    for c in F['cras']:
+        d = files.setdefault(c['file'], json.load(open(os.path.join(data, c['file']))))
+        if isinstance(d, list):
+            d = next(x for x in d if x['cra'] == c['cra'])
+        rep = {int(r['fy'][2:]): r for r in d['budget_by_year'] if r['tif_revenue'] is not None and r['district'] == c['district']}
+        known = sorted(k for k in rep if k <= last)
+        hist = []
+        for fy in range(known[0], last + 1):
+            if fy in rep:
+                v, kind, src = rep[fy]['tif_revenue'], 'reported', rep[fy]['source_url']
+            else:
+                a, b = max(k for k in known if k < fy), min(k for k in known if k > fy)
+                va, vb = rep[a]['tif_revenue'], rep[b]['tif_revenue']
+                v = va * (vb / va) ** ((fy - a) / (b - a)) if va > 0 and vb > 0 else va + (vb - va) * (fy - a) / (b - a)
+                kind, src = 'filled gap', None
+            hist.append((fy, v, kind, src))
+        anchors = {fy: (r['tif_revenue'], r['source_url']) for fy, r in rep.items() if fy > last}
+        anchors.update({a['fy']: (a['increment'], a['source_url']) for a in c.get('anchors', [])})
+        base = dict(cra_id=c['id'], cra=c['name'], gov_id=c['gov_id'])
+
+        def row(fy, v, kind, scen, src):
+            sh = share(c, fy)
+            return dict(base, fiscal_year=fy, fy=f'FY{fy}', basis=kind, scenario=scen, increment=round(v),
+                        county_share=round(sh, 4), county_amount=round(v * sh), city_amount=round(v * (1 - sh)), source_url=src)
+        for fy, v, kind, src in hist:
+            years.append(row(fy, v, kind, 'history', src))
+        for scen, g in F['scenarios'].items():
+            v = hist[-1][1]
+            for fy in range(last + 1, c['sunset_fy'] + 1):
+                if fy in anchors:
+                    v, kind, src = anchors[fy][0], 'adopted budget', anchors[fy][1]
+                else:
+                    v, kind, src = v * (1 + g), f'projected {round(g * 100)}% a year', None
+                years.append(row(fy, min(v, c.get('cap') or v), kind, scen, src))
+        h = [r for r in years if r['cra_id'] == c['id'] and r['scenario'] == 'history']
+        fut = lambda s: sum(r['increment'] for r in years if r['cra_id'] == c['id'] and r['scenario'] == s)
+        agencies.append(dict(base, city={'pcb': 'Panama City Beach', 'pc': 'Panama City', 'lh': 'Lynn Haven', 'cw': 'Callaway', 'sp': 'Springfield', 'parker': 'Parker'}[c['gov_id']],
+                             created=c['created'], base_year=c['base'], first_fy_on_record=h[0]['fiscal_year'], years_filled=sum(1 for r in h if r['basis'] == 'filled gap'),
+                             increment_fy2025=h[-1]['increment'], county_share_fy2025=h[-1]['county_share'], county_fy2025=h[-1]['county_amount'], city_fy2025=h[-1]['city_amount'],
+                             paid_on_record=sum(r['increment'] for r in h), county_paid_on_record=sum(r['county_amount'] for r in h),
+                             sunset_fy=c['sunset_fy'], sunset_assumed=c['sunset_assumed'], sunset_basis=c['sunset_basis'], yearly_cap=c.get('cap'),
+                             to_come_low=fut('low'), to_come_mid=fut('mid'), to_come_high=fut('high'),
+                             source_url=next((r['source_url'] for r in reversed(h) if r['source_url']), None)))
+    hist = [r for r in years if r['scenario'] == 'history']
+    model = {'county_except_fbr': lambda fy: sum(r['county_amount'] for r in hist if r['fiscal_year'] == fy and r['cra_id'] != 'pcb-fbr'),
+             'fbr_cumulative': lambda fy: sum(r['county_amount'] for r in hist if r['fiscal_year'] <= fy and r['cra_id'] == 'pcb-fbr'),
+             'county_budget_fy2026': lambda fy: sum(r['county_amount'] for r in years if r['fiscal_year'] == fy and r['scenario'] == 'mid')}
+    checks = []
+    for k in F['checks']:
+        m = model[k['model']](k['fiscal_year'])
+        checks.append({'figure': k['check'], 'fiscal_year': k['fiscal_year'], 'official_figure': k['official'], 'estimate': m,
+                       'difference_pct': round((m - k['official']) / k['official'] * 100, 1), 'source_url': k['source_url']})
+    return agencies, years, checks, F
+
+
+def cra_agencies():
+    return _cra_increment()[0]
+
+
+def cra_tax_increment():
+    return _cra_increment()[1]
+
+
+def cra_increment_checks():
+    return _cra_increment()[2]
+
+
 def tax_districts():
     """Which taxing authorities levy in each tax district (My Address, tax calculator); rates are in property-tax-rates."""
     from addr_page import address_data
@@ -624,5 +717,8 @@ DATASETS = [
     ('site-menu', 'Site menu', "Every link in the site's main menu, one row per link, in English and Spanish: the section and the question it answers, the link's place in the section, and the section's start-here page. place_id is the place the menu belongs to (fl-bay = Bay County), so a menu for another place sits beside it.", site_menu),
     ('checkbook-payments', 'Checkbook: every payment', "Every payment in each government's own check register (checks, ACH, wires and cards), as published from the files the government sends: date, payee, amount, check number, invoice, fund, account and description. fiscal_year is the year the fiscal year ends. Voided checks are left out. Payments to private individuals (refunds, reimbursements) are listed as \"Individual (name withheld)\" with payee_kind individual and a category instead of the description. payee_entity_id links a payee to its profile (entity-profiles) when the site knows it. Bank statements and reconciliations are never published.", checkbook_payments),
     ('budget-actuals', 'Budget vs. actual, month by month', "Each government's budget-vs-actual report as of each month end (as_of), line by line: fund, department, account, the original and amended budget, actual_ytd (spending, or revenue collected, to date) and encumbered (open purchase orders). line_type is expense or revenue. One report per month end, so a fiscal year has a row per line per report. fiscal_year is the year the fiscal year ends (FY2026 = Oct 2025 to Sep 2026).", budget_actuals),
+    ('cra-agencies', 'CRAs: tax increment by agency', "One row per Community Redevelopment Agency that collects tax increment in Bay County: when it was created, its base year, the FY2025 increment and how much of it Bay County and the city paid, the total on record, its sunset date and what that date rests on, and the increment still to come under a 3%, 6% or 9% growth scenario. sunset_assumed is true where the CRA's plan was not found.", cra_agencies),
+    ('cra-tax-increment', 'CRAs: tax increment by year', "Property tax paid to each CRA by fiscal year, split between Bay County and the city by millage. scenario history: basis reported (from CRA reports, audits and budgets) or filled gap (between two reported years). scenario low, mid, high: FY2026 to the CRA's sunset, from adopted budgets where they exist, then 3%, 6% or 9% growth a year (Front Beach Road capped at $30M). Schools and the water management district are exempt and pay nothing.", cra_tax_increment),
+    ('cra-increment-checks', 'CRAs: estimate checked against official figures', "Official county figures for CRA payments next to this estimate for the same year, with the difference in percent.", cra_increment_checks),
     ('tax-districts', 'Tax districts', 'Which taxing authorities levy property tax in each tax district, and the combined millage. Rates by year are in property-tax-rates (authority_id).', tax_districts),
 ]

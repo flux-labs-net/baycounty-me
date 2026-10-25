@@ -291,6 +291,8 @@ def preview_text():
                         "Your estimated property tax bill, who represents you, your zoned schools, flood and evacuation zones, and whether you're in a redevelopment district."),
         '/public-money/cra-spending': ("Where Bay County's CRA money goes",
                                        f"{M(s['cra_spent'])} across {s['cra_n']} records: what Bay County's six Community Redevelopment Agencies bought, built and granted, and who was paid. Mapped, with sources."),
+        '/public-money/cra-tax-increment': ('How much property tax goes to the CRAs',
+                                            "Bay County and its cities pay about $28.7M a year to seven Community Redevelopment Agencies, three-quarters of it to Front Beach Road. Year by year, who pays, and what's still to come."),
         '/public-money/tax-dollars': ('Where your Bay County property tax goes',
                                       f"{M(s['lv_tot'])} levied in FY2026. Estimate your own bill, see each government's slice, and track six years of tax rates for the county, schools and every city."),
         '/public-money/amendment-3': ('Amendment 3: what it would mean for Bay County',

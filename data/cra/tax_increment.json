@@ -1,0 +1,40 @@
+{
+  "about": "Facts for the CRA tax increment estimate (/public-money/cra-tax-increment), read by site/page_datasets.py cra_tax_increment(). Yearly increment comes from each CRA's budget_by_year in data/panama_city.json, data/pcb.json, data/lynn_haven.json and data/others.json; millage from data/tax/millage.json. This file holds what those don't: which rows to use, sunset dates and their basis, adopted-budget anchors, the Front Beach Road cap and the official figures the estimate is checked against. Compiled 2026-10-25.",
+  "statute_url": "https://www.leg.state.fl.us/Statutes/index.cfm?App_mode=Display_Statute&URL=0100-0199/0163/Sections/0163.387.html",
+  "last_reported_fy": 2025,
+  "scenarios": {"low": 0.03, "mid": 0.06, "high": 0.09},
+  "cras": [
+    {"id": "pcb-fbr", "name": "Front Beach Road CRA", "gov_id": "pcb", "file": "pcb.json", "district": "Front Beach Road CRA", "city_millage": null,
+     "created": "2001", "base": "2001", "sunset_fy": 2049, "sunset_assumed": false,
+     "sunset_basis": "Plan extended from 2031 to 2049 by Res. 19-140 (Sept 2019). A 2024 city-county agreement caps yearly CRA revenue at $30M through 2049; a 2020 agreement (Res. 20-85) rebates 20% of county increment above $15M a year to the county.",
+     "cap": 30000000, "anchors": [{"fy": 2026, "increment": 22200000, "source_url": "https://www.baycountyfl.gov/829/Understanding-Amendment-3"}]},
+    {"id": "pcb-pier", "name": "Pier Park CRA", "gov_id": "pcb", "file": "pcb.json", "district": "Pier Park CRA", "city_millage": null,
+     "created": "2001", "base": "2001", "sunset_fy": 2039, "sunset_assumed": true,
+     "sunset_basis": "No end date found. Projected to Sept 30, 2039, the latest date under s.163.3755, F.S. for a CRA that existed in 2019 unless the city votes to continue it. The increment is passed to the Pier Park Community Development District under the 2001 partnership agreement."},
+    {"id": "pc", "name": "Panama City CRA", "gov_id": "pc", "file": "panama_city.json", "district": "all", "city_millage": "city_panama_city",
+     "created": "1983", "base": "1984 to 2004 (four districts)", "sunset_fy": 2044, "sunset_assumed": false,
+     "sunset_basis": "All four districts are scheduled to sunset in 2044 (2025 plan). Bay County keeps 26% of the increment from the 2025 St. Andrews expansion area (not modeled)."},
+    {"id": "lh", "name": "Lynn Haven CRA", "gov_id": "lh", "file": "lynn_haven.json", "district": "all", "city_millage": "city_lynn_haven",
+     "created": "2004", "base": "2003 base year", "sunset_fy": 2043, "sunset_assumed": false,
+     "sunset_basis": "Extended from about 2033 to Nov 30, 2043 by Res. 2026-01-504 (Jan 2026)."},
+    {"id": "callaway", "name": "Callaway CRA", "gov_id": "cw", "file": "others.json", "cra": "Callaway CRA", "district": "all", "city_millage": "city_callaway",
+     "created": "2007", "base": "2007", "sunset_fy": 2037, "sunset_assumed": true,
+     "sunset_basis": "The plan text was not retrieved. Assumes the 30-year plan limit (about 2037); Sept 30, 2039 at the latest under s.163.3755, F.S. unless the city votes to continue it."},
+    {"id": "springfield", "name": "Springfield CRA", "gov_id": "sp", "file": "others.json", "cra": "Springfield CRA", "district": "all", "city_millage": "city_springfield",
+     "created": "2007", "base": "2007 (base value $67.6M)", "sunset_fy": 2037, "sunset_assumed": true,
+     "sunset_basis": "The plan text was not retrieved. Assumes the 30-year plan limit (about 2037); Sept 30, 2039 at the latest under s.163.3755, F.S. unless the city votes to continue it."},
+    {"id": "parker", "name": "Parker CRA", "gov_id": "parker", "file": "others.json", "cra": "Parker CRA", "district": "all", "city_millage": "city_parker",
+     "created": "2004", "base": "2004", "sunset_fy": 2034, "sunset_assumed": true,
+     "sunset_basis": "The plan text was not retrieved. Assumes the 30-year plan limit (about 2034). No positive increment before FY2024."}
+  ],
+  "checks": [
+    {"check": "Bay County general fund, \"All Other CRA's\" (every CRA but Front Beach Road), FY2023 actual", "fiscal_year": 2023, "official": 2239358, "model": "county_except_fbr",
+     "source_url": "https://www.baycountyfl.gov/ArchiveCenter/ViewFile/Item/329"},
+    {"check": "Bay County general fund, \"All Other CRA's\" (every CRA but Front Beach Road), FY2024 actual", "fiscal_year": 2024, "official": 3571473, "model": "county_except_fbr",
+     "source_url": "https://www.baycountyfl.gov/DocumentCenter/View/18382/FY-2026-Final-Budget-Commissioners-Book-09-16-2025"},
+    {"check": "Paid by Bay County to the Front Beach Road CRA through FY2023, as a county commissioner put it in 2023", "fiscal_year": 2023, "official": 172000000, "model": "fbr_cumulative",
+     "source_url": "https://www.wjhg.com/2023/10/18/bay-county-commissioners-want-front-beach-road-cra-projects-done-earlier"},
+    {"check": "Bay County's CRA payments in FY2026: $22.2M to Front Beach Road plus $4,901,698 budgeted for all others (county says about $27M, 16.5% of its property tax)", "fiscal_year": 2026, "official": 27101698, "model": "county_budget_fy2026",
+     "source_url": "https://www.baycountyfl.gov/829/Understanding-Amendment-3"}
+  ]
+}

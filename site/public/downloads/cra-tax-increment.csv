@@ -1,0 +1,400 @@
+cra_id,cra,gov_id,fiscal_year,fy,basis,scenario,increment,county_share,county_amount,city_amount,source_url
+pcb-fbr,Front Beach Road CRA,pcb,2003,FY2003,reported,history,923154,1.0,923154,0,https://www.pcbfl.gov/Archive.aspx?ADID=177
+pcb-fbr,Front Beach Road CRA,pcb,2004,FY2004,reported,history,1848987,1.0,1848987,0,https://www.pcbfl.gov/Archive.aspx?ADID=177
+pcb-fbr,Front Beach Road CRA,pcb,2005,FY2005,reported,history,2494974,1.0,2494974,0,https://www.pcbfl.gov/Archive.aspx?ADID=177
+pcb-fbr,Front Beach Road CRA,pcb,2006,FY2006,reported,history,6940002,1.0,6940002,0,https://www.pcbfl.gov/Archive.aspx?ADID=177
+pcb-fbr,Front Beach Road CRA,pcb,2007,FY2007,reported,history,9234244,1.0,9234244,0,https://www.pcbfl.gov/Archive.aspx?ADID=177
+pcb-fbr,Front Beach Road CRA,pcb,2008,FY2008,reported,history,8522456,1.0,8522456,0,https://www.pcbfl.gov/Archive.aspx?ADID=177
+pcb-fbr,Front Beach Road CRA,pcb,2009,FY2009,reported,history,10019940,1.0,10019940,0,https://www.pcbfl.gov/Archive.aspx?ADID=177
+pcb-fbr,Front Beach Road CRA,pcb,2010,FY2010,reported,history,8246840,1.0,8246840,0,https://www.pcbfl.gov/home/showpublisheddocument/210/635343538872330000
+pcb-fbr,Front Beach Road CRA,pcb,2011,FY2011,reported,history,7263322,1.0,7263322,0,https://www.pcbfl.gov/Archive.aspx?ADID=177
+pcb-fbr,Front Beach Road CRA,pcb,2012,FY2012,reported,history,6396058,1.0,6396058,0,https://www.pcbfl.gov/Archive.aspx?ADID=177
+pcb-fbr,Front Beach Road CRA,pcb,2013,FY2013,reported,history,5719481,1.0,5719481,0,https://www.pcbfl.gov/Archive.aspx?ADID=177
+pcb-fbr,Front Beach Road CRA,pcb,2014,FY2014,reported,history,5710445,1.0,5710445,0,https://www.pcbfl.gov/Archive.aspx?ADID=177
+pcb-fbr,Front Beach Road CRA,pcb,2015,FY2015,reported,history,7829110,1.0,7829110,0,https://www.pcbfl.gov/Archive.aspx?ADID=177
+pcb-fbr,Front Beach Road CRA,pcb,2016,FY2016,reported,history,8632890,1.0,8632890,0,https://www.pcbfl.gov/Archive.aspx?ADID=177
+pcb-fbr,Front Beach Road CRA,pcb,2017,FY2017,reported,history,9425307,1.0,9425307,0,https://pcbfl.gov/home/showpublisheddocument/8381/636836843370370000
+pcb-fbr,Front Beach Road CRA,pcb,2018,FY2018,reported,history,9509593,1.0,9509593,0,https://pcbfl.gov/home/showpublisheddocument/8381/636836843370370000
+pcb-fbr,Front Beach Road CRA,pcb,2019,FY2019,reported,history,10316478,1.0,10316478,0,https://pcbfl.gov/home/showpublisheddocument/17019/637390543060100000
+pcb-fbr,Front Beach Road CRA,pcb,2020,FY2020,reported,history,11188355,1.0,11188355,0,https://www.pcbfl.gov/home/showpublisheddocument/20405/637915939701630000
+pcb-fbr,Front Beach Road CRA,pcb,2021,FY2021,reported,history,12365579,1.0,12365579,0,https://pcbfl.gov/home/showpublisheddocument/20395/637915929748770000
+pcb-fbr,Front Beach Road CRA,pcb,2022,FY2022,reported,history,13375738,1.0,13375738,0,https://www.pcbfl.gov/DocumentCenter/View/2390/Resolution-22-211-CRA-Agency-Amending-FY22-Budget-Adopting-FY23-Budget-PDF
+pcb-fbr,Front Beach Road CRA,pcb,2023,FY2023,reported,history,15910225,1.0,15910225,0,https://pcbfl.gov/home/showpublisheddocument/21073/637995389953170000
+pcb-fbr,Front Beach Road CRA,pcb,2024,FY2024,reported,history,21888453,1.0,21888453,0,https://www.pcbfl.gov/Archive/ViewFile/Item/129
+pcb-fbr,Front Beach Road CRA,pcb,2025,FY2025,reported,history,21289949,1.0,21289949,0,https://www.pcbfl.gov/Archive.aspx?ADID=177
+pcb-fbr,Front Beach Road CRA,pcb,2026,FY2026,adopted budget,low,22200000,1.0,22200000,0,https://www.baycountyfl.gov/829/Understanding-Amendment-3
+pcb-fbr,Front Beach Road CRA,pcb,2027,FY2027,projected 3% a year,low,22866000,1.0,22866000,0,
+pcb-fbr,Front Beach Road CRA,pcb,2028,FY2028,projected 3% a year,low,23551980,1.0,23551980,0,
+pcb-fbr,Front Beach Road CRA,pcb,2029,FY2029,projected 3% a year,low,24258539,1.0,24258539,0,
+pcb-fbr,Front Beach Road CRA,pcb,2030,FY2030,projected 3% a year,low,24986296,1.0,24986296,0,
+pcb-fbr,Front Beach Road CRA,pcb,2031,FY2031,projected 3% a year,low,25735884,1.0,25735884,0,
+pcb-fbr,Front Beach Road CRA,pcb,2032,FY2032,projected 3% a year,low,26507961,1.0,26507961,0,
+pcb-fbr,Front Beach Road CRA,pcb,2033,FY2033,projected 3% a year,low,27303200,1.0,27303200,0,
+pcb-fbr,Front Beach Road CRA,pcb,2034,FY2034,projected 3% a year,low,28122296,1.0,28122296,0,
+pcb-fbr,Front Beach Road CRA,pcb,2035,FY2035,projected 3% a year,low,28965965,1.0,28965965,0,
+pcb-fbr,Front Beach Road CRA,pcb,2036,FY2036,projected 3% a year,low,29834944,1.0,29834944,0,
+pcb-fbr,Front Beach Road CRA,pcb,2037,FY2037,projected 3% a year,low,30000000,1.0,30000000,0,
+pcb-fbr,Front Beach Road CRA,pcb,2038,FY2038,projected 3% a year,low,30000000,1.0,30000000,0,
+pcb-fbr,Front Beach Road CRA,pcb,2039,FY2039,projected 3% a year,low,30000000,1.0,30000000,0,
+pcb-fbr,Front Beach Road CRA,pcb,2040,FY2040,projected 3% a year,low,30000000,1.0,30000000,0,
+pcb-fbr,Front Beach Road CRA,pcb,2041,FY2041,projected 3% a year,low,30000000,1.0,30000000,0,
+pcb-fbr,Front Beach Road CRA,pcb,2042,FY2042,projected 3% a year,low,30000000,1.0,30000000,0,
+pcb-fbr,Front Beach Road CRA,pcb,2043,FY2043,projected 3% a year,low,30000000,1.0,30000000,0,
+pcb-fbr,Front Beach Road CRA,pcb,2044,FY2044,projected 3% a year,low,30000000,1.0,30000000,0,
+pcb-fbr,Front Beach Road CRA,pcb,2045,FY2045,projected 3% a year,low,30000000,1.0,30000000,0,
+pcb-fbr,Front Beach Road CRA,pcb,2046,FY2046,projected 3% a year,low,30000000,1.0,30000000,0,
+pcb-fbr,Front Beach Road CRA,pcb,2047,FY2047,projected 3% a year,low,30000000,1.0,30000000,0,
+pcb-fbr,Front Beach Road CRA,pcb,2048,FY2048,projected 3% a year,low,30000000,1.0,30000000,0,
+pcb-fbr,Front Beach Road CRA,pcb,2049,FY2049,projected 3% a year,low,30000000,1.0,30000000,0,
+pcb-fbr,Front Beach Road CRA,pcb,2026,FY2026,adopted budget,mid,22200000,1.0,22200000,0,https://www.baycountyfl.gov/829/Understanding-Amendment-3
+pcb-fbr,Front Beach Road CRA,pcb,2027,FY2027,projected 6% a year,mid,23532000,1.0,23532000,0,
+pcb-fbr,Front Beach Road CRA,pcb,2028,FY2028,projected 6% a year,mid,24943920,1.0,24943920,0,
+pcb-fbr,Front Beach Road CRA,pcb,2029,FY2029,projected 6% a year,mid,26440555,1.0,26440555,0,
+pcb-fbr,Front Beach Road CRA,pcb,2030,FY2030,projected 6% a year,mid,28026989,1.0,28026989,0,
+pcb-fbr,Front Beach Road CRA,pcb,2031,FY2031,projected 6% a year,mid,29708608,1.0,29708608,0,
+pcb-fbr,Front Beach Road CRA,pcb,2032,FY2032,projected 6% a year,mid,30000000,1.0,30000000,0,
+pcb-fbr,Front Beach Road CRA,pcb,2033,FY2033,projected 6% a year,mid,30000000,1.0,30000000,0,
+pcb-fbr,Front Beach Road CRA,pcb,2034,FY2034,projected 6% a year,mid,30000000,1.0,30000000,0,
+pcb-fbr,Front Beach Road CRA,pcb,2035,FY2035,projected 6% a year,mid,30000000,1.0,30000000,0,
+pcb-fbr,Front Beach Road CRA,pcb,2036,FY2036,projected 6% a year,mid,30000000,1.0,30000000,0,
+pcb-fbr,Front Beach Road CRA,pcb,2037,FY2037,projected 6% a year,mid,30000000,1.0,30000000,0,
+pcb-fbr,Front Beach Road CRA,pcb,2038,FY2038,projected 6% a year,mid,30000000,1.0,30000000,0,
+pcb-fbr,Front Beach Road CRA,pcb,2039,FY2039,projected 6% a year,mid,30000000,1.0,30000000,0,
+pcb-fbr,Front Beach Road CRA,pcb,2040,FY2040,projected 6% a year,mid,30000000,1.0,30000000,0,
+pcb-fbr,Front Beach Road CRA,pcb,2041,FY2041,projected 6% a year,mid,30000000,1.0,30000000,0,
+pcb-fbr,Front Beach Road CRA,pcb,2042,FY2042,projected 6% a year,mid,30000000,1.0,30000000,0,
+pcb-fbr,Front Beach Road CRA,pcb,2043,FY2043,projected 6% a year,mid,30000000,1.0,30000000,0,
+pcb-fbr,Front Beach Road CRA,pcb,2044,FY2044,projected 6% a year,mid,30000000,1.0,30000000,0,
+pcb-fbr,Front Beach Road CRA,pcb,2045,FY2045,projected 6% a year,mid,30000000,1.0,30000000,0,
+pcb-fbr,Front Beach Road CRA,pcb,2046,FY2046,projected 6% a year,mid,30000000,1.0,30000000,0,
+pcb-fbr,Front Beach Road CRA,pcb,2047,FY2047,projected 6% a year,mid,30000000,1.0,30000000,0,
+pcb-fbr,Front Beach Road CRA,pcb,2048,FY2048,projected 6% a year,mid,30000000,1.0,30000000,0,
+pcb-fbr,Front Beach Road CRA,pcb,2049,FY2049,projected 6% a year,mid,30000000,1.0,30000000,0,
+pcb-fbr,Front Beach Road CRA,pcb,2026,FY2026,adopted budget,high,22200000,1.0,22200000,0,https://www.baycountyfl.gov/829/Understanding-Amendment-3
+pcb-fbr,Front Beach Road CRA,pcb,2027,FY2027,projected 9% a year,high,24198000,1.0,24198000,0,
+pcb-fbr,Front Beach Road CRA,pcb,2028,FY2028,projected 9% a year,high,26375820,1.0,26375820,0,
+pcb-fbr,Front Beach Road CRA,pcb,2029,FY2029,projected 9% a year,high,28749644,1.0,28749644,0,
+pcb-fbr,Front Beach Road CRA,pcb,2030,FY2030,projected 9% a year,high,30000000,1.0,30000000,0,
+pcb-fbr,Front Beach Road CRA,pcb,2031,FY2031,projected 9% a year,high,30000000,1.0,30000000,0,
+pcb-fbr,Front Beach Road CRA,pcb,2032,FY2032,projected 9% a year,high,30000000,1.0,30000000,0,
+pcb-fbr,Front Beach Road CRA,pcb,2033,FY2033,projected 9% a year,high,30000000,1.0,30000000,0,
+pcb-fbr,Front Beach Road CRA,pcb,2034,FY2034,projected 9% a year,high,30000000,1.0,30000000,0,
+pcb-fbr,Front Beach Road CRA,pcb,2035,FY2035,projected 9% a year,high,30000000,1.0,30000000,0,
+pcb-fbr,Front Beach Road CRA,pcb,2036,FY2036,projected 9% a year,high,30000000,1.0,30000000,0,
+pcb-fbr,Front Beach Road CRA,pcb,2037,FY2037,projected 9% a year,high,30000000,1.0,30000000,0,
+pcb-fbr,Front Beach Road CRA,pcb,2038,FY2038,projected 9% a year,high,30000000,1.0,30000000,0,
+pcb-fbr,Front Beach Road CRA,pcb,2039,FY2039,projected 9% a year,high,30000000,1.0,30000000,0,
+pcb-fbr,Front Beach Road CRA,pcb,2040,FY2040,projected 9% a year,high,30000000,1.0,30000000,0,
+pcb-fbr,Front Beach Road CRA,pcb,2041,FY2041,projected 9% a year,high,30000000,1.0,30000000,0,
+pcb-fbr,Front Beach Road CRA,pcb,2042,FY2042,projected 9% a year,high,30000000,1.0,30000000,0,
+pcb-fbr,Front Beach Road CRA,pcb,2043,FY2043,projected 9% a year,high,30000000,1.0,30000000,0,
+pcb-fbr,Front Beach Road CRA,pcb,2044,FY2044,projected 9% a year,high,30000000,1.0,30000000,0,
+pcb-fbr,Front Beach Road CRA,pcb,2045,FY2045,projected 9% a year,high,30000000,1.0,30000000,0,
+pcb-fbr,Front Beach Road CRA,pcb,2046,FY2046,projected 9% a year,high,30000000,1.0,30000000,0,
+pcb-fbr,Front Beach Road CRA,pcb,2047,FY2047,projected 9% a year,high,30000000,1.0,30000000,0,
+pcb-fbr,Front Beach Road CRA,pcb,2048,FY2048,projected 9% a year,high,30000000,1.0,30000000,0,
+pcb-fbr,Front Beach Road CRA,pcb,2049,FY2049,projected 9% a year,high,30000000,1.0,30000000,0,
+pcb-pier,Pier Park CRA,pcb,2009,FY2009,reported,history,146209,1.0,146209,0,https://www.pcbfl.gov/home/showpublisheddocument/210/635343538872330000
+pcb-pier,Pier Park CRA,pcb,2010,FY2010,reported,history,337788,1.0,337788,0,https://www.pcbfl.gov/home/showpublisheddocument/210/635343538872330000
+pcb-pier,Pier Park CRA,pcb,2011,FY2011,reported,history,344835,1.0,344835,0,https://www.pcbfl.gov/home/showpublisheddocument/20431/637915993743700000
+pcb-pier,Pier Park CRA,pcb,2012,FY2012,filled gap,history,364338,1.0,364338,0,
+pcb-pier,Pier Park CRA,pcb,2013,FY2013,filled gap,history,384943,1.0,384943,0,
+pcb-pier,Pier Park CRA,pcb,2014,FY2014,filled gap,history,406714,1.0,406714,0,
+pcb-pier,Pier Park CRA,pcb,2015,FY2015,filled gap,history,429716,1.0,429716,0,
+pcb-pier,Pier Park CRA,pcb,2016,FY2016,filled gap,history,454019,1.0,454019,0,
+pcb-pier,Pier Park CRA,pcb,2017,FY2017,reported,history,479697,1.0,479697,0,https://pcbfl.gov/home/showpublisheddocument/8381/636836843370370000
+pcb-pier,Pier Park CRA,pcb,2018,FY2018,filled gap,history,471013,1.0,471013,0,
+pcb-pier,Pier Park CRA,pcb,2019,FY2019,reported,history,462487,1.0,462487,0,https://pcbfl.gov/home/showpublisheddocument/17019/637390543060100000
+pcb-pier,Pier Park CRA,pcb,2020,FY2020,reported,history,462872,1.0,462872,0,https://www.pcbfl.gov/home/showpublisheddocument/20405/637915939701630000
+pcb-pier,Pier Park CRA,pcb,2021,FY2021,reported,history,466459,1.0,466459,0,https://pcbfl.gov/home/showpublisheddocument/20395/637915929748770000
+pcb-pier,Pier Park CRA,pcb,2022,FY2022,reported,history,471235,1.0,471235,0,https://pcbfl.gov/home/showpublisheddocument/22499/638158559049200000
+pcb-pier,Pier Park CRA,pcb,2023,FY2023,reported,history,479089,1.0,479089,0,https://www.pcbfl.gov/home/showpublisheddocument/24403/638472373705030000
+pcb-pier,Pier Park CRA,pcb,2024,FY2024,reported,history,583706,1.0,583706,0,https://www.pcbfl.gov/home/showpublisheddocument/26819/638785746997200000
+pcb-pier,Pier Park CRA,pcb,2025,FY2025,reported,history,713300,1.0,713300,0,https://www.pcbfl.gov/Archive.aspx?ADID=177
+pcb-pier,Pier Park CRA,pcb,2026,FY2026,projected 3% a year,low,734699,1.0,734699,0,
+pcb-pier,Pier Park CRA,pcb,2027,FY2027,projected 3% a year,low,756740,1.0,756740,0,
+pcb-pier,Pier Park CRA,pcb,2028,FY2028,projected 3% a year,low,779442,1.0,779442,0,
+pcb-pier,Pier Park CRA,pcb,2029,FY2029,projected 3% a year,low,802825,1.0,802825,0,
+pcb-pier,Pier Park CRA,pcb,2030,FY2030,projected 3% a year,low,826910,1.0,826910,0,
+pcb-pier,Pier Park CRA,pcb,2031,FY2031,projected 3% a year,low,851718,1.0,851718,0,
+pcb-pier,Pier Park CRA,pcb,2032,FY2032,projected 3% a year,low,877269,1.0,877269,0,
+pcb-pier,Pier Park CRA,pcb,2033,FY2033,projected 3% a year,low,903587,1.0,903587,0,
+pcb-pier,Pier Park CRA,pcb,2034,FY2034,projected 3% a year,low,930695,1.0,930695,0,
+pcb-pier,Pier Park CRA,pcb,2035,FY2035,projected 3% a year,low,958616,1.0,958616,0,
+pcb-pier,Pier Park CRA,pcb,2036,FY2036,projected 3% a year,low,987374,1.0,987374,0,
+pcb-pier,Pier Park CRA,pcb,2037,FY2037,projected 3% a year,low,1016995,1.0,1016995,0,
+pcb-pier,Pier Park CRA,pcb,2038,FY2038,projected 3% a year,low,1047505,1.0,1047505,0,
+pcb-pier,Pier Park CRA,pcb,2039,FY2039,projected 3% a year,low,1078930,1.0,1078930,0,
+pcb-pier,Pier Park CRA,pcb,2026,FY2026,projected 6% a year,mid,756098,1.0,756098,0,
+pcb-pier,Pier Park CRA,pcb,2027,FY2027,projected 6% a year,mid,801464,1.0,801464,0,
+pcb-pier,Pier Park CRA,pcb,2028,FY2028,projected 6% a year,mid,849552,1.0,849552,0,
+pcb-pier,Pier Park CRA,pcb,2029,FY2029,projected 6% a year,mid,900525,1.0,900525,0,
+pcb-pier,Pier Park CRA,pcb,2030,FY2030,projected 6% a year,mid,954556,1.0,954556,0,
+pcb-pier,Pier Park CRA,pcb,2031,FY2031,projected 6% a year,mid,1011830,1.0,1011830,0,
+pcb-pier,Pier Park CRA,pcb,2032,FY2032,projected 6% a year,mid,1072539,1.0,1072539,0,
+pcb-pier,Pier Park CRA,pcb,2033,FY2033,projected 6% a year,mid,1136892,1.0,1136892,0,
+pcb-pier,Pier Park CRA,pcb,2034,FY2034,projected 6% a year,mid,1205105,1.0,1205105,0,
+pcb-pier,Pier Park CRA,pcb,2035,FY2035,projected 6% a year,mid,1277412,1.0,1277412,0,
+pcb-pier,Pier Park CRA,pcb,2036,FY2036,projected 6% a year,mid,1354056,1.0,1354056,0,
+pcb-pier,Pier Park CRA,pcb,2037,FY2037,projected 6% a year,mid,1435300,1.0,1435300,0,
+pcb-pier,Pier Park CRA,pcb,2038,FY2038,projected 6% a year,mid,1521418,1.0,1521418,0,
+pcb-pier,Pier Park CRA,pcb,2039,FY2039,projected 6% a year,mid,1612703,1.0,1612703,0,
+pcb-pier,Pier Park CRA,pcb,2026,FY2026,projected 9% a year,high,777497,1.0,777497,0,
+pcb-pier,Pier Park CRA,pcb,2027,FY2027,projected 9% a year,high,847472,1.0,847472,0,
+pcb-pier,Pier Park CRA,pcb,2028,FY2028,projected 9% a year,high,923744,1.0,923744,0,
+pcb-pier,Pier Park CRA,pcb,2029,FY2029,projected 9% a year,high,1006881,1.0,1006881,0,
+pcb-pier,Pier Park CRA,pcb,2030,FY2030,projected 9% a year,high,1097500,1.0,1097500,0,
+pcb-pier,Pier Park CRA,pcb,2031,FY2031,projected 9% a year,high,1196276,1.0,1196276,0,
+pcb-pier,Pier Park CRA,pcb,2032,FY2032,projected 9% a year,high,1303940,1.0,1303940,0,
+pcb-pier,Pier Park CRA,pcb,2033,FY2033,projected 9% a year,high,1421295,1.0,1421295,0,
+pcb-pier,Pier Park CRA,pcb,2034,FY2034,projected 9% a year,high,1549211,1.0,1549211,0,
+pcb-pier,Pier Park CRA,pcb,2035,FY2035,projected 9% a year,high,1688641,1.0,1688641,0,
+pcb-pier,Pier Park CRA,pcb,2036,FY2036,projected 9% a year,high,1840618,1.0,1840618,0,
+pcb-pier,Pier Park CRA,pcb,2037,FY2037,projected 9% a year,high,2006274,1.0,2006274,0,
+pcb-pier,Pier Park CRA,pcb,2038,FY2038,projected 9% a year,high,2186838,1.0,2186838,0,
+pcb-pier,Pier Park CRA,pcb,2039,FY2039,projected 9% a year,high,2383654,1.0,2383654,0,
+pc,Panama City CRA,pc,2011,FY2011,reported,history,1574961,0.4701,740437,834524,https://www.panamacity.gov/DocumentCenter/View/68/FY2011-Annual-Report-PDF
+pc,Panama City CRA,pc,2012,FY2012,filled gap,history,1737570,0.4701,816885,920685,
+pc,Panama City CRA,pc,2013,FY2013,filled gap,history,1916969,0.4701,901226,1015743,
+pc,Panama City CRA,pc,2014,FY2014,filled gap,history,2114889,0.4701,994274,1120615,
+pc,Panama City CRA,pc,2015,FY2015,reported,history,2333244,0.4701,1096930,1236314,https://panamacity.gov/DocumentCenter/View/1853/FY2015-Annual-Report-PDF
+pc,Panama City CRA,pc,2016,FY2016,reported,history,2306065,0.4701,1084152,1221913,https://www.panamacity.gov/DocumentCenter/View/8687/FY2016
+pc,Panama City CRA,pc,2017,FY2017,reported,history,2239989,0.4701,1053088,1186901,https://panamacity.gov/DocumentCenter/View/3827/FY2017-Annual-Report-PDF
+pc,Panama City CRA,pc,2018,FY2018,reported,history,2172012,0.4701,1021129,1150883,https://panamacity.gov/DocumentCenter/View/4570/FY2018-Annual-Report-PDF
+pc,Panama City CRA,pc,2019,FY2019,filled gap,history,1815789,0.4701,853658,962131,
+pc,Panama City CRA,pc,2020,FY2020,filled gap,history,1517989,0.4701,713653,804336,
+pc,Panama City CRA,pc,2021,FY2021,reported,history,1269030,0.4701,596610,672420,https://flauditor.gov/pages/specialdistricts_efile%20rpts/2021%20panama%20city%20community%20redevelopment%20agency.pdf
+pc,Panama City CRA,pc,2022,FY2022,reported,history,1650658,0.4752,784337,866321,https://flauditor.gov/pages/specialdistricts_efile%20rpts/2022%20panama%20city%20community%20redevelopment%20agency.pdf
+pc,Panama City CRA,pc,2023,FY2023,reported,history,2229939,0.4803,1071064,1158875,https://flauditor.gov/pages/specialdistricts_efile%20rpts/2023%20panama%20city%20community%20redevelopment%20agency.pdf
+pc,Panama City CRA,pc,2024,FY2024,reported,history,3049102,0.5311,1619321,1429781,https://flauditor.gov/pages/specialdistricts_efile%20rpts/2024%20panama%20city%20community%20redevelopment%20agency.pdf
+pc,Panama City CRA,pc,2025,FY2025,reported,history,3572350,0.5311,1897208,1675142,https://www.panamacity.gov/DocumentCenter/View/10977
+pc,Panama City CRA,pc,2026,FY2026,projected 3% a year,low,3679520,0.5311,1954124,1725396,
+pc,Panama City CRA,pc,2027,FY2027,adopted budget,low,4399193,0.5311,2336329,2062864,https://www.panamacity.gov/AgendaCenter/ViewFile/Item/17481?fileID=37374
+pc,Panama City CRA,pc,2028,FY2028,projected 3% a year,low,4531169,0.5311,2406418,2124750,
+pc,Panama City CRA,pc,2029,FY2029,projected 3% a year,low,4667104,0.5311,2478611,2188493,
+pc,Panama City CRA,pc,2030,FY2030,projected 3% a year,low,4807117,0.5311,2552969,2254148,
+pc,Panama City CRA,pc,2031,FY2031,projected 3% a year,low,4951330,0.5311,2629558,2321772,
+pc,Panama City CRA,pc,2032,FY2032,projected 3% a year,low,5099870,0.5311,2708445,2391425,
+pc,Panama City CRA,pc,2033,FY2033,projected 3% a year,low,5252867,0.5311,2789699,2463168,
+pc,Panama City CRA,pc,2034,FY2034,projected 3% a year,low,5410452,0.5311,2873389,2537063,
+pc,Panama City CRA,pc,2035,FY2035,projected 3% a year,low,5572766,0.5311,2959591,2613175,
+pc,Panama City CRA,pc,2036,FY2036,projected 3% a year,low,5739949,0.5311,3048379,2691570,
+pc,Panama City CRA,pc,2037,FY2037,projected 3% a year,low,5912148,0.5311,3139830,2772317,
+pc,Panama City CRA,pc,2038,FY2038,projected 3% a year,low,6089512,0.5311,3234025,2855487,
+pc,Panama City CRA,pc,2039,FY2039,projected 3% a year,low,6272197,0.5311,3331046,2941151,
+pc,Panama City CRA,pc,2040,FY2040,projected 3% a year,low,6460363,0.5311,3430977,3029386,
+pc,Panama City CRA,pc,2041,FY2041,projected 3% a year,low,6654174,0.5311,3533907,3120268,
+pc,Panama City CRA,pc,2042,FY2042,projected 3% a year,low,6853799,0.5311,3639924,3213876,
+pc,Panama City CRA,pc,2043,FY2043,projected 3% a year,low,7059413,0.5311,3749122,3310292,
+pc,Panama City CRA,pc,2044,FY2044,projected 3% a year,low,7271196,0.5311,3861595,3409601,
+pc,Panama City CRA,pc,2026,FY2026,projected 6% a year,mid,3786691,0.5311,2011040,1775651,
+pc,Panama City CRA,pc,2027,FY2027,adopted budget,mid,4399193,0.5311,2336329,2062864,https://www.panamacity.gov/AgendaCenter/ViewFile/Item/17481?fileID=37374
+pc,Panama City CRA,pc,2028,FY2028,projected 6% a year,mid,4663145,0.5311,2476508,2186636,
+pc,Panama City CRA,pc,2029,FY2029,projected 6% a year,mid,4942933,0.5311,2625099,2317834,
+pc,Panama City CRA,pc,2030,FY2030,projected 6% a year,mid,5239509,0.5311,2782605,2456905,
+pc,Panama City CRA,pc,2031,FY2031,projected 6% a year,mid,5553880,0.5311,2949561,2604319,
+pc,Panama City CRA,pc,2032,FY2032,projected 6% a year,mid,5887113,0.5311,3126535,2760578,
+pc,Panama City CRA,pc,2033,FY2033,projected 6% a year,mid,6240339,0.5311,3314127,2926213,
+pc,Panama City CRA,pc,2034,FY2034,projected 6% a year,mid,6614760,0.5311,3512974,3101785,
+pc,Panama City CRA,pc,2035,FY2035,projected 6% a year,mid,7011645,0.5311,3723753,3287892,
+pc,Panama City CRA,pc,2036,FY2036,projected 6% a year,mid,7432344,0.5311,3947178,3485166,
+pc,Panama City CRA,pc,2037,FY2037,projected 6% a year,mid,7878285,0.5311,4184009,3694276,
+pc,Panama City CRA,pc,2038,FY2038,projected 6% a year,mid,8350982,0.5311,4435049,3915933,
+pc,Panama City CRA,pc,2039,FY2039,projected 6% a year,mid,8852041,0.5311,4701152,4150889,
+pc,Panama City CRA,pc,2040,FY2040,projected 6% a year,mid,9383163,0.5311,4983221,4399942,
+pc,Panama City CRA,pc,2041,FY2041,projected 6% a year,mid,9946153,0.5311,5282215,4663938,
+pc,Panama City CRA,pc,2042,FY2042,projected 6% a year,mid,10542922,0.5311,5599147,4943775,
+pc,Panama City CRA,pc,2043,FY2043,projected 6% a year,mid,11175497,0.5311,5935096,5240401,
+pc,Panama City CRA,pc,2044,FY2044,projected 6% a year,mid,11846027,0.5311,6291202,5554825,
+pc,Panama City CRA,pc,2026,FY2026,projected 9% a year,high,3893862,0.5311,2067957,1825905,
+pc,Panama City CRA,pc,2027,FY2027,adopted budget,high,4399193,0.5311,2336329,2062864,https://www.panamacity.gov/AgendaCenter/ViewFile/Item/17481?fileID=37374
+pc,Panama City CRA,pc,2028,FY2028,projected 9% a year,high,4795120,0.5311,2546598,2248522,
+pc,Panama City CRA,pc,2029,FY2029,projected 9% a year,high,5226681,0.5311,2775792,2450889,
+pc,Panama City CRA,pc,2030,FY2030,projected 9% a year,high,5697083,0.5311,3025613,2671469,
+pc,Panama City CRA,pc,2031,FY2031,projected 9% a year,high,6209820,0.5311,3297918,2911901,
+pc,Panama City CRA,pc,2032,FY2032,projected 9% a year,high,6768704,0.5311,3594731,3173973,
+pc,Panama City CRA,pc,2033,FY2033,projected 9% a year,high,7377887,0.5311,3918257,3459630,
+pc,Panama City CRA,pc,2034,FY2034,projected 9% a year,high,8041897,0.5311,4270900,3770997,
+pc,Panama City CRA,pc,2035,FY2035,projected 9% a year,high,8765668,0.5311,4655281,4110387,
+pc,Panama City CRA,pc,2036,FY2036,projected 9% a year,high,9554578,0.5311,5074256,4480321,
+pc,Panama City CRA,pc,2037,FY2037,projected 9% a year,high,10414490,0.5311,5530939,4883550,
+pc,Panama City CRA,pc,2038,FY2038,projected 9% a year,high,11351794,0.5311,6028724,5323070,
+pc,Panama City CRA,pc,2039,FY2039,projected 9% a year,high,12373455,0.5311,6571309,5802146,
+pc,Panama City CRA,pc,2040,FY2040,projected 9% a year,high,13487066,0.5311,7162727,6324339,
+pc,Panama City CRA,pc,2041,FY2041,projected 9% a year,high,14700902,0.5311,7807372,6893530,
+pc,Panama City CRA,pc,2042,FY2042,projected 9% a year,high,16023983,0.5311,8510036,7513947,
+pc,Panama City CRA,pc,2043,FY2043,projected 9% a year,high,17466142,0.5311,9275939,8190203,
+pc,Panama City CRA,pc,2044,FY2044,projected 9% a year,high,19038095,0.5311,10110774,8927321,
+lh,Lynn Haven CRA,lh,2017,FY2017,reported,history,300373,0.5078,152528,147845,https://www.cityoflynnhaven.com/Archive.aspx?ADID=122
+lh,Lynn Haven CRA,lh,2018,FY2018,reported,history,310391,0.5078,157615,152776,https://www.cityoflynnhaven.com/Archive.aspx?ADID=123
+lh,Lynn Haven CRA,lh,2019,FY2019,reported,history,354738,0.5078,180134,174604,https://www.cityoflynnhaven.com/DocumentCenter/View/943/CRA-Annual-Report-FY-1819-033120-PDF
+lh,Lynn Haven CRA,lh,2020,FY2020,reported,history,272512,0.5078,138380,134132,https://www.cityoflynnhaven.com/DocumentCenter/View/1518
+lh,Lynn Haven CRA,lh,2021,FY2021,reported,history,365034,0.5078,185362,179672,https://flauditor.gov/pages/specialdistricts_efile%20rpts/2021%20lynn%20haven%20community%20redevelopment%20agency.pdf
+lh,Lynn Haven CRA,lh,2022,FY2022,reported,history,505547,0.5197,262729,242818,https://flauditor.gov/pages/specialdistricts_efile%20rpts/2022%20lynn%20haven%20community%20redevelopment%20agency.pdf
+lh,Lynn Haven CRA,lh,2023,FY2023,reported,history,649367,0.5197,337471,311896,https://www.flauditor.gov/pages/specialdistricts_efile%20rpts/2023%20lynn%20haven%20community%20redevelopment%20agency.pdf
+lh,Lynn Haven CRA,lh,2024,FY2024,reported,history,878883,0.5761,506325,372558,https://www.flauditor.gov/pages/specialdistricts_efile%20rpts/2024%20lynn%20haven%20community%20redevelopment%20agency.pdf
+lh,Lynn Haven CRA,lh,2025,FY2025,reported,history,1036446,0.5731,593950,442496,https://flauditor.gov/pages/specialdistricts_efile%20rpts/2025%20lynn%20haven%20community%20redevelopment%20agency.pdf
+lh,Lynn Haven CRA,lh,2026,FY2026,projected 3% a year,low,1067539,0.5731,611768,455771,
+lh,Lynn Haven CRA,lh,2027,FY2027,adopted budget,low,983729,0.5612,552099,431629,https://www.cityoflynnhaven.gov/DocumentCenter/View/5091/FY2026-27-Final-Approved-Budget
+lh,Lynn Haven CRA,lh,2028,FY2028,projected 3% a year,low,1013240,0.5612,568662,444578,
+lh,Lynn Haven CRA,lh,2029,FY2029,projected 3% a year,low,1043638,0.5612,585722,457915,
+lh,Lynn Haven CRA,lh,2030,FY2030,projected 3% a year,low,1074947,0.5612,603294,471653,
+lh,Lynn Haven CRA,lh,2031,FY2031,projected 3% a year,low,1107195,0.5612,621393,485802,
+lh,Lynn Haven CRA,lh,2032,FY2032,projected 3% a year,low,1140411,0.5612,640035,500376,
+lh,Lynn Haven CRA,lh,2033,FY2033,projected 3% a year,low,1174623,0.5612,659236,515388,
+lh,Lynn Haven CRA,lh,2034,FY2034,projected 3% a year,low,1209862,0.5612,679013,530849,
+lh,Lynn Haven CRA,lh,2035,FY2035,projected 3% a year,low,1246158,0.5612,699383,546775,
+lh,Lynn Haven CRA,lh,2036,FY2036,projected 3% a year,low,1283543,0.5612,720364,563178,
+lh,Lynn Haven CRA,lh,2037,FY2037,projected 3% a year,low,1322049,0.5612,741975,580073,
+lh,Lynn Haven CRA,lh,2038,FY2038,projected 3% a year,low,1361710,0.5612,764235,597476,
+lh,Lynn Haven CRA,lh,2039,FY2039,projected 3% a year,low,1402562,0.5612,787162,615400,
+lh,Lynn Haven CRA,lh,2040,FY2040,projected 3% a year,low,1444639,0.5612,810777,633862,
+lh,Lynn Haven CRA,lh,2041,FY2041,projected 3% a year,low,1487978,0.5612,835100,652878,
+lh,Lynn Haven CRA,lh,2042,FY2042,projected 3% a year,low,1532617,0.5612,860153,672464,
+lh,Lynn Haven CRA,lh,2043,FY2043,projected 3% a year,low,1578596,0.5612,885957,692638,
+lh,Lynn Haven CRA,lh,2026,FY2026,projected 6% a year,mid,1098633,0.5731,629587,469046,
+lh,Lynn Haven CRA,lh,2027,FY2027,adopted budget,mid,983729,0.5612,552099,431629,https://www.cityoflynnhaven.gov/DocumentCenter/View/5091/FY2026-27-Final-Approved-Budget
+lh,Lynn Haven CRA,lh,2028,FY2028,projected 6% a year,mid,1042752,0.5612,585225,457527,
+lh,Lynn Haven CRA,lh,2029,FY2029,projected 6% a year,mid,1105317,0.5612,620339,484979,
+lh,Lynn Haven CRA,lh,2030,FY2030,projected 6% a year,mid,1171636,0.5612,657559,514077,
+lh,Lynn Haven CRA,lh,2031,FY2031,projected 6% a year,mid,1241935,0.5612,697013,544922,
+lh,Lynn Haven CRA,lh,2032,FY2032,projected 6% a year,mid,1316451,0.5612,738834,577617,
+lh,Lynn Haven CRA,lh,2033,FY2033,projected 6% a year,mid,1395438,0.5612,783164,612274,
+lh,Lynn Haven CRA,lh,2034,FY2034,projected 6% a year,mid,1479164,0.5612,830153,649011,
+lh,Lynn Haven CRA,lh,2035,FY2035,projected 6% a year,mid,1567914,0.5612,879963,687951,
+lh,Lynn Haven CRA,lh,2036,FY2036,projected 6% a year,mid,1661989,0.5612,932760,729228,
+lh,Lynn Haven CRA,lh,2037,FY2037,projected 6% a year,mid,1761708,0.5612,988726,772982,
+lh,Lynn Haven CRA,lh,2038,FY2038,projected 6% a year,mid,1867410,0.5612,1048049,819361,
+lh,Lynn Haven CRA,lh,2039,FY2039,projected 6% a year,mid,1979455,0.5612,1110932,868523,
+lh,Lynn Haven CRA,lh,2040,FY2040,projected 6% a year,mid,2098222,0.5612,1177588,920634,
+lh,Lynn Haven CRA,lh,2041,FY2041,projected 6% a year,mid,2224116,0.5612,1248244,975872,
+lh,Lynn Haven CRA,lh,2042,FY2042,projected 6% a year,mid,2357563,0.5612,1323138,1034424,
+lh,Lynn Haven CRA,lh,2043,FY2043,projected 6% a year,mid,2499016,0.5612,1402527,1096490,
+lh,Lynn Haven CRA,lh,2026,FY2026,projected 9% a year,high,1129726,0.5731,647405,482321,
+lh,Lynn Haven CRA,lh,2027,FY2027,adopted budget,high,983729,0.5612,552099,431629,https://www.cityoflynnhaven.gov/DocumentCenter/View/5091/FY2026-27-Final-Approved-Budget
+lh,Lynn Haven CRA,lh,2028,FY2028,projected 9% a year,high,1072264,0.5612,601788,470476,
+lh,Lynn Haven CRA,lh,2029,FY2029,projected 9% a year,high,1168768,0.5612,655949,512819,
+lh,Lynn Haven CRA,lh,2030,FY2030,projected 9% a year,high,1273957,0.5612,714985,558972,
+lh,Lynn Haven CRA,lh,2031,FY2031,projected 9% a year,high,1388613,0.5612,779333,609280,
+lh,Lynn Haven CRA,lh,2032,FY2032,projected 9% a year,high,1513588,0.5612,849473,664115,
+lh,Lynn Haven CRA,lh,2033,FY2033,projected 9% a year,high,1649811,0.5612,925926,723885,
+lh,Lynn Haven CRA,lh,2034,FY2034,projected 9% a year,high,1798294,0.5612,1009259,789035,
+lh,Lynn Haven CRA,lh,2035,FY2035,projected 9% a year,high,1960141,0.5612,1100093,860048,
+lh,Lynn Haven CRA,lh,2036,FY2036,projected 9% a year,high,2136553,0.5612,1199101,937452,
+lh,Lynn Haven CRA,lh,2037,FY2037,projected 9% a year,high,2328843,0.5612,1307020,1021823,
+lh,Lynn Haven CRA,lh,2038,FY2038,projected 9% a year,high,2538439,0.5612,1424652,1113787,
+lh,Lynn Haven CRA,lh,2039,FY2039,projected 9% a year,high,2766899,0.5612,1552871,1214028,
+lh,Lynn Haven CRA,lh,2040,FY2040,projected 9% a year,high,3015920,0.5612,1692629,1323291,
+lh,Lynn Haven CRA,lh,2041,FY2041,projected 9% a year,high,3287352,0.5612,1844965,1442387,
+lh,Lynn Haven CRA,lh,2042,FY2042,projected 9% a year,high,3583214,0.5612,2011012,1572202,
+lh,Lynn Haven CRA,lh,2043,FY2043,projected 9% a year,high,3905703,0.5612,2192003,1713700,
+callaway,Callaway CRA,cw,2021,FY2021,reported,history,54221,0.6173,33472,20749,https://flauditor.gov/pages/specialdistricts_efile%20rpts/2022%20callaway%20community%20redevelopment%20agency.pdf
+callaway,Callaway CRA,cw,2022,FY2022,reported,history,238097,0.6173,146983,91114,https://flauditor.gov/pages/specialdistricts_efile%20rpts/2022%20callaway%20community%20redevelopment%20agency.pdf
+callaway,Callaway CRA,cw,2023,FY2023,reported,history,487256,0.6173,300794,186462,https://flauditor.gov/pages/specialdistricts_efile%20rpts/2023%20callaway%20community%20redevelopment%20agency.pdf
+callaway,Callaway CRA,cw,2024,FY2024,reported,history,856412,0.6641,568716,287696,https://flauditor.gov/pages/specialdistricts_efile%20rpts/2024%20callaway%20community%20redevelopment%20agency.pdf
+callaway,Callaway CRA,cw,2025,FY2025,reported,history,1143791,0.6641,759556,384235,https://flauditor.gov/pages/specialdistricts_efile%20rpts/2025%20callaway%20community%20redevelopment%20agency.pdf
+callaway,Callaway CRA,cw,2026,FY2026,projected 3% a year,low,1178105,0.6681,787150,390954,
+callaway,Callaway CRA,cw,2027,FY2027,adopted budget,low,3024494,0.6681,2020815,1003679,https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_09172026-422
+callaway,Callaway CRA,cw,2028,FY2028,projected 3% a year,low,3115229,0.6681,2081439,1033789,
+callaway,Callaway CRA,cw,2029,FY2029,projected 3% a year,low,3208686,0.6681,2143883,1064803,
+callaway,Callaway CRA,cw,2030,FY2030,projected 3% a year,low,3304946,0.6681,2208199,1096747,
+callaway,Callaway CRA,cw,2031,FY2031,projected 3% a year,low,3404095,0.6681,2274445,1129650,
+callaway,Callaway CRA,cw,2032,FY2032,projected 3% a year,low,3506217,0.6681,2342678,1163539,
+callaway,Callaway CRA,cw,2033,FY2033,projected 3% a year,low,3611404,0.6681,2412959,1198445,
+callaway,Callaway CRA,cw,2034,FY2034,projected 3% a year,low,3719746,0.6681,2485347,1234399,
+callaway,Callaway CRA,cw,2035,FY2035,projected 3% a year,low,3831339,0.6681,2559908,1271431,
+callaway,Callaway CRA,cw,2036,FY2036,projected 3% a year,low,3946279,0.6681,2636705,1309574,
+callaway,Callaway CRA,cw,2037,FY2037,projected 3% a year,low,4064667,0.6681,2715806,1348861,
+callaway,Callaway CRA,cw,2026,FY2026,projected 6% a year,mid,1212418,0.6681,810077,402341,
+callaway,Callaway CRA,cw,2027,FY2027,adopted budget,mid,3024494,0.6681,2020815,1003679,https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_09172026-422
+callaway,Callaway CRA,cw,2028,FY2028,projected 6% a year,mid,3205964,0.6681,2142064,1063900,
+callaway,Callaway CRA,cw,2029,FY2029,projected 6% a year,mid,3398321,0.6681,2270588,1127734,
+callaway,Callaway CRA,cw,2030,FY2030,projected 6% a year,mid,3602221,0.6681,2406823,1195398,
+callaway,Callaway CRA,cw,2031,FY2031,projected 6% a year,mid,3818354,0.6681,2551232,1267122,
+callaway,Callaway CRA,cw,2032,FY2032,projected 6% a year,mid,4047455,0.6681,2704306,1343149,
+callaway,Callaway CRA,cw,2033,FY2033,projected 6% a year,mid,4290303,0.6681,2866565,1423738,
+callaway,Callaway CRA,cw,2034,FY2034,projected 6% a year,mid,4547721,0.6681,3038558,1509162,
+callaway,Callaway CRA,cw,2035,FY2035,projected 6% a year,mid,4820584,0.6681,3220872,1599712,
+callaway,Callaway CRA,cw,2036,FY2036,projected 6% a year,mid,5109819,0.6681,3414124,1695695,
+callaway,Callaway CRA,cw,2037,FY2037,projected 6% a year,mid,5416408,0.6681,3618972,1797436,
+callaway,Callaway CRA,cw,2026,FY2026,projected 9% a year,high,1246732,0.6681,833004,413728,
+callaway,Callaway CRA,cw,2027,FY2027,adopted budget,high,3024494,0.6681,2020815,1003679,https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_09172026-422
+callaway,Callaway CRA,cw,2028,FY2028,projected 9% a year,high,3296698,0.6681,2202688,1094010,
+callaway,Callaway CRA,cw,2029,FY2029,projected 9% a year,high,3593401,0.6681,2400930,1192471,
+callaway,Callaway CRA,cw,2030,FY2030,projected 9% a year,high,3916807,0.6681,2617014,1299794,
+callaway,Callaway CRA,cw,2031,FY2031,projected 9% a year,high,4269320,0.6681,2852545,1416775,
+callaway,Callaway CRA,cw,2032,FY2032,projected 9% a year,high,4653559,0.6681,3109274,1544285,
+callaway,Callaway CRA,cw,2033,FY2033,projected 9% a year,high,5072379,0.6681,3389109,1683270,
+callaway,Callaway CRA,cw,2034,FY2034,projected 9% a year,high,5528893,0.6681,3694129,1834765,
+callaway,Callaway CRA,cw,2035,FY2035,projected 9% a year,high,6026494,0.6681,4026600,1999893,
+callaway,Callaway CRA,cw,2036,FY2036,projected 9% a year,high,6568878,0.6681,4388994,2179884,
+callaway,Callaway CRA,cw,2037,FY2037,projected 9% a year,high,7160077,0.6681,4784004,2376073,
+springfield,Springfield CRA,sp,2023,FY2023,reported,history,192948,0.4769,92026,100922,https://www.springfieldfl.net/media/10331
+springfield,Springfield CRA,sp,2024,FY2024,reported,history,382166,0.5277,201679,180487,https://www.springfieldfl.net/media/10331
+springfield,Springfield CRA,sp,2025,FY2025,reported,history,506805,0.5277,267454,239351,https://www.springfieldfl.net/media/10746
+springfield,Springfield CRA,sp,2026,FY2026,adopted budget,low,642820,0.5277,339232,303588,https://www.springfieldfl.net/media/10801
+springfield,Springfield CRA,sp,2027,FY2027,adopted budget,low,736858,0.5277,388858,348000,https://www.springfieldfl.net/media/10806
+springfield,Springfield CRA,sp,2028,FY2028,projected 3% a year,low,758963,0.5277,400524,358440,
+springfield,Springfield CRA,sp,2029,FY2029,projected 3% a year,low,781732,0.5277,412540,369193,
+springfield,Springfield CRA,sp,2030,FY2030,projected 3% a year,low,805184,0.5277,424916,380268,
+springfield,Springfield CRA,sp,2031,FY2031,projected 3% a year,low,829340,0.5277,437663,391677,
+springfield,Springfield CRA,sp,2032,FY2032,projected 3% a year,low,854220,0.5277,450793,403427,
+springfield,Springfield CRA,sp,2033,FY2033,projected 3% a year,low,879847,0.5277,464317,415530,
+springfield,Springfield CRA,sp,2034,FY2034,projected 3% a year,low,906242,0.5277,478247,427996,
+springfield,Springfield CRA,sp,2035,FY2035,projected 3% a year,low,933429,0.5277,492594,440835,
+springfield,Springfield CRA,sp,2036,FY2036,projected 3% a year,low,961432,0.5277,507372,454060,
+springfield,Springfield CRA,sp,2037,FY2037,projected 3% a year,low,990275,0.5277,522593,467682,
+springfield,Springfield CRA,sp,2026,FY2026,adopted budget,mid,642820,0.5277,339232,303588,https://www.springfieldfl.net/media/10801
+springfield,Springfield CRA,sp,2027,FY2027,adopted budget,mid,736858,0.5277,388858,348000,https://www.springfieldfl.net/media/10806
+springfield,Springfield CRA,sp,2028,FY2028,projected 6% a year,mid,781069,0.5277,412190,368880,
+springfield,Springfield CRA,sp,2029,FY2029,projected 6% a year,mid,827933,0.5277,436921,391012,
+springfield,Springfield CRA,sp,2030,FY2030,projected 6% a year,mid,877609,0.5277,463136,414473,
+springfield,Springfield CRA,sp,2031,FY2031,projected 6% a year,mid,930266,0.5277,490925,439341,
+springfield,Springfield CRA,sp,2032,FY2032,projected 6% a year,mid,986082,0.5277,520380,465702,
+springfield,Springfield CRA,sp,2033,FY2033,projected 6% a year,mid,1045247,0.5277,551603,493644,
+springfield,Springfield CRA,sp,2034,FY2034,projected 6% a year,mid,1107962,0.5277,584699,523263,
+springfield,Springfield CRA,sp,2035,FY2035,projected 6% a year,mid,1174439,0.5277,619781,554658,
+springfield,Springfield CRA,sp,2036,FY2036,projected 6% a year,mid,1244906,0.5277,656968,587938,
+springfield,Springfield CRA,sp,2037,FY2037,projected 6% a year,mid,1319600,0.5277,696386,623214,
+springfield,Springfield CRA,sp,2026,FY2026,adopted budget,high,642820,0.5277,339232,303588,https://www.springfieldfl.net/media/10801
+springfield,Springfield CRA,sp,2027,FY2027,adopted budget,high,736858,0.5277,388858,348000,https://www.springfieldfl.net/media/10806
+springfield,Springfield CRA,sp,2028,FY2028,projected 9% a year,high,803175,0.5277,423855,379320,
+springfield,Springfield CRA,sp,2029,FY2029,projected 9% a year,high,875461,0.5277,462002,413458,
+springfield,Springfield CRA,sp,2030,FY2030,projected 9% a year,high,954252,0.5277,503583,450670,
+springfield,Springfield CRA,sp,2031,FY2031,projected 9% a year,high,1040135,0.5277,548905,491230,
+springfield,Springfield CRA,sp,2032,FY2032,projected 9% a year,high,1133747,0.5277,598307,535440,
+springfield,Springfield CRA,sp,2033,FY2033,projected 9% a year,high,1235784,0.5277,652154,583630,
+springfield,Springfield CRA,sp,2034,FY2034,projected 9% a year,high,1347005,0.5277,710848,636157,
+springfield,Springfield CRA,sp,2035,FY2035,projected 9% a year,high,1468235,0.5277,774824,693411,
+springfield,Springfield CRA,sp,2036,FY2036,projected 9% a year,high,1600376,0.5277,844559,755818,
+springfield,Springfield CRA,sp,2037,FY2037,projected 9% a year,high,1744410,0.5277,920569,823841,
+parker,Parker CRA,parker,2023,FY2023,reported,history,0,1.0,0,0,https://cityofparker.com/wp-content/uploads/filr/3313/CRA%20BUDGET%20RESOLUTION%20%202022-26.pdf
+parker,Parker CRA,parker,2024,FY2024,reported,history,247539,0.6444,159512,88027,https://flauditor.gov/pages/specialdistricts_efile%20rpts/2024%20community%20redevelopment%20agency%20of%20the%20city%20of%20parker.pdf
+parker,Parker CRA,parker,2025,FY2025,reported,history,393198,0.6444,253373,139825,https://flauditor.gov/pages/specialdistricts_efile%20rpts/2025%20community%20redevelopment%20agency%20of%20the%20city%20of%20parker.pdf
+parker,Parker CRA,parker,2026,FY2026,projected 3% a year,low,404994,0.6444,260974,144020,
+parker,Parker CRA,parker,2027,FY2027,adopted budget,low,424195,0.6444,273347,150848,https://cityofparker.com/wp-content/uploads/filr/7005/Agenda-Final-Budget-Meeting-Package-09.24.26.pdf
+parker,Parker CRA,parker,2028,FY2028,projected 3% a year,low,436921,0.6444,281547,155374,
+parker,Parker CRA,parker,2029,FY2029,projected 3% a year,low,450028,0.6444,289994,160035,
+parker,Parker CRA,parker,2030,FY2030,projected 3% a year,low,463529,0.6444,298694,164836,
+parker,Parker CRA,parker,2031,FY2031,projected 3% a year,low,477435,0.6444,307654,169781,
+parker,Parker CRA,parker,2032,FY2032,projected 3% a year,low,491758,0.6444,316884,174874,
+parker,Parker CRA,parker,2033,FY2033,projected 3% a year,low,506511,0.6444,326390,180121,
+parker,Parker CRA,parker,2034,FY2034,projected 3% a year,low,521706,0.6444,336182,185524,
+parker,Parker CRA,parker,2026,FY2026,projected 6% a year,mid,416790,0.6444,268575,148215,
+parker,Parker CRA,parker,2027,FY2027,adopted budget,mid,424195,0.6444,273347,150848,https://cityofparker.com/wp-content/uploads/filr/7005/Agenda-Final-Budget-Meeting-Package-09.24.26.pdf
+parker,Parker CRA,parker,2028,FY2028,projected 6% a year,mid,449647,0.6444,289748,159899,
+parker,Parker CRA,parker,2029,FY2029,projected 6% a year,mid,476626,0.6444,307133,169493,
+parker,Parker CRA,parker,2030,FY2030,projected 6% a year,mid,505223,0.6444,325560,179663,
+parker,Parker CRA,parker,2031,FY2031,projected 6% a year,mid,535536,0.6444,345094,190442,
+parker,Parker CRA,parker,2032,FY2032,projected 6% a year,mid,567669,0.6444,365800,201869,
+parker,Parker CRA,parker,2033,FY2033,projected 6% a year,mid,601729,0.6444,387748,213981,
+parker,Parker CRA,parker,2034,FY2034,projected 6% a year,mid,637832,0.6444,411013,226820,
+parker,Parker CRA,parker,2026,FY2026,projected 9% a year,high,428586,0.6444,276176,152410,
+parker,Parker CRA,parker,2027,FY2027,adopted budget,high,424195,0.6444,273347,150848,https://cityofparker.com/wp-content/uploads/filr/7005/Agenda-Final-Budget-Meeting-Package-09.24.26.pdf
+parker,Parker CRA,parker,2028,FY2028,projected 9% a year,high,462373,0.6444,297948,164424,
+parker,Parker CRA,parker,2029,FY2029,projected 9% a year,high,503986,0.6444,324763,179223,
+parker,Parker CRA,parker,2030,FY2030,projected 9% a year,high,549345,0.6444,353992,195353,
+parker,Parker CRA,parker,2031,FY2031,projected 9% a year,high,598786,0.6444,385851,212934,
+parker,Parker CRA,parker,2032,FY2032,projected 9% a year,high,652677,0.6444,420578,232099,
+parker,Parker CRA,parker,2033,FY2033,projected 9% a year,high,711417,0.6444,458430,252987,
+parker,Parker CRA,parker,2034,FY2034,projected 9% a year,high,775445,0.6444,499689,275756,

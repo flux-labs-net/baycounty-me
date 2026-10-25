@@ -3743,7 +3743,7 @@
    "id": "site-updates",
    "title": "What's new",
    "description": "Each change to the site's data and pages, newest first.",
-   "rows": 54,
+   "rows": 55,
    "columns": [
     {
      "name": "date",
@@ -6863,7 +6863,7 @@
    "id": "site-menu",
    "title": "Site menu",
    "description": "Every link in the site's main menu, one row per link, in English and Spanish: the section and the question it answers, the link's place in the section, and the section's start-here page. place_id is the place the menu belongs to (fl-bay = Bay County), so a menu for another place sits beside it.",
-   "rows": 50,
+   "rows": 51,
    "columns": [
     {
      "name": "place_id",
@@ -7121,6 +7121,293 @@
    "json": "/downloads/budget-actuals.json",
    "csv": "/downloads/budget-actuals.csv",
    "api": "/api/v1/datasets/budget-actuals"
+  },
+  {
+   "id": "cra-agencies",
+   "title": "CRAs: tax increment by agency",
+   "description": "One row per Community Redevelopment Agency that collects tax increment in Bay County: when it was created, its base year, the FY2025 increment and how much of it Bay County and the city paid, the total on record, its sunset date and what that date rests on, and the increment still to come under a 3%, 6% or 9% growth scenario. sunset_assumed is true where the CRA's plan was not found.",
+   "rows": 7,
+   "columns": [
+    {
+     "name": "cra_id",
+     "type": "string"
+    },
+    {
+     "name": "cra",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "cw",
+      "lh",
+      "parker",
+      "pc",
+      "pcb",
+      "sp"
+     ]
+    },
+    {
+     "name": "city",
+     "type": "string",
+     "values": [
+      "Callaway",
+      "Lynn Haven",
+      "Panama City",
+      "Panama City Beach",
+      "Parker",
+      "Springfield"
+     ]
+    },
+    {
+     "name": "created",
+     "type": "string",
+     "values": [
+      "1983",
+      "2001",
+      "2004",
+      "2007"
+     ]
+    },
+    {
+     "name": "base_year",
+     "type": "string",
+     "values": [
+      "1984 to 2004 (four districts)",
+      "2001",
+      "2003 base year",
+      "2004",
+      "2007",
+      "2007 (base value $67.6M)"
+     ]
+    },
+    {
+     "name": "first_fy_on_record",
+     "type": "number"
+    },
+    {
+     "name": "years_filled",
+     "type": "number"
+    },
+    {
+     "name": "increment_fy2025",
+     "type": "number"
+    },
+    {
+     "name": "county_share_fy2025",
+     "type": "number"
+    },
+    {
+     "name": "county_fy2025",
+     "type": "number"
+    },
+    {
+     "name": "city_fy2025",
+     "type": "number"
+    },
+    {
+     "name": "paid_on_record",
+     "type": "number"
+    },
+    {
+     "name": "county_paid_on_record",
+     "type": "number"
+    },
+    {
+     "name": "sunset_fy",
+     "type": "number"
+    },
+    {
+     "name": "sunset_assumed",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "sunset_basis",
+     "type": "string",
+     "values": [
+      "All four districts are scheduled to sunset in 2044 (2025 plan). Bay County keeps 26% of the increment from the 2025 St. Andrews expansion area (not modeled).",
+      "Extended from about 2033 to Nov 30, 2043 by Res. 2026-01-504 (Jan 2026).",
+      "No end date found. Projected to Sept 30, 2039, the latest date under s.163.3755, F.S. for a CRA that existed in 2019 unless the city votes to continue it. The increment is passed to the Pier Park Community Development District under the 2001 partnership agreement.",
+      "Plan extended from 2031 to 2049 by Res. 19-140 (Sept 2019). A 2024 city-county agreement caps yearly CRA revenue at $30M through 2049; a 2020 agreement (Res. 20-85) rebates 20% of county increment above $15M a year to the county.",
+      "The plan text was not retrieved. Assumes the 30-year plan limit (about 2034). No positive increment before FY2024.",
+      "The plan text was not retrieved. Assumes the 30-year plan limit (about 2037); Sept 30, 2039 at the latest under s.163.3755, F.S. unless the city votes to continue it."
+     ]
+    },
+    {
+     "name": "yearly_cap",
+     "type": "number"
+    },
+    {
+     "name": "to_come_low",
+     "type": "number"
+    },
+    {
+     "name": "to_come_mid",
+     "type": "number"
+    },
+    {
+     "name": "to_come_high",
+     "type": "number"
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://flauditor.gov/pages/specialdistricts_efile%20rpts/2025%20callaway%20community%20redevelopment%20agency.pdf",
+      "https://flauditor.gov/pages/specialdistricts_efile%20rpts/2025%20community%20redevelopment%20agency%20of%20the%20city%20of%20parker.pdf",
+      "https://flauditor.gov/pages/specialdistricts_efile%20rpts/2025%20lynn%20haven%20community%20redevelopment%20agency.pdf",
+      "https://www.panamacity.gov/DocumentCenter/View/10977",
+      "https://www.pcbfl.gov/Archive.aspx?ADID=177",
+      "https://www.springfieldfl.net/media/10746"
+     ]
+    }
+   ],
+   "json": "/downloads/cra-agencies.json",
+   "csv": "/downloads/cra-agencies.csv",
+   "api": "/api/v1/datasets/cra-agencies"
+  },
+  {
+   "id": "cra-tax-increment",
+   "title": "CRAs: tax increment by year",
+   "description": "Property tax paid to each CRA by fiscal year, split between Bay County and the city by millage. scenario history: basis reported (from CRA reports, audits and budgets) or filled gap (between two reported years). scenario low, mid, high: FY2026 to the CRA's sunset, from adopted budgets where they exist, then 3%, 6% or 9% growth a year (Front Beach Road capped at $30M). Schools and the water management district are exempt and pay nothing.",
+   "rows": 399,
+   "columns": [
+    {
+     "name": "cra_id",
+     "type": "string",
+     "values": [
+      "callaway",
+      "lh",
+      "parker",
+      "pc",
+      "pcb-fbr",
+      "pcb-pier",
+      "springfield"
+     ]
+    },
+    {
+     "name": "cra",
+     "type": "string",
+     "values": [
+      "Callaway CRA",
+      "Front Beach Road CRA",
+      "Lynn Haven CRA",
+      "Panama City CRA",
+      "Parker CRA",
+      "Pier Park CRA",
+      "Springfield CRA"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "cw",
+      "lh",
+      "parker",
+      "pc",
+      "pcb",
+      "sp"
+     ]
+    },
+    {
+     "name": "fiscal_year",
+     "type": "number"
+    },
+    {
+     "name": "fy",
+     "type": "string"
+    },
+    {
+     "name": "basis",
+     "type": "string",
+     "values": [
+      "adopted budget",
+      "filled gap",
+      "projected 3% a year",
+      "projected 6% a year",
+      "projected 9% a year",
+      "reported"
+     ]
+    },
+    {
+     "name": "scenario",
+     "type": "string",
+     "values": [
+      "high",
+      "history",
+      "low",
+      "mid"
+     ]
+    },
+    {
+     "name": "increment",
+     "type": "number"
+    },
+    {
+     "name": "county_share",
+     "type": "number"
+    },
+    {
+     "name": "county_amount",
+     "type": "number"
+    },
+    {
+     "name": "city_amount",
+     "type": "number"
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/cra-tax-increment.json",
+   "csv": "/downloads/cra-tax-increment.csv",
+   "api": "/api/v1/datasets/cra-tax-increment"
+  },
+  {
+   "id": "cra-increment-checks",
+   "title": "CRAs: estimate checked against official figures",
+   "description": "Official county figures for CRA payments next to this estimate for the same year, with the difference in percent.",
+   "rows": 4,
+   "columns": [
+    {
+     "name": "figure",
+     "type": "string"
+    },
+    {
+     "name": "fiscal_year",
+     "type": "number"
+    },
+    {
+     "name": "official_figure",
+     "type": "number"
+    },
+    {
+     "name": "estimate",
+     "type": "number"
+    },
+    {
+     "name": "difference_pct",
+     "type": "number"
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/cra-increment-checks.json",
+   "csv": "/downloads/cra-increment-checks.csv",
+   "api": "/api/v1/datasets/cra-increment-checks"
   },
   {
    "id": "tax-districts",
