@@ -3,10 +3,13 @@ const $ = id => document.getElementById(id);
 let D; // page data loads after the page has rendered; the markup shows a loading note until then
 try { const r = await fetch('/data/contracts-page.json'); if (!r.ok) throw new Error(r.status); D = await r.json(); }
 catch (e) { $('ctCount').textContent = 'The contracts could not be loaded. Please refresh the page.'; return; }
-const R = D.rows, VP = D.vp;
+const R = D.rows, VP = D.vp, VBY = Object.fromEntries(VP.map(p => [p.id, p]));
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const usd = n => '$' + Math.round(n).toLocaleString('en-US');
 const big = n => (n < 0 ? '\u2212' : '') + (Math.abs(n) >= 1e6 ? '$' + (Math.abs(n) / 1e6).toFixed(1) + 'M' : '$' + Math.round(Math.abs(n) / 1e3) + 'K');
+// company names link to their profile (vendor page or /profile/...): r.e / p.e is the entity id, BC.href the shared rule (site/entity_graph.py page_url)
+const vurl = eid => eid && window.BC ? BC.href(eid) : null;
+const vname = (eid, text) => { const u = vurl(eid); return u ? `<a href="${esc(u)}">${esc(text)}</a>` : esc(text); };
 let shown = 50, cur = [];
 // year: opens on the newest year with contracts; ?year= in the link (a year or 'all') picks another
 const YRS = [...new Set(R.map(r => +(r.d || '').slice(0, 4)).filter(Boolean))].sort((a, b) => b - a);
@@ -23,7 +26,7 @@ function filt() {
   cur = R.filter(r => (!g || r.g === g) && (!m || r.m === m) && (!y || (r.d || '').startsWith(y)) && (!q || (r.v + ' ' + r.p + ' ' + r.n).toLowerCase().includes(q)));
   cur = order(cur);
   $('ctCount').textContent = `${cur.length} contracts${y ? ' in ' + y : ''} · ${big(cur.reduce((a, r) => a + r.a, 0))}`;
-  $('ctT').tBodies[0].innerHTML = cur.slice(0, shown).map(r => `<tr><td>${esc(r.g)}</td><td class="wrap"><button type="button" class="vbtn" data-v="${esc(r.id)}">${esc(r.v)}</button></td><td class="wrap small">${esc(r.p)}${r.n ? `<br><span class="muted">${esc(r.n)}</span>` : ''}</td><td class="num">${usd(r.a)}</td><td class="small">${esc(r.m)}</td><td class="small">${esc(r.d)} ${r.u ? `<a class="src" href="${esc(r.u)}" target="_blank" rel="noopener">Source</a>` : ''}</td></tr>`).join('') || '<tr><td colspan="6" class="muted">No contracts match.</td></tr>';
+  $('ctT').tBodies[0].innerHTML = cur.slice(0, shown).map(r => `<tr><td>${esc(r.g)}</td><td class="wrap">${vname(r.e, r.v)}${r.id !== 'unnamed' && VBY[r.id] ? `<br><button type="button" class="vbtn sm" data-v="${esc(r.id)}" aria-label="Summary of ${esc(r.v)}">Summary</button>` : ''}</td><td class="wrap small">${esc(r.p)}${r.n ? `<br><span class="muted">${esc(r.n)}</span>` : ''}</td><td class="num">${usd(r.a)}</td><td class="small">${esc(r.m)}</td><td class="small">${esc(r.d)} ${r.u ? `<a class="src" href="${esc(r.u)}" target="_blank" rel="noopener">Source</a>` : ''}</td></tr>`).join('') || '<tr><td colspan="6" class="muted">No contracts match.</td></tr>';
   $('ctMore').hidden = cur.length <= shown;
 }
 ['ctQ', 'ctG', 'ctM'].forEach(id => $(id).addEventListener('input', () => { shown = 50; filt(); }));
@@ -38,12 +41,10 @@ filt();
 if (window.BCM && BCM.city) BCM.city.on(k => BCM.city.fitYear($('ctY'), R.filter(r => BCM.city.has(k, r.g)).map(r => +(r.d || '').slice(0, 4) || null)));
 
 /* company cards: every record for one company, whatever spelling each record used */
-const VBY = Object.fromEntries(VP.map(p => [p.id, p]));
 const fdt = s => s ? new Date(s + 'T12:00:00').toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'}) : '';
 const src = u => u ? ` <a class="src" href="${esc(u)}" target="_blank" rel="noopener">Source</a>` : '';
 const named = VP.filter(p => p.t !== 'unnamed');
 $('vpList').innerHTML = named.map(p => `<option value="${esc(p.n)}">`).join('');
-const VSLUG = fetch('/data/vendor-slugs.json').then(r => r.json()).catch(() => ({}));  // vendor profile pages
 function card(id, scroll) {
   const p = VBY[id], el = $('vpCard');
   if (!p) return;
@@ -53,7 +54,7 @@ function card(id, scroll) {
     return `<tr><th scope="row">${esc(g)}</th><td class="num">${aw.length || '—'}</td><td class="num">${aw.length ? big(sum(aw)) : '—'}</td><td class="num">${pd.length ? big(sum(pd)) + `<small class="muted vp-yr">${pd.map(x => `<span title="${esc(x.cover)}">FY${String(x.fy).slice(2)} ${big(x.a)} (#${x.rank})</span>`).join('<br>')}</small>` : '—'}</td></tr>`; }).join('');
   const kpi = (lbl, v, sub) => `<div class="kpi"><span class="eyebrow">${lbl}</span><span class="v">${v}</span><span class="s">${sub}</span></div>`;
   const offs = new Set(p.gifts.map(g => g.o));
-  el.innerHTML = `<div class="vp-hd"><h3>${esc(p.n)}</h3>${p.t === 'public' ? '<span class="badge">Public agency</span>' : ''}</div>
+  el.innerHTML = `<div class="vp-hd"><h3>${vname(p.e, p.n)}</h3>${p.t === 'public' ? '<span class="badge">Public agency</span>' : ''}</div>
     ${p.aka.length ? `<p class="small muted">Also written as: ${p.aka.map(esc).join(' · ')}</p>` : ''}
     <div class="kpis">${kpi('Contracts awarded', p.aw.length, p.aw.length ? big(p.tot) : 'none in this list')}
       ${kpi('Paid, where known', p.paid.length ? big(sum(p.paid)) : '—', p.paid.length ? 'in top-payee lists' : 'not a top payee in any register')}
@@ -68,8 +69,7 @@ function card(id, scroll) {
       <p class="note">From current officials' latest campaign reports. Gifts from the company's owners or employees as individuals aren't linked to it.</p>` : ''}
     ${p.votes.length ? `<h4>Votes on this company's contracts by officials it gave to</h4><ul class="plain mm-list">${p.votes.map(v => `<li><b>${fdt(v.d)}</b> · ${esc(v.g)}: ${esc(v.h)}${v.a ? ' · ' + big(v.a) : ''}${v.consent ? ' <span class="muted">(consent agenda)</span>' : ''} · ${esc(v.outcome || '')} ${esc(v.tally || '')}${src(v.u)}<br><span class="small">${v.roll.map(m => m.gift ? `<b>${esc(m.n)}</b> ${esc(m.vote)} (got ${usd(m.gift)})` : `${esc(m.n)} ${esc(m.vote)}`).join(' · ')}</span></li>`).join('')}</ul>` : ''}
     ${p.gifts.length ? `<p><a class="pill" href="/connections/money-map?show=all&amp;q=${encodeURIComponent(p.mm || p.n)}#map">See it on the money map</a></p>` : ''}
-    <p data-vprof="${esc(p.id)}" hidden><a class="pill" href="/public-money/vendors/${esc(p.id)}">Full vendor page</a></p>`;
-  VSLUG.then(s => { const x = el.querySelector('[data-vprof]'); if (x && s.ids && s.ids[x.dataset.vprof]) x.hidden = false; });
+    ${vurl(p.e) ? `<p><a class="pill" href="${esc(vurl(p.e))}">Full company profile</a></p>` : ''}`;
   const all = $('vpAll'); if (all) all.addEventListener('click', () => { el.querySelectorAll('.vp-aw li[hidden]').forEach(li => li.hidden = false); all.remove(); });
   const u = new URL(location.href); u.searchParams.set('company', id); history.replaceState(null, '', u.pathname + u.search + '#company');
   if (scroll) $('company').scrollIntoView({behavior: 'smooth', block: 'start'});

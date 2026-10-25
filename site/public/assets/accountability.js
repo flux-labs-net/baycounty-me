@@ -72,7 +72,7 @@ function phases(p) { // how far the record goes: planned, approved, under way, d
 function detail(p) {
   const ev = p.ev.map(x => {
     const src = x.u ? `<a class="src" href="${esc(x.u)}" target="_blank" rel="noopener">${x.news ? 'News report' : 'Source'}</a>` : '<span class="muted">No link</span>';
-    const who = x.payee ? (x.vid ? `<a href="/public-money/vendors/${esc(x.vid)}">${esc(x.payee)}</a>` : esc(x.payee)) : '';
+    const who = x.payee ? (x.vid && window.BC ? BC.a('vendor:' + x.vid, x.payee) : esc(x.payee)) : '';
     const mem = x.k === 'vote' && x.members && Object.keys(x.members).length ? `<details class="acct-mem"><summary>How each member voted</summary>${Object.entries(x.members).map(([n, v]) => `${esc(n)}: <b>${esc(v)}</b>`).join(' · ')}</details>` : '';
     return `<li class="k-${x.k}${x.side ? ' side' : ''}"><span class="acct-when">${esc(fmtD(x.d))}</span><span class="acct-what"><em class="acct-k">${esc(KIND[x.k] || x.k)}</em>${x.a != null ? ` <b>${x.approx ? 'about ' : ''}${usd(x.a)}</b>` : ''}
       <span>${esc(x.t)}</span>${who ? `<span class="acct-who">Paid to / with: ${who}</span>` : ''}${mem}

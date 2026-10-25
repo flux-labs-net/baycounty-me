@@ -612,6 +612,7 @@ details.el-dec > .el-rh,details.el-dec > .el-cands{padding:0 18px 16px}
 .mt-tools .tt-csv{min-height:42px}
 @media (max-width:760px){.mt-f.mt-tools{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .vbtn{all:unset;cursor:pointer;font-weight:600;color:var(--ink,inherit);text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
+.vbtn.sm{font-weight:400;font-size:.8rem;color:var(--muted,inherit)}
 .vbtn:hover,.vbtn:focus-visible{text-decoration-color:currentColor}.vbtn:focus-visible{outline:2px solid var(--s1);outline-offset:2px;border-radius:3px}
 .hb.vlink{cursor:pointer}.hb.vlink:hover{background:var(--sunken)}
 .vp-card{border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-top:10px}
