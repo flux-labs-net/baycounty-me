@@ -79,7 +79,8 @@ def developers_page(out_dir):
       <li><b>Tools it offers:</b> <code>list_datasets</code>, <code>query_dataset</code>, <code>get_government</code>, <code>search_site</code>, <code>upcoming_meetings</code> (by government, days ahead or a keyword such as a street name), <code>member_voting_record</code> (one board member's votes, including when they were in the minority) and <code>vendor_profile</code> (one company's contracts, change orders, payments, CRA payments and business campaign contributions; a match doesn't show why anything happened) and <code>official_correspondence</code> (published letters to officials and their replies), <code>compare_budget_years</code> (one government's budget in two fiscal years, by fund, department and service, or audited revenue and spending), <code>government_checkbook</code> and <code>budget_vs_actual</code> (a government's own payments and its spending against the budget this year), and <code>find_entity</code> and <code>get_entity</code> (anyone or anything on the site and every documented connection: who paid it, campaign gifts from organizations, votes, board seats and businesses).</li>
       <li><b>Resources:</b> each dataset is also an MCP resource at <code>baycounty://datasets/&lt;id&gt;</code> (up to 2,000 rows; the full file is linked).</li>
       <li><b>Example question:</b> "Which Bay County contracts over $5 million went to campaign donors, and how did commissioners vote?"</li>
-    </ul></section>
+    </ul>
+    <p>The site's own <a href="/ask">Ask</a> page uses these same tools: Claude answers visitors' questions from this data and links each source.</p></section>
   <section class="tx-sec method" id="terms"><div class="sec-hd"><h2>Use and limits</h2></div>
     <ul class="plain">
       <li>The data is compiled from public records and free to reuse. Please credit BayCounty.me and link to the source record for any figure you publish.</li>

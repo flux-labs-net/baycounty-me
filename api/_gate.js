@@ -100,4 +100,4 @@ function instrument(res, ctx, info) {
   }
 }
 
-module.exports = {gate, instrument, cleanQuery, sha256, derive, MESSAGES, ipOf};
+module.exports = {gate, instrument, cleanQuery, sha256, derive, MESSAGES, ipOf, ipHash};

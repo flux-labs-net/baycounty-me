@@ -12,6 +12,7 @@ from amend_page import amend_page
 from addr_page import addr_page
 from michael_page import michael_page
 from search_page import search_page, build_index
+from ask_page import ask_page, ASK_ICON
 from debt_audit_page import debt_page, audits_page
 from tourism_page import bedtax_page, surtax_page
 from fees_page import fees_page, who_page
@@ -112,11 +113,14 @@ def nav_html(active):
             cur = ' aria-current="page"' if m['href'] == active else ''
             items.append(f'<li><a href="{m["href"]}"{cur}>{m["label"]}</a></li>')
     # The Spanish pages keep a way back to English; the English pages have no language link for now (Jeremy, 2026-10-24).
+    cur = ' aria-current="page"' if active == '/ask' else ''
+    ask = '' if es else f'<a class="ask-btn" href="/ask"{cur}>{ASK_ICON}<span>Ask</span></a>'
     lang = '<a class="lang-link" href="__LANGHREF__" lang="__LANGCODE__" hreflang="__LANGCODE__">__LANGLABEL__</a>' if es else ''
     return f'''<header class="site-head"><div class="site-head-in">
   <a class="wordmark" href="{'/es' if es else '/'}" aria-label="{SITE} {'inicio' if es else 'home'}"><span>{wordmark_html()}</span></a>
   <nav aria-label="Main"><ul id="site-menu" class="menu">{"".join(items)}</ul></nav>
   {lang}
+  {ask}
   <a class="search-btn" href="/search" aria-label="Search" aria-keyshortcuts="/ Control+K">{SEARCH_ICON}</a>
   <button type="button" class="theme-btn" id="themeBtn" aria-label="Theme: match system"><svg class="ti ti-system" width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="6.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 3.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/></svg><svg class="ti ti-light" width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 2v2.2M10 15.8V18M2 10h2.2M15.8 10H18M4.3 4.3l1.6 1.6M14.1 14.1l1.6 1.6M4.3 15.7l1.6-1.6M14.1 5.9l1.6-1.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><svg class="ti ti-dark" width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path d="M16 12.6A6.6 6.6 0 0 1 7.4 4a6.6 6.6 0 1 0 8.6 8.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="theme-lbl">System</span></button>
   <button type="button" class="menu-btn" aria-expanded="false" aria-controls="site-menu"><span class="sr">Menu</span><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14" stroke="currentColor" stroke-width="1.8"/></svg></button>
@@ -613,6 +617,7 @@ def privacy_page():
     <li><b>Email alerts.</b> If you sign up, we keep your email address and what you chose to follow, so we can send the emails. Every email has a link to change or stop them. To have your address deleted entirely, email us.</li>
     <li><b>Contact form.</b> Your message, name and email come to us by email so we can answer. They aren't added to any list.</li>
     <li><b>API.</b> Requests to the public API are logged with the caller's IP address for 90 days to stop abuse, then deleted.</li>
+    <li><b>Ask.</b> Questions you type on the <a href="/ask">Ask</a> page are sent to Anthropic's Claude AI to write the answer, along with the public records it looks up. BayCounty.me doesn't save your questions or the answers; it logs only how many were asked (with a scrambled form of your IP address, to enforce limits) and what they cost. Anthropic's handling is covered by its <a href="https://www.anthropic.com/legal/privacy" target="_blank" rel="noopener">privacy policy</a>. Please don't type personal information.</li>
     <li><b>My Address.</b> Address lookups go straight from your browser to Bay County's and FEMA's public map servers. BayCounty.me doesn't receive or store what you look up.</li>
   </ul>
   <h2>The iPhone app</h2>
@@ -683,6 +688,7 @@ PAGES = [
     ('/glossary', 'Plain-English guide', 'Every term on BayCounty.me explained simply: CRAs, tax increment, millage, homestead exemptions, budgets and more.', glossary_page),
     ('/updates', 'Updates', 'New pages, new data and corrections on BayCounty.me, newest first, with an RSS feed.', updates_page),
     ('/search', 'Search', 'Search every page, glossary term and public-money record on BayCounty.me.', search_page),
+    ('/ask', 'Ask BayCounty.me', 'Ask a question in your own words about Bay County budgets, taxes, votes, contracts, meetings or officials, and get an answer from the public records on BayCounty.me, with links to each source.', ask_page),
     ('/about', 'About', 'What BayCounty.me is, where its information comes from, and how to send a correction.', about_page),
     ('/privacy', 'Privacy', 'What BayCounty.me and its iPhone app collect: no accounts, no ads, no tracking.', privacy_page),
 ]

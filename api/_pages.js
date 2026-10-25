@@ -44,6 +44,7 @@ const PAGES = {
   '/glossary': {datasets: ['glossary-terms']},
   '/updates': {datasets: ['site-updates'], endpoints: ['/changes']},
   '/search': {endpoints: ['/search']},
+  '/ask': {none: 'a chatbot: answers come from the MCP tools (api/mcp.js) over the same datasets and endpoints, through /api/chat'},
   '/about': {none: 'about the site'},
   '/privacy': {none: 'privacy policy'},
   '/connections': {datasets: ['connections-payees', 'connections-payments', 'connections-links', 'connections-gifts']},

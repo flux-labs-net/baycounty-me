@@ -9,6 +9,7 @@
     "test": "node --test api/__tests__/*.test.js"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^1.3.0",
     "exceljs": "^4.4.0",
     "pg": "8.13.1"
   },
