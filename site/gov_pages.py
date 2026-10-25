@@ -152,7 +152,7 @@ def gov_page(key):
         ctx = ''.join(f'<p class="note">{e(t)} {src(u)}</p>' for t, u in (b.get('context') or [])[:2])
         secs.append(f'''<section class="tx-sec"><div class="sec-hd"><h2 id="money">Money in, money out</h2><span class="muted">{e(b.get("status") or "")} budget{" · general fund " + money(b["general_fund"]) if b.get("general_fund") else ""}</span></div>
           <div class="two"><div><h3 class="h4">Where the money comes from</h3>{hbars(list((b.get("revenue") or {}).items()), "var(--s3)")}</div><div><h3 class="h4">What the general fund pays for</h3>{hbars(list((b.get("spending") or {}).items()))}</div></div>
-          {ctx}<p class="src-line">{srcs} · <a href="/public-money/tax-dollars">Compare every government's budget</a>{' · <a href="/public-money/budget-explorer?gov=' + key + '">Budget explorer</a>' if p.get("budget_detail") else ''} · <a href="/public-money/budget-compare?gov={key}">Compare years</a></p></section>''')
+          {ctx}<p class="src-line">{srcs} · <a href="/public-money/tax-dollars">Compare every government's budget</a>{' · <a href="/public-money/budget-explorer?gov=' + key + '">Budget explorer</a>' if p.get("budget_detail") else ''} · <a href="/public-money/budget-compare?gov={key}">Compare years</a>{' · <a href="/public-money/cra-tax-increment">Property tax paid to CRAs</a>' if key == 'county' else ''}</p></section>''')
     # tax rate history
     m = p.get('millage')
     if m and any(x is not None for x in m.get('rate') or []):
@@ -207,7 +207,7 @@ def gov_page(key):
     secs = [re.sub(r'<div class="sec-hd"><h2 id="([a-z]+)">', lambda m: f'<div class="sec-hd">{ico(*SEC[m.group(1)][:2])}<h2 id="{m.group(1)}">', x, count=1) for x in secs]
     by_id = {re.search(r'id="([a-z]+)"', x).group(1): x for x in secs}
     cra = g.get('cra')
-    live_secs = {'contracts': live('contracts', 'Contracts'), 'cra': live('cra', 'Redevelopment (CRA) spending') if cra else '',
+    live_secs = {'contracts': live('contracts', 'Contracts'), 'cra': live('cra', 'Redevelopment (CRA) spending', '<p class="src-line"><a href="/public-money/cra-tax-increment#cras">How much property tax this CRA gets each year, and from whom →</a></p>') if cra else '',
                  'projects': live('projects', 'Projects'), 'votes': live('votes', 'How they voted'), 'savings': live('savings', 'Where it could spend less')}
     order = ['who', 'money', 'rate', 'contracts', 'cra', 'projects', 'votes', 'meet', 'debt', 'audits', 'savings', 'act']
     body = ''.join(by_id.get(i) or live_secs.get(i) or '' for i in order)

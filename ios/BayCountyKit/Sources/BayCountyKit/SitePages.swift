@@ -17,6 +17,7 @@ public enum SitePages {
         "/": .native("Home"),
         "/my-address": .native("My Address"),
         "/public-money/cra-spending": .native("CRA Spending"),
+        "/public-money/cra-tax-increment": .dataset("cra-agencies"),
         "/public-money/tax-dollars": .native("Tax calculator"),
         "/public-money/amendment-3": .native("Amendment 3"),
         "/public-money/hurricane-michael": .dataset("fema-michael-projects"),

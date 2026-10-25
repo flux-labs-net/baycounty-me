@@ -46,6 +46,7 @@ def menu():
                 _i('Checkbook', '/public-money/checkbook', 'Every payment, from the government\'s own books')] if OPEN_BOOKS_PUBLIC else []),
              _i('Budgets by year', '/public-money/budget-compare', 'Compare any two years, line by line'),
              _i('CRA spending', '/public-money/cra-spending', 'What redevelopment agencies paid for'),
+             _i('CRA tax increment', '/public-money/cra-tax-increment', 'Property tax paid to the CRAs, by year'),
              _i('Sales tax projects', '/public-money/sales-tax-projects', 'Half-cent projects: promised vs built'),
              _i('Hurricane Michael', '/public-money/hurricane-michael', 'FEMA, HUD and state recovery money'),
              _i('Debt', '/public-money/debt', 'What each government owes'),

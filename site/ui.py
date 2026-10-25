@@ -91,7 +91,7 @@ PAGE_ICON = {
     '/who-runs-bay-county': 'users', '/governments': 'county', '/compare': 'compare',
     '/my-address': 'pin', '/ask': 'bulb', '/public-money/tax-dollars': 'receipt', '/public-money/fees-and-bills': 'drop',
     '/public-money/exemptions': 'home', '/public-money/tourist-tax': 'sun', '/public-money/amendment-3': 'vote',
-    '/public-money/budget-explorer': 'wallet', '/public-money/budget-compare': 'trend', '/public-money/checkbook': 'wallet', '/public-money/budget-tracker': 'columns', '/public-money/cra-spending': 'columns', '/public-money/sales-tax-projects': 'crane',
+    '/public-money/budget-explorer': 'wallet', '/public-money/budget-compare': 'trend', '/public-money/checkbook': 'wallet', '/public-money/budget-tracker': 'columns', '/public-money/cra-spending': 'columns', '/public-money/cra-tax-increment': 'percent', '/public-money/sales-tax-projects': 'crane',
     '/public-money/hurricane-michael': 'storm', '/public-money/debt': 'dollar', '/public-money/map': 'map',
     '/public-money/accountability': 'shield', '/public-money/contracts': 'file', '/public-money/vendors': 'store',
     '/public-money/who-gets-paid': 'dollar', '/public-money/votes': 'vote', '/public-money/savings': 'piggy',

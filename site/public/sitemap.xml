@@ -92,7 +92,7 @@
   </url>
   <url>
     <loc>https://baycounty.me/es/impuestos</loc>
-    <lastmod>2026-10-21</lastmod>
+    <lastmod>2026-10-25</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://baycounty.me/public-money/tax-dollars"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://baycounty.me/es/impuestos"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://baycounty.me/public-money/tax-dollars"/>
@@ -764,7 +764,7 @@
   </url>
   <url>
     <loc>https://baycounty.me/public-money/amendment-3</loc>
-    <lastmod>2026-10-20</lastmod>
+    <lastmod>2026-10-25</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/public-money/audits</loc>
@@ -785,6 +785,10 @@
   <url>
     <loc>https://baycounty.me/public-money/cra-spending</loc>
     <lastmod>2026-10-24</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/public-money/cra-tax-increment</loc>
+    <lastmod>2026-10-25</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/public-money/debt</loc>
@@ -822,7 +826,7 @@
   </url>
   <url>
     <loc>https://baycounty.me/public-money/tax-dollars</loc>
-    <lastmod>2026-10-21</lastmod>
+    <lastmod>2026-10-25</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://baycounty.me/public-money/tax-dollars"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://baycounty.me/es/impuestos"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://baycounty.me/public-money/tax-dollars"/>

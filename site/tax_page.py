@@ -269,7 +269,7 @@ def tax_page(out_dir):
     <div class="sec-hd"><h2 id="all-h">Where all of Bay County's property tax goes</h2><span class="muted">Total {T('levy', 'levied')} in {FY[last]}: <b>${total26/1e6:,.1f}M</b></span></div>
     <div class="hbars" id="allBars"></div>
     <aside class="callout">
-      <b>Some of this goes to redevelopment districts.</b> Bay County says about $27 million (16.5%) of the countywide property tax it collects goes to city {T('cra', 'Community Redevelopment Agencies')}, including about $22.2 million a year to Panama City Beach's Front Beach Road CRA. That money is the {T('tif', 'tax increment')} from growth inside those districts. <a href="/public-money/cra-spending">See what the CRAs spend it on →</a> <a class="src" href="{CRA_AMD3}" target="_blank" rel="noopener">Source: Bay County</a>
+      <b>Some of this goes to redevelopment districts.</b> Bay County says about $27 million (16.5%) of the countywide property tax it collects goes to city {T('cra', 'Community Redevelopment Agencies')}, including about $22.2 million a year to Panama City Beach's Front Beach Road CRA. That money is the {T('tif', 'tax increment')} from growth inside those districts. <a href="/public-money/cra-tax-increment">How much each CRA gets, by year →</a> <a href="/public-money/cra-spending">See what the CRAs spend it on →</a> <a class="src" href="{CRA_AMD3}" target="_blank" rel="noopener">Source: Bay County</a>
     </aside>
   </section>
 

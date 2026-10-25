@@ -9,6 +9,9 @@ from datetime import datetime, timezone
 import html
 
 CHANGES = [
+    {'date': '2026-10-25', 'title': 'How much property tax goes to the CRAs',
+     'text': "A new page estimates how much property tax Bay County and the cities pay to the seven Community Redevelopment Agencies each year: about $28.7M in FY2025, $25.8M of it from Bay County and three-quarters of it to Panama City Beach's Front Beach Road CRA. It shows who pays, what has been paid since FY2003, sunset dates and what could still be paid under three growth scenarios, checked against the county's own budget figures. The method and the missing years are on the page.",
+     'pages': ['/public-money/cra-tax-increment', '/public-money/tax-dollars', '/public-money/amendment-3', '/governments', '/open-data', '/developers']},
     {'date': '2026-10-25', 'title': 'Budgets back to 2015',
      'text': "The budget comparison now reaches back further. Bay County has every adopted budget from FY2015 to FY2027, fund by fund, from the county's budget archive. Panama City has FY2017 to FY2022 by fund group, read from its scanned budget books, and its General Fund for every year from FY2015 using the city's audited financial reports, and Lynn Haven adds FY2020 with every fund and department. Audited revenue and spending for the county and all seven cities now go back to FY2015. For Panama City Beach, Callaway, Springfield, Parker, Mexico Beach and the school district, the General Fund budget for FY2021 to FY2025 comes from each year's audited financial report (Parker back to FY2015); their older budget books aren't posted online. The page lists which years each government has.",
      'pages': ['/public-money/budget-compare', '/governments', '/open-data']},

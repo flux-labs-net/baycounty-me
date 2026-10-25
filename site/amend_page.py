@@ -148,7 +148,7 @@ def amend_page(out_dir):
         <p>Mayor Dave Lowery has described a possible 40% to 45% drop in the city's property tax revenue. {S('wjhg_lh')} The state's estimate is ${lh['imp'][1]/1e6:.2f}M a year, about {lh['imp'][1]/lh['levy']:.0%} of what the city levied in FY2026. {S('rec')}</p>
       </article>
       <article class="card"><h3>CRAs</h3>
-        <p>The county says it can't reduce its required {T('cra', 'CRA')} payments on its own. That includes about $22.2M a year to Panama City Beach's Front Beach Road CRA. As county revenue shrinks, those payments take up a bigger share of it. {S('county')} <a href="/public-money/cra-spending">CRA spending →</a></p>
+        <p>The county says it can't reduce its required {T('cra', 'CRA')} payments on its own. That includes about $22.2M a year to Panama City Beach's Front Beach Road CRA. As county revenue shrinks, those payments take up a bigger share of it. {S('county')} <a href="/public-money/cra-tax-increment">CRA tax increment →</a> <a href="/public-money/cra-spending">CRA spending →</a></p>
       </article>
     </div>
   </section>
