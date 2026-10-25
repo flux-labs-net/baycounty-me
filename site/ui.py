@@ -184,7 +184,15 @@ def _hero(body, path):
     if scope or stamp:
         stamp = stamp.replace('<div class="stamp">', '<div class="stamp ui-stamp">', 1)
         pick = f'<div class="ui-pick{" no-scope" if not scope else ""}" data-report="skip">{scope}{stamp}</div>'
-    new = (f'<header class="tx-top ui-hero"><div class="ui-id"><span class="ui-badge t-{tone}">{ico(badge)}</span>'
+    if path.startswith('/people/') and title:
+        # a person's page: their initials, in the same color as their card in the People directory
+        ini = re.search(r'>([^<]*)</span>$', avatar(title, 'blue')).group(1)
+        badge_h = f'<span class="ui-badge ui-badge-av t-{tone_of(title)}" aria-hidden="true">{ini}</span>'
+    elif path.startswith('/public-money/vendors/') and title:
+        badge_h = f'<span class="ui-badge t-{tone_of(title)}">{ico(badge)}</span>'
+    else:
+        badge_h = f'<span class="ui-badge t-{tone}">{ico(badge)}</span>'
+    new = (f'<header class="tx-top ui-hero"><div class="ui-id">{badge_h}'
            f'<div class="ui-hd">{inner}{inner_tags}</div></div>{pick}</header>')
     return body[:h0] + new + body[h1:]
 

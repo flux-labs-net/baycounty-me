@@ -912,3 +912,23 @@ a.ui-person:hover b{color:var(--blue)}
 .ui-dc .ui-av{align-self:flex-start}
 .ui-more{font-weight:500;white-space:nowrap;color:var(--muted)}
 .ui-dir-govs{margin:8px 0 20px}
+/* profiles: initials badge, facts card, vote cards */
+.ui-badge.ui-badge-av{border-radius:50%;font:600 24px var(--f-display);letter-spacing:-.01em}
+.ui-facts{display:flex;flex-direction:column;gap:0;margin:0 0 4px;text-align:left;font-size:.92rem;color:var(--ink)}
+.ui-facts > div{padding:10px 4px;border-bottom:1px solid var(--line)}
+.ui-facts > div:first-child{padding-top:2px}
+.ui-facts dt{font-size:.74rem;font-weight:500;color:var(--muted);margin-bottom:2px}
+.ui-facts dd{margin:0;font-weight:600;line-height:1.35;text-wrap:pretty}
+.ui-facts dd span{display:block;font-weight:400;font-size:.8rem;color:var(--muted)}
+.ui-facts ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.ui-facts dd li span a{color:var(--blue);text-decoration:none}
+.ui-pick .ui-stamp > a[href="/alerts"]{background:var(--navy);color:var(--bg)}
+.ui-pick .ui-stamp > a[href="/alerts"]:hover{background:color-mix(in srgb,var(--navy) 88%,var(--ink))}
+ul.ui-votes{display:flex;flex-direction:column;gap:8px;margin:0;padding:0;list-style:none}
+.ui-vc{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-radius:16px;background:var(--surface);box-shadow:var(--ui-shadow)}
+.ui-vc .ui-pill{flex:none;margin:1px 0 0;min-width:44px;justify-content:center}
+.ui-vc-t{display:flex;flex-direction:column;gap:2px;min-width:0;font-size:.92rem;line-height:1.45;text-wrap:pretty}
+.ui-vc-t small{font-size:.78rem;color:var(--muted)}
+.ui-facts a{color:var(--blue);text-decoration:none}.ui-facts a:hover{text-decoration:underline}
+:root .ui-badge.ui-badge-av{border-radius:50%}
+.pf-page #pfHead .kpis{margin-top:24px}

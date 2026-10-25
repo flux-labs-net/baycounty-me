@@ -215,7 +215,7 @@ def vendor_page(vid):
       <td class="num">{usd(g["contribution_amount"])}{f'<small>{usd(g["refunded_by_campaign"])} refunded</small>' if g.get("refunded_by_campaign") else ""}</td><td>{e(", ".join(g["contribution_dates"]))}</td>
       <td class="small">{"<span class='badge warn'>Same government</span> " if any(m == g.get("office_gov_id") for m in g["_govs"]) else ""}{e(", ".join(gname(x) for x in g["_govs"]))}</td>
       <td class="small">{e(ids.biz_case(g["contributor"]))}{" (spelled differently in the filing)" if g["match_confidence"] == "likely" else ""} <a class="src" href="{e(g["campaign_report_url"])}" target="_blank" rel="noopener">Report</a></td></tr>''' for g in sorted(p['gifts'], key=lambda g: (-g['contribution_amount'], g['candidate'])))
-        gifts = f'''<section class="tx-sec"{secg({g.get("office_gov_id") for g in p["gifts"]})}><div class="sec-hd"><h2 id="gifts">Campaign gifts from the business</h2><span class="muted">Business contributions only</span></div>
+        gifts = f'''<section class="tx-sec"{secg({g.get("office_gov_id") for g in p["gifts"]})}><div class="sec-hd"><h2 id="gifts" data-tile="Campaign gifts">Campaign gifts from the business</h2><span class="muted">Business contributions only</span></div>
     <div class="tablewrap"><table class="tx-table vd-table"><thead><tr><th scope="col">To</th><th scope="col" class="num">Gave</th><th scope="col">Dates</th><th scope="col">Governments that pay this vendor</th><th scope="col">Filed as</th></tr></thead><tbody>{gr}</tbody></table></div>
     <p class="note">From the Supervisor of Elections reports of current officeholders and 2026 candidates. Gifts from the company's owners or employees as individuals are not linked to it, and individual donors are never named on this site. "Same government" means the official serves on (or the candidate is running for) a government that pays this vendor. {e(NOTE)}</p></section>'''
     votes = ''
@@ -225,18 +225,28 @@ def vendor_page(vid):
         for x in sorted(p['votes'], key=lambda x: x['vote']['date'], reverse=True):
             v_, l = x['vote'], x['link']
             roll = ' · '.join((f'<b>{e(n)}</b> {e(val)} (got a gift)' if ids.person_id(n) in gave else f'{e(n)} {e(val)}') for n, val in (v_.get('by_member') or {}).items()) or '<span class="muted">roll call not recorded</span>'
-            vr += f'''<li{data_g(v_["body"])}><b>{e(v_["date"])}</b> · {e(x["board"])}: {e(v_.get("headline") or v_.get("item"))}{(" · " + money(v_["amount"])) if v_.get("amount") else ""} · {e(v_.get("outcome") or "")} {e(v_.get("tally") or "")}
-        <a class="src" href="{e(v_.get("source_url"))}" target="_blank" rel="noopener">Minutes</a><br><span class="small">{roll}</span><br><span class="muted small">Approves: {e(l["record_what"])} ({money(l["record_amount"])}, {e(l["record_date"])}). Matched by {e(l["match_method"].replace("_", " ").replace("+", ", "))}.</span></li>'''
-        votes = f'''<section class="tx-sec"{secg({x["vote"]["body"] for x in p["votes"]})}><div class="sec-hd"><h2 id="votes">Votes that approved its contracts</h2><span class="muted">How each member voted, from the minutes</span></div>
-    <ul class="plain mm-list">{vr}</ul>
+            oc = str(v_.get('outcome') or '')
+            tone = 'teal' if re.match(r'(?i)pass|approv|adopt|carr', oc) else 'salmon' if re.match(r'(?i)fail|den|reject', oc) else 'blue'
+            vr += f'''<li class="ui-vc"{data_g(v_["body"])}><span class="ui-pill t-{tone}">{e(oc[:1].upper() + oc[1:]) or "Vote"}</span><span class="ui-vc-t"><span>{e(v_.get("headline") or v_.get("item"))}{(" · " + money(v_["amount"])) if v_.get("amount") else ""}</span>
+        <small>{e(v_["date"])} · {e(x["board"])}{" · " + e(v_["tally"]) if v_.get("tally") else ""} · <a class="src" href="{e(v_.get("source_url"))}" target="_blank" rel="noopener">Minutes</a></small><span class="small">{roll}</span><small>Approves: {e(l["record_what"])} ({money(l["record_amount"])}, {e(l["record_date"])}). Matched by {e(l["match_method"].replace("_", " ").replace("+", ", "))}.</small></span></li>'''
+        votes = f'''<section class="tx-sec"{secg({x["vote"]["body"] for x in p["votes"]})}><div class="sec-hd"><h2 id="votes" data-tile="Votes">Votes that approved its contracts</h2><span class="muted">How each member voted, from the minutes</span></div>
+    <ul class="plain ui-votes">{vr}</ul>
     <p class="note">Votes are linked to a contract when the same government voted within 45 days and the minutes agree with the agenda record in at least two ways (company name, bid number, project words or amount). Many contracts are approved on a consent agenda with routine items in one vote. {e(NOTE)}</p></section>'''
     aka = [a for a in v['aliases'] if a != v['name'] and not a.isupper()]
+    # the facts card at the top right: who pays it and the years on file
+    from entity_links import gov as gov_link
+    ds = sorted(m.group(0) for r in p['recs'] for m in [re.search(r'(19|20)\d\d', str(r.get('date') or ''))] if m)
+    facts = [('Works for', '<ul>' + ''.join(f'<li>{gov_link(g)}</li>' for g in p['govs'][:6]) + (f'<li class="muted">and {len(p["govs"]) - 6} more</li>' if len(p['govs']) > 6 else '') + '</ul>')] if p['govs'] else []
+    if ds:
+        facts.append(('On file', f'{ds[0]}{"–" + ds[-1] if ds[-1] != ds[0] else ""}<span>{len(p["recs"])} money record{"s" if len(p["recs"]) != 1 else ""}</span>'))
+    facts_h = '<dl class="ui-facts">' + ''.join(f'<div><dt>{k}</dt><dd>{x}</dd></div>' for k, x in facts) + '</dl>' if facts else ''
+    card = f'<a class="pill" href="/public-money/contracts?company={e(vid)}#company">Company card on Contracts</a>' if any(p['cnt'].get(k) for k in ('contract', 'change_order', 'emergency', 'register')) else ''
     ev = f'<p class="note">Spellings combined because: {e(v["merge_evidence"])}</p>' if v.get('merge_evidence') else ''
     return f'''<div class="page tax">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow"><a href="{BASE}/">Vendors</a> · {e(", ".join(gname(g) for g in p["govs"]))}</span><h1>{e(v["name"])}</h1>
     <p class="lede">Every record on this site that names {e(v["name"])}: {len(p["recs"])} money record{"s" if len(p["recs"]) != 1 else ""}{f", {len(p['gifts'])} campaign gift match{'es' if len(p['gifts']) != 1 else ''}" if p['gifts'] else ""}{f" and {len(p['votes'])} recorded vote{'s' if len(p['votes']) != 1 else ''} on its contracts" if p['votes'] else ""}.</p>
     {f'<p class="small muted">Also written as: {e(" · ".join(aka))}</p>' if aka else ""}</div>
-    {f'<div class="stamp"><a class="pill" href="/public-money/contracts?company={e(vid)}#company">Company card on Contracts</a></div>' if any(p['cnt'].get(k) for k in ('contract', 'change_order', 'emergency', 'register')) else ''}</header>
+    {f'<div class="stamp">{facts_h}{card}</div>' if facts_h or card else ''}</header>
   {city_bar(gk, hide=True) if len(gk) > 1 else ''}
   <div class="kpis">{kp}</div>
   {secs}{gifts}{votes}
