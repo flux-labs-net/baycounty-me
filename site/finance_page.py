@@ -244,6 +244,11 @@ dialog.drawer::backdrop{background:rgba(10,14,20,.4)}
   .pk-keep,.dept,.t tr,.pk-find{break-inside:avoid}
   .packet .h2{break-after:avoid}
   .packet .legend{break-before:avoid;flex-wrap:nowrap;white-space:nowrap}
+  /* Short cells stay on one line; only the finding text may wrap. Tighter padding gives it the room. */
+  .packet table.t{font-size:8.6pt}
+  .packet .t th,.packet .t td{padding:5px 6px;white-space:nowrap}
+  .packet table.t.na td:nth-child(2){white-space:normal;width:100%}
+  .packet .t thead{display:table-header-group}
   .packet .foot{display:none}
 }
 """
