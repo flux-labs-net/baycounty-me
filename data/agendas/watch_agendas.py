@@ -629,6 +629,23 @@ class Run:
         return notes
 
 
+def notice_html(subject, items, more=""):
+    """Full HTML document for the admin notice. Spam filters score bare HTML fragments and long bare URLs as
+    spam-like, so each file is a short link with its label, inside a real <html><body>."""
+    e = fm.html.escape
+    li = "".join('<p style="margin:0 0 10px 0">%s<br><a href="%s" style="color:#1E3A76">Open the file</a></p>' % (e(label), e(url, quote=True))
+                 for label, url in items)
+    if more:
+        li += "<p>%s</p>" % e(more)
+    return ('<!DOCTYPE html><html><head><meta charset="UTF-8"><title>%s</title></head>'
+            '<body style="margin:0;padding:24px;background:#F6F8FB;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:22px;color:#161B24">'
+            '<div style="max-width:600px;margin:0 auto;background:#FFFFFF;border:1px solid #E1E6ED;padding:20px 24px">'
+            '<p style="font-size:18px;font-weight:bold;margin:0 0 16px 0">BayCounty.me agendas</p>%s'
+            '<p><a href="https://baycounty.me/admin" style="color:#1E3A76">Open the Agendas tab</a></p>'
+            '<p style="font-size:12px;color:#5A6372;margin:16px 0 0 0">Sent to BayCounty.me admins when the agenda watcher finds new files.</p>'
+            '</div></body></html>') % (e(subject), li)
+
+
 def notify(run):
     key, to = os.environ.get("RESEND_KEY"), os.environ.get("ADMIN_EMAILS") or "hello@fluxlabs.net"
     if not (key and run.fresh):
@@ -647,8 +664,10 @@ def notify(run):
     n_new = sum(1 for s, _ in rows if s == "new")
     subject = "BayCounty.me agendas: %d new, %d updated" % (n_new, len(rows) - n_new)
     text = "\n".join(lines) + "\n\nReview them on https://baycounty.me/admin (Agendas tab).\n"
-    html = "<p>" + "</p><p>".join(fm.html.escape(l).replace("\n  ", "<br>") for l in lines) + \
-        '</p><p><a href="https://baycounty.me/admin">Open the Agendas tab</a></p>'
+    html = notice_html(subject, [(("NEW" if s == "new" else "UPDATED") + ": %s %s%s" % (
+        d["board"] or d["source"], d["kind"], " for " + d["meeting_date"] if d["meeting_date"] else "") +
+        (" (%s)" % d["title"] if d["title"] else ""), d["url"]) for s, d in rows[:40]],
+        "...and %d more on the Agendas tab." % more if more else "")
     body = json.dumps({"from": os.environ.get("ALERTS_FROM") or "BayCounty.me <hello@baycounty.me>",
                        "to": [a for a in re.split(r"[\s,;]+", to) if a], "subject": subject, "text": text, "html": html}).encode()
     req = urllib.request.Request("https://api.resend.com/emails", data=body, method="POST",
