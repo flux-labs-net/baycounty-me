@@ -3,9 +3,12 @@
   const $ = s => document.querySelector(s);
   // Show script errors on the page itself, so a broken tab says why instead of staying blank.
   const oops = msg => {
-    const main = document.querySelector('.ad-main'); if (!main) return;
     let box = document.getElementById('ad-oops');
-    if (!box) { box = document.createElement('div'); box.id = 'ad-oops'; box.className = 'banner bad'; main.prepend(box); }
+    if (!box) {
+      box = document.createElement('div'); box.id = 'ad-oops'; box.className = 'banner bad';
+      box.style.cssText = 'position:fixed;z-index:100;left:16px;right:16px;bottom:16px;max-width:720px;margin:0 auto;box-shadow:0 8px 30px rgba(0,0,0,.18)';
+      document.body.append(box);
+    }
     box.innerHTML = '<div><b>Something broke on this page.</b><div class="small muted"></div></div>';
     box.querySelector('.small').textContent = String(msg).slice(0, 400);
   };
