@@ -44,7 +44,7 @@ const PAGES = {
   '/connections': {datasets: ['connections-payees', 'connections-payments', 'connections-links', 'connections-gifts', 'money-map-gifts', 'money-map-contracts', 'money-map-votes']},
   '/public-money/vendors': {datasets: ['vendors-directory', 'contracts', 'vendor-payments', 'cra-payments', 'campaign-contributions-2026', 'entity-profiles', 'entity-connections'],
     endpoints: ['/entities/{id}']},
-  '/people': {datasets: ['entity-profiles', 'people-directory', 'owner-gifts', 'officials-pay', 'salary-leaders'], endpoints: ['/entities']},
+  '/people': {datasets: ['entity-profiles', 'people-directory', 'owner-gifts', 'officials-pay', 'salary-leaders', 'officeholder-terms'], endpoints: ['/entities']},
   // one shell page for every other profile: /profile/<kind>/<id> (vercel.json rewrite), filled from the API
   '/profile': {datasets: ['entity-profiles', 'entity-connections', 'nonprofit-officials', 'official-businesses', 'official-business-links', 'shared-owner-groups', 'owner-gifts'],
     endpoints: ['/entities/{id}']},
@@ -53,10 +53,10 @@ const PAGES = {
 // a government's page carries the dashboards' records for that government (gov.js narrows them by city and year), and its
 // whole budget, debt, audits and savings ideas (site/gov_detail.py), which used to be dashboards of their own
 const PREFIXES = {'/governments/': {datasets: ['government-profiles', 'government-years', 'budget-detail', 'officials-pay', 'votes', 'meetings', 'contracts', 'cra-payments',
-  'accountability-projects', 'sales-tax-projects', 'fema-michael-projects', 'savings-opportunities', 'savings-evidence', 'debt', 'bonds', 'audit-findings', 'budget-per-resident', 'entity-connections'], endpoints: ['/governments/{slug}', '/entities/{id}']},
+  'accountability-projects', 'sales-tax-projects', 'fema-michael-projects', 'savings-opportunities', 'savings-evidence', 'debt', 'bonds', 'audit-findings', 'budget-per-resident', 'entity-connections', 'officeholder-terms'], endpoints: ['/governments/{slug}', '/entities/{id}', '/officials']},
   // each official's and candidate's profile (site/people_pages.py)
   '/people/': {datasets: ['entity-profiles', 'entity-connections', 'people-directory', 'member-votes', 'campaign-finance', 'candidates-2026', 'officials-pay', 'salary-leaders',
-    'money-map-votes', 'nonprofit-officials', 'official-businesses', 'official-business-links', 'shared-owner-groups', 'owner-gifts'], endpoints: ['/entities/{id}']},
+    'money-map-votes', 'nonprofit-officials', 'official-businesses', 'official-business-links', 'shared-owner-groups', 'owner-gifts', 'officeholder-terms'], endpoints: ['/entities/{id}']},
   '/public-money/vendors/': {datasets: ['vendors-directory', 'contracts', 'change-orders', 'emergency-purchases', 'vendor-payments', 'cra-payments', 'campaign-contributions-2026', 'votes',
     'entity-profiles', 'entity-connections'], endpoints: ['/entities/{id}']}};
 

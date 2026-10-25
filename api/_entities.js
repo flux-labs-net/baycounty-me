@@ -24,6 +24,7 @@ const RELATION = {
   gift: ['gave to the campaign of', 'got campaign gifts from'],
   voted: ['voted on contracts with', 'had contracts voted on by'],
   serves: ['serves', 'is served by'],
+  served: ['served', 'was served by'],
   board: ['sits on the board of', 'has on its board'],
   runs: ['runs', 'is run by'],
   grant: ['gave a grant to', 'got a grant from'],

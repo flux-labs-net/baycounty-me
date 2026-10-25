@@ -1,6 +1,6 @@
 {
  "about": "Elected officials, department leaders and 2026 local candidates named in the site's datasets, one id per person. Names are matched on first and last name with common nicknames (Doug = Douglas, Chris = Christopher, Dave = David ...), ignoring middle initials, titles and notes in parentheses; \"(D2)\" style suffixes become the district field. People who appear under more than one government are listed in multi_government for checking. No other people are included.",
- "count": 140,
+ "count": 202,
  "people": [
   {
    "id": "adrian-welle",
@@ -23,6 +23,60 @@
      "role": "board member",
      "gov_id": "mb",
      "source": "votes"
+    },
+    {
+     "role": "former council member, Group 4",
+     "gov_id": "mb",
+     "seat": "Group 4",
+     "years": "2022–2024",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "al-cathey",
+   "name": "Al Cathey",
+   "aliases": [
+    "Al Cathey"
+   ],
+   "district": null,
+   "gov_ids": [
+    "mb"
+   ],
+   "roles": [
+    {
+     "role": "former mayor",
+     "gov_id": "mb",
+     "seat": "Mayor (Group 1)",
+     "years": "until 2015",
+     "source": "officeholders"
+    },
+    {
+     "role": "former mayor",
+     "gov_id": "mb",
+     "seat": "Mayor (Group 1)",
+     "years": "2017–2023",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "al-shortt",
+   "name": "Al Shortt",
+   "aliases": [
+    "Al Shortt"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pcb"
+   ],
+   "roles": [
+    {
+     "role": "former city manager",
+     "gov_id": "pcb",
+     "seat": "City Manager",
+     "years": "2021–2021",
+     "source": "officeholders"
     }
    ]
   },
@@ -57,6 +111,13 @@
      "role": "officeholder: Panama City Mayor",
      "gov_id": "pc",
      "source": "campaign"
+    },
+    {
+     "role": "Mayor",
+     "gov_id": "pc",
+     "seat": "Mayor",
+     "years": "since 2025",
+     "source": "officeholders"
     }
    ]
   },
@@ -114,6 +175,13 @@
      "role": "officeholder: Parker Mayor",
      "gov_id": "parker",
      "source": "campaign"
+    },
+    {
+     "role": "Mayor",
+     "gov_id": "parker",
+     "seat": "Mayor",
+     "years": "since 2021",
+     "source": "officeholders"
     }
    ]
   },
@@ -148,6 +216,53 @@
      "role": "officeholder: School Board, District 2",
      "gov_id": "schools",
      "source": "campaign"
+    },
+    {
+     "role": "School board member, District 2",
+     "gov_id": "schools",
+     "seat": "District 2",
+     "years": "since 2022",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "antonius-barnes",
+   "name": "Antonius Barnes",
+   "aliases": [
+    "Antonius Barnes"
+   ],
+   "district": null,
+   "gov_ids": [
+    "lh"
+   ],
+   "roles": [
+    {
+     "role": "former city commissioner, Seat 2",
+     "gov_id": "lh",
+     "seat": "Seat 2",
+     "years": "until 2019",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "april-gibson",
+   "name": "April Gibson",
+   "aliases": [
+    "April Gibson"
+   ],
+   "district": null,
+   "gov_ids": [
+    "parker"
+   ],
+   "roles": [
+    {
+     "role": "former council member, Seat 3",
+     "gov_id": "parker",
+     "seat": "Seat 3",
+     "years": "2021–2023",
+     "source": "officeholders"
     }
    ]
   },
@@ -206,6 +321,26 @@
    ]
   },
   {
+   "id": "bill-husfelt",
+   "name": "Bill Husfelt",
+   "aliases": [
+    "Bill Husfelt"
+   ],
+   "district": null,
+   "gov_ids": [
+    "schools"
+   ],
+   "roles": [
+    {
+     "role": "former superintendent",
+     "gov_id": "schools",
+     "seat": "Superintendent",
+     "years": "until 2023",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
    "id": "bill-kinsaul",
    "name": "Bill Kinsaul",
    "aliases": [
@@ -230,6 +365,53 @@
      "role": "officeholder: Clerk of Circuit Court & Comptroller",
      "gov_id": "clerk",
      "source": "campaign"
+    }
+   ]
+  },
+  {
+   "id": "billy-rader",
+   "name": "Billy Rader",
+   "aliases": [
+    "Billy Rader"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pc"
+   ],
+   "roles": [
+    {
+     "role": "former city commissioner, Ward 3",
+     "gov_id": "pc",
+     "seat": "Ward 3",
+     "years": "until 2023",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "bob-majka",
+   "name": "Bob Majka",
+   "aliases": [
+    "Bob Majka",
+    "Robert (Bob) Majka"
+   ],
+   "district": null,
+   "gov_ids": [
+    "county",
+    "port"
+   ],
+   "roles": [
+    {
+     "role": "Executive Director",
+     "gov_id": "port",
+     "source": "salaries"
+    },
+    {
+     "role": "former county manager",
+     "gov_id": "county",
+     "seat": "County Manager",
+     "years": "2015–2026",
+     "source": "officeholders"
     }
    ]
   },
@@ -264,6 +446,27 @@
      "role": "officeholder: Callaway Commissioner, Ward 3",
      "gov_id": "cw",
      "source": "campaign"
+    },
+    {
+     "role": "former mayor",
+     "gov_id": "cw",
+     "seat": "Mayor",
+     "years": "2016–2017",
+     "source": "officeholders"
+    },
+    {
+     "role": "former city commissioner, Ward 3",
+     "gov_id": "cw",
+     "seat": "Ward 3",
+     "years": "until 2016",
+     "source": "officeholders"
+    },
+    {
+     "role": "City commissioner, Ward 3",
+     "gov_id": "cw",
+     "seat": "Ward 3",
+     "years": "since 2020",
+     "source": "officeholders"
     }
    ]
   },
@@ -309,6 +512,53 @@
      "role": "2026 candidate: City of Callaway Commissioner, Ward 1",
      "gov_id": "cw",
      "source": "candidates_2026"
+    },
+    {
+     "role": "City commissioner, Ward 1",
+     "gov_id": "cw",
+     "seat": "Ward 1",
+     "years": "since 2025",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "bobby-pollock",
+   "name": "Bobby Pollock",
+   "aliases": [
+    "Bobby Pollock"
+   ],
+   "district": null,
+   "gov_ids": [
+    "mb"
+   ],
+   "roles": [
+    {
+     "role": "former council member, Group 3",
+     "gov_id": "mb",
+     "seat": "Group 3",
+     "years": "2019–2023",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "brandon-aldridge",
+   "name": "Brandon Aldridge",
+   "aliases": [
+    "Brandon Aldridge"
+   ],
+   "district": null,
+   "gov_ids": [
+    "lh"
+   ],
+   "roles": [
+    {
+     "role": "former city commissioner, Seat 1",
+     "gov_id": "lh",
+     "seat": "Seat 1",
+     "years": "2019–2023",
+     "source": "officeholders"
     }
    ]
   },
@@ -327,6 +577,33 @@
      "role": "Assistant City Manager and Interim City Clerk-Treasurer",
      "gov_id": "pc",
      "source": "salaries"
+    },
+    {
+     "role": "former city manager",
+     "gov_id": "pc",
+     "seat": "City Manager",
+     "years": "2023–2024",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "brenda-ruthven",
+   "name": "Brenda Ruthven",
+   "aliases": [
+    "Brenda Ruthven"
+   ],
+   "district": null,
+   "gov_ids": [
+    "schools"
+   ],
+   "roles": [
+    {
+     "role": "former school board member, District 2",
+     "gov_id": "schools",
+     "seat": "District 2",
+     "years": "2020–2022",
+     "source": "officeholders"
     }
    ]
   },
@@ -379,6 +656,13 @@
      "role": "officeholder: Panama City Commission, Ward III",
      "gov_id": "pc",
      "source": "campaign"
+    },
+    {
+     "role": "City commissioner, Ward 3",
+     "gov_id": "pc",
+     "seat": "Ward 3",
+     "years": "since 2023",
+     "source": "officeholders"
     }
    ]
   },
@@ -425,6 +709,13 @@
      "role": "2026 candidate: City of Springfield Mayor",
      "gov_id": "sp",
      "source": "candidates_2026"
+    },
+    {
+     "role": "former city commissioner, Ward 1",
+     "gov_id": "sp",
+     "seat": "Ward 1",
+     "years": "2016–2023",
+     "source": "officeholders"
     }
    ]
   },
@@ -493,6 +784,26 @@
    ]
   },
   {
+   "id": "chris-hubbard",
+   "name": "Chris Hubbard",
+   "aliases": [
+    "Chris Hubbard"
+   ],
+   "district": null,
+   "gov_ids": [
+    "mb"
+   ],
+   "roles": [
+    {
+     "role": "former city administrator",
+     "gov_id": "mb",
+     "seat": "City Administrator",
+     "years": "2023–2024",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
    "id": "chris-lightfoot",
    "name": "Chris Lightfoot",
    "aliases": [
@@ -512,6 +823,13 @@
      "role": "City Manager",
      "gov_id": "lh",
      "source": "officials-pay"
+    },
+    {
+     "role": "City Manager",
+     "gov_id": "lh",
+     "seat": "City Manager",
+     "years": "since 2025",
+     "source": "officeholders"
     }
    ]
   },
@@ -557,6 +875,33 @@
      "role": "2026 candidate: Bay District School Board, District 3",
      "gov_id": "schools",
      "source": "candidates_2026"
+    },
+    {
+     "role": "School board member, District 3",
+     "gov_id": "schools",
+     "seat": "District 3",
+     "years": "since 2022",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "chris-truitt",
+   "name": "Chris Truitt",
+   "aliases": [
+    "Chris Truitt"
+   ],
+   "district": null,
+   "gov_ids": [
+    "mb"
+   ],
+   "roles": [
+    {
+     "role": "former city administrator",
+     "gov_id": "mb",
+     "seat": "City Administrator",
+     "years": "2024–2025",
+     "source": "officeholders"
     }
    ]
   },
@@ -601,6 +946,13 @@
      "role": "2026 candidate: City of Springfield Commissioner, Ward 4",
      "gov_id": "sp",
      "source": "candidates_2026"
+    },
+    {
+     "role": "City commissioner, Ward 4",
+     "gov_id": "sp",
+     "seat": "Ward 4",
+     "years": "since 2022",
+     "source": "officeholders"
     }
    ]
   },
@@ -640,6 +992,13 @@
      "role": "officeholder: Bay County Commission, District 5",
      "gov_id": "county",
      "source": "campaign"
+    },
+    {
+     "role": "County commissioner, District 5",
+     "gov_id": "county",
+     "seat": "District 5",
+     "years": "since 2022",
+     "source": "officeholders"
     }
    ]
   },
@@ -705,6 +1064,33 @@
      "role": "Commissioner",
      "gov_id": "lh",
      "source": "salaries"
+    },
+    {
+     "role": "City commissioner, Seat 4",
+     "gov_id": "lh",
+     "seat": "Seat 4",
+     "years": "since 2026",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "dan-russell",
+   "name": "Dan Russell",
+   "aliases": [
+    "Dan Russell"
+   ],
+   "district": null,
+   "gov_ids": [
+    "lh"
+   ],
+   "roles": [
+    {
+     "role": "former city commissioner, Seat 3",
+     "gov_id": "lh",
+     "seat": "Seat 3",
+     "years": "2017–2021",
+     "source": "officeholders"
     }
    ]
   },
@@ -772,6 +1158,13 @@
      "role": "officeholder: Bay County Commission, District 1",
      "gov_id": "county",
      "source": "campaign"
+    },
+    {
+     "role": "County commissioner, District 1",
+     "gov_id": "county",
+     "seat": "District 1",
+     "years": "since 2024",
+     "source": "officeholders"
     }
    ]
   },
@@ -817,6 +1210,13 @@
      "role": "2026 candidate: City of Lynn Haven Mayor (partial term)",
      "gov_id": "lh",
      "source": "candidates_2026"
+    },
+    {
+     "role": "Mayor",
+     "gov_id": "lh",
+     "seat": "Mayor",
+     "years": "since 2026",
+     "source": "officeholders"
     }
    ]
   },
@@ -887,6 +1287,13 @@
      "role": "officeholder: Callaway Commissioner, Ward 2",
      "gov_id": "cw",
      "source": "campaign"
+    },
+    {
+     "role": "City commissioner, Ward 2",
+     "gov_id": "cw",
+     "seat": "Ward 2",
+     "years": "since 2018",
+     "source": "officeholders"
     }
    ]
   },
@@ -905,6 +1312,26 @@
      "role": "Deputy Superintendent - Teaching & Learning",
      "gov_id": "schools",
      "source": "salaries"
+    }
+   ]
+  },
+  {
+   "id": "doug-baber",
+   "name": "Doug Baber",
+   "aliases": [
+    "Doug Baber"
+   ],
+   "district": null,
+   "gov_ids": [
+    "mb"
+   ],
+   "roles": [
+    {
+     "role": "former city administrator",
+     "gov_id": "mb",
+     "seat": "City Administrator",
+     "years": "2021–2023",
+     "source": "officeholders"
     }
    ]
   },
@@ -944,6 +1371,13 @@
      "role": "officeholder: Bay County Commission, District 3",
      "gov_id": "county",
      "source": "campaign"
+    },
+    {
+     "role": "County commissioner, District 3",
+     "gov_id": "county",
+     "seat": "District 3",
+     "years": "since 2024",
+     "source": "officeholders"
     }
    ]
   },
@@ -984,6 +1418,13 @@
      "role": "officeholder: Bay County Commission, District 4",
      "gov_id": "county",
      "source": "campaign"
+    },
+    {
+     "role": "County commissioner, District 4",
+     "gov_id": "county",
+     "seat": "District 4",
+     "years": "since 2020",
+     "source": "officeholders"
     }
    ]
   },
@@ -1007,6 +1448,13 @@
      "role": "City Manager",
      "gov_id": "pcb",
      "source": "officials-pay"
+    },
+    {
+     "role": "City Manager",
+     "gov_id": "pcb",
+     "seat": "City Manager",
+     "years": "since 2021",
+     "source": "officeholders"
     }
    ]
   },
@@ -1030,6 +1478,26 @@
      "role": "City Manager",
      "gov_id": "cw",
      "source": "officials-pay"
+    }
+   ]
+  },
+  {
+   "id": "eddie-cook",
+   "name": "Eddie Cook",
+   "aliases": [
+    "Eddie Cook"
+   ],
+   "district": null,
+   "gov_ids": [
+    "cw"
+   ],
+   "roles": [
+    {
+     "role": "City Manager",
+     "gov_id": "cw",
+     "seat": "City Manager",
+     "years": "since 2017",
+     "source": "officeholders"
     }
    ]
   },
@@ -1064,6 +1532,13 @@
      "role": "officeholder: Mexico Beach Council, Group 2",
      "gov_id": "mb",
      "source": "campaign"
+    },
+    {
+     "role": "Council member, Group 2",
+     "gov_id": "mb",
+     "seat": "Group 2",
+     "years": "since 2025",
+     "source": "officeholders"
     }
    ]
   },
@@ -1098,6 +1573,93 @@
      "role": "officeholder: Panama City Beach Council, Ward 2",
      "gov_id": "pcb",
      "source": "campaign"
+    },
+    {
+     "role": "Council member, Ward 2",
+     "gov_id": "pcb",
+     "seat": "Ward 2",
+     "years": "since 2024",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "frank-mancinelli",
+   "name": "Frank Mancinelli",
+   "aliases": [
+    "Frank Mancinelli"
+   ],
+   "district": null,
+   "gov_ids": [
+    "cw"
+   ],
+   "roles": [
+    {
+     "role": "former city commissioner, Ward 4",
+     "gov_id": "cw",
+     "seat": "Ward 4",
+     "years": "2020–2022",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "gayle-oberst",
+   "name": "Gayle Oberst",
+   "aliases": [
+    "Gayle Oberst"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pcb"
+   ],
+   "roles": [
+    {
+     "role": "former mayor",
+     "gov_id": "pcb",
+     "seat": "Mayor",
+     "years": "until 2016",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "geoff-mcconnell",
+   "name": "Geoff McConnell",
+   "aliases": [
+    "Geoff McConnell"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pcb"
+   ],
+   "roles": [
+    {
+     "role": "former council member, Ward 3",
+     "gov_id": "pcb",
+     "seat": "Ward 3",
+     "years": "2018–2022",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "george-gainer",
+   "name": "George Gainer",
+   "aliases": [
+    "George Gainer"
+   ],
+   "district": null,
+   "gov_ids": [
+    "county"
+   ],
+   "roles": [
+    {
+     "role": "former county commissioner, District 2",
+     "gov_id": "county",
+     "seat": "District 2",
+     "years": "until 2016",
+     "source": "officeholders"
     }
    ]
   },
@@ -1121,6 +1683,13 @@
      "role": "2026 candidate: Bay District School Board, District 2",
      "gov_id": "schools",
      "source": "candidates_2026"
+    },
+    {
+     "role": "former school board member, District 2",
+     "gov_id": "schools",
+     "seat": "District 2",
+     "years": "until 2019",
+     "source": "officeholders"
     }
    ]
   },
@@ -1171,6 +1740,26 @@
    ]
   },
   {
+   "id": "greg-brudnicki",
+   "name": "Greg Brudnicki",
+   "aliases": [
+    "Greg Brudnicki"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pc"
+   ],
+   "roles": [
+    {
+     "role": "former mayor",
+     "gov_id": "pc",
+     "seat": "Mayor",
+     "years": "until 2023",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
    "id": "greg-porta",
    "name": "Greg Porta",
    "aliases": [
@@ -1190,6 +1779,46 @@
      "role": "2026 candidate: Lake Powell Residential Golf Community Development District, Seat 2",
      "gov_id": "lake_powell_cdd",
      "source": "candidates_2026"
+    }
+   ]
+  },
+  {
+   "id": "guy-tunnell",
+   "name": "Guy Tunnell",
+   "aliases": [
+    "Guy Tunnell"
+   ],
+   "district": null,
+   "gov_ids": [
+    "county"
+   ],
+   "roles": [
+    {
+     "role": "former county commissioner, District 4",
+     "gov_id": "county",
+     "seat": "District 4",
+     "years": "until 2018",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "hector-solis",
+   "name": "Hector Solis",
+   "aliases": [
+    "Hector Solis"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pcb"
+   ],
+   "roles": [
+    {
+     "role": "former council member, Ward 4",
+     "gov_id": "pcb",
+     "seat": "Ward 4",
+     "years": "2016–2020",
+     "source": "officeholders"
     }
    ]
   },
@@ -1260,6 +1889,13 @@
      "role": "officeholder: Springfield Commissioner, Ward 1",
      "gov_id": "sp",
      "source": "campaign"
+    },
+    {
+     "role": "City commissioner, Ward 1",
+     "gov_id": "sp",
+     "seat": "Ward 1",
+     "years": "since 2023",
+     "source": "officeholders"
     }
    ]
   },
@@ -1304,6 +1940,13 @@
      "role": "2026 candidate: City of Springfield Commissioner, Ward 3",
      "gov_id": "sp",
      "source": "candidates_2026"
+    },
+    {
+     "role": "City commissioner, Ward 3",
+     "gov_id": "sp",
+     "seat": "Ward 3",
+     "years": "since 2015",
+     "source": "officeholders"
     }
    ]
   },
@@ -1397,6 +2040,13 @@
      "role": "officeholder: Lynn Haven Commissioner, Seat 3",
      "gov_id": "lh",
      "source": "campaign"
+    },
+    {
+     "role": "City commissioner, Seat 3",
+     "gov_id": "lh",
+     "seat": "Seat 3",
+     "years": "since 2021",
+     "source": "officeholders"
     }
    ]
   },
@@ -1449,6 +2099,13 @@
      "role": "officeholder: Panama City Commission, Ward II",
      "gov_id": "pc",
      "source": "campaign"
+    },
+    {
+     "role": "City commissioner, Ward 2",
+     "gov_id": "pc",
+     "seat": "Ward 2",
+     "years": "since 2023",
+     "source": "officeholders"
     }
    ]
   },
@@ -1467,6 +2124,13 @@
      "role": "Assistant City Manager",
      "gov_id": "pc",
      "source": "salaries"
+    },
+    {
+     "role": "former city manager",
+     "gov_id": "pc",
+     "seat": "City Manager",
+     "years": "2018–2018",
+     "source": "officeholders"
     }
    ]
   },
@@ -1491,6 +2155,53 @@
      "role": "board member",
      "gov_id": "mb",
      "source": "votes"
+    },
+    {
+     "role": "former council member, Group 4",
+     "gov_id": "mb",
+     "seat": "Group 4",
+     "years": "2024–2026",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "jeff-brown",
+   "name": "Jeff Brown",
+   "aliases": [
+    "Jeff Brown"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pc"
+   ],
+   "roles": [
+    {
+     "role": "former city manager",
+     "gov_id": "pc",
+     "seat": "City Manager",
+     "years": "2015–2018",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "jeff-tendler",
+   "name": "Jeff Tendler",
+   "aliases": [
+    "Jeff Tendler"
+   ],
+   "district": null,
+   "gov_ids": [
+    "mb"
+   ],
+   "roles": [
+    {
+     "role": "former council member, Group 5",
+     "gov_id": "mb",
+     "seat": "Group 5",
+     "years": "2014–2016",
+     "source": "officeholders"
     }
    ]
   },
@@ -1533,6 +2244,13 @@
      "role": "board member",
      "gov_id": "pc",
      "source": "votes"
+    },
+    {
+     "role": "former city commissioner, Ward 1",
+     "gov_id": "pc",
+     "seat": "Ward 1",
+     "years": "2017–2025",
+     "source": "officeholders"
     }
    ]
   },
@@ -1568,6 +2286,13 @@
      "role": "officeholder: School Board, District 1",
      "gov_id": "schools",
      "source": "campaign"
+    },
+    {
+     "role": "School board member, District 1",
+     "gov_id": "schools",
+     "seat": "District 1",
+     "years": "since before 2015",
+     "source": "officeholders"
     }
    ]
   },
@@ -1592,6 +2317,13 @@
      "role": "board member",
      "gov_id": "mb",
      "source": "votes"
+    },
+    {
+     "role": "former council member, Group 2",
+     "gov_id": "mb",
+     "seat": "Group 2",
+     "years": "2019–2025",
+     "source": "officeholders"
     }
    ]
   },
@@ -1616,6 +2348,13 @@
      "role": "board member",
      "gov_id": "lh",
      "source": "votes"
+    },
+    {
+     "role": "former mayor",
+     "gov_id": "lh",
+     "seat": "Mayor",
+     "years": "2021–2026",
+     "source": "officeholders"
     }
    ]
   },
@@ -1634,6 +2373,26 @@
      "role": "Deputy Superintendent - Business & Finance (CFO)",
      "gov_id": "schools",
      "source": "salaries"
+    }
+   ]
+  },
+  {
+   "id": "joe-wayne-walker",
+   "name": "Joe Wayne Walker",
+   "aliases": [
+    "Joe Wayne Walker"
+   ],
+   "district": null,
+   "gov_ids": [
+    "schools"
+   ],
+   "roles": [
+    {
+     "role": "former school board member, District 3",
+     "gov_id": "schools",
+     "seat": "District 3",
+     "years": "until 2018",
+     "source": "officeholders"
     }
    ]
   },
@@ -1664,7 +2423,8 @@
    ],
    "district": null,
    "gov_ids": [
-    "county"
+    "county",
+    "lh"
    ],
    "roles": [
     {
@@ -1676,6 +2436,20 @@
      "role": "County Manager",
      "gov_id": "county",
      "source": "officials-pay"
+    },
+    {
+     "role": "County Manager",
+     "gov_id": "county",
+     "seat": "County Manager",
+     "years": "since 2026",
+     "source": "officeholders"
+    },
+    {
+     "role": "former city manager",
+     "gov_id": "lh",
+     "seat": "City Manager",
+     "years": "until 2017",
+     "source": "officeholders"
     }
    ]
   },
@@ -1718,6 +2492,60 @@
      "role": "board member",
      "gov_id": "parker",
      "source": "votes"
+    },
+    {
+     "role": "former council member, Seat 3",
+     "gov_id": "parker",
+     "seat": "Seat 3",
+     "years": "until 2021",
+     "source": "officeholders"
+    },
+    {
+     "role": "former council member, Seat 4",
+     "gov_id": "parker",
+     "seat": "Seat 4",
+     "years": "2024–2026",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "john-kady",
+   "name": "John Kady",
+   "aliases": [
+    "John Kady"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pc"
+   ],
+   "roles": [
+    {
+     "role": "former city commissioner, Ward 1",
+     "gov_id": "pc",
+     "seat": "Ward 1",
+     "years": "until 2017",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "john-reichard",
+   "name": "John Reichard",
+   "aliases": [
+    "John Reichard"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pcb"
+   ],
+   "roles": [
+    {
+     "role": "former council member, Ward 1",
+     "gov_id": "pcb",
+     "seat": "Ward 1",
+     "years": "until 2018",
+     "source": "officeholders"
     }
    ]
   },
@@ -1759,6 +2587,53 @@
      "role": "City Manager",
      "gov_id": "pc",
      "source": "officials-pay"
+    },
+    {
+     "role": "City Manager",
+     "gov_id": "pc",
+     "seat": "City Manager",
+     "years": "since 2024",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "joseph-ashbrook",
+   "name": "Joseph Ashbrook",
+   "aliases": [
+    "Joseph Ashbrook"
+   ],
+   "district": null,
+   "gov_ids": [
+    "lh"
+   ],
+   "roles": [
+    {
+     "role": "former city commissioner, Seat 4",
+     "gov_id": "lh",
+     "seat": "Seat 4",
+     "years": "until 2017",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "joseph-townsend",
+   "name": "Joseph Townsend",
+   "aliases": [
+    "Joseph Townsend"
+   ],
+   "district": null,
+   "gov_ids": [
+    "cw"
+   ],
+   "roles": [
+    {
+     "role": "former city commissioner, Ward 4",
+     "gov_id": "cw",
+     "seat": "Ward 4",
+     "years": "2016–2018",
+     "source": "officeholders"
     }
    ]
   },
@@ -1811,6 +2686,33 @@
      "role": "officeholder: Panama City Commission, Ward IV",
      "gov_id": "pc",
      "source": "campaign"
+    },
+    {
+     "role": "City commissioner, Ward 4",
+     "gov_id": "pc",
+     "seat": "Ward 4",
+     "years": "since 2021",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "josie-strange",
+   "name": "Josie Strange",
+   "aliases": [
+    "Josie Strange"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pcb"
+   ],
+   "roles": [
+    {
+     "role": "former council member, Ward 3",
+     "gov_id": "pcb",
+     "seat": "Ward 3",
+     "years": "until 2018",
+     "source": "officeholders"
     }
    ]
   },
@@ -1840,6 +2742,20 @@
      "role": "2026 candidate: Lynn Haven Commissioner Seat 1",
      "gov_id": "lh",
      "source": "finance_2026"
+    },
+    {
+     "role": "former city commissioner, Seat 4",
+     "gov_id": "lh",
+     "seat": "Seat 4",
+     "years": "2017–2023",
+     "source": "officeholders"
+    },
+    {
+     "role": "former city commissioner, Seat 4",
+     "gov_id": "lh",
+     "seat": "Seat 4",
+     "years": "2025–2026",
+     "source": "officeholders"
     }
    ]
   },
@@ -1864,6 +2780,13 @@
      "role": "board member",
      "gov_id": "lh",
      "source": "votes"
+    },
+    {
+     "role": "former city commissioner, Seat 4",
+     "gov_id": "lh",
+     "seat": "Seat 4",
+     "years": "2023–2025",
+     "source": "officeholders"
     }
    ]
   },
@@ -1921,6 +2844,33 @@
      "role": "officeholder: Parker Council, Seat 3",
      "gov_id": "parker",
      "source": "campaign"
+    },
+    {
+     "role": "Council member, Seat 3",
+     "gov_id": "parker",
+     "seat": "Seat 3",
+     "years": "since 2024",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "keith-baker",
+   "name": "Keith Baker",
+   "aliases": [
+    "Keith Baker"
+   ],
+   "district": null,
+   "gov_ids": [
+    "county"
+   ],
+   "roles": [
+    {
+     "role": "former county commissioner, District 4",
+     "gov_id": "county",
+     "seat": "District 4",
+     "years": "2018–2020",
+     "source": "officeholders"
     }
    ]
   },
@@ -1961,9 +2911,30 @@
    ]
   },
   {
+   "id": "ken-jones",
+   "name": "Ken Jones",
+   "aliases": [
+    "Ken Jones"
+   ],
+   "district": null,
+   "gov_ids": [
+    "parker"
+   ],
+   "roles": [
+    {
+     "role": "former council member, Seat 1",
+     "gov_id": "parker",
+     "seat": "Seat 1",
+     "years": "until 2020",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
    "id": "kenneth-ayers",
    "name": "Kenneth L. Ayers, Jr.",
    "aliases": [
+    "Kenneth Ayers",
     "Kenneth L. Ayers, Jr."
    ],
    "district": null,
@@ -1991,6 +2962,13 @@
      "role": "officeholder: Callaway Commissioner, Ward 4",
      "gov_id": "cw",
      "source": "campaign"
+    },
+    {
+     "role": "City commissioner, Ward 4",
+     "gov_id": "cw",
+     "seat": "Ward 4",
+     "years": "since 2022",
+     "source": "officeholders"
     }
    ]
   },
@@ -2014,6 +2992,26 @@
      "role": "2026 candidate: Lake Powell Residential Golf Community Development District, Seat 5",
      "gov_id": "lake_powell_cdd",
      "source": "candidates_2026"
+    }
+   ]
+  },
+  {
+   "id": "kenneth-brown",
+   "name": "Kenneth Brown",
+   "aliases": [
+    "Kenneth Brown"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pc"
+   ],
+   "roles": [
+    {
+     "role": "former city commissioner, Ward 2",
+     "gov_id": "pc",
+     "seat": "Ward 2",
+     "years": "until 2023",
+     "source": "officeholders"
     }
    ]
   },
@@ -2107,6 +3105,13 @@
      "role": "officeholder: Mexico Beach Council, Group 3",
      "gov_id": "mb",
      "source": "campaign"
+    },
+    {
+     "role": "Council member, Group 3",
+     "gov_id": "mb",
+     "seat": "Group 3",
+     "years": "since 2023",
+     "source": "officeholders"
     }
    ]
   },
@@ -2136,6 +3141,53 @@
      "role": "Council Member (Group 4, appointed April 2026)",
      "gov_id": "mb",
      "source": "salaries"
+    },
+    {
+     "role": "Council member, Group 4",
+     "gov_id": "mb",
+     "seat": "Group 4",
+     "years": "since 2026",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "margo-anderson",
+   "name": "Margo Anderson",
+   "aliases": [
+    "Margo Anderson"
+   ],
+   "district": null,
+   "gov_ids": [
+    "lh"
+   ],
+   "roles": [
+    {
+     "role": "former mayor",
+     "gov_id": "lh",
+     "seat": "Mayor",
+     "years": "2015–2020",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "mario-gisbert",
+   "name": "Mario Gisbert",
+   "aliases": [
+    "Mario Gisbert"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pcb"
+   ],
+   "roles": [
+    {
+     "role": "former city manager",
+     "gov_id": "pcb",
+     "seat": "City Manager",
+     "years": "until 2020",
+     "source": "officeholders"
     }
    ]
   },
@@ -2148,6 +3200,7 @@
    "district": null,
    "gov_ids": [
     "county",
+    "pc",
     "schools"
    ],
    "roles": [
@@ -2165,6 +3218,20 @@
      "role": "officeholder: Superintendent of Schools",
      "gov_id": "schools",
      "source": "campaign"
+    },
+    {
+     "role": "Superintendent",
+     "gov_id": "schools",
+     "seat": "Superintendent",
+     "years": "since 2023",
+     "source": "officeholders"
+    },
+    {
+     "role": "former city manager",
+     "gov_id": "pc",
+     "seat": "City Manager",
+     "years": "2018–2023",
+     "source": "officeholders"
     }
    ]
   },
@@ -2194,6 +3261,13 @@
      "role": "Council Member",
      "gov_id": "parker",
      "source": "salaries"
+    },
+    {
+     "role": "Council member, Seat 4",
+     "gov_id": "parker",
+     "seat": "Seat 4",
+     "years": "since 2026",
+     "source": "officeholders"
     }
    ]
   },
@@ -2218,6 +3292,13 @@
      "role": "board member",
      "gov_id": "pcb",
      "source": "votes"
+    },
+    {
+     "role": "former mayor",
+     "gov_id": "pcb",
+     "seat": "Mayor",
+     "years": "2020–2024",
+     "source": "officeholders"
     }
    ]
   },
@@ -2236,6 +3317,26 @@
      "role": "Police Chief",
      "gov_id": "pc",
      "source": "salaries"
+    }
+   ]
+  },
+  {
+   "id": "mary-blackburn",
+   "name": "Mary Blackburn",
+   "aliases": [
+    "Mary Blackburn"
+   ],
+   "district": null,
+   "gov_ids": [
+    "mb"
+   ],
+   "roles": [
+    {
+     "role": "former council member, Group 2",
+     "gov_id": "mb",
+     "seat": "Group 2",
+     "years": "2014–2016",
+     "source": "officeholders"
     }
    ]
   },
@@ -2280,6 +3381,33 @@
      "role": "2026 candidate: City of Panama City Beach Council, Ward 3",
      "gov_id": "pcb",
      "source": "candidates_2026"
+    },
+    {
+     "role": "Council member, Ward 3",
+     "gov_id": "pcb",
+     "seat": "Ward 3",
+     "years": "since 2022",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "melba-covey",
+   "name": "Melba Covey",
+   "aliases": [
+    "Melba Covey"
+   ],
+   "district": null,
+   "gov_ids": [
+    "cw"
+   ],
+   "roles": [
+    {
+     "role": "former city commissioner, Ward 1",
+     "gov_id": "cw",
+     "seat": "Ward 1",
+     "years": "until 2018",
+     "source": "officeholders"
     }
    ]
   },
@@ -2298,6 +3426,20 @@
      "role": "City Administrator",
      "gov_id": "mb",
      "source": "salaries"
+    },
+    {
+     "role": "former city administrator",
+     "gov_id": "mb",
+     "seat": "City Administrator",
+     "years": "2024–2024",
+     "source": "officeholders"
+    },
+    {
+     "role": "City Administrator",
+     "gov_id": "mb",
+     "seat": "City Administrator",
+     "years": "since 2025",
+     "source": "officeholders"
     }
    ]
   },
@@ -2309,6 +3451,7 @@
    ],
    "district": null,
    "gov_ids": [
+    "cw",
     "pc"
    ],
    "roles": [
@@ -2316,6 +3459,13 @@
      "role": "Director, Development Services",
      "gov_id": "pc",
      "source": "salaries"
+    },
+    {
+     "role": "former city manager",
+     "gov_id": "cw",
+     "seat": "City Manager",
+     "years": "until 2017",
+     "source": "officeholders"
     }
    ]
   },
@@ -2350,6 +3500,53 @@
      "role": "officeholder: Panama City Beach Council, Ward 4",
      "gov_id": "pcb",
      "source": "campaign"
+    },
+    {
+     "role": "Council member, Ward 4",
+     "gov_id": "pcb",
+     "seat": "Ward 4",
+     "years": "since 2020",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "michael-manning",
+   "name": "Michael Manning",
+   "aliases": [
+    "Michael Manning"
+   ],
+   "district": null,
+   "gov_ids": [
+    "mb"
+   ],
+   "roles": [
+    {
+     "role": "former city administrator",
+     "gov_id": "mb",
+     "seat": "City Administrator",
+     "years": "2023–2023",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "michael-miller",
+   "name": "Michael Miller",
+   "aliases": [
+    "Michael Miller"
+   ],
+   "district": null,
+   "gov_ids": [
+    "parker"
+   ],
+   "roles": [
+    {
+     "role": "former council member, Seat 4",
+     "gov_id": "parker",
+     "seat": "Seat 4",
+     "years": "until 2019",
+     "source": "officeholders"
     }
    ]
   },
@@ -2397,6 +3594,33 @@
      "role": "board member",
      "gov_id": "pc",
      "source": "votes"
+    },
+    {
+     "role": "former mayor",
+     "gov_id": "pc",
+     "seat": "Mayor",
+     "years": "2023–2025",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "michael-white",
+   "name": "Michael White",
+   "aliases": [
+    "Michael White"
+   ],
+   "district": null,
+   "gov_ids": [
+    "lh"
+   ],
+   "roles": [
+    {
+     "role": "former city manager",
+     "gov_id": "lh",
+     "seat": "City Manager",
+     "years": "2017–2019",
+     "source": "officeholders"
     }
    ]
   },
@@ -2421,6 +3645,13 @@
      "role": "board member",
      "gov_id": "mb",
      "source": "votes"
+    },
+    {
+     "role": "former mayor",
+     "gov_id": "mb",
+     "seat": "Mayor (Group 1)",
+     "years": "2023–2024",
+     "source": "officeholders"
     }
    ]
   },
@@ -2439,6 +3670,94 @@
      "role": "2026 candidate: Lynn Haven Commissioner Seat 2",
      "gov_id": "lh",
      "source": "finance_2026"
+    }
+   ]
+  },
+  {
+   "id": "mike-jones",
+   "name": "Mike Jones",
+   "aliases": [
+    "Mike Jones"
+   ],
+   "district": null,
+   "gov_ids": [
+    "cw"
+   ],
+   "roles": [
+    {
+     "role": "former city commissioner, Ward 4",
+     "gov_id": "cw",
+     "seat": "Ward 4",
+     "years": "2018–2020",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "mike-nelson",
+   "name": "Mike Nelson",
+   "aliases": [
+    "Mike Nelson"
+   ],
+   "district": null,
+   "gov_ids": [
+    "county"
+   ],
+   "roles": [
+    {
+     "role": "former county commissioner, District 1",
+     "gov_id": "county",
+     "seat": "District 1",
+     "years": "until 2016",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "mike-nichols",
+   "name": "Mike Nichols",
+   "aliases": [
+    "Mike Nichols"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pc"
+   ],
+   "roles": [
+    {
+     "role": "former city commissioner, Ward 4",
+     "gov_id": "pc",
+     "seat": "Ward 4",
+     "years": "until 2021",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "mike-thomas",
+   "name": "Mike Thomas",
+   "aliases": [
+    "Mike Thomas"
+   ],
+   "district": null,
+   "gov_ids": [
+    "county",
+    "pcb"
+   ],
+   "roles": [
+    {
+     "role": "former county commissioner, District 5",
+     "gov_id": "county",
+     "seat": "District 5",
+     "years": "until 2016",
+     "source": "officeholders"
+    },
+    {
+     "role": "former mayor",
+     "gov_id": "pcb",
+     "seat": "Mayor",
+     "years": "2016–2020",
+     "source": "officeholders"
     }
    ]
   },
@@ -2512,6 +3831,26 @@
    ]
   },
   {
+   "id": "pamm-chapman",
+   "name": "Pamm Chapman",
+   "aliases": [
+    "Pamm Chapman"
+   ],
+   "district": null,
+   "gov_ids": [
+    "schools"
+   ],
+   "roles": [
+    {
+     "role": "former school board member, District 3",
+     "gov_id": "schools",
+     "seat": "District 3",
+     "years": "2018–2022",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
    "id": "pamn-henderson",
    "name": "Pamn Henderson",
    "aliases": [
@@ -2542,6 +3881,20 @@
      "role": "officeholder: Callaway Mayor",
      "gov_id": "cw",
      "source": "campaign"
+    },
+    {
+     "role": "Mayor",
+     "gov_id": "cw",
+     "seat": "Mayor",
+     "years": "since 2017",
+     "source": "officeholders"
+    },
+    {
+     "role": "former city commissioner, Ward 2",
+     "gov_id": "cw",
+     "seat": "Ward 2",
+     "years": "until 2017",
+     "source": "officeholders"
     }
    ]
   },
@@ -2594,6 +3947,13 @@
      "role": "officeholder: Lynn Haven Commissioner, Seat 2",
      "gov_id": "lh",
      "source": "campaign"
+    },
+    {
+     "role": "City commissioner, Seat 2",
+     "gov_id": "lh",
+     "seat": "Seat 2",
+     "years": "since 2019",
+     "source": "officeholders"
     }
    ]
   },
@@ -2628,6 +3988,13 @@
      "role": "officeholder: Panama City Beach Council, Ward 1",
      "gov_id": "pcb",
      "source": "campaign"
+    },
+    {
+     "role": "Council member, Ward 1",
+     "gov_id": "pcb",
+     "seat": "Ward 1",
+     "years": "since 2018",
+     "source": "officeholders"
     }
    ]
   },
@@ -2652,6 +4019,53 @@
      "role": "board member",
      "gov_id": "pcb",
      "source": "votes"
+    },
+    {
+     "role": "former council member, Ward 2",
+     "gov_id": "pcb",
+     "seat": "Ward 2",
+     "years": "2016–2024",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "philip-griffitts",
+   "name": "Philip Griffitts",
+   "aliases": [
+    "Philip Griffitts"
+   ],
+   "district": null,
+   "gov_ids": [
+    "county"
+   ],
+   "roles": [
+    {
+     "role": "former county commissioner, District 5",
+     "gov_id": "county",
+     "seat": "District 5",
+     "years": "2016–2022",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "phillip-dykes",
+   "name": "Phillip Dykes",
+   "aliases": [
+    "Phillip Dykes"
+   ],
+   "district": null,
+   "gov_ids": [
+    "sp"
+   ],
+   "roles": [
+    {
+     "role": "former city commissioner, Ward 2",
+     "gov_id": "sp",
+     "seat": "Ward 2",
+     "years": "until 2024",
+     "source": "officeholders"
     }
    ]
   },
@@ -2715,6 +4129,33 @@
      "role": "2026 candidate: City of Springfield Mayor",
      "gov_id": "sp",
      "source": "candidates_2026"
+    },
+    {
+     "role": "Mayor",
+     "gov_id": "sp",
+     "seat": "Mayor",
+     "years": "since 2013",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "ralph-hollister",
+   "name": "Ralph Hollister",
+   "aliases": [
+    "Ralph Hollister"
+   ],
+   "district": null,
+   "gov_ids": [
+    "cw"
+   ],
+   "roles": [
+    {
+     "role": "former city commissioner, Ward 4",
+     "gov_id": "cw",
+     "seat": "Ward 4",
+     "years": "until 2016",
+     "source": "officeholders"
     }
    ]
   },
@@ -2749,6 +4190,13 @@
      "role": "officeholder: Springfield Commissioner, Ward 2",
      "gov_id": "sp",
      "source": "campaign"
+    },
+    {
+     "role": "City commissioner, Ward 2",
+     "gov_id": "sp",
+     "seat": "Ward 2",
+     "years": "since 2024",
+     "source": "officeholders"
     }
    ]
   },
@@ -2767,6 +4215,26 @@
      "role": "Deputy Executive Director",
      "gov_id": "airport",
      "source": "salaries"
+    }
+   ]
+  },
+  {
+   "id": "richard-musgrave",
+   "name": "Richard Musgrave",
+   "aliases": [
+    "Richard Musgrave"
+   ],
+   "district": null,
+   "gov_ids": [
+    "parker"
+   ],
+   "roles": [
+    {
+     "role": "former mayor",
+     "gov_id": "parker",
+     "seat": "Mayor",
+     "years": "until 2021",
+     "source": "officeholders"
     }
    ]
   },
@@ -2801,6 +4269,20 @@
      "role": "officeholder: Mexico Beach Mayor (Group 1)",
      "gov_id": "mb",
      "source": "campaign"
+    },
+    {
+     "role": "Mayor",
+     "gov_id": "mb",
+     "seat": "Mayor (Group 1)",
+     "years": "since 2024",
+     "source": "officeholders"
+    },
+    {
+     "role": "former council member, Group 5",
+     "gov_id": "mb",
+     "seat": "Group 5",
+     "years": "2022–2024",
+     "source": "officeholders"
     }
    ]
   },
@@ -2853,6 +4335,13 @@
      "role": "officeholder: Panama City Commission, Ward I",
      "gov_id": "pc",
      "source": "campaign"
+    },
+    {
+     "role": "City commissioner, Ward 1",
+     "gov_id": "pc",
+     "seat": "Ward 1",
+     "years": "since 2025",
+     "source": "officeholders"
     }
    ]
   },
@@ -2902,24 +4391,53 @@
      "role": "2026 candidate: Bay County Commission, District 2",
      "gov_id": "county",
      "source": "candidates_2026"
+    },
+    {
+     "role": "County commissioner, District 2",
+     "gov_id": "county",
+     "seat": "District 2",
+     "years": "since 2016",
+     "source": "officeholders"
     }
    ]
   },
   {
-   "id": "robert-majka",
-   "name": "Robert (Bob) Majka",
+   "id": "rodney-friend",
+   "name": "Rodney Friend",
    "aliases": [
-    "Robert (Bob) Majka"
+    "Rodney Friend"
    ],
    "district": null,
    "gov_ids": [
-    "port"
+    "lh"
    ],
    "roles": [
     {
-     "role": "Executive Director",
-     "gov_id": "port",
-     "source": "salaries"
+     "role": "former city commissioner, Seat 1",
+     "gov_id": "lh",
+     "seat": "Seat 1",
+     "years": "until 2019",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "roger-schad",
+   "name": "Roger Schad",
+   "aliases": [
+    "Roger Schad"
+   ],
+   "district": null,
+   "gov_ids": [
+    "lh"
+   ],
+   "roles": [
+    {
+     "role": "former city commissioner, Seat 3",
+     "gov_id": "lh",
+     "seat": "Seat 3",
+     "years": "until 2017",
+     "source": "officeholders"
     }
    ]
   },
@@ -2954,6 +4472,60 @@
      "role": "officeholder: Parker Council, Seat 1",
      "gov_id": "parker",
      "source": "campaign"
+    },
+    {
+     "role": "Council member, Seat 1",
+     "gov_id": "parker",
+     "seat": "Seat 1",
+     "years": "since 2021",
+     "source": "officeholders"
+    },
+    {
+     "role": "former council member, Seat 2",
+     "gov_id": "parker",
+     "seat": "Seat 2",
+     "years": "until 2019",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "ron-fairbanks",
+   "name": "Ron Fairbanks",
+   "aliases": [
+    "Ron Fairbanks"
+   ],
+   "district": null,
+   "gov_ids": [
+    "cw"
+   ],
+   "roles": [
+    {
+     "role": "former city commissioner, Ward 3",
+     "gov_id": "cw",
+     "seat": "Ward 3",
+     "years": "2016–2020",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "ryan-neves",
+   "name": "Ryan Neves",
+   "aliases": [
+    "Ryan Neves"
+   ],
+   "district": null,
+   "gov_ids": [
+    "schools"
+   ],
+   "roles": [
+    {
+     "role": "former school board member, District 4",
+     "gov_id": "schools",
+     "seat": "District 4",
+     "years": "until 2020",
+     "source": "officeholders"
     }
    ]
   },
@@ -2988,6 +4560,13 @@
      "role": "officeholder: Lynn Haven Commissioner, Seat 1",
      "gov_id": "lh",
      "source": "campaign"
+    },
+    {
+     "role": "City commissioner, Seat 1",
+     "gov_id": "lh",
+     "seat": "Seat 1",
+     "years": "since 2023",
+     "source": "officeholders"
     }
    ]
   },
@@ -3030,6 +4609,13 @@
      "role": "board member",
      "gov_id": "cw",
      "source": "votes"
+    },
+    {
+     "role": "former city commissioner, Ward 1",
+     "gov_id": "cw",
+     "seat": "Ward 1",
+     "years": "2018–2025",
+     "source": "officeholders"
     }
    ]
   },
@@ -3103,6 +4689,26 @@
    ]
   },
   {
+   "id": "sharon-call",
+   "name": "Sharon Call",
+   "aliases": [
+    "Sharon Call"
+   ],
+   "district": null,
+   "gov_ids": [
+    "mb"
+   ],
+   "roles": [
+    {
+     "role": "former council member, Group 5",
+     "gov_id": "mb",
+     "seat": "Group 5",
+     "years": "2020–2022",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
    "id": "shawn-selph",
    "name": "Shawn Selph",
    "aliases": [
@@ -3162,6 +4768,26 @@
    ]
   },
   {
+   "id": "stacie-galbreath",
+   "name": "Stacie Galbreath",
+   "aliases": [
+    "Stacie Galbreath"
+   ],
+   "district": null,
+   "gov_ids": [
+    "parker"
+   ],
+   "roles": [
+    {
+     "role": "former council member, Seat 4",
+     "gov_id": "parker",
+     "seat": "Seat 4",
+     "years": "2019–2023",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
    "id": "steve-cox",
    "name": "Steve Cox",
    "aliases": [
@@ -3202,6 +4828,13 @@
      "role": "2026 candidate: City of Mexico Beach Council Member, Group 5",
      "gov_id": "mb",
      "source": "candidates_2026"
+    },
+    {
+     "role": "Council member, Group 5",
+     "gov_id": "mb",
+     "seat": "Group 5",
+     "years": "since 2025",
+     "source": "officeholders"
     }
    ]
   },
@@ -3246,6 +4879,13 @@
      "role": "2026 candidate: Bay District School Board, District 5",
      "gov_id": "schools",
      "source": "candidates_2026"
+    },
+    {
+     "role": "School board member, District 5",
+     "gov_id": "schools",
+     "seat": "District 5",
+     "years": "since before 2015",
+     "source": "officeholders"
     }
    ]
   },
@@ -3280,6 +4920,13 @@
      "role": "officeholder: Panama City Beach Mayor",
      "gov_id": "pcb",
      "source": "campaign"
+    },
+    {
+     "role": "Mayor",
+     "gov_id": "pcb",
+     "seat": "Mayor",
+     "years": "since 2024",
+     "source": "officeholders"
     }
    ]
   },
@@ -3348,6 +4995,26 @@
    ]
   },
   {
+   "id": "tanya-castro",
+   "name": "Tanya Castro",
+   "aliases": [
+    "Tanya Castro"
+   ],
+   "district": null,
+   "gov_ids": [
+    "mb"
+   ],
+   "roles": [
+    {
+     "role": "former council member, Group 4",
+     "gov_id": "mb",
+     "seat": "Group 4",
+     "years": "2014–2016",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
    "id": "teresa-cox",
    "name": "Teresa Cox",
    "aliases": [
@@ -3384,6 +5051,46 @@
    ]
   },
   {
+   "id": "thomas-abbott",
+   "name": "Thomas Abbott",
+   "aliases": [
+    "Thomas Abbott"
+   ],
+   "district": null,
+   "gov_ids": [
+    "cw"
+   ],
+   "roles": [
+    {
+     "role": "former mayor",
+     "gov_id": "cw",
+     "seat": "Mayor",
+     "years": "until 2016",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "tim-legare",
+   "name": "Tim Legare",
+   "aliases": [
+    "Tim Legare"
+   ],
+   "district": null,
+   "gov_ids": [
+    "cw"
+   ],
+   "roles": [
+    {
+     "role": "former city manager",
+     "gov_id": "cw",
+     "seat": "City Manager",
+     "years": "2017–2017",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
    "id": "tim-linderman",
    "name": "Tim Linderman",
    "aliases": [
@@ -3404,6 +5111,13 @@
      "role": "board member",
      "gov_id": "mb",
      "source": "votes"
+    },
+    {
+     "role": "former council member, Group 5",
+     "gov_id": "mb",
+     "seat": "Group 5",
+     "years": "2024–2025",
+     "source": "officeholders"
     }
    ]
   },
@@ -3502,6 +5216,33 @@
      "role": "board member",
      "gov_id": "county",
      "source": "votes"
+    },
+    {
+     "role": "former county commissioner, District 1",
+     "gov_id": "county",
+     "seat": "District 1",
+     "years": "2016–2024",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "tony-o-rourke",
+   "name": "Tony O'Rourke",
+   "aliases": [
+    "Tony O'Rourke"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pcb"
+   ],
+   "roles": [
+    {
+     "role": "former city manager",
+     "gov_id": "pcb",
+     "seat": "City Manager",
+     "years": "2020–2021",
+     "source": "officeholders"
     }
    ]
   },
@@ -3536,6 +5277,33 @@
      "role": "officeholder: Parker Council, Seat 2 (Mayor Pro Tem)",
      "gov_id": "parker",
      "source": "campaign"
+    },
+    {
+     "role": "Council member, Seat 2",
+     "gov_id": "parker",
+     "seat": "Seat 2",
+     "years": "since 2019",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "topeka-humphries",
+   "name": "Topeka Humphries",
+   "aliases": [
+    "Topeka Humphries"
+   ],
+   "district": null,
+   "gov_ids": [
+    "sp"
+   ],
+   "roles": [
+    {
+     "role": "former city commissioner, Ward 4",
+     "gov_id": "sp",
+     "seat": "Ward 4",
+     "years": "until 2022",
+     "source": "officeholders"
     }
    ]
   },
@@ -3563,6 +5331,26 @@
    ]
   },
   {
+   "id": "vickie-gainer",
+   "name": "Vickie Gainer",
+   "aliases": [
+    "Vickie Gainer"
+   ],
+   "district": null,
+   "gov_ids": [
+    "lh"
+   ],
+   "roles": [
+    {
+     "role": "former city manager",
+     "gov_id": "lh",
+     "seat": "City Manager",
+     "years": "2019–2025",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
    "id": "vickie-lewis",
    "name": "Vickie Lewis",
    "aliases": [
@@ -3581,9 +5369,50 @@
    ]
   },
   {
+   "id": "walter-kelley",
+   "name": "Walter Kelley",
+   "aliases": [
+    "Walter Kelley"
+   ],
+   "district": null,
+   "gov_ids": [
+    "lh"
+   ],
+   "roles": [
+    {
+     "role": "former mayor",
+     "gov_id": "lh",
+     "seat": "Mayor",
+     "years": "until 2015",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "wayne-mcleod",
+   "name": "Wayne McLeod",
+   "aliases": [
+    "Wayne McLeod"
+   ],
+   "district": null,
+   "gov_ids": [
+    "cw"
+   ],
+   "roles": [
+    {
+     "role": "former city commissioner, Ward 2",
+     "gov_id": "cw",
+     "seat": "Ward 2",
+     "years": "2017–2018",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
    "id": "william-dozier",
    "name": "William T. Dozier",
    "aliases": [
+    "Bill Dozier",
     "William T. Dozier"
    ],
    "district": null,
@@ -3601,6 +5430,13 @@
      "role": "board member",
      "gov_id": "county",
      "source": "votes"
+    },
+    {
+     "role": "former county commissioner, District 3",
+     "gov_id": "county",
+     "seat": "District 3",
+     "years": "until 2024",
+     "source": "officeholders"
     }
    ]
   },
@@ -3664,6 +5500,13 @@
      "role": "officeholder: School Board, District 4",
      "gov_id": "schools",
      "source": "campaign"
+    },
+    {
+     "role": "School board member, District 4",
+     "gov_id": "schools",
+     "seat": "District 4",
+     "years": "since 2020",
+     "source": "officeholders"
     }
    ]
   }
@@ -3683,5 +5526,59 @@
    "why": "Tax Collector William (Chuck) Perdue; the salary file lists \"Chuck Perdue\"."
   }
  ],
- "multi_government": []
+ "multi_government": [
+  {
+   "person_id": "joel-schubert",
+   "governments": [
+    "county",
+    "lh"
+   ],
+   "names": [
+    "Joel B. Schubert",
+    "Joel Schubert"
+   ]
+  },
+  {
+   "person_id": "michael-fuller",
+   "governments": [
+    "cw",
+    "pc"
+   ],
+   "names": [
+    "Michael Fuller"
+   ]
+  },
+  {
+   "person_id": "bob-majka",
+   "governments": [
+    "county",
+    "port"
+   ],
+   "names": [
+    "Bob Majka",
+    "Robert (Bob) Majka"
+   ]
+  },
+  {
+   "person_id": "mark-mcqueen",
+   "governments": [
+    "county",
+    "pc",
+    "schools"
+   ],
+   "names": [
+    "Mark McQueen"
+   ]
+  },
+  {
+   "person_id": "mike-thomas",
+   "governments": [
+    "county",
+    "pcb"
+   ],
+   "names": [
+    "Mike Thomas"
+   ]
+  }
+ ]
 }

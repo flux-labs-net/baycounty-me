@@ -149,8 +149,9 @@ def gov_page(key):
             f'<a class="ui-tag" href="{e(off["contact_url"])}" target="_blank" rel="noopener">{ico("mail")}Contact</a>' if off.get('contact_url') else '',
             f'<a class="ui-tag" href="/people">{ico("users")}All officials</a>'])
         secs.append(f'''<section class="tx-sec"><div class="sec-hd"><h2 id="who">Who's in charge</h2><span class="muted">{e(off.get("form") or "")}</span></div>
-          <div class="ui-people">{"".join(_person_card(s, i) for i, s in enumerate(board))}</div>
-          {f'<h3 class="ui-h3">Appointed staff and pay</h3><div class="ui-row">{"".join(_person_card(s, i + 1) for i, s in enumerate(staff))}{pay}</div>' if staff or pay else ''}
+          <p class="small muted" id="gxBoardNote">Today's officials. Pick a year in the bar at the top to see who held each seat, and who was manager, that year.</p>
+          <div class="ui-people" id="gxBoard">{"".join(_person_card(s, i) for i, s in enumerate(board))}</div>
+          {f'<h3 class="ui-h3">Appointed staff and pay</h3><div class="ui-row" id="gxStaff">{"".join(_person_card(s, i + 1, staff=True) for i, s in enumerate(staff))}{pay}</div>' if staff or pay else ''}
           <div class="ui-links">{links}</div></section>''')
     # money
     if b.get('revenue') or b.get('spending'):
@@ -253,8 +254,9 @@ def gov_page(key):
 <script src="/assets/gov.js" defer></script>{SAV_ASSETS if 'id="svList"' in body else ''}'''
 
 
-def _person_card(s, i):
-    """One official as a card: initials, name, seat. The card links to the person's profile when there is one."""
+def _person_card(s, i, staff=False):
+    """One official as a card: initials, name, seat. The card links to the person's profile when there is one.
+    A staff card carries data-seat, so gov.js can swap in whoever held that job in the year picked."""
     from fees_page import split_note, term_txt
     from entity_links import href
     from entity_graph import build
@@ -262,12 +264,13 @@ def _person_card(s, i):
     name, note = split_note(s.get('holder'))
     term, _ = term_txt(s.get('term_end'))
     sub = ' · '.join(x for x in [e(s['seat']), f'until {e(term)}' if term else ''] if x)
+    ds = f' data-seat="{e(s["seat"])}"' if staff else ''
     if not name:
-        return f'<div class="ui-person vac">{_avatar(None, "blue", "users")}<span><b>Not published online</b><small>{sub}</small></span></div>'
+        return f'<div class="ui-person vac"{ds}>{_avatar(None, "blue", "users")}<span><b>Not published online</b><small>{sub}</small></span></div>'
     pid = ids.person_id(name)
     url = href('person:' + pid) if pid and 'person:' + pid in build().ents else None
     inner = f'{_avatar(name, TONES[i % 4])}<span><b>{e(name)}</b><small>{sub}</small>{f"<small>{e(note)}</small>" if note else ""}</span>'
-    return f'<a class="ui-person" href="{e(url)}">{inner}</a>' if url else f'<div class="ui-person">{inner}</div>'
+    return f'<a class="ui-person" href="{e(url)}"{ds}>{inner}</a>' if url else f'<div class="ui-person"{ds}>{inner}</div>'
 
 
 def _dt(iso):

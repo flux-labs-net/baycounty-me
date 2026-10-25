@@ -3633,7 +3633,7 @@
    "id": "people-directory",
    "title": "People",
    "description": "Elected officials, department leaders and 2026 candidates named in BayCounty.me records, with their roles.",
-   "rows": 140,
+   "rows": 202,
    "columns": [
     {
      "name": "person_id",
@@ -6623,7 +6623,7 @@
    "id": "entity-profiles",
    "title": "Profiles: people, companies and organizations",
    "description": "Every company, elected official, candidate, nonprofit, nonprofit board member, registered business, committee and government named in BayCounty.me records, one row each, with its profile page and how many documented connections it has. entity_id (kind:key) joins entity-connections. Board members are named as their nonprofits' public filings list them; individual campaign donors are included only when they run a registered business (owner-gifts).",
-   "rows": 14395,
+   "rows": 14457,
    "columns": [
     {
      "name": "entity_id",
@@ -6734,7 +6734,7 @@
    "id": "entity-connections",
    "title": "Connections between people, companies and organizations",
    "description": "Every documented connection between two entities in entity-profiles, totalled per pair and kind: a government paid a payee, an organization gave to an official's or candidate's campaign, an official voted on a company's contracts, a person sits on a nonprofit's board or runs a business, a nonprofit gave a grant, two payees share a project. Each row has its source. Individual campaign donors are included only when they run a registered business (owner-gifts); officials' board seats and businesses are added by the API once checked by hand.",
-   "rows": 15841,
+   "rows": 15986,
    "columns": [
     {
      "name": "link_id",
@@ -6800,6 +6800,7 @@
       "related",
       "runs",
       "same",
+      "served",
       "serves",
       "voted"
      ]
@@ -6813,6 +6814,7 @@
       "is the same organization as",
       "paid",
       "runs",
+      "served",
       "serves",
       "shares a project or address with",
       "sits on the board of",
@@ -6858,6 +6860,195 @@
    "json": "/downloads/entity-connections.json",
    "csv": "/downloads/entity-connections.csv",
    "api": "/api/v1/datasets/entity-connections"
+  },
+  {
+   "id": "officeholder-terms",
+   "title": "Officeholders by year",
+   "description": "Who held each elected seat, and each government's appointed manager, on every local government since 2014: one row per person per seat, with start_date and end_date, so the officials in office on any date or in any fiscal year can be picked out. person_name is blank for a known vacancy (vacant true) and for a stretch nobody could confirm from the records found (confirmed false); the note says which. start_date blank = in office before FY2015; end_date blank = in office now. start_approx / end_approx mark dates known only to the month or year. appointed is true for the government's appointed manager or administrator (the county manager, city managers, Mexico Beach's administrator) and false for elected seats. how is elected, special election, appointed, interim or commission (chosen by the commission). Each term names its source: election results, minutes, budget books, city sites or news. place_id is the place (fl-bay = Bay County).",
+   "rows": 166,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "schools",
+      "sp"
+     ]
+    },
+    {
+     "name": "government",
+     "type": "string",
+     "values": [
+      "Bay County",
+      "Bay District Schools",
+      "City of Callaway",
+      "City of Lynn Haven",
+      "City of Mexico Beach",
+      "City of Panama City",
+      "City of Panama City Beach",
+      "City of Parker",
+      "City of Springfield"
+     ]
+    },
+    {
+     "name": "body",
+     "type": "string",
+     "values": [
+      "Board of County Commissioners",
+      "City Commission",
+      "City Council",
+      "School Board and Superintendent"
+     ]
+    },
+    {
+     "name": "seat",
+     "type": "string",
+     "values": [
+      "City Administrator",
+      "City Manager",
+      "County Manager",
+      "District 1",
+      "District 2",
+      "District 3",
+      "District 4",
+      "District 5",
+      "Group 2",
+      "Group 3",
+      "Group 4",
+      "Group 5",
+      "Mayor",
+      "Mayor (Group 1)",
+      "Seat 1",
+      "Seat 2",
+      "Seat 3",
+      "Seat 4",
+      "Superintendent",
+      "Ward 1",
+      "Ward 2",
+      "Ward 3",
+      "Ward 4"
+     ]
+    },
+    {
+     "name": "seat_order",
+     "type": "number"
+    },
+    {
+     "name": "appointed",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "term_order",
+     "type": "number"
+    },
+    {
+     "name": "person_name",
+     "type": "string"
+    },
+    {
+     "name": "person_id",
+     "type": "string"
+    },
+    {
+     "name": "start_date",
+     "type": "string"
+    },
+    {
+     "name": "end_date",
+     "type": "string"
+    },
+    {
+     "name": "start_approx",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "end_approx",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "how",
+     "type": "string",
+     "values": [
+      "appointed",
+      "commission",
+      "elected",
+      "interim",
+      "special election"
+     ]
+    },
+    {
+     "name": "vacant",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "confirmed",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "note",
+     "type": "string"
+    },
+    {
+     "name": "source_title",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "date_start",
+     "type": "string"
+    },
+    {
+     "name": "date_end",
+     "type": "string"
+    },
+    {
+     "name": "date_precision",
+     "type": "string",
+     "values": [
+      "day"
+     ]
+    }
+   ],
+   "json": "/downloads/officeholder-terms.json",
+   "csv": "/downloads/officeholder-terms.csv",
+   "api": "/api/v1/datasets/officeholder-terms"
   },
   {
    "id": "site-menu",
