@@ -31,9 +31,9 @@ body{display:block}
 .row .grow{flex:1}
 .muted{color:var(--muted)} .small{font-size:.84rem}
 .mono{font-family:var(--f-data);font-size:.84rem}
-table.at{width:100%;border-collapse:collapse;font-size:.88rem}
-.at th{text-align:left;font:500 .76rem var(--f-body);color:var(--muted);text-transform:uppercase;letter-spacing:.04em;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
-.at td{padding:10px;border-bottom:1px solid var(--line);vertical-align:top}
+table.at{width:100%;border-collapse:collapse;font-size:13px}
+.at th{text-align:left;font:500 .7rem var(--f-body);color:var(--muted);text-transform:uppercase;letter-spacing:.04em;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+.at td{padding:7px 10px;border-bottom:1px solid var(--line);vertical-align:top}
 .at tr.click{cursor:pointer} .at tr.click:hover td{background:var(--sunken)}
 .at td.num,.at th.num{text-align:right;font-variant-numeric:tabular-nums}
 .tw{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
@@ -148,6 +148,20 @@ details.ag summary{cursor:pointer;color:var(--blue)} details.ag pre{white-space:
 
 /* layout + menu: side menu from 960px, top bar and full-screen menu below */
 .cp{max-width:1320px}
+.cp-main{font-size:14px}
+/* desktop tables: one line per row, no sideways scroll (fit() in admin.js sizes the columns and marks the ones that shrink .fl) */
+@media (min-width:641px){
+  table.at.fit th,table.at.fit td{white-space:nowrap}
+  table.at.fit.fixed{table-layout:fixed}
+  table.at.fit.fixed th{overflow:hidden;text-overflow:ellipsis}
+  table.at.fit td{vertical-align:middle}
+  table.at.fit .fl{overflow:hidden;text-overflow:ellipsis}
+  table.at.fit td > .fl-in{display:inline}
+  table.at.fit td > .fl-sep::before{content:" · ";color:var(--muted)}
+  table.at.fit td.fl-wrap{white-space:normal}
+  table.at.fit td.fl-wrap .fl-in{display:block}
+  table.at.fit td.fl-wrap .fl-sep::before{content:none}
+}
 .cp-shell{display:grid;grid-template-columns:236px minmax(0,1fr);gap:32px;align-items:start}
 .cp-main{min-width:0}
 .cp-h{font:600 1.45rem var(--f-display);letter-spacing:-.015em;margin:4px 0 16px}
@@ -555,6 +569,6 @@ details.ag summary{cursor:pointer;color:var(--blue)} details.ag pre{white-space:
     <span class="grow"></span><button class="btn" value="cancel" id="kd-close">Close</button>
   </div>
 </form></dialog>
-<script src="/assets/admin.js?v=257097be96" defer></script>
+<script src="/assets/admin.js?v=6ba865bfae" defer></script>
 </body>
 </html>

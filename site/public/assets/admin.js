@@ -71,6 +71,7 @@
     history.replaceState(null, '', '#' + name);
     menu(false); window.scrollTo(0, 0);
     loaders[name]();
+    document.dispatchEvent(new Event('cp:tab'));
   }
   nav.addEventListener('click', e => { const a = e.target.closest('a[data-tab]'); if (!a) return; e.preventDefault(); tab(a.dataset.tab); });
   window.addEventListener('hashchange', () => tab(location.hash.slice(1)));
@@ -1290,5 +1291,71 @@
   let q = false;
   const run = () => { q = false; document.querySelectorAll('table').forEach(label); };
   const go = () => { run(); new MutationObserver(ms => { if (q) return; if (ms.some(m => m.addedNodes.length)) { q = true; requestAnimationFrame(run); } }).observe(document.body, {childList: true, subtree: true}); };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go); else go();
+})();
+
+/* Desktop tables: every row on one line and no sideways scrolling. Short columns keep their full width; long text
+   columns share the room left and end in "…" (hover shows the full text). A name with a second line (a <div>
+   under it) runs on the same line after a "·". Phones get the cards above instead. Opt out with data-fit="off". */
+(() => {
+  const ACT = 'button,input,select,textarea', FREE = 'details,pre,iframe';
+  const colsOf = tr => { const out = []; for (const c of tr.cells) { const n = Math.max(1, c.colSpan || 1); out.push(c); for (let i = 1; i < n; i++) out.push(null); } return out; };
+  const fit = t => {
+    if (t.dataset.fit === 'off' || !t.classList.contains('at')) return;
+    t.classList.add('fit'); t.classList.remove('fixed');
+    const span = tr => tr.cells.length === 1 && (tr.cells[0].colSpan || 1) > 1;
+    const rows = [...t.rows].filter(tr => { if (span(tr)) { tr.cells[0].classList.add('fl-wrap'); return false; } return true; });
+    const cols = [];   // per column: {cells, len, act, free}
+    for (const tr of rows) colsOf(tr).forEach((c, i) => {
+      if (!c) return;
+      const col = cols[i] || (cols[i] = {cells: [], len: 0, act: false, free: false});
+      col.cells.push(c);
+      c.classList.remove('fl'); c.style.width = '';
+      if (c.tagName !== 'TD') return;
+      if (c.querySelector(ACT)) col.act = true;
+      if (c.querySelector(FREE)) col.free = true;
+      let prev = false;
+      for (const n of c.childNodes) {
+        if (n.nodeType === 1 && n.tagName === 'DIV' && !n.querySelector(ACT)) { n.classList.add('fl-in'); n.classList.toggle('fl-sep', prev); }
+        if (n.nodeType === 1 || (n.nodeType === 3 && n.textContent.trim())) prev = true;
+      }
+      col.len = Math.max(col.len, c.textContent.replace(/\s+/g, ' ').trim().length);
+    });
+    // Widths come from one row with a cell per column (the header row when there is one).
+    const head = rows.find(tr => colsOf(tr).every(Boolean) && colsOf(tr).length === cols.length);
+    const box = t.parentElement;
+    if (!head || !box || !t.offsetParent || cols.some(c => !c)) return;
+    const avail = box.clientWidth, cells = colsOf(head);
+    if (t.offsetWidth <= avail + 1) return;   // fits on one line already
+    // A column's natural width is its widest body cell; headings may end in "…" before data does.
+    const pad = c => { const s = getComputedStyle(c); return parseFloat(s.paddingLeft) + parseFloat(s.paddingRight); };
+    const rg = document.createRange(), inner = c => { rg.selectNodeContents(c); return rg.getBoundingClientRect().width + pad(c) + 2; };
+    const nat = cols.map(col => Math.max(48, ...col.cells.filter(c => c.tagName === 'TD').map(inner)));
+    // Too wide: the widest text columns shrink to one shared cap (short ones keep their width); buttons and
+    // drop-downs never shrink. The cap is the largest width at which everything fits.
+    const can = cols.map((c, i) => i).filter(i => !cols[i].act && !cols[i].free);
+    if (!can.length) return;
+    const room = avail - nat.reduce((a, w, i) => a + (can.includes(i) ? 0 : w), 0);
+    const used = cap => can.reduce((a, i) => a + Math.min(nat[i], cap), 0);
+    let lo = 0, hi = Math.max(...can.map(i => nat[i]));
+    for (let k = 0; k < 24; k++) { const m = (lo + hi) / 2; if (used(m) <= room) lo = m; else hi = m; }
+    const cap = Math.max(lo, 40), flex = new Set(can.filter(i => nat[i] > cap));
+    const w = nat.map((n, i) => flex.has(i) ? Math.floor(cap) : Math.ceil(n));
+    cells.forEach((c, i) => { c.style.width = Math.max(0, w[i] - pad(c)) + 'px'; });
+    t.classList.add('fixed');
+    flex.forEach(i => cols[i].cells.forEach(c => { c.classList.add('fl'); c.style.minWidth = ''; }));
+  };
+  let q = false;
+  const run = () => { q = false; if (innerWidth > 640) document.querySelectorAll('.cp-main table').forEach(fit); };
+  const soon = () => { if (!q) { q = true; requestAnimationFrame(run); } };
+  const go = () => {
+    run();
+    new MutationObserver(ms => { if (ms.some(m => m.addedNodes.length)) soon(); }).observe(document.body, {childList: true, subtree: true});
+    document.addEventListener('cp:tab', soon); addEventListener('resize', soon);
+    document.addEventListener('mouseover', e => {
+      const c = e.target.closest && e.target.closest('td.fl');
+      if (c && !c.title && c.scrollWidth > c.clientWidth) c.title = c.textContent.replace(/\s+/g, ' ').trim();
+    });
+  };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go); else go();
 })();
