@@ -126,7 +126,7 @@ def person_page(pid):
         rs = [r for r in p['roles'] if r.get('gov_id') == g and r.get('source') != 'campaign_history']  # past races go under "Ran for"
         if not rs:
             continue
-        oh = [f"{r['role']} ({r['years']})" for r in rs if r.get('source') == 'officeholders']  # elected seats since 2014, with years
+        oh = [f"{r['role']} ({r['years']})" for r in rs if r.get('source') == 'officeholders']  # elected seats since 2016, with years
         best = next((r['role'] for r in rs if r.get('source') in ('salaries', 'officials-pay')), None) or next((r['role'].split(':', 1)[-1].strip() for r in rs if r.get('source') == 'campaign'), None) or (('; '.join(oh)) if oh else (rs[0]['role'] if rs else ''))
         roles.append(f'<li>{e(best[:1].upper() + best[1:])}<span>{gov_link(g)}</span></li>')
     # the facts card at the top right: where they serve, the 2026 race, pay and votes on file

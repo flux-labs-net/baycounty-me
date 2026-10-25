@@ -32,8 +32,6 @@
      "source_url": "https://www.baycountyfl.gov/ArchiveCenter/ViewFile/Item/329"},
     {"check": "Bay County general fund, \"All Other CRA's\" (every CRA but Front Beach Road), FY2024 actual", "fiscal_year": 2024, "official": 3571473, "model": "county_except_fbr",
      "source_url": "https://www.baycountyfl.gov/DocumentCenter/View/18382/FY-2026-Final-Budget-Commissioners-Book-09-16-2025"},
-    {"check": "Paid by Bay County to the Front Beach Road CRA through FY2023, as a county commissioner put it in 2023", "fiscal_year": 2023, "official": 172000000, "model": "fbr_cumulative",
-     "source_url": "https://www.wjhg.com/2023/10/18/bay-county-commissioners-want-front-beach-road-cra-projects-done-earlier"},
     {"check": "Bay County's CRA payments in FY2026: $22.2M to Front Beach Road plus $4,901,698 budgeted for all others (county says about $27M, 16.5% of its property tax)", "fiscal_year": 2026, "official": 27101698, "model": "county_budget_fy2026",
      "source_url": "https://www.baycountyfl.gov/829/Understanding-Amendment-3"}
   ]

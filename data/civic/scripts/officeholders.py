@@ -1,8 +1,9 @@
-"""Who held each elected seat, year by year: every local government's officeholder terms since 2014.
+"""Who held each elected seat, year by year: every local government's officeholder terms since 2016, the site's first year.
 
 One term per person per seat, with start and end dates. A stretch nobody could confirm is a gap row (name null,
-gap true), never a guess. start null means the person was already in office before FY2015, the first year the site
-covers; end null means still in office. *_approx marks a date known only to the month (or the year), from the first
+gap true), never a guess. start null means the person was already in office before 2016, the first year the site
+covers (data/entities/cutoff.py): terms that ended before 2016 are dropped and earlier start dates are left out. end
+null means still in office. *_approx marks a date known only to the month (or the year), from the first
 and last meetings the person appears in.
 
 Sources: Bay County Supervisor of Elections results (enr.electionsfl.org), council and commission minutes (roll
@@ -13,7 +14,10 @@ staff (clerks, attorneys, chiefs) are not, and the government pages list today's
 Writes data/civic/officeholders.json, read by site/page_datasets.py officeholder_terms() (dataset officeholder-terms).
 Run: python3 data/civic/scripts/officeholders.py
 """
-import json, os
+import json, os, sys
+
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'entities'))
+import cutoff  # noqa: E402  the site's first year
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, '..', 'officeholders.json')
@@ -364,20 +368,32 @@ def check(gov, seat, terms):
         assert t.get('gap') or t.get('name'), t
 
 
+def from_first_year(terms):
+    """Terms that reach the site's first year; a start before it becomes null (in office before 2016)."""
+    out = []
+    for t in terms:
+        if not cutoff.keep_span(t.get('start'), t.get('end')):
+            continue
+        if t.get('start') and not cutoff.keep(t['start']):
+            t = {k: v for k, v in t.items() if k not in ('start', 'start_approx')}
+        out.append(t)
+    return out
+
+
 def main():
     govs = []
     for gov, g in G.items():
         seats = []
         for order, (seat, terms) in enumerate(g['seats']):
             check(gov, seat, terms)
-            seats.append({'seat': seat, 'order': order, 'appointed': False, 'terms': terms})
+            seats.append({'seat': seat, 'order': order, 'appointed': False, 'terms': from_first_year(terms)})
         for order, (seat, terms) in enumerate(STAFF.get(gov, []), len(seats)):
             check(gov, seat, terms)
-            seats.append({'seat': seat, 'order': order, 'appointed': True, 'terms': terms})
+            seats.append({'seat': seat, 'order': order, 'appointed': True, 'terms': from_first_year(terms)})
         govs.append({'gov_id': gov, 'government': NAMES[gov], 'body': g['body'], 'seats': seats})
     gaps = [f"{NAMES[g['gov_id']]}, {s['seat']}: {t['note']}" for g in govs for s in g['seats'] for t in s['terms'] if t.get('gap') and not t.get('vacant')]
     json.dump({'as_of': AS_OF, 'place_id': PLACE,
-               'notes': ['One term per person per seat. start null = in office before FY2015; end null = in office now.',
+               'notes': ['One term per person per seat. start null = in office before 2016, the first year the site covers; end null = in office now.',
                          'A gap row (name null) is a stretch nobody could confirm from the records found, or a known vacancy (vacant true).',
                          '*_approx = the date is known only to the month or year (first or last meeting the person appears in).',
                          'Elected seats, plus each government\'s appointed manager or administrator (appointed true). Other staff are listed as of today on each government page.'],

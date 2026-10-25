@@ -9,6 +9,8 @@ import os, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
+sys.path.insert(0, os.path.join(HERE, '..', 'data', 'entities'))
+import cutoff  # noqa: E402  the site's first year (2016)
 
 
 # --- Connections (/connections) ----------------------------------------------------------------------------------------
@@ -184,7 +186,7 @@ def _cra_increment():
         d = files.setdefault(c['file'], json.load(open(os.path.join(data, c['file']))))
         if isinstance(d, list):
             d = next(x for x in d if x['cra'] == c['cra'])
-        rep = {int(r['fy'][2:]): r for r in d['budget_by_year'] if r['tif_revenue'] is not None and r['district'] == c['district']}
+        rep = {int(r['fy'][2:]): r for r in d['budget_by_year'] if r['tif_revenue'] is not None and r['district'] == c['district'] and cutoff.keep(r['fy'])}
         known = sorted(k for k in rep if k <= last)
         hist = []
         for fy in range(known[0], last + 1):
@@ -225,7 +227,6 @@ def _cra_increment():
                              source_url=next((r['source_url'] for r in reversed(h) if r['source_url']), None)))
     hist = [r for r in years if r['scenario'] == 'history']
     model = {'county_except_fbr': lambda fy: sum(r['county_amount'] for r in hist if r['fiscal_year'] == fy and r['cra_id'] != 'pcb-fbr'),
-             'fbr_cumulative': lambda fy: sum(r['county_amount'] for r in hist if r['fiscal_year'] <= fy and r['cra_id'] == 'pcb-fbr'),
              'county_budget_fy2026': lambda fy: sum(r['county_amount'] for r in years if r['fiscal_year'] == fy and r['scenario'] == 'mid')}
     checks = []
     for k in F['checks']:
@@ -680,7 +681,7 @@ def entity_connections():
 def officeholder_terms():
     """Who held each elected seat, one row per term, from data/civic/officeholders.json
     (data/civic/scripts/officeholders.py). person_name null is a known vacancy (vacant true) or a stretch nobody could
-    confirm (confirmed false). start_date null = in office before FY2015; end_date null = in office now."""
+    confirm (confirmed false). start_date null = in office before 2016, the site's first year; end_date null = in office now."""
     import json
     d = json.load(open(os.path.join(HERE, '..', 'data', 'civic', 'officeholders.json')))
     sys.path.insert(0, os.path.join(HERE, '..', 'data', 'entities'))
@@ -739,7 +740,7 @@ DATASETS = [
     ('owner-gifts', 'Campaign gifts from business owners', "Personal gifts to local campaigns from people who run a registered Florida business, one row per person and campaign. A contributor filed as an individual is listed when the name and street address on the Supervisor of Elections filing are the same as an officer, manager or registered agent of a for-profit business on Sunbiz that was active around the gift; middle initials and Jr/Sr must agree, and protected voters are never matched. Other individual donors are never named. No addresses or occupations.", owner_gifts),
     ('entity-profiles', 'Profiles: people, companies and organizations', 'Every company, elected official, candidate, nonprofit, nonprofit board member, registered business, committee and government named in BayCounty.me records, one row each, with its profile page and how many documented connections it has. entity_id (kind:key) joins entity-connections. Board members are named as their nonprofits\' public filings list them; individual campaign donors are included only when they run a registered business (owner-gifts).', entity_profiles),
     ('entity-connections', 'Connections between people, companies and organizations', "Every documented connection between two entities in entity-profiles, totalled per pair and kind: a government paid a payee, an organization gave to an official's or candidate's campaign, an official voted on a company's contracts, a person sits on a nonprofit's board or runs a business, a nonprofit gave a grant, two payees share a project. Each row has its source. Individual campaign donors are included only when they run a registered business (owner-gifts); officials' board seats and businesses are added by the API once checked by hand.", entity_connections),
-    ('officeholder-terms', 'Officeholders by year', "Who held each elected seat, and each government's appointed manager, on every local government since 2014: one row per person per seat, with start_date and end_date, so the officials in office on any date or in any fiscal year can be picked out. person_name is blank for a known vacancy (vacant true) and for a stretch nobody could confirm from the records found (confirmed false); the note says which. start_date blank = in office before FY2015; end_date blank = in office now. start_approx / end_approx mark dates known only to the month or year. appointed is true for the government's appointed manager or administrator (the county manager, city managers, Mexico Beach's administrator) and false for elected seats. how is elected, special election, appointed, interim or commission (chosen by the commission). Each term names its source: election results, minutes, budget books, city sites or news. place_id is the place (fl-bay = Bay County).", officeholder_terms),
+    ('officeholder-terms', 'Officeholders by year', "Who held each elected seat, and each government's appointed manager, on every local government since 2016: one row per person per seat, with start_date and end_date, so the officials in office on any date or in any fiscal year can be picked out. person_name is blank for a known vacancy (vacant true) and for a stretch nobody could confirm from the records found (confirmed false); the note says which. start_date blank = in office before 2016; end_date blank = in office now. start_approx / end_approx mark dates known only to the month or year. appointed is true for the government's appointed manager or administrator (the county manager, city managers, Mexico Beach's administrator) and false for elected seats. how is elected, special election, appointed, interim or commission (chosen by the commission). Each term names its source: election results, minutes, budget books, city sites or news. place_id is the place (fl-bay = Bay County).", officeholder_terms),
     ('site-menu', 'Site menu', "Every link in the site's main menu, one row per link, in English and Spanish: the section and the question it answers, the link's place in the section, and the section's start-here page. place_id is the place the menu belongs to (fl-bay = Bay County), so a menu for another place sits beside it.", site_menu),
     ('checkbook-payments', 'Checkbook: every payment', "Every payment in each government's own check register (checks, ACH, wires and cards), as published from the files the government sends: date, payee, amount, check number, invoice, fund, account and description. fiscal_year is the year the fiscal year ends. Voided checks are left out. Payments to private individuals (refunds, reimbursements) are listed as \"Individual (name withheld)\" with payee_kind individual and a category instead of the description. payee_entity_id links a payee to its profile (entity-profiles) when the site knows it. Bank statements and reconciliations are never published.", checkbook_payments),
     ('budget-actuals', 'Budget vs. actual, month by month', "Each government's budget-vs-actual report as of each month end (as_of), line by line: fund, department, account, the original and amended budget, actual_ytd (spending, or revenue collected, to date) and encumbered (open purchase orders). line_type is expense or revenue. One report per month end, so a fiscal year has a row per line per report. fiscal_year is the year the fiscal year ends (FY2026 = Oct 2025 to Sep 2026).", budget_actuals),

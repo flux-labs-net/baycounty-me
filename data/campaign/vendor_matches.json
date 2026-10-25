@@ -1,25 +1,25 @@
 {
  "as_of": "2026-10-25",
  "method": "Business contributors to current officeholders (campaign.json), 2026 local candidates (../elections/finance_2026.json) and every other local campaign since 2016 (campaign_history.json) were compared with every payee on this site: contracts, change orders and emergency purchases (../contracts/contracts.json), Bay County and Lynn Haven check registers, payments by the three tourism agencies (../money/payments.json) and the CRA ledger (../merged.json). Both sides are resolved to vendor ids in ../entities/vendors.json: names are matched after removing punctuation, \"&\"/\"and\" and legal suffixes, plus hand-checked joins of truncated or misspelled names (each with its evidence in vendors.json). Nothing is fuzzy-matched. \"exact\" = the filed name matches the vendor's name; \"likely\" = the filing truncates, abbreviates or misspells it. One row per contributor spelling, candidate and paying government. A match shows only that an organization with the same name appears in both public records; it does not show why a gift was made or how a contract was awarded. Built by build_vendor_matches.py.",
- "count_rows": 554,
- "count_contributor_candidate_pairs": 214,
- "count_distinct_vendors": 52,
+ "count_rows": 543,
+ "count_contributor_candidate_pairs": 205,
+ "count_distinct_vendors": 50,
  "count_by_confidence_pairs": {
-  "likely": 22,
-  "exact": 192
+  "exact": 183,
+  "likely": 22
  },
- "pairs_where_contract_government_matches_office": 70,
+ "pairs_where_contract_government_matches_office": 68,
  "count_by_gift_source_pairs": {
   "2026 candidates (finance_2026.json)": 21,
   "current officeholders (campaign.json)": 45,
-  "past campaigns 2016-2025 (campaign_history.json)": 148
+  "past campaigns 2016-2025 (campaign_history.json)": 139
  },
  "count_by_record_type_rows": {
-  "cra": 48,
+  "cra": 44,
   "change_order": 94,
-  "contract": 419,
-  "register": 152,
-  "tdc": 65,
+  "contract": 413,
+  "register": 151,
+  "tdc": 63,
   "emergency": 70
  },
  "matches": [
@@ -46,7 +46,7 @@
     "Panama City CRA spent FY2024: Commercial improvement grant toward an $842,639 new restaurant build ($50,000.00)"
    ],
    "record_ids": [
-    "cra:33"
+    "cra:27"
    ],
    "contract_source_urls": [
     "https://www.panamacity.gov/DocumentCenter/View/9865"
@@ -1647,7 +1647,7 @@
     "change_order:32",
     "contract:291",
     "change_order:45",
-    "cra:10"
+    "cra:9"
    ],
    "contract_source_urls": [
     "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_07252023-627?html=true",
@@ -3065,7 +3065,7 @@
     "Panama City CRA spent FY2024: Commercial improvement grant toward an $842,639 new restaurant build ($50,000.00)"
    ],
    "record_ids": [
-    "cra:33"
+    "cra:27"
    ],
    "contract_source_urls": [
     "https://www.panamacity.gov/DocumentCenter/View/9865"
@@ -4257,7 +4257,7 @@
    ],
    "record_ids": [
     "contract:300",
-    "cra:125"
+    "cra:101"
    ],
    "contract_source_urls": [
     "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=128",
@@ -4441,7 +4441,7 @@
     "change_order:32",
     "contract:291",
     "change_order:45",
-    "cra:10"
+    "cra:9"
    ],
    "contract_source_urls": [
     "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_07252023-627?html=true",
@@ -5907,7 +5907,7 @@
    ],
    "record_ids": [
     "contract:300",
-    "cra:125"
+    "cra:101"
    ],
    "contract_source_urls": [
     "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=128",
@@ -7058,13 +7058,13 @@
     "Contract 2025-01-30: Task order, utilities relocation engineering on SR 30A (US 98), R. Jackson to Thomas Dr ($268,260.00)"
    ],
    "record_ids": [
-    "cra:115",
-    "cra:116",
-    "cra:120",
-    "cra:118",
-    "cra:114",
-    "cra:119",
-    "cra:117",
+    "cra:91",
+    "cra:92",
+    "cra:96",
+    "cra:94",
+    "cra:90",
+    "cra:95",
+    "cra:93",
     "contract:304",
     "contract:311"
    ],
@@ -7709,13 +7709,13 @@
     "Contract 2025-01-30: Task order, utilities relocation engineering on SR 30A (US 98), R. Jackson to Thomas Dr ($268,260.00)"
    ],
    "record_ids": [
-    "cra:115",
-    "cra:116",
-    "cra:120",
-    "cra:118",
-    "cra:114",
-    "cra:119",
-    "cra:117",
+    "cra:91",
+    "cra:92",
+    "cra:96",
+    "cra:94",
+    "cra:90",
+    "cra:95",
+    "cra:93",
     "contract:304",
     "contract:311"
    ],
@@ -8635,13 +8635,13 @@
     "Contract 2025-01-30: Task order, utilities relocation engineering on SR 30A (US 98), R. Jackson to Thomas Dr ($268,260.00)"
    ],
    "record_ids": [
-    "cra:115",
-    "cra:116",
-    "cra:120",
-    "cra:118",
-    "cra:114",
-    "cra:119",
-    "cra:117",
+    "cra:91",
+    "cra:92",
+    "cra:96",
+    "cra:94",
+    "cra:90",
+    "cra:95",
+    "cra:93",
     "contract:304",
     "contract:311"
    ],
@@ -8693,9 +8693,9 @@
     "Panama City Beach CRA spent 2020-06-29 (Change Order #18, Res. 20-136): Segment 2: underground electrical conversion and added electrical service at Los Rancheros ($13,108.30) (not counted in CRA totals: Included in the $16.0M Segment 2 project total)"
    ],
    "record_ids": [
-    "cra:107",
-    "cra:108",
-    "cra:109"
+    "cra:83",
+    "cra:84",
+    "cra:85"
    ],
    "contract_source_urls": [
     "https://www.pcbfl.gov/home/showpublisheddocument/20389/637915921100900000",
@@ -9571,13 +9571,13 @@
     "Contract 2025-01-30: Task order, utilities relocation engineering on SR 30A (US 98), R. Jackson to Thomas Dr ($268,260.00)"
    ],
    "record_ids": [
-    "cra:115",
-    "cra:116",
-    "cra:120",
-    "cra:118",
-    "cra:114",
-    "cra:119",
-    "cra:117",
+    "cra:91",
+    "cra:92",
+    "cra:96",
+    "cra:94",
+    "cra:90",
+    "cra:95",
+    "cra:93",
     "contract:304",
     "contract:311"
    ],
@@ -9629,9 +9629,9 @@
     "Panama City Beach CRA spent 2020-06-29 (Change Order #18, Res. 20-136): Segment 2: underground electrical conversion and added electrical service at Los Rancheros ($13,108.30) (not counted in CRA totals: Included in the $16.0M Segment 2 project total)"
    ],
    "record_ids": [
-    "cra:107",
-    "cra:108",
-    "cra:109"
+    "cra:83",
+    "cra:84",
+    "cra:85"
    ],
    "contract_source_urls": [
     "https://www.pcbfl.gov/home/showpublisheddocument/20389/637915921100900000",
@@ -10393,9 +10393,9 @@
     "Panama City Beach CRA spent 2020-06-29 (Change Order #18, Res. 20-136): Segment 2: underground electrical conversion and added electrical service at Los Rancheros ($13,108.30) (not counted in CRA totals: Included in the $16.0M Segment 2 project total)"
    ],
    "record_ids": [
-    "cra:107",
-    "cra:108",
-    "cra:109"
+    "cra:83",
+    "cra:84",
+    "cra:85"
    ],
    "contract_source_urls": [
     "https://www.pcbfl.gov/home/showpublisheddocument/20389/637915921100900000",
@@ -10757,9 +10757,9 @@
     "Panama City Beach CRA spent 2020-06-29 (Change Order #18, Res. 20-136): Segment 2: underground electrical conversion and added electrical service at Los Rancheros ($13,108.30) (not counted in CRA totals: Included in the $16.0M Segment 2 project total)"
    ],
    "record_ids": [
-    "cra:107",
-    "cra:108",
-    "cra:109"
+    "cra:83",
+    "cra:84",
+    "cra:85"
    ],
    "contract_source_urls": [
     "https://www.pcbfl.gov/home/showpublisheddocument/20389/637915921100900000",
@@ -11139,9 +11139,9 @@
     "Panama City Beach CRA spent 2020-06-29 (Change Order #18, Res. 20-136): Segment 2: underground electrical conversion and added electrical service at Los Rancheros ($13,108.30) (not counted in CRA totals: Included in the $16.0M Segment 2 project total)"
    ],
    "record_ids": [
-    "cra:107",
-    "cra:108",
-    "cra:109"
+    "cra:83",
+    "cra:84",
+    "cra:85"
    ],
    "contract_source_urls": [
     "https://www.pcbfl.gov/home/showpublisheddocument/20389/637915921100900000",
@@ -11420,7 +11420,7 @@
    ],
    "record_ids": [
     "contract:300",
-    "cra:125"
+    "cra:101"
    ],
    "contract_source_urls": [
     "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=128",
@@ -12147,13 +12147,13 @@
     "Contract 2025-01-30: Task order, utilities relocation engineering on SR 30A (US 98), R. Jackson to Thomas Dr ($268,260.00)"
    ],
    "record_ids": [
-    "cra:115",
-    "cra:116",
-    "cra:120",
-    "cra:118",
-    "cra:114",
-    "cra:119",
-    "cra:117",
+    "cra:91",
+    "cra:92",
+    "cra:96",
+    "cra:94",
+    "cra:90",
+    "cra:95",
+    "cra:93",
     "contract:304",
     "contract:311"
    ],
@@ -12205,9 +12205,9 @@
     "Panama City Beach CRA spent 2020-06-29 (Change Order #18, Res. 20-136): Segment 2: underground electrical conversion and added electrical service at Los Rancheros ($13,108.30) (not counted in CRA totals: Included in the $16.0M Segment 2 project total)"
    ],
    "record_ids": [
-    "cra:107",
-    "cra:108",
-    "cra:109"
+    "cra:83",
+    "cra:84",
+    "cra:85"
    ],
    "contract_source_urls": [
     "https://www.pcbfl.gov/home/showpublisheddocument/20389/637915921100900000",
@@ -12472,45 +12472,6 @@
    "note": "Names match after removing punctuation and legal suffixes.",
    "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=16&c=bay&ca=378&rellevel=4&committee=N",
    "office_gov_id": "lh",
-   "same_government_as_office": false
-  },
-  {
-   "contributor": "Ink Trax, Inc.",
-   "contributor_spellings": null,
-   "vendor": "Ink Trax (Old Coke Building)",
-   "vendor_id": "ink-trax",
-   "vendor_entity": "Ink Trax (Old Coke Building)",
-   "candidate": "Doug Moore",
-   "person_id": "douglas-moore",
-   "office": "Bay County Commission, District 4",
-   "election": "2020 Primary (08/18/2020)/General Election (11/3/2020)",
-   "gift_source": "past campaigns 2016-2025 (campaign_history.json)",
-   "contribution_amount": 1000.0,
-   "refunded_by_campaign": null,
-   "contribution_dates": [
-    "2020-09-11"
-   ],
-   "contribution_items": [
-    "check"
-   ],
-   "contract_ids_or_descriptions": [
-    "Panama City CRA spent FY2011: Matching commercial improvement grant ($47,644.68)"
-   ],
-   "record_ids": [
-    "cra:37"
-   ],
-   "contract_source_urls": [
-    "https://www.panamacity.gov/DocumentCenter/View/68/FY2011-Annual-Report-PDF"
-   ],
-   "contract_government": "City of Panama City",
-   "contract_gov_id": "pc",
-   "record_types": [
-    "cra"
-   ],
-   "match_confidence": "exact",
-   "note": "Names match after removing punctuation and legal suffixes.",
-   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=21&c=bay&ca=530&rellevel=4&committee=N",
-   "office_gov_id": "county",
    "same_government_as_office": false
   },
   {
@@ -13329,9 +13290,9 @@
     "Panama City Beach CRA spent 2020-06-29 (Change Order #18, Res. 20-136): Segment 2: underground electrical conversion and added electrical service at Los Rancheros ($13,108.30) (not counted in CRA totals: Included in the $16.0M Segment 2 project total)"
    ],
    "record_ids": [
-    "cra:107",
-    "cra:108",
-    "cra:109"
+    "cra:83",
+    "cra:84",
+    "cra:85"
    ],
    "contract_source_urls": [
     "https://www.pcbfl.gov/home/showpublisheddocument/20389/637915921100900000",
@@ -13476,7 +13437,7 @@
     "Panama City Beach CRA spent 2020-12-10 (Res. 21-53): Front Beach Road 4-inch force main relocation ($95,172.13) (not counted in CRA totals: Resolution does not say CRA; may be city utility funds)"
    ],
    "record_ids": [
-    "cra:129"
+    "cra:105"
    ],
    "contract_source_urls": [
     "https://pcbfl.gov/home/showpublisheddocument/17149/637435750461770000"
@@ -14286,9 +14247,9 @@
     "Panama City Beach CRA spent 2020-06-29 (Change Order #18, Res. 20-136): Segment 2: underground electrical conversion and added electrical service at Los Rancheros ($13,108.30) (not counted in CRA totals: Included in the $16.0M Segment 2 project total)"
    ],
    "record_ids": [
-    "cra:107",
-    "cra:108",
-    "cra:109"
+    "cra:83",
+    "cra:84",
+    "cra:85"
    ],
    "contract_source_urls": [
     "https://www.pcbfl.gov/home/showpublisheddocument/20389/637915921100900000",
@@ -14830,9 +14791,9 @@
     "Panama City Beach CRA spent 2020-06-29 (Change Order #18, Res. 20-136): Segment 2: underground electrical conversion and added electrical service at Los Rancheros ($13,108.30) (not counted in CRA totals: Included in the $16.0M Segment 2 project total)"
    ],
    "record_ids": [
-    "cra:107",
-    "cra:108",
-    "cra:109"
+    "cra:83",
+    "cra:84",
+    "cra:85"
    ],
    "contract_source_urls": [
     "https://www.pcbfl.gov/home/showpublisheddocument/20389/637915921100900000",
@@ -15238,13 +15199,13 @@
     "Contract 2025-01-30: Task order, utilities relocation engineering on SR 30A (US 98), R. Jackson to Thomas Dr ($268,260.00)"
    ],
    "record_ids": [
-    "cra:115",
-    "cra:116",
-    "cra:120",
-    "cra:118",
-    "cra:114",
-    "cra:119",
-    "cra:117",
+    "cra:91",
+    "cra:92",
+    "cra:96",
+    "cra:94",
+    "cra:90",
+    "cra:95",
+    "cra:93",
     "contract:304",
     "contract:311"
    ],
@@ -15296,9 +15257,9 @@
     "Panama City Beach CRA spent 2020-06-29 (Change Order #18, Res. 20-136): Segment 2: underground electrical conversion and added electrical service at Los Rancheros ($13,108.30) (not counted in CRA totals: Included in the $16.0M Segment 2 project total)"
    ],
    "record_ids": [
-    "cra:107",
-    "cra:108",
-    "cra:109"
+    "cra:83",
+    "cra:84",
+    "cra:85"
    ],
    "contract_source_urls": [
     "https://www.pcbfl.gov/home/showpublisheddocument/20389/637915921100900000",
@@ -15577,7 +15538,7 @@
    ],
    "record_ids": [
     "contract:300",
-    "cra:125"
+    "cra:101"
    ],
    "contract_source_urls": [
     "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=128",
@@ -17775,13 +17736,13 @@
     "Contract 2025-01-30: Task order, utilities relocation engineering on SR 30A (US 98), R. Jackson to Thomas Dr ($268,260.00)"
    ],
    "record_ids": [
-    "cra:115",
-    "cra:116",
-    "cra:120",
-    "cra:118",
-    "cra:114",
-    "cra:119",
-    "cra:117",
+    "cra:91",
+    "cra:92",
+    "cra:96",
+    "cra:94",
+    "cra:90",
+    "cra:95",
+    "cra:93",
     "contract:304",
     "contract:311"
    ],
@@ -19254,13 +19215,13 @@
     "Contract 2025-01-30: Task order, utilities relocation engineering on SR 30A (US 98), R. Jackson to Thomas Dr ($268,260.00)"
    ],
    "record_ids": [
-    "cra:115",
-    "cra:116",
-    "cra:120",
-    "cra:118",
-    "cra:114",
-    "cra:119",
-    "cra:117",
+    "cra:91",
+    "cra:92",
+    "cra:96",
+    "cra:94",
+    "cra:90",
+    "cra:95",
+    "cra:93",
     "contract:304",
     "contract:311"
    ],
@@ -19312,9 +19273,9 @@
     "Panama City Beach CRA spent 2020-06-29 (Change Order #18, Res. 20-136): Segment 2: underground electrical conversion and added electrical service at Los Rancheros ($13,108.30) (not counted in CRA totals: Included in the $16.0M Segment 2 project total)"
    ],
    "record_ids": [
-    "cra:107",
-    "cra:108",
-    "cra:109"
+    "cra:83",
+    "cra:84",
+    "cra:85"
    ],
    "contract_source_urls": [
     "https://www.pcbfl.gov/home/showpublisheddocument/20389/637915921100900000",
@@ -19593,7 +19554,7 @@
    ],
    "record_ids": [
     "contract:300",
-    "cra:125"
+    "cra:101"
    ],
    "contract_source_urls": [
     "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=128",
@@ -21174,51 +21135,6 @@
    "same_government_as_office": false
   },
   {
-   "contributor": "GAC Contractors",
-   "contributor_spellings": null,
-   "vendor": "GAC Contractors, Inc.",
-   "vendor_id": "gac-contractors",
-   "vendor_entity": "GAC Contractors, Inc.",
-   "candidate": "Phil Chester",
-   "person_id": "phil-chester",
-   "office": "Panama City Beach Council, Ward 2",
-   "election": "2016 Municipal Super Tuesday (4/19/2016)",
-   "gift_source": "past campaigns 2016-2025 (campaign_history.json)",
-   "contribution_amount": 1000.0,
-   "refunded_by_campaign": null,
-   "contribution_dates": [
-    "2015-08-05"
-   ],
-   "contribution_items": [
-    "check"
-   ],
-   "contract_ids_or_descriptions": [
-    "Panama City Beach CRA spent 2016-09-22 (award): Front Beach Road Segment 2 reconstruction (South Thomas Dr to Richard Jackson Blvd; roadway, stormwater, utilities, sidewalks, lighting, trolley lanes) ($14,222,000.00) (not counted in CRA totals: Included in the $16.0M Segment 2 project total)",
-    "Panama City Beach CRA spent 2019 (Res. 19-123): Change Order #17, Segment 2: buying and installing red asphalt for the tram/trolley lanes ($95,363.82) (not counted in CRA totals: Included in the $16.0M Segment 2 project total)",
-    "Panama City Beach CRA spent 2020-06-29 (Change Order #18, Res. 20-136): Segment 2: underground electrical conversion and added electrical service at Los Rancheros ($13,108.30) (not counted in CRA totals: Included in the $16.0M Segment 2 project total)"
-   ],
-   "record_ids": [
-    "cra:107",
-    "cra:108",
-    "cra:109"
-   ],
-   "contract_source_urls": [
-    "https://www.pcbfl.gov/home/showpublisheddocument/20389/637915921100900000",
-    "https://pcbfl.gov/home/showpublisheddocument/14612/637012047594470000",
-    "https://pcbfl.gov/home/showpublisheddocument/16813/637299759305930000"
-   ],
-   "contract_government": "City of Panama City Beach",
-   "contract_gov_id": "pcb",
-   "record_types": [
-    "cra"
-   ],
-   "match_confidence": "exact",
-   "note": "Names match after removing punctuation and legal suffixes.",
-   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=15&c=bay&ca=308&rellevel=4&committee=N",
-   "office_gov_id": "pcb",
-   "same_government_as_office": true
-  },
-  {
    "contributor": "Marshall Brothers",
    "contributor_spellings": null,
    "vendor": "Marshall Brothers / Marshall Brothers Construction & Engineering / Marshall Brothers Construction & Engineering, Inc. / Marshall Brothers Construction and Engineering Inc. / Marshall Brothers Construction and Engineering, Inc.",
@@ -21430,10 +21346,7 @@
   },
   {
    "contributor": "Panhandle Engineering",
-   "contributor_spellings": [
-    "Panhandle Engineering",
-    "Panhandle Engineering, Inc."
-   ],
+   "contributor_spellings": null,
    "vendor": "PANHANDLE ENGIN / Panhandle Engineering",
    "vendor_id": "panhandle-engineering",
    "vendor_entity": "Panhandle Engineering",
@@ -21442,14 +21355,12 @@
    "office": "Panama City Beach Council, Ward 2",
    "election": "2020 Municipal Super Tuesday (4/21/2020)",
    "gift_source": "past campaigns 2016-2025 (campaign_history.json)",
-   "contribution_amount": 1500.0,
+   "contribution_amount": 1000.0,
    "refunded_by_campaign": null,
    "contribution_dates": [
-    "2015-08-05",
     "2020-03-09"
    ],
    "contribution_items": [
-    "check",
     "check"
    ],
    "contract_ids_or_descriptions": [
@@ -21491,10 +21402,7 @@
   },
   {
    "contributor": "Panhandle Engineering",
-   "contributor_spellings": [
-    "Panhandle Engineering",
-    "Panhandle Engineering, Inc."
-   ],
+   "contributor_spellings": null,
    "vendor": "Mott MacDonald and Panhandle Engineering / Panhandle Engineering",
    "vendor_id": "panhandle-engineering",
    "vendor_entity": "Panhandle Engineering",
@@ -21503,14 +21411,12 @@
    "office": "Panama City Beach Council, Ward 2",
    "election": "2020 Municipal Super Tuesday (4/21/2020)",
    "gift_source": "past campaigns 2016-2025 (campaign_history.json)",
-   "contribution_amount": 1500.0,
+   "contribution_amount": 1000.0,
    "refunded_by_campaign": null,
    "contribution_dates": [
-    "2015-08-05",
     "2020-03-09"
    ],
    "contribution_items": [
-    "check",
     "check"
    ],
    "contract_ids_or_descriptions": [
@@ -21545,175 +21451,6 @@
    "note": "Names match after removing punctuation and legal suffixes.",
    "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=22&c=bay&ca=474&rellevel=4&committee=N",
    "office_gov_id": "pcb",
-   "same_government_as_office": false
-  },
-  {
-   "contributor": "anderson construction company",
-   "contributor_spellings": null,
-   "vendor": "Anderson Construction Company / Anderson Construction Company of North Florida",
-   "vendor_id": "anderson-construction",
-   "vendor_entity": "Anderson Construction Co. of North Florida",
-   "candidate": "Philip 'Griff ' Griffitts",
-   "person_id": "philip-griffitts",
-   "office": "Bay County Commission, District 5",
-   "election": "2016 Primary/General Elections (11/8/2016)",
-   "gift_source": "past campaigns 2016-2025 (campaign_history.json)",
-   "contribution_amount": 250.0,
-   "refunded_by_campaign": null,
-   "contribution_dates": [
-    "2015-12-14"
-   ],
-   "contribution_items": [
-    "check"
-   ],
-   "contract_ids_or_descriptions": [
-    "Contract 2023-03-28: Renovation of the existing vehicle maintenance facility ($1,667,174.00)",
-    "Contract 2026-04-14: Bid PC26-020, Hometown Revitalization, A.D. Harris ($484,650.00)"
-   ],
-   "record_ids": [
-    "contract:201",
-    "contract:280"
-   ],
-   "contract_source_urls": [
-    "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_03282023-603?html=true",
-    "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_04142026-844?html=true"
-   ],
-   "contract_government": "City of Panama City",
-   "contract_gov_id": "pc",
-   "record_types": [
-    "contract"
-   ],
-   "match_confidence": "exact",
-   "note": "Names match after removing punctuation and legal suffixes.",
-   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=14&c=bay&ca=299&rellevel=4&committee=N",
-   "office_gov_id": "county",
-   "same_government_as_office": false
-  },
-  {
-   "contributor": "inland construction co",
-   "contributor_spellings": null,
-   "vendor": "Inland Construction and Engineering, Inc.",
-   "vendor_id": "inland",
-   "vendor_entity": "Inland Construction and Engineering",
-   "candidate": "Philip 'Griff ' Griffitts",
-   "person_id": "philip-griffitts",
-   "office": "Bay County Commission, District 5",
-   "election": "2016 Primary/General Elections (11/8/2016)",
-   "gift_source": "past campaigns 2016-2025 (campaign_history.json)",
-   "contribution_amount": 1000.0,
-   "refunded_by_campaign": null,
-   "contribution_dates": [
-    "2015-11-06"
-   ],
-   "contribution_items": [
-    "check"
-   ],
-   "contract_ids_or_descriptions": [
-    "Contract 2023-07-18: Contract 23-14, RESTORE artificial reef construction ($458,425.00)",
-    "Contract 2026-06-02: Contract 26-31, McKenzie boat ramp project ($592,295.00)"
-   ],
-   "record_ids": [
-    "contract:44",
-    "contract:142"
-   ],
-   "contract_source_urls": [
-    "https://baycountyfl.primegov.com/Public/CompiledDocument/1399",
-    "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=4766"
-   ],
-   "contract_government": "Bay County BOCC",
-   "contract_gov_id": "county",
-   "record_types": [
-    "contract"
-   ],
-   "match_confidence": "exact",
-   "note": "Names match after removing punctuation and legal suffixes.",
-   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=14&c=bay&ca=299&rellevel=4&committee=N",
-   "office_gov_id": "county",
-   "same_government_as_office": true
-  },
-  {
-   "contributor": "inland construction co",
-   "contributor_spellings": null,
-   "vendor": "Inland Construction / Inland Construction & Engineering (bid awarded May 28, 2024) / Inland Construction and Engineering",
-   "vendor_id": "inland",
-   "vendor_entity": "Inland Construction and Engineering",
-   "candidate": "Philip 'Griff ' Griffitts",
-   "person_id": "philip-griffitts",
-   "office": "Bay County Commission, District 5",
-   "election": "2016 Primary/General Elections (11/8/2016)",
-   "gift_source": "past campaigns 2016-2025 (campaign_history.json)",
-   "contribution_amount": 1000.0,
-   "refunded_by_campaign": null,
-   "contribution_dates": [
-    "2015-11-06"
-   ],
-   "contribution_items": [
-    "check"
-   ],
-   "contract_ids_or_descriptions": [
-    "Contract 2025-01-28: PC24-017, Hentz Park ($924,120.00)",
-    "Contract 2025-12-16: Bid PC26-008, Hometown Revitalization Group DD ($892,500.00)",
-    "Panama City CRA budgeted FY2024-FY2026: Millville Waterfront Park renovation, Phase II: playground, amphitheater, trees, restrooms (total project cost, paid from FY2024-26 Millville district budgets) ($1,500,000.00)"
-   ],
-   "record_ids": [
-    "contract:244",
-    "contract:272",
-    "cra:6"
-   ],
-   "contract_source_urls": [
-    "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_01282025-725?html=true",
-    "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_12162025-796?html=true",
-    "https://panamacity.gov/785/Current-Projects"
-   ],
-   "contract_government": "City of Panama City",
-   "contract_gov_id": "pc",
-   "record_types": [
-    "contract",
-    "cra"
-   ],
-   "match_confidence": "exact",
-   "note": "Names match after removing punctuation and legal suffixes.",
-   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=14&c=bay&ca=299&rellevel=4&committee=N",
-   "office_gov_id": "county",
-   "same_government_as_office": false
-  },
-  {
-   "contributor": "pcb entertainment llc",
-   "contributor_spellings": null,
-   "vendor": "PCB Entertainment LLC",
-   "vendor_id": "pcb-entertainment",
-   "vendor_entity": "PCB Entertainment LLC",
-   "candidate": "Philip 'Griff ' Griffitts",
-   "person_id": "philip-griffitts",
-   "office": "Bay County Commission, District 5",
-   "election": "2016 Primary/General Elections (11/8/2016)",
-   "gift_source": "past campaigns 2016-2025 (campaign_history.json)",
-   "contribution_amount": 250.0,
-   "refunded_by_campaign": null,
-   "contribution_dates": [
-    "2015-11-05"
-   ],
-   "contribution_items": [
-    "check"
-   ],
-   "contract_ids_or_descriptions": [
-    "Panama City Beach Convention & Visitors Bureau (Visit Panama City Beach) check register (FY2024, FY2025, FY2026): $1,250,000.00 paid in 3 payments"
-   ],
-   "record_ids": [
-    "tdc:0/6"
-   ],
-   "contract_source_urls": [
-    "https://bayforms.baycoclerk.com/PublicAccess/PublicRecordSearch/"
-   ],
-   "contract_government": "Panama City Beach Convention & Visitors Bureau (Visit Panama City Beach)",
-   "contract_gov_id": "visit_pcb",
-   "record_types": [
-    "tdc"
-   ],
-   "match_confidence": "exact",
-   "note": "Names match after removing punctuation and legal suffixes.",
-   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=14&c=bay&ca=299&rellevel=4&committee=N",
-   "office_gov_id": "county",
    "same_government_as_office": false
   },
   {
@@ -22044,115 +21781,6 @@
    "same_government_as_office": false
   },
   {
-   "contributor": "Panhandle Engineering, Inc",
-   "contributor_spellings": null,
-   "vendor": "PANHANDLE ENGIN / Panhandle Engineering",
-   "vendor_id": "panhandle-engineering",
-   "vendor_entity": "Panhandle Engineering",
-   "candidate": "Rick Russell Jr.",
-   "person_id": "rick-russell",
-   "office": "Panama City Beach Mayor",
-   "election": "2016 Municipal Super Tuesday (4/19/2016)",
-   "gift_source": "past campaigns 2016-2025 (campaign_history.json)",
-   "contribution_amount": 500.0,
-   "refunded_by_campaign": null,
-   "contribution_dates": [
-    "2015-08-17"
-   ],
-   "contribution_items": [
-    "check"
-   ],
-   "contract_ids_or_descriptions": [
-    "Contract 2022-10-07: Task order, engineering for FDOT legislative paving Phase III ($160,325.00)",
-    "Contract 2023-10-24: Task order, legislative paving program phase ($116,310.00)",
-    "Contract 2025-10-14: Task order, lift station improvements ($146,399.00)",
-    "Contract 2025-11-12: Task order, sewer force main improvements design ($382,820.00)",
-    "FY2023 check register, top-vendor list: $787,419.25 paid",
-    "FY2024 check register, top-vendor list: $358,261.20 paid",
-    "FY2025 check register, top-vendor list: $335,960.91 paid"
-   ],
-   "record_ids": [
-    "contract:157",
-    "contract:162",
-    "contract:178",
-    "contract:180",
-    "register:3/top_vendors/7",
-    "register:4/top_vendors/13",
-    "register:5/top_vendors/15"
-   ],
-   "contract_source_urls": [
-    "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10072022-417",
-    "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10242023-650",
-    "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_10142025-1032",
-    "https://www.cityoflynnhaven.com/AgendaCenter/ViewFile/Agenda/_11122025-1054",
-    "https://www.cityoflynnhaven.com/AgendaCenter"
-   ],
-   "contract_government": "City of Lynn Haven",
-   "contract_gov_id": "lh",
-   "record_types": [
-    "contract",
-    "register"
-   ],
-   "match_confidence": "exact",
-   "note": "Names match after removing punctuation and legal suffixes.",
-   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=15&c=bay&ca=309&rellevel=4&committee=N",
-   "office_gov_id": "pcb",
-   "same_government_as_office": false
-  },
-  {
-   "contributor": "Panhandle Engineering, Inc",
-   "contributor_spellings": null,
-   "vendor": "Mott MacDonald and Panhandle Engineering / Panhandle Engineering",
-   "vendor_id": "panhandle-engineering",
-   "vendor_entity": "Panhandle Engineering",
-   "candidate": "Rick Russell Jr.",
-   "person_id": "rick-russell",
-   "office": "Panama City Beach Mayor",
-   "election": "2016 Municipal Super Tuesday (4/19/2016)",
-   "gift_source": "past campaigns 2016-2025 (campaign_history.json)",
-   "contribution_amount": 500.0,
-   "refunded_by_campaign": null,
-   "contribution_dates": [
-    "2015-08-17"
-   ],
-   "contribution_items": [
-    "check"
-   ],
-   "contract_ids_or_descriptions": [
-    "Contract 2023-05-23: Additional task order, SRF lead engineer program management plan ($600,000.00)",
-    "Contract 2024-03-26: Additional task order, SRF lead engineer program management plan ($250,000.00)",
-    "Contract 2025-04-24: Task order, CEI for SRF Area D-21 (up to) ($286,820.00)",
-    "Contract 2025-04-24: Task Order 5, SRF lead engineer program management plan ($250,000.00)",
-    "Contract 2025-11-18: Task order, CEI for SRF Area H (up to) ($267,080.00)",
-    "Contract 2026-07-14: Task Order Amendment 6, SRF lead engineer program management plan ($250,000.00)"
-   ],
-   "record_ids": [
-    "contract:202",
-    "contract:224",
-    "contract:253",
-    "contract:255",
-    "contract:270",
-    "contract:287"
-   ],
-   "contract_source_urls": [
-    "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_05232023-618?html=true",
-    "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_03262024-671?html=true",
-    "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_04242025-742?html=true",
-    "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_11182025-795?html=true",
-    "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_07142026-871?html=true"
-   ],
-   "contract_government": "City of Panama City",
-   "contract_gov_id": "pc",
-   "record_types": [
-    "contract"
-   ],
-   "match_confidence": "exact",
-   "note": "Names match after removing punctuation and legal suffixes.",
-   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=15&c=bay&ca=309&rellevel=4&committee=N",
-   "office_gov_id": "pcb",
-   "same_government_as_office": false
-  },
-  {
    "contributor": "GAC CONTRACTORS",
    "contributor_spellings": null,
    "vendor": "GAC Contractors, Inc.",
@@ -22177,9 +21805,9 @@
     "Panama City Beach CRA spent 2020-06-29 (Change Order #18, Res. 20-136): Segment 2: underground electrical conversion and added electrical service at Los Rancheros ($13,108.30) (not counted in CRA totals: Included in the $16.0M Segment 2 project total)"
    ],
    "record_ids": [
-    "cra:107",
-    "cra:108",
-    "cra:109"
+    "cra:83",
+    "cra:84",
+    "cra:85"
    ],
    "contract_source_urls": [
     "https://www.pcbfl.gov/home/showpublisheddocument/20389/637915921100900000",
@@ -22505,13 +22133,13 @@
     "Contract 2025-01-30: Task order, utilities relocation engineering on SR 30A (US 98), R. Jackson to Thomas Dr ($268,260.00)"
    ],
    "record_ids": [
-    "cra:115",
-    "cra:116",
-    "cra:120",
-    "cra:118",
-    "cra:114",
-    "cra:119",
-    "cra:117",
+    "cra:91",
+    "cra:92",
+    "cra:96",
+    "cra:94",
+    "cra:90",
+    "cra:95",
+    "cra:93",
     "contract:304",
     "contract:311"
    ],
@@ -22604,9 +22232,9 @@
     "Panama City Beach CRA spent 2020-06-29 (Change Order #18, Res. 20-136): Segment 2: underground electrical conversion and added electrical service at Los Rancheros ($13,108.30) (not counted in CRA totals: Included in the $16.0M Segment 2 project total)"
    ],
    "record_ids": [
-    "cra:107",
-    "cra:108",
-    "cra:109"
+    "cra:83",
+    "cra:84",
+    "cra:85"
    ],
    "contract_source_urls": [
     "https://www.pcbfl.gov/home/showpublisheddocument/20389/637915921100900000",
@@ -22885,7 +22513,7 @@
    ],
    "record_ids": [
     "contract:300",
-    "cra:125"
+    "cra:101"
    ],
    "contract_source_urls": [
     "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=128",
@@ -23608,9 +23236,9 @@
     "Panama City Beach CRA spent 2020-06-29 (Change Order #18, Res. 20-136): Segment 2: underground electrical conversion and added electrical service at Los Rancheros ($13,108.30) (not counted in CRA totals: Included in the $16.0M Segment 2 project total)"
    ],
    "record_ids": [
-    "cra:107",
-    "cra:108",
-    "cra:109"
+    "cra:83",
+    "cra:84",
+    "cra:85"
    ],
    "contract_source_urls": [
     "https://www.pcbfl.gov/home/showpublisheddocument/20389/637915921100900000",
@@ -23692,9 +23320,9 @@
     "Panama City Beach CRA spent 2020-06-29 (Change Order #18, Res. 20-136): Segment 2: underground electrical conversion and added electrical service at Los Rancheros ($13,108.30) (not counted in CRA totals: Included in the $16.0M Segment 2 project total)"
    ],
    "record_ids": [
-    "cra:107",
-    "cra:108",
-    "cra:109"
+    "cra:83",
+    "cra:84",
+    "cra:85"
    ],
    "contract_source_urls": [
     "https://www.pcbfl.gov/home/showpublisheddocument/20389/637915921100900000",
@@ -23981,13 +23609,13 @@
     "Contract 2025-01-30: Task order, utilities relocation engineering on SR 30A (US 98), R. Jackson to Thomas Dr ($268,260.00)"
    ],
    "record_ids": [
-    "cra:115",
-    "cra:116",
-    "cra:120",
-    "cra:118",
-    "cra:114",
-    "cra:119",
-    "cra:117",
+    "cra:91",
+    "cra:92",
+    "cra:96",
+    "cra:94",
+    "cra:90",
+    "cra:95",
+    "cra:93",
     "contract:304",
     "contract:311"
    ],
@@ -24623,9 +24251,9 @@
     "Panama City Beach CRA spent 2020-06-29 (Change Order #18, Res. 20-136): Segment 2: underground electrical conversion and added electrical service at Los Rancheros ($13,108.30) (not counted in CRA totals: Included in the $16.0M Segment 2 project total)"
    ],
    "record_ids": [
-    "cra:107",
-    "cra:108",
-    "cra:109"
+    "cra:83",
+    "cra:84",
+    "cra:85"
    ],
    "contract_source_urls": [
     "https://www.pcbfl.gov/home/showpublisheddocument/20389/637915921100900000",
@@ -24671,7 +24299,7 @@
     "Panama City CRA spent FY2024: Commercial improvement grant toward an $842,639 new restaurant build ($50,000.00)"
    ],
    "record_ids": [
-    "cra:33"
+    "cra:27"
    ],
    "contract_source_urls": [
     "https://www.panamacity.gov/DocumentCenter/View/9865"
@@ -24968,9 +24596,9 @@
     "Panama City Beach CRA spent 2020-06-29 (Change Order #18, Res. 20-136): Segment 2: underground electrical conversion and added electrical service at Los Rancheros ($13,108.30) (not counted in CRA totals: Included in the $16.0M Segment 2 project total)"
    ],
    "record_ids": [
-    "cra:107",
-    "cra:108",
-    "cra:109"
+    "cra:83",
+    "cra:84",
+    "cra:85"
    ],
    "contract_source_urls": [
     "https://www.pcbfl.gov/home/showpublisheddocument/20389/637915921100900000",
@@ -25183,48 +24811,6 @@
    "note": "Names match after removing punctuation and legal suffixes.",
    "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=21&c=bay&ca=490&rellevel=4&committee=N",
    "office_gov_id": "county",
-   "same_government_as_office": false
-  },
-  {
-   "contributor": "ANDERSON CONSTRUCTION COMPANY",
-   "contributor_spellings": null,
-   "vendor": "Anderson Construction Company / Anderson Construction Company of North Florida",
-   "vendor_id": "anderson-construction",
-   "vendor_entity": "Anderson Construction Co. of North Florida",
-   "candidate": "William (Bill) Husfelt",
-   "person_id": "bill-husfelt",
-   "office": "Superintendent of Schools",
-   "election": "2016 Primary/General Elections (11/8/2016)",
-   "gift_source": "past campaigns 2016-2025 (campaign_history.json)",
-   "contribution_amount": 250.0,
-   "refunded_by_campaign": null,
-   "contribution_dates": [
-    "2015-11-16"
-   ],
-   "contribution_items": [
-    "check"
-   ],
-   "contract_ids_or_descriptions": [
-    "Contract 2023-03-28: Renovation of the existing vehicle maintenance facility ($1,667,174.00)",
-    "Contract 2026-04-14: Bid PC26-020, Hometown Revitalization, A.D. Harris ($484,650.00)"
-   ],
-   "record_ids": [
-    "contract:201",
-    "contract:280"
-   ],
-   "contract_source_urls": [
-    "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_03282023-603?html=true",
-    "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_04142026-844?html=true"
-   ],
-   "contract_government": "City of Panama City",
-   "contract_gov_id": "pc",
-   "record_types": [
-    "contract"
-   ],
-   "match_confidence": "exact",
-   "note": "Names match after removing punctuation and legal suffixes.",
-   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=14&c=bay&ca=307&rellevel=4&committee=N",
-   "office_gov_id": "schools",
    "same_government_as_office": false
   },
   {
@@ -25537,13 +25123,13 @@
     "Contract 2025-01-30: Task order, utilities relocation engineering on SR 30A (US 98), R. Jackson to Thomas Dr ($268,260.00)"
    ],
    "record_ids": [
-    "cra:115",
-    "cra:116",
-    "cra:120",
-    "cra:118",
-    "cra:114",
-    "cra:119",
-    "cra:117",
+    "cra:91",
+    "cra:92",
+    "cra:96",
+    "cra:94",
+    "cra:90",
+    "cra:95",
+    "cra:93",
     "contract:304",
     "contract:311"
    ],
@@ -25563,45 +25149,6 @@
    "record_types": [
     "contract",
     "cra"
-   ],
-   "match_confidence": "exact",
-   "note": "Names match after removing punctuation and legal suffixes.",
-   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=14&c=bay&ca=307&rellevel=4&committee=N",
-   "office_gov_id": "schools",
-   "same_government_as_office": false
-  },
-  {
-   "contributor": "EPCI",
-   "contributor_spellings": null,
-   "vendor": "EPCI",
-   "vendor_id": "epci",
-   "vendor_entity": "EPCI",
-   "candidate": "William (Bill) Husfelt",
-   "person_id": "bill-husfelt",
-   "office": "Superintendent of Schools",
-   "election": "2016 Primary/General Elections (11/8/2016)",
-   "gift_source": "past campaigns 2016-2025 (campaign_history.json)",
-   "contribution_amount": 500.0,
-   "refunded_by_campaign": null,
-   "contribution_dates": [
-    "2015-10-28"
-   ],
-   "contribution_items": [
-    "check"
-   ],
-   "contract_ids_or_descriptions": [
-    "Mexico Beach Community Development Council check register (FY2024, FY2026): $214.00 paid in 2 payments"
-   ],
-   "record_ids": [
-    "tdc:2/61"
-   ],
-   "contract_source_urls": [
-    "https://bayforms.baycoclerk.com/PublicAccess/PublicRecordSearch/"
-   ],
-   "contract_government": "Mexico Beach Community Development Council",
-   "contract_gov_id": "mb_cdc",
-   "record_types": [
-    "tdc"
    ],
    "match_confidence": "exact",
    "note": "Names match after removing punctuation and legal suffixes.",
@@ -25680,51 +25227,6 @@
    "contract_gov_id": "pc",
    "record_types": [
     "contract"
-   ],
-   "match_confidence": "exact",
-   "note": "Names match after removing punctuation and legal suffixes.",
-   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=14&c=bay&ca=307&rellevel=4&committee=N",
-   "office_gov_id": "schools",
-   "same_government_as_office": false
-  },
-  {
-   "contributor": "GAC CONTRACTORS, INC.",
-   "contributor_spellings": null,
-   "vendor": "GAC Contractors, Inc.",
-   "vendor_id": "gac-contractors",
-   "vendor_entity": "GAC Contractors, Inc.",
-   "candidate": "William (Bill) Husfelt",
-   "person_id": "bill-husfelt",
-   "office": "Superintendent of Schools",
-   "election": "2016 Primary/General Elections (11/8/2016)",
-   "gift_source": "past campaigns 2016-2025 (campaign_history.json)",
-   "contribution_amount": 1000.0,
-   "refunded_by_campaign": null,
-   "contribution_dates": [
-    "2015-09-14"
-   ],
-   "contribution_items": [
-    "check"
-   ],
-   "contract_ids_or_descriptions": [
-    "Panama City Beach CRA spent 2016-09-22 (award): Front Beach Road Segment 2 reconstruction (South Thomas Dr to Richard Jackson Blvd; roadway, stormwater, utilities, sidewalks, lighting, trolley lanes) ($14,222,000.00) (not counted in CRA totals: Included in the $16.0M Segment 2 project total)",
-    "Panama City Beach CRA spent 2019 (Res. 19-123): Change Order #17, Segment 2: buying and installing red asphalt for the tram/trolley lanes ($95,363.82) (not counted in CRA totals: Included in the $16.0M Segment 2 project total)",
-    "Panama City Beach CRA spent 2020-06-29 (Change Order #18, Res. 20-136): Segment 2: underground electrical conversion and added electrical service at Los Rancheros ($13,108.30) (not counted in CRA totals: Included in the $16.0M Segment 2 project total)"
-   ],
-   "record_ids": [
-    "cra:107",
-    "cra:108",
-    "cra:109"
-   ],
-   "contract_source_urls": [
-    "https://www.pcbfl.gov/home/showpublisheddocument/20389/637915921100900000",
-    "https://pcbfl.gov/home/showpublisheddocument/14612/637012047594470000",
-    "https://pcbfl.gov/home/showpublisheddocument/16813/637299759305930000"
-   ],
-   "contract_government": "City of Panama City Beach",
-   "contract_gov_id": "pcb",
-   "record_types": [
-    "cra"
    ],
    "match_confidence": "exact",
    "note": "Names match after removing punctuation and legal suffixes.",
@@ -25943,11 +25445,8 @@
    "same_government_as_office": false
   },
   {
-   "contributor": "PANHANDLE ENGINEERING, INC.",
-   "contributor_spellings": [
-    "PANHANDLE ENGINEERING, INC",
-    "PANHANDLE ENGINEERING, INC."
-   ],
+   "contributor": "PANHANDLE ENGINEERING, INC",
+   "contributor_spellings": null,
    "vendor": "PANHANDLE ENGIN / Panhandle Engineering",
    "vendor_id": "panhandle-engineering",
    "vendor_entity": "Panhandle Engineering",
@@ -25956,14 +25455,12 @@
    "office": "Superintendent of Schools",
    "election": "2016 Primary/General Elections (11/8/2016)",
    "gift_source": "past campaigns 2016-2025 (campaign_history.json)",
-   "contribution_amount": 2000.0,
+   "contribution_amount": 1000.0,
    "refunded_by_campaign": null,
    "contribution_dates": [
-    "2015-09-30",
     "2016-11-02"
    ],
    "contribution_items": [
-    "check",
     "check"
    ],
    "contract_ids_or_descriptions": [
@@ -26004,11 +25501,8 @@
    "same_government_as_office": false
   },
   {
-   "contributor": "PANHANDLE ENGINEERING, INC.",
-   "contributor_spellings": [
-    "PANHANDLE ENGINEERING, INC",
-    "PANHANDLE ENGINEERING, INC."
-   ],
+   "contributor": "PANHANDLE ENGINEERING, INC",
+   "contributor_spellings": null,
    "vendor": "Mott MacDonald and Panhandle Engineering / Panhandle Engineering",
    "vendor_id": "panhandle-engineering",
    "vendor_entity": "Panhandle Engineering",
@@ -26017,14 +25511,12 @@
    "office": "Superintendent of Schools",
    "election": "2016 Primary/General Elections (11/8/2016)",
    "gift_source": "past campaigns 2016-2025 (campaign_history.json)",
-   "contribution_amount": 2000.0,
+   "contribution_amount": 1000.0,
    "refunded_by_campaign": null,
    "contribution_dates": [
-    "2015-09-30",
     "2016-11-02"
    ],
    "contribution_items": [
-    "check",
     "check"
    ],
    "contract_ids_or_descriptions": [
@@ -26121,9 +25613,9 @@
     "Panama City Beach CRA spent 2020-06-29 (Change Order #18, Res. 20-136): Segment 2: underground electrical conversion and added electrical service at Los Rancheros ($13,108.30) (not counted in CRA totals: Included in the $16.0M Segment 2 project total)"
    ],
    "record_ids": [
-    "cra:107",
-    "cra:108",
-    "cra:109"
+    "cra:83",
+    "cra:84",
+    "cra:85"
    ],
    "contract_source_urls": [
     "https://www.pcbfl.gov/home/showpublisheddocument/20389/637915921100900000",

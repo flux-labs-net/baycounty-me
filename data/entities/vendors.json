@@ -1,6 +1,6 @@
 {
  "about": "One record per vendor (business or organization paid by a Bay County government, CRA or tourism agency). aliases are every spelling found in contracts, change orders, emergency purchases, check registers (including 15-character truncations), TDC payments, the CRA ledger and business campaign contributions. Built by data/entities/build_entities.py; hand-reviewed joins carry merge_evidence. Look-alike names that were not joined are in vendor_review.json.",
- "count": 596,
+ "count": 589,
  "vendors": [
   {
    "id": "12elevenband",
@@ -125,22 +125,6 @@
    ]
   },
   {
-   "id": "a-d-harris-improvement-society",
-   "name": "A.D. Harris Improvement Society, Inc.",
-   "aliases": [
-    "A.D. Harris Improvement Society, Inc."
-   ],
-   "keys": [
-    "adharrisimprovementsociety"
-   ],
-   "records": {
-    "cra": 1
-   },
-   "gov_ids": [
-    "pc"
-   ]
-  },
-  {
    "id": "aaron-rich-marketing",
    "name": "Aaron Rich Marketing",
    "aliases": [
@@ -187,22 +171,6 @@
    },
    "gov_ids": [
     "lh"
-   ]
-  },
-  {
-   "id": "absolute-business-solutions",
-   "name": "Absolute Business Solutions",
-   "aliases": [
-    "Absolute Business Solutions"
-   ],
-   "keys": [
-    "absolutebusinesssolutions"
-   ],
-   "records": {
-    "cra": 1
-   },
-   "gov_ids": [
-    "pc"
    ]
   },
   {
@@ -622,12 +590,10 @@
    "id": "anderson-construction",
    "name": "Anderson Construction Co. of North Florida",
    "aliases": [
-    "ANDERSON CONSTRUCTION COMPANY",
     "Anderson Construction",
     "Anderson Construction Co. of North Florida",
     "Anderson Construction Company",
-    "Anderson Construction Company of North Florida",
-    "anderson construction company"
+    "Anderson Construction Company of North Florida"
    ],
    "keys": [
     "andersonconstruction",
@@ -1186,22 +1152,6 @@
    },
    "gov_ids": [
     "destination_pc"
-   ]
-  },
-  {
-   "id": "bay-medical-sacred-heart-health-system",
-   "name": "Bay Medical / Sacred Heart Health System",
-   "aliases": [
-    "Bay Medical / Sacred Heart Health System"
-   ],
-   "keys": [
-    "baymedicalsacredhearthealthsystem"
-   ],
-   "records": {
-    "cra": 1
-   },
-   "gov_ids": [
-    "pc"
    ]
   },
   {
@@ -3748,7 +3698,6 @@
    "name": "GAC Contractors, Inc.",
    "aliases": [
     "GAC CONTRACTORS",
-    "GAC CONTRACTORS, INC.",
     "GAC Contractors",
     "GAC Contractors Inc",
     "GAC Contractors, Inc."
@@ -4447,7 +4396,7 @@
    ],
    "records": {
     "tdc": 1,
-    "cra": 2
+    "cra": 1
    },
    "gov_ids": [
     "destination_pc",
@@ -4859,23 +4808,6 @@
    ]
   },
   {
-   "id": "ink-trax",
-   "name": "Ink Trax (Old Coke Building)",
-   "aliases": [
-    "Ink Trax (Old Coke Building)",
-    "Ink Trax, Inc."
-   ],
-   "keys": [
-    "inktrax"
-   ],
-   "records": {
-    "cra": 1
-   },
-   "gov_ids": [
-    "pc"
-   ]
-  },
-  {
    "id": "inland",
    "name": "Inland Construction and Engineering",
    "aliases": [
@@ -4885,8 +4817,7 @@
     "Inland Construction Inc.",
     "Inland Construction and Engineering",
     "Inland Construction and Engineering, Inc.",
-    "Inland Construction inc",
-    "inland construction co"
+    "Inland Construction inc"
    ],
    "keys": [
     "inlandconstruction",
@@ -5013,22 +4944,6 @@
    },
    "gov_ids": [
     "destination_pc"
-   ]
-  },
-  {
-   "id": "jani-s-ceramics",
-   "name": "Jani's Ceramics",
-   "aliases": [
-    "Jani's Ceramics"
-   ],
-   "keys": [
-    "janisceramics"
-   ],
-   "records": {
-    "cra": 1
-   },
-   "gov_ids": [
-    "pc"
    ]
   },
   {
@@ -5551,22 +5466,6 @@
    },
    "gov_ids": [
     "lh"
-   ]
-  },
-  {
-   "id": "layla-s-gelato",
-   "name": "Layla's Gelato",
-   "aliases": [
-    "Layla's Gelato"
-   ],
-   "keys": [
-    "laylasgelato"
-   ],
-   "records": {
-    "cra": 1
-   },
-   "gov_ids": [
-    "pc"
    ]
   },
   {
@@ -6855,7 +6754,6 @@
     "PANHANDLE ENGIN",
     "PANHANDLE ENGINEERING",
     "PANHANDLE ENGINEERING, INC",
-    "PANHANDLE ENGINEERING, INC.",
     "Panhandle Engineering",
     "Panhandle Engineering Inc",
     "Panhandle Engineering Inc.",
@@ -6990,27 +6888,10 @@
    ]
   },
   {
-   "id": "pbs-j",
-   "name": "PBS&J",
-   "aliases": [
-    "PBS&J"
-   ],
-   "keys": [
-    "pbsj"
-   ],
-   "records": {
-    "cra": 1
-   },
-   "gov_ids": [
-    "pcb"
-   ]
-  },
-  {
    "id": "pcb-entertainment",
    "name": "PCB Entertainment LLC",
    "aliases": [
-    "PCB Entertainment LLC",
-    "pcb entertainment llc"
+    "PCB Entertainment LLC"
    ],
    "keys": [
     "pcbentertainment"
@@ -10163,7 +10044,7 @@
   ]
  },
  "skipped": {
-  "not a named vendor": 150,
+  "not a named vendor": 134,
   "cra money in": 2
  }
 }

@@ -174,7 +174,7 @@ def person_title(p):
         t = f"{r['role']}, {short(r['gov_id'])}" if short(r['gov_id']).lower() not in r['role'].lower() else r['role']
     elif first('campaign', 'officeholder'):
         t = first('campaign', 'officeholder')['role'].split(':', 1)[1].strip()
-    elif first('officeholders'):  # an elected seat since 2014 (officeholder-terms): more exact than the vote records' member lists
+    elif first('officeholders'):  # an elected seat since 2016 (officeholder-terms): more exact than the vote records' member lists
         oh = [x for x in roles if x.get('source') == 'officeholders']
         r = next((x for x in oh if not x['role'].startswith('former')), oh[-1])  # the seat held now, else the latest one
         t = r['role'][:1].upper() + r['role'][1:] + f', {short(r["gov_id"])}'

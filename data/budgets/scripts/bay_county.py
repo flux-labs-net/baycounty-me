@@ -1,7 +1,7 @@
-"""Bay County (Board of County Commissioners) adopted budgets by fund, FY2015 to the latest year.
+"""Bay County (Board of County Commissioners) adopted budgets by fund, FY2016 (the site's first year) to the latest year.
 
 Reads the "Summary of All Funds" table in the county's budget books. Each table prints three years side by side, so
-seven documents cover every year from FY2015. Documents are on the Budget Office page
+six documents cover every year from FY2016 (the FY2017 book's FY2015 column is dropped, see data/entities/cutoff.py). Documents are on the Budget Office page
 (https://www.baycountyfl.gov/262/Budget-Office) and its "Previous Annual Budgets" archive (Archive.aspx?AMID=40).
 
 Every year is checked: the funds must add up to the printed "Total all Funds" and the General Fund row must match.
@@ -10,6 +10,9 @@ the long expenditure reports).
 Run: python3 data/budgets/scripts/bay_county.py [pdf-folder]   (downloads the PDFs when missing). Needs pdftotext.
 """
 import json, os, re, subprocess, sys, urllib.request
+
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'entities'))
+import cutoff  # noqa: E402  the site's first year
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, '..', 'bay_county.json')
@@ -93,7 +96,7 @@ def main(folder):
         'Each fund keeps its number across years and takes the latest name the county gives it (for example "101 Transportation Trust" is now "101 Transportation").',
         'FY2019 is the figure presented at the Sept 18, 2018 final hearing. FY2027 is the Sept 2026 final-hearing figure, which the county still labels tentative.',
         'General Fund departments are on record for FY2026 only; older books print departments in long line-item reports that are not parsed yet.']}
-    out['years'] = [years[y] for y in sorted(years)]
+    out['years'] = [years[y] for y in sorted(years) if cutoff.keep(y)]
     json.dump(out, open(OUT, 'w'), indent=1)
     for y in out['years']:
         print(y['fiscal_year'], len(y['funds']), y['total'], y['general_fund'])

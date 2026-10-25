@@ -22,7 +22,6 @@
   "not_reconciled": 11
  },
  "gaps": [
-  "2015: the SOE online system starts with the 2016 elections; 2015 city races would need a records request to the SOE or the city clerks.",
   "Left out (party posts and a federal race that file with the SOE): Rep State Committeeman (2016) x2; Rep State Committeeman (2020) x2; Rep State Committeeman (2024) x2; Rep State Committeewoman (2016) x2; Rep State Committeewoman (2020) x3; Rep State Committeewoman (2024) x3; United States Senate (2016).",
   "Campaigns whose itemized lines do not add up to the SOE summary are flagged in reconciliation; the SOE summary figures are used for totals.",
   "Political committees (for example referendum committees) are not candidates and are not included."
@@ -42167,22 +42166,6 @@
      "name": "Paul Bohac (candidate)",
      "city": null,
      "type": "candidate",
-     "amount": 100.0,
-     "date": "2015-10-15",
-     "kind": "loan"
-    },
-    {
-     "name": "George H Smith real estate",
-     "city": "Callaway",
-     "type": "business",
-     "amount": 100.0,
-     "date": "2015-11-27",
-     "kind": "check"
-    },
-    {
-     "name": "Paul Bohac (candidate)",
-     "city": null,
-     "type": "candidate",
      "amount": 250.0,
      "date": "2016-01-11",
      "kind": "loan"
@@ -42214,7 +42197,8 @@
    ],
    "reconciliation": "itemized matches summary",
    "notes": [
-    "Campaign filed a termination report (TRGM); account is closed."
+    "Campaign filed a termination report (TRGM); account is closed.",
+    "2 itemized gifts from organizations dated before 2016 are not listed (the site starts in 2016); the totals cover the whole campaign."
    ],
    "gov_id": "cw",
    "election_date": "2016-04-19",
@@ -42290,22 +42274,6 @@
      "name": "Ron Fairbanks (candidate)",
      "city": null,
      "type": "candidate",
-     "amount": 100.0,
-     "date": "2015-09-30",
-     "kind": "loan"
-    },
-    {
-     "name": "Ron Fairbanks (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 500.0,
-     "date": "2015-10-30",
-     "kind": "loan"
-    },
-    {
-     "name": "Ron Fairbanks (candidate)",
-     "city": null,
-     "type": "candidate",
      "amount": 346.85,
      "date": "2016-01-22",
      "kind": "in-kind"
@@ -42345,7 +42313,8 @@
    ],
    "reconciliation": "itemized matches summary",
    "notes": [
-    "Campaign filed a termination report (TRGM); account is closed."
+    "Campaign filed a termination report (TRGM); account is closed.",
+    "2 itemized gifts from organizations dated before 2016 are not listed (the site starts in 2016); the totals cover the whole campaign."
    ],
    "gov_id": "cw",
    "election_date": "2016-04-19",
@@ -42416,19 +42385,11 @@
     "candidate_self": 0.0,
     "other": 0.0
    },
-   "contributors": [
-    {
-     "name": "regions",
-     "city": "callaway",
-     "type": "business",
-     "amount": 2.0,
-     "date": "2015-12-23",
-     "kind": "refund"
-    }
-   ],
+   "contributors": [],
    "reconciliation": "itemized matches summary",
    "notes": [
-    "Campaign filed a termination report (TRMQ); account is closed."
+    "Campaign filed a termination report (TRMQ); account is closed.",
+    "1 itemized gifts from organizations dated before 2016 are not listed (the site starts in 2016); the totals cover the whole campaign."
    ],
    "gov_id": "cw",
    "election_date": "2016-04-19",
@@ -42501,14 +42462,6 @@
    },
    "contributors": [
     {
-     "name": "RPP Real Estate Svs Inc",
-     "city": "Panama CIty",
-     "type": "business",
-     "amount": 100.0,
-     "date": "2015-04-30",
-     "kind": "check"
-    },
-    {
      "name": "RPP Real Estate Services Inc",
      "city": "Panama City Beach",
      "type": "business",
@@ -42535,7 +42488,8 @@
    ],
    "reconciliation": "itemized matches summary",
    "notes": [
-    "Campaign filed a termination report (TRMQ); account is closed."
+    "Campaign filed a termination report (TRMQ); account is closed.",
+    "1 itemized gifts from organizations dated before 2016 are not listed (the site starts in 2016); the totals cover the whole campaign."
    ],
    "gov_id": "cw",
    "election_date": "2016-04-19",
@@ -42689,35 +42643,11 @@
     "candidate_self": 976.49,
     "other": 0.0
    },
-   "contributors": [
-    {
-     "name": "Jerry Wallace (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 881.49,
-     "date": "2015-11-28",
-     "kind": "in-kind"
-    },
-    {
-     "name": "Jerry Wallace (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 45.0,
-     "date": "2015-12-01",
-     "kind": "in-kind"
-    },
-    {
-     "name": "Jerry Wallace (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 50.0,
-     "date": "2015-12-03",
-     "kind": "loan"
-    }
-   ],
+   "contributors": [],
    "reconciliation": "itemized matches summary",
    "notes": [
-    "Campaign filed a termination report (TRM2); account is closed."
+    "Campaign filed a termination report (TRM2); account is closed.",
+    "3 itemized gifts from organizations dated before 2016 are not listed (the site starts in 2016); the totals cover the whole campaign."
    ],
    "gov_id": "mb",
    "election_date": "2016-04-19",
@@ -42871,20 +42801,12 @@
     "candidate_self": 0.0,
     "other": 0.0
    },
-   "contributors": [
-    {
-     "name": "rcr cars",
-     "city": "panama city beach",
-     "type": "business",
-     "amount": 500.0,
-     "date": "2015-08-21",
-     "kind": "check"
-    }
-   ],
+   "contributors": [],
    "reconciliation": "expenditures: itemized 2,204.98 vs SOE 1,897.16 (diff +307.82)",
    "notes": [
     "Campaign filed a termination report (TRMQ); account is closed.",
-    "Monetary contributions minus expenditures/distributions = -97.16 at termination (SOE figures)."
+    "Monetary contributions minus expenditures/distributions = -97.16 at termination (SOE figures).",
+    "1 itemized gifts from organizations dated before 2016 are not listed (the site starts in 2016); the totals cover the whole campaign."
    ],
    "gov_id": "pcb",
    "election_date": "2016-04-19",
@@ -42961,46 +42883,6 @@
    },
    "contributors": [
     {
-     "name": "TDW Inc.",
-     "city": "Panama City",
-     "type": "business",
-     "amount": 500.0,
-     "date": "2015-08-04",
-     "kind": "check"
-    },
-    {
-     "name": "GAC Contractors",
-     "city": "Panama City",
-     "type": "business",
-     "amount": 1000.0,
-     "date": "2015-08-05",
-     "kind": "check"
-    },
-    {
-     "name": "Panhandle Engineering, Inc.",
-     "city": "Lynn Haven",
-     "type": "business",
-     "amount": 500.0,
-     "date": "2015-08-05",
-     "kind": "check"
-    },
-    {
-     "name": "Bubba Hill Auto",
-     "city": "Panama City",
-     "type": "business",
-     "amount": 500.0,
-     "date": "2015-08-12",
-     "kind": "check"
-    },
-    {
-     "name": "Phil Chester (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 750.0,
-     "date": "2015-12-15",
-     "kind": "in-kind"
-    },
-    {
      "name": "Brown Fire Protection",
      "city": "Panama City",
      "type": "business",
@@ -43035,7 +42917,8 @@
    ],
    "reconciliation": "itemized matches summary",
    "notes": [
-    "Campaign filed a termination report (TRMQ); account is closed."
+    "Campaign filed a termination report (TRMQ); account is closed.",
+    "5 itemized gifts from organizations dated before 2016 are not listed (the site starts in 2016); the totals cover the whole campaign."
    ],
    "gov_id": "pcb",
    "election_date": "2016-04-19",
@@ -43112,14 +42995,6 @@
    },
    "contributors": [
     {
-     "name": "Hector Solis (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 500.0,
-     "date": "2015-11-10",
-     "kind": "loan"
-    },
-    {
      "name": "The Pittman Firm",
      "city": "Panama City",
      "type": "business",
@@ -43178,7 +43053,8 @@
    ],
    "reconciliation": "itemized matches summary",
    "notes": [
-    "Campaign filed a termination report (TRGM); account is closed."
+    "Campaign filed a termination report (TRGM); account is closed.",
+    "1 itemized gifts from organizations dated before 2016 are not listed (the site starts in 2016); the totals cover the whole campaign."
    ],
    "gov_id": "pcb",
    "election_date": "2016-04-19",
@@ -43251,22 +43127,6 @@
    },
    "contributors": [
     {
-     "name": "Keith Curry (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 500.0,
-     "date": "2015-12-10",
-     "kind": "loan"
-    },
-    {
-     "name": "Keith Curry (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 1600.0,
-     "date": "2015-12-30",
-     "kind": "in-kind"
-    },
-    {
      "name": "BEACH LIQUORS",
      "city": "PANAMA CITY BEACH",
      "type": "business",
@@ -43317,7 +43177,8 @@
    ],
    "reconciliation": "expenditures: itemized 15,100.00 vs SOE 14,900.00 (diff +200.00)",
    "notes": [
-    "Campaign filed a termination report (TRGM); account is closed."
+    "Campaign filed a termination report (TRGM); account is closed.",
+    "2 itemized gifts from organizations dated before 2016 are not listed (the site starts in 2016); the totals cover the whole campaign."
    ],
    "gov_id": "pcb",
    "election_date": "2016-04-19",
@@ -43393,22 +43254,6 @@
     "other": 0.0
    },
    "contributors": [
-    {
-     "name": "Robert Benjamin Smith (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 2275.0,
-     "date": "2015-12-02",
-     "kind": "loan"
-    },
-    {
-     "name": "Robert Benjamin Smith (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 38.0,
-     "date": "2015-12-14",
-     "kind": "in-kind"
-    },
     {
      "name": "COX BUILDING CORPOORATION",
      "city": "PANAMA CITY BEACH",
@@ -43596,7 +43441,8 @@
    ],
    "reconciliation": "expenditures: itemized 51,946.00 vs SOE 51,625.00 (diff +321.00)",
    "notes": [
-    "Campaign filed a termination report (TRGM); account is closed."
+    "Campaign filed a termination report (TRGM); account is closed.",
+    "2 itemized gifts from organizations dated before 2016 are not listed (the site starts in 2016); the totals cover the whole campaign."
    ],
    "gov_id": "pcb",
    "election_date": "2016-04-19",
@@ -43741,27 +43587,11 @@
     "candidate_self": 294.55,
     "other": 0.0
    },
-   "contributors": [
-    {
-     "name": "Brandon Caldwell (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 44.55,
-     "date": "2015-04-22",
-     "kind": "in-kind"
-    },
-    {
-     "name": "Brandon Caldwell (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 250.0,
-     "date": "2015-05-14",
-     "kind": "loan"
-    }
-   ],
+   "contributors": [],
    "reconciliation": "itemized matches summary",
    "notes": [
-    "Campaign filed a termination report (TRM7); account is closed."
+    "Campaign filed a termination report (TRM7); account is closed.",
+    "2 itemized gifts from organizations dated before 2016 are not listed (the site starts in 2016); the totals cover the whole campaign."
    ],
    "gov_id": "pcb",
    "election_date": "2016-04-19",
@@ -44144,75 +43974,11 @@
     "candidate_self": 88.38,
     "other": 0.0
    },
-   "contributors": [
-    {
-     "name": "Joe Moore (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 28.83,
-     "date": "2015-04-08",
-     "kind": "in-kind"
-    },
-    {
-     "name": "Joe Moore (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 31.5,
-     "date": "2015-04-08",
-     "kind": "loan"
-    },
-    {
-     "name": "Joe Moore (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 28.05,
-     "date": "2015-05-01",
-     "kind": "in-kind"
-    },
-    {
-     "name": "Pates Ford Resort & Marina LLC",
-     "city": "Smithville",
-     "type": "business",
-     "amount": 1000.0,
-     "date": "2015-06-23",
-     "kind": "check"
-    },
-    {
-     "name": "Tootsies Entertainment LLC",
-     "city": "Goodlettsaville",
-     "type": "business",
-     "amount": 1000.0,
-     "date": "2015-06-23",
-     "kind": "check"
-    },
-    {
-     "name": "Tootsies of Panama City LLC",
-     "city": "panama City Beach",
-     "type": "business",
-     "amount": 1000.0,
-     "date": "2015-06-23",
-     "kind": "check"
-    },
-    {
-     "name": "Blue Horizon Lodge Inc",
-     "city": "Panama City Beach",
-     "type": "business",
-     "amount": 100.0,
-     "date": "2015-09-10",
-     "kind": "check"
-    },
-    {
-     "name": "Rao Reddy Albibi Finlaw & Well",
-     "city": "Panama City",
-     "type": "business",
-     "amount": 250.0,
-     "date": "2015-09-30",
-     "kind": "check"
-    }
-   ],
+   "contributors": [],
    "reconciliation": "itemized matches summary",
    "notes": [
-    "Campaign filed a termination report (TRM1); account is closed."
+    "Campaign filed a termination report (TRM1); account is closed.",
+    "8 itemized gifts from organizations dated before 2016 are not listed (the site starts in 2016); the totals cover the whole campaign."
    ],
    "gov_id": "pcb",
    "election_date": "2016-04-19",
@@ -44283,35 +44049,11 @@
     "candidate_self": 80.0,
     "other": 0.0
    },
-   "contributors": [
-    {
-     "name": "John Curci (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 30.0,
-     "date": "2015-06-03",
-     "kind": "loan"
-    },
-    {
-     "name": "the bouy",
-     "city": "pcb",
-     "type": "business",
-     "amount": 200.0,
-     "date": "2015-07-28",
-     "kind": "cash"
-    },
-    {
-     "name": "John Curci (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 50.0,
-     "date": "2015-08-18",
-     "kind": "loan"
-    }
-   ],
+   "contributors": [],
    "reconciliation": "itemized matches summary",
    "notes": [
-    "Campaign filed a termination report (TRMQ); account is closed."
+    "Campaign filed a termination report (TRMQ); account is closed.",
+    "3 itemized gifts from organizations dated before 2016 are not listed (the site starts in 2016); the totals cover the whole campaign."
    ],
    "gov_id": "pcb",
    "election_date": "2016-04-19",
@@ -44499,46 +44241,6 @@
    },
    "contributors": [
     {
-     "name": "Ken Nelson (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 100.0,
-     "date": "2015-09-14",
-     "kind": "loan"
-    },
-    {
-     "name": "Ken Nelson (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 2000.0,
-     "date": "2015-09-29",
-     "kind": "in-kind"
-    },
-    {
-     "name": "MAINTENANCE PLUS PROPERTY",
-     "city": "Panama City",
-     "type": "business",
-     "amount": 1000.0,
-     "date": "2015-11-05",
-     "kind": "check"
-    },
-    {
-     "name": "T & B PROPERTY ENTERPRISES",
-     "city": "PANAMA CITY",
-     "type": "business",
-     "amount": 1000.0,
-     "date": "2015-11-05",
-     "kind": "check"
-    },
-    {
-     "name": "P.C. HOME CENTER, INC.",
-     "city": "Ocala",
-     "type": "business",
-     "amount": 400.0,
-     "date": "2015-12-02",
-     "kind": "check"
-    },
-    {
      "name": "MOTEL ONE",
      "city": "PANAMA CITY BEACH",
      "type": "business",
@@ -44557,7 +44259,8 @@
    ],
    "reconciliation": "itemized matches summary",
    "notes": [
-    "Campaign filed a termination report (TRGM); account is closed."
+    "Campaign filed a termination report (TRGM); account is closed.",
+    "5 itemized gifts from organizations dated before 2016 are not listed (the site starts in 2016); the totals cover the whole campaign."
    ],
    "gov_id": "pcb",
    "election_date": "2016-04-19",
@@ -44941,30 +44644,6 @@
    },
    "contributors": [
     {
-     "name": "Panhandle Engineering, Inc",
-     "city": "Lynn Haven",
-     "type": "business",
-     "amount": 500.0,
-     "date": "2015-08-17",
-     "kind": "check"
-    },
-    {
-     "name": "Gulf Asphalt",
-     "city": "Panama City",
-     "type": "business",
-     "amount": 1000.0,
-     "date": "2015-10-20",
-     "kind": "check"
-    },
-    {
-     "name": "Phoenix Construction",
-     "city": "Lynn Haven",
-     "type": "business",
-     "amount": 1000.0,
-     "date": "2015-10-20",
-     "kind": "check"
-    },
-    {
      "name": "Magnum Engineering Inc",
      "city": "Lynn Haven",
      "type": "business",
@@ -45207,7 +44886,8 @@
    ],
    "reconciliation": "itemized matches summary",
    "notes": [
-    "Campaign filed a termination report (TRGM); account is closed."
+    "Campaign filed a termination report (TRGM); account is closed.",
+    "3 itemized gifts from organizations dated before 2016 are not listed (the site starts in 2016); the totals cover the whole campaign."
    ],
    "gov_id": "pcb",
    "election_date": "2016-04-19",
@@ -45406,14 +45086,6 @@
      "name": "James Haddock (candidate)",
      "city": null,
      "type": "candidate",
-     "amount": 2.25,
-     "date": "2015-11-24",
-     "kind": "in-kind"
-    },
-    {
-     "name": "James Haddock (candidate)",
-     "city": null,
-     "type": "candidate",
      "amount": 400.0,
      "date": "2016-01-04",
      "kind": "loan"
@@ -45437,7 +45109,8 @@
    ],
    "reconciliation": "itemized matches summary",
    "notes": [
-    "Campaign filed a termination report (TRGM); account is closed."
+    "Campaign filed a termination report (TRGM); account is closed.",
+    "1 itemized gifts from organizations dated before 2016 are not listed (the site starts in 2016); the totals cover the whole campaign."
    ],
    "gov_id": "sp",
    "election_date": "2016-04-19",
@@ -45513,46 +45186,6 @@
      "name": "Phillip Dykes (candidate)",
      "city": null,
      "type": "candidate",
-     "amount": 2.4,
-     "date": "2015-11-24",
-     "kind": "in-kind"
-    },
-    {
-     "name": "Phillip Dykes (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 3.0,
-     "date": "2015-12-02",
-     "kind": "in-kind"
-    },
-    {
-     "name": "Phillip Dykes (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 3.0,
-     "date": "2015-12-12",
-     "kind": "in-kind"
-    },
-    {
-     "name": "Phillip Dykes (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 600.0,
-     "date": "2015-12-15",
-     "kind": "loan"
-    },
-    {
-     "name": "Phillip Dykes (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 1.7,
-     "date": "2015-12-16",
-     "kind": "in-kind"
-    },
-    {
-     "name": "Phillip Dykes (candidate)",
-     "city": null,
-     "type": "candidate",
      "amount": 0.4,
      "date": "2016-01-28",
      "kind": "in-kind"
@@ -45560,7 +45193,8 @@
    ],
    "reconciliation": "itemized matches summary",
    "notes": [
-    "Campaign filed a termination report (TRMQ); account is closed."
+    "Campaign filed a termination report (TRMQ); account is closed.",
+    "5 itemized gifts from organizations dated before 2016 are not listed (the site starts in 2016); the totals cover the whole campaign."
    ],
    "gov_id": "sp",
    "election_date": "2016-04-19",
@@ -46064,14 +45698,6 @@
      "name": "A Converting Inc.",
      "city": "Panama City",
      "type": "business",
-     "amount": 500.0,
-     "date": "2015-09-14",
-     "kind": "check"
-    },
-    {
-     "name": "A Converting Inc.",
-     "city": "Panama City",
-     "type": "business",
      "amount": 400.0,
      "date": "2016-02-18",
      "kind": "check"
@@ -46151,7 +45777,8 @@
    ],
    "reconciliation": "expenditures: itemized 8,540.00 vs SOE 8,500.00 (diff +40.00)",
    "notes": [
-    "Campaign filed a termination report (TRP); account is closed."
+    "Campaign filed a termination report (TRP); account is closed.",
+    "1 itemized gifts from organizations dated before 2016 are not listed (the site starts in 2016); the totals cover the whole campaign."
    ],
    "gov_id": "county",
    "election_date": "2016-11-08",
@@ -46227,22 +45854,6 @@
     "other": 0.0
    },
    "contributors": [
-    {
-     "name": "Mike Nelson (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 100.0,
-     "date": "2015-11-13",
-     "kind": "loan"
-    },
-    {
-     "name": "D & G Automotive Inc",
-     "city": "Panama City",
-     "type": "business",
-     "amount": 1000.0,
-     "date": "2015-11-17",
-     "kind": "check"
-    },
     {
      "name": "Coastal Parasail Inc",
      "city": "Panama City Beach",
@@ -46831,7 +46442,8 @@
    "reconciliation": "itemized matches summary",
    "notes": [
     "Campaign filed a termination report (TRP); account is closed.",
-    "Monetary contributions minus expenditures/distributions = -500.00 at termination (SOE figures)."
+    "Monetary contributions minus expenditures/distributions = -500.00 at termination (SOE figures).",
+    "2 itemized gifts from organizations dated before 2016 are not listed (the site starts in 2016); the totals cover the whole campaign."
    ],
    "gov_id": "county",
    "election_date": "2016-11-08",
@@ -46907,14 +46519,6 @@
     "other": 0.0
    },
    "contributors": [
-    {
-     "name": "Winterfell Construction",
-     "city": "Panama City",
-     "type": "business",
-     "amount": 1000.0,
-     "date": "2015-11-24",
-     "kind": "check"
-    },
     {
      "name": "Bay Blueprint LLC",
      "city": "Southport",
@@ -47598,7 +47202,8 @@
    ],
    "reconciliation": "itemized matches summary",
    "notes": [
-    "Campaign filed a termination report (TRP); account is closed."
+    "Campaign filed a termination report (TRP); account is closed.",
+    "1 itemized gifts from organizations dated before 2016 are not listed (the site starts in 2016); the totals cover the whole campaign."
    ],
    "gov_id": "county",
    "election_date": "2016-11-08",
@@ -48617,14 +48222,6 @@
    },
    "contributors": [
     {
-     "name": "Bill Dozier (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 100.0,
-     "date": "2015-11-16",
-     "kind": "loan"
-    },
-    {
      "name": "Panhandle Engineering",
      "city": "Lynn Haven",
      "type": "business",
@@ -48923,7 +48520,8 @@
    ],
    "reconciliation": "itemized matches summary",
    "notes": [
-    "Campaign filed a termination report (TRP); account is closed."
+    "Campaign filed a termination report (TRP); account is closed.",
+    "1 itemized gifts from organizations dated before 2016 are not listed (the site starts in 2016); the totals cover the whole campaign."
    ],
    "gov_id": "county",
    "election_date": "2016-11-08",
@@ -49278,46 +48876,6 @@
      "name": "Brian Rust (candidate)",
      "city": null,
      "type": "candidate",
-     "amount": 121.83,
-     "date": "2015-06-25",
-     "kind": "in-kind"
-    },
-    {
-     "name": "Signs Unlimited",
-     "city": "Panama City",
-     "type": "business",
-     "amount": 50.0,
-     "date": "2015-06-25",
-     "kind": "in-kind"
-    },
-    {
-     "name": "Brian Rust (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 196.88,
-     "date": "2015-06-26",
-     "kind": "in-kind"
-    },
-    {
-     "name": "Brian Rust (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 100.0,
-     "date": "2015-08-07",
-     "kind": "loan"
-    },
-    {
-     "name": "Brian Rust (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 48.99,
-     "date": "2015-08-07",
-     "kind": "in-kind"
-    },
-    {
-     "name": "Brian Rust (candidate)",
-     "city": null,
-     "type": "candidate",
      "amount": 50.0,
      "date": "2016-02-25",
      "kind": "in-kind"
@@ -49373,7 +48931,8 @@
    ],
    "reconciliation": "itemized matches summary",
    "notes": [
-    "Campaign filed a termination report (TRP); account is closed."
+    "Campaign filed a termination report (TRP); account is closed.",
+    "5 itemized gifts from organizations dated before 2016 are not listed (the site starts in 2016); the totals cover the whole campaign."
    ],
    "gov_id": "county",
    "election_date": "2016-11-08",
@@ -49444,19 +49003,11 @@
     "candidate_self": 0.0,
     "other": 0.0
    },
-   "contributors": [
-    {
-     "name": "Parkway Storage",
-     "city": "Panama City Beach",
-     "type": "business",
-     "amount": 1000.0,
-     "date": "2015-04-17",
-     "kind": "check"
-    }
-   ],
+   "contributors": [],
    "reconciliation": "itemized matches summary",
    "notes": [
-    "Campaign filed a termination report (TRM5); account is closed."
+    "Campaign filed a termination report (TRM5); account is closed.",
+    "1 itemized gifts from organizations dated before 2016 are not listed (the site starts in 2016); the totals cover the whole campaign."
    ],
    "gov_id": "county",
    "election_date": "2016-11-08",
@@ -49532,294 +49083,6 @@
     "other": 0.0
    },
    "contributors": [
-    {
-     "name": "treasure island marina",
-     "city": "panama city beach",
-     "type": "business",
-     "amount": 1000.0,
-     "date": "2015-06-26",
-     "kind": "check"
-    },
-    {
-     "name": "granite plus",
-     "city": "panama city beach",
-     "type": "business",
-     "amount": 500.0,
-     "date": "2015-07-20",
-     "kind": "check"
-    },
-    {
-     "name": "mckinney insurance",
-     "city": "panama city",
-     "type": "business",
-     "amount": 500.0,
-     "date": "2015-07-20",
-     "kind": "check"
-    },
-    {
-     "name": "buddys seafood inc",
-     "city": "panama city beach",
-     "type": "business",
-     "amount": 100.0,
-     "date": "2015-07-22",
-     "kind": "check"
-    },
-    {
-     "name": "hattie marine services",
-     "city": "panama city beach",
-     "type": "business",
-     "amount": 100.0,
-     "date": "2015-07-22",
-     "kind": "check"
-    },
-    {
-     "name": "wes pac inc",
-     "city": "panama city beach",
-     "type": "business",
-     "amount": 500.0,
-     "date": "2015-07-24",
-     "kind": "check"
-    },
-    {
-     "name": "skinner tax consulting",
-     "city": "panama city beach",
-     "type": "business",
-     "amount": 500.0,
-     "date": "2015-08-21",
-     "kind": "check"
-    },
-    {
-     "name": "blue horizon lodge",
-     "city": "panama city beach",
-     "type": "business",
-     "amount": 300.0,
-     "date": "2015-08-31",
-     "kind": "check"
-    },
-    {
-     "name": "harrison rivard duncan buzzet",
-     "city": "panama city",
-     "type": "business",
-     "amount": 1000.0,
-     "date": "2015-08-31",
-     "kind": "check"
-    },
-    {
-     "name": "pharmacy equity partners llc",
-     "city": "panama city",
-     "type": "business",
-     "amount": 1000.0,
-     "date": "2015-08-31",
-     "kind": "check"
-    },
-    {
-     "name": "abbott real estate, inc",
-     "city": "panama city beach",
-     "type": "business",
-     "amount": 200.0,
-     "date": "2015-11-05",
-     "kind": "check"
-    },
-    {
-     "name": "bestway auto brokers, llc",
-     "city": "panama city",
-     "type": "business",
-     "amount": 250.0,
-     "date": "2015-11-05",
-     "kind": "check"
-    },
-    {
-     "name": "dermatology solutions group ll",
-     "city": "panama city",
-     "type": "business",
-     "amount": 500.0,
-     "date": "2015-11-05",
-     "kind": "check"
-    },
-    {
-     "name": "jdh hospitality llc",
-     "city": "panama city",
-     "type": "business",
-     "amount": 100.0,
-     "date": "2015-11-05",
-     "kind": "check"
-    },
-    {
-     "name": "mckinney purchasing inc",
-     "city": "panama city beach",
-     "type": "business",
-     "amount": 100.0,
-     "date": "2015-11-05",
-     "kind": "check"
-    },
-    {
-     "name": "mcneil carroll engineering, in",
-     "city": "panama city",
-     "type": "business",
-     "amount": 250.0,
-     "date": "2015-11-05",
-     "kind": "check"
-    },
-    {
-     "name": "merrick industries inc",
-     "city": "lynn haven",
-     "type": "business",
-     "amount": 1000.0,
-     "date": "2015-11-05",
-     "kind": "check"
-    },
-    {
-     "name": "moore borthers construction",
-     "city": "lynn haven",
-     "type": "business",
-     "amount": 1000.0,
-     "date": "2015-11-05",
-     "kind": "check"
-    },
-    {
-     "name": "nations real estate brokerage",
-     "city": "panama city",
-     "type": "business",
-     "amount": 500.0,
-     "date": "2015-11-05",
-     "kind": "check"
-    },
-    {
-     "name": "ooh-la-la",
-     "city": "lynn haven",
-     "type": "business",
-     "amount": 100.0,
-     "date": "2015-11-05",
-     "kind": "check"
-    },
-    {
-     "name": "pcb entertainment llc",
-     "city": "panama city beach",
-     "type": "business",
-     "amount": 250.0,
-     "date": "2015-11-05",
-     "kind": "check"
-    },
-    {
-     "name": "prebble rish inc",
-     "city": "port st joe",
-     "type": "business",
-     "amount": 1000.0,
-     "date": "2015-11-05",
-     "kind": "check"
-    },
-    {
-     "name": "sage land holdings llc",
-     "city": "panama city beach",
-     "type": "business",
-     "amount": 750.0,
-     "date": "2015-11-05",
-     "kind": "check"
-    },
-    {
-     "name": "shipwreck island waterpark",
-     "city": "panama city beach",
-     "type": "business",
-     "amount": 1000.0,
-     "date": "2015-11-05",
-     "kind": "check"
-    },
-    {
-     "name": "shri gautam swami, inc",
-     "city": "panama city beach",
-     "type": "business",
-     "amount": 100.0,
-     "date": "2015-11-05",
-     "kind": "check"
-    },
-    {
-     "name": "southern hospitality llc",
-     "city": "panama city",
-     "type": "business",
-     "amount": 151.0,
-     "date": "2015-11-05",
-     "kind": "check"
-    },
-    {
-     "name": "triple j\\'s inc",
-     "city": "panama city",
-     "type": "business",
-     "amount": 100.0,
-     "date": "2015-11-05",
-     "kind": "check"
-    },
-    {
-     "name": "vittles companies inc",
-     "city": "panama city",
-     "type": "business",
-     "amount": 400.0,
-     "date": "2015-11-05",
-     "kind": "check"
-    },
-    {
-     "name": "wes pac inc",
-     "city": "panama city beach",
-     "type": "business",
-     "amount": 500.0,
-     "date": "2015-11-05",
-     "kind": "check"
-    },
-    {
-     "name": "wreck raider dive company",
-     "city": "panama city beach",
-     "type": "business",
-     "amount": 100.0,
-     "date": "2015-11-05",
-     "kind": "check"
-    },
-    {
-     "name": "inland construction co",
-     "city": "panama city",
-     "type": "business",
-     "amount": 1000.0,
-     "date": "2015-11-06",
-     "kind": "check"
-    },
-    {
-     "name": "nitram management llc",
-     "city": "panama city",
-     "type": "business",
-     "amount": 100.0,
-     "date": "2015-11-10",
-     "kind": "check"
-    },
-    {
-     "name": "chateau",
-     "city": "panama city beach",
-     "type": "business",
-     "amount": 1000.0,
-     "date": "2015-11-11",
-     "kind": "check"
-    },
-    {
-     "name": "vitality pro llc",
-     "city": "panama city beach",
-     "type": "business",
-     "amount": 1000.0,
-     "date": "2015-11-13",
-     "kind": "check"
-    },
-    {
-     "name": "anderson construction company",
-     "city": "panama city",
-     "type": "business",
-     "amount": 250.0,
-     "date": "2015-12-14",
-     "kind": "check"
-    },
-    {
-     "name": "Aquatic Adventures Management",
-     "city": "panama city beach",
-     "type": "business",
-     "amount": 1000.0,
-     "date": "2015-12-16",
-     "kind": "check"
-    },
     {
      "name": "Finch and FInch LLC",
      "city": "panama city",
@@ -50039,7 +49302,8 @@
    ],
    "reconciliation": "itemized matches summary",
    "notes": [
-    "Campaign filed a termination report (TRP); account is closed."
+    "Campaign filed a termination report (TRP); account is closed.",
+    "36 itemized gifts from organizations dated before 2016 are not listed (the site starts in 2016); the totals cover the whole campaign."
    ],
    "gov_id": "county",
    "election_date": "2016-11-08",
@@ -50490,78 +49754,6 @@
      "name": "Dan Sowell (candidate)",
      "city": null,
      "type": "candidate",
-     "amount": 500.0,
-     "date": "2015-09-10",
-     "kind": "loan"
-    },
-    {
-     "name": "Dan Sowell (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 4923.0,
-     "date": "2015-09-17",
-     "kind": "loan"
-    },
-    {
-     "name": "Dan Sowell (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 29.0,
-     "date": "2015-09-17",
-     "kind": "in-kind"
-    },
-    {
-     "name": "Dan Sowell (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 79.99,
-     "date": "2015-09-18",
-     "kind": "in-kind"
-    },
-    {
-     "name": "Dan Sowell (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 850.0,
-     "date": "2015-09-21",
-     "kind": "in-kind"
-    },
-    {
-     "name": "Dan Sowell (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 74.99,
-     "date": "2015-09-26",
-     "kind": "in-kind"
-    },
-    {
-     "name": "Dan Sowell (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 12.33,
-     "date": "2015-10-13",
-     "kind": "in-kind"
-    },
-    {
-     "name": "Dan Sowell (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 29.0,
-     "date": "2015-11-13",
-     "kind": "in-kind"
-    },
-    {
-     "name": "Dan Sowell (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 29.0,
-     "date": "2015-12-13",
-     "kind": "in-kind"
-    },
-    {
-     "name": "Dan Sowell (candidate)",
-     "city": null,
-     "type": "candidate",
      "amount": 29.0,
      "date": "2016-01-13",
      "kind": "in-kind"
@@ -50841,7 +50033,8 @@
    ],
    "reconciliation": "itemized matches summary",
    "notes": [
-    "Campaign filed a termination report (TRP); account is closed."
+    "Campaign filed a termination report (TRP); account is closed.",
+    "9 itemized gifts from organizations dated before 2016 are not listed (the site starts in 2016); the totals cover the whole campaign."
    ],
    "gov_id": "property_appraiser",
    "election_date": "2016-11-08",
@@ -50917,86 +50110,6 @@
      "name": "Gregory LaPlante (candidate)",
      "city": null,
      "type": "candidate",
-     "amount": 150.0,
-     "date": "2015-06-28",
-     "kind": "in-kind"
-    },
-    {
-     "name": "Gregory LaPlante (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 1000.0,
-     "date": "2015-06-29",
-     "kind": "loan"
-    },
-    {
-     "name": "Gregory LaPlante (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 240.38,
-     "date": "2015-07-01",
-     "kind": "in-kind"
-    },
-    {
-     "name": "Gregory LaPlante (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 169.5,
-     "date": "2015-07-02",
-     "kind": "in-kind"
-    },
-    {
-     "name": "Gregory LaPlante (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 24.98,
-     "date": "2015-07-24",
-     "kind": "in-kind"
-    },
-    {
-     "name": "Gregory LaPlante (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 100.0,
-     "date": "2015-08-17",
-     "kind": "in-kind"
-    },
-    {
-     "name": "Gregory LaPlante (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 24.98,
-     "date": "2015-08-24",
-     "kind": "in-kind"
-    },
-    {
-     "name": "Gregory LaPlante (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 24.98,
-     "date": "2015-09-24",
-     "kind": "in-kind"
-    },
-    {
-     "name": "Gregory LaPlante (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 24.98,
-     "date": "2015-10-30",
-     "kind": "in-kind"
-    },
-    {
-     "name": "Gregory LaPlante (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 24.98,
-     "date": "2015-12-24",
-     "kind": "in-kind"
-    },
-    {
-     "name": "Gregory LaPlante (candidate)",
-     "city": null,
-     "type": "candidate",
      "amount": 24.98,
      "date": "2016-01-24",
      "kind": "in-kind"
@@ -51068,7 +50181,8 @@
    ],
    "reconciliation": "itemized matches summary",
    "notes": [
-    "Campaign filed a termination report (TRP); account is closed."
+    "Campaign filed a termination report (TRP); account is closed.",
+    "10 itemized gifts from organizations dated before 2016 are not listed (the site starts in 2016); the totals cover the whole campaign."
    ],
    "gov_id": "property_appraiser",
    "election_date": "2016-11-08",
@@ -51417,78 +50531,6 @@
     "other": 0.0
    },
    "contributors": [
-    {
-     "name": "James E. McCalister (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 70.14,
-     "date": "2015-07-15",
-     "kind": "in-kind"
-    },
-    {
-     "name": "James E. McCalister (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 100.0,
-     "date": "2015-07-15",
-     "kind": "loan"
-    },
-    {
-     "name": "James E. McCalister (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 12.55,
-     "date": "2015-08-12",
-     "kind": "in-kind"
-    },
-    {
-     "name": "James E. McCalister (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 63.9,
-     "date": "2015-08-14",
-     "kind": "in-kind"
-    },
-    {
-     "name": "James E. McCalister (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 300.0,
-     "date": "2015-09-02",
-     "kind": "in-kind"
-    },
-    {
-     "name": "James E. McCalister (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 63.9,
-     "date": "2015-09-15",
-     "kind": "in-kind"
-    },
-    {
-     "name": "James E. McCalister (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 1762.88,
-     "date": "2015-10-02",
-     "kind": "in-kind"
-    },
-    {
-     "name": "James E. McCalister (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 1325.12,
-     "date": "2015-11-30",
-     "kind": "in-kind"
-    },
-    {
-     "name": "James E. McCalister (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 1301.12,
-     "date": "2015-12-21",
-     "kind": "in-kind"
-    },
     {
      "name": "James E. McCalister (candidate)",
      "city": null,
@@ -51852,7 +50894,8 @@
    ],
    "reconciliation": "itemized matches summary",
    "notes": [
-    "Campaign filed a termination report (TRG); account is closed."
+    "Campaign filed a termination report (TRG); account is closed.",
+    "9 itemized gifts from organizations dated before 2016 are not listed (the site starts in 2016); the totals cover the whole campaign."
    ],
    "gov_id": "schools",
    "election_date": "2016-11-08",
@@ -51928,30 +50971,6 @@
      "name": "Kimberly Smith (candidate)",
      "city": null,
      "type": "candidate",
-     "amount": 25.0,
-     "date": "2015-11-30",
-     "kind": "loan"
-    },
-    {
-     "name": "Kimberly Smith (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 1000.0,
-     "date": "2015-12-01",
-     "kind": "loan"
-    },
-    {
-     "name": "Kimberly Smith (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 240.7,
-     "date": "2015-12-05",
-     "kind": "in-kind"
-    },
-    {
-     "name": "Kimberly Smith (candidate)",
-     "city": null,
-     "type": "candidate",
      "amount": 103.2,
      "date": "2016-01-31",
      "kind": "in-kind"
@@ -51967,7 +50986,8 @@
    ],
    "reconciliation": "itemized matches summary",
    "notes": [
-    "Campaign filed a termination report (TRP); account is closed."
+    "Campaign filed a termination report (TRP); account is closed.",
+    "3 itemized gifts from organizations dated before 2016 are not listed (the site starts in 2016); the totals cover the whole campaign."
    ],
    "gov_id": "schools",
    "election_date": "2016-11-08",
@@ -52043,22 +51063,6 @@
      "name": "Mackie Owens (candidate)",
      "city": null,
      "type": "candidate",
-     "amount": 1076.5,
-     "date": "2015-06-15",
-     "kind": "in-kind"
-    },
-    {
-     "name": "Mackie Owens (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 800.0,
-     "date": "2015-10-06",
-     "kind": "loan"
-    },
-    {
-     "name": "Mackie Owens (candidate)",
-     "city": null,
-     "type": "candidate",
      "amount": 150.0,
      "date": "2016-02-23",
      "kind": "loan"
@@ -52114,7 +51118,8 @@
    ],
    "reconciliation": "itemized matches summary",
    "notes": [
-    "Campaign filed a termination report (TRP); account is closed."
+    "Campaign filed a termination report (TRP); account is closed.",
+    "2 itemized gifts from organizations dated before 2016 are not listed (the site starts in 2016); the totals cover the whole campaign."
    ],
    "gov_id": "schools",
    "election_date": "2016-11-08",
@@ -52187,14 +51192,6 @@
    },
    "contributors": [
     {
-     "name": "Steve George (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 100.0,
-     "date": "2015-12-23",
-     "kind": "loan"
-    },
-    {
      "name": "innovations fcu",
      "city": "Lynn Haven",
      "type": "business",
@@ -52205,7 +51202,8 @@
    ],
    "reconciliation": "itemized matches summary",
    "notes": [
-    "Campaign filed a termination report (TRM1); account is closed."
+    "Campaign filed a termination report (TRM1); account is closed.",
+    "1 itemized gifts from organizations dated before 2016 are not listed (the site starts in 2016); the totals cover the whole campaign."
    ],
    "gov_id": "schools",
    "election_date": "2016-11-08",
@@ -52281,278 +51279,6 @@
     "other": 0.0
    },
    "contributors": [
-    {
-     "name": "William (Bill) Husfelt (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 200.0,
-     "date": "2015-07-30",
-     "kind": "loan"
-    },
-    {
-     "name": "COASTAL CONSULTING SERVICES SE",
-     "city": "PANAMA CITY",
-     "type": "business",
-     "amount": 500.0,
-     "date": "2015-08-31",
-     "kind": "check"
-    },
-    {
-     "name": "COASTALMED OF FLORIDA, LLC",
-     "city": "PANAMA CITY",
-     "type": "business",
-     "amount": 1000.0,
-     "date": "2015-08-31",
-     "kind": "check"
-    },
-    {
-     "name": "HARRISON RIVARD DUNCAN BUZZETT",
-     "city": "PANAMA CITY",
-     "type": "business",
-     "amount": 1000.0,
-     "date": "2015-08-31",
-     "kind": "check"
-    },
-    {
-     "name": "MCELHENEY PROPERTIES, LLC",
-     "city": "PANAMA CITY",
-     "type": "business",
-     "amount": 1000.0,
-     "date": "2015-08-31",
-     "kind": "check"
-    },
-    {
-     "name": "William (Bill) Husfelt (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 1000.0,
-     "date": "2015-08-31",
-     "kind": "in-kind"
-    },
-    {
-     "name": "William (Bill) Husfelt (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 500.0,
-     "date": "2015-08-31",
-     "kind": "in-kind"
-    },
-    {
-     "name": "BAY WEST DEVELOPERS",
-     "city": "PANAMA CITY",
-     "type": "business",
-     "amount": 500.0,
-     "date": "2015-09-14",
-     "kind": "check"
-    },
-    {
-     "name": "COASTAL RECLAIM MATERIALS CORP",
-     "city": "PANAMA CITY BEACH",
-     "type": "business",
-     "amount": 500.0,
-     "date": "2015-09-14",
-     "kind": "check"
-    },
-    {
-     "name": "EMERALD COAST STRIPING",
-     "city": "PANAMA CITY",
-     "type": "business",
-     "amount": 500.0,
-     "date": "2015-09-14",
-     "kind": "check"
-    },
-    {
-     "name": "GAC CONTRACTORS, INC.",
-     "city": "PANAMA CITY",
-     "type": "business",
-     "amount": 1000.0,
-     "date": "2015-09-14",
-     "kind": "check"
-    },
-    {
-     "name": "GLENN T. WARREN & COMPANY",
-     "city": "BLOUNTSTOWN",
-     "type": "business",
-     "amount": 500.0,
-     "date": "2015-09-14",
-     "kind": "check"
-    },
-    {
-     "name": "KENNY STRANGE ELECTRIC, INC.",
-     "city": "PANAMA CITY",
-     "type": "business",
-     "amount": 1000.0,
-     "date": "2015-09-14",
-     "kind": "check"
-    },
-    {
-     "name": "FLORIDA SPORTSMEDICINE",
-     "city": "PANAMA CITY",
-     "type": "business",
-     "amount": 1000.0,
-     "date": "2015-09-28",
-     "kind": "check"
-    },
-    {
-     "name": "CBF CONSULTING ENGINEERS, LLC",
-     "city": "LYNN HAVEN",
-     "type": "business",
-     "amount": 500.0,
-     "date": "2015-09-30",
-     "kind": "check"
-    },
-    {
-     "name": "PANHANDLE ENGINEERING, INC.",
-     "city": "LYNN HAVEN",
-     "type": "business",
-     "amount": 1000.0,
-     "date": "2015-09-30",
-     "kind": "check"
-    },
-    {
-     "name": "CARROLL L MCCAULEY, P.A.",
-     "city": "PANAMA CITY",
-     "type": "business",
-     "amount": 500.0,
-     "date": "2015-10-09",
-     "kind": "check"
-    },
-    {
-     "name": "INACOMP",
-     "city": "FERNANDINA BEACH",
-     "type": "business",
-     "amount": 500.0,
-     "date": "2015-10-09",
-     "kind": "check"
-    },
-    {
-     "name": "MARINE TRANSPORTATION SERVICES",
-     "city": "PANAMA CITY",
-     "type": "business",
-     "amount": 500.0,
-     "date": "2015-10-09",
-     "kind": "check"
-    },
-    {
-     "name": "SMALLWOOD INVESTMENTS, LLC",
-     "city": "PANAMA CITY",
-     "type": "business",
-     "amount": 1000.0,
-     "date": "2015-10-09",
-     "kind": "check"
-    },
-    {
-     "name": "A B GOLF, INC.",
-     "city": "PANAMA CITY",
-     "type": "business",
-     "amount": 100.0,
-     "date": "2015-10-26",
-     "kind": "check"
-    },
-    {
-     "name": "FIVE STAR INSPECTIONS",
-     "city": "LYNN HAVEN",
-     "type": "business",
-     "amount": 250.0,
-     "date": "2015-10-26",
-     "kind": "check"
-    },
-    {
-     "name": "COASTAL SOUTHERN INC",
-     "city": "LYNN HAVEN",
-     "type": "business",
-     "amount": 250.0,
-     "date": "2015-10-28",
-     "kind": "check"
-    },
-    {
-     "name": "EPCI",
-     "city": "YOUNGSTOWN",
-     "type": "business",
-     "amount": 500.0,
-     "date": "2015-10-28",
-     "kind": "check"
-    },
-    {
-     "name": "G & W CP DBA SONNY\\'S BBQ",
-     "city": "LYNN HAVEN",
-     "type": "business",
-     "amount": 250.0,
-     "date": "2015-10-28",
-     "kind": "check"
-    },
-    {
-     "name": "PREBLE-RISH, INC.",
-     "city": "PORT ST. JOE",
-     "type": "business",
-     "amount": 500.0,
-     "date": "2015-10-28",
-     "kind": "check"
-    },
-    {
-     "name": "CAPTAIN ANDERSONS RESTAURANT",
-     "city": "PANAMA CITY BEACH",
-     "type": "business",
-     "amount": 750.0,
-     "date": "2015-10-30",
-     "kind": "in-kind"
-    },
-    {
-     "name": "William (Bill) Husfelt (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 17.08,
-     "date": "2015-10-30",
-     "kind": "in-kind"
-    },
-    {
-     "name": "William (Bill) Husfelt (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 17.08,
-     "date": "2015-10-30",
-     "kind": "in-kind"
-    },
-    {
-     "name": "BENNETT\\'S REEF, INC.",
-     "city": "PANAMA CITY BEACH",
-     "type": "business",
-     "amount": 250.0,
-     "date": "2015-11-09",
-     "kind": "check"
-    },
-    {
-     "name": "SEAHAVEN CONSTRUCTION, LLC",
-     "city": "PANAMA CITY BEACH",
-     "type": "business",
-     "amount": 250.0,
-     "date": "2015-11-09",
-     "kind": "check"
-    },
-    {
-     "name": "ANDERSON CONSTRUCTION COMPANY",
-     "city": "PANAMA CITY",
-     "type": "business",
-     "amount": 250.0,
-     "date": "2015-11-16",
-     "kind": "check"
-    },
-    {
-     "name": "ABBOTT APPRAISAL ASSOCIATES",
-     "city": "PANAMA CITY",
-     "type": "business",
-     "amount": 225.0,
-     "date": "2015-11-30",
-     "kind": "check"
-    },
-    {
-     "name": "SOUTHERN ORTHOPEDIC",
-     "city": "PANAMA CITY",
-     "type": "business",
-     "amount": 225.0,
-     "date": "2015-11-30",
-     "kind": "check"
-    },
     {
      "name": "FLORIDA ARCHITECTS, INC",
      "city": "PANAMA CITY",
@@ -52980,7 +51706,8 @@
    ],
    "reconciliation": "itemized matches summary",
    "notes": [
-    "Campaign filed a termination report (TRG); account is closed."
+    "Campaign filed a termination report (TRG); account is closed.",
+    "34 itemized gifts from organizations dated before 2016 are not listed (the site starts in 2016); the totals cover the whole campaign."
    ],
    "gov_id": "schools",
    "election_date": "2016-11-08",
@@ -53770,51 +52497,11 @@
     "candidate_self": 7350.0,
     "other": 0.0
    },
-   "contributors": [
-    {
-     "name": "Mark Andersen (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 1000.0,
-     "date": "2015-10-16",
-     "kind": "loan"
-    },
-    {
-     "name": "Mark Andersen (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 5000.0,
-     "date": "2015-10-16",
-     "kind": "in-kind"
-    },
-    {
-     "name": "Mark Andersen (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 300.0,
-     "date": "2015-10-16",
-     "kind": "in-kind"
-    },
-    {
-     "name": "Mark Andersen (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 50.0,
-     "date": "2015-10-16",
-     "kind": "in-kind"
-    },
-    {
-     "name": "Mark Andersen (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 1000.0,
-     "date": "2015-10-16",
-     "kind": "in-kind"
-    }
-   ],
+   "contributors": [],
    "reconciliation": "itemized matches summary",
    "notes": [
-    "Campaign filed a termination report (TRQ); account is closed."
+    "Campaign filed a termination report (TRQ); account is closed.",
+    "5 itemized gifts from organizations dated before 2016 are not listed (the site starts in 2016); the totals cover the whole campaign."
    ],
    "gov_id": "soe",
    "election_date": "2016-11-08",
@@ -53890,22 +52577,6 @@
     "other": 0.0
    },
    "contributors": [
-    {
-     "name": "Amy Baker (candidate)",
-     "city": null,
-     "type": "candidate",
-     "amount": 500.0,
-     "date": "2015-07-31",
-     "kind": "loan"
-    },
-    {
-     "name": "Gaming Entertainment Enterllc",
-     "city": "Panama City",
-     "type": "business",
-     "amount": 1000.0,
-     "date": "2015-08-07",
-     "kind": "check"
-    },
     {
      "name": "MDC ELECTRIC INC",
      "city": "YOUNGSTOWN",
@@ -54110,7 +52781,8 @@
    "reconciliation": "itemized matches summary",
    "notes": [
     "Campaign filed a termination report (TRG); account is closed.",
-    "Monetary contributions minus expenditures/distributions = 261.18 at termination (SOE figures)."
+    "Monetary contributions minus expenditures/distributions = 261.18 at termination (SOE figures).",
+    "2 itemized gifts from organizations dated before 2016 are not listed (the site starts in 2016); the totals cover the whole campaign."
    ],
    "gov_id": "tax_collector",
    "election_date": "2016-11-08",

@@ -1,6 +1,6 @@
 """Draft public records requests for every budget year BayCounty.me is missing, one draft per government.
 
-Reads what the budget-years dataset holds (site/page_datasets.py budget_years) for FY2015 to FY2027 and asks each
+Reads what the budget-years dataset holds (site/page_datasets.py budget_years) for FY2016 (the site's first year, data/entities/cutoff.py) to FY2027 and asks each
 government for the adopted budget of every year where we have no department-level lines. Writes
 data/civic/records_requests.json, which /admin seeds into corr.records_requests as drafts. Nothing is sent from here:
 an admin reviews each draft and presses Send in the "Records requests" tab.
@@ -12,8 +12,10 @@ import json, os, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.join(HERE, '..', '..', '..')
 sys.path.insert(0, os.path.join(ROOT, 'site'))
+sys.path.insert(0, os.path.join(ROOT, 'data', 'entities'))
+import cutoff  # noqa: E402
 OUT = os.path.join(HERE, '..', 'records_requests.json')
-FIRST, LAST = 2015, 2027
+FIRST, LAST = cutoff.FIRST_YEAR, 2027
 
 # Who handles records requests. recipient_email is blank where no address is published; the admin fills it in.
 RECIPIENTS = {
@@ -39,7 +41,7 @@ FY = lambda y, school: f'FY{y} ({y - 1}-{str(y)[2:]} school year)' if school els
 
 
 def spans(years):
-    """[2015, 2016, 2017, 2020] -> 'FY2015-FY2017 and FY2020'."""
+    """[2016, 2017, 2018, 2021] -> 'FY2016-FY2018 and FY2021'."""
     out, ys = [], sorted(years)
     i = 0
     while i < len(ys):
@@ -109,7 +111,7 @@ def main():
         drafts.append({'key': f'budgets-{FIRST}-{g}', 'government': gov, 'government_key': g, 'recipient_name': who, 'recipient_email': email,
                        'contact_url': url, 'subject': f'Public records request: {what}, {spans(years)}', 'body': body(g, n), 'gaps': n,
                        'notes': NOTES.get(g)})
-    out = {'as_of': '2026-10-25', 'about': 'Records request drafts for the budget years BayCounty.me is missing (FY2015 onward). Seeded into corr.records_requests and sent only from /admin.',
+    out = {'as_of': '2026-10-25', 'about': 'Records request drafts for the budget years BayCounty.me is missing (FY2016 onward). Seeded into corr.records_requests and sent only from /admin.',
            'requests': drafts}
     json.dump(out, open(OUT, 'w'), indent=1, ensure_ascii=False)
     for d in drafts:

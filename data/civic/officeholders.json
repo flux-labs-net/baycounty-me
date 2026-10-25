@@ -2,20 +2,17 @@
  "as_of": "2026-10-25",
  "place_id": "fl-bay",
  "notes": [
-  "One term per person per seat. start null = in office before FY2015; end null = in office now.",
+  "One term per person per seat. start null = in office before 2016, the first year the site covers; end null = in office now.",
   "A gap row (name null) is a stretch nobody could confirm from the records found, or a known vacancy (vacant true).",
   "*_approx = the date is known only to the month or year (first or last meeting the person appears in).",
   "Elected seats, plus each government's appointed manager or administrator (appointed true). Other staff are listed as of today on each government page."
  ],
  "gaps": [
-  "Bay County, County Manager: County manager before Bob Majka (2015) not confirmed.",
   "Bay District Schools, District 2: The governor was to appoint someone until the 2020 election; the appointee is not confirmed.",
   "City of Lynn Haven, City Manager: The public works director served as interim city manager for about two weeks.",
-  "City of Panama City, City Manager: City manager before Jeff Brown (2015) not confirmed.",
   "City of Panama City Beach, Ward 2: Holder before 2016 not confirmed.",
   "City of Panama City Beach, Ward 4: Holder before 2016 not confirmed.",
   "City of Springfield, Ward 1: Holder before 2016 not confirmed.",
-  "City of Springfield, Ward 3: Holder before April 2015 not confirmed.",
   "City of Parker, Seat 1: Not confirmed.",
   "City of Mexico Beach, Mayor (Group 1): Mayor from 2015 to 2017 not confirmed (Tom Bailey lost to Al Cathey in 2017).",
   "City of Mexico Beach, Group 2: Holder from 2016 to 2019 not confirmed.",
@@ -651,18 +648,11 @@
      "appointed": true,
      "terms": [
       {
-       "end": "2015-01-01",
-       "note": "County manager before Bob Majka (2015) not confirmed.",
-       "gap": true
-      },
-      {
        "name": "Bob Majka",
-       "start": "2015-01-01",
        "end": "2026-03-03",
        "how": "appointed",
        "src": "majka",
-       "note": "Robert Majka. Appointed in 2015 (month not confirmed); left to run Port Panama City.",
-       "start_approx": true
+       "note": "Robert Majka. Appointed in 2015 (month not confirmed); left to run Port Panama City."
       },
       {
        "name": "Joel Schubert",
@@ -826,15 +816,7 @@
      "appointed": false,
      "terms": [
       {
-       "name": "Walter Kelley",
-       "end": "2015-04-21",
-       "how": "elected",
-       "src": "lh14",
-       "note": "Lost the 2015 election to Margo Anderson."
-      },
-      {
        "name": "Margo Anderson",
-       "start": "2015-04-21",
        "end": "2020-08-20",
        "how": "elected",
        "src": "e2015m",
@@ -1172,18 +1154,11 @@
      "appointed": true,
      "terms": [
       {
-       "end": "2015-01-01",
-       "note": "City manager before Jeff Brown (2015) not confirmed.",
-       "gap": true
-      },
-      {
        "name": "Jeff Brown",
-       "start": "2015-01-01",
        "end": "2018-01-25",
        "how": "appointed",
        "src": "pc_brown_bio",
-       "note": "Jeffrey E. Brown. Assistant city manager from 2004; city manager from 2015 (month not confirmed). Resigned Jan 25, 2018.",
-       "start_approx": true
+       "note": "Jeffrey E. Brown. Assistant city manager from 2004; city manager from 2015 (month not confirmed). Resigned Jan 25, 2018."
       },
       {
        "name": "Jared Jones",
@@ -1636,11 +1611,9 @@
      "terms": [
       {
        "name": "Ralph Hammond",
-       "start": "2013-04-16",
        "how": "elected",
        "src": "sp_mayor",
-       "note": "Mayor since 2013; re-elected 2022 and 2026.",
-       "start_approx": true
+       "note": "Mayor since 2013; re-elected 2022 and 2026."
       }
      ]
     },
@@ -1699,13 +1672,7 @@
      "appointed": false,
      "terms": [
       {
-       "end": "2015-04-21",
-       "note": "Holder before April 2015 not confirmed.",
-       "gap": true
-      },
-      {
        "name": "Jackie Kennington",
-       "start": "2015-04-21",
        "how": "elected",
        "src": "e2015m",
        "note": "Re-elected 2018, 2022 and, unopposed, 2026."
@@ -1895,15 +1862,6 @@
      "appointed": false,
      "terms": [
       {
-       "name": "Al Cathey",
-       "end": "2015-04-21",
-       "how": "elected",
-       "src": "mb_cathey",
-       "note": "Mayor 2006-2015.",
-       "end_approx": true
-      },
-      {
-       "start": "2015-04-21",
        "end": "2017-04-18",
        "note": "Mayor from 2015 to 2017 not confirmed (Tom Bailey lost to Al Cathey in 2017).",
        "src": "e2017m",
@@ -1941,7 +1899,6 @@
      "terms": [
       {
        "name": "Mary Blackburn",
-       "start": "2014-04-22",
        "end": "2016-04-19",
        "how": "elected",
        "src": "e2014m",
@@ -2003,7 +1960,6 @@
      "terms": [
       {
        "name": "Tanya Castro",
-       "start": "2014-04-22",
        "end": "2016-04-19",
        "how": "elected",
        "src": "e2014m",
@@ -2049,7 +2005,6 @@
      "terms": [
       {
        "name": "Jeff Tendler",
-       "start": "2014-04-22",
        "end": "2016-04-19",
        "how": "elected",
        "src": "e2014m",

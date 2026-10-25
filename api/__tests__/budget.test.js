@@ -65,18 +65,19 @@ test('Lynn Haven: FY2025 vs FY2026 and FY2022 vs FY2026 match the budget documen
   assert.equal(compare(rows, {gov: 'lh', basis: 'actual'}).to, 2024);
 });
 
-test('Bay County: adopted budgets by fund from FY2015, each adding up to the printed total', {skip: !fs.existsSync(built)}, () => {
+test('Bay County: adopted budgets by fund from FY2016 (the site\'s first year), each adding up to the printed total', {skip: !fs.existsSync(built)}, () => {
   const rows = JSON.parse(fs.readFileSync(built, 'utf8'));
   const cov = coverage(rows).find(g => g.gov_id === 'county');
-  for (let y = 2015; y <= 2027; y++) assert.ok(cov.adopted_detail.includes(y), `FY${y}`);
-  for (let y = 2015; y <= 2024; y++) assert.ok(cov.actual.includes(y), `actuals FY${y}`);
+  for (let y = 2016; y <= 2027; y++) assert.ok(cov.adopted_detail.includes(y), `FY${y}`);
+  for (let y = 2016; y <= 2024; y++) assert.ok(cov.actual.includes(y), `actuals FY${y}`);
+  assert.ok(!cov.adopted_detail.includes(2015) && !cov.actual.includes(2015), 'nothing before FY2016');
   for (const y of cov.adopted_detail) {
     const ys = rows.filter(r => r.gov_id === 'county' && r.fiscal_year === y && r.basis === 'adopted');
     const funds = ys.filter(r => r.section === 'fund').reduce((a, r) => a + r.amount, 0);
     assert.equal(funds, ys.find(r => r.line_key === 'total').amount, `FY${y}`);
   }
-  const c = compare(rows, {gov: 'county', from: 2015, to: 2026});
+  const c = compare(rows, {gov: 'county', from: 2016, to: 2026});
   const t = Object.fromEntries(c.totals.map(l => [l.key, l]));
-  assert.deepEqual([t.total.from, t.general_fund.from, t.general_fund.to], [271281490, 99391200, 281737981]);
+  assert.deepEqual([t.total.from, t.general_fund.from, t.general_fund.to], [281572075, 106557010, 281737981]);
   assert.equal(c.sections.fund.find(l => l.key === 'f101').name, '101 Transportation');
 });

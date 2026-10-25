@@ -5,7 +5,7 @@ res={}
 for f in sorted(os.listdir(D)):
     if not f.endswith('.xlsx'): continue
     wb=openpyxl.load_workbook(os.path.join(D,f))
-    for yr in [str(y) for y in range(2015, 2026)]:
+    for yr in [str(y) for y in range(2016, 2026)]:
         if yr not in wb.sheetnames: continue
         ws=wb[yr]
         rows=list(ws.iter_rows(values_only=True))

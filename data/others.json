@@ -240,7 +240,7 @@
   "data_gaps": [
    "Callaway's CRA annual reports (for example the 2023 annual report), CRA agendas and minutes, and budget resolutions (CRA Res 2021-01) are on cityofcallaway.com, but that site couldn't be read by our tools. These would name vendors and projects.",
    "No vendor-level payments were found. Check the CRA board agenda packets in the city AgendaCenter.",
-   "No CRA audit for FY2020 or earlier could be found on the Auditor General's site. Pre-2021 tax increment history (2007-2020) is unknown apart from FY2021's $54,221, taken from the FY2022 audit comparison.",
+   "No CRA audit for FY2020 or earlier could be found on the Auditor General's site. Tax increment history for FY2016-FY2020 is unknown apart from FY2021's $54,221, taken from the FY2022 audit comparison.",
    "The 2007 Redevelopment Plan PDF on the city site returned an error, so planned project costs and the sunset date were not captured.",
    "The Tyndall Parkway median beautification (2019-2020, $500K, Lawnscapes Inc.) and the Cherry Street rehab ($5M) were reported as state/FDOT funded with no CRA funding mentioned, so they are excluded. Confirm whether any CRA money went in.",
    "There is no confirmed CRA tie to the Callaway Arts & Conference Center.",
@@ -516,7 +516,7 @@
   ],
   "data_gaps": [
    "Several Springfield PDFs are scans with no text: the FY24-25 budget, Res 2025-02 and Res 2025-03, and the minutes for Nov 2024, May 2025 and Sept 2025. Their line items and vendor awards have not been transcribed yet.",
-   "The audit for FY2023 and earlier and TIF history for 2007-2022 were not found. Check the Florida Auditor General special district e-file or City of Springfield ACFRs.",
+   "The audit for FY2023 and earlier and TIF history for 2016-2022 were not found. Check the Florida Auditor General special district e-file or City of Springfield ACFRs.",
    "No vendor or contractor names were found for the park and sidewalk projects. The amounts listed are budget appropriations, not paid invoices.",
    "No CRA spending on the Transmitter Rd or 15th St corridor was documented.",
    "Exact park coordinates (Nature Park, Carrie Bell Shaw Park, Buddy McLemore Park) are not geocoded."
@@ -672,7 +672,7 @@
    }
   ],
   "data_gaps": [
-   "TIF and budget history for 2004-2022 was not found. The CRA reportedly had no positive increment for years. Check older Auditor General filings and City of Parker ACFRs.",
+   "TIF and budget history for 2016-2022 was not found. The CRA reportedly had no positive increment for years. Check older Auditor General filings and City of Parker ACFRs.",
    "Parker CRA budget documents for FY2025-FY2027 and any annual reports were not found online (cityofparker.com wp-content uploads may hold them). The FY2025 budget had $286,253 for economic environment, none of it spent.",
    "The redevelopment plan text and any Hwy 98 corridor project list were not found.",
    "The FY2023 Parker CRA audit URL returned an error."

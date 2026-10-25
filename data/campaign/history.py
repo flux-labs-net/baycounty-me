@@ -13,12 +13,14 @@ Privacy (same as campaign.json and finance_2026.json): individual contributors a
 count and a total. Organizations and the candidate's own money are listed item by item, with the city as filed.
 Expenditures are kept only as totals here, because payees who are private people would otherwise be named.
 
-The SOE's online system starts with the 2016 elections. There is no reporting group for 2015 (the 2015 city races
-would need a records request), and the Florida Division of Elections holds only state and multi-county races.
+The SOE's online system starts with the 2016 elections, which is also the site's first year (data/entities/cutoff.py):
+itemized gifts dated before 2016 (early money for the 2016 races) are left out of the lists, not the totals.
 """
 import datetime, json, os, re, subprocess, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, os.path.join(HERE, '..', 'entities'))
+import cutoff  # noqa: E402  the site's first year (2016)
 SCRIPTS = os.path.join(HERE, '..', 'elections', 'scripts')
 OUT = os.path.join(HERE, 'campaign_history.json')
 
@@ -104,6 +106,10 @@ def main():
         c.pop('top_expenditures', None)  # payees can be private people: totals only here
         c.pop('cash_on_hand_estimate', None)
         c['contributors'] = [x for x in c['contributors'] if x.get('type') != 'individual']
+        early = [x for x in c['contributors'] if not cutoff.keep(x.get('date'))]
+        if early:  # the site starts in 2016: itemized gifts dated earlier are left out; the campaign totals stay whole
+            c['contributors'] = [x for x in c['contributors'] if cutoff.keep(x.get('date'))]
+            c.setdefault('notes', []).append(f'{len(early)} itemized gifts from organizations dated before 2016 are not listed (the site starts in 2016); the totals cover the whole campaign.')
         c.update({'office': label, 'gov_id': gid, 'election_date': GROUPS[e], 'primary_date': PRIMARY.get(e), 'year': int(GROUPS[e][:4]),
                   'outcome': outcome(c['soe_status'])})
         out.append(c)
@@ -123,8 +129,7 @@ def main():
                     'reconciled': sum(1 for c in out if c['reconciliation'] == 'itemized matches summary'),
                     'no_activity': sum(1 for c in out if c['reconciliation'].startswith('no activity')),
                     'not_reconciled': sum(1 for c in out if c['reconciliation'] != 'itemized matches summary' and not c['reconciliation'].startswith('no activity'))},
-        'gaps': ['2015: the SOE online system starts with the 2016 elections; 2015 city races would need a records request to the SOE or the city clerks.',
-                 'Left out (party posts and a federal race that file with the SOE): ' + '; '.join(f'{k} x{v}' if v > 1 else k for k, v in sorted(left_counts.items())) + '.',
+        'gaps': ['Left out (party posts and a federal race that file with the SOE): ' + '; '.join(f'{k} x{v}' if v > 1 else k for k, v in sorted(left_counts.items())) + '.',
                  'Campaigns whose itemized lines do not add up to the SOE summary are flagged in reconciliation; the SOE summary figures are used for totals.',
                  'Political committees (for example referendum committees) are not candidates and are not included.'],
         'candidates': out,

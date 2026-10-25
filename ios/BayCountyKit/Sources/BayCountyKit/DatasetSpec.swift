@@ -193,7 +193,7 @@ public struct DatasetSpec: Sendable {
         "vendors-directory": .init(.more, "building.2", title: ["name"], subtitle: ["vendor_type"], filters: ["vendor_type"],
                                    page: "public-money/vendors"),
         "people-directory": .init(.peopleAndPay, "person.3", title: ["name"], subtitle: ["district"], page: "people"),
-        // who held each elected seat since 2014; a row with no name is a vacancy or a stretch nobody could confirm, so it falls back to the seat
+        // who held each elected seat since 2016 (the site's first year); a row with no name is a vacancy or a stretch nobody could confirm, so it falls back to the seat
         "officeholder-terms": .init(.peopleAndPay, "person.badge.clock", title: ["person_name", "seat"], subtitle: ["government", "seat"], detail: "note",
                                     date: ["date_start", "date_end"], badge: "how", filters: ["government", "seat", "how"], page: "people"),
         "glossary-terms": .init(.more, "book", title: ["term"], subtitle: ["group_name"], detail: "simple", filters: ["group_name"],

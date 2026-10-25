@@ -1,7 +1,6 @@
 entity_a,name_a,entity_b,name_b,connection,source_url,gov_id
 v:dewberry,Dewberry Engineers,v:cwr-contracting,"CWR Contracting, Inc.",Dewberry is engineer of record on CWR's Segment 3 change order (Res. 23-195),https://d3n9y02raazwpg.cloudfront.net/pcbgov/0d86e393-7c8e-11ed-9024-0050569183fa-b95fcb69-f19b-4652-8495-9f0a506dc971-1688747339.pdf,
 v:gac-contractors,"GAC Contractors, Inc.",v:cwr-contracting,"CWR Contracting, Inc.",Both hold Front Beach Road Segment 3 contract records: GAC's low bid (Res. 21-127) and CWR's final payment,https://www.pcbfl.gov/home/showpublisheddocument/27668/638887882812000000,
-v:pbs-j,PBS&J,v:dewberry,Dewberry Engineers,"Both designed SR 79 / Segment 3 work: PBS&J's final design, then Dewberry's construction administration",https://pcbfl.gov/home/showpublisheddocument/262/635288586904330000,
 v:dewberry,Dewberry Engineers,s:southern-earth-sciences,Southern Earth Sciences,Southern Earth Sciences is a subconsultant on Dewberry's Segment 4.1 and 4.2 task orders,https://pcbfl.gov/home/showpublisheddocument/13909/636870324888970000,
 v:volkert,"Volkert, Inc.",s:southern-earth-sciences,Southern Earth Sciences,Southern Earth Sciences is a subconsultant on Volkert's Segment 4.3 design,https://pcbfl.gov/home/showpublisheddocument/18302/637617846736370000,
 v:dewberry,Dewberry Engineers,s:gortemoller-engineering,Gortemoller Engineering,Gortemoller Engineering is a subconsultant on Dewberry's Segment 4.1 and 4.2 task orders,https://pcbfl.gov/home/showpublisheddocument/16673/637266931768470000,

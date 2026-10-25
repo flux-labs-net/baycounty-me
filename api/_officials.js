@@ -1,6 +1,7 @@
 // Who held each elected seat in a fiscal year or on a date (GET /api/v1/officials and the MCP tool officials_in_office).
 // Reads the officeholder-terms dataset (site/page_datasets.py officeholder_terms()). Pure functions, so the tests, the
 // API and the MCP tool give the same answer the government pages show (site/gov.js does the same pick in the browser).
+const cutoff = require('./_cutoff');
 const bad = (msg, status = 400) => Object.assign(new Error(msg), {status, expose: true});
 const FY_START = {schools: 7};  // fiscal years start in October; the school district's in July
 const pad = n => String(n).padStart(2, '0');
@@ -34,10 +35,12 @@ function inOffice(all, q = {}, today = new Date().toISOString().slice(0, 10)) {
   let from, to, year = null;
   if (q.date) {
     if (!/^\d{4}-\d{2}-\d{2}$/.test(String(q.date))) throw bad('date must be YYYY-MM-DD.');
+    if (!cutoff.keep(q.date)) throw bad(`The site starts in ${cutoff.FIRST_YEAR}: pick a date in ${cutoff.FIRST_YEAR} or later.`);
     from = to = String(q.date);
   } else if (q.year) {
     year = Number(q.year);
     if (!Number.isInteger(year) || year < 1900 || year > 2100) throw bad('year must be a fiscal year such as 2019 (the year it ends).');
+    if (year < cutoff.FIRST_YEAR) throw bad(`The site starts at FY${cutoff.FIRST_YEAR}: pick ${cutoff.FIRST_YEAR} or later.`);
     ({from, to} = fyWindow(gov, year));
   } else from = to = today;
   const seats = new Map();

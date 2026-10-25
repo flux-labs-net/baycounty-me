@@ -30,7 +30,7 @@ function kpis() {
   const k = (l, v, s) => `<div class="kpi"><span class="eyebrow">${l}</span><span class="v">${v}</span><span class="s">${s}</span></div>`;
   $('ciKpis').innerHTML = k(`Tax increment, FY${last}`, M(t), `All ${A.length} CRAs. ${Math.round(fbr / t * 100)}% is Front Beach Road`) +
     k(`Paid by Bay County, FY${last}`, M(c), `${Math.round(c / t * 100)}% of the total; the cities paid ${M(t - c)}`) +
-    k(`Paid on record, FY${first} to FY${last}`, M(sum(h, r => r.increment)), `${M(sum(h, r => r.county_amount))} from the county. Early years are missing for several CRAs`) +
+    k(`Paid on record, FY${first} to FY${last}`, M(sum(h, r => r.increment)), `${M(sum(h, r => r.county_amount))} from the county. Nothing before FY2016 is counted, and early years are missing for several CRAs`) +
     k('Still to come, to each sunset', `${M(lo)}–${M(hi).slice(1)}`, 'Low to high growth scenario');
 }
 

@@ -76,6 +76,8 @@ function dateKey(s) {
 }
 
 /* ---------- years ---------- */
+/* The site's earliest year (data/entities/cutoff.py, api/_cutoff.js): year pickers never offer anything before it. */
+const FIRST_YEAR = 2016;
 /* Florida local fiscal years start Oct 1, so from October the current fiscal year is next calendar year. */
 const curFY = () => { const d = new Date(); return d.getFullYear() + (d.getMonth() >= 9 ? 1 : 0); };
 const yearOf = v => { const k = typeof v === 'number' ? v : dateKey(v); return k == null ? null : Math.floor(k / 1e4); };
@@ -99,10 +101,10 @@ function yearsIn(s) {
   const rng = /(?:FY\s?)?(?<!\d)((?:19|20)\d{2})\s?(?:-|–|to|through)\s?(?:FY\s?)?((?:19|20)?\d{2})\b/gi; let r;
   while ((r = rng.exec(s))) { const a = +r[1]; let b = +r[2]; if (b < 100) b += Math.floor(a / 100) * 100; if (b >= a && b - a <= 30) for (let y = a; y <= b; y++) out.add(y); }
   (s.match(/(?<!\d)(?:19|20)\d{2}(?!\d)/g) || []).forEach(y => out.add(+y));
-  return [...out];
+  return [...out].filter(y => y >= FIRST_YEAR);
 }
 /* <select> markup for a year picker; fy labels the years FY2026 instead of 2026. */
-const yearOptions = (years, cur, fy) => `<option value="">${L.allYears}</option>` + years.map(y => `<option value="${y}"${cur === y ? ' selected' : ''}>${fy ? 'FY' : ''}${y}</option>`).join('');
+const yearOptions = (years, cur, fy) => `<option value="">${L.allYears}</option>` + years.filter(y => +y >= FIRST_YEAR).map(y => `<option value="${y}"${cur === y ? ' selected' : ''}>${fy ? 'FY' : ''}${y}</option>`).join('');
 
 const coll = new Intl.Collator(ES ? 'es' : 'en', {numeric: true, sensitivity: 'base'});
 /* Compare two values of one type; empty values always sort last, whichever the direction. */
@@ -516,7 +518,7 @@ function enhanceList(ol) {
   run();
 }
 
-window.TT = {num, dateKey, cmp, sortBy, csv, slug, pageSlug, attach, enhance, enhanceList, prim, L, curFY, yearOf, startYear, yearOptions, yearsIn, countBy};
+window.TT = {num, dateKey, cmp, sortBy, csv, slug, pageSlug, attach, enhance, enhanceList, prim, L, curFY, yearOf, startYear, yearOptions, yearsIn, countBy, FIRST_YEAR};
 
 const start = () => { scan(); mo.observe(document.body, {childList: true, subtree: true, attributes: true, attributeFilter: ['hidden']}); };
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();

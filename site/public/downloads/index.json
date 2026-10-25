@@ -744,7 +744,7 @@
    "id": "cra-payments",
    "title": "CRA spending",
    "description": "What Bay County's Community Redevelopment Agencies paid for, with locations.",
-   "rows": 168,
+   "rows": 144,
    "columns": [
     {
      "name": "cra",
@@ -2050,7 +2050,7 @@
    "id": "accountability-projects",
    "title": "Accountability: projects",
    "description": "One row per project on the Accountability console: stage, first and latest figures, cost growth, questions raised by the published rules, records still missing and the agency reply.",
-   "rows": 94,
+   "rows": 93,
    "columns": [
     {
      "name": "project_id",
@@ -2131,7 +2131,6 @@
      "name": "first_figure_is",
      "type": "string",
      "values": [
-      "construction contract",
       "construction contract at award",
       "low bid at award (about)",
       "original contract",
@@ -2174,7 +2173,6 @@
       "The Bayview Boardwalk (St. Andrews) project budget by fiscal year and funding source (CRA share and Rebuild Florida grant), the construction contract and payments to date",
       "The Millville Waterfront Park Phase II construction contract with Inland Construction & Engineering (bid awarded May 28, 2024): contract amount, change orders and payments to date",
       "The TIF rebate agreement for 401 E 6th St (approved December 2024), including the property owner, the yearly cap, the term and any payments made",
-      "The construction contract, contractor name and full change-order list for the South Thomas Drive / Front Beach Road Segment 1 reconstruction (2009-2013)",
       "The contracts, contractors and current schedule for the Berthe Avenue and Rogers Pond spillway projects funded by the Callaway CRA, and the status of the pending stormwater grant",
       "The current cost estimate for Front Beach Road Segment 4.1, broken down by design, right-of-way, utilities and construction, and by funding source",
       "The deed(s) and closing statement for the City/CRA purchase of 37 lots with 35 homes on 6.5 acres in Downtown North (closed April 2017), including the price and seller | The final purchase and development agreement with Sankofa Group, LLC for the Glenwood Town Center (approved July 2025), including the sale price, deadlines and buy-back terms",
@@ -2232,7 +2230,7 @@
    "id": "accountability-events",
    "title": "Accountability: project timelines",
    "description": "Every dated event in each project timeline: budgets, approvals, awards, change orders, votes, payments and completion, with sources.",
-   "rows": 250,
+   "rows": 243,
    "columns": [
     {
      "name": "project_id",
@@ -2334,7 +2332,7 @@
    "id": "connections-payees",
    "title": "Connections: payees",
    "description": "Every payee in the payment records of every local government and agency (contracts, change orders, emergency purchases, check registers, tourism agency payments and the CRA ledger) as one entity, with who paid it and whether it gave to a campaign. dollars_in_records adds every record, and an award and the payments on it can both be records, so it is not a deduplicated total. Unnamed grant recipients are grouped.",
-   "rows": 645,
+   "rows": 637,
    "columns": [
     {
      "name": "entity_id",
@@ -2435,7 +2433,7 @@
    "id": "connections-payments",
    "title": "Connections: payment records",
    "description": "One row per payment record behind the Connections network: which government or agency paid which payee, the record type, amount, date and source. CRA ledger items that are only proposed or planned are not included.",
-   "rows": 1149,
+   "rows": 1126,
    "columns": [
     {
      "name": "record_id",
@@ -2592,7 +2590,7 @@
    "id": "connections-links",
    "title": "Connections: documented links",
    "description": "Documented links between payees that are not payments (shared project, address or subcontract), each with its source.",
-   "rows": 7,
+   "rows": 6,
    "columns": [
     {
      "name": "entity_a",
@@ -2601,7 +2599,6 @@
       "v:acorns-to-oaks-academy",
       "v:dewberry",
       "v:gac-contractors",
-      "v:pbs-j",
       "v:volkert"
      ]
     },
@@ -2612,7 +2609,6 @@
       "Acorns to Oaks Academy",
       "Dewberry Engineers",
       "GAC Contractors, Inc.",
-      "PBS&J",
       "Volkert, Inc."
      ]
     },
@@ -2623,8 +2619,7 @@
       "o:owner-of-401-e-6th-st",
       "s:gortemoller-engineering",
       "s:southern-earth-sciences",
-      "v:cwr-contracting",
-      "v:dewberry"
+      "v:cwr-contracting"
      ]
     },
     {
@@ -2632,7 +2627,6 @@
      "type": "string",
      "values": [
       "CWR Contracting, Inc.",
-      "Dewberry Engineers",
       "Gortemoller Engineering",
       "Owner of 401 E 6th St",
       "Southern Earth Sciences"
@@ -2659,7 +2653,7 @@
    "id": "connections-gifts",
    "title": "Connections: business gifts to officials",
    "description": "Gifts from businesses, PACs and committees to current officeholders and 2026 candidates, one row per donor and official, with the payee id when the donor was also paid by a local government. Individual donors are never included.",
-   "rows": 2761,
+   "rows": 2682,
    "columns": [
     {
      "name": "donor",
@@ -3282,7 +3276,7 @@
    "id": "donor-contracts",
    "title": "Donors with government contracts",
    "description": "Each business donor matched to a local government contract, award or payment, with the match method and confidence.",
-   "rows": 554,
+   "rows": 543,
    "columns": [
     {
      "name": "contributor",
@@ -3476,7 +3470,7 @@
    "id": "vendors-directory",
    "title": "Companies",
    "description": "Every company in BayCounty.me records, with its other spellings, the governments it works with and how many records name it.",
-   "rows": 596,
+   "rows": 589,
    "columns": [
     {
      "name": "vendor_id",
@@ -3633,7 +3627,7 @@
    "id": "site-updates",
    "title": "What's new",
    "description": "Each change to the site's data and pages, newest first.",
-   "rows": 56,
+   "rows": 57,
    "columns": [
     {
      "name": "date",
@@ -4032,7 +4026,7 @@
    "id": "government-years",
    "title": "Governments by year",
    "description": "One row per government per fiscal year: adopted budget and its status, general fund, property tax rate and levy, audited actual revenue and spending, residents, audited debt and staff count. A blank means no record for that year. fiscal_year is the year the fiscal year ends (FY2026 = Oct 2025 to Sep 2026; schools Jul to Jun).",
-   "rows": 111,
+   "rows": 103,
    "columns": [
     {
      "name": "gov_id",
@@ -4072,7 +4066,6 @@
      "name": "fy",
      "type": "string",
      "values": [
-      "FY2015",
       "FY2016",
       "FY2017",
       "FY2018",
@@ -4098,7 +4091,6 @@
       "Jul 2024 to Jun 2025",
       "Jul 2025 to Jun 2026",
       "Jul 2026 to Jun 2027",
-      "Oct 2014 to Sep 2015",
       "Oct 2015 to Sep 2016",
       "Oct 2016 to Sep 2017",
       "Oct 2017 to Sep 2018",
@@ -4315,7 +4307,6 @@
      "name": "date_start",
      "type": "string",
      "values": [
-      "2014-10-01",
       "2015-10-01",
       "2016-10-01",
       "2017-10-01",
@@ -4341,7 +4332,6 @@
      "name": "date_end",
      "type": "string",
      "values": [
-      "2015-09-30",
       "2016-09-30",
       "2017-09-30",
       "2018-09-30",
@@ -4379,7 +4369,7 @@
    "id": "budget-years",
    "title": "Budgets by year, line by line",
    "description": "Every budget line on record for each government and fiscal year, to compare one year with another. basis adopted: the adopted budget's total and General Fund, each fund and each General Fund department. basis actual: audited revenue by source and spending by function from the state's Local Government Financial Reports (in_total is false for transfers and borrowing, which the audited totals leave out). line_key lines the same fund or department up across years; service groups departments into common services. fiscal_year is the year the fiscal year ends (FY2026 = Oct 2025 to Sep 2026; schools Jul to Jun).",
-   "rows": 2561,
+   "rows": 2377,
    "columns": [
     {
      "name": "gov_id",
@@ -4419,7 +4409,6 @@
      "name": "fy",
      "type": "string",
      "values": [
-      "FY2015",
       "FY2016",
       "FY2017",
       "FY2018",
@@ -4525,7 +4514,6 @@
      "name": "date_start",
      "type": "string",
      "values": [
-      "2014-10-01",
       "2015-10-01",
       "2016-10-01",
       "2017-10-01",
@@ -4551,7 +4539,6 @@
      "name": "date_end",
      "type": "string",
      "values": [
-      "2015-09-30",
       "2016-09-30",
       "2017-09-30",
       "2018-09-30",
@@ -4589,7 +4576,7 @@
    "id": "business-donor-sunbiz",
    "title": "Business donors in the state corporate registry",
    "description": "Each business that gave to a current officeholder or 2026 local candidate, matched to its Florida Division of Corporations (Sunbiz) record: document number, registered name, status and principal city, with the match method. Business-level only; no owner or officer names.",
-   "rows": 2751,
+   "rows": 2666,
    "columns": [
     {
      "name": "contributor",
@@ -4948,7 +4935,7 @@
    "id": "nonprofits",
    "title": "Nonprofits",
    "description": "Every nonprofit in the county: organizations recognized by the IRS with a local address, and active Florida nonprofit corporations (Sunbiz) based here. Type, IRS subsection, latest 990 revenue, expenses and assets, how many board members its filings list, how many of those sit on another local board, government payment records and grants. Board members are in nonprofit-board-members.",
-   "rows": 1961,
+   "rows": 1957,
    "columns": [
     {
      "name": "nonprofit_id",
@@ -5366,7 +5353,7 @@
    "id": "nonprofit-payments",
    "title": "Nonprofits: government payment records",
    "description": "Payment records on the site (contracts, check registers, tourism agency payments, CRA ledger) whose payee is a local nonprofit, matched by name.",
-   "rows": 30,
+   "rows": 29,
    "columns": [
     {
      "name": "nonprofit_id",
@@ -5495,7 +5482,6 @@
      "name": "date",
      "type": "string",
      "values": [
-      "FY2015",
       "FY2017",
       "FY2018",
       "FY2024",
@@ -5522,7 +5508,6 @@
       "Panama City Community Development Council (Destination Panama City): 4 payments",
       "Panama City Community Development Council (Destination Panama City): 6 payments",
       "Panama City Community Development Council (Destination Panama City): 7 payments",
-      "Print/Publishing Museum operation agreement",
       "Volunteer home repairs ($70K from Downtown North, $10K from Millville); 41 homes renovated",
       "Volunteer home repairs MOU ($70K Downtown North, $10K Millville)"
      ]
@@ -5547,7 +5532,6 @@
      "type": "string",
      "values": [
       "https://bayforms.baycoclerk.com/PublicAccess/PublicRecordSearch/",
-      "https://panamacity.gov/DocumentCenter/View/1853/FY2015-Annual-Report-PDF",
       "https://panamacity.gov/DocumentCenter/View/3827/FY2017-Annual-Report-PDF",
       "https://panamacity.gov/DocumentCenter/View/4570/FY2018-Annual-Report-PDF",
       "https://www.panamacity.gov/DocumentCenter/View/9865"
@@ -5717,7 +5701,7 @@
    "id": "nonprofit-board-members",
    "title": "Nonprofits: board members",
    "description": "Officers, directors, trustees and key employees of local nonprofits as listed on their IRS returns (2019 on), 990-N postcards and state corporate filings: one row per person per nonprofit with titles, years on file, reported pay and hours, and how many other current local boards the same name sits on (homeowner associations aside). person_id groups the same name across boards; two people with a common name can share one.",
-   "rows": 9315,
+   "rows": 9236,
    "columns": [
     {
      "name": "person_id",
@@ -5813,7 +5797,7 @@
    "id": "nonprofit-board-businesses",
    "title": "Nonprofits: board members' businesses",
    "description": "Businesses that local nonprofit board members run, from Florida corporate filings (Sunbiz officers and registered agents), with each business's gifts to local campaigns. match is \"Name and address\" when the person on the nonprofit's own state filing is the same Sunbiz person, or \"Name\" when only one Sunbiz person in the county has that name. person_id matches nonprofit-board-members.",
-   "rows": 3213,
+   "rows": 3199,
    "columns": [
     {
      "name": "person_id",
@@ -5879,7 +5863,7 @@
    "id": "charity-registrations",
    "title": "Nonprofits: Florida charity registrations",
    "description": "Charities with a county address registered with the Florida Department of Agriculture and Consumer Services to ask the public for donations (Check-A-Charity): registration status and dates, the revenue and the program, fundraising and management spending each reported to the state, and the professional fundraising firms it uses. nonprofit_id links to the nonprofits dataset (joined by FEIN, then by exact name); the officers and directors each registration lists are in nonprofit-board-members.",
-   "rows": 218,
+   "rows": 207,
    "columns": [
     {
      "name": "registration_number",
@@ -5934,10 +5918,8 @@
       "Denied",
       "Exempt",
       "Exempt - Membership Only",
-      "Exempt: Title 36 - Veterans",
       "Expired",
       "Law NA - Educational",
-      "Law NA - Governmental",
       "Law NA - Religious",
       "Not Soliciting",
       "Registered",
@@ -6488,7 +6470,7 @@
    "id": "entity-profiles",
    "title": "Profiles: people, companies and organizations",
    "description": "Every company, elected official, candidate, nonprofit, nonprofit board member, registered business, committee and government named in BayCounty.me records, one row each, with its profile page and how many documented connections it has. entity_id (kind:key) joins entity-connections. Board members are named as their nonprofits' public filings list them; individual campaign donors are included only when they run a registered business (owner-gifts).",
-   "rows": 15661,
+   "rows": 15544,
    "columns": [
     {
      "name": "entity_id",
@@ -6603,7 +6585,7 @@
    "id": "entity-connections",
    "title": "Connections between people, companies and organizations",
    "description": "Every documented connection between two entities in entity-profiles, totalled per pair and kind: a government paid a payee, an organization gave to an official's or candidate's campaign, an official voted on a company's contracts, a person sits on a nonprofit's board or runs a business, a nonprofit gave a grant, two payees share a project. Each row has its source. Individual campaign donors are included only when they run a registered business (owner-gifts); officials' board seats and businesses are added by the API once checked by hand.",
-   "rows": 18152,
+   "rows": 17977,
    "columns": [
     {
      "name": "link_id",
@@ -6737,8 +6719,8 @@
   {
    "id": "officeholder-terms",
    "title": "Officeholders by year",
-   "description": "Who held each elected seat, and each government's appointed manager, on every local government since 2014: one row per person per seat, with start_date and end_date, so the officials in office on any date or in any fiscal year can be picked out. person_name is blank for a known vacancy (vacant true) and for a stretch nobody could confirm from the records found (confirmed false); the note says which. start_date blank = in office before FY2015; end_date blank = in office now. start_approx / end_approx mark dates known only to the month or year. appointed is true for the government's appointed manager or administrator (the county manager, city managers, Mexico Beach's administrator) and false for elected seats. how is elected, special election, appointed, interim or commission (chosen by the commission). Each term names its source: election results, minutes, budget books, city sites or news. place_id is the place (fl-bay = Bay County).",
-   "rows": 166,
+   "description": "Who held each elected seat, and each government's appointed manager, on every local government since 2016: one row per person per seat, with start_date and end_date, so the officials in office on any date or in any fiscal year can be picked out. person_name is blank for a known vacancy (vacant true) and for a stretch nobody could confirm from the records found (confirmed false); the note says which. start_date blank = in office before 2016; end_date blank = in office now. start_approx / end_approx mark dates known only to the month or year. appointed is true for the government's appointed manager or administrator (the county manager, city managers, Mexico Beach's administrator) and false for elected seats. how is elected, special election, appointed, interim or commission (chosen by the commission). Each term names its source: election results, minutes, budget books, city sites or news. place_id is the place (fl-bay = Bay County).",
+   "rows": 161,
    "columns": [
     {
      "name": "place_id",
@@ -7339,7 +7321,7 @@
    "id": "cra-tax-increment",
    "title": "CRAs: tax increment by year",
    "description": "Property tax paid to each CRA by fiscal year, split between Bay County and the city by millage. scenario history: basis reported (from CRA reports, audits and budgets) or filled gap (between two reported years). scenario low, mid, high: FY2026 to the CRA's sunset, from adopted budgets where they exist, then 3%, 6% or 9% growth a year (Front Beach Road capped at $30M). Schools and the water management district are exempt and pay nothing.",
-   "rows": 399,
+   "rows": 373,
    "columns": [
     {
      "name": "cra_id",
@@ -7438,7 +7420,7 @@
    "id": "cra-increment-checks",
    "title": "CRAs: estimate checked against official figures",
    "description": "Official county figures for CRA payments next to this estimate for the same year, with the difference in percent.",
-   "rows": 4,
+   "rows": 3,
    "columns": [
     {
      "name": "figure",
@@ -9460,7 +9442,7 @@
    "id": "campaign-contributions-history",
    "title": "Contributions from organizations, 2016-2025",
    "description": "Every contribution from a business, committee or party to a local candidate in the 2016 to 2025 elections, as filed. Individual donors are not included, and neither is bank interest on campaign accounts.",
-   "rows": 2782,
+   "rows": 2691,
    "columns": [
     {
      "name": "election_year",
@@ -9522,7 +9504,6 @@
      "name": "outcome",
      "type": "string",
      "values": [
-      "did not qualify",
       "lost",
       "withdrew",
       "won"
