@@ -12,6 +12,9 @@ CHANGES = [
     {'date': '2026-10-25', 'title': 'How much property tax goes to the CRAs',
      'text': "A new page estimates how much property tax Bay County and the cities pay to the seven Community Redevelopment Agencies each year: about $28.7M in FY2025, $25.8M of it from Bay County and three-quarters of it to Panama City Beach's Front Beach Road CRA. It shows who pays, what has been paid since FY2003, sunset dates and what could still be paid under three growth scenarios, checked against the county's own budget figures. The method and the missing years are on the page.",
      'pages': ['/public-money/cra-tax-increment', '/public-money/tax-dollars', '/public-money/amendment-3', '/governments', '/open-data', '/developers']},
+    {'date': '2026-10-25', 'title': 'Fewer pages, more on each government',
+     'text': "Each government's page now carries its whole budget (every fund and department, and what each service costs per resident), every debt and bond, every audit finding from the last three years, and its savings ideas. Compare shows the side-by-side totals, including cost per resident by service. Tourism agency payments moved onto the Tourist tax page, county officers and officials' pay onto People, and the money map into Connections as Donors and votes. The old pages send you to the new spot.",
+     'pages': ['/governments', '/compare', '/public-money/tourist-tax', '/people', '/connections', '/public-money/tax-dollars']},
     {'date': '2026-10-25', 'title': 'Budgets back to 2015',
      'text': "The budget comparison now reaches back further. Bay County has every adopted budget from FY2015 to FY2027, fund by fund, from the county's budget archive. Panama City has FY2017 to FY2022 by fund group, read from its scanned budget books, and its General Fund for every year from FY2015 using the city's audited financial reports, and Lynn Haven adds FY2020 with every fund and department. Audited revenue and spending for the county and all seven cities now go back to FY2015. For Panama City Beach, Callaway, Springfield, Parker, Mexico Beach and the school district, the General Fund budget for FY2021 to FY2025 comes from each year's audited financial report (Parker back to FY2015); their older budget books aren't posted online. The page lists which years each government has.",
      'pages': ['/public-money/budget-compare', '/governments', '/open-data']},
@@ -174,7 +177,14 @@ CHANGES = [
 ]
 
 
-LABELS = {'/': 'Home', '/my-address': 'My Address', '/public-money/tax-dollars': 'Tax Dollars', '/public-money/fees-and-bills': 'Fees & Bills',
+# pages folded into others (2026-10-25): old entries link to where the content lives now
+MOVED = {'/public-money/budget-explorer': '/compare', '/public-money/savings': '/governments', '/public-money/debt': '/compare',
+         '/public-money/audits': '/governments', '/public-money/who-gets-paid': '/public-money/tourist-tax', '/public-money/map': '/public-money/sales-tax-projects',
+         '/who-runs-bay-county': '/people', '/connections/money-map': '/connections'}
+for _c in CHANGES:
+    _c['pages'] = list(dict.fromkeys(MOVED.get(p, p) for p in _c['pages']))
+
+LABELS = {'/people': 'People', '/': 'Home', '/my-address': 'My Address', '/public-money/tax-dollars': 'Tax Dollars', '/public-money/fees-and-bills': 'Fees & Bills',
           '/public-money/tourist-tax': 'Tourist Tax', '/public-money/amendment-3': 'Amendment 3', '/public-money/cra-spending': 'CRA Spending',
           '/public-money/sales-tax-projects': 'Sales Tax Projects', '/public-money/hurricane-michael': 'Hurricane Michael',
           '/public-money/contracts': 'Contracts', '/public-money/votes': 'How They Voted', '/public-money/debt': 'Debt',
@@ -216,7 +226,7 @@ def coverage():
     ds = sorted(c['date'] for c in j('contracts', 'contracts.json')['contracts'] if c.get('date'))
     rows.append(('Contracts and change orders', f'Since {mon(ds[0])}', '/public-money/contracts'))
     fa = sorted({m.group(0) for a in j('debt_audit', 'debt_audit.json')['audits'] for m in [re.match(r'FY\d{4}', a.get('fy') or '')] if m})
-    rows.append(('Audit findings', f'{fa[0]}\u2013{fa[-1]} audits', '/public-money/audits'))
+    rows.append(('Audit findings', f'{fa[0]}\u2013{fa[-1]} audits', '/governments'))
     vd = sorted(v['date'] for v in j('votes', 'votes.json')['votes'] if v.get('date'))
     rows.append(('Recorded votes', f'{mon(vd[0])} to {mon(vd[-1])}', '/public-money/votes'))
     rows.append(('Property values (My Address)', '2026 property roll, live from Bay County GIS', '/my-address'))

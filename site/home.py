@@ -48,10 +48,10 @@ def topics(s):
         ('/public-money/hurricane-michael', 'Hurricane Michael', 'Where the recovery money went', 'Every FEMA rebuilding project, aid to households, Rebuild Florida awards and debris costs.', M(s['fema'], 0), f'FEMA rebuilding money, {s["fema_n"]} projects'),
         ('/public-money/sales-tax-projects', 'Sales Tax Projects', 'Promised vs built', 'Every half-cent sales tax project on the county map, with its status, plus the school half-cent.', f'{s["sp_done"]:,} of {s["sp_n"]:,}', 'projects marked completed'),
         ('/public-money/tourist-tax', 'Tourist Tax', 'What visitors pay, and where it goes', 'Ten years of bed tax collections, how the pennies are split and what Visit PCB spends.', M(s['bt25']), f'collected in FY2025, {s["pcb_share"]:.0%} from the PCB zone'),
-        ('/public-money/debt', 'Debt', 'What local governments owe', 'Bonds and bank loans by government, big single payments ahead, and pension promises.', M(s['debt']), 'owed across Bay County governments'),
-        ('/public-money/audits', 'Audit Findings', 'What the auditors found', 'Three years of audit findings in plain English, including problems that keep coming back.', f'{s["findings"]}', f'findings, {s["repeats"]} repeats in the latest audits'),
+        ('/compare', 'Debt', 'What local governments owe', 'Debt per resident for every government, side by side; each government\'s page lists its bonds and loans.', M(s['debt']), 'owed across Bay County governments'),
+        ('/governments', 'Audit Findings', 'What the auditors found', 'Three years of audit findings in plain English on each government\'s page, including problems that keep coming back.', f'{s["findings"]}', f'findings, {s["repeats"]} repeats in the latest audits'),
         ('/public-money/fees-and-bills', 'Fees & Bills', 'Fees on your tax bill, and water and garbage', 'Fire, stormwater and other flat fees, plus a typical monthly utility bill in each city.', '$28.1M', 'in flat fees on FY2026 tax bills'),
-        ('/who-runs-bay-county', 'Officials', 'Who runs Bay County', 'Every elected seat and appointed manager, and what top officials are paid.', '5', 'independently elected county officers'),
+        ('/people', 'Officials', 'Officials and pay', 'Every official and candidate, the five county officers, and what top officials are paid.', '5', 'independently elected county officers'),
         ('/public-money/contracts', 'Contracts', 'Who gets the contracts', 'Major contracts since 2022: winners, how they were awarded, change orders and who the county paid most.', str(s['ct_n']), 'contracts tracked'),
         ('/public-money/amendment-3', 'Amendment 3', 'What changes if it passes', 'The property tax amendment on the November ballot: your bill before and after, and the state\'s estimates.', M(s['a3']), 'less for Bay governments in FY2029 (state est.)'),
     ]
@@ -185,17 +185,17 @@ def home_page():
   <section class="h-follow" aria-labelledby="follow">
     <div class="h-sec-hd"><div><span class="eyebrow">Step 2 · Follow it</span><h2 id="follow">Where it went, and who's checking.</h2></div><a href="/public-money/accountability">Accountability console →</a></div>
     <div class="h-tiles">
-      <a class="h-tile t-blue" href="/public-money/budget-explorer">
+      <a class="h-tile t-blue" href="/compare#services">
         <span class="eyebrow">Spending · {bd['fy']}</span>
         <span class="mini" aria-hidden="true">{budget_bars}</span>
         <b class="fig">{M(bd['total'])}</b><span class="h-tl">Budgeted this year</span><span class="muted">{bd['n']} governments · biggest everyday costs: {html.escape(top2)}</span>
       </a>
-      <a class="h-tile t-salmon" href="/public-money/debt">
+      <a class="h-tile t-salmon" href="/compare#m-debt">
         <span class="eyebrow">Debt</span>
         <span class="mini" aria-hidden="true">{debt_bars}</span>
         <b class="fig">{M(s['debt'])}</b><span class="h-tl">Owed by local governments</span><span class="muted">County, cities, schools and authorities</span>
       </a>
-      <a class="h-tile t-amber" href="/public-money/audits">
+      <a class="h-tile t-amber" href="/compare#m-findings">
         <span class="eyebrow">Accountability</span>
         <span class="prog" aria-hidden="true"><span class="p-a"><i style="width:{(s['findings'] - s['repeats']) / s['findings'] * 100:.0f}%"></i></span><span class="p-b"><i style="width:{s['sp_done'] / s['sp_n'] * 100:.0f}%"></i></span></span>
         <b class="fig">{s['findings']} findings</b><span class="h-tl">{s['repeats']} repeat audit findings</span><span class="muted">{s['sp_done']:,} of {s['sp_n']:,} sales tax projects done</span>
@@ -205,7 +205,7 @@ def home_page():
       <a href="/public-money/contracts">{s['ct_n']} contracts</a>
       <a href="/public-money/votes">How they voted</a>
       <a href="/connections">Connections</a>
-      <a href="/public-money/savings">Savings finder</a>
+      <a href="/governments">Governments</a>
       <a href="/public-money/tourist-tax">Bed tax {M(s['bt25'])}</a>
       <a href="/public-money/hurricane-michael">Hurricane Michael {M(s['fema'], 0)}</a>
       {f'<a class="hot" href="/public-money/amendment-3">Amendment 3 · −{M(s["a3"])} FY2029</a>' if election else ''}

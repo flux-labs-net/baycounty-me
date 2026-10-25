@@ -26,6 +26,46 @@ def compare_data():
     return rows
 
 
+def services_section():
+    """Cost per resident by service (formerly on the Budget explorer): every government's General Fund, grouped into
+    common services, divided by residents, with the city median. Dataset budget-per-resident."""
+    import html
+    from money_pages import per_resident_rows, SERVICES
+    rows = per_resident_rows()
+    if not rows:
+        return ''
+    e = html.escape
+    cols = SERVICES + [('total', 'Everyday General Fund')]
+    govs = list(dict.fromkeys(r['government'] for r in rows))
+    by = {(r['government'], r['service_id']): r for r in rows}
+    slug = {p.get('name'): (p['slug'], p['short'], p['kind']) for p in all_profiles()}
+    med = {sid: next((r['city_median_per_resident'] for r in rows if r['service_id'] == sid and r['city_median_per_resident']), None) for sid, _ in cols}
+
+    def cell(g, sid):
+        r = by.get((g, sid))
+        if not r or r['per_resident'] is None:
+            return '<td class="num muted">—</td>'
+        p = r['vs_city_median_pct']
+        mark = '<span class="ar" title="More than 25% above the city median">▲</span>' if p is not None and p > 25 else '<span class="ar" title="More than 25% below the city median">▼</span>' if p is not None and p < -25 else ''
+        return f'<td class="num" title="{e(r["departments_included"])}">${r["per_resident"]:,.0f}{mark}</td>'
+
+    def name(g):
+        sl, sh, kind = slug.get(g, (None, g, ''))
+        return (f'<a href="/governments/{sl}">{e(sh)}</a>' if sl else e(g)) + (' <span class="muted">(countywide)</span>' if kind != 'city' else '')
+    body = ''.join(f'<tr><th scope="row">{name(g)}</th>{"".join(cell(g, sid) for sid, _ in cols)}</tr>' for g in govs)
+    foot = ''.join(f'<td class="num">{"$" + format(med[sid], ",.0f") if med[sid] else "—"}</td>' for sid, _ in cols)
+    return f'''<section class="tx-sec"><div class="sec-hd"><h2 id="services">Cost per resident, by service</h2><span class="muted">FY2026 General Fund budget ÷ residents</span></div>
+    <div class="tablewrap"><table class="tx-table bn-tbl"><thead><tr><th scope="col">Per resident</th>{"".join(f'<th scope="col" class="num">{e(l)}</th>' for _, l in cols)}</tr></thead>
+      <tbody>{body}</tbody><tfoot><tr><th scope="row">City median</th>{foot}</tr></tfoot></table></div>
+    <p class="note">▲ more than 25% above the city median · ▼ more than 25% below. Hover a figure to see which departments it adds up. Download: <a href="/downloads/budget-per-resident.csv">CSV</a> · <a href="/downloads/budget-per-resident.json">JSON</a></p>
+    <details class="gaps"><summary>How the services are grouped, and what to watch for</summary><ul>
+      <li><b>Departments are grouped by name.</b> Each government names its departments differently, so they're sorted into common services.</li>
+      <li><b>Only the General Fund is counted.</b> Some cities pay for a service partly from other funds (a roads fund, a fire assessment, the CRA), so their figure can understate the full cost.</li>
+      <li><b>Left out of every service:</b> transfers, reserves, debt payments and hurricane-recovery lines. "Everyday General Fund" is the General Fund without those.</li>
+      <li><b>Contract services count too.</b> Callaway and Mexico Beach pay the Sheriff for policing; that contract is their police cost.</li>
+      <li><b>Bay County</b> is shown for context only; its figures are spread over every county resident. The school district isn't compared here.</li></ul></details></section>'''
+
+
 def compare_page(out_dir):
     js = open(os.path.join(HERE, 'compare.js')).read().replace('__CMP__', json.dumps(compare_data(), separators=(',', ':')))
     open(os.path.join(out_dir, 'assets', 'compare.js'), 'w').write(js)
@@ -40,6 +80,7 @@ def compare_page(out_dir):
   </section>
   <p class="print-meta" id="printMeta"></p>
   <div class="cmp-grid" id="cmpGrid"></div>
+  ''' + services_section() + '''
   <section class="tx-sec method"><div class="sec-hd"><h2 id="notes">Reading the comparison</h2></div>
     <ul class="plain">
       <li><b>Different jobs.</b> The county serves everyone and runs countywide services; the school district runs schools; cities provide police, fire, water and other services that differ from city to city. Compare cities with cities.</li>

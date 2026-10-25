@@ -108,7 +108,7 @@ struct MoneyView: View {
                         CardList {
                             RouteRow(route: .explore, title: "Every dataset", symbol: "square.grid.2x2")
                             RowDivider(inset: 50)
-                            WebRow(title: "Public money map", symbol: "map", url: URL(string: "https://baycounty.me/public-money/map"))
+                            WebRow(title: "Sales tax projects map", symbol: "map", url: URL(string: "https://baycounty.me/public-money/sales-tax-projects"))
                         }
                     }
                     .padding(.horizontal, 16)

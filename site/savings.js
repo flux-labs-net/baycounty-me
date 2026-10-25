@@ -1,4 +1,5 @@
-/* Savings finder: opportunities, their evidence and the records to request.
+/* Savings ideas on a government's page (/governments/<slug>, section "Where it could spend less"): opportunities, their
+   evidence and the records to request, for that government only (window.GOVPAGE.key).
    Data: /data/savings.json (built by site/savings_page.py from the Accountability projects and the CRA ledger).
    ?k=<kind of saving> filters the list; #<opportunity id> opens on one opportunity. */
 (async () => {
@@ -12,8 +13,8 @@ const pct = r => r == null ? '—' : (Math.abs(r) < 0.1 ? +(r * 100).toFixed(1) 
 const conf = c => ({Medium: 'c-medium', 'Needs records': 'c-records'}[c] || '');
 
 // the city bar at the top: only opportunities for that government, and the totals above add up just those
-const C = window.BCM && BCM.city;
-let city = C ? C.get() : '';
+const C = window.BCM && BCM.city, FIXED = window.GOVPAGE && GOVPAGE.key;
+let city = FIXED || (C ? C.get() : '');
 const mine = o => !city || o.govs.includes(city);
 function stats() {
   const xs = D.opportunities.filter(mine), sum = k => xs.reduce((a, o) => a + (o[k] || 0), 0);
@@ -70,7 +71,7 @@ function card(o) {
     ? `<div class="sav-fig"><span>Potential savings</span><b>${big(o.savings_low)} – ${big(o.savings_high)}</b><small>${pct(o.rate_low)} to ${pct(o.rate_high)} of ${esc(o.in_play_is)}</small></div>`
     : `<div class="sav-fig"><span>Potential savings</span><b>${o.estimate === 'records' ? 'Needs records' : 'No estimate'}</b><small>${o.estimate === 'records' ? 'The records below come first' : 'A pattern to repeat, not a cut'}</small></div>`;
   const inPlay = o.in_play != null ? `<div class="sav-fig"><span>In play</span><b>${big(o.in_play)}</b><small>${esc(o.in_play_is)}</small></div>` : '';
-  const overlaps = o.overlaps.length ? `<p class="sav-p muted">Overlaps with ${o.overlaps.map(id => `<a href="#${esc(id)}" data-go="${esc(id)}">${esc(BY[id]?.title || id)}</a>`).join(', ')}, so the two estimates shouldn't simply be added.</p>` : '';
+  const overlaps = o.overlaps.length ? `<p class="sav-p muted">Overlaps with ${o.overlaps.map(id => BY[id] && mine(BY[id]) ? `<a href="#${esc(id)}" data-go="${esc(id)}">${esc(BY[id].title)}</a>` : esc(BY[id]?.title || id)).join(', ')}, so the two estimates shouldn't simply be added.</p>` : '';
   const reqs = o.requests.map(r => `<a class="pill sm" href="/records-request?gov=${encodeURIComponent(r.gk)}&d=${encodeURIComponent(r.q)}" title="${esc(r.q)}">Request the records</a>`).join(' ');
   const srcs = o.sources.slice(0, 6).map((u, i) => `<a href="${esc(u)}" target="_blank" rel="noopener">Source ${i + 1}</a>`).join(' ');
   return `<article class="sav-card" id="${esc(o.id)}">
@@ -94,7 +95,7 @@ function filters() {
 function draw() {
   const all = O.filter(mine), list = all.filter(o => kind === 'All' || o.lever === kind);
   $('svList').innerHTML = list.map(card).join('') || `<p class="muted">${all.length ? 'None of this kind yet.' : `No opportunities found for ${esc(C.label(city))} yet.`}</p>`;
-  $('svCount').textContent = `${list.length} of ${all.length}`;
+  $('svCount').textContent = FIXED ? `${all.length} place${all.length === 1 ? '' : 's'} to look` : `${list.length} of ${all.length}`;
   filters(); stats();
 }
 $('svF').addEventListener('click', ev => {
@@ -105,12 +106,12 @@ $('svF').addEventListener('click', ev => {
 });
 $('svList').addEventListener('click', ev => {
   const a = ev.target.closest('a[data-go]'); if (!a) return;
-  const o = BY[a.dataset.go]; if (o && !mine(o) && C) C.set('');
+  const o = BY[a.dataset.go]; if (o && !mine(o) && C && !FIXED) C.set('');
   if (o && kind !== 'All' && o.lever !== kind) { kind = 'All'; draw(); }
 });
 draw();
-if (C) C.on(k => { if (k !== city) { city = k; draw(); } });
+if (C && !FIXED) C.on(k => { if (k !== city) { city = k; draw(); } });
 const h = decodeURIComponent(location.hash.slice(1));
-if (BY[h] && !mine(BY[h]) && C) C.set('');
+if (BY[h] && !mine(BY[h]) && C && !FIXED) C.set('');
 if (BY[h]) { if (kind !== 'All' && BY[h].lever !== kind) { kind = 'All'; draw(); } $(h)?.scrollIntoView(); }
 })();

@@ -178,7 +178,7 @@ def person_page(pid):
     return f'''<div class="page tax">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow"><a href="/people">People</a>{" · " + eyebrow if eyebrow else ""}</span><h1>{e(x["name"])}</h1>
     {f'<p class="lede">{e(x["subtitle"])}</p>' if x.get("subtitle") else ''}</div>
-    <div class="stamp">{f'<dl class="ui-facts">{facts_h}</dl>' if facts_h else ''}<a class="pill" href="/alerts">Get alerts</a><a class="pill" href="/who-runs-bay-county">Who runs Bay County</a></div></header>
+    <div class="stamp">{f'<dl class="ui-facts">{facts_h}</dl>' if facts_h else ''}<a class="pill" href="/alerts">Get alerts</a><a class="pill" href="/people#co">County officers and pay</a></div></header>
   {f'<div class="kpis">{kp}</div>' if kp else ''}
   {profile_section(eid, 'Connections', 'Companies, groups and governments linked to ' + x['name'] + ' in the records')}
   {secs}
@@ -220,6 +220,7 @@ def _kinds(p):
 
 
 def people_index():
+    from fees_page import who_sections
     from ui import dir_card, directory, ico
     G = EG.build()
     cards, kinds, govs = [], Counter(), {}
@@ -240,12 +241,13 @@ def people_index():
     k = lambda icon, tone, label, v, sub: f'<div class="kpi ui-k"><span class="kh">{ico(icon, tone)}<span class="eyebrow">{label}</span></span><span class="v">{v}</span><span class="s">{sub}</span></div>'
     return f'''<div class="page tax">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Connections · People</span><h1>Officials and candidates</h1>
-    <p class="lede">One page for each elected official, department leader and 2026 candidate in these records: where they serve, campaign money from businesses and groups, how they voted, and who they connect to.</p></div>
-    <div class="stamp"><a class="pill" href="/who-runs-bay-county">Who runs Bay County</a><a class="pill" href="/connections">Connections network</a></div></header>
+    <p class="lede">One page for each elected official, department leader and 2026 candidate in these records: where they serve, campaign money from businesses and groups, how they voted, and who they connect to. Below: the five countywide officers and what top officials are paid.</p></div>
+    <div class="stamp"><a class="pill" href="#co">County officers</a><a class="pill" href="#pay">Officials' pay</a><a class="pill" href="/connections">Connections network</a></div></header>
   <div class="kpis">{k("users", "blue", "Elected officials", kinds["elected"], f"On {len(govs)} boards and offices")}{k("flag", "salmon", "2026 candidates", kinds["candidate"], "On the November 3 ballot")}{k("briefcase", "teal", "Department leaders", kinds["staff"], "Managers, clerks and chiefs")}{k("network", "amber", "Connections", f"{total_links:,}", "Companies, donors, boards and votes")}</div>
   <section class="tx-sec"><div class="sec-hd"><h2 id="all">Everyone</h2><span class="muted">{len(cards)} people</span></div>
     {directory(cards, "People", chips, sorted(govs.items(), key=lambda kv: kv[1]), "Search a name, seat or government", csv="baycounty-people")}
     <p class="note">Only elected officials, department leaders and candidates have a page here. Nonprofit board members and businesses have a profile reached from the nonprofit, company or <a href="/connections">Connections</a> pages. Individual campaign donors are named only when they run a registered business; others are counted in totals.</p></section>
+  {who_sections()}
 </div>
 {ASSETS}'''
 
