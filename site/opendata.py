@@ -10,7 +10,7 @@ _sys.path.insert(0, os.path.join(DATA, 'entities'))
 import ids  # noqa: E402  shared government / vendor / person ids (data/entities)
 
 # which columns name the government, per dataset, tried in order (office titles are matched by contained name)
-GOV_COLS = {'owner-gifts': ['office'], 'entity-profiles': ['gov_id'], 'entity-connections': [], 'government-profiles': ['government'], 'government-years': ['gov_id', 'government'], 'budget-years': ['gov_id'], 'votes': ['government'], 'member-votes': ['gov_id'], 'cra-payments': ['city'],
+GOV_COLS = {'owner-gifts': ['office'], 'entity-profiles': ['gov_id'], 'entity-connections': [], 'government-profiles': ['government'], 'government-years': ['gov_id', 'government'], 'budget-years': ['gov_id'], 'officeholder-terms': ['gov_id'], 'votes': ['government'], 'member-votes': ['gov_id'], 'cra-payments': ['city'],
             'property-tax-rates': ['authority_id'], 'fema-michael-projects': ['applicant'], 'officials-pay': ['title', 'government'],
             'meetings': ['gov', 'board'], 'campaign-finance': ['office', 'gov'], 'bonds': ['gov'], 'salary-positions': ['employer_id'],
             'salary-leaders': ['employer_id'], 'candidates-2026': ['office', 'government'], 'campaign-contributions-2026': ['office'],

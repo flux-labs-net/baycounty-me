@@ -143,7 +143,8 @@ def gov_page(key):
             f'<a class="ui-tag" href="{e(off["contact_url"])}" target="_blank" rel="noopener">{ico("mail")}Contact</a>' if off.get('contact_url') else '',
             f'<a class="ui-tag" href="/who-runs-bay-county">{ico("users")}All officials</a>'])
         secs.append(f'''<section class="tx-sec"><div class="sec-hd"><h2 id="who">Who's in charge</h2><span class="muted">{e(off.get("form") or "")}</span></div>
-          <div class="ui-people">{"".join(_person_card(s, i) for i, s in enumerate(board))}</div>
+          <p class="small muted" id="gxBoardNote">Today's officials. Pick a year in the bar at the top to see who held each seat that year.</p>
+          <div class="ui-people" id="gxBoard">{"".join(_person_card(s, i) for i, s in enumerate(board))}</div>
           {f'<h3 class="ui-h3">Appointed staff and pay</h3><div class="ui-row">{"".join(_person_card(s, i + 1) for i, s in enumerate(staff))}{pay}</div>' if staff or pay else ''}
           <div class="ui-links">{links}</div></section>''')
     # money

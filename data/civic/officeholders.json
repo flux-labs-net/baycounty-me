@@ -1,0 +1,1754 @@
+{
+ "as_of": "2026-10-25",
+ "place_id": "fl-bay",
+ "notes": [
+  "One term per person per seat. start null = in office before FY2015; end null = in office now.",
+  "A gap row (name null) is a stretch nobody could confirm from the records found, or a known vacancy (vacant true).",
+  "*_approx = the date is known only to the month or year (first or last meeting the person appears in).",
+  "Elected seats only; appointed staff are listed as of today on each government page."
+ ],
+ "gaps": [
+  "Bay District Schools, District 2: The governor was to appoint someone until the 2020 election; the appointee is not confirmed.",
+  "City of Panama City Beach, Ward 2: Holder before 2016 not confirmed.",
+  "City of Panama City Beach, Ward 4: Holder before 2016 not confirmed.",
+  "City of Springfield, Ward 1: Holder before 2016 not confirmed.",
+  "City of Springfield, Ward 3: Holder before April 2015 not confirmed.",
+  "City of Parker, Seat 1: Not confirmed.",
+  "City of Mexico Beach, Mayor (Group 1): Mayor from 2015 to 2017 not confirmed (Tom Bailey lost to Al Cathey in 2017).",
+  "City of Mexico Beach, Group 2: Holder from 2016 to 2019 not confirmed.",
+  "City of Mexico Beach, Group 3: Holder before 2019 not confirmed.",
+  "City of Mexico Beach, Group 4: Holder from 2016 to 2022 not confirmed.",
+  "City of Mexico Beach, Group 5: Holder from 2016 to 2020 not confirmed."
+ ],
+ "sources": {
+  "e2014m": {
+   "title": "2014 municipal elections, Apr 22, 2014 (SOE results)",
+   "url": "https://enr.electionsfl.org/BAY/1177/Summary/"
+  },
+  "e2015m": {
+   "title": "2015 municipal elections, Apr 21, 2015 (SOE results)",
+   "url": "https://enr.electionsfl.org/BAY/1281/Summary/"
+  },
+  "e2016m": {
+   "title": "2016 municipal elections, Apr 19, 2016 (SOE results)",
+   "url": "https://enr.electionsfl.org/BAY/1494/Summary/"
+  },
+  "e2016p": {
+   "title": "2016 primary election, Aug 30, 2016 (SOE results)",
+   "url": "https://enr.electionsfl.org/BAY/1537/Summary/"
+  },
+  "e2016g": {
+   "title": "2016 general election, Nov 8, 2016 (SOE results)",
+   "url": "https://enr.electionsfl.org/BAY/1609/Summary/"
+  },
+  "e2017m": {
+   "title": "2017 municipal elections, Apr 18, 2017 (SOE results)",
+   "url": "https://enr.electionsfl.org/BAY/1712/Summary/"
+  },
+  "e2017r": {
+   "title": "2017 Lynn Haven runoff, May 16, 2017 (SOE results)",
+   "url": "https://enr.electionsfl.org/BAY/1723/Summary/"
+  },
+  "e2018m": {
+   "title": "2018 municipal elections, Apr 17, 2018 (SOE results)",
+   "url": "https://enr.electionsfl.org/BAY/1830/Summary/"
+  },
+  "e2018p": {
+   "title": "2018 primary election, Aug 28, 2018 (SOE results)",
+   "url": "https://enr.electionsfl.org/BAY/1896/Summary/"
+  },
+  "e2019m": {
+   "title": "2019 municipal elections, Apr 16, 2019 (SOE results)",
+   "url": "https://enr.electionsfl.org/BAY/2088/Summary/"
+  },
+  "e2019r": {
+   "title": "2019 Panama City Ward 2 runoff, May 21, 2019 (SOE results)",
+   "url": "https://enr.electionsfl.org/BAY/2151/Summary/"
+  },
+  "e2020m": {
+   "title": "2020 municipal elections, Apr 21, 2020 (SOE results)",
+   "url": "https://enr.electionsfl.org/BAY/2651/Summary/"
+  },
+  "e2020p": {
+   "title": "2020 primary election, Aug 18, 2020 (SOE results)",
+   "url": "https://enr.electionsfl.org/BAY/2731/Summary/"
+  },
+  "e2020g": {
+   "title": "2020 general election, Nov 3, 2020 (SOE results)",
+   "url": "https://enr.electionsfl.org/BAY/2754/Summary/"
+  },
+  "e2021m": {
+   "title": "2021 municipal elections, Apr 20, 2021 (SOE results)",
+   "url": "https://enr.electionsfl.org/BAY/3413/Summary/"
+  },
+  "e2021r": {
+   "title": "2021 Lynn Haven runoff, May 18, 2021 (SOE results)",
+   "url": "https://enr.electionsfl.org/BAY/2954/Summary/"
+  },
+  "e2022m": {
+   "title": "2022 municipal elections, Apr 19, 2022 (SOE results)",
+   "url": "https://enr.electionsfl.org/BAY/3159/Summary/"
+  },
+  "e2022p": {
+   "title": "2022 primary election, Aug 23, 2022 (SOE results)",
+   "url": "https://enr.electionsfl.org/BAY/3256/Summary/"
+  },
+  "e2023m": {
+   "title": "2023 municipal elections, Apr 18, 2023 (SOE results)",
+   "url": "https://enr.electionsfl.org/BAY/3361/Summary/"
+  },
+  "e2023r": {
+   "title": "2023 municipal runoffs, May 16, 2023 (SOE results)",
+   "url": "https://enr.electionsfl.org/BAY/3396/Summary/"
+  },
+  "e2024m": {
+   "title": "2024 municipal elections, Apr 16, 2024 (SOE results)",
+   "url": "https://enr.electionsfl.org/BAY/3592/Summary/"
+  },
+  "e2024p": {
+   "title": "2024 primary election, Aug 20, 2024 (SOE results)",
+   "url": "https://enr.electionsfl.org/BAY/3662/Summary/"
+  },
+  "e2025m": {
+   "title": "2025 municipal elections, Apr 22, 2025 (SOE results)",
+   "url": "https://enr.electionsfl.org/BAY/3825/Summary/"
+  },
+  "e2025r": {
+   "title": "2025 municipal runoffs, May 20, 2025 (SOE results)",
+   "url": "https://enr.electionsfl.org/BAY/3836/Summary/"
+  },
+  "e2026m": {
+   "title": "2026 municipal elections, Apr 21, 2026 (SOE results)",
+   "url": "https://enr.electionsfl.org/BAY/3948/Summary/"
+  },
+  "bocc_hist": {
+   "title": "Bay County, History of Bay County: past commissioners by term",
+   "url": "https://www.baycountyfl.gov/336/History-of-Bay-County"
+  },
+  "bocc_now": {
+   "title": "Bay County Board of County Commissioners",
+   "url": "https://www.baycountyfl.gov/305/County-Commissioners"
+  },
+  "griffitts": {
+   "title": "WJHG, Meet the newest Bay County Commissioners (2016)",
+   "url": "https://www.wjhg.com/content/news/Meet-the-newest-Bay-County-Commissioners-391831481.html"
+  },
+  "baker": {
+   "title": "WJHG, Bay County Commissioner arrested on fraud and misconduct charges (Jun 23, 2020)",
+   "url": "https://www.wjhg.com/2020/06/23/bay-county-commissioner-arrested-on-fraud-and-misconduct-charges/"
+  },
+  "moore": {
+   "title": "WJHG, Bay County to hold special election for District 4 commission seat (Aug 14, 2020)",
+   "url": "https://www.wjhg.com/2020/08/14/bay-county-to-hold-special-election-for-district-4-commission-seat"
+  },
+  "pease": {
+   "title": "Office of the Governor, appointment of Clair Pease (Dec 15, 2022)",
+   "url": "https://flgov.com/2022/12/15/governor-ron-desantis-appoints-clair-pease-to-the-bay-county-board-of-county-commissioners"
+  },
+  "gainer": {
+   "title": "Wikipedia, George Gainer",
+   "url": "https://en.wikipedia.org/wiki/George_Gainer"
+  },
+  "bds2016": {
+   "title": "Ballotpedia, Bay District Schools elections (2016)",
+   "url": "https://ballotpedia.org/Bay_District_Schools_elections_(2016)"
+  },
+  "littleton": {
+   "title": "WJHG, Ginger Littleton retires from BDS school board after 13 years (Nov 2019)",
+   "url": "https://www.wjhg.com/content/news/Ginger-Littleton-retires-from-school-board--564827642.html"
+  },
+  "mcqueen": {
+   "title": "Office of the Governor, appointment of Mark McQueen (Jul 26, 2023)",
+   "url": "https://flgov.com/2023/07/26/governor-ron-desantis-appoints-mark-mcqueen-as-bay-countys-superintendent-of-schools"
+  },
+  "bds_board": {
+   "title": "Bay District Schools, School Board members",
+   "url": "https://bay.k12.fl.us/school-board-members"
+  },
+  "lh14": {
+   "title": "Lynn Haven FY2014-15 budget (city commission page)",
+   "url": "https://www.cityoflynnhaven.gov/Archive/ViewFile/Item/112"
+  },
+  "lh17": {
+   "title": "Lynn Haven FY2016-17 budget (city commission page)",
+   "url": "https://www.cityoflynnhaven.gov/Archive/ViewFile/Item/115"
+  },
+  "lh18": {
+   "title": "Lynn Haven FY2017-18 budget (city commission page)",
+   "url": "https://www.cityoflynnhaven.gov/ArchiveCenter/ViewFile/Item/116"
+  },
+  "lh20": {
+   "title": "Lynn Haven FY2019-20 budget (city commission page)",
+   "url": "https://www.cityoflynnhaven.gov/DocumentCenter/View/720"
+  },
+  "lh21": {
+   "title": "Lynn Haven FY2020-21 budget (city commission page)",
+   "url": "https://www.cityoflynnhaven.gov/DocumentCenter/View/1104"
+  },
+  "lh22": {
+   "title": "Lynn Haven FY2021-22 budget (city commission page)",
+   "url": "https://www.cityoflynnhaven.gov/DocumentCenter/View/1828"
+  },
+  "lh24": {
+   "title": "Lynn Haven FY2023-24 budget (city commission page)",
+   "url": "https://www.cityoflynnhaven.gov/DocumentCenter/View/2684"
+  },
+  "lh27": {
+   "title": "Lynn Haven FY2026-27 budget (city commission page)",
+   "url": "https://www.cityoflynnhaven.gov/DocumentCenter/View/5091"
+  },
+  "lh_anderson": {
+   "title": "WFSU, Lynn Haven city commissioners leave mayoral seat vacant (Aug 28, 2020)",
+   "url": "https://news.wfsu.org/wfsu-local-news/2020-08-28/lynn-haven-city-commissioners-leave-mayoral-seat-vacant"
+  },
+  "lh_vandergrift": {
+   "title": "WJHG, New Lynn Haven Commissioner appointed to fill vacant seat (Feb 4, 2023)",
+   "url": "https://www.wjhg.com/2023/02/04/new-lynn-haven-commissioner-appointed-fill-vacant-seat"
+  },
+  "lh_lowery": {
+   "title": "WJHG, Lynn Haven Commissioners appoint new mayor (Jan 14, 2026)",
+   "url": "https://www.wjhg.com/2026/01/14/lynn-haven-commissioners-appoint-new-mayor/"
+  },
+  "lh_tinder26": {
+   "title": "WJHG, City of Lynn Haven releases statement and legal memo ahead of special commission meeting (Sep 16, 2026)",
+   "url": "https://www.wjhg.com/2026/09/16/city-lynn-haven-releases-statement-legal-memo-ahead-special-commission-meeting/"
+  },
+  "lh_langford": {
+   "title": "WMBB, Corey Langford appointed to Lynn Haven commission (Sep 2026)",
+   "url": "https://www.mypanhandle.com/news/corey-langford-appointed-to-lynn-haven-commission-as-ward-4/"
+  },
+  "pc16": {
+   "title": "Panama City commission minutes, Aug 23, 2016 (roll call)",
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Item/1813?fileID=5652"
+  },
+  "pc18": {
+   "title": "Panama City Annual Budget FY2018 (city commission page)",
+   "url": "https://www.panamacity.gov/ArchiveCenter/ViewFile/Item/326"
+  },
+  "pc21": {
+   "title": "Panama City Annual Budget FY2021 (city commission page)",
+   "url": "https://www.panamacity.gov/ArchiveCenter/ViewFile/Item/1449"
+  },
+  "pc22": {
+   "title": "Panama City Annual Budget FY2022 (city commission page)",
+   "url": "https://www.panamacity.gov/ArchiveCenter/ViewFile/Item/1471"
+  },
+  "pc_now": {
+   "title": "Panama City, City Commission",
+   "url": "https://www.panamacity.gov/395/City-Commission"
+  },
+  "pcb_old": {
+   "title": "Panama City Beach council document listing Mayor Mike Thomas and Ward 1 John Reichard",
+   "url": "https://www.pcbfl.gov/ArchiveCenter/ViewFile/Item/54"
+  },
+  "pcb_casto": {
+   "title": "Panama City Beach council document listing Mayor Mike Thomas and Ward 1 Paul Casto",
+   "url": "https://www.pcbfl.gov/ArchiveCenter/ViewFile/Item/56"
+  },
+  "pcb_oberst": {
+   "title": "WJHG, Former Panama City Beach mayor passes away (May 18, 2025)",
+   "url": "https://www.wjhg.com/2025/05/18/former-panama-city-beach-mayor-passes-away"
+  },
+  "pcb_now": {
+   "title": "Panama City Beach, City Council members",
+   "url": "https://pcbfl.gov/government/city-council/city-council-members"
+  },
+  "pcb_2020": {
+   "title": "WFSU, Panama City Beach leaders to take office (Apr 23, 2020)",
+   "url": "https://news.wfsu.org/wfsu-local-news/2020-04-23/panama-city-beach-leaders-to-take-office-reopen-sand"
+  },
+  "cw14": {
+   "title": "Callaway commission minutes, Oct 28, 2014 (roll call)",
+   "url": "https://www.cityofcallaway.com/ArchiveCenter/ViewFile/Item/1523"
+  },
+  "cw16a": {
+   "title": "Callaway commission minutes, Mar 22, 2016",
+   "url": "https://www.cityofcallaway.com/ArchiveCenter/ViewFile/Item/1857"
+  },
+  "cw16b": {
+   "title": "Callaway commission minutes, Apr 26, 2016",
+   "url": "https://www.cityofcallaway.com/ArchiveCenter/ViewFile/Item/1867"
+  },
+  "cw17a": {
+   "title": "Callaway commission minutes, Sep 26, 2017",
+   "url": "https://www.cityofcallaway.com/ArchiveCenter/ViewFile/Item/2232"
+  },
+  "cw17b": {
+   "title": "Callaway commission minutes, Oct 24, 2017",
+   "url": "https://www.cityofcallaway.com/ArchiveCenter/ViewFile/Item/2249"
+  },
+  "cw18a": {
+   "title": "Callaway commission minutes, May 8, 2018",
+   "url": "https://www.cityofcallaway.com/ArchiveCenter/ViewFile/Item/2350"
+  },
+  "cw18b": {
+   "title": "Callaway commission minutes, Jun 26, 2018",
+   "url": "https://www.cityofcallaway.com/ArchiveCenter/ViewFile/Item/2363"
+  },
+  "cw20a": {
+   "title": "Callaway commission minutes, Feb 25, 2020",
+   "url": "https://www.cityofcallaway.com/ArchiveCenter/ViewFile/Item/2705"
+  },
+  "cw20b": {
+   "title": "Callaway commission minutes, May 12, 2020",
+   "url": "https://www.cityofcallaway.com/ArchiveCenter/ViewFile/Item/2723"
+  },
+  "cw22a": {
+   "title": "Callaway commission minutes, Jun 14, 2022",
+   "url": "https://www.cityofcallaway.com/ArchiveCenter/ViewFile/Item/3184"
+  },
+  "cw22b": {
+   "title": "Callaway commission minutes, Aug 23, 2022",
+   "url": "https://www.cityofcallaway.com/ArchiveCenter/ViewFile/Item/3251"
+  },
+  "cw25a": {
+   "title": "Callaway commission minutes, Aug 26, 2025",
+   "url": "https://www.cityofcallaway.com/ArchiveCenter/ViewFile/Item/3786"
+  },
+  "cw25b": {
+   "title": "Callaway commission minutes, Oct 28, 2025",
+   "url": "https://www.cityofcallaway.com/ArchiveCenter/ViewFile/Item/3848"
+  },
+  "cw_now": {
+   "title": "Callaway, Mayor / Commission",
+   "url": "https://www.cityofcallaway.com/70/Mayor-Commission"
+  },
+  "sp19": {
+   "title": "Springfield commission minutes, Jan 7, 2019 (present)",
+   "url": "https://www.springfieldfl.net/media/1106"
+  },
+  "sp_now": {
+   "title": "Springfield, City Commission",
+   "url": "https://www.springfieldfl.net/city-commission"
+  },
+  "sp_mayor": {
+   "title": "Springfield, Ralph Hammond (mayor since 2013)",
+   "url": "https://www.springfieldfl.net/city-commission/directory-listing/ralph-hammond"
+  },
+  "pk14": {
+   "title": "Parker 2014 council minutes (present)",
+   "url": "https://www.cityofparker.com/wp-content/uploads/filr/2665/2014%20Official%20Minutes.pdf"
+  },
+  "pk17": {
+   "title": "Parker 2017 council minutes (present)",
+   "url": "https://www.cityofparker.com/wp-content/uploads/filr/2680/2017%20Minutes.pdf"
+  },
+  "pk20": {
+   "title": "Parker council minutes, Feb 4, 2020 (present)",
+   "url": "https://www.cityofparker.com/wp-content/uploads/filr/2903/Feb%204%202020%20MINUTES%20Regular%20Council.pdf"
+  },
+  "pk20b": {
+   "title": "Parker council minutes, Dec 15, 2020 (present)",
+   "url": "https://www.cityofparker.com/wp-content/uploads/filr/2893/Dec%2015%202020%20Minutes%20Regular.pdf"
+  },
+  "pk23": {
+   "title": "Parker council agenda and minutes, Jul 18, 2023 (council listed)",
+   "url": "https://www.cityofparker.com/wp-content/uploads/filr/4409/July%2018,%202023%20Council%20Minutes.pdf"
+  },
+  "pk23r": {
+   "title": "WMBB, Two Parker city council members to resign over Florida financial disclosure law (Dec 2023)",
+   "url": "https://www.mypanhandle.com/news/local-news/bay-county/parker/two-parker-city-council-members-to-resign-over-controversial-florida-law/"
+  },
+  "pk24": {
+   "title": "Parker council minutes, Mar 5, 2024 (council listed)",
+   "url": "https://www.cityofparker.com/wp-content/uploads/filr/5440/March%205,%202024%20REGULAR%20COUNCIL%20MEETING%20PUBLIC%20HEARING%20AGENDA%20MINUTES.pdf"
+  },
+  "pk25": {
+   "title": "Parker council minutes, May 2025 (present)",
+   "url": "https://www.cityofparker.com/wp-content/uploads/filr/6148/Approved-Minutes-Regular-Meeting-052025.pdf"
+  },
+  "pk_rega": {
+   "title": "Parker council appoints a replacement for John Haney (Jul 2026)",
+   "url": "https://citizenportal.ai/articles/8589306/florida/bay-county/parker/parker-council-appoints-and-swears-in-mark-grama-to-fill-vacant-seat"
+  },
+  "pk_now": {
+   "title": "Parker, City Council",
+   "url": "https://cityofparker.com/government/city-council/"
+  },
+  "pk_aud": {
+   "title": "Parker audited financial statements, FY2015-FY2019 (addressed to Mayor Richard Musgrave)",
+   "url": "https://cityofparker.com/wp-content/uploads/filr/3183/September%2030,%202019%20Audited%20Financial%20Statements.pdf"
+  },
+  "mb_cathey": {
+   "title": "WMBB, Remembering Al Cathey (2026): mayor 2006-2015 and 2017-2023",
+   "url": "https://www.mypanhandle.com/news/local-news/bay-county/mexico-beach/remembering-al-cathey-the-man-who-helped-rebuild-mexico-beach/"
+  },
+  "mb_recall": {
+   "title": "WMBB, Mexico Beach recalls Mayor Michele Miller, votes in Richard Wolff (Apr 2024)",
+   "url": "https://www.mypanhandle.com/news/local-news/politics-news/mexico-beach-recalls-mayor-michele-miller-votes-in-richard-wolff/"
+  },
+  "mb_now": {
+   "title": "Mexico Beach, Mayor and Council",
+   "url": "https://mexicobeachfl.gov/government/mayor-and-council/"
+  },
+  "votes": {
+   "title": "BayCounty.me vote records (roll calls in commission minutes, 2024-2026)",
+   "url": "https://baycounty.me/public-money/votes"
+  }
+ },
+ "governments": [
+  {
+   "gov_id": "county",
+   "government": "Bay County",
+   "body": "Board of County Commissioners",
+   "seats": [
+    {
+     "seat": "District 1",
+     "order": 0,
+     "terms": [
+      {
+       "name": "Mike Nelson",
+       "end": "2016-11-22",
+       "how": "elected",
+       "src": "bocc_hist",
+       "note": "Lost the Aug 2016 Republican primary to Tommy Hamm."
+      },
+      {
+       "name": "Tommy Hamm",
+       "start": "2016-11-22",
+       "end": "2024-11-19",
+       "how": "elected",
+       "src": "e2016p",
+       "note": "Won the 2016 primary; re-elected 2020; lost the 2024 primary."
+      },
+      {
+       "name": "Daniel Raffield",
+       "start": "2024-11-19",
+       "how": "elected",
+       "src": "e2024p"
+      }
+     ]
+    },
+    {
+     "seat": "District 2",
+     "order": 1,
+     "terms": [
+      {
+       "name": "George Gainer",
+       "end": "2016-11-22",
+       "how": "elected",
+       "src": "gainer",
+       "note": "Left to run for the Florida Senate in 2016.",
+       "end_approx": true
+      },
+      {
+       "name": "Robert Carroll",
+       "start": "2016-11-22",
+       "how": "elected",
+       "src": "e2016g",
+       "note": "Won the Nov 2016 election for the rest of the term; re-elected 2018, 2022 and, unopposed, 2026."
+      }
+     ]
+    },
+    {
+     "seat": "District 3",
+     "order": 2,
+     "terms": [
+      {
+       "name": "Bill Dozier",
+       "end": "2024-11-19",
+       "how": "elected",
+       "src": "bocc_hist",
+       "note": "William T. Dozier. Re-elected 2016 and 2020."
+      },
+      {
+       "name": "Doug Crosby",
+       "start": "2024-11-19",
+       "how": "elected",
+       "src": "bocc_now"
+      }
+     ]
+    },
+    {
+     "seat": "District 4",
+     "order": 3,
+     "terms": [
+      {
+       "name": "Guy Tunnell",
+       "end": "2018-11-20",
+       "how": "elected",
+       "src": "bocc_hist",
+       "end_approx": true
+      },
+      {
+       "name": "Keith Baker",
+       "start": "2018-11-20",
+       "end": "2020-06-23",
+       "how": "elected",
+       "src": "baker",
+       "note": "Resigned the day he was arrested, Jun 23, 2020.",
+       "start_approx": true
+      },
+      {
+       "start": "2020-06-23",
+       "end": "2020-11-17",
+       "note": "Vacant until the Nov 3, 2020 special election.",
+       "src": "moore",
+       "gap": true,
+       "vacant": true
+      },
+      {
+       "name": "Doug Moore",
+       "start": "2020-11-17",
+       "how": "special election",
+       "src": "e2020g",
+       "note": "Won the 2020 special election for the last two years of the term; re-elected 2022. Not running in 2026.",
+       "start_approx": true
+      }
+     ]
+    },
+    {
+     "seat": "District 5",
+     "order": 4,
+     "terms": [
+      {
+       "name": "Mike Thomas",
+       "end": "2016-04-19",
+       "how": "elected",
+       "src": "bocc_hist",
+       "note": "Left the seat after he was elected Panama City Beach mayor in April 2016.",
+       "end_approx": true
+      },
+      {
+       "start": "2016-04-19",
+       "end": "2016-06-15",
+       "note": "Vacant until the governor appointed a replacement in June 2016.",
+       "src": "griffitts",
+       "gap": true,
+       "vacant": true
+      },
+      {
+       "name": "Philip Griffitts",
+       "start": "2016-06-15",
+       "end": "2022-11-08",
+       "how": "appointed",
+       "src": "griffitts",
+       "note": "Known as Griff. Appointed by Gov. Rick Scott in June 2016; won the seat in the Aug 2016 primary and again in 2020. Left after he was elected to the Florida House in Nov 2022.",
+       "start_approx": true,
+       "end_approx": true
+      },
+      {
+       "start": "2022-11-08",
+       "end": "2022-12-15",
+       "note": "Vacant until the governor appointed a replacement.",
+       "src": "pease",
+       "gap": true,
+       "vacant": true
+      },
+      {
+       "name": "Clair Pease",
+       "start": "2022-12-15",
+       "how": "appointed",
+       "src": "pease",
+       "note": "Appointed by Gov. Ron DeSantis; elected to a full term in 2024."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "gov_id": "schools",
+   "government": "Bay District Schools",
+   "body": "School Board and Superintendent",
+   "seats": [
+    {
+     "seat": "Superintendent",
+     "order": 0,
+     "terms": [
+      {
+       "name": "Bill Husfelt",
+       "end": "2023-07-31",
+       "how": "elected",
+       "src": "e2016g",
+       "note": "Re-elected 2016 and 2020; left in summer 2023.",
+       "end_approx": true
+      },
+      {
+       "name": "Mark McQueen",
+       "start": "2023-08-01",
+       "how": "appointed",
+       "src": "mcqueen",
+       "note": "Appointed by Gov. Ron DeSantis to finish the term."
+      }
+     ]
+    },
+    {
+     "seat": "District 1",
+     "order": 1,
+     "terms": [
+      {
+       "name": "Jerry Register",
+       "how": "elected",
+       "src": "bds2016",
+       "note": "Unopposed in 2016; re-elected 2020 and 2024."
+      }
+     ]
+    },
+    {
+     "seat": "District 2",
+     "order": 2,
+     "terms": [
+      {
+       "name": "Ginger Littleton",
+       "end": "2019-11-30",
+       "how": "elected",
+       "src": "littleton",
+       "note": "On the board since 2006; stepped down in late 2019.",
+       "end_approx": true
+      },
+      {
+       "start": "2019-11-30",
+       "end": "2020-11-17",
+       "note": "The governor was to appoint someone until the 2020 election; the appointee is not confirmed.",
+       "src": "littleton",
+       "gap": true
+      },
+      {
+       "name": "Brenda Ruthven",
+       "start": "2020-11-17",
+       "end": "2022-11-22",
+       "how": "elected",
+       "src": "e2020p"
+      },
+      {
+       "name": "Ann Leonard",
+       "start": "2022-11-22",
+       "how": "elected",
+       "src": "e2022p",
+       "note": "Did not seek re-election in 2026; Ginger Littleton won the seat and takes office in Nov 2026."
+      }
+     ]
+    },
+    {
+     "seat": "District 3",
+     "order": 3,
+     "terms": [
+      {
+       "name": "Joe Wayne Walker",
+       "end": "2018-11-20",
+       "how": "elected",
+       "src": "bds2016",
+       "note": "Lost the Aug 2018 election to Pamm Chapman."
+      },
+      {
+       "name": "Pamm Chapman",
+       "start": "2018-11-20",
+       "end": "2022-11-22",
+       "how": "elected",
+       "src": "e2018p"
+      },
+      {
+       "name": "Chris Moore",
+       "start": "2022-11-22",
+       "how": "elected",
+       "src": "bds_board",
+       "note": "Unopposed in 2022; in a Nov 3, 2026 runoff."
+      }
+     ]
+    },
+    {
+     "seat": "District 4",
+     "order": 4,
+     "terms": [
+      {
+       "name": "Ryan Neves",
+       "end": "2020-11-17",
+       "how": "elected",
+       "src": "bds2016",
+       "note": "Ryan Scott Neves. Unopposed in 2016."
+      },
+      {
+       "name": "Winston Chester",
+       "start": "2020-11-17",
+       "how": "elected",
+       "src": "e2020p",
+       "note": "Re-elected 2024."
+      }
+     ]
+    },
+    {
+     "seat": "District 5",
+     "order": 5,
+     "terms": [
+      {
+       "name": "Steve Moss",
+       "how": "elected",
+       "src": "e2018p",
+       "note": "On the board since 2010; re-elected 2014, 2018 and, unopposed, 2022 and 2026."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "gov_id": "lh",
+   "government": "City of Lynn Haven",
+   "body": "City Commission",
+   "seats": [
+    {
+     "seat": "Mayor",
+     "order": 0,
+     "terms": [
+      {
+       "name": "Walter Kelley",
+       "end": "2015-04-21",
+       "how": "elected",
+       "src": "lh14",
+       "note": "Lost the 2015 election to Margo Anderson."
+      },
+      {
+       "name": "Margo Anderson",
+       "start": "2015-04-21",
+       "end": "2020-08-20",
+       "how": "elected",
+       "src": "e2015m",
+       "note": "Re-elected 2019. Removed by the governor and resigned in August 2020 after a federal indictment."
+      },
+      {
+       "start": "2020-08-20",
+       "end": "2021-05-18",
+       "note": "Vacant. Mayor Pro Tem Dan Russell led the commission until the 2021 special election.",
+       "src": "lh_anderson",
+       "gap": true,
+       "vacant": true
+      },
+      {
+       "name": "Jesse Nelson",
+       "start": "2021-05-18",
+       "end": "2026-01-07",
+       "how": "special election",
+       "src": "e2021r",
+       "note": "Won the 2021 special election runoff; re-elected 2023. Resigned in January 2026 before a recall vote.",
+       "end_approx": true
+      },
+      {
+       "name": "Dave Lowery",
+       "start": "2026-01-13",
+       "how": "appointed",
+       "src": "lh_lowery",
+       "note": "Appointed by the commission until the 2027 election.",
+       "start_approx": true
+      }
+     ]
+    },
+    {
+     "seat": "Seat 1",
+     "order": 1,
+     "terms": [
+      {
+       "name": "Rodney Friend",
+       "end": "2019-04-16",
+       "how": "elected",
+       "src": "lh14",
+       "note": "Re-elected 2015."
+      },
+      {
+       "name": "Brandon Aldridge",
+       "start": "2019-04-16",
+       "end": "2023-05-16",
+       "how": "elected",
+       "src": "e2019m"
+      },
+      {
+       "name": "Sam Peebles",
+       "start": "2023-05-16",
+       "how": "elected",
+       "src": "e2023r",
+       "note": "Won the May 2023 runoff."
+      }
+     ]
+    },
+    {
+     "seat": "Seat 2",
+     "order": 2,
+     "terms": [
+      {
+       "name": "Antonius Barnes",
+       "end": "2019-04-16",
+       "how": "elected",
+       "src": "lh18"
+      },
+      {
+       "name": "Pat Perno",
+       "start": "2019-04-16",
+       "how": "elected",
+       "src": "e2019m",
+       "note": "Re-elected 2023."
+      }
+     ]
+    },
+    {
+     "seat": "Seat 3",
+     "order": 3,
+     "terms": [
+      {
+       "name": "Roger Schad",
+       "end": "2017-05-16",
+       "how": "elected",
+       "src": "lh17",
+       "note": "Lost the 2017 election."
+      },
+      {
+       "name": "Dan Russell",
+       "start": "2017-05-16",
+       "end": "2021-05-18",
+       "how": "elected",
+       "src": "e2017r",
+       "note": "Mayor Pro Tem and acting head of the commission from August 2020 to May 2021."
+      },
+      {
+       "name": "Jamie Warrick",
+       "start": "2021-05-18",
+       "how": "elected",
+       "src": "e2021r",
+       "note": "Re-elected 2025."
+      }
+     ]
+    },
+    {
+     "seat": "Seat 4",
+     "order": 4,
+     "terms": [
+      {
+       "name": "Joseph Ashbrook",
+       "end": "2017-04-18",
+       "how": "elected",
+       "src": "lh17",
+       "note": "Lost the 2017 election to Judy Tinder."
+      },
+      {
+       "name": "Judy Tinder",
+       "start": "2017-04-18",
+       "end": "2023-02-03",
+       "how": "elected",
+       "src": "e2017m",
+       "note": "Re-elected 2021. Left the seat to run for mayor in 2023.",
+       "end_approx": true
+      },
+      {
+       "name": "Judy Vandergrift",
+       "start": "2023-02-03",
+       "end": "2025-05-20",
+       "how": "appointed",
+       "src": "lh_vandergrift",
+       "note": "Appointed until the April 2023 special election, which she won.",
+       "start_approx": true
+      },
+      {
+       "name": "Judy Tinder",
+       "start": "2025-05-20",
+       "end": "2026-09-08",
+       "how": "elected",
+       "src": "e2025r",
+       "note": "Won the May 2025 runoff. Resigned at the Sep 8, 2026 meeting."
+      },
+      {
+       "name": "Corey Langford",
+       "start": "2026-09-21",
+       "how": "appointed",
+       "src": "lh_langford",
+       "note": "Appointed by the commission to finish the term.",
+       "start_approx": true
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "gov_id": "pc",
+   "government": "City of Panama City",
+   "body": "City Commission",
+   "seats": [
+    {
+     "seat": "Mayor",
+     "order": 0,
+     "terms": [
+      {
+       "name": "Greg Brudnicki",
+       "end": "2023-05-16",
+       "how": "elected",
+       "src": "pc16",
+       "note": "Re-elected 2019; lost the May 2023 runoff."
+      },
+      {
+       "name": "Michael Rohan",
+       "start": "2023-05-16",
+       "end": "2025-04-22",
+       "how": "elected",
+       "src": "e2023r",
+       "note": "Michael \"Doc\" Rohan. Lost the 2025 election."
+      },
+      {
+       "name": "Allan Branch",
+       "start": "2025-04-22",
+       "how": "elected",
+       "src": "e2025m"
+      }
+     ]
+    },
+    {
+     "seat": "Ward 1",
+     "order": 1,
+     "terms": [
+      {
+       "name": "John Kady",
+       "end": "2017-04-18",
+       "how": "elected",
+       "src": "pc16",
+       "note": "Lost the 2017 election."
+      },
+      {
+       "name": "Jenna Haligas",
+       "start": "2017-04-18",
+       "end": "2025-05-20",
+       "how": "elected",
+       "src": "e2017m",
+       "note": "Jenna Flint Haligas. Re-elected 2021."
+      },
+      {
+       "name": "Robbie Hughes",
+       "start": "2025-05-20",
+       "how": "elected",
+       "src": "e2025r",
+       "note": "Won the May 2025 runoff."
+      }
+     ]
+    },
+    {
+     "seat": "Ward 2",
+     "order": 2,
+     "terms": [
+      {
+       "name": "Kenneth Brown",
+       "end": "2023-04-18",
+       "how": "elected",
+       "src": "e2015m",
+       "note": "Kenneth E. Brown. Re-elected 2015 and 2019 (runoff)."
+      },
+      {
+       "name": "Janice Lucas",
+       "start": "2023-04-18",
+       "how": "elected",
+       "src": "e2023m"
+      }
+     ]
+    },
+    {
+     "seat": "Ward 3",
+     "order": 3,
+     "terms": [
+      {
+       "name": "Billy Rader",
+       "end": "2023-04-18",
+       "how": "elected",
+       "src": "pc18",
+       "note": "Lost the 2023 election."
+      },
+      {
+       "name": "Brian Grainger",
+       "start": "2023-04-18",
+       "how": "elected",
+       "src": "e2023m"
+      }
+     ]
+    },
+    {
+     "seat": "Ward 4",
+     "order": 4,
+     "terms": [
+      {
+       "name": "Mike Nichols",
+       "end": "2021-04-20",
+       "how": "elected",
+       "src": "pc21",
+       "note": "Lost the 2021 election."
+      },
+      {
+       "name": "Josh Street",
+       "start": "2021-04-20",
+       "how": "elected",
+       "src": "e2021m",
+       "note": "Re-elected 2025."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "gov_id": "pcb",
+   "government": "City of Panama City Beach",
+   "body": "City Council",
+   "seats": [
+    {
+     "seat": "Mayor",
+     "order": 0,
+     "terms": [
+      {
+       "name": "Gayle Oberst",
+       "end": "2016-04-19",
+       "how": "elected",
+       "src": "pcb_oberst",
+       "note": "Mayor from 2006; term-limited in 2016."
+      },
+      {
+       "name": "Mike Thomas",
+       "start": "2016-04-19",
+       "end": "2020-04-21",
+       "how": "elected",
+       "src": "e2016m"
+      },
+      {
+       "name": "Mark Sheldon",
+       "start": "2020-04-21",
+       "end": "2024-04-16",
+       "how": "elected",
+       "src": "e2020m",
+       "note": "Lost the 2024 election."
+      },
+      {
+       "name": "Stuart Tettemer",
+       "start": "2024-04-16",
+       "how": "elected",
+       "src": "e2024m"
+      }
+     ]
+    },
+    {
+     "seat": "Ward 1",
+     "order": 1,
+     "terms": [
+      {
+       "name": "John Reichard",
+       "end": "2018-04-17",
+       "how": "elected",
+       "src": "pcb_old",
+       "note": "Listed as the Ward 1 member under Mayor Mike Thomas; the year he left is not confirmed.",
+       "end_approx": true
+      },
+      {
+       "name": "Paul Casto",
+       "start": "2018-04-17",
+       "how": "elected",
+       "src": "pcb_casto",
+       "note": "Already the Ward 1 member under Mayor Mike Thomas (2016-2020); re-elected 2022. Start year not confirmed.",
+       "start_approx": true
+      }
+     ]
+    },
+    {
+     "seat": "Ward 2",
+     "order": 2,
+     "terms": [
+      {
+       "end": "2016-04-19",
+       "note": "Holder before 2016 not confirmed.",
+       "gap": true
+      },
+      {
+       "name": "Phil Chester",
+       "start": "2016-04-19",
+       "end": "2024-04-16",
+       "how": "elected",
+       "src": "e2020m",
+       "note": "Two terms; re-elected 2020 by 34 votes."
+      },
+      {
+       "name": "Ethan Register",
+       "start": "2024-04-16",
+       "how": "elected",
+       "src": "pcb_now",
+       "note": "Unopposed in 2024."
+      }
+     ]
+    },
+    {
+     "seat": "Ward 3",
+     "order": 3,
+     "terms": [
+      {
+       "name": "Josie Strange",
+       "end": "2018-04-17",
+       "how": "elected",
+       "src": "e2014m",
+       "note": "Re-elected 2014; term-limited in 2018."
+      },
+      {
+       "name": "Geoff McConnell",
+       "start": "2018-04-17",
+       "end": "2022-04-19",
+       "how": "elected",
+       "src": "e2018m",
+       "note": "Lost the 2022 election."
+      },
+      {
+       "name": "Mary Coburn",
+       "start": "2022-04-19",
+       "how": "elected",
+       "src": "e2022m",
+       "note": "On the Nov 3, 2026 ballot."
+      }
+     ]
+    },
+    {
+     "seat": "Ward 4",
+     "order": 4,
+     "terms": [
+      {
+       "end": "2016-04-19",
+       "note": "Holder before 2016 not confirmed.",
+       "gap": true
+      },
+      {
+       "name": "Hector Solis",
+       "start": "2016-04-19",
+       "end": "2020-04-21",
+       "how": "elected",
+       "src": "e2016m"
+      },
+      {
+       "name": "Michael Jarman",
+       "start": "2020-04-21",
+       "how": "elected",
+       "src": "e2020m",
+       "note": "Vice Mayor."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "gov_id": "cw",
+   "government": "City of Callaway",
+   "body": "City Commission",
+   "seats": [
+    {
+     "seat": "Mayor",
+     "order": 0,
+     "terms": [
+      {
+       "name": "Thomas Abbott",
+       "end": "2016-04-01",
+       "how": "elected",
+       "src": "cw16a",
+       "note": "Thomas W. Abbott. Last at the Mar 22, 2016 meeting.",
+       "end_approx": true
+      },
+      {
+       "name": "Bob Pelletier",
+       "start": "2016-04-01",
+       "end": "2017-10-01",
+       "how": "commission",
+       "src": "cw16b",
+       "note": "Mayor by the Apr 26, 2016 meeting; last presided Sep 26, 2017.",
+       "start_approx": true,
+       "end_approx": true
+      },
+      {
+       "name": "Pamn Henderson",
+       "start": "2017-10-01",
+       "how": "commission",
+       "src": "cw17b",
+       "note": "Mayor by the Oct 24, 2017 meeting; elected mayor in April 2020 and re-elected 2024.",
+       "start_approx": true
+      }
+     ]
+    },
+    {
+     "seat": "Ward 1",
+     "order": 1,
+     "terms": [
+      {
+       "name": "Melba Covey",
+       "end": "2018-04-17",
+       "how": "elected",
+       "src": "e2014m",
+       "note": "Lost the 2018 election to Scott Davis."
+      },
+      {
+       "name": "Scott Davis",
+       "start": "2018-04-17",
+       "end": "2025-09-01",
+       "how": "elected",
+       "src": "e2018m",
+       "note": "Last at the Aug 26, 2025 meeting.",
+       "end_approx": true
+      },
+      {
+       "name": "Bobby Birdsell",
+       "start": "2025-10-01",
+       "how": "appointed",
+       "src": "cw25b",
+       "note": "Appointed in October 2025; on the Nov 3, 2026 ballot.",
+       "start_approx": true
+      }
+     ]
+    },
+    {
+     "seat": "Ward 2",
+     "order": 2,
+     "terms": [
+      {
+       "name": "Pamn Henderson",
+       "end": "2017-10-01",
+       "how": "elected",
+       "src": "cw14",
+       "note": "Moved to mayor in 2017.",
+       "end_approx": true
+      },
+      {
+       "name": "Wayne McLeod",
+       "start": "2017-10-01",
+       "end": "2018-04-17",
+       "how": "appointed",
+       "src": "cw17b",
+       "note": "On the commission from October 2017; lost the April 2018 election.",
+       "start_approx": true
+      },
+      {
+       "name": "David Griggs",
+       "start": "2018-04-17",
+       "how": "elected",
+       "src": "e2018m",
+       "note": "Mayor Pro Tem. Re-elected 2022; term ends Nov 2026."
+      }
+     ]
+    },
+    {
+     "seat": "Ward 3",
+     "order": 3,
+     "terms": [
+      {
+       "name": "Bob Pelletier",
+       "end": "2016-04-01",
+       "how": "elected",
+       "src": "e2014m",
+       "note": "Moved to mayor in 2016.",
+       "end_approx": true
+      },
+      {
+       "name": "Ron Fairbanks",
+       "start": "2016-04-19",
+       "end": "2020-04-21",
+       "how": "elected",
+       "src": "e2016m"
+      },
+      {
+       "name": "Bob Pelletier",
+       "start": "2020-04-21",
+       "how": "elected",
+       "src": "e2020m",
+       "note": "Re-elected 2024."
+      }
+     ]
+    },
+    {
+     "seat": "Ward 4",
+     "order": 4,
+     "terms": [
+      {
+       "name": "Ralph Hollister",
+       "end": "2016-04-01",
+       "how": "elected",
+       "src": "cw16a",
+       "end_approx": true
+      },
+      {
+       "name": "Joseph Townsend",
+       "start": "2016-04-01",
+       "end": "2018-06-01",
+       "how": "elected",
+       "src": "cw16b",
+       "note": "On the commission by Apr 26, 2016; last at the May 8, 2018 meeting.",
+       "start_approx": true,
+       "end_approx": true
+      },
+      {
+       "name": "Mike Jones",
+       "start": "2018-06-01",
+       "end": "2020-03-01",
+       "how": "appointed",
+       "src": "cw18b",
+       "note": "On the commission by Jun 26, 2018; at the Feb 25, 2020 meeting.",
+       "start_approx": true,
+       "end_approx": true
+      },
+      {
+       "name": "Frank Mancinelli",
+       "start": "2020-03-01",
+       "end": "2022-07-01",
+       "src": "cw20b",
+       "note": "On the commission by May 12, 2020; last at the Jun 14, 2022 meeting.",
+       "start_approx": true,
+       "end_approx": true
+      },
+      {
+       "name": "Kenneth Ayers",
+       "start": "2022-07-01",
+       "src": "cw22b",
+       "note": "Kenneth L. Ayers, Jr. On the commission by Aug 23, 2022; elected 2024.",
+       "start_approx": true
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "gov_id": "sp",
+   "government": "City of Springfield",
+   "body": "City Commission",
+   "seats": [
+    {
+     "seat": "Mayor",
+     "order": 0,
+     "terms": [
+      {
+       "name": "Ralph Hammond",
+       "start": "2013-04-16",
+       "how": "elected",
+       "src": "sp_mayor",
+       "note": "Mayor since 2013; re-elected 2022 and 2026.",
+       "start_approx": true
+      }
+     ]
+    },
+    {
+     "seat": "Ward 1",
+     "order": 1,
+     "terms": [
+      {
+       "end": "2016-04-19",
+       "note": "Holder before 2016 not confirmed.",
+       "gap": true
+      },
+      {
+       "name": "Carl Curti",
+       "start": "2016-04-19",
+       "end": "2023-04-18",
+       "how": "elected",
+       "src": "e2016m",
+       "note": "In office through at least 2019; ran for mayor in 2022. The year he left is not confirmed.",
+       "end_approx": true
+      },
+      {
+       "name": "Jack Griffis",
+       "start": "2023-04-18",
+       "src": "sp_now",
+       "note": "Serving since 2023.",
+       "start_approx": true
+      }
+     ]
+    },
+    {
+     "seat": "Ward 2",
+     "order": 2,
+     "terms": [
+      {
+       "name": "Phillip Dykes",
+       "end": "2024-04-16",
+       "src": "sp19",
+       "note": "On the commission in 2018 and 2019 minutes; start and end years not confirmed.",
+       "end_approx": true
+      },
+      {
+       "name": "Richard Chval",
+       "start": "2024-04-16",
+       "src": "sp_now",
+       "note": "Serving since 2024.",
+       "start_approx": true
+      }
+     ]
+    },
+    {
+     "seat": "Ward 3",
+     "order": 3,
+     "terms": [
+      {
+       "end": "2015-04-21",
+       "note": "Holder before April 2015 not confirmed.",
+       "gap": true
+      },
+      {
+       "name": "Jackie Kennington",
+       "start": "2015-04-21",
+       "how": "elected",
+       "src": "e2015m",
+       "note": "Re-elected 2018, 2022 and, unopposed, 2026."
+      }
+     ]
+    },
+    {
+     "seat": "Ward 4",
+     "order": 4,
+     "terms": [
+      {
+       "name": "Topeka Humphries",
+       "end": "2022-04-19",
+       "src": "sp19",
+       "note": "On the commission in 2018 and 2019 minutes; start year not confirmed.",
+       "end_approx": true
+      },
+      {
+       "name": "Cindy Hamre",
+       "start": "2022-04-19",
+       "src": "sp_now",
+       "note": "Serving since 2022; re-elected unopposed 2026.",
+       "start_approx": true
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "gov_id": "parker",
+   "government": "City of Parker",
+   "body": "City Council",
+   "seats": [
+    {
+     "seat": "Mayor",
+     "order": 0,
+     "terms": [
+      {
+       "name": "Richard Musgrave",
+       "end": "2021-04-20",
+       "how": "elected",
+       "src": "pk_aud",
+       "note": "Rich Musgrave. Lost the 2021 election."
+      },
+      {
+       "name": "Andrew Kelly",
+       "start": "2021-04-20",
+       "how": "elected",
+       "src": "e2021m",
+       "note": "Re-elected 2023."
+      }
+     ]
+    },
+    {
+     "seat": "Seat 1",
+     "order": 1,
+     "terms": [
+      {
+       "name": "Ken Jones",
+       "end": "2020-12-01",
+       "how": "elected",
+       "src": "pk14",
+       "note": "Mayor Pro Tem in 2020. Held seat 1 or seat 3 (the seat number is not confirmed); not at the Dec 15, 2020 meeting.",
+       "end_approx": true
+      },
+      {
+       "start": "2020-12-01",
+       "end": "2021-04-20",
+       "note": "Not confirmed.",
+       "gap": true
+      },
+      {
+       "name": "Ron Chaple",
+       "start": "2021-04-20",
+       "how": "elected",
+       "src": "e2021m",
+       "note": "Ronald H. Chaple."
+      }
+     ]
+    },
+    {
+     "seat": "Seat 2",
+     "order": 2,
+     "terms": [
+      {
+       "name": "Ron Chaple",
+       "end": "2019-04-16",
+       "how": "elected",
+       "src": "e2015m",
+       "note": "Re-elected 2015; lost the 2019 election to Tonya Barrow."
+      },
+      {
+       "name": "Tonya Barrow",
+       "start": "2019-04-16",
+       "how": "elected",
+       "src": "e2019m",
+       "note": "Mayor Pro Tem. Re-elected 2023."
+      }
+     ]
+    },
+    {
+     "seat": "Seat 3",
+     "order": 3,
+     "terms": [
+      {
+       "name": "John Haney",
+       "end": "2021-04-20",
+       "how": "elected",
+       "src": "pk14",
+       "note": "Held seat 1 or seat 3 (the seat number is not confirmed).",
+       "end_approx": true
+      },
+      {
+       "name": "April Gibson",
+       "start": "2021-04-20",
+       "end": "2023-12-31",
+       "how": "elected",
+       "src": "e2021m",
+       "note": "Resigned in December 2023 over the new financial disclosure law.",
+       "end_approx": true
+      },
+      {
+       "name": "Katy Bodiford",
+       "start": "2024-02-01",
+       "how": "appointed",
+       "src": "pk24",
+       "note": "On the council by March 2024, filling seat 3 or seat 4 (not confirmed).",
+       "start_approx": true
+      }
+     ]
+    },
+    {
+     "seat": "Seat 4",
+     "order": 4,
+     "terms": [
+      {
+       "name": "Michael Miller",
+       "end": "2019-04-16",
+       "how": "elected",
+       "src": "e2015m",
+       "note": "Mayor Pro Tem. Re-elected 2015."
+      },
+      {
+       "name": "Stacie Galbreath",
+       "start": "2019-04-16",
+       "end": "2023-12-29",
+       "how": "elected",
+       "src": "e2019m",
+       "note": "Re-elected 2023. Resigned Dec 29, 2023 over the new financial disclosure law."
+      },
+      {
+       "name": "John Haney",
+       "start": "2024-02-01",
+       "end": "2026-07-01",
+       "how": "appointed",
+       "src": "pk24",
+       "note": "Back on the council by March 2024, filling seat 3 or seat 4 (not confirmed); resigned in 2026.",
+       "start_approx": true,
+       "end_approx": true
+      },
+      {
+       "name": "Mark Rega",
+       "start": "2026-07-21",
+       "how": "appointed",
+       "src": "pk_rega",
+       "note": "Appointed in July 2026 to finish John Haney's term.",
+       "start_approx": true
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "gov_id": "mb",
+   "government": "City of Mexico Beach",
+   "body": "City Council",
+   "seats": [
+    {
+     "seat": "Mayor (Group 1)",
+     "order": 0,
+     "terms": [
+      {
+       "name": "Al Cathey",
+       "end": "2015-04-21",
+       "how": "elected",
+       "src": "mb_cathey",
+       "note": "Mayor 2006-2015.",
+       "end_approx": true
+      },
+      {
+       "start": "2015-04-21",
+       "end": "2017-04-18",
+       "note": "Mayor from 2015 to 2017 not confirmed (Tom Bailey lost to Al Cathey in 2017).",
+       "src": "e2017m",
+       "gap": true
+      },
+      {
+       "name": "Al Cathey",
+       "start": "2017-04-18",
+       "end": "2023-04-18",
+       "how": "elected",
+       "src": "e2017m",
+       "note": "Lost the 2023 election to Michele Miller."
+      },
+      {
+       "name": "Michele Miller",
+       "start": "2023-04-18",
+       "end": "2024-04-16",
+       "how": "elected",
+       "src": "e2023m",
+       "note": "Recalled by voters Apr 16, 2024."
+      },
+      {
+       "name": "Richard Wolff",
+       "start": "2024-04-16",
+       "how": "special election",
+       "src": "e2024m",
+       "note": "Won the special election held with the recall."
+      }
+     ]
+    },
+    {
+     "seat": "Group 2",
+     "order": 1,
+     "terms": [
+      {
+       "name": "Mary Blackburn",
+       "start": "2014-04-22",
+       "end": "2016-04-19",
+       "how": "elected",
+       "src": "e2014m",
+       "note": "Elected 2014 to a two-year term; whether she served past 2016 is not confirmed.",
+       "end_approx": true
+      },
+      {
+       "start": "2016-04-19",
+       "end": "2019-04-16",
+       "note": "Holder from 2016 to 2019 not confirmed.",
+       "gap": true
+      },
+      {
+       "name": "Jerry Smith",
+       "start": "2019-04-16",
+       "end": "2025-04-22",
+       "how": "elected",
+       "src": "e2019m",
+       "note": "Re-elected 2023; Mayor Pro Tem in 2024."
+      },
+      {
+       "name": "Erik Fosshage",
+       "start": "2025-04-22",
+       "how": "elected",
+       "src": "e2025m"
+      }
+     ]
+    },
+    {
+     "seat": "Group 3",
+     "order": 2,
+     "terms": [
+      {
+       "end": "2019-04-16",
+       "note": "Holder before 2019 not confirmed.",
+       "gap": true
+      },
+      {
+       "name": "Bobby Pollock",
+       "start": "2019-04-16",
+       "end": "2023-04-18",
+       "how": "elected",
+       "src": "e2019m",
+       "note": "Lost the 2023 election."
+      },
+      {
+       "name": "Linda Hamilton",
+       "start": "2023-04-18",
+       "how": "elected",
+       "src": "e2023m"
+      }
+     ]
+    },
+    {
+     "seat": "Group 4",
+     "order": 3,
+     "terms": [
+      {
+       "name": "Tanya Castro",
+       "start": "2014-04-22",
+       "end": "2016-04-19",
+       "how": "elected",
+       "src": "e2014m",
+       "note": "Elected 2014 to a two-year term; whether she served past 2016 is not confirmed.",
+       "end_approx": true
+      },
+      {
+       "start": "2016-04-19",
+       "end": "2022-04-19",
+       "note": "Holder from 2016 to 2022 not confirmed.",
+       "gap": true
+      },
+      {
+       "name": "Adrian Welle",
+       "start": "2022-04-19",
+       "end": "2024-04-16",
+       "how": "elected",
+       "src": "e2022m"
+      },
+      {
+       "name": "Jason Adams",
+       "start": "2024-04-16",
+       "end": "2026-04-01",
+       "how": "elected",
+       "src": "e2024m",
+       "note": "Left in 2026.",
+       "end_approx": true
+      },
+      {
+       "name": "Lisa Logan",
+       "start": "2026-04-01",
+       "how": "appointed",
+       "src": "mb_now",
+       "note": "Appointed April 2026; elected unopposed for the next term.",
+       "start_approx": true
+      }
+     ]
+    },
+    {
+     "seat": "Group 5",
+     "order": 4,
+     "terms": [
+      {
+       "name": "Jeff Tendler",
+       "start": "2014-04-22",
+       "end": "2016-04-19",
+       "how": "elected",
+       "src": "e2014m",
+       "note": "Elected 2014 to a two-year term; whether he served past 2016 is not confirmed.",
+       "end_approx": true
+      },
+      {
+       "start": "2016-04-19",
+       "end": "2020-04-21",
+       "note": "Holder from 2016 to 2020 not confirmed.",
+       "gap": true
+      },
+      {
+       "name": "Sharon Call",
+       "start": "2020-04-21",
+       "end": "2022-04-19",
+       "how": "elected",
+       "src": "e2020m"
+      },
+      {
+       "name": "Richard Wolff",
+       "start": "2022-04-19",
+       "end": "2024-04-16",
+       "how": "elected",
+       "src": "e2022m",
+       "note": "Became mayor in 2024."
+      },
+      {
+       "name": "Tim Linderman",
+       "start": "2024-04-16",
+       "end": "2025-06-01",
+       "how": "special election",
+       "src": "e2024m",
+       "note": "The month he left is not confirmed.",
+       "end_approx": true
+      },
+      {
+       "name": "Steve Cox",
+       "start": "2025-06-01",
+       "src": "mb_now",
+       "note": "On the council in 2025 and 2026 votes; elected unopposed in 2026.",
+       "start_approx": true
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

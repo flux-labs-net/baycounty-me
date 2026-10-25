@@ -23,8 +23,16 @@ const yearsFor = async () => {
   const f = await get('/downloads/government-years.json');
   return (Array.isArray(f) ? f : []).filter(r => r.gov_id === K);
 };
-const [CT, P1, P2, AC, ST, FM, VT, SV, GYr] = await Promise.all([...['/data/contracts-page.json', '/data/cra-pay-1.json', '/data/cra-pay-2.json',
-  '/data/accountability.json', '/data/surtax-projects.json', '/data/michael-page.json', '/data/votes-page.json', '/data/savings.json'].map(get), yearsFor()]);
+// who held each elected seat, term by term (officeholder-terms dataset), the same way
+const termsFor = async () => {
+  const api = await get(`/api/v1/datasets/officeholder-terms?gov_id=${encodeURIComponent(K)}&limit=200`);
+  if (api && Array.isArray(api.data)) return api.data;
+  const f = await get('/downloads/officeholder-terms.json');
+  return (Array.isArray(f) ? f : []).filter(r => r.gov_id === K);
+};
+const [CT, P1, P2, AC, ST, FM, VT, SV, GYr, OHr] = await Promise.all([...['/data/contracts-page.json', '/data/cra-pay-1.json', '/data/cra-pay-2.json',
+  '/data/accountability.json', '/data/surtax-projects.json', '/data/michael-page.json', '/data/votes-page.json', '/data/savings.json'].map(get), yearsFor(), termsFor()]);
+const OH = (OHr || []).slice().sort((a, b) => a.seat_order - b.seat_order || a.term_order - b.term_order);
 const GY = (GYr || []).slice().sort((a, b) => a.fiscal_year - b.fiscal_year);
 
 /* ---------- this government's rows, each with the years it counts in ---------- */
@@ -41,7 +49,9 @@ const savings = (SV?.opportunities || []).filter(o => (o.govs || []).includes(K)
 /* ---------- the year picker ---------- */
 const ysel = $('#gxYear');
 const allYs = [...Object.values(S).flatMap(rs => rs.flatMap(r => r.ys)), ...GY.map(r => r.fiscal_year)];
-const YRS = [...new Set(allYs)].filter(y => y >= 2000).sort((a, b) => b - a);
+// every fiscal year the officeholder terms cover is pickable too, so each year back to 2015 shows who was in office
+const ohYs = OH.length ? Array.from({length: new Date().getFullYear() - 2014}, (_, i) => 2015 + i) : [];
+const YRS = [...new Set([...allYs, ...ohYs])].filter(y => y >= 2000).sort((a, b) => b - a);
 ysel.innerHTML = '<option value="all">All years</option>' + YRS.map(y => `<option value="${y}">${y}</option>`).join('');
 // opens on the newest year this government has a good share of records for
 // (planned project years run into the future, so they don't pick the year; a dated record does)
@@ -192,6 +202,45 @@ function topCards() {
   $('#gxTopH').textContent = `Fiscal year ${fy}${r.period ? ' · ' + r.period : ''}`;
 }
 
+/* ---------- who held each elected seat in the year (officeholder-terms); "All years" keeps today's roster ---------- */
+const boardBox = $('#gxBoard'), boardNote = $('#gxBoardNote'), board0 = boardBox ? boardBox.innerHTML : '', note0 = boardNote ? boardNote.innerHTML : '';
+const TONE = ['blue', 'teal', 'amber', 'salmon'];
+const initials = n => { const w = String(n || '').replace(/["(].*/, '').split(/\s+/).filter(x => /^\p{L}/u.test(x)); return w.length ? (w[0][0] + (w.length > 1 ? w[w.length - 1][0] : '')).toUpperCase() : '?'; };
+const mon = d => { const t = new Date(d + 'T12:00'); return t.toLocaleDateString('en-US', {month: 'short', year: 'numeric'}); };
+const pad2 = n => String(n).padStart(2, '0');
+function officials() {
+  if (!boardBox || !OH.length) return;
+  if (ysel.value === 'all') { boardBox.innerHTML = board0; if (boardNote) boardNote.innerHTML = note0; return; }
+  // the fiscal year's first and last day (FY2026 = Oct 2025 to Sep 2026; schools Jul to Jun), never past today
+  const y = +ysel.value, st = G.fyStart || 10, today = new Date().toISOString().slice(0, 10);
+  const last = new Date(Date.UTC(y, st - 1, 0)).toISOString().slice(0, 10);
+  let from = `${y - 1}-${pad2(st)}-01`, to = last < today ? last : today;
+  if (from > today) from = today;
+  const on = t => (!t.start_date || t.start_date <= to) && (!t.end_date || t.end_date > from);
+  const seats = [...new Set(OH.map(t => t.seat))];
+  const cards = [];
+  seats.forEach((seat, i) => {
+    const hs = OH.filter(t => t.seat === seat && on(t));
+    hs.forEach(t => {
+      const ap = (d, a) => (a ? 'about ' : '') + mon(d);
+      const part = t.end_date && t.end_date <= to ? `until ${ap(t.end_date, t.end_approx)}` : t.start_date && t.start_date > from ? `from ${ap(t.start_date, t.start_approx)}` : '';
+      const sub = [esc(seat), part].filter(Boolean).join(' · ');
+      if (!t.person_name) {
+        cards.push(`<div class="ui-person vac"><span class="ui-av t-blue"><span class="ico i-users" aria-hidden="true"></span></span><span><b>${t.vacant ? 'Vacant' : 'Not confirmed'}</b><small>${sub}</small><small>${esc(t.note || '')}</small></span></div>`);
+        return;
+      }
+      const how = t.how && t.how !== 'elected' ? (t.how === 'commission' ? 'chosen by the commission' : t.how) : '';
+      const inner = `<span class="ui-av t-${TONE[i % 4]}" aria-hidden="true">${esc(initials(t.person_name))}</span><span><b>${esc(t.person_name)}</b><small>${sub}</small>${how ? `<small>${esc(how[0].toUpperCase() + how.slice(1))}</small>` : ''}</span>`;
+      const u = t.person_id && window.BC ? BC.href('person:' + t.person_id) : null;
+      cards.push(u ? `<a class="ui-person" href="${esc(u)}" title="${esc(t.note || '')}">${inner}</a>` : `<div class="ui-person" title="${esc(t.note || '')}">${inner}</div>`);
+    });
+  });
+  boardBox.innerHTML = cards.join('');
+  const changed = seats.filter(seat => OH.filter(t => t.seat === seat && on(t)).length > 1).length;
+  if (boardNote) boardNote.innerHTML = `Elected officials in office in fiscal year ${y} (${esc(nice(from))} to ${esc(nice(to))})${changed ? `; ${plural(changed, 'seat')} changed hands that year, so each person who held it is listed` : ''}. Staff below are today's. `
+    + `<a href="/open-data#officeholder-terms">Every term, with its source</a>`;
+}
+
 /* ---------- "this year" strip at the top ---------- */
 function glance() {
   const box = $('#gxGlance'); if (!box) return;
@@ -215,7 +264,7 @@ function glance() {
 }
 
 function render() {
-  topCards(); contracts(); cra(); projects(); votes(); glance();
+  topCards(); officials(); contracts(); cra(); projects(); votes(); glance();
   BCM.urlState.set({year: ysel.value});
 }
 ysel.addEventListener('change', render);

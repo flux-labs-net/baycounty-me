@@ -584,6 +584,31 @@ def entity_connections():
     return connection_rows()
 
 
+def officeholder_terms():
+    """Who held each elected seat, one row per term, from data/civic/officeholders.json
+    (data/civic/scripts/officeholders.py). person_name null is a known vacancy (vacant true) or a stretch nobody could
+    confirm (confirmed false). start_date null = in office before FY2015; end_date null = in office now."""
+    import json
+    d = json.load(open(os.path.join(HERE, '..', 'data', 'civic', 'officeholders.json')))
+    sys.path.insert(0, os.path.join(HERE, '..', 'data', 'entities'))
+    import ids
+    rows = []
+    for g in d['governments']:
+        for s in g['seats']:
+            for i, t in enumerate(s['terms']):
+                src = d['sources'].get(t.get('src')) or {}
+                name = t.get('name')
+                rows.append({'place_id': d['place_id'], 'gov_id': g['gov_id'], 'government': g['government'], 'body': g['body'],
+                             'seat': s['seat'], 'seat_order': s['order'], 'term_order': i, 'person_name': name,
+                             'person_id': ids.person_id(name) if name else None,
+                             'start_date': t.get('start'), 'end_date': t.get('end'),
+                             'start_approx': bool(t.get('start_approx')), 'end_approx': bool(t.get('end_approx')),
+                             'how': t.get('how'), 'vacant': bool(t.get('vacant')), 'confirmed': not t.get('gap') or bool(t.get('vacant')), 'note': t.get('note'),
+                             'source_title': src.get('title'), 'source_url': src.get('url'),
+                             'date_start': t.get('start'), 'date_end': t.get('end'), 'date_precision': 'day'})
+    return rows
+
+
 def site_menu():
     from site_menu import site_menu_rows
     return site_menu_rows()
@@ -621,6 +646,7 @@ DATASETS = [
     ('owner-gifts', 'Campaign gifts from business owners', "Personal gifts to local campaigns from people who run a registered Florida business, one row per person and campaign. A contributor filed as an individual is listed when the name and street address on the Supervisor of Elections filing are the same as an officer, manager or registered agent of a for-profit business on Sunbiz that was active around the gift; middle initials and Jr/Sr must agree, and protected voters are never matched. Other individual donors are never named. No addresses or occupations.", owner_gifts),
     ('entity-profiles', 'Profiles: people, companies and organizations', 'Every company, elected official, candidate, nonprofit, nonprofit board member, registered business, committee and government named in BayCounty.me records, one row each, with its profile page and how many documented connections it has. entity_id (kind:key) joins entity-connections. Board members are named as their nonprofits\' public filings list them; individual campaign donors are included only when they run a registered business (owner-gifts).', entity_profiles),
     ('entity-connections', 'Connections between people, companies and organizations', "Every documented connection between two entities in entity-profiles, totalled per pair and kind: a government paid a payee, an organization gave to an official's or candidate's campaign, an official voted on a company's contracts, a person sits on a nonprofit's board or runs a business, a nonprofit gave a grant, two payees share a project. Each row has its source. Individual campaign donors are included only when they run a registered business (owner-gifts); officials' board seats and businesses are added by the API once checked by hand.", entity_connections),
+    ('officeholder-terms', 'Officeholders by year', "Who held each elected seat on every local government since 2014: one row per person per seat, with start_date and end_date, so the officials in office on any date or in any fiscal year can be picked out. person_name is blank for a known vacancy (vacant true) and for a stretch nobody could confirm from the records found (confirmed false); the note says which. start_date blank = in office before FY2015; end_date blank = in office now. start_approx / end_approx mark dates known only to the month or year. how is elected, special election, appointed or commission (chosen by the commission). Each term names its source: election results, minutes, budget books, city sites or news. place_id is the place (fl-bay = Bay County).", officeholder_terms),
     ('site-menu', 'Site menu', "Every link in the site's main menu, one row per link, in English and Spanish: the section and the question it answers, the link's place in the section, and the section's start-here page. place_id is the place the menu belongs to (fl-bay = Bay County), so a menu for another place sits beside it.", site_menu),
     ('checkbook-payments', 'Checkbook: every payment', "Every payment in each government's own check register (checks, ACH, wires and cards), as published from the files the government sends: date, payee, amount, check number, invoice, fund, account and description. fiscal_year is the year the fiscal year ends. Voided checks are left out. Payments to private individuals (refunds, reimbursements) are listed as \"Individual (name withheld)\" with payee_kind individual and a category instead of the description. payee_entity_id links a payee to its profile (entity-profiles) when the site knows it. Bank statements and reconciliations are never published.", checkbook_payments),
     ('budget-actuals', 'Budget vs. actual, month by month', "Each government's budget-vs-actual report as of each month end (as_of), line by line: fund, department, account, the original and amended budget, actual_ytd (spending, or revenue collected, to date) and encumbered (open purchase orders). line_type is expense or revenue. One report per month end, so a fiscal year has a row per line per report. fiscal_year is the year the fiscal year ends (FY2026 = Oct 2025 to Sep 2026).", budget_actuals),

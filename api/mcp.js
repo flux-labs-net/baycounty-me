@@ -34,6 +34,13 @@ const TOOLS = [
      to: {type: 'integer', description: 'Later fiscal year. Default: the latest year with line-by-line detail'},
      basis: {type: 'string', enum: ['adopted', 'actual'], default: 'adopted'}}},
    annotations: {readOnlyHint: true}},
+  {name: 'officials_in_office', title: 'Officials in office',
+   description: 'Who held each elected seat on a Bay County government in a fiscal year, on a date, or today: mayor, commissioners or council members, school board members and the superintendent, with each person\'s profile id, how they got the seat (elected, special election, appointed), their term dates and the source. part_of_period marks someone who joined or left during the year; vacant means nobody held the seat and confirmed false is a stretch nobody could confirm. Covers 2014 on. Omit gov to list the governments.',
+   inputSchema: {type: 'object', additionalProperties: false, properties: {
+     gov: {type: 'string', description: 'county, schools, pc, pcb, lh (Lynn Haven), cw (Callaway), sp (Springfield), parker or mb (Mexico Beach)'},
+     year: {type: 'integer', description: 'Fiscal year, the year it ends (2019 = Oct 2018 to Sep 2019; schools Jul to Jun)'},
+     date: {type: 'string', description: 'A date (YYYY-MM-DD) instead of a year. Default: today'}}},
+   annotations: {readOnlyHint: true}},
   {name: 'government_checkbook', title: 'Government checkbook',
    description: 'One government\'s payments in a fiscal year from its own check register: the total, payments by month, the top payees (with profile ids), by fund and payment method, and the largest payments. Payments to private individuals are counted but never named. Add payee to list every payment to one payee. Returns an empty governments list while nothing is published.',
    inputSchema: {type: 'object', additionalProperties: false, properties: {
@@ -228,6 +235,12 @@ async function call(req, name, a = {}) {
     const rows = await rowsOf(req, await load(req, '/downloads/index.json'), 'budget-years');
     if (!a.gov) return {governments: B.coverage(rows)};
     return {...B.compare(rows, a), page: `${SITE}/public-money/budget-compare?gov=${encodeURIComponent(a.gov)}`};
+  }
+  if (name === 'officials_in_office') {
+    const O = require('./_officials');
+    const rows = await rowsOf(req, await load(req, '/downloads/index.json'), 'officeholder-terms');
+    if (!a.gov) return {governments: O.governments(rows)};
+    return {...O.inOffice(rows, a), note: 'Cite each holder\'s source link. Profiles: https://baycounty.me/people/<person_id>.'};
   }
   if (name === 'government_checkbook' || name === 'budget_vs_actual') {
     const O = require('./_openbooks');

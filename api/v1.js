@@ -18,6 +18,7 @@
 //   GET /api/v1/budget-compare?gov=&from=&to=&basis=   one government's budget in two fiscal years, line by line (api/_budget.js)
 //   GET /api/v1/checkbook?gov=&fy=      one government's payments in a fiscal year: by month, payee and fund (api/_openbooks.js)
 //   GET /api/v1/budget-actual?gov=&fy=&as_of=   spending and revenue against the budget, by department (api/_openbooks.js)
+//   GET /api/v1/officials?gov=&year=&date=  who held each elected seat in a fiscal year or on a date (api/_officials.js)
 // Responses carry an ETag (and Last-Modified when the data's date is known); a matching If-None-Match or
 // If-Modified-Since gets 304 Not Modified with no body.
 const crypto = require('crypto');
@@ -172,6 +173,11 @@ function openapi(catalog) {
           p('basis', 'adopted (default): adopted budgets. actual: audited revenue and spending', {type: 'string', enum: ['adopted', 'actual']})],
         responses: {200: {description: '{government, gov_id, basis, from, to, years, detail_years, totals: [line], sections: {department, fund, service} or {spending, revenue}: [line], history: [{fiscal_year, total, general_fund}], biggest_increase, biggest_decrease, notes, sources: {from, to}} or, without gov, {governments: [...]}'},
           400: {description: 'A year with no budget on record'}, 404: {description: 'Unknown government, or fewer than two years on record'}}}},
+      '/officials': {get: {operationId: 'officialsInOffice', summary: 'Who held each elected seat on one government in a fiscal year or on a date: mayor, commissioners or council members, school board and superintendent',
+        description: 'Without gov, lists the governments and their seats. With gov, returns every seat and each person who held it during the period (year = the fiscal year, the year it ends: FY2019 = Oct 2018 to Sep 2019, schools Jul to Jun), on a date, or today when neither is given. part_of_period marks someone who joined or left during the year. vacant true means nobody held the seat; confirmed false is a stretch nobody could confirm from the records found. Each holder has person_id (profile: /people/<id>) and the term\'s source. Data: the officeholder-terms dataset, 2014 on.',
+        parameters: [p('gov', 'Government id: county, schools, pc, pcb, lh, cw, sp, parker, mb'), p('year', 'Fiscal year, e.g. 2019 (the year it ends)', {type: 'integer'}), p('date', 'A date (YYYY-MM-DD) instead of a year')],
+        responses: {200: {description: '{data: {gov_id, government, body, place_id, fiscal_year, from, to, seats: [{seat, holders: [{person_name, person_id, vacant, confirmed, start_date, end_date, start_approx, end_approx, how, part_of_period, note, source_title, source_url}]}], note}} or, without gov, {data: [{gov_id, government, body, seats, unconfirmed}]}'},
+          400: {description: 'A bad year or date'}, 404: {description: 'Unknown government'}}}},
       '/checkbook': {get: {operationId: 'checkbook', summary: 'One government\'s payments in a fiscal year, from its own check register: total, by month, top payees, by fund and payment method, the largest payments',
         description: 'Without gov, uses the first government that has published its check register; fy defaults to its latest fiscal year. Every payment is in the checkbook-payments dataset (filter it with gov_id and fiscal_year). Voided checks are left out; payments to private individuals are counted but not named. When nothing is published yet, governments is empty.',
         parameters: [p('gov', 'Government id: county, schools, pc, pcb, lh, cw, sp, parker, mb'), p('fy', 'Fiscal year, the year it ends (e.g. 2026 for Oct 2025 to Sep 2026)', {type: 'integer'})],
@@ -209,7 +215,7 @@ module.exports = async (req, res) => {
     if (!parts.length) return res.status(200).json({
       name: 'BayCounty.me API', version: 'v1', updated: catalog.updated, docs: `${SITE}/developers`, openapi: `${SITE}/api/v1/openapi.json`, mcp: `${SITE}/api/mcp`,
       endpoints: {datasets: `${SITE}/api/v1/datasets`, governments: `${SITE}/api/v1/governments`, search: `${SITE}/api/v1/search?q=`,
-        entities: `${SITE}/api/v1/entities?q=`, budget_compare: `${SITE}/api/v1/budget-compare?gov=lh&from=2025&to=2026`, checkbook: `${SITE}/api/v1/checkbook?gov=lh`, budget_actual: `${SITE}/api/v1/budget-actual?gov=lh`, status: `${SITE}/api/v1/status`, changes: `${SITE}/api/v1/changes?since=`, meetings_calendar: `${SITE}/api/v1/meetings.ics?gov=`},
+        entities: `${SITE}/api/v1/entities?q=`, budget_compare: `${SITE}/api/v1/budget-compare?gov=lh&from=2025&to=2026`, checkbook: `${SITE}/api/v1/checkbook?gov=lh`, budget_actual: `${SITE}/api/v1/budget-actual?gov=lh`, officials: `${SITE}/api/v1/officials?gov=lh&year=2019`, status: `${SITE}/api/v1/status`, changes: `${SITE}/api/v1/changes?since=`, meetings_calendar: `${SITE}/api/v1/meetings.ics?gov=`},
       license: catalog.license, datasets: catalog.datasets.map(d => ({id: d.id, title: d.title, rows: d.rows, url: `${SITE}/api/v1/datasets/${d.id}`}))});
     if (parts[0] === 'openapi.json') return res.status(200).json(openapi(catalog));
     if (parts[0] === 'status') { res.locals.lastModified = null; return res.status(200).json(await status(catalog)); }
@@ -293,6 +299,14 @@ module.exports = async (req, res) => {
       if (!req.query.gov && !req.query.government) return res.status(200).json({data: B.coverage(rows), note: 'Add ?gov=<gov_id>&from=<year>&to=<year> to compare two years.'});
       try { const r = B.compare(rows, req.query); info.rows = r.sections ? Object.values(r.sections).reduce((a, s) => a + s.length, 0) : 0; return res.status(200).json({data: r}); }
       catch (e) { if (e.expose) return res.status(e.status).json({error: e.message, ...e.extra}); throw e; }
+    }
+    if (parts[0] === 'officials') {
+      const O = require('./_officials');
+      const meta = catalog.datasets.find(d => d.id === 'officeholder-terms');
+      const rows = meta ? (await datasetRows(req, meta)).rows : await load(req, '/downloads/officeholder-terms.json');
+      if (!req.query.gov && !req.query.government) return res.status(200).json({data: O.governments(rows), note: 'Add ?gov=<gov_id>&year=<fiscal year> (or &date=YYYY-MM-DD) for who held each seat.'});
+      try { const r = O.inOffice(rows, req.query); info.rows = r.seats.reduce((a, x) => a + x.holders.length, 0); return res.status(200).json({data: r}); }
+      catch (e) { if (e.expose) return res.status(e.status).json({error: e.message}); throw e; }
     }
     if (parts[0] === 'checkbook' || parts[0] === 'budget-actual') {
       // Each government's own accounting, as published from its finance files. Rows can change any time a file is published.

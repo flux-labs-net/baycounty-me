@@ -122,12 +122,15 @@ def person_page(pid):
     roles = []
     for g in govs:
         rs = [r for r in p['roles'] if r.get('gov_id') == g]
-        best = next((r['role'] for r in rs if r.get('source') in ('salaries', 'officials-pay')), None) or next((r['role'].split(':', 1)[-1].strip() for r in rs if r.get('source') == 'campaign'), None) or (rs[0]['role'] if rs else '')
+        oh = [f"{r['role']} ({r['years']})" for r in rs if r.get('source') == 'officeholders']  # elected seats since 2014, with years
+        best = next((r['role'] for r in rs if r.get('source') in ('salaries', 'officials-pay')), None) or next((r['role'].split(':', 1)[-1].strip() for r in rs if r.get('source') == 'campaign'), None) or (('; '.join(oh)) if oh else (rs[0]['role'] if rs else ''))
         roles.append(f'<li>{e(best[:1].upper() + best[1:])}<span>{gov_link(g)}</span></li>')
     # the facts card at the top right: where they serve, the 2026 race, pay and votes on file
     facts = []
     if roles:
-        facts.append(('Serves', f'<ul>{"".join(roles)}</ul>'))
+        seat_roles = [r for r in p['roles'] if r.get('source') == 'officeholders'] or [r for r in p['roles'] if r.get('source') == 'votes']  # terms beat vote-record member lists
+        former = bool(seat_roles) and all((r.get('role') or '').startswith('former') for r in seat_roles)
+        facts.append(('Served' if former and not any(r.get('source') in ('salaries', 'officials-pay', 'campaign') for r in p['roles']) else 'Serves', f'<ul>{"".join(roles)}</ul>'))
     for c in cand[:1]:
         facts.append(('On the ballot', f'{e(c["office"])}<span>November 3, 2026{" · incumbent" if c.get("incumbent") else ""}</span>'))
     facts_h = ''.join(f'<div><dt>{k}</dt><dd>{v}</dd></div>' for k, v in facts)

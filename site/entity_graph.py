@@ -44,6 +44,7 @@ RELATION = {
     'gift': ('gave to the campaign of', 'got campaign gifts from'),
     'voted': ('voted on contracts with', 'had contracts voted on by'),
     'serves': ('serves', 'is served by'),
+    'served': ('served', 'was served by'),
     'board': ('sits on the board of', 'has on its board'),
     'runs': ('runs', 'is run by'),
     'grant': ('gave a grant to', 'got a grant from'),
@@ -171,6 +172,10 @@ def person_title(p):
         t = f"{r['role']}, {short(r['gov_id'])}" if short(r['gov_id']).lower() not in r['role'].lower() else r['role']
     elif first('campaign', 'officeholder'):
         t = first('campaign', 'officeholder')['role'].split(':', 1)[1].strip()
+    elif first('officeholders'):  # an elected seat since 2014 (officeholder-terms): more exact than the vote records' member lists
+        oh = [x for x in roles if x.get('source') == 'officeholders']
+        r = next((x for x in oh if not x['role'].startswith('former')), oh[-1])  # the seat held now, else the latest one
+        t = r['role'][:1].upper() + r['role'][1:] + f', {short(r["gov_id"])}'
     elif first('votes', 'board member'):
         r = first('votes', 'board member')
         t = f"Board member, {short(r['gov_id'])}" + (f" ({r['seat']})" if r.get('seat') and not str(r['seat']).isdigit() else '')
@@ -198,9 +203,16 @@ def build():
         seen = set()
         for r in roles:
             gid = r.get('gov_id')
-            if gid and (gid, r.get('role')) not in seen and 'former' not in (r.get('role') or ''):
+            if gid and (gid, r.get('role')) not in seen and 'former' not in (r.get('role') or '') and r.get('source') != 'officeholders':
                 seen.add((gid, r.get('role')))
                 G.link('person:' + p['id'], 'gov:' + gid, 'serves', detail=(r.get('role') or '').capitalize() + (f", {r['seat']}" if r.get('seat') and not str(r['seat']).isdigit() else ''), key=r.get('role') or '')
+
+    # elected seats held since 2014, one link per person, government and seat, dated by the term (officeholder-terms)
+    for t in _ds('officeholder-terms'):
+        if t.get('person_id') and 'person:' + t['person_id'] in G.ents:
+            yrs = f"{(t['start_date'] or '')[:4] or 'before 2015'}–{(t['end_date'] or '')[:4] or 'now'}"
+            G.link('person:' + t['person_id'], 'gov:' + t['gov_id'], 'served' if t.get('end_date') else 'serves', None,
+                   t.get('end_date') or t.get('start_date'), f"{t['body']}, {t['seat']} ({yrs})", t.get('source_url'), key='seat:' + t['seat'])
 
     # companies (every vendor id, with or without a vendor page)
     for v in (ids._load('vendors.json') or {'vendors': []})['vendors']:
