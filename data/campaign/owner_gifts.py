@@ -5,8 +5,8 @@ who runs a registered business (a Sunbiz officer, manager or registered agent) a
 by name, with the businesses they run.
 
 Usage: python3 data/campaign/owner_gifts.py [WORKDIR]
-  Downloads the itemized SOE (VoterFocus) export of every campaign in data/campaign/campaign.json and
-  data/elections/finance_2026.json into WORKDIR (files already there are reused), matches the individual contributors
+  Downloads the itemized SOE (VoterFocus) export of every campaign in data/campaign/campaign.json,
+  data/elections/finance_2026.json and data/campaign/campaign_history.json into WORKDIR (files already there are reused), matches the individual contributors
   to Sunbiz people (data/sunbiz/build_sunbiz.py) and writes data/campaign/owner_gifts.json. Exits 0 and keeps the old
   file when the SOE can't be reached.
 
@@ -57,6 +57,11 @@ def campaigns():
     for c in json.load(open(os.path.join(ROOT, 'data', 'elections', 'finance_2026.json')))['candidates']:
         if c.get('export_url') and str(c['cand_id']) not in out:
             out[str(c['cand_id'])] = {'candidate': c['name'], 'office': c.get('office'), 'gov': None, 'election': c.get('election'),
+                                      'report_url': c.get('report_url'), 'export_url': c['export_url']}
+    hp = os.path.join(ROOT, 'data', 'campaign', 'campaign_history.json')  # every other local campaign since 2016
+    for c in (json.load(open(hp))['candidates'] if os.path.exists(hp) else []):
+        if c.get('export_url') and str(c['cand_id']) not in out:
+            out[str(c['cand_id'])] = {'candidate': c['name'], 'office': c.get('office'), 'gov': c.get('gov_id'), 'election': c.get('election'),
                                       'report_url': c.get('report_url'), 'export_url': c['export_url']}
     return out
 

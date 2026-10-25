@@ -26,6 +26,7 @@ const RELATION = {
   serves: ['serves', 'is served by'],
   served: ['served', 'was served by'],
   candidate: ['is a candidate for office in', 'has candidates for office'],
+  ran: ['ran for office in', 'had on the ballot'],
   board: ['sits on the board of', 'has on its board'],
   runs: ['runs', 'is run by'],
   grant: ['gave a grant to', 'got a grant from'],

@@ -13,6 +13,7 @@ const PKIND = { gov: 'Government', cra: 'Redevelopment agency (CRA)', tourism: '
 const COL = { payer: 'var(--navy)', biz: 'var(--blue)', gov: 'var(--muted)', prop: 'var(--amber)', unnamed: 'var(--surface)', grants: 'var(--surface)', official: 'var(--salmon)', candidate: 'var(--salmon)' };
 const TOP = 40;  // payees shown by dollars in the "key payees" view, besides every donor and linked payee
 const st = { pay: new Set(Object.keys(D.payers)), types: new Set(Object.keys(D.types)), scope: 'focus', focus: new Set(), don: 'payees', sel: null, view: 'trail', city: '' };
+const candLbl = o => o.yr ? `${o.yr} candidate` : '2026 candidate';
 const ent = id => id.startsWith('m:') ? { n: (D.off[id] || {}).n || id.slice(2), k: (D.off[id] || {}).cand ? 'candidate' : 'official' }
   : id.startsWith('p:') ? { n: D.payers[id.slice(2)].n, k: 'payer' } : D.ents[id] || (id.startsWith('d:') ? { n: id.slice(2), k: 'biz' } : { n: id, k: 'biz' });
 const payerName = p => D.payers[p] ? D.payers[p].n : p;
@@ -209,7 +210,7 @@ function graphPrompt(svg, W, H) {
 function searchBox() {
   const opts = new Map();
   Object.entries(D.payers).forEach(([k, p]) => opts.set(p.n, 'p:' + k));
-  Object.entries(D.off).forEach(([k, o]) => opts.set(o.n + (o.cand ? ' (2026 candidate)' : ''), k));
+  Object.entries(D.off).forEach(([k, o]) => opts.set(o.n + (o.cand ? ` (${candLbl(o)})` : ''), k));
   const has = new Set(D.recs.map(r => r.e));
   Object.entries(D.ents).forEach(([k, e]) => { if (has.has(k) && /^[vb]:/.test(k)) opts.set(e.n, k); });
   $('cnFind').innerHTML = [...opts.keys()].sort().map(n => `<option value="${esc(n)}">`).join('');
@@ -318,7 +319,7 @@ function donTable(vis) {
   const rows = D.don.filter(d => offShown(D.off[d.o] || {}) && (st.don !== 'payees' || (d.e && paidNow.has(d.e))));
   $('cnDonCount').textContent = `${rows.length} donor and official pairs · ${money(rows.reduce((a, d) => a + d.a, 0))}` + (st.don === 'payees' ? ' · donors paid in the current filters; pick "All business donors" for every gift' : '');
   $('cnDonT').innerHTML = `<thead><tr><th>Business or group</th><th>Official</th><th>Office</th><th class="num">Amount</th><th>Date</th><th>Also paid by a government</th></tr></thead><tbody>` +
-    rows.map((d, i) => { const o = D.off[d.o] || {}; return `<tr data-tt-role="row"><td>${esc(d.dn)}${d.ty === 'pac' || d.ty === 'committee' ? ` <span class="cn-flag">${d.ty.toUpperCase() === 'PAC' ? 'PAC' : 'committee'}</span>` : ''}</td><td><button type="button" class="cn-link" data-off="${i}">${esc(o.n)}</button>${o.cand ? ' <span class="cn-flag">2026 candidate</span>' : ''}</td><td>${esc(o.off)}</td><td class="num">${full(d.a)}${d.n > 1 ? ` <span class="cn-flag">${d.n} gifts</span>` : ''}</td><td class="num">${esc(d.date)}</td><td>${d.e ? `<button type="button" class="cn-link" data-ent="${esc(d.e)}">${esc(ent(d.e).n)}</button>${d.cf === 'likely' ? ' <span class="cn-flag">likely</span>' : ''}` : '—'}</td></tr>`; }).join('') + '</tbody>';
+    rows.map((d, i) => { const o = D.off[d.o] || {}; return `<tr data-tt-role="row"><td>${esc(d.dn)}${d.ty === 'pac' || d.ty === 'committee' ? ` <span class="cn-flag">${d.ty.toUpperCase() === 'PAC' ? 'PAC' : 'committee'}</span>` : ''}</td><td><button type="button" class="cn-link" data-off="${i}">${esc(o.n)}</button>${o.cand ? ` <span class="cn-flag">${candLbl(o)}</span>` : ''}</td><td>${esc(o.off)}</td><td class="num">${full(d.a)}${d.n > 1 ? ` <span class="cn-flag">${d.n} gifts</span>` : ''}</td><td class="num">${esc(d.date)}</td><td>${d.e ? `<button type="button" class="cn-link" data-ent="${esc(d.e)}">${esc(ent(d.e).n)}</button>${d.cf === 'likely' ? ' <span class="cn-flag">likely</span>' : ''}` : '—'}</td></tr>`; }).join('') + '</tbody>';
   $('cnDonT').querySelectorAll('[data-ent]').forEach(b => b.onclick = () => { setView('network'); select(b.dataset.ent); });
   $('cnDonT').querySelectorAll('[data-off]').forEach(b => b.onclick = () => {
     const d = rows[+b.dataset.off];
@@ -361,7 +362,7 @@ function profile() {
       ${P.k === 'cra' ? '<p><a href="/public-money/cra-spending">Open the full CRA ledger</a></p>' : P.k === 'tourism' ? '<p><a href="/public-money/tourist-tax#paid">Every tourism agency payment</a></p>' : '<p><a href="/public-money/contracts">Contracts and awards</a></p>'}${clear}`;
   } else if (id.startsWith('m:')) {
     const o = D.off[id] || {}, ds = D.don.filter(d => d.o === id);
-    p.innerHTML = `${close}<div><span class="eyebrow">${o.cand ? '2026 candidate' : 'Elected official'}</span><h2>${esc(o.n)}</h2><p class="cn-note">${esc(o.off)}</p>${o.pid ? `<p><a href="/people/${esc(o.pid)}">Full profile: votes, campaign money and connections</a></p>` : ''}</div>
+    p.innerHTML = `${close}<div><span class="eyebrow">${o.cand ? candLbl(o) : 'Elected official'}</span><h2>${esc(o.n)}</h2><p class="cn-note">${esc(o.off)}</p>${o.pid ? `<p><a href="/people/${esc(o.pid)}">Full profile: votes, campaign money and connections</a></p>` : ''}</div>
       <div><div class="cn-big">${money(ds.reduce((a, d) => a + d.a, 0))}</div><span class="cn-note">from businesses, PACs and committees. Gifts from individual people are never named.</span></div>
       ${(o.gp || []).length ? `<p class="cn-note">Sits on: ${o.gp.map(k => `<button type="button" class="cn-link" data-sel="p:${esc(k)}">${esc(payerName(k))}</button>`).join(', ')}</p>` : ''}
       <div class="cn-recs">${ds.map(d => `<div class="cn-rec"><span>${d.e ? `<button type="button" class="cn-link" data-sel="${esc(d.e)}">${esc(d.dn)}</button> <span class="cn-flag red">paid by a government</span>` : esc(d.dn)}</span><span class="num">${full(d.a)}</span><span class="cn-meta">${esc(d.date)}${url(d.u) ? ` · <a href="${esc(url(d.u))}" target="_blank" rel="noopener">Campaign report</a>` : ''}</span></div>`).join('')}</div>${clear}`;
@@ -373,7 +374,7 @@ function profile() {
     p.innerHTML = `${close}<div><span class="eyebrow">${KIND[e.k] || ''}</span><h2>${esc(e.n)}</h2>${by.length ? `<p class="cn-note">Paid by ${esc(by.join(' · '))}</p>` : ''}${e.vp ? `<p><a href="/public-money/vendors/${esc(e.vp)}">Vendor profile: every contract, payment and vote</a></p>` : profileLink(id, e)}${e.np ? `<p><a href="/connections/nonprofits?id=${encodeURIComponent(e.np)}#npList">Nonprofit details: IRS filings, grants and board</a></p>` : ''}</div>
       ${all.length ? `<div><span class="cn-note">${all.length} record${all.length === 1 ? '' : 's'}${shown.length < all.length ? `, ${shown.length} in the current filters` : ''}. An award and the payments on it can both appear, so the types are not added together.</span><div class="cn-recs">${byType(all)}</div></div>` : ''}
       ${rel.length ? `<div class="cn-rel"><h3 class="eyebrow">Connected payees</h3>${rel.join('')}</div>` : ''}
-      ${e.k === 'biz' ? `<div class="cn-rel"><h3 class="eyebrow">Campaign gifts</h3>${dons.length ? dons.map(d => { const o = D.off[d.o] || {}; return `<div>${full(d.a)} to <button type="button" class="cn-link" data-sel="${esc(d.o)}">${esc(o.n)}</button>, ${esc(o.off)}${o.cand ? ' (2026 candidate)' : ''} · ${esc(d.date)}${url(d.u) ? ` · <a href="${esc(url(d.u))}" target="_blank" rel="noopener">Report</a>` : ''}${d.cf === 'likely' ? ' <span class="cn-flag">likely match</span>' : ''}</div>`; }).join('') : '<div class="cn-note">None in the campaign data.</div>'}</div>` : ''}
+      ${e.k === 'biz' ? `<div class="cn-rel"><h3 class="eyebrow">Campaign gifts</h3>${dons.length ? dons.map(d => { const o = D.off[d.o] || {}; return `<div>${full(d.a)} to <button type="button" class="cn-link" data-sel="${esc(d.o)}">${esc(o.n)}</button>, ${esc(o.off)}${o.cand ? ` (${candLbl(o)})` : ''} · ${esc(d.date)}${url(d.u) ? ` · <a href="${esc(url(d.u))}" target="_blank" rel="noopener">Report</a>` : ''}${d.cf === 'likely' ? ' <span class="cn-flag">likely match</span>' : ''}</div>`; }).join('') : '<div class="cn-note">None in the campaign data.</div>'}</div>` : ''}
       ${all.length ? `<div><h3 class="eyebrow">Records</h3>${recList(all)}</div>` : ''}${clear}`;
   }
   p.querySelectorAll('[data-sel]').forEach(b => b.onclick = () => select(b.dataset.sel));

@@ -292,6 +292,12 @@ public struct PeopleDirectory: Codable, Sendable {
                 let here = roles.filter { $0.gov_id == g }
                 let specific = here.filter { !generic($0) }
                 var keep = specific.isEmpty ? here : specific
+                // A past race ("2020 candidate: ...") gives way to any other role in the same government.
+                func pastRace(_ r: Role) -> Bool {
+                    let t = r.role ?? ""
+                    return t.range(of: #"^20\d\d candidate:"#, options: .regularExpression) != nil && !t.hasPrefix("2026 candidate")
+                }
+                if keep.contains(where: { !pastRace($0) }) { keep = keep.filter { !pastRace($0) } }
                 if specific.isEmpty, keep.contains(where: { ($0.role ?? "").lowercased().hasPrefix("officeholder:") }) {
                     keep = keep.filter { ($0.role ?? "").lowercased().hasPrefix("officeholder:") }
                 }

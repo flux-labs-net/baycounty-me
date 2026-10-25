@@ -89,12 +89,12 @@ test('a board member or business officer confirmed as an official shows once, as
 test('each person has one row per government, with every role folded in', async () => {
   const links = JSON.parse(fs.readFileSync(path.join(PUB, 'downloads', 'entity-connections.json'), 'utf8'));
   const seen = new Map();
-  for (const l of links.filter(x => ['serves', 'served', 'candidate'].includes(x.relation))) {
+  for (const l of links.filter(x => ['serves', 'served', 'candidate'].includes(x.relation))) {  // past races ('ran') are one row per race; the page folds them per person
     const k = l.from_id + '|' + l.to_id;
     assert.ok(!seen.has(k), `${l.from_name} is listed twice for ${l.to_name}: "${seen.get(k)}" and "${l.detail}"`);
     seen.set(k, l.detail);
   }
-  const hamre = links.find(l => l.from_id === 'person:cindy-hamre' && l.to_id === 'gov:sp');
+  const hamre = links.find(l => l.from_id === 'person:cindy-hamre' && l.to_id === 'gov:sp' && l.relation !== 'ran');
   if (hamre) {
     assert.equal(hamre.relation, 'serves');
     assert.match(hamre.detail, /Ward 4 \(2022–now\)/);

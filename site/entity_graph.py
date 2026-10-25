@@ -46,6 +46,7 @@ RELATION = {
     'serves': ('serves', 'is served by'),
     'served': ('served', 'was served by'),
     'candidate': ('is a candidate for office in', 'has candidates for office'),
+    'ran': ('ran for office in', 'had on the ballot'),
     'board': ('sits on the board of', 'has on its board'),
     'runs': ('runs', 'is run by'),
     'grant': ('gave a grant to', 'got a grant from'),
@@ -182,6 +183,10 @@ def person_title(p):
         t = f"Board member, {short(r['gov_id'])}" + (f" ({r['seat']})" if r.get('seat') and not str(r['seat']).isdigit() else '')
     elif first('votes', 'former'):
         t = f"Former board member, {short(first('votes', 'former')['gov_id'])}"
+    past = [r for r in roles if r.get('source') == 'campaign_history']
+    if past and not t:  # someone known here only from a past campaign (campaign-history): their latest race
+        r = max(past, key=lambda r: r.get('year') or 0)
+        t = f"Ran for {r['office']} in {r['year']}" + (' (won)' if r.get('outcome') == 'won' else '')
     c = first('candidates_2026') or first('finance_2026')
     if c:
         race = _race(c['role'], c.get('gov_id')) if ':' in c['role'] else ''
@@ -238,7 +243,7 @@ def service(p, gid, terms):
     """Everything one person does or did for one government, as one connection: relation, detail, dates, kind.
 
     'Commissioner, Ward 4 (2022–now) · Running again in 2026' instead of one row per record that names them."""
-    roles = [r for r in p.get('roles') or [] if r.get('gov_id') == gid]
+    roles = [r for r in p.get('roles') or [] if r.get('gov_id') == gid and r.get('source') != 'campaign_history']
     now = [t for t in terms if not t.get('end_date')]
     past = sorted((t for t in terms if t.get('end_date')), key=lambda t: t['end_date'], reverse=True)
     def yrs(t):
@@ -328,6 +333,13 @@ def build():
                 G.links[(pid, 'gov:' + gid, sv['relation'], '')]['dates'] = sv['dates']
         G.ents[pid]['label'] = next((PERSON_LABEL[k] for k in PERSON_LABEL if k in kinds), None)
 
+    # every local race they ran in since 2016 (campaign-history), one link per person, government and office
+    for r in _ds('campaign-history'):
+        if r.get('person_id') and 'person:' + r['person_id'] in G.ents and r.get('gov_id') and 'gov:' + r['gov_id'] in G.ents:
+            G.link('person:' + r['person_id'], 'gov:' + r['gov_id'], 'ran', r.get('total_raised'), r.get('election_date'),
+                   f"{_race(r['office'], r['gov_id'])}, {r['election_year']}" + (f" ({r['outcome']})" if r.get('outcome') else ''), r.get('report_url'), key=f"ran:{r['office']}:{r['election_year']}")
+            G.ents['person:' + r['person_id']]['label'] = G.ents['person:' + r['person_id']].get('label') or 'Past candidate'
+
     # companies (every vendor id, with or without a vendor page)
     for v in (ids._load('vendors.json') or {'vendors': []})['vendors']:
         G.ent('vendor:' + v['id'], v['name'], 'Company paid or hired by local governments', (v.get('gov_ids') or [None])[0], aliases=[a for a in v['aliases'] if not a.isupper()])
@@ -402,7 +414,7 @@ def build():
         else:
             frm = G.ent('committee:' + _slug(r['donor']), ids.biz_case(r['donor']), {'pac': 'Political committee', 'committee': 'Committee'}.get(r['donor_type'], 'Organization') + ' that gave to a local campaign')
         if frm:
-            G.link(frm, 'person:' + pid, 'gift', r.get('amount'), r.get('dates'), (r.get('office') or '') + (' (2026 candidate)' if r.get('candidate_2026') else ''),
+            G.link(frm, 'person:' + pid, 'gift', r.get('amount'), r.get('dates'), (r.get('office') or '') + (' (2026 candidate)' if r.get('candidate_2026') else f" ({r['past_campaign_year']} campaign)" if r.get('past_campaign_year') else ''),
                    r.get('report_url'), key=r.get('office') or '')
 
     # recorded votes on a vendor's contracts (data/votes/contract_votes.json), per member and vendor

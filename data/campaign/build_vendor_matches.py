@@ -93,7 +93,7 @@ def build():
             rows.append({
                 'contributor': name, 'contributor_spellings': sorted(p['names']) if len(p['names']) > 1 else None, 'vendor': ' / '.join(sorted({r['name'] for r in rs})), 'vendor_id': vid, 'vendor_entity': v['name'],
                 'candidate': cand, 'person_id': ids.person_id(cand), 'office': g['office'], 'election': g['election'],
-                'gift_source': 'current officeholders (campaign.json)' if src == 'officeholders' else '2026 candidates (finance_2026.json)',
+                'gift_source': {'officeholders': 'current officeholders (campaign.json)', 'candidates_2026': '2026 candidates (finance_2026.json)'}.get(src, 'past campaigns 2016-2025 (campaign_history.json)'),
                 'contribution_amount': round(p['amount'], 2), 'refunded_by_campaign': round(p['refund'], 2) or None,
                 'contribution_dates': sorted(set(p['dates'])), 'contribution_items': p['items'],
                 'contract_ids_or_descriptions': desc, 'record_ids': rids, 'contract_source_urls': urls,
@@ -108,7 +108,7 @@ def build():
     conf = collections.Counter(next(r['match_confidence'] for r in rows if (r['contributor'], r['candidate']) == p) for p in pairs_set)
     out = {
         'as_of': datetime.date.today().isoformat(),
-        'method': ('Business contributors to current officeholders (campaign.json) and 2026 local candidates (../elections/finance_2026.json) were compared with every payee on this site: '
+        'method': ('Business contributors to current officeholders (campaign.json), 2026 local candidates (../elections/finance_2026.json) and every other local campaign since 2016 (campaign_history.json) were compared with every payee on this site: '
                    'contracts, change orders and emergency purchases (../contracts/contracts.json), Bay County and Lynn Haven check registers, payments by the three tourism agencies '
                    '(../money/payments.json) and the CRA ledger (../merged.json). Both sides are resolved to vendor ids in ../entities/vendors.json: names are matched after removing '
                    'punctuation, "&"/"and" and legal suffixes, plus hand-checked joins of truncated or misspelled names (each with its evidence in vendors.json). Nothing is fuzzy-matched. '

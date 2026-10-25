@@ -60,6 +60,7 @@ def menu():
          'start': _i('Connections network', '/connections', 'Who every government paid, and who gave to officials'),
          'groups': [{'group': "Who decides, and who's connected", 'items': [
              *([_i('2026 Elections', '/elections', "Who's running, their platforms and money")] if ELECTIONS_READY else []),
+             _i('Past elections', '/elections/past', 'Every local race since 2016 and its money'),
              _i('Campaign gifts', '/connections/campaign-gifts', 'Who funds campaigns, and donors with contracts'),
              _i('Business ties', '/connections/business-ties', "Officials' and candidates' businesses"),
              _i('Shared owners', '/connections/shared-owners', 'Companies with a shared owner giving to one candidate'),
