@@ -40,7 +40,8 @@ final class DataTests: XCTestCase {
             let spec = DatasetSpec.for(d.id)
             let titled = rows.filter { spec.title($0) != "Record" }.count
             XCTAssertGreaterThanOrEqual(Double(titled), Double(rows.count) * 0.95, "\(d.id): most rows need a title")
-            if !spec.amountKeys.isEmpty, !DatasetSpec.ownScreens.contains(d.id) {
+            // A database-only dataset (filled after deploy, e.g. checkbook-payments) publishes no rows in the build.
+            if !rows.isEmpty, !spec.amountKeys.isEmpty, !DatasetSpec.ownScreens.contains(d.id) {
                 let withAmount = rows.filter { spec.amount($0) != nil }.count
                 XCTAssertGreaterThan(withAmount, 0, "\(d.id): amount column never filled")
             }
