@@ -3743,7 +3743,7 @@
    "id": "site-updates",
    "title": "What's new",
    "description": "Each change to the site's data and pages, newest first.",
-   "rows": 51,
+   "rows": 52,
    "columns": [
     {
      "name": "date",
@@ -3753,7 +3753,8 @@
       "2026-10-21",
       "2026-10-22",
       "2026-10-23",
-      "2026-10-24"
+      "2026-10-24",
+      "2026-10-25"
      ]
     },
     {
@@ -4241,11 +4242,12 @@
       "adopted at final hearing Sept 10, 2026 (Resolution 27-03 millage and 27-04 budget, both 5-0 per BoardDocs minutes)",
       "adopted at final hearing Sept 16, 2025 (budget book still labels columns 'Tentative/Recommended'; final hearing presentation confirms these totals were adopted)",
       "adopted at final hearing Sept 22, 2026 (budget document dated 9/22/2026; WJHG reports millage passed 4-1 and budget unanimously; minutes not yet posted)",
+      "adopted: FY 2020-2021 Final Approved Budget; grand total of expenditures by fund, including disaster recovery",
       "adopted: FY 2021-2022 Final Approved Budget, footer 'FY 22 Approved Budget 9/28/21'; grand total of expenditures by fund",
       "adopted: FY 2022-2023 Final Approved Budget, pages stamped 'Approved 9-27-22'; grand total of expenditures by fund, including disaster recovery",
       "adopted: FY 2023-2024 Final Approved Budget, pages stamped 'Approved 9-26-23' (tables still headed 'FY 2024 Proposed Budget'); grand total of expenditures by fund",
+      "adopted: FY 2024-25 Final Approved Budget; grand total of expenditures by fund. The city amended it to $64,870,778 (General Fund $21,193,114) in the mid-year budget approved 4-21-25.",
       "amended budget expenditures as shown in FY26 draft",
-      "amended/adjusted (Dec 2024), not original adopted",
       "approximate per news ('more than $49.878 million')",
       "approximate per news: 'more than $121.413 million' operating budget, general fund 'almost $55 million'",
       "approximate, as reported at final approval",
@@ -4281,8 +4283,9 @@
       "https://www.baycountyfl.gov/DocumentCenter/View/18382/FY-2026-Final-Budget-Commissioners-Book-09-16-2025",
       "https://www.baycountyfl.gov/DocumentCenter/View/21155/FY-2027-Final-Budget-Hearing-Presentation---09-23-26",
       "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_09172026-422",
-      "https://www.cityoflynnhaven.com/DocumentCenter/View/4110/FY-2025-MID-YEAR-BUDGET-Approved-04-21-25",
+      "https://www.cityoflynnhaven.gov/DocumentCenter/View/1104/APPROVED-2021-BUDGET-PDF",
       "https://www.cityoflynnhaven.gov/DocumentCenter/View/1828/FY-2021-2022-Final-Approved-Budget-PDF",
+      "https://www.cityoflynnhaven.gov/DocumentCenter/View/3330",
       "https://www.cityoflynnhaven.gov/DocumentCenter/View/5091/FY2026-27-Final-Approved-Budget",
       "https://www.fldoe.org/file/7507/BayTotalBUD2526.pdf",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Item/17544?fileID=37527",
@@ -4473,6 +4476,192 @@
    "json": "/downloads/government-years.json",
    "csv": "/downloads/government-years.csv",
    "api": "/api/v1/datasets/government-years"
+  },
+  {
+   "id": "budget-years",
+   "title": "Budgets by year, line by line",
+   "description": "Every budget line on record for each government and fiscal year, to compare one year with another. basis adopted: the adopted budget's total and General Fund, each fund and each General Fund department. basis actual: audited revenue by source and spending by function from the state's Local Government Financial Reports (in_total is false for transfers and borrowing, which the audited totals leave out). line_key lines the same fund or department up across years; service groups departments into common services. fiscal_year is the year the fiscal year ends (FY2026 = Oct 2025 to Sep 2026; schools Jul to Jun).",
+   "rows": 1161,
+   "columns": [
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "schools",
+      "sp"
+     ]
+    },
+    {
+     "name": "government",
+     "type": "string",
+     "values": [
+      "Bay County Board of County Commissioners",
+      "Bay District Schools (School Board of Bay County)",
+      "City of Callaway",
+      "City of Lynn Haven",
+      "City of Mexico Beach",
+      "City of Panama City",
+      "City of Panama City Beach",
+      "City of Parker",
+      "City of Springfield"
+     ]
+    },
+    {
+     "name": "fiscal_year",
+     "type": "number"
+    },
+    {
+     "name": "fy",
+     "type": "string",
+     "values": [
+      "FY2021",
+      "FY2022",
+      "FY2023",
+      "FY2024",
+      "FY2025",
+      "FY2026",
+      "FY2027"
+     ]
+    },
+    {
+     "name": "basis",
+     "type": "string",
+     "values": [
+      "actual",
+      "adopted"
+     ]
+    },
+    {
+     "name": "section",
+     "type": "string",
+     "values": [
+      "department",
+      "fund",
+      "revenue",
+      "spending",
+      "total"
+     ]
+    },
+    {
+     "name": "line_key",
+     "type": "string"
+    },
+    {
+     "name": "name",
+     "type": "string"
+    },
+    {
+     "name": "service",
+     "type": "string",
+     "values": [
+      "Administration & support",
+      "Fire",
+      "Libraries",
+      "Other services",
+      "Parks & recreation",
+      "Planning, building & code",
+      "Police / law enforcement",
+      "Streets & public works",
+      "Transfers, reserves, debt & disaster"
+     ]
+    },
+    {
+     "name": "fund_type",
+     "type": "string",
+     "values": [
+      "CRA",
+      "capital",
+      "debt service",
+      "enterprise",
+      "enterprise (impact fees)",
+      "enterprise (utilities)",
+      "general",
+      "internal service",
+      "special revenue",
+      "special revenue (dependent district)",
+      "special revenue (tourist development)",
+      "special revenue / capital"
+     ]
+    },
+    {
+     "name": "amount",
+     "type": "number"
+    },
+    {
+     "name": "in_total",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "status",
+     "type": "string",
+     "values": [
+      "adopted",
+      "amended",
+      "approximate",
+      "audited",
+      "draft",
+      "final hearing held",
+      "tentative"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "date_start",
+     "type": "string",
+     "values": [
+      "2020-10-01",
+      "2021-10-01",
+      "2022-10-01",
+      "2023-10-01",
+      "2024-07-01",
+      "2024-10-01",
+      "2025-07-01",
+      "2025-10-01",
+      "2026-07-01",
+      "2026-10-01"
+     ]
+    },
+    {
+     "name": "date_end",
+     "type": "string",
+     "values": [
+      "2021-09-30",
+      "2022-09-30",
+      "2023-09-30",
+      "2024-09-30",
+      "2025-06-30",
+      "2025-09-30",
+      "2026-06-30",
+      "2026-09-30",
+      "2027-06-30",
+      "2027-09-30"
+     ]
+    },
+    {
+     "name": "date_precision",
+     "type": "string",
+     "values": [
+      "fiscal_year"
+     ]
+    }
+   ],
+   "json": "/downloads/budget-years.json",
+   "csv": "/downloads/budget-years.csv",
+   "api": "/api/v1/datasets/budget-years"
   },
   {
    "id": "business-donor-sunbiz",
@@ -6642,7 +6831,7 @@
    "id": "site-menu",
    "title": "Site menu",
    "description": "Every link in the site's main menu, one row per link, in English and Spanish: the section and the question it answers, the link's place in the section, and the section's start-here page. place_id is the place the menu belongs to (fl-bay = Bay County), so a menu for another place sits beside it.",
-   "rows": 56,
+   "rows": 57,
    "columns": [
     {
      "name": "place_id",

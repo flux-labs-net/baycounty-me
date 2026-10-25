@@ -9,6 +9,9 @@ from datetime import datetime, timezone
 import html
 
 CHANGES = [
+    {'date': '2026-10-25', 'title': 'Compare a budget across years',
+     'text': "A new page compares any government's budget in two fiscal years, such as Lynn Haven FY2025 and FY2026 or FY2022 and FY2026: the total, the General Fund, every department, every service and every fund, with the dollar and percent change. Lynn Haven has every adopted budget from FY2021 to FY2027 line by line, read from the city's budget documents; the other governments have FY2026 and, where posted, FY2027 lines, plus totals for earlier years. Audited revenue and spending can be compared for FY2021 to FY2024. Lynn Haven's FY2025 budget is now the original adopted figure ($52.2M); the city amended it to $64.9M at mid-year.",
+     'pages': ['/public-money/budget-compare', '/public-money/budget-explorer', '/governments', '/developers', '/open-data']},
     {'date': '2026-10-24', 'title': 'Business owners who gave are now named',
      'text': "People who run a registered business and gave to a local campaign are now listed by name, with the businesses they run and every campaign they gave to. A donor is listed only when the name and street address on the campaign filing are the same as an officer, manager or registered agent on the state business registry. Other individual donors are still counted only in totals, and addresses are never shown.",
      'pages': ['/connections/campaign-gifts', '/people']},

@@ -51,6 +51,7 @@ function run() {
   const notes = Array.isArray(b.notes) ? b.notes : (b.notes ? [b.notes] : []);
   $('beNotes').innerHTML = notes.map(n => `<p>${esc(n)}</p>`).join('') + (b.source_url ? `<p><a class="src" href="${esc(b.source_url)}" target="_blank" rel="noopener">Budget document</a></p>` : '');
   $('beGov').href = '/governments/' + b.slug; $('beGov').textContent = b.short + ' overview →';
+  $('beCmp').href = '/public-money/budget-compare?gov=' + b.gov;
   $('beTitle').textContent = b.short + ' budget';
   bench(b);
 }

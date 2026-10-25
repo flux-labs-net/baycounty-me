@@ -1,0 +1,1472 @@
+{
+ "gov": "lh",
+ "name": "City of Lynn Haven",
+ "as_of": "2026-10-25",
+ "notes": [
+  "Each year is the Final Approved (adopted) budget, from the \"TOTAL EXPENDITURES by funding source\" table. FY2025 is the original adopted budget; the city amended it to $64,870,778 at mid-year (April 2025).",
+  "Fund amounts add up to the printed grand total and departments to the General Fund in every year (within a few dollars of rounding).",
+  "Department numbers stay the same across years; names are the FY2026 document's, so \"PD\" is Police and \"Bldg. Dept\" is Building Department.",
+  "Indirect cost recovery is a credit: the General Fund charges overhead to the utility funds, which lowers the General Fund total.",
+  "Totals include transfers between funds, so some money is counted twice. FY2021 to FY2023 include large Hurricane Michael recovery budgets in the Disaster Recovery Fund."
+ ],
+ "years": [
+  {
+   "fiscal_year": 2021,
+   "status": "adopted",
+   "source_title": "FY 2020-2021 Final Approved Budget",
+   "source_url": "https://www.cityoflynnhaven.gov/DocumentCenter/View/1104",
+   "total": 54259462,
+   "general_fund": 16043022,
+   "funds": [
+    {
+     "code": "001",
+     "name": "001 General Fund",
+     "type": "general",
+     "amount": 16043022
+    },
+    {
+     "code": "101",
+     "name": "101 Disaster Recovery Fund",
+     "type": "special revenue",
+     "amount": 19396789
+    },
+    {
+     "code": "102",
+     "name": "102 Hurricane Michael Relief Fund",
+     "type": "special revenue",
+     "amount": 5010
+    },
+    {
+     "code": "103",
+     "name": "103 COVID-19 Fund",
+     "type": "special revenue",
+     "amount": 50000
+    },
+    {
+     "code": "301",
+     "name": "301 Surtax Fund",
+     "type": "special revenue / capital",
+     "amount": 3429175
+    },
+    {
+     "code": "401",
+     "name": "401 Water Fund",
+     "type": "enterprise (utilities)",
+     "amount": 5082841
+    },
+    {
+     "code": "402",
+     "name": "402 Sewer Fund",
+     "type": "enterprise (utilities)",
+     "amount": 5101682
+    },
+    {
+     "code": "404",
+     "name": "404 Stormwater Fund",
+     "type": "enterprise",
+     "amount": 1897804
+    },
+    {
+     "code": "405",
+     "name": "405 Sanitation Fund",
+     "type": "enterprise",
+     "amount": 2637400
+    },
+    {
+     "code": "701",
+     "name": "701 CRA Fund",
+     "type": "CRA",
+     "amount": 615739
+    }
+   ],
+   "general_fund_departments": [
+    {
+     "code": "511",
+     "name": "Legislative",
+     "amount": 100553
+    },
+    {
+     "code": "512",
+     "name": "Executive",
+     "amount": 506223
+    },
+    {
+     "code": "513",
+     "name": "Finance",
+     "amount": 354610
+    },
+    {
+     "code": "515",
+     "name": "Planning",
+     "amount": 248273
+    },
+    {
+     "code": "516",
+     "name": "Public Works",
+     "amount": 420558
+    },
+    {
+     "code": "517",
+     "name": "General Fund Debt Service",
+     "amount": 155387
+    },
+    {
+     "code": "518",
+     "name": "Facility Maintenance",
+     "amount": 600230
+    },
+    {
+     "code": "519",
+     "name": "Admin",
+     "amount": 759013
+    },
+    {
+     "code": "520",
+     "name": "IT",
+     "amount": 532013
+    },
+    {
+     "code": "521",
+     "name": "Police",
+     "amount": 3930827
+    },
+    {
+     "code": "522",
+     "name": "Fire",
+     "amount": 2243597
+    },
+    {
+     "code": "523",
+     "name": "Code Enforcement",
+     "amount": 151598
+    },
+    {
+     "code": "524",
+     "name": "Building Department",
+     "amount": 679826
+    },
+    {
+     "code": "527",
+     "name": "HR",
+     "amount": 502849
+    },
+    {
+     "code": "528",
+     "name": "LH Bayou Preserve",
+     "amount": 272585
+    },
+    {
+     "code": "539",
+     "name": "Customer Service",
+     "amount": 374279
+    },
+    {
+     "code": "541",
+     "name": "Street",
+     "amount": 2741362
+    },
+    {
+     "code": "549",
+     "name": "Fleet",
+     "amount": 174469
+    },
+    {
+     "code": "552",
+     "name": "Economic Development",
+     "amount": 128480
+    },
+    {
+     "code": "571",
+     "name": "Library",
+     "amount": 3500
+    },
+    {
+     "code": "572",
+     "name": "Community Services/Sports",
+     "amount": 681002
+    },
+    {
+     "code": "573",
+     "name": "Community Services/Parks",
+     "amount": 1575825
+    },
+    {
+     "code": "574",
+     "name": "Communications/Marketing",
+     "amount": 328893
+    },
+    {
+     "code": "576",
+     "name": "Animal Shelter",
+     "amount": 359629
+    },
+    {
+     "code": "581",
+     "name": "Indirect cost recovery (credit)",
+     "amount": -1782558
+    }
+   ]
+  },
+  {
+   "fiscal_year": 2022,
+   "status": "adopted",
+   "source_title": "FY 2021-2022 Final Approved Budget",
+   "source_url": "https://www.cityoflynnhaven.gov/DocumentCenter/View/1828",
+   "total": 57108949,
+   "general_fund": 14576308,
+   "funds": [
+    {
+     "code": "001",
+     "name": "001 General Fund",
+     "type": "general",
+     "amount": 14576308
+    },
+    {
+     "code": "101",
+     "name": "101 Disaster Recovery Fund",
+     "type": "special revenue",
+     "amount": 22878555
+    },
+    {
+     "code": "103",
+     "name": "103 COVID-19 Fund",
+     "type": "special revenue",
+     "amount": 50000
+    },
+    {
+     "code": "301",
+     "name": "301 Surtax Fund",
+     "type": "special revenue / capital",
+     "amount": 4374070
+    },
+    {
+     "code": "401",
+     "name": "401 Water Fund",
+     "type": "enterprise (utilities)",
+     "amount": 4909154
+    },
+    {
+     "code": "402",
+     "name": "402 Sewer Fund",
+     "type": "enterprise (utilities)",
+     "amount": 5051318
+    },
+    {
+     "code": "404",
+     "name": "404 Stormwater Fund",
+     "type": "enterprise",
+     "amount": 2025755
+    },
+    {
+     "code": "405",
+     "name": "405 Sanitation Fund",
+     "type": "enterprise",
+     "amount": 2747178
+    },
+    {
+     "code": "701",
+     "name": "701 CRA Fund",
+     "type": "CRA",
+     "amount": 496612
+    }
+   ],
+   "general_fund_departments": [
+    {
+     "code": "511",
+     "name": "Legislative",
+     "amount": 89548
+    },
+    {
+     "code": "512",
+     "name": "Executive",
+     "amount": 462089
+    },
+    {
+     "code": "513",
+     "name": "Finance",
+     "amount": 444010
+    },
+    {
+     "code": "515",
+     "name": "Planning",
+     "amount": 216961
+    },
+    {
+     "code": "516",
+     "name": "Public Works",
+     "amount": 424699
+    },
+    {
+     "code": "517",
+     "name": "General Fund Debt Service",
+     "amount": 156920
+    },
+    {
+     "code": "518",
+     "name": "Facility Maintenance",
+     "amount": 676831
+    },
+    {
+     "code": "519",
+     "name": "Admin",
+     "amount": 352320
+    },
+    {
+     "code": "520",
+     "name": "IT",
+     "amount": 473530
+    },
+    {
+     "code": "521",
+     "name": "Police",
+     "amount": 4017661
+    },
+    {
+     "code": "522",
+     "name": "Fire",
+     "amount": 2331316
+    },
+    {
+     "code": "523",
+     "name": "Code Enforcement",
+     "amount": 177627
+    },
+    {
+     "code": "524",
+     "name": "Building Department",
+     "amount": 514607
+    },
+    {
+     "code": "527",
+     "name": "HR",
+     "amount": 450427
+    },
+    {
+     "code": "528",
+     "name": "LH Bayou Preserve",
+     "amount": 322984
+    },
+    {
+     "code": "529",
+     "name": "Budgeting",
+     "amount": 176849
+    },
+    {
+     "code": "539",
+     "name": "Customer Service",
+     "amount": 409683
+    },
+    {
+     "code": "541",
+     "name": "Street",
+     "amount": 1860240
+    },
+    {
+     "code": "549",
+     "name": "Fleet",
+     "amount": 146762
+    },
+    {
+     "code": "552",
+     "name": "Economic Development",
+     "amount": 165468
+    },
+    {
+     "code": "571",
+     "name": "Library",
+     "amount": 3500
+    },
+    {
+     "code": "572",
+     "name": "Community Services/Sports",
+     "amount": 741552
+    },
+    {
+     "code": "573",
+     "name": "Community Services/Parks",
+     "amount": 1000675
+    },
+    {
+     "code": "574",
+     "name": "Communications/Marketing",
+     "amount": 321321
+    },
+    {
+     "code": "576",
+     "name": "Animal Shelter",
+     "amount": 258315
+    },
+    {
+     "code": "581",
+     "name": "Indirect cost recovery (credit)",
+     "amount": -1619590
+    }
+   ]
+  },
+  {
+   "fiscal_year": 2023,
+   "status": "adopted",
+   "source_title": "FY 2022-2023 Final Approved Budget",
+   "source_url": "https://www.cityoflynnhaven.gov/DocumentCenter/View/2294",
+   "total": 71110754,
+   "general_fund": 19010800,
+   "funds": [
+    {
+     "code": "001",
+     "name": "001 General Fund",
+     "type": "general",
+     "amount": 19010800
+    },
+    {
+     "code": "021",
+     "name": "021 General Impact Fees",
+     "type": "special revenue",
+     "amount": 229593
+    },
+    {
+     "code": "101",
+     "name": "101 Disaster Recovery Fund",
+     "type": "special revenue",
+     "amount": 21330184
+    },
+    {
+     "code": "103",
+     "name": "103 COVID-19 Fund",
+     "type": "special revenue",
+     "amount": 5000
+    },
+    {
+     "code": "301",
+     "name": "301 Surtax Fund",
+     "type": "special revenue / capital",
+     "amount": 3126008
+    },
+    {
+     "code": "401",
+     "name": "401 Water Fund",
+     "type": "enterprise (utilities)",
+     "amount": 5123271
+    },
+    {
+     "code": "402",
+     "name": "402 Sewer Fund",
+     "type": "enterprise (utilities)",
+     "amount": 9523169
+    },
+    {
+     "code": "404",
+     "name": "404 Stormwater Fund",
+     "type": "enterprise",
+     "amount": 7787362
+    },
+    {
+     "code": "405",
+     "name": "405 Sanitation Fund",
+     "type": "enterprise",
+     "amount": 3528520
+    },
+    {
+     "code": "501",
+     "name": "501 Water Impact Fees",
+     "type": "enterprise (impact fees)",
+     "amount": 144636
+    },
+    {
+     "code": "502",
+     "name": "502 Sewer Impact Fees",
+     "type": "enterprise (impact fees)",
+     "amount": 521078
+    },
+    {
+     "code": "504",
+     "name": "504 Stormwater Impact Fees",
+     "type": "enterprise (impact fees)",
+     "amount": 95481
+    },
+    {
+     "code": "701",
+     "name": "701 CRA Fund",
+     "type": "CRA",
+     "amount": 685651
+    }
+   ],
+   "general_fund_departments": [
+    {
+     "code": "511",
+     "name": "Legislative",
+     "amount": 88065
+    },
+    {
+     "code": "512",
+     "name": "Executive",
+     "amount": 457455
+    },
+    {
+     "code": "513",
+     "name": "Finance",
+     "amount": 493631
+    },
+    {
+     "code": "515",
+     "name": "Planning",
+     "amount": 212103
+    },
+    {
+     "code": "516",
+     "name": "Public Works",
+     "amount": 418193
+    },
+    {
+     "code": "517",
+     "name": "General Fund Debt Service",
+     "amount": 156541
+    },
+    {
+     "code": "518",
+     "name": "Facility Maintenance",
+     "amount": 793837
+    },
+    {
+     "code": "519",
+     "name": "Admin",
+     "amount": 2308582
+    },
+    {
+     "code": "520",
+     "name": "IT",
+     "amount": 591280
+    },
+    {
+     "code": "521",
+     "name": "Police",
+     "amount": 4399427
+    },
+    {
+     "code": "522",
+     "name": "Fire",
+     "amount": 2467037
+    },
+    {
+     "code": "523",
+     "name": "Code Enforcement",
+     "amount": 141049
+    },
+    {
+     "code": "524",
+     "name": "Building Department",
+     "amount": 532695
+    },
+    {
+     "code": "527",
+     "name": "HR",
+     "amount": 820393
+    },
+    {
+     "code": "528",
+     "name": "LH Bayou Preserve",
+     "amount": 323737
+    },
+    {
+     "code": "539",
+     "name": "Customer Service",
+     "amount": 427379
+    },
+    {
+     "code": "541",
+     "name": "Street",
+     "amount": 3050739
+    },
+    {
+     "code": "549",
+     "name": "Fleet",
+     "amount": 192369
+    },
+    {
+     "code": "552",
+     "name": "Economic Development",
+     "amount": 809664
+    },
+    {
+     "code": "572",
+     "name": "Community Services/Sports",
+     "amount": 681457
+    },
+    {
+     "code": "573",
+     "name": "Community Services/Parks",
+     "amount": 971049
+    },
+    {
+     "code": "574",
+     "name": "Communications/Marketing",
+     "amount": 539214
+    },
+    {
+     "code": "576",
+     "name": "Animal Shelter",
+     "amount": 247216
+    },
+    {
+     "code": "581",
+     "name": "Indirect cost recovery (credit)",
+     "amount": -2112311
+    }
+   ]
+  },
+  {
+   "fiscal_year": 2024,
+   "status": "adopted",
+   "source_title": "FY 2023-2024 Final Approved Budget",
+   "source_url": "https://www.cityoflynnhaven.gov/DocumentCenter/View/2684",
+   "total": 64009222,
+   "general_fund": 18732969,
+   "funds": [
+    {
+     "code": "001",
+     "name": "001 General Fund",
+     "type": "general",
+     "amount": 18732969
+    },
+    {
+     "code": "021",
+     "name": "021 General Impact Fees",
+     "type": "special revenue",
+     "amount": 969587
+    },
+    {
+     "code": "101",
+     "name": "101 Disaster Recovery Fund",
+     "type": "special revenue",
+     "amount": 6121304
+    },
+    {
+     "code": "103",
+     "name": "103 COVID-19 Fund",
+     "type": "special revenue",
+     "amount": 5000
+    },
+    {
+     "code": "301",
+     "name": "301 Surtax Fund",
+     "type": "special revenue / capital",
+     "amount": 5073364
+    },
+    {
+     "code": "401",
+     "name": "401 Water Fund",
+     "type": "enterprise (utilities)",
+     "amount": 5728868
+    },
+    {
+     "code": "402",
+     "name": "402 Sewer Fund",
+     "type": "enterprise (utilities)",
+     "amount": 12645892
+    },
+    {
+     "code": "404",
+     "name": "404 Stormwater Fund",
+     "type": "enterprise",
+     "amount": 7223646
+    },
+    {
+     "code": "405",
+     "name": "405 Sanitation Fund",
+     "type": "enterprise",
+     "amount": 3403770
+    },
+    {
+     "code": "501",
+     "name": "501 Water Impact Fees",
+     "type": "enterprise (impact fees)",
+     "amount": 535721
+    },
+    {
+     "code": "502",
+     "name": "502 Sewer Impact Fees",
+     "type": "enterprise (impact fees)",
+     "amount": 2025644
+    },
+    {
+     "code": "504",
+     "name": "504 Stormwater Impact Fees",
+     "type": "enterprise (impact fees)",
+     "amount": 352500
+    },
+    {
+     "code": "701",
+     "name": "701 CRA Fund",
+     "type": "CRA",
+     "amount": 1190956
+    }
+   ],
+   "general_fund_departments": [
+    {
+     "code": "511",
+     "name": "Legislative",
+     "amount": 94811
+    },
+    {
+     "code": "512",
+     "name": "Executive",
+     "amount": 477955
+    },
+    {
+     "code": "513",
+     "name": "Finance",
+     "amount": 595423
+    },
+    {
+     "code": "515",
+     "name": "Planning",
+     "amount": 237672
+    },
+    {
+     "code": "516",
+     "name": "Public Works",
+     "amount": 102909
+    },
+    {
+     "code": "517",
+     "name": "General Fund Debt Service",
+     "amount": 158445
+    },
+    {
+     "code": "518",
+     "name": "Facility Maintenance",
+     "amount": 856589
+    },
+    {
+     "code": "519",
+     "name": "Admin",
+     "amount": 282020
+    },
+    {
+     "code": "520",
+     "name": "IT",
+     "amount": 670455
+    },
+    {
+     "code": "521",
+     "name": "Police",
+     "amount": 4651471
+    },
+    {
+     "code": "522",
+     "name": "Fire",
+     "amount": 2562013
+    },
+    {
+     "code": "523",
+     "name": "Code Enforcement",
+     "amount": 153233
+    },
+    {
+     "code": "524",
+     "name": "Building Department",
+     "amount": 480731
+    },
+    {
+     "code": "527",
+     "name": "HR",
+     "amount": 1070973
+    },
+    {
+     "code": "528",
+     "name": "LH Bayou Preserve",
+     "amount": 374955
+    },
+    {
+     "code": "539",
+     "name": "Customer Service",
+     "amount": 477576
+    },
+    {
+     "code": "541",
+     "name": "Street",
+     "amount": 2760040
+    },
+    {
+     "code": "549",
+     "name": "Fleet",
+     "amount": 181063
+    },
+    {
+     "code": "552",
+     "name": "Economic Development",
+     "amount": 822119
+    },
+    {
+     "code": "572",
+     "name": "Community Services/Sports",
+     "amount": 1331307
+    },
+    {
+     "code": "573",
+     "name": "Community Services/Parks",
+     "amount": 1402529
+    },
+    {
+     "code": "574",
+     "name": "Communications/Marketing",
+     "amount": 527899
+    },
+    {
+     "code": "576",
+     "name": "Animal Shelter",
+     "amount": 258693
+    },
+    {
+     "code": "581",
+     "name": "Indirect cost recovery (credit)",
+     "amount": -2081441
+    },
+    {
+     "code": "581R",
+     "name": "Reserve",
+     "amount": 283530
+    }
+   ]
+  },
+  {
+   "fiscal_year": 2025,
+   "status": "adopted",
+   "source_title": "FY 2024-25 Final Approved Budget",
+   "source_url": "https://www.cityoflynnhaven.gov/DocumentCenter/View/3330",
+   "total": 52229518,
+   "general_fund": 19809284,
+   "funds": [
+    {
+     "code": "001",
+     "name": "001 General Fund",
+     "type": "general",
+     "amount": 19809284
+    },
+    {
+     "code": "021",
+     "name": "021 General Impact Fees",
+     "type": "special revenue",
+     "amount": 721600
+    },
+    {
+     "code": "101",
+     "name": "101 Disaster Recovery Fund",
+     "type": "special revenue",
+     "amount": 4685222
+    },
+    {
+     "code": "103",
+     "name": "103 COVID-19 Fund",
+     "type": "special revenue",
+     "amount": 5000
+    },
+    {
+     "code": "301",
+     "name": "301 Surtax Fund",
+     "type": "special revenue / capital",
+     "amount": 4944607
+    },
+    {
+     "code": "401",
+     "name": "401 Water Fund",
+     "type": "enterprise (utilities)",
+     "amount": 5900691
+    },
+    {
+     "code": "402",
+     "name": "402 Sewer Fund",
+     "type": "enterprise (utilities)",
+     "amount": 7362768
+    },
+    {
+     "code": "404",
+     "name": "404 Stormwater Fund",
+     "type": "enterprise",
+     "amount": 2567133
+    },
+    {
+     "code": "405",
+     "name": "405 Sanitation Fund",
+     "type": "enterprise",
+     "amount": 3476440
+    },
+    {
+     "code": "501",
+     "name": "501 Water Impact Fees",
+     "type": "enterprise (impact fees)",
+     "amount": 172586
+    },
+    {
+     "code": "502",
+     "name": "502 Sewer Impact Fees",
+     "type": "enterprise (impact fees)",
+     "amount": 1000000
+    },
+    {
+     "code": "504",
+     "name": "504 Stormwater Impact Fees",
+     "type": "enterprise (impact fees)",
+     "amount": 310000
+    },
+    {
+     "code": "701",
+     "name": "701 CRA Fund",
+     "type": "CRA",
+     "amount": 1274187
+    }
+   ],
+   "general_fund_departments": [
+    {
+     "code": "511",
+     "name": "Legislative",
+     "amount": 98892
+    },
+    {
+     "code": "512",
+     "name": "Executive",
+     "amount": 494897
+    },
+    {
+     "code": "513",
+     "name": "Finance",
+     "amount": 720250
+    },
+    {
+     "code": "515",
+     "name": "Planning",
+     "amount": 243579
+    },
+    {
+     "code": "516",
+     "name": "Public Works",
+     "amount": 48898
+    },
+    {
+     "code": "517",
+     "name": "General Fund Debt Service",
+     "amount": 155911
+    },
+    {
+     "code": "518",
+     "name": "Facility Maintenance",
+     "amount": 933288
+    },
+    {
+     "code": "519",
+     "name": "Admin",
+     "amount": 419559
+    },
+    {
+     "code": "520",
+     "name": "IT",
+     "amount": 686621
+    },
+    {
+     "code": "521",
+     "name": "Police",
+     "amount": 5054642
+    },
+    {
+     "code": "522",
+     "name": "Fire",
+     "amount": 2743653
+    },
+    {
+     "code": "523",
+     "name": "Code Enforcement",
+     "amount": 155081
+    },
+    {
+     "code": "524",
+     "name": "Building Department",
+     "amount": 463939
+    },
+    {
+     "code": "527",
+     "name": "HR",
+     "amount": 1056116
+    },
+    {
+     "code": "528",
+     "name": "LH Bayou Preserve",
+     "amount": 351819
+    },
+    {
+     "code": "539",
+     "name": "Customer Service",
+     "amount": 578776
+    },
+    {
+     "code": "541",
+     "name": "Street",
+     "amount": 2917777
+    },
+    {
+     "code": "549",
+     "name": "Fleet",
+     "amount": 168583
+    },
+    {
+     "code": "552",
+     "name": "Economic Development",
+     "amount": 754945
+    },
+    {
+     "code": "572",
+     "name": "Community Services/Sports",
+     "amount": 1487480
+    },
+    {
+     "code": "573",
+     "name": "Community Services/Parks",
+     "amount": 1489901
+    },
+    {
+     "code": "574",
+     "name": "Communications/Marketing",
+     "amount": 573734
+    },
+    {
+     "code": "576",
+     "name": "Animal Shelter",
+     "amount": 273914
+    },
+    {
+     "code": "581",
+     "name": "Indirect cost recovery (credit)",
+     "amount": -2201032
+    },
+    {
+     "code": "581R",
+     "name": "Reserve",
+     "amount": 138060
+    }
+   ]
+  },
+  {
+   "fiscal_year": 2026,
+   "status": "adopted",
+   "source_title": "FY2025-26 Final Approved Budget 9-23-25",
+   "source_url": "https://www.cityoflynnhaven.gov/DocumentCenter/View/4411",
+   "total": 61858708,
+   "general_fund": 24353606,
+   "funds": [
+    {
+     "code": "001",
+     "name": "001 General Fund",
+     "type": "general",
+     "amount": 24353606
+    },
+    {
+     "code": "021",
+     "name": "021 General Impact Fees",
+     "type": "special revenue",
+     "amount": 194070
+    },
+    {
+     "code": "101",
+     "name": "101 Disaster Recovery Fund",
+     "type": "special revenue",
+     "amount": 4335514
+    },
+    {
+     "code": "103",
+     "name": "103 COVID-19 Fund",
+     "type": "special revenue",
+     "amount": 5000
+    },
+    {
+     "code": "301",
+     "name": "301 Surtax Fund",
+     "type": "special revenue / capital",
+     "amount": 3396122
+    },
+    {
+     "code": "401",
+     "name": "401 Water Fund",
+     "type": "enterprise (utilities)",
+     "amount": 7261373
+    },
+    {
+     "code": "402",
+     "name": "402 Sewer Fund",
+     "type": "enterprise (utilities)",
+     "amount": 7563367
+    },
+    {
+     "code": "404",
+     "name": "404 Stormwater Fund",
+     "type": "enterprise",
+     "amount": 8216123
+    },
+    {
+     "code": "405",
+     "name": "405 Sanitation Fund",
+     "type": "enterprise",
+     "amount": 3879472
+    },
+    {
+     "code": "501",
+     "name": "501 Water Impact Fees",
+     "type": "enterprise (impact fees)",
+     "amount": 150354
+    },
+    {
+     "code": "502",
+     "name": "502 Sewer Impact Fees",
+     "type": "enterprise (impact fees)",
+     "amount": 444762
+    },
+    {
+     "code": "504",
+     "name": "504 Stormwater Impact Fees",
+     "type": "enterprise (impact fees)",
+     "amount": 59673
+    },
+    {
+     "code": "701",
+     "name": "701 CRA Fund",
+     "type": "CRA",
+     "amount": 1999274
+    }
+   ],
+   "general_fund_departments": [
+    {
+     "code": "511",
+     "name": "Legislative",
+     "amount": 104646
+    },
+    {
+     "code": "512",
+     "name": "Executive",
+     "amount": 704441
+    },
+    {
+     "code": "513",
+     "name": "Finance",
+     "amount": 841817
+    },
+    {
+     "code": "515",
+     "name": "Planning",
+     "amount": 271992
+    },
+    {
+     "code": "516",
+     "name": "Public Works",
+     "amount": 26850
+    },
+    {
+     "code": "517",
+     "name": "General Fund Debt Service",
+     "amount": 155267
+    },
+    {
+     "code": "518",
+     "name": "Facility Maintenance",
+     "amount": 962024
+    },
+    {
+     "code": "519",
+     "name": "Admin",
+     "amount": 3713586
+    },
+    {
+     "code": "520",
+     "name": "IT",
+     "amount": 764069
+    },
+    {
+     "code": "521",
+     "name": "Police",
+     "amount": 4792059
+    },
+    {
+     "code": "522",
+     "name": "Fire",
+     "amount": 5343217
+    },
+    {
+     "code": "523",
+     "name": "Code Enforcement",
+     "amount": 151278
+    },
+    {
+     "code": "524",
+     "name": "Building Department",
+     "amount": 445520
+    },
+    {
+     "code": "527",
+     "name": "HR",
+     "amount": 285718
+    },
+    {
+     "code": "528",
+     "name": "LH Bayou Preserve",
+     "amount": 351575
+    },
+    {
+     "code": "539",
+     "name": "Customer Service",
+     "amount": 140996
+    },
+    {
+     "code": "541",
+     "name": "Street",
+     "amount": 2386135
+    },
+    {
+     "code": "549",
+     "name": "Fleet",
+     "amount": 244474
+    },
+    {
+     "code": "552",
+     "name": "Economic Development",
+     "amount": 1854630
+    },
+    {
+     "code": "572",
+     "name": "Community Services/Sports",
+     "amount": 1437073
+    },
+    {
+     "code": "573",
+     "name": "Community Services/Parks",
+     "amount": 1372371
+    },
+    {
+     "code": "574",
+     "name": "Communications/Marketing",
+     "amount": 442623
+    },
+    {
+     "code": "576",
+     "name": "Animal Shelter",
+     "amount": 267202
+    },
+    {
+     "code": "581",
+     "name": "Indirect cost recovery (credit)",
+     "amount": -2705956
+    }
+   ]
+  },
+  {
+   "fiscal_year": 2027,
+   "status": "adopted",
+   "source_title": "FY 2026-2027 Final Approved Budget",
+   "source_url": "https://www.cityoflynnhaven.gov/DocumentCenter/View/5091",
+   "total": 54310755,
+   "general_fund": 22196794,
+   "funds": [
+    {
+     "code": "001",
+     "name": "001 General Fund",
+     "type": "general",
+     "amount": 22196794
+    },
+    {
+     "code": "021",
+     "name": "021 General Impact Fees",
+     "type": "special revenue",
+     "amount": 271576
+    },
+    {
+     "code": "101",
+     "name": "101 Disaster Recovery Fund",
+     "type": "special revenue",
+     "amount": 2819944
+    },
+    {
+     "code": "103",
+     "name": "103 COVID-19 Fund",
+     "type": "special revenue",
+     "amount": 5000
+    },
+    {
+     "code": "301",
+     "name": "301 Surtax Fund",
+     "type": "special revenue / capital",
+     "amount": 3230000
+    },
+    {
+     "code": "401",
+     "name": "401 Water Fund",
+     "type": "enterprise (utilities)",
+     "amount": 8294542
+    },
+    {
+     "code": "402",
+     "name": "402 Sewer Fund",
+     "type": "enterprise (utilities)",
+     "amount": 7925137
+    },
+    {
+     "code": "404",
+     "name": "404 Stormwater Fund",
+     "type": "enterprise",
+     "amount": 3665181
+    },
+    {
+     "code": "405",
+     "name": "405 Sanitation Fund",
+     "type": "enterprise",
+     "amount": 3893107
+    },
+    {
+     "code": "501",
+     "name": "501 Water Impact Fees",
+     "type": "enterprise (impact fees)",
+     "amount": 177328
+    },
+    {
+     "code": "502",
+     "name": "502 Sewer Impact Fees",
+     "type": "enterprise (impact fees)",
+     "amount": 649086
+    },
+    {
+     "code": "504",
+     "name": "504 Stormwater Impact Fees",
+     "type": "enterprise (impact fees)",
+     "amount": 169005
+    },
+    {
+     "code": "701",
+     "name": "701 CRA Fund",
+     "type": "CRA",
+     "amount": 1014054
+    }
+   ],
+   "general_fund_departments": [
+    {
+     "code": "511",
+     "name": "Legislative",
+     "amount": 102275
+    },
+    {
+     "code": "512",
+     "name": "Executive",
+     "amount": 1165000
+    },
+    {
+     "code": "513",
+     "name": "Finance",
+     "amount": 627868
+    },
+    {
+     "code": "515",
+     "name": "Planning",
+     "amount": 210201
+    },
+    {
+     "code": "516",
+     "name": "Public Works",
+     "amount": 7500
+    },
+    {
+     "code": "517",
+     "name": "General Fund Debt Service",
+     "amount": 156432
+    },
+    {
+     "code": "518",
+     "name": "Facility Maintenance",
+     "amount": 897200
+    },
+    {
+     "code": "519",
+     "name": "Admin",
+     "amount": 3737701
+    },
+    {
+     "code": "520",
+     "name": "IT",
+     "amount": 744948
+    },
+    {
+     "code": "521",
+     "name": "Police",
+     "amount": 4069488
+    },
+    {
+     "code": "522",
+     "name": "Fire",
+     "amount": 3600892
+    },
+    {
+     "code": "523",
+     "name": "Code Enforcement",
+     "amount": 89133
+    },
+    {
+     "code": "524",
+     "name": "Building Department",
+     "amount": 293631
+    },
+    {
+     "code": "527",
+     "name": "HR",
+     "amount": 231177
+    },
+    {
+     "code": "528",
+     "name": "LH Bayou Preserve",
+     "amount": 289659
+    },
+    {
+     "code": "539",
+     "name": "Customer Service",
+     "amount": 123531
+    },
+    {
+     "code": "541",
+     "name": "Street",
+     "amount": 1350482
+    },
+    {
+     "code": "549",
+     "name": "Fleet",
+     "amount": 337302
+    },
+    {
+     "code": "552",
+     "name": "Economic Development",
+     "amount": 3742900
+    },
+    {
+     "code": "572",
+     "name": "Community Services/Sports",
+     "amount": 1264637
+    },
+    {
+     "code": "573",
+     "name": "Community Services/Parks",
+     "amount": 1054986
+    },
+    {
+     "code": "574",
+     "name": "Communications/Marketing",
+     "amount": 24408
+    },
+    {
+     "code": "576",
+     "name": "Animal Shelter",
+     "amount": 373314
+    },
+    {
+     "code": "581",
+     "name": "Indirect cost recovery (credit)",
+     "amount": -2449466
+    },
+    {
+     "code": "581R",
+     "name": "Reserve",
+     "amount": 151596
+    }
+   ]
+  }
+ ]
+}
