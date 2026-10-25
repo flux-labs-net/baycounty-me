@@ -9,59 +9,59 @@
    "recipient_name": "Joel Schubert, County Manager (records custodian)",
    "recipient_email": "jschubert@baycountyfl.gov",
    "contact_url": "https://www.baycountyfl.gov/307/Communications-Office",
-   "subject": "Public records request: General Fund department budgets, FY2015-FY2025 and FY2027",
-   "body": "Under Chapter 119, Florida Statutes, I’m requesting copies of the adopted budget’s General Fund appropriations by department (or division) for each of these fiscal years. The “Summary of All Funds” tables are already posted on the county website; what I’m missing is the department-level breakdown of the General Fund:\n\n- FY2015 (Oct 1, 2014 to Sep 30, 2015)\n- FY2016 (Oct 1, 2015 to Sep 30, 2016)\n- FY2017 (Oct 1, 2016 to Sep 30, 2017)\n- FY2018 (Oct 1, 2017 to Sep 30, 2018)\n- FY2019 (Oct 1, 2018 to Sep 30, 2019)\n- FY2020 (Oct 1, 2019 to Sep 30, 2020)\n- FY2021 (Oct 1, 2020 to Sep 30, 2021)\n- FY2022 (Oct 1, 2021 to Sep 30, 2022)\n- FY2023 (Oct 1, 2022 to Sep 30, 2023)\n- FY2024 (Oct 1, 2023 to Sep 30, 2024)\n- FY2025 (Oct 1, 2024 to Sep 30, 2025)\n- FY2027 (Oct 1, 2026 to Sep 30, 2027)\n\nElectronic copies (PDF or spreadsheet) by email are preferred. If any of these are already posted online, a link is all I need. If a year can’t be found, please say so and I’ll take what exists.\n\nThis is a non-commercial request. These records will be used to show residents how the budget has changed over time on BayCounty.me, an independent public-records site for Bay County. If fulfilling it will cost more than $25, please send an estimate before starting.\n\nThank you,\nJeremy McSpadden\nBayCounty.me",
+   "subject": "Public records request: line-item budgets by fund and department, FY2015-FY2025 and FY2027",
+   "body": "Under Chapter 119, Florida Statutes, I’m requesting the complete adopted budget, in as much detail as your records hold, for each of these fiscal years:\n\n- FY2015 (Oct 1, 2014 to Sep 30, 2015)\n- FY2016 (Oct 1, 2015 to Sep 30, 2016)\n- FY2017 (Oct 1, 2016 to Sep 30, 2017)\n- FY2018 (Oct 1, 2017 to Sep 30, 2018)\n- FY2019 (Oct 1, 2018 to Sep 30, 2019)\n- FY2020 (Oct 1, 2019 to Sep 30, 2020)\n- FY2021 (Oct 1, 2020 to Sep 30, 2021)\n- FY2022 (Oct 1, 2021 to Sep 30, 2022)\n- FY2023 (Oct 1, 2022 to Sep 30, 2023)\n- FY2024 (Oct 1, 2023 to Sep 30, 2024)\n- FY2025 (Oct 1, 2024 to Sep 30, 2025)\n- FY2027 (Oct 1, 2026 to Sep 30, 2027)\n\nFor each year, please include:\n\n1. Appropriations (expenditures) for every fund, broken down by department and division (cost center) and by account or object code (personnel services, operating expenses, capital outlay, debt service, grants and aids, transfers, reserves), with the line-item amounts.\n2. Revenues for every fund by source and account (taxes, fees, intergovernmental, grants, charges for services, transfers in, fund balance carried forward).\n3. Authorized positions (FTEs) by department, if the budget lists them.\n4. The adopted capital improvement program or capital budget for that year.\n5. The budget ordinance or resolution that adopted it, with its exhibits, and, if available, the final amended budget at year end.\n\nA line-item report or export from your financial system (Excel or CSV) is ideal. The full budget book in PDF works too. If any of these are already posted online, a link is all I need, and if a year or item can’t be found, please send what exists rather than holding the rest.\n\nThis is a non-commercial request. These records will be used to show residents how the budget has changed over time on BayCounty.me, an independent public-records site for Bay County. If fulfilling it will cost more than $25, please send an estimate before starting.\n\nThank you,\nJeremy McSpadden\nBayCounty.me",
    "gaps": [
     {
      "fiscal_year": 2015,
-     "need": "General Fund appropriations by department"
+     "need": "line-item budget by fund, department and account (fund totals only)"
     },
     {
      "fiscal_year": 2016,
-     "need": "General Fund appropriations by department"
+     "need": "line-item budget by fund, department and account (fund totals only)"
     },
     {
      "fiscal_year": 2017,
-     "need": "General Fund appropriations by department"
+     "need": "line-item budget by fund, department and account (fund totals only)"
     },
     {
      "fiscal_year": 2018,
-     "need": "General Fund appropriations by department"
+     "need": "line-item budget by fund, department and account (fund totals only)"
     },
     {
      "fiscal_year": 2019,
-     "need": "General Fund appropriations by department"
+     "need": "line-item budget by fund, department and account (fund totals only)"
     },
     {
      "fiscal_year": 2020,
-     "need": "General Fund appropriations by department"
+     "need": "line-item budget by fund, department and account (fund totals only)"
     },
     {
      "fiscal_year": 2021,
-     "need": "General Fund appropriations by department"
+     "need": "line-item budget by fund, department and account (fund totals only)"
     },
     {
      "fiscal_year": 2022,
-     "need": "General Fund appropriations by department"
+     "need": "line-item budget by fund, department and account (fund totals only)"
     },
     {
      "fiscal_year": 2023,
-     "need": "General Fund appropriations by department"
+     "need": "line-item budget by fund, department and account (fund totals only)"
     },
     {
      "fiscal_year": 2024,
-     "need": "General Fund appropriations by department"
+     "need": "line-item budget by fund, department and account (fund totals only)"
     },
     {
      "fiscal_year": 2025,
-     "need": "General Fund appropriations by department"
+     "need": "line-item budget by fund, department and account (fund totals only)"
     },
     {
      "fiscal_year": 2027,
-     "need": "General Fund appropriations by department"
+     "need": "line-item budget by fund, department and account (fund totals only)"
     }
    ],
-   "notes": "Optional: the county’s fund totals are complete for every year; this asks only for General Fund department detail."
+   "notes": "We already have fund totals for every year; this asks for the department and line-item detail behind them."
   },
   {
    "key": "budgets-2015-pc",
@@ -70,32 +70,56 @@
    "recipient_name": "Public Records, City Clerk’s Office",
    "recipient_email": "publicrecords@panamacity.gov",
    "contact_url": "https://panamacity.gov/581/Public-Records-Request",
-   "subject": "Public records request: adopted budgets, FY2015-FY2016, FY2023-FY2025 and FY2027",
-   "body": "Under Chapter 119, Florida Statutes, I’m requesting copies of the adopted (final) budget for each of these fiscal years, showing total appropriations by fund and General Fund appropriations by department. The budget book, the budget ordinance or resolution with its exhibits, or the summary presented at the final September hearing would each work:\n\n- FY2015 (Oct 1, 2014 to Sep 30, 2015)\n- FY2016 (Oct 1, 2015 to Sep 30, 2016)\n- FY2023 (Oct 1, 2022 to Sep 30, 2023)\n- FY2024 (Oct 1, 2023 to Sep 30, 2024)\n- FY2025 (Oct 1, 2024 to Sep 30, 2025)\n- FY2027 (Oct 1, 2026 to Sep 30, 2027)\n\nElectronic copies (PDF or spreadsheet) by email are preferred. If any of these are already posted online, a link is all I need. If a year can’t be found, please say so and I’ll take what exists.\n\nThis is a non-commercial request. These records will be used to show residents how the budget has changed over time on BayCounty.me, an independent public-records site for Bay County. If fulfilling it will cost more than $25, please send an estimate before starting.\n\nThank you,\nJeremy McSpadden\nBayCounty.me",
+   "subject": "Public records request: line-item budgets by fund and department, FY2015-FY2025 and FY2027",
+   "body": "Under Chapter 119, Florida Statutes, I’m requesting the complete adopted budget, in as much detail as your records hold, for each of these fiscal years:\n\n- FY2015 (Oct 1, 2014 to Sep 30, 2015)\n- FY2016 (Oct 1, 2015 to Sep 30, 2016)\n- FY2017 (Oct 1, 2016 to Sep 30, 2017)\n- FY2018 (Oct 1, 2017 to Sep 30, 2018)\n- FY2019 (Oct 1, 2018 to Sep 30, 2019)\n- FY2020 (Oct 1, 2019 to Sep 30, 2020)\n- FY2021 (Oct 1, 2020 to Sep 30, 2021)\n- FY2022 (Oct 1, 2021 to Sep 30, 2022)\n- FY2023 (Oct 1, 2022 to Sep 30, 2023)\n- FY2024 (Oct 1, 2023 to Sep 30, 2024)\n- FY2025 (Oct 1, 2024 to Sep 30, 2025)\n- FY2027 (Oct 1, 2026 to Sep 30, 2027)\n\nFor each year, please include:\n\n1. Appropriations (expenditures) for every fund, broken down by department and division (cost center) and by account or object code (personnel services, operating expenses, capital outlay, debt service, grants and aids, transfers, reserves), with the line-item amounts.\n2. Revenues for every fund by source and account (taxes, fees, intergovernmental, grants, charges for services, transfers in, fund balance carried forward).\n3. Authorized positions (FTEs) by department, if the budget lists them.\n4. The adopted capital improvement program or capital budget for that year.\n5. The budget ordinance or resolution that adopted it, with its exhibits, and, if available, the final amended budget at year end.\n\nA line-item report or export from your financial system (Excel or CSV) is ideal. The full budget book in PDF works too. If any of these are already posted online, a link is all I need, and if a year or item can’t be found, please send what exists rather than holding the rest.\n\nThis is a non-commercial request. These records will be used to show residents how the budget has changed over time on BayCounty.me, an independent public-records site for Bay County. If fulfilling it will cost more than $25, please send an estimate before starting.\n\nThank you,\nJeremy McSpadden\nBayCounty.me",
    "gaps": [
     {
      "fiscal_year": 2015,
-     "need": "adopted budget by fund"
+     "need": "line-item budget by fund, department and account (total only)"
     },
     {
      "fiscal_year": 2016,
-     "need": "adopted budget by fund"
+     "need": "line-item budget by fund, department and account (total only)"
+    },
+    {
+     "fiscal_year": 2017,
+     "need": "line-item budget by fund, department and account (fund totals only)"
+    },
+    {
+     "fiscal_year": 2018,
+     "need": "line-item budget by fund, department and account (fund totals only)"
+    },
+    {
+     "fiscal_year": 2019,
+     "need": "line-item budget by fund, department and account (fund totals only)"
+    },
+    {
+     "fiscal_year": 2020,
+     "need": "line-item budget by fund, department and account (fund totals only)"
+    },
+    {
+     "fiscal_year": 2021,
+     "need": "line-item budget by fund, department and account (fund totals only)"
+    },
+    {
+     "fiscal_year": 2022,
+     "need": "line-item budget by fund, department and account (fund totals only)"
     },
     {
      "fiscal_year": 2023,
-     "need": "adopted budget by fund"
+     "need": "line-item budget by fund, department and account (total only)"
     },
     {
      "fiscal_year": 2024,
-     "need": "adopted budget by fund"
+     "need": "line-item budget by fund, department and account (total only)"
     },
     {
      "fiscal_year": 2025,
-     "need": "adopted budget by fund"
+     "need": "line-item budget by fund, department and account (total only)"
     },
     {
      "fiscal_year": 2027,
-     "need": "adopted budget by fund"
+     "need": "line-item budget by fund, department and account (total only)"
     }
    ],
    "notes": null
@@ -107,52 +131,52 @@
    "recipient_name": "Lynne Fasone, City Clerk",
    "recipient_email": "",
    "contact_url": "https://www.pcbfl.gov/about-us/city-news",
-   "subject": "Public records request: adopted budgets, FY2015-FY2025",
-   "body": "Under Chapter 119, Florida Statutes, I’m requesting copies of the adopted (final) budget for each of these fiscal years, showing total appropriations by fund and General Fund appropriations by department. The budget book, the budget ordinance or resolution with its exhibits, or the summary presented at the final September hearing would each work:\n\n- FY2015 (Oct 1, 2014 to Sep 30, 2015)\n- FY2016 (Oct 1, 2015 to Sep 30, 2016)\n- FY2017 (Oct 1, 2016 to Sep 30, 2017)\n- FY2018 (Oct 1, 2017 to Sep 30, 2018)\n- FY2019 (Oct 1, 2018 to Sep 30, 2019)\n- FY2020 (Oct 1, 2019 to Sep 30, 2020)\n- FY2021 (Oct 1, 2020 to Sep 30, 2021)\n- FY2022 (Oct 1, 2021 to Sep 30, 2022)\n- FY2023 (Oct 1, 2022 to Sep 30, 2023)\n- FY2024 (Oct 1, 2023 to Sep 30, 2024)\n- FY2025 (Oct 1, 2024 to Sep 30, 2025)\n\nElectronic copies (PDF or spreadsheet) by email are preferred. If any of these are already posted online, a link is all I need. If a year can’t be found, please say so and I’ll take what exists.\n\nThis is a non-commercial request. These records will be used to show residents how the budget has changed over time on BayCounty.me, an independent public-records site for Bay County. If fulfilling it will cost more than $25, please send an estimate before starting.\n\nThank you,\nJeremy McSpadden\nBayCounty.me",
+   "subject": "Public records request: line-item budgets by fund and department, FY2015-FY2025",
+   "body": "Under Chapter 119, Florida Statutes, I’m requesting the complete adopted budget, in as much detail as your records hold, for each of these fiscal years:\n\n- FY2015 (Oct 1, 2014 to Sep 30, 2015)\n- FY2016 (Oct 1, 2015 to Sep 30, 2016)\n- FY2017 (Oct 1, 2016 to Sep 30, 2017)\n- FY2018 (Oct 1, 2017 to Sep 30, 2018)\n- FY2019 (Oct 1, 2018 to Sep 30, 2019)\n- FY2020 (Oct 1, 2019 to Sep 30, 2020)\n- FY2021 (Oct 1, 2020 to Sep 30, 2021)\n- FY2022 (Oct 1, 2021 to Sep 30, 2022)\n- FY2023 (Oct 1, 2022 to Sep 30, 2023)\n- FY2024 (Oct 1, 2023 to Sep 30, 2024)\n- FY2025 (Oct 1, 2024 to Sep 30, 2025)\n\nFor each year, please include:\n\n1. Appropriations (expenditures) for every fund, broken down by department and division (cost center) and by account or object code (personnel services, operating expenses, capital outlay, debt service, grants and aids, transfers, reserves), with the line-item amounts.\n2. Revenues for every fund by source and account (taxes, fees, intergovernmental, grants, charges for services, transfers in, fund balance carried forward).\n3. Authorized positions (FTEs) by department, if the budget lists them.\n4. The adopted capital improvement program or capital budget for that year.\n5. The budget ordinance or resolution that adopted it, with its exhibits, and, if available, the final amended budget at year end.\n\nA line-item report or export from your financial system (Excel or CSV) is ideal. The full budget book in PDF works too. If any of these are already posted online, a link is all I need, and if a year or item can’t be found, please send what exists rather than holding the rest.\n\nThis is a non-commercial request. These records will be used to show residents how the budget has changed over time on BayCounty.me, an independent public-records site for Bay County. If fulfilling it will cost more than $25, please send an estimate before starting.\n\nThank you,\nJeremy McSpadden\nBayCounty.me",
    "gaps": [
     {
      "fiscal_year": 2015,
-     "need": "adopted budget by fund (nothing on record)"
+     "need": "line-item budget by fund, department and account (nothing on record)"
     },
     {
      "fiscal_year": 2016,
-     "need": "adopted budget by fund (nothing on record)"
+     "need": "line-item budget by fund, department and account (nothing on record)"
     },
     {
      "fiscal_year": 2017,
-     "need": "adopted budget by fund (nothing on record)"
+     "need": "line-item budget by fund, department and account (nothing on record)"
     },
     {
      "fiscal_year": 2018,
-     "need": "adopted budget by fund (nothing on record)"
+     "need": "line-item budget by fund, department and account (nothing on record)"
     },
     {
      "fiscal_year": 2019,
-     "need": "adopted budget by fund (nothing on record)"
+     "need": "line-item budget by fund, department and account (nothing on record)"
     },
     {
      "fiscal_year": 2020,
-     "need": "adopted budget by fund (nothing on record)"
+     "need": "line-item budget by fund, department and account (nothing on record)"
     },
     {
      "fiscal_year": 2021,
-     "need": "adopted budget by fund"
+     "need": "line-item budget by fund, department and account (total only)"
     },
     {
      "fiscal_year": 2022,
-     "need": "adopted budget by fund"
+     "need": "line-item budget by fund, department and account (total only)"
     },
     {
      "fiscal_year": 2023,
-     "need": "adopted budget by fund"
+     "need": "line-item budget by fund, department and account (total only)"
     },
     {
      "fiscal_year": 2024,
-     "need": "adopted budget by fund"
+     "need": "line-item budget by fund, department and account (total only)"
     },
     {
      "fiscal_year": 2025,
-     "need": "adopted budget by fund"
+     "need": "line-item budget by fund, department and account (total only)"
     }
    ],
    "notes": "No published email for the City Clerk (pcbfl.gov blocks automated reads). Add the clerk’s address before sending."
@@ -164,28 +188,28 @@
    "recipient_name": "City Clerk",
    "recipient_email": "cityhall@cityoflynnhaven.com",
    "contact_url": "https://www.cityoflynnhaven.com/",
-   "subject": "Public records request: adopted budgets, FY2015-FY2019",
-   "body": "Under Chapter 119, Florida Statutes, I’m requesting copies of the adopted (final) budget for each of these fiscal years, showing total appropriations by fund and General Fund appropriations by department. The budget book, the budget ordinance or resolution with its exhibits, or the summary presented at the final September hearing would each work:\n\n- FY2015 (Oct 1, 2014 to Sep 30, 2015)\n- FY2016 (Oct 1, 2015 to Sep 30, 2016)\n- FY2017 (Oct 1, 2016 to Sep 30, 2017)\n- FY2018 (Oct 1, 2017 to Sep 30, 2018)\n- FY2019 (Oct 1, 2018 to Sep 30, 2019)\n\nElectronic copies (PDF or spreadsheet) by email are preferred. If any of these are already posted online, a link is all I need. If a year can’t be found, please say so and I’ll take what exists.\n\nThis is a non-commercial request. These records will be used to show residents how the budget has changed over time on BayCounty.me, an independent public-records site for Bay County. If fulfilling it will cost more than $25, please send an estimate before starting.\n\nThank you,\nJeremy McSpadden\nBayCounty.me",
+   "subject": "Public records request: line-item budgets by fund and department, FY2015-FY2019",
+   "body": "Under Chapter 119, Florida Statutes, I’m requesting the complete adopted budget, in as much detail as your records hold, for each of these fiscal years:\n\n- FY2015 (Oct 1, 2014 to Sep 30, 2015)\n- FY2016 (Oct 1, 2015 to Sep 30, 2016)\n- FY2017 (Oct 1, 2016 to Sep 30, 2017)\n- FY2018 (Oct 1, 2017 to Sep 30, 2018)\n- FY2019 (Oct 1, 2018 to Sep 30, 2019)\n\nFor each year, please include:\n\n1. Appropriations (expenditures) for every fund, broken down by department and division (cost center) and by account or object code (personnel services, operating expenses, capital outlay, debt service, grants and aids, transfers, reserves), with the line-item amounts.\n2. Revenues for every fund by source and account (taxes, fees, intergovernmental, grants, charges for services, transfers in, fund balance carried forward).\n3. Authorized positions (FTEs) by department, if the budget lists them.\n4. The adopted capital improvement program or capital budget for that year.\n5. The budget ordinance or resolution that adopted it, with its exhibits, and, if available, the final amended budget at year end.\n\nA line-item report or export from your financial system (Excel or CSV) is ideal. The full budget book in PDF works too. If any of these are already posted online, a link is all I need, and if a year or item can’t be found, please send what exists rather than holding the rest.\n\nThis is a non-commercial request. These records will be used to show residents how the budget has changed over time on BayCounty.me, an independent public-records site for Bay County. If fulfilling it will cost more than $25, please send an estimate before starting.\n\nThank you,\nJeremy McSpadden\nBayCounty.me",
    "gaps": [
     {
      "fiscal_year": 2015,
-     "need": "adopted budget by fund (nothing on record)"
+     "need": "line-item budget by fund, department and account (nothing on record)"
     },
     {
      "fiscal_year": 2016,
-     "need": "adopted budget by fund (nothing on record)"
+     "need": "line-item budget by fund, department and account (nothing on record)"
     },
     {
      "fiscal_year": 2017,
-     "need": "adopted budget by fund (nothing on record)"
+     "need": "line-item budget by fund, department and account (nothing on record)"
     },
     {
      "fiscal_year": 2018,
-     "need": "adopted budget by fund (nothing on record)"
+     "need": "line-item budget by fund, department and account (nothing on record)"
     },
     {
      "fiscal_year": 2019,
-     "need": "adopted budget by fund (nothing on record)"
+     "need": "line-item budget by fund, department and account (nothing on record)"
     }
    ],
    "notes": null
@@ -197,52 +221,56 @@
    "recipient_name": "Ashley Robyck, City Clerk",
    "recipient_email": "arobyck@cityofcallaway.com",
    "contact_url": "https://www.cityofcallaway.com/directory.aspx",
-   "subject": "Public records request: adopted budgets, FY2015-FY2025",
-   "body": "Under Chapter 119, Florida Statutes, I’m requesting copies of the adopted (final) budget for each of these fiscal years, showing total appropriations by fund and General Fund appropriations by department. The budget book, the budget ordinance or resolution with its exhibits, or the summary presented at the final September hearing would each work:\n\n- FY2015 (Oct 1, 2014 to Sep 30, 2015)\n- FY2016 (Oct 1, 2015 to Sep 30, 2016)\n- FY2017 (Oct 1, 2016 to Sep 30, 2017)\n- FY2018 (Oct 1, 2017 to Sep 30, 2018)\n- FY2019 (Oct 1, 2018 to Sep 30, 2019)\n- FY2020 (Oct 1, 2019 to Sep 30, 2020)\n- FY2021 (Oct 1, 2020 to Sep 30, 2021)\n- FY2022 (Oct 1, 2021 to Sep 30, 2022)\n- FY2023 (Oct 1, 2022 to Sep 30, 2023)\n- FY2024 (Oct 1, 2023 to Sep 30, 2024)\n- FY2025 (Oct 1, 2024 to Sep 30, 2025)\n\nElectronic copies (PDF or spreadsheet) by email are preferred. If any of these are already posted online, a link is all I need. If a year can’t be found, please say so and I’ll take what exists.\n\nThis is a non-commercial request. These records will be used to show residents how the budget has changed over time on BayCounty.me, an independent public-records site for Bay County. If fulfilling it will cost more than $25, please send an estimate before starting.\n\nThank you,\nJeremy McSpadden\nBayCounty.me",
+   "subject": "Public records request: line-item budgets by fund and department, FY2015-FY2025 and FY2027",
+   "body": "Under Chapter 119, Florida Statutes, I’m requesting the complete adopted budget, in as much detail as your records hold, for each of these fiscal years:\n\n- FY2015 (Oct 1, 2014 to Sep 30, 2015)\n- FY2016 (Oct 1, 2015 to Sep 30, 2016)\n- FY2017 (Oct 1, 2016 to Sep 30, 2017)\n- FY2018 (Oct 1, 2017 to Sep 30, 2018)\n- FY2019 (Oct 1, 2018 to Sep 30, 2019)\n- FY2020 (Oct 1, 2019 to Sep 30, 2020)\n- FY2021 (Oct 1, 2020 to Sep 30, 2021)\n- FY2022 (Oct 1, 2021 to Sep 30, 2022)\n- FY2023 (Oct 1, 2022 to Sep 30, 2023)\n- FY2024 (Oct 1, 2023 to Sep 30, 2024)\n- FY2025 (Oct 1, 2024 to Sep 30, 2025)\n- FY2027 (Oct 1, 2026 to Sep 30, 2027)\n\nFor each year, please include:\n\n1. Appropriations (expenditures) for every fund, broken down by department and division (cost center) and by account or object code (personnel services, operating expenses, capital outlay, debt service, grants and aids, transfers, reserves), with the line-item amounts.\n2. Revenues for every fund by source and account (taxes, fees, intergovernmental, grants, charges for services, transfers in, fund balance carried forward).\n3. Authorized positions (FTEs) by department, if the budget lists them.\n4. The adopted capital improvement program or capital budget for that year.\n5. The budget ordinance or resolution that adopted it, with its exhibits, and, if available, the final amended budget at year end.\n\nA line-item report or export from your financial system (Excel or CSV) is ideal. The full budget book in PDF works too. If any of these are already posted online, a link is all I need, and if a year or item can’t be found, please send what exists rather than holding the rest.\n\nThis is a non-commercial request. These records will be used to show residents how the budget has changed over time on BayCounty.me, an independent public-records site for Bay County. If fulfilling it will cost more than $25, please send an estimate before starting.\n\nThank you,\nJeremy McSpadden\nBayCounty.me",
    "gaps": [
     {
      "fiscal_year": 2015,
-     "need": "adopted budget by fund (nothing on record)"
+     "need": "line-item budget by fund, department and account (nothing on record)"
     },
     {
      "fiscal_year": 2016,
-     "need": "adopted budget by fund (nothing on record)"
+     "need": "line-item budget by fund, department and account (nothing on record)"
     },
     {
      "fiscal_year": 2017,
-     "need": "adopted budget by fund (nothing on record)"
+     "need": "line-item budget by fund, department and account (nothing on record)"
     },
     {
      "fiscal_year": 2018,
-     "need": "adopted budget by fund (nothing on record)"
+     "need": "line-item budget by fund, department and account (nothing on record)"
     },
     {
      "fiscal_year": 2019,
-     "need": "adopted budget by fund (nothing on record)"
+     "need": "line-item budget by fund, department and account (nothing on record)"
     },
     {
      "fiscal_year": 2020,
-     "need": "adopted budget by fund (nothing on record)"
+     "need": "line-item budget by fund, department and account (nothing on record)"
     },
     {
      "fiscal_year": 2021,
-     "need": "adopted budget by fund"
+     "need": "line-item budget by fund, department and account (total only)"
     },
     {
      "fiscal_year": 2022,
-     "need": "adopted budget by fund"
+     "need": "line-item budget by fund, department and account (total only)"
     },
     {
      "fiscal_year": 2023,
-     "need": "adopted budget by fund"
+     "need": "line-item budget by fund, department and account (total only)"
     },
     {
      "fiscal_year": 2024,
-     "need": "adopted budget by fund"
+     "need": "line-item budget by fund, department and account (total only)"
     },
     {
      "fiscal_year": 2025,
-     "need": "adopted budget by fund"
+     "need": "line-item budget by fund, department and account (total only)"
+    },
+    {
+     "fiscal_year": 2027,
+     "need": "line-item budget by fund, department and account (fund totals only)"
     }
    ],
    "notes": null
@@ -254,52 +282,52 @@
    "recipient_name": "Teresa Cox, City Clerk",
    "recipient_email": "",
    "contact_url": "https://www.springfieldfl.net/email-contact/node/3842/field_email",
-   "subject": "Public records request: adopted budgets, FY2015-FY2025",
-   "body": "Under Chapter 119, Florida Statutes, I’m requesting copies of the adopted (final) budget for each of these fiscal years, showing total appropriations by fund and General Fund appropriations by department. The budget book, the budget ordinance or resolution with its exhibits, or the summary presented at the final September hearing would each work:\n\n- FY2015 (Oct 1, 2014 to Sep 30, 2015)\n- FY2016 (Oct 1, 2015 to Sep 30, 2016)\n- FY2017 (Oct 1, 2016 to Sep 30, 2017)\n- FY2018 (Oct 1, 2017 to Sep 30, 2018)\n- FY2019 (Oct 1, 2018 to Sep 30, 2019)\n- FY2020 (Oct 1, 2019 to Sep 30, 2020)\n- FY2021 (Oct 1, 2020 to Sep 30, 2021)\n- FY2022 (Oct 1, 2021 to Sep 30, 2022)\n- FY2023 (Oct 1, 2022 to Sep 30, 2023)\n- FY2024 (Oct 1, 2023 to Sep 30, 2024)\n- FY2025 (Oct 1, 2024 to Sep 30, 2025)\n\nElectronic copies (PDF or spreadsheet) by email are preferred. If any of these are already posted online, a link is all I need. If a year can’t be found, please say so and I’ll take what exists.\n\nThis is a non-commercial request. These records will be used to show residents how the budget has changed over time on BayCounty.me, an independent public-records site for Bay County. If fulfilling it will cost more than $25, please send an estimate before starting.\n\nThank you,\nJeremy McSpadden\nBayCounty.me",
+   "subject": "Public records request: line-item budgets by fund and department, FY2015-FY2025",
+   "body": "Under Chapter 119, Florida Statutes, I’m requesting the complete adopted budget, in as much detail as your records hold, for each of these fiscal years:\n\n- FY2015 (Oct 1, 2014 to Sep 30, 2015)\n- FY2016 (Oct 1, 2015 to Sep 30, 2016)\n- FY2017 (Oct 1, 2016 to Sep 30, 2017)\n- FY2018 (Oct 1, 2017 to Sep 30, 2018)\n- FY2019 (Oct 1, 2018 to Sep 30, 2019)\n- FY2020 (Oct 1, 2019 to Sep 30, 2020)\n- FY2021 (Oct 1, 2020 to Sep 30, 2021)\n- FY2022 (Oct 1, 2021 to Sep 30, 2022)\n- FY2023 (Oct 1, 2022 to Sep 30, 2023)\n- FY2024 (Oct 1, 2023 to Sep 30, 2024)\n- FY2025 (Oct 1, 2024 to Sep 30, 2025)\n\nFor each year, please include:\n\n1. Appropriations (expenditures) for every fund, broken down by department and division (cost center) and by account or object code (personnel services, operating expenses, capital outlay, debt service, grants and aids, transfers, reserves), with the line-item amounts.\n2. Revenues for every fund by source and account (taxes, fees, intergovernmental, grants, charges for services, transfers in, fund balance carried forward).\n3. Authorized positions (FTEs) by department, if the budget lists them.\n4. The adopted capital improvement program or capital budget for that year.\n5. The budget ordinance or resolution that adopted it, with its exhibits, and, if available, the final amended budget at year end.\n\nA line-item report or export from your financial system (Excel or CSV) is ideal. The full budget book in PDF works too. If any of these are already posted online, a link is all I need, and if a year or item can’t be found, please send what exists rather than holding the rest.\n\nThis is a non-commercial request. These records will be used to show residents how the budget has changed over time on BayCounty.me, an independent public-records site for Bay County. If fulfilling it will cost more than $25, please send an estimate before starting.\n\nThank you,\nJeremy McSpadden\nBayCounty.me",
    "gaps": [
     {
      "fiscal_year": 2015,
-     "need": "adopted budget by fund (nothing on record)"
+     "need": "line-item budget by fund, department and account (nothing on record)"
     },
     {
      "fiscal_year": 2016,
-     "need": "adopted budget by fund (nothing on record)"
+     "need": "line-item budget by fund, department and account (nothing on record)"
     },
     {
      "fiscal_year": 2017,
-     "need": "adopted budget by fund (nothing on record)"
+     "need": "line-item budget by fund, department and account (nothing on record)"
     },
     {
      "fiscal_year": 2018,
-     "need": "adopted budget by fund (nothing on record)"
+     "need": "line-item budget by fund, department and account (nothing on record)"
     },
     {
      "fiscal_year": 2019,
-     "need": "adopted budget by fund (nothing on record)"
+     "need": "line-item budget by fund, department and account (nothing on record)"
     },
     {
      "fiscal_year": 2020,
-     "need": "adopted budget by fund (nothing on record)"
+     "need": "line-item budget by fund, department and account (nothing on record)"
     },
     {
      "fiscal_year": 2021,
-     "need": "adopted budget by fund"
+     "need": "line-item budget by fund, department and account (total only)"
     },
     {
      "fiscal_year": 2022,
-     "need": "adopted budget by fund"
+     "need": "line-item budget by fund, department and account (total only)"
     },
     {
      "fiscal_year": 2023,
-     "need": "adopted budget by fund"
+     "need": "line-item budget by fund, department and account (total only)"
     },
     {
      "fiscal_year": 2024,
-     "need": "adopted budget by fund"
+     "need": "line-item budget by fund, department and account (total only)"
     },
     {
      "fiscal_year": 2025,
-     "need": "adopted budget by fund"
+     "need": "line-item budget by fund, department and account (total only)"
     }
    ],
    "notes": "Springfield publishes only a contact form for the clerk. Add an address, or paste this text into the form and mark the request sent."
@@ -311,56 +339,56 @@
    "recipient_name": "Rachelle Stanley, City Clerk",
    "recipient_email": "clerk@cityofparker.com",
    "contact_url": "https://cityofparker.com/",
-   "subject": "Public records request: adopted budgets, FY2015-FY2025 and FY2027",
-   "body": "Under Chapter 119, Florida Statutes, I’m requesting copies of the adopted (final) budget for each of these fiscal years, showing total appropriations by fund and General Fund appropriations by department. The budget book, the budget ordinance or resolution with its exhibits, or the summary presented at the final September hearing would each work:\n\n- FY2015 (Oct 1, 2014 to Sep 30, 2015)\n- FY2016 (Oct 1, 2015 to Sep 30, 2016)\n- FY2017 (Oct 1, 2016 to Sep 30, 2017)\n- FY2018 (Oct 1, 2017 to Sep 30, 2018)\n- FY2019 (Oct 1, 2018 to Sep 30, 2019)\n- FY2020 (Oct 1, 2019 to Sep 30, 2020)\n- FY2021 (Oct 1, 2020 to Sep 30, 2021)\n- FY2022 (Oct 1, 2021 to Sep 30, 2022)\n- FY2023 (Oct 1, 2022 to Sep 30, 2023)\n- FY2024 (Oct 1, 2023 to Sep 30, 2024)\n- FY2025 (Oct 1, 2024 to Sep 30, 2025)\n- FY2027 (Oct 1, 2026 to Sep 30, 2027)\n\nElectronic copies (PDF or spreadsheet) by email are preferred. If any of these are already posted online, a link is all I need. If a year can’t be found, please say so and I’ll take what exists.\n\nThis is a non-commercial request. These records will be used to show residents how the budget has changed over time on BayCounty.me, an independent public-records site for Bay County. If fulfilling it will cost more than $25, please send an estimate before starting.\n\nThank you,\nJeremy McSpadden\nBayCounty.me",
+   "subject": "Public records request: line-item budgets by fund and department, FY2015-FY2025 and FY2027",
+   "body": "Under Chapter 119, Florida Statutes, I’m requesting the complete adopted budget, in as much detail as your records hold, for each of these fiscal years:\n\n- FY2015 (Oct 1, 2014 to Sep 30, 2015)\n- FY2016 (Oct 1, 2015 to Sep 30, 2016)\n- FY2017 (Oct 1, 2016 to Sep 30, 2017)\n- FY2018 (Oct 1, 2017 to Sep 30, 2018)\n- FY2019 (Oct 1, 2018 to Sep 30, 2019)\n- FY2020 (Oct 1, 2019 to Sep 30, 2020)\n- FY2021 (Oct 1, 2020 to Sep 30, 2021)\n- FY2022 (Oct 1, 2021 to Sep 30, 2022)\n- FY2023 (Oct 1, 2022 to Sep 30, 2023)\n- FY2024 (Oct 1, 2023 to Sep 30, 2024)\n- FY2025 (Oct 1, 2024 to Sep 30, 2025)\n- FY2027 (Oct 1, 2026 to Sep 30, 2027)\n\nFor each year, please include:\n\n1. Appropriations (expenditures) for every fund, broken down by department and division (cost center) and by account or object code (personnel services, operating expenses, capital outlay, debt service, grants and aids, transfers, reserves), with the line-item amounts.\n2. Revenues for every fund by source and account (taxes, fees, intergovernmental, grants, charges for services, transfers in, fund balance carried forward).\n3. Authorized positions (FTEs) by department, if the budget lists them.\n4. The adopted capital improvement program or capital budget for that year.\n5. The budget ordinance or resolution that adopted it, with its exhibits, and, if available, the final amended budget at year end.\n\nA line-item report or export from your financial system (Excel or CSV) is ideal. The full budget book in PDF works too. If any of these are already posted online, a link is all I need, and if a year or item can’t be found, please send what exists rather than holding the rest.\n\nThis is a non-commercial request. These records will be used to show residents how the budget has changed over time on BayCounty.me, an independent public-records site for Bay County. If fulfilling it will cost more than $25, please send an estimate before starting.\n\nThank you,\nJeremy McSpadden\nBayCounty.me",
    "gaps": [
     {
      "fiscal_year": 2015,
-     "need": "adopted budget by fund"
+     "need": "line-item budget by fund, department and account (total only)"
     },
     {
      "fiscal_year": 2016,
-     "need": "adopted budget by fund"
+     "need": "line-item budget by fund, department and account (total only)"
     },
     {
      "fiscal_year": 2017,
-     "need": "adopted budget by fund"
+     "need": "line-item budget by fund, department and account (total only)"
     },
     {
      "fiscal_year": 2018,
-     "need": "adopted budget by fund"
+     "need": "line-item budget by fund, department and account (total only)"
     },
     {
      "fiscal_year": 2019,
-     "need": "adopted budget by fund"
+     "need": "line-item budget by fund, department and account (total only)"
     },
     {
      "fiscal_year": 2020,
-     "need": "adopted budget by fund (nothing on record)"
+     "need": "line-item budget by fund, department and account (nothing on record)"
     },
     {
      "fiscal_year": 2021,
-     "need": "adopted budget by fund"
+     "need": "line-item budget by fund, department and account (total only)"
     },
     {
      "fiscal_year": 2022,
-     "need": "adopted budget by fund"
+     "need": "line-item budget by fund, department and account (total only)"
     },
     {
      "fiscal_year": 2023,
-     "need": "adopted budget by fund"
+     "need": "line-item budget by fund, department and account (total only)"
     },
     {
      "fiscal_year": 2024,
-     "need": "adopted budget by fund"
+     "need": "line-item budget by fund, department and account (total only)"
     },
     {
      "fiscal_year": 2025,
-     "need": "adopted budget by fund"
+     "need": "line-item budget by fund, department and account (total only)"
     },
     {
      "fiscal_year": 2027,
-     "need": "adopted budget by fund"
+     "need": "line-item budget by fund, department and account (total only)"
     }
    ],
    "notes": null
@@ -372,56 +400,56 @@
    "recipient_name": "Tammy Brunson, City Clerk",
    "recipient_email": "t.brunson@mexicobeachfl.gov",
    "contact_url": "https://www.mexicobeachfl.gov/",
-   "subject": "Public records request: adopted budgets, FY2015-FY2025 and FY2027",
-   "body": "Under Chapter 119, Florida Statutes, I’m requesting copies of the adopted (final) budget for each of these fiscal years, showing total appropriations by fund and General Fund appropriations by department. The budget book, the budget ordinance or resolution with its exhibits, or the summary presented at the final September hearing would each work:\n\n- FY2015 (Oct 1, 2014 to Sep 30, 2015)\n- FY2016 (Oct 1, 2015 to Sep 30, 2016)\n- FY2017 (Oct 1, 2016 to Sep 30, 2017)\n- FY2018 (Oct 1, 2017 to Sep 30, 2018)\n- FY2019 (Oct 1, 2018 to Sep 30, 2019)\n- FY2020 (Oct 1, 2019 to Sep 30, 2020)\n- FY2021 (Oct 1, 2020 to Sep 30, 2021)\n- FY2022 (Oct 1, 2021 to Sep 30, 2022)\n- FY2023 (Oct 1, 2022 to Sep 30, 2023)\n- FY2024 (Oct 1, 2023 to Sep 30, 2024)\n- FY2025 (Oct 1, 2024 to Sep 30, 2025)\n- FY2027 (Oct 1, 2026 to Sep 30, 2027)\n\nElectronic copies (PDF or spreadsheet) by email are preferred. If any of these are already posted online, a link is all I need. If a year can’t be found, please say so and I’ll take what exists.\n\nThis is a non-commercial request. These records will be used to show residents how the budget has changed over time on BayCounty.me, an independent public-records site for Bay County. If fulfilling it will cost more than $25, please send an estimate before starting.\n\nThank you,\nJeremy McSpadden\nBayCounty.me",
+   "subject": "Public records request: line-item budgets by fund and department, FY2015-FY2025 and FY2027",
+   "body": "Under Chapter 119, Florida Statutes, I’m requesting the complete adopted budget, in as much detail as your records hold, for each of these fiscal years:\n\n- FY2015 (Oct 1, 2014 to Sep 30, 2015)\n- FY2016 (Oct 1, 2015 to Sep 30, 2016)\n- FY2017 (Oct 1, 2016 to Sep 30, 2017)\n- FY2018 (Oct 1, 2017 to Sep 30, 2018)\n- FY2019 (Oct 1, 2018 to Sep 30, 2019)\n- FY2020 (Oct 1, 2019 to Sep 30, 2020)\n- FY2021 (Oct 1, 2020 to Sep 30, 2021)\n- FY2022 (Oct 1, 2021 to Sep 30, 2022)\n- FY2023 (Oct 1, 2022 to Sep 30, 2023)\n- FY2024 (Oct 1, 2023 to Sep 30, 2024)\n- FY2025 (Oct 1, 2024 to Sep 30, 2025)\n- FY2027 (Oct 1, 2026 to Sep 30, 2027)\n\nFor each year, please include:\n\n1. Appropriations (expenditures) for every fund, broken down by department and division (cost center) and by account or object code (personnel services, operating expenses, capital outlay, debt service, grants and aids, transfers, reserves), with the line-item amounts.\n2. Revenues for every fund by source and account (taxes, fees, intergovernmental, grants, charges for services, transfers in, fund balance carried forward).\n3. Authorized positions (FTEs) by department, if the budget lists them.\n4. The adopted capital improvement program or capital budget for that year.\n5. The budget ordinance or resolution that adopted it, with its exhibits, and, if available, the final amended budget at year end.\n\nA line-item report or export from your financial system (Excel or CSV) is ideal. The full budget book in PDF works too. If any of these are already posted online, a link is all I need, and if a year or item can’t be found, please send what exists rather than holding the rest.\n\nThis is a non-commercial request. These records will be used to show residents how the budget has changed over time on BayCounty.me, an independent public-records site for Bay County. If fulfilling it will cost more than $25, please send an estimate before starting.\n\nThank you,\nJeremy McSpadden\nBayCounty.me",
    "gaps": [
     {
      "fiscal_year": 2015,
-     "need": "adopted budget by fund (nothing on record)"
+     "need": "line-item budget by fund, department and account (nothing on record)"
     },
     {
      "fiscal_year": 2016,
-     "need": "adopted budget by fund (nothing on record)"
+     "need": "line-item budget by fund, department and account (nothing on record)"
     },
     {
      "fiscal_year": 2017,
-     "need": "adopted budget by fund (nothing on record)"
+     "need": "line-item budget by fund, department and account (nothing on record)"
     },
     {
      "fiscal_year": 2018,
-     "need": "adopted budget by fund (nothing on record)"
+     "need": "line-item budget by fund, department and account (nothing on record)"
     },
     {
      "fiscal_year": 2019,
-     "need": "adopted budget by fund (nothing on record)"
+     "need": "line-item budget by fund, department and account (nothing on record)"
     },
     {
      "fiscal_year": 2020,
-     "need": "adopted budget by fund (nothing on record)"
+     "need": "line-item budget by fund, department and account (nothing on record)"
     },
     {
      "fiscal_year": 2021,
-     "need": "adopted budget by fund"
+     "need": "line-item budget by fund, department and account (total only)"
     },
     {
      "fiscal_year": 2022,
-     "need": "adopted budget by fund"
+     "need": "line-item budget by fund, department and account (total only)"
     },
     {
      "fiscal_year": 2023,
-     "need": "adopted budget by fund"
+     "need": "line-item budget by fund, department and account (total only)"
     },
     {
      "fiscal_year": 2024,
-     "need": "adopted budget by fund"
+     "need": "line-item budget by fund, department and account (total only)"
     },
     {
      "fiscal_year": 2025,
-     "need": "adopted budget by fund"
+     "need": "line-item budget by fund, department and account (total only)"
     },
     {
      "fiscal_year": 2027,
-     "need": "adopted budget by fund (nothing on record)"
+     "need": "line-item budget by fund, department and account (nothing on record)"
     }
    ],
    "notes": null
@@ -433,56 +461,56 @@
    "recipient_name": "Office of Communications (public records)",
    "recipient_email": "BDSComm@bay.k12.fl.us",
    "contact_url": "https://bay.k12.fl.us/uploads/PUBLIC%20RECORD%20REQUESTS.htm",
-   "subject": "Public records request: adopted budgets, FY2015-FY2025 and FY2027",
-   "body": "Under Chapter 119, Florida Statutes, I’m requesting copies of the final adopted district budget for each of these fiscal years, showing appropriations by fund and, for the General Fund, by function or department (the budget summary adopted at the September final hearing is fine):\n\n- FY2015 (2014-15 school year)\n- FY2016 (2015-16 school year)\n- FY2017 (2016-17 school year)\n- FY2018 (2017-18 school year)\n- FY2019 (2018-19 school year)\n- FY2020 (2019-20 school year)\n- FY2021 (2020-21 school year)\n- FY2022 (2021-22 school year)\n- FY2023 (2022-23 school year)\n- FY2024 (2023-24 school year)\n- FY2025 (2024-25 school year)\n- FY2027 (2026-27 school year)\n\nElectronic copies (PDF or spreadsheet) by email are preferred. If any of these are already posted online, a link is all I need. If a year can’t be found, please say so and I’ll take what exists.\n\nThis is a non-commercial request. These records will be used to show residents how the budget has changed over time on BayCounty.me, an independent public-records site for Bay County. If fulfilling it will cost more than $25, please send an estimate before starting.\n\nThank you,\nJeremy McSpadden\nBayCounty.me",
+   "subject": "Public records request: line-item budgets by fund and department, FY2015-FY2025 and FY2027",
+   "body": "Under Chapter 119, Florida Statutes, I’m requesting the complete adopted budget, in as much detail as your records hold, for each of these fiscal years:\n\n- FY2015 (2014-15 school year)\n- FY2016 (2015-16 school year)\n- FY2017 (2016-17 school year)\n- FY2018 (2017-18 school year)\n- FY2019 (2018-19 school year)\n- FY2020 (2019-20 school year)\n- FY2021 (2020-21 school year)\n- FY2022 (2021-22 school year)\n- FY2023 (2022-23 school year)\n- FY2024 (2023-24 school year)\n- FY2025 (2024-25 school year)\n- FY2027 (2026-27 school year)\n\nFor each year, please include:\n\n1. Appropriations (expenditures) for every fund, broken down by function, cost center or school/department and by account or object code (personnel services, operating expenses, capital outlay, debt service, grants and aids, transfers, reserves), with the line-item amounts.\n2. Revenues for every fund by source and account (taxes, fees, intergovernmental, grants, charges for services, transfers in, fund balance carried forward).\n3. Authorized positions (FTEs) by department, if the budget lists them.\n4. The adopted capital improvement program or capital budget for that year.\n5. The budget ordinance or resolution that adopted it, with its exhibits, and, if available, the final amended budget at year end.\n\nA line-item report or export from your financial system (Excel or CSV) is ideal. The full budget book in PDF works too. If any of these are already posted online, a link is all I need, and if a year or item can’t be found, please send what exists rather than holding the rest.\n\nThis is a non-commercial request. These records will be used to show residents how the budget has changed over time on BayCounty.me, an independent public-records site for Bay County. If fulfilling it will cost more than $25, please send an estimate before starting.\n\nThank you,\nJeremy McSpadden\nBayCounty.me",
    "gaps": [
     {
      "fiscal_year": 2015,
-     "need": "adopted budget by fund (nothing on record)"
+     "need": "line-item budget by fund, department and account (nothing on record)"
     },
     {
      "fiscal_year": 2016,
-     "need": "adopted budget by fund (nothing on record)"
+     "need": "line-item budget by fund, department and account (nothing on record)"
     },
     {
      "fiscal_year": 2017,
-     "need": "adopted budget by fund (nothing on record)"
+     "need": "line-item budget by fund, department and account (nothing on record)"
     },
     {
      "fiscal_year": 2018,
-     "need": "adopted budget by fund (nothing on record)"
+     "need": "line-item budget by fund, department and account (nothing on record)"
     },
     {
      "fiscal_year": 2019,
-     "need": "adopted budget by fund"
+     "need": "line-item budget by fund, department and account (total only)"
     },
     {
      "fiscal_year": 2020,
-     "need": "adopted budget by fund (nothing on record)"
+     "need": "line-item budget by fund, department and account (nothing on record)"
     },
     {
      "fiscal_year": 2021,
-     "need": "adopted budget by fund"
+     "need": "line-item budget by fund, department and account (total only)"
     },
     {
      "fiscal_year": 2022,
-     "need": "adopted budget by fund"
+     "need": "line-item budget by fund, department and account (total only)"
     },
     {
      "fiscal_year": 2023,
-     "need": "adopted budget by fund (nothing on record)"
+     "need": "line-item budget by fund, department and account (nothing on record)"
     },
     {
      "fiscal_year": 2024,
-     "need": "adopted budget by fund"
+     "need": "line-item budget by fund, department and account (total only)"
     },
     {
      "fiscal_year": 2025,
-     "need": "adopted budget by fund"
+     "need": "line-item budget by fund, department and account (total only)"
     },
     {
      "fiscal_year": 2027,
-     "need": "adopted budget by fund"
+     "need": "line-item budget by fund, department and account (total only)"
     }
    ],
    "notes": "The district asks for a name, mailing address and phone number in each request; add them to the signature before sending."

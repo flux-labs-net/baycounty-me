@@ -1,7 +1,7 @@
 """Draft public records requests for every budget year BayCounty.me is missing, one draft per government.
 
 Reads what the budget-years dataset holds (site/page_datasets.py budget_years) for FY2015 to FY2027 and asks each
-government for the adopted budget of every year where we have no fund-level lines. Writes
+government for the adopted budget of every year where we have no department-level lines. Writes
 data/civic/records_requests.json, which /admin seeds into corr.records_requests as drafts. Nothing is sent from here:
 an admin reviews each draft and presses Send in the "Records requests" tab.
 
@@ -32,7 +32,7 @@ RECIPIENTS = {
 NOTES = {
     'pcb': 'No published email for the City Clerk (pcbfl.gov blocks automated reads). Add the clerk’s address before sending.',
     'sp': 'Springfield publishes only a contact form for the clerk. Add an address, or paste this text into the form and mark the request sent.',
-    'county': 'Optional: the county’s fund totals are complete for every year; this asks only for General Fund department detail.',
+    'county': 'We already have fund totals for every year; this asks for the department and line-item detail behind them.',
     'schools': 'The district asks for a name, mailing address and phone number in each request; add them to the signature before sending.',
 }
 FY = lambda y, school: f'FY{y} ({y - 1}-{str(y)[2:]} school year)' if school else f'FY{y} (Oct 1, {y - 1} to Sep 30, {y})'
@@ -63,11 +63,10 @@ def gaps():
         need = []
         for y in range(FIRST, LAST + 1):
             s = yrs.get(y, set())
-            if g == 'county':
-                if 'department' not in s:
-                    need.append({'fiscal_year': y, 'need': 'General Fund appropriations by department'})
-            elif 'fund' not in s:
-                need.append({'fiscal_year': y, 'need': 'adopted budget by fund' + ('' if s else ' (nothing on record)')})
+            if 'department' in s:
+                continue
+            have_txt = 'nothing on record' if not s else ('fund totals only' if 'fund' in s else 'total only')
+            need.append({'fiscal_year': y, 'need': f'line-item budget by fund, department and account ({have_txt})'})
         out[g] = need
     return out
 
@@ -76,22 +75,20 @@ def body(g, need):
     school = g == 'schools'
     years = [n['fiscal_year'] for n in need]
     lines = '\n'.join(f'- {FY(y, school)}' for y in years)
-    if g == 'county':
-        ask = ('the adopted budget’s General Fund appropriations by department (or division) for each of these fiscal years. '
-               'The “Summary of All Funds” tables are already posted on the county website; what I’m missing is the department-level '
-               'breakdown of the General Fund:')
-    elif school:
-        ask = ('the final adopted district budget for each of these fiscal years, showing appropriations by fund and, for the General '
-               'Fund, by function or department (the budget summary adopted at the September final hearing is fine):')
-    else:
-        ask = ('the adopted (final) budget for each of these fiscal years, showing total appropriations by fund and General Fund '
-               'appropriations by department. The budget book, the budget ordinance or resolution with its exhibits, or the '
-               'summary presented at the final September hearing would each work:')
-    return f'''Under Chapter 119, Florida Statutes, I’m requesting copies of {ask}
+    unit = 'function, cost center or school/department' if school else 'department and division (cost center)'
+    return f'''Under Chapter 119, Florida Statutes, I’m requesting the complete adopted budget, in as much detail as your records hold, for each of these fiscal years:
 
 {lines}
 
-Electronic copies (PDF or spreadsheet) by email are preferred. If any of these are already posted online, a link is all I need. If a year can’t be found, please say so and I’ll take what exists.
+For each year, please include:
+
+1. Appropriations (expenditures) for every fund, broken down by {unit} and by account or object code (personnel services, operating expenses, capital outlay, debt service, grants and aids, transfers, reserves), with the line-item amounts.
+2. Revenues for every fund by source and account (taxes, fees, intergovernmental, grants, charges for services, transfers in, fund balance carried forward).
+3. Authorized positions (FTEs) by department, if the budget lists them.
+4. The adopted capital improvement program or capital budget for that year.
+5. The budget ordinance or resolution that adopted it, with its exhibits, and, if available, the final amended budget at year end.
+
+A line-item report or export from your financial system (Excel or CSV) is ideal. The full budget book in PDF works too. If any of these are already posted online, a link is all I need, and if a year or item can’t be found, please send what exists rather than holding the rest.
 
 This is a non-commercial request. These records will be used to show residents how the budget has changed over time on BayCounty.me, an independent public-records site for Bay County. If fulfilling it will cost more than $25, please send an estimate before starting.
 
@@ -108,7 +105,7 @@ def main():
         if not n:
             continue
         years = [x['fiscal_year'] for x in n]
-        what = 'General Fund department budgets' if g == 'county' else 'adopted budgets'
+        what = 'line-item budgets by fund and department'
         drafts.append({'key': f'budgets-{FIRST}-{g}', 'government': gov, 'government_key': g, 'recipient_name': who, 'recipient_email': email,
                        'contact_url': url, 'subject': f'Public records request: {what}, {spans(years)}', 'body': body(g, n), 'gaps': n,
                        'notes': NOTES.get(g)})
