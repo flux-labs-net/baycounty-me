@@ -4260,7 +4260,7 @@
       "adopted: FY 2023-2024 Final Approved Budget, pages stamped 'Approved 9-26-23' (tables still headed 'FY 2024 Proposed Budget'); grand total of expenditures by fund",
       "adopted: FY 2024-25 Final Approved Budget; grand total of expenditures by fund. The city amended it to $64,870,778 (General Fund $21,193,114) in the mid-year budget approved 4-21-25.",
       "amended budget expenditures as shown in FY26 draft",
-      "approximate per news: 'more than $121.413 million' operating budget, general fund 'almost $55 million'",
+      "approximate per news: 'more than $121.413 million' operating budget. The General Fund is the original budget in the FY2023 ACFR (expenditures $50,823,188 plus transfers out $9,762,870); news had put it at 'almost $55 million'.",
       "approximate, as reported at final approval",
       "final approved Sept 23, 2025 (columns in document are labeled 'FY 2026 Proposed')",
       "final hearing Sept 23, 2026. The county's final-hearing presentation still labels the budget and millage columns 'Tentative'; the minutes for that hearing are not posted yet, so the roll call is not confirmed.",
@@ -4477,7 +4477,7 @@
    "id": "budget-years",
    "title": "Budgets by year, line by line",
    "description": "Every budget line on record for each government and fiscal year, to compare one year with another. basis adopted: the adopted budget's total and General Fund, each fund and each General Fund department. basis actual: audited revenue by source and spending by function from the state's Local Government Financial Reports (in_total is false for transfers and borrowing, which the audited totals leave out). line_key lines the same fund or department up across years; service groups departments into common services. fiscal_year is the year the fiscal year ends (FY2026 = Oct 2025 to Sep 2026; schools Jul to Jun).",
-   "rows": 2526,
+   "rows": 2529,
    "columns": [
     {
      "name": "gov_id",
