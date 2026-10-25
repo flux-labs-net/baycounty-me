@@ -36,7 +36,7 @@ from site_menu import menu, links as menu_links, ELECTIONS_READY
 MENU = menu()
 
 TOKENS = open(os.path.join(ROOT, 'tokens.css')).read()
-SITE_CSS = open(os.path.join(ROOT, 'site.css')).read()
+SITE_CSS = open(os.path.join(ROOT, 'site.css')).read() + '\n' + open(os.path.join(ROOT, 'ui.css')).read()  # ui.css: shared page pieces
 
 
 def hreflang(path):
@@ -174,7 +174,7 @@ MENU_JS = '''(() => {
 
 
 # Shared helpers (window.BCM): URL state for data-param controls (?gov= etc.) and announce. Tables use tables.js.
-DEEPLINK_JS = open(os.path.join(ROOT, 'site_helpers.js')).read()
+DEEPLINK_JS = open(os.path.join(ROOT, 'site_helpers.js')).read() + open(os.path.join(ROOT, 'ui.js')).read()
 SEARCH_JS = open(os.path.join(ROOT, 'search.js')).read()  # header search dialog + the engine the /search page uses
 
 
@@ -288,7 +288,8 @@ CRA_EXPLAINER = f'''
 
 
 def layout(title, desc, path, body, extra_head=''):
-    out = _layout(title, desc, path, body, extra_head)
+    from ui import enhance
+    out = _layout(title, desc, path, enhance(body, path), extra_head)
     return localize_chrome(out) if path.startswith('/es') else out
 
 

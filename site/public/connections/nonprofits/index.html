@@ -121,10 +121,10 @@
   body.np-lock{overflow:hidden}
 }
 </style>
-<div class="page tax">
-  <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Connections · Nonprofits</span><h1>Bay County nonprofits</h1>
+<div class="page tax ui">
+  <header class="tx-top ui-hero"><div class="ui-id"><span class="ui-badge t-blue"><span class="ico i-heart" aria-hidden="true"></span></span><div class="ui-hd"><div class="tx-brand"><span class="eyebrow ui-kick k-blue"><span class="ico i-users" aria-hidden="true"></span>People</span><h1>Bay County nonprofits</h1>
     <p class="lede" id="npLede">Every local nonprofit, starting with the ones tied to public money and campaigns. Search for any one, or tap a card.</p></div>
-    <div class="stamp"><a class="pill" href="/connections">Network</a><a class="pill" href="/connections/shared-owners">Shared owners</a></div></header>
+    <div class="ui-tags"><a class="ui-tag" href="/connections"><span class="ico i-network" aria-hidden="true"></span>Network</a><a class="ui-tag" href="/connections/shared-owners"><span class="ico i-network" aria-hidden="true"></span>Shared owners</a></div></div></div></header>
   <div class="np-seg" role="group" aria-label="View"><button type="button" id="npVOrg" aria-pressed="true">Nonprofits</button><button type="button" id="npVPpl" aria-pressed="false">People</button></div>
   <div class="np-cards" id="npCards" aria-live="polite"></div>
   <div class="np-lay"><div>
@@ -139,7 +139,7 @@
     <p class="np-more"><button type="button" class="pill" id="npMore" hidden>Show more</button></p>
   </div>
   <aside class="np-panel" id="npPanel" aria-label="Details"><p class="muted small">Pick a nonprofit or a person to see its connections, board, money and filings.</p></aside></div>
-  <section class="tx-sec method"><div class="sec-hd"><h2>Sources and method</h2></div><ul class="plain">
+  <section class="tx-sec method"><div class="sec-hd"><span class="ui-ti t-teal"><span class="ico i-info" aria-hidden="true"></span></span><h2>Sources and method</h2></div><ul class="plain">
     <li><b>Which organizations.</b> Every organization the IRS recognizes as tax-exempt with an address in Bay County (the IRS Exempt Organizations Business Master File), plus active Florida nonprofit corporations (Sunbiz) whose principal address is in the county. IRS and state records are joined by the EIN the corporation gives the state, then by exact name.</li>
     <li><b>Money.</b> Revenue, expenses and assets come from the latest 990, 990-EZ or 990-PF the organization e-filed (2019 on). Small organizations file a 990-N postcard with no figures, and churches don't have to file. Government payment records are the site's contracts, check registers, tourism agency payments and CRA ledger, matched to the nonprofit by name. Grants are from Schedule I of local nonprofits' returns.</li>
     <li><b>Florida charity registrations.</b> Charities that ask Floridians for donations must register each year with the Florida Department of Agriculture and Consumer Services. The registrations with a Bay County address come from its <a href="https://csapp.fdacs.gov/CSPublicApp/CheckACharity/CheckACharity.aspx" target="_blank" rel="noopener">Check-A-Charity</a> database: status, expiration, the revenue and the program, fundraising and management spending the charity reported, and its professional fundraising firms. Officers, directors and the tax ID (FEIN) come from the registration application each charity uploads; people the application marks as removed or exempt from public records are left out, and scanned applications without readable text are not read yet. Registrations are joined to the IRS and state records by FEIN, then by exact name; those that match neither are listed on their own. Churches and some small charities are exempt from registering, so a missing registration is not by itself a problem.</li>

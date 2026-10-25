@@ -64,27 +64,27 @@
   </div>
 </div>
 <main id="main">
-<div class="page tax sav">
-  <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Public Money · Accountability</span><h1>Savings finder</h1>
-    <p class="lede">Places Bay County's local governments could spend less, found in records already on this site: projects that ran over, money budgeted but not spent, services bought separately that could be bought together. Each one shows the records it rests on, an estimate with its assumption, and the question to ask next.</p></div></header>
-  <div class="scope" data-scope role="group" aria-label="Filter this page">
+<div class="page tax ui sav">
+  <header class="tx-top ui-hero"><div class="ui-id"><span class="ui-badge t-salmon"><span class="ico i-piggy" aria-hidden="true"></span></span><div class="ui-hd"><div class="tx-brand"><span class="eyebrow ui-kick k-salmon"><span class="ico i-shield" aria-hidden="true"></span>Watchdog</span><h1>Savings finder</h1>
+    <p class="lede">Places Bay County's local governments could spend less, found in records already on this site: projects that ran over, money budgeted but not spent, services bought separately that could be bought together. Each one shows the records it rests on, an estimate with its assumption, and the question to ask next.</p></div></div></div><div class="ui-pick" data-report="skip"><div class="scope" data-scope role="group" aria-label="Filter this page">
   <label class="sc-f sc-city"><span>Government</span><select id="scCity" data-city aria-label="Government"><option value="">All governments</option><option value="pc">Panama City</option><option value="pcb">Panama City Beach</option><option value="lh">Lynn Haven</option><option value="cw">Callaway</option><option value="sp">Springfield</option></select></label>
   <div class="sc-slot" data-scope-slot></div>
-</div>
+</div></div></header>
+  
   <div class="sav-stats" role="list">
     <div role="listitem"><b id="svM">$197.2M</b><span>spending these touch</span></div>
     <div role="listitem"><b id="svL">$5.8M</b><span>potential savings, low estimate</span></div>
     <div role="listitem"><b id="svH">$13.9M</b><span>potential savings, high estimate</span></div>
     <div role="listitem"><b id="svN">3</b><span>need records before an estimate</span></div>
   </div>
-  <section class="tx-sec" id="list"><div class="sec-hd"><h2>Opportunities</h2><span class="muted" id="svCount" aria-live="polite"></span></div>
+  <section class="tx-sec" id="list"><div class="sec-hd"><span class="ui-ti t-blue"><span class="ico i-chart" aria-hidden="true"></span></span><h2>Opportunities</h2><span class="muted" id="svCount" aria-live="polite"></span></div>
     <p class="small muted">Ranked by the high estimate. Estimates are illustrative: each states its assumption, and some overlap, so treat the totals as a scale, not a promise.</p>
     <div class="sav-filters" id="svF" role="group" aria-label="Filter by kind of saving"></div>
     <div id="svList" class="sav-list"><p class="muted">Loading opportunities…</p></div></section>
-  <section class="tx-sec" id="records"><div class="sec-hd"><h2>Records that would find more</h2></div>
+  <section class="tx-sec" id="records"><div class="sec-hd"><span class="ui-ti t-blue"><span class="ico i-mail" aria-hidden="true"></span></span><h2>Records that would find more</h2></div>
     <p class="small muted">The CRA ledger covers projects and grants, not every payment. These records, asked of each city and the county, would show subscriptions, duplicate payments and price differences.</p>
     <ul class="plain sav-reqs"><li><b>Accounts payable check register or vendor payment history for the last three fiscal years, as a CSV or spreadsheet export</b><br><span class="muted small">Finds duplicate payments, the same vendor at different prices, and charges that grew with no contract change.</span> <a class="pill sm" href="/records-request?d=Accounts payable check register or vendor payment history for the last three fiscal years, as a CSV or spreadsheet export">Request this record</a></li><li><b>A list of software, license, subscription and telecom contracts, with vendor, annual cost and renewal date</b><br><span class="muted small">Finds overlapping subscriptions across departments and between cities.</span> <a class="pill sm" href="/records-request?d=A list of software, license, subscription and telecom contracts, with vendor, annual cost and renewal date">Request this record</a></li><li><b>Year-end CRA fund balances, with the project each balance is committed to</b><br><span class="muted small">Shows how much tax increment is sitting idle.</span> <a class="pill sm" href="/records-request?d=Year-end CRA fund balances, with the project each balance is committed to">Request this record</a></li></ul></section>
-  <section class="tx-sec method" id="how"><div class="sec-hd"><h2>How this was built</h2></div>
+  <section class="tx-sec method" id="how"><div class="sec-hd"><span class="ui-ti t-salmon"><span class="ico i-crane" aria-hidden="true"></span></span><h2>How this was built</h2></div>
     <ul class="plain">
       <li>Every figure comes from records already on the site: project histories on the <a href="/public-money/accountability">Accountability console</a> and rows of the <a href="/public-money/cra-spending">CRA ledger</a>. Each opportunity links the documents behind it.</li>
       <li>An estimate multiplies the spending in play by a low and a high rate. The rate is the stated assumption, not a measured result. Where the records can't support a rate, the opportunity says which records are needed instead.</li>

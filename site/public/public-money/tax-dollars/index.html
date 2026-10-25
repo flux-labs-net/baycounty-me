@@ -67,23 +67,23 @@
   </div>
 </div>
 <main id="main">
-<div class="page tax">
-  <header class="tx-top">
+<div class="page tax ui">
+  <header class="tx-top ui-hero"><div class="ui-id"><span class="ui-badge t-amber"><span class="ico i-receipt" aria-hidden="true"></span></span><div class="ui-hd">
     <div class="tx-brand">
-      <span class="eyebrow">Public Money · Tax Dollars</span>
+      <span class="eyebrow ui-kick k-amber"><span class="ico i-receipt" aria-hidden="true"></span>Taxes</span>
       <h1>How your tax dollars are allocated</h1>
       <p class="lede">Your property tax bill isn't one tax. It's several governments each taking a slice. Here's who gets what from your bill, where each government's other money comes from, and what it pays for.</p>
     </div>
-    <div class="stamp"><button type="button" id="pdf" class="pdf-btn"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 12v2h10v-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Export PDF</button><span>Rates for FY2026 (Oct 2025 to Sept 2026)<br>Data updated Oct 21, 2026</span></div>
-  </header>
-  <div class="scope" data-scope role="group" aria-label="Filter this page">
+    
+  </div></div><div class="ui-pick" data-report="skip"><div class="scope" data-scope role="group" aria-label="Filter this page">
   <label class="sc-f sc-city"><span>Government</span><select id="scCity" data-city aria-label="Government"><option value="">All governments</option><option value="county">Bay County</option><option value="schools">Bay District Schools</option><option value="pc">Panama City</option><option value="pcb">Panama City Beach</option><option value="lh">Lynn Haven</option><option value="cw">Callaway</option><option value="sp">Springfield</option><option value="parker">Parker</option><option value="mb">Mexico Beach</option></select></label>
   <div class="sc-slot" data-scope-slot></div><span class="sc-note muted">Opens that government in "Each government's money" and sets the calculator to its city</span>
-</div>
+</div><div class="stamp ui-stamp"><button type="button" id="pdf" class="pdf-btn"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 12v2h10v-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Export PDF</button><span>Rates for FY2026 (Oct 2025 to Sept 2026)<br>Data updated Oct 21, 2026</span></div></div></header><nav class="ui-tiles" aria-label="On this page" data-report="skip"><a href="#calc-h" data-jump="calc-h"><span class="ui-ti t-amber"><span class="ico i-receipt" aria-hidden="true"></span></span><span><b>Your bill, slice by slice</b><small>Estimate using FY2026 rates</small></span></a><a href="#all-h" data-jump="all-h"><span class="ui-ti t-amber"><span class="ico i-receipt" aria-hidden="true"></span></span><span><b>Where all of Bay County&#x27;s property tax goes</b><small>Total levied in FY2026: $421.9M</small></span></a><a href="#trend-h" data-jump="trend-h"><span class="ui-ti t-amber"><span class="ico i-receipt" aria-hidden="true"></span></span><span><b>Six years of property tax</b><small>Total levied each year, by who receives it</small></span></a><a href="#gov-h" data-jump="gov-h"><span class="ui-ti t-blue"><span class="ico i-city" aria-hidden="true"></span></span><span><b>Each government&#x27;s money</b><small>Where it comes from, and what it pays for</small></span></a></nav><nav class="ui-mini" aria-label="Sections" data-off data-report="skip"><a href="#calc-h"><span class="ico i-receipt" aria-hidden="true"></span>Your bill, slice by…</a><a href="#all-h"><span class="ico i-receipt" aria-hidden="true"></span>Where all of Bay…</a><a href="#trend-h"><span class="ico i-receipt" aria-hidden="true"></span>Six years of property…</a><a href="#gov-h"><span class="ico i-city" aria-hidden="true"></span>Each government&#x27;s…</a></nav>
+  
 
   <section class="explain" aria-labelledby="howbill">
     <div class="ex-txt">
-      <span class="eyebrow">The simple version</span>
+      <span class="ui-ex-hd"><span class="ui-ti t-amber"><span class="ico i-bulb" aria-hidden="true"></span></span><span class="eyebrow">The simple version</span></span>
       <h2 id="howbill">How a property tax bill works</h2>
       <ol class="ex-steps">
         <li><b>Your home gets a value.</b> The Property Appraiser sets it each January. Subtract any <span class="term" data-term="homestead">homestead exemption</span> and you get your <span class="term" data-term="taxable-value">taxable value</span>.</li>
@@ -94,8 +94,7 @@
     </div>
   </section>
 
-  <section class="tx-sec" id="calc" aria-labelledby="calc-h">
-    <div class="sec-hd"><h2 id="calc-h">Your bill, slice by slice</h2><span class="muted">Estimate using FY2026 rates</span></div>
+  <section class="tx-sec" id="calc" aria-labelledby="calc-h"><div class="sec-hd"><span class="ui-ti t-amber"><span class="ico i-receipt" aria-hidden="true"></span></span><h2 id="calc-h">Your bill, slice by slice</h2><span class="muted">Estimate using FY2026 rates</span></div>
     <div class="calc">
       <form class="calc-in" id="calcForm" onsubmit="return false">
         <label class="fld"><span>Where is the property?</span><select id="cDist"></select></label>
@@ -118,16 +117,14 @@
     <p class="note">This covers <span class="term" data-term="ad-valorem">property taxes</span> only. Your actual bill also has <span class="term" data-term="non-ad-valorem">non-ad valorem assessments</span> (flat fees for things like fire service, stormwater or garbage) and may have other exemptions for seniors, veterans or disability. Paying in November takes 4% off.</p>
   </section>
 
-  <section class="tx-sec" aria-labelledby="all-h">
-    <div class="sec-hd"><h2 id="all-h">Where all of Bay County's property tax goes</h2><span class="muted">Total <span class="term" data-term="levy">levied</span> in FY2026: <b>$421.9M</b></span></div>
+  <section class="tx-sec" aria-labelledby="all-h"><div class="sec-hd"><span class="ui-ti t-amber"><span class="ico i-receipt" aria-hidden="true"></span></span><h2 id="all-h">Where all of Bay County's property tax goes</h2><span class="muted">Total <span class="term" data-term="levy">levied</span> in FY2026: <b>$421.9M</b></span></div>
     <div class="hbars" id="allBars"></div>
     <aside class="callout">
       <b>Some of this goes to redevelopment districts.</b> Bay County says about $27 million (16.5%) of the countywide property tax it collects goes to city <span class="term" data-term="cra">Community Redevelopment Agencies</span>, including about $22.2 million a year to Panama City Beach's Front Beach Road CRA. That money is the <span class="term" data-term="tif">tax increment</span> from growth inside those districts. <a href="/public-money/cra-spending">See what the CRAs spend it on →</a> <a class="src" href="https://www.baycountyfl.gov/829/Understanding-Amendment-3" target="_blank" rel="noopener">Source: Bay County</a>
     </aside>
   </section>
 
-  <section class="tx-sec" aria-labelledby="trend-h">
-    <div class="sec-hd"><h2 id="trend-h">Six years of property tax</h2><span class="muted">Total levied each year, by who receives it</span></div>
+  <section class="tx-sec" aria-labelledby="trend-h"><div class="sec-hd"><span class="ui-ti t-amber"><span class="ico i-receipt" aria-hidden="true"></span></span><h2 id="trend-h">Six years of property tax</h2><span class="muted">Total levied each year, by who receives it</span></div>
     <div class="vbars stacked" id="levyTrend"></div>
     <ul class="leg" id="levyLeg"></ul>
     <details class="tbl-toggle"><summary>Show as a table</summary><div class="tablewrap"><table class="tx-table" id="levyTable"></table></div></details>
@@ -136,14 +133,12 @@
     <p class="note">Bay County raised its rate from 4.4362 to 5.4362 mills in FY2024. Parker started a city property tax in FY2024. Panama City Beach has no city property tax. A rate that stays the same can still be a tax increase under Florida law if it's above the <span class="term" data-term="rolled-back">rolled-back rate</span>, because rising values bring in more money.</p>
   </section>
 
-  <section class="tx-sec" id="govs" aria-labelledby="gov-h">
-    <div class="sec-hd"><h2 id="gov-h">Each government's money</h2><span class="muted">Where it comes from, and what it pays for</span></div>
+  <section class="tx-sec" id="govs" aria-labelledby="gov-h"><div class="sec-hd"><span class="ui-ti t-blue"><span class="ico i-city" aria-hidden="true"></span></span><h2 id="gov-h">Each government's money</h2><span class="muted">Where it comes from, and what it pays for</span></div>
     <div class="pills" id="govPills" role="tablist" aria-label="Choose a government"></div>
     <div id="govBody"></div>
   </section>
 
-  <section class="tx-sec method" aria-labelledby="src-h">
-    <div class="sec-hd"><h2 id="src-h">Sources and gaps</h2></div>
+  <section class="tx-sec method" aria-labelledby="src-h"><div class="sec-hd"><span class="ui-ti t-teal"><span class="ico i-info" aria-hidden="true"></span></span><h2 id="src-h">Sources and gaps</h2></div>
     <p>Tax rates and levies come from the Florida Department of Revenue: <a href="https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/County%20Municipal%20Reports/Table%201-Comparison%20of%20Levies/25table1/Bay%20Table%201.pdf" target="_blank" rel="noopener">2025 Comparison of Taxes Levied, Bay County</a> and the <a href="https://floridarevenue.com/property/dataportal/Documents/PTO%20Data%20Portal/TACD%20History/2025%20Taxing%20Authority%20Code%20Descriptions/2025%20Bay%20TACD.pdf" target="_blank" rel="noopener">2025 Bay tax district rate report</a>, matched against the <a href="https://baycountyfltax.gov/?p=2190" target="_blank" rel="noopener">Bay County Tax Collector's 2025 rates</a>. Earlier years come from the same DOR tables for each year. Every district's rates add up to DOR's published total.</p>
     <p>FY2026 budgets come from each government's adopted budget, linked under each government above. Audited actuals for FY2021 to FY2024 come from the Florida Office of Economic and Demographic Research (<a href="https://edr.state.fl.us/content/local-government/data/revenues-expenditures/cntyfiscal.cfm" target="_blank" rel="noopener">county</a> and <a href="https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal.cfm" target="_blank" rel="noopener">city</a> reports), which compiles each government's <span class="term" data-term="audit">annual financial report</span>. They cover operating funds, including utilities, and leave out borrowing and transfers between a government's own accounts so nothing is counted twice.</p>
     <p>The calculator applies each rate to your taxable value. With a homestead, the first $25,000 comes off every tax, and a second amount (on value above $50,000) comes off everything except school taxes. That second amount was $25,000 through 2024 and is now adjusted for inflation: <a href="https://www.floridarevenue.com/property/Documents/cpi_homestead_exemption.pdf" target="_blank" rel="noopener">$25,722 for FY2026 bills</a>. It does not include other exemptions or non-ad valorem fees.</p>
