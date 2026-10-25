@@ -63,7 +63,12 @@ jobs:
         id: fetch_campaign_finance
         continue-on-error: true
         working-directory: data/elections/scripts
-        run: ./refresh.sh "$RUNNER_TEMP/soe"
+        env:
+          # keys the public business-owner ids (data/campaign/owner_gifts.py); without it owner gifts aren't updated
+          OWNER_ID_KEY: ${{ secrets.OWNER_ID_KEY }}
+        run: |
+          if [ -z "$OWNER_ID_KEY" ]; then echo "alert=The OWNER_ID_KEY repository secret is missing, so business-owner gifts were not updated." >> "$GITHUB_OUTPUT"; fi
+          ./refresh.sh "$RUNNER_TEMP/soe"
       - name: Check campaign finance freshness
         # refresh.sh keeps the old file when the Elections Office site is down, so a long outage would be silent.
         id: finance_freshness
