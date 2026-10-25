@@ -35,7 +35,7 @@ def tone_of(text):
 # words in a heading or label -> (icon, tone); the first match wins
 WORDS = [
     (r'\bvot|split', 'vote', 'amber'),
-    (r'meeting|agenda', 'calendar', 'salmon'),
+    (r'meeting|agenda|coming up|schedule', 'calendar', 'salmon'),
     (r'change order|grew|growth|went up|increase', 'trend', 'salmon'),
     (r'emergenc', 'flag', 'salmon'),
     (r'contract|award|\bbid', 'file', 'blue'),

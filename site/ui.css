@@ -339,3 +339,10 @@ ul.ui-votes{display:flex;flex-direction:column;gap:8px;margin:0;padding:0;list-s
 .ui-facts a{color:var(--blue);text-decoration:none}.ui-facts a:hover{text-decoration:underline}
 :root .ui-badge.ui-badge-av{border-radius:50%}
 .pf-page #pfHead .kpis{margin-top:24px}
+/* meetings list: a calendar tile beside each meeting */
+:root .fd.ui-mtc{flex-direction:row;align-items:flex-start;gap:16px;border:0;border-radius:20px;box-shadow:var(--ui-shadow);padding:16px}
+.ui-mtc .ui-date{width:58px;border-radius:12px}
+.ui-mtc .ui-date .d{font-size:1.5rem}
+.ui-mtc-b{display:flex;flex-direction:column;gap:6px;min-width:0;flex:1}
+@media (max-width:560px){:root .fd.ui-mtc{gap:12px;padding:14px}.ui-mtc .ui-date{width:50px}}
+.addr-out[hidden]{display:none}
