@@ -425,7 +425,7 @@ def owner_gifts():
     d = json.load(open(fp))
     agg = {}
     for g in d['gifts']:
-        r = agg.setdefault((g['person_key'], g['cand_id']), {'n': 0, 'amt': 0.0, 'dates': []})
+        r = agg.setdefault((g['owner_id'], g['cand_id']), {'n': 0, 'amt': 0.0, 'dates': []})
         r['n'] += 1
         r['amt'] += g['amount']
         if g.get('date'):
