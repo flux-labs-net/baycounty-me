@@ -212,7 +212,7 @@ def build():
         if t.get('person_id') and 'person:' + t['person_id'] in G.ents:
             yrs = f"{(t['start_date'] or '')[:4] or 'before 2015'}–{(t['end_date'] or '')[:4] or 'now'}"
             G.link('person:' + t['person_id'], 'gov:' + t['gov_id'], 'served' if t.get('end_date') else 'serves', None,
-                   t.get('end_date') or t.get('start_date'), f"{t['body']}, {t['seat']} ({yrs})", t.get('source_url'), key='seat:' + t['seat'])
+                   t.get('end_date') or t.get('start_date'), f"{t['seat'] if t.get('appointed') else t['body'] + ', ' + t['seat']} ({yrs})", t.get('source_url'), key='seat:' + t['seat'])
 
     # companies (every vendor id, with or without a vendor page)
     for v in (ids._load('vendors.json') or {'vendors': []})['vendors']:

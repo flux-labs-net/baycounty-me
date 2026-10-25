@@ -208,36 +208,37 @@ const TONE = ['blue', 'teal', 'amber', 'salmon'];
 const initials = n => { const w = String(n || '').replace(/["(].*/, '').split(/\s+/).filter(x => /^\p{L}/u.test(x)); return w.length ? (w[0][0] + (w.length > 1 ? w[w.length - 1][0] : '')).toUpperCase() : '?'; };
 const mon = d => { const t = new Date(d + 'T12:00'); return t.toLocaleDateString('en-US', {month: 'short', year: 'numeric'}); };
 const pad2 = n => String(n).padStart(2, '0');
+const staffBox = $('#gxStaff'), staff0 = staffBox ? staffBox.innerHTML : '';
 function officials() {
   if (!boardBox || !OH.length) return;
-  if (ysel.value === 'all') { boardBox.innerHTML = board0; if (boardNote) boardNote.innerHTML = note0; return; }
+  if (ysel.value === 'all') { boardBox.innerHTML = board0; if (boardNote) boardNote.innerHTML = note0; if (staffBox) staffBox.innerHTML = staff0; return; }
   // the fiscal year's first and last day (FY2026 = Oct 2025 to Sep 2026; schools Jul to Jun), never past today
   const y = +ysel.value, st = G.fyStart || 10, today = new Date().toISOString().slice(0, 10);
   const last = new Date(Date.UTC(y, st - 1, 0)).toISOString().slice(0, 10);
   let from = `${y - 1}-${pad2(st)}-01`, to = last < today ? last : today;
   if (from > today) from = today;
   const on = t => (!t.start_date || t.start_date <= to) && (!t.end_date || t.end_date > from);
-  const seats = [...new Set(OH.map(t => t.seat))];
-  const cards = [];
-  seats.forEach((seat, i) => {
-    const hs = OH.filter(t => t.seat === seat && on(t));
-    hs.forEach(t => {
-      const ap = (d, a) => (a ? 'about ' : '') + mon(d);
-      const part = t.end_date && t.end_date <= to ? `until ${ap(t.end_date, t.end_approx)}` : t.start_date && t.start_date > from ? `from ${ap(t.start_date, t.start_approx)}` : '';
-      const sub = [esc(seat), part].filter(Boolean).join(' · ');
-      if (!t.person_name) {
-        cards.push(`<div class="ui-person vac"><span class="ui-av t-blue"><span class="ico i-users" aria-hidden="true"></span></span><span><b>${t.vacant ? 'Vacant' : 'Not confirmed'}</b><small>${sub}</small><small>${esc(t.note || '')}</small></span></div>`);
-        return;
-      }
-      const how = t.how && t.how !== 'elected' ? (t.how === 'commission' ? 'chosen by the commission' : t.how) : '';
-      const inner = `<span class="ui-av t-${TONE[i % 4]}" aria-hidden="true">${esc(initials(t.person_name))}</span><span><b>${esc(t.person_name)}</b><small>${sub}</small>${how ? `<small>${esc(how[0].toUpperCase() + how.slice(1))}</small>` : ''}</span>`;
-      const u = t.person_id && window.BC ? BC.href('person:' + t.person_id) : null;
-      cards.push(u ? `<a class="ui-person" href="${esc(u)}" title="${esc(t.note || '')}">${inner}</a>` : `<div class="ui-person" title="${esc(t.note || '')}">${inner}</div>`);
-    });
-  });
-  boardBox.innerHTML = cards.join('');
-  const changed = seats.filter(seat => OH.filter(t => t.seat === seat && on(t)).length > 1).length;
-  if (boardNote) boardNote.innerHTML = `Elected officials in office in fiscal year ${y} (${esc(nice(from))} to ${esc(nice(to))})${changed ? `; ${plural(changed, 'seat')} changed hands that year, so each person who held it is listed` : ''}. Staff below are today's. `
+  const ap = (d, a) => (a ? 'about ' : '') + mon(d);
+  const cardsFor = (seats, tone0) => seats.flatMap((seat, i) => OH.filter(t => t.seat === seat && on(t)).map(t => {
+    const part = t.end_date && t.end_date <= to ? `until ${ap(t.end_date, t.end_approx)}` : t.start_date && t.start_date > from ? `from ${ap(t.start_date, t.start_approx)}` : '';
+    const sub = [esc(seat), part].filter(Boolean).join(' · ');
+    if (!t.person_name)
+      return `<div class="ui-person vac"><span class="ui-av t-blue"><span class="ico i-users" aria-hidden="true"></span></span><span><b>${t.vacant ? 'Vacant' : 'Not confirmed'}</b><small>${sub}</small><small>${esc(t.note || '')}</small></span></div>`;
+    const how = t.how && !['elected', 'appointed'].includes(t.how) ? (t.how === 'commission' ? 'chosen by the commission' : t.how) : t.how === 'appointed' && !t.appointed ? 'appointed' : '';
+    const inner = `<span class="ui-av t-${TONE[(i + tone0) % 4]}" aria-hidden="true">${esc(initials(t.person_name))}</span><span><b>${esc(t.person_name)}</b><small>${sub}</small>${how ? `<small>${esc(how[0].toUpperCase() + how.slice(1))}</small>` : ''}</span>`;
+    const u = t.person_id && window.BC ? BC.href('person:' + t.person_id) : null;
+    return u ? `<a class="ui-person" href="${esc(u)}" title="${esc(t.note || '')}">${inner}</a>` : `<div class="ui-person" title="${esc(t.note || '')}">${inner}</div>`;
+  }));
+  const elected = [...new Set(OH.filter(t => !t.appointed).map(t => t.seat))], mgr = [...new Set(OH.filter(t => t.appointed).map(t => t.seat))];
+  boardBox.innerHTML = cardsFor(elected, 0).join('');
+  // the manager's card follows the year; other staff (no year record) stay as today's
+  if (staffBox && mgr.length) {
+    const tmp = document.createElement('div'); tmp.innerHTML = staff0;
+    $$('[data-seat]', tmp).forEach(c => { if (mgr.includes(c.dataset.seat)) c.remove(); });
+    staffBox.innerHTML = cardsFor(mgr, 1).join('') + tmp.innerHTML;
+  }
+  const changed = [...elected, ...mgr].filter(seat => OH.filter(t => t.seat === seat && on(t)).length > 1).length;
+  if (boardNote) boardNote.innerHTML = `Officials in office in fiscal year ${y} (${esc(nice(from))} to ${esc(nice(to))})${changed ? `; ${plural(changed, 'seat')} changed hands that year, so each person who held it is listed` : ''}.${mgr.length ? ` The ${esc(mgr[0].toLowerCase())} below is that year's too; other staff and pay are today's.` : ' Staff below are today\'s.'} `
     + `<a href="/open-data#officeholder-terms">Every term, with its source</a>`;
 }
 

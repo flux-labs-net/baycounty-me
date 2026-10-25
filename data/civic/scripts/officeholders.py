@@ -7,8 +7,8 @@ and last meetings the person appears in.
 
 Sources: Bay County Supervisor of Elections results (enr.electionsfl.org), council and commission minutes (roll
 calls), budget books (which list the commission), city websites, the governor's appointment notices and local news.
-Each term names its source. Appointed staff (managers, clerks, attorneys) are not here: the government pages list
-today's staff.
+Each term names its source. Each government's appointed manager or administrator is here too (appointed true); other
+staff (clerks, attorneys, chiefs) are not, and the government pages list today's.
 
 Writes data/civic/officeholders.json, read by site/page_datasets.py officeholder_terms() (dataset officeholder-terms).
 Run: python3 data/civic/scripts/officeholders.py
@@ -121,6 +121,30 @@ S = {
  'mb_cathey': ('WMBB, Remembering Al Cathey (2026): mayor 2006-2015 and 2017-2023', 'https://www.mypanhandle.com/news/local-news/bay-county/mexico-beach/remembering-al-cathey-the-man-who-helped-rebuild-mexico-beach/'),
  'mb_recall': ('WMBB, Mexico Beach recalls Mayor Michele Miller, votes in Richard Wolff (Apr 2024)', 'https://www.mypanhandle.com/news/local-news/politics-news/mexico-beach-recalls-mayor-michele-miller-votes-in-richard-wolff/'),
  'mb_now': ('Mexico Beach, Mayor and Council', 'https://mexicobeachfl.gov/government/mayor-and-council/'),
+ # appointed managers and administrators
+ 'majka': ('Bay County staff directory, Bob Majka (county manager from 2015)', 'https://www.baycountyfl.gov/directory.aspx?EID=31'),
+ 'schubert_bc': ('WJHG, Bay County Commissioners honor Bob Majka for his service as county manager (Mar 4, 2026)', 'https://www.wjhg.com/2026/03/04/bay-county-commissioners-honor-bob-majka-his-service-county-manager/'),
+ 'pc_brown_bio': ('City of Auburndale, City Manager Jeffrey Brown (Panama City city manager 2015-2018)', 'https://auburndalefl.com/cmo/'),
+ 'pc_brown': ('WJHG, Panama City Commissioners accept City Manager\'s resignation (Jan 2018)', 'https://www.wjhg.com/content/news/Panama-City-Commissioners-accept-City-Managers-resignation-471169763.html'),
+ 'pc_mcqueen': ('Army Times, How a 2-star Army general took charge of a broken city (Oct 2018)', 'https://www.armytimes.com/news/your-army/2018/10/28/how-a-2-star-army-general-took-charge-of-a-broken-city/'),
+ 'pc_waldron': ('WJHG, Panama City Commissioners accept Mark McQueen\'s early resignation letter (Aug 1, 2023)', 'https://www.wjhg.com/2023/08/01/panama-city-commissioners-accept-mark-mcqueens-early-resignation-letter/'),
+ 'pc_hayes': ('WJHG, New city manager of Panama City selected in 4-1 vote (Dec 16, 2023)', 'https://www.wjhg.com/2023/12/16/new-city-manager-panama-city-selected-4-1-vote'),
+ 'pcb_cm': ('Panama City Beach, City Manager', 'https://www.pcbfl.gov/184/City-Manager'),
+ 'pcb_orourke': ('WJHG, PCB City Manager Tony O\'Rourke terminated (Feb 12, 2021)', 'https://www.wjhg.com/2021/02/12/pcb-city-manager-tony-orourke-terminated-at-thursdays-city-council-meeting'),
+ 'pcb_shortt': ('WFSU, Panama City Beach City Council appoints interim city manager (Feb 16, 2021)', 'https://news.wfsu.org/wfsu-local-news/2021-02-16/panama-city-beach-city-council-appoints-interim-city-manager'),
+ 'lh_white': ('WJHG, Michael White resigns as City Manager of Lynn Haven (Mar 2019)', 'https://www.wjhg.com/content/news/Michael-White-resigns-as-City-Manager-of-Lynn-Haven-507711851.html'),
+ 'lh_gainer': ('WJHG, Lynn Haven City Manager Vickie Gainer fired (Jul 18, 2025)', 'https://www.wjhg.com/2025/07/18/lynn-haven-city-manager-vickie-gainer-fired-following-special-commission-meeting'),
+ 'lh_interim': ('WJHG, Lynn Haven approves an interim city manager (Jul 23, 2025)', 'https://www.wjhg.com/2025/07/23/lynn-haven-approves-an-interim-city-manager'),
+ 'lh_lightfoot': ('WJHG, Lynn Haven appoints Chris Lightfoot as city manager in 4-1 vote (Mar 16, 2026)', 'https://www.wjhg.com/2026/03/16/lynn-haven-appoints-new-city-manager'),
+ 'cw14c': ('Callaway commission minutes, Jun 24, 2014', 'https://www.cityofcallaway.com/ArchiveCenter/ViewFile/Item/1547'),
+ 'cw16c': ('Callaway commission minutes, Dec 13, 2016', 'https://www.cityofcallaway.com/ArchiveCenter/ViewFile/Item/2018'),
+ 'cw17c': ('Callaway commission minutes, Feb 28, 2017', 'https://www.cityofcallaway.com/ArchiveCenter/ViewFile/Item/2077'),
+ 'cw17d': ('Callaway commission minutes, Jun 27, 2017', 'https://www.cityofcallaway.com/ArchiveCenter/ViewFile/Item/2152'),
+ 'mb_baber': ('WMBB, Mexico Beach city administrator resigns (2023)', 'https://www.mypanhandle.com/news/local-news/bay-county/mexico-beach/mexico-beach-city-administrator-resigns/'),
+ 'mb_manning': ('WMBB, Mexico Beach interim city manager resigns (Aug 2023)', 'https://www.mypanhandle.com/news/local-news/bay-county/mexico-beach/mexico-beach-interim-city-manager-resigns/'),
+ 'mb_hubbard': ('WJHG, Mexico Beach officials vote 4-1 to terminate City Administrator (Jul 24, 2024)', 'https://www.wjhg.com/2024/07/24/mexico-beach-officials-vote-4-1-terminate-city-administrator'),
+ 'mb_truitt': ('WJHG, Mexico Beach City Administrator fired; HR investigation report released (May 15, 2025)', 'https://www.wjhg.com/2025/05/15/mexico-beach-city-administrator-fired-city-officials-release-full-hr-investigation-report'),
+ 'mb_smig': ('WMBB, Mexico Beach strives for stability with not-so-new city administrator (2025)', 'https://www.mypanhandle.com/news/local-news/bay-county/mexico-beach-strives-for-stability-with-not-so-new-city-administrator/'),
  'votes': ('BayCounty.me vote records (roll calls in commission minutes, 2024-2026)', 'https://baycounty.me/public-money/votes'),
 }
 
@@ -290,6 +314,39 @@ G['mb'] = {'body': 'City Council', 'seats': [
 ]}
 
 
+# Appointed chief executives (county, city manager or administrator). The schools' superintendent is above; Springfield
+# and Parker have no manager (the mayor and council run the city with a clerk).
+STAFF = {
+ 'county': [('County Manager', [GAP(None, '2015-01-01', 'County manager before Bob Majka (2015) not confirmed.'),
+                                T('Bob Majka', '2015-01-01', '2026-03-03', 'appointed', 'majka', 'Robert Majka. Appointed in 2015 (month not confirmed); left to run Port Panama City.', sa=True),
+                                T('Joel Schubert', '2026-03-03', None, 'appointed', 'schubert_bc', 'Deputy county manager for nine years before.')])],
+ 'pc': [('City Manager', [GAP(None, '2015-01-01', 'City manager before Jeff Brown (2015) not confirmed.'),
+                          T('Jeff Brown', '2015-01-01', '2018-01-25', 'appointed', 'pc_brown_bio', 'Jeffrey E. Brown. Assistant city manager from 2004; city manager from 2015 (month not confirmed). Resigned Jan 25, 2018.', sa=True),
+                          T('Jared Jones', '2018-01-25', '2018-09-01', 'interim', 'pc_brown', 'Assistant city manager, interim until Mark McQueen started.', ea=True),
+                          T('Mark McQueen', '2018-09-01', '2023-07-31', 'appointed', 'pc_mcqueen', 'Started two weeks before Hurricane Michael. Left to become schools superintendent.', sa=True),
+                          T('Brandy Waldron', '2023-07-31', '2024-01-08', 'interim', 'pc_waldron', 'Assistant city manager and CRA director.', ea=True),
+                          T('Jonathan Hayes', '2024-01-08', None, 'appointed', 'pc_hayes', 'Former public works director; chosen 4-1 in December 2023.', sa=True)])],
+ 'pcb': [('City Manager', [T('Mario Gisbert', None, '2020-01-06', 'appointed', 'pcb_cm', 'Retired once a successor was hired.', ea=True),
+                           T("Tony O'Rourke", '2020-01-06', '2021-02-11', 'appointed', 'pcb_orourke', 'Anthony O\'Rourke. Fired by the council 4-0 on Feb 11, 2021.', sa=True),
+                           T('Al Shortt', '2021-02-11', '2021-04-22', 'interim', 'pcb_shortt', 'Former utilities and public works director; interim until Drew Whitman was hired.'),
+                           T('Drew Whitman', '2021-04-22', None, 'appointed', 'pcb_cm', 'Former police chief.')])],
+ 'lh': [('City Manager', [T('Joel Schubert', None, '2017-06-01', 'appointed', 'lh17', 'Left in mid-2017 (month not confirmed); later Bay County deputy county manager and county manager.', ea=True),
+                          T('Michael White', '2017-06-01', '2019-03-26', 'appointed', 'lh18', 'Resigned in March 2019, a week after his arrest.', sa=True, ea=True),
+                          T('Vickie Gainer', '2019-03-26', '2025-07-14', 'appointed', 'lh_white', 'Deputy city clerk; acting city manager from March 2019, then city manager. Put on leave Jul 14 and fired Jul 18, 2025.', sa=True),
+                          GAP('2025-07-14', '2025-07-23', 'The public works director served as interim city manager for about two weeks.', 'lh_interim'),
+                          T('Chris Lightfoot', '2025-07-23', None, 'appointed', 'lh_lightfoot', 'Public works and utilities director; interim from July 2025, made permanent 4-1 in March 2026.', sa=True)])],
+ 'cw': [('City Manager', [T('Michael Fuller', None, '2017-02-01', 'appointed', 'cw14c', 'City manager from mid-2014 (before that the planning director); last at the Dec 13, 2016 meeting.', ea=True),
+                          T('Tim Legare', '2017-02-01', '2017-06-01', 'interim', 'cw17c', 'Interim city manager by the Feb 28, 2017 meeting, then city manager.', sa=True, ea=True),
+                          T('Eddie Cook', '2017-06-01', None, 'appointed', 'cw17d', 'Edward Cook. City manager by the Jun 27, 2017 meeting.', sa=True)])],
+ 'mb': [('City Administrator', [GAP(None, '2021-07-01', 'Administrators from 2014 to 2021 not confirmed (the city has had about a dozen administrators since 2018).'),
+                                T('Doug Baber', '2021-07-01', '2023-07-19', 'appointed', 'mb_baber', 'About two years as administrator (start not confirmed); left for Crystal River.', sa=True),
+                                T('Michael Manning', '2023-07-19', '2023-08-15', 'interim', 'mb_manning', 'Interim; left for Crystal River.', sa=True),
+                                T('Chris Hubbard', '2023-08-15', '2024-07-23', 'appointed', 'mb_hubbard', 'Also administrator from 2006 to 2014. Fired 4-1 on Jul 23, 2024.', sa=True),
+                                T('Mell Smigielski', '2024-07-23', '2024-10-14', 'interim', 'mb_smig', 'Temporary administrator after Chris Hubbard was fired.'),
+                                T('Chris Truitt', '2024-10-14', '2025-04-23', 'appointed', 'mb_truitt', 'Fired 4-1 on Apr 23, 2025.'),
+                                T('Mell Smigielski', '2025-04-25', None, 'appointed', 'mb_smig', 'Interim from Apr 25, 2025, then hired on a two-year contract.')])],
+}
+
 NAMES = {'county': 'Bay County', 'schools': 'Bay District Schools', 'lh': 'City of Lynn Haven', 'pc': 'City of Panama City',
          'pcb': 'City of Panama City Beach', 'cw': 'City of Callaway', 'sp': 'City of Springfield', 'parker': 'City of Parker',
          'mb': 'City of Mexico Beach'}
@@ -313,14 +370,17 @@ def main():
         seats = []
         for order, (seat, terms) in enumerate(g['seats']):
             check(gov, seat, terms)
-            seats.append({'seat': seat, 'order': order, 'terms': terms})
+            seats.append({'seat': seat, 'order': order, 'appointed': False, 'terms': terms})
+        for order, (seat, terms) in enumerate(STAFF.get(gov, []), len(seats)):
+            check(gov, seat, terms)
+            seats.append({'seat': seat, 'order': order, 'appointed': True, 'terms': terms})
         govs.append({'gov_id': gov, 'government': NAMES[gov], 'body': g['body'], 'seats': seats})
     gaps = [f"{NAMES[g['gov_id']]}, {s['seat']}: {t['note']}" for g in govs for s in g['seats'] for t in s['terms'] if t.get('gap') and not t.get('vacant')]
     json.dump({'as_of': AS_OF, 'place_id': PLACE,
                'notes': ['One term per person per seat. start null = in office before FY2015; end null = in office now.',
                          'A gap row (name null) is a stretch nobody could confirm from the records found, or a known vacancy (vacant true).',
                          '*_approx = the date is known only to the month or year (first or last meeting the person appears in).',
-                         'Elected seats only; appointed staff are listed as of today on each government page.'],
+                         'Elected seats, plus each government\'s appointed manager or administrator (appointed true). Other staff are listed as of today on each government page.'],
                'gaps': gaps, 'sources': {k: {'title': t, 'url': u} for k, (t, u) in S.items()}, 'governments': govs},
               open(OUT, 'w'), indent=1, ensure_ascii=False)
     print('wrote', os.path.relpath(OUT), sum(len(s['terms']) for g in govs for s in g['seats']), 'terms,', len(gaps), 'gaps')

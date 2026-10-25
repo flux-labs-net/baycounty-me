@@ -42,7 +42,7 @@ function inOffice(all, q = {}, today = new Date().toISOString().slice(0, 10)) {
   } else from = to = today;
   const seats = new Map();
   for (const r of rows.slice().sort((a, b) => a.seat_order - b.seat_order || a.term_order - b.term_order)) {
-    if (!seats.has(r.seat)) seats.set(r.seat, {seat: r.seat, holders: []});
+    if (!seats.has(r.seat)) seats.set(r.seat, {seat: r.seat, appointed: !!r.appointed, holders: []});
     if (!overlaps(r, from, to)) continue;
     // a term that began or ended inside the window: someone else held the seat for part of it
     const part = !!((r.start_date && r.start_date > from) || (r.end_date && r.end_date <= to));
@@ -51,7 +51,7 @@ function inOffice(all, q = {}, today = new Date().toISOString().slice(0, 10)) {
   }
   const first = rows[0];
   return {gov_id: gov, government: first.government, body: first.body, place_id: first.place_id, fiscal_year: year, from, to, seats: [...seats.values()],
-    note: 'One entry per person who held the seat during the period; part_of_period marks someone who joined or left during it. vacant = nobody held the seat; confirmed false = a stretch nobody could confirm from the records found. Elected seats only.'};
+    note: 'One entry per person who held the seat during the period; part_of_period marks someone who joined or left during it. vacant = nobody held the seat; confirmed false = a stretch nobody could confirm from the records found. Elected seats, plus the appointed manager or administrator (appointed true).'};
 }
 
 module.exports = {fyWindow, overlaps, inOffice, governments};

@@ -11,6 +11,7 @@ create table if not exists officeholder_terms (
   "body" text,
   "seat" text,
   "seat_order" bigint,
+  "appointed" boolean,
   "term_order" bigint,
   "person_name" text,
   "person_id" text,
@@ -40,7 +41,7 @@ create index if not exists officeholder_terms_gov_idx on officeholder_terms (gov
 create index if not exists officeholder_terms_gov_id_idx on officeholder_terms (place_id, gov_id, seat_order, term_order);
 create index if not exists officeholder_terms_person_idx on officeholder_terms (person_id);
 
-insert into datasets (id, table_name, title, description) values ('officeholder-terms', 'officeholder_terms', $t$Officeholders by year$t$, $d$Who held each elected seat on every local government since 2014: one row per person per seat with start and end dates, so the officials in office in any year can be picked out. Stretches nobody could confirm are marked, and each term names its source.$d$)
+insert into datasets (id, table_name, title, description) values ('officeholder-terms', 'officeholder_terms', $t$Officeholders by year$t$, $d$Who held each elected seat, and each government's appointed manager, on every local government since 2014: one row per person per seat with start and end dates, so the officials in office in any year can be picked out. Stretches nobody could confirm are marked, and each term names its source.$d$)
   on conflict (id) do update set title = excluded.title, description = excluded.description, updated_at = now();
 
 alter table officeholder_terms enable row level security;

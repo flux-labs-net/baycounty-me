@@ -5,10 +5,13 @@
   "One term per person per seat. start null = in office before FY2015; end null = in office now.",
   "A gap row (name null) is a stretch nobody could confirm from the records found, or a known vacancy (vacant true).",
   "*_approx = the date is known only to the month or year (first or last meeting the person appears in).",
-  "Elected seats only; appointed staff are listed as of today on each government page."
+  "Elected seats, plus each government's appointed manager or administrator (appointed true). Other staff are listed as of today on each government page."
  ],
  "gaps": [
+  "Bay County, County Manager: County manager before Bob Majka (2015) not confirmed.",
   "Bay District Schools, District 2: The governor was to appoint someone until the 2020 election; the appointee is not confirmed.",
+  "City of Lynn Haven, City Manager: The public works director served as interim city manager for about two weeks.",
+  "City of Panama City, City Manager: City manager before Jeff Brown (2015) not confirmed.",
   "City of Panama City Beach, Ward 2: Holder before 2016 not confirmed.",
   "City of Panama City Beach, Ward 4: Holder before 2016 not confirmed.",
   "City of Springfield, Ward 1: Holder before 2016 not confirmed.",
@@ -18,7 +21,8 @@
   "City of Mexico Beach, Group 2: Holder from 2016 to 2019 not confirmed.",
   "City of Mexico Beach, Group 3: Holder before 2019 not confirmed.",
   "City of Mexico Beach, Group 4: Holder from 2016 to 2022 not confirmed.",
-  "City of Mexico Beach, Group 5: Holder from 2016 to 2020 not confirmed."
+  "City of Mexico Beach, Group 5: Holder from 2016 to 2020 not confirmed.",
+  "City of Mexico Beach, City Administrator: Administrators from 2014 to 2021 not confirmed (the city has had about a dozen administrators since 2018)."
  ],
  "sources": {
   "e2014m": {
@@ -381,6 +385,98 @@
    "title": "Mexico Beach, Mayor and Council",
    "url": "https://mexicobeachfl.gov/government/mayor-and-council/"
   },
+  "majka": {
+   "title": "Bay County staff directory, Bob Majka (county manager from 2015)",
+   "url": "https://www.baycountyfl.gov/directory.aspx?EID=31"
+  },
+  "schubert_bc": {
+   "title": "WJHG, Bay County Commissioners honor Bob Majka for his service as county manager (Mar 4, 2026)",
+   "url": "https://www.wjhg.com/2026/03/04/bay-county-commissioners-honor-bob-majka-his-service-county-manager/"
+  },
+  "pc_brown_bio": {
+   "title": "City of Auburndale, City Manager Jeffrey Brown (Panama City city manager 2015-2018)",
+   "url": "https://auburndalefl.com/cmo/"
+  },
+  "pc_brown": {
+   "title": "WJHG, Panama City Commissioners accept City Manager's resignation (Jan 2018)",
+   "url": "https://www.wjhg.com/content/news/Panama-City-Commissioners-accept-City-Managers-resignation-471169763.html"
+  },
+  "pc_mcqueen": {
+   "title": "Army Times, How a 2-star Army general took charge of a broken city (Oct 2018)",
+   "url": "https://www.armytimes.com/news/your-army/2018/10/28/how-a-2-star-army-general-took-charge-of-a-broken-city/"
+  },
+  "pc_waldron": {
+   "title": "WJHG, Panama City Commissioners accept Mark McQueen's early resignation letter (Aug 1, 2023)",
+   "url": "https://www.wjhg.com/2023/08/01/panama-city-commissioners-accept-mark-mcqueens-early-resignation-letter/"
+  },
+  "pc_hayes": {
+   "title": "WJHG, New city manager of Panama City selected in 4-1 vote (Dec 16, 2023)",
+   "url": "https://www.wjhg.com/2023/12/16/new-city-manager-panama-city-selected-4-1-vote"
+  },
+  "pcb_cm": {
+   "title": "Panama City Beach, City Manager",
+   "url": "https://www.pcbfl.gov/184/City-Manager"
+  },
+  "pcb_orourke": {
+   "title": "WJHG, PCB City Manager Tony O'Rourke terminated (Feb 12, 2021)",
+   "url": "https://www.wjhg.com/2021/02/12/pcb-city-manager-tony-orourke-terminated-at-thursdays-city-council-meeting"
+  },
+  "pcb_shortt": {
+   "title": "WFSU, Panama City Beach City Council appoints interim city manager (Feb 16, 2021)",
+   "url": "https://news.wfsu.org/wfsu-local-news/2021-02-16/panama-city-beach-city-council-appoints-interim-city-manager"
+  },
+  "lh_white": {
+   "title": "WJHG, Michael White resigns as City Manager of Lynn Haven (Mar 2019)",
+   "url": "https://www.wjhg.com/content/news/Michael-White-resigns-as-City-Manager-of-Lynn-Haven-507711851.html"
+  },
+  "lh_gainer": {
+   "title": "WJHG, Lynn Haven City Manager Vickie Gainer fired (Jul 18, 2025)",
+   "url": "https://www.wjhg.com/2025/07/18/lynn-haven-city-manager-vickie-gainer-fired-following-special-commission-meeting"
+  },
+  "lh_interim": {
+   "title": "WJHG, Lynn Haven approves an interim city manager (Jul 23, 2025)",
+   "url": "https://www.wjhg.com/2025/07/23/lynn-haven-approves-an-interim-city-manager"
+  },
+  "lh_lightfoot": {
+   "title": "WJHG, Lynn Haven appoints Chris Lightfoot as city manager in 4-1 vote (Mar 16, 2026)",
+   "url": "https://www.wjhg.com/2026/03/16/lynn-haven-appoints-new-city-manager"
+  },
+  "cw14c": {
+   "title": "Callaway commission minutes, Jun 24, 2014",
+   "url": "https://www.cityofcallaway.com/ArchiveCenter/ViewFile/Item/1547"
+  },
+  "cw16c": {
+   "title": "Callaway commission minutes, Dec 13, 2016",
+   "url": "https://www.cityofcallaway.com/ArchiveCenter/ViewFile/Item/2018"
+  },
+  "cw17c": {
+   "title": "Callaway commission minutes, Feb 28, 2017",
+   "url": "https://www.cityofcallaway.com/ArchiveCenter/ViewFile/Item/2077"
+  },
+  "cw17d": {
+   "title": "Callaway commission minutes, Jun 27, 2017",
+   "url": "https://www.cityofcallaway.com/ArchiveCenter/ViewFile/Item/2152"
+  },
+  "mb_baber": {
+   "title": "WMBB, Mexico Beach city administrator resigns (2023)",
+   "url": "https://www.mypanhandle.com/news/local-news/bay-county/mexico-beach/mexico-beach-city-administrator-resigns/"
+  },
+  "mb_manning": {
+   "title": "WMBB, Mexico Beach interim city manager resigns (Aug 2023)",
+   "url": "https://www.mypanhandle.com/news/local-news/bay-county/mexico-beach/mexico-beach-interim-city-manager-resigns/"
+  },
+  "mb_hubbard": {
+   "title": "WJHG, Mexico Beach officials vote 4-1 to terminate City Administrator (Jul 24, 2024)",
+   "url": "https://www.wjhg.com/2024/07/24/mexico-beach-officials-vote-4-1-terminate-city-administrator"
+  },
+  "mb_truitt": {
+   "title": "WJHG, Mexico Beach City Administrator fired; HR investigation report released (May 15, 2025)",
+   "url": "https://www.wjhg.com/2025/05/15/mexico-beach-city-administrator-fired-city-officials-release-full-hr-investigation-report"
+  },
+  "mb_smig": {
+   "title": "WMBB, Mexico Beach strives for stability with not-so-new city administrator (2025)",
+   "url": "https://www.mypanhandle.com/news/local-news/bay-county/mexico-beach-strives-for-stability-with-not-so-new-city-administrator/"
+  },
   "votes": {
    "title": "BayCounty.me vote records (roll calls in commission minutes, 2024-2026)",
    "url": "https://baycounty.me/public-money/votes"
@@ -395,6 +491,7 @@
     {
      "seat": "District 1",
      "order": 0,
+     "appointed": false,
      "terms": [
       {
        "name": "Mike Nelson",
@@ -422,6 +519,7 @@
     {
      "seat": "District 2",
      "order": 1,
+     "appointed": false,
      "terms": [
       {
        "name": "George Gainer",
@@ -443,6 +541,7 @@
     {
      "seat": "District 3",
      "order": 2,
+     "appointed": false,
      "terms": [
       {
        "name": "Bill Dozier",
@@ -462,6 +561,7 @@
     {
      "seat": "District 4",
      "order": 3,
+     "appointed": false,
      "terms": [
       {
        "name": "Guy Tunnell",
@@ -500,6 +600,7 @@
     {
      "seat": "District 5",
      "order": 4,
+     "appointed": false,
      "terms": [
       {
        "name": "Mike Thomas",
@@ -543,6 +644,34 @@
        "note": "Appointed by Gov. Ron DeSantis; elected to a full term in 2024."
       }
      ]
+    },
+    {
+     "seat": "County Manager",
+     "order": 5,
+     "appointed": true,
+     "terms": [
+      {
+       "end": "2015-01-01",
+       "note": "County manager before Bob Majka (2015) not confirmed.",
+       "gap": true
+      },
+      {
+       "name": "Bob Majka",
+       "start": "2015-01-01",
+       "end": "2026-03-03",
+       "how": "appointed",
+       "src": "majka",
+       "note": "Robert Majka. Appointed in 2015 (month not confirmed); left to run Port Panama City.",
+       "start_approx": true
+      },
+      {
+       "name": "Joel Schubert",
+       "start": "2026-03-03",
+       "how": "appointed",
+       "src": "schubert_bc",
+       "note": "Deputy county manager for nine years before."
+      }
+     ]
     }
    ]
   },
@@ -554,6 +683,7 @@
     {
      "seat": "Superintendent",
      "order": 0,
+     "appointed": false,
      "terms": [
       {
        "name": "Bill Husfelt",
@@ -575,6 +705,7 @@
     {
      "seat": "District 1",
      "order": 1,
+     "appointed": false,
      "terms": [
       {
        "name": "Jerry Register",
@@ -587,6 +718,7 @@
     {
      "seat": "District 2",
      "order": 2,
+     "appointed": false,
      "terms": [
       {
        "name": "Ginger Littleton",
@@ -622,6 +754,7 @@
     {
      "seat": "District 3",
      "order": 3,
+     "appointed": false,
      "terms": [
       {
        "name": "Joe Wayne Walker",
@@ -649,6 +782,7 @@
     {
      "seat": "District 4",
      "order": 4,
+     "appointed": false,
      "terms": [
       {
        "name": "Ryan Neves",
@@ -669,6 +803,7 @@
     {
      "seat": "District 5",
      "order": 5,
+     "appointed": false,
      "terms": [
       {
        "name": "Steve Moss",
@@ -688,6 +823,7 @@
     {
      "seat": "Mayor",
      "order": 0,
+     "appointed": false,
      "terms": [
       {
        "name": "Walter Kelley",
@@ -734,6 +870,7 @@
     {
      "seat": "Seat 1",
      "order": 1,
+     "appointed": false,
      "terms": [
       {
        "name": "Rodney Friend",
@@ -761,6 +898,7 @@
     {
      "seat": "Seat 2",
      "order": 2,
+     "appointed": false,
      "terms": [
       {
        "name": "Antonius Barnes",
@@ -780,6 +918,7 @@
     {
      "seat": "Seat 3",
      "order": 3,
+     "appointed": false,
      "terms": [
       {
        "name": "Roger Schad",
@@ -808,6 +947,7 @@
     {
      "seat": "Seat 4",
      "order": 4,
+     "appointed": false,
      "terms": [
       {
        "name": "Joseph Ashbrook",
@@ -851,6 +991,55 @@
        "start_approx": true
       }
      ]
+    },
+    {
+     "seat": "City Manager",
+     "order": 5,
+     "appointed": true,
+     "terms": [
+      {
+       "name": "Joel Schubert",
+       "end": "2017-06-01",
+       "how": "appointed",
+       "src": "lh17",
+       "note": "Left in mid-2017 (month not confirmed); later Bay County deputy county manager and county manager.",
+       "end_approx": true
+      },
+      {
+       "name": "Michael White",
+       "start": "2017-06-01",
+       "end": "2019-03-26",
+       "how": "appointed",
+       "src": "lh18",
+       "note": "Resigned in March 2019, a week after his arrest.",
+       "start_approx": true,
+       "end_approx": true
+      },
+      {
+       "name": "Vickie Gainer",
+       "start": "2019-03-26",
+       "end": "2025-07-14",
+       "how": "appointed",
+       "src": "lh_white",
+       "note": "Deputy city clerk; acting city manager from March 2019, then city manager. Put on leave Jul 14 and fired Jul 18, 2025.",
+       "start_approx": true
+      },
+      {
+       "start": "2025-07-14",
+       "end": "2025-07-23",
+       "note": "The public works director served as interim city manager for about two weeks.",
+       "src": "lh_interim",
+       "gap": true
+      },
+      {
+       "name": "Chris Lightfoot",
+       "start": "2025-07-23",
+       "how": "appointed",
+       "src": "lh_lightfoot",
+       "note": "Public works and utilities director; interim from July 2025, made permanent 4-1 in March 2026.",
+       "start_approx": true
+      }
+     ]
     }
    ]
   },
@@ -862,6 +1051,7 @@
     {
      "seat": "Mayor",
      "order": 0,
+     "appointed": false,
      "terms": [
       {
        "name": "Greg Brudnicki",
@@ -889,6 +1079,7 @@
     {
      "seat": "Ward 1",
      "order": 1,
+     "appointed": false,
      "terms": [
       {
        "name": "John Kady",
@@ -917,6 +1108,7 @@
     {
      "seat": "Ward 2",
      "order": 2,
+     "appointed": false,
      "terms": [
       {
        "name": "Kenneth Brown",
@@ -936,6 +1128,7 @@
     {
      "seat": "Ward 3",
      "order": 3,
+     "appointed": false,
      "terms": [
       {
        "name": "Billy Rader",
@@ -955,6 +1148,7 @@
     {
      "seat": "Ward 4",
      "order": 4,
+     "appointed": false,
      "terms": [
       {
        "name": "Mike Nichols",
@@ -971,6 +1165,62 @@
        "note": "Re-elected 2025."
       }
      ]
+    },
+    {
+     "seat": "City Manager",
+     "order": 5,
+     "appointed": true,
+     "terms": [
+      {
+       "end": "2015-01-01",
+       "note": "City manager before Jeff Brown (2015) not confirmed.",
+       "gap": true
+      },
+      {
+       "name": "Jeff Brown",
+       "start": "2015-01-01",
+       "end": "2018-01-25",
+       "how": "appointed",
+       "src": "pc_brown_bio",
+       "note": "Jeffrey E. Brown. Assistant city manager from 2004; city manager from 2015 (month not confirmed). Resigned Jan 25, 2018.",
+       "start_approx": true
+      },
+      {
+       "name": "Jared Jones",
+       "start": "2018-01-25",
+       "end": "2018-09-01",
+       "how": "interim",
+       "src": "pc_brown",
+       "note": "Assistant city manager, interim until Mark McQueen started.",
+       "end_approx": true
+      },
+      {
+       "name": "Mark McQueen",
+       "start": "2018-09-01",
+       "end": "2023-07-31",
+       "how": "appointed",
+       "src": "pc_mcqueen",
+       "note": "Started two weeks before Hurricane Michael. Left to become schools superintendent.",
+       "start_approx": true
+      },
+      {
+       "name": "Brandy Waldron",
+       "start": "2023-07-31",
+       "end": "2024-01-08",
+       "how": "interim",
+       "src": "pc_waldron",
+       "note": "Assistant city manager and CRA director.",
+       "end_approx": true
+      },
+      {
+       "name": "Jonathan Hayes",
+       "start": "2024-01-08",
+       "how": "appointed",
+       "src": "pc_hayes",
+       "note": "Former public works director; chosen 4-1 in December 2023.",
+       "start_approx": true
+      }
+     ]
     }
    ]
   },
@@ -982,6 +1232,7 @@
     {
      "seat": "Mayor",
      "order": 0,
+     "appointed": false,
      "terms": [
       {
        "name": "Gayle Oberst",
@@ -1016,6 +1267,7 @@
     {
      "seat": "Ward 1",
      "order": 1,
+     "appointed": false,
      "terms": [
       {
        "name": "John Reichard",
@@ -1038,6 +1290,7 @@
     {
      "seat": "Ward 2",
      "order": 2,
+     "appointed": false,
      "terms": [
       {
        "end": "2016-04-19",
@@ -1064,6 +1317,7 @@
     {
      "seat": "Ward 3",
      "order": 3,
+     "appointed": false,
      "terms": [
       {
        "name": "Josie Strange",
@@ -1092,6 +1346,7 @@
     {
      "seat": "Ward 4",
      "order": 4,
+     "appointed": false,
      "terms": [
       {
        "end": "2016-04-19",
@@ -1113,6 +1368,45 @@
        "note": "Vice Mayor."
       }
      ]
+    },
+    {
+     "seat": "City Manager",
+     "order": 5,
+     "appointed": true,
+     "terms": [
+      {
+       "name": "Mario Gisbert",
+       "end": "2020-01-06",
+       "how": "appointed",
+       "src": "pcb_cm",
+       "note": "Retired once a successor was hired.",
+       "end_approx": true
+      },
+      {
+       "name": "Tony O'Rourke",
+       "start": "2020-01-06",
+       "end": "2021-02-11",
+       "how": "appointed",
+       "src": "pcb_orourke",
+       "note": "Anthony O'Rourke. Fired by the council 4-0 on Feb 11, 2021.",
+       "start_approx": true
+      },
+      {
+       "name": "Al Shortt",
+       "start": "2021-02-11",
+       "end": "2021-04-22",
+       "how": "interim",
+       "src": "pcb_shortt",
+       "note": "Former utilities and public works director; interim until Drew Whitman was hired."
+      },
+      {
+       "name": "Drew Whitman",
+       "start": "2021-04-22",
+       "how": "appointed",
+       "src": "pcb_cm",
+       "note": "Former police chief."
+      }
+     ]
     }
    ]
   },
@@ -1124,6 +1418,7 @@
     {
      "seat": "Mayor",
      "order": 0,
+     "appointed": false,
      "terms": [
       {
        "name": "Thomas Abbott",
@@ -1156,6 +1451,7 @@
     {
      "seat": "Ward 1",
      "order": 1,
+     "appointed": false,
      "terms": [
       {
        "name": "Melba Covey",
@@ -1186,6 +1482,7 @@
     {
      "seat": "Ward 2",
      "order": 2,
+     "appointed": false,
      "terms": [
       {
        "name": "Pamn Henderson",
@@ -1216,6 +1513,7 @@
     {
      "seat": "Ward 3",
      "order": 3,
+     "appointed": false,
      "terms": [
       {
        "name": "Bob Pelletier",
@@ -1244,6 +1542,7 @@
     {
      "seat": "Ward 4",
      "order": 4,
+     "appointed": false,
      "terms": [
       {
        "name": "Ralph Hollister",
@@ -1289,6 +1588,39 @@
        "start_approx": true
       }
      ]
+    },
+    {
+     "seat": "City Manager",
+     "order": 5,
+     "appointed": true,
+     "terms": [
+      {
+       "name": "Michael Fuller",
+       "end": "2017-02-01",
+       "how": "appointed",
+       "src": "cw14c",
+       "note": "City manager from mid-2014 (before that the planning director); last at the Dec 13, 2016 meeting.",
+       "end_approx": true
+      },
+      {
+       "name": "Tim Legare",
+       "start": "2017-02-01",
+       "end": "2017-06-01",
+       "how": "interim",
+       "src": "cw17c",
+       "note": "Interim city manager by the Feb 28, 2017 meeting, then city manager.",
+       "start_approx": true,
+       "end_approx": true
+      },
+      {
+       "name": "Eddie Cook",
+       "start": "2017-06-01",
+       "how": "appointed",
+       "src": "cw17d",
+       "note": "Edward Cook. City manager by the Jun 27, 2017 meeting.",
+       "start_approx": true
+      }
+     ]
     }
    ]
   },
@@ -1300,6 +1632,7 @@
     {
      "seat": "Mayor",
      "order": 0,
+     "appointed": false,
      "terms": [
       {
        "name": "Ralph Hammond",
@@ -1314,6 +1647,7 @@
     {
      "seat": "Ward 1",
      "order": 1,
+     "appointed": false,
      "terms": [
       {
        "end": "2016-04-19",
@@ -1341,6 +1675,7 @@
     {
      "seat": "Ward 2",
      "order": 2,
+     "appointed": false,
      "terms": [
       {
        "name": "Phillip Dykes",
@@ -1361,6 +1696,7 @@
     {
      "seat": "Ward 3",
      "order": 3,
+     "appointed": false,
      "terms": [
       {
        "end": "2015-04-21",
@@ -1379,6 +1715,7 @@
     {
      "seat": "Ward 4",
      "order": 4,
+     "appointed": false,
      "terms": [
       {
        "name": "Topeka Humphries",
@@ -1406,6 +1743,7 @@
     {
      "seat": "Mayor",
      "order": 0,
+     "appointed": false,
      "terms": [
       {
        "name": "Richard Musgrave",
@@ -1426,6 +1764,7 @@
     {
      "seat": "Seat 1",
      "order": 1,
+     "appointed": false,
      "terms": [
       {
        "name": "Ken Jones",
@@ -1453,6 +1792,7 @@
     {
      "seat": "Seat 2",
      "order": 2,
+     "appointed": false,
      "terms": [
       {
        "name": "Ron Chaple",
@@ -1473,6 +1813,7 @@
     {
      "seat": "Seat 3",
      "order": 3,
+     "appointed": false,
      "terms": [
       {
        "name": "John Haney",
@@ -1504,6 +1845,7 @@
     {
      "seat": "Seat 4",
      "order": 4,
+     "appointed": false,
      "terms": [
       {
        "name": "Michael Miller",
@@ -1550,6 +1892,7 @@
     {
      "seat": "Mayor (Group 1)",
      "order": 0,
+     "appointed": false,
      "terms": [
       {
        "name": "Al Cathey",
@@ -1594,6 +1937,7 @@
     {
      "seat": "Group 2",
      "order": 1,
+     "appointed": false,
      "terms": [
       {
        "name": "Mary Blackburn",
@@ -1629,6 +1973,7 @@
     {
      "seat": "Group 3",
      "order": 2,
+     "appointed": false,
      "terms": [
       {
        "end": "2019-04-16",
@@ -1654,6 +1999,7 @@
     {
      "seat": "Group 4",
      "order": 3,
+     "appointed": false,
      "terms": [
       {
        "name": "Tanya Castro",
@@ -1699,6 +2045,7 @@
     {
      "seat": "Group 5",
      "order": 4,
+     "appointed": false,
      "terms": [
       {
        "name": "Jeff Tendler",
@@ -1745,6 +2092,68 @@
        "src": "mb_now",
        "note": "On the council in 2025 and 2026 votes; elected unopposed in 2026.",
        "start_approx": true
+      }
+     ]
+    },
+    {
+     "seat": "City Administrator",
+     "order": 5,
+     "appointed": true,
+     "terms": [
+      {
+       "end": "2021-07-01",
+       "note": "Administrators from 2014 to 2021 not confirmed (the city has had about a dozen administrators since 2018).",
+       "gap": true
+      },
+      {
+       "name": "Doug Baber",
+       "start": "2021-07-01",
+       "end": "2023-07-19",
+       "how": "appointed",
+       "src": "mb_baber",
+       "note": "About two years as administrator (start not confirmed); left for Crystal River.",
+       "start_approx": true
+      },
+      {
+       "name": "Michael Manning",
+       "start": "2023-07-19",
+       "end": "2023-08-15",
+       "how": "interim",
+       "src": "mb_manning",
+       "note": "Interim; left for Crystal River.",
+       "start_approx": true
+      },
+      {
+       "name": "Chris Hubbard",
+       "start": "2023-08-15",
+       "end": "2024-07-23",
+       "how": "appointed",
+       "src": "mb_hubbard",
+       "note": "Also administrator from 2006 to 2014. Fired 4-1 on Jul 23, 2024.",
+       "start_approx": true
+      },
+      {
+       "name": "Mell Smigielski",
+       "start": "2024-07-23",
+       "end": "2024-10-14",
+       "how": "interim",
+       "src": "mb_smig",
+       "note": "Temporary administrator after Chris Hubbard was fired."
+      },
+      {
+       "name": "Chris Truitt",
+       "start": "2024-10-14",
+       "end": "2025-04-23",
+       "how": "appointed",
+       "src": "mb_truitt",
+       "note": "Fired 4-1 on Apr 23, 2025."
+      },
+      {
+       "name": "Mell Smigielski",
+       "start": "2025-04-25",
+       "how": "appointed",
+       "src": "mb_smig",
+       "note": "Interim from Apr 25, 2025, then hired on a two-year contract."
       }
      ]
     }

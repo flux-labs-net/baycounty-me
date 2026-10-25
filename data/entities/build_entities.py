@@ -297,16 +297,16 @@ def build_people():
     for race in cand['races']:
         for k in race.get('candidates') or []:
             seen.append((k['name'], {'role': '2026 candidate: ' + race['office'], 'gov_id': ids.gov_id(race['office'], contains=True) or race.get('gov'), 'source': 'candidates_2026'}))
-    # every elected officeholder since 2014, current and former (data/civic/officeholders.json)
+    # every elected officeholder and appointed manager since 2014, current and former (data/civic/officeholders.json)
     oh = _j('civic', 'officeholders.json')
     for g in oh['governments']:
         for st in g['seats']:
             for t in st['terms']:
                 if t.get('name'):
                     member = {'Board of County Commissioners': 'County commissioner', 'City Commission': 'City commissioner', 'City Council': 'Council member'}.get(g['body'], 'School board member')
-                    office = st['seat'].split(' (')[0] if st['seat'].startswith(('Mayor', 'Superintendent')) else f"{member}, {st['seat']}"
+                    office = st['seat'].split(' (')[0] if st.get('appointed') or st['seat'].startswith(('Mayor', 'Superintendent')) else f"{member}, {st['seat']}"
                     a, b = (t.get('start') or '')[:4], (t.get('end') or '')[:4]
-                    seen.append((t['name'], {'role': ('former ' + office[0].lower() + office[1:]) if b else office, 'gov_id': g['gov_id'], 'seat': st['seat'],
+                    seen.append((t['name'], {'role': ('former ' + (office.lower() if st.get('appointed') else office[0].lower() + office[1:])) if b else office, 'gov_id': g['gov_id'], 'seat': st['seat'],
                                              'years': f'{a}–{b}' if a and b else f'until {b}' if b else f'since {a}' if a else 'since before 2015', 'source': 'officeholders'}))
     join = {}
     for a, b, _ in SAME_PERSON:

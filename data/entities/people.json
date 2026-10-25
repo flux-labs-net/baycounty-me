@@ -1,6 +1,6 @@
 {
  "about": "Elected officials, department leaders and 2026 local candidates named in the site's datasets, one id per person. Names are matched on first and last name with common nicknames (Doug = Douglas, Chris = Christopher, Dave = David ...), ignoring middle initials, titles and notes in parentheses; \"(D2)\" style suffixes become the district field. People who appear under more than one government are listed in multi_government for checking. No other people are included.",
- "count": 190,
+ "count": 202,
  "people": [
   {
    "id": "adrian-welle",
@@ -56,6 +56,26 @@
      "gov_id": "mb",
      "seat": "Mayor (Group 1)",
      "years": "2017–2023",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "al-shortt",
+   "name": "Al Shortt",
+   "aliases": [
+    "Al Shortt"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pcb"
+   ],
+   "roles": [
+    {
+     "role": "former city manager",
+     "gov_id": "pcb",
+     "seat": "City Manager",
+     "years": "2021–2021",
      "source": "officeholders"
     }
    ]
@@ -369,6 +389,33 @@
    ]
   },
   {
+   "id": "bob-majka",
+   "name": "Bob Majka",
+   "aliases": [
+    "Bob Majka",
+    "Robert (Bob) Majka"
+   ],
+   "district": null,
+   "gov_ids": [
+    "county",
+    "port"
+   ],
+   "roles": [
+    {
+     "role": "Executive Director",
+     "gov_id": "port",
+     "source": "salaries"
+    },
+    {
+     "role": "former county manager",
+     "gov_id": "county",
+     "seat": "County Manager",
+     "years": "2015–2026",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
    "id": "bob-pelletier",
    "name": "Bob Pelletier",
    "aliases": [
@@ -530,6 +577,13 @@
      "role": "Assistant City Manager and Interim City Clerk-Treasurer",
      "gov_id": "pc",
      "source": "salaries"
+    },
+    {
+     "role": "former city manager",
+     "gov_id": "pc",
+     "seat": "City Manager",
+     "years": "2023–2024",
+     "source": "officeholders"
     }
    ]
   },
@@ -730,6 +784,26 @@
    ]
   },
   {
+   "id": "chris-hubbard",
+   "name": "Chris Hubbard",
+   "aliases": [
+    "Chris Hubbard"
+   ],
+   "district": null,
+   "gov_ids": [
+    "mb"
+   ],
+   "roles": [
+    {
+     "role": "former city administrator",
+     "gov_id": "mb",
+     "seat": "City Administrator",
+     "years": "2023–2024",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
    "id": "chris-lightfoot",
    "name": "Chris Lightfoot",
    "aliases": [
@@ -749,6 +823,13 @@
      "role": "City Manager",
      "gov_id": "lh",
      "source": "officials-pay"
+    },
+    {
+     "role": "City Manager",
+     "gov_id": "lh",
+     "seat": "City Manager",
+     "years": "since 2025",
+     "source": "officeholders"
     }
    ]
   },
@@ -800,6 +881,26 @@
      "gov_id": "schools",
      "seat": "District 3",
      "years": "since 2022",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "chris-truitt",
+   "name": "Chris Truitt",
+   "aliases": [
+    "Chris Truitt"
+   ],
+   "district": null,
+   "gov_ids": [
+    "mb"
+   ],
+   "roles": [
+    {
+     "role": "former city administrator",
+     "gov_id": "mb",
+     "seat": "City Administrator",
+     "years": "2024–2025",
      "source": "officeholders"
     }
    ]
@@ -1215,6 +1316,26 @@
    ]
   },
   {
+   "id": "doug-baber",
+   "name": "Doug Baber",
+   "aliases": [
+    "Doug Baber"
+   ],
+   "district": null,
+   "gov_ids": [
+    "mb"
+   ],
+   "roles": [
+    {
+     "role": "former city administrator",
+     "gov_id": "mb",
+     "seat": "City Administrator",
+     "years": "2021–2023",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
    "id": "doug-crosby",
    "name": "Doug Crosby",
    "aliases": [
@@ -1327,6 +1448,13 @@
      "role": "City Manager",
      "gov_id": "pcb",
      "source": "officials-pay"
+    },
+    {
+     "role": "City Manager",
+     "gov_id": "pcb",
+     "seat": "City Manager",
+     "years": "since 2021",
+     "source": "officeholders"
     }
    ]
   },
@@ -1350,6 +1478,26 @@
      "role": "City Manager",
      "gov_id": "cw",
      "source": "officials-pay"
+    }
+   ]
+  },
+  {
+   "id": "eddie-cook",
+   "name": "Eddie Cook",
+   "aliases": [
+    "Eddie Cook"
+   ],
+   "district": null,
+   "gov_ids": [
+    "cw"
+   ],
+   "roles": [
+    {
+     "role": "City Manager",
+     "gov_id": "cw",
+     "seat": "City Manager",
+     "years": "since 2017",
+     "source": "officeholders"
     }
    ]
   },
@@ -1976,6 +2124,13 @@
      "role": "Assistant City Manager",
      "gov_id": "pc",
      "source": "salaries"
+    },
+    {
+     "role": "former city manager",
+     "gov_id": "pc",
+     "seat": "City Manager",
+     "years": "2018–2018",
+     "source": "officeholders"
     }
    ]
   },
@@ -2006,6 +2161,26 @@
      "gov_id": "mb",
      "seat": "Group 4",
      "years": "2024–2026",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "jeff-brown",
+   "name": "Jeff Brown",
+   "aliases": [
+    "Jeff Brown"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pc"
+   ],
+   "roles": [
+    {
+     "role": "former city manager",
+     "gov_id": "pc",
+     "seat": "City Manager",
+     "years": "2015–2018",
      "source": "officeholders"
     }
    ]
@@ -2248,7 +2423,8 @@
    ],
    "district": null,
    "gov_ids": [
-    "county"
+    "county",
+    "lh"
    ],
    "roles": [
     {
@@ -2260,6 +2436,20 @@
      "role": "County Manager",
      "gov_id": "county",
      "source": "officials-pay"
+    },
+    {
+     "role": "County Manager",
+     "gov_id": "county",
+     "seat": "County Manager",
+     "years": "since 2026",
+     "source": "officeholders"
+    },
+    {
+     "role": "former city manager",
+     "gov_id": "lh",
+     "seat": "City Manager",
+     "years": "until 2017",
+     "source": "officeholders"
     }
    ]
   },
@@ -2397,6 +2587,13 @@
      "role": "City Manager",
      "gov_id": "pc",
      "source": "officials-pay"
+    },
+    {
+     "role": "City Manager",
+     "gov_id": "pc",
+     "seat": "City Manager",
+     "years": "since 2024",
+     "source": "officeholders"
     }
    ]
   },
@@ -2975,6 +3172,26 @@
    ]
   },
   {
+   "id": "mario-gisbert",
+   "name": "Mario Gisbert",
+   "aliases": [
+    "Mario Gisbert"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pcb"
+   ],
+   "roles": [
+    {
+     "role": "former city manager",
+     "gov_id": "pcb",
+     "seat": "City Manager",
+     "years": "until 2020",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
    "id": "mark-mcqueen",
    "name": "Mark McQueen",
    "aliases": [
@@ -2983,6 +3200,7 @@
    "district": null,
    "gov_ids": [
     "county",
+    "pc",
     "schools"
    ],
    "roles": [
@@ -3006,6 +3224,13 @@
      "gov_id": "schools",
      "seat": "Superintendent",
      "years": "since 2023",
+     "source": "officeholders"
+    },
+    {
+     "role": "former city manager",
+     "gov_id": "pc",
+     "seat": "City Manager",
+     "years": "2018–2023",
      "source": "officeholders"
     }
    ]
@@ -3201,6 +3426,20 @@
      "role": "City Administrator",
      "gov_id": "mb",
      "source": "salaries"
+    },
+    {
+     "role": "former city administrator",
+     "gov_id": "mb",
+     "seat": "City Administrator",
+     "years": "2024–2024",
+     "source": "officeholders"
+    },
+    {
+     "role": "City Administrator",
+     "gov_id": "mb",
+     "seat": "City Administrator",
+     "years": "since 2025",
+     "source": "officeholders"
     }
    ]
   },
@@ -3212,6 +3451,7 @@
    ],
    "district": null,
    "gov_ids": [
+    "cw",
     "pc"
    ],
    "roles": [
@@ -3219,6 +3459,13 @@
      "role": "Director, Development Services",
      "gov_id": "pc",
      "source": "salaries"
+    },
+    {
+     "role": "former city manager",
+     "gov_id": "cw",
+     "seat": "City Manager",
+     "years": "until 2017",
+     "source": "officeholders"
     }
    ]
   },
@@ -3259,6 +3506,26 @@
      "gov_id": "pcb",
      "seat": "Ward 4",
      "years": "since 2020",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "michael-manning",
+   "name": "Michael Manning",
+   "aliases": [
+    "Michael Manning"
+   ],
+   "district": null,
+   "gov_ids": [
+    "mb"
+   ],
+   "roles": [
+    {
+     "role": "former city administrator",
+     "gov_id": "mb",
+     "seat": "City Administrator",
+     "years": "2023–2023",
      "source": "officeholders"
     }
    ]
@@ -3333,6 +3600,26 @@
      "gov_id": "pc",
      "seat": "Mayor",
      "years": "2023–2025",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
+   "id": "michael-white",
+   "name": "Michael White",
+   "aliases": [
+    "Michael White"
+   ],
+   "district": null,
+   "gov_ids": [
+    "lh"
+   ],
+   "roles": [
+    {
+     "role": "former city manager",
+     "gov_id": "lh",
+     "seat": "City Manager",
+     "years": "2017–2019",
      "source": "officeholders"
     }
    ]
@@ -4115,24 +4402,6 @@
    ]
   },
   {
-   "id": "robert-majka",
-   "name": "Robert (Bob) Majka",
-   "aliases": [
-    "Robert (Bob) Majka"
-   ],
-   "district": null,
-   "gov_ids": [
-    "port"
-   ],
-   "roles": [
-    {
-     "role": "Executive Director",
-     "gov_id": "port",
-     "source": "salaries"
-    }
-   ]
-  },
-  {
    "id": "rodney-friend",
    "name": "Rodney Friend",
    "aliases": [
@@ -4802,6 +5071,26 @@
    ]
   },
   {
+   "id": "tim-legare",
+   "name": "Tim Legare",
+   "aliases": [
+    "Tim Legare"
+   ],
+   "district": null,
+   "gov_ids": [
+    "cw"
+   ],
+   "roles": [
+    {
+     "role": "former city manager",
+     "gov_id": "cw",
+     "seat": "City Manager",
+     "years": "2017–2017",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
    "id": "tim-linderman",
    "name": "Tim Linderman",
    "aliases": [
@@ -4938,6 +5227,26 @@
    ]
   },
   {
+   "id": "tony-o-rourke",
+   "name": "Tony O'Rourke",
+   "aliases": [
+    "Tony O'Rourke"
+   ],
+   "district": null,
+   "gov_ids": [
+    "pcb"
+   ],
+   "roles": [
+    {
+     "role": "former city manager",
+     "gov_id": "pcb",
+     "seat": "City Manager",
+     "years": "2020–2021",
+     "source": "officeholders"
+    }
+   ]
+  },
+  {
    "id": "tonya-barrow",
    "name": "Tonya Barrow",
    "aliases": [
@@ -5018,6 +5327,26 @@
      "role": "2026 candidate: Bay County Judge, Group 4",
      "gov_id": "county_court",
      "source": "candidates_2026"
+    }
+   ]
+  },
+  {
+   "id": "vickie-gainer",
+   "name": "Vickie Gainer",
+   "aliases": [
+    "Vickie Gainer"
+   ],
+   "district": null,
+   "gov_ids": [
+    "lh"
+   ],
+   "roles": [
+    {
+     "role": "former city manager",
+     "gov_id": "lh",
+     "seat": "City Manager",
+     "years": "2019–2025",
+     "source": "officeholders"
     }
    ]
   },
@@ -5198,6 +5527,49 @@
   }
  ],
  "multi_government": [
+  {
+   "person_id": "joel-schubert",
+   "governments": [
+    "county",
+    "lh"
+   ],
+   "names": [
+    "Joel B. Schubert",
+    "Joel Schubert"
+   ]
+  },
+  {
+   "person_id": "michael-fuller",
+   "governments": [
+    "cw",
+    "pc"
+   ],
+   "names": [
+    "Michael Fuller"
+   ]
+  },
+  {
+   "person_id": "bob-majka",
+   "governments": [
+    "county",
+    "port"
+   ],
+   "names": [
+    "Bob Majka",
+    "Robert (Bob) Majka"
+   ]
+  },
+  {
+   "person_id": "mark-mcqueen",
+   "governments": [
+    "county",
+    "pc",
+    "schools"
+   ],
+   "names": [
+    "Mark McQueen"
+   ]
+  },
   {
    "person_id": "mike-thomas",
    "governments": [

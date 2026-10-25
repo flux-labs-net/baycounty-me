@@ -45,6 +45,15 @@ test('every term is in order within its seat, and every name has a profile id', 
   assert.ok(new Set(rows.map(r => r.gov_id)).size >= 9);
 });
 
+test('the appointed manager follows the year too', () => {
+  assert.deepEqual(names(O.inOffice(rows, {gov: 'lh', year: 2016}), 'City Manager'), ['Joel Schubert']);
+  assert.deepEqual(names(O.inOffice(rows, {gov: 'lh', year: 2019}), 'City Manager'), ['Michael White', 'Vickie Gainer']);
+  const r = O.inOffice(rows, {gov: 'lh', year: 2026});
+  assert.deepEqual(names(r, 'City Manager'), ['Chris Lightfoot']);
+  assert.equal(r.seats.find(s => s.seat === 'City Manager').appointed, true);
+  assert.equal(r.seats.find(s => s.seat === 'Mayor').appointed, false);
+});
+
 test('bad input gets a clear error', () => {
   assert.throws(() => O.inOffice(rows, {}), /gov=/);
   assert.throws(() => O.inOffice(rows, {gov: 'nowhere'}), e => e.status === 404);
