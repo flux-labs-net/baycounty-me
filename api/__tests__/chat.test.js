@@ -86,3 +86,15 @@ test('the prompt carries the privacy and neutrality rules', () => {
   assert.ok(C.chatTools(TOOLS).length === TOOLS.length);
   assert.equal(C.invalidInput(C.chatTools(TOOLS).find(t => t.name === 'find_entity'), {}), 'q is required');
 });
+
+test('text written before a tool call is dropped, and an empty answer gets one nudge', async () => {
+  const events = [];
+  const r = await C.answer({client: fakeClient([
+    {stop_reason: 'tool_use', usage, content: [{type: 'text', text: 'Let me look that up.'}, {type: 'tool_use', id: 't1', name: 'search_site', input: {q: 'pier'}}]},
+    {stop_reason: 'end_turn', usage, content: [{type: 'thinking', thinking: ''}]},
+    {stop_reason: 'end_turn', usage, content: [{type: 'text', text: 'The pier is on the [search page](https://baycounty.me/search).'}]},
+  ]), messages: [{role: 'user', content: 'pier?'}], mcpTools: TOOLS, callTool: async () => ({results: []}), emit: e => events.push(e)});
+  assert.equal(r.text, 'The pier is on the [search page](https://baycounty.me/search).');
+  assert.ok(events.some(e => e.type === 'reset'));
+  assert.equal(r.rounds, 3);
+});

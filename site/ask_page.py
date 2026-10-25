@@ -93,7 +93,7 @@ JS = r'''
   function inline(s, sources) {
     const out = [];
     let rest = s;
-    const rx = /\[([^\]]+)\]\(([^)\s]+)\)|\*\*([^*]+)\*\*|`([^`]+)`/;
+    const rx = /\[([^\]]+)\]\(([^)\s]+)\)|\*\*([^*]+)\*\*|`([^`]+)`|(https?:\/\/[^\s)<>"]+[^\s)<>".,;:!?])/;
     let m;
     while ((m = rest.match(rx))) {
       out.push(esc(rest.slice(0, m.index)));
@@ -101,7 +101,8 @@ JS = r'''
         const h = href(m[2], sources);
         out.push(h ? `<a href="${esc(h)}"${h.startsWith('http') ? ' target="_blank" rel="noopener nofollow"' : ''}>${esc(m[1])}</a>` : esc(m[1]));
       } else if (m[3] !== undefined) out.push(`<b>${esc(m[3])}</b>`);
-      else out.push(`<code>${esc(m[4])}</code>`);
+      else if (m[4] !== undefined) out.push(`<code>${esc(m[4])}</code>`);
+      else { const h = href(m[5], sources); out.push(h ? `<a href="${esc(h)}"${h.startsWith('http') ? ' target="_blank" rel="noopener nofollow"' : ''}>${esc(m[5].replace(/^https?:\/\/(www\.)?/, ''))}</a>` : esc(m[5])); }
       rest = rest.slice(m.index + m[0].length);
     }
     out.push(esc(rest));
@@ -130,7 +131,7 @@ JS = r'''
         out.push(`<${ordered ? 'ol' : 'ul'}>${items.map(x => `<li>${inline(x, sources)}</li>`).join('')}</${ordered ? 'ol' : 'ul'}>`);
         continue;
       }
-      const para = [];
+      const para = [lines[i++]];  // always take at least one line, so a stray "|" line can't stall the loop
       while (i < lines.length && lines[i].trim() && !/^\s*([-*•]|\d+[.)])\s+/.test(lines[i]) && !/^\s*\|/.test(lines[i])) para.push(lines[i++]);
       const h = para.length === 1 && /^#{1,4}\s+/.test(para[0]);
       out.push(h ? `<p><b>${inline(para[0].replace(/^#+\s+/, ''), sources)}</b></p>` : `<p>${para.map(x => inline(x.replace(/^#+\s+/, ''), sources)).join('<br>')}</p>`);
@@ -230,7 +231,7 @@ def ask_page():
   <div class="ask-wrap">
     <p class="ask-off" id="askOff" hidden>Ask isn't turned on yet. In the meantime, <a href="/search">search the site</a>.</p>
     <section class="ask-card" aria-label="Chat">
-      <div class="ask-log" id="askLog" aria-live="polite">
+      <div class="ask-log" id="askLog" aria-live="polite" data-nolinkify>
         <div class="ask-empty" id="askEmpty">
           <h2>Try a question</h2>
           <div class="ask-ex" id="askEx">{ex}</div>

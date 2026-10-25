@@ -440,7 +440,7 @@ if (document.readyState === 'loading') document.addEventListener('DOMContentLoad
     node.parentNode.replaceChild(frag, node);
   }
   function walk(root) {
-    const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {acceptNode: n => { for (let p = n.parentNode; p && p !== root.parentNode; p = p.parentNode) if (SKIP.has(p.nodeName) || p.nodeName === 'svg') return NodeFilter.FILTER_REJECT; return NodeFilter.FILTER_ACCEPT; }});
+    const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {acceptNode: n => { for (let p = n.parentNode; p && p !== root.parentNode; p = p.parentNode) if (SKIP.has(p.nodeName) || p.nodeName === 'svg' || (p.hasAttribute && p.hasAttribute('data-nolinkify'))) return NodeFilter.FILTER_REJECT; return NodeFilter.FILTER_ACCEPT; }});
     const list = []; while (w.nextNode()) list.push(w.currentNode); list.forEach(fix);
   }
   const main = document.getElementById('main'); if (!main) return;

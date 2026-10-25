@@ -11,7 +11,7 @@ const PRICES = {
   'claude-opus-5-5': [4, 20, 0.20, 5],
 };
 const MAX_ROUNDS = 6;               // tool rounds per question
-const MAX_OUTPUT = 2500;            // tokens per model call
+const MAX_OUTPUT = 8000;            // tokens per model call (thinking counts toward it)
 const MAX_QUESTION = 600;           // characters in the visitor's message
 const MAX_HISTORY = 10;             // earlier messages kept (5 back-and-forths)
 const MAX_HISTORY_CHARS = 2500;     // per earlier message
@@ -130,7 +130,7 @@ async function answer({client, model, messages, mcpTools, callTool, emit = () =>
   const system = `${SYSTEM}\n\nToday is ${today()} (US Central time).`;
   const usage = {input_tokens: 0, output_tokens: 0, cache_read_input_tokens: 0, cache_creation_input_tokens: 0};
   const used = [], sources = new Set();
-  let text = '', status = 'ok', rounds = 0, badJson = 0;
+  let text = '', status = 'ok', rounds = 0, badJson = 0, nudged = false;
 
   for (;;) {
     rounds++;
@@ -153,6 +153,9 @@ async function answer({client, model, messages, mcpTools, callTool, emit = () =>
       throw e;
     }
     for (const k of Object.keys(usage)) usage[k] += (msg.usage && msg.usage[k]) || 0;
+    const calls = msg.content.filter(b => b.type === 'tool_use');
+    // Only the last round's text is the answer: a "let me look that up" line before tool calls is dropped.
+    if (calls.length && !last && text && msg.stop_reason !== 'refusal') { text = ''; emit({type: 'reset'}); }
 
     if (msg.stop_reason === 'refusal') {
       status = 'refused';
@@ -160,7 +163,13 @@ async function answer({client, model, messages, mcpTools, callTool, emit = () =>
       text += note; emit({type: 'text', text: note});
       break;
     }
-    const calls = msg.content.filter(b => b.type === 'tool_use');
+    if (!calls.length && !text.trim() && !nudged && !last) {
+      // finished without writing anything (e.g. spent the round thinking): ask once for the answer
+      nudged = true;
+      convo.push({role: 'assistant', content: msg.content.length ? msg.content : [{type: 'text', text: '…'}]});
+      convo.push({role: 'user', content: 'Please give your answer now, briefly, from what you found.'});
+      continue;
+    }
     if (!calls.length || last) break;
     if (msg.stop_reason === 'max_tokens') {
       // a tool call cut off mid-input: don't run it, and give the model more room to finish without tools
@@ -186,7 +195,6 @@ async function answer({client, model, messages, mcpTools, callTool, emit = () =>
       }
     }));
     convo.push({role: 'user', content: results});
-    if (text && !/\s$/.test(text)) { text += '\n\n'; emit({type: 'text', text: '\n\n'}); }
   }
   return {text: text.trim(), sources: [...sources].slice(0, 400), usage, cost: costOf(model, usage), tools: used, rounds, status, model};
 }
