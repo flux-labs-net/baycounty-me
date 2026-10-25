@@ -293,6 +293,108 @@ def government_years():
     return out
 
 
+# --- Budgets by year (/public-money/budget-compare) -------------------------------------------------------------------
+
+_LINE_ALIAS = {'comprehensive planning': 'planning', 'protective inspection': 'building', 'law enforcement': 'police',
+               'community redevelopment': 'cra', 'community redevelopment agency': 'cra'}
+
+
+def _line_key(section, name, code=None):
+    """One key per budget line, so the same fund or department lines up across years even when a document words it
+    differently ("Legislative - Commission" and "Legislative (commission)", "Community Redevelopment Fund (CRA)" and
+    "CRA Fund"). A department or fund number wins when the source gives one."""
+    import re
+    if code:
+        return f'{section[0]}{code}'
+    n = re.sub(r'\(.*?\)', '', str(name or '').lower())
+    n = re.split(r'\s+[-–]\s+|/', n)[0]
+    n = re.sub(r'^\d+\s+', '', n).replace('&', 'and')
+    n = re.sub(r'\b(fund|department|dept\.?)\b', '', n)
+    n = re.sub(r'[^a-z0-9 ]', '', n)
+    n = re.sub(r'\s+', ' ', n).strip()
+    return f'{section[0]}:' + _LINE_ALIAS.get(n, n)
+
+
+def budget_years():
+    """Every budget line we have for each government and fiscal year, for comparing one year with another.
+
+    basis 'adopted': the adopted budget's total and General Fund (same figures as government-years), its funds and its
+    General Fund departments. Department and fund lines come from data/budgets/<gov>.json (one file per government,
+    every year of its budget documents) where there is one, else data/civic/budgets_detail.json (FY2026) and the
+    FY2027 lines in data/tax/budgets.json.
+    basis 'actual': audited revenue by source and spending by function from the state's Local Government Financial
+    Reports (data/tax/finances.json). in_total is false for transfers and borrowing, which the totals leave out.
+    """
+    import glob, json
+    from govs import GOVS
+    from money_pages import service_of, SVC_NAME
+    D = os.path.join(HERE, '..', 'data')
+    J = lambda *p: json.load(open(os.path.join(D, *p)))
+    bud = {g['id']: g for g in J('tax', 'budgets.json')['governments']}
+    det = {g['gov']: g for g in J('civic', 'budgets_detail.json')['governments']}
+    fin = {g['id']: g for g in J('tax', 'finances.json')['governments']}
+    files = {}
+    for fp in sorted(glob.glob(os.path.join(D, 'budgets', '*.json'))):
+        f = json.load(open(fp))
+        files[f['gov']] = {y['fiscal_year']: y for y in f['years']}
+    gy = {(r['gov_id'], r['fiscal_year']): r for r in government_years()}
+    SVC_OTHER = {None: 'Transfers, reserves, debt & disaster', 'other': 'Other services'}
+    out = []
+
+    def add(g, y, basis, section, name, amount, **kw):
+        if amount is None:
+            return
+        key = kw.pop('key', None) or _line_key(section, name, kw.pop('code', None))
+        svc = service_of(name) if section == 'department' else None
+        if svc == 'other':  # a renamed line ("Protective inspection") takes its usual name's service ("building")
+            svc = service_of(key.split(':', 1)[-1])
+        out.append({'gov_id': g['key'], 'government': g['name'], 'fiscal_year': y, 'fy': f'FY{y}', 'basis': basis, 'section': section,
+                    'line_key': key, 'name': name,
+                    'service': (SVC_NAME.get(svc) or SVC_OTHER.get(svc)) if section == 'department' else None,
+                    'fund_type': kw.pop('fund_type', None), 'amount': round(amount), 'in_total': kw.pop('in_total', True),
+                    'status': kw.pop('status', None), 'source_url': kw.pop('source_url', None)})
+
+    for g in GOVS:
+        k, b = g['key'], bud.get(g['tax']) or {}
+        # totals: the same figures as government-years
+        for (gk, y), r in sorted(gy.items()):
+            if gk != k:
+                continue
+            st = r.get('budget_status')
+            add(g, y, 'adopted', 'total', 'Total budget' + (' (without transfers between funds)' if r.get('budget_excludes_transfers') else ''), r.get('budget_total'),
+                key='total', status=st, source_url=r.get('budget_source_url'))
+            add(g, y, 'adopted', 'total', 'General Fund', r.get('general_fund'), key='general_fund', status=st, source_url=r.get('budget_source_url'))
+            add(g, y, 'actual', 'total', 'Revenue (audited)', r.get('actual_revenue'), key='revenue_total', status='audited', source_url=r.get('actuals_source_url'))
+            add(g, y, 'actual', 'total', 'Spending (audited, without transfers)', r.get('actual_spending'), key='spending_total', status='audited', source_url=r.get('actuals_source_url'))
+        # funds and General Fund departments, by year
+        years = dict(files.get(k, {}))
+        d = det.get(k)
+        if d and _fy(d.get('fiscal_year')) not in years:
+            years[_fy(d['fiscal_year'])] = {'status': d.get('status'), 'source_url': d.get('source_url'), 'total': d.get('total'), 'funds': d.get('funds') or [],
+                                            'general_fund_departments': d.get('general_fund_departments') or []}
+        x27 = b.get('fy2027') or {}
+        if 2027 not in years and (x27.get('fund_totals') or (x27.get('gf_expenditures') and 'Other departments' not in x27['gf_expenditures'])):
+            years[2027] = {'status': _budget_status(x27.get('status')), 'source_url': x27.get('source_url'),
+                           'funds': [{'name': n, 'amount': a} for n, a in (x27.get('fund_totals') or {}).items()],
+                           'general_fund_departments': [{'name': n, 'amount': a} for n, a in (x27.get('gf_expenditures') or {}).items()]}
+        for y, x in sorted(years.items()):
+            st = _budget_status(x.get('status'))
+            if x.get('total') and not (gy.get((k, y)) or {}).get('budget_total'):  # a total the yearly file doesn't carry
+                add(g, y, 'adopted', 'total', 'Total budget', x['total'], key='total', status=st, source_url=x.get('source_url'))
+            for f in x.get('funds') or []:
+                add(g, y, 'adopted', 'fund', f['name'], f.get('amount'), code=f.get('code'), fund_type=f.get('type'), status=st, source_url=x.get('source_url'))
+            for dp in x.get('general_fund_departments') or []:
+                add(g, y, 'adopted', 'department', dp['name'], dp.get('amount'), code=dp.get('code'), status=st, source_url=x.get('source_url'))
+        # audited actuals
+        for a in (fin.get(g['tax']) or {}).get('years') or []:
+            y = _fy(a['fy'])
+            for n, v in (a.get('revenues') or {}).items():
+                add(g, y, 'actual', 'revenue', n, v, in_total='not revenue' not in n, status='audited', source_url=a.get('revenue_source_url') or a.get('source_url'))
+            for n, v in (a.get('expenditures') or {}).items():
+                add(g, y, 'actual', 'spending', n, v, in_total=n != 'Transfers & other', status='audited', source_url=a.get('expenditure_source_url') or a.get('source_url'))
+    return out
+
+
 # --- Business donors matched to the state corporate registry (data/sunbiz) ----------------------------------------
 
 def business_donor_sunbiz():
@@ -477,6 +579,7 @@ DATASETS = [
     ('savings-opportunities', 'Savings finder: opportunities', 'Places Bay County governments could spend less: the spending each touches, a low and high estimate with its stated assumption, the next step and the records still needed. Every figure is computed from the Accountability projects and the CRA ledger.', savings_opportunities),
     ('savings-evidence', 'Savings finder: evidence', 'The records behind each savings opportunity, one row per project or CRA ledger record: the figure, what it is compared with, the gap or share, cost per unit where one applies, and the source.', savings_evidence),
     ('government-years', 'Governments by year', 'One row per government per fiscal year: adopted budget and its status, general fund, property tax rate and levy, audited actual revenue and spending, residents, audited debt and staff count. A blank means no record for that year. fiscal_year is the year the fiscal year ends (FY2026 = Oct 2025 to Sep 2026; schools Jul to Jun).', government_years),
+    ('budget-years', 'Budgets by year, line by line', "Every budget line on record for each government and fiscal year, to compare one year with another. basis adopted: the adopted budget's total and General Fund, each fund and each General Fund department. basis actual: audited revenue by source and spending by function from the state's Local Government Financial Reports (in_total is false for transfers and borrowing, which the audited totals leave out). line_key lines the same fund or department up across years; service groups departments into common services. fiscal_year is the year the fiscal year ends (FY2026 = Oct 2025 to Sep 2026; schools Jul to Jun).", budget_years),
     ('business-donor-sunbiz', 'Business donors in the state corporate registry', 'Each business that gave to a current officeholder or 2026 local candidate, matched to its Florida Division of Corporations (Sunbiz) record: document number, registered name, status and principal city, with the match method. Business-level only; no owner or officer names.', business_donor_sunbiz),
     ('shared-owner-groups', 'Shared-owner campaign gifts', 'Businesses that share an officer, manager or registered agent (state corporate records) and gave to the same local candidate, one row per business. Only groups checked by hand are listed. People are not named. Each company is its own contributor under Florida law, so a group is legal when each company is a real contributor.', shared_owner_groups),
     ('over-limit-gifts', 'Gifts over the contribution limit', "Organizations that gave one local candidate more than Florida's $1,000-per-election limit, as the campaign reported it (s. 106.08, F.S.), net of reported refunds. The primary and general are separate elections. Each case was checked by hand. status is Open (over the limit as reported, no explanation found) or Resolved (resolution says why: a reporting error, an amended report, a refund, a check designated for the general election, or a Florida Elections Commission ruling). A reported overage is not a finding of wrongdoing. Individual donors are not listed.", over_limit_gifts),

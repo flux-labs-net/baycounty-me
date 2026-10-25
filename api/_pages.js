@@ -28,6 +28,7 @@ const PAGES = {
   '/connections/campaign-gifts': {datasets: ['campaign-finance', 'donor-contracts', 'campaign-contributions-2026', 'business-donor-sunbiz', 'owner-gifts']},
   '/who-runs-bay-county': {datasets: ['people-directory', 'officials-pay', 'salary-leaders']},
   '/public-money/budget-explorer': {datasets: ['budget-detail', 'budget-per-resident']},
+  '/public-money/budget-compare': {datasets: ['budget-years', 'government-years'], endpoints: ['/budget-compare']},
   '/elections': {datasets: ['candidates-2026', 'campaign-contributions-2026']},
   '/public-money/exemptions': {datasets: ['property-tax-exemptions']},
   '/connections/money-map': {datasets: ['money-map-gifts', 'money-map-contracts', 'money-map-votes']},

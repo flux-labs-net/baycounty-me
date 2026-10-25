@@ -26,6 +26,14 @@ const TOOLS = [
    description: 'Profile of a Bay County local government: population, budget, tax rate, debt, audit findings, votes recorded, staff, utility bill and FEMA money, plus years: budget, tax rate, audited actuals, residents, debt and staff for each fiscal year on record. Omit slug to list all.',
    inputSchema: {type: 'object', additionalProperties: false, properties: {slug: {type: 'string', description: 'bay-county, bay-district-schools, panama-city, panama-city-beach, lynn-haven, callaway, springfield, parker or mexico-beach'}}},
    annotations: {readOnlyHint: true}},
+  {name: 'compare_budget_years', title: 'Compare budget years',
+   description: 'Compare one government\'s budget in two fiscal years: total budget, General Fund, each fund, each General Fund department and each service, with the dollar and percent change, plus the totals for every year on record. basis "actual" compares audited revenue by source and spending by function instead. Omit gov to list the years on record for each government.',
+   inputSchema: {type: 'object', additionalProperties: false, properties: {
+     gov: {type: 'string', description: 'county, schools, pc, pcb, lh (Lynn Haven), cw, sp, parker or mb'},
+     from: {type: 'integer', description: 'Earlier fiscal year (the year it ends, e.g. 2025 for Oct 2024 to Sep 2025). Default: the year before to'},
+     to: {type: 'integer', description: 'Later fiscal year. Default: the latest year with line-by-line detail'},
+     basis: {type: 'string', enum: ['adopted', 'actual'], default: 'adopted'}}},
+   annotations: {readOnlyHint: true}},
   {name: 'upcoming_meetings', title: 'Upcoming meetings',
    description: 'Upcoming public meetings of Bay County boards (County Commission, School Board, city commissions, CRA boards), soonest first, with agenda links and agenda item titles where posted. Meetings marked expected=true come from the regular schedule, not an official posting.',
    inputSchema: {type: 'object', additionalProperties: false, properties: {
@@ -200,6 +208,12 @@ async function call(req, name, a = {}) {
     let page = rows.slice(offset, offset + limit);
     if (a.fields) { const f = a.fields.split(',').map(s => s.trim()); page = page.map(r => Object.fromEntries(f.filter(k => k in r).map(k => [k, r[k]]))); }
     return {dataset: meta.id, total: rows.length, offset, returned: page.length, rows: page, note: 'Cite each row\'s source link. Data compiled by BayCounty.me from public records.'};
+  }
+  if (name === 'compare_budget_years') {
+    const B = require('./_budget');
+    const rows = await rowsOf(req, await load(req, '/downloads/index.json'), 'budget-years');
+    if (!a.gov) return {governments: B.coverage(rows)};
+    return {...B.compare(rows, a), page: `${SITE}/public-money/budget-compare?gov=${encodeURIComponent(a.gov)}`};
   }
   if (name === 'get_government') {
     const c = await load(req, '/downloads/index.json'), gp = c.datasets.find(d => d.id === 'government-profiles');

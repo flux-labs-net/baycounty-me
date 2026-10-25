@@ -39,6 +39,7 @@ def menu():
         {'label': 'Spending', 'question': 'Where it goes',
          'start': _i('Budget explorer', '/public-money/budget-explorer', 'Each budget by fund and department, per resident'),
          'groups': [{'group': 'Where it goes', 'items': [
+             _i('Budgets by year', '/public-money/budget-compare', 'Compare any two years, line by line'),
              _i('CRA spending', '/public-money/cra-spending', 'What redevelopment agencies paid for'),
              _i('Sales tax projects', '/public-money/sales-tax-projects', 'Half-cent projects: promised vs built'),
              _i('Hurricane Michael', '/public-money/hurricane-michael', 'FEMA, HUD and state recovery money'),
