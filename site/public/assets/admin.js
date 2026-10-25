@@ -33,15 +33,79 @@
   });
   $('#signout').addEventListener('click', async () => { await api('logout', {method: 'POST'}).catch(() => {}); location.href = '/admin'; });
 
-  // ---------- tabs ----------
-  const loaders = {keys: loadKeys, analytics: loadStats, logs: () => loadLogs(true), settings: loadSettings, ingestion: loadIngestion, agendas: loadAgendas, sent: loadSent, emails: loadEmails, compose: () => loadCompose(), correspondence: loadCorr, records: loadRR, owners: () => { loadOwners(); loadLimits(); }, ties: loadTies, boards: loadBoards};
+  // ---------- menu + panes ----------
+  // Old #hashes from before the menu was regrouped still land somewhere sensible.
+  const ALIAS = {logs: 'analytics'};
+  const loaders = {todo: loadTodo, keys: loadKeys, analytics: () => { loadStats(); loadLogs(true); }, settings: loadSettings, ingestion: loadIngestion,
+    accounting: () => loadLedger(), agendas: loadAgendas, sent: loadSent, emails: loadEmails, compose: () => loadCompose(), correspondence: loadCorr,
+    records: loadRR, owners: loadOwners, limits: loadLimits, ties: loadTies, boards: loadBoards};
+  const nav = $('#an-nav'), menuBtn = $('#an-open');
+  function menu(open) {
+    nav.classList.toggle('open', open); document.body.classList.toggle('an-lock', open);
+    menuBtn.setAttribute('aria-expanded', String(open));
+    if (!open) { $('#an-find').value = ''; findFilter(''); }
+  }
+  menuBtn.addEventListener('click', () => menu(true));
+  $('#an-close').addEventListener('click', () => menu(false));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && nav.classList.contains('open')) menu(false); });
   function tab(name) {
-    document.querySelectorAll('[role=tab][data-tab]').forEach(b => b.setAttribute('aria-selected', String(b.dataset.tab === name)));
-    document.querySelectorAll('[role=tabpanel]').forEach(p => { p.hidden = p.id !== 'tab-' + name; });
+    name = ALIAS[name] || name;
+    if (!loaders[name]) name = 'todo';
+    nav.querySelectorAll('[data-tab]').forEach(a => a.dataset.tab === name ? a.setAttribute('aria-current', 'page') : a.removeAttribute('aria-current'));
+    document.querySelectorAll('.pane').forEach(p => { p.hidden = p.id !== 'tab-' + name; });
+    const link = nav.querySelector(`[data-tab="${name}"]`), title = link ? link.querySelector('span').textContent : 'To do';
+    $('#ad-h').textContent = title; $('#an-cur').textContent = title; document.title = title + ' · Admin · BayCounty.me';
     history.replaceState(null, '', '#' + name);
+    menu(false); window.scrollTo(0, 0);
     loaders[name]();
   }
-  document.querySelectorAll('[role=tab][data-tab]').forEach(b => b.addEventListener('click', () => tab(b.dataset.tab)));
+  nav.addEventListener('click', e => { const a = e.target.closest('a[data-tab]'); if (!a) return; e.preventDefault(); tab(a.dataset.tab); });
+  window.addEventListener('hashchange', () => tab(location.hash.slice(1)));
+  function findFilter(q) {
+    q = q.trim().toLowerCase();
+    nav.querySelectorAll('.an-items a').forEach(a => a.classList.toggle('an-hide', !!q && !a.textContent.toLowerCase().includes(q)));
+    nav.querySelectorAll('.an-g').forEach(g => { g.hidden = !!q && !g.querySelector('.an-items a:not(.an-hide)'); });
+  }
+  $('#an-find').addEventListener('input', e => findFilter(e.target.value));
+  $('#an-find').addEventListener('keydown', e => {
+    if (e.key !== 'Enter') return;
+    const a = nav.querySelector('.an-items a:not(.an-hide)'); if (a) { e.preventDefault(); tab(a.dataset.tab); }
+  });
+
+  // ---------- to do (api/_summary.js) ----------
+  // One card per queue with waiting work; the menu gets a dot on each of those items.
+  const TODO = [
+    ['owners', 'teal', 'Review', 'Business owner groups', 'Businesses that share a person and gave to the same candidate.', 'Open queue'],
+    ['limits', 'teal', 'Review', 'Gifts over the limit', 'Cases to confirm, reject or resolve with a source.', 'Open queue'],
+    ['boards', 'teal', 'Review', 'Nonprofit board matches', 'Officials, leaders and candidates matched to board seats.', 'Open queue'],
+    ['ties', 'teal', 'Review', 'Business ties', 'Officials matched by name to Sunbiz officers.', 'Open queue'],
+    ['accounting', 'teal', 'Review', 'Accounting files', 'Check-register rows waiting for approve or reject.', 'Open queue'],
+    ['replies', 'blue', 'Outreach', 'Replies to handle', 'Conversations with a reply, plus emails that matched no conversation.', 'Read replies', 'correspondence'],
+    ['records', 'blue', 'Outreach', 'Unsent records requests', 'Drafts waiting for you to press Send.', 'Open drafts'],
+    ['syncs', 'amber', 'Problems', 'Datasets failing now', 'Datasets whose latest load failed.', 'See data health', 'ingestion'],
+    ['agendas', 'amber', 'Problems', 'Agenda errors', 'Unresolved errors from the last 14 days.', 'See agendas'],
+  ];
+  async function loadTodo() {
+    let r;
+    try { r = await api('summary'); }
+    catch (e) { $('#td-banner').innerHTML = `<div class="banner bad"><div><b>Couldn’t load the to do list.</b><div class="small muted">${esc(e.message)}</div></div></div>`; $('#td-list').innerHTML = ''; return; }
+    $('#td-banner').innerHTML = '';
+    const c = r.counts || {};
+    const busy = TODO.filter(t => c[t[0]] > 0), quiet = TODO.filter(t => c[t[0]] === 0);
+    $('#td-list').innerHTML = busy.map(([key, tone, kind, title, desc, go, to]) => `<a href="#${to || key}" data-go="${to || key}">
+      <span class="k ${tone}">${kind}<b>${fmt(c[key])}</b></span><span class="t">${title}</span><span class="d">${desc}</span><span class="go">${go} →</span></a>`).join('')
+      || '<div class="banner good"><div><b>Nothing waiting.</b> <span class="small muted">Every queue is clear.</span></div></div>';
+    const unknown = TODO.filter(t => c[t[0]] == null).map(t => t[3]);
+    $('#td-quiet').textContent = (quiet.length ? 'Clear right now: ' + quiet.map(t => t[3].toLowerCase()).join(', ') + '.' : '')
+      + (unknown.length ? ' Couldn’t count: ' + unknown.join(', ').toLowerCase() + '.' : '');
+    markMenu(c);
+  }
+  function markMenu(c) {
+    nav.querySelectorAll('[data-count]').forEach(a => a.querySelector('.an-n').classList.toggle('on', c[a.dataset.count] > 0));
+    const total = TODO.reduce((n, t) => n + (c[t[0]] > 0 ? c[t[0]] : 0), 0);
+    $('#an-total').hidden = !total; $('#an-total').textContent = total > 999 ? '999+' : fmt(total);
+  }
+  $('#td-list').addEventListener('click', e => { const a = e.target.closest('[data-go]'); if (!a) return; e.preventDefault(); tab(a.dataset.go); });
 
   // ---------- keys ----------
   let KEYS = [];
@@ -119,7 +183,7 @@
     catch (e) { $('#kd-err').textContent = e.message; }
   });
   $('#kd-stats').addEventListener('click', () => { const id = editing.id; dlg.close(); tab('analytics'); $('#an-scope').value = id; loadStats(); });
-  $('#kd-logs').addEventListener('click', () => { const id = editing.id; dlg.close(); tab('logs'); $('#lg-scope').value = id; loadLogs(true); });
+  $('#kd-logs').addEventListener('click', () => { const id = editing.id; dlg.close(); tab('logs'); $('#lg-scope').value = id; loadLogs(true); $('#logs').scrollIntoView(); });
 
   // ---------- analytics ----------
   $('#an-scope').addEventListener('change', loadStats);
@@ -268,7 +332,6 @@
   const central = (h, m) => { const d = new Date(); d.setUTCHours(h, m, 0, 0); return d.toLocaleTimeString('en-US', {hour: 'numeric', minute: '2-digit', timeZone: 'America/Chicago'}); };
   const RUN = {ok: 'OK', failed: 'Failed', running: 'Running'};
   async function loadIngestion() {
-    loadLedger();
     $('#in-sched').innerHTML = SCHED.map(([what, days, h, m]) => `<span>${esc(what)}</span><span>${esc(days)}, ${central(h, m)}</span>`).join('');
     let r;
     try { r = await api('ingestion'); }
@@ -1035,6 +1098,10 @@
     b.disabled = false;
   });
   $('#ol-status').addEventListener('change', loadLimits);
+  $('#tab-limits').addEventListener('click', e => {
+    const a = e.target.closest('[data-doc],[data-person]'); if (!a) return;
+    e.preventDefault(); tab('owners'); a.dataset.doc ? owDetail('entity', a.dataset.doc) : owDetail('person', a.dataset.person);
+  });
   let owTimer;
   $('#ow-q').addEventListener('input', () => {
     clearTimeout(owTimer);
@@ -1183,8 +1250,32 @@
       const me = await api('me');
       $('#who').textContent = me.email; $('#signin').hidden = true; $('#app').hidden = false;
       await loadKeys();
-      const start = location.hash.slice(1);
-      tab(loaders[start] ? start : 'keys');
-    } catch (e) { showSignin(); }
+      tab(location.hash.slice(1));
+      if (location.hash !== '#todo') api('summary').then(r => markMenu(r.counts || {})).catch(() => {});
+    } catch (e) { console.error(e); showSignin(); }
   })();
+})();
+
+/* Copied from site/site_helpers.js (the admin page does not load site.js). */
+/* Phone tables: no sideways scrolling. Each body cell gets data-label (its column heading) and the table gets
+   class "stk"; site.css turns rows into cards under 640px. Opt out with <table data-stack="off">. */
+(() => {
+  const colsOf = tr => { const out = []; for (const c of tr.cells) { const n = Math.max(1, c.colSpan || 1); out.push(c); for (let i = 1; i < n; i++) out.push(null); } return out; };
+  const label = t => {
+    if (t.dataset.stack === 'off' || t.closest('[data-stack="off"]')) return;
+    const h = t.tHead && t.tHead.rows.length ? t.tHead.rows[t.tHead.rows.length - 1] : null;
+    const names = h ? colsOf(h).map(c => c ? c.textContent.replace(/\s+/g, ' ').trim() : '') : (t.dataset.cols || '').split('|');
+    let n = names.length; for (const b of t.tBodies) for (const r of b.rows) n = Math.max(n, colsOf(r).length);
+    if (n < 3) { t.classList.add('stk2'); return; }   // two columns fit a phone once they may wrap
+    t.classList.add('stk');
+    for (const part of [...t.tBodies, t.tFoot].filter(Boolean)) for (const tr of part.rows) {
+      const cs = colsOf(tr);
+      if (tr.cells.length === 1 && (tr.cells[0].colSpan || 1) > 1) { tr.classList.add('stk-span'); continue; }
+      cs.forEach((c, i) => { if (c && !c.hasAttribute('data-label') && names[i]) c.setAttribute('data-label', names[i]); });
+    }
+  };
+  let q = false;
+  const run = () => { q = false; document.querySelectorAll('table').forEach(label); };
+  const go = () => { run(); new MutationObserver(ms => { if (q) return; if (ms.some(m => m.addedNodes.length)) { q = true; requestAnimationFrame(run); } }).observe(document.body, {childList: true, subtree: true}); };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go); else go();
 })();
