@@ -54,12 +54,12 @@ test('a bad tool input is sent back as an error, not run', async () => {
 });
 
 test('stops after the round limit and handles refusals', async () => {
-  const loop = Array.from({length: 7}, (_, i) => ({stop_reason: 'tool_use', usage, content: [{type: 'tool_use', id: 't' + i, name: 'search_site', input: {q: 'tax'}}]}));
+  const loop = Array.from({length: 6}, (_, i) => ({stop_reason: 'tool_use', usage, content: [{type: 'tool_use', id: 't' + i, name: 'search_site', input: {q: 'tax'}}]}));
   const seen = [];
   const r = await C.answer({client: fakeClient(loop, seen), messages: [{role: 'user', content: 'x'}], mcpTools: TOOLS, callTool: async () => ({results: []})});
-  assert.equal(seen.length, 7);
+  assert.equal(seen.length, 6);
   assert.deepEqual(seen.at(-1).tool_choice, {type: 'none'}, 'the last round answers without tools');
-  assert.equal(r.tools.length, 6);
+  assert.equal(r.tools.length, 5);
   const ref = await C.answer({client: fakeClient([{stop_reason: 'refusal', usage, content: []}]), messages: [{role: 'user', content: 'x'}], mcpTools: TOOLS, callTool: async () => ({})});
   assert.equal(ref.status, 'refused');
   assert.match(ref.text, /can’t help/);
@@ -97,4 +97,19 @@ test('text written before a tool call is dropped, and an empty answer gets one n
   assert.equal(r.text, 'The pier is on the [search page](https://baycounty.me/search).');
   assert.ok(events.some(e => e.type === 'reset'));
   assert.equal(r.rounds, 3);
+});
+
+test('only a few tool calls run per round', async () => {
+  const many = Array.from({length: 9}, (_, i) => ({type: 'tool_use', id: 'c' + i, name: 'search_site', input: {q: 'x' + i}}));
+  const seen = [];
+  let ran = 0;
+  const r = await C.answer({client: fakeClient([
+    {stop_reason: 'tool_use', usage, content: many},
+    {stop_reason: 'end_turn', usage, content: [{type: 'text', text: 'Done.'}]},
+  ], seen), messages: [{role: 'user', content: 'x'}], mcpTools: TOOLS, callTool: async () => { ran++; return {results: [{url: 'https://example.com/a'}]}; }});
+  assert.equal(ran, 4);
+  const res = seen[1].messages.at(-1).content;
+  assert.equal(res.length, 9, 'every call gets a result');
+  assert.equal(res.filter(x => x.is_error).length, 5);
+  assert.deepEqual(r.sources, [], 'only sources the answer links to are sent');
 });

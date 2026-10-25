@@ -203,7 +203,9 @@ JS = r'''
       if (failed) b.insertAdjacentHTML('beforeend', `<p class="ask-err">${esc(failed)}</p>`);
     } catch (e) {
       msgs.pop(); save();
-      b.innerHTML = `<p class="ask-err">${esc(e.message)}</p>`;
+      // fetch() throws a TypeError ("Load failed" in Safari) when the connection drops, often because the phone left the page
+      const m = e instanceof TypeError ? 'The connection dropped before the answer came back. This can happen if you switch apps or lock your phone while Ask is working. Keep this page open and tap send to try again.' : e.message;
+      b.innerHTML = `<p class="ask-err">${esc(m)}</p>`;
       box.value = q; fit();
     }
     busy = false; send.disabled = false; box.focus({preventScroll: true});

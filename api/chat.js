@@ -81,6 +81,8 @@ module.exports = async (req, res) => {
   res.writeHead(200, {'Content-Type': 'text/event-stream; charset=utf-8', 'Cache-Control': 'no-store', 'X-Accel-Buffering': 'no', Connection: 'keep-alive'});
   const send = (event, data) => res.write(`event: ${event}\ndata: ${JSON.stringify(data)}\n\n`);
   const t0 = Date.now();
+  // A comment line every few seconds while tools run, so phones and proxies don't treat a quiet stream as dead.
+  const ping = setInterval(() => { try { res.write(': ping\n\n'); } catch (e) {} }, 5000);
   const mcp = require('./mcp');
   const A = require('@anthropic-ai/sdk'), APIError = (A.default || A).APIError || A.APIError;
   let r;
@@ -99,5 +101,6 @@ module.exports = async (req, res) => {
     const busy = e.status === 429 || e.status === 529 || e.status >= 500;
     send('error', {message: busy ? 'Ask is busy right now. Please try again in a minute.' : 'Something went wrong answering that. Please try again.'});
   }
+  clearInterval(ping);
   res.end();
 };
