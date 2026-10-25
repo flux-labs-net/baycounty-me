@@ -54,7 +54,8 @@ function shape(id, rows) {
       other: {entity_id: out ? r.to_id : r.from_id, name: out ? r.to_name : r.from_name, kind: out ? r.to_kind : r.from_kind,
         kind_label: KIND_LABEL[out ? r.to_kind : r.from_kind] || null, page_url: out ? r.to_url : r.from_url},
       amount: r.amount ?? null, records: r.records ?? null, first_date: r.first_date || null, last_date: r.last_date || null, detail: r.detail || null,
-      source_url: r.source_url || null, dataset: r.dataset || 'entity-connections', checked_by_hand: r.checked_by_hand || undefined};
+      source_url: r.source_url || null, dataset: r.dataset || 'entity-connections', checked_by_hand: r.checked_by_hand || undefined,
+      merged_from: r.merged_from || undefined};
   });
 }
 
@@ -84,7 +85,8 @@ async function liveConnections(req, catalog, ent) {
       link_id: 'no:' + r.official_id + ':' + r.nonprofit_id, from_id: 'person:' + r.official_id, from_name: r.official, from_kind: 'person', from_url: `/people/${r.official_id}`,
       to_id: 'nonprofit:' + r.nonprofit_id, to_name: r.nonprofit, to_kind: 'nonprofit', to_url: `/profile/nonprofit/${r.nonprofit_id}`, relation: 'board',
       first_date: r.first_year ? String(r.first_year) : null, last_date: r.last_year ? String(r.last_year) : null,
-      detail: [r.titles, r.current ? 'current' : null].filter(Boolean).join(' · ') || null, source_url: r.source_url, dataset: 'nonprofit-officials'}))));
+      detail: [r.titles, r.current ? 'current' : null].filter(Boolean).join(' · ') || null, source_url: r.source_url, dataset: 'nonprofit-officials',
+      same_as: r.person_id ? 'member:' + r.person_id : null}))));
   }
   if (kind === 'person' || kind === 'business') {
     tasks.push(rowsWhere(req, catalog, 'official-businesses', kind === 'person' ? {person_id: key} : {sunbiz_doc_number: [key.toUpperCase(), key]}).then(rs => rs.forEach(r => r.person_id && r.sunbiz_doc_number && add({
@@ -122,6 +124,35 @@ async function liveConnections(req, catalog, ent) {
   return out;
 }
 
+// A name in the build-time rows (a nonprofit board member, or a board member or business owner on a company's Sunbiz
+// filing) and a hand-checked official are often the same person on the same record. Show one row: the official's,
+// which links to their person page, keeping the amount and dates from the build row. A board seat merges when the
+// confirmed row names that board-member key; a business row merges when the names match on the same company's filing.
+const nameKey = s => { const w = String(s || '').toLowerCase().replace(/[^a-z\s]/g, ' ').split(/\s+/).filter(x => x && !/^(jr|sr|ii|iii|iv)$/.test(x)); return w.length > 1 ? w[0] + ' ' + w[w.length - 1] : w.join(''); };
+function mergeConfirmed(links, live) {
+  const seen = new Set(links.map(r => r.from_id + '|' + r.to_id + '|' + r.relation));
+  const add = live.filter(r => !seen.has(r.from_id + '|' + r.to_id + '|' + r.relation));
+  const drop = new Set();
+  for (const r of add) {
+    if (r.from_kind !== 'person') continue;
+    const twin = links.find(l => !drop.has(l) && l.relation === r.relation && l.to_id === r.to_id && l.from_id !== r.from_id &&
+      (r.same_as ? l.from_id === r.same_as : ['member', 'owner'].includes(l.from_kind) && nameKey(l.from_name) === nameKey(r.from_name)));
+    if (!twin) continue;
+    drop.add(twin);
+    for (const k of ['amount', 'first_date', 'last_date', 'detail', 'source_url']) if (r[k] == null && twin[k] != null) r[k] = twin[k];
+    if (twin.records > (r.records || 0)) r.records = twin.records;
+    r.merged_from = twin.from_id;
+  }
+  return links.filter(l => !drop.has(l)).concat(add);
+}
+
+// A board member an editor confirmed as an official: the profile says so and links the official's page.
+async function withOfficial(req, catalog, ent) {
+  const rs = await rowsWhere(req, catalog, 'nonprofit-officials', {person_id: ent.entity_id.slice(7)}).catch(() => []);
+  const r = rs.find(x => x.official_id);
+  return r ? {...ent, same_as: {entity_id: 'person:' + r.official_id, name: r.official, kind: 'person', page_url: `/people/${r.official_id}`}} : ent;
+}
+
 async function getEntity(req, catalog, id) {
   if (!ID_RE.test(id)) throw Object.assign(new Error('An entity id looks like kind:key, e.g. person:douglas-moore or vendor:dewberry.'), {status: 400, expose: true});
   const pm = meta(catalog, 'entity-profiles'), lm = meta(catalog, 'entity-connections');
@@ -145,9 +176,10 @@ async function getEntity(req, catalog, id) {
   }
   if (!ent) throw Object.assign(new Error(`No entity "${id}".`), {status: 404, expose: true});
   live = live || await liveConnections(req, catalog, ent);
-  const seen = new Set(links.map(r => r.from_id + '|' + r.to_id + '|' + r.relation));
-  const all = links.concat(live.filter(r => !seen.has(r.from_id + '|' + r.to_id + '|' + r.relation)));
+  if (ent.kind === 'member') ent = await withOfficial(req, catalog, ent);
+  const all = mergeConfirmed(links, live);
   const connections = shape(id, all).sort((a, b) => (b.amount || 0) - (a.amount || 0) || String(a.other.name).localeCompare(String(b.other.name)));
+  if (live.length) ent = {...ent, connections: connections.length};
   const counts = {};
   connections.forEach(c => { counts[c.relation] = (counts[c.relation] || 0) + 1; });
   return {entity: ent, connections, counts, data_source: source,
@@ -172,4 +204,4 @@ async function searchEntities(req, catalog, {q: text = '', kind = '', limit = 20
   return rows;
 }
 
-module.exports = {getEntity, searchEntities, RELATION, KIND_LABEL, ID_RE};
+module.exports = {getEntity, searchEntities, mergeConfirmed, RELATION, KIND_LABEL, ID_RE};
