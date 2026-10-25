@@ -3743,7 +3743,7 @@
    "id": "site-updates",
    "title": "What's new",
    "description": "Each change to the site's data and pages, newest first.",
-   "rows": 53,
+   "rows": 54,
    "columns": [
     {
      "name": "date",
@@ -6863,7 +6863,7 @@
    "id": "site-menu",
    "title": "Site menu",
    "description": "Every link in the site's main menu, one row per link, in English and Spanish: the section and the question it answers, the link's place in the section, and the section's start-here page. place_id is the place the menu belongs to (fl-bay = Bay County), so a menu for another place sits beside it.",
-   "rows": 57,
+   "rows": 50,
    "columns": [
     {
      "name": "place_id",

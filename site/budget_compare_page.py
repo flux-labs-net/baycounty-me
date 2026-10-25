@@ -58,7 +58,7 @@ def budget_compare_page(out_dir, keys):
 <div class="page tax">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Public Money · Budgets</span><h1 id="bcTitle">Compare budgets across years</h1>
     <p class="lede">Pick a government and any two fiscal years to see what grew, what shrank and what's new: the total, the General Fund, each department, each service and each fund, in dollars and percent.</p></div>
-    <div class="stamp">{PDF_BTN}<a class="pill" href="/public-money/budget-explorer">One year in detail →</a></div></header>
+    <div class="stamp">{PDF_BTN}<a class="pill" href="/compare#services">Cost per resident →</a></div></header>
   {city_bar(keys, note='All governments shows Lynn Haven, which has the most years of detail')}
   <div class="bc-ctl">{sel('bcFrom', 'From')}{sel('bcTo', 'To')}<button type="button" class="bc-swap" id="bcSwap" data-scope title="Swap the two years">⇄ Swap</button></div>
   <div class="chips bc-basis" id="bcBasis" role="group" aria-label="What to compare">
@@ -93,7 +93,7 @@ def budget_compare_page(out_dir, keys):
       <li><b>Lines are matched across years</b> by department or fund number where the budget prints one (Lynn Haven), and otherwise by name, so "Legislative - Commission" and "Legislative (commission)" count as one line. A line marked <span class="dv-tag add">new</span> or <span class="dv-tag rem">gone</span> is in only one of the two years; often it was renamed, merged or split.</li>
       <li><b>Departments are the General Fund only.</b> Utilities, the CRA, disaster recovery and other funds are in "by fund".</li>
       <li><b>Totals count transfers twice.</b> When one fund pays another, both show it, so a total can rise just because more money moved between funds.</li>
-      <li><b>Services</b> group each government's own department names, the same way as the <a href="/public-money/budget-explorer#bench">budget explorer</a>. Transfers, reserves, debt and disaster lines are kept apart.</li>
+      <li><b>Services</b> group each government's own department names, the same way as the <a href="/compare#services">budget explorer</a>. Transfers, reserves, debt and disaster lines are kept apart.</li>
       <li><b>Data:</b> <a href="/api/v1/budget-compare?gov=lh&amp;from=2025&amp;to=2026">/api/v1/budget-compare</a> · every line: <a href="/api/v1/datasets/budget-years">budget-years</a> (<a href="/downloads/budget-years.csv">CSV</a>).</li></ul></section>
 </div>
 <link rel="stylesheet" href="/assets/tax.css">

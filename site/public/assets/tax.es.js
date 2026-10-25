@@ -129,7 +129,9 @@ function barList(obj, opts = {}) {
   return `<div class="hbars small">${ent.map(([k, v]) => { const s = SAVE.test(k); return `<div class="hb${s ? ' save' : ''}"><span class="hb-n">${esc(k)}${s ? ' <em>(ahorros, no es dinero nuevo ni gasto)</em>' : ''}</span><span class="hb-track"><span class="hb-bar" style="width:${Math.max(.6, v / max * 100)}%"></span></span><span class="hb-v">${big(v)}${s ? '' : ` <em>${pct(v / tot)}</em>`}</span></div>`; }).join('')}</div>`;
 }
 let govSel = D.govs[0].id, actYear = {};
+const HAS_GOV = !!$('govPills');  // the per-government panel moved to each government's page; only Spanish keeps it
 function renderGov() {
+  if (!HAS_GOV) return;
   const g = D.govs.find(x => x.id === govSel);
   $('govPills').innerHTML = D.govs.map(x => `<button type="button" role="tab" class="pill" aria-selected="${x.id === govSel}" data-g="${x.id}">${esc(x.short)}</button>`).join('');
   const [st, stText] = g.status;
@@ -179,6 +181,7 @@ function renderGov() {
 }
 // a pill click moves the city bar too (and the bar moves the pills, below)
 const pickGov = id => { govSel = id; renderGov(); BCM.city.set(BCM.city.key(id) || ''); $('govPills').querySelector(`[data-g="${govSel}"]`).focus(); };
+if (HAS_GOV) {
 $('govPills').addEventListener('click', e => { const b = e.target.closest('[data-g]'); if (b) pickGov(b.dataset.g); });
 $('govPills').addEventListener('keydown', e => {
   if (!['ArrowRight', 'ArrowLeft'].includes(e.key)) return;
@@ -187,6 +190,7 @@ $('govPills').addEventListener('keydown', e => {
 });
 $('govBody').addEventListener('click', e => { const b = e.target.closest('[data-y]'); if (b) { actYear[govSel] = b.dataset.y; renderGov(); } });
 renderGov();
+}
 /* the city bar: open that government's tab, and point the calculator at its city while the reader hasn't picked one */
 BCM.city.on(k => {
   const g = k && D.govs.find(x => BCM.city.key(x.id) === k);

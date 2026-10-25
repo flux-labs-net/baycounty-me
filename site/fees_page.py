@@ -144,24 +144,10 @@ def roster_li(s):
             f'<span class="r-term">{"until " + e(term) if term else ""}</span></li>')
 
 
-def who_page():
+def who_sections():
+    """Countywide officers and officials' pay, as sections of the People page (/people). This was /who-runs-bay-county;
+    each government's own seats are on its page (/governments/<slug>, \"Who's in charge\")."""
     d = json.load(open(SRC))
-    blocks = ''
-    for g in d['governments']:
-        seats = g.get('seats', [])
-        board = [s for s in seats if s.get('elected') or not STAFF.search(s['seat'])]
-        staff = [s for s in seats if s not in board]
-        ft = g.get('ftes'); ftv = ft.get('value') if isinstance(ft, dict) else ft
-        links = ' · '.join(x for x in [
-            f'{ftv:,g} employees' if ftv else '',
-            f'<a href="{e(g.get("website"))}" target="_blank" rel="noopener">Website</a>' if g.get('website') else '',
-            f'<a href="{e(g.get("contact_url"))}" target="_blank" rel="noopener">Contact</a>' if g.get('contact_url') else '',
-            a(g.get('source_url'))] if x)
-        blocks += f'''<article class="card gov"{data_g(g["name"])}><h3>{e(g["name"])}</h3><p class="muted small">{e(g.get("form", ""))}</p>
-          <h4 class="roster-h">Elected board</h4><ul class="roster">{"".join(roster_li(s) for s in board)}</ul>
-          {f'<h4 class="roster-h">Appointed staff</h4><ul class="roster">{"".join(roster_li(s) for s in staff)}</ul>' if staff else ""}
-          <p class="gov-ft small">{links}</p></article>'''
-
     def officer(c):
         term, _ = term_txt(c.get('term_end'))
         el, eln = term_txt(c.get('elected'))
@@ -181,23 +167,21 @@ def who_page():
                  f'<td>{e(p["government"])}<small>{e(p["year"])}</small></td><td class="num">{money(p["annual"])}</td>'
                  f'<td class="wrap small muted">{e(p.get("basis", ""))} {a(p.get("source_url"))}</td></tr>')
     gaps = ''.join(f'<li>{e(g)}</li>' for g in d['gaps'] if re.search(r'salar|pay|roster|term|school board|manager', g, re.I))
-    return f'''<div class="page tax">
-  <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Who Runs Bay County</span><h1>Who runs Bay County</h1>
-    <p class="lede">Bay County has one county government, seven cities, a school district and five independently elected county officers. Here's who holds each seat, who's appointed to run things day to day, and what top officials are paid.</p></div>{PDF}</header>
-  {city_bar([k for k in KEYS if any(gkey(g["name"]) == k for g in d["governments"])], hide=True, note='Bay County includes the five county officers')}
-  <section class="explain"><div class="ex-txt"><span class="eyebrow">The simple version</span><h2>Who's in charge of what</h2>
+    from govs import all_profiles
+    glinks = ''.join(f'<a class="ui-tag" href="/governments/{p["slug"]}#who">{e(p["short"])}</a>' for p in all_profiles())
+    return f'''<section class="explain"><div class="ex-txt"><span class="eyebrow">The simple version</span><h2>Who's in charge of what</h2>
     <ol class="ex-steps">
       <li><b>Elected boards set policy and budgets.</b> The County Commission, each city commission or council, and the School Board vote on budgets, tax rates and big contracts.</li>
       <li><b>Appointed managers run operations.</b> A county manager or city manager, hired by the board, runs departments and staff. Springfield and Parker have no manager; the board oversees staff directly and a city clerk handles administration.</li>
       <li><b>Five county officers are elected on their own.</b> The Sheriff, Property Appraiser, Tax Collector, Clerk of Court and Supervisor of Elections each run their own office. The County Commission funds most of their budgets. Their pay is set by a state formula.</li>
     </ol>
+    <p>Every board's seats, terms and appointed staff are on its government's page:</p><div class="ui-tags">{glinks}</div>
     <p><a href="/my-address/">Find who represents your address →</a></p></div></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="co">Countywide elected officers</h2><span class="muted">Pay set by state formula</span></div>
-    <div class="officers" data-city-empty="The five county officers serve all of Bay County, {{city}} included. Choose Bay County to see them.">{co}</div></section>
-  <section class="tx-sec"><div class="sec-hd"><h2 id="govs">Governments</h2><span class="muted">Elected boards and the staff they appoint</span></div><div class="gov-grid">{blocks}</div></section>
+    <div class="officers">{co}</div></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="pay">What officials are paid</h2><span class="muted">From state salary reports, budgets and contracts</span></div>
-    <div class="tablewrap" data-city-empty="No pay records found for {{city}} officials yet."><table class="tx-table pay-table"><thead><tr><th scope="col">Position</th><th scope="col">Government</th><th scope="col" class="num">Annual</th><th scope="col">Basis</th></tr></thead><tbody>{prow}</tbody></table></div>
-    <p class="note">Where a budget shows only one combined line for a whole city commission, that total is listed rather than divided among members.</p></section>
-  <section class="tx-sec method"><div class="sec-hd"><h2 id="gaps">What we couldn't find</h2></div><ul class="plain">{gaps}</ul></section>
-</div>
-<link rel="stylesheet" href="/assets/tax.css">'''
+    <div class="tablewrap"><table class="tx-table pay-table"><thead><tr><th scope="col">Position</th><th scope="col">Government</th><th scope="col" class="num">Annual</th><th scope="col">Basis</th></tr></thead><tbody>{prow}</tbody></table></div>
+    <p class="note">Where a budget shows only one combined line for a whole city commission, that total is listed rather than divided among members. Salary data names only elected officials and department leaders.</p>
+    <details class="gaps"><summary>What we couldn't find</summary><ul class="plain">{gaps}</ul></details></section>
+
+'''

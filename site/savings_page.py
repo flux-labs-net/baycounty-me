@@ -1,4 +1,5 @@
-"""Savings finder (/public-money/savings): where Bay County governments could spend less, from records already on the site.
+"""Savings ideas: where Bay County governments could spend less, from records already on the site. Shown on each
+government's page (site/gov_detail.py, assets/savings.js); /public-money/savings redirects there.
 
 Sources:
   data/savings/opportunities.json  reviewed opportunities: what each rests on, the assumption and the next step
@@ -8,7 +9,7 @@ Sources:
 Every dollar figure is computed here from those records; opportunities.json holds only estimate rates and reviewed unit
 counts (such as blocks of sidewalk). A selector that stops matching the records it expects fails the build.
 
-Writes public/data/savings.json (read by assets/savings.js) and feeds the savings-opportunities and savings-evidence
+gov_detail.write_savings_data writes public/data/savings.json (read by assets/savings.js) and feeds the savings-opportunities and savings-evidence
 datasets (site/page_datasets.py), so the page's data is in the database and /api/v1.
 An opportunity is a question worth asking, with an illustrative estimate, not a finding that money was wasted.
 """
@@ -185,44 +186,6 @@ def money(n):
     if n is None:
         return '—'
     return f'${n/1e6:,.1f}M' if n >= 1e6 else (f'${n/1e3:,.0f}K' if n >= 1e3 else f'${n:,.0f}')
-
-
-def savings_page(out_dir):
-    D = build()
-    json.dump(D, open(os.path.join(out_dir, 'data', 'savings.json'), 'w'), separators=(',', ':'))
-    for f in ('savings.js', 'savings.css'):
-        open(os.path.join(out_dir, 'assets', f), 'w').write(open(os.path.join(HERE, f)).read())
-    S = D['stats']
-    gk = [k for k in ('county', 'schools', 'pc', 'pcb', 'lh', 'cw', 'sp', 'parker', 'mb') if any(k in o['govs'] for o in D['opportunities'])]
-    reqs = ''.join(f'<li><b>{e(r["q"])}</b><br><span class="muted small">{e(r["why"])}</span> <a class="pill sm" href="/records-request?d={e(r["q"])}">Request this record</a></li>' for r in D['general_requests'])
-    return f'''<div class="page tax sav">
-  <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Public Money · Accountability</span><h1>Savings finder</h1>
-    <p class="lede">Places Bay County's local governments could spend less, found in records already on this site: projects that ran over, money budgeted but not spent, services bought separately that could be bought together. Each one shows the records it rests on, an estimate with its assumption, and the question to ask next.</p></div></header>
-  {city_bar(gk)}
-  <div class="sav-stats" role="list">
-    <div role="listitem"><b id="svM">{money(S["in_play"])}</b><span>spending these touch</span></div>
-    <div role="listitem"><b id="svL">{money(S["savings_low"])}</b><span>potential savings, low estimate</span></div>
-    <div role="listitem"><b id="svH">{money(S["savings_high"])}</b><span>potential savings, high estimate</span></div>
-    <div role="listitem"><b id="svN">{S["needs_records"]:,}</b><span>need records before an estimate</span></div>
-  </div>
-  <section class="tx-sec" id="list"><div class="sec-hd"><h2>Opportunities</h2><span class="muted" id="svCount" aria-live="polite"></span></div>
-    <p class="small muted">Ranked by the high estimate. Estimates are illustrative: each states its assumption, and some overlap, so treat the totals as a scale, not a promise.</p>
-    <div class="sav-filters" id="svF" role="group" aria-label="Filter by kind of saving"></div>
-    <div id="svList" class="sav-list"><p class="muted">Loading opportunities…</p></div></section>
-  <section class="tx-sec" id="records"><div class="sec-hd"><h2>Records that would find more</h2></div>
-    <p class="small muted">The CRA ledger covers projects and grants, not every payment. These records, asked of each city and the county, would show subscriptions, duplicate payments and price differences.</p>
-    <ul class="plain sav-reqs">{reqs}</ul></section>
-  <section class="tx-sec method" id="how"><div class="sec-hd"><h2>How this was built</h2></div>
-    <ul class="plain">
-      <li>Every figure comes from records already on the site: project histories on the <a href="/public-money/accountability">Accountability console</a> and rows of the <a href="/public-money/cra-spending">CRA ledger</a>. Each opportunity links the documents behind it.</li>
-      <li>An estimate multiplies the spending in play by a low and a high rate. The rate is the stated assumption, not a measured result. Where the records can't support a rate, the opportunity says which records are needed instead.</li>
-      <li>Totals add each opportunity once, but some overlap (engineering fees are part of project cost). Grants are included in project costs, so totals are more than local tax money alone.</li>
-      <li>Download everything as <a href="/data/savings.json">JSON</a>, or use the <a href="/open-data">open data</a> and <a href="/developers">API</a>. Corrections: <a href="/about#contact">send one</a>.</li>
-    </ul></section>
-</div>
-<link rel="stylesheet" href="/assets/tax.css">
-<link rel="stylesheet" href="/assets/savings.css">
-<script src="/assets/savings.js" defer></script>'''
 
 
 if __name__ == '__main__':

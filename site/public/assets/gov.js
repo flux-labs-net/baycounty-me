@@ -1,6 +1,6 @@
 /* A government's page (/governments/<slug>): the dashboards' own data, narrowed to this government, for one year.
-   Reads the same published files the dashboards use (contracts, CRA ledger, projects, sales tax, FEMA, votes,
-   savings) and fills the sections the page marks with data-gx. The Year picker in the bar at the top drives
+   Reads the same published files the dashboards use (contracts, CRA ledger, projects, sales tax, FEMA, votes)
+   and fills the sections the page marks with data-gx. The Year picker in the bar at the top drives
    every section; "All years" shows everything. Each section links to its full dashboard on the same city and year. */
 (async () => {
 const G = window.GOVPAGE; if (!G) return;
@@ -23,8 +23,8 @@ const yearsFor = async () => {
   const f = await get('/downloads/government-years.json');
   return (Array.isArray(f) ? f : []).filter(r => r.gov_id === K);
 };
-const [CT, P1, P2, AC, ST, FM, VT, SV, GYr] = await Promise.all([...['/data/contracts-page.json', '/data/cra-pay-1.json', '/data/cra-pay-2.json',
-  '/data/accountability.json', '/data/surtax-projects.json', '/data/michael-page.json', '/data/votes-page.json', '/data/savings.json'].map(get), yearsFor()]);
+const [CT, P1, P2, AC, ST, FM, VT, GYr] = await Promise.all([...['/data/contracts-page.json', '/data/cra-pay-1.json', '/data/cra-pay-2.json',
+  '/data/accountability.json', '/data/surtax-projects.json', '/data/michael-page.json', '/data/votes-page.json'].map(get), yearsFor()]);
 const GY = (GYr || []).slice().sort((a, b) => a.fiscal_year - b.fiscal_year);
 
 /* ---------- this government's rows, each with the years it counts in ---------- */
@@ -36,7 +36,6 @@ S.projects = (AC?.projects || []).filter(p => p.gk === K).map(p => ({...p, ys: s
 S.salestax = (ST || []).filter(p => has(p.g)).map(p => ({...p, ys: [...new Set([...Object.keys(p.sfy || {}).map(Number), ...TT.yearsIn(p.y)])]}));
 S.fema = (FM?.rows || []).filter(r => has(r.a)).map(r => ({...r, ys: [yr(r.d1)].filter(Boolean)}));
 S.votes = (VT?.votes || []).filter(v => v.g === K).map(v => ({...v, ys: [yr(v.d)].filter(Boolean)}));
-const savings = (SV?.opportunities || []).filter(o => (o.govs || []).includes(K));
 
 /* ---------- the year picker ---------- */
 const ysel = $('#gxYear');
@@ -142,15 +141,6 @@ function votes() {
     link: `<a href="${dash('/public-money/votes', `&g=${K}`)}#all">Every ${esc(G.short)} vote, by member</a>`,
   });
 }
-function savingsSec() {
-  if (!savings.length) return gone('savings');
-  fill('savings', {
-    sub: `${plural(savings.length, 'place')} to look, from records on this site`,
-    body: `<div class="gx-cards">${savings.slice(0, 6).map(o => `<a class="gx-card" href="/public-money/savings?gov=${K}#${encodeURIComponent(o.id)}"><span class="eyebrow">${esc(o.lever)}</span><b>${esc(o.title)}</b><span class="muted small">${o.savings_low ? `${money(o.savings_low)}${o.savings_high && o.savings_high !== o.savings_low ? '–' + money(o.savings_high) : ''} possible` : ''}${o.in_play ? ` · ${money(o.in_play)} in play` : ''}</span></a>`).join('')}</div>`,
-    link: `<a href="/public-money/savings?gov=${K}">Savings finder</a>`,
-  });
-}
-
 /* ---------- top cards: budget, tax rate, residents, debt, staff for the fiscal year in the bar ----------
    Year 2026 in the picker means fiscal year 2026 (Oct 2025 to Sep 2026; schools Jul to Jun). "All years" shows the
    current fiscal year. A figure with no record for that year says so; it never falls back to another year's number.
@@ -224,8 +214,7 @@ document.addEventListener('click', e => {
   const f = e.target.closest('[data-fy]');
   if (f && [...ysel.options].some(o => o.value === f.dataset.fy)) { ysel.value = f.dataset.fy; render(); }
 });
-savingsSec(); render();
-if (savings.length) { const el = $('.ui-tiles [data-jump="savings"] small'); if (el) el.textContent = plural(savings.length, 'idea'); }
+render();
 
 /* ---------- meetings: drop ones that have passed since the page was built; say how soon the next one is ---------- */
 (() => {

@@ -256,6 +256,7 @@ def _gift_type(d):
 
 
 def connections_page(out_dir):
+    from money_map import money_map_section
     D = network_data()
     js = open(os.path.join(HERE, 'connections.js')).read().replace('__CN__', json.dumps(D, ensure_ascii=False, separators=(',', ':')))
     open(os.path.join(out_dir, 'assets', 'connections.js'), 'w').write(js)
@@ -271,7 +272,7 @@ def connections_page(out_dir):
     return f'''<div class="page tax cn">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Connections · Network</span><h1>Who local governments paid, and who gave to the officials in charge</h1>
     <p class="lede">Every contract, payment and grant on the site, linked to who received it, to other payees on the same project or address, and to business gifts to the officials who approve the spending. Tap any name to follow its connections.</p></div>
-    <div class="stamp"><a class="pill" href="/connections/campaign-gifts">Campaign gifts</a><a class="pill" href="/connections/money-map">Money map</a><a class="pill" href="/connections/nonprofits">Nonprofits</a><span>Campaign reports as of {D.get("as_of") or ""}</span></div></header>
+    <div class="stamp"><a class="pill" href="/connections/campaign-gifts">Campaign gifts</a><a class="pill" href="/connections/nonprofits">Nonprofits</a><span>Campaign reports as of {D.get("as_of") or ""}</span></div></header>
   {city_bar(cities, label='Government')}
   <section class="explain"><div class="ex-txt"><span class="eyebrow">Read this first</span><h2>What a line means</h2>
     <ol class="ex-steps"><li><b>A gray line is money from a government or agency.</b> Thicker lines carry more dollars in the records. A contract award and the check register payments on it can describe the same money, so record types are never added together.</li>
@@ -289,6 +290,7 @@ def connections_page(out_dir):
     <button type="button" role="tab" class="cn-tab" id="t-network" data-v="network">Network</button>
     <button type="button" role="tab" class="cn-tab" id="t-payees" data-v="payees">Payees</button>
     <button type="button" role="tab" class="cn-tab" id="t-gifts" data-v="gifts">Campaign gifts</button>
+    <button type="button" role="tab" class="cn-tab" id="t-donors" data-v="donors">Donors and votes</button>
   </div>
   <div class="cn-main">
     <div class="cn-view">
@@ -307,6 +309,7 @@ def connections_page(out_dir):
       <section id="v-gifts" hidden><div class="cn-vh"><h2>Business gifts to officials and candidates</h2><span class="cn-note" id="cnDonCount"></span></div>
         <div class="cn-pad"><div class="tablewrap"><table class="tx-table" id="cnDonT" data-tt-sort="3:desc" data-tt-year="off"></table></div>
         <p class="cn-note">Each row totals one business or group's gifts to one official's most recent campaign, or to a 2026 candidate, from Supervisor of Elections reports, largest first. "Donors who were paid" lists only businesses paid in the records chosen above; "All business donors" lists every gift. "Likely" means the names matched after a hand check rather than exactly. Gifts from individual people are counted on <a href="/connections/campaign-gifts">Campaign gifts</a>, where people who run a registered business are named.</p></div></section>
+      {money_map_section(out_dir)}
     </div>
     <aside class="cn-profile" id="cnProfile" aria-live="polite"></aside>
   </div>
@@ -316,4 +319,5 @@ def connections_page(out_dir):
 <link rel="stylesheet" href="/assets/tax.css">
 <link rel="stylesheet" href="/assets/connections.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js" defer></script>
-<script src="/assets/connections.js" defer></script>'''
+<script src="/assets/connections.js" defer></script>
+<script src="/assets/money_map.js" defer></script>'''

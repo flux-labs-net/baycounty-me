@@ -184,9 +184,11 @@ function heat1() {
 
 $('mmShow').addEventListener('change', () => { sel = null; render(); });
 $('mmQ').addEventListener('input', render);
-let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(render, 150); });
+let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { if (!$('v-donors')?.hidden) render(); }, 150); });
 let first = true;
 const all = () => { if (!first) sel = null; first = false; render(); votesTable(); heat1(); };
 if (window.BCM && BCM.city) BCM.city.on(all); else all();
-if (sel && qs.get('sel')) $('map').scrollIntoView();
+// the Connections page shows this as its "Donors and votes" view: redraw when the view opens, at its real width
+window.MM = {render: () => { render(); votesTable(); heat1(); }};
+if (sel && qs.get('sel') && !$('v-donors')?.hidden) $('map').scrollIntoView();
 })();
