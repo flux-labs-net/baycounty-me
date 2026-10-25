@@ -43,6 +43,20 @@ CSS = '''
 .ask-b th,.ask-b td{border-bottom:1px solid var(--line);padding:6px 10px;text-align:left;vertical-align:top}
 .ask-b th{font-weight:600;background:var(--sunken)}
 .ask-b td.n,.ask-b th.n{text-align:right;font-family:var(--f-data);white-space:nowrap}
+.ask-b th.n{font-family:var(--f-body)}
+.ask-b td:empty{display:none}
+@media (max-width:640px){
+  /* phones: each table row becomes a small card, so nothing is squeezed or scrolls sideways */
+  .ask-b .tw{overflow:visible}
+  .ask-b table,.ask-b tbody,.ask-b tr,.ask-b td{display:block;width:100%;min-width:0}
+  .ask-b thead{display:none}
+  .ask-b tr{border:1px solid var(--line);border-radius:10px;padding:8px 12px;margin:0 0 8px;background:var(--sunken)}
+  .ask-b td,.ask-b td.n{border:0;padding:3px 0;display:flex;justify-content:space-between;gap:12px;text-align:right;white-space:normal;font-family:inherit;overflow-wrap:anywhere}
+  .ask-b td::before{content:attr(data-l);color:var(--muted);font-family:var(--f-body);text-align:left;flex:none;max-width:45%}
+  .ask-b td:first-child{display:block;text-align:left;font-weight:600;padding-bottom:5px}
+  .ask-b td:first-child::before{content:none}
+  .ask-b td.n{font-family:var(--f-data)}
+}
 .ask-st{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:.85rem}
 .ask-st i{width:7px;height:7px;border-radius:50%;background:var(--teal);animation:askp 1s ease-in-out infinite}
 @keyframes askp{50%{opacity:.25}}
@@ -123,7 +137,7 @@ JS = r'''
         while (i < lines.length && /^\s*\|/.test(lines[i])) body.push(row(lines[i++]));
         const isN = head.map((_, j) => body.length && body.every(r => !r[j] || num(r[j])));
         out.push(`<div class="tw"><table data-tt="off" data-stack="off"><thead><tr>${head.map((c, j) => `<th${isN[j] ? ' class="n"' : ''}>${inline(c, sources)}</th>`).join('')}</tr></thead><tbody>${
-          body.map(r => `<tr>${head.map((_, j) => `<td${isN[j] ? ' class="n"' : ''}>${inline(r[j] || '', sources)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`);
+          body.map(r => `<tr>${head.map((h, j) => `<td data-l="${esc(h.replace(/[*_\x60]/g, ''))}"${isN[j] ? ' class="n"' : ''}>${inline(r[j] || '', sources)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`);
         continue;
       }
       if (/^\s*([-*•]|\d+[.)])\s+/.test(l)) {
