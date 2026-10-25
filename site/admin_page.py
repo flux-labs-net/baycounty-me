@@ -273,7 +273,7 @@ def shell_html():
         <div class="an-who"><span id="who"></span><button class="linkish" id="signout" type="button">Sign out</button></div>
       </div>
     </nav>
-    <main class="ad-main">
+    <div class="ad-main" id="ad-main">
     <h1 class="ad-h" id="ad-h">To do</h1>"""
 
 
@@ -566,7 +566,8 @@ def admin_page(out_dir):
       <div id="bd-results"></div>
       <div id="bd-detail"></div>
     </section>
-    </main>
+    </div>
+    </div>
   </div>
 </div>
 
