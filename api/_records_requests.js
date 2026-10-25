@@ -47,9 +47,10 @@ async function seed() {
   return {added, updated};
 }
 
+// Seeds on every open (a handful of rows), so drafts nobody has touched follow the latest file.
 async function list() {
-  let rows = await q(`select r.*, t.status thread_status, t.last_at thread_last_at from corr.records_requests r left join corr.threads t on t.id = r.thread_id order by r.id`);
-  if (!rows.length) { await seed(); rows = await q(`select r.*, null thread_status, null thread_last_at from corr.records_requests r order by r.id`); }
+  await seed();
+  const rows = await q(`select r.*, t.status thread_status, t.last_at thread_last_at from corr.records_requests r left join corr.threads t on t.id = r.thread_id order by r.id`);
   return {requests: rows};
 }
 
