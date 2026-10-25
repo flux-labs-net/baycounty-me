@@ -16,6 +16,7 @@ from datetime import datetime, timezone
 import vendors as V
 import change_growth as CG
 from city_filter import city_bar, scope
+from entity_graph import build as entity_graph
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(HERE, '..', 'data')
@@ -129,7 +130,7 @@ def curated():
             y = dict(x)
             if y.get('payee'):
                 vid, vn, vt = V.resolve(y['payee'])
-                if vt == 'business':
+                if vt == 'business' and 'vendor:' + vid in entity_graph().ents:  # links to the company's profile
                     y['vid'] = vid
             ev.append(y)
         flags = [{'r': c['rule'], 'sev': 'warn', 'note': c['note']} for c in p.get('checks', [])]

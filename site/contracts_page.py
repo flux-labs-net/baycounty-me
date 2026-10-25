@@ -4,10 +4,26 @@ from collections import defaultdict
 import vendors as V
 from change_growth import growth_section
 from city_filter import city_bar, data_g, by_city, gkey
+from entity_graph import build as entity_graph
+from entity_links import a as ent_a
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 SRC = os.path.join(HERE, '..', 'data', 'contracts', 'contracts.json')
 e = lambda s: html.escape(str(s if s is not None else ''))
+
+
+def vendor_eid(vid):
+    """The company's entity id when it has a profile (every name links to its profile; see site/entity_graph.py)."""
+    x = 'vendor:' + (vid or '')
+    return x if vid and vid != 'unnamed' and x in entity_graph().ents else ''
+
+
+def vlink(raw, text=None):
+    """Any spelling of a company name, linked to its profile when it has one."""
+    vid, n, _ = V.resolve(raw)
+    t = raw if text is None else text
+    x = vendor_eid(vid)
+    return ent_a(x, t) if x else e(t)
 
 METHODS = [  # (bucket, regex) checked in order
     ('Emergency', r'emergenc'),
@@ -153,17 +169,19 @@ def contracts_page(out_dir):
         rm = tv[0]['amount']
         cover = f'{len(r.get("months_covered", []))} of 12 months' if r.get('months_covered') else ''
         regs += f'''<details class="tbl-toggle"{data_g(r["government"])}{" open" if r is d["registers"][-1] or r.get("fy") == 2025 else ""}><summary>{e(SHORT.get(r["government"], r["government"]))}, FY{e(r["fy"])} {("· " + cover) if cover else ""}</summary><div class="hbars small">''' + ''.join(
-            f'''<div class="hb"><span class="hb-n">{e(V.ids.biz_case(v["vendor"]))}</span><span class="hb-track"><span class="hb-bar" style="width:{max(.5, v["amount"]/rm*100):.1f}%"></span></span><span class="hb-v">{money(v["amount"])}</span></div>''' for v in tv[:15]) + \
+            f'''<div class="hb"><span class="hb-n">{vlink(v["vendor"], V.ids.biz_case(v["vendor"]))}</span><span class="hb-track"><span class="hb-bar" style="width:{max(.5, v["amount"]/rm*100):.1f}%"></span></span><span class="hb-v">{money(v["amount"])}</span></div>''' for v in tv[:15]) + \
             f'''</div><p class="note">{"Lynn Haven's warrant lists in its agenda packets, which show only checks of about $10,000 or more and cut payee names short; smaller checks and electronic payments aren't included. No purpose is given for individual checks." if "Lynn Haven" in r["government"] else "The Bay County Clerk of Court's monthly check register, attached to County Commission agendas."} {f'Missing months: {", ".join(r["months_missing"])}.' if r.get("months_missing") else ""} <a class="src" href="{e(r["url"])}" target="_blank" rel="noopener">Source</a></p></details>'''
     # change orders
     co = sorted(d['change_orders'], key=lambda x: -(x.get('change_amount') or 0))
-    co_rows = ''.join(f'''<tr{data_g(x["government"])}><td>{e(SHORT.get(x["government"], x["government"]))}</td><td class="wrap"><b>{e(x.get("vendor"))}</b><br><span class="small muted">{e(x.get("project"))}</span></td><td class="num">{money(x.get("original_amount"))}</td><td class="num">{money(x.get("change_amount"))}</td><td class="num">{f'{x["pct_of_original"]:.0f}%' if isinstance(x.get("pct_of_original"), (int, float)) else "—"}</td><td class="wrap small">{e(x.get("reason"))}</td><td class="small">{e(x.get("date"))} <a class="src" href="{e(x.get("source_url"))}" target="_blank" rel="noopener">Source</a></td></tr>''' for x in co)
-    em = ''.join(f'''<li{data_g(x["government"])}><b>{e(SHORT.get(x["government"], x["government"]))}, {e(x.get("date"))}: {money(x.get("amount"))}</b> to {e(x.get("vendor"))} for {e(x.get("purpose"))}. <span class="muted">{e(x.get("basis", ""))}</span> <a class="src" href="{e(x.get("source_url"))}" target="_blank" rel="noopener">Source</a></li>''' for x in sorted(d['emergency_purchases'], key=lambda x: x.get('date') or ''))
+    co_rows = ''.join(f'''<tr{data_g(x["government"])}><td>{e(SHORT.get(x["government"], x["government"]))}</td><td class="wrap"><b>{vlink(x.get("vendor"))}</b><br><span class="small muted">{e(x.get("project"))}</span></td><td class="num">{money(x.get("original_amount"))}</td><td class="num">{money(x.get("change_amount"))}</td><td class="num">{f'{x["pct_of_original"]:.0f}%' if isinstance(x.get("pct_of_original"), (int, float)) else "—"}</td><td class="wrap small">{e(x.get("reason"))}</td><td class="small">{e(x.get("date"))} <a class="src" href="{e(x.get("source_url"))}" target="_blank" rel="noopener">Source</a></td></tr>''' for x in co)
+    em = ''.join(f'''<li{data_g(x["government"])}><b>{e(SHORT.get(x["government"], x["government"]))}, {e(x.get("date"))}: {money(x.get("amount"))}</b> to {vlink(x.get("vendor"))} for {e(x.get("purpose"))}. <span class="muted">{e(x.get("basis", ""))}</span> <a class="src" href="{e(x.get("source_url"))}" target="_blank" rel="noopener">Source</a></li>''' for x in sorted(d['emergency_purchases'], key=lambda x: x.get('date') or ''))
     th = ''.join(f'''<li{data_g(x["government"])}><b>{e(SHORT.get(x["government"], x["government"]))}.</b> {e(x["rule"])} <a class="src" href="{e(x.get("source_url"))}" target="_blank" rel="noopener">Source</a></li>''' for x in d['thresholds'])
     # ledger data for JS
     rows = [{'g': SHORT.get(c['government'], c['government']), 'v': c['vendor'], 'id': c['vid'], 'a': c['amount'], 'p': c.get('purpose') or '', 'd': c.get('date') or '', 'm': c['b'], 'mf': c.get('method') or '',
-             'u': c.get('source_url') or '', 'n': c.get('notes') or ''} for c in sorted(cs, key=lambda c: -c['amount'])]
+             'u': c.get('source_url') or '', 'n': c.get('notes') or '', 'e': vendor_eid(c['vid'])} for c in sorted(cs, key=lambda c: -c['amount'])]
     vp = sorted(vendor_profiles(d, cs).values(), key=lambda p: p['n'].lower())
+    for p in vp:
+        p['e'] = vendor_eid(p['id'])
     json.dump({'rows': rows, 'vp': vp}, open(os.path.join(out_dir, 'data', 'contracts-page.json'), 'w'), ensure_ascii=False, separators=(',', ':'))
     open(os.path.join(out_dir, 'assets', 'contracts.js'), 'w').write(open(os.path.join(HERE, 'contracts.js')).read())
     govs = sorted(set(r['g'] for r in rows))
