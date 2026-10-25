@@ -99,6 +99,7 @@ def person_page(pid):
     x = G.ents[eid]
     cand = _by_person('candidates-2026').get(pid, [])
     fin = _by_person('campaign-finance').get(pid, [])
+    hist = sorted(_by_person('campaign-history').get(pid, []), key=lambda r: r.get('election_date') or '', reverse=True)  # every campaign since 2016
     pay = _by_person('officials-pay').get(pid, []) + _by_person('salary-leaders').get(pid, [])
     mv = sorted(_by_person('member-votes').get(pid, []), key=lambda r: r.get('date') or '', reverse=True)
     names = {x['name']} | set(x['aliases'])
@@ -110,7 +111,7 @@ def person_page(pid):
     govs = list(dict.fromkeys(g for g in (p.get('gov_ids') or [])))
     kpi = lambda lbl, val, s: f'<div class="kpi"><span class="eyebrow">{e(lbl)}</span><span class="v">{val}</span><span class="s">{e(s)}</span></div>'
     tally = Counter(str(r.get('vote')).lower() for r in mv)
-    raised = next((r['total_raised'] for r in cand if r.get('total_raised')), None) or next((r['total_raised'] for r in fin if r.get('total_raised')), None)
+    raised = next((r['total_raised'] for r in cand if r.get('total_raised')), None) or next((r['total_raised'] for r in fin if r.get('total_raised')), None) or next((r['total_raised'] for r in hist if r.get('total_raised')), None)
     sal = next((r.get('annual') or r.get('salary') for r in pay if (r.get('annual') or r.get('salary'))), None)
     kp = ''.join([kpi('Recorded votes', f'{len(mv):,}', ', '.join(f'{n} {k}' for k, n in tally.most_common(3)) or 'money votes on file') if mv else '',
                   kpi('Campaign raised', money(raised), 'most recent campaign on file') if raised else '',
@@ -121,7 +122,9 @@ def person_page(pid):
     # roles
     roles = []
     for g in govs:
-        rs = [r for r in p['roles'] if r.get('gov_id') == g]
+        rs = [r for r in p['roles'] if r.get('gov_id') == g and r.get('source') != 'campaign_history']  # past races go under "Ran for"
+        if not rs:
+            continue
         oh = [f"{r['role']} ({r['years']})" for r in rs if r.get('source') == 'officeholders']  # elected seats since 2014, with years
         best = next((r['role'] for r in rs if r.get('source') in ('salaries', 'officials-pay')), None) or next((r['role'].split(':', 1)[-1].strip() for r in rs if r.get('source') == 'campaign'), None) or (('; '.join(oh)) if oh else (rs[0]['role'] if rs else ''))
         roles.append(f'<li>{e(best[:1].upper() + best[1:])}<span>{gov_link(g)}</span></li>')
@@ -131,6 +134,10 @@ def person_page(pid):
         seat_roles = [r for r in p['roles'] if r.get('source') == 'officeholders'] or [r for r in p['roles'] if r.get('source') == 'votes']  # terms beat vote-record member lists
         former = bool(seat_roles) and all((r.get('role') or '').startswith('former') for r in seat_roles)
         facts.append(('Served' if former and not any(r.get('source') in ('salaries', 'officials-pay', 'campaign') for r in p['roles']) else 'Serves', f'<ul>{"".join(roles)}</ul>'))
+    ran = [r for r in p['roles'] if r.get('source') == 'campaign_history']
+    if ran:
+        ran = sorted(ran, key=lambda r: -(r.get('year') or 0))
+        facts.append(('Ran for', '<ul>' + ''.join(f'<li>{e(r["office"])}<span>{r["year"]}{" · " + e(r["outcome"]) if r.get("outcome") else ""}</span></li>' for r in ran[:4]) + '</ul>'))
     for c in cand[:1]:
         facts.append(('On the ballot', f'{e(c["office"])}<span>November 3, 2026{" · incumbent" if c.get("incumbent") else ""}</span>'))
     facts_h = ''.join(f'<div><dt>{k}</dt><dd>{v}</dd></div>' for k, v in facts)
@@ -142,14 +149,17 @@ def person_page(pid):
     <p class="small">Raised {money(c.get("total_raised"))} · spent {money(c.get("total_spent"))} · from individuals {money(c.get("from_individuals_total"))} ({c.get("from_individuals_count") or 0} gifts, not named) · from organizations {money(c.get("from_organizations"))} · own money {money(c.get("own_money"))}{f' · <a class="src" href="{e(c["finance_report_url"])}" target="_blank" rel="noopener">Campaign report</a>' if c.get("finance_report_url") else ''}{f' · <a href="{e(c["website"])}" target="_blank" rel="noopener nofollow">Campaign website</a>' if c.get("website") else ''}</p>
     <p class="small"><a href="/elections">Every 2026 race</a></p></section>'''
     # campaign money
-    if gifts or fin:
+    if gifts or fin or hist:
         gr = ''.join(f'<tr><th scope="row">{link(o["entity_id"])}<small>{e(EG.KIND_LABEL[o["kind"]])}</small></th><td class="num">{money(l["amount"])}</td><td class="small">{e(", ".join(sorted(set(l["dates"]))))}</td><td class="small">{e("; ".join(l["detail"]))}</td><td>{src(l["source_url"], "Report")}</td></tr>'
                      for l, o in sorted(gifts, key=lambda t: -(t[0]['amount'] or 0)))
         tot = ''.join(f'<li>{e(r.get("election") or "")}: raised {money(r.get("total_raised"))} from {r.get("n_contributions") or 0} contributions{" · " + src(r.get("report_url"), "Report") if r.get("report_url") else ""}</li>' for r in fin)
+        fin_urls = {r.get('report_url') for r in fin}
+        tot += ''.join(f'<li>{e(r["election_year"])} · {e(r["office"])}{" (" + e(r["outcome"]) + ")" if r.get("outcome") else ""}: raised {money(r.get("total_raised"))}, {money(r.get("from_individuals_total"))} of it from {r.get("from_individuals_count") or 0} individual gifts (not named){" · " + src(r.get("report_url"), "Report") if r.get("report_url") else ""}</li>'
+                       for r in hist if r.get('report_url') not in fin_urls)
         secs += f'''<section class="tx-sec"><div class="sec-hd"><h2 id="gifts" data-tile="Campaign gifts">Campaign gifts from businesses and groups</h2><span class="muted">Supervisor of Elections reports</span></div>
     {f'<ul class="plain">{tot}</ul>' if tot else ''}
     {f'<div class="tablewrap"><table class="tx-table vd-table"><thead><tr><th scope="col">From</th><th scope="col" class="num">Gave</th><th scope="col">Dates</th><th scope="col">Campaign</th><th scope="col">Source</th></tr></thead><tbody>{gr}</tbody></table></div>' if gr else '<p class="muted small">No gifts from businesses, PACs or committees in the reports on file.</p>'}
-    <p class="note">Businesses, PACs and committees are named here, and people who run a registered business are listed below. Other gifts from individual people are counted in the totals but never named. <a href="/connections/campaign-gifts">Campaign gifts</a> has every official.</p></section>'''
+    <p class="note">Businesses, PACs and committees are named here, and people who run a registered business are listed below. Other gifts from individual people are counted in the totals but never named. <a href="/connections/campaign-gifts">Campaign gifts</a> has every official and <a href="/elections/past">Past elections</a> every local race since 2016.</p></section>'''
     if owner_gifts:
         def runs(oid):
             return [o for l, o, d in EG.neighbors(oid) if l['relation'] == 'runs' and d == 'out']
@@ -217,9 +227,13 @@ def _kinds(p):
             ks.append('elected')
         elif src == 'salaries':
             ks.append('staff')
+        elif src == 'campaign_history':
+            ks.append('past')
     if 'elected' in ks:
         ks = [k for k in ks if k != 'staff']  # an official's pay row is not a staff job
-    return [k for k in ('elected', 'candidate', 'staff') if k in ks] or ['elected']
+    if 'past' in ks and ({'elected', 'candidate'} & set(ks)):
+        ks = [k for k in ks if k != 'past']  # an official or 2026 candidate who also ran before
+    return [k for k in ('elected', 'candidate', 'staff', 'past') if k in ks] or ['elected']
 
 
 def people_index():
@@ -240,11 +254,11 @@ def people_index():
                 govs[g] = G.ents['gov:' + g]['name']
         cards.append(dir_card(f'/people/{p["id"]}', x['name'], x['subtitle'] or '', ' · '.join(gov_link(g) for g in gids),
                               f'{n} link{"s" if n != 1 else ""}', ' '.join(ks), ' '.join(gids), n, also=' '.join(x['aliases'])))
-    chips = [('', 'Everyone', len(cards)), ('elected', 'Elected', kinds['elected']), ('candidate', '2026 candidates', kinds['candidate']), ('staff', 'Department leaders', kinds['staff'])]
+    chips = [('', 'Everyone', len(cards)), ('elected', 'Elected', kinds['elected']), ('candidate', '2026 candidates', kinds['candidate']), ('staff', 'Department leaders', kinds['staff']), ('past', 'Past candidates', kinds['past'])]
     k = lambda icon, tone, label, v, sub: f'<div class="kpi ui-k"><span class="kh">{ico(icon, tone)}<span class="eyebrow">{label}</span></span><span class="v">{v}</span><span class="s">{sub}</span></div>'
     return f'''<div class="page tax">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Connections · People</span><h1>Officials and candidates</h1>
-    <p class="lede">One page for each elected official, department leader and 2026 candidate in these records: where they serve, campaign money from businesses and groups, how they voted, and who they connect to. Below: the five countywide officers and what top officials are paid.</p></div>
+    <p class="lede">One page for each elected official, department leader and local candidate since 2016 in these records: where they serve, campaign money from businesses and groups, how they voted, and who they connect to. Below: the five countywide officers and what top officials are paid.</p></div>
     <div class="stamp"><a class="pill" href="#co">County officers</a><a class="pill" href="#pay">Officials' pay</a><a class="pill" href="/connections">Connections network</a></div></header>
   <div class="kpis">{k("users", "blue", "Elected officials", kinds["elected"], f"On {len(govs)} boards and offices")}{k("flag", "salmon", "2026 candidates", kinds["candidate"], "On the November 3 ballot")}{k("briefcase", "teal", "Department leaders", kinds["staff"], "Managers, clerks and chiefs")}{k("network", "amber", "Connections", f"{total_links:,}", "Companies, donors, boards and votes")}</div>
   <section class="tx-sec"><div class="sec-hd"><h2 id="all">Everyone</h2><span class="muted">{len(cards)} people</span></div>
@@ -268,7 +282,7 @@ def profile_shell():
 
 
 def pages():
-    out = [('/people', 'Officials and candidates', 'Every Bay County elected official, department leader and 2026 candidate, with campaign money, votes and connections.', people_index),
+    out = [('/people', 'Officials and candidates', 'Every Bay County elected official, department leader and local candidate since 2016, with campaign money, votes and connections.', people_index),
            ('/profile', 'Profile', 'A profile of a company, nonprofit, board member, business or committee in Bay County public records, with every documented connection.', profile_shell)]
     for p in _people():
         n = p['name']

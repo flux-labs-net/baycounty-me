@@ -529,6 +529,7 @@ from linkify import linkify_html, LINKIFY_JS
 from dates import us_dates_html, DATES_JS  # noqa: E402
 from developers_page import developers_page
 from elections_page import elections_page
+from past_elections_page import past_elections_page
 from exemptions_page import exemptions_page
 from es_pages import ES_MENU, localize_chrome, es_home, es_addr_page, es_glossary_page, es_records_page, glossary_es_terms, write_report_es, es_tax_page, es_fees_page, es_exemptions_page, es_elections_page, es_meetings_page, prune as prune_es
 from govs import GOVS as GOVLIST  # noqa: E402
@@ -663,6 +664,7 @@ PAGES = [
     ('/connections/campaign-gifts', 'Campaign gifts and contracts', "Who funded the campaigns of Bay County's current elected officials, from Supervisor of Elections reports, and which donors also hold local government contracts.", campaign_page),
     ('/public-money/budget-compare', 'Compare budgets across years', "Compare any Bay County government's budget in two fiscal years, such as Lynn Haven FY2025 and FY2026: what grew, what shrank and what's new, by department, service and fund, in dollars and percent.", lambda: budget_compare_page(OUT, None)),
     *([('/elections', "Who's running in 2026", 'Every local race on Bay County ballots in 2026: the candidates, their platforms in their own words, links to their campaigns, and where their campaign money comes from.', elections_page)] if ELECTIONS_READY else []),
+    ('/elections/past', 'Past local elections, 2016 to 2025', 'Every candidate who ran for a local office in Bay County from 2016 through 2025, winners and losers, with what each raised and spent and which businesses and groups gave.', past_elections_page),
     ('/public-money/exemptions', 'Property tax exemptions', 'Who gets a property tax exemption in Bay County, from homestead to disabled veterans, how many homes, and how much tax each one takes off bills, from the 2026 tax roll.', lambda: exemptions_page(OUT)),
     ('/public-money/contracts', 'Who gets the contracts', 'Major contracts approved by Bay County and its cities since 2022: winners, how they were awarded, change orders, emergency purchases and who the county paid most.', lambda: contracts_page(OUT)),
     ('/correspondence', 'Letters to officials',

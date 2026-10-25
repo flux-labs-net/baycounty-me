@@ -38,6 +38,7 @@ public enum SitePages {
         "/connections/campaign-gifts": .dataset("campaign-finance"),
         "/public-money/budget-compare": .web("two-year budget comparison, read live from /api/v1/budget-compare; the rows are the budget-years dataset in Explore"),
         "/elections": .dataset("candidates-2026"),
+        "/elections/past": .dataset("campaign-history"),
         "/public-money/exemptions": .dataset("property-tax-exemptions"),
         "/public-money/contracts": .dataset("contracts"),
         "/public-money/accountability": .native("Accountability console"),

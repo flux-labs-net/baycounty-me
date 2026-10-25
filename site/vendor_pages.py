@@ -211,7 +211,7 @@ def vendor_page(vid):
     <div class="tablewrap"><table class="tx-table"><thead><tr><th scope="col">Date</th><th scope="col">Government</th><th scope="col">What</th><th scope="col" class="num">Amount</th><th scope="col">Source</th></tr></thead><tbody>{"".join(_rec_line(r) for r in rs)}</tbody></table></div></section>'''
     gifts = ''
     if p['gifts']:
-        gr = ''.join(f'''<tr{data_g(g.get("office_gov_id"))}><th scope="row">{e(g["candidate"])}<small>{e(g["office"])} · {e("current officeholder" if g["gift_source"].startswith("current") else "2026 candidate")}</small></th>
+        gr = ''.join(f'''<tr{data_g(g.get("office_gov_id"))}><th scope="row">{e(g["candidate"])}<small>{e(g["office"])} · {e("current officeholder" if g["gift_source"].startswith("current") else "2026 candidate" if g["gift_source"].startswith("2026") else (g.get("election") or "past campaign"))}</small></th>
       <td class="num">{usd(g["contribution_amount"])}{f'<small>{usd(g["refunded_by_campaign"])} refunded</small>' if g.get("refunded_by_campaign") else ""}</td><td>{e(", ".join(g["contribution_dates"]))}</td>
       <td class="small">{"<span class='badge warn'>Same government</span> " if any(m == g.get("office_gov_id") for m in g["_govs"]) else ""}{e(", ".join(gname(x) for x in g["_govs"]))}</td>
       <td class="small">{e(ids.biz_case(g["contributor"]))}{" (spelled differently in the filing)" if g["match_confidence"] == "likely" else ""} <a class="src" href="{e(g["campaign_report_url"])}" target="_blank" rel="noopener">Report</a></td></tr>''' for g in sorted(p['gifts'], key=lambda g: (-g['contribution_amount'], g['candidate'])))
