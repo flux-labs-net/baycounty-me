@@ -89,7 +89,7 @@ def connections_gifts():
     return out
 
 
-# --- Money map (/connections/money-map) -------------------------------------------------------------------------------
+# --- Money map (/connections#donors) ----------------------------------------------------------------------------------
 
 def _mm():
     from money_map import map_data
@@ -166,7 +166,7 @@ def tax_districts():
             for k, d in a['districts'].items()]
 
 
-# --- Savings finder (/public-money/savings) ----------------------------------------------------------------------------
+# --- Savings ideas (government pages) --------------------------------------------------------------------------------
 
 def savings_opportunities():
     from savings_page import opportunity_rows

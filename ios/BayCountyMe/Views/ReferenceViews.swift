@@ -91,6 +91,9 @@ struct AboutView: View {
                 if let r = store.lastRefresh { LabeledContent("Checked", value: r.formatted(date: .abbreviated, time: .shortened)) }
                 Button { Task { await store.refreshAll() } } label: { Label("Check for new data", systemImage: "arrow.clockwise") }
             }
+            Section("App") {
+                LabeledContent("Version", value: Self.appVersion)
+            }
             Section {
                 WebLink(title: "Send a correction", symbol: "exclamationmark.bubble", url: URL(string: "https://baycounty.me/about#contact"))
                 WebLink(title: "Privacy", symbol: "hand.raised", url: URL(string: "https://baycounty.me/privacy"))
@@ -102,6 +105,14 @@ struct AboutView: View {
             Section { PoweredByFlux() }.listRowBackground(Color.clear)
         }
         .navigationTitle("About")
+    }
+
+    /// "1.0 (7)": marketing version and build number, so a TestFlight or Xcode build can be told apart.
+    static var appVersion: String {
+        let info = Bundle.main.infoDictionary
+        let v = info?["CFBundleShortVersionString"] as? String ?? "?"
+        let b = info?["CFBundleVersion"] as? String ?? "?"
+        return "\(v) (\(b))"
     }
 
     private func label(_ t: String, _ d: String) -> some View {

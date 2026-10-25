@@ -15,6 +15,21 @@ open BayCountyMe.xcodeproj
 
 Set your Team under Signing & Capabilities, pick an iPhone simulator, press Run.
 
+### Getting new changes into a build
+
+`BayCountyMe.xcodeproj` is generated and not committed, so a pull alone doesn't update it.
+
+```bash
+cd ios
+git pull origin main
+xcodegen                 # always, after every pull: picks up new Swift files and the build number
+open BayCountyMe.xcodeproj
+```
+
+In Xcode: Product > Clean Build Folder (Shift-Cmd-K), then Run. For TestFlight, bump
+`CURRENT_PROJECT_VERSION` in `project.yml` first (App Store Connect rejects a build number it already has),
+re-run `xcodegen`, then Product > Archive. About > App shows the version and build you're running.
+
 ## What's in it
 
 | Tab | What it shows |
@@ -69,4 +84,4 @@ In Xcode, ⌘U runs the same tests.
 2. Native versions of the tax calculator and My Address.
 3. Push alerts for new agendas (the site already has email alerts and an agenda watcher).
 4. Spanish, matching the site's `/es` pages.
-5. TestFlight.
+5. Automatic build numbers for TestFlight uploads.

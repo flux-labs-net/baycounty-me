@@ -56,12 +56,20 @@ def _surtax():
              'u': '/public-money/sales-tax-projects' + (f'?p={surtax_id(p)}' if surtax_id(p) and p.get('lat') is not None else '')} for p in d['infra_surtax']['projects']]
 
 
+def _gov_url(name):
+    """The government page that carries this audit (a city's page carries its CRA and port; Bay County's, the airport district)."""
+    from city_filter import gkey
+    from govs import BY_KEY
+    g = BY_KEY.get(gkey(name) or 'county')
+    return f"/governments/{g['slug']}"
+
+
 def _audits():
     d = json.load(open(os.path.join(DATA, 'debt_audit', 'debt_audit.json')))
     from debt_audit_page import short, finding_id
     q = __import__('urllib.parse').parse.quote
     return [{'k': 'Audit finding', 't': f"{short(a['government'])}: {f.get('title', '')}", 's': f.get('plain', ''),
-             'u': f"/public-money/audits?gov={q(short(a['government']))}#{finding_id(short(a['government']), a, f)}"} for a in d['audits'] for f in a['findings']]
+             'u': f"{_gov_url(a['government'])}#{finding_id(short(a['government']), a, f)}"} for a in d['audits'] for f in a['findings']]
 
 
 def _contracts():

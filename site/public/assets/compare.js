@@ -38,7 +38,7 @@ function draw() {
     if (!vals.length) return '';
     const mx = Math.max(...vals.map(([, v]) => v)) || 1;
     vals.sort((a, b) => b[1] - a[1]);
-    return `<section class="card cmp-card"><h3>${esc(title)}${per && perable ? ` <span class="muted small">${id === 'emp' ? 'per 1,000 residents' : 'per resident'}</span>` : ''}</h3><p class="muted small">${esc(help)}</p>
+    return `<section class="card cmp-card" id="m-${id}"><h3>${esc(title)}${per && perable ? ` <span class="muted small">${id === 'emp' ? 'per 1,000 residents' : 'per resident'}</span>` : ''}</h3><p class="muted small">${esc(help)}</p>
       <div class="hbars">${vals.map(([r, v]) => `<div class="hb"><span class="hb-n"><a href="/governments/${r.slug}">${esc(r.n)}</a></span><span class="hb-track"><span class="hb-bar" style="width:${Math.max(0.5, v / mx * 100).toFixed(1)}%;background:${color[r.k]}"></span></span><span class="hb-v">${esc(fmt(v, per && perable, r))}</span></div>`).join('')}</div>
       ${missing.length ? `<p class="note small">Not available: ${esc(missing.join(', '))}</p>` : ''}</section>`;
   }).join('');
@@ -49,4 +49,6 @@ document.querySelectorAll('[data-set]').forEach(b => b.addEventListener('click',
   sel = new Set(b.dataset.set === 'all' ? R.map(r => r.k) : b.dataset.set === 'cities' ? R.filter(r => r.kind === 'city').map(r => r.k) : []); chips(); draw(); }));
 $('cmpPer').addEventListener('input', draw);
 chips(); draw();
+// links such as /compare#m-debt point at a card drawn above
+{ const t = location.hash && document.getElementById(location.hash.slice(1)); if (t) t.scrollIntoView(); }
 })();

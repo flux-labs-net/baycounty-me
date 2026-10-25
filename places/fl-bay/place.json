@@ -19,9 +19,9 @@
     "about": "a managed IT services company in Panama City"
   },
   "officials": {
-    "href": "/who-runs-bay-county",
-    "label": "Who runs Bay County",
-    "desc": "Every elected seat and top salary"
+    "href": "/people",
+    "label": "Officials and pay",
+    "desc": "Every official, county officers and top salaries"
   },
   "governments": [
     {

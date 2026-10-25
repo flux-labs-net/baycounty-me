@@ -102,6 +102,7 @@ def bedtax_page(out_dir):
   <section class="tx-sec"><div class="sec-hd"><h2 id="con">Major contracts</h2></div><ul class="plain" data-city-empty="No tourist tax contracts specific to the {{city}} zone in these records.">{con}</ul></section>
   <section class="tx-sec"><div class="sec-hd"><h2 id="news">Recent decisions and news</h2></div><ol class="timeline">{ctx}</ol>
     <p class="note">Criminal charges described above are allegations, not convictions.</p></section>
+  {__import__('money_pages').payments_section()}
   <section class="tx-sec method"><div class="sec-hd"><h2 id="src">Gaps</h2></div><ul class="plain">{''.join(f"<li>{e(g)}</li>" for g in d["gaps"] if any(w in g for w in ("TDT", "TDC", "bed", "ad agency", "CVB")))}</ul></section>
   <div class="tt" id="tt" role="tooltip" hidden></div>
 </div>
@@ -198,6 +199,7 @@ def surtax_page(out_dir):
   <section class="tx-sec"><div class="sec-hd"><h2 id="sch-h">The school half-cent</h2></div>
     <div class="two"><div><h3 class="h4">Collected by Bay District Schools</h3><div class="tablewrap"><table class="tx-table"><thead><tr><th scope="col">Year</th><th scope="col" class="num">Collected</th></tr></thead><tbody>{scol}</tbody></table></div><p class="note">From the district's audited statements (school years end June 30).</p></div>
     <div><h3 class="h4">Projects tied to the tax by a source</h3><ul class="plain">{sproj}</ul><p class="note">{e(sch["promised_project_list_note"])} The district had ${sch["construction_commitments_total"]["total_contract"]/1e6:,.1f}M in construction contracts open at June 30, 2025, paid from all sources, not only the surtax. {a(sch["construction_commitments_total"]["source_url"])}</p></div></div></section>
+  {__import__('money_pages').payments_section()}
   <section class="tx-sec method"><div class="sec-hd"><h2 id="src">Gaps</h2></div><ul class="plain">{''.join(f"<li>{e(g)}</li>" for g in d["gaps"] if any(w in g.lower() for w in ("surtax", "school", "oversight", "infrastructure")))}</ul></section>
   <div class="tt" id="tt" role="tooltip" hidden></div>
 </div>

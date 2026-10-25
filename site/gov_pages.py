@@ -3,6 +3,9 @@ import html, json, os, re
 from datetime import date
 from city_filter import city_bar
 from govs import CRA_NAME
+from gov_detail import debt_detail, audit_section, savings_section, savings_hint, budget_detail
+from site_menu import OPEN_BOOKS_PUBLIC
+OPEN_BOOKS_LINKS = ' · <a href="/public-money/budget-tracker?gov={key}">Spending against the budget</a> · <a href="/public-money/checkbook?gov={key}">Every payment</a>'
 _dumps = json.dumps
 
 
@@ -109,6 +112,9 @@ def year_cards(key, rows, fy):
     return out, fy, r.get('period') or ''
 
 
+SAV_ASSETS = '<link rel="stylesheet" href="/assets/savings.css"><script src="/assets/savings.js" defer></script>'
+
+
 def gov_page(key):
     from fees_page import roster_li, STAFF
     p = profile(key)
@@ -141,7 +147,7 @@ def gov_page(key):
         links = ''.join(x for x in [
             f'<a class="ui-tag" href="{e(off["website"])}" target="_blank" rel="noopener">{ico("globe")}Website</a>' if off.get('website') else '',
             f'<a class="ui-tag" href="{e(off["contact_url"])}" target="_blank" rel="noopener">{ico("mail")}Contact</a>' if off.get('contact_url') else '',
-            f'<a class="ui-tag" href="/who-runs-bay-county">{ico("users")}All officials</a>'])
+            f'<a class="ui-tag" href="/people">{ico("users")}All officials</a>'])
         secs.append(f'''<section class="tx-sec"><div class="sec-hd"><h2 id="who">Who's in charge</h2><span class="muted">{e(off.get("form") or "")}</span></div>
           <p class="small muted" id="gxBoardNote">Today's officials. Pick a year in the bar at the top to see who held each seat, and who was manager, that year.</p>
           <div class="ui-people" id="gxBoard">{"".join(_person_card(s, i) for i, s in enumerate(board))}</div>
@@ -153,7 +159,7 @@ def gov_page(key):
         ctx = ''.join(f'<p class="note">{e(t)} {src(u)}</p>' for t, u in (b.get('context') or [])[:2])
         secs.append(f'''<section class="tx-sec"><div class="sec-hd"><h2 id="money">Money in, money out</h2><span class="muted">{e(b.get("status") or "")} budget{" · general fund " + money(b["general_fund"]) if b.get("general_fund") else ""}</span></div>
           <div class="two"><div><h3 class="h4">Where the money comes from</h3>{hbars(list((b.get("revenue") or {}).items()), "var(--s3)")}</div><div><h3 class="h4">What the general fund pays for</h3>{hbars(list((b.get("spending") or {}).items()))}</div></div>
-          {ctx}<p class="src-line">{srcs} · <a href="/public-money/tax-dollars">Compare every government's budget</a>{' · <a href="/public-money/budget-explorer?gov=' + key + '">Budget explorer</a>' if p.get("budget_detail") else ''} · <a href="/public-money/budget-compare?gov={key}">Compare years</a></p></section>''')
+          {ctx}{budget_detail(key, pop)}<p class="src-line">{srcs} · <a href="/compare#services">Compare every government's budget</a> · <a href="/public-money/budget-compare?gov={key}">Compare years</a>{OPEN_BOOKS_LINKS.format(key=key) if OPEN_BOOKS_PUBLIC else ''}</p></section>''')
     # tax rate history
     m = p.get('millage')
     if m and any(x is not None for x in m.get('rate') or []):
@@ -168,24 +174,14 @@ def gov_page(key):
     # debt
     d = p.get('debt')
     if d:
-        LBL = {'notes_loans': 'Notes and loans', 'revenue_bonds': 'Revenue bonds', 'general_obligation_bonds': 'General obligation bonds', 'leases': 'Leases', 'sbitas': 'Software subscriptions (SBITAs)', 'bond_premium': 'Bond premium', 'finance_purchases': 'Finance purchases'}
-        bt = ''.join(f'<tr><th scope="row">{e(LBL.get(k, k.replace("_", " ").capitalize()))}</th><td class="num">{usd(v)}</td></tr>' for k, v in (d.get('by_type') or {}).items()
-                     if isinstance(v, (int, float)) and v and not any(x in k for x in ('compensated', 'pension', 'opeb', 'landfill', 'claims', 'total')))
-        rel = ''.join(f'<li>{e(x["name"])}: {money(x["total"])}</li>' for x in d.get('related') or [] if x.get('total'))
         secs.append(f'''<section class="tx-sec"><div class="sec-hd"><h2 id="debt">Debt</h2><span class="muted">{e(d.get("fy") or "")}</span></div>
           <p><b>{money(d["total"])}</b> owed{f" — about {usd(pr['debt'])} per resident" if pr.get("debt") else ""}. {e(d.get("note") or "")}</p>
-          {f'<div class="tablewrap"><table class="tx-table"><thead><tr><th scope="col">Kind of debt</th><th scope="col" class="num">Owed</th></tr></thead><tbody>{bt}</tbody></table></div>' if bt else ''}
-          {f'<p class="small">Related agencies:</p><ul class="plain small">{rel}</ul>' if rel else ''}
-          <p class="src-line">{src(d.get("source_url"), "Audited financial statements")} · <a href="/public-money/debt">All local debt</a></p></section>''')
-    # audits
+          {debt_detail(key)}
+          <p class="src-line">{src(d.get("source_url"), "Audited financial statements")} · <a href="/compare">Compare debt across governments</a></p></section>''')
+    # audits: every year on file, with each finding
     au = p.get('audits')
-    if au:
-        last = au[0]
-        fl = ''.join(f'<li class="fd"><div class="fd-hd"><b>{e(f["title"])}</b>{" <span class=\"badge warn\">Repeat</span>" if f["repeat"] else ""}</div><p class="small">{e(f.get("plain") or "")}</p></li>' for f in last['findings'][:4])
-        counts = ' · '.join(f'{a["fy"]}: {len(a["findings"])} finding{"s" if len(a["findings"]) != 1 else ""}' for a in au)
-        secs.append(f'''<section class="tx-sec"><div class="sec-hd"><h2 id="audits">What the auditors found</h2><span class="muted">{e(counts)}</span></div>
-          {f'<ol class="findings">{fl}</ol>' if fl else '<p>No findings in the latest audit.</p>'}
-          <p class="src-line">{src(last.get("source_url"), last["fy"] + " audit")} · <a href="/public-money/audits">All audit findings</a></p></section>''')
+    if audit_section(key):
+        secs.append(audit_section(key))
     if p.get('utility_bill'):
         u = p['utility_bill']; static.append(kpi('Typical utility bill', f'${u["total"]:,.2f}', f'a month at 5,000 gallons at today\'s rates{"" if u.get("garbage") else ", garbage not included"} · <a href="/public-money/fees-and-bills?gov={key}">compare</a>', static=True))
     # meetings
@@ -209,7 +205,8 @@ def gov_page(key):
     by_id = {re.search(r'id="([a-z]+)"', x).group(1): x for x in secs}
     cra = g.get('cra')
     live_secs = {'contracts': live('contracts', 'Contracts'), 'cra': live('cra', 'Redevelopment (CRA) spending') if cra else '',
-                 'projects': live('projects', 'Projects'), 'votes': live('votes', 'How they voted'), 'savings': live('savings', 'Where it could spend less')}
+                 'projects': live('projects', 'Projects'), 'votes': live('votes', 'How they voted'), 'savings': savings_section(key)}
+    live_secs['savings'] = live_secs['savings'].replace('<div class="sec-hd"><h2>', f'<div class="sec-hd">{ico(*SEC["savings"][:2])}<h2>', 1)
     order = ['who', 'money', 'rate', 'contracts', 'cra', 'projects', 'votes', 'meet', 'debt', 'audits', 'savings', 'act']
     body = ''.join(by_id.get(i) or live_secs.get(i) or '' for i in order)
     # section tiles: a one-line preview under each name (gov.js fills the year-dependent ones)
@@ -222,7 +219,7 @@ def gov_page(key):
             'contracts': 'Awards and how they were bid', 'cra': 'Redevelopment spending', 'projects': 'Budget to close-out', 'votes': 'Money votes',
             'meet': f'Next: {_md(up[0]["start"])}' if up else 'Calendar', 'debt': f'{money(p["debt"]["total"])} · {e(p["debt"].get("fy") or "").split(" ")[0]}' if p.get('debt') else 'What it owes',
             'audits': (lambda au: f'{len(au[0]["findings"])} finding{"s" if len(au[0]["findings"]) != 1 else ""} in {e(au[0]["fy"])}')(p['audits']) if p.get('audits') else 'Audit findings',
-            'savings': 'Ways to spend less'}
+            'savings': savings_hint(key)}
     ids = [i for i in ['who', 'money', 'rate', 'contracts', 'cra', 'projects', 'votes', 'meet', 'debt', 'audits', 'savings'] if f'id="{i}"' in body]
     tiles = ''.join(f'<a href="#{i}" data-jump="{i}">{ico(SEC[i][0], SEC[i][1])}<span><b>{SEC[i][2]}</b><small>{hint.get(i, "")}</small></span></a>' for i in ids)
     mini = ''.join(f'<a href="#{i}">{ico(SEC[i][0])}{SEC[i][2]}</a>' for i in ids)
@@ -254,7 +251,7 @@ def gov_page(key):
 <link rel="stylesheet" href="/assets/tax.css">
 <link rel="stylesheet" href="/assets/gov.css">
 <script>window.GOVPAGE={_dumps(cfg)};</script>
-<script src="/assets/gov.js" defer></script>'''
+<script src="/assets/gov.js" defer></script>{SAV_ASSETS if 'id="svList"' in body else ''}'''
 
 
 def _person_card(s, i, staff=False):

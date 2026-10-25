@@ -1,4 +1,4 @@
-"""Money map (/connections/money-map): officials <- donor organizations -> governments that pay those donors.
+"""Money map (the "Donors and votes" view of /connections; /connections/money-map redirects there): officials <- donor organizations -> governments that pay those donors.
 
 The donor sits in the middle so each fact is shown once and attached to who it belongs to:
 a gift links a donor to the official who received it; a contract links the donor to the government that awarded it.
@@ -163,11 +163,12 @@ def OFFG(o):
     return o['g']
 
 
-def money_map_page(out_dir):
+def money_map_section(out_dir):
+    """The Connections page's \"Donors and votes\" view (formerly /connections/money-map). Writes assets/money_map.js."""
     try:
         D = map_data()
     except FileNotFoundError:
-        return '<div class="page prose"><h1>Money map</h1><p>Coming soon.</p></div>'
+        return ''
     js = open(os.path.join(HERE, 'money_map.js')).read().replace('__MM__', json.dumps(D, ensure_ascii=False, separators=(',', ':')))
     open(os.path.join(out_dir, 'assets', 'money_map.js'), 'w').write(js)
     e = cp.e
@@ -190,39 +191,26 @@ def money_map_page(out_dir):
     k_sameg = lambda os_, vg: f"gifts totaling {usd(sum(g['a'] for g in same if g['o'] in os_))}"
     k_voted = lambda os_, vg: len({(d, o) for d, o in voted if o in os_})
     k_votedn = lambda os_, vg: f"official–donor pairs, {len(vg)} recorded votes"
-    return f'''<div class="page tax mm">
-  <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Connections · Money map</span><h1>Money map</h1>
-    <p class="lede">Which businesses and groups gave to which officials' campaigns, and which of those donors are paid by a local government. Tap any name to follow its connections.</p></div>
-    <div class="stamp"><a class="pill" href="/connections">See the network</a><a class="pill" href="/connections/campaign-gifts">Campaign gift tables</a><button type="button" class="pdf-btn" id="pdf"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 12v2h10v-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Export PDF</button><span>Reports as of {e(D.get("as_of"))}</span></div></header>
-  {city_bar(ck, label='Officials of', note='Bay County includes the county officers')}
-  <section class="explain"><div class="ex-txt"><span class="eyebrow">Read this first</span><h2>What the map does and doesn't show</h2>
-    <ol class="ex-steps"><li><b>A gift and a contract are two separate facts.</b> A line to an official is a campaign gift. A line to a government is that government's contracts or payments to the same business. The map never adds contract dollars to an official.</li>
-      <li><b>Officials only vote on their own government's contracts.</b> A county commissioner has no say in a city's contracts. The connections that can matter are marked: a gift to an official whose own government pays that donor.</li>
-      <li><b>None of this shows wrongdoing.</b> Contracts are usually bid, and most are approved by the full board, often on a consent agenda with routine items. The dates are shown so you can see what came first.</li></ol></div></section>
-  <div class="kpis">
-    <div class="kpi"><span class="eyebrow">Donor organizations</span><span class="v"{per(k_donors)}>{len(D["donors"])}</span><span class="s"{per(k_off)}>gave to {len(D["officials"])} current officials</span></div>
-    <div class="kpi"><span class="eyebrow">Also paid by a local government</span><span class="v"{per(k_k)}>{len(k_ids)}</span><span class="s"{per(k_kg)}>gave ${k_gift:,.0f} in all</span></div>
-    <div class="kpi"><span class="eyebrow">Gift to the official's own government's contractor</span><span class="v"{per(k_same)}>{len(same)}</span><span class="s"{per(k_sameg)}>gifts totaling ${sum(g["a"] for g in same):,.0f}</span></div>
-    <div class="kpi"><span class="eyebrow">Voted on that donor's contract</span><span class="v"{per(k_voted)}>{len(voted)}</span><span class="s"{per(k_votedn)}>official–donor pairs, {len(D["vgroups"])} recorded votes</span></div>
-  </div>
-  <div class="vt-filters mm-f">
-    <label class="vf"><span>Show donors</span><select id="mmShow"><option value="same">Gave to an official whose government pays them</option><option value="k">Paid by any local government</option><option value="top">Top 40 by amount given</option><option value="all">All organizations</option></select></label>
-    <label class="vf"><span>Find</span><input id="mmQ" type="search" placeholder="Donor or official"></label>
-  </div>
-  <section class="tx-sec"><div class="sec-hd"><h2 id="map">Relationship map</h2><span class="muted" id="mmCount"></span></div>
+    return f'''<section id="v-donors" class="mm" hidden><div class="cn-vh"><h2 id="map">Donors, officials and votes on their contracts</h2><span class="cn-note" id="mmCount"></span></div>
+    <div class="cn-pad">
+    <div class="kpis">
+      <div class="kpi"><span class="eyebrow">Donor organizations</span><span class="v"{per(k_donors)}>{len(D["donors"])}</span><span class="s"{per(k_off)}>gave to {len(D["officials"])} current officials</span></div>
+      <div class="kpi"><span class="eyebrow">Also paid by a local government</span><span class="v"{per(k_k)}>{len(k_ids)}</span><span class="s"{per(k_kg)}>gave ${k_gift:,.0f} in all</span></div>
+      <div class="kpi"><span class="eyebrow">Gift to the official's own government's contractor</span><span class="v"{per(k_same)}>{len(same)}</span><span class="s"{per(k_sameg)}>gifts totaling ${sum(g["a"] for g in same):,.0f}</span></div>
+      <div class="kpi"><span class="eyebrow">Voted on that donor's contract</span><span class="v"{per(k_voted)}>{len(voted)}</span><span class="s"{per(k_votedn)}>official–donor pairs, {len(D["vgroups"])} recorded votes</span></div>
+    </div>
+    <p class="cn-note">A gift and a contract are two separate facts: a line to an official is a campaign gift, and a line to a government is that government's contracts or payments to the same business. Officials only vote on their own government's contracts, so the connections that can matter are marked. None of this shows wrongdoing; most contracts are bid and approved by the full board.</p>
+    <div class="vt-filters mm-f">
+      <label class="vf"><span>Show donors</span><select id="mmShow"><option value="same">Gave to an official whose government pays them</option><option value="k">Paid by any local government</option><option value="top">Top 40 by amount given</option><option value="all">All organizations</option></select></label>
+      <label class="vf"><span>Find</span><input id="mmQ" type="search" placeholder="Donor or official"></label>
+    </div>
     <div class="mm-legend"><span><i class="lg-gift"></i>Campaign gift</span><span><i class="lg-same"></i>Gift to an official whose government pays the donor</span><span><i class="lg-con"></i>Government's contracts or payments to the donor</span><span class="muted">Line thickness shows dollars; gifts and contracts use separate scales</span></div>
     <p class="mm-hint muted small">Scroll sideways to see the whole map.</p><div class="mm-wrap" id="mmWrap"><svg id="mmSvg" role="img" aria-label="Map of officials, the organizations that gave to their campaigns, and the governments that pay those organizations"></svg></div>
     <div class="mm-detail" id="mmDetail" aria-live="polite"><p class="muted">Tap an official, donor or government to see its connections and the records behind them.</p></div>
-  </section>
-  <section class="tx-sec"><div class="sec-hd"><h2 id="votes">Votes on a donor's contract</h2><span class="muted">Contract votes where at least one board member had received a gift from the business. The full roll call is shown; members who got a gift are listed first, in bold.</span></div>
+    <h3 class="h4" id="votes">Votes on a donor's contract</h3><p class="cn-note">Contract votes where at least one board member had received a gift from the business. The full roll call is shown; members who got a gift are listed first, in bold.</p>
     <div class="tablewrap"><table class="tx-table cm-table" id="mmVotes"></table></div>
-    <p class="note">From the meeting minutes on the <a href="/public-money/votes">How They Voted</a> page, matched by the company's exact name. "Consent" means the item was approved in one vote with other routine items. Only the votes on this site are checked; contracts approved by staff under a purchasing limit never come to a vote.</p></section>
-  <section class="tx-sec"><div class="sec-hd"><h2 id="heat1">Heat map: who gave to which government's officials</h2><span class="muted">Top 30 donor organizations</span></div>
+    <p class="cn-note">From the meeting minutes on the <a href="/public-money/votes">How They Voted</a> page, matched by the company's exact name. "Consent" means the item was approved in one vote with other routine items. Only the votes on this site are checked; contracts approved by staff under a purchasing limit never come to a vote.</p>
+    <h3 class="h4" id="heat1">Who gave to which government's officials</h3><p class="cn-note">Top 30 donor organizations. Each cell is what the organization gave to the campaigns of that government's current officials; darker means more. A ring marks a cell where that same government also pays the donor.</p>
     <div class="tablewrap"><table data-tt="off" class="heat" id="mmHeat1"></table></div>
-    <p class="note">Each cell is what the organization gave to the campaigns of that government's current officials. Darker means more. A ring marks a cell where that same government also pays the donor.</p></section>
-  <section class="tx-sec method"><div class="sec-hd"><h2 id="src">Sources and method</h2></div>
-    <p>Gifts come from the officials' most recent campaign reports with the Supervisor of Elections. Contracts and payments come from the contracts, change orders and check registers on this site, matched by organization name; each donor's contracts with a government are counted once. Only organizations are shown; gifts from individual people, including a company's owners or employees, are counted on the <a href="/connections/campaign-gifts">Campaign Money</a> page but not named or linked to a company.</p></section>
-</div>
-<link rel="stylesheet" href="/assets/tax.css">
-<script>(() => {{ const u = new URL(location.href); if (u.searchParams.get('gov') === 'constitutional') {{ u.searchParams.set('gov', 'county'); history.replaceState(history.state, '', u); }} }})(); /* old links for the county officers: before the city bar reads ?gov= */</script>
-<script src="/assets/money_map.js" defer></script>'''
+    <p class="cn-note">Gifts come from the officials' most recent campaign reports with the Supervisor of Elections. Contracts and payments come from the contracts, change orders and check registers on this site, matched by organization name. Only organizations are shown here; gifts from individual people are on <a href="/connections/campaign-gifts">Campaign gifts</a>.</p>
+    </div></section>'''

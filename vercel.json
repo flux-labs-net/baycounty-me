@@ -41,7 +41,479 @@
     },
     {
       "source": "/public-money/money-map",
-      "destination": "/connections/money-map",
+      "destination": "/connections#donors",
+      "permanent": true
+    },
+    {
+      "source": "/public-money/budget-explorer",
+      "has": [
+        {
+          "type": "query",
+          "key": "gov",
+          "value": "county"
+        }
+      ],
+      "destination": "/governments/bay-county#money",
+      "permanent": true
+    },
+    {
+      "source": "/public-money/budget-explorer",
+      "has": [
+        {
+          "type": "query",
+          "key": "gov",
+          "value": "schools"
+        }
+      ],
+      "destination": "/governments/bay-district-schools#money",
+      "permanent": true
+    },
+    {
+      "source": "/public-money/budget-explorer",
+      "has": [
+        {
+          "type": "query",
+          "key": "gov",
+          "value": "pc"
+        }
+      ],
+      "destination": "/governments/panama-city#money",
+      "permanent": true
+    },
+    {
+      "source": "/public-money/budget-explorer",
+      "has": [
+        {
+          "type": "query",
+          "key": "gov",
+          "value": "pcb"
+        }
+      ],
+      "destination": "/governments/panama-city-beach#money",
+      "permanent": true
+    },
+    {
+      "source": "/public-money/budget-explorer",
+      "has": [
+        {
+          "type": "query",
+          "key": "gov",
+          "value": "lh"
+        }
+      ],
+      "destination": "/governments/lynn-haven#money",
+      "permanent": true
+    },
+    {
+      "source": "/public-money/budget-explorer",
+      "has": [
+        {
+          "type": "query",
+          "key": "gov",
+          "value": "cw"
+        }
+      ],
+      "destination": "/governments/callaway#money",
+      "permanent": true
+    },
+    {
+      "source": "/public-money/budget-explorer",
+      "has": [
+        {
+          "type": "query",
+          "key": "gov",
+          "value": "sp"
+        }
+      ],
+      "destination": "/governments/springfield#money",
+      "permanent": true
+    },
+    {
+      "source": "/public-money/budget-explorer",
+      "has": [
+        {
+          "type": "query",
+          "key": "gov",
+          "value": "parker"
+        }
+      ],
+      "destination": "/governments/parker#money",
+      "permanent": true
+    },
+    {
+      "source": "/public-money/budget-explorer",
+      "has": [
+        {
+          "type": "query",
+          "key": "gov",
+          "value": "mb"
+        }
+      ],
+      "destination": "/governments/mexico-beach#money",
+      "permanent": true
+    },
+    {
+      "source": "/public-money/savings",
+      "has": [
+        {
+          "type": "query",
+          "key": "gov",
+          "value": "county"
+        }
+      ],
+      "destination": "/governments/bay-county#savings",
+      "permanent": true
+    },
+    {
+      "source": "/public-money/savings",
+      "has": [
+        {
+          "type": "query",
+          "key": "gov",
+          "value": "schools"
+        }
+      ],
+      "destination": "/governments/bay-district-schools#savings",
+      "permanent": true
+    },
+    {
+      "source": "/public-money/savings",
+      "has": [
+        {
+          "type": "query",
+          "key": "gov",
+          "value": "pc"
+        }
+      ],
+      "destination": "/governments/panama-city#savings",
+      "permanent": true
+    },
+    {
+      "source": "/public-money/savings",
+      "has": [
+        {
+          "type": "query",
+          "key": "gov",
+          "value": "pcb"
+        }
+      ],
+      "destination": "/governments/panama-city-beach#savings",
+      "permanent": true
+    },
+    {
+      "source": "/public-money/savings",
+      "has": [
+        {
+          "type": "query",
+          "key": "gov",
+          "value": "lh"
+        }
+      ],
+      "destination": "/governments/lynn-haven#savings",
+      "permanent": true
+    },
+    {
+      "source": "/public-money/savings",
+      "has": [
+        {
+          "type": "query",
+          "key": "gov",
+          "value": "cw"
+        }
+      ],
+      "destination": "/governments/callaway#savings",
+      "permanent": true
+    },
+    {
+      "source": "/public-money/savings",
+      "has": [
+        {
+          "type": "query",
+          "key": "gov",
+          "value": "sp"
+        }
+      ],
+      "destination": "/governments/springfield#savings",
+      "permanent": true
+    },
+    {
+      "source": "/public-money/savings",
+      "has": [
+        {
+          "type": "query",
+          "key": "gov",
+          "value": "parker"
+        }
+      ],
+      "destination": "/governments/parker#savings",
+      "permanent": true
+    },
+    {
+      "source": "/public-money/savings",
+      "has": [
+        {
+          "type": "query",
+          "key": "gov",
+          "value": "mb"
+        }
+      ],
+      "destination": "/governments/mexico-beach#savings",
+      "permanent": true
+    },
+    {
+      "source": "/public-money/debt",
+      "has": [
+        {
+          "type": "query",
+          "key": "gov",
+          "value": "county"
+        }
+      ],
+      "destination": "/governments/bay-county#debt",
+      "permanent": true
+    },
+    {
+      "source": "/public-money/debt",
+      "has": [
+        {
+          "type": "query",
+          "key": "gov",
+          "value": "schools"
+        }
+      ],
+      "destination": "/governments/bay-district-schools#debt",
+      "permanent": true
+    },
+    {
+      "source": "/public-money/debt",
+      "has": [
+        {
+          "type": "query",
+          "key": "gov",
+          "value": "pc"
+        }
+      ],
+      "destination": "/governments/panama-city#debt",
+      "permanent": true
+    },
+    {
+      "source": "/public-money/debt",
+      "has": [
+        {
+          "type": "query",
+          "key": "gov",
+          "value": "pcb"
+        }
+      ],
+      "destination": "/governments/panama-city-beach#debt",
+      "permanent": true
+    },
+    {
+      "source": "/public-money/debt",
+      "has": [
+        {
+          "type": "query",
+          "key": "gov",
+          "value": "lh"
+        }
+      ],
+      "destination": "/governments/lynn-haven#debt",
+      "permanent": true
+    },
+    {
+      "source": "/public-money/debt",
+      "has": [
+        {
+          "type": "query",
+          "key": "gov",
+          "value": "cw"
+        }
+      ],
+      "destination": "/governments/callaway#debt",
+      "permanent": true
+    },
+    {
+      "source": "/public-money/debt",
+      "has": [
+        {
+          "type": "query",
+          "key": "gov",
+          "value": "sp"
+        }
+      ],
+      "destination": "/governments/springfield#debt",
+      "permanent": true
+    },
+    {
+      "source": "/public-money/debt",
+      "has": [
+        {
+          "type": "query",
+          "key": "gov",
+          "value": "parker"
+        }
+      ],
+      "destination": "/governments/parker#debt",
+      "permanent": true
+    },
+    {
+      "source": "/public-money/debt",
+      "has": [
+        {
+          "type": "query",
+          "key": "gov",
+          "value": "mb"
+        }
+      ],
+      "destination": "/governments/mexico-beach#debt",
+      "permanent": true
+    },
+    {
+      "source": "/public-money/audits",
+      "has": [
+        {
+          "type": "query",
+          "key": "gov",
+          "value": "county"
+        }
+      ],
+      "destination": "/governments/bay-county#audits",
+      "permanent": true
+    },
+    {
+      "source": "/public-money/audits",
+      "has": [
+        {
+          "type": "query",
+          "key": "gov",
+          "value": "schools"
+        }
+      ],
+      "destination": "/governments/bay-district-schools#audits",
+      "permanent": true
+    },
+    {
+      "source": "/public-money/audits",
+      "has": [
+        {
+          "type": "query",
+          "key": "gov",
+          "value": "pc"
+        }
+      ],
+      "destination": "/governments/panama-city#audits",
+      "permanent": true
+    },
+    {
+      "source": "/public-money/audits",
+      "has": [
+        {
+          "type": "query",
+          "key": "gov",
+          "value": "pcb"
+        }
+      ],
+      "destination": "/governments/panama-city-beach#audits",
+      "permanent": true
+    },
+    {
+      "source": "/public-money/audits",
+      "has": [
+        {
+          "type": "query",
+          "key": "gov",
+          "value": "lh"
+        }
+      ],
+      "destination": "/governments/lynn-haven#audits",
+      "permanent": true
+    },
+    {
+      "source": "/public-money/audits",
+      "has": [
+        {
+          "type": "query",
+          "key": "gov",
+          "value": "cw"
+        }
+      ],
+      "destination": "/governments/callaway#audits",
+      "permanent": true
+    },
+    {
+      "source": "/public-money/audits",
+      "has": [
+        {
+          "type": "query",
+          "key": "gov",
+          "value": "sp"
+        }
+      ],
+      "destination": "/governments/springfield#audits",
+      "permanent": true
+    },
+    {
+      "source": "/public-money/audits",
+      "has": [
+        {
+          "type": "query",
+          "key": "gov",
+          "value": "parker"
+        }
+      ],
+      "destination": "/governments/parker#audits",
+      "permanent": true
+    },
+    {
+      "source": "/public-money/audits",
+      "has": [
+        {
+          "type": "query",
+          "key": "gov",
+          "value": "mb"
+        }
+      ],
+      "destination": "/governments/mexico-beach#audits",
+      "permanent": true
+    },
+    {
+      "source": "/public-money/budget-explorer",
+      "destination": "/compare#services",
+      "permanent": true
+    },
+    {
+      "source": "/public-money/savings",
+      "destination": "/governments",
+      "permanent": true
+    },
+    {
+      "source": "/public-money/debt",
+      "destination": "/compare#m-debt",
+      "permanent": true
+    },
+    {
+      "source": "/public-money/audits",
+      "destination": "/compare#m-findings",
+      "permanent": true
+    },
+    {
+      "source": "/public-money/who-gets-paid",
+      "destination": "/public-money/tourist-tax#paid",
+      "permanent": true
+    },
+    {
+      "source": "/public-money/map",
+      "destination": "/public-money/sales-tax-projects",
+      "permanent": true
+    },
+    {
+      "source": "/who-runs-bay-county",
+      "destination": "/people",
+      "permanent": true
+    },
+    {
+      "source": "/connections/money-map",
+      "destination": "/connections#donors",
       "permanent": true
     },
     {

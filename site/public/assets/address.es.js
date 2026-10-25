@@ -264,7 +264,7 @@ function matchMember(rep, gov) {
 function govRecordLinks(k) {
   const g = D.govs[k]; if (!g) return '';
   const L = [[`/governments/${g.slug}`, X.l_page], g.c ? [`/public-money/contracts?gov=${encodeURIComponent(g.c)}#all`, X.l_contracts] : null, [`/meetings?gov=${k}`, X.l_meetings],
-    g.b ? [`/public-money/budget-explorer?gov=${k}`, X.l_budget] : null, [`/alerts?gov=${k}`, X.l_alerts], [`/records-request?gov=${k}`, X.l_records],
+    g.b ? [`/governments/${g.slug || ''}#money`, X.l_budget] : null, [`/alerts?gov=${k}`, X.l_alerts], [`/records-request?gov=${k}`, X.l_records],
     g.f ? [`/public-money/hurricane-michael?q=${encodeURIComponent(g.f)}`, X.l_michael] : null].filter(Boolean);
   return `<dt>${esc(g.s)}</dt><dd>${L.map(([h, t]) => `<a href="${esc(h)}">${esc(t)}</a>`).join(' · ')}</dd>`;
 }
