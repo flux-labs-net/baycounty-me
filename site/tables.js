@@ -18,6 +18,7 @@
    Search:    <table data-tt-search="off">   page already has its own search box for this table.
    Headings:  <table data-cols="Name|Amount"> names columns for a table with no <thead>.
    Order:     <table data-tt-sort="2:desc"> overrides the default order.
+   Rows:      <tr data-tt-role="row"> is always a data row (never read as a totals row from its first word).
    Year:      a table with a date column covering several years gets a Year picker that opens on the
               newest year with records (never past the current fiscal year), with "All years" one tap
               away. ?year=2024 or ?year=all in the link picks for every table. <table data-tt-year="off">
@@ -171,6 +172,7 @@ function cellsByCol(tr) { const out = []; for (const c of tr.cells) { const n = 
 function ncols(t) { const h = headRow(t); if (h) return cellsByCol(h).length; let m = 0; for (const b of t.tBodies) for (const r of b.rows) m = Math.max(m, cellsByCol(r).length); return m; }
 
 function kind(tr, n) {
+  if (tr.dataset.ttRole === 'row') return 'row';  // a page marks its data rows, e.g. a business named "Total Earth Services"
   if (tr.classList.contains('grp') || tr.dataset.ttRole === 'group') return 'group';
   if (tr.cells.length === 1 && (tr.cells[0].colSpan || 1) >= Math.max(2, n)) return tr.cells[0].tagName === 'TH' ? 'group' : 'note';
   if (tr.classList.contains('total') || tr.classList.contains('tot') || tr.dataset.ttRole === 'total') return 'total';
