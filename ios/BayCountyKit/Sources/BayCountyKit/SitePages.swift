@@ -37,6 +37,8 @@ public enum SitePages {
         "/connections/campaign-gifts": .dataset("campaign-finance"),
         "/who-runs-bay-county": .native("People"),
         "/public-money/budget-explorer": .dataset("budget-detail"),
+        "/public-money/checkbook": .web("one government's payments, read live from /api/v1/checkbook; every payment is the checkbook-payments dataset in Explore"),
+        "/public-money/budget-tracker": .web("spending against the budget by department, read live from /api/v1/budget-actual; the lines are the budget-actuals dataset in Explore"),
         "/public-money/budget-compare": .web("two-year budget comparison, read live from /api/v1/budget-compare; the rows are the budget-years dataset in Explore"),
         "/elections": .dataset("candidates-2026"),
         "/public-money/exemptions": .dataset("property-tax-exemptions"),

@@ -39,6 +39,8 @@ def menu():
         {'label': 'Spending', 'question': 'Where it goes',
          'start': _i('Budget explorer', '/public-money/budget-explorer', 'Each budget by fund and department, per resident'),
          'groups': [{'group': 'Where it goes', 'items': [
+             _i('Budget tracker', '/public-money/budget-tracker', 'Spending against the budget, month by month'),
+             _i('Checkbook', '/public-money/checkbook', 'Every payment, from the government\'s own books'),
              _i('Budgets by year', '/public-money/budget-compare', 'Compare any two years, line by line'),
              _i('CRA spending', '/public-money/cra-spending', 'What redevelopment agencies paid for'),
              _i('Sales tax projects', '/public-money/sales-tax-projects', 'Half-cent projects: promised vs built'),

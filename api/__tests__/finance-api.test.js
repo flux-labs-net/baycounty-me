@@ -32,7 +32,7 @@ test.before(async () => {
   pool = new Pool({connectionString: URL_});
   q = async (t, p = []) => (await pool.query(t, p)).rows;
   await q('drop schema if exists finance cascade');
-  for (const f of ['0015_finance.sql', '0016_finance_signin.sql']) await pool.query(fs.readFileSync(path.join(__dirname, '../../db/migrations', f), 'utf8'));
+  for (const f of ['0015_finance.sql', '0016_finance_signin.sql', '0048_finance_publish.sql']) await pool.query(fs.readFileSync(path.join(__dirname, '../../db/migrations', f), 'utf8'));
   await q(`insert into finance.members (workspace_id, email, role) values ('lh', 'viewer@city.test', 'viewer')`);
   const {createHandler} = require('../finance');
   handler = createHandler({q, hasDb: () => true, storage: fakeStorage, caller: async () => as});

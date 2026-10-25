@@ -16,6 +16,8 @@
 //   GET /api/v1/entities?q=&kind=       find a company, official, candidate, nonprofit, board member or business
 //   GET /api/v1/entities/{id}           one entity's profile and every documented connection (api/_entities.js)
 //   GET /api/v1/budget-compare?gov=&from=&to=&basis=   one government's budget in two fiscal years, line by line (api/_budget.js)
+//   GET /api/v1/checkbook?gov=&fy=      one government's payments in a fiscal year: by month, payee and fund (api/_openbooks.js)
+//   GET /api/v1/budget-actual?gov=&fy=&as_of=   spending and revenue against the budget, by department (api/_openbooks.js)
 // Responses carry an ETag (and Last-Modified when the data's date is known); a matching If-None-Match or
 // If-Modified-Since gets 304 Not Modified with no body.
 const crypto = require('crypto');
@@ -170,6 +172,16 @@ function openapi(catalog) {
           p('basis', 'adopted (default): adopted budgets. actual: audited revenue and spending', {type: 'string', enum: ['adopted', 'actual']})],
         responses: {200: {description: '{government, gov_id, basis, from, to, years, detail_years, totals: [line], sections: {department, fund, service} or {spending, revenue}: [line], history: [{fiscal_year, total, general_fund}], biggest_increase, biggest_decrease, notes, sources: {from, to}} or, without gov, {governments: [...]}'},
           400: {description: 'A year with no budget on record'}, 404: {description: 'Unknown government, or fewer than two years on record'}}}},
+      '/checkbook': {get: {operationId: 'checkbook', summary: 'One government\'s payments in a fiscal year, from its own check register: total, by month, top payees, by fund and payment method, the largest payments',
+        description: 'Without gov, uses the first government that has published its check register; fy defaults to its latest fiscal year. Every payment is in the checkbook-payments dataset (filter it with gov_id and fiscal_year). Voided checks are left out; payments to private individuals are counted but not named. When nothing is published yet, governments is empty.',
+        parameters: [p('gov', 'Government id: county, schools, pc, pcb, lh, cw, sp, parker, mb'), p('fy', 'Fiscal year, the year it ends (e.g. 2026 for Oct 2025 to Sep 2026)', {type: 'integer'})],
+        responses: {200: {description: '{data: {government, gov_id, fiscal_year, fiscal_years, governments: [{gov_id, government, fiscal_years, through}], from, through, total, payments, payees, by_month: [{month, total, payments}], top_payees: [{payee, payee_entity_id, total, payments, first, last}], by_fund, by_method, individuals: {total, payments}, largest, source_files, note}}'},
+          400: {description: 'A fiscal year that is not published'}, 404: {description: 'A government with nothing published'}}}},
+      '/budget-actual': {get: {operationId: 'budgetActual', summary: 'One government\'s spending and revenue against its budget, by department, as of a month end, from its own budget-vs-actual report',
+        description: 'Spent = spending to date plus open purchase orders. used is spent / budget; elapsed is the share of the fiscal year gone by as_of, so a department whose used runs well past elapsed is spending ahead of the year. months has the totals for every report published that year. Lines: the budget-actuals dataset.',
+        parameters: [p('gov', 'Government id: county, schools, pc, pcb, lh, cw, sp, parker, mb'), p('fy', 'Fiscal year, the year it ends', {type: 'integer'}), p('as_of', 'Report date (YYYY-MM-DD). Default: the latest report of that year')],
+        responses: {200: {description: '{data: {government, gov_id, fiscal_year, fiscal_years, governments, as_of, as_ofs, elapsed, totals: {original, budget, actual, encumbered, spent, used}, departments: [{name, fund, original, budget, actual, encumbered, spent, used, amended, lines: [...]}], over_budget, running_ahead, revenue: {budget, collected, sources}, months: [{as_of, elapsed, budget, spent, used, revenue_budget, revenue_collected}], source_files, note}}'},
+          400: {description: 'A fiscal year or report date that is not published'}, 404: {description: 'A government with nothing published'}}}},
       '/search': {get: {operationId: 'searchSite', summary: 'Search every page on BayCounty.me', parameters: [{name: 'q', in: 'query', required: true, schema: {type: 'string'}}, p('limit', 'Results (default 20, max 100)', {type: 'integer'})], responses: {200: {description: 'Results'}}}},
     },
   };
@@ -197,7 +209,7 @@ module.exports = async (req, res) => {
     if (!parts.length) return res.status(200).json({
       name: 'BayCounty.me API', version: 'v1', updated: catalog.updated, docs: `${SITE}/developers`, openapi: `${SITE}/api/v1/openapi.json`, mcp: `${SITE}/api/mcp`,
       endpoints: {datasets: `${SITE}/api/v1/datasets`, governments: `${SITE}/api/v1/governments`, search: `${SITE}/api/v1/search?q=`,
-        entities: `${SITE}/api/v1/entities?q=`, budget_compare: `${SITE}/api/v1/budget-compare?gov=lh&from=2025&to=2026`, status: `${SITE}/api/v1/status`, changes: `${SITE}/api/v1/changes?since=`, meetings_calendar: `${SITE}/api/v1/meetings.ics?gov=`},
+        entities: `${SITE}/api/v1/entities?q=`, budget_compare: `${SITE}/api/v1/budget-compare?gov=lh&from=2025&to=2026`, checkbook: `${SITE}/api/v1/checkbook?gov=lh`, budget_actual: `${SITE}/api/v1/budget-actual?gov=lh`, status: `${SITE}/api/v1/status`, changes: `${SITE}/api/v1/changes?since=`, meetings_calendar: `${SITE}/api/v1/meetings.ics?gov=`},
       license: catalog.license, datasets: catalog.datasets.map(d => ({id: d.id, title: d.title, rows: d.rows, url: `${SITE}/api/v1/datasets/${d.id}`}))});
     if (parts[0] === 'openapi.json') return res.status(200).json(openapi(catalog));
     if (parts[0] === 'status') { res.locals.lastModified = null; return res.status(200).json(await status(catalog)); }
@@ -280,6 +292,16 @@ module.exports = async (req, res) => {
       const rows = meta ? (await datasetRows(req, meta)).rows : await load(req, '/downloads/budget-years.json');
       if (!req.query.gov && !req.query.government) return res.status(200).json({data: B.coverage(rows), note: 'Add ?gov=<gov_id>&from=<year>&to=<year> to compare two years.'});
       try { const r = B.compare(rows, req.query); info.rows = r.sections ? Object.values(r.sections).reduce((a, s) => a + s.length, 0) : 0; return res.status(200).json({data: r}); }
+      catch (e) { if (e.expose) return res.status(e.status).json({error: e.message, ...e.extra}); throw e; }
+    }
+    if (parts[0] === 'checkbook' || parts[0] === 'budget-actual') {
+      // Each government's own accounting, as published from its finance files. Rows can change any time a file is published.
+      const O = require('./_openbooks');
+      res.locals.lastModified = null;
+      const id = parts[0] === 'checkbook' ? 'checkbook-payments' : 'budget-actuals';
+      const meta = catalog.datasets.find(d => d.id === id);
+      const rows = meta ? (await datasetRows(req, meta)).rows : [];
+      try { const r = parts[0] === 'checkbook' ? O.checkbook(rows, req.query) : O.budgetActual(rows, req.query); return res.status(200).json({data: r}); }
       catch (e) { if (e.expose) return res.status(e.status).json({error: e.message, ...e.extra}); throw e; }
     }
     if (parts[0] === 'correspondence') {

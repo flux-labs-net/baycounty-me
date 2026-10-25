@@ -34,6 +34,20 @@ const TOOLS = [
      to: {type: 'integer', description: 'Later fiscal year. Default: the latest year with line-by-line detail'},
      basis: {type: 'string', enum: ['adopted', 'actual'], default: 'adopted'}}},
    annotations: {readOnlyHint: true}},
+  {name: 'government_checkbook', title: 'Government checkbook',
+   description: 'One government\'s payments in a fiscal year from its own check register: the total, payments by month, the top payees (with profile ids), by fund and payment method, and the largest payments. Payments to private individuals are counted but never named. Add payee to list every payment to one payee. Returns an empty governments list while nothing is published.',
+   inputSchema: {type: 'object', additionalProperties: false, properties: {
+     gov: {type: 'string', description: 'county, schools, pc, pcb, lh (Lynn Haven), cw, sp, parker or mb. Default: the first government with published data'},
+     fy: {type: 'integer', description: 'Fiscal year, the year it ends (2026 = Oct 2025 to Sep 2026). Default: the latest published'},
+     payee: {type: 'string', description: 'Part of a payee name: list that payee\'s payments in the year'}}},
+   annotations: {readOnlyHint: true}},
+  {name: 'budget_vs_actual', title: 'Budget vs. actual',
+   description: 'How one government is doing against its budget this year, from its own budget-vs-actual report: budget, spent to date plus open purchase orders, share used against the share of the year gone, each department (over budget, running ahead) and revenue collected by source. Returns an empty governments list while nothing is published.',
+   inputSchema: {type: 'object', additionalProperties: false, properties: {
+     gov: {type: 'string', description: 'county, schools, pc, pcb, lh, cw, sp, parker or mb'},
+     fy: {type: 'integer', description: 'Fiscal year, the year it ends. Default: the latest published'},
+     as_of: {type: 'string', description: 'Report date YYYY-MM-DD. Default: the latest report of that year'}}},
+   annotations: {readOnlyHint: true}},
   {name: 'upcoming_meetings', title: 'Upcoming meetings',
    description: 'Upcoming public meetings of Bay County boards (County Commission, School Board, city commissions, CRA boards), soonest first, with agenda links and agenda item titles where posted. Meetings marked expected=true come from the regular schedule, not an official posting.',
    inputSchema: {type: 'object', additionalProperties: false, properties: {
@@ -214,6 +228,25 @@ async function call(req, name, a = {}) {
     const rows = await rowsOf(req, await load(req, '/downloads/index.json'), 'budget-years');
     if (!a.gov) return {governments: B.coverage(rows)};
     return {...B.compare(rows, a), page: `${SITE}/public-money/budget-compare?gov=${encodeURIComponent(a.gov)}`};
+  }
+  if (name === 'government_checkbook' || name === 'budget_vs_actual') {
+    const O = require('./_openbooks');
+    const c = await load(req, '/downloads/index.json');
+    if (name === 'budget_vs_actual') {
+      const r = O.budgetActual(await rowsOf(req, c, 'budget-actuals'), a);
+      if (!r.gov_id) return r;
+      return {...r, departments: r.departments.map(d => ({...d, lines: undefined, line_count: d.lines.length})), page: `${SITE}/public-money/budget-tracker?gov=${r.gov_id}`};
+    }
+    const rows = await rowsOf(req, c, 'checkbook-payments'), r = O.checkbook(rows, a);
+    if (!r.gov_id) return r;
+    const out = {...r, page: `${SITE}/public-money/checkbook?gov=${r.gov_id}`};
+    if (a.payee) {
+      const w = String(a.payee).toLowerCase();
+      out.payee_payments = rows.filter(x => x.gov_id === r.gov_id && Number(x.fiscal_year) === r.fiscal_year && x.payee_kind !== 'individual' && String(x.payee).toLowerCase().includes(w))
+        .sort((x, y) => String(x.paid_on).localeCompare(String(y.paid_on))).slice(0, 500)
+        .map(x => ({paid_on: String(x.paid_on).slice(0, 10), payee: x.payee, amount: Number(x.amount), doc_no: x.doc_no, invoice_no: x.invoice_no, fund: x.fund, account: x.account, description: x.description}));
+    }
+    return out;
   }
   if (name === 'get_government') {
     const c = await load(req, '/downloads/index.json'), gp = c.datasets.find(d => d.id === 'government-profiles');

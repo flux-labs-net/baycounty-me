@@ -16,16 +16,55 @@ CSS = r"""
 :root[data-theme="dark"]{--urgent:#FF8C82;--review:#F2B661;--info:#A1AABA;--ok:#5BC98E;--pace:#E7ECF3;--bar:#7FA6DA;--bar-over:#FF8C82}
 body{display:block}
 [hidden]{display:none!important}
-.fw{max-width:1120px;margin:0 auto;padding:18px 16px 72px}
-.top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding-bottom:12px;border-bottom:1px solid var(--line);margin-bottom:6px}
-.top h1{font:600 1.1rem var(--f-display);margin:0}
-.top .ws{color:var(--muted);font-size:.9rem}
-.who{margin-left:auto;display:flex;align-items:center;gap:10px;color:var(--muted);font-size:.84rem;flex-wrap:wrap;justify-content:flex-end}
-.who .theme-btn{order:0}
-.tabs{display:flex;gap:2px;overflow-x:auto;margin:0 -16px 20px;padding:0 16px;border-bottom:1px solid var(--line);scrollbar-width:none}
-.tabs button{flex:none;border:0;border-bottom:2px solid transparent;background:none;color:var(--muted);font:500 .9rem var(--f-body);padding:12px 12px 10px;cursor:pointer}
-.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--navy)}
-.tabs .count{font-variant-numeric:tabular-nums;color:var(--urgent);margin-left:4px}
+.fw{max-width:1320px;margin:0 auto;padding:18px 16px 72px}
+/* layout + menu, the same as /admin: side menu from 960px, top bar and full-screen menu below */
+.fw-shell{display:grid;grid-template-columns:236px minmax(0,1fr);gap:32px;align-items:start}
+.fw-main{min-width:0}
+.fw-h{font:600 1.45rem var(--f-display);letter-spacing:-.015em;margin:4px 0 16px}
+.an{position:sticky;top:16px;max-height:calc(100vh - 32px);overflow-y:auto;display:flex;flex-direction:column;gap:2px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 10px}
+.an-head{display:flex;align-items:center;gap:10px;padding:0 6px 12px}
+.an-logo{width:32px;height:32px;flex-shrink:0;border-radius:9px;background:var(--navy);color:var(--surface);display:inline-flex;align-items:center;justify-content:center;font:600 .78rem var(--f-body)}
+.an-brand{display:flex;flex-direction:column;line-height:1.2;flex:1;min-width:0}
+.an-brand b{font-size:.9rem} .an-brand span{font-size:.76rem;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.an-btn{width:44px;height:44px;flex-shrink:0;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
+.an-x,.an-top{display:none}
+.an-ws{margin:0 0 8px;width:100%}
+.an a{display:flex;align-items:center;gap:10px;min-height:34px;padding:0 10px;border-radius:8px;color:var(--ink);text-decoration:none;font:400 .88rem var(--f-body)}
+.an a span{flex:1;min-width:0}
+.an a:hover{background:var(--sunken)}
+.an a[aria-current="page"]{background:color-mix(in srgb,var(--blue) 14%,transparent);color:var(--navy);font-weight:600}
+.an-home{font-weight:500!important}
+.an-total{font:600 .72rem var(--f-body);font-style:normal;background:var(--urgent);color:var(--surface);border-radius:999px;padding:1px 8px;font-variant-numeric:tabular-nums}
+.an-n{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.an-n.on{background:var(--gold)}
+.an-g{display:flex;flex-direction:column;gap:2px}
+.an-h{display:flex;align-items:center;gap:8px;font:600 .68rem var(--f-body);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:12px 10px 3px}
+.an-teal svg{color:var(--teal)} .an-blue svg{color:var(--blue)} .an-amber svg{color:var(--gold)} .an-gray svg{color:var(--muted)}
+.an-items{display:flex;flex-direction:column;gap:2px}
+.an-items a{padding-left:32px}
+.an-foot{margin-top:14px;border-top:1px solid var(--line);padding-top:10px;display:flex;flex-direction:column;gap:2px}
+.an-foot svg{color:var(--muted)}
+.an-foot .theme-btn{margin:6px 10px 0;align-self:flex-start}
+.an-who{display:flex;align-items:center;gap:8px;padding:8px 10px 2px;font-size:.78rem;color:var(--muted)}
+.an-who span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis}
+.an-who .btn{min-height:28px;padding:0 6px;font-size:.78rem}
+@media (max-width:959px){
+  .fw{padding-top:0}
+  .an-top{display:flex;position:sticky;top:0;z-index:30;align-items:center;gap:10px;margin:0 -16px 14px;padding:8px 8px 8px 16px;min-height:60px;box-sizing:border-box;background:var(--surface);border-bottom:1px solid var(--line)}
+  .an-cur{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.15}
+  .an-cur span{font-size:.72rem;color:var(--muted)} .an-cur b{font-size:.95rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .fw-shell{display:block}
+  .an{display:none;position:fixed;inset:0;z-index:60;max-height:none;border:0;border-radius:0;padding:12px 16px 24px;background:var(--bg)}
+  .an.open{display:flex}
+  .an-x{display:inline-flex}
+  .an a{min-height:44px}
+  .an a.an-home,.an a.an-home[aria-current="page"],.an a.an-home:hover{background:var(--navy);color:var(--surface);border-radius:12px;margin-bottom:4px}
+  .an-items{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+  .an-items a{padding:0 12px;border:1px solid var(--line);background:var(--surface);font-size:.84rem;line-height:1.2}
+  .an-h{padding:12px 2px 6px}
+  .fw-h{font-size:1.25rem;margin:0 0 12px}
+  body.an-lock{overflow:hidden}
+}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:38px;padding:0 14px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:500 .88rem var(--f-body);cursor:pointer;text-decoration:none}
 .btn:hover{border-color:var(--blue)}
 .btn.primary{background:var(--navy);border-color:var(--navy);color:#fff}
@@ -192,8 +231,9 @@ dialog.drawer::backdrop{background:rgba(10,14,20,.4)}
 @media print{
   @page{size:letter;margin:14mm 14mm 16mm}
   html,body{background:#fff!important}
-  .top,.tabs,.no-print,dialog{display:none!important}
+  .an,.an-top,.fw-h,.no-print,dialog{display:none!important}
   .fw{padding:0;max-width:none}
+  .fw-shell{display:block}
   section[data-panel]:not(#p-packet){display:none!important}
   .packet{border:0;padding:0;max-width:none;font-size:10pt}
   .packet *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
@@ -205,6 +245,66 @@ dialog.drawer::backdrop{background:rgba(10,14,20,.4)}
 """
 
 
+THEME_BTN = ('''<button type="button" class="theme-btn" aria-label="Theme: match system"><svg class="ti ti-system" width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="6.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 3.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/></svg><svg class="ti ti-light" width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 2v2.2M10 15.8V18M2 10h2.2M15.8 10H18M4.3 4.3l1.6 1.6M14.1 14.1l1.6 1.6M4.3 15.7l1.6-1.6M14.1 5.9l1.6-1.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><svg class="ti ti-dark" width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path d="M16 12.6A6.6 6.6 0 0 1 7.4 4a6.6 6.6 0 1 0 8.6 8.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="theme-lbl">System</span></button>''')
+
+# The finance menu, laid out like /admin: (group, tone, icon, [(tab, label, least role or None, count key or None)]).
+# A tab is a <section id="p-NAME" data-panel>. Roles: viewer < uploader < reviewer < owner (finance.js ROLE).
+MENU = [
+    ('Review', 'teal', 'shield', [('flags', 'Flags', None, 'flags'), ('packet', 'Board packet', None, None)]),
+    ('Files', 'blue', 'file', [('upload', 'Add a file', 'uploader', None), ('files', 'Files', None, None)]),
+    ('Access', 'gray', 'key', [('people', 'People', 'owner', None)]),
+]
+
+_ICONS = {
+    'home': '<path d="M4 20V10l8-6 8 6v10"/><path d="M9 20v-6h6v6"/>',
+    'shield': '<path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/>',
+    'file': '<path d="M14 3H7a1 1 0 00-1 1v16a1 1 0 001 1h10a1 1 0 001-1V7z"/><path d="M14 3v4h4M9 13h6M9 17h6"/>',
+    'key': '<circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M16 7l3 3"/>',
+    'out': '<path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 01-1 1H5a1 1 0 01-1-1V7a1 1 0 011-1h5"/>',
+    'menu': '<path d="M4 7h16M4 12h16M4 17h16"/>',
+    'close': '<path d="M6 6l12 12M18 6L6 18"/>',
+}
+
+
+def _svg(name, size=18):
+    return (f'<svg width="{size}" height="{size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" '
+            f'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{_ICONS[name]}</svg>')
+
+
+def shell_html():
+    """Top bar (phones), the grouped menu (side menu on wide screens, full-screen sheet on phones) and the page title."""
+    groups = []
+    for group, tone, icon, items in MENU:
+        links = ''.join('<a href="#%s" data-tab="%s"%s%s><span>%s</span><i class="an-n"></i></a>' % (
+            t, t, ' data-min="%s" hidden' % m if m else '', ' data-count="%s"' % k if k else '', label) for t, label, m, k in items)
+        groups.append(f'<div class="an-g"><div class="an-h an-{tone}">{_svg(icon, 14)}{group}</div><div class="an-items">{links}</div></div>')
+    return f"""    <header class="an-top">
+      <span class="an-logo" aria-hidden="true">BC</span>
+      <div class="an-cur"><span>City finances</span><b id="an-cur">Overview</b></div>
+      <button class="an-btn" id="an-open" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="an-nav">{_svg('menu', 20)}</button>
+    </header>
+    <div class="fw-shell">
+    <nav class="an" id="an-nav" aria-label="Finance">
+      <div class="an-head">
+        <span class="an-logo" aria-hidden="true">BC</span>
+        <div class="an-brand"><b>City finances</b><span id="ws-name"></span></div>
+        <button class="an-btn an-x" id="an-close" type="button" aria-label="Close menu">{_svg('close', 20)}</button>
+      </div>
+      <select class="sel an-ws" id="ws-pick" aria-label="Workspace" hidden></select>
+      <a href="#overview" data-tab="overview" class="an-home">{_svg('home')}<span>Overview</span><i class="an-total" id="flag-count" hidden></i></a>
+      {''.join(groups)}
+      <div class="an-foot">
+        <a href="/public-money/checkbook" target="_blank" rel="noopener"><span>Public checkbook</span>{_svg('out', 14)}</a>
+        <a href="/public-money/budget-tracker" target="_blank" rel="noopener"><span>Public budget tracker</span>{_svg('out', 14)}</a>
+        <a href="/" target="_blank" rel="noopener"><span>Public site</span>{_svg('out', 14)}</a>
+        {THEME_BTN}
+        <div class="an-who"><span id="who"></span><button class="btn quiet" id="signout" type="button">Sign out</button></div>
+      </div>
+    </nav>
+    <main class="fw-main">
+    <h1 class="fw-h" id="fw-h">Overview</h1>"""
+
+
 def brand():
     """Names the board packet prints, from the place config, so another county's build brands its own packet."""
     return {'site': place.SITE, 'domain': place.DOMAIN, 'operator': place.OPERATOR['name'],
@@ -212,6 +312,7 @@ def brand():
 
 
 def finance_page(out_dir):
+    shell = shell_html()
     brand_json = json.dumps(brand(), ensure_ascii=False).replace('</', '<\\/')
     html = f'''<!doctype html>
 <html lang="en">
@@ -227,9 +328,9 @@ def finance_page(out_dir):
 <style>{CSS}</style>
 </head>
 <body>
-<main class="fw">
+<div class="fw">
   <section id="signin" class="signin" hidden>
-    <div class="row" style="justify-content:flex-end;margin-bottom:24px"><button type="button" class="theme-btn" aria-label="Theme: match system"><svg class="ti ti-system" width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="6.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 3.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/></svg><svg class="ti ti-light" width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 2v2.2M10 15.8V18M2 10h2.2M15.8 10H18M4.3 4.3l1.6 1.6M14.1 14.1l1.6 1.6M4.3 15.7l1.6-1.6M14.1 5.9l1.6-1.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><svg class="ti ti-dark" width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path d="M16 12.6A6.6 6.6 0 0 1 7.4 4a6.6 6.6 0 1 0 8.6 8.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="theme-lbl">System</span></button></div>
+    <div class="row" style="justify-content:flex-end;margin-bottom:24px">{THEME_BTN}</div>
     <h1>Sign in to city finances</h1>
     <p class="muted small">For city staff and commissioners with access. We'll email you a 6-digit code.</p>
     <form id="email-form" class="row" style="margin-top:14px">
@@ -245,19 +346,7 @@ def finance_page(out_dir):
   </section>
 
   <div id="app" hidden>
-    <header class="top">
-      <h1>City finances</h1><span class="ws" id="ws-name"></span>
-      <select class="sel" id="ws-pick" aria-label="Workspace" hidden></select>
-      <div class="who"><span id="who"></span><button type="button" class="theme-btn" aria-label="Theme: match system"><svg class="ti ti-system" width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="6.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 3.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/></svg><svg class="ti ti-light" width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 2v2.2M10 15.8V18M2 10h2.2M15.8 10H18M4.3 4.3l1.6 1.6M14.1 14.1l1.6 1.6M4.3 15.7l1.6-1.6M14.1 5.9l1.6-1.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><svg class="ti ti-dark" width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path d="M16 12.6A6.6 6.6 0 0 1 7.4 4a6.6 6.6 0 1 0 8.6 8.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="theme-lbl">System</span></button><button class="btn quiet" id="signout" type="button">Sign out</button></div>
-    </header>
-    <nav class="tabs" role="tablist" aria-label="Sections">
-      <button role="tab" data-tab="overview" aria-selected="true">Overview</button>
-      <button role="tab" data-tab="flags" aria-selected="false">Flags<span class="count" id="flag-count"></span></button>
-      <button role="tab" data-tab="upload" aria-selected="false" data-min="uploader">Add a file</button>
-      <button role="tab" data-tab="files" aria-selected="false">Files</button>
-      <button role="tab" data-tab="people" aria-selected="false" data-min="owner">People</button>
-      <button role="tab" data-tab="packet" aria-selected="false">Board packet</button>
-    </nav>
+{shell}
 
     <section id="p-overview" data-panel>
       <p class="lead" id="ov-lead"></p>
@@ -335,8 +424,10 @@ def finance_page(out_dir):
       <div class="row no-print" style="margin-bottom:14px"><p class="sub grow" style="margin:0">A one-page summary for a commission meeting. Print it or save it as a PDF.</p><button class="btn primary" type="button" id="print">Print or save as PDF</button></div>
       <article class="packet" id="packet"></article>
     </section>
+    </main>
+    </div>
   </div>
-</main>
+</div>
 
 <dialog class="drawer" id="drawer" aria-labelledby="dr-title"><div class="dr">
   <div class="dr-h"><div class="grow"><span id="dr-sev"></span><h2 id="dr-title"></h2></div><button class="btn quiet" type="button" id="dr-close" aria-label="Close">Close</button></div>
