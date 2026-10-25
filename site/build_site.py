@@ -521,6 +521,7 @@ from meetings_page import meetings_page
 from campaign_page import campaign_page
 from money_pages import budget_page, payments_page
 from budget_compare_page import budget_compare_page
+import open_books_page
 from open_books_page import checkbook_page, budget_tracker_page
 from money_map import money_map_page
 from linkify import linkify_html, LINKIFY_JS
@@ -658,8 +659,6 @@ PAGES = [
     ('/connections/campaign-gifts', 'Campaign gifts and contracts', "Who funded the campaigns of Bay County's current elected officials, from Supervisor of Elections reports, and which donors also hold local government contracts.", campaign_page),
     ('/who-runs-bay-county', 'Who runs Bay County', 'Every elected seat and appointed manager for Bay County, its cities and the school district, plus what top officials are paid.', who_page),
     ('/public-money/budget-explorer', 'Budget explorer', "Open up any Bay County government's FY2026 budget: spending by fund and department, and where the money comes from.", lambda: budget_page(OUT)),
-    ('/public-money/checkbook', 'Checkbook', "Every payment a Bay County government makes, from its own check register: who got paid, how much, when and from which fund. Search any company, or see the money month by month.", lambda: checkbook_page(OUT)),
-    ('/public-money/budget-tracker', 'Budget tracker', "How each department of a Bay County government is spending against its budget this year, from the government's own monthly budget report: spent, committed, and whether it's ahead of the calendar.", lambda: budget_tracker_page(OUT)),
     ('/public-money/budget-compare', 'Compare budgets across years', "Compare any Bay County government's budget in two fiscal years, such as Lynn Haven FY2025 and FY2026: what grew, what shrank and what's new, by department, service and fund, in dollars and percent.", lambda: budget_compare_page(OUT, None)),
     *([('/elections', "Who's running in 2026", 'Every local race on Bay County ballots in 2026: the candidates, their platforms in their own words, links to their campaigns, and where their campaign money comes from.', elections_page)] if ELECTIONS_READY else []),
     ('/public-money/exemptions', 'Property tax exemptions', 'Who gets a property tax exemption in Bay County, from homestead to disabled veterans, how many homes, and how much tax each one takes off bills, from the 2026 tax roll.', lambda: exemptions_page(OUT)),
@@ -692,6 +691,11 @@ PAGES = [
 from vendor_pages import pages as vendor_page_list, index_page as vendors_index  # noqa: E402
 from public_map import public_map_page  # noqa: E402
 from connections import connections_page  # noqa: E402
+if open_books_page.PUBLIC:  # checkbook and budget tracker, hidden until registers arrive
+    PAGES += [
+        ('/public-money/checkbook', 'Checkbook', "Every payment a Bay County government makes, from its own check register: who got paid, how much, when and from which fund. Search any company, or see the money month by month.", lambda: checkbook_page(OUT)),
+        ('/public-money/budget-tracker', 'Budget tracker', "How each department of a Bay County government is spending against its budget this year, from the government's own monthly budget report: spent, committed, and whether it's ahead of the calendar.", lambda: budget_tracker_page(OUT)),
+    ]
 PAGES += [('/connections', 'Connections: who governments paid, and who gave to officials', 'Who every Bay County government and agency paid, how those payees connect, and which businesses gave to the officials who approve the spending.', lambda: connections_page(OUT))]
 PAGES += [('/public-money/map', 'Public money map', 'CRA spending and half-cent sales tax projects across Bay County on one map, with CRA district lines and city limits.', lambda: public_map_page(OUT))]
 PAGES += [(p, t, d, fn or (lambda: vendors_index(OUT))) for p, t, d, fn in vendor_page_list()]
