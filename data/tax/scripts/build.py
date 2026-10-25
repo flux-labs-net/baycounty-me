@@ -28,6 +28,8 @@ def rb(c):
     if 380<=i<=389:
         s='Transfers in (381)' if i==381 else 'Debt & lease proceeds (383-384)' if i in (383,384) else 'Other (382, 385-389)'
         return 'Debt proceeds & transfers (not revenue)',s
+    if 390<=i<=399:  # older sheets: extraordinary and special items (one-time gains), kept out of revenue like transfers
+        return 'Debt proceeds & transfers (not revenue)','Extraordinary and special items (392-393)'
     raise Exception(c)
 def eb(c):
     i=int(c)
@@ -47,7 +49,7 @@ out={'governments':[]}; checks=[]
 for gid,name,fn,folder in GOV:
     R=d.get(fn+'revenues.xlsx',{}); E=d.get(fn+'expenditures.xlsx',{})
     g={'id':gid,'name':name,'years':[]}
-    for y in ['2021','2022','2023','2024','2025']:
+    for y in [str(y) for y in range(2015, 2026)]:
         r=R.get(y); e=E.get(y)
         if not r and not e: continue
         yo={'fy':'FY'+y,'fiscal_year_end':(r or e)['fye'].replace('Local Fiscal Year Ended ',''),'population':(r or e)['pop']}

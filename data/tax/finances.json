@@ -1,11 +1,426 @@
 {
- "as_of": "2026-10-20 (EDR workbooks downloaded this date; latest sheet FY2024 for all, plus FY2025 expenditures only for Callaway)",
+ "as_of": "2026-10-25 (EDR workbooks downloaded this date; sheets FY2015 to FY2024 for all, plus FY2025 expenditures only for Callaway)",
  "basis": "Source: Florida EDR 'Expenditures and Revenues Reported by Florida's Local Governments' county (cntyfiscal) and municipal (munifiscal) workbooks, compiled by EDR from Annual Financial Reports filed with Florida DFS (Uniform Accounting System codes). Fiscal years end September 30. FUNDS: bucket figures, revenue_total and expenditure_total are PRIMARY GOVERNMENT, ALL OPERATING FUNDS = Governmental funds (General, Special Revenue, Debt Service, Capital Projects, Permanent) + Enterprise funds (utilities). Excluded from the buckets (reported separately in *_excluded_funds): Internal Service (internal chargebacks, double-counting), Custodial (money collected for other governments, e.g. county tax collector; only reported from FY2021+), Pension/Trust/Private Purpose (fiduciary), and Component Units (separately reported entities such as some CRAs/authorities). *_governmental_funds_only fields give governmental funds alone (revenue excludes 38x). *_all_funds_as_published = every column EDR publishes (Total Account column). REVENUE MAP: 311 Property taxes; 312-316,319 Sales & other local taxes (local option/tourist/fuel taxes, infrastructure surtax, utility taxes, communications services tax, business tax, insurance premium tax); 32x Permits, fees & special assessments (incl. franchise fees, impact fees, stormwater fees); 33x State & federal money (revenue_detail splits 331+333 federal, 332 other state assistance, 334 state grants, 335 state shared revenues incl. half-cent sales tax and revenue sharing, 337-339 other local governments); 34x Charges for services incl. utilities and court fees; 35x Fines; 36x Interest & other (interest incl. fair-value changes which can be negative, rents, asset sales, donations, settlements); 38x Debt proceeds & transfers (381 transfers in, 383-384 debt/lease proceeds, 382/388/389 other incl. proprietary non-operating grants) kept separate and NOT included in revenue_total (revenue_total_incl_other_sources adds it). EXPENDITURE MAP: 511-516,518,519 General government; 517 + 591 (proprietary interest) Debt service; 52x Public safety; 53x Physical environment; 54x Transportation; 55x Economic environment (CRA spending where the city/county reports it inside the primary government, typically 552/559); 56x Human services; 57x Culture & recreation; 58x-59x Transfers & other (581 transfers out, 590 other non-operating, 593 special items); 6xx-7xx Courts (county only; court-related costs). expenditure_total includes transfers; expenditure_total_excl_transfers removes the Transfers & other bucket. Note AFR expenditure codes for governmental funds include capital outlay within each function, and principal+interest only where coded 517.",
  "governments": [
   {
    "id": "bay_county",
    "name": "Bay County (county government)",
    "years": [
+    {
+     "fy": "FY2015",
+     "fiscal_year_end": "September 30, 2015",
+     "population": 173310,
+     "revenues": {
+      "Property taxes": 72337961,
+      "Sales & other local taxes": 25967812,
+      "Permits, fees & special assessments": 2224612,
+      "State & federal money": 42440917,
+      "Charges for services (incl. utilities)": 62763170,
+      "Fines": 1347578,
+      "Interest & other": 9586306,
+      "Debt proceeds & transfers (not revenue)": 45174549
+     },
+     "revenue_detail": {
+      "State & federal money": {
+       "Federal grants & payments (331, 333)": 11704696,
+       "State grants (334)": 10496466,
+       "State shared revenues (335)": 20228906,
+       "Other local governments (337-339)": 10849
+      },
+      "Debt proceeds & transfers (not revenue)": {
+       "Transfers in (381)": 3770224,
+       "Debt & lease proceeds (383-384)": 41254325,
+       "Other (382, 385-389)": 150000
+      }
+     },
+     "revenue_total": 216668356,
+     "revenue_total_incl_other_sources": 261842905,
+     "revenue_total_governmental_funds_only": 158800823,
+     "revenue_excluded_funds": {
+      "Internal Service": 8607588,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 18330792
+     },
+     "revenue_all_funds_as_published": 288781285,
+     "revenue_source_title": "Bay County Government Revenues Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2015",
+     "revenue_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/cntyfiscal/baycountyrevenues.xlsx",
+     "expenditures": {
+      "General government": 17698339,
+      "Courts (county court-related)": 7748144,
+      "Public safety": 72600599,
+      "Physical environment": 44662693,
+      "Transportation": 25073921,
+      "Economic environment": 33376248,
+      "Human services": 5645241,
+      "Culture & recreation": 5105700,
+      "Debt service": 0,
+      "Transfers & other": 43895390
+     },
+     "expenditure_total": 255806275,
+     "expenditure_total_excl_transfers": 211910885,
+     "expenditure_total_governmental_funds_only": 203671638,
+     "expenditure_excluded_funds": {
+      "Internal Service": 8548375,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 12390408
+     },
+     "expenditure_all_funds_as_published": 276745058,
+     "expenditure_source_title": "Bay County Government Expenditures Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2015",
+     "expenditure_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/cntyfiscal/baycountyexpenditures.xlsx",
+     "source_title": "EDR, Expenditures and Revenues Reported by Florida's Local Governments (compiled from DFS Annual Financial Reports), sheet 2015",
+     "source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/cntyfiscal.cfm"
+    },
+    {
+     "fy": "FY2016",
+     "fiscal_year_end": "September 30, 2016",
+     "population": 176016,
+     "revenues": {
+      "Property taxes": 74587688,
+      "Sales & other local taxes": 26197949,
+      "Permits, fees & special assessments": 2545288,
+      "State & federal money": 37880733,
+      "Charges for services (incl. utilities)": 65100758,
+      "Fines": 1325077,
+      "Interest & other": 8724091,
+      "Debt proceeds & transfers (not revenue)": 4194832
+     },
+     "revenue_detail": {
+      "State & federal money": {
+       "Federal grants & payments (331, 333)": 10545840,
+       "State grants (334)": 6045752,
+       "State shared revenues (335)": 21289141
+      },
+      "Debt proceeds & transfers (not revenue)": {
+       "Transfers in (381)": 3253337,
+       "Debt & lease proceeds (383-384)": 791495,
+       "Other (382, 385-389)": 150000
+      }
+     },
+     "revenue_total": 216361584,
+     "revenue_total_incl_other_sources": 220556416,
+     "revenue_total_governmental_funds_only": 162230914,
+     "revenue_excluded_funds": {
+      "Internal Service": 8774964,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 11759810
+     },
+     "revenue_all_funds_as_published": 241091190,
+     "revenue_source_title": "Bay County Government Revenues Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2016",
+     "revenue_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/cntyfiscal/baycountyrevenues.xlsx",
+     "expenditures": {
+      "General government": 26176693,
+      "Courts (county court-related)": 8533854,
+      "Public safety": 72036437,
+      "Physical environment": 50215388,
+      "Transportation": 25761355,
+      "Economic environment": 24423016,
+      "Human services": 6152342,
+      "Culture & recreation": 5445725,
+      "Debt service": 0,
+      "Transfers & other": 3266590
+     },
+     "expenditure_total": 222011400,
+     "expenditure_total_excl_transfers": 218744810,
+     "expenditure_total_governmental_funds_only": 163542216,
+     "expenditure_excluded_funds": {
+      "Internal Service": 8736404,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 20114367
+     },
+     "expenditure_all_funds_as_published": 250862171,
+     "expenditure_source_title": "Bay County Government Expenditures Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2016",
+     "expenditure_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/cntyfiscal/baycountyexpenditures.xlsx",
+     "source_title": "EDR, Expenditures and Revenues Reported by Florida's Local Governments (compiled from DFS Annual Financial Reports), sheet 2016",
+     "source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/cntyfiscal.cfm"
+    },
+    {
+     "fy": "FY2017",
+     "fiscal_year_end": "September 30, 2017",
+     "population": 178820,
+     "revenues": {
+      "Property taxes": 77143203,
+      "Sales & other local taxes": 37892739,
+      "Permits, fees & special assessments": 2783870,
+      "State & federal money": 37902012,
+      "Charges for services (incl. utilities)": 67897650,
+      "Fines": 1308371,
+      "Interest & other": 6099518,
+      "Debt proceeds & transfers (not revenue)": 15048461
+     },
+     "revenue_detail": {
+      "State & federal money": {
+       "Federal grants & payments (331, 333)": 10270649,
+       "State grants (334)": 5622630,
+       "State shared revenues (335)": 22008733
+      },
+      "Debt proceeds & transfers (not revenue)": {
+       "Transfers in (381)": 13927938,
+       "Debt & lease proceeds (383-384)": 970523,
+       "Other (382, 385-389)": 150000
+      }
+     },
+     "revenue_total": 231027363,
+     "revenue_total_incl_other_sources": 246075824,
+     "revenue_total_governmental_funds_only": 176828200,
+     "revenue_excluded_funds": {
+      "Internal Service": 9600172,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 17327511
+     },
+     "revenue_all_funds_as_published": 273003507,
+     "revenue_source_title": "Bay County Government Revenues Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2017",
+     "revenue_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/cntyfiscal/baycountyrevenues.xlsx",
+     "expenditures": {
+      "General government": 18985650,
+      "Courts (county court-related)": 8078426,
+      "Public safety": 75074216,
+      "Physical environment": 45361494,
+      "Transportation": 35119174,
+      "Economic environment": 36906412,
+      "Human services": 6431248,
+      "Culture & recreation": 6448256,
+      "Debt service": 0,
+      "Transfers & other": 13970657
+     },
+     "expenditure_total": 246375533,
+     "expenditure_total_excl_transfers": 232404876,
+     "expenditure_total_governmental_funds_only": 192058838,
+     "expenditure_excluded_funds": {
+      "Internal Service": 9549785,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 16409488
+     },
+     "expenditure_all_funds_as_published": 272334806,
+     "expenditure_source_title": "Bay County Government Expenditures Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2017",
+     "expenditure_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/cntyfiscal/baycountyexpenditures.xlsx",
+     "source_title": "EDR, Expenditures and Revenues Reported by Florida's Local Governments (compiled from DFS Annual Financial Reports), sheet 2017",
+     "source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/cntyfiscal.cfm"
+    },
+    {
+     "fy": "FY2018",
+     "fiscal_year_end": "September 30, 2018",
+     "population": 181199,
+     "revenues": {
+      "Property taxes": 76315124,
+      "Sales & other local taxes": 43708957,
+      "Permits, fees & special assessments": 3753474,
+      "State & federal money": 46452885,
+      "Charges for services (incl. utilities)": 68392328,
+      "Fines": 1817460,
+      "Interest & other": 6485415,
+      "Debt proceeds & transfers (not revenue)": 63788239
+     },
+     "revenue_detail": {
+      "State & federal money": {
+       "Federal grants & payments (331, 333)": 14607846,
+       "State grants (334)": 9067990,
+       "State shared revenues (335)": 22777049
+      },
+      "Debt proceeds & transfers (not revenue)": {
+       "Transfers in (381)": 11797399,
+       "Debt & lease proceeds (383-384)": 51840840,
+       "Other (382, 385-389)": 150000
+      }
+     },
+     "revenue_total": 246925643,
+     "revenue_total_incl_other_sources": 310713882,
+     "revenue_total_governmental_funds_only": 192425758,
+     "revenue_excluded_funds": {
+      "Internal Service": 9678585,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 17535650
+     },
+     "revenue_all_funds_as_published": 337928117,
+     "revenue_source_title": "Bay County Government Revenues Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2018",
+     "revenue_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/cntyfiscal/baycountyrevenues.xlsx",
+     "expenditures": {
+      "General government": 29985479,
+      "Courts (county court-related)": 8771185,
+      "Public safety": 82684218,
+      "Physical environment": 51310900,
+      "Transportation": 42313068,
+      "Economic environment": 34272205,
+      "Human services": 6730079,
+      "Culture & recreation": 6868577,
+      "Debt service": 0,
+      "Transfers & other": 11823435
+     },
+     "expenditure_total": 274759146,
+     "expenditure_total_excl_transfers": 262935711,
+     "expenditure_total_governmental_funds_only": 216973444,
+     "expenditure_excluded_funds": {
+      "Internal Service": 9594480,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 16405780
+     },
+     "expenditure_all_funds_as_published": 300759406,
+     "expenditure_source_title": "Bay County Government Expenditures Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2018",
+     "expenditure_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/cntyfiscal/baycountyexpenditures.xlsx",
+     "source_title": "EDR, Expenditures and Revenues Reported by Florida's Local Governments (compiled from DFS Annual Financial Reports), sheet 2018",
+     "source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/cntyfiscal.cfm"
+    },
+    {
+     "fy": "FY2019",
+     "fiscal_year_end": "September 30, 2019",
+     "population": 167283,
+     "revenues": {
+      "Property taxes": 83829900,
+      "Sales & other local taxes": 46920795,
+      "Permits, fees & special assessments": 5882374,
+      "State & federal money": 213645802,
+      "Charges for services (incl. utilities)": 80655341,
+      "Fines": 1824495,
+      "Interest & other": 26361899,
+      "Debt proceeds & transfers (not revenue)": 95672902
+     },
+     "revenue_detail": {
+      "State & federal money": {
+       "Federal grants & payments (331, 333)": 179406653,
+       "State grants (334)": 9488106,
+       "State shared revenues (335)": 24751043
+      },
+      "Debt proceeds & transfers (not revenue)": {
+       "Transfers in (381)": 13933927,
+       "Debt & lease proceeds (383-384)": 81601475,
+       "Other (382, 385-389)": 137500
+      }
+     },
+     "revenue_total": 459120606,
+     "revenue_total_incl_other_sources": 554793508,
+     "revenue_total_governmental_funds_only": 262193502,
+     "revenue_excluded_funds": {
+      "Internal Service": 32581154,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 18511452
+     },
+     "revenue_all_funds_as_published": 605886114,
+     "revenue_source_title": "Bay County Government Revenues Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2019",
+     "revenue_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/cntyfiscal/baycountyrevenues.xlsx",
+     "expenditures": {
+      "General government": 52937667,
+      "Courts (county court-related)": 12768305,
+      "Public safety": 92812065,
+      "Physical environment": 245908921,
+      "Transportation": 40840298,
+      "Economic environment": 60585834,
+      "Human services": 11379610,
+      "Culture & recreation": 7802740,
+      "Debt service": 0,
+      "Transfers & other": 13017287
+     },
+     "expenditure_total": 538052727,
+     "expenditure_total_excl_transfers": 525035440,
+     "expenditure_total_governmental_funds_only": 335581996,
+     "expenditure_excluded_funds": {
+      "Internal Service": 13667368,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 19909666
+     },
+     "expenditure_all_funds_as_published": 571629761,
+     "expenditure_source_title": "Bay County Government Expenditures Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2019",
+     "expenditure_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/cntyfiscal/baycountyexpenditures.xlsx",
+     "source_title": "EDR, Expenditures and Revenues Reported by Florida's Local Governments (compiled from DFS Annual Financial Reports), sheet 2019",
+     "source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/cntyfiscal.cfm"
+    },
+    {
+     "fy": "FY2020",
+     "fiscal_year_end": "September 30, 2020",
+     "population": 174410,
+     "revenues": {
+      "Property taxes": 78486505,
+      "Sales & other local taxes": 41602140,
+      "Permits, fees & special assessments": 6971231,
+      "State & federal money": 148925889,
+      "Charges for services (incl. utilities)": 73413430,
+      "Fines": 1680849,
+      "Interest & other": 17216307,
+      "Debt proceeds & transfers (not revenue)": 125992937
+     },
+     "revenue_detail": {
+      "State & federal money": {
+       "Federal grants & payments (331, 333)": 109299407,
+       "State grants (334)": 16600438,
+       "State shared revenues (335)": 23026044
+      },
+      "Debt proceeds & transfers (not revenue)": {
+       "Transfers in (381)": 18673330,
+       "Debt & lease proceeds (383-384)": 107026883,
+       "Other (382, 385-389)": 292724
+      }
+     },
+     "revenue_total": 368296351,
+     "revenue_total_incl_other_sources": 494289288,
+     "revenue_total_governmental_funds_only": 274088024,
+     "revenue_excluded_funds": {
+      "Internal Service": 30502083,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 13840682
+     },
+     "revenue_all_funds_as_published": 538632053,
+     "revenue_source_title": "Bay County Government Revenues Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2020",
+     "revenue_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/cntyfiscal/baycountyrevenues.xlsx",
+     "expenditures": {
+      "General government": 43472395,
+      "Courts (county court-related)": 12484198,
+      "Public safety": 103975281,
+      "Physical environment": 64166873,
+      "Transportation": 63673303,
+      "Economic environment": 28241991,
+      "Human services": 10184176,
+      "Culture & recreation": 13843979,
+      "Debt service": 0,
+      "Transfers & other": 88122117
+     },
+     "expenditure_total": 428164313,
+     "expenditure_total_excl_transfers": 340042196,
+     "expenditure_total_governmental_funds_only": 355540030,
+     "expenditure_excluded_funds": {
+      "Internal Service": 15242017,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 13762911
+     },
+     "expenditure_all_funds_as_published": 457169241,
+     "expenditure_source_title": "Bay County Government Expenditures Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2020",
+     "expenditure_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/cntyfiscal/baycountyexpenditures.xlsx",
+     "source_title": "EDR, Expenditures and Revenues Reported by Florida's Local Governments (compiled from DFS Annual Financial Reports), sheet 2020",
+     "source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/cntyfiscal.cfm"
+    },
     {
      "fy": "FY2021",
      "fiscal_year_end": "September 30, 2021",
@@ -289,6 +704,413 @@
    "name": "City of Panama City",
    "years": [
     {
+     "fy": "FY2015",
+     "fiscal_year_end": "September 30, 2015",
+     "population": 35835,
+     "revenues": {
+      "Property taxes": 10844681,
+      "Sales & other local taxes": 17010736,
+      "Permits, fees & special assessments": 4409263,
+      "State & federal money": 7201318,
+      "Charges for services (incl. utilities)": 29985329,
+      "Fines": 206589,
+      "Interest & other": 1482057,
+      "Debt proceeds & transfers (not revenue)": 11646413
+     },
+     "revenue_detail": {
+      "State & federal money": {
+       "Federal grants & payments (331, 333)": 1204798,
+       "State grants (334)": 1395214,
+       "State shared revenues (335)": 4601306
+      },
+      "Debt proceeds & transfers (not revenue)": {
+       "Transfers in (381)": 9692567,
+       "Debt & lease proceeds (383-384)": 1888296,
+       "Other (382, 385-389)": 65550
+      }
+     },
+     "revenue_total": 71139973,
+     "revenue_total_incl_other_sources": 82786386,
+     "revenue_total_governmental_funds_only": 41909267,
+     "revenue_excluded_funds": {
+      "Internal Service": 8584970,
+      "Custodial": 0,
+      "Pension": 2340130,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 16803341
+     },
+     "revenue_all_funds_as_published": 110514827,
+     "revenue_source_title": "Panama City Revenues Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2015",
+     "revenue_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/panamacityrevenues.xlsx",
+     "expenditures": {
+      "General government": 5590404,
+      "Public safety": 19125330,
+      "Physical environment": 18014892,
+      "Transportation": 6942864,
+      "Economic environment": 3715353,
+      "Human services": 265926,
+      "Culture & recreation": 8158576,
+      "Debt service": 2698208,
+      "Transfers & other": 13946195
+     },
+     "expenditure_total": 78457748,
+     "expenditure_total_excl_transfers": 64511553,
+     "expenditure_total_governmental_funds_only": 54113617,
+     "expenditure_excluded_funds": {
+      "Internal Service": 8513918,
+      "Custodial": 0,
+      "Pension": 5295919,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 13909617
+     },
+     "expenditure_all_funds_as_published": 106177202,
+     "expenditure_source_title": "Panama City Expenditures Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2015",
+     "expenditure_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/panamacityexpenditures.xlsx",
+     "source_title": "EDR, Expenditures and Revenues Reported by Florida's Local Governments (compiled from DFS Annual Financial Reports), sheet 2015",
+     "source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal.cfm"
+    },
+    {
+     "fy": "FY2016",
+     "fiscal_year_end": "September 30, 2016",
+     "population": 36909,
+     "revenues": {
+      "Property taxes": 11167569,
+      "Sales & other local taxes": 17311472,
+      "Permits, fees & special assessments": 4373282,
+      "State & federal money": 5924897,
+      "Charges for services (incl. utilities)": 29090633,
+      "Fines": 166568,
+      "Interest & other": 1845916,
+      "Debt proceeds & transfers (not revenue)": 7663176
+     },
+     "revenue_detail": {
+      "State & federal money": {
+       "Federal grants & payments (331, 333)": 1028249,
+       "State grants (334)": 82246,
+       "State shared revenues (335)": 4814402
+      },
+      "Debt proceeds & transfers (not revenue)": {
+       "Transfers in (381)": 7663176,
+       "Other (382, 385-389)": 0
+      }
+     },
+     "revenue_total": 69880337,
+     "revenue_total_incl_other_sources": 77543513,
+     "revenue_total_governmental_funds_only": 41430750,
+     "revenue_excluded_funds": {
+      "Internal Service": 7749638,
+      "Custodial": 0,
+      "Pension": 10521180,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 19581021
+     },
+     "revenue_all_funds_as_published": 115395352,
+     "revenue_source_title": "Panama City Revenues Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2016",
+     "revenue_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/panamacityrevenues.xlsx",
+     "expenditures": {
+      "General government": 5072810,
+      "Public safety": 18000124,
+      "Physical environment": 18503917,
+      "Transportation": 3883658,
+      "Economic environment": 4494736,
+      "Human services": 244089,
+      "Culture & recreation": 6208705,
+      "Debt service": 3636551,
+      "Transfers & other": 11966221
+     },
+     "expenditure_total": 72010811,
+     "expenditure_total_excl_transfers": 60044590,
+     "expenditure_total_governmental_funds_only": 46753768,
+     "expenditure_excluded_funds": {
+      "Internal Service": 7609911,
+      "Custodial": 0,
+      "Pension": 7116078,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 14193533
+     },
+     "expenditure_all_funds_as_published": 100930333,
+     "expenditure_source_title": "Panama City Expenditures Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2016",
+     "expenditure_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/panamacityexpenditures.xlsx",
+     "source_title": "EDR, Expenditures and Revenues Reported by Florida's Local Governments (compiled from DFS Annual Financial Reports), sheet 2016",
+     "source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal.cfm"
+    },
+    {
+     "fy": "FY2017",
+     "fiscal_year_end": "September 30, 2017",
+     "population": 36988,
+     "revenues": {
+      "Property taxes": 11137673,
+      "Sales & other local taxes": 19520465,
+      "Permits, fees & special assessments": 4112022,
+      "State & federal money": 6285068,
+      "Charges for services (incl. utilities)": 31012383,
+      "Fines": 194130,
+      "Interest & other": 1403149,
+      "Debt proceeds & transfers (not revenue)": 10542485
+     },
+     "revenue_detail": {
+      "State & federal money": {
+       "Federal grants & payments (331, 333)": 912518,
+       "State grants (334)": 419942,
+       "State shared revenues (335)": 4952608
+      },
+      "Debt proceeds & transfers (not revenue)": {
+       "Transfers in (381)": 7245694,
+       "Debt & lease proceeds (383-384)": 3296791,
+       "Other (382, 385-389)": 0
+      }
+     },
+     "revenue_total": 73664890,
+     "revenue_total_incl_other_sources": 84207375,
+     "revenue_total_governmental_funds_only": 43399564,
+     "revenue_excluded_funds": {
+      "Internal Service": 8660171,
+      "Custodial": 0,
+      "Pension": 10876471,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 15727685
+     },
+     "revenue_all_funds_as_published": 119471702,
+     "revenue_source_title": "Panama City Revenues Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2017",
+     "revenue_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/panamacityrevenues.xlsx",
+     "expenditures": {
+      "General government": 14261522,
+      "Public safety": 19808212,
+      "Physical environment": 19000071,
+      "Transportation": 4213565,
+      "Economic environment": 4035217,
+      "Human services": 282512,
+      "Culture & recreation": 6536219,
+      "Debt service": 4816982,
+      "Transfers & other": 12208436
+     },
+     "expenditure_total": 85162736,
+     "expenditure_total_excl_transfers": 72954300,
+     "expenditure_total_governmental_funds_only": 58880734,
+     "expenditure_excluded_funds": {
+      "Internal Service": 8823562,
+      "Custodial": 0,
+      "Pension": 7023060,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 14860141
+     },
+     "expenditure_all_funds_as_published": 115869499,
+     "expenditure_source_title": "Panama City Expenditures Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2017",
+     "expenditure_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/panamacityexpenditures.xlsx",
+     "source_title": "EDR, Expenditures and Revenues Reported by Florida's Local Governments (compiled from DFS Annual Financial Reports), sheet 2017",
+     "source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal.cfm"
+    },
+    {
+     "fy": "FY2018",
+     "fiscal_year_end": "September 30, 2018",
+     "population": 37208,
+     "revenues": {
+      "Property taxes": 11101930,
+      "Sales & other local taxes": 21360694,
+      "Permits, fees & special assessments": 4261663,
+      "State & federal money": 6451426,
+      "Charges for services (incl. utilities)": 31294559,
+      "Fines": 157341,
+      "Interest & other": 1888256,
+      "Debt proceeds & transfers (not revenue)": 43806893
+     },
+     "revenue_detail": {
+      "State & federal money": {
+       "Federal grants & payments (331, 333)": 780149,
+       "State grants (334)": 466403,
+       "State shared revenues (335)": 5204874
+      },
+      "Debt proceeds & transfers (not revenue)": {
+       "Transfers in (381)": 11765228,
+       "Debt & lease proceeds (383-384)": 32041665,
+       "Other (382, 385-389)": 0
+      }
+     },
+     "revenue_total": 76515869,
+     "revenue_total_incl_other_sources": 120322762,
+     "revenue_total_governmental_funds_only": 45804607,
+     "revenue_excluded_funds": {
+      "Internal Service": 8917132,
+      "Custodial": 0,
+      "Pension": 9255909,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 22528848
+     },
+     "revenue_all_funds_as_published": 161024651,
+     "revenue_source_title": "Panama City Revenues Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2018",
+     "revenue_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/panamacityrevenues.xlsx",
+     "expenditures": {
+      "General government": 14320531,
+      "Public safety": 23439906,
+      "Physical environment": 19874854,
+      "Transportation": 3929630,
+      "Economic environment": 5643094,
+      "Human services": 244479,
+      "Culture & recreation": 7261649,
+      "Debt service": 1427750,
+      "Transfers & other": 16858379
+     },
+     "expenditure_total": 93000272,
+     "expenditure_total_excl_transfers": 76141893,
+     "expenditure_total_governmental_funds_only": 65633315,
+     "expenditure_excluded_funds": {
+      "Internal Service": 8549323,
+      "Custodial": 0,
+      "Pension": 6663530,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 15442574
+     },
+     "expenditure_all_funds_as_published": 123655699,
+     "expenditure_source_title": "Panama City Expenditures Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2018",
+     "expenditure_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/panamacityexpenditures.xlsx",
+     "source_title": "EDR, Expenditures and Revenues Reported by Florida's Local Governments (compiled from DFS Annual Financial Reports), sheet 2018",
+     "source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal.cfm"
+    },
+    {
+     "fy": "FY2019",
+     "fiscal_year_end": "September 30, 2019",
+     "population": 32951,
+     "revenues": {
+      "Property taxes": 12410800,
+      "Sales & other local taxes": 20290670,
+      "Permits, fees & special assessments": 3490296,
+      "State & federal money": 89951893,
+      "Charges for services (incl. utilities)": 24100793,
+      "Fines": 192411,
+      "Interest & other": 23878458,
+      "Debt proceeds & transfers (not revenue)": 93346644
+     },
+     "revenue_detail": {
+      "State & federal money": {
+       "Federal grants & payments (331, 333)": 76716533,
+       "State grants (334)": 7610327,
+       "State shared revenues (335)": 5625033
+      },
+      "Debt proceeds & transfers (not revenue)": {
+       "Transfers in (381)": 23569086,
+       "Debt & lease proceeds (383-384)": 60077909,
+       "Other (382, 385-389)": 9699649
+      }
+     },
+     "revenue_total": 174315321,
+     "revenue_total_incl_other_sources": 267661965,
+     "revenue_total_governmental_funds_only": 150590065,
+     "revenue_excluded_funds": {
+      "Internal Service": 8763807,
+      "Custodial": 0,
+      "Pension": 9309396,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 18658615
+     },
+     "revenue_all_funds_as_published": 304393783,
+     "revenue_source_title": "Panama City Revenues Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2019",
+     "revenue_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/panamacityrevenues.xlsx",
+     "expenditures": {
+      "General government": 84768599,
+      "Public safety": 25051159,
+      "Physical environment": 28287203,
+      "Transportation": 3860795,
+      "Economic environment": 5548015,
+      "Human services": 235158,
+      "Culture & recreation": 14539138,
+      "Debt service": 4527204,
+      "Transfers & other": 28635756
+     },
+     "expenditure_total": 195453027,
+     "expenditure_total_excl_transfers": 166817271,
+     "expenditure_total_governmental_funds_only": 159875811,
+     "expenditure_excluded_funds": {
+      "Internal Service": 6582922,
+      "Custodial": 0,
+      "Pension": 6814054,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 15630624
+     },
+     "expenditure_all_funds_as_published": 224480627,
+     "expenditure_source_title": "Panama City Expenditures Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2019",
+     "expenditure_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/panamacityexpenditures.xlsx",
+     "source_title": "EDR, Expenditures and Revenues Reported by Florida's Local Governments (compiled from DFS Annual Financial Reports), sheet 2019",
+     "source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal.cfm"
+    },
+    {
+     "fy": "FY2020",
+     "fiscal_year_end": "September 30, 2020",
+     "population": 34517,
+     "revenues": {
+      "Property taxes": 12667790,
+      "Sales & other local taxes": 20993991,
+      "Permits, fees & special assessments": 4108553,
+      "State & federal money": 21508553,
+      "Charges for services (incl. utilities)": 28108500,
+      "Fines": 264064,
+      "Interest & other": 17432808,
+      "Debt proceeds & transfers (not revenue)": 29382658
+     },
+     "revenue_detail": {
+      "State & federal money": {
+       "Federal grants & payments (331, 333)": 5933079,
+       "State grants (334)": 10303368,
+       "State shared revenues (335)": 5272106
+      },
+      "Debt proceeds & transfers (not revenue)": {
+       "Transfers in (381)": 13826464,
+       "Debt & lease proceeds (383-384)": 15501564,
+       "Other (382, 385-389)": 54630
+      }
+     },
+     "revenue_total": 105084259,
+     "revenue_total_incl_other_sources": 134466917,
+     "revenue_total_governmental_funds_only": 76782436,
+     "revenue_excluded_funds": {
+      "Internal Service": 8480652,
+      "Custodial": 0,
+      "Pension": 9409390,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 23787309
+     },
+     "revenue_all_funds_as_published": 176144268,
+     "revenue_source_title": "Panama City Revenues Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2020",
+     "revenue_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/panamacityrevenues.xlsx",
+     "expenditures": {
+      "General government": 39788115,
+      "Public safety": 21394011,
+      "Physical environment": 23229085,
+      "Transportation": 3752963,
+      "Economic environment": 7855058,
+      "Human services": 271247,
+      "Culture & recreation": 13672967,
+      "Debt service": 7164360,
+      "Transfers & other": 18594205
+     },
+     "expenditure_total": 135722011,
+     "expenditure_total_excl_transfers": 117127806,
+     "expenditure_total_governmental_funds_only": 105128241,
+     "expenditure_excluded_funds": {
+      "Internal Service": 7678937,
+      "Custodial": 0,
+      "Pension": 7009591,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 17627035
+     },
+     "expenditure_all_funds_as_published": 168037574,
+     "expenditure_source_title": "Panama City Expenditures Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2020",
+     "expenditure_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/panamacityexpenditures.xlsx",
+     "source_title": "EDR, Expenditures and Revenues Reported by Florida's Local Governments (compiled from DFS Annual Financial Reports), sheet 2020",
+     "source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal.cfm"
+    },
+    {
      "fy": "FY2021",
      "fiscal_year_end": "September 30, 2021",
      "population": 34698,
@@ -563,6 +1385,410 @@
    "id": "panama_city_beach",
    "name": "City of Panama City Beach",
    "years": [
+    {
+     "fy": "FY2015",
+     "fiscal_year_end": "September 30, 2015",
+     "population": 12467,
+     "revenues": {
+      "Property taxes": 0,
+      "Sales & other local taxes": 14519130,
+      "Permits, fees & special assessments": 5125985,
+      "State & federal money": 10926200,
+      "Charges for services (incl. utilities)": 32279698,
+      "Fines": 657560,
+      "Interest & other": 1042446,
+      "Debt proceeds & transfers (not revenue)": 44060774
+     },
+     "revenue_detail": {
+      "State & federal money": {
+       "Federal grants & payments (331, 333)": 840285,
+       "State shared revenues (335)": 1481599,
+       "Other local governments (337-339)": 8604316
+      },
+      "Debt proceeds & transfers (not revenue)": {
+       "Transfers in (381)": 1008844,
+       "Other (382, 385-389)": 43051930
+      }
+     },
+     "revenue_total": 64551019,
+     "revenue_total_incl_other_sources": 108611793,
+     "revenue_total_governmental_funds_only": 30308594,
+     "revenue_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 2377552,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 0
+     },
+     "revenue_all_funds_as_published": 110989345,
+     "revenue_source_title": "Panama City Beach Revenues Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2015",
+     "revenue_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/panamacitybeachrevenues.xlsx",
+     "expenditures": {
+      "General government": 1414103,
+      "Public safety": 13003748,
+      "Physical environment": 28443558,
+      "Transportation": 6888500,
+      "Economic environment": 450430,
+      "Human services": 0,
+      "Culture & recreation": 5599078,
+      "Debt service": 0,
+      "Transfers & other": 43743914
+     },
+     "expenditure_total": 99543331,
+     "expenditure_total_excl_transfers": 55799417,
+     "expenditure_total_governmental_funds_only": 68081939,
+     "expenditure_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 2883759,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 0
+     },
+     "expenditure_all_funds_as_published": 102427090,
+     "expenditure_source_title": "Panama City Beach Expenditures Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2015",
+     "expenditure_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/panamacitybeachexpenditures.xlsx",
+     "source_title": "EDR, Expenditures and Revenues Reported by Florida's Local Governments (compiled from DFS Annual Financial Reports), sheet 2015",
+     "source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal.cfm"
+    },
+    {
+     "fy": "FY2016",
+     "fiscal_year_end": "September 30, 2016",
+     "population": 12545,
+     "revenues": {
+      "Property taxes": 0,
+      "Sales & other local taxes": 15143299,
+      "Permits, fees & special assessments": 6177518,
+      "State & federal money": 11008906,
+      "Charges for services (incl. utilities)": 32950211,
+      "Fines": 711702,
+      "Interest & other": 1266886,
+      "Debt proceeds & transfers (not revenue)": 2039496
+     },
+     "revenue_detail": {
+      "State & federal money": {
+       "Federal grants & payments (331, 333)": 105189,
+       "State shared revenues (335)": 1570603,
+       "Other local governments (337-339)": 9333114
+      },
+      "Debt proceeds & transfers (not revenue)": {
+       "Transfers in (381)": 1728370,
+       "Other (382, 385-389)": 311126
+      }
+     },
+     "revenue_total": 67258522,
+     "revenue_total_incl_other_sources": 69298018,
+     "revenue_total_governmental_funds_only": 32412909,
+     "revenue_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 8340236,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 0
+     },
+     "revenue_all_funds_as_published": 77638254,
+     "revenue_source_title": "Panama City Beach Revenues Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2016",
+     "revenue_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/panamacitybeachrevenues.xlsx",
+     "expenditures": {
+      "General government": 1845351,
+      "Public safety": 18195129,
+      "Physical environment": 26807074,
+      "Transportation": 7523547,
+      "Economic environment": 469982,
+      "Human services": 0,
+      "Culture & recreation": 5685527,
+      "Debt service": 0,
+      "Transfers & other": 1828370
+     },
+     "expenditure_total": 62354980,
+     "expenditure_total_excl_transfers": 60526610,
+     "expenditure_total_governmental_funds_only": 32961759,
+     "expenditure_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 2789386,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 0
+     },
+     "expenditure_all_funds_as_published": 65144366,
+     "expenditure_source_title": "Panama City Beach Expenditures Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2016",
+     "expenditure_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/panamacitybeachexpenditures.xlsx",
+     "source_title": "EDR, Expenditures and Revenues Reported by Florida's Local Governments (compiled from DFS Annual Financial Reports), sheet 2016",
+     "source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal.cfm"
+    },
+    {
+     "fy": "FY2017",
+     "fiscal_year_end": "September 30, 2017",
+     "population": 12741,
+     "revenues": {
+      "Property taxes": 0,
+      "Sales & other local taxes": 16572089,
+      "Permits, fees & special assessments": 6920629,
+      "State & federal money": 11955698,
+      "Charges for services (incl. utilities)": 34048364,
+      "Fines": 511009,
+      "Interest & other": 1182532,
+      "Debt proceeds & transfers (not revenue)": 5483579
+     },
+     "revenue_detail": {
+      "State & federal money": {
+       "Federal grants & payments (331, 333)": 71415,
+       "State shared revenues (335)": 1621209,
+       "Other local governments (337-339)": 10263074
+      },
+      "Debt proceeds & transfers (not revenue)": {
+       "Transfers in (381)": 725128,
+       "Other (382, 385-389)": 4758451
+      }
+     },
+     "revenue_total": 71190321,
+     "revenue_total_incl_other_sources": 76673900,
+     "revenue_total_governmental_funds_only": 34930991,
+     "revenue_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 11300654,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 0
+     },
+     "revenue_all_funds_as_published": 87974554,
+     "revenue_source_title": "Panama City Beach Revenues Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2017",
+     "revenue_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/panamacitybeachrevenues.xlsx",
+     "expenditures": {
+      "General government": 1806116,
+      "Public safety": 12273500,
+      "Physical environment": 26993829,
+      "Transportation": 12535376,
+      "Economic environment": 479697,
+      "Human services": 0,
+      "Culture & recreation": 6316372,
+      "Debt service": 0,
+      "Transfers & other": 4825128
+     },
+     "expenditure_total": 65230018,
+     "expenditure_total_excl_transfers": 60404890,
+     "expenditure_total_governmental_funds_only": 31143902,
+     "expenditure_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 2954734,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 0
+     },
+     "expenditure_all_funds_as_published": 68184752,
+     "expenditure_source_title": "Panama City Beach Expenditures Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2017",
+     "expenditure_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/panamacitybeachexpenditures.xlsx",
+     "source_title": "EDR, Expenditures and Revenues Reported by Florida's Local Governments (compiled from DFS Annual Financial Reports), sheet 2017",
+     "source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal.cfm"
+    },
+    {
+     "fy": "FY2018",
+     "fiscal_year_end": "September 30, 2018",
+     "population": 13099,
+     "revenues": {
+      "Property taxes": 0,
+      "Sales & other local taxes": 17941995,
+      "Permits, fees & special assessments": 7889200,
+      "State & federal money": 12732071,
+      "Charges for services (incl. utilities)": 33397063,
+      "Fines": 513920,
+      "Interest & other": 2143216,
+      "Debt proceeds & transfers (not revenue)": 806253
+     },
+     "revenue_detail": {
+      "State & federal money": {
+       "Federal grants & payments (331, 333)": 553462,
+       "State shared revenues (335)": 1701090,
+       "Other local governments (337-339)": 10477519
+      },
+      "Debt proceeds & transfers (not revenue)": {
+       "Transfers in (381)": 554232,
+       "Other (382, 385-389)": 252021
+      }
+     },
+     "revenue_total": 74617465,
+     "revenue_total_incl_other_sources": 75423718,
+     "revenue_total_governmental_funds_only": 36120411,
+     "revenue_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 8868049,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 0
+     },
+     "revenue_all_funds_as_published": 84291767,
+     "revenue_source_title": "Panama City Beach Revenues Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2018",
+     "revenue_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/panamacitybeachrevenues.xlsx",
+     "expenditures": {
+      "General government": 2218599,
+      "Public safety": 13781669,
+      "Physical environment": 27247131,
+      "Transportation": 13073130,
+      "Economic environment": 459749,
+      "Human services": 0,
+      "Culture & recreation": 6510681,
+      "Debt service": 0,
+      "Transfers & other": 654232
+     },
+     "expenditure_total": 63945191,
+     "expenditure_total_excl_transfers": 63290959,
+     "expenditure_total_governmental_funds_only": 33801585,
+     "expenditure_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 5209934,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 0
+     },
+     "expenditure_all_funds_as_published": 69155125,
+     "expenditure_source_title": "Panama City Beach Expenditures Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2018",
+     "expenditure_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/panamacitybeachexpenditures.xlsx",
+     "source_title": "EDR, Expenditures and Revenues Reported by Florida's Local Governments (compiled from DFS Annual Financial Reports), sheet 2018",
+     "source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal.cfm"
+    },
+    {
+     "fy": "FY2019",
+     "fiscal_year_end": "September 30, 2019",
+     "population": 13435,
+     "revenues": {
+      "Property taxes": 0,
+      "Sales & other local taxes": 20182259,
+      "Permits, fees & special assessments": 14404619,
+      "State & federal money": 14228811,
+      "Charges for services (incl. utilities)": 35649569,
+      "Fines": 556830,
+      "Interest & other": 2596727,
+      "Debt proceeds & transfers (not revenue)": 772727
+     },
+     "revenue_detail": {
+      "State & federal money": {
+       "Federal grants & payments (331, 333)": 1023522,
+       "State grants (334)": 22154,
+       "State shared revenues (335)": 1863338,
+       "Other local governments (337-339)": 11319797
+      },
+      "Debt proceeds & transfers (not revenue)": {
+       "Transfers in (381)": 521777,
+       "Other (382, 385-389)": 250950
+      }
+     },
+     "revenue_total": 87618815,
+     "revenue_total_incl_other_sources": 88391542,
+     "revenue_total_governmental_funds_only": 46311046,
+     "revenue_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 6767919,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 0
+     },
+     "revenue_all_funds_as_published": 95159461,
+     "revenue_source_title": "Panama City Beach Revenues Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2019",
+     "revenue_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/panamacitybeachrevenues.xlsx",
+     "expenditures": {
+      "General government": 4869731,
+      "Public safety": 18129510,
+      "Physical environment": 29238262,
+      "Transportation": 13231974,
+      "Economic environment": 462487,
+      "Human services": 0,
+      "Culture & recreation": 6417639,
+      "Debt service": 0,
+      "Transfers & other": 621777
+     },
+     "expenditure_total": 72971380,
+     "expenditure_total_excl_transfers": 72349603,
+     "expenditure_total_governmental_funds_only": 40832021,
+     "expenditure_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 4189351,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 0
+     },
+     "expenditure_all_funds_as_published": 77160731,
+     "expenditure_source_title": "Panama City Beach Expenditures Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2019",
+     "expenditure_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/panamacitybeachexpenditures.xlsx",
+     "source_title": "EDR, Expenditures and Revenues Reported by Florida's Local Governments (compiled from DFS Annual Financial Reports), sheet 2019",
+     "source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal.cfm"
+    },
+    {
+     "fy": "FY2020",
+     "fiscal_year_end": "September 30, 2020",
+     "population": 13691,
+     "revenues": {
+      "Property taxes": 0,
+      "Sales & other local taxes": 18552147,
+      "Permits, fees & special assessments": 16653979,
+      "State & federal money": 17155566,
+      "Charges for services (incl. utilities)": 34895983,
+      "Fines": 485738,
+      "Interest & other": 2089003,
+      "Debt proceeds & transfers (not revenue)": 3127161
+     },
+     "revenue_detail": {
+      "State & federal money": {
+       "Federal grants & payments (331, 333)": 1446990,
+       "State grants (334)": 51456,
+       "State shared revenues (335)": 1796443,
+       "Other local governments (337-339)": 13860677
+      },
+      "Debt proceeds & transfers (not revenue)": {
+       "Transfers in (381)": 2687061,
+       "Other (382, 385-389)": 440100
+      }
+     },
+     "revenue_total": 89832416,
+     "revenue_total_incl_other_sources": 92959577,
+     "revenue_total_governmental_funds_only": 49810699,
+     "revenue_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 11591079,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 0
+     },
+     "revenue_all_funds_as_published": 104550656,
+     "revenue_source_title": "Panama City Beach Revenues Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2020",
+     "revenue_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/panamacitybeachrevenues.xlsx",
+     "expenditures": {
+      "General government": 3941756,
+      "Public safety": 19084222,
+      "Physical environment": 30091700,
+      "Transportation": 18190607,
+      "Economic environment": 462872,
+      "Human services": 0,
+      "Culture & recreation": 7306247,
+      "Debt service": 0,
+      "Transfers & other": 7115433
+     },
+     "expenditure_total": 86192837,
+     "expenditure_total_excl_transfers": 79077404,
+     "expenditure_total_governmental_funds_only": 49263475,
+     "expenditure_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 4746280,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 0
+     },
+     "expenditure_all_funds_as_published": 90939117,
+     "expenditure_source_title": "Panama City Beach Expenditures Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2020",
+     "expenditure_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/panamacitybeachexpenditures.xlsx",
+     "source_title": "EDR, Expenditures and Revenues Reported by Florida's Local Governments (compiled from DFS Annual Financial Reports), sheet 2020",
+     "source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal.cfm"
+    },
     {
      "fy": "FY2021",
      "fiscal_year_end": "September 30, 2021",
@@ -843,6 +2069,412 @@
    "name": "City of Lynn Haven",
    "years": [
     {
+     "fy": "FY2015",
+     "fiscal_year_end": "September 30, 2015",
+     "population": 19287,
+     "revenues": {
+      "Property taxes": 3622960,
+      "Sales & other local taxes": 2433026,
+      "Permits, fees & special assessments": 2276643,
+      "State & federal money": 2521345,
+      "Charges for services (incl. utilities)": 10267811,
+      "Fines": 41098,
+      "Interest & other": 257837,
+      "Debt proceeds & transfers (not revenue)": 403272
+     },
+     "revenue_detail": {
+      "State & federal money": {
+       "Federal grants & payments (331, 333)": 118596,
+       "State grants (334)": 90626,
+       "State shared revenues (335)": 2312123
+      },
+      "Debt proceeds & transfers (not revenue)": {
+       "Transfers in (381)": 403272
+      }
+     },
+     "revenue_total": 21420720,
+     "revenue_total_incl_other_sources": 21823992,
+     "revenue_total_governmental_funds_only": 10765515,
+     "revenue_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 1627066,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 432134
+     },
+     "revenue_all_funds_as_published": 23883192,
+     "revenue_source_title": "Lynn Haven Revenues Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2015",
+     "revenue_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/lynnhavenrevenues.xlsx",
+     "expenditures": {
+      "General government": 2544568,
+      "Public safety": 4422952,
+      "Physical environment": 8231502,
+      "Transportation": 892824,
+      "Economic environment": 0,
+      "Human services": 0,
+      "Culture & recreation": 1657675,
+      "Debt service": 403662,
+      "Transfers & other": 403272
+     },
+     "expenditure_total": 18556455,
+     "expenditure_total_excl_transfers": 18153183,
+     "expenditure_total_governmental_funds_only": 10324953,
+     "expenditure_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 1611946,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 358326
+     },
+     "expenditure_all_funds_as_published": 20526727,
+     "expenditure_source_title": "Lynn Haven Expenditures Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2015",
+     "expenditure_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/lynnhavenexpenditures.xlsx",
+     "source_title": "EDR, Expenditures and Revenues Reported by Florida's Local Governments (compiled from DFS Annual Financial Reports), sheet 2015",
+     "source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal.cfm"
+    },
+    {
+     "fy": "FY2016",
+     "fiscal_year_end": "September 30, 2016",
+     "population": 20004,
+     "revenues": {
+      "Property taxes": 3654907,
+      "Sales & other local taxes": 2537265,
+      "Permits, fees & special assessments": 3244274,
+      "State & federal money": 2521685,
+      "Charges for services (incl. utilities)": 10616720,
+      "Fines": 66518,
+      "Interest & other": 387524,
+      "Debt proceeds & transfers (not revenue)": 4641446
+     },
+     "revenue_detail": {
+      "State & federal money": {
+       "Federal grants & payments (331, 333)": 88786,
+       "State shared revenues (335)": 2432899
+      },
+      "Debt proceeds & transfers (not revenue)": {
+       "Transfers in (381)": 675812,
+       "Other (382, 385-389)": 3965634
+      }
+     },
+     "revenue_total": 23028893,
+     "revenue_total_incl_other_sources": 27670339,
+     "revenue_total_governmental_funds_only": 11586606,
+     "revenue_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 3926390,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 291940
+     },
+     "revenue_all_funds_as_published": 31888669,
+     "revenue_source_title": "Lynn Haven Revenues Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2016",
+     "revenue_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/lynnhavenrevenues.xlsx",
+     "expenditures": {
+      "General government": 2454712,
+      "Public safety": 4462280,
+      "Physical environment": 8103694,
+      "Transportation": 1256743,
+      "Economic environment": 21394,
+      "Human services": 0,
+      "Culture & recreation": 1814701,
+      "Debt service": 410811,
+      "Transfers & other": 2324432
+     },
+     "expenditure_total": 20848767,
+     "expenditure_total_excl_transfers": 18524335,
+     "expenditure_total_governmental_funds_only": 12455324,
+     "expenditure_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 1375711,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 410850
+     },
+     "expenditure_all_funds_as_published": 22635328,
+     "expenditure_source_title": "Lynn Haven Expenditures Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2016",
+     "expenditure_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/lynnhavenexpenditures.xlsx",
+     "source_title": "EDR, Expenditures and Revenues Reported by Florida's Local Governments (compiled from DFS Annual Financial Reports), sheet 2016",
+     "source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal.cfm"
+    },
+    {
+     "fy": "FY2017",
+     "fiscal_year_end": "September 30, 2017",
+     "population": 20886,
+     "revenues": {
+      "Property taxes": 3787684,
+      "Sales & other local taxes": 3716729,
+      "Permits, fees & special assessments": 2903768,
+      "State & federal money": 3294323,
+      "Charges for services (incl. utilities)": 11346981,
+      "Fines": 82221,
+      "Interest & other": 801062,
+      "Debt proceeds & transfers (not revenue)": 5631739
+     },
+     "revenue_detail": {
+      "State & federal money": {
+       "Federal grants & payments (331, 333)": 217138,
+       "State grants (334)": 320329,
+       "State shared revenues (335)": 2756856
+      },
+      "Debt proceeds & transfers (not revenue)": {
+       "Transfers in (381)": 1145809,
+       "Debt & lease proceeds (383-384)": 3910000,
+       "Other (382, 385-389)": 575930
+      }
+     },
+     "revenue_total": 25932768,
+     "revenue_total_incl_other_sources": 31564507,
+     "revenue_total_governmental_funds_only": 13987499,
+     "revenue_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 4595407,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 303962
+     },
+     "revenue_all_funds_as_published": 36463876,
+     "revenue_source_title": "Lynn Haven Revenues Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2017",
+     "revenue_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/lynnhavenrevenues.xlsx",
+     "expenditures": {
+      "General government": 3282754,
+      "Public safety": 4696272,
+      "Physical environment": 8381688,
+      "Transportation": 3243940,
+      "Economic environment": 41118,
+      "Human services": 0,
+      "Culture & recreation": 1954439,
+      "Debt service": 354857,
+      "Transfers & other": 1145809
+     },
+     "expenditure_total": 23100877,
+     "expenditure_total_excl_transfers": 21955068,
+     "expenditure_total_governmental_funds_only": 13999705,
+     "expenditure_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 1944142,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 381839
+     },
+     "expenditure_all_funds_as_published": 25426858,
+     "expenditure_source_title": "Lynn Haven Expenditures Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2017",
+     "expenditure_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/lynnhavenexpenditures.xlsx",
+     "source_title": "EDR, Expenditures and Revenues Reported by Florida's Local Governments (compiled from DFS Annual Financial Reports), sheet 2017",
+     "source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal.cfm"
+    },
+    {
+     "fy": "FY2018",
+     "fiscal_year_end": "September 30, 2018",
+     "population": 21201,
+     "revenues": {
+      "Property taxes": 3924530,
+      "Sales & other local taxes": 4461977,
+      "Permits, fees & special assessments": 2936757,
+      "State & federal money": 2879627,
+      "Charges for services (incl. utilities)": 11176441,
+      "Fines": 54069,
+      "Interest & other": 684663,
+      "Debt proceeds & transfers (not revenue)": 9393597
+     },
+     "revenue_detail": {
+      "State & federal money": {
+       "Federal grants & payments (331, 333)": 63011,
+       "State grants (334)": 87640,
+       "State shared revenues (335)": 2728976
+      },
+      "Debt proceeds & transfers (not revenue)": {
+       "Transfers in (381)": 3285047,
+       "Debt & lease proceeds (383-384)": 6090000,
+       "Other (382, 385-389)": 18550
+      }
+     },
+     "revenue_total": 26118064,
+     "revenue_total_incl_other_sources": 35511661,
+     "revenue_total_governmental_funds_only": 14147910,
+     "revenue_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 3756769,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 304005
+     },
+     "revenue_all_funds_as_published": 39572435,
+     "revenue_source_title": "Lynn Haven Revenues Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2018",
+     "revenue_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/lynnhavenrevenues.xlsx",
+     "expenditures": {
+      "General government": 3272886,
+      "Public safety": 5967911,
+      "Physical environment": 8514168,
+      "Transportation": 7999125,
+      "Economic environment": 100431,
+      "Human services": 0,
+      "Culture & recreation": 2879290,
+      "Debt service": 1204967,
+      "Transfers & other": 3285047
+     },
+     "expenditure_total": 33223825,
+     "expenditure_total_excl_transfers": 29938778,
+     "expenditure_total_governmental_funds_only": 22691137,
+     "expenditure_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 1887932,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 583065
+     },
+     "expenditure_all_funds_as_published": 35694822,
+     "expenditure_source_title": "Lynn Haven Expenditures Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2018",
+     "expenditure_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/lynnhavenexpenditures.xlsx",
+     "source_title": "EDR, Expenditures and Revenues Reported by Florida's Local Governments (compiled from DFS Annual Financial Reports), sheet 2018",
+     "source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal.cfm"
+    },
+    {
+     "fy": "FY2019",
+     "fiscal_year_end": "September 30, 2019",
+     "population": 19586,
+     "revenues": {
+      "Property taxes": 4433135,
+      "Sales & other local taxes": 4588749,
+      "Permits, fees & special assessments": 3815490,
+      "State & federal money": 20477465,
+      "Charges for services (incl. utilities)": 10812126,
+      "Fines": 32705,
+      "Interest & other": 10629984,
+      "Debt proceeds & transfers (not revenue)": 36831358
+     },
+     "revenue_detail": {
+      "State & federal money": {
+       "Federal grants & payments (331, 333)": 15342323,
+       "State grants (334)": 1550326,
+       "State shared revenues (335)": 3167900,
+       "Other local governments (337-339)": 416916
+      },
+      "Debt proceeds & transfers (not revenue)": {
+       "Transfers in (381)": 2425314,
+       "Debt & lease proceeds (383-384)": 34310000,
+       "Other (382, 385-389)": 96044
+      }
+     },
+     "revenue_total": 54789654,
+     "revenue_total_incl_other_sources": 91621012,
+     "revenue_total_governmental_funds_only": 43272833,
+     "revenue_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 3037755,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 0
+     },
+     "revenue_all_funds_as_published": 94658767,
+     "revenue_source_title": "Lynn Haven Revenues Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2019",
+     "revenue_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/lynnhavenrevenues.xlsx",
+     "expenditures": {
+      "General government": 3265239,
+      "Public safety": 44000407,
+      "Physical environment": 10062033,
+      "Transportation": 1136018,
+      "Economic environment": 135360,
+      "Human services": 0,
+      "Culture & recreation": 1725859,
+      "Debt service": 1418818,
+      "Transfers & other": 2425314
+     },
+     "expenditure_total": 64169048,
+     "expenditure_total_excl_transfers": 61743734,
+     "expenditure_total_governmental_funds_only": 53372710,
+     "expenditure_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 2259905,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 0
+     },
+     "expenditure_all_funds_as_published": 66428953,
+     "expenditure_source_title": "Lynn Haven Expenditures Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2019",
+     "expenditure_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/lynnhavenexpenditures.xlsx",
+     "source_title": "EDR, Expenditures and Revenues Reported by Florida's Local Governments (compiled from DFS Annual Financial Reports), sheet 2019",
+     "source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal.cfm"
+    },
+    {
+     "fy": "FY2020",
+     "fiscal_year_end": "September 30, 2020",
+     "population": 20235,
+     "revenues": {
+      "Property taxes": 3874792,
+      "Sales & other local taxes": 4854712,
+      "Permits, fees & special assessments": 3243879,
+      "State & federal money": 13386817,
+      "Charges for services (incl. utilities)": 12261592,
+      "Fines": 89085,
+      "Interest & other": 1946250,
+      "Debt proceeds & transfers (not revenue)": 6932843
+     },
+     "revenue_detail": {
+      "State & federal money": {
+       "Federal grants & payments (331, 333)": 8540434,
+       "State grants (334)": 1806266,
+       "State shared revenues (335)": 2955302,
+       "Other local governments (337-339)": 84815
+      },
+      "Debt proceeds & transfers (not revenue)": {
+       "Transfers in (381)": 1739892,
+       "Debt & lease proceeds (383-384)": 5137333,
+       "Other (382, 385-389)": 55618
+      }
+     },
+     "revenue_total": 39657127,
+     "revenue_total_incl_other_sources": 46589970,
+     "revenue_total_governmental_funds_only": 27606733,
+     "revenue_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 5544247,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 0
+     },
+     "revenue_all_funds_as_published": 52134217,
+     "revenue_source_title": "Lynn Haven Revenues Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2020",
+     "revenue_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/lynnhavenrevenues.xlsx",
+     "expenditures": {
+      "General government": 3252435,
+      "Public safety": 19755871,
+      "Physical environment": 11102590,
+      "Transportation": 3341328,
+      "Economic environment": 427745,
+      "Human services": 0,
+      "Culture & recreation": 1816696,
+      "Debt service": 2485853,
+      "Transfers & other": 1739892
+     },
+     "expenditure_total": 43922410,
+     "expenditure_total_excl_transfers": 42182518,
+     "expenditure_total_governmental_funds_only": 31640926,
+     "expenditure_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 2370332,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 0
+     },
+     "expenditure_all_funds_as_published": 46292742,
+     "expenditure_source_title": "Lynn Haven Expenditures Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2020",
+     "expenditure_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/lynnhavenexpenditures.xlsx",
+     "source_title": "EDR, Expenditures and Revenues Reported by Florida's Local Governments (compiled from DFS Annual Financial Reports), sheet 2020",
+     "source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal.cfm"
+    },
+    {
      "fy": "FY2021",
      "fiscal_year_end": "September 30, 2021",
      "population": 18810,
@@ -1117,6 +2749,405 @@
    "id": "callaway",
    "name": "City of Callaway",
    "years": [
+    {
+     "fy": "FY2015",
+     "fiscal_year_end": "September 30, 2015",
+     "population": 14681,
+     "revenues": {
+      "Property taxes": 1018134,
+      "Sales & other local taxes": 1904617,
+      "Permits, fees & special assessments": 1121456,
+      "State & federal money": 2400669,
+      "Charges for services (incl. utilities)": 7517378,
+      "Fines": 4182,
+      "Interest & other": 676342,
+      "Debt proceeds & transfers (not revenue)": 981185
+     },
+     "revenue_detail": {
+      "State & federal money": {
+       "Federal grants & payments (331, 333)": 46955,
+       "State grants (334)": 448625,
+       "State shared revenues (335)": 1887925,
+       "Other local governments (337-339)": 17164
+      },
+      "Debt proceeds & transfers (not revenue)": {
+       "Transfers in (381)": 981185
+      }
+     },
+     "revenue_total": 14642778,
+     "revenue_total_incl_other_sources": 15623963,
+     "revenue_total_governmental_funds_only": 6631904,
+     "revenue_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 0
+     },
+     "revenue_all_funds_as_published": 15623963,
+     "revenue_source_title": "Callaway Revenues Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2015",
+     "revenue_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/callawayrevenues.xlsx",
+     "expenditures": {
+      "General government": 766531,
+      "Public safety": 2397794,
+      "Physical environment": 7417436,
+      "Transportation": 1497723,
+      "Economic environment": 0,
+      "Human services": 0,
+      "Culture & recreation": 769445,
+      "Debt service": 89757,
+      "Transfers & other": 981186
+     },
+     "expenditure_total": 13919872,
+     "expenditure_total_excl_transfers": 12938686,
+     "expenditure_total_governmental_funds_only": 6502436,
+     "expenditure_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 0
+     },
+     "expenditure_all_funds_as_published": 13919872,
+     "expenditure_source_title": "Callaway Expenditures Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2015",
+     "expenditure_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/callawayexpenditures.xlsx",
+     "source_title": "EDR, Expenditures and Revenues Reported by Florida's Local Governments (compiled from DFS Annual Financial Reports), sheet 2015",
+     "source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal.cfm"
+    },
+    {
+     "fy": "FY2016",
+     "fiscal_year_end": "September 30, 2016",
+     "population": 15625,
+     "revenues": {
+      "Property taxes": 1012892,
+      "Sales & other local taxes": 2043872,
+      "Permits, fees & special assessments": 1223870,
+      "State & federal money": 2375808,
+      "Charges for services (incl. utilities)": 7610912,
+      "Fines": 3611,
+      "Interest & other": 874670,
+      "Debt proceeds & transfers (not revenue)": 2702713
+     },
+     "revenue_detail": {
+      "State & federal money": {
+       "State grants (334)": 365622,
+       "State shared revenues (335)": 2010186
+      },
+      "Debt proceeds & transfers (not revenue)": {
+       "Transfers in (381)": 2534339,
+       "Other (382, 385-389)": 168374
+      }
+     },
+     "revenue_total": 15145635,
+     "revenue_total_incl_other_sources": 17848348,
+     "revenue_total_governmental_funds_only": 6831443,
+     "revenue_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 17952
+     },
+     "revenue_all_funds_as_published": 17866300,
+     "revenue_source_title": "Callaway Revenues Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2016",
+     "revenue_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/callawayrevenues.xlsx",
+     "expenditures": {
+      "General government": 728408,
+      "Public safety": 2539852,
+      "Physical environment": 7523636,
+      "Transportation": 1509656,
+      "Economic environment": 0,
+      "Human services": 0,
+      "Culture & recreation": 770968,
+      "Debt service": 1447235,
+      "Transfers & other": 2534339
+     },
+     "expenditure_total": 17054094,
+     "expenditure_total_excl_transfers": 14519755,
+     "expenditure_total_governmental_funds_only": 8521043,
+     "expenditure_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 5886
+     },
+     "expenditure_all_funds_as_published": 17059980,
+     "expenditure_source_title": "Callaway Expenditures Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2016",
+     "expenditure_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/callawayexpenditures.xlsx",
+     "source_title": "EDR, Expenditures and Revenues Reported by Florida's Local Governments (compiled from DFS Annual Financial Reports), sheet 2016",
+     "source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal.cfm"
+    },
+    {
+     "fy": "FY2017",
+     "fiscal_year_end": "September 30, 2017",
+     "population": 15737,
+     "revenues": {
+      "Property taxes": 1027364,
+      "Sales & other local taxes": 1958518,
+      "Permits, fees & special assessments": 1147395,
+      "State & federal money": 3447324,
+      "Charges for services (incl. utilities)": 7741682,
+      "Fines": 8975,
+      "Interest & other": 728379,
+      "Debt proceeds & transfers (not revenue)": 987927
+     },
+     "revenue_detail": {
+      "State & federal money": {
+       "Federal grants & payments (331, 333)": 430858,
+       "State grants (334)": 2215,
+       "State shared revenues (335)": 3014251
+      },
+      "Debt proceeds & transfers (not revenue)": {
+       "Transfers in (381)": 913002,
+       "Other (382, 385-389)": 74925
+      }
+     },
+     "revenue_total": 16059637,
+     "revenue_total_incl_other_sources": 17047564,
+     "revenue_total_governmental_funds_only": 7766589,
+     "revenue_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 129612
+     },
+     "revenue_all_funds_as_published": 17177176,
+     "revenue_source_title": "Callaway Revenues Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2017",
+     "revenue_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/callawayrevenues.xlsx",
+     "expenditures": {
+      "General government": 908235,
+      "Public safety": 2625226,
+      "Physical environment": 8030003,
+      "Transportation": 1853581,
+      "Economic environment": 0,
+      "Human services": 0,
+      "Culture & recreation": 952545,
+      "Debt service": 0,
+      "Transfers & other": 1009045
+     },
+     "expenditure_total": 15378635,
+     "expenditure_total_excl_transfers": 14369590,
+     "expenditure_total_governmental_funds_only": 7348632,
+     "expenditure_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 209270
+     },
+     "expenditure_all_funds_as_published": 15587905,
+     "expenditure_source_title": "Callaway Expenditures Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2017",
+     "expenditure_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/callawayexpenditures.xlsx",
+     "source_title": "EDR, Expenditures and Revenues Reported by Florida's Local Governments (compiled from DFS Annual Financial Reports), sheet 2017",
+     "source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal.cfm"
+    },
+    {
+     "fy": "FY2018",
+     "fiscal_year_end": "September 30, 2018",
+     "population": 15855,
+     "revenues": {
+      "Property taxes": 1027827,
+      "Sales & other local taxes": 1998426,
+      "Permits, fees & special assessments": 1988899,
+      "State & federal money": 3881646,
+      "Charges for services (incl. utilities)": 7540351,
+      "Fines": 18350,
+      "Interest & other": 865600,
+      "Debt proceeds & transfers (not revenue)": 675407
+     },
+     "revenue_detail": {
+      "State & federal money": {
+       "State grants (334)": 195666,
+       "State shared revenues (335)": 3685980
+      },
+      "Debt proceeds & transfers (not revenue)": {
+       "Transfers in (381)": 675407
+      }
+     },
+     "revenue_total": 17321099,
+     "revenue_total_incl_other_sources": 17996506,
+     "revenue_total_governmental_funds_only": 8749073,
+     "revenue_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 48119
+     },
+     "revenue_all_funds_as_published": 18044625,
+     "revenue_source_title": "Callaway Revenues Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2018",
+     "revenue_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/callawayrevenues.xlsx",
+     "expenditures": {
+      "General government": 1096452,
+      "Public safety": 2816017,
+      "Physical environment": 7997543,
+      "Transportation": 1489392,
+      "Economic environment": 0,
+      "Human services": 0,
+      "Culture & recreation": 833147,
+      "Debt service": 0,
+      "Transfers & other": 675407
+     },
+     "expenditure_total": 14907958,
+     "expenditure_total_excl_transfers": 14232551,
+     "expenditure_total_governmental_funds_only": 6910415,
+     "expenditure_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 445
+     },
+     "expenditure_all_funds_as_published": 14908403,
+     "expenditure_source_title": "Callaway Expenditures Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2018",
+     "expenditure_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/callawayexpenditures.xlsx",
+     "source_title": "EDR, Expenditures and Revenues Reported by Florida's Local Governments (compiled from DFS Annual Financial Reports), sheet 2018",
+     "source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal.cfm"
+    },
+    {
+     "fy": "FY2019",
+     "fiscal_year_end": "September 30, 2019",
+     "population": 13211,
+     "revenues": {
+      "Property taxes": 924565,
+      "Sales & other local taxes": 1573988,
+      "Permits, fees & special assessments": 2076676,
+      "State & federal money": 13595173,
+      "Charges for services (incl. utilities)": 5525974,
+      "Fines": 11045,
+      "Interest & other": 795784,
+      "Debt proceeds & transfers (not revenue)": 8458065
+     },
+     "revenue_detail": {
+      "State & federal money": {
+       "Federal grants & payments (331, 333)": 8764452,
+       "State grants (334)": 810951,
+       "State shared revenues (335)": 4019770
+      },
+      "Debt proceeds & transfers (not revenue)": {
+       "Transfers in (381)": 208065,
+       "Debt & lease proceeds (383-384)": 8250000
+      }
+     },
+     "revenue_total": 24503205,
+     "revenue_total_incl_other_sources": 32961270,
+     "revenue_total_governmental_funds_only": 18046870,
+     "revenue_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 88781
+     },
+     "revenue_all_funds_as_published": 33050051,
+     "revenue_source_title": "Callaway Revenues Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2019",
+     "revenue_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/callawayrevenues.xlsx",
+     "expenditures": {
+      "General government": 1527585,
+      "Public safety": 23928821,
+      "Physical environment": 6901563,
+      "Transportation": 1538131,
+      "Economic environment": 0,
+      "Human services": 0,
+      "Culture & recreation": 675821,
+      "Debt service": 57253,
+      "Transfers & other": 208065
+     },
+     "expenditure_total": 34837239,
+     "expenditure_total_excl_transfers": 34629174,
+     "expenditure_total_governmental_funds_only": 27935676,
+     "expenditure_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 545
+     },
+     "expenditure_all_funds_as_published": 34837784,
+     "expenditure_source_title": "Callaway Expenditures Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2019",
+     "expenditure_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/callawayexpenditures.xlsx",
+     "source_title": "EDR, Expenditures and Revenues Reported by Florida's Local Governments (compiled from DFS Annual Financial Reports), sheet 2019",
+     "source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal.cfm"
+    },
+    {
+     "fy": "FY2020",
+     "fiscal_year_end": "September 30, 2020",
+     "population": 14662,
+     "revenues": {
+      "Property taxes": 1108348,
+      "Sales & other local taxes": 1806328,
+      "Permits, fees & special assessments": 1906965,
+      "State & federal money": 15630229,
+      "Charges for services (incl. utilities)": 7830579,
+      "Fines": 29605,
+      "Interest & other": 1294311,
+      "Debt proceeds & transfers (not revenue)": 3092061
+     },
+     "revenue_detail": {
+      "State & federal money": {
+       "Federal grants & payments (331, 333)": 8437445,
+       "State grants (334)": 3445691,
+       "State shared revenues (335)": 3747093
+      },
+      "Debt proceeds & transfers (not revenue)": {
+       "Transfers in (381)": 842061,
+       "Debt & lease proceeds (383-384)": 2250000
+      }
+     },
+     "revenue_total": 29606365,
+     "revenue_total_incl_other_sources": 32698426,
+     "revenue_total_governmental_funds_only": 19516445,
+     "revenue_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 0
+     },
+     "revenue_all_funds_as_published": 32698426,
+     "revenue_source_title": "Callaway Revenues Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2020",
+     "revenue_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/callawayrevenues.xlsx",
+     "expenditures": {
+      "General government": 1236649,
+      "Public safety": 6442245,
+      "Physical environment": 6939423,
+      "Transportation": 4331708,
+      "Economic environment": 0,
+      "Human services": 0,
+      "Culture & recreation": 822834,
+      "Debt service": 103411,
+      "Transfers & other": 9092061
+     },
+     "expenditure_total": 28968331,
+     "expenditure_total_excl_transfers": 19876270,
+     "expenditure_total_governmental_funds_only": 22028908,
+     "expenditure_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 2363
+     },
+     "expenditure_all_funds_as_published": 28970694,
+     "expenditure_source_title": "Callaway Expenditures Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2020",
+     "expenditure_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/callawayexpenditures.xlsx",
+     "source_title": "EDR, Expenditures and Revenues Reported by Florida's Local Governments (compiled from DFS Annual Financial Reports), sheet 2020",
+     "source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal.cfm"
+    },
     {
      "fy": "FY2021",
      "fiscal_year_end": "September 30, 2021",
@@ -1422,6 +3453,403 @@
    "name": "City of Springfield",
    "years": [
     {
+     "fy": "FY2015",
+     "fiscal_year_end": "September 30, 2015",
+     "population": 9097,
+     "revenues": {
+      "Property taxes": 642940,
+      "Sales & other local taxes": 944368,
+      "Permits, fees & special assessments": 964326,
+      "State & federal money": 1440457,
+      "Charges for services (incl. utilities)": 5592911,
+      "Fines": 36784,
+      "Interest & other": 388284,
+      "Debt proceeds & transfers (not revenue)": 1034254
+     },
+     "revenue_detail": {
+      "State & federal money": {
+       "Federal grants & payments (331, 333)": 130372,
+       "State grants (334)": 11185,
+       "State shared revenues (335)": 1291661,
+       "Other local governments (337-339)": 7239
+      },
+      "Debt proceeds & transfers (not revenue)": {
+       "Transfers in (381)": 693723,
+       "Other (382, 385-389)": 340531
+      }
+     },
+     "revenue_total": 10010070,
+     "revenue_total_incl_other_sources": 11044324,
+     "revenue_total_governmental_funds_only": 4367098,
+     "revenue_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 0
+     },
+     "revenue_all_funds_as_published": 11044324,
+     "revenue_source_title": "Springfield Revenues Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2015",
+     "revenue_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/springfieldrevenues.xlsx",
+     "expenditures": {
+      "General government": 367957,
+      "Public safety": 2789345,
+      "Physical environment": 5370516,
+      "Transportation": 826346,
+      "Economic environment": 0,
+      "Human services": 0,
+      "Culture & recreation": 339550,
+      "Debt service": 105967,
+      "Transfers & other": 693723
+     },
+     "expenditure_total": 10493404,
+     "expenditure_total_excl_transfers": 9799681,
+     "expenditure_total_governmental_funds_only": 4764675,
+     "expenditure_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 0
+     },
+     "expenditure_all_funds_as_published": 10493404,
+     "expenditure_source_title": "Springfield Expenditures Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2015",
+     "expenditure_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/springfieldexpenditures.xlsx",
+     "source_title": "EDR, Expenditures and Revenues Reported by Florida's Local Governments (compiled from DFS Annual Financial Reports), sheet 2015",
+     "source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal.cfm"
+    },
+    {
+     "fy": "FY2016",
+     "fiscal_year_end": "September 30, 2016",
+     "population": 9490,
+     "revenues": {
+      "Property taxes": 643543,
+      "Sales & other local taxes": 1096597,
+      "Permits, fees & special assessments": 1149884,
+      "State & federal money": 1346669,
+      "Charges for services (incl. utilities)": 5933582,
+      "Fines": 30111,
+      "Interest & other": 396089,
+      "Debt proceeds & transfers (not revenue)": 1411250
+     },
+     "revenue_detail": {
+      "State & federal money": {
+       "Federal grants & payments (331, 333)": 1865,
+       "State shared revenues (335)": 1344804
+      },
+      "Debt proceeds & transfers (not revenue)": {
+       "Transfers in (381)": 40785,
+       "Other (382, 385-389)": 1370465
+      }
+     },
+     "revenue_total": 10596475,
+     "revenue_total_incl_other_sources": 12007725,
+     "revenue_total_governmental_funds_only": 4658439,
+     "revenue_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 0
+     },
+     "revenue_all_funds_as_published": 12007725,
+     "revenue_source_title": "Springfield Revenues Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2016",
+     "revenue_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/springfieldrevenues.xlsx",
+     "expenditures": {
+      "General government": 348748,
+      "Public safety": 2786498,
+      "Physical environment": 5526618,
+      "Transportation": 1066362,
+      "Economic environment": 0,
+      "Human services": 0,
+      "Culture & recreation": 410370,
+      "Debt service": 40785,
+      "Transfers & other": 40785
+     },
+     "expenditure_total": 10220166,
+     "expenditure_total_excl_transfers": 10179381,
+     "expenditure_total_governmental_funds_only": 4824945,
+     "expenditure_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 0
+     },
+     "expenditure_all_funds_as_published": 10220166,
+     "expenditure_source_title": "Springfield Expenditures Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2016",
+     "expenditure_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/springfieldexpenditures.xlsx",
+     "source_title": "EDR, Expenditures and Revenues Reported by Florida's Local Governments (compiled from DFS Annual Financial Reports), sheet 2016",
+     "source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal.cfm"
+    },
+    {
+     "fy": "FY2017",
+     "fiscal_year_end": "September 30, 2017",
+     "population": 9568,
+     "revenues": {
+      "Property taxes": 676611,
+      "Sales & other local taxes": 1005917,
+      "Permits, fees & special assessments": 1048657,
+      "State & federal money": 1958605,
+      "Charges for services (incl. utilities)": 6061120,
+      "Fines": 56156,
+      "Interest & other": 442438,
+      "Debt proceeds & transfers (not revenue)": 1635988
+     },
+     "revenue_detail": {
+      "State & federal money": {
+       "Federal grants & payments (331, 333)": 8356,
+       "State shared revenues (335)": 1950249
+      },
+      "Debt proceeds & transfers (not revenue)": {
+       "Other (382, 385-389)": 1635988
+      }
+     },
+     "revenue_total": 11249504,
+     "revenue_total_incl_other_sources": 12885492,
+     "revenue_total_governmental_funds_only": 5140597,
+     "revenue_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 0
+     },
+     "revenue_all_funds_as_published": 12885492,
+     "revenue_source_title": "Springfield Revenues Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2017",
+     "revenue_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/springfieldrevenues.xlsx",
+     "expenditures": {
+      "General government": 364634,
+      "Public safety": 3081325,
+      "Physical environment": 5759468,
+      "Transportation": 1415815,
+      "Economic environment": 0,
+      "Human services": 0,
+      "Culture & recreation": 460470,
+      "Debt service": 0,
+      "Transfers & other": 0
+     },
+     "expenditure_total": 11081712,
+     "expenditure_total_excl_transfers": 11081712,
+     "expenditure_total_governmental_funds_only": 5483662,
+     "expenditure_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 175
+     },
+     "expenditure_all_funds_as_published": 11081887,
+     "expenditure_source_title": "Springfield Expenditures Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2017",
+     "expenditure_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/springfieldexpenditures.xlsx",
+     "source_title": "EDR, Expenditures and Revenues Reported by Florida's Local Governments (compiled from DFS Annual Financial Reports), sheet 2017",
+     "source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal.cfm"
+    },
+    {
+     "fy": "FY2018",
+     "fiscal_year_end": "September 30, 2018",
+     "population": 9621,
+     "revenues": {
+      "Property taxes": 721265,
+      "Sales & other local taxes": 1073569,
+      "Permits, fees & special assessments": 992802,
+      "State & federal money": 2353441,
+      "Charges for services (incl. utilities)": 6232458,
+      "Fines": 28481,
+      "Interest & other": 406513,
+      "Debt proceeds & transfers (not revenue)": 3143579
+     },
+     "revenue_detail": {
+      "State & federal money": {
+       "State shared revenues (335)": 2346252,
+       "Other local governments (337-339)": 7189
+      },
+      "Debt proceeds & transfers (not revenue)": {
+       "Other (382, 385-389)": 3143579
+      }
+     },
+     "revenue_total": 11808529,
+     "revenue_total_incl_other_sources": 14952108,
+     "revenue_total_governmental_funds_only": 5582783,
+     "revenue_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 0
+     },
+     "revenue_all_funds_as_published": 14952108,
+     "revenue_source_title": "Springfield Revenues Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2018",
+     "revenue_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/springfieldrevenues.xlsx",
+     "expenditures": {
+      "General government": 424995,
+      "Public safety": 3858391,
+      "Physical environment": 5330198,
+      "Transportation": 1107324,
+      "Economic environment": 175,
+      "Human services": 0,
+      "Culture & recreation": 514135,
+      "Debt service": 0,
+      "Transfers & other": 0
+     },
+     "expenditure_total": 11235218,
+     "expenditure_total_excl_transfers": 11235218,
+     "expenditure_total_governmental_funds_only": 6089710,
+     "expenditure_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 0
+     },
+     "expenditure_all_funds_as_published": 11235218,
+     "expenditure_source_title": "Springfield Expenditures Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2018",
+     "expenditure_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/springfieldexpenditures.xlsx",
+     "source_title": "EDR, Expenditures and Revenues Reported by Florida's Local Governments (compiled from DFS Annual Financial Reports), sheet 2018",
+     "source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal.cfm"
+    },
+    {
+     "fy": "FY2019",
+     "fiscal_year_end": "September 30, 2019",
+     "population": 7793,
+     "revenues": {
+      "Property taxes": 694052,
+      "Sales & other local taxes": 828246,
+      "Permits, fees & special assessments": 919370,
+      "State & federal money": 4752869,
+      "Charges for services (incl. utilities)": 3479834,
+      "Fines": 45066,
+      "Interest & other": 485782,
+      "Debt proceeds & transfers (not revenue)": 11888373
+     },
+     "revenue_detail": {
+      "State & federal money": {
+       "Federal grants & payments (331, 333)": 2191417,
+       "State shared revenues (335)": 2561452
+      },
+      "Debt proceeds & transfers (not revenue)": {
+       "Debt & lease proceeds (383-384)": 7000000,
+       "Other (382, 385-389)": 110520,
+       "Extraordinary and special items (392-393)": 4777853
+      }
+     },
+     "revenue_total": 11205219,
+     "revenue_total_incl_other_sources": 23093592,
+     "revenue_total_governmental_funds_only": 7760139,
+     "revenue_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 0
+     },
+     "revenue_all_funds_as_published": 23093592,
+     "revenue_source_title": "Springfield Revenues Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2019",
+     "revenue_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/springfieldrevenues.xlsx",
+     "expenditures": {
+      "General government": 15781592,
+      "Public safety": 4656806,
+      "Physical environment": 5866836,
+      "Transportation": 775254,
+      "Economic environment": 0,
+      "Human services": 0,
+      "Culture & recreation": 319100,
+      "Debt service": 266552,
+      "Transfers & other": 0
+     },
+     "expenditure_total": 27666140,
+     "expenditure_total_excl_transfers": 27666140,
+     "expenditure_total_governmental_funds_only": 22025250,
+     "expenditure_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 175
+     },
+     "expenditure_all_funds_as_published": 27666315,
+     "expenditure_source_title": "Springfield Expenditures Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2019",
+     "expenditure_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/springfieldexpenditures.xlsx",
+     "source_title": "EDR, Expenditures and Revenues Reported by Florida's Local Governments (compiled from DFS Annual Financial Reports), sheet 2019",
+     "source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal.cfm"
+    },
+    {
+     "fy": "FY2020",
+     "fiscal_year_end": "September 30, 2020",
+     "population": 8938,
+     "revenues": {
+      "Property taxes": 609699,
+      "Sales & other local taxes": 921158,
+      "Permits, fees & special assessments": 1050416,
+      "State & federal money": 15488790,
+      "Charges for services (incl. utilities)": 5410036,
+      "Fines": 47090,
+      "Interest & other": 505209,
+      "Debt proceeds & transfers (not revenue)": 1351228
+     },
+     "revenue_detail": {
+      "State & federal money": {
+       "Federal grants & payments (331, 333)": 11907856,
+       "State grants (334)": 1177576,
+       "State shared revenues (335)": 2403358
+      },
+      "Debt proceeds & transfers (not revenue)": {
+       "Other (382, 385-389)": 1351228
+      }
+     },
+     "revenue_total": 24032398,
+     "revenue_total_incl_other_sources": 25383626,
+     "revenue_total_governmental_funds_only": 18521434,
+     "revenue_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 0
+     },
+     "revenue_all_funds_as_published": 25383626,
+     "revenue_source_title": "Springfield Revenues Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2020",
+     "revenue_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/springfieldrevenues.xlsx",
+     "expenditures": {
+      "General government": 3937403,
+      "Public safety": 3905979,
+      "Physical environment": 5416483,
+      "Transportation": 755645,
+      "Economic environment": 0,
+      "Human services": 0,
+      "Culture & recreation": 255575,
+      "Debt service": 277885,
+      "Transfers & other": 0
+     },
+     "expenditure_total": 14548970,
+     "expenditure_total_excl_transfers": 14548970,
+     "expenditure_total_governmental_funds_only": 9343050,
+     "expenditure_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 0
+     },
+     "expenditure_all_funds_as_published": 14548970,
+     "expenditure_source_title": "Springfield Expenditures Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2020",
+     "expenditure_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/springfieldexpenditures.xlsx",
+     "source_title": "EDR, Expenditures and Revenues Reported by Florida's Local Governments (compiled from DFS Annual Financial Reports), sheet 2020",
+     "source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal.cfm"
+    },
+    {
      "fy": "FY2021",
      "fiscal_year_end": "September 30, 2021",
      "population": 8109,
@@ -1699,6 +4127,403 @@
    "name": "City of Parker",
    "years": [
     {
+     "fy": "FY2015",
+     "fiscal_year_end": "September 30, 2015",
+     "population": 4409,
+     "revenues": {
+      "Property taxes": 0,
+      "Sales & other local taxes": 737192,
+      "Permits, fees & special assessments": 388505,
+      "State & federal money": 578232,
+      "Charges for services (incl. utilities)": 2635419,
+      "Fines": 36305,
+      "Interest & other": 364879,
+      "Debt proceeds & transfers (not revenue)": 1087411
+     },
+     "revenue_detail": {
+      "State & federal money": {
+       "Federal grants & payments (331, 333)": 8268,
+       "State shared revenues (335)": 569964
+      },
+      "Debt proceeds & transfers (not revenue)": {
+       "Transfers in (381)": 718000,
+       "Other (382, 385-389)": 369411
+      }
+     },
+     "revenue_total": 4740532,
+     "revenue_total_incl_other_sources": 5827943,
+     "revenue_total_governmental_funds_only": 2344246,
+     "revenue_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 14
+     },
+     "revenue_all_funds_as_published": 5827957,
+     "revenue_source_title": "Parker Revenues Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2015",
+     "revenue_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/parkerrevenues.xlsx",
+     "expenditures": {
+      "General government": 436509,
+      "Public safety": 1173804,
+      "Physical environment": 1964455,
+      "Transportation": 554218,
+      "Economic environment": 0,
+      "Human services": 0,
+      "Culture & recreation": 76070,
+      "Debt service": 0,
+      "Transfers & other": 718000
+     },
+     "expenditure_total": 4923056,
+     "expenditure_total_excl_transfers": 4205056,
+     "expenditure_total_governmental_funds_only": 2459088,
+     "expenditure_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 175
+     },
+     "expenditure_all_funds_as_published": 4923231,
+     "expenditure_source_title": "Parker Expenditures Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2015",
+     "expenditure_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/parkerexpenditures.xlsx",
+     "source_title": "EDR, Expenditures and Revenues Reported by Florida's Local Governments (compiled from DFS Annual Financial Reports), sheet 2015",
+     "source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal.cfm"
+    },
+    {
+     "fy": "FY2016",
+     "fiscal_year_end": "September 30, 2016",
+     "population": 4441,
+     "revenues": {
+      "Property taxes": 0,
+      "Sales & other local taxes": 729902,
+      "Permits, fees & special assessments": 369494,
+      "State & federal money": 615378,
+      "Charges for services (incl. utilities)": 2726792,
+      "Fines": 44559,
+      "Interest & other": 260686,
+      "Debt proceeds & transfers (not revenue)": 1203537
+     },
+     "revenue_detail": {
+      "State & federal money": {
+       "Federal grants & payments (331, 333)": 1000,
+       "State grants (334)": 17505,
+       "State shared revenues (335)": 596873
+      },
+      "Debt proceeds & transfers (not revenue)": {
+       "Transfers in (381)": 360097,
+       "Other (382, 385-389)": 843440
+      }
+     },
+     "revenue_total": 4746811,
+     "revenue_total_incl_other_sources": 5950348,
+     "revenue_total_governmental_funds_only": 2221266,
+     "revenue_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 0
+     },
+     "revenue_all_funds_as_published": 5950348,
+     "revenue_source_title": "Parker Revenues Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2016",
+     "revenue_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/parkerrevenues.xlsx",
+     "expenditures": {
+      "General government": 443739,
+      "Public safety": 1315795,
+      "Physical environment": 2104453,
+      "Transportation": 345764,
+      "Economic environment": 0,
+      "Human services": 0,
+      "Culture & recreation": 102344,
+      "Debt service": 0,
+      "Transfers & other": 360097
+     },
+     "expenditure_total": 4672192,
+     "expenditure_total_excl_transfers": 4312095,
+     "expenditure_total_governmental_funds_only": 2417702,
+     "expenditure_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 0
+     },
+     "expenditure_all_funds_as_published": 4672192,
+     "expenditure_source_title": "Parker Expenditures Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2016",
+     "expenditure_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/parkerexpenditures.xlsx",
+     "source_title": "EDR, Expenditures and Revenues Reported by Florida's Local Governments (compiled from DFS Annual Financial Reports), sheet 2016",
+     "source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal.cfm"
+    },
+    {
+     "fy": "FY2017",
+     "fiscal_year_end": "September 30, 2017",
+     "population": 4419,
+     "revenues": {
+      "Property taxes": 0,
+      "Sales & other local taxes": 966017,
+      "Permits, fees & special assessments": 318048,
+      "State & federal money": 763771,
+      "Charges for services (incl. utilities)": 2812133,
+      "Fines": 35732,
+      "Interest & other": 291100,
+      "Debt proceeds & transfers (not revenue)": 131011
+     },
+     "revenue_detail": {
+      "State & federal money": {
+       "Federal grants & payments (331, 333)": 1032,
+       "State shared revenues (335)": 762739
+      },
+      "Debt proceeds & transfers (not revenue)": {
+       "Debt & lease proceeds (383-384)": 131011
+      }
+     },
+     "revenue_total": 5186801,
+     "revenue_total_incl_other_sources": 5317812,
+     "revenue_total_governmental_funds_only": 2572835,
+     "revenue_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 7
+     },
+     "revenue_all_funds_as_published": 5317819,
+     "revenue_source_title": "Parker Revenues Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2017",
+     "revenue_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/parkerrevenues.xlsx",
+     "expenditures": {
+      "General government": 383114,
+      "Public safety": 1172176,
+      "Physical environment": 2237347,
+      "Transportation": 338152,
+      "Economic environment": 0,
+      "Human services": 0,
+      "Culture & recreation": 362079,
+      "Debt service": 0,
+      "Transfers & other": 0
+     },
+     "expenditure_total": 4492868,
+     "expenditure_total_excl_transfers": 4492868,
+     "expenditure_total_governmental_funds_only": 2496212,
+     "expenditure_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 175
+     },
+     "expenditure_all_funds_as_published": 4493043,
+     "expenditure_source_title": "Parker Expenditures Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2017",
+     "expenditure_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/parkerexpenditures.xlsx",
+     "source_title": "EDR, Expenditures and Revenues Reported by Florida's Local Governments (compiled from DFS Annual Financial Reports), sheet 2017",
+     "source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal.cfm"
+    },
+    {
+     "fy": "FY2018",
+     "fiscal_year_end": "September 30, 2018",
+     "population": 4467,
+     "revenues": {
+      "Property taxes": 0,
+      "Sales & other local taxes": 1141902,
+      "Permits, fees & special assessments": 378935,
+      "State & federal money": 635622,
+      "Charges for services (incl. utilities)": 2834510,
+      "Fines": 34980,
+      "Interest & other": 219212,
+      "Debt proceeds & transfers (not revenue)": 2850
+     },
+     "revenue_detail": {
+      "State & federal money": {
+       "State shared revenues (335)": 635622
+      },
+      "Debt proceeds & transfers (not revenue)": {
+       "Transfers in (381)": 2850
+      }
+     },
+     "revenue_total": 5245161,
+     "revenue_total_incl_other_sources": 5248011,
+     "revenue_total_governmental_funds_only": 2634959,
+     "revenue_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 7
+     },
+     "revenue_all_funds_as_published": 5248018,
+     "revenue_source_title": "Parker Revenues Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2018",
+     "revenue_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/parkerrevenues.xlsx",
+     "expenditures": {
+      "General government": 418027,
+      "Public safety": 1133438,
+      "Physical environment": 2367467,
+      "Transportation": 676094,
+      "Economic environment": 0,
+      "Human services": 0,
+      "Culture & recreation": 125954,
+      "Debt service": 0,
+      "Transfers & other": 2850
+     },
+     "expenditure_total": 4723830,
+     "expenditure_total_excl_transfers": 4720980,
+     "expenditure_total_governmental_funds_only": 2627502,
+     "expenditure_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 174
+     },
+     "expenditure_all_funds_as_published": 4724004,
+     "expenditure_source_title": "Parker Expenditures Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2018",
+     "expenditure_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/parkerexpenditures.xlsx",
+     "source_title": "EDR, Expenditures and Revenues Reported by Florida's Local Governments (compiled from DFS Annual Financial Reports), sheet 2018",
+     "source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal.cfm"
+    },
+    {
+     "fy": "FY2019",
+     "fiscal_year_end": "September 30, 2019",
+     "population": 3694,
+     "revenues": {
+      "Property taxes": 0,
+      "Sales & other local taxes": 1007893,
+      "Permits, fees & special assessments": 307819,
+      "State & federal money": 2371853,
+      "Charges for services (incl. utilities)": 2287178,
+      "Fines": 14215,
+      "Interest & other": 454812,
+      "Debt proceeds & transfers (not revenue)": 1830148
+     },
+     "revenue_detail": {
+      "State & federal money": {
+       "Federal grants & payments (331, 333)": 1682839,
+       "State shared revenues (335)": 689014
+      },
+      "Debt proceeds & transfers (not revenue)": {
+       "Debt & lease proceeds (383-384)": 104749,
+       "Other (382, 385-389)": 1657901,
+       "Extraordinary and special items (392-393)": 67498
+      }
+     },
+     "revenue_total": 6443770,
+     "revenue_total_incl_other_sources": 8273918,
+     "revenue_total_governmental_funds_only": 4133928,
+     "revenue_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 7
+     },
+     "revenue_all_funds_as_published": 8273925,
+     "revenue_source_title": "Parker Revenues Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2019",
+     "revenue_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/parkerrevenues.xlsx",
+     "expenditures": {
+      "General government": 10222879,
+      "Public safety": 1239653,
+      "Physical environment": 2337148,
+      "Transportation": 403425,
+      "Economic environment": 0,
+      "Human services": 0,
+      "Culture & recreation": 423716,
+      "Debt service": 0,
+      "Transfers & other": 0
+     },
+     "expenditure_total": 14626821,
+     "expenditure_total_excl_transfers": 14626821,
+     "expenditure_total_governmental_funds_only": 12652278,
+     "expenditure_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 176
+     },
+     "expenditure_all_funds_as_published": 14626997,
+     "expenditure_source_title": "Parker Expenditures Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2019",
+     "expenditure_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/parkerexpenditures.xlsx",
+     "source_title": "EDR, Expenditures and Revenues Reported by Florida's Local Governments (compiled from DFS Annual Financial Reports), sheet 2019",
+     "source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal.cfm"
+    },
+    {
+     "fy": "FY2020",
+     "fiscal_year_end": "September 30, 2020",
+     "population": 3865,
+     "revenues": {
+      "Property taxes": 0,
+      "Sales & other local taxes": 1023332,
+      "Permits, fees & special assessments": 287019,
+      "State & federal money": 8445642,
+      "Charges for services (incl. utilities)": 2537848,
+      "Fines": 3090,
+      "Interest & other": 402012,
+      "Debt proceeds & transfers (not revenue)": 2261569
+     },
+     "revenue_detail": {
+      "State & federal money": {
+       "Federal grants & payments (331, 333)": 7305414,
+       "State grants (334)": 182078,
+       "State shared revenues (335)": 958150
+      },
+      "Debt proceeds & transfers (not revenue)": {
+       "Debt & lease proceeds (383-384)": 1143321,
+       "Other (382, 385-389)": 1087748,
+       "Extraordinary and special items (392-393)": 30500
+      }
+     },
+     "revenue_total": 12698943,
+     "revenue_total_incl_other_sources": 14960512,
+     "revenue_total_governmental_funds_only": 10186645,
+     "revenue_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 8
+     },
+     "revenue_all_funds_as_published": 14960520,
+     "revenue_source_title": "Parker Revenues Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2020",
+     "revenue_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/parkerrevenues.xlsx",
+     "expenditures": {
+      "General government": 1150310,
+      "Public safety": 1302825,
+      "Physical environment": 2224211,
+      "Transportation": 378830,
+      "Economic environment": 0,
+      "Human services": 0,
+      "Culture & recreation": 82079,
+      "Debt service": 0,
+      "Transfers & other": 0
+     },
+     "expenditure_total": 5138255,
+     "expenditure_total_excl_transfers": 5138255,
+     "expenditure_total_governmental_funds_only": 3217746,
+     "expenditure_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 0
+     },
+     "expenditure_all_funds_as_published": 5138255,
+     "expenditure_source_title": "Parker Expenditures Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2020",
+     "expenditure_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/parkerexpenditures.xlsx",
+     "source_title": "EDR, Expenditures and Revenues Reported by Florida's Local Governments (compiled from DFS Annual Financial Reports), sheet 2020",
+     "source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal.cfm"
+    },
+    {
      "fy": "FY2021",
      "fiscal_year_end": "September 30, 2021",
      "population": 4027,
@@ -1973,6 +4798,384 @@
    "name": "City of Mexico Beach",
    "years": [
     {
+     "fy": "FY2015",
+     "fiscal_year_end": "September 30, 2015",
+     "population": 1136,
+     "revenues": {
+      "Property taxes": 1655688,
+      "Sales & other local taxes": 209673,
+      "Permits, fees & special assessments": 392538,
+      "State & federal money": 357885,
+      "Charges for services (incl. utilities)": 2833204,
+      "Fines": 6743,
+      "Interest & other": 304646,
+      "Debt proceeds & transfers (not revenue)": 0
+     },
+     "revenue_detail": {
+      "State & federal money": {
+       "State grants (334)": 214972,
+       "State shared revenues (335)": 142913
+      }
+     },
+     "revenue_total": 5760377,
+     "revenue_total_incl_other_sources": 5760377,
+     "revenue_total_governmental_funds_only": 2893208,
+     "revenue_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 0
+     },
+     "revenue_all_funds_as_published": 5760377,
+     "revenue_source_title": "Mexico Beach Revenues Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2015",
+     "revenue_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/mexicobeachrevenues.xlsx",
+     "expenditures": {
+      "General government": 559031,
+      "Public safety": 658359,
+      "Physical environment": 2662800,
+      "Transportation": 495057,
+      "Economic environment": 0,
+      "Human services": 125481,
+      "Culture & recreation": 412627,
+      "Debt service": 0,
+      "Transfers & other": 0
+     },
+     "expenditure_total": 4913355,
+     "expenditure_total_excl_transfers": 4913355,
+     "expenditure_total_governmental_funds_only": 2395305,
+     "expenditure_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 0
+     },
+     "expenditure_all_funds_as_published": 4913355,
+     "expenditure_source_title": "Mexico Beach Expenditures Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2015",
+     "expenditure_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/mexicobeachexpenditures.xlsx",
+     "source_title": "EDR, Expenditures and Revenues Reported by Florida's Local Governments (compiled from DFS Annual Financial Reports), sheet 2015",
+     "source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal.cfm"
+    },
+    {
+     "fy": "FY2016",
+     "fiscal_year_end": "September 30, 2016",
+     "population": 1196,
+     "revenues": {
+      "Property taxes": 1666629,
+      "Sales & other local taxes": 209466,
+      "Permits, fees & special assessments": 229335,
+      "State & federal money": 2221262,
+      "Charges for services (incl. utilities)": 3132993,
+      "Fines": 10445,
+      "Interest & other": 105060,
+      "Debt proceeds & transfers (not revenue)": 0
+     },
+     "revenue_detail": {
+      "State & federal money": {
+       "Federal grants & payments (331, 333)": 100000,
+       "State grants (334)": 1991645,
+       "State shared revenues (335)": 129617
+      }
+     },
+     "revenue_total": 7575190,
+     "revenue_total_incl_other_sources": 7575190,
+     "revenue_total_governmental_funds_only": 4526522,
+     "revenue_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 0
+     },
+     "revenue_all_funds_as_published": 7575190,
+     "revenue_source_title": "Mexico Beach Revenues Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2016",
+     "revenue_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/mexicobeachrevenues.xlsx",
+     "expenditures": {
+      "General government": 526255,
+      "Public safety": 813087,
+      "Physical environment": 4338801,
+      "Transportation": 676620,
+      "Economic environment": 40300,
+      "Human services": 133892,
+      "Culture & recreation": 811535,
+      "Debt service": 0,
+      "Transfers & other": 0
+     },
+     "expenditure_total": 7340490,
+     "expenditure_total_excl_transfers": 7340490,
+     "expenditure_total_governmental_funds_only": 4341202,
+     "expenditure_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 0
+     },
+     "expenditure_all_funds_as_published": 7340490,
+     "expenditure_source_title": "Mexico Beach Expenditures Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2016",
+     "expenditure_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/mexicobeachexpenditures.xlsx",
+     "source_title": "EDR, Expenditures and Revenues Reported by Florida's Local Governments (compiled from DFS Annual Financial Reports), sheet 2016",
+     "source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal.cfm"
+    },
+    {
+     "fy": "FY2017",
+     "fiscal_year_end": "September 30, 2017",
+     "population": 1202,
+     "revenues": {
+      "Property taxes": 1832089,
+      "Sales & other local taxes": 253858,
+      "Permits, fees & special assessments": 257421,
+      "State & federal money": 3122852,
+      "Charges for services (incl. utilities)": 3315501,
+      "Fines": 5901,
+      "Interest & other": 181000,
+      "Debt proceeds & transfers (not revenue)": 0
+     },
+     "revenue_detail": {
+      "State & federal money": {
+       "State grants (334)": 2918683,
+       "State shared revenues (335)": 204169
+      }
+     },
+     "revenue_total": 8968622,
+     "revenue_total_incl_other_sources": 8968622,
+     "revenue_total_governmental_funds_only": 5713054,
+     "revenue_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 0
+     },
+     "revenue_all_funds_as_published": 8968622,
+     "revenue_source_title": "Mexico Beach Revenues Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2017",
+     "revenue_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/mexicobeachrevenues.xlsx",
+     "expenditures": {
+      "General government": 1018326,
+      "Public safety": 938577,
+      "Physical environment": 5027296,
+      "Transportation": 315736,
+      "Economic environment": 414993,
+      "Human services": 134711,
+      "Culture & recreation": 1475895,
+      "Debt service": 0,
+      "Transfers & other": 0
+     },
+     "expenditure_total": 9325534,
+     "expenditure_total_excl_transfers": 9325534,
+     "expenditure_total_governmental_funds_only": 6274091,
+     "expenditure_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 0
+     },
+     "expenditure_all_funds_as_published": 9325534,
+     "expenditure_source_title": "Mexico Beach Expenditures Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2017",
+     "expenditure_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/mexicobeachexpenditures.xlsx",
+     "source_title": "EDR, Expenditures and Revenues Reported by Florida's Local Governments (compiled from DFS Annual Financial Reports), sheet 2017",
+     "source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal.cfm"
+    },
+    {
+     "fy": "FY2018",
+     "fiscal_year_end": "September 30, 2018",
+     "population": 1285,
+     "revenues": {
+      "Property taxes": 1824736,
+      "Sales & other local taxes": 239450,
+      "Permits, fees & special assessments": 285955,
+      "State & federal money": 502767,
+      "Charges for services (incl. utilities)": 4308869,
+      "Fines": 2719,
+      "Interest & other": 140757,
+      "Debt proceeds & transfers (not revenue)": 0
+     },
+     "revenue_detail": {
+      "State & federal money": {
+       "State grants (334)": 92232,
+       "State shared revenues (335)": 259305,
+       "Other local governments (337-339)": 151230
+      }
+     },
+     "revenue_total": 7305253,
+     "revenue_total_incl_other_sources": 7305253,
+     "revenue_total_governmental_funds_only": 3041019,
+     "revenue_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 0
+     },
+     "revenue_all_funds_as_published": 7305253,
+     "revenue_source_title": "Mexico Beach Revenues Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2018",
+     "revenue_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/mexicobeachrevenues.xlsx",
+     "expenditures": {
+      "General government": 689492,
+      "Public safety": 1188676,
+      "Physical environment": 3285947,
+      "Transportation": 372590,
+      "Economic environment": 32628,
+      "Human services": 157658,
+      "Culture & recreation": 682134,
+      "Debt service": 0,
+      "Transfers & other": 0
+     },
+     "expenditure_total": 6409125,
+     "expenditure_total_excl_transfers": 6409125,
+     "expenditure_total_governmental_funds_only": 2895179,
+     "expenditure_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 0
+     },
+     "expenditure_all_funds_as_published": 6409125,
+     "expenditure_source_title": "Mexico Beach Expenditures Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2018",
+     "expenditure_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/mexicobeachexpenditures.xlsx",
+     "source_title": "EDR, Expenditures and Revenues Reported by Florida's Local Governments (compiled from DFS Annual Financial Reports), sheet 2018",
+     "source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal.cfm"
+    },
+    {
+     "fy": "FY2019",
+     "fiscal_year_end": "September 30, 2019",
+     "population": 627,
+     "revenues": {
+      "Property taxes": 2197106,
+      "Sales & other local taxes": 275502,
+      "Permits, fees & special assessments": 536991,
+      "State & federal money": 45802375,
+      "Charges for services (incl. utilities)": 2639807,
+      "Fines": 3680,
+      "Interest & other": 4641171,
+      "Debt proceeds & transfers (not revenue)": 0
+     },
+     "revenue_detail": {
+      "State & federal money": {
+       "State grants (334)": 45509583,
+       "State shared revenues (335)": 292792
+      }
+     },
+     "revenue_total": 56096632,
+     "revenue_total_incl_other_sources": 56096632,
+     "revenue_total_governmental_funds_only": 53461120,
+     "revenue_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 0
+     },
+     "revenue_all_funds_as_published": 56096632,
+     "revenue_source_title": "Mexico Beach Revenues Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2019",
+     "revenue_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/mexicobeachrevenues.xlsx",
+     "expenditures": {
+      "General government": 54143173,
+      "Public safety": 1089195,
+      "Physical environment": 3374947,
+      "Transportation": 9802768,
+      "Economic environment": 0,
+      "Human services": 0,
+      "Culture & recreation": 1368660,
+      "Debt service": 0,
+      "Transfers & other": 0
+     },
+     "expenditure_total": 69778743,
+     "expenditure_total_excl_transfers": 69778743,
+     "expenditure_total_governmental_funds_only": 62823427,
+     "expenditure_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 0
+     },
+     "expenditure_all_funds_as_published": 69778743,
+     "expenditure_source_title": "Mexico Beach Expenditures Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2019",
+     "expenditure_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/mexicobeachexpenditures.xlsx",
+     "source_title": "EDR, Expenditures and Revenues Reported by Florida's Local Governments (compiled from DFS Annual Financial Reports), sheet 2019",
+     "source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal.cfm"
+    },
+    {
+     "fy": "FY2020",
+     "fiscal_year_end": "September 30, 2020",
+     "population": 773,
+     "revenues": {
+      "Property taxes": 2397380,
+      "Sales & other local taxes": 289246,
+      "Permits, fees & special assessments": 729412,
+      "State & federal money": 12813765,
+      "Charges for services (incl. utilities)": 2581642,
+      "Fines": 5807,
+      "Interest & other": 815006,
+      "Debt proceeds & transfers (not revenue)": 650471
+     },
+     "revenue_detail": {
+      "State & federal money": {
+       "State grants (334)": 12541975,
+       "State shared revenues (335)": 271790
+      },
+      "Debt proceeds & transfers (not revenue)": {
+       "Transfers in (381)": 600471,
+       "Debt & lease proceeds (383-384)": 50000
+      }
+     },
+     "revenue_total": 19632258,
+     "revenue_total_incl_other_sources": 20282729,
+     "revenue_total_governmental_funds_only": 17154967,
+     "revenue_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 0
+     },
+     "revenue_all_funds_as_published": 20282729,
+     "revenue_source_title": "Mexico Beach Revenues Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2020",
+     "revenue_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/mexicobeachrevenues.xlsx",
+     "expenditures": {
+      "General government": 12929547,
+      "Public safety": 2208612,
+      "Physical environment": 2333530,
+      "Transportation": 1534803,
+      "Economic environment": 0,
+      "Human services": 0,
+      "Culture & recreation": 528401,
+      "Debt service": 4732,
+      "Transfers & other": 535251
+     },
+     "expenditure_total": 20074876,
+     "expenditure_total_excl_transfers": 19539625,
+     "expenditure_total_governmental_funds_only": 17389629,
+     "expenditure_excluded_funds": {
+      "Internal Service": 0,
+      "Custodial": 0,
+      "Pension": 0,
+      "Trust": 0,
+      "Private Purpose": 0,
+      "Component Units": 0
+     },
+     "expenditure_all_funds_as_published": 20074876,
+     "expenditure_source_title": "Mexico Beach Expenditures Reported by Account Code and Fund Type - Local Fiscal Year Ended September 30, 2020",
+     "expenditure_source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal/mexicobeachexpenditures.xlsx",
+     "source_title": "EDR, Expenditures and Revenues Reported by Florida's Local Governments (compiled from DFS Annual Financial Reports), sheet 2020",
+     "source_url": "https://edr.state.fl.us/content/local-government/data/revenues-expenditures/munifiscal.cfm"
+    },
+    {
      "fy": "FY2021",
      "fiscal_year_end": "September 30, 2021",
      "population": 1037,
@@ -2243,6 +5446,8 @@
   "Component units (e.g. a CRA set up as a separate entity) are excluded from buckets: Panama City component units revenue $19.9M-$38.5M/yr, Bay County $23.3M-$33.0M/yr, Callaway small FY2021-22. CRA spending therefore appears in 'Economic environment' only where reported inside the primary government.",
   "Interest & other (36x) includes 361.3 net change in fair value of investments, which can swing negative/positive year to year.",
   "Population is the per-capita denominator printed in each EDR sheet (April 1 estimate used by EDR); per-resident figures for Bay County use the county-wide population (includes city residents).",
-  "Per-fund detail (General vs Special Revenue etc.) is available in the raw EDR files but not carried into this JSON beyond the governmental/all-fund totals."
+  "Per-fund detail (General vs Special Revenue etc.) is available in the raw EDR files but not carried into this JSON beyond the governmental/all-fund totals.",
+  "FY2015-FY2020 sheets have no Custodial or Private Purpose columns (GASB 84 starts FY2021); fiduciary money then sits under Trust, which is excluded either way.",
+  "FY2019-FY2020 Parker and Springfield report extraordinary and special items (392-393, one-time gains such as insurance proceeds after Hurricane Michael); they are kept out of revenue_total with transfers."
  ]
 }

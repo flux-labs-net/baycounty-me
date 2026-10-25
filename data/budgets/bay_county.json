@@ -1,0 +1,2470 @@
+{
+ "gov": "county",
+ "name": "Bay County Board of County Commissioners",
+ "as_of": "2026-10-25",
+ "notes": [
+  "Each year is the adopted budget from the \"Summary of All Funds\" table in the county budget books; each table prints three years, so the source is the earliest book that shows that year as adopted.",
+  "Fund amounts include reserves and cash carried forward, and add up to the printed \"Total all Funds\" in every year. That total counts transfers between funds twice (FY2026: $734.5M with transfers).",
+  "Each fund keeps its number across years and takes the latest name the county gives it (for example \"101 Transportation Trust\" is now \"101 Transportation\").",
+  "FY2019 is the figure presented at the Sept 18, 2018 final hearing. FY2027 is the Sept 2026 final-hearing figure, which the county still labels tentative.",
+  "General Fund departments are on record for FY2026 only; older books print departments in long line-item reports that are not parsed yet."
+ ],
+ "years": [
+  {
+   "fiscal_year": 2015,
+   "status": "adopted",
+   "source_title": "2017 Summary of All Funds",
+   "source_url": "https://www.baycountyfl.gov/Archive.aspx?ADID=113",
+   "total": 271281490,
+   "general_fund": 99391200,
+   "funds": [
+    {
+     "code": "001",
+     "name": "001 General Fund",
+     "type": "general",
+     "amount": 99391200
+    },
+    {
+     "code": "101",
+     "name": "101 Transportation",
+     "type": "special revenue",
+     "amount": 21092698
+    },
+    {
+     "code": "111",
+     "name": "111 Road Impact-Beach/Airport",
+     "type": "special revenue",
+     "amount": 189047
+    },
+    {
+     "code": "112",
+     "name": "112 Road Impact-East Bay County",
+     "type": "special revenue",
+     "amount": 308204
+    },
+    {
+     "code": "113",
+     "name": "113 Road Impact-Panama City",
+     "type": "special revenue",
+     "amount": 26386
+    },
+    {
+     "code": "114",
+     "name": "114 Road Impact-Southport/Sand Hills",
+     "type": "special revenue",
+     "amount": 213567
+    },
+    {
+     "code": "118",
+     "name": "118 Transit",
+     "type": "special revenue",
+     "amount": 3760427
+    },
+    {
+     "code": "120",
+     "name": "120 Library",
+     "type": "special revenue",
+     "amount": 3315681
+    },
+    {
+     "code": "125",
+     "name": "125 TDC - Administration",
+     "type": "special revenue",
+     "amount": 9268761
+    },
+    {
+     "code": "126",
+     "name": "126 TDC - Mexico Beach",
+     "type": "special revenue",
+     "amount": 549866
+    },
+    {
+     "code": "127",
+     "name": "127 TDC - Beach Nourishment",
+     "type": "special revenue",
+     "amount": 27538670
+    },
+    {
+     "code": "128",
+     "name": "128 TDC - 5th Cent",
+     "type": "special revenue",
+     "amount": 2974545
+    },
+    {
+     "code": "130",
+     "name": "130 Public Safety",
+     "type": "special revenue",
+     "amount": 3090052
+    },
+    {
+     "code": "133",
+     "name": "133 Intergovernmental Radio Comm",
+     "type": "special revenue",
+     "amount": 1205713
+    },
+    {
+     "code": "140",
+     "name": "140 Mosquito Control",
+     "type": "special revenue",
+     "amount": 1384879
+    },
+    {
+     "code": "145",
+     "name": "145 M.S.T.U. - Fire Services",
+     "type": "special revenue",
+     "amount": 7405922
+    },
+    {
+     "code": "167",
+     "name": "167 M.S.B.U.",
+     "type": "special revenue",
+     "amount": 40406
+    },
+    {
+     "code": "401",
+     "name": "401 Water Plant Operations",
+     "type": "enterprise",
+     "amount": 24980432
+    },
+    {
+     "code": "412",
+     "name": "412 MPAWTF/Joint Venture",
+     "type": "enterprise",
+     "amount": 7955363
+    },
+    {
+     "code": "420",
+     "name": "420 Retail Water/Wastewater",
+     "type": "enterprise",
+     "amount": 12503999
+    },
+    {
+     "code": "430",
+     "name": "430 Solid Waste",
+     "type": "enterprise",
+     "amount": 20109000
+    },
+    {
+     "code": "440",
+     "name": "440 Builders Services",
+     "type": "enterprise",
+     "amount": 5454090
+    },
+    {
+     "code": "450",
+     "name": "450 EMS",
+     "type": "enterprise",
+     "amount": 7500000
+    },
+    {
+     "code": "501",
+     "name": "501 Internal Service",
+     "type": "internal service",
+     "amount": 5191727
+    },
+    {
+     "code": "505",
+     "name": "505 Workers' Compensation",
+     "type": "internal service",
+     "amount": 1213205
+    },
+    {
+     "code": "506",
+     "name": "506 Risk",
+     "type": "internal service",
+     "amount": 3126095
+    },
+    {
+     "code": "510",
+     "name": "510 Utility Admin",
+     "type": "internal service",
+     "amount": 1491555
+    }
+   ],
+   "general_fund_departments": []
+  },
+  {
+   "fiscal_year": 2016,
+   "status": "adopted",
+   "source_title": "2017 Summary of All Funds",
+   "source_url": "https://www.baycountyfl.gov/Archive.aspx?ADID=113",
+   "total": 281572075,
+   "general_fund": 106557010,
+   "funds": [
+    {
+     "code": "001",
+     "name": "001 General Fund",
+     "type": "general",
+     "amount": 106557010
+    },
+    {
+     "code": "101",
+     "name": "101 Transportation",
+     "type": "special revenue",
+     "amount": 19530329
+    },
+    {
+     "code": "111",
+     "name": "111 Road Impact-Beach/Airport",
+     "type": "special revenue",
+     "amount": 189075
+    },
+    {
+     "code": "112",
+     "name": "112 Road Impact-East Bay County",
+     "type": "special revenue",
+     "amount": 308250
+    },
+    {
+     "code": "113",
+     "name": "113 Road Impact-Panama City",
+     "type": "special revenue",
+     "amount": 26391
+    },
+    {
+     "code": "114",
+     "name": "114 Road Impact-Southport/Sand Hills",
+     "type": "special revenue",
+     "amount": 213600
+    },
+    {
+     "code": "118",
+     "name": "118 Transit",
+     "type": "special revenue",
+     "amount": 4775125
+    },
+    {
+     "code": "120",
+     "name": "120 Library",
+     "type": "special revenue",
+     "amount": 3126467
+    },
+    {
+     "code": "125",
+     "name": "125 TDC - Administration",
+     "type": "special revenue",
+     "amount": 10750000
+    },
+    {
+     "code": "126",
+     "name": "126 TDC - Mexico Beach",
+     "type": "special revenue",
+     "amount": 538420
+    },
+    {
+     "code": "127",
+     "name": "127 TDC - Beach Nourishment",
+     "type": "special revenue",
+     "amount": 27906500
+    },
+    {
+     "code": "128",
+     "name": "128 TDC - 5th Cent",
+     "type": "special revenue",
+     "amount": 3350000
+    },
+    {
+     "code": "129",
+     "name": "129 TDC - Panama City",
+     "type": "special revenue",
+     "amount": 1330000
+    },
+    {
+     "code": "130",
+     "name": "130 Public Safety",
+     "type": "special revenue",
+     "amount": 1890052
+    },
+    {
+     "code": "133",
+     "name": "133 Intergovernmental Radio Comm",
+     "type": "special revenue",
+     "amount": 968589
+    },
+    {
+     "code": "140",
+     "name": "140 Mosquito Control",
+     "type": "special revenue",
+     "amount": 1420066
+    },
+    {
+     "code": "145",
+     "name": "145 M.S.T.U. - Fire Services",
+     "type": "special revenue",
+     "amount": 8244934
+    },
+    {
+     "code": "167",
+     "name": "167 M.S.B.U.",
+     "type": "special revenue",
+     "amount": 76896
+    },
+    {
+     "code": "401",
+     "name": "401 Water Plant Operations",
+     "type": "enterprise",
+     "amount": 28466563
+    },
+    {
+     "code": "412",
+     "name": "412 MPAWTF/Joint Venture",
+     "type": "enterprise",
+     "amount": 8532460
+    },
+    {
+     "code": "420",
+     "name": "420 Retail Water/Wastewater",
+     "type": "enterprise",
+     "amount": 11674678
+    },
+    {
+     "code": "430",
+     "name": "430 Solid Waste",
+     "type": "enterprise",
+     "amount": 17637050
+    },
+    {
+     "code": "440",
+     "name": "440 Builders Services",
+     "type": "enterprise",
+     "amount": 4955840
+    },
+    {
+     "code": "450",
+     "name": "450 EMS",
+     "type": "enterprise",
+     "amount": 7712599
+    },
+    {
+     "code": "501",
+     "name": "501 Internal Service",
+     "type": "internal service",
+     "amount": 5243045
+    },
+    {
+     "code": "505",
+     "name": "505 Workers' Compensation",
+     "type": "internal service",
+     "amount": 1204381
+    },
+    {
+     "code": "506",
+     "name": "506 Risk",
+     "type": "internal service",
+     "amount": 3425986
+    },
+    {
+     "code": "510",
+     "name": "510 Utility Admin",
+     "type": "internal service",
+     "amount": 1517769
+    }
+   ],
+   "general_fund_departments": []
+  },
+  {
+   "fiscal_year": 2017,
+   "status": "adopted",
+   "source_title": "2017 Summary of All Funds",
+   "source_url": "https://www.baycountyfl.gov/Archive.aspx?ADID=113",
+   "total": 298638606,
+   "general_fund": 111330991,
+   "funds": [
+    {
+     "code": "001",
+     "name": "001 General Fund",
+     "type": "general",
+     "amount": 111330991
+    },
+    {
+     "code": "101",
+     "name": "101 Transportation",
+     "type": "special revenue",
+     "amount": 27611122
+    },
+    {
+     "code": "111",
+     "name": "111 Road Impact-Beach/Airport",
+     "type": "special revenue",
+     "amount": 190521
+    },
+    {
+     "code": "112",
+     "name": "112 Road Impact-East Bay County",
+     "type": "special revenue",
+     "amount": 310608
+    },
+    {
+     "code": "113",
+     "name": "113 Road Impact-Panama City",
+     "type": "special revenue",
+     "amount": 26592
+    },
+    {
+     "code": "114",
+     "name": "114 Road Impact-Southport/Sand Hills",
+     "type": "special revenue",
+     "amount": 215234
+    },
+    {
+     "code": "118",
+     "name": "118 Transit",
+     "type": "special revenue",
+     "amount": 4970434
+    },
+    {
+     "code": "120",
+     "name": "120 Library",
+     "type": "special revenue",
+     "amount": 3093065
+    },
+    {
+     "code": "125",
+     "name": "125 TDC - Administration",
+     "type": "special revenue",
+     "amount": 10580526
+    },
+    {
+     "code": "126",
+     "name": "126 TDC - Mexico Beach",
+     "type": "special revenue",
+     "amount": 575873
+    },
+    {
+     "code": "127",
+     "name": "127 TDC - Beach Nourishment",
+     "type": "special revenue",
+     "amount": 32799746
+    },
+    {
+     "code": "128",
+     "name": "128 TDC - 5th Cent",
+     "type": "special revenue",
+     "amount": 3350000
+    },
+    {
+     "code": "129",
+     "name": "129 TDC - Panama City",
+     "type": "special revenue",
+     "amount": 1500000
+    },
+    {
+     "code": "130",
+     "name": "130 Public Safety",
+     "type": "special revenue",
+     "amount": 1815215
+    },
+    {
+     "code": "133",
+     "name": "133 Intergovernmental Radio Comm",
+     "type": "special revenue",
+     "amount": 950089
+    },
+    {
+     "code": "140",
+     "name": "140 Mosquito Control",
+     "type": "special revenue",
+     "amount": 1338242
+    },
+    {
+     "code": "145",
+     "name": "145 M.S.T.U. - Fire Services",
+     "type": "special revenue",
+     "amount": 8684788
+    },
+    {
+     "code": "167",
+     "name": "167 M.S.B.U.",
+     "type": "special revenue",
+     "amount": 69840
+    },
+    {
+     "code": "401",
+     "name": "401 Water Plant Operations",
+     "type": "enterprise",
+     "amount": 30933064
+    },
+    {
+     "code": "412",
+     "name": "412 MPAWTF/Joint Venture",
+     "type": "enterprise",
+     "amount": 8632857
+    },
+    {
+     "code": "420",
+     "name": "420 Retail Water/Wastewater",
+     "type": "enterprise",
+     "amount": 12477035
+    },
+    {
+     "code": "430",
+     "name": "430 Solid Waste",
+     "type": "enterprise",
+     "amount": 14320317
+    },
+    {
+     "code": "440",
+     "name": "440 Builders Services",
+     "type": "enterprise",
+     "amount": 4781400
+    },
+    {
+     "code": "450",
+     "name": "450 EMS",
+     "type": "enterprise",
+     "amount": 7642939
+    },
+    {
+     "code": "501",
+     "name": "501 Internal Service",
+     "type": "internal service",
+     "amount": 4574815
+    },
+    {
+     "code": "505",
+     "name": "505 Workers' Compensation",
+     "type": "internal service",
+     "amount": 1204381
+    },
+    {
+     "code": "506",
+     "name": "506 Risk",
+     "type": "internal service",
+     "amount": 3140381
+    },
+    {
+     "code": "510",
+     "name": "510 Utility Admin",
+     "type": "internal service",
+     "amount": 1518531
+    }
+   ],
+   "general_fund_departments": []
+  },
+  {
+   "fiscal_year": 2018,
+   "status": "adopted",
+   "source_title": "FY 19 Summary of Funds (final hearing, Sept 18, 2018)",
+   "source_url": "https://www.baycountyfl.gov/Archive.aspx?ADID=219",
+   "total": 333564801,
+   "general_fund": 113444032,
+   "funds": [
+    {
+     "code": "001",
+     "name": "001 General Fund",
+     "type": "general",
+     "amount": 113444032
+    },
+    {
+     "code": "101",
+     "name": "101 Transportation",
+     "type": "special revenue",
+     "amount": 22773046
+    },
+    {
+     "code": "102",
+     "name": "102 Half-Cent Infrastructure Surtax",
+     "type": "special revenue",
+     "amount": 13814400
+    },
+    {
+     "code": "111",
+     "name": "111 Road Impact-Beach/Airport",
+     "type": "special revenue",
+     "amount": 193113
+    },
+    {
+     "code": "112",
+     "name": "112 Road Impact-East Bay County",
+     "type": "special revenue",
+     "amount": 12000
+    },
+    {
+     "code": "113",
+     "name": "113 Road Impact-Panama City",
+     "type": "special revenue",
+     "amount": 26150
+    },
+    {
+     "code": "114",
+     "name": "114 Road Impact-Southport/Sand Hills",
+     "type": "special revenue",
+     "amount": 217500
+    },
+    {
+     "code": "118",
+     "name": "118 Transit",
+     "type": "special revenue",
+     "amount": 5593306
+    },
+    {
+     "code": "120",
+     "name": "120 Library",
+     "type": "special revenue",
+     "amount": 3191102
+    },
+    {
+     "code": "122",
+     "name": "122 Restore Act",
+     "type": "special revenue",
+     "amount": 7405241
+    },
+    {
+     "code": "125",
+     "name": "125 TDC - Administration",
+     "type": "special revenue",
+     "amount": 13100150
+    },
+    {
+     "code": "126",
+     "name": "126 TDC - Mexico Beach",
+     "type": "special revenue",
+     "amount": 885550
+    },
+    {
+     "code": "127",
+     "name": "127 TDC - Beach Nourishment",
+     "type": "special revenue",
+     "amount": 24529608
+    },
+    {
+     "code": "128",
+     "name": "128 TDC - 5th Cent",
+     "type": "special revenue",
+     "amount": 4257550
+    },
+    {
+     "code": "129",
+     "name": "129 TDC - Panama City",
+     "type": "special revenue",
+     "amount": 1680600
+    },
+    {
+     "code": "130",
+     "name": "130 Public Safety",
+     "type": "special revenue",
+     "amount": 3326665
+    },
+    {
+     "code": "133",
+     "name": "133 Intergovernmental Radio Comm",
+     "type": "special revenue",
+     "amount": 14027945
+    },
+    {
+     "code": "140",
+     "name": "140 Mosquito Control",
+     "type": "special revenue",
+     "amount": 1321793
+    },
+    {
+     "code": "145",
+     "name": "145 M.S.T.U. - Fire Services",
+     "type": "special revenue",
+     "amount": 11084018
+    },
+    {
+     "code": "167",
+     "name": "167 M.S.B.U.",
+     "type": "special revenue",
+     "amount": 64763
+    },
+    {
+     "code": "401",
+     "name": "401 Water Plant Operations",
+     "type": "enterprise",
+     "amount": 25979523
+    },
+    {
+     "code": "412",
+     "name": "412 MPAWTF/Joint Venture",
+     "type": "enterprise",
+     "amount": 8802506
+    },
+    {
+     "code": "420",
+     "name": "420 Retail Water/Wastewater",
+     "type": "enterprise",
+     "amount": 15986390
+    },
+    {
+     "code": "430",
+     "name": "430 Solid Waste",
+     "type": "enterprise",
+     "amount": 15634934
+    },
+    {
+     "code": "440",
+     "name": "440 Builders Services",
+     "type": "enterprise",
+     "amount": 4453350
+    },
+    {
+     "code": "450",
+     "name": "450 EMS",
+     "type": "enterprise",
+     "amount": 10495986
+    },
+    {
+     "code": "501",
+     "name": "501 Internal Service",
+     "type": "internal service",
+     "amount": 4758082
+    },
+    {
+     "code": "505",
+     "name": "505 Workers' Compensation",
+     "type": "internal service",
+     "amount": 1456192
+    },
+    {
+     "code": "506",
+     "name": "506 Risk",
+     "type": "internal service",
+     "amount": 3447326
+    },
+    {
+     "code": "510",
+     "name": "510 Utility Admin",
+     "type": "internal service",
+     "amount": 1601980
+    }
+   ],
+   "general_fund_departments": []
+  },
+  {
+   "fiscal_year": 2019,
+   "status": "adopted",
+   "source_title": "FY 19 Summary of Funds (final hearing, Sept 18, 2018)",
+   "source_url": "https://www.baycountyfl.gov/Archive.aspx?ADID=219",
+   "total": 341640225,
+   "general_fund": 118589304,
+   "funds": [
+    {
+     "code": "001",
+     "name": "001 General Fund",
+     "type": "general",
+     "amount": 118589304
+    },
+    {
+     "code": "101",
+     "name": "101 Transportation",
+     "type": "special revenue",
+     "amount": 25128164
+    },
+    {
+     "code": "102",
+     "name": "102 Half-Cent Infrastructure Surtax",
+     "type": "special revenue",
+     "amount": 17350000
+    },
+    {
+     "code": "111",
+     "name": "111 Road Impact-Beach/Airport",
+     "type": "special revenue",
+     "amount": 195927
+    },
+    {
+     "code": "112",
+     "name": "112 Road Impact-East Bay County",
+     "type": "special revenue",
+     "amount": 315509
+    },
+    {
+     "code": "113",
+     "name": "113 Road Impact-Panama City",
+     "type": "special revenue",
+     "amount": 27312
+    },
+    {
+     "code": "114",
+     "name": "114 Road Impact-Southport/Sand Hills",
+     "type": "special revenue",
+     "amount": 221630
+    },
+    {
+     "code": "118",
+     "name": "118 Transit",
+     "type": "special revenue",
+     "amount": 5873349
+    },
+    {
+     "code": "120",
+     "name": "120 Library",
+     "type": "special revenue",
+     "amount": 3462417
+    },
+    {
+     "code": "125",
+     "name": "125 TDC - Administration",
+     "type": "special revenue",
+     "amount": 14598500
+    },
+    {
+     "code": "126",
+     "name": "126 TDC - Mexico Beach",
+     "type": "special revenue",
+     "amount": 841750
+    },
+    {
+     "code": "127",
+     "name": "127 TDC - Beach Nourishment",
+     "type": "special revenue",
+     "amount": 28700000
+    },
+    {
+     "code": "128",
+     "name": "128 TDC - 5th Cent",
+     "type": "special revenue",
+     "amount": 10137600
+    },
+    {
+     "code": "129",
+     "name": "129 TDC - Panama City",
+     "type": "special revenue",
+     "amount": 2158900
+    },
+    {
+     "code": "130",
+     "name": "130 Public Safety",
+     "type": "special revenue",
+     "amount": 3326665
+    },
+    {
+     "code": "133",
+     "name": "133 Intergovernmental Radio Comm",
+     "type": "special revenue",
+     "amount": 1026945
+    },
+    {
+     "code": "140",
+     "name": "140 Mosquito Control",
+     "type": "special revenue",
+     "amount": 1531937
+    },
+    {
+     "code": "145",
+     "name": "145 M.S.T.U. - Fire Services",
+     "type": "special revenue",
+     "amount": 9192593
+    },
+    {
+     "code": "167",
+     "name": "167 M.S.B.U.",
+     "type": "special revenue",
+     "amount": 70581
+    },
+    {
+     "code": "401",
+     "name": "401 Water Plant Operations",
+     "type": "enterprise",
+     "amount": 26552137
+    },
+    {
+     "code": "412",
+     "name": "412 MPAWTF/Joint Venture",
+     "type": "enterprise",
+     "amount": 8050247
+    },
+    {
+     "code": "420",
+     "name": "420 Retail Water/Wastewater",
+     "type": "enterprise",
+     "amount": 21300429
+    },
+    {
+     "code": "430",
+     "name": "430 Solid Waste",
+     "type": "enterprise",
+     "amount": 16981135
+    },
+    {
+     "code": "440",
+     "name": "440 Builders Services",
+     "type": "enterprise",
+     "amount": 4006481
+    },
+    {
+     "code": "450",
+     "name": "450 EMS",
+     "type": "enterprise",
+     "amount": 9443796
+    },
+    {
+     "code": "501",
+     "name": "501 Internal Service",
+     "type": "internal service",
+     "amount": 5345226
+    },
+    {
+     "code": "505",
+     "name": "505 Workers' Compensation",
+     "type": "internal service",
+     "amount": 1574606
+    },
+    {
+     "code": "506",
+     "name": "506 Risk",
+     "type": "internal service",
+     "amount": 3816372
+    },
+    {
+     "code": "510",
+     "name": "510 Utility Admin",
+     "type": "internal service",
+     "amount": 1820713
+    }
+   ],
+   "general_fund_departments": []
+  },
+  {
+   "fiscal_year": 2020,
+   "status": "adopted",
+   "source_title": "FY22 Commission Books 9-14-2021",
+   "source_url": "https://www.baycountyfl.gov/Archive.aspx?ADID=293",
+   "total": 359350583,
+   "general_fund": 118817232,
+   "funds": [
+    {
+     "code": "001",
+     "name": "001 General Fund",
+     "type": "general",
+     "amount": 118817232
+    },
+    {
+     "code": "101",
+     "name": "101 Transportation",
+     "type": "special revenue",
+     "amount": 25419119
+    },
+    {
+     "code": "102",
+     "name": "102 Half-Cent Infrastructure Surtax",
+     "type": "special revenue",
+     "amount": 16450000
+    },
+    {
+     "code": "111",
+     "name": "111 Road Impact-Beach/Airport",
+     "type": "special revenue",
+     "amount": 198596
+    },
+    {
+     "code": "112",
+     "name": "112 Road Impact-East Bay County",
+     "type": "special revenue",
+     "amount": 319859
+    },
+    {
+     "code": "113",
+     "name": "113 Road Impact-Panama City",
+     "type": "special revenue",
+     "amount": 27534
+    },
+    {
+     "code": "114",
+     "name": "114 Road Impact-Southport/Sand Hills",
+     "type": "special revenue",
+     "amount": 224645
+    },
+    {
+     "code": "118",
+     "name": "118 Transit",
+     "type": "special revenue",
+     "amount": 6113971
+    },
+    {
+     "code": "120",
+     "name": "120 Library",
+     "type": "special revenue",
+     "amount": 3390418
+    },
+    {
+     "code": "124",
+     "name": "124 TDC - Sports Park",
+     "type": "special revenue",
+     "amount": 1722726
+    },
+    {
+     "code": "125",
+     "name": "125 TDC - Administration",
+     "type": "special revenue",
+     "amount": 16600313
+    },
+    {
+     "code": "126",
+     "name": "126 TDC - Mexico Beach",
+     "type": "special revenue",
+     "amount": 342358
+    },
+    {
+     "code": "127",
+     "name": "127 TDC - Beach Nourishment",
+     "type": "special revenue",
+     "amount": 39905938
+    },
+    {
+     "code": "128",
+     "name": "128 TDC - 5th Cent",
+     "type": "special revenue",
+     "amount": 4780938
+    },
+    {
+     "code": "129",
+     "name": "129 TDC - Panama City",
+     "type": "special revenue",
+     "amount": 873600
+    },
+    {
+     "code": "130",
+     "name": "130 Public Safety",
+     "type": "special revenue",
+     "amount": 3940569
+    },
+    {
+     "code": "133",
+     "name": "133 Intergovernmental Radio Comm",
+     "type": "special revenue",
+     "amount": 979513
+    },
+    {
+     "code": "140",
+     "name": "140 Mosquito Control",
+     "type": "special revenue",
+     "amount": 1527183
+    },
+    {
+     "code": "145",
+     "name": "145 M.S.T.U. - Fire Services",
+     "type": "special revenue",
+     "amount": 9327191
+    },
+    {
+     "code": "167",
+     "name": "167 M.S.B.U.",
+     "type": "special revenue",
+     "amount": 96135
+    },
+    {
+     "code": "401",
+     "name": "401 Water Plant Operations",
+     "type": "enterprise",
+     "amount": 26665406
+    },
+    {
+     "code": "412",
+     "name": "412 MPAWTF/Joint Venture",
+     "type": "enterprise",
+     "amount": 6384101
+    },
+    {
+     "code": "420",
+     "name": "420 Retail Water/Wastewater",
+     "type": "enterprise",
+     "amount": 17609940
+    },
+    {
+     "code": "430",
+     "name": "430 Solid Waste",
+     "type": "enterprise",
+     "amount": 25407504
+    },
+    {
+     "code": "440",
+     "name": "440 Builders Services",
+     "type": "enterprise",
+     "amount": 5530975
+    },
+    {
+     "code": "450",
+     "name": "450 EMS",
+     "type": "enterprise",
+     "amount": 10237329
+    },
+    {
+     "code": "501",
+     "name": "501 Internal Service",
+     "type": "internal service",
+     "amount": 6529655
+    },
+    {
+     "code": "505",
+     "name": "505 Workers' Compensation",
+     "type": "internal service",
+     "amount": 2333564
+    },
+    {
+     "code": "506",
+     "name": "506 Risk",
+     "type": "internal service",
+     "amount": 5536458
+    },
+    {
+     "code": "510",
+     "name": "510 Utility Admin",
+     "type": "internal service",
+     "amount": 2057813
+    }
+   ],
+   "general_fund_departments": []
+  },
+  {
+   "fiscal_year": 2021,
+   "status": "adopted",
+   "source_title": "FY22 Commission Books 9-14-2021",
+   "source_url": "https://www.baycountyfl.gov/Archive.aspx?ADID=293",
+   "total": 389385956,
+   "general_fund": 129184181,
+   "funds": [
+    {
+     "code": "001",
+     "name": "001 General Fund",
+     "type": "general",
+     "amount": 129184181
+    },
+    {
+     "code": "101",
+     "name": "101 Transportation",
+     "type": "special revenue",
+     "amount": 29130162
+    },
+    {
+     "code": "102",
+     "name": "102 Half-Cent Infrastructure Surtax",
+     "type": "special revenue",
+     "amount": 38500000
+    },
+    {
+     "code": "111",
+     "name": "111 Road Impact-Beach/Airport",
+     "type": "special revenue",
+     "amount": 204722
+    },
+    {
+     "code": "112",
+     "name": "112 Road Impact-East Bay County",
+     "type": "special revenue",
+     "amount": 332845
+    },
+    {
+     "code": "113",
+     "name": "113 Road Impact-Panama City",
+     "type": "special revenue",
+     "amount": 28240
+    },
+    {
+     "code": "114",
+     "name": "114 Road Impact-Southport/Sand Hills",
+     "type": "special revenue",
+     "amount": 230065
+    },
+    {
+     "code": "118",
+     "name": "118 Transit",
+     "type": "special revenue",
+     "amount": 8558343
+    },
+    {
+     "code": "124",
+     "name": "124 TDC - Sports Park",
+     "type": "special revenue",
+     "amount": 1495345
+    },
+    {
+     "code": "125",
+     "name": "125 TDC - Administration",
+     "type": "special revenue",
+     "amount": 12330000
+    },
+    {
+     "code": "126",
+     "name": "126 TDC - Mexico Beach",
+     "type": "special revenue",
+     "amount": 185801
+    },
+    {
+     "code": "127",
+     "name": "127 TDC - Beach Nourishment",
+     "type": "special revenue",
+     "amount": 44282500
+    },
+    {
+     "code": "128",
+     "name": "128 TDC - 5th Cent",
+     "type": "special revenue",
+     "amount": 4157500
+    },
+    {
+     "code": "129",
+     "name": "129 TDC - Panama City",
+     "type": "special revenue",
+     "amount": 2150481
+    },
+    {
+     "code": "130",
+     "name": "130 Public Safety",
+     "type": "special revenue",
+     "amount": 3350000
+    },
+    {
+     "code": "133",
+     "name": "133 Intergovernmental Radio Comm",
+     "type": "special revenue",
+     "amount": 3608903
+    },
+    {
+     "code": "140",
+     "name": "140 Mosquito Control",
+     "type": "special revenue",
+     "amount": 1526566
+    },
+    {
+     "code": "145",
+     "name": "145 M.S.T.U. - Fire Services",
+     "type": "special revenue",
+     "amount": 9984010
+    },
+    {
+     "code": "167",
+     "name": "167 M.S.B.U.",
+     "type": "special revenue",
+     "amount": 77718
+    },
+    {
+     "code": "401",
+     "name": "401 Water Plant Operations",
+     "type": "enterprise",
+     "amount": 38859265
+    },
+    {
+     "code": "412",
+     "name": "412 MPAWTF/Joint Venture",
+     "type": "enterprise",
+     "amount": 6088732
+    },
+    {
+     "code": "420",
+     "name": "420 Retail Water/Wastewater",
+     "type": "enterprise",
+     "amount": 19355210
+    },
+    {
+     "code": "430",
+     "name": "430 Solid Waste",
+     "type": "enterprise",
+     "amount": 13727442
+    },
+    {
+     "code": "440",
+     "name": "440 Builders Services",
+     "type": "enterprise",
+     "amount": 3684351
+    },
+    {
+     "code": "501",
+     "name": "501 Internal Service",
+     "type": "internal service",
+     "amount": 7269149
+    },
+    {
+     "code": "505",
+     "name": "505 Workers' Compensation",
+     "type": "internal service",
+     "amount": 3193984
+    },
+    {
+     "code": "506",
+     "name": "506 Risk",
+     "type": "internal service",
+     "amount": 5728971
+    },
+    {
+     "code": "510",
+     "name": "510 Utility Admin",
+     "type": "internal service",
+     "amount": 2161470
+    }
+   ],
+   "general_fund_departments": []
+  },
+  {
+   "fiscal_year": 2022,
+   "status": "adopted",
+   "source_title": "FY22 Commission Books 9-14-2021",
+   "source_url": "https://www.baycountyfl.gov/Archive.aspx?ADID=293",
+   "total": 465188542,
+   "general_fund": 160407625,
+   "funds": [
+    {
+     "code": "001",
+     "name": "001 General Fund",
+     "type": "general",
+     "amount": 160407625
+    },
+    {
+     "code": "101",
+     "name": "101 Transportation",
+     "type": "special revenue",
+     "amount": 30732847
+    },
+    {
+     "code": "102",
+     "name": "102 Half-Cent Infrastructure Surtax",
+     "type": "special revenue",
+     "amount": 22050000
+    },
+    {
+     "code": "112",
+     "name": "112 Road Impact-East Bay County",
+     "type": "special revenue",
+     "amount": 338166
+    },
+    {
+     "code": "113",
+     "name": "113 Road Impact-Panama City",
+     "type": "special revenue",
+     "amount": 28610
+    },
+    {
+     "code": "114",
+     "name": "114 Road Impact-Southport/Sand Hills",
+     "type": "special revenue",
+     "amount": 231559
+    },
+    {
+     "code": "118",
+     "name": "118 Transit",
+     "type": "special revenue",
+     "amount": 8047708
+    },
+    {
+     "code": "124",
+     "name": "124 TDC - Sports Park",
+     "type": "special revenue",
+     "amount": 1694423
+    },
+    {
+     "code": "125",
+     "name": "125 TDC - Administration",
+     "type": "special revenue",
+     "amount": 14484754
+    },
+    {
+     "code": "126",
+     "name": "126 TDC - Mexico Beach",
+     "type": "special revenue",
+     "amount": 353753
+    },
+    {
+     "code": "127",
+     "name": "127 TDC - Beach Nourishment",
+     "type": "special revenue",
+     "amount": 47000751
+    },
+    {
+     "code": "128",
+     "name": "128 TDC - 5th Cent",
+     "type": "special revenue",
+     "amount": 4840751
+    },
+    {
+     "code": "129",
+     "name": "129 TDC - Panama City",
+     "type": "special revenue",
+     "amount": 1536881
+    },
+    {
+     "code": "130",
+     "name": "130 Public Safety",
+     "type": "special revenue",
+     "amount": 3312500
+    },
+    {
+     "code": "133",
+     "name": "133 Intergovernmental Radio Comm",
+     "type": "special revenue",
+     "amount": 3205652
+    },
+    {
+     "code": "135",
+     "name": "135 Community Housing Fund",
+     "type": "special revenue",
+     "amount": 3961000
+    },
+    {
+     "code": "140",
+     "name": "140 Mosquito Control",
+     "type": "special revenue",
+     "amount": 2108110
+    },
+    {
+     "code": "145",
+     "name": "145 M.S.T.U. - Fire Services",
+     "type": "special revenue",
+     "amount": 13757302
+    },
+    {
+     "code": "150",
+     "name": "150 Hurricane Michael Fund",
+     "type": "special revenue",
+     "amount": 38896108
+    },
+    {
+     "code": "160",
+     "name": "160 COVID",
+     "type": "special revenue",
+     "amount": 16966449
+    },
+    {
+     "code": "167",
+     "name": "167 M.S.B.U.",
+     "type": "special revenue",
+     "amount": 57716
+    },
+    {
+     "code": "401",
+     "name": "401 Water Plant Operations",
+     "type": "enterprise",
+     "amount": 27433499
+    },
+    {
+     "code": "412",
+     "name": "412 MPAWTF/Joint Venture",
+     "type": "enterprise",
+     "amount": 10310328
+    },
+    {
+     "code": "420",
+     "name": "420 Retail Water/Wastewater",
+     "type": "enterprise",
+     "amount": 20011196
+    },
+    {
+     "code": "430",
+     "name": "430 Solid Waste",
+     "type": "enterprise",
+     "amount": 11586900
+    },
+    {
+     "code": "440",
+     "name": "440 Builders Services",
+     "type": "enterprise",
+     "amount": 5245000
+    },
+    {
+     "code": "501",
+     "name": "501 Internal Service",
+     "type": "internal service",
+     "amount": 6837410
+    },
+    {
+     "code": "505",
+     "name": "505 Workers' Compensation",
+     "type": "internal service",
+     "amount": 2179359
+    },
+    {
+     "code": "506",
+     "name": "506 Risk",
+     "type": "internal service",
+     "amount": 5151444
+    },
+    {
+     "code": "510",
+     "name": "510 Utility Admin",
+     "type": "internal service",
+     "amount": 2420741
+    }
+   ],
+   "general_fund_departments": []
+  },
+  {
+   "fiscal_year": 2023,
+   "status": "adopted",
+   "source_title": "Bay County FY25 Tentative Budget - Commissioners Book 09-04-2024",
+   "source_url": "https://www.baycountyfl.gov/Archive.aspx?ADID=329",
+   "total": 485371326,
+   "general_fund": 159798323,
+   "funds": [
+    {
+     "code": "001",
+     "name": "001 General Fund",
+     "type": "general",
+     "amount": 159798323
+    },
+    {
+     "code": "101",
+     "name": "101 Transportation",
+     "type": "special revenue",
+     "amount": 33918496
+    },
+    {
+     "code": "102",
+     "name": "102 Half-Cent Infrastructure Surtax",
+     "type": "special revenue",
+     "amount": 32936300
+    },
+    {
+     "code": "112",
+     "name": "112 Road Impact-East Bay County",
+     "type": "special revenue",
+     "amount": 335748
+    },
+    {
+     "code": "113",
+     "name": "113 Road Impact-Panama City",
+     "type": "special revenue",
+     "amount": 28747
+    },
+    {
+     "code": "114",
+     "name": "114 Road Impact-Southport/Sand Hills",
+     "type": "special revenue",
+     "amount": 232447
+    },
+    {
+     "code": "118",
+     "name": "118 Transit",
+     "type": "special revenue",
+     "amount": 8447153
+    },
+    {
+     "code": "122",
+     "name": "122 Restore Act",
+     "type": "special revenue",
+     "amount": 4818159
+    },
+    {
+     "code": "124",
+     "name": "124 TDC - Sports Park",
+     "type": "special revenue",
+     "amount": 1866262
+    },
+    {
+     "code": "125",
+     "name": "125 TDC - Administration",
+     "type": "special revenue",
+     "amount": 25840000
+    },
+    {
+     "code": "126",
+     "name": "126 TDC - Mexico Beach",
+     "type": "special revenue",
+     "amount": 611218
+    },
+    {
+     "code": "127",
+     "name": "127 TDC - Beach Nourishment",
+     "type": "special revenue",
+     "amount": 53562500
+    },
+    {
+     "code": "128",
+     "name": "128 TDC - 5th Cent",
+     "type": "special revenue",
+     "amount": 8682500
+    },
+    {
+     "code": "129",
+     "name": "129 TDC - Panama City",
+     "type": "special revenue",
+     "amount": 2289105
+    },
+    {
+     "code": "130",
+     "name": "130 Public Safety",
+     "type": "special revenue",
+     "amount": 2812500
+    },
+    {
+     "code": "133",
+     "name": "133 Intergovernmental Radio Comm",
+     "type": "special revenue",
+     "amount": 3644248
+    },
+    {
+     "code": "135",
+     "name": "135 Community Housing Fund",
+     "type": "special revenue",
+     "amount": 2898000
+    },
+    {
+     "code": "140",
+     "name": "140 Mosquito Control",
+     "type": "special revenue",
+     "amount": 2225923
+    },
+    {
+     "code": "145",
+     "name": "145 M.S.T.U. - Fire Services",
+     "type": "special revenue",
+     "amount": 14412053
+    },
+    {
+     "code": "150",
+     "name": "150 Hurricane Michael Fund",
+     "type": "special revenue",
+     "amount": 2333251
+    },
+    {
+     "code": "160",
+     "name": "160 COVID",
+     "type": "special revenue",
+     "amount": 24566449
+    },
+    {
+     "code": "167",
+     "name": "167 M.S.B.U.",
+     "type": "special revenue",
+     "amount": 60050
+    },
+    {
+     "code": "401",
+     "name": "401 Water Plant Operations",
+     "type": "enterprise",
+     "amount": 27638042
+    },
+    {
+     "code": "412",
+     "name": "412 MPAWTF/Joint Venture",
+     "type": "enterprise",
+     "amount": 11215722
+    },
+    {
+     "code": "420",
+     "name": "420 Retail Water/Wastewater",
+     "type": "enterprise",
+     "amount": 19592403
+    },
+    {
+     "code": "430",
+     "name": "430 Solid Waste",
+     "type": "enterprise",
+     "amount": 11549215
+    },
+    {
+     "code": "440",
+     "name": "440 Builders Services",
+     "type": "enterprise",
+     "amount": 6715000
+    },
+    {
+     "code": "501",
+     "name": "501 Internal Service",
+     "type": "internal service",
+     "amount": 8390579
+    },
+    {
+     "code": "505",
+     "name": "505 Workers' Compensation",
+     "type": "internal service",
+     "amount": 4028521
+    },
+    {
+     "code": "506",
+     "name": "506 Risk",
+     "type": "internal service",
+     "amount": 6374941
+    },
+    {
+     "code": "510",
+     "name": "510 Utility Admin",
+     "type": "internal service",
+     "amount": 3547471
+    }
+   ],
+   "general_fund_departments": []
+  },
+  {
+   "fiscal_year": 2024,
+   "status": "adopted",
+   "source_title": "Bay County FY25 Tentative Budget - Commissioners Book 09-04-2024",
+   "source_url": "https://www.baycountyfl.gov/Archive.aspx?ADID=329",
+   "total": 588084239,
+   "general_fund": 204141082,
+   "funds": [
+    {
+     "code": "001",
+     "name": "001 General Fund",
+     "type": "general",
+     "amount": 204141082
+    },
+    {
+     "code": "101",
+     "name": "101 Transportation",
+     "type": "special revenue",
+     "amount": 44574935
+    },
+    {
+     "code": "102",
+     "name": "102 Half-Cent Infrastructure Surtax",
+     "type": "special revenue",
+     "amount": 43639706
+    },
+    {
+     "code": "114",
+     "name": "114 Road Impact-Southport/Sand Hills",
+     "type": "special revenue",
+     "amount": 236500
+    },
+    {
+     "code": "118",
+     "name": "118 Transit",
+     "type": "special revenue",
+     "amount": 7793310
+    },
+    {
+     "code": "124",
+     "name": "124 TDC - Sports Park",
+     "type": "special revenue",
+     "amount": 2377973
+    },
+    {
+     "code": "125",
+     "name": "125 TDC - Administration",
+     "type": "special revenue",
+     "amount": 20014725
+    },
+    {
+     "code": "126",
+     "name": "126 TDC - Mexico Beach",
+     "type": "special revenue",
+     "amount": 895340
+    },
+    {
+     "code": "127",
+     "name": "127 TDC - Beach Nourishment",
+     "type": "special revenue",
+     "amount": 59847500
+    },
+    {
+     "code": "128",
+     "name": "128 TDC - 5th Cent",
+     "type": "special revenue",
+     "amount": 6762500
+    },
+    {
+     "code": "129",
+     "name": "129 TDC - Panama City",
+     "type": "special revenue",
+     "amount": 3227606
+    },
+    {
+     "code": "130",
+     "name": "130 Public Safety",
+     "type": "special revenue",
+     "amount": 3102500
+    },
+    {
+     "code": "133",
+     "name": "133 Intergovernmental Radio Comm",
+     "type": "special revenue",
+     "amount": 3957894
+    },
+    {
+     "code": "135",
+     "name": "135 Community Housing Fund",
+     "type": "special revenue",
+     "amount": 12635829
+    },
+    {
+     "code": "140",
+     "name": "140 Mosquito Control",
+     "type": "special revenue",
+     "amount": 2449066
+    },
+    {
+     "code": "145",
+     "name": "145 M.S.T.U. - Fire Services",
+     "type": "special revenue",
+     "amount": 16917759
+    },
+    {
+     "code": "150",
+     "name": "150 Hurricane Michael Fund",
+     "type": "special revenue",
+     "amount": 40000000
+    },
+    {
+     "code": "160",
+     "name": "160 COVID",
+     "type": "special revenue",
+     "amount": 13154042
+    },
+    {
+     "code": "167",
+     "name": "167 M.S.B.U.",
+     "type": "special revenue",
+     "amount": 53250
+    },
+    {
+     "code": "401",
+     "name": "401 Water Plant Operations",
+     "type": "enterprise",
+     "amount": 30665500
+    },
+    {
+     "code": "412",
+     "name": "412 MPAWTF/Joint Venture",
+     "type": "enterprise",
+     "amount": 7358788
+    },
+    {
+     "code": "420",
+     "name": "420 Retail Water/Wastewater",
+     "type": "enterprise",
+     "amount": 24467094
+    },
+    {
+     "code": "430",
+     "name": "430 Solid Waste",
+     "type": "enterprise",
+     "amount": 9361200
+    },
+    {
+     "code": "440",
+     "name": "440 Builders Services",
+     "type": "enterprise",
+     "amount": 6703500
+    },
+    {
+     "code": "501",
+     "name": "501 Internal Service",
+     "type": "internal service",
+     "amount": 7802823
+    },
+    {
+     "code": "505",
+     "name": "505 Workers' Compensation",
+     "type": "internal service",
+     "amount": 4031362
+    },
+    {
+     "code": "506",
+     "name": "506 Risk",
+     "type": "internal service",
+     "amount": 8051065
+    },
+    {
+     "code": "510",
+     "name": "510 Utility Admin",
+     "type": "internal service",
+     "amount": 3861390
+    }
+   ],
+   "general_fund_departments": []
+  },
+  {
+   "fiscal_year": 2025,
+   "status": "adopted",
+   "source_title": "FY 2026 Final Budget Commissioners' Book 09-16-2025",
+   "source_url": "https://www.baycountyfl.gov/DocumentCenter/View/18382",
+   "total": 649906858,
+   "general_fund": 237968255,
+   "funds": [
+    {
+     "code": "001",
+     "name": "001 General Fund",
+     "type": "general",
+     "amount": 237968255
+    },
+    {
+     "code": "101",
+     "name": "101 Transportation",
+     "type": "special revenue",
+     "amount": 50018336
+    },
+    {
+     "code": "102",
+     "name": "102 Half-Cent Infrastructure Surtax",
+     "type": "special revenue",
+     "amount": 39438056
+    },
+    {
+     "code": "114",
+     "name": "114 Road Impact-Southport/Sand Hills",
+     "type": "special revenue",
+     "amount": 231953
+    },
+    {
+     "code": "118",
+     "name": "118 Transit",
+     "type": "special revenue",
+     "amount": 10529254
+    },
+    {
+     "code": "124",
+     "name": "124 TDC - Sports Park",
+     "type": "special revenue",
+     "amount": 2537220
+    },
+    {
+     "code": "125",
+     "name": "125 TDC - Administration",
+     "type": "special revenue",
+     "amount": 21150000
+    },
+    {
+     "code": "126",
+     "name": "126 TDC - Mexico Beach",
+     "type": "special revenue",
+     "amount": 21293782
+    },
+    {
+     "code": "127",
+     "name": "127 TDC - Beach Nourishment",
+     "type": "special revenue",
+     "amount": 65227500
+    },
+    {
+     "code": "128",
+     "name": "128 TDC - 5th Cent",
+     "type": "special revenue",
+     "amount": 11652500
+    },
+    {
+     "code": "129",
+     "name": "129 TDC - Panama City",
+     "type": "special revenue",
+     "amount": 2105117
+    },
+    {
+     "code": "130",
+     "name": "130 Public Safety",
+     "type": "special revenue",
+     "amount": 2708824
+    },
+    {
+     "code": "133",
+     "name": "133 Intergovernmental Radio Comm",
+     "type": "special revenue",
+     "amount": 4144992
+    },
+    {
+     "code": "135",
+     "name": "135 Community Housing Fund",
+     "type": "special revenue",
+     "amount": 8826230
+    },
+    {
+     "code": "140",
+     "name": "140 Mosquito Control",
+     "type": "special revenue",
+     "amount": 2709070
+    },
+    {
+     "code": "145",
+     "name": "145 M.S.T.U. - Fire Services",
+     "type": "special revenue",
+     "amount": 20315336
+    },
+    {
+     "code": "150",
+     "name": "150 Hurricane Michael Fund",
+     "type": "special revenue",
+     "amount": 27000000
+    },
+    {
+     "code": "160",
+     "name": "160 COVID",
+     "type": "special revenue",
+     "amount": 9000000
+    },
+    {
+     "code": "167",
+     "name": "167 M.S.B.U.",
+     "type": "special revenue",
+     "amount": 64500
+    },
+    {
+     "code": "401",
+     "name": "401 Water Plant Operations",
+     "type": "enterprise",
+     "amount": 26258049
+    },
+    {
+     "code": "412",
+     "name": "412 MPAWTF/Joint Venture",
+     "type": "enterprise",
+     "amount": 8260691
+    },
+    {
+     "code": "420",
+     "name": "420 Retail Water/Wastewater",
+     "type": "enterprise",
+     "amount": 37008630
+    },
+    {
+     "code": "430",
+     "name": "430 Solid Waste",
+     "type": "enterprise",
+     "amount": 11060115
+    },
+    {
+     "code": "440",
+     "name": "440 Builders Services",
+     "type": "enterprise",
+     "amount": 4850000
+    },
+    {
+     "code": "501",
+     "name": "501 Internal Service",
+     "type": "internal service",
+     "amount": 7985597
+    },
+    {
+     "code": "505",
+     "name": "505 Workers' Compensation",
+     "type": "internal service",
+     "amount": 4579759
+    },
+    {
+     "code": "506",
+     "name": "506 Risk",
+     "type": "internal service",
+     "amount": 9529532
+    },
+    {
+     "code": "510",
+     "name": "510 Utility Admin",
+     "type": "internal service",
+     "amount": 3453560
+    }
+   ],
+   "general_fund_departments": []
+  },
+  {
+   "fiscal_year": 2026,
+   "status": "adopted",
+   "source_title": "FY 2026 Final Budget Commissioners' Book 09-16-2025",
+   "source_url": "https://www.baycountyfl.gov/DocumentCenter/View/18382",
+   "total": 734465609,
+   "general_fund": 281737981,
+   "funds": [
+    {
+     "code": "001",
+     "name": "001 General Fund",
+     "type": "general",
+     "amount": 281737981
+    },
+    {
+     "code": "101",
+     "name": "101 Transportation",
+     "type": "special revenue",
+     "amount": 47079008
+    },
+    {
+     "code": "102",
+     "name": "102 Half-Cent Infrastructure Surtax",
+     "type": "special revenue",
+     "amount": 65115736
+    },
+    {
+     "code": "112",
+     "name": "112 Road Impact-East Bay County",
+     "type": "special revenue",
+     "amount": 8013
+    },
+    {
+     "code": "114",
+     "name": "114 Road Impact-Southport/Sand Hills",
+     "type": "special revenue",
+     "amount": 256960
+    },
+    {
+     "code": "118",
+     "name": "118 Transit",
+     "type": "special revenue",
+     "amount": 11002111
+    },
+    {
+     "code": "122",
+     "name": "122 Restore Act",
+     "type": "special revenue",
+     "amount": 7819761
+    },
+    {
+     "code": "124",
+     "name": "124 TDC - Sports Park",
+     "type": "special revenue",
+     "amount": 2659789
+    },
+    {
+     "code": "125",
+     "name": "125 TDC - Administration",
+     "type": "special revenue",
+     "amount": 25150000
+    },
+    {
+     "code": "126",
+     "name": "126 TDC - Mexico Beach",
+     "type": "special revenue",
+     "amount": 1137603
+    },
+    {
+     "code": "127",
+     "name": "127 TDC - Beach Nourishment",
+     "type": "special revenue",
+     "amount": 61227500
+    },
+    {
+     "code": "128",
+     "name": "128 TDC - 5th Cent",
+     "type": "special revenue",
+     "amount": 10352500
+    },
+    {
+     "code": "129",
+     "name": "129 TDC - Panama City",
+     "type": "special revenue",
+     "amount": 1813684
+    },
+    {
+     "code": "130",
+     "name": "130 Public Safety",
+     "type": "special revenue",
+     "amount": 2296900
+    },
+    {
+     "code": "133",
+     "name": "133 Intergovernmental Radio Comm",
+     "type": "special revenue",
+     "amount": 5188668
+    },
+    {
+     "code": "135",
+     "name": "135 Community Housing Fund",
+     "type": "special revenue",
+     "amount": 6927427
+    },
+    {
+     "code": "140",
+     "name": "140 Mosquito Control",
+     "type": "special revenue",
+     "amount": 3189291
+    },
+    {
+     "code": "145",
+     "name": "145 M.S.T.U. - Fire Services",
+     "type": "special revenue",
+     "amount": 33643487
+    },
+    {
+     "code": "150",
+     "name": "150 Hurricane Michael Fund",
+     "type": "special revenue",
+     "amount": 15000000
+    },
+    {
+     "code": "167",
+     "name": "167 M.S.B.U.",
+     "type": "special revenue",
+     "amount": 75261
+    },
+    {
+     "code": "401",
+     "name": "401 Water Plant Operations",
+     "type": "enterprise",
+     "amount": 41628649
+    },
+    {
+     "code": "412",
+     "name": "412 MPAWTF/Joint Venture",
+     "type": "enterprise",
+     "amount": 22909111
+    },
+    {
+     "code": "420",
+     "name": "420 Retail Water/Wastewater",
+     "type": "enterprise",
+     "amount": 40465640
+    },
+    {
+     "code": "430",
+     "name": "430 Solid Waste",
+     "type": "enterprise",
+     "amount": 10887853
+    },
+    {
+     "code": "440",
+     "name": "440 Builders Services",
+     "type": "enterprise",
+     "amount": 4150000
+    },
+    {
+     "code": "501",
+     "name": "501 Internal Service",
+     "type": "internal service",
+     "amount": 8784829
+    },
+    {
+     "code": "505",
+     "name": "505 Workers' Compensation",
+     "type": "internal service",
+     "amount": 8244962
+    },
+    {
+     "code": "506",
+     "name": "506 Risk",
+     "type": "internal service",
+     "amount": 11588864
+    },
+    {
+     "code": "510",
+     "name": "510 Utility Admin",
+     "type": "internal service",
+     "amount": 4124021
+    }
+   ],
+   "general_fund_departments": [
+    {
+     "name": "Sheriff / law enforcement",
+     "amount": 43595846
+    },
+    {
+     "name": "Jail operations (Sheriff-run)",
+     "amount": 30841594
+    },
+    {
+     "name": "Emergency medical services",
+     "amount": 30612414
+    },
+    {
+     "name": "Emergency management, code enforcement, animal control, medical examiner & public-safety debt",
+     "amount": 18921368
+    },
+    {
+     "name": "Human services (incl. $26.0M hospital LPPF payments)",
+     "amount": 37023523
+    },
+    {
+     "name": "Economic environment (incl. $4.9M to CRAs other than Front Beach)",
+     "amount": 5187215
+    },
+    {
+     "name": "Parks & recreation",
+     "amount": 13049436
+    },
+    {
+     "name": "Libraries",
+     "amount": 4119374
+    },
+    {
+     "name": "Constitutional officers (Property Appraiser, Tax Collector, Supervisor of Elections, Clerk)",
+     "amount": 20047395
+    },
+    {
+     "name": "Courts & judicial support",
+     "amount": 5356592
+    },
+    {
+     "name": "Administration & general government",
+     "amount": 19408430
+    },
+    {
+     "name": "Transfers out (mostly $32.0M to Transportation/roads fund)",
+     "amount": 34405652
+    },
+    {
+     "name": "Reserves (budgeted contingency)",
+     "amount": 1000000
+    },
+    {
+     "name": "Cash reserves",
+     "amount": 18169142
+    }
+   ]
+  },
+  {
+   "fiscal_year": 2027,
+   "status": "final hearing Sept 23, 2026 (the book and presentation still label it tentative)",
+   "source_title": "FY 2027 Tentative Budget Commissioner Book 09-15-26",
+   "source_url": "https://www.baycountyfl.gov/DocumentCenter/View/21090",
+   "total": 789059853,
+   "general_fund": 284489439,
+   "funds": [
+    {
+     "code": "001",
+     "name": "001 General Fund",
+     "type": "general",
+     "amount": 284489439
+    },
+    {
+     "code": "101",
+     "name": "101 Transportation",
+     "type": "special revenue",
+     "amount": 46493651
+    },
+    {
+     "code": "102",
+     "name": "102 Half-Cent Infrastructure Surtax",
+     "type": "special revenue",
+     "amount": 56353973
+    },
+    {
+     "code": "114",
+     "name": "114 Road Impact-Southport/Sand Hills",
+     "type": "special revenue",
+     "amount": 267000
+    },
+    {
+     "code": "118",
+     "name": "118 Transit",
+     "type": "special revenue",
+     "amount": 13544597
+    },
+    {
+     "code": "122",
+     "name": "122 Restore Act",
+     "type": "special revenue",
+     "amount": 7412540
+    },
+    {
+     "code": "124",
+     "name": "124 TDC - Sports Park",
+     "type": "special revenue",
+     "amount": 3116209
+    },
+    {
+     "code": "125",
+     "name": "125 TDC - Administration",
+     "type": "special revenue",
+     "amount": 34745026
+    },
+    {
+     "code": "126",
+     "name": "126 TDC - Mexico Beach",
+     "type": "special revenue",
+     "amount": 1278550
+    },
+    {
+     "code": "127",
+     "name": "127 TDC - Beach Nourishment",
+     "type": "special revenue",
+     "amount": 72234500
+    },
+    {
+     "code": "128",
+     "name": "128 TDC - 5th Cent",
+     "type": "special revenue",
+     "amount": 28134500
+    },
+    {
+     "code": "129",
+     "name": "129 TDC - Panama City",
+     "type": "special revenue",
+     "amount": 2211186
+    },
+    {
+     "code": "130",
+     "name": "130 Public Safety",
+     "type": "special revenue",
+     "amount": 2706287
+    },
+    {
+     "code": "133",
+     "name": "133 Intergovernmental Radio Comm",
+     "type": "special revenue",
+     "amount": 5997545
+    },
+    {
+     "code": "135",
+     "name": "135 Community Housing Fund",
+     "type": "special revenue",
+     "amount": 5054287
+    },
+    {
+     "code": "140",
+     "name": "140 Mosquito Control",
+     "type": "special revenue",
+     "amount": 3386719
+    },
+    {
+     "code": "145",
+     "name": "145 M.S.T.U. - Fire Services",
+     "type": "special revenue",
+     "amount": 23505733
+    },
+    {
+     "code": "150",
+     "name": "150 Hurricane Michael Fund",
+     "type": "special revenue",
+     "amount": 24500000
+    },
+    {
+     "code": "160",
+     "name": "160 COVID",
+     "type": "special revenue",
+     "amount": 1700000
+    },
+    {
+     "code": "167",
+     "name": "167 M.S.B.U.",
+     "type": "special revenue",
+     "amount": 150563
+    },
+    {
+     "code": "401",
+     "name": "401 Water Plant Operations",
+     "type": "enterprise",
+     "amount": 50581360
+    },
+    {
+     "code": "412",
+     "name": "412 MPAWTF/Joint Venture",
+     "type": "enterprise",
+     "amount": 18301029
+    },
+    {
+     "code": "420",
+     "name": "420 Retail Water/Wastewater",
+     "type": "enterprise",
+     "amount": 44093924
+    },
+    {
+     "code": "430",
+     "name": "430 Solid Waste",
+     "type": "enterprise",
+     "amount": 10938082
+    },
+    {
+     "code": "440",
+     "name": "440 Builders Services",
+     "type": "enterprise",
+     "amount": 5480501
+    },
+    {
+     "code": "501",
+     "name": "501 Internal Service",
+     "type": "internal service",
+     "amount": 8417672
+    },
+    {
+     "code": "505",
+     "name": "505 Workers' Compensation",
+     "type": "internal service",
+     "amount": 3756186
+    },
+    {
+     "code": "506",
+     "name": "506 Risk",
+     "type": "internal service",
+     "amount": 12730448
+    },
+    {
+     "code": "510",
+     "name": "510 Utility Admin",
+     "type": "internal service",
+     "amount": 3084488
+    },
+    {
+     "code": "520",
+     "name": "520 Self Insurance Fund",
+     "type": "internal service",
+     "amount": 14393858
+    }
+   ],
+   "general_fund_departments": []
+  }
+ ]
+}

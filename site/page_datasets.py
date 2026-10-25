@@ -211,7 +211,7 @@ def government_years():
     One row per government per fiscal year. A blank value means no record for that year (never carried over from
     another year). fiscal_year is the year the fiscal year ends in (FY2026 = Oct 2025 to Sep 2026; schools Jul to Jun).
     """
-    import json
+    import glob, json
     from govs import GOVS
     D = os.path.join(HERE, '..', 'data')
     J = lambda *p: json.load(open(os.path.join(D, *p)))
@@ -221,14 +221,20 @@ def government_years():
     da = J('debt_audit', 'debt_audit.json')
     fees = {g['name']: g for g in J('fees', 'fees_pay_officials.json')['governments']}
     pop = J('civic', 'population.json')
+    files = {}
+    for fp in sorted(glob.glob(os.path.join(D, 'budgets', '*.json'))):
+        f = json.load(open(fp))
+        files[f['gov']] = f['years']
     from place import NAME as PLACE_NAME
     out = []
     for g in GOVS:
         rows = {}
         row = lambda y: rows.setdefault(y, {})
         b = bud.get(g['tax']) or {}
-        # budgets: history, FY2026, FY2027
-        entries = [(h.get('fy'), h, h.get('note') or 'adopted') for h in b.get('history') or []]
+        # budgets: the yearly budget file (data/budgets/<gov>.json), then history, FY2026 and FY2027, which win where both have a year
+        entries = [(f"FY{y['fiscal_year']}", {'total_budget': y.get('total'), 'general_fund': y.get('general_fund'), 'source_url': y.get('source_url')}, y.get('status'))
+                   for y in files.get(g['key'], [])]
+        entries += [(h.get('fy'), h, h.get('note') or 'adopted') for h in b.get('history') or []]
         entries += [('FY2026', b.get('fy2026') or {}, (b.get('fy2026') or {}).get('status')), ('FY2027', b.get('fy2027') or {}, (b.get('fy2027') or {}).get('status'))]
         for fy, x, st in entries:
             y = _fy(fy)

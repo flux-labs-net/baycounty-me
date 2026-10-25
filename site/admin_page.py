@@ -115,6 +115,10 @@ details.ag summary{cursor:pointer;color:var(--blue)} details.ag pre{white-space:
 .co-p.off .nm,.co-p.off .sub,.co-p.off input{opacity:.55}
 .co-chip{display:inline-flex;gap:4px;align-items:center;font-size:.78rem;border:1px solid var(--line);border-radius:999px;padding:2px 8px;margin:2px 4px 2px 0;background:var(--sunken)}
 .pill.awaiting{color:var(--warn)} .pill.replied{color:var(--ok)} .pill.closed{color:var(--muted)} .pill.public{color:var(--blue)}
+.pill.draft{color:var(--muted)} .pill.received{color:var(--ok)}
+.rr-gaps{display:flex;flex-wrap:wrap;gap:4px}
+.rr-gaps span{font:500 .74rem var(--f-data);border:1px solid var(--line);border-radius:6px;padding:1px 6px;background:var(--sunken)}
+.co-p.on{background:var(--sunken)}
 .th-msg{border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:10px;background:var(--bg)}
 .th-msg.in{border-left:4px solid var(--ok)} .th-msg.out{border-left:4px solid var(--bar)}
 .th-msg header{display:flex;gap:8px;flex-wrap:wrap;align-items:center;font-size:.8rem;color:var(--muted);margin-bottom:6px}
@@ -186,6 +190,7 @@ def admin_page(out_dir):
       <button role="tab" data-tab="emails" aria-selected="false">Emails</button>
       <button role="tab" data-tab="compose" aria-selected="false">Write to officials</button>
       <button role="tab" data-tab="correspondence" aria-selected="false">Correspondence</button>
+      <button role="tab" data-tab="records" aria-selected="false">Records requests</button>
       <button role="tab" data-tab="owners" aria-selected="false">Business owners</button>
       <button role="tab" data-tab="boards" aria-selected="false">Nonprofit boards</button>
       <button role="tab" data-tab="ties" aria-selected="false">Business ties</button>
@@ -376,6 +381,15 @@ def admin_page(out_dir):
       <p class="muted small" style="margin-top:8px">The public page is <a href="/correspondence" target="_blank" rel="noopener">baycounty.me/correspondence</a>. It shows only published threads, by official name and seat, without email addresses.</p>
     </section>
 
+    <section id="tab-records" role="tabpanel" hidden>
+      <p class="muted small" style="margin:0 0 12px">Public records requests (Chapter 119) for the budget years the site is missing, one draft per government. Nothing is sent until you press Send on a request. Each goes to one address from hello@baycounty.me, and the reply shows up under Correspondence.</p>
+      <div class="tiles" id="rr-tiles"></div>
+      <div class="co">
+        <div class="co-list" id="rr-list"><p class="empty">Loading…</p></div>
+        <div class="card" id="rr-detail" style="display:flex;flex-direction:column;gap:12px"><p class="muted small" style="margin:0">Pick a request on the left.</p></div>
+      </div>
+    </section>
+
     <section id="tab-ties" role="tabpanel" hidden>
       <div class="banner"><div><b>Check each match before confirming it.</b> <span class="small muted">Officials, department leaders and candidates paired by name with people in the state corporate file (Sunbiz). A name match can be a different person: open the Sunbiz record and check the address, middle initial or business before you confirm. Confirming publishes that official's businesses and links on <a href="/connections/business-ties" target="_blank" rel="noopener">/connections/business-ties</a>; rejecting or setting it back to unreviewed takes them down. Other people on those businesses are never named publicly.</span></div></div>
       <div class="tiles" id="bt-tiles"></div>
@@ -449,6 +463,12 @@ def admin_page(out_dir):
   <p class="small" id="co-confirm-text" style="margin:0"></p>
   <div id="co-confirm-list" class="small" style="max-height:240px;overflow:auto"></div>
   <div class="row"><button class="btn primary" type="button" id="co-confirm-go">Send now</button><span class="grow"></span><button class="btn" value="cancel">Cancel</button></div>
+</form></dialog>
+
+<dialog id="rr-confirm"><form method="dialog">
+  <h2>Send this records request?</h2>
+  <p class="small" id="rr-confirm-text" style="margin:0"></p>
+  <div class="row"><button class="btn primary" type="button" id="rr-confirm-go">Send now</button><span class="grow"></span><button class="btn" value="cancel">Cancel</button></div>
 </form></dialog>
 
 <dialog id="key-dialog"><form method="dialog" id="key-form">

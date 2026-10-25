@@ -3,13 +3,176 @@
  "name": "City of Lynn Haven",
  "as_of": "2026-10-25",
  "notes": [
-  "Each year is the Final Approved (adopted) budget, from the \"TOTAL EXPENDITURES by funding source\" table. FY2025 is the original adopted budget; the city amended it to $64,870,778 at mid-year (April 2025).",
+  "Each year is the Final Approved (adopted) budget, from the \"TOTAL EXPENDITURES by funding source\" table (FY2020: the City-Wide Budget Summary). FY2025 is the original adopted budget; the city amended it to $64,870,778 at mid-year (April 2025).",
   "Fund amounts add up to the printed grand total and departments to the General Fund in every year (within a few dollars of rounding).",
   "Department numbers stay the same across years; names are the FY2026 document's, so \"PD\" is Police and \"Bldg. Dept\" is Building Department.",
   "Indirect cost recovery is a credit: the General Fund charges overhead to the utility funds, which lowers the General Fund total.",
+  "FY2020's book prints the Disaster Recovery Fund ($68.3M) beside a $38.9M city total; it is counted here so FY2020 matches later years.",
   "Totals include transfers between funds, so some money is counted twice. FY2021 to FY2023 include large Hurricane Michael recovery budgets in the Disaster Recovery Fund."
  ],
  "years": [
+  {
+   "fiscal_year": 2020,
+   "status": "adopted",
+   "source_title": "City of Lynn Haven 2020 Annual Budget (Fiscal Year 2019-2020, approved)",
+   "source_url": "https://www.cityoflynnhaven.gov/DocumentCenter/View/720",
+   "total": 107227157,
+   "general_fund": 15231707,
+   "funds": [
+    {
+     "code": "001",
+     "name": "001 General Fund",
+     "type": "general",
+     "amount": 15231707
+    },
+    {
+     "code": "701",
+     "name": "701 CRA Fund",
+     "type": "CRA",
+     "amount": 505174
+    },
+    {
+     "code": "301",
+     "name": "301 Surtax Fund",
+     "type": "special revenue / capital",
+     "amount": 2461272
+    },
+    {
+     "code": "401",
+     "name": "401 Water Fund",
+     "type": "enterprise (utilities)",
+     "amount": 8437369
+    },
+    {
+     "code": "402",
+     "name": "402 Sewer Fund",
+     "type": "enterprise (utilities)",
+     "amount": 7948751
+    },
+    {
+     "code": "404",
+     "name": "404 Stormwater Fund",
+     "type": "enterprise",
+     "amount": 1894564
+    },
+    {
+     "code": "405",
+     "name": "405 Sanitation Fund",
+     "type": "enterprise",
+     "amount": 2444577
+    },
+    {
+     "code": "101",
+     "name": "101 Disaster Recovery Fund",
+     "type": "special revenue",
+     "amount": 68303743
+    }
+   ],
+   "general_fund_departments": [
+    {
+     "code": "511",
+     "name": "Legislative",
+     "amount": 104060
+    },
+    {
+     "code": "512",
+     "name": "Executive",
+     "amount": 468204
+    },
+    {
+     "code": "513",
+     "name": "Finance",
+     "amount": 390169
+    },
+    {
+     "name": "Professional Services",
+     "amount": 283715
+    },
+    {
+     "code": "519",
+     "name": "Admin",
+     "amount": 1414589
+    },
+    {
+     "code": "539",
+     "name": "Customer Service",
+     "amount": 392359
+    },
+    {
+     "code": "574",
+     "name": "Communications/Marketing",
+     "amount": 363932
+    },
+    {
+     "code": "518",
+     "name": "Facility Maintenance",
+     "amount": 665016
+    },
+    {
+     "code": "515",
+     "name": "Planning",
+     "amount": 253840
+    },
+    {
+     "code": "524",
+     "name": "Building Department",
+     "amount": 592298
+    },
+    {
+     "code": "521",
+     "name": "Police",
+     "amount": 4086243
+    },
+    {
+     "code": "522",
+     "name": "Fire",
+     "amount": 2341029
+    },
+    {
+     "code": "516",
+     "name": "Public Works",
+     "amount": 455752
+    },
+    {
+     "code": "541",
+     "name": "Street",
+     "amount": 1928427
+    },
+    {
+     "code": "549",
+     "name": "Fleet",
+     "amount": 154272
+    },
+    {
+     "code": "571",
+     "name": "Library",
+     "amount": 11500
+    },
+    {
+     "name": "Community Services",
+     "amount": 2332657
+    },
+    {
+     "code": "576",
+     "name": "Animal Shelter",
+     "amount": 424772
+    },
+    {
+     "name": "Community Redevelopment (General Fund share)",
+     "amount": 96472
+    },
+    {
+     "code": "517",
+     "name": "General Fund Debt Service",
+     "amount": 158070
+    },
+    {
+     "code": "581",
+     "name": "Indirect cost recovery (credit)",
+     "amount": -1685669
+    }
+   ]
+  },
   {
    "fiscal_year": 2021,
    "status": "adopted",

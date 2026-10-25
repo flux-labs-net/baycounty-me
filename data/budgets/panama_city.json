@@ -1,0 +1,355 @@
+{
+ "gov": "pc",
+ "name": "City of Panama City",
+ "as_of": "2026-10-25",
+ "notes": [
+  "Adopted budgets by fund group from the BUDGET SUMMARY table in each Annual Budget book (scanned; figures read from the page images and checked against the printed grand total).",
+  "The grand total includes transfers between funds and appropriated reserves.",
+  "FY2025 onward come from the city's newer budget books, which list individual funds, so only the General Fund lines up line for line with these years.",
+  "FY2015, FY2016, FY2023 and FY2024 have the General Fund only, from the original budget in that year's Annual Comprehensive Financial Report (original expenditures plus transfers out, which matches the budget book in FY2017 and FY2022). The budget books for those years are not posted.",
+  "FY2017 is the prior-year column of the FY2018 book."
+ ],
+ "years": [
+  {
+   "fiscal_year": 2015,
+   "status": "adopted",
+   "source_title": "2015 Comprehensive Annual Financial Report (General Fund original budget)",
+   "source_url": "https://www.panamacity.gov/ArchiveCenter/ViewFile/Item/267",
+   "total": null,
+   "general_fund": 39575322,
+   "general_fund_departments": [],
+   "funds": []
+  },
+  {
+   "fiscal_year": 2016,
+   "status": "adopted",
+   "source_title": "2016 Comprehensive Annual Financial Report (General Fund original budget)",
+   "source_url": "https://www.panamacity.gov/ArchiveCenter/ViewFile/Item/305",
+   "total": null,
+   "general_fund": 40810657,
+   "general_fund_departments": [],
+   "funds": []
+  },
+  {
+   "fiscal_year": 2017,
+   "status": "adopted",
+   "source_title": "Annual Budget Fiscal Year 2018 (prior-year column)",
+   "source_url": "https://www.panamacity.gov/ArchiveCenter/ViewFile/Item/326",
+   "total": 92795990,
+   "general_fund": 39669038,
+   "general_fund_departments": [],
+   "funds": [
+    {
+     "name": "General Fund",
+     "type": "general",
+     "amount": 39669038
+    },
+    {
+     "name": "Special Revenue Funds",
+     "type": "special revenue",
+     "amount": 4430018
+    },
+    {
+     "name": "Debt Service Fund",
+     "type": "debt service",
+     "amount": 1870258
+    },
+    {
+     "name": "Capital Projects Fund",
+     "type": "capital",
+     "amount": 2844000
+    },
+    {
+     "name": "Marinas Fund",
+     "type": "enterprise",
+     "amount": 4918978
+    },
+    {
+     "name": "Solid Waste Fund",
+     "type": "enterprise",
+     "amount": 8779953
+    },
+    {
+     "name": "Utilities Fund",
+     "type": "enterprise (utilities)",
+     "amount": 22344770
+    },
+    {
+     "name": "Internal Service Funds",
+     "type": "internal service",
+     "amount": 7938975
+    }
+   ]
+  },
+  {
+   "fiscal_year": 2018,
+   "status": "adopted",
+   "source_title": "Annual Budget Fiscal Year 2018, adopted Sept 25, 2017",
+   "source_url": "https://www.panamacity.gov/ArchiveCenter/ViewFile/Item/326",
+   "total": 100117973,
+   "general_fund": 41385849,
+   "general_fund_departments": [],
+   "funds": [
+    {
+     "name": "General Fund",
+     "type": "general",
+     "amount": 41385849
+    },
+    {
+     "name": "Special Revenue Funds",
+     "type": "special revenue",
+     "amount": 8462214
+    },
+    {
+     "name": "Debt Service Fund",
+     "type": "debt service",
+     "amount": 2120553
+    },
+    {
+     "name": "Capital Projects Fund",
+     "type": "capital",
+     "amount": 1334500
+    },
+    {
+     "name": "Marinas Fund",
+     "type": "enterprise",
+     "amount": 3294141
+    },
+    {
+     "name": "Solid Waste Fund",
+     "type": "enterprise",
+     "amount": 8894582
+    },
+    {
+     "name": "Utilities Fund",
+     "type": "enterprise (utilities)",
+     "amount": 25008355
+    },
+    {
+     "name": "Internal Service Funds",
+     "type": "internal service",
+     "amount": 9617779
+    }
+   ]
+  },
+  {
+   "fiscal_year": 2019,
+   "status": "adopted",
+   "source_title": "Annual Budget Fiscal Year 2019, adopted Sept 25, 2018",
+   "source_url": "https://www.panamacity.gov/ArchiveCenter/ViewFile/Item/379",
+   "total": 108690082,
+   "general_fund": 44872653,
+   "general_fund_departments": [],
+   "funds": [
+    {
+     "name": "General Fund",
+     "type": "general",
+     "amount": 44872653
+    },
+    {
+     "name": "Special Revenue Funds",
+     "type": "special revenue",
+     "amount": 7786311
+    },
+    {
+     "name": "Debt Service Fund",
+     "type": "debt service",
+     "amount": 2969654
+    },
+    {
+     "name": "Capital Projects Fund",
+     "type": "capital",
+     "amount": 1849000
+    },
+    {
+     "name": "Marinas Fund",
+     "type": "enterprise",
+     "amount": 3856812
+    },
+    {
+     "name": "Solid Waste Fund",
+     "type": "enterprise",
+     "amount": 8226864
+    },
+    {
+     "name": "Utilities Fund",
+     "type": "enterprise (utilities)",
+     "amount": 29146778
+    },
+    {
+     "name": "Internal Service Funds",
+     "type": "internal service",
+     "amount": 9982010
+    }
+   ]
+  },
+  {
+   "fiscal_year": 2020,
+   "status": "adopted",
+   "source_title": "Annual Budget Fiscal Year 2020, adopted Sept 23, 2019",
+   "source_url": "https://www.panamacity.gov/ArchiveCenter/ViewFile/Item/417",
+   "total": 118250732,
+   "general_fund": 45808555,
+   "general_fund_departments": [],
+   "funds": [
+    {
+     "name": "General Fund",
+     "type": "general",
+     "amount": 45808555
+    },
+    {
+     "name": "Special Revenue Funds",
+     "type": "special revenue",
+     "amount": 13466886
+    },
+    {
+     "name": "Debt Service Fund",
+     "type": "debt service",
+     "amount": 6998628
+    },
+    {
+     "name": "Capital Projects Fund",
+     "type": "capital",
+     "amount": 1000000
+    },
+    {
+     "name": "Marinas Fund",
+     "type": "enterprise",
+     "amount": 1433656
+    },
+    {
+     "name": "Solid Waste Fund",
+     "type": "enterprise",
+     "amount": 8631149
+    },
+    {
+     "name": "Utilities Fund",
+     "type": "enterprise (utilities)",
+     "amount": 31482041
+    },
+    {
+     "name": "Internal Service Funds",
+     "type": "internal service",
+     "amount": 9429817
+    }
+   ]
+  },
+  {
+   "fiscal_year": 2021,
+   "status": "adopted",
+   "source_title": "Annual Budget Fiscal Year 2021, adopted Sept 21, 2020",
+   "source_url": "https://www.panamacity.gov/ArchiveCenter/ViewFile/Item/1449",
+   "total": 123114028,
+   "general_fund": 47647856,
+   "general_fund_departments": [],
+   "funds": [
+    {
+     "name": "General Fund",
+     "type": "general",
+     "amount": 47647856
+    },
+    {
+     "name": "Special Revenue Funds",
+     "type": "special revenue",
+     "amount": 26393661
+    },
+    {
+     "name": "Debt Service Fund",
+     "type": "debt service",
+     "amount": 6801056
+    },
+    {
+     "name": "Marinas Fund",
+     "type": "enterprise",
+     "amount": 1597778
+    },
+    {
+     "name": "Solid Waste Fund",
+     "type": "enterprise",
+     "amount": 9391093
+    },
+    {
+     "name": "Utilities Fund",
+     "type": "enterprise (utilities)",
+     "amount": 21566421
+    },
+    {
+     "name": "Internal Service Funds",
+     "type": "internal service",
+     "amount": 9716163
+    }
+   ]
+  },
+  {
+   "fiscal_year": 2022,
+   "status": "adopted",
+   "source_title": "Annual Budget Fiscal Year 2022, adopted Sept 27, 2021",
+   "source_url": "https://www.panamacity.gov/ArchiveCenter/ViewFile/Item/1471",
+   "total": 132053778,
+   "general_fund": 54980116,
+   "general_fund_departments": [],
+   "funds": [
+    {
+     "name": "General Fund",
+     "type": "general",
+     "amount": 54980116
+    },
+    {
+     "name": "Special Revenue Funds",
+     "type": "special revenue",
+     "amount": 23633876
+    },
+    {
+     "name": "Debt Service Fund",
+     "type": "debt service",
+     "amount": 5904296
+    },
+    {
+     "name": "Capital Projects Fund",
+     "type": "capital",
+     "amount": 1454484
+    },
+    {
+     "name": "Marinas Fund",
+     "type": "enterprise",
+     "amount": 1568676
+    },
+    {
+     "name": "Solid Waste Fund",
+     "type": "enterprise",
+     "amount": 9451446
+    },
+    {
+     "name": "Utilities Fund",
+     "type": "enterprise (utilities)",
+     "amount": 25652443
+    },
+    {
+     "name": "Internal Service Funds",
+     "type": "internal service",
+     "amount": 9408441
+    }
+   ]
+  },
+  {
+   "fiscal_year": 2023,
+   "status": "adopted",
+   "source_title": "2023 Annual Comprehensive Financial Report (General Fund original budget)",
+   "source_url": "https://www.panamacity.gov/ArchiveCenter/ViewFile/Item/1536",
+   "total": null,
+   "general_fund": 60586058,
+   "general_fund_departments": [],
+   "funds": []
+  },
+  {
+   "fiscal_year": 2024,
+   "status": "adopted",
+   "source_title": "2024 Annual Comprehensive Financial Report (General Fund original budget)",
+   "source_url": "https://www.panamacity.gov/ArchiveCenter/ViewFile/Item/1550",
+   "total": null,
+   "general_fund": 63498080,
+   "general_fund_departments": [],
+   "funds": []
+  }
+ ]
+}

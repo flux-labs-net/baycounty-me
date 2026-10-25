@@ -1,0 +1,61 @@
+{
+ "gov": "schools",
+ "name": "Bay District Schools",
+ "as_of": "2026-10-25",
+ "notes": [
+  "General Fund only: the original (adopted) budget from the General Fund budget-and-actual schedule in each year's audited financial report, filed with the Florida Auditor General.",
+  "The Auditor General keeps the last five years of reports; earlier years need the reports from the government itself."
+ ],
+ "years": [
+  {
+   "fiscal_year": 2019,
+   "status": "adopted",
+   "source_title": "FY2019 annual financial audit report, General Fund budget and actual schedule (original budget)",
+   "source_url": "https://flauditor.gov/pages/dsb_efile%20rpts/2019%20bay%20county%20dsb.pdf",
+   "total": null,
+   "general_fund": 243351498,
+   "funds": [],
+   "general_fund_departments": []
+  },
+  {
+   "fiscal_year": 2021,
+   "status": "adopted",
+   "source_title": "FY2021 annual financial audit report, General Fund budget and actual schedule (original budget)",
+   "source_url": "https://flauditor.gov/pages/dsb_efile%20rpts/2021%20bay%20county%20district%20school%20board.pdf",
+   "total": null,
+   "general_fund": 295347837,
+   "funds": [],
+   "general_fund_departments": []
+  },
+  {
+   "fiscal_year": 2022,
+   "status": "adopted",
+   "source_title": "FY2022 annual financial audit report, General Fund budget and actual schedule (original budget)",
+   "source_url": "https://flauditor.gov/pages/dsb_efile%20rpts/2022%20bay%20county%20district%20school%20board.pdf",
+   "total": null,
+   "general_fund": 301691505,
+   "funds": [],
+   "general_fund_departments": []
+  },
+  {
+   "fiscal_year": 2024,
+   "status": "adopted",
+   "source_title": "FY2024 annual financial audit report, General Fund budget and actual schedule (original budget)",
+   "source_url": "https://flauditor.gov/pages/dsb_efile%20rpts/2024%20bay%20county%20district%20school%20board.pdf",
+   "total": null,
+   "general_fund": 332446672,
+   "funds": [],
+   "general_fund_departments": []
+  },
+  {
+   "fiscal_year": 2025,
+   "status": "adopted",
+   "source_title": "FY2025 annual financial audit report, General Fund budget and actual schedule (original budget)",
+   "source_url": "https://flauditor.gov/pages/dsb_efile%20rpts/2025%20bay%20county%20district%20school%20board.pdf",
+   "total": null,
+   "general_fund": 348925303,
+   "funds": [],
+   "general_fund_departments": []
+  }
+ ]
+}

@@ -34,7 +34,7 @@
   $('#signout').addEventListener('click', async () => { await api('logout', {method: 'POST'}).catch(() => {}); location.href = '/admin'; });
 
   // ---------- tabs ----------
-  const loaders = {keys: loadKeys, analytics: loadStats, logs: () => loadLogs(true), settings: loadSettings, ingestion: loadIngestion, agendas: loadAgendas, sent: loadSent, emails: loadEmails, compose: () => loadCompose(), correspondence: loadCorr, owners: () => { loadOwners(); loadLimits(); }, ties: loadTies, boards: loadBoards};
+  const loaders = {keys: loadKeys, analytics: loadStats, logs: () => loadLogs(true), settings: loadSettings, ingestion: loadIngestion, agendas: loadAgendas, sent: loadSent, emails: loadEmails, compose: () => loadCompose(), correspondence: loadCorr, records: loadRR, owners: () => { loadOwners(); loadLimits(); }, ties: loadTies, boards: loadBoards};
   function tab(name) {
     document.querySelectorAll('[role=tab][data-tab]').forEach(b => b.setAttribute('aria-selected', String(b.dataset.tab === name)));
     document.querySelectorAll('[role=tabpanel]').forEach(p => { p.hidden = p.id !== 'tab-' + name; });
@@ -691,6 +691,71 @@
       $('#co-goto').addEventListener('click', () => tab('correspondence'));
       coPicked.clear(); $('#co-subj').value = ''; $('#co-body').value = ''; renderCompose();
     } catch (e) { $('#co-confirm').close(); $('#co-msg').textContent = e.message; }
+    btn.disabled = false; btn.textContent = 'Send now';
+  });
+
+  // ---------- records requests ----------
+  let RR = null, rrOpen = null;
+  const rrLabel = {draft: 'Draft', sent: 'Sent', received: 'Records received', closed: 'Closed'};
+  async function loadRR() {
+    try { RR = await api('rr_list'); RR.requests.forEach(r => { r.id = Number(r.id); }); }
+    catch (e) { $('#rr-list').innerHTML = `<p class="empty">${esc(e.message)}</p>`; return; }
+    renderRR();
+  }
+  function renderRR() {
+    const rs = RR.requests, n = s => rs.filter(r => r.status === s).length;
+    $('#rr-tiles').innerHTML = [['Drafts', n('draft')], ['Sent', n('sent')], ['Records received', n('received')], ['Need an address', rs.filter(r => r.status === 'draft' && !r.recipient_email).length]]
+      .map(([l, v]) => `<div class="tile"><b>${fmt(v)}</b><span>${l}</span></div>`).join('');
+    $('#rr-list').innerHTML = rs.map(r => `<button type="button" class="co-p${r.id === rrOpen ? ' on' : ''}" data-rr="${r.id}" style="width:100%;text-align:left;background:${r.id === rrOpen ? 'var(--sunken)' : 'none'};border-left:0;border-right:0;border-top:0;cursor:pointer;font:inherit;color:inherit">
+        <span></span><span class="nm">${esc(r.government)}</span><span class="pill ${esc(r.status)}">${esc(rrLabel[r.status] || r.status)}</span>
+        <span class="sub">${esc(r.gaps.length)} year${r.gaps.length === 1 ? '' : 's'} · ${r.recipient_email ? esc(r.recipient_email) : '<span style="color:var(--warn)">No address yet</span>'}</span></button>`).join('') || '<p class="empty">No requests.</p>';
+    if (rrOpen) showRR(rrOpen);
+  }
+  $('#rr-list').addEventListener('click', e => { const b = e.target.closest('[data-rr]'); if (b) { rrOpen = Number(b.dataset.rr); renderRR(); } });
+  function showRR(id) {
+    const r = RR.requests.find(x => x.id === id); if (!r) return;
+    const draft = r.status === 'draft', box = $('#rr-detail');
+    box.innerHTML = `<div class="row" style="gap:8px;flex-wrap:wrap"><h2 class="h2 grow" style="margin:0">${esc(r.government)}</h2>
+        <select class="sel" id="rr-status" aria-label="Status" style="width:auto">${Object.entries(rrLabel).map(([k, v]) => `<option value="${k}"${k === r.status ? ' selected' : ''}>${v}</option>`).join('')}</select></div>
+      ${r.notes ? `<div class="banner"><div class="small">${esc(r.notes)}</div></div>` : ''}
+      <div><div class="small muted" style="margin-bottom:4px">Missing years</div><div class="rr-gaps">${r.gaps.map(g => `<span title="${esc(g.need)}">FY${esc(g.fiscal_year)}</span>`).join('')}</div></div>
+      <div class="row" style="gap:10px;flex-wrap:wrap">
+        <label class="f grow" style="min-width:200px">To (name)<input id="rr-name" maxlength="200" value="${esc(r.recipient_name || '')}"${draft ? '' : ' disabled'}></label>
+        <label class="f grow" style="min-width:200px">Email<input id="rr-email" type="email" value="${esc(r.recipient_email || '')}" placeholder="Add the records contact’s address"${draft ? '' : ' disabled'}></label>
+      </div>
+      ${r.contact_url ? `<p class="small muted" style="margin:-4px 0 0">Contact source: <a href="${esc(r.contact_url)}" target="_blank" rel="noopener">${esc(r.contact_url)}</a></p>` : ''}
+      <label class="f">Subject<input id="rr-subj" maxlength="200" value="${esc(r.subject)}"${draft ? '' : ' disabled'}></label>
+      <label class="f">Message<textarea id="rr-body" style="min-height:320px"${draft ? '' : ' disabled'}>${esc(r.body)}</textarea></label>
+      <p class="small muted" style="margin:-4px 0 0">The email opens with “Dear ${esc(r.recipient_name && r.recipient_name.includes(',') ? r.recipient_name.split(',')[0] : 'Records Custodian')},” and ends with a reference number so the reply can be matched.</p>
+      <label class="f">Notes (admin only)<textarea id="rr-notes" maxlength="2000">${esc(r.notes || '')}</textarea></label>
+      <div class="row">${draft ? '<button class="btn" type="button" id="rr-save">Save draft</button><button class="btn" type="button" id="rr-test">Send a test to me</button><span class="grow"></span><button class="btn primary" type="button" id="rr-send">Send</button>'
+        : `<button class="btn" type="button" id="rr-save">Save notes</button><span class="grow"></span>${r.thread_id ? '<button class="btn" type="button" id="rr-thread">Open in Correspondence</button>' : ''}`}</div>
+      <p class="small" id="rr-msg" role="status" style="margin:0">${r.sent_at ? `Sent ${esc(stamp(r.sent_at))}${r.sent_by ? ' by ' + esc(r.sent_by) : ''}.` : ''}</p>`;
+    const fields = () => draft ? {recipient_name: $('#rr-name').value, recipient_email: $('#rr-email').value, subject: $('#rr-subj').value, body: $('#rr-body').value, notes: $('#rr-notes').value} : {notes: $('#rr-notes').value};
+    const save = async () => { const x = await api('rr_save', {method: 'POST', body: {id, ...fields()}}); Object.assign(r, x.request, {id}); return r; };
+    $('#rr-save').addEventListener('click', async () => { try { await save(); renderRR(); $('#rr-msg').textContent = 'Saved.'; } catch (e) { $('#rr-msg').textContent = e.message; } });
+    $('#rr-status').addEventListener('change', async e => {
+      try { const x = await api('rr_save', {method: 'POST', body: {id, status: e.target.value}}); Object.assign(r, x.request, {id}); renderRR(); }
+      catch (err) { e.target.value = r.status; $('#rr-msg').textContent = err.message; }
+    });
+    const th = $('#rr-thread'); if (th) th.addEventListener('click', () => { tab('correspondence'); showThread(Number(r.thread_id)); });
+    if (!draft) return;
+    $('#rr-test').addEventListener('click', async () => {
+      $('#rr-msg').textContent = 'Saving and sending a test…';
+      try { await save(); const x = await api('rr_send', {method: 'POST', body: {id, test: true}}); $('#rr-msg').textContent = `Test sent to ${x.to}. Its subject starts with [Test]; the request is still a draft.`; }
+      catch (e) { $('#rr-msg').textContent = e.message; }
+    });
+    $('#rr-send').addEventListener('click', async () => {
+      try { await save(); } catch (e) { $('#rr-msg').textContent = e.message; return; }
+      if (!r.recipient_email) { $('#rr-msg').textContent = 'Add the recipient’s email address first.'; return; }
+      $('#rr-confirm-text').innerHTML = `<b>${esc(r.subject)}</b> goes to ${esc(r.recipient_name || '')} at <b>${esc(r.recipient_email)}</b>. This can’t be unsent.`;
+      $('#rr-confirm').showModal();
+    });
+  }
+  $('#rr-confirm-go').addEventListener('click', async () => {
+    const btn = $('#rr-confirm-go'); btn.disabled = true; btn.textContent = 'Sending…';
+    try { await api('rr_send', {method: 'POST', body: {id: rrOpen}}); $('#rr-confirm').close(); await loadRR(); $('#rr-msg').textContent = 'Sent. The reply will show up under Correspondence.'; }
+    catch (e) { $('#rr-confirm').close(); $('#rr-msg').textContent = e.message; }
     btn.disabled = false; btn.textContent = 'Send now';
   });
 

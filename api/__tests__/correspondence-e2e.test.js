@@ -34,6 +34,7 @@ test.before(async () => {
   q = async (t, p = []) => (await pool.query(t, p)).rows;
   await q('drop schema if exists corr cascade');
   await pool.query(fs.readFileSync(path.join(__dirname, '../../db/migrations/0020_correspondence.sql'), 'utf8'));
+  await pool.query(fs.readFileSync(path.join(__dirname, '../../db/migrations/0046_records_requests.sql'), 'utf8'));
   await q(`insert into corr.contacts (government, seat, name, email, origin) values
     ('City of Lynn Haven', 'Mayor', 'Pat Mayor', 'mayor@lh.test', 'manual'),
     ('City of Lynn Haven', 'Commissioner Seat 1', 'Chris One (vice mayor)', 'one@lh.test', 'manual'),
@@ -129,4 +130,45 @@ test('contact edits validate addresses and turning someone off keeps them out of
   await assert.rejects(C.saveContact({id: cw, email: 'not an email'}), /doesn’t look like/);
   await C.saveContact({id: cw, active: false});
   await assert.rejects(C.send({subject: 'Hi', body: 'A question about the budget.', ids: [cw]}, 'jeremy@fluxlabs.net'), /None of the selected/);
+});
+
+// Records requests (admin "Records requests" tab, migration 0046): drafts from data/civic/records_requests.json.
+test('records request drafts seed from the file, keep edits, and send only on request', opts, async () => {
+  const R = require('../_records_requests');
+  const {requests} = await R.list();
+  const file = JSON.parse(fs.readFileSync(path.join(__dirname, '../../data/civic/records_requests.json'), 'utf8')).requests;
+  assert.equal(requests.length, file.length);
+  assert.ok(requests.every(r => r.status === 'draft' && !r.thread_id));
+  assert.equal((await R.seed()).updated, 0);
+
+  const pcb = requests.find(r => r.government_key === 'pcb');
+  const noAddr = await R.send({id: pcb.id}, 'jeremy@fluxlabs.net').catch(e => e);
+  assert.equal(noAddr.message, 'Add the recipient’s email address first.');
+  const bad = await R.save({id: pcb.id, recipient_email: 'not an address'}).catch(e => e);
+  assert.match(bad.message, /email address/);
+  await R.save({id: pcb.id, recipient_email: 'clerk@pcb.test', body: pcb.body + '\n\nP.S. Links are fine.'});
+  await R.seed();
+  const [kept] = await q('select * from corr.records_requests where id = $1', [pcb.id]);
+  assert.equal(kept.origin, 'manual');
+  assert.match(kept.body, /P\.S\. Links are fine\./);
+
+  const before = sent.length;
+  const t = await R.send({id: pcb.id, test: true}, 'jeremy@fluxlabs.net');
+  assert.ok(t.test);
+  assert.deepEqual(sent[before].to, ['jeremy@fluxlabs.net']);
+  assert.equal((await q('select status from corr.records_requests where id = $1', [pcb.id]))[0].status, 'draft');
+
+  const out = await R.send({id: pcb.id}, 'jeremy@fluxlabs.net');
+  const mail = sent[sent.length - 1];
+  assert.deepEqual(mail.to, ['clerk@pcb.test']);
+  assert.ok(!mail.cc && !mail.bcc);
+  assert.match(mail.text, /^Dear Lynne Fasone,/);
+  assert.match(mail.text, /Chapter 119/);
+  assert.equal(out.request.status, 'sent');
+  const [th] = await q('select * from corr.threads where id = $1', [out.thread_id]);
+  assert.equal(th.official_seat, 'Records request');
+  assert.equal(th.email, 'clerk@pcb.test');
+  const again = await R.send({id: pcb.id}, 'jeremy@fluxlabs.net').catch(e => e);
+  assert.equal(again.message, 'This request was already sent.');
+  assert.equal(R.greetName('Public Records, City Clerk’s Office'), 'Records Custodian');
 });
