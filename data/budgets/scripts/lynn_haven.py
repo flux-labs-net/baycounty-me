@@ -93,10 +93,31 @@ def parse(text, fy):
         'general_fund_departments': [{'code': c, 'name': DEPTS[c], 'amount': round(a)} for c, a in depts.items() if round(a)],
     }
 
+# FY2020's book (document 720) has no "by funding source" table, so its figures are copied from the City-Wide Budget
+# Summary (pages 6 to 8): fund totals from the "Total Expenditures" row and General Fund departments from the General
+# Fund column. The book prints the Disaster Recovery Fund beside the $38,923,414 city total; it is added here because
+# FY2021 onward count it in the total. Checked by fund and department sums in main().
+FY2020_FUNDS = {'001': 15231707, '701': 505174, '301': 2461272, '401': 8437369, '402': 7948751, '404': 1894564, '405': 2444577, '101': 68303743}
+FY2020_DEPTS = [('511', 'City Commission', 104060), ('512', 'City Manager', 468204), ('513', 'Finance', 390169), (None, 'Professional Services', 283715),
+                ('519', 'Administrative Support', 1414589), ('539', 'Customer Service', 392359), ('574', 'Communications & Marketing', 363932),
+                ('518', 'Facility Maintenance', 665016), ('515', 'Comprehensive Planning', 253840), ('524', 'Building Department', 592298),
+                ('521', 'Law Enforcement', 4086243), ('522', 'Fire', 2341029), ('516', 'Public Works Administration', 455752), ('541', 'Street', 1928427),
+                ('549', 'Fleet Maintenance', 154272), ('571', 'Library', 11500), (None, 'Community Services', 2332657), ('576', 'Animal Shelter', 424772),
+                (None, 'Community Redevelopment (General Fund share)', 96472), ('517', 'Debt Service', 158070), ('581', 'Indirect Allocation Transfers', -1685669)]
+
+
+def fy2020():
+    funds = [{'code': c, 'name': f'{c} {FUNDS[c][0]}', 'type': FUNDS[c][1], 'amount': a} for c, a in FY2020_FUNDS.items()]
+    depts = [{'code': c, 'name': DEPTS[c] if c else n, 'amount': a} if c else {'name': n, 'amount': a} for c, n, a in FY2020_DEPTS]
+    assert sum(FY2020_FUNDS.values()) - FY2020_FUNDS['101'] == 38923414 and sum(d['amount'] for d in depts) == FY2020_FUNDS['001']
+    return {'fiscal_year': 2020, 'status': 'adopted', 'source_title': 'City of Lynn Haven 2020 Annual Budget (Fiscal Year 2019-2020, approved)',
+            'source_url': BASE + '720', 'total': sum(FY2020_FUNDS.values()), 'general_fund': FY2020_FUNDS['001'], 'funds': funds,
+            'general_fund_departments': depts}
+
 
 def main(folder):
     os.makedirs(folder, exist_ok=True)
-    years = []
+    years = [fy2020()]
     for fy, (doc, _) in sorted(DOCS.items()):
         pdf = os.path.join(folder, f'lh_fy{fy}.pdf')
         if not os.path.exists(pdf):
@@ -107,11 +128,12 @@ def main(folder):
     json.dump({
         'gov': 'lh', 'name': 'City of Lynn Haven', 'as_of': '2026-10-25',
         'notes': [
-            'Each year is the Final Approved (adopted) budget, from the "TOTAL EXPENDITURES by funding source" table. FY2025 is the original adopted budget; '
+            'Each year is the Final Approved (adopted) budget, from the "TOTAL EXPENDITURES by funding source" table (FY2020: the City-Wide Budget Summary). FY2025 is the original adopted budget; '
             'the city amended it to $64,870,778 at mid-year (April 2025).',
             'Fund amounts add up to the printed grand total and departments to the General Fund in every year (within a few dollars of rounding).',
             'Department numbers stay the same across years; names are the FY2026 document\'s, so "PD" is Police and "Bldg. Dept" is Building Department.',
             'Indirect cost recovery is a credit: the General Fund charges overhead to the utility funds, which lowers the General Fund total.',
+            'FY2020\'s book prints the Disaster Recovery Fund ($68.3M) beside a $38.9M city total; it is counted here so FY2020 matches later years.',
             'Totals include transfers between funds, so some money is counted twice. FY2021 to FY2023 include large Hurricane Michael recovery budgets in the Disaster Recovery Fund.',
         ],
         'years': years,
