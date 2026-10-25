@@ -65,38 +65,41 @@
 </div>
 <main id="main">
 <style>
-.np-seg{display:inline-flex;width:max-content;border:1px solid var(--line);border-radius:999px;padding:3px;margin:4px 0 16px}
+.np-seg{display:inline-flex;width:max-content;border-radius:999px;padding:4px;margin:4px 0 16px;background:var(--surface);box-shadow:var(--ui-shadow)}
 .np-seg button{all:unset;cursor:pointer;font:500 .9rem var(--f-body);padding:6px 18px;border-radius:999px;color:var(--muted)}
 .np-seg button[aria-pressed=true]{background:var(--navy);color:var(--bg)}
 .np-seg button:focus-visible,.np-card:focus-visible,.np-tabs button:focus-visible,.np-row:focus-visible{outline:2px solid var(--navy);outline-offset:2px}
-.np-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:0 0 20px}
-.np-card{all:unset;box-sizing:border-box;cursor:pointer;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px}
-.np-card[aria-pressed=true]{border-color:var(--navy);box-shadow:0 0 0 1px var(--navy) inset}
-.np-card b{display:block;font:700 1.6rem var(--f-display);font-variant-numeric:tabular-nums}
+.np-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:0 0 22px}
+.np-card{all:unset;box-sizing:border-box;display:flex;flex-direction:column;align-items:flex-start;cursor:pointer;background:var(--surface);border-radius:20px;padding:16px 18px;box-shadow:var(--ui-shadow);transition:box-shadow .15s ease-out,scale .15s ease-out}
+.np-card:hover,.np-card[aria-pressed=true]{box-shadow:var(--ui-ring)}
+.np-card:active{scale:.98}
+.np-card .ui-ti{margin-bottom:10px}
+.np-card b{display:block;font:600 1.85rem var(--f-display);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
 .np-card strong{display:block;font-weight:600;margin:2px 0}
-.np-card span{color:var(--muted);font-size:.85rem}
+.np-card > span:last-child{color:var(--muted);font-size:.85rem;line-height:1.45}
 .np-lay{display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:24px;align-items:start}
-.np-q{width:100%;box-sizing:border-box;min-height:44px;border:1px solid var(--line);border-radius:10px;padding:0 12px;background:var(--bg);color:var(--ink);font:inherit}
+.np-q{width:100%;box-sizing:border-box;min-height:48px;border:0;border-radius:14px;padding:0 16px;background:var(--surface);box-shadow:var(--ui-shadow);color:var(--ink);font:inherit}
+.np-q:focus{outline:none;box-shadow:var(--ui-ring)}
 .np-filters{margin:8px 0 0;font-size:.88rem}
 .np-filters summary{cursor:pointer;color:var(--muted)}
 .np-filters .filters-row{margin-top:8px}
 .np-tabs{display:flex;gap:20px;border-bottom:1px solid var(--line);margin:12px 0 0;overflow-x:auto}
 .np-tabs button{all:unset;cursor:pointer;padding:10px 0;color:var(--muted);font-size:.92rem;white-space:nowrap;border-bottom:2px solid transparent}
 .np-tabs button[aria-selected=true]{color:var(--ink);font-weight:600;border-bottom-color:var(--navy)}
-.np-row{display:grid;grid-template-columns:1fr auto;gap:4px 16px;padding:14px 6px;border-bottom:1px solid var(--line);cursor:pointer}
+.np-row{display:grid;grid-template-columns:1fr auto;gap:4px 16px;padding:14px 12px;border-bottom:1px solid var(--line);cursor:pointer;border-radius:12px}
 .np-row:hover,.np-row.sel{background:color-mix(in srgb,var(--navy) 5%,transparent)}
 .np-row h3{font:600 1rem var(--f-display);margin:0}
 .np-row .m,.np-panel .m{color:var(--muted);font-size:.84rem}
 .np-row .v{text-align:right;font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
 .np-chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
-.np-chip{font-size:.78rem;border-radius:999px;padding:2px 9px;background:color-mix(in srgb,var(--navy) 9%,transparent);color:var(--navy)}
-.np-chip.hot{background:color-mix(in srgb,var(--salmon) 14%,transparent);color:var(--salmon)}
+.np-chip{font-size:.78rem;border-radius:999px;padding:3px 10px;background:var(--tint-teal);color:var(--teal)}
+.np-chip.hot{background:var(--tint-salmon);color:var(--accent-ink)}
 .np-more{margin:14px 0 0}
-.np-panel{position:sticky;top:80px;max-height:calc(100vh - 96px);overflow:auto;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px}
+.np-panel{position:sticky;top:80px;max-height:calc(100vh - 96px);overflow:auto;background:var(--surface);border-radius:20px;box-shadow:var(--ui-shadow);padding:20px}
 .np-panel h2{font:700 1.15rem var(--f-display);margin:0 0 2px}
 .np-panel .np-x{display:none}
 .np-kv{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
-.np-kv div{border:1px solid var(--line);border-radius:10px;padding:8px}
+.np-kv div{border-radius:12px;padding:10px;background:var(--sunken)}
 .np-kv b{display:block;font:600 1rem var(--f-display);font-variant-numeric:tabular-nums}
 .np-kv span{font-size:.75rem;color:var(--muted)}
 .np-panel .np-tabs{gap:16px;margin:6px 0 4px}
@@ -121,10 +124,10 @@
   body.np-lock{overflow:hidden}
 }
 </style>
-<div class="page tax">
-  <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Connections · Nonprofits</span><h1>Bay County nonprofits</h1>
+<div class="page tax ui">
+  <header class="tx-top ui-hero"><div class="ui-id"><span class="ui-badge t-blue"><span class="ico i-heart" aria-hidden="true"></span></span><div class="ui-hd"><div class="tx-brand"><span class="eyebrow ui-kick k-blue"><span class="ico i-users" aria-hidden="true"></span>People</span><h1>Bay County nonprofits</h1>
     <p class="lede" id="npLede">Every local nonprofit, starting with the ones tied to public money and campaigns. Search for any one, or tap a card.</p></div>
-    <div class="stamp"><a class="pill" href="/connections">Network</a><a class="pill" href="/connections/shared-owners">Shared owners</a></div></header>
+    <div class="ui-tags"><a class="ui-tag" href="/connections"><span class="ico i-network" aria-hidden="true"></span>Network</a><a class="ui-tag" href="/connections/shared-owners"><span class="ico i-network" aria-hidden="true"></span>Shared owners</a></div></div></div></header>
   <div class="np-seg" role="group" aria-label="View"><button type="button" id="npVOrg" aria-pressed="true">Nonprofits</button><button type="button" id="npVPpl" aria-pressed="false">People</button></div>
   <div class="np-cards" id="npCards" aria-live="polite"></div>
   <div class="np-lay"><div>
@@ -139,7 +142,7 @@
     <p class="np-more"><button type="button" class="pill" id="npMore" hidden>Show more</button></p>
   </div>
   <aside class="np-panel" id="npPanel" aria-label="Details"><p class="muted small">Pick a nonprofit or a person to see its connections, board, money and filings.</p></aside></div>
-  <section class="tx-sec method"><div class="sec-hd"><h2>Sources and method</h2></div><ul class="plain">
+  <section class="tx-sec method"><div class="sec-hd"><span class="ui-ti t-teal"><span class="ico i-info" aria-hidden="true"></span></span><h2>Sources and method</h2></div><ul class="plain">
     <li><b>Which organizations.</b> Every organization the IRS recognizes as tax-exempt with an address in Bay County (the IRS Exempt Organizations Business Master File), plus active Florida nonprofit corporations (Sunbiz) whose principal address is in the county. IRS and state records are joined by the EIN the corporation gives the state, then by exact name.</li>
     <li><b>Money.</b> Revenue, expenses and assets come from the latest 990, 990-EZ or 990-PF the organization e-filed (2019 on). Small organizations file a 990-N postcard with no figures, and churches don't have to file. Government payment records are the site's contracts, check registers, tourism agency payments and CRA ledger, matched to the nonprofit by name. Grants are from Schedule I of local nonprofits' returns.</li>
     <li><b>Florida charity registrations.</b> Charities that ask Floridians for donations must register each year with the Florida Department of Agriculture and Consumer Services. The registrations with a Bay County address come from its <a href="https://csapp.fdacs.gov/CSPublicApp/CheckACharity/CheckACharity.aspx" target="_blank" rel="noopener">Check-A-Charity</a> database: status, expiration, the revenue and the program, fundraising and management spending the charity reported, and its professional fundraising firms. Officers, directors and the tax ID (FEIN) come from the registration application each charity uploads; people the application marks as removed or exempt from public records are left out, and scanned applications without readable text are not read yet. Registrations are joined to the IRS and state records by FEIN, then by exact name; those that match neither are listed on their own. Churches and some small charities are exempt from registering, so a missing registration is not by itself a problem.</li>

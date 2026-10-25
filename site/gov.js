@@ -71,7 +71,7 @@ function fill(id, {sub, kpis, body, link, empty}) {
   $('[data-gx-link]', sec).innerHTML = link || '';
   $$('.gx-more', sec).forEach(b => b.onclick = () => { $$('tr[data-more]', sec).forEach(t => t.hidden = false); b.remove(); });
 }
-const gone = id => { const s = document.getElementById(id); if (s) s.remove(); $$(`.gx-tiles a[href="#${id}"], .gx-mini a[href="#${id}"]`).forEach(a => a.remove()); };
+const gone = id => { const s = document.getElementById(id); if (s) s.remove(); $$(`.ui-tiles a[href="#${id}"], .ui-mini a[href="#${id}"]`).forEach(a => a.remove()); };
 
 /* ---------- renderers ---------- */
 function contracts() {
@@ -158,9 +158,9 @@ function savingsSec() {
 // icon and tint per card label: the same table as KPI_ICON in site/gov_pages.py
 const KPI_ICON = {'Residents': ['users', 'teal'], 'Budget': ['wallet', 'blue'], 'Spent (audited)': ['wallet', 'blue'], 'Property tax rate': ['percent', 'amber'],
   'School tax rate': ['percent', 'amber'], 'Debt': ['dollar', 'salmon'], 'Employees': ['briefcase', 'blue'], 'Typical utility bill': ['drop', 'teal']};
-const ico = (n, t) => { const i = `<span class="ico i-${n}" aria-hidden="true"></span>`; return t ? `<span class="gv-ti t-${t}">${i}</span>` : i; };
+const ico = (n, t) => { const i = `<span class="ico i-${n}" aria-hidden="true"></span>`; return t ? `<span class="ui-ti t-${t}">${i}</span>` : i; };
 const topKpi = (l, v, s = '', no = false) => { const [n, t] = KPI_ICON[l] || ['grid', 'blue'];
-  return `<div class="kpi gv-k${no ? ' kpi-none' : ''}"><span class="kh">${ico(n, t)}<span class="eyebrow">${l}</span></span><span class="v">${v}</span><span class="s">${s}</span></div>`; };
+  return `<div class="kpi ui-k${no ? ' kpi-none' : ''}"><span class="kh">${ico(n, t)}<span class="eyebrow">${l}</span></span><span class="v">${v}</span><span class="s">${s}</span></div>`; };
 const topBox = $('#gxTop'), keep = topBox ? $$('[data-static]', topBox).map(x => x.outerHTML).join('') : '';
 const curFY = (() => { const d = new Date(), st = G.fyStart || 10; return d.getMonth() + 1 >= st ? d.getFullYear() + 1 : d.getFullYear(); })();
 function topCards() {
@@ -206,7 +206,7 @@ function glance() {
   $('#gxGlanceH').textContent = ysel.value === 'all' ? 'Across every year on record' : `In ${ysel.value}`;
   box.innerHTML = t.map(([h, l, v2, s, n, tn]) => `<a class="kpi gx-k" href="${h}">${ico(n, tn)}<span class="eyebrow">${l}</span><span class="v">${v2}</span><span class="s">${s}</span></a>`).join('');
   // the one-line previews in the section tiles follow the year too
-  const tip = (id, txt) => { const el = $(`.gx-tiles [data-jump="${id}"] small`); if (el) el.textContent = txt; };
+  const tip = (id, txt) => { const el = $(`.ui-tiles [data-jump="${id}"] small`); if (el) el.textContent = txt; };
   if (S.contracts.length) tip('contracts', `${ct} · ${plural(c.length, 'contract')}`);
   if (G.cra) tip('cra', `${cr} spent`);
   if (S.votes.length) tip('votes', `${plural(v.length, 'vote')} · ${splits} split`);
@@ -225,7 +225,7 @@ document.addEventListener('click', e => {
   if (f && [...ysel.options].some(o => o.value === f.dataset.fy)) { ysel.value = f.dataset.fy; render(); }
 });
 savingsSec(); render();
-if (savings.length) { const el = $('.gx-tiles [data-jump="savings"] small'); if (el) el.textContent = plural(savings.length, 'idea'); }
+if (savings.length) { const el = $('.ui-tiles [data-jump="savings"] small'); if (el) el.textContent = plural(savings.length, 'idea'); }
 
 /* ---------- meetings: drop ones that have passed since the page was built; say how soon the next one is ---------- */
 (() => {
@@ -239,10 +239,4 @@ if (savings.length) { const el = $('.gx-tiles [data-jump="savings"] small'); if 
   when.textContent = 'Next meeting · ' + (n <= 0 ? 'today' : n === 1 ? 'tomorrow' : `in ${n} days`);
 })();
 $$('[data-gx-loading]').forEach(el => el.remove());
-// the compact section bar shows once the tiles have scrolled away, and marks the section in view
-const mini = $('.gx-mini'), tiles = $('.gx-tiles');
-if (mini && tiles) new IntersectionObserver(([en]) => { if (en.isIntersecting) mini.setAttribute('data-off', ''); else if (en.boundingClientRect.top < 0) mini.removeAttribute('data-off'); },
-  {rootMargin: `-${parseInt(getComputedStyle(document.documentElement).getPropertyValue('--head-h')) || 57}px 0px 0px 0px`}).observe(tiles);
-const links = $$('.gx-mini a'), io = new IntersectionObserver(es => es.forEach(en => { if (en.isIntersecting) links.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + (en.target.id || en.target.querySelector('h2[id]')?.id))); }), {rootMargin: '-35% 0px -60% 0px'});
-links.forEach(a => { const t = document.getElementById(a.getAttribute('href').slice(1)); const sec = t && (t.closest('section') || t); if (sec) io.observe(sec); });
 })();

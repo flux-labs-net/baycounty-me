@@ -43,10 +43,7 @@ def hbars(rows, color='var(--s1)'):
     return '<div class="hbars">' + ''.join(f'<div class="hb"><span class="hb-n">{e(k)}</span><span class="hb-track"><span class="hb-bar" style="width:{v/mx*100:.1f}%;background:{color}"></span></span><span class="hb-v">{money(v)}</span></div>' for k, v in sorted(rows, key=lambda kv: -kv[1])) + '</div>'
 
 
-def ico(name, tone=None):
-    """An icon (a CSS mask in gov.css, so it takes the text color). With a tone it sits in a tinted square."""
-    i = f'<span class="ico i-{name}" aria-hidden="true"></span>'
-    return f'<span class="gv-ti t-{tone}">{i}</span>' if tone else i
+from ui import ico, avatar as _avatar, TONES  # shared pieces (ui.css)
 
 
 # the icon and tint of each top card, by its label (gov.js has the same table for the cards it redraws)
@@ -62,7 +59,7 @@ SEC = {'who': ('users', 'blue', 'Officials'), 'money': ('wallet', 'blue', 'Budge
 
 
 def kpi(label, value, sub='', static=False, none=False):
-    cls = 'kpi gv-k' + (' kpi-none' if none else '')
+    cls = 'kpi ui-k' + (' kpi-none' if none else '')
     i, t = KPI_ICON.get(label, ('grid', 'blue'))
     return f'<div class="{cls}"{" data-static" if static else ""}><span class="kh">{ico(i, t)}<span class="eyebrow">{e(label)}</span></span><span class="v">{value}</span><span class="s">{sub}</span></div>'
 
@@ -140,15 +137,15 @@ def gov_page(key):
         seats = off['seats']
         board = [s for s in seats if s.get('elected') or not STAFF.search(s['seat'])]
         staff = [s for s in seats if s not in board]
-        pay = ''.join(f'<div class="gv-person">{_avatar(None, "amber", "dollar")}<span><b>{usd(x["annual"])}</b><small>{e(x["title"])}{" · " + e(x["name"]) if x.get("name") else ""} · {e(x.get("year") or "")}</small></span></div>' for x in p.get('pay') or [])
+        pay = ''.join(f'<div class="ui-person">{_avatar(None, "amber", "dollar")}<span><b>{usd(x["annual"])}</b><small>{e(x["title"])}{" · " + e(x["name"]) if x.get("name") else ""} · {e(x.get("year") or "")}</small></span></div>' for x in p.get('pay') or [])
         links = ''.join(x for x in [
-            f'<a class="gv-tag" href="{e(off["website"])}" target="_blank" rel="noopener">{ico("globe")}Website</a>' if off.get('website') else '',
-            f'<a class="gv-tag" href="{e(off["contact_url"])}" target="_blank" rel="noopener">{ico("mail")}Contact</a>' if off.get('contact_url') else '',
-            f'<a class="gv-tag" href="/who-runs-bay-county">{ico("users")}All officials</a>'])
+            f'<a class="ui-tag" href="{e(off["website"])}" target="_blank" rel="noopener">{ico("globe")}Website</a>' if off.get('website') else '',
+            f'<a class="ui-tag" href="{e(off["contact_url"])}" target="_blank" rel="noopener">{ico("mail")}Contact</a>' if off.get('contact_url') else '',
+            f'<a class="ui-tag" href="/who-runs-bay-county">{ico("users")}All officials</a>'])
         secs.append(f'''<section class="tx-sec"><div class="sec-hd"><h2 id="who">Who's in charge</h2><span class="muted">{e(off.get("form") or "")}</span></div>
-          <div class="gv-people">{"".join(_person_card(s, i) for i, s in enumerate(board))}</div>
-          {f'<h3 class="gv-h3">Appointed staff and pay</h3><div class="gv-row">{"".join(_person_card(s, i + 1) for i, s in enumerate(staff))}{pay}</div>' if staff or pay else ''}
-          <div class="gv-links">{links}</div></section>''')
+          <div class="ui-people">{"".join(_person_card(s, i) for i, s in enumerate(board))}</div>
+          {f'<h3 class="ui-h3">Appointed staff and pay</h3><div class="ui-row">{"".join(_person_card(s, i + 1) for i, s in enumerate(staff))}{pay}</div>' if staff or pay else ''}
+          <div class="ui-links">{links}</div></section>''')
     # money
     if b.get('revenue') or b.get('spending'):
         srcs = ' '.join(src(u, t) for t, u in b.get('sources', [])[:2])
@@ -194,13 +191,13 @@ def gov_page(key):
     if p.get('meetings'):
         up = [x for x in p['meetings'] if not x.get('past')][:6]
         if up:
-            secs.append(f'''<section class="tx-sec"><div class="sec-hd"><h2 id="meet">Upcoming meetings</h2><span class="muted">{len(up)} on the calendar</span><a class="gv-crumb" href="/meetings?gov={key}">All meetings {ico("arrow")}</a></div>
+            secs.append(f'''<section class="tx-sec"><div class="sec-hd"><h2 id="meet">Upcoming meetings</h2><span class="muted">{len(up)} on the calendar</span><a class="ui-crumb" href="/meetings?gov={key}">All meetings {ico("arrow")}</a></div>
               {_meetings(up, key, p["short"])}</section>''')
     # get involved
     secs.append(f'''<section class="tx-sec act"><div class="sec-hd"><h2 id="act">Stay informed</h2></div>
-      <div class="gv-act"><div>{ico("bell", "blue")}<h3>Get updates</h3><p>Email when {e(p["short"])} has new votes, contracts or corrections on this site.</p><p><a class="gv-btn pri" href="/alerts?gov={key}">Follow {e(p["short"])}</a></p></div>
-      <div>{ico("folder", "amber")}<h3>Ask for a record</h3><p>Something missing here? Request it from {e(p["short"])} under Florida's public records law.</p><p><a class="gv-btn" href="/records-request?gov={key}">Request a record</a></p></div>
-      <div>{ico("compare", "teal")}<h3>Compare</h3><p>See {e(p["short"])} side by side with other Bay County governments.</p><p><a class="gv-btn" href="/compare?g={key}">Compare</a></p></div></div></section>''')
+      <div class="ui-act"><div>{ico("bell", "blue")}<h3>Get updates</h3><p>Email when {e(p["short"])} has new votes, contracts or corrections on this site.</p><p><a class="ui-btn pri" href="/alerts?gov={key}">Follow {e(p["short"])}</a></p></div>
+      <div>{ico("folder", "amber")}<h3>Ask for a record</h3><p>Something missing here? Request it from {e(p["short"])} under Florida's public records law.</p><p><a class="ui-btn" href="/records-request?gov={key}">Request a record</a></p></div>
+      <div>{ico("compare", "teal")}<h3>Compare</h3><p>See {e(p["short"])} side by side with other Bay County governments.</p><p><a class="ui-btn" href="/compare?g={key}">Compare</a></p></div></div></section>''')
     # sections filled in the browser by gov.js from the dashboards' published data, for the year in the bar
     def live(i, title, more=''):
         ic, tone, _ = SEC[i]
@@ -236,17 +233,17 @@ def gov_page(key):
     lede = g.get('blurb') or f'{e(p["name"])}: who runs it, what it spends and owes, how its commission votes, and what the auditors found, all from public records.'
     kind = 'County' if key == 'county' else 'Schools' if key == 'schools' else 'City'
     form = (off.get('form') or '').split(';')[0].strip()
-    tags = ''.join(x for x in [f'<span class="gv-tag">{ico({"County": "county", "Schools": "school"}.get(kind, "city"))}{kind}</span>',
-                               f'<span class="gv-tag">{ico("gavel")}{e(form[:1].upper() + form[1:])}</span>' if form else '',
-                               f'<a class="gv-tag" href="{e(off["website"])}" target="_blank" rel="noopener">{ico("globe")}Official website</a>' if off.get('website') else ''])
-    return f'''<div class="page tax gov-page gv">
-  <header class="gv-hero">
-    <div class="gv-id"><span class="gv-badge t-blue">{ico({"County": "county", "Schools": "school"}.get(kind, "city"))}</span>
-      <div><a class="gv-crumb" href="/governments">{ico("back")}All governments</a><h1>{e(p["short"])}</h1><p class="lede">{e(lede)}</p><div class="gv-tags">{tags}</div></div></div>
-    <div class="gv-pick" data-report="skip">{bar}<button type="button" class="pdf-btn" id="pdf">{ico("folder")}Export PDF</button><span class="gv-upd">Data updated {DATA_UPDATED}</span></div>
+    tags = ''.join(x for x in [f'<span class="ui-tag">{ico({"County": "county", "Schools": "school"}.get(kind, "city"))}{kind}</span>',
+                               f'<span class="ui-tag">{ico("gavel")}{e(form[:1].upper() + form[1:])}</span>' if form else '',
+                               f'<a class="ui-tag" href="{e(off["website"])}" target="_blank" rel="noopener">{ico("globe")}Official website</a>' if off.get('website') else ''])
+    return f'''<div class="page tax gov-page ui">
+  <header class="ui-hero">
+    <div class="ui-id"><span class="ui-badge t-blue">{ico({"County": "county", "Schools": "school"}.get(kind, "city"))}</span>
+      <div><a class="ui-crumb" href="/governments">{ico("back")}All governments</a><h1>{e(p["short"])}</h1><p class="lede">{e(lede)}</p><div class="ui-tags">{tags}</div></div></div>
+    <div class="ui-pick" data-report="skip">{bar}<button type="button" class="pdf-btn" id="pdf">{ico("folder")}Export PDF</button><span class="ui-upd">Data updated {DATA_UPDATED}</span></div>
   </header>
-  <nav class="gx-tiles" aria-label="On this page" data-report="skip">{tiles}</nav>
-  <nav class="gx-mini" aria-label="Sections" data-off data-report="skip">{mini}</nav>
+  <nav class="ui-tiles" aria-label="On this page" data-report="skip">{tiles}</nav>
+  <nav class="ui-mini" aria-label="Sections" data-off data-report="skip">{mini}</nav>
   <section class="gx-top" aria-labelledby="gxTopH"><h2 class="gx-top-h muted" id="gxTopH">Fiscal year {fy_shown}{f" · {e(period)}" if period else ""}</h2>
   <div class="kpis" id="gxTop">{"".join(kp + static)}</div>{'' if gy else '<p class="muted small">No yearly figures on file for this government yet.</p>'}</section>
   {glance}
@@ -259,17 +256,6 @@ def gov_page(key):
 <script src="/assets/gov.js" defer></script>'''
 
 
-TONES = ['blue', 'teal', 'amber', 'salmon']
-
-
-def _avatar(name, tone, icon=None):
-    if icon:
-        return f'<span class="gv-av t-{tone}">{ico(icon)}</span>'
-    parts = [w for w in re.sub(r'["(].*', '', name or '').split() if w[:1].isalpha()]
-    ini = (parts[0][0] + (parts[-1][0] if len(parts) > 1 else '')).upper() if parts else '?'
-    return f'<span class="gv-av t-{tone}" aria-hidden="true">{e(ini)}</span>'
-
-
 def _person_card(s, i):
     """One official as a card: initials, name, seat. The card links to the person's profile when there is one."""
     from fees_page import split_note, term_txt
@@ -280,11 +266,11 @@ def _person_card(s, i):
     term, _ = term_txt(s.get('term_end'))
     sub = ' · '.join(x for x in [e(s['seat']), f'until {e(term)}' if term else ''] if x)
     if not name:
-        return f'<div class="gv-person vac">{_avatar(None, "blue", "users")}<span><b>Not published online</b><small>{sub}</small></span></div>'
+        return f'<div class="ui-person vac">{_avatar(None, "blue", "users")}<span><b>Not published online</b><small>{sub}</small></span></div>'
     pid = ids.person_id(name)
     url = href('person:' + pid) if pid and 'person:' + pid in build().ents else None
     inner = f'{_avatar(name, TONES[i % 4])}<span><b>{e(name)}</b><small>{sub}</small>{f"<small>{e(note)}</small>" if note else ""}</span>'
-    return f'<a class="gv-person" href="{e(url)}">{inner}</a>' if url else f'<div class="gv-person">{inner}</div>'
+    return f'<a class="ui-person" href="{e(url)}">{inner}</a>' if url else f'<div class="ui-person">{inner}</div>'
 
 
 def _dt(iso):
@@ -301,7 +287,7 @@ def _md(iso):
 
 
 def _date_tile(d):
-    return (f'<span class="gv-date" aria-hidden="true"><span class="mo">{d.strftime("%b").upper()}</span>'
+    return (f'<span class="ui-date" aria-hidden="true"><span class="mo">{d.strftime("%b").upper()}</span>'
             f'<span class="d">{d.day}</span><span class="wd">{d.strftime("%a")}</span></span>')
 
 
@@ -322,22 +308,22 @@ def _meetings(up, key, short):
             li = ''.join(f'<li>{e(t)}</li>' for t in items[:3]) + (f'<li class="more">+ {len(items) - 3} more agenda item{"s" if len(items) - 3 != 1 else ""}</li>' if len(items) > 3 else '')
             loc = re.sub(r'\s+-\s+', ', ', m.get('location') or '')
             acts = ''.join(x for x in [
-                f'<a class="gv-btn pri" href="{e(m["agenda_url"])}" target="_blank" rel="noopener">{ico("file")}Agenda</a>' if posted else '',
-                f'<a class="gv-btn" href="{e(m["packet_url"])}" target="_blank" rel="noopener">{ico("folder")}Full packet</a>' if m.get('packet_url') else '',
-                f'<a class="gv-btn" href="{e(m["detail_url"])}" target="_blank" rel="noopener">{ico("globe")}Meeting page</a>' if m.get('detail_url') and not posted else '',
-                f'<a class="gv-btn" href="/alerts?gov={key}">{ico("bell")}Get agenda alerts</a>' if not posted else ''])
-            out.append(f'''<article class="gv-next" data-start="{e(m["start"])}" aria-label="{e(m.get("title") or "Meeting")}, {e(full)}"><div class="gv-nx">{_date_tile(d)}
-              <div style="min-width:0"><span class="gv-pill t-salmon" data-when>Next meeting</span>{'<span class="gv-pill t-teal">Agenda posted</span>' if posted else ('<span class="gv-pill t-amber">Expected</span>' if m.get('expected') else '')}
-              <h3>{e(m.get("title") or "Meeting")}</h3><div class="gv-meta">{f'<span>{ico("clock")}{e(full)}</span>'}{f'<span>{ico("pin")}{e(loc)}</span>' if loc else ''}</div></div></div>
-              {f'<ol class="gv-items">{li}</ol>' if li else ''}{f'<div class="gv-acts">{acts}</div>' if acts else ''}</article>''')
+                f'<a class="ui-btn pri" href="{e(m["agenda_url"])}" target="_blank" rel="noopener">{ico("file")}Agenda</a>' if posted else '',
+                f'<a class="ui-btn" href="{e(m["packet_url"])}" target="_blank" rel="noopener">{ico("folder")}Full packet</a>' if m.get('packet_url') else '',
+                f'<a class="ui-btn" href="{e(m["detail_url"])}" target="_blank" rel="noopener">{ico("globe")}Meeting page</a>' if m.get('detail_url') and not posted else '',
+                f'<a class="ui-btn" href="/alerts?gov={key}">{ico("bell")}Get agenda alerts</a>' if not posted else ''])
+            out.append(f'''<article class="ui-next" data-start="{e(m["start"])}" aria-label="{e(m.get("title") or "Meeting")}, {e(full)}"><div class="ui-nx">{_date_tile(d)}
+              <div style="min-width:0"><span class="ui-pill t-salmon" data-when>Next meeting</span>{'<span class="ui-pill t-teal">Agenda posted</span>' if posted else ('<span class="ui-pill t-amber">Expected</span>' if m.get('expected') else '')}
+              <h3>{e(m.get("title") or "Meeting")}</h3><div class="ui-meta">{f'<span>{ico("clock")}{e(full)}</span>'}{f'<span>{ico("pin")}{e(loc)}</span>' if loc else ''}</div></div></div>
+              {f'<ol class="ui-items">{li}</ol>' if li else ''}{f'<div class="ui-acts">{acts}</div>' if acts else ''}</article>''')
             continue
         status = (f'<a href="{e(m["agenda_url"])}" target="_blank" rel="noopener">Agenda posted</a>' if posted else 'Expected' if m.get('expected') else 'Agenda not posted yet')
-        out.append(f'<div class="gv-mc" data-start="{e(m["start"])}">{_date_tile(d)}<div style="min-width:0"><b>{e(m.get("title") or "Meeting")}</b><small>{e(full.split(", ")[0])}{" · " + when(d) if when(d) else ""}</small><small>{status}</small></div></div>')
+        out.append(f'<div class="ui-mc" data-start="{e(m["start"])}">{_date_tile(d)}<div style="min-width:0"><b>{e(m.get("title") or "Meeting")}</b><small>{e(full.split(", ")[0])}{" · " + when(d) if when(d) else ""}</small><small>{status}</small></div></div>')
     if not out:
         return ''
     later = ''.join(out[1:5])
-    return (f'<div class="gv-meet{" solo" if not later else ""}">{out[0]}'
-            + (f'<div class="gv-later">{later}<a class="gv-alert" href="/alerts?gov={key}">{ico("mail")}Email me when {e(short)} posts an agenda</a></div>' if later else '')
+    return (f'<div class="ui-meet{" solo" if not later else ""}">{out[0]}'
+            + (f'<div class="ui-later">{later}<a class="ui-alert" href="/alerts?gov={key}">{ico("mail")}Email me when {e(short)} posts an agenda</a></div>' if later else '')
             + '</div>')
 
 
@@ -347,21 +333,27 @@ def _connections(key, short):
 
 
 def govs_index():
+    from ui import dir_card, avatar
     ps = all_profiles()
-    cards = ''
+    cards = []
+    look = {'county': ('Bay County government', 'map', 'blue'), 'schools': ('School district', 'book', 'amber'), 'city': ('City', 'city', 'teal')}
     for p in ps:
         b = p.get('budget') or {}
+        kind, icon, tone = look.get(p['kind'], look['city'])
         facts = [f'{p["population"]:,} residents' if p.get('population') and p['kind'] == 'city' else '',
                  f'{money(b["total"])} budget' if b.get('total') else '',
                  (f'{b["mills"]:g} mills' if b.get('mills') else 'no city property tax') if p['kind'] == 'city' else '',
-                 f'{(p.get("votes") or {}).get("n", 0)} votes recorded']
-        cards += f'''<a class="topic" href="/governments/{p["slug"]}"><span class="eyebrow">{e("County" if p["kind"] == "county" else "Schools" if p["kind"] == "schools" else "City")}</span><h3>{e(p["short"])}</h3><p>{e(" · ".join(x for x in facts if x))}</p><span class="t-stat"><b>{money((p.get("debt") or {}).get("total"))}</b> in debt</span></a>'''
+                 f'{money((p.get("debt") or {}).get("total"))} in debt' if (p.get("debt") or {}).get("total") else '']
+        n = (p.get("votes") or {}).get("n", 0)
+        cards.append(dir_card(f'/governments/{p["slug"]}', p['short'], ' · '.join(x for x in facts if x), '', f'{n:,} votes' if n else kind,
+                              av=avatar(p['short'], tone, icon)))
+    cards = ''.join(cards)
     return f'''<div class="page tax">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Governments</span><h1>Bay County's local governments</h1>
     <p class="lede">One page for each government: who runs it, its budget and tax rate, debt, audit findings, votes, contracts and projects. Pick yours, or compare them side by side.</p></div>
     <div class="stamp"><a class="pill" href="/compare">Compare governments</a></div></header>
   <h2 class="sr">Every local government</h2>
-  <div class="topics">{cards}</div>
+  <div class="ui-dir ui-dir-govs">{cards}</div>
   <p class="note">Bay County residents pay the county and school district, and city residents also pay their city. Unincorporated areas are served by the county alone. <a href="/my-address/">Find yours by address</a>.</p>
 </div>
 <link rel="stylesheet" href="/assets/tax.css">'''

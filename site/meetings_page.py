@@ -24,6 +24,14 @@ def _when(s):
     return d.strftime('%a, %b %-d') + (d.strftime(' · %-I:%M %p').replace(':00 ', ' ') if timed else '')
 
 
+def _date_tile(s):
+    """The month, day and weekday in a small calendar tile (ui.css .ui-date)."""
+    d, _ = _dt(s or '')
+    if not d:
+        return ''
+    return f'<span class="ui-date" aria-hidden="true"><span class="mo">{d.strftime("%b").upper()}</span><span class="d">{d.day}</span><span class="wd">{d.strftime("%a")}</span></span>'
+
+
 def ics(meetings, boards):
     def esc_ics(t):
         return re.sub(r'([,;\\])', r'\\\1', str(t or '')).replace('\n', '\\n')
@@ -64,10 +72,10 @@ def meetings_page(out_dir):
         links = ' · '.join(x for x in [f'<a href="{e(m["agenda_url"])}" target="_blank" rel="noopener">Agenda</a>' if m.get('agenda_url') else '',
                                        f'<a href="{e(m["packet_url"])}" target="_blank" rel="noopener">Packet</a>' if m.get('packet_url') else '',
                                        f'<a href="{e(m["minutes_url"])}" target="_blank" rel="noopener">Minutes</a>' if m.get('minutes_url') else ''] if x)
-        return f'''<li class="fd mt" data-g="{e(b.get("gov"))}" data-gn="{e(GN.get(b.get("gov"), ""))}" data-d="{e(m.get("start") or "")}" data-b="{e(b.get("name") or m["board"])}" data-t="{e(m.get("title") or "")}" data-l="{e(m.get("location") or "")}" data-a="{e(m.get("agenda_url") or "")}" data-m="{e(m.get("minutes_url") or "")}" data-s="{"expected" if m.get("expected") else "posted" if m.get("agenda_url") else "calendar"}"><div class="vt-top"><span class="vt-board">{e(b.get("name") or m["board"])}</span>{'<span class="badge">Expected</span>' if m.get("expected") else '<span class="badge ok">Agenda posted</span>' if m.get("agenda_url") and not m.get("past") else ''}</div>
+        return f'''<li class="fd mt ui-mtc" data-g="{e(b.get("gov"))}" data-gn="{e(GN.get(b.get("gov"), ""))}" data-d="{e(m.get("start") or "")}" data-b="{e(b.get("name") or m["board"])}" data-t="{e(m.get("title") or "")}" data-l="{e(m.get("location") or "")}" data-a="{e(m.get("agenda_url") or "")}" data-m="{e(m.get("minutes_url") or "")}" data-s="{"expected" if m.get("expected") else "posted" if m.get("agenda_url") else "calendar"}">{_date_tile(m.get("start"))}<div class="ui-mtc-b"><div class="vt-top"><span class="vt-board">{e(b.get("name") or m["board"])}</span>{'<span class="badge">Expected</span>' if m.get("expected") else '<span class="badge ok">Agenda posted</span>' if m.get("agenda_url") and not m.get("past") else ''}</div>
           <div class="vt-h">{e(_when(m["start"]))}</div><p class="small">{e(m.get("title") or "")}{(" · " + e(m.get("location"))) if m.get("location") else ""}</p>
           {f'<details class="mt-items"><summary>{len(m["items"])} money item{"s" if len(m["items"]) != 1 else ""} on the agenda</summary><ul class="plain small">{items}</ul></details>' if m.get("items") else ""}
-          {f'<p class="small">{links}</p>' if links else ('<p class="small muted">From the regular schedule; the agenda isn\'t posted yet.</p>' if m.get("expected") else '<p class="small muted">On the government\'s calendar; the agenda isn\'t posted yet.</p>' if not m.get("past") else '')}</li>'''
+          {f'<p class="small">{links}</p>' if links else ('<p class="small muted">From the regular schedule; the agenda isn\'t posted yet.</p>' if m.get("expected") else '<p class="small muted">On the government\'s calendar; the agenda isn\'t posted yet.</p>' if not m.get("past") else '')}</div></li>'''
     sched = ''.join(f'<tr{data_g(b.get("gov"))}><th scope="row">{e(b["name"])}<small>{e(GN.get(b.get("gov"), ""))}</small></th><td class="small">{e(b.get("schedule"))}{(" · " + e(b.get("location"))) if b.get("location") else ""}</td><td class="small">{f"<a class=src href={json.dumps(b.get("calendar_url") or b.get("source_url"))} target=_blank rel=noopener>Calendar</a>" if (b.get("calendar_url") or b.get("source_url")) else ""}</td></tr>' for b in md.get('boards', []))
     gk = [g['key'] for g in GOVS if any(b.get('gov') == g['key'] for b in boards.values())]
     opts = ''.join(f'<option value="{k}">{e(GN[k])}</option>' for k in gk)

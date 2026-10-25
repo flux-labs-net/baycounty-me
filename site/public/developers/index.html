@@ -64,18 +64,18 @@
   </div>
 </div>
 <main id="main">
-<div class="page tax dev">
-  <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Learn and reuse · API</span><h1>BayCounty.me API</h1>
+<div class="page tax ui dev">
+  <header class="tx-top ui-hero"><div class="ui-id"><span class="ui-badge t-teal"><span class="ico i-code" aria-hidden="true"></span></span><div class="ui-hd"><div class="tx-brand"><span class="eyebrow ui-kick k-teal"><span class="ico i-megaphone" aria-hidden="true"></span>Take part</span><h1>BayCounty.me API</h1>
     <p class="lede">Connect your own app, spreadsheet, newsroom tool or AI assistant to the public records on this site. Free, read-only, and no key needed.</p></div>
-    <div class="stamp"><a class="pill" href="/api/v1">Open the API</a><span>60 datasets</span></div></header>
+    </div></div><div class="ui-pick no-scope" data-report="skip"><div class="stamp ui-stamp"><a class="pill" href="/api/v1">Open the API</a><span>60 datasets</span></div></div></header>
   <nav class="jump" aria-label="On this page"><a href="#start">Quick start</a><a href="#endpoints">Endpoints</a><a href="#filters">Filtering</a><a href="#datasets">Datasets</a><a href="#keys">API keys</a><a href="#mcp">AI assistants (MCP)</a><a href="#terms">Use and limits</a></nav>
-  <section class="tx-sec" id="start"><div class="sec-hd"><h2>Quick start</h2></div>
+  <section class="tx-sec" id="start"><div class="sec-hd"><span class="ui-ti t-blue"><span class="ico i-chart" aria-hidden="true"></span></span><h2>Quick start</h2></div>
     <p>Every dataset on the <a href="/open-data">Open data</a> page is also available as an API. Responses are JSON (or CSV with <code>format=csv</code>), and every row carries a link to its source record. Rows are served live from the BayCounty.me database, so newly added records show up within about five minutes; each response says where its rows came from in <code>meta.data_source</code>.</p>
     <pre class="dev-code"><code>curl &#x27;https://baycounty.me/api/v1/datasets/contracts?government=Bay%20County%20BOCC&amp;amount_min=1000000&amp;sort=-amount&amp;limit=5&#x27;</code></pre>
     <pre class="dev-code"><code>curl &#x27;https://baycounty.me/api/v1/datasets/votes?board=Lynn%20Haven%20City%20Commission&amp;split=true&amp;date_from=2025-01-01&#x27;</code></pre>
     <pre class="dev-code"><code>curl &#x27;https://baycounty.me/api/v1/datasets/salary-positions?category=law_enforcement&amp;fields=employer,title,pay_min,pay_max&amp;format=csv&#x27;</code></pre>
     <p class="small muted">Base URL: <code>https://baycounty.me/api/v1</code> · Machine-readable description: <a href="/api/v1/openapi.json">OpenAPI 3.1</a> (import it into Postman, a GPT action, or any OpenAPI tool).</p></section>
-  <section class="tx-sec" id="endpoints"><div class="sec-hd"><h2>Endpoints</h2></div>
+  <section class="tx-sec" id="endpoints"><div class="sec-hd"><span class="ui-ti t-teal"><span class="ico i-chart" aria-hidden="true"></span></span><h2>Endpoints</h2></div>
     <div class="tablewrap"><table class="tx-table"><thead><tr><th scope="col">Request</th><th scope="col">Returns</th></tr></thead><tbody>
       <tr><th scope="row"><code>GET /api/v1</code></th><td>Index: every dataset with row counts and links</td></tr>
       <tr><th scope="row"><code>GET /api/v1/datasets</code></th><td>Catalog with every column, its type and, for short lists, its allowed values</td></tr>
@@ -93,7 +93,7 @@
       <tr><th scope="row"><code>GET /api/v1/search?q=</code></th><td>Search every page on the site, e.g. <a href="/api/v1/search?q=martin%20theatre">martin theatre</a></td></tr>
       <tr><th scope="row"><code>GET /downloads/{id}.json</code></th><td>The whole dataset as one file, for bulk use</td></tr>
     </tbody></table></div></section>
-  <section class="tx-sec" id="filters"><div class="sec-hd"><h2>Filtering, sorting and paging</h2></div>
+  <section class="tx-sec" id="filters"><div class="sec-hd"><span class="ui-ti t-amber"><span class="ico i-chart" aria-hidden="true"></span></span><h2>Filtering, sorting and paging</h2></div>
     <ul class="plain">
       <li><b>Match a column:</b> <code>?government=City%20of%20Callaway</code> (spaces as <code>%20</code>; the catalog lists each column's allowed values). Matching ignores capitals. Separate several values with commas to match any of them: <code>?outcome=failed,tabled</code>.</li>
       <li><b>Ranges:</b> add <code>_min</code> or <code>_max</code> to a number column (<code>amount_min=500000</code>) and <code>_from</code> or <code>_to</code> to a date (<code>date_from=2025-10-01</code>).</li>
@@ -106,7 +106,7 @@
       <li><b>Paging:</b> <code>limit</code> (up to 1,000, default 100) and <code>offset</code>. The response's <code>meta.next</code> is the link to the next page.</li>
       <li><b>Caching:</b> responses carry an <code>ETag</code> (and <code>Last-Modified</code> where the data's date is known). Send it back as <code>If-None-Match</code> (or <code>If-Modified-Since</code>) and you get <code>304 Not Modified</code> with no body when nothing changed.</li>
     </ul></section>
-  <section class="tx-sec" id="datasets"><div class="sec-hd"><h2>Datasets</h2><span class="muted">Updated Oct 24, 2026</span></div>
+  <section class="tx-sec" id="datasets"><div class="sec-hd"><span class="ui-ti t-blue"><span class="ico i-download" aria-hidden="true"></span></span><h2>Datasets</h2><span class="muted">Updated Oct 25, 2026</span></div>
     <div class="tablewrap"><table class="tx-table cm-table"><thead><tr><th scope="col">Dataset id</th><th scope="col" class="num">Rows</th><th scope="col">Links</th></tr></thead><tbody><tr><th scope="row"><code>government-profiles</code><small>Government profiles</small></th><td class="num">9</td>
       <td class="small"><a href="/api/v1/datasets/government-profiles?limit=5">Try it</a> · <a href="/api/v1/datasets/government-profiles/schema">Columns</a> · <a href="/downloads/government-profiles.csv">CSV</a></td></tr><tr><th scope="row"><code>votes</code><small>Recorded votes</small></th><td class="num">606</td>
       <td class="small"><a href="/api/v1/datasets/votes?limit=5">Try it</a> · <a href="/api/v1/datasets/votes/schema">Columns</a> · <a href="/downloads/votes.csv">CSV</a></td></tr><tr><th scope="row"><code>member-votes</code><small>Votes by member</small></th><td class="num">3,023</td>
@@ -168,7 +168,7 @@
       <td class="small"><a href="/api/v1/datasets/candidates-2026?limit=5">Try it</a> · <a href="/api/v1/datasets/candidates-2026/schema">Columns</a> · <a href="/downloads/candidates-2026.csv">CSV</a></td></tr><tr><th scope="row"><code>campaign-contributions-2026</code><small>2026 contributions from organizations</small></th><td class="num">156</td>
       <td class="small"><a href="/api/v1/datasets/campaign-contributions-2026?limit=5">Try it</a> · <a href="/api/v1/datasets/campaign-contributions-2026/schema">Columns</a> · <a href="/downloads/campaign-contributions-2026.csv">CSV</a></td></tr><tr><th scope="row"><code>property-tax-exemptions</code><small>Property tax exemptions (2026 roll)</small></th><td class="num">25</td>
       <td class="small"><a href="/api/v1/datasets/property-tax-exemptions?limit=5">Try it</a> · <a href="/api/v1/datasets/property-tax-exemptions/schema">Columns</a> · <a href="/downloads/property-tax-exemptions.csv">CSV</a></td></tr></tbody></table></div></section>
-  <section class="tx-sec" id="keys"><div class="sec-hd"><h2>API keys and limits</h2></div>
+  <section class="tx-sec" id="keys"><div class="sec-hd"><span class="ui-ti t-blue"><span class="ico i-download" aria-hidden="true"></span></span><h2>API keys and limits</h2></div>
     <p>You don't need a key. Without one, each connection can make a set number of requests a minute and per day (each response's headers show how many are left). If you need more, or want your use tracked separately, <a href="/about#contact">ask for a key</a>.</p>
     <p>Send a key in any of these ways (the header is best, so the key stays out of logs and browser history):</p>
     <pre class="dev-code"><code>curl -H &#x27;Authorization: Bearer bcm_your_key&#x27; &#x27;https://baycounty.me/api/v1/datasets/votes?limit=5&#x27;</code></pre>
@@ -177,7 +177,7 @@
       <li>Every response carries <code>X-RateLimit-Limit</code> and <code>X-RateLimit-Remaining</code> (per minute), plus <code>X-RateLimit-Limit-Day</code> and <code>X-RateLimit-Remaining-Day</code> when a daily limit applies. Daily limits reset at midnight Central time.</li>
       <li>Over a limit, you get status <code>429</code> with a <code>Retry-After</code> header in seconds. A wrong key gets <code>401</code>; a paused, revoked or expired key gets <code>403</code>.</li>
     </ul></section>
-  <section class="tx-sec" id="mcp"><div class="sec-hd"><h2>Connect an AI assistant (MCP)</h2></div>
+  <section class="tx-sec" id="mcp"><div class="sec-hd"><span class="ui-ti t-teal"><span class="ico i-chart" aria-hidden="true"></span></span><h2>Connect an AI assistant (MCP)</h2></div>
     <p>BayCounty.me runs a <a href="https://modelcontextprotocol.io" target="_blank" rel="noopener">Model Context Protocol</a> server, so AI assistants that support remote MCP servers can look up these records directly and cite them. There's no sign-in.</p>
     <pre class="dev-code"><code>https://baycounty.me/api/mcp</code></pre>
     <ul class="plain">
@@ -187,7 +187,7 @@
       <li><b>Resources:</b> each dataset is also an MCP resource at <code>baycounty://datasets/&lt;id&gt;</code> (up to 2,000 rows; the full file is linked).</li>
       <li><b>Example question:</b> "Which Bay County contracts over $5 million went to campaign donors, and how did commissioners vote?"</li>
     </ul></section>
-  <section class="tx-sec method" id="terms"><div class="sec-hd"><h2>Use and limits</h2></div>
+  <section class="tx-sec method" id="terms"><div class="sec-hd"><span class="ui-ti t-amber"><span class="ico i-chart" aria-hidden="true"></span></span><h2>Use and limits</h2></div>
     <ul class="plain">
       <li>The data is compiled from public records and free to reuse. Please credit BayCounty.me and link to the source record for any figure you publish.</li>
       <li>Check the original record before relying on a single number. Each dataset's notes and gaps are on its page on this site.</li>

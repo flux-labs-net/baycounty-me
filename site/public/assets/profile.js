@@ -18,14 +18,25 @@
   const embedded = document.getElementById('pfData');
   let D = embedded ? JSON.parse(embedded.textContent) : null;
 
+  // the shared page look (site/ui.py): initials or an icon in a tinted badge, the section kicker, icon stat cards
+  const TONES = ['blue', 'teal', 'amber', 'salmon'];
+  const toneOf = t => TONES[[...String(t || '')].reduce((a, c) => a + c.codePointAt(0), 0) % 4];  // same as ui.tone_of
+  const ico = (n, t) => { const i = `<span class="ico i-${n}" aria-hidden="true"></span>`; return t ? `<span class="ui-ti t-${t}">${i}</span>` : i; };
+  const ICON = {gov: 'county', vendor: 'store', business: 'store', nonprofit: 'heart', committee: 'megaphone'};
+  function initials(name) {
+    const w = String(name || '').replace(/["(].*/, '').split(/\s+/).filter(x => /^\p{L}/u.test(x));
+    return w.length ? (w[0][0] + (w.length > 1 ? w[w.length - 1][0] : '')).toUpperCase() : '?';
+  }
   function header(e) {
     const h = document.getElementById('pfHead'); if (!h) return;
     document.title = e.name + ' · BayCounty.me';
-    const kp = (l, v, s) => v ? `<div class="kpi"><span class="eyebrow">${l}</span><span class="v">${v}</span><span class="s">${s}</span></div>` : '';
-    h.innerHTML = `<header class="tx-top"><div class="tx-brand"><span class="eyebrow"><a href="/connections">Connections</a> · ${esc(e.kind_label || KIND[e.kind])}</span><h1>${esc(e.name)}</h1>
-      ${e.subtitle ? `<p class="lede">${esc(e.subtitle)}</p>` : ''}${e.aliases && e.aliases.length ? `<p class="small muted">Also written as: ${esc(e.aliases.join(' · '))}</p>` : ''}</div>
-      ${e.source_url ? `<div class="stamp"><a class="pill" href="${esc(e.source_url)}" target="_blank" rel="noopener">Public record</a></div>` : ''}</header>
-      <div class="kpis">${kp('Connections', (e.connections || 0).toLocaleString('en-US'), 'in public records')}${kp('Received', money(e.amount_received), 'payments, gifts and grants in the records')}${kp('Gave or paid', money(e.amount_given), 'payments, gifts and grants in the records')}</div>`;
+    const tone = toneOf(e.name), ic = ICON[e.kind];
+    const badge = ic ? `<span class="ui-badge t-${tone}">${ico(ic)}</span>` : `<span class="ui-badge ui-badge-av t-${tone}" aria-hidden="true">${esc(initials(e.name))}</span>`;
+    const kp = (i, t, l, v, s) => v ? `<div class="kpi ui-k"><span class="kh">${ico(i, t)}<span class="eyebrow">${l}</span></span><span class="v">${v}</span><span class="s">${s}</span></div>` : '';
+    const tags = e.source_url ? `<div class="ui-tags"><a class="ui-tag" href="${esc(e.source_url)}" target="_blank" rel="noopener">${ico('link')}Public record</a></div>` : '';
+    h.innerHTML = `<header class="tx-top ui-hero"><div class="ui-id">${badge}<div class="ui-hd"><div class="tx-brand"><span class="eyebrow ui-kick k-blue"><a href="/connections">Connections</a> · ${esc(e.kind_label || KIND[e.kind])}</span><h1>${esc(e.name)}</h1>
+      ${e.subtitle ? `<p class="lede">${esc(e.subtitle)}</p>` : ''}${e.aliases && e.aliases.length ? `<p class="small muted">Also written as: ${esc(e.aliases.join(' · '))}</p>` : ''}</div>${tags}</div></div></header>
+      <div class="kpis">${kp('network', 'blue', 'Connections', (e.connections || 0).toLocaleString('en-US'), 'in public records')}${kp('dollar', 'teal', 'Received', money(e.amount_received), 'payments, gifts and grants in the records')}${kp('wallet', 'amber', 'Gave or paid', money(e.amount_given), 'payments, gifts and grants in the records')}</div>`;
   }
 
   // ---------- mini network ----------

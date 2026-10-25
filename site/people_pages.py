@@ -123,13 +123,18 @@ def person_page(pid):
     for g in govs:
         rs = [r for r in p['roles'] if r.get('gov_id') == g]
         best = next((r['role'] for r in rs if r.get('source') in ('salaries', 'officials-pay')), None) or next((r['role'].split(':', 1)[-1].strip() for r in rs if r.get('source') == 'campaign'), None) or (rs[0]['role'] if rs else '')
-        roles.append(f'<span class="pill">{gov_link(g)} · {e(best[:1].upper() + best[1:])}</span>')
+        roles.append(f'<li>{e(best[:1].upper() + best[1:])}<span>{gov_link(g)}</span></li>')
+    # the facts card at the top right: where they serve, the 2026 race, pay and votes on file
+    facts = []
     if roles:
-        secs += f'<section class="tx-sec"><div class="sec-hd"><h2 id="roles">Where {e(x["name"])} serves</h2><span class="muted">From votes, salaries and campaign filings</span></div><div class="pp-roles">{"".join(roles)}</div></section>'
+        facts.append(('Serves', f'<ul>{"".join(roles)}</ul>'))
+    for c in cand[:1]:
+        facts.append(('On the ballot', f'{e(c["office"])}<span>November 3, 2026{" · incumbent" if c.get("incumbent") else ""}</span>'))
+    facts_h = ''.join(f'<div><dt>{k}</dt><dd>{v}</dd></div>' for k, v in facts)
     # 2026 race
     for c in cand:
         plat = ''.join(f'<li>{e(t)}</li>' for t in (c.get('platform') or []))
-        secs += f'''<section class="tx-sec"><div class="sec-hd"><h2 id="race">On the 2026 ballot: {e(c["office"])}</h2><span class="muted">{e((c.get("status") or "").replace("_", " "))}{" · incumbent" if c.get("incumbent") else ""}</span></div>
+        secs += f'''<section class="tx-sec"><div class="sec-hd"><h2 id="race" data-tile="2026 race">On the 2026 ballot: {e(c["office"])}</h2><span class="muted">{e((c.get("status") or "").replace("_", " "))}{" · incumbent" if c.get("incumbent") else ""}</span></div>
     {f'<ul class="pp-plat">{plat}</ul><p class="small muted">Platform in the candidate\'s own words, summarized from their filings and campaign pages.</p>' if plat else ''}
     <p class="small">Raised {money(c.get("total_raised"))} · spent {money(c.get("total_spent"))} · from individuals {money(c.get("from_individuals_total"))} ({c.get("from_individuals_count") or 0} gifts, not named) · from organizations {money(c.get("from_organizations"))} · own money {money(c.get("own_money"))}{f' · <a class="src" href="{e(c["finance_report_url"])}" target="_blank" rel="noopener">Campaign report</a>' if c.get("finance_report_url") else ''}{f' · <a href="{e(c["website"])}" target="_blank" rel="noopener nofollow">Campaign website</a>' if c.get("website") else ''}</p>
     <p class="small"><a href="/elections">Every 2026 race</a></p></section>'''
@@ -138,7 +143,7 @@ def person_page(pid):
         gr = ''.join(f'<tr><th scope="row">{link(o["entity_id"])}<small>{e(EG.KIND_LABEL[o["kind"]])}</small></th><td class="num">{money(l["amount"])}</td><td class="small">{e(", ".join(sorted(set(l["dates"]))))}</td><td class="small">{e("; ".join(l["detail"]))}</td><td>{src(l["source_url"], "Report")}</td></tr>'
                      for l, o in sorted(gifts, key=lambda t: -(t[0]['amount'] or 0)))
         tot = ''.join(f'<li>{e(r.get("election") or "")}: raised {money(r.get("total_raised"))} from {r.get("n_contributions") or 0} contributions{" · " + src(r.get("report_url"), "Report") if r.get("report_url") else ""}</li>' for r in fin)
-        secs += f'''<section class="tx-sec"><div class="sec-hd"><h2 id="gifts">Campaign gifts from businesses and groups</h2><span class="muted">Supervisor of Elections reports</span></div>
+        secs += f'''<section class="tx-sec"><div class="sec-hd"><h2 id="gifts" data-tile="Campaign gifts">Campaign gifts from businesses and groups</h2><span class="muted">Supervisor of Elections reports</span></div>
     {f'<ul class="plain">{tot}</ul>' if tot else ''}
     {f'<div class="tablewrap"><table class="tx-table vd-table"><thead><tr><th scope="col">From</th><th scope="col" class="num">Gave</th><th scope="col">Dates</th><th scope="col">Campaign</th><th scope="col">Source</th></tr></thead><tbody>{gr}</tbody></table></div>' if gr else '<p class="muted small">No gifts from businesses, PACs or committees in the reports on file.</p>'}
     <p class="note">Businesses, PACs and committees are named here, and people who run a registered business are listed below. Other gifts from individual people are counted in the totals but never named. <a href="/connections/campaign-gifts">Campaign gifts</a> has every official.</p></section>'''
@@ -151,21 +156,21 @@ def person_page(pid):
             more = f' and {len(bs) - 4} more' if len(bs) > 4 else ''
             orow += (f'<tr><th scope="row">{link(o["entity_id"])}</th><td class="wrap small">{", ".join(link(b["entity_id"]) for b in bs[:4])}{more}</td>'
                      f'<td class="num">{money(l["amount"])}</td><td class="small">{e(", ".join(sorted(set(l["dates"]))))}</td><td>{src(l["source_url"], "Report")}</td></tr>')
-        secs += f'''<section class="tx-sec"><div class="sec-hd"><h2 id="owner-gifts">Personal gifts from business owners</h2><span class="muted">{len(owner_gifts)} people</span></div>
+        secs += f'''<section class="tx-sec"><div class="sec-hd"><h2 id="owner-gifts" data-tile="Owner gifts">Personal gifts from business owners</h2><span class="muted">{len(owner_gifts)} people</span></div>
     <div class="tablewrap"><table class="tx-table vd-table"><thead><tr><th scope="col">Person</th><th scope="col">Runs</th><th scope="col" class="num">Gave</th><th scope="col">Dates</th><th scope="col">Source</th></tr></thead><tbody>{orow}</tbody></table></div>
     <p class="note">People who gave as individuals and whose name and street address on the filing are the same as an officer, manager or registered agent of a for-profit business on Sunbiz. Addresses are not shown. A gift from a business owner is a fact in the records, not a sign that the business wanted anything.</p></section>'''
     # votes on donors' contracts
     if mm:
         rows = ''.join(f'<li><b>{e(r["vote_date"])}</b>: voted {e(r["vote"])} on {e(r["item"])}{" · " + money(r["amount"]) if r.get("amount") else ""} ({e(r["outcome"])} {e(r["tally"])}{", consent agenda" if r.get("consent_agenda") else ""}). {link_name_vendor(r["donor"])} gave {money(r["gift_amount"])} {e(r["gift_before_or_after_vote"])} the vote. <a class="src" href="{e(r["source_url"])}" target="_blank" rel="noopener">Minutes</a></li>' for r in sorted(mm, key=lambda r: r['vote_date'], reverse=True))
-        secs += f'<section class="tx-sec"><div class="sec-hd"><h2 id="donor-votes">Votes on contracts with their own donors</h2><span class="muted">From the Money map</span></div><ul class="plain mm-list">{rows}</ul><p class="note">{e(NOTE)}</p></section>'
+        secs += f'<section class="tx-sec"><div class="sec-hd"><h2 id="donor-votes" data-tile="Donor votes">Votes on contracts with their own donors</h2><span class="muted">From the Money map</span></div><ul class="plain mm-list">{rows}</ul><p class="note">{e(NOTE)}</p></section>'
     # votes on companies' contracts
     if voted:
         vr = ''.join(f'<tr><th scope="row">{link(o["entity_id"])}</th><td class="small">{e("; ".join(l["detail"]))}</td><td class="num">{l["records"]}</td><td class="small">{e(min(l["dates"]) if l["dates"] else "")}{(" to " + e(max(l["dates"]))) if len(set(l["dates"])) > 1 else ""}</td></tr>' for l, o in sorted(voted, key=lambda t: -t[0]['records']))
-        secs += f'<section class="tx-sec"><div class="sec-hd"><h2 id="contract-votes">Votes on companies\' contracts</h2><span class="muted">Contract approvals matched to the minutes</span></div><div class="tablewrap"><table class="tx-table vd-table"><thead><tr><th scope="col">Company</th><th scope="col">Votes</th><th scope="col" class="num">Approvals</th><th scope="col">When</th></tr></thead><tbody>{vr}</tbody></table></div></section>'
+        secs += f'<section class="tx-sec"><div class="sec-hd"><h2 id="contract-votes" data-tile="Contract votes">Votes on companies\' contracts</h2><span class="muted">Contract approvals matched to the minutes</span></div><div class="tablewrap"><table class="tx-table vd-table"><thead><tr><th scope="col">Company</th><th scope="col">Votes</th><th scope="col" class="num">Approvals</th><th scope="col">When</th></tr></thead><tbody>{vr}</tbody></table></div></section>'
     # recent votes
     if mv:
-        rv = ''.join(f'<li><b>{e(r.get("date"))}</b> · {e(r.get("board"))}: {e(r.get("headline"))} · <b>{e(r.get("vote"))}</b> <a class="src" href="{e(r.get("source_url"))}" target="_blank" rel="noopener">Minutes</a></li>' for r in mv[:12])
-        secs += f'<section class="tx-sec"><div class="sec-hd"><h2 id="votes">Latest recorded votes</h2><span class="muted">{len(mv):,} money votes on file</span></div><ul class="plain mm-list">{rv}</ul><p class="small"><a href="/public-money/votes">Every recorded vote</a></p></section>'
+        rv = ''.join(vote_card(r) for r in mv[:12])
+        secs += f'<section class="tx-sec"><div class="sec-hd"><h2 id="votes" data-tile="Latest votes">Latest recorded votes</h2><span class="muted">{len(mv):,} money votes on file</span></div><ul class="plain ui-votes">{rv}</ul><p class="small"><a href="/public-money/votes">Every recorded vote</a></p></section>'
     if pay:
         pr = ''.join(f'<li>{e(r.get("title"))}{", " + e(r.get("employer") or r.get("government")) if (r.get("employer") or r.get("government")) else ""}: {money(r.get("annual") or r.get("salary"))} ({e(r.get("year") or r.get("fiscal_year") or r.get("as_of") or "")}) <a class="src" href="{e(r.get("source_url"))}" target="_blank" rel="noopener">Source</a></li>' for r in pay)
         secs += f'<section class="tx-sec"><div class="sec-hd"><h2 id="pay">Pay</h2><span class="muted">Elected officials and department leaders only</span></div><ul class="plain">{pr}</ul></section>'
@@ -173,7 +178,7 @@ def person_page(pid):
     return f'''<div class="page tax">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow"><a href="/people">People</a>{" · " + eyebrow if eyebrow else ""}</span><h1>{e(x["name"])}</h1>
     {f'<p class="lede">{e(x["subtitle"])}</p>' if x.get("subtitle") else ''}</div>
-    <div class="stamp"><a class="pill" href="/who-runs-bay-county">Who runs Bay County</a></div></header>
+    <div class="stamp">{f'<dl class="ui-facts">{facts_h}</dl>' if facts_h else ''}<a class="pill" href="/alerts">Get alerts</a><a class="pill" href="/who-runs-bay-county">Who runs Bay County</a></div></header>
   {f'<div class="kpis">{kp}</div>' if kp else ''}
   {profile_section(eid, 'Connections', 'Companies, groups and governments linked to ' + x['name'] + ' in the records')}
   {secs}
@@ -185,25 +190,61 @@ def person_page(pid):
 {ASSETS}'''
 
 
+def vote_card(r):
+    """One recorded vote: the date, the board and item, and how they voted as a colored pill."""
+    v = str(r.get('vote') or '')
+    tone = 'teal' if v.lower() in ('yes', 'aye', 'yea') else 'salmon' if v.lower() in ('no', 'nay') else 'blue'
+    return (f'<li class="ui-vc"><span class="ui-pill t-{tone}">{e(v[:1].upper() + v[1:]) or "?"}</span><span class="ui-vc-t"><span>{e(r.get("headline"))}</span>'
+            f'<small>{e(r.get("date"))} · {e(r.get("board"))} · <a class="src" href="{e(r.get("source_url"))}" target="_blank" rel="noopener">Minutes</a></small></span></li>')
+
+
 def link_name_vendor(name):
     from entity_links import vendor
     return vendor(name)
 
 
+def _kinds(p):
+    """elected / candidate / staff, from where each role came from (a person can be several)."""
+    ks = []
+    for r in p.get('roles') or []:
+        src, role = r.get('source'), (r.get('role') or '').lower()
+        if src == 'candidates_2026' or role.startswith('2026 candidate'):
+            ks.append('candidate')
+        elif src in ('votes', 'officials-pay', 'campaign') and not role.startswith('former'):
+            ks.append('elected')
+        elif src == 'salaries':
+            ks.append('staff')
+    if 'elected' in ks:
+        ks = [k for k in ks if k != 'staff']  # an official's pay row is not a staff job
+    return [k for k in ('elected', 'candidate', 'staff') if k in ks] or ['elected']
+
+
 def people_index():
+    from ui import dir_card, directory, ico
     G = EG.build()
-    rows = []
+    cards, kinds, govs = [], Counter(), {}
+    total_links = 0
     for p in sorted(_people(), key=lambda p: (p['name'].split()[-1], p['name'])):
         x = G.ents['person:' + p['id']]
         n = len(EG.neighbors('person:' + p['id']))
-        rows.append(f'<tr data-n="{e((x["name"] + " " + " ".join(x["aliases"]) + " " + (x["subtitle"] or "")).lower())}"><th scope="row"><a href="/people/{e(p["id"])}">{e(x["name"])}</a><small>{e(x["subtitle"] or "")}</small></th>'
-                    f'<td>{" · ".join(gov_link(g) for g in (p.get("gov_ids") or []))}</td><td class="num">{n}</td></tr>')
+        total_links += n
+        ks = _kinds(p)
+        kinds.update(ks)
+        gids = [g for g in (p.get('gov_ids') or []) if g]
+        for g in gids:
+            if 'gov:' + g in G.ents:
+                govs[g] = G.ents['gov:' + g]['name']
+        cards.append(dir_card(f'/people/{p["id"]}', x['name'], x['subtitle'] or '', ' · '.join(gov_link(g) for g in gids),
+                              f'{n} link{"s" if n != 1 else ""}', ' '.join(ks), ' '.join(gids), n, also=' '.join(x['aliases'])))
+    chips = [('', 'Everyone', len(cards)), ('elected', 'Elected', kinds['elected']), ('candidate', '2026 candidates', kinds['candidate']), ('staff', 'Department leaders', kinds['staff'])]
+    k = lambda icon, tone, label, v, sub: f'<div class="kpi ui-k"><span class="kh">{ico(icon, tone)}<span class="eyebrow">{label}</span></span><span class="v">{v}</span><span class="s">{sub}</span></div>'
     return f'''<div class="page tax">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Connections · People</span><h1>Officials and candidates</h1>
     <p class="lede">One page for each elected official, department leader and 2026 candidate in these records: where they serve, campaign money from businesses and groups, how they voted, and who they connect to.</p></div>
     <div class="stamp"><a class="pill" href="/who-runs-bay-county">Who runs Bay County</a><a class="pill" href="/connections">Connections network</a></div></header>
-  <section class="tx-sec"><div class="sec-hd"><h2 id="all">Everyone</h2><span class="muted">{len(rows)} people</span></div>
-    <div class="tablewrap"><table class="tx-table vd-table" data-tt-sort="0:asc"><thead><tr><th scope="col">Person</th><th scope="col">Government</th><th scope="col" class="num">Connections</th></tr></thead><tbody>{"".join(rows)}</tbody></table></div>
+  <div class="kpis">{k("users", "blue", "Elected officials", kinds["elected"], f"On {len(govs)} boards and offices")}{k("flag", "salmon", "2026 candidates", kinds["candidate"], "On the November 3 ballot")}{k("briefcase", "teal", "Department leaders", kinds["staff"], "Managers, clerks and chiefs")}{k("network", "amber", "Connections", f"{total_links:,}", "Companies, donors, boards and votes")}</div>
+  <section class="tx-sec"><div class="sec-hd"><h2 id="all">Everyone</h2><span class="muted">{len(cards)} people</span></div>
+    {directory(cards, "People", chips, sorted(govs.items(), key=lambda kv: kv[1]), "Search a name, seat or government", csv="baycounty-people")}
     <p class="note">Only elected officials, department leaders and candidates have a page here. Nonprofit board members and businesses have a profile reached from the nonprofit, company or <a href="/connections">Connections</a> pages. Individual campaign donors are named only when they run a registered business; others are counted in totals.</p></section>
 </div>
 {ASSETS}'''
