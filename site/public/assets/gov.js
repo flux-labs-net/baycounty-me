@@ -83,7 +83,7 @@ function contracts() {
     kpis: rs.length ? kpi('Awarded', money(tot), plural(rs.length, 'contract')) + kpi('Competitively bid', rs.length ? Math.round(comp / rs.length * 100) + '%' : '—', `${comp} of ${rs.length}`)
       + kpi('Largest', money(rs[0].a), esc(rs[0].v)) : '',
     body: table(['Company', 'For', 'Amount', 'How awarded', 'Approved'], rs.map(r =>
-      `<td class="wrap"><a href="/public-money/contracts?company=${encodeURIComponent(r.id)}#company">${esc(r.v)}</a></td><td class="wrap small">${esc(r.p)}</td><td class="num">${usd(r.a)}</td><td class="small">${esc(r.m)}</td><td class="small nowrap">${esc(nice(r.d))}${src(r.u)}</td>`)),
+      `<td class="wrap"><a href="${esc(r.e && window.BC ? BC.href(r.e) : '/public-money/contracts?company=' + encodeURIComponent(r.id) + '#company')}">${esc(r.v)}</a></td><td class="wrap small">${esc(r.p)}</td><td class="num">${usd(r.a)}</td><td class="small">${esc(r.m)}</td><td class="small nowrap">${esc(nice(r.d))}${src(r.u)}</td>`)),
     empty: `No major contracts recorded for ${esc(G.short)} in ${ylabel()}.`,
     link: `<a href="${dash('/public-money/contracts')}#all">All ${esc(G.short)} contracts, change orders and payments</a>`,
   });
@@ -98,7 +98,7 @@ function cra() {
     sub: `${esc(G.craName)} · ${plural(rs.length, 'record')} in ${ylabel()}`,
     kpis: rs.length ? kpi('Spent or committed', money(spent), 'Payments and awards, each dollar once') + kpi('Budgeted', money(planned), 'Plans, not yet confirmed as paid') + kpi('Records', rs.length, `${new Set(rs.map(p => p.district)).size} district${new Set(rs.map(p => p.district)).size === 1 ? '' : 's'}`) : '',
     body: table(['Paid to', 'For', 'District', 'Status', 'Amount'], top.map(p =>
-      `<td class="wrap">${esc(p.payee)}</td><td class="wrap small">${esc(p.purpose)}${src(p.url)}</td><td class="small">${esc(p.district)}</td><td class="small">${esc(p.status)}${p.count ? '' : ' <span class="muted">(not in totals)</span>'}</td><td class="num">${p.amount ? usd(p.amount) : '—'}</td>`)),
+      `<td class="wrap">${p.vp && window.BC ? BC.a('vendor:' + p.vp, p.payee) : esc(p.payee)}</td><td class="wrap small">${esc(p.purpose)}${src(p.url)}</td><td class="small">${esc(p.district)}</td><td class="small">${esc(p.status)}${p.count ? '' : ' <span class="muted">(not in totals)</span>'}</td><td class="num">${p.amount ? usd(p.amount) : '—'}</td>`)),
     empty: `No CRA records for ${ylabel()}.`,
     link: `<a href="${dash('/public-money/cra-spending')}">Map and full ledger</a> · <a href="/connections?gov=${K}">Who the city and its CRA paid, and campaign gifts</a>`,
   });

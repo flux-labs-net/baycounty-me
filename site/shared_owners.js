@@ -61,7 +61,7 @@
         ${written(g) ? `<span class="so-tag">written ${esc(written(g))}</span>` : ''}
         ${g.all_checks_1000 ? '<span class="so-tag">every check $1,000</span>' : ''}${g.same_day ? '<span class="so-tag">all the same day</span>' : ''}</div>
       <table class="so-biz" data-tt="off"><tbody>${g.businesses.sort((a, b) => b.business_amount - a.business_amount).map(b => `<tr>
-        <td><a href="${esc(b.source_url)}" target="_blank" rel="noopener">${esc(title(b.business))}</a>${window.BCM_bizOff ? BCM_bizOff(b.business_status, b.business_last_filed) : ''}<small>${b.business_status === 'Active' ? 'Active' : ''}${b.business_dates ? (b.business_status === 'Active' ? ' · ' : '') + 'gave ' + esc(window.BCM_usDate ? BCM_usDate(b.business_dates) : b.business_dates) : ''}</small></td>
+        <td>${b.sunbiz_doc_number && window.BC ? BC.a('business:' + String(b.sunbiz_doc_number).toLowerCase(), title(b.business)) : esc(title(b.business))}${b.source_url ? ` <a class="src" href="${esc(b.source_url)}" target="_blank" rel="noopener">Sunbiz</a>` : ''}${window.BCM_bizOff ? BCM_bizOff(b.business_status, b.business_last_filed) : ''}<small>${b.business_status === 'Active' ? 'Active' : ''}${b.business_dates ? (b.business_status === 'Active' ? ' · ' : '') + 'gave ' + esc(window.BCM_usDate ? BCM_usDate(b.business_dates) : b.business_dates) : ''}</small></td>
         <td class="num">${usd(b.business_amount)}</td></tr>`).join('')}</tbody></table></section>`;
     $('#soList').innerHTML = list.map(c => {
       const many = c.groups.length > 1;
