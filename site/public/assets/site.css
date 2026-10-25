@@ -850,7 +850,10 @@ a.ui-person:hover b{color:var(--blue)}
 .ui .sec-hd h2{font-size:1.3rem}
 .ui .filters-row input:not([type=checkbox]),.ui .filters-row select,.ui .tbl-tools input,.ui .tbl-tools select{min-height:44px;border-radius:12px}
 :root .ui .tablewrap{border:0;border-radius:20px;box-shadow:var(--ui-shadow);background:var(--surface)}
-:root .ui details.tbl-toggle{border:0;border-radius:18px;box-shadow:var(--ui-shadow);background:var(--surface)}
+:root .ui details.tbl-toggle{border:0;border-radius:18px;box-shadow:var(--ui-shadow);background:var(--surface);padding:0 20px}
+:root .ui details.tbl-toggle > summary{padding:13px 0;margin:0}
+:root .ui details.tbl-toggle[open]{padding-bottom:16px}
+:root .ui details.tbl-toggle .tablewrap{box-shadow:none;border-radius:12px}
 .ui .hb-bar{border-radius:999px}
 .ui .hb-track{border-radius:999px;background:color-mix(in srgb,var(--blue) 7%,transparent)}
 .ui .note{text-wrap:pretty}
