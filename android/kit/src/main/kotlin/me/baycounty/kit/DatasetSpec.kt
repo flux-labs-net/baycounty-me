@@ -233,6 +233,10 @@ data class DatasetSpec(
         "site-updates" to DatasetSpec(Section.MORE, "sparkles", title = listOf("title"), subtitle = listOf("date"), detail = "text", date = listOf("date"), page = "updates"),
         "site-menu" to DatasetSpec(Section.MORE, "list.bullet", title = listOf("label"), subtitle = listOf("section", "lang"), detail = "description",
                            filters = listOf("section", "lang")),
+        "data-sources" to DatasetSpec(Section.MORE, "doc.text.magnifyingglass", title = listOf("source_name"), subtitle = listOf("government", "topic"), detail = "what_we_take",
+                              badge = "method", filters = listOf("topic", "government", "method"), page = "data-sources"),
+        "data-source-sites" to DatasetSpec(Section.MORE, "globe", title = listOf("website"), subtitle = listOf("topic"), detail = "topic",
+                                   filters = listOf("topic"), page = "data-sources"),
         )
 
         /** Datasets the app shows in their own tabs rather than in Explore. */

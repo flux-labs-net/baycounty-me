@@ -88,5 +88,6 @@ fun icon(symbol: String?): ImageVector = when (symbol) {
     "chevron.up.chevron.down" -> Icons.Outlined.UnfoldMore
     "checkmark" -> Icons.Outlined.Check
     "trend" -> Icons.AutoMirrored.Outlined.ShowChart
+    "globe" -> Icons.Outlined.Public
     else -> Icons.Outlined.TableChart
 }
