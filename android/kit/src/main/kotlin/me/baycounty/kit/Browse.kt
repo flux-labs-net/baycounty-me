@@ -12,16 +12,23 @@ object Browse {
         "change-orders" to Total("Added", "Added to existing contracts by change orders."),
         "emergency-purchases" to Total("Approved", null),
         "campaign-contributions-2026" to Total("Given", null),
+        "campaign-contributions-history" to Total("Given", null),
+        "business-donor-sunbiz" to Total("Given", null),
+        "owner-gifts" to Total("Given", null),
         "fema-michael-projects" to Total("Federal share", "FEMA's share obligated so far, not all paid out."),
         "bed-tax-collections" to Total("Collected", null),
         "vendor-payments" to Total("Paid", null),
     )
 
+    /** Lists of single campaign gifts. Florida caps a gift at $1,000 per election, so the largest single gift
+     *  says little: these rank each giver by its total and show how many gifts it made. */
+    val giftLists: Set<String> = setOf("campaign-contributions-2026", "campaign-contributions-history")
+
     fun noun(datasetID: String): String = mapOf(
         "contracts" to "Contracts", "votes" to "Votes", "member-votes" to "Votes", "change-orders" to "Change orders",
         "emergency-purchases" to "Purchases", "salary-positions" to "Positions", "salary-leaders" to "Positions",
         "fema-michael-projects" to "Projects", "sales-tax-projects" to "Projects", "audit-findings" to "Findings",
-        "campaign-contributions-2026" to "Gifts", "cra-payments" to "Records", "bonds" to "Bonds",
+        "campaign-contributions-2026" to "Gifts", "campaign-contributions-history" to "Gifts", "cra-payments" to "Records", "bonds" to "Bonds",
     )[datasetID] ?: "Records"
 
     private val agencies = mapOf(
