@@ -237,6 +237,9 @@ data class DatasetSpec(
                               badge = "method", filters = listOf("topic", "government", "method"), page = "data-sources"),
         "data-source-sites" to DatasetSpec(Section.MORE, "globe", title = listOf("website"), subtitle = listOf("topic"), detail = "topic",
                                    filters = listOf("topic"), page = "data-sources"),
+        // how much of each government's records since 2016 are on file, per portion; status is complete / partial / missing
+        "data-completeness" to DatasetSpec(Section.MORE, "checklist", title = listOf("portion"), subtitle = listOf("government", "period"), detail = "missing",
+                                   badge = "status", filters = listOf("government", "portion", "status"), page = "governments"),
         )
 
         /** Datasets the app shows in their own tabs rather than in Explore. */
