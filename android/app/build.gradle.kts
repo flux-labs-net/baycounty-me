@@ -8,12 +8,12 @@ plugins {
 
 android {
     namespace = "me.baycounty.app"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "me.baycounty"  // the Play listing's package name (fixed once set); the code namespace stays me.baycounty.app
         minSdk = 26
-        targetSdk = 35
+        targetSdk = 36
         // Play rejects a versionCode it already has. The release workflow sets BCM_VERSION_CODE to its run number. About shows both.
         versionCode = System.getenv("BCM_VERSION_CODE")?.toIntOrNull() ?: 1
         versionName = "1.0"
@@ -44,10 +44,6 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
-    }
-    kotlinOptions {
-        jvmTarget = "17"
-        freeCompilerArgs += listOf("-opt-in=androidx.compose.foundation.layout.ExperimentalLayoutApi", "-opt-in=androidx.compose.material3.ExperimentalMaterial3Api", "-opt-in=androidx.compose.foundation.ExperimentalFoundationApi")
     }
     buildFeatures {
         compose = true
@@ -81,4 +77,15 @@ tasks.withType<Test>().configureEach {
     System.getProperty("screens")?.let { systemProperty("screens", it) }
     System.getProperty("pages")?.let { systemProperty("pages", it) }
     System.getProperty("fullres")?.let { systemProperty("fullres", it) }
+    System.getProperty("tall")?.let { systemProperty("tall", it) }
+    // Paparazzi 2.0 alphas build their HTML report with a Gradle class that 8.x lacks. The PNGs and the XML results
+    // are what CI uses, so the HTML report stays off.
+    reports.html.required.set(false)
+}
+
+kotlin {
+    compilerOptions {
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17)
+        optIn.addAll("androidx.compose.foundation.layout.ExperimentalLayoutApi", "androidx.compose.material3.ExperimentalMaterial3Api", "androidx.compose.foundation.ExperimentalFoundationApi")
+    }
 }
