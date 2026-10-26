@@ -120,7 +120,7 @@
   {
    "id": "votes",
    "title": "Recorded votes",
-   "description": "Money votes by the County Commission, School Board, city commissions and CRA boards, with how each member voted.",
+   "description": "Votes by the County Commission, School Board, city commissions and CRA boards since 2016, with how each member voted: hand-researched money votes plus every motion read from the official minutes.",
    "rows": 606,
    "columns": [
     {
@@ -287,6 +287,36 @@
      "type": "array"
     },
     {
+     "name": "source_type",
+     "type": "string",
+     "values": [
+      "researched"
+     ]
+    },
+    {
+     "name": "verified",
+     "type": "string",
+     "values": [
+      "hand-checked"
+     ]
+    },
+    {
+     "name": "vote_method",
+     "type": "string"
+    },
+    {
+     "name": "mover",
+     "type": "string"
+    },
+    {
+     "name": "seconder",
+     "type": "string"
+    },
+    {
+     "name": "source_page",
+     "type": "string"
+    },
+    {
      "name": "vote_id",
      "type": "string"
     },
@@ -397,6 +427,17 @@
       "schools",
       "sp"
      ]
+    },
+    {
+     "name": "source_type",
+     "type": "string",
+     "values": [
+      "researched"
+     ]
+    },
+    {
+     "name": "vote_id",
+     "type": "string"
     },
     {
      "name": "person_id",

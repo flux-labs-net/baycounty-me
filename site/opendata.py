@@ -112,6 +112,9 @@ def add_vote_links(did, rows):
             r['vote_id'] = vids[i]
             r['contract_ids'] = [l['record_id'] for l in ls] or None
             r['contract_match_method'] = '; '.join(l['match_method'] for l in ls) or None
+        for r in rows[len(d['votes']):]:  # votes read from minutes: not linked to contracts yet
+            r.setdefault('contract_ids', None)
+            r.setdefault('contract_match_method', None)
     return rows
 
 
@@ -165,20 +168,38 @@ def _j(*p):
         return None
 
 
+def _minutes_votes():
+    """Votes read from official minutes (data/votes/minutes_votes.json, written by data/minutes/export_votes.py)."""
+    return (_j('votes', 'minutes_votes.json') or {}).get('votes') or []
+
+
+def _vote_row(v, names, source_type):
+    bm = v.get('by_member') or {}
+    return {'date': v.get('date'), 'government': gov_of_body(v['body']), 'board': names.get(v['body']), 'category': v.get('category'), 'headline': v.get('headline'),
+            'summary': v.get('summary'), 'amount': v.get('amount'), 'outcome': v.get('outcome'), 'tally': v.get('tally'), 'split': is_split(v),
+            'voted_yes': '; '.join(n for n, x in bm.items() if x == 'yes'), 'voted_no': '; '.join(n for n, x in bm.items() if x == 'no'),
+            'absent_or_abstained': '; '.join(n for n, x in bm.items() if x in ('absent', 'abstain')), 'agenda_item': v.get('item'),
+            'source_title': v.get('source_title'), 'source_url': v.get('source_url'),
+            'members': [{'name': n, 'person_id': ids.person_id(n), 'vote': x} for n, x in bm.items()] or None,
+            'source_type': source_type, 'verified': v.get('verified') or ('hand-checked' if source_type == 'researched' else None),
+            'vote_method': v.get('vote_method'), 'mover': v.get('mover'), 'seconder': v.get('seconder'), 'source_page': v.get('source_page'),
+            'vote_id': v.get('vote_id')}
+
+
 def _votes():
+    """Hand-researched votes (data/votes/votes.json) first, in file order (add_vote_links pairs them with
+    contract_votes.json by index), then every vote read from minutes."""
     d = _j('votes', 'votes.json'); names = {b['id']: re.sub(r'\bCity City\b', 'City', b['name']) for b in d['bodies']}
-    return [{'date': v.get('date'), 'government': gov_of_body(v['body']), 'board': names.get(v['body']), 'category': v.get('category'), 'headline': v.get('headline'),
-             'summary': v.get('summary'), 'amount': v.get('amount'), 'outcome': v.get('outcome'), 'tally': v.get('tally'), 'split': is_split(v),
-             'voted_yes': '; '.join(n for n, x in (v.get('by_member') or {}).items() if x == 'yes'), 'voted_no': '; '.join(n for n, x in (v.get('by_member') or {}).items() if x == 'no'),
-             'absent_or_abstained': '; '.join(n for n, x in (v.get('by_member') or {}).items() if x in ('absent', 'abstain')), 'agenda_item': v.get('item'),
-             'source_title': v.get('source_title'), 'source_url': v.get('source_url'),
-             'members': [{'name': n, 'person_id': ids.person_id(n), 'vote': x} for n, x in (v.get('by_member') or {}).items()] or None} for v in d['votes']]
+    return [_vote_row(v, names, 'researched') for v in d['votes']] + [_vote_row(v, names, 'minutes') for v in _minutes_votes()]
 
 
 def _member_votes():
     d = _j('votes', 'votes.json'); names = {b['id']: re.sub(r'\bCity City\b', 'City', b['name']) for b in d['bodies']}
-    return [{'date': v.get('date'), 'board': names.get(v['body']), 'member': n, 'vote': x, 'headline': v.get('headline'), 'source_url': v.get('source_url'), 'gov_id': gov_of_body(v['body'])}
-            for v in d['votes'] for n, x in (v.get('by_member') or {}).items()]
+    vids = ids.vote_ids(d['votes'])
+    both = [(v, vids[i], 'researched') for i, v in enumerate(d['votes'])] + [(v, v.get('vote_id'), 'minutes') for v in _minutes_votes()]
+    return [{'date': v.get('date'), 'board': names.get(v['body']), 'member': n, 'vote': x, 'headline': v.get('headline'), 'source_url': v.get('source_url'),
+             'gov_id': gov_of_body(v['body']), 'source_type': st, 'vote_id': vid}
+            for v, vid, st in both for n, x in (v.get('by_member') or {}).items()]
 
 
 def _cra():
@@ -365,7 +386,7 @@ def datasets():
     ts = _j('tourism', 'tourism_surtax.json'); pa = _j('michael', 'pa_ledger.json')
     D = [
         ('government-profiles', 'Government profiles', 'One row per government: population, budget, tax rate, debt, audit findings, votes, staff, utility bill and Hurricane Michael money.', _profiles),
-        ('votes', 'Recorded votes', 'Money votes by the County Commission, School Board, city commissions and CRA boards, with how each member voted.', _votes),
+        ('votes', 'Recorded votes', 'Votes by the County Commission, School Board, city commissions and CRA boards since 2016, with how each member voted: hand-researched money votes plus every motion read from the official minutes.', _votes),
         ('member-votes', 'Votes by member', 'One row per member per vote (long format), for tallying individual records.', _member_votes),
         ('contracts', 'Contracts', 'Major contracts approved since October 2022: vendor, amount, purpose, how awarded.', lambda: _flat(ct['contracts'], ['government', 'vendor', 'amount', 'purpose', 'date', 'method', 'source_title', 'source_url', 'notes'])),
         ('change-orders', 'Change orders', 'Contract change orders with original and new totals.', lambda: _flat(ct['change_orders'], ['government', 'vendor', 'project', 'original_amount', 'change_amount', 'new_total', 'pct_of_original', 'reason', 'date', 'source_url'])),

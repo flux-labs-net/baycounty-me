@@ -1,6 +1,9 @@
 """/data-sources: where every record on BayCounty.me comes from. Data: site/data_sources.py
-(datasets data-sources and data-source-sites)."""
-import collections, html
+(datasets data-sources and data-source-sites). The "What we've loaded so far" section is live: assets/progress.js
+reads GET /api/v1/import-progress (api/_progress.js), the same numbers the /admin Import progress tab shows."""
+import collections, html, os
+
+HERE = os.path.dirname(os.path.abspath(__file__))
 
 from data_sources import GOVS, TOPICS, AUTO_DAILY, AUTO_WEEKLY, AUTO_30, LIVE, BULK, rows, site_rows
 
@@ -36,7 +39,10 @@ def _kind(method):
     return 'a' if method in AUTO else 'l' if method == LIVE else 'h'
 
 
-def data_sources_page():
+def data_sources_page(out_dir=None):
+    if out_dir:
+        os.makedirs(os.path.join(out_dir, 'assets'), exist_ok=True)
+        open(os.path.join(out_dir, 'assets', 'progress.js'), 'w').write(open(os.path.join(HERE, 'progress.js')).read())
     R = rows()
     W = site_rows()
     e = html.escape
@@ -93,7 +99,12 @@ def data_sources_page():
       <div class="kpi"><span class="eyebrow">State and federal files</span><span class="v">{n_bulk}</span><span class="s">bulk data downloads</span></div>
       <div class="kpi"><span class="eyebrow">Websites cited</span><span class="v">{sites}</span><span class="s">{docs:,} documents and pages linked</span></div>
     </div>
-    <p>Data is still being loaded and checked, so some totals are not final and may change. Found something wrong or missing? <a href="/about#contact">Send a correction</a>.</p>
+    <p>Data is still being loaded and checked, so some totals are not final and may change (<a href="#progress">see how far we’ve got</a>). Found something wrong or missing? <a href="/about#contact">Send a correction</a>.</p>
+  </section>
+
+  <section class="tx-sec"><div class="sec-hd"><h2 id="progress" data-tile="Loaded so far">What we’ve loaded so far</h2><span class="muted">Live: every vote in every board’s minutes since 2016</span></div>
+    <p>We’re reading every set of meeting minutes each governing board has posted since 2016, so every vote and how each member voted can be searched. This tracks it as it runs: files found in each government’s archive, downloaded, read into motions and roll calls, and checked. The same numbers are in the API at <a href="/api/v1/import-progress">/api/v1/import-progress</a>.</p>
+    <div data-import-progress><p class="muted">Loading progress…</p></div>
   </section>
 
   <section class="tx-sec"><div class="sec-hd"><h2 id="rules" data-tile="Our rules">How we work</h2></div>
@@ -129,4 +140,5 @@ def data_sources_page():
     <p>Both tables are open data: <a href="/api/v1/datasets/data-sources">data-sources</a> and <a href="/api/v1/datasets/data-source-sites">data-source-sites</a> in the API, or as CSV on <a href="/open-data">Open data</a>.</p>
   </section>
 </div>
-<link rel="stylesheet" href="/assets/tax.css">'''
+<link rel="stylesheet" href="/assets/tax.css">
+<script src="/assets/progress.js" defer></script>'''

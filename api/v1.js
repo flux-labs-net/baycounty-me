@@ -19,6 +19,7 @@
 //   GET /api/v1/checkbook?gov=&fy=      one government's payments in a fiscal year: by month, payee and fund (api/_openbooks.js)
 //   GET /api/v1/budget-actual?gov=&fy=&as_of=   spending and revenue against the budget, by department (api/_openbooks.js)
 //   GET /api/v1/officials?gov=&year=&date=  who held each elected seat in a fiscal year or on a date (api/_officials.js)
+//   GET /api/v1/import-progress         how far the minutes backfill has got, per board and year (api/_progress.js)
 // Responses carry an ETag (and Last-Modified when the data's date is known); a matching If-None-Match or
 // If-Modified-Since gets 304 Not Modified with no body.
 const crypto = require('crypto');
@@ -144,6 +145,8 @@ function openapi(catalog) {
       '/datasets/{id}/schema': {get: {operationId: 'datasetSchema', summary: 'Columns and types for one dataset', parameters: [{name: 'id', in: 'path', required: true, schema: {type: 'string', enum: ids}}], responses: {200: {description: 'Schema'}}}},
       '/governments': {get: {operationId: 'listGovernments', summary: 'Profile of every local government', responses: {200: {description: 'Profiles'}}}},
       '/governments/{slug}': {get: {operationId: 'getGovernment', summary: 'One government profile, with its budget, tax rate, audited actuals, residents, debt and staff for each fiscal year on record (years)', parameters: [{name: 'slug', in: 'path', required: true, schema: {type: 'string', example: 'lynn-haven'}}], responses: {200: {description: 'Profile'}, 404: {description: 'Unknown government'}}}},
+      '/import-progress': {get: {operationId: 'importProgress', summary: 'How far loading every board\'s meeting minutes since 2016 has got: files found in each archive, downloaded, read into motions and checked, per board and year, with the estimated time left',
+        responses: {200: {description: '{installed, phase, stages: [...], totals, eta, last, runs: [...], boards: [{board, gov, name, note, totals, years: [{year, listed, found, captured, read, motions, passed, flagged, state}]}]}'}}}},
       '/status': {get: {operationId: 'status', summary: 'Rows per dataset, last database sync and load errors', responses: {200: {description: '{database, last_sync, errors: [...], datasets: [{id, rows_published, rows_in_database, last_ingest, error}]}'}}}},
       '/changes': {get: {operationId: 'changes', summary: 'Records added to the database since a time',
         description: 'Uses each record\'s created_at (when the database first saw it). An edited record counts as new; removed records are not listed.',
@@ -215,10 +218,11 @@ module.exports = async (req, res) => {
     if (!parts.length) return res.status(200).json({
       name: 'BayCounty.me API', version: 'v1', updated: catalog.updated, docs: `${SITE}/developers`, openapi: `${SITE}/api/v1/openapi.json`, mcp: `${SITE}/api/mcp`,
       endpoints: {datasets: `${SITE}/api/v1/datasets`, governments: `${SITE}/api/v1/governments`, search: `${SITE}/api/v1/search?q=`,
-        entities: `${SITE}/api/v1/entities?q=`, budget_compare: `${SITE}/api/v1/budget-compare?gov=lh&from=2025&to=2026`, checkbook: `${SITE}/api/v1/checkbook?gov=lh`, budget_actual: `${SITE}/api/v1/budget-actual?gov=lh`, officials: `${SITE}/api/v1/officials?gov=lh&year=2019`, status: `${SITE}/api/v1/status`, changes: `${SITE}/api/v1/changes?since=`, meetings_calendar: `${SITE}/api/v1/meetings.ics?gov=`},
+        entities: `${SITE}/api/v1/entities?q=`, budget_compare: `${SITE}/api/v1/budget-compare?gov=lh&from=2025&to=2026`, checkbook: `${SITE}/api/v1/checkbook?gov=lh`, budget_actual: `${SITE}/api/v1/budget-actual?gov=lh`, officials: `${SITE}/api/v1/officials?gov=lh&year=2019`, status: `${SITE}/api/v1/status`, import_progress: `${SITE}/api/v1/import-progress`, changes: `${SITE}/api/v1/changes?since=`, meetings_calendar: `${SITE}/api/v1/meetings.ics?gov=`},
       license: catalog.license, datasets: catalog.datasets.map(d => ({id: d.id, title: d.title, rows: d.rows, url: `${SITE}/api/v1/datasets/${d.id}`}))});
     if (parts[0] === 'openapi.json') return res.status(200).json(openapi(catalog));
     if (parts[0] === 'status') { res.locals.lastModified = null; return res.status(200).json(await status(catalog)); }
+    if (parts[0] === 'import-progress') { res.locals.lastModified = null; return res.status(200).json(await require('./_progress').publicProgress(rest)); }
     if (parts[0] === 'changes') { res.locals.lastModified = null; return res.status(200).json(await changes(catalog, req.query)); }
     if (parts[0] === 'meetings.ics') {
       const md = catalog.datasets.find(d => d.id === 'meetings');

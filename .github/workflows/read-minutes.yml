@@ -1,0 +1,100 @@
+# Votes from meeting minutes (data/minutes/README_minutes.md).
+#   list:    count the files each archive lists and store the counts for the progress pages (no downloads).
+#   crawl:   capture every governing-board minutes file from 2016 on into the agenda store (crawl_minutes.py).
+#            Skips files it already has, so it can be stopped and run again. Hand runs only.
+#   read:    collect finished Message Batches, then send the next minutes files (read_minutes.py --collect --submit).
+#            Runs every 3 hours, which drains the 2016-2026 backlog over a few days and then picks up new minutes the
+#            watcher captures. Spending is capped: MINUTES_BATCH_BUDGET_USD per run (default 25) and
+#            MINUTES_TOTAL_BUDGET_USD for all reads (default 150).
+#   rematch: re-run name matching and checks on stored motions after data/civic/officeholders.json changes.
+# Motions reach the site through the daily meetings refresh (export_votes.py). Flagged ones wait on /admin.
+# Secrets: DATABASE_URL, SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, ANTHROPIC_API_KEY (+ variable ANTHROPIC_WORKSPACE_ID
+# if the key isn't workspace-scoped). Variables (optional): MINUTES_MODEL (default claude-sonnet-5-5),
+# MINUTES_SUBMIT_MAX, MINUTES_BATCH_BUDGET_USD, MINUTES_TOTAL_BUDGET_USD, MINUTES_PAUSED=1 to stop scheduled reads.
+name: Read minutes
+on:
+  schedule:
+    - cron: '41 */3 * * *'
+  workflow_dispatch:
+    inputs:
+      step:
+        description: 'list, crawl, read, crawl+read or rematch'
+        default: read
+      only:
+        description: 'crawl: limit to sources (comma list: county,schools,pc,cw,lh,pcb,sp,parker,mb). Blank = all.'
+        default: ''
+      from_year:
+        description: 'crawl: first year (2016 or later)'
+        default: '2016'
+      max:
+        description: 'crawl: most files to fetch this run'
+        default: '2500'
+permissions:
+  contents: read
+concurrency:
+  group: read-minutes
+  cancel-in-progress: false
+jobs:
+  minutes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      SUPABASE_REGION: ${{ vars.SUPABASE_REGION || 'us-east-2' }}
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+      STEP: ${{ inputs.step || 'read' }}
+    steps:
+      - name: Paused?
+        id: gate
+        run: |
+          if [ "${{ github.event_name }}" = "schedule" ] && [ "${{ vars.MINUTES_PAUSED }}" = "1" ]; then echo "skip=true" >> "$GITHUB_OUTPUT"; echo "Paused (MINUTES_PAUSED=1)"; fi
+      - uses: actions/checkout@v4
+        if: steps.gate.outputs.skip != 'true'
+      - uses: actions/setup-python@v5
+        if: steps.gate.outputs.skip != 'true'
+        with:
+          python-version: '3.12'
+      - name: Install tools
+        if: steps.gate.outputs.skip != 'true'
+        run: |
+          pip install -q 'psycopg[binary]'
+          sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils tesseract-ocr >/dev/null
+      - name: Count files in each archive
+        if: steps.gate.outputs.skip != 'true' && env.STEP == 'list'
+        env:
+          ONLY: ${{ inputs.only }}
+          FROM: ${{ inputs.from_year || '2016' }}
+        run: |
+          args="--inventory --from $FROM"
+          [ -n "$ONLY" ] && args="$args --only $ONLY"
+          python data/minutes/crawl_minutes.py $args
+      - name: Capture minutes files
+        if: steps.gate.outputs.skip != 'true' && contains(env.STEP, 'crawl')
+        env:
+          ONLY: ${{ inputs.only }}
+          FROM: ${{ inputs.from_year || '2016' }}
+          MAX: ${{ inputs.max || '2500' }}
+        run: |
+          args="--from $FROM --max $MAX"
+          [ -n "$ONLY" ] && args="$args --only $ONLY"
+          python data/minutes/crawl_minutes.py $args
+      - name: Read minutes into votes
+        if: steps.gate.outputs.skip != 'true' && (contains(env.STEP, 'read') || env.STEP == 'rematch')
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ANTHROPIC_WORKSPACE_ID: ${{ vars.ANTHROPIC_WORKSPACE_ID }}
+          MINUTES_MODEL: ${{ vars.MINUTES_MODEL }}
+          MINUTES_SUBMIT_MAX: ${{ vars.MINUTES_SUBMIT_MAX }}
+          MINUTES_BATCH_BUDGET_USD: ${{ vars.MINUTES_BATCH_BUDGET_USD }}
+          MINUTES_TOTAL_BUDGET_USD: ${{ vars.MINUTES_TOTAL_BUDGET_USD }}
+        run: |
+          if [ "$STEP" = "rematch" ]; then python data/minutes/read_minutes.py --rematch; else python data/minutes/read_minutes.py --collect --submit; fi
+      - name: Email admins about problems
+        if: always() && steps.gate.outputs.skip != 'true' && (failure() || github.event_name == 'workflow_dispatch')
+        env:
+          STEPS: ${{ toJSON(steps) }}
+          JOB_STATUS: ${{ job.status }}
+          RESEND_KEY: ${{ secrets.RESEND_FULL_KEY }}
+          ADMIN_EMAILS: ${{ secrets.ADMIN_EMAILS }}
+        run: python3 .github/scripts/notify_admins.py

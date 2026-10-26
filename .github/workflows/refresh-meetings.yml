@@ -90,6 +90,17 @@ jobs:
         run: |
           pip install -q 'psycopg[binary]'
           python data/agendas/export_items.py
+      - name: Export votes read from minutes
+        # Motions read from official minutes that passed every check or were approved on /admin
+        # (data/minutes/export_votes.py). A database problem keeps the last export.
+        id: export_minutes_votes
+        continue-on-error: true
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          SUPABASE_REGION: ${{ vars.SUPABASE_REGION || 'us-east-2' }}
+        run: |
+          pip install -q 'psycopg[binary]'
+          python data/minutes/export_votes.py
       - name: Rebuild derived datasets
         # People, vendor matches, contract votes, Sunbiz donor links and nonprofit links are built from the files
         # fetched above (data/build.py). Without this, new candidates and gifts got no profile until someone rebuilt.
@@ -109,10 +120,10 @@ jobs:
       - name: Commit if changed
         id: commit_and_push
         run: |
-          src="data/meetings data/elections/finance_2026.json data/campaign/owner_gifts.json data/agendas/agenda_items.json"
+          src="data/meetings data/elections/finance_2026.json data/campaign/owner_gifts.json data/agendas/agenda_items.json data/votes/minutes_votes.json"
           # git status --porcelain also lists new, untracked files, which git diff --quiet ignores.
           if [ -z "$(git status --porcelain -- data site/public)" ]; then echo "No changes"; exit 0; fi
-          .github/scripts/push_refresh.sh "Daily refresh: meetings, agenda items and campaign finance ($(date -u +%Y-%m-%d))" $src
+          .github/scripts/push_refresh.sh "Daily refresh: meetings, agenda items, votes from minutes and campaign finance ($(date -u +%Y-%m-%d))" $src
       - name: Deploy the refresh to Vercel
         # Vercel blocks Git deploys of commits whose author isn't on the Vercel team, which includes this bot's commits.
         # A deploy hook (Vercel > Project > Settings > Git > Deploy Hooks, branch main) builds main regardless; store

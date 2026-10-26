@@ -228,10 +228,10 @@ details.ag summary{cursor:pointer;color:var(--blue)} details.ag pre{white-space:
 MENU = [
     ('Review', 'teal', 'shield', [('owners', 'Business owners', 'owners'), ('limits', 'Gifts over the limit', 'limits'),
                                   ('boards', 'Nonprofit boards', 'boards'), ('ties', 'Business ties', 'ties'),
-                                  ('accounting', 'Accounting files', 'accounting')]),
+                                  ('minutes', 'Votes from minutes', 'minutes'), ('accounting', 'Accounting files', 'accounting')]),
     ('Outreach', 'blue', 'send', [('compose', 'Write to officials', None), ('correspondence', 'Conversations', 'replies'),
                                   ('records', 'Records requests', 'records')]),
-    ('Data & email', 'amber', 'db', [('ingestion', 'Data health', 'syncs'), ('agendas', 'Agendas', 'agendas'),
+    ('Data & email', 'amber', 'db', [('ingestion', 'Data health', 'syncs'), ('progress', 'Import progress', None), ('agendas', 'Agendas', 'agendas'),
                                      ('sent', 'Sent mail', None), ('emails', 'Email templates', None)]),
     ('API', 'gray', 'key', [('keys', 'Keys', None), ('analytics', 'Usage & request log', None), ('settings', 'Limits & activity', None)]),
 ]
@@ -516,6 +516,30 @@ def admin_page(out_dir):
       <div class="tw"><table class="at" id="bt-table" data-tt="off"><thead><tr><th class="pk"><input type="checkbox" data-bk-all aria-label="Select all shown"></th><th>Official</th><th>Sunbiz person</th><th>Businesses</th><th>Links</th><th>Review</th></tr></thead><tbody></tbody></table></div>
     </section>
 
+    <section id="tab-progress" class="pane" hidden>
+      <div class="banner"><div><b>Minutes backfill progress.</b> <span class="small muted">The same numbers as the public “What we’ve loaded so far” section on <a href="/data-sources#progress" target="_blank" rel="noopener">Where our data comes from</a>, plus costs. Run the Read minutes workflow with step <b>list</b> to count each archive, <b>crawl</b> to download, and reading runs every 3 hours on its own. Flagged votes wait in <a href="#minutes">Votes from minutes</a>.</span></div></div>
+      <div id="ip-admin"><p class="muted">Loading…</p></div>
+    </section>
+
+    <section id="tab-minutes" class="pane" hidden>
+      <div class="banner"><div><b>Votes read from meeting minutes.</b> <span class="small muted">Every minutes file since 2016 is read by Claude into motions and roll calls, and the printed names are matched to officeholder terms. Motions that pass every check go on the site automatically on the next daily refresh. Motions here failed a check, or are a random 1-in-50 spot check of passing ones: open the minutes page, then approve (publishes a flagged motion) or reject (keeps any motion off the site). To fix a wrong name or term, correct data/civic/officeholders.json and re-match.</span></div></div>
+      <div class="tiles" id="mv-tiles"></div>
+      <div class="row" style="gap:8px;flex-wrap:wrap;margin:18px 0 8px">
+        <h2 class="h2 grow" style="margin:0">Motions</h2>
+        <input class="sel" id="mv-q" type="search" placeholder="Words in the motion" aria-label="Words in the motion">
+        <select class="sel" id="mv-queue" aria-label="Queue"><option value="flagged">Flagged</option><option value="sample">Spot checks</option><option value="passed">Passed checks</option><option value="all">All motions</option></select>
+        <select class="sel" id="mv-board" aria-label="Board"><option value="">Every board</option></select>
+        <select class="sel" id="mv-year" aria-label="Year"><option value="">Every year</option></select>
+        <select class="sel" id="mv-status" aria-label="Review status"><option value="unreviewed">Unreviewed</option><option value="">Any review status</option><option value="approved">Approved</option><option value="rejected">Rejected</option></select>
+      </div>
+      <div id="mv-checks" class="small muted" style="margin:0 0 8px"></div>
+      <div class="tw"><table class="at" id="mv-table" data-tt="off"><thead><tr><th class="pk"><input type="checkbox" data-bk-all aria-label="Select all shown"></th><th>Meeting</th><th>Motion</th><th>Votes</th><th>Checks</th><th>Review</th></tr></thead><tbody></tbody></table></div>
+      <h2 class="h2" style="margin:24px 0 8px">Coverage</h2>
+      <div class="tw"><table class="at" id="mv-coverage"><thead><tr><th>Board</th><th class="num">Files</th><th class="num">Read</th><th class="num">Motions</th><th>By year (files read / captured)</th></tr></thead><tbody></tbody></table></div>
+      <h2 class="h2" style="margin:24px 0 8px">Batches</h2>
+      <div class="tw"><table class="at" id="mv-batches"><thead><tr><th>Batch</th><th>Status</th><th class="num">Requests</th><th class="num">Estimate</th><th class="num">Cost</th><th>Sent</th><th>Collected</th></tr></thead><tbody></tbody></table></div>
+    </section>
+
     <section id="tab-owners" class="pane" hidden>
       <div class="banner"><div><b>Private research. Do not publish names from this tab.</b> <span class="small muted">Officers, managers and registered agents from the state corporate file (Sunbiz), grouped into people by name and address, and business campaign gifts matched to those businesses. Public pages show business names only. Mark a group confirmed after checking it on Sunbiz; nothing here is published automatically. Giving through several companies is legal in Florida when each company is a real contributor.</span></div></div>
       <div class="tiles" id="ow-tiles"></div>
@@ -630,6 +654,7 @@ def admin_page(out_dir):
     <span class="grow"></span><button class="btn" value="cancel" id="kd-close">Close</button>
   </div>
 </form></dialog>
+<script src="/assets/progress.js" defer></script>
 <script src="/assets/admin.js?v={js_ver}" defer></script>
 </body>
 </html>

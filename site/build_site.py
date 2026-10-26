@@ -547,7 +547,7 @@ def page_options():
 
 def data_sources_page():
     from data_sources_page import data_sources_page as page
-    return page()
+    return page(OUT)
 
 
 def about_page():
