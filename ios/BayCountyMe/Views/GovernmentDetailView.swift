@@ -155,7 +155,8 @@ struct GovernmentDetailView: View {
         var parts: [String] = []
         if h.partOfPeriod {
             let s = h.startDate.map { "from \(Self.short($0))" }, e = h.endDate.map { "until \(Self.short($0))" }
-            parts.append("Part of the year" + ([s, e].compactMap { $0 }.isEmpty ? "" : ", " + [s, e].compactMap { $0 }.joined(separator: " "))
+            let range = [s, e].compactMap { $0 }
+            parts.append("Part of the year" + (range.isEmpty ? "" : ", " + range.joined(separator: " ")))
         }
         if !h.confirmed { parts.append("Not confirmed from the records found") }
         return parts.joined(separator: " · ")
