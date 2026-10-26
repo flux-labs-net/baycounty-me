@@ -32,6 +32,9 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.launch
 
+/** Where screens start scrolled to, in pixels. Only the screenshot tests change it, to capture long pages in parts. */
+val LocalScrollStart = androidx.compose.runtime.staticCompositionLocalOf { 0 }
+
 /** An icon-only toolbar button (toolbar items never carry text). */
 @Composable
 fun ToolbarIcon(symbol: String, description: String, onClick: () -> Unit) {
@@ -49,7 +52,7 @@ fun Screen(
     navigationIcon: (@Composable () -> Unit)? = null,
     actions: @Composable RowScope.() -> Unit = {},
     onRefresh: (suspend () -> Unit)? = null,
-    listState: LazyListState = rememberLazyListState(),
+    listState: LazyListState = rememberLazyListState(0, LocalScrollStart.current),
     spacing: Int = 26,
     content: LazyListScope.() -> Unit,
 ) {

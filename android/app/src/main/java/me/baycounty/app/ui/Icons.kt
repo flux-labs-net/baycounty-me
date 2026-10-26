@@ -1,6 +1,7 @@
 package me.baycounty.app.ui
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.FilterAlt
 import androidx.compose.material.icons.automirrored.outlined.ArrowForward
 import androidx.compose.material.icons.automirrored.outlined.CompareArrows
 import androidx.compose.material.icons.automirrored.outlined.List
@@ -77,11 +78,13 @@ fun icon(symbol: String?): ImageVector = when (symbol) {
     "curlybraces" -> Icons.Outlined.Code
     "wifi.slash" -> Icons.Outlined.WifiOff
     "minus.circle" -> Icons.Outlined.RemoveCircleOutline
-    "line.3.horizontal.decrease.circle", "line.3.horizontal.decrease.circle.fill" -> Icons.Outlined.FilterList
+    "line.3.horizontal.decrease.circle" -> Icons.Outlined.FilterAlt
+    "line.3.horizontal.decrease.circle.fill" -> Icons.Filled.FilterAlt
     "xmark", "xmark.circle.fill" -> Icons.Outlined.Close
     "chevron.right" -> Icons.Outlined.ChevronRight
     "chevron.down" -> Icons.Outlined.ExpandMore
     "chevron.up" -> Icons.Outlined.ExpandLess
+    "chevron.up.chevron.down" -> Icons.Outlined.UnfoldMore
     "trend" -> Icons.AutoMirrored.Outlined.ShowChart
     else -> Icons.Outlined.TableChart
 }

@@ -46,10 +46,10 @@ import java.io.File
 import java.time.Instant
 
 /** App-wide state: the catalog, governments, meetings, any dataset rows loaded so far, and the site's /data/app files. */
-class AppStore(context: Context) {
-    private val app = context.applicationContext
+class AppStore(context: Context, client: BayCountyClient? = null) {
+    private val app = context.applicationContext ?: context
     val scope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
-    val client = BayCountyClient(
+    val client = client ?: BayCountyClient(
         cacheDirectory = File(app.cacheDir, "BayCountyMe"),
         seed = { name -> runCatching { app.assets.open("seed/$name").use { it.readBytes() } }.getOrNull() },
     )

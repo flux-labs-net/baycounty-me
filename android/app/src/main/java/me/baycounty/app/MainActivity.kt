@@ -57,8 +57,7 @@ private val tabs = listOf(
 )
 
 @Composable
-fun AppRoot(store: AppStore, screen: String? = null) {
-    val nav = remember { Nav() }
+fun AppRoot(store: AppStore, screen: String? = null, nav: Nav = remember { Nav() }) {
     val saver = rememberSaveableStateHolder()
     LaunchedEffect(Unit) {
         store.loadEssentials()
@@ -112,6 +111,13 @@ private fun TabRoot(tab: Tab) = when (tab) {
 fun RouteScreen(route: Route) {
     when (route) {
         is Route.MeetingDetail -> MeetingDetailScreen(route.id)
+        is Route.Gov -> GovernmentScreen(route.govID)
+        Route.People -> PeopleScreen()
+        is Route.Person -> PersonScreen(route.id)
+        Route.Vendors -> VendorsScreen()
+        is Route.Vendor -> VendorScreen(route.id)
+        Route.DonorContracts -> DonorContractsScreen()
+        Route.MoneyMap -> MoneyMapScreen()
         Route.Search -> SearchScreen()
         else -> PendingScreen(route)
     }

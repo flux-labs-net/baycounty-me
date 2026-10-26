@@ -671,3 +671,30 @@ val PagePadding = PaddingValues(start = 16.dp, end = 16.dp, top = 8.dp, bottom =
 
 @Composable
 fun RowScope.Fill() = Spacer(Modifier.weight(1f))
+
+/** A pill that opens a menu of choices (the iOS Menu picker), for long lists like fiscal years. */
+@Composable
+fun <K> MenuPicker(label: String, options: List<Pair<K, String>>, description: String = label, onPick: (K) -> Unit) {
+    var open by remember { mutableStateOf(false) }
+    Box {
+        Row(
+            Modifier.heightIn(min = 44.dp).card(22.dp).clickable(role = Role.Button) { open = true }.padding(horizontal = 16.dp)
+                .semantics { contentDescription = description },
+            verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp),
+        ) {
+            Text(label, style = T.subheadBold, color = Brand.text)
+            Icon(icon("chevron.up.chevron.down"), null, tint = Brand.secondary, modifier = Modifier.size(16.dp))
+        }
+        androidx.compose.material3.DropdownMenu(open, { open = false }, containerColor = Brand.surface) {
+            for ((k, t) in options) androidx.compose.material3.DropdownMenuItem(text = { Text(t, style = T.body, color = Brand.text) }, onClick = { open = false; onPick(k) })
+        }
+    }
+}
+
+/** "All 12 findings" / "Show fewer" at the bottom of a CardList. */
+@Composable
+fun ShowMoreRow(expanded: Boolean, moreLabel: String, onToggle: () -> Unit) {
+    Box(Modifier.fillMaxWidth().heightIn(min = 44.dp).clickable(role = Role.Button, onClick = onToggle), contentAlignment = Alignment.Center) {
+        Text(if (expanded) "Show fewer" else moreLabel, style = T.subheadBold, color = Brand.navy)
+    }
+}

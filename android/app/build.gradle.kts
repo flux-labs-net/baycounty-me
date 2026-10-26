@@ -3,6 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("org.jetbrains.kotlin.plugin.compose")
     id("org.jetbrains.kotlin.plugin.serialization")
+    id("app.cash.paparazzi")
 }
 
 android {
@@ -72,4 +73,12 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7")
     implementation("androidx.browser:browser:1.8.0")
     implementation("org.osmdroid:osmdroid-android:6.1.20")
+    testImplementation("junit:junit:4.13.2")
+}
+
+tasks.withType<Test>().configureEach {
+    systemProperty("repoRoot", rootProject.projectDir.parentFile.absolutePath)
+    System.getProperty("screens")?.let { systemProperty("screens", it) }
+    System.getProperty("pages")?.let { systemProperty("pages", it) }
+    System.getProperty("fullres")?.let { systemProperty("fullres", it) }
 }

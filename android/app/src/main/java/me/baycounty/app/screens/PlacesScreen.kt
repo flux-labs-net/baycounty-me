@@ -79,7 +79,7 @@ fun PlacesScreen() {
                                 GovBadge(g.govID)
                                 Column(Modifier.weight(1f)) {
                                     Text(g.name, style = T.subheadBold, color = Brand.text)
-                                    Text(govSubtitle(g), style = T.caption, color = Brand.secondary, maxLines = 1)
+                                    Text(govSubtitle(g), style = T.caption, color = Brand.secondary, maxLines = 2)
                                 }
                                 g.budgetTotal?.let { Text(Format.compactMoney(it), style = T.subheadBold.copy(fontWeight = FontWeight.Bold), color = Brand.text) }
                                 Chevron()
