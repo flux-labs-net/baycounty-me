@@ -54,3 +54,24 @@ const shards = ['00349-010-000', '12345-678-000', '30123-100-000', 'A-1'].map(p 
 
 fs.writeFileSync(root + '/ios/BayCountyKit/Tests/BayCountyKitTests/Fixtures/web-parity.json', JSON.stringify({tax, a3, parse, shards}, null, 1));
 console.log(`wrote ${tax.length} tax, ${a3.length} amendment, ${parse.length} parse, ${shards.length} shard cases`);
+
+// --- api/_officials.js and api/_budget.js: who held each seat, and budget comparisons, from the published datasets
+const dl = n => JSON.parse(fs.readFileSync(root + '/site/public/downloads/' + n + '.json'));
+const {inOffice} = require(root + '/api/_officials.js');
+const {compare} = require(root + '/api/_budget.js');
+const terms = dl('officeholder-terms'), budgets = dl('budget-years');
+const officials = [];
+for (const gov of ['county', 'schools', 'lh', 'pc', 'mb', 'parker']) for (const year of [2016, 2019, 2023, 2026]) {
+  const r = inOffice(terms, {gov, year});
+  officials.push({gov, year, seats: r.seats.map(s => ({seat: s.seat, holders: s.holders.map(h => h.person_name + (h.part_of_period ? '*' : ''))}))});
+}
+const budget = [];
+for (const gov of [...new Set(budgets.map(r => r.gov_id))]) for (const basis of ['adopted', 'actual']) {
+  let r; try { r = compare(budgets, {gov, basis}); } catch (e) { continue; }
+  const pick = ls => ls.slice(0, 5).map(l => ({key: l.key, from: l.from, to: l.to}));
+  budget.push({gov, basis, from: r.from, to: r.to, totals: pick(r.totals),
+    sections: Object.fromEntries(Object.entries(r.sections).map(([k, v]) => [k, pick(v)])), notes: r.notes,
+    up: r.biggest_increase && r.biggest_increase.key, down: r.biggest_decrease && r.biggest_decrease.key});
+}
+fs.writeFileSync(root + '/ios/BayCountyKit/Tests/BayCountyKitTests/Fixtures/api-parity.json', JSON.stringify({officials, budget}, null, 1));
+console.log(`wrote ${officials.length} officials, ${budget.length} budget comparison cases`);

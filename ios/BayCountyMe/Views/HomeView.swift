@@ -47,6 +47,10 @@ struct HomeView: View {
                         .accessibilityLabel("About BayCounty.me")
                 }
                 ToolbarItem(placement: .topBarTrailing) {
+                    Button { store.openSite("/ask") } label: { Image(systemName: "bubble.left.and.text.bubble.right") }
+                        .accessibilityLabel("Ask a question")
+                }
+                ToolbarItem(placement: .topBarTrailing) {
                     Button { store.openSite("/alerts") } label: { Image(systemName: "bell") }
                         .accessibilityLabel("Email alerts")
                 }
@@ -271,6 +275,7 @@ struct HomeView: View {
             "vendor": .vendor("roberts-and-roberts"), "person": .person("clair-pease"), "explore": .explore,
             "votes": .dataset("votes"), "salaries": .dataset("salary-positions"),
             "accountability": .accountability, "accproject": .accountabilityProject("pcb-fbr-seg3"),
+            "budget": .budgetCompare(govID: "lh"), "craincrement": .craIncrement, "pastelections": .dataset("campaign-history"),
         ]
         if let r = simple[arg] { path = [r]; return }
         if arg == "tab:search" { path = [.search]; return }

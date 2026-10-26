@@ -1,0 +1,2562 @@
+{
+ "officials": [
+  {
+   "gov": "county",
+   "year": 2016,
+   "seats": [
+    {
+     "seat": "District 1",
+     "holders": [
+      "Mike Nelson"
+     ]
+    },
+    {
+     "seat": "District 2",
+     "holders": [
+      "George Gainer"
+     ]
+    },
+    {
+     "seat": "District 3",
+     "holders": [
+      "Bill Dozier"
+     ]
+    },
+    {
+     "seat": "District 4",
+     "holders": [
+      "Guy Tunnell"
+     ]
+    },
+    {
+     "seat": "District 5",
+     "holders": [
+      "Mike Thomas*",
+      "null*",
+      "Philip Griffitts*"
+     ]
+    },
+    {
+     "seat": "County Manager",
+     "holders": [
+      "Bob Majka"
+     ]
+    }
+   ]
+  },
+  {
+   "gov": "county",
+   "year": 2019,
+   "seats": [
+    {
+     "seat": "District 1",
+     "holders": [
+      "Tommy Hamm"
+     ]
+    },
+    {
+     "seat": "District 2",
+     "holders": [
+      "Robert Carroll"
+     ]
+    },
+    {
+     "seat": "District 3",
+     "holders": [
+      "Bill Dozier"
+     ]
+    },
+    {
+     "seat": "District 4",
+     "holders": [
+      "Guy Tunnell*",
+      "Keith Baker*"
+     ]
+    },
+    {
+     "seat": "District 5",
+     "holders": [
+      "Philip Griffitts"
+     ]
+    },
+    {
+     "seat": "County Manager",
+     "holders": [
+      "Bob Majka"
+     ]
+    }
+   ]
+  },
+  {
+   "gov": "county",
+   "year": 2023,
+   "seats": [
+    {
+     "seat": "District 1",
+     "holders": [
+      "Tommy Hamm"
+     ]
+    },
+    {
+     "seat": "District 2",
+     "holders": [
+      "Robert Carroll"
+     ]
+    },
+    {
+     "seat": "District 3",
+     "holders": [
+      "Bill Dozier"
+     ]
+    },
+    {
+     "seat": "District 4",
+     "holders": [
+      "Doug Moore"
+     ]
+    },
+    {
+     "seat": "District 5",
+     "holders": [
+      "Philip Griffitts*",
+      "null*",
+      "Clair Pease*"
+     ]
+    },
+    {
+     "seat": "County Manager",
+     "holders": [
+      "Bob Majka"
+     ]
+    }
+   ]
+  },
+  {
+   "gov": "county",
+   "year": 2026,
+   "seats": [
+    {
+     "seat": "District 1",
+     "holders": [
+      "Daniel Raffield"
+     ]
+    },
+    {
+     "seat": "District 2",
+     "holders": [
+      "Robert Carroll"
+     ]
+    },
+    {
+     "seat": "District 3",
+     "holders": [
+      "Doug Crosby"
+     ]
+    },
+    {
+     "seat": "District 4",
+     "holders": [
+      "Doug Moore"
+     ]
+    },
+    {
+     "seat": "District 5",
+     "holders": [
+      "Clair Pease"
+     ]
+    },
+    {
+     "seat": "County Manager",
+     "holders": [
+      "Bob Majka*",
+      "Joel Schubert*"
+     ]
+    }
+   ]
+  },
+  {
+   "gov": "schools",
+   "year": 2016,
+   "seats": [
+    {
+     "seat": "Superintendent",
+     "holders": [
+      "Bill Husfelt"
+     ]
+    },
+    {
+     "seat": "District 1",
+     "holders": [
+      "Jerry Register"
+     ]
+    },
+    {
+     "seat": "District 2",
+     "holders": [
+      "Ginger Littleton"
+     ]
+    },
+    {
+     "seat": "District 3",
+     "holders": [
+      "Joe Wayne Walker"
+     ]
+    },
+    {
+     "seat": "District 4",
+     "holders": [
+      "Ryan Neves"
+     ]
+    },
+    {
+     "seat": "District 5",
+     "holders": [
+      "Steve Moss"
+     ]
+    }
+   ]
+  },
+  {
+   "gov": "schools",
+   "year": 2019,
+   "seats": [
+    {
+     "seat": "Superintendent",
+     "holders": [
+      "Bill Husfelt"
+     ]
+    },
+    {
+     "seat": "District 1",
+     "holders": [
+      "Jerry Register"
+     ]
+    },
+    {
+     "seat": "District 2",
+     "holders": [
+      "Ginger Littleton"
+     ]
+    },
+    {
+     "seat": "District 3",
+     "holders": [
+      "Joe Wayne Walker*",
+      "Pamm Chapman*"
+     ]
+    },
+    {
+     "seat": "District 4",
+     "holders": [
+      "Ryan Neves"
+     ]
+    },
+    {
+     "seat": "District 5",
+     "holders": [
+      "Steve Moss"
+     ]
+    }
+   ]
+  },
+  {
+   "gov": "schools",
+   "year": 2023,
+   "seats": [
+    {
+     "seat": "Superintendent",
+     "holders": [
+      "Bill Husfelt"
+     ]
+    },
+    {
+     "seat": "District 1",
+     "holders": [
+      "Jerry Register"
+     ]
+    },
+    {
+     "seat": "District 2",
+     "holders": [
+      "Brenda Ruthven*",
+      "Ann Leonard*"
+     ]
+    },
+    {
+     "seat": "District 3",
+     "holders": [
+      "Pamm Chapman*",
+      "Chris Moore*"
+     ]
+    },
+    {
+     "seat": "District 4",
+     "holders": [
+      "Winston Chester"
+     ]
+    },
+    {
+     "seat": "District 5",
+     "holders": [
+      "Steve Moss"
+     ]
+    }
+   ]
+  },
+  {
+   "gov": "schools",
+   "year": 2026,
+   "seats": [
+    {
+     "seat": "Superintendent",
+     "holders": [
+      "Mark McQueen"
+     ]
+    },
+    {
+     "seat": "District 1",
+     "holders": [
+      "Jerry Register"
+     ]
+    },
+    {
+     "seat": "District 2",
+     "holders": [
+      "Ann Leonard"
+     ]
+    },
+    {
+     "seat": "District 3",
+     "holders": [
+      "Chris Moore"
+     ]
+    },
+    {
+     "seat": "District 4",
+     "holders": [
+      "Winston Chester"
+     ]
+    },
+    {
+     "seat": "District 5",
+     "holders": [
+      "Steve Moss"
+     ]
+    }
+   ]
+  },
+  {
+   "gov": "lh",
+   "year": 2016,
+   "seats": [
+    {
+     "seat": "Mayor",
+     "holders": [
+      "Margo Anderson"
+     ]
+    },
+    {
+     "seat": "Seat 1",
+     "holders": [
+      "Rodney Friend"
+     ]
+    },
+    {
+     "seat": "Seat 2",
+     "holders": [
+      "Antonius Barnes"
+     ]
+    },
+    {
+     "seat": "Seat 3",
+     "holders": [
+      "Roger Schad"
+     ]
+    },
+    {
+     "seat": "Seat 4",
+     "holders": [
+      "Joseph Ashbrook"
+     ]
+    },
+    {
+     "seat": "City Manager",
+     "holders": [
+      "Joel Schubert"
+     ]
+    }
+   ]
+  },
+  {
+   "gov": "lh",
+   "year": 2019,
+   "seats": [
+    {
+     "seat": "Mayor",
+     "holders": [
+      "Margo Anderson"
+     ]
+    },
+    {
+     "seat": "Seat 1",
+     "holders": [
+      "Rodney Friend*",
+      "Brandon Aldridge*"
+     ]
+    },
+    {
+     "seat": "Seat 2",
+     "holders": [
+      "Antonius Barnes*",
+      "Pat Perno*"
+     ]
+    },
+    {
+     "seat": "Seat 3",
+     "holders": [
+      "Dan Russell"
+     ]
+    },
+    {
+     "seat": "Seat 4",
+     "holders": [
+      "Judy Tinder"
+     ]
+    },
+    {
+     "seat": "City Manager",
+     "holders": [
+      "Michael White*",
+      "Vickie Gainer*"
+     ]
+    }
+   ]
+  },
+  {
+   "gov": "lh",
+   "year": 2023,
+   "seats": [
+    {
+     "seat": "Mayor",
+     "holders": [
+      "Jesse Nelson"
+     ]
+    },
+    {
+     "seat": "Seat 1",
+     "holders": [
+      "Brandon Aldridge*",
+      "Sam Peebles*"
+     ]
+    },
+    {
+     "seat": "Seat 2",
+     "holders": [
+      "Pat Perno"
+     ]
+    },
+    {
+     "seat": "Seat 3",
+     "holders": [
+      "Jamie Warrick"
+     ]
+    },
+    {
+     "seat": "Seat 4",
+     "holders": [
+      "Judy Tinder*",
+      "Judy Vandergrift*"
+     ]
+    },
+    {
+     "seat": "City Manager",
+     "holders": [
+      "Vickie Gainer"
+     ]
+    }
+   ]
+  },
+  {
+   "gov": "lh",
+   "year": 2026,
+   "seats": [
+    {
+     "seat": "Mayor",
+     "holders": [
+      "Jesse Nelson*",
+      "Dave Lowery*"
+     ]
+    },
+    {
+     "seat": "Seat 1",
+     "holders": [
+      "Sam Peebles"
+     ]
+    },
+    {
+     "seat": "Seat 2",
+     "holders": [
+      "Pat Perno"
+     ]
+    },
+    {
+     "seat": "Seat 3",
+     "holders": [
+      "Jamie Warrick"
+     ]
+    },
+    {
+     "seat": "Seat 4",
+     "holders": [
+      "Judy Tinder*",
+      "Corey Langford*"
+     ]
+    },
+    {
+     "seat": "City Manager",
+     "holders": [
+      "Chris Lightfoot"
+     ]
+    }
+   ]
+  },
+  {
+   "gov": "pc",
+   "year": 2016,
+   "seats": [
+    {
+     "seat": "Mayor",
+     "holders": [
+      "Greg Brudnicki"
+     ]
+    },
+    {
+     "seat": "Ward 1",
+     "holders": [
+      "John Kady"
+     ]
+    },
+    {
+     "seat": "Ward 2",
+     "holders": [
+      "Kenneth Brown"
+     ]
+    },
+    {
+     "seat": "Ward 3",
+     "holders": [
+      "Billy Rader"
+     ]
+    },
+    {
+     "seat": "Ward 4",
+     "holders": [
+      "Mike Nichols"
+     ]
+    },
+    {
+     "seat": "City Manager",
+     "holders": [
+      "Jeff Brown"
+     ]
+    }
+   ]
+  },
+  {
+   "gov": "pc",
+   "year": 2019,
+   "seats": [
+    {
+     "seat": "Mayor",
+     "holders": [
+      "Greg Brudnicki"
+     ]
+    },
+    {
+     "seat": "Ward 1",
+     "holders": [
+      "Jenna Haligas"
+     ]
+    },
+    {
+     "seat": "Ward 2",
+     "holders": [
+      "Kenneth Brown"
+     ]
+    },
+    {
+     "seat": "Ward 3",
+     "holders": [
+      "Billy Rader"
+     ]
+    },
+    {
+     "seat": "Ward 4",
+     "holders": [
+      "Mike Nichols"
+     ]
+    },
+    {
+     "seat": "City Manager",
+     "holders": [
+      "Mark McQueen"
+     ]
+    }
+   ]
+  },
+  {
+   "gov": "pc",
+   "year": 2023,
+   "seats": [
+    {
+     "seat": "Mayor",
+     "holders": [
+      "Greg Brudnicki*",
+      "Michael Rohan*"
+     ]
+    },
+    {
+     "seat": "Ward 1",
+     "holders": [
+      "Jenna Haligas"
+     ]
+    },
+    {
+     "seat": "Ward 2",
+     "holders": [
+      "Kenneth Brown*",
+      "Janice Lucas*"
+     ]
+    },
+    {
+     "seat": "Ward 3",
+     "holders": [
+      "Billy Rader*",
+      "Brian Grainger*"
+     ]
+    },
+    {
+     "seat": "Ward 4",
+     "holders": [
+      "Josh Street"
+     ]
+    },
+    {
+     "seat": "City Manager",
+     "holders": [
+      "Mark McQueen*",
+      "Brandy Waldron*"
+     ]
+    }
+   ]
+  },
+  {
+   "gov": "pc",
+   "year": 2026,
+   "seats": [
+    {
+     "seat": "Mayor",
+     "holders": [
+      "Allan Branch"
+     ]
+    },
+    {
+     "seat": "Ward 1",
+     "holders": [
+      "Robbie Hughes"
+     ]
+    },
+    {
+     "seat": "Ward 2",
+     "holders": [
+      "Janice Lucas"
+     ]
+    },
+    {
+     "seat": "Ward 3",
+     "holders": [
+      "Brian Grainger"
+     ]
+    },
+    {
+     "seat": "Ward 4",
+     "holders": [
+      "Josh Street"
+     ]
+    },
+    {
+     "seat": "City Manager",
+     "holders": [
+      "Jonathan Hayes"
+     ]
+    }
+   ]
+  },
+  {
+   "gov": "mb",
+   "year": 2016,
+   "seats": [
+    {
+     "seat": "Mayor (Group 1)",
+     "holders": [
+      "null"
+     ]
+    },
+    {
+     "seat": "Group 2",
+     "holders": [
+      "Mary Blackburn*",
+      "null*"
+     ]
+    },
+    {
+     "seat": "Group 3",
+     "holders": [
+      "null"
+     ]
+    },
+    {
+     "seat": "Group 4",
+     "holders": [
+      "Tanya Castro*",
+      "null*"
+     ]
+    },
+    {
+     "seat": "Group 5",
+     "holders": [
+      "Jeff Tendler*",
+      "null*"
+     ]
+    },
+    {
+     "seat": "City Administrator",
+     "holders": [
+      "null"
+     ]
+    }
+   ]
+  },
+  {
+   "gov": "mb",
+   "year": 2019,
+   "seats": [
+    {
+     "seat": "Mayor (Group 1)",
+     "holders": [
+      "Al Cathey"
+     ]
+    },
+    {
+     "seat": "Group 2",
+     "holders": [
+      "null*",
+      "Jerry Smith*"
+     ]
+    },
+    {
+     "seat": "Group 3",
+     "holders": [
+      "null*",
+      "Bobby Pollock*"
+     ]
+    },
+    {
+     "seat": "Group 4",
+     "holders": [
+      "null"
+     ]
+    },
+    {
+     "seat": "Group 5",
+     "holders": [
+      "null"
+     ]
+    },
+    {
+     "seat": "City Administrator",
+     "holders": [
+      "null"
+     ]
+    }
+   ]
+  },
+  {
+   "gov": "mb",
+   "year": 2023,
+   "seats": [
+    {
+     "seat": "Mayor (Group 1)",
+     "holders": [
+      "Al Cathey*",
+      "Michele Miller*"
+     ]
+    },
+    {
+     "seat": "Group 2",
+     "holders": [
+      "Jerry Smith"
+     ]
+    },
+    {
+     "seat": "Group 3",
+     "holders": [
+      "Bobby Pollock*",
+      "Linda Hamilton*"
+     ]
+    },
+    {
+     "seat": "Group 4",
+     "holders": [
+      "Adrian Welle"
+     ]
+    },
+    {
+     "seat": "Group 5",
+     "holders": [
+      "Richard Wolff"
+     ]
+    },
+    {
+     "seat": "City Administrator",
+     "holders": [
+      "Doug Baber*",
+      "Michael Manning*",
+      "Chris Hubbard*"
+     ]
+    }
+   ]
+  },
+  {
+   "gov": "mb",
+   "year": 2026,
+   "seats": [
+    {
+     "seat": "Mayor (Group 1)",
+     "holders": [
+      "Richard Wolff"
+     ]
+    },
+    {
+     "seat": "Group 2",
+     "holders": [
+      "Erik Fosshage"
+     ]
+    },
+    {
+     "seat": "Group 3",
+     "holders": [
+      "Linda Hamilton"
+     ]
+    },
+    {
+     "seat": "Group 4",
+     "holders": [
+      "Jason Adams*",
+      "Lisa Logan*"
+     ]
+    },
+    {
+     "seat": "Group 5",
+     "holders": [
+      "Steve Cox"
+     ]
+    },
+    {
+     "seat": "City Administrator",
+     "holders": [
+      "Mell Smigielski"
+     ]
+    }
+   ]
+  },
+  {
+   "gov": "parker",
+   "year": 2016,
+   "seats": [
+    {
+     "seat": "Mayor",
+     "holders": [
+      "Richard Musgrave"
+     ]
+    },
+    {
+     "seat": "Seat 1",
+     "holders": [
+      "Ken Jones"
+     ]
+    },
+    {
+     "seat": "Seat 2",
+     "holders": [
+      "Ron Chaple"
+     ]
+    },
+    {
+     "seat": "Seat 3",
+     "holders": [
+      "John Haney"
+     ]
+    },
+    {
+     "seat": "Seat 4",
+     "holders": [
+      "Michael Miller"
+     ]
+    }
+   ]
+  },
+  {
+   "gov": "parker",
+   "year": 2019,
+   "seats": [
+    {
+     "seat": "Mayor",
+     "holders": [
+      "Richard Musgrave"
+     ]
+    },
+    {
+     "seat": "Seat 1",
+     "holders": [
+      "Ken Jones"
+     ]
+    },
+    {
+     "seat": "Seat 2",
+     "holders": [
+      "Ron Chaple*",
+      "Tonya Barrow*"
+     ]
+    },
+    {
+     "seat": "Seat 3",
+     "holders": [
+      "John Haney"
+     ]
+    },
+    {
+     "seat": "Seat 4",
+     "holders": [
+      "Michael Miller*",
+      "Stacie Galbreath*"
+     ]
+    }
+   ]
+  },
+  {
+   "gov": "parker",
+   "year": 2023,
+   "seats": [
+    {
+     "seat": "Mayor",
+     "holders": [
+      "Andrew Kelly"
+     ]
+    },
+    {
+     "seat": "Seat 1",
+     "holders": [
+      "Ron Chaple"
+     ]
+    },
+    {
+     "seat": "Seat 2",
+     "holders": [
+      "Tonya Barrow"
+     ]
+    },
+    {
+     "seat": "Seat 3",
+     "holders": [
+      "April Gibson"
+     ]
+    },
+    {
+     "seat": "Seat 4",
+     "holders": [
+      "Stacie Galbreath"
+     ]
+    }
+   ]
+  },
+  {
+   "gov": "parker",
+   "year": 2026,
+   "seats": [
+    {
+     "seat": "Mayor",
+     "holders": [
+      "Andrew Kelly"
+     ]
+    },
+    {
+     "seat": "Seat 1",
+     "holders": [
+      "Ron Chaple"
+     ]
+    },
+    {
+     "seat": "Seat 2",
+     "holders": [
+      "Tonya Barrow"
+     ]
+    },
+    {
+     "seat": "Seat 3",
+     "holders": [
+      "Katy Bodiford"
+     ]
+    },
+    {
+     "seat": "Seat 4",
+     "holders": [
+      "John Haney*",
+      "Mark Rega*"
+     ]
+    }
+   ]
+  }
+ ],
+ "budget": [
+  {
+   "gov": "county",
+   "basis": "adopted",
+   "from": 2026,
+   "to": 2027,
+   "totals": [
+    {
+     "key": "total",
+     "from": 734465609,
+     "to": 789059853
+    },
+    {
+     "key": "general_fund",
+     "from": 281737981,
+     "to": 284489439
+    }
+   ],
+   "sections": {
+    "department": [
+     {
+      "key": "d:sheriff",
+      "from": 43595846,
+      "to": null
+     },
+     {
+      "key": "d:human services",
+      "from": 37023523,
+      "to": null
+     },
+     {
+      "key": "d:transfers out",
+      "from": 34405652,
+      "to": null
+     },
+     {
+      "key": "d:jail operations",
+      "from": 30841594,
+      "to": null
+     },
+     {
+      "key": "d:emergency medical services",
+      "from": 30612414,
+      "to": null
+     }
+    ],
+    "fund": [
+     {
+      "key": "f128",
+      "from": 10352500,
+      "to": 28134500
+     },
+     {
+      "key": "f520",
+      "from": null,
+      "to": 14393858
+     },
+     {
+      "key": "f127",
+      "from": 61227500,
+      "to": 72234500
+     },
+     {
+      "key": "f145",
+      "from": 33643487,
+      "to": 23505733
+     },
+     {
+      "key": "f125",
+      "from": 25150000,
+      "to": 34745026
+     }
+    ],
+    "service": [
+     {
+      "key": "Other services",
+      "from": 127942706,
+      "to": null
+     },
+     {
+      "key": "Transfers, reserves, debt & disaster",
+      "from": 53574794,
+      "to": null
+     },
+     {
+      "key": "Police / law enforcement",
+      "from": 43595846,
+      "to": null
+     },
+     {
+      "key": "Administration & support",
+      "from": 39455825,
+      "to": null
+     },
+     {
+      "key": "Parks & recreation",
+      "from": 13049436,
+      "to": null
+     }
+    ]
+   },
+   "notes": [
+    "FY2027 has only a total on record, no fund or department lines.",
+    "FY2026 is adopted and FY2027 is final hearing held, so they aren't measured the same way."
+   ],
+   "up": null,
+   "down": null
+  },
+  {
+   "gov": "county",
+   "basis": "actual",
+   "from": 2023,
+   "to": 2024,
+   "totals": [
+    {
+     "key": "revenue_total",
+     "from": 430159532,
+     "to": 462823851
+    },
+    {
+     "key": "spending_total",
+     "from": 456746231,
+     "to": 521264558
+    }
+   ],
+   "sections": {
+    "spending": [
+     {
+      "key": "s:general government",
+      "from": 80110354,
+      "to": 133443384
+     },
+     {
+      "key": "s:transfers and other",
+      "from": 19828104,
+      "to": 32573340
+     },
+     {
+      "key": "s:physical environment",
+      "from": 71787685,
+      "to": 60452203
+     },
+     {
+      "key": "s:public safety",
+      "from": 121602545,
+      "to": 132763321
+     },
+     {
+      "key": "s:transportation",
+      "from": 65725875,
+      "to": 71871588
+     }
+    ],
+    "revenue": [
+     {
+      "key": "r:property taxes",
+      "from": 110406779,
+      "to": 155548804
+     },
+     {
+      "key": "r:debt proceeds and transfers",
+      "from": 72538702,
+      "to": 85473516
+     },
+     {
+      "key": "r:state and federal money",
+      "from": 104225757,
+      "to": 96482928
+     },
+     {
+      "key": "r:interest and other",
+      "from": 44573410,
+      "to": 38230392
+     },
+     {
+      "key": "r:charges for services",
+      "from": 77387234,
+      "to": 82713770
+     }
+    ]
+   },
+   "notes": [],
+   "up": "s:general government",
+   "down": "s:physical environment"
+  },
+  {
+   "gov": "schools",
+   "basis": "adopted",
+   "from": 2026,
+   "to": 2027,
+   "totals": [
+    {
+     "key": "total",
+     "from": 648500000,
+     "to": 639909531
+    },
+    {
+     "key": "general_fund",
+     "from": 345030839,
+     "to": null
+    }
+   ],
+   "sections": {
+    "department": [
+     {
+      "key": "d:instruction",
+      "from": 209710188,
+      "to": null
+     },
+     {
+      "key": "d:operation of plant",
+      "from": 23530859,
+      "to": null
+     },
+     {
+      "key": "d:facilities acquisition and construction",
+      "from": 22627611,
+      "to": null
+     },
+     {
+      "key": "d:school administration",
+      "from": 17978917,
+      "to": null
+     },
+     {
+      "key": "d:ending balance",
+      "from": 13077334,
+      "to": null
+     }
+    ],
+    "fund": [
+     {
+      "key": "f:general",
+      "from": 344457618,
+      "to": null
+     },
+     {
+      "key": "f:capital projects",
+      "from": 188123372,
+      "to": null
+     },
+     {
+      "key": "f:internal service",
+      "from": 57101523,
+      "to": null
+     },
+     {
+      "key": "f:special revenue",
+      "from": 35036289,
+      "to": null
+     },
+     {
+      "key": "f:debt service",
+      "from": 16971051,
+      "to": null
+     }
+    ],
+    "service": [
+     {
+      "key": "Other services",
+      "from": 297139451,
+      "to": null
+     },
+     {
+      "key": "Administration & support",
+      "from": 34240832,
+      "to": null
+     },
+     {
+      "key": "Transfers, reserves, debt & disaster",
+      "from": 13077334,
+      "to": null
+     }
+    ]
+   },
+   "notes": [
+    "FY2027 has only a total on record, no fund or department lines.",
+    "FY2026 is tentative and FY2027 is adopted, so they aren't measured the same way."
+   ],
+   "up": null,
+   "down": null
+  },
+  {
+   "gov": "pc",
+   "basis": "adopted",
+   "from": 2022,
+   "to": 2026,
+   "totals": [
+    {
+     "key": "total",
+     "from": 132053778,
+     "to": 153837293
+    },
+    {
+     "key": "general_fund",
+     "from": 54980116,
+     "to": 67703379
+    }
+   ],
+   "sections": {
+    "department": [
+     {
+      "key": "d:police",
+      "from": null,
+      "to": 19273932
+     },
+     {
+      "key": "d:fire",
+      "from": null,
+      "to": 12122358
+     },
+     {
+      "key": "d:administration and general government",
+      "from": null,
+      "to": 10968341
+     },
+     {
+      "key": "d:public works streets drainage and engineering",
+      "from": null,
+      "to": 8325833
+     },
+     {
+      "key": "d:parks culture and recreation",
+      "from": null,
+      "to": 6365061
+     }
+    ],
+    "fund": [
+     {
+      "key": "f:special revenue funds",
+      "from": 23633876,
+      "to": null
+     },
+     {
+      "key": "f:general",
+      "from": 54980116,
+      "to": 67703379
+     },
+     {
+      "key": "f:environmental services",
+      "from": null,
+      "to": 11631407
+     },
+     {
+      "key": "f:medical selfinsurance",
+      "from": null,
+      "to": 10145413
+     },
+     {
+      "key": "f:solid waste",
+      "from": 9451446,
+      "to": null
+     }
+    ],
+    "service": [
+     {
+      "key": "Police / law enforcement",
+      "from": null,
+      "to": 19273932
+     },
+     {
+      "key": "Fire",
+      "from": null,
+      "to": 12122358
+     },
+     {
+      "key": "Administration & support",
+      "from": null,
+      "to": 10968341
+     },
+     {
+      "key": "Streets & public works",
+      "from": null,
+      "to": 8325833
+     },
+     {
+      "key": "Parks & recreation",
+      "from": null,
+      "to": 6365061
+     }
+    ]
+   },
+   "notes": [
+    "FY2022 has only a total on record, no fund or department lines."
+   ],
+   "up": null,
+   "down": null
+  },
+  {
+   "gov": "pc",
+   "basis": "actual",
+   "from": 2023,
+   "to": 2024,
+   "totals": [
+    {
+     "key": "revenue_total",
+     "from": 136191576,
+     "to": 157185923
+    },
+    {
+     "key": "spending_total",
+     "from": 175510671,
+     "to": 154145393
+    }
+   ],
+   "sections": {
+    "spending": [
+     {
+      "key": "s:debt service",
+      "from": 48607409,
+      "to": 14162669
+     },
+     {
+      "key": "s:transfers and other",
+      "from": 44161526,
+      "to": 29248149
+     },
+     {
+      "key": "s:culture and recreation",
+      "from": 12854271,
+      "to": 22763818
+     },
+     {
+      "key": "s:transportation",
+      "from": 12688939,
+      "to": 15863447
+     },
+     {
+      "key": "s:general government",
+      "from": 22167611,
+      "to": 19366646
+     }
+    ],
+    "revenue": [
+     {
+      "key": "r:debt proceeds and transfers",
+      "from": 196388819,
+      "to": 31246101
+     },
+     {
+      "key": "r:state and federal money",
+      "from": 29376485,
+      "to": 39037821
+     },
+     {
+      "key": "r:interest and other",
+      "from": 12189733,
+      "to": 18475226
+     },
+     {
+      "key": "r:charges for services",
+      "from": 38411669,
+      "to": 42014562
+     },
+     {
+      "key": "r:property taxes",
+      "from": 15103301,
+      "to": 18377558
+     }
+    ]
+   },
+   "notes": [],
+   "up": "s:culture and recreation",
+   "down": "s:debt service"
+  },
+  {
+   "gov": "pcb",
+   "basis": "adopted",
+   "from": 2026,
+   "to": 2027,
+   "totals": [
+    {
+     "key": "total",
+     "from": 282221725,
+     "to": 262806054
+    },
+    {
+     "key": "general_fund",
+     "from": 71918315,
+     "to": 73810864
+    }
+   ],
+   "sections": {
+    "department": [
+     {
+      "key": "d:street",
+      "from": 11378175,
+      "to": 9345624
+     },
+     {
+      "key": "d:recreation",
+      "from": 13891200,
+      "to": 15504100
+     },
+     {
+      "key": "d:fire",
+      "from": 14429050,
+      "to": 15497220
+     },
+     {
+      "key": "d:police",
+      "from": 22717050,
+      "to": 23400150
+     },
+     {
+      "key": "d:building",
+      "from": 3031900,
+      "to": 3243900
+     }
+    ],
+    "fund": [
+     {
+      "key": "f:utility",
+      "from": 127314080,
+      "to": 96332810
+     },
+     {
+      "key": "f:health insurance internal service",
+      "from": null,
+      "to": 5930000
+     },
+     {
+      "key": "f:information technology",
+      "from": null,
+      "to": 2724700
+     },
+     {
+      "key": "f:general",
+      "from": 71918315,
+      "to": 73810864
+     },
+     {
+      "key": "f:fleet internal service",
+      "from": null,
+      "to": 769900
+     }
+    ],
+    "service": [
+     {
+      "key": "Streets & public works",
+      "from": 11378175,
+      "to": 9345624
+     },
+     {
+      "key": "Parks & recreation",
+      "from": 13891200,
+      "to": 15504100
+     },
+     {
+      "key": "Fire",
+      "from": 14429050,
+      "to": 15497220
+     },
+     {
+      "key": "Police / law enforcement",
+      "from": 22717050,
+      "to": 23400150
+     },
+     {
+      "key": "Administration & support",
+      "from": 5554400,
+      "to": 5922000
+     }
+    ]
+   },
+   "notes": [],
+   "up": "d:recreation",
+   "down": "d:street"
+  },
+  {
+   "gov": "pcb",
+   "basis": "actual",
+   "from": 2023,
+   "to": 2024,
+   "totals": [
+    {
+     "key": "revenue_total",
+     "from": 129308191,
+     "to": 149793356
+    },
+    {
+     "key": "spending_total",
+     "from": 103594926,
+     "to": 116321370
+    }
+   ],
+   "sections": {
+    "spending": [
+     {
+      "key": "s:public safety",
+      "from": 26625385,
+      "to": 38787891
+     },
+     {
+      "key": "s:physical environment",
+      "from": 34644704,
+      "to": 35122225
+     },
+     {
+      "key": "s:culture and recreation",
+      "from": 11862416,
+      "to": 12180604
+     },
+     {
+      "key": "s:transfers and other",
+      "from": 2245339,
+      "to": 2427237
+     },
+     {
+      "key": "s:general government",
+      "from": 4523742,
+      "to": 4343738
+     }
+    ],
+    "revenue": [
+     {
+      "key": "r:state and federal money",
+      "from": 25024524,
+      "to": 40820912
+     },
+     {
+      "key": "r:permits fees and special assessments",
+      "from": 22611730,
+      "to": 24962793
+     },
+     {
+      "key": "r:interest and other",
+      "from": 9816489,
+      "to": 11322252
+     },
+     {
+      "key": "r:charges for services",
+      "from": 41627102,
+      "to": 42659924
+     },
+     {
+      "key": "r:sales and other local taxes",
+      "from": 29395162,
+      "to": 29006175
+     }
+    ]
+   },
+   "notes": [],
+   "up": "s:public safety",
+   "down": "s:general government"
+  },
+  {
+   "gov": "lh",
+   "basis": "adopted",
+   "from": 2026,
+   "to": 2027,
+   "totals": [
+    {
+     "key": "total",
+     "from": 61858708,
+     "to": 54310755
+    },
+    {
+     "key": "general_fund",
+     "from": 24353606,
+     "to": 22196794
+    }
+   ],
+   "sections": {
+    "department": [
+     {
+      "key": "d552",
+      "from": 1854630,
+      "to": 3742900
+     },
+     {
+      "key": "d522",
+      "from": 5343217,
+      "to": 3600892
+     },
+     {
+      "key": "d541",
+      "from": 2386135,
+      "to": 1350482
+     },
+     {
+      "key": "d521",
+      "from": 4792059,
+      "to": 4069488
+     },
+     {
+      "key": "d512",
+      "from": 704441,
+      "to": 1165000
+     }
+    ],
+    "fund": [
+     {
+      "key": "f404",
+      "from": 8216123,
+      "to": 3665181
+     },
+     {
+      "key": "f001",
+      "from": 24353606,
+      "to": 22196794
+     },
+     {
+      "key": "f101",
+      "from": 4335514,
+      "to": 2819944
+     },
+     {
+      "key": "f401",
+      "from": 7261373,
+      "to": 8294542
+     },
+     {
+      "key": "f701",
+      "from": 1999274,
+      "to": 1014054
+     }
+    ],
+    "service": [
+     {
+      "key": "Other services",
+      "from": 2121832,
+      "to": 4116214
+     },
+     {
+      "key": "Fire",
+      "from": 5343217,
+      "to": 3600892
+     },
+     {
+      "key": "Streets & public works",
+      "from": 2412985,
+      "to": 1357982
+     },
+     {
+      "key": "Police / law enforcement",
+      "from": 4792059,
+      "to": 4069488
+     },
+     {
+      "key": "Parks & recreation",
+      "from": 3161019,
+      "to": 2609282
+     }
+    ]
+   },
+   "notes": [],
+   "up": "d552",
+   "down": "d522"
+  },
+  {
+   "gov": "lh",
+   "basis": "actual",
+   "from": 2023,
+   "to": 2024,
+   "totals": [
+    {
+     "key": "revenue_total",
+     "from": 53379730,
+     "to": 44678904
+    },
+    {
+     "key": "spending_total",
+     "from": 54929856,
+     "to": 43003439
+    }
+   ],
+   "sections": {
+    "spending": [
+     {
+      "key": "s:public safety",
+      "from": 26785053,
+      "to": 13398176
+     },
+     {
+      "key": "s:general government",
+      "from": 8419162,
+      "to": 4117585
+     },
+     {
+      "key": "s:transfers and other",
+      "from": 5151329,
+      "to": 2199983
+     },
+     {
+      "key": "s:transportation",
+      "from": 1439681,
+      "to": 4207194
+     },
+     {
+      "key": "s:physical environment",
+      "from": 12879904,
+      "to": 14338378
+     }
+    ],
+    "revenue": [
+     {
+      "key": "r:state and federal money",
+      "from": 19547699,
+      "to": 9513257
+     },
+     {
+      "key": "r:debt proceeds and transfers",
+      "from": 5151329,
+      "to": 2199983
+     },
+     {
+      "key": "r:charges for services",
+      "from": 13910010,
+      "to": 16514638
+     },
+     {
+      "key": "r:permits fees and special assessments",
+      "from": 5165065,
+      "to": 2939558
+     },
+     {
+      "key": "r:property taxes",
+      "from": 7181288,
+      "to": 8225738
+     }
+    ]
+   },
+   "notes": [],
+   "up": "s:transportation",
+   "down": "s:public safety"
+  },
+  {
+   "gov": "cw",
+   "basis": "adopted",
+   "from": 2026,
+   "to": 2027,
+   "totals": [
+    {
+     "key": "total",
+     "from": 55000000,
+     "to": 50215139
+    },
+    {
+     "key": "general_fund",
+     "from": null,
+     "to": 12227754
+    }
+   ],
+   "sections": {
+    "department": [
+     {
+      "key": "d:police",
+      "from": 2789554,
+      "to": null
+     },
+     {
+      "key": "d:fire",
+      "from": 2674305,
+      "to": null
+     },
+     {
+      "key": "d:leisure services",
+      "from": 2563294,
+      "to": null
+     },
+     {
+      "key": "d:streets",
+      "from": 1761184,
+      "to": null
+     },
+     {
+      "key": "d:transfers out",
+      "from": 1086088,
+      "to": null
+     }
+    ],
+    "fund": [
+     {
+      "key": "f:capital projects",
+      "from": 25496755,
+      "to": 21948541
+     },
+     {
+      "key": "f:general",
+      "from": 13705820,
+      "to": 12227754
+     },
+     {
+      "key": "f:sewer",
+      "from": 8007965,
+      "to": 7099858
+     },
+     {
+      "key": "f:cra",
+      "from": 2634585,
+      "to": 3114390
+     },
+     {
+      "key": "f:water",
+      "from": 4429122,
+      "to": 4655938
+     }
+    ],
+    "service": [
+     {
+      "key": "Police / law enforcement",
+      "from": 2789554,
+      "to": null
+     },
+     {
+      "key": "Fire",
+      "from": 2674305,
+      "to": null
+     },
+     {
+      "key": "Parks & recreation",
+      "from": 2563294,
+      "to": null
+     },
+     {
+      "key": "Administration & support",
+      "from": 2381372,
+      "to": null
+     },
+     {
+      "key": "Streets & public works",
+      "from": 1761184,
+      "to": null
+     }
+    ]
+   },
+   "notes": [
+    "FY2027 has only a total on record, no fund or department lines.",
+    "FY2026 is tentative and FY2027 is adopted, so they aren't measured the same way."
+   ],
+   "up": null,
+   "down": null
+  },
+  {
+   "gov": "cw",
+   "basis": "actual",
+   "from": 2024,
+   "to": 2025,
+   "totals": [
+    {
+     "key": "revenue_total",
+     "from": 27748161,
+     "to": null
+    },
+    {
+     "key": "spending_total",
+     "from": 21735896,
+     "to": 23157336
+    }
+   ],
+   "sections": {
+    "spending": [
+     {
+      "key": "s:general government",
+      "from": 1749270,
+      "to": 6285337
+     },
+     {
+      "key": "s:transportation",
+      "from": 3983766,
+      "to": 1291986
+     },
+     {
+      "key": "s:culture and recreation",
+      "from": 2001020,
+      "to": 1508874
+     },
+     {
+      "key": "s:transfers and other",
+      "from": 514714,
+      "to": 125761
+     },
+     {
+      "key": "s:physical environment",
+      "from": 8914113,
+      "to": 9227434
+     }
+    ],
+    "revenue": [
+     {
+      "key": "r:charges for services",
+      "from": 10165356,
+      "to": null
+     },
+     {
+      "key": "r:state and federal money",
+      "from": 5606336,
+      "to": null
+     },
+     {
+      "key": "r:sales and other local taxes",
+      "from": 4384862,
+      "to": null
+     },
+     {
+      "key": "r:property taxes",
+      "from": 2838805,
+      "to": null
+     },
+     {
+      "key": "r:interest and other",
+      "from": 2661355,
+      "to": null
+     }
+    ]
+   },
+   "notes": [],
+   "up": "s:general government",
+   "down": "s:transportation"
+  },
+  {
+   "gov": "sp",
+   "basis": "adopted",
+   "from": 2026,
+   "to": 2027,
+   "totals": [
+    {
+     "key": "total",
+     "from": 28655332,
+     "to": 19589673
+    },
+    {
+     "key": "general_fund",
+     "from": null,
+     "to": 8980056
+    }
+   ],
+   "sections": {
+    "department": [
+     {
+      "key": "d:fema projects",
+      "from": 7865213,
+      "to": 199248
+     },
+     {
+      "key": "d:administration",
+      "from": 1832447,
+      "to": 1083494
+     },
+     {
+      "key": "d:police",
+      "from": 3800375,
+      "to": 3481061
+     },
+     {
+      "key": "d:legislative",
+      "from": 394097,
+      "to": 106173
+     },
+     {
+      "key": "d:street",
+      "from": 887288,
+      "to": 1039182
+     }
+    ],
+    "fund": [
+     {
+      "key": "f:general",
+      "from": 17954071,
+      "to": 8980056
+     },
+     {
+      "key": "f:cra",
+      "from": 1811373,
+      "to": 1547348
+     },
+     {
+      "key": "f:sewer",
+      "from": 4607751,
+      "to": 4736195
+     },
+     {
+      "key": "f:sanitation",
+      "from": 1520011,
+      "to": 1630407
+     },
+     {
+      "key": "f:debt service",
+      "from": 594559,
+      "to": 500187
+     }
+    ],
+    "service": [
+     {
+      "key": "Transfers, reserves, debt & disaster",
+      "from": 7865213,
+      "to": 199248
+     },
+     {
+      "key": "Administration & support",
+      "from": 2532120,
+      "to": 1469684
+     },
+     {
+      "key": "Police / law enforcement",
+      "from": 3800375,
+      "to": 3481061
+     },
+     {
+      "key": "Streets & public works",
+      "from": 887288,
+      "to": 1039182
+     },
+     {
+      "key": "Fire",
+      "from": 2153688,
+      "to": 2104844
+     }
+    ]
+   },
+   "notes": [],
+   "up": "d:street",
+   "down": "d:fema projects"
+  },
+  {
+   "gov": "sp",
+   "basis": "actual",
+   "from": 2023,
+   "to": 2024,
+   "totals": [
+    {
+     "key": "revenue_total",
+     "from": 17086595,
+     "to": 16347940
+    },
+    {
+     "key": "spending_total",
+     "from": 16890278,
+     "to": 19962869
+    }
+   ],
+   "sections": {
+    "spending": [
+     {
+      "key": "s:general government",
+      "from": 1594510,
+      "to": 6840450
+     },
+     {
+      "key": "s:transportation",
+      "from": 3774878,
+      "to": 837605
+     },
+     {
+      "key": "s:physical environment",
+      "from": 5638121,
+      "to": 6052070
+     },
+     {
+      "key": "s:public safety",
+      "from": 5362639,
+      "to": 5773408
+     },
+     {
+      "key": "s:culture and recreation",
+      "from": 520130,
+      "to": 459336
+     }
+    ],
+    "revenue": [
+     {
+      "key": "r:debt proceeds and transfers",
+      "from": 1410627,
+      "to": 4828368
+     },
+     {
+      "key": "r:state and federal money",
+      "from": 6374077,
+      "to": 3962670
+     },
+     {
+      "key": "r:charges for services",
+      "from": 6680485,
+      "to": 7393188
+     },
+     {
+      "key": "r:property taxes",
+      "from": 1443988,
+      "to": 1870834
+     },
+     {
+      "key": "r:permits fees and special assessments",
+      "from": 1383962,
+      "to": 1629862
+     }
+    ]
+   },
+   "notes": [],
+   "up": "s:general government",
+   "down": "s:transportation"
+  },
+  {
+   "gov": "parker",
+   "basis": "adopted",
+   "from": 2026,
+   "to": 2027,
+   "totals": [
+    {
+     "key": "total",
+     "from": 14972230,
+     "to": 9275994
+    },
+    {
+     "key": "general_fund",
+     "from": 7098904,
+     "to": 5678901
+    }
+   ],
+   "sections": {
+    "department": [
+     {
+      "key": "d:street",
+      "from": 2254966,
+      "to": null
+     },
+     {
+      "key": "d:police",
+      "from": 1278338,
+      "to": null
+     },
+     {
+      "key": "d:general government",
+      "from": 591529,
+      "to": null
+     },
+     {
+      "key": "d:fire",
+      "from": 530518,
+      "to": null
+     },
+     {
+      "key": "d:parks",
+      "from": 417853,
+      "to": null
+     }
+    ],
+    "fund": [
+     {
+      "key": "f:capital",
+      "from": 6500000,
+      "to": null
+     },
+     {
+      "key": "f:general",
+      "from": 5691404,
+      "to": null
+     },
+     {
+      "key": "f:utility",
+      "from": 4804691,
+      "to": null
+     },
+     {
+      "key": "f:cra",
+      "from": 256246,
+      "to": null
+     }
+    ],
+    "service": [
+     {
+      "key": "Streets & public works",
+      "from": 2254966,
+      "to": null
+     },
+     {
+      "key": "Police / law enforcement",
+      "from": 1278338,
+      "to": null
+     },
+     {
+      "key": "Administration & support",
+      "from": 651065,
+      "to": null
+     },
+     {
+      "key": "Fire",
+      "from": 530518,
+      "to": null
+     },
+     {
+      "key": "Parks & recreation",
+      "from": 417853,
+      "to": null
+     }
+    ]
+   },
+   "notes": [
+    "FY2027 has only a total on record, no fund or department lines.",
+    "FY2026 is draft and FY2027 is final hearing held, so they aren't measured the same way."
+   ],
+   "up": null,
+   "down": null
+  },
+  {
+   "gov": "parker",
+   "basis": "actual",
+   "from": 2023,
+   "to": 2024,
+   "totals": [
+    {
+     "key": "revenue_total",
+     "from": 7572053,
+     "to": 9512538
+    },
+    {
+     "key": "spending_total",
+     "from": 7285390,
+     "to": 9469997
+    }
+   ],
+   "sections": {
+    "spending": [
+     {
+      "key": "s:transportation",
+      "from": 742953,
+      "to": 2760583
+     },
+     {
+      "key": "s:culture and recreation",
+      "from": 435215,
+      "to": 1113915
+     },
+     {
+      "key": "s:physical environment",
+      "from": 3044309,
+      "to": 2609387
+     },
+     {
+      "key": "s:general government",
+      "from": 1521728,
+      "to": 1330063
+     },
+     {
+      "key": "s:public safety",
+      "from": 1541185,
+      "to": 1656049
+     }
+    ],
+    "revenue": [
+     {
+      "key": "r:debt proceeds and transfers",
+      "from": 1774912,
+      "to": 93786
+     },
+     {
+      "key": "r:property taxes",
+      "from": 0,
+      "to": 964343
+     },
+     {
+      "key": "r:state and federal money",
+      "from": 2695935,
+      "to": 3336405
+     },
+     {
+      "key": "r:interest and other",
+      "from": 250009,
+      "to": 438397
+     },
+     {
+      "key": "r:permits fees and special assessments",
+      "from": 374916,
+      "to": 483559
+     }
+    ]
+   },
+   "notes": [],
+   "up": "s:transportation",
+   "down": "s:physical environment"
+  },
+  {
+   "gov": "mb",
+   "basis": "adopted",
+   "from": 2025,
+   "to": 2026,
+   "totals": [
+    {
+     "key": "total",
+     "from": null,
+     "to": 19700964
+    },
+    {
+     "key": "general_fund",
+     "from": 8003671,
+     "to": null
+    }
+   ],
+   "sections": {
+    "department": [
+     {
+      "key": "d:canal",
+      "from": null,
+      "to": 6408521
+     },
+     {
+      "key": "d:roads and streets",
+      "from": null,
+      "to": 1534850
+     },
+     {
+      "key": "d:police",
+      "from": null,
+      "to": 1304360
+     },
+     {
+      "key": "d:fire",
+      "from": null,
+      "to": 1251368
+     },
+     {
+      "key": "d:parks and recreation",
+      "from": null,
+      "to": 1026181
+     }
+    ],
+    "fund": [
+     {
+      "key": "f:general",
+      "from": null,
+      "to": 13826168
+     },
+     {
+      "key": "f:enterprise funds",
+      "from": null,
+      "to": 5874795
+     }
+    ],
+    "service": [
+     {
+      "key": "Other services",
+      "from": null,
+      "to": 6408521
+     },
+     {
+      "key": "Streets & public works",
+      "from": null,
+      "to": 1534850
+     },
+     {
+      "key": "Administration & support",
+      "from": null,
+      "to": 1532748
+     },
+     {
+      "key": "Police / law enforcement",
+      "from": null,
+      "to": 1304360
+     },
+     {
+      "key": "Fire",
+      "from": null,
+      "to": 1251368
+     }
+    ]
+   },
+   "notes": [
+    "FY2025 has only a total on record, no fund or department lines.",
+    "FY2025 is adopted and FY2026 is tentative, so they aren't measured the same way."
+   ],
+   "up": null,
+   "down": null
+  },
+  {
+   "gov": "mb",
+   "basis": "actual",
+   "from": 2023,
+   "to": 2024,
+   "totals": [
+    {
+     "key": "revenue_total",
+     "from": 14038640,
+     "to": 13085617
+    },
+    {
+     "key": "spending_total",
+     "from": 10164300,
+     "to": 10586330
+    }
+   ],
+   "sections": {
+    "spending": [
+     {
+      "key": "s:transportation",
+      "from": 3417104,
+      "to": 1007529
+     },
+     {
+      "key": "s:public safety",
+      "from": 2038468,
+      "to": 3164797
+     },
+     {
+      "key": "s:general government",
+      "from": 1138935,
+      "to": 1901066
+     },
+     {
+      "key": "s:culture and recreation",
+      "from": 590603,
+      "to": 1231159
+     },
+     {
+      "key": "s:physical environment",
+      "from": 2979190,
+      "to": 3281779
+     }
+    ],
+    "revenue": [
+     {
+      "key": "r:state and federal money",
+      "from": 5863235,
+      "to": 3665809
+     },
+     {
+      "key": "r:charges for services",
+      "from": 2900432,
+      "to": 3499070
+     },
+     {
+      "key": "r:property taxes",
+      "from": 3388162,
+      "to": 3737921
+     },
+     {
+      "key": "r:interest and other",
+      "from": 643567,
+      "to": 891330
+     },
+     {
+      "key": "r:permits fees and special assessments",
+      "from": 816900,
+      "to": 1036808
+     }
+    ]
+   },
+   "notes": [],
+   "up": "s:public safety",
+   "down": "s:transportation"
+  }
+ ]
+}

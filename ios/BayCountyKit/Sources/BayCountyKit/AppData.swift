@@ -274,6 +274,12 @@ public struct PeopleDirectory: Codable, Sendable {
         public let name: String
         public let district: String?
         public let gov_ids: [String]
+        /// The site's one line about them ("County Commissioner, District 2, Bay County · running again in 2026").
+        public var subtitle: String? = nil
+        /// Elected official, Department leader, Candidate, Former official or Past candidate.
+        public var label: String? = nil
+        /// The People page's filter groups: elected, candidate, staff, past.
+        public var kinds: [String]? = nil
         public let roles: [Role]
 
         /// Roles with the duplicates removed. Sources word the same office differently
@@ -319,6 +325,7 @@ public struct PeopleDirectory: Codable, Sendable {
         }
 
         public var headline: String {
+            if let subtitle, !subtitle.isEmpty { return subtitle }
             let main = mainRoles
             let r = main.first { r in let t = r.role ?? ""; return !t.hasPrefix("former") && !t.hasPrefix("2026 candidate") }
                 ?? main.first { !($0.role ?? "").hasPrefix("former") } ?? main.first
@@ -455,5 +462,24 @@ extension BayCountyClient {
     public func appData<T: Decodable>(_ name: String, as type: T.Type = T.self) async throws -> (T, Freshness) {
         let r = try await get("/data/app/\(name)")
         return (try JSONDecoder().decode(T.self, from: r.data), r.freshness)
+    }
+}
+
+/// The People list's filter groups, the same chips as the site's /people page.
+public enum PeopleKind: String, Sendable, CaseIterable, Identifiable {
+    case everyone, elected, candidate, staff, past
+    public var id: String { rawValue }
+    public var label: String {
+        switch self {
+        case .everyone: "Everyone"
+        case .elected: "Elected"
+        case .candidate: "2026 candidates"
+        case .staff: "Department leaders"
+        case .past: "Past candidates"
+        }
+    }
+
+    public func includes(_ p: PeopleDirectory.Person) -> Bool {
+        self == .everyone || (p.kinds ?? ["elected"]).contains(rawValue)
     }
 }
