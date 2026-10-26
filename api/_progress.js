@@ -114,7 +114,7 @@ function summarize(rows, runs = [], opts = {}) {
 
   const out = {installed: true, as_of: now.toISOString(), first_year: FIRST_YEAR, years, phase, stages,
     totals: {...T, pct_read: pct(T.read, T.found), ocr_share: pct(T.ocr_pages, T.pages)}, eta, last, runs: mine, boards,
-    method: 'Counts come from the BayCounty.me database. “Found” is the number of minutes files each archive lists, or the number we have stored when that’s higher. A file is read when Claude has turned it into motions and roll calls; a vote is checked when the names add up to the printed tally and every voter held the seat that day, or a person reviewed it. Checked votes reach the votes data the next morning.'};
+    method: 'Counts come from the BayCounty.me database. “Found” is the number of minutes files each archive lists, or the number we have stored when that’s higher. A file is read when our automated reader has turned it into motions and roll calls; a vote is checked when the names add up to the printed tally and every voter held the seat that day, or a person reviewed it. Checked votes reach the votes data the next morning.'};
   if (opts.cost) {
     const c = opts.cost, avg = c.avg > 0 ? c.avg : COST_PER_FILE;
     const unsent = Math.max(0, T.found - done - T.reading);

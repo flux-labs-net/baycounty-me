@@ -101,7 +101,7 @@
       <td class="ip-tot" title="Files read of files found">${b.totals.found ? b.totals.pct_read + '%' : '—'}</td></tr>`).join('')
       || `<tr><td colspan="${d.years.length + 2}" class="muted">No archives counted yet.</td></tr>`;
     const notes = d.boards.filter(b => b.note).map(b => `<li><b>${esc(b.name)}:</b> ${esc(b.note)}</li>`).join('');
-    const KIND = {crawl: 'Download from archives', read: 'Read with Claude'};
+    const KIND = {crawl: 'Download from archives', read: 'Read and extract votes'};
     const runs = (d.runs || []).slice(0, opts.admin ? 12 : 6).map(r => `<tr><td>${esc(KIND[r.kind] || r.kind)}</td><td>${esc(ago(r.started_at))}</td>
       <td>${esc(r.status === 'ok' ? 'Finished' : r.status === 'running' ? 'Running' : 'Problem')}</td></tr>`).join('');
     el.innerHTML = `<div class="ip">
