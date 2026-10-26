@@ -75,6 +75,7 @@ fun HomeScreen() {
     ) {
         item { SearchField { nav.push(Route.Search) } }
         item { BallotBanner() }
+        item { AddressCard() }
         item { MeetingsSection() }
         item { TaxBillSection() }
         item { NumbersSection() }
@@ -130,6 +131,48 @@ private fun BallotBanner() {
             Text("−${Format.compactMoney(a3.localImpact(year))} to local budgets by ${Amendment3Model.fiscalYears[year]} · needs 60%", style = T.caption, color = Brand.secondary)
         }
         Icon(icon("chevron.right"), null, tint = Brand.salmon, modifier = Modifier.size(18.dp))
+    }
+}
+
+/** The saved home address (tax estimate, representatives, schools, flood zone), or a prompt to look one up. */
+@Composable
+private fun AddressCard() {
+    val store = LocalStore.current
+    val nav = LocalNav.current
+    val home = store.home
+    CardList {
+        if (home != null) {
+            AddressCardRow("house.fill", "My Address", home.display, "Tax estimate, representatives, schools, flood zone") { nav.push(Route.Address(home)) }
+            RowDivider(62.dp)
+            Row(
+                Modifier.fillMaxWidth().clickable { nav.push(Route.MyAddress) }.padding(horizontal = 14.dp, vertical = 12.dp),
+                verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp),
+            ) {
+                Icon(icon("magnifyingglass"), null, tint = Brand.navy, modifier = Modifier.size(18.dp))
+                Text("Look up another address", style = T.subhead.copy(fontWeight = FontWeight.Medium), color = Brand.navy)
+            }
+        } else {
+            AddressCardRow("mappin.and.ellipse", "My Address", "What applies to your address?",
+                "Property tax estimate, who represents you, schools, flood and evacuation zones") { nav.push(Route.MyAddress) }
+        }
+    }
+}
+
+@Composable
+private fun AddressCardRow(symbol: String, eyebrow: String, title: String, detail: String, onClick: () -> Unit) {
+    Row(
+        Modifier.fillMaxWidth().clickable(onClick = onClick).padding(14.dp),
+        verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp),
+    ) {
+        Box(Modifier.size(36.dp).background(Brand.navy.copy(alpha = 0.1f), RoundedCornerShape(10.dp)), contentAlignment = Alignment.Center) {
+            Icon(icon(symbol), null, tint = Brand.navy, modifier = Modifier.size(20.dp))
+        }
+        Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
+            Text(eyebrow, style = T.caption, color = Brand.secondary)
+            Text(title, style = T.headline, color = Brand.text)
+            Text(detail, style = T.caption, color = Brand.secondary)
+        }
+        Chevron()
     }
 }
 
