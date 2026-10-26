@@ -38,10 +38,10 @@ import me.baycounty.kit.TaxModel
 
 /** A heading over a group of rows, like an iOS List section header. */
 @Composable
-private fun FormHeader(text: String) = Text(text, style = T.footnote.copy(fontWeight = FontWeight.SemiBold), color = Brand.secondary, modifier = Modifier.padding(start = 4.dp))
+internal fun FormHeader(text: String) = Text(text, style = T.footnote.copy(fontWeight = FontWeight.SemiBold), color = Brand.secondary, modifier = Modifier.padding(start = 4.dp))
 
 @Composable
-private fun FormSection(title: String?, footer: String? = null, content: @Composable () -> Unit) {
+internal fun FormSection(title: String?, footer: String? = null, content: @Composable () -> Unit) {
     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
         if (title != null) FormHeader(title)
         content()

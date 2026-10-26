@@ -58,7 +58,7 @@ class ScreensTest(@Suppress("unused") private val label: String, private val scr
         val pages = System.getProperty("pages")?.toIntOrNull() ?: 1
         for (p in 0 until pages) {
             paparazzi.snapshot(if (pages > 1) "p$p" else null) {
-                CompositionLocalProvider(LocalScrollStart provides p * 1900) { BayCountyTheme(dark) { AppRoot(store, nav = nav) } }
+                CompositionLocalProvider(LocalScrollStart provides p * 1900, androidx.activity.compose.LocalActivityResultRegistryOwner provides noResults) { BayCountyTheme(dark) { AppRoot(store, nav = nav) } }
             }
         }
     }
@@ -73,6 +73,13 @@ fun offlineClient() = BayCountyClient(baseURL = "https://offline.invalid", seed 
     dirs.map { File(repo, "site/public/$it/$name") }.firstOrNull { it.exists() }?.readBytes()
 })
 
+/** Permission prompts can't open in a snapshot; this owner just ignores them. */
+private val noResults = object : androidx.activity.result.ActivityResultRegistryOwner {
+    override val activityResultRegistry = object : androidx.activity.result.ActivityResultRegistry() {
+        override fun <I, O> onLaunch(requestCode: Int, contract: androidx.activity.result.contract.ActivityResultContract<I, O>, input: I, options: androidx.core.app.ActivityOptionsCompat?) {}
+    }
+}
+
 /** Loads what a screen's LaunchedEffect would load, since a snapshot is taken before effects finish. */
 suspend fun preload(store: AppStore, route: Route?) {
     store.loadGlossary()
@@ -86,6 +93,7 @@ suspend fun preload(store: AppStore, route: Route?) {
         is Route.BudgetCompare -> store.load("budget-years")
         is Route.TaxCalculator, is Route.GovBudget -> store.loadTax()
         is Route.Amendment3 -> store.loadAmendment3()
+        Route.Accountability, is Route.AccountabilityProject -> store.loadAccountability()
         Route.CRAIncrement -> store.load(listOf("cra-agencies", "cra-tax-increment", "cra-increment-checks"))
         is Route.Dataset -> store.load(route.id)
         is Route.Record -> {

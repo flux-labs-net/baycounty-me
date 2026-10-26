@@ -131,18 +131,10 @@ fun RouteScreen(route: Route) {
         Route.Glossary -> GlossaryScreen()
         Route.Updates -> UpdatesScreen()
         Route.About -> AboutScreen()
-        else -> PendingScreen(route)
-    }
-}
-
-/** A route whose native screen isn't built yet: open the same page on the website. */
-@Composable
-private fun PendingScreen(route: Route) {
-    val o = rememberOpener()
-    Screen(route::class.simpleName ?: "BayCounty.me") {
-        item {
-            Unavailable("Opens on the website", "This page opens on baycounty.me for now.", "Open page", symbol = "safari") { o.openSite("/") }
-        }
+        Route.MyAddress -> MyAddressScreen()
+        is Route.Address -> AddressReportScreen(route.match)
+        Route.Accountability -> AccountabilityScreen()
+        is Route.AccountabilityProject -> AccountabilityProjectScreen(route.id)
     }
 }
 
