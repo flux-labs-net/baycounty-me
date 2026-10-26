@@ -134,7 +134,7 @@ def main(argv):
         print("couldn't read motions (%s); keeping the last export" % e, file=sys.stderr)
         return 1
     doc = {"as_of": dt.date.today().isoformat(),
-           "notes": ["Every motion read from official minutes by a Claude model (data/minutes/read_minutes.py), with names "
+           "notes": ["Every motion read from official minutes by automated text extraction (data/minutes/read_minutes.py), with names "
                      "matched to officeholder-terms. 'auto-checked' votes passed every automatic check (the named votes add up "
                      "to the printed tally, every voter held a seat that day, a quorum voted); 'reviewed' votes were flagged "
                      "and then approved by an admin. Scanned minutes were read with OCR, so check the source page before "
