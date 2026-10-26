@@ -84,7 +84,7 @@ On GitHub, the **Android** workflow (`.github/workflows/android.yml`) runs on ev
    - Data safety: **no data collected or shared**. The app has no accounts or analytics; location is used on the phone once to find the nearest address and isn't sent to us; a saved home address stays on the phone. Data is encrypted in transit (HTTPS).
    - Government apps: answer **No**. BayCounty.me is independent and isn't made by or for a government. Say so in the description too.
    - News app: No. Financial features: None.
-6. **Store listing:** short description (up to 80 characters), full description, the 512×512 icon, a 1024×500 feature graphic, and at least two phone screenshots. The emulator screenshots from the Android workflow's `screens-emulator` artifact are the right size. Category: Education or News & Magazines; contact email hello@fluxlabs.net; website https://baycounty.me.
+6. **Store listing:** everything is in `android/store/`: the text to paste (`listing.md`), the 512×512 icon, the 1024×500 feature graphic and phone screenshots. To refresh the screenshots, take them from the Android workflow's `screens-emulator` artifact; Play needs the long side at most twice the short side, so trim 1080×2400 shots to 2160 tall or less. Category: Education or News & Magazines; contact email hello@fluxlabs.net; website https://baycounty.me.
 
 ### Each release
 
