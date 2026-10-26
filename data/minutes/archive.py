@@ -191,18 +191,21 @@ BD = "https://go.boarddocs.com/fl/bcsdfl/Board.nsf"
 BD_COMMITTEE = "A4EP6J588C05"
 
 
-def boarddocs_file(unique):
+def boarddocs_file(*uniques):
+    """Fetch the minutes page. A meeting is listed twice ("Agenda" and "Detailed Agenda"); the minutes usually hang off
+    the Detailed Agenda entry, so every entry for the meeting is tried in turn."""
     def get():
-        body = urllib.parse.urlencode({"id": unique, "current_committee_id": BD_COMMITTEE}).encode()
-        data, _ = _req(BD + "/BD-GetMinutes?open", body, "application/x-www-form-urlencoded")
-        if len(fm.strip_tags(data.decode("utf-8", "replace"))) < 200:
-            raise RuntimeError("no minutes posted for this meeting")
-        return data, "text/html"
+        for unique in uniques:
+            body = urllib.parse.urlencode({"id": unique, "current_committee_id": BD_COMMITTEE}).encode()
+            data, _ = _req(BD + "/BD-GetMinutes?open", body, "application/x-www-form-urlencoded")
+            if len(fm.strip_tags(data.decode("utf-8", "replace"))) >= 200:
+                return data, "text/html"
+        raise RuntimeError("no minutes posted for this meeting")
     return get
 
 
 def parse_boarddocs(meetings, first, last):
-    out, seen = [], set()
+    out, by = [], {}
     for m in meetings:
         nd = str(m.get("numberdate") or "")
         if not re.match(r"^\d{8}$", nd):
@@ -211,13 +214,18 @@ def parse_boarddocs(meetings, first, last):
         if not (max(first, FIRST_YEAR) <= d.year <= last):
             continue
         name = m.get("name") or ""
-        # Each meeting has an "Agenda" and a "Detailed Agenda" entry; the minutes hang off the first one seen.
-        if d in seen and not re.search(r"special|workshop|hearing", name, re.I):
+        # Each meeting has an "Agenda" and a "Detailed Agenda" entry: one record per meeting, linked to the first entry
+        # seen (a stable link), fetching from every entry. Special meetings, workshops and hearings are their own records.
+        key = (d, name if re.search(r"special|workshop|hearing", name, re.I) else "")
+        if key in by:
+            by[key]["uniques"].append((bool(re.search(r"detailed", name, re.I)), m["unique"]))
             continue
-        seen.add(d)
-        out.append({"date": d, "url": "%s/goto?open&id=%s" % (BD, m["unique"]), "board": "schools",
-                    "title": re.sub(r"\s*(detailed\s+)?agenda$", "", name, flags=re.I) or "School Board Meeting",
-                    "fetch": boarddocs_file(m["unique"]), "source": "schools"})
+        by[key] = {"date": d, "url": "%s/goto?open&id=%s" % (BD, m["unique"]), "board": "schools",
+                   "title": re.sub(r"\s*(detailed\s+)?agenda$", "", name, flags=re.I) or "School Board Meeting",
+                   "source": "schools", "uniques": [(bool(re.search(r"detailed", name, re.I)), m["unique"])]}
+        out.append(by[key])
+    for r in out:
+        r["fetch"] = boarddocs_file(*[u for _, u in sorted(r.pop("uniques"), key=lambda x: not x[0])])
     return out
 
 

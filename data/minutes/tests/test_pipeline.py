@@ -92,6 +92,15 @@ class Text(unittest.TestCase):
     def test_html(self):
         self.assertIn("Yes: Chapman", T.html_text(b"<p>Motion carried</p><p>Yes: Chapman, Moss</p>"))
 
+    def test_docx(self):
+        import io
+        import zipfile
+        b = io.BytesIO()
+        with zipfile.ZipFile(b, "w") as z:
+            z.writestr("word/document.xml", '<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>'
+                       '<w:p><w:r><w:t>Motion by </w:t></w:r><w:r><w:t>Smith</w:t></w:r></w:p><w:p><w:r><w:t>Passed 5-0</w:t></w:r></w:p></w:body></w:document>')
+        self.assertEqual(T.to_pages(b.getvalue(), T.DOCX), (["Motion by Smith\nPassed 5-0"], "text", 0))
+
 
 class Answers(unittest.TestCase):
     answer = {"meetings": [{"board": "City Commission", "date": "2016-12-13", "type": "regular", "present": PRESENT, "absent": [],
