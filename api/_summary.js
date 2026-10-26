@@ -15,6 +15,7 @@ const COUNTS = {
   syncs: `select count(*)::int n from (select distinct on (dataset) status from ingest_runs where dataset is not null
             and started_at > now() - interval '60 days' order by dataset, id desc) x where status = 'failed'`,
   agendas: `select count(*)::int n from agendas.errors where resolved_at is null and at > now() - interval '14 days'`,
+  minutes: `select count(*)::int n from agendas.motions where review_status = 'unreviewed' and (check_status = 'flagged' or sampled)`,
 };
 
 // q: the query function (db.q), passed in so tests can fake it.

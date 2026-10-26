@@ -233,6 +233,14 @@ async function route(req, res, action, me) {
       await audit(me.e, action, null, {status: body.status, n: r.updated, matches: r.rows.map(x => x.board_key + '|' + x.official_id)});
       return r;
     }
+    case 'minutes': return require('./_minutes').report({queue: String(Q.queue || 'flagged'), board: String(Q.board || ''), year: String(Q.year || ''),
+      status: Q.status == null ? 'unreviewed' : String(Q.status), q: String(Q.q || '')});
+    case 'minutes_review': {
+      if (req.method !== 'POST') throw Object.assign(new Error('Use POST.'), {status: 405});
+      const r = await require('./_minutes').review(body, me.e);
+      await audit(me.e, action, null, {status: body.status, n: r.updated, motions: r.rows.map(x => x.id)});
+      return r;
+    }
     case 'careers': return require('./_careers').matches({county: Q.county, status: String(Q.status || ''), confidence: String(Q.confidence || ''), q: String(Q.q || '')});
     case 'careers_review': {
       if (req.method !== 'POST') throw Object.assign(new Error('Use POST.'), {status: 405});

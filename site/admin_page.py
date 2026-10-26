@@ -228,7 +228,7 @@ details.ag summary{cursor:pointer;color:var(--blue)} details.ag pre{white-space:
 MENU = [
     ('Review', 'teal', 'shield', [('owners', 'Business owners', 'owners'), ('limits', 'Gifts over the limit', 'limits'),
                                   ('boards', 'Nonprofit boards', 'boards'), ('ties', 'Business ties', 'ties'),
-                                  ('accounting', 'Accounting files', 'accounting')]),
+                                  ('minutes', 'Votes from minutes', 'minutes'), ('accounting', 'Accounting files', 'accounting')]),
     ('Outreach', 'blue', 'send', [('compose', 'Write to officials', None), ('correspondence', 'Conversations', 'replies'),
                                   ('records', 'Records requests', 'records')]),
     ('Data & email', 'amber', 'db', [('ingestion', 'Data health', 'syncs'), ('agendas', 'Agendas', 'agendas'),
@@ -514,6 +514,25 @@ def admin_page(out_dir):
         <select class="sel" id="bt-status" aria-label="Review status"><option value="unreviewed">Unreviewed</option><option value="">Any review status</option><option value="confirmed">Confirmed</option><option value="rejected">Rejected</option></select>
       </div>
       <div class="tw"><table class="at" id="bt-table" data-tt="off"><thead><tr><th class="pk"><input type="checkbox" data-bk-all aria-label="Select all shown"></th><th>Official</th><th>Sunbiz person</th><th>Businesses</th><th>Links</th><th>Review</th></tr></thead><tbody></tbody></table></div>
+    </section>
+
+    <section id="tab-minutes" class="pane" hidden>
+      <div class="banner"><div><b>Votes read from meeting minutes.</b> <span class="small muted">Every minutes file since 2016 is read by Claude into motions and roll calls, and the printed names are matched to officeholder terms. Motions that pass every check go on the site automatically on the next daily refresh. Motions here failed a check, or are a random 1-in-50 spot check of passing ones: open the minutes page, then approve (publishes a flagged motion) or reject (keeps any motion off the site). To fix a wrong name or term, correct data/civic/officeholders.json and re-match.</span></div></div>
+      <div class="tiles" id="mv-tiles"></div>
+      <div class="row" style="gap:8px;flex-wrap:wrap;margin:18px 0 8px">
+        <h2 class="h2 grow" style="margin:0">Motions</h2>
+        <input class="sel" id="mv-q" type="search" placeholder="Words in the motion" aria-label="Words in the motion">
+        <select class="sel" id="mv-queue" aria-label="Queue"><option value="flagged">Flagged</option><option value="sample">Spot checks</option><option value="passed">Passed checks</option><option value="all">All motions</option></select>
+        <select class="sel" id="mv-board" aria-label="Board"><option value="">Every board</option></select>
+        <select class="sel" id="mv-year" aria-label="Year"><option value="">Every year</option></select>
+        <select class="sel" id="mv-status" aria-label="Review status"><option value="unreviewed">Unreviewed</option><option value="">Any review status</option><option value="approved">Approved</option><option value="rejected">Rejected</option></select>
+      </div>
+      <div id="mv-checks" class="small muted" style="margin:0 0 8px"></div>
+      <div class="tw"><table class="at" id="mv-table" data-tt="off"><thead><tr><th class="pk"><input type="checkbox" data-bk-all aria-label="Select all shown"></th><th>Meeting</th><th>Motion</th><th>Votes</th><th>Checks</th><th>Review</th></tr></thead><tbody></tbody></table></div>
+      <h2 class="h2" style="margin:24px 0 8px">Coverage</h2>
+      <div class="tw"><table class="at" id="mv-coverage"><thead><tr><th>Board</th><th class="num">Files</th><th class="num">Read</th><th class="num">Motions</th><th>By year (files read / captured)</th></tr></thead><tbody></tbody></table></div>
+      <h2 class="h2" style="margin:24px 0 8px">Batches</h2>
+      <div class="tw"><table class="at" id="mv-batches"><thead><tr><th>Batch</th><th>Status</th><th class="num">Requests</th><th class="num">Estimate</th><th class="num">Cost</th><th>Sent</th><th>Collected</th></tr></thead><tbody></tbody></table></div>
     </section>
 
     <section id="tab-owners" class="pane" hidden>
