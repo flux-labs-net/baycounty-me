@@ -65,6 +65,7 @@ struct ListSummary: View {
     let topTitle: String?
     let top: [Browse.Bucket]
     let onTop: (String) -> Void
+    var countUnit: String? = nil
     let note: String?
 
     var body: some View {
@@ -87,7 +88,7 @@ struct ListSummary: View {
                 BucketChart(title: chartTitle, buckets: buckets, byAmount: byAmount, selected: $selected)
             }
             if let topTitle, top.count >= 2 {
-                TopBars(title: topTitle, items: top, byAmount: byAmount, onTap: onTop)
+                TopBars(title: topTitle, items: top, byAmount: byAmount, countUnit: countUnit, onTap: onTop)
             }
             if let note {
                 Text(note).font(.caption2).foregroundStyle(.secondary).frame(maxWidth: .infinity, alignment: .leading)
@@ -158,6 +159,8 @@ struct TopBars: View {
     let title: String
     let items: [Browse.Bucket]
     let byAmount: Bool
+    /// Shows how many records make up each total ("12 gifts") next to the amount.
+    var countUnit: String? = nil
     let onTap: (String) -> Void
 
     var body: some View {
@@ -171,6 +174,9 @@ struct TopBars: View {
                         HStack {
                             Text(item.label).font(.subheadline).lineLimit(1).foregroundStyle(.primary)
                             Spacer(minLength: 8)
+                            if byAmount, let u = countUnit {
+                                Text("\(item.count) \(item.count == 1 ? u : u + "s")").font(.caption).foregroundStyle(.secondary).lineLimit(1)
+                            }
                             Text(byAmount ? Format.compactMoney(v) : "\(item.count)")
                                 .font(.subheadline.weight(.semibold).monospacedDigit()).foregroundStyle(.primary)
                         }

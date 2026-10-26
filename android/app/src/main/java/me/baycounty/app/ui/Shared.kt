@@ -238,7 +238,7 @@ fun tableShortDate(row: DataRow): String {
 
 /** The biggest names in a list, as bars. Tapping one filters the list to it. */
 @Composable
-fun TopBars(title: String, items: List<Browse.Bucket>, byAmount: Boolean, onTap: (String) -> Unit) {
+fun TopBars(title: String, items: List<Browse.Bucket>, byAmount: Boolean, countUnit: String? = null, onTap: (String) -> Unit) {
     val maxV = items.maxOfOrNull { if (byAmount) it.amount else it.count.toDouble() } ?: 1.0
     Column(Modifier.fillMaxWidth().card(12.dp).padding(14.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
         Text(title, style = T.subheadBold, color = Brand.text)
@@ -248,6 +248,10 @@ fun TopBars(title: String, items: List<Browse.Bucket>, byAmount: Boolean, onTap:
                 Row {
                     Text(item.label, style = T.subhead, color = Brand.text, maxLines = 1, overflow = TextOverflow.Ellipsis, modifier = Modifier.weight(1f))
                     Spacer(Modifier.width(8.dp))
+                    if (byAmount && countUnit != null) {
+                        Text("${item.count} ${if (item.count == 1) countUnit else countUnit + "s"}", style = T.caption, color = Brand.secondary, maxLines = 1)
+                        Spacer(Modifier.width(8.dp))
+                    }
                     Text(if (byAmount) Format.compactMoney(v) else "${item.count}", style = T.subheadBold, color = Brand.text)
                 }
                 MagnitudeBar(if (maxV > 0) v / maxV else 0.0, 6.dp)

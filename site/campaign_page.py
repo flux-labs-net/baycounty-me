@@ -63,21 +63,23 @@ NAME_FIX = {
 }
 
 
-def merge_orgs(orgs):
+def merge_orgs(orgs, counts=False):
     """Total gifts by organization, treating spelling variants of one name as one donor.
-    Names with different legal suffixes (Inc vs LLC) stay separate; a name with no suffix joins its only suffixed match."""
-    groups = defaultdict(lambda: defaultdict(lambda: [0.0, []]))
+    Names with different legal suffixes (Inc vs LLC) stay separate; a name with no suffix joins its only suffixed match.
+    Returns [(name, total)], or [(name, total, gifts)] with counts=True; refunds are netted and not counted as gifts."""
+    groups = defaultdict(lambda: defaultdict(lambda: [0.0, [], 0]))
     for x in orgs:
         nm = NAME_FIX.get(x['name'].strip(), x['name'].strip())
         b, suf = _base(nm)
-        g = groups[b][suf]; g[0] += x.get('amount') or 0; g[1].append(nm)
+        g = groups[b][suf]; g[0] += x.get('amount') or 0; g[1].append(nm); g[2] += (x.get('amount') or 0) > 0
     out = []
     for b, by in groups.items():
         sufs = [k for k in by if k]
         if '' in by and len(sufs) == 1:
-            bare = by.pop(''); by[sufs[0]][0] += bare[0]; by[sufs[0]][1] += bare[1]
-        out += [(CANON.get(_base(v[1][0])) or _display(v[1]), v[0]) for v in by.values()]
-    return sorted(out, key=lambda kv: -kv[1])
+            bare = by.pop(''); by[sufs[0]][0] += bare[0]; by[sufs[0]][1] += bare[1]; by[sufs[0]][2] += bare[2]
+        out += [(CANON.get(_base(v[1][0])) or _display(v[1]), v[0], v[2]) for v in by.values()]
+    out.sort(key=lambda kv: (-kv[1], -kv[2], kv[0]))
+    return out if counts else [kv[:2] for kv in out]
 
 
 def campaign_page():
@@ -132,10 +134,10 @@ def campaign_page():
         for c in sorted(cs, key=lambda c: -(c.get('total_raised') or 0)):
             bt = c.get('by_type_total') or {}
             orgs = sorted((x for x in c.get('contributors') or [] if x.get('type') not in ('individual', 'candidate')), key=lambda x: -(x.get('amount') or 0))
-            top = merge_orgs(orgs)
+            top = merge_orgs(orgs, counts=True)
             orgt = sum(v for k, v in bt.items() if k not in ('individual', 'candidate_self'))
             fi = c.get('from_individuals') or {}
-            det = (f'<details class="flds"><summary>{len(top)} organizations</summary><ul class="plain small">' + ''.join(f'<li>{e(n)} · {usd(v)}</li>' for n, v in top) + '</ul></details>') if top else '<span class="muted small">none</span>'
+            det = (f'<details class="flds"><summary>{len(top)} organizations</summary><ul class="plain small">' + ''.join(f'<li>{e(n)} · {usd(v)}{f" <small>{k} gifts</small>" if k > 1 else ""}</li>' for n, v, k in top) + '</ul></details>') if top else '<span class="muted small">none</span>'
             rows += f'''<tr data-g="{CITY(gk)}"><th scope="row"><b>{e(c["official"])}</b><small>{e(c.get("office"))} · {e(c.get("election"))}</small></th>
               <td class="num">{usd(c.get("total_raised"))}</td><td class="num">{usd(fi.get("total"))}<small>{fi.get("count") or 0} people</small></td><td class="num">{usd(orgt)}</td>
               <td class="num">{usd(bt.get("candidate_self"))}</td><td class="wrap">{det} <a class="src" href="{e(c.get("report_url"))}" target="_blank" rel="noopener">Report</a>{f'<br><span class="muted small">{e(c["note"])}</span>' if c.get("note") else ""}</td></tr>'''

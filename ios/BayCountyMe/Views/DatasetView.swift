@@ -224,9 +224,10 @@ struct DatasetView: View {
             buckets: buckets(base),
             byAmount: totalInfo != nil,
             selected: $bucket,
-            topTitle: topKey.map { "Biggest by \(Browse.GroupKey.column($0).label.lowercased())" },
+            topTitle: topKey.map { (Browse.giftLists.contains(datasetID) ? "Total given by " : "Biggest by ") + Browse.GroupKey.column($0).label.lowercased() },
             top: topKey.map { Browse.top(base, key: $0, spec: spec, byAmount: totalInfo != nil) } ?? [],
             onTop: { name in if let k = topKey { filters[k] = name } },
+            countUnit: Browse.giftLists.contains(datasetID) ? "gift" : nil,
             note: totalInfo?.note)
     }
 

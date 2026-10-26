@@ -314,7 +314,8 @@ private fun SummaryCard(
                 }
             }
         }
-        if (topKey != null && top.size >= 2) TopBars("Biggest by ${Browse.GroupKey.Column(topKey).label.lowercase()}", top, byAmount) { onTop(topKey, it) }
+        if (topKey != null && top.size >= 2) TopBars((if (datasetID in Browse.giftLists) "Total given by " else "Biggest by ") + Browse.GroupKey.Column(topKey).label.lowercase(), top, byAmount,
+            countUnit = if (datasetID in Browse.giftLists) "gift" else null) { onTop(topKey, it) }
         totalInfo?.note?.let { Text(it, style = T.caption2, color = Brand.secondary) }
     }
 }

@@ -9,17 +9,24 @@ public enum Browse {
         "change-orders": ("Added", "Added to existing contracts by change orders."),
         "emergency-purchases": ("Approved", nil),
         "campaign-contributions-2026": ("Given", nil),
+        "campaign-contributions-history": ("Given", nil),
+        "business-donor-sunbiz": ("Given", nil),
+        "owner-gifts": ("Given", nil),
         "fema-michael-projects": ("Federal share", "FEMA's share obligated so far, not all paid out."),
         "bed-tax-collections": ("Collected", nil),
         "vendor-payments": ("Paid", nil),
     ]
+
+    /// Lists of single campaign gifts. Florida caps a gift at $1,000 per election, so the largest single gift
+    /// says little: these rank each giver by its total and show how many gifts it made.
+    public static let giftLists: Set<String> = ["campaign-contributions-2026", "campaign-contributions-history"]
 
     /// What a list's records are called on its summary ("Contracts", "Votes").
     public static func noun(_ datasetID: String) -> String {
         ["contracts": "Contracts", "votes": "Votes", "member-votes": "Votes", "change-orders": "Change orders",
          "emergency-purchases": "Purchases", "salary-positions": "Positions", "salary-leaders": "Positions",
          "fema-michael-projects": "Projects", "sales-tax-projects": "Projects", "audit-findings": "Findings",
-         "campaign-contributions-2026": "Gifts", "cra-payments": "Records", "bonds": "Bonds"][datasetID] ?? "Records"
+         "campaign-contributions-2026": "Gifts", "campaign-contributions-history": "Gifts", "cra-payments": "Records", "bonds": "Bonds"][datasetID] ?? "Records"
     }
 
     /// A readable name for a value: government ids ("pc") become names, codes ("special_district") become words.
