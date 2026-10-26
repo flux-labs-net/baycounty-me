@@ -128,6 +128,9 @@ fun RouteScreen(route: Route) {
         is Route.TaxCalculator -> TaxCalculatorScreen(route)
         is Route.GovBudget -> GovBudgetScreen(route.id)
         is Route.Amendment3 -> Amendment3Screen(route)
+        Route.Glossary -> GlossaryScreen()
+        Route.Updates -> UpdatesScreen()
+        Route.About -> AboutScreen()
         else -> PendingScreen(route)
     }
 }
