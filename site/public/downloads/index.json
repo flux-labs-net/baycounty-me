@@ -1,6 +1,6 @@
 {
  "name": "BayCounty.me open data",
- "updated": "2026-10-25",
+ "updated": "2026-10-26",
  "license": "Public records; free to reuse with credit to BayCounty.me",
  "datasets": [
   {
@@ -2653,7 +2653,7 @@
    "id": "connections-gifts",
    "title": "Connections: business gifts to officials",
    "description": "Gifts from businesses, PACs and committees to current officeholders and 2026 candidates, one row per donor and official, with the payee id when the donor was also paid by a local government. Individual donors are never included.",
-   "rows": 2682,
+   "rows": 2681,
    "columns": [
     {
      "name": "donor",
@@ -3276,7 +3276,7 @@
    "id": "donor-contracts",
    "title": "Donors with government contracts",
    "description": "Each business donor matched to a local government contract, award or payment, with the match method and confidence.",
-   "rows": 543,
+   "rows": 541,
    "columns": [
     {
      "name": "contributor",
@@ -4576,7 +4576,7 @@
    "id": "business-donor-sunbiz",
    "title": "Business donors in the state corporate registry",
    "description": "Each business that gave to a current officeholder or 2026 local candidate, matched to its Florida Division of Corporations (Sunbiz) record: document number, registered name, status and principal city, with the match method. Business-level only; no owner or officer names.",
-   "rows": 2666,
+   "rows": 2665,
    "columns": [
     {
      "name": "contributor",
@@ -6342,7 +6342,7 @@
    "id": "owner-gifts",
    "title": "Campaign gifts from business owners",
    "description": "Personal gifts to local campaigns from people who run a registered Florida business, one row per person and campaign. A contributor filed as an individual is listed when the name and street address on the Supervisor of Elections filing are the same as an officer, manager or registered agent of a for-profit business on Sunbiz that was active around the gift; middle initials and Jr/Sr must agree, and protected voters are never matched. Other individual donors are never named. No addresses or occupations.",
-   "rows": 319,
+   "rows": 1116,
    "columns": [
     {
      "name": "donor_id",
@@ -6374,45 +6374,32 @@
     },
     {
      "name": "office",
-     "type": "string",
-     "values": [
-      "Bay County Commission, District 1",
-      "Bay County Commission, District 3",
-      "Bay County Commission, District 4",
-      "Bay County Commission, District 5",
-      "Callaway Commission, Ward 1",
-      "Callaway Commissioner, Ward 3",
-      "Lynn Haven Commissioner, Seat 1",
-      "Lynn Haven Commissioner, Seat 2",
-      "Panama City Beach Council, Ward 1",
-      "Panama City Beach Council, Ward 2",
-      "Panama City Beach Council, Ward 3",
-      "Panama City Beach Council, Ward 4",
-      "Panama City Beach Mayor",
-      "Panama City Commission, Ward I",
-      "Panama City Commission, Ward II",
-      "Panama City Commission, Ward III",
-      "Panama City Commission, Ward IV",
-      "Panama City Mayor",
-      "School Board, District 1",
-      "School Board, District 2",
-      "School Board, District 3",
-      "School Board, District 4",
-      "Sheriff",
-      "Springfield Mayor",
-      "Superintendent of Schools",
-      "Supervisor of Elections"
-     ]
+     "type": "string"
     },
     {
      "name": "election",
      "type": "string",
      "values": [
+      "2016 Municipal Super Tuesday (4/19/2016)",
+      "2016 Primary/General Elections (11/8/2016)",
+      "2017 Municipal Super Tuesday (4/18/2017)",
+      "2018 Municipal Super Tuesday (4/17/2018)",
+      "2018 Primary/General Election (11/6/2018)",
+      "2019 Municipal Super Tuesday (4/16/2019)",
+      "2020 Municipal Super Tuesday (4/21/2020)",
+      "2020 Primary (08/18/2020)/General Election (11/3/2020)",
+      "2021 Special School Board Referendum/Municipal Election (4/20/2021)",
+      "2022 Municipal Super Tuesday (4/19/2022)",
+      "2022 Primary/General Election (11/8/2022)",
       "2022 municipal (Apr 19, 2022)",
       "2022 primary/general",
+      "2023 Municipal Super Tuesday (4/18/2023)",
       "2023 municipal (Apr 18, 2023)",
+      "2024 Municipal Super Tuesday (4/16/2024)",
+      "2024 Primary/General Election (11/5/2024)",
       "2024 municipal (Apr 16, 2024)",
       "2024 primary/general",
+      "2025 Municipal Super Tuesday (4/22/2025)",
       "2025 municipal (Apr 22, 2025)",
       "2026 Municipal Super Tuesday (Apr 21, 2026)",
       "2026 Primary/General (Aug 18 / Nov 3, 2026)",
@@ -6450,15 +6437,22 @@
      "name": "gov_id",
      "type": "string",
      "values": [
+      "beach_mosquito",
       "county",
+      "county_court",
       "cw",
+      "lake_powell_cdd",
       "lh",
+      "mb",
+      "parker",
       "pc",
       "pcb",
+      "property_appraiser",
       "schools",
       "sheriff",
       "soe",
-      "sp"
+      "sp",
+      "tax_collector"
      ]
     }
    ],
@@ -6470,7 +6464,7 @@
    "id": "entity-profiles",
    "title": "Profiles: people, companies and organizations",
    "description": "Every company, elected official, candidate, nonprofit, nonprofit board member, registered business, committee and government named in BayCounty.me records, one row each, with its profile page and how many documented connections it has. entity_id (kind:key) joins entity-connections. Board members are named as their nonprofits' public filings list them; individual campaign donors are included only when they run a registered business (owner-gifts).",
-   "rows": 15544,
+   "rows": 16438,
    "columns": [
     {
      "name": "entity_id",
@@ -6585,7 +6579,7 @@
    "id": "entity-connections",
    "title": "Connections between people, companies and organizations",
    "description": "Every documented connection between two entities in entity-profiles, totalled per pair and kind: a government paid a payee, an organization gave to an official's or candidate's campaign, an official voted on a company's contracts, a person sits on a nonprofit's board or runs a business, a nonprofit gave a grant, two payees share a project. Each row has its source. Individual campaign donors are included only when they run a registered business (owner-gifts); officials' board seats and businesses are added by the API once checked by hand.",
-   "rows": 17977,
+   "rows": 19609,
    "columns": [
     {
      "name": "link_id",
@@ -9021,7 +9015,7 @@
    "id": "campaign-contributions-2026",
    "title": "2026 contributions from organizations",
    "description": "Every contribution from a business, committee or party to a 2026 local candidate. Individual donors are not included, and neither is bank interest on campaign accounts.",
-   "rows": 156,
+   "rows": 155,
    "columns": [
     {
      "name": "candidate",

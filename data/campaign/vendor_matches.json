@@ -1,24 +1,24 @@
 {
- "as_of": "2026-10-25",
+ "as_of": "2026-10-26",
  "method": "Business contributors to current officeholders (campaign.json), 2026 local candidates (../elections/finance_2026.json) and every other local campaign since 2016 (campaign_history.json) were compared with every payee on this site: contracts, change orders and emergency purchases (../contracts/contracts.json), Bay County and Lynn Haven check registers, payments by the three tourism agencies (../money/payments.json) and the CRA ledger (../merged.json). Both sides are resolved to vendor ids in ../entities/vendors.json: names are matched after removing punctuation, \"&\"/\"and\" and legal suffixes, plus hand-checked joins of truncated or misspelled names (each with its evidence in vendors.json). Nothing is fuzzy-matched. \"exact\" = the filed name matches the vendor's name; \"likely\" = the filing truncates, abbreviates or misspells it. One row per contributor spelling, candidate and paying government. A match shows only that an organization with the same name appears in both public records; it does not show why a gift was made or how a contract was awarded. Built by build_vendor_matches.py.",
- "count_rows": 543,
- "count_contributor_candidate_pairs": 205,
+ "count_rows": 541,
+ "count_contributor_candidate_pairs": 204,
  "count_distinct_vendors": 50,
  "count_by_confidence_pairs": {
   "exact": 183,
-  "likely": 22
+  "likely": 21
  },
- "pairs_where_contract_government_matches_office": 68,
+ "pairs_where_contract_government_matches_office": 67,
  "count_by_gift_source_pairs": {
-  "2026 candidates (finance_2026.json)": 21,
+  "2026 candidates (finance_2026.json)": 20,
   "current officeholders (campaign.json)": 45,
   "past campaigns 2016-2025 (campaign_history.json)": 139
  },
  "count_by_record_type_rows": {
   "cra": 44,
-  "change_order": 94,
-  "contract": 413,
-  "register": 151,
+  "change_order": 93,
+  "contract": 412,
+  "register": 149,
   "tdc": 63,
   "emergency": 70
  },
@@ -1289,98 +1289,6 @@
    ],
    "match_confidence": "exact",
    "note": "Names match after removing punctuation and legal suffixes.",
-   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=719&rellevel=4&committee=N",
-   "office_gov_id": "county",
-   "same_government_as_office": false
-  },
-  {
-   "contributor": "Culpepper",
-   "contributor_spellings": null,
-   "vendor": "Culpepper Construction / Culpepper Construction Co. / Culpepper Construction Company, Inc.",
-   "vendor_id": "culpepper",
-   "vendor_entity": "Culpepper Construction",
-   "candidate": "Scott Duvall",
-   "person_id": "scott-duvall",
-   "office": "Bay County Commission, District 4",
-   "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
-   "gift_source": "2026 candidates (finance_2026.json)",
-   "contribution_amount": 1000.0,
-   "refunded_by_campaign": null,
-   "contribution_dates": [
-    "2026-03-04"
-   ],
-   "contribution_items": [
-    "check"
-   ],
-   "contract_ids_or_descriptions": [
-    "Change order 2024-03-05: New Juvenile Justice Courthouse Addition (change $903,958.00)",
-    "Contract 2024-11-19: ITB 24-49, potable water treatment plant generator (Hurricane Ian project 4673-005-R) ($1,422,838.00)",
-    "FY2024 check register, top-vendor list: $2,139,656.58 paid",
-    "FY2026 check register, top-vendor list: $1,356,111.71 paid"
-   ],
-   "record_ids": [
-    "change_order:2",
-    "contract:88",
-    "register:0/top_vendors/7",
-    "register:2/top_vendors/21"
-   ],
-   "contract_source_urls": [
-    "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=2139",
-    "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=3824",
-    "https://baycountyfl.primegov.com/public/portal"
-   ],
-   "contract_government": "Bay County BOCC",
-   "contract_gov_id": "county",
-   "record_types": [
-    "change_order",
-    "contract",
-    "register"
-   ],
-   "match_confidence": "likely",
-   "note": "The filing spells the name \"Culpepper\"; matched to Culpepper Construction by a hand-checked spelling join. \"CULPEPPER CONST\" is the Lynn Haven warrant list cut at 15 characters; one campaign filing lists just \"Culpepper\".",
-   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=719&rellevel=4&committee=N",
-   "office_gov_id": "county",
-   "same_government_as_office": true
-  },
-  {
-   "contributor": "Culpepper",
-   "contributor_spellings": null,
-   "vendor": "CULPEPPER CONST",
-   "vendor_id": "culpepper",
-   "vendor_entity": "Culpepper Construction",
-   "candidate": "Scott Duvall",
-   "person_id": "scott-duvall",
-   "office": "Bay County Commission, District 4",
-   "election": "2026 Primary/General (Aug 18 / Nov 3, 2026)",
-   "gift_source": "2026 candidates (finance_2026.json)",
-   "contribution_amount": 1000.0,
-   "refunded_by_campaign": null,
-   "contribution_dates": [
-    "2026-03-04"
-   ],
-   "contribution_items": [
-    "check"
-   ],
-   "contract_ids_or_descriptions": [
-    "FY2023 check register, top-vendor list: $5,120,862.36 paid",
-    "FY2024 check register, top-vendor list: $737,592.37 paid",
-    "FY2025 check register, top-vendor list: $518,170.69 paid"
-   ],
-   "record_ids": [
-    "register:3/top_vendors/0",
-    "register:4/top_vendors/7",
-    "register:5/top_vendors/8"
-   ],
-   "contract_source_urls": [
-    "https://www.cityoflynnhaven.com/AgendaCenter"
-   ],
-   "contract_government": "City of Lynn Haven",
-   "contract_gov_id": "lh",
-   "record_types": [
-    "register"
-   ],
-   "match_confidence": "likely",
-   "note": "The filing spells the name \"Culpepper\"; matched to Culpepper Construction by a hand-checked spelling join. \"CULPEPPER CONST\" is the Lynn Haven warrant list cut at 15 characters; one campaign filing lists just \"Culpepper\".",
    "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=719&rellevel=4&committee=N",
    "office_gov_id": "county",
    "same_government_as_office": false
