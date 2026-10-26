@@ -41,6 +41,7 @@ const PAGES = {
   '/search': {endpoints: ['/search']},
   '/ask': {none: 'a chatbot: answers come from the MCP tools (api/mcp.js) over the same datasets and endpoints, through /api/chat'},
   '/about': {none: 'about the site'},
+  '/data-sources': {datasets: ['data-sources', 'data-source-sites']},
   '/privacy': {none: 'privacy policy'},
   '/connections': {datasets: ['connections-payees', 'connections-payments', 'connections-links', 'connections-gifts', 'money-map-gifts', 'money-map-contracts', 'money-map-votes']},
   '/public-money/vendors': {datasets: ['vendors-directory', 'contracts', 'vendor-payments', 'cra-payments', 'campaign-contributions-2026', 'entity-profiles', 'entity-connections'],

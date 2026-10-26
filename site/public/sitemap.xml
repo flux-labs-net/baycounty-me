@@ -9,7 +9,7 @@
   </url>
   <url>
     <loc>https://baycounty.me/about</loc>
-    <lastmod>2026-10-21</lastmod>
+    <lastmod>2026-10-26</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/alerts</loc>
@@ -46,6 +46,10 @@
   <url>
     <loc>https://baycounty.me/correspondence</loc>
     <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/data-sources</loc>
+    <lastmod>2026-10-26</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/developers</loc>
@@ -188,7 +192,7 @@
   </url>
   <url>
     <loc>https://baycounty.me/open-data</loc>
-    <lastmod>2026-10-25</lastmod>
+    <lastmod>2026-10-26</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/people</loc>
@@ -2188,6 +2192,6 @@
   </url>
   <url>
     <loc>https://baycounty.me/updates</loc>
-    <lastmod>2026-10-25</lastmod>
+    <lastmod>2026-10-26</lastmod>
   </url>
 </urlset>

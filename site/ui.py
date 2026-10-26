@@ -301,11 +301,12 @@ def data_notice(es=False):
     The close button hides it for that browser (ui.js); the inline script hides it before paint on later visits."""
     if es:
         msg = ('<b>Seguimos cargando datos.</b> Todavía estamos incorporando y revisando registros, '
-               'así que algunos totales no son definitivos y pueden cambiar.')
+               'así que algunos totales no son definitivos y pueden cambiar. '
+               '<a href="/data-sources" hreflang="en">De dónde vienen los datos</a> (en inglés)')
         close = 'Cerrar aviso'
     else:
         msg = ('<b>Data is still coming in.</b> We are still loading and checking records, so some totals '
-               'are not final and may change. <a href="/updates">See what’s new</a>')
+               'are not final and may change. <a href="/data-sources">Where our data comes from</a>')
         close = 'Close notice'
     return (f'<div class="data-note" id="dataNote" role="note" data-report="skip" data-key="{NOTE_KEY}"><div class="data-note-in">'
             f'{ico("info")}<p>{msg}</p>'

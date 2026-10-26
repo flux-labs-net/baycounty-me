@@ -9,6 +9,9 @@ from datetime import datetime, timezone
 import html
 
 CHANGES = [
+    {'date': '2026-10-26', 'title': 'Where our data comes from',
+     'text': "A new page lists every source behind BayCounty.me: each government's agenda system, calendar, minutes, budgets and fee schedules, and every state and federal database we use (Florida Auditor General, Department of Revenue, EDR, Sunbiz, the Supervisor of Elections, IRS filings, OpenFEMA and more). For each one it shows the link, whether we fetch it automatically or read it by hand, how often, what we take and how we check it, plus a count of every website our records cite. A notice at the top of every page also says the data is still being loaded and checked, so some totals may change.",
+     'pages': ['/data-sources', '/about', '/open-data']},
     {'date': '2026-10-25', 'title': 'The site now starts in 2016',
      'text': "BayCounty.me now covers 2016 onward: fiscal year 2016 for budgets and other yearly figures, and 2016 for dated records. Older figures came off every page, download and the API: FY2015 budgets and audited actuals, CRA tax increment from FY2003 to FY2015, CRA spending records from before 2016, officeholder terms that ended before 2016, older events in the Accountability timelines (and the Front Beach Road Segment 1 project, built 2009 to 2013), and nonprofit board seats, grants and charity registrations from before 2016. Year pickers start at 2016.",
      'pages': ['/public-money/budget-compare', '/governments', '/public-money/cra-tax-increment', '/public-money/cra-spending', '/public-money/accountability', '/connections/nonprofits', '/people', '/open-data', '/developers']},
