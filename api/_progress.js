@@ -52,7 +52,7 @@ function summarize(rows, runs = [], opts = {}) {
   }
   const order = Object.keys(BOARDS).filter(b => byBoard.has(b)).concat([...byBoard.keys()].filter(b => !BOARDS[b]).sort());
   const T = {found: 0, listed: 0, captured: 0, read: 0, reading: 0, unreadable: 0, motions: 0, passed: 0, flagged: 0, reviewed: 0,
-    pages: 0, ocr_pages: 0, read_7d: 0, gaps: 0, boards: order.length, listed_boards: 0};
+    pages: 0, ocr_pages: 0, read_7d: 0, failed: 0, gaps: 0, boards: order.length, listed_boards: 0};
   const boards = order.map(b => {
     const m = byBoard.get(b);
     const t = {found: 0, captured: 0, read: 0, motions: 0, passed: 0, flagged: 0};
@@ -70,7 +70,7 @@ function summarize(rows, runs = [], opts = {}) {
       for (const k of ['found', 'captured', 'read', 'motions', 'passed', 'flagged']) t[k] += c[k];
       for (const k of ['captured', 'read', 'reading', 'unreadable', 'motions', 'passed', 'flagged']) T[k] += c[k];
       T.found += c.found; T.listed += listed || 0;
-      T.reviewed += n(r.reviewed); T.pages += n(r.pages); T.ocr_pages += n(r.ocr_pages); T.read_7d += n(r.read_7d);
+      T.reviewed += n(r.reviewed); T.pages += n(r.pages); T.ocr_pages += n(r.ocr_pages); T.read_7d += n(r.read_7d); T.failed += n(r.failed);
       if (c.state === 'none_online') T.gaps += 1;
       return c;
     });
@@ -84,7 +84,8 @@ function summarize(rows, runs = [], opts = {}) {
   const stages = [
     {key: 'found', label: 'Found in the archives', value: T.found, of: null, pct: T.listed_boards ? 100 : 0,
       detail: T.listed_boards ? `${T.listed_boards} of ${T.boards || Object.keys(BOARDS).length} boards’ archives counted` : 'Archives not counted yet'},
-    {key: 'captured', label: 'Downloaded and stored', value: T.captured, of: T.found, pct: pct(T.captured, T.found)},
+    {key: 'captured', label: 'Downloaded and stored', value: T.captured, of: T.found, pct: pct(T.captured, T.found),
+      detail: T.failed ? `${T.failed} downloads failed; retried on the next crawl` : null},
     {key: 'read', label: 'Read into motions', value: done, of: T.captured, pct: pct(done, T.captured),
       detail: T.reading ? `${T.reading} being read now` : null},
     {key: 'checked', label: 'Votes checked', value: checked, of: T.motions, pct: pct(checked, T.motions),

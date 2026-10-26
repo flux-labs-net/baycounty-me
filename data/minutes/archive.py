@@ -307,7 +307,8 @@ def parse_parker(page, first, last):
             d = dt.date(int(ym.group(1)), 12, 31)
         if not d or not (max(first, FIRST_YEAR) <= d.year <= last):
             continue
-        out.append({"date": d, "url": html.unescape(h.group(1)), "board": "parker", "title": title, "fetch": None,
+        url = html.unescape(h.group(1)).strip().replace(" ", "%20")   # Parker's file names have spaces
+        out.append({"date": d, "url": url, "board": "parker", "title": title, "fetch": None,
                     "source": "parker", "multi": bool(ym)})
     return out
 

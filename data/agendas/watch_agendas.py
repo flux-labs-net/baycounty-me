@@ -241,7 +241,10 @@ def download(url, tries=3):
 
 
 def canonical(url):
-    """AgendaCenter serves the same agenda as HTML (?html=true) and PDF (no query); keep the PDF."""
+    """AgendaCenter serves the same agenda as HTML (?html=true) and PDF (no query); keep the PDF. Spaces in a link
+    (Parker's file names) are encoded, since urllib refuses a URL with a space in it."""
+    if url and " " in url:
+        url = url.strip().replace(" ", "%20")
     if url and "AgendaCenter/ViewFile" in url and "html=true" in url:
         return url.split("?", 1)[0]
     return url

@@ -37,6 +37,8 @@ class T(unittest.TestCase):
         self.assertEqual(p['attachments'][0]['filename'], 'agenda.pdf')
         self.assertEqual(w.canonical('https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_1-9?html=true'),
                          'https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_1-9')
+        self.assertEqual(w.canonical('https://cityofparker.com/filr/6652/Approved Minutes 3.17.26.pdf'),
+                         'https://cityofparker.com/filr/6652/Approved%20Minutes%203.17.26.pdf')
         self.assertEqual(w.fingerprint(b'<p>Hi  <b>there</b></p>', 'text/html'), w.fingerprint(b'<div>Hi there</div>', 'text/html'))
 
 

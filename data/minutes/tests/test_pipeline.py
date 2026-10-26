@@ -56,6 +56,11 @@ class Archive(unittest.TestCase):
         recs = A.parse_parker(page, 2016, 2026)
         self.assertEqual([(r["date"].isoformat(), r["multi"]) for r in recs], [("2016-12-31", True), ("2022-03-01", False)])
 
+    def test_parker_spaces_encoded(self):
+        page = ('<table id="filr-library-minutes-1"><tr><td class="title">March 17, 2026 Regular Meeting</td>'
+                '<td><a href="https://p/filr/6652/Approved Minutes 3.17.26.pdf">x</a></td></tr></table>')
+        self.assertEqual(A.parse_parker(page, 2016, 2026)[0]["url"], "https://p/filr/6652/Approved%20Minutes%203.17.26.pdf")
+
     def test_archive_center(self):
         page = ('<a href="Archive.aspx?ADID=3854"><span>January 13, 2026, Regular Meeting</span></a>'
                 '<a href="Archive.aspx?ADID=1"><span>Not a date</span></a>')
