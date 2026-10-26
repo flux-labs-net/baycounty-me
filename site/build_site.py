@@ -608,7 +608,7 @@ def about_page():
 def privacy_page():
     return '''<div class="page prose">
   <h1>Privacy</h1>
-  <p class="lede">BayCounty.me doesn't sell, share or track you. There are no accounts, no ads and no tracking cookies, on the website or in the iPhone app.</p>
+  <p class="lede">BayCounty.me doesn't sell, share or track you. There are no accounts, no ads and no tracking cookies, on the website or in the iPhone and Android apps.</p>
   <h2>The website</h2>
   <ul>
     <li><b>Visits.</b> The site counts page views with Vercel Web Analytics, which uses no cookies and doesn't identify you.</li>
@@ -618,12 +618,13 @@ def privacy_page():
     <li><b>Ask.</b> Questions you type on the <a href="/ask">Ask</a> page are sent to an AI service to write the answer, along with the public records it looks up. BayCounty.me doesn't save your questions or the answers; it logs only how many were asked (with a scrambled form of your IP address, to enforce limits) and what they cost. Please don't type personal information.</li>
     <li><b>My Address.</b> Address lookups go straight from your browser to Bay County's and FEMA's public map servers. BayCounty.me doesn't receive or store what you look up.</li>
   </ul>
-  <h2>The iPhone app</h2>
+  <h2>The iPhone and Android apps</h2>
   <ul>
     <li><b>No data collected.</b> The app has no accounts, analytics or advertising, and sends nothing about you to BayCounty.me.</li>
     <li><b>Your address and location.</b> If you save a home address, it stays on your phone. If you tap "Use my location," the app asks permission first and uses your location once to find your address on Bay County's public map server. It isn't stored or sent anywhere else.</li>
     <li><b>Downloaded data.</b> The app saves copies of the public records it shows so it works offline. Deleting the app deletes them.</li>
-    <li><b>Crash reports.</b> If you've allowed it in your iPhone settings, Apple may share anonymous crash reports with the developer.</li>
+    <li><b>Maps.</b> The Android app draws its maps with OpenStreetMap tiles, so OpenStreetMap's servers see your IP address when they send them, as any website would. The iPhone app uses Apple Maps.</li>
+    <li><b>Crash reports.</b> If you've allowed it in your phone's settings, Apple or Google may share anonymous crash reports with the developer.</li>
   </ul>
   <h2>Questions</h2>
   <p>Email <a href="mailto:hello@fluxlabs.net">hello@fluxlabs.net</a> or use the <a href="/about#contact">contact form</a>. BayCounty.me is run by <a href="https://fluxlabs.net/" target="_blank" rel="noopener">Flux Labs</a> in Panama City, Florida.</p>
@@ -683,7 +684,7 @@ PAGES = [
     ('/search', 'Search', 'Search every page, glossary term and public-money record on BayCounty.me.', search_page),
     ('/ask', 'Ask BayCounty.me', 'Ask a question in your own words about Bay County budgets, taxes, votes, contracts, meetings or officials, and get an answer from the public records on BayCounty.me, with links to each source.', ask_page),
     ('/about', 'About', 'What BayCounty.me is, where its information comes from, and how to send a correction.', about_page),
-    ('/privacy', 'Privacy', 'What BayCounty.me and its iPhone app collect: no accounts, no ads, no tracking.', privacy_page),
+    ('/privacy', 'Privacy', 'What BayCounty.me and its iPhone and Android apps collect: no accounts, no ads, no tracking.', privacy_page),
 ]
 
 

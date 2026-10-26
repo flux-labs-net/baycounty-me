@@ -1,0 +1,40 @@
+name: Android release
+# Builds the signed app bundle (.aab) to upload to the Play Console. Run it by hand from the Actions tab.
+# Needs the repository secrets in android/README.md. The version code is this workflow's run number plus 100,
+# so every bundle has a new one, as Play requires.
+on:
+  workflow_dispatch:
+jobs:
+  bundle:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: android
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Restore the upload key
+        env:
+          KEYSTORE_BASE64: ${{ secrets.BCM_KEYSTORE_BASE64 }}
+        run: |
+          if [ -z "$KEYSTORE_BASE64" ]; then echo "The BCM_KEYSTORE_BASE64 secret is missing. See android/README.md."; exit 1; fi
+          echo "$KEYSTORE_BASE64" | base64 -d > "$RUNNER_TEMP/upload.jks"
+          echo "BCM_KEYSTORE=$RUNNER_TEMP/upload.jks" >> "$GITHUB_ENV"
+      - name: Signed bundle
+        env:
+          BCM_KEYSTORE_PASSWORD: ${{ secrets.BCM_KEYSTORE_PASSWORD }}
+          BCM_KEY_ALIAS: ${{ secrets.BCM_KEY_ALIAS }}
+          BCM_KEY_PASSWORD: ${{ secrets.BCM_KEY_PASSWORD }}
+        run: |
+          export BCM_VERSION_CODE=$((${{ github.run_number }} + 100))
+          ./gradlew :kit:test :app:bundleRelease
+          rm -f "$BCM_KEYSTORE"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: app-release-aab
+          path: android/app/build/outputs/bundle/release/app-release.aab

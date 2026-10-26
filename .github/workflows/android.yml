@@ -1,0 +1,68 @@
+name: Android
+# Builds the Android app (android/) when it changes: kit tests, a debug APK, every screen rendered on the JVM in
+# light and dark (Paparazzi, from the data in this repo), and real emulator screenshots with live data.
+# Download the APK and both sets of pictures from the run's artifacts.
+on:
+  workflow_dispatch:
+  pull_request:
+    paths: ["android/**", "site/public/data/app/**", ".github/workflows/android.yml"]
+  push:
+    branches: [main]
+    paths: ["android/**", ".github/workflows/android.yml"]
+env:
+  SCREENS: home,tab:governments,tab:money,tab:meetings,tab:search,gov:county,gov:lh,tax,amendment3,glossary,vendors,vendor,people,person,moneymap,donors,contracts,votes,salaries,accountability,accproject,cra,craincrement,budget,pastelections,updates,about,explore,myaddress,record:contract,record:vote,record:board,record:nonprofit
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    defaults:
+      run:
+        working-directory: android
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: gradle/actions/setup-gradle@v4
+      - name: Kit tests and debug APK
+        run: ./gradlew :kit:test :app:assembleDebug
+      - name: Render every screen, light and dark
+        run: ./gradlew :app:testDebugUnitTest --tests 'me.baycounty.app.ScreensTest' -Dscreens="$SCREENS" -Dfullres="$PWD/shots"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: apk-debug
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: screens-jvm
+          path: android/shots
+
+  emulator:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: apk-debug
+      - name: Let the emulator use KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+      - uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 34
+          target: google_apis
+          arch: x86_64
+          profile: pixel_6
+          disable-animations: true
+          script: bash android/scripts/emulator_shots.sh app-debug.apk emulator-shots
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: screens-emulator
+          path: emulator-shots

@@ -14,8 +14,8 @@ android {
         applicationId = "me.baycounty.app"
         minSdk = 26
         targetSdk = 35
-        // Bump versionCode on every Play Console upload (Play rejects a code it already has). About shows both.
-        versionCode = 1
+        // Play rejects a versionCode it already has. The release workflow sets BCM_VERSION_CODE to its run number. About shows both.
+        versionCode = System.getenv("BCM_VERSION_CODE")?.toIntOrNull() ?: 1
         versionName = "1.0"
     }
 
