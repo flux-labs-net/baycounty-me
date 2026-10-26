@@ -205,6 +205,9 @@ public struct DatasetSpec: Sendable {
                               badge: "method", filters: ["topic", "government", "method"], page: "data-sources"),
         "data-source-sites": .init(.more, "globe", title: ["website"], subtitle: ["topic"], detail: "topic",
                                    filters: ["topic"], page: "data-sources"),
+        // how much of each government's records since 2016 are on file, per portion (budgets, audits, ...); status is complete / partial / missing
+        "data-completeness": .init(.more, "checklist", title: ["portion"], subtitle: ["government", "period"], detail: "missing",
+                                   badge: "status", filters: ["government", "portion", "status"], page: "governments"),
     ]
 
     /// Datasets the app shows in their own tabs rather than in Explore.

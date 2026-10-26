@@ -403,3 +403,26 @@ ul.ui-votes{display:flex;flex-direction:column;gap:8px;margin:0;padding:0;list-s
 .data-note-x:focus-visible{outline:none;box-shadow:var(--ui-ring)}
 @media (max-width:560px){.data-note-in{font-size:.8rem;padding-top:8px;padding-bottom:8px}}
 @media print{.data-note{display:none!important}}
+
+/* Data completeness: the percent by each government's name and its status table (completeness.py, completeness.js) */
+.dc-dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:currentColor;flex:none}
+.dc-complete{--dc:var(--teal)}.dc-partial{--dc:var(--gold)}.dc-missing{--dc:var(--salmon)}
+.dc-chip{display:inline-flex;align-items:center;gap:7px;font-size:.86rem;padding:5px 12px 5px 10px;border-radius:999px;text-decoration:none;color:var(--ink);
+  background:color-mix(in srgb,var(--dc) 14%,var(--surface));box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--dc) 45%,transparent)}
+.dc-chip .dc-dot,.dc-mini .dc-dot,.dc-st .dc-dot,.dc-key .dc-dot{color:var(--dc)}
+.dc-chip b{font-variant-numeric:tabular-nums;font-weight:600}
+.dc-chip:hover{box-shadow:inset 0 0 0 2px color-mix(in srgb,var(--dc) 70%,transparent)}
+.dc-mini{display:inline-flex;align-items:center;gap:5px;font-size:.78rem;color:var(--muted);white-space:nowrap}.dc-mini b{color:var(--ink);font-weight:600;font-variant-numeric:tabular-nums}
+.dc-key{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:.8rem;color:var(--muted)}.dc-key>span{display:inline-flex;align-items:center;gap:6px}
+.dc-t{width:100%;border-collapse:collapse;font-size:.9rem}
+.dc-t th,.dc-t td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle}
+.dc-t thead th{font-size:.76rem;font-weight:500;color:var(--muted);border-bottom:1px solid var(--line)}
+.dc-t tbody th{font-weight:500;white-space:nowrap}.dc-t tbody th a{color:var(--ink);text-decoration:none}.dc-t tbody th a:hover{color:var(--blue)}
+.dc-t small{display:block;font-size:.74rem;color:var(--muted);font-weight:400;white-space:normal}
+.dc-t .num{text-align:right;font-variant-numeric:tabular-nums;font-weight:600;width:3.5em}
+.dc-t .dc-n{color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+.dc-t td:first-of-type{width:34%;min-width:90px}
+.dc-bar{display:block;height:8px;border-radius:99px;background:var(--sunken);box-shadow:inset 0 0 0 1px var(--line);overflow:hidden}
+.dc-fill{display:block;height:100%;border-radius:99px;background:var(--dc)}
+.dc-st{display:inline-flex;align-items:center;gap:6px;font-weight:500;white-space:nowrap}
+@media (max-width:640px){.dc-t .dc-n,.dc-t .dc-sx,.dc-t .dc-sc small,.dc-t thead .dc-sh span{display:none}.dc-t td:first-of-type{width:30%}.dc-t th,.dc-t td{padding:8px 6px}.dc-t tbody th{white-space:normal}}

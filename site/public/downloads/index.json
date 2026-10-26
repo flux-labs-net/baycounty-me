@@ -7182,6 +7182,151 @@
    "api": "/api/v1/datasets/data-sources"
   },
   {
+   "id": "data-completeness",
+   "title": "How complete each government's data is",
+   "description": "For each government and each portion of its records (adopted budgets, audited spending, tax rates, debt, audit findings, officials by year): the years since 2016 we expect (period, expected), how many we have on file (have), the percent loaded (pct) and a status: complete (100%), partial (50-99%) or missing (under 50%). missing lists the fiscal years not on file. For officials, have and expected are seat-years and pct is the share where the officeholder is confirmed. Votes read from minutes change every few hours and are in /api/v1/import-progress instead.",
+   "rows": 54,
+   "columns": [
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "schools",
+      "sp"
+     ]
+    },
+    {
+     "name": "government",
+     "type": "string",
+     "values": [
+      "Bay County",
+      "Bay District Schools",
+      "Callaway",
+      "Lynn Haven",
+      "Mexico Beach",
+      "Panama City",
+      "Panama City Beach",
+      "Parker",
+      "Springfield"
+     ]
+    },
+    {
+     "name": "portion_id",
+     "type": "string",
+     "values": [
+      "actuals",
+      "audits",
+      "budgets",
+      "debt",
+      "officials",
+      "tax"
+     ]
+    },
+    {
+     "name": "portion",
+     "type": "string",
+     "values": [
+      "Adopted budgets",
+      "Audit findings",
+      "Audited spending",
+      "Debt",
+      "Officials by year",
+      "Tax rates"
+     ]
+    },
+    {
+     "name": "period",
+     "type": "string",
+     "values": [
+      "2016–2026",
+      "FY2016–FY2024",
+      "FY2016–FY2025",
+      "FY2016–FY2027"
+     ]
+    },
+    {
+     "name": "have",
+     "type": "number"
+    },
+    {
+     "name": "expected",
+     "type": "number"
+    },
+    {
+     "name": "unit",
+     "type": "string",
+     "values": [
+      "seat-years",
+      "years"
+     ]
+    },
+    {
+     "name": "pct",
+     "type": "number"
+    },
+    {
+     "name": "status",
+     "type": "string",
+     "values": [
+      "complete",
+      "missing",
+      "partial"
+     ]
+    },
+    {
+     "name": "missing",
+     "type": "string",
+     "values": [
+      "FY2016–FY2018, FY2020, FY2023",
+      "FY2016–FY2019",
+      "FY2016–FY2020",
+      "FY2016–FY2020, FY2026",
+      "FY2016–FY2020, FY2026–FY2027",
+      "FY2016–FY2021",
+      "FY2016–FY2022",
+      "FY2016–FY2023",
+      "FY2016–FY2024",
+      "FY2016–FY2025",
+      "FY2020",
+      "FY2025"
+     ]
+    },
+    {
+     "name": "detail",
+     "type": "string",
+     "values": [
+      "Adopted budget total or General Fund for each fiscal year.",
+      "Audits filed with the Florida Auditor General, read for findings and the auditor's opinion.",
+      "From the state's Local Government Financial Reports, filed through FY2025.",
+      "Seat-years since 2016 where the officeholder is confirmed from a record.",
+      "The property tax rate (millage) adopted for each fiscal year.",
+      "Total debt from each year's audited financial statements."
+     ]
+    },
+    {
+     "name": "page_url",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "/data-sources#matrix"
+     ]
+    }
+   ],
+   "json": "/downloads/data-completeness.json",
+   "csv": "/downloads/data-completeness.csv",
+   "api": "/api/v1/datasets/data-completeness"
+  },
+  {
    "id": "data-source-sites",
    "title": "Websites our records cite",
    "description": "Every website cited by the records behind BayCounty.me, per topic, with how many distinct documents and pages from it the data links to. Counted from the data files at each build.",

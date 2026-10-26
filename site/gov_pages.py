@@ -234,6 +234,9 @@ def gov_page(key):
     tags = ''.join(x for x in [f'<span class="ui-tag">{ico({"County": "county", "Schools": "school"}.get(kind, "city"))}{kind}</span>',
                                f'<span class="ui-tag">{ico("gavel")}{e(form[:1].upper() + form[1:])}</span>' if form else '',
                                f'<a class="ui-tag" href="{e(off["website"])}" target="_blank" rel="noopener">{ico("globe")}Official website</a>' if off.get('website') else ''])
+    import completeness
+    dc = completeness.by_gov(key)
+    tags = completeness.chip(key, dc) + tags if dc else tags
     return f'''<div class="page tax gov-page ui">
   <header class="ui-hero">
     <div class="ui-id"><span class="ui-badge t-blue">{ico({"County": "county", "Schools": "school"}.get(kind, "city"))}</span>
@@ -242,6 +245,7 @@ def gov_page(key):
   </header>
   <nav class="ui-tiles" aria-label="On this page" data-report="skip">{tiles}</nav>
   <nav class="ui-mini" aria-label="Sections" data-off data-report="skip">{mini}</nav>
+  {completeness.table(key, dc, p["short"]) if dc else ""}
   <section class="gx-top" aria-labelledby="gxTopH"><h2 class="gx-top-h muted" id="gxTopH">Fiscal year {fy_shown}{f" · {e(period)}" if period else ""}</h2>
   <div class="kpis" id="gxTop">{"".join(kp + static)}</div>{'' if gy else '<p class="muted small">No yearly figures on file for this government yet.</p>'}</section>
   {glance}
@@ -251,7 +255,7 @@ def gov_page(key):
 <link rel="stylesheet" href="/assets/tax.css">
 <link rel="stylesheet" href="/assets/gov.css">
 <script>window.GOVPAGE={_dumps(cfg)};</script>
-<script src="/assets/gov.js" defer></script>{SAV_ASSETS if 'id="svList"' in body else ''}'''
+<script src="/assets/gov.js" defer></script><script src="/assets/completeness.js" defer></script>{SAV_ASSETS if 'id="svList"' in body else ''}'''
 
 
 def _person_card(s, i, staff=False):
@@ -334,6 +338,8 @@ def _connections(key, short):
 
 def govs_index():
     from ui import dir_card, avatar
+    import completeness
+    dc_rows = completeness.rows()
     ps = all_profiles()
     cards = []
     look = {'county': ('Bay County government', 'map', 'blue'), 'schools': ('School district', 'book', 'amber'), 'city': ('City', 'city', 'teal')}
@@ -344,8 +350,8 @@ def govs_index():
                  f'{money(b["total"])} budget' if b.get('total') else '',
                  (f'{b["mills"]:g} mills' if b.get('mills') else 'no city property tax') if p['kind'] == 'city' else '',
                  f'{money((p.get("debt") or {}).get("total"))} in debt' if (p.get("debt") or {}).get("total") else '']
-        n = (p.get("votes") or {}).get("n", 0)
-        cards.append(dir_card(f'/governments/{p["slug"]}', p['short'], ' · '.join(x for x in facts if x), '', f'{n:,} votes' if n else kind,
+        dc = completeness.by_gov(p['key'], dc_rows)
+        cards.append(dir_card(f'/governments/{p["slug"]}', p['short'], ' · '.join(x for x in facts if x), '', completeness.card_chip(p['key'], dc) if dc else kind,
                               av=avatar(p['short'], tone, icon)))
     cards = ''.join(cards)
     return f'''<div class="page tax">
@@ -356,4 +362,5 @@ def govs_index():
   <div class="ui-dir ui-dir-govs">{cards}</div>
   <p class="note">Bay County residents pay the county and school district, and city residents also pay their city. Unincorporated areas are served by the county alone. <a href="/my-address/">Find yours by address</a>.</p>
 </div>
-<link rel="stylesheet" href="/assets/tax.css">'''
+<link rel="stylesheet" href="/assets/tax.css">
+<script src="/assets/completeness.js" defer></script>'''
