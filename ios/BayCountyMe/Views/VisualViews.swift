@@ -167,10 +167,12 @@ struct YearBars: View {
         let labels = Set(ChartTicks.shownLabels(shown.map(\.label)))
         let maxV = shown.map(\.value).max() ?? 0
         let annotateAll = shown.count <= 6
+        // Two or three bars at 70% of their slot turn into wide blocks; keep them column-shaped.
+        let barWidth: MarkDimension = shown.count < 6 ? .fixed(34) : .ratio(0.7)
         VStack(alignment: .leading, spacing: 8) {
             Text(title).font(.subheadline.weight(.semibold))
             Chart(Array(shown.enumerated()), id: \.offset) { i, p in
-                BarMark(x: .value("Year", p.label), y: .value("Amount", p.value), width: .ratio(0.7))
+                BarMark(x: .value("Year", p.label), y: .value("Amount", p.value), width: barWidth)
                     .foregroundStyle(Brand.navy)
                     .cornerRadius(3)
                     .annotation(position: .top, spacing: 3) {
