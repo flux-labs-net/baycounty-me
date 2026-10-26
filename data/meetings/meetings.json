@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-26T06:34:11-05:00",
+  "generated": "2026-10-26T17:34:50-05:00",
   "window": {
     "from": "2026-10-26",
     "to": "2026-12-25"
@@ -71,11 +71,11 @@
       "calendar_url": "https://www.panamacity.gov/Calendar.aspx",
       "schedule_source_url": "https://panamacity.gov/401/About-Meetings",
       "sources": {
-        "AgendaCenter": "ok (26 records)",
+        "AgendaCenter": "ok (27 records)",
         "calendar (iCal cat 22)": "ok (52 records)"
       },
       "coverage": {
-        "agenda_feed": 1,
+        "agenda_feed": 2,
         "calendar": 2,
         "expected": 0
       }
@@ -741,6 +741,17 @@
       "source": "Parker:https://cityofparker.com/government/agendas-minutes/",
       "status": "posted",
       "cancelled": true
+    },
+    {
+      "board": "pc",
+      "title": "CRA Virtual Workshop Agenda",
+      "start": "2026-11-03",
+      "location": "Virtual (live stream on the city website)",
+      "agenda_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_11032026-916",
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "AgendaCenter:https://www.panamacity.gov/AgendaCenter",
+      "status": "posted"
     },
     {
       "board": "pc-cra",
