@@ -36,11 +36,13 @@ def load():
 
 
 def _orgs(c):
-    agg = defaultdict(float)
+    """[(name, type, total, gifts)], largest total first. Florida caps each gift at $1,000, so totals are what rank."""
+    agg, cnt = defaultdict(float), defaultdict(int)
     for x in c.get('contributors') or []:
         if x.get('type') not in ('candidate', 'individual') and x.get('kind') != 'interest':
             agg[(x['name'], x.get('type'))] += x.get('amount') or 0
-    return sorted(((n, t, round(v, 2)) for (n, t), v in agg.items() if abs(v) > 0.005), key=lambda r: -r[2])
+            cnt[(x['name'], x.get('type'))] += (x.get('amount') or 0) > 0
+    return sorted(((n, t, round(v, 2), cnt[(n, t)]) for (n, t), v in agg.items() if abs(v) > 0.005), key=lambda r: (-r[2], -r[3], r[0]))
 
 
 def _org_total(c):
@@ -61,7 +63,7 @@ def race_html(office, cs):
                  f'<td class="num">{usd(c.get("total_spent"))}</td><td><a class="src" href="{e(c.get("report_url"))}" target="_blank" rel="noopener">Report</a></td></tr>')
         orgs = _orgs(c)
         if orgs:
-            li = ''.join(f'<li>{vendor(n) if t == "business" else e(ids.biz_case(n))}{"" if t == "business" else " <small>" + e(TYPE.get(t, t)) + "</small>"} · {usd(v)}</li>' for n, t, v in orgs)
+            li = ''.join(f'<li>{vendor(n) if t == "business" else e(ids.biz_case(n))}{"" if t == "business" else " <small>" + e(TYPE.get(t, t)) + "</small>"} · {usd(v)}{f" <small>{k} gifts</small>" if k > 1 else ""}</li>' for n, t, v, k in orgs)
             donors += f'<div class="pe-donors"><h5>{e(c["name"])}: {len(orgs)} organization{"s" if len(orgs) != 1 else ""}</h5><ul class="pe-list small">{li}</ul></div>'
     gid = cs[0].get('gov_id')
     det = f'<details class="flds"><summary>Organizations that gave in this race</summary>{donors}</details>' if donors else ''

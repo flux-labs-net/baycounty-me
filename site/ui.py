@@ -22,7 +22,7 @@ def avatar(name, tone, icon=None):
     """Initials (or an icon) in a tinted circle, for people and organizations."""
     if icon:
         return f'<span class="ui-av t-{tone}">{ico(icon)}</span>'
-    parts = [w for w in re.sub(r'["(].*', '', name or '').split() if w[:1].isalpha()]
+    parts = [w for w in re.sub(r'\([^)]*\)?|"[^"]*"?', ' ', name or '').split() if w[:1].isalpha()]
     ini = (parts[0][0] + (parts[-1][0] if len(parts) > 1 else '')).upper() if parts else '?'
     return f'<span class="ui-av t-{tone}" aria-hidden="true">{html.escape(ini)}</span>'
 

@@ -195,7 +195,7 @@ function topCards() {
 /* ---------- who held each elected seat in the year (officeholder-terms); "All years" keeps today's roster ---------- */
 const boardBox = $('#gxBoard'), boardNote = $('#gxBoardNote'), board0 = boardBox ? boardBox.innerHTML : '', note0 = boardNote ? boardNote.innerHTML : '';
 const TONE = ['blue', 'teal', 'amber', 'salmon'];
-const initials = n => { const w = String(n || '').replace(/["(].*/, '').split(/\s+/).filter(x => /^\p{L}/u.test(x)); return w.length ? (w[0][0] + (w.length > 1 ? w[w.length - 1][0] : '')).toUpperCase() : '?'; };
+const initials = n => { const w = String(n || '').replace(/\([^)]*\)?|"[^"]*"?/g, ' ').split(/\s+/).filter(x => /^\p{L}/u.test(x)); return w.length ? (w[0][0] + (w.length > 1 ? w[w.length - 1][0] : '')).toUpperCase() : '?'; };
 const mon = d => { const t = new Date(d + 'T12:00'); return t.toLocaleDateString('en-US', {month: 'short', year: 'numeric'}); };
 const pad2 = n => String(n).padStart(2, '0');
 const staffBox = $('#gxStaff'), staff0 = staffBox ? staffBox.innerHTML : '';
