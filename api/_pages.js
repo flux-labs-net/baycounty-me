@@ -15,7 +15,7 @@ const PAGES = {
   '/public-money/tourist-tax': {datasets: ['bed-tax-collections', 'vendor-payments']},
   '/public-money/sales-tax-projects': {datasets: ['sales-tax-projects']},
   '/public-money/fees-and-bills': {datasets: ['fees-assessments']},
-  '/governments': {datasets: ['government-profiles'], endpoints: ['/governments']},
+  '/governments': {datasets: ['government-profiles', 'data-completeness'], endpoints: ['/governments', '/import-progress']},
   '/compare': {datasets: ['government-profiles', 'budget-per-resident', 'debt', 'audit-findings'], endpoints: ['/governments']},
   '/open-data': {endpoints: ['/datasets', '/status']},
   '/developers': {endpoints: ['/openapi.json'], none: 'API documentation'},
@@ -55,7 +55,7 @@ const PAGES = {
 // a government's page carries the dashboards' records for that government (gov.js narrows them by city and year), and its
 // whole budget, debt, audits and savings ideas (site/gov_detail.py), which used to be dashboards of their own
 const PREFIXES = {'/governments/': {datasets: ['government-profiles', 'government-years', 'budget-detail', 'officials-pay', 'votes', 'meetings', 'contracts', 'cra-payments',
-  'accountability-projects', 'sales-tax-projects', 'fema-michael-projects', 'savings-opportunities', 'savings-evidence', 'debt', 'bonds', 'audit-findings', 'budget-per-resident', 'entity-connections', 'officeholder-terms'], endpoints: ['/governments/{slug}', '/entities/{id}', '/officials']},
+  'accountability-projects', 'sales-tax-projects', 'fema-michael-projects', 'savings-opportunities', 'savings-evidence', 'debt', 'bonds', 'audit-findings', 'budget-per-resident', 'entity-connections', 'officeholder-terms', 'data-completeness'], endpoints: ['/governments/{slug}', '/entities/{id}', '/officials', '/import-progress']},
   // each official's and candidate's profile (site/people_pages.py)
   '/people/': {datasets: ['entity-profiles', 'entity-connections', 'people-directory', 'member-votes', 'campaign-finance', 'campaign-history', 'candidates-2026', 'officials-pay', 'salary-leaders',
     'money-map-votes', 'nonprofit-officials', 'official-businesses', 'official-business-links', 'shared-owner-groups', 'owner-gifts', 'officeholder-terms'], endpoints: ['/entities/{id}']},
