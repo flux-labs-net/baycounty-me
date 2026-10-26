@@ -390,3 +390,16 @@ ul.ui-votes{display:flex;flex-direction:column;gap:8px;margin:0;padding:0;list-s
 :root .ui .au-yr .fd{border:0;border-radius:14px;background:var(--sunken);padding:14px 16px;gap:8px}
 .ui .au-yr .fd > .fd-hd b{font-size:.95rem;line-height:1.35}
 @media (max-width:560px){:root .ui .au-yr .fd{padding:12px 14px}}
+/* Site-wide data notice under the header (ui.data_notice) */
+.data-note{background:var(--tint-amber);border-bottom:1px solid color-mix(in srgb,var(--amber) 45%,var(--line))}
+.data-note[hidden]{display:none}
+.data-note-in{max-width:1360px;margin:0 auto;display:flex;align-items:flex-start;gap:10px;padding:9px max(16px,env(safe-area-inset-right,0px)) 9px max(16px,env(safe-area-inset-left,0px));font-size:.86rem;line-height:1.45;color:var(--ink)}
+.data-note-in>.ico{color:var(--gold);margin-top:.15em}
+.data-note-in p{margin:0;flex:1;min-width:0}
+.data-note-in b{font-weight:600}
+.data-note-in a{color:inherit;text-decoration:underline;text-underline-offset:2px;white-space:nowrap}
+.data-note-x{flex:none;display:grid;place-items:center;width:28px;height:28px;margin:-4px -6px -4px 0;border:0;border-radius:8px;background:none;color:var(--muted);cursor:pointer}
+.data-note-x:hover{background:color-mix(in srgb,var(--amber) 22%,transparent);color:var(--ink)}
+.data-note-x:focus-visible{outline:none;box-shadow:var(--ui-ring)}
+@media (max-width:560px){.data-note-in{font-size:.8rem;padding-top:8px;padding-bottom:8px}}
+@media print{.data-note{display:none!important}}

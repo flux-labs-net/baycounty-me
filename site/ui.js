@@ -53,3 +53,13 @@ const go = () => document.querySelectorAll('[data-ui-dir]').forEach(grid => {
 });
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go); else go();
 })();
+/* Site-wide data notice (ui.data_notice): the close button hides it in this browser until NOTE_KEY changes. */
+(function () {
+const go = () => {
+  const n = document.getElementById('dataNote');
+  const x = n && n.querySelector('.data-note-x');
+  if (!x) return;
+  x.addEventListener('click', () => { n.hidden = true; try { localStorage.setItem('bcm-note', n.dataset.key); } catch (e) {} });
+};
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go); else go();
+})();

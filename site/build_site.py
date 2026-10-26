@@ -299,6 +299,7 @@ def _layout(title, desc, path, body, extra_head=''):
     import html as _h
     from og import slug as _slug
     from seo import head_title, meta_desc, jsonld
+    from ui import data_notice
     full = _h.escape(head_title(title, path), quote=False)
     pt, pd = PREVIEW.get(path, (title, desc))
     t, d = _h.escape(pt, quote=True), _h.escape(pd, quote=True)
@@ -354,6 +355,7 @@ def _layout(title, desc, path, body, extra_head=''):
 <body>
 <a class="skip" href="#main">Skip to content</a>
 {nav_html(path).replace('__LANGHREF__', ES_ALT.get(path, '/') if path.startswith('/es') else (EN_TO_ES.get(path) or '/es')).replace('__LANGCODE__', 'en' if path.startswith('/es') else 'es').replace('__LANGLABEL__', 'English' if path.startswith('/es') else 'Español')}
+{data_notice(path.startswith('/es')) if path != '/404' else ''}
 <main id="main">
 {body}
 </main>
