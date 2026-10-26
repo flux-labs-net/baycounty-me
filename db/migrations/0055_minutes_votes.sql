@@ -113,3 +113,56 @@ create index if not exists votes_vote_id_idx on votes (vote_id);
 create index if not exists member_votes_vote_id_idx on member_votes (vote_id);
 
 update datasets set description = $d$Votes by the County Commission, School Board, city commissions and CRA boards since 2016, with how each member voted: hand-researched money votes plus every motion read from the official minutes.$d$, updated_at = now() where id = 'votes';
+
+-- How many minutes files each archive lists, per board and year, written by every crawl (crawl_minutes.py, also
+-- --inventory on its own). The progress dashboards compare it with what was captured and read.
+create table if not exists agendas.minutes_inventory (
+  board text not null,                        -- same board ids as agendas.documents
+  year integer not null,
+  listed integer not null default 0,          -- files the archive lists (0 = none posted online)
+  year_files integer not null default 0,      -- of those, whole-year files holding many meetings (Parker 2016-17)
+  sources text not null default '',           -- archive keys, comma list
+  listed_at timestamptz not null default now(),
+  primary key (board, year)
+);
+alter table agendas.minutes_inventory enable row level security;
+
+-- Progress of the minutes backfill per board and year, counts only (no motion text, no names, no costs), for
+-- /data-sources, GET /api/v1/import-progress and the /admin dashboard. A plain view runs with its owner's rights,
+-- so the public can read these totals while the agendas tables stay admin-only.
+create or replace view public.minutes_progress as
+with inv as (
+  select board, year, listed, year_files, listed_at from agendas.minutes_inventory where year >= 2016
+), docs as (
+  select d.board, extract(year from d.meeting_date)::int as year, count(*)::int as captured,
+         count(r.id) filter (where r.status = 'ok')::int as read,
+         count(r.id) filter (where r.status = 'submitted')::int as reading,
+         count(r.id) filter (where r.status in ('failed', 'no_text'))::int as unreadable,
+         count(r.id) filter (where r.status = 'ok' and r.read_at > now() - interval '7 days')::int as read_7d,
+         coalesce(sum(r.ocr_pages) filter (where r.status = 'ok'), 0)::int as ocr_pages,
+         coalesce(sum(r.pages) filter (where r.status = 'ok'), 0)::int as pages,
+         max(r.read_at) as last_read_at, max(d.first_seen_at) as last_captured_at
+    from agendas.documents d
+    left join agendas.minutes_reads r on r.document_id = d.id and r.sha256 = d.current_sha256
+   where d.kind = 'minutes' and d.meeting_date >= date '2016-01-01' and d.board is not null
+   group by 1, 2
+), mo as (
+  select board, extract(year from meeting_date)::int as year, count(*)::int as motions,
+         count(*) filter (where review_status <> 'rejected' and (check_status = 'passed' or review_status = 'approved'))::int as passed,
+         count(*) filter (where check_status = 'flagged' and review_status = 'unreviewed')::int as flagged,
+         count(*) filter (where check_status = 'flagged' and review_status <> 'unreviewed')::int as reviewed
+    from agendas.motions where meeting_date >= date '2016-01-01'
+   group by 1, 2
+)
+select coalesce(inv.board, docs.board, mo.board) as board, coalesce(inv.year, docs.year, mo.year) as year,
+       inv.listed, coalesce(inv.year_files, 0) as year_files, inv.listed_at,
+       coalesce(docs.captured, 0) as captured, coalesce(docs.read, 0) as read, coalesce(docs.reading, 0) as reading,
+       coalesce(docs.unreadable, 0) as unreadable, coalesce(docs.read_7d, 0) as read_7d,
+       coalesce(docs.pages, 0) as pages, coalesce(docs.ocr_pages, 0) as ocr_pages,
+       docs.last_read_at, docs.last_captured_at,
+       coalesce(mo.motions, 0) as motions, coalesce(mo.passed, 0) as passed, coalesce(mo.flagged, 0) as flagged,
+       coalesce(mo.reviewed, 0) as reviewed
+  from inv
+  full join docs on docs.board = inv.board and docs.year = inv.year
+  full join mo on mo.board = coalesce(inv.board, docs.board) and mo.year = coalesce(inv.year, docs.year);
+grant select on public.minutes_progress to anon, authenticated;

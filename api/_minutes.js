@@ -102,4 +102,18 @@ async function review(body, admin) {
   return {updated: rows.length, by: admin, rows};
 }
 
-module.exports = {CHECKS, where, cleanIds, report, review};
+// The backfill dashboard: the public progress numbers (api/_progress.js) plus what reading has cost.
+async function progress() {
+  const {summarize} = require('./_progress');
+  let rows;
+  try { rows = await db.q('select * from public.minutes_progress'); }
+  catch (e) { if (missing(e)) return {installed: false, note: 'The next database sync applies migration 0055; then run the Read minutes workflow with step list.'}; throw e; }
+  const runs = await db.q(`select dataset, started_at, finished_at, status, rows_in, notes from ingest_runs
+      where dataset in ('minutes_votes', 'agenda_documents') order by id desc limit 200`);
+  const [c] = await db.q(`select (select coalesce(sum(cost_usd), 0) from agendas.minutes_reads)::float spent,
+      (select coalesce(sum(est_cost_usd), 0) from agendas.minutes_batches where status = 'in_progress')::float in_flight,
+      (select avg(cost_usd) from agendas.minutes_reads where status = 'ok' and cost_usd > 0)::float avg`);
+  return summarize(rows, runs, {cost: {...c, budget: Number(process.env.MINUTES_TOTAL_BUDGET_USD) || 150}});
+}
+
+module.exports = {CHECKS, where, cleanIds, report, review, progress};

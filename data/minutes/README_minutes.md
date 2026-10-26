@@ -15,6 +15,14 @@ The **Read minutes** workflow (`.github/workflows/read-minutes.yml`) runs the cr
 3 hours. The daily **Refresh meetings** workflow runs the export, so new votes reach the site and `/api/v1` the next
 morning. The agenda watcher keeps capturing new minutes, so new meetings flow through the same way.
 
+## Progress
+
+Every crawl stores how many files each archive lists per board and year (`agendas.minutes_inventory`; run the
+workflow with step `list` to count without downloading). The view `public.minutes_progress` compares that with what
+was captured, read and checked (counts only). It feeds the live "What we've loaded so far" section on
+`/data-sources`, `GET /api/v1/import-progress` (`api/_progress.js`), and the /admin **Import progress** tab, which adds
+spend and the estimated cost to finish.
+
 ## Where the minutes are (checked 2026-10-26)
 
 | Board | Source | Online from | Notes |

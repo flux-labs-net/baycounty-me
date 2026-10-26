@@ -64,6 +64,18 @@ class Archive(unittest.TestCase):
         self.assertEqual(recs[0]["url"], "https://www.cityofcallaway.com/Archive.aspx?ADID=3854")
 
 
+class Inventory(unittest.TestCase):
+    def test_zero_years_are_kept(self):
+        import crawl_minutes as C
+        recs = [{"board": "pc", "date": dt.date(2017, 3, 1), "source": "pc"}, {"board": "pc", "date": dt.date(2017, 4, 1), "source": "pc"},
+                {"board": "parker", "date": dt.date(2016, 12, 31), "source": "parker", "multi": True}]
+        rows = C.inventory_rows(recs, 2016, 2018)
+        self.assertIn(("pc", 2016, 0, 0, "pc"), rows)
+        self.assertIn(("pc", 2017, 2, 0, "pc"), rows)
+        self.assertIn(("parker", 2016, 1, 1, "parker"), rows)
+        self.assertEqual(len(rows), 6)
+
+
 class Text(unittest.TestCase):
     def test_chunks_break_at_meeting_start(self):
         pages = ["x" * 30000, "y" * 30000, "MINUTES OF THE REGULAR MEETING\n" + "z" * 30000, "w" * 30000]

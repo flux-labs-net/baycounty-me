@@ -1,4 +1,5 @@
 # Votes from meeting minutes (data/minutes/README_minutes.md).
+#   list:    count the files each archive lists and store the counts for the progress pages (no downloads).
 #   crawl:   capture every governing-board minutes file from 2016 on into the agenda store (crawl_minutes.py).
 #            Skips files it already has, so it can be stopped and run again. Hand runs only.
 #   read:    collect finished Message Batches, then send the next minutes files (read_minutes.py --collect --submit).
@@ -17,7 +18,7 @@ on:
   workflow_dispatch:
     inputs:
       step:
-        description: 'crawl, read, crawl+read or rematch'
+        description: 'list, crawl, read, crawl+read or rematch'
         default: read
       only:
         description: 'crawl: limit to sources (comma list: county,schools,pc,cw,lh,pcb,sp,parker,mb). Blank = all.'
@@ -59,6 +60,15 @@ jobs:
         run: |
           pip install -q 'psycopg[binary]'
           sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils tesseract-ocr >/dev/null
+      - name: Count files in each archive
+        if: steps.gate.outputs.skip != 'true' && env.STEP == 'list'
+        env:
+          ONLY: ${{ inputs.only }}
+          FROM: ${{ inputs.from_year || '2016' }}
+        run: |
+          args="--inventory --from $FROM"
+          [ -n "$ONLY" ] && args="$args --only $ONLY"
+          python data/minutes/crawl_minutes.py $args
       - name: Capture minutes files
         if: steps.gate.outputs.skip != 'true' && contains(env.STEP, 'crawl')
         env:

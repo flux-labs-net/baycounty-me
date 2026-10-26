@@ -231,7 +231,7 @@ MENU = [
                                   ('minutes', 'Votes from minutes', 'minutes'), ('accounting', 'Accounting files', 'accounting')]),
     ('Outreach', 'blue', 'send', [('compose', 'Write to officials', None), ('correspondence', 'Conversations', 'replies'),
                                   ('records', 'Records requests', 'records')]),
-    ('Data & email', 'amber', 'db', [('ingestion', 'Data health', 'syncs'), ('agendas', 'Agendas', 'agendas'),
+    ('Data & email', 'amber', 'db', [('ingestion', 'Data health', 'syncs'), ('progress', 'Import progress', None), ('agendas', 'Agendas', 'agendas'),
                                      ('sent', 'Sent mail', None), ('emails', 'Email templates', None)]),
     ('API', 'gray', 'key', [('keys', 'Keys', None), ('analytics', 'Usage & request log', None), ('settings', 'Limits & activity', None)]),
 ]
@@ -516,6 +516,11 @@ def admin_page(out_dir):
       <div class="tw"><table class="at" id="bt-table" data-tt="off"><thead><tr><th class="pk"><input type="checkbox" data-bk-all aria-label="Select all shown"></th><th>Official</th><th>Sunbiz person</th><th>Businesses</th><th>Links</th><th>Review</th></tr></thead><tbody></tbody></table></div>
     </section>
 
+    <section id="tab-progress" class="pane" hidden>
+      <div class="banner"><div><b>Minutes backfill progress.</b> <span class="small muted">The same numbers as the public “What we’ve loaded so far” section on <a href="/data-sources#progress" target="_blank" rel="noopener">Where our data comes from</a>, plus costs. Run the Read minutes workflow with step <b>list</b> to count each archive, <b>crawl</b> to download, and reading runs every 3 hours on its own. Flagged votes wait in <a href="#minutes">Votes from minutes</a>.</span></div></div>
+      <div id="ip-admin"><p class="muted">Loading…</p></div>
+    </section>
+
     <section id="tab-minutes" class="pane" hidden>
       <div class="banner"><div><b>Votes read from meeting minutes.</b> <span class="small muted">Every minutes file since 2016 is read by Claude into motions and roll calls, and the printed names are matched to officeholder terms. Motions that pass every check go on the site automatically on the next daily refresh. Motions here failed a check, or are a random 1-in-50 spot check of passing ones: open the minutes page, then approve (publishes a flagged motion) or reject (keeps any motion off the site). To fix a wrong name or term, correct data/civic/officeholders.json and re-match.</span></div></div>
       <div class="tiles" id="mv-tiles"></div>
@@ -649,6 +654,7 @@ def admin_page(out_dir):
     <span class="grow"></span><button class="btn" value="cancel" id="kd-close">Close</button>
   </div>
 </form></dialog>
+<script src="/assets/progress.js" defer></script>
 <script src="/assets/admin.js?v={js_ver}" defer></script>
 </body>
 </html>

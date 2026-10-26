@@ -51,7 +51,7 @@
   const ALIAS = {logs: 'analytics'};
   const loaders = {todo: loadTodo, keys: loadKeys, analytics: () => { loadStats(); loadLogs(true); }, settings: loadSettings, ingestion: loadIngestion,
     accounting: () => loadLedger(), agendas: loadAgendas, sent: loadSent, emails: loadEmails, compose: () => loadCompose(), correspondence: loadCorr,
-    records: loadRR, owners: loadOwners, limits: loadLimits, ties: loadTies, boards: loadBoards, minutes: loadMinutes};
+    records: loadRR, owners: loadOwners, limits: loadLimits, ties: loadTies, boards: loadBoards, minutes: loadMinutes, progress: loadProgress};
   const nav = $('#an-nav'), menuBtn = $('#an-open');
   function menu(open) {
     nav.classList.toggle('open', open); document.body.classList.toggle('an-lock', open);
@@ -1268,12 +1268,21 @@
     key: m => String(m.id), body: list => ({items: list.map(m => ({id: m.id}))}),
     warn: st => st === 'approved' ? 'Approved motions go on the site with the next daily refresh.' : st === 'rejected' ? 'Rejected motions stay off the site.' : '',
     reload: () => loadMinutes()});
+  // ---------- import progress (api/_minutes.js progress -> site/progress.js, shared with /data-sources) ----------
+  async function loadProgress() {
+    const el = $('#ip-admin');
+    let r;
+    try { r = await api('import_progress'); }
+    catch (e) { el.innerHTML = `<div class="banner bad"><div><b>Couldn’t load progress.</b><div class="small muted">${esc(e.message)}</div></div></div>`; return; }
+    if (window.BCProgress) BCProgress.render(el, r, {admin: true});
+    else el.textContent = 'The progress script didn’t load.';
+  }
   let mvFilled = false;
   async function loadMinutes() {
     let r;
     try { r = await api('minutes', {params: {queue: $('#mv-queue').value, board: $('#mv-board').value, year: $('#mv-year').value, status: $('#mv-status').value, q: $('#mv-q').value.trim()}}); }
     catch (e) { $('#mv-tiles').innerHTML = `<div class="banner bad"><div><b>Couldn’t load votes from minutes.</b><div class="small muted">${esc(e.message)}</div></div></div>`; return; }
-    if (!r.installed) { $('#mv-tiles').innerHTML = '<div class="banner"><div>Not set up yet. The next database sync applies migration 0054; then run the Read minutes workflow.</div></div>'; return; }
+    if (!r.installed) { $('#mv-tiles').innerHTML = '<div class="banner"><div>Not set up yet. The next database sync applies migration 0055; then run the Read minutes workflow.</div></div>'; return; }
     const t = r.totals;
     $('#mv-tiles').innerHTML = [[fmt(t.files), 'Minutes files captured'], [fmt(t.read), 'Files read'], [fmt(t.waiting), 'Waiting on a batch'],
       [fmt(t.unread), 'Couldn’t read'], [fmt(t.motions), 'Motions'], [fmt(t.passed), 'Passed checks'], [fmt(t.flagged), 'Flagged, unreviewed'],

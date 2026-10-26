@@ -235,6 +235,7 @@ async function route(req, res, action, me) {
     }
     case 'minutes': return require('./_minutes').report({queue: String(Q.queue || 'flagged'), board: String(Q.board || ''), year: String(Q.year || ''),
       status: Q.status == null ? 'unreviewed' : String(Q.status), q: String(Q.q || '')});
+    case 'import_progress': return require('./_minutes').progress();
     case 'minutes_review': {
       if (req.method !== 'POST') throw Object.assign(new Error('Use POST.'), {status: 405});
       const r = await require('./_minutes').review(body, me.e);

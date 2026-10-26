@@ -5,14 +5,17 @@ crawl_minutes.py - capture every governing-board minutes file from 2016 on into 
 Lists each archive year by year (archive.py) and hands every file to the watcher's capture step
 (data/agendas/watch_agendas.py): downloaded, hashed, versioned, stored in the private "agendas" bucket and listed
 on /admin (Agendas tab) as kind "minutes". Files already captured are skipped, so the crawl can be stopped and run
-again; read_minutes.py reads whatever has been captured.
+again; read_minutes.py reads whatever has been captured. Every run also stores how many files each archive lists per
+board and year (agendas.minutes_inventory), which /data-progress and /admin compare with what was captured and read.
 
 Usage:
   python3 data/minutes/crawl_minutes.py --list [--only pc,county] [--from 2016]     # count files, no database
+  python3 data/minutes/crawl_minutes.py --inventory [--only ...]   # count files and store the counts (progress pages)
   python3 data/minutes/crawl_minutes.py [--only ...] [--from 2016] [--to 2026] [--max 400]
 Environment: DATABASE_URL, SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY (same as the watcher).
 """
 import collections
+import datetime as dt
 import os
 import sys
 
@@ -31,6 +34,33 @@ def known_urls(db):
     with db.conn.cursor() as c:
         c.execute("select url from agendas.documents where kind = 'minutes' and current_sha256 is not null")
         return {r[0] for r in c.fetchall()}
+
+
+def inventory_rows(recs, first, last):
+    """Files listed per (board, year), with a 0 for each year a board's archive lists nothing, so a gap shows."""
+    last = last or dt.date.today().year
+    listed = collections.Counter((r["board"], r["date"].year) for r in recs)
+    year_files = collections.Counter((r["board"], r["date"].year) for r in recs if r.get("multi"))
+    sources = collections.defaultdict(set)
+    for r in recs:
+        sources[r["board"]].add(r["source"])
+    return [(b, y, listed[(b, y)], year_files[(b, y)], ",".join(sorted(sources[b])))
+            for b in sorted(sources) for y in range(first, last + 1)]
+
+
+def store_inventory(db, rows):
+    with db.conn.cursor() as c:
+        c.execute("select to_regclass('agendas.minutes_inventory')")
+        if not c.fetchone()[0]:
+            print("agendas.minutes_inventory doesn't exist yet (migration 0055); inventory not stored")
+            return 0
+        c.executemany("""insert into agendas.minutes_inventory (board, year, listed, year_files, sources, listed_at)
+                         values (%s, %s, %s, %s, %s, now())
+                         on conflict (board, year) do update set listed = excluded.listed, year_files = excluded.year_files,
+                           sources = excluded.sources, listed_at = now()""", rows)
+    db.conn.commit()
+    print("stored the inventory: %d board-years" % len(rows))
+    return len(rows)
 
 
 def main(argv):
@@ -53,6 +83,10 @@ def main(argv):
         return 2
     wa.MAX_DOWNLOADS = cap
     db = wa.DB(url, False)
+    if recs:
+        store_inventory(db, inventory_rows(recs, first, last))
+    if "--inventory" in argv:
+        return 1 if errors else 0
     run = wa.Run(db, wa.Storage())
     run.start("minutes backfill" + (" (%s)" % ",".join(only) if only else ""))
     for k, e in errors:
@@ -77,6 +111,8 @@ def main(argv):
         fatal = "%s: %s" % (type(e).__name__, e)
         run.error("run", fatal)
     run.finish(fatal)
+    if run.run_id:   # finish() replaces the notes; keep the label the progress pages look for
+        db.one("update ingest_runs set notes = 'minutes backfill: ' || coalesce(notes, '') where id = %s", (run.run_id,))
     return 1 if fatal else 0
 
 
