@@ -33,6 +33,7 @@ sealed class Route {
     object Search : Route()
     data class BudgetCompare(val govID: String? = null) : Route()
     object CRAIncrement : Route()
+    data class GovBudget(val id: String) : Route()
 }
 
 /** Today, Places, Money and Meetings. Search opens from the field on Today. */

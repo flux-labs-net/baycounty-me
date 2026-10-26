@@ -83,6 +83,9 @@ suspend fun preload(store: AppStore, route: Route?) {
         Route.DonorContracts -> store.loadDonorContracts()
         Route.MoneyMap -> store.loadMoneyMap()
         Route.CRA -> store.load("cra-payments")
+        is Route.BudgetCompare -> store.load("budget-years")
+        is Route.TaxCalculator, is Route.GovBudget -> store.loadTax()
+        is Route.Amendment3 -> store.loadAmendment3()
         Route.CRAIncrement -> store.load(listOf("cra-agencies", "cra-tax-increment", "cra-increment-checks"))
         is Route.Dataset -> store.load(route.id)
         is Route.Record -> {

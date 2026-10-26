@@ -124,6 +124,10 @@ fun RouteScreen(route: Route) {
         Route.Search -> SearchScreen()
         Route.CRA -> CRAScreen()
         Route.CRAIncrement -> CRAIncrementScreen()
+        is Route.BudgetCompare -> BudgetCompareScreen(route.govID)
+        is Route.TaxCalculator -> TaxCalculatorScreen(route)
+        is Route.GovBudget -> GovBudgetScreen(route.id)
+        is Route.Amendment3 -> Amendment3Screen(route)
         else -> PendingScreen(route)
     }
 }

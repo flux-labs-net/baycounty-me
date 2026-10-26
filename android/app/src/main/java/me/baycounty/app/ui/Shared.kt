@@ -30,6 +30,7 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
@@ -335,5 +336,72 @@ fun ToggleRow(label: String, checked: Boolean, onChange: (Boolean) -> Unit) {
     Row(Modifier.fillMaxWidth().card(14.dp).clickable { onChange(!checked) }.padding(horizontal = 14.dp, vertical = 8.dp), verticalAlignment = Alignment.CenterVertically) {
         Text(label, style = T.subhead, color = Brand.text, modifier = Modifier.weight(1f))
         androidx.compose.material3.Switch(checked, onChange, colors = androidx.compose.material3.SwitchDefaults.colors(checkedTrackColor = Brand.navyFill))
+    }
+}
+
+/** A card with a small label over the current choice that opens a menu (the iOS form Picker). */
+@Composable
+fun <K> FieldMenu(label: String, value: String, options: List<Pair<K, String>>, modifier: Modifier = Modifier, selected: K? = null, onPick: (K) -> Unit) {
+    var open by androidx.compose.runtime.remember { androidx.compose.runtime.mutableStateOf(false) }
+    Box(modifier) {
+        Column(
+            Modifier.fillMaxWidth().heightIn(min = 56.dp).card(14.dp).clickable(role = androidx.compose.ui.semantics.Role.Button) { open = true }
+                .padding(horizontal = 14.dp, vertical = 8.dp)
+                .clearAndSetSemantics { contentDescription = "$label, $value" },
+            verticalArrangement = Arrangement.spacedBy(2.dp),
+        ) {
+            Text(label, style = T.caption, color = Brand.secondary)
+            Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                Text(value, style = T.headline, color = Brand.text, modifier = Modifier.weight(1f, fill = false), maxLines = 2)
+                Icon(icon("chevron.up.chevron.down"), null, tint = Brand.secondary, modifier = Modifier.size(14.dp))
+            }
+        }
+        androidx.compose.material3.DropdownMenu(open, { open = false }, containerColor = Brand.surface) {
+            for ((k, t) in options) androidx.compose.material3.DropdownMenuItem(
+                text = { Text(t, style = if (k == selected) T.subheadBold else T.body, color = if (k == selected) Brand.navy else Brand.text) },
+                onClick = { open = false; onPick(k) },
+            )
+        }
+    }
+}
+
+/** A dollar amount typed with the number pad, shown with thousands commas as you type. */
+@Composable
+fun MoneyField(label: String, text: String, onChange: (String) -> Unit) {
+    androidx.compose.material3.OutlinedTextField(
+        text,
+        { new -> val digits = new.filter { it.isDigit() }; onChange(if (digits.isEmpty()) "" else me.baycounty.kit.Format.number(minOf(digits.toDouble(), 1e9))) },
+        Modifier.fillMaxWidth(),
+        label = { Text(label) },
+        prefix = { Text("$", style = T.body, color = Brand.secondary) },
+        singleLine = true, shape = androidx.compose.foundation.shape.RoundedCornerShape(14.dp), textStyle = T.body,
+        keyboardOptions = androidx.compose.foundation.text.KeyboardOptions(keyboardType = androidx.compose.ui.text.input.KeyboardType.Number),
+        colors = androidx.compose.material3.OutlinedTextFieldDefaults.colors(
+            focusedContainerColor = Brand.surface, unfocusedContainerColor = Brand.surface,
+            focusedBorderColor = Brand.navy, unfocusedBorderColor = Brand.hairline, cursorColor = Brand.navy,
+            focusedTextColor = Brand.text, unfocusedTextColor = Brand.text, focusedLabelColor = Brand.navy, unfocusedLabelColor = Brand.secondary,
+        ),
+    )
+}
+
+/** Digits in a typed amount, capped at a billion. */
+fun typedAmount(text: String): Double = minOf(text.filter { it.isDigit() }.toDoubleOrNull() ?: 0.0, 1e9)
+
+/** One choice in a short list of long options, with a check on the picked one (the iOS inline Picker). */
+@Composable
+fun <K> RadioList(options: List<Pair<K, String>>, selected: K, onPick: (K) -> Unit) {
+    CardList {
+        options.forEachIndexed { i, (k, t) ->
+            Row(
+                Modifier.fillMaxWidth().heightIn(min = 48.dp).clickable(role = androidx.compose.ui.semantics.Role.RadioButton) { onPick(k) }
+                    .padding(horizontal = 14.dp, vertical = 10.dp)
+                    .semantics(mergeDescendants = true) { this.selected = k == selected },
+                verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp),
+            ) {
+                Text(t, style = T.subhead, color = Brand.text, modifier = Modifier.weight(1f))
+                if (k == selected) Icon(icon("checkmark"), null, tint = Brand.navy, modifier = Modifier.size(20.dp))
+            }
+            if (i < options.lastIndex) RowDivider()
+        }
     }
 }
