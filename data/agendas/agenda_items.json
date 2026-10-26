@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-26T11:38:52+00:00",
+ "generated": "2026-10-26T22:40:21+00:00",
  "note": "Agenda items read from posted agendas by a Claude model (data/agendas/extract_agendas.py). Amounts are the largest dollar figure printed on the item, not necessarily spending. Check the agenda itself before relying on an item.",
  "items": [
   {
@@ -17,6 +17,22 @@
    "parties": [],
    "addresses": [],
    "url": "https://mexicobeachfl.gov/uploads/2026/10/November-5-2026-Special-Meeting-LDC-Workshop.pdf"
+  },
+  {
+   "board": "pc",
+   "body": "Panama City City Commission",
+   "gov": "pc",
+   "date": "2026-11-03",
+   "meeting": "CRA Virtual Workshop Agenda",
+   "number": "2",
+   "section": null,
+   "title": "General discussion of current and future programs in each CRA District",
+   "summary": null,
+   "kind": "presentation",
+   "amount": null,
+   "parties": [],
+   "addresses": [],
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_11032026-916"
   },
   {
    "board": "mb",

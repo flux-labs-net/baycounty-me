@@ -121,7 +121,7 @@
    "id": "votes",
    "title": "Recorded votes",
    "description": "Votes by the County Commission, School Board, city commissions and CRA boards since 2016, with how each member voted: hand-researched money votes plus every motion read from the official minutes.",
-   "rows": 606,
+   "rows": 1081,
    "columns": [
     {
      "name": "date",
@@ -164,13 +164,25 @@
      "name": "category",
      "type": "string",
      "values": [
+      "appointment",
       "budget",
+      "consent agenda",
       "contract",
       "cra",
       "debt",
+      "fees",
+      "grant",
       "land",
+      "land use",
       "millage",
-      "other"
+      "ordinance",
+      "other",
+      "personnel",
+      "policy",
+      "procedural",
+      "property",
+      "resolution",
+      "settlement"
      ]
     },
     {
@@ -239,36 +251,7 @@
     },
     {
      "name": "absent_or_abstained",
-     "type": "string",
-     "values": [
-      "Ann Leonard",
-      "Brian Grainger",
-      "Chris Moore",
-      "Clair Pease",
-      "Dave Lowery",
-      "Doug Crosby",
-      "Erik Fosshage",
-      "Ethan Register",
-      "Jackie Kennington",
-      "Janice Lucas",
-      "Jenna Haligas",
-      "Jerry Register",
-      "Jesse Nelson",
-      "Jesse Nelson; Judy Tinder",
-      "Josh Street",
-      "Josh Street; Brian Grainger",
-      "Josh Street; Janice Lucas",
-      "Judy Vandergrift",
-      "Katy Bodiford",
-      "Mary Coburn",
-      "Michael Jarman",
-      "Paul Casto",
-      "Richard Chval",
-      "Richard Wolff",
-      "Robbie Hughes; Josh Street",
-      "Robert Carroll",
-      "Steve Moss"
-     ]
+     "type": "string"
     },
     {
      "name": "agenda_item",
@@ -290,6 +273,7 @@
      "name": "source_type",
      "type": "string",
      "values": [
+      "minutes",
       "researched"
      ]
     },
@@ -297,12 +281,18 @@
      "name": "verified",
      "type": "string",
      "values": [
+      "auto-checked",
       "hand-checked"
      ]
     },
     {
      "name": "vote_method",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "no_dissent_recorded",
+      "roll_call",
+      "unanimous"
+     ]
     },
     {
      "name": "mover",
@@ -314,7 +304,7 @@
     },
     {
      "name": "source_page",
-     "type": "string"
+     "type": "number"
     },
     {
      "name": "vote_id",
@@ -366,7 +356,7 @@
    "id": "member-votes",
    "title": "Votes by member",
    "description": "One row per member per vote (long format), for tallying individual records.",
-   "rows": 3023,
+   "rows": 5390,
    "columns": [
     {
      "name": "date",
@@ -432,6 +422,7 @@
      "name": "source_type",
      "type": "string",
      "values": [
+      "minutes",
       "researched"
      ]
     },
@@ -7330,7 +7321,7 @@
    "id": "data-source-sites",
    "title": "Websites our records cite",
    "description": "Every website cited by the records behind BayCounty.me, per topic, with how many distinct documents and pages from it the data links to. Counted from the data files at each build.",
-   "rows": 305,
+   "rows": 306,
    "columns": [
     {
      "name": "website",
@@ -7999,7 +7990,7 @@
    "id": "meetings",
    "title": "Upcoming meetings",
    "description": "Scheduled and expected meetings for every board.",
-   "rows": 50,
+   "rows": 51,
    "columns": [
     {
      "name": "board",
@@ -8032,6 +8023,7 @@
       "Budget Hearing",
       "CANCELLED - ELECTION DAY*** Agenda Regular Meeting",
       "CRA Board Meeting",
+      "CRA Virtual Workshop Agenda",
       "City Commission Meeting",
       "City Commission Meeting of October 27, 2026.",
       "City Council",
@@ -8101,6 +8093,7 @@
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-912?html=true",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10202026-915?html=true",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10272026-902?html=true",
+      "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_11032026-916",
       "https://www.springfieldfl.net/media/10901"
      ]
     },
