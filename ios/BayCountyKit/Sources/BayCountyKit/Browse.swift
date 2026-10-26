@@ -77,7 +77,7 @@ public enum Browse {
     public static func years(_ rows: [Row], spec: DatasetSpec, periods: [Int: Period]) -> [Bucket] {
         var count = [Period: Int](), amount = [Period: Double]()
         for r in rows {
-            guard let p = periods[r.id] else { continue }
+            guard let p = periods[r.id], p.year >= Cutoff.firstYear else { continue }
             count[p, default: 0] += 1
             amount[p, default: 0] += spec.amount(r) ?? 0
         }

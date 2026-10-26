@@ -75,20 +75,23 @@ struct CRAIncrementView: View {
             VStack(alignment: .leading, spacing: 12) {
                 ChipRow(chips: CRAIncrement.Scenario.allCases.map { (id: $0, label: $0.label) }, selected: scenario) { scenario = $0 }
                 ChipRow(chips: CRAIncrement.Payer.allCases.map { (id: $0, label: $0.label) }, selected: payer) { payer = $0 }
+                // Years are categories so each bar gets an even slot (a number axis started at year 0
+                // and squeezed every bar into one sliver). Only round years are labelled.
+                let ticks = Set(ChartTicks.yearTicks(series.map(\.fiscalYear)).map(String.init))
                 Chart(series) { y in
-                    BarMark(x: .value("Year", y.fiscalYear), y: .value("Amount", y.amount))
-                        .foregroundStyle(y.projected ? Brand.amber.opacity(0.55) : Brand.navy)
+                    BarMark(x: .value("Year", String(y.fiscalYear)), y: .value("Amount", y.amount), width: .ratio(0.72))
+                        .foregroundStyle(y.projected ? Brand.amber : Brand.navy)
+                        .cornerRadius(2)
                 }
                 .chartXAxis {
-                    AxisMarks(values: .stride(by: 5)) { v in
-                        AxisGridLine()
-                        AxisValueLabel { if let n = v.as(Int.self) { Text(String(n)) } else if let d = v.as(Double.self) { Text(String(Int(d))) } }
+                    AxisMarks(values: series.map { String($0.fiscalYear) }.filter { ticks.contains($0) }) { v in
+                        AxisValueLabel(collisionResolution: .disabled) { if let s = v.as(String.self) { Text(s).font(.caption2) } }
                     }
                 }
                 .chartYAxis {
-                    AxisMarks { v in
-                        AxisGridLine()
-                        AxisValueLabel { if let d = v.as(Double.self) { Text(Format.compactMoney(d)) } }
+                    AxisMarks(position: .trailing, values: .automatic(desiredCount: 4)) { v in
+                        AxisGridLine().foregroundStyle(Brand.hairline)
+                        AxisValueLabel { if let d = v.as(Double.self) { Text(Format.compactMoney(d)).font(.caption2) } }
                     }
                 }
                 .frame(height: 200)
@@ -96,13 +99,14 @@ struct CRAIncrementView: View {
                 .accessibilityValue(series.filter { $0.fiscalYear % 5 == 0 }.map { "FY\($0.fiscalYear) \(Format.compactMoney($0.amount))" }.joined(separator: ", "))
                 HStack(spacing: 14) {
                     HStack(spacing: 5) { RoundedRectangle(cornerRadius: 2).fill(Brand.navy).frame(width: 10, height: 10); Text("Reported") }
-                    HStack(spacing: 5) { RoundedRectangle(cornerRadius: 2).fill(Brand.amber.opacity(0.55)).frame(width: 10, height: 10); Text("Projected") }
+                    HStack(spacing: 5) { RoundedRectangle(cornerRadius: 2).fill(Brand.amber).frame(width: 10, height: 10); Text("Projected") }
                 }
                 .font(.caption).foregroundStyle(.secondary)
             }
             .padding(14)
             .card(14)
         }
+        .id("chart")
     }
 
     private var agencyList: some View {

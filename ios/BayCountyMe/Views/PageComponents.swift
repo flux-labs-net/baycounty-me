@@ -165,6 +165,23 @@ struct PageScroll<Content: View>: View {
                 .padding(.bottom, 28)
         }
         .background(Brand.canvas)
+        .screenshotScroll()
+    }
+}
+
+extension View {
+    /// For automated screenshots: `-scrollTo <id>` starts the screen scrolled to the view marked `.id(<id>)`
+    /// (charts use "chart"), once its data has had a few seconds to load.
+    func screenshotScroll() -> some View {
+        let args = ProcessInfo.processInfo.arguments
+        let target = args.firstIndex(of: "-scrollTo").flatMap { $0 + 1 < args.count ? args[$0 + 1] : nil }
+        return ScrollViewReader { proxy in
+            self.task {
+                guard let target else { return }
+                try? await Task.sleep(for: .seconds(6))
+                proxy.scrollTo(target, anchor: .top)
+            }
+        }
     }
 }
 

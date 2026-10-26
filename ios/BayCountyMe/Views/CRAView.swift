@@ -46,8 +46,8 @@ struct CRAView: View {
                     }
                     .chartForegroundStyleScale(["Paid out": Brand.navy, "Committed or budgeted": Brand.navy.opacity(0.35)])
                     .chartXAxis {
-                        AxisMarks { v in
-                            AxisGridLine()
+                        AxisMarks(values: .automatic(desiredCount: 4)) { v in
+                            AxisGridLine().foregroundStyle(Brand.hairline)
                             AxisValueLabel { if let d = v.as(Double.self) { Text(Format.compactMoney(d)) } }
                         }
                     }
@@ -55,6 +55,7 @@ struct CRAView: View {
                     .frame(height: CGFloat(summaries.count) * 40 + 60)
                     .padding(14)
                     .card(14)
+                    .id("chart")
 
                     CardList {
                         ForEach(summaries) { s in

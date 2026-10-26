@@ -39,6 +39,16 @@ jobs:
             sleep 12
             xcrun simctl io "$DEV" screenshot "shots/$(echo "$s" | tr ': ' '__')_dark.png"
           done
+          # Each chart, scrolled into view, in light and dark mode.
+          for mode in light dark; do
+            xcrun simctl ui "$DEV" appearance "$mode"
+            for s in craincrement cra budget vendor person tax contracts; do
+              xcrun simctl terminate "$DEV" me.baycounty.app 2>/dev/null || true
+              xcrun simctl launch "$DEV" me.baycounty.app -screen "$s" -scrollTo chart
+              sleep 16
+              xcrun simctl io "$DEV" screenshot "shots/chart_${s}_${mode}.png"
+            done
+          done
       - uses: actions/upload-artifact@v4
         with:
           name: screenshots

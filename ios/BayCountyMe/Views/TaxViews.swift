@@ -22,7 +22,7 @@ struct TaxCalculatorView: View {
     var body: some View {
         Group {
             if let m = store.taxModel {
-                content(m)
+                content(m).screenshotScroll()
             } else if let e = store.appError("tax.json") {
                 ContentUnavailableView("Couldn't load the calculator", systemImage: "wifi.slash", description: Text(e))
             } else {
@@ -99,11 +99,25 @@ struct TaxCalculatorView: View {
             }
 
             Section {
-                Chart(e.trend) { y in
-                    BarMark(x: .value("Year", y.fy), y: .value("Bill", y.total)).foregroundStyle(Brand.navy)
+                let trend = ChartTicks.sinceCutoff(e.trend) { ChartTicks.year(of: $0.fy) }
+                Chart(trend) { y in
+                    BarMark(x: .value("Year", y.fy), y: .value("Bill", y.total), width: .ratio(0.7))
+                        .foregroundStyle(Brand.navy).cornerRadius(3)
                 }
-                .chartYAxis { AxisMarks { v in AxisGridLine(); AxisValueLabel { if let d = v.as(Double.self) { Text(Format.compactMoney(d)) } } } }
+                .chartXAxis {
+                    AxisMarks(values: ChartTicks.shownLabels(trend.map(\.fy))) { v in
+                        AxisValueLabel(collisionResolution: .disabled) { if let s = v.as(String.self) { Text(s).font(.caption2) } }
+                    }
+                }
+                .chartYAxis {
+                    AxisMarks(values: .automatic(desiredCount: 4)) { v in
+                        AxisGridLine().foregroundStyle(Brand.hairline)
+                        AxisValueLabel { if let d = v.as(Double.self) { Text(Format.compactMoney(d)).font(.caption2) } }
+                    }
+                }
                 .frame(height: 180)
+                .padding(.vertical, 6)
+                .id("chart")
             } header: { Text("The same home at each year's rates") }
 
             Section {
