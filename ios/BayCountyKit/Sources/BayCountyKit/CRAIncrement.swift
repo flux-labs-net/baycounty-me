@@ -48,7 +48,7 @@ public enum CRAIncrement {
     static func sum(_ rows: [Row], _ key: String) -> Double { rows.compactMap { $0.number(key) }.reduce(0, +) }
 
     public static func headline(agencies: [Row], years: [Row]) -> Headline? {
-        let h = years.filter { $0.string("scenario") == "history" }
+        let h = years.filter { $0.string("scenario") == "history" && fy($0) >= Cutoff.firstYear }
         guard let last = h.map(fy).max(), let first = h.map(fy).min() else { return nil }
         let y = h.filter { fy($0) == last }
         return Headline(lastYear: last, firstYear: first, total: sum(y, "increment"), county: sum(y, "county_amount"),
@@ -61,7 +61,7 @@ public enum CRAIncrement {
     public static func byYear(_ years: [Row], scenario: Scenario = .mid, payer: Payer = .all) -> [YearTotal] {
         let h = years.filter { $0.string("scenario") == "history" }
         let lastH = h.map(fy).max() ?? 0
-        let rows = h + years.filter { $0.string("scenario") == scenario.rawValue }
+        let rows = (h + years.filter { $0.string("scenario") == scenario.rawValue }).filter { fy($0) >= Cutoff.firstYear }
         var by: [Int: Double] = [:]
         for r in rows { by[fy(r), default: 0] += payer.amount(r) }
         return by.keys.sorted().map { YearTotal(fiscalYear: $0, amount: by[$0]!, projected: $0 > lastH) }

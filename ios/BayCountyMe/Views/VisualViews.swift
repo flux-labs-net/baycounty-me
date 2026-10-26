@@ -156,26 +156,43 @@ struct TopicGrid: View {
 }
 
 /// A small bar chart of amounts by year (a company's contracts, an official's pay).
+/// Years before 2016 are left out. With many years, only some get a label and only the newest and biggest show their amount.
 struct YearBars: View {
     let title: String
     let points: [(label: String, value: Double)]
     var format: (Double) -> String = Format.compactMoney
 
     var body: some View {
+        let shown = Array(ChartTicks.sinceCutoff(points) { ChartTicks.year(of: $0.label) }.suffix(12))
+        let labels = Set(ChartTicks.shownLabels(shown.map(\.label)))
+        let maxV = shown.map(\.value).max() ?? 0
+        let annotateAll = shown.count <= 6
         VStack(alignment: .leading, spacing: 8) {
             Text(title).font(.subheadline.weight(.semibold))
-            Chart(Array(points.enumerated()), id: \.offset) { _, p in
-                BarMark(x: .value("Year", p.label), y: .value("Amount", p.value))
+            Chart(Array(shown.enumerated()), id: \.offset) { i, p in
+                BarMark(x: .value("Year", p.label), y: .value("Amount", p.value), width: .ratio(0.7))
                     .foregroundStyle(Brand.navy)
                     .cornerRadius(3)
-                    .annotation(position: .top) { Text(format(p.value)).font(.caption2).foregroundStyle(.secondary) }
+                    .annotation(position: .top, spacing: 3) {
+                        if annotateAll || i == shown.count - 1 || p.value == maxV {
+                            Text(format(p.value)).font(.caption2).foregroundStyle(.secondary).fixedSize()
+                        }
+                    }
+            }
+            .chartXAxis {
+                AxisMarks(values: shown.map(\.label).filter { labels.contains($0) }) { v in
+                    AxisValueLabel(collisionResolution: .disabled) { if let s = v.as(String.self) { Text(s).font(.caption2) } }
+                }
             }
             .chartYAxis(.hidden)
-            .frame(height: 120)
+            // Headroom so the amounts above the tallest bar aren't cut off.
+            .chartYScale(domain: 0...max(maxV * 1.18, 1))
+            .frame(height: 130)
             .accessibilityLabel(title)
-            .accessibilityValue(points.map { "\($0.label) \(format($0.value))" }.joined(separator: ", "))
+            .accessibilityValue(shown.map { "\($0.label) \(format($0.value))" }.joined(separator: ", "))
         }
         .padding(14)
         .card(12)
+        .id("chart")
     }
 }

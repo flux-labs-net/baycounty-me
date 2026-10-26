@@ -118,18 +118,21 @@ struct BucketChart: View {
                 }
             }
             Chart(buckets) { b in
-                BarMark(x: .value("Period", b.label), y: .value("Value", value(b)))
+                BarMark(x: .value("Period", b.label), y: .value("Value", value(b)), width: .ratio(0.7))
                     .foregroundStyle(selected == nil || selected == b.key ? Brand.navy : Brand.navy.opacity(0.25))
                     .cornerRadius(3)
             }
             .chartYAxis {
                 AxisMarks(position: .leading, values: .automatic(desiredCount: 3)) { v in
-                    AxisGridLine()
+                    AxisGridLine().foregroundStyle(Brand.hairline)
                     AxisValueLabel { if let d = v.as(Double.self) { Text(text(d)).font(.caption2) } }
                 }
             }
             .chartXAxis {
-                AxisMarks { v in AxisValueLabel { if let s = v.as(String.self) { Text(s).font(.caption2) } } }
+                // A label under every bar runs together past six or so; show every other (or third), always the newest.
+                AxisMarks(values: ChartTicks.shownLabels(buckets.map(\.label))) { v in
+                    AxisValueLabel(collisionResolution: .disabled) { if let s = v.as(String.self) { Text(s).font(.caption2) } }
+                }
             }
             .chartXSelection(value: $touched)
             .onChange(of: touched) { _, label in

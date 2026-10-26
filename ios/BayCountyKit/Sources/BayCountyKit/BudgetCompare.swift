@@ -122,7 +122,7 @@ public enum BudgetCompare {
         }
         var history: [(fiscalYear: Int, total: Double)] = []
         var status: [Int: String] = [:]
-        for y in years {
+        for y in years where y >= Cutoff.firstYear {
             let t = mine.filter { fy($0) == y && $0.string("section") == "total" }
             status[y] = t.first?.string("status")
             if let v = t.first(where: { $0.string("line_key") == "total" || $0.string("line_key") == "spending_total" })?.number("amount") {

@@ -122,6 +122,7 @@ struct VendorDetailView: View {
             if let url = v?.pageURL { Section { WebLink(title: "Company page on BayCounty.me", url: url) } }
             else { Section { WebLink(title: "Profile and connections on BayCounty.me", url: URL(string: "https://baycounty.me/profile/vendor/\(vendorID)")) } }
         }
+        .screenshotScroll()
         .navigationTitle(v?.name ?? "Company")
         .navigationBarTitleDisplayMode(.inline)
         .task {
