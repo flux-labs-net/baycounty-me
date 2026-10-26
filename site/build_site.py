@@ -135,7 +135,7 @@ FOOTER = f'''<footer class="site-foot"><div class="site-foot-in">
     <div><b>Take part</b><a href="/meetings">Meetings</a><a href="/alerts">Email alerts</a><a href="/records-request">Request a record</a><a href="/open-data">Open data &amp; API</a></div>
   </nav>
   <div class="foot-base">
-    <p class="muted foot-links">__UPDATED__<a href="/updates">What's new</a> · <a href="/updates.xml">RSS</a> · <a href="/about">Sources and method</a> · <a href="/privacy">Privacy</a> · <a href="/about#contact">Send a correction</a> · <span class="sel">{EMAIL}</span></p>
+    <p class="muted foot-links">__UPDATED__<a href="/updates">What's new</a> · <a href="/updates.xml">RSS</a> · <a href="/data-sources">Where our data comes from</a> · <a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/about#contact">Send a correction</a> · <span class="sel">{EMAIL}</span></p>
     <a class="powered" href="{OPERATOR['url']}" target="_blank" rel="noopener"><span>Powered by</span><img src="{OPERATOR['logo']}" alt="{OPERATOR['name']}" width="140" height="25"></a>
   </div>
 </div></footer>'''
@@ -299,6 +299,7 @@ def _layout(title, desc, path, body, extra_head=''):
     import html as _h
     from og import slug as _slug
     from seo import head_title, meta_desc, jsonld
+    from ui import data_notice
     full = _h.escape(head_title(title, path), quote=False)
     pt, pd = PREVIEW.get(path, (title, desc))
     t, d = _h.escape(pt, quote=True), _h.escape(pd, quote=True)
@@ -354,6 +355,7 @@ def _layout(title, desc, path, body, extra_head=''):
 <body>
 <a class="skip" href="#main">Skip to content</a>
 {nav_html(path).replace('__LANGHREF__', ES_ALT.get(path, '/') if path.startswith('/es') else (EN_TO_ES.get(path) or '/es')).replace('__LANGCODE__', 'en' if path.startswith('/es') else 'es').replace('__LANGLABEL__', 'English' if path.startswith('/es') else 'Español')}
+{data_notice(path.startswith('/es')) if path != '/404' else ''}
 <main id="main">
 {body}
 </main>
@@ -543,13 +545,18 @@ def page_options():
     return out
 
 
+def data_sources_page():
+    from data_sources_page import data_sources_page as page
+    return page()
+
+
 def about_page():
     return '''<div class="page prose">
   <span class="eyebrow">About</span>
   <h1>About BayCounty.me</h1>
   <p>BayCounty.me is an independent project that collects Bay County, Florida public records and turns them into maps and tables anyone can read. It starts with how local governments spend public money and will grow from there.</p>
   <h2>Where the information comes from</h2>
-  <p>Everything on the site comes from documents the public can already request or download: city and county budgets, annual reports, audits filed with the Florida Auditor General, council and commission resolutions, Bay County GIS map layers, and reporting by local newsrooms. Each figure carries a link to its source.</p>
+  <p>Everything on the site comes from documents the public can already request or download: city and county budgets, annual reports, audits filed with the Florida Auditor General, council and commission resolutions, Bay County GIS map layers, and reporting by local newsrooms. Each figure carries a link to its source. <a href="/data-sources">See every source we use</a>, with links and how we process each one.</p>
   <h2>What the labels mean</h2>
   <ul>
     <li><b>Spent</b>: the record reports the money as paid.</li>
@@ -684,6 +691,7 @@ PAGES = [
     ('/search', 'Search', 'Search every page, glossary term and public-money record on BayCounty.me.', search_page),
     ('/ask', 'Ask BayCounty.me', 'Ask a question in your own words about Bay County budgets, taxes, votes, contracts, meetings or officials, and get an answer from the public records on BayCounty.me, with links to each source.', ask_page),
     ('/about', 'About', 'What BayCounty.me is, where its information comes from, and how to send a correction.', about_page),
+    ('/data-sources', 'Where our data comes from', 'Every source behind BayCounty.me: each government\'s agenda systems, websites and documents, and every state and federal database, with links, how often we check them and how we process the records.', data_sources_page),
     ('/privacy', 'Privacy', 'What BayCounty.me and its iPhone and Android apps collect: no accounts, no ads, no tracking.', privacy_page),
 ]
 

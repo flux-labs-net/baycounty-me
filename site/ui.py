@@ -291,3 +291,25 @@ def directory(cards, label, chips=(), govs=(), search='Search', sorts=(('c', 'Mo
             f'{chips_h}<div class="ui-dir-bar" data-report="skip"><span class="muted small" data-dir-count aria-live="polite"></span>{csv_h}</div>'
             f'<div class="ui-dir" data-ui-dir aria-label="{html.escape(label)}">{"".join(cards)}</div>'
             '<p class="muted ui-dir-none" data-dir-none hidden>No matches. Try fewer words or another filter.</p></div>')
+
+
+NOTE_KEY = 'ingest-2026-10'  # change this to show the notice again to people who closed it
+
+
+def data_notice(es=False):
+    """Site-wide strip under the header: the data is still being loaded, so some totals are not final.
+    The close button hides it for that browser (ui.js); the inline script hides it before paint on later visits."""
+    if es:
+        msg = ('<b>Seguimos cargando datos.</b> Todavía estamos incorporando y revisando registros, '
+               'así que algunos totales no son definitivos y pueden cambiar. '
+               '<a href="/data-sources" hreflang="en">De dónde vienen los datos</a> (en inglés)')
+        close = 'Cerrar aviso'
+    else:
+        msg = ('<b>Data is still coming in.</b> We are still loading and checking records, so some totals '
+               'are not final and may change. <a href="/data-sources">Where our data comes from</a>')
+        close = 'Close notice'
+    return (f'<div class="data-note" id="dataNote" role="note" data-report="skip" data-key="{NOTE_KEY}"><div class="data-note-in">'
+            f'{ico("info")}<p>{msg}</p>'
+            f'<button type="button" class="data-note-x" aria-label="{close}"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">'
+            '<path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></button></div></div>'
+            f"<script>try{{if(localStorage.getItem('bcm-note')==='{NOTE_KEY}')document.getElementById('dataNote').hidden=true}}catch(e){{}}</script>")

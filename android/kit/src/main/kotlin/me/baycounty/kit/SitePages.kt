@@ -53,6 +53,7 @@ object SitePages {
         "/search" to Coverage.Native("Search tab"),
         "/ask" to Coverage.Web("Ask chatbot, opened from the Today toolbar and Search; answers stream from /api/chat, which uses the MCP tools"),
         "/about" to Coverage.Native("About"),
+        "/data-sources" to Coverage.Dataset("data-sources"),
         "/privacy" to Coverage.Web("privacy page"),
         "/people" to Coverage.Native("People"),
     )

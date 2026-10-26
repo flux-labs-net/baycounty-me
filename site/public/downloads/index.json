@@ -3627,7 +3627,7 @@
    "id": "site-updates",
    "title": "What's new",
    "description": "Each change to the site's data and pages, newest first.",
-   "rows": 57,
+   "rows": 58,
    "columns": [
     {
      "name": "date",
@@ -3638,7 +3638,8 @@
       "2026-10-22",
       "2026-10-23",
       "2026-10-24",
-      "2026-10-25"
+      "2026-10-25",
+      "2026-10-26"
      ]
     },
     {
@@ -6900,10 +6901,325 @@
    "api": "/api/v1/datasets/officeholder-terms"
   },
   {
+   "id": "data-sources",
+   "title": "Where the data comes from",
+   "description": "Every source BayCounty.me takes records from, one row per source: the topic, the government it covers (or state and federal databases), the link, how we get it (automatic fetch, downloaded and read by hand, a state or federal bulk file, or a live lookup), how often, what we take from it, how we process it and the checks we run.",
+   "rows": 114,
+   "columns": [
+    {
+     "name": "topic",
+     "type": "string",
+     "values": [
+      "Audits and debt",
+      "Budgets",
+      "Businesses and owners",
+      "Campaign money",
+      "Contracts and change orders",
+      "Elections",
+      "Fees and bills",
+      "Hurricane Michael",
+      "Meetings and agendas",
+      "My Address lookups",
+      "News and context",
+      "Nonprofits",
+      "Officials by year",
+      "Pay",
+      "Property tax",
+      "Public records contacts",
+      "Redevelopment agencies (CRAs)",
+      "Sales tax projects",
+      "Tourist tax",
+      "Votes"
+     ]
+    },
+    {
+     "name": "topic_id",
+     "type": "string",
+     "values": [
+      "address",
+      "audits",
+      "budgets",
+      "businesses",
+      "campaign",
+      "contracts",
+      "cra",
+      "elections",
+      "fees",
+      "meetings",
+      "michael",
+      "news",
+      "nonprofits",
+      "officials",
+      "property-tax",
+      "records",
+      "salaries",
+      "sales-tax",
+      "tourist-tax",
+      "votes"
+     ]
+    },
+    {
+     "name": "government",
+     "type": "string",
+     "values": [
+      "Bay County",
+      "Bay District Schools",
+      "Callaway",
+      "Constitutional officers and districts",
+      "County-wide sources",
+      "Lynn Haven",
+      "Mexico Beach",
+      "Panama City",
+      "Panama City Beach",
+      "Parker",
+      "Springfield",
+      "State and federal databases"
+     ]
+    },
+    {
+     "name": "government_id",
+     "type": "string",
+     "values": [
+      "county",
+      "county-wide",
+      "cw",
+      "lh",
+      "mb",
+      "officers",
+      "parker",
+      "pc",
+      "pcb",
+      "schools",
+      "sp",
+      "state"
+     ]
+    },
+    {
+     "name": "source_name",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "method",
+     "type": "string",
+     "values": [
+      "Automatic, daily",
+      "Automatic, every 30 minutes on weekdays",
+      "Automatic, weekly",
+      "Downloaded and read by hand",
+      "Live lookup (nothing stored)",
+      "State or federal bulk data file"
+     ]
+    },
+    {
+     "name": "refresh",
+     "type": "string",
+     "values": [
+      "As minutes are adopted",
+      "As needed",
+      "As new filings post",
+      "As pages change",
+      "As reports post",
+      "As seats change",
+      "As updated",
+      "Daily",
+      "Each election",
+      "Each meeting",
+      "Each search",
+      "Each year",
+      "Each year, as audits are filed",
+      "Each year, when adopted",
+      "Every 30 minutes on weekdays, and twice a day",
+      "Monthly",
+      "Once",
+      "Quarterly",
+      "Weekly"
+     ]
+    },
+    {
+     "name": "what_we_take",
+     "type": "string"
+    },
+    {
+     "name": "how_we_process",
+     "type": "string",
+     "values": [
+      "Address lookups go straight from your browser to the county's and FEMA's public map servers at the moment you search.",
+      "Adopted budget books are downloaded from each government's website and the totals, funds and departments typed into the data. Where a budget book is not posted, the Annual Financial Report the government files with the state is used. Audited revenue and spending come from the state's Local Government Financial Reports.",
+      "Assessments come from the state's non-ad valorem assessment roll file. Utility rates and fees come from city and county fee schedules and budget books.",
+      "Audited financial statements filed with the Florida Auditor General are read for debt (bonds, notes, loans, leases), audit findings and the auditor's opinion.",
+      "Awards, change orders and emergency purchases are taken from agenda items and their attached memos and resolutions. An agenda item is a proposal, so where minutes exist the record is checked against them.",
+      "Bed tax collections come from the Clerk's monthly reports. Payments by the three tourism agencies come from the Clerk's monthly check registers, read from text PDFs in the Clerk's public records search. State tax rates and history come from EDR.",
+      "CRA spending is read from CRA annual reports, agendas, budgets and audits, one ledger line per payment or project. Tax increment comes from CRA reports, audits and budgets, split between the county and city by millage.",
+      "Candidate lists, status and official results come from the Supervisor of Elections. Platforms come from candidates' own sites.",
+      "Each government's agenda system is checked every 30 minutes on weekdays (when a notice email arrives) and swept twice a day. Every agenda, packet and minutes file is downloaded and fingerprinted; a changed file is kept as a new version. An AI model reads each new agenda into a list of items using only the agenda's own words (it is told not to guess). The meetings list combines the agenda system with the government's calendar; boards with no calendar get dates from their regular schedule, marked \"expected\".",
+      "Every tax-exempt organization with a county address is pulled from IRS data, with every 990, 990-EZ and 990-PF e-filed since 2019 (board members, pay, grants, revenue). State charity registrations and state corporate filings are joined in.",
+      "FEMA Public Assistance projects and applicants for disaster DR-4399 are downloaded from OpenFEMA every week.",
+      "Infrastructure sales tax projects are downloaded from Bay County's map server every week and matched to the published project schedule.",
+      "Local news reports are cited for context (for example an arrest, a resignation or a policy change) when no official document says it.",
+      "Money votes are read from adopted minutes (or draft minutes printed in the next agenda packet). Each motion is recorded with the roll call by name; the amount comes from the staff memo or resolution attached to the item. Scanned minutes are read with OCR.",
+      "Pay comes from budget pay plans, published salary schedules, job postings and the state's report on officials' salaries.",
+      "Records custodians, portals and policies are taken from each agency's official pages.",
+      "Summary totals and the itemized export for each campaign are downloaded from the Supervisor of Elections' campaign finance system every day. Amended and deleted lines are applied, then businesses are matched to state corporate records.",
+      "Tax rates (millage) come from state Department of Revenue and EDR files and the governments' adopted budgets. Assessments and exemptions come from the state's parcel and assessment roll files.",
+      "The state's full corporate file (about 18 GB, updated quarterly) is filtered to businesses with an address in the county. Officers, managers and registered agents are grouped into people and matched to officials and donors.",
+      "Who held each seat since 2016 is built from election results, minutes, budget books, city websites and news reports."
+     ]
+    },
+    {
+     "name": "checks",
+     "type": "string",
+     "values": [
+      "A name match is only a lead: nothing about a person is published until it is checked by hand. Street addresses are never stored or shown.",
+      "Each line carries its source and a confidence level; amounts inside a larger total are shown but counted once. Estimates are checked against official county figures.",
+      "Each term names its source. Stretches nobody could confirm are marked unconfirmed, not guessed.",
+      "Every agency-month matches the register's printed total to the cent. Payments to private individuals are counted, not listed.",
+      "Failed fetches are logged and emailed to the site admins. Every version of every file is kept.",
+      "Itemized sums are checked against the Supervisor's summary totals. Individual donors are only counted, never named, unless they run a registered business.",
+      "Matches between the map and the schedule are listed with their method.",
+      "Names are checked against each board's roster. Every split or failed vote found is included.",
+      "News is never the only source for a dollar figure.",
+      "Nothing you look up is sent to or stored by BayCounty.me.",
+      "Office names are checked against the Notice of General Election.",
+      "Only audited figures are used. When a government's latest audit is not yet filed, the previous year is used and labeled.",
+      "Only elected officials and department leaders are named. Other staff are counted, not named.",
+      "Only portals linked from an official page are listed.",
+      "Organizations are joined by EIN, then by exact name. Official-to-board matches are checked by hand before they are tagged.",
+      "Panama City records were checked against 124 of 126 meetings' minutes and Panama City Beach against 38 of 50; Bay County and Lynn Haven come from agendas only. Known changes are noted on the record.",
+      "Rates are checked against each government's adopted millage resolution where posted.",
+      "The data is FEMA's own; nothing is retyped.",
+      "Totals are added back up and compared with the printed totals. Each year links to its document.",
+      "Where a code-to-name match is inferred rather than published, it is labeled."
+     ]
+    },
+    {
+     "name": "page",
+     "type": "string",
+     "values": [
+      "/connections/business-ties",
+      "/connections/campaign-gifts",
+      "/connections/nonprofits",
+      "/elections",
+      "/governments",
+      "/meetings",
+      "/my-address",
+      "/people",
+      "/public-money/budget-compare",
+      "/public-money/contracts",
+      "/public-money/cra-spending",
+      "/public-money/fees-and-bills",
+      "/public-money/hurricane-michael",
+      "/public-money/sales-tax-projects",
+      "/public-money/tax-dollars",
+      "/public-money/tourist-tax",
+      "/public-money/votes",
+      "/records-request",
+      "/updates"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "schools",
+      "sp"
+     ]
+    }
+   ],
+   "json": "/downloads/data-sources.json",
+   "csv": "/downloads/data-sources.csv",
+   "api": "/api/v1/datasets/data-sources"
+  },
+  {
+   "id": "data-source-sites",
+   "title": "Websites our records cite",
+   "description": "Every website cited by the records behind BayCounty.me, per topic, with how many distinct documents and pages from it the data links to. Counted from the data files at each build.",
+   "rows": 305,
+   "columns": [
+    {
+     "name": "website",
+     "type": "string"
+    },
+    {
+     "name": "topic",
+     "type": "string",
+     "values": [
+      "Audits and debt",
+      "Budgets",
+      "Businesses and owners",
+      "Campaign money",
+      "Contracts and change orders",
+      "Elections",
+      "Fees and bills",
+      "Hurricane Michael",
+      "Meetings and agendas",
+      "My Address lookups",
+      "Nonprofits",
+      "Pay",
+      "Property tax",
+      "Public records contacts",
+      "Redevelopment agencies (CRAs)",
+      "Sales tax projects",
+      "Tourist tax",
+      "Votes"
+     ]
+    },
+    {
+     "name": "topic_id",
+     "type": "string",
+     "values": [
+      "address",
+      "audits",
+      "budgets",
+      "businesses",
+      "campaign",
+      "contracts",
+      "cra",
+      "elections",
+      "fees",
+      "meetings",
+      "michael",
+      "nonprofits",
+      "property-tax",
+      "records",
+      "salaries",
+      "sales-tax",
+      "tourist-tax",
+      "votes"
+     ]
+    },
+    {
+     "name": "documents_cited",
+     "type": "number"
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/data-source-sites.json",
+   "csv": "/downloads/data-source-sites.csv",
+   "api": "/api/v1/datasets/data-source-sites"
+  },
+  {
    "id": "site-menu",
    "title": "Site menu",
    "description": "Every link in the site's main menu, one row per link, in English and Spanish: the section and the question it answers, the link's place in the section, and the section's start-here page. place_id is the place the menu belongs to (fl-bay = Bay County), so a menu for another place sits beside it.",
-   "rows": 52,
+   "rows": 53,
    "columns": [
     {
      "name": "place_id",
