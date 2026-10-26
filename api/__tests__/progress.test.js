@@ -6,7 +6,7 @@ const {summarize} = require('../_progress');
 const NOW = '2026-10-26T12:00:00Z';
 const rows = [
   {board: 'pc', year: 2016, listed: 20, captured: 20, read: 20, motions: 300, passed: 280, flagged: 5, reviewed: 15, pages: 400, ocr_pages: 400},
-  {board: 'pc', year: 2017, listed: 22, captured: 10, read: 4, reading: 2, motions: 50, passed: 50},
+  {board: 'pc', year: 2017, listed: 22, captured: 10, read: 4, reading: 2, motions: 50, passed: 50, failed: 3},
   {board: 'schools', year: 2016, listed: 0},
   {board: 'schools', year: 2024, listed: null, captured: 3},   // captured by the watcher, archive not counted
   {board: 'pc', year: 2015, listed: 9},                         // before the site's first year: ignored
@@ -18,6 +18,7 @@ test('totals, stages and the board-year grid', () => {
   assert.equal(d.totals.captured, 33);
   assert.equal(d.totals.read, 24);
   assert.equal(d.totals.gaps, 1);
+  assert.match(d.stages[1].detail, /3 downloads failed/);
   assert.equal(d.phase.key, 'capturing');
   assert.deepEqual(d.stages.map(s => s.key), ['found', 'captured', 'read', 'checked']);
   assert.equal(d.stages[3].value, 280 + 50 + 15);
