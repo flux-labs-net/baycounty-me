@@ -83,7 +83,16 @@ suspend fun preload(store: AppStore, route: Route?) {
         Route.DonorContracts -> store.loadDonorContracts()
         Route.MoneyMap -> store.loadMoneyMap()
         is Route.Dataset -> store.load(route.id)
-        is Route.Record -> store.load(route.datasetID)
+        is Route.Record -> {
+            store.load(route.datasetID); store.loadVendors(); store.loadPeople()
+            val row = store.rows[route.datasetID]?.firstOrNull { it.id == route.rowID }
+            if (row != null) {
+                val ids = me.baycounty.kit.RecordProfile.groups(route.datasetID, row).map { it.datasetID }.toMutableSet()
+                if (me.baycounty.kit.RecordProfile.refs(route.datasetID, row).any { it.kind == "nonprofit" }) ids += "nonprofits"
+                if (me.baycounty.kit.RecordLinks.voteIDs(row).isNotEmpty()) ids += "votes"
+                store.load(ids.toList())
+            }
+        }
         else -> {}
     }
 }

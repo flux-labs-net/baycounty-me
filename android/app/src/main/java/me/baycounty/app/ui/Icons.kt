@@ -17,6 +17,7 @@ fun icon(symbol: String?): ImageVector = when (symbol) {
     "house.slash" -> Icons.Outlined.HomeWork
     "mappin.and.ellipse", "location" -> Icons.Outlined.Place
     "map" -> Icons.Outlined.Map
+    "square.and.arrow.up" -> Icons.Outlined.Share
     "dollarsign.circle", "dollarsign.arrow.circlepath" -> Icons.Outlined.Paid
     "calendar", "calendar.badge.clock" -> Icons.Outlined.CalendarMonth
     "calendar.badge.plus" -> Icons.Outlined.EditCalendar

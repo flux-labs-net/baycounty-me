@@ -445,7 +445,10 @@ data class ChartPoint(val label: String, val value: Double, val color: Color? = 
  * nothing before 2016, and amounts on top only for the newest and biggest bar when there are many.
  */
 @Composable
-fun BarChart(points: List<ChartPoint>, height: Dp = 130.dp, format: (Double) -> String = Format::compactMoney, defaultColor: Color = Brand.navy, maxBars: Int = 12) {
+fun BarChart(
+    points: List<ChartPoint>, height: Dp = 130.dp, format: (Double) -> String = Format::compactMoney, defaultColor: Color = Brand.navy, maxBars: Int = 12,
+    selectedLabel: String? = null, onTap: ((String) -> Unit)? = null,
+) {
     val shown = ChartTicks.sinceCutoff(points) { ChartTicks.yearOf(it.label) }.takeLast(maxBars)
     if (shown.isEmpty()) return
     val labelIdx = ChartTicks.labelIndices(shown.size).toSet()
@@ -453,14 +456,18 @@ fun BarChart(points: List<ChartPoint>, height: Dp = 130.dp, format: (Double) -> 
     val annotateAll = shown.size <= 6
     Row(Modifier.fillMaxWidth().height(height + 34.dp).semantics { contentDescription = shown.joinToString(", ") { "${it.label} ${format(it.value)}" } }, verticalAlignment = Alignment.Bottom) {
         shown.forEachIndexed { i, p ->
-            Column(Modifier.weight(1f).fillMaxHeight(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Bottom) {
+            val dim = selectedLabel != null && selectedLabel != p.label
+            Column(
+                Modifier.weight(1f).fillMaxHeight().then(if (onTap != null) Modifier.clickable { onTap(p.label) } else Modifier),
+                horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Bottom,
+            ) {
                 if (annotateAll || i == shown.size - 1 || p.value == maxV) {
                     Text(format(p.value), style = T.caption2, color = Brand.secondary, maxLines = 1, softWrap = false, modifier = Modifier.wrapContentWidth(unbounded = true))
                 }
                 val f = if (maxV > 0) (p.value / (maxV * 1.0)).toFloat().coerceIn(0.01f, 1f) else 0.01f
                 Box(
                     Modifier.padding(top = 3.dp).then(if (shown.size < 6) Modifier.width(34.dp) else Modifier.fillMaxWidth(0.7f))
-                        .height(height * f * 0.86f).background(p.color ?: defaultColor, RoundedCornerShape(topStart = 3.dp, topEnd = 3.dp)),
+                        .height(height * f * 0.86f).background((p.color ?: defaultColor).copy(alpha = if (dim) 0.25f else 1f), RoundedCornerShape(topStart = 3.dp, topEnd = 3.dp)),
                 )
                 Text(
                     if (i in labelIdx) p.label else "", style = T.caption2, color = Brand.secondary, maxLines = 1, softWrap = false,
@@ -674,16 +681,17 @@ fun RowScope.Fill() = Spacer(Modifier.weight(1f))
 
 /** A pill that opens a menu of choices (the iOS Menu picker), for long lists like fiscal years. */
 @Composable
-fun <K> MenuPicker(label: String, options: List<Pair<K, String>>, description: String = label, onPick: (K) -> Unit) {
+fun <K> MenuPicker(label: String, options: List<Pair<K, String>>, description: String = label, filled: Boolean = false, onPick: (K) -> Unit) {
     var open by remember { mutableStateOf(false) }
     Box {
         Row(
-            Modifier.heightIn(min = 44.dp).card(22.dp).clickable(role = Role.Button) { open = true }.padding(horizontal = 16.dp)
+            Modifier.heightIn(min = 44.dp).then(if (filled) Modifier.clip(CircleShape).background(Brand.navyFill) else Modifier.card(22.dp))
+                .clickable(role = Role.Button) { open = true }.padding(horizontal = 16.dp)
                 .semantics { contentDescription = description },
             verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp),
         ) {
-            Text(label, style = T.subheadBold, color = Brand.text)
-            Icon(icon("chevron.up.chevron.down"), null, tint = Brand.secondary, modifier = Modifier.size(16.dp))
+            Text(label, style = T.subheadBold, color = if (filled) Color.White else Brand.text)
+            Icon(icon("chevron.up.chevron.down"), null, tint = if (filled) Color.White else Brand.secondary, modifier = Modifier.size(16.dp))
         }
         androidx.compose.material3.DropdownMenu(open, { open = false }, containerColor = Brand.surface) {
             for ((k, t) in options) androidx.compose.material3.DropdownMenuItem(text = { Text(t, style = T.body, color = Brand.text) }, onClick = { open = false; onPick(k) })

@@ -118,6 +118,9 @@ fun RouteScreen(route: Route) {
         is Route.Vendor -> VendorScreen(route.id)
         Route.DonorContracts -> DonorContractsScreen()
         Route.MoneyMap -> MoneyMapScreen()
+        is Route.Dataset -> DatasetScreen(route.id, route.filters)
+        is Route.Record -> RecordScreen(route.datasetID, route.rowID)
+        Route.Explore -> ExploreScreen()
         Route.Search -> SearchScreen()
         else -> PendingScreen(route)
     }
