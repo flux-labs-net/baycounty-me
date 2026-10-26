@@ -51,7 +51,7 @@
   const ALIAS = {logs: 'analytics'};
   const loaders = {todo: loadTodo, keys: loadKeys, analytics: () => { loadStats(); loadLogs(true); }, settings: loadSettings, ingestion: loadIngestion,
     accounting: () => loadLedger(), agendas: loadAgendas, sent: loadSent, emails: loadEmails, compose: () => loadCompose(), correspondence: loadCorr,
-    records: loadRR, owners: loadOwners, limits: loadLimits, ties: loadTies, boards: loadBoards};
+    records: loadRR, owners: loadOwners, limits: loadLimits, ties: loadTies, boards: loadBoards, minutes: loadMinutes};
   const nav = $('#an-nav'), menuBtn = $('#an-open');
   function menu(open) {
     nav.classList.toggle('open', open); document.body.classList.toggle('an-lock', open);
@@ -93,6 +93,7 @@
     ['limits', 'teal', 'Review', 'Gifts over the limit', 'Cases to confirm, reject or resolve with a source.', 'Open queue'],
     ['boards', 'teal', 'Review', 'Nonprofit board matches', 'Officials, leaders and candidates matched to board seats.', 'Open queue'],
     ['ties', 'teal', 'Review', 'Business ties', 'Officials matched by name to Sunbiz officers.', 'Open queue'],
+    ['minutes', 'teal', 'Review', 'Votes from minutes', 'Motions read from minutes that failed a check, plus spot checks.', 'Open queue'],
     ['accounting', 'teal', 'Review', 'Accounting files', 'Check-register rows waiting for approve or reject.', 'Open queue'],
     ['replies', 'blue', 'Outreach', 'Replies to handle', 'Conversations with a reply, plus emails that matched no conversation.', 'Read replies', 'correspondence'],
     ['records', 'blue', 'Outreach', 'Unsent records requests', 'Drafts waiting for you to press Send.', 'Open drafts'],
@@ -322,7 +323,7 @@
     const name = id => (KEYS.find(k => k.id === id) || {}).name;
     const WHAT = {email_test: 'Sent a test email', create_key: 'Created a key', update_key: 'Changed a key', rotate_key: 'Replaced a key', update_settings: 'Changed settings', block_ip: 'Blocked an address', unblock_ip: 'Removed a block', login: 'Signed in', login_requested: 'Asked for a sign-in link',
       ledger_normalize: 'Normalized accounting files', ledger_approve: 'Approved ledger rows', ledger_reject: 'Rejected ledger rows', ledger_source: 'Changed an accounting source', ledger_finance: 'Sent a file to /finance',
-      registry_review: 'Reviewed shared-owner groups', registry_limit_review: 'Reviewed over-limit cases', boards_review: 'Reviewed board matches', careers_review: 'Reviewed business ties'};
+      registry_review: 'Reviewed shared-owner groups', registry_limit_review: 'Reviewed over-limit cases', boards_review: 'Reviewed board matches', careers_review: 'Reviewed business ties', minutes_review: 'Reviewed votes from minutes'};
     $('#audit-table tbody').innerHTML = a.audit.map(x => `<tr><td class="small" style="white-space:nowrap">${stamp(x.at)}</td><td class="small">${esc(x.admin)}</td><td class="small">${esc(WHAT[x.action] || x.action)}${x.key_id && name(x.key_id) ? ': ' + esc(name(x.key_id)) : ''}</td>
       <td class="small muted mono" style="word-break:break-all">${x.detail && x.action !== 'login' ? auditDetail(x.detail) : ''}</td></tr>`).join('') || '<tr><td colspan="4" class="empty">Nothing yet.</td></tr>';
   }
@@ -1256,6 +1257,75 @@
   ['#bt-status', '#bt-confidence'].forEach(s => $(s).addEventListener('change', loadTies));
   let btTimer;
   $('#bt-q').addEventListener('input', () => { clearTimeout(btTimer); btTimer = setTimeout(loadTies, 300); });
+
+  // ---------- votes from minutes (agendas.motions, api/_minutes.js) ----------
+  const MV_BOARD = {county: 'County Commission', schools: 'School Board', pc: 'Panama City', 'pc-cra': 'Panama City CRA', pcb: 'Panama City Beach',
+    lh: 'Lynn Haven', 'lh-cra': 'Lynn Haven CRA', cw: 'Callaway', 'cw-cra': 'Callaway CRA', sp: 'Springfield', parker: 'Parker', mb: 'Mexico Beach'};
+  const MV_REV = {unreviewed: 'Unreviewed', approved: 'Approved', rejected: 'Rejected'};
+  const MV_VOTE = {yes: 'Y', no: 'N', abstain: 'Abst.', absent: 'Abs.'};
+  const mvBulk = bulkReview({table: '#mv-table', noun: ['motion', 'motions'], action: 'minutes_review',
+    statuses: [['approved', 'Approve', 'primary'], ['rejected', 'Reject', 'danger'], ['unreviewed', 'Back to unreviewed']],
+    key: m => String(m.id), body: list => ({items: list.map(m => ({id: m.id}))}),
+    warn: st => st === 'approved' ? 'Approved motions go on the site with the next daily refresh.' : st === 'rejected' ? 'Rejected motions stay off the site.' : '',
+    reload: () => loadMinutes()});
+  let mvFilled = false;
+  async function loadMinutes() {
+    let r;
+    try { r = await api('minutes', {params: {queue: $('#mv-queue').value, board: $('#mv-board').value, year: $('#mv-year').value, status: $('#mv-status').value, q: $('#mv-q').value.trim()}}); }
+    catch (e) { $('#mv-tiles').innerHTML = `<div class="banner bad"><div><b>Couldn’t load votes from minutes.</b><div class="small muted">${esc(e.message)}</div></div></div>`; return; }
+    if (!r.installed) { $('#mv-tiles').innerHTML = '<div class="banner"><div>Not set up yet. The next database sync applies migration 0054; then run the Read minutes workflow.</div></div>'; return; }
+    const t = r.totals;
+    $('#mv-tiles').innerHTML = [[fmt(t.files), 'Minutes files captured'], [fmt(t.read), 'Files read'], [fmt(t.waiting), 'Waiting on a batch'],
+      [fmt(t.unread), 'Couldn’t read'], [fmt(t.motions), 'Motions'], [fmt(t.passed), 'Passed checks'], [fmt(t.flagged), 'Flagged, unreviewed'],
+      [fmt(t.sample), 'Spot checks waiting'], ['$' + Number(t.cost || 0).toFixed(2), 'Spent so far'], ['$' + Number(t.in_flight || 0).toFixed(2), 'In flight (estimate)']]
+      .map(([v, l]) => `<div class="tile"><b>${v}</b><span>${l}</span></div>`).join('');
+    if (!mvFilled) {
+      $('#mv-board').innerHTML += Object.entries(MV_BOARD).map(([k, v]) => `<option value="${k}">${esc(v)}</option>`).join('');
+      const y = new Date().getFullYear();
+      for (let i = y; i >= 2016; i--) $('#mv-year').innerHTML += `<option>${i}</option>`;
+      mvFilled = true;
+    }
+    $('#mv-checks').innerHTML = (r.checks || []).length ? 'Waiting by check: ' + r.checks.map(c => `${esc(r.check_labels[c.code] || c.code)} (${fmt(c.n)})`).join(' · ') : '';
+    const votes = m => Object.entries(m.votes || {}).map(([n, v]) => `<div><span class="pill">${MV_VOTE[v] || esc(v)}</span> ${esc(n)}</div>`).join('');
+    $('#mv-table tbody').innerHTML = r.motions.map(m => `<tr>${mvBulk.cell(m)}
+      <td class="small"><b>${esc(MV_BOARD[m.board] || m.board)}</b><div>${esc(m.meeting_date ? String(m.meeting_date).slice(0, 10) : 'No date')}${m.meeting_type && m.meeting_type !== 'regular' ? ' · ' + esc(m.meeting_type.replace('_', ' ')) : ''}</div>
+        ${m.version_id ? `<button type="button" class="linkish" data-mv-ver="${m.version_id}">Open minutes${m.page ? ', page ' + m.page : ''}</button>` : ''}</td>
+      <td class="small"><b>${esc(m.summary || '')}</b>${m.item_title ? `<div class="muted">${esc([m.item_number, m.item_title].filter(Boolean).join(' '))}</div>` : ''}
+        <div>${esc((m.motion || '').slice(0, 400))}</div>
+        <div class="muted">${[m.mover && 'Moved: ' + esc(m.mover), m.seconder && 'Second: ' + esc(m.seconder), m.consent ? 'Consent agenda' : '', m.amount != null ? owUsd(m.amount) : ''].filter(Boolean).join(' · ')}</div></td>
+      <td class="small"><div><b>${esc(m.outcome || '')}</b> ${esc(m.tally || '')}${m.tally_printed && m.tally_printed !== m.tally ? ` <span class="muted">(printed ${esc(m.tally_printed)})</span>` : ''}</div>
+        <div class="muted">${esc((m.vote_method || '').replace(/_/g, ' '))}</div>${votes(m)}</td>
+      <td class="small">${(m.checks || []).map(c => `<div>${esc(r.check_labels[c] || c)}</div>`).join('') || (m.sampled ? '<span class="pill">spot check</span>' : '<span class="muted">Passed</span>')}
+        ${(m.unmatched || []).length ? `<div class="muted">Unmatched: ${m.unmatched.map(esc).join(', ')}</div>` : ''}</td>
+      <td><select class="sel" data-mv-id="${m.id}" aria-label="Review">${Object.entries(MV_REV).map(([k, v]) => `<option value="${k}"${k === m.review_status ? ' selected' : ''}>${v}</option>`).join('')}</select>
+        ${m.reviewed_by ? `<div class="muted small">${esc(m.reviewed_by)}</div>` : ''}</td></tr>`).join('') || '<tr><td colspan="6" class="empty">No motions with these filters.</td></tr>';
+    mvBulk.set(r.motions);
+    const byBoard = {};
+    (r.coverage || []).forEach(c => { (byBoard[c.board] = byBoard[c.board] || []).push(c); });
+    $('#mv-coverage tbody').innerHTML = Object.entries(byBoard).map(([b, rows]) => `<tr><td>${esc(MV_BOARD[b] || b)}</td>
+      <td class="num">${fmt(rows.reduce((n, x) => n + x.files, 0))}</td><td class="num">${fmt(rows.reduce((n, x) => n + x.read, 0))}</td>
+      <td class="num">${fmt(rows.reduce((n, x) => n + x.motions, 0))}</td>
+      <td class="small">${rows.map(x => `${x.yr}: ${x.read}/${x.files}`).join(' · ')}</td></tr>`).join('') || '<tr><td colspan="5" class="empty">No minutes captured yet.</td></tr>';
+    $('#mv-batches tbody').innerHTML = (r.batches || []).map(b => `<tr><td class="small">${esc(b.batch_id)}</td><td>${esc(b.status)}</td><td class="num">${fmt(b.requests)}</td>
+      <td class="num">${b.est != null ? '$' + b.est.toFixed(2) : '—'}</td><td class="num">${b.cost != null ? '$' + b.cost.toFixed(2) : '—'}</td>
+      <td class="small">${when(b.submitted_at)}</td><td class="small">${b.collected_at ? when(b.collected_at) : ''}</td></tr>`).join('') || '<tr><td colspan="7" class="empty">No batches yet.</td></tr>';
+  }
+  $('#mv-table').addEventListener('change', async e => {
+    const s = e.target.closest('[data-mv-id]'); if (!s) return;
+    s.disabled = true;
+    try { await api('minutes_review', {method: 'POST', body: {id: Number(s.dataset.mvId), status: s.value}}); mvBulk.mark(s.dataset.mvId, s.value); }
+    catch (err) { alert(err.message); }
+    s.disabled = false;
+  });
+  $('#mv-table').addEventListener('click', async e => {
+    const b = e.target.closest('[data-mv-ver]'); if (!b) return;
+    const w = window.open('', '_blank');
+    try { const j = await api('agenda_file', {params: {id: b.dataset.mvVer}}); if (j.url) w.location = j.url; else { w.close(); alert('This file wasn’t stored and has no public link.'); } }
+    catch (err) { w.close(); alert(err.message); }
+  });
+  ['#mv-queue', '#mv-board', '#mv-year', '#mv-status'].forEach(s => $(s).addEventListener('change', loadMinutes));
+  let mvTimer;
+  $('#mv-q').addEventListener('input', () => { clearTimeout(mvTimer); mvTimer = setTimeout(loadMinutes, 300); });
 
   // ---------- start ----------
   (async () => {
