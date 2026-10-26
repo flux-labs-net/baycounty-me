@@ -24,7 +24,7 @@
   const ico = (n, t) => { const i = `<span class="ico i-${n}" aria-hidden="true"></span>`; return t ? `<span class="ui-ti t-${t}">${i}</span>` : i; };
   const ICON = {gov: 'county', vendor: 'store', business: 'store', nonprofit: 'heart', committee: 'megaphone'};
   function initials(name) {
-    const w = String(name || '').replace(/["(].*/, '').split(/\s+/).filter(x => /^\p{L}/u.test(x));
+    const w = String(name || '').replace(/\([^)]*\)?|"[^"]*"?/g, ' ').split(/\s+/).filter(x => /^\p{L}/u.test(x));
     return w.length ? (w[0][0] + (w.length > 1 ? w[w.length - 1][0] : '')).toUpperCase() : '?';
   }
   function header(e) {

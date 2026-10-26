@@ -46,7 +46,7 @@ def hbars(rows, color='var(--s1)'):
     return '<div class="hbars">' + ''.join(f'<div class="hb"><span class="hb-n">{e(k)}</span><span class="hb-track"><span class="hb-bar" style="width:{v/mx*100:.1f}%;background:{color}"></span></span><span class="hb-v">{money(v)}</span></div>' for k, v in sorted(rows, key=lambda kv: -kv[1])) + '</div>'
 
 
-from ui import ico, avatar as _avatar, TONES  # shared pieces (ui.css)
+from ui import ico, avatar as _avatar, TONES, tone_of  # shared pieces (ui.css)
 
 
 # the icon and tint of each top card, by its label (gov.js has the same table for the cards it redraws)
@@ -143,7 +143,7 @@ def gov_page(key):
         seats = off['seats']
         board = [s for s in seats if s.get('elected') or not STAFF.search(s['seat'])]
         staff = [s for s in seats if s not in board]
-        pay = ''.join(f'<div class="ui-person">{_avatar(None, "amber", "dollar")}<span><b>{usd(x["annual"])}</b><small>{e(x["title"])}{" · " + e(x["name"]) if x.get("name") else ""} · {e(x.get("year") or "")}</small></span></div>' for x in p.get('pay') or [])
+        pay = ''.join(_pay_card(x) for x in p.get('pay') or [])
         links = ''.join(x for x in [
             f'<a class="ui-tag" href="{e(off["website"])}" target="_blank" rel="noopener">{ico("globe")}Website</a>' if off.get('website') else '',
             f'<a class="ui-tag" href="{e(off["contact_url"])}" target="_blank" rel="noopener">{ico("mail")}Contact</a>' if off.get('contact_url') else '',
@@ -256,6 +256,22 @@ def gov_page(key):
 <link rel="stylesheet" href="/assets/gov.css">
 <script>window.GOVPAGE={_dumps(cfg)};</script>
 <script src="/assets/gov.js" defer></script><script src="/assets/completeness.js" defer></script>{SAV_ASSETS if 'id="svList"' in body else ''}'''
+
+
+def _pay_card(x):
+    """One pay row as a card. The person's name is the title (linked to their profile, like the staff cards);
+    the job, salary and year sit underneath. A row with no name (a combined board total) leads with the job."""
+    from entity_links import href
+    from entity_graph import build
+    import ids
+    name = x.get('name')
+    sub = ' · '.join(v for v in [e(x['title']) if name else '', usd(x['annual']), e(x.get('year') or '')] if v)
+    if not name:
+        return f'<div class="ui-person">{_avatar(None, "amber", "dollar")}<span><b>{e(x["title"])}</b><small>{sub}</small></span></div>'
+    pid = ids.person_id(name)
+    url = href('person:' + pid) if pid and 'person:' + pid in build().ents else None
+    inner = f'{_avatar(name, tone_of(name))}<span><b>{e(name)}</b><small>{sub}</small></span>'
+    return f'<a class="ui-person" href="{e(url)}">{inner}</a>' if url else f'<div class="ui-person">{inner}</div>'
 
 
 def _person_card(s, i, staff=False):
