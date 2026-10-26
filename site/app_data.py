@@ -89,9 +89,18 @@ def vendors():
 
 
 def people():
+    """Everyone with a /people page. `subtitle` and `label` are the site's one-line description and kind
+    (Elected official, Department leader, Candidate, Former official); `kinds` are the People page's filter chips."""
+    import entity_graph as EG
+    from people_pages import _kinds
     p = json.load(open(os.path.join(HERE, '..', 'data', 'entities', 'people.json')))
+    G = EG.build()
+
+    def ent(pid):
+        return G.ents.get('person:' + pid) or {}
     return {'about': p.get('about'), 'people': [
         {'id': x['id'], 'name': x['name'], 'district': x.get('district'), 'gov_ids': x.get('gov_ids', []),
+         'subtitle': ent(x['id']).get('subtitle') or None, 'label': ent(x['id']).get('label') or None, 'kinds': _kinds(x),
          'roles': [{'role': r.get('role'), 'gov_id': r.get('gov_id'), 'seat': r.get('seat')} for r in x.get('roles', [])]}
         for x in p['people']]}
 

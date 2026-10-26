@@ -6,12 +6,15 @@ final class MoneyTabTests: XCTestCase {
         ("Tax calculator", "Tax Dollars"),
         ("Fees on your tax bill", "Fees on tax bills"),
         ("Budgets", "Budgets by fund and department"),
+        ("Budget compare", "Budget compare"),
         ("CRA spending", "CRA Spending"),
+        ("CRA tax increment", "CRA tax increment"),
         ("Contracts", "Contracts"),
         ("Accountability console", "Accountability"),
         ("Debt", "Debt by government"),
         ("Audit findings", "Audit findings"),
         ("2026 candidates", "2026 local candidates"),
+        ("Past elections", "Local campaigns since 2016"),
     ]
 
     func testEachCardOpensItsOwnScreen() {

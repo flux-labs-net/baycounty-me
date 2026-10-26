@@ -5,8 +5,9 @@ import Foundation
 public enum RecordLinks {
     /// Datasets that name companies by `vendor_id` / `vendor_ids`.
     public static let vendorDatasets = ["contracts", "change-orders", "emergency-purchases", "cra-payments", "vendor-payments", "campaign-contributions-2026"]
-    /// Datasets that name people by `person_id` (or, for votes, inside `members`).
-    public static let personDatasets = ["officials-pay", "salary-leaders", "campaign-finance", "candidates-2026", "member-votes", "votes"]
+    /// Datasets that name people by `person_id` (or, for votes, inside `members`; for owner gifts, `candidate_id`).
+    public static let personDatasets = ["officials-pay", "salary-leaders", "campaign-finance", "candidates-2026", "member-votes", "votes",
+                                        "officeholder-terms", "campaign-history", "business-donor-sunbiz", "owner-gifts"]
 
     public static func vendorIDs(_ row: Row) -> [String] {
         var ids = row.strings("vendor_ids")
@@ -17,6 +18,7 @@ public enum RecordLinks {
     public static func personIDs(_ row: Row) -> [String] {
         var ids = [String]()
         if let p = row.string("person_id") { ids.append(p) }
+        if let c = row.string("candidate_id"), !ids.contains(c) { ids.append(c) }
         for m in row["members"]?.arrayValue ?? [] {
             if case .object(let o) = m, let p = o["person_id"]?.stringValue, !ids.contains(p) { ids.append(p) }
         }

@@ -23,6 +23,7 @@ struct SearchView: View {
 
     /// The site's Get Involved pages, opened in the in-app browser.
     private let takePart: [(title: String, detail: String, symbol: String, path: String)] = [
+        ("Ask a question", "Plain answers from the site's records", "bubble.left.and.text.bubble.right", "/ask"),
         ("Letters to officials", "What we asked, and what they said", "envelope.open", "/correspondence"),
         ("Request a record", "Write a public records request", "doc.badge.plus", "/records-request"),
         ("Email alerts", "Weekly updates for your government", "bell", "/alerts"),

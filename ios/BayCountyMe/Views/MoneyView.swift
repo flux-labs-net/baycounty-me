@@ -25,8 +25,10 @@ struct MoneyView: View {
     ]
     private let goes: [Item] = [
         .init(title: "Budgets", symbol: "chart.pie", detail: "Each budget by fund and department", route: .dataset("budget-detail")),
+        .init(title: "Budget compare", symbol: "arrow.left.arrow.right", detail: "One government's budget, two years side by side", route: .budgetCompare()),
         .init(title: "Cost per resident", symbol: "person.2", detail: "Each service, per resident", route: .dataset("budget-per-resident")),
         .init(title: "CRA spending", symbol: "building.2", detail: "What redevelopment agencies paid for", route: .cra),
+        .init(title: "CRA tax increment", symbol: "percent", detail: "Property tax that goes to the CRAs instead", route: .craIncrement),
         .init(title: "Sales tax projects", symbol: "road.lanes", detail: "Half-cent projects: promised vs built", route: .dataset("sales-tax-projects")),
         .init(title: "Hurricane Michael", symbol: "hurricane", detail: "Every FEMA rebuilding project", route: .dataset("fema-michael-projects")),
     ]
@@ -36,7 +38,7 @@ struct MoneyView: View {
         .init(title: "Contracts", symbol: "signature", detail: "Who wins contracts, and how", route: .dataset("contracts")),
         .init(title: "Companies", symbol: "building", detail: "Every company paid, with its contracts and votes", route: .vendors),
         .init(title: "How they voted", symbol: "hand.raised", detail: "Every recorded vote on money decisions", route: .dataset("votes")),
-        .init(title: "Who gets paid", symbol: "dollarsign.circle", detail: "Payments by the tourism agencies", route: .dataset("vendor-payments")),
+        .init(title: "Tourism payments", symbol: "dollarsign.circle", detail: "Who the tourism agencies paid", route: .dataset("vendor-payments")),
         .init(title: "Change orders", symbol: "arrow.triangle.2.circlepath", detail: "How much contracts grew", route: .dataset("change-orders")),
         .init(title: "Emergency purchases", symbol: "exclamationmark.triangle", detail: "Bought without bidding", route: .dataset("emergency-purchases")),
         .init(title: "Debt", symbol: "creditcard", detail: "What each government owes", route: .dataset("debt")),
@@ -57,6 +59,9 @@ struct MoneyView: View {
     private let elections: [Item] = [
         .init(title: "2026 candidates", symbol: "checkmark.seal", detail: "Who's running, and what they raised", route: .dataset("candidates-2026")),
         .init(title: "Gifts from organizations", symbol: "envelope", detail: "2026 contributions from businesses and groups", route: .dataset("campaign-contributions-2026")),
+        .init(title: "Past elections", symbol: "clock.arrow.circlepath", detail: "Every local race from 2016 to 2025, with what each raised", route: .dataset("campaign-history")),
+        .init(title: "Gifts in past races", symbol: "tray.full", detail: "Business and group gifts to 2016 to 2025 campaigns", route: .dataset("campaign-contributions-history")),
+        .init(title: "Business owners who gave", symbol: "person.text.rectangle", detail: "Gifts from people who run a registered business", route: .dataset("owner-gifts")),
     ]
 
     private enum MoneySection: String, CaseIterable { case pay, goes, accountability, connections, elections }

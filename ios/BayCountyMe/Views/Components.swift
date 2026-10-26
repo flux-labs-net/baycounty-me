@@ -56,6 +56,8 @@ enum Route: Hashable {
     case accountability
     case accountabilityProject(String)
     case search
+    case budgetCompare(govID: String? = nil)
+    case craIncrement
 }
 
 extension View {
@@ -85,6 +87,8 @@ extension View {
                 case .accountability: AccountabilityView()
                 case .accountabilityProject(let id): AccountabilityProjectView(projectID: id)
                 case .search: SearchView()
+                case .budgetCompare(let g): BudgetCompareView(govID: g)
+                case .craIncrement: CRAIncrementView()
                 }
             }
             .pageBackground()

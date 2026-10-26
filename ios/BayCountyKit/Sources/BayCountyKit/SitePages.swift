@@ -17,7 +17,7 @@ public enum SitePages {
         "/": .native("Home"),
         "/my-address": .native("My Address"),
         "/public-money/cra-spending": .native("CRA Spending"),
-        "/public-money/cra-tax-increment": .dataset("cra-agencies"),
+        "/public-money/cra-tax-increment": .native("CRA tax increment"),
         "/public-money/tax-dollars": .native("Tax calculator"),
         "/public-money/amendment-3": .native("Amendment 3"),
         "/public-money/hurricane-michael": .dataset("fema-michael-projects"),
@@ -36,7 +36,7 @@ public enum SitePages {
         "/alerts": .web("email alert sign-up; push alerts are planned for the app"),
         "/meetings": .native("Meetings tab"),
         "/connections/campaign-gifts": .dataset("campaign-finance"),
-        "/public-money/budget-compare": .web("two-year budget comparison, read live from /api/v1/budget-compare; the rows are the budget-years dataset in Explore"),
+        "/public-money/budget-compare": .native("Budget compare (BudgetCompare, the same rules as /api/v1/budget-compare)"),
         "/elections": .dataset("candidates-2026"),
         "/elections/past": .dataset("campaign-history"),
         "/public-money/exemptions": .dataset("property-tax-exemptions"),
@@ -48,11 +48,10 @@ public enum SitePages {
         "/glossary": .native("Glossary"),
         "/updates": .native("What's new"),
         "/search": .native("Search tab"),
-        "/ask": .web("Ask chatbot; answers stream from /api/chat, which uses the MCP tools"),
+        "/ask": .web("Ask chatbot, opened from the Today toolbar and Search; answers stream from /api/chat, which uses the MCP tools"),
         "/about": .native("About"),
         "/privacy": .web("privacy page"),
         "/people": .native("People"),
-        "/profile": .web("profile of a company, nonprofit, board member or business, read live from /api/v1/entities"),
     ]
 
     /// Page families covered by one native screen (each government's profile).

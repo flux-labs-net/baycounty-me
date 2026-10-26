@@ -42,7 +42,7 @@ re-run `xcodegen`, then Product > Archive. About > App shows the version and bui
 
 CRA Spending has its own screen with the map, paid-out vs committed/budgeted totals and a chart by agency. It follows the site's data rules: only `count: true` rows go into totals, and Spent is kept separate from money that's only planned.
 
-The tax calculator, My Address, Compare and Amendment 3 open the website page in an in-app browser for now.
+Budget compare and CRA tax increment have native screens. Their numbers come from BayCountyKit ports of the site's own rules (`BudgetCompare` from api/_budget.js, `Officeholders` from api/_officials.js, `CRAIncrement` from site/cra_increment.js), and `ApiParityTests` checks them against the API's answers (fixtures from `node ios/scripts/make_fixtures.js`). Government screens follow the site's government page: who's in charge by fiscal year, the money, debt, audit findings, savings ideas and the CRA. Ask, Compare, Connections and the forms open the website page in the in-app browser. `SitePages.swift` lists how the app covers every site page.
 
 ## Data
 
