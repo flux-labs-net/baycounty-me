@@ -5,7 +5,7 @@
 set -u
 APK=$1
 OUT=$2
-PKG=me.baycounty.app
+PKG=me.baycounty
 mkdir -p "$OUT"
 adb install -r "$APK"
 # A clean status bar: 9:41, full battery, no notifications.
@@ -18,10 +18,10 @@ adb shell am broadcast -a com.android.systemui.demo -e command notifications -e 
 shot() { # name, dark (true/false), screen ("" for home)
   adb shell am force-stop "$PKG"
   if [ -z "$3" ]; then
-    adb shell am start -W -n "$PKG/.MainActivity" --ez dark "$2" >/dev/null
+    adb shell am start -W -n "$PKG/me.baycounty.app.MainActivity" --ez dark "$2" >/dev/null
   else
     # adb shell joins its arguments into one command line, so spaces in a screen name need escaping.
-    adb shell am start -W -n "$PKG/.MainActivity" --ez dark "$2" --es screen "${3// /\\ }" >/dev/null
+    adb shell am start -W -n "$PKG/me.baycounty.app.MainActivity" --ez dark "$2" --es screen "${3// /\\ }" >/dev/null
   fi
   sleep 12
   adb exec-out screencap -p > "$OUT/$1.png"

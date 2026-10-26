@@ -11,7 +11,7 @@ android {
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "me.baycounty.app"
+        applicationId = "me.baycounty"  // the Play listing's package name (fixed once set); the code namespace stays me.baycounty.app
         minSdk = 26
         targetSdk = 35
         // Play rejects a versionCode it already has. The release workflow sets BCM_VERSION_CODE to its run number. About shows both.
