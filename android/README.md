@@ -4,7 +4,7 @@ Native Kotlin and Jetpack Compose app for BayCounty.me, built to match the iOS a
 
 ## Run it
 
-Needs Android Studio (Ladybug or later) or the command line with JDK 17 and the Android SDK (platform 36).
+Needs Android Studio (Ladybug or later) or the command line with JDK 21 and the Android SDK (platform 36).
 
 ```bash
 cd android
