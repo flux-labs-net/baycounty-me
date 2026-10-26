@@ -55,7 +55,7 @@ cd android
   -Dscreens="home,gov:lh,tax,budget" -Dpages=2 -Dfullres=$PWD/shots   # light and dark PNGs in android/shots
 ```
 
-Screen names are the iOS app's `-screen` names (`home`, `tab:money`, `gov:county`, `person`, `record:vote`, `craincrement`...). The app also takes them from an intent: `adb shell am start -n me.baycounty.app/.MainActivity --es screen tax --ez dark true`.
+Screen names are the iOS app's `-screen` names (`home`, `tab:money`, `gov:county`, `person`, `record:vote`, `craincrement`...). The app also takes them from an intent: `adb shell am start -n me.baycounty/me.baycounty.app.MainActivity --es screen tax --ez dark true`.
 
 On GitHub, the **Android** workflow (`.github/workflows/android.yml`) runs on every pull request that touches `android/`: kit tests, the debug APK, every screen rendered on the JVM in light and dark, and real emulator screenshots with live data. All three are in the run's artifacts.
 
