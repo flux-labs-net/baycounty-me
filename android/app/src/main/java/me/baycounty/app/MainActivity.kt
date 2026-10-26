@@ -85,7 +85,9 @@ fun AppRoot(store: AppStore, screen: String? = null, nav: Nav = remember { Nav()
                 }
             },
         ) { pad ->
-            Box(Modifier.fillMaxSize().padding(bottom = pad.calculateBottomPadding()).consumeWindowInsets(pad)) {
+            // pad holds the status bar on top and the tab bar below. Padding by both keeps every screen's title bar
+            // below the clock and camera (the top bars then see those insets as already used).
+            Box(Modifier.fillMaxSize().padding(pad).consumeWindowInsets(pad)) {
                 val stack = nav.stack()
                 val top = stack.lastOrNull()
                 val key = "${nav.tab}/${stack.size}/${top?.hashCode() ?: 0}"
