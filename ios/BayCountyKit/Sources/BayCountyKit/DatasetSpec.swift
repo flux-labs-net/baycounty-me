@@ -201,6 +201,10 @@ public struct DatasetSpec: Sendable {
         "site-updates": .init(.more, "sparkles", title: ["title"], subtitle: ["date"], detail: "text", date: ["date"], page: "updates"),
         "site-menu": .init(.more, "list.bullet", title: ["label"], subtitle: ["section", "lang"], detail: "description",
                            filters: ["section", "lang"]),
+        "data-sources": .init(.more, "doc.text.magnifyingglass", title: ["source_name"], subtitle: ["government", "topic"], detail: "what_we_take",
+                              badge: "method", filters: ["topic", "government", "method"], page: "data-sources"),
+        "data-source-sites": .init(.more, "globe", title: ["website"], subtitle: ["topic"], detail: "topic",
+                                   filters: ["topic"], page: "data-sources"),
     ]
 
     /// Datasets the app shows in their own tabs rather than in Explore.
