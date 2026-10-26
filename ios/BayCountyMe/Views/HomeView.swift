@@ -25,6 +25,7 @@ struct HomeView: View {
                 VStack(alignment: .leading, spacing: 24) {
                     searchField
                     ballotBanner
+                    addressCard
                     meetingsSection
                     taxBillSection
                     numbersSection
@@ -111,6 +112,37 @@ struct HomeView: View {
             }
             .buttonStyle(.plain)
         }
+    }
+
+    // MARK: My Address
+
+    /// The saved home address (tax estimate, representatives, schools, flood zone), or a prompt to look one up.
+    private var addressCard: some View {
+        CardList {
+            if let home = store.home {
+                NavigationLink(value: Route.address(home)) {
+                    AddressCardRow(symbol: "house.fill", eyebrow: "My Address", title: home.display,
+                                   detail: "Tax estimate, representatives, schools, flood zone")
+                }
+                .buttonStyle(.plain)
+                Divider().padding(.leading, 62)
+                NavigationLink(value: Route.myAddress) {
+                    Label("Look up another address", systemImage: "magnifyingglass")
+                        .font(.subheadline.weight(.medium)).foregroundStyle(Brand.navy)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.horizontal, 14).padding(.vertical, 12)
+                        .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+            } else {
+                NavigationLink(value: Route.myAddress) {
+                    AddressCardRow(symbol: "mappin.and.ellipse", eyebrow: "My Address", title: "What applies to your address?",
+                                   detail: "Property tax estimate, who represents you, schools, flood and evacuation zones")
+                }
+                .buttonStyle(.plain)
+            }
+        }
+        .accessibilityIdentifier("myAddressCard")
     }
 
     // MARK: Meetings
@@ -303,5 +335,30 @@ struct HomeView: View {
             let q = String(arg.dropFirst("address:".count))
             if let m = try? await store.gis.search(q).matches.first { path = [.address(m)] }
         }
+    }
+}
+
+/// One row on the Today tab's My Address card.
+private struct AddressCardRow: View {
+    let symbol: String
+    let eyebrow: String
+    let title: String
+    let detail: String
+
+    var body: some View {
+        HStack(spacing: 12) {
+            Image(systemName: symbol).font(.title3).foregroundStyle(Brand.navy)
+                .frame(width: 36, height: 36)
+                .background(Brand.navy.opacity(0.1), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
+            VStack(alignment: .leading, spacing: 2) {
+                Text(eyebrow).font(.caption).foregroundStyle(.secondary)
+                Text(title).font(.headline).foregroundStyle(.primary).multilineTextAlignment(.leading)
+                Text(detail).font(.caption).foregroundStyle(.secondary).multilineTextAlignment(.leading)
+            }
+            Spacer(minLength: 0)
+            Image(systemName: "chevron.right").font(.caption.weight(.semibold)).foregroundStyle(.tertiary)
+        }
+        .padding(14)
+        .contentShape(Rectangle())
     }
 }
