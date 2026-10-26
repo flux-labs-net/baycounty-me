@@ -122,6 +122,8 @@ fun RouteScreen(route: Route) {
         is Route.Record -> RecordScreen(route.datasetID, route.rowID)
         Route.Explore -> ExploreScreen()
         Route.Search -> SearchScreen()
+        Route.CRA -> CRAScreen()
+        Route.CRAIncrement -> CRAIncrementScreen()
         else -> PendingScreen(route)
     }
 }

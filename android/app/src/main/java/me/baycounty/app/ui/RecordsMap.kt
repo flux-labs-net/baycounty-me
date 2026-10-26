@@ -9,6 +9,9 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalInspectionMode
@@ -26,7 +29,7 @@ import org.osmdroid.views.overlay.Marker
 fun RecordsMap(datasetID: String, rows: List<DataRow>, modifier: Modifier = Modifier, onSelect: ((DataRow) -> Unit)? = null) {
     val located = rows.filter { it.number("lat") != null && it.number("lng") != null }.take(600)
     if (LocalInspectionMode.current) {
-        Box(modifier.background(Brand.sunken), contentAlignment = Alignment.Center) { Text("Map", style = T.caption, color = Brand.secondary) }
+        Box(modifier.clip(RoundedCornerShape(14.dp)).background(Brand.sunken), contentAlignment = Alignment.Center) { Text("Map", style = T.caption, color = Brand.secondary) }
         return
     }
     val context = LocalContext.current
@@ -43,7 +46,7 @@ fun RecordsMap(datasetID: String, rows: List<DataRow>, modifier: Modifier = Modi
         }
     }
     DisposableEffect(map) { map.onResume(); onDispose { map.onPause(); map.onDetach() } }
-    AndroidView({ map }, modifier) { m ->
+    AndroidView({ map }, modifier.clip(RoundedCornerShape(14.dp))) { m ->
         m.overlays.clear()
         for (r in located) {
             m.overlays.add(Marker(m).apply {
