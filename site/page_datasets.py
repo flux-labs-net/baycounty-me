@@ -924,3 +924,6 @@ DATASETS = [
     ('chamber-events', 'Chambers of commerce: events and programs', "Upcoming events from each chamber's public calendar (kind event: title, start and end in local time, venue and city, category, the event's own link) and each chamber's yearly and monthly signature programs (kind program: schedule and what it is). chamber_event is false for community events a chamber lists on its calendar. Refreshed daily where the calendar has a public feed.", chamber_events),
     ('tax-districts', 'Tax districts', 'Which taxing authorities levy property tax in each tax district, and the combined millage. Rates by year are in property-tax-rates (authority_id).', tax_districts),
 ]
+
+from volunteer_data import DATASETS as _VOLUNTEER  # noqa: E402  /volunteer (site/volunteer_data.py)
+DATASETS += _VOLUNTEER

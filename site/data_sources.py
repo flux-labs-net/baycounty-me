@@ -72,6 +72,10 @@ TOPICS = [
     ('chambers', 'Chambers of commerce', '/chambers',
      "Board, staff and program lists are copied by hand from each chamber's website. Upcoming events are read every day from the Panama City Beach Chamber's public calendar feed; the Bay County Chamber's calendar platform turns automated readers away.",
      'Board members are joined to other local filings by first and last name, and to an official only where the chamber names their government post. Organizations are joined to governments, paid companies, nonprofits or one Sunbiz filing with the exact same name.'),
+    ('volunteer', 'Volunteer needs', '/volunteer',
+     "Open volunteer needs are read every day from United Way of Northwest Florida's volunteer center and Idealist's listings for Bay County towns; only needs in a county town or ZIP are kept. "
+     'Volunteer counts come from Part I of each nonprofit\'s latest e-filed Form 990.',
+     'Organizations on the boards are joined to local nonprofits by exact name, with a few checked by hand (data/volunteer/bay/organizations.json).'),
     ('cra', 'Redevelopment agencies (CRAs)', '/public-money/cra-spending',
      'CRA spending is read from CRA annual reports, agendas, budgets and audits, one ledger line per payment or project. '
      'Tax increment comes from CRA reports, audits and budgets, split between the county and city by millage.',
@@ -186,6 +190,8 @@ src('businesses', 'state', 'Sunbiz business search', 'https://search.sunbiz.org/
 src('chambers', 'county', 'Bay County Chamber of Commerce website (board, staff and programs)', 'https://panamacity.org/board-of-directors/', BY_HAND, 'As boards change', 'Board, staff and past chairs since 2016 by name, title and organization; regular programs')
 src('chambers', 'county', 'Panama City Beach Chamber of Commerce website (board, staff and programs)', 'https://pcbeach.org/board-of-directors/', BY_HAND, 'As boards change', 'Board and staff by name, title and organization; regular programs')
 src('chambers', 'county', 'Panama City Beach Chamber events calendar feed', 'https://pcbeach.org/local-events/', AUTO_DAILY, 'Daily', 'Upcoming chamber and community events: title, time, venue and link')
+src('volunteer', 'county-wide', 'United Way of Northwest Florida volunteer center', 'https://volunteer.unitedwaynwfl.org/need/', AUTO_DAILY, 'Daily', 'Open volunteer needs: title, agency, what volunteers do, when, city and ZIP')
+src('volunteer', 'county-wide', 'Idealist volunteer listings (Bay County towns)', 'https://www.idealist.org/en/volunteer-in-panama-city-fl', AUTO_DAILY, 'Daily', 'Open volunteer opportunities: title, organization, description, city, posted and closing dates')
 src('nonprofits', 'state', 'IRS exempt organization and 990 data (GivingTuesday 990 data lake)', 'https://990data.givingtuesday.org/', BULK, 'As new filings post', 'Organizations, 990, 990-EZ, 990-PF and 990-N filings since 2019: board members, pay, grants and finances')
 src('nonprofits', 'state', 'ProPublica Nonprofit Explorer', 'https://projects.propublica.org/nonprofits/', BY_HAND, 'As needed', 'Links to each organization\'s filings')
 src('nonprofits', 'state', 'Florida Check-A-Charity (Department of Agriculture and Consumer Services)', 'https://csapp.fdacs.gov/', BULK, 'As needed', 'Charity registrations, reported finances, fundraisers, officers and directors')
@@ -265,7 +271,7 @@ FOLDER_TOPIC = {
     'agendas': 'meetings', 'meetings': 'meetings', 'votes': 'votes', 'contracts': 'contracts', 'budgets': 'budgets',
     'debt_audit': 'audits', 'money': 'audits', 'tax': 'property-tax', 'amendment3': 'property-tax', 'exemptions': 'property-tax',
     'salaries': 'salaries', 'campaign': 'campaign', 'elections': 'elections', 'sunbiz': 'businesses', 'careers': 'businesses',
-    'nonprofits': 'nonprofits', 'chambers': 'chambers', 'cra': 'cra', 'merged.json': 'cra', 'michael': 'michael', 'surtax': 'sales-tax',
+    'nonprofits': 'nonprofits', 'chambers': 'chambers', 'volunteer': 'volunteer', 'cra': 'cra', 'merged.json': 'cra', 'michael': 'michael', 'surtax': 'sales-tax',
     'tourism': 'tourist-tax', 'fees': 'fees', 'nearby': 'address', 'civic': 'records', 'projects': 'contracts',
 }
 SKIP_HOSTS = {'baycounty.me', 'www.baycounty.me', 'aptg.co'}

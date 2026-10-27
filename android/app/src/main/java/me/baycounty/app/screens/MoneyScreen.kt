@@ -74,6 +74,7 @@ private val moneyItems: Map<MoneySection, List<MoneyItem>> = mapOf(
         MoneyItem("Shared owners", "person.2", "Businesses with a shared owner that gave to the same candidate", site = "/connections/shared-owners"),
         MoneyItem("Nonprofits", "heart.text.square", "Every local nonprofit, its public money, and its board", Route.Dataset("nonprofits")),
         MoneyItem("Nonprofit boards", "person.3", "Who sits on each nonprofit's board", Route.Dataset("nonprofit-board-members")),
+        MoneyItem("Volunteer", "hand.raised", "Open needs from local nonprofits", Route.Volunteer),
         MoneyItem("Chambers of commerce", "storefront", "Boards, events and public money", Route.Chambers),
         MoneyItem("Business ties", "briefcase", "Officials' and candidates' businesses", site = "/connections/business-ties"),
     ),

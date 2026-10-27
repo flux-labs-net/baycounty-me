@@ -34,6 +34,7 @@ object SitePages {
         "/records-request" to Coverage.Web("records request writer"),
         "/connections/shared-owners" to Coverage.Web("confirmed shared-owner groups and gifts over the limit, read live from /api/v1/datasets/shared-owner-groups and over-limit-gifts"),
         "/connections/nonprofits" to Coverage.Dataset("nonprofits"),
+        "/volunteer" to Coverage.Native("Volunteer"),
         "/chambers" to Coverage.Native("Chambers of commerce"),
         "/connections/business-ties" to Coverage.Web("confirmed official-to-business matches, read live from /api/v1/datasets/official-businesses and official-business-links"),
         "/correspondence" to Coverage.Web("published letters to officials, read live from /api/v1/correspondence"),
