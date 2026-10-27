@@ -582,20 +582,18 @@ def src_granicus_pcb():
         hh = mm = None
         archived = "clip_id=" in link
         if archived:
-            # for archived clips the feed's pubDate is the meeting start (Pacific)
-            parts = it.find("gran:pubDateParts", ns)
+            # For archived clips the pubDate is the start in Pacific wall-clock time, on a
+            # 12-hour clock with no a.m./p.m. and always labelled -0800: a 9 a.m. meeting
+            # reads 07:00 and a 5 p.m. meeting reads 03:00, summer and winter alike.
             try:
                 pdt = dt.datetime.strptime((it.findtext("pubDate") or "")[:25].strip(),
                                            "%a, %d %b %Y %H:%M:%S")
-                tz = (it.findtext("pubDate") or "")[26:].strip()
-                off = int(tz[:3]) if re.match(r"[+-]\d{4}", tz) else -7
-                utc = pdt - dt.timedelta(hours=off)
-                coff = -5 if central_offset(d) == "-05:00" else -6
-                loc = utc + dt.timedelta(hours=coff)
-                if loc.date() == d:
-                    hh, mm = loc.hour, loc.minute
+                if pdt.date() == d:  # some clips were published days later
+                    hh, mm = (pdt.hour + 2) % 24, pdt.minute
+                    if hh < 8:  # no council meeting starts before 8 a.m., so it was p.m.
+                        hh += 12
             except Exception:
-                pass
+                hh = mm = None
         m = meeting("pcb", re.sub(r"\s+-\s+.*$", "", title), d, hh, mm or 0,
                     location="City Hall Council Chambers, 17007 Panama City Beach Pkwy, Panama City Beach, FL 32413",
                     agenda_url=link or None, source="Granicus:" + PCB_RSS)
@@ -830,8 +828,9 @@ BOARDS = [
      "source_url": "https://www.panamacity.gov/AgendaCenter",
      "calendar_url": "https://www.panamacity.gov/Calendar.aspx"},
     {"id": "pcb", "name": "Panama City Beach City Council", "gov": "pcb",
-     "schedule": "2nd and 4th Thursday of every month (except November and December); "
-                 "2nd Thursday meetings at 5 p.m., 4th Thursday meetings at 9 a.m.",
+     "schedule": "2nd and 4th Thursday of every month; 2nd Thursday meetings at 5 p.m., "
+                 "4th Thursday meetings at 9 a.m. November and December have one meeting, "
+                 "on the 2nd Thursday at 9 a.m.",
      "schedule_source_url": "https://www.pcbfl.gov/185/City-Council",
      "location": "City Council Chambers, City Hall, 17007 Panama City Beach Pkwy, Panama City Beach, FL 32413",
      "source_url": "https://pcbgov.granicus.com/ViewPublisher.php?view_id=1",
@@ -884,8 +883,10 @@ BOARDS = [
 # Published/observed regular schedules used ONLY for "expected" dates on boards
 # that have no official calendar feed. (nth week, weekday Mon=0, hour, minute)
 RULES = {
-    "pcb": {"slots": [(2, 3, 17, 0), (4, 3, 9, 0)], "skip_months": {11, 12},
-            "basis": "published schedule (pcbfl.gov/185/City-Council)"},
+    # Nov and Dec: one meeting, 2nd Thursday at 9 a.m. (every year in the Granicus archive since 2023).
+    "pcb": {"slots": [(2, 3, 17, 0), (4, 3, 9, 0)], "skip_months": set(),
+            "month_slots": {11: [(2, 3, 9, 0)], 12: [(2, 3, 9, 0)]},
+            "basis": "published schedule (pcbfl.gov/185/City-Council); Nov/Dec from the Granicus archive"},
     "mb": {"slots": [(2, 1, 9, 0), (4, 1, 9, 0)], "skip_months": set(),
            "basis": "published schedule (mexicobeachfl.gov council-meetings page)"},
     "parker": {"slots": [(1, 1, 17, 30), (3, 1, 17, 30)], "skip_months": set(),
@@ -921,6 +922,13 @@ def merge(primary, calendar):
     return res
 
 
+def rule_slots(rule, month):
+    """The (nth, weekday, hour, minute) slots a board meets in for a given month."""
+    if month in rule["skip_months"]:
+        return []
+    return rule.get("month_slots", {}).get(month, rule["slots"])
+
+
 def gen_expected(board_id, existing, today, end):
     rule = RULES.get(board_id)
     if not rule:
@@ -929,14 +937,13 @@ def gen_expected(board_id, existing, today, end):
     out = []
     y, mo = today.year, today.month
     while dt.date(y, mo, 1) <= end:
-        if mo not in rule["skip_months"]:
-            for n, wd, hh, mm in rule["slots"]:
-                d = _nth_weekday(y, mo, wd, n)
-                if d and today <= d <= end and d not in have:
-                    m = meeting(board_id, "Regular Meeting (expected)", d, hh, mm,
-                                source="schedule:" + rule["basis"], status="expected")
-                    m["expected"] = True
-                    out.append(m)
+        for n, wd, hh, mm in rule_slots(rule, mo):
+            d = _nth_weekday(y, mo, wd, n)
+            if d and today <= d <= end and d not in have:
+                m = meeting(board_id, "Regular Meeting (expected)", d, hh, mm,
+                            source="schedule:" + rule["basis"], status="expected")
+                m["expected"] = True
+                out.append(m)
         mo += 1
         if mo == 13:
             y, mo = y + 1, 1
@@ -1013,8 +1020,8 @@ def main(argv):
     # Panama City Beach
     per["pcb"] += safe("pcb", "Granicus RSS", src_granicus_pcb) or []
     for m in per["pcb"]:
-        if m["hh"] is None and m["date"].month not in RULES["pcb"]["skip_months"]:
-            for n, wd, hh, mm in RULES["pcb"]["slots"]:
+        if m["hh"] is None:
+            for n, wd, hh, mm in rule_slots(RULES["pcb"], m["date"].month):
                 if _nth_weekday(m["date"].year, m["date"].month, wd, n) == m["date"]:
                     m["hh"], m["mm"], m["time_from_schedule"] = hh, mm, True
 

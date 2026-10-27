@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-26T17:34:50-05:00",
+  "generated": "2026-10-26T21:35:07-05:00",
   "window": {
     "from": "2026-10-26",
     "to": "2026-12-25"
@@ -103,7 +103,7 @@
       "id": "pcb",
       "name": "Panama City Beach City Council",
       "gov": "pcb",
-      "schedule": "2nd and 4th Thursday of every month (except November and December); 2nd Thursday meetings at 5 p.m., 4th Thursday meetings at 9 a.m.",
+      "schedule": "2nd and 4th Thursday of every month; 2nd Thursday meetings at 5 p.m., 4th Thursday meetings at 9 a.m. November and December have one meeting, on the 2nd Thursday at 9 a.m.",
       "location": "City Council Chambers, City Hall, 17007 Panama City Beach Pkwy, Panama City Beach, FL 32413",
       "source_url": "https://pcbgov.granicus.com/ViewPublisher.php?view_id=1",
       "calendar_url": "https://pcbgov.granicus.com/ViewPublisher.php?view_id=1",
@@ -114,7 +114,7 @@
       "coverage": {
         "agenda_feed": 0,
         "calendar": 0,
-        "expected": 0
+        "expected": 2
       }
     },
     {
@@ -506,7 +506,7 @@
     {
       "board": "pcb",
       "title": "City Council",
-      "start": "2026-10-22T10:00:00-05:00",
+      "start": "2026-10-22T09:00:00-05:00",
       "location": "City Hall Council Chambers, 17007 Panama City Beach Pkwy, Panama City Beach, FL 32413",
       "agenda_url": "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=421",
       "packet_url": null,
@@ -827,6 +827,18 @@
       "detail_url": "https://www.bay.k12.fl.us/school-board-meetings"
     },
     {
+      "board": "pcb",
+      "title": "Regular Meeting (expected)",
+      "start": "2026-11-12T09:00:00-06:00",
+      "location": "City Council Chambers, City Hall, 17007 Panama City Beach Pkwy, Panama City Beach, FL 32413",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "schedule:published schedule (pcbfl.gov/185/City-Council); Nov/Dec from the Granicus archive",
+      "status": "expected",
+      "expected": true
+    },
+    {
       "board": "sp",
       "title": "Commission Workshop",
       "start": "2026-11-16T17:30:00-06:00",
@@ -1004,6 +1016,18 @@
       "packet_url": null,
       "minutes_url": null,
       "source": "schedule:published schedule (mexicobeachfl.gov council-meetings page)",
+      "status": "expected",
+      "expected": true
+    },
+    {
+      "board": "pcb",
+      "title": "Regular Meeting (expected)",
+      "start": "2026-12-10T09:00:00-06:00",
+      "location": "City Council Chambers, City Hall, 17007 Panama City Beach Pkwy, Panama City Beach, FL 32413",
+      "agenda_url": null,
+      "packet_url": null,
+      "minutes_url": null,
+      "source": "schedule:published schedule (pcbfl.gov/185/City-Council); Nov/Dec from the Granicus archive",
       "status": "expected",
       "expected": true
     },

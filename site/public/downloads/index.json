@@ -1,6 +1,6 @@
 {
  "name": "BayCounty.me open data",
- "updated": "2026-10-26",
+ "updated": "2026-10-27",
  "license": "Public records; free to reuse with credit to BayCounty.me",
  "datasets": [
   {
@@ -7990,7 +7990,7 @@
    "id": "meetings",
    "title": "Upcoming meetings",
    "description": "Scheduled and expected meetings for every board.",
-   "rows": 51,
+   "rows": 53,
    "columns": [
     {
      "name": "board",
@@ -8060,6 +8060,7 @@
       "Callaway Arts & Conference Center - 500 Callaway Park Way Callaway FL 32404",
       "Callaway Arts & Conference Center, 500 Callaway Pkwy, Callaway, FL 32404",
       "Callaway Arts & Conference Center, 500 Callaway Pkwy, Callaway, FL 32404 (typical; confirm on agenda)",
+      "City Council Chambers, City Hall, 17007 Panama City Beach Pkwy, Panama City Beach, FL 32413",
       "City Hall Council Chambers, 17007 Panama City Beach Pkwy, Panama City Beach, FL 32413",
       "Government Center - 840 W. 11th st. Panama City FL 32401",
       "Live Stream on City website - https://www.panamacity.gov/369/Live-Stream - Panama City FL 3240",
@@ -8139,7 +8140,8 @@
       "calendar:https://www.cityofcallaway.com/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar",
       "calendar:https://www.panamacity.gov/common/modules/iCalendar/iCalendar.aspx?catID=22&feed=calendar",
       "schedule:pattern observed in posted agendas (no published schedule found)",
-      "schedule:published schedule (mexicobeachfl.gov council-meetings page)"
+      "schedule:published schedule (mexicobeachfl.gov council-meetings page)",
+      "schedule:published schedule (pcbfl.gov/185/City-Council); Nov/Dec from the Granicus archive"
      ]
     },
     {
