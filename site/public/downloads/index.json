@@ -121,7 +121,7 @@
    "id": "votes",
    "title": "Recorded votes",
    "description": "Votes by the County Commission, School Board, city commissions and CRA boards since 2016, with how each member voted: hand-researched money votes plus every motion read from the official minutes.",
-   "rows": 1081,
+   "rows": 3789,
    "columns": [
     {
      "name": "date",
@@ -206,14 +206,24 @@
       "failed",
       "passed",
       "passed (roll call; tally not reported)",
-      "scheduled; outcome not yet published"
+      "scheduled; outcome not yet published",
+      "tabled",
+      "unclear",
+      "withdrawn"
      ]
     },
     {
      "name": "tally",
      "type": "string",
      "values": [
+      "0-0",
+      "0-1",
+      "0-2",
+      "0-3",
+      "0-5",
+      "1-2",
       "1-4",
+      "2-0",
       "2-2",
       "2-3",
       "3-0",
@@ -228,6 +238,7 @@
       "5-0 (minutes: 'carried unanimously upon roll-call vote')",
       "5-0 (minutes: 'carried unanimously')",
       "5-0 (minutes: 'carried unanimously'; Mayor Henderson attended by phone)",
+      "6-0",
       "not found",
       "unanimous",
       "unanimous (per news; names not listed)"
@@ -282,7 +293,8 @@
      "type": "string",
      "values": [
       "auto-checked",
-      "hand-checked"
+      "hand-checked",
+      "reviewed"
      ]
     },
     {
@@ -290,6 +302,7 @@
      "type": "string",
      "values": [
       "no_dissent_recorded",
+      "outcome_only",
       "roll_call",
       "unanimous"
      ]
@@ -356,7 +369,7 @@
    "id": "member-votes",
    "title": "Votes by member",
    "description": "One row per member per vote (long format), for tallying individual records.",
-   "rows": 5390,
+   "rows": 18418,
    "columns": [
     {
      "name": "date",
