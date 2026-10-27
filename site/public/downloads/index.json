@@ -7019,7 +7019,7 @@
    "id": "data-sources",
    "title": "Where the data comes from",
    "description": "Every source BayCounty.me takes records from, one row per source: the topic, the government it covers (or state and federal databases), the link, how we get it (automatic fetch, downloaded and read by hand, a state or federal bulk file, or a live lookup), how often, what we take from it, how we process it and the checks we run.",
-   "rows": 117,
+   "rows": 120,
    "columns": [
     {
      "name": "topic",
@@ -7043,6 +7043,7 @@
       "Property tax",
       "Public records contacts",
       "Redevelopment agencies (CRAs)",
+      "Restaurant inspections",
       "Sales tax projects",
       "Tourist tax",
       "Votes"
@@ -7069,6 +7070,7 @@
       "officials",
       "property-tax",
       "records",
+      "restaurants",
       "salaries",
       "sales-tax",
       "tourist-tax",
@@ -7175,6 +7177,7 @@
       "CRA spending is read from CRA annual reports, agendas, budgets and audits, one ledger line per payment or project. Tax increment comes from CRA reports, audits and budgets, split between the county and city by millage.",
       "Candidate lists, status and official results come from the Supervisor of Elections. Platforms come from candidates' own sites.",
       "Each government's agenda system is checked every 30 minutes on weekdays (when a notice email arrives) and swept twice a day. Every agenda, packet and minutes file is downloaded and fingerprinted; a changed file is kept as a new version. An AI model reads each new agenda into a list of items using only the agenda's own words (it is told not to guess). The meetings list combines the agenda system with the government's calendar; boards with no calendar get dates from their regular schedule, marked \"expected\".",
+      "Every food safety inspection of a restaurant, food truck, caterer or other food service license in the county since 2016 is read from the state's public inspection files, and the state's license list is read every day. New businesses come from the state corporate file: every filing since 2016 with a main address in the county.",
       "Every tax-exempt organization with a county address is pulled from IRS data, with every 990, 990-EZ and 990-PF e-filed since 2019 (board members, pay, grants, revenue). State charity registrations and state corporate filings are joined in.",
       "FEMA Public Assistance projects and applicants for disaster DR-4399 are downloaded from OpenFEMA every week.",
       "Infrastructure sales tax projects are downloaded from Bay County's map server every week and matched to the published project schedule.",
@@ -7211,6 +7214,7 @@
       "Panama City records were checked against 124 of 126 meetings' minutes and Panama City Beach against 38 of 50; Bay County and Lynn Haven come from agendas only. Known changes are noted on the record.",
       "Rates are checked against each government's adopted millage resolution where posted.",
       "The data is FEMA's own; nothing is retyped.",
+      "The state's inspection result codes are put in plain words. Inspections are joined to licenses by license number. A license holder is linked to a profile only when its name matches one company local governments paid or one Sunbiz filing.",
       "Totals are added back up and compared with the printed totals. Each year links to its document.",
       "Where a code-to-name match is inferred rather than published, it is labeled."
      ]
@@ -7238,6 +7242,7 @@
       "/public-money/tourist-tax",
       "/public-money/votes",
       "/records-request",
+      "/restaurants",
       "/updates"
      ]
     },
@@ -7503,7 +7508,7 @@
    "id": "data-source-sites",
    "title": "Websites our records cite",
    "description": "Every website cited by the records behind BayCounty.me, per topic, with how many distinct documents and pages from it the data links to. Counted from the data files at each build.",
-   "rows": 312,
+   "rows": 313,
    "columns": [
     {
      "name": "website",
@@ -7529,6 +7534,7 @@
       "Property tax",
       "Public records contacts",
       "Redevelopment agencies (CRAs)",
+      "Restaurant inspections",
       "Sales tax projects",
       "Tourist tax",
       "Votes"
@@ -7553,6 +7559,7 @@
       "nonprofits",
       "property-tax",
       "records",
+      "restaurants",
       "salaries",
       "sales-tax",
       "tourist-tax",
@@ -7580,7 +7587,7 @@
    "id": "site-menu",
    "title": "Site menu",
    "description": "Every link in the site's main menu, one row per link, in English and Spanish: the section and the question it answers, the link's place in the section, and the section's start-here page. place_id is the place the menu belongs to (fl-bay = Bay County), so a menu for another place sits beside it.",
-   "rows": 54,
+   "rows": 56,
    "columns": [
     {
      "name": "place_id",
@@ -7636,6 +7643,7 @@
      "values": [
       "Impuestos y tarifas",
       "Is it spent well?",
+      "Local businesses",
       "Local governments",
       "Show up, ask, reuse",
       "Su voz",
@@ -8687,6 +8695,522 @@
    "json": "/downloads/chamber-events.json",
    "csv": "/downloads/chamber-events.csv",
    "api": "/api/v1/datasets/chamber-events"
+  },
+  {
+   "id": "restaurants",
+   "title": "Restaurants and food service",
+   "description": "One row per restaurant, food truck, caterer or other food service license in the county: today's state license list plus every license inspected since 2016 that is no longer listed (licensed_now false). Name, kind, license holder (licensee, linked to its profile through licensee_entity_id when it matches a company or Sunbiz filing), location (city and ZIP only for food trucks, caterers and event vendors, whose license address can be a home), seats, when it opened (its first licensing inspection), and its inspection record: the latest result, the latest routine inspection, inspections and high-priority violations in the last 12 months, and emergency closures. From the Florida DBPR Division of Hotels and Restaurants.",
+   "rows": 1435,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "license_number",
+     "type": "string"
+    },
+    {
+     "name": "license_type",
+     "type": "string",
+     "values": [
+      "Caterer",
+      "Food truck or cart",
+      "Restaurant or food service",
+      "Temporary event vendor",
+      "Vending machine"
+     ]
+    },
+    {
+     "name": "kind",
+     "type": "string",
+     "values": [
+      "Caterer",
+      "Food truck",
+      "Food truck or cart",
+      "Hot dog cart",
+      "Restaurant or food service",
+      "Restaurant with seating",
+      "Takeout, no seating",
+      "Temporary event vendor",
+      "Vending machine"
+     ]
+    },
+    {
+     "name": "business_name",
+     "type": "string"
+    },
+    {
+     "name": "licensee",
+     "type": "string"
+    },
+    {
+     "name": "licensee_entity_id",
+     "type": "string"
+    },
+    {
+     "name": "address",
+     "type": "string"
+    },
+    {
+     "name": "city",
+     "type": "string",
+     "values": [
+      "Bradenton",
+      "Callaway",
+      "Cottondale",
+      "Crestview",
+      "Fountain",
+      "Inlet Beach",
+      "Laguna Beach",
+      "Lynn Haven",
+      "Marianna",
+      "Mexico Bch",
+      "Mexico Beach",
+      "Panama",
+      "Panama Cith Bch",
+      "Panama City",
+      "Panama City Bch",
+      "Panama City Beach",
+      "Parker",
+      "Santa Rosa Beach",
+      "Shalimar",
+      "Southport",
+      "Springfield",
+      "Sunnyside",
+      "Tyndall Afb",
+      "Youngstown"
+     ]
+    },
+    {
+     "name": "zip",
+     "type": "string",
+     "values": [
+      "32401",
+      "32402",
+      "32403",
+      "32404",
+      "32405",
+      "32407",
+      "32408",
+      "32409",
+      "32410",
+      "32412",
+      "32413",
+      "32414",
+      "32417",
+      "32431",
+      "32438",
+      "32444",
+      "32446",
+      "32456",
+      "32459",
+      "32461",
+      "32466",
+      "32536",
+      "32579"
+     ]
+    },
+    {
+     "name": "seats",
+     "type": "number"
+    },
+    {
+     "name": "licensed_now",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "license_expires",
+     "type": "string",
+     "values": [
+      "2025-06-01",
+      "2026-06-01",
+      "2027-04-28",
+      "2027-06-01",
+      "2028-06-01"
+     ]
+    },
+    {
+     "name": "risk_level",
+     "type": "string",
+     "values": [
+      "Risk Level 1",
+      "Risk Level 2",
+      "Risk Level 3 - HSP"
+     ]
+    },
+    {
+     "name": "opened",
+     "type": "string"
+    },
+    {
+     "name": "first_inspection",
+     "type": "string"
+    },
+    {
+     "name": "last_inspection",
+     "type": "string"
+    },
+    {
+     "name": "last_result",
+     "type": "string",
+     "values": [
+      "Allowed to reopen",
+      "Fine recommended (administrative complaint)",
+      "Follow-up after complaint: fixed",
+      "Follow-up visit: fixed",
+      "Follow-up visit: more time given",
+      "Follow-up visit: not fixed, fine recommended",
+      "Met inspection standards",
+      "Stayed closed: more time given",
+      "Warning, follow-up visit set"
+     ]
+    },
+    {
+     "name": "last_result_level",
+     "type": "string",
+     "values": [
+      "closed",
+      "fine",
+      "ok",
+      "warning"
+     ]
+    },
+    {
+     "name": "last_high_priority",
+     "type": "number"
+    },
+    {
+     "name": "last_routine_date",
+     "type": "string"
+    },
+    {
+     "name": "last_routine_violations",
+     "type": "number"
+    },
+    {
+     "name": "last_routine_high_priority",
+     "type": "number"
+    },
+    {
+     "name": "inspections",
+     "type": "number"
+    },
+    {
+     "name": "inspections_last_year",
+     "type": "number"
+    },
+    {
+     "name": "high_priority_last_year",
+     "type": "number"
+    },
+    {
+     "name": "closures",
+     "type": "number"
+    },
+    {
+     "name": "last_closure",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://www2.myfloridalicense.com/hotels-restaurants/public-records/",
+      "https://www2.myfloridalicense.com/sto/file_download/extracts/hrfood6.csv"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/restaurants.json",
+   "csv": "/downloads/restaurants.csv",
+   "api": "/api/v1/datasets/restaurants"
+  },
+  {
+   "id": "restaurant-inspections",
+   "title": "Restaurant inspections",
+   "description": "Every state food safety inspection of a restaurant, food truck, caterer or other food service license in the county since 2016, one row per visit: date, type (routine, complaint, licensing, or a follow-up visit when visit_number is over 1), the state's disposition and what it means in plain words (result, result_level ok, warning, fine or closed), violation counts by priority (high priority violations are the ones most likely to make someone sick), and the violation items cited. From the Florida DBPR Division of Hotels and Restaurants public records, refreshed daily.",
+   "rows": 17180,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "visit_id",
+     "type": "string"
+    },
+    {
+     "name": "license_number",
+     "type": "string"
+    },
+    {
+     "name": "business_name",
+     "type": "string"
+    },
+    {
+     "name": "city",
+     "type": "string",
+     "values": [
+      "Bradenton",
+      "Callaway",
+      "Cottondale",
+      "Crestview",
+      "Fountain",
+      "Inlet Beach",
+      "Laguna Beach",
+      "Lynn Haven",
+      "Marianna",
+      "Mexico Bch",
+      "Mexico Beach",
+      "Panama",
+      "Panama Cith Bch",
+      "Panama City",
+      "Panama City Bch",
+      "Panama City Bea",
+      "Panama City Beach",
+      "Parker",
+      "Santa Rosa Beach",
+      "Shalimar",
+      "Southport",
+      "Springfield",
+      "Sunnyside",
+      "Tyndall Afb",
+      "Youngstown"
+     ]
+    },
+    {
+     "name": "date",
+     "type": "string"
+    },
+    {
+     "name": "inspection_type",
+     "type": "string",
+     "values": [
+      "Complaint Full",
+      "Complaint Partial",
+      "Food-Licensing Inspection",
+      "Routine - Food",
+      "Routine - Lodging"
+     ]
+    },
+    {
+     "name": "visit_number",
+     "type": "number"
+    },
+    {
+     "name": "disposition",
+     "type": "string",
+     "values": [
+      "Admin. Complaint Callback Complied",
+      "Admin. Complaint Callback Not Complied",
+      "Administrative Complaint Time Extension",
+      "Administrative complaint recommended",
+      "Administrative determination recommended",
+      "Call Back - Admin. complaint recommended",
+      "Call Back - Complied",
+      "Call Back - Extension given, pending",
+      "Emergency Order Callback Complied",
+      "Emergency Order Callback Not Complied",
+      "Emergency Order Callback Time Extension",
+      "Emergency order recommended",
+      "Inspection Completed - No Further Action",
+      "Not available electronically",
+      "Seasonal (Active/Inactive)",
+      "Warning Issued"
+     ]
+    },
+    {
+     "name": "result",
+     "type": "string",
+     "values": [
+      "Allowed to reopen",
+      "Fine recommended (administrative complaint)",
+      "Follow-up after complaint: fixed",
+      "Follow-up after complaint: more time given",
+      "Follow-up after complaint: not fixed",
+      "Follow-up visit: fixed",
+      "Follow-up visit: more time given",
+      "Follow-up visit: not fixed, fine recommended",
+      "Met inspection standards",
+      "Not available electronically",
+      "Ordered closed (emergency order)",
+      "Referred for an administrative decision",
+      "Seasonal (Active/Inactive)",
+      "Stayed closed: more time given",
+      "Stayed closed: not fixed",
+      "Warning, follow-up visit set"
+     ]
+    },
+    {
+     "name": "result_level",
+     "type": "string",
+     "values": [
+      "closed",
+      "fine",
+      "ok",
+      "warning"
+     ]
+    },
+    {
+     "name": "high_priority",
+     "type": "number"
+    },
+    {
+     "name": "intermediate",
+     "type": "number"
+    },
+    {
+     "name": "basic",
+     "type": "number"
+    },
+    {
+     "name": "total_violations",
+     "type": "number"
+    },
+    {
+     "name": "violation_codes",
+     "type": "string"
+    },
+    {
+     "name": "violation_items",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://www2.myfloridalicense.com/hotels-restaurants/public-records/"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/restaurant-inspections.json",
+   "csv": "/downloads/restaurant-inspections.csv",
+   "api": "/api/v1/datasets/restaurant-inspections"
+  },
+  {
+   "id": "new-businesses",
+   "title": "New businesses",
+   "description": "Every company, nonprofit and partnership filed with the Florida Division of Corporations (Sunbiz) since 2016 whose main address is in the county, newest first: name, type, filing date, whether it is still active, city and ZIP (street addresses are left out because many small companies list a home), its latest annual report, its profile id, any restaurant it holds a license for, and a link to its state record, which names its officers and registered agent. Out-of-state companies count from the day they registered to do business in Florida. Updated when the state publishes its quarterly corporate file.",
+   "rows": 42048,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "doc_number",
+     "type": "string"
+    },
+    {
+     "name": "name",
+     "type": "string"
+    },
+    {
+     "name": "filing_type",
+     "type": "string",
+     "values": [
+      "Florida LLC",
+      "Florida corporation",
+      "Florida limited partnership",
+      "Florida nonprofit corporation",
+      "Out-of-state LLC",
+      "Out-of-state corporation",
+      "Out-of-state limited partnership",
+      "Out-of-state nonprofit"
+     ]
+    },
+    {
+     "name": "filed_date",
+     "type": "string"
+    },
+    {
+     "name": "filed_month",
+     "type": "string"
+    },
+    {
+     "name": "status",
+     "type": "string",
+     "values": [
+      "Active",
+      "Inactive"
+     ]
+    },
+    {
+     "name": "city",
+     "type": "string"
+    },
+    {
+     "name": "zip",
+     "type": "string",
+     "values": [
+      "32401",
+      "32402",
+      "32403",
+      "32404",
+      "32405",
+      "32406",
+      "32407",
+      "32408",
+      "32409",
+      "32410",
+      "32411",
+      "32412",
+      "32413",
+      "32417",
+      "32438",
+      "32444",
+      "32466"
+     ]
+    },
+    {
+     "name": "last_filing_date",
+     "type": "string"
+    },
+    {
+     "name": "latest_annual_report",
+     "type": "number"
+    },
+    {
+     "name": "entity_id",
+     "type": "string"
+    },
+    {
+     "name": "restaurants",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/new-businesses.json",
+   "csv": "/downloads/new-businesses.csv",
+   "api": "/api/v1/datasets/new-businesses"
   },
   {
    "id": "tax-districts",

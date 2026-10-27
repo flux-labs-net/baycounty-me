@@ -22,6 +22,7 @@ from correspondence_page import correspondence_page
 from shared_owners_page import shared_owners_page
 from nonprofits_page import nonprofits_page
 from chambers_page import chambers_page
+from restaurants_page import restaurants_page, new_businesses_page
 from business_ties_page import business_ties_page
 from updates import updates_page, rss, last_updated, nice as nice_date
 OUT = os.path.join(ROOT, 'public')
@@ -686,6 +687,10 @@ PAGES = [
      'Every nonprofit in Bay County: what each reports to the IRS, the government money and grants that reach it, and public officials who sit on its board.', lambda: nonprofits_page(OUT)),
     ('/chambers', 'Chambers of commerce',
      "Bay County's two chambers of commerce, the Bay County Chamber and the Panama City Beach Chamber: who sits on their boards and staff, upcoming events and programs, their IRS filings, the public money they get, and board members' businesses that do work for local governments.", lambda: chambers_page(OUT)),
+    ('/restaurants', 'Restaurant inspections',
+     'Every restaurant, food truck and caterer in Bay County and what state food safety inspectors found on every visit since 2016: violations, warnings, fines recommended and emergency closures.', lambda: restaurants_page(OUT)),
+    ('/new-businesses', 'New businesses',
+     'Every company, nonprofit and partnership filed with the state since 2016 with its main address in Bay County, by month, city and type, and every new restaurant, food truck and caterer.', lambda: new_businesses_page(OUT)),
     ('/connections/business-ties', "Officials' businesses",
      'Registered businesses and nonprofits that list a Bay County official, department leader or candidate, checked by hand, and where those businesses meet campaigns and public money.', lambda: business_ties_page(OUT)),
     ('/public-money/accountability', 'Accountability console: projects from budget to close-out',

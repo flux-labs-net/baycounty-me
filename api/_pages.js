@@ -22,6 +22,8 @@ const PAGES = {
   '/records-request': {none: 'a form that writes a records request'},
   '/correspondence': {endpoints: ['/correspondence']},
   '/connections/shared-owners': {datasets: ['shared-owner-groups', 'over-limit-gifts']},
+  '/restaurants': {datasets: ['restaurants', 'restaurant-inspections']},
+  '/new-businesses': {datasets: ['new-businesses', 'restaurants']},
   '/chambers': {datasets: ['chambers', 'chamber-leaders', 'chamber-events', 'nonprofit-payments', 'nonprofits']},
   '/connections/nonprofits': {datasets: ['nonprofits', 'nonprofit-board-members', 'nonprofit-board-businesses', 'nonprofit-payments', 'nonprofit-grants', 'nonprofit-officials', 'charity-registrations']},
   '/connections/business-ties': {datasets: ['official-businesses', 'official-business-links']},

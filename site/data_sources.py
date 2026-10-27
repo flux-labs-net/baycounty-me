@@ -69,6 +69,10 @@ TOPICS = [
      'Every tax-exempt organization with a county address is pulled from IRS data, with every 990, 990-EZ and 990-PF e-filed since 2019 (board members, pay, grants, revenue). '
      'State charity registrations and state corporate filings are joined in.',
      'Organizations are joined by EIN, then by exact name. Official-to-board matches are checked by hand before they are tagged.'),
+    ('restaurants', 'Restaurant inspections', '/restaurants',
+     "Every food safety inspection of a restaurant, food truck, caterer or other food service license in the county since 2016 is read from the state's public inspection files, and the state's license list is read every day. "
+     'New businesses come from the state corporate file: every filing since 2016 with a main address in the county.',
+     "The state's inspection result codes are put in plain words. Inspections are joined to licenses by license number. A license holder is linked to a profile only when its name matches one company local governments paid or one Sunbiz filing."),
     ('chambers', 'Chambers of commerce', '/chambers',
      "Board, staff and program lists are copied by hand from each chamber's website. Upcoming events are read every day from the Panama City Beach Chamber's public calendar feed; the Bay County Chamber's calendar platform turns automated readers away.",
      'Board members are joined to other local filings by first and last name, and to an official only where the chamber names their government post. Organizations are joined to governments, paid companies, nonprofits or one Sunbiz filing with the exact same name.'),
@@ -183,6 +187,9 @@ src('elections', 'state', 'Florida election night results (Bay County)', 'https:
 # --- Businesses and nonprofits ---------------------------------------------------------------------------------------
 src('businesses', 'state', 'Florida Division of Corporations (Sunbiz) quarterly data file', 'https://dos.fl.gov/sunbiz/other-services/data-downloads/', BULK, 'Quarterly', 'Every business with a county address, its officers, managers and registered agents')
 src('businesses', 'state', 'Sunbiz business search', 'https://search.sunbiz.org/', BY_HAND, 'As needed', 'Links to each business\'s state record, used to check matches')
+src('restaurants', 'state', 'Florida DBPR Division of Hotels and Restaurants inspection files', 'https://www2.myfloridalicense.com/hotels-restaurants/public-records/', AUTO_DAILY, 'Daily', 'Every food service inspection since 2016: date, type, result and violations cited')
+src('restaurants', 'state', 'Florida DBPR food service license list', 'https://www2.myfloridalicense.com/hotels-restaurants/public-records/', AUTO_DAILY, 'Daily', 'Every licensed restaurant, food truck and caterer: name, license holder, location, seats')
+src('restaurants', 'state', 'Florida Division of Corporations (Sunbiz) quarterly data file: new filings', 'https://dos.fl.gov/sunbiz/other-services/data-downloads/', BULK, 'Quarterly', 'New businesses filed since 2016 with a main address in the county')
 src('chambers', 'county', 'Bay County Chamber of Commerce website (board, staff and programs)', 'https://panamacity.org/board-of-directors/', BY_HAND, 'As boards change', 'Board, staff and past chairs since 2016 by name, title and organization; regular programs')
 src('chambers', 'county', 'Panama City Beach Chamber of Commerce website (board, staff and programs)', 'https://pcbeach.org/board-of-directors/', BY_HAND, 'As boards change', 'Board and staff by name, title and organization; regular programs')
 src('chambers', 'county', 'Panama City Beach Chamber events calendar feed', 'https://pcbeach.org/local-events/', AUTO_DAILY, 'Daily', 'Upcoming chamber and community events: title, time, venue and link')
@@ -265,7 +272,7 @@ FOLDER_TOPIC = {
     'agendas': 'meetings', 'meetings': 'meetings', 'votes': 'votes', 'contracts': 'contracts', 'budgets': 'budgets',
     'debt_audit': 'audits', 'money': 'audits', 'tax': 'property-tax', 'amendment3': 'property-tax', 'exemptions': 'property-tax',
     'salaries': 'salaries', 'campaign': 'campaign', 'elections': 'elections', 'sunbiz': 'businesses', 'careers': 'businesses',
-    'nonprofits': 'nonprofits', 'chambers': 'chambers', 'cra': 'cra', 'merged.json': 'cra', 'michael': 'michael', 'surtax': 'sales-tax',
+    'nonprofits': 'nonprofits', 'chambers': 'chambers', 'restaurants': 'restaurants', 'cra': 'cra', 'merged.json': 'cra', 'michael': 'michael', 'surtax': 'sales-tax',
     'tourism': 'tourist-tax', 'fees': 'fees', 'nearby': 'address', 'civic': 'records', 'projects': 'contracts',
 }
 SKIP_HOSTS = {'baycounty.me', 'www.baycounty.me', 'aptg.co'}

@@ -32,6 +32,8 @@ public enum SitePages {
         "/connections/shared-owners": .web("confirmed shared-owner groups and gifts over the limit, read live from /api/v1/datasets/shared-owner-groups and over-limit-gifts"),
         "/connections/nonprofits": .dataset("nonprofits"),
         "/chambers": .native("Chambers of commerce"),
+        "/restaurants": .dataset("restaurants"),
+        "/new-businesses": .dataset("new-businesses"),
         "/connections/business-ties": .web("confirmed official-to-business matches, read live from /api/v1/datasets/official-businesses and official-business-links"),
         "/correspondence": .web("published letters to officials, read live from /api/v1/correspondence"),
         "/alerts": .web("email alert sign-up; push alerts are planned for the app"),

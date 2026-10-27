@@ -152,6 +152,7 @@ suspend fun openScreenshotRoute(store: AppStore, nav: Nav, arg: String) {
         "salaries" to Route.Dataset("salary-positions"), "accountability" to Route.Accountability,
         "accproject" to Route.AccountabilityProject("pcb-fbr-seg3"), "budget" to Route.BudgetCompare("lh"),
         "craincrement" to Route.CRAIncrement, "chambers" to Route.Chambers, "pastelections" to Route.Dataset("campaign-history"),
+        "restaurants" to Route.Dataset("restaurants"), "newbusinesses" to Route.Dataset("new-businesses"),
     )
     simple[arg]?.let { nav.replace(it); return }
     when {

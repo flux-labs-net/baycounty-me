@@ -195,6 +195,10 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://baycounty.me/my-address"/>
   </url>
   <url>
+    <loc>https://baycounty.me/new-businesses</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/open-data</loc>
     <lastmod>2026-10-27</lastmod>
   </url>
@@ -2189,6 +2193,10 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://baycounty.me/records-request"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://baycounty.me/es/solicitar-registros"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://baycounty.me/records-request"/>
+  </url>
+  <url>
+    <loc>https://baycounty.me/restaurants</loc>
+    <lastmod>2026-10-20</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/search</loc>

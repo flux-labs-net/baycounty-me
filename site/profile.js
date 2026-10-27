@@ -119,6 +119,20 @@
   const rowHtml = c => `<tr><th scope="row">${c.other.page_url ? `<a href="${esc(c.other.page_url)}">${esc(c.other.name)}</a>` : esc(c.other.name)}${c.other.kind === 'person' && c.checked_by_hand ? ' <span class="pf-badge">Official</span>' : ''}<small>${esc(what(c))}${c.checked_by_hand ? ' · checked by hand' : ''}</small></th>
         <td class="wrap small">${esc(c.detail || '')}</td><td class="num">${c.amount ? money(c.amount) : ''}${c.records > 1 ? `<small>${c.records} records</small>` : ''}</td>
         <td class="small">${esc([c.first_date, c.last_date].filter((x, i, a) => x && a.indexOf(x) === i).join(' to '))}</td><td>${c.source_url ? `<a class="src" href="${esc(c.source_url)}" target="_blank" rel="noopener">Source</a>` : ''}</td></tr>`;
+  // a business's state filing (new-businesses) and the restaurants it holds a license for (restaurants)
+  const LEVEL = {ok: 'ok', warning: 'warn', fine: 'bad', closed: 'bad'};
+  function facts(e) {
+    let h = '';
+    const f = e.filing;
+    if (f) h += `<section class="pf-grp"><div class="sec-hd"><h3>State filing</h3><span class="muted">Florida Division of Corporations</span></div>
+      <p>${esc(f.filing_type)} filed ${esc(f.filed_date)}${f.city ? ', ' + esc(f.city) : ''}. ${f.status === 'Active' ? 'Active' : 'Inactive'}${f.latest_annual_report ? `; latest annual report ${esc(f.latest_annual_report)}` : ''}.
+      <a href="${esc(f.source_url)}" target="_blank" rel="noopener">State record</a> (officers and registered agent). <a href="/new-businesses">New businesses →</a></p></section>`;
+    const rs = e.restaurants || [];
+    if (rs.length) h += `<section class="pf-grp"><div class="sec-hd"><h3>Restaurant licenses</h3><span class="muted">${rs.length} · state food safety inspections</span></div>
+      <div class="tablewrap"><table class="tx-table vd-table" data-tt="off"><tbody>${rs.map(r => `<tr><td><a href="${esc(r.page_url)}">${esc(r.name)}</a><small>${esc([r.kind, r.city, r.licensed_now ? null : 'no longer licensed'].filter(Boolean).join(' · '))}</small></td>
+        <td class="wrap small"><span class="pf-res ${LEVEL[r.last_result_level] || ''}">${esc(r.last_result || 'Not inspected yet')}</span>${r.closures ? ` · ${r.closures} emergency closure${r.closures > 1 ? 's' : ''}` : ''}</td><td class="small">${esc(r.last_inspection || '')}</td></tr>`).join('')}</tbody></table></div></section>`;
+    return h;
+  }
   function list(d) {
     const box = document.getElementById('pfList'); if (!box) return;
     const groups = new Map();
@@ -131,7 +145,8 @@
       return `<section class="pf-grp"><div class="sec-hd"><h3>${esc(lbl.charAt(0).toUpperCase() + lbl.slice(1))}</h3><span class="muted">${rs.length.toLocaleString('en-US')}${tot ? ' · ' + money(tot) + ' in the records' : ''}</span></div>
         <div class="tablewrap"><table class="tx-table vd-table" data-tt="off" data-cols="|What|Amount|Dates|"><tbody>${rs.slice(0, SHOW).map(row).join('')}</tbody></table></div>
         ${rs.length > SHOW ? `<button type="button" class="pill pf-more" data-k="${esc(k)}">Show all ${rs.length.toLocaleString('en-US')}</button>` : ''}</section>`;
-    }).join('') || '<p class="muted">No connections in the records yet.</p>';
+    }).join('') || (d.entity.filing || d.entity.restaurants ? '' : '<p class="muted">No connections in the records yet.</p>');
+    box.insertAdjacentHTML('afterbegin', facts(d.entity));
     box.querySelectorAll('.pf-more').forEach(b => b.addEventListener('click', () => {
       const rs = groups.get(b.dataset.k), tb = b.previousElementSibling.querySelector('tbody');
       tb.innerHTML = rs.map(rowHtml).join('');

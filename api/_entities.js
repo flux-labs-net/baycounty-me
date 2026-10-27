@@ -194,6 +194,15 @@ async function getEntity(req, catalog, id) {
       source_url: sunbizUrl(null, id.slice(9))};
     live = await liveConnections(req, catalog, stub);
     if (live.length) { ent = stub; const r = live[0]; ent.name = r.from_id === id ? r.from_name : r.to_name; ent.source_url = sunbizUrl(ent.name, id.slice(9)); ent.connections = live.length; }
+    else {  // a business filed since 2016 (new-businesses) or one that holds a restaurant license, with no other connections yet
+      const doc = id.slice(9).toUpperCase();
+      const nb = (await rowsWhere(req, catalog, 'new-businesses', {doc_number: doc}).catch(() => []))[0];
+      const lic = nb ? [] : await rowsWhere(req, catalog, 'restaurants', {licensee_entity_id: id}).catch(() => []);
+      if (nb || lic.length) {
+        ent = {...stub, name: nb ? nb.name : lic[0].licensee, source_url: nb ? nb.source_url : sunbizUrl(lic[0].licensee, id.slice(9)),
+          subtitle: nb ? [nb.filing_type, nb.status === 'Active' ? null : 'inactive', nb.city].filter(Boolean).join(' · ') : 'Registered business'};
+      }
+    }
   }
   if (!ent) throw Object.assign(new Error(`No entity "${id}".`), {status: 404, expose: true});
   live = live || await liveConnections(req, catalog, ent);
@@ -201,6 +210,18 @@ async function getEntity(req, catalog, id) {
   if (ent.kind === 'person') {  // the official photo their government publishes (official-photos), when there is one
     const ph = (await rowsWhere(req, catalog, 'official-photos', {entity_id: id}).catch(() => []))[0];
     if (ph) ent = {...ent, photo: {url: ph.photo_url, credit: ph.credit, source_url: ph.source_url}};
+  }
+  if (ent.kind === 'business' || ent.kind === 'vendor' || ent.kind === 'nonprofit') {
+    // when it was filed with the state (new-businesses, since 2016) and the restaurants it holds a license for
+    if (ent.kind === 'business') {
+      const nb = (await rowsWhere(req, catalog, 'new-businesses', {doc_number: id.slice(9).toUpperCase()}).catch(() => []))[0];
+      if (nb) ent = {...ent, filing: {doc_number: nb.doc_number, filing_type: nb.filing_type, filed_date: nb.filed_date, status: nb.status, city: nb.city,
+        latest_annual_report: nb.latest_annual_report ?? null, source_url: nb.source_url}};
+    }
+    const lic = await rowsWhere(req, catalog, 'restaurants', {licensee_entity_id: id}).catch(() => []);
+    if (lic.length) ent = {...ent, restaurants: lic.map(r => ({license_number: r.license_number, name: r.business_name, kind: r.kind, city: r.city, licensed_now: r.licensed_now,
+      opened: r.opened || null, last_inspection: r.last_inspection || null, last_result: r.last_result || null, last_result_level: r.last_result_level || null,
+      closures: r.closures || 0, page_url: `/restaurants#r${r.license_number}`}))};
   }
   const all = mergeConfirmed(links, live);
   const labels = await personLabels(req, pm, all, id, source);
