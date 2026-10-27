@@ -8,7 +8,7 @@ settings:
   base:
     SWIFT_VERSION: "5.9"
     MARKETING_VERSION: "1.0"
-    CURRENT_PROJECT_VERSION: "10"   # bump on every TestFlight upload (9 is the last that may have been uploaded); About shows it
+    CURRENT_PROJECT_VERSION: "11"   # bump on every TestFlight upload (10 is the last that may have been uploaded); About shows it
     DEVELOPMENT_TEAM: Q8EM9CLKCK   # Flux Labs
     CODE_SIGN_STYLE: Automatic
 packages:
