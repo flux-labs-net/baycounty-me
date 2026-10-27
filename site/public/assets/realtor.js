@@ -344,73 +344,200 @@ $('delAcct').addEventListener('click', async () => {
    one unbreakable block, so a heading never sits alone at the bottom of a page. */
 function load(src) { return new Promise((res, rej) => { const s = document.createElement('script'); s.src = src; s.onload = res; s.onerror = () => rej(new Error('load ' + src)); document.head.appendChild(s); }); }
 async function pdfReady() { if (!window.pdfMake) await load(PDFMAKE); if (!window.pdfMake.vfs || !Object.keys(window.pdfMake.vfs).length) await load(VFS); }
+/* ---------- aerial photos for the PDF cover ----------
+   County 2020 aerial tiles (public, served with CORS to baycounty.me) stitched on a canvas, with the parcel outlined.
+   Returns JPEG data URLs; any failure just means a cover without a photo. */
+const AERIAL = 'https://gis.baycountyfl.gov/arcgis/rest/services/Aerials/Aerials2020/MapServer/tile';
+const PARCELS = 'https://gis.baycountyfl.gov/arcgis/rest/services/Admin_A12/MapServer/6/query';
+const merc = (lon, lat, z) => { const n = 256 * 2 ** z, s = Math.sin(lat * Math.PI / 180); return [(lon + 180) / 360 * n, (0.5 - Math.log((1 + s) / (1 - s)) / (4 * Math.PI)) * n]; };
+async function parcelRing(r) {
+  try {
+    const q = new URLSearchParams({f: 'json', geometry: `${r.lon},${r.lat}`, geometryType: 'esriGeometryPoint', inSR: 4326, spatialRel: 'esriSpatialRelIntersects', outFields: 'A1RENUM', returnGeometry: 'true', outSR: 4326});
+    const j = await (await fetch(`${PARCELS}?${q}`)).json();
+    return (((j.features || [])[0] || {}).geometry || {}).rings || null;
+  } catch (e) { return null; }
+}
+function tileImg(z, x, y) { return new Promise(res => { const i = new Image(); i.crossOrigin = 'anonymous'; i.onload = () => res(i); i.onerror = () => res(null); i.src = `${AERIAL}/${z}/${y}/${x}`; }); }
+async function aerialShot(r, rings, {w, h, z, pin, accent}) {
+  const [cx, cy] = merc(r.lon, r.lat, z), x0 = cx - w / 2, y0 = cy - h / 2, cv = document.createElement('canvas'); cv.width = w; cv.height = h;
+  const g = cv.getContext('2d'); g.fillStyle = '#dfe5ec'; g.fillRect(0, 0, w, h);
+  const jobs = [];
+  for (let tx = Math.floor(x0 / 256); tx <= Math.floor((x0 + w) / 256); tx++) for (let ty = Math.floor(y0 / 256); ty <= Math.floor((y0 + h) / 256); ty++)
+    jobs.push(tileImg(z, tx, ty).then(i => { if (i) g.drawImage(i, tx * 256 - x0, ty * 256 - y0); return !!i; }));
+  if (!(await Promise.all(jobs)).some(Boolean)) return null;
+  if (rings && !pin) {
+    g.beginPath(); rings.forEach(ring => ring.forEach(([lon, lat], k) => { const [px, py] = merc(lon, lat, z); g[k ? 'lineTo' : 'moveTo'](px - x0, py - y0); }));
+    g.closePath(); g.lineJoin = 'round'; g.strokeStyle = 'rgba(255,255,255,.95)'; g.lineWidth = Math.max(6, w / 220); g.stroke(); g.strokeStyle = accent; g.lineWidth = Math.max(3, w / 450); g.stroke();
+  }
+  if (pin) { const R = Math.max(10, w / 70); g.beginPath(); g.arc(w / 2, h / 2, R, 0, 7); g.fillStyle = accent; g.fill(); g.lineWidth = R / 2.5; g.strokeStyle = '#fff'; g.stroke(); }
+  try { return cv.toDataURL('image/jpeg', 0.84); } catch (e) { return null; }
+}
+async function aerials(r, accent) {
+  if (r.lat == null || r.lon == null) return {};
+  const rings = await parcelRing(r);
+  let z = 20;
+  if (rings) { // zoom so the parcel fills about half the close-up
+    const pts = rings.flat(), lons = pts.map(p => p[0]), lats = pts.map(p => p[1]);
+    for (z = 21; z > 15; z--) { const [a, b] = merc(Math.min(...lons), Math.max(...lats), z), [c, d] = merc(Math.max(...lons), Math.min(...lats), z); if (c - a < 800 && d - b < 330) break; }
+  }
+  // One shot per frame shape the covers use, so nothing is stretched.
+  const shapes = {hero: [1600, 748], strip: [1600, 481], mid: [1380, 800], square: [940, 908], wide: [900, 980, true]};
+  const out = {}; await Promise.all(Object.entries(shapes).map(async ([k, [w, h, pin]]) => { out[k] = await aerialShot(r, rings, {w, h, z: pin ? Math.max(15, z - 3) : z, pin, accent}); }));
+  return out;
+}
+const DEFAULT_COVER = 'editorial';
 const RB = t => String(t ?? '').replace(/→/g, 'to').replace(/[←-⇿☀-➿]/g, '');
-function buildDoc() {
+function buildDoc(opts = {}) {
+  // Clean brochure layout: brand band, the address, six at-a-glance numbers, then numbered sections whose facts sit
+  // in a two- or three-column grid. No links anywhere in the PDF: sources are named in plain text.
   const b = (ME && ME.brand) || {}, r = REPORT, P = color(b.color_primary, DEF.primary), A = color(b.color_accent, DEF.accent), FG = onColor(P);
-  const ink = '#161B24', muted = '#5A6372', line = '#E1E6ED', sunken = '#F3F6FA', W = 532;
-  const contact = [b.phone, b.email, b.website ? b.website.replace(/^https?:\/\//, '') : ''].filter(Boolean);
-  const who = [{text: b.agent_name || '', bold: true, fontSize: 12, color: FG}, b.title ? {text: b.title, fontSize: 8.5, color: FG} : null,
-    b.brokerage ? {text: b.brokerage, fontSize: 8.5, color: FG, bold: !b.logo} : null, ...contact.map(c => ({text: c, fontSize: 8.5, color: FG})),
-    b.license_no ? {text: 'License ' + b.license_no, fontSize: 7.5, color: FG, opacity: 0.85} : null].filter(Boolean);
-  // The logo sits on a white tile so any logo reads on any brand color.
-  const cells = [b.logo ? {table: {body: [[{image: b.logo, fit: [150, 46]}]]}, layout: {fillColor: () => '#FFFFFF', hLineWidth: () => 0, vLineWidth: () => 0, paddingLeft: () => 6, paddingRight: () => 6, paddingTop: () => 4, paddingBottom: () => 4}}
-    : {text: b.brokerage || 'Property report', color: FG, bold: true, fontSize: 15, margin: [0, 6, 0, 0]}, {stack: who, alignment: 'right'}];
-  const widths = [b.logo ? 170 : '*', '*'];
-  if (b.photo) { cells.push({image: b.photo, width: 54, height: 54}); widths.push(54); }
-  const band = {table: {widths, body: [cells]},
-    layout: {fillColor: () => P, hLineWidth: () => 0, vLineWidth: () => 0, paddingLeft: i => (i === 0 ? 14 : 8), paddingRight: i => (i === cells.length - 1 ? 14 : 4), paddingTop: () => 12, paddingBottom: () => 12}};
-  const sub = [r.jurisdiction, r.zip ? 'FL ' + r.zip : '', r.parcel_id ? 'Parcel ' + r.parcel_id : ''].filter(Boolean).join('  ·  ');
-  const meta = [r.prepared_for ? 'Prepared for ' + r.prepared_for : '', day(r.generated_at), b.agent_name ? 'by ' + b.agent_name : ''].filter(Boolean).join('  ·  ');
-  const T = tiles();
-  const tileRow = T.length ? {table: {widths: T.map(() => '*'), body: [T.map(([k, v, s]) => ({stack: [{text: k.toUpperCase(), fontSize: 6.5, color: muted, characterSpacing: 0.6}, {text: v, fontSize: 15, bold: true, color: ink, margin: [0, 2, 0, 1]}, {text: s, fontSize: 7, color: muted}]}))]},
-    layout: {fillColor: () => sunken, hLineWidth: i => (i === 0 ? 2 : 0), hLineColor: () => A, vLineWidth: i => (i > 0 && i < T.length ? 6 : 0), vLineColor: () => '#FFFFFF', paddingLeft: () => 10, paddingRight: () => 8, paddingTop: () => 8, paddingBottom: () => 8}, margin: [0, 12, 0, 4]} : null;
+  if (!(b.agent_name || b.brokerage || b.logo)) opts = {...opts, noDate: true};
+  const ink = '#161B24', muted = '#5A6372', faint = '#8A93A1', line = '#E3E7EE', sunken = '#F4F6F9', W = 532;
+  const none = {hLineWidth: () => 0, vLineWidth: () => 0, paddingLeft: () => 0, paddingRight: () => 0, paddingTop: () => 0, paddingBottom: () => 0};
+  const cap = (t, o = {}) => ({text: String(t).toUpperCase(), fontSize: 6.5, bold: true, color: faint, characterSpacing: 0.7, ...o});
+  const contact = [b.phone, b.email, b.website ? b.website.replace(/^https?:\/\//, '').replace(/\/$/, '') : ''].filter(Boolean);
+
+  // Brand band: logo (on a white tile so it reads on any color) or brokerage name, then the agent.
+  const who = [{text: b.agent_name || '', bold: true, fontSize: 11.5, color: FG}, b.title ? {text: b.title, fontSize: 8, color: FG, opacity: 0.9} : null,
+    contact.length ? {text: contact.join('   '), fontSize: 8, color: FG, margin: [0, 3, 0, 0]} : null,
+    b.license_no ? {text: 'License ' + b.license_no, fontSize: 7, color: FG, opacity: 0.8, margin: [0, 1, 0, 0]} : null].filter(Boolean);
+  const cells = [b.logo ? {table: {body: [[{image: b.logo, fit: [140, 40]}]]}, layout: {...none, fillColor: () => '#FFFFFF', paddingLeft: () => 7, paddingRight: () => 7, paddingTop: () => 5, paddingBottom: () => 5}}
+    : {text: b.brokerage || 'Property report', color: FG, bold: true, fontSize: 15, margin: [0, 8, 0, 0]}, {stack: who, alignment: 'right', margin: [0, 2, 0, 0]}];
+  const widths = [b.logo ? 'auto' : '*', '*'];
+  if (b.photo) { cells.push({image: b.photo, width: 50, height: 50}); widths.push(50); }
+  const band = {table: {widths, body: [cells]}, layout: {...none, fillColor: () => P, paddingLeft: i => (i === 0 ? 16 : 10), paddingRight: i => (i === cells.length - 1 ? 16 : 0), paddingTop: () => 14, paddingBottom: () => 14}};
+
+  const sub = [r.jurisdiction, r.zip ? 'FL ' + r.zip : '', r.parcel_id ? 'Parcel ' + r.parcel_id : ''].filter(Boolean).join('   ·   ');
+  const title = {margin: [0, 22, 0, 0], stack: [
+    {text: 'PROPERTY REPORT', fontSize: 7.5, bold: true, color: A, characterSpacing: 1.4},
+    {text: RB(r.address || ''), fontSize: 26, bold: true, color: ink, margin: [0, 4, 0, 3]},
+    {text: sub, fontSize: 9, color: muted},
+    {columns: [r.prepared_for ? {width: 'auto', stack: [cap('Prepared for'), {text: RB(r.prepared_for), fontSize: 9.5, bold: true, color: ink, margin: [0, 2, 0, 0]}]} : null,
+      opts.noDate ? null : {width: 'auto', stack: [cap('Date'), {text: day(r.generated_at), fontSize: 9.5, bold: true, color: ink, margin: [0, 2, 0, 0]}]},
+      b.agent_name ? {width: 'auto', stack: [cap('Prepared by'), {text: RB(b.agent_name + (b.brokerage ? ', ' + b.brokerage : '')), fontSize: 9.5, bold: true, color: ink, margin: [0, 2, 0, 0]}]} : null].filter(Boolean),
+     columnGap: 28, margin: [0, 12, 0, 0]},
+    b.tagline ? {text: RB(b.tagline), fontSize: 9.5, italics: true, color: P, margin: [0, 12, 0, 0]} : null].filter(Boolean)};
+
+  // At a glance: up to six numbers, three to a row.
+  const tax = S('tax'), hz = S('hazards'), pr = S('property'), sch = S('schools');
+  const G = [tax ? ['Estimated yearly tax', usd(tax.data.estimated_bill), 'property tax + flat fees'] : null,
+    pr && pr.data.market_value ? ['Market value', usd(pr.data.market_value), '2026 Property Appraiser roll'] : null,
+    hz ? ['Flood zone', hz.data.flood_zone || 'Not mapped', hz.data.high_risk ? 'high-risk flood area' : 'FEMA flood map'] : null,
+    hz ? ['Evacuation zone', hz.data.evacuation_zone || 'None', 'county evacuation map'] : null,
+    pr && pr.data.year_built ? ['Year built', String(pr.data.year_built), pr.data.effective_year && pr.data.effective_year !== pr.data.year_built ? 'effective ' + pr.data.effective_year : 'Property Appraiser'] : null,
+    pr && pr.data.heated_sqft ? ['Heated area', pr.data.heated_sqft.toLocaleString('en-US') + ' sq ft', pr.data.acres ? pr.data.acres.toLocaleString('en-US', {maximumFractionDigits: 2}) + '-acre lot' : ''] :
+      sch && sch.data.schools ? ['Zoned schools', String(sch.data.schools.length), 'elementary to high'] : null].filter(Boolean);
+  const glance = (cols = 3, big = 17) => { const rows = []; for (let i = 0; i < G.length; i += cols) rows.push(Array.from({length: cols}, (_, j) => G[i + j]
+      ? {stack: [cap(G[i + j][0], {color: muted}), {text: RB(G[i + j][1]), fontSize: big, bold: true, color: ink, margin: [0, 4, 0, 2]}, {text: G[i + j][2], fontSize: 7.5, color: muted}]} : {text: ''}));
+    return rows.length ? {table: {widths: Array(cols).fill('*'), body: rows},
+      layout: {fillColor: () => sunken, hLineWidth: (i, n) => (i === 0 ? 2.5 : i < n.table.body.length ? 6 : 0), hLineColor: i => (i === 0 ? A : '#FFFFFF'),
+        vLineWidth: i => (i > 0 && i < cols ? 6 : 0), vLineColor: () => '#FFFFFF', paddingLeft: () => 12, paddingRight: () => 10, paddingTop: () => 11, paddingBottom: () => 11}} : null; };
+
+  // Cover. Agents with branding get their band; everyone else gets a clean default led by the place name.
+  const img = opts.img || {}, branded = !!(b.agent_name || b.brokerage || b.logo);
+  const city = /^City of /.test(r.jurisdiction || '') ? r.jurisdiction.replace(/^City of /, '') : 'Bay County';
+  const cityLine = city === 'Bay County' ? 'Florida' : 'Bay County, Florida';
+  const credit = {text: 'Aerial photo: Bay County GIS, 2020. Parcel outline approximate.', fontSize: 6.5, color: faint, margin: [0, 4, 0, 0]};
+  const photo = (data, w, h) => data ? {image: data, width: w, height: h} : {canvas: [{type: 'rect', x: 0, y: 0, w, h, color: sunken}]};
+  const addr = (top = 22, size = 26) => ({margin: [0, top, 0, 0], stack: title.stack.slice(1).map((x, i) => (i === 0 ? {...x, fontSize: size, margin: [0, 0, 0, 3]} : x))});
+  const kicker = (t, c = A) => ({text: t.toUpperCase(), fontSize: 7.5, bold: true, color: c, characterSpacing: 1.4});
+  const style = branded ? 'branded' : (opts.style || DEFAULT_COVER);
+  let cover;
+  if (style === 'branded') {
+    cover = [band, {canvas: [{type: 'rect', x: 0, y: 0, w: W, h: 3, color: A}]}, img.strip ? {margin: [0, 14, 0, 0], stack: [photo(img.strip, W, 160), credit]} : null, title, glance() && {...glance(), margin: [0, 18, 0, 0]}];
+  } else if (style === 'aerial') { // full-bleed photo with the place name over it
+    const H = 286;
+    cover = [img.hero ? {image: img.hero, width: 612, height: H, absolutePosition: {x: 0, y: 0}} : {canvas: [{type: 'rect', x: 0, y: 0, w: 612, h: H, color: P}], absolutePosition: {x: 0, y: 0}},
+      {canvas: [{type: 'rect', x: 0, y: 0, w: 612, h: 74, color: '#0B1220', fillOpacity: 0.58}], absolutePosition: {x: 0, y: H - 74}},
+      {absolutePosition: {x: 40, y: H - 60}, stack: [{text: city.toUpperCase(), fontSize: 20, bold: true, color: '#FFFFFF', characterSpacing: 2.5}, {text: cityLine + '   ·   Property report', fontSize: 8.5, color: '#FFFFFF', opacity: 0.85, margin: [0, 3, 0, 0]}]},
+      {canvas: [{type: 'rect', x: 0, y: 0, w: 612, h: 4, color: A}], absolutePosition: {x: 0, y: H}},
+      {text: '', margin: [0, H - 44 + 6, 0, 0]}, {text: 'Aerial photo: Bay County GIS, 2020. Parcel outline approximate.', fontSize: 6.5, color: faint, alignment: 'right'},
+      addr(14), {...glance(), margin: [0, 20, 0, 0]}];
+  } else if (style === 'band') { // solid band with the place name, photo beside the numbers
+    cover = [{table: {widths: ['*', 'auto'], body: [[{stack: [{text: city, fontSize: 24, bold: true, color: '#FFFFFF'}, {text: cityLine.toUpperCase(), fontSize: 7.5, bold: true, color: '#FFFFFF', opacity: 0.8, characterSpacing: 1.4, margin: [0, 3, 0, 0]}]},
+        {stack: [{text: 'PROPERTY REPORT', fontSize: 7.5, bold: true, color: '#FFFFFF', characterSpacing: 1.4, alignment: 'right'}, {text: day(r.generated_at), fontSize: 9, color: '#FFFFFF', alignment: 'right', margin: [0, 3, 0, 0]}], margin: [0, 6, 0, 0]}]]},
+      layout: {...none, fillColor: () => P, paddingLeft: i => (i === 0 ? 18 : 0), paddingRight: i => (i === 1 ? 18 : 0), paddingTop: () => 18, paddingBottom: () => 18}},
+      {canvas: [{type: 'rect', x: 0, y: 0, w: W, h: 3, color: A}]}, addr(22),
+      {margin: [0, 20, 0, 0], columns: [{width: 236, stack: [photo(img.square, 236, 228), credit]}, {width: '*', stack: [glance(2, 15)].filter(Boolean)}], columnGap: 14}];
+  } else { // editorial (and the city-logo version of it): white page, place name as a wordmark, two photos side by side
+    const logoTile = style === 'logo' ? (opts.cityLogo ? {image: opts.cityLogo, fit: [44, 44], width: 44} : {width: 44, stack: [{canvas: [{type: 'ellipse', x: 22, y: 22, r1: 21, r2: 21, lineColor: line, lineWidth: 1, color: sunken}]}, {text: 'CITY\nLOGO', fontSize: 6, bold: true, color: faint, alignment: 'center', margin: [0, -29, 0, 0]}]}) : null;
+    cover = [{columns: [logoTile, {width: '*', stack: [{text: style === 'logo' ? (city === 'Bay County' ? 'Bay County' : 'City of ' + city) : city.toUpperCase(), fontSize: style === 'logo' ? 17 : 15, bold: true, color: P, characterSpacing: style === 'logo' ? 0 : 2.2}, {text: cityLine, fontSize: 8.5, color: muted, margin: [0, 2, 0, 0]}], margin: [0, logoTile ? 7 : 0, 0, 0]},
+        {width: 'auto', stack: [kicker('Property report'), {text: day(r.generated_at), fontSize: 8.5, color: muted, alignment: 'right', margin: [0, 3, 0, 0]}], margin: [0, logoTile ? 9 : 2, 0, 0]}].filter(Boolean), columnGap: 12},
+      {canvas: [{type: 'line', x1: 0, y1: 0, x2: W, y2: 0, lineWidth: 0.75, lineColor: line}, {type: 'rect', x: 0, y: -1.25, w: 48, h: 2.5, color: A}], margin: [0, 14, 0, 0]},
+      addr(20, 28),
+      {margin: [0, 18, 0, 0], columns: [{width: 338, stack: [photo(img.mid, 338, 196)]}, {width: '*', stack: [photo(img.wide, 180, 196)]}], columnGap: 14}, credit,
+      {...glance(), margin: [0, 18, 0, 0]}];
+  }
+
+  // Sections.
   const models = r.sections.map(s => (s.status === 'ok' || s.status === 'partial') && s.data ? sectionModel(s) : null).filter(Boolean);
-  const kvTable = m => m.kv.length ? {table: {widths: [128, '*'], body: m.kv.map(([k, v, o]) => [{text: k, color: muted, fontSize: 8.5, noWrap: true}, {text: RB(v), fontSize: 9, bold: !!o.bold, color: ink}])},
-    layout: {hLineWidth: (i, n) => (i > 0 && i < n.table.body.length ? 0.5 : 0), hLineColor: () => line, vLineWidth: () => 0, paddingLeft: () => 0, paddingRight: () => 6, paddingTop: () => 3.5, paddingBottom: () => 3.5}} : null;
-  const dataTable = m => m.table ? {table: {headerRows: 1, widths: ['*', 52, 70], body: [m.table.cols.map((c, i) => ({text: c, bold: true, fontSize: 8, color: muted, alignment: m.table.align[i], noWrap: true})),
-    ...m.table.rows.map(row => row.map((c, i) => ({text: RB(c), fontSize: 8.5, color: ink, alignment: m.table.align[i], noWrap: i > 0})))]},
-    layout: {hLineWidth: (i, n) => (i === 1 ? 0.8 : i > 1 && i < n.table.body.length ? 0.4 : 0), hLineColor: i => (i === 1 ? muted : line), vLineWidth: () => 0, paddingLeft: () => 0, paddingRight: () => 4, paddingTop: () => 3, paddingBottom: () => 3}, margin: [0, 8, 0, 0]} : null;
-  const listBlock = l => {
-    const it = l.items.map(i => ({stack: [{text: RB(i.t), fontSize: 9, bold: true, color: ink}, i.sub ? {text: RB(i.sub), fontSize: 7.5, color: muted, margin: [0, 1, 0, 0]} : null].filter(Boolean), margin: [0, 0, 8, 5]}));
-    const body = !it.length ? [{text: l.empty || 'None on file.', fontSize: 8.5, color: muted}]
-      : l.cols === 2 ? [{columns: [{stack: it.filter((_, i) => i % 2 === 0)}, {stack: it.filter((_, i) => i % 2 === 1)}], columnGap: 12}] : it;
-    return [{text: l.h, fontSize: 8.5, bold: true, color: P, margin: [0, 8, 0, 4]}, ...body];
+  const grid = m => {
+    if (!m.kv.length) return null;
+    const n = m.kv.every(([, v]) => v.length <= 26) && m.kv.length > 2 ? 3 : 2, rows = [];
+    for (let i = 0; i < m.kv.length; i += n) rows.push(Array.from({length: n}, (_, j) => { const c = m.kv[i + j];
+      return c ? {stack: [cap(c[0]), {text: RB(c[1]), fontSize: 9.5, bold: !!c[2].bold, color: ink, margin: [0, 2.5, 0, 0]}]} : {text: ''}; }));
+    return {table: {widths: Array(n).fill('*'), body: rows}, layout: {...none, hLineWidth: (i, nd) => (i > 0 && i < nd.table.body.length ? 0.5 : 0), hLineColor: () => line, paddingRight: () => 12, paddingTop: () => 7, paddingBottom: () => 7}};
   };
-  const sections = models.map(m => ({unbreakable: true, margin: [0, 14, 0, 0], stack: [
-    {table: {widths: ['*'], body: [[{text: m.title, fontSize: 12, bold: true, color: P}]]}, layout: {hLineWidth: i => (i === 1 ? 1.5 : 0), hLineColor: () => A, vLineWidth: () => 0, paddingLeft: () => 0, paddingRight: () => 0, paddingTop: () => 0, paddingBottom: () => 4}, margin: [0, 0, 0, 6]},
-    kvTable(m), dataTable(m), ...m.lists.flatMap(listBlock),
-    m.note ? {text: RB(m.note), fontSize: 7.5, color: muted, italics: true, margin: [0, 6, 0, 0]} : null,
-    m.sources.length ? {text: m.sources.flatMap((x, i) => [i ? {text: '   ·   ', color: muted} : null, {text: x.label, link: x.url, color: P, decoration: 'underline'}]).filter(Boolean), fontSize: 7.5, margin: [0, 4, 0, 0]} : null,
+  const dataTable = m => m.table ? {margin: [0, 10, 0, 0], table: {headerRows: 1, widths: ['*', 56, 72], body: [m.table.cols.map((c, i) => cap(c, {alignment: m.table.align[i], color: muted, noWrap: true})),
+    ...m.table.rows.map(row => row.map((c, i) => ({text: RB(c), fontSize: 8.5, color: ink, alignment: m.table.align[i], noWrap: i > 0})))]},
+    layout: {...none, fillColor: (i) => (i > 0 && i % 2 === 0 ? sunken : null), hLineWidth: i => (i === 1 ? 0.8 : 0), hLineColor: () => muted, paddingLeft: () => 6, paddingRight: () => 6, paddingTop: () => 4, paddingBottom: () => 4}} : null;
+  const listBlock = l => {
+    const it = l.items.map(i => ({stack: [{text: RB(i.t), fontSize: 9, bold: true, color: ink}, i.sub ? {text: RB(i.sub), fontSize: 7.5, color: muted, margin: [0, 1.5, 0, 0]} : null].filter(Boolean), margin: [0, 0, 10, 7]}));
+    const body = !it.length ? [{text: l.empty || 'None on file.', fontSize: 8.5, color: muted}]
+      : it.length > 3 || l.cols === 2 ? [{columns: [{stack: it.filter((_, i) => i % 2 === 0)}, {stack: it.filter((_, i) => i % 2 === 1)}], columnGap: 16}] : it;
+    return [cap(l.h, {color: P, margin: [0, 12, 0, 6]}), ...body];
+  };
+  const sections = models.map((m, k) => ({unbreakable: true, margin: [0, 24, 0, 0], stack: [
+    {columns: [{width: 26, text: String(k + 1).padStart(2, '0'), fontSize: 10, bold: true, color: A, margin: [0, 2.5, 0, 0]}, {text: m.title, fontSize: 13.5, bold: true, color: P}], margin: [0, 0, 0, 5]},
+    {canvas: [{type: 'line', x1: 0, y1: 0, x2: W, y2: 0, lineWidth: 0.75, lineColor: line}], margin: [0, 0, 0, 2]},
+    grid(m), dataTable(m), ...m.lists.flatMap(listBlock),
+    m.note ? {text: RB(m.note), fontSize: 7.5, color: muted, margin: [0, 9, 0, 0]} : null,
+    m.sources.length ? {text: [{text: 'Source: ', bold: true}, m.sources.map(x => x.label).join(', ')], fontSize: 7, color: faint, margin: [0, 4, 0, 0]} : null,
   ].filter(Boolean)}));
-  const disc = {unbreakable: true, margin: [0, 20, 0, 0], stack: [
-    {canvas: [{type: 'line', x1: 0, y1: 0, x2: W, y2: 0, lineWidth: 0.5, lineColor: line}]},
-    b.disclaimer ? {text: RB(b.disclaimer), fontSize: 7.5, color: muted, margin: [0, 8, 0, 0]} : null,
-    {text: DISCLAIMER, fontSize: 7, color: muted, margin: [0, 6, 0, 0]},
-    b.office_address ? {text: [b.brokerage, b.office_address].filter(Boolean).join(' · '), fontSize: 7.5, color: muted, margin: [0, 6, 0, 0]} : null].filter(Boolean)};
-  const footLine = [b.agent_name, b.brokerage, b.phone, b.email].filter(Boolean).join('  ·  ');
+
+  // Closing: the agent card, then the fine print.
+  const card = b.agent_name || b.brokerage ? {unbreakable: true, margin: [0, 28, 0, 0], table: {widths: b.photo ? [56, '*'] : ['*'], body: [[
+    ...(b.photo ? [{image: b.photo, width: 56, height: 56}] : []),
+    {stack: [cap('Questions about this home?', {color: A}), {text: b.agent_name || b.brokerage, fontSize: 12, bold: true, color: ink, margin: [0, 3, 0, 1]},
+      {text: [b.title, b.agent_name ? b.brokerage : ''].filter(Boolean).join(', '), fontSize: 8.5, color: muted},
+      contact.length ? {text: contact.join('   ·   '), fontSize: 8.5, color: ink, margin: [0, 4, 0, 0]} : null,
+      b.office_address ? {text: RB(b.office_address), fontSize: 8, color: muted, margin: [0, 2, 0, 0]} : null].filter(Boolean)}]]},
+    layout: {...none, fillColor: () => sunken, vLineWidth: i => (i === 0 ? 3 : 0), vLineColor: () => P, paddingLeft: i => (i === 0 ? 14 : 12), paddingRight: () => 12, paddingTop: () => 12, paddingBottom: () => 12}} : null;
+  const disc = {unbreakable: true, margin: [0, 18, 0, 0], stack: [
+    b.disclaimer ? {text: RB(b.disclaimer), fontSize: 7.5, color: muted, margin: [0, 0, 0, 6]} : null,
+    {text: DISCLAIMER, fontSize: 7, color: faint}].filter(Boolean)};
+
+  // Contents fills the rest of the cover; the sections start on page 2.
+  if (sections.length && !branded) { // a branded band leaves no room for it
+    const names = models.map((m, k) => ({columns: [{width: 18, text: String(k + 1).padStart(2, '0'), fontSize: 8, bold: true, color: A}, {text: m.title, fontSize: 8.5, color: ink}], margin: [0, 0, 0, 5]}));
+    const per = Math.ceil(names.length / 3);
+    cover.push({unbreakable: true, margin: [0, 24, 0, 0], stack: [cap('In this report', {color: muted, margin: [0, 0, 0, 8]}), {columns: [0, 1, 2].map(i => ({stack: names.slice(i * per, i * per + per)})), columnGap: 14}]});
+    sections[0].pageBreak = 'before';
+  }
+  const footLine = [b.agent_name, b.brokerage, b.phone].filter(Boolean).join('   ·   ');
   return {
-    pageSize: 'LETTER', pageMargins: [40, 40, 40, 46],
+    pageSize: 'LETTER', pageMargins: [40, 44, 40, 48],
     info: {title: `Property report: ${r.address || ''}`, author: b.agent_name || b.brokerage || 'BayCounty.me', subject: 'Address report', creator: 'BayCounty.me realtor console'},
-    defaultStyle: {font: 'Roboto', fontSize: 9, color: ink, lineHeight: 1.15},
-    header: page => page > 1 ? {columns: [{text: RB(r.address || ''), fontSize: 7.5, color: muted}, {text: b.brokerage || '', fontSize: 7.5, color: muted, alignment: 'right'}], margin: [40, 20, 40, 0]} : null,
-    footer: (page, count) => ({margin: [40, 14, 40, 0], columns: [{text: footLine || 'Property report', fontSize: 7, color: muted, noWrap: true}, {text: `Page ${page} of ${count}`, fontSize: 7, color: muted, alignment: 'right', width: 70}]}),
-    content: [band, {canvas: [{type: 'rect', x: 0, y: 0, w: W, h: 3, color: A}]},
-      {margin: [0, 16, 0, 0], stack: [{text: 'PROPERTY REPORT', fontSize: 7.5, bold: true, color: A, characterSpacing: 1.2}, {text: RB(r.address || ''), fontSize: 22, bold: true, color: ink, margin: [0, 2, 0, 2]}, {text: sub, fontSize: 9, color: muted}, {text: meta, fontSize: 8.5, color: muted, margin: [0, 3, 0, 0]},
-        b.tagline ? {text: RB(b.tagline), fontSize: 9, italics: true, color: P, margin: [0, 6, 0, 0]} : null].filter(Boolean)},
-      tileRow, ...sections, disc].filter(Boolean),
+    defaultStyle: {font: 'Roboto', fontSize: 9, color: ink, lineHeight: 1.18},
+    header: page => page > 1 ? {margin: [40, 18, 40, 0], stack: [
+      {columns: [{text: RB(r.address || ''), fontSize: 7.5, bold: true, color: ink}, {text: b.brokerage || 'Property report', fontSize: 7.5, color: muted, alignment: 'right'}]},
+      {canvas: [{type: 'rect', x: 0, y: 5, w: 24, h: 2, color: A}]}]} : null,
+    footer: (page, count) => ({margin: [40, 16, 40, 0], columns: [{text: footLine || RB(r.address || 'Property report'), fontSize: 7, color: faint, noWrap: true},
+      {text: [{text: 'Public records compiled by ', color: faint}, {text: 'BayCounty.me', bold: true, color: muted}, {text: `     ${page} / ${count}`, color: faint}], fontSize: 7, alignment: 'right', width: 'auto'}]}),
+    content: [...cover.filter(Boolean), ...sections, card, disc].filter(Boolean),
   };
 }
 $('pdfBtn').addEventListener('click', async () => {
   const btn = $('pdfBtn'); btn.disabled = true; const label = btn.innerHTML; btn.textContent = 'Making PDF…';
   try {
-    await pdfReady();
+    const [, img] = await Promise.all([pdfReady(), aerials(REPORT, color(((ME && ME.brand) || {}).color_accent, DEF.accent)).catch(() => ({}))]);
     const slug = String(REPORT.address || 'address').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-    pdfMake.createPdf(buildDoc()).download(`property-report-${slug}.pdf`);
+    pdfMake.createPdf(buildDoc({img})).download(`property-report-${slug}.pdf`);
   } catch (e) { $('runErr').textContent = 'The PDF couldn’t be made. Check your connection and try again.'; $('runErr').hidden = false; }
   btn.disabled = false; btn.innerHTML = label;
 });
 $('printBtn').addEventListener('click', () => window.print());
-window.BCRealtor = {buildDoc: () => buildDoc(), report: () => REPORT, pdfReady};
+window.BCRealtor = {buildDoc: o => buildDoc(o), aerials: () => aerials(REPORT, color(((ME && ME.brand) || {}).color_accent, DEF.accent)), report: () => REPORT, pdfReady};
 
 start();
 })();

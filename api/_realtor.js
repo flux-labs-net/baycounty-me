@@ -193,5 +193,23 @@ async function handler(req, res) {
   }
 }
 
+/* ---------- admin (api/admin.js tab "Realtor agents") ---------- */
+async function adminList() {
+  const rows = await q(`select a.email, a.status, a.created_at, a.last_login_at, a.login_count, a.reports_run, b.agent_name, b.brokerage, b.phone
+                        from realtor.agents a left join realtor.brands b on b.agent_id = a.id order by (a.status = 'pending') desc, a.created_at desc limit 500`);
+  const n = s => rows.filter(r => r.status === s).length;
+  return {signup: signupMode(), counts: {total: rows.length, active: n('active'), pending: n('pending'), paused: n('paused')}, rows};
+}
+// Add an agent by email, or change one's status (active, paused, pending).
+async function adminSet(b) {
+  const email = String(b.email || '').trim().toLowerCase(), status = String(b.status || 'active');
+  if (!EMAIL.test(email)) throw bad('Enter a valid email address.');
+  if (!['active', 'paused', 'pending'].includes(status)) throw bad('Unknown status.');
+  const [r] = await q(`insert into realtor.agents (email, status) values ($1, $2) on conflict (email) do update set status = excluded.status returning email, status`, [email, status]);
+  return r;
+}
+
 module.exports = handler;
+module.exports.adminList = adminList;
+module.exports.adminSet = adminSet;
 Object.assign(module.exports, {cleanBrand, image, website, makeToken, readToken, signupMode, COOKIE});

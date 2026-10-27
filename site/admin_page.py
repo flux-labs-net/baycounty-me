@@ -239,6 +239,7 @@ MENU = [
                                   ('records', 'Records requests', 'records')]),
     ('Data & email', 'amber', 'db', [('ingestion', 'Data health', 'syncs'), ('progress', 'Import progress', None), ('agendas', 'Agendas', 'agendas'),
                                      ('sent', 'Sent mail', None), ('emails', 'Email templates', None)]),
+    ('Accounts', 'teal', 'users', [('realtors', 'Realtor agents', None)]),
     ('API', 'gray', 'key', [('keys', 'Keys', None), ('analytics', 'Usage & request log', None), ('settings', 'Limits & activity', None)]),
 ]
 TITLES = {'todo': 'To do', **{t: label for _, _, _, items in MENU for t, label, _ in items}}
@@ -246,6 +247,7 @@ TITLES = {'todo': 'To do', **{t: label for _, _, _, items in MENU for t, label, 
 _ICONS = {
     'todo': '<path d="M9 6h11M9 12h11M9 18h11M4 6l1 1 2-2M4 12l1 1 2-2M4 18l1 1 2-2"/>',
     'shield': '<path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/>',
+    'users': '<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.6 3.2-5.5 6.5-5.5s5.9 1.9 6.5 5.5"/><path d="M16 4.5a3.5 3.5 0 010 7M18 14.8c2 .7 3.2 2.5 3.5 5.2"/>',
     'send': '<path d="M21 3L10 14"/><path d="M21 3l-7 18-4-7-7-4z"/>',
     'db': '<ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/>',
     'key': '<circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M16 7l3 3"/>',
@@ -520,6 +522,17 @@ def admin_page(out_dir):
         <select class="sel" id="bt-status" aria-label="Review status"><option value="unreviewed">Unreviewed</option><option value="">Any review status</option><option value="confirmed">Confirmed</option><option value="rejected">Rejected</option></select>
       </div>
       <div class="tw"><table class="at" id="bt-table" data-tt="off"><thead><tr><th class="pk"><input type="checkbox" data-bk-all aria-label="Select all shown"></th><th>Official</th><th>Sunbiz person</th><th>Businesses</th><th>Links</th><th>Review</th></tr></thead><tbody></tbody></table></div>
+    </section>
+
+    <section id="tab-realtors" class="pane" hidden>
+      <div class="banner"><div><b>Who can use the realtor console.</b> <span class="small muted">Agents sign in at <a href="/realtor" target="_blank" rel="noopener">/realtor</a> with an emailed link. With sign-up set to invite (REALTOR_SIGNUP=invite in Vercel), a new address waits here as <b>pending</b> until you turn it on. <b>Paused</b> agents can't sign in or print. Their branding and history stay private to them.</span></div></div>
+      <div class="tiles" id="ra-tiles"></div>
+      <div class="row" style="gap:8px;flex-wrap:wrap;margin:18px 0 8px">
+        <h2 class="h2 grow" style="margin:0">Agents</h2>
+        <input class="sel" id="ra-email" type="email" placeholder="agent@brokerage.com" aria-label="Agent email">
+        <button class="btn" id="ra-add" type="button">Add agent</button>
+      </div>
+      <div class="tw"><table class="at" id="ra-table" data-tt="off"><thead><tr><th>Agent</th><th>Brokerage</th><th>Joined</th><th>Last sign-in</th><th>Reports</th><th>Access</th></tr></thead><tbody></tbody></table></div>
     </section>
 
     <section id="tab-names" class="pane" hidden>

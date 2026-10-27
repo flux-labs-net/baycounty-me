@@ -139,7 +139,7 @@ function taxEstimate(D, parcel, cityName, ex, nav) {
   return {district: id, district_label: d.label, district_from_parcel: exact, total_millage: d.total, fiscal_year: D.fy,
     homestead: t.homestead, market_value: t.just, assessed_value: t.assessed, exemptions: t.exempt, taxable_school: t.school, taxable_other: t.non,
     lines, property_tax: Math.round(tax), fees, fees_total: Math.round(feeTotal), estimated_bill: Math.round(tax + feeTotal),
-    note: `Estimate: 2026 values × the ${D.fy} rates, plus the flat fees on the FY2026 bill. The Tax Collector's bill is the official amount. A sale removes the seller's homestead, so a buyer's bill is often higher.`};
+    note: `Estimate: 2026 values × the ${D.fy} rates, plus the flat fees on the FY2026 bill. The Tax Collector's bill is the amount owed. A sale removes the seller's homestead, so a buyer's bill is often higher.`};
 }
 
 /* ---------- officials ---------- */
