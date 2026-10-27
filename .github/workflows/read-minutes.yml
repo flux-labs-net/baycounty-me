@@ -15,6 +15,8 @@ name: Read minutes
 on:
   schedule:
     - cron: '41 */3 * * *'
+    # School Board minutes: BoardDocs refuses after 10-20 quick downloads, so fetch a few a day until all are in
+    - cron: '17 9 * * *'
   workflow_dispatch:
     inputs:
       step:
@@ -43,7 +45,7 @@ jobs:
       SUPABASE_REGION: ${{ vars.SUPABASE_REGION || 'us-east-2' }}
       SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
       SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
-      STEP: ${{ inputs.step || 'read' }}
+      STEP: ${{ inputs.step || (github.event.schedule == '17 9 * * *' && 'crawl') || 'read' }}
     steps:
       - name: Paused?
         id: gate
@@ -72,9 +74,9 @@ jobs:
       - name: Capture minutes files
         if: steps.gate.outputs.skip != 'true' && contains(env.STEP, 'crawl')
         env:
-          ONLY: ${{ inputs.only }}
+          ONLY: ${{ inputs.only || (github.event.schedule == '17 9 * * *' && 'schools') || '' }}
           FROM: ${{ inputs.from_year || '2016' }}
-          MAX: ${{ inputs.max || '2500' }}
+          MAX: ${{ inputs.max || (github.event.schedule == '17 9 * * *' && '10') || '2500' }}
         run: |
           args="--from $FROM --max $MAX"
           [ -n "$ONLY" ] && args="$args --only $ONLY"
