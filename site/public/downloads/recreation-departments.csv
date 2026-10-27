@@ -1,0 +1,12 @@
+place_id,gov_id,name,run_by,parks_url,programs_url,programs_label,as_of,source_url
+fl-bay,county,Bay County Parks & Recreation,Bay County,https://www.baycountyfl.gov/289/Parks-Recreation,https://www.baycountyfl.gov/296/Sports-Programs,Adult sports leagues,2026-10-27,https://www.baycountyfl.gov/289/Parks-Recreation
+fl-bay,pc,"Panama City Parks, Culture & Recreation",Panama City,https://www.panamacity.gov/845/Parks-Culture-and-Recreation,https://www.panamacity.gov/688/Programs-Events,Programs & events,2026-10-27,https://www.panamacity.gov/845/Parks-Culture-and-Recreation
+fl-bay,pcb,Panama City Beach Parks & Recreation,Panama City Beach,https://pcbfl.gov/departments/parks-recreation-department,https://pcbfl.gov/departments/parks-recreation-department,"Camps, leagues and classes",2026-10-27,https://pcbfl.gov/departments/parks-recreation-department
+fl-bay,lh,Lynn Haven Sports & Recreation,Lynn Haven,https://www.cityoflynnhaven.gov/495/parks-grounds,https://www.cityoflynnhaven.gov/496/Sports-Recreation,Sports & recreation,2026-10-27,https://www.cityoflynnhaven.gov/495/parks-grounds
+fl-bay,cw,Callaway Leisure Services,Callaway,https://www.cityofcallaway.com/,,,2026-10-27,https://www.cityofcallaway.com/
+fl-bay,sp,Springfield Parks & Recreation,Springfield,https://www.springfieldfl.net/parks-recreation,https://www.springfieldfl.net/parks-recreation,Parks & recreation,2026-10-27,https://www.springfieldfl.net/parks-recreation
+fl-bay,parker,Parker Parks & Ramps,Parker,https://cityofparker.com/residents/parks-ramps/,,,2026-10-27,https://cityofparker.com/residents/parks-ramps/
+fl-bay,mb,Mexico Beach Parks & Venues,Mexico Beach,https://mexicobeachfl.gov/visitors/public-parks-venues/,,,2026-10-27,https://mexicobeachfl.gov/visitors/public-parks-venues/
+fl-bay,,St. Andrews State Park,Florida State Parks,https://www.floridastateparks.org/parks-and-trails/st-andrews-state-park,,,2026-10-27,https://www.floridastateparks.org/parks-and-trails/st-andrews-state-park
+fl-bay,,Camp Helen State Park,Florida State Parks,https://www.floridastateparks.org/parks-and-trails/camp-helen-state-park,,,2026-10-27,https://www.floridastateparks.org/parks-and-trails/camp-helen-state-park
+fl-bay,,Pine Log State Forest,Florida Forest Service,https://www.fdacs.gov/Forest-Wildfire/Our-Forests/State-Forests/Pine-Log-State-Forest,,,2026-10-27,https://www.fdacs.gov/Forest-Wildfire/Our-Forests/State-Forests/Pine-Log-State-Forest

@@ -41,6 +41,13 @@ const TOOLS = [
      year: {type: 'integer', description: 'Fiscal year, the year it ends (2019 = Oct 2018 to Sep 2019; schools Jul to Jun)'},
      date: {type: 'string', description: 'A date (YYYY-MM-DD) instead of a year. Default: today'}}},
    annotations: {readOnlyHint: true}},
+  {name: 'zoned_schools', title: 'Zoned public schools',
+   description: 'The elementary, middle and high school zoned for a Bay County street address (or a latitude and longitude), with each school\'s grades taught, enrollment, latest Florida school grade and per-student spending, and a link to its entry on the Schools page. Zones are the school district\'s attendance zones from the county GIS server. Choice, magnet, charter and virtual schools take students from outside their zone, so tell the user to confirm with the district. Omit address and lat/lon to list every open public school.',
+   inputSchema: {type: 'object', additionalProperties: false, properties: {
+     address: {type: 'string', description: 'Street address with a house number, e.g. 1200 Harrison Ave, Panama City'},
+     lat: {type: 'number', description: 'Latitude, instead of address'},
+     lon: {type: 'number', description: 'Longitude, instead of address'}}},
+   annotations: {readOnlyHint: true}},
   {name: 'government_checkbook', title: 'Government checkbook',
    description: 'One government\'s payments in a fiscal year from its own check register: the total, payments by month, the top payees (with profile ids), by fund and payment method, and the largest payments. Payments to private individuals are counted but never named. Add payee to list every payment to one payee. Returns an empty governments list while nothing is published.',
    inputSchema: {type: 'object', additionalProperties: false, properties: {
@@ -253,6 +260,19 @@ async function call(req, name, a = {}) {
     const rows = await rowsOf(req, await load(req, '/downloads/index.json'), 'officeholder-terms');
     if (!a.gov) return {governments: O.governments(rows)};
     return {...O.inOffice(rows, a), note: 'Cite each holder\'s source link. Profiles: https://baycounty.me/people/<person_id>.'};
+  }
+  if (name === 'zoned_schools') {
+    const S = require('./_schools');
+    const c = await load(req, '/downloads/index.json');
+    const schools = await rowsOf(req, c, 'schools');
+    let lat = a.lat, lon = a.lon, matched = null;
+    if (a.address && (lat == null || lon == null)) {
+      const hits = await S.geocode(a.address);
+      if (!hits.length) return {error: `No address in the county matches "${String(a.address).slice(0, 120)}". Try the house number and street name only.`};
+      ({lat, lon} = hits[0]); matched = hits[0];
+    }
+    if (lat == null || lon == null) return {schools: S.summary(schools), page: `${SITE}/schools/`};
+    return {...S.zonedAt(await rowsOf(req, c, 'school-zones'), schools, lat, lon), matched_address: matched, page: `${SITE}/schools/`};
   }
   if (name === 'government_checkbook' || name === 'budget_vs_actual') {
     const O = require('./_openbooks');

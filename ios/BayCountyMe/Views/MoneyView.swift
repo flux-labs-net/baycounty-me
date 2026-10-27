@@ -31,6 +31,10 @@ struct MoneyView: View {
         .init(title: "CRA tax increment", symbol: "percent", detail: "Property tax that goes to the CRAs instead", route: .craIncrement),
         .init(title: "Sales tax projects", symbol: "road.lanes", detail: "Half-cent projects: promised vs built", route: .dataset("sales-tax-projects")),
         .init(title: "Hurricane Michael", symbol: "hurricane", detail: "Every FEMA rebuilding project", route: .dataset("fema-michael-projects")),
+        .init(title: "Development projects", symbol: "building.2", detail: "Site plans and subdivisions in review or approved", route: .dataset("development-projects")),
+        .init(title: "New homes permitted", symbol: "house", detail: "Each year, city by city, since 2016", route: .dataset("housing-permits")),
+        .init(title: "State road work", symbol: "road.lanes", detail: "FDOT contracts, contractors and costs", route: .dataset("road-contracts")),
+        .init(title: "FDOT five-year plan", symbol: "calendar.badge.clock", detail: "Road projects coming in the next five years", route: .dataset("road-work-program")),
     ]
     private let accountability: [Item] = [
         .init(title: "Accountability console", symbol: "checklist", detail: "Projects from budget to close-out, with open questions", route: .accountability),
