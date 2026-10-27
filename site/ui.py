@@ -309,33 +309,37 @@ def enhance(body, path):
 
 
 
-def dir_card(href, name, sub='', where='', count='', kinds='', govs='', n=0, av=None, tone=None, also='', city='', order=None, group=''):
+def dir_card(href, name, sub='', where='', count='', kinds='', govs='', n=0, av=None, tone=None, also='', city='', order=None, group='', status='', sub_group=''):
     """One card in a directory: initials (or an icon), the name (the whole card opens it), a line under it,
     where they serve (links of their own) and a small count. kinds/govs feed the chips and the government filter;
     city is a data_g() attribute when the page's government bar should hide cards of other governments.
-    order/group feed the 'gov' sort: the card's position and the heading it sits under (ui.js adds the headings)."""
+    order/group feed the 'gov' sort: the card's position and the heading it sits under (ui.js adds the headings);
+    sub_group is a smaller heading inside the group (Current, Past). status feeds directory(statuses=...)."""
     tone = tone or tone_of(name)
     sub_h = f'<small>{html.escape(sub)}</small>' if sub else ''
     where_h = f'<span class="ui-dc-w">{ico("city")}<span>{where}</span></span>' if where else ''
     count_h = f'<span class="ui-dc-n">{count}</span>' if count else ''
-    og = (f' data-o="{order}"' if order is not None else '') + (f' data-gh="{html.escape(group)}"' if group else '')
+    og = ((f' data-o="{order}"' if order is not None else '') + (f' data-gh="{html.escape(group)}"' if group else '')
+          + (f' data-sh="{html.escape(sub_group)}"' if sub_group else '') + (f' data-t="{html.escape(status)}"' if status else ''))
     return (f'<div class="ui-dc" data-n="{html.escape(name)}" data-s="{html.escape((name + ' ' + also + ' ' + sub).lower())}" data-k="{html.escape(kinds)}" data-gv="{html.escape(govs)}" data-c="{n}"{og}{city}>'
             f'{av or avatar(name, tone)}<span class="ui-dc-t"><a class="ui-dc-a" href="{html.escape(href)}">{html.escape(name)}</a>{sub_h}{where_h}</span>{count_h}</div>')
 
 
-def directory(cards, label, chips=(), govs=(), search='Search', sorts=(('c', 'Most connected'), ('az', 'A to Z')), csv=None, csv_head='name,role,serves,connections,link'):
+def directory(cards, label, chips=(), govs=(), search='Search', sorts=(('c', 'Most connected'), ('az', 'A to Z')), csv=None, csv_head='name,role,serves,connections,link', statuses=()):
     """A searchable card grid. chips: [(kind, label, count)], the first shows everyone. govs: [(key, label)].
     sorts: 'c' by the card's number, 'az' by last name, 'name' by the whole name, 'gov' by each card's order under a
     heading per group (dir_card order/group). The first sort is the default.
-    csv: the file name for Download CSV (each card's name, line, place and count). ui.js does the filtering."""
+    csv: the file name for Download CSV (each card's name, line, place and count). ui.js does the filtering.
+    statuses: [(key, label)] for a menu that filters on each card's status (dir_card status), the first shows all."""
     ch = ''.join(f'<button type="button" class="ui-chip" data-k="{k}" aria-pressed="{"true" if i == 0 else "false"}">{html.escape(t)} <b>{n}</b></button>'
                  for i, (k, t, n) in enumerate(chips))
     gs = ('<select data-dir-g aria-label="Government"><option value="">All governments</option>'
           + ''.join(f'<option value="{k}">{html.escape(t)}</option>' for k, t in govs) + '</select>') if govs else ''
+    st = ('<select data-dir-t aria-label="Current or past">' + ''.join(f'<option value="{k}">{html.escape(t)}</option>' for k, t in statuses) + '</select>') if statuses else ''
     so = ('<select data-dir-s aria-label="Sort">' + ''.join(f'<option value="{k}">{html.escape(t)}</option>' for k, t in sorts) + '</select>') if sorts else ''
     chips_h = f'<div class="ui-chips" role="group" aria-label="Show">{ch}</div>' if ch else ''
     csv_h = f'<button type="button" class="ui-link" data-dir-csv="{html.escape(csv)}" data-head="{html.escape(csv_head)}">{ico("download")}Download CSV</button>' if csv else ''
-    return (f'<div class="ui-dirbox"><div class="ui-find" data-report="skip"><label class="ui-q">{ico("search")}<input type="search" data-dir-q placeholder="{html.escape(search)}" aria-label="{html.escape(search)}"></label>{gs}{so}</div>'
+    return (f'<div class="ui-dirbox"><div class="ui-find" data-report="skip"><label class="ui-q">{ico("search")}<input type="search" data-dir-q placeholder="{html.escape(search)}" aria-label="{html.escape(search)}"></label>{gs}{st}{so}</div>'
             f'{chips_h}<div class="ui-dir-bar" data-report="skip"><span class="muted small" data-dir-count aria-live="polite"></span>{csv_h}</div>'
             f'<div class="ui-dir" data-ui-dir aria-label="{html.escape(label)}">{"".join(cards)}</div>'
             '<p class="muted ui-dir-none" data-dir-none hidden>No matches. Try fewer words or another filter.</p></div>')

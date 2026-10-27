@@ -243,6 +243,8 @@ GOV_ORDER = ['county', 'schools', 'sheriff', 'clerk', 'property_appraiser', 'tax
              'pc', 'pcb', 'lh', 'cw', 'sp', 'parker', 'mb']
 TITLE_RANKS = ['Mayor, chair or elected officer', 'Vice chair or mayor pro tem', 'Commissioner or board member', 'Manager or administrator',
                'Assistant manager, clerk or attorney', 'Department leader', '2026 candidate', 'Former official', 'Past candidate']
+PAST_RANK = 7  # ranks from here on (former officials, past candidates) are listed as Past; the rest as Current
+STATUS = {'current': 'Current', 'past': 'Past'}
 _OFFICERS = ('sheriff', 'tax collector', 'property appraiser', 'clerk of circuit court', 'supervisor of elections', 'superintendent')
 
 
@@ -267,6 +269,11 @@ def title_rank(line):
     if re.search(r'manager|administrator|^executive director(,|$)', t):
         return 3
     return 5
+
+
+def status_of(rank):
+    """'current' (in office, on staff or on the 2026 ballot) or 'past' (former officials and past candidates)."""
+    return 'past' if rank >= PAST_RANK else 'current'
 
 
 def last_name(name):
@@ -318,7 +325,8 @@ def people_index():
                 govs[g] = G.ents['gov:' + g]['name']
         cards.append(dir_card(f'/people/{p["id"]}', x['name'], x['subtitle'] or '', ' · '.join(gov_link(g) for g in gids),
                               f'{n} link{"s" if n != 1 else ""}', ' '.join(ks), ' '.join(gids), n, also=' '.join(x['aliases']),
-                              av=avatar(x['name'], tone_of(x['name']), photo=photo_of(p['id'])), order=pos, group=gname(home)))
+                              av=avatar(x['name'], tone_of(x['name']), photo=photo_of(p['id'])), order=pos, group=gname(home),
+                              status=status_of(rank), sub_group=STATUS[status_of(rank)]))
     chips = [('', 'Everyone', len(cards)), ('elected', 'Elected', kinds['elected']), ('candidate', '2026 candidates', kinds['candidate']), ('staff', 'Department leaders', kinds['staff']), ('past', 'Past candidates', kinds['past'])]
     k = lambda icon, tone, label, v, sub: f'<div class="kpi ui-k"><span class="kh">{ico(icon, tone)}<span class="eyebrow">{label}</span></span><span class="v">{v}</span><span class="s">{sub}</span></div>'
     return f'''<div class="page tax">
@@ -327,7 +335,7 @@ def people_index():
     <div class="stamp"><a class="pill" href="#co">County officers</a><a class="pill" href="#pay">Officials' pay</a><a class="pill" href="/connections">Connections network</a></div></header>
   <div class="kpis">{k("users", "blue", "Elected officials", kinds["elected"], f"On {len(govs)} boards and offices")}{k("flag", "salmon", "2026 candidates", kinds["candidate"], "On the November 3 ballot")}{k("briefcase", "teal", "Department leaders", kinds["staff"], "Managers, clerks and chiefs")}{k("network", "amber", "Connections", f"{total_links:,}", "Companies, donors, boards and votes")}</div>
   <section class="tx-sec"><div class="sec-hd"><h2 id="all">Everyone</h2><span class="muted">{len(cards)} people</span></div>
-    {directory(cards, "People", chips, sorted(govs.items(), key=lambda kv: kv[1]), "Search a name, seat or government", csv="baycounty-people", sorts=(('gov', 'By government'), ('c', 'Most connected'), ('az', 'A to Z')))}
+    {directory(cards, "People", chips, sorted(govs.items(), key=lambda kv: kv[1]), "Search a name, seat or government", csv="baycounty-people", sorts=(('gov', 'By government'), ('c', 'Most connected'), ('az', 'A to Z')), statuses=(('', 'Current and past'), ('current', 'Current only'), ('past', 'Past only')))}
     <p class="note">Only elected officials, department leaders and candidates have a page here. Nonprofit board members and businesses have a profile reached from the nonprofit, company or <a href="/connections">Connections</a> pages. Individual campaign donors are named only when they run a registered business; others are counted in totals.</p></section>
   {who_sections()}
 </div>

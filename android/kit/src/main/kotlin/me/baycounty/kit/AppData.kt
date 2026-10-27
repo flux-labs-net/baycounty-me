@@ -260,10 +260,13 @@ data class PeopleDirectory(val about: String? = null, val people: List<Person> =
         val gov: String? = null,
         val group: String? = null,
         val rank: Int? = null,
+        /** "current" (in office, on staff or on the 2026 ballot) or "past" (former officials and past candidates). */
+        val status: String? = null,
         val order: Int? = null,
         val roles: List<Role> = emptyList(),
     ) {
         val photoUrl: String? get() = photo?.let { BayCountyClient.SITE + it }
+        val isPast: Boolean get() = status?.let { it == "past" } ?: ((rank ?: 0) >= 7)
 
         @Serializable data class Role(val role: String? = null, val gov_id: String? = null, val seat: String? = null)
 
@@ -408,6 +411,16 @@ suspend fun <T> BayCountyClient.appData(name: String, serializer: KSerializer<T>
 }
 
 /** The People list's filter groups, the same chips as the site's /people page. */
+/**
+ * The People list's Current / Past filter, like the site's menu: current is in office, on staff or on the 2026 ballot;
+ * past is former officials and past candidates.
+ */
+enum class PeopleEra(val label: String) {
+    ALL("Current and past"), CURRENT("Current"), PAST("Past");
+
+    fun includes(p: PeopleDirectory.Person): Boolean = this == ALL || (this == PAST) == p.isPast
+}
+
 enum class PeopleKind(val key: String, val label: String) {
     EVERYONE("everyone", "Everyone"),
     ELECTED("elected", "Elected"),

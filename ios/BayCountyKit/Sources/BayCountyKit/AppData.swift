@@ -299,7 +299,10 @@ public struct PeopleDirectory: Codable, Sendable {
         public var gov: String? = nil
         public var group: String? = nil
         public var rank: Int? = nil
+        /// "current" (in office, on staff or on the 2026 ballot) or "past" (former officials and past candidates).
+        public var status: String? = nil
         public var order: Int? = nil
+        public var isPast: Bool { status.map { $0 == "past" } ?? ((rank ?? 0) >= 7) }
         public let roles: [Role]
 
         public var photoURL: URL? { photo.map { BayCountyClient.site.appendingPathComponent(String($0.dropFirst())) } }
@@ -493,6 +496,24 @@ extension BayCountyClient {
 }
 
 /// The People list's filter groups, the same chips as the site's /people page.
+/// The People list's Current / Past filter, like the site's menu: current is in office, on staff or on the 2026 ballot;
+/// past is former officials and past candidates.
+public enum PeopleEra: String, Sendable, CaseIterable, Identifiable {
+    case all, current, past
+    public var id: String { rawValue }
+    public var label: String {
+        switch self {
+        case .all: "Current and past"
+        case .current: "Current"
+        case .past: "Past"
+        }
+    }
+
+    public func includes(_ p: PeopleDirectory.Person) -> Bool {
+        self == .all || (self == .past) == p.isPast
+    }
+}
+
 public enum PeopleKind: String, Sendable, CaseIterable, Identifiable {
     case everyone, elected, candidate, staff, past
     public var id: String { rawValue }

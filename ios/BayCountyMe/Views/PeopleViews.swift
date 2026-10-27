@@ -70,18 +70,21 @@ struct PeopleView: View {
     @Environment(AppStore.self) private var store
     @State private var query = ""
     @State private var kind: PeopleKind = .everyone
+    @State private var era: PeopleEra = .all
 
     var body: some View {
         let q = query.lowercased()
         let all = store.people?.people ?? []
-        let people = all.filter { kind.includes($0) && (q.isEmpty || $0.name.lowercased().contains(q)) }
+        let people = all.filter { kind.includes($0) && era.includes($0) && (q.isEmpty || $0.name.lowercased().contains(q)) }
         let counts = Dictionary(uniqueKeysWithValues: PeopleKind.allCases.map { k in (k, all.filter { k.includes($0) }.count) })
+        let eraCounts = Dictionary(uniqueKeysWithValues: PeopleEra.allCases.map { e in (e, all.filter { e.includes($0) }.count) })
         PageScroll {
             PageHero(kicker: "Connections · People", title: "Officials and candidates",
                      subtitle: "Every elected official, department leader and local candidate since 2016 in these records. Rank-and-file employees appear only by job title, never by name.",
                      symbol: "person.3", tone: .teal)
             if !all.isEmpty {
                 ChipRow(chips: PeopleKind.allCases.map { (id: $0, label: $0.label) }, selected: kind, counts: counts) { kind = $0 }
+                ChipRow(chips: PeopleEra.allCases.map { (id: $0, label: $0.label) }, selected: era, counts: eraCounts) { era = $0 }
             }
             LazyVStack(alignment: .leading, spacing: 22) {
                 ForEach(PeopleDirectory.grouped(people), id: \.title) { g in
@@ -99,15 +102,25 @@ struct PeopleView: View {
         .task { await store.loadPeople() }
     }
 
+    /// One government: its heading, then Current and Past cards (each already in title, then last-name order).
     @ViewBuilder private func group(_ title: String, _ list: [PeopleDirectory.Person]) -> some View {
         if !list.isEmpty {
-            let sorted = list  // already in the site's order: title, then last name
             VStack(alignment: .leading, spacing: 10) {
                 HStack(alignment: .firstTextBaseline) {
                     Text(title).font(.headline)
                     Spacer()
                     Text("\(list.count)").font(.subheadline.monospacedDigit()).foregroundStyle(.secondary)
                 }
+                section("Current", list.filter { !$0.isPast })
+                section("Past", list.filter(\.isPast))
+            }
+        }
+    }
+
+    @ViewBuilder private func section(_ title: String, _ sorted: [PeopleDirectory.Person]) -> some View {
+        if !sorted.isEmpty {
+            VStack(alignment: .leading, spacing: 6) {
+                Text(title.uppercased()).font(.caption.weight(.semibold)).tracking(0.6).foregroundStyle(.secondary)
                 CardList {
                     ForEach(sorted) { p in
                         NavigationLink(value: Route.person(p.id)) {

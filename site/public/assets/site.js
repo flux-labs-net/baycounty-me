@@ -481,16 +481,16 @@ if (document.readyState === 'loading') document.addEventListener('DOMContentLoad
 (() => {
 const go = () => document.querySelectorAll('[data-ui-dir]').forEach(grid => {
   const root = grid.closest('section') || grid.parentNode;
-  const q = root.querySelector('[data-dir-q]'), g = root.querySelector('[data-dir-g]'), s = root.querySelector('[data-dir-s]');
+  const q = root.querySelector('[data-dir-q]'), g = root.querySelector('[data-dir-g]'), s = root.querySelector('[data-dir-s]'), t = root.querySelector('[data-dir-t]');
   const chips = [...root.querySelectorAll('.ui-chip[data-k]')], count = root.querySelector('[data-dir-count]'), none = root.querySelector('[data-dir-none]');
   const cards = [...grid.children];
   let kind = '';
   const words = t => (t || '').toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g, '').split(/\s+/).filter(Boolean);
   const run = () => {
-    const w = words(q && q.value), gv = g ? g.value : '';
+    const w = words(q && q.value), gv = g ? g.value : '', tv = t ? t.value : '';
     cards.forEach(c => {
       const ok = w.every(x => (c.dataset.s || '').normalize('NFKD').replace(/[\u0300-\u036f]/g, '').includes(x))
-        && (!kind || (' ' + c.dataset.k + ' ').includes(' ' + kind + ' ')) && (!gv || (' ' + c.dataset.gv + ' ').includes(' ' + gv + ' '));
+        && (!kind || (' ' + c.dataset.k + ' ').includes(' ' + kind + ' ')) && (!gv || (' ' + c.dataset.gv + ' ').includes(' ' + gv + ' ')) && (!tv || c.dataset.t === tv);
       c.classList.toggle('ui-off', !ok);
     });
     const by = s ? s.value : 'c';
@@ -500,23 +500,27 @@ const go = () => document.querySelectorAll('[data-ui-dir]').forEach(grid => {
     if (by === 'gov') groups();
     count_();
   };
-  // 'gov' sort: a heading (with how many are shown) above each government's cards; hidden when none of them are.
+  // 'gov' sort: a heading (with how many are shown) above each government's cards and a smaller one above each
+  // sub-group inside it (Current, Past); a heading hides when none of its cards are shown.
   const heads = [];
   const last = n => { const w = n.replace(/,/g, ' ').split(/\s+/).filter(x => x && !/^(jr|sr|ii|iii|iv)\.?$/i.test(x)); return (w.pop() || n).toLowerCase(); };
   const groups = () => {
-    let h = null, g = null;
+    let g = null, sg = null;
+    const head = (tag, cls, text, c) => {
+      const h = document.createElement(tag); h.className = cls; h.dataset.g = text;
+      h.innerHTML = '<span></span><b></b>'; h.firstChild.textContent = text;
+      grid.insertBefore(h, c); heads.push(h);
+    };
     [...grid.children].forEach(c => {
-      if (c.dataset.gh !== g) {
-        g = c.dataset.gh;
-        h = document.createElement('h3'); h.className = 'ui-dir-h'; h.dataset.g = g;
-        h.innerHTML = '<span></span><b></b>'; h.firstChild.textContent = g;
-        grid.insertBefore(h, c); heads.push(h);
-      }
+      if (c.dataset.gh !== g) { g = c.dataset.gh; sg = null; head('h3', 'ui-dir-h', g, c); }
+      if (c.dataset.sh && c.dataset.sh !== sg) { sg = c.dataset.sh; head('h4', 'ui-dir-h ui-dir-sub', sg, c); }
     });
   };
   const countHeads = () => heads.forEach(h => {
     let n = 0;
-    for (let c = h.nextElementSibling; c && !c.classList.contains('ui-dir-h'); c = c.nextElementSibling) if (!c.hidden && !c.classList.contains('ui-off')) n++;
+    const sub = h.classList.contains('ui-dir-sub');  // a group heading counts past its sub-headings, a sub-heading stops at the next heading
+    for (let c = h.nextElementSibling; c && !(c.classList.contains('ui-dir-h') && (sub || !c.classList.contains('ui-dir-sub'))); c = c.nextElementSibling)
+      if (!c.classList.contains('ui-dir-h') && !c.hidden && !c.classList.contains('ui-off')) n++;
     if (h.hidden !== !n) h.hidden = !n;  // only on change: the observer below watches hidden
     h.lastChild.textContent = n.toLocaleString('en-US');
   });
@@ -527,7 +531,7 @@ const go = () => document.querySelectorAll('[data-ui-dir]').forEach(grid => {
     if (none) none.hidden = n > 0;
   };
   chips.forEach(b => b.addEventListener('click', () => { kind = b.dataset.k; chips.forEach(x => x.setAttribute('aria-pressed', x === b)); run(); }));
-  [q, g, s].forEach(el => el && el.addEventListener(el.tagName === 'INPUT' ? 'input' : 'change', run));
+  [q, g, s, t].forEach(el => el && el.addEventListener(el.tagName === 'INPUT' ? 'input' : 'change', run));
   const csvBtn = root.querySelector('[data-dir-csv]');
   if (csvBtn) csvBtn.addEventListener('click', () => {
     const rows = cards.filter(c => !c.hidden && !c.classList.contains('ui-off')).map(c => { const a = c.querySelector('.ui-dc-a'); return [a.textContent.trim(), (c.querySelector('small') || {}).textContent || '', ((c.querySelector('.ui-dc-w') || {}).textContent || '').trim(), c.dataset.c, a.href]; });

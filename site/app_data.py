@@ -93,10 +93,11 @@ def people():
     (Elected official, Department leader, Candidate, Former official); `kinds` are the People page's filter chips.
     `photo` is the path of their official photo (dataset official-photos), or null for initials.
     `gov`, `group`, `rank` and `order` are the People list's order (people_pages.directory_order): the government they
-    are listed under and its name (the list's heading), their title rank (0 mayor or chair ... 8 past candidate) and their position; the list is in that order."""
+    are listed under and its name (the list's heading), their title rank (0 mayor or chair ... 8 past candidate), `status` (current, or past for former officials and past
+    candidates) and their position; the list is in that order."""
     import entity_graph as EG
     from ui import photo_of
-    from people_pages import _kinds, directory_order
+    from people_pages import _kinds, directory_order, status_of
     p = json.load(open(os.path.join(HERE, '..', 'data', 'entities', 'people.json')))
     G = EG.build()
     order = directory_order(p['people'])
@@ -107,7 +108,7 @@ def people():
         {'id': x['id'], 'name': x['name'], 'district': x.get('district'), 'gov_ids': x.get('gov_ids', []),
          'subtitle': ent(x['id']).get('subtitle') or None, 'label': ent(x['id']).get('label') or None, 'kinds': _kinds(x),
          'photo': photo_of(x['id']), 'gov': order[x['id']][0] or None,
-         'group': (G.ents.get('gov:' + order[x['id']][0]) or {}).get('name') or 'Other offices', 'rank': order[x['id']][1], 'order': order[x['id']][2],
+         'group': (G.ents.get('gov:' + order[x['id']][0]) or {}).get('name') or 'Other offices', 'rank': order[x['id']][1], 'status': status_of(order[x['id']][1]), 'order': order[x['id']][2],
          'roles': [{'role': r.get('role'), 'gov_id': r.get('gov_id'), 'seat': r.get('seat')} for r in x.get('roles', [])]}
         for x in sorted(p['people'], key=lambda x: order[x['id']][2])]}
 

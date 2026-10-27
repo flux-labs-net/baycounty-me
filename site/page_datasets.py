@@ -143,7 +143,7 @@ def people_directory():
     from app_data import people
     from people_pages import TITLE_RANKS
     return [{'person_id': p['id'], 'name': p['name'], 'district': p['district'], 'gov_ids': p['gov_ids'] or None, 'roles': p['roles'] or None,
-             'primary_gov_id': p['gov'], 'title_rank': p['rank'], 'title_group': TITLE_RANKS[p['rank']], 'sort_order': p['order']}
+             'primary_gov_id': p['gov'], 'title_rank': p['rank'], 'title_group': TITLE_RANKS[p['rank']], 'status': p['status'], 'sort_order': p['order']}
             for p in people()['people']]
 
 
@@ -746,7 +746,7 @@ DATASETS = [
     ('money-map-votes', 'Money map: votes on donors\' contracts', 'Recorded votes by an official on a contract with one of their own donors, and whether the gift came before or after.', money_map_votes),
     ('donor-contracts', 'Donors with government contracts', 'Each business donor matched to a local government contract, award or payment, with the match method and confidence.', donor_contracts),
     ('vendors-directory', 'Companies', 'Every company in BayCounty.me records, with its other spellings, the governments it works with and how many records name it.', vendors_directory),
-    ('people-directory', 'People', 'Elected officials, department leaders and 2026 candidates named in BayCounty.me records, with their roles. sort_order is the People page\'s order: by the government they are listed under (primary_gov_id), then title (title_rank 0 mayor, chair or elected officer to 8 past candidate, named in title_group), then last name.', people_directory),
+    ('people-directory', 'People', 'Elected officials, department leaders and 2026 candidates named in BayCounty.me records, with their roles. sort_order is the People page\'s order: by the government they are listed under (primary_gov_id), then title (title_rank 0 mayor, chair or elected officer to 8 past candidate, named in title_group), then last name. status is current (in office, on staff or on the 2026 ballot) or past (former officials and past candidates).', people_directory),
     ('glossary-terms', 'Glossary', 'Plain-English definitions of the government and tax terms used on the site.', glossary_terms),
     ('site-updates', 'What\'s new', 'Each change to the site\'s data and pages, newest first.', site_updates),
     ('savings-opportunities', 'Savings finder: opportunities', 'Places Bay County governments could spend less: the spending each touches, a low and high estimate with its stated assumption, the next step and the records still needed. Every figure is computed from the Accountability projects and the CRA ledger.', savings_opportunities),
