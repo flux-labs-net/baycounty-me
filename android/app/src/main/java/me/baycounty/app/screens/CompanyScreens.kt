@@ -210,7 +210,7 @@ fun DonorContractsScreen() {
     val all = store.donorContracts?.matches ?: emptyList()
     val list = if (sameOnly) all.filter { it.same_government_as_office == true } else all
     val groups = list.groupBy { it.vendor_id ?: it.contributor ?: "" }.map { (k, ms) ->
-        Group(k, ms.first().vendor ?: ms.first().contributor ?: k, ms.first().vendor_id, ms, ms.mapNotNull { it.contribution_amount }.sum())
+        Group(k, ms.first().vendor_name ?: ms.first().vendor ?: ms.first().contributor ?: k, ms.first().vendor_id, ms, ms.mapNotNull { it.contribution_amount }.sum())
     }.sortedByDescending { it.total }
     Screen("Donors with contracts", spacing = 20) {
         item {

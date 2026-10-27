@@ -6,14 +6,19 @@ Run by data/build.py after merged.json is written. Vendors:
   2. names with the same key are one vendor;
   3. SAME below joins keys that are the same firm (truncated register names, typos, d/b/a names), each with the evidence;
   4. business campaign contributors whose key matches a vendor become aliases of that vendor (never a new vendor);
-  5. pairs that look alike but were NOT joined are written to vendor_review.json for a person to check.
-Nothing is fuzzy-merged automatically.
+  5. spellings matched by name to the same Sunbiz filing are one firm (name_match.sunbiz_groups), and so are look-alike
+     pairs an admin confirmed on /admin (name_decisions.json);
+  6. look-alike names that are not joined ("Emeral Coast Striping" / "Emerald Coast Striping": one letter off, a plural,
+     a name cut short) are written to vendor_review.json look_alike_names for an admin to confirm or keep apart.
+Nothing is fuzzy-merged automatically. name_joins.json lists every join (also for donors that are not vendors), so the
+campaign pages group a company's gifts under one name (ids.canon_key).
 """
 import collections, json, os, re, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 import ids  # noqa: E402
+import name_match as NM  # noqa: E402
 import records  # noqa: E402
 
 K = ids.vkey
@@ -117,11 +122,28 @@ def slug(s):
 
 def build_vendors():
     recs = [r for r in records.all_records() if r['name']]
-    keymap = {}  # key -> group key
+    J, how = NM.Joins(), {}  # key -> group key; group key -> [(how, evidence)]
     for keys, disp, why in SAME:
         for k in keys:
-            keymap[k] = keys[0]
-    G = lambda k: keymap.get(k, k)
+            J.join(keys[0], k)
+    dec = NM.decisions()
+    apart_keys = {frozenset((a, b)) for a, b, _ in KEEP_APART} | {frozenset((d['a_key'], d['b_key'])) for d in dec['rejected']}
+    for d in dec['confirmed']:
+        if frozenset((d['a_key'], d['b_key'])) not in apart_keys:
+            r = J.join(d['a_key'], d['b_key'])
+            how.setdefault(r, []).append(('review', f'An admin confirmed "{d.get("a_name") or d["a_key"]}" and "{d.get("b_name") or d["b_key"]}" are one company'
+                                                    + (f' ({d["reviewed_on"]})' if d.get('reviewed_on') else '') + '.'))
+    sunbiz_skipped = []
+    for doc, (ent, ks) in sorted(NM.sunbiz_groups(K).items()):
+        keys = sorted(ks)
+        if any(frozenset((a, b)) in apart_keys for a in keys for b in keys if a < b):
+            sunbiz_skipped.append({'sunbiz_doc_number': doc, 'entity': ent, 'spellings': ks, 'why': 'two of these spellings are kept apart by hand'})
+            continue
+        for k in keys[1:]:
+            r = J.join(keys[0], k)
+        how.setdefault(J.find(keys[0]), []).append(('sunbiz', f'Spellings {", ".join(chr(34) + v[0] + chr(34) for v in ks.values())} were each matched by name to the same Florida '
+                                                              f'corporation filing (Sunbiz document {doc}{", " + ent if ent else ""}).'))
+    G = J.find
     clusters = collections.defaultdict(lambda: {'names': collections.Counter(), 'src': collections.Counter(), 'govs': set(), 'keys': set()})
     joint_raw = {}
     skipped = collections.Counter()
@@ -148,15 +170,20 @@ def build_vendors():
         c['names'][n] += 1; c['src'][r['src']] += 1; c['keys'].add(k)
         if r['gov_id']: c['govs'].add(r['gov_id'])
     for keys, disp, why in SAME:
-        if keys[0] in clusters:
-            clusters[keys[0]]['display'] = disp
-            clusters[keys[0]]['evidence'] = why
+        if G(keys[0]) in clusters:
+            clusters[G(keys[0])]['display'] = disp
+            clusters[G(keys[0])]['evidence'] = why
+    for r, ev in how.items():
+        if G(r) in clusters:
+            c = clusters[G(r)]
+            c['evidence'] = ' '.join(([c['evidence']] if c.get('evidence') else []) + [e for _, e in ev])
     # campaign spellings: aliases only, never new vendors
     camp = collections.defaultdict(set)
     for d in records.donations():
         k = G(K(d['name']))
         if k in clusters:
             camp[k].add(d['name'].strip())
+            clusters[k]['keys'].add(K(d['name']))
     # ids
     # site/vendors.py (the Contracts page's company list) is the source of company ids and names: a cluster whose spellings
     # resolve to one company there takes that id. When vendors.py joins two of these clusters, it wins (its merges are
@@ -226,10 +253,48 @@ def build_vendors():
             if any((x, y) in apart for x in vs for y in vs if x != y):
                 continue
             review['possible_matches_not_joined'].append({'shared_words': t, 'vendors': vs, 'names': {x: next(v['name'] for v in out if v['id'] == x) for x in vs}})
+    review['look_alike_names'] = look_alikes(out, recs, G, apart_keys, dec)
+    review['joined_by_sunbiz_filing'] = [{'sunbiz_doc_number': d, 'entity': e, 'spellings': ks} for d, (e, ks) in sorted(NM.sunbiz_groups(K).items())
+                                         if d not in {x['sunbiz_doc_number'] for x in sunbiz_skipped}]
+    review['sunbiz_join_skipped'] = sunbiz_skipped
+    review['decisions'] = {'confirmed': len(dec['confirmed']), 'rejected': len(dec['rejected'])}
+    joins = []
+    for r, ks in sorted(J.groups().items()):
+        joins.append({'key': r, 'keys': sorted(ks), 'how': sorted({h for h, _ in how.get(r, [])} | ({'hand'} if any(r == keys[0] for keys, _, _ in SAME) else set())),
+                      'evidence': ' '.join(e for _, e in how.get(r, [])) or next((w for keys, _, w in SAME if keys[0] == r), None)})
+    review['_joins'] = joins
     return {'about': 'One record per vendor (business or organization paid by a Bay County government, CRA or tourism agency). aliases are every spelling found in contracts, change orders, '
                      'emergency purchases, check registers (including 15-character truncations), TDC payments, the CRA ledger and business campaign contributions. Built by data/entities/build_entities.py; '
                      'hand-reviewed joins carry merge_evidence. Look-alike names that were not joined are in vendor_review.json.',
             'count': len(out), 'vendors': out, 'joint': joint, 'skipped': dict(skipped)}, review
+
+
+def look_alikes(vendors, recs, G, apart, dec):
+    """Look-alike business names that are not joined, for an admin to confirm or keep apart (/admin, Name matches).
+    Covers vendor spellings and business campaign contributors. Each pair: both keys, their spellings, where each name
+    appears, and why they look alike (name_match.like_reason)."""
+    seen = collections.defaultdict(lambda: {'names': collections.Counter(), 'records': collections.Counter(), 'gifts': 0, 'given': 0.0})
+    for r in recs:
+        n = r['name'].strip()
+        if records.NOT_NAMED.search(n) or PUBLIC.search(n) or ids.gov_id(n) or n in JOINT:
+            continue
+        x = seen[K(n)]; x['names'][n] += 1; x['records'][r['src']] += 1
+    for d in records.donations(('business', 'pac', 'other')):
+        n = d['name'].strip()
+        x = seen[K(n)]; x['names'][n] += 1; x['gifts'] += 1; x['given'] += d.get('amount') or 0
+    vid = {k: v['id'] for v in vendors for k in v['keys']}
+    decided = {frozenset((d['a_key'], d['b_key'])) for d in dec['confirmed'] + dec['rejected']}
+    out = []
+    for a, b, why in NM.like_pairs(k for k in seen if len(k) >= 6):
+        pair = frozenset((a, b))
+        if G(a) == G(b) or (vid.get(a) and vid.get(a) == vid.get(b)) or pair in apart or pair in decided:
+            continue
+        side = lambda k: {'key': k, 'names': [n for n, _ in seen[k]['names'].most_common(4)], 'vendor_id': vid.get(G(k)) or vid.get(k),
+                          'records': dict(seen[k]['records']) or None, 'gifts': seen[k]['gifts'] or None, 'given': round(seen[k]['given'], 2) or None}
+        out.append({'a': side(a), 'b': side(b), 'reason': why})
+    # pairs that touch a vendor or a gift with money first; then by name
+    out.sort(key=lambda p: (-(bool(p['a']['vendor_id']) + bool(p['b']['vendor_id'])), p['a']['key']))
+    return out
 
 
 def _pick_display(names):
@@ -359,9 +424,14 @@ def main():
     print('people:', p['count'], 'multi-government:', len(p['multi_government']))
     v, rev = build_vendors()
     json.dump(v, open(os.path.join(HERE, 'vendors.json'), 'w'), indent=1, ensure_ascii=False)
+    joins = rev.pop('_joins')
     json.dump(rev, open(os.path.join(HERE, 'vendor_review.json'), 'w'), indent=1, ensure_ascii=False)
+    json.dump({'about': 'Business name keys (ids.vkey) that are one company: hand-checked joins in build_entities.py SAME, spellings matched to the same Sunbiz filing, '
+                        'and look-alike pairs an admin confirmed on /admin. Read by ids.canon_key(). Built by build_entities.py.',
+               'count': len(joins), 'groups': joins}, open(os.path.join(HERE, 'name_joins.json'), 'w'), indent=1, ensure_ascii=False)
     ids.reset()
-    print('vendors:', v['count'], 'joint names:', len(v['joint']), 'skipped:', v['skipped'], 'review pairs:', len(rev['possible_matches_not_joined']))
+    print('vendors:', v['count'], 'joint names:', len(v['joint']), 'skipped:', v['skipped'], 'review pairs:', len(rev['possible_matches_not_joined']),
+          'look-alike names to review:', len(rev['look_alike_names']), 'name joins:', len(joins))
 
 
 if __name__ == '__main__':

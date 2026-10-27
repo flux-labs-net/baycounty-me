@@ -15,8 +15,8 @@
   "matched_entities": 729,
   "match_methods": {
    "exact": 1379,
-   "truncated_name": 157,
-   "vendor_alias": 53,
+   "truncated_name": 153,
+   "vendor_alias": 57,
    "plural_variant": 39
   }
  },
@@ -34476,7 +34476,7 @@
    "sunbiz_status": "Active",
    "sunbiz_filing_type": "DOMP",
    "sunbiz_principal_city": "Panama City",
-   "match_method": "truncated_name",
+   "match_method": "vendor_alias",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/INLAND%20CONSTRUCTION%20AND%20ENGINEERING%2C%20INC./Page1",
    "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=14&c=bay&ca=326&rellevel=4&committee=N"
@@ -50636,7 +50636,7 @@
    "sunbiz_status": "Active",
    "sunbiz_filing_type": "DOMP",
    "sunbiz_principal_city": "Panama City",
-   "match_method": "truncated_name",
+   "match_method": "vendor_alias",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/INLAND%20CONSTRUCTION%20AND%20ENGINEERING%2C%20INC./Page1",
    "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=26&c=bay&ca=641&rellevel=4&committee=N"
@@ -51576,7 +51576,7 @@
    "sunbiz_status": "Active",
    "sunbiz_filing_type": "DOMP",
    "sunbiz_principal_city": "Panama City",
-   "match_method": "truncated_name",
+   "match_method": "vendor_alias",
    "county": "bay",
    "source_url": "https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/SOUTHEASTERN%20OUTDOOR%20MANAGEMENT%2C%20INC./Page1",
    "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=26&c=bay&ca=641&rellevel=4&committee=N"

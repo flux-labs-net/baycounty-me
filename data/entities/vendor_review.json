@@ -485,5 +485,5740 @@
    ],
    "evidence": "Panama City CRA annual reports name the same volunteer home-repair program as \"World Changers / First Baptist Church of Panama City\" and \"World Changers Organization\"."
   }
- ]
+ ],
+ "look_alike_names": [
+  {
+   "a": {
+    "key": "breakingground",
+    "names": [
+     "Breaking Ground"
+    ],
+    "vendor_id": "breaking-ground",
+    "records": {
+     "contract": 1
+    },
+    "gifts": null,
+    "given": null
+   },
+   "b": {
+    "key": "breaknground",
+    "names": [
+     "Break-N-Ground LLC"
+    ],
+    "vendor_id": "break-n-ground",
+    "records": {
+     "contract": 1
+    },
+    "gifts": null,
+    "given": null
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "destinations",
+    "names": [
+     "Destinations Florida",
+     "Destinations Florida, Inc"
+    ],
+    "vendor_id": "destinations-florida",
+    "records": {
+     "tdc": 3
+    },
+    "gifts": null,
+    "given": null
+   },
+   "b": {
+    "key": "destinationsinternational",
+    "names": [
+     "Destinations International"
+    ],
+    "vendor_id": "destinations-international",
+    "records": {
+     "tdc": 2
+    },
+    "gifts": null,
+    "given": null
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "hallcontractingconstruction",
+    "names": [
+     "Hall Contracting and Construction, Inc.",
+     "Hall Contracting & Construction, Inc."
+    ],
+    "vendor_id": "hall-contracting",
+    "records": {
+     "contract": 2,
+     "register": 1
+    },
+    "gifts": null,
+    "given": null
+   },
+   "b": {
+    "key": "hallscontractingconstruction",
+    "names": [
+     "Hall's Contracting and Construction"
+    ],
+    "vendor_id": "hall-s-contracting-construction",
+    "records": {
+     "contract": 1
+    },
+    "gifts": null,
+    "given": null
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "quickbookspayroll",
+    "names": [
+     "QuickBooks Payroll"
+    ],
+    "vendor_id": "quickbooks-payroll",
+    "records": {
+     "tdc": 1
+    },
+    "gifts": null,
+    "given": null
+   },
+   "b": {
+    "key": "quickbookspayrollservice",
+    "names": [
+     "QuickBooks Payroll Service"
+    ],
+    "vendor_id": "quickbooks-payroll-service",
+    "records": {
+     "tdc": 1
+    },
+    "gifts": null,
+    "given": null
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "ustravelassoc",
+    "names": [
+     "US Travel Assoc"
+    ],
+    "vendor_id": "us-travel-assoc",
+    "records": {
+     "tdc": 1
+    },
+    "gifts": null,
+    "given": null
+   },
+   "b": {
+    "key": "ustravelassociation",
+    "names": [
+     "U.S. Travel Association"
+    ],
+    "vendor_id": "u-s-travel-association",
+    "records": {
+     "tdc": 1
+    },
+    "gifts": null,
+    "given": null
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "baldwincontain",
+    "names": [
+     "BALDWIN CONTAIN"
+    ],
+    "vendor_id": "baldwin-contain",
+    "records": {
+     "register": 1
+    },
+    "gifts": null,
+    "given": null
+   },
+   "b": {
+    "key": "baldwincontainer",
+    "names": [
+     "Baldwin Container CO",
+     "Baldwin Container Company LLC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 1500.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "beachmovementeventmanagemen",
+    "names": [
+     "Beach Movement Event Managemen"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "b": {
+    "key": "beachmovementeventmanagement",
+    "names": [
+     "Beach Movement Event Management"
+    ],
+    "vendor_id": "beach-movement-event-management",
+    "records": {
+     "tdc": 1
+    },
+    "gifts": null,
+    "given": null
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "emeraldcoastac",
+    "names": [
+     "Emerald Coast A/C"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 600.21
+   },
+   "b": {
+    "key": "emeraldcoastapa",
+    "names": [
+     "Emerald Coast APA"
+    ],
+    "vendor_id": "emerald-coast-apa",
+    "records": {
+     "tdc": 1
+    },
+    "gifts": null,
+    "given": null
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "emeraldcoastcruizin",
+    "names": [
+     "Emerald Coast Cruizin, LLC"
+    ],
+    "vendor_id": "emerald-coast-cruizin",
+    "records": {
+     "tdc": 1
+    },
+    "gifts": null,
+    "given": null
+   },
+   "b": {
+    "key": "emeraldcoastcurizin",
+    "names": [
+     "Emerald Coast Curizin'"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 300.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "extremelandclearing",
+    "names": [
+     "Extreme Land Clearing",
+     "Extreme Land Clearing, LLC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 5,
+    "given": 2250.0
+   },
+   "b": {
+    "key": "extremelandclearingexcavation",
+    "names": [
+     "Extreme Land Clearing & Excavation LLC"
+    ],
+    "vendor_id": "extreme-land-clearing-excavation",
+    "records": {
+     "contract": 1
+    },
+    "gifts": null,
+    "given": null
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "extremelandclearingexc",
+    "names": [
+     "Extreme Land Clearing & Exc."
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "b": {
+    "key": "extremelandclearingexcavation",
+    "names": [
+     "Extreme Land Clearing & Excavation LLC"
+    ],
+    "vendor_id": "extreme-land-clearing-excavation",
+    "records": {
+     "contract": 1
+    },
+    "gifts": null,
+    "given": null
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "extremelandclearingexcav",
+    "names": [
+     "Extreme Land Clearing & Excav"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "extremelandclearingexcavation",
+    "names": [
+     "Extreme Land Clearing & Excavation LLC"
+    ],
+    "vendor_id": "extreme-land-clearing-excavation",
+    "records": {
+     "contract": 1
+    },
+    "gifts": null,
+    "given": null
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "extremelandclearingexcava",
+    "names": [
+     "Extreme Land Clearing & Excava"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 4,
+    "given": 3500.0
+   },
+   "b": {
+    "key": "extremelandclearingexcavation",
+    "names": [
+     "Extreme Land Clearing & Excavation LLC"
+    ],
+    "vendor_id": "extreme-land-clearing-excavation",
+    "records": {
+     "contract": 1
+    },
+    "gifts": null,
+    "given": null
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "extremelandclearingexcavation",
+    "names": [
+     "Extreme Land Clearing & Excavation LLC"
+    ],
+    "vendor_id": "extreme-land-clearing-excavation",
+    "records": {
+     "contract": 1
+    },
+    "gifts": null,
+    "given": null
+   },
+   "b": {
+    "key": "extremelandclearingexcvtion",
+    "names": [
+     "Extreme Land Clearing&Excvtion"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "gaccontractor",
+    "names": [
+     "GAC Contractor"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "gaccontractors",
+    "names": [
+     "GAC Contractors",
+     "GAC Contractors, Inc.",
+     "GAC CONTRACTORS",
+     "GAC Contractors Inc"
+    ],
+    "vendor_id": "gac-contractors",
+    "records": {
+     "cra": 3
+    },
+    "gifts": 19,
+    "given": 19000.0
+   },
+   "reason": "plural"
+  },
+  {
+   "a": {
+    "key": "gaccontractors",
+    "names": [
+     "GAC Contractors",
+     "GAC Contractors, Inc.",
+     "GAC CONTRACTORS",
+     "GAC Contractors Inc"
+    ],
+    "vendor_id": "gac-contractors",
+    "records": {
+     "cra": 3
+    },
+    "gifts": 19,
+    "given": 19000.0
+   },
+   "b": {
+    "key": "gaccontractorsgulfasphalt",
+    "names": [
+     "GAC Contractors/Gulf Asphalt"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "gaccontractors",
+    "names": [
+     "GAC Contractors",
+     "GAC Contractors, Inc.",
+     "GAC CONTRACTORS",
+     "GAC Contractors Inc"
+    ],
+    "vendor_id": "gac-contractors",
+    "records": {
+     "cra": 3
+    },
+    "gifts": 19,
+    "given": 19000.0
+   },
+   "b": {
+    "key": "gaccontrators",
+    "names": [
+     "GAC Contrators"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "gtsentertainment",
+    "names": [
+     "GTS Entertainment"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "gtsentertainmentgroup",
+    "names": [
+     "GTS Entertainment Group, Inc"
+    ],
+    "vendor_id": "gts-entertainment-group",
+    "records": {
+     "tdc": 1
+    },
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "hallscontracting",
+    "names": [
+     "Halls Contracting",
+     "Hall's Contracting LLC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 1500.0
+   },
+   "b": {
+    "key": "hallscontractingconstruction",
+    "names": [
+     "Hall's Contracting and Construction"
+    ],
+    "vendor_id": "hall-s-contracting-construction",
+    "records": {
+     "contract": 1
+    },
+    "gifts": null,
+    "given": null
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "inlandconstruction",
+    "names": [
+     "Inland Construction",
+     "Inland Construction Inc",
+     "Inland Construction inc",
+     "Inland Construction Inc."
+    ],
+    "vendor_id": "inland",
+    "records": {
+     "contract": 1
+    },
+    "gifts": 5,
+    "given": 4250.0
+   },
+   "b": {
+    "key": "inlandconstructionengineeringice",
+    "names": [
+     "Inland Construction Engineering ICE, Inc"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 750.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "inlandconstructionengineer",
+    "names": [
+     "Inland Construction & Engineer"
+    ],
+    "vendor_id": "inland",
+    "records": null,
+    "gifts": 3,
+    "given": 2500.0
+   },
+   "b": {
+    "key": "inlandconstructionengineeringice",
+    "names": [
+     "Inland Construction Engineering ICE, Inc"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 750.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "inlandconstructionengineering",
+    "names": [
+     "Inland Construction and Engineering, Inc.",
+     "Inland Construction and Engineering",
+     "Inland Construction & Engineering (bid awarded May 28, 2024)"
+    ],
+    "vendor_id": "inland",
+    "records": {
+     "contract": 3,
+     "cra": 1
+    },
+    "gifts": null,
+    "given": null
+   },
+   "b": {
+    "key": "inlandconstructionengineeringice",
+    "names": [
+     "Inland Construction Engineering ICE, Inc"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 750.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "marshalbrothers",
+    "names": [
+     "Marshal Brothers"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "marshallbothers",
+    "names": [
+     "Marshall Bothers"
+    ],
+    "vendor_id": "marshall-brothers",
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "marshalbrothers",
+    "names": [
+     "Marshal Brothers"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "marshallbrothers",
+    "names": [
+     "Marshall Brothers",
+     "Marshall Brothers, Inc.",
+     "MARSHALL BROTHERS",
+     "Marshall Brother\\'s"
+    ],
+    "vendor_id": "marshall-brothers",
+    "records": {
+     "contract": 7,
+     "change_order": 2,
+     "emergency": 1
+    },
+    "gifts": 21,
+    "given": 19700.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "peoplesfirstinsurance",
+    "names": [
+     "Peoples First Insurance"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "peoplesfirstinsuranceservices",
+    "names": [
+     "Peoples First Insurance Services, LLC"
+    ],
+    "vendor_id": "peoples-first-insurance-services",
+    "records": {
+     "tdc": 1
+    },
+    "gifts": null,
+    "given": null
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "phoenixconstru",
+    "names": [
+     "PHOENIX CONSTRU"
+    ],
+    "vendor_id": "phoenix",
+    "records": {
+     "register": 1
+    },
+    "gifts": null,
+    "given": null
+   },
+   "b": {
+    "key": "phoenixconstruction",
+    "names": [
+     "Phoenix Construction, Inc",
+     "PHOENIX CONSTRUCTION",
+     "Phoenix Construction"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 3,
+    "given": 2500.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "phoenixconstruction",
+    "names": [
+     "Phoenix Construction, Inc",
+     "PHOENIX CONSTRUCTION",
+     "Phoenix Construction"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 3,
+    "given": 2500.0
+   },
+   "b": {
+    "key": "phoenixconstructionservices",
+    "names": [
+     "Phoenix Construction Services, Inc.",
+     "Phoenix Construction Services"
+    ],
+    "vendor_id": "phoenix",
+    "records": {
+     "contract": 1,
+     "change_order": 1,
+     "register": 1
+    },
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "vbadesign",
+    "names": [
+     "VBA Design"
+    ],
+    "vendor_id": "vba-design",
+    "records": {
+     "contract": 1
+    },
+    "gifts": null,
+    "given": null
+   },
+   "b": {
+    "key": "vbadesigns",
+    "names": [
+     "VBA Designs Inc."
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "reason": "plural"
+  },
+  {
+   "a": {
+    "key": "alscomputer",
+    "names": [
+     "ALS Computer"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 125.0
+   },
+   "b": {
+    "key": "alscomputers",
+    "names": [
+     "A L S Computers Inc"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 125.0
+   },
+   "reason": "plural"
+  },
+  {
+   "a": {
+    "key": "anchorconsultingeng",
+    "names": [
+     "ANCHOR CONSULTING & ENG"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 150.0
+   },
+   "b": {
+    "key": "anchorconsultingengineering",
+    "names": [
+     "Anchor Consulting Engineering",
+     "anchor consulting engineering"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 5,
+    "given": 2950.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "anchorconsultingengineering",
+    "names": [
+     "Anchor Consulting Engineering",
+     "anchor consulting engineering"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 5,
+    "given": 2950.0
+   },
+   "b": {
+    "key": "anchorconsultingenrineering",
+    "names": [
+     "Anchor Consulting Enrineering"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 250.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "asphalttextures",
+    "names": [
+     "Asphalt Textures, LLC",
+     "Asphalt Textures LLC",
+     "Asphalt textures",
+     "Asphalt Textures Inc"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 9,
+    "given": 6945.21
+   },
+   "b": {
+    "key": "asphalytextures",
+    "names": [
+     "Asphaly Textures, LLC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "bandofbrothers",
+    "names": [
+     "Band of Brothers, LLC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 250.0
+   },
+   "b": {
+    "key": "bandofbrothersgroup",
+    "names": [
+     "Band of Brothers Group, LLC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 200.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "baycountyrepublicanorg",
+    "names": [
+     "BAY COUNTY REPUBLICAN ORG",
+     "Bay County Republican Org."
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "baycountyrepublicanorganiza",
+    "names": [
+     "Bay County Republican Organiza"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "baylincolndodge",
+    "names": [
+     "Bay Lincoln Dodge"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "baylincolndodgehyundai",
+    "names": [
+     "BAY LINCOLN DODGE HYUNDAI"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "beachieproperties",
+    "names": [
+     "Beachie Properties Inc",
+     "Beachie Properties, Inc."
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 3,
+    "given": 850.0
+   },
+   "b": {
+    "key": "beachiepropoerties",
+    "names": [
+     "beachie propoerties llc"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 250.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "beachliqours",
+    "names": [
+     "Beach Liqours"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "b": {
+    "key": "beachliquors",
+    "names": [
+     "Beach Liquors",
+     "BEACH LIQUORS"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 4,
+    "given": 3500.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "beachtimereality",
+    "names": [
+     "Beach Time Reality, Inc."
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 250.0
+   },
+   "b": {
+    "key": "beachtimerealty",
+    "names": [
+     "Beach Time Realty, Inc."
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 250.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "billcramerchevrolet",
+    "names": [
+     "Bill Cramer Chevrolet"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 2000.0
+   },
+   "b": {
+    "key": "billcramerchevroletcadillac",
+    "names": [
+     "Bill Cramer Chevrolet Cadillac"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 6,
+    "given": 6000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "bluewatercommercial",
+    "names": [
+     "Bluewater Commercial LLC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "bluewatercommercialgroup",
+    "names": [
+     "Blue Water Commercial Group LL"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "bluewatercommercial",
+    "names": [
+     "Bluewater Commercial LLC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "bluewatercommerical",
+    "names": [
+     "Bluewater Commerical LLC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "brisharkeys",
+    "names": [
+     "BRI Sharkey's LLC",
+     "BRI Sharkey/s LLC",
+     "BRI Sharkeys, LLC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 3,
+    "given": 2000.0
+   },
+   "b": {
+    "key": "brisharkys",
+    "names": [
+     "BRI Sharky's LLC",
+     "BRI Sharky's",
+     "BRI Sharky's, LLC.",
+     "BRI Sharkys LLC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 11,
+    "given": 4150.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "browardhallagency",
+    "names": [
+     "Broward Hall Agency"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 250.0
+   },
+   "b": {
+    "key": "browardhallagendy",
+    "names": [
+     "Broward Hall Agendy, Inc"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "browardhallins",
+    "names": [
+     "Broward Hall Ins."
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "b": {
+    "key": "browardhallinsurance",
+    "names": [
+     "Broward Hall Insurance"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 50.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "buddysseafood",
+    "names": [
+     "Buddys Seafood"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 250.0
+   },
+   "b": {
+    "key": "buddysseafoodmarket",
+    "names": [
+     "Buddy's Seafood Market"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "bythesearesort",
+    "names": [
+     "By The Sea Resort Inc",
+     "By the Sea Resort Inc"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 2000.0
+   },
+   "b": {
+    "key": "bythesearesortincramada",
+    "names": [
+     "By The Sea Resort Inc - Ramada"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "bythesearesort",
+    "names": [
+     "By The Sea Resort Inc",
+     "By the Sea Resort Inc"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 2000.0
+   },
+   "b": {
+    "key": "bythesearesorts",
+    "names": [
+     "By the Sea Resorts Inc",
+     "By The Sea Resorts, Inc"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 4,
+    "given": 4000.0
+   },
+   "reason": "plural"
+  },
+  {
+   "a": {
+    "key": "bythesearesort",
+    "names": [
+     "By The Sea Resort Inc",
+     "By the Sea Resort Inc"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 2000.0
+   },
+   "b": {
+    "key": "bythesearesortsincbeach",
+    "names": [
+     "By The Sea Resorts Inc - Beach"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "bythesearesort",
+    "names": [
+     "By The Sea Resort Inc",
+     "By the Sea Resort Inc"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 2000.0
+   },
+   "b": {
+    "key": "bythesearesortsinccandl",
+    "names": [
+     "By The Sea Resorts Inc - Candl"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "bythesearesort",
+    "names": [
+     "By The Sea Resort Inc",
+     "By the Sea Resort Inc"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 2000.0
+   },
+   "b": {
+    "key": "bythesearesortsincchate",
+    "names": [
+     "By The Sea Resorts Inc - Chate"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "bythesearesort",
+    "names": [
+     "By The Sea Resort Inc",
+     "By the Sea Resort Inc"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 2000.0
+   },
+   "b": {
+    "key": "bythesearesortsincholid",
+    "names": [
+     "By The Sea Resorts Inc - Holid"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "bythesearesort",
+    "names": [
+     "By The Sea Resort Inc",
+     "By the Sea Resort Inc"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 2000.0
+   },
+   "b": {
+    "key": "bythesearesortsincocean",
+    "names": [
+     "By The Sea Resorts Inc - Ocean"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "bythesearesort",
+    "names": [
+     "By The Sea Resort Inc",
+     "By the Sea Resort Inc"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 2000.0
+   },
+   "b": {
+    "key": "bythesearesortsincsugar",
+    "names": [
+     "By The Sea Resorts Inc - Sugar"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "bythesearesorts",
+    "names": [
+     "By the Sea Resorts Inc",
+     "By The Sea Resorts, Inc"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 4,
+    "given": 4000.0
+   },
+   "b": {
+    "key": "bythesearesortsincbeach",
+    "names": [
+     "By The Sea Resorts Inc - Beach"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "bythesearesorts",
+    "names": [
+     "By the Sea Resorts Inc",
+     "By The Sea Resorts, Inc"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 4,
+    "given": 4000.0
+   },
+   "b": {
+    "key": "bythesearesortsinccandl",
+    "names": [
+     "By The Sea Resorts Inc - Candl"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "bythesearesorts",
+    "names": [
+     "By the Sea Resorts Inc",
+     "By The Sea Resorts, Inc"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 4,
+    "given": 4000.0
+   },
+   "b": {
+    "key": "bythesearesortsincchate",
+    "names": [
+     "By The Sea Resorts Inc - Chate"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "bythesearesorts",
+    "names": [
+     "By the Sea Resorts Inc",
+     "By The Sea Resorts, Inc"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 4,
+    "given": 4000.0
+   },
+   "b": {
+    "key": "bythesearesortsincholid",
+    "names": [
+     "By The Sea Resorts Inc - Holid"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "bythesearesorts",
+    "names": [
+     "By the Sea Resorts Inc",
+     "By The Sea Resorts, Inc"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 4,
+    "given": 4000.0
+   },
+   "b": {
+    "key": "bythesearesortsincocean",
+    "names": [
+     "By The Sea Resorts Inc - Ocean"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "bythesearesorts",
+    "names": [
+     "By the Sea Resorts Inc",
+     "By The Sea Resorts, Inc"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 4,
+    "given": 4000.0
+   },
+   "b": {
+    "key": "bythesearesortsincsugar",
+    "names": [
+     "By The Sea Resorts Inc - Sugar"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "cantrellassociates",
+    "names": [
+     "The Cantrell Associates LLC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 4,
+    "given": 2500.0
+   },
+   "b": {
+    "key": "cantrellbassociates",
+    "names": [
+     "The Cantrell B Associates LLC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "captainandersonrestaurant",
+    "names": [
+     "Captain Anderson Restaurant"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "b": {
+    "key": "captainandersonsrestaurant",
+    "names": [
+     "Captain Anderson's Restaurant",
+     "Captain Anderson\\'s Restaurant",
+     "Captain Andersons Restaurant"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 3,
+    "given": 2000.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "captainandersons",
+    "names": [
+     "Captain Andersons",
+     "Captain Anderson's"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 445.21
+   },
+   "b": {
+    "key": "captainandersonsrestaurant",
+    "names": [
+     "Captain Anderson's Restaurant",
+     "Captain Anderson\\'s Restaurant",
+     "Captain Andersons Restaurant"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 3,
+    "given": 2000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "captbobzalescharter",
+    "names": [
+     "Capt. Bob Zales Charter, LLC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 100.0
+   },
+   "b": {
+    "key": "captbobzalescharters",
+    "names": [
+     "Capt Bob Zales Charters LLC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 100.0
+   },
+   "reason": "plural"
+  },
+  {
+   "a": {
+    "key": "classycycles",
+    "names": [
+     "Classy Cycles",
+     "Classy Cycles Inc"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 2000.0
+   },
+   "b": {
+    "key": "classycycyles",
+    "names": [
+     "Classy Cycyles"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "clubbsrealestategroup",
+    "names": [
+     "Clubbs Real Estate Group",
+     "Clubbs Real Estate Group, LLC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 5,
+    "given": 2250.0
+   },
+   "b": {
+    "key": "clubsrealestategroup",
+    "names": [
+     "Clubs Real Estate Group LLC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "comprehensiveplanningassoc",
+    "names": [
+     "Comprehensive Planning Assoc."
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "comprehensiveplanningassocia",
+    "names": [
+     "Comprehensive Planning Associa"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 1500.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "culliganbottledwater",
+    "names": [
+     "Culligan Bottled Water"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 1300.0
+   },
+   "b": {
+    "key": "culliganbottledwatertrumbullbottledwater",
+    "names": [
+     "Culligan Bottled Water Trumbull Bottled Water, Inc."
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 750.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "customconstruction",
+    "names": [
+     "Custom Construction"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 1500.0
+   },
+   "b": {
+    "key": "customconstructionbyericor",
+    "names": [
+     "Custom Construction by Eric Or"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 3,
+    "given": 1050.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "cypressenvironmental",
+    "names": [
+     "Cypress Environmental"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "cypressenvironmentalofbayc",
+    "names": [
+     "Cypress Environmental Of Bay C"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "daffininsurance",
+    "names": [
+     "Daffin Insurance"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 3,
+    "given": 1400.0
+   },
+   "b": {
+    "key": "daffininsuranceservices",
+    "names": [
+     "Daffin Insurance Services Inc",
+     "Daffin Insurance Services",
+     "Daffin Insurance Services, Inc"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 3,
+    "given": 800.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "denisehallmonrowanassocia",
+    "names": [
+     "Denise Hallmon Rowan & Associa"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "b": {
+    "key": "denisehallmonrowanassocs",
+    "names": [
+     "Denise Hallmon Rowan&Assocs PA"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 250.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "dermatologysolutionsgroup",
+    "names": [
+     "Dermatology Solutions Group LL",
+     "Dermatology Solutions Group",
+     "Dermatology Solutions Group, I"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 6,
+    "given": 3750.0
+   },
+   "b": {
+    "key": "dermatologysolutionsgrp",
+    "names": [
+     "Dermatology Solutions Grp, LLC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "dgautomotive",
+    "names": [
+     "D & G Automotive Inc",
+     "D and G Automotive Inc",
+     "D & G Automotive, Inc.",
+     "D&G Automotive Inc"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 9,
+    "given": 8500.0
+   },
+   "b": {
+    "key": "dgautomotiveinc",
+    "names": [
+     "D &G Automotiveinc Inc."
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "driftaway",
+    "names": [
+     "Driftaway LLLP",
+     "Driftaway, Lllp"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 3,
+    "given": 1750.0
+   },
+   "b": {
+    "key": "driftway",
+    "names": [
+     "Driftway LLLP"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "driftwoodlodge",
+    "names": [
+     "Driftwood Lodge"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "b": {
+    "key": "driftwoodlodgeonthegulf",
+    "names": [
+     "Driftwood Lodge on the Gulf"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "easternshipbuilding",
+    "names": [
+     "EASTERN SHIPBUILDING"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "easternshipbuildinggroup",
+    "names": [
+     "Eastern Shipbuilding Group"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "edgewaterbeachgolf",
+    "names": [
+     "Edgewater Beach and Golf"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "edgewaterbeachgolfresort",
+    "names": [
+     "Edgewater Beach & Golf Resort"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 5,
+    "given": 2445.21
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "emeralcoaststriping",
+    "names": [
+     "Emeral Coast Striping LLC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "emeraldcoaststriping",
+    "names": [
+     "Emerald Coast Striping, LLC",
+     "Emerald Coast Striping LLC",
+     "Emerald Coast Striping",
+     "EMERALD COAST STRIPING LLC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 17,
+    "given": 14000.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "emeralcoaststriping",
+    "names": [
+     "Emeral Coast Striping LLC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "emeraldcoaststripling",
+    "names": [
+     "Emerald Coast Stripling"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "emeralcoaststriping",
+    "names": [
+     "Emeral Coast Striping LLC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "emeraldcoaststripping",
+    "names": [
+     "Emerald Coast Stripping LLC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "emeraldcoastobgyn",
+    "names": [
+     "Emerald Coast OBGYN"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 1500.0
+   },
+   "b": {
+    "key": "emeraldcoastobgynofthepan",
+    "names": [
+     "Emerald Coast OBGYN of the Pan"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "emeraldcoastobgyn",
+    "names": [
+     "Emerald Coast OBGYN"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 1500.0
+   },
+   "b": {
+    "key": "emeraldcoastobgynresearch",
+    "names": [
+     "Emerald Coast OBGYN Research"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "emeraldcoastobgyn",
+    "names": [
+     "Emerald Coast OBGYN"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 1500.0
+   },
+   "b": {
+    "key": "emeraldcoastobygn",
+    "names": [
+     "Emerald Coast OBYGN"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "emeraldcoaststriping",
+    "names": [
+     "Emerald Coast Striping, LLC",
+     "Emerald Coast Striping LLC",
+     "Emerald Coast Striping",
+     "EMERALD COAST STRIPING LLC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 17,
+    "given": 14000.0
+   },
+   "b": {
+    "key": "emeraldcoaststripingllcoper",
+    "names": [
+     "Emerald Coast Striping LLCOper"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "emeraldcoaststriping",
+    "names": [
+     "Emerald Coast Striping, LLC",
+     "Emerald Coast Striping LLC",
+     "Emerald Coast Striping",
+     "EMERALD COAST STRIPING LLC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 17,
+    "given": 14000.0
+   },
+   "b": {
+    "key": "emeraldcoaststripling",
+    "names": [
+     "Emerald Coast Stripling"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "emeraldcoaststriping",
+    "names": [
+     "Emerald Coast Striping, LLC",
+     "Emerald Coast Striping LLC",
+     "Emerald Coast Striping",
+     "EMERALD COAST STRIPING LLC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 17,
+    "given": 14000.0
+   },
+   "b": {
+    "key": "emeraldcoaststripping",
+    "names": [
+     "Emerald Coast Stripping LLC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "emeraldcoaststripling",
+    "names": [
+     "Emerald Coast Stripling"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "emeraldcoaststripping",
+    "names": [
+     "Emerald Coast Stripping LLC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "emeraldplace",
+    "names": [
+     "Emerald Place"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "emeraldplaza",
+    "names": [
+     "Emerald Plaza LLC.",
+     "Emerald Plaza"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 450.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "emeraldviewassnmgmt",
+    "names": [
+     "Emerald View Assn Mgmt"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "emeraldviewassocmgmt",
+    "names": [
+     "Emerald View Assoc. Mgmt."
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "epcicodeadministration",
+    "names": [
+     "EPCI Code Administration"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 250.0
+   },
+   "b": {
+    "key": "epcicodeadministrationser",
+    "names": [
+     "EPCI Code Administration Ser."
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 250.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "epcicodeadministration",
+    "names": [
+     "EPCI Code Administration"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 250.0
+   },
+   "b": {
+    "key": "epcicodeadministrationservi",
+    "names": [
+     "EPCI Code Administration Servi"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "epcicodeadministrationser",
+    "names": [
+     "EPCI Code Administration Ser."
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 250.0
+   },
+   "b": {
+    "key": "epcicodeadministrationservi",
+    "names": [
+     "EPCI Code Administration Servi"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "epconsultants",
+    "names": [
+     "EP Consultants",
+     "EP Consultants Inc",
+     "E P Consultants Inc",
+     "E P CONSULTANTS, INC."
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 6,
+    "given": 3000.0
+   },
+   "b": {
+    "key": "epconultants",
+    "names": [
+     "EP Conultants Inc"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 100.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "extremelandclearing",
+    "names": [
+     "Extreme Land Clearing",
+     "Extreme Land Clearing, LLC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 5,
+    "given": 2250.0
+   },
+   "b": {
+    "key": "extremelandclearingexc",
+    "names": [
+     "Extreme Land Clearing & Exc."
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "extremelandclearing",
+    "names": [
+     "Extreme Land Clearing",
+     "Extreme Land Clearing, LLC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 5,
+    "given": 2250.0
+   },
+   "b": {
+    "key": "extremelandclearingexcav",
+    "names": [
+     "Extreme Land Clearing & Excav"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "extremelandclearing",
+    "names": [
+     "Extreme Land Clearing",
+     "Extreme Land Clearing, LLC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 5,
+    "given": 2250.0
+   },
+   "b": {
+    "key": "extremelandclearingexcava",
+    "names": [
+     "Extreme Land Clearing & Excava"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 4,
+    "given": 3500.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "extremelandclearing",
+    "names": [
+     "Extreme Land Clearing",
+     "Extreme Land Clearing, LLC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 5,
+    "given": 2250.0
+   },
+   "b": {
+    "key": "extremelandclearingexcvtion",
+    "names": [
+     "Extreme Land Clearing&Excvtion"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "extremelandclearingexc",
+    "names": [
+     "Extreme Land Clearing & Exc."
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "b": {
+    "key": "extremelandclearingexcvtion",
+    "names": [
+     "Extreme Land Clearing&Excvtion"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "familytraditioncharter",
+    "names": [
+     "Family Tradition Charter"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "b": {
+    "key": "familytraditioncharterboat",
+    "names": [
+     "Family Tradition Charter Boat"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "fermanmanagement",
+    "names": [
+     "Ferman Management"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "fermanmanagementservices",
+    "names": [
+     "Ferman Management Services"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "flasportsmedicine",
+    "names": [
+     "FLA. SPORTSMEDICINE"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "b": {
+    "key": "flasportsmedicineorthopedi",
+    "names": [
+     "FLA.SPORTSMEDICINE & ORTHOPEDI"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "floridacoastalclosing",
+    "names": [
+     "Florida Coastal Closing"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 250.0
+   },
+   "b": {
+    "key": "floridacoastalclosingescr",
+    "names": [
+     "Florida Coastal Closing & Escr"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 250.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "folksrestaurant",
+    "names": [
+     "Folks Restaurant",
+     "Folks Restaurant, Ltd"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 200.0
+   },
+   "b": {
+    "key": "folksrestaurants",
+    "names": [
+     "Folks Restaurants, Ltd",
+     "Folks Restaurants Ltd.",
+     "Folks Restaurants, Ltd.",
+     "Folks Restaurants LTD"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 7,
+    "given": 544.52
+   },
+   "reason": "plural"
+  },
+  {
+   "a": {
+    "key": "gaccontractor",
+    "names": [
+     "GAC Contractor"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "gaccontractorsgulfasphalt",
+    "names": [
+     "GAC Contractors/Gulf Asphalt"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "gaccontractor",
+    "names": [
+     "GAC Contractor"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "gaccontrators",
+    "names": [
+     "GAC Contrators"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "garrettsautomobileservicece",
+    "names": [
+     "Garretts Automobile Service Ce"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 400.0
+   },
+   "b": {
+    "key": "garrettsautomotiveservicece",
+    "names": [
+     "Garretts Automotive Service Ce"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 400.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "garywaksteinassoc",
+    "names": [
+     "Gary Wakstein & Assoc"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "b": {
+    "key": "garywaksteinsassoc",
+    "names": [
+     "Gary Wakstein's and Assoc."
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "georgehsmithrealestate",
+    "names": [
+     "George H Smith Real Estate",
+     "George H. Smith Real Estate"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 6,
+    "given": 900.0
+   },
+   "b": {
+    "key": "georgesmithrealestate",
+    "names": [
+     "George Smith Real Estate"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 100.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "giglienterprieses",
+    "names": [
+     "GIGLI ENTERPRIESES INC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "b": {
+    "key": "giglienterprises",
+    "names": [
+     "Gigli Enterprises"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 100.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "gourmetkitchen",
+    "names": [
+     "Gourmet Kitchen, Inc"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 200.0
+   },
+   "b": {
+    "key": "gourmetkitchenshoppes",
+    "names": [
+     "Gourmet Kitchen Shoppes Inc."
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 100.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "griffittsinvestments",
+    "names": [
+     "Griffitts Investments"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "b": {
+    "key": "griffittsinvestmentsltdpart",
+    "names": [
+     "Griffitts Investments LTD Part"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "gulfcoasteagleinv",
+    "names": [
+     "Gulf Coast Eagle Inv"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 250.0
+   },
+   "b": {
+    "key": "gulfcoasteagleinvestments",
+    "names": [
+     "Gulf Coast Eagle Investments L"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 100.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "gulfcoasttreespecialist",
+    "names": [
+     "Gulf Coast Tree Specialist"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 3,
+    "given": 1350.0
+   },
+   "b": {
+    "key": "gulfcoasttreespecialists",
+    "names": [
+     "Gulf coast tree specialists"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 350.0
+   },
+   "reason": "plural"
+  },
+  {
+   "a": {
+    "key": "hallseptictank",
+    "names": [
+     "Hall Septic Tank"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 250.0
+   },
+   "b": {
+    "key": "hallseptictankservice",
+    "names": [
+     "Hall Septic Tank Service, Inc."
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "hamcobbusinesssolutions",
+    "names": [
+     "Hamco B Business Solutions LLC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "b": {
+    "key": "hamcobusinesssolutions",
+    "names": [
+     "Hamco Business Solutions",
+     "Hamco Business Solutions LLC",
+     "HAMCO Business Solutions LLC",
+     "HAMCO BUSINESS SOLUTIONS"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 5,
+    "given": 2500.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "hamcobbusinesssolutions",
+    "names": [
+     "Hamco B Business Solutions LLC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "b": {
+    "key": "hamcobusinesssolutons",
+    "names": [
+     "HAMCO BUSINESS SOLUTONS LLC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "hamcobusinesssolutions",
+    "names": [
+     "Hamco Business Solutions",
+     "Hamco Business Solutions LLC",
+     "HAMCO Business Solutions LLC",
+     "HAMCO BUSINESS SOLUTIONS"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 5,
+    "given": 2500.0
+   },
+   "b": {
+    "key": "hamcobusinesssolutons",
+    "names": [
+     "HAMCO BUSINESS SOLUTONS LLC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "hammerheaadfreds",
+    "names": [
+     "Hammerheaad Fred's"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "hammerheadfreds",
+    "names": [
+     "Hammerhead Fred's",
+     "Hammerhead Fred's Inc.",
+     "Hammerhead Fred's Inc",
+     "Hammerhead Freds, Inc"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 9,
+    "given": 3000.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "harpoonharrys",
+    "names": [
+     "Harpoon Harry's"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 2000.0
+   },
+   "b": {
+    "key": "harpoonharrysharpoonharrys",
+    "names": [
+     "Harpoon Harrys Harpoon Harrys"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "harrisonrivardduncanbu",
+    "names": [
+     "Harrison, Rivard, Duncan, & Bu"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "harrisonrivardduncanbuzze",
+    "names": [
+     "Harrison Rivard Duncan & Buzze"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "harrisonrivardduncanbu",
+    "names": [
+     "Harrison, Rivard, Duncan, & Bu"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "harrisonrivardduncanbuzzet",
+    "names": [
+     "Harrison,Rivard,Duncan &Buzzet"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "harrisonrivardduncanbu",
+    "names": [
+     "Harrison, Rivard, Duncan, & Bu"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "harrisonrivardduncanbuzzett",
+    "names": [
+     "Harrison,Rivard,Duncan,Buzzett",
+     "HARRISON RIVARD DUNCAN BUZZETT"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 2000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "harrisonrivardduncanbuzze",
+    "names": [
+     "Harrison Rivard Duncan & Buzze"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "harrisonrivardduncanbuzzet",
+    "names": [
+     "Harrison,Rivard,Duncan &Buzzet"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "harrisonrivardduncanbuzze",
+    "names": [
+     "Harrison Rivard Duncan & Buzze"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "harrisonrivardduncanbuzzett",
+    "names": [
+     "Harrison,Rivard,Duncan,Buzzett",
+     "HARRISON RIVARD DUNCAN BUZZETT"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 2000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "harrisonrivardduncanbuzzet",
+    "names": [
+     "Harrison,Rivard,Duncan &Buzzet"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "b": {
+    "key": "harrisonrivardduncanbuzzett",
+    "names": [
+     "Harrison,Rivard,Duncan,Buzzett",
+     "HARRISON RIVARD DUNCAN BUZZETT"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 2000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "herbafex",
+    "names": [
+     "Herbafex Inc"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 250.0
+   },
+   "b": {
+    "key": "herbaflex",
+    "names": [
+     "herbaflex"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "holidaybeachrentals",
+    "names": [
+     "Holiday Beach Rentals Inc"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "b": {
+    "key": "holidaybeachrentalsdevelopm",
+    "names": [
+     "Holiday Beach Rentals Developm"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "holidaygolfracqueclub",
+    "names": [
+     "Holiday Golf & Racque Club, Ic"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "holidaygolfracquetclub",
+    "names": [
+     "Holiday Golf & Racquet Club"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "holidaygolfracqueclub",
+    "names": [
+     "Holiday Golf & Racque Club, Ic"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "holidaygolfraquetclub",
+    "names": [
+     "Holiday Golf & Raquet Club"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "holidaygolfracquetclub",
+    "names": [
+     "Holiday Golf & Racquet Club"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "holidaygolfraquetclub",
+    "names": [
+     "Holiday Golf & Raquet Club"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "horsleyconstruction",
+    "names": [
+     "Horsley Construction"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 3,
+    "given": 2300.0
+   },
+   "b": {
+    "key": "horsleyconstructiongroup",
+    "names": [
+     "Horsley Construction Group",
+     "Horsley Construction Group, In"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 3,
+    "given": 3000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "infinityconstruction",
+    "names": [
+     "Infinity Construction",
+     "Infinity Construction Inc"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 2000.0
+   },
+   "b": {
+    "key": "infinityconstructionent",
+    "names": [
+     "Infinity Construction Ent",
+     "Infinity Construction Ent."
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 2000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "infinityconstruction",
+    "names": [
+     "Infinity Construction",
+     "Infinity Construction Inc"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 2000.0
+   },
+   "b": {
+    "key": "infinityconstructionenter",
+    "names": [
+     "Infinity Construction Enter"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "infinityconstruction",
+    "names": [
+     "Infinity Construction",
+     "Infinity Construction Inc"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 2000.0
+   },
+   "b": {
+    "key": "infinityconstructionenterpr",
+    "names": [
+     "Infinity Construction Enterpr."
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "infinityconstruction",
+    "names": [
+     "Infinity Construction",
+     "Infinity Construction Inc"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 2000.0
+   },
+   "b": {
+    "key": "infinityconstructionenterpri",
+    "names": [
+     "Infinity Construction Enterpri"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 9,
+    "given": 9000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "infinityconstruction",
+    "names": [
+     "Infinity Construction",
+     "Infinity Construction Inc"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 2000.0
+   },
+   "b": {
+    "key": "infinityconstructionenterprises",
+    "names": [
+     "Infinity Construction Enterprises Inc"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "infinityconstructionent",
+    "names": [
+     "Infinity Construction Ent",
+     "Infinity Construction Ent."
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 2000.0
+   },
+   "b": {
+    "key": "infinityconstructionenter",
+    "names": [
+     "Infinity Construction Enter"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "infinityconstructionent",
+    "names": [
+     "Infinity Construction Ent",
+     "Infinity Construction Ent."
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 2000.0
+   },
+   "b": {
+    "key": "infinityconstructionenterpr",
+    "names": [
+     "Infinity Construction Enterpr."
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "infinityconstructionent",
+    "names": [
+     "Infinity Construction Ent",
+     "Infinity Construction Ent."
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 2000.0
+   },
+   "b": {
+    "key": "infinityconstructionenterpri",
+    "names": [
+     "Infinity Construction Enterpri"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 9,
+    "given": 9000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "infinityconstructionent",
+    "names": [
+     "Infinity Construction Ent",
+     "Infinity Construction Ent."
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 2000.0
+   },
+   "b": {
+    "key": "infinityconstructionenterprises",
+    "names": [
+     "Infinity Construction Enterprises Inc"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "infinityconstructionenter",
+    "names": [
+     "Infinity Construction Enter"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "infinityconstructionenterpr",
+    "names": [
+     "Infinity Construction Enterpr."
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "infinityconstructionenter",
+    "names": [
+     "Infinity Construction Enter"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "infinityconstructionenterpri",
+    "names": [
+     "Infinity Construction Enterpri"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 9,
+    "given": 9000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "infinityconstructionenter",
+    "names": [
+     "Infinity Construction Enter"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "infinityconstructionenterprises",
+    "names": [
+     "Infinity Construction Enterprises Inc"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "jmichaelsdockside",
+    "names": [
+     "j michaels dockside"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 400.0
+   },
+   "b": {
+    "key": "jmichaelsdocksidebargril",
+    "names": [
+     "J Michael\\'s Dockside Bar&Gril"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 400.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "johndouglasinsurancagency",
+    "names": [
+     "John Douglas Insuranc Agency"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 300.0
+   },
+   "b": {
+    "key": "johndouglasinsuranceagency",
+    "names": [
+     "John Douglas Insurance Agency"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 250.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "johndouglasinsurance",
+    "names": [
+     "John Douglas Insurance"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 200.0
+   },
+   "b": {
+    "key": "johndouglasinsuranceagency",
+    "names": [
+     "John Douglas Insurance Agency"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 250.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "legacygolfclub",
+    "names": [
+     "Legacy Golf Club, Inc."
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "legacygolfclubpcb",
+    "names": [
+     "Legacy Golf Club PCB, Inc."
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "legacygolfclub",
+    "names": [
+     "Legacy Golf Club, Inc."
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "legacygulfclub",
+    "names": [
+     "LEGACY GULF CLUB"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "losrancheros",
+    "names": [
+     "Los Rancheros"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "losrancherosofpanamacity",
+    "names": [
+     "Los Rancheros of Panama City"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "losrancherosofpanamacity",
+    "names": [
+     "Los Rancheros of Panama City"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "lostrancherosofpanamacity",
+    "names": [
+     "Lost Rancheros of Panama City"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 750.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "lyndallpartners",
+    "names": [
+     "Lyndall Partners LLC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "lyndellpartners",
+    "names": [
+     "Lyndell Partners, LLC",
+     "Lyndell Partners LLC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 1000.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "manualthompson",
+    "names": [
+     "Manual and Thompson, PA"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "manuelthompson",
+    "names": [
+     "Manuel & Thompson",
+     "Manuel & Thompson, P.A.",
+     "Manuel & Thompson PA",
+     "Manuel & Thompson, PA"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 15,
+    "given": 9250.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "marinetransportation",
+    "names": [
+     "Marine Transportation"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "marinetransportationserv",
+    "names": [
+     "Marine Transportation Serv."
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "marinetransportation",
+    "names": [
+     "Marine Transportation"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "marinetransportationservice",
+    "names": [
+     "Marine Transportation Service"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "marinetransportation",
+    "names": [
+     "Marine Transportation"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "marinetransportationservices",
+    "names": [
+     "Marine Transportation Services"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "marinetransportationserv",
+    "names": [
+     "Marine Transportation Serv."
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "b": {
+    "key": "marinetransportationservice",
+    "names": [
+     "Marine Transportation Service"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "marinetransportationserv",
+    "names": [
+     "Marine Transportation Serv."
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "b": {
+    "key": "marinetransportationservices",
+    "names": [
+     "Marine Transportation Services"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "marinetransportationservice",
+    "names": [
+     "Marine Transportation Service"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "b": {
+    "key": "marinetransportationservices",
+    "names": [
+     "Marine Transportation Services"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "reason": "plural"
+  },
+  {
+   "a": {
+    "key": "mbfarmsofcalhoun",
+    "names": [
+     "MB Farms of Calhoun Co LLC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "mbfarmsofcalhouncounty",
+    "names": [
+     "MB Farms of Calhoun County LLC",
+     "MB Farms of Calhoun County"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 2000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "mbfarmsofcalhoun",
+    "names": [
+     "MB Farms of Calhoun Co LLC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "mbfarmsofcalhouncty",
+    "names": [
+     "M B Farms of Calhoun Cty"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "mccallsodfarm",
+    "names": [
+     "McCall Sod Farm",
+     "McCall Sod Farm Inc",
+     "McCall Sod Farm Inc.",
+     "MCCALL Sod Farm"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 9,
+    "given": 8000.0
+   },
+   "b": {
+    "key": "mccallsodfarms",
+    "names": [
+     "McCall Sod Farms"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "plural"
+  },
+  {
+   "a": {
+    "key": "mckinneyinsurance",
+    "names": [
+     "mckinney insurance llc",
+     "McKinney Insurance"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 750.0
+   },
+   "b": {
+    "key": "mckinneyinsuranceinvest",
+    "names": [
+     "McKinney Insurance & Invest."
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "mckinneyinsurance",
+    "names": [
+     "mckinney insurance llc",
+     "McKinney Insurance"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 750.0
+   },
+   "b": {
+    "key": "mckinneyinsuranceinvestmen",
+    "names": [
+     "McKinney Insurance & Investmen"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 750.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "mcneilcarrollengineering",
+    "names": [
+     "McNeil Carroll Engineering",
+     "McNeil Carroll Engineering Inc"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 5,
+    "given": 2600.0
+   },
+   "b": {
+    "key": "mcneillcarrollengineering",
+    "names": [
+     "MCNEILL CARROLL ENGINEERING"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "michaellovchuckinsurance",
+    "names": [
+     "Michael Lovchuck Insurance"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 200.0
+   },
+   "b": {
+    "key": "michaellovchukinsurance",
+    "names": [
+     "Michael Lovchuk Insurance",
+     "Michael Lovchuk Insurance Inc"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 3,
+    "given": 1750.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "mikescafeoysterbar",
+    "names": [
+     "Mikes Cafe & Oyster Bar, LLC",
+     "Mike's Cafe & Oyster Bar, LL",
+     "Mike's Cafe & Oyster Bar, LLC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 3,
+    "given": 1500.0
+   },
+   "b": {
+    "key": "mikescafoysterbar",
+    "names": [
+     "Mikes CafÃ© & Oyster Bar, LLC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "monolithconstruction",
+    "names": [
+     "Monolith Construction"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 250.0
+   },
+   "b": {
+    "key": "monolithconstructionpanhan",
+    "names": [
+     "Monolith Construction - Panhan"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 132.64
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "nathanleehead",
+    "names": [
+     "Nathan Lee Head LLC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "nathanleeheadofmillville",
+    "names": [
+     "Nathan Lee Head of Millville L"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "nathanleehead",
+    "names": [
+     "Nathan Lee Head LLC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "nathanleeheadofmilton",
+    "names": [
+     "Nathan Lee Head of Milton, LLC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "nathanleehead",
+    "names": [
+     "Nathan Lee Head LLC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "nathanleeheadofpasco",
+    "names": [
+     "Nathan Lee Head of Pasco, LLC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "nathanleehead",
+    "names": [
+     "Nathan Lee Head LLC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "nathanleeheadpensacola",
+    "names": [
+     "Nathan Lee Head Pensacola"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "nathanleehead",
+    "names": [
+     "Nathan Lee Head LLC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "nathanleeheadtallahassee",
+    "names": [
+     "Nathan Lee Head Tallahassee"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "nationsrealestate",
+    "names": [
+     "Nations Real Estate",
+     "Nations Real Estate, LLC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 3,
+    "given": 2500.0
+   },
+   "b": {
+    "key": "nationsrealestatebrokerage",
+    "names": [
+     "Nations Real Estate Brokerage"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 3,
+    "given": 2000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "nelsonmarineservice",
+    "names": [
+     "Nelson Marine Service Inc",
+     "Nelson Marine Service, Inc."
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 4,
+    "given": 1475.0
+   },
+   "b": {
+    "key": "nelsonmarineservices",
+    "names": [
+     "Nelson Marine Services"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 600.0
+   },
+   "reason": "plural"
+  },
+  {
+   "a": {
+    "key": "nevesmediasolutions",
+    "names": [
+     "Neves Media Solutions"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "nevesmediasolutionsgroup",
+    "names": [
+     "Neves Media Solutions Group"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 4,
+    "given": 2513.75
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "nexisrealty",
+    "names": [
+     "Nexis Realty, Inc."
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "b": {
+    "key": "nexusrealty",
+    "names": [
+     "NEXUS REALTY"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 350.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "nicholsassociates",
+    "names": [
+     "Nichols and Associates",
+     "Nichols & Associates"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 3,
+    "given": 1409.0
+   },
+   "b": {
+    "key": "nicholsassociatesofbay",
+    "names": [
+     "Nichols & Associates of Bay"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 250.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "oasisresort",
+    "names": [
+     "Oasis Resort, Inc."
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "oasisresorts",
+    "names": [
+     "Oasis Resorts Inc.",
+     "Oasis Resorts, Inc",
+     "Oasis Resorts, Inc.",
+     "Oasis Resorts Inc"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 6,
+    "given": 6000.0
+   },
+   "reason": "plural"
+  },
+  {
+   "a": {
+    "key": "palemettoinnsuites",
+    "names": [
+     "The Palemetto Inn & Suites"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 400.0
+   },
+   "b": {
+    "key": "palmettoinnsuites",
+    "names": [
+     "The Palmetto Inn and Suites"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": -221.92
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "panamacitymarinaservices",
+    "names": [
+     "Panama City Marina services In"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "panamacitymarineservices",
+    "names": [
+     "Panama City Marine Services"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "patronisbrothers",
+    "names": [
+     "Patronis Brothers Inc",
+     "Patronis Brothers, Inc",
+     "Patronis Brothers",
+     "Patronis Brothers, Inc."
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 10,
+    "given": 5800.0
+   },
+   "b": {
+    "key": "patronisbrotherscaptander",
+    "names": [
+     "Patronis Brothers - Capt Ander"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "patronisbrothers",
+    "names": [
+     "Patronis Brothers Inc",
+     "Patronis Brothers, Inc",
+     "Patronis Brothers",
+     "Patronis Brothers, Inc."
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 10,
+    "given": 5800.0
+   },
+   "b": {
+    "key": "patronisbrothersenterprises",
+    "names": [
+     "Patronis Brothers Enterprises"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "paypalbpaypal",
+    "names": [
+     "PayPal B PayPal"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 0.14
+   },
+   "b": {
+    "key": "paypalpaypal",
+    "names": [
+     "PayPal PayPal"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 0.18
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "persimmon200a",
+    "names": [
+     "Persimmon 200A"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "persimmon200b",
+    "names": [
+     "Persimmon 200B"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "pineapplewilleys",
+    "names": [
+     "Pineapple Willey's"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "b": {
+    "key": "pineapplewillys",
+    "names": [
+     "Pineapple Willy\\'s",
+     "Pineapple Willy's",
+     "Pineapple Willys"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 4,
+    "given": 2000.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "pineapplewilleys",
+    "names": [
+     "Pineapple Willey's"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "b": {
+    "key": "pineapplywillys",
+    "names": [
+     "Pineapply Willy\\'s"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "pineapplewillys",
+    "names": [
+     "Pineapple Willy\\'s",
+     "Pineapple Willy's",
+     "Pineapple Willys"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 4,
+    "given": 2000.0
+   },
+   "b": {
+    "key": "pineapplywillys",
+    "names": [
+     "Pineapply Willy\\'s"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "pineapplewillys",
+    "names": [
+     "Pineapple Willy\\'s",
+     "Pineapple Willy's",
+     "Pineapple Willys"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 4,
+    "given": 2000.0
+   },
+   "b": {
+    "key": "pinnapplewilly",
+    "names": [
+     "Pinnapple Willy"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "plumdelightfulantiq",
+    "names": [
+     "PLUM DELIGHTFUL ANTIQ INC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 100.0
+   },
+   "b": {
+    "key": "plumdelightfulantiques",
+    "names": [
+     "Plum Delightful Antiques Inc"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 250.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "prestiageworldwidepcb",
+    "names": [
+     "Prestiage Worldwide PCB Inc."
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "b": {
+    "key": "prestigeworldwidepcb",
+    "names": [
+     "Prestige Worldwide PCB"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "professionalwindowglass",
+    "names": [
+     "Professional Window and Glass"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "b": {
+    "key": "professionalwindowsglass",
+    "names": [
+     "Professional Windows & Glass"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 995.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "prosperityqualityservices",
+    "names": [
+     "Prosperity Quality Services"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "prospertyqualityservices",
+    "names": [
+     "Prosperty Quality Services Inc"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "realtorspolicticaladvocacyc",
+    "names": [
+     "Realtors Polictical Advocacy C"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "b": {
+    "key": "realtorspoliticaladvocacy",
+    "names": [
+     "Realtors Political Advocacy Co",
+     "Realtors Political Advocacy"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 19,
+    "given": 15500.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "realtorspoliticalaction",
+    "names": [
+     "Realtors Political Action - FL"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "realtorspoliticalactioncomm",
+    "names": [
+     "Realtors Political Action Comm"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 1500.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "realtorspoliticalaction",
+    "names": [
+     "Realtors Political Action - FL"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "realtorspoliticalactioncommittee",
+    "names": [
+     "Realtors Political Action Committee Florida"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "realtorspoliticalactioncomm",
+    "names": [
+     "Realtors Political Action Comm"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 1500.0
+   },
+   "b": {
+    "key": "realtorspoliticalactioncommittee",
+    "names": [
+     "Realtors Political Action Committee Florida"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "realtorspoliticaladvocacy",
+    "names": [
+     "Realtors Political Advocacy Co",
+     "Realtors Political Advocacy"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 19,
+    "given": 15500.0
+   },
+   "b": {
+    "key": "realtorspoliticaladvocacycommittee",
+    "names": [
+     "Realtors Political Advocacy Committee"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 1500.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "registersenterprises",
+    "names": [
+     "Registers Enterprises"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "b": {
+    "key": "registersenterprisesofbay",
+    "names": [
+     "Register's Enterprises of Bay"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "rxexpresspharmacy",
+    "names": [
+     "Rx Express Pharmacy"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 250.0
+   },
+   "b": {
+    "key": "rxexpresspharmacyofpanama",
+    "names": [
+     "RX Express Pharmacy of Panama"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "sagemanagementconsultants",
+    "names": [
+     "Sage Management Consultants",
+     "Sage Management Consultants, L"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 1500.0
+   },
+   "b": {
+    "key": "sagemanagementconsultantsllc",
+    "names": [
+     "Sage Management ConsultantsLLC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "seabyrdmarine",
+    "names": [
+     "Seabyrd Marine Inc"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "seabyrdmarineconstruction",
+    "names": [
+     "Sea Byrd Marine Construction"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "shuckumsoysterpub",
+    "names": [
+     "Shuckums Oyster Pub"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "b": {
+    "key": "shuckumsoysterpubgrill",
+    "names": [
+     "Shuckums Oyster Pub and Grill",
+     "Shuckums Oyster Pub & Grill"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 3,
+    "given": 2000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "southernlandmarks",
+    "names": [
+     "Southern Landmarks Inc"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 250.0
+   },
+   "b": {
+    "key": "southernlandmarksin",
+    "names": [
+     "Southern Landmarks In"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "sweetwatermitigation",
+    "names": [
+     "Sweetwater Mitigation"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 1500.0
+   },
+   "b": {
+    "key": "sweetwatermitigationbank",
+    "names": [
+     "Sweetwater Mitigation Bank llc",
+     "Sweetwater Mitigation Bank, In",
+     "Sweetwater Mitigation Bank",
+     "Sweetwater Mitigation Bank Inc"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 4,
+    "given": 4000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "syfrettdykeslaw",
+    "names": [
+     "Syfrett & Dykes Law"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "syfrettdykeslawoffice",
+    "names": [
+     "Syfrett & Dykes Law Office"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 1500.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "syfrettdykeslaw",
+    "names": [
+     "Syfrett & Dykes Law"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "syfrettdykeslawoffices",
+    "names": [
+     "Syfrett & Dykes Law Offices,PA",
+     "Syfrett & Dykes Law offices"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 3,
+    "given": 2500.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "syfrettdykeslawoffice",
+    "names": [
+     "Syfrett & Dykes Law Office"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 1500.0
+   },
+   "b": {
+    "key": "syfrettdykeslawoffices",
+    "names": [
+     "Syfrett & Dykes Law Offices,PA",
+     "Syfrett & Dykes Law offices"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 3,
+    "given": 2500.0
+   },
+   "reason": "plural"
+  },
+  {
+   "a": {
+    "key": "tadlockassoc",
+    "names": [
+     "Tadlock & Assoc, LLC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "tadlockassociates",
+    "names": [
+     "Tadlock and Associates",
+     "Tadlock & Associates",
+     "TADLOCK & ASSOCIATES",
+     "Tadlock and Associates, LLC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 5,
+    "given": 3500.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "teachablemomentsconsultant",
+    "names": [
+     "Teachable Moments Consultant,"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "teachablemomentsconsulting",
+    "names": [
+     "Teachable Moments Consulting, Inc."
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "thackerconstruction",
+    "names": [
+     "Thacker Construction"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "b": {
+    "key": "thackerconstructionofnw",
+    "names": [
+     "Thacker Construction of NW FL"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "thomasdonutsnackshop",
+    "names": [
+     "Thomas Donut & Snack Shop LLC",
+     "Thomas' Donut & Snack Shop",
+     "Thomas' Donut & Snack Shop, LL"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 3,
+    "given": 1500.0
+   },
+   "b": {
+    "key": "thomasdonutsnakshop",
+    "names": [
+     "Thomas' Donut & Snak Shop, LLC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "treasureislandmarina",
+    "names": [
+     "Treasure Island Marina"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 3,
+    "given": 3000.0
+   },
+   "b": {
+    "key": "tresureislandmarina",
+    "names": [
+     "Tresure Island Marina"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "triplej",
+    "names": [
+     "Triple J"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 100.0
+   },
+   "b": {
+    "key": "triplejs",
+    "names": [
+     "Triple J's"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 100.0
+   },
+   "reason": "plural"
+  },
+  {
+   "a": {
+    "key": "trumbullbottledwater",
+    "names": [
+     "Trumbull Bottled Water",
+     "Trumbull Bottled Water Inc",
+     "Trumbull Bottled Water Inc.",
+     "TRUMBULL BOTTLED WATER, INC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 9,
+    "given": 8100.0
+   },
+   "b": {
+    "key": "trumbullbottleswater",
+    "names": [
+     "Trumbull Bottles Water, Inc"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "trumbullbottledwater",
+    "names": [
+     "Trumbull Bottled Water",
+     "Trumbull Bottled Water Inc",
+     "Trumbull Bottled Water Inc.",
+     "TRUMBULL BOTTLED WATER, INC"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 9,
+    "given": 8100.0
+   },
+   "b": {
+    "key": "trumbullbottlewater",
+    "names": [
+     "Trumbull Bottle Water, Inc."
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "trumbullbottleswater",
+    "names": [
+     "Trumbull Bottles Water, Inc"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "b": {
+    "key": "trumbullbottlewater",
+    "names": [
+     "Trumbull Bottle Water, Inc."
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "trumbullwaterservices",
+    "names": [
+     "Trumbull Water Services"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "b": {
+    "key": "trumbullwaterservicesofnw",
+    "names": [
+     "Trumbull Water Services of NW"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "trumbullwaterservices",
+    "names": [
+     "Trumbull Water Services"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "b": {
+    "key": "trumbullwaterservicesofnwf",
+    "names": [
+     "Trumbull Water Services of NWF"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 2000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "trumbullwaterservicesofnw",
+    "names": [
+     "Trumbull Water Services of NW"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "trumbullwaterservicesofnwf",
+    "names": [
+     "Trumbull Water Services of NWF"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 2000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "veteransepticsiteconst",
+    "names": [
+     "Veteran Septic & Site Const"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "b": {
+    "key": "veteransepticsiteconstruc",
+    "names": [
+     "Veteran Septic & Site Construc"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "victoriaslastbite",
+    "names": [
+     "Victoria's Last Bite"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 4,
+    "given": 1633.0
+   },
+   "b": {
+    "key": "victoriaslastbitecafe",
+    "names": [
+     "Victoria's Last Bite Cafe"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 267.5
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "vittlescompanies",
+    "names": [
+     "Vittles Companies, Inc.",
+     "Vittles Companies, Inc",
+     "Vittles Companies",
+     "Vittles Companies Inc."
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 13,
+    "given": 2044.52
+   },
+   "b": {
+    "key": "vittlescompaniesincoperati",
+    "names": [
+     "Vittles Companies, Inc Operati"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 100.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "vittlesincoperating",
+    "names": [
+     "Vittles Inc. operating"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 100.0
+   },
+   "b": {
+    "key": "vittlesincoperatingaccount",
+    "names": [
+     "Vittles Inc Operating Account"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 100.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "vittlestago",
+    "names": [
+     "Vittles Ta Go, Inc.",
+     "Vittles Ta Go, Inc",
+     "Vittles Ta Go",
+     "Vittles Ta Go Inc."
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 10,
+    "given": 989.04
+   },
+   "b": {
+    "key": "vittlestogo",
+    "names": [
+     "Vittles To Go, Inc.",
+     "Vittles To Go, Inc",
+     "Vittles to Go, Inc"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 3,
+    "given": 300.0
+   },
+   "reason": "spelling"
+  },
+  {
+   "a": {
+    "key": "warrendozierequip",
+    "names": [
+     "Warren Dozier & Equip. Co,"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "b": {
+    "key": "warrendozierequipment",
+    "names": [
+     "Warren Dozier & Equipment Inc"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 2000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "whiteswrecker",
+    "names": [
+     "White's Wrecker"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 300.0
+   },
+   "b": {
+    "key": "whiteswreckerservice",
+    "names": [
+     "White's Wrecker Service",
+     "White\\'s Wrecker Service"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 1500.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "whodeyprints",
+    "names": [
+     "Who Dey Prints"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 241.34
+   },
+   "b": {
+    "key": "whodeyprintsembroidery",
+    "names": [
+     "Who-Dey Prints and Embroidery",
+     "Who Dey Prints & Embroidery"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 2,
+    "given": 177.5
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "winterfellconstruction",
+    "names": [
+     "Winterfell Construction Inc."
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "b": {
+    "key": "winterfellconstructiongroup",
+    "names": [
+     "Winterfell Construction Group"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "shortened"
+  },
+  {
+   "a": {
+    "key": "winterfellconstruction",
+    "names": [
+     "Winterfell Construction Inc."
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 500.0
+   },
+   "b": {
+    "key": "winterfellconstucton",
+    "names": [
+     "Winterfell Constucton Co"
+    ],
+    "vendor_id": null,
+    "records": null,
+    "gifts": 1,
+    "given": 1000.0
+   },
+   "reason": "spelling"
+  }
+ ],
+ "joined_by_sunbiz_filing": [
+  {
+   "sunbiz_doc_number": "590756",
+   "entity": "TDW, INC.",
+   "spellings": {
+    "tdwincdbatoniesdance": [
+     "TDW INC DBA TONIES DANCE"
+    ],
+    "tdwincdbatoniesdanceworks": [
+     "TDW Inc DBA Tonies Dance Works"
+    ],
+    "tdw": [
+     "TDW INC"
+    ]
+   }
+  },
+  {
+   "sunbiz_doc_number": "L04000045045",
+   "entity": "MCKINNEY INSURANCE & INVESTMENTS, LLC",
+   "spellings": {
+    "mckinneyinsuranceinvestmen": [
+     "McKinney Insurance & Investmen"
+    ],
+    "mckinneyinsuranceinvest": [
+     "McKinney Insurance & Invest."
+    ]
+   }
+  },
+  {
+   "sunbiz_doc_number": "L09000063982",
+   "entity": "RJ GORMAN MARINE CONSTRUCTION LLC",
+   "spellings": {
+    "rjgormanmarineconstruction": [
+     "RJ Gorman Marine Construction"
+    ],
+    "rjgormanmarine": [
+     "RJ Gorman Marine"
+    ]
+   }
+  },
+  {
+   "sunbiz_doc_number": "L16000056211",
+   "entity": "EXTREME LAND CLEARING & EXCAVATION, LLC",
+   "spellings": {
+    "extremelandclearingexcav": [
+     "Extreme Land Clearing & Excav"
+    ],
+    "extremelandclearingexc": [
+     "Extreme Land Clearing & Exc."
+    ],
+    "extremelandclearingexcava": [
+     "Extreme Land Clearing & Excava"
+    ]
+   }
+  },
+  {
+   "sunbiz_doc_number": "L18000184748",
+   "entity": "JERRY WILSON BUILDING CONTRACTOR LLC",
+   "spellings": {
+    "jerrywilsonbuildingcontract": [
+     "Jerry Wilson Building Contract"
+    ],
+    "jerrywilsonbuildingcont": [
+     "Jerry Wilson Building Cont LLC"
+    ]
+   }
+  },
+  {
+   "sunbiz_doc_number": "L99000004446",
+   "entity": "GULF COAST UTILITY CONTRACTORS, L.L.C.",
+   "spellings": {
+    "gulfcoastutilitycontractors": [
+     "GULF COAST UTILITY CONTRACTORS",
+     "Gulf Coast Utility Contractors"
+    ],
+    "gulfcoastutilitycontractor": [
+     "Gulf Coast Utility Contractor"
+    ]
+   }
+  },
+  {
+   "sunbiz_doc_number": "M74236",
+   "entity": "ROBERTS AND ROBERTS, INCORPORATED",
+   "spellings": {
+    "robertsroberts": [
+     "ROBERTS & ROBERTS INC",
+     "Roberts & Roberts INC",
+     "Roberts & Roberts, Inc",
+     "Roberts Roberts",
+     "Roberts and Roberts",
+     "Roberts and Roberts Inc",
+     "Roberts and Roberts Inc.",
+     "Roberts and Roberts, Inc."
+    ],
+    "robersroberts": [
+     "Robers and Roberts, Inc"
+    ]
+   }
+  },
+  {
+   "sunbiz_doc_number": "P03000046344",
+   "entity": "MICHAEL LOVCHUK INSURANCE AGENCY, INC",
+   "spellings": {
+    "michaellovchukinsuranceagency": [
+     "Michael Lovchuk Insurance Agency"
+    ],
+    "michaellovchukinsurance": [
+     "Michael Lovchuk Insurance Inc"
+    ],
+    "michaellovchukinsuranceagen": [
+     "Michael Lovchuk Insurance Agen"
+    ]
+   }
+  },
+  {
+   "sunbiz_doc_number": "P09000092674",
+   "entity": "EMERALD COAST ROOFING & CONSTRUCTION CO.",
+   "spellings": {
+    "emeraldcoastroofingconstru": [
+     "Emerald Coast Roofing &Constru"
+    ],
+    "emeraldcoastroofingconst": [
+     "Emerald Coast Roofing & Const"
+    ]
+   }
+  },
+  {
+   "sunbiz_doc_number": "P13000054771",
+   "entity": "INFINITY CONSTRUCTION ENTERPRISES, INC.",
+   "spellings": {
+    "infinityconstructionenterpri": [
+     "Infinity Construction Enterpri"
+    ],
+    "infinityconstructionenterprises": [
+     "Infinity Construction Enterprises Inc"
+    ],
+    "infinityconstructionenterpr": [
+     "Infinity Construction Enterpr."
+    ]
+   }
+  },
+  {
+   "sunbiz_doc_number": "P94000077770",
+   "entity": "INLAND CONSTRUCTION AND ENGINEERING, INC.",
+   "spellings": {
+    "inlandconstruction": [
+     "Inland Construction",
+     "Inland Construction Inc",
+     "Inland Construction Inc.",
+     "Inland Construction inc"
+    ],
+    "inlandconstructionengineer": [
+     "Inland Construction & Engineer"
+    ]
+   }
+  },
+  {
+   "sunbiz_doc_number": "P97000002830",
+   "entity": "MARSHALL BROTHERS CONSTRUCTION & ENGINEERING, INC.",
+   "spellings": {
+    "marshallbrothers": [
+     "MARSHALL BROTHERS",
+     "Marshall Brother\\'s",
+     "Marshall Brothers",
+     "Marshall Brothers, Inc."
+    ],
+    "marshallbothers": [
+     "Marshall Bothers"
+    ],
+    "marshallbrothersconstruction": [
+     "Marshall Brothers Construction"
+    ]
+   }
+  },
+  {
+   "sunbiz_doc_number": "P97000066986",
+   "entity": "SOUTHEASTERN OUTDOOR MANAGEMENT, INC.",
+   "spellings": {
+    "southeasternoutdoormgmt": [
+     "Southeastern Outdoor Mgmt"
+    ],
+    "southeasternoutdoormanagemen": [
+     "Southeastern Outdoor Managemen"
+    ]
+   }
+  },
+  {
+   "sunbiz_doc_number": "P99000042421",
+   "entity": "ADISHVAR, INC.",
+   "spellings": {
+    "adishvarllcdbapcbcigars": [
+     "Adishvar LLC DBA PCB Cigars"
+    ],
+    "adishvar": [
+     "Adishvar LLC",
+     "Adishvar, LLC"
+    ]
+   }
+  },
+  {
+   "sunbiz_doc_number": "V72062",
+   "entity": "WES PAC, INC.",
+   "spellings": {
+    "wespacincdbafirefly": [
+     "Wes Pac Inc DBA Firefly",
+     "Wes Pac, Inc - dba Firefly"
+    ],
+    "wespac": [
+     "Wes Pac, Inc"
+    ]
+   }
+  }
+ ],
+ "sunbiz_join_skipped": [],
+ "decisions": {
+  "confirmed": 0,
+  "rejected": 0
+ }
 }

@@ -242,6 +242,13 @@ async function route(req, res, action, me) {
       await audit(me.e, action, null, {status: body.status, n: r.updated, motions: r.rows.map(x => x.id)});
       return r;
     }
+    case 'names': return require('./_names').list({status: Q.status == null ? 'unreviewed' : String(Q.status), reason: String(Q.reason || ''), q: String(Q.q || '')});
+    case 'names_review': {
+      if (req.method !== 'POST') throw Object.assign(new Error('Use POST.'), {status: 405});
+      const r = await require('./_names').review(body, me.e);
+      await audit(me.e, action, null, {status: body.status, n: r.updated, pairs: r.rows.map(x => x.a_key + '|' + x.b_key)});
+      return r;
+    }
     case 'careers': return require('./_careers').matches({county: Q.county, status: String(Q.status || ''), confidence: String(Q.confidence || ''), q: String(Q.q || '')});
     case 'careers_review': {
       if (req.method !== 'POST') throw Object.assign(new Error('Use POST.'), {status: 405});

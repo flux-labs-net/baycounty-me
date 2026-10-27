@@ -1,9 +1,11 @@
 """Campaign gifts and contracts (/connections/campaign-gifts). Formerly /public-money/campaign-money."""
-import html, json, os, re
+import html, json, os, re, sys
 from collections import defaultdict
 from city_filter import city_bar, by_city, KEYS
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, os.path.join(HERE, '..', 'data', 'entities'))
+import ids  # noqa: E402
 DATA = os.path.join(HERE, '..', 'data', 'campaign')
 e = lambda s: html.escape(str(s if s is not None else ''))
 GOVN = {'county': 'Bay County Commission', 'constitutional': 'County officers', 'schools': 'School Board & Superintendent', 'pc': 'Panama City', 'pcb': 'Panama City Beach',
@@ -20,6 +22,11 @@ SUFFIX = re.compile(r'[\s,.]*\b(inc|llc|ll|co|corp|corporation|company|pa|pllc|l
 
 
 def _base(n):
+    """(name key, legal suffix): spellings of one name share it. Names joined as one company (same Sunbiz filing, a
+    hand-checked or admin-confirmed join: data/entities/name_joins.json) share the group key whatever their suffix."""
+    j = ids.joined_key(ids.vkey(NAME_FIX.get(n.strip(), n.strip())))
+    if j:
+        return j, ''
     b, suf = n.strip(), ''
     m = SUFFIX.search(b)
     if m:

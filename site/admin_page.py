@@ -233,7 +233,7 @@ details.ag summary{cursor:pointer;color:var(--blue)} details.ag pre{white-space:
 # Count keys match api/_summary.js; an item with waiting work shows a dot.
 MENU = [
     ('Review', 'teal', 'shield', [('owners', 'Business owners', 'owners'), ('limits', 'Gifts over the limit', 'limits'),
-                                  ('boards', 'Nonprofit boards', 'boards'), ('ties', 'Business ties', 'ties'),
+                                  ('boards', 'Nonprofit boards', 'boards'), ('ties', 'Business ties', 'ties'), ('names', 'Name matches', None),
                                   ('minutes', 'Votes from minutes', 'minutes'), ('accounting', 'Accounting files', 'accounting')]),
     ('Outreach', 'blue', 'send', [('compose', 'Write to officials', None), ('correspondence', 'Conversations', 'replies'),
                                   ('records', 'Records requests', 'records')]),
@@ -520,6 +520,18 @@ def admin_page(out_dir):
         <select class="sel" id="bt-status" aria-label="Review status"><option value="unreviewed">Unreviewed</option><option value="">Any review status</option><option value="confirmed">Confirmed</option><option value="rejected">Rejected</option></select>
       </div>
       <div class="tw"><table class="at" id="bt-table" data-tt="off"><thead><tr><th class="pk"><input type="checkbox" data-bk-all aria-label="Select all shown"></th><th>Official</th><th>Sunbiz person</th><th>Businesses</th><th>Links</th><th>Review</th></tr></thead><tbody></tbody></table></div>
+    </section>
+
+    <section id="tab-names" class="pane" hidden>
+      <div class="banner"><div><b>Is this one company?</b> <span class="small muted">Business names from contracts, check registers and campaign filings that look alike but are not joined yet: one or two letters apart, a plural, or one name cut short. Spacing, punctuation and legal suffixes are already handled (“T K Vandy LLC” and “TKVandy, LLC” are one name), and names filed with the same Sunbiz document are joined automatically. <b>Confirm</b> joins the two names everywhere (vendor pages, campaign gifts, the money map, the apps) after the next daily refresh; <b>Keep apart</b> stops the pair from coming back.</span></div></div>
+      <div class="tiles" id="nm-tiles"></div>
+      <div class="row" style="gap:8px;flex-wrap:wrap;margin:18px 0 8px">
+        <h2 class="h2 grow" style="margin:0">Look-alike names</h2>
+        <input class="sel" id="nm-q" type="search" placeholder="Name" aria-label="Name">
+        <select class="sel" id="nm-reason" aria-label="Why they look alike"><option value="">Any reason</option><option value="spelling">One or two letters apart</option><option value="plural">Plural</option><option value="shortened">One name is the start of the other</option></select>
+        <select class="sel" id="nm-status" aria-label="Review status"><option value="unreviewed">Unreviewed</option><option value="">Any review status</option><option value="confirmed">One company</option><option value="rejected">Kept apart</option></select>
+      </div>
+      <div class="tw"><table class="at" id="nm-table" data-tt="off"><thead><tr><th class="pk"><input type="checkbox" data-bk-all aria-label="Select all shown"></th><th>Name</th><th>Looks like</th><th>Why</th><th>Review</th></tr></thead><tbody></tbody></table></div>
     </section>
 
     <section id="tab-progress" class="pane" hidden>

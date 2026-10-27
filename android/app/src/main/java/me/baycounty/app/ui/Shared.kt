@@ -171,13 +171,16 @@ fun DonorMatchRow(match: DonorContracts.Match, showCandidate: Boolean = true) {
             val pid = match.person_id; val vid = match.vendor_id
             when {
                 showCandidate && pid != null -> Text(match.candidate ?: pid, style = T.subheadBold, color = Brand.navy, modifier = Modifier.weight(1f).clickable { nav.push(Route.Person(pid)) })
-                !showCandidate && vid != null -> Text(match.vendor ?: match.contributor ?: vid, style = T.subheadBold, color = Brand.navy, modifier = Modifier.weight(1f).clickable { nav.push(Route.Vendor(vid)) })
-                else -> Text((if (showCandidate) match.candidate else match.contributor) ?: "", style = T.subheadBold, color = Brand.text, modifier = Modifier.weight(1f))
+                !showCandidate && vid != null -> Text(match.vendor_name ?: match.vendor ?: match.contributor ?: vid, style = T.subheadBold, color = Brand.navy, modifier = Modifier.weight(1f).clickable { nav.push(Route.Vendor(vid)) })
+                else -> Text((if (showCandidate) match.candidate else (match.vendor_name ?: match.contributor)) ?: "", style = T.subheadBold, color = Brand.text, modifier = Modifier.weight(1f))
             }
             match.contribution_amount?.let { Text(Format.money(it), style = T.subhead, color = Brand.text) }
         }
         Text(listOfNotNull(match.office, match.election).joinToString(" · "), style = T.caption, color = Brand.secondary)
-        match.contract_ids_or_descriptions?.takeIf { it.isNotEmpty() }?.let { Text(it.take(2).joinToString("\n"), style = T.caption2, color = Brand.text) }
+        match.contract_governments?.takeIf { it.size > 1 }?.let { Text("Paid by " + it.joinToString(", "), style = T.caption2, color = Brand.secondary) }
+        match.contract_ids_or_descriptions?.takeIf { it.isNotEmpty() }?.let {
+            Text(it.take(3).joinToString("\n") + (if (it.size > 3) "\n+${it.size - 3} more" else ""), style = T.caption2, color = Brand.text)
+        }
         if (match.same_government_as_office == true) Badge("Contract with the same government", Brand.salmon)
     }
 }

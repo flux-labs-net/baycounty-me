@@ -1,0 +1,5 @@
+{
+ "about": "Admin calls on look-alike business names from /admin > Name matches. confirmed: one company; rejected: keep apart. Read by build_entities.py. Written by export_name_decisions.py.",
+ "confirmed": [],
+ "rejected": []
+}

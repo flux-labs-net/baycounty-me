@@ -1,25 +1,25 @@
 {
  "as_of": "2026-10-27",
  "method": "Business contributors to current officeholders (campaign.json), 2026 local candidates (../elections/finance_2026.json) and every other local campaign since 2016 (campaign_history.json) were compared with every payee on this site: contracts, change orders and emergency purchases (../contracts/contracts.json), Bay County and Lynn Haven check registers, payments by the three tourism agencies (../money/payments.json) and the CRA ledger (../merged.json). Both sides are resolved to vendor ids in ../entities/vendors.json: names are matched after removing punctuation, \"&\"/\"and\" and legal suffixes, plus hand-checked joins of truncated or misspelled names (each with its evidence in vendors.json). Nothing is fuzzy-matched. \"exact\" = the filed name matches the vendor's name; \"likely\" = the filing truncates, abbreviates or misspells it. One row per contributor spelling, candidate and paying government. A match shows only that an organization with the same name appears in both public records; it does not show why a gift was made or how a contract was awarded. Built by build_vendor_matches.py.",
- "count_rows": 541,
- "count_contributor_candidate_pairs": 204,
+ "count_rows": 545,
+ "count_contributor_candidate_pairs": 206,
  "count_distinct_vendors": 50,
  "count_by_confidence_pairs": {
-  "exact": 183,
-  "likely": 21
+  "exact": 182,
+  "likely": 24
  },
- "pairs_where_contract_government_matches_office": 67,
+ "pairs_where_contract_government_matches_office": 69,
  "count_by_gift_source_pairs": {
   "2026 candidates (finance_2026.json)": 20,
   "current officeholders (campaign.json)": 45,
-  "past campaigns 2016-2025 (campaign_history.json)": 139
+  "past campaigns 2016-2025 (campaign_history.json)": 141
  },
  "count_by_record_type_rows": {
-  "cra": 44,
+  "cra": 45,
   "change_order": 93,
-  "contract": 412,
+  "contract": 415,
   "register": 149,
-  "tdc": 63,
+  "tdc": 64,
   "emergency": 70
  },
  "matches": [
@@ -2167,7 +2167,7 @@
     "register"
    ],
    "match_confidence": "likely",
-   "note": "The filing spells the name \"Robers and Roberts, Inc\"; matched to Roberts and Roberts by a hand-checked spelling join. \"ROBERTS & ROBER\" is the Lynn Haven warrant list cut at 15 characters; \"Robers and Roberts, Inc\" is a typo in one 2026 campaign filing.",
+   "note": "The filing spells the name \"Robers and Roberts, Inc\"; matched to Roberts and Roberts by a hand-checked spelling join. \"ROBERTS & ROBER\" is the Lynn Haven warrant list cut at 15 characters; \"Robers and Roberts, Inc\" is a typo in one 2026 campaign filing. Spellings \"ROBERTS & ROBERTS INC\", \"Robers and Roberts, Inc\" were each matched by name to the same Florida corporation filing (Sunbiz document M74236, ROBERTS AND ROBERTS, INCORPORATED).",
    "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=719&rellevel=4&committee=N",
    "office_gov_id": "county",
    "same_government_as_office": true
@@ -2211,7 +2211,7 @@
     "contract"
    ],
    "match_confidence": "likely",
-   "note": "The filing spells the name \"Robers and Roberts, Inc\"; matched to Roberts and Roberts by a hand-checked spelling join. \"ROBERTS & ROBER\" is the Lynn Haven warrant list cut at 15 characters; \"Robers and Roberts, Inc\" is a typo in one 2026 campaign filing.",
+   "note": "The filing spells the name \"Robers and Roberts, Inc\"; matched to Roberts and Roberts by a hand-checked spelling join. \"ROBERTS & ROBER\" is the Lynn Haven warrant list cut at 15 characters; \"Robers and Roberts, Inc\" is a typo in one 2026 campaign filing. Spellings \"ROBERTS & ROBERTS INC\", \"Robers and Roberts, Inc\" were each matched by name to the same Florida corporation filing (Sunbiz document M74236, ROBERTS AND ROBERTS, INCORPORATED).",
    "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=719&rellevel=4&committee=N",
    "office_gov_id": "county",
    "same_government_as_office": false
@@ -2256,7 +2256,7 @@
     "register"
    ],
    "match_confidence": "likely",
-   "note": "The filing spells the name \"Robers and Roberts, Inc\"; matched to Roberts and Roberts by a hand-checked spelling join. \"ROBERTS & ROBER\" is the Lynn Haven warrant list cut at 15 characters; \"Robers and Roberts, Inc\" is a typo in one 2026 campaign filing.",
+   "note": "The filing spells the name \"Robers and Roberts, Inc\"; matched to Roberts and Roberts by a hand-checked spelling join. \"ROBERTS & ROBER\" is the Lynn Haven warrant list cut at 15 characters; \"Robers and Roberts, Inc\" is a typo in one 2026 campaign filing. Spellings \"ROBERTS & ROBERTS INC\", \"Robers and Roberts, Inc\" were each matched by name to the same Florida corporation filing (Sunbiz document M74236, ROBERTS AND ROBERTS, INCORPORATED).",
    "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=719&rellevel=4&committee=N",
    "office_gov_id": "county",
    "same_government_as_office": false
@@ -2295,7 +2295,7 @@
     "contract"
    ],
    "match_confidence": "likely",
-   "note": "The filing spells the name \"Robers and Roberts, Inc\"; matched to Roberts and Roberts by a hand-checked spelling join. \"ROBERTS & ROBER\" is the Lynn Haven warrant list cut at 15 characters; \"Robers and Roberts, Inc\" is a typo in one 2026 campaign filing.",
+   "note": "The filing spells the name \"Robers and Roberts, Inc\"; matched to Roberts and Roberts by a hand-checked spelling join. \"ROBERTS & ROBER\" is the Lynn Haven warrant list cut at 15 characters; \"Robers and Roberts, Inc\" is a typo in one 2026 campaign filing. Spellings \"ROBERTS & ROBERTS INC\", \"Robers and Roberts, Inc\" were each matched by name to the same Florida corporation filing (Sunbiz document M74236, ROBERTS AND ROBERTS, INCORPORATED).",
    "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=719&rellevel=4&committee=N",
    "office_gov_id": "county",
    "same_government_as_office": false
@@ -4516,7 +4516,7 @@
     "register"
    ],
    "match_confidence": "likely",
-   "note": "The filing spells the name \"Marshall Bothers\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing.",
+   "note": "The filing spells the name \"Marshall Bothers\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing. Spellings \"MARSHALL BROTHERS\", \"Marshall Bothers\", \"Marshall Brothers Construction\" were each matched by name to the same Florida corporation filing (Sunbiz document P97000002830, MARSHALL BROTHERS CONSTRUCTION & ENGINEERING, INC.).",
    "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=26&c=bay&ca=650&rellevel=4&committee=N",
    "office_gov_id": "county",
    "same_government_as_office": true
@@ -4558,7 +4558,7 @@
     "emergency"
    ],
    "match_confidence": "likely",
-   "note": "The filing spells the name \"Marshall Bothers\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing.",
+   "note": "The filing spells the name \"Marshall Bothers\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing. Spellings \"MARSHALL BROTHERS\", \"Marshall Bothers\", \"Marshall Brothers Construction\" were each matched by name to the same Florida corporation filing (Sunbiz document P97000002830, MARSHALL BROTHERS CONSTRUCTION & ENGINEERING, INC.).",
    "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=26&c=bay&ca=650&rellevel=4&committee=N",
    "office_gov_id": "county",
    "same_government_as_office": false
@@ -4624,7 +4624,7 @@
     "emergency"
    ],
    "match_confidence": "likely",
-   "note": "The filing spells the name \"Marshall Bothers\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing.",
+   "note": "The filing spells the name \"Marshall Bothers\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing. Spellings \"MARSHALL BROTHERS\", \"Marshall Bothers\", \"Marshall Brothers Construction\" were each matched by name to the same Florida corporation filing (Sunbiz document P97000002830, MARSHALL BROTHERS CONSTRUCTION & ENGINEERING, INC.).",
    "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=26&c=bay&ca=650&rellevel=4&committee=N",
    "office_gov_id": "county",
    "same_government_as_office": false
@@ -4663,7 +4663,7 @@
     "contract"
    ],
    "match_confidence": "likely",
-   "note": "The filing spells the name \"Marshall Bothers\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing.",
+   "note": "The filing spells the name \"Marshall Bothers\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing. Spellings \"MARSHALL BROTHERS\", \"Marshall Bothers\", \"Marshall Brothers Construction\" were each matched by name to the same Florida corporation filing (Sunbiz document P97000002830, MARSHALL BROTHERS CONSTRUCTION & ENGINEERING, INC.).",
    "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=26&c=bay&ca=650&rellevel=4&committee=N",
    "office_gov_id": "county",
    "same_government_as_office": false
@@ -4708,7 +4708,7 @@
     "register"
    ],
    "match_confidence": "likely",
-   "note": "The filing spells the name \"RJ Gorman Marine\"; matched to RJ Gorman Marine Construction by a hand-checked spelling join. Register spelling \"R.J. Gorman Marine Construction LLC\"; one campaign filing cuts it to \"RJ Gorman Marine\". Kept separate from RJ Gorman Contracting, LLC (a different LLC that built the Mexico Beach and PCB piers).",
+   "note": "The filing spells the name \"RJ Gorman Marine\"; matched to RJ Gorman Marine Construction by a hand-checked spelling join. Register spelling \"R.J. Gorman Marine Construction LLC\"; one campaign filing cuts it to \"RJ Gorman Marine\". Kept separate from RJ Gorman Contracting, LLC (a different LLC that built the Mexico Beach and PCB piers). Spellings \"RJ Gorman Marine Construction\", \"RJ Gorman Marine\" were each matched by name to the same Florida corporation filing (Sunbiz document L09000063982, RJ GORMAN MARINE CONSTRUCTION LLC).",
    "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=26&c=bay&ca=650&rellevel=4&committee=N",
    "office_gov_id": "county",
    "same_government_as_office": true
@@ -6264,7 +6264,7 @@
     "contract"
    ],
    "match_confidence": "likely",
-   "note": "The filing spells the name \"Southeastern Outdoor Mgmt\"; matched to Southeastern Outdoor Management by a hand-checked spelling join. \"Southeastern Outdoor Met Inc\" and \"Mgt Inc\" are how the scanned Visit PCB register reads; \"Southeastern Outdoor Mgmt\" is a campaign filing.",
+   "note": "The filing spells the name \"Southeastern Outdoor Mgmt\"; matched to Southeastern Outdoor Management by a hand-checked spelling join. \"Southeastern Outdoor Met Inc\" and \"Mgt Inc\" are how the scanned Visit PCB register reads; \"Southeastern Outdoor Mgmt\" is a campaign filing. Spellings \"Southeastern Outdoor Mgmt\", \"Southeastern Outdoor Managemen\" were each matched by name to the same Florida corporation filing (Sunbiz document P97000066986, SOUTHEASTERN OUTDOOR MANAGEMENT, INC.).",
    "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=26&c=bay&ca=638&rellevel=4&committee=N",
    "office_gov_id": "county",
    "same_government_as_office": true
@@ -6303,7 +6303,7 @@
     "tdc"
    ],
    "match_confidence": "likely",
-   "note": "The filing spells the name \"Southeastern Outdoor Mgmt\"; matched to Southeastern Outdoor Management by a hand-checked spelling join. \"Southeastern Outdoor Met Inc\" and \"Mgt Inc\" are how the scanned Visit PCB register reads; \"Southeastern Outdoor Mgmt\" is a campaign filing.",
+   "note": "The filing spells the name \"Southeastern Outdoor Mgmt\"; matched to Southeastern Outdoor Management by a hand-checked spelling join. \"Southeastern Outdoor Met Inc\" and \"Mgt Inc\" are how the scanned Visit PCB register reads; \"Southeastern Outdoor Mgmt\" is a campaign filing. Spellings \"Southeastern Outdoor Mgmt\", \"Southeastern Outdoor Managemen\" were each matched by name to the same Florida corporation filing (Sunbiz document P97000066986, SOUTHEASTERN OUTDOOR MANAGEMENT, INC.).",
    "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=26&c=bay&ca=638&rellevel=4&committee=N",
    "office_gov_id": "county",
    "same_government_as_office": false
@@ -18327,7 +18327,7 @@
     "register"
    ],
    "match_confidence": "likely",
-   "note": "The filing spells the name \"RJ Gorman Marine\"; matched to RJ Gorman Marine Construction by a hand-checked spelling join. Register spelling \"R.J. Gorman Marine Construction LLC\"; one campaign filing cuts it to \"RJ Gorman Marine\". Kept separate from RJ Gorman Contracting, LLC (a different LLC that built the Mexico Beach and PCB piers).",
+   "note": "The filing spells the name \"RJ Gorman Marine\"; matched to RJ Gorman Marine Construction by a hand-checked spelling join. Register spelling \"R.J. Gorman Marine Construction LLC\"; one campaign filing cuts it to \"RJ Gorman Marine\". Kept separate from RJ Gorman Contracting, LLC (a different LLC that built the Mexico Beach and PCB piers). Spellings \"RJ Gorman Marine Construction\", \"RJ Gorman Marine\" were each matched by name to the same Florida corporation filing (Sunbiz document L09000063982, RJ GORMAN MARINE CONSTRUCTION LLC).",
    "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=31&c=bay&ca=642&rellevel=4&committee=N",
    "office_gov_id": "pcb",
    "same_government_as_office": false
@@ -19520,6 +19520,94 @@
    "same_government_as_office": false
   },
   {
+   "contributor": "Inland Construction & Engineer",
+   "contributor_spellings": null,
+   "vendor": "Inland Construction and Engineering, Inc.",
+   "vendor_id": "inland",
+   "vendor_entity": "Inland Construction and Engineering",
+   "candidate": "Mike Nelson",
+   "person_id": "mike-nelson",
+   "office": "Bay County Commission, District 1",
+   "election": "2016 Primary/General Elections (11/8/2016)",
+   "gift_source": "past campaigns 2016-2025 (campaign_history.json)",
+   "contribution_amount": 500.0,
+   "refunded_by_campaign": null,
+   "contribution_dates": [
+    "2016-06-09"
+   ],
+   "contribution_items": [
+    "check"
+   ],
+   "contract_ids_or_descriptions": [
+    "Contract 2023-07-18: Contract 23-14, RESTORE artificial reef construction ($458,425.00)",
+    "Contract 2026-06-02: Contract 26-31, McKenzie boat ramp project ($592,295.00)"
+   ],
+   "record_ids": [
+    "contract:44",
+    "contract:142"
+   ],
+   "contract_source_urls": [
+    "https://baycountyfl.primegov.com/Public/CompiledDocument/1399",
+    "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=4766"
+   ],
+   "contract_government": "Bay County BOCC",
+   "contract_gov_id": "county",
+   "record_types": [
+    "contract"
+   ],
+   "match_confidence": "likely",
+   "note": "The filing spells the name \"Inland Construction & Engineer\"; matched to Inland Construction and Engineering by a hand-checked spelling join. Panama City agendas use both the full name and \"Inland Construction\"; the CRA ledger names \"Inland Construction & Engineering\" for the Millville park bid. Spellings \"Inland Construction\", \"Inland Construction & Engineer\" were each matched by name to the same Florida corporation filing (Sunbiz document P94000077770, INLAND CONSTRUCTION AND ENGINEERING, INC.).",
+   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=14&c=bay&ca=326&rellevel=4&committee=N",
+   "office_gov_id": "county",
+   "same_government_as_office": true
+  },
+  {
+   "contributor": "Inland Construction & Engineer",
+   "contributor_spellings": null,
+   "vendor": "Inland Construction / Inland Construction & Engineering (bid awarded May 28, 2024) / Inland Construction and Engineering",
+   "vendor_id": "inland",
+   "vendor_entity": "Inland Construction and Engineering",
+   "candidate": "Mike Nelson",
+   "person_id": "mike-nelson",
+   "office": "Bay County Commission, District 1",
+   "election": "2016 Primary/General Elections (11/8/2016)",
+   "gift_source": "past campaigns 2016-2025 (campaign_history.json)",
+   "contribution_amount": 500.0,
+   "refunded_by_campaign": null,
+   "contribution_dates": [
+    "2016-06-09"
+   ],
+   "contribution_items": [
+    "check"
+   ],
+   "contract_ids_or_descriptions": [
+    "Contract 2025-01-28: PC24-017, Hentz Park ($924,120.00)",
+    "Contract 2025-12-16: Bid PC26-008, Hometown Revitalization Group DD ($892,500.00)",
+    "Panama City CRA budgeted FY2024-FY2026: Millville Waterfront Park renovation, Phase II: playground, amphitheater, trees, restrooms (total project cost, paid from FY2024-26 Millville district budgets) ($1,500,000.00)"
+   ],
+   "record_ids": [
+    "contract:244",
+    "contract:272",
+    "cra:6"
+   ],
+   "contract_source_urls": [
+    "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_01282025-725?html=true",
+    "https://panamacity.gov/AgendaCenter/ViewFile/Agenda/_12162025-796?html=true",
+    "https://panamacity.gov/785/Current-Projects"
+   ],
+   "contract_government": "City of Panama City",
+   "contract_gov_id": "pc",
+   "record_types": [
+    "contract",
+    "cra"
+   ],
+   "match_confidence": "likely",
+   "note": "The filing spells the name \"Inland Construction & Engineer\"; matched to Inland Construction and Engineering by a hand-checked spelling join. Panama City agendas use both the full name and \"Inland Construction\"; the CRA ledger names \"Inland Construction & Engineering\" for the Millville park bid. Spellings \"Inland Construction\", \"Inland Construction & Engineer\" were each matched by name to the same Florida corporation filing (Sunbiz document P94000077770, INLAND CONSTRUCTION AND ENGINEERING, INC.).",
+   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=14&c=bay&ca=326&rellevel=4&committee=N",
+   "office_gov_id": "county",
+   "same_government_as_office": false
+  },
+  {
    "contributor": "Magnum Engineering",
    "contributor_spellings": null,
    "vendor": "Dewberry Engineers (with Halff Associates and Magnum Engineering)",
@@ -19935,7 +20023,7 @@
     "register"
    ],
    "match_confidence": "likely",
-   "note": "The filing spells the name \"Marshall Brothers Construction\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing.",
+   "note": "The filing spells the name \"Marshall Brothers Construction\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing. Spellings \"MARSHALL BROTHERS\", \"Marshall Bothers\", \"Marshall Brothers Construction\" were each matched by name to the same Florida corporation filing (Sunbiz document P97000002830, MARSHALL BROTHERS CONSTRUCTION & ENGINEERING, INC.).",
    "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=15&c=bay&ca=332&rellevel=4&committee=N",
    "office_gov_id": "pcb",
    "same_government_as_office": false
@@ -19977,7 +20065,7 @@
     "emergency"
    ],
    "match_confidence": "likely",
-   "note": "The filing spells the name \"Marshall Brothers Construction\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing.",
+   "note": "The filing spells the name \"Marshall Brothers Construction\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing. Spellings \"MARSHALL BROTHERS\", \"Marshall Bothers\", \"Marshall Brothers Construction\" were each matched by name to the same Florida corporation filing (Sunbiz document P97000002830, MARSHALL BROTHERS CONSTRUCTION & ENGINEERING, INC.).",
    "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=15&c=bay&ca=332&rellevel=4&committee=N",
    "office_gov_id": "pcb",
    "same_government_as_office": false
@@ -20043,7 +20131,7 @@
     "emergency"
    ],
    "match_confidence": "likely",
-   "note": "The filing spells the name \"Marshall Brothers Construction\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing.",
+   "note": "The filing spells the name \"Marshall Brothers Construction\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing. Spellings \"MARSHALL BROTHERS\", \"Marshall Bothers\", \"Marshall Brothers Construction\" were each matched by name to the same Florida corporation filing (Sunbiz document P97000002830, MARSHALL BROTHERS CONSTRUCTION & ENGINEERING, INC.).",
    "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=15&c=bay&ca=332&rellevel=4&committee=N",
    "office_gov_id": "pcb",
    "same_government_as_office": false
@@ -20082,7 +20170,7 @@
     "contract"
    ],
    "match_confidence": "likely",
-   "note": "The filing spells the name \"Marshall Brothers Construction\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing.",
+   "note": "The filing spells the name \"Marshall Brothers Construction\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing. Spellings \"MARSHALL BROTHERS\", \"Marshall Bothers\", \"Marshall Brothers Construction\" were each matched by name to the same Florida corporation filing (Sunbiz document P97000002830, MARSHALL BROTHERS CONSTRUCTION & ENGINEERING, INC.).",
    "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=15&c=bay&ca=332&rellevel=4&committee=N",
    "office_gov_id": "pcb",
    "same_government_as_office": false
@@ -20808,7 +20896,7 @@
     "register"
    ],
    "match_confidence": "likely",
-   "note": "The filing spells the name \"Marshall Brothers Construction\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing.",
+   "note": "The filing spells the name \"Marshall Brothers Construction\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing. Spellings \"MARSHALL BROTHERS\", \"Marshall Bothers\", \"Marshall Brothers Construction\" were each matched by name to the same Florida corporation filing (Sunbiz document P97000002830, MARSHALL BROTHERS CONSTRUCTION & ENGINEERING, INC.).",
    "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=20&c=bay&ca=445&rellevel=4&committee=N",
    "office_gov_id": "lh",
    "same_government_as_office": false
@@ -20850,7 +20938,7 @@
     "emergency"
    ],
    "match_confidence": "likely",
-   "note": "The filing spells the name \"Marshall Brothers Construction\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing.",
+   "note": "The filing spells the name \"Marshall Brothers Construction\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing. Spellings \"MARSHALL BROTHERS\", \"Marshall Bothers\", \"Marshall Brothers Construction\" were each matched by name to the same Florida corporation filing (Sunbiz document P97000002830, MARSHALL BROTHERS CONSTRUCTION & ENGINEERING, INC.).",
    "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=20&c=bay&ca=445&rellevel=4&committee=N",
    "office_gov_id": "lh",
    "same_government_as_office": true
@@ -20916,7 +21004,7 @@
     "emergency"
    ],
    "match_confidence": "likely",
-   "note": "The filing spells the name \"Marshall Brothers Construction\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing.",
+   "note": "The filing spells the name \"Marshall Brothers Construction\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing. Spellings \"MARSHALL BROTHERS\", \"Marshall Bothers\", \"Marshall Brothers Construction\" were each matched by name to the same Florida corporation filing (Sunbiz document P97000002830, MARSHALL BROTHERS CONSTRUCTION & ENGINEERING, INC.).",
    "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=20&c=bay&ca=445&rellevel=4&committee=N",
    "office_gov_id": "lh",
    "same_government_as_office": false
@@ -20955,7 +21043,7 @@
     "contract"
    ],
    "match_confidence": "likely",
-   "note": "The filing spells the name \"Marshall Brothers Construction\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing.",
+   "note": "The filing spells the name \"Marshall Brothers Construction\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing. Spellings \"MARSHALL BROTHERS\", \"Marshall Bothers\", \"Marshall Brothers Construction\" were each matched by name to the same Florida corporation filing (Sunbiz document P97000002830, MARSHALL BROTHERS CONSTRUCTION & ENGINEERING, INC.).",
    "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=20&c=bay&ca=445&rellevel=4&committee=N",
    "office_gov_id": "lh",
    "same_government_as_office": false
@@ -21536,7 +21624,7 @@
     "register"
    ],
    "match_confidence": "likely",
-   "note": "The filing spells the name \"Marshall Brothers Construction\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing.",
+   "note": "The filing spells the name \"Marshall Brothers Construction\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing. Spellings \"MARSHALL BROTHERS\", \"Marshall Bothers\", \"Marshall Brothers Construction\" were each matched by name to the same Florida corporation filing (Sunbiz document P97000002830, MARSHALL BROTHERS CONSTRUCTION & ENGINEERING, INC.).",
    "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=15&c=bay&ca=309&rellevel=4&committee=N",
    "office_gov_id": "pcb",
    "same_government_as_office": false
@@ -21578,7 +21666,7 @@
     "emergency"
    ],
    "match_confidence": "likely",
-   "note": "The filing spells the name \"Marshall Brothers Construction\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing.",
+   "note": "The filing spells the name \"Marshall Brothers Construction\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing. Spellings \"MARSHALL BROTHERS\", \"Marshall Bothers\", \"Marshall Brothers Construction\" were each matched by name to the same Florida corporation filing (Sunbiz document P97000002830, MARSHALL BROTHERS CONSTRUCTION & ENGINEERING, INC.).",
    "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=15&c=bay&ca=309&rellevel=4&committee=N",
    "office_gov_id": "pcb",
    "same_government_as_office": false
@@ -21644,7 +21732,7 @@
     "emergency"
    ],
    "match_confidence": "likely",
-   "note": "The filing spells the name \"Marshall Brothers Construction\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing.",
+   "note": "The filing spells the name \"Marshall Brothers Construction\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing. Spellings \"MARSHALL BROTHERS\", \"Marshall Bothers\", \"Marshall Brothers Construction\" were each matched by name to the same Florida corporation filing (Sunbiz document P97000002830, MARSHALL BROTHERS CONSTRUCTION & ENGINEERING, INC.).",
    "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=15&c=bay&ca=309&rellevel=4&committee=N",
    "office_gov_id": "pcb",
    "same_government_as_office": false
@@ -21683,7 +21771,7 @@
     "contract"
    ],
    "match_confidence": "likely",
-   "note": "The filing spells the name \"Marshall Brothers Construction\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing.",
+   "note": "The filing spells the name \"Marshall Brothers Construction\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing. Spellings \"MARSHALL BROTHERS\", \"Marshall Bothers\", \"Marshall Brothers Construction\" were each matched by name to the same Florida corporation filing (Sunbiz document P97000002830, MARSHALL BROTHERS CONSTRUCTION & ENGINEERING, INC.).",
    "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=15&c=bay&ca=309&rellevel=4&committee=N",
    "office_gov_id": "pcb",
    "same_government_as_office": false
@@ -23608,7 +23696,7 @@
     "register"
    ],
    "match_confidence": "likely",
-   "note": "The filing spells the name \"Marshall Brothers Construction\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing.",
+   "note": "The filing spells the name \"Marshall Brothers Construction\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing. Spellings \"MARSHALL BROTHERS\", \"Marshall Bothers\", \"Marshall Brothers Construction\" were each matched by name to the same Florida corporation filing (Sunbiz document P97000002830, MARSHALL BROTHERS CONSTRUCTION & ENGINEERING, INC.).",
    "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=19&c=bay&ca=426&rellevel=4&committee=N",
    "office_gov_id": "schools",
    "same_government_as_office": false
@@ -23650,7 +23738,7 @@
     "emergency"
    ],
    "match_confidence": "likely",
-   "note": "The filing spells the name \"Marshall Brothers Construction\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing.",
+   "note": "The filing spells the name \"Marshall Brothers Construction\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing. Spellings \"MARSHALL BROTHERS\", \"Marshall Bothers\", \"Marshall Brothers Construction\" were each matched by name to the same Florida corporation filing (Sunbiz document P97000002830, MARSHALL BROTHERS CONSTRUCTION & ENGINEERING, INC.).",
    "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=19&c=bay&ca=426&rellevel=4&committee=N",
    "office_gov_id": "schools",
    "same_government_as_office": false
@@ -23716,7 +23804,7 @@
     "emergency"
    ],
    "match_confidence": "likely",
-   "note": "The filing spells the name \"Marshall Brothers Construction\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing.",
+   "note": "The filing spells the name \"Marshall Brothers Construction\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing. Spellings \"MARSHALL BROTHERS\", \"Marshall Bothers\", \"Marshall Brothers Construction\" were each matched by name to the same Florida corporation filing (Sunbiz document P97000002830, MARSHALL BROTHERS CONSTRUCTION & ENGINEERING, INC.).",
    "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=19&c=bay&ca=426&rellevel=4&committee=N",
    "office_gov_id": "schools",
    "same_government_as_office": false
@@ -23755,7 +23843,7 @@
     "contract"
    ],
    "match_confidence": "likely",
-   "note": "The filing spells the name \"Marshall Brothers Construction\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing.",
+   "note": "The filing spells the name \"Marshall Brothers Construction\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing. Spellings \"MARSHALL BROTHERS\", \"Marshall Bothers\", \"Marshall Brothers Construction\" were each matched by name to the same Florida corporation filing (Sunbiz document P97000002830, MARSHALL BROTHERS CONSTRUCTION & ENGINEERING, INC.).",
    "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=19&c=bay&ca=426&rellevel=4&committee=N",
    "office_gov_id": "schools",
    "same_government_as_office": false
@@ -24525,22 +24613,29 @@
    "same_government_as_office": false
   },
   {
-   "contributor": "Inland Construction",
-   "contributor_spellings": null,
+   "contributor": "Inland Construction & Engineer",
+   "contributor_spellings": [
+    "Inland Construction",
+    "Inland Construction & Engineer"
+   ],
    "vendor": "Inland Construction and Engineering, Inc.",
    "vendor_id": "inland",
    "vendor_entity": "Inland Construction and Engineering",
    "candidate": "Tommy Hamm",
    "person_id": "tommy-hamm",
    "office": "Bay County Commission, District 1",
-   "election": "2020 Primary (08/18/2020)/General Election (11/3/2020)",
+   "election": "2024 Primary/General Election (11/5/2024)",
    "gift_source": "past campaigns 2016-2025 (campaign_history.json)",
-   "contribution_amount": 1000.0,
+   "contribution_amount": 3000.0,
    "refunded_by_campaign": null,
    "contribution_dates": [
-    "2020-03-01"
+    "2020-03-01",
+    "2023-12-07",
+    "2024-04-22"
    ],
    "contribution_items": [
+    "check",
+    "check",
     "check"
    ],
    "contract_ids_or_descriptions": [
@@ -24560,29 +24655,36 @@
    "record_types": [
     "contract"
    ],
-   "match_confidence": "exact",
-   "note": "Names match after removing punctuation and legal suffixes.",
-   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=21&c=bay&ca=490&rellevel=4&committee=N",
+   "match_confidence": "likely",
+   "note": "The filing spells the name \"Inland Construction & Engineer\"; matched to Inland Construction and Engineering by a hand-checked spelling join. Panama City agendas use both the full name and \"Inland Construction\"; the CRA ledger names \"Inland Construction & Engineering\" for the Millville park bid. Spellings \"Inland Construction\", \"Inland Construction & Engineer\" were each matched by name to the same Florida corporation filing (Sunbiz document P94000077770, INLAND CONSTRUCTION AND ENGINEERING, INC.).",
+   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=26&c=bay&ca=641&rellevel=4&committee=N",
    "office_gov_id": "county",
    "same_government_as_office": true
   },
   {
-   "contributor": "Inland Construction",
-   "contributor_spellings": null,
+   "contributor": "Inland Construction & Engineer",
+   "contributor_spellings": [
+    "Inland Construction",
+    "Inland Construction & Engineer"
+   ],
    "vendor": "Inland Construction / Inland Construction & Engineering (bid awarded May 28, 2024) / Inland Construction and Engineering",
    "vendor_id": "inland",
    "vendor_entity": "Inland Construction and Engineering",
    "candidate": "Tommy Hamm",
    "person_id": "tommy-hamm",
    "office": "Bay County Commission, District 1",
-   "election": "2020 Primary (08/18/2020)/General Election (11/3/2020)",
+   "election": "2024 Primary/General Election (11/5/2024)",
    "gift_source": "past campaigns 2016-2025 (campaign_history.json)",
-   "contribution_amount": 1000.0,
+   "contribution_amount": 3000.0,
    "refunded_by_campaign": null,
    "contribution_dates": [
-    "2020-03-01"
+    "2020-03-01",
+    "2023-12-07",
+    "2024-04-22"
    ],
    "contribution_items": [
+    "check",
+    "check",
     "check"
    ],
    "contract_ids_or_descriptions": [
@@ -24606,9 +24708,9 @@
     "contract",
     "cra"
    ],
-   "match_confidence": "exact",
-   "note": "Names match after removing punctuation and legal suffixes.",
-   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=21&c=bay&ca=490&rellevel=4&committee=N",
+   "match_confidence": "likely",
+   "note": "The filing spells the name \"Inland Construction & Engineer\"; matched to Inland Construction and Engineering by a hand-checked spelling join. Panama City agendas use both the full name and \"Inland Construction\"; the CRA ledger names \"Inland Construction & Engineering\" for the Millville park bid. Spellings \"Inland Construction\", \"Inland Construction & Engineer\" were each matched by name to the same Florida corporation filing (Sunbiz document P94000077770, INLAND CONSTRUCTION AND ENGINEERING, INC.).",
+   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=26&c=bay&ca=641&rellevel=4&committee=N",
    "office_gov_id": "county",
    "same_government_as_office": false
   },
@@ -24718,6 +24820,84 @@
    "match_confidence": "exact",
    "note": "Names match after removing punctuation and legal suffixes.",
    "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=21&c=bay&ca=490&rellevel=4&committee=N",
+   "office_gov_id": "county",
+   "same_government_as_office": false
+  },
+  {
+   "contributor": "Southeastern Outdoor Managemen",
+   "contributor_spellings": null,
+   "vendor": "Southeastern Outdoor Management",
+   "vendor_id": "southeastern-outdoor",
+   "vendor_entity": "Southeastern Outdoor Management",
+   "candidate": "Tommy Hamm",
+   "person_id": "tommy-hamm",
+   "office": "Bay County Commission, District 1",
+   "election": "2024 Primary/General Election (11/5/2024)",
+   "gift_source": "past campaigns 2016-2025 (campaign_history.json)",
+   "contribution_amount": 250.0,
+   "refunded_by_campaign": null,
+   "contribution_dates": [
+    "2024-07-25"
+   ],
+   "contribution_items": [
+    "check"
+   ],
+   "contract_ids_or_descriptions": [
+    "Contract 2024-09-17: Contract 24-55, landscape services for the Tourist Development Council ($408,084.00)"
+   ],
+   "record_ids": [
+    "contract:84"
+   ],
+   "contract_source_urls": [
+    "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=3581"
+   ],
+   "contract_government": "Bay County BOCC",
+   "contract_gov_id": "county",
+   "record_types": [
+    "contract"
+   ],
+   "match_confidence": "likely",
+   "note": "The filing spells the name \"Southeastern Outdoor Managemen\"; matched to Southeastern Outdoor Management by a hand-checked spelling join. \"Southeastern Outdoor Met Inc\" and \"Mgt Inc\" are how the scanned Visit PCB register reads; \"Southeastern Outdoor Mgmt\" is a campaign filing. Spellings \"Southeastern Outdoor Mgmt\", \"Southeastern Outdoor Managemen\" were each matched by name to the same Florida corporation filing (Sunbiz document P97000066986, SOUTHEASTERN OUTDOOR MANAGEMENT, INC.).",
+   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=26&c=bay&ca=641&rellevel=4&committee=N",
+   "office_gov_id": "county",
+   "same_government_as_office": true
+  },
+  {
+   "contributor": "Southeastern Outdoor Managemen",
+   "contributor_spellings": null,
+   "vendor": "Southeastern Outdoor Mgt Inc",
+   "vendor_id": "southeastern-outdoor",
+   "vendor_entity": "Southeastern Outdoor Management",
+   "candidate": "Tommy Hamm",
+   "person_id": "tommy-hamm",
+   "office": "Bay County Commission, District 1",
+   "election": "2024 Primary/General Election (11/5/2024)",
+   "gift_source": "past campaigns 2016-2025 (campaign_history.json)",
+   "contribution_amount": 250.0,
+   "refunded_by_campaign": null,
+   "contribution_dates": [
+    "2024-07-25"
+   ],
+   "contribution_items": [
+    "check"
+   ],
+   "contract_ids_or_descriptions": [
+    "Panama City Beach Convention & Visitors Bureau (Visit Panama City Beach) check register (FY2024, FY2025, FY2026): $290,108.83 paid in 21 payments"
+   ],
+   "record_ids": [
+    "tdc:0/40"
+   ],
+   "contract_source_urls": [
+    "https://bayforms.baycoclerk.com/PublicAccess/PublicRecordSearch/"
+   ],
+   "contract_government": "Panama City Beach Convention & Visitors Bureau (Visit Panama City Beach)",
+   "contract_gov_id": "visit_pcb",
+   "record_types": [
+    "tdc"
+   ],
+   "match_confidence": "likely",
+   "note": "The filing spells the name \"Southeastern Outdoor Managemen\"; matched to Southeastern Outdoor Management by a hand-checked spelling join. \"Southeastern Outdoor Met Inc\" and \"Mgt Inc\" are how the scanned Visit PCB register reads; \"Southeastern Outdoor Mgmt\" is a campaign filing. Spellings \"Southeastern Outdoor Mgmt\", \"Southeastern Outdoor Managemen\" were each matched by name to the same Florida corporation filing (Sunbiz document P97000066986, SOUTHEASTERN OUTDOOR MANAGEMENT, INC.).",
+   "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=26&c=bay&ca=641&rellevel=4&committee=N",
    "office_gov_id": "county",
    "same_government_as_office": false
   },
@@ -25599,7 +25779,7 @@
     "register"
    ],
    "match_confidence": "likely",
-   "note": "The filing spells the name \"Marshall Brothers Construction\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing.",
+   "note": "The filing spells the name \"Marshall Brothers Construction\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing. Spellings \"MARSHALL BROTHERS\", \"Marshall Bothers\", \"Marshall Brothers Construction\" were each matched by name to the same Florida corporation filing (Sunbiz document P97000002830, MARSHALL BROTHERS CONSTRUCTION & ENGINEERING, INC.).",
    "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=21&c=bay&ca=489&rellevel=4&committee=N",
    "office_gov_id": "schools",
    "same_government_as_office": false
@@ -25641,7 +25821,7 @@
     "emergency"
    ],
    "match_confidence": "likely",
-   "note": "The filing spells the name \"Marshall Brothers Construction\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing.",
+   "note": "The filing spells the name \"Marshall Brothers Construction\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing. Spellings \"MARSHALL BROTHERS\", \"Marshall Bothers\", \"Marshall Brothers Construction\" were each matched by name to the same Florida corporation filing (Sunbiz document P97000002830, MARSHALL BROTHERS CONSTRUCTION & ENGINEERING, INC.).",
    "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=21&c=bay&ca=489&rellevel=4&committee=N",
    "office_gov_id": "schools",
    "same_government_as_office": false
@@ -25707,7 +25887,7 @@
     "emergency"
    ],
    "match_confidence": "likely",
-   "note": "The filing spells the name \"Marshall Brothers Construction\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing.",
+   "note": "The filing spells the name \"Marshall Brothers Construction\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing. Spellings \"MARSHALL BROTHERS\", \"Marshall Bothers\", \"Marshall Brothers Construction\" were each matched by name to the same Florida corporation filing (Sunbiz document P97000002830, MARSHALL BROTHERS CONSTRUCTION & ENGINEERING, INC.).",
    "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=21&c=bay&ca=489&rellevel=4&committee=N",
    "office_gov_id": "schools",
    "same_government_as_office": false
@@ -25746,7 +25926,7 @@
     "contract"
    ],
    "match_confidence": "likely",
-   "note": "The filing spells the name \"Marshall Brothers Construction\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing.",
+   "note": "The filing spells the name \"Marshall Brothers Construction\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing. Spellings \"MARSHALL BROTHERS\", \"Marshall Bothers\", \"Marshall Brothers Construction\" were each matched by name to the same Florida corporation filing (Sunbiz document P97000002830, MARSHALL BROTHERS CONSTRUCTION & ENGINEERING, INC.).",
    "campaign_report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=21&c=bay&ca=489&rellevel=4&committee=N",
    "office_gov_id": "schools",
    "same_government_as_office": false

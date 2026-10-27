@@ -234,16 +234,19 @@ struct DonorMatchRow: View {
                 if showCandidate, let pid = match.person_id {
                     NavigationLink(value: Route.person(pid)) { Text(match.candidate ?? pid).font(.subheadline.weight(.medium)) }
                 } else if let vid = match.vendor_id, !showCandidate {
-                    NavigationLink(value: Route.vendor(vid)) { Text(match.vendor ?? match.contributor ?? vid).font(.subheadline.weight(.medium)) }
+                    NavigationLink(value: Route.vendor(vid)) { Text(match.vendor_name ?? match.vendor ?? match.contributor ?? vid).font(.subheadline.weight(.medium)) }
                 } else {
-                    Text(showCandidate ? (match.candidate ?? "") : (match.contributor ?? "")).font(.subheadline.weight(.medium))
+                    Text(showCandidate ? (match.candidate ?? "") : (match.vendor_name ?? match.contributor ?? "")).font(.subheadline.weight(.medium))
                 }
                 Spacer()
                 if let a = match.contribution_amount { Text(Format.money(a)).monospacedDigit() }
             }
             Text([match.office, match.election].compactMap { $0 }.joined(separator: " · ")).font(.caption).foregroundStyle(.secondary)
+            if let govs = match.contract_governments, govs.count > 1 {
+                Text("Paid by " + govs.joined(separator: ", ")).font(.caption2).foregroundStyle(.secondary)
+            }
             if let items = match.contract_ids_or_descriptions, !items.isEmpty {
-                Text(items.prefix(2).joined(separator: "\n")).font(.caption2)
+                Text(items.prefix(3).joined(separator: "\n") + (items.count > 3 ? "\n+\(items.count - 3) more" : "")).font(.caption2)
             }
             if match.same_government_as_office == true {
                 Badge(text: "Contract with the same government", color: Brand.salmon)
@@ -273,7 +276,7 @@ struct DonorContractsView: View {
         var out: [Group] = []
         for (key, ms) in grouped {
             let total: Double = ms.compactMap { $0.contribution_amount }.reduce(0, +)
-            let name: String = ms.first?.vendor ?? ms.first?.contributor ?? key
+            let name: String = ms.first?.vendor_name ?? ms.first?.vendor ?? ms.first?.contributor ?? key
             out.append(Group(id: key, name: name, vendorID: ms.first?.vendor_id, matches: ms, total: total))
         }
         return out.sorted { $0.total > $1.total }

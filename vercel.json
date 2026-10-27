@@ -15,7 +15,7 @@
     },
     "api/admin.js": {
       "maxDuration": 60,
-      "includeFiles": "data/civic/official_contacts.json"
+      "includeFiles": "{data/civic/official_contacts.json,data/entities/vendor_review.json}"
     }
   },
   "crons": [
