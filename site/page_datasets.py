@@ -329,6 +329,9 @@ def _chamber_rows():
             return 'business:' + sb[k][0].lower(), 'Sunbiz filing with the same name'
         return None, None
 
+    import json as _json
+    pf = os.path.join(HERE, '..', 'data', 'chambers', place.split('-', 1)[-1], 'photos.json')
+    photos = {(p['chamber_id'], p['name']): p for p in (_json.load(open(pf))['photos'] if os.path.exists(pf) else [])}
     chambers, leaders = [], []
     for c in C['chambers']:
         n = nps.get(c['nonprofit_id']) or {}
@@ -363,6 +366,7 @@ def _chamber_rows():
                 'person_name': r['name'], 'title': r['title'], 'organization': r.get('organization'), 'term_ends': r.get('term_ends'), 'year': r.get('year'),
                 'current': r['group'] != 'Past chairs', 'person_entity_id': pid, 'person_url': page_url(pid), 'person_match': pmatch,
                 'organization_entity_id': oid, 'organization_url': page_url(oid) if oid else None, 'organization_match': omatch,
+                'photo': (photos.get((c['chamber_id'], r['name'])) or {}).get('photo'),
                 'as_of': C['as_of'], 'source_url': c['staff_url'] if r['group'] == 'Staff' else c['board_url']})
     programs = []
     for c in C['chambers']:
@@ -388,6 +392,19 @@ def chamber_leaders():
 
 def chamber_events():
     return _chamber_rows()[2]
+
+
+def community_events():
+    """Upcoming events from public calendars around the county (data/events/<county>/events.json, from
+    data/events/fetch_events.py): city and county calendars, the library system, visitor bureaus and the PCB Chamber."""
+    import json
+    from place import PLACE_ID
+    p = os.path.join(HERE, '..', 'data', 'events', PLACE_ID.split('-', 1)[-1], 'events.json')
+    if not os.path.exists(p):
+        return []
+    cols = ['event_id', 'source_id', 'source', 'gov', 'town', 'title', 'starts', 'ends', 'all_day', 'venue', 'category',
+            'recurring', 'cost', 'url', 'source_url']
+    return [{'place_id': PLACE_ID, **{k: e.get(k) for k in cols}} for e in json.load(open(p))['events']]
 
 
 def tax_districts():
@@ -922,5 +939,6 @@ DATASETS = [
     ('chambers', 'Chambers of commerce', "One row per chamber of commerce: what it is and who it serves, its board meetings, its latest IRS Form 990 (revenue, expenses, assets, employees), public money paid to it by local governments and tourism agencies (from nonprofit-payments), its foundation, and links to its member directory, events and join page. entity_id is its profile (entity-profiles). Chambers are private, member-owned nonprofits, not government agencies.", chambers),
     ('chamber-leaders', 'Chambers of commerce: boards and staff', "Each chamber's board (executive committee, directors, ex officio and honorary members), staff and past chairs since 2016, as listed on the chamber's own website on as_of: name, title and the organization each board member represents. No phone numbers, emails or addresses. person_entity_id and organization_entity_id link to profiles; person_match and organization_match say how each link was made (blank = no match, shown as plain text).", chamber_leaders),
     ('chamber-events', 'Chambers of commerce: events and programs', "Upcoming events from each chamber's public calendar (kind event: title, start and end in local time, venue and city, category, the event's own link) and each chamber's yearly and monthly signature programs (kind program: schedule and what it is). chamber_event is false for community events a chamber lists on its calendar. Refreshed daily where the calendar has a public feed.", chamber_events),
+    ('community-events', 'Community events', "What's happening around the county in the next two months, from public calendars: the county and city calendars, the library system, visitor bureaus and the Panama City Beach Chamber. One row per event date: title, start and end in local time, town, venue name, category (Community, Public meeting, Library, Chamber), recurring for programs listed on two or more dates, and the event's own link. Refreshed daily.", community_events),
     ('tax-districts', 'Tax districts', 'Which taxing authorities levy property tax in each tax district, and the combined millage. Rates by year are in property-tax-rates (authority_id).', tax_districts),
 ]

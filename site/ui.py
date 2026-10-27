@@ -117,7 +117,7 @@ PAGE_ICON = {
     '/public-money/who-gets-paid': 'dollar', '/public-money/votes': 'vote', '/public-money/savings': 'piggy',
     '/public-money/audits': 'search', '/connections': 'network', '/elections': 'flag', '/elections/past': 'flag', '/connections/campaign-gifts': 'heart',
     '/connections/money-map': 'link', '/connections/business-ties': 'store', '/connections/shared-owners': 'network',
-    '/connections/nonprofits': 'heart', '/chambers': 'store', '/meetings': 'calendar', '/alerts': 'bell', '/records-request': 'mail',
+    '/connections/nonprofits': 'heart', '/chambers': 'store', '/events': 'calendar', '/meetings': 'calendar', '/alerts': 'bell', '/records-request': 'mail',
     '/correspondence': 'mail', '/glossary': 'book', '/open-data': 'download', '/developers': 'code', '/updates': 'news',
     '/about': 'info', '/privacy': 'shield', '/search': 'search', '/people': 'users', '/profile': 'user',
 }

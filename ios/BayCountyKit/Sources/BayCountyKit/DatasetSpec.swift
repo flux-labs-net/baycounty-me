@@ -151,6 +151,8 @@ public struct DatasetSpec: Sendable {
                                  badge: "role_group", filters: ["chamber", "role_group"], page: "chambers"),
         "chamber-events": .init(.accountability, "calendar", title: ["title"], subtitle: ["chamber", "venue", "schedule"], detail: "about",
                                 date: ["starts"], badge: "category", filters: ["chamber", "kind", "category"], page: "chambers"),
+        "community-events": .init(.more, "calendar", title: ["title"], subtitle: ["town", "venue", "source"],
+                                  date: ["starts"], badge: "category", filters: ["town", "category", "source"], page: "events"),
         "nonprofits": .init(.accountability, "heart.text.square", title: ["name"], subtitle: ["kind", "city"], detail: "subsection",
                             amount: ["total_revenue", "irs_revenue"], badge: "latest_return_form", filters: ["kind", "city", "subsection"], page: "connections/nonprofits"),
         "nonprofit-board-members": .init(.accountability, "person.3", title: ["person"], subtitle: ["nonprofit", "titles"], detail: "sources",

@@ -73,6 +73,11 @@ jobs:
         # The PCB Chamber's public calendar feed. A failure keeps yesterday's events and records the error.
         continue-on-error: true
         run: python data/chambers/fetch_events.py
+      - name: Fetch community events
+        # County and city calendars, the library system, visitor bureaus and the PCB Chamber (after the chamber fetch,
+        # which it reads). A failed source keeps yesterday's events.
+        continue-on-error: true
+        run: python data/events/fetch_events.py
       - name: Check campaign finance freshness
         # refresh.sh keeps the old file when the Elections Office site is down, so a long outage would be silent.
         id: finance_freshness
@@ -135,7 +140,7 @@ jobs:
       - name: Commit if changed
         id: commit_and_push
         run: |
-          src="data/meetings data/elections/finance_2026.json data/campaign/owner_gifts.json data/agendas/agenda_items.json data/votes/minutes_votes.json data/entities/name_decisions.json data/chambers/bay/events.json"
+          src="data/meetings data/elections/finance_2026.json data/campaign/owner_gifts.json data/agendas/agenda_items.json data/votes/minutes_votes.json data/entities/name_decisions.json data/chambers/bay/events.json data/events/bay/events.json"
           # git status --porcelain also lists new, untracked files, which git diff --quiet ignores.
           if [ -z "$(git status --porcelain -- data site/public)" ]; then echo "No changes"; exit 0; fi
           .github/scripts/push_refresh.sh "Daily refresh: meetings, agenda items, votes from minutes and campaign finance ($(date -u +%Y-%m-%d))" $src

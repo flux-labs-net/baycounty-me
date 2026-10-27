@@ -183,6 +183,8 @@ data class DatasetSpec(
                                  badge = "role_group", filters = listOf("chamber", "role_group"), page = "chambers"),
         "chamber-events" to DatasetSpec(Section.ACCOUNTABILITY, "calendar", title = listOf("title"), subtitle = listOf("chamber", "venue", "schedule"), detail = "about",
                                 date = listOf("starts"), badge = "category", filters = listOf("chamber", "kind", "category"), page = "chambers"),
+        "community-events" to DatasetSpec(Section.MORE, "calendar", title = listOf("title"), subtitle = listOf("town", "venue", "source"),
+                                  date = listOf("starts"), badge = "category", filters = listOf("town", "category", "source"), page = "events"),
         "nonprofits" to DatasetSpec(Section.ACCOUNTABILITY, "heart.text.square", title = listOf("name"), subtitle = listOf("kind", "city"), detail = "subsection",
                             amount = listOf("total_revenue", "irs_revenue"), badge = "latest_return_form", filters = listOf("kind", "city", "subsection"), page = "connections/nonprofits"),
         "nonprofit-board-members" to DatasetSpec(Section.ACCOUNTABILITY, "person.3", title = listOf("person"), subtitle = listOf("nonprofit", "titles"), detail = "sources",
