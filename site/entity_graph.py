@@ -66,13 +66,6 @@ def _norm(s):
     return ' '.join(w for w in s.split() if w not in ('inc', 'llc', 'co', 'corp', 'company', 'the', 'pa', 'pllc'))
 
 
-def pcase(name):
-    """'BARRY S WILSON' -> 'Barry S Wilson'; names already in mixed case are left alone."""
-    if not name or re.search(r'[a-z]', name):
-        return name
-    return re.sub(r"\b([A-Z])([A-Z']+)\b", lambda m: m.group(1) + m.group(2).lower(), name)
-
-
 def _main_govs():
     global MAIN_GOVS
     if MAIN_GOVS is None:
@@ -446,7 +439,7 @@ def build():
         nid = np_names.get(r['nonprofit_id'])
         if not nid:
             continue
-        mid = G.ent('member:' + r['person_id'], pcase(r['person']), 'Nonprofit board member', None)
+        mid = G.ent('member:' + r['person_id'], ids.person_case(r['person']), 'Nonprofit board member', None)
         yrs = f"{r['first_year']}" + (f"–{r['last_year']}" if r.get('last_year') and r['last_year'] != r['first_year'] else '') if r.get('first_year') else None
         G.link(mid, nid, 'board', r.get('compensation'), yrs, ' · '.join(x for x in [r.get('titles') or r.get('role'), 'current' if r.get('current') else None] if x),
                r.get('source_url'), key=r.get('titles') or '')

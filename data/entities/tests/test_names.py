@@ -4,6 +4,25 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 import ids
 
 
+class BizCase(unittest.TestCase):
+    def test_all_caps(self):
+        cases = {
+            'PANAMA CITY COMMUNITY DEVELOPMENT COUNCIL, INC.': 'Panama City Community Development Council, Inc.',
+            'HARRISON & LUVERNE, LLC': 'Harrison & Luverne, LLC',
+            'ST. ANDREWS AND ST. JOSEPH BAYS ESTUARY PROGRAM': 'St. Andrews and St. Joseph Bays Estuary Program',
+            'DOWNTOWN PC RENAISSANCE LLC': 'Downtown PC Renaissance LLC',
+            'MCKENZIE BROTHERS 1ST STREET LLC': 'McKenzie Brothers 1st Street LLC',
+            'MACDONALD HOMES OF BAY COUNTY, INC': 'MacDonald Homes of Bay County, Inc',
+            'YMCA OF NORTHWEST FLORIDA': 'YMCA of Northwest Florida',
+            'GAC, LLC': 'GAC, LLC',
+        }
+        for raw, want in cases.items():
+            self.assertEqual(ids.biz_case(raw), want)
+
+    def test_mixed_case_kept(self):
+        self.assertEqual(ids.biz_case('Dewberry Engineers Inc.'), 'Dewberry Engineers Inc.')
+
+
 class PersonCase(unittest.TestCase):
     def test_all_caps(self):
         cases = {

@@ -4,7 +4,7 @@
   const $ = s => document.querySelector(s);
   const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
   const usd = n => '$' + Number(n || 0).toLocaleString('en-US', {maximumFractionDigits: 0});
-  const title = s => String(s || '').toLowerCase().replace(/\b([a-z])/g, m => m.toUpperCase()).replace(/\b(Llc|Inc|Pa|Lp|Llp|Pllc|Pc)\b/g, m => m.toUpperCase());
+  const title = s => window.BCNames ? BCNames.bizCase(String(s || '')) : String(s || '');  // api/_names.js, in site.js
   const NOW = new Date().getFullYear();
   const LINK = {shared_business: 'Same business', own_business_gift: 'Business gave', partner_business_gift: 'Shared officer', public_payee: 'Paid by a government'};
   let people = [];

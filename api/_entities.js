@@ -8,6 +8,7 @@
 // (official-businesses, official-business-links) and shared-owner campaign gifts (shared-owner-groups). Individual
 // campaign donors are never in any of these datasets.
 const {datasetRows, rest} = require('./_data');
+const {nameCase} = require('./_names');
 
 const SUNBIZ_SEARCH = 'https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults';
 // Sunbiz record pages need an internal id the state files don't carry, so link the entity-name search (business listed
@@ -54,7 +55,7 @@ function shape(id, rows, labels = new Map()) {
     const out = r.from_id === id;
     const rel = r.relation;
     return {link_id: r.link_id, relation: rel, label: (RELATION[rel] || [rel, rel])[out ? 0 : 1], direction: out ? 'out' : 'in',
-      other: {entity_id: out ? r.to_id : r.from_id, name: out ? r.to_name : r.from_name, kind: out ? r.to_kind : r.from_kind,
+      other: {entity_id: out ? r.to_id : r.from_id, name: nameCase(out ? r.to_name : r.from_name, out ? r.to_kind : r.from_kind), kind: out ? r.to_kind : r.from_kind,
         kind_label: labels.get(out ? r.to_id : r.from_id) || KIND_LABEL[out ? r.to_kind : r.from_kind] || null, page_url: out ? r.to_url : r.from_url},
       amount: r.amount ?? null, records: r.records ?? null, first_date: r.first_date || null, last_date: r.last_date || null, detail: r.detail || null,
       source_url: r.source_url || null, dataset: r.dataset || 'entity-connections', checked_by_hand: r.checked_by_hand || undefined,
@@ -206,6 +207,7 @@ async function getEntity(req, catalog, id) {
   if (live.length) ent = {...ent, connections: connections.length};
   const counts = {};
   connections.forEach(c => { counts[c.relation] = (counts[c.relation] || 0) + 1; });
+  ent = {...ent, name: nameCase(ent.name, ent.kind)};  // database-only rows keep names as filed, often in all caps
   return {entity: ent, connections, counts, data_source: source,
     note: 'Connections come from public records, each with its source. A connection is a fact in two records; it does not show why anything happened. Individual campaign donors are never named.'};
 }

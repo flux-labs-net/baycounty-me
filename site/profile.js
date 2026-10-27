@@ -67,11 +67,11 @@
     });
     let svg = '';
     pts.forEach(p => { svg += `<line class="pf-l ${LINE[p.c.relation] || ''}" x1="${cx}" y1="${cy}" x2="${p.x.toFixed(1)}" y2="${p.y.toFixed(1)}"/>`; });
-    const lab = (s, n) => s.length > n ? s.slice(0, n - 1) + '…' : s;
+    const lab = (s, n) => s.length > n ? s.slice(0, n - 1).trimEnd() + '…' : s;
     pts.forEach(p => {
       const dx = p.right ? p.r + 5 : -p.r - 5;
       const o = p.c.other, tip = `${o.name} (${KIND[o.kind] || o.kind}): ${p.c.label}${p.c.amount ? ' · ' + money(p.c.amount) : ''}`;
-      const inner = `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="${p.r.toFixed(1)}" fill="${COLOR[o.kind] || 'var(--muted)'}"/><text x="${(p.x + dx).toFixed(1)}" y="${(p.y + 4).toFixed(1)}" text-anchor="${p.right ? 'start' : 'end'}">${esc(lab(o.name, narrow ? 15 : 30))}</text><title>${esc(tip)}</title>`;
+      const inner = `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="${p.r.toFixed(1)}" fill="${COLOR[o.kind] || 'var(--muted)'}"/><text x="${(p.x + dx).toFixed(1)}" y="${(p.y + 4).toFixed(1)}" text-anchor="${p.right ? 'start' : 'end'}" data-w="${Math.floor(p.right ? W - p.x - dx - 4 : p.x + dx - 4)}">${esc(lab(o.name, narrow ? 15 : 30))}</text><title>${esc(tip)}</title>`;
       svg += o.page_url ? `<a href="${esc(o.page_url)}">${inner}</a>` : `<g>${inner}</g>`;
     });
     const me = d.entity;
@@ -81,6 +81,11 @@
     box.innerHTML = `<svg viewBox="0 0 ${W} ${H}"${narrow ? ' class="pf-sm"' : ''} role="img" aria-label="${esc(me.name)} and ${nodes.length} of its connections">${svg}</svg>
       <div class="pf-legend">${kinds.map(k => `<span><i style="background:${COLOR[k]}"></i>${k === 'vendor' ? 'Company or business' : KIND[k]}</span>`).join('')}${rels.map(r => `<span><i class="ln ${LINE[r] || ''}"></i>${esc(labelOf(r))}</span>`).join('')}</div>
       <p class="cn-note">${all.length > nodes.length ? `Showing ${nodes.length} of ${all.length} connections, the largest of each kind first. ` : ''}Tap a name to open its profile. Bigger circles carry more dollars in the records.</p>`;
+    // a long name on the left arc can run past the edge of the map: shorten any label wider than the room beside its circle
+    box.querySelectorAll('text[data-w]').forEach(t => {
+      const w = +t.dataset.w; let s = t.textContent;
+      try { while (s.length > 4 && t.getComputedTextLength() > w) { s = s.slice(0, -2).trimEnd() + '…'; t.textContent = s; } } catch (e) { /* not rendered */ }
+    });
   }
   const labelOf = r => ({serves: 'Serves', served: 'Served', candidate: 'Candidates', ran: 'Ran for office', paid: 'Payments', gift: 'Campaign gifts', voted: 'Votes on contracts', board: 'Board seats', runs: 'Runs a business', grant: 'Grants', related: 'Shared project or tie', same: 'Same organization'}[r] || r);
 
