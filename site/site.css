@@ -572,6 +572,11 @@ select:not([multiple]):not([size])::-ms-expand{display:none}
   table.stk td,table.stk tbody th,table.stk tfoot th{padding:5px 0 !important;overflow-wrap:break-word}
   table.stk td::before,table.stk tbody th::before,table.stk tfoot th::before{position:static;display:block;width:auto;margin-bottom:1px;font-weight:500}
   table.stk tr{padding:12px 14px}
+  /* short values sit two to a line so a card is not one long column (site_helpers.js marks the wide cells) */
+  table.stk.stk-g tbody tr:not(.stk-span),table.stk.stk-g tfoot tr:not(.stk-span){display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-flow:row dense;column-gap:16px;row-gap:4px}
+  table.stk.stk-g tr > :first-child,table.stk.stk-g tr > .stk-w{grid-column:1/-1}
+  table.stk.stk-g tbody tr > th[scope=row]:first-child::before{content:none}
+  table.stk.stk-g tbody tr > th[scope=row]:first-child{font-size:.95rem}
 }
 /* the header's Ask button turns into an icon on narrow phones */
 @media (max-width:520px){

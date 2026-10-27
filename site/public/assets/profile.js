@@ -34,7 +34,8 @@
     const badge = ic ? `<span class="ui-badge t-${tone}">${ico(ic)}</span>` : `<span class="ui-badge ui-badge-av t-${tone}" aria-hidden="true">${esc(initials(e.name))}</span>`;
     const kp = (i, t, l, v, s) => v ? `<div class="kpi ui-k"><span class="kh">${ico(i, t)}<span class="eyebrow">${l}</span></span><span class="v">${v}</span><span class="s">${s}</span></div>` : '';
     const tags = e.source_url ? `<div class="ui-tags"><a class="ui-tag" href="${esc(e.source_url)}" target="_blank" rel="noopener">${ico('link')}Public record</a></div>` : '';
-    h.innerHTML = `<header class="tx-top ui-hero"><div class="ui-id">${badge}<div class="ui-hd"><div class="tx-brand"><span class="eyebrow ui-kick k-blue"><a href="/connections">Connections</a> · ${esc(e.kind_label || KIND[e.kind])}</span><h1>${esc(e.name)}</h1>
+    h.closest('.page')?.classList.add('ui-pfp');
+    h.innerHTML = `<header class="tx-top ui-hero ui-pf"><div class="ui-id">${badge}<div class="ui-hd"><div class="tx-brand"><span class="eyebrow ui-kick k-blue"><a href="/connections">Connections</a> · ${esc(e.kind_label || KIND[e.kind])}</span><h1>${esc(e.name)}</h1>
       ${e.subtitle ? `<p class="lede">${esc(e.subtitle)}</p>` : ''}${e.aliases && e.aliases.length ? `<p class="small muted">Also written as: ${esc(e.aliases.join(' · '))}</p>` : ''}${e.same_as && e.same_as.page_url ? `<p class="small">Checked by hand: this board member is <a href="${esc(e.same_as.page_url)}">${esc(e.same_as.name)}</a> <span class="pf-badge">Official</span></p>` : ''}</div>${tags}</div></div></header>
       <div class="kpis">${kp('network', 'blue', 'Connections', (e.connections || 0).toLocaleString('en-US'), 'in public records')}${kp('dollar', 'teal', 'Received', money(e.amount_received), 'payments, gifts and grants in the records')}${kp('wallet', 'amber', 'Gave or paid', money(e.amount_given), 'payments, gifts and grants in the records')}</div>`;
   }
