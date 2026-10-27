@@ -69,6 +69,12 @@ TOPICS = [
      'Every tax-exempt organization with a county address is pulled from IRS data, with every 990, 990-EZ and 990-PF e-filed since 2019 (board members, pay, grants, revenue). '
      'State charity registrations and state corporate filings are joined in.',
      'Organizations are joined by EIN, then by exact name. Official-to-board matches are checked by hand before they are tagged.'),
+    ('notices', 'Public notices', '/notices',
+     "Government legal notices are read every day from the county's public notice website, which keeps 30 days; notices already on file stay as an archive.",
+     "Court, tax deed, foreclosure, probate and other private notices are left out. The posting government is matched from the notice's opening words."),
+    ('jobs', 'Government jobs', '/jobs',
+     "Open jobs are read every day from each employer's public job board. Boards that turn automated readers away are listed with a link instead.",
+     'Jobs whose closing date has passed are dropped.'),
     ('chambers', 'Chambers of commerce', '/chambers',
      "Board, staff and program lists are copied by hand from each chamber's website. Upcoming events are read every day from the Panama City Beach Chamber's public calendar feed; the Bay County Chamber's calendar platform turns automated readers away.",
      'Board members are joined to other local filings by first and last name, and to an official only where the chamber names their government post. Organizations are joined to governments, paid companies, nonprofits or one Sunbiz filing with the exact same name.'),
@@ -178,7 +184,20 @@ src('salaries', 'state', 'Florida EDR elected officials\' salaries report', 'htt
 src('campaign', 'county-wide', 'Supervisor of Elections campaign finance (VoterFocus)', 'https://www.voterfocus.com/ws/WScand/candidate_pr.php?c=Bay', AUTO_DAILY, 'Daily', 'Summary totals and itemized contributions and expenses for every local campaign since 2016')
 src('campaign', 'county-wide', 'Supervisor of Elections candidate finance page', 'https://www.bayvotesfl.gov/candidates/candidate-committee-finances/', BY_HAND, 'Each election', 'Which reporting groups and elections exist')
 src('elections', 'county-wide', 'Supervisor of Elections (offices up for election, snapshots)', 'https://www.bayvotesfl.gov/', BY_HAND, 'Each election', 'Races, candidates and status')
-src('elections', 'state', 'Florida election night results (Bay County)', 'https://enr.electionsfl.org/BAY/', BY_HAND, 'Each election', 'Official results')
+src('elections', 'state', 'Supervisor of Elections results site (election night reporting, Bay County)', 'https://enr.electionsfl.org/BAY/', AUTO_DAILY, 'Daily; every 20 minutes on election night', 'Votes for every contest since 2016 by Election Day, early voting and mail, turnout')
+src('elections', 'county-wide', 'Supervisor of Elections results archive', 'https://www.voterfocus.com/enr_php/enrarchive.php?county=Bay&election=', AUTO_DAILY, 'Daily', 'The list of every election since 2016')
+src('elections', 'county-wide', "Supervisor of Elections precinct directory", 'https://www.voterfocus.com/PrecinctFinder/precinctDirectory?county=FL-BAY', AUTO_DAILY, 'Daily', "Each precinct's Election Day polling place")
+src('elections', 'county-wide', "Supervisor of Elections events calendar", 'https://www.bayvotesfl.gov/elections/events/', AUTO_DAILY, 'Daily', 'Canvassing board meetings, voting equipment tests and early voting')
+src('elections', 'county-wide', "Supervisor of Elections voter guide and early voting page", 'https://www.bayvotesfl.gov/voters/vote-early/', BY_HAND, 'Each countywide election', 'Registration and vote-by-mail deadlines, election days, early voting sites and hours')
+src('elections', 'county-wide', 'Bay County address points (county GIS)', 'https://gis.baycountyfl.gov/arcgis/rest/services/Admin_A12/MapServer/3', LIVE, 'Each lookup', 'Map points for voting sites; the address lookup on the voting page')
+src('notices', 'county-wide', "Bay County public notice website", 'https://publicnoticesbaycountyfl.gov/', AUTO_DAILY, 'Daily', 'Government legal notices: bids, public hearings and meetings, with full text (court and private notices left out)')
+src('jobs', 'county', 'Bay County job board', 'https://baycountyfl.wd12.myworkdayjobs.com/en-US/Bay_County_External_Career_Site', AUTO_DAILY, 'Daily', 'Open jobs')
+src('jobs', 'schools', 'Bay District Schools job board', 'https://focus.bayschools.net/focus/jobs/#!Jobs', AUTO_DAILY, 'Daily', 'Open jobs')
+src('jobs', 'pc', 'City of Panama City job board', 'https://www.governmentjobs.com/careers/pcgov', AUTO_DAILY, 'Daily', 'Open jobs with pay')
+src('jobs', 'lh', 'City of Lynn Haven job board', 'https://jobs.keldair.com/cityoflynnhaven', AUTO_DAILY, 'Daily', 'Open jobs')
+src('jobs', 'cw', 'City of Callaway job openings feed', 'https://www.cityofcallaway.com/Jobs.aspx', AUTO_DAILY, 'Daily', 'Open jobs')
+src('jobs', 'parker', 'City of Parker careers page', 'https://cityofparker.com/government/careers/', AUTO_DAILY, 'Daily', 'Open jobs')
+src('jobs', 'county-wide', 'Northwest Florida Beaches International Airport employment page', 'https://www.iflybeaches.com/airport-district/employment', AUTO_DAILY, 'Daily', 'Open jobs')
 
 # --- Businesses and nonprofits ---------------------------------------------------------------------------------------
 src('businesses', 'state', 'Florida Division of Corporations (Sunbiz) quarterly data file', 'https://dos.fl.gov/sunbiz/other-services/data-downloads/', BULK, 'Quarterly', 'Every business with a county address, its officers, managers and registered agents')
@@ -265,7 +284,7 @@ FOLDER_TOPIC = {
     'agendas': 'meetings', 'meetings': 'meetings', 'votes': 'votes', 'contracts': 'contracts', 'budgets': 'budgets',
     'debt_audit': 'audits', 'money': 'audits', 'tax': 'property-tax', 'amendment3': 'property-tax', 'exemptions': 'property-tax',
     'salaries': 'salaries', 'campaign': 'campaign', 'elections': 'elections', 'sunbiz': 'businesses', 'careers': 'businesses',
-    'nonprofits': 'nonprofits', 'chambers': 'chambers', 'cra': 'cra', 'merged.json': 'cra', 'michael': 'michael', 'surtax': 'sales-tax',
+    'nonprofits': 'nonprofits', 'chambers': 'chambers', 'notices': 'notices', 'jobs': 'jobs', 'cra': 'cra', 'merged.json': 'cra', 'michael': 'michael', 'surtax': 'sales-tax',
     'tourism': 'tourist-tax', 'fees': 'fees', 'nearby': 'address', 'civic': 'records', 'projects': 'contracts',
 }
 SKIP_HOSTS = {'baycounty.me', 'www.baycounty.me', 'aptg.co'}

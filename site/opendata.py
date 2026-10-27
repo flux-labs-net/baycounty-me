@@ -11,7 +11,7 @@ import ids  # noqa: E402  shared government / vendor / person ids (data/entities
 import cutoff  # noqa: E402  the site's first year (data/entities/cutoff.py)
 
 # which columns name the government, per dataset, tried in order (office titles are matched by contained name)
-GOV_COLS = {'chambers': [], 'chamber-leaders': [], 'chamber-events': [], 'owner-gifts': ['office'], 'entity-profiles': ['gov_id'], 'entity-connections': [], 'government-profiles': ['government'], 'government-years': ['gov_id', 'government'], 'budget-years': ['gov_id'], 'cra-agencies': ['gov_id'], 'cra-tax-increment': ['gov_id'], 'cra-increment-checks': [], 'officeholder-terms': ['gov_id'], 'official-photos': [], 'data-completeness': ['gov_id'], 'votes': ['government'], 'member-votes': ['gov_id'], 'cra-payments': ['city'],
+GOV_COLS = {'elections': [], 'election-results': ['gov_id'], 'election-dates': [], 'voting-locations': [], 'public-notices': ['gov_id'], 'job-openings': ['gov_id'], 'job-boards': ['gov_id'], 'chambers': [], 'chamber-leaders': [], 'chamber-events': [], 'owner-gifts': ['office'], 'entity-profiles': ['gov_id'], 'entity-connections': [], 'government-profiles': ['government'], 'government-years': ['gov_id', 'government'], 'budget-years': ['gov_id'], 'cra-agencies': ['gov_id'], 'cra-tax-increment': ['gov_id'], 'cra-increment-checks': [], 'officeholder-terms': ['gov_id'], 'official-photos': [], 'data-completeness': ['gov_id'], 'votes': ['government'], 'member-votes': ['gov_id'], 'cra-payments': ['city'],
             'property-tax-rates': ['authority_id'], 'fema-michael-projects': ['applicant'], 'officials-pay': ['title', 'government'],
             'meetings': ['gov', 'board'], 'campaign-finance': ['office', 'gov'], 'bonds': ['gov'], 'salary-positions': ['employer_id'],
             'salary-leaders': ['employer_id'], 'candidates-2026': ['office', 'government'], 'campaign-contributions-2026': ['office'], 'campaign-history': ['gov_id'], 'campaign-contributions-history': ['gov_id'],
@@ -129,7 +129,8 @@ FIRST_YEAR_COL = {'votes': 'date', 'member-votes': 'date', 'contracts': 'date', 
                   'officeholder-terms': 'end_date', 'official-businesses': 'closed_year', 'official-business-links': 'last_date',
                   'business-donor-sunbiz': 'last_date', 'over-limit-gifts': 'last_date', 'owner-gifts': 'last_date',
                   'checkbook-payments': 'fiscal_year', 'budget-actuals': 'fiscal_year', 'cra-tax-increment': 'fiscal_year',
-                  'cra-increment-checks': 'fiscal_year', 'campaign-contributions-2026': 'date', 'campaign-contributions-history': 'date', 'meetings': 'start', 'chamber-leaders': 'year'}
+                  'cra-increment-checks': 'fiscal_year', 'campaign-contributions-2026': 'date', 'campaign-contributions-history': 'date', 'meetings': 'start', 'chamber-leaders': 'year',
+                  'elections': 'date', 'election-results': 'election_date', 'election-dates': 'date', 'public-notices': 'published'}
 DROPPED_BEFORE_FIRST_YEAR = {}  # dataset -> rows the last check dropped (should stay empty: fix the ingestion instead)
 
 

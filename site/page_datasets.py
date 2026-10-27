@@ -402,6 +402,43 @@ def tax_districts():
             for k, d in a['districts'].items()]
 
 
+# --- Elections hub, public notices, job openings (/elections/results, /elections/voting, /notices, /jobs) ---------------
+
+def elections():
+    from civic_data import elections as f
+    return f()
+
+
+def election_results():
+    from civic_data import election_results as f
+    return f()
+
+
+def election_dates():
+    from civic_data import election_dates as f
+    return f()
+
+
+def voting_locations():
+    from civic_data import voting_locations as f
+    return f()
+
+
+def public_notices():
+    from civic_data import public_notices as f
+    return f()
+
+
+def job_openings():
+    from civic_data import job_openings as f
+    return f()
+
+
+def job_boards():
+    from civic_data import job_boards as f
+    return f()
+
+
 # --- Savings ideas (government pages) --------------------------------------------------------------------------------
 
 def savings_opportunities():
@@ -922,5 +959,12 @@ DATASETS = [
     ('chambers', 'Chambers of commerce', "One row per chamber of commerce: what it is and who it serves, its board meetings, its latest IRS Form 990 (revenue, expenses, assets, employees), public money paid to it by local governments and tourism agencies (from nonprofit-payments), its foundation, and links to its member directory, events and join page. entity_id is its profile (entity-profiles). Chambers are private, member-owned nonprofits, not government agencies.", chambers),
     ('chamber-leaders', 'Chambers of commerce: boards and staff', "Each chamber's board (executive committee, directors, ex officio and honorary members), staff and past chairs since 2016, as listed on the chamber's own website on as_of: name, title and the organization each board member represents. No phone numbers, emails or addresses. person_entity_id and organization_entity_id link to profiles; person_match and organization_match say how each link was made (blank = no match, shown as plain text).", chamber_leaders),
     ('chamber-events', 'Chambers of commerce: events and programs', "Upcoming events from each chamber's public calendar (kind event: title, start and end in local time, venue and city, category, the event's own link) and each chamber's yearly and monthly signature programs (kind program: schedule and what it is). chamber_event is false for community events a chamber lists on its calendar. Refreshed daily where the calendar has a public feed.", chamber_events),
+    ('elections', 'Elections since 2016', "Every election the Bay County Supervisor of Elections has held since 2016, one row each: the date, name and kind (primary, general, municipal, runoff, referendum, recall, presidential preference primary), registered voters, ballots cast, turnout and precincts reporting. status is final (completely reported), counting (results still coming in) or canceled. A city's own view of a municipal election day and the 2018 recounts are folded into the countywide election. Contest results are in election-results.", elections),
+    ('election-results', 'Election results since 2016', "Official results of every contest on a Bay County ballot since 2016, one row per choice: votes on Election Day, in early voting and by mail, the total and percent, and rank in the contest. level is Federal, State, Court, County, School district, City, Special district or Party; gov_id is the local government a contest elects or decides. measure is true for a yes-or-no ballot question. party_primary is REP or DEM for a closed party primary, or Universal primary when every voter could vote. recount is true where the 2018 recount figures replace the first count. person_entity_id links a local candidate to their profile. A blank vote count is 1 to 29 votes, which the law keeps from being reported for privacy. From the Supervisor of Elections' election results site.", election_results),
+    ('election-dates', 'Election dates', "Key dates for Bay County elections: registration deadlines, early voting, vote-by-mail request and return deadlines and election days (kept by hand from the Supervisor of Elections' voter guide), plus the upcoming events on the Supervisor of Elections' calendar (canvassing board meetings, tests of the voting equipment), read daily. kind says which; starts_at is the start time when one is given.", election_dates),
+    ('voting-locations', 'Where to vote', "Every early voting site for the next countywide election (kind early_voting: any registered Bay County voter can vote at any of them, with the dates and hours) and the Election Day polling place for each of the county's precincts (kind polling_place: on Election Day you vote only at your own precinct's polling place). lat and lon place each on a map, from Bay County's address points. From the Supervisor of Elections.", voting_locations),
+    ('public-notices', 'Public notices', "Legal notices published by local governments and public agencies on the county's public notice website: bid and proposal requests, public hearings and ordinances, public meetings and other notices, with the government that posted it (gov_id, blank for agencies that are not one of the county's local governments), the date it was published, the first date it mentions after that (the meeting, hearing or bid due date) and the full text. Court, foreclosure, tax deed, probate and other private notices on the same site are left out. The site keeps 30 days; notices already on file stay as an archive.", public_notices),
+    ('job-openings', 'Government job openings', "Open jobs posted by Bay County, Bay District Schools, the cities and the airport on their own job boards, read daily: title, department, job type, pay where posted, posting and closing dates and the link to apply. Jobs whose closing date has passed are left out. first_seen is the first day the job was on file.", job_openings),
+    ('job-boards', 'Government job boards', "Each local government's job board and whether its openings are read automatically: openings is how many are open now, blank where the board cannot be read (note says why and where to look).", job_boards),
     ('tax-districts', 'Tax districts', 'Which taxing authorities levy property tax in each tax district, and the combined millage. Rates by year are in property-tax-rates (authority_id).', tax_districts),
 ]

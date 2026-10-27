@@ -60,6 +60,8 @@ def menu():
          'start': _i('Connections network', '/connections', 'Who every government paid, and who gave to officials'),
          'groups': [{'group': "Who decides, and who's connected", 'items': [
              *([_i('2026 Elections', '/elections', "Who's running, their platforms and money")] if ELECTIONS_READY else []),
+             _i('Where and when to vote', '/elections/voting', 'Dates, polling places and your ballot'),
+             _i('Election results', '/elections/results', 'Every contest since 2016'),
              _i('Past elections', '/elections/past', 'Every local race since 2016 and its money'),
              _i('Campaign gifts', '/connections/campaign-gifts', 'Who funds campaigns, and donors with contracts'),
              _i('Business ties', '/connections/business-ties', "Officials' and candidates' businesses"),
@@ -70,6 +72,8 @@ def menu():
         {'label': 'Take part', 'question': 'Show up, ask, reuse',
          'start': _i('Meetings', '/meetings', 'When every board meets, with agendas'),
          'groups': [{'group': 'Show up, ask, reuse', 'items': [
+             _i('Public notices', '/notices', 'Bids, hearings and meetings'),
+             _i('Government jobs', '/jobs', 'Open jobs at every local government'),
              _i('Email alerts', '/alerts', 'Weekly updates for your government'),
              _i('Request a record', '/records-request', 'Write a public records request'),
              _i('Letters to officials', '/correspondence', 'What we asked, and what they said'),

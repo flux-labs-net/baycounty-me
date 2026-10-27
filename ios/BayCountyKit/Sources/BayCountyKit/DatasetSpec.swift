@@ -122,6 +122,13 @@ public struct DatasetSpec: Sendable {
                                   amount: ["pay_max", "pay_mid", "pay_min"], filters: ["employer", "category", "fiscal_year"],
                                   page: "people"),
         // Elections
+        "elections": .init(.elections, "checkmark.seal", title: ["name"], subtitle: ["date", "kind"], date: ["date"], badge: "status", filters: ["kind", "status"], page: "elections/results"),
+        "election-results": .init(.elections, "chart.bar", title: ["choice"], subtitle: ["office", "election_name"], date: ["election_date"], badge: "level", filters: ["election_date", "level", "gov_id"], page: "elections/results"),
+        "election-dates": .init(.elections, "calendar", title: ["title"], subtitle: ["election", "kind"], date: ["date"], badge: "kind", filters: ["kind"], page: "elections/voting"),
+        "voting-locations": .init(.elections, "mappin.and.ellipse", title: ["name"], subtitle: ["address", "city"], detail: "hours", badge: "kind", filters: ["kind", "city"], page: "elections/voting"),
+        "public-notices": .init(.more, "megaphone", title: ["title"], subtitle: ["agency", "kind_label"], detail: "text", date: ["published"], badge: "kind_label", filters: ["agency", "kind"], page: "notices"),
+        "job-openings": .init(.more, "briefcase", title: ["title"], subtitle: ["employer", "department"], detail: "pay", date: ["posted"], badge: "job_type", filters: ["employer", "job_type"], page: "jobs"),
+        "job-boards": .init(.more, "building.2", title: ["employer"], subtitle: ["note"], page: "jobs"),
         "candidates-2026": .init(.elections, "checkmark.seal", title: ["candidate"], subtitle: ["office", "party"],
                                  amount: ["total_raised"], badge: "status", filters: ["office", "government", "status"], page: "elections"),
         "campaign-finance": .init(.elections, "chart.bar", title: ["official"], subtitle: ["office", "election"],
