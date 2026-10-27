@@ -49,6 +49,9 @@ def menu():
              _i('CRA tax increment', '/public-money/cra-tax-increment', 'Property tax paid to the CRAs, by year'),
              _i('Sales tax projects', '/public-money/sales-tax-projects', 'Half-cent projects: promised vs built'),
              _i('Hurricane Michael', '/public-money/hurricane-michael', 'FEMA, HUD and state recovery money'),
+         ]}, {'group': 'Building and roads', 'items': [
+             _i('Building & development', '/development', 'New homes permitted and projects in review'),
+             _i('Road projects', '/roads', 'State road work, costs and the five-year plan'),
          ]}]},
         {'label': 'Watchdog', 'question': 'Is it spent well?',
          'start': _i('Accountability console', '/public-money/accountability', 'Big projects from approval to close, with open questions'),
@@ -68,9 +71,17 @@ def menu():
              _i('Nonprofits', '/connections/nonprofits', 'Public money, and officials on their boards'),
              _i('Chambers of commerce', '/chambers', 'Boards, events and public money'),
          ]}]},
+        {'label': 'Outdoors', 'question': 'Beaches, water and parks',
+         'start': _i('Beaches', '/beaches', "Today's flag, rip currents, water quality, access"),
+         'groups': [{'group': 'Beaches, water and parks', 'items': [
+             _i('Parks', '/parks', 'Parks, boat ramps, trails and sign-ups'),
+             _i('Water quality', '/beaches#water', 'State bacteria tests at each beach'),
+             _i('Beach access', '/beaches#access', 'Every public access and lot, on a map'),
+         ]}]},
         {'label': 'Take part', 'question': 'Show up, ask, reuse',
          'start': _i('Meetings', '/meetings', 'When every board meets, with agendas'),
          'groups': [{'group': 'Show up, ask, reuse', 'items': [
+             _i('Events', '/events', "What's happening around the county"),
              _i('Email alerts', '/alerts', 'Weekly updates for your government'),
              _i('Request a record', '/records-request', 'Write a public records request'),
              _i('Letters to officials', '/correspondence', 'What we asked, and what they said'),

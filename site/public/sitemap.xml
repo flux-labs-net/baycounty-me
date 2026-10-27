@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://baycounty.me/</loc>
-    <lastmod>2026-10-21</lastmod>
+    <lastmod>2026-10-27</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://baycounty.me/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://baycounty.me/es"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://baycounty.me/"/>
@@ -18,6 +18,10 @@
   <url>
     <loc>https://baycounty.me/ask</loc>
     <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/beaches</loc>
+    <lastmod>2026-10-27</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/chambers</loc>
@@ -57,6 +61,10 @@
   </url>
   <url>
     <loc>https://baycounty.me/developers</loc>
+    <lastmod>2026-10-27</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/development</loc>
     <lastmod>2026-10-27</lastmod>
   </url>
   <url>
@@ -114,7 +122,7 @@
   </url>
   <url>
     <loc>https://baycounty.me/es/reuniones</loc>
-    <lastmod>2026-10-21</lastmod>
+    <lastmod>2026-10-27</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://baycounty.me/meetings"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://baycounty.me/es/reuniones"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://baycounty.me/meetings"/>
@@ -132,6 +140,10 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://baycounty.me/public-money/fees-and-bills"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://baycounty.me/es/tarifas-y-facturas"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://baycounty.me/public-money/fees-and-bills"/>
+  </url>
+  <url>
+    <loc>https://baycounty.me/events</loc>
+    <lastmod>2026-10-27</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/glossary</loc>
@@ -182,7 +194,7 @@
   </url>
   <url>
     <loc>https://baycounty.me/meetings</loc>
-    <lastmod>2026-10-21</lastmod>
+    <lastmod>2026-10-27</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://baycounty.me/meetings"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://baycounty.me/es/reuniones"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://baycounty.me/meetings"/>
@@ -196,6 +208,10 @@
   </url>
   <url>
     <loc>https://baycounty.me/open-data</loc>
+    <lastmod>2026-10-27</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/parks</loc>
     <lastmod>2026-10-27</lastmod>
   </url>
   <url>
@@ -1566,7 +1582,7 @@
   </url>
   <url>
     <loc>https://baycounty.me/public-money/sales-tax-projects</loc>
-    <lastmod>2026-10-23</lastmod>
+    <lastmod>2026-10-27</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/public-money/tax-dollars</loc>
@@ -2189,6 +2205,10 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://baycounty.me/records-request"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://baycounty.me/es/solicitar-registros"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://baycounty.me/records-request"/>
+  </url>
+  <url>
+    <loc>https://baycounty.me/roads</loc>
+    <lastmod>2026-10-27</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/schools</loc>
