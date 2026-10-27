@@ -123,7 +123,7 @@ def past_elections_page():
     return f'''<div class="page tax pe">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Get involved · Past elections</span><h1>Past local elections, 2016 to 2025</h1>
     <p class="lede">Every candidate who ran for a local office in Bay County from 2016 through 2025, winners and losers, and where their campaign money came from. Businesses and groups that gave are named; gifts from individual people are counted and totaled.</p></div>
-    <div class="stamp"><a class="pill" href="/elections">2026 races</a><a class="pill" href="/connections/campaign-gifts">Current officials</a><span>Supervisor of Elections reports, checked {e(d.get("as_of"))}</span></div></header>
+    <div class="stamp"><a class="pill" href="/elections/results">Vote totals</a><a class="pill" href="/elections">2026 races</a><a class="pill" href="/connections/campaign-gifts">Current officials</a><span>Supervisor of Elections reports, checked {e(d.get("as_of"))}</span></div></header>
   {city_bar(gk, hide=True, note='Bay County includes county offices and judges; special districts always show')}
   <div class="kpis">
     <div class="kpi"><span class="eyebrow">Campaigns</span><span class="v"{per(n_camp)}>{n_camp(C)}</span><span class="s">in {len(years)} years of local elections</span></div>

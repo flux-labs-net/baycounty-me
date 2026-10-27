@@ -1,0 +1,51 @@
+[
+ {
+  "name": "home",
+  "title": "Your county's money, in plain view",
+  "accent": "in plain view",
+  "sub": "Budgets, taxes, contracts and votes for Bay County, the schools and every city",
+  "screen": "home"
+ },
+ {
+  "name": "tax",
+  "title": "Your tax bill, slice by slice",
+  "accent": "slice by slice",
+  "sub": "See what schools, the county, your city and each district take",
+  "screen": "tax"
+ },
+ {
+  "name": "gov-county",
+  "title": "Every government at a glance",
+  "accent": "at a glance",
+  "sub": "Budget, debt, audits and votes for all nine local governments",
+  "screen": "gov_county"
+ },
+ {
+  "name": "meetings",
+  "title": "Every meeting, in one place",
+  "accent": "in one place",
+  "sub": "Agendas for every board, and one tap to your calendar",
+  "screen": "tab_meetings"
+ },
+ {
+  "name": "contracts",
+  "title": "Follow every contract",
+  "accent": "every contract",
+  "sub": "Who wins them, what they're worth and who approved them",
+  "screen": "contracts"
+ },
+ {
+  "name": "person",
+  "title": "Know who's in charge",
+  "accent": "who's in charge",
+  "sub": "Officials' terms, pay and votes, since 2016",
+  "screen": "person"
+ },
+ {
+  "name": "donors",
+  "title": "See who funds campaigns",
+  "accent": "funds campaigns",
+  "sub": "Campaign money by candidate, and donors who hold contracts",
+  "screen": "donors"
+ }
+]

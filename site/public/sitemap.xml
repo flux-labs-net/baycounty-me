@@ -20,6 +20,10 @@
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/beaches</loc>
+    <lastmod>2026-10-27</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/chambers</loc>
     <lastmod>2026-10-27</lastmod>
   </url>
@@ -60,6 +64,10 @@
     <lastmod>2026-10-27</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/development</loc>
+    <lastmod>2026-10-27</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/elections</loc>
     <lastmod>2026-10-25</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://baycounty.me/elections"/>
@@ -69,6 +77,18 @@
   <url>
     <loc>https://baycounty.me/elections/past</loc>
     <lastmod>2026-10-25</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/elections/results</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/elections/voting</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/emergency</loc>
+    <lastmod>2026-10-27</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/es</loc>
@@ -154,7 +174,7 @@
   </url>
   <url>
     <loc>https://baycounty.me/governments/bay-district-schools</loc>
-    <lastmod>2026-10-20</lastmod>
+    <lastmod>2026-10-27</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/governments/callaway</loc>
@@ -185,6 +205,14 @@
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/hurricane-prep</loc>
+    <lastmod>2026-10-27</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/jobs</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/meetings</loc>
     <lastmod>2026-10-27</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://baycounty.me/meetings"/>
@@ -193,13 +221,25 @@
   </url>
   <url>
     <loc>https://baycounty.me/my-address</loc>
-    <lastmod>2026-10-21</lastmod>
+    <lastmod>2026-10-27</lastmod>
     <xhtml:link rel="alternate" hreflang="en" href="https://baycounty.me/my-address"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://baycounty.me/es/mi-direccion"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://baycounty.me/my-address"/>
   </url>
   <url>
+    <loc>https://baycounty.me/new-businesses</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/notices</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/open-data</loc>
+    <lastmod>2026-10-27</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/parks</loc>
     <lastmod>2026-10-27</lastmod>
   </url>
   <url>
@@ -1570,7 +1610,7 @@
   </url>
   <url>
     <loc>https://baycounty.me/public-money/sales-tax-projects</loc>
-    <lastmod>2026-10-23</lastmod>
+    <lastmod>2026-10-27</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/public-money/tax-dollars</loc>
@@ -2195,6 +2235,18 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://baycounty.me/records-request"/>
   </url>
   <url>
+    <loc>https://baycounty.me/restaurants</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/roads</loc>
+    <lastmod>2026-10-27</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/schools</loc>
+    <lastmod>2026-10-27</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/search</loc>
     <lastmod>2026-10-21</lastmod>
   </url>
@@ -2205,5 +2257,9 @@
   <url>
     <loc>https://baycounty.me/updates</loc>
     <lastmod>2026-10-27</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/utilities</loc>
+    <lastmod>2026-10-20</lastmod>
   </url>
 </urlset>

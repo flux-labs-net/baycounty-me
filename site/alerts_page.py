@@ -55,6 +55,7 @@ def alerts_page(out_dir):
     return f'''<div class="page tax">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Get involved</span><h1>Get updates by email</h1>
     <p class="lede">Follow the governments you care about. Once a week, when there's something new, you'll get a short email: new votes and data, corrections, and the meetings coming up.</p></div></header>
+  <p class="note" style="margin:0">Looking for weather warnings, evacuation orders, shelters or boil-water notices? See <a href="/emergency">Emergencies and alerts</a>, updated every 5 minutes, and <a href="/hurricane-prep">Hurricane prep</a>.</p>
   <div class="al-status" id="alStatus" hidden></div>
   <form class="contact al-form" id="alForm" novalidate>
     <div class="vf"><span>Countywide</span><label class="al-opt al-week"><input type="checkbox" name="g" value="week"><span><b>This week in Bay County</b>: events, meetings, new votes and contracts across the county (<a href="/this-week">see this week's</a>)</span></label></div>

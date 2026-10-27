@@ -179,6 +179,7 @@ struct AddressReportView: View {
                 repsSection(r, m)
                 schoolsSection(r)
                 craSection(r, m)
+                AddressUtilitiesSection(match: match)
                 safetySection(r)
                 developmentSection(r)
                 nearbySection

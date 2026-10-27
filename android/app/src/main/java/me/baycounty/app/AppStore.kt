@@ -39,6 +39,7 @@ import me.baycounty.kit.PeopleDirectory
 import me.baycounty.kit.Row
 import me.baycounty.kit.SiteUpdate
 import me.baycounty.kit.TaxModel
+import me.baycounty.kit.UtilityLookup
 import me.baycounty.kit.VendorDirectory
 import me.baycounty.kit.accountability
 import me.baycounty.kit.appData
@@ -76,6 +77,14 @@ class AppStore(context: Context, client: BayCountyClient? = null) {
     var donorContracts by mutableStateOf<DonorContracts?>(null); private set
     var moneyMap by mutableStateOf<MoneyMap?>(null); private set
     var accountability by mutableStateOf<AccountabilityConsole?>(null); private set
+
+    /** Utility lookups by address id, kept in memory only (never on disk), so going back doesn't ask again. */
+    val utilities = mutableStateMapOf<String, UtilityLookup>()
+
+    suspend fun loadUtilities(m: AddressMatch, force: Boolean = false): UtilityLookup {
+        if (!force) utilities[m.id]?.let { return it }
+        return client.utilities(m.point).also { utilities[m.id] = it }
+    }
 
     /** A glossary term shown in a sheet. */
     var presentedTerm by mutableStateOf<Glossary.Term?>(null)
