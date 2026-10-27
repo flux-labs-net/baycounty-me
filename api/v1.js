@@ -20,6 +20,7 @@
 //   GET /api/v1/budget-actual?gov=&fy=&as_of=   spending and revenue against the budget, by department (api/_openbooks.js)
 //   GET /api/v1/officials?gov=&year=&date=  who held each elected seat in a fiscal year or on a date (api/_officials.js)
 //   GET /api/v1/import-progress         how far the minutes backfill has got, per board and year (api/_progress.js)
+//   GET /api/v1/address-report?address=|lat=&lon=  everything on file for one address, by section (api/_address_report.js)
 // Responses carry an ETag (and Last-Modified when the data's date is known); a matching If-None-Match or
 // If-Modified-Since gets 304 Not Modified with no body.
 const crypto = require('crypto');
@@ -191,6 +192,11 @@ function openapi(catalog) {
         parameters: [p('gov', 'Government id: county, schools, pc, pcb, lh, cw, sp, parker, mb'), p('fy', 'Fiscal year, the year it ends', {type: 'integer'}), p('as_of', 'Report date (YYYY-MM-DD). Default: the latest report of that year')],
         responses: {200: {description: '{data: {government, gov_id, fiscal_year, fiscal_years, governments, as_of, as_ofs, elapsed, totals: {original, budget, actual, encumbered, spent, used}, departments: [{name, fund, original, budget, actual, encumbered, spent, used, amended, lines: [...]}], over_budget, running_ahead, revenue: {budget, collected, sources}, months: [{as_of, elapsed, budget, spent, used, revenue_budget, revenue_collected}], source_files, note}}'},
           400: {description: 'A fiscal year or report date that is not published'}, 404: {description: 'A government with nothing published'}}}},
+      '/address-report': {get: {operationId: 'addressReport', summary: 'Everything BayCounty.me has for one address: the property and its recent sales, a property tax estimate with every taxing authority, flood and evacuation zones, zoned schools, utilities and trash day, zoning and development nearby, road and sales tax projects nearby, parks and beaches, nearby services, who represents it, and what is coming up',
+        description: 'Give address (house number and street; add zip to narrow it) or lat and lon (optionally parcel, the Property Appraiser parcel id). The answer is a list of sections, each with status ok, partial, none (nothing on file), pending (its data is not published yet) or error (a live map server did not answer). Parcel facts, district boundaries and representatives are read live from the county GIS server and the flood zone from FEMA; the tax estimate uses the tax-districts and property-tax-rates datasets. Owner names, mailing addresses and buyer or seller names are never returned, and sales before 2016 are left out. The address you send is not logged. The realtor console at /realtor prints this report as a branded PDF.',
+        parameters: [p('address', 'Street address, e.g. 825 Ohio Ave, Lynn Haven'), p('zip', 'ZIP code, to narrow an address'), p('lat', 'Latitude (decimal degrees)', {type: 'number'}), p('lon', 'Longitude (decimal degrees)', {type: 'number'}), p('parcel', 'Property Appraiser parcel id, with lat/lon'), p('place', 'Place id (default fl-bay)')],
+        responses: {200: {description: '{data: {place_id, address, city, zip, lat, lon, parcel_id, jurisdiction, generated_at, other_matches, sections: [{id, title, status, data, note, sources: [{label, url}]}], note}}. Section ids: property, tax, hazards, schools, utilities, zoning, roads, outdoors, services, officials, events.'},
+          400: {description: 'No address or a bad location'}, 404: {description: 'No matching address, or a point outside the county'}, 502: {description: 'The county address service did not answer'}}}},
       '/search': {get: {operationId: 'searchSite', summary: 'Search every page on BayCounty.me', parameters: [{name: 'q', in: 'query', required: true, schema: {type: 'string'}}, p('limit', 'Results (default 20, max 100)', {type: 'integer'})], responses: {200: {description: 'Results'}}}},
     },
   };
@@ -208,7 +214,9 @@ module.exports = async (req, res) => {
   const path = String(req.query.path || '').replace(/^\/+|\/+$/g, '');
   const parts = path ? path.split('/') : [];
   const ctx = await gate(req, res, 'api');
-  const info = {endpoint: path || 'index', dataset: parts[0] === 'datasets' ? parts[1] || null : null, query: cleanQuery(req.query)};
+  // An address report never logs where someone looked: address, lat, lon and parcel are dropped from the request log.
+  const logQuery = parts[0] === 'address-report' ? Object.fromEntries(Object.entries(req.query || {}).filter(([k]) => !['address', 'lat', 'lon', 'lng', 'parcel', 'zip', 'label'].includes(k))) : req.query;
+  const info = {endpoint: path || 'index', dataset: parts[0] === 'datasets' ? parts[1] || null : null, query: cleanQuery(logQuery)};
   instrument(res, ctx, info);
   conditional(req, res);
   if (!ctx.ok) return res.status(ctx.status).json({error: ctx.message || 'Request not allowed.', reason: ctx.reason, docs: `${SITE}/developers#keys`});
@@ -218,7 +226,7 @@ module.exports = async (req, res) => {
     if (!parts.length) return res.status(200).json({
       name: 'BayCounty.me API', version: 'v1', updated: catalog.updated, docs: `${SITE}/developers`, openapi: `${SITE}/api/v1/openapi.json`, mcp: `${SITE}/api/mcp`,
       endpoints: {datasets: `${SITE}/api/v1/datasets`, governments: `${SITE}/api/v1/governments`, search: `${SITE}/api/v1/search?q=`,
-        entities: `${SITE}/api/v1/entities?q=`, budget_compare: `${SITE}/api/v1/budget-compare?gov=lh&from=2025&to=2026`, checkbook: `${SITE}/api/v1/checkbook?gov=lh`, budget_actual: `${SITE}/api/v1/budget-actual?gov=lh`, officials: `${SITE}/api/v1/officials?gov=lh&year=2019`, status: `${SITE}/api/v1/status`, import_progress: `${SITE}/api/v1/import-progress`, changes: `${SITE}/api/v1/changes?since=`, meetings_calendar: `${SITE}/api/v1/meetings.ics?gov=`},
+        entities: `${SITE}/api/v1/entities?q=`, budget_compare: `${SITE}/api/v1/budget-compare?gov=lh&from=2025&to=2026`, checkbook: `${SITE}/api/v1/checkbook?gov=lh`, budget_actual: `${SITE}/api/v1/budget-actual?gov=lh`, officials: `${SITE}/api/v1/officials?gov=lh&year=2019`, address_report: `${SITE}/api/v1/address-report?address=825+Ohio+Ave`, status: `${SITE}/api/v1/status`, import_progress: `${SITE}/api/v1/import-progress`, changes: `${SITE}/api/v1/changes?since=`, meetings_calendar: `${SITE}/api/v1/meetings.ics?gov=`},
       license: catalog.license, datasets: catalog.datasets.map(d => ({id: d.id, title: d.title, rows: d.rows, url: `${SITE}/api/v1/datasets/${d.id}`}))});
     if (parts[0] === 'openapi.json') return res.status(200).json(openapi(catalog));
     if (parts[0] === 'status') { res.locals.lastModified = null; return res.status(200).json(await status(catalog)); }
@@ -303,6 +311,13 @@ module.exports = async (req, res) => {
       if (!req.query.gov && !req.query.government) return res.status(200).json({data: B.coverage(rows), note: 'Add ?gov=<gov_id>&from=<year>&to=<year> to compare two years.'});
       try { const r = B.compare(rows, req.query); info.rows = r.sections ? Object.values(r.sections).reduce((a, s) => a + s.length, 0) : 0; return res.status(200).json({data: r}); }
       catch (e) { if (e.expose) return res.status(e.status).json({error: e.message, ...e.extra}); throw e; }
+    }
+    if (parts[0] === 'address-report') {
+      res.locals.lastModified = null;
+      const A = require('./_address_report');
+      const rowsOf = async id => { const m = catalog.datasets.find(d => d.id === id); return m ? (await datasetRows(req, m)).rows : null; };
+      try { const r = await A.forRequest(req.query, {catalog, rowsOf, file: f => load(req, f)}); info.rows = r.sections.length; return res.status(200).json({data: r}); }
+      catch (e) { if (e.expose) return res.status(e.status).json({error: e.message}); throw e; }
     }
     if (parts[0] === 'officials') {
       const O = require('./_officials');

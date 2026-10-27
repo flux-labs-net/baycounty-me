@@ -87,6 +87,8 @@ ${ruleList}<p style="margin-top:16px">Want an alert for a vote, a contract, a st
 }
 
 module.exports = async (req, res) => {
+  // /api/realtor (vercel.json rewrite): the realtor console's accounts live in api/_realtor.js
+  if (req.query && req.query.app === 'realtor') return require('./_realtor')(req, res);
   res.setHeader('Cache-Control', 'no-store');
   res.setHeader('Referrer-Policy', 'no-referrer');
   res.setHeader('X-Robots-Tag', 'noindex');

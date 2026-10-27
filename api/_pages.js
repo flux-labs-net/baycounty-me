@@ -5,6 +5,9 @@
 const PAGES = {
   '/': {datasets: ['site-updates', 'government-profiles', 'budget-detail', 'budget-per-resident', 'property-tax-rates', 'tax-districts', 'fema-michael-projects', 'debt', 'audit-findings', 'sales-tax-projects', 'cra-payments'],
     endpoints: ['/search']},
+  // the realtor console prints the address report; agent accounts and branding are private (api/_realtor.js, migration 0074)
+  '/realtor': {datasets: ['tax-districts', 'property-tax-rates', 'sales-tax-projects', 'people-directory', 'officeholder-terms', 'meetings'], endpoints: ['/address-report'],
+    note: 'Live map lookups (parcel, flood, districts) are made by the address-report endpoint at request time. Sections for utilities, schools, parks, beaches, development and events read their datasets when those are published.'},
   '/my-address': {datasets: ['tax-districts', 'property-tax-rates', 'fees-assessments', 'cra-payments', 'property-tax-exemptions', 'meetings'],
     note: 'Per-parcel lookups (exemptions, districts) are not in the API yet.'},
   '/public-money/cra-spending': {datasets: ['cra-payments']},

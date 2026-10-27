@@ -1782,6 +1782,10 @@
       "destination": "/api/manage"
     },
     {
+      "source": "/api/realtor",
+      "destination": "/api/manage?app=realtor"
+    },
+    {
       "source": "/api/v1/:path*",
       "destination": "/api/v1?path=:path*"
     }

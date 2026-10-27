@@ -41,6 +41,13 @@ const TOOLS = [
      year: {type: 'integer', description: 'Fiscal year, the year it ends (2019 = Oct 2018 to Sep 2019; schools Jul to Jun)'},
      date: {type: 'string', description: 'A date (YYYY-MM-DD) instead of a year. Default: today'}}},
    annotations: {readOnlyHint: true}},
+  {name: 'address_report', title: 'Everything about an address',
+   description: 'Everything BayCounty.me has for one Bay County address, by section: the property (use, size, year built, values, sales since 2016), a property tax estimate with every taxing authority and flat fee, FEMA flood zone and evacuation zone, zoned schools, utilities and trash day, zoning and development nearby, road and sales tax projects nearby, parks and beaches, nearby fire station and library, who represents it (county, city, school board, state, U.S.) and upcoming meetings and events. A section with status "pending" has no published data yet. Owner names are never included. Give address (house number and street) or lat and lon.',
+   inputSchema: {type: 'object', additionalProperties: false, properties: {
+     address: {type: 'string', description: 'Street address, e.g. 825 Ohio Ave, Lynn Haven'},
+     zip: {type: 'string', description: 'ZIP code, to narrow the address'},
+     lat: {type: 'number'}, lon: {type: 'number'}}},
+   annotations: {readOnlyHint: true, openWorldHint: true}},
   {name: 'government_checkbook', title: 'Government checkbook',
    description: 'One government\'s payments in a fiscal year from its own check register: the total, payments by month, the top payees (with profile ids), by fund and payment method, and the largest payments. Payments to private individuals are counted but never named. Add payee to list every payment to one payee. Returns an empty governments list while nothing is published.',
    inputSchema: {type: 'object', additionalProperties: false, properties: {
@@ -236,6 +243,13 @@ async function call(req, name, a = {}) {
     if (!a.gov) return {governments: B.coverage(rows)};
     return {...B.compare(rows, a), page: `${SITE}/public-money/budget-compare?gov=${encodeURIComponent(a.gov)}`};
   }
+  if (name === 'address_report') {
+    const A = require('./_address_report'), c = await load(req, '/downloads/index.json');
+    const has = id => c.datasets.some(d => d.id === id);
+    const r = await A.forRequest(a, {catalog: c, rowsOf: id => (has(id) ? rowsOf(req, c, id) : null), file: f => load(req, f)});
+    return {...r, sections: r.sections.filter(x => x.status !== 'pending'), coming_soon: r.sections.filter(x => x.status === 'pending').map(x => x.title),
+      page: `${SITE}/my-address`, note: r.note + ' Cite each section\'s sources.'};
+  }
   if (name === 'officials_in_office') {
     const O = require('./_officials');
     const rows = await rowsOf(req, await load(req, '/downloads/index.json'), 'officeholder-terms');
@@ -304,7 +318,7 @@ function describe(m) {
   return {endpoint: m && m.method === 'tools/call' ? `tools/call:${p.name}` : (m && m.method) || null,
     dataset: m && m.method === 'tools/call' && p.arguments ? p.arguments.id || p.arguments.slug || p.arguments.vendor || p.arguments.member || p.arguments.gov || null
       : m && m.method === 'resources/read' ? String(p.uri || '').replace(/^baycounty:\/\/datasets\//, '').slice(0, 80) || null : null,
-    query: m && m.method === 'tools/call' ? JSON.stringify(p.arguments || {}).replace(/"api_key":"[^"]*"/, '') : null};
+    query: m && m.method === 'tools/call' ? (p.name === 'address_report' ? null : JSON.stringify(p.arguments || {}).replace(/"api_key":"[^"]*"/, '')) : null};
 }
 
 const ok = (id, result) => ({jsonrpc: '2.0', id, result});

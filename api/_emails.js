@@ -59,6 +59,17 @@ function adminSignInEmail(link) {
       footer: 'You’re getting this because someone asked to sign in to the BayCounty.me admin with this address.'})};
 }
 
+function realtorSignInEmail(link, minutes = 20) {
+  const subject = 'Your BayCounty.me realtor console sign-in link';
+  return {subject,
+    text: `Sign in to the BayCounty.me realtor console:\n\n${link}\n\nThe link works once and expires in ${minutes} minutes. If you didn't ask for it, ignore this email.`,
+    html: ui.layout({title: subject, preheader: `Your sign-in link. It works once and expires in ${minutes} minutes.`, kicker: 'Realtor console',
+      hero: {tone: 'blue', icon: 'key', eyebrow: 'Realtor console', title: 'Sign in to run address reports'},
+      body: ui.p(`Use this button to sign in. It works once and expires in ${minutes} minutes.`) + ui.button(link, 'Sign in') +
+        ui.note('Didn’t ask for this? Ignore this email. Nobody can sign in without the link.'),
+      footer: 'You’re getting this because someone asked to sign in to the BayCounty.me realtor console with this address.'})};
+}
+
 // Weekly digest for one government (digest.js), from one entry of /data/digest.json. Returns null when there's
 // nothing new in the last `days` days and no meeting in the next 8, which means no email that week.
 // The footer keeps Resend's broadcast placeholders ({{{RESEND_UNSUBSCRIBE_URL}}}, the prefs_token property).
@@ -94,4 +105,4 @@ function digestEmail(g, {now = Date.now(), days = 7} = {}) {
   return {subject, html, text, changes: changes.length, meetings: meets.length};
 }
 
-module.exports = {confirmEmail, manageLinkEmail, adminSignInEmail, digestEmail, clip};
+module.exports = {confirmEmail, manageLinkEmail, adminSignInEmail, realtorSignInEmail, digestEmail, clip};
