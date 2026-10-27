@@ -655,28 +655,19 @@ def _school_rows():
 
     zs = F['zone_schools'].get('zones', {})
     zones = []
-    try:
-        from shapely.geometry import shape
-        have_shapely = True
-    except ImportError:
-        have_shapely = False
     import json, math, re
     for z in F['zones'].get('zones', []):
         sid = zs.get(z['zone_name'])
         geom = {'type': 'Polygon', 'coordinates': z['rings']} if len(z['rings']) == 1 else {'type': 'MultiPolygon', 'coordinates': [[r] for r in z['rings']]}
-        area = None
-        if have_shapely:
-            # Esri rings: outer rings run clockwise, holes counter-clockwise; an even-odd fill gives the zone's area
-            lat0 = sum(p[1] for r in z['rings'] for p in r) / max(1, sum(len(r) for r in z['rings']))
-            kx, ky = 69.172 * math.cos(math.radians(lat0)), 69.0
-            from shapely.geometry import Polygon
-            tot = 0.0
-            for r in z['rings']:
-                if len(r) >= 4:
-                    p = Polygon([(x * kx, y * ky) for x, y in r])
-                    signed = sum((r[i][0] - r[i - 1][0]) * (r[i][1] + r[i - 1][1]) for i in range(len(r)))  # >0 clockwise
-                    tot += p.area if signed > 0 else -p.area
-            area = round(abs(tot), 2)
+        # Shoelace area on a local flat projection. Esri rings: outer rings run clockwise (negative signed area),
+        # holes counter-clockwise, so flipping the sign and summing gives the zone's area with holes taken out.
+        lat0 = sum(p[1] for r in z['rings'] for p in r) / max(1, sum(len(r) for r in z['rings']))
+        kx, ky = 69.172 * math.cos(math.radians(lat0)), 69.0
+        tot = 0.0
+        for r in z['rings']:
+            pts = [(x * kx, y * ky) for x, y in r]
+            tot -= sum(pts[i - 1][0] * pts[i][1] - pts[i][0] * pts[i - 1][1] for i in range(len(pts))) / 2
+        area = round(abs(tot), 2) if z['rings'] else None
         zones.append({'place_id': place, 'zone_id': re.sub(r'[^a-z0-9]+', '-', f"{z['level']} {z['zone_name']}".lower()).strip('-'),
                       'level': z['level'], 'zone_name': z['zone_name'], 'school_id': sid, 'school': name.get(sid),
                       'mou_area': 'MOU' in z['zone_name'], 'pieces': z['pieces'], 'area_sq_mi': area, 'last_edited': z.get('last_edited'),
