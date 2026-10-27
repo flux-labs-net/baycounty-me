@@ -227,11 +227,15 @@ data class PeopleDirectory(val about: String? = null, val people: List<Person> =
     companion object {
         /**
          * The People list as the site shows it: one heading per government, each in government then title then last-name order.
-         * Without the order fields (an older people.json) it falls back to the first government and the name.
+         * Without the order fields (an older people.json) it falls back to the site's government order, current before
+         * past, then last name.
          */
         fun grouped(list: List<Person>): List<Pair<String, List<Person>>> {
             val out = linkedMapOf<String, MutableList<Person>>()
-            for (p in list.sortedWith(compareBy<Person>({ it.order ?: Int.MAX_VALUE }, { it.name }))) {
+            val govIndex = { p: Person -> Governments.order.indexOf(p.gov ?: p.gov_ids.firstOrNull() ?: "").let { if (it < 0) 99 else it } }
+            val sorted = list.sortedWith(compareBy<Person>({ it.order ?: (Int.MAX_VALUE - 100 + govIndex(it)) },
+                { if (it.order == null && it.isPast) 1 else 0 }, { if (it.order == null) it.lastName else "" }))
+            for (p in sorted) {
                 val title = p.group ?: Governments.names[p.gov ?: p.gov_ids.firstOrNull() ?: ""] ?: "Other offices"
                 out.getOrPut(title) { mutableListOf() } += p
             }
@@ -266,7 +270,13 @@ data class PeopleDirectory(val about: String? = null, val people: List<Person> =
         val roles: List<Role> = emptyList(),
     ) {
         val photoUrl: String? get() = photo?.let { BayCountyClient.SITE + it }
-        val isPast: Boolean get() = status?.let { it == "past" } ?: ((rank ?: 0) >= 7)
+        val isPast: Boolean
+            get() = status?.let { it == "past" } ?: rank?.let { it >= 7 }
+                ?: (label == "Former official" || label == "Past candidate")  // an older people.json
+        /** Surname for sorting: "Kenneth L. Ayers, Jr." sorts under Ayers (people_pages.last_name). */
+        val lastName: String
+            get() = name.replace(",", " ").split(" ").filter { it.isNotBlank() && it.lowercase().trim('.') !in setOf("jr", "sr", "ii", "iii", "iv") }
+                .lastOrNull()?.lowercase() ?: name.lowercase()
 
         @Serializable data class Role(val role: String? = null, val gov_id: String? = null, val seat: String? = null)
 
