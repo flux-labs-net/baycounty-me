@@ -3,21 +3,24 @@
 read_minutes.py - read captured minutes into motions and roll calls, in batches.
 
   --submit    find minutes files not read yet (newest meetings first), pull their text (OCR for scanned pages),
-              and send them to Claude through the Message Batches API (half the normal price; results within a day,
-              usually an hour). Long files are split at page boundaries into several requests.
+              and send them to the model as a batch (Anthropic Message Batches or OpenAI Batch API: half the normal
+              price; results within a day, usually an hour). Long files are split at page boundaries into several requests.
   --collect   fetch finished batches, store each file's motions, match names to officeholders and run the checks
               (match.py). Flagged motions wait on /admin ("Votes from minutes").
   --rematch   re-run matching and checks on every stored motion (after data/civic/officeholders.json changes).
               Review decisions are kept.
-  --file F    local check: print the text and the request for one file; add --direct (needs ANTHROPIC_API_KEY) to
+  --file F    local check: print the text and the request for one file; add --direct (needs the model's API key) to
               read it right away and print the motions and matched votes. Add --board pc --date 2016-12-13.
 
 Spending limits: each --submit stops at MINUTES_SUBMIT_MAX files (default 150) or MINUTES_BATCH_BUDGET_USD of
 estimated cost (default 25), and never lets the total for all reads pass MINUTES_TOTAL_BUDGET_USD (default 150;
 Jeremy approved about $100 for the 2016-2026 backfill on 2026-10-26).
 
-Environment: DATABASE_URL, ANTHROPIC_API_KEY (+ ANTHROPIC_WORKSPACE_ID if the key isn't scoped to a workspace),
-SUPABASE_URL + SUPABASE_SERVICE_ROLE_KEY (stored copies), MINUTES_MODEL (default claude-sonnet-5-5).
+Model: MINUTES_MODEL (default claude-sonnet-5-5). A gpt-* name sends the batches to OpenAI instead (data/llm.py).
+Each batch keeps the model it was sent with, so switching models mid-backlog is safe and the caps count both.
+
+Environment: DATABASE_URL, SUPABASE_URL + SUPABASE_SERVICE_ROLE_KEY (stored copies), and the key for the model's
+provider: ANTHROPIC_API_KEY (+ ANTHROPIC_WORKSPACE_ID if the key isn't scoped to a workspace) or OPENAI_API_KEY.
 Needs poppler-utils and tesseract-ocr.
 """
 import concurrent.futures as cf
@@ -26,16 +29,16 @@ import json
 import os
 import re
 import sys
-import urllib.error
-import urllib.request
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 sys.path.insert(0, os.path.join(HERE, "..", "agendas"))
+sys.path.insert(0, os.path.join(HERE, ".."))
+import llm  # noqa: E402  (Claude or GPT, picked by the model name)
 import match as M  # noqa: E402
 import text as T  # noqa: E402
 import watch_agendas as wa  # noqa: E402
-import extract_agendas as xa  # noqa: E402  (get_bytes, prices)
+import extract_agendas as xa  # noqa: E402  (get_bytes)
 
 fm = wa.fm
 MODEL = os.environ.get("MINUTES_MODEL") or "claude-sonnet-5-5"
@@ -49,7 +52,6 @@ KEEP_TEXT = 400_000
 MAX_OUT = 32_000
 RETRY_HOURS, MAX_ATTEMPTS = 6, 3
 FIRST_DATE = "2016-01-01"
-API = "https://api.anthropic.com/v1"
 
 KINDS = ["contract", "purchase", "change_order", "budget", "millage", "grant", "bond_debt", "rezoning_land_use",
          "ordinance", "resolution", "appointment", "personnel", "settlement", "fee_rate", "property", "policy",
@@ -123,50 +125,21 @@ applicants and companies may be named.
 - page: the number from the nearest "=== Page N ===" marker above the motion."""
 
 
-def headers():
-    key = os.environ.get("ANTHROPIC_API_KEY")
-    if not key:
-        raise xa.SetupError("ANTHROPIC_API_KEY is not set")
-    h = {"x-api-key": key, "anthropic-version": "2023-06-01", "content-type": "application/json", "User-Agent": fm.UA}
-    if os.environ.get("ANTHROPIC_WORKSPACE_ID"):
-        h["anthropic-workspace-id"] = os.environ["ANTHROPIC_WORKSPACE_ID"]
-    return h
-
-
-def api(method, path, body=None, raw=False):
-    req = urllib.request.Request(path if path.startswith("http") else API + path, method=method, headers=headers(),
-                                 data=json.dumps(body).encode() if body is not None else None)
-    last = None
-    for attempt in range(4):
-        try:
-            with urllib.request.urlopen(req, timeout=300) as r:
-                data = r.read()
-                return data if raw else json.loads(data.decode("utf-8"))
-        except urllib.error.HTTPError as e:
-            msg = e.read()[:400].decode("utf-8", "replace")
-            if e.code in (401, 403) or (e.code == 400 and re.search(r"api key|workspace|credit|billing", msg, re.I)):
-                raise xa.SetupError("Claude API %s: %s" % (e.code, msg))
-            last = RuntimeError("Claude API %s: %s" % (e.code, msg))
-            if e.code not in (429, 500, 502, 503, 529):
-                raise last
-        except Exception as e:
-            last = e
-        fm.time.sleep(5 * (attempt + 1))
-    raise last
-
-
 def params(board_name, doc_date, chunk_text, first, total_chunks):
     where = "%s minutes" % board_name + (" dated %s" % doc_date if doc_date else "")
     part = "" if total_chunks == 1 else " (part of a longer file, starting at page %d; a meeting may begin or end outside this part)" % first
-    return {"model": MODEL, "max_tokens": MAX_OUT,
-            "system": [{"type": "text", "text": SYSTEM, "cache_control": {"type": "ephemeral"}}],
-            "messages": [{"role": "user", "content": "Minutes file: %s%s.\n\n%s" % (where, part, chunk_text)}],
-            "output_config": {"format": {"type": "json_schema", "schema": SCHEMA}}}
+    return {"system": SYSTEM, "user": "Minutes file: %s%s.\n\n%s" % (where, part, chunk_text)}
 
 
-def price(tin, tout, discount=BATCH_DISCOUNT):
-    p = xa.PRICES.get(MODEL) or xa.PRICES["claude-sonnet-5-5"]
-    return round((tin * p[0] + tout * p[1]) / 1e6 * discount, 4)
+def body(p, model=None):
+    """The request body for one chunk, in the provider's own shape."""
+    return llm.request_body(model or MODEL, p["system"], p["user"], SCHEMA, "minutes", MAX_OUT)
+
+
+def price(tin, tout, discount=BATCH_DISCOUNT, model=None):
+    model = model or MODEL
+    c = llm.price(model, tin, tout, discount)
+    return c if c is not None else llm.price("claude-sonnet-5-5", tin, tout, discount)
 
 
 def estimate(chars):
@@ -306,17 +279,18 @@ def submit(db, storage, run_id):
             est += cost
             name = M.BOARDS.get(board, (None, None, board))[2]
             for i, (first, ps) in enumerate(parts):
-                requests.append({"custom_id": "r%d-c%d" % (row[0], i),
-                                 "params": params(name, mdate, T.joined(ps, first), first, len(parts))})
+                p = params(name, mdate, T.joined(ps, first), first, len(parts))
+                requests.append(llm.batch_request(MODEL, "r%d-c%d" % (row[0], i), p["system"], p["user"], SCHEMA,
+                                                  "minutes", MAX_OUT))
     if not requests:
         print("nothing to send")
         return 0
-    b = api("POST", "/messages/batches", {"requests": requests})
+    bid = llm.batch_submit(MODEL, requests)
     db.one("insert into agendas.minutes_batches (batch_id, model, requests, est_cost_usd) values (%s,%s,%s,%s)",
-           (b["id"], MODEL, len(requests), round(est, 4)))
+           (bid, MODEL, len(requests), round(est, 4)))
     ids = sorted({int(r["custom_id"].split("-")[0][1:]) for r in requests})
-    db.one("update agendas.minutes_reads set batch_id = %s where id = any(%s)", (b["id"], ids))
-    print("sent batch %s: %d request(s) for %d file(s), about $%.2f" % (b["id"], len(requests), reads, est))
+    db.one("update agendas.minutes_reads set batch_id = %s where id = any(%s)", (bid, ids))
+    print("sent batch %s to %s: %d request(s) for %d file(s), about $%.2f" % (bid, MODEL, len(requests), reads, est))
     return reads
 
 
@@ -327,6 +301,7 @@ def store_read(db, read_id, data=None):
     if not r:
         return 0
     doc_id, results, board, mdate, url, title = r[0]
+    model = fetchall(db, "select model from agendas.minutes_reads where id = %s", (read_id,))[0][0]
     results = sorted(results or [], key=lambda x: x.get("chunk", 0))
     multi = bool(re.search(r"^20\d\d\s+(official\s+)?minutes$", title or "", re.I))
     meetings = merge_chunks([x.get("answer") for x in results])
@@ -351,60 +326,49 @@ def store_read(db, read_id, data=None):
     tout = sum(x.get("out", 0) for x in results)
     db.one("""update agendas.minutes_reads set status = 'ok', error = null, meetings = %s, motion_count = %s, input_tokens = %s,
               output_tokens = %s, cost_usd = %s, read_at = now() where id = %s""",
-           (len(meetings), len(rows), tin, tout, price(tin, tout), read_id))
+           (len(meetings), len(rows), tin, tout, price(tin, tout, model=model), read_id))
     flagged = sum(1 for m in rows if m["check_status"] == "flagged")
     print("  ok      %-7s %s %s: %d meeting(s), %d motion(s), %d flagged" % (board, mdate or "", (title or url)[:50], len(meetings), len(rows), flagged))
     return len(rows)
 
 
 def collect(db):
-    batches = fetchall(db, "select batch_id from agendas.minutes_batches where status in ('in_progress', 'ended') order by id")
+    batches = fetchall(db, "select batch_id, model from agendas.minutes_batches where status in ('in_progress', 'ended') order by id")
     n_motions = 0
-    for (bid,) in batches:
-        b = api("GET", "/messages/batches/" + bid)
-        if b.get("processing_status") != "ended":
-            c = b.get("request_counts") or {}
-            print("batch %s: still running (%s done of %s)" % (bid, c.get("succeeded", 0) + c.get("errored", 0),
-                                                              sum(v for v in c.values() if isinstance(v, int))))
+    for bid, bmodel in batches:
+        model = llm.batch_model(bmodel, bid)
+        state, note = llm.batch_state(model, bid)
+        if state == "running":
+            print("batch %s: still running (%s)" % (bid, note))
+            continue
+        if state == "failed":  # the whole batch was refused (e.g. over the provider's queue limit): retry its files later
+            db.one("update agendas.minutes_batches set status = 'failed', error = %s, ended_at = now() where batch_id = %s", (note, bid))
+            db.one("update agendas.minutes_reads set status = 'failed', error = %s where batch_id = %s and status = 'submitted'", (note, bid))
+            print("batch %s: %s" % (bid, note))
             continue
         db.one("update agendas.minutes_batches set status = 'ended', ended_at = coalesce(ended_at, now()) where batch_id = %s", (bid,))
-        raw = api("GET", b["results_url"], raw=True).decode("utf-8")
         touched, cost = set(), 0.0
-        for line in raw.splitlines():
-            if not line.strip():
-                continue
-            res = json.loads(line)
-            m = re.match(r"r(\d+)-c(\d+)$", res.get("custom_id") or "")
+        for res in llm.batch_results(model, bid):
+            m = re.match(r"r(\d+)-c(\d+)$", res.custom_id or "")
             if not m:
                 continue
             read_id, chunk = int(m.group(1)), int(m.group(2))
-            result = res.get("result") or {}
-            if result.get("type") != "succeeded":
-                err = json.dumps(result.get("error") or result)[:500]
-                db.one("update agendas.minutes_reads set status = 'failed', error = %s where id = %s", (err, read_id))
-                continue
-            msg = result["message"]
-            u = msg.get("usage") or {}
-            tin = (u.get("input_tokens") or 0) + (u.get("cache_read_input_tokens") or 0) + (u.get("cache_creation_input_tokens") or 0)
-            tout = u.get("output_tokens") or 0
-            cost += price(tin, tout)
-            if msg.get("stop_reason") in ("max_tokens", "refusal"):
-                db.one("update agendas.minutes_reads set status = 'failed', error = %s where id = %s",
-                       ("model stopped: %s (chunk %d)" % (msg.get("stop_reason"), chunk), read_id))
-                continue
-            try:
-                answer = json.loads("".join(x.get("text", "") for x in msg.get("content") or [] if x.get("type") == "text"))
-            except ValueError as e:
-                db.one("update agendas.minutes_reads set status = 'failed', error = %s where id = %s", ("bad JSON: %s" % e, read_id))
+            cost += price(res.tin, res.tout, model=model)
+            if res.error:
+                err = res.error if not res.error.startswith("model stopped") else "%s (chunk %d)" % (res.error, chunk)
+                db.one("update agendas.minutes_reads set status = 'failed', error = %s where id = %s", (err[:500], read_id))
                 continue
             db.one("""update agendas.minutes_reads set results = results || %s::jsonb, chunks_done = chunks_done + 1
                       where id = %s and status = 'submitted'""",
-                   (json.dumps([{"chunk": chunk, "answer": answer, "in": tin, "out": tout}]), read_id))
+                   (json.dumps([{"chunk": chunk, "answer": res.answer, "in": res.tin, "out": res.tout}]), read_id))
             touched.add(read_id)
         for read_id in sorted(touched):
             done = fetchall(db, "select chunks, chunks_done, status from agendas.minutes_reads where id = %s", (read_id,))[0]
             if done[2] == "submitted" and done[1] >= done[0]:
                 n_motions += store_read(db, read_id)
+        # files in a batch that ended without an answer (expired or cancelled) go back in the queue
+        db.one("""update agendas.minutes_reads set status = 'failed', error = 'no answer in batch'
+                  where batch_id = %s and status = 'submitted' and chunks_done < chunks""", (bid,))
         db.one("update agendas.minutes_batches set status = 'collected', collected_at = now(), cost_usd = %s where batch_id = %s",
                (round(cost, 4), bid))
         print("batch %s collected: about $%.2f" % (bid, cost))
@@ -433,17 +397,15 @@ def local(argv):
     name = M.BOARDS.get(board, (None, None, board))[2]
     if "--direct" not in argv:
         for first, ps in parts:
-            p = params(name, date, T.joined(ps, first), first, len(parts))
-            print(json.dumps({k: v for k, v in p.items() if k != "output_config"}, indent=1)[:6000])
+            p = body(params(name, date, T.joined(ps, first), first, len(parts)))
+            print(json.dumps({k: v for k, v in p.items() if k not in ("output_config", "response_format")}, indent=1)[:6000])
         return 0
     results = []
     for i, (first, ps) in enumerate(parts):
-        j = api("POST", "/messages", params(name, date, T.joined(ps, first), first, len(parts)))
-        out = "".join(b.get("text", "") for b in j.get("content", []) if b.get("type") == "text")
-        u = j.get("usage") or {}
-        print("chunk %d: %s in / %s out, about $%.3f at full price" % (i, u.get("input_tokens"), u.get("output_tokens"),
-                                                                      price(u.get("input_tokens") or 0, u.get("output_tokens") or 0, 1)), file=sys.stderr)
-        results.append(json.loads(out))
+        p = params(name, date, T.joined(ps, first), first, len(parts))
+        answer, tin, tout = llm.structured(MODEL, p["system"], p["user"], SCHEMA, "minutes", MAX_OUT)
+        print("chunk %d (%s): %s in / %s out, about $%.3f at full price" % (i, MODEL, tin, tout, price(tin, tout, 1)), file=sys.stderr)
+        results.append(answer)
     rows = motion_rows(merge_chunks(results), board, date)
     for r in rows:
         print("%s p%s %-8s %-6s %-20s %s | %s" % (r["meeting_date"], r["page"], r["check_status"], r["tally"], r["vote_method"],
@@ -462,9 +424,13 @@ def main(argv):
     if not os.environ.get("DATABASE_URL"):
         print("DATABASE_URL is not set", file=sys.stderr)
         return 2
-    if not os.environ.get("ANTHROPIC_API_KEY") and "--rematch" not in argv:
-        print("ANTHROPIC_API_KEY is not set; skipping minutes reading")
-        return 0
+    if "--rematch" not in argv:
+        if not llm.known(MODEL):  # without a price the spending caps can't work
+            print("no price for model %s; add it to PRICES in data/llm.py" % MODEL, file=sys.stderr)
+            return 2
+        if not llm.has_key(MODEL):
+            print("%s is not set (model %s); skipping minutes reading" % (llm.key_name(MODEL), MODEL))
+            return 0
     db = wa.DB(os.environ["DATABASE_URL"], False)
     storage = wa.Storage()
     r = db.one("insert into ingest_runs (origin, dataset, notes) values ('scraper:minutes', 'minutes_votes', %s) returning id",

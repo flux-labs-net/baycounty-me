@@ -113,8 +113,9 @@ Where each secret lives. Values are never committed.
 | `OWNER_ID_KEY` | GitHub secret | keys public business-owner ids (`owner:o_…`) so they can't be traced to an address; never change it (every owner profile link would change) |
 | `VERCEL_DEPLOY_HOOK` | GitHub secret | refresh workflows deploy bot commits (Vercel skips Git deploys by non-members) |
 | `ANTHROPIC_API_KEY` | GitHub secret | watch-agendas reads posted agendas into items |
+| `OPENAI_API_KEY` | GitHub secret | only when `AGENDA_MODEL` or `MINUTES_MODEL` is a GPT model (`gpt-*`) |
 | `POP_HOST`, `POP_USER`, `POP_PASS` | GitHub secret (optional) | a POP3 agenda mailbox |
-| `SUPABASE_REGION`, `AGENDA_INBOX`, `AGENDA_MODEL`, `AGENDA_EXTRACT_MAX`, `AGENDA_EXTRACT_BUDGET_USD`, `ANTHROPIC_WORKSPACE_ID`, `POP_DELETE` | GitHub variables | workflow settings |
+| `SUPABASE_REGION`, `AGENDA_INBOX`, `AGENDA_MODEL`, `MINUTES_MODEL`, `AGENDA_EXTRACT_MAX`, `AGENDA_EXTRACT_BUDGET_USD`, `ANTHROPIC_WORKSPACE_ID`, `OPENAI_PROJECT_ID`, `OPENAI_REASONING_EFFORT`, `POP_DELETE` | GitHub variables | workflow settings |
 | `CRON_SECRET` | Vercel env | `/api/digest` and `/api/alerts-run` crons |
 | `ALERTS_SECRET` | Vercel env | signs alert subscribe/manage links |
 | `FINANCE_HASH_SECRET` | Vercel env | /finance sign-in hashing |

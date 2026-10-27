@@ -161,13 +161,22 @@ class Answers(unittest.TestCase):
         self.assertEqual(m[0]["present"], ["A", "B"])
 
     def test_request_shape(self):
-        p = R.params("Panama City Commission", "2016-12-13", "=== Page 1 ===\ntext", 1, 1)
+        p = R.body(R.params("Panama City Commission", "2016-12-13", "=== Page 1 ===\ntext", 1, 1), "claude-sonnet-5-5")
         self.assertEqual(p["output_config"]["format"]["type"], "json_schema")
         self.assertEqual(p["system"][0]["cache_control"], {"type": "ephemeral"})
         self.assertIn("2016-12-13", p["messages"][0]["content"])
 
+    def test_request_shape_gpt(self):
+        p = R.body(R.params("Panama City Commission", "2016-12-13", "=== Page 1 ===\ntext", 1, 1), "gpt-6.1-sol")
+        self.assertEqual(p["model"], "gpt-6.1-sol")
+        self.assertEqual(p["response_format"]["json_schema"]["strict"], True)
+        self.assertIs(p["response_format"]["json_schema"]["schema"], R.SCHEMA)
+        self.assertEqual(p["messages"][0]["content"], R.SYSTEM)
+        self.assertIn("2016-12-13", p["messages"][1]["content"])
+
     def test_batch_price_is_half(self):
-        self.assertAlmostEqual(R.price(1_000_000, 0), 1.0)   # Sonnet 5.5: $2 per million in, half price in a batch
+        self.assertAlmostEqual(R.price(1_000_000, 0, model="claude-sonnet-5-5"), 1.0)   # $2 per million in, half in a batch
+        self.assertAlmostEqual(R.price(1_000_000, 100_000, model="gpt-6.1-sol"), 1.5)    # $2 in / $10 out, half in a batch
 
 
 if __name__ == "__main__":
