@@ -94,7 +94,19 @@ struct UtilitiesView: View {
         guard let m = current else { return }
         lookup = nil
         failed = false
+        if Self.screenshotSample, let url = Bundle.main.url(forResource: "utilities-sample", withExtension: "json"),
+           let data = try? Data(contentsOf: url), let sample = try? UtilityLookup.decode(data) {
+            lookup = sample; return
+        }
         do { lookup = try await store.client.utilities(at: m.point) } catch { failed = true }
+    }
+
+    /// Automated screenshots (`-screen utilities:<address>`) show a saved /api/v1/utilities answer for 825 Ohio Ave,
+    /// so the picture doesn't depend on the live servers.
+    private static var screenshotSample: Bool {
+        let a = ProcessInfo.processInfo.arguments
+        guard let i = a.firstIndex(of: "-screen"), i + 1 < a.count else { return false }
+        return a[i + 1].hasPrefix("utilities:")
     }
 }
 
