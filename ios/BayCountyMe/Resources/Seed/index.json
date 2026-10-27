@@ -11507,7 +11507,7 @@
     },
     {
      "name": "area_sq_mi",
-     "type": "string"
+     "type": "number"
     },
     {
      "name": "last_edited",
