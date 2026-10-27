@@ -29,9 +29,7 @@ struct VolunteerView: View {
                 }
             } else {
                 kpis
-                ChipRow(chips: [(id: "", label: "All causes")] + Volunteer.causes(in: needs, orgs).map { (id: $0, label: $0) }, selected: cause) {
-                    cause = $0; allNeeds = false; allOrgs = false
-                }
+                causeMenu
                 needsSection
                 orgsSection
                 howToHelp
@@ -62,6 +60,28 @@ struct VolunteerView: View {
             KPICard(title: "Volunteers reported", value: Format.number(reported), caption: "Latest Form 990s", symbol: "chart.bar", tone: .amber)
         }
     }
+
+    /// 15 causes don't fit a chip row on a phone, so the cause is a menu (the site shows chips).
+    private var causeMenu: some View {
+        Menu {
+            Button("All causes") { pick("") }
+            ForEach(Volunteer.causes(in: needs, orgs), id: \.self) { c in Button(c) { pick(c) } }
+        } label: {
+            VStack(alignment: .leading, spacing: 2) {
+                Text("Cause").font(.caption).foregroundStyle(.secondary)
+                HStack(spacing: 4) {
+                    Text(cause.isEmpty ? "All causes" : cause).font(.headline).foregroundStyle(.primary)
+                    Image(systemName: "chevron.up.chevron.down").font(.caption2).foregroundStyle(.secondary)
+                }
+            }
+            .padding(.horizontal, 14)
+            .frame(maxWidth: .infinity, minHeight: 56, alignment: .leading)
+            .card(14)
+        }
+        .accessibilityLabel("Cause, \(cause.isEmpty ? "all causes" : cause)")
+    }
+
+    private func pick(_ c: String) { cause = c; allNeeds = false; allOrgs = false }
 
     private var needsSection: some View {
         let list = Volunteer.open(needs, today: Self.today, cause: cause.isEmpty ? nil : cause)

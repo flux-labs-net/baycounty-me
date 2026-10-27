@@ -63,9 +63,9 @@ fun VolunteerScreen() {
         val list = Volunteer.orgs(orgs, c)
         item { Kpis(Volunteer.open(needs, today), orgs) }
         item {
-            ChipRow(listOf("" to "All causes") + Volunteer.causesIn(needs, orgs).map { it to it }, cause) {
-                cause = it; allNeeds = false; allOrgs = false
-            }
+            // 15 causes don't fit a chip row on a phone, so the cause is a menu (the site shows chips)
+            FieldMenu("Cause", cause.ifEmpty { "All causes" }, listOf("" to "All causes") + Volunteer.causesIn(needs, orgs).map { it to it },
+                      selected = cause) { cause = it; allNeeds = false; allOrgs = false }
         }
         item {
             PageSection("Open needs right now", "hand.raised", Tone.TEAL, "Sign up on the organization's board. Check the details there before you go.") {
