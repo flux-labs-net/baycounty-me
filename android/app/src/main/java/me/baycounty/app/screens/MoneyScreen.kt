@@ -38,6 +38,7 @@ private enum class MoneySection(val title: String) {
 private val moneyItems: Map<MoneySection, List<MoneyItem>> = mapOf(
     MoneySection.PAY to listOf(
         MoneyItem("Tax calculator", "percent", "Your property tax bill, slice by slice", Route.TaxCalculator()),
+        MoneyItem("Utilities & trash day", "trash", "Who provides what, and your pickup day", Route.Utilities()),
         MoneyItem("Fees on your tax bill", "doc.plaintext", "Fire, stormwater and other flat fees", Route.Dataset("fees-assessments")),
         MoneyItem("Exemptions", "house", "Homestead, veterans, seniors and more", Route.Dataset("property-tax-exemptions")),
         MoneyItem("Amendment 3", "checklist", "What the ballot amendment would change", Route.Amendment3()),

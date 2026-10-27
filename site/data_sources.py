@@ -72,6 +72,9 @@ TOPICS = [
     ('chambers', 'Chambers of commerce', '/chambers',
      "Board, staff and program lists are copied by hand from each chamber's website. Upcoming events are read every day from the Panama City Beach Chamber's public calendar feed; the Bay County Chamber's calendar platform turns automated readers away.",
      'Board members are joined to other local filings by first and last name, and to an official only where the chamber names their government post. Organizations are joined to governments, paid companies, nonprofits or one Sunbiz filing with the exact same name.'),
+    ('utilities', 'Utilities and trash day', '/utilities',
+     "Providers, pickup rules, holiday schedules and rates are copied by hand from each city's and the county's utility and sanitation pages, rate ordinances and Public Service Commission filings. Pickup routes and the electric co-op territory are read live from public map layers for each lookup; the address isn't kept.",
+     'Each provider row links its source page. The live lookup is checked against known addresses in every city with a route map (Panama City, Lynn Haven, Callaway, Parker).'),
     ('cra', 'Redevelopment agencies (CRAs)', '/public-money/cra-spending',
      'CRA spending is read from CRA annual reports, agendas, budgets and audits, one ledger line per payment or project. '
      'Tax increment comes from CRA reports, audits and budgets, split between the county and city by millage.',
@@ -183,6 +186,11 @@ src('elections', 'state', 'Florida election night results (Bay County)', 'https:
 # --- Businesses and nonprofits ---------------------------------------------------------------------------------------
 src('businesses', 'state', 'Florida Division of Corporations (Sunbiz) quarterly data file', 'https://dos.fl.gov/sunbiz/other-services/data-downloads/', BULK, 'Quarterly', 'Every business with a county address, its officers, managers and registered agents')
 src('businesses', 'state', 'Sunbiz business search', 'https://search.sunbiz.org/', BY_HAND, 'As needed', 'Links to each business\'s state record, used to check matches')
+src('utilities', 'county', 'Bay County utility services and solid waste haulers list', 'https://www.baycountyfl.gov/DocumentCenter/View/19009/Solid-Waste-Haulers---Bay-County-updated-11-12-25', BY_HAND, 'As the county updates it', 'Licensed private garbage haulers and county water and sewer service')
+src('utilities', 'county', 'City utility and sanitation pages and rate ordinances (all seven cities)', 'https://www.panamacity.gov/154/Environmental-Services-Division-Solid-Wa', BY_HAND, 'Yearly, with new rates', 'Who provides water, sewer and garbage in each city, pickup rules, holiday schedules and rates')
+src('utilities', 'county', 'City route maps (Panama City, Lynn Haven, Callaway, Parker)', 'https://gis.baycountyfl.gov/arcgis/rest/services/LynnHaven/TrashGarbageRoutes/MapServer', LIVE, 'Each lookup', 'Garbage and yard waste route and pickup day at a point')
+src('utilities', 'county', 'Bay County city limits map', 'https://gis.baycountyfl.gov/arcgis/rest/services/BayView/BayView/MapServer/6', LIVE, 'Each lookup', 'Which city an address is in')
+src('utilities', 'county', 'Electric service territories (Pacific Northwest National Laboratory)', 'https://eedgis.pnnl.gov/arcgis/rest/services/Hosted/Electric_Service_Territories/FeatureServer/0', LIVE, 'Each lookup', 'Whether Gulf Coast Electric Cooperative serves a point')
 src('chambers', 'county', 'Bay County Chamber of Commerce website (board, staff and programs)', 'https://panamacity.org/board-of-directors/', BY_HAND, 'As boards change', 'Board, staff and past chairs since 2016 by name, title and organization; regular programs')
 src('chambers', 'county', 'Panama City Beach Chamber of Commerce website (board, staff and programs)', 'https://pcbeach.org/board-of-directors/', BY_HAND, 'As boards change', 'Board and staff by name, title and organization; regular programs')
 src('chambers', 'county', 'Panama City Beach Chamber events calendar feed', 'https://pcbeach.org/local-events/', AUTO_DAILY, 'Daily', 'Upcoming chamber and community events: title, time, venue and link')
@@ -265,7 +273,7 @@ FOLDER_TOPIC = {
     'agendas': 'meetings', 'meetings': 'meetings', 'votes': 'votes', 'contracts': 'contracts', 'budgets': 'budgets',
     'debt_audit': 'audits', 'money': 'audits', 'tax': 'property-tax', 'amendment3': 'property-tax', 'exemptions': 'property-tax',
     'salaries': 'salaries', 'campaign': 'campaign', 'elections': 'elections', 'sunbiz': 'businesses', 'careers': 'businesses',
-    'nonprofits': 'nonprofits', 'chambers': 'chambers', 'cra': 'cra', 'merged.json': 'cra', 'michael': 'michael', 'surtax': 'sales-tax',
+    'nonprofits': 'nonprofits', 'chambers': 'chambers', 'utilities': 'utilities', 'cra': 'cra', 'merged.json': 'cra', 'michael': 'michael', 'surtax': 'sales-tax',
     'tourism': 'tourist-tax', 'fees': 'fees', 'nearby': 'address', 'civic': 'records', 'projects': 'contracts',
 }
 SKIP_HOSTS = {'baycounty.me', 'www.baycounty.me', 'aptg.co'}

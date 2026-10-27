@@ -17,6 +17,7 @@ struct MoneyView: View {
 
     private let pay: [Item] = [
         .init(title: "Tax calculator", symbol: "percent", detail: "Your property tax bill, slice by slice", route: .taxCalculator()),
+        .init(title: "Utilities & trash day", symbol: "trash", detail: "Who provides what, and your pickup day", route: .utilities()),
         .init(title: "Fees on your tax bill", symbol: "doc.plaintext", detail: "Fire, stormwater and other flat fees", route: .dataset("fees-assessments")),
         .init(title: "Exemptions", symbol: "house", detail: "Homestead, veterans, seniors and more", route: .dataset("property-tax-exemptions")),
         .init(title: "Amendment 3", symbol: "checklist", detail: "What the ballot amendment would change", route: .amendment3()),

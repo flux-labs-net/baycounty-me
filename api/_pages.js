@@ -5,7 +5,8 @@
 const PAGES = {
   '/': {datasets: ['site-updates', 'government-profiles', 'budget-detail', 'budget-per-resident', 'property-tax-rates', 'tax-districts', 'fema-michael-projects', 'debt', 'audit-findings', 'sales-tax-projects', 'cra-payments'],
     endpoints: ['/search']},
-  '/my-address': {datasets: ['tax-districts', 'property-tax-rates', 'fees-assessments', 'cra-payments', 'property-tax-exemptions', 'meetings'],
+  '/my-address': {datasets: ['tax-districts', 'property-tax-rates', 'fees-assessments', 'cra-payments', 'property-tax-exemptions', 'meetings', 'utility-providers', 'trash-pickup', 'trash-holidays'],
+    endpoints: ['/utilities'],
     note: 'Per-parcel lookups (exemptions, districts) are not in the API yet.'},
   '/public-money/cra-spending': {datasets: ['cra-payments']},
   '/public-money/cra-tax-increment': {datasets: ['cra-agencies', 'cra-tax-increment', 'cra-increment-checks', 'property-tax-rates']},
@@ -22,6 +23,7 @@ const PAGES = {
   '/records-request': {none: 'a form that writes a records request'},
   '/correspondence': {endpoints: ['/correspondence']},
   '/connections/shared-owners': {datasets: ['shared-owner-groups', 'over-limit-gifts']},
+  '/utilities': {datasets: ['utility-providers', 'trash-pickup', 'trash-holidays', 'utility-rates'], endpoints: ['/utilities']},
   '/chambers': {datasets: ['chambers', 'chamber-leaders', 'chamber-events', 'nonprofit-payments', 'nonprofits']},
   '/connections/nonprofits': {datasets: ['nonprofits', 'nonprofit-board-members', 'nonprofit-board-businesses', 'nonprofit-payments', 'nonprofit-grants', 'nonprofit-officials', 'charity-registrations']},
   '/connections/business-ties': {datasets: ['official-businesses', 'official-business-links']},

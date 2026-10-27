@@ -402,6 +402,126 @@ def tax_districts():
             for k, d in a['districts'].items()]
 
 
+# --- Utilities and trash pickup (/utilities) ---------------------------------------------------------------------------
+
+SERVICE_LABEL = {'water': 'Water', 'sewer': 'Sewer', 'electric': 'Electricity', 'gas': 'Natural gas', 'internet': 'Internet',
+                 'garbage': 'Garbage', 'yard_waste': 'Yard waste and bulk trash', 'bulk': 'Bulk pickup', 'recycling': 'Recycling',
+                 'stormwater': 'Stormwater', 'bill': 'Whole bill'}
+
+
+def utilities_file():
+    """data/utilities/<county>/utilities.json: providers, pickup routes, holiday rules and extra rates, copied by hand."""
+    import json
+    from place import PLACE_ID
+    f = os.path.join(HERE, '..', 'data', 'utilities', PLACE_ID.split('-', 1)[-1], 'utilities.json')
+    return json.load(open(f)) if os.path.exists(f) else None
+
+
+def _area(U, area):
+    return {'area': area, 'area_name': 'All of ' + _place_name() if area == 'all' else U['areas'].get(area, area),
+            'gov_id': None if area == 'all' else area}
+
+
+def _place_name():
+    from place import PLACE
+    return PLACE.get('name', '')
+
+
+def utility_providers():
+    U = utilities_file()
+    if not U:
+        return []
+    return [{'place_id': U['place_id'], **_area(U, p['area']), 'service': p['service'], 'service_label': SERVICE_LABEL[p['service']],
+             'provider': p['provider'], 'entity_id': p.get('entity_id'), 'entity_name': p.get('entity_name'), 'provider_kind': p.get('provider_kind'), 'coverage': p.get('coverage'),
+             'phone': p.get('phone'), 'website': p.get('website'), 'outage_url': p.get('outage_url'), 'notes': p.get('notes'),
+             'as_of': U['as_of'], 'source_url': p.get('source_url')} for p in U['providers']]
+
+
+def trash_pickup():
+    """One row per pickup route (or the rule where there is no route map). lookup_layer, zone_field and day_field tell
+    /api/v1/utilities where to read an address's route and day live; zone and pickup_days are the route's usual days."""
+    U = utilities_file()
+    if not U:
+        return []
+    out = []
+    for t in U['trash']:
+        for z in t['zones']:
+            out.append({'place_id': U['place_id'], **_area(U, t['area']), 'service': t['service'], 'service_label': SERVICE_LABEL[t['service']],
+                        'provider': t['provider'], 'zone': z[0] or None, 'pickup_days': z[1] or None, 'zone_area': z[2] if len(z) > 2 else None,
+                        'rule': t.get('rule'), 'lookup_layer': t.get('lookup_layer'), 'zone_field': t.get('zone_field'), 'day_field': t.get('day_field'),
+                        'notes': t.get('notes'), 'as_of': U['as_of'], 'source_url': t.get('source_url')})
+    return out
+
+
+def trash_holidays():
+    U = utilities_file()
+    if not U:
+        return []
+    return [{'place_id': U['place_id'], **_area(U, h['area']), 'provider': h['provider'], 'holiday': h['holiday'], 'when_observed': h['when'],
+             'garbage': h['garbage'], 'yard_waste': h['yard_waste'], 'as_of': U['as_of'], 'source_url': U['holiday_sources'].get(h['area'])}
+            for h in U['holidays']]
+
+
+# data/fees/fees_pay_officials.json utility_rates: provider name -> area, and each rate key -> (charge, unit, applies_to)
+FEES_AREA = [('Bay County Utility', 'county'), ('Panama City Beach', 'pcb'), ('Panama City', 'pc'), ('Lynn Haven', 'lh'), ('Callaway', 'cw'),
+             ('Springfield', 'sp'), ('Mexico Beach', 'mb'), ('Parker', 'parker')]
+RATE_KEY = {
+    'base_monthly': ('Base charge', 'per month', 'Inside the city'), 'base_monthly_3_4in': ('Base charge', 'per month', '3/4-inch meter'),
+    'base_monthly_1in': ('Base charge', 'per month', '1-inch meter'), 'base_monthly_5_8_or_3_4in': ('Base charge (includes 6,000 gallons)', 'per month', '5/8 or 3/4-inch meter'),
+    'base_monthly_residential': ('Base charge (includes 6,000 gallons)', 'per month', 'Residential'), 'base_monthly_0_4000gal': ('Base charge (first 4,000 gallons)', 'per month', 'Residential'),
+    'per_1000_gal': ('Usage', 'per 1,000 gallons', 'Inside the city'), 'per_1000_gal_above_6000': ('Usage above 6,000 gallons', 'per 1,000 gallons', 'Inside the city'),
+    'per_1000_gal_over_4000': ('Usage above 4,000 gallons', 'per 1,000 gallons', 'Residential'),
+    'outside_city_base': ('Base charge', 'per month', 'Outside the city'), 'outside_base': ('Base charge', 'per month', 'Outside the city'),
+    'outside_per_1000': ('Usage', 'per 1,000 gallons', 'Outside the city'), 'senior_base': ('Base charge', 'per month', 'Seniors 65 and older'),
+    'senior_per_1000': ('Usage', 'per 1,000 gallons', 'Seniors 65 and older'), 'sewer_only_flat': ('Sewer-only flat charge', 'per month', 'Sewer customers without county water'),
+    'availability_flat': ('Availability charge (not connected)', 'per month', 'Lots where sewer is available'),
+}
+
+
+def utility_rates():
+    """Monthly rates set by each public utility: water, sewer and garbage from the Fees & bills research
+    (data/fees/fees_pay_officials.json utility_rates), plus extra rows in data/utilities (Parker water, landfill fees)."""
+    import json
+    U = utilities_file()
+    if not U:
+        return []
+    F = json.load(open(os.path.join(HERE, '..', 'data', 'fees', 'fees_pay_officials.json')))
+    out = []
+
+    def add(area, provider, service, charge, amount, unit, applies, effective, src, note=None):
+        out.append({'place_id': U['place_id'], **_area(U, area), 'provider': provider, 'service': service, 'service_label': SERVICE_LABEL.get(service, service.title()),
+                    'charge': charge, 'amount': amount, 'unit': unit, 'applies_to': applies, 'effective': effective, 'notes': note, 'source_url': src})
+
+    for r in F.get('utility_rates', []):
+        area = next((a for k, a in FEES_AREA if k in r['provider']), None)
+        if not area:
+            continue
+        prov, eff, src = r['provider'], r.get('effective'), r.get('source_url')
+        for svc in ('water', 'sewer'):
+            d = r.get(svc) or {}
+            for k, v in d.items():
+                if k in RATE_KEY and isinstance(v, (int, float)):
+                    charge, unit, applies = RATE_KEY[k]
+                    add(area, prov, svc, charge, v, unit, applies, eff, src)
+                elif k == 'tiers_per_1000_gal':
+                    for t in v:
+                        add(area, prov, svc, f"Usage, {t['range']} gallons", t['rate'], 'per 1,000 gallons', 'Residential', eff, src)
+                elif isinstance(v, str) and k in ('city_water_franchise_fee', 'utility_tax'):
+                    add(area, prov, svc, 'Franchise fee' if 'franchise' in k else 'Utility tax', None, v, 'Added to the water bill', eff, src)
+        if isinstance(r.get('garbage'), (int, float)):
+            add(area, prov, 'garbage', 'Garbage' if area != 'cw' else 'Solid waste (city trash and yard pickup)', r['garbage'], 'per month', 'Residential', eff, src, r.get('garbage_note'))
+        if isinstance(r.get('garbage_senior'), (int, float)):
+            add(area, prov, 'garbage', 'Garbage', r['garbage_senior'], 'per month', 'Seniors 65 and older', eff, src)
+        if isinstance(r.get('stormwater'), (int, float)):
+            add(area, prov, 'stormwater', 'Stormwater', r['stormwater'], 'per month', 'Residential', eff, src)
+        if r.get('bill_5000gal'):
+            add(area, prov, 'bill', 'Typical monthly bill at 5,000 gallons', r['bill_5000gal'], 'per month', 'Residential, all city charges on the bill', eff, src,
+                ' '.join(x for x in [r.get('calc'), r.get('calc_caveat')] if x))
+    for x in U.get('rates', []):
+        add(x['area'], x['provider'], x['service'], x['charge'], x['amount'], x['unit'], x['applies_to'], x['effective'], x['source_url'])
+    return out
+
+
 # --- Savings ideas (government pages) --------------------------------------------------------------------------------
 
 def savings_opportunities():
@@ -922,5 +1042,9 @@ DATASETS = [
     ('chambers', 'Chambers of commerce', "One row per chamber of commerce: what it is and who it serves, its board meetings, its latest IRS Form 990 (revenue, expenses, assets, employees), public money paid to it by local governments and tourism agencies (from nonprofit-payments), its foundation, and links to its member directory, events and join page. entity_id is its profile (entity-profiles). Chambers are private, member-owned nonprofits, not government agencies.", chambers),
     ('chamber-leaders', 'Chambers of commerce: boards and staff', "Each chamber's board (executive committee, directors, ex officio and honorary members), staff and past chairs since 2016, as listed on the chamber's own website on as_of: name, title and the organization each board member represents. No phone numbers, emails or addresses. person_entity_id and organization_entity_id link to profiles; person_match and organization_match say how each link was made (blank = no match, shown as plain text).", chamber_leaders),
     ('chamber-events', 'Chambers of commerce: events and programs', "Upcoming events from each chamber's public calendar (kind event: title, start and end in local time, venue and city, category, the event's own link) and each chamber's yearly and monthly signature programs (kind program: schedule and what it is). chamber_event is false for community events a chamber lists on its calendar. Refreshed daily where the calendar has a public feed.", chamber_events),
+    ('utility-providers', 'Utilities: who provides each service', "Who provides water, sewer, electricity, natural gas, garbage, yard waste, recycling and internet in each part of the county (area: a city, unincorporated, or all for countywide providers): the provider, what kind of provider it is, whether it covers all, most or some of the area, its phone number, website and outage page, and notes on how the service works. entity_id is the provider's profile (entity-profiles) where there is one. /api/v1/utilities?lat=&lon= picks the rows for one address.", utility_providers),
+    ('utility-rates', 'Utilities: rates', "Monthly charges set by each public utility, one row per charge: water and sewer base and usage charges (inside and outside the city, senior rates, meter sizes), garbage and stormwater on the city bill, franchise fees and utility taxes, landfill fees, and a typical monthly bill at 5,000 gallons with its arithmetic in notes. effective says which rate schedule the row comes from.", utility_rates),
+    ('trash-pickup', 'Trash pickup: routes and days', "Garbage, yard waste and bulk pickup in each city: one row per route with its usual pickup days, or the rule where a city has no route map (for example a private hauler sets the day). lookup_layer is the public map layer that holds the routes, zone_field the route field and day_field the day field; /api/v1/utilities?lat=&lon= reads them at an address. zone_area describes a route in words where there is no map.", trash_pickup),
+    ('trash-holidays', 'Trash pickup: holiday changes', "How each city's garbage and yard waste pickup changes on holidays, as the city or its hauler publishes it: the holiday, when it falls, and what happens to garbage and yard waste pickup.", trash_holidays),
     ('tax-districts', 'Tax districts', 'Which taxing authorities levy property tax in each tax district, and the combined millage. Rates by year are in property-tax-rates (authority_id).', tax_districts),
 ]

@@ -66,6 +66,18 @@ class BayCountyClient(
         } finally { conn.disconnect() }
     }
 
+    /** One address's utilities and pickup days from `/api/v1/utilities`. Not cached. */
+    suspend fun utilities(point: GeoPoint): UtilityLookup = withContext(Dispatchers.IO) {
+        val conn = URL("$baseURL/api/v1/utilities?lat=${"%.6f".format(java.util.Locale.US, point.y)}&lon=${"%.6f".format(java.util.Locale.US, point.x)}").openConnection() as HttpURLConnection
+        conn.connectTimeout = 15000; conn.readTimeout = 25000
+        conn.useCaches = false
+        try {
+            val code = conn.responseCode
+            if (code != 200) throw ClientError.Http(code)
+            UtilityLookup.decode(conn.inputStream.use { it.readBytes() }.decodeToString())
+        } finally { conn.disconnect() }
+    }
+
     private suspend fun rowsAt(path: String): Pair<List<Row>, Freshness> {
         val r = get(path)
         return Row.decodeList(r.data) to r.freshness

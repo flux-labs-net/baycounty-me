@@ -35,6 +35,7 @@ def menu():
          'groups': [{'group': 'What you pay', 'items': [
              _i('Tax dollars', '/public-money/tax-dollars', 'Your property tax bill, slice by slice'),
              _i('Fees & bills', '/public-money/fees-and-bills', 'Tax-bill fees, water and garbage'),
+             _i('Utilities & trash day', '/utilities', 'Who provides what, and your pickup day'),
              _i('Exemptions', '/public-money/exemptions', 'Homestead, veterans, seniors and more'),
              _i('Tourist tax', '/public-money/tourist-tax', 'The 5% bed tax visitors pay'),
              _i('Amendment 3', '/public-money/amendment-3', 'What the ballot amendment would change'),
