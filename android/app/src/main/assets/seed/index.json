@@ -7021,7 +7021,7 @@
    "id": "data-sources",
    "title": "Where the data comes from",
    "description": "Every source BayCounty.me takes records from, one row per source: the topic, the government it covers (or state and federal databases), the link, how we get it (automatic fetch, downloaded and read by hand, a state or federal bulk file, or a live lookup), how often, what we take from it, how we process it and the checks we run.",
-   "rows": 117,
+   "rows": 121,
    "columns": [
     {
      "name": "topic",
@@ -7044,6 +7044,7 @@
       "Pay",
       "Property tax",
       "Public records contacts",
+      "Public schools",
       "Redevelopment agencies (CRAs)",
       "Sales tax projects",
       "Tourist tax",
@@ -7073,6 +7074,7 @@
       "records",
       "salaries",
       "sales-tax",
+      "schools",
       "tourist-tax",
       "votes"
      ]
@@ -7144,6 +7146,8 @@
       "As pages change",
       "As reports post",
       "As seats change",
+      "As the district posts events",
+      "As the district redraws zones",
       "As updated",
       "Daily",
       "Each election",
@@ -7156,7 +7160,9 @@
       "Monthly",
       "Once",
       "Quarterly",
-      "Weekly"
+      "Weekly",
+      "Yearly (about a year behind)",
+      "Yearly (grades in July)"
      ]
     },
     {
@@ -7177,6 +7183,7 @@
       "CRA spending is read from CRA annual reports, agendas, budgets and audits, one ledger line per payment or project. Tax increment comes from CRA reports, audits and budgets, split between the county and city by millage.",
       "Candidate lists, status and official results come from the Supervisor of Elections. Platforms come from candidates' own sites.",
       "Each government's agenda system is checked every 30 minutes on weekdays (when a notice email arrives) and swept twice a day. Every agenda, packet and minutes file is downloaded and fingerprinted; a changed file is kept as a new version. An AI model reads each new agenda into a list of items using only the agenda's own words (it is told not to guess). The meetings list combines the agenda system with the government's calendar; boards with no calendar get dates from their regular schedule, marked \"expected\".",
+      "Every public school, its students and teachers since 2015-16 come from the U.S. Department of Education's school directory, read weekly through the Urban Institute's Education Data API. Attendance zones are read weekly from the county GIS server and the calendar every day from the district's website. State school grades and per-pupil spending files are read by hand, because the state's website turns automated readers away.",
       "Every tax-exempt organization with a county address is pulled from IRS data, with every 990, 990-EZ and 990-PF e-filed since 2019 (board members, pay, grants, revenue). State charity registrations and state corporate filings are joined in.",
       "FEMA Public Assistance projects and applicants for disaster DR-4399 are downloaded from OpenFEMA every week.",
       "Infrastructure sales tax projects are downloaded from Bay County's map server every week and matched to the published project schedule.",
@@ -7198,6 +7205,7 @@
       "Board members are joined to other local filings by first and last name, and to an official only where the chamber names their government post. Organizations are joined to governments, paid companies, nonprofits or one Sunbiz filing with the exact same name.",
       "Each line carries its source and a confidence level; amounts inside a larger total are shown but counted once. Estimates are checked against official county figures.",
       "Each term names its source. Stretches nobody could confirm are marked unconfirmed, not guessed.",
+      "Each zone is matched to its school by hand once. Charter schools are linked by hand to the nonprofit that runs them.",
       "Every agency-month matches the register's printed total to the cent. Payments to private individuals are counted, not listed.",
       "Failed fetches are logged and emailed to the site admins. Every version of every file is kept.",
       "Itemized sums are checked against the Supervisor's summary totals. Individual donors are only counted, never named, unless they run a registered business.",
@@ -7240,6 +7248,7 @@
       "/public-money/tourist-tax",
       "/public-money/votes",
       "/records-request",
+      "/schools",
       "/updates"
      ]
     },
