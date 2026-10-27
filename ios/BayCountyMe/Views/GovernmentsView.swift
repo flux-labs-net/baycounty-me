@@ -89,6 +89,8 @@ struct GovernmentsView: View {
             CardList {
                 RouteRow(route: .people, title: "Officials, leaders and candidates", symbol: "person.3")
                 RowDivider(inset: 50)
+                RouteRow(route: .schools, title: "Public schools", detail: "Calendar, grades and students for every school", symbol: "graduationcap")
+                RowDivider(inset: 50)
                 RouteRow(route: .dataset("officials-pay"), title: "What officials are paid", symbol: "person.text.rectangle")
                 RowDivider(inset: 50)
                 RouteRow(route: .budgetCompare(), title: "Budget compare", symbol: "arrow.left.arrow.right")

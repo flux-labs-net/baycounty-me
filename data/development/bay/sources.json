@@ -1,0 +1,39 @@
+{
+  "place_id": "fl-bay",
+  "census": {
+    "state_fips": "12",
+    "county_fips": "005",
+    "region": "South Region",
+    "region_prefix": "so",
+    "places": {
+      "Bay County Unincorporated Area": {"gov_id": "county", "area": "Unincorporated Bay County"},
+      "Panama City": {"gov_id": "pc", "area": "Panama City"},
+      "Panama City Beach": {"gov_id": "pcb", "area": "Panama City Beach"},
+      "Lynn Haven": {"gov_id": "lh", "area": "Lynn Haven"},
+      "Callaway": {"gov_id": "cw", "area": "Callaway"},
+      "Springfield": {"gov_id": "sp", "area": "Springfield"},
+      "Parker": {"gov_id": "parker", "area": "Parker"},
+      "Mexico Beach": {"gov_id": "mb", "area": "Mexico Beach"}
+    }
+  },
+  "development_layers": [
+    {
+      "id": "county-do",
+      "gov_id": "county",
+      "label": "Bay County development orders (unincorporated county)",
+      "url": "https://gis.baycountyfl.gov/arcgis/rest/services/Departmental/Planning/MapServer/18",
+      "page": "https://www.baycountyfl.gov/157/Planning-Zoning",
+      "fields": {"name": "NAME", "number": "NUMBER", "description": "DESCRIPTION", "size": "SIZE", "location": "LOCATION",
+                 "applied": "APPLICATION_RECEIVED", "approved": "DO_ISSUED", "status": "TYPE", "edited": "last_edited_date"}
+    },
+    {
+      "id": "pcb-dev",
+      "gov_id": "pcb",
+      "label": "Panama City Beach developments (city map layer)",
+      "url": "https://gis.baycountyfl.gov/arcgis/rest/services/PanamaCityBeach/PanamaCityBeachPublic/MapServer/4",
+      "page": "https://www.pcbfl.gov/departments/planning-zoning",
+      "fields": {"name": "Name", "description": "TYPE", "size": "SIZE", "applied": "DateApplied", "approved": "DateIssued",
+                 "building_permit": "BuildingPermit", "occupancy": "OccupancyDate", "plans": "Plans"}
+    }
+  ]
+}

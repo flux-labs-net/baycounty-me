@@ -30,6 +30,11 @@ jobs:
           BCM_KEYSTORE_PASSWORD: ${{ secrets.BCM_KEYSTORE_PASSWORD }}
           BCM_KEY_ALIAS: ${{ secrets.BCM_KEY_ALIAS }}
           BCM_KEY_PASSWORD: ${{ secrets.BCM_KEY_PASSWORD }}
+          # Phone alerts (Firebase Cloud Messaging). Optional: without them the app builds with alerts off.
+          FCM_APP_ID: ${{ secrets.FCM_APP_ID }}
+          FCM_API_KEY: ${{ secrets.FCM_API_KEY }}
+          FCM_PROJECT_ID: ${{ secrets.FCM_PROJECT_ID }}
+          FCM_SENDER_ID: ${{ secrets.FCM_SENDER_ID }}
         run: |
           export BCM_VERSION_CODE=$((${{ github.run_number }} + 100))
           ./gradlew :kit:test :app:bundleRelease

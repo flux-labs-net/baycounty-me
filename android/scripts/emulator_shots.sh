@@ -8,6 +8,10 @@ OUT=$2
 PKG=me.baycounty
 mkdir -p "$OUT"
 adb install -r "$APK"
+# A slow CI emulator often shows "System UI isn't responding" over every shot. Hide error dialogs and let it settle.
+adb shell settings put global hide_error_dialogs 1
+adb shell settings put global anr_show_background 0
+sleep 30
 # A clean status bar: 9:41, full battery, no notifications.
 adb shell settings put global sysui_demo_allowed 1
 adb shell am broadcast -a com.android.systemui.demo -e command enter >/dev/null

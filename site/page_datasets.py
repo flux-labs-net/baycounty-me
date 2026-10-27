@@ -329,6 +329,9 @@ def _chamber_rows():
             return 'business:' + sb[k][0].lower(), 'Sunbiz filing with the same name'
         return None, None
 
+    import json as _json
+    pf = os.path.join(HERE, '..', 'data', 'chambers', place.split('-', 1)[-1], 'photos.json')
+    photos = {(p['chamber_id'], p['name']): p for p in (_json.load(open(pf))['photos'] if os.path.exists(pf) else [])}
     chambers, leaders = [], []
     for c in C['chambers']:
         n = nps.get(c['nonprofit_id']) or {}
@@ -363,6 +366,7 @@ def _chamber_rows():
                 'person_name': r['name'], 'title': r['title'], 'organization': r.get('organization'), 'term_ends': r.get('term_ends'), 'year': r.get('year'),
                 'current': r['group'] != 'Past chairs', 'person_entity_id': pid, 'person_url': page_url(pid), 'person_match': pmatch,
                 'organization_entity_id': oid, 'organization_url': page_url(oid) if oid else None, 'organization_match': omatch,
+                'photo': (photos.get((c['chamber_id'], r['name'])) or {}).get('photo'),
                 'as_of': C['as_of'], 'source_url': c['staff_url'] if r['group'] == 'Staff' else c['board_url']})
     programs = []
     for c in C['chambers']:
@@ -388,6 +392,364 @@ def chamber_leaders():
 
 def chamber_events():
     return _chamber_rows()[2]
+
+
+def community_events():
+    """Upcoming events from public calendars around the county (data/events/<county>/events.json, from
+    data/events/fetch_events.py): city and county calendars, the library system, visitor bureaus and the PCB Chamber."""
+    import json
+    from place import PLACE_ID
+    p = os.path.join(HERE, '..', 'data', 'events', PLACE_ID.split('-', 1)[-1], 'events.json')
+    if not os.path.exists(p):
+        return []
+    cols = ['event_id', 'source_id', 'source', 'gov', 'town', 'title', 'starts', 'ends', 'all_day', 'venue', 'category',
+            'recurring', 'cost', 'url', 'source_url']
+    return [{'place_id': PLACE_ID, **{k: e.get(k) for k in cols}} for e in json.load(open(p))['events']]
+
+
+# --- Beaches, beach water quality, parks (/beaches, /parks) ------------------------------------------------------------
+
+FLAG_COLORS = [  # the International Life Saving Federation flags Bay County's beach patrols fly
+    ('Double red', 'Water closed to the public', 'Swimming and wading are against the law while double red flags fly (fines apply in Panama City Beach and unincorporated Bay County).'),
+    ('Red', 'High hazard', 'High surf and/or strong currents. Experienced swimmers only, and only close to shore.'),
+    ('Yellow', 'Medium hazard', 'Moderate surf and/or currents. Use caution.'),
+    ('Green', 'Low hazard', 'Calm conditions. Rip currents can still form near piers, jetties and sandbars.'),
+    ('Purple', 'Dangerous marine life', 'Jellyfish, stingrays or other marine life seen. Flies with another flag.'),
+]
+
+
+def _outdoor_files():
+    """data/outdoors/<county>/places.json, water_quality.json and conditions.json (data/outdoors/fetch_outdoors.py)."""
+    import json
+    from place import PLACE
+    d = os.path.join(HERE, '..', 'data', 'outdoors', PLACE['id'].split('-', 1)[-1])
+    load = lambda n: json.load(open(os.path.join(d, n))) if os.path.exists(os.path.join(d, n)) else {}
+    return PLACE['id'], load('places.json'), load('water_quality.json'), load('conditions.json')
+
+
+def beach_access():
+    place, P, _, _ = _outdoor_files()
+    gov = {'Panama City Beach': 'Panama City Beach', 'Mexico Beach': 'Mexico Beach'}
+    return [{'place_id': place, **r, 'run_by': gov.get(r['area'], 'Bay County')} for r in P.get('beach_access', [])]
+
+
+def beach_parking():
+    place, P, _, _ = _outdoor_files()
+    return [{'place_id': place, **r} for r in P.get('beach_parking', [])]
+
+
+def beach_water_samples():
+    place, _, W, _ = _outdoor_files()
+    return [{'place_id': place, **r} for r in W.get('samples', []) if r['date'] >= cutoff.FIRST_DATE]
+
+
+def beach_water_sites():
+    """One row per Healthy Beaches sampling site, with its latest result and how its samples have rated."""
+    place, _, W, _ = _outdoor_files()
+    S = beach_water_samples()
+    out = []
+    for s in W.get('sites', []):
+        mine = sorted((r for r in S if r['site_id'] == s['site_id']), key=lambda r: r['date'])
+        rated = [r for r in mine if r.get('rating') in ('Good', 'Moderate', 'Poor')]
+        last = rated[-1] if rated else None
+        out.append({'place_id': place, 'site_id': s['site_id'], 'name': s['name'], 'active': s['active'], 'epa_beach_id': s['epa_beach_id'],
+                    'latitude': s['latitude'], 'longitude': s['longitude'],
+                    'latest_date': last['date'] if last else None, 'latest_enterococcus': last['enterococcus'] if last else None,
+                    'latest_rating': last['rating'] if last else None, 'latest_advisory': last['advisory'] if last else None,
+                    'samples': len(rated), 'first_date': rated[0]['date'] if rated else None,
+                    'good': sum(1 for r in rated if r['rating'] == 'Good'), 'moderate': sum(1 for r in rated if r['rating'] == 'Moderate'),
+                    'poor': sum(1 for r in rated if r['rating'] == 'Poor'), 'advisories': sum(1 for r in rated if r['advisory']),
+                    'source_url': s['source_url']})
+    return out
+
+
+def beach_conditions():
+    """The latest surf zone forecast (kind forecast, one row per period), active beach alerts (kind alert), the flag color
+    reported each day (kind flag) and what each flag means (kind legend)."""
+    place, _, _, C = _outdoor_files()
+    base = {'place_id': place, 'zone': C.get('zone'), 'issued': None, 'period': None, 'flag_color': None, 'meaning': None, 'rip_current_risk': None,
+            'surf_height': None, 'uv_index': None, 'water_temperature': None, 'weather': None, 'high_temperature': None, 'winds': None,
+            'sunrise': None, 'sunset': None, 'summary': None, 'date': None, 'ends': None, 'sort_order': None, 'source_url': None}
+    rows = []
+    for i, p in enumerate(C.get('periods', [])):
+        rows.append({**base, **p, 'kind': 'forecast', 'issued': C.get('issued'), 'flag_color': C.get('flag') if i == 0 else None,
+                     'summary': p.get('summary') or (C.get('outlook') if i == 0 else None), 'sort_order': i + 1, 'source_url': C.get('product_url')})
+    for a in C.get('alerts', []):
+        rows.append({**base, 'kind': 'alert', 'issued': C.get('issued'), 'period': a['event'], 'summary': a.get('headline'), 'date': a.get('starts'),
+                     'ends': a.get('ends'), 'source_url': a.get('url')})
+    for h in C.get('flag_history', []):
+        if h['date'] >= cutoff.FIRST_DATE:
+            rows.append({**base, 'kind': 'flag', 'issued': h['issued'], 'date': h['date'], 'flag_color': h['flag'], 'source_url': h['source_url']})
+    for i, (color, meaning, about) in enumerate(FLAG_COLORS):
+        rows.append({**base, 'kind': 'legend', 'flag_color': color, 'meaning': meaning, 'summary': about, 'sort_order': i + 1,
+                     'source_url': 'https://www.pcbfl.gov/174/Beach-Flags'})
+    for r in rows:
+        r['kind'] = r.pop('kind')
+    return rows
+
+
+def parks():
+    place, P, _, _ = _outdoor_files()
+    return [{'place_id': place, **r} for r in P.get('parks', [])]
+
+
+def boat_ramps():
+    place, P, _, _ = _outdoor_files()
+    return [{'place_id': place, **r} for r in P.get('boat_ramps', [])]
+
+
+def trails():
+    place, P, _, _ = _outdoor_files()
+    return [{'place_id': place, **r} for r in P.get('trails', [])]
+
+
+def recreation_departments():
+    """data/outdoors/<county>/recreation.json: each government's parks and recreation pages (hand-checked)."""
+    import json
+    from place import PLACE, governments
+    fp = os.path.join(HERE, '..', 'data', 'outdoors', PLACE['id'].split('-', 1)[-1], 'recreation.json')
+    if not os.path.exists(fp):
+        return []
+    R = json.load(open(fp))
+    short = {g['key']: g['short'] for g in governments()}
+    return [{'place_id': PLACE['id'], 'gov_id': d['gov_id'], 'name': d['name'], 'run_by': d.get('run_by') or short.get(d['gov_id']),
+             'parks_url': d['parks_url'], 'programs_url': d.get('programs_url'), 'programs_label': d.get('programs_label'),
+             'as_of': R.get('as_of'), 'source_url': d['parks_url']} for d in R['departments']]
+
+
+
+# --- Building and development (/development) and road projects (/roads) ----------------------------------------------
+
+def _place_file(*parts):
+    """data/<topic>/<county>/<file> for the current place, or None when this place has none yet."""
+    import json
+    from place import PLACE_ID
+    p = os.path.join(HERE, '..', 'data', parts[0], PLACE_ID.split('-', 1)[-1], *parts[1:])
+    return json.load(open(p)) if os.path.exists(p) else None
+
+
+def _gov_short(gid):
+    from govs import GOVS
+    return next((g['short'] for g in GOVS if g['key'] == gid), None)
+
+
+def development_projects():
+    """Development projects on each government's public planning map (data/development/fetch.py)."""
+    d = _place_file('development', 'projects.json')
+    if not d:
+        return []
+    layer = {L['id']: L for L in d['layers']}
+    return [{'place_id': d['place_id'], 'project_id': r['project_id'], 'gov_id': r['gov_id'], 'government': _gov_short(r['gov_id']),
+             'name': r['name'], 'case_number': r['case_number'], 'description': r['description'], 'size': r['size'], 'location': r['location'],
+             'status': r['status'], 'applied_date': r['applied_date'], 'approved_date': r['approved_date'], 'permit_date': r['permit_date'],
+             'occupancy_date': r['occupancy_date'], 'plans_url': r['plans_url'], 'lat': r['lat'], 'lng': r['lng'],
+             'source': layer[r['layer']]['label'], 'source_page': layer[r['layer']]['page'], 'fetched': d['fetched'], 'source_url': r['source_url']}
+            for r in d['projects']]
+
+
+def housing_permits():
+    """New homes authorized by building permits per year and area (Census Building Permits Survey)."""
+    d = _place_file('development', 'permits.json')
+    if not d:
+        return []
+    def summary(r):
+        v = r['total_value']
+        money = f'${v / 1e6:,.1f} million' if v >= 1e6 else f'${v:,}'
+        return f"{r['total_units']:,} new homes ({r['single_family_units']:,} single-family), {money} on the permits" + (' (Census estimate)' if r['estimated'] else '')
+    return [{'place_id': d['place_id'], **r, 'summary': summary(r)} for r in d['permits']]
+
+
+def road_contracts():
+    """FDOT construction and maintenance contracts in the county since 2016 (data/roads/fetch_fdot.py)."""
+    d = _place_file('roads', 'fdot.json')
+    if not d:
+        return []
+    return [{'place_id': d['place_id'], 'agency': 'Florida Department of Transportation', **{k: v for k, v in r.items()}, 'fetched': d['fetched']}
+            for r in d['contracts']]
+
+
+def road_work_program():
+    """Projects in FDOT's current adopted five-year work program in the county, one row per project and phase."""
+    d = _place_file('roads', 'fdot.json')
+    if not d:
+        return []
+    return [{'place_id': d['place_id'], 'agency': 'Florida Department of Transportation', **r, 'fetched': d['fetched']} for r in d['work_program']]
+
+
+# --- Schools (/schools) -------------------------------------------------------------------------------------------------
+# data/schools/<county>/: schools.json, zones.json and calendar.json (data/schools/fetch_schools.py), grades.json and
+# spending.json (data/schools/fetch_fldoe.py), zone_schools.json (which school each attendance zone feeds, by hand).
+
+SCHOOL_GOV = 'schools'  # the district's gov_id in places/<id>/place.json
+# Charter schools run by a local nonprofit, by state school number (checked by hand against each school's site and
+# the nonprofits dataset). University Academy and Central High aren't matched to a local filing.
+CHARTER_OPERATORS = {
+    '03-0701': 'np-651121807', '03-0711': 'np-651121807', '03-0731': 'np-651121807', '03-0741': 'np-651121807', '03-0751': 'np-651121807',
+    '03-0771': 'np-261413851', '03-0801': 'np-261413851', '03-0781': 'np-861145087', '03-2701': 'np-800688292', '03-0764': 'np-880556695',
+}
+
+
+def _school_files():
+    import json
+    from place import PLACE_ID, PLACE
+    d = os.path.join(HERE, '..', 'data', 'schools', PLACE_ID.split('-', 1)[-1])
+    j = lambda n, default: json.load(open(os.path.join(d, n))) if os.path.exists(os.path.join(d, n)) else default
+    return {'conf': PLACE.get('schools') or {}, 'place': PLACE_ID, 'dir': j('schools.json', None), 'zones': j('zones.json', {'zones': []}),
+            'calendar': j('calendar.json', {'events': []}), 'grades': j('grades.json', {'rows': []}),
+            'spending': j('spending.json', {'rows': [], 'files': []}), 'zone_schools': j('zone_schools.json', {'zones': {}})}
+
+
+def _sy(end_year):
+    """School year label from the year it ends: 2025 -> '2024-25'."""
+    return f'{end_year - 1}-{str(end_year)[2:]}'
+
+
+def _school_rows():
+    if '_schools' in _SCH:
+        return _SCH['_schools']
+    F = _school_files()
+    D = F['dir']
+    if not D:
+        _SCH['_schools'] = {k: [] for k in ('schools', 'grades', 'spending', 'enrollment', 'calendar', 'zones')}
+        return _SCH['_schools']
+    place = F['place']
+    name = {s['school_number']: s['name'] for s in D['schools']}
+    for r in F['grades'].get('rows', []):  # a school in the state's grade file but not the federal directory
+        name.setdefault(r['school_number'], (r.get('school_name_raw') or r['school_number']).title())
+    grade_src = F['grades'].get('source_url') or 'https://www.fldoe.org/accountability/accountability-reporting/school-grades/'
+    spend_src = {f['year']: f['source_url'] for f in F['spending'].get('files', [])}
+
+    # enrollment, one row per school and year (CCD year 2024 = the 2024-25 school year, which ends in 2025)
+    enrollment = []
+    for s in D['schools']:
+        for y, n in sorted(s.get('enrollment_by_year', {}).items()):
+            if n and int(y) + 1 >= cutoff.FIRST_YEAR:
+                enrollment.append({'place_id': place, 'school_id': s['school_number'], 'school': s['name'], 'year': int(y) + 1,
+                                   'school_year': _sy(int(y) + 1), 'enrollment': n, 'source_url': D['source_url'].replace(str(D['directory_year']), y)})
+    enr = {(r['school_id'], r['year']): r['enrollment'] for r in enrollment}
+
+    grades = []
+    comp_keys = ['ela_achievement', 'ela_gains', 'ela_gains_low25', 'math_achievement', 'math_gains', 'math_gains_low25', 'science_achievement',
+                 'social_studies_achievement', 'middle_acceleration', 'graduation_rate', 'college_career_acceleration', 'total_points',
+                 'percent_of_points', 'percent_tested', 'pct_economically_disadvantaged']
+    for r in sorted(F['grades'].get('rows', []), key=lambda r: (r['school_number'], r['year'])):
+        if r['year'] < cutoff.FIRST_YEAR:
+            continue
+        g = {'place_id': place, 'school_id': r['school_number'], 'school': name.get(r['school_number']), 'year': r['year'], 'school_year': _sy(r['year']),
+             'grade': r['grade'], 'informational_baseline': r['year'] == 2023}
+        g.update({k: r.get(k) for k in comp_keys})
+        g['source_url'] = grade_src
+        grades.append(g)
+
+    spending = []
+    rows = F['spending'].get('rows', [])
+    for r in sorted(rows, key=lambda r: (r['year'], r['school_number'])):
+        if not r.get('year') or r['year'] < cutoff.FIRST_YEAR:
+            continue
+        n = enr.get((r['school_number'], r['year']))
+        spending.append({'place_id': place, 'school_id': r['school_number'], 'school': name.get(r['school_number']) or r.get('school_name_raw'),
+                         'year': r['year'], 'school_year': _sy(r['year']), 'federal_per_student': r.get('federal_ppe'),
+                         'state_local_per_student': r.get('state_local_ppe'), 'total_per_student': r.get('total_ppe'), 'enrollment': n,
+                         'estimated_total': round(r['total_ppe'] * n) if r.get('total_ppe') and n else None,
+                         'source_url': spend_src.get(r['year']) or F['spending'].get('page_url')})
+
+    zs = F['zone_schools'].get('zones', {})
+    zones = []
+    try:
+        from shapely.geometry import shape
+        have_shapely = True
+    except ImportError:
+        have_shapely = False
+    import json, math, re
+    for z in F['zones'].get('zones', []):
+        sid = zs.get(z['zone_name'])
+        geom = {'type': 'Polygon', 'coordinates': z['rings']} if len(z['rings']) == 1 else {'type': 'MultiPolygon', 'coordinates': [[r] for r in z['rings']]}
+        area = None
+        if have_shapely:
+            # Esri rings: outer rings run clockwise, holes counter-clockwise; an even-odd fill gives the zone's area
+            lat0 = sum(p[1] for r in z['rings'] for p in r) / max(1, sum(len(r) for r in z['rings']))
+            kx, ky = 69.172 * math.cos(math.radians(lat0)), 69.0
+            from shapely.geometry import Polygon
+            tot = 0.0
+            for r in z['rings']:
+                if len(r) >= 4:
+                    p = Polygon([(x * kx, y * ky) for x, y in r])
+                    signed = sum((r[i][0] - r[i - 1][0]) * (r[i][1] + r[i - 1][1]) for i in range(len(r)))  # >0 clockwise
+                    tot += p.area if signed > 0 else -p.area
+            area = round(abs(tot), 2)
+        zones.append({'place_id': place, 'zone_id': re.sub(r'[^a-z0-9]+', '-', f"{z['level']} {z['zone_name']}".lower()).strip('-'),
+                      'level': z['level'], 'zone_name': z['zone_name'], 'school_id': sid, 'school': name.get(sid),
+                      'mou_area': 'MOU' in z['zone_name'], 'pieces': z['pieces'], 'area_sq_mi': area, 'last_edited': z.get('last_edited'),
+                      'geometry': json.dumps(geom, separators=(',', ':')), 'source_url': z.get('layer_url') or F['zones'].get('source_url')})
+
+    by_g = {}
+    for g in grades:
+        by_g.setdefault(g['school_id'], []).append(g)
+    by_s = {}
+    for s in spending:
+        by_s.setdefault(s['school_id'], []).append(s)
+    zoned = {}
+    for z in zones:
+        if z['school_id'] and not z['mou_area']:
+            zoned.setdefault(z['school_id'], set()).add(z['level'])
+    schools = []
+    for s in D['schools']:
+        sid = s['school_number']
+        gl = sorted(by_g.get(sid, []), key=lambda g: g['year'])
+        sl = sorted((x for x in by_s.get(sid, []) if x['total_per_student']), key=lambda x: x['year'])
+        op = CHARTER_OPERATORS.get(sid) if s['charter'] else None
+        st = s.get('teachers_fte')
+        schools.append({
+            'place_id': place, 'school_id': sid, 'nces_id': s['nces_id'], 'name': s['name'], 'status': s['status'], 'level': s['level'],
+            'school_type': s['school_type'], 'grades': s['grades'], 'charter': s['charter'], 'virtual': s['virtual'],
+            'operator_entity_id': 'nonprofit:' + op if op else None,
+            'address': s['address'], 'city': s['city'], 'zip': s['zip'], 'phone': s['phone'], 'latitude': s['latitude'], 'longitude': s['longitude'],
+            'enrollment': s['enrollment'] if s['status'] == 'Open' else None, 'enrollment_year': D['school_year'] if s['status'] == 'Open' else None,
+            'last_year_open': None if s['status'] == 'Open' else _sy(s['last_directory_year'] + 1),
+            'teachers_fte': st if s['status'] == 'Open' else None,
+            'students_per_teacher': round(s['enrollment'] / st, 1) if s['status'] == 'Open' and st and s.get('enrollment') else None,
+            'free_reduced_lunch_pct': round(100 * s['free_reduced_lunch'] / s['enrollment'], 1) if s.get('free_reduced_lunch') and s.get('enrollment') else None,
+            'latest_grade': gl[-1]['grade'] if gl else None, 'latest_grade_year': gl[-1]['year'] if gl else None,
+            'prior_grade': gl[-2]['grade'] if len(gl) > 1 else None, 'grades_on_record': len(gl),
+            'latest_per_student': sl[-1]['total_per_student'] if sl else None, 'latest_spending_year': sl[-1]['year'] if sl else None,
+            'zoned_levels': ', '.join(l for l in ('Elementary', 'Middle', 'High') if l in zoned.get(sid, ())) or None,
+            'district': F['conf'].get('district_name'), 'page_url': f'/schools/#s-{sid}', 'source_url': D['source_url'],
+        })
+    schools.sort(key=lambda r: (r['status'] != 'Open', r['name']))
+
+    cal_src = F['calendar'].get('source_url')
+    calendar = [{'place_id': place, 'event_id': e['event_id'], 'title': e['title'], 'kind': e['kind'], 'starts': e['starts'], 'ends': e.get('ends'),
+                 'all_day': e['all_day'], 'venue': re.sub(r',?\s*(United States|USA)\s*$', '', e.get('venue') or '').strip(' ,') or None, 'school_year': e.get('school_year'), 'source_url': cal_src}
+                for e in F['calendar'].get('events', [])]
+    _SCH['_schools'] = {'schools': schools, 'grades': grades, 'spending': spending, 'enrollment': enrollment, 'calendar': calendar, 'zones': zones}
+    return _SCH['_schools']
+
+
+_SCH = {}
+
+
+def schools():
+    return _school_rows()['schools']
+
+
+def school_grades():
+    return _school_rows()['grades']
+
+
+def school_spending():
+    return _school_rows()['spending']
+
+
+def school_enrollment():
+    return _school_rows()['enrollment']
+
+
+def school_calendar():
+    return _school_rows()['calendar']
+
+
+def school_zones():
+    return _school_rows()['zones']
 
 
 
@@ -648,6 +1010,163 @@ def tax_districts():
     return [{'district': k, 'label': d['label'], 'authority_ids': d['stack'], 'total_millage': d['total'],
              'tax_district_codes': sorted(codes.get(k, ()), key=int) or None}
             for k, d in a['districts'].items()]
+
+
+# --- Elections hub, public notices, job openings (/elections/results, /elections/voting, /notices, /jobs) ---------------
+
+def elections():
+    from civic_data import elections as f
+    return f()
+
+
+def election_results():
+    from civic_data import election_results as f
+    return f()
+
+
+def election_dates():
+    from civic_data import election_dates as f
+    return f()
+
+
+def voting_locations():
+    from civic_data import voting_locations as f
+    return f()
+
+
+def public_notices():
+    from civic_data import public_notices as f
+    return f()
+
+
+def job_openings():
+    from civic_data import job_openings as f
+    return f()
+
+
+def job_boards():
+    from civic_data import job_boards as f
+    return f()
+
+
+# --- Utilities and trash pickup (/utilities) ---------------------------------------------------------------------------
+
+SERVICE_LABEL = {'water': 'Water', 'sewer': 'Sewer', 'electric': 'Electricity', 'gas': 'Natural gas', 'internet': 'Internet',
+                 'garbage': 'Garbage', 'yard_waste': 'Yard waste and bulk trash', 'bulk': 'Bulk pickup', 'recycling': 'Recycling',
+                 'stormwater': 'Stormwater', 'bill': 'Whole bill'}
+
+
+def utilities_file():
+    """data/utilities/<county>/utilities.json: providers, pickup routes, holiday rules and extra rates, copied by hand."""
+    import json
+    from place import PLACE_ID
+    f = os.path.join(HERE, '..', 'data', 'utilities', PLACE_ID.split('-', 1)[-1], 'utilities.json')
+    return json.load(open(f)) if os.path.exists(f) else None
+
+
+def _area(U, area):
+    return {'area': area, 'area_name': 'All of ' + _place_name() if area == 'all' else U['areas'].get(area, area),
+            'gov_id': None if area == 'all' else area}
+
+
+def _place_name():
+    from place import PLACE
+    return PLACE.get('name', '')
+
+
+def utility_providers():
+    U = utilities_file()
+    if not U:
+        return []
+    return [{'place_id': U['place_id'], **_area(U, p['area']), 'service': p['service'], 'service_label': SERVICE_LABEL[p['service']],
+             'provider': p['provider'], 'entity_id': p.get('entity_id'), 'entity_name': p.get('entity_name'), 'provider_kind': p.get('provider_kind'), 'coverage': p.get('coverage'),
+             'phone': p.get('phone'), 'website': p.get('website'), 'outage_url': p.get('outage_url'), 'notes': p.get('notes'),
+             'as_of': U['as_of'], 'source_url': p.get('source_url')} for p in U['providers']]
+
+
+def trash_pickup():
+    """One row per pickup route (or the rule where there is no route map). lookup_layer, zone_field and day_field tell
+    /api/v1/utilities where to read an address's route and day live; zone and pickup_days are the route's usual days."""
+    U = utilities_file()
+    if not U:
+        return []
+    out = []
+    for t in U['trash']:
+        for z in t['zones']:
+            out.append({'place_id': U['place_id'], **_area(U, t['area']), 'service': t['service'], 'service_label': SERVICE_LABEL[t['service']],
+                        'provider': t['provider'], 'zone': z[0] or None, 'pickup_days': z[1] or None, 'zone_area': z[2] if len(z) > 2 else None,
+                        'rule': t.get('rule'), 'lookup_layer': t.get('lookup_layer'), 'zone_field': t.get('zone_field'), 'day_field': t.get('day_field'),
+                        'notes': t.get('notes'), 'as_of': U['as_of'], 'source_url': t.get('source_url')})
+    return out
+
+
+def trash_holidays():
+    U = utilities_file()
+    if not U:
+        return []
+    return [{'place_id': U['place_id'], **_area(U, h['area']), 'provider': h['provider'], 'holiday': h['holiday'], 'when_observed': h['when'],
+             'garbage': h['garbage'], 'yard_waste': h['yard_waste'], 'as_of': U['as_of'], 'source_url': U['holiday_sources'].get(h['area'])}
+            for h in U['holidays']]
+
+
+# data/fees/fees_pay_officials.json utility_rates: provider name -> area, and each rate key -> (charge, unit, applies_to)
+FEES_AREA = [('Bay County Utility', 'county'), ('Panama City Beach', 'pcb'), ('Panama City', 'pc'), ('Lynn Haven', 'lh'), ('Callaway', 'cw'),
+             ('Springfield', 'sp'), ('Mexico Beach', 'mb'), ('Parker', 'parker')]
+RATE_KEY = {
+    'base_monthly': ('Base charge', 'per month', 'Inside the city'), 'base_monthly_3_4in': ('Base charge', 'per month', '3/4-inch meter'),
+    'base_monthly_1in': ('Base charge', 'per month', '1-inch meter'), 'base_monthly_5_8_or_3_4in': ('Base charge (includes 6,000 gallons)', 'per month', '5/8 or 3/4-inch meter'),
+    'base_monthly_residential': ('Base charge (includes 6,000 gallons)', 'per month', 'Residential'), 'base_monthly_0_4000gal': ('Base charge (first 4,000 gallons)', 'per month', 'Residential'),
+    'per_1000_gal': ('Usage', 'per 1,000 gallons', 'Inside the city'), 'per_1000_gal_above_6000': ('Usage above 6,000 gallons', 'per 1,000 gallons', 'Inside the city'),
+    'per_1000_gal_over_4000': ('Usage above 4,000 gallons', 'per 1,000 gallons', 'Residential'),
+    'outside_city_base': ('Base charge', 'per month', 'Outside the city'), 'outside_base': ('Base charge', 'per month', 'Outside the city'),
+    'outside_per_1000': ('Usage', 'per 1,000 gallons', 'Outside the city'), 'senior_base': ('Base charge', 'per month', 'Seniors 65 and older'),
+    'senior_per_1000': ('Usage', 'per 1,000 gallons', 'Seniors 65 and older'), 'sewer_only_flat': ('Sewer-only flat charge', 'per month', 'Sewer customers without county water'),
+    'availability_flat': ('Availability charge (not connected)', 'per month', 'Lots where sewer is available'),
+}
+
+
+def utility_rates():
+    """Monthly rates set by each public utility: water, sewer and garbage from the Fees & bills research
+    (data/fees/fees_pay_officials.json utility_rates), plus extra rows in data/utilities (Parker water, landfill fees)."""
+    import json
+    U = utilities_file()
+    if not U:
+        return []
+    F = json.load(open(os.path.join(HERE, '..', 'data', 'fees', 'fees_pay_officials.json')))
+    out = []
+
+    def add(area, provider, service, charge, amount, unit, applies, effective, src, note=None):
+        out.append({'place_id': U['place_id'], **_area(U, area), 'provider': provider, 'service': service, 'service_label': SERVICE_LABEL.get(service, service.title()),
+                    'charge': charge, 'amount': amount, 'unit': unit, 'applies_to': applies, 'effective': effective, 'notes': note, 'source_url': src})
+
+    for r in F.get('utility_rates', []):
+        area = next((a for k, a in FEES_AREA if k in r['provider']), None)
+        if not area:
+            continue
+        prov, eff, src = r['provider'], r.get('effective'), r.get('source_url')
+        for svc in ('water', 'sewer'):
+            d = r.get(svc) or {}
+            for k, v in d.items():
+                if k in RATE_KEY and isinstance(v, (int, float)):
+                    charge, unit, applies = RATE_KEY[k]
+                    add(area, prov, svc, charge, v, unit, applies, eff, src)
+                elif k == 'tiers_per_1000_gal':
+                    for t in v:
+                        add(area, prov, svc, f"Usage, {t['range']} gallons", t['rate'], 'per 1,000 gallons', 'Residential', eff, src)
+                elif isinstance(v, str) and k in ('city_water_franchise_fee', 'utility_tax'):
+                    add(area, prov, svc, 'Franchise fee' if 'franchise' in k else 'Utility tax', None, v, 'Added to the water bill', eff, src)
+        if isinstance(r.get('garbage'), (int, float)):
+            add(area, prov, 'garbage', 'Garbage' if area != 'cw' else 'Solid waste (city trash and yard pickup)', r['garbage'], 'per month', 'Residential', eff, src, r.get('garbage_note'))
+        if isinstance(r.get('garbage_senior'), (int, float)):
+            add(area, prov, 'garbage', 'Garbage', r['garbage_senior'], 'per month', 'Seniors 65 and older', eff, src)
+        if isinstance(r.get('stormwater'), (int, float)):
+            add(area, prov, 'stormwater', 'Stormwater', r['stormwater'], 'per month', 'Residential', eff, src)
+        if r.get('bill_5000gal'):
+            add(area, prov, 'bill', 'Typical monthly bill at 5,000 gallons', r['bill_5000gal'], 'per month', 'Residential, all city charges on the bill', eff, src,
+                ' '.join(x for x in [r.get('calc'), r.get('calc_caveat')] if x))
+    for x in U.get('rates', []):
+        add(x['area'], x['provider'], x['service'], x['charge'], x['amount'], x['unit'], x['applies_to'], x['effective'], x['source_url'])
+    return out
 
 
 # --- Savings ideas (government pages) --------------------------------------------------------------------------------
@@ -942,6 +1461,18 @@ def shared_owner_groups():
     return []
 
 
+# School grades and spending come from fldoe.org files read by hand (data/schools/fetch_fldoe.py); until a file is on
+# hand the datasets are empty, so their columns are listed here to keep the table and the API stable.
+_GRADE_NUM = ['year', 'ela_achievement', 'ela_gains', 'ela_gains_low25', 'math_achievement', 'math_gains', 'math_gains_low25', 'science_achievement',
+              'social_studies_achievement', 'middle_acceleration', 'graduation_rate', 'college_career_acceleration', 'total_points',
+              'percent_of_points', 'percent_tested', 'pct_economically_disadvantaged']
+DB_ONLY_COLUMNS['school-grades'] = {**{c: 'string' for c in ('place_id', 'school_id', 'school', 'school_year', 'grade')}, 'informational_baseline': 'boolean',
+                                    **{c: 'number' for c in _GRADE_NUM}, 'source_url': 'string', 'gov_id': 'string'}
+DB_ONLY_COLUMNS['school-spending'] = {**{c: 'string' for c in ('place_id', 'school_id', 'school')}, 'year': 'number', 'school_year': 'string',
+                                      **{c: 'number' for c in ('federal_per_student', 'state_local_per_student', 'total_per_student', 'enrollment', 'estimated_total')},
+                                      'source_url': 'string', 'gov_id': 'string'}
+
+
 # Gifts over the per-election limit: rows are written by registry.publish_limit_case() when an admin confirms or
 # resolves a case (migration 0038), not by the site build.
 OVER_LIMIT_COLUMNS = ['case_id', 'candidate', 'office', 'election', 'election_phase', 'contributor', 'contributor_type', 'gifts', 'gross_amount',
@@ -1124,6 +1655,88 @@ def data_source_sites():
     return site_rows()
 
 
+# --- Emergency and alerts hub (/emergency) ------------------------------------------------------------------------------
+
+def _emergency_file(name, default=None):
+    """data/emergency/<county>/<name>: zones.json and resources.json are copied by hand; shelters.json, zones_geo.json and
+    notices.json are written by data/emergency/fetch_emergency.js (daily). Live notices are /api/v1/emergency."""
+    import json
+    from place import PLACE_ID
+    f = os.path.join(HERE, '..', 'data', 'emergency', PLACE_ID.split('-', 1)[-1], name)
+    return json.load(open(f)) if os.path.exists(f) else default
+
+
+def evacuation_zones():
+    import json
+    from place import PLACE_ID
+    Z = _emergency_file('zones.json')
+    if not Z:
+        return []
+    G = {g['zone']: g for g in (_emergency_file('zones_geo.json', {}) or {}).get('zones', [])}
+    return [{'place_id': PLACE_ID, 'zone': z['zone'], 'sort_order': z['order'], 'color': z['color'], 'where_it_is': z['who'],
+             'when_ordered': z['when'], 'plain': z['plain'], 'zone_edited': (G.get(z['zone']) or {}).get('edited'),
+             'geometry': json.dumps((G.get(z['zone']) or {}).get('geometry'), separators=(',', ':')) if G.get(z['zone']) else None,
+             'map_url': Z['map_url'], 'layer_url': Z['layer_url'], 'as_of': Z['as_of'], 'source_url': Z['source_url']} for z in Z['zones']]
+
+
+def emergency_shelters():
+    from place import PLACE_ID
+    S = _emergency_file('shelters.json')
+    if not S:
+        return []
+    cols = ('shelter_id', 'name', 'address', 'shelter_type', 'group_name', 'group_about', 'note', 'status', 'status_as_of', 'lat', 'lng',
+            'evacuation_zone', 'operator', 'source_url')
+    return [{'place_id': PLACE_ID, **{k: r.get(k) for k in cols}, 'checked': S.get('checked')} for r in S['shelters']]
+
+
+def emergency_resources():
+    from place import PLACE_ID
+    R = _emergency_file('resources.json')
+    if not R:
+        return []
+    return [{'place_id': PLACE_ID, 'sort_order': i + 1, **{k: r.get(k) for k in ('resource_id', 'group', 'name', 'org', 'phone', 'url', 'about', 'gov_id')},
+             'as_of': R['as_of'], 'source_url': r.get('url')} for i, r in enumerate(R['resources'])]
+
+
+EMERGENCY_NOTICE_COLS = ('notice_id', 'place_id', 'kind', 'source', 'source_type', 'gov_id', 'title', 'summary', 'instruction', 'severity', 'event',
+                         'area', 'zones', 'issued', 'starts', 'ends', 'updated', 'status', 'full_closure', 'roadway', 'first_seen', 'last_seen',
+                         'url', 'source_url')
+
+
+def emergency_notices():
+    N = _emergency_file('notices.json')
+    if not N:
+        return []
+    return [{k: n.get(k) for k in EMERGENCY_NOTICE_COLS} for n in N['notices'] if str(n.get('issued') or n.get('first_seen') or '')[:4] >= str(cutoff.FIRST_YEAR)]
+
+
+def hurricane_prep():
+    from place import PLACE_ID
+    P = _emergency_file('prep.json')
+    if not P:
+        return []
+    return [{'place_id': PLACE_ID, 'sort_order': i + 1, 'topic': x['topic'], 'step': x['step'], 'text': x['text'], 'source': x['source'],
+             'as_of': P['as_of'], 'source_url': x['source_url']} for i, x in enumerate(P['steps'])]
+
+
+def disaster_declarations():
+    from place import PLACE_ID
+    R = _emergency_file('rebuild.json')
+    if not R:
+        return []
+    return [{'place_id': PLACE_ID, **d} for d in R['declarations'] if str(d['declared'])[:4] >= str(cutoff.FIRST_YEAR)]
+
+
+def rebuild_money():
+    from place import PLACE_ID
+    R = _emergency_file('rebuild.json')
+    if not R:
+        return []
+    cols = ('zip', 'area_name', 'program', 'disaster_number', 'event', 'year', 'count', 'count_label', 'approved', 'amount_paid', 'repair_amount',
+            'rental_amount', 'inspected_damage', 'source_url')
+    return [{'place_id': PLACE_ID, **{k: r.get(k) for k in cols}} for r in R['by_zip'] if (r.get('year') or 0) >= cutoff.FIRST_YEAR]
+
+
 DATASETS = [
     ('connections-payees', 'Connections: payees', 'Every payee in the payment records of every local government and agency (contracts, change orders, emergency purchases, check registers, tourism agency payments and the CRA ledger) as one entity, with who paid it and whether it gave to a campaign. dollars_in_records adds every record, and an award and the payments on it can both be records, so it is not a deduplicated total. Unnamed grant recipients are grouped.', connections_payees),
     ('connections-payments', 'Connections: payment records', 'One row per payment record behind the Connections network: which government or agency paid which payee, the record type, amount, date and source. CRA ledger items that are only proposed or planned are not included.', connections_payments),
@@ -1170,6 +1783,44 @@ DATASETS = [
     ('chambers', 'Chambers of commerce', "One row per chamber of commerce: what it is and who it serves, its board meetings, its latest IRS Form 990 (revenue, expenses, assets, employees), public money paid to it by local governments and tourism agencies (from nonprofit-payments), its foundation, and links to its member directory, events and join page. entity_id is its profile (entity-profiles). Chambers are private, member-owned nonprofits, not government agencies.", chambers),
     ('chamber-leaders', 'Chambers of commerce: boards and staff', "Each chamber's board (executive committee, directors, ex officio and honorary members), staff and past chairs since 2016, as listed on the chamber's own website on as_of: name, title and the organization each board member represents. No phone numbers, emails or addresses. person_entity_id and organization_entity_id link to profiles; person_match and organization_match say how each link was made (blank = no match, shown as plain text).", chamber_leaders),
     ('chamber-events', 'Chambers of commerce: events and programs', "Upcoming events from each chamber's public calendar (kind event: title, start and end in local time, venue and city, category, the event's own link) and each chamber's yearly and monthly signature programs (kind program: schedule and what it is). chamber_event is false for community events a chamber lists on its calendar. Refreshed daily where the calendar has a public feed.", chamber_events),
+    ('community-events', 'Community events', "What's happening around the county in the next two months, from public calendars: the county and city calendars, the library system, visitor bureaus and the Panama City Beach Chamber. One row per event date: title, start and end in local time, town, venue name, category (Community, Public meeting, Library, Chamber), recurring for programs listed on two or more dates, and the event's own link. Refreshed daily.", community_events),
+    ('beach-access', 'Beach access points', "Every public beach access on the Gulf in the county from the county's GIS: name and number, street address, area (Panama City Beach, Mexico Beach or unincorporated), map point, whether cars can drive on, and whether it is wheelchair accessible (from Panama City Beach's GIS). Parking, restrooms, showers, lifeguards and boardwalks come from the Florida DEP coastal access survey where its site is within about 200 feet (state_site_id); blank means not surveyed.", beach_access),
+    ('beach-parking', 'Beach parking lots', "County-run beach parking lots: number of spaces, type of parking, map point and the nearest beach access.", beach_parking),
+    ('beach-water-sites', 'Beach water quality: sampling sites', "Each Florida Healthy Beaches Program sampling site in the county (Florida Department of Health), with its latest rated sample, the number of Good, Moderate and Poor samples since first_date, and how many came with a health advisory. Ratings: Good 0-35, Moderate 35.5-70, Poor 70.5 or more enterococci per 100 mL of water.", beach_water_sites),
+    ('beach-water-samples', 'Beach water quality: samples', "Every published Healthy Beaches sample at each site: date, enterococcus count per 100 mL, the state's rating and whether a health advisory was issued. The state's lookup shows the latest 50 samples per site; samples are kept here as they come in, so history grows from 2026 on.", beach_water_samples),
+    ('beach-conditions', 'Beach conditions and flags', "From the National Weather Service Tallahassee surf zone forecast for the county's coast: kind forecast is one row per forecast period (rip current risk, surf height, UV index, water temperature, weather, winds, sunrise and sunset), the first carrying the beach flag color the beach officials reported to the weather service; kind alert is an active beach or coastal alert; kind flag is the flag color reported each day since we began recording; kind legend is what each flag color means. Refreshed daily.", beach_conditions),
+    ('parks', 'Parks', "Every public park in the county from the county's parks inventory (all governments): who runs it, acres, its main use, and yes/no for restrooms, pavilions, picnic tables, playgrounds, sports fields and courts, trails, beach access, boat ramps and docks and fishing piers. facilities and photo_url come from the county's park guide where it lists the park.", parks),
+    ('boat-ramps', 'Boat ramps and launches', "Public boat ramps and small-craft launches: park, who runs it, fresh or salt water, waterbody, ramp surface, restroom, dock and fishing pier, and map point.", boat_ramps),
+    ('recreation-departments', 'Parks and recreation departments', "Each local government's parks and recreation pages (and the state parks and forest in the county), for program and league sign-ups and facility rentals, checked by hand on as_of.", recreation_departments),
+    ('trails', 'Trails', "Named trails from the county's and Panama City Beach's trail maps, with segments added up: miles, surface, allowed uses, skill level and a map point at one end.", trails),
+    ('development-projects', 'Development projects', "Development projects on each local government's public planning map: Bay County's development orders for the unincorporated county (site plans for commercial buildings, subdivisions, apartments and other projects, from application to approval) and Panama City Beach's development map. One row per project: name, what it is, size, address, status and the application, approval, building permit and occupancy dates on record. Projects with no date, or nothing since 2016, are left out. Owners and developers are not listed on the maps.", development_projects),
+    ('housing-permits', 'New homes permitted', "New privately owned homes authorized by building permits, per year, for the whole county, each city and the unincorporated area, from the U.S. Census Bureau's Building Permits Survey: single-family homes, homes in 2 to 4 unit buildings and in buildings with 5 or more units, with the construction value the permits list and a one-line summary. year_to_date rows cover this year so far (period). estimated is true when the government sent the Census Bureau no monthly reports that year and the figures are the Bureau's estimate.", housing_permits),
+    ('road-contracts', 'State road contracts', "Every Florida Department of Transportation construction and maintenance contract in the county that was under way in 2016 or later: what and where, the contractor, the current contract amount, letting, start, estimated finish and final acceptance dates, and status. status is Under way when FDOT's map shows the contract active. vendor_id links a contractor that local governments also paid. project_id is FDOT's item and segment number, which joins road-work-program.", road_contracts),
+    ('road-work-program', 'State road work program', "Projects in the Florida Department of Transportation's current adopted five-year work program in the county, one row per project and phase (planning, project development and environment study, design, right of way, construction, construction inspection): what and where, the kind of work, the fiscal years the phase is funded in (July to June, named for the year it ends) and the project's status. FDOT's map layers don't carry dollar amounts; contract amounts are in road-contracts.", road_work_program),
+    ('schools', 'Public schools', "One row per public school in the district, open now or closed since 2016: state school number (school_id, district-school), federal id, level, grades taught, district or charter, address and phone of the school building, enrollment and teachers for the latest federal school directory year, students per teacher, share of students eligible for free or reduced-price lunch, latest state school grade and the one before it, latest per-student spending, and which attendance zone levels feed it. operator_entity_id is the nonprofit that runs a charter school (entity-profiles).", schools),
+    ('school-grades', 'School grades', "Every Florida school grade (A to F, or I for incomplete) on record for each school since 2016, from the Florida Department of Education's school grades file, one row per school and year. year is the school year's end (2025 = 2024-25). Components (percent of students: English and math achievement and learning gains, science, social studies, acceleration, graduation rate; total points and percent of points) are filled in for the latest year in the file. No grades were given for 2019-20 (testing was canceled); 2020-21 grades were only given to schools that asked; 2022-23 grades were an informational baseline (informational_baseline true).", school_grades),
+    ('school-spending', 'Spending per school', "Per-student spending at each school from the Florida Department of Education's yearly Every Student Succeeds Act (ESSA) per-pupil expenditure reports: federal, state and local, and total, one row per school and year (year = the school year's end). estimated_total multiplies the per-student figure by that year's enrollment from the federal school directory, so it is an estimate, not a reported total.", school_spending),
+    ('school-enrollment', 'School enrollment by year', "Students enrolled at each public school each school year since 2015-16 (year = the school year's end), from the U.S. Department of Education's Common Core of Data school directory.", school_enrollment),
+    ('school-calendar', 'School district calendar', "The school district's calendar as posted on its website: first and last day, holidays and breaks, no-school days, early release days, end of each grading period, graduations and School Board meetings. kind is first-day, last-day, no-school, break, early-release, grading, graduation, board-meeting or other. starts and ends are local dates (all_day) or local date and time. Refreshed daily; past events of the school year stay on file.", school_calendar),
+    ('school-zones', 'School attendance zones', "The school district's attendance zones (which elementary, middle and high school serves each part of the county), from the county GIS server, one row per zone with the school it feeds (school_id), area in square miles, the county's last edit date and the zone's shape as GeoJSON (geometry, longitude/latitude, simplified to about 40 meters). mou_area marks zones the county map labels MOU (covered by a separate agreement). Choice, magnet and charter schools take students from outside their zone.", school_zones),
+    ('evacuation-zones', 'Hurricane evacuation zones', "Bay County's hurricane evacuation zones A to D, in the order they are usually called: where each zone is, when it is ordered and what to do, with each zone's shape (geometry, GeoJSON in WGS84, simplified to about 300 m; the county map is the authority). Look up the zone for an address at /api/v1/evacuation-zone.", evacuation_zones),
+    ('emergency-shelters', 'Emergency shelters', "Every disaster shelter Bay County Emergency Services lists: special needs, general population, mass care support, recovery and extreme-weather shelters, with the address, the group's open or closed status as the county last posted it (status_as_of), the map point and the evacuation zone the shelter sits in. Not every shelter opens for every storm. The live status is in /api/v1/emergency.", emergency_shelters),
+    ('emergency-resources', 'Emergency phone numbers and sign-ups', "The numbers, sign-ups, maps and outage pages people need before and during an emergency, from each organization's own site: 911, the county Emergency Operations Center, AlertBay, the special needs registry, weather offices, FL511 and power outage maps.", emergency_resources),
+    ('emergency-notices', 'Emergency notices archive', "Every emergency notice BayCounty.me has recorded for the county, newest first: National Weather Service watches, warnings and advisories, boil-water notices, road closures, water and sewer outages, evacuation orders, shelter openings and storm updates from each government's alert center and news feed, and FL511 state road closures. kind is the topic, status active (live at the last check), ended or lifted. first_seen and last_seen are when BayCounty.me saw it. The live list is /api/v1/emergency.", emergency_notices),
+    ('hurricane-prep', 'Hurricane prep steps', "Plain-English steps for hurricane season, sandbags, generator safety, an approaching storm and the days after, each with the agency it comes from (Bay County, Ready.gov, CDC, National Weather Service, FEMA, the Army Corps of Engineers).", hurricane_prep),
+    ('disaster-declarations', 'Disaster declarations', "Every federal major disaster, emergency and fire management declaration that included the county since 2016, from OpenFEMA: the storm or event, the dates, and which FEMA programs were opened (individual aid to households, public aid to governments, hazard mitigation).", disaster_declarations),
+    ('rebuild-money', 'Rebuild money by ZIP code', "Money that reached each ZIP code after storms since 2016, from OpenFEMA: FEMA housing aid to owners and renters (Individuals and Households Program: households that applied, approved, dollars, of which repair and rental help, and FEMA-inspected damage for owners) and flood insurance claims paid (NFIP, building, contents and compliance payments added). One row per ZIP, program and storm. Totals only; FEMA does not publish who received aid and neither does BayCounty.me.", rebuild_money),
+    ('elections', 'Elections since 2016', "Every election the Bay County Supervisor of Elections has held since 2016, one row each: the date, name and kind (primary, general, municipal, runoff, referendum, recall, presidential preference primary), registered voters, ballots cast, turnout and precincts reporting. status is final (completely reported), counting (results still coming in) or canceled. A city's own view of a municipal election day and the 2018 recounts are folded into the countywide election. Contest results are in election-results.", elections),
+    ('election-results', 'Election results since 2016', "Official results of every contest on a Bay County ballot since 2016, one row per choice: votes on Election Day, in early voting and by mail, the total and percent, and rank in the contest. level is Federal, State, Court, County, School district, City, Special district or Party; gov_id is the local government a contest elects or decides. measure is true for a yes-or-no ballot question. party_primary is REP or DEM for a closed party primary, or Universal primary when every voter could vote. recount is true where the 2018 recount figures replace the first count. person_entity_id links a local candidate to their profile. A blank vote count is 1 to 29 votes, which the law keeps from being reported for privacy. From the Supervisor of Elections' election results site.", election_results),
+    ('election-dates', 'Election dates', "Key dates for Bay County elections: registration deadlines, early voting, vote-by-mail request and return deadlines and election days (kept by hand from the Supervisor of Elections' voter guide), plus the upcoming events on the Supervisor of Elections' calendar (canvassing board meetings, tests of the voting equipment), read daily. kind says which; starts_at is the start time when one is given.", election_dates),
+    ('voting-locations', 'Where to vote', "Every early voting site for the next countywide election (kind early_voting: any registered Bay County voter can vote at any of them, with the dates and hours) and the Election Day polling place for each of the county's precincts (kind polling_place: on Election Day you vote only at your own precinct's polling place). lat and lon place each on a map, from Bay County's address points. From the Supervisor of Elections.", voting_locations),
+    ('public-notices', 'Public notices', "Legal notices published by local governments and public agencies on the county's public notice website: bid and proposal requests, public hearings and ordinances, public meetings and other notices, with the government that posted it (gov_id, blank for agencies that are not one of the county's local governments), the date it was published, the first date it mentions after that (the meeting, hearing or bid due date) and the full text. Court, foreclosure, tax deed, probate and other private notices on the same site are left out. The site keeps 30 days; notices already on file stay as an archive.", public_notices),
+    ('job-openings', 'Government job openings', "Open jobs posted by Bay County, Bay District Schools, the cities and the airport on their own job boards, read daily: title, department, job type, pay where posted, posting and closing dates and the link to apply. Jobs whose closing date has passed are left out. first_seen is the first day the job was on file.", job_openings),
+    ('job-boards', 'Government job boards', "Each local government's job board and whether its openings are read automatically: openings is how many are open now, blank where the board cannot be read (note says why and where to look).", job_boards),
+    ('utility-providers', 'Utilities: who provides each service', "Who provides water, sewer, electricity, natural gas, garbage, yard waste, recycling and internet in each part of the county (area: a city, unincorporated, or all for countywide providers): the provider, what kind of provider it is, whether it covers all, most or some of the area, its phone number, website and outage page, and notes on how the service works. entity_id is the provider's profile (entity-profiles) where there is one. /api/v1/utilities?lat=&lon= picks the rows for one address.", utility_providers),
+    ('utility-rates', 'Utilities: rates', "Monthly charges set by each public utility, one row per charge: water and sewer base and usage charges (inside and outside the city, senior rates, meter sizes), garbage and stormwater on the city bill, franchise fees and utility taxes, landfill fees, and a typical monthly bill at 5,000 gallons with its arithmetic in notes. effective says which rate schedule the row comes from.", utility_rates),
+    ('trash-pickup', 'Trash pickup: routes and days', "Garbage, yard waste and bulk pickup in each city: one row per route with its usual pickup days, or the rule where a city has no route map (for example a private hauler sets the day). lookup_layer is the public map layer that holds the routes, zone_field the route field and day_field the day field; /api/v1/utilities?lat=&lon= reads them at an address. zone_area describes a route in words where there is no map.", trash_pickup),
+    ('trash-holidays', 'Trash pickup: holiday changes', "How each city's garbage and yard waste pickup changes on holidays, as the city or its hauler publishes it: the holiday, when it falls, and what happens to garbage and yard waste pickup.", trash_holidays),
     ('restaurants', 'Restaurants and food service', "One row per restaurant, food truck, caterer or other food service license in the county: today's state license list plus every license inspected since 2016 that is no longer listed (licensed_now false). Name, kind, license holder (licensee, linked to its profile through licensee_entity_id when it matches a company or Sunbiz filing), location (city and ZIP only for food trucks, caterers and event vendors, whose license address can be a home), seats, when it opened (its first licensing inspection), and its inspection record: the latest result, the latest routine inspection, inspections and high-priority violations in the last 12 months, and emergency closures. From the Florida DBPR Division of Hotels and Restaurants.", restaurants),
     ('restaurant-inspections', 'Restaurant inspections', "Every state food safety inspection of a restaurant, food truck, caterer or other food service license in the county since 2016, one row per visit: date, type (routine, complaint, licensing, or a follow-up visit when visit_number is over 1), the state's disposition and what it means in plain words (result, result_level ok, warning, fine or closed), violation counts by priority (high priority violations are the ones most likely to make someone sick), and the violation items cited. From the Florida DBPR Division of Hotels and Restaurants public records, refreshed daily.", restaurant_inspections),
     ('new-businesses', 'New businesses', "Every company, nonprofit and partnership filed with the Florida Division of Corporations (Sunbiz) since 2016 whose main address is in the county, newest first: name, type, filing date, whether it is still active, city and ZIP (street addresses are left out because many small companies list a home), its latest annual report, its profile id, any restaurant it holds a license for, and a link to its state record, which names its officers and registered agent. Out-of-state companies count from the day they registered to do business in Florida. Updated when the state publishes its quarterly corporate file.", new_businesses),

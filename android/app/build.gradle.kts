@@ -17,6 +17,10 @@ android {
         // Play rejects a versionCode it already has. The release workflow sets BCM_VERSION_CODE to its run number. About shows both.
         versionCode = System.getenv("BCM_VERSION_CODE")?.toIntOrNull() ?: 1
         versionName = "1.0"
+        // Firebase Cloud Messaging for phone alerts, from CI secrets (never the repo). Blank = alerts off in this build.
+        for (k in listOf("FCM_APP_ID", "FCM_API_KEY", "FCM_PROJECT_ID", "FCM_SENDER_ID")) {
+            buildConfigField("String", k, "\"" + (System.getenv(k) ?: "") + "\"")
+        }
     }
 
     signingConfigs {
@@ -69,6 +73,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7")
     implementation("androidx.browser:browser:1.8.0")
     implementation("org.osmdroid:osmdroid-android:6.1.20")
+    implementation("com.google.firebase:firebase-messaging:24.1.0")
     testImplementation("junit:junit:4.13.2")
 }
 

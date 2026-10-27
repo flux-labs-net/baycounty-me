@@ -1,0 +1,43 @@
+{
+  "_about": "Bay County's hurricane evacuation zones, in the county's own words (Emergency Services, Evacuation Zones page). Copied by hand; the zone shapes come from Bay County's GIS layer (fetch_emergency.js writes zones_geo.json).",
+  "as_of": "2026-10-27",
+  "source_url": "https://www.baycountyfl.gov/511/Evacuation-Zones",
+  "map_url": "https://gis.baycountyfl.gov/bayview/",
+  "layer_url": "https://gis.baycountyfl.gov/arcgis/rest/services/Admin_A12/MapServer/80",
+  "summary": "The four evacuation zones, A, B, C and D, are areas where storm surge may go. Zone A is along the water and is usually the first zone considered for evacuation. Depending on the storm and the surge expected, Zone B is next, then C, and finally D. Zones are set from storm surge models and the lay of the land, not flood insurance maps.",
+  "outside": "If you're not in an evacuation zone, Bay County recommends sheltering in place: secure your home and yard, close windows and doors, bring pets inside and stay in an interior room. In past storms the county has also told people in mobile or manufactured homes to leave, in any zone, so read each order.",
+  "zones": [
+    {
+      "zone": "A",
+      "order": 1,
+      "color": "#d1495b",
+      "who": "Along the water",
+      "when": "First zone considered for evacuation.",
+      "plain": "Closest to the water. Usually the first to leave."
+    },
+    {
+      "zone": "B",
+      "order": 2,
+      "color": "#ed8b3a",
+      "who": "Next zone inland from Zone A",
+      "when": "Next, depending on the storm and the surge expected.",
+      "plain": "Leave when an order names Zone B."
+    },
+    {
+      "zone": "C",
+      "order": 3,
+      "color": "#e8c547",
+      "who": "Farther inland",
+      "when": "After Zone B, for storms with higher surge.",
+      "plain": "Leave when an order names Zone C."
+    },
+    {
+      "zone": "D",
+      "order": 4,
+      "color": "#4f9d69",
+      "who": "Farthest inland of the four zones",
+      "when": "Last zone, for the highest surge.",
+      "plain": "Leave when an order names Zone D."
+    }
+  ]
+}

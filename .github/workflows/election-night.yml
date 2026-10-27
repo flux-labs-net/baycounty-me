@@ -1,0 +1,56 @@
+# Election night: read the Supervisor of Elections' results every 20 minutes while votes are counted, rebuild the site
+# and deploy, so /elections/results fills in as precincts report. Only the results file changes here; the daily refresh
+# (refresh-meetings.yml) does everything else. Add a line under schedule for each countywide election night.
+name: Election night results
+on:
+  schedule:
+    # Nov 3, 2026 general election: polls close 7 p.m. CST = 01:00 UTC Nov 4. Every 20 minutes until 11:40 p.m. CST.
+    - cron: '*/20 0-5 4 11 *'
+  workflow_dispatch: {}
+permissions:
+  contents: write
+  actions: write
+concurrency:
+  group: main-writer
+  cancel-in-progress: false
+jobs:
+  results:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Only on an election night
+        id: gate
+        run: |
+          # The schedule above repeats every year; run only in a year with a countywide election that night.
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] || [ "$(date -u +%Y)" = "2026" ]; then echo "go=true" >> "$GITHUB_OUTPUT"; fi
+      - uses: actions/checkout@v4
+        if: steps.gate.outputs.go == 'true'
+      - uses: actions/setup-python@v5
+        if: steps.gate.outputs.go == 'true'
+        with:
+          python-version: '3.12'
+      - name: Fetch results
+        if: steps.gate.outputs.go == 'true'
+        run: python data/elections/scripts/fetch_results.py
+      - name: Rebuild site
+        if: steps.gate.outputs.go == 'true'
+        working-directory: site
+        run: python build_site.py > /dev/null
+      - name: Commit if changed
+        id: commit_and_push
+        if: steps.gate.outputs.go == 'true'
+        run: |
+          if [ -z "$(git status --porcelain -- data/elections/results.json)" ]; then echo "No changes"; exit 0; fi
+          .github/scripts/push_refresh.sh "Election night results ($(date -u +%Y-%m-%dT%H:%MZ))" data/elections/results.json
+      - name: Deploy to Vercel
+        if: steps.commit_and_push.outputs.pushed == 'true'
+        env:
+          HOOK: ${{ secrets.VERCEL_DEPLOY_HOOK }}
+        run: |
+          if [ -z "$HOOK" ]; then echo "::warning title=Vercel::VERCEL_DEPLOY_HOOK isn't set."; exit 0; fi
+          curl -fsS -X POST "$HOOK" > /dev/null && echo "Vercel deploy started"
+      - name: Sync the database
+        if: steps.commit_and_push.outputs.pushed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh workflow run sync-db.yml --repo "$GITHUB_REPOSITORY" --ref main

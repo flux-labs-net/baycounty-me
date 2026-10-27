@@ -1,0 +1,753 @@
+{
+ "as_of": "2026-10-27T20:51:17+00:00",
+ "errors": [],
+ "finder_url": "https://www.voterfocus.com/PrecinctFinder/addressSearch?county=BAY",
+ "directory_url": "https://www.voterfocus.com/PrecinctFinder/precinctDirectory?county=FL-BAY",
+ "events_url": "https://www.bayvotesfl.gov/elections/events/",
+ "calendar": [
+  {
+   "date": "2026-03-23",
+   "election": "2026 Municipal Election (Mexico Beach and Springfield)",
+   "kind": "registration_deadline",
+   "title": "Last day to register or change party for the April 21 municipal election",
+   "source_url": "https://bay-soe.s3.amazonaws.com/uploads/2026/09/10131046/15004-E-Voters-Guide.pdf"
+  },
+  {
+   "date": "2026-04-21",
+   "election": "2026 Municipal Election (Mexico Beach and Springfield)",
+   "kind": "election_day",
+   "title": "Municipal Election Day, polls open 7 a.m. to 7 p.m.",
+   "source_url": "https://bay-soe.s3.amazonaws.com/uploads/2026/09/10131046/15004-E-Voters-Guide.pdf"
+  },
+  {
+   "date": "2026-07-20",
+   "election": "2026 Primary Election",
+   "kind": "registration_deadline",
+   "title": "Last day to register or change party for the August 18 primary",
+   "source_url": "https://bay-soe.s3.amazonaws.com/uploads/2026/09/10131046/15004-E-Voters-Guide.pdf"
+  },
+  {
+   "date": "2026-08-18",
+   "election": "2026 Primary Election",
+   "kind": "election_day",
+   "title": "Primary Election Day, polls open 7 a.m. to 7 p.m.",
+   "source_url": "https://bay-soe.s3.amazonaws.com/uploads/2026/09/10131046/15004-E-Voters-Guide.pdf"
+  },
+  {
+   "date": "2026-10-05",
+   "election": "2026 General Election",
+   "kind": "registration_deadline",
+   "title": "Last day to register to vote in the November 3 general election",
+   "source_url": "https://bay-soe.s3.amazonaws.com/uploads/2026/09/10131046/15004-E-Voters-Guide.pdf"
+  },
+  {
+   "date": "2026-10-19",
+   "end_date": "2026-10-31",
+   "election": "2026 General Election",
+   "kind": "early_voting",
+   "title": "Early voting at any of the eight early voting sites, 10 a.m. to 6 p.m. (the Elections Office opens at 8:30 a.m.)",
+   "source_url": "https://www.bayvotesfl.gov/voters/vote-early/"
+  },
+  {
+   "date": "2026-10-22",
+   "election": "2026 General Election",
+   "kind": "mail_ballot_request_deadline",
+   "title": "5 p.m.: last day to ask for a vote-by-mail ballot to be mailed to you",
+   "source_url": "https://bay-soe.s3.amazonaws.com/uploads/2026/09/10131046/15004-E-Voters-Guide.pdf"
+  },
+  {
+   "date": "2026-11-03",
+   "election": "2026 General Election",
+   "kind": "election_day",
+   "title": "General Election Day, polls open 7 a.m. to 7 p.m. at your own precinct",
+   "source_url": "https://www.bayvotesfl.gov/elections/upcoming-elections/"
+  },
+  {
+   "date": "2026-11-03",
+   "election": "2026 General Election",
+   "kind": "mail_ballot_return_deadline",
+   "title": "7 p.m.: vote-by-mail ballots must reach the Elections Office or an early voting drop box before this (not your precinct)",
+   "source_url": "https://bay-soe.s3.amazonaws.com/uploads/2026/09/10131046/15004-E-Voters-Guide.pdf"
+  }
+ ],
+ "soe_events": [
+  {
+   "starts": "2026-10-29T08:30",
+   "all_day": false,
+   "title": "Canvassing Board Meeting to continue canvass of vote by mail ballots, scan into audit system, and ballot duplication (as needed)",
+   "url": "https://www.bayvotesfl.gov/events/canvass-of-vote-by-mail-ballots-2/",
+   "source_url": "https://www.bayvotesfl.gov/elections/events/"
+  },
+  {
+   "starts": "2026-10-31",
+   "all_day": true,
+   "title": "Early Voting Ends. Early Voting Hours: SOE Office 8:30 AM-6PM, All other locations 10AM-6PM Early Voting Locations",
+   "url": "https://www.bayvotesfl.gov/events/early-voting-general-election-2/",
+   "source_url": "https://www.bayvotesfl.gov/elections/events/"
+  },
+  {
+   "starts": "2026-11-01T13:00",
+   "all_day": false,
+   "title": "Canvassing Board Meeting to continue canvass of vote by mail ballots(as needed), scan ballots into audit system, and ballot duplication\u2026",
+   "url": "https://www.bayvotesfl.gov/events/canvassing-board-meeting/",
+   "source_url": "https://www.bayvotesfl.gov/elections/events/"
+  },
+  {
+   "starts": "2026-11-03T15:00",
+   "all_day": false,
+   "title": "Canvassing Board Meeting to continue canvass of vote by mail ballots, scan ballots into audit system, and ballot duplication (as\u2026",
+   "url": "https://www.bayvotesfl.gov/events/canvass-vote-by-mail-ballots/",
+   "source_url": "https://www.bayvotesfl.gov/elections/events/"
+  },
+  {
+   "starts": "2026-11-03T18:30",
+   "all_day": false,
+   "title": "Continue Canvass of Vote by Mail, scan into audit system, and duplicate (as needed). Report Preliminary results after poll close\u2026",
+   "url": "https://www.bayvotesfl.gov/events/canvass-vote-by-mail-report-preliminary-results/",
+   "source_url": "https://www.bayvotesfl.gov/elections/events/"
+  },
+  {
+   "starts": "2026-11-03T07:00",
+   "all_day": false,
+   "title": "Voting for the General Election.",
+   "url": "https://www.bayvotesfl.gov/events/general-election/",
+   "source_url": "https://www.bayvotesfl.gov/elections/events/"
+  },
+  {
+   "starts": "2026-11-05T17:01",
+   "all_day": false,
+   "title": "Canvassing Board Meeting to process Provisional Ballots and Vote By Mail Ballots referred to Canvassing Board for signature defects, and\u2026",
+   "url": "https://www.bayvotesfl.gov/events/canvassing-board-meeting-2/",
+   "source_url": "https://www.bayvotesfl.gov/elections/events/"
+  },
+  {
+   "starts": "2026-11-07T00:00",
+   "all_day": false,
+   "title": "Canvassing Board Meeting to conduct recount if required and produce 2nd Unofficial Results.",
+   "url": "https://www.bayvotesfl.gov/events/recount-if-required/",
+   "source_url": "https://www.bayvotesfl.gov/elections/events/"
+  },
+  {
+   "starts": "2026-11-13T17:01",
+   "all_day": false,
+   "title": "Canvassing Board Meeting to canvass 10 Day Overseas ballots for General Election (F.S. 101.0695(5), File Official Results and conduct Post\u2026",
+   "url": "https://www.bayvotesfl.gov/events/canvassing-board-meeting-3/",
+   "source_url": "https://www.bayvotesfl.gov/elections/events/"
+  }
+ ],
+ "early_voting": {
+  "election": "2026 General Election",
+  "election_date": "2026-11-03",
+  "starts": "2026-10-19",
+  "ends": "2026-10-31",
+  "hours": "10 a.m. to 6 p.m. every day; the Supervisor of Elections Office opens at 8:30 a.m.",
+  "note": "Any registered Bay County voter can vote at any early voting site. Every site has a secure drop box for vote-by-mail ballots.",
+  "live_wait_url": "https://vls.vrswebapps.com/#county=bay",
+  "source_url": "https://www.bayvotesfl.gov/voters/vote-early/",
+  "sites": [
+   {
+    "name": "Frank Brown Park Community Center",
+    "address": "16200 Panama City Beach Pkwy",
+    "city": "Panama City Beach",
+    "zip": "32413",
+    "lat_lon": [
+     30.230878,
+     -85.877308
+    ]
+   },
+   {
+    "name": "Frank Nelson Building",
+    "address": "4201 W 22nd St",
+    "city": "Panama City",
+    "zip": "32405",
+    "lat_lon": [
+     30.189295,
+     -85.716053
+    ]
+   },
+   {
+    "name": "Lyndell Conference Center",
+    "address": "423 Lyndell Ln",
+    "city": "Panama City Beach",
+    "zip": "32407",
+    "lat_lon": [
+     30.19795,
+     -85.830129
+    ]
+   },
+   {
+    "name": "Lynn Haven Senior Center",
+    "address": "905 Pennsylvania Ave",
+    "city": "Lynn Haven",
+    "zip": "32444",
+    "lat_lon": [
+     30.245052,
+     -85.647044
+    ]
+   },
+   {
+    "name": "MLK Jr Recreation Center",
+    "address": "705 E 14th Ct",
+    "city": "Panama City",
+    "zip": "32401",
+    "lat_lon": [
+     30.174416,
+     -85.648717
+    ]
+   },
+   {
+    "name": "Palo Alto Church of Christ",
+    "address": "3119 N Hwy 231",
+    "city": "Panama City",
+    "zip": "32405",
+    "lat_lon": [
+     30.207899,
+     -85.615183
+    ]
+   },
+   {
+    "name": "Parker Community Center",
+    "address": "935 W Park St",
+    "city": "Panama City",
+    "zip": "32404",
+    "lat_lon": [
+     30.129705,
+     -85.605051
+    ]
+   },
+   {
+    "name": "Supervisor of Elections Office",
+    "address": "830 W 11th St",
+    "city": "Panama City",
+    "zip": "32401",
+    "hours": "8:30 a.m. to 6 p.m.",
+    "lat_lon": [
+     30.170264,
+     -85.672452
+    ]
+   }
+  ]
+ },
+ "polling_places": [
+  {
+   "precinct": "1",
+   "name": "1st Baptist Church of Fountain",
+   "address": "18906 Highway 231",
+   "city": "Fountain",
+   "zip": "32438",
+   "url": "https://www.voterfocus.com/PrecinctFinder/precinctSummary?county=FL-BAY&precinct=%20%201",
+   "source_url": "https://www.voterfocus.com/PrecinctFinder/precinctDirectory?county=FL-BAY",
+   "lat_lon": [
+    30.492075,
+    -85.416519
+   ]
+  },
+  {
+   "precinct": "2",
+   "name": "Youngstown Fire Station",
+   "address": "11771 Hwy 231",
+   "city": "Youngstown",
+   "zip": "32466",
+   "url": "https://www.voterfocus.com/PrecinctFinder/precinctSummary?county=FL-BAY&precinct=%20%202",
+   "source_url": "https://www.voterfocus.com/PrecinctFinder/precinctDirectory?county=FL-BAY",
+   "lat_lon": [
+    30.358418,
+    -85.439008
+   ]
+  },
+  {
+   "precinct": "3",
+   "name": "1st Baptist of Deerpoint Lake",
+   "address": "5940 Highway 2311",
+   "city": "Panama City",
+   "zip": "32404",
+   "url": "https://www.voterfocus.com/PrecinctFinder/precinctSummary?county=FL-BAY&precinct=%20%203",
+   "source_url": "https://www.voterfocus.com/PrecinctFinder/precinctDirectory?county=FL-BAY",
+   "lat_lon": [
+    30.257046,
+    -85.586275
+   ]
+  },
+  {
+   "precinct": "4",
+   "name": "Bayou George Christian Church",
+   "address": "7814 Highway 2301",
+   "city": "Panama City",
+   "zip": "32404",
+   "url": "https://www.voterfocus.com/PrecinctFinder/precinctSummary?county=FL-BAY&precinct=%20%204",
+   "source_url": "https://www.voterfocus.com/PrecinctFinder/precinctDirectory?county=FL-BAY",
+   "lat_lon": [
+    30.291303,
+    -85.53941
+   ]
+  },
+  {
+   "precinct": "5",
+   "name": "Sand Hills Fire Station",
+   "address": "13010 Hwy 77",
+   "city": "Southport",
+   "zip": "32409",
+   "url": "https://www.voterfocus.com/PrecinctFinder/precinctSummary?county=FL-BAY&precinct=%20%205",
+   "source_url": "https://www.voterfocus.com/PrecinctFinder/precinctDirectory?county=FL-BAY",
+   "lat_lon": [
+    30.383064,
+    -85.682747
+   ]
+  },
+  {
+   "precinct": "6",
+   "name": "Hilton Garden Inn Panama City Airport",
+   "address": "5625 Venture Crossings Blvd",
+   "city": "Panama City",
+   "zip": "32409",
+   "url": "https://www.voterfocus.com/PrecinctFinder/precinctSummary?county=FL-BAY&precinct=%20%206",
+   "source_url": "https://www.voterfocus.com/PrecinctFinder/precinctDirectory?county=FL-BAY",
+   "lat_lon": [
+    30.335579,
+    -85.798027
+   ]
+  },
+  {
+   "precinct": "7",
+   "name": "Gulfview Methodist Church",
+   "address": "245 Wisteria Ln",
+   "city": "Panama City Beach",
+   "zip": "32413",
+   "url": "https://www.voterfocus.com/PrecinctFinder/precinctSummary?county=FL-BAY&precinct=%20%207",
+   "source_url": "https://www.voterfocus.com/PrecinctFinder/precinctDirectory?county=FL-BAY",
+   "lat_lon": [
+    30.248611,
+    -85.934729
+   ]
+  },
+  {
+   "precinct": "8",
+   "name": "5 Bridges Church",
+   "address": "17495 Panama City Beach Pkwy",
+   "city": "Panama City Beach",
+   "zip": "32413",
+   "url": "https://www.voterfocus.com/PrecinctFinder/precinctSummary?county=FL-BAY&precinct=%20%208",
+   "source_url": "https://www.voterfocus.com/PrecinctFinder/precinctDirectory?county=FL-BAY",
+   "lat_lon": [
+    30.233908,
+    -85.901332
+   ]
+  },
+  {
+   "precinct": "9",
+   "name": "Frank Brown Park Community Center",
+   "address": "16200 Panama City Beach Pkwy",
+   "city": "Panama City Beach",
+   "zip": "32413",
+   "url": "https://www.voterfocus.com/PrecinctFinder/precinctSummary?county=FL-BAY&precinct=%20%209",
+   "source_url": "https://www.voterfocus.com/PrecinctFinder/precinctDirectory?county=FL-BAY",
+   "lat_lon": [
+    30.230878,
+    -85.877308
+   ]
+  },
+  {
+   "precinct": "10",
+   "name": "Lyndell Conference Center",
+   "address": "423 Lyndell Ln",
+   "city": "Panama City Beach",
+   "zip": "32407",
+   "url": "https://www.voterfocus.com/PrecinctFinder/precinctSummary?county=FL-BAY&precinct=%2010",
+   "source_url": "https://www.voterfocus.com/PrecinctFinder/precinctDirectory?county=FL-BAY",
+   "lat_lon": [
+    30.19795,
+    -85.830129
+   ]
+  },
+  {
+   "precinct": "11",
+   "name": "Cornerstone Baptist Church",
+   "address": "213 Carolyn Ave",
+   "city": "Panama City Beach",
+   "zip": "32407",
+   "url": "https://www.voterfocus.com/PrecinctFinder/precinctSummary?county=FL-BAY&precinct=%2011",
+   "source_url": "https://www.voterfocus.com/PrecinctFinder/precinctDirectory?county=FL-BAY",
+   "lat_lon": [
+    30.19277,
+    -85.757604
+   ]
+  },
+  {
+   "precinct": "12",
+   "name": "LaQuinta Inn",
+   "address": "7115 Coastal Palms Blvd",
+   "city": "Panama City Beach",
+   "zip": "32408",
+   "url": "https://www.voterfocus.com/PrecinctFinder/precinctSummary?county=FL-BAY&precinct=%2012",
+   "source_url": "https://www.voterfocus.com/PrecinctFinder/precinctDirectory?county=FL-BAY",
+   "lat_lon": [
+    30.174374,
+    -85.76158
+   ]
+  },
+  {
+   "precinct": "13",
+   "name": "Captain Andersons Event Center",
+   "address": "5550 N Lagoon Dr #2",
+   "city": "Panama City Beach",
+   "zip": "32408",
+   "url": "https://www.voterfocus.com/PrecinctFinder/precinctSummary?county=FL-BAY&precinct=%2013",
+   "source_url": "https://www.voterfocus.com/PrecinctFinder/precinctDirectory?county=FL-BAY",
+   "lat_lon": [
+    30.148548,
+    -85.746493
+   ]
+  },
+  {
+   "precinct": "14",
+   "name": "Frank Nelson Building",
+   "address": "4201 W 22nd St",
+   "city": "Panama City",
+   "zip": "32405",
+   "url": "https://www.voterfocus.com/PrecinctFinder/precinctSummary?county=FL-BAY&precinct=%2014",
+   "source_url": "https://www.voterfocus.com/PrecinctFinder/precinctDirectory?county=FL-BAY",
+   "lat_lon": [
+    30.189295,
+    -85.716053
+   ]
+  },
+  {
+   "precinct": "15",
+   "name": "Bay County Public Library",
+   "address": "898 W 11th St",
+   "city": "Panama City",
+   "zip": "32401",
+   "url": "https://www.voterfocus.com/PrecinctFinder/precinctSummary?county=FL-BAY&precinct=%2015",
+   "source_url": "https://www.voterfocus.com/PrecinctFinder/precinctDirectory?county=FL-BAY",
+   "lat_lon": [
+    30.168482,
+    -85.672826
+   ]
+  },
+  {
+   "precinct": "16",
+   "name": "Shaddai Shrine Center",
+   "address": "1101 W 19th St",
+   "city": "Panama City",
+   "zip": "32405",
+   "url": "https://www.voterfocus.com/PrecinctFinder/precinctSummary?county=FL-BAY&precinct=%2016",
+   "source_url": "https://www.voterfocus.com/PrecinctFinder/precinctDirectory?county=FL-BAY",
+   "lat_lon": [
+    30.182094,
+    -85.679098
+   ]
+  },
+  {
+   "precinct": "17",
+   "name": "Calvary Panama City",
+   "address": "3701 W Highway 390",
+   "city": "Panama City",
+   "zip": "32405",
+   "url": "https://www.voterfocus.com/PrecinctFinder/precinctSummary?county=FL-BAY&precinct=%2017",
+   "source_url": "https://www.voterfocus.com/PrecinctFinder/precinctDirectory?county=FL-BAY",
+   "lat_lon": [
+    30.233312,
+    -85.602817
+   ]
+  },
+  {
+   "precinct": "18",
+   "name": "Lynn Haven Methodist Church",
+   "address": "3203 Minnesota Ave",
+   "city": "Panama City",
+   "zip": "32405",
+   "url": "https://www.voterfocus.com/PrecinctFinder/precinctSummary?county=FL-BAY&precinct=%2018",
+   "source_url": "https://www.voterfocus.com/PrecinctFinder/precinctDirectory?county=FL-BAY",
+   "lat_lon": [
+    30.207413,
+    -85.646439
+   ]
+  },
+  {
+   "precinct": "19",
+   "name": "Lynn Haven Senior Center",
+   "address": "905 Pennsylvania Ave",
+   "city": "Lynn Haven",
+   "zip": "32444",
+   "url": "https://www.voterfocus.com/PrecinctFinder/precinctSummary?county=FL-BAY&precinct=%2019",
+   "source_url": "https://www.voterfocus.com/PrecinctFinder/precinctDirectory?county=FL-BAY",
+   "lat_lon": [
+    30.245052,
+    -85.647044
+   ]
+  },
+  {
+   "precinct": "20",
+   "name": "Palo Alto Church of Christ",
+   "address": "3119 N Highway 231",
+   "city": "Panama City",
+   "zip": "32405",
+   "url": "https://www.voterfocus.com/PrecinctFinder/precinctSummary?county=FL-BAY&precinct=%2020",
+   "source_url": "https://www.voterfocus.com/PrecinctFinder/precinctDirectory?county=FL-BAY",
+   "lat_lon": [
+    30.207899,
+    -85.615183
+   ]
+  },
+  {
+   "precinct": "21",
+   "name": "MLK Jr Recreation Center",
+   "address": "705 E 14th Ct",
+   "city": "Panama City",
+   "zip": "32401",
+   "url": "https://www.voterfocus.com/PrecinctFinder/precinctSummary?county=FL-BAY&precinct=%2021",
+   "source_url": "https://www.voterfocus.com/PrecinctFinder/precinctDirectory?county=FL-BAY",
+   "lat_lon": [
+    30.174416,
+    -85.648717
+   ]
+  },
+  {
+   "precinct": "22",
+   "name": "Daffin Park Clubhouse",
+   "address": "320 Kraft Ave",
+   "city": "Panama City",
+   "zip": "32401",
+   "url": "https://www.voterfocus.com/PrecinctFinder/precinctSummary?county=FL-BAY&precinct=%2022",
+   "source_url": "https://www.voterfocus.com/PrecinctFinder/precinctDirectory?county=FL-BAY",
+   "lat_lon": [
+    30.154229,
+    -85.621416
+   ]
+  },
+  {
+   "precinct": "23",
+   "name": "1st Baptist Church of Callaway",
+   "address": "6930 E Hwy 22",
+   "city": "Panama City",
+   "zip": "32404",
+   "url": "https://www.voterfocus.com/PrecinctFinder/precinctSummary?county=FL-BAY&precinct=%2023",
+   "source_url": "https://www.voterfocus.com/PrecinctFinder/precinctDirectory?county=FL-BAY",
+   "lat_lon": [
+    30.152866,
+    -85.573552
+   ]
+  },
+  {
+   "precinct": "24",
+   "name": "Callaway Arts & Conference Center",
+   "address": "500 Callaway Pkwy",
+   "city": "Panama City",
+   "zip": "32404",
+   "url": "https://www.voterfocus.com/PrecinctFinder/precinctSummary?county=FL-BAY&precinct=%2024",
+   "source_url": "https://www.voterfocus.com/PrecinctFinder/precinctDirectory?county=FL-BAY",
+   "lat_lon": [
+    30.15637,
+    -85.547018
+   ]
+  },
+  {
+   "precinct": "25",
+   "name": "Parker Community Center",
+   "address": "935 W Park St",
+   "city": "Panama City",
+   "zip": "32404",
+   "url": "https://www.voterfocus.com/PrecinctFinder/precinctSummary?county=FL-BAY&precinct=%2025",
+   "source_url": "https://www.voterfocus.com/PrecinctFinder/precinctDirectory?county=FL-BAY",
+   "lat_lon": [
+    30.129705,
+    -85.605051
+   ]
+  },
+  {
+   "precinct": "26",
+   "name": "1st Baptist of Mexico Beach",
+   "address": "823 N 15th St",
+   "city": "Mexico Beach",
+   "zip": "32456",
+   "url": "https://www.voterfocus.com/PrecinctFinder/precinctSummary?county=FL-BAY&precinct=%2026",
+   "source_url": "https://www.voterfocus.com/PrecinctFinder/precinctDirectory?county=FL-BAY",
+   "lat_lon": [
+    29.942051,
+    -85.395571
+   ]
+  },
+  {
+   "precinct": "27",
+   "name": "Boardwalk Convention Center",
+   "address": "9600 S Thomas Drive",
+   "city": "Panama City Beach",
+   "zip": "32408",
+   "url": "https://www.voterfocus.com/PrecinctFinder/precinctSummary?county=FL-BAY&precinct=%2027",
+   "source_url": "https://www.voterfocus.com/PrecinctFinder/precinctDirectory?county=FL-BAY",
+   "lat_lon": [
+    30.172397,
+    -85.7999
+   ]
+  },
+  {
+   "precinct": "28",
+   "name": "Majette Park Community Center",
+   "address": "5304 Old Majette Tower Rd",
+   "city": "Panama City",
+   "zip": "32404",
+   "url": "https://www.voterfocus.com/PrecinctFinder/precinctSummary?county=FL-BAY&precinct=%2028",
+   "source_url": "https://www.voterfocus.com/PrecinctFinder/precinctDirectory?county=FL-BAY",
+   "lat_lon": [
+    30.244858,
+    -85.521115
+   ]
+  },
+  {
+   "precinct": "29",
+   "name": "Southport Community Building",
+   "address": "7734 Franklin Ave",
+   "city": "Southport",
+   "zip": "32409",
+   "url": "https://www.voterfocus.com/PrecinctFinder/precinctSummary?county=FL-BAY&precinct=%2029",
+   "source_url": "https://www.voterfocus.com/PrecinctFinder/precinctDirectory?county=FL-BAY",
+   "lat_lon": [
+    30.29085,
+    -85.643016
+   ]
+  },
+  {
+   "precinct": "30",
+   "name": "Callaway Community Center",
+   "address": "530 Beulah Ave",
+   "city": "Callaway",
+   "zip": "32404",
+   "url": "https://www.voterfocus.com/PrecinctFinder/precinctSummary?county=FL-BAY&precinct=%2030",
+   "source_url": "https://www.voterfocus.com/PrecinctFinder/precinctDirectory?county=FL-BAY",
+   "lat_lon": [
+    30.136825,
+    -85.570664
+   ]
+  }
+ ],
+ "geocode_cache": {
+  "18906 Highway 231, Fountain, FL 32438": [
+   30.492075,
+   -85.416519
+  ],
+  "11771 Hwy 231, Youngstown, FL 32466": [
+   30.358418,
+   -85.439008
+  ],
+  "5940 Highway 2311, Panama City, FL 32404": [
+   30.257046,
+   -85.586275
+  ],
+  "7814 Highway 2301, Panama City, FL 32404": [
+   30.291303,
+   -85.53941
+  ],
+  "13010 Hwy 77, Southport, FL 32409": [
+   30.383064,
+   -85.682747
+  ],
+  "5625 Venture Crossings Blvd, Panama City, FL 32409": [
+   30.335579,
+   -85.798027
+  ],
+  "245 Wisteria Ln, Panama City Beach, FL 32413": [
+   30.248611,
+   -85.934729
+  ],
+  "17495 Panama City Beach Pkwy, Panama City Beach, FL 32413": [
+   30.233908,
+   -85.901332
+  ],
+  "16200 Panama City Beach Pkwy, Panama City Beach, FL 32413": [
+   30.230878,
+   -85.877308
+  ],
+  "423 Lyndell Ln, Panama City Beach, FL 32407": [
+   30.19795,
+   -85.830129
+  ],
+  "213 Carolyn Ave, Panama City Beach, FL 32407": [
+   30.19277,
+   -85.757604
+  ],
+  "7115 Coastal Palms Blvd, Panama City Beach, FL 32408": [
+   30.174374,
+   -85.76158
+  ],
+  "5550 N Lagoon Dr #2, Panama City Beach, FL 32408": [
+   30.148548,
+   -85.746493
+  ],
+  "4201 W 22nd St, Panama City, FL 32405": [
+   30.189295,
+   -85.716053
+  ],
+  "898 W 11th St, Panama City, FL 32401": [
+   30.168482,
+   -85.672826
+  ],
+  "1101 W 19th St, Panama City, FL 32405": [
+   30.182094,
+   -85.679098
+  ],
+  "3701 W Highway 390, Panama City, FL 32405": [
+   30.233312,
+   -85.602817
+  ],
+  "3203 Minnesota Ave, Panama City, FL 32405": [
+   30.207413,
+   -85.646439
+  ],
+  "905 Pennsylvania Ave, Lynn Haven, FL 32444": [
+   30.245052,
+   -85.647044
+  ],
+  "3119 N Highway 231, Panama City, FL 32405": [
+   30.207899,
+   -85.615183
+  ],
+  "705 E 14th Ct, Panama City, FL 32401": [
+   30.174416,
+   -85.648717
+  ],
+  "320 Kraft Ave, Panama City, FL 32401": [
+   30.154229,
+   -85.621416
+  ],
+  "6930 E Hwy 22, Panama City, FL 32404": [
+   30.152866,
+   -85.573552
+  ],
+  "500 Callaway Pkwy, Panama City, FL 32404": [
+   30.15637,
+   -85.547018
+  ],
+  "935 W Park St, Panama City, FL 32404": [
+   30.129705,
+   -85.605051
+  ],
+  "823 N 15th St, Mexico Beach, FL 32456": [
+   29.942051,
+   -85.395571
+  ],
+  "9600 S Thomas Drive, Panama City Beach, FL 32408": [
+   30.172397,
+   -85.7999
+  ],
+  "5304 Old Majette Tower Rd, Panama City, FL 32404": [
+   30.244858,
+   -85.521115
+  ],
+  "7734 Franklin Ave, Southport, FL 32409": [
+   30.29085,
+   -85.643016
+  ],
+  "530 Beulah Ave, Callaway, FL 32404": [
+   30.136825,
+   -85.570664
+  ],
+  "3119 N Hwy 231, Panama City, FL 32405": [
+   30.207899,
+   -85.615183
+  ],
+  "830 W 11th St, Panama City, FL 32401": [
+   30.170264,
+   -85.672452
+  ]
+ }
+}
