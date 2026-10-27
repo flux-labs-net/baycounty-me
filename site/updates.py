@@ -9,6 +9,9 @@ from datetime import datetime, timezone
 import html
 
 CHANGES = [
+    {'date': '2026-10-27', 'title': 'Public schools',
+     'text': "A new Schools page covers every public school in Bay County, district and charter. Type an address to see its zoned elementary, middle and high school (from the school district's attendance zones); see the school calendar, from days off and early release to graduations and School Board meetings, refreshed daily; and open any school for its students, teachers, enrollment since 2016 and the nonprofit that runs it if it's a charter school. A chart shows district enrollment by year, including the drop after Hurricane Michael, and a list shows the schools that closed since 2016. State school grades and spending per school are being added from the Florida Department of Education. The address report links to the same schools, the API has a new endpoint for the schools zoned for any address, and the apps have the page too.",
+     'pages': ['/schools', '/my-address', '/governments/bay-district-schools', '/open-data', '/developers']},
     {'date': '2026-10-27', 'title': 'Chambers of commerce',
      'text': "A new page covers Bay County's two chambers of commerce, the Bay County Chamber and the Panama City Beach Chamber: who sits on their boards and staff (each name links to a profile with the person's other boards and records), the organizations those board members represent and what local governments paid them, upcoming chamber and community events, regular programs such as First Friday and Friday at the Beach, each chamber's IRS filings, and the tourism agency money paid to them. Board lists are copied from the chambers' own websites; no contact details are published. The apps have the same screen.",
      'pages': ['/chambers', '/connections/nonprofits', '/people', '/open-data', '/developers']},

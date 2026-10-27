@@ -19,7 +19,9 @@ GOV_COLS = {'chambers': [], 'chamber-leaders': [], 'chamber-events': [], 'owner-
             'connections-gifts': ['official_gov_id', 'office'], 'connections-payments': ['payer_gov_id'], 'donor-contracts': ['contract_gov_id'], 'connections-payees': [], 'connections-links': [],
             'vendors-directory': [], 'people-directory': [], 'glossary-terms': [], 'site-updates': [], 'tax-districts': ['district'],
             'savings-opportunities': ['government'], 'savings-evidence': [], 'business-donor-sunbiz': ['gov_id', 'office'], 'shared-owner-groups': [], 'over-limit-gifts': [], 'official-businesses': ['gov_id'], 'official-business-links': ['gov_id'], 'checkbook-payments': ['gov_id'], 'budget-actuals': ['gov_id']}
-FIXED_GOV = {'bed-tax-collections': 'county', 'property-tax-exemptions': 'county'}  # county bed tax in every zone; the county-wide tax roll
+# county bed tax in every zone; the county-wide tax roll; the school datasets are all the school district's
+FIXED_GOV = {'bed-tax-collections': 'county', 'property-tax-exemptions': 'county',
+             'schools': 'schools', 'school-grades': 'schools', 'school-spending': 'schools', 'school-enrollment': 'schools', 'school-calendar': 'schools', 'school-zones': 'schools'}
 
 
 VENDOR_COL = {'contracts': 'vendor', 'change-orders': 'vendor', 'emergency-purchases': 'vendor', 'cra-payments': 'payee', 'vendor-payments': 'vendor',
@@ -129,7 +131,8 @@ FIRST_YEAR_COL = {'votes': 'date', 'member-votes': 'date', 'contracts': 'date', 
                   'officeholder-terms': 'end_date', 'official-businesses': 'closed_year', 'official-business-links': 'last_date',
                   'business-donor-sunbiz': 'last_date', 'over-limit-gifts': 'last_date', 'owner-gifts': 'last_date',
                   'checkbook-payments': 'fiscal_year', 'budget-actuals': 'fiscal_year', 'cra-tax-increment': 'fiscal_year',
-                  'cra-increment-checks': 'fiscal_year', 'campaign-contributions-2026': 'date', 'campaign-contributions-history': 'date', 'meetings': 'start', 'chamber-leaders': 'year'}
+                  'cra-increment-checks': 'fiscal_year', 'campaign-contributions-2026': 'date', 'campaign-contributions-history': 'date', 'meetings': 'start', 'chamber-leaders': 'year',
+                  'school-grades': 'year', 'school-spending': 'year', 'school-enrollment': 'year', 'school-calendar': 'starts'}
 DROPPED_BEFORE_FIRST_YEAR = {}  # dataset -> rows the last check dropped (should stay empty: fix the ingestion instead)
 
 

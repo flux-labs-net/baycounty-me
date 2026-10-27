@@ -3737,7 +3737,7 @@
    "id": "site-updates",
    "title": "What's new",
    "description": "Each change to the site's data and pages, newest first.",
-   "rows": 59,
+   "rows": 60,
    "columns": [
     {
      "name": "date",
@@ -6693,7 +6693,7 @@
    "id": "entity-connections",
    "title": "Connections between people, companies and organizations",
    "description": "Every documented connection between two entities in entity-profiles, totalled per pair and kind: a government paid a payee, an organization gave to an official's or candidate's campaign, an official voted on a company's contracts, a person sits on a nonprofit's board or runs a business, a nonprofit gave a grant, two payees share a project. Each row has its source. Individual campaign donors are included only when they run a registered business (owner-gifts); officials' board seats and businesses are added by the API once checked by hand.",
-   "rows": 19716,
+   "rows": 19726,
    "columns": [
     {
      "name": "link_id",
@@ -6754,6 +6754,7 @@
      "values": [
       "board",
       "candidate",
+      "charter",
       "gift",
       "grant",
       "paid",
@@ -6778,6 +6779,7 @@
       "paid",
       "ran for office in",
       "runs",
+      "runs a charter school for",
       "served",
       "serves",
       "shares a project or address with",
@@ -7019,7 +7021,7 @@
    "id": "data-sources",
    "title": "Where the data comes from",
    "description": "Every source BayCounty.me takes records from, one row per source: the topic, the government it covers (or state and federal databases), the link, how we get it (automatic fetch, downloaded and read by hand, a state or federal bulk file, or a live lookup), how often, what we take from it, how we process it and the checks we run.",
-   "rows": 117,
+   "rows": 121,
    "columns": [
     {
      "name": "topic",
@@ -7042,6 +7044,7 @@
       "Pay",
       "Property tax",
       "Public records contacts",
+      "Public schools",
       "Redevelopment agencies (CRAs)",
       "Sales tax projects",
       "Tourist tax",
@@ -7071,6 +7074,7 @@
       "records",
       "salaries",
       "sales-tax",
+      "schools",
       "tourist-tax",
       "votes"
      ]
@@ -7142,6 +7146,8 @@
       "As pages change",
       "As reports post",
       "As seats change",
+      "As the district posts events",
+      "As the district redraws zones",
       "As updated",
       "Daily",
       "Each election",
@@ -7154,7 +7160,9 @@
       "Monthly",
       "Once",
       "Quarterly",
-      "Weekly"
+      "Weekly",
+      "Yearly (about a year behind)",
+      "Yearly (grades in July)"
      ]
     },
     {
@@ -7175,6 +7183,7 @@
       "CRA spending is read from CRA annual reports, agendas, budgets and audits, one ledger line per payment or project. Tax increment comes from CRA reports, audits and budgets, split between the county and city by millage.",
       "Candidate lists, status and official results come from the Supervisor of Elections. Platforms come from candidates' own sites.",
       "Each government's agenda system is checked every 30 minutes on weekdays (when a notice email arrives) and swept twice a day. Every agenda, packet and minutes file is downloaded and fingerprinted; a changed file is kept as a new version. An AI model reads each new agenda into a list of items using only the agenda's own words (it is told not to guess). The meetings list combines the agenda system with the government's calendar; boards with no calendar get dates from their regular schedule, marked \"expected\".",
+      "Every public school, its students and teachers since 2015-16 come from the U.S. Department of Education's school directory, read weekly through the Urban Institute's Education Data API. Attendance zones are read weekly from the county GIS server and the calendar every day from the district's website. State school grades and per-pupil spending files are read by hand, because the state's website turns automated readers away.",
       "Every tax-exempt organization with a county address is pulled from IRS data, with every 990, 990-EZ and 990-PF e-filed since 2019 (board members, pay, grants, revenue). State charity registrations and state corporate filings are joined in.",
       "FEMA Public Assistance projects and applicants for disaster DR-4399 are downloaded from OpenFEMA every week.",
       "Infrastructure sales tax projects are downloaded from Bay County's map server every week and matched to the published project schedule.",
@@ -7196,6 +7205,7 @@
       "Board members are joined to other local filings by first and last name, and to an official only where the chamber names their government post. Organizations are joined to governments, paid companies, nonprofits or one Sunbiz filing with the exact same name.",
       "Each line carries its source and a confidence level; amounts inside a larger total are shown but counted once. Estimates are checked against official county figures.",
       "Each term names its source. Stretches nobody could confirm are marked unconfirmed, not guessed.",
+      "Each zone is matched to its school by hand once. Charter schools are linked by hand to the nonprofit that runs them.",
       "Every agency-month matches the register's printed total to the cent. Payments to private individuals are counted, not listed.",
       "Failed fetches are logged and emailed to the site admins. Every version of every file is kept.",
       "Itemized sums are checked against the Supervisor's summary totals. Individual donors are only counted, never named, unless they run a registered business.",
@@ -7238,6 +7248,7 @@
       "/public-money/tourist-tax",
       "/public-money/votes",
       "/records-request",
+      "/schools",
       "/updates"
      ]
     },
@@ -7580,7 +7591,7 @@
    "id": "site-menu",
    "title": "Site menu",
    "description": "Every link in the site's main menu, one row per link, in English and Spanish: the section and the question it answers, the link's place in the section, and the section's start-here page. place_id is the place the menu belongs to (fl-bay = Bay County), so a menu for another place sits beside it.",
-   "rows": 54,
+   "rows": 55,
    "columns": [
     {
      "name": "place_id",
@@ -8687,6 +8698,741 @@
    "json": "/downloads/chamber-events.json",
    "csv": "/downloads/chamber-events.csv",
    "api": "/api/v1/datasets/chamber-events"
+  },
+  {
+   "id": "schools",
+   "title": "Public schools",
+   "description": "One row per public school in the district, open now or closed since 2016: state school number (school_id, district-school), federal id, level, grades taught, district or charter, address and phone of the school building, enrollment and teachers for the latest federal school directory year, students per teacher, share of students eligible for free or reduced-price lunch, latest state school grade and the one before it, latest per-student spending, and which attendance zone levels feed it. operator_entity_id is the nonprofit that runs a charter school (entity-profiles).",
+   "rows": 59,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "school_id",
+     "type": "string"
+    },
+    {
+     "name": "nces_id",
+     "type": "string"
+    },
+    {
+     "name": "name",
+     "type": "string"
+    },
+    {
+     "name": "status",
+     "type": "string",
+     "values": [
+      "Closed",
+      "Open"
+     ]
+    },
+    {
+     "name": "level",
+     "type": "string",
+     "values": [
+      "Combined",
+      "Elementary",
+      "High",
+      "Middle",
+      "Other"
+     ]
+    },
+    {
+     "name": "school_type",
+     "type": "string",
+     "values": [
+      "Alternative",
+      "Career and technical",
+      "Regular",
+      "Special education"
+     ]
+    },
+    {
+     "name": "grades",
+     "type": "string",
+     "values": [
+      "12",
+      "3-12",
+      "6-12",
+      "6-8",
+      "9-12",
+      "K-12",
+      "K-5",
+      "K-8",
+      "PK-12",
+      "PK-4",
+      "PK-5",
+      "PK-8"
+     ]
+    },
+    {
+     "name": "charter",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "virtual",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "operator_entity_id",
+     "type": "string",
+     "values": [
+      "nonprofit:np-261413851",
+      "nonprofit:np-651121807",
+      "nonprofit:np-800688292",
+      "nonprofit:np-861145087",
+      "nonprofit:np-880556695"
+     ]
+    },
+    {
+     "name": "address",
+     "type": "string"
+    },
+    {
+     "name": "city",
+     "type": "string",
+     "values": [
+      "Lynn Haven",
+      "Panama City",
+      "Panama City Beach",
+      "Southport",
+      "Tyndall AFB",
+      "Youngstown"
+     ]
+    },
+    {
+     "name": "zip",
+     "type": "string",
+     "values": [
+      "32401",
+      "32403",
+      "32404",
+      "32405",
+      "32407",
+      "32408",
+      "32409",
+      "32413",
+      "32444",
+      "32466"
+     ]
+    },
+    {
+     "name": "phone",
+     "type": "string"
+    },
+    {
+     "name": "latitude",
+     "type": "number"
+    },
+    {
+     "name": "longitude",
+     "type": "number"
+    },
+    {
+     "name": "enrollment",
+     "type": "number"
+    },
+    {
+     "name": "enrollment_year",
+     "type": "string",
+     "values": [
+      "2024-25"
+     ]
+    },
+    {
+     "name": "last_year_open",
+     "type": "string",
+     "values": [
+      "2015-16",
+      "2017-18",
+      "2019-20",
+      "2020-21",
+      "2022-23"
+     ]
+    },
+    {
+     "name": "teachers_fte",
+     "type": "number"
+    },
+    {
+     "name": "students_per_teacher",
+     "type": "number"
+    },
+    {
+     "name": "free_reduced_lunch_pct",
+     "type": "number"
+    },
+    {
+     "name": "latest_grade",
+     "type": "string"
+    },
+    {
+     "name": "latest_grade_year",
+     "type": "string"
+    },
+    {
+     "name": "prior_grade",
+     "type": "string"
+    },
+    {
+     "name": "grades_on_record",
+     "type": "number"
+    },
+    {
+     "name": "latest_per_student",
+     "type": "string"
+    },
+    {
+     "name": "latest_spending_year",
+     "type": "string"
+    },
+    {
+     "name": "zoned_levels",
+     "type": "string",
+     "values": [
+      "Elementary",
+      "Elementary, Middle",
+      "Elementary, Middle, High",
+      "High",
+      "Middle",
+      "Middle, High"
+     ]
+    },
+    {
+     "name": "district",
+     "type": "string",
+     "values": [
+      "Bay District Schools"
+     ]
+    },
+    {
+     "name": "page_url",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://educationdata.urban.org/api/v1/schools/ccd/directory/2024/?fips=12&leaid=1200090"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "schools"
+     ]
+    }
+   ],
+   "json": "/downloads/schools.json",
+   "csv": "/downloads/schools.csv",
+   "api": "/api/v1/datasets/schools"
+  },
+  {
+   "id": "school-grades",
+   "title": "School grades",
+   "description": "Every Florida school grade (A to F, or I for incomplete) on record for each school since 2016, from the Florida Department of Education's school grades file, one row per school and year. year is the school year's end (2025 = 2024-25). Components (percent of students: English and math achievement and learning gains, science, social studies, acceleration, graduation rate; total points and percent of points) are filled in for the latest year in the file. No grades were given for 2019-20 (testing was canceled); 2020-21 grades were only given to schools that asked; 2022-23 grades were an informational baseline (informational_baseline true).",
+   "rows": 0,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string"
+    },
+    {
+     "name": "school_id",
+     "type": "string"
+    },
+    {
+     "name": "school",
+     "type": "string"
+    },
+    {
+     "name": "school_year",
+     "type": "string"
+    },
+    {
+     "name": "grade",
+     "type": "string"
+    },
+    {
+     "name": "informational_baseline",
+     "type": "boolean"
+    },
+    {
+     "name": "year",
+     "type": "number"
+    },
+    {
+     "name": "ela_achievement",
+     "type": "number"
+    },
+    {
+     "name": "ela_gains",
+     "type": "number"
+    },
+    {
+     "name": "ela_gains_low25",
+     "type": "number"
+    },
+    {
+     "name": "math_achievement",
+     "type": "number"
+    },
+    {
+     "name": "math_gains",
+     "type": "number"
+    },
+    {
+     "name": "math_gains_low25",
+     "type": "number"
+    },
+    {
+     "name": "science_achievement",
+     "type": "number"
+    },
+    {
+     "name": "social_studies_achievement",
+     "type": "number"
+    },
+    {
+     "name": "middle_acceleration",
+     "type": "number"
+    },
+    {
+     "name": "graduation_rate",
+     "type": "number"
+    },
+    {
+     "name": "college_career_acceleration",
+     "type": "number"
+    },
+    {
+     "name": "total_points",
+     "type": "number"
+    },
+    {
+     "name": "percent_of_points",
+     "type": "number"
+    },
+    {
+     "name": "percent_tested",
+     "type": "number"
+    },
+    {
+     "name": "pct_economically_disadvantaged",
+     "type": "number"
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/school-grades.json",
+   "csv": "/downloads/school-grades.csv",
+   "api": "/api/v1/datasets/school-grades"
+  },
+  {
+   "id": "school-spending",
+   "title": "Spending per school",
+   "description": "Per-student spending at each school from the Florida Department of Education's yearly Every Student Succeeds Act (ESSA) per-pupil expenditure reports: federal, state and local, and total, one row per school and year (year = the school year's end). estimated_total multiplies the per-student figure by that year's enrollment from the federal school directory, so it is an estimate, not a reported total.",
+   "rows": 0,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string"
+    },
+    {
+     "name": "school_id",
+     "type": "string"
+    },
+    {
+     "name": "school",
+     "type": "string"
+    },
+    {
+     "name": "year",
+     "type": "number"
+    },
+    {
+     "name": "school_year",
+     "type": "string"
+    },
+    {
+     "name": "federal_per_student",
+     "type": "number"
+    },
+    {
+     "name": "state_local_per_student",
+     "type": "number"
+    },
+    {
+     "name": "total_per_student",
+     "type": "number"
+    },
+    {
+     "name": "enrollment",
+     "type": "number"
+    },
+    {
+     "name": "estimated_total",
+     "type": "number"
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/school-spending.json",
+   "csv": "/downloads/school-spending.csv",
+   "api": "/api/v1/datasets/school-spending"
+  },
+  {
+   "id": "school-enrollment",
+   "title": "School enrollment by year",
+   "description": "Students enrolled at each public school each school year since 2015-16 (year = the school year's end), from the U.S. Department of Education's Common Core of Data school directory.",
+   "rows": 486,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "school_id",
+     "type": "string"
+    },
+    {
+     "name": "school",
+     "type": "string"
+    },
+    {
+     "name": "year",
+     "type": "number"
+    },
+    {
+     "name": "school_year",
+     "type": "string",
+     "values": [
+      "2015-16",
+      "2016-17",
+      "2017-18",
+      "2018-19",
+      "2019-20",
+      "2020-21",
+      "2021-22",
+      "2022-23",
+      "2023-24",
+      "2024-25"
+     ]
+    },
+    {
+     "name": "enrollment",
+     "type": "number"
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://educationdata.urban.org/api/v1/schools/ccd/directory/2015/?fips=12&leaid=1200090",
+      "https://educationdata.urban.org/api/v1/schools/ccd/directory/2016/?fips=12&leaid=1200090",
+      "https://educationdata.urban.org/api/v1/schools/ccd/directory/2017/?fips=12&leaid=1200090",
+      "https://educationdata.urban.org/api/v1/schools/ccd/directory/2018/?fips=12&leaid=1200090",
+      "https://educationdata.urban.org/api/v1/schools/ccd/directory/2019/?fips=12&leaid=1200090",
+      "https://educationdata.urban.org/api/v1/schools/ccd/directory/2020/?fips=12&leaid=1200090",
+      "https://educationdata.urban.org/api/v1/schools/ccd/directory/2021/?fips=12&leaid=1200090",
+      "https://educationdata.urban.org/api/v1/schools/ccd/directory/2022/?fips=12&leaid=1200090",
+      "https://educationdata.urban.org/api/v1/schools/ccd/directory/2023/?fips=12&leaid=1200090",
+      "https://educationdata.urban.org/api/v1/schools/ccd/directory/2024/?fips=12&leaid=1200090"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "schools"
+     ]
+    }
+   ],
+   "json": "/downloads/school-enrollment.json",
+   "csv": "/downloads/school-enrollment.csv",
+   "api": "/api/v1/datasets/school-enrollment"
+  },
+  {
+   "id": "school-calendar",
+   "title": "School district calendar",
+   "description": "The school district's calendar as posted on its website: first and last day, holidays and breaks, no-school days, early release days, end of each grading period, graduations and School Board meetings. kind is first-day, last-day, no-school, break, early-release, grading, graduation, board-meeting or other. starts and ends are local dates (all_day) or local date and time. Refreshed daily; past events of the school year stay on file.",
+   "rows": 25,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "event_id",
+     "type": "string"
+    },
+    {
+     "name": "title",
+     "type": "string",
+     "values": [
+      "Arnold Graduation",
+      "Bay Graduation",
+      "Bay Virtual Graduation",
+      "Bozeman Graduation",
+      "Christmas Holidays",
+      "End of Second Nine Weeks",
+      "End of Third Nine Weeks",
+      "Good Friday - No School for Students",
+      "Haney Graduation",
+      "Last Day of School - Early Release Day",
+      "MKL and Mosley Graduations",
+      "Martin Luther King Jr's Birthday",
+      "Presidents' Day",
+      "Records Word Day - No school for Students",
+      "Rosenwald Graduation",
+      "Rutherford Graduation",
+      "School Board Meeting",
+      "School Board Meeting - Organizational Meeting",
+      "Spring Break",
+      "Teacher PLC Planning Day - No School for Students",
+      "Teacher Planning Day - No school for students",
+      "Thanksgiving Holiday - No school for students",
+      "Veterans Day - No school for students"
+     ]
+    },
+    {
+     "name": "kind",
+     "type": "string",
+     "values": [
+      "board-meeting",
+      "break",
+      "grading",
+      "graduation",
+      "last-day",
+      "no-school"
+     ]
+    },
+    {
+     "name": "starts",
+     "type": "string"
+    },
+    {
+     "name": "ends",
+     "type": "string"
+    },
+    {
+     "name": "all_day",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "venue",
+     "type": "string",
+     "values": [
+      "1311 Balboa Ave, Panama City, FL 32401"
+     ]
+    },
+    {
+     "name": "school_year",
+     "type": "string",
+     "values": [
+      "2026-27"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://www.bay.k12.fl.us/o/bds/page/academic-calendar"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "schools"
+     ]
+    }
+   ],
+   "json": "/downloads/school-calendar.json",
+   "csv": "/downloads/school-calendar.csv",
+   "api": "/api/v1/datasets/school-calendar"
+  },
+  {
+   "id": "school-zones",
+   "title": "School attendance zones",
+   "description": "The school district's attendance zones (which elementary, middle and high school serves each part of the county), from the county GIS server, one row per zone with the school it feeds (school_id), area in square miles, the county's last edit date and the zone's shape as GeoJSON (geometry, longitude/latitude, simplified to about 40 meters). mou_area marks zones the county map labels MOU (covered by a separate agreement). Choice, magnet and charter schools take students from outside their zone.",
+   "rows": 36,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "zone_id",
+     "type": "string"
+    },
+    {
+     "name": "level",
+     "type": "string",
+     "values": [
+      "Elementary",
+      "High",
+      "Middle"
+     ]
+    },
+    {
+     "name": "zone_name",
+     "type": "string"
+    },
+    {
+     "name": "school_id",
+     "type": "string",
+     "values": [
+      "03-0061",
+      "03-0071",
+      "03-0081",
+      "03-0091",
+      "03-0101",
+      "03-0111",
+      "03-0131",
+      "03-0151",
+      "03-0161",
+      "03-0171",
+      "03-0201",
+      "03-0211",
+      "03-0221",
+      "03-0251",
+      "03-0262",
+      "03-0331",
+      "03-0341",
+      "03-0391",
+      "03-0461",
+      "03-0471",
+      "03-0491",
+      "03-0501",
+      "03-0511",
+      "03-0521",
+      "03-0541",
+      "03-0551",
+      "03-0571",
+      "03-0611"
+     ]
+    },
+    {
+     "name": "school",
+     "type": "string",
+     "values": [
+      "A. Crawford Mosley High School",
+      "A. Gary Walsingham Academy",
+      "Bay High School",
+      "Breakfast Point Academy",
+      "Callaway Elementary School",
+      "Cedar Grove Elementary School",
+      "Deane Bozeman School",
+      "Deer Point Elementary School",
+      "Hiland Park Elementary School",
+      "Hutchison Beach Elementary School",
+      "J.R. Arnold High School",
+      "Jinks Middle School",
+      "Lucille Moore Elementary School",
+      "Lynn Haven Elementary School",
+      "Merriam Cherry Street Elementary",
+      "Merritt Brown Middle School",
+      "Mowat Middle School",
+      "Northside Elementary School",
+      "Oscar Patterson Academy",
+      "Parker Elementary School",
+      "Patronis Elementary School",
+      "Rutherford High School",
+      "Southport Elementary School",
+      "Surfside Middle School",
+      "Tommy Smith Elementary School",
+      "Tyndall Academy",
+      "Waller Elementary School",
+      "West Bay Elementary School"
+     ]
+    },
+    {
+     "name": "mou_area",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "pieces",
+     "type": "number"
+    },
+    {
+     "name": "area_sq_mi",
+     "type": "number"
+    },
+    {
+     "name": "last_edited",
+     "type": "string",
+     "values": [
+      "2026-09-23"
+     ]
+    },
+    {
+     "name": "geometry",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://gis.baycountyfl.gov/arcgis/rest/services/SchoolAttendanceZones/MapServer/0",
+      "https://gis.baycountyfl.gov/arcgis/rest/services/SchoolAttendanceZones/MapServer/1",
+      "https://gis.baycountyfl.gov/arcgis/rest/services/SchoolAttendanceZones/MapServer/2"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "schools"
+     ]
+    }
+   ],
+   "json": "/downloads/school-zones.json",
+   "csv": "/downloads/school-zones.csv",
+   "api": "/api/v1/datasets/school-zones"
   },
   {
    "id": "tax-districts",

@@ -63,8 +63,9 @@ def grade_label(g):
 
 def title_case(s):
     s = (s or '').title()
-    s = re.sub(r"\b(Of|At|In|And|The)\b", lambda m: m.group(1).lower(), s)
-    s = re.sub(r'\b(Ii|Iii|Iv|Ese|Sabl|Mlk)\b', lambda m: m.group(1).upper(), s)
+    s = re.sub(r"(?<!^)\b(Of|At|In|And|The|For)\b", lambda m: m.group(1).lower(), s)
+    s = re.sub(r'\b(Ii|Iii|Iv|Ese|Sabl|Mlk|Afb|Ami)\b', lambda m: m.group(1).upper(), s)
+    s = s.replace('Amikids', 'AMIkids')
     s = re.sub(r"\b([A-Z])\.([a-z])", lambda m: m.group(1) + '.' + m.group(2).upper(), s)
     s = s.replace('J.R.', 'J.R.').replace(' Inc', ' Inc.').replace('Inc..', 'Inc.')
     return s[0].upper() + s[1:] if s else s
@@ -74,9 +75,12 @@ def fetch_directory(conf, latest):
     """Every school in the district: latest CCD directory year plus each year's enrollment since FIRST_YEAR."""
     q = f"?fips={conf['fips']}&leaid={conf['nces_leaid']}"
     years = {}
-    for y in range(FIRST_YEAR, latest + 1):
+    for y in range(FIRST_YEAR - 1, latest + 1):  # CCD 2015 = the 2015-16 school year, which ends in 2016
         try:
             rows = get(URBAN.format(year=y) + q)['results']
+            for s in rows:  # some years give the school number without the district part ('0061', not '03-0061')
+                if s.get('seasch') and '-' not in s['seasch']:
+                    s['seasch'] = f"{conf['fldoe_district']}-{s['seasch'].zfill(4)}"
             if rows:
                 years[y] = rows
         except Exception as e:  # a year not published yet
@@ -89,15 +93,19 @@ def fetch_directory(conf, latest):
         for s in rows:
             if s.get('enrollment') is not None and s['enrollment'] >= 0:
                 hist.setdefault(s['seasch'], {})[str(y)] = s['enrollment']
+    newest = {}  # each school's newest directory record, so schools that closed since 2016 are kept too
+    for y in sorted(years):
+        for s in years[y]:
+            newest[s['seasch']] = (y, s)
     schools = []
-    for s in years[last]:
-        if s.get('school_status') not in (1, 3, 4, 5, 8):  # open, new, added, changed, reopened
-            continue
+    for sn, (y, s) in newest.items():
+        open_now = y == last and s.get('school_status') in (1, 3, 4, 5, 8)  # open, new, added, changed, reopened
         lo, hi = grade_label(s.get('lowest_grade_offered')), grade_label(s.get('highest_grade_offered'))
         frl = s.get('free_or_reduced_price_lunch')
         enr = s.get('enrollment') if (s.get('enrollment') or 0) > 0 else None
         schools.append({
             'school_number': s['seasch'], 'nces_id': s['ncessch'], 'name_raw': s['school_name'], 'name': title_case(s['school_name']),
+            'status': 'Open' if open_now else 'Closed', 'last_directory_year': y,
             'level': LEVEL.get(s.get('school_level'), 'Other'), 'school_type': TYPE.get(s.get('school_type'), 'Other'),
             'charter': s.get('charter') == 1, 'virtual': s.get('virtual') == 1,
             'grades': f'{lo}-{hi}' if lo and hi and lo != hi else lo,

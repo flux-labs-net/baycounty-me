@@ -40,6 +40,9 @@ fun icon(symbol: String?): ImageVector = when (symbol) {
     "person.badge.clock" -> Icons.Outlined.History
     "building.2", "building" -> Icons.Outlined.Business
     "storefront" -> Icons.Outlined.Storefront
+    "graduationcap" -> Icons.Outlined.School
+    "star" -> Icons.Outlined.StarOutline
+    "xmark.circle" -> Icons.Outlined.HighlightOff
     "sun.max" -> Icons.Outlined.WbSunny
     "repeat" -> Icons.Outlined.Repeat
     "building.columns" -> Icons.Outlined.AccountBalance

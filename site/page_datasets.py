@@ -5,7 +5,7 @@ Every page's data is published as an open-data dataset so it reaches the databas
 individual campaign donors are named only when they run a registered business (owner-gifts); everyone else appears
 only in summed totals. Grant programs' unnamed recipients stay grouped.
 """
-import os, sys
+import os, re, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
@@ -390,6 +390,182 @@ def chamber_events():
     return _chamber_rows()[2]
 
 
+# --- Schools (/schools) -------------------------------------------------------------------------------------------------
+# data/schools/<county>/: schools.json, zones.json and calendar.json (data/schools/fetch_schools.py), grades.json and
+# spending.json (data/schools/fetch_fldoe.py), zone_schools.json (which school each attendance zone feeds, by hand).
+
+SCHOOL_GOV = 'schools'  # the district's gov_id in places/<id>/place.json
+# Charter schools run by a local nonprofit, by state school number (checked by hand against each school's site and
+# the nonprofits dataset). University Academy and Central High aren't matched to a local filing.
+CHARTER_OPERATORS = {
+    '03-0701': 'np-651121807', '03-0711': 'np-651121807', '03-0731': 'np-651121807', '03-0741': 'np-651121807', '03-0751': 'np-651121807',
+    '03-0771': 'np-261413851', '03-0801': 'np-261413851', '03-0781': 'np-861145087', '03-2701': 'np-800688292', '03-0764': 'np-880556695',
+}
+
+
+def _school_files():
+    import json
+    from place import PLACE_ID, PLACE
+    d = os.path.join(HERE, '..', 'data', 'schools', PLACE_ID.split('-', 1)[-1])
+    j = lambda n, default: json.load(open(os.path.join(d, n))) if os.path.exists(os.path.join(d, n)) else default
+    return {'conf': PLACE.get('schools') or {}, 'place': PLACE_ID, 'dir': j('schools.json', None), 'zones': j('zones.json', {'zones': []}),
+            'calendar': j('calendar.json', {'events': []}), 'grades': j('grades.json', {'rows': []}),
+            'spending': j('spending.json', {'rows': [], 'files': []}), 'zone_schools': j('zone_schools.json', {'zones': {}})}
+
+
+def _sy(end_year):
+    """School year label from the year it ends: 2025 -> '2024-25'."""
+    return f'{end_year - 1}-{str(end_year)[2:]}'
+
+
+def _school_rows():
+    if '_schools' in _SCH:
+        return _SCH['_schools']
+    F = _school_files()
+    D = F['dir']
+    if not D:
+        _SCH['_schools'] = {k: [] for k in ('schools', 'grades', 'spending', 'enrollment', 'calendar', 'zones')}
+        return _SCH['_schools']
+    place = F['place']
+    name = {s['school_number']: s['name'] for s in D['schools']}
+    for r in F['grades'].get('rows', []):  # a school in the state's grade file but not the federal directory
+        name.setdefault(r['school_number'], (r.get('school_name_raw') or r['school_number']).title())
+    grade_src = F['grades'].get('source_url') or 'https://www.fldoe.org/accountability/accountability-reporting/school-grades/'
+    spend_src = {f['year']: f['source_url'] for f in F['spending'].get('files', [])}
+
+    # enrollment, one row per school and year (CCD year 2024 = the 2024-25 school year, which ends in 2025)
+    enrollment = []
+    for s in D['schools']:
+        for y, n in sorted(s.get('enrollment_by_year', {}).items()):
+            if n and int(y) + 1 >= cutoff.FIRST_YEAR:
+                enrollment.append({'place_id': place, 'school_id': s['school_number'], 'school': s['name'], 'year': int(y) + 1,
+                                   'school_year': _sy(int(y) + 1), 'enrollment': n, 'source_url': D['source_url'].replace(str(D['directory_year']), y)})
+    enr = {(r['school_id'], r['year']): r['enrollment'] for r in enrollment}
+
+    grades = []
+    comp_keys = ['ela_achievement', 'ela_gains', 'ela_gains_low25', 'math_achievement', 'math_gains', 'math_gains_low25', 'science_achievement',
+                 'social_studies_achievement', 'middle_acceleration', 'graduation_rate', 'college_career_acceleration', 'total_points',
+                 'percent_of_points', 'percent_tested', 'pct_economically_disadvantaged']
+    for r in sorted(F['grades'].get('rows', []), key=lambda r: (r['school_number'], r['year'])):
+        if r['year'] < cutoff.FIRST_YEAR:
+            continue
+        g = {'place_id': place, 'school_id': r['school_number'], 'school': name.get(r['school_number']), 'year': r['year'], 'school_year': _sy(r['year']),
+             'grade': r['grade'], 'informational_baseline': r['year'] == 2023}
+        g.update({k: r.get(k) for k in comp_keys})
+        g['source_url'] = grade_src
+        grades.append(g)
+
+    spending = []
+    rows = F['spending'].get('rows', [])
+    for r in sorted(rows, key=lambda r: (r['year'], r['school_number'])):
+        if not r.get('year') or r['year'] < cutoff.FIRST_YEAR:
+            continue
+        n = enr.get((r['school_number'], r['year']))
+        spending.append({'place_id': place, 'school_id': r['school_number'], 'school': name.get(r['school_number']) or r.get('school_name_raw'),
+                         'year': r['year'], 'school_year': _sy(r['year']), 'federal_per_student': r.get('federal_ppe'),
+                         'state_local_per_student': r.get('state_local_ppe'), 'total_per_student': r.get('total_ppe'), 'enrollment': n,
+                         'estimated_total': round(r['total_ppe'] * n) if r.get('total_ppe') and n else None,
+                         'source_url': spend_src.get(r['year']) or F['spending'].get('page_url')})
+
+    zs = F['zone_schools'].get('zones', {})
+    zones = []
+    try:
+        from shapely.geometry import shape
+        have_shapely = True
+    except ImportError:
+        have_shapely = False
+    import json, math, re
+    for z in F['zones'].get('zones', []):
+        sid = zs.get(z['zone_name'])
+        geom = {'type': 'Polygon', 'coordinates': z['rings']} if len(z['rings']) == 1 else {'type': 'MultiPolygon', 'coordinates': [[r] for r in z['rings']]}
+        area = None
+        if have_shapely:
+            # Esri rings: outer rings run clockwise, holes counter-clockwise; an even-odd fill gives the zone's area
+            lat0 = sum(p[1] for r in z['rings'] for p in r) / max(1, sum(len(r) for r in z['rings']))
+            kx, ky = 69.172 * math.cos(math.radians(lat0)), 69.0
+            from shapely.geometry import Polygon
+            tot = 0.0
+            for r in z['rings']:
+                if len(r) >= 4:
+                    p = Polygon([(x * kx, y * ky) for x, y in r])
+                    signed = sum((r[i][0] - r[i - 1][0]) * (r[i][1] + r[i - 1][1]) for i in range(len(r)))  # >0 clockwise
+                    tot += p.area if signed > 0 else -p.area
+            area = round(abs(tot), 2)
+        zones.append({'place_id': place, 'zone_id': re.sub(r'[^a-z0-9]+', '-', f"{z['level']} {z['zone_name']}".lower()).strip('-'),
+                      'level': z['level'], 'zone_name': z['zone_name'], 'school_id': sid, 'school': name.get(sid),
+                      'mou_area': 'MOU' in z['zone_name'], 'pieces': z['pieces'], 'area_sq_mi': area, 'last_edited': z.get('last_edited'),
+                      'geometry': json.dumps(geom, separators=(',', ':')), 'source_url': z.get('layer_url') or F['zones'].get('source_url')})
+
+    by_g = {}
+    for g in grades:
+        by_g.setdefault(g['school_id'], []).append(g)
+    by_s = {}
+    for s in spending:
+        by_s.setdefault(s['school_id'], []).append(s)
+    zoned = {}
+    for z in zones:
+        if z['school_id'] and not z['mou_area']:
+            zoned.setdefault(z['school_id'], set()).add(z['level'])
+    schools = []
+    for s in D['schools']:
+        sid = s['school_number']
+        gl = sorted(by_g.get(sid, []), key=lambda g: g['year'])
+        sl = sorted((x for x in by_s.get(sid, []) if x['total_per_student']), key=lambda x: x['year'])
+        op = CHARTER_OPERATORS.get(sid) if s['charter'] else None
+        st = s.get('teachers_fte')
+        schools.append({
+            'place_id': place, 'school_id': sid, 'nces_id': s['nces_id'], 'name': s['name'], 'status': s['status'], 'level': s['level'],
+            'school_type': s['school_type'], 'grades': s['grades'], 'charter': s['charter'], 'virtual': s['virtual'],
+            'operator_entity_id': 'nonprofit:' + op if op else None,
+            'address': s['address'], 'city': s['city'], 'zip': s['zip'], 'phone': s['phone'], 'latitude': s['latitude'], 'longitude': s['longitude'],
+            'enrollment': s['enrollment'] if s['status'] == 'Open' else None, 'enrollment_year': D['school_year'] if s['status'] == 'Open' else None,
+            'last_year_open': None if s['status'] == 'Open' else _sy(s['last_directory_year'] + 1),
+            'teachers_fte': st if s['status'] == 'Open' else None,
+            'students_per_teacher': round(s['enrollment'] / st, 1) if s['status'] == 'Open' and st and s.get('enrollment') else None,
+            'free_reduced_lunch_pct': round(100 * s['free_reduced_lunch'] / s['enrollment'], 1) if s.get('free_reduced_lunch') and s.get('enrollment') else None,
+            'latest_grade': gl[-1]['grade'] if gl else None, 'latest_grade_year': gl[-1]['year'] if gl else None,
+            'prior_grade': gl[-2]['grade'] if len(gl) > 1 else None, 'grades_on_record': len(gl),
+            'latest_per_student': sl[-1]['total_per_student'] if sl else None, 'latest_spending_year': sl[-1]['year'] if sl else None,
+            'zoned_levels': ', '.join(l for l in ('Elementary', 'Middle', 'High') if l in zoned.get(sid, ())) or None,
+            'district': F['conf'].get('district_name'), 'page_url': f'/schools/#s-{sid}', 'source_url': D['source_url'],
+        })
+    schools.sort(key=lambda r: (r['status'] != 'Open', r['name']))
+
+    cal_src = F['calendar'].get('source_url')
+    calendar = [{'place_id': place, 'event_id': e['event_id'], 'title': e['title'], 'kind': e['kind'], 'starts': e['starts'], 'ends': e.get('ends'),
+                 'all_day': e['all_day'], 'venue': re.sub(r',?\s*(United States|USA)\s*$', '', e.get('venue') or '').strip(' ,') or None, 'school_year': e.get('school_year'), 'source_url': cal_src}
+                for e in F['calendar'].get('events', [])]
+    _SCH['_schools'] = {'schools': schools, 'grades': grades, 'spending': spending, 'enrollment': enrollment, 'calendar': calendar, 'zones': zones}
+    return _SCH['_schools']
+
+
+_SCH = {}
+
+
+def schools():
+    return _school_rows()['schools']
+
+
+def school_grades():
+    return _school_rows()['grades']
+
+
+def school_spending():
+    return _school_rows()['spending']
+
+
+def school_enrollment():
+    return _school_rows()['enrollment']
+
+
+def school_calendar():
+    return _school_rows()['calendar']
+
+
+def school_zones():
+    return _school_rows()['zones']
+
+
 def tax_districts():
     """Which taxing authorities levy in each tax district (My Address, tax calculator); rates are in property-tax-rates."""
     from addr_page import address_data
@@ -694,6 +870,18 @@ def shared_owner_groups():
     return []
 
 
+# School grades and spending come from fldoe.org files read by hand (data/schools/fetch_fldoe.py); until a file is on
+# hand the datasets are empty, so their columns are listed here to keep the table and the API stable.
+_GRADE_NUM = ['year', 'ela_achievement', 'ela_gains', 'ela_gains_low25', 'math_achievement', 'math_gains', 'math_gains_low25', 'science_achievement',
+              'social_studies_achievement', 'middle_acceleration', 'graduation_rate', 'college_career_acceleration', 'total_points',
+              'percent_of_points', 'percent_tested', 'pct_economically_disadvantaged']
+DB_ONLY_COLUMNS['school-grades'] = {**{c: 'string' for c in ('place_id', 'school_id', 'school', 'school_year', 'grade')}, 'informational_baseline': 'boolean',
+                                    **{c: 'number' for c in _GRADE_NUM}, 'source_url': 'string', 'gov_id': 'string'}
+DB_ONLY_COLUMNS['school-spending'] = {**{c: 'string' for c in ('place_id', 'school_id', 'school')}, 'year': 'number', 'school_year': 'string',
+                                      **{c: 'number' for c in ('federal_per_student', 'state_local_per_student', 'total_per_student', 'enrollment', 'estimated_total')},
+                                      'source_url': 'string', 'gov_id': 'string'}
+
+
 # Gifts over the per-election limit: rows are written by registry.publish_limit_case() when an admin confirms or
 # resolves a case (migration 0038), not by the site build.
 OVER_LIMIT_COLUMNS = ['case_id', 'candidate', 'office', 'election', 'election_phase', 'contributor', 'contributor_type', 'gifts', 'gross_amount',
@@ -922,5 +1110,11 @@ DATASETS = [
     ('chambers', 'Chambers of commerce', "One row per chamber of commerce: what it is and who it serves, its board meetings, its latest IRS Form 990 (revenue, expenses, assets, employees), public money paid to it by local governments and tourism agencies (from nonprofit-payments), its foundation, and links to its member directory, events and join page. entity_id is its profile (entity-profiles). Chambers are private, member-owned nonprofits, not government agencies.", chambers),
     ('chamber-leaders', 'Chambers of commerce: boards and staff', "Each chamber's board (executive committee, directors, ex officio and honorary members), staff and past chairs since 2016, as listed on the chamber's own website on as_of: name, title and the organization each board member represents. No phone numbers, emails or addresses. person_entity_id and organization_entity_id link to profiles; person_match and organization_match say how each link was made (blank = no match, shown as plain text).", chamber_leaders),
     ('chamber-events', 'Chambers of commerce: events and programs', "Upcoming events from each chamber's public calendar (kind event: title, start and end in local time, venue and city, category, the event's own link) and each chamber's yearly and monthly signature programs (kind program: schedule and what it is). chamber_event is false for community events a chamber lists on its calendar. Refreshed daily where the calendar has a public feed.", chamber_events),
+    ('schools', 'Public schools', "One row per public school in the district, open now or closed since 2016: state school number (school_id, district-school), federal id, level, grades taught, district or charter, address and phone of the school building, enrollment and teachers for the latest federal school directory year, students per teacher, share of students eligible for free or reduced-price lunch, latest state school grade and the one before it, latest per-student spending, and which attendance zone levels feed it. operator_entity_id is the nonprofit that runs a charter school (entity-profiles).", schools),
+    ('school-grades', 'School grades', "Every Florida school grade (A to F, or I for incomplete) on record for each school since 2016, from the Florida Department of Education's school grades file, one row per school and year. year is the school year's end (2025 = 2024-25). Components (percent of students: English and math achievement and learning gains, science, social studies, acceleration, graduation rate; total points and percent of points) are filled in for the latest year in the file. No grades were given for 2019-20 (testing was canceled); 2020-21 grades were only given to schools that asked; 2022-23 grades were an informational baseline (informational_baseline true).", school_grades),
+    ('school-spending', 'Spending per school', "Per-student spending at each school from the Florida Department of Education's yearly Every Student Succeeds Act (ESSA) per-pupil expenditure reports: federal, state and local, and total, one row per school and year (year = the school year's end). estimated_total multiplies the per-student figure by that year's enrollment from the federal school directory, so it is an estimate, not a reported total.", school_spending),
+    ('school-enrollment', 'School enrollment by year', "Students enrolled at each public school each school year since 2015-16 (year = the school year's end), from the U.S. Department of Education's Common Core of Data school directory.", school_enrollment),
+    ('school-calendar', 'School district calendar', "The school district's calendar as posted on its website: first and last day, holidays and breaks, no-school days, early release days, end of each grading period, graduations and School Board meetings. kind is first-day, last-day, no-school, break, early-release, grading, graduation, board-meeting or other. starts and ends are local dates (all_day) or local date and time. Refreshed daily; past events of the school year stay on file.", school_calendar),
+    ('school-zones', 'School attendance zones', "The school district's attendance zones (which elementary, middle and high school serves each part of the county), from the county GIS server, one row per zone with the school it feeds (school_id), area in square miles, the county's last edit date and the zone's shape as GeoJSON (geometry, longitude/latitude, simplified to about 40 meters). mou_area marks zones the county map labels MOU (covered by a separate agreement). Choice, magnet and charter schools take students from outside their zone.", school_zones),
     ('tax-districts', 'Tax districts', 'Which taxing authorities levy property tax in each tax district, and the combined millage. Rates by year are in property-tax-rates (authority_id).', tax_districts),
 ]

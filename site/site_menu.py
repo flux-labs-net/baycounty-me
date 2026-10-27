@@ -27,6 +27,7 @@ def menu():
          'groups': [{'group': 'Local governments', 'items': [
              *[_i(g['short'], f"/governments/{g['slug']}", g.get('menu_desc') or '') for g in govs if g['kind'] != 'city'],
              *[_i(g['short'], f"/governments/{g['slug']}") for g in govs if g['kind'] == 'city'],
+             _i('Public schools', '/schools', 'Your zoned schools, calendar, grades and spending'),
              _i('All governments', '/governments', 'Every local government at a glance'),
              _i('Compare governments', '/compare', 'Budgets, services, taxes, debt and audits per resident'),
          ]}]},
