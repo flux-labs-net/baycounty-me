@@ -97,6 +97,8 @@ suspend fun preload(store: AppStore, route: Route?) {
         Route.CRAIncrement -> store.load(listOf("cra-agencies", "cra-tax-increment", "cra-increment-checks"))
         Route.Chambers -> store.load(listOf("chambers", "chamber-leaders", "chamber-events"))
         Route.Events -> store.load("community-events")
+        Route.Beaches -> store.load(me.baycounty.kit.Outdoors.beachDatasets)
+        Route.Parks -> store.load(me.baycounty.kit.Outdoors.parkDatasets)
         is Route.Dataset -> store.load(route.id)
         is Route.Record -> {
             store.load(route.datasetID); store.loadVendors(); store.loadPeople()

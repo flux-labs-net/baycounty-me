@@ -92,5 +92,19 @@ fun icon(symbol: String?): ImageVector = when (symbol) {
     "checkmark" -> Icons.Outlined.Check
     "trend" -> Icons.AutoMirrored.Outlined.ShowChart
     "globe" -> Icons.Outlined.Public
+    "beach.umbrella" -> Icons.Outlined.BeachAccess
+    "tree" -> Icons.Outlined.Park
+    "drop" -> Icons.Outlined.WaterDrop
+    "water.waves" -> Icons.Outlined.Waves
+    "wind" -> Icons.Outlined.Air
+    "thermometer.medium" -> Icons.Outlined.Thermostat
+    "sailboat" -> Icons.Outlined.Sailing
+    "figure.hiking" -> Icons.Outlined.Hiking
+    "figure.run" -> Icons.Outlined.SportsSoccer
+    "figure.play" -> Icons.Outlined.Toys
+    "parkingsign" -> Icons.Outlined.LocalParking
+    "testtube.2" -> Icons.Outlined.Science
+    "arrow.up.right.square" -> Icons.Outlined.Launch
+    "arrow.triangle.turn.up.right.diamond" -> Icons.Outlined.Directions
     else -> Icons.Outlined.TableChart
 }

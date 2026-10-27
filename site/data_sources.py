@@ -75,6 +75,9 @@ TOPICS = [
     ('events', 'Community events', '/events',
      "Read every morning from each organizer's public calendar feed: the county and city calendars (RSS), The Events Calendar feeds on the library, visitor bureau and city sites, the Mexico Beach calendar export and the Panama City Beach Chamber. A feed that fails keeps yesterday's events.",
      'Library events outside Bay County are left out. Repeating programs (the same title on two or more dates) are flagged so pages can lead with one-off events.'),
+    ('outdoors', 'Beaches and parks', '/beaches',
+     "The beach flag, rip current risk and surf forecast are read every morning from the National Weather Service surf zone forecast (and again in the visitor's browser). Water quality samples are read every day from the Florida Department of Health's Healthy Beaches lookup. Beach accesses, parking, parks, boat ramps and trails come from the county's and Panama City Beach's public GIS maps and the state's coastal access survey.",
+     "Each beach access is joined to the state's coastal access survey only when the two points are within about 200 feet. Parks in the county's park guide are joined to its parks inventory by name. Samples before 2016 are dropped; samples already on file are kept when the state's lookup stops showing them."),
     ('cra', 'Redevelopment agencies (CRAs)', '/public-money/cra-spending',
      'CRA spending is read from CRA annual reports, agendas, budgets and audits, one ledger line per payment or project. '
      'Tax increment comes from CRA reports, audits and budgets, split between the county and city by millage.',
@@ -197,6 +200,12 @@ src('events', 'mb', 'Mexico Beach visitor events calendar', 'https://www.mexicob
 src('chambers', 'county', 'Bay County Chamber of Commerce website (board, staff and programs)', 'https://panamacity.org/board-of-directors/', BY_HAND, 'As boards change', 'Board, staff and past chairs since 2016 by name, title and organization; regular programs')
 src('chambers', 'county', 'Panama City Beach Chamber of Commerce website (board, staff and programs)', 'https://pcbeach.org/board-of-directors/', BY_HAND, 'As boards change', 'Board and staff by name, title and organization; regular programs')
 src('chambers', 'county', 'Panama City Beach Chamber events calendar feed', 'https://pcbeach.org/local-events/', AUTO_DAILY, 'Daily', 'Upcoming chamber and community events: title, time, venue and link')
+src('outdoors', 'state', 'National Weather Service Tallahassee surf zone forecast (coastal Bay County)', 'https://www.weather.gov/beach/tae', AUTO_DAILY, 'Daily, and live on the page', 'The beach flag color reported by beach officials, rip current risk, surf height, UV index, water temperature and beach alerts')
+src('outdoors', 'state', 'Florida Department of Health, Florida Healthy Beaches Program', 'https://www.floridahealth.gov/community-environmental-public-health/environmental-public-health/water-quality/beach-water-quality/', AUTO_DAILY, 'Daily', 'Sampling sites and every published enterococcus sample, rating and health advisory')
+src('outdoors', 'state', 'Florida DEP coastal access sites', 'https://services1.arcgis.com/nRHtyn3uE1kyzoYc/arcgis/rest/services/BEACH_ACCESS_SITES/FeatureServer', AUTO_DAILY, 'Daily', 'Parking, restrooms, showers, lifeguards and boardwalks at beach accesses')
+src('outdoors', 'county', 'Bay County GIS: beach accesses, beach parking, parks inventory, park guide, boat ramps and trails', 'https://services1.arcgis.com/QB0VWfqR9MD4lF0F/arcgis/rest/services', AUTO_DAILY, 'Daily', 'Every public beach access, county beach lot, park (all governments), boat ramp and trail, with amenities')
+src('outdoors', 'pcb', 'Panama City Beach GIS: recreation (beach access, trails)', 'https://services7.arcgis.com/HMHYRsYOvuxpp8zD/arcgis/rest/services/Recreation/FeatureServer', AUTO_DAILY, 'Daily', 'Wheelchair-accessible beach accesses and Conservation Park trails')
+src('outdoors', 'county-wide', "Each government's parks and recreation pages", 'https://www.baycountyfl.gov/289/Parks-Recreation', BY_HAND, 'As pages change', 'Links for program and league sign-ups')
 src('nonprofits', 'state', 'IRS exempt organization and 990 data (GivingTuesday 990 data lake)', 'https://990data.givingtuesday.org/', BULK, 'As new filings post', 'Organizations, 990, 990-EZ, 990-PF and 990-N filings since 2019: board members, pay, grants and finances')
 src('nonprofits', 'state', 'ProPublica Nonprofit Explorer', 'https://projects.propublica.org/nonprofits/', BY_HAND, 'As needed', 'Links to each organization\'s filings')
 src('nonprofits', 'state', 'Florida Check-A-Charity (Department of Agriculture and Consumer Services)', 'https://csapp.fdacs.gov/', BULK, 'As needed', 'Charity registrations, reported finances, fundraisers, officers and directors')
@@ -276,7 +285,7 @@ FOLDER_TOPIC = {
     'agendas': 'meetings', 'meetings': 'meetings', 'votes': 'votes', 'contracts': 'contracts', 'budgets': 'budgets',
     'debt_audit': 'audits', 'money': 'audits', 'tax': 'property-tax', 'amendment3': 'property-tax', 'exemptions': 'property-tax',
     'salaries': 'salaries', 'campaign': 'campaign', 'elections': 'elections', 'sunbiz': 'businesses', 'careers': 'businesses',
-    'nonprofits': 'nonprofits', 'chambers': 'chambers', 'events': 'events', 'cra': 'cra', 'merged.json': 'cra', 'michael': 'michael', 'surtax': 'sales-tax',
+    'nonprofits': 'nonprofits', 'chambers': 'chambers', 'events': 'events', 'outdoors': 'outdoors', 'cra': 'cra', 'merged.json': 'cra', 'michael': 'michael', 'surtax': 'sales-tax',
     'tourism': 'tourist-tax', 'fees': 'fees', 'nearby': 'address', 'civic': 'records', 'projects': 'contracts',
 }
 SKIP_HOSTS = {'baycounty.me', 'www.baycounty.me', 'aptg.co'}

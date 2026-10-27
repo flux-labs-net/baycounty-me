@@ -60,6 +60,8 @@ enum Route: Hashable {
     case craIncrement
     case chambers
     case events
+    case beaches
+    case parks
 }
 
 extension View {
@@ -93,6 +95,8 @@ extension View {
                 case .craIncrement: CRAIncrementView()
                 case .chambers: ChambersView()
                 case .events: EventsView()
+                case .beaches: BeachesView()
+                case .parks: ParksView()
                 }
             }
             .pageBackground()

@@ -33,6 +33,8 @@ public enum SitePages {
         "/connections/nonprofits": .dataset("nonprofits"),
         "/chambers": .native("Chambers of commerce"),
         "/events": .native("Events"),
+        "/beaches": .native("Beaches"),
+        "/parks": .native("Parks"),
         "/connections/business-ties": .web("confirmed official-to-business matches, read live from /api/v1/datasets/official-businesses and official-business-links"),
         "/correspondence": .web("published letters to officials, read live from /api/v1/correspondence"),
         "/alerts": .web("email alert sign-up; push alerts are planned for the app"),

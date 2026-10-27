@@ -15,6 +15,8 @@ struct HomeView: View {
         ("Companies", "building", .vendors),
         ("Campaign money", "chart.bar", .dataset("campaign-finance")),
         ("Accountability console", "checklist", .accountability),
+        ("Beaches", "beach.umbrella", .beaches),
+        ("Parks, ramps and trails", "tree", .parks),
         ("Glossary", "character.book.closed", .glossary),
         ("What's new", "sparkles", .updates),
     ]
@@ -380,7 +382,7 @@ struct HomeView: View {
             "vendor": .vendor("roberts-and-roberts"), "person": .person("clair-pease"), "explore": .explore,
             "votes": .dataset("votes"), "salaries": .dataset("salary-positions"),
             "accountability": .accountability, "accproject": .accountabilityProject("pcb-fbr-seg3"),
-            "budget": .budgetCompare(govID: "lh"), "craincrement": .craIncrement, "chambers": .chambers, "events": .events, "pastelections": .dataset("campaign-history"),
+            "budget": .budgetCompare(govID: "lh"), "craincrement": .craIncrement, "chambers": .chambers, "events": .events, "beaches": .beaches, "parks": .parks, "pastelections": .dataset("campaign-history"),
         ]
         if let r = simple[arg] { path = [r]; return }
         if arg == "tab:search" { path = [.search]; return }

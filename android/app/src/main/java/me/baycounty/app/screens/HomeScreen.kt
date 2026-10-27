@@ -52,6 +52,8 @@ private val browse = listOf(
     BrowseItem("Companies", "building", Route.Vendors),
     BrowseItem("Campaign money", "chart.bar", Route.Dataset("campaign-finance")),
     BrowseItem("Accountability console", "checklist", Route.Accountability),
+    BrowseItem("Beaches", "beach.umbrella", Route.Beaches),
+    BrowseItem("Parks, ramps and trails", "tree", Route.Parks),
     BrowseItem("Glossary", "character.book.closed", Route.Glossary),
     BrowseItem("What's new", "sparkles", Route.Updates),
 )

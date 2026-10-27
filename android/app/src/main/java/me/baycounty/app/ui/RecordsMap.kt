@@ -63,3 +63,42 @@ fun RecordsMap(datasetID: String, rows: List<DataRow>, modifier: Modifier = Modi
     }
 }
 
+
+/** One dot on a points map (beach accesses, sampling sites, parks, ramps, trailheads). */
+data class MapDot(val id: String, val title: String, val lat: Double, val lng: Double, val color: androidx.compose.ui.graphics.Color, val row: DataRow? = null)
+
+/** Dots of several kinds on an OpenStreetMap map of the county (the iOS PointsMap). */
+@Composable
+fun PointsMap(points: List<MapDot>, modifier: Modifier = Modifier, onSelect: ((MapDot) -> Unit)? = null) {
+    if (LocalInspectionMode.current) {
+        Box(modifier.clip(RoundedCornerShape(14.dp)).background(Brand.sunken), contentAlignment = Alignment.Center) { Text("Map", style = T.caption, color = Brand.secondary) }
+        return
+    }
+    val context = LocalContext.current
+    val map = remember {
+        Configuration.getInstance().userAgentValue = context.packageName
+        MapView(context).apply {
+            setTileSource(TileSourceFactory.MAPNIK)
+            setMultiTouchControls(true)
+            zoomController.setVisibility(org.osmdroid.views.CustomZoomButtonsController.Visibility.NEVER)
+            controller.setZoom(10.3)
+            controller.setCenter(GeoPoint(30.17, -85.72))
+        }
+    }
+    DisposableEffect(map) { map.onResume(); onDispose { map.onPause(); map.onDetach() } }
+    AndroidView({ map }, modifier.clip(RoundedCornerShape(14.dp))) { m ->
+        m.overlays.clear()
+        for (p in points) {
+            m.overlays.add(Marker(m).apply {
+                position = GeoPoint(p.lat, p.lng)
+                title = p.title
+                icon = GradientDrawable().apply {
+                    shape = GradientDrawable.OVAL; setSize(30, 30); setColor(p.color.toArgb()); setStroke(3, 0xFFFFFFFF.toInt())
+                }
+                setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_CENTER)
+                setOnMarkerClickListener { _, _ -> onSelect?.invoke(p); onSelect != null }
+            })
+        }
+        m.invalidate()
+    }
+}

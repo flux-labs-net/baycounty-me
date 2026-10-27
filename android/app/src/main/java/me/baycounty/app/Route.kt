@@ -35,6 +35,8 @@ sealed class Route {
     object CRAIncrement : Route()
     object Chambers : Route()
     object Events : Route()
+    object Beaches : Route()
+    object Parks : Route()
     data class GovBudget(val id: String) : Route()
 }
 
