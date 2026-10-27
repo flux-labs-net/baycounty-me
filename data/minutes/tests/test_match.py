@@ -75,6 +75,18 @@ class Votes(unittest.TestCase):
         self.assertEqual(r["checks"], [])
         self.assertEqual(r["check_status"], "passed")
 
+    def test_only_dissenters_named(self):
+        # "passed 3-2 with Brown and Kady dissenting": the others there voted yes
+        m = {"yes": [], "no": ["Brown", "Kady"], "outcome": "passed", "tally_text": "3-2"}
+        r = M.evaluate(m, self.meeting, "pc", data=DATA)
+        self.assertEqual(r["tally"], "3-2")
+        self.assertEqual(r["votes"]["Billy Rader"], "yes")
+        self.assertEqual(r["checks"], [])
+        # a count that doesn't fit is left for review, not filled in
+        m = {"yes": [], "no": ["Brown"], "outcome": "passed", "tally_text": "3-1"}
+        r = M.evaluate(m, self.meeting, "pc", data=DATA)
+        self.assertIn("tally_mismatch", r["checks"])
+
     def test_split_vote_and_unanimous_expansion(self):
         m = {"yes": ["Rader", "Nichols", "Kady", "Brudnicki"], "no": ["Brown"], "outcome": "passed", "tally_text": "4-1"}
         r = M.evaluate(m, self.meeting, "pc", data=DATA)

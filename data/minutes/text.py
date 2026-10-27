@@ -82,10 +82,29 @@ def html_text(data):
     return tidy(fm.strip_tags(s, sep=" ").replace(" \n", "\n"))
 
 
+def docx_text(data):
+    """Word (.docx) minutes -> text, one paragraph per line. Page breaks aren't stored in the file, so it is one page."""
+    import io
+    import zipfile
+    from xml.etree import ElementTree as ET
+    w = "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}"
+    with zipfile.ZipFile(io.BytesIO(data)) as z:
+        root = ET.fromstring(z.read("word/document.xml"))
+    lines = []
+    for p in root.iter(w + "p"):
+        lines.append("".join(t.text or "" for t in p.iter() if t.tag in (w + "t", w + "tab")).strip())
+    return tidy("\n".join(lines))
+
+
+DOCX = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+
+
 def to_pages(data, ctype=""):
-    """-> (pages, method, ocr pages) for a PDF or an HTML page."""
+    """-> (pages, method, ocr pages) for a PDF, a Word file or an HTML page."""
     if data[:5] == b"%PDF-" or ctype == "application/pdf":
         return pdf_text(data)
+    if ctype == DOCX or (data[:2] == b"PK" and b"word/document.xml" in data[:4000]):
+        return [docx_text(data)], "text", 0
     if ctype in ("text/html", "text/plain") or data.lstrip()[:1] == b"<":
         return [html_text(data)], "text", 0
     raise ValueError("can't read %s" % (ctype or "this file type"))

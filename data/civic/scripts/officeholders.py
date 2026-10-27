@@ -210,7 +210,7 @@ G['lh'] = {'body': 'City Commission', 'seats': [
  ('Seat 4', [T('Joseph Ashbrook', None, '2017-04-18', 'elected', 'lh17', 'Lost the 2017 election to Judy Tinder.'),
              T('Judy Tinder', '2017-04-18', '2023-02-03', 'elected', 'e2017m', 'Re-elected 2021. Left the seat to run for mayor in 2023.', ea=True),
              T('Judy Vandergrift', '2023-02-03', '2025-05-20', 'appointed', 'lh_vandergrift', 'Appointed until the April 2023 special election, which she won.', sa=True),
-             T('Judy Tinder', '2025-05-20', '2026-09-08', 'elected', 'e2025r', 'Won the May 2025 runoff. Resigned at the Sep 8, 2026 meeting.'),
+             T('Judy Tinder', '2025-05-20', '2026-09-09', 'elected', 'e2025r', 'Won the May 2025 runoff. Resigned at the end of the Sep 8, 2026 meeting, after voting in it.'),
              T('Corey Langford', '2026-09-21', None, 'appointed', 'lh_langford', 'Appointed by the commission to finish the term.', sa=True)]),
 ]}
 G['pc'] = {'body': 'City Commission', 'seats': [

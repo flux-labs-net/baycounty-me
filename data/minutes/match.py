@@ -208,6 +208,14 @@ def member_votes(motion, meeting, board, date, data=None):
             votes.setdefault(c, "yes")
     for c in absent:
         votes.setdefault(c, "absent")
+    if method == "roll_call" and motion.get("no") and not motion.get("yes"):
+        # "passed 3-2, Pelletier and Griggs dissenting": only the no votes are named. When the printed count says the
+        # rest of the members there voted yes, record them as yes; otherwise leave them for the checks to flag.
+        t = parse_tally(motion.get("tally_text"))
+        rest = ((present or set(names)) - absent) - set(votes)
+        if t and t[1] == sum(1 for v in votes.values() if v == "no") and len(rest) == t[0]:
+            for c in rest:
+                votes[c] = "yes"
     if method == "roll_call":
         for c in present - set(votes):
             votes[c] = "absent"   # present at roll call but not in either list: left the room or didn't vote
