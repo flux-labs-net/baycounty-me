@@ -1,30 +1,50 @@
 // Builders for the emails people get from BayCounty.me. Each returns {subject, html, text} and sends nothing,
 // so the routes that send them and the /admin email previews use exactly the same content.
 // The rule-alert email is built by compose() in alerts-run.js. Files starting with _ are not routes.
-const {SITE, esc, emailShell, button, PREFS_LINK_TEMPLATE} = require('./_alerts');
+const {SITE, esc, PREFS_LINK_TEMPLATE} = require('./_alerts');
+const ui = require('./_email_ui');
 
-const P = 'margin:0 0 10px 0;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:22px;color:#161B24';
-const H = 'margin:18px 0 8px 0;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:22px;color:#1E3A76;font-weight:bold';
 const day = 864e5;
-const nice = d => new Date(d + (d.length === 10 ? 'T12:00:00Z' : '')).toLocaleDateString('en-US', {month: 'short', day: 'numeric', timeZone: 'America/Chicago'});
-const when = d => d.length > 10 ? new Date(d).toLocaleString('en-US', {weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit', timeZone: 'America/Chicago'}) : nice(d);
+const TZ = 'America/Chicago';
+const at = d => new Date(d + (d.length === 10 ? 'T12:00:00Z' : ''));
+const nice = d => at(d).toLocaleDateString('en-US', {month: 'short', day: 'numeric', timeZone: TZ});
+const when = d => d.length > 10 ? at(d).toLocaleString('en-US', {weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit', timeZone: TZ}) : at(d).toLocaleDateString('en-US', {weekday: 'short', month: 'short', day: 'numeric', timeZone: TZ});
+const plural = (n, w) => `${n} ${w}${n === 1 ? '' : 's'}`;
+// Cuts long text at a sentence (or word) near n characters, so each update stays two or three lines.
+function clip(s, n = 220) {
+  s = String(s || '').trim();
+  if (s.length <= n) return s;
+  const cut = s.slice(0, n), dot = cut.lastIndexOf('. ');
+  return dot > n * 0.5 ? cut.slice(0, dot + 1) : cut.replace(/\s+\S*$/, '') + '…';
+}
 
 // Double opt-in confirmation (subscribe.js). what: plain-text description; isRule: rule alert vs weekly digest.
-function confirmEmail({what, isRule, link}) {
-  const subject = 'Confirm your BayCounty.me alerts';
-  const lead = isRule ? `Please confirm you want this BayCounty.me email alert: <b>${esc(what)}</b>. We check every morning and email you only when something new matches.` : `Please confirm you want ${esc(what).replace(/for (.*)$/, 'for <b>$1</b>')}: new votes, data and corrections, plus upcoming meetings.`;
-  const html = emailShell(subject, `<p style="margin:0 0 12px 0;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:22px;color:#161B24">${lead}</p>${button(link, 'Confirm my alerts')}<p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#5A6372">The link works for 7 days. If you didn't ask for this, ignore this email and nothing will be sent.</p>`,
-    'BayCounty.me puts Bay County, Florida public records in plain view. Built by Flux Labs, Panama City.');
+// govs: government names for a digest sign-up (optional, for the subject line).
+function confirmEmail({what, isRule, link, govs}) {
+  const names = govs && govs.length ? govs : null;
+  const subject = isRule ? 'Confirm your BayCounty.me alert' : names && names.length === 1 ? `Confirm your ${names[0]} weekly updates` : 'Confirm your BayCounty.me weekly updates';
+  const tail = ui.small('The link works for 7 days. If you didn’t ask for this, ignore this email and nothing will be sent.');
+  const body = isRule
+    ? ui.p('Please confirm you want this alert. We check every morning and email you only when something new matches.') +
+      ui.facts([['Alert', `<b>${esc(what)}</b>`], ['How often', 'Only when something new matches']]) + ui.button(link, 'Confirm my alert') + tail
+    : ui.p(`You asked for weekly BayCounty.me updates for <b>${esc(names ? names.join(', ') : what.replace(/^.*\bfor\s+/, ''))}</b>. Each Monday you’ll get:`) +
+      ui.list([['teal', 'New', 'Votes, data and pages added that week'], ['blue', 'Meetings', 'Meetings coming up, with agendas'], ['amber', 'Fixes', 'Corrections to anything we published']]) +
+      ui.button(link, 'Confirm my updates') + tail;
+  const html = ui.layout({title: subject, preheader: isRule ? `${what}. Tap to start it.` : 'One tap and you’re set. The link works for 7 days.',
+    kicker: 'Email alerts', hero: {tone: isRule ? 'teal' : 'blue', icon: 'bell', eyebrow: 'One more step', title: isRule ? 'Confirm your alert' : 'Confirm your weekly updates'}, body});
   const text = `Please confirm you want ${isRule ? 'this BayCounty.me alert: ' : ''}${what}.\n\nConfirm: ${link}\n\nThe link works for 7 days. If you didn't ask for this, ignore this email.`;
   return {subject, html, text};
 }
 
 // "Email me a link" from the manage page (manage.js).
 function manageLinkEmail(link) {
-  const subject = 'Manage your BayCounty.me emails';
+  const subject = 'Your link to manage BayCounty.me emails';
   return {subject,
-    html: emailShell(subject, `<p style="margin:0 0 12px 0;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:22px;color:#161B24">Here’s your link to change what you follow or unsubscribe.</p>${button(link, 'Manage my emails')}`, 'If you didn’t ask for this, you can ignore it.'),
-    text: `Change what you follow or unsubscribe: ${link}`};
+    html: ui.layout({title: subject, preheader: 'Change what you follow or unsubscribe.', kicker: 'Email alerts',
+      hero: {tone: 'blue', icon: 'mail', eyebrow: 'Your emails', title: 'Change what you follow'},
+      body: ui.p('Here’s your link to pick which governments you follow, change your alerts, or unsubscribe from everything.') + ui.button(link, 'Manage my emails') +
+        ui.small('If you didn’t ask for this, you can ignore it. Nothing changes until you use the link.')}),
+    text: `Change what you follow or unsubscribe: ${link}\n\nIf you didn't ask for this, you can ignore it.`};
 }
 
 // Admin sign-in link (admin.js).
@@ -32,8 +52,11 @@ function adminSignInEmail(link) {
   const subject = 'Sign in to BayCounty.me admin';
   return {subject,
     text: `Sign in to the BayCounty.me admin:\n\n${link}\n\nThe link works once and expires in 15 minutes. If you didn't ask for it, ignore this email.`,
-    html: emailShell(subject, `<p style="${P}">Sign in to the BayCounty.me admin:</p>${button(link, 'Sign in')}<p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#5A6372">The link works once and expires in 15 minutes. If you didn't ask for it, ignore this email.</p>`,
-      'You’re getting this because someone asked to sign in to the BayCounty.me admin with this address.')};
+    html: ui.layout({title: subject, preheader: 'Your sign-in link. It works once and expires in 15 minutes.', kicker: 'Admin',
+      hero: {tone: 'blue', icon: 'key', eyebrow: 'Admin', title: 'Sign in to BayCounty.me'},
+      body: ui.p('Use this button to sign in to the admin. It works once and expires in 15 minutes.') + ui.button(link, 'Sign in') +
+        ui.note('Didn’t ask for this? Ignore this email. Nobody can sign in without the link.'),
+      footer: 'You’re getting this because someone asked to sign in to the BayCounty.me admin with this address.'})};
 }
 
 // Weekly digest for one government (digest.js), from one entry of /data/digest.json. Returns null when there's
@@ -45,20 +68,30 @@ function digestEmail(g, {now = Date.now(), days = 7} = {}) {
   const meets = (g.meetings || []).filter(m => { const t = Date.parse(m.start); return t >= now - day / 2 && t <= until; });
   if (!changes.length && !meets.length) return null;
   const page = `${SITE}/governments/${g.slug}`;
-  let inner = `<p style="${P}">Here's what's new on BayCounty.me for <b>${esc(g.name)}</b> this week.</p>`, text = `What's new on BayCounty.me for ${g.name} this week.\n`;
+  const counts = [changes.length && plural(changes.length, 'update'), meets.length && plural(meets.length, 'meeting')].filter(Boolean);
+  const weekOf = new Date(now - 6 * day).toLocaleDateString('en-US', {month: 'short', day: 'numeric', timeZone: TZ});
+  let body = '', text = `What's new on BayCounty.me for ${g.name} this week.\n`;
   if (changes.length) {
-    inner += `<p style="${H}">New and updated</p>` + changes.map(c => `<p style="${P}"><b><a href="${esc(c.url)}" style="color:#1E3A76">${esc(c.title)}</a></b> <span style="color:#5A6372;font-size:13px">${esc(nice(c.date))}</span><br>${esc(c.text)}</p>`).join('');
+    body += ui.section('teal', 'spark', 'New and updated', changes.length) +
+      changes.map(c => { const t = clip(c.text); return ui.item({title: esc(c.title), url: c.url, meta: esc(nice(c.date)), text: esc(t), more: t !== String(c.text || '').trim() ? 'Read more' : ''}); }).join('');
     text += '\nNEW AND UPDATED\n' + changes.map(c => `- ${c.title} (${nice(c.date)}): ${c.text} ${c.url}`).join('\n') + '\n';
   }
   if (meets.length) {
-    inner += `<p style="${H}">Coming up</p>` + meets.map(m => `<p style="${P}"><b>${esc(when(m.start))}</b> · ${esc(m.title)}${m.agenda_url ? ` · <a href="${esc(m.agenda_url)}" style="color:#1E3A76">Agenda</a>` : m.expected ? ' <span style="color:#5A6372;font-size:13px">(regular schedule; agenda not posted yet)</span>' : ''}</p>`).join('');
+    body += (changes.length ? ui.spacer(18) : '') + ui.section('salmon', 'calendar', 'Coming up', meets.length) + meets.map(m => {
+      const d = at(m.start);
+      return ui.meeting({mon: d.toLocaleDateString('en-US', {month: 'short', timeZone: TZ}).toUpperCase(), day: d.toLocaleDateString('en-US', {day: 'numeric', timeZone: TZ}),
+        title: esc(m.title), time: esc([when(m.start), m.location].filter(Boolean).join(' · ')), agendaUrl: m.agenda_url, pending: m.agenda_url ? '' : 'Agenda not posted yet'});
+    }).join('');
     text += '\nCOMING UP\n' + meets.map(m => `- ${when(m.start)}: ${m.title}${m.agenda_url ? ' ' + m.agenda_url : ''}`).join('\n') + '\n';
   }
-  inner += button(page, `See ${g.name} on BayCounty.me`);
-  const footer = `You're getting this because you signed up for ${esc(g.name)} alerts on BayCounty.me. <a href="{{{RESEND_UNSUBSCRIBE_URL}}}" style="color:#5A6372">Unsubscribe</a> · <a href="${PREFS_LINK_TEMPLATE}" style="color:#5A6372">Change what you follow</a>`;
+  body += ui.button(page, `See ${g.name} on BayCounty.me`, {mt: 22});
+  const footer = `You’re getting this because you signed up for ${esc(g.name)} updates on BayCounty.me. ${ui.footLink(PREFS_LINK_TEMPLATE, 'Change what you follow')} · ${ui.footLink('{{{RESEND_UNSUBSCRIBE_URL}}}', 'Unsubscribe')}<br><br>${ui.ABOUT}`;
   text += `\n${page}\n\nChange what you follow: ${PREFS_LINK_TEMPLATE}\nUnsubscribe: {{{RESEND_UNSUBSCRIBE_URL}}}`;
-  const subject = `${g.name} this week on BayCounty.me`;
-  return {subject, html: emailShell(subject, inner, footer), text, changes: changes.length, meetings: meets.length};
+  const subject = `${g.name} this week: ${counts.join(', ')}`;
+  const pre = [...changes.slice(0, 2).map(c => c.title), meets[0] && `${meets[0].title} ${nice(meets[0].start)}`].filter(Boolean).join(' · ');
+  const html = ui.layout({title: subject, preheader: pre, kicker: `Weekly update · ${nice(new Date(now).toISOString())}`,
+    hero: {tone: 'blue', icon: 'calendar', eyebrow: `${esc(g.name)} · Week of ${weekOf}`, title: `${counts.join(' and ').replace(/^./, c => c.toUpperCase())} this week`}, body, footer});
+  return {subject, html, text, changes: changes.length, meetings: meets.length};
 }
 
-module.exports = {confirmEmail, manageLinkEmail, adminSignInEmail, digestEmail};
+module.exports = {confirmEmail, manageLinkEmail, adminSignInEmail, digestEmail, clip};

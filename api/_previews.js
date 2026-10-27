@@ -13,7 +13,16 @@ const PREVIEWS = [
   {id: 'rule_alert', name: 'Rule alert matches', when: 'Mornings, when new records match someone’s rules. Sample matches, or the latest real email.', sources: true},
   {id: 'manage_link', name: 'Manage-your-emails link', when: 'When someone asks for a link on the manage page.'},
   {id: 'admin_signin', name: 'Admin sign-in link', when: 'When an admin signs in to /admin.'},
+  {id: 'finance_code', name: 'Finance sign-in code', when: 'When a finance workspace member signs in to /finance.'},
+  {id: 'letter', name: 'Letter to an official', when: 'Sent from Correspondence. Sample text; the real body is what you write.'},
+  {id: 'records_request', name: 'Public records request', when: 'Sent from Records requests. Sample text.'},
+  {id: 'contact', name: 'Admin: contact form message', when: 'To hello@fluxlabs.net for each contact form message.'},
+  {id: 'corr_reply', name: 'Admin: reply from an official', when: 'When an official answers a letter or records request.'},
+  {id: 'health', name: 'Admin: ingestion problems', when: 'Daily, only when the ingestion check finds problems.'},
+  {id: 'review_alerts', name: 'Admin: rule alerts ready to review', when: 'After the morning alerts run, while autosend is off.'},
+  {id: 'review_digest', name: 'Admin: weekly digests ready to review', when: 'Mondays, while digest autosend is off.'},
 ];
+// The agenda watcher notice and the workflow failure alert are built in Python (site/email_ui.py) and aren't previewed here.
 
 const DUMMY = 'preview-only';
 const SAMPLE_EMAIL = 'resident@example.com';
@@ -53,7 +62,7 @@ async function preview(id, {gov, source} = {}) {
   switch (id) {
     case 'confirm_digest': {
       const govs = [gov];
-      m = confirmEmail({what: 'weekly BayCounty.me updates for ' + govs.map(g => GOVS[g][0]).join(', '), isRule: false, link: fakeConfirm});
+      m = confirmEmail({what: 'weekly BayCounty.me updates for ' + govs.map(g => GOVS[g][0]).join(', '), isRule: false, link: fakeConfirm, govs: govs.map(g => GOVS[g][0])});
       break;
     }
     case 'confirm_rule':
@@ -84,6 +93,40 @@ async function preview(id, {gov, source} = {}) {
     }
     case 'manage_link': m = manageLinkEmail(`${SITE}/alerts/manage?t=${DUMMY}`); break;
     case 'admin_signin': m = adminSignInEmail(`${SITE}/api/admin?action=verify&t=${DUMMY}`); break;
+    case 'finance_code': m = require('./_finance/auth').codeEmail('482913'); note = 'Sample code.'; break;
+    case 'letter': case 'records_request': {
+      const records = id === 'records_request';
+      m = require('./_correspondence').composeEmail(records
+        ? {subject: 'Public records request: FY2026 check register', name: 'Records Custodian', token: 'PREVIEW0', kind: 'records',
+          body: 'Under Chapter 119, Florida Statutes, we request copies of the check register (all disbursements) for fiscal year 2026 in electronic form.\n\nA spreadsheet or CSV is ideal. If any part is exempt, please cite the exemption and release the rest.\n\nThank you,\nBayCounty.me'}
+        : {subject: 'Question about the FY2027 stormwater fee', name: 'Commissioner Sample', token: 'PREVIEW0',
+          body: 'I’m writing about the stormwater fee in the FY2027 budget.\n\nCould you tell us which figure the Commission adopted? We’ll publish your answer next to the budget.\n\nThank you,\nBayCounty.me'});
+      note = 'Sample text in the real layout.';
+      break;
+    }
+    case 'contact':
+      m = {subject: '[BayCounty.me] Correction · /meetings', html: require('./contact').contactEmail({topic: 'Correction', name: 'Jane Resident', email: 'jane@example.org', page: `${SITE}/meetings`,
+        message: 'The meeting time listed for the Nov 4 Planning Commission is wrong. The city moved it to 5:30 PM.'}), text: ''};
+      note = 'Sample message.';
+      break;
+    case 'corr_reply':
+      m = require('./_correspondence').replyNotice({official_name: 'City Clerk', official_seat: 'Records request', government: GOVS[gov][0], subject: 'Public records request: FY2026 check register'},
+        {subject: 'RE: Public records request: FY2026 check register', text: 'Attached is the FY2026 check register you requested. There is no charge for this request.', attachments: [{}]}, 'clerk@example.gov', 'header');
+      note = 'Sample reply.';
+      break;
+    case 'health':
+      m = require('./_health').problemsEmail({last_sync: new Date(Date.now() - 30 * 3600e3).toISOString(), problems: [
+        {level: 'error', text: 'meetings: last successful load was 52 hours ago (limit 36).'}, {level: 'warning', text: 'agenda-items: 3 files could not be read.'}]});
+      note = 'Sample problems.';
+      break;
+    case 'review_alerts':
+      m = require('./alerts-run').reviewEmail([{id: 2041, matches: 4, subject: '4 new matches for your BayCounty.me alerts'}, {id: 2042, matches: 2, subject: '2 new matches for your BayCounty.me alerts'}], 7);
+      note = 'Sample drafts.';
+      break;
+    case 'review_digest':
+      m = require('./digest').reviewEmail('ready', {done: [{gov: 'Lynn Haven', ok: true}, {gov: 'Panama City', ok: true}, {gov: 'Callaway', ok: false, error: {message: 'Sample error'}}]});
+      note = 'Sample drafts.';
+      break;
     default: throw Object.assign(new Error('Unknown email.'), {status: 404});
   }
   return {subject: m.subject, html: inert(m.html), text: inert(m.text), note};

@@ -54,6 +54,8 @@ import urllib.request
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, os.path.join(HERE, "..", "meetings"))
 import fetch_meetings as fm  # noqa: E402  (reuses the per-board source adapters)
+sys.path.insert(0, os.path.join(HERE, "..", "..", "site"))
+import email_ui  # noqa: E402  (the shared email layout, twin of api/_email_ui.js)
 
 MAX_BYTES = 1024 * 1024 * 1024                    # never read more than 1 GB of one file
 STORE_MAX = int(os.environ.get("AGENDA_STORE_MAX_MB") or 50) * 1024 * 1024  # Supabase Storage's default per-file limit
@@ -633,20 +635,19 @@ class Run:
 
 
 def notice_html(subject, items, more=""):
-    """Full HTML document for the admin notice. Spam filters score bare HTML fragments and long bare URLs as
-    spam-like, so each file is a short link with its label, inside a real <html><body>."""
-    e = fm.html.escape
-    li = "".join('<p style="margin:0 0 10px 0">%s<br><a href="%s" style="color:#1E3A76">Open the file</a></p>' % (e(label), e(url, quote=True))
-                 for label, url in items)
-    if more:
-        li += "<p>%s</p>" % e(more)
-    return ('<!DOCTYPE html><html><head><meta charset="UTF-8"><title>%s</title></head>'
-            '<body style="margin:0;padding:24px;background:#F6F8FB;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:22px;color:#161B24">'
-            '<div style="max-width:600px;margin:0 auto;background:#FFFFFF;border:1px solid #E1E6ED;padding:20px 24px">'
-            '<p style="font-size:18px;font-weight:bold;margin:0 0 16px 0">BayCounty.me agendas</p>%s'
-            '<p><a href="https://baycounty.me/admin" style="color:#1E3A76">Open the Agendas tab</a></p>'
-            '<p style="font-size:12px;color:#5A6372;margin:16px 0 0 0">Sent to BayCounty.me admins when the agenda watcher finds new files.</p>'
-            '</div></body></html>') % (e(subject), li)
+    """Full HTML for the admin notice, in the shared email layout. items: [(status, label, url)], status "new" or
+    "updated". Each file is a short link under its label (spam filters dislike long bare URLs)."""
+    e = email_ui.esc
+    n_new = sum(1 for s, _, _ in items if s == "new")
+    rows = [("teal" if s == "new" else "amber", "New" if s == "new" else "Updated",
+             "<b>%s</b><br>%s" % (e(label), email_ui.a(url, "Open the file", "font-size:13px"))) for s, label, url in items]
+    body = email_ui.list_rows(rows) + (email_ui.p(e(more), muted=True, size=14, lh=21) if more else "") + \
+        email_ui.button(email_ui.SITE + "/admin#agendas", "Review on the Agendas tab")
+    title = " and ".join(x for x in ["%d new agenda%s" % (n_new, "" if n_new == 1 else "s") if n_new else "",
+                                     "%d updated" % (len(items) - n_new) if len(items) - n_new else ""] if x) or "Agenda files"
+    return email_ui.admin_notice(subject, body, preheader_text=items[0][1] if items else "", kicker="Agenda watcher", tone="blue", ic="file",
+                                 eyebrow="Agenda watcher", title=title,
+                                 footer=email_ui.admin_footer("Sent to BayCounty.me admins when the agenda watcher finds new files."))
 
 
 def notify(run):
@@ -667,10 +668,9 @@ def notify(run):
     n_new = sum(1 for s, _ in rows if s == "new")
     subject = "BayCounty.me agendas: %d new, %d updated" % (n_new, len(rows) - n_new)
     text = "\n".join(lines) + "\n\nReview them on https://baycounty.me/admin (Agendas tab).\n"
-    html = notice_html(subject, [(("NEW" if s == "new" else "UPDATED") + ": %s %s%s" % (
-        d["board"] or d["source"], d["kind"], " for " + d["meeting_date"] if d["meeting_date"] else "") +
-        (" (%s)" % d["title"] if d["title"] else ""), d["url"]) for s, d in rows[:40]],
-        "...and %d more on the Agendas tab." % more if more else "")
+    html = notice_html(subject, [(s, "%s %s%s" % (d["board"] or d["source"], d["kind"], " for " + d["meeting_date"] if d["meeting_date"] else "") +
+                                  (" (%s)" % d["title"] if d["title"] else ""), d["url"]) for s, d in rows[:40]],
+                       "...and %d more on the Agendas tab." % more if more else "")
     body = json.dumps({"from": os.environ.get("ALERTS_FROM") or "BayCounty.me <hello@baycounty.me>",
                        "to": [a for a in re.split(r"[\s,;]+", to) if a], "subject": subject, "text": text, "html": html}).encode()
     req = urllib.request.Request("https://api.resend.com/emails", data=body, method="POST",

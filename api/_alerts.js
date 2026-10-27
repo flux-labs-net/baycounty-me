@@ -1,5 +1,6 @@
 // Shared helpers for BayCounty.me email alerts (files starting with _ are not routes).
 const crypto = require('crypto');
+const ui = require('./_email_ui');
 const GOVS = {
   county: ['Bay County', 'c9e0b24b-617a-40ee-842f-0c89112299e9'],
   schools: ['Bay District Schools', '29f40586-260f-45fa-9c47-5a703bc5bb75'],
@@ -31,19 +32,14 @@ async function resend(path, method, body, key) {
   return {ok: r.ok, status: r.status, body: j};
 }
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
+// Wraps a plain body in the shared email layout (api/_email_ui.js). Builders that want the badge/hero call ui.layout.
 function emailShell(title, inner, footer) {
-  return `<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="X-UA-Compatible" content="IE=edge"><title>${esc(title)}</title></head>
-<body style="margin:0;padding:0;background-color:#F6F8FB"><table width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#F6F8FB" style="background-color:#F6F8FB"><tr><td align="center" style="padding-top:24px;padding-bottom:24px;padding-left:12px;padding-right:12px">
-<table width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px;width:100%;background-color:#FFFFFF;border:1px solid #E1E6ED" bgcolor="#FFFFFF">
-<tr><td style="padding-top:20px;padding-bottom:16px;padding-left:24px;padding-right:24px;border-bottom:1px solid #E1E6ED;font-family:Arial,Helvetica,sans-serif;font-size:20px;line-height:24px;color:#161B24;font-weight:bold">BayCounty<span style="color:#E5564A">.me</span></td></tr>
-<tr><td style="padding-top:20px;padding-bottom:8px;padding-left:24px;padding-right:24px;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:22px;color:#161B24">${inner}</td></tr>
-<tr><td style="padding-top:16px;padding-bottom:20px;padding-left:24px;padding-right:24px;border-top:1px solid #E1E6ED;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:18px;color:#5A6372">${footer}</td></tr>
-</table></td></tr></table></body></html>`;
+  return ui.layout({title, body: inner, footer: footer || DEFAULT_FOOTER});
 }
 // Every email leaves as a full HTML document with a plain-text part. Spam filters (Microsoft and Sophos most of all)
 // score bare HTML fragments and HTML-only mail as spam-like, so a builder that passes a fragment gets the site shell
 // and a footer, and one that passes no text gets text made from its HTML.
-const DEFAULT_FOOTER = 'BayCounty.me puts Bay County, Florida public records in plain view. Built by Flux Labs, Panama City, Florida.';
+const DEFAULT_FOOTER = ui.ABOUT;
 function htmlToText(html) {
   return String(html)
     .replace(/<(style|script|head)[^>]*>[\s\S]*?<\/\1>/gi, '')
@@ -59,7 +55,7 @@ function finishEmail(body) {
   if (!out.text && out.html) out.text = htmlToText(out.html);
   return out;
 }
-const button = (href, label) => `<table cellpadding="0" cellspacing="0" border="0" style="margin-top:8px;margin-bottom:16px"><tr><td bgcolor="#1E3A76" style="background-color:#1E3A76;border-radius:6px;padding-top:12px;padding-bottom:12px;padding-left:20px;padding-right:20px"><a href="${esc(href)}" style="font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:18px;color:#FFFFFF;text-decoration:none;font-weight:bold">${esc(label)}</a></td></tr></table>`;
+const button = (href, label) => ui.button(href, label);
 
 // Sign-up forms must be posted from this site. Requires an Origin header from an allowed origin, or (for browsers
 // that leave Origin off) a Referer on an allowed origin. A request with neither is refused.
