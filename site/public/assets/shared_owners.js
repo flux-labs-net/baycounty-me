@@ -3,7 +3,7 @@
   const $ = s => document.querySelector(s);
   const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]));
   const usd = n => '$' + Number(n || 0).toLocaleString('en-US', {maximumFractionDigits: 0});
-  const title = s => String(s || '').toLowerCase().replace(/\b([a-z])/g, m => m.toUpperCase()).replace(/\b(Llc|Inc|Pa|Lp|Llp|Pllc)\b/g, m => m.toUpperCase());
+  const title = s => window.BCNames ? BCNames.bizCase(String(s || '')) : String(s || '');  // api/_names.js, in site.js
   let groups = [];
   const yearOf = g => (String(g.election || '').match(/\b(19|20)\d\d\b/) || [''])[0];
 

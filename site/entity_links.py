@@ -246,7 +246,10 @@ ENTITY_JS = r"""
     if (k === 'person') return '/people/' + encodeURIComponent(v);
     return '/profile/' + k + '/' + encodeURIComponent(v);
   }
-  const a = (id, text, cls) => { const u = href(id); return u ? `<a${cls ? ` class="${cls}"` : ''} href="${esc(u)}">${esc(text)}</a>` : esc(text); };
+  const a = (id, text, cls) => {  // names filed in all caps read as names (api/_names.js), as entity_links.a() does at build
+    const u = href(id), t = window.BCNames ? BCNames.nameCase(text, id) : text;
+    return u ? `<a${cls ? ` class="${cls}"` : ''} href="${esc(u)}">${esc(t)}</a>` : esc(t);
+  };
   window.BC = Object.assign(window.BC || {}, {href, a});
   // names in text that page scripts fill in: same rules as entity_links.link_names()
   const main = document.getElementById('main'); if (!main || document.documentElement.lang.startsWith('es')) return;
