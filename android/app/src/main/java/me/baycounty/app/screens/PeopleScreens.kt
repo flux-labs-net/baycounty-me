@@ -23,12 +23,13 @@ import me.baycounty.kit.Format
 import me.baycounty.kit.Governments
 import me.baycounty.kit.Officeholders
 import me.baycounty.kit.PeopleDirectory
+import me.baycounty.kit.PeopleEra
 import me.baycounty.kit.PeopleKind
 import me.baycounty.kit.Period
 import me.baycounty.kit.RecordLinks
 import me.baycounty.kit.Row as DataRow
 
-/** Officials, department leaders and candidates since 2016, grouped by government, with the site's filter chips. */
+/** Officials, department leaders and candidates since 2016, grouped by government and in title then last-name order like the site, with the site's filter chips. */
 @Composable
 fun PeopleScreen() {
     val store = LocalStore.current
@@ -36,10 +37,12 @@ fun PeopleScreen() {
     LaunchedEffect(Unit) { store.loadPeople() }
     var query by rememberSaveable { mutableStateOf("") }
     var kind by rememberSaveable { mutableStateOf(PeopleKind.EVERYONE) }
+    var era by rememberSaveable { mutableStateOf(PeopleEra.ALL) }
     val all = store.people?.people ?: emptyList()
     val q = query.lowercase()
-    val people = all.filter { kind.includes(it) && (q.isEmpty() || q in it.name.lowercase()) }
+    val people = all.filter { kind.includes(it) && era.includes(it) && (q.isEmpty() || q in it.name.lowercase()) }
     val counts = PeopleKind.entries.associateWith { k -> all.count { k.includes(it) } }
+    val eraCounts = PeopleEra.entries.associateWith { e -> all.count { e.includes(it) } }
     Screen("People", spacing = 20) {
         item {
             PageHero("Connections · People", "Officials and candidates",
@@ -49,21 +52,23 @@ fun PeopleScreen() {
         if (store.people == null) { item { AppDataPending("people.json", "Couldn't load people") { store.loadPeople() } }; return@Screen }
         item { FilterField(query, "Find a person") { query = it } }
         item { ChipRow(PeopleKind.entries.map { it to it.label }, kind, counts) { kind = it } }
-        val groups = Governments.order.map { (Governments.names[it] ?: it) to people.filter { p -> p.gov_ids.firstOrNull() == it } } +
-            listOf("Other offices" to people.filter { (it.gov_ids.firstOrNull() ?: "") !in Governments.order })
-        for ((title, list) in groups) {
-            if (list.isEmpty()) continue
-            val sorted = list.sortedBy { it.name }
+        item { ChipRow(PeopleEra.entries.map { it to it.label }, era, eraCounts) { era = it } }
+        for ((title, list) in PeopleDirectory.grouped(people)) {
             item(key = title) {
                 Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                     Row(verticalAlignment = Alignment.Bottom) {
                         Text(title, style = T.headline, color = Brand.text, modifier = Modifier.weight(1f))
                         Text("${list.size}", style = T.subhead, color = Brand.secondary)
                     }
-                    CardList {
-                        sorted.forEachIndexed { i, p ->
-                            PersonRow(p) { nav.push(Route.Person(p.id)) }
-                            if (i < sorted.lastIndex) RowDivider(64.dp)
+                    // Current, then Past; each already in the site's order (title, then last name)
+                    for ((label, sorted) in listOf("CURRENT" to list.filter { !it.isPast }, "PAST" to list.filter { it.isPast })) {
+                        if (sorted.isEmpty()) continue
+                        Text(label, style = T.caption, color = Brand.secondary)
+                        CardList {
+                            sorted.forEachIndexed { i, p ->
+                                PersonRow(p) { nav.push(Route.Person(p.id)) }
+                                if (i < sorted.lastIndex) RowDivider(64.dp)
+                            }
                         }
                     }
                 }

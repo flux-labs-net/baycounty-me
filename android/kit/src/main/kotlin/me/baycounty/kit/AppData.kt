@@ -224,6 +224,25 @@ data class VendorDirectory(val about: String? = null, val vendors: List<Vendor> 
 
 @Serializable
 data class PeopleDirectory(val about: String? = null, val people: List<Person> = emptyList()) {
+    companion object {
+        /**
+         * The People list as the site shows it: one heading per government, each in government then title then last-name order.
+         * Without the order fields (an older people.json) it falls back to the site's government order, current before
+         * past, then last name.
+         */
+        fun grouped(list: List<Person>): List<Pair<String, List<Person>>> {
+            val out = linkedMapOf<String, MutableList<Person>>()
+            val govIndex = { p: Person -> Governments.order.indexOf(p.gov ?: p.gov_ids.firstOrNull() ?: "").let { if (it < 0) 99 else it } }
+            val sorted = list.sortedWith(compareBy<Person>({ it.order ?: (Int.MAX_VALUE - 100 + govIndex(it)) },
+                { if (it.order == null && it.isPast) 1 else 0 }, { if (it.order == null) it.lastName else "" }))
+            for (p in sorted) {
+                val title = p.group ?: Governments.names[p.gov ?: p.gov_ids.firstOrNull() ?: ""] ?: "Other offices"
+                out.getOrPut(title) { mutableListOf() } += p
+            }
+            return out.map { it.key to it.value }
+        }
+    }
+
     @Serializable
     data class Person(
         val id: String = "",
@@ -238,9 +257,26 @@ data class PeopleDirectory(val about: String? = null, val people: List<Person> =
         val kinds: List<String>? = null,
         /** Path of their official photo on the site ("/photos/people/<id>.webp", dataset official-photos); null shows initials. */
         val photo: String? = null,
+        /**
+         * The People list's order (site/people_pages.py directory_order): the government they are listed under,
+         * its name (the list's heading), their title rank (0 mayor or chair ... 8 past candidate) and their position.
+         */
+        val gov: String? = null,
+        val group: String? = null,
+        val rank: Int? = null,
+        /** "current" (in office, on staff or on the 2026 ballot) or "past" (former officials and past candidates). */
+        val status: String? = null,
+        val order: Int? = null,
         val roles: List<Role> = emptyList(),
     ) {
         val photoUrl: String? get() = photo?.let { BayCountyClient.SITE + it }
+        val isPast: Boolean
+            get() = status?.let { it == "past" } ?: rank?.let { it >= 7 }
+                ?: (label == "Former official" || label == "Past candidate")  // an older people.json
+        /** Surname for sorting: "Kenneth L. Ayers, Jr." sorts under Ayers (people_pages.last_name). */
+        val lastName: String
+            get() = name.replace(",", " ").split(" ").filter { it.isNotBlank() && it.lowercase().trim('.') !in setOf("jr", "sr", "ii", "iii", "iv") }
+                .lastOrNull()?.lowercase() ?: name.lowercase()
 
         @Serializable data class Role(val role: String? = null, val gov_id: String? = null, val seat: String? = null)
 
@@ -385,6 +421,16 @@ suspend fun <T> BayCountyClient.appData(name: String, serializer: KSerializer<T>
 }
 
 /** The People list's filter groups, the same chips as the site's /people page. */
+/**
+ * The People list's Current / Past filter, like the site's menu: current is in office, on staff or on the 2026 ballot;
+ * past is former officials and past candidates.
+ */
+enum class PeopleEra(val label: String) {
+    ALL("Current and past"), CURRENT("Current"), PAST("Past");
+
+    fun includes(p: PeopleDirectory.Person): Boolean = this == ALL || (this == PAST) == p.isPast
+}
+
 enum class PeopleKind(val key: String, val label: String) {
     EVERYONE("everyone", "Everyone"),
     ELECTED("elected", "Elected"),

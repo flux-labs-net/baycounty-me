@@ -264,6 +264,24 @@ public struct VendorDirectory: Codable, Sendable {
 }
 
 public struct PeopleDirectory: Codable, Sendable {
+    /// The People list as the site shows it: one heading per government, each in government then title then last-name order.
+    /// Without the order fields (an older people.json) it falls back to the site's government order, current before past,
+    /// then last name.
+    public static func grouped(_ list: [Person]) -> [(title: String, people: [Person])] {
+        func key(_ p: Person) -> (Int, Int, String) {
+            if let o = p.order { return (o, 0, "") }
+            let g = p.gov ?? p.gov_ids.first ?? ""
+            return (Int.max - 100 + (Governments.order.firstIndex(of: g) ?? 99), p.isPast ? 1 : 0, p.lastName)
+        }
+        let sorted = list.sorted { key($0) < key($1) }
+        var out: [(title: String, people: [Person])] = []
+        for p in sorted {
+            let title = p.group ?? Governments.names[p.gov ?? p.gov_ids.first ?? ""] ?? "Other offices"
+            if let i = out.firstIndex(where: { $0.title == title }) { out[i].people.append(p) } else { out.append((title, [p])) }
+        }
+        return out
+    }
+
     public struct Person: Codable, Sendable, Identifiable, Hashable {
         public struct Role: Codable, Sendable, Hashable {
             public let role: String?
@@ -282,6 +300,25 @@ public struct PeopleDirectory: Codable, Sendable {
         public var kinds: [String]? = nil
         /// Path of their official photo on the site ("/photos/people/<id>.webp", dataset official-photos); nil shows initials.
         public var photo: String? = nil
+        /// The People list's order (site/people_pages.py directory_order): the government they are listed under,
+        /// its name (the list's heading), their title rank (0 mayor or chair ... 8 past candidate) and their position.
+        public var gov: String? = nil
+        public var group: String? = nil
+        public var rank: Int? = nil
+        /// "current" (in office, on staff or on the 2026 ballot) or "past" (former officials and past candidates).
+        public var status: String? = nil
+        public var order: Int? = nil
+        public var isPast: Bool {
+            if let status { return status == "past" }
+            if let rank { return rank >= 7 }
+            return label == "Former official" || label == "Past candidate"  // an older people.json
+        }
+        /// Surname for sorting: "Kenneth L. Ayers, Jr." sorts under Ayers (people_pages.last_name).
+        public var lastName: String {
+            let w = name.replacingOccurrences(of: ",", with: " ").split(separator: " ")
+                .filter { !["jr", "sr", "ii", "iii", "iv"].contains($0.lowercased().trimmingCharacters(in: CharacterSet(charactersIn: "."))) }
+            return (w.last.map(String.init) ?? name).lowercased()
+        }
         public let roles: [Role]
 
         public var photoURL: URL? { photo.map { BayCountyClient.site.appendingPathComponent(String($0.dropFirst())) } }
@@ -475,6 +512,24 @@ extension BayCountyClient {
 }
 
 /// The People list's filter groups, the same chips as the site's /people page.
+/// The People list's Current / Past filter, like the site's menu: current is in office, on staff or on the 2026 ballot;
+/// past is former officials and past candidates.
+public enum PeopleEra: String, Sendable, CaseIterable, Identifiable {
+    case all, current, past
+    public var id: String { rawValue }
+    public var label: String {
+        switch self {
+        case .all: "Current and past"
+        case .current: "Current"
+        case .past: "Past"
+        }
+    }
+
+    public func includes(_ p: PeopleDirectory.Person) -> Bool {
+        self == .all || (self == .past) == p.isPast
+    }
+}
+
 public enum PeopleKind: String, Sendable, CaseIterable, Identifiable {
     case everyone, elected, candidate, staff, past
     public var id: String { rawValue }

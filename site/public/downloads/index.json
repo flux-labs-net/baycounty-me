@@ -3570,7 +3570,7 @@
   {
    "id": "people-directory",
    "title": "People",
-   "description": "Elected officials, department leaders and 2026 candidates named in BayCounty.me records, with their roles.",
+   "description": "Elected officials, department leaders and 2026 candidates named in BayCounty.me records, with their roles. sort_order is the People page's order: by the government they are listed under (primary_gov_id), then title (title_rank 0 mayor, chair or elected officer to 8 past candidate, named in title_group), then last name. status is current (in office, on staff or on the 2026 ballot) or past (former officials and past candidates).",
    "rows": 329,
    "columns": [
     {
@@ -3599,6 +3599,62 @@
     {
      "name": "roles",
      "type": "array"
+    },
+    {
+     "name": "primary_gov_id",
+     "type": "string",
+     "values": [
+      "airport",
+      "beach_mosquito",
+      "clerk",
+      "county",
+      "county_court",
+      "cw",
+      "lake_powell_cdd",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "port",
+      "property_appraiser",
+      "schools",
+      "sheriff",
+      "soe",
+      "sp",
+      "tax_collector"
+     ]
+    },
+    {
+     "name": "title_rank",
+     "type": "number"
+    },
+    {
+     "name": "title_group",
+     "type": "string",
+     "values": [
+      "2026 candidate",
+      "Assistant manager, clerk or attorney",
+      "Commissioner or board member",
+      "Department leader",
+      "Former official",
+      "Manager or administrator",
+      "Mayor, chair or elected officer",
+      "Past candidate",
+      "Vice chair or mayor pro tem"
+     ]
+    },
+    {
+     "name": "status",
+     "type": "string",
+     "values": [
+      "current",
+      "past"
+     ]
+    },
+    {
+     "name": "sort_order",
+     "type": "number"
     },
     {
      "name": "gov_id",
