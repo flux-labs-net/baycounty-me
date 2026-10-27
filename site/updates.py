@@ -9,6 +9,9 @@ from datetime import datetime, timezone
 import html
 
 CHANGES = [
+    {'date': '2026-10-27', 'title': 'Building, development and road projects',
+     'text': "Two new pages. Building and development shows how many new homes are permitted each year since 2016 in the county and each city (from the Census Bureau's permit survey), and the commercial buildings, subdivisions and apartments in the county's planning review, with their status and dates on a map. Road projects shows the state highway work under way and what each FDOT contract costs, FDOT's five-year plan for local roads, the contractors (linked to their profiles, with what local governments paid them), and the county and city road jobs paid for by the half-cent sales tax. Both refresh every week, and the apps list the same records.",
+     'pages': ['/development', '/roads', '/public-money/sales-tax-projects', '/open-data', '/developers']},
     {'date': '2026-10-27', 'title': 'Chambers of commerce',
      'text': "A new page covers Bay County's two chambers of commerce, the Bay County Chamber and the Panama City Beach Chamber: who sits on their boards and staff (each name links to a profile with the person's other boards and records), the organizations those board members represent and what local governments paid them, upcoming chamber and community events, regular programs such as First Friday and Friday at the Beach, each chamber's IRS filings, and the tourism agency money paid to them. Board lists are copied from the chambers' own websites; no contact details are published. The apps have the same screen.",
      'pages': ['/chambers', '/connections/nonprofits', '/people', '/open-data', '/developers']},

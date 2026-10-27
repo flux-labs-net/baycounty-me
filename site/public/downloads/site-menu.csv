@@ -22,6 +22,8 @@ fl-bay,en,Spending,3,Where it goes,Where it goes,1,CRA spending,/public-money/cr
 fl-bay,en,Spending,3,Where it goes,Where it goes,2,CRA tax increment,/public-money/cra-tax-increment,"Property tax paid to the CRAs, by year",False,
 fl-bay,en,Spending,3,Where it goes,Where it goes,3,Sales tax projects,/public-money/sales-tax-projects,Half-cent projects: promised vs built,False,
 fl-bay,en,Spending,3,Where it goes,Where it goes,4,Hurricane Michael,/public-money/hurricane-michael,"FEMA, HUD and state recovery money",False,
+fl-bay,en,Spending,3,Where it goes,Building and roads,5,Building & development,/development,New homes permitted and projects in review,False,
+fl-bay,en,Spending,3,Where it goes,Building and roads,6,Road projects,/roads,"State road work, costs and the five-year plan",False,
 fl-bay,en,Watchdog,4,Is it spent well?,,0,Accountability console,/public-money/accountability,"Big projects from approval to close, with open questions",True,
 fl-bay,en,Watchdog,4,Is it spent well?,Is it spent well?,1,Contracts,/public-money/contracts,"Who wins them, and how",False,
 fl-bay,en,Watchdog,4,Is it spent well?,Is it spent well?,2,Vendors,/public-money/vendors,"Every company paid, with its contracts and votes",False,

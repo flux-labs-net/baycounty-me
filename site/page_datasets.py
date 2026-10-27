@@ -390,6 +390,65 @@ def chamber_events():
     return _chamber_rows()[2]
 
 
+
+# --- Building and development (/development) and road projects (/roads) ----------------------------------------------
+
+def _place_file(*parts):
+    """data/<topic>/<county>/<file> for the current place, or None when this place has none yet."""
+    import json
+    from place import PLACE_ID
+    p = os.path.join(HERE, '..', 'data', parts[0], PLACE_ID.split('-', 1)[-1], *parts[1:])
+    return json.load(open(p)) if os.path.exists(p) else None
+
+
+def _gov_short(gid):
+    from govs import GOVS
+    return next((g['short'] for g in GOVS if g['key'] == gid), None)
+
+
+def development_projects():
+    """Development projects on each government's public planning map (data/development/fetch.py)."""
+    d = _place_file('development', 'projects.json')
+    if not d:
+        return []
+    layer = {L['id']: L for L in d['layers']}
+    return [{'place_id': d['place_id'], 'project_id': r['project_id'], 'gov_id': r['gov_id'], 'government': _gov_short(r['gov_id']),
+             'name': r['name'], 'case_number': r['case_number'], 'description': r['description'], 'size': r['size'], 'location': r['location'],
+             'status': r['status'], 'applied_date': r['applied_date'], 'approved_date': r['approved_date'], 'permit_date': r['permit_date'],
+             'occupancy_date': r['occupancy_date'], 'plans_url': r['plans_url'], 'lat': r['lat'], 'lng': r['lng'],
+             'source': layer[r['layer']]['label'], 'source_page': layer[r['layer']]['page'], 'fetched': d['fetched'], 'source_url': r['source_url']}
+            for r in d['projects']]
+
+
+def housing_permits():
+    """New homes authorized by building permits per year and area (Census Building Permits Survey)."""
+    d = _place_file('development', 'permits.json')
+    if not d:
+        return []
+    def summary(r):
+        v = r['total_value']
+        money = f'${v / 1e6:,.1f} million' if v >= 1e6 else f'${v:,}'
+        return f"{r['total_units']:,} new homes ({r['single_family_units']:,} single-family), {money} on the permits" + (' (Census estimate)' if r['estimated'] else '')
+    return [{'place_id': d['place_id'], **r, 'summary': summary(r)} for r in d['permits']]
+
+
+def road_contracts():
+    """FDOT construction and maintenance contracts in the county since 2016 (data/roads/fetch_fdot.py)."""
+    d = _place_file('roads', 'fdot.json')
+    if not d:
+        return []
+    return [{'place_id': d['place_id'], 'agency': 'Florida Department of Transportation', **{k: v for k, v in r.items()}, 'fetched': d['fetched']}
+            for r in d['contracts']]
+
+
+def road_work_program():
+    """Projects in FDOT's current adopted five-year work program in the county, one row per project and phase."""
+    d = _place_file('roads', 'fdot.json')
+    if not d:
+        return []
+    return [{'place_id': d['place_id'], 'agency': 'Florida Department of Transportation', **r, 'fetched': d['fetched']} for r in d['work_program']]
+
+
 def tax_districts():
     """Which taxing authorities levy in each tax district (My Address, tax calculator); rates are in property-tax-rates."""
     from addr_page import address_data
@@ -922,5 +981,9 @@ DATASETS = [
     ('chambers', 'Chambers of commerce', "One row per chamber of commerce: what it is and who it serves, its board meetings, its latest IRS Form 990 (revenue, expenses, assets, employees), public money paid to it by local governments and tourism agencies (from nonprofit-payments), its foundation, and links to its member directory, events and join page. entity_id is its profile (entity-profiles). Chambers are private, member-owned nonprofits, not government agencies.", chambers),
     ('chamber-leaders', 'Chambers of commerce: boards and staff', "Each chamber's board (executive committee, directors, ex officio and honorary members), staff and past chairs since 2016, as listed on the chamber's own website on as_of: name, title and the organization each board member represents. No phone numbers, emails or addresses. person_entity_id and organization_entity_id link to profiles; person_match and organization_match say how each link was made (blank = no match, shown as plain text).", chamber_leaders),
     ('chamber-events', 'Chambers of commerce: events and programs', "Upcoming events from each chamber's public calendar (kind event: title, start and end in local time, venue and city, category, the event's own link) and each chamber's yearly and monthly signature programs (kind program: schedule and what it is). chamber_event is false for community events a chamber lists on its calendar. Refreshed daily where the calendar has a public feed.", chamber_events),
+    ('development-projects', 'Development projects', "Development projects on each local government's public planning map: Bay County's development orders for the unincorporated county (site plans for commercial buildings, subdivisions, apartments and other projects, from application to approval) and Panama City Beach's development map. One row per project: name, what it is, size, address, status and the application, approval, building permit and occupancy dates on record. Projects with no date, or nothing since 2016, are left out. Owners and developers are not listed on the maps.", development_projects),
+    ('housing-permits', 'New homes permitted', "New privately owned homes authorized by building permits, per year, for the whole county, each city and the unincorporated area, from the U.S. Census Bureau's Building Permits Survey: single-family homes, homes in 2 to 4 unit buildings and in buildings with 5 or more units, with the construction value the permits list and a one-line summary. year_to_date rows cover this year so far (period). estimated is true when the government sent the Census Bureau no monthly reports that year and the figures are the Bureau's estimate.", housing_permits),
+    ('road-contracts', 'State road contracts', "Every Florida Department of Transportation construction and maintenance contract in the county that was under way in 2016 or later: what and where, the contractor, the current contract amount, letting, start, estimated finish and final acceptance dates, and status. status is Under way when FDOT's map shows the contract active. vendor_id links a contractor that local governments also paid. project_id is FDOT's item and segment number, which joins road-work-program.", road_contracts),
+    ('road-work-program', 'State road work program', "Projects in the Florida Department of Transportation's current adopted five-year work program in the county, one row per project and phase (planning, project development and environment study, design, right of way, construction, construction inspection): what and where, the kind of work, the fiscal years the phase is funded in (July to June, named for the year it ends) and the project's status. FDOT's map layers don't carry dollar amounts; contract amounts are in road-contracts.", road_work_program),
     ('tax-districts', 'Tax districts', 'Which taxing authorities levy property tax in each tax district, and the combined millage. Rates by year are in property-tax-rates (authority_id).', tax_districts),
 ]

@@ -3737,7 +3737,7 @@
    "id": "site-updates",
    "title": "What's new",
    "description": "Each change to the site's data and pages, newest first.",
-   "rows": 59,
+   "rows": 60,
    "columns": [
     {
      "name": "date",
@@ -6576,7 +6576,7 @@
    "id": "entity-profiles",
    "title": "Profiles: people, companies and organizations",
    "description": "Every company, elected official, candidate, nonprofit, nonprofit board member, registered business, committee and government named in BayCounty.me records, one row each, with its profile page and how many documented connections it has. entity_id (kind:key) joins entity-connections. Board members are named as their nonprofits' public filings list them; individual campaign donors are included only when they run a registered business (owner-gifts).",
-   "rows": 16472,
+   "rows": 16497,
    "columns": [
     {
      "name": "entity_id",
@@ -6693,7 +6693,7 @@
    "id": "entity-connections",
    "title": "Connections between people, companies and organizations",
    "description": "Every documented connection between two entities in entity-profiles, totalled per pair and kind: a government paid a payee, an organization gave to an official's or candidate's campaign, an official voted on a company's contracts, a person sits on a nonprofit's board or runs a business, a nonprofit gave a grant, two payees share a project. Each row has its source. Individual campaign donors are included only when they run a registered business (owner-gifts); officials' board seats and businesses are added by the API once checked by hand.",
-   "rows": 19716,
+   "rows": 19748,
    "columns": [
     {
      "name": "link_id",
@@ -6756,6 +6756,7 @@
       "candidate",
       "gift",
       "grant",
+      "hired",
       "paid",
       "ran",
       "related",
@@ -6773,6 +6774,7 @@
      "values": [
       "gave a grant to",
       "gave to the campaign of",
+      "hired",
       "is a candidate for office in",
       "is the same organization as",
       "paid",
@@ -7019,7 +7021,7 @@
    "id": "data-sources",
    "title": "Where the data comes from",
    "description": "Every source BayCounty.me takes records from, one row per source: the topic, the government it covers (or state and federal databases), the link, how we get it (automatic fetch, downloaded and read by hand, a state or federal bulk file, or a live lookup), how often, what we take from it, how we process it and the checks we run.",
-   "rows": 117,
+   "rows": 122,
    "columns": [
     {
      "name": "topic",
@@ -7027,6 +7029,7 @@
      "values": [
       "Audits and debt",
       "Budgets",
+      "Building and development",
       "Businesses and owners",
       "Campaign money",
       "Chambers of commerce",
@@ -7043,6 +7046,7 @@
       "Property tax",
       "Public records contacts",
       "Redevelopment agencies (CRAs)",
+      "Road projects",
       "Sales tax projects",
       "Tourist tax",
       "Votes"
@@ -7060,6 +7064,7 @@
       "chambers",
       "contracts",
       "cra",
+      "development",
       "elections",
       "fees",
       "meetings",
@@ -7069,6 +7074,7 @@
       "officials",
       "property-tax",
       "records",
+      "roads",
       "salaries",
       "sales-tax",
       "tourist-tax",
@@ -7154,7 +7160,8 @@
       "Monthly",
       "Once",
       "Quarterly",
-      "Weekly"
+      "Weekly",
+      "Weekly (Census posts monthly)"
      ]
     },
     {
@@ -7180,8 +7187,10 @@
       "Infrastructure sales tax projects are downloaded from Bay County's map server every week and matched to the published project schedule.",
       "Local news reports are cited for context (for example an arrest, a resignation or a policy change) when no official document says it.",
       "Money votes are read from adopted minutes (or draft minutes printed in the next agenda packet). Each motion is recorded with the roll call by name; the amount comes from the staff memo or resolution attached to the item. Scanned minutes are read with OCR.",
+      "New-home counts come from the Census Bureau's Building Permits Survey files for the county, each city and the unincorporated area. Development projects are read every week from the county's public planning map layers (Bay County's development orders and Panama City Beach's development map).",
       "Pay comes from budget pay plans, published salary schedules, job postings and the state's report on officials' salaries.",
       "Records custodians, portals and policies are taken from each agency's official pages.",
+      "State road contracts and FDOT's adopted five-year work program are read every week from FDOT's public map services, filtered to the county. County and city road work comes from the half-cent sales tax project map.",
       "Summary totals and the itemized export for each campaign are downloaded from the Supervisor of Elections' campaign finance system every day. Amended and deleted lines are applied, then businesses are matched to state corporate records.",
       "Tax rates (millage) come from state Department of Revenue and EDR files and the governments' adopted budgets. Assessments and exemptions come from the state's parcel and assessment roll files.",
       "The state's full corporate file (about 18 GB, updated quarterly) is filtered to businesses with an address in the county. Officers, managers and registered agents are grouped into people and matched to officials and donors.",
@@ -7204,11 +7213,13 @@
       "News is never the only source for a dollar figure.",
       "Nothing you look up is sent to or stored by BayCounty.me.",
       "Office names are checked against the Notice of General Election.",
+      "One row per contract (FDOT lists each road segment separately). A contract counts as under way only when FDOT flags it active. Contractors are joined to local vendors by name.",
       "Only audited figures are used. When a government's latest audit is not yet filed, the previous year is used and labeled.",
       "Only elected officials and department leaders are named. Other staff are counted, not named.",
       "Only portals linked from an official page are listed.",
       "Organizations are joined by EIN, then by exact name. Official-to-board matches are checked by hand before they are tagged.",
       "Panama City records were checked against 124 of 126 meetings' minutes and Panama City Beach against 38 of 50; Bay County and Lynn Haven come from agendas only. Known changes are noted on the record.",
+      "Projects with no date, or nothing on record since 2016, are left out. Census figures marked estimated are the Bureau's own estimates for a government that sent no monthly reports.",
       "Rates are checked against each government's adopted millage resolution where posted.",
       "The data is FEMA's own; nothing is retyped.",
       "Totals are added back up and compared with the printed totals. Each year links to its document.",
@@ -7223,6 +7234,7 @@
       "/connections/business-ties",
       "/connections/campaign-gifts",
       "/connections/nonprofits",
+      "/development",
       "/elections",
       "/governments",
       "/meetings",
@@ -7238,6 +7250,7 @@
       "/public-money/tourist-tax",
       "/public-money/votes",
       "/records-request",
+      "/roads",
       "/updates"
      ]
     },
@@ -7503,7 +7516,7 @@
    "id": "data-source-sites",
    "title": "Websites our records cite",
    "description": "Every website cited by the records behind BayCounty.me, per topic, with how many distinct documents and pages from it the data links to. Counted from the data files at each build.",
-   "rows": 312,
+   "rows": 320,
    "columns": [
     {
      "name": "website",
@@ -7515,6 +7528,7 @@
      "values": [
       "Audits and debt",
       "Budgets",
+      "Building and development",
       "Businesses and owners",
       "Campaign money",
       "Chambers of commerce",
@@ -7529,6 +7543,7 @@
       "Property tax",
       "Public records contacts",
       "Redevelopment agencies (CRAs)",
+      "Road projects",
       "Sales tax projects",
       "Tourist tax",
       "Votes"
@@ -7546,6 +7561,7 @@
       "chambers",
       "contracts",
       "cra",
+      "development",
       "elections",
       "fees",
       "meetings",
@@ -7553,6 +7569,7 @@
       "nonprofits",
       "property-tax",
       "records",
+      "roads",
       "salaries",
       "sales-tax",
       "tourist-tax",
@@ -7580,7 +7597,7 @@
    "id": "site-menu",
    "title": "Site menu",
    "description": "Every link in the site's main menu, one row per link, in English and Spanish: the section and the question it answers, the link's place in the section, and the section's start-here page. place_id is the place the menu belongs to (fl-bay = Bay County), so a menu for another place sits beside it.",
-   "rows": 54,
+   "rows": 56,
    "columns": [
     {
      "name": "place_id",
@@ -7634,6 +7651,7 @@
      "name": "item_group",
      "type": "string",
      "values": [
+      "Building and roads",
       "Impuestos y tarifas",
       "Is it spent well?",
       "Local governments",
@@ -8687,6 +8705,691 @@
    "json": "/downloads/chamber-events.json",
    "csv": "/downloads/chamber-events.csv",
    "api": "/api/v1/datasets/chamber-events"
+  },
+  {
+   "id": "development-projects",
+   "title": "Development projects",
+   "description": "Development projects on each local government's public planning map: Bay County's development orders for the unincorporated county (site plans for commercial buildings, subdivisions, apartments and other projects, from application to approval) and Panama City Beach's development map. One row per project: name, what it is, size, address, status and the application, approval, building permit and occupancy dates on record. Projects with no date, or nothing since 2016, are left out. Owners and developers are not listed on the maps.",
+   "rows": 246,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "project_id",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "pcb"
+     ]
+    },
+    {
+     "name": "government",
+     "type": "string",
+     "values": [
+      "Bay County",
+      "Panama City Beach"
+     ]
+    },
+    {
+     "name": "name",
+     "type": "string"
+    },
+    {
+     "name": "case_number",
+     "type": "string"
+    },
+    {
+     "name": "description",
+     "type": "string"
+    },
+    {
+     "name": "size",
+     "type": "string"
+    },
+    {
+     "name": "location",
+     "type": "string"
+    },
+    {
+     "name": "status",
+     "type": "string",
+     "values": [
+      "Applied",
+      "Approved",
+      "Built",
+      "Permitted",
+      "Under review"
+     ]
+    },
+    {
+     "name": "applied_date",
+     "type": "string"
+    },
+    {
+     "name": "approved_date",
+     "type": "string"
+    },
+    {
+     "name": "permit_date",
+     "type": "string",
+     "values": [
+      "2019-05-17",
+      "2019-09-09",
+      "2019-11-15",
+      "2020-01-30",
+      "2020-03-24",
+      "2020-05-27",
+      "2021-01-07",
+      "2021-03-29"
+     ]
+    },
+    {
+     "name": "occupancy_date",
+     "type": "string",
+     "values": [
+      "2020-01-30",
+      "2020-06-29",
+      "2021-01-13",
+      "2021-03-11",
+      "2021-05-05"
+     ]
+    },
+    {
+     "name": "plans_url",
+     "type": "string"
+    },
+    {
+     "name": "lat",
+     "type": "number"
+    },
+    {
+     "name": "lng",
+     "type": "number"
+    },
+    {
+     "name": "source",
+     "type": "string",
+     "values": [
+      "Bay County development orders (unincorporated county)",
+      "Panama City Beach developments (city map layer)"
+     ]
+    },
+    {
+     "name": "source_page",
+     "type": "string",
+     "values": [
+      "https://www.baycountyfl.gov/157/Planning-Zoning",
+      "https://www.pcbfl.gov/departments/planning-zoning"
+     ]
+    },
+    {
+     "name": "fetched",
+     "type": "string",
+     "values": [
+      "2026-10-27"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://gis.baycountyfl.gov/arcgis/rest/services/Departmental/Planning/MapServer/18",
+      "https://gis.baycountyfl.gov/arcgis/rest/services/PanamaCityBeach/PanamaCityBeachPublic/MapServer/4"
+     ]
+    }
+   ],
+   "json": "/downloads/development-projects.json",
+   "csv": "/downloads/development-projects.csv",
+   "api": "/api/v1/datasets/development-projects"
+  },
+  {
+   "id": "housing-permits",
+   "title": "New homes permitted",
+   "description": "New privately owned homes authorized by building permits, per year, for the whole county, each city and the unincorporated area, from the U.S. Census Bureau's Building Permits Survey: single-family homes, homes in 2 to 4 unit buildings and in buildings with 5 or more units, with the construction value the permits list and a one-line summary. year_to_date rows cover this year so far (period). estimated is true when the government sent the Census Bureau no monthly reports that year and the figures are the Bureau's estimate.",
+   "rows": 99,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "area_id",
+     "type": "string",
+     "values": [
+      "county",
+      "county-total",
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "sp"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "sp"
+     ]
+    },
+    {
+     "name": "area",
+     "type": "string",
+     "values": [
+      "All of Bay County",
+      "Callaway",
+      "Lynn Haven",
+      "Mexico Beach",
+      "Panama City",
+      "Panama City Beach",
+      "Parker",
+      "Springfield",
+      "Unincorporated Bay County"
+     ]
+    },
+    {
+     "name": "year",
+     "type": "number"
+    },
+    {
+     "name": "period",
+     "type": "string",
+     "values": [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024",
+      "2025",
+      "Jan to Aug 2026"
+     ]
+    },
+    {
+     "name": "months",
+     "type": "number"
+    },
+    {
+     "name": "year_to_date",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "months_reported",
+     "type": "number"
+    },
+    {
+     "name": "estimated",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "single_family_units",
+     "type": "number"
+    },
+    {
+     "name": "single_family_value",
+     "type": "number"
+    },
+    {
+     "name": "two_to_four_units",
+     "type": "number"
+    },
+    {
+     "name": "two_to_four_buildings",
+     "type": "number"
+    },
+    {
+     "name": "two_to_four_value",
+     "type": "number"
+    },
+    {
+     "name": "five_plus_units",
+     "type": "number"
+    },
+    {
+     "name": "five_plus_buildings",
+     "type": "number"
+    },
+    {
+     "name": "five_plus_value",
+     "type": "number"
+    },
+    {
+     "name": "total_units",
+     "type": "number"
+    },
+    {
+     "name": "total_value",
+     "type": "number"
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://www2.census.gov/econ/bps/County/co2016a.txt",
+      "https://www2.census.gov/econ/bps/County/co2017a.txt",
+      "https://www2.census.gov/econ/bps/County/co2018a.txt",
+      "https://www2.census.gov/econ/bps/County/co2019a.txt",
+      "https://www2.census.gov/econ/bps/County/co2020a.txt",
+      "https://www2.census.gov/econ/bps/County/co2021a.txt",
+      "https://www2.census.gov/econ/bps/County/co2022a.txt",
+      "https://www2.census.gov/econ/bps/County/co2023a.txt",
+      "https://www2.census.gov/econ/bps/County/co2024a.txt",
+      "https://www2.census.gov/econ/bps/County/co2025a.txt",
+      "https://www2.census.gov/econ/bps/County/co2608y.txt",
+      "https://www2.census.gov/econ/bps/Place/South%20Region/so2016a.txt",
+      "https://www2.census.gov/econ/bps/Place/South%20Region/so2017a.txt",
+      "https://www2.census.gov/econ/bps/Place/South%20Region/so2018a.txt",
+      "https://www2.census.gov/econ/bps/Place/South%20Region/so2019a.txt",
+      "https://www2.census.gov/econ/bps/Place/South%20Region/so2020a.txt",
+      "https://www2.census.gov/econ/bps/Place/South%20Region/so2021a.txt",
+      "https://www2.census.gov/econ/bps/Place/South%20Region/so2022a.txt",
+      "https://www2.census.gov/econ/bps/Place/South%20Region/so2023a.txt",
+      "https://www2.census.gov/econ/bps/Place/South%20Region/so2024a.txt",
+      "https://www2.census.gov/econ/bps/Place/South%20Region/so2025a.txt",
+      "https://www2.census.gov/econ/bps/Place/South%20Region/so2608y.txt"
+     ]
+    },
+    {
+     "name": "summary",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/housing-permits.json",
+   "csv": "/downloads/housing-permits.csv",
+   "api": "/api/v1/datasets/housing-permits"
+  },
+  {
+   "id": "road-contracts",
+   "title": "State road contracts",
+   "description": "Every Florida Department of Transportation construction and maintenance contract in the county that was under way in 2016 or later: what and where, the contractor, the current contract amount, letting, start, estimated finish and final acceptance dates, and status. status is Under way when FDOT's map shows the contract active. vendor_id links a contractor that local governments also paid. project_id is FDOT's item and segment number, which joins road-work-program.",
+   "rows": 85,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "agency",
+     "type": "string",
+     "values": [
+      "Florida Department of Transportation"
+     ]
+    },
+    {
+     "name": "contract_id",
+     "type": "string"
+    },
+    {
+     "name": "project_id",
+     "type": "string"
+    },
+    {
+     "name": "description",
+     "type": "string"
+    },
+    {
+     "name": "description_fdot",
+     "type": "string"
+    },
+    {
+     "name": "contract_type",
+     "type": "string",
+     "values": [
+      "Asset maintenance",
+      "Construction",
+      "Design-build",
+      "Lump sum construction",
+      "Maintenance"
+     ]
+    },
+    {
+     "name": "contract_type_code",
+     "type": "string",
+     "values": [
+      "CC",
+      "CDB",
+      "CLS",
+      "CSL",
+      "MAM",
+      "MLC"
+     ]
+    },
+    {
+     "name": "status",
+     "type": "string",
+     "values": [
+      "Complete",
+      "Under way"
+     ]
+    },
+    {
+     "name": "active_on_fdot_map",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "contractor",
+     "type": "string"
+    },
+    {
+     "name": "amount",
+     "type": "number"
+    },
+    {
+     "name": "let_date",
+     "type": "string"
+    },
+    {
+     "name": "executed_date",
+     "type": "string"
+    },
+    {
+     "name": "work_began_date",
+     "type": "string"
+    },
+    {
+     "name": "estimated_completion_date",
+     "type": "string"
+    },
+    {
+     "name": "final_acceptance_date",
+     "type": "string"
+    },
+    {
+     "name": "ended_date",
+     "type": "string"
+    },
+    {
+     "name": "bid_days",
+     "type": "number"
+    },
+    {
+     "name": "length_miles",
+     "type": "number"
+    },
+    {
+     "name": "lat",
+     "type": "number"
+    },
+    {
+     "name": "lng",
+     "type": "number"
+    },
+    {
+     "name": "district",
+     "type": "string",
+     "values": [
+      "03"
+     ]
+    },
+    {
+     "name": "website",
+     "type": "string",
+     "values": [
+      "http://www.nwflroads.com/"
+     ]
+    },
+    {
+     "name": "data_date",
+     "type": "string",
+     "values": [
+      "2026-08-01"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://gis.fdot.gov/arcgis/rest/services/All_Construction_Contracts/MapServer/0"
+     ]
+    },
+    {
+     "name": "financial_projects",
+     "type": "number"
+    },
+    {
+     "name": "roads",
+     "type": "string",
+     "values": [
+      "ARTHUR DRIVE OVER LYNN HAVEN BAYOU BRIDGE NO. 464514",
+      "CR 2327",
+      "CR 30",
+      "CR 389",
+      "OS 391",
+      "SR 20",
+      "SR 22",
+      "SR 30",
+      "SR 30A",
+      "SR 368",
+      "SR 368A",
+      "SR 388",
+      "SR 390",
+      "SR 391",
+      "SR 392A",
+      "SR 75",
+      "SR 77",
+      "SR 79"
+     ]
+    },
+    {
+     "name": "fetched",
+     "type": "string",
+     "values": [
+      "2026-10-27"
+     ]
+    },
+    {
+     "name": "vendor_id",
+     "type": "string",
+     "values": [
+      "anderson-columbia",
+      "bcl",
+      "cw-roberts",
+      "harders",
+      "ingram-signalization",
+      "phoenix",
+      "rj-gorman-contracting",
+      "roberts-and-roberts",
+      "rotolo-consultants"
+     ]
+    },
+    {
+     "name": "vendor_ids",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/road-contracts.json",
+   "csv": "/downloads/road-contracts.csv",
+   "api": "/api/v1/datasets/road-contracts"
+  },
+  {
+   "id": "road-work-program",
+   "title": "State road work program",
+   "description": "Projects in the Florida Department of Transportation's current adopted five-year work program in the county, one row per project and phase (planning, project development and environment study, design, right of way, construction, construction inspection): what and where, the kind of work, the fiscal years the phase is funded in (July to June, named for the year it ends) and the project's status. FDOT's map layers don't carry dollar amounts; contract amounts are in road-contracts.",
+   "rows": 143,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "agency",
+     "type": "string",
+     "values": [
+      "Florida Department of Transportation"
+     ]
+    },
+    {
+     "name": "project_id",
+     "type": "string"
+    },
+    {
+     "name": "phase_code",
+     "type": "string",
+     "values": [
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "9",
+      "C"
+     ]
+    },
+    {
+     "name": "phase",
+     "type": "string",
+     "values": [
+      "Capital",
+      "Construction",
+      "Construction Support",
+      "Environmental",
+      "PD&E",
+      "Preliminary Engineering",
+      "Right of Way"
+     ]
+    },
+    {
+     "name": "description",
+     "type": "string"
+    },
+    {
+     "name": "description_fdot",
+     "type": "string"
+    },
+    {
+     "name": "work_type",
+     "type": "string",
+     "values": [
+      "Add lanes and reconstruct",
+      "Bike lane and sidewalk",
+      "Bike path or trail",
+      "Bridge repair",
+      "Bridge replacement",
+      "Design (preliminary engineering)",
+      "Fender work",
+      "Interchange: add lanes",
+      "Intersection improvement",
+      "Landscaping",
+      "Lighting",
+      "New road construction",
+      "Pave shoulders",
+      "Project study (PD&E)",
+      "Rail capacity project",
+      "Resurfacing",
+      "Right of way for a future project",
+      "Safety project",
+      "Sidewalk",
+      "Traffic operations improvement",
+      "Traffic signals"
+     ]
+    },
+    {
+     "name": "project_status",
+     "type": "string",
+     "values": [
+      "Bids received",
+      "Buying land",
+      "Construction complete",
+      "Contract signed",
+      "Design under way",
+      "Not started",
+      "Out for bids",
+      "Under construction",
+      "Work in progress"
+     ]
+    },
+    {
+     "name": "length_miles",
+     "type": "number"
+    },
+    {
+     "name": "district",
+     "type": "string",
+     "values": [
+      "03",
+      "30"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://gis.fdot.gov/arcgis/rest/services/Work_Program_Current/MapServer/20"
+     ]
+    },
+    {
+     "name": "fiscal_years",
+     "type": "array"
+    },
+    {
+     "name": "first_fiscal_year",
+     "type": "number"
+    },
+    {
+     "name": "last_fiscal_year",
+     "type": "number"
+    },
+    {
+     "name": "fetched",
+     "type": "string",
+     "values": [
+      "2026-10-27"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/road-work-program.json",
+   "csv": "/downloads/road-work-program.csv",
+   "api": "/api/v1/datasets/road-work-program"
   },
   {
    "id": "tax-districts",

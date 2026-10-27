@@ -48,6 +48,9 @@ def menu():
              _i('CRA tax increment', '/public-money/cra-tax-increment', 'Property tax paid to the CRAs, by year'),
              _i('Sales tax projects', '/public-money/sales-tax-projects', 'Half-cent projects: promised vs built'),
              _i('Hurricane Michael', '/public-money/hurricane-michael', 'FEMA, HUD and state recovery money'),
+         ]}, {'group': 'Building and roads', 'items': [
+             _i('Building & development', '/development', 'New homes permitted and projects in review'),
+             _i('Road projects', '/roads', 'State road work, costs and the five-year plan'),
          ]}]},
         {'label': 'Watchdog', 'question': 'Is it spent well?',
          'start': _i('Accountability console', '/public-money/accountability', 'Big projects from approval to close, with open questions'),

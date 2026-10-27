@@ -1,5 +1,6 @@
 # Weekly refresh of sources that change slowly: Hurricane Michael FEMA Public Assistance projects (OpenFEMA, no key)
-# and the county's half-cent sales tax project map (Bay County GIS). Rebuilds the site and commits only when
+# the county's half-cent sales tax project map (Bay County GIS), development projects and new-home permits
+# (county planning maps, Census Building Permits Survey) and state road contracts and work program (FDOT GIS). Rebuilds the site and commits only when
 # something changed; pushing to main triggers the normal Vercel deploy, and sync-db.yml runs after this workflow.
 # Same pattern as refresh-meetings.yml. Each fetch keeps the existing file if its source fails or returns nothing.
 # Any failure emails the admins (ADMIN_EMAILS secret) through .github/scripts/notify_admins.py.
@@ -36,10 +37,18 @@ jobs:
         continue-on-error: true
         working-directory: data/surtax
         run: python fetch_gis.py < /dev/null
+      - name: Fetch development projects and new-home permits (planning maps, Census)
+        id: fetch_development
+        continue-on-error: true
+        run: python data/development/fetch.py < /dev/null
+      - name: Fetch state road contracts and work program (FDOT GIS)
+        id: fetch_roads
+        continue-on-error: true
+        run: python data/roads/fetch_fdot.py < /dev/null
       - name: Report fetch failures
-        if: steps.fetch_fema_ledger.outcome == 'failure' || steps.fetch_sales_tax_map.outcome == 'failure'
+        if: steps.fetch_fema_ledger.outcome == 'failure' || steps.fetch_sales_tax_map.outcome == 'failure' || steps.fetch_development.outcome == 'failure' || steps.fetch_roads.outcome == 'failure'
         run: |
-          echo "::warning title=Weekly refresh::FEMA fetch: ${{ steps.fetch_fema_ledger.outcome }}; GIS fetch: ${{ steps.fetch_sales_tax_map.outcome }}. The previous files were kept."
+          echo "::warning title=Weekly refresh::FEMA fetch: ${{ steps.fetch_fema_ledger.outcome }}; GIS fetch: ${{ steps.fetch_sales_tax_map.outcome }}; development: ${{ steps.fetch_development.outcome }}; roads: ${{ steps.fetch_roads.outcome }}. The previous files were kept."
       - name: Rebuild site
         id: rebuild_site
         run: |
@@ -56,7 +65,7 @@ jobs:
           # Commit whenever the rebuild changed anything, not only the two fetched files: data/build.py also
           # rebuilds people, vendor matches and other derived files from the daily inputs.
           if [ -z "$(git status --porcelain -- data site/public)" ]; then echo "No changes"; exit 0; fi
-          .github/scripts/push_refresh.sh "Weekly refresh: FEMA projects, sales tax map and derived data ($(date -u +%Y-%m-%d))" data/michael/pa_ledger.json data/surtax/gis_projects.json
+          .github/scripts/push_refresh.sh "Weekly refresh: FEMA projects, sales tax map, development, roads and derived data ($(date -u +%Y-%m-%d))" data/michael/pa_ledger.json data/surtax/gis_projects.json data/development/bay/projects.json data/development/bay/permits.json data/roads/bay/fdot.json
       - name: Deploy the refresh to Vercel
         # Vercel blocks Git deploys of commits whose author isn't on the Vercel team, which includes this bot's commits.
         # A deploy hook (Vercel > Project > Settings > Git > Deploy Hooks, branch main) builds main regardless; store
