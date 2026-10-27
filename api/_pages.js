@@ -23,6 +23,7 @@ const PAGES = {
   '/correspondence': {endpoints: ['/correspondence']},
   '/connections/shared-owners': {datasets: ['shared-owner-groups', 'over-limit-gifts']},
   '/events': {datasets: ['community-events']},
+  '/this-week': {datasets: ['weekly-roundup', 'community-events', 'meetings', 'votes', 'contracts', 'change-orders']},
   '/chambers': {datasets: ['chambers', 'chamber-leaders', 'chamber-events', 'nonprofit-payments', 'nonprofits']},
   '/connections/nonprofits': {datasets: ['nonprofits', 'nonprofit-board-members', 'nonprofit-board-businesses', 'nonprofit-payments', 'nonprofit-grants', 'nonprofit-officials', 'charity-registrations']},
   '/connections/business-ties': {datasets: ['official-businesses', 'official-business-links']},

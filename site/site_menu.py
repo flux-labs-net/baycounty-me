@@ -71,6 +71,7 @@ def menu():
          'start': _i('Meetings', '/meetings', 'When every board meets, with agendas'),
          'groups': [{'group': 'Show up, ask, reuse', 'items': [
              _i('Events', '/events', "What's happening around the county"),
+             _i('This week', '/this-week', 'The weekly email: events, votes, contracts'),
              _i('Email alerts', '/alerts', 'Weekly updates for your government'),
              _i('Request a record', '/records-request', 'Write a public records request'),
              _i('Letters to officials', '/correspondence', 'What we asked, and what they said'),

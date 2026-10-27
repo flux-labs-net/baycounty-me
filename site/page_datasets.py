@@ -407,6 +407,11 @@ def community_events():
     return [{'place_id': PLACE_ID, **{k: e.get(k) for k in cols}} for e in json.load(open(p))['events']]
 
 
+def weekly_roundup():
+    from weekly import weekly_roundup as rows
+    return rows()
+
+
 def tax_districts():
     """Which taxing authorities levy in each tax district (My Address, tax calculator); rates are in property-tax-rates."""
     from addr_page import address_data
@@ -940,5 +945,6 @@ DATASETS = [
     ('chamber-leaders', 'Chambers of commerce: boards and staff', "Each chamber's board (executive committee, directors, ex officio and honorary members), staff and past chairs since 2016, as listed on the chamber's own website on as_of: name, title and the organization each board member represents. No phone numbers, emails or addresses. person_entity_id and organization_entity_id link to profiles; person_match and organization_match say how each link was made (blank = no match, shown as plain text).", chamber_leaders),
     ('chamber-events', 'Chambers of commerce: events and programs', "Upcoming events from each chamber's public calendar (kind event: title, start and end in local time, venue and city, category, the event's own link) and each chamber's yearly and monthly signature programs (kind program: schedule and what it is). chamber_event is false for community events a chamber lists on its calendar. Refreshed daily where the calendar has a public feed.", chamber_events),
     ('community-events', 'Community events', "What's happening around the county in the next two months, from public calendars: the county and city calendars, the library system, visitor bureaus and the Panama City Beach Chamber. One row per event date: title, start and end in local time, town, venue name, category (Community, Public meeting, Library, Chamber), recurring for programs listed on two or more dates, and the event's own link. Refreshed daily.", community_events),
+    ('weekly-roundup', 'This week in Bay County', "This week's edition of the weekly email and the /this-week page, one row per item: events happening this week (one-off events first; repeating programs and meetings left out), public meetings this week, and votes, contracts and change orders that first appeared on BayCounty.me last week (first_seen; minutes come out weeks after a meeting, so date can be earlier). section is event, meeting, vote, contract or change_order; featured marks what the email shows. people lists who voted no, with profile links. Rebuilt every morning.", weekly_roundup),
     ('tax-districts', 'Tax districts', 'Which taxing authorities levy property tax in each tax district, and the combined millage. Rates by year are in property-tax-rates (authority_id).', tax_districts),
 ]

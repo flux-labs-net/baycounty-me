@@ -13,6 +13,10 @@ const GOVS = {
   mb: ['Mexico Beach', 'd629cd98-bffd-49f2-99bb-f519f70594e1'],
 };
 const ALL_SEGMENT = '1ae0dd54-dba8-4baa-93b2-fc1e1a04a9aa';
+// The countywide weekly email ("This week in Bay County", api/weekly.js) has its own list beside the per-government ones.
+// LISTS is everything a person can sign up for by key: 'week' plus each government.
+const WEEKLY = ['This week in Bay County', process.env.WEEKLY_SEGMENT || 'b85149cc-3e1b-4e07-8df5-61a6ce10c7b1'];
+const LISTS = {week: WEEKLY, ...GOVS};
 const FROM = process.env.ALERTS_FROM || 'BayCounty.me <hello@baycounty.me>';
 const SITE = 'https://baycounty.me';
 const b64 = s => Buffer.from(s).toString('base64url');
@@ -125,6 +129,6 @@ function page(title, body) {
 <body><div class="b">${body}</div></body></html>`;
 }
 
-module.exports = {GOVS, ALL_SEGMENT, FROM, SITE, makeToken, readToken, resend, finishEmail, htmlToText, esc, emailShell, button,
+module.exports = {GOVS, WEEKLY, LISTS, ALL_SEGMENT, FROM, SITE, makeToken, readToken, resend, finishEmail, htmlToText, esc, emailShell, button,
   sameOrigin, claimConfirmSend, emailHash, prefsToken, readPrefsToken, prefsUrl, COOLDOWN_MIN,
   PREFS_PROP, PREFS_LINK_TEMPLATE, ensurePrefsProperty, setPrefsProperty, page};

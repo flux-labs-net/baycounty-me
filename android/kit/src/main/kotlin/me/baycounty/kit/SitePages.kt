@@ -36,6 +36,7 @@ object SitePages {
         "/connections/nonprofits" to Coverage.Dataset("nonprofits"),
         "/chambers" to Coverage.Native("Chambers of commerce"),
         "/events" to Coverage.Native("Events"),
+        "/this-week" to Coverage.Web("the weekly email's page with its sign-up form; the events, meetings, votes and contracts in it are on native screens"),
         "/connections/business-ties" to Coverage.Web("confirmed official-to-business matches, read live from /api/v1/datasets/official-businesses and official-business-links"),
         "/correspondence" to Coverage.Web("published letters to officials, read live from /api/v1/correspondence"),
         "/alerts" to Coverage.Web("email alert sign-up; push alerts are planned for the app"),
