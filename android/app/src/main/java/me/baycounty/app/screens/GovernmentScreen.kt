@@ -108,12 +108,14 @@ private fun WhosInCharge(govID: String, terms: List<DataRow>) {
                         }
                         if (!h.confirmed) parts += "Not confirmed from the records found"
                         val linked = h.personID?.takeIf { store.person(it) != null }
+                        val empty = h.vacant || h.personName.isEmpty()
                         Row(
                             (if (linked != null) Modifier.clickable { nav.push(Route.Person(linked)) } else Modifier).fillMaxWidth(),
-                            verticalAlignment = Alignment.CenterVertically,
+                            verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp),
                         ) {
+                            // their official photo (official-photos), or initials, like the site's "Who's in charge" cards
+                            if (!empty) PersonInitials(h.personName, 36.dp, h.personID?.let { store.person(it) }?.photoUrl)
                             Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
-                                val empty = h.vacant || h.personName.isEmpty()
                                 Text(if (h.vacant) "Vacant" else h.personName.ifEmpty { "Not confirmed" }, style = T.subheadBold, color = if (empty) Brand.secondary else Brand.text)
                                 if (parts.isNotEmpty()) Text(parts.joinToString(" · "), style = T.caption, color = Brand.secondary)
                             }
