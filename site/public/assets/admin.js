@@ -361,7 +361,7 @@
     $('#in-table tbody').innerHTML = r.datasets.map(d => `<tr><td class="mono" style="white-space:nowrap">${esc(d.dataset)}${d.origin && d.origin !== 'site_build' ? `<div class="muted small">${esc(d.origin)}</div>` : ''}</td>
       <td><span class="pill ${esc(d.status)}">${RUN[d.status] || esc(d.status)}</span></td><td>${when(d.finished_at || d.started_at)}</td><td>${when(d.last_ok)}</td>
       <td class="num">${fmt(d.rows_in)}</td><td class="num">${fmt(d.rows_added)}</td><td class="num">${fmt(d.rows_deleted)}</td>
-      <td class="small ${d.status === 'failed' ? '' : 'muted'}" style="min-width:220px;max-width:360px">${esc(d.notes || '')}</td></tr>`).join('') || '<tr><td colspan="8" class="empty">No loads in the last 60 days.</td></tr>';
+      <td class="small ${d.status === 'failed' ? '' : 'muted'}">${esc(d.notes || '')}</td></tr>`).join('') || '<tr><td colspan="8" class="empty">No loads in the last 60 days.</td></tr>';
     $('#in-fail tbody').innerHTML = r.failures.map(f => `<tr><td class="small" style="white-space:nowrap">${stamp(f.started_at)}</td><td class="mono">${esc(f.dataset)}</td><td class="small">${esc(f.notes || '')}</td>
       <td class="mono small">${f.git_sha ? `<a href="https://github.com/jeremymcs/baycounty-me/commit/${esc(f.git_sha)}" target="_blank" rel="noopener">${esc(String(f.git_sha).slice(0, 7))}</a>` : ''}</td></tr>`).join('') || '<tr><td colspan="4" class="empty">No failures.</td></tr>';
   }
@@ -505,7 +505,7 @@
         <td class="num">${fmt(d.version_count)}</td><td style="white-space:nowrap">${files || '<span class="muted small">None</span>'}</td></tr>`;
     }).join('') || '<tr><td colspan="7" class="empty">No documents in this window.</td></tr>';
     $('#ag-notices tbody').innerHTML = r.notices.map(n => `<tr><td class="small" style="white-space:nowrap">${n.received_at ? stamp(n.received_at) : when(n.pulled_at)}</td>
-      <td class="small" style="max-width:200px;word-break:break-word">${esc(n.from_addr)}</td>
+      <td class="small" title="${esc(n.from_addr)}">${esc(n.from_addr)}</td>
       <td style="min-width:220px"><b>${esc(n.subject || '(no subject)')}</b><details class="ag"><summary class="small">Email text</summary><pre>${esc(n.body_text || '')}</pre></details></td>
       <td class="mono small">${esc((n.sources || []).join(', ') || '—')}</td>
       <td class="small">${(n.links || []).length ? `<details class="ag"><summary>${(n.links || []).length}</summary><div class="ag-links">${n.links.map(u => `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(shortUrl(u))}</a>`).join('')}</div></details>` : '0'}</td>
@@ -580,11 +580,13 @@
     const dSel = $('#se-domain'), dCur = dSel.value;
     dSel.innerHTML = SE.domains.map(d => `<option value="${esc(d)}">${esc(d)}</option>`).join('') + '<option value="">All domains</option>';
     dSel.value = dCur;
-    $('#se-table tbody').innerHTML = SE.rows.map(r => `<tr><td class="small" style="white-space:nowrap" title="${esc(new Date(r.created_at).toLocaleString())}">${when(r.created_at)}</td>
-      <td class="small" style="max-width:220px;word-break:break-word">${esc(r.to.join(', '))}</td><td><b>${esc(r.subject || '(no subject)')}</b></td>
-      <td class="small muted" style="max-width:200px;word-break:break-word">${esc(r.from)}</td>
+    const addr = f => { const m = String(f || '').match(/<([^>]+)>/); return m ? m[1] : String(f || ''); };
+    $('#se-table tbody').innerHTML = SE.rows.map(r => `<tr class="click" data-se="${esc(r.id)}"><td class="small">${when(r.created_at)}</td>
+      <td><b>${esc(r.subject || '(no subject)')}</b></td>
+      <td class="small" title="${esc(r.to.join(', '))}">${esc(r.to[0] || '')}${r.to.length > 1 ? ` <span class="muted">+${r.to.length - 1}</span>` : ''}</td>
+      <td class="small muted md-hide" title="${esc(r.from)}">${esc(addr(r.from))}</td>
       <td><span class="pill ${esc(r.status)}">${esc(seLabel(r.status))}</span></td>
-      <td><button class="btn" type="button" data-se="${esc(r.id)}" style="min-height:28px;padding:0 8px;font-size:.78rem">View</button></td></tr>`).join('')
+      <td class="act ph-hide"><button class="btn sm" type="button" data-se="${esc(r.id)}">View</button></td></tr>`).join('')
       || '<tr><td colspan="6" class="empty">No emails match.</td></tr>';
     $('#se-foot').textContent = `Showing ${fmt(SE.rows.length)} of ${fmt(c.total)} in this window. ` +
       (SE.capped ? `Only the ${fmt(SE.fetched)} most recent sends are loaded (back to ${new Date(SE.oldest_fetched).toLocaleDateString()}); use the Resend dashboard for older mail.` : '');
@@ -1389,7 +1391,7 @@
       if (!c) return;
       const col = cols[i] || (cols[i] = {cells: [], len: 0, act: false, free: false});
       col.cells.push(c);
-      c.classList.remove('fl'); c.style.width = '';
+      c.classList.remove('fl'); c.style.width = ''; c.style.maxWidth = '';
       if (c.tagName !== 'TD') return;
       if (c.querySelector(ACT)) col.act = true;
       if (c.querySelector(FREE)) col.free = true;
@@ -1404,12 +1406,13 @@
     const head = rows.find(tr => colsOf(tr).every(Boolean) && colsOf(tr).length === cols.length);
     const box = t.parentElement;
     if (!head || !box || !t.offsetParent || cols.some(c => !c)) return;
-    const avail = box.clientWidth, cells = colsOf(head);
+    const avail = box.clientWidth - 2, cells = colsOf(head);
     if (t.offsetWidth <= avail + 1) return;   // fits on one line already
     // A column's natural width is its widest body cell; headings may end in "…" before data does.
     const pad = c => { const s = getComputedStyle(c); return parseFloat(s.paddingLeft) + parseFloat(s.paddingRight); };
     const rg = document.createRange(), inner = c => { rg.selectNodeContents(c); return rg.getBoundingClientRect().width + pad(c) + 2; };
-    const nat = cols.map(col => Math.max(48, ...col.cells.filter(c => c.tagName === 'TD').map(inner)));
+    const shown = c => c.getClientRects().length > 0;   // a column hidden at this width takes no room
+    const nat = cols.map((col, i) => shown(cells[i]) ? Math.max(48, ...col.cells.filter(c => c.tagName === 'TD').map(inner)) : 0);
     // Too wide: the widest text columns shrink to one shared cap (short ones keep their width); buttons and
     // drop-downs never shrink. The cap is the largest width at which everything fits.
     const can = cols.map((c, i) => i).filter(i => !cols[i].act && !cols[i].free);
@@ -1420,7 +1423,8 @@
     for (let k = 0; k < 24; k++) { const m = (lo + hi) / 2; if (used(m) <= room) lo = m; else hi = m; }
     const cap = Math.max(lo, 40), flex = new Set(can.filter(i => nat[i] > cap));
     const w = nat.map((n, i) => flex.has(i) ? Math.floor(cap) : Math.ceil(n));
-    cells.forEach((c, i) => { c.style.width = Math.max(0, w[i] - pad(c)) + 'px'; });
+    // site.css sets border-box, so a cell's width includes its padding.
+    cells.forEach((c, i) => { c.style.width = Math.max(0, w[i] - (getComputedStyle(c).boxSizing === 'border-box' ? 0 : pad(c))) + 'px'; });
     t.classList.add('fixed');
     flex.forEach(i => cols[i].cells.forEach(c => { c.classList.add('fl'); c.style.minWidth = ''; }));
   };
