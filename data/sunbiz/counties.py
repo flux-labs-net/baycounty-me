@@ -10,6 +10,10 @@ COUNTIES = {
         'shared_zips': {'32438', '32466'},  # Fountain, Youngstown: partly in Washington / Calhoun counties
         'cities': {'PANAMA CITY', 'PANAMA CITY BEACH', 'LYNN HAVEN', 'CALLAWAY', 'SPRINGFIELD', 'PARKER', 'MEXICO BEACH',
                    'SOUTHPORT', 'YOUNGSTOWN', 'FOUNTAIN', 'TYNDALL AFB', 'PCB', 'PC', 'BAYOU GEORGE', 'HILAND PARK'},
+        # 32413 also covers the east end of 30A in Walton County; these places there are left out.
+        'outside_places': {'INLET BEACH', 'ROSEMARY BEACH', 'SEACREST', 'SEACREST BEACH', 'ALYS BEACH', 'WATERSOUND',
+                           'WATERSOUND BEACH', 'SANTA ROSA BEACH', 'SEAGROVE BEACH', 'SEASIDE', 'WATERCOLOR', 'MIRAMAR BEACH',
+                           'DESTIN', 'FREEPORT', 'DEFUNIAK SPRINGS', 'CHIPLEY', 'BLOUNTSTOWN', 'WEWAHITCHKA', 'PORT ST JOE'},
     },
 }
 

@@ -9109,7 +9109,7 @@
    "id": "new-businesses",
    "title": "New businesses",
    "description": "Every company, nonprofit and partnership filed with the Florida Division of Corporations (Sunbiz) since 2016 whose main address is in the county, newest first: name, type, filing date, whether it is still active, city and ZIP (street addresses are left out because many small companies list a home), its latest annual report, its profile id, any restaurant it holds a license for, and a link to its state record, which names its officers and registered agent. Out-of-state companies count from the day they registered to do business in Florida. Updated when the state publishes its quarterly corporate file.",
-   "rows": 42048,
+   "rows": 41946,
    "columns": [
     {
      "name": "place_id",

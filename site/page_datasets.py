@@ -570,6 +570,28 @@ FILING_TYPE = {'FLAL': 'Florida LLC', 'DOMP': 'Florida corporation', 'DOMNP': 'F
                'FORL': 'Out-of-state LLC', 'FORP': 'Out-of-state corporation', 'FORNP': 'Out-of-state nonprofit', 'FORLP': 'Out-of-state limited partnership'}
 
 
+def _clean_city(raw, c):
+    """One spelling per city: 'Pcb', 'P C Beach' and 'Panama City Bch, Fl' all become Panama City Beach."""
+    import difflib
+    t = re.sub(r'[^A-Z ]', ' ', (raw or '').upper())
+    t = re.sub(r'\b(FL|FLA|FLORIDA)\b', ' ', t)
+    t = re.sub(r'\s+', ' ', t).strip()
+    if not t:
+        return None
+    if t in ('PCB', 'PC BEACH', 'P C BEACH') or (re.match(r'^(PA|PC|P C)', t) and re.search(r'\b(BEACH|BCH|BEECH|BACH|BREACH)\b', t)):
+        return 'Panama City Beach'
+    names = {'PANAMA', 'PC', 'PANAMA CITY', 'PANAMA CTY'}
+    if t in names:
+        return 'Panama City'
+    fixed = {'LYNNHAVEN': 'LYNN HAVEN', 'SOUTH PORT': 'SOUTHPORT', 'TYNDALL AFB': 'TYNDALL AFB', 'TYNDALL': 'TYNDALL AFB'}
+    t = fixed.get(t, t)
+    known = sorted(c['cities'] - {'PCB', 'PC'})
+    if t not in known:
+        m = difflib.get_close_matches(t, known, n=1, cutoff=0.8)
+        t = m[0] if m else t
+    return 'Tyndall AFB' if t == 'TYNDALL AFB' else t.title()
+
+
 def new_businesses():
     """Every business filed with the state since 2016 whose main (principal) address is in the county, from the
     Division of Corporations quarterly file (data/sunbiz/<county>/entities.csv.gz). Out-of-state companies count from
@@ -598,13 +620,16 @@ def new_businesses():
         z = (r.get('zip') or '')[:5]
         if z not in c['zips'] or (z in c.get('shared_zips', ()) and (r.get('city') or '').upper() not in c['cities']):
             continue
+        city = _clean_city(r.get('city'), c)
+        if city and city.upper() in c.get('outside_places', ()):
+            continue
         doc = r['doc_number'].strip()
         bid = 'business:' + doc.lower()
         eid = G.alias[bid][0] if bid in G.alias else bid
         last = r.get('last_txn_date') or ''
         out.append({'place_id': PLACE_ID, 'doc_number': doc, 'name': ids.biz_case(r['name'].strip()), 'filing_type': FILING_TYPE.get(r['filing_type'], r['filing_type']),
                     'filed_date': f'{d[4:]}-{d[:2]}-{d[2:4]}', 'filed_month': f'{d[4:]}-{d[:2]}',
-                    'status': 'Active' if r.get('status') == 'A' else 'Inactive', 'city': (r.get('city') or '').title() or None, 'zip': z,
+                    'status': 'Active' if r.get('status') == 'A' else 'Inactive', 'city': city, 'zip': z,
                     'last_filing_date': f'{last[4:]}-{last[:2]}-{last[2:4]}' if len(last) == 8 else None,
                     'latest_annual_report': int(r['report_year_1']) if (r.get('report_year_1') or '').isdigit() else None,
                     'entity_id': eid, 'restaurants': '; '.join(sorted(set(rest.get(eid, [])))) or None,
