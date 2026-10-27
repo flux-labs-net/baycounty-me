@@ -121,7 +121,7 @@
    "id": "votes",
    "title": "Recorded votes",
    "description": "Votes by the County Commission, School Board, city commissions and CRA boards since 2016, with how each member voted: hand-researched money votes plus every motion read from the official minutes.",
-   "rows": 3789,
+   "rows": 6714,
    "columns": [
     {
      "name": "date",
@@ -221,6 +221,7 @@
       "0-2",
       "0-3",
       "0-5",
+      "1-0",
       "1-2",
       "1-4",
       "2-0",
@@ -239,6 +240,7 @@
       "5-0 (minutes: 'carried unanimously')",
       "5-0 (minutes: 'carried unanimously'; Mayor Henderson attended by phone)",
       "6-0",
+      "five \"No's\" and zero \"Yes's\"",
       "not found",
       "unanimous",
       "unanimous (per news; names not listed)"
@@ -369,7 +371,7 @@
    "id": "member-votes",
    "title": "Votes by member",
    "description": "One row per member per vote (long format), for tallying individual records.",
-   "rows": 18418,
+   "rows": 32563,
    "columns": [
     {
      "name": "date",
@@ -9021,6 +9023,7 @@
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1149,plainText=false)",
       "https://mexicobeachfl.gov/uploads/2026/09/October-13-2026-CIty-Council-Meeting-Agenda-Packet.pdf",
       "https://mexicobeachfl.gov/uploads/2026/09/October-27-2026-City-Council-Meeting-Packet.pdf",
+      "https://mexicobeachfl.gov/uploads/2026/10/October-30-2026-Special-Meeting-and-LDc-Workshop-Packet.pdf",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-912?packet=true",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10202026-915?packet=true",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10272026-902?packet=true"
