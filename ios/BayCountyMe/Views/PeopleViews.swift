@@ -64,7 +64,8 @@ struct PersonInitials: View {
     }
 }
 
-/// Officials, department leaders and candidates since 2016, grouped by government, with the site's filter chips.
+/// Officials, department leaders and candidates since 2016, grouped by government and in title then last-name order
+/// like the site, with the site's filter chips.
 struct PeopleView: View {
     @Environment(AppStore.self) private var store
     @State private var query = ""
@@ -83,10 +84,9 @@ struct PeopleView: View {
                 ChipRow(chips: PeopleKind.allCases.map { (id: $0, label: $0.label) }, selected: kind, counts: counts) { kind = $0 }
             }
             LazyVStack(alignment: .leading, spacing: 22) {
-                ForEach(Governments.order, id: \.self) { g in
-                    group(Governments.names[g] ?? g, people.filter { $0.gov_ids.first == g })
+                ForEach(PeopleDirectory.grouped(people), id: \.title) { g in
+                    group(g.title, g.people)
                 }
-                group("Other offices", people.filter { !Governments.order.contains($0.gov_ids.first ?? "") })
             }
             if !all.isEmpty && people.isEmpty {
                 Text("No one matches.").font(.subheadline).foregroundStyle(.secondary)
@@ -101,7 +101,7 @@ struct PeopleView: View {
 
     @ViewBuilder private func group(_ title: String, _ list: [PeopleDirectory.Person]) -> some View {
         if !list.isEmpty {
-            let sorted = list.sorted { $0.name < $1.name }
+            let sorted = list  // already in the site's order: title, then last name
             VStack(alignment: .leading, spacing: 10) {
                 HStack(alignment: .firstTextBaseline) {
                     Text(title).font(.headline)

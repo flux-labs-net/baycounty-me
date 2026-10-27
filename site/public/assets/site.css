@@ -915,6 +915,10 @@ a.ui-person:hover b{color:var(--blue)}
 .ui-dir{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:12px}
 .ui-dc{position:relative;display:flex;align-items:center;gap:14px;min-width:0;padding:14px 16px;border-radius:20px;background:var(--surface);box-shadow:var(--ui-shadow);transition:box-shadow .15s ease-out}
 .ui-dc[hidden],.ui-dc.ui-off{display:none}
+.ui-dir-h{grid-column:1/-1;display:flex;align-items:baseline;gap:10px;margin:18px 2px 0;padding-bottom:8px;border-bottom:1px solid var(--line);font:600 1.05rem var(--f-display);color:var(--ink)}
+.ui-dir-h:first-child{margin-top:4px}
+.ui-dir-h b{font:600 .8rem var(--f-body);color:var(--muted);font-variant-numeric:tabular-nums}
+.ui-dir-h[hidden]{display:none}
 .ui-dc:hover{box-shadow:var(--ui-ring)}
 .ui-dc .ui-av{margin:0;width:46px;height:46px;flex:none;font-size:16px}
 .ui-dc-t{display:flex;flex-direction:column;min-width:0;flex:1}

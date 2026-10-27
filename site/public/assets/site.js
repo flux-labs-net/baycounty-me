@@ -494,11 +494,34 @@ const go = () => document.querySelectorAll('[data-ui-dir]').forEach(grid => {
       c.classList.toggle('ui-off', !ok);
     });
     const by = s ? s.value : 'c';
-    cards.slice().sort((a, b) => by === 'name' ? a.dataset.n.localeCompare(b.dataset.n) : by === 'az' ? a.dataset.n.split(' ').pop().localeCompare(b.dataset.n.split(' ').pop()) || a.dataset.n.localeCompare(b.dataset.n)
+    heads.forEach(h => h.remove()); heads.length = 0;
+    cards.slice().sort((a, b) => by === 'gov' ? (+a.dataset.o - +b.dataset.o) : by === 'name' ? a.dataset.n.localeCompare(b.dataset.n) : by === 'az' ? last(a.dataset.n).localeCompare(last(b.dataset.n)) || a.dataset.n.localeCompare(b.dataset.n)
       : (+b.dataset.c - +a.dataset.c) || a.dataset.n.localeCompare(b.dataset.n)).forEach(c => grid.appendChild(c));
+    if (by === 'gov') groups();
     count_();
   };
+  // 'gov' sort: a heading (with how many are shown) above each government's cards; hidden when none of them are.
+  const heads = [];
+  const last = n => { const w = n.replace(/,/g, ' ').split(/\s+/).filter(x => x && !/^(jr|sr|ii|iii|iv)\.?$/i.test(x)); return (w.pop() || n).toLowerCase(); };
+  const groups = () => {
+    let h = null, g = null;
+    [...grid.children].forEach(c => {
+      if (c.dataset.gh !== g) {
+        g = c.dataset.gh;
+        h = document.createElement('h3'); h.className = 'ui-dir-h'; h.dataset.g = g;
+        h.innerHTML = '<span></span><b></b>'; h.firstChild.textContent = g;
+        grid.insertBefore(h, c); heads.push(h);
+      }
+    });
+  };
+  const countHeads = () => heads.forEach(h => {
+    let n = 0;
+    for (let c = h.nextElementSibling; c && !c.classList.contains('ui-dir-h'); c = c.nextElementSibling) if (!c.hidden && !c.classList.contains('ui-off')) n++;
+    if (h.hidden !== !n) h.hidden = !n;  // only on change: the observer below watches hidden
+    h.lastChild.textContent = n.toLocaleString('en-US');
+  });
   const count_ = () => {
+    countHeads();
     const n = cards.filter(c => !c.hidden && !c.classList.contains('ui-off')).length;
     if (count) count.textContent = n === cards.length ? `${cards.length.toLocaleString('en-US')} shown` : `${n.toLocaleString('en-US')} of ${cards.length.toLocaleString('en-US')} shown`;
     if (none) none.hidden = n > 0;
@@ -510,7 +533,7 @@ const go = () => document.querySelectorAll('[data-ui-dir]').forEach(grid => {
     const rows = cards.filter(c => !c.hidden && !c.classList.contains('ui-off')).map(c => { const a = c.querySelector('.ui-dc-a'); return [a.textContent.trim(), (c.querySelector('small') || {}).textContent || '', ((c.querySelector('.ui-dc-w') || {}).textContent || '').trim(), c.dataset.c, a.href]; });
     if (window.TT) window.TT.csv(csvBtn.dataset.dirCsv, csvBtn.dataset.head.split(','), rows);
   });
-  new MutationObserver(count_).observe(grid, {subtree: true, attributes: true, attributeFilter: ['hidden']});  // the government bar hides cards too
+  new MutationObserver(ms => { if (ms.some(m => !m.target.classList.contains('ui-dir-h'))) count_(); }).observe(grid, {subtree: true, attributes: true, attributeFilter: ['hidden']});  // the government bar hides cards too
   run();
 });
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go); else go();

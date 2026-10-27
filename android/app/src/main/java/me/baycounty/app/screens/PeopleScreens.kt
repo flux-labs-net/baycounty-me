@@ -28,7 +28,7 @@ import me.baycounty.kit.Period
 import me.baycounty.kit.RecordLinks
 import me.baycounty.kit.Row as DataRow
 
-/** Officials, department leaders and candidates since 2016, grouped by government, with the site's filter chips. */
+/** Officials, department leaders and candidates since 2016, grouped by government and in title then last-name order like the site, with the site's filter chips. */
 @Composable
 fun PeopleScreen() {
     val store = LocalStore.current
@@ -49,11 +49,8 @@ fun PeopleScreen() {
         if (store.people == null) { item { AppDataPending("people.json", "Couldn't load people") { store.loadPeople() } }; return@Screen }
         item { FilterField(query, "Find a person") { query = it } }
         item { ChipRow(PeopleKind.entries.map { it to it.label }, kind, counts) { kind = it } }
-        val groups = Governments.order.map { (Governments.names[it] ?: it) to people.filter { p -> p.gov_ids.firstOrNull() == it } } +
-            listOf("Other offices" to people.filter { (it.gov_ids.firstOrNull() ?: "") !in Governments.order })
-        for ((title, list) in groups) {
-            if (list.isEmpty()) continue
-            val sorted = list.sortedBy { it.name }
+        for ((title, list) in PeopleDirectory.grouped(people)) {
+            val sorted = list  // already in the site's order: title, then last name
             item(key = title) {
                 Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                     Row(verticalAlignment = Alignment.Bottom) {

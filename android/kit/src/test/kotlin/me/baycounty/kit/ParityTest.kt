@@ -170,6 +170,11 @@ class ParityTest {
         }
         p.people.firstOrNull { it.id == "nick-atkinson" }?.let { assertEquals(1, it.mainRoles.size) }
         for (person in p.people) assertFalse(person.id, person.mainRoles.isEmpty())
+        // The People list's order: government, then title, then last name, like the site.
+        val groups = PeopleDirectory.grouped(p.people)
+        assertEquals("Bay County", groups.first().first)
+        assertEquals("clair-pease", groups.first().second.first().id)  // the chair leads the county
+        for ((_, list) in groups) assertEquals(list.map { it.rank }, list.map { it.rank }.sortedBy { it ?: 99 })
         assertTrue(BCJson.decodeFromString(DonorContracts.serializer(), Repo.app("donor-contracts.json")).matches.size > 50)
         val mm = BCJson.decodeFromString(MoneyMap.serializer(), Repo.app("money-map.json"))
         assertTrue(mm.donors.size > 100)

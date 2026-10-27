@@ -224,6 +224,21 @@ data class VendorDirectory(val about: String? = null, val vendors: List<Vendor> 
 
 @Serializable
 data class PeopleDirectory(val about: String? = null, val people: List<Person> = emptyList()) {
+    companion object {
+        /**
+         * The People list as the site shows it: one heading per government, each in government then title then last-name order.
+         * Without the order fields (an older people.json) it falls back to the first government and the name.
+         */
+        fun grouped(list: List<Person>): List<Pair<String, List<Person>>> {
+            val out = linkedMapOf<String, MutableList<Person>>()
+            for (p in list.sortedWith(compareBy<Person>({ it.order ?: Int.MAX_VALUE }, { it.name }))) {
+                val title = p.group ?: Governments.names[p.gov ?: p.gov_ids.firstOrNull() ?: ""] ?: "Other offices"
+                out.getOrPut(title) { mutableListOf() } += p
+            }
+            return out.map { it.key to it.value }
+        }
+    }
+
     @Serializable
     data class Person(
         val id: String = "",
@@ -238,6 +253,14 @@ data class PeopleDirectory(val about: String? = null, val people: List<Person> =
         val kinds: List<String>? = null,
         /** Path of their official photo on the site ("/photos/people/<id>.webp", dataset official-photos); null shows initials. */
         val photo: String? = null,
+        /**
+         * The People list's order (site/people_pages.py directory_order): the government they are listed under,
+         * its name (the list's heading), their title rank (0 mayor or chair ... 8 past candidate) and their position.
+         */
+        val gov: String? = null,
+        val group: String? = null,
+        val rank: Int? = null,
+        val order: Int? = null,
         val roles: List<Role> = emptyList(),
     ) {
         val photoUrl: String? get() = photo?.let { BayCountyClient.SITE + it }

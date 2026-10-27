@@ -264,6 +264,18 @@ public struct VendorDirectory: Codable, Sendable {
 }
 
 public struct PeopleDirectory: Codable, Sendable {
+    /// The People list as the site shows it: one heading per government, each in government then title then last-name order.
+    /// Without the order fields (an older people.json) it falls back to the first government and the name.
+    public static func grouped(_ list: [Person]) -> [(title: String, people: [Person])] {
+        let sorted = list.sorted { ($0.order ?? Int.max, $0.name) < ($1.order ?? Int.max, $1.name) }
+        var out: [(title: String, people: [Person])] = []
+        for p in sorted {
+            let title = p.group ?? Governments.names[p.gov ?? p.gov_ids.first ?? ""] ?? "Other offices"
+            if let i = out.firstIndex(where: { $0.title == title }) { out[i].people.append(p) } else { out.append((title, [p])) }
+        }
+        return out
+    }
+
     public struct Person: Codable, Sendable, Identifiable, Hashable {
         public struct Role: Codable, Sendable, Hashable {
             public let role: String?
@@ -282,6 +294,12 @@ public struct PeopleDirectory: Codable, Sendable {
         public var kinds: [String]? = nil
         /// Path of their official photo on the site ("/photos/people/<id>.webp", dataset official-photos); nil shows initials.
         public var photo: String? = nil
+        /// The People list's order (site/people_pages.py directory_order): the government they are listed under,
+        /// its name (the list's heading), their title rank (0 mayor or chair ... 8 past candidate) and their position.
+        public var gov: String? = nil
+        public var group: String? = nil
+        public var rank: Int? = nil
+        public var order: Int? = nil
         public let roles: [Role]
 
         public var photoURL: URL? { photo.map { BayCountyClient.site.appendingPathComponent(String($0.dropFirst())) } }

@@ -238,13 +238,75 @@ def _kinds(p):
     return [k for k in ('elected', 'candidate', 'staff', 'past') if k in ks] or ['elected']
 
 
+# The People list's order: government, then title, then last name (Jeremy, 2026-10-27).
+GOV_ORDER = ['county', 'schools', 'sheriff', 'clerk', 'property_appraiser', 'tax_collector', 'soe', 'county_court',
+             'pc', 'pcb', 'lh', 'cw', 'sp', 'parker', 'mb']
+TITLE_RANKS = ['Mayor, chair or elected officer', 'Vice chair or mayor pro tem', 'Commissioner or board member', 'Manager or administrator',
+               'Assistant manager, clerk or attorney', 'Department leader', '2026 candidate', 'Former official', 'Past candidate']
+_OFFICERS = ('sheriff', 'tax collector', 'property appraiser', 'clerk of circuit court', 'supervisor of elections', 'superintendent')
+
+
+def title_rank(line):
+    """Where one part of a person's line ("Mayor, Lynn Haven", "Former city manager, Panama City") sits in TITLE_RANKS."""
+    import re
+    t = line.strip().lower()
+    if t.startswith('ran for'):
+        return 8
+    if t.startswith('former'):
+        return 7
+    if t.startswith('2026 candidate') or t.startswith('running'):
+        return 6
+    if re.search(r'\bvice\b|pro tem', t):
+        return 1
+    if re.search(r'\bmayor\b|\bchair', t) or t.startswith(_OFFICERS):
+        return 0
+    if re.search(r'commissioner|council|school board|board member', t):
+        return 2
+    if re.search(r'assistant|deputy|\bclerk|attorney', t):
+        return 4
+    if re.search(r'manager|administrator|^executive director(,|$)', t):
+        return 3
+    return 5
+
+
+def last_name(name):
+    """Surname for sorting: "Kenneth L. Ayers, Jr." and "Robert Merritt III" sort under Ayers and Merritt."""
+    w = [x for x in name.replace(',', ' ').split() if x.lower().strip('.') not in ('jr', 'sr', 'ii', 'iii', 'iv')]
+    return (w[-1] if w else name).lower()
+
+
+def directory_order(people=None):
+    """{person id: (gov id, title rank, position)} for every person: grouped by their main government (the one their
+    top title is for), governments in GOV_ORDER then by name, then TITLE_RANKS, then last and first name.
+    The site, the apps (people.json) and the people-directory dataset all use this one order."""
+    G = EG.build()
+    govs = {k[4:]: v['name'] for k, v in G.ents.items() if k.startswith('gov:')}
+    by_len = sorted(govs.items(), key=lambda kv: -len(kv[1]))
+    keys = []
+    for p in people or _people():
+        sub = (G.ents.get('person:' + p['id']) or {}).get('subtitle') or ''
+        parts = [x for x in sub.split(' · ') if x.strip()] or ['']
+        best = min(parts, key=title_rank)
+        rank = title_rank(best)
+        gids = [g for g in (p.get('gov_ids') or []) if g]
+        gov = next((k for k, n in by_len if n in best and k in gids), None) or next((k for k, n in by_len if n in best), None) or (gids[0] if gids else '')
+        last = last_name(p['name'])
+        gpos = GOV_ORDER.index(gov) if gov in GOV_ORDER else len(GOV_ORDER)
+        keys.append(((gpos, govs.get(gov, gov), rank, last, p['name'].lower()), p['id'], gov, rank))
+    keys.sort()
+    return {pid: (gov, rank, i) for i, (_, pid, gov, rank) in enumerate(keys)}
+
+
 def people_index():
     from fees_page import who_sections
     from ui import dir_card, directory, ico, avatar, tone_of, photo_of
     G = EG.build()
     cards, kinds, govs = [], Counter(), {}
     total_links = 0
-    for p in sorted(_people(), key=lambda p: (p['name'].split()[-1], p['name'])):
+    order = directory_order()
+    gname = lambda g: (G.ents.get('gov:' + g) or {}).get('name') or 'Other offices'
+    for p in sorted(_people(), key=lambda p: order[p['id']][2]):
+        home, rank, pos = order[p['id']]
         x = G.ents['person:' + p['id']]
         n = len(EG.neighbors('person:' + p['id']))
         total_links += n
@@ -256,7 +318,7 @@ def people_index():
                 govs[g] = G.ents['gov:' + g]['name']
         cards.append(dir_card(f'/people/{p["id"]}', x['name'], x['subtitle'] or '', ' · '.join(gov_link(g) for g in gids),
                               f'{n} link{"s" if n != 1 else ""}', ' '.join(ks), ' '.join(gids), n, also=' '.join(x['aliases']),
-                              av=avatar(x['name'], tone_of(x['name']), photo=photo_of(p['id']))))
+                              av=avatar(x['name'], tone_of(x['name']), photo=photo_of(p['id'])), order=pos, group=gname(home)))
     chips = [('', 'Everyone', len(cards)), ('elected', 'Elected', kinds['elected']), ('candidate', '2026 candidates', kinds['candidate']), ('staff', 'Department leaders', kinds['staff']), ('past', 'Past candidates', kinds['past'])]
     k = lambda icon, tone, label, v, sub: f'<div class="kpi ui-k"><span class="kh">{ico(icon, tone)}<span class="eyebrow">{label}</span></span><span class="v">{v}</span><span class="s">{sub}</span></div>'
     return f'''<div class="page tax">
@@ -265,7 +327,7 @@ def people_index():
     <div class="stamp"><a class="pill" href="#co">County officers</a><a class="pill" href="#pay">Officials' pay</a><a class="pill" href="/connections">Connections network</a></div></header>
   <div class="kpis">{k("users", "blue", "Elected officials", kinds["elected"], f"On {len(govs)} boards and offices")}{k("flag", "salmon", "2026 candidates", kinds["candidate"], "On the November 3 ballot")}{k("briefcase", "teal", "Department leaders", kinds["staff"], "Managers, clerks and chiefs")}{k("network", "amber", "Connections", f"{total_links:,}", "Companies, donors, boards and votes")}</div>
   <section class="tx-sec"><div class="sec-hd"><h2 id="all">Everyone</h2><span class="muted">{len(cards)} people</span></div>
-    {directory(cards, "People", chips, sorted(govs.items(), key=lambda kv: kv[1]), "Search a name, seat or government", csv="baycounty-people")}
+    {directory(cards, "People", chips, sorted(govs.items(), key=lambda kv: kv[1]), "Search a name, seat or government", csv="baycounty-people", sorts=(('gov', 'By government'), ('c', 'Most connected'), ('az', 'A to Z')))}
     <p class="note">Only elected officials, department leaders and candidates have a page here. Nonprofit board members and businesses have a profile reached from the nonprofit, company or <a href="/connections">Connections</a> pages. Individual campaign donors are named only when they run a registered business; others are counted in totals.</p></section>
   {who_sections()}
 </div>
