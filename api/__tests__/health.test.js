@@ -44,7 +44,7 @@ test('previews match the live builders and have inert links', async () => {
   const live = confirmEmail({what: 'weekly BayCounty.me updates for Lynn Haven', isRule: false, link: 'https://baycounty.me/api/confirm?t=preview-only', govs: ['Lynn Haven']});
   const pv = await preview('confirm_digest', {gov: 'lh'});
   assert.equal(pv.html, live.html);
-  for (const t of PREVIEWS.filter(x => x.id !== 'digest')) {
+  for (const t of PREVIEWS.filter(x => x.id !== 'digest' && x.id !== 'weekly' /* these fetch live data */)) {
     const m = await preview(t.id, {gov: 'pcb'});
     assert.ok(m.subject, t.id);
     assert.doesNotMatch(m.html + m.text, /example\.com|RESEND_UNSUBSCRIBE_URL|contact\.prefs_token/, `${t.id} has a live or placeholder link`);

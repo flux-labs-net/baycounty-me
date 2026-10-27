@@ -1,7 +1,7 @@
 // POST /api/subscribe {email, govs:[...]} or {email, rule: {type, params}} -> sends a confirmation link (double opt-in).
 // Guards: same-origin Origin (or Referer) required; honeypot + fill time; 5 sign-ups/hour per connection (per instance);
 // at most one confirmation email per address every 10 minutes (database-backed, see _alerts.claimConfirmSend).
-const {GOVS, FROM, SITE, makeToken, resend, sameOrigin, claimConfirmSend} = require('./_alerts');
+const {LISTS, FROM, SITE, makeToken, resend, sameOrigin, claimConfirmSend} = require('./_alerts');
 const {ipOf} = require('./_gate');
 const hits = new Map();
 module.exports = async (req, res) => {
@@ -26,11 +26,12 @@ module.exports = async (req, res) => {
     tok = () => makeToken(email, [], {kind: 'rule', r: v.type, p: v.params});
     what = describe(v.type, v.params);
   } else {
-    const govs = [...new Set((Array.isArray(b.govs) ? b.govs : []).filter(g => GOVS[g]))];
-    if (!govs.length) return res.status(400).json({ok: false, error: 'Pick at least one government to follow.'});
+    // 'week' is the countywide weekly email; the other keys are governments (_alerts.LISTS)
+    const govs = [...new Set((Array.isArray(b.govs) ? b.govs : []).filter(g => LISTS[g]))];
+    if (!govs.length) return res.status(400).json({ok: false, error: 'Pick the weekly email or at least one government to follow.'});
     tok = () => makeToken(email, govs);
-    govNames = govs.map(g => GOVS[g][0]);
-    what = 'weekly BayCounty.me updates for ' + govNames.join(', ');
+    govNames = govs.map(g => LISTS[g][0]);
+    what = govs.length === 1 && govs[0] === 'week' ? 'the weekly email This week in Bay County' : 'weekly BayCounty.me updates for ' + govNames.join(', ');
   }
   if (!(process.env.RESEND_FULL_KEY || process.env.RESEND_API_KEY) || !process.env.ALERTS_SECRET) return res.status(500).json({ok: false, error: 'Alerts aren’t set up yet. Please try again soon.'});
   // Cooldown: answer the same way whether or not an email goes out, so the form can't be used to probe addresses.

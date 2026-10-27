@@ -53,6 +53,9 @@ RELATION = {
     'related': ('shares a project or address with', 'shares a project or address with'),
     'same': ('is the same organization as', 'is the same organization as'),
     'works': ('works at', 'has on its staff'),
+    'hired': ('hired', 'was hired by'),
+    'charter': ('runs a charter school for', 'has a charter school run by'),
+    'utility': ('provides utility service in', 'gets utility service from'),
 }
 MAIN_GOVS = None
 _C = {}
@@ -451,6 +454,17 @@ def build():
         b = business(r['doc_number'], r['business'], 'Registered business' + (f" ({r['business_status'].lower()})" if r.get('business_status') and r['business_status'] != 'Active' else ''), r.get('source_url'))
         G.link(mid, b, 'runs', detail='Matched by ' + (r.get('match') or 'name').lower(), source_url=r.get('source_url'))
 
+    # utilities: the companies that provide power, gas or garbage pickup in each part of the county (utility-providers,
+    # copied from city and county pages). A city's own utility is the government itself, so it gets no link.
+    for r in _ds('utility-providers'):
+        eid = r.get('entity_id')
+        if not eid or eid.startswith('gov:'):
+            continue
+        if eid not in G.ents:
+            G.ent(eid, r.get('entity_name') or r['provider'], r.get('provider_kind'), None, r.get('source_url'))
+        gid = 'gov:' + (r['gov_id'] or 'county')
+        G.link(eid, gid, 'utility', None, r.get('as_of'), r['service_label'] + ('' if r['gov_id'] else ' across the county'), r.get('source_url'), key=r['service'])
+
     # chambers of commerce: board seats, staff and past chairs from each chamber's own website (chamber-leaders), and the
     # organization each board member represents there
     for r in _ds('chamber-leaders'):
@@ -473,6 +487,13 @@ def build():
         if oid and oid in G.ents and not pid.startswith('person:'):
             G.link(pid, oid, 'works', None, when, f"Listed with it on the {r['chamber']} board", r.get('source_url'), key='chamber')
 
+    # charter schools: the local nonprofit that runs each one, and the school district that authorized it (schools dataset)
+    for r in _ds('schools'):
+        op, gid = r.get('operator_entity_id'), 'gov:' + (r.get('gov_id') or 'schools')
+        if op and op in G.ents and gid in G.ents:
+            G.link(op, gid, 'charter', None, r.get('enrollment_year'), r['name'] + (f" (grades {r['grades']})" if r.get('grades') else ''),
+                   'https://baycounty.me' + r['page_url'], key=r['school_id'])
+
     # people who run a registered business and gave to a campaign personally (data/campaign/owner_gifts.py)
     for r in _ds('owner-gifts'):
         pid = r.get('candidate_id')
@@ -487,10 +508,34 @@ def build():
         if r.get('last_date') and r['last_date'] != r.get('first_date'):
             G.links[(oid, 'person:' + pid, 'gift', r.get('office') or '')]['dates'].append(r['last_date'])
 
+    # federal contracts to companies based in the county (USAspending, federal-contract-years): the signing agency or
+    # military branch paid the company, one link per agency and company with the money obligated since 2016
+    for r in _ds('federal-contract-years'):
+        aid, rid = r.get('agency_entity_id'), r.get('recipient_entity_id')
+        if not aid or not rid:
+            continue
+        G.ent(aid, r['sub_agency'] or r['agency'],
+              'Federal agency' + (f" · {r['agency']}" if r.get('sub_agency') and r['sub_agency'] != r['agency'] else ''), None, 'https://www.usaspending.gov/search')
+        if rid.startswith('business:') and rid not in G.ents:
+            G.ent(rid, ids.biz_case(r['recipient']), 'Company with federal contracts', None, 'https://www.usaspending.gov/search')
+        if rid in G.ents:
+            G.link(aid, rid, 'paid', r.get('obligated'), str(r['year']), 'Federal contracts', r.get('source_url'), key='federal')
+
     for r in _ds('nonprofit-grants'):
         a, b = np_names.get(r['grantor_id']), np_names.get(r.get('recipient_id'))
         if a and b:
             G.link(a, b, 'grant', r.get('cash'), r.get('tax_year'), r.get('purpose'), r.get('source_url'))
+
+    # state road contracts (road-contracts): the Florida Department of Transportation and each contractor it hired here
+    roads = _ds('road-contracts')
+    if roads:
+        fdot = G.ent('gov:fdot', 'Florida Department of Transportation', 'State agency: state highways and bridges', None, 'https://www.fdot.gov/')
+        for r in roads:
+            if not r.get('contractor'):
+                continue
+            to = 'vendor:' + r['vendor_id'] if r.get('vendor_id') and 'vendor:' + r['vendor_id'] in G.ents else \
+                G.ent('business:' + _slug(r['contractor']), ids.biz_case(r['contractor']), 'Road contractor hired by the state')
+            G.link(fdot, to, 'hired', r.get('amount'), r.get('let_date'), 'State road contract', r.get('source_url'), key='fdot')
 
     _C['G'] = G
     return G

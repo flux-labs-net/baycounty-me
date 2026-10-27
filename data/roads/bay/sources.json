@@ -1,0 +1,12 @@
+{
+  "place_id": "fl-bay",
+  "fdot": {
+    "county_name": "BAY",
+    "county_code": "46",
+    "district": "03",
+    "district_site": "https://www.nwflroads.com/",
+    "contracts_url": "https://gis.fdot.gov/arcgis/rest/services/All_Construction_Contracts/MapServer/0",
+    "work_program_url": "https://gis.fdot.gov/arcgis/rest/services/Work_Program_Current/MapServer",
+    "work_program_page": "https://www.fdot.gov/workprogram/"
+  }
+}

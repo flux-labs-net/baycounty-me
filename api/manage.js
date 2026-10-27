@@ -6,9 +6,10 @@
 //   POST with body List-Unsubscribe=One-Click and ?t= is the one-click unsubscribe that Gmail, Yahoo and Outlook send
 //        from the List-Unsubscribe header (RFC 8058). It comes from the mail provider, so it has no Origin header;
 //        the signed token is what authorizes it.
+// GOVS here is _alerts.LISTS: the countywide weekly email ('week') and each government, each a Resend segment.
 // The token is signed with ALERTS_SECRET and tied to the address (_alerts.prefsToken). It doesn't expire, so the
 // link in every email keeps working; changing ALERTS_SECRET invalidates all of them.
-const {GOVS, ALL_SEGMENT, FROM, resend, esc, emailShell, button, sameOrigin, claimConfirmSend, readPrefsToken, prefsUrl, setPrefsProperty, page} = require('./_alerts');
+const {LISTS: GOVS, ALL_SEGMENT, FROM, resend, esc, emailShell, button, sameOrigin, claimConfirmSend, readPrefsToken, prefsUrl, setPrefsProperty, page} = require('./_alerts');
 
 const KEY = () => process.env.RESEND_FULL_KEY;
 const segToGov = Object.fromEntries(Object.entries(GOVS).map(([k, [, id]]) => [id, k]));
@@ -62,7 +63,7 @@ async function unsubscribeAll(email, key) {
   catch (e) { console.error('manage: unsubscribe rules', e.message); }
 }
 
-const MSG = {saved: 'Saved. You’ll get weekly updates for the governments checked below.', stopped: 'You’re unsubscribed from every BayCounty.me email. You can sign up again any time.',
+const MSG = {saved: 'Saved. You’ll get the weekly emails checked below.', stopped: 'You’re unsubscribed from every BayCounty.me email. You can sign up again any time.',
   removed: 'That alert is turned off.', error: 'Something went wrong. Please try again.', sent: 'If that address gets BayCounty.me email, a link to manage it is on its way.'};
 
 function linkForm(note) {

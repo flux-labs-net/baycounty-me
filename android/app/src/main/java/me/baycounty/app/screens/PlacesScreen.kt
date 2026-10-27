@@ -96,6 +96,8 @@ fun PlacesScreen() {
                 CardList {
                     RouteRow(Route.People, "Officials, leaders and candidates", symbol = "person.3")
                     RowDivider(50.dp)
+                    RouteRow(Route.Schools, "Public schools", "Calendar, grades and students for every school", symbol = "graduationcap")
+                    RowDivider(50.dp)
                     RouteRow(Route.Dataset("officials-pay"), "What officials are paid", symbol = "person.text.rectangle")
                     RowDivider(50.dp)
                     RouteRow(Route.BudgetCompare(), "Budget compare", symbol = "arrow.left.arrow.right")

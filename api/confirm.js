@@ -3,7 +3,7 @@
 //                            scanners (Microsoft Defender Safe Links and others) open links before people do.
 //   POST /api/confirm (t)    does the work, then redirects to /alerts with a status.
 // Token kinds: weekly digest sign-ups (no kind, from subscribe.js) and rule alerts (kind 'rule', see _rules.js).
-const {GOVS, ALL_SEGMENT, readToken, resend, esc, setPrefsProperty} = require('./_alerts');
+const {LISTS, ALL_SEGMENT, readToken, resend, esc, setPrefsProperty} = require('./_alerts');
 
 function page(title, body) {
   return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex">
@@ -13,7 +13,7 @@ function page(title, body) {
 }
 
 async function confirmDigest(p, key) {
-  const segs = [ALL_SEGMENT, ...p.g.filter(g => GOVS[g]).map(g => GOVS[g][1])];
+  const segs = [ALL_SEGMENT, ...p.g.filter(g => LISTS[g]).map(g => LISTS[g][1])];
   let r = await resend('/contacts', 'POST', {email: p.e, unsubscribed: false, segments: segs.map(id => ({id}))}, key);
   if (!r.ok) { // already a contact: re-subscribe and add to each list
     await resend(`/contacts/${encodeURIComponent(p.e)}`, 'PATCH', {unsubscribed: false}, key);
@@ -22,7 +22,8 @@ async function confirmDigest(p, key) {
     if (!r.ok) console.error('confirm add', adds.map(a => a.status + ' ' + JSON.stringify(a.body)).join(' | '));
   }
   if (r.ok) await setPrefsProperty(p.e, key); // per-contact manage link used by the digest footer
-  return r.ok ? `/alerts?status=confirmed&g=${p.g.join(',')}` : '/alerts?status=error';
+  if (!r.ok) return '/alerts?status=error';
+  return p.g.length === 1 && p.g[0] === 'week' ? '/this-week?status=confirmed#signup' : `/alerts?status=confirmed&g=${p.g.join(',')}`;
 }
 
 module.exports = async (req, res) => {
@@ -35,7 +36,7 @@ module.exports = async (req, res) => {
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
     if (!p) return res.status(200).send(page('Link expired', `<h1>This link has expired</h1><p>Confirmation links last 7 days. Sign up again and we'll send a new one.</p><a class="btn" href="/alerts">Back to alerts</a>`));
     const tokAttr = String(raw).replace(/[^A-Za-z0-9._-]/g, '');
-    const what = p.kind === 'rule' ? `this alert: ${esc(require('./_rules').describe(p.r, p.p || {}))},` : `weekly updates for ${esc(p.g.filter(g => GOVS[g]).map(g => GOVS[g][0]).join(', '))}`;
+    const what = p.kind === 'rule' ? `this alert: ${esc(require('./_rules').describe(p.r, p.p || {}))},` : `weekly updates for ${esc(p.g.filter(g => LISTS[g]).map(g => LISTS[g][0]).join(', '))}`;
     return res.status(200).send(page('Confirm your alerts', `<h1>Confirm your BayCounty.me alerts</h1><p>Press the button to start getting ${what} at ${esc(p.e)}.</p>
 <form method="post" action="/api/confirm"><input type="hidden" name="t" value="${tokAttr}"><button type="submit" autofocus>Confirm</button></form>`));
   }

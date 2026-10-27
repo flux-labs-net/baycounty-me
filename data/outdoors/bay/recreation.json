@@ -1,0 +1,17 @@
+{
+ "about": "Each government's parks and recreation pages, for program and league sign-ups and facility rentals. Checked by hand on 2026-10-27; a page that turned automated readers away was checked through a search engine's copy.",
+ "as_of": "2026-10-27",
+ "departments": [
+  {"gov_id": "county", "name": "Bay County Parks & Recreation", "parks_url": "https://www.baycountyfl.gov/289/Parks-Recreation", "programs_url": "https://www.baycountyfl.gov/296/Sports-Programs", "programs_label": "Adult sports leagues"},
+  {"gov_id": "pc", "name": "Panama City Parks, Culture & Recreation", "parks_url": "https://www.panamacity.gov/845/Parks-Culture-and-Recreation", "programs_url": "https://www.panamacity.gov/688/Programs-Events", "programs_label": "Programs & events"},
+  {"gov_id": "pcb", "name": "Panama City Beach Parks & Recreation", "parks_url": "https://pcbfl.gov/departments/parks-recreation-department", "programs_url": "https://pcbfl.gov/departments/parks-recreation-department", "programs_label": "Camps, leagues and classes"},
+  {"gov_id": "lh", "name": "Lynn Haven Sports & Recreation", "parks_url": "https://www.cityoflynnhaven.gov/495/parks-grounds", "programs_url": "https://www.cityoflynnhaven.gov/496/Sports-Recreation", "programs_label": "Sports & recreation"},
+  {"gov_id": "cw", "name": "Callaway Leisure Services", "parks_url": "https://www.cityofcallaway.com/", "programs_url": null, "programs_label": null},
+  {"gov_id": "sp", "name": "Springfield Parks & Recreation", "parks_url": "https://www.springfieldfl.net/parks-recreation", "programs_url": "https://www.springfieldfl.net/parks-recreation", "programs_label": "Parks & recreation"},
+  {"gov_id": "parker", "name": "Parker Parks & Ramps", "parks_url": "https://cityofparker.com/residents/parks-ramps/", "programs_url": null, "programs_label": null},
+  {"gov_id": "mb", "name": "Mexico Beach Parks & Venues", "parks_url": "https://mexicobeachfl.gov/visitors/public-parks-venues/", "programs_url": null, "programs_label": null},
+  {"gov_id": null, "name": "St. Andrews State Park", "parks_url": "https://www.floridastateparks.org/parks-and-trails/st-andrews-state-park", "programs_url": null, "programs_label": null, "run_by": "Florida State Parks"},
+  {"gov_id": null, "name": "Camp Helen State Park", "parks_url": "https://www.floridastateparks.org/parks-and-trails/camp-helen-state-park", "programs_url": null, "programs_label": null, "run_by": "Florida State Parks"},
+  {"gov_id": null, "name": "Pine Log State Forest", "parks_url": "https://www.fdacs.gov/Forest-Wildfire/Our-Forests/State-Forests/Pine-Log-State-Forest", "programs_url": null, "programs_label": null, "run_by": "Florida Forest Service"}
+ ]
+}

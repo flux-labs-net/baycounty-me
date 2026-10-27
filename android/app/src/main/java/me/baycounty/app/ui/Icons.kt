@@ -40,6 +40,17 @@ fun icon(symbol: String?): ImageVector = when (symbol) {
     "person.badge.clock" -> Icons.Outlined.History
     "building.2", "building" -> Icons.Outlined.Business
     "storefront" -> Icons.Outlined.Storefront
+    "graduationcap" -> Icons.Outlined.School
+    "star" -> Icons.Outlined.StarOutline
+    "xmark.circle" -> Icons.Outlined.HighlightOff
+    "bolt" -> Icons.Outlined.Bolt
+    "phone" -> Icons.Outlined.Phone
+    "drop" -> Icons.Outlined.WaterDrop
+    "trash" -> Icons.Outlined.Delete
+    "fork.knife" -> Icons.Outlined.Restaurant
+    "hand.raised" -> Icons.Outlined.VolunteerActivism
+    "shield" -> Icons.Outlined.Shield
+    "newspaper" -> Icons.Outlined.Newspaper
     "sun.max" -> Icons.Outlined.WbSunny
     "repeat" -> Icons.Outlined.Repeat
     "building.columns" -> Icons.Outlined.AccountBalance
@@ -92,5 +103,30 @@ fun icon(symbol: String?): ImageVector = when (symbol) {
     "checkmark" -> Icons.Outlined.Check
     "trend" -> Icons.AutoMirrored.Outlined.ShowChart
     "globe" -> Icons.Outlined.Public
+    "beach.umbrella" -> Icons.Outlined.BeachAccess
+    "tree" -> Icons.Outlined.Park
+    "drop" -> Icons.Outlined.WaterDrop
+    "water.waves" -> Icons.Outlined.Waves
+    "wind" -> Icons.Outlined.Air
+    "thermometer.medium" -> Icons.Outlined.Thermostat
+    "sailboat" -> Icons.Outlined.Sailing
+    "figure.hiking" -> Icons.Outlined.Hiking
+    "figure.run" -> Icons.Outlined.SportsSoccer
+    "figure.play" -> Icons.Outlined.Toys
+    "parkingsign" -> Icons.Outlined.LocalParking
+    "testtube.2" -> Icons.Outlined.Science
+    "arrow.up.right.square" -> Icons.Outlined.Launch
+    "arrow.triangle.turn.up.right.diamond" -> Icons.Outlined.Directions
+    "car.side.arrowtriangle.up.fill" -> Icons.Outlined.DirectionsCar
+    "cloud.bolt.rain" -> Icons.Outlined.Thunderstorm
+    "house.lodge" -> Icons.Outlined.NightShelter
+    "drop.triangle", "drop" -> Icons.Outlined.WaterDrop
+    "phone" -> Icons.Outlined.Phone
+    "house.and.flag" -> Icons.Outlined.Cottage
+    "shield.lefthalf.filled" -> Icons.Outlined.Shield
+    "bolt.trianglebadge.exclamationmark" -> Icons.Outlined.ElectricBolt
+    "hammer" -> Icons.Outlined.Construction
+    "bell.badge" -> Icons.Outlined.NotificationsActive
+    "exclamationmark.octagon" -> Icons.Outlined.Report
     else -> Icons.Outlined.TableChart
 }

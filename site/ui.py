@@ -105,7 +105,7 @@ def icon_for(text, i=0):
 
 # the six menu sections: their icon and tone, for the kicker above a page title
 SECTION_LOOK = {'Governments': ('county', 'blue'), 'Taxes': ('receipt', 'amber'), 'Spending': ('wallet', 'teal'),
-                'Watchdog': ('shield', 'salmon'), 'People': ('users', 'blue'), 'Take part': ('megaphone', 'teal')}
+                'Watchdog': ('shield', 'salmon'), 'People': ('users', 'blue'), 'Outdoors': ('sun', 'teal'), 'Take part': ('megaphone', 'teal')}
 # each page's badge icon (its tone comes from its menu section)
 PAGE_ICON = {
     '/who-runs-bay-county': 'users', '/governments': 'county', '/compare': 'compare',
@@ -117,7 +117,7 @@ PAGE_ICON = {
     '/public-money/who-gets-paid': 'dollar', '/public-money/votes': 'vote', '/public-money/savings': 'piggy',
     '/public-money/audits': 'search', '/connections': 'network', '/elections': 'flag', '/elections/past': 'flag', '/connections/campaign-gifts': 'heart',
     '/connections/money-map': 'link', '/connections/business-ties': 'store', '/connections/shared-owners': 'network',
-    '/connections/nonprofits': 'heart', '/chambers': 'store', '/meetings': 'calendar', '/alerts': 'bell', '/records-request': 'mail',
+    '/connections/nonprofits': 'heart', '/chambers': 'store', '/events': 'calendar', '/beaches': 'waves', '/parks': 'tree', '/schools': 'school', '/this-week': 'mail', '/volunteer': 'heart', '/military': 'shield', '/meetings': 'calendar', '/emergency': 'storm', '/hurricane-prep': 'shield', '/alerts': 'bell', '/records-request': 'mail',
     '/correspondence': 'mail', '/glossary': 'book', '/open-data': 'download', '/developers': 'code', '/updates': 'news',
     '/about': 'info', '/privacy': 'shield', '/search': 'search', '/people': 'users', '/profile': 'user',
 }

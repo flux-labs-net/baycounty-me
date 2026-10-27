@@ -233,6 +233,7 @@ fun AddressReportScreen(match: AddressMatch) {
                 }
             }
             item { CRASection(r, m) }
+            item { AddressUtilitiesSection(match) }
             item { SafetySection(r, match) }
             r.development?.let { d -> item { DevelopmentSection(d) } }
             item { NearbySection(nearby, nearbyFailed) }

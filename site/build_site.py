@@ -22,6 +22,19 @@ from correspondence_page import correspondence_page
 from shared_owners_page import shared_owners_page
 from nonprofits_page import nonprofits_page
 from chambers_page import chambers_page
+from events_page import events_page
+from outdoors_page import beaches_page, parks_page
+from growth_pages import development_page, roads_page
+from schools_page import schools_page
+from emergency_page import emergency_page
+from hurricane_prep_page import hurricane_prep_page
+from elections_hub_page import results_page as election_results_page, voting_page
+from notices_jobs_page import notices_page, jobs_page
+from utilities_page import utilities_page
+from restaurants_page import restaurants_page, new_businesses_page
+from weekly import this_week_page
+from volunteer_page import volunteer_page
+from military_page import military_page
 from realtor_page import realtor_page
 from business_ties_page import business_ties_page
 from updates import updates_page, rss, last_updated, nice as nice_date
@@ -134,7 +147,7 @@ FOOTER = f'''<footer class="site-foot"><div class="site-foot-in">
   <nav class="foot-cols" aria-label="Footer">
     <div><b>Follow the money</b><a href="/public-money/tax-dollars">Tax dollars</a><a href="/governments">Governments</a><a href="/compare">Compare governments</a><a href="/public-money/contracts">Contracts</a></div>
     <div><b>Accountability</b><a href="/public-money/accountability">Accountability console</a><a href="/public-money/votes">How they voted</a><a href="/connections">Connections</a></div>
-    <div><b>Take part</b><a href="/meetings">Meetings</a><a href="/alerts">Email alerts</a><a href="/records-request">Request a record</a><a href="/open-data">Open data &amp; API</a></div>
+    <div><b>Take part</b><a href="/meetings">Meetings</a><a href="/this-week">This week</a><a href="/alerts">Email alerts</a><a href="/records-request">Request a record</a><a href="/open-data">Open data &amp; API</a></div>
   </nav>
   <div class="foot-base">
     <p class="muted foot-links">__UPDATED__<a href="/updates">What's new</a> · <a href="/updates.xml">RSS</a> · <a href="/data-sources">Where our data comes from</a> · <a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/about#contact">Send a correction</a> · <span class="sel">{EMAIL}</span></p>
@@ -673,11 +686,19 @@ PAGES = [
     *([('/es/elecciones', 'Quiénes son candidatos en 2026', 'Cada contienda local en las boletas del condado de Bay en 2026: los candidatos, sus propuestas, enlaces a sus campañas y de dónde viene el dinero de su campaña.', es_elections_page)] if ELECTIONS_READY else []),
     ('/es/reuniones', 'Próximas reuniones públicas en el condado de Bay', 'Cuándo y dónde se reúnen la Comisión del Condado, la Junta Escolar y cada comisión de ciudad, con enlaces a las agendas y los temas de dinero de cada una.', es_meetings_page),
     ('/records-request', 'Request a public record', 'Write a Florida public records request to any Bay County government in a minute: pick a record the site is missing or describe your own.', lambda: records_page(OUT)),
+    ('/emergency', 'Emergencies and alerts in Bay County',
+     "What's happening now in Bay County: National Weather Service warnings, evacuation orders, open shelters, boil-water notices and road closures, checked every few minutes. Look up the evacuation zone for any address and find every county shelter.", lambda: emergency_page(OUT)),
+    ('/hurricane-prep', 'Hurricane prep for Bay County',
+     'Get ready for hurricane season in Bay County: a plan and a kit, sandbags, generator safety, what to do when a storm is coming and after it, every federal disaster declaration since 2016 and the FEMA rebuild money that reached each ZIP code.', hurricane_prep_page),
     ('/alerts', 'Get BayCounty.me updates by email', 'Follow Bay County, the school district or your city and get a short weekly email with new votes, data, corrections and upcoming meetings.', lambda: alerts_page(OUT)),
     ('/meetings', 'Upcoming public meetings in Bay County', 'When and where the County Commission, School Board and every city commission meet, with agenda links and the money items on each agenda.', lambda: meetings_page(OUT)),
     ('/connections/campaign-gifts', 'Campaign gifts and contracts', "Who funded the campaigns of Bay County's current elected officials, from Supervisor of Elections reports, and which donors also hold local government contracts.", campaign_page),
     ('/public-money/budget-compare', 'Compare budgets across years', "Compare any Bay County government's budget in two fiscal years, such as Lynn Haven FY2025 and FY2026: what grew, what shrank and what's new, by department, service and fund, in dollars and percent.", lambda: budget_compare_page(OUT, None)),
     *([('/elections', "Who's running in 2026", 'Every local race on Bay County ballots in 2026: the candidates, their platforms in their own words, links to their campaigns, and where their campaign money comes from.', elections_page)] if ELECTIONS_READY else []),
+    ('/elections/results', 'Election results since 2016', "Results of every contest on a Bay County ballot since 2016, from the Supervisor of Elections: votes for each candidate and ballot question, on Election Day, early and by mail, and turnout for every election.", election_results_page),
+    ('/elections/voting', 'Where and when to vote', "Bay County election dates, every early voting site, each precinct's Election Day polling place, and the local races on your ballot by address.", voting_page),
+    ('/notices', 'Public notices', "Bids, public hearings and meetings that Bay County, the School Board, the cities and other public agencies announce, in one searchable list linked to the government that posted each.", notices_page),
+    ('/jobs', 'Government jobs', "Open jobs at Bay County, Bay District Schools, the cities and the airport, read daily from each employer's own job board, with pay, closing dates and where to apply.", jobs_page),
     ('/elections/past', 'Past local elections, 2016 to 2025', 'Every candidate who ran for a local office in Bay County from 2016 through 2025, winners and losers, with what each raised and spent and which businesses and groups gave.', past_elections_page),
     ('/public-money/exemptions', 'Property tax exemptions', 'Who gets a property tax exemption in Bay County, from homestead to disabled veterans, how many homes, and how much tax each one takes off bills, from the 2026 tax roll.', lambda: exemptions_page(OUT)),
     ('/public-money/contracts', 'Who gets the contracts', 'Major contracts approved by Bay County and its cities since 2022: winners, how they were awarded, change orders, emergency purchases and who the county paid most.', lambda: contracts_page(OUT)),
@@ -685,10 +706,34 @@ PAGES = [
      'Emails BayCounty.me sent to Bay County elected officials and managers, and their replies, published as public records.', lambda: correspondence_page(OUT)),
     ('/connections/shared-owners', 'Shared-owner campaign gifts',
      'Groups of Bay County businesses that share an owner or officer in state corporate records and each gave to the same local candidate, checked by hand. People are not named.', lambda: shared_owners_page(OUT)),
+    ('/events', 'Events in Bay County',
+     "What's happening around Bay County in the next two months, from public calendars: the county and city calendars, the library system, the visitor bureaus and the chambers. Updated every morning.", lambda: events_page(OUT)),
+    ('/this-week', 'This week in Bay County',
+     "What's happening in Bay County this week, the public meetings on the calendar, and the votes and contracts added last week. The same list goes out by email every Monday.", lambda: this_week_page(OUT)),
     ('/connections/nonprofits', 'Nonprofits in Bay County',
      'Every nonprofit in Bay County: what each reports to the IRS, the government money and grants that reach it, and public officials who sit on its board.', lambda: nonprofits_page(OUT)),
+    ('/schools', 'Public schools',
+     "Every public school in Bay County: which schools serve your address, the school district calendar, each school's state grades, students and spending per student since 2016, and schools that closed.", lambda: schools_page(OUT)),
+    ('/utilities', 'Utilities and trash day',
+     "Who provides water, sewer, electricity, natural gas and garbage pickup at any Bay County address, its trash and yard waste day, holiday changes, power outage lines and what each city charges for water and sewer.", lambda: utilities_page(OUT)),
     ('/chambers', 'Chambers of commerce',
      "Bay County's two chambers of commerce, the Bay County Chamber and the Panama City Beach Chamber: who sits on their boards and staff, upcoming events and programs, their IRS filings, the public money they get, and board members' businesses that do work for local governments.", lambda: chambers_page(OUT)),
+    ('/beaches', 'Beaches: flags, rip currents, water quality and access',
+     "Today's beach flag and rip current risk for Panama City Beach and the rest of the county's Gulf beaches, what each flag means, state water quality samples at every sampling site, and every public beach access and county beach parking lot on a map.", lambda: beaches_page(OUT)),
+    ('/parks', 'Parks, boat ramps and trails',
+     'Every public park, boat ramp and trail in Bay County: playgrounds, restrooms, sports fields, fishing piers and trails, who runs each one, a map with directions, and where to sign up for leagues and programs.', lambda: parks_page(OUT)),
+    ('/development', 'Building and development',
+     "New homes permitted in Bay County each year, city by city, and the commercial buildings, subdivisions and apartments in planning review, with their status and dates, on a map.", lambda: development_page(OUT)),
+    ('/roads', 'Road projects',
+     "State highway work under way in Bay County and what each FDOT contract costs, FDOT's five-year plan for local roads, the contractors, and the county and city road jobs paid for by the half-cent sales tax.", lambda: roads_page(OUT)),
+    ('/restaurants', 'Restaurant inspections',
+     'Every restaurant, food truck and caterer in Bay County and what state food safety inspectors found on every visit since 2016: violations, warnings, fines recommended and emergency closures.', lambda: restaurants_page(OUT)),
+    ('/new-businesses', 'New businesses',
+     'Every company, nonprofit and partnership filed with the state since 2016 with its main address in Bay County, by month, city and type, and every new restaurant, food truck and caterer.', lambda: new_businesses_page(OUT)),
+    ('/volunteer', 'Volunteer in Bay County',
+     'Open volunteer needs from Bay County nonprofits, read every day from public volunteer boards, and the local nonprofits that rely on volunteers year-round, by cause.', lambda: volunteer_page(OUT)),
+    ('/military', 'Military and the bases',
+     "Tyndall Air Force Base and Naval Support Activity Panama City: what each base does and who commands it, the latest news from the units on them, and every federal contract since 2016 to companies based in Bay County, by company, agency and year.", lambda: military_page(OUT)),
     ('/connections/business-ties', "Officials' businesses",
      'Registered businesses and nonprofits that list a Bay County official, department leader or candidate, checked by hand, and where those businesses meet campaigns and public money.', lambda: business_ties_page(OUT)),
     ('/public-money/accountability', 'Accountability console: projects from budget to close-out',
@@ -781,6 +826,7 @@ def main():
     shutil.copy(os.path.join(ROOT, 'completeness.js'), os.path.join(OUT, 'assets', 'completeness.js'))
     shutil.copy(os.path.join(ROOT, 'gov.css'), os.path.join(OUT, 'assets', 'gov.css'))
     shutil.copy(os.path.join(ROOT, 'home.js'), os.path.join(OUT, 'assets', 'home.js'))
+    shutil.copy(os.path.join(ROOT, 'events.js'), os.path.join(OUT, 'assets', 'events.js'))
     shutil.copy(os.path.join(ROOT, 'report.js'), os.path.join(OUT, 'assets', 'report.js'))
     write_report_es(OUT)
     shutil.copy(os.path.join(ROOT, 'tables.js'), os.path.join(OUT, 'assets', 'tables.js'))

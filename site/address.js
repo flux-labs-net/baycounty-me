@@ -244,6 +244,7 @@ async function load(f) {
   renderCra(cra);
   renderSafe(flood, evac, mosq, tdc, fire, lib, park);
   renderGovLinks(govKey);
+  if (window.BCUtil) BCUtil.card($('utilBody'), {lat: pt.y, lon: pt.x}).then(() => { const m = document.createElement('p'); m.className = 'muted small'; m.innerHTML = '<a href="/utilities?a=' + encodeURIComponent(a.ADDRESS) + '">Full utilities page →</a>'; $('utilBody').append(m); });
   loadDev(pt, cityName);
   loadNear(pt, govKey);
   drawMap(pt, cityName, cra?.[0]?.CRA);
@@ -430,8 +431,12 @@ function renderReps(comm, local, sb, house, senate, ush, cityName) {
   ]) + '<dt class="span">Money decisions</dt><dd class="span"><a href="/public-money/tax-dollars#govs">See each government\'s budget →</a></dd>';
 }
 function renderSchools(es, ms, hs) {
-  const n = x => x?.[0] ? esc(x[0].NAME) : '<span class="muted">—</span>';
-  $('schBody').innerHTML = kv([['Elementary', n(es)], ['Middle', n(ms)], ['High', n(hs)]]) + '<dd class="span muted small">Attendance zones from Bay District Schools via county GIS. Choice and magnet options differ.</dd>';
+  const n = x => {
+    const z = x?.[0]?.NAME; if (!z) return '<span class="muted">—</span>';
+    const s = (D.schools || {})[z.replace(/\s+/g, ' ').trim()];
+    return s ? `<a href="/schools/#s-${esc(s.id)}">${esc(s.n)}</a>${s.g ? ` <span class="muted small">grade ${esc(s.g)} (${s.y - 1}-${String(s.y).slice(2)})</span>` : ''}` : esc(z);
+  };
+  $('schBody').innerHTML = kv([['Elementary', n(es)], ['Middle', n(ms)], ['High', n(hs)]]) + '<dd class="span muted small">Attendance zones from Bay District Schools via county GIS. Choice and magnet options differ. <a href="/schools/">All schools, calendar and grades →</a></dd>';
 }
 function renderCra(cra) {
   const el = $('craBody'), c = cra?.[0];
