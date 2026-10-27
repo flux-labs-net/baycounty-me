@@ -5,7 +5,8 @@ extract_agendas.py - read captured agendas into items.
 For each agenda captured by watch_agendas.py whose current version hasn't been read yet:
   1. get the file (Supabase Storage copy, else the public source URL)
   2. pull out its text (pdftotext for PDFs; visible text for HTML pages)
-  3. send the text to a Claude model (AGENDA_MODEL, default claude-sonnet-5-5) with a JSON schema, and store the
+  3. send the text to a model (AGENDA_MODEL, default claude-sonnet-5-5; a gpt-* name uses OpenAI) with a JSON
+     schema, and store the
      meeting details and every numbered item: title, one-line summary, kind, dollar amounts, parties, addresses.
 
 Only agendas (and agenda-like files from notice emails) are read, never packets: packets run to hundreds of pages
@@ -14,10 +15,11 @@ Each run reads at most AGENDA_EXTRACT_MAX documents (default 25), newest meeting
 run's estimated cost passes AGENDA_EXTRACT_BUDGET_USD (default 2.00).
 
 A failed read is retried after RETRY_HOURS (6), up to MAX_ATTEMPTS (3). A setup problem (pdftotext missing, a bad
-key, a key that needs ANTHROPIC_WORKSPACE_ID) stops the run without marking agendas failed.
+key, a key that needs ANTHROPIC_WORKSPACE_ID, an unknown model) stops the run without marking agendas failed.
 
-Environment: DATABASE_URL, ANTHROPIC_API_KEY, ANTHROPIC_WORKSPACE_ID (only if the key isn't scoped to a workspace), SUPABASE_URL + SUPABASE_SERVICE_ROLE_KEY (to read stored copies),
-AGENDA_MODEL, AGENDA_EXTRACT_MAX, AGENDA_EXTRACT_BUDGET_USD.
+Environment: DATABASE_URL, SUPABASE_URL + SUPABASE_SERVICE_ROLE_KEY (to read stored copies), AGENDA_MODEL,
+AGENDA_EXTRACT_MAX, AGENDA_EXTRACT_BUDGET_USD, and the key for the model's provider: ANTHROPIC_API_KEY (+
+ANTHROPIC_WORKSPACE_ID if the key isn't scoped to a workspace) or OPENAI_API_KEY (see data/llm.py).
 Usage:
   python3 data/agendas/extract_agendas.py                 # the scheduled step
   python3 data/agendas/extract_agendas.py --file x.pdf    # read one local file and print the JSON (no database)
@@ -37,6 +39,8 @@ import urllib.request
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
+sys.path.insert(0, os.path.join(HERE, ".."))
+import llm  # noqa: E402  (Claude or GPT, picked by the model name)
 import watch_agendas as wa  # noqa: E402  (DB, Storage, download, fetch_meetings helpers)
 from export_items import keep_party  # noqa: E402
 
@@ -73,11 +77,10 @@ def wants_alerts(meeting_date, today):
     return meeting_date is not None and meeting_date >= today - dt.timedelta(days=ALERT_DAYS_BACK)
 
 
-class SetupError(RuntimeError):
-    """A problem with the run's setup (missing tool, bad key or workspace), not with one agenda: stop the run and
-    record nothing per agenda, so every agenda isn't marked failed and retried for no reason."""
-# Published prices per million tokens (input, output). Haiku is listed "from" this price, so its estimate is a floor.
-PRICES = {"claude-sonnet-5-5": (2.0, 10.0), "claude-haiku-5-5": (0.10, 0.50), "claude-opus-5-5": (4.0, 20.0)}
+# A problem with the run's setup (missing tool, bad key or workspace), not with one agenda: stop the run and record
+# nothing per agenda, so every agenda isn't marked failed and retried for no reason.
+SetupError = llm.SetupError
+PRICES = llm.PRICES
 KINDS = ["contract", "purchase", "change_order", "budget", "grant", "bond_debt", "rezoning_land_use", "ordinance",
          "resolution", "appointment", "personnel", "presentation", "public_hearing", "consent", "minutes_approval",
          "other"]
@@ -160,45 +163,16 @@ def to_text(data, ctype, url=""):
     return re.sub(r"\n{3,}", "\n\n", t).strip()
 
 
-def claude(text):
-    key = os.environ.get("ANTHROPIC_API_KEY")
-    if not key:
-        raise SetupError("ANTHROPIC_API_KEY is not set")
-    headers = {"x-api-key": key, "anthropic-version": "2023-06-01", "content-type": "application/json", "User-Agent": fm.UA}
-    if os.environ.get("ANTHROPIC_WORKSPACE_ID"):  # needed when the key isn't scoped to a workspace
-        headers["anthropic-workspace-id"] = os.environ["ANTHROPIC_WORKSPACE_ID"]
-    body = json.dumps({"model": MODEL, "max_tokens": 16000,
-                       "messages": [{"role": "user", "content": PROMPT + text}],
-                       "output_config": {"format": {"type": "json_schema", "schema": SCHEMA}}}).encode()
-    last = None
-    for attempt in range(3):
-        req = urllib.request.Request("https://api.anthropic.com/v1/messages", data=body, method="POST", headers=headers)
-        try:
-            with urllib.request.urlopen(req, timeout=300) as r:
-                j = json.loads(r.read().decode("utf-8"))
-            break
-        except urllib.error.HTTPError as e:
-            msg = e.read()[:400].decode("utf-8", "replace")
-            if e.code in (401, 403) or (e.code == 400 and re.search(r"api key|workspace|credit|billing", msg, re.I)):
-                raise SetupError("Claude API %s: %s" % (e.code, msg))
-            last = RuntimeError("Claude API %s: %s" % (e.code, msg))
-            if e.code not in (429, 500, 502, 503, 529):
-                raise last
-        except Exception as e:
-            last = e
-        fm.time.sleep(5 * (attempt + 1))
-    else:
-        raise last
-    if j.get("stop_reason") in ("refusal", "max_tokens"):
-        raise RuntimeError("model stopped: %s" % j.get("stop_reason"))
-    out = "".join(b.get("text", "") for b in j.get("content", []) if b.get("type") == "text")
-    u = j.get("usage") or {}
-    return json.loads(out), u.get("input_tokens") or 0, u.get("output_tokens") or 0
+def ask_model(text):
+    """-> (answer, input tokens, output tokens) from AGENDA_MODEL (Claude or GPT)."""
+    try:
+        return llm.structured(MODEL, None, PROMPT + text, SCHEMA, "agenda", 16000)
+    except llm.ModelStopped as e:
+        raise RuntimeError(str(e))
 
 
 def cost(model, tin, tout):
-    p = PRICES.get(model)
-    return round((tin * p[0] + tout * p[1]) / 1e6, 4) if p else None
+    return llm.price(model, tin, tout)
 
 
 def norm_date(s):
@@ -255,7 +229,7 @@ def run():
             if len(re.sub(r"\s", "", text)) < 200:
                 status = "no_text"
             else:
-                parsed, tin, tout = claude(text[:MAX_CHARS])
+                parsed, tin, tout = ask_model(text[:MAX_CHARS])
         except SetupError as e:
             msg = str(e)[:500]
             print("setup problem, stopping: " + msg)
@@ -328,13 +302,16 @@ def main(argv):
         if "--text-only" in argv:
             print(text[:4000])
             return 0
-        parsed, tin, tout = claude(text[:MAX_CHARS])
+        parsed, tin, tout = ask_model(text[:MAX_CHARS])
         print(json.dumps(parsed, indent=2))
         print("tokens in/out %d/%d, about $%s" % (tin, tout, cost(MODEL, tin, tout)), file=sys.stderr)
         return 0
-    if not os.environ.get("ANTHROPIC_API_KEY"):
-        print("ANTHROPIC_API_KEY is not set; skipping agenda extraction")
+    if not llm.has_key(MODEL):
+        print("%s is not set (model %s); skipping agenda extraction" % (llm.key_name(MODEL), MODEL))
         return 0
+    if not llm.known(MODEL):  # without a price the spending cap can't work
+        print("no price for model %s; add it to PRICES in data/llm.py" % MODEL, file=sys.stderr)
+        return 2
     if not os.environ.get("DATABASE_URL"):
         print("DATABASE_URL is not set", file=sys.stderr)
         return 2

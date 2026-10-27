@@ -27,7 +27,7 @@ class T(unittest.TestCase):
             return FakeResp(json.dumps({'content': [{'type': 'text', 'text': json.dumps(out)}], 'stop_reason': 'end_turn',
                                         'usage': {'input_tokens': 2000, 'output_tokens': 500}}).encode())
         urllib.request.urlopen = fake
-        parsed, tin, tout = x.claude('AGENDA TEXT')
+        parsed, tin, tout = x.ask_model('AGENDA TEXT')
         self.assertEqual(parsed['items'][0]['amounts'][0]['amount'], 1250000)
         self.assertEqual((tin, tout), (2000, 500))
         self.assertEqual(seen['body']['model'], x.MODEL)
@@ -40,7 +40,58 @@ class T(unittest.TestCase):
         for reason in ('refusal', 'max_tokens'):
             urllib.request.urlopen = lambda req, timeout=0: FakeResp(json.dumps({'content': [], 'stop_reason': reason, 'usage': {}}).encode())
             with self.assertRaises(RuntimeError):
-                x.claude('x')
+                x.ask_model('x')
+
+    def test_gpt_request_and_parse(self):
+        seen = {}
+        out = {'meeting': {'body': 'City Council', 'date': '2026-09-24', 'time': None, 'location': None}, 'items': []}
+        def fake(req, timeout=0):
+            seen['url'] = req.full_url; seen['body'] = json.loads(req.data); seen['headers'] = dict(req.header_items())
+            return FakeResp(json.dumps({'choices': [{'message': {'content': json.dumps(out), 'refusal': None}, 'finish_reason': 'stop'}],
+                                        'usage': {'prompt_tokens': 3000, 'completion_tokens': 800}}).encode())
+        urllib.request.urlopen = fake
+        os.environ['OPENAI_API_KEY'] = 'sk-test'
+        old = x.MODEL
+        x.MODEL = 'gpt-6.1-sol'
+        try:
+            parsed, tin, tout = x.ask_model('AGENDA TEXT')
+        finally:
+            x.MODEL = old
+            del os.environ['OPENAI_API_KEY']
+        self.assertEqual(parsed['meeting']['body'], 'City Council')
+        self.assertEqual((tin, tout), (3000, 800))
+        self.assertTrue(seen['url'].endswith('/v1/chat/completions'))
+        self.assertEqual(seen['headers'].get('Authorization'), 'Bearer sk-test')
+        self.assertEqual(seen['body']['response_format']['json_schema']['strict'], True)
+        self.assertIn('AGENDA TEXT', seen['body']['messages'][-1]['content'])
+        self.assertEqual(x.cost('gpt-6.1-sol', 1_000_000, 100_000), 3.0)
+
+    def test_gpt_cut_off_raises(self):
+        os.environ['OPENAI_API_KEY'] = 'sk-test'
+        old = x.MODEL
+        x.MODEL = 'gpt-5-mini'
+        urllib.request.urlopen = lambda req, timeout=0: FakeResp(json.dumps({'choices': [{'message': {'content': '{"me'}, 'finish_reason': 'length'}], 'usage': {}}).encode())
+        try:
+            with self.assertRaises(RuntimeError):
+                x.ask_model('x')
+        finally:
+            x.MODEL = old
+            del os.environ['OPENAI_API_KEY']
+
+    def test_gpt_quota_is_a_setup_error(self):
+        import urllib.error
+        def f(req, timeout=0):
+            raise urllib.error.HTTPError(req.full_url, 429, 'x', {}, io.BytesIO(b'{"error":{"code":"insufficient_quota"}}'))
+        urllib.request.urlopen = f
+        os.environ['OPENAI_API_KEY'] = 'sk-test'
+        old = x.MODEL
+        x.MODEL = 'gpt-6.1-sol'
+        try:
+            with self.assertRaises(x.SetupError):
+                x.ask_model('x')
+        finally:
+            x.MODEL = old
+            del os.environ['OPENAI_API_KEY']
 
     def test_helpers(self):
         self.assertEqual(x.cost('claude-sonnet-5-5', 1_000_000, 100_000), 3.0)
@@ -69,13 +120,13 @@ class T(unittest.TestCase):
             return f
         urllib.request.urlopen = err(400, '{"error":{"message":"This API key is not scoped to a workspace"}}')
         with self.assertRaises(x.SetupError):
-            x.claude('x')
+            x.ask_model('x')
         urllib.request.urlopen = err(401, 'invalid x-api-key')
         with self.assertRaises(x.SetupError):
-            x.claude('x')
+            x.ask_model('x')
         urllib.request.urlopen = err(400, '{"error":{"message":"prompt is too long"}}')
         with self.assertRaises(RuntimeError) as cm:
-            x.claude('x')
+            x.ask_model('x')
         self.assertNotIsInstance(cm.exception, x.SetupError)
         seen = {}
         def ok(req, timeout=0):
@@ -84,7 +135,7 @@ class T(unittest.TestCase):
         urllib.request.urlopen = ok
         os.environ['ANTHROPIC_WORKSPACE_ID'] = 'wrkspc_test'
         try:
-            x.claude('x')
+            x.ask_model('x')
         finally:
             del os.environ['ANTHROPIC_WORKSPACE_ID']
         self.assertEqual(seen.get('Anthropic-workspace-id'), 'wrkspc_test')

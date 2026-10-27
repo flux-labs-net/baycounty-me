@@ -42,7 +42,10 @@ spend and the estimated cost to finish.
 - Text: `pdftotext` per page; a page with under 80 letters is rendered at 300 dpi and read with Tesseract.
   Pages are marked `=== Page N ===` so each motion carries its page. Files over about 90,000 characters are split
   at page breaks (preferring a page where a new meeting starts) into several requests.
-- Model: `MINUTES_MODEL`, default `claude-sonnet-5-5`, through the Message Batches API (half price). The prompt asks
+- Model: `MINUTES_MODEL`, default `claude-sonnet-5-5`, through the Message Batches API (half price). A `gpt-*` name
+  (for example `gpt-6.1-sol`) sends the same prompt and schema to OpenAI's Batch API instead (also half price; needs
+  the `OPENAI_API_KEY` secret). Each batch remembers its model, so switching mid-backlog is safe, and the spending
+  caps count both providers. A hand run of the workflow can set `model` for that run only. See `data/llm.py`. The prompt asks
   for every voted motion (procedural ones only when split), the roll call at the start of each meeting, and per
   motion the printed yes/no/abstain/absent names, the tally as printed, outcome, mover, seconder, amounts,
   ordinance and resolution numbers, organizations, page, and a one-sentence summary. Nothing not printed.

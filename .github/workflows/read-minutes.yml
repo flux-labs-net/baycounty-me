@@ -9,7 +9,8 @@
 #   rematch: re-run name matching and checks on stored motions after data/civic/officeholders.json changes.
 # Motions reach the site through the daily meetings refresh (export_votes.py). Flagged ones wait on /admin.
 # Secrets: DATABASE_URL, SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, ANTHROPIC_API_KEY (+ variable ANTHROPIC_WORKSPACE_ID
-# if the key isn't workspace-scoped). Variables (optional): MINUTES_MODEL (default claude-sonnet-5-5),
+# if the key isn't workspace-scoped), OPENAI_API_KEY for gpt-* models. Variables (optional): MINUTES_MODEL (default
+# claude-sonnet-5-5; a gpt-* name such as gpt-6.1-sol sends batches to OpenAI), OPENAI_REASONING_EFFORT (default low),
 # MINUTES_SUBMIT_MAX, MINUTES_BATCH_BUDGET_USD, MINUTES_TOTAL_BUDGET_USD, MINUTES_PAUSED=1 to stop scheduled reads.
 name: Read minutes
 on:
@@ -29,6 +30,9 @@ on:
       max:
         description: 'crawl: most files to fetch this run'
         default: '2500'
+      model:
+        description: 'read: model for this run only (e.g. claude-sonnet-5-5, gpt-6.1-sol). Blank = MINUTES_MODEL.'
+        default: ''
 permissions:
   contents: read
 concurrency:
@@ -84,7 +88,10 @@ jobs:
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           ANTHROPIC_WORKSPACE_ID: ${{ vars.ANTHROPIC_WORKSPACE_ID }}
-          MINUTES_MODEL: ${{ vars.MINUTES_MODEL }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_PROJECT_ID: ${{ vars.OPENAI_PROJECT_ID }}
+          OPENAI_REASONING_EFFORT: ${{ vars.OPENAI_REASONING_EFFORT }}
+          MINUTES_MODEL: ${{ inputs.model || vars.MINUTES_MODEL }}
           MINUTES_SUBMIT_MAX: ${{ vars.MINUTES_SUBMIT_MAX }}
           MINUTES_BATCH_BUDGET_USD: ${{ vars.MINUTES_BATCH_BUDGET_USD }}
           MINUTES_TOTAL_BUDGET_USD: ${{ vars.MINUTES_TOTAL_BUDGET_USD }}

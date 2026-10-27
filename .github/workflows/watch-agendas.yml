@@ -7,7 +7,8 @@
 #          ADMIN_EMAILS. Optional: POP_HOST, POP_USER, POP_PASS (a POP3 mailbox as well as / instead of Resend);
 #          repository variables AGENDA_INBOX (default ingest@baycounty.me) and POP_DELETE=1.
 # Agenda reading (extract_agendas.py): secret ANTHROPIC_API_KEY (+ variable ANTHROPIC_WORKSPACE_ID if the key isn't
-#          workspace-scoped); variables AGENDA_MODEL (default claude-sonnet-5-5),
+#          workspace-scoped), or OPENAI_API_KEY for a gpt-* model; variables AGENDA_MODEL (default claude-sonnet-5-5;
+#          a gpt-* name such as gpt-6.1-sol reads with OpenAI), OPENAI_REASONING_EFFORT (default low),
 #          AGENDA_EXTRACT_MAX (25 per run), AGENDA_EXTRACT_BUDGET_USD (2.00 per run).
 name: Watch agendas
 on:
@@ -76,8 +77,8 @@ jobs:
           python data/agendas/watch_agendas.py $args
       - name: Read new agendas into items
         id: extract
-        # Claude model AGENDA_MODEL (repository variable; default claude-sonnet-5-5, or claude-haiku-5-5 to spend less).
-        # Skipped when ANTHROPIC_API_KEY isn't set. Runs even if the watch step logged errors.
+        # Model AGENDA_MODEL (repository variable; default claude-sonnet-5-5, claude-haiku-5-5 to spend less, or a
+        # gpt-* model to use OpenAI). Skipped when that provider's key isn't set. Runs even if the watch step logged errors.
         if: always() && steps.watch.outcome != 'cancelled'
         continue-on-error: true
         env:
@@ -87,6 +88,9 @@ jobs:
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           ANTHROPIC_WORKSPACE_ID: ${{ vars.ANTHROPIC_WORKSPACE_ID }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_PROJECT_ID: ${{ vars.OPENAI_PROJECT_ID }}
+          OPENAI_REASONING_EFFORT: ${{ vars.OPENAI_REASONING_EFFORT }}
           AGENDA_MODEL: ${{ vars.AGENDA_MODEL }}
           AGENDA_EXTRACT_MAX: ${{ vars.AGENDA_EXTRACT_MAX }}
           AGENDA_EXTRACT_BUDGET_USD: ${{ vars.AGENDA_EXTRACT_BUDGET_USD }}
