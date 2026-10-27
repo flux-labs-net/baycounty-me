@@ -76,6 +76,7 @@ fun HomeScreen() {
         item { SearchField { nav.push(Route.Search) } }
         item { BallotBanner() }
         item { AddressCard() }
+        item { HomeEventsSection() }
         item { MeetingsSection() }
         item { TaxBillSection() }
         item { NumbersSection() }

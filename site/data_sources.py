@@ -72,6 +72,9 @@ TOPICS = [
     ('chambers', 'Chambers of commerce', '/chambers',
      "Board, staff and program lists are copied by hand from each chamber's website. Upcoming events are read every day from the Panama City Beach Chamber's public calendar feed; the Bay County Chamber's calendar platform turns automated readers away.",
      'Board members are joined to other local filings by first and last name, and to an official only where the chamber names their government post. Organizations are joined to governments, paid companies, nonprofits or one Sunbiz filing with the exact same name.'),
+    ('events', 'Community events', '/events',
+     "Read every morning from each organizer's public calendar feed: the county and city calendars (RSS), The Events Calendar feeds on the library, visitor bureau and city sites, the Mexico Beach calendar export and the Panama City Beach Chamber. A feed that fails keeps yesterday's events.",
+     'Library events outside Bay County are left out. Repeating programs (the same title on two or more dates) are flagged so pages can lead with one-off events.'),
     ('cra', 'Redevelopment agencies (CRAs)', '/public-money/cra-spending',
      'CRA spending is read from CRA annual reports, agendas, budgets and audits, one ledger line per payment or project. '
      'Tax increment comes from CRA reports, audits and budgets, split between the county and city by millage.',
@@ -183,6 +186,14 @@ src('elections', 'state', 'Florida election night results (Bay County)', 'https:
 # --- Businesses and nonprofits ---------------------------------------------------------------------------------------
 src('businesses', 'state', 'Florida Division of Corporations (Sunbiz) quarterly data file', 'https://dos.fl.gov/sunbiz/other-services/data-downloads/', BULK, 'Quarterly', 'Every business with a county address, its officers, managers and registered agents')
 src('businesses', 'state', 'Sunbiz business search', 'https://search.sunbiz.org/', BY_HAND, 'As needed', 'Links to each business\'s state record, used to check matches')
+src('events', 'county', 'Bay County calendar feed', 'https://www.baycountyfl.gov/Calendar.aspx', AUTO_DAILY, 'Daily', 'County events and meetings: title, date, time, place name')
+src('events', 'pc', 'City of Panama City calendar feed', 'https://www.panamacity.gov/Calendar.aspx', AUTO_DAILY, 'Daily', 'City events, recreation programs and meetings')
+src('events', 'lh', 'City of Lynn Haven calendar feed', 'https://www.cityoflynnhaven.gov/Calendar.aspx', AUTO_DAILY, 'Daily', 'City events and meetings')
+src('events', 'cw', 'City of Callaway calendar feed', 'https://www.cityofcallaway.com/Calendar.aspx', AUTO_DAILY, 'Daily', 'City events and meetings')
+src('events', 'parker', 'City of Parker events feed', 'https://cityofparker.com/events/', AUTO_DAILY, 'Daily', 'City events and library dates')
+src('events', 'county', 'Northwest Regional Library System events feed', 'https://www.nwrls.com/events', AUTO_DAILY, 'Daily', 'Bay County library branch programs')
+src('events', 'county', 'Destination Panama City events feed', 'https://www.destinationpanamacity.com/events/', AUTO_DAILY, 'Daily', 'Visitor events in Panama City')
+src('events', 'mb', 'Mexico Beach visitor events calendar', 'https://www.mexicobeach.com/events/', AUTO_DAILY, 'Daily', 'Visitor events in Mexico Beach')
 src('chambers', 'county', 'Bay County Chamber of Commerce website (board, staff and programs)', 'https://panamacity.org/board-of-directors/', BY_HAND, 'As boards change', 'Board, staff and past chairs since 2016 by name, title and organization; regular programs')
 src('chambers', 'county', 'Panama City Beach Chamber of Commerce website (board, staff and programs)', 'https://pcbeach.org/board-of-directors/', BY_HAND, 'As boards change', 'Board and staff by name, title and organization; regular programs')
 src('chambers', 'county', 'Panama City Beach Chamber events calendar feed', 'https://pcbeach.org/local-events/', AUTO_DAILY, 'Daily', 'Upcoming chamber and community events: title, time, venue and link')
@@ -265,7 +276,7 @@ FOLDER_TOPIC = {
     'agendas': 'meetings', 'meetings': 'meetings', 'votes': 'votes', 'contracts': 'contracts', 'budgets': 'budgets',
     'debt_audit': 'audits', 'money': 'audits', 'tax': 'property-tax', 'amendment3': 'property-tax', 'exemptions': 'property-tax',
     'salaries': 'salaries', 'campaign': 'campaign', 'elections': 'elections', 'sunbiz': 'businesses', 'careers': 'businesses',
-    'nonprofits': 'nonprofits', 'chambers': 'chambers', 'cra': 'cra', 'merged.json': 'cra', 'michael': 'michael', 'surtax': 'sales-tax',
+    'nonprofits': 'nonprofits', 'chambers': 'chambers', 'events': 'events', 'cra': 'cra', 'merged.json': 'cra', 'michael': 'michael', 'surtax': 'sales-tax',
     'tourism': 'tourist-tax', 'fees': 'fees', 'nearby': 'address', 'civic': 'records', 'projects': 'contracts',
 }
 SKIP_HOSTS = {'baycounty.me', 'www.baycounty.me', 'aptg.co'}

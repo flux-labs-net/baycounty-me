@@ -30,3 +30,32 @@ class ChambersTest {
         assertEquals("Nov 6 to Nov 8", Chambers.whenLabel(d))
     }
 }
+
+class EventsTest {
+    private fun row(json: String) = Row.decodeList("[$json]")[0]
+
+    @Test fun upcomingStartsAtTodayAndSorts() {
+        val rows = Repo.rows(Events.DATASET)
+        val up = Events.upcoming(rows, "2000-01-01")
+        assertEquals(rows.size, up.size)
+        assertEquals(up.map { it.string("starts") }, up.map { it.string("starts") }.sortedBy { it })
+        assertTrue(Events.towns(rows).isNotEmpty())
+    }
+
+    @Test fun featuredSkipsMeetingsAndRepeats() {
+        val rows = listOf(
+            row("""{"title":"Fair","starts":"2026-11-02T10:00:00","category":"Community","recurring":false}"""),
+            row("""{"title":"Commission Meeting","starts":"2026-11-02T17:00:00","category":"Public meeting","recurring":false}"""),
+            row("""{"title":"Story Time","starts":"2026-11-03T10:00:00","category":"Library","recurring":true}"""),
+        )
+        assertEquals(listOf("Fair"), Events.featured(rows, "2026-11-01", "2026-11-30").map { it.string("title") })
+    }
+
+    @Test fun labels() {
+        assertEquals("Today", Events.dayLabel("2026-10-27", "2026-10-27"))
+        assertEquals("Tomorrow", Events.dayLabel("2026-10-28", "2026-10-27"))
+        assertEquals("Thursday, Oct 29", Events.dayLabel("2026-10-29", "2026-10-27"))
+        assertEquals("5:30 p.m.", Events.time(row("""{"starts":"2026-10-29T17:30:00"}""")))
+        assertEquals("All day", Events.time(row("""{"starts":"2026-10-29T00:00:00"}""")))
+    }
+}

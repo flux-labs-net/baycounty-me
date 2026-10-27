@@ -9,6 +9,9 @@ from datetime import datetime, timezone
 import html
 
 CHANGES = [
+    {'date': '2026-10-27', 'title': "What's happening in Bay County",
+     'text': "The home page now opens its second section with what's happening today and coming soon around the county, and a new Events page lists the next two months in one calendar you can filter by town and kind: city and county events and meetings, library programs, visitor events in Panama City and Mexico Beach, and Panama City Beach Chamber events. Everything is read every morning from each organizer's public calendar, and each title links to the organizer's page. Chamber board and staff photos from the chambers' own websites now appear on the Chambers page. The apps have the same events on their home screens.",
+     'pages': ['/', '/events', '/chambers', '/meetings', '/open-data', '/developers']},
     {'date': '2026-10-27', 'title': 'Chambers of commerce',
      'text': "A new page covers Bay County's two chambers of commerce, the Bay County Chamber and the Panama City Beach Chamber: who sits on their boards and staff (each name links to a profile with the person's other boards and records), the organizations those board members represent and what local governments paid them, upcoming chamber and community events, regular programs such as First Friday and Friday at the Beach, each chamber's IRS filings, and the tourism agency money paid to them. Board lists are copied from the chambers' own websites; no contact details are published. The apps have the same screen.",
      'pages': ['/chambers', '/connections/nonprofits', '/people', '/open-data', '/developers']},

@@ -121,6 +121,7 @@ def _bars(rows, colors):
 def home_page():
     s = stats()
     from updates import CHANGES, nice
+    from events_page import home_section
     from govs import GOVS
     from place import NAME
     b = bill_data()
@@ -181,6 +182,8 @@ def home_page():
         <ol class="cmp-bars" id="cmpBars">{ranked}</ol>
       </div>
   </section>
+
+  {home_section()}
 
   <section class="h-follow" aria-labelledby="follow">
     <div class="h-sec-hd"><div><span class="eyebrow">Step 2 · Follow it</span><h2 id="follow">Where it went, and who's checking.</h2></div><a href="/public-money/accountability">Accountability console →</a></div>
