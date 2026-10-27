@@ -140,7 +140,7 @@ def _index():
 SKIP = {'a', 'script', 'style', 'textarea', 'title', 'head', 'option', 'svg', 'code', 'pre', 'button', 'label', 'select', 'h1', 'nav',
         'summary', 'input'}
 VOID = {'br', 'img', 'input', 'meta', 'link', 'hr', 'wbr', 'source', 'col', 'area', 'base', 'embed', 'param', 'track'}
-NO_PEOPLE = ('/connections/nonprofits', '/profile/')
+NO_PEOPLE = ('/connections/nonprofits', '/profile/', '/chambers')
 
 
 def _link_text(html_text, path, people_ok):

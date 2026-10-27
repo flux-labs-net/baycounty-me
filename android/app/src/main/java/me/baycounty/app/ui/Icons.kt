@@ -39,6 +39,9 @@ fun icon(symbol: String?): ImageVector = when (symbol) {
     "person.crop.circle.badge.checkmark" -> Icons.Outlined.HowToReg
     "person.badge.clock" -> Icons.Outlined.History
     "building.2", "building" -> Icons.Outlined.Business
+    "storefront" -> Icons.Outlined.Storefront
+    "sun.max" -> Icons.Outlined.WbSunny
+    "repeat" -> Icons.Outlined.Repeat
     "building.columns" -> Icons.Outlined.AccountBalance
     "checkmark.seal" -> Icons.Outlined.Verified
     "road.lanes" -> Icons.Outlined.AddRoad

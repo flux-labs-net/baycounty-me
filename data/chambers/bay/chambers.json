@@ -1,0 +1,702 @@
+{
+ "place_id": "fl-bay",
+ "as_of": "2026-10-27",
+ "method": "Copied by hand from each chamber's own website (board, staff and program pages) on the as_of date. Names, titles and the organization each board member represents only: no phone numbers, emails or addresses. Upcoming events come from data/chambers/fetch_events.py (events.json). Filings, revenue and public money come from the nonprofits datasets (IRS Form 990 and Sunbiz).",
+ "chambers": [
+  {
+   "chamber_id": "bay-chamber",
+   "name": "Bay County Chamber of Commerce",
+   "short_name": "Bay County Chamber",
+   "nonprofit_id": "np-590391375",
+   "foundation_id": "np-593479027",
+   "founded": 1913,
+   "serves": "Callaway, Lynn Haven, Mexico Beach, Panama City, Panama City Beach, Parker, Springfield and unincorporated Bay County",
+   "tagline": "Building a Better Bay",
+   "about": "An independent, member-owned business group (not a government agency) that runs networking events, leadership programs and advocacy for Bay County businesses. Its foundation runs Leadership Bay, Junior Leadership Bay and Bay Young Professionals.",
+   "board_meets": "The board meets at 11 a.m. on the third Thursday of each month; members are welcome. The executive committee meets at 11 a.m. on the second Thursday; those meetings are closed.",
+   "website": "https://panamacity.org/",
+   "board_url": "https://panamacity.org/board-of-directors/",
+   "staff_url": "https://panamacity.org/staff/",
+   "events_url": "https://business.panamacity.org/events-calendar",
+   "directory_url": "https://business.panamacity.org/member-directory",
+   "join_url": "https://panamacity.org/membership/",
+   "about_url": "https://panamacity.org/about-us/"
+  },
+  {
+   "chamber_id": "pcb-chamber",
+   "name": "Panama City Beach Chamber of Commerce",
+   "short_name": "Beach Chamber",
+   "nonprofit_id": "np-592857564",
+   "foundation_id": null,
+   "founded": 1987,
+   "serves": "Panama City Beach and the beaches of Bay County",
+   "tagline": null,
+   "about": "The business group for Panama City Beach, incorporated in 1987 (Sunbiz N21370). It runs Friday at the Beach, IdeaCamp, Business After Hours, two leads groups, young professionals events, the Panama City Beach Marathon and the Annual Awards Dinner.",
+   "board_meets": null,
+   "website": "https://pcbeach.org/",
+   "board_url": "https://pcbeach.org/board-of-directors/",
+   "staff_url": "https://pcbeach.org/chamber-staff/",
+   "events_url": "https://pcbeach.org/local-events/category/chamber-events/",
+   "directory_url": "https://members.pcbeach.org/directory",
+   "join_url": "https://pcbeach.org/join/",
+   "about_url": "https://pcbeach.org/chamber/"
+  }
+ ],
+ "leaders": {
+  "bay-chamber": [
+   {
+    "group": "Executive committee",
+    "name": "Allen Armstrong",
+    "title": "Chairman",
+    "organization": "New Venture Research Corporation"
+   },
+   {
+    "group": "Executive committee",
+    "name": "Denise Rowan",
+    "title": "Chairman-elect",
+    "organization": "Dunlap & Shipman"
+   },
+   {
+    "group": "Executive committee",
+    "name": "Tricia Berry",
+    "title": "Vice chair",
+    "organization": "Panhandle Pediatric Dentistry"
+   },
+   {
+    "group": "Executive committee",
+    "name": "Jeremy Bennett",
+    "title": "Treasurer",
+    "organization": "Gulf Coast Bank & Trust Company"
+   },
+   {
+    "group": "Executive committee",
+    "name": "Ty Mitchell",
+    "title": "Vice chair of communications",
+    "organization": "Bay County Tax Collector"
+   },
+   {
+    "group": "Executive committee",
+    "name": "Shane Boyett",
+    "title": "Military Affairs Committee chairman",
+    "organization": "Florida Power & Light"
+   },
+   {
+    "group": "Board",
+    "name": "Shay Cattrett",
+    "title": "Chairman's appointment (one year)",
+    "organization": "BaySolutions"
+   },
+   {
+    "group": "Board",
+    "name": "Stacie Galbreath",
+    "title": "Chairman's appointment (one year)",
+    "organization": "Glass Ventures"
+   },
+   {
+    "group": "Board",
+    "name": "Rendy Lovelady",
+    "title": "Chairman's appointment (one year)",
+    "organization": "PCB Entertainment"
+   },
+   {
+    "group": "Board",
+    "name": "Chase Christianson",
+    "title": "Director",
+    "organization": "HCA Florida Gulf Coast Hospital",
+    "term_ends": "2026-12-31"
+   },
+   {
+    "group": "Board",
+    "name": "Paul Corbin",
+    "title": "Director",
+    "organization": "Coca-Cola Bottling Co. United",
+    "term_ends": "2026-12-31"
+   },
+   {
+    "group": "Board",
+    "name": "Arthur Cullen",
+    "title": "Director",
+    "organization": "Consultant",
+    "term_ends": "2026-12-31"
+   },
+   {
+    "group": "Board",
+    "name": "Brendan D'Isernia",
+    "title": "Director",
+    "organization": "Eastern Shipbuilding Group",
+    "term_ends": "2026-12-31"
+   },
+   {
+    "group": "Board",
+    "name": "Clint Mizell",
+    "title": "Director",
+    "organization": "Capital City Bank",
+    "term_ends": "2026-12-31"
+   },
+   {
+    "group": "Board",
+    "name": "William Brock",
+    "title": "Director",
+    "organization": "The St. Joe Company",
+    "term_ends": "2027-12-31"
+   },
+   {
+    "group": "Board",
+    "name": "Steve Clements",
+    "title": "Director",
+    "organization": "CBC Construction",
+    "term_ends": "2027-12-31"
+   },
+   {
+    "group": "Board",
+    "name": "Alex Murphy",
+    "title": "Director",
+    "organization": "Central Moloney",
+    "term_ends": "2027-12-31"
+   },
+   {
+    "group": "Board",
+    "name": "Jeremy Pridgeon",
+    "title": "Director",
+    "organization": "First United Methodist Church",
+    "term_ends": "2027-12-31"
+   },
+   {
+    "group": "Board",
+    "name": "Aaron Rich",
+    "title": "Director",
+    "organization": "Aaron Rich Marketing",
+    "term_ends": "2027-12-31"
+   },
+   {
+    "group": "Board",
+    "name": "Aaron White",
+    "title": "Director",
+    "organization": "SmartBank",
+    "term_ends": "2027-12-31"
+   },
+   {
+    "group": "Board",
+    "name": "Eric Arnold",
+    "title": "Director",
+    "organization": "Borusan Berg Pipe",
+    "term_ends": "2028-12-31"
+   },
+   {
+    "group": "Board",
+    "name": "Chris Cramer",
+    "title": "Director",
+    "organization": "Bill Cramer Automotive",
+    "term_ends": "2028-12-31"
+   },
+   {
+    "group": "Board",
+    "name": "Cynthia Fuller",
+    "title": "Director",
+    "organization": "Holy Nativity Episcopal School",
+    "term_ends": "2028-12-31"
+   },
+   {
+    "group": "Board",
+    "name": "Gina Littleton",
+    "title": "Director",
+    "organization": "United Way of Northwest Florida",
+    "term_ends": "2028-12-31"
+   },
+   {
+    "group": "Board",
+    "name": "Abdalla Nassar",
+    "title": "Director",
+    "organization": "ASTRO America",
+    "term_ends": "2028-12-31"
+   },
+   {
+    "group": "Board",
+    "name": "Cory Proctor",
+    "title": "Director",
+    "organization": "Trustmark Bank",
+    "term_ends": "2028-12-31"
+   },
+   {
+    "group": "Ex officio (non-voting)",
+    "name": "Luke Ahmann",
+    "title": "Lt. Gen., Commander, 1st Air Force",
+    "organization": "1st Air Force"
+   },
+   {
+    "group": "Ex officio (non-voting)",
+    "name": "Ryan Thulin",
+    "title": "Colonel, Commander, 325th Fighter Wing",
+    "organization": "Tyndall Air Force Base"
+   },
+   {
+    "group": "Ex officio (non-voting)",
+    "name": "Kim Bodine",
+    "title": "Executive Director",
+    "organization": "CareerSource Gulf Coast"
+   },
+   {
+    "group": "Ex officio (non-voting)",
+    "name": "Randy Hanna",
+    "title": "Dean",
+    "organization": "FSU Panama City"
+   },
+   {
+    "group": "Ex officio (non-voting)",
+    "name": "Becca Hardin",
+    "title": "President and CEO",
+    "organization": "Bay Economic Development Alliance"
+   },
+   {
+    "group": "Ex officio (non-voting)",
+    "name": "Bob Majka",
+    "title": "Executive Director",
+    "organization": "Panama City Port Authority",
+    "person_id": "bob-majka"
+   },
+   {
+    "group": "Ex officio (non-voting)",
+    "name": "Parker McClellan",
+    "title": "Executive Director",
+    "organization": "Northwest Florida Beaches International Airport",
+    "person_id": "parker-mcclellan",
+    "organization_id": "gov:airport"
+   },
+   {
+    "group": "Ex officio (non-voting)",
+    "name": "Glen McDonald",
+    "title": "President",
+    "organization": "Gulf Coast State College"
+   },
+   {
+    "group": "Ex officio (non-voting)",
+    "name": "Mark McQueen",
+    "title": "Superintendent",
+    "organization": "Bay District Schools",
+    "person_id": "mark-mcqueen"
+   },
+   {
+    "group": "Ex officio (non-voting)",
+    "name": "Tristan Oliveria",
+    "title": "CDR, Commander",
+    "organization": "Naval Support Activity Panama City"
+   },
+   {
+    "group": "Ex officio (non-voting)",
+    "name": "Tom Neubauer",
+    "title": "President",
+    "organization": "Bay Defense Alliance"
+   },
+   {
+    "group": "Ex officio (non-voting)",
+    "name": "Paul L. Stence Jr.",
+    "title": "Capt., USN, Commanding Officer",
+    "organization": "Naval Surface Warfare Center Panama City Division"
+   },
+   {
+    "group": "Ex officio (non-voting)",
+    "name": "Jennifer Vigil",
+    "title": "President and CEO",
+    "organization": "Destination Panama City"
+   },
+   {
+    "group": "Staff",
+    "name": "Al McCambry",
+    "title": "President and CEO"
+   },
+   {
+    "group": "Staff",
+    "name": "Tamara Barnes",
+    "title": "Vice President of Membership"
+   },
+   {
+    "group": "Staff",
+    "name": "Sean Kim",
+    "title": "Vice President of Strategic Partnerships"
+   },
+   {
+    "group": "Staff",
+    "name": "Lisa Moore",
+    "title": "Vice President of Events and Foundation"
+   },
+   {
+    "group": "Staff",
+    "name": "Taylor Smith",
+    "title": "Marketing and Communications"
+   },
+   {
+    "group": "Staff",
+    "name": "Philomena Martrain",
+    "title": "Membership Account Executive"
+   },
+   {
+    "group": "Staff",
+    "name": "Victoria Pyle",
+    "title": "Information Specialist"
+   },
+   {
+    "group": "Past chairs",
+    "name": "Robert Carroll",
+    "title": "Chairman",
+    "year": 2016
+   },
+   {
+    "group": "Past chairs",
+    "name": "Claire Sherman",
+    "title": "Chairman",
+    "year": 2017
+   },
+   {
+    "group": "Past chairs",
+    "name": "Doug Moore",
+    "title": "Chairman",
+    "year": 2018
+   },
+   {
+    "group": "Past chairs",
+    "name": "Will Cramer",
+    "title": "Chairman",
+    "year": 2019
+   },
+   {
+    "group": "Past chairs",
+    "name": "Andrew Rowell",
+    "title": "Chairman",
+    "year": 2020
+   },
+   {
+    "group": "Past chairs",
+    "name": "Chris Moore",
+    "title": "Chairman",
+    "year": 2021
+   },
+   {
+    "group": "Past chairs",
+    "name": "Garrett Anderson",
+    "title": "Chairman",
+    "year": 2022
+   },
+   {
+    "group": "Past chairs",
+    "name": "Kyle Shoots",
+    "title": "Chairman",
+    "year": 2023
+   },
+   {
+    "group": "Past chairs",
+    "name": "Joe Holt",
+    "title": "Chairman",
+    "year": 2024
+   },
+   {
+    "group": "Past chairs",
+    "name": "Shane Boyett",
+    "title": "Chairman",
+    "year": 2025
+   }
+  ],
+  "pcb-chamber": [
+   {
+    "group": "Executive committee",
+    "name": "Jeremy Hinton",
+    "title": "Chairman",
+    "organization": "Innovations FCU"
+   },
+   {
+    "group": "Executive committee",
+    "name": "Ryan Mulvey",
+    "title": "Past chair",
+    "organization": "The Inside Drive Podcast"
+   },
+   {
+    "group": "Executive committee",
+    "name": "Lee Ann Leonard",
+    "title": "Incoming chair",
+    "organization": "Fine & Funky Art"
+   },
+   {
+    "group": "Executive committee",
+    "name": "Jason Morehouse",
+    "title": "Secretary",
+    "organization": "SmartBank"
+   },
+   {
+    "group": "Executive committee",
+    "name": "Grant Wittstruck",
+    "title": "Treasurer",
+    "organization": "LAT30° Strategic Partners"
+   },
+   {
+    "group": "Board",
+    "name": "Julian Bennett",
+    "title": "Director",
+    "organization": "Sharky's Beachfront Restaurant"
+   },
+   {
+    "group": "Board",
+    "name": "Chris Bishop",
+    "title": "Director",
+    "organization": "Capt. Jacks Family Buffet"
+   },
+   {
+    "group": "Board",
+    "name": "Allen Cotton",
+    "title": "Director",
+    "organization": "Beef 'O' Brady's"
+   },
+   {
+    "group": "Board",
+    "name": "Robin Godwin",
+    "title": "Director",
+    "organization": "Ascension Sacred Heart Bay"
+   },
+   {
+    "group": "Board",
+    "name": "Catherine Collins",
+    "title": "Director",
+    "organization": "The St. Joe Company"
+   },
+   {
+    "group": "Board",
+    "name": "Robert Gates",
+    "title": "Director",
+    "organization": "Panama City Toyota"
+   },
+   {
+    "group": "Board",
+    "name": "Jacy Elmore",
+    "title": "Director",
+    "organization": "The Beach Wagon"
+   },
+   {
+    "group": "Board",
+    "name": "Matt Griffitts",
+    "title": "Director",
+    "organization": "Cay Marine Construction"
+   },
+   {
+    "group": "Board",
+    "name": "Chad Pippin",
+    "title": "Director",
+    "organization": "White Construction Company"
+   },
+   {
+    "group": "Board",
+    "name": "Kristen Sheffield",
+    "title": "Director",
+    "organization": "Rock'it Lanes"
+   },
+   {
+    "group": "Board",
+    "name": "Skip Stoltz",
+    "title": "Director",
+    "organization": "Domino's"
+   },
+   {
+    "group": "Board",
+    "name": "Lance VonGerichten",
+    "title": "Director",
+    "organization": "Firefly"
+   },
+   {
+    "group": "Board",
+    "name": "Andy Weddle",
+    "title": "Director",
+    "organization": "DMW Law Group"
+   },
+   {
+    "group": "Honorary",
+    "name": "Ramon Duvall",
+    "title": "Honorary board member",
+    "organization": "Beachside Fellowship"
+   },
+   {
+    "group": "Honorary",
+    "name": "Parker McClellan",
+    "title": "Honorary board member",
+    "organization": "Northwest Florida Beaches International Airport",
+    "person_id": "parker-mcclellan",
+    "organization_id": "gov:airport"
+   },
+   {
+    "group": "Honorary",
+    "name": "Irvin Clark",
+    "title": "Dr., Honorary board member",
+    "organization": "Florida State University-Panama City"
+   },
+   {
+    "group": "Honorary",
+    "name": "Becca Hardin",
+    "title": "Honorary board member",
+    "organization": "Bay Economic Development Alliance"
+   },
+   {
+    "group": "Honorary",
+    "name": "Jason Hedden",
+    "title": "Honorary board member",
+    "organization": "Gulf Coast State College"
+   },
+   {
+    "group": "Honorary",
+    "name": "Jayna Leach",
+    "title": "Honorary board member",
+    "organization": "Visit Panama City Beach"
+   },
+   {
+    "group": "Honorary",
+    "name": "John Skaggs",
+    "title": "Honorary board member",
+    "organization": "Naval Support Activity Panama City"
+   },
+   {
+    "group": "Honorary",
+    "name": "Andrew Starr",
+    "title": "Honorary board member",
+    "organization": "Tallahassee Memorial HealthCare"
+   },
+   {
+    "group": "Staff",
+    "name": "Kristopher McLane",
+    "title": "President and CEO"
+   },
+   {
+    "group": "Staff",
+    "name": "Jena Liles",
+    "title": "Chief Financial Officer"
+   },
+   {
+    "group": "Staff",
+    "name": "Shannon Richmond",
+    "title": "Vice President, Director of Membership Services"
+   },
+   {
+    "group": "Staff",
+    "name": "Carley Morgan",
+    "title": "Director of Marketing and Events"
+   },
+   {
+    "group": "Staff",
+    "name": "Anna Stephenson",
+    "title": "Digital Engagement Director"
+   },
+   {
+    "group": "Staff",
+    "name": "Gabby Champagne",
+    "title": "Director of Communications"
+   },
+   {
+    "group": "Staff",
+    "name": "Alex Wohlford",
+    "title": "Member Support Director"
+   }
+  ]
+ },
+ "programs": {
+  "bay-chamber": [
+   {
+    "name": "First Friday",
+    "schedule": "First Friday of every month",
+    "about": "Morning networking with community project updates, Chamber news and a featured speaker.",
+    "url": "https://panamacity.org/first-friday/"
+   },
+   {
+    "name": "Business After Hours",
+    "schedule": "Evenings, hosted by a different member business",
+    "about": "Informal networking for members and guests.",
+    "url": "https://panamacity.org/business-after-hours/"
+   },
+   {
+    "name": "Tourism Appreciation Month",
+    "schedule": "May",
+    "about": "Events recognizing the people and businesses in tourism and hospitality.",
+    "url": "https://panamacity.org/tourism-appreciation-month/"
+   },
+   {
+    "name": "Membership Appreciation Month",
+    "schedule": "September",
+    "about": "A month of member recognition, networking and events.",
+    "url": "https://panamacity.org/membership-appreciation-month/"
+   },
+   {
+    "name": "First Responders Appreciation Luncheon",
+    "schedule": "October",
+    "about": "Recognizes Bay County's first responders of the year.",
+    "url": "https://panamacity.org/first-responders-appreciation/"
+   },
+   {
+    "name": "Board of Directors Block Party",
+    "schedule": "Yearly",
+    "about": "Networking evening with the Dino Races.",
+    "url": "https://panamacity.org/block-party/"
+   },
+   {
+    "name": "Annual Gala",
+    "schedule": "Yearly",
+    "about": "Awards and the installation of the new board chair.",
+    "url": "https://panamacity.org/annual-gala/"
+   },
+   {
+    "name": "Leadership Bay",
+    "schedule": "Yearly class",
+    "about": "The foundation's months-long leadership program for current and emerging leaders.",
+    "url": "https://panamacity.org/foundation/leadership-bay/"
+   },
+   {
+    "name": "Junior Leadership Bay",
+    "schedule": "Yearly class",
+    "about": "Leadership program for high school students.",
+    "url": "https://panamacity.org/foundation/junior-leadership-bay/"
+   },
+   {
+    "name": "Military Affairs Committee",
+    "schedule": "Year-round",
+    "about": "Shared with the Beach Chamber: events for military leaders, the Gulf Coast Salute Air Show and change-of-command ceremonies.",
+    "url": "https://panamacity.org/committees/military-affairs-committee/"
+   }
+  ],
+  "pcb-chamber": [
+   {
+    "name": "Friday at the Beach",
+    "schedule": "Monthly, Friday morning",
+    "about": "The Beach Chamber's monthly breakfast meeting.",
+    "url": "https://pcbeach.org/local-events/category/chamber-events/"
+   },
+   {
+    "name": "IdeaCamp",
+    "schedule": "Monthly",
+    "about": "A small-business forum for sharing ideas and connecting.",
+    "url": "https://pcbeach.org/ideacamp-small-business-committee/"
+   },
+   {
+    "name": "Business After Hours",
+    "schedule": "Monthly, evenings",
+    "about": "Networking hosted by a member business.",
+    "url": "https://pcbeach.org/local-events/category/chamber-events/"
+   },
+   {
+    "name": "Leads groups",
+    "schedule": "Twice a month (two groups)",
+    "about": "Members-only referral groups, one seat per industry.",
+    "url": "https://pcbeach.org/leads-group/"
+   },
+   {
+    "name": "Annual Awards Dinner",
+    "schedule": "February",
+    "about": "The Beach Chamber's yearly awards.",
+    "url": "https://pcbeach.org/annualdinner/"
+   },
+   {
+    "name": "Panama City Beach Marathon",
+    "schedule": "December",
+    "about": "Marathon and half marathon starting at Pier Park.",
+    "url": "https://pcbeach.org/panama-city-beach-marathon/"
+   },
+   {
+    "name": "Military Affairs Committee",
+    "schedule": "Year-round",
+    "about": "Shared with the Bay County Chamber.",
+    "url": "https://pcbeach.org/military-affairs-committee/"
+   }
+  ]
+ }
+}
