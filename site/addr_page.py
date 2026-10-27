@@ -118,7 +118,21 @@ def address_data():
     data['govs'], data['craId'] = gov_links()
     data['members'] = member_votes()
     data['elections'] = os.path.exists(os.path.join(HERE, '..', 'data', 'elections', 'candidates_2026.json'))
+    data['schools'] = school_links()
     return data
+
+
+def school_links():
+    """Zone name -> the school it feeds (schools and school-zones datasets), so the report links each zoned school to
+    its entry on /schools with its latest state grade."""
+    from page_datasets import schools, school_zones
+    by = {s['school_id']: s for s in schools()}
+    out = {}
+    for z in school_zones():
+        s = by.get(z['school_id'])
+        if s:
+            out[z['zone_name']] = {'id': s['school_id'], 'n': s['name'], 'g': s.get('latest_grade'), 'y': s.get('latest_grade_year')}
+    return out
 
 
 def addr_page(out_dir):

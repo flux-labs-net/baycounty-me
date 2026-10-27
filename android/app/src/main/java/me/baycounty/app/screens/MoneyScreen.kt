@@ -53,6 +53,10 @@ private val moneyItems: Map<MoneySection, List<MoneyItem>> = mapOf(
         MoneyItem("CRA tax increment", "percent", "Property tax that goes to the CRAs instead", Route.CRAIncrement),
         MoneyItem("Sales tax projects", "road.lanes", "Half-cent projects: promised vs built", Route.Dataset("sales-tax-projects")),
         MoneyItem("Hurricane Michael", "hurricane", "Every FEMA rebuilding project", Route.Dataset("fema-michael-projects")),
+        MoneyItem("Development projects", "building.2", "Site plans and subdivisions in review or approved", Route.Dataset("development-projects")),
+        MoneyItem("New homes permitted", "house", "Each year, city by city, since 2016", Route.Dataset("housing-permits")),
+        MoneyItem("State road work", "road.lanes", "FDOT contracts, contractors and costs", Route.Dataset("road-contracts")),
+        MoneyItem("FDOT five-year plan", "calendar.badge.clock", "Road projects coming in the next five years", Route.Dataset("road-work-program")),
     ),
     MoneySection.ACCOUNTABILITY to listOf(
         MoneyItem("Accountability console", "checklist", "Projects from budget to close-out, with open questions", Route.Accountability),
