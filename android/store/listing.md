@@ -51,7 +51,7 @@ Education (or News & Magazines)
 
 - App icon: `icon-512.png` (512 × 512)
 - Feature graphic: `feature-graphic.png` (1024 × 500)
-- Phone screenshots: `screenshots/` (1080 × 1920 each, a caption over the live app). Upload in order; Play shows the first three most. The raw emulator shots they're made from are in `screenshots/raw/`.
+- Phone screenshots: `screenshots/` (1080 × 1920 each, a caption over the live app, made with `ios/scripts/store_screenshots.js` from the Android workflow's `screens-emulator` shots). Upload in order; Play shows the first three most.
 
 ## Production release notes (500 characters max)
 
