@@ -36,12 +36,12 @@ test('digestEmail skips quiet weeks and widens on request', () => {
   const g = {key: 'lh', name: 'Lynn Haven', slug: 'lynn-haven', changes: [{date: '2026-09-20', title: 'Votes', text: 'New votes', url: 'https://baycounty.me/x'}], meetings: []};
   assert.equal(digestEmail(g, {now: now.getTime()}), null);
   const m = digestEmail(g, {now: now.getTime(), days: 60});
-  assert.equal(m.subject, 'Lynn Haven this week on BayCounty.me');
+  assert.equal(m.subject, 'Lynn Haven this week: 1 update');
   assert.match(m.html, /\{\{\{RESEND_UNSUBSCRIBE_URL\}\}\}/, 'live digest keeps the broadcast placeholder');
 });
 
 test('previews match the live builders and have inert links', async () => {
-  const live = confirmEmail({what: 'weekly BayCounty.me updates for Lynn Haven', isRule: false, link: 'https://baycounty.me/api/confirm?t=preview-only'});
+  const live = confirmEmail({what: 'weekly BayCounty.me updates for Lynn Haven', isRule: false, link: 'https://baycounty.me/api/confirm?t=preview-only', govs: ['Lynn Haven']});
   const pv = await preview('confirm_digest', {gov: 'lh'});
   assert.equal(pv.html, live.html);
   for (const t of PREVIEWS.filter(x => x.id !== 'digest')) {

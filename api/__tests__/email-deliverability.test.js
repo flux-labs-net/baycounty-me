@@ -9,7 +9,7 @@ const {codeEmail} = require('../_finance/auth');
 
 test('a bare HTML fragment is sent as a full document with a footer', () => {
   const out = finishEmail({subject: 'Hi', html: '<p>Hello <a href="https://baycounty.me/x">there</a></p>', text: 'Hello'});
-  assert.match(out.html, /^<!DOCTYPE html><html>/);
+  assert.match(out.html, /^<!DOCTYPE html><html[\s>]/);
   assert.match(out.html, /<body/);
   assert.match(out.html, /Built by Flux Labs/);
   assert.equal(out.text, 'Hello');

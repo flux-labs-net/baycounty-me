@@ -10,7 +10,8 @@ const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 const {q} = require('./_db');
-const {FROM, SITE, resend, esc, emailShell} = require('./_alerts');
+const {FROM, SITE, resend, esc} = require('./_alerts');
+const ui = require('./_email_ui');
 const {admins} = require('./_session');
 
 const INBOX = String(process.env.CORR_INBOX || 'hello@baycounty.me').toLowerCase();
@@ -53,12 +54,16 @@ function stripQuoted(text) {
   return {text: kept, quoted: cut < lines.length};
 }
 
-// The outgoing email for one official. body is plain text written in /admin.
-function composeEmail({subject, body, name, token}) {
-  const paras = String(body).trim().split(/\n{2,}/).map(p => `<p style="margin:0 0 14px">${esc(p).replace(/\n/g, '<br>')}</p>`).join('');
+// The outgoing email for one official. body is plain text written in /admin. kind: 'records' for a records request.
+// Letters stay plain on purpose (no badge or big button): they go to government inboxes and should read like mail.
+function composeEmail({subject, body, name, token, kind}) {
+  const paras = String(body).trim().split(/\n{2,}/).map(p => ui.p(esc(p).replace(/\n/g, '<br>'))).join('');
   const footerText = `Sent from BayCounty.me, an independent public-records site for Bay County, Florida. Replies come to ${INBOX} and may be published at ${SITE}/correspondence as public records (Chapter 119, Florida Statutes). Ref: BCM-${token}`;
-  const html = emailShell(subject, (name ? `<p style="margin:0 0 14px">${esc(greeting(name))},</p>` : '') + paras,
-    `${esc(footerText.replace(` Ref: BCM-${token}`, ''))}<br><span style="color:#8A93A3">Ref: BCM-${esc(token)}</span>`);
+  const first = String(body).trim().split(/\n/)[0] || '';
+  const html = ui.layout({title: subject, preheader: (name ? greeting(name) + ', ' : '') + first.slice(0, 120),
+    kicker: kind === 'records' ? 'Public records request' : 'Public correspondence',
+    body: (name ? ui.p(`${esc(greeting(name))},`) : '') + paras,
+    letter: `${esc(footerText.replace(` Ref: BCM-${token}`, ''))}<br><span class="bc-fa" style="font-family:${ui.MONO};font-size:12px;color:${ui.C.faint}">Ref: BCM-${esc(token)}</span>`});
   const text = (name ? greeting(name) + ',\n\n' : '') + String(body).trim() + '\n\n--\n' + footerText + '\n';
   return {subject, html, text};
 }
@@ -237,20 +242,30 @@ async function inbound(emailId) {
      String(d.html || '').slice(0, 200000), msgId, info.inReplyTo || null, emailId, JSON.stringify(atts), by, d.created_at || null]);
   if (!row) return {ok: true, duplicate: true};
   if (thread) await q(`update corr.threads set status = 'replied', last_at = now() where id = $1`, [thread.id]);
-  await notifyAdmins(thread, d, from).catch(e => console.error('corr notify', e.message));
+  await notifyAdmins(thread, d, from, by).catch(e => console.error('corr notify', e.message));
   return {ok: true, matched: !!thread, by};
 }
 
-async function notifyAdmins(thread, d, from) {
+async function notifyAdmins(thread, d, from, by) {
   const to = admins();
   if (!to.length || !key()) return;
+  await resend('/emails', 'POST', {from: FROM, to, ...replyNotice(thread, d, from, by)}, key());
+}
+
+// The admin notice for an inbound email: {subject, html, text}. thread is null when it matched nothing.
+function replyNotice(thread, d, from, by) {
   const who = thread ? `${thread.official_name || from} (${thread.official_seat}, ${thread.government})` : from;
   const subject = thread ? `Reply from ${thread.official_name || from}: ${thread.subject}` : `Unmatched email to ${INBOX}: ${d.subject || '(no subject)'}`;
   const snippet = stripQuoted(d.text || '').text.slice(0, 600);
-  const html = emailShell(subject, `<p style="margin:0 0 10px"><b>${esc(who)}</b> wrote:</p><p style="margin:0 0 14px;white-space:pre-wrap">${esc(snippet || '(no text)')}</p>
-    <p style="margin:0"><a href="${SITE}/admin#correspondence">Open in Correspondence</a>${thread ? '' : ' (it needs to be matched to a thread)'}</p>`,
-    'Admin notice from BayCounty.me. Nothing is public until you publish the thread.');
-  await resend('/emails', 'POST', {from: FROM, to, subject, html, text: `${who} wrote:\n\n${snippet}\n\n${SITE}/admin#correspondence`}, key());
+  const atts = (d.attachments || []).length;
+  const html = ui.layout({title: subject, preheader: `“${snippet.slice(0, 120)}”`, kicker: 'Correspondence',
+    hero: thread ? {tone: 'teal', icon: 'reply', eyebrow: by === 'address' ? 'New reply · Matched by sender' : 'New reply · Matched to a thread', title: `${esc(thread.official_name || from)} replied`}
+                 : {tone: 'amber', icon: 'mail', eyebrow: 'New email · Not matched yet', title: `Email to ${esc(INBOX)}`},
+    body: ui.facts([['From', esc(who)], ['Subject', esc(d.subject || '(no subject)')], ...(thread ? [['Thread', esc(thread.subject)]] : []), ...(atts ? [['Attachments', `${atts} file${atts === 1 ? '' : 's'}`]] : [])]) +
+      ui.quote(snippet || '(no text)') + ui.button(`${SITE}/admin#correspondence`, thread ? 'Open in Correspondence' : 'Match it to a thread') +
+      ui.small('Nothing is public until you publish the thread.'),
+    footer: ui.adminFooter()});
+  return {subject, html, text: `${who} wrote:\n\n${snippet}\n\n${SITE}/admin#correspondence`};
 }
 
 // ---------- admin views ----------
@@ -353,5 +368,5 @@ async function publicFeed({year = '', government = ''} = {}) {
   return {year: y, years, governments, total: all.length, conversations: out};
 }
 
-module.exports = {INBOX, forInbox, inbound, seed, contacts, saveContact, send, reply, threads, thread, publish, setStatus, assign, dismiss, publicFeed,
+module.exports = {INBOX, replyNotice, forInbox, inbound, seed, contacts, saveContact, send, reply, threads, thread, publish, setStatus, assign, dismiss, publicFeed,
   tokenFrom, stripQuoted, composeEmail, messageIdFor, newToken};

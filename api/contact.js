@@ -7,6 +7,20 @@ const hits = new Map(); // best-effort per-instance rate limit
 
 const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const clip = (s, n) => String(s ?? '').trim().slice(0, n);
+const ui = require('./_email_ui');
+const TONE = { Correction: 'salmon', 'Record or tip': 'teal', Question: 'blue', 'Something else': 'amber' };
+
+// The notice in hello@fluxlabs.net's inbox. Reply-To is the sender, so replying answers them directly.
+function contactEmail({topic, name, email, page, message}) {
+  const who = name || email || 'someone';
+  const pageUrl = /^https?:\/\//.test(page) ? page : '';
+  return ui.layout({title: `Contact form: ${topic}`, preheader: `${who}: ${message.slice(0, 120)}`, kicker: 'Contact form',
+    hero: {tone: TONE[topic] || 'blue', icon: 'chat', eyebrow: `Contact form · ${esc(topic)}`, title: `New message from ${esc(who)}`},
+    body: ui.facts([['Topic', ui.pill(TONE[topic] || 'blue', esc(topic))], ['Name', esc(name || '(not given)')],
+        ['Email', email ? ui.a('mailto:' + email, esc(email)) : '(not given)'], ['Page', pageUrl ? ui.a(pageUrl, esc(page.replace(/^https?:\/\/[^/]+/, '') || page)) : esc(page || '(not given)')]]) +
+      ui.quote(message) + ui.small(email ? `Reply to this email to answer ${esc(name || email)} directly.` : 'No email address was given, so there’s no way to reply.'),
+    footer: ui.adminFooter('Sent from the contact form on BayCounty.me.')});
+}
 
 module.exports = async (req, res) => {
   res.setHeader('Cache-Control', 'no-store');
@@ -31,10 +45,7 @@ module.exports = async (req, res) => {
   if (!(process.env.RESEND_FULL_KEY || process.env.RESEND_API_KEY)) return res.status(500).json({ ok: false, error: 'The form isn’t configured yet. Please email hello@fluxlabs.net.' });
 
   const rows = [['Topic', topic], ['Name', name || '(not given)'], ['Email', email || '(not given)'], ['Page', page || '(not given)']];
-  const html = `<div style="font:14px/1.5 -apple-system,Segoe UI,Arial,sans-serif;color:#0f172a">
-<p style="margin:0 0 12px;font-weight:600">New message from the BayCounty.me contact form</p>
-<table style="border-collapse:collapse;margin:0 0 14px">${rows.map(([k, v]) => `<tr><td style="padding:3px 14px 3px 0;color:#64748b">${k}</td><td style="padding:3px 0">${esc(v)}</td></tr>`).join('')}</table>
-<div style="white-space:pre-wrap;border-left:3px solid #2a78d6;padding:8px 12px;background:#f8fafc">${esc(message)}</div></div>`;
+  const html = contactEmail({topic, name, email, page, message});
   const text = rows.map(([k, v]) => `${k}: ${v}`).join('\n') + '\n\n' + message;
 
   const r = await fetch('https://api.resend.com/emails', {
@@ -52,3 +63,4 @@ module.exports = async (req, res) => {
   recent.push(now); hits.set(ip, recent);
   return res.status(200).json({ ok: true });
 };
+module.exports.contactEmail = contactEmail;

@@ -88,7 +88,7 @@ async function send({id, test}, me) {
   if (!key()) throw err('RESEND_FULL_KEY isn’t set in Vercel.', 500);
   const name = greetName(r.recipient_name);
   if (test) {
-    const m = composeEmail({subject: r.subject, body: r.body, name, token: 'TEST0000'});
+    const m = composeEmail({subject: r.subject, body: r.body, name, token: 'TEST0000', kind: 'records'});
     const s = await resend('/emails', 'POST', {from: FROM, to: [me], reply_to: INBOX, subject: '[Test] ' + m.subject, html: m.html, text: m.text}, key());
     if (!s.ok) throw err('Resend didn’t accept the test (' + s.status + ').', 502);
     return {ok: true, test: true, to: me};
@@ -96,7 +96,7 @@ async function send({id, test}, me) {
   if (r.status !== 'draft') throw err('This request was already sent.');
   if (!r.recipient_email) throw err('Add the recipient’s email address first.');
   const token = newToken(), msgId = messageIdFor(token, 0);
-  const m = composeEmail({subject: r.subject, body: r.body, name, token});
+  const m = composeEmail({subject: r.subject, body: r.body, name, token, kind: 'records'});
   const [t] = await q(`insert into corr.threads (token, official_name, official_seat, government, email, subject)
       values ($1, $2, $3, $4, $5, $6) returning id`, [token, r.recipient_name, 'Records request', r.government, r.recipient_email, r.subject]);
   const s = await resend('/emails', 'POST', {from: FROM, to: [r.recipient_email], reply_to: INBOX, subject: m.subject, html: m.html, text: m.text,
