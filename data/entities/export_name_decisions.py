@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """export_name_decisions.py - write data/entities/name_decisions.json from the admin's calls on look-alike business names.
 
-/admin > Name matches stores each call in name_match_reviews (migration 0059, api/_names.js): confirmed = the two names
+/admin > Name matches stores each call in name_match_reviews (migration 0059, api/_name_matches.js): confirmed = the two names
 are one company, rejected = keep them apart. build_entities.py reads this file (name_match.decisions()) and joins or
 separates the names in vendors.json, name_joins.json and everything built from them.
 

@@ -7,7 +7,7 @@
 --    "Emerald Coast Striping"): confirmed = one company, rejected = keep apart. The candidates come from
 --    data/entities/build_entities.py (vendor_review.json look_alike_names); data/entities/export_name_decisions.py writes
 --    these rows to data/entities/name_decisions.json in the daily refresh, and the next build joins or separates the names.
---    Admin only (no public read policy); read and written by api/_names.js.
+--    Admin only (no public read policy); read and written by api/_name_matches.js.
 
 alter table donor_contracts add column if not exists "vendor_name" text;
 alter table donor_contracts add column if not exists "contract_governments" jsonb;

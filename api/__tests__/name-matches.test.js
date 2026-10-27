@@ -1,4 +1,4 @@
-// Tests for look-alike business names on /admin (api/_names.js). Run: npm test
+// Tests for look-alike business names on /admin (api/_name_matches.js). Run: npm test
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const path = require('path');
@@ -7,7 +7,7 @@ const dbPath = path.join(__dirname, '..', '_db.js');
 const calls = [];
 let reply = () => [];
 require.cache[dbPath] = {id: dbPath, filename: dbPath, loaded: true, exports: {q: async (sql, p) => { calls.push({sql, p}); return reply(sql, p); }, hasDb: () => true}};
-const N = require('../_names');
+const N = require('../_name_matches');
 
 const PAIRS = [
   {a: {key: 'emeraldcoaststriping', names: ['Emerald Coast Striping']}, b: {key: 'emeralcoaststriping', names: ['Emeral Coast Striping LLC'], gifts: 1, given: 500}, reason: 'spelling'},
