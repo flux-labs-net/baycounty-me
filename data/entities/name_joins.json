@@ -1,0 +1,473 @@
+{
+ "about": "Business name keys (ids.vkey) that are one company: hand-checked joins in build_entities.py SAME, spellings matched to the same Sunbiz filing, and look-alike pairs an admin confirmed on /admin. Read by ids.canon_key(). Built by build_entities.py.",
+ "count": 40,
+ "groups": [
+  {
+   "key": "850constructionservices",
+   "keys": [
+    "850constructio",
+    "850constructionservices"
+   ],
+   "how": [
+    "hand"
+   ],
+   "evidence": "\"850 CONSTRUCTIO\" is the Lynn Haven warrant list cut at 15 characters."
+  },
+  {
+   "key": "adishvar",
+   "keys": [
+    "adishvar",
+    "adishvarllcdbapcbcigars"
+   ],
+   "how": [
+    "sunbiz"
+   ],
+   "evidence": "Spellings \"Adishvar LLC DBA PCB Cigars\", \"Adishvar LLC\" were each matched by name to the same Florida corporation filing (Sunbiz document P99000042421, ADISHVAR, INC.)."
+  },
+  {
+   "key": "americansandasphaltpaving",
+   "keys": [
+    "americansand",
+    "americansandasphalt",
+    "americansandasphaltpavi",
+    "americansandasphaltpaving"
+   ],
+   "how": [
+    "hand"
+   ],
+   "evidence": "\"AMERICAN SAND &\" is the Lynn Haven warrant list cut at 15 characters; \"American Sand and Asphalt Pavi\" is a campaign filing cut at 30 characters."
+  },
+  {
+   "key": "arrisgeneralcontractors",
+   "keys": [
+    "arrisgeneral",
+    "arrisgeneralcontractors"
+   ],
+   "how": [
+    "hand"
+   ],
+   "evidence": "\"ARRIS GENERAL\" is the Lynn Haven warrant list cut short."
+  },
+  {
+   "key": "bayoubuildersofbay",
+   "keys": [
+    "bayoubuildersofbay",
+    "bayoubuildersofbaycounty"
+   ],
+   "how": [
+    "hand"
+   ],
+   "evidence": "\"Bay Co.\" and \"Bay County\" spellings in Panama City agendas."
+  },
+  {
+   "key": "bclcivilcontractors",
+   "keys": [
+    "bclcivilcontr",
+    "bclcivilcontractors"
+   ],
+   "how": [
+    "hand"
+   ],
+   "evidence": "\"BCL CIVIL CONTR\" is the Lynn Haven warrant list cut at 15 characters."
+  },
+  {
+   "key": "bgncontractors",
+   "keys": [
+    "bgncontractors",
+    "gagegoldenconstruction",
+    "gagegoldenconstructiondbabgncontractors"
+   ],
+   "how": [
+    "hand"
+   ],
+   "evidence": "The county agenda names the firm \"Gage Golden Construction dba BGN Contractors\"; the county check register lists \"GAGE GOLDEN CONSTRUCTION\"."
+  },
+  {
+   "key": "carvertise",
+   "keys": [
+    "carvertise",
+    "carvertiseincis"
+   ],
+   "how": [
+    "hand"
+   ],
+   "evidence": "The scanned Destination Panama City register reads one line as \"Carvertise, Inc iS)\"; the extra characters are a scan error."
+  },
+  {
+   "key": "cbcconstruction",
+   "keys": [
+    "cbcconstructio",
+    "cbcconstruction"
+   ],
+   "how": [
+    "hand"
+   ],
+   "evidence": "\"CBC CONSTRUCTIO\" is the Lynn Haven warrant list cut at 15 characters."
+  },
+  {
+   "key": "culpepperconstruction",
+   "keys": [
+    "culpepper",
+    "culpepperconst",
+    "culpepperconstruction"
+   ],
+   "how": [
+    "hand"
+   ],
+   "evidence": "\"CULPEPPER CONST\" is the Lynn Haven warrant list cut at 15 characters; one campaign filing lists just \"Culpepper\"."
+  },
+  {
+   "key": "cwrobertscontracting",
+   "keys": [
+    "cwroberts",
+    "cwrobertscont",
+    "cwrobertscontracting"
+   ],
+   "how": [
+    "hand"
+   ],
+   "evidence": "Spacing variants (\"C. W.\", \"C.W.\", \"CW\") and the Lynn Haven warrant list's 15-character \"CW ROBERTS CONT\". Kept separate from Roberts and Roberts, Inc., a different company."
+  },
+  {
+   "key": "davisonfuelsoil",
+   "keys": [
+    "davisonfuelsi",
+    "davisonfuelsoil"
+   ],
+   "how": [
+    "hand"
+   ],
+   "evidence": "\"DAVISON FUELS I\" is the Lynn Haven warrant list cut at 15 characters."
+  },
+  {
+   "key": "dewberryengineers",
+   "keys": [
+    "dewberry",
+    "dewberryengineering",
+    "dewberryengineers"
+   ],
+   "how": [
+    "hand"
+   ],
+   "evidence": "Panama City awarded Project RESTORE Glenwood task orders to \"Dewberry Engineering Inc.\" (2023-11-28 agenda) and the CEI task order for the same project to \"Dewberry Engineers Inc.\" (2025-06-10); Dewberry's Panhandle offices came from its 2016 purchase of Preble-Rish (dewberry.com). \"DEWBERRY\" is the Lynn Haven warrant list; \"Dewberry\" is how two campaign filings list it."
+  },
+  {
+   "key": "ecsc",
+   "keys": [
+    "ecsc",
+    "emeraldcoastsiteconstruction"
+   ],
+   "how": [
+    "hand"
+   ],
+   "evidence": "Agendas give both names together: \"ECSC, LLC (Emerald Coast Site Construction)\" and \"Emerald Coast Site Construction (ECSC)\"."
+  },
+  {
+   "key": "emeraldcoastroofingconst",
+   "keys": [
+    "emeraldcoastroofingconst",
+    "emeraldcoastroofingconstru"
+   ],
+   "how": [
+    "sunbiz"
+   ],
+   "evidence": "Spellings \"Emerald Coast Roofing &Constru\", \"Emerald Coast Roofing & Const\" were each matched by name to the same Florida corporation filing (Sunbiz document P09000092674, EMERALD COAST ROOFING & CONSTRUCTION CO.)."
+  },
+  {
+   "key": "extremelandclearingexc",
+   "keys": [
+    "extremelandclearingexc",
+    "extremelandclearingexcav",
+    "extremelandclearingexcava"
+   ],
+   "how": [
+    "sunbiz"
+   ],
+   "evidence": "Spellings \"Extreme Land Clearing & Excav\", \"Extreme Land Clearing & Exc.\", \"Extreme Land Clearing & Excava\" were each matched by name to the same Florida corporation filing (Sunbiz document L16000056211, EXTREME LAND CLEARING & EXCAVATION, LLC)."
+  },
+  {
+   "key": "floridablue",
+   "keys": [
+    "floridablue",
+    "floridabluebluecrossblueshield"
+   ],
+   "how": [
+    "hand"
+   ],
+   "evidence": "The county register names the payee \"Florida Blue / Blue Cross Blue Shield of Florida\"; Florida Blue is that insurer's trade name."
+  },
+  {
+   "key": "gulfcoastutilitycontractors",
+   "keys": [
+    "gulfcoastutil",
+    "gulfcoastutilitycontractor",
+    "gulfcoastutilitycontractors"
+   ],
+   "how": [
+    "hand",
+    "sunbiz"
+   ],
+   "evidence": "Spellings \"GULF COAST UTILITY CONTRACTORS\", \"Gulf Coast Utility Contractor\" were each matched by name to the same Florida corporation filing (Sunbiz document L99000004446, GULF COAST UTILITY CONTRACTORS, L.L.C.)."
+  },
+  {
+   "key": "halffassociates",
+   "keys": [
+    "halff",
+    "halffassociates"
+   ],
+   "how": [
+    "hand"
+   ],
+   "evidence": "Panama City's agenda names \"Halff (Halff Engineering / Halff Associates)\"."
+  },
+  {
+   "key": "hghardersons",
+   "keys": [
+    "hghardersons",
+    "hghardersson",
+    "hgharderssons"
+   ],
+   "how": [
+    "hand"
+   ],
+   "evidence": "Apostrophe and plural variants of the same contractor."
+  },
+  {
+   "key": "hydraservices",
+   "keys": [
+    "hydraservice",
+    "hydraservices"
+   ],
+   "how": [
+    "hand"
+   ],
+   "evidence": "Same pump-station firm spelled with and without the final \"s\" in Panama City and county agendas."
+  },
+  {
+   "key": "infinityconstructionenterpr",
+   "keys": [
+    "infinityconstructionenterpr",
+    "infinityconstructionenterpri",
+    "infinityconstructionenterprises"
+   ],
+   "how": [
+    "sunbiz"
+   ],
+   "evidence": "Spellings \"Infinity Construction Enterpri\", \"Infinity Construction Enterprises Inc\", \"Infinity Construction Enterpr.\" were each matched by name to the same Florida corporation filing (Sunbiz document P13000054771, INFINITY CONSTRUCTION ENTERPRISES, INC.)."
+  },
+  {
+   "key": "inlandconstructionengineering",
+   "keys": [
+    "inlandconstruction",
+    "inlandconstructionengineer",
+    "inlandconstructionengineering"
+   ],
+   "how": [
+    "hand",
+    "sunbiz"
+   ],
+   "evidence": "Spellings \"Inland Construction\", \"Inland Construction & Engineer\" were each matched by name to the same Florida corporation filing (Sunbiz document P94000077770, INLAND CONSTRUCTION AND ENGINEERING, INC.)."
+  },
+  {
+   "key": "jerrywilsonbuildingcont",
+   "keys": [
+    "jerrywilsonbuildingcont",
+    "jerrywilsonbuildingcontract"
+   ],
+   "how": [
+    "sunbiz"
+   ],
+   "evidence": "Spellings \"Jerry Wilson Building Contract\", \"Jerry Wilson Building Cont LLC\" were each matched by name to the same Florida corporation filing (Sunbiz document L18000184748, JERRY WILSON BUILDING CONTRACTOR LLC)."
+  },
+  {
+   "key": "marshallbrothers",
+   "keys": [
+    "marshallbothers",
+    "marshallbrothers",
+    "marshallbrothersconstruction",
+    "marshallbrothersconstructionengineering"
+   ],
+   "how": [
+    "hand",
+    "sunbiz"
+   ],
+   "evidence": "Spellings \"MARSHALL BROTHERS\", \"Marshall Bothers\", \"Marshall Brothers Construction\" were each matched by name to the same Florida corporation filing (Sunbiz document P97000002830, MARSHALL BROTHERS CONSTRUCTION & ENGINEERING, INC.)."
+  },
+  {
+   "key": "mckinneyinsuranceinvest",
+   "keys": [
+    "mckinneyinsuranceinvest",
+    "mckinneyinsuranceinvestmen"
+   ],
+   "how": [
+    "sunbiz"
+   ],
+   "evidence": "Spellings \"McKinney Insurance & Investmen\", \"McKinney Insurance & Invest.\" were each matched by name to the same Florida corporation filing (Sunbiz document L04000045045, MCKINNEY INSURANCE & INVESTMENTS, LLC)."
+  },
+  {
+   "key": "michaellovchukinsurance",
+   "keys": [
+    "michaellovchukinsurance",
+    "michaellovchukinsuranceagen",
+    "michaellovchukinsuranceagency"
+   ],
+   "how": [
+    "sunbiz"
+   ],
+   "evidence": "Spellings \"Michael Lovchuk Insurance Agency\", \"Michael Lovchuk Insurance Inc\", \"Michael Lovchuk Insurance Agen\" were each matched by name to the same Florida corporation filing (Sunbiz document P03000046344, MICHAEL LOVCHUK INSURANCE AGENCY, INC)."
+  },
+  {
+   "key": "panhandleengineering",
+   "keys": [
+    "panhandleengin",
+    "panhandleengineering"
+   ],
+   "how": [
+    "hand"
+   ],
+   "evidence": "\"PANHANDLE ENGIN\" is the Lynn Haven warrant list cut at 15 characters."
+  },
+  {
+   "key": "phoenixconstructionservices",
+   "keys": [
+    "phoenixconstru",
+    "phoenixconstructionservices"
+   ],
+   "how": [
+    "hand"
+   ],
+   "evidence": "\"PHOENIX CONSTRU\" is the Lynn Haven warrant list cut at 15 characters."
+  },
+  {
+   "key": "rjgormanmarineconstruction",
+   "keys": [
+    "rjgormanmarine",
+    "rjgormanmarineconstruction"
+   ],
+   "how": [
+    "hand",
+    "sunbiz"
+   ],
+   "evidence": "Spellings \"RJ Gorman Marine Construction\", \"RJ Gorman Marine\" were each matched by name to the same Florida corporation filing (Sunbiz document L09000063982, RJ GORMAN MARINE CONSTRUCTION LLC)."
+  },
+  {
+   "key": "robertsroberts",
+   "keys": [
+    "robersroberts",
+    "robertsrober",
+    "robertsroberts"
+   ],
+   "how": [
+    "hand",
+    "sunbiz"
+   ],
+   "evidence": "Spellings \"ROBERTS & ROBERTS INC\", \"Robers and Roberts, Inc\" were each matched by name to the same Florida corporation filing (Sunbiz document M74236, ROBERTS AND ROBERTS, INCORPORATED)."
+  },
+  {
+   "key": "sjelectrosystemsdbaprimax",
+   "keys": [
+    "sjelectrosystemsdbaprimax",
+    "sjelectrosystemsdbaprimex"
+   ],
+   "how": [
+    "hand"
+   ],
+   "evidence": "The two county agenda spellings differ only in \"Primax\"/\"Primex\"."
+  },
+  {
+   "key": "southeasternoutdoormanagement",
+   "keys": [
+    "southeasternoutdoormanagemen",
+    "southeasternoutdoormanagement",
+    "southeasternoutdoormet",
+    "southeasternoutdoormgmt",
+    "southeasternoutdoormgt"
+   ],
+   "how": [
+    "hand",
+    "sunbiz"
+   ],
+   "evidence": "Spellings \"Southeastern Outdoor Mgmt\", \"Southeastern Outdoor Managemen\" were each matched by name to the same Florida corporation filing (Sunbiz document P97000066986, SOUTHEASTERN OUTDOOR MANAGEMENT, INC.)."
+  },
+  {
+   "key": "southernconstructionservice",
+   "keys": [
+    "southernconstruction",
+    "southernconstructionservice",
+    "southernconstructionservices"
+   ],
+   "how": [
+    "hand"
+   ],
+   "evidence": "Singular/plural and a shortened form in the same governments' agendas."
+  },
+  {
+   "key": "tdw",
+   "keys": [
+    "tdw",
+    "tdwincdbatoniesdance",
+    "tdwincdbatoniesdanceworks"
+   ],
+   "how": [
+    "sunbiz"
+   ],
+   "evidence": "Spellings \"TDW INC DBA TONIES DANCE\", \"TDW Inc DBA Tonies Dance Works\", \"TDW INC\" were each matched by name to the same Florida corporation filing (Sunbiz document 590756, TDW, INC.)."
+  },
+  {
+   "key": "telemetryprocesscontrol",
+   "keys": [
+    "telemetryprocesscon",
+    "telemetryprocesscontrol"
+   ],
+   "how": [
+    "hand"
+   ],
+   "evidence": "The county register cuts the name at \"TELEMETRY AND PROCESS CON\"."
+  },
+  {
+   "key": "ten8",
+   "keys": [
+    "ten8",
+    "ten8firesafety"
+   ],
+   "how": [
+    "hand"
+   ],
+   "evidence": "Fire apparatus dealer named \"Ten-8\" in the county agenda and \"Ten-8 Fire & Safety, LLC\" elsewhere."
+  },
+  {
+   "key": "vyde",
+   "keys": [
+    "vyde",
+    "vydeltds"
+   ],
+   "how": [
+    "hand"
+   ],
+   "evidence": "The scanned Visit PCB register reads one line as \"Vyde LTD S)\"; the extra characters are a scan error."
+  },
+  {
+   "key": "wespac",
+   "keys": [
+    "wespac",
+    "wespacincdbafirefly"
+   ],
+   "how": [
+    "sunbiz"
+   ],
+   "evidence": "Spellings \"Wes Pac Inc DBA Firefly\", \"Wes Pac, Inc\" were each matched by name to the same Florida corporation filing (Sunbiz document V72062, WES PAC, INC.)."
+  },
+  {
+   "key": "worldchangersfirstbaptistchurchofpanamacity",
+   "keys": [
+    "worldchangers",
+    "worldchangersfirstbaptistchurchofpanamacity",
+    "worldchangersorganization"
+   ],
+   "how": [
+    "hand"
+   ],
+   "evidence": "Panama City CRA annual reports name the same volunteer home-repair program as \"World Changers / First Baptist Church of Panama City\" and \"World Changers Organization\"."
+  }
+ ]
+}

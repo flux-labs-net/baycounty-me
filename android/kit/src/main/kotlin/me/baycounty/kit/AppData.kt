@@ -295,6 +295,8 @@ data class DonorContracts(val as_of: String? = null, val method: String? = null,
     data class Match(
         val contributor: String? = null,
         val vendor: String? = null,
+        /** The company's one name on the site (record spellings in [vendor] can differ: "TK Vandy LLC" / "T K Vandy LLC"). */
+        val vendor_name: String? = null,
         val vendor_id: String? = null,
         val candidate: String? = null,
         val person_id: String? = null,
@@ -308,6 +310,9 @@ data class DonorContracts(val as_of: String? = null, val method: String? = null,
         val contract_source_urls: List<String>? = null,
         val contract_government: String? = null,
         val contract_gov_id: String? = null,
+        /** Every government that paid the company (one row per gift, so a gift is counted once). */
+        val contract_governments: List<String>? = null,
+        val contract_gov_ids: List<String>? = null,
         val match_confidence: String? = null,
         val note: String? = null,
         val campaign_report_url: String? = null,

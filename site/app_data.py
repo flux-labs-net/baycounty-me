@@ -109,13 +109,50 @@ def people():
 
 
 def donor_contracts():
-    """Business donors that also hold local government contracts (the campaign money page's list)."""
+    """Business donors that also hold local government contracts (the campaign money page's list).
+
+    One row per gift: a company's gift to one campaign. vendor_matches.json repeats a gift once per government that paid
+    the company, each time under that government's spelling of the name, so the rows are folded here. vendor_name is the
+    company's one name on the site; contract_governments lists every government that paid it; contract_gov_id is the
+    official's own government when it is one of them, otherwise the first."""
+    import sys
+    sys.path.insert(0, os.path.join(HERE, '..', 'data', 'entities'))
+    import ids
     m = json.load(open(os.path.join(HERE, '..', 'data', 'campaign', 'vendor_matches.json')))
-    keep = ('contributor', 'vendor', 'vendor_id', 'candidate', 'person_id', 'office', 'office_gov_id', 'election',
-            'contribution_amount', 'contribution_dates', 'contract_ids_or_descriptions', 'record_ids', 'contract_source_urls',
-            'contract_government', 'contract_gov_id', 'record_types', 'match_confidence', 'note', 'campaign_report_url',
-            'same_government_as_office', 'refunded_by_campaign')
-    return {'as_of': m.get('as_of'), 'method': m.get('method'), 'matches': [{k: x.get(k) for k in keep} for x in m['matches']]}
+    out = {}
+    for x in m['matches']:
+        k = (x.get('vendor_id') or x.get('contributor'), x.get('candidate'), x.get('gift_source'))
+        r = out.get(k)
+        if r is None:
+            v = ids.vendor(x.get('vendor_id')) or {}
+            r = out[k] = {'contributor': x.get('contributor'), 'vendor_name': v.get('name') or x.get('vendor_entity') or x.get('contributor'),
+                          'vendor_id': x.get('vendor_id'), 'candidate': x.get('candidate'), 'person_id': x.get('person_id'), 'office': x.get('office'),
+                          'office_gov_id': x.get('office_gov_id'), 'election': x.get('election'), 'contribution_amount': x.get('contribution_amount'),
+                          'contribution_dates': x.get('contribution_dates'), 'refunded_by_campaign': x.get('refunded_by_campaign'),
+                          'match_confidence': x.get('match_confidence'), 'note': x.get('note'), 'campaign_report_url': x.get('campaign_report_url'),
+                          '_spellings': set(), '_govs': [], '_items': [], '_rids': [], '_urls': [], '_types': set(), 'same_government_as_office': False}
+        r['_spellings'] |= set((x.get('vendor') or '').split(' / ')) - {''}
+        if x.get('contract_gov_id') not in [g for g, _ in r['_govs']]:
+            r['_govs'].append((x.get('contract_gov_id'), x.get('contract_government')))
+        for d, rid in zip(x.get('contract_ids_or_descriptions') or [], (x.get('record_ids') or []) + [None] * 99):
+            if d not in r['_items']:
+                r['_items'].append(d); r['_rids'].append(rid)
+        r['_urls'] += [u for u in x.get('contract_source_urls') or [] if u not in r['_urls']]
+        r['_types'] |= set(x.get('record_types') or [])
+        r['same_government_as_office'] |= bool(x.get('same_government_as_office'))
+        if x.get('match_confidence') == 'likely':
+            r['match_confidence'], r['note'] = 'likely', x.get('note')
+    rows = []
+    for r in out.values():
+        govs = sorted(r.pop('_govs'), key=lambda g: g[0] != r['office_gov_id'])
+        items = r.pop('_items'); rids = r.pop('_rids')
+        rows.append({**{k: v for k, v in r.items() if not k.startswith('_')},
+                     'vendor': ' / '.join(sorted(r['_spellings'])), 'contract_ids_or_descriptions': items, 'record_ids': [x for x in rids if x],
+                     'contract_source_urls': r['_urls'], 'contract_government': govs[0][1], 'contract_gov_id': govs[0][0],
+                     'contract_governments': [g[1] for g in govs], 'contract_gov_ids': [g[0] for g in govs], 'record_types': sorted(r['_types'])})
+    return {'as_of': m.get('as_of'), 'method': (m.get('method') or '').replace('One row per contributor spelling, candidate and paying government.',
+                                                                              'One row per gift (company and campaign), with every government that paid the company.'),
+            'matches': rows}
 
 
 def write_app_data(out_dir, page_list):

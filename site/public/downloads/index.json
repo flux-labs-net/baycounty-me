@@ -2699,7 +2699,7 @@
    "id": "connections-gifts",
    "title": "Connections: business gifts to officials",
    "description": "Gifts from businesses, PACs and committees to current officeholders and 2026 candidates, one row per donor and official, with the payee id when the donor was also paid by a local government. Individual donors are never included.",
-   "rows": 2681,
+   "rows": 2680,
    "columns": [
     {
      "name": "donor",
@@ -3013,7 +3013,7 @@
    "id": "money-map-contracts",
    "title": "Money map: donor contracts",
    "description": "Contracts, awards and payments held by campaign donors, per donor and government.",
-   "rows": 57,
+   "rows": 56,
    "columns": [
     {
      "name": "donor",
@@ -3034,7 +3034,6 @@
       "Marshall Brothers",
       "Mr Fence",
       "Panhandle Engineering Inc.",
-      "RJ Gorman Marine",
       "RJ Gorman Marine Construction",
       "Roberts and Roberts, Inc.",
       "Southeastern Outdoor Mgmt",
@@ -3322,14 +3321,14 @@
    "id": "donor-contracts",
    "title": "Donors with government contracts",
    "description": "Each business donor matched to a local government contract, award or payment, with the match method and confidence.",
-   "rows": 541,
+   "rows": 208,
    "columns": [
     {
      "name": "contributor",
      "type": "string"
     },
     {
-     "name": "vendor",
+     "name": "vendor_name",
      "type": "string"
     },
     {
@@ -3385,6 +3384,7 @@
       "2023 Municipal Super Tuesday (4/18/2023)",
       "2023 municipal (Apr 18, 2023)",
       "2024 Municipal Super Tuesday (4/16/2024)",
+      "2024 Primary/General Election (11/5/2024)",
       "2024 municipal (Apr 16, 2024)",
       "2024 primary/general",
       "2025 Municipal Super Tuesday (4/22/2025)",
@@ -3400,6 +3400,51 @@
     {
      "name": "contribution_dates",
      "type": "array"
+    },
+    {
+     "name": "refunded_by_campaign",
+     "type": "number"
+    },
+    {
+     "name": "match_confidence",
+     "type": "string",
+     "values": [
+      "exact",
+      "likely"
+     ]
+    },
+    {
+     "name": "note",
+     "type": "string",
+     "values": [
+      "Names match after removing punctuation and legal suffixes.",
+      "The filing spells the name \"American Sand and Asphalt Pavi\"; matched to American Sand & Asphalt Paving by a hand-checked spelling join. \"AMERICAN SAND &\" is the Lynn Haven warrant list cut at 15 characters; \"American Sand and Asphalt Pavi\" is a campaign filing cut at 30 characters.",
+      "The filing spells the name \"Culpepper\"; matched to Culpepper Construction by a hand-checked spelling join. \"CULPEPPER CONST\" is the Lynn Haven warrant list cut at 15 characters; one campaign filing lists just \"Culpepper\".",
+      "The filing spells the name \"Dewberry\"; matched to Dewberry Engineers by a hand-checked spelling join. Panama City awarded Project RESTORE Glenwood task orders to \"Dewberry Engineering Inc.\" (2023-11-28 agenda) and the CEI task order for the same project to \"Dewberry Engineers Inc.\" (2025-06-10); Dewberry's Panhandle offices came from its 2016 purchase of Preble-Rish (dewberry.com). \"DEWBERRY\" is the Lynn Haven warrant list; \"Dewberry\" is how two campaign filings list it.",
+      "The filing spells the name \"Inland Construction & Engineer\"; matched to Inland Construction and Engineering by a hand-checked spelling join. Panama City agendas use both the full name and \"Inland Construction\"; the CRA ledger names \"Inland Construction & Engineering\" for the Millville park bid. Spellings \"Inland Construction\", \"Inland Construction & Engineer\" were each matched by name to the same Florida corporation filing (Sunbiz document P94000077770, INLAND CONSTRUCTION AND ENGINEERING, INC.).",
+      "The filing spells the name \"Marshall Bothers\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing. Spellings \"MARSHALL BROTHERS\", \"Marshall Bothers\", \"Marshall Brothers Construction\" were each matched by name to the same Florida corporation filing (Sunbiz document P97000002830, MARSHALL BROTHERS CONSTRUCTION & ENGINEERING, INC.).",
+      "The filing spells the name \"Marshall Brothers Construction\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing. Spellings \"MARSHALL BROTHERS\", \"Marshall Bothers\", \"Marshall Brothers Construction\" were each matched by name to the same Florida corporation filing (Sunbiz document P97000002830, MARSHALL BROTHERS CONSTRUCTION & ENGINEERING, INC.).",
+      "The filing spells the name \"RJ Gorman Marine\"; matched to RJ Gorman Marine Construction by a hand-checked spelling join. Register spelling \"R.J. Gorman Marine Construction LLC\"; one campaign filing cuts it to \"RJ Gorman Marine\". Kept separate from RJ Gorman Contracting, LLC (a different LLC that built the Mexico Beach and PCB piers). Spellings \"RJ Gorman Marine Construction\", \"RJ Gorman Marine\" were each matched by name to the same Florida corporation filing (Sunbiz document L09000063982, RJ GORMAN MARINE CONSTRUCTION LLC).",
+      "The filing spells the name \"Robers and Roberts, Inc\"; matched to Roberts and Roberts by a hand-checked spelling join. \"ROBERTS & ROBER\" is the Lynn Haven warrant list cut at 15 characters; \"Robers and Roberts, Inc\" is a typo in one 2026 campaign filing. Spellings \"ROBERTS & ROBERTS INC\", \"Robers and Roberts, Inc\" were each matched by name to the same Florida corporation filing (Sunbiz document M74236, ROBERTS AND ROBERTS, INCORPORATED).",
+      "The filing spells the name \"Southeastern Outdoor Managemen\"; matched to Southeastern Outdoor Management by a hand-checked spelling join. \"Southeastern Outdoor Met Inc\" and \"Mgt Inc\" are how the scanned Visit PCB register reads; \"Southeastern Outdoor Mgmt\" is a campaign filing. Spellings \"Southeastern Outdoor Mgmt\", \"Southeastern Outdoor Managemen\" were each matched by name to the same Florida corporation filing (Sunbiz document P97000066986, SOUTHEASTERN OUTDOOR MANAGEMENT, INC.).",
+      "The filing spells the name \"Southeastern Outdoor Mgmt\"; matched to Southeastern Outdoor Management by a hand-checked spelling join. \"Southeastern Outdoor Met Inc\" and \"Mgt Inc\" are how the scanned Visit PCB register reads; \"Southeastern Outdoor Mgmt\" is a campaign filing. Spellings \"Southeastern Outdoor Mgmt\", \"Southeastern Outdoor Managemen\" were each matched by name to the same Florida corporation filing (Sunbiz document P97000066986, SOUTHEASTERN OUTDOOR MANAGEMENT, INC.)."
+     ]
+    },
+    {
+     "name": "campaign_report_url",
+     "type": "string"
+    },
+    {
+     "name": "same_government_as_office",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "vendor",
+     "type": "string"
     },
     {
      "name": "contract_ids_or_descriptions",
@@ -3423,8 +3468,6 @@
       "City of Mexico Beach",
       "City of Panama City",
       "City of Panama City Beach",
-      "City of Parker",
-      "City of Springfield",
       "Mexico Beach Community Development Council",
       "Panama City Beach Convention & Visitors Bureau (Visit Panama City Beach)",
       "Panama City Community Development Council (Destination Panama City)"
@@ -3440,55 +3483,22 @@
       "lh",
       "mb",
       "mb_cdc",
-      "parker",
       "pc",
       "pcb",
-      "sp",
       "visit_pcb"
      ]
     },
     {
-     "name": "record_types",
+     "name": "contract_governments",
      "type": "array"
     },
     {
-     "name": "match_confidence",
-     "type": "string",
-     "values": [
-      "exact",
-      "likely"
-     ]
+     "name": "contract_gov_ids",
+     "type": "array"
     },
     {
-     "name": "note",
-     "type": "string",
-     "values": [
-      "Names match after removing punctuation and legal suffixes.",
-      "The filing spells the name \"American Sand and Asphalt Pavi\"; matched to American Sand & Asphalt Paving by a hand-checked spelling join. \"AMERICAN SAND &\" is the Lynn Haven warrant list cut at 15 characters; \"American Sand and Asphalt Pavi\" is a campaign filing cut at 30 characters.",
-      "The filing spells the name \"Culpepper\"; matched to Culpepper Construction by a hand-checked spelling join. \"CULPEPPER CONST\" is the Lynn Haven warrant list cut at 15 characters; one campaign filing lists just \"Culpepper\".",
-      "The filing spells the name \"Dewberry\"; matched to Dewberry Engineers by a hand-checked spelling join. Panama City awarded Project RESTORE Glenwood task orders to \"Dewberry Engineering Inc.\" (2023-11-28 agenda) and the CEI task order for the same project to \"Dewberry Engineers Inc.\" (2025-06-10); Dewberry's Panhandle offices came from its 2016 purchase of Preble-Rish (dewberry.com). \"DEWBERRY\" is the Lynn Haven warrant list; \"Dewberry\" is how two campaign filings list it.",
-      "The filing spells the name \"Marshall Bothers\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing.",
-      "The filing spells the name \"Marshall Brothers Construction\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing.",
-      "The filing spells the name \"RJ Gorman Marine\"; matched to RJ Gorman Marine Construction by a hand-checked spelling join. Register spelling \"R.J. Gorman Marine Construction LLC\"; one campaign filing cuts it to \"RJ Gorman Marine\". Kept separate from RJ Gorman Contracting, LLC (a different LLC that built the Mexico Beach and PCB piers).",
-      "The filing spells the name \"Robers and Roberts, Inc\"; matched to Roberts and Roberts by a hand-checked spelling join. \"ROBERTS & ROBER\" is the Lynn Haven warrant list cut at 15 characters; \"Robers and Roberts, Inc\" is a typo in one 2026 campaign filing.",
-      "The filing spells the name \"Southeastern Outdoor Mgmt\"; matched to Southeastern Outdoor Management by a hand-checked spelling join. \"Southeastern Outdoor Met Inc\" and \"Mgt Inc\" are how the scanned Visit PCB register reads; \"Southeastern Outdoor Mgmt\" is a campaign filing."
-     ]
-    },
-    {
-     "name": "campaign_report_url",
-     "type": "string"
-    },
-    {
-     "name": "same_government_as_office",
-     "type": "boolean",
-     "values": [
-      false,
-      true
-     ]
-    },
-    {
-     "name": "refunded_by_campaign",
-     "type": "number"
+     "name": "record_types",
+     "type": "array"
     },
     {
      "name": "gov_id",
@@ -3500,10 +3510,8 @@
       "lh",
       "mb",
       "mb_cdc",
-      "parker",
       "pc",
       "pcb",
-      "sp",
       "visit_pcb"
      ]
     }
@@ -6511,7 +6519,7 @@
    "id": "entity-profiles",
    "title": "Profiles: people, companies and organizations",
    "description": "Every company, elected official, candidate, nonprofit, nonprofit board member, registered business, committee and government named in BayCounty.me records, one row each, with its profile page and how many documented connections it has. entity_id (kind:key) joins entity-connections. Board members are named as their nonprofits' public filings list them; individual campaign donors are included only when they run a registered business (owner-gifts).",
-   "rows": 16438,
+   "rows": 16436,
    "columns": [
     {
      "name": "entity_id",

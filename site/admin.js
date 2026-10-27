@@ -51,7 +51,7 @@
   const ALIAS = {logs: 'analytics'};
   const loaders = {todo: loadTodo, keys: loadKeys, analytics: () => { loadStats(); loadLogs(true); }, settings: loadSettings, ingestion: loadIngestion,
     accounting: () => loadLedger(), agendas: loadAgendas, sent: loadSent, emails: loadEmails, compose: () => loadCompose(), correspondence: loadCorr,
-    records: loadRR, owners: loadOwners, limits: loadLimits, ties: loadTies, boards: loadBoards, minutes: loadMinutes, progress: loadProgress};
+    records: loadRR, owners: loadOwners, limits: loadLimits, ties: loadTies, names: loadNames, boards: loadBoards, minutes: loadMinutes, progress: loadProgress};
   const nav = $('#an-nav'), menuBtn = $('#an-open');
   function menu(open) {
     nav.classList.toggle('open', open); document.body.classList.toggle('an-lock', open);
@@ -323,7 +323,7 @@
     const name = id => (KEYS.find(k => k.id === id) || {}).name;
     const WHAT = {email_test: 'Sent a test email', create_key: 'Created a key', update_key: 'Changed a key', rotate_key: 'Replaced a key', update_settings: 'Changed settings', block_ip: 'Blocked an address', unblock_ip: 'Removed a block', login: 'Signed in', login_requested: 'Asked for a sign-in link',
       ledger_normalize: 'Normalized accounting files', ledger_approve: 'Approved ledger rows', ledger_reject: 'Rejected ledger rows', ledger_source: 'Changed an accounting source', ledger_finance: 'Sent a file to /finance',
-      registry_review: 'Reviewed shared-owner groups', registry_limit_review: 'Reviewed over-limit cases', boards_review: 'Reviewed board matches', careers_review: 'Reviewed business ties', minutes_review: 'Reviewed votes from minutes'};
+      registry_review: 'Reviewed shared-owner groups', registry_limit_review: 'Reviewed over-limit cases', boards_review: 'Reviewed board matches', careers_review: 'Reviewed business ties', names_review: 'Reviewed name matches', minutes_review: 'Reviewed votes from minutes'};
     $('#audit-table tbody').innerHTML = a.audit.map(x => `<tr><td class="small" style="white-space:nowrap">${stamp(x.at)}</td><td class="small">${esc(x.admin)}</td><td class="small">${esc(WHAT[x.action] || x.action)}${x.key_id && name(x.key_id) ? ': ' + esc(name(x.key_id)) : ''}</td>
       <td class="small muted mono" style="word-break:break-all">${x.detail && x.action !== 'login' ? auditDetail(x.detail) : ''}</td></tr>`).join('') || '<tr><td colspan="4" class="empty">Nothing yet.</td></tr>';
   }
@@ -1259,6 +1259,46 @@
   ['#bt-status', '#bt-confidence'].forEach(s => $(s).addEventListener('change', loadTies));
   let btTimer;
   $('#bt-q').addEventListener('input', () => { clearTimeout(btTimer); btTimer = setTimeout(loadTies, 300); });
+
+  // ---------- name matches: look-alike business names (api/_names.js) ----------
+  const NM_REV = {unreviewed: 'Unreviewed', confirmed: 'One company', rejected: 'Keep apart'};
+  const nmSide = s => `<b>${owNm((s.names || [])[0] || s.key)}</b>${(s.names || []).length > 1 ? `<div class="muted small">also ${(s.names || []).slice(1).map(owNm).join('; ')}</div>` : ''}
+    <div class="muted small">${[s.vendor_id ? `<a href="/profile/vendor/${esc(s.vendor_id)}" target="_blank" rel="noopener">vendor</a>` : '',
+      s.records ? Object.entries(s.records).map(([k, n]) => `${fmt(n)} ${esc(k.replace('_', ' '))}`).join(', ') : '',
+      s.gifts ? `${fmt(s.gifts)} gift${s.gifts === 1 ? '' : 's'}, ${owUsd(s.given)}` : ''].filter(Boolean).join(' · ')}</div>`;
+  const nmBulk = bulkReview({table: '#nm-table', noun: ['pair', 'pairs'], action: 'names_review',
+    statuses: [['confirmed', 'One company', 'primary'], ['rejected', 'Keep apart', 'danger'], ['unreviewed', 'Back to unreviewed']],
+    key: r => r.a_key + '|' + r.b_key,
+    body: list => ({items: list.map(r => ({a_key: r.a_key, b_key: r.b_key, a_name: (r.a.names || [])[0], b_name: (r.b.names || [])[0]}))}),
+    confident: r => r.reason === 'spelling' && (r.a.gifts || r.b.gifts) && !(r.a.vendor_id && r.b.vendor_id), confidentLabel: 'Spelling slips',
+    confidentHelp: 'Spelling slips: one or two letters apart, at least one name from a campaign filing, and not two separate vendors. Still read each one.',
+    warn: st => st === 'confirmed' ? 'The names are joined everywhere after the next daily refresh.' : '', reload: () => loadNames()});
+  async function loadNames() {
+    let r;
+    try { r = await api('names', {params: {status: $('#nm-status').value, reason: $('#nm-reason').value, q: $('#nm-q').value.trim()}}); }
+    catch (e) { $('#nm-tiles').innerHTML = `<div class="banner bad"><div><b>Couldn’t load name matches.</b><div class="small muted">${esc(e.message)}</div></div></div>`; return; }
+    const c = r.counts;
+    $('#nm-tiles').innerHTML = [[fmt(c.pairs), 'Look-alike pairs in the last build'], [fmt(c.unreviewed), 'Not yet reviewed'], [fmt(c.confirmed), 'One company'], [fmt(c.rejected), 'Kept apart']]
+      .map(([v, l]) => `<div class="tile"><b>${v}</b><span>${l}</span></div>`).join('');
+    $('#nm-table tbody').innerHTML = r.rows.map(m => `<tr>${nmBulk.cell(m)}<td class="small">${nmSide(m.a)}</td><td class="small">${nmSide(m.b)}</td>
+      <td class="small">${esc(m.reason_label || '')}</td>
+      <td><select class="sel" data-nm-a="${esc(m.a_key)}" data-nm-b="${esc(m.b_key)}" aria-label="Review">${Object.entries(NM_REV).map(([k, v]) => `<option value="${k}"${k === m.review_status ? ' selected' : ''}>${v}</option>`).join('')}</select>
+        ${m.reviewed_by ? `<div class="muted small">${esc(m.reviewed_by)}</div>` : ''}</td></tr>`).join('') || '<tr><td colspan="5" class="empty">No pairs with these filters.</td></tr>';
+    if (r.total > r.rows.length) $('#nm-table tbody').insertAdjacentHTML('beforeend', `<tr><td colspan="5" class="empty">Showing ${fmt(r.rows.length)} of ${fmt(r.total)}. Narrow the list with the filters.</td></tr>`);
+    nmBulk.set(r.rows);
+  }
+  $('#nm-table').addEventListener('change', async e => {
+    const s = e.target.closest('[data-nm-a]'); if (!s) return;
+    s.disabled = true;
+    const row = s.closest('tr');
+    try { await api('names_review', {method: 'POST', body: {a_key: s.dataset.nmA, b_key: s.dataset.nmB, status: s.value,
+      a_name: row.cells[1].querySelector('b').textContent, b_name: row.cells[2].querySelector('b').textContent}}); nmBulk.mark(s.dataset.nmA + '|' + s.dataset.nmB, s.value); }
+    catch (err) { alert(err.message); }
+    s.disabled = false;
+  });
+  ['#nm-status', '#nm-reason'].forEach(s => $(s).addEventListener('change', loadNames));
+  let nmTimer;
+  $('#nm-q').addEventListener('input', () => { clearTimeout(nmTimer); nmTimer = setTimeout(loadNames, 300); });
 
   // ---------- votes from minutes (agendas.motions, api/_minutes.js) ----------
   const MV_BOARD = {county: 'County Commission', schools: 'School Board', pc: 'Panama City', 'pc-cra': 'Panama City CRA', pcb: 'Panama City Beach',

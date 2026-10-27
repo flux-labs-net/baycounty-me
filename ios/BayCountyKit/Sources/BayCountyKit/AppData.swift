@@ -346,6 +346,8 @@ public struct DonorContracts: Codable, Sendable {
     public struct Match: Codable, Sendable, Identifiable, Hashable {
         public let contributor: String?
         public let vendor: String?
+        /// The company's one name on the site (the record spellings in `vendor` can differ: "TK Vandy LLC" / "T K Vandy LLC").
+        public let vendor_name: String?
         public let vendor_id: String?
         public let candidate: String?
         public let person_id: String?
@@ -359,6 +361,9 @@ public struct DonorContracts: Codable, Sendable {
         public let contract_source_urls: [String]?
         public let contract_government: String?
         public let contract_gov_id: String?
+        /// Every government that paid the company (one row per gift, so a gift is counted once).
+        public let contract_governments: [String]?
+        public let contract_gov_ids: [String]?
         public let match_confidence: String?
         public let note: String?
         public let campaign_report_url: String?

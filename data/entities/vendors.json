@@ -480,6 +480,7 @@
    "keys": [
     "americansand",
     "americansandasphalt",
+    "americansandasphaltpavi",
     "americansandasphaltpaving",
     "americansandasphaltxcavation"
    ],
@@ -2411,6 +2412,7 @@
     "Culpepper Construction Company, Inc."
    ],
    "keys": [
+    "culpepper",
     "culpepperconst",
     "culpepperconstruction"
    ],
@@ -3814,7 +3816,7 @@
     "sp"
    ],
    "site_vendor_type": "business",
-   "merge_evidence": "Agendas add \"(GCUC)\" or drop the plural; \"GULF COAST UTIL\" is the Lynn Haven warrant list cut at 15 characters."
+   "merge_evidence": "Agendas add \"(GCUC)\" or drop the plural; \"GULF COAST UTIL\" is the Lynn Haven warrant list cut at 15 characters. Spellings \"GULF COAST UTILITY CONTRACTORS\", \"Gulf Coast Utility Contractor\" were each matched by name to the same Florida corporation filing (Sunbiz document L99000004446, GULF COAST UTILITY CONTRACTORS, L.L.C.)."
   },
   {
    "id": "gemini-engineering-sciences",
@@ -4812,6 +4814,7 @@
    "name": "Inland Construction and Engineering",
    "aliases": [
     "Inland Construction",
+    "Inland Construction & Engineer",
     "Inland Construction & Engineering (bid awarded May 28, 2024)",
     "Inland Construction Inc",
     "Inland Construction Inc.",
@@ -4821,6 +4824,7 @@
    ],
    "keys": [
     "inlandconstruction",
+    "inlandconstructionengineer",
     "inlandconstructionengineering"
    ],
    "records": {
@@ -4832,7 +4836,7 @@
     "pc"
    ],
    "site_vendor_type": "business",
-   "merge_evidence": "Panama City agendas use both the full name and \"Inland Construction\"; the CRA ledger names \"Inland Construction & Engineering\" for the Millville park bid."
+   "merge_evidence": "Panama City agendas use both the full name and \"Inland Construction\"; the CRA ledger names \"Inland Construction & Engineering\" for the Millville park bid. Spellings \"Inland Construction\", \"Inland Construction & Engineer\" were each matched by name to the same Florida corporation filing (Sunbiz document P94000077770, INLAND CONSTRUCTION AND ENGINEERING, INC.)."
   },
   {
    "id": "inliner-solutions",
@@ -5884,6 +5888,7 @@
     "Marshall Brothers, Inc."
    ],
    "keys": [
+    "marshallbothers",
     "marshallbrothers",
     "marshallbrothersconstruction",
     "marshallbrothersconstructionengineering"
@@ -5901,7 +5906,7 @@
     "sp"
    ],
    "site_vendor_type": "business",
-   "merge_evidence": "Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing."
+   "merge_evidence": "Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing. Spellings \"MARSHALL BROTHERS\", \"Marshall Bothers\", \"Marshall Brothers Construction\" were each matched by name to the same Florida corporation filing (Sunbiz document P97000002830, MARSHALL BROTHERS CONSTRUCTION & ENGINEERING, INC.)."
   },
   {
    "id": "mccall-bennett",
@@ -7941,6 +7946,7 @@
     "RJ Gorman Marine Construction, LLC"
    ],
    "keys": [
+    "rjgormanmarine",
     "rjgormanmarineconstruction"
    ],
    "records": {
@@ -7951,7 +7957,7 @@
     "county"
    ],
    "site_vendor_type": "business",
-   "merge_evidence": "Register spelling \"R.J. Gorman Marine Construction LLC\"; one campaign filing cuts it to \"RJ Gorman Marine\". Kept separate from RJ Gorman Contracting, LLC (a different LLC that built the Mexico Beach and PCB piers)."
+   "merge_evidence": "Register spelling \"R.J. Gorman Marine Construction LLC\"; one campaign filing cuts it to \"RJ Gorman Marine\". Kept separate from RJ Gorman Contracting, LLC (a different LLC that built the Mexico Beach and PCB piers). Spellings \"RJ Gorman Marine Construction\", \"RJ Gorman Marine\" were each matched by name to the same Florida corporation filing (Sunbiz document L09000063982, RJ GORMAN MARINE CONSTRUCTION LLC)."
   },
   {
    "id": "roberson-associates",
@@ -7986,6 +7992,7 @@
     "Roberts and Roberts, Inc."
    ],
    "keys": [
+    "robersroberts",
     "robertsrober",
     "robertsroberts"
    ],
@@ -8002,7 +8009,7 @@
     "pcb"
    ],
    "site_vendor_type": "business",
-   "merge_evidence": "\"ROBERTS & ROBER\" is the Lynn Haven warrant list cut at 15 characters; \"Robers and Roberts, Inc\" is a typo in one 2026 campaign filing."
+   "merge_evidence": "\"ROBERTS & ROBER\" is the Lynn Haven warrant list cut at 15 characters; \"Robers and Roberts, Inc\" is a typo in one 2026 campaign filing. Spellings \"ROBERTS & ROBERTS INC\", \"Robers and Roberts, Inc\" were each matched by name to the same Florida corporation filing (Sunbiz document M74236, ROBERTS AND ROBERTS, INCORPORATED)."
   },
   {
    "id": "robin-malpass-associates",
@@ -8586,12 +8593,15 @@
    "id": "southeastern-outdoor",
    "name": "Southeastern Outdoor Management",
    "aliases": [
+    "Southeastern Outdoor Managemen",
     "Southeastern Outdoor Management",
     "Southeastern Outdoor Mgmt",
     "Southeastern Outdoor Mgt Inc"
    ],
    "keys": [
+    "southeasternoutdoormanagemen",
     "southeasternoutdoormanagement",
+    "southeasternoutdoormgmt",
     "southeasternoutdoormgt"
    ],
    "records": {
@@ -8603,7 +8613,7 @@
     "visit_pcb"
    ],
    "site_vendor_type": "business",
-   "merge_evidence": "\"Southeastern Outdoor Met Inc\" and \"Mgt Inc\" are how the scanned Visit PCB register reads; \"Southeastern Outdoor Mgmt\" is a campaign filing."
+   "merge_evidence": "\"Southeastern Outdoor Met Inc\" and \"Mgt Inc\" are how the scanned Visit PCB register reads; \"Southeastern Outdoor Mgmt\" is a campaign filing. Spellings \"Southeastern Outdoor Mgmt\", \"Southeastern Outdoor Managemen\" were each matched by name to the same Florida corporation filing (Sunbiz document P97000066986, SOUTHEASTERN OUTDOOR MANAGEMENT, INC.)."
   },
   {
    "id": "southern-construction",

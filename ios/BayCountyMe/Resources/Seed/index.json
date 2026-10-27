@@ -1,6 +1,6 @@
 {
  "name": "BayCounty.me open data",
- "updated": "2026-10-26",
+ "updated": "2026-10-27",
  "license": "Public records; free to reuse with credit to BayCounty.me",
  "datasets": [
   {
@@ -120,8 +120,8 @@
   {
    "id": "votes",
    "title": "Recorded votes",
-   "description": "Money votes by the County Commission, School Board, city commissions and CRA boards, with how each member voted.",
-   "rows": 606,
+   "description": "Votes by the County Commission, School Board, city commissions and CRA boards since 2016, with how each member voted: hand-researched money votes plus every motion read from the official minutes.",
+   "rows": 3789,
    "columns": [
     {
      "name": "date",
@@ -164,13 +164,25 @@
      "name": "category",
      "type": "string",
      "values": [
+      "appointment",
       "budget",
+      "consent agenda",
       "contract",
       "cra",
       "debt",
+      "fees",
+      "grant",
       "land",
+      "land use",
       "millage",
-      "other"
+      "ordinance",
+      "other",
+      "personnel",
+      "policy",
+      "procedural",
+      "property",
+      "resolution",
+      "settlement"
      ]
     },
     {
@@ -194,14 +206,24 @@
       "failed",
       "passed",
       "passed (roll call; tally not reported)",
-      "scheduled; outcome not yet published"
+      "scheduled; outcome not yet published",
+      "tabled",
+      "unclear",
+      "withdrawn"
      ]
     },
     {
      "name": "tally",
      "type": "string",
      "values": [
+      "0-0",
+      "0-1",
+      "0-2",
+      "0-3",
+      "0-5",
+      "1-2",
       "1-4",
+      "2-0",
       "2-2",
       "2-3",
       "3-0",
@@ -216,6 +238,7 @@
       "5-0 (minutes: 'carried unanimously upon roll-call vote')",
       "5-0 (minutes: 'carried unanimously')",
       "5-0 (minutes: 'carried unanimously'; Mayor Henderson attended by phone)",
+      "6-0",
       "not found",
       "unanimous",
       "unanimous (per news; names not listed)"
@@ -239,36 +262,7 @@
     },
     {
      "name": "absent_or_abstained",
-     "type": "string",
-     "values": [
-      "Ann Leonard",
-      "Brian Grainger",
-      "Chris Moore",
-      "Clair Pease",
-      "Dave Lowery",
-      "Doug Crosby",
-      "Erik Fosshage",
-      "Ethan Register",
-      "Jackie Kennington",
-      "Janice Lucas",
-      "Jenna Haligas",
-      "Jerry Register",
-      "Jesse Nelson",
-      "Jesse Nelson; Judy Tinder",
-      "Josh Street",
-      "Josh Street; Brian Grainger",
-      "Josh Street; Janice Lucas",
-      "Judy Vandergrift",
-      "Katy Bodiford",
-      "Mary Coburn",
-      "Michael Jarman",
-      "Paul Casto",
-      "Richard Chval",
-      "Richard Wolff",
-      "Robbie Hughes; Josh Street",
-      "Robert Carroll",
-      "Steve Moss"
-     ]
+     "type": "string"
     },
     {
      "name": "agenda_item",
@@ -285,6 +279,45 @@
     {
      "name": "members",
      "type": "array"
+    },
+    {
+     "name": "source_type",
+     "type": "string",
+     "values": [
+      "minutes",
+      "researched"
+     ]
+    },
+    {
+     "name": "verified",
+     "type": "string",
+     "values": [
+      "auto-checked",
+      "hand-checked",
+      "reviewed"
+     ]
+    },
+    {
+     "name": "vote_method",
+     "type": "string",
+     "values": [
+      "no_dissent_recorded",
+      "outcome_only",
+      "roll_call",
+      "unanimous"
+     ]
+    },
+    {
+     "name": "mover",
+     "type": "string"
+    },
+    {
+     "name": "seconder",
+     "type": "string"
+    },
+    {
+     "name": "source_page",
+     "type": "number"
     },
     {
      "name": "vote_id",
@@ -336,7 +369,7 @@
    "id": "member-votes",
    "title": "Votes by member",
    "description": "One row per member per vote (long format), for tallying individual records.",
-   "rows": 3023,
+   "rows": 18418,
    "columns": [
     {
      "name": "date",
@@ -397,6 +430,18 @@
       "schools",
       "sp"
      ]
+    },
+    {
+     "name": "source_type",
+     "type": "string",
+     "values": [
+      "minutes",
+      "researched"
+     ]
+    },
+    {
+     "name": "vote_id",
+     "type": "string"
     },
     {
      "name": "person_id",
@@ -1323,6 +1368,7 @@
       "Pending Insurance Closeout Review",
       "Pending Large Project Review",
       "Pending PDMG Project Review",
+      "Pending Project Closeout Final Review",
       "Pending Project Closeout Initial Review",
       "Pending Recipient Final Review",
       "Pending Scope and Cost Development",
@@ -2653,7 +2699,7 @@
    "id": "connections-gifts",
    "title": "Connections: business gifts to officials",
    "description": "Gifts from businesses, PACs and committees to current officeholders and 2026 candidates, one row per donor and official, with the payee id when the donor was also paid by a local government. Individual donors are never included.",
-   "rows": 2682,
+   "rows": 2680,
    "columns": [
     {
      "name": "donor",
@@ -2967,7 +3013,7 @@
    "id": "money-map-contracts",
    "title": "Money map: donor contracts",
    "description": "Contracts, awards and payments held by campaign donors, per donor and government.",
-   "rows": 57,
+   "rows": 56,
    "columns": [
     {
      "name": "donor",
@@ -2988,7 +3034,6 @@
       "Marshall Brothers",
       "Mr Fence",
       "Panhandle Engineering Inc.",
-      "RJ Gorman Marine",
       "RJ Gorman Marine Construction",
       "Roberts and Roberts, Inc.",
       "Southeastern Outdoor Mgmt",
@@ -3276,14 +3321,14 @@
    "id": "donor-contracts",
    "title": "Donors with government contracts",
    "description": "Each business donor matched to a local government contract, award or payment, with the match method and confidence.",
-   "rows": 543,
+   "rows": 208,
    "columns": [
     {
      "name": "contributor",
      "type": "string"
     },
     {
-     "name": "vendor",
+     "name": "vendor_name",
      "type": "string"
     },
     {
@@ -3339,6 +3384,7 @@
       "2023 Municipal Super Tuesday (4/18/2023)",
       "2023 municipal (Apr 18, 2023)",
       "2024 Municipal Super Tuesday (4/16/2024)",
+      "2024 Primary/General Election (11/5/2024)",
       "2024 municipal (Apr 16, 2024)",
       "2024 primary/general",
       "2025 Municipal Super Tuesday (4/22/2025)",
@@ -3354,6 +3400,51 @@
     {
      "name": "contribution_dates",
      "type": "array"
+    },
+    {
+     "name": "refunded_by_campaign",
+     "type": "number"
+    },
+    {
+     "name": "match_confidence",
+     "type": "string",
+     "values": [
+      "exact",
+      "likely"
+     ]
+    },
+    {
+     "name": "note",
+     "type": "string",
+     "values": [
+      "Names match after removing punctuation and legal suffixes.",
+      "The filing spells the name \"American Sand and Asphalt Pavi\"; matched to American Sand & Asphalt Paving by a hand-checked spelling join. \"AMERICAN SAND &\" is the Lynn Haven warrant list cut at 15 characters; \"American Sand and Asphalt Pavi\" is a campaign filing cut at 30 characters.",
+      "The filing spells the name \"Culpepper\"; matched to Culpepper Construction by a hand-checked spelling join. \"CULPEPPER CONST\" is the Lynn Haven warrant list cut at 15 characters; one campaign filing lists just \"Culpepper\".",
+      "The filing spells the name \"Dewberry\"; matched to Dewberry Engineers by a hand-checked spelling join. Panama City awarded Project RESTORE Glenwood task orders to \"Dewberry Engineering Inc.\" (2023-11-28 agenda) and the CEI task order for the same project to \"Dewberry Engineers Inc.\" (2025-06-10); Dewberry's Panhandle offices came from its 2016 purchase of Preble-Rish (dewberry.com). \"DEWBERRY\" is the Lynn Haven warrant list; \"Dewberry\" is how two campaign filings list it.",
+      "The filing spells the name \"Inland Construction & Engineer\"; matched to Inland Construction and Engineering by a hand-checked spelling join. Panama City agendas use both the full name and \"Inland Construction\"; the CRA ledger names \"Inland Construction & Engineering\" for the Millville park bid. Spellings \"Inland Construction\", \"Inland Construction & Engineer\" were each matched by name to the same Florida corporation filing (Sunbiz document P94000077770, INLAND CONSTRUCTION AND ENGINEERING, INC.).",
+      "The filing spells the name \"Marshall Bothers\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing. Spellings \"MARSHALL BROTHERS\", \"Marshall Bothers\", \"Marshall Brothers Construction\" were each matched by name to the same Florida corporation filing (Sunbiz document P97000002830, MARSHALL BROTHERS CONSTRUCTION & ENGINEERING, INC.).",
+      "The filing spells the name \"Marshall Brothers Construction\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing. Spellings \"MARSHALL BROTHERS\", \"Marshall Bothers\", \"Marshall Brothers Construction\" were each matched by name to the same Florida corporation filing (Sunbiz document P97000002830, MARSHALL BROTHERS CONSTRUCTION & ENGINEERING, INC.).",
+      "The filing spells the name \"RJ Gorman Marine\"; matched to RJ Gorman Marine Construction by a hand-checked spelling join. Register spelling \"R.J. Gorman Marine Construction LLC\"; one campaign filing cuts it to \"RJ Gorman Marine\". Kept separate from RJ Gorman Contracting, LLC (a different LLC that built the Mexico Beach and PCB piers). Spellings \"RJ Gorman Marine Construction\", \"RJ Gorman Marine\" were each matched by name to the same Florida corporation filing (Sunbiz document L09000063982, RJ GORMAN MARINE CONSTRUCTION LLC).",
+      "The filing spells the name \"Robers and Roberts, Inc\"; matched to Roberts and Roberts by a hand-checked spelling join. \"ROBERTS & ROBER\" is the Lynn Haven warrant list cut at 15 characters; \"Robers and Roberts, Inc\" is a typo in one 2026 campaign filing. Spellings \"ROBERTS & ROBERTS INC\", \"Robers and Roberts, Inc\" were each matched by name to the same Florida corporation filing (Sunbiz document M74236, ROBERTS AND ROBERTS, INCORPORATED).",
+      "The filing spells the name \"Southeastern Outdoor Managemen\"; matched to Southeastern Outdoor Management by a hand-checked spelling join. \"Southeastern Outdoor Met Inc\" and \"Mgt Inc\" are how the scanned Visit PCB register reads; \"Southeastern Outdoor Mgmt\" is a campaign filing. Spellings \"Southeastern Outdoor Mgmt\", \"Southeastern Outdoor Managemen\" were each matched by name to the same Florida corporation filing (Sunbiz document P97000066986, SOUTHEASTERN OUTDOOR MANAGEMENT, INC.).",
+      "The filing spells the name \"Southeastern Outdoor Mgmt\"; matched to Southeastern Outdoor Management by a hand-checked spelling join. \"Southeastern Outdoor Met Inc\" and \"Mgt Inc\" are how the scanned Visit PCB register reads; \"Southeastern Outdoor Mgmt\" is a campaign filing. Spellings \"Southeastern Outdoor Mgmt\", \"Southeastern Outdoor Managemen\" were each matched by name to the same Florida corporation filing (Sunbiz document P97000066986, SOUTHEASTERN OUTDOOR MANAGEMENT, INC.)."
+     ]
+    },
+    {
+     "name": "campaign_report_url",
+     "type": "string"
+    },
+    {
+     "name": "same_government_as_office",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "vendor",
+     "type": "string"
     },
     {
      "name": "contract_ids_or_descriptions",
@@ -3377,8 +3468,6 @@
       "City of Mexico Beach",
       "City of Panama City",
       "City of Panama City Beach",
-      "City of Parker",
-      "City of Springfield",
       "Mexico Beach Community Development Council",
       "Panama City Beach Convention & Visitors Bureau (Visit Panama City Beach)",
       "Panama City Community Development Council (Destination Panama City)"
@@ -3394,55 +3483,22 @@
       "lh",
       "mb",
       "mb_cdc",
-      "parker",
       "pc",
       "pcb",
-      "sp",
       "visit_pcb"
      ]
     },
     {
-     "name": "record_types",
+     "name": "contract_governments",
      "type": "array"
     },
     {
-     "name": "match_confidence",
-     "type": "string",
-     "values": [
-      "exact",
-      "likely"
-     ]
+     "name": "contract_gov_ids",
+     "type": "array"
     },
     {
-     "name": "note",
-     "type": "string",
-     "values": [
-      "Names match after removing punctuation and legal suffixes.",
-      "The filing spells the name \"American Sand and Asphalt Pavi\"; matched to American Sand & Asphalt Paving by a hand-checked spelling join. \"AMERICAN SAND &\" is the Lynn Haven warrant list cut at 15 characters; \"American Sand and Asphalt Pavi\" is a campaign filing cut at 30 characters.",
-      "The filing spells the name \"Culpepper\"; matched to Culpepper Construction by a hand-checked spelling join. \"CULPEPPER CONST\" is the Lynn Haven warrant list cut at 15 characters; one campaign filing lists just \"Culpepper\".",
-      "The filing spells the name \"Dewberry\"; matched to Dewberry Engineers by a hand-checked spelling join. Panama City awarded Project RESTORE Glenwood task orders to \"Dewberry Engineering Inc.\" (2023-11-28 agenda) and the CEI task order for the same project to \"Dewberry Engineers Inc.\" (2025-06-10); Dewberry's Panhandle offices came from its 2016 purchase of Preble-Rish (dewberry.com). \"DEWBERRY\" is the Lynn Haven warrant list; \"Dewberry\" is how two campaign filings list it.",
-      "The filing spells the name \"Marshall Bothers\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing.",
-      "The filing spells the name \"Marshall Brothers Construction\"; matched to Marshall Brothers Construction & Engineering by a hand-checked spelling join. Agendas use \"Marshall Brothers\", \"Marshall Brothers, Inc.\" and the full name for the same water/sewer contractor; \"Marshall Bothers\" is a typo in one campaign filing.",
-      "The filing spells the name \"RJ Gorman Marine\"; matched to RJ Gorman Marine Construction by a hand-checked spelling join. Register spelling \"R.J. Gorman Marine Construction LLC\"; one campaign filing cuts it to \"RJ Gorman Marine\". Kept separate from RJ Gorman Contracting, LLC (a different LLC that built the Mexico Beach and PCB piers).",
-      "The filing spells the name \"Robers and Roberts, Inc\"; matched to Roberts and Roberts by a hand-checked spelling join. \"ROBERTS & ROBER\" is the Lynn Haven warrant list cut at 15 characters; \"Robers and Roberts, Inc\" is a typo in one 2026 campaign filing.",
-      "The filing spells the name \"Southeastern Outdoor Mgmt\"; matched to Southeastern Outdoor Management by a hand-checked spelling join. \"Southeastern Outdoor Met Inc\" and \"Mgt Inc\" are how the scanned Visit PCB register reads; \"Southeastern Outdoor Mgmt\" is a campaign filing."
-     ]
-    },
-    {
-     "name": "campaign_report_url",
-     "type": "string"
-    },
-    {
-     "name": "same_government_as_office",
-     "type": "boolean",
-     "values": [
-      false,
-      true
-     ]
-    },
-    {
-     "name": "refunded_by_campaign",
-     "type": "number"
+     "name": "record_types",
+     "type": "array"
     },
     {
      "name": "gov_id",
@@ -3454,10 +3510,8 @@
       "lh",
       "mb",
       "mb_cdc",
-      "parker",
       "pc",
       "pcb",
-      "sp",
       "visit_pcb"
      ]
     }
@@ -3627,7 +3681,7 @@
    "id": "site-updates",
    "title": "What's new",
    "description": "Each change to the site's data and pages, newest first.",
-   "rows": 57,
+   "rows": 58,
    "columns": [
     {
      "name": "date",
@@ -3638,7 +3692,8 @@
       "2026-10-22",
       "2026-10-23",
       "2026-10-24",
-      "2026-10-25"
+      "2026-10-25",
+      "2026-10-26"
      ]
     },
     {
@@ -4576,7 +4631,7 @@
    "id": "business-donor-sunbiz",
    "title": "Business donors in the state corporate registry",
    "description": "Each business that gave to a current officeholder or 2026 local candidate, matched to its Florida Division of Corporations (Sunbiz) record: document number, registered name, status and principal city, with the match method. Business-level only; no owner or officer names.",
-   "rows": 2666,
+   "rows": 2665,
    "columns": [
     {
      "name": "contributor",
@@ -6342,7 +6397,7 @@
    "id": "owner-gifts",
    "title": "Campaign gifts from business owners",
    "description": "Personal gifts to local campaigns from people who run a registered Florida business, one row per person and campaign. A contributor filed as an individual is listed when the name and street address on the Supervisor of Elections filing are the same as an officer, manager or registered agent of a for-profit business on Sunbiz that was active around the gift; middle initials and Jr/Sr must agree, and protected voters are never matched. Other individual donors are never named. No addresses or occupations.",
-   "rows": 319,
+   "rows": 1116,
    "columns": [
     {
      "name": "donor_id",
@@ -6374,45 +6429,32 @@
     },
     {
      "name": "office",
-     "type": "string",
-     "values": [
-      "Bay County Commission, District 1",
-      "Bay County Commission, District 3",
-      "Bay County Commission, District 4",
-      "Bay County Commission, District 5",
-      "Callaway Commission, Ward 1",
-      "Callaway Commissioner, Ward 3",
-      "Lynn Haven Commissioner, Seat 1",
-      "Lynn Haven Commissioner, Seat 2",
-      "Panama City Beach Council, Ward 1",
-      "Panama City Beach Council, Ward 2",
-      "Panama City Beach Council, Ward 3",
-      "Panama City Beach Council, Ward 4",
-      "Panama City Beach Mayor",
-      "Panama City Commission, Ward I",
-      "Panama City Commission, Ward II",
-      "Panama City Commission, Ward III",
-      "Panama City Commission, Ward IV",
-      "Panama City Mayor",
-      "School Board, District 1",
-      "School Board, District 2",
-      "School Board, District 3",
-      "School Board, District 4",
-      "Sheriff",
-      "Springfield Mayor",
-      "Superintendent of Schools",
-      "Supervisor of Elections"
-     ]
+     "type": "string"
     },
     {
      "name": "election",
      "type": "string",
      "values": [
+      "2016 Municipal Super Tuesday (4/19/2016)",
+      "2016 Primary/General Elections (11/8/2016)",
+      "2017 Municipal Super Tuesday (4/18/2017)",
+      "2018 Municipal Super Tuesday (4/17/2018)",
+      "2018 Primary/General Election (11/6/2018)",
+      "2019 Municipal Super Tuesday (4/16/2019)",
+      "2020 Municipal Super Tuesday (4/21/2020)",
+      "2020 Primary (08/18/2020)/General Election (11/3/2020)",
+      "2021 Special School Board Referendum/Municipal Election (4/20/2021)",
+      "2022 Municipal Super Tuesday (4/19/2022)",
+      "2022 Primary/General Election (11/8/2022)",
       "2022 municipal (Apr 19, 2022)",
       "2022 primary/general",
+      "2023 Municipal Super Tuesday (4/18/2023)",
       "2023 municipal (Apr 18, 2023)",
+      "2024 Municipal Super Tuesday (4/16/2024)",
+      "2024 Primary/General Election (11/5/2024)",
       "2024 municipal (Apr 16, 2024)",
       "2024 primary/general",
+      "2025 Municipal Super Tuesday (4/22/2025)",
       "2025 municipal (Apr 22, 2025)",
       "2026 Municipal Super Tuesday (Apr 21, 2026)",
       "2026 Primary/General (Aug 18 / Nov 3, 2026)",
@@ -6450,15 +6492,22 @@
      "name": "gov_id",
      "type": "string",
      "values": [
+      "beach_mosquito",
       "county",
+      "county_court",
       "cw",
+      "lake_powell_cdd",
       "lh",
+      "mb",
+      "parker",
       "pc",
       "pcb",
+      "property_appraiser",
       "schools",
       "sheriff",
       "soe",
-      "sp"
+      "sp",
+      "tax_collector"
      ]
     }
    ],
@@ -6470,7 +6519,7 @@
    "id": "entity-profiles",
    "title": "Profiles: people, companies and organizations",
    "description": "Every company, elected official, candidate, nonprofit, nonprofit board member, registered business, committee and government named in BayCounty.me records, one row each, with its profile page and how many documented connections it has. entity_id (kind:key) joins entity-connections. Board members are named as their nonprofits' public filings list them; individual campaign donors are included only when they run a registered business (owner-gifts).",
-   "rows": 15544,
+   "rows": 16436,
    "columns": [
     {
      "name": "entity_id",
@@ -6585,7 +6634,7 @@
    "id": "entity-connections",
    "title": "Connections between people, companies and organizations",
    "description": "Every documented connection between two entities in entity-profiles, totalled per pair and kind: a government paid a payee, an organization gave to an official's or candidate's campaign, an official voted on a company's contracts, a person sits on a nonprofit's board or runs a business, a nonprofit gave a grant, two payees share a project. Each row has its source. Individual campaign donors are included only when they run a registered business (owner-gifts); officials' board seats and businesses are added by the API once checked by hand.",
-   "rows": 17977,
+   "rows": 19609,
    "columns": [
     {
      "name": "link_id",
@@ -6906,10 +6955,563 @@
    "api": "/api/v1/datasets/officeholder-terms"
   },
   {
+   "id": "data-sources",
+   "title": "Where the data comes from",
+   "description": "Every source BayCounty.me takes records from, one row per source: the topic, the government it covers (or state and federal databases), the link, how we get it (automatic fetch, downloaded and read by hand, a state or federal bulk file, or a live lookup), how often, what we take from it, how we process it and the checks we run.",
+   "rows": 114,
+   "columns": [
+    {
+     "name": "topic",
+     "type": "string",
+     "values": [
+      "Audits and debt",
+      "Budgets",
+      "Businesses and owners",
+      "Campaign money",
+      "Contracts and change orders",
+      "Elections",
+      "Fees and bills",
+      "Hurricane Michael",
+      "Meetings and agendas",
+      "My Address lookups",
+      "News and context",
+      "Nonprofits",
+      "Officials by year",
+      "Pay",
+      "Property tax",
+      "Public records contacts",
+      "Redevelopment agencies (CRAs)",
+      "Sales tax projects",
+      "Tourist tax",
+      "Votes"
+     ]
+    },
+    {
+     "name": "topic_id",
+     "type": "string",
+     "values": [
+      "address",
+      "audits",
+      "budgets",
+      "businesses",
+      "campaign",
+      "contracts",
+      "cra",
+      "elections",
+      "fees",
+      "meetings",
+      "michael",
+      "news",
+      "nonprofits",
+      "officials",
+      "property-tax",
+      "records",
+      "salaries",
+      "sales-tax",
+      "tourist-tax",
+      "votes"
+     ]
+    },
+    {
+     "name": "government",
+     "type": "string",
+     "values": [
+      "Bay County",
+      "Bay District Schools",
+      "Callaway",
+      "Constitutional officers and districts",
+      "County-wide sources",
+      "Lynn Haven",
+      "Mexico Beach",
+      "Panama City",
+      "Panama City Beach",
+      "Parker",
+      "Springfield",
+      "State and federal databases"
+     ]
+    },
+    {
+     "name": "government_id",
+     "type": "string",
+     "values": [
+      "county",
+      "county-wide",
+      "cw",
+      "lh",
+      "mb",
+      "officers",
+      "parker",
+      "pc",
+      "pcb",
+      "schools",
+      "sp",
+      "state"
+     ]
+    },
+    {
+     "name": "source_name",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "method",
+     "type": "string",
+     "values": [
+      "Automatic, daily",
+      "Automatic, every 30 minutes on weekdays",
+      "Automatic, weekly",
+      "Downloaded and read by hand",
+      "Live lookup (nothing stored)",
+      "State or federal bulk data file"
+     ]
+    },
+    {
+     "name": "refresh",
+     "type": "string",
+     "values": [
+      "As minutes are adopted",
+      "As needed",
+      "As new filings post",
+      "As pages change",
+      "As reports post",
+      "As seats change",
+      "As updated",
+      "Daily",
+      "Each election",
+      "Each meeting",
+      "Each search",
+      "Each year",
+      "Each year, as audits are filed",
+      "Each year, when adopted",
+      "Every 30 minutes on weekdays, and twice a day",
+      "Monthly",
+      "Once",
+      "Quarterly",
+      "Weekly"
+     ]
+    },
+    {
+     "name": "what_we_take",
+     "type": "string"
+    },
+    {
+     "name": "how_we_process",
+     "type": "string",
+     "values": [
+      "Address lookups go straight from your browser to the county's and FEMA's public map servers at the moment you search.",
+      "Adopted budget books are downloaded from each government's website and the totals, funds and departments typed into the data. Where a budget book is not posted, the Annual Financial Report the government files with the state is used. Audited revenue and spending come from the state's Local Government Financial Reports.",
+      "Assessments come from the state's non-ad valorem assessment roll file. Utility rates and fees come from city and county fee schedules and budget books.",
+      "Audited financial statements filed with the Florida Auditor General are read for debt (bonds, notes, loans, leases), audit findings and the auditor's opinion.",
+      "Awards, change orders and emergency purchases are taken from agenda items and their attached memos and resolutions. An agenda item is a proposal, so where minutes exist the record is checked against them.",
+      "Bed tax collections come from the Clerk's monthly reports. Payments by the three tourism agencies come from the Clerk's monthly check registers, read from text PDFs in the Clerk's public records search. State tax rates and history come from EDR.",
+      "CRA spending is read from CRA annual reports, agendas, budgets and audits, one ledger line per payment or project. Tax increment comes from CRA reports, audits and budgets, split between the county and city by millage.",
+      "Candidate lists, status and official results come from the Supervisor of Elections. Platforms come from candidates' own sites.",
+      "Each government's agenda system is checked every 30 minutes on weekdays (when a notice email arrives) and swept twice a day. Every agenda, packet and minutes file is downloaded and fingerprinted; a changed file is kept as a new version. An AI model reads each new agenda into a list of items using only the agenda's own words (it is told not to guess). The meetings list combines the agenda system with the government's calendar; boards with no calendar get dates from their regular schedule, marked \"expected\".",
+      "Every tax-exempt organization with a county address is pulled from IRS data, with every 990, 990-EZ and 990-PF e-filed since 2019 (board members, pay, grants, revenue). State charity registrations and state corporate filings are joined in.",
+      "FEMA Public Assistance projects and applicants for disaster DR-4399 are downloaded from OpenFEMA every week.",
+      "Infrastructure sales tax projects are downloaded from Bay County's map server every week and matched to the published project schedule.",
+      "Local news reports are cited for context (for example an arrest, a resignation or a policy change) when no official document says it.",
+      "Money votes are read from adopted minutes (or draft minutes printed in the next agenda packet). Each motion is recorded with the roll call by name; the amount comes from the staff memo or resolution attached to the item. Scanned minutes are read with OCR.",
+      "Pay comes from budget pay plans, published salary schedules, job postings and the state's report on officials' salaries.",
+      "Records custodians, portals and policies are taken from each agency's official pages.",
+      "Summary totals and the itemized export for each campaign are downloaded from the Supervisor of Elections' campaign finance system every day. Amended and deleted lines are applied, then businesses are matched to state corporate records.",
+      "Tax rates (millage) come from state Department of Revenue and EDR files and the governments' adopted budgets. Assessments and exemptions come from the state's parcel and assessment roll files.",
+      "The state's full corporate file (about 18 GB, updated quarterly) is filtered to businesses with an address in the county. Officers, managers and registered agents are grouped into people and matched to officials and donors.",
+      "Who held each seat since 2016 is built from election results, minutes, budget books, city websites and news reports."
+     ]
+    },
+    {
+     "name": "checks",
+     "type": "string",
+     "values": [
+      "A name match is only a lead: nothing about a person is published until it is checked by hand. Street addresses are never stored or shown.",
+      "Each line carries its source and a confidence level; amounts inside a larger total are shown but counted once. Estimates are checked against official county figures.",
+      "Each term names its source. Stretches nobody could confirm are marked unconfirmed, not guessed.",
+      "Every agency-month matches the register's printed total to the cent. Payments to private individuals are counted, not listed.",
+      "Failed fetches are logged and emailed to the site admins. Every version of every file is kept.",
+      "Itemized sums are checked against the Supervisor's summary totals. Individual donors are only counted, never named, unless they run a registered business.",
+      "Matches between the map and the schedule are listed with their method.",
+      "Names are checked against each board's roster. Every split or failed vote found is included.",
+      "News is never the only source for a dollar figure.",
+      "Nothing you look up is sent to or stored by BayCounty.me.",
+      "Office names are checked against the Notice of General Election.",
+      "Only audited figures are used. When a government's latest audit is not yet filed, the previous year is used and labeled.",
+      "Only elected officials and department leaders are named. Other staff are counted, not named.",
+      "Only portals linked from an official page are listed.",
+      "Organizations are joined by EIN, then by exact name. Official-to-board matches are checked by hand before they are tagged.",
+      "Panama City records were checked against 124 of 126 meetings' minutes and Panama City Beach against 38 of 50; Bay County and Lynn Haven come from agendas only. Known changes are noted on the record.",
+      "Rates are checked against each government's adopted millage resolution where posted.",
+      "The data is FEMA's own; nothing is retyped.",
+      "Totals are added back up and compared with the printed totals. Each year links to its document.",
+      "Where a code-to-name match is inferred rather than published, it is labeled."
+     ]
+    },
+    {
+     "name": "page",
+     "type": "string",
+     "values": [
+      "/connections/business-ties",
+      "/connections/campaign-gifts",
+      "/connections/nonprofits",
+      "/elections",
+      "/governments",
+      "/meetings",
+      "/my-address",
+      "/people",
+      "/public-money/budget-compare",
+      "/public-money/contracts",
+      "/public-money/cra-spending",
+      "/public-money/fees-and-bills",
+      "/public-money/hurricane-michael",
+      "/public-money/sales-tax-projects",
+      "/public-money/tax-dollars",
+      "/public-money/tourist-tax",
+      "/public-money/votes",
+      "/records-request",
+      "/updates"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "schools",
+      "sp"
+     ]
+    }
+   ],
+   "json": "/downloads/data-sources.json",
+   "csv": "/downloads/data-sources.csv",
+   "api": "/api/v1/datasets/data-sources"
+  },
+  {
+   "id": "official-photos",
+   "title": "Official photos",
+   "description": "Official headshots of current elected officials and department leaders, one row per person: the photo on BayCounty.me (photo_url, a 320px square WebP), who published it (credit) and the government page it came from (source_url), and when it was copied. Only photos a government publishes on its own website; never campaign, news or social media photos. person_id joins officeholder-terms and entity_id joins entity-profiles. Anyone not listed has no published photo and is shown with initials.",
+   "rows": 40,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "person_id",
+     "type": "string"
+    },
+    {
+     "name": "entity_id",
+     "type": "string"
+    },
+    {
+     "name": "name",
+     "type": "string"
+    },
+    {
+     "name": "photo_url",
+     "type": "string"
+    },
+    {
+     "name": "photo_path",
+     "type": "string"
+    },
+    {
+     "name": "width",
+     "type": "number"
+    },
+    {
+     "name": "height",
+     "type": "number"
+    },
+    {
+     "name": "credit",
+     "type": "string",
+     "values": [
+      "Bay County Board of County Commissioners",
+      "Bay County Clerk of Court and Comptroller",
+      "Bay County Sheriff's Office",
+      "Bay County Supervisor of Elections",
+      "Bay District Schools",
+      "City of Callaway",
+      "City of Lynn Haven",
+      "City of Panama City",
+      "City of Parker"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://cityofparker.com/government/city-council/",
+      "https://panamacity.gov/directory.aspx",
+      "https://www.bay.k12.fl.us/page/school-board",
+      "https://www.baycoclerk.com/",
+      "https://www.baycountyfl.gov/directory.aspx",
+      "https://www.bayso.org/",
+      "https://www.bayvotesfl.gov/about/meet-the-staff/",
+      "https://www.bayvotesfl.gov/about/meet-the-supervisor/",
+      "https://www.cityofcallaway.com/70/Mayor-Commission",
+      "https://www.cityofcallaway.com/directory.aspx",
+      "https://www.cityoflynnhaven.gov/directory.aspx"
+     ]
+    },
+    {
+     "name": "image_source_url",
+     "type": "string"
+    },
+    {
+     "name": "fetched_on",
+     "type": "string",
+     "values": [
+      "2026-10-27"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/official-photos.json",
+   "csv": "/downloads/official-photos.csv",
+   "api": "/api/v1/datasets/official-photos"
+  },
+  {
+   "id": "data-completeness",
+   "title": "How complete each government's data is",
+   "description": "For each government and each portion of its records (adopted budgets, audited spending, tax rates, debt, audit findings, officials by year): the years since 2016 we expect (period, expected), how many we have on file (have), the percent loaded (pct) and a status: complete (100%), partial (50-99%) or missing (under 50%). missing lists the fiscal years not on file. For officials, have and expected are seat-years and pct is the share where the officeholder is confirmed. Votes read from minutes change every few hours and are in /api/v1/import-progress instead.",
+   "rows": 54,
+   "columns": [
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "schools",
+      "sp"
+     ]
+    },
+    {
+     "name": "government",
+     "type": "string",
+     "values": [
+      "Bay County",
+      "Bay District Schools",
+      "Callaway",
+      "Lynn Haven",
+      "Mexico Beach",
+      "Panama City",
+      "Panama City Beach",
+      "Parker",
+      "Springfield"
+     ]
+    },
+    {
+     "name": "portion_id",
+     "type": "string",
+     "values": [
+      "actuals",
+      "audits",
+      "budgets",
+      "debt",
+      "officials",
+      "tax"
+     ]
+    },
+    {
+     "name": "portion",
+     "type": "string",
+     "values": [
+      "Adopted budgets",
+      "Audit findings",
+      "Audited spending",
+      "Debt",
+      "Officials by year",
+      "Tax rates"
+     ]
+    },
+    {
+     "name": "period",
+     "type": "string",
+     "values": [
+      "2016–2026",
+      "FY2016–FY2024",
+      "FY2016–FY2025",
+      "FY2016–FY2027"
+     ]
+    },
+    {
+     "name": "have",
+     "type": "number"
+    },
+    {
+     "name": "expected",
+     "type": "number"
+    },
+    {
+     "name": "unit",
+     "type": "string",
+     "values": [
+      "seat-years",
+      "years"
+     ]
+    },
+    {
+     "name": "pct",
+     "type": "number"
+    },
+    {
+     "name": "status",
+     "type": "string",
+     "values": [
+      "complete",
+      "missing",
+      "partial"
+     ]
+    },
+    {
+     "name": "missing",
+     "type": "string",
+     "values": [
+      "FY2016–FY2018, FY2020, FY2023",
+      "FY2016–FY2019",
+      "FY2016–FY2020",
+      "FY2016–FY2020, FY2026",
+      "FY2016–FY2020, FY2026–FY2027",
+      "FY2016–FY2021",
+      "FY2016–FY2022",
+      "FY2016–FY2023",
+      "FY2016–FY2024",
+      "FY2016–FY2025",
+      "FY2020",
+      "FY2025"
+     ]
+    },
+    {
+     "name": "detail",
+     "type": "string",
+     "values": [
+      "Adopted budget total or General Fund for each fiscal year.",
+      "Audits filed with the Florida Auditor General, read for findings and the auditor's opinion.",
+      "From the state's Local Government Financial Reports, filed through FY2025.",
+      "Seat-years since 2016 where the officeholder is confirmed from a record.",
+      "The property tax rate (millage) adopted for each fiscal year.",
+      "Total debt from each year's audited financial statements."
+     ]
+    },
+    {
+     "name": "page_url",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "/data-sources#matrix"
+     ]
+    }
+   ],
+   "json": "/downloads/data-completeness.json",
+   "csv": "/downloads/data-completeness.csv",
+   "api": "/api/v1/datasets/data-completeness"
+  },
+  {
+   "id": "data-source-sites",
+   "title": "Websites our records cite",
+   "description": "Every website cited by the records behind BayCounty.me, per topic, with how many distinct documents and pages from it the data links to. Counted from the data files at each build.",
+   "rows": 308,
+   "columns": [
+    {
+     "name": "website",
+     "type": "string"
+    },
+    {
+     "name": "topic",
+     "type": "string",
+     "values": [
+      "Audits and debt",
+      "Budgets",
+      "Businesses and owners",
+      "Campaign money",
+      "Contracts and change orders",
+      "Elections",
+      "Fees and bills",
+      "Hurricane Michael",
+      "Meetings and agendas",
+      "My Address lookups",
+      "Nonprofits",
+      "Pay",
+      "Property tax",
+      "Public records contacts",
+      "Redevelopment agencies (CRAs)",
+      "Sales tax projects",
+      "Tourist tax",
+      "Votes"
+     ]
+    },
+    {
+     "name": "topic_id",
+     "type": "string",
+     "values": [
+      "address",
+      "audits",
+      "budgets",
+      "businesses",
+      "campaign",
+      "contracts",
+      "cra",
+      "elections",
+      "fees",
+      "meetings",
+      "michael",
+      "nonprofits",
+      "property-tax",
+      "records",
+      "salaries",
+      "sales-tax",
+      "tourist-tax",
+      "votes"
+     ]
+    },
+    {
+     "name": "documents_cited",
+     "type": "number"
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/data-source-sites.json",
+   "csv": "/downloads/data-source-sites.csv",
+   "api": "/api/v1/datasets/data-source-sites"
+  },
+  {
    "id": "site-menu",
    "title": "Site menu",
    "description": "Every link in the site's main menu, one row per link, in English and Spanish: the section and the question it answers, the link's place in the section, and the section's start-here page. place_id is the place the menu belongs to (fl-bay = Bay County), so a menu for another place sits beside it.",
-   "rows": 52,
+   "rows": 53,
    "columns": [
     {
      "name": "place_id",
@@ -7503,7 +8105,7 @@
    "id": "meetings",
    "title": "Upcoming meetings",
    "description": "Scheduled and expected meetings for every board.",
-   "rows": 50,
+   "rows": 53,
    "columns": [
     {
      "name": "board",
@@ -7536,6 +8138,7 @@
       "Budget Hearing",
       "CANCELLED - ELECTION DAY*** Agenda Regular Meeting",
       "CRA Board Meeting",
+      "CRA Virtual Workshop Agenda",
       "City Commission Meeting",
       "City Commission Meeting of October 27, 2026.",
       "City Council",
@@ -7572,6 +8175,7 @@
       "Callaway Arts & Conference Center - 500 Callaway Park Way Callaway FL 32404",
       "Callaway Arts & Conference Center, 500 Callaway Pkwy, Callaway, FL 32404",
       "Callaway Arts & Conference Center, 500 Callaway Pkwy, Callaway, FL 32404 (typical; confirm on agenda)",
+      "City Council Chambers, City Hall, 17007 Panama City Beach Pkwy, Panama City Beach, FL 32413",
       "City Hall Council Chambers, 17007 Panama City Beach Pkwy, Panama City Beach, FL 32413",
       "Government Center - 840 W. 11th st. Panama City FL 32401",
       "Live Stream on City website - https://www.panamacity.gov/369/Live-Stream - Panama City FL 3240",
@@ -7605,6 +8209,7 @@
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-912?html=true",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10202026-915?html=true",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10272026-902?html=true",
+      "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_11032026-916",
       "https://www.springfieldfl.net/media/10901"
      ]
     },
@@ -7650,7 +8255,8 @@
       "calendar:https://www.cityofcallaway.com/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar",
       "calendar:https://www.panamacity.gov/common/modules/iCalendar/iCalendar.aspx?catID=22&feed=calendar",
       "schedule:pattern observed in posted agendas (no published schedule found)",
-      "schedule:published schedule (mexicobeachfl.gov council-meetings page)"
+      "schedule:published schedule (mexicobeachfl.gov council-meetings page)",
+      "schedule:published schedule (pcbfl.gov/185/City-Council); Nov/Dec from the Granicus archive"
      ]
     },
     {
@@ -9021,7 +9627,7 @@
    "id": "campaign-contributions-2026",
    "title": "2026 contributions from organizations",
    "description": "Every contribution from a business, committee or party to a 2026 local candidate. Individual donors are not included, and neither is bank interest on campaign accounts.",
-   "rows": 156,
+   "rows": 155,
    "columns": [
     {
      "name": "candidate",

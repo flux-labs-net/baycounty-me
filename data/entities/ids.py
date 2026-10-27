@@ -229,16 +229,34 @@ def gov_id(*values, contains=False):
 TRAIL = {'inc', 'incorporated', 'llc', 'lc', 'llp', 'lllp', 'pllc', 'co', 'corp', 'corporation', 'company', 'pa', 'ltd', 'lp', 'fl', 'florida', 'of'}
 
 
+# The elections office cuts contributor names at 30 characters, often inside the legal suffix: "Freedom Consulting
+# Services LL", "Dermatology Solutions Group, I". These are the pieces a cut can leave behind.
+CUT_SUFFIX = {'l', 'll', 'i', 'in', 'ic', 'inco', 'incor', 'incorp', 'incorpo', 'incorpor', 'incorpora', 'incorporat', 'incorporate',
+              'cor', 'corpo', 'corpor', 'corpora', 'corporat', 'corporati', 'corporatio', 'comp', 'compa', 'compan', 'lt', 'pl', 'pll'}
+
+
 def vkey(name):
     """Matching key: lowercase, '&' -> and, no parentheticals or punctuation, a leading 'the' and trailing legal
-    suffixes ('Inc', 'LLC', 'Co', 'of Florida' ...) dropped, no spaces. 'Florida Architects' keeps 'florida'."""
-    s = (name or '').lower().replace('&', ' and ')
+    suffixes ('Inc', 'LLC', 'Co', 'of Florida' ...) dropped, no spaces. 'Florida Architects' keeps 'florida'.
+    Spacing and punctuation never matter: 'T K Vandy LLC', 'T.K. Vandy LLC' and 'TKVandy, LLC' are all 'tkvandy'.
+    A legal suffix cut short by the elections office's 30-character limit ('... Services LL') is dropped too."""
+    raw = (name or '').strip()
+    s = raw.lower().replace('&', ' and ')
     s = re.sub(r'\(.*?\)', ' ', s)
     s = re.sub(r"[’']", '', s)
-    toks = re.sub(r'[^a-z0-9 ]', ' ', s).split()
+    toks, run = [], False  # a run of single letters is one word: 'P.A.' -> 'pa', 'L.L.C.' -> 'llc', 'T K' -> 'tk'
+    for t in re.sub(r'[^a-z0-9 ]', ' ', s).split():
+        single = len(t) == 1 and t.isalpha()
+        if single and run:
+            toks[-1] += t
+        else:
+            toks.append(t)
+        run = single
     if toks and toks[0] == 'the':
         toks = toks[1:]
-    while len(toks) > 1 and toks[-1] in TRAIL:
+    if len(toks) > 1 and toks[-1] in CUT_SUFFIX and (len(raw) >= 28 and len(toks) > 2 or re.search(r',\s*ll\.?$', raw, re.I)):
+        toks = toks[:-1]
+    while len(toks) > 1 and (toks[-1] in TRAIL or toks[-1] == 'dba'):  # 'Patronis Brothers, Inc D/B/A' (the d/b/a name cut off)
         toks = toks[:-1]
     return ''.join(t for t in toks if t != 'and')
 
@@ -280,6 +298,21 @@ def vendor_id(name):
 
 def vendor(vid):
     return _vendor_tables()[2].get(vid)
+
+
+def canon_key(key):
+    """The one key for a company whose spellings were joined (name_joins.json: hand-checked, same Sunbiz filing, or
+    confirmed on review), e.g. canon_key(vkey('Emeral Coast Striping LLC')) == canon_key(vkey('Emerald Coast Striping')) once
+    an admin confirms them. Any other key is returned as it is."""
+    return joined_key(key) or key
+
+
+def joined_key(key):
+    """The group key when this key was joined with other spellings (name_joins.json), else None."""
+    if 'canon' not in _C:
+        d = _load('name_joins.json') or {'groups': []}
+        _C['canon'] = {k: g['key'] for g in d['groups'] for k in g['keys']}
+    return _C['canon'].get(key)
 
 
 # ---------- people ----------

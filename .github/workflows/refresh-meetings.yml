@@ -101,6 +101,17 @@ jobs:
         run: |
           pip install -q 'psycopg[binary]'
           python data/minutes/export_votes.py
+      - name: Export name-match decisions
+        # Look-alike business names an admin confirmed or kept apart on /admin > Name matches
+        # (data/entities/export_name_decisions.py); the rebuild below applies them. A database problem keeps the last export.
+        id: export_name_decisions
+        continue-on-error: true
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          SUPABASE_REGION: ${{ vars.SUPABASE_REGION || 'us-east-2' }}
+        run: |
+          pip install -q 'psycopg[binary]'
+          python data/entities/export_name_decisions.py
       - name: Rebuild derived datasets
         # People, vendor matches, contract votes, Sunbiz donor links and nonprofit links are built from the files
         # fetched above (data/build.py). Without this, new candidates and gifts got no profile until someone rebuilt.
@@ -120,7 +131,7 @@ jobs:
       - name: Commit if changed
         id: commit_and_push
         run: |
-          src="data/meetings data/elections/finance_2026.json data/campaign/owner_gifts.json data/agendas/agenda_items.json data/votes/minutes_votes.json"
+          src="data/meetings data/elections/finance_2026.json data/campaign/owner_gifts.json data/agendas/agenda_items.json data/votes/minutes_votes.json data/entities/name_decisions.json"
           # git status --porcelain also lists new, untracked files, which git diff --quiet ignores.
           if [ -z "$(git status --porcelain -- data site/public)" ]; then echo "No changes"; exit 0; fi
           .github/scripts/push_refresh.sh "Daily refresh: meetings, agenda items, votes from minutes and campaign finance ($(date -u +%Y-%m-%d))" $src
