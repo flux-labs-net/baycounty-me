@@ -136,6 +136,22 @@ struct BeachesView: View {
         .refreshable { for i in Outdoors.beachDatasets { await store.load(i, force: true) } }
     }
 
+    private static func periodDetail(_ r: Row) -> String {
+        if let w = r.string("weather") {
+            var parts: [String] = [w]
+            if let winds = r.string("winds") { parts.append(winds) }
+            return parts.joined(separator: ", ")
+        }
+        return (r.string("summary") ?? "").replacingOccurrences(of: "*", with: "")
+    }
+
+    private static func latestLine(_ s: Row) -> String {
+        var parts: [String] = ["Latest " + (s.string("latest_date") ?? "none")]
+        if let e = s.number("latest_enterococcus") { parts.append("\(Int(e)) per 100 mL") }
+        if s.bool("latest_advisory") == true { parts.append("health advisory") }
+        return parts.joined(separator: " · ")
+    }
+
     private var todaySection: some View {
         let fc = Outdoors.forecast(conditions)
         let now = fc.first
@@ -181,8 +197,7 @@ struct BeachesView: View {
                             HStack(alignment: .top) {
                                 VStack(alignment: .leading, spacing: 3) {
                                     Text(r.string("period") ?? "").font(.subheadline.weight(.semibold))
-                                    Text(r.string("weather").map { w in [w, r.string("winds")].compactMap { $0 }.joined(separator: ", ") }
-                                         ?? (r.string("summary") ?? "").replacingOccurrences(of: "*", with: ""))
+                                    Text(Self.periodDetail(r))
                                         .font(.caption).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true)
                                 }
                                 Spacer(minLength: 8)
@@ -238,8 +253,7 @@ struct BeachesView: View {
                         HStack(alignment: .top) {
                             VStack(alignment: .leading, spacing: 3) {
                                 Text(s.string("name") ?? "").font(.subheadline.weight(.semibold))
-                                Text(["Latest \(s.string("latest_date") ?? "none")", s.number("latest_enterococcus").map { "\(Int($0)) per 100 mL" },
-                                      s.bool("latest_advisory") == true ? "health advisory" : nil].compactMap { $0 }.joined(separator: " · "))
+                                Text(Self.latestLine(s))
                                     .font(.caption).foregroundStyle(.secondary)
                                 Text("\(Int(s.number("good") ?? 0)) good, \(Int(s.number("moderate") ?? 0)) moderate, \(Int(s.number("poor") ?? 0)) poor since \(s.string("first_date") ?? "")")
                                     .font(.caption2).foregroundStyle(.secondary)
@@ -259,9 +273,9 @@ struct BeachesView: View {
     private var accessSection: some View {
         let list = Outdoors.accesses(access, filter: filter, query: query)
         let shown = showAll || !query.isEmpty ? list : Array(list.prefix(12))
-        var pts: [MapPoint] = access.compactMap { point($0, id: "a" + $0.id, title: $0.string("name") ?? "Beach access", color: Brand.blue) }
-        pts += Outdoors.waterSites(sites).compactMap { point($0, id: "w" + $0.id, title: $0.string("name") ?? "", color: ratingColor($0.string("latest_rating"))) }
-        pts += parking.compactMap { point($0, id: "p" + $0.id, title: "County beach parking", color: .gray) }
+        var pts: [MapPoint] = access.compactMap { point($0, id: "a\($0.id)", title: $0.string("name") ?? "Beach access", color: Brand.blue) }
+        pts += Outdoors.waterSites(sites).compactMap { point($0, id: "w\($0.id)", title: $0.string("name") ?? "", color: ratingColor($0.string("latest_rating"))) }
+        pts += parking.compactMap { point($0, id: "p\($0.id)", title: "County beach parking", color: .gray) }
         return PageSection(title: "Beach access and parking", symbol: "beach.umbrella", tone: .teal,
                            caption: "\(access.count) public accesses. Blue: access. Green to red: water sample site. Gray: county beach parking.") {
             VStack(alignment: .leading, spacing: 12) {
@@ -326,9 +340,7 @@ struct ParksView: View {
                 }
             } else {
                 kpis
-                PointsMap(points: parks.compactMap { point($0, id: "k" + $0.id, title: $0.string("name") ?? "", color: Brand.good) }
-                          + ramps.compactMap { point($0, id: "r" + $0.id, title: $0.string("name") ?? "", color: Brand.blue) }
-                          + trails.compactMap { point($0, id: "t" + $0.id, title: $0.string("name") ?? "", color: Brand.amber) }) { p in
+                PointsMap(points: mapPoints) { p in
                     if let r = p.row, let u = Outdoors.directions(r) { store.open(u) }
                 }
                 parksSection
@@ -347,6 +359,21 @@ struct ParksView: View {
         .navigationBarTitleDisplayMode(.inline)
         .task { await store.load(Outdoors.parkDatasets) }
         .refreshable { for i in Outdoors.parkDatasets { await store.load(i, force: true) } }
+    }
+
+    private var mapPoints: [MapPoint] {
+        var pts: [MapPoint] = parks.compactMap { point($0, id: "k\($0.id)", title: $0.string("name") ?? "", color: Brand.good) }
+        pts += ramps.compactMap { point($0, id: "r\($0.id)", title: $0.string("name") ?? "", color: Brand.blue) }
+        pts += trails.compactMap { point($0, id: "t\($0.id)", title: $0.string("name") ?? "", color: Brand.amber) }
+        return pts
+    }
+
+    private static func parkLine(_ p: Row) -> String {
+        var parts: [String] = []
+        if let a = p.string("address") { parts.append(a) }
+        if let r = p.string("run_by") { parts.append("Run by " + r) }
+        if let ac = p.number("acres") { parts.append(Format.number(ac) + " acres") }
+        return parts.joined(separator: " · ")
     }
 
     private var kpis: some View {
@@ -382,8 +409,7 @@ struct ParksView: View {
                             HStack(alignment: .top) {
                                 VStack(alignment: .leading, spacing: 4) {
                                     Text(p.string("name") ?? "").font(.subheadline.weight(.semibold)).foregroundStyle(.primary)
-                                    Text([p.string("address"), p.string("run_by").map { "Run by \($0)" }, p.number("acres").map { "\(Format.number($0)) acres" }]
-                                        .compactMap { $0 }.joined(separator: " · "))
+                                    Text(Self.parkLine(p))
                                         .font(.caption).foregroundStyle(.secondary).multilineTextAlignment(.leading)
                                     let tags = Outdoors.parkTags(p)
                                     if !tags.isEmpty { TagFlow(tags: tags) }
