@@ -192,7 +192,7 @@ def person_page(pid):
     return f'''<div class="page tax">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow"><a href="/people">People</a>{" · " + eyebrow if eyebrow else ""}</span><h1>{e(x["name"])}</h1>
     {f'<p class="lede">{e(x["subtitle"])}</p>' if x.get("subtitle") else ''}</div>
-    <div class="stamp">{f'<dl class="ui-facts">{facts_h}</dl>' if facts_h else ''}<a class="pill" href="/alerts">Get alerts</a><a class="pill" href="/people#co">County officers and pay</a></div></header>
+    <div class="stamp">{f'<dl class="ui-facts">{facts_h}</dl>' if facts_h else ''}<a class="pill" href="/alerts">Get alerts</a><a class="pill" href="/people#co">Officers and pay</a></div></header>
   {f'<div class="kpis">{kp}</div>' if kp else ''}
   {profile_section(eid, 'Connections', 'Companies, groups and governments linked to ' + x['name'] + ' in the records')}
   {secs}

@@ -603,6 +603,11 @@ select:not([multiple]):not([size])::-ms-expand{display:none}
   table.stk td,table.stk tbody th,table.stk tfoot th{padding:5px 0 !important;overflow-wrap:break-word}
   table.stk td::before,table.stk tbody th::before,table.stk tfoot th::before{position:static;display:block;width:auto;margin-bottom:1px;font-weight:500}
   table.stk tr{padding:12px 14px}
+  /* short values sit two to a line so a card is not one long column (site_helpers.js marks the wide cells) */
+  table.stk.stk-g tbody tr:not(.stk-span),table.stk.stk-g tfoot tr:not(.stk-span){display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-flow:row dense;column-gap:16px;row-gap:4px}
+  table.stk.stk-g tr > :first-child,table.stk.stk-g tr > .stk-w{grid-column:1/-1}
+  table.stk.stk-g tbody tr > th[scope=row]:first-child::before{content:none}
+  table.stk.stk-g tbody tr > th[scope=row]:first-child{font-size:.95rem}
 }
 /* the header's Ask button turns into an icon on narrow phones */
 @media (max-width:520px){
@@ -1045,3 +1050,66 @@ ul.ui-votes{display:flex;flex-direction:column;gap:8px;margin:0;padding:0;list-s
 @media (max-width:640px){:root .ui-badge.ui-badge-ph,:root .tx-top.ui-hero .ui-badge.ui-badge-ph{width:64px;height:64px;border-radius:50%;margin-top:0}}
 .ui-photo-cr{margin:6px 0 0;font-size:12px;color:var(--muted)}
 .ui-photo-cr a{color:inherit}
+
+/* person profiles (/people/<id>): the name beside the photo, the buttons on the right, the facts in one strip */
+:root .tx-top.ui-pf{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:18px 28px;padding:6px 0 4px}
+.ui-pf .ui-id{align-items:center;gap:22px;flex:none}
+:root .tx-top.ui-pf .ui-badge{margin-top:0;width:80px;height:80px;border-radius:22px;font-size:34px}
+:root .tx-top.ui-pf .ui-badge.ui-badge-av{width:96px;height:96px;border-radius:50%;font-size:34px}
+:root .tx-top.ui-pf .ui-badge.ui-badge-ph{width:112px;height:112px;margin-top:0}
+:root .ui-pf h1{margin:2px 0 4px}
+.ui-pf .ui-hd > .ui-photo-cr{margin-top:6px}
+.ui-pf-act{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end}
+.ui-pf-act .ui-btn{justify-content:center}
+.ui-pf-facts{grid-column:1/-1;display:flex;align-items:flex-end;gap:12px;min-width:0;border-radius:20px;background:var(--surface);box-shadow:var(--ui-shadow);overflow:hidden}
+:root .ui-pf-facts .ui-facts{flex:1;min-width:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;margin:0;align-self:stretch;background:var(--line)}
+:root .ui-pf-facts .ui-facts > div{padding:14px 18px;border:0;background:var(--surface)}
+.ui-pf-facts .ui-facts dd{font-size:.95rem}
+.ui-pf-facts .ui-facts ul{gap:8px}
+.ui-pf-facts .ui-photo-cr{flex:none;margin:0;padding:0 18px 14px 6px}
+/* a company page's government picker: the first cell of the strip */
+:root .ui-pick.ui-pf-scope{flex:0 0 260px;align-self:stretch;justify-content:center;padding:14px 18px;border-radius:0;background:none;box-shadow:none;border-right:1px solid var(--line)}
+/* section tiles on a person's page: a wrapping row of chips (the stat cards below carry the numbers) */
+.ui.ui-pfp > .ui-tiles{display:flex;flex-wrap:wrap;gap:10px}
+.ui.ui-pfp > .ui-tiles a{padding:6px 16px 6px 6px;gap:10px;border-radius:999px}
+.ui.ui-pfp > .ui-tiles .ui-ti{width:32px;height:32px;font-size:16px;border-radius:50%}
+.ui.ui-pfp > .ui-tiles b{font-size:.9rem;-webkit-line-clamp:1}
+.ui.ui-pfp > .ui-tiles small{display:none}
+@media (max-width:860px){
+  :root .tx-top.ui-pf{grid-template-columns:minmax(0,1fr)}
+  .ui-pf-act{justify-content:flex-start}
+}
+@media (max-width:640px){
+  :root .tx-top.ui-pf{gap:14px}
+  :root .ui-pf .ui-id{flex-direction:row;align-items:flex-start;gap:14px}
+  :root .tx-top.ui-pf .ui-badge{width:56px;height:56px;font-size:24px;border-radius:16px}
+  :root .tx-top.ui-pf .ui-badge.ui-badge-av{width:64px;height:64px;font-size:24px;border-radius:50%}
+  :root .tx-top.ui-pf .ui-badge.ui-badge-ph{width:76px;height:76px}
+  :root .ui-pf h1{font-size:clamp(1.55rem,7vw,2rem);margin:0 0 2px;line-height:1.1}
+  :root .ui-pf .eyebrow.ui-kick{min-height:0;font-size:.78rem}
+  .ui-pf .lede{font-size:.92rem;line-height:1.4}
+  .ui-pf-act{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .ui-pf-act .ui-btn{min-height:44px;padding:0 10px;font-size:.86rem}
+  .ui-pf-act .ui-btn:only-child{grid-column:1/-1}
+  .ui-pf-facts{flex-direction:column;align-items:stretch;gap:0}
+  :root .ui-pf-facts .ui-facts{grid-template-columns:repeat(2,minmax(0,1fr))}
+  :root .ui-pf-facts .ui-facts > div{padding:12px 14px}
+  .ui-pf-facts .ui-facts > div:last-child:nth-child(odd){grid-column:1/-1}
+  .ui-pf-facts .ui-facts dd{font-size:.9rem}
+  .ui-pf-facts .ui-photo-cr{padding:8px 14px 10px;border-top:1px solid var(--line);font-size:11px}
+  :root .ui-pick.ui-pf-scope{flex:none;padding:12px 14px;border-right:0;border-bottom:1px solid var(--line)}
+  .ui.ui-pfp > .ui-tiles{gap:8px}
+  .ui.ui-pfp > .ui-tiles a{padding:5px 14px 5px 5px;gap:8px}
+  .ui.ui-pfp > .ui-tiles .ui-ti{width:30px;height:30px;font-size:15px}
+  .ui.ui-pfp > .ui-tiles b{font-size:.84rem}
+  /* stat cards become one card with a row each */
+  :root .ui.ui-pfp .kpis{display:flex;flex-direction:column;gap:0;border-radius:20px;background:var(--surface);box-shadow:var(--ui-shadow);overflow:hidden}
+  :root .ui.ui-pfp .kpis .kpi.ui-k{display:grid;grid-template-columns:auto minmax(0,1fr) auto;grid-template-areas:"ic lb v" "ic s v";align-items:center;column-gap:12px;row-gap:0;padding:12px 14px;border-radius:0;box-shadow:none;background:none}
+  :root .ui.ui-pfp .kpis .kpi.ui-k + .kpi.ui-k{border-top:1px solid var(--line)}
+  .ui.ui-pfp .ui-k .kh{display:contents}
+  .ui.ui-pfp .ui-k .kh .ui-ti{grid-area:ic;width:34px;height:34px;font-size:17px;border-radius:10px}
+  :root .ui.ui-pfp .ui-k .kh .eyebrow{grid-area:lb;font-size:.86rem;color:var(--ink);font-weight:500;line-height:1.3}
+  .ui.ui-pfp .ui-k .v{grid-area:v;font-size:1.2rem;text-align:right}
+  .ui.ui-pfp .ui-k .s{grid-area:s;font-size:.76rem;line-height:1.35;color:var(--muted)}
+}
+@media print{.ui-pf-act{display:none}}
