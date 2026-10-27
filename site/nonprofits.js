@@ -9,8 +9,8 @@
   const usd = n => n == null || n === '' ? '—' : '$' + Number(n).toLocaleString('en-US', {maximumFractionDigits: 0});
   const big = n => { n = Number(n || 0); return n >= 1e6 ? '$' + (n / 1e6).toFixed(1).replace(/\.0$/, '') + 'M' : n >= 1e3 ? '$' + Math.round(n / 1e3) + 'K' : '$' + Math.round(n); };
   const num = n => Number(n || 0).toLocaleString('en-US');
-  const title = s => String(s || '').toLowerCase().replace(/(^|[^a-z'’])([a-z])/g, (m, a, b) => a + b.toUpperCase()).replace(/\b(Llc|Inc|Pa|Usa|Us|Ymca|Ywca|Vfw|Pta|Pto|Cra|Cdc|Ii|Iii)\b/g, m => m.toUpperCase());
-  const pname = s => String(s || '').replace(/\b([A-Z])([A-Z']+)\b/g, (m, a, b) => a + b.toLowerCase());
+  const title = s => window.BCNames ? BCNames.bizCase(String(s || '')) : String(s || '');  // api/_names.js, in site.js
+  const pname = s => window.BCNames ? BCNames.personCase(String(s || '')) : String(s || '');
   const plural = (n, w, ws) => `${num(n)} ${n === 1 ? w : (ws || w + 's')}`;
   const years = r => r.first_year && r.last_year && r.first_year !== r.last_year ? `${r.first_year}–${r.last_year}` : (r.last_year || '');
   const active = s => /^(active|registered)\b/i.test(s || '');  // FDACS: small charities are Active, larger ones Registered

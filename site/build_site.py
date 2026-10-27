@@ -177,6 +177,8 @@ MENU_JS = '''(() => {
 
 # Shared helpers (window.BCM): URL state for data-param controls (?gov= etc.) and announce. Tables use tables.js.
 DEEPLINK_JS = open(os.path.join(ROOT, 'site_helpers.js')).read() + open(os.path.join(ROOT, 'ui.js')).read()
+# name casing shared with the API (api/_names.js): window.BCNames and BC.bizCase / BC.personCase / BC.nameCase
+NAMES_JS = open(os.path.join(ROOT, '..', 'api', '_names.js')).read() + '\nwindow.BC = Object.assign(window.BC || {}, window.BCNames);\n'
 SEARCH_JS = open(os.path.join(ROOT, 'search.js')).read()  # header search dialog + the engine the /search page uses
 
 
@@ -763,7 +765,7 @@ def main():
     from glossary import TERMS
     gl = {t['id']: {'term': t['term'], 'simple': t['simple']} for t in TERMS}
     from city_filter import js_table as _city_js
-    open(os.path.join(OUT, 'assets', 'site.js'), 'w').write(_city_js() + MENU_JS + SEARCH_JS + DEEPLINK_JS + LINKIFY_JS + entity_js() + DATES_JS + TERM_JS.replace('__GLOSSARY_ES__', json.dumps(glossary_es_terms(), ensure_ascii=False)).replace('__GLOSSARY__', json.dumps(gl, ensure_ascii=False)))
+    open(os.path.join(OUT, 'assets', 'site.js'), 'w').write(_city_js() + NAMES_JS + MENU_JS + SEARCH_JS + DEEPLINK_JS + LINKIFY_JS + entity_js() + DATES_JS + TERM_JS.replace('__GLOSSARY_ES__', json.dumps(glossary_es_terms(), ensure_ascii=False)).replace('__GLOSSARY__', json.dumps(gl, ensure_ascii=False)))
     shutil.copy(os.path.join(ROOT, '..', 'assets', 'logo_small.webp'), os.path.join(OUT, 'assets', 'flux-labs.webp'))
     shutil.copy(os.path.join(ROOT, 'favicon.svg'), os.path.join(OUT, 'favicon.svg'))
     shutil.copytree(os.path.join(ROOT, 'photos'), os.path.join(OUT, 'photos'), dirs_exist_ok=True)  # official photos (data/civic/scripts/official_photos.py)
