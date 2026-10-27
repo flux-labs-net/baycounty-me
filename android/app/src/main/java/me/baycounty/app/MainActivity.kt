@@ -127,6 +127,8 @@ fun RouteScreen(route: Route) {
         Route.CRA -> CRAScreen()
         Route.CRAIncrement -> CRAIncrementScreen()
         Route.Chambers -> ChambersScreen()
+        Route.Beaches -> BeachesScreen()
+        Route.Parks -> ParksScreen()
         is Route.BudgetCompare -> BudgetCompareScreen(route.govID)
         is Route.TaxCalculator -> TaxCalculatorScreen(route)
         is Route.GovBudget -> GovBudgetScreen(route.id)
@@ -151,7 +153,7 @@ suspend fun openScreenshotRoute(store: AppStore, nav: Nav, arg: String) {
         "person" to Route.Person("clair-pease"), "explore" to Route.Explore, "votes" to Route.Dataset("votes"),
         "salaries" to Route.Dataset("salary-positions"), "accountability" to Route.Accountability,
         "accproject" to Route.AccountabilityProject("pcb-fbr-seg3"), "budget" to Route.BudgetCompare("lh"),
-        "craincrement" to Route.CRAIncrement, "chambers" to Route.Chambers, "pastelections" to Route.Dataset("campaign-history"),
+        "craincrement" to Route.CRAIncrement, "chambers" to Route.Chambers, "beaches" to Route.Beaches, "parks" to Route.Parks, "pastelections" to Route.Dataset("campaign-history"),
     )
     simple[arg]?.let { nav.replace(it); return }
     when {

@@ -390,6 +390,116 @@ def chamber_events():
     return _chamber_rows()[2]
 
 
+# --- Beaches, beach water quality, parks (/beaches, /parks) ------------------------------------------------------------
+
+FLAG_COLORS = [  # the International Life Saving Federation flags Bay County's beach patrols fly
+    ('Double red', 'Water closed to the public', 'Swimming and wading are against the law while double red flags fly (fines apply in Panama City Beach and unincorporated Bay County).'),
+    ('Red', 'High hazard', 'High surf and/or strong currents. Experienced swimmers only, and only close to shore.'),
+    ('Yellow', 'Medium hazard', 'Moderate surf and/or currents. Use caution.'),
+    ('Green', 'Low hazard', 'Calm conditions. Rip currents can still form near piers, jetties and sandbars.'),
+    ('Purple', 'Dangerous marine life', 'Jellyfish, stingrays or other marine life seen. Flies with another flag.'),
+]
+
+
+def _outdoor_files():
+    """data/outdoors/<county>/places.json, water_quality.json and conditions.json (data/outdoors/fetch_outdoors.py)."""
+    import json
+    from place import PLACE
+    d = os.path.join(HERE, '..', 'data', 'outdoors', PLACE['id'].split('-', 1)[-1])
+    load = lambda n: json.load(open(os.path.join(d, n))) if os.path.exists(os.path.join(d, n)) else {}
+    return PLACE['id'], load('places.json'), load('water_quality.json'), load('conditions.json')
+
+
+def beach_access():
+    place, P, _, _ = _outdoor_files()
+    gov = {'Panama City Beach': 'Panama City Beach', 'Mexico Beach': 'Mexico Beach'}
+    return [{'place_id': place, **r, 'run_by': gov.get(r['area'], 'Bay County')} for r in P.get('beach_access', [])]
+
+
+def beach_parking():
+    place, P, _, _ = _outdoor_files()
+    return [{'place_id': place, **r} for r in P.get('beach_parking', [])]
+
+
+def beach_water_samples():
+    place, _, W, _ = _outdoor_files()
+    return [{'place_id': place, **r} for r in W.get('samples', []) if r['date'] >= cutoff.FIRST_DATE]
+
+
+def beach_water_sites():
+    """One row per Healthy Beaches sampling site, with its latest result and how its samples have rated."""
+    place, _, W, _ = _outdoor_files()
+    S = beach_water_samples()
+    out = []
+    for s in W.get('sites', []):
+        mine = sorted((r for r in S if r['site_id'] == s['site_id']), key=lambda r: r['date'])
+        rated = [r for r in mine if r.get('rating') in ('Good', 'Moderate', 'Poor')]
+        last = rated[-1] if rated else None
+        out.append({'place_id': place, 'site_id': s['site_id'], 'name': s['name'], 'active': s['active'], 'epa_beach_id': s['epa_beach_id'],
+                    'latitude': s['latitude'], 'longitude': s['longitude'],
+                    'latest_date': last['date'] if last else None, 'latest_enterococcus': last['enterococcus'] if last else None,
+                    'latest_rating': last['rating'] if last else None, 'latest_advisory': last['advisory'] if last else None,
+                    'samples': len(rated), 'first_date': rated[0]['date'] if rated else None,
+                    'good': sum(1 for r in rated if r['rating'] == 'Good'), 'moderate': sum(1 for r in rated if r['rating'] == 'Moderate'),
+                    'poor': sum(1 for r in rated if r['rating'] == 'Poor'), 'advisories': sum(1 for r in rated if r['advisory']),
+                    'source_url': s['source_url']})
+    return out
+
+
+def beach_conditions():
+    """The latest surf zone forecast (kind forecast, one row per period), active beach alerts (kind alert), the flag color
+    reported each day (kind flag) and what each flag means (kind legend)."""
+    place, _, _, C = _outdoor_files()
+    base = {'place_id': place, 'zone': C.get('zone'), 'issued': None, 'period': None, 'flag_color': None, 'meaning': None, 'rip_current_risk': None,
+            'surf_height': None, 'uv_index': None, 'water_temperature': None, 'weather': None, 'high_temperature': None, 'winds': None,
+            'sunrise': None, 'sunset': None, 'summary': None, 'date': None, 'ends': None, 'sort_order': None, 'source_url': None}
+    rows = []
+    for i, p in enumerate(C.get('periods', [])):
+        rows.append({**base, **p, 'kind': 'forecast', 'issued': C.get('issued'), 'flag_color': C.get('flag') if i == 0 else None,
+                     'summary': p.get('summary') or (C.get('outlook') if i == 0 else None), 'sort_order': i + 1, 'source_url': C.get('product_url')})
+    for a in C.get('alerts', []):
+        rows.append({**base, 'kind': 'alert', 'issued': C.get('issued'), 'period': a['event'], 'summary': a.get('headline'), 'date': a.get('starts'),
+                     'ends': a.get('ends'), 'source_url': a.get('url')})
+    for h in C.get('flag_history', []):
+        if h['date'] >= cutoff.FIRST_DATE:
+            rows.append({**base, 'kind': 'flag', 'issued': h['issued'], 'date': h['date'], 'flag_color': h['flag'], 'source_url': h['source_url']})
+    for i, (color, meaning, about) in enumerate(FLAG_COLORS):
+        rows.append({**base, 'kind': 'legend', 'flag_color': color, 'meaning': meaning, 'summary': about, 'sort_order': i + 1,
+                     'source_url': 'https://www.pcbfl.gov/174/Beach-Flags'})
+    for r in rows:
+        r['kind'] = r.pop('kind')
+    return rows
+
+
+def parks():
+    place, P, _, _ = _outdoor_files()
+    return [{'place_id': place, **r} for r in P.get('parks', [])]
+
+
+def boat_ramps():
+    place, P, _, _ = _outdoor_files()
+    return [{'place_id': place, **r} for r in P.get('boat_ramps', [])]
+
+
+def trails():
+    place, P, _, _ = _outdoor_files()
+    return [{'place_id': place, **r} for r in P.get('trails', [])]
+
+
+def recreation_departments():
+    """data/outdoors/<county>/recreation.json: each government's parks and recreation pages (hand-checked)."""
+    import json
+    from place import PLACE, governments
+    fp = os.path.join(HERE, '..', 'data', 'outdoors', PLACE['id'].split('-', 1)[-1], 'recreation.json')
+    if not os.path.exists(fp):
+        return []
+    R = json.load(open(fp))
+    short = {g['key']: g['short'] for g in governments()}
+    return [{'place_id': PLACE['id'], 'gov_id': d['gov_id'], 'name': d['name'], 'run_by': d.get('run_by') or short.get(d['gov_id']),
+             'parks_url': d['parks_url'], 'programs_url': d.get('programs_url'), 'programs_label': d.get('programs_label'),
+             'as_of': R.get('as_of'), 'source_url': d['parks_url']} for d in R['departments']]
+
+
 def tax_districts():
     """Which taxing authorities levy in each tax district (My Address, tax calculator); rates are in property-tax-rates."""
     from addr_page import address_data
@@ -922,5 +1032,14 @@ DATASETS = [
     ('chambers', 'Chambers of commerce', "One row per chamber of commerce: what it is and who it serves, its board meetings, its latest IRS Form 990 (revenue, expenses, assets, employees), public money paid to it by local governments and tourism agencies (from nonprofit-payments), its foundation, and links to its member directory, events and join page. entity_id is its profile (entity-profiles). Chambers are private, member-owned nonprofits, not government agencies.", chambers),
     ('chamber-leaders', 'Chambers of commerce: boards and staff', "Each chamber's board (executive committee, directors, ex officio and honorary members), staff and past chairs since 2016, as listed on the chamber's own website on as_of: name, title and the organization each board member represents. No phone numbers, emails or addresses. person_entity_id and organization_entity_id link to profiles; person_match and organization_match say how each link was made (blank = no match, shown as plain text).", chamber_leaders),
     ('chamber-events', 'Chambers of commerce: events and programs', "Upcoming events from each chamber's public calendar (kind event: title, start and end in local time, venue and city, category, the event's own link) and each chamber's yearly and monthly signature programs (kind program: schedule and what it is). chamber_event is false for community events a chamber lists on its calendar. Refreshed daily where the calendar has a public feed.", chamber_events),
+    ('beach-access', 'Beach access points', "Every public beach access on the Gulf in the county from the county's GIS: name and number, street address, area (Panama City Beach, Mexico Beach or unincorporated), map point, whether cars can drive on, and whether it is wheelchair accessible (from Panama City Beach's GIS). Parking, restrooms, showers, lifeguards and boardwalks come from the Florida DEP coastal access survey where its site is within about 200 feet (state_site_id); blank means not surveyed.", beach_access),
+    ('beach-parking', 'Beach parking lots', "County-run beach parking lots: number of spaces, type of parking, map point and the nearest beach access.", beach_parking),
+    ('beach-water-sites', 'Beach water quality: sampling sites', "Each Florida Healthy Beaches Program sampling site in the county (Florida Department of Health), with its latest rated sample, the number of Good, Moderate and Poor samples since first_date, and how many came with a health advisory. Ratings: Good 0-35, Moderate 35.5-70, Poor 70.5 or more enterococci per 100 mL of water.", beach_water_sites),
+    ('beach-water-samples', 'Beach water quality: samples', "Every published Healthy Beaches sample at each site: date, enterococcus count per 100 mL, the state's rating and whether a health advisory was issued. The state's lookup shows the latest 50 samples per site; samples are kept here as they come in, so history grows from 2026 on.", beach_water_samples),
+    ('beach-conditions', 'Beach conditions and flags', "From the National Weather Service Tallahassee surf zone forecast for the county's coast: kind forecast is one row per forecast period (rip current risk, surf height, UV index, water temperature, weather, winds, sunrise and sunset), the first carrying the beach flag color the beach officials reported to the weather service; kind alert is an active beach or coastal alert; kind flag is the flag color reported each day since we began recording; kind legend is what each flag color means. Refreshed daily.", beach_conditions),
+    ('parks', 'Parks', "Every public park in the county from the county's parks inventory (all governments): who runs it, acres, its main use, and yes/no for restrooms, pavilions, picnic tables, playgrounds, sports fields and courts, trails, beach access, boat ramps and docks and fishing piers. facilities and photo_url come from the county's park guide where it lists the park.", parks),
+    ('boat-ramps', 'Boat ramps and launches', "Public boat ramps and small-craft launches: park, who runs it, fresh or salt water, waterbody, ramp surface, restroom, dock and fishing pier, and map point.", boat_ramps),
+    ('recreation-departments', 'Parks and recreation departments', "Each local government's parks and recreation pages (and the state parks and forest in the county), for program and league sign-ups and facility rentals, checked by hand on as_of.", recreation_departments),
+    ('trails', 'Trails', "Named trails from the county's and Panama City Beach's trail maps, with segments added up: miles, surface, allowed uses, skill level and a map point at one end.", trails),
     ('tax-districts', 'Tax districts', 'Which taxing authorities levy property tax in each tax district, and the combined millage. Rates by year are in property-tax-rates (authority_id).', tax_districts),
 ]

@@ -9,6 +9,9 @@ from datetime import datetime, timezone
 import html
 
 CHANGES = [
+    {'date': '2026-10-27', 'title': 'Beaches and parks',
+     'text': "Two new pages under a new Outdoors menu. Beaches shows today's beach flag and rip current risk (the flag color beach officials report to the National Weather Service, refreshed when you open the page), the next few days' surf forecast, what each flag means, the state health department's water quality samples at all 15 active sampling sites (each sample since late 2022, rated good, moderate or poor), and all 152 public beach accesses and the county's beach parking lots on a map, with wheelchair and drive-on access. Parks lists 107 public parks with their playgrounds, restrooms, fields, courts, piers and trails, 45 boat ramps and launches, 36 named trails, a map with directions, and each government's page for leagues, programs and rentals. The apps have the same screens.",
+     'pages': ['/beaches', '/parks', '/open-data', '/developers']},
     {'date': '2026-10-27', 'title': 'Chambers of commerce',
      'text': "A new page covers Bay County's two chambers of commerce, the Bay County Chamber and the Panama City Beach Chamber: who sits on their boards and staff (each name links to a profile with the person's other boards and records), the organizations those board members represent and what local governments paid them, upcoming chamber and community events, regular programs such as First Friday and Friday at the Beach, each chamber's IRS filings, and the tourism agency money paid to them. Board lists are copied from the chambers' own websites; no contact details are published. The apps have the same screen.",
      'pages': ['/chambers', '/connections/nonprofits', '/people', '/open-data', '/developers']},

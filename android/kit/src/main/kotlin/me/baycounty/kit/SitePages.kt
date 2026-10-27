@@ -35,6 +35,8 @@ object SitePages {
         "/connections/shared-owners" to Coverage.Web("confirmed shared-owner groups and gifts over the limit, read live from /api/v1/datasets/shared-owner-groups and over-limit-gifts"),
         "/connections/nonprofits" to Coverage.Dataset("nonprofits"),
         "/chambers" to Coverage.Native("Chambers of commerce"),
+        "/beaches" to Coverage.Native("Beaches"),
+        "/parks" to Coverage.Native("Parks"),
         "/connections/business-ties" to Coverage.Web("confirmed official-to-business matches, read live from /api/v1/datasets/official-businesses and official-business-links"),
         "/correspondence" to Coverage.Web("published letters to officials, read live from /api/v1/correspondence"),
         "/alerts" to Coverage.Web("email alert sign-up; push alerts are planned for the app"),
