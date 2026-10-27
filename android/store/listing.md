@@ -21,13 +21,13 @@ WHAT YOU CAN DO
 • See the next public meetings across Bay County, read the agenda items and add a meeting to your calendar.
 • Compare Bay County, Panama City, Lynn Haven, Callaway, Springfield, Parker, Mexico Beach, Panama City Beach and the school district side by side.
 • Follow the money: spending, contracts, the companies that get them, debt, audits and CRA (redevelopment) spending.
-• See how officials voted and who held each seat over the years.
-• Check campaign money for local races, totaled by candidate.
+• See who's in charge, with photos of current officials, how they voted and who held each seat since 2016.
+• Check campaign money for local races, totaled by candidate, and which donors also hold government contracts.
 • Search people, companies, contracts and votes from one box.
 
 PLAIN AND SOURCED
 
-Spent, committed and budgeted money are kept apart, so plans are never counted as payments. Totals count each dollar once. Data goes back to 2016.
+Spent, committed and budgeted money are kept apart, so plans are never counted as payments. Totals count each dollar once. Data goes back to 2016 and updates as governments publish new records, without an app update.
 
 INDEPENDENT
 
@@ -35,7 +35,7 @@ BayCounty.me is an independent public records project by Flux Labs in Panama Cit
 
 PRIVATE
 
-No account, no ads, no tracking. If you choose "Use my location", it is used on your phone once to find your address and is never sent to us.
+No account, no ads, no tracking. If you choose "Use my location", it is used on your phone once to find your address and is never sent to us. A saved home address stays on your phone.
 
 ## Category
 
@@ -51,8 +51,17 @@ Education (or News & Magazines)
 
 - App icon: `icon-512.png` (512 × 512)
 - Feature graphic: `feature-graphic.png` (1024 × 500)
-- Phone screenshots: `screenshots/` (1080 wide, at most 2:1, from the emulator run with live data). Upload in order; Play shows the first three most.
+- Phone screenshots: `screenshots/` (1080 × 1920 each, a caption over the live app). Upload in order; Play shows the first three most. The raw emulator shots they're made from are in `screenshots/raw/`.
 
-## First release notes
+## Production release notes (500 characters max)
 
-First release of BayCounty.me for Android: the same public records as baycounty.me, built for your phone.
+```
+<en-US>
+BayCounty.me for Android: Bay County, Florida public records on your phone.
+• Your tax bill and every government that taxes your address
+• Upcoming meetings and agendas, with calendar links
+• Budgets, contracts, debt, audits and CRA spending
+• Officials with photos, votes and campaign money
+• Works offline with the latest data bundled
+</en-US>
+```
