@@ -97,12 +97,15 @@ function ipLimited(req) {
 }
 
 function codeEmail(code, appName = 'BayCounty.me Finance') {
+  const ui = require('../_email_ui');
   const text = `Your ${appName} sign-in code is ${code}\n\nIt works once and expires in ${CODE_MINUTES} minutes. If you didn't ask for it, ignore this email.`;
-  const html = `<div style="font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:22px;color:#161B24">
-<p>Your ${appName} sign-in code:</p>
-<p style="font-size:30px;letter-spacing:6px;font-weight:bold;margin:12px 0;font-family:'Courier New',monospace">${code}</p>
-<p style="color:#5A6372;font-size:13px">It works once and expires in ${CODE_MINUTES} minutes. If you didn't ask for it, ignore this email.</p></div>`;
-  return {subject: `${code} is your BayCounty.me sign-in code`, text, html};
+  const subject = `${code} is your BayCounty.me sign-in code`;
+  const html = ui.layout({title: subject, preheader: `It works once and expires in ${CODE_MINUTES} minutes.`, kicker: 'Finance',
+    hero: {tone: 'teal', icon: 'lock', eyebrow: ui.esc(appName), title: 'Your sign-in code'},
+    body: ui.p('Enter this code on the sign-in page:') + ui.code(code) +
+      ui.small(`It works once and expires in ${CODE_MINUTES} minutes. If you didn’t ask for it, ignore this email.`),
+    footer: `You’re getting this because someone asked to sign in to ${ui.esc(appName)} with this address.`});
+  return {subject, text, html};
 }
 
 // Sends a code if the address belongs to a workspace member. Always answers the same way, so the form can't be used

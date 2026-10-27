@@ -17,7 +17,7 @@ module.exports = async (req, res) => {
   const email = String(b.email || '').trim().toLowerCase().slice(0, 200);
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return res.status(400).json({ok: false, error: 'Please enter a valid email address.'});
   // Two kinds of sign-up: weekly digests ({govs}) or one rule alert ({rule: {type, params}}, see _rules.js).
-  let tok, what;
+  let tok, what, govNames;
   if (b.rule) {
     const {validate, describe} = require('./_rules');
     const v = validate(b.rule.type, b.rule.params || {});
@@ -29,13 +29,14 @@ module.exports = async (req, res) => {
     const govs = [...new Set((Array.isArray(b.govs) ? b.govs : []).filter(g => GOVS[g]))];
     if (!govs.length) return res.status(400).json({ok: false, error: 'Pick at least one government to follow.'});
     tok = () => makeToken(email, govs);
-    what = 'weekly BayCounty.me updates for ' + govs.map(g => GOVS[g][0]).join(', ');
+    govNames = govs.map(g => GOVS[g][0]);
+    what = 'weekly BayCounty.me updates for ' + govNames.join(', ');
   }
   if (!(process.env.RESEND_FULL_KEY || process.env.RESEND_API_KEY) || !process.env.ALERTS_SECRET) return res.status(500).json({ok: false, error: 'Alerts aren’t set up yet. Please try again soon.'});
   // Cooldown: answer the same way whether or not an email goes out, so the form can't be used to probe addresses.
   if (!(await claimConfirmSend(email))) { recent.push(now); hits.set(ip, recent); return res.status(200).json({ok: true}); }
   const link = `${SITE}/api/confirm?t=${tok()}`;
-  const {subject, html, text} = require('./_emails').confirmEmail({what, isRule: !!b.rule, link});
+  const {subject, html, text} = require('./_emails').confirmEmail({what, isRule: !!b.rule, link, govs: govNames});
   const r = await resend('/emails', 'POST', {from: FROM, to: [email], subject, html, text}, (process.env.RESEND_FULL_KEY || process.env.RESEND_API_KEY));
   if (!r.ok) { console.error('confirm send', r.status, JSON.stringify(r.body)); return res.status(502).json({ok: false, error: 'We couldn’t send the confirmation email. Please try again.'}); }
   recent.push(now); hits.set(ip, recent);

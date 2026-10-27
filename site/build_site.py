@@ -766,6 +766,7 @@ def main():
     open(os.path.join(OUT, 'assets', 'site.js'), 'w').write(_city_js() + MENU_JS + SEARCH_JS + DEEPLINK_JS + LINKIFY_JS + entity_js() + DATES_JS + TERM_JS.replace('__GLOSSARY_ES__', json.dumps(glossary_es_terms(), ensure_ascii=False)).replace('__GLOSSARY__', json.dumps(gl, ensure_ascii=False)))
     shutil.copy(os.path.join(ROOT, '..', 'assets', 'logo_small.webp'), os.path.join(OUT, 'assets', 'flux-labs.webp'))
     shutil.copy(os.path.join(ROOT, 'favicon.svg'), os.path.join(OUT, 'favicon.svg'))
+    shutil.copytree(os.path.join(ROOT, 'email-icons'), os.path.join(OUT, 'assets', 'email'), dirs_exist_ok=True)  # icons in emails (api/_email_ui.js)
     shutil.copy(os.path.join(ROOT, 'tax.css'), os.path.join(OUT, 'assets', 'tax.css'))
     shutil.copy(os.path.join(ROOT, 'gov.js'), os.path.join(OUT, 'assets', 'gov.js'))
     shutil.copy(os.path.join(ROOT, 'completeness.js'), os.path.join(OUT, 'assets', 'completeness.js'))

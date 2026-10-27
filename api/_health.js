@@ -2,7 +2,8 @@
 // lists problems an admin should know about. Used by the daily alerts run (emails admins when there are problems)
 // and by the Ingestion tab on /admin. Files starting with _ are not routes.
 const db = require('./_db');
-const {FROM, SITE, resend} = require('./_alerts');
+const {FROM, SITE, resend, esc} = require('./_alerts');
+const ui = require('./_email_ui');
 
 const STALE_HOURS = Number(process.env.INGEST_STALE_HOURS) || 36; // the database normally syncs every morning
 const STUCK_HOURS = 2;
@@ -44,25 +45,47 @@ async function report() {
 
 const recipients = () => String(process.env.ADMIN_EMAILS || process.env.DIGEST_REVIEWER || 'hello@fluxlabs.net').split(/[\s,;]+/).filter(Boolean);
 
+const central = d => new Date(d).toLocaleString('en-US', {timeZone: 'America/Chicago', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit'}) + ' Central';
+
+// The admin email for a report with problems.
+function problemsEmail(r) {
+  const n = r.problems.length, s = n === 1 ? '' : 's';
+  const errors = r.problems.filter(p => p.level === 'error');
+  const text = `The daily BayCounty.me ingestion check found ${n} problem${s}:\n\n` +
+    r.problems.map(p => `- ${p.level === 'error' ? '' : '(warning) '}${p.text}`).join('\n') +
+    `\n\nLast successful database sync: ${r.last_sync ? new Date(r.last_sync).toLocaleString('en-US', {timeZone: 'America/Chicago'}) + ' Central' : 'never'}.\n` +
+    `\nDetails: ${SITE}/admin#ingestion\nWorkflow runs: https://github.com/jeremymcs/baycounty-me/actions\n`;
+  return ui.adminNotice({subject: `BayCounty.me ingestion check: ${n} problem${s}`, text, kicker: 'Data health',
+    tone: errors.length ? 'salmon' : 'amber', icon: 'alert', eyebrow: 'Daily ingestion check', title: `${n} problem${s} need${s ? '' : 's'} a look`,
+    preheader: (r.problems[0] || {}).text || '',
+    body: ui.list(r.problems.map(p => p.level === 'error' ? ['salmon', 'Error', esc(p.text)] : ['amber', 'Warning', esc(p.text)])) +
+      ui.facts([['Last good sync', r.last_sync ? central(r.last_sync) : 'Never'], ['Workflow runs', ui.a('https://github.com/jeremymcs/baycounty-me/actions', 'GitHub Actions')]]) +
+      ui.button(`${SITE}/admin#ingestion`, 'Open data health') + ui.small('When a fetch fails, the site keeps the previous data. Nothing is deleted.')});
+}
+
+// The admin email when the check itself couldn't run.
+function brokenEmail(message) {
+  const text = `The daily ingestion check couldn't read the database: ${message}\n\nCheck Supabase and the DATABASE_URL setting in Vercel. Details: ${SITE}/admin#ingestion\n`;
+  return ui.adminNotice({subject: 'BayCounty.me ingestion check could not run', text, kicker: 'Data health', tone: 'salmon', icon: 'alert',
+    eyebrow: 'Daily ingestion check', title: 'The check couldn’t run', preheader: 'The daily check couldn’t read the database.',
+    body: ui.p('The daily ingestion check couldn’t read the database:') + ui.quote(message) +
+      ui.p('Check Supabase and the DATABASE_URL setting in Vercel.', {size: 14, lh: 21}) + ui.button(`${SITE}/admin#ingestion`, 'Open data health')});
+}
+
 // Daily: email the admins only when something is wrong. Returns the report.
 async function checkAndNotify(key) {
   let r;
   try { r = await report(); }
   catch (e) { // the check itself couldn't run (e.g. the database is down): that's worth an email too
-    if (key) await resend('/emails', 'POST', {from: FROM, to: recipients(), subject: 'BayCounty.me ingestion check could not run',
-      text: `The daily ingestion check couldn't read the database: ${e.message}\n\nCheck Supabase and the DATABASE_URL setting in Vercel. Details: ${SITE}/admin#ingestion\n`}, key).catch(() => {});
+    if (key) await resend('/emails', 'POST', {from: FROM, to: recipients(), ...brokenEmail(e.message)}, key).catch(() => {});
     throw e;
   }
   if (r.problems.length && key) {
-    const text = `The daily BayCounty.me ingestion check found ${r.problems.length} problem${r.problems.length === 1 ? '' : 's'}:\n\n` +
-      r.problems.map(p => `- ${p.level === 'error' ? '' : '(warning) '}${p.text}`).join('\n') +
-      `\n\nLast successful database sync: ${r.last_sync ? new Date(r.last_sync).toLocaleString('en-US', {timeZone: 'America/Chicago'}) + ' Central' : 'never'}.\n` +
-      `\nDetails: ${SITE}/admin#ingestion\nWorkflow runs: https://github.com/jeremymcs/baycounty-me/actions\n`;
-    const s = await resend('/emails', 'POST', {from: FROM, to: recipients(), subject: `BayCounty.me ingestion check: ${r.problems.length} problem${r.problems.length === 1 ? '' : 's'}`, text}, key);
+    const s = await resend('/emails', 'POST', {from: FROM, to: recipients(), ...problemsEmail(r)}, key);
     if (!s.ok) console.error('health email', s.status, JSON.stringify(s.body));
     r.emailed = s.ok;
   }
   return r;
 }
 
-module.exports = {assess, report, checkAndNotify, recipients, STALE_HOURS};
+module.exports = {assess, report, checkAndNotify, recipients, problemsEmail, brokenEmail, STALE_HOURS};

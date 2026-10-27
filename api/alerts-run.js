@@ -6,12 +6,13 @@
 // With ALERTS_AUTOSEND=1, each run's emails are sent right away.
 // Auth: Authorization: Bearer <CRON_SECRET> (Vercel sends it on cron calls).
 // Each run first does the ingestion health check (_health.js) and emails ADMIN_EMAILS if it finds problems.
-const {FROM, SITE, resend, esc, emailShell, button, prefsUrl} = require('./_alerts');
+const {FROM, SITE, resend, esc, prefsUrl} = require('./_alerts');
+const ui = require('./_email_ui');
 const {match, describe} = require('./_rules');
 const db = require('./_db');
 
-const P = 'margin:0 0 10px 0;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:22px;color:#161B24';
-const H = 'margin:18px 0 8px 0;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:22px;color:#1E3A76;font-weight:bold';
+// Each kind of rule gets its own colored heading in the email.
+const LOOK = {contract: ['teal', 'dollar'], keyword: ['blue', 'search'], vote: ['amber', 'vote'], campaign: ['salmon', 'megaphone']};
 const MAX_EVENTS = 5000, MAX_PER_EMAIL = 40;
 
 // Pure: group matches per subscriber. rules: [{id, email, rule_type, params}], events: [{dataset, record_hash, government_key, record}],
@@ -36,22 +37,42 @@ function plan(rules, events, seen = new Set()) {
 }
 
 function compose(email, groups) {
-  let n = 0, inner = `<p style="${P}">Here’s what’s new on BayCounty.me that matches your alerts.</p>`, text = 'New on BayCounty.me that matches your alerts.\n';
-  for (const {rule, hits} of groups) {
+  let n = 0, body = '', text = 'New on BayCounty.me that matches your alerts.\n';
+  groups.forEach(({rule, hits}, gi) => {
     const shown = hits.slice(0, Math.max(1, MAX_PER_EMAIL - n));
     n += shown.length;
     const head = describe(rule.rule_type, rule.params);
-    inner += `<p style="${H}">${esc(head)}</p>` + shown.map(m => `<p style="${P}"><b>${m.url ? `<a href="${esc(m.url)}" style="color:#1E3A76">${esc(m.title)}</a>` : esc(m.title)}</b>${m.detail ? `<br>${esc(m.detail)}` : ''}</p>`).join('');
+    const [tone, icon] = LOOK[rule.rule_type] || ['blue', 'bell'];
+    body += (gi ? ui.spacer(18) : '') + ui.section(tone, icon, esc(head), hits.length) +
+      shown.map(m => ui.item({title: esc(m.title), url: m.url, text: m.detail ? esc(m.detail) : '', more: m.url ? 'See the record' : ''})).join('');
     text += `\n${head.toUpperCase()}\n` + shown.map(m => `- ${m.title}${m.detail ? ': ' + m.detail : ''}${m.url ? ' ' + m.url : ''}`).join('\n') + '\n';
-    if (hits.length > shown.length) { inner += `<p style="${P}">…and ${hits.length - shown.length} more.</p>`; text += `...and ${hits.length - shown.length} more.\n`; }
-  }
-  inner += `<p style="${P};font-size:13px;color:#5A6372">Each item links to its public record. A match only shows that a record mentions what you asked about, not why anything happened.</p>` + button(`${SITE}/meetings`, 'See it on BayCounty.me');
+    if (hits.length > shown.length) { body += ui.p(`…and ${hits.length - shown.length} more.`, {muted: true, mb: 0, size: 14}); text += `...and ${hits.length - shown.length} more.\n`; }
+  });
+  body += ui.spacer(16) + ui.note('Each item links to its public record. A match only shows that a record mentions what you asked about, not why anything happened.') +
+    ui.button(`${SITE}/meetings`, 'See it on BayCounty.me');
   const manage = prefsUrl(email);
-  const footer = `You’re getting this because you set up these alerts on BayCounty.me. <a href="${esc(manage)}" style="color:#5A6372">Change or stop your alerts</a>`;
+  const footer = `You’re getting this because you set up these alerts on BayCounty.me. ${ui.footLink(manage, 'Change or stop your alerts')}<br><br>${ui.ABOUT}`;
   text += `\nChange or stop your alerts: ${manage}\n`;
   const total = groups.reduce((a, g) => a + g.hits.length, 0);
-  const subject = `BayCounty.me: ${total} new match${total === 1 ? '' : 'es'} for your alerts`;
-  return {subject, html: emailShell(subject, inner, footer), text, matches: total};
+  const first = groups[0] && groups[0].hits[0];
+  const subject = `${total} new match${total === 1 ? '' : 'es'} for your BayCounty.me alerts`;
+  const today = new Date().toLocaleDateString('en-US', {month: 'short', day: 'numeric', timeZone: 'America/Chicago'});
+  const html = ui.layout({title: subject, preheader: first ? `${first.title}${total > 1 ? `, and ${total - 1} more` : ''}.` : '', kicker: `Your alerts · ${today}`,
+    hero: {tone: 'teal', icon: 'bell', eyebrow: 'New this morning', title: `${total} new match${total === 1 ? '' : 'es'} for your alerts`}, body, footer});
+  return {subject, html, text, matches: total};
+}
+
+// The reviewer's note when drafts are waiting (autosend off).
+function reviewEmail(made, events) {
+  const n = made.length, s = n > 1 ? 's' : '';
+  const text = `The daily alerts run matched ${events} new record(s) and drafted ${n} email(s) (saved in alerts.outbox, status 'draft'):\n\n${made.map(o => `- #${o.id}: ${o.matches} match(es): ${o.subject}`).join('\n')}\n\nTo send drafts: set ALERTS_AUTOSEND=1 in Vercel, then POST ${SITE}/api/alerts-run?send=drafts with the CRON_SECRET (or wait for the next run, which sends new matches directly).\nAddresses aren't listed here; see alerts.outbox in Supabase.`;
+  return ui.adminNotice({subject: `BayCounty.me: ${n} rule alert email${s} ready to review`, text, kicker: 'Review queue', tone: 'amber', icon: 'check',
+    preheader: `The morning run matched ${events} new record${events === 1 ? '' : 's'} and drafted ${n} email${s}.`,
+    eyebrow: 'Daily alerts run', title: `${n} alert email${s} ready to review`,
+    body: ui.p(`The morning run matched ${events} new record${events === 1 ? '' : 's'} and drafted ${n} email${s}. Nothing has gone to subscribers yet.`) +
+      ui.list(made.slice(0, 40).map(o => ['blue', `#${o.id}`, `${o.matches} match${o.matches === 1 ? '' : 'es'} · ${esc(o.subject)}`])) +
+      ui.p(`To send them, set <b>ALERTS_AUTOSEND=1</b> in Vercel, then POST <span style="font-family:${ui.MONO};font-size:13px">/api/alerts-run?send=drafts</span> with the CRON_SECRET, or wait for the next run.`, {size: 14, lh: 21}) +
+      ui.small('Addresses aren’t listed here. They stay in alerts.outbox in Supabase.')});
 }
 
 async function sendOne(key, o) {
@@ -104,8 +125,7 @@ module.exports = async (req, res) => {
     let sent = 0;
     if (autosend) for (const o of made) if (await sendOne(key, o)) sent++;
     if (made.length && !autosend) {
-      await resend('/emails', 'POST', {from: FROM, to: [reviewer], subject: `BayCounty.me: ${made.length} rule alert email${made.length > 1 ? 's' : ''} ready to review`,
-        text: `The daily alerts run matched ${events.length} new record(s) and drafted ${made.length} email(s) (saved in alerts.outbox, status 'draft'):\n\n${made.map(o => `- #${o.id}: ${o.matches} match(es): ${o.subject}`).join('\n')}\n\nTo send drafts: set ALERTS_AUTOSEND=1 in Vercel, then POST ${SITE}/api/alerts-run?send=drafts with the CRON_SECRET (or wait for the next run, which sends new matches directly).\nAddresses aren't listed here; see alerts.outbox in Supabase.`}, key).catch(() => {});
+      await resend('/emails', 'POST', {from: FROM, to: [reviewer], ...reviewEmail(made, events.length)}, key).catch(() => {});
     }
     return res.status(200).json({ok: true, autosend, events: events.length, rules: rules.length, emails: made.length, sent, ingest_problems: problems});
   } catch (e) {
@@ -116,3 +136,4 @@ module.exports = async (req, res) => {
 };
 module.exports.plan = plan;
 module.exports.compose = compose;
+module.exports.reviewEmail = reviewEmail;
