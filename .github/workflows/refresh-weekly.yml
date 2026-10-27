@@ -36,10 +36,14 @@ jobs:
         continue-on-error: true
         working-directory: data/surtax
         run: python fetch_gis.py < /dev/null
+      - name: Fetch disaster declarations and rebuild money by ZIP (OpenFEMA)
+        id: fetch_fema_rebuild
+        continue-on-error: true
+        run: python data/emergency/fetch_fema.py < /dev/null
       - name: Report fetch failures
-        if: steps.fetch_fema_ledger.outcome == 'failure' || steps.fetch_sales_tax_map.outcome == 'failure'
+        if: steps.fetch_fema_ledger.outcome == 'failure' || steps.fetch_sales_tax_map.outcome == 'failure' || steps.fetch_fema_rebuild.outcome == 'failure'
         run: |
-          echo "::warning title=Weekly refresh::FEMA fetch: ${{ steps.fetch_fema_ledger.outcome }}; GIS fetch: ${{ steps.fetch_sales_tax_map.outcome }}. The previous files were kept."
+          echo "::warning title=Weekly refresh::FEMA fetch: ${{ steps.fetch_fema_ledger.outcome }}; GIS fetch: ${{ steps.fetch_sales_tax_map.outcome }}; FEMA rebuild money: ${{ steps.fetch_fema_rebuild.outcome }}. The previous files were kept."
       - name: Rebuild site
         id: rebuild_site
         run: |

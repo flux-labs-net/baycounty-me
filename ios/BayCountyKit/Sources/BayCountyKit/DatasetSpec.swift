@@ -188,6 +188,14 @@ public struct DatasetSpec: Sendable {
         "owner-gifts": .init(.elections, "person.text.rectangle", title: ["donor"], subtitle: ["candidate", "businesses"], amount: ["amount"],
                              date: ["last_date"], filters: ["candidate", "office"], page: "connections/campaign-gifts"),
         // Entity profiles (every person, company, nonprofit and government, and how they connect)
+        // Emergencies and hurricane prep
+        "evacuation-zones": .init(.more, "map", title: ["zone"], subtitle: ["where_it_is"], detail: "when_ordered", page: "emergency"),
+        "emergency-shelters": .init(.more, "house.lodge", title: ["name"], subtitle: ["address", "group_name"], detail: "note", badge: "status", filters: ["shelter_type", "status", "evacuation_zone"], page: "emergency"),
+        "emergency-resources": .init(.more, "phone", title: ["name"], subtitle: ["group", "phone"], detail: "about", filters: ["group"], page: "emergency"),
+        "emergency-notices": .init(.more, "exclamationmark.triangle", title: ["title"], subtitle: ["source", "kind"], detail: "summary", date: ["issued", "first_seen"], badge: "status", filters: ["kind", "source", "status"], page: "emergency"),
+        "hurricane-prep": .init(.more, "checklist", title: ["step"], subtitle: ["topic", "source"], detail: "text", filters: ["topic"], page: "hurricane-prep"),
+        "disaster-declarations": .init(.more, "hurricane", title: ["title"], subtitle: ["kind", "incident_type"], date: ["declared"], badge: "kind", filters: ["kind", "incident_type"], page: "hurricane-prep"),
+        "rebuild-money": .init(.more, "house.and.flag", title: ["area_name", "zip"], subtitle: ["zip", "program", "event"], amount: ["amount_paid"], date: ["year"], badge: "program", filters: ["program", "event", "zip", "year"], page: "hurricane-prep"),
         "entity-profiles": .init(.more, "person.crop.circle", title: ["name"], subtitle: ["kind_label", "subtitle"],
                                  amount: ["amount_received", "amount_given"], badge: "kind_label", filters: ["kind_label"], page: "people"),
         "entity-connections": .init(.more, "point.3.connected.trianglepath.dotted", title: ["from_name"], subtitle: ["relation_label", "to_name"],

@@ -876,6 +876,88 @@ def data_source_sites():
     return site_rows()
 
 
+# --- Emergency and alerts hub (/emergency) ------------------------------------------------------------------------------
+
+def _emergency_file(name, default=None):
+    """data/emergency/<county>/<name>: zones.json and resources.json are copied by hand; shelters.json, zones_geo.json and
+    notices.json are written by data/emergency/fetch_emergency.js (daily). Live notices are /api/v1/emergency."""
+    import json
+    from place import PLACE_ID
+    f = os.path.join(HERE, '..', 'data', 'emergency', PLACE_ID.split('-', 1)[-1], name)
+    return json.load(open(f)) if os.path.exists(f) else default
+
+
+def evacuation_zones():
+    import json
+    from place import PLACE_ID
+    Z = _emergency_file('zones.json')
+    if not Z:
+        return []
+    G = {g['zone']: g for g in (_emergency_file('zones_geo.json', {}) or {}).get('zones', [])}
+    return [{'place_id': PLACE_ID, 'zone': z['zone'], 'sort_order': z['order'], 'color': z['color'], 'where_it_is': z['who'],
+             'when_ordered': z['when'], 'plain': z['plain'], 'zone_edited': (G.get(z['zone']) or {}).get('edited'),
+             'geometry': json.dumps((G.get(z['zone']) or {}).get('geometry'), separators=(',', ':')) if G.get(z['zone']) else None,
+             'map_url': Z['map_url'], 'layer_url': Z['layer_url'], 'as_of': Z['as_of'], 'source_url': Z['source_url']} for z in Z['zones']]
+
+
+def emergency_shelters():
+    from place import PLACE_ID
+    S = _emergency_file('shelters.json')
+    if not S:
+        return []
+    cols = ('shelter_id', 'name', 'address', 'shelter_type', 'group_name', 'group_about', 'note', 'status', 'status_as_of', 'lat', 'lng',
+            'evacuation_zone', 'operator', 'source_url')
+    return [{'place_id': PLACE_ID, **{k: r.get(k) for k in cols}, 'checked': S.get('checked')} for r in S['shelters']]
+
+
+def emergency_resources():
+    from place import PLACE_ID
+    R = _emergency_file('resources.json')
+    if not R:
+        return []
+    return [{'place_id': PLACE_ID, 'sort_order': i + 1, **{k: r.get(k) for k in ('resource_id', 'group', 'name', 'org', 'phone', 'url', 'about', 'gov_id')},
+             'as_of': R['as_of'], 'source_url': r.get('url')} for i, r in enumerate(R['resources'])]
+
+
+EMERGENCY_NOTICE_COLS = ('notice_id', 'place_id', 'kind', 'source', 'source_type', 'gov_id', 'title', 'summary', 'instruction', 'severity', 'event',
+                         'area', 'zones', 'issued', 'starts', 'ends', 'updated', 'status', 'full_closure', 'roadway', 'first_seen', 'last_seen',
+                         'url', 'source_url')
+
+
+def emergency_notices():
+    N = _emergency_file('notices.json')
+    if not N:
+        return []
+    return [{k: n.get(k) for k in EMERGENCY_NOTICE_COLS} for n in N['notices'] if str(n.get('issued') or n.get('first_seen') or '')[:4] >= str(cutoff.FIRST_YEAR)]
+
+
+def hurricane_prep():
+    from place import PLACE_ID
+    P = _emergency_file('prep.json')
+    if not P:
+        return []
+    return [{'place_id': PLACE_ID, 'sort_order': i + 1, 'topic': x['topic'], 'step': x['step'], 'text': x['text'], 'source': x['source'],
+             'as_of': P['as_of'], 'source_url': x['source_url']} for i, x in enumerate(P['steps'])]
+
+
+def disaster_declarations():
+    from place import PLACE_ID
+    R = _emergency_file('rebuild.json')
+    if not R:
+        return []
+    return [{'place_id': PLACE_ID, **d} for d in R['declarations'] if str(d['declared'])[:4] >= str(cutoff.FIRST_YEAR)]
+
+
+def rebuild_money():
+    from place import PLACE_ID
+    R = _emergency_file('rebuild.json')
+    if not R:
+        return []
+    cols = ('zip', 'area_name', 'program', 'disaster_number', 'event', 'year', 'count', 'count_label', 'approved', 'amount_paid', 'repair_amount',
+            'rental_amount', 'inspected_damage', 'source_url')
+    return [{'place_id': PLACE_ID, **{k: r.get(k) for k in cols}} for r in R['by_zip'] if (r.get('year') or 0) >= cutoff.FIRST_YEAR]
+
+
 DATASETS = [
     ('connections-payees', 'Connections: payees', 'Every payee in the payment records of every local government and agency (contracts, change orders, emergency purchases, check registers, tourism agency payments and the CRA ledger) as one entity, with who paid it and whether it gave to a campaign. dollars_in_records adds every record, and an award and the payments on it can both be records, so it is not a deduplicated total. Unnamed grant recipients are grouped.', connections_payees),
     ('connections-payments', 'Connections: payment records', 'One row per payment record behind the Connections network: which government or agency paid which payee, the record type, amount, date and source. CRA ledger items that are only proposed or planned are not included.', connections_payments),
@@ -922,5 +1004,12 @@ DATASETS = [
     ('chambers', 'Chambers of commerce', "One row per chamber of commerce: what it is and who it serves, its board meetings, its latest IRS Form 990 (revenue, expenses, assets, employees), public money paid to it by local governments and tourism agencies (from nonprofit-payments), its foundation, and links to its member directory, events and join page. entity_id is its profile (entity-profiles). Chambers are private, member-owned nonprofits, not government agencies.", chambers),
     ('chamber-leaders', 'Chambers of commerce: boards and staff', "Each chamber's board (executive committee, directors, ex officio and honorary members), staff and past chairs since 2016, as listed on the chamber's own website on as_of: name, title and the organization each board member represents. No phone numbers, emails or addresses. person_entity_id and organization_entity_id link to profiles; person_match and organization_match say how each link was made (blank = no match, shown as plain text).", chamber_leaders),
     ('chamber-events', 'Chambers of commerce: events and programs', "Upcoming events from each chamber's public calendar (kind event: title, start and end in local time, venue and city, category, the event's own link) and each chamber's yearly and monthly signature programs (kind program: schedule and what it is). chamber_event is false for community events a chamber lists on its calendar. Refreshed daily where the calendar has a public feed.", chamber_events),
+    ('evacuation-zones', 'Hurricane evacuation zones', "Bay County's hurricane evacuation zones A to D, in the order they are usually called: where each zone is, when it is ordered and what to do, with each zone's shape (geometry, GeoJSON in WGS84, simplified to about 300 m; the county map is the authority). Look up the zone for an address at /api/v1/evacuation-zone.", evacuation_zones),
+    ('emergency-shelters', 'Emergency shelters', "Every disaster shelter Bay County Emergency Services lists: special needs, general population, mass care support, recovery and extreme-weather shelters, with the address, the group's open or closed status as the county last posted it (status_as_of), the map point and the evacuation zone the shelter sits in. Not every shelter opens for every storm. The live status is in /api/v1/emergency.", emergency_shelters),
+    ('emergency-resources', 'Emergency phone numbers and sign-ups', "The numbers, sign-ups, maps and outage pages people need before and during an emergency, from each organization's own site: 911, the county Emergency Operations Center, AlertBay, the special needs registry, weather offices, FL511 and power outage maps.", emergency_resources),
+    ('emergency-notices', 'Emergency notices archive', "Every emergency notice BayCounty.me has recorded for the county, newest first: National Weather Service watches, warnings and advisories, boil-water notices, road closures, water and sewer outages, evacuation orders, shelter openings and storm updates from each government's alert center and news feed, and FL511 state road closures. kind is the topic, status active (live at the last check), ended or lifted. first_seen and last_seen are when BayCounty.me saw it. The live list is /api/v1/emergency.", emergency_notices),
+    ('hurricane-prep', 'Hurricane prep steps', "Plain-English steps for hurricane season, sandbags, generator safety, an approaching storm and the days after, each with the agency it comes from (Bay County, Ready.gov, CDC, National Weather Service, FEMA, the Army Corps of Engineers).", hurricane_prep),
+    ('disaster-declarations', 'Disaster declarations', "Every federal major disaster, emergency and fire management declaration that included the county since 2016, from OpenFEMA: the storm or event, the dates, and which FEMA programs were opened (individual aid to households, public aid to governments, hazard mitigation).", disaster_declarations),
+    ('rebuild-money', 'Rebuild money by ZIP code', "Money that reached each ZIP code after storms since 2016, from OpenFEMA: FEMA housing aid to owners and renters (Individuals and Households Program: households that applied, approved, dollars, of which repair and rental help, and FEMA-inspected damage for owners) and flood insurance claims paid (NFIP, building, contents and compliance payments added). One row per ZIP, program and storm. Totals only; FEMA does not publish who received aid and neither does BayCounty.me.", rebuild_money),
     ('tax-districts', 'Tax districts', 'Which taxing authorities levy property tax in each tax district, and the combined millage. Rates by year are in property-tax-rates (authority_id).', tax_districts),
 ]

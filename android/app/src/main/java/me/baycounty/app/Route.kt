@@ -34,6 +34,8 @@ sealed class Route {
     data class BudgetCompare(val govID: String? = null) : Route()
     object CRAIncrement : Route()
     object Chambers : Route()
+    object Emergency : Route()
+    object HurricanePrep : Route()
     data class GovBudget(val id: String) : Route()
 }
 

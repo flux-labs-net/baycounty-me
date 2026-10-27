@@ -22,6 +22,13 @@ targets:
       - path: BayCountyMe
     dependencies:
       - package: BayCountyKit
+    entitlements:
+      # Phone alerts (Emergencies screen). Apple's push service needs the Push Notifications capability on the
+      # me.baycounty.app identifier; automatic signing adds it. The server sends with APNS_* keys (api/_push.js).
+      path: BayCountyMe/BayCountyMe.entitlements
+      properties:
+        aps-environment: development
+        com.apple.developer.usernotifications.time-sensitive: true
     info:
       path: BayCountyMe/Info.plist
       properties:
@@ -34,6 +41,7 @@ targets:
         UISupportedInterfaceOrientations:
           - UIInterfaceOrientationPortrait
         LSApplicationQueriesSchemes: [maps, webcal]
+        UIBackgroundModes: [remote-notification]
         NSLocationWhenInUseUsageDescription: "BayCounty.me uses your location once, when you tap Use my location, to find your address on Bay County's public map. It isn't stored or shared."
         ITSAppUsesNonExemptEncryption: false
     settings:

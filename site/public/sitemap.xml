@@ -13,7 +13,7 @@
   </url>
   <url>
     <loc>https://baycounty.me/alerts</loc>
-    <lastmod>2026-10-21</lastmod>
+    <lastmod>2026-10-27</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/ask</loc>
@@ -69,6 +69,10 @@
   <url>
     <loc>https://baycounty.me/elections/past</loc>
     <lastmod>2026-10-25</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/emergency</loc>
+    <lastmod>2026-10-27</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/es</loc>
@@ -179,6 +183,10 @@
   <url>
     <loc>https://baycounty.me/governments/springfield</loc>
     <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/hurricane-prep</loc>
+    <lastmod>2026-10-27</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/meetings</loc>

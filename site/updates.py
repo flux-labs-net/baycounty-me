@@ -9,6 +9,9 @@ from datetime import datetime, timezone
 import html
 
 CHANGES = [
+    {'date': '2026-10-27', 'title': 'Emergencies, alerts and hurricane prep',
+     'text': "A new Emergencies and alerts page shows what is happening now in Bay County, checked every 5 minutes: National Weather Service watches and warnings, evacuation orders, open shelters, boil-water notices, road closures from FL511 and the cities, and storm updates from the county and city alert centers. Type an address to see its evacuation zone, whether an order covers it and the nearest shelters, and see every county shelter on a zone map. A Hurricane prep page covers a plan and a kit, sandbags, generator safety and what to do after a storm, every federal disaster declaration since 2016 and the FEMA housing aid and flood insurance money that reached each ZIP code after past storms (totals only). The apps can send notifications for warnings, evacuation orders, shelter openings, boil-water notices and agenda items near a saved place.",
+     'pages': ['/emergency', '/hurricane-prep', '/alerts', '/open-data', '/developers']},
     {'date': '2026-10-27', 'title': 'Chambers of commerce',
      'text': "A new page covers Bay County's two chambers of commerce, the Bay County Chamber and the Panama City Beach Chamber: who sits on their boards and staff (each name links to a profile with the person's other boards and records), the organizations those board members represent and what local governments paid them, upcoming chamber and community events, regular programs such as First Friday and Friday at the Beach, each chamber's IRS filings, and the tourism agency money paid to them. Board lists are copied from the chambers' own websites; no contact details are published. The apps have the same screen.",
      'pages': ['/chambers', '/connections/nonprofits', '/people', '/open-data', '/developers']},

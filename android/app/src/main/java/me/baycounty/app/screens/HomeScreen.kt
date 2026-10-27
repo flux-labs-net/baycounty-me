@@ -46,6 +46,8 @@ import java.time.Instant
 private data class BrowseItem(val title: String, val symbol: String, val route: Route)
 
 private val browse = listOf(
+    BrowseItem("Emergencies and alerts", "exclamationmark.triangle", Route.Emergency),
+    BrowseItem("Hurricane prep", "hurricane", Route.HurricanePrep),
     BrowseItem("CRA spending", "building.2", Route.CRA),
     BrowseItem("Contracts", "signature", Route.Dataset("contracts")),
     BrowseItem("How they voted", "hand.raised", Route.Dataset("votes")),
@@ -68,7 +70,7 @@ fun HomeScreen() {
         navigationIcon = { BayMarkButton { nav.push(Route.About) } },
         actions = {
             ToolbarIcon("bubble.left.and.text.bubble.right", "Ask a question") { o.openSite("/ask") }
-            ToolbarIcon("bell", "Email alerts") { o.openSite("/alerts") }
+            ToolbarIcon("bell", "Emergencies and alerts") { nav.push(Route.Emergency) }
         },
         onRefresh = { store.refreshAll() },
         spacing = 24,

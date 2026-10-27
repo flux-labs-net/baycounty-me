@@ -25,6 +25,8 @@ const PAGES = {
   '/chambers': {datasets: ['chambers', 'chamber-leaders', 'chamber-events', 'nonprofit-payments', 'nonprofits']},
   '/connections/nonprofits': {datasets: ['nonprofits', 'nonprofit-board-members', 'nonprofit-board-businesses', 'nonprofit-payments', 'nonprofit-grants', 'nonprofit-officials', 'charity-registrations']},
   '/connections/business-ties': {datasets: ['official-businesses', 'official-business-links']},
+  '/emergency': {datasets: ['evacuation-zones', 'emergency-shelters', 'emergency-resources', 'emergency-notices'], endpoints: ['/emergency', '/evacuation-zone']},
+  '/hurricane-prep': {datasets: ['hurricane-prep', 'disaster-declarations', 'rebuild-money'], endpoints: ['/emergency']},
   '/alerts': {none: 'email alert sign-up form'},
   '/meetings': {datasets: ['meetings'], endpoints: ['/meetings.ics']},
   '/connections/campaign-gifts': {datasets: ['campaign-finance', 'donor-contracts', 'campaign-contributions-2026', 'business-donor-sunbiz', 'owner-gifts']},
