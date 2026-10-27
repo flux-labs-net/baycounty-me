@@ -26,7 +26,7 @@ struct MilitaryView: View {
                     ProgressView().frame(maxWidth: .infinity, minHeight: 160)
                 }
             } else {
-                kpis
+                kpis(bases)
                 ForEach(bases) { baseCard($0) }
                 newsSection
                 contractsSection
@@ -46,9 +46,11 @@ struct MilitaryView: View {
         .refreshable { for i in Military.datasets { await store.load(i, force: true) } }
     }
 
-    private var kpis: some View {
+    private func kpis(_ bases: [Row]) -> some View {
         let latest = Military.stories(news).first?.string("published")
         return StatGrid {
+            KPICard(title: "Bases", value: "\(bases.count)", caption: bases.compactMap { $0.string("short_name") }.joined(separator: " and "),
+                    symbol: "shield", tone: .salmon)
             KPICard(title: "News stories", value: "\(news.count)", caption: latest.map { "Latest \(Military.dateLabel($0))" } ?? "From the units on each base",
                     symbol: "newspaper", tone: .blue)
             KPICard(title: "Federal contracts", value: Format.compactMoney(Military.total(years)),

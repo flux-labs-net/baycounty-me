@@ -57,7 +57,7 @@ fun MilitaryScreen() {
             }
             return@Screen
         }
-        item { Kpis(news, years) }
+        item { Kpis(bases, news, years) }
         for (b in bases) item { BaseCard(b) }
         item { NewsSection(bases, news, base, allNews, onBase = { base = it; allNews = false }, onMore = { allNews = !allNews }) }
         item { ContractsSection(years) }
@@ -76,12 +76,13 @@ fun MilitaryScreen() {
 }
 
 @Composable
-private fun Kpis(news: List<DataRow>, years: List<DataRow>) {
+private fun Kpis(bases: List<DataRow>, news: List<DataRow>, years: List<DataRow>) {
     val latest = Military.stories(news).firstOrNull()?.string("published")
-    Grid2(listOf(0, 1, 2)) { i, m ->
+    Grid2(listOf(0, 1, 2, 3)) { i, m ->
         when (i) {
-            0 -> KPICard("News stories", "${news.size}", m, latest?.let { "Latest ${Military.dateLabel(it)}" } ?: "From the units on each base", "newspaper", Tone.BLUE)
-            1 -> KPICard("Federal contracts", Format.compactMoney(Military.total(years)), m, "To ${Military.companies(years).size} Bay County companies since 2016", "dollarsign.circle", Tone.TEAL)
+            0 -> KPICard("Bases", "${bases.size}", m, bases.mapNotNull { it.string("short_name") }.joinToString(" and "), "shield", Tone.SALMON)
+            1 -> KPICard("News stories", "${news.size}", m, latest?.let { "Latest ${Military.dateLabel(it)}" } ?: "From the units on each base", "newspaper", Tone.BLUE)
+            2 -> KPICard("Federal contracts", Format.compactMoney(Military.total(years)), m, "To ${Military.companies(years).size} Bay County companies since 2016", "dollarsign.circle", Tone.TEAL)
             else -> KPICard("From the Defense Department", "${Military.defenseShare(years)}%", m, "Most of the rest is Coast Guard", "shield", Tone.AMBER)
         }
     }
