@@ -9,6 +9,9 @@ from datetime import datetime, timezone
 import html
 
 CHANGES = [
+    {'date': '2026-10-27', 'title': 'Military and the bases',
+     'text': "A new page covers Tyndall Air Force Base and Naval Support Activity Panama City: what each base does, who commands it and the units on it, and the latest news stories from the 325th Fighter Wing, the 601st Air and Space Operations Center, NSA Panama City, the Navy's Panama City research lab and the Navy Experimental Diving Unit, read every day from their public feeds. It also lists every federal contract since 2016 to a company based in Bay County, from USAspending.gov: $3.9B to 239 companies, a little over half from the Defense Department and most of the rest from the Coast Guard. Each company links to its profile, where federal money now shows next to local government payments and campaign gifts. The apps have the same screen.",
+     'pages': ['/military', '/people', '/open-data', '/developers']},
     {'date': '2026-10-27', 'title': 'Chambers of commerce',
      'text': "A new page covers Bay County's two chambers of commerce, the Bay County Chamber and the Panama City Beach Chamber: who sits on their boards and staff (each name links to a profile with the person's other boards and records), the organizations those board members represent and what local governments paid them, upcoming chamber and community events, regular programs such as First Friday and Friday at the Beach, each chamber's IRS filings, and the tourism agency money paid to them. Board lists are copied from the chambers' own websites; no contact details are published. The apps have the same screen.",
      'pages': ['/chambers', '/connections/nonprofits', '/people', '/open-data', '/developers']},

@@ -34,6 +34,7 @@ fl-bay,en,People,5,"Who decides, and who's connected","Who decides, and who's co
 fl-bay,en,People,5,"Who decides, and who's connected","Who decides, and who's connected",5,Shared owners,/connections/shared-owners,Companies with a shared owner giving to one candidate,False,
 fl-bay,en,People,5,"Who decides, and who's connected","Who decides, and who's connected",6,Nonprofits,/connections/nonprofits,"Public money, and officials on their boards",False,
 fl-bay,en,People,5,"Who decides, and who's connected","Who decides, and who's connected",7,Chambers of commerce,/chambers,"Boards, events and public money",False,
+fl-bay,en,People,5,"Who decides, and who's connected","Who decides, and who's connected",8,Military and the bases,/military,Base news and federal contracts to local firms,False,
 fl-bay,en,Take part,6,"Show up, ask, reuse",,0,Meetings,/meetings,"When every board meets, with agendas",True,
 fl-bay,en,Take part,6,"Show up, ask, reuse","Show up, ask, reuse",1,Email alerts,/alerts,Weekly updates for your government,False,
 fl-bay,en,Take part,6,"Show up, ask, reuse","Show up, ask, reuse",2,Request a record,/records-request,Write a public records request,False,

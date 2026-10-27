@@ -36,10 +36,15 @@ jobs:
         continue-on-error: true
         working-directory: data/surtax
         run: python fetch_gis.py < /dev/null
+      - name: Fetch federal contracts to local companies (USAspending)
+        id: fetch_federal_contracts
+        continue-on-error: true
+        # Writes the file only after every page has loaded, so a failure keeps last week's contracts.
+        run: python data/military/fetch_contracts.py < /dev/null
       - name: Report fetch failures
-        if: steps.fetch_fema_ledger.outcome == 'failure' || steps.fetch_sales_tax_map.outcome == 'failure'
+        if: steps.fetch_fema_ledger.outcome == 'failure' || steps.fetch_sales_tax_map.outcome == 'failure' || steps.fetch_federal_contracts.outcome == 'failure'
         run: |
-          echo "::warning title=Weekly refresh::FEMA fetch: ${{ steps.fetch_fema_ledger.outcome }}; GIS fetch: ${{ steps.fetch_sales_tax_map.outcome }}. The previous files were kept."
+          echo "::warning title=Weekly refresh::FEMA fetch: ${{ steps.fetch_fema_ledger.outcome }}; GIS fetch: ${{ steps.fetch_sales_tax_map.outcome }}; USAspending fetch: ${{ steps.fetch_federal_contracts.outcome }}. The previous files were kept."
       - name: Rebuild site
         id: rebuild_site
         run: |
@@ -56,7 +61,7 @@ jobs:
           # Commit whenever the rebuild changed anything, not only the two fetched files: data/build.py also
           # rebuilds people, vendor matches and other derived files from the daily inputs.
           if [ -z "$(git status --porcelain -- data site/public)" ]; then echo "No changes"; exit 0; fi
-          .github/scripts/push_refresh.sh "Weekly refresh: FEMA projects, sales tax map and derived data ($(date -u +%Y-%m-%d))" data/michael/pa_ledger.json data/surtax/gis_projects.json
+          .github/scripts/push_refresh.sh "Weekly refresh: FEMA projects, sales tax map and derived data ($(date -u +%Y-%m-%d))" data/michael/pa_ledger.json data/surtax/gis_projects.json data/military/bay/federal_contracts.json
       - name: Deploy the refresh to Vercel
         # Vercel blocks Git deploys of commits whose author isn't on the Vercel team, which includes this bot's commits.
         # A deploy hook (Vercel > Project > Settings > Git > Deploy Hooks, branch main) builds main regardless; store

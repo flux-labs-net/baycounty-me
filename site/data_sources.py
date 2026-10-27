@@ -72,6 +72,9 @@ TOPICS = [
     ('chambers', 'Chambers of commerce', '/chambers',
      "Board, staff and program lists are copied by hand from each chamber's website. Upcoming events are read every day from the Panama City Beach Chamber's public calendar feed; the Bay County Chamber's calendar platform turns automated readers away.",
      'Board members are joined to other local filings by first and last name, and to an official only where the chamber names their government post. Organizations are joined to governments, paid companies, nonprofits or one Sunbiz filing with the exact same name.'),
+    ('military', 'Military and the bases', '/military',
+     "News stories are read every day from the DVIDS feeds of the units at Tyndall Air Force Base and Naval Support Activity Panama City; the base websites turn automated readers away. Federal contracts come from USAspending.gov: every contract action since 2016 for a company with a business address in the county. Base facts and commanders are checked by hand.",
+     'Contractors are joined to a local vendor, or to a business campaign donor through its Sunbiz filing, when the names match; otherwise each gets its own profile. Amounts are money obligated since January 1, 2016.'),
     ('cra', 'Redevelopment agencies (CRAs)', '/public-money/cra-spending',
      'CRA spending is read from CRA annual reports, agendas, budgets and audits, one ledger line per payment or project. '
      'Tax increment comes from CRA reports, audits and budgets, split between the county and city by millage.',
@@ -186,6 +189,9 @@ src('businesses', 'state', 'Sunbiz business search', 'https://search.sunbiz.org/
 src('chambers', 'county', 'Bay County Chamber of Commerce website (board, staff and programs)', 'https://panamacity.org/board-of-directors/', BY_HAND, 'As boards change', 'Board, staff and past chairs since 2016 by name, title and organization; regular programs')
 src('chambers', 'county', 'Panama City Beach Chamber of Commerce website (board, staff and programs)', 'https://pcbeach.org/board-of-directors/', BY_HAND, 'As boards change', 'Board and staff by name, title and organization; regular programs')
 src('chambers', 'county', 'Panama City Beach Chamber events calendar feed', 'https://pcbeach.org/local-events/', AUTO_DAILY, 'Daily', 'Upcoming chamber and community events: title, time, venue and link')
+src('military', 'state', 'DVIDS unit news feeds (325th Fighter Wing, 601st AOC, NSA Panama City, NSWC Panama City Division, NEDU)', 'https://www.dvidshub.net/unit/NSAPC', AUTO_DAILY, 'Daily', 'News stories from the units on each base: title, summary, date, author and link')
+src('military', 'state', 'USAspending.gov contract search (recipients in the county)', 'https://www.usaspending.gov/search', AUTO_WEEKLY, 'Weekly', 'Every federal contract action since 2016 for a company based in the county: recipient, agency, what it buys and money obligated')
+src('military', 'state', 'Base histories and change-of-command stories', 'https://en.wikipedia.org/wiki/Tyndall_Air_Force_Base', BY_HAND, 'As commanders change', 'Mission, tenant units, commanders and base facts')
 src('nonprofits', 'state', 'IRS exempt organization and 990 data (GivingTuesday 990 data lake)', 'https://990data.givingtuesday.org/', BULK, 'As new filings post', 'Organizations, 990, 990-EZ, 990-PF and 990-N filings since 2019: board members, pay, grants and finances')
 src('nonprofits', 'state', 'ProPublica Nonprofit Explorer', 'https://projects.propublica.org/nonprofits/', BY_HAND, 'As needed', 'Links to each organization\'s filings')
 src('nonprofits', 'state', 'Florida Check-A-Charity (Department of Agriculture and Consumer Services)', 'https://csapp.fdacs.gov/', BULK, 'As needed', 'Charity registrations, reported finances, fundraisers, officers and directors')
@@ -265,7 +271,7 @@ FOLDER_TOPIC = {
     'agendas': 'meetings', 'meetings': 'meetings', 'votes': 'votes', 'contracts': 'contracts', 'budgets': 'budgets',
     'debt_audit': 'audits', 'money': 'audits', 'tax': 'property-tax', 'amendment3': 'property-tax', 'exemptions': 'property-tax',
     'salaries': 'salaries', 'campaign': 'campaign', 'elections': 'elections', 'sunbiz': 'businesses', 'careers': 'businesses',
-    'nonprofits': 'nonprofits', 'chambers': 'chambers', 'cra': 'cra', 'merged.json': 'cra', 'michael': 'michael', 'surtax': 'sales-tax',
+    'nonprofits': 'nonprofits', 'chambers': 'chambers', 'military': 'military', 'cra': 'cra', 'merged.json': 'cra', 'michael': 'michael', 'surtax': 'sales-tax',
     'tourism': 'tourist-tax', 'fees': 'fees', 'nearby': 'address', 'civic': 'records', 'projects': 'contracts',
 }
 SKIP_HOSTS = {'baycounty.me', 'www.baycounty.me', 'aptg.co'}

@@ -55,6 +55,7 @@ struct MoneyView: View {
         .init(title: "Nonprofits", symbol: "heart.text.square", detail: "Every local nonprofit, its public money, and its board", route: .dataset("nonprofits")),
         .init(title: "Nonprofit boards", symbol: "person.3", detail: "Who sits on each nonprofit's board", route: .dataset("nonprofit-board-members")),
         .init(title: "Chambers of commerce", symbol: "storefront", detail: "Boards, events and public money", route: .chambers),
+        .init(title: "Military and the bases", symbol: "shield", detail: "Base news and federal contracts to local firms", route: .military),
         .init(title: "Business ties", symbol: "briefcase", detail: "Officials' and candidates' businesses", site: "/connections/business-ties"),
     ]
     private let elections: [Item] = [

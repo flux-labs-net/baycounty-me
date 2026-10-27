@@ -75,6 +75,7 @@ private val moneyItems: Map<MoneySection, List<MoneyItem>> = mapOf(
         MoneyItem("Nonprofits", "heart.text.square", "Every local nonprofit, its public money, and its board", Route.Dataset("nonprofits")),
         MoneyItem("Nonprofit boards", "person.3", "Who sits on each nonprofit's board", Route.Dataset("nonprofit-board-members")),
         MoneyItem("Chambers of commerce", "storefront", "Boards, events and public money", Route.Chambers),
+        MoneyItem("Military and the bases", "shield", "Base news and federal contracts to local firms", Route.Military),
         MoneyItem("Business ties", "briefcase", "Officials' and candidates' businesses", site = "/connections/business-ties"),
     ),
     MoneySection.ELECTIONS to listOf(
