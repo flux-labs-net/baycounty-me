@@ -191,13 +191,40 @@ BD = "https://go.boarddocs.com/fl/bcsdfl/Board.nsf"
 BD_COMMITTEE = "A4EP6J588C05"
 
 
+BD_GAP = 2.0          # seconds between BoardDocs requests: it starts answering 403 after a few dozen quick ones
+BD_BACKOFF = (60, 180)  # waits after a 403/429 before trying again
+_bd = {"last": 0.0, "blocked": False}
+
+
+def _bd_post(path, body):
+    """POST to BoardDocs politely: space requests out, and when it starts refusing (403/429) wait and retry. If it
+    keeps refusing, stop asking for the rest of this run; the files left are fetched by the next crawl."""
+    if _bd["blocked"]:
+        raise RuntimeError("BoardDocs is refusing requests (rate limit); left for the next run")
+    for wait in BD_BACKOFF + (None,):
+        gap = BD_GAP - (fm.time.time() - _bd["last"])
+        if gap > 0:
+            fm.time.sleep(gap)
+        _bd["last"] = fm.time.time()
+        try:
+            return _req(BD + path, body, "application/x-www-form-urlencoded")
+        except RuntimeError as e:
+            if not re.search(r"HTTP Error (403|429)", str(e)):
+                raise
+            if wait is None:
+                _bd["blocked"] = True
+                raise RuntimeError("BoardDocs is refusing requests (rate limit); left for the next run")
+            print("  BoardDocs refused a request; waiting %ds" % wait, flush=True)
+            fm.time.sleep(wait)
+
+
 def boarddocs_file(*uniques):
     """Fetch the minutes page. A meeting is listed twice ("Agenda" and "Detailed Agenda"); the minutes usually hang off
     the Detailed Agenda entry, so every entry for the meeting is tried in turn."""
     def get():
         for unique in uniques:
             body = urllib.parse.urlencode({"id": unique, "current_committee_id": BD_COMMITTEE}).encode()
-            data, _ = _req(BD + "/BD-GetMinutes?open", body, "application/x-www-form-urlencoded")
+            data, _ = _bd_post("/BD-GetMinutes?open", body)
             if len(fm.strip_tags(data.decode("utf-8", "replace"))) >= 200:
                 return data, "text/html"
         raise RuntimeError("no minutes posted for this meeting")
@@ -231,7 +258,7 @@ def parse_boarddocs(meetings, first, last):
 
 def schools(first, last):
     body = urllib.parse.urlencode({"current_committee_id": BD_COMMITTEE}).encode()
-    data, _ = _req(BD + "/BD-GetMeetingsList?open", body, "application/x-www-form-urlencoded")
+    data, _ = _bd_post("/BD-GetMeetingsList?open", body)
     return parse_boarddocs(json.loads(data.decode("utf-8")), first, last)
 
 
