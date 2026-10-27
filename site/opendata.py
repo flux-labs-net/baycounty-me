@@ -11,7 +11,7 @@ import ids  # noqa: E402  shared government / vendor / person ids (data/entities
 import cutoff  # noqa: E402  the site's first year (data/entities/cutoff.py)
 
 # which columns name the government, per dataset, tried in order (office titles are matched by contained name)
-GOV_COLS = {'beach-access': ['run_by'], 'beach-parking': [], 'beach-water-sites': [], 'beach-water-samples': [], 'beach-conditions': [], 'parks': ['gov_id'], 'boat-ramps': ['gov_id'], 'trails': [], 'recreation-departments': ['gov_id'], 'chambers': [], 'chamber-leaders': [], 'chamber-events': [], 'owner-gifts': ['office'], 'entity-profiles': ['gov_id'], 'entity-connections': [], 'government-profiles': ['government'], 'government-years': ['gov_id', 'government'], 'budget-years': ['gov_id'], 'cra-agencies': ['gov_id'], 'cra-tax-increment': ['gov_id'], 'cra-increment-checks': [], 'officeholder-terms': ['gov_id'], 'official-photos': [], 'data-completeness': ['gov_id'], 'votes': ['government'], 'member-votes': ['gov_id'], 'cra-payments': ['city'],
+GOV_COLS = {'beach-access': ['run_by'], 'beach-parking': [], 'beach-water-sites': [], 'beach-water-samples': [], 'beach-conditions': [], 'parks': ['gov_id'], 'boat-ramps': ['gov_id'], 'trails': [], 'recreation-departments': ['gov_id'], 'development-projects': ['gov_id'], 'housing-permits': ['gov_id'], 'road-contracts': [], 'road-work-program': [], 'chambers': [], 'chamber-leaders': [], 'chamber-events': [], 'owner-gifts': ['office'], 'entity-profiles': ['gov_id'], 'entity-connections': [], 'government-profiles': ['government'], 'government-years': ['gov_id', 'government'], 'budget-years': ['gov_id'], 'cra-agencies': ['gov_id'], 'cra-tax-increment': ['gov_id'], 'cra-increment-checks': [], 'officeholder-terms': ['gov_id'], 'official-photos': [], 'data-completeness': ['gov_id'], 'votes': ['government'], 'member-votes': ['gov_id'], 'cra-payments': ['city'],
             'property-tax-rates': ['authority_id'], 'fema-michael-projects': ['applicant'], 'officials-pay': ['title', 'government'],
             'meetings': ['gov', 'board'], 'campaign-finance': ['office', 'gov'], 'bonds': ['gov'], 'salary-positions': ['employer_id'],
             'salary-leaders': ['employer_id'], 'candidates-2026': ['office', 'government'], 'campaign-contributions-2026': ['office'], 'campaign-history': ['gov_id'], 'campaign-contributions-history': ['gov_id'],
@@ -23,7 +23,7 @@ FIXED_GOV = {'bed-tax-collections': 'county', 'property-tax-exemptions': 'county
 
 
 VENDOR_COL = {'contracts': 'vendor', 'change-orders': 'vendor', 'emergency-purchases': 'vendor', 'cra-payments': 'payee', 'vendor-payments': 'vendor',
-              'campaign-contributions-2026': 'contributor', 'campaign-contributions-history': 'contributor', 'business-donor-sunbiz': 'contributor'}
+              'campaign-contributions-2026': 'contributor', 'campaign-contributions-history': 'contributor', 'business-donor-sunbiz': 'contributor', 'road-contracts': 'contractor'}
 
 
 def add_vendor_id(did, rows):

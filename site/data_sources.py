@@ -78,6 +78,12 @@ TOPICS = [
     ('outdoors', 'Beaches and parks', '/beaches',
      "The beach flag, rip current risk and surf forecast are read every morning from the National Weather Service surf zone forecast (and again in the visitor's browser). Water quality samples are read every day from the Florida Department of Health's Healthy Beaches lookup. Beach accesses, parking, parks, boat ramps and trails come from the county's and Panama City Beach's public GIS maps and the state's coastal access survey.",
      "Each beach access is joined to the state's coastal access survey only when the two points are within about 200 feet. Parks in the county's park guide are joined to its parks inventory by name. Samples before 2016 are dropped; samples already on file are kept when the state's lookup stops showing them."),
+    ('development', 'Building and development', '/development',
+     "New-home counts come from the Census Bureau's Building Permits Survey files for the county, each city and the unincorporated area. Development projects are read every week from the county's public planning map layers (Bay County's development orders and Panama City Beach's development map).",
+     'Projects with no date, or nothing on record since 2016, are left out. Census figures marked estimated are the Bureau\'s own estimates for a government that sent no monthly reports.'),
+    ('roads', 'Road projects', '/roads',
+     "State road contracts and FDOT's adopted five-year work program are read every week from FDOT's public map services, filtered to the county. County and city road work comes from the half-cent sales tax project map.",
+     'One row per contract (FDOT lists each road segment separately). A contract counts as under way only when FDOT flags it active. Contractors are joined to local vendors by name.'),
     ('cra', 'Redevelopment agencies (CRAs)', '/public-money/cra-spending',
      'CRA spending is read from CRA annual reports, agendas, budgets and audits, one ledger line per payment or project. '
      'Tax increment comes from CRA reports, audits and budgets, split between the county and city by millage.',
@@ -206,6 +212,11 @@ src('outdoors', 'state', 'Florida DEP coastal access sites', 'https://services1.
 src('outdoors', 'county', 'Bay County GIS: beach accesses, beach parking, parks inventory, park guide, boat ramps and trails', 'https://services1.arcgis.com/QB0VWfqR9MD4lF0F/arcgis/rest/services', AUTO_DAILY, 'Daily', 'Every public beach access, county beach lot, park (all governments), boat ramp and trail, with amenities')
 src('outdoors', 'pcb', 'Panama City Beach GIS: recreation (beach access, trails)', 'https://services7.arcgis.com/HMHYRsYOvuxpp8zD/arcgis/rest/services/Recreation/FeatureServer', AUTO_DAILY, 'Daily', 'Wheelchair-accessible beach accesses and Conservation Park trails')
 src('outdoors', 'county-wide', "Each government's parks and recreation pages", 'https://www.baycountyfl.gov/289/Parks-Recreation', BY_HAND, 'As pages change', 'Links for program and league sign-ups')
+src('development', 'state', 'U.S. Census Bureau Building Permits Survey (county and place files)', 'https://www.census.gov/construction/bps/', AUTO_WEEKLY, 'Weekly (Census posts monthly)', 'New homes authorized by building permits per year, by building size, for the county, each city and the unincorporated area')
+src('development', 'county', 'Bay County planning map: development orders', 'https://gis.baycountyfl.gov/arcgis/rest/services/Departmental/Planning/MapServer/18', AUTO_WEEKLY, 'Weekly', 'Each development order project in the unincorporated county: name, use, size, address, status, application and approval dates')
+src('development', 'pcb', 'Panama City Beach development map layer', 'https://gis.baycountyfl.gov/arcgis/rest/services/PanamaCityBeach/PanamaCityBeachPublic/MapServer/4', AUTO_WEEKLY, 'Weekly', 'Development projects with application, approval, building permit and occupancy dates')
+src('roads', 'state', 'FDOT All Construction Contracts map service', 'https://gis.fdot.gov/arcgis/rest/services/All_Construction_Contracts/MapServer/0', AUTO_WEEKLY, 'Weekly', 'Every FDOT construction and maintenance contract in the county: contractor, amount, dates and status')
+src('roads', 'state', 'FDOT current adopted work program map service', 'https://gis.fdot.gov/arcgis/rest/services/Work_Program_Current/MapServer', AUTO_WEEKLY, 'Weekly', 'Projects in the five-year work program: phases and the fiscal years they are funded in')
 src('nonprofits', 'state', 'IRS exempt organization and 990 data (GivingTuesday 990 data lake)', 'https://990data.givingtuesday.org/', BULK, 'As new filings post', 'Organizations, 990, 990-EZ, 990-PF and 990-N filings since 2019: board members, pay, grants and finances')
 src('nonprofits', 'state', 'ProPublica Nonprofit Explorer', 'https://projects.propublica.org/nonprofits/', BY_HAND, 'As needed', 'Links to each organization\'s filings')
 src('nonprofits', 'state', 'Florida Check-A-Charity (Department of Agriculture and Consumer Services)', 'https://csapp.fdacs.gov/', BULK, 'As needed', 'Charity registrations, reported finances, fundraisers, officers and directors')
@@ -285,7 +296,7 @@ FOLDER_TOPIC = {
     'agendas': 'meetings', 'meetings': 'meetings', 'votes': 'votes', 'contracts': 'contracts', 'budgets': 'budgets',
     'debt_audit': 'audits', 'money': 'audits', 'tax': 'property-tax', 'amendment3': 'property-tax', 'exemptions': 'property-tax',
     'salaries': 'salaries', 'campaign': 'campaign', 'elections': 'elections', 'sunbiz': 'businesses', 'careers': 'businesses',
-    'nonprofits': 'nonprofits', 'chambers': 'chambers', 'events': 'events', 'outdoors': 'outdoors', 'cra': 'cra', 'merged.json': 'cra', 'michael': 'michael', 'surtax': 'sales-tax',
+    'nonprofits': 'nonprofits', 'chambers': 'chambers', 'events': 'events', 'outdoors': 'outdoors', 'development': 'development', 'roads': 'roads', 'cra': 'cra', 'merged.json': 'cra', 'michael': 'michael', 'surtax': 'sales-tax',
     'tourism': 'tourist-tax', 'fees': 'fees', 'nearby': 'address', 'civic': 'records', 'projects': 'contracts',
 }
 SKIP_HOSTS = {'baycounty.me', 'www.baycounty.me', 'aptg.co'}

@@ -24,6 +24,7 @@ from nonprofits_page import nonprofits_page
 from chambers_page import chambers_page
 from events_page import events_page
 from outdoors_page import beaches_page, parks_page
+from growth_pages import development_page, roads_page
 from business_ties_page import business_ties_page
 from updates import updates_page, rss, last_updated, nice as nice_date
 OUT = os.path.join(ROOT, 'public')
@@ -694,6 +695,10 @@ PAGES = [
      "Today's beach flag and rip current risk for Panama City Beach and the rest of the county's Gulf beaches, what each flag means, state water quality samples at every sampling site, and every public beach access and county beach parking lot on a map.", lambda: beaches_page(OUT)),
     ('/parks', 'Parks, boat ramps and trails',
      'Every public park, boat ramp and trail in Bay County: playgrounds, restrooms, sports fields, fishing piers and trails, who runs each one, a map with directions, and where to sign up for leagues and programs.', lambda: parks_page(OUT)),
+    ('/development', 'Building and development',
+     "New homes permitted in Bay County each year, city by city, and the commercial buildings, subdivisions and apartments in planning review, with their status and dates, on a map.", lambda: development_page(OUT)),
+    ('/roads', 'Road projects',
+     "State highway work under way in Bay County and what each FDOT contract costs, FDOT's five-year plan for local roads, the contractors, and the county and city road jobs paid for by the half-cent sales tax.", lambda: roads_page(OUT)),
     ('/connections/business-ties', "Officials' businesses",
      'Registered businesses and nonprofits that list a Bay County official, department leader or candidate, checked by hand, and where those businesses meet campaigns and public money.', lambda: business_ties_page(OUT)),
     ('/public-money/accountability', 'Accountability console: projects from budget to close-out',

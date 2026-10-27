@@ -25,6 +25,8 @@ const PAGES = {
   '/events': {datasets: ['community-events']},
   '/beaches': {datasets: ['beach-conditions', 'beach-water-sites', 'beach-water-samples', 'beach-access', 'beach-parking']},
   '/parks': {datasets: ['parks', 'boat-ramps', 'trails', 'recreation-departments']},
+  '/development': {datasets: ['housing-permits', 'development-projects']},
+  '/roads': {datasets: ['road-contracts', 'road-work-program', 'sales-tax-projects', 'entity-profiles']},
   '/chambers': {datasets: ['chambers', 'chamber-leaders', 'chamber-events', 'nonprofit-payments', 'nonprofits']},
   '/connections/nonprofits': {datasets: ['nonprofits', 'nonprofit-board-members', 'nonprofit-board-businesses', 'nonprofit-payments', 'nonprofit-grants', 'nonprofit-officials', 'charity-registrations']},
   '/connections/business-ties': {datasets: ['official-businesses', 'official-business-links']},
