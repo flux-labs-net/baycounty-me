@@ -143,11 +143,17 @@ struct GovernmentDetailView: View {
     }
 
     private func holderText(_ h: Officeholders.Holder, _ line: String) -> some View {
-        VStack(alignment: .leading, spacing: 2) {
-            Text(h.vacant ? "Vacant" : h.personName.isEmpty ? "Not confirmed" : h.personName)
-                .font(.subheadline.weight(.semibold))
-                .foregroundStyle(h.vacant || h.personName.isEmpty ? Color.secondary : Color.primary)
-            if !line.isEmpty { Text(line).font(.caption).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true) }
+        HStack(spacing: 12) {
+            // their official photo (official-photos), or initials, like the site's "Who's in charge" cards
+            if !h.vacant && !h.personName.isEmpty {
+                PersonInitials(name: h.personName, size: 36, photo: h.personID.flatMap { store.person($0) }?.photoURL)
+            }
+            VStack(alignment: .leading, spacing: 2) {
+                Text(h.vacant ? "Vacant" : h.personName.isEmpty ? "Not confirmed" : h.personName)
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(h.vacant || h.personName.isEmpty ? Color.secondary : Color.primary)
+                if !line.isEmpty { Text(line).font(.caption).foregroundStyle(.secondary).fixedSize(horizontal: false, vertical: true) }
+            }
         }
     }
 
