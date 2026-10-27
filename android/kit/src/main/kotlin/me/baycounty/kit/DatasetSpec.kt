@@ -228,6 +228,8 @@ data class DatasetSpec(
         // who held each elected seat since 2016 (the site's first year); a row with no name is a vacancy or a stretch nobody could confirm, so it falls back to the seat
         "officeholder-terms" to DatasetSpec(Section.PEOPLE_AND_PAY, "person.badge.clock", title = listOf("person_name", "seat"), subtitle = listOf("government", "seat"), detail = "note",
                                     date = listOf("date_start", "date_end"), badge = "how", filters = listOf("government", "seat", "how"), page = "people"),
+        // official headshots its government publishes, one row per person (the photo shows on People rows and person screens)
+        "official-photos" to DatasetSpec(Section.PEOPLE_AND_PAY, "person.3", title = listOf("name"), subtitle = listOf("credit"), detail = "source_url", date = listOf("fetched_on"), page = "people"),
         "glossary-terms" to DatasetSpec(Section.MORE, "book", title = listOf("term"), subtitle = listOf("group_name"), detail = "simple", filters = listOf("group_name"),
                                 page = "glossary"),
         "site-updates" to DatasetSpec(Section.MORE, "sparkles", title = listOf("title"), subtitle = listOf("date"), detail = "text", date = listOf("date"), page = "updates"),

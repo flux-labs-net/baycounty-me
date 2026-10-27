@@ -215,7 +215,10 @@ function officials() {
     if (!t.person_name)
       return `<div class="ui-person vac"><span class="ui-av t-blue"><span class="ico i-users" aria-hidden="true"></span></span><span><b>${t.vacant ? 'Vacant' : 'Not confirmed'}</b><small>${sub}</small><small>${esc(t.note || '')}</small></span></div>`;
     const how = t.how && !['elected', 'appointed'].includes(t.how) ? (t.how === 'commission' ? 'chosen by the commission' : t.how) : t.how === 'appointed' && !t.appointed ? 'appointed' : '';
-    const inner = `<span class="ui-av t-${TONE[(i + tone0) % 4]}" aria-hidden="true">${esc(initials(t.person_name))}</span><span><b>${esc(t.person_name)}</b><small>${sub}</small>${how ? `<small>${esc(how[0].toUpperCase() + how.slice(1))}</small>` : ''}</span>`;
+    const ph = t.person_id && (G.photos || {})[t.person_id];
+    const av = ph ? `<span class="ui-av ui-av-ph t-${TONE[(i + tone0) % 4]}"><img src="${esc(ph)}" alt="" width="160" height="160" loading="lazy" decoding="async"></span>`
+      : `<span class="ui-av t-${TONE[(i + tone0) % 4]}" aria-hidden="true">${esc(initials(t.person_name))}</span>`;
+    const inner = `${av}<span><b>${esc(t.person_name)}</b><small>${sub}</small>${how ? `<small>${esc(how[0].toUpperCase() + how.slice(1))}</small>` : ''}</span>`;
     const u = t.person_id && window.BC ? BC.href('person:' + t.person_id) : null;
     return u ? `<a class="ui-person" href="${esc(u)}" title="${esc(t.note || '')}">${inner}</a>` : `<div class="ui-person" title="${esc(t.note || '')}">${inner}</div>`;
   }));

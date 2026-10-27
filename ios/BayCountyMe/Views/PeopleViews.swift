@@ -11,7 +11,7 @@ struct PersonRow: View {
 
     var body: some View {
         HStack(spacing: 12) {
-            PersonInitials(name: person.name, size: 38)
+            PersonInitials(name: person.name, size: 38, photo: person.photoURL)
             VStack(alignment: .leading, spacing: 2) {
                 HStack(spacing: 6) {
                     Text(person.name).font(.subheadline.weight(.semibold)).foregroundStyle(.primary)
@@ -26,10 +26,11 @@ struct PersonRow: View {
     }
 }
 
-/// Initials on a circle tinted by name, like the site's people cards.
+/// Initials on a circle tinted by name, like the site's people cards, or their official photo when there is one.
 struct PersonInitials: View {
     let name: String
     var size: CGFloat = 38
+    var photo: URL? = nil
 
     private var initials: String {
         name.split(separator: " ").filter { $0.first?.isLetter == true }.prefix(2).map { String($0.prefix(1)) }.joined()
@@ -39,11 +40,27 @@ struct PersonInitials: View {
         return tones[abs(name.unicodeScalars.reduce(0) { ($0 &* 31 &+ Int($1.value)) % 9973 }) % tones.count]
     }
 
-    var body: some View {
+    private var letters: some View {
         Text(initials).font(.system(size: size * 0.38, weight: .semibold)).foregroundStyle(tone.color)
             .frame(width: size, height: size)
             .background(tone.color.opacity(0.13), in: Circle())
-            .accessibilityHidden(true)
+    }
+
+    var body: some View {
+        Group {
+            if let photo {
+                AsyncImage(url: photo) { phase in
+                    if let image = phase.image {
+                        image.resizable().scaledToFill().frame(width: size, height: size).clipShape(Circle())
+                    } else {
+                        letters
+                    }
+                }
+            } else {
+                letters
+            }
+        }
+        .accessibilityHidden(true)
     }
 }
 
@@ -123,7 +140,7 @@ struct PersonDetailView: View {
         let byDS = Dictionary(uniqueKeysWithValues: recs.map { ($0.dataset, $0.rows) })
         PageScroll {
             PageHero(kicker: p?.label ?? "People", title: p?.name ?? "Person", subtitle: p?.headline) {
-                PersonInitials(name: p?.name ?? "?", size: 52)
+                PersonInitials(name: p?.name ?? "?", size: 52, photo: p?.photoURL)
             }
             roles(p)
             terms(byDS)

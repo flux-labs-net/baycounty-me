@@ -1,5 +1,6 @@
 package me.baycounty.app.ui
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -26,6 +27,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
@@ -123,9 +125,14 @@ fun VoteRow(row: DataRow, summary: VoteSummary) {
     }
 }
 
-/** Initials on a circle tinted by name, like the site's people cards. */
+/** Initials on a circle tinted by name, like the site's people cards, or their official photo once it loads. */
 @Composable
-fun PersonInitials(name: String, size: Dp = 38.dp) {
+fun PersonInitials(name: String, size: Dp = 38.dp, photo: String? = null) {
+    val image = rememberRemotePhoto(photo)
+    if (image != null) {
+        Image(image, contentDescription = null, contentScale = ContentScale.Crop, modifier = Modifier.size(size).clip(CircleShape).clearAndSetSemantics {})
+        return
+    }
     val initials = name.split(" ").filter { it.firstOrNull()?.isLetter() == true }.take(2).joinToString("") { it.take(1) }
     var h = 0
     for (c in name) h = (h * 31 + c.code) % 9973
@@ -143,7 +150,7 @@ fun PersonRow(person: PeopleDirectory.Person, onClick: (() -> Unit)? = null) {
         (if (onClick != null) Modifier.clickable(role = Role.Button, onClick = onClick) else Modifier).fillMaxWidth().padding(horizontal = 14.dp, vertical = 9.dp),
         verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp),
     ) {
-        PersonInitials(person.name)
+        PersonInitials(person.name, photo = person.photoUrl)
         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
                 Text(person.name, style = T.subheadBold, color = Brand.text)

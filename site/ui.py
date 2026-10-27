@@ -8,9 +8,26 @@ enhance()  gives a page built on the standard skeleton (header.tx-top, the gover
            layout() runs it on every page, so a new page gets it by using the same skeleton.
 """
 import html
+import json
+import os
 import re
 
 TONES = ['blue', 'teal', 'amber', 'salmon']
+_PHOTOS = None
+
+
+def photos():
+    """Official headshots by person id (data/civic/official_photos.json, dataset official-photos)."""
+    global _PHOTOS
+    if _PHOTOS is None:
+        f = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'data', 'civic', 'official_photos.json')
+        _PHOTOS = {r['person_id']: r for r in json.load(open(f))['photos']} if os.path.exists(f) else {}
+    return _PHOTOS
+
+
+def photo_of(person_id):
+    """The photo's URL for a person id, or None (they keep their initials)."""
+    return (photos().get(person_id or '') or {}).get('photo_path')
 
 
 def ico(name, tone=None):
@@ -18,8 +35,11 @@ def ico(name, tone=None):
     return f'<span class="ui-ti t-{tone}">{i}</span>' if tone else i
 
 
-def avatar(name, tone, icon=None):
-    """Initials (or an icon) in a tinted circle, for people and organizations."""
+def avatar(name, tone, icon=None, photo=None):
+    """Initials (or an icon, or the person's official photo) in a tinted circle, for people and organizations."""
+    if photo:
+        return (f'<span class="ui-av ui-av-ph t-{tone}"><img src="{html.escape(photo)}" alt="" width="160" height="160"'
+                f' loading="lazy" decoding="async"></span>')
     if icon:
         return f'<span class="ui-av t-{tone}">{ico(icon)}</span>'
     parts = [w for w in re.sub(r'\([^)]*\)?|"[^"]*"?', ' ', name or '').split() if w[:1].isalpha()]
@@ -186,8 +206,15 @@ def _hero(body, path):
         pick = f'<div class="ui-pick{" no-scope" if not scope else ""}" data-report="skip">{scope}{stamp}</div>'
     if path.startswith('/people/') and title:
         # a person's page: their initials, in the same color as their card in the People directory
-        ini = re.search(r'>([^<]*)</span>$', avatar(title, 'blue')).group(1)
-        badge_h = f'<span class="ui-badge ui-badge-av t-{tone_of(title)}" aria-hidden="true">{ini}</span>'
+        ph = photos().get(path.rstrip('/').split('/')[-1])
+        if ph:
+            badge_h = (f'<span class="ui-badge ui-badge-av ui-badge-ph t-{tone_of(title)}"><img src="{html.escape(ph["photo_path"])}"'
+                       f' alt="Photo of {html.escape(title)}" width="160" height="160" decoding="async"></span>')
+            inner += (f'<p class="ui-photo-cr">Photo: <a href="{html.escape(ph["source_url"])}" target="_blank" rel="noopener">'
+                      f'{html.escape(ph["credit"])}</a></p>')
+        else:
+            ini = re.search(r'>([^<]*)</span>$', avatar(title, 'blue')).group(1)
+            badge_h = f'<span class="ui-badge ui-badge-av t-{tone_of(title)}" aria-hidden="true">{ini}</span>'
     elif path.startswith('/public-money/vendors/') and title:
         badge_h = f'<span class="ui-badge t-{tone_of(title)}">{ico(badge)}</span>'
     else:

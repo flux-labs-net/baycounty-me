@@ -46,7 +46,7 @@ def hbars(rows, color='var(--s1)'):
     return '<div class="hbars">' + ''.join(f'<div class="hb"><span class="hb-n">{e(k)}</span><span class="hb-track"><span class="hb-bar" style="width:{v/mx*100:.1f}%;background:{color}"></span></span><span class="hb-v">{money(v)}</span></div>' for k, v in sorted(rows, key=lambda kv: -kv[1])) + '</div>'
 
 
-from ui import ico, avatar as _avatar, TONES, tone_of  # shared pieces (ui.css)
+from ui import ico, avatar as _avatar, TONES, tone_of, photo_of, photos  # shared pieces (ui.css)
 
 
 # the icon and tint of each top card, by its label (gov.js has the same table for the cards it redraws)
@@ -225,7 +225,8 @@ def gov_page(key):
     mini = ''.join(f'<a href="#{i}">{ico(SEC[i][0])}{SEC[i][2]}</a>' for i in ids)
     glance = (f'<section class="tx-sec gx-glance" hidden><div class="sec-hd">{ico("pulse", "blue")}<h2 id="year">At a glance</h2><span class="muted" id="gxGlanceH"></span></div>'
               '<div class="kpis" id="gxGlance"></div><p class="muted small" data-gx-loading>Loading this government\'s records…</p></section>')
-    cfg = {'key': key, 'short': p['short'], 'cra': cra or '', 'craName': CRA_NAME.get(cra, '') if cra else '', 'fyStart': fy_start}
+    cfg = {'key': key, 'short': p['short'], 'cra': cra or '', 'craName': CRA_NAME.get(cra, '') if cra else '', 'fyStart': fy_start,
+           'photos': {k: v['photo_path'] for k, v in photos().items()}}
     year = '<label class="sc-f sc-year" data-scope><span>Year</span><select id="gxYear" aria-label="Year"><option value="all">All years</option></select></label>'
     bar = city_bar(None, fixed=key, extra=year)
     lede = g.get('blurb') or f'{e(p["name"])}: who runs it, what it spends and owes, how its commission votes, and what the auditors found, all from public records.'
@@ -270,7 +271,7 @@ def _pay_card(x):
         return f'<div class="ui-person">{_avatar(None, "amber", "dollar")}<span><b>{e(x["title"])}</b><small>{sub}</small></span></div>'
     pid = ids.person_id(name)
     url = href('person:' + pid) if pid and 'person:' + pid in build().ents else None
-    inner = f'{_avatar(name, tone_of(name))}<span><b>{e(name)}</b><small>{sub}</small></span>'
+    inner = f'{_avatar(name, tone_of(name), photo=photo_of(pid))}<span><b>{e(name)}</b><small>{sub}</small></span>'
     return f'<a class="ui-person" href="{e(url)}">{inner}</a>' if url else f'<div class="ui-person">{inner}</div>'
 
 
@@ -289,7 +290,7 @@ def _person_card(s, i, staff=False):
         return f'<div class="ui-person vac"{ds}>{_avatar(None, "blue", "users")}<span><b>Not published online</b><small>{sub}</small></span></div>'
     pid = ids.person_id(name)
     url = href('person:' + pid) if pid and 'person:' + pid in build().ents else None
-    inner = f'{_avatar(name, TONES[i % 4])}<span><b>{e(name)}</b><small>{sub}</small>{f"<small>{e(note)}</small>" if note else ""}</span>'
+    inner = f'{_avatar(name, TONES[i % 4], photo=photo_of(pid))}<span><b>{e(name)}</b><small>{sub}</small>{f"<small>{e(note)}</small>" if note else ""}</span>'
     return f'<a class="ui-person" href="{e(url)}"{ds}>{inner}</a>' if url else f'<div class="ui-person"{ds}>{inner}</div>'
 
 

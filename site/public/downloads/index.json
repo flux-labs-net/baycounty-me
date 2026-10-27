@@ -7187,6 +7187,99 @@
    "api": "/api/v1/datasets/data-sources"
   },
   {
+   "id": "official-photos",
+   "title": "Official photos",
+   "description": "Official headshots of current elected officials and department leaders, one row per person: the photo on BayCounty.me (photo_url, a 320px square WebP), who published it (credit) and the government page it came from (source_url), and when it was copied. Only photos a government publishes on its own website; never campaign, news or social media photos. person_id joins officeholder-terms and entity_id joins entity-profiles. Anyone not listed has no published photo and is shown with initials.",
+   "rows": 40,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "person_id",
+     "type": "string"
+    },
+    {
+     "name": "entity_id",
+     "type": "string"
+    },
+    {
+     "name": "name",
+     "type": "string"
+    },
+    {
+     "name": "photo_url",
+     "type": "string"
+    },
+    {
+     "name": "photo_path",
+     "type": "string"
+    },
+    {
+     "name": "width",
+     "type": "number"
+    },
+    {
+     "name": "height",
+     "type": "number"
+    },
+    {
+     "name": "credit",
+     "type": "string",
+     "values": [
+      "Bay County Board of County Commissioners",
+      "Bay County Clerk of Court and Comptroller",
+      "Bay County Sheriff's Office",
+      "Bay County Supervisor of Elections",
+      "Bay District Schools",
+      "City of Callaway",
+      "City of Lynn Haven",
+      "City of Panama City",
+      "City of Parker"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://cityofparker.com/government/city-council/",
+      "https://panamacity.gov/directory.aspx",
+      "https://www.bay.k12.fl.us/page/school-board",
+      "https://www.baycoclerk.com/",
+      "https://www.baycountyfl.gov/directory.aspx",
+      "https://www.bayso.org/",
+      "https://www.bayvotesfl.gov/about/meet-the-staff/",
+      "https://www.bayvotesfl.gov/about/meet-the-supervisor/",
+      "https://www.cityofcallaway.com/70/Mayor-Commission",
+      "https://www.cityofcallaway.com/directory.aspx",
+      "https://www.cityoflynnhaven.gov/directory.aspx"
+     ]
+    },
+    {
+     "name": "image_source_url",
+     "type": "string"
+    },
+    {
+     "name": "fetched_on",
+     "type": "string",
+     "values": [
+      "2026-10-27"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/official-photos.json",
+   "csv": "/downloads/official-photos.csv",
+   "api": "/api/v1/datasets/official-photos"
+  },
+  {
    "id": "data-completeness",
    "title": "How complete each government's data is",
    "description": "For each government and each portion of its records (adopted budgets, audited spending, tax rates, debt, audit findings, officials by year): the years since 2016 we expect (period, expected), how many we have on file (have), the percent loaded (pct) and a status: complete (100%), partial (50-99%) or missing (under 50%). missing lists the fiscal years not on file. For officials, have and expected are seat-years and pct is the share where the officeholder is confirmed. Votes read from minutes change every few hours and are in /api/v1/import-progress instead.",
@@ -7335,7 +7428,7 @@
    "id": "data-source-sites",
    "title": "Websites our records cite",
    "description": "Every website cited by the records behind BayCounty.me, per topic, with how many distinct documents and pages from it the data links to. Counted from the data files at each build.",
-   "rows": 306,
+   "rows": 308,
    "columns": [
     {
      "name": "website",

@@ -426,3 +426,10 @@ ul.ui-votes{display:flex;flex-direction:column;gap:8px;margin:0;padding:0;list-s
 .dc-fill{display:block;height:100%;border-radius:99px;background:var(--dc)}
 .dc-st{display:inline-flex;align-items:center;gap:6px;font-weight:500;white-space:nowrap}
 @media (max-width:640px){.dc-t .dc-n,.dc-t .dc-sx,.dc-t .dc-sc small,.dc-t thead .dc-sh span{display:none}.dc-t td:first-of-type{width:30%}.dc-t th,.dc-t td{padding:8px 6px}.dc-t tbody th{white-space:normal}}
+/* official photos (data/civic/official_photos.json): the photo fills the initials circle; no photo keeps the initials */
+.ui-av.ui-av-ph,.ui-badge.ui-badge-ph{overflow:hidden;padding:0;background:var(--sunken)}
+.ui-av-ph img,.ui-badge-ph img{display:block;width:100%;height:100%;object-fit:cover;border-radius:inherit}
+:root .ui-badge.ui-badge-ph,:root .tx-top.ui-hero .ui-badge.ui-badge-ph{width:84px;height:84px;border-radius:50%;margin-top:22px;box-shadow:0 0 0 3px var(--surface),0 1px 6px rgb(0 0 0/.12)}
+@media (max-width:640px){:root .ui-badge.ui-badge-ph,:root .tx-top.ui-hero .ui-badge.ui-badge-ph{width:64px;height:64px;border-radius:50%;margin-top:0}}
+.ui-photo-cr{margin:6px 0 0;font-size:12px;color:var(--muted)}
+.ui-photo-cr a{color:inherit}

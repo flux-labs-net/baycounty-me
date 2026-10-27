@@ -111,7 +111,7 @@ fun PersonScreen(personID: String) {
     val byDS = RecordLinks.recordsForPerson(personID, store.rows).toMap()
     var allGifts by rememberSaveable(personID) { mutableStateOf(false) }
     Screen(p?.name ?: "Person") {
-        item { PageHero(p?.label ?: "People", p?.name ?: "Person", p?.headline, badge = { PersonInitials(p?.name ?: "?", 52.dp) }) }
+        item { PageHero(p?.label ?: "People", p?.name ?: "Person", p?.headline, badge = { PersonInitials(p?.name ?: "?", 52.dp, p?.photoUrl) }) }
         val main = p?.mainRoles ?: emptyList()
         if (main.size > 1) item {
             PageSection("Where they serve", "building.columns", Tone.BLUE) {

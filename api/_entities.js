@@ -196,6 +196,10 @@ async function getEntity(req, catalog, id) {
   if (!ent) throw Object.assign(new Error(`No entity "${id}".`), {status: 404, expose: true});
   live = live || await liveConnections(req, catalog, ent);
   if (ent.kind === 'member') ent = await withOfficial(req, catalog, ent);
+  if (ent.kind === 'person') {  // the official photo their government publishes (official-photos), when there is one
+    const ph = (await rowsWhere(req, catalog, 'official-photos', {entity_id: id}).catch(() => []))[0];
+    if (ph) ent = {...ent, photo: {url: ph.photo_url, credit: ph.credit, source_url: ph.source_url}};
+  }
   const all = mergeConfirmed(links, live);
   const labels = await personLabels(req, pm, all, id, source);
   const connections = shape(id, all, labels).sort((a, b) => (b.amount || 0) - (a.amount || 0) || String(a.other.name).localeCompare(String(b.other.name)));
