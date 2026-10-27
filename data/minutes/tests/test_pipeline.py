@@ -48,6 +48,33 @@ class Archive(unittest.TestCase):
         recs = A.parse_boarddocs(ms, 2016, 2026)
         self.assertEqual([r["url"].split("id=")[1] for r in recs], ["A1"])
 
+    def test_boarddocs_backs_off_then_stops(self):
+        calls, sleeps = [], []
+        replies = [RuntimeError("HTTPError: HTTP Error 403: Forbidden"), (b"<p>%s</p>" % (b"x" * 300), "text/html")]
+
+        def fake_req(url, data=None, ctype=None, **kw):
+            calls.append(url)
+            r = replies.pop(0) if replies else RuntimeError("HTTPError: HTTP Error 403: Forbidden")
+            if isinstance(r, Exception):
+                raise r
+            return r
+        old_req, old_sleep = A._req, A.fm.time.sleep
+        A._req, A.fm.time.sleep = fake_req, sleeps.append
+        A._bd.update(last=0.0, blocked=False)
+        try:
+            self.assertEqual(A.boarddocs_file("U1")()[1], "text/html")   # one 403, a wait, then the page
+            self.assertIn(60, sleeps)
+            with self.assertRaises(RuntimeError):                         # refused every time: give up for this run
+                A.boarddocs_file("U2")()
+            self.assertTrue(A._bd["blocked"])
+            n = len(calls)
+            with self.assertRaises(RuntimeError):                         # later files fail without asking again
+                A.boarddocs_file("U3")()
+            self.assertEqual(len(calls), n)
+        finally:
+            A._req, A.fm.time.sleep = old_req, old_sleep
+            A._bd.update(last=0.0, blocked=False)
+
     def test_parker_year_file(self):
         page = ('<table id="filr-library-minutes-1"><tr><td class="title">2016 Minutes</td><td><a href="https://p/2016.pdf">x</a></td></tr>'
                 '<tr><td class="title">2015 Official Minutes</td><td><a href="https://p/2015.pdf">x</a></td></tr>'
