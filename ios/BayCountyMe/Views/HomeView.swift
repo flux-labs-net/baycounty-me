@@ -9,12 +9,16 @@ struct HomeView: View {
     @AppStorage("taxDistrict") private var savedDistrict = ""
 
     private let browse: [(title: String, symbol: String, route: Route)] = [
+        ("Emergencies and alerts", "exclamationmark.triangle", .emergency),
+        ("Hurricane prep", "hurricane", .hurricanePrep),
         ("CRA spending", "building.2", .cra),
         ("Contracts", "signature", .dataset("contracts")),
         ("How they voted", "hand.raised", .dataset("votes")),
         ("Companies", "building", .vendors),
         ("Campaign money", "chart.bar", .dataset("campaign-finance")),
         ("Accountability console", "checklist", .accountability),
+        ("Beaches", "beach.umbrella", .beaches),
+        ("Parks, ramps and trails", "tree", .parks),
         ("Glossary", "character.book.closed", .glossary),
         ("What's new", "sparkles", .updates),
     ]
@@ -26,6 +30,7 @@ struct HomeView: View {
                     searchField
                     ballotBanner
                     addressCard
+                    eventsSection
                     meetingsSection
                     taxBillSection
                     numbersSection
@@ -52,15 +57,21 @@ struct HomeView: View {
                         .accessibilityLabel("Ask a question")
                 }
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button { store.openSite("/alerts") } label: { Image(systemName: "bell") }
-                        .accessibilityLabel("Email alerts")
+                    Button { path.append(.emergency) } label: { Image(systemName: "bell") }
+                        .accessibilityLabel("Emergencies and alerts")
                 }
             }
             .refreshable { await store.refreshAll() }
             .withRoutes()
+            .onReceive(NotificationCenter.default.publisher(for: .openNotice)) { note in
+                // A tapped notification: emergency notices open the Emergencies screen, agenda items their agenda.
+                guard let url = note.object as? URL else { return }
+                if url.path.hasPrefix("/emergency") { store.tab = .home; path = [.emergency] } else { store.open(url) }
+            }
             .task {
                 await store.loadTax()
                 await store.loadAmendment3()
+                await store.load(Events.dataset)
                 await openScreenshotRoute()
             }
         }
@@ -193,6 +204,77 @@ struct HomeView: View {
         }
     }
 
+    // MARK: Events
+
+    /// What's on today and one-off events coming soon, from the community-events dataset (same picks as the site's home page).
+    @ViewBuilder private var eventsSection: some View {
+        let rows = store.rows[Events.dataset] ?? []
+        let today = Events.todayKey()
+        let now = Events.today(rows, today: today)
+        let soon = Events.featured(rows, today: today, until: Events.plusDays(21), limit: 6)
+        if !rows.isEmpty {
+            VStack(alignment: .leading, spacing: 12) {
+                SectionHeader(title: "Happening today", action: "All events") { path.append(.events) }
+                if now.isEmpty {
+                    Text("Nothing listed for today.").font(.subheadline).foregroundStyle(.secondary)
+                        .padding(14).frame(maxWidth: .infinity, alignment: .leading).card(14)
+                } else {
+                    CardList {
+                        ForEach(now.prefix(4)) { r in
+                            EventRow(row: r)
+                            if r.id != now.prefix(4).last?.id { RowDivider(inset: 86) }
+                        }
+                        if now.count > 4 {
+                            RowDivider()
+                            Button("All \(now.count) today") { path.append(.events) }
+                                .font(.subheadline.weight(.semibold)).frame(maxWidth: .infinity, minHeight: 44)
+                        }
+                    }
+                }
+                if !soon.isEmpty {
+                    Text("Coming soon").font(.subheadline.weight(.semibold)).foregroundStyle(.secondary)
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 10) {
+                            ForEach(soon) { r in soonCard(r) }
+                        }
+                    }
+                }
+                Button { path.append(.chambers) } label: {
+                    HStack(spacing: 12) {
+                        ToneIcon(symbol: "storefront", tone: .teal, size: 36)
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("Business community").font(.subheadline.weight(.semibold)).foregroundStyle(.primary)
+                            Text("Chamber boards, events and public money").font(.caption).foregroundStyle(.secondary)
+                        }
+                        Spacer()
+                        Image(systemName: "chevron.right").font(.caption.weight(.semibold)).foregroundStyle(.tertiary)
+                    }
+                    .padding(14).card(14)
+                }
+                .buttonStyle(.plain)
+            }
+        }
+    }
+
+    private func soonCard(_ r: Row) -> some View {
+        let d = Chambers.date(r)
+        return Button { if let u = r.url("url") { store.open(u) } } label: {
+            VStack(alignment: .leading, spacing: 6) {
+                Text(d.map { "\(Self.weekday.string(from: $0).uppercased()) \(Self.month.string(from: $0).uppercased()) \(Self.dayNumber.string(from: $0))" } ?? "")
+                    .font(.caption2.weight(.bold)).foregroundStyle(Brand.salmon)
+                Text(r.string("title") ?? "").font(.subheadline.weight(.semibold)).foregroundStyle(.primary)
+                    .lineLimit(3).multilineTextAlignment(.leading)
+                Spacer(minLength: 0)
+                Text([r.string("venue"), r.string("town")].compactMap { $0 }.joined(separator: " · "))
+                    .font(.caption).foregroundStyle(.secondary).lineLimit(2).multilineTextAlignment(.leading)
+            }
+            .padding(12)
+            .frame(width: 200, height: 132, alignment: .topLeading)
+            .card(14)
+        }
+        .buttonStyle(.plain)
+    }
+
     // MARK: Tax bill
 
     @ViewBuilder private var taxBillSection: some View {
@@ -307,7 +389,9 @@ struct HomeView: View {
             "vendor": .vendor("roberts-and-roberts"), "person": .person("clair-pease"), "explore": .explore,
             "votes": .dataset("votes"), "salaries": .dataset("salary-positions"),
             "accountability": .accountability, "accproject": .accountabilityProject("pcb-fbr-seg3"),
-            "budget": .budgetCompare(govID: "lh"), "craincrement": .craIncrement, "chambers": .chambers, "volunteer": .volunteer, "pastelections": .dataset("campaign-history"),
+            "budget": .budgetCompare(govID: "lh"), "craincrement": .craIncrement, "chambers": .chambers, "events": .events, "beaches": .beaches, "parks": .parks, "schools": .schools, "emergency": .emergency, "hurricaneprep": .hurricanePrep, "volunteer": .volunteer, "pastelections": .dataset("campaign-history"),
+            "roads": .dataset("road-contracts"), "development": .dataset("development-projects"),
+            "restaurants": .dataset("restaurants"), "newbusinesses": .dataset("new-businesses"),
         ]
         if let r = simple[arg] { path = [r]; return }
         if arg == "tab:search" { path = [.search]; return }
@@ -329,6 +413,11 @@ struct HomeView: View {
             let rows = store.rows[ds] ?? []
             let pick = rows.first { $0.string("nonprofit_id") == "np-sb-n01000008288" && (ds == "nonprofits" || $0.string("person") == "Kathy Bass") }
             if let r = pick ?? rows.first { path = [.record(ds, rowID: r.id)] }
+            return
+        }
+        if arg.hasPrefix("utilities:") {
+            let q = String(arg.dropFirst("utilities:".count))
+            if let m = try? await store.gis.search(q).matches.first { path = [.utilities(m)] }
             return
         }
         if arg.hasPrefix("address:") {

@@ -17,6 +17,7 @@ struct MoneyView: View {
 
     private let pay: [Item] = [
         .init(title: "Tax calculator", symbol: "percent", detail: "Your property tax bill, slice by slice", route: .taxCalculator()),
+        .init(title: "Utilities & trash day", symbol: "trash", detail: "Who provides what, and your pickup day", route: .utilities()),
         .init(title: "Fees on your tax bill", symbol: "doc.plaintext", detail: "Fire, stormwater and other flat fees", route: .dataset("fees-assessments")),
         .init(title: "Exemptions", symbol: "house", detail: "Homestead, veterans, seniors and more", route: .dataset("property-tax-exemptions")),
         .init(title: "Amendment 3", symbol: "checklist", detail: "What the ballot amendment would change", route: .amendment3()),
@@ -31,6 +32,10 @@ struct MoneyView: View {
         .init(title: "CRA tax increment", symbol: "percent", detail: "Property tax that goes to the CRAs instead", route: .craIncrement),
         .init(title: "Sales tax projects", symbol: "road.lanes", detail: "Half-cent projects: promised vs built", route: .dataset("sales-tax-projects")),
         .init(title: "Hurricane Michael", symbol: "hurricane", detail: "Every FEMA rebuilding project", route: .dataset("fema-michael-projects")),
+        .init(title: "Development projects", symbol: "building.2", detail: "Site plans and subdivisions in review or approved", route: .dataset("development-projects")),
+        .init(title: "New homes permitted", symbol: "house", detail: "Each year, city by city, since 2016", route: .dataset("housing-permits")),
+        .init(title: "State road work", symbol: "road.lanes", detail: "FDOT contracts, contractors and costs", route: .dataset("road-contracts")),
+        .init(title: "FDOT five-year plan", symbol: "calendar.badge.clock", detail: "Road projects coming in the next five years", route: .dataset("road-work-program")),
     ]
     private let accountability: [Item] = [
         .init(title: "Accountability console", symbol: "checklist", detail: "Projects from budget to close-out, with open questions", route: .accountability),
@@ -56,6 +61,8 @@ struct MoneyView: View {
         .init(title: "Nonprofit boards", symbol: "person.3", detail: "Who sits on each nonprofit's board", route: .dataset("nonprofit-board-members")),
         .init(title: "Volunteer", symbol: "hand.raised", detail: "Open needs from local nonprofits", route: .volunteer),
         .init(title: "Chambers of commerce", symbol: "storefront", detail: "Boards, events and public money", route: .chambers),
+        .init(title: "Restaurant inspections", symbol: "fork.knife", detail: "Every inspection, warning and closure since 2016", route: .dataset("restaurants")),
+        .init(title: "New businesses", symbol: "storefront", detail: "Companies filed in Bay County since 2016", route: .dataset("new-businesses")),
         .init(title: "Business ties", symbol: "briefcase", detail: "Officials' and candidates' businesses", site: "/connections/business-ties"),
     ]
     private let elections: [Item] = [

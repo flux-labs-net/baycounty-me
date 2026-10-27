@@ -2,13 +2,15 @@
 // alerts-run.js compose), with sample or live data, and returns {subject, html, text, note}. Sends nothing.
 // Links in previews are inert: confirm links carry a dummy token (the page says the link expired), and Resend's
 // broadcast placeholders and sample manage links are swapped for the manage page (which asks for an address). Files starting with _ are not routes.
-const {GOVS, SITE, prefsUrl} = require('./_alerts');
+const {GOVS, WEEKLY, SITE, prefsUrl} = require('./_alerts');
 const {describe} = require('./_rules');
-const {confirmEmail, manageLinkEmail, adminSignInEmail, digestEmail} = require('./_emails');
+const {confirmEmail, manageLinkEmail, adminSignInEmail, digestEmail, weeklyEmail} = require('./_emails');
 
 const PREVIEWS = [
   {id: 'confirm_digest', name: 'Sign-up confirmation: weekly updates', when: 'Right after someone signs up for weekly updates on /alerts.'},
   {id: 'confirm_rule', name: 'Sign-up confirmation: rule alert', when: 'Right after someone sets up a rule alert (contracts, votes, keywords, campaign reports).'},
+  {id: 'weekly', name: 'This week in Bay County', when: 'Mondays, to everyone on the countywide weekly list. Built from this week’s live data (/this-week).'},
+  {id: 'confirm_weekly', name: 'Sign-up confirmation: This week in Bay County', when: 'Right after someone signs up on /this-week.'},
   {id: 'digest', name: 'Weekly digest', when: 'Mondays, one per government, to everyone following it. Built from this week’s live data.', usesGov: true},
   {id: 'rule_alert', name: 'Rule alert matches', when: 'Mornings, when new records match someone’s rules. Sample matches, or the latest real email.', sources: true},
   {id: 'manage_link', name: 'Manage-your-emails link', when: 'When someone asks for a link on the manage page.'},
@@ -21,6 +23,7 @@ const PREVIEWS = [
   {id: 'health', name: 'Admin: ingestion problems', when: 'Daily, only when the ingestion check finds problems.'},
   {id: 'review_alerts', name: 'Admin: rule alerts ready to review', when: 'After the morning alerts run, while autosend is off.'},
   {id: 'review_digest', name: 'Admin: weekly digests ready to review', when: 'Mondays, while digest autosend is off.'},
+  {id: 'review_weekly', name: 'Admin: This week in Bay County ready to review', when: 'Mondays, while weekly autosend is off.'},
 ];
 // The agenda watcher notice and the workflow failure alert are built in Python (site/email_ui.py) and aren't previewed here.
 
@@ -63,6 +66,19 @@ async function preview(id, {gov, source} = {}) {
     case 'confirm_digest': {
       const govs = [gov];
       m = confirmEmail({what: 'weekly BayCounty.me updates for ' + govs.map(g => GOVS[g][0]).join(', '), isRule: false, link: fakeConfirm, govs: govs.map(g => GOVS[g][0])});
+      break;
+    }
+    case 'confirm_weekly':
+      m = confirmEmail({what: 'the weekly email This week in Bay County', isRule: false, link: fakeConfirm, govs: [WEEKLY[0]]});
+      break;
+    case 'weekly': {
+      const {SITE_URL} = require('./_data');
+      const r = await fetch(`${SITE_URL}/data/weekly.json?ts=${Date.now()}`);
+      if (!r.ok) throw Object.assign(new Error(`Couldn’t load weekly.json (HTTP ${r.status}).`), {status: 502});
+      const ed = await r.json();
+      m = weeklyEmail(ed);
+      if (!m) return {subject: '', html: '', text: '', note: 'Nothing this week, so no email would go out.'};
+      note = `Week of ${ed.week_of}, live data: ${m.counts.ev} events, ${m.counts.mt} meetings, ${m.counts.vt} new votes, ${m.counts.ct} new contracts.`;
       break;
     }
     case 'confirm_rule':
@@ -126,6 +142,10 @@ async function preview(id, {gov, source} = {}) {
     case 'review_digest':
       m = require('./digest').reviewEmail('ready', {done: [{gov: 'Lynn Haven', ok: true}, {gov: 'Panama City', ok: true}, {gov: 'Callaway', ok: false, error: {message: 'Sample error'}}]});
       note = 'Sample drafts.';
+      break;
+    case 'review_weekly':
+      m = require('./weekly').reviewEmail('ready', {id: 'preview', subject: 'This week in Bay County: 37 events, 6 new votes, 3 new contracts', counts: {ev: 37, mt: 7, vt: 6, ct: 3}});
+      note = 'Sample draft.';
       break;
     default: throw Object.assign(new Error('Unknown email.'), {status: 404});
   }

@@ -21,6 +21,7 @@ GOV_NAME = dict(GOVS)
 AUTO_DAILY = 'Automatic, daily'
 AUTO_WEEKLY = 'Automatic, weekly'
 AUTO_30 = 'Automatic, every 30 minutes on weekdays'
+AUTO_5 = 'Automatic, every 5 minutes'
 BY_HAND = 'Downloaded and read by hand'
 BULK = 'State or federal bulk data file'
 LIVE = 'Live lookup (nothing stored)'
@@ -69,9 +70,42 @@ TOPICS = [
      'Every tax-exempt organization with a county address is pulled from IRS data, with every 990, 990-EZ and 990-PF e-filed since 2019 (board members, pay, grants, revenue). '
      'State charity registrations and state corporate filings are joined in.',
      'Organizations are joined by EIN, then by exact name. Official-to-board matches are checked by hand before they are tagged.'),
+    ('schools', 'Public schools', '/schools',
+     "Every public school, its students and teachers since 2015-16 come from the U.S. Department of Education's school directory, read weekly through the Urban Institute's Education Data API. "
+     "Attendance zones are read weekly from the county GIS server and the calendar every day from the district's website. State school grades and per-pupil spending files are read by hand, because the state's website turns automated readers away.",
+     'Each zone is matched to its school by hand once. Charter schools are linked by hand to the nonprofit that runs them.'),
+    ('emergency', 'Emergencies and hurricane prep', '/emergency',
+     'Weather alerts, city and county alert centers and news feeds, FL511 road closures and the county shelter page are read every 5 minutes; a daily copy goes into the notices archive. '
+     'Evacuation zones and address points come from the county\'s map service. Disaster declarations, FEMA housing aid and flood insurance claims come from OpenFEMA weekly.',
+     'Notices are sorted into kinds by the words in their titles; anything unclear stays a storm update. FEMA money is shown only as totals per ZIP code. Prep steps are summarized by hand and link their source.'),
+    ('notices', 'Public notices', '/notices',
+     "Government legal notices are read every day from the county's public notice website, which keeps 30 days; notices already on file stay as an archive.",
+     "Court, tax deed, foreclosure, probate and other private notices are left out. The posting government is matched from the notice's opening words."),
+    ('jobs', 'Government jobs', '/jobs',
+     "Open jobs are read every day from each employer's public job board. Boards that turn automated readers away are listed with a link instead.",
+     'Jobs whose closing date has passed are dropped.'),
+    ('restaurants', 'Restaurant inspections', '/restaurants',
+     "Every food safety inspection of a restaurant, food truck, caterer or other food service license in the county since 2016 is read from the state's public inspection files, and the state's license list is read every day. "
+     'New businesses come from the state corporate file: every filing since 2016 with a main address in the county.',
+     "The state's inspection result codes are put in plain words. Inspections are joined to licenses by license number. A license holder is linked to a profile only when its name matches one company local governments paid or one Sunbiz filing."),
     ('chambers', 'Chambers of commerce', '/chambers',
      "Board, staff and program lists are copied by hand from each chamber's website. Upcoming events are read every day from the Panama City Beach Chamber's public calendar feed; the Bay County Chamber's calendar platform turns automated readers away.",
      'Board members are joined to other local filings by first and last name, and to an official only where the chamber names their government post. Organizations are joined to governments, paid companies, nonprofits or one Sunbiz filing with the exact same name.'),
+    ('events', 'Community events', '/events',
+     "Read every morning from each organizer's public calendar feed: the county and city calendars (RSS), The Events Calendar feeds on the library, visitor bureau and city sites, the Mexico Beach calendar export and the Panama City Beach Chamber. A feed that fails keeps yesterday's events.",
+     'Library events outside Bay County are left out. Repeating programs (the same title on two or more dates) are flagged so pages can lead with one-off events.'),
+    ('outdoors', 'Beaches and parks', '/beaches',
+     "The beach flag, rip current risk and surf forecast are read every morning from the National Weather Service surf zone forecast (and again in the visitor's browser). Water quality samples are read every day from the Florida Department of Health's Healthy Beaches lookup. Beach accesses, parking, parks, boat ramps and trails come from the county's and Panama City Beach's public GIS maps and the state's coastal access survey.",
+     "Each beach access is joined to the state's coastal access survey only when the two points are within about 200 feet. Parks in the county's park guide are joined to its parks inventory by name. Samples before 2016 are dropped; samples already on file are kept when the state's lookup stops showing them."),
+    ('development', 'Building and development', '/development',
+     "New-home counts come from the Census Bureau's Building Permits Survey files for the county, each city and the unincorporated area. Development projects are read every week from the county's public planning map layers (Bay County's development orders and Panama City Beach's development map).",
+     'Projects with no date, or nothing on record since 2016, are left out. Census figures marked estimated are the Bureau\'s own estimates for a government that sent no monthly reports.'),
+    ('roads', 'Road projects', '/roads',
+     "State road contracts and FDOT's adopted five-year work program are read every week from FDOT's public map services, filtered to the county. County and city road work comes from the half-cent sales tax project map.",
+     'One row per contract (FDOT lists each road segment separately). A contract counts as under way only when FDOT flags it active. Contractors are joined to local vendors by name.'),
+    ('utilities', 'Utilities and trash day', '/utilities',
+     "Providers, pickup rules, holiday schedules and rates are copied by hand from each city's and the county's utility and sanitation pages, rate ordinances and Public Service Commission filings. Pickup routes and the electric co-op territory are read live from public map layers for each lookup; the address isn't kept.",
+     'Each provider row links its source page. The live lookup is checked against known addresses in every city with a route map (Panama City, Lynn Haven, Callaway, Parker).'),
     ('volunteer', 'Volunteer needs', '/volunteer',
      "Open volunteer needs are read every day from United Way of Northwest Florida's volunteer center and Idealist's listings for Bay County towns; only needs in a county town or ZIP are kept. "
      'Volunteer counts come from Part I of each nonprofit\'s latest e-filed Form 990.',
@@ -182,14 +216,69 @@ src('salaries', 'state', 'Florida EDR elected officials\' salaries report', 'htt
 src('campaign', 'county-wide', 'Supervisor of Elections campaign finance (VoterFocus)', 'https://www.voterfocus.com/ws/WScand/candidate_pr.php?c=Bay', AUTO_DAILY, 'Daily', 'Summary totals and itemized contributions and expenses for every local campaign since 2016')
 src('campaign', 'county-wide', 'Supervisor of Elections candidate finance page', 'https://www.bayvotesfl.gov/candidates/candidate-committee-finances/', BY_HAND, 'Each election', 'Which reporting groups and elections exist')
 src('elections', 'county-wide', 'Supervisor of Elections (offices up for election, snapshots)', 'https://www.bayvotesfl.gov/', BY_HAND, 'Each election', 'Races, candidates and status')
-src('elections', 'state', 'Florida election night results (Bay County)', 'https://enr.electionsfl.org/BAY/', BY_HAND, 'Each election', 'Official results')
+src('elections', 'state', 'Supervisor of Elections results site (election night reporting, Bay County)', 'https://enr.electionsfl.org/BAY/', AUTO_DAILY, 'Daily; every 20 minutes on election night', 'Votes for every contest since 2016 by Election Day, early voting and mail, turnout')
+src('elections', 'county-wide', 'Supervisor of Elections results archive', 'https://www.voterfocus.com/enr_php/enrarchive.php?county=Bay&election=', AUTO_DAILY, 'Daily', 'The list of every election since 2016')
+src('elections', 'county-wide', "Supervisor of Elections precinct directory", 'https://www.voterfocus.com/PrecinctFinder/precinctDirectory?county=FL-BAY', AUTO_DAILY, 'Daily', "Each precinct's Election Day polling place")
+src('elections', 'county-wide', "Supervisor of Elections events calendar", 'https://www.bayvotesfl.gov/elections/events/', AUTO_DAILY, 'Daily', 'Canvassing board meetings, voting equipment tests and early voting')
+src('elections', 'county-wide', "Supervisor of Elections voter guide and early voting page", 'https://www.bayvotesfl.gov/voters/vote-early/', BY_HAND, 'Each countywide election', 'Registration and vote-by-mail deadlines, election days, early voting sites and hours')
+src('elections', 'county-wide', 'Bay County address points (county GIS)', 'https://gis.baycountyfl.gov/arcgis/rest/services/Admin_A12/MapServer/3', LIVE, 'Each lookup', 'Map points for voting sites; the address lookup on the voting page')
+src('notices', 'county-wide', "Bay County public notice website", 'https://publicnoticesbaycountyfl.gov/', AUTO_DAILY, 'Daily', 'Government legal notices: bids, public hearings and meetings, with full text (court and private notices left out)')
+src('jobs', 'county', 'Bay County job board', 'https://baycountyfl.wd12.myworkdayjobs.com/en-US/Bay_County_External_Career_Site', AUTO_DAILY, 'Daily', 'Open jobs')
+src('jobs', 'schools', 'Bay District Schools job board', 'https://focus.bayschools.net/focus/jobs/#!Jobs', AUTO_DAILY, 'Daily', 'Open jobs')
+src('jobs', 'pc', 'City of Panama City job board', 'https://www.governmentjobs.com/careers/pcgov', AUTO_DAILY, 'Daily', 'Open jobs with pay')
+src('jobs', 'lh', 'City of Lynn Haven job board', 'https://jobs.keldair.com/cityoflynnhaven', AUTO_DAILY, 'Daily', 'Open jobs')
+src('jobs', 'cw', 'City of Callaway job openings feed', 'https://www.cityofcallaway.com/Jobs.aspx', AUTO_DAILY, 'Daily', 'Open jobs')
+src('jobs', 'parker', 'City of Parker careers page', 'https://cityofparker.com/government/careers/', AUTO_DAILY, 'Daily', 'Open jobs')
+src('jobs', 'county-wide', 'Northwest Florida Beaches International Airport employment page', 'https://www.iflybeaches.com/airport-district/employment', AUTO_DAILY, 'Daily', 'Open jobs')
 
 # --- Businesses and nonprofits ---------------------------------------------------------------------------------------
 src('businesses', 'state', 'Florida Division of Corporations (Sunbiz) quarterly data file', 'https://dos.fl.gov/sunbiz/other-services/data-downloads/', BULK, 'Quarterly', 'Every business with a county address, its officers, managers and registered agents')
 src('businesses', 'state', 'Sunbiz business search', 'https://search.sunbiz.org/', BY_HAND, 'As needed', 'Links to each business\'s state record, used to check matches')
+src('events', 'county', 'Bay County calendar feed', 'https://www.baycountyfl.gov/Calendar.aspx', AUTO_DAILY, 'Daily', 'County events and meetings: title, date, time, place name')
+src('events', 'pc', 'City of Panama City calendar feed', 'https://www.panamacity.gov/Calendar.aspx', AUTO_DAILY, 'Daily', 'City events, recreation programs and meetings')
+src('events', 'lh', 'City of Lynn Haven calendar feed', 'https://www.cityoflynnhaven.gov/Calendar.aspx', AUTO_DAILY, 'Daily', 'City events and meetings')
+src('events', 'cw', 'City of Callaway calendar feed', 'https://www.cityofcallaway.com/Calendar.aspx', AUTO_DAILY, 'Daily', 'City events and meetings')
+src('events', 'parker', 'City of Parker events feed', 'https://cityofparker.com/events/', AUTO_DAILY, 'Daily', 'City events and library dates')
+src('events', 'county', 'Northwest Regional Library System events feed', 'https://www.nwrls.com/events', AUTO_DAILY, 'Daily', 'Bay County library branch programs')
+src('events', 'county', 'Destination Panama City events feed', 'https://www.destinationpanamacity.com/events/', AUTO_DAILY, 'Daily', 'Visitor events in Panama City')
+src('events', 'mb', 'Mexico Beach visitor events calendar', 'https://www.mexicobeach.com/events/', AUTO_DAILY, 'Daily', 'Visitor events in Mexico Beach')
+src('schools', 'schools', 'U.S. Department of Education school directory (Common Core of Data), via the Urban Institute Education Data API', 'https://educationdata.urban.org/documentation/schools.html', AUTO_WEEKLY, 'Yearly (about a year behind)', 'Every public school: level, grades, address, students, teachers, free and reduced lunch')
+src('schools', 'schools', 'Bay County GIS school attendance zones', 'https://gis.baycountyfl.gov/arcgis/rest/services/SchoolAttendanceZones/MapServer', AUTO_WEEKLY, 'As the district redraws zones', 'Elementary, middle and high school zone shapes')
+src('schools', 'schools', 'Bay District Schools calendar', 'https://www.bay.k12.fl.us/o/bds/page/academic-calendar', AUTO_DAILY, 'As the district posts events', 'Days off, breaks, grading periods, graduations and School Board meetings')
+src('schools', 'schools', 'Florida Department of Education school grades and per-pupil expenditure reports', 'https://www.fldoe.org/accountability/accountability-reporting/school-grades/', BY_HAND, 'Yearly (grades in July)', 'Each school\'s grade and spending per student')
+# --- Emergencies and hurricane prep ----------------------------------------------------------------------------------
+src('emergency', 'state', 'National Weather Service active alerts (Bay County land and coastal zones)', 'https://api.weather.gov/alerts/active?zone=FLC005,FLZ012,FLZ112', AUTO_5, 'Every 5 minutes', 'Watches, warnings and advisories: event, area, times, severity and instructions')
+src('emergency', 'county', 'Bay County Alert Center and News Flash feeds', 'https://www.baycountyfl.gov/CivicAlerts.aspx', AUTO_5, 'Every 5 minutes', 'Boil-water notices, closures, evacuation orders, shelter openings and storm updates')
+src('emergency', 'pc', 'Panama City Alert Center and News Flash feeds', 'https://www.panamacity.gov/CivicAlerts.aspx', AUTO_5, 'Every 5 minutes', 'Boil-water notices, closures and storm updates')
+src('emergency', 'pcb', 'Panama City Beach Alert Center and News Flash feeds', 'https://www.pcbfl.gov/CivicAlerts.aspx', AUTO_5, 'Every 5 minutes', 'Boil-water notices, closures and storm updates')
+src('emergency', 'lh', 'Lynn Haven Alert Center and News Flash feeds', 'https://www.cityoflynnhaven.gov/CivicAlerts.aspx', AUTO_5, 'Every 5 minutes', 'Boil-water notices, closures and storm updates')
+src('emergency', 'state', 'FL511 closures, incidents and construction (Bay County)', 'https://fl511.com/list/closures', AUTO_5, 'Every 5 minutes', 'State road closures and incidents: road, direction, description and times')
+src('emergency', 'county-wide', 'Bay County Emergency Shelters page', 'https://www.baycountyfl.gov/766/Emergency-Shelters', AUTO_5, 'Every 5 minutes', 'Each shelter, its address, type and open or closed status')
+src('emergency', 'county-wide', 'Bay County GIS evacuation zones and address points', 'https://gis.baycountyfl.gov/arcgis/rest/services/Admin_A12/MapServer/80', AUTO_DAILY, 'Daily (zones); live (address lookups)', 'Zone A to D shapes; address points to place shelters and look up an address')
+src('emergency', 'state', 'OpenFEMA disaster declarations, housing assistance and flood insurance claims', 'https://www.fema.gov/about/openfema/data-sets', AUTO_WEEKLY, 'Weekly', 'Declarations since 2016; FEMA housing aid and NFIP claims paid, totals per ZIP code')
+src('emergency', 'county-wide', 'Bay County Disaster Preparedness Guide, Ready.gov, CDC and NWS safety pages', 'https://www.baycountyfl.gov/DocumentCenter/View/5659/BayCo-DisasterPreparednessGuide_v10_FINAL-web2', BY_HAND, 'Each season', 'Hurricane prep, sandbag and generator safety steps, summarized with a link to each source')
+src('utilities', 'county', 'Bay County utility services and solid waste haulers list', 'https://www.baycountyfl.gov/DocumentCenter/View/19009/Solid-Waste-Haulers---Bay-County-updated-11-12-25', BY_HAND, 'As the county updates it', 'Licensed private garbage haulers and county water and sewer service')
+src('utilities', 'county', 'City utility and sanitation pages and rate ordinances (all seven cities)', 'https://www.panamacity.gov/154/Environmental-Services-Division-Solid-Wa', BY_HAND, 'Yearly, with new rates', 'Who provides water, sewer and garbage in each city, pickup rules, holiday schedules and rates')
+src('utilities', 'county', 'City route maps (Panama City, Lynn Haven, Callaway, Parker)', 'https://gis.baycountyfl.gov/arcgis/rest/services/LynnHaven/TrashGarbageRoutes/MapServer', LIVE, 'Each lookup', 'Garbage and yard waste route and pickup day at a point')
+src('utilities', 'county', 'Bay County city limits map', 'https://gis.baycountyfl.gov/arcgis/rest/services/BayView/BayView/MapServer/6', LIVE, 'Each lookup', 'Which city an address is in')
+src('utilities', 'county', 'Electric service territories (Pacific Northwest National Laboratory)', 'https://eedgis.pnnl.gov/arcgis/rest/services/Hosted/Electric_Service_Territories/FeatureServer/0', LIVE, 'Each lookup', 'Whether Gulf Coast Electric Cooperative serves a point')
+src('restaurants', 'state', 'Florida DBPR Division of Hotels and Restaurants inspection files', 'https://www2.myfloridalicense.com/hotels-restaurants/public-records/', AUTO_DAILY, 'Daily', 'Every food service inspection since 2016: date, type, result and violations cited')
+src('restaurants', 'state', 'Florida DBPR food service license list', 'https://www2.myfloridalicense.com/hotels-restaurants/public-records/', AUTO_DAILY, 'Daily', 'Every licensed restaurant, food truck and caterer: name, license holder, location, seats')
+src('restaurants', 'state', 'Florida Division of Corporations (Sunbiz) quarterly data file: new filings', 'https://dos.fl.gov/sunbiz/other-services/data-downloads/', BULK, 'Quarterly', 'New businesses filed since 2016 with a main address in the county')
 src('chambers', 'county', 'Bay County Chamber of Commerce website (board, staff and programs)', 'https://panamacity.org/board-of-directors/', BY_HAND, 'As boards change', 'Board, staff and past chairs since 2016 by name, title and organization; regular programs')
 src('chambers', 'county', 'Panama City Beach Chamber of Commerce website (board, staff and programs)', 'https://pcbeach.org/board-of-directors/', BY_HAND, 'As boards change', 'Board and staff by name, title and organization; regular programs')
 src('chambers', 'county', 'Panama City Beach Chamber events calendar feed', 'https://pcbeach.org/local-events/', AUTO_DAILY, 'Daily', 'Upcoming chamber and community events: title, time, venue and link')
+src('outdoors', 'state', 'National Weather Service Tallahassee surf zone forecast (coastal Bay County)', 'https://www.weather.gov/beach/tae', AUTO_DAILY, 'Daily, and live on the page', 'The beach flag color reported by beach officials, rip current risk, surf height, UV index, water temperature and beach alerts')
+src('outdoors', 'state', 'Florida Department of Health, Florida Healthy Beaches Program', 'https://www.floridahealth.gov/community-environmental-public-health/environmental-public-health/water-quality/beach-water-quality/', AUTO_DAILY, 'Daily', 'Sampling sites and every published enterococcus sample, rating and health advisory')
+src('outdoors', 'state', 'Florida DEP coastal access sites', 'https://services1.arcgis.com/nRHtyn3uE1kyzoYc/arcgis/rest/services/BEACH_ACCESS_SITES/FeatureServer', AUTO_DAILY, 'Daily', 'Parking, restrooms, showers, lifeguards and boardwalks at beach accesses')
+src('outdoors', 'county', 'Bay County GIS: beach accesses, beach parking, parks inventory, park guide, boat ramps and trails', 'https://services1.arcgis.com/QB0VWfqR9MD4lF0F/arcgis/rest/services', AUTO_DAILY, 'Daily', 'Every public beach access, county beach lot, park (all governments), boat ramp and trail, with amenities')
+src('outdoors', 'pcb', 'Panama City Beach GIS: recreation (beach access, trails)', 'https://services7.arcgis.com/HMHYRsYOvuxpp8zD/arcgis/rest/services/Recreation/FeatureServer', AUTO_DAILY, 'Daily', 'Wheelchair-accessible beach accesses and Conservation Park trails')
+src('outdoors', 'county-wide', "Each government's parks and recreation pages", 'https://www.baycountyfl.gov/289/Parks-Recreation', BY_HAND, 'As pages change', 'Links for program and league sign-ups')
+src('development', 'state', 'U.S. Census Bureau Building Permits Survey (county and place files)', 'https://www.census.gov/construction/bps/', AUTO_WEEKLY, 'Weekly (Census posts monthly)', 'New homes authorized by building permits per year, by building size, for the county, each city and the unincorporated area')
+src('development', 'county', 'Bay County planning map: development orders', 'https://gis.baycountyfl.gov/arcgis/rest/services/Departmental/Planning/MapServer/18', AUTO_WEEKLY, 'Weekly', 'Each development order project in the unincorporated county: name, use, size, address, status, application and approval dates')
+src('development', 'pcb', 'Panama City Beach development map layer', 'https://gis.baycountyfl.gov/arcgis/rest/services/PanamaCityBeach/PanamaCityBeachPublic/MapServer/4', AUTO_WEEKLY, 'Weekly', 'Development projects with application, approval, building permit and occupancy dates')
+src('roads', 'state', 'FDOT All Construction Contracts map service', 'https://gis.fdot.gov/arcgis/rest/services/All_Construction_Contracts/MapServer/0', AUTO_WEEKLY, 'Weekly', 'Every FDOT construction and maintenance contract in the county: contractor, amount, dates and status')
+src('roads', 'state', 'FDOT current adopted work program map service', 'https://gis.fdot.gov/arcgis/rest/services/Work_Program_Current/MapServer', AUTO_WEEKLY, 'Weekly', 'Projects in the five-year work program: phases and the fiscal years they are funded in')
 src('volunteer', 'county-wide', 'United Way of Northwest Florida volunteer center', 'https://volunteer.unitedwaynwfl.org/need/', AUTO_DAILY, 'Daily', 'Open volunteer needs: title, agency, what volunteers do, when, city and ZIP')
 src('volunteer', 'county-wide', 'Idealist volunteer listings (Bay County towns)', 'https://www.idealist.org/en/volunteer-in-panama-city-fl', AUTO_DAILY, 'Daily', 'Open volunteer opportunities: title, organization, description, city, posted and closing dates')
 src('nonprofits', 'state', 'IRS exempt organization and 990 data (GivingTuesday 990 data lake)', 'https://990data.givingtuesday.org/', BULK, 'As new filings post', 'Organizations, 990, 990-EZ, 990-PF and 990-N filings since 2019: board members, pay, grants and finances')
@@ -271,7 +360,7 @@ FOLDER_TOPIC = {
     'agendas': 'meetings', 'meetings': 'meetings', 'votes': 'votes', 'contracts': 'contracts', 'budgets': 'budgets',
     'debt_audit': 'audits', 'money': 'audits', 'tax': 'property-tax', 'amendment3': 'property-tax', 'exemptions': 'property-tax',
     'salaries': 'salaries', 'campaign': 'campaign', 'elections': 'elections', 'sunbiz': 'businesses', 'careers': 'businesses',
-    'nonprofits': 'nonprofits', 'chambers': 'chambers', 'volunteer': 'volunteer', 'cra': 'cra', 'merged.json': 'cra', 'michael': 'michael', 'surtax': 'sales-tax',
+    'nonprofits': 'nonprofits', 'chambers': 'chambers', 'events': 'events', 'outdoors': 'outdoors', 'development': 'development', 'roads': 'roads', 'emergency': 'emergency', 'notices': 'notices', 'jobs': 'jobs', 'utilities': 'utilities', 'restaurants': 'restaurants', 'volunteer': 'volunteer', 'cra': 'cra', 'merged.json': 'cra', 'michael': 'michael', 'surtax': 'sales-tax',
     'tourism': 'tourist-tax', 'fees': 'fees', 'nearby': 'address', 'civic': 'records', 'projects': 'contracts',
 }
 SKIP_HOSTS = {'baycounty.me', 'www.baycounty.me', 'aptg.co'}

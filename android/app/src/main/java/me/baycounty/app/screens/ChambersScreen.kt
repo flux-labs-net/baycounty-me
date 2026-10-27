@@ -298,7 +298,7 @@ private fun LeaderRow(r: DataRow, detail: String? = null) {
             .padding(horizontal = 14.dp, vertical = 10.dp),
         verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp),
     ) {
-        PersonInitials(name, 38.dp)
+        PersonInitials(name, 38.dp, Chambers.profilePath(r, "photo")?.let { BayCountyClient.SITE + it })
         Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
             Text(name, style = T.subheadBold, color = Brand.text)
             if (sub.isNotEmpty()) Text(sub, style = T.caption, color = Brand.secondary)

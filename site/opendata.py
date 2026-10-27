@@ -11,7 +11,7 @@ import ids  # noqa: E402  shared government / vendor / person ids (data/entities
 import cutoff  # noqa: E402  the site's first year (data/entities/cutoff.py)
 
 # which columns name the government, per dataset, tried in order (office titles are matched by contained name)
-GOV_COLS = {'volunteer-needs': [], 'volunteer-orgs': [], 'chambers': [], 'chamber-leaders': [], 'chamber-events': [], 'owner-gifts': ['office'], 'entity-profiles': ['gov_id'], 'entity-connections': [], 'government-profiles': ['government'], 'government-years': ['gov_id', 'government'], 'budget-years': ['gov_id'], 'cra-agencies': ['gov_id'], 'cra-tax-increment': ['gov_id'], 'cra-increment-checks': [], 'officeholder-terms': ['gov_id'], 'official-photos': [], 'data-completeness': ['gov_id'], 'votes': ['government'], 'member-votes': ['gov_id'], 'cra-payments': ['city'],
+GOV_COLS = {'beach-access': ['run_by'], 'beach-parking': [], 'beach-water-sites': [], 'beach-water-samples': [], 'beach-conditions': [], 'parks': ['gov_id'], 'boat-ramps': ['gov_id'], 'trails': [], 'recreation-departments': ['gov_id'], 'development-projects': ['gov_id'], 'housing-permits': ['gov_id'], 'road-contracts': [], 'road-work-program': [], 'hurricane-prep': [], 'disaster-declarations': [], 'rebuild-money': [], 'evacuation-zones': [], 'emergency-shelters': [], 'emergency-resources': ['gov_id'], 'emergency-notices': ['gov_id'], 'elections': [], 'election-results': ['gov_id'], 'election-dates': [], 'voting-locations': [], 'public-notices': ['gov_id'], 'job-openings': ['gov_id'], 'job-boards': ['gov_id'], 'utility-providers': ['gov_id'], 'utility-rates': ['gov_id'], 'trash-pickup': ['gov_id'], 'trash-holidays': ['gov_id'], 'restaurants': [], 'restaurant-inspections': [], 'new-businesses': [], 'volunteer-needs': [], 'volunteer-orgs': [], 'chambers': [], 'chamber-leaders': [], 'chamber-events': [], 'owner-gifts': ['office'], 'entity-profiles': ['gov_id'], 'entity-connections': [], 'government-profiles': ['government'], 'government-years': ['gov_id', 'government'], 'budget-years': ['gov_id'], 'cra-agencies': ['gov_id'], 'cra-tax-increment': ['gov_id'], 'cra-increment-checks': [], 'officeholder-terms': ['gov_id'], 'official-photos': [], 'data-completeness': ['gov_id'], 'votes': ['government'], 'member-votes': ['gov_id'], 'cra-payments': ['city'],
             'property-tax-rates': ['authority_id'], 'fema-michael-projects': ['applicant'], 'officials-pay': ['title', 'government'],
             'meetings': ['gov', 'board'], 'campaign-finance': ['office', 'gov'], 'bonds': ['gov'], 'salary-positions': ['employer_id'],
             'salary-leaders': ['employer_id'], 'candidates-2026': ['office', 'government'], 'campaign-contributions-2026': ['office'], 'campaign-history': ['gov_id'], 'campaign-contributions-history': ['gov_id'],
@@ -19,11 +19,13 @@ GOV_COLS = {'volunteer-needs': [], 'volunteer-orgs': [], 'chambers': [], 'chambe
             'connections-gifts': ['official_gov_id', 'office'], 'connections-payments': ['payer_gov_id'], 'donor-contracts': ['contract_gov_id'], 'connections-payees': [], 'connections-links': [],
             'vendors-directory': [], 'people-directory': [], 'glossary-terms': [], 'site-updates': [], 'tax-districts': ['district'],
             'savings-opportunities': ['government'], 'savings-evidence': [], 'business-donor-sunbiz': ['gov_id', 'office'], 'shared-owner-groups': [], 'over-limit-gifts': [], 'official-businesses': ['gov_id'], 'official-business-links': ['gov_id'], 'checkbook-payments': ['gov_id'], 'budget-actuals': ['gov_id']}
-FIXED_GOV = {'bed-tax-collections': 'county', 'property-tax-exemptions': 'county'}  # county bed tax in every zone; the county-wide tax roll
+# county bed tax in every zone; the county-wide tax roll; the school datasets are all the school district's
+FIXED_GOV = {'bed-tax-collections': 'county', 'property-tax-exemptions': 'county',
+             'schools': 'schools', 'school-grades': 'schools', 'school-spending': 'schools', 'school-enrollment': 'schools', 'school-calendar': 'schools', 'school-zones': 'schools'}
 
 
 VENDOR_COL = {'contracts': 'vendor', 'change-orders': 'vendor', 'emergency-purchases': 'vendor', 'cra-payments': 'payee', 'vendor-payments': 'vendor',
-              'campaign-contributions-2026': 'contributor', 'campaign-contributions-history': 'contributor', 'business-donor-sunbiz': 'contributor'}
+              'campaign-contributions-2026': 'contributor', 'campaign-contributions-history': 'contributor', 'business-donor-sunbiz': 'contributor', 'road-contracts': 'contractor'}
 
 
 def add_vendor_id(did, rows):
@@ -129,7 +131,10 @@ FIRST_YEAR_COL = {'votes': 'date', 'member-votes': 'date', 'contracts': 'date', 
                   'officeholder-terms': 'end_date', 'official-businesses': 'closed_year', 'official-business-links': 'last_date',
                   'business-donor-sunbiz': 'last_date', 'over-limit-gifts': 'last_date', 'owner-gifts': 'last_date',
                   'checkbook-payments': 'fiscal_year', 'budget-actuals': 'fiscal_year', 'cra-tax-increment': 'fiscal_year',
-                  'cra-increment-checks': 'fiscal_year', 'campaign-contributions-2026': 'date', 'campaign-contributions-history': 'date', 'meetings': 'start', 'chamber-leaders': 'year'}
+                  'cra-increment-checks': 'fiscal_year', 'campaign-contributions-2026': 'date', 'campaign-contributions-history': 'date', 'meetings': 'start', 'chamber-leaders': 'year', 'beach-water-samples': 'date',
+                  'school-grades': 'year', 'school-spending': 'year', 'school-enrollment': 'year', 'school-calendar': 'starts', 'emergency-notices': 'issued', 'disaster-declarations': 'declared', 'rebuild-money': 'year',
+                  'elections': 'date', 'election-results': 'election_date', 'election-dates': 'date', 'public-notices': 'published',
+                  'restaurant-inspections': 'date', 'new-businesses': 'filed_date'}
 DROPPED_BEFORE_FIRST_YEAR = {}  # dataset -> rows the last check dropped (should stay empty: fix the ingestion instead)
 
 
