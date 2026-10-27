@@ -236,8 +236,12 @@ data class PeopleDirectory(val about: String? = null, val people: List<Person> =
         val label: String? = null,
         /** The People page's filter groups: elected, candidate, staff, past. */
         val kinds: List<String>? = null,
+        /** Path of their official photo on the site ("/photos/people/<id>.webp", dataset official-photos); null shows initials. */
+        val photo: String? = null,
         val roles: List<Role> = emptyList(),
     ) {
+        val photoUrl: String? get() = photo?.let { BayCountyClient.SITE + it }
+
         @Serializable data class Role(val role: String? = null, val gov_id: String? = null, val seat: String? = null)
 
         /** Roles with the duplicates removed (see the iOS kit for the reasoning). */

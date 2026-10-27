@@ -703,6 +703,17 @@ def officeholder_terms():
     return rows
 
 
+def official_photos():
+    """Official headshots of current officials and department leaders, one row per person, from
+    data/civic/official_photos.json (data/civic/scripts/official_photos.py). Only photos the government publishes."""
+    import json
+    d = json.load(open(os.path.join(HERE, '..', 'data', 'civic', 'official_photos.json')))
+    return [{'place_id': d['place_id'], 'person_id': r['person_id'], 'entity_id': 'person:' + r['person_id'], 'name': r['name'],
+             'photo_url': 'https://baycounty.me' + r['photo_path'], 'photo_path': r['photo_path'], 'width': r['width'],
+             'height': r['height'], 'credit': r['credit'], 'source_url': r['source_url'],
+             'image_source_url': r['image_source_url'], 'fetched_on': r['fetched_on']} for r in d['photos']]
+
+
 def data_completeness():
     import completeness
     return completeness.rows()
@@ -757,6 +768,7 @@ DATASETS = [
     ('entity-connections', 'Connections between people, companies and organizations', "Every documented connection between two entities in entity-profiles, totalled per pair and kind: a government paid a payee, an organization gave to an official's or candidate's campaign, an official voted on a company's contracts, a person sits on a nonprofit's board or runs a business, a nonprofit gave a grant, two payees share a project. Each row has its source. Individual campaign donors are included only when they run a registered business (owner-gifts); officials' board seats and businesses are added by the API once checked by hand.", entity_connections),
     ('officeholder-terms', 'Officeholders by year', "Who held each elected seat, and each government's appointed manager, on every local government since 2016: one row per person per seat, with start_date and end_date, so the officials in office on any date or in any fiscal year can be picked out. person_name is blank for a known vacancy (vacant true) and for a stretch nobody could confirm from the records found (confirmed false); the note says which. start_date blank = in office before 2016; end_date blank = in office now. start_approx / end_approx mark dates known only to the month or year. appointed is true for the government's appointed manager or administrator (the county manager, city managers, Mexico Beach's administrator) and false for elected seats. how is elected, special election, appointed, interim or commission (chosen by the commission). Each term names its source: election results, minutes, budget books, city sites or news. place_id is the place (fl-bay = Bay County).", officeholder_terms),
     ('data-sources', 'Where the data comes from', "Every source BayCounty.me takes records from, one row per source: the topic, the government it covers (or state and federal databases), the link, how we get it (automatic fetch, downloaded and read by hand, a state or federal bulk file, or a live lookup), how often, what we take from it, how we process it and the checks we run.", data_sources),
+    ('official-photos', 'Official photos', "Official headshots of current elected officials and department leaders, one row per person: the photo on BayCounty.me (photo_url, a 320px square WebP), who published it (credit) and the government page it came from (source_url), and when it was copied. Only photos a government publishes on its own website; never campaign, news or social media photos. person_id joins officeholder-terms and entity_id joins entity-profiles. Anyone not listed has no published photo and is shown with initials.", official_photos),
     ('data-completeness', 'How complete each government\'s data is', "For each government and each portion of its records (adopted budgets, audited spending, tax rates, debt, audit findings, officials by year): the years since 2016 we expect (period, expected), how many we have on file (have), the percent loaded (pct) and a status: complete (100%), partial (50-99%) or missing (under 50%). missing lists the fiscal years not on file. For officials, have and expected are seat-years and pct is the share where the officeholder is confirmed. Votes read from minutes change every few hours and are in /api/v1/import-progress instead.", data_completeness),
     ('data-source-sites', 'Websites our records cite', "Every website cited by the records behind BayCounty.me, per topic, with how many distinct documents and pages from it the data links to. Counted from the data files at each build.", data_source_sites),
     ('site-menu', 'Site menu', "Every link in the site's main menu, one row per link, in English and Spanish: the section and the question it answers, the link's place in the section, and the section's start-here page. place_id is the place the menu belongs to (fl-bay = Bay County), so a menu for another place sits beside it.", site_menu),

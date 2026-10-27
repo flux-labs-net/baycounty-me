@@ -280,7 +280,11 @@ public struct PeopleDirectory: Codable, Sendable {
         public var label: String? = nil
         /// The People page's filter groups: elected, candidate, staff, past.
         public var kinds: [String]? = nil
+        /// Path of their official photo on the site ("/photos/people/<id>.webp", dataset official-photos); nil shows initials.
+        public var photo: String? = nil
         public let roles: [Role]
+
+        public var photoURL: URL? { photo.map { BayCountyClient.site.appendingPathComponent(String($0.dropFirst())) } }
 
         /// Roles with the duplicates removed. Sources word the same office differently
         /// ("board member", "County Commissioner", "officeholder: Bay County Commission, District 5"),

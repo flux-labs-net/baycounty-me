@@ -239,7 +239,7 @@ def _kinds(p):
 
 def people_index():
     from fees_page import who_sections
-    from ui import dir_card, directory, ico
+    from ui import dir_card, directory, ico, avatar, tone_of, photo_of
     G = EG.build()
     cards, kinds, govs = [], Counter(), {}
     total_links = 0
@@ -254,7 +254,8 @@ def people_index():
             if 'gov:' + g in G.ents:
                 govs[g] = G.ents['gov:' + g]['name']
         cards.append(dir_card(f'/people/{p["id"]}', x['name'], x['subtitle'] or '', ' · '.join(gov_link(g) for g in gids),
-                              f'{n} link{"s" if n != 1 else ""}', ' '.join(ks), ' '.join(gids), n, also=' '.join(x['aliases'])))
+                              f'{n} link{"s" if n != 1 else ""}', ' '.join(ks), ' '.join(gids), n, also=' '.join(x['aliases']),
+                              av=avatar(x['name'], tone_of(x['name']), photo=photo_of(p['id']))))
     chips = [('', 'Everyone', len(cards)), ('elected', 'Elected', kinds['elected']), ('candidate', '2026 candidates', kinds['candidate']), ('staff', 'Department leaders', kinds['staff']), ('past', 'Past candidates', kinds['past'])]
     k = lambda icon, tone, label, v, sub: f'<div class="kpi ui-k"><span class="kh">{ico(icon, tone)}<span class="eyebrow">{label}</span></span><span class="v">{v}</span><span class="s">{sub}</span></div>'
     return f'''<div class="page tax">
