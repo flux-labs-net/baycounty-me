@@ -2,12 +2,12 @@
 
 /restaurants: every restaurant, food truck and caterer in the county with its state food safety inspections since 2016
 (datasets restaurants and restaurant-inspections, site/page_datasets.py, from data/restaurants/<county>/, which
-data/restaurants/fetch_dbpr.py refreshes daily). The searchable list reads /data/restaurants.json, written here from the
+data/restaurants/fetch_dbpr.py refreshes daily). The searchable list reads /data/restaurants-page.json (named apart from the dataset files the apps read), written here from the
 same rows, so the page and the API never disagree.
 
 /new-businesses: every company filed with the state since 2016 with its main address in the county (dataset
 new-businesses, from the Sunbiz quarterly file) and every newly licensed restaurant. The list reads
-/data/new-businesses.json (the last 12 months of filings).
+/data/new-businesses-page.json (the last 12 months of filings).
 
 License holders and businesses link to their profile (entity_graph.page_url): a company local governments paid, a
 nonprofit, or the business's own /profile/business/<doc> page, which the API fills from new-businesses and restaurants.
@@ -116,7 +116,7 @@ RS_JS = r"""
     if (c) { c.querySelector('.rs-more')?.click(); c.scrollIntoView({block: 'center'}); }
   }
   addEventListener('hashchange', openHash);
-  fetch('/data/restaurants.json').then(r => r.json()).then(j => { D = j; filter(); openHash(); })
+  fetch('/data/restaurants-page.json').then(r => r.json()).then(j => { D = j; filter(); openHash(); })
     .catch(() => { cnt.textContent = 'The list could not load. Try again in a moment.'; });
 })();
 """
@@ -141,7 +141,7 @@ NB_JS = r"""
   }
   [q, city, type].forEach(x => x.addEventListener(x === q ? 'input' : 'change', () => { N = 25; filter(); }));
   more.addEventListener('click', () => { N += 100; filter(); });
-  fetch('/data/new-businesses.json').then(r => r.json()).then(j => { D = j; filter(); }).catch(() => { cnt.textContent = 'The list could not load. Try again in a moment.'; });
+  fetch('/data/new-businesses-page.json').then(r => r.json()).then(j => { D = j; filter(); }).catch(() => { cnt.textContent = 'The list could not load. Try again in a moment.'; });
 })();
 """
 
@@ -191,7 +191,7 @@ def restaurants_page(out_dir):
                  x['visit_number'], x['result'], x['result_level'], x['high_priority'], x['intermediate'], x['basic'], (x['violation_codes'] or '').replace(':', '').replace('; ', ' ')] for x in v]
             for k, v in by.items()}
     os.makedirs(os.path.join(out_dir, 'data'), exist_ok=True)
-    json.dump({'r': lic_rows, 'i': hist, 'v': VIOLATION, 'updated': today.isoformat()}, open(os.path.join(out_dir, 'data', 'restaurants.json'), 'w'), ensure_ascii=False, separators=(',', ':'))
+    json.dump({'r': lic_rows, 'i': hist, 'v': VIOLATION, 'updated': today.isoformat()}, open(os.path.join(out_dir, 'data', 'restaurants-page.json'), 'w'), ensure_ascii=False, separators=(',', ':'))
 
     now = [r for r in R if r['licensed_now']]
     recent = [x for x in I if x['date'] >= year_ago]
@@ -302,7 +302,7 @@ def new_businesses_page(out_dir):
     os.makedirs(os.path.join(out_dir, 'data'), exist_ok=True)
     json.dump({'b': [[b['doc_number'], b['name'], b['filing_type'], b['filed_date'], b['status'] == 'Active', b['city'], b['zip'],
                       page_url(b['entity_id']), b['source_url'], b['restaurants']] for b in y12], 'through': latest},
-              open(os.path.join(out_dir, 'data', 'new-businesses.json'), 'w'), ensure_ascii=False, separators=(',', ':'))
+              open(os.path.join(out_dir, 'data', 'new-businesses-page.json'), 'w'), ensure_ascii=False, separators=(',', ':'))
 
     # filings per year (the current year is partial) and per month for the last 36 months
     per_year = Counter(b['filed_date'][:4] for b in B)

@@ -199,7 +199,7 @@
     if (c) { c.querySelector('.rs-more')?.click(); c.scrollIntoView({block: 'center'}); }
   }
   addEventListener('hashchange', openHash);
-  fetch('/data/restaurants.json').then(r => r.json()).then(j => { D = j; filter(); openHash(); })
+  fetch('/data/restaurants-page.json').then(r => r.json()).then(j => { D = j; filter(); openHash(); })
     .catch(() => { cnt.textContent = 'The list could not load. Try again in a moment.'; });
 })();
 </script>

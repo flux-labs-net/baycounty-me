@@ -161,7 +161,7 @@
   }
   [q, city, type].forEach(x => x.addEventListener(x === q ? 'input' : 'change', () => { N = 25; filter(); }));
   more.addEventListener('click', () => { N += 100; filter(); });
-  fetch('/data/new-businesses.json').then(r => r.json()).then(j => { D = j; filter(); }).catch(() => { cnt.textContent = 'The list could not load. Try again in a moment.'; });
+  fetch('/data/new-businesses-page.json').then(r => r.json()).then(j => { D = j; filter(); }).catch(() => { cnt.textContent = 'The list could not load. Try again in a moment.'; });
 })();
 </script>
 </main>
