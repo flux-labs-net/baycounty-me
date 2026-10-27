@@ -53,6 +53,8 @@ RELATION = {
     'related': ('shares a project or address with', 'shares a project or address with'),
     'same': ('is the same organization as', 'is the same organization as'),
     'works': ('works at', 'has on its staff'),
+    'hired': ('hired', 'was hired by'),
+    'charter': ('runs a charter school for', 'has a charter school run by'),
 }
 MAIN_GOVS = None
 _C = {}
@@ -473,6 +475,13 @@ def build():
         if oid and oid in G.ents and not pid.startswith('person:'):
             G.link(pid, oid, 'works', None, when, f"Listed with it on the {r['chamber']} board", r.get('source_url'), key='chamber')
 
+    # charter schools: the local nonprofit that runs each one, and the school district that authorized it (schools dataset)
+    for r in _ds('schools'):
+        op, gid = r.get('operator_entity_id'), 'gov:' + (r.get('gov_id') or 'schools')
+        if op and op in G.ents and gid in G.ents:
+            G.link(op, gid, 'charter', None, r.get('enrollment_year'), r['name'] + (f" (grades {r['grades']})" if r.get('grades') else ''),
+                   'https://baycounty.me' + r['page_url'], key=r['school_id'])
+
     # people who run a registered business and gave to a campaign personally (data/campaign/owner_gifts.py)
     for r in _ds('owner-gifts'):
         pid = r.get('candidate_id')
@@ -491,6 +500,17 @@ def build():
         a, b = np_names.get(r['grantor_id']), np_names.get(r.get('recipient_id'))
         if a and b:
             G.link(a, b, 'grant', r.get('cash'), r.get('tax_year'), r.get('purpose'), r.get('source_url'))
+
+    # state road contracts (road-contracts): the Florida Department of Transportation and each contractor it hired here
+    roads = _ds('road-contracts')
+    if roads:
+        fdot = G.ent('gov:fdot', 'Florida Department of Transportation', 'State agency: state highways and bridges', None, 'https://www.fdot.gov/')
+        for r in roads:
+            if not r.get('contractor'):
+                continue
+            to = 'vendor:' + r['vendor_id'] if r.get('vendor_id') and 'vendor:' + r['vendor_id'] in G.ents else \
+                G.ent('business:' + _slug(r['contractor']), ids.biz_case(r['contractor']), 'Road contractor hired by the state')
+            G.link(fdot, to, 'hired', r.get('amount'), r.get('let_date'), 'State road contract', r.get('source_url'), key='fdot')
 
     _C['G'] = G
     return G

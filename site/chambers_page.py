@@ -146,7 +146,7 @@ def _person(r):
         sub.append(_org(r))
     if r.get('term_ends'):
         sub.append(f"Term ends {r['term_ends'][:4]}")
-    return (f'<div class="ch-p">{avatar(r["person_name"], tone_of(r["person_name"]))}<span><b>{_name(r)}</b>'
+    return (f'<div class="ch-p">{avatar(r["person_name"], tone_of(r["person_name"]), photo=r.get("photo"))}<span><b>{_name(r)}</b>'
             f'<small>{" · ".join(sub)}</small></span></div>')
 
 
@@ -299,6 +299,7 @@ def chambers_page(out_dir):
   <section class="tx-sec method"><div class="sec-hd"><h2 id="method">Where this comes from</h2></div>
     <ul class="plain">
       <li><b>Boards, staff and programs</b> are copied from each chamber's own website: names, titles and the organization each board member represents. No phone numbers, emails or addresses.</li>
+      <li><b>Photos</b> are the headshots each chamber publishes on its own board and staff pages. To have one taken down, use the <a href="/about#contact">contact form</a>.</li>
       <li><b>Events</b> are read every day from the Panama City Beach Chamber's public calendar feed. The Bay County Chamber's calendar runs on a members platform that turns automated readers away, so its regular programs are listed instead.</li>
       <li><b>Revenue, staff and public money</b> come from IRS Form 990 filings and the tourism agencies' payment records, the same data as the <a href="/connections/nonprofits">Nonprofits</a> page.</li>
       <li><b>Member lists</b> are on each chamber's directory; they aren't copied here yet.</li>

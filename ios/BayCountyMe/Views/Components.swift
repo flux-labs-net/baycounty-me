@@ -59,6 +59,12 @@ enum Route: Hashable {
     case budgetCompare(govID: String? = nil)
     case craIncrement
     case chambers
+    case events
+    case beaches
+    case parks
+    case schools
+    case emergency
+    case hurricanePrep
 }
 
 extension View {
@@ -91,6 +97,12 @@ extension View {
                 case .budgetCompare(let g): BudgetCompareView(govID: g)
                 case .craIncrement: CRAIncrementView()
                 case .chambers: ChambersView()
+                case .events: EventsView()
+                case .beaches: BeachesView()
+                case .parks: ParksView()
+                case .schools: SchoolsView()
+                case .emergency: EmergencyView()
+                case .hurricanePrep: HurricanePrepView()
                 }
             }
             .pageBackground()

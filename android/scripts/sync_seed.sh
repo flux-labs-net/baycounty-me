@@ -6,7 +6,7 @@ cd "$(dirname "$0")/../.."
 src=site/public/downloads
 dst=android/app/src/main/assets/seed
 mkdir -p "$dst"
-for f in index government-profiles meetings cra-payments; do
+for f in index government-profiles meetings cra-payments schools school-calendar school-enrollment; do
   cp "$src/$f.json" "$dst/$f.json"
 done
 # Every /data/app file except its index, so each screen works offline on first launch.

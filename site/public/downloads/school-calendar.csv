@@ -1,0 +1,26 @@
+place_id,event_id,title,kind,starts,ends,all_day,venue,school_year,source_url,gov_id
+fl-bay,58024795,School Board Meeting,board-meeting,2026-10-27T15:00,2026-10-27T17:00,False,"1311 Balboa Ave, Panama City, FL 32401",2026-27,https://www.bay.k12.fl.us/o/bds/page/academic-calendar,schools
+fl-bay,58195462,Teacher Planning Day - No school for students,no-school,2026-10-28,2026-10-28,True,,2026-27,https://www.bay.k12.fl.us/o/bds/page/academic-calendar,schools
+fl-bay,58024796,School Board Meeting,board-meeting,2026-11-10T15:00,2026-11-10T17:00,False,"1311 Balboa Ave, Panama City, FL 32401",2026-27,https://www.bay.k12.fl.us/o/bds/page/academic-calendar,schools
+fl-bay,58195463,Veterans Day - No school for students,no-school,2026-11-11,2026-11-11,True,,2026-27,https://www.bay.k12.fl.us/o/bds/page/academic-calendar,schools
+fl-bay,58024797,School Board Meeting - Organizational Meeting,board-meeting,2026-11-17T15:00,2026-11-17T17:00,False,"1311 Balboa Ave, Panama City, FL 32401",2026-27,https://www.bay.k12.fl.us/o/bds/page/academic-calendar,schools
+fl-bay,58195464,Thanksgiving Holiday - No school for students,no-school,2026-11-23,2026-11-27,True,,2026-27,https://www.bay.k12.fl.us/o/bds/page/academic-calendar,schools
+fl-bay,58661602,End of Second Nine Weeks,grading,2026-12-18,2026-12-18,True,,2026-27,https://www.bay.k12.fl.us/o/bds/page/academic-calendar,schools
+fl-bay,58661592,Christmas Holidays,break,2026-12-21,2027-01-05,True,,2026-27,https://www.bay.k12.fl.us/o/bds/page/academic-calendar,schools
+fl-bay,58661595,Records Word Day - No school for Students,no-school,2027-01-04,2027-01-04,True,,2026-27,https://www.bay.k12.fl.us/o/bds/page/academic-calendar,schools
+fl-bay,58661593,Martin Luther King Jr's Birthday,no-school,2027-01-18,2027-01-18,True,,2026-27,https://www.bay.k12.fl.us/o/bds/page/academic-calendar,schools
+fl-bay,58661594,Teacher PLC Planning Day - No School for Students,no-school,2027-02-03,2027-02-03,True,,2026-27,https://www.bay.k12.fl.us/o/bds/page/academic-calendar,schools
+fl-bay,58661596,Presidents' Day,no-school,2027-02-15,2027-02-15,True,,2026-27,https://www.bay.k12.fl.us/o/bds/page/academic-calendar,schools
+fl-bay,58661597,End of Third Nine Weeks,grading,2027-03-12,2027-03-12,True,,2026-27,https://www.bay.k12.fl.us/o/bds/page/academic-calendar,schools
+fl-bay,58661598,Spring Break,break,2027-03-15,2027-03-19,True,,2026-27,https://www.bay.k12.fl.us/o/bds/page/academic-calendar,schools
+fl-bay,58661599,Good Friday - No School for Students,no-school,2027-03-26,2027-03-26,True,,2026-27,https://www.bay.k12.fl.us/o/bds/page/academic-calendar,schools
+fl-bay,58661600,Teacher PLC Planning Day - No School for Students,no-school,2027-04-14,2027-04-14,True,,2026-27,https://www.bay.k12.fl.us/o/bds/page/academic-calendar,schools
+fl-bay,58661603,Bay Virtual Graduation,graduation,2027-05-14,2027-05-14,True,,2026-27,https://www.bay.k12.fl.us/o/bds/page/academic-calendar,schools
+fl-bay,58661604,Rosenwald Graduation,graduation,2027-05-17,2027-05-17,True,,2026-27,https://www.bay.k12.fl.us/o/bds/page/academic-calendar,schools
+fl-bay,58661605,Arnold Graduation,graduation,2027-05-18,2027-05-18,True,,2026-27,https://www.bay.k12.fl.us/o/bds/page/academic-calendar,schools
+fl-bay,58661606,Bay Graduation,graduation,2027-05-19,2027-05-19,True,,2026-27,https://www.bay.k12.fl.us/o/bds/page/academic-calendar,schools
+fl-bay,58661607,MKL and Mosley Graduations,graduation,2027-05-20,2027-05-20,True,,2026-27,https://www.bay.k12.fl.us/o/bds/page/academic-calendar,schools
+fl-bay,58661608,Bozeman Graduation,graduation,2027-05-21,2027-05-21,True,,2026-27,https://www.bay.k12.fl.us/o/bds/page/academic-calendar,schools
+fl-bay,58661609,Rutherford Graduation,graduation,2027-05-24,2027-05-24,True,,2026-27,https://www.bay.k12.fl.us/o/bds/page/academic-calendar,schools
+fl-bay,58661610,Haney Graduation,graduation,2027-05-25,2027-05-25,True,,2026-27,https://www.bay.k12.fl.us/o/bds/page/academic-calendar,schools
+fl-bay,58661601,Last Day of School - Early Release Day,last-day,2027-05-26,2027-05-26,True,,2026-27,https://www.bay.k12.fl.us/o/bds/page/academic-calendar,schools

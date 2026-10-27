@@ -121,6 +121,7 @@ def _bars(rows, colors):
 def home_page():
     s = stats()
     from updates import CHANGES, nice
+    from events_page import home_section
     from govs import GOVS
     from place import NAME
     b = bill_data()
@@ -182,6 +183,8 @@ def home_page():
       </div>
   </section>
 
+  {home_section()}
+
   <section class="h-follow" aria-labelledby="follow">
     <div class="h-sec-hd"><div><span class="eyebrow">Step 2 · Follow it</span><h2 id="follow">Where it went, and who's checking.</h2></div><a href="/public-money/accountability">Accountability console →</a></div>
     <div class="h-tiles">
@@ -223,7 +226,7 @@ def home_page():
     </div>
     <div class="h-card">
       <div class="h-card-hd"><b>Take part</b></div>
-      <nav class="h-take" aria-label="Take part"><a href="/meetings">Meetings</a><a href="/elections">2026 elections</a><a href="/elections/voting">Where to vote</a><a href="/elections/results">Election results</a><a href="/notices">Public notices</a><a href="/jobs">Government jobs</a><a href="/records-request">Request a record</a><a href="/alerts">Email alerts</a><a href="/open-data">Open data</a><a href="/glossary">Plain-English guide</a><a href="/es" hreflang="es" lang="es">En español</a></nav>
+      <nav class="h-take" aria-label="Take part"><a href="/emergency">Emergencies &amp; alerts</a><a href="/meetings">Meetings</a><a href="/elections">2026 elections</a><a href="/elections/voting">Where to vote</a><a href="/elections/results">Election results</a><a href="/notices">Public notices</a><a href="/jobs">Government jobs</a><a href="/records-request">Request a record</a><a href="/alerts">Email alerts</a><a href="/open-data">Open data</a><a href="/glossary">Plain-English guide</a><a href="/es" hreflang="es" lang="es">En español</a></nav>
     </div>
   </section>
 </div>

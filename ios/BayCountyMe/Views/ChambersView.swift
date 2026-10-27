@@ -251,7 +251,7 @@ struct ChambersView: View {
         let name = r.string("person_name") ?? ""
         let sub = detail ?? [r.string("title"), r.string("organization")].compactMap { $0 }.joined(separator: " · ")
         let label = HStack(spacing: 12) {
-            PersonInitials(name: name, size: 38)
+            PersonInitials(name: name, size: 38, photo: Chambers.profileURL(r, "photo"))
             VStack(alignment: .leading, spacing: 2) {
                 Text(name).font(.subheadline.weight(.semibold)).foregroundStyle(.primary)
                 Text(sub).font(.caption).foregroundStyle(.secondary).multilineTextAlignment(.leading).fixedSize(horizontal: false, vertical: true)

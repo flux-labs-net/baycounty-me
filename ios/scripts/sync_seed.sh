@@ -5,7 +5,7 @@ set -euo pipefail
 cd "$(dirname "$0")/../.."
 src=site/public/downloads
 dst=ios/BayCountyMe/Resources/Seed
-for f in index government-profiles meetings cra-payments; do
+for f in index government-profiles meetings cra-payments schools school-calendar school-enrollment; do
   cp "$src/$f.json" "$dst/$f.json"
 done
 # Every /data/app file except its index (about 650 KB), so each app screen works offline on first launch.

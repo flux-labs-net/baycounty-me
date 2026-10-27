@@ -27,6 +27,7 @@ def menu():
          'groups': [{'group': 'Local governments', 'items': [
              *[_i(g['short'], f"/governments/{g['slug']}", g.get('menu_desc') or '') for g in govs if g['kind'] != 'city'],
              *[_i(g['short'], f"/governments/{g['slug']}") for g in govs if g['kind'] == 'city'],
+             _i('Public schools', '/schools', 'Your zoned schools, calendar, grades and spending'),
              _i('All governments', '/governments', 'Every local government at a glance'),
              _i('Compare governments', '/compare', 'Budgets, services, taxes, debt and audits per resident'),
          ]}]},
@@ -48,6 +49,9 @@ def menu():
              _i('CRA tax increment', '/public-money/cra-tax-increment', 'Property tax paid to the CRAs, by year'),
              _i('Sales tax projects', '/public-money/sales-tax-projects', 'Half-cent projects: promised vs built'),
              _i('Hurricane Michael', '/public-money/hurricane-michael', 'FEMA, HUD and state recovery money'),
+         ]}, {'group': 'Building and roads', 'items': [
+             _i('Building & development', '/development', 'New homes permitted and projects in review'),
+             _i('Road projects', '/roads', 'State road work, costs and the five-year plan'),
          ]}]},
         {'label': 'Watchdog', 'question': 'Is it spent well?',
          'start': _i('Accountability console', '/public-money/accountability', 'Big projects from approval to close, with open questions'),
@@ -69,9 +73,19 @@ def menu():
              _i('Nonprofits', '/connections/nonprofits', 'Public money, and officials on their boards'),
              _i('Chambers of commerce', '/chambers', 'Boards, events and public money'),
          ]}]},
+        {'label': 'Outdoors', 'question': 'Beaches, water and parks',
+         'start': _i('Beaches', '/beaches', "Today's flag, rip currents, water quality, access"),
+         'groups': [{'group': 'Beaches, water and parks', 'items': [
+             _i('Parks', '/parks', 'Parks, boat ramps, trails and sign-ups'),
+             _i('Water quality', '/beaches#water', 'State bacteria tests at each beach'),
+             _i('Beach access', '/beaches#access', 'Every public access and lot, on a map'),
+         ]}]},
         {'label': 'Take part', 'question': 'Show up, ask, reuse',
          'start': _i('Meetings', '/meetings', 'When every board meets, with agendas'),
          'groups': [{'group': 'Show up, ask, reuse', 'items': [
+             _i('Events', '/events', "What's happening around the county"),
+             _i('Emergencies & alerts', '/emergency', 'Weather warnings, evacuation zones, shelters, boil-water notices'),
+             _i('Hurricane prep', '/hurricane-prep', 'Sandbags, generator safety, disaster declarations, FEMA rebuild money by ZIP code'),
              _i('Public notices', '/notices', 'Bids, hearings and meetings'),
              _i('Government jobs', '/jobs', 'Open jobs at every local government'),
              _i('Email alerts', '/alerts', 'Weekly updates for your government'),

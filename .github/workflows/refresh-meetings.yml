@@ -73,6 +73,24 @@ jobs:
         # The PCB Chamber's public calendar feed. A failure keeps yesterday's events and records the error.
         continue-on-error: true
         run: python data/chambers/fetch_events.py
+      - name: Fetch community events
+        # County and city calendars, the library system, visitor bureaus and the PCB Chamber (after the chamber fetch,
+        # which it reads). A failed source keeps yesterday's events.
+        continue-on-error: true
+        run: python data/events/fetch_events.py
+      - name: Fetch beach conditions, water quality and parks
+        continue-on-error: true
+        run: python3 data/outdoors/fetch_outdoors.py
+      - name: Fetch the school district calendar
+        # Bay District Schools' website events feed: no-school days, early release, grading periods, graduations and
+        # School Board meetings. A failure keeps the events on file and records the error.
+        continue-on-error: true
+        run: python data/schools/fetch_schools.py --only calendar
+      - name: Fetch emergency data
+        # Shelters, the evacuation zone shapes and the day's emergency notices (data/emergency/bay/). The live list is
+        # checked every 5 minutes by the site itself; this keeps the downloadable archive. A failure keeps yesterday's files.
+        continue-on-error: true
+        run: node data/emergency/fetch_emergency.js
       - name: Fetch election results
         # Every Bay County election since 2016 (data/elections/scripts/fetch_results.py). Elections from the last 60 days
         # are read again; a failure keeps the file as it was.
@@ -160,10 +178,10 @@ jobs:
       - name: Commit if changed
         id: commit_and_push
         run: |
-          src="data/meetings data/elections/finance_2026.json data/campaign/owner_gifts.json data/agendas/agenda_items.json data/votes/minutes_votes.json data/entities/name_decisions.json data/chambers/bay/events.json data/elections/results.json data/elections/voting.json data/notices/bay/notices.json data/jobs/bay/jobs.json"
+          src="data/meetings data/elections/finance_2026.json data/campaign/owner_gifts.json data/agendas/agenda_items.json data/votes/minutes_votes.json data/entities/name_decisions.json data/chambers/bay/events.json data/events/bay/events.json data/outdoors/bay data/schools/bay/calendar.json data/emergency data/elections/results.json data/elections/voting.json data/notices/bay/notices.json data/jobs/bay/jobs.json"
           # git status --porcelain also lists new, untracked files, which git diff --quiet ignores.
           if [ -z "$(git status --porcelain -- data site/public)" ]; then echo "No changes"; exit 0; fi
-          .github/scripts/push_refresh.sh "Daily refresh: meetings, agenda items, votes from minutes, campaign finance, elections, notices and jobs ($(date -u +%Y-%m-%d))" $src
+          .github/scripts/push_refresh.sh "Daily refresh: meetings, agenda items, votes from minutes, campaign finance, elections, notices, jobs and emergency notices ($(date -u +%Y-%m-%d))" $src
       - name: Deploy the refresh to Vercel
         # Vercel blocks Git deploys of commits whose author isn't on the Vercel team, which includes this bot's commits.
         # A deploy hook (Vercel > Project > Settings > Git > Deploy Hooks, branch main) builds main regardless; store

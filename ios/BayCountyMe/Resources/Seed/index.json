@@ -121,7 +121,7 @@
    "id": "votes",
    "title": "Recorded votes",
    "description": "Votes by the County Commission, School Board, city commissions and CRA boards since 2016, with how each member voted: hand-researched money votes plus every motion read from the official minutes.",
-   "rows": 3789,
+   "rows": 6714,
    "columns": [
     {
      "name": "date",
@@ -221,6 +221,7 @@
       "0-2",
       "0-3",
       "0-5",
+      "1-0",
       "1-2",
       "1-4",
       "2-0",
@@ -239,6 +240,7 @@
       "5-0 (minutes: 'carried unanimously')",
       "5-0 (minutes: 'carried unanimously'; Mayor Henderson attended by phone)",
       "6-0",
+      "five \"No's\" and zero \"Yes's\"",
       "not found",
       "unanimous",
       "unanimous (per news; names not listed)"
@@ -369,7 +371,7 @@
    "id": "member-votes",
    "title": "Votes by member",
    "description": "One row per member per vote (long format), for tallying individual records.",
-   "rows": 18418,
+   "rows": 32563,
    "columns": [
     {
      "name": "date",
@@ -3737,7 +3739,7 @@
    "id": "site-updates",
    "title": "What's new",
    "description": "Each change to the site's data and pages, newest first.",
-   "rows": 59,
+   "rows": 64,
    "columns": [
     {
      "name": "date",
@@ -6576,7 +6578,7 @@
    "id": "entity-profiles",
    "title": "Profiles: people, companies and organizations",
    "description": "Every company, elected official, candidate, nonprofit, nonprofit board member, registered business, committee and government named in BayCounty.me records, one row each, with its profile page and how many documented connections it has. entity_id (kind:key) joins entity-connections. Board members are named as their nonprofits' public filings list them; individual campaign donors are included only when they run a registered business (owner-gifts).",
-   "rows": 16472,
+   "rows": 16497,
    "columns": [
     {
      "name": "entity_id",
@@ -6693,7 +6695,7 @@
    "id": "entity-connections",
    "title": "Connections between people, companies and organizations",
    "description": "Every documented connection between two entities in entity-profiles, totalled per pair and kind: a government paid a payee, an organization gave to an official's or candidate's campaign, an official voted on a company's contracts, a person sits on a nonprofit's board or runs a business, a nonprofit gave a grant, two payees share a project. Each row has its source. Individual campaign donors are included only when they run a registered business (owner-gifts); officials' board seats and businesses are added by the API once checked by hand.",
-   "rows": 19716,
+   "rows": 19758,
    "columns": [
     {
      "name": "link_id",
@@ -6754,8 +6756,10 @@
      "values": [
       "board",
       "candidate",
+      "charter",
       "gift",
       "grant",
+      "hired",
       "paid",
       "ran",
       "related",
@@ -6773,11 +6777,13 @@
      "values": [
       "gave a grant to",
       "gave to the campaign of",
+      "hired",
       "is a candidate for office in",
       "is the same organization as",
       "paid",
       "ran for office in",
       "runs",
+      "runs a charter school for",
       "served",
       "serves",
       "shares a project or address with",
@@ -7019,20 +7025,25 @@
    "id": "data-sources",
    "title": "Where the data comes from",
    "description": "Every source BayCounty.me takes records from, one row per source: the topic, the government it covers (or state and federal databases), the link, how we get it (automatic fetch, downloaded and read by hand, a state or federal bulk file, or a live lookup), how often, what we take from it, how we process it and the checks we run.",
-   "rows": 117,
+   "rows": 163,
    "columns": [
     {
      "name": "topic",
      "type": "string",
      "values": [
       "Audits and debt",
+      "Beaches and parks",
       "Budgets",
+      "Building and development",
       "Businesses and owners",
       "Campaign money",
       "Chambers of commerce",
+      "Community events",
       "Contracts and change orders",
       "Elections",
+      "Emergencies and hurricane prep",
       "Fees and bills",
+      "Government jobs",
       "Hurricane Michael",
       "Meetings and agendas",
       "My Address lookups",
@@ -7041,8 +7052,11 @@
       "Officials by year",
       "Pay",
       "Property tax",
+      "Public notices",
       "Public records contacts",
+      "Public schools",
       "Redevelopment agencies (CRAs)",
+      "Road projects",
       "Sales tax projects",
       "Tourist tax",
       "Votes"
@@ -7060,17 +7074,25 @@
       "chambers",
       "contracts",
       "cra",
+      "development",
       "elections",
+      "emergency",
+      "events",
       "fees",
+      "jobs",
       "meetings",
       "michael",
       "news",
       "nonprofits",
+      "notices",
       "officials",
+      "outdoors",
       "property-tax",
       "records",
+      "roads",
       "salaries",
       "sales-tax",
+      "schools",
       "tourist-tax",
       "votes"
      ]
@@ -7125,6 +7147,7 @@
      "values": [
       "Automatic, daily",
       "Automatic, every 30 minutes on weekdays",
+      "Automatic, every 5 minutes",
       "Automatic, weekly",
       "Downloaded and read by hand",
       "Live lookup (nothing stored)",
@@ -7133,29 +7156,7 @@
     },
     {
      "name": "refresh",
-     "type": "string",
-     "values": [
-      "As boards change",
-      "As minutes are adopted",
-      "As needed",
-      "As new filings post",
-      "As pages change",
-      "As reports post",
-      "As seats change",
-      "As updated",
-      "Daily",
-      "Each election",
-      "Each meeting",
-      "Each search",
-      "Each year",
-      "Each year, as audits are filed",
-      "Each year, when adopted",
-      "Every 30 minutes on weekdays, and twice a day",
-      "Monthly",
-      "Once",
-      "Quarterly",
-      "Weekly"
-     ]
+     "type": "string"
     },
     {
      "name": "what_we_take",
@@ -7175,16 +7176,24 @@
       "CRA spending is read from CRA annual reports, agendas, budgets and audits, one ledger line per payment or project. Tax increment comes from CRA reports, audits and budgets, split between the county and city by millage.",
       "Candidate lists, status and official results come from the Supervisor of Elections. Platforms come from candidates' own sites.",
       "Each government's agenda system is checked every 30 minutes on weekdays (when a notice email arrives) and swept twice a day. Every agenda, packet and minutes file is downloaded and fingerprinted; a changed file is kept as a new version. An AI model reads each new agenda into a list of items using only the agenda's own words (it is told not to guess). The meetings list combines the agenda system with the government's calendar; boards with no calendar get dates from their regular schedule, marked \"expected\".",
+      "Every public school, its students and teachers since 2015-16 come from the U.S. Department of Education's school directory, read weekly through the Urban Institute's Education Data API. Attendance zones are read weekly from the county GIS server and the calendar every day from the district's website. State school grades and per-pupil spending files are read by hand, because the state's website turns automated readers away.",
       "Every tax-exempt organization with a county address is pulled from IRS data, with every 990, 990-EZ and 990-PF e-filed since 2019 (board members, pay, grants, revenue). State charity registrations and state corporate filings are joined in.",
       "FEMA Public Assistance projects and applicants for disaster DR-4399 are downloaded from OpenFEMA every week.",
+      "Government legal notices are read every day from the county's public notice website, which keeps 30 days; notices already on file stay as an archive.",
       "Infrastructure sales tax projects are downloaded from Bay County's map server every week and matched to the published project schedule.",
       "Local news reports are cited for context (for example an arrest, a resignation or a policy change) when no official document says it.",
       "Money votes are read from adopted minutes (or draft minutes printed in the next agenda packet). Each motion is recorded with the roll call by name; the amount comes from the staff memo or resolution attached to the item. Scanned minutes are read with OCR.",
+      "New-home counts come from the Census Bureau's Building Permits Survey files for the county, each city and the unincorporated area. Development projects are read every week from the county's public planning map layers (Bay County's development orders and Panama City Beach's development map).",
+      "Open jobs are read every day from each employer's public job board. Boards that turn automated readers away are listed with a link instead.",
       "Pay comes from budget pay plans, published salary schedules, job postings and the state's report on officials' salaries.",
+      "Read every morning from each organizer's public calendar feed: the county and city calendars (RSS), The Events Calendar feeds on the library, visitor bureau and city sites, the Mexico Beach calendar export and the Panama City Beach Chamber. A feed that fails keeps yesterday's events.",
       "Records custodians, portals and policies are taken from each agency's official pages.",
+      "State road contracts and FDOT's adopted five-year work program are read every week from FDOT's public map services, filtered to the county. County and city road work comes from the half-cent sales tax project map.",
       "Summary totals and the itemized export for each campaign are downloaded from the Supervisor of Elections' campaign finance system every day. Amended and deleted lines are applied, then businesses are matched to state corporate records.",
       "Tax rates (millage) come from state Department of Revenue and EDR files and the governments' adopted budgets. Assessments and exemptions come from the state's parcel and assessment roll files.",
+      "The beach flag, rip current risk and surf forecast are read every morning from the National Weather Service surf zone forecast (and again in the visitor's browser). Water quality samples are read every day from the Florida Department of Health's Healthy Beaches lookup. Beach accesses, parking, parks, boat ramps and trails come from the county's and Panama City Beach's public GIS maps and the state's coastal access survey.",
       "The state's full corporate file (about 18 GB, updated quarterly) is filtered to businesses with an address in the county. Officers, managers and registered agents are grouped into people and matched to officials and donors.",
+      "Weather alerts, city and county alert centers and news feeds, FL511 road closures and the county shelter page are read every 5 minutes; a daily copy goes into the notices archive. Evacuation zones and address points come from the county's map service. Disaster declarations, FEMA housing aid and flood insurance claims come from OpenFEMA weekly.",
       "Who held each seat since 2016 is built from election results, minutes, budget books, city websites and news reports."
      ]
     },
@@ -7194,21 +7203,29 @@
      "values": [
       "A name match is only a lead: nothing about a person is published until it is checked by hand. Street addresses are never stored or shown.",
       "Board members are joined to other local filings by first and last name, and to an official only where the chamber names their government post. Organizations are joined to governments, paid companies, nonprofits or one Sunbiz filing with the exact same name.",
+      "Court, tax deed, foreclosure, probate and other private notices are left out. The posting government is matched from the notice's opening words.",
+      "Each beach access is joined to the state's coastal access survey only when the two points are within about 200 feet. Parks in the county's park guide are joined to its parks inventory by name. Samples before 2016 are dropped; samples already on file are kept when the state's lookup stops showing them.",
       "Each line carries its source and a confidence level; amounts inside a larger total are shown but counted once. Estimates are checked against official county figures.",
       "Each term names its source. Stretches nobody could confirm are marked unconfirmed, not guessed.",
+      "Each zone is matched to its school by hand once. Charter schools are linked by hand to the nonprofit that runs them.",
       "Every agency-month matches the register's printed total to the cent. Payments to private individuals are counted, not listed.",
       "Failed fetches are logged and emailed to the site admins. Every version of every file is kept.",
       "Itemized sums are checked against the Supervisor's summary totals. Individual donors are only counted, never named, unless they run a registered business.",
+      "Jobs whose closing date has passed are dropped.",
+      "Library events outside Bay County are left out. Repeating programs (the same title on two or more dates) are flagged so pages can lead with one-off events.",
       "Matches between the map and the schedule are listed with their method.",
       "Names are checked against each board's roster. Every split or failed vote found is included.",
       "News is never the only source for a dollar figure.",
       "Nothing you look up is sent to or stored by BayCounty.me.",
+      "Notices are sorted into kinds by the words in their titles; anything unclear stays a storm update. FEMA money is shown only as totals per ZIP code. Prep steps are summarized by hand and link their source.",
       "Office names are checked against the Notice of General Election.",
+      "One row per contract (FDOT lists each road segment separately). A contract counts as under way only when FDOT flags it active. Contractors are joined to local vendors by name.",
       "Only audited figures are used. When a government's latest audit is not yet filed, the previous year is used and labeled.",
       "Only elected officials and department leaders are named. Other staff are counted, not named.",
       "Only portals linked from an official page are listed.",
       "Organizations are joined by EIN, then by exact name. Official-to-board matches are checked by hand before they are tagged.",
       "Panama City records were checked against 124 of 126 meetings' minutes and Panama City Beach against 38 of 50; Bay County and Lynn Haven come from agendas only. Known changes are noted on the record.",
+      "Projects with no date, or nothing on record since 2016, are left out. Census figures marked estimated are the Bureau's own estimates for a government that sent no monthly reports.",
       "Rates are checked against each government's adopted millage resolution where posted.",
       "The data is FEMA's own; nothing is retyped.",
       "Totals are added back up and compared with the printed totals. Each year links to its document.",
@@ -7219,14 +7236,20 @@
      "name": "page",
      "type": "string",
      "values": [
+      "/beaches",
       "/chambers",
       "/connections/business-ties",
       "/connections/campaign-gifts",
       "/connections/nonprofits",
+      "/development",
       "/elections",
+      "/emergency",
+      "/events",
       "/governments",
+      "/jobs",
       "/meetings",
       "/my-address",
+      "/notices",
       "/people",
       "/public-money/budget-compare",
       "/public-money/contracts",
@@ -7238,6 +7261,8 @@
       "/public-money/tourist-tax",
       "/public-money/votes",
       "/records-request",
+      "/roads",
+      "/schools",
       "/updates"
      ]
     },
@@ -7503,7 +7528,7 @@
    "id": "data-source-sites",
    "title": "Websites our records cite",
    "description": "Every website cited by the records behind BayCounty.me, per topic, with how many distinct documents and pages from it the data links to. Counted from the data files at each build.",
-   "rows": 312,
+   "rows": 384,
    "columns": [
     {
      "name": "website",
@@ -7514,21 +7539,28 @@
      "type": "string",
      "values": [
       "Audits and debt",
+      "Beaches and parks",
       "Budgets",
+      "Building and development",
       "Businesses and owners",
       "Campaign money",
       "Chambers of commerce",
+      "Community events",
       "Contracts and change orders",
       "Elections",
+      "Emergencies and hurricane prep",
       "Fees and bills",
+      "Government jobs",
       "Hurricane Michael",
       "Meetings and agendas",
       "My Address lookups",
       "Nonprofits",
       "Pay",
       "Property tax",
+      "Public notices",
       "Public records contacts",
       "Redevelopment agencies (CRAs)",
+      "Road projects",
       "Sales tax projects",
       "Tourist tax",
       "Votes"
@@ -7546,13 +7578,20 @@
       "chambers",
       "contracts",
       "cra",
+      "development",
       "elections",
+      "emergency",
+      "events",
       "fees",
+      "jobs",
       "meetings",
       "michael",
       "nonprofits",
+      "notices",
+      "outdoors",
       "property-tax",
       "records",
+      "roads",
       "salaries",
       "sales-tax",
       "tourist-tax",
@@ -7580,7 +7619,7 @@
    "id": "site-menu",
    "title": "Site menu",
    "description": "Every link in the site's main menu, one row per link, in English and Spanish: the section and the question it answers, the link's place in the section, and the section's start-here page. place_id is the place the menu belongs to (fl-bay = Bay County), so a menu for another place sits beside it.",
-   "rows": 54,
+   "rows": 68,
    "columns": [
     {
      "name": "place_id",
@@ -7606,6 +7645,7 @@
       "Governments",
       "Inicio",
       "Mi dirección",
+      "Outdoors",
       "Participe",
       "People",
       "Spending",
@@ -7622,6 +7662,7 @@
      "name": "question",
      "type": "string",
      "values": [
+      "Beaches, water and parks",
       "Is it spent well?",
       "Show up, ask, reuse",
       "What you pay",
@@ -7634,6 +7675,8 @@
      "name": "item_group",
      "type": "string",
      "values": [
+      "Beaches, water and parks",
+      "Building and roads",
       "Impuestos y tarifas",
       "Is it spent well?",
       "Local governments",
@@ -8482,6 +8525,10 @@
      ]
     },
     {
+     "name": "photo",
+     "type": "string"
+    },
+    {
      "name": "as_of",
      "type": "string",
      "values": [
@@ -8689,6 +8736,4787 @@
    "api": "/api/v1/datasets/chamber-events"
   },
   {
+   "id": "community-events",
+   "title": "Community events",
+   "description": "What's happening around the county in the next two months, from public calendars: the county and city calendars, the library system, visitor bureaus and the Panama City Beach Chamber. One row per event date: title, start and end in local time, town, venue name, category (Community, Public meeting, Library, Chamber), recurring for programs listed on two or more dates, and the event's own link. Refreshed daily.",
+   "rows": 188,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "event_id",
+     "type": "string"
+    },
+    {
+     "name": "source_id",
+     "type": "string",
+     "values": [
+      "bay-county",
+      "callaway",
+      "destination-pc",
+      "library",
+      "lynn-haven",
+      "mexico-beach",
+      "panama-city",
+      "parker",
+      "pcb-chamber"
+     ]
+    },
+    {
+     "name": "source",
+     "type": "string",
+     "values": [
+      "Bay County",
+      "City of Callaway",
+      "City of Lynn Haven",
+      "City of Panama City",
+      "City of Parker",
+      "Destination Panama City",
+      "Mexico Beach (visitor events)",
+      "Northwest Regional Library System",
+      "Panama City Beach Chamber"
+     ]
+    },
+    {
+     "name": "gov",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "parker",
+      "pc"
+     ]
+    },
+    {
+     "name": "town",
+     "type": "string",
+     "values": [
+      "Bay County",
+      "Callaway",
+      "Lynn Haven",
+      "Mexico Beach",
+      "Panama City",
+      "Panama City Beach",
+      "Parker"
+     ]
+    },
+    {
+     "name": "title",
+     "type": "string"
+    },
+    {
+     "name": "starts",
+     "type": "string"
+    },
+    {
+     "name": "ends",
+     "type": "string"
+    },
+    {
+     "name": "all_day",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "venue",
+     "type": "string"
+    },
+    {
+     "name": "category",
+     "type": "string",
+     "values": [
+      "Chamber",
+      "Community",
+      "Library",
+      "Public meeting"
+     ]
+    },
+    {
+     "name": "recurring",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "cost",
+     "type": "string",
+     "values": [
+      "Free",
+      "Free for spectators"
+     ]
+    },
+    {
+     "name": "url",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://cityofparker.com/events/",
+      "https://pcbeach.org/local-events/",
+      "https://www.baycountyfl.gov/Calendar.aspx",
+      "https://www.cityofcallaway.com/Calendar.aspx",
+      "https://www.cityoflynnhaven.gov/Calendar.aspx",
+      "https://www.destinationpanamacity.com/events/",
+      "https://www.mexicobeach.com/events/",
+      "https://www.nwrls.com/events",
+      "https://www.panamacity.gov/Calendar.aspx"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "parker",
+      "pc"
+     ]
+    }
+   ],
+   "json": "/downloads/community-events.json",
+   "csv": "/downloads/community-events.csv",
+   "api": "/api/v1/datasets/community-events"
+  },
+  {
+   "id": "beach-access",
+   "title": "Beach access points",
+   "description": "Every public beach access on the Gulf in the county from the county's GIS: name and number, street address, area (Panama City Beach, Mexico Beach or unincorporated), map point, whether cars can drive on, and whether it is wheelchair accessible (from Panama City Beach's GIS). Parking, restrooms, showers, lifeguards and boardwalks come from the Florida DEP coastal access survey where its site is within about 200 feet (state_site_id); blank means not surveyed.",
+   "rows": 152,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "access_id",
+     "type": "string"
+    },
+    {
+     "name": "name",
+     "type": "string"
+    },
+    {
+     "name": "number",
+     "type": "string"
+    },
+    {
+     "name": "address",
+     "type": "string"
+    },
+    {
+     "name": "area",
+     "type": "string",
+     "values": [
+      "Mexico Beach",
+      "Panama City Beach",
+      "Unincorporated Bay County"
+     ]
+    },
+    {
+     "name": "latitude",
+     "type": "number"
+    },
+    {
+     "name": "longitude",
+     "type": "number"
+    },
+    {
+     "name": "vehicle_access",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "wheelchair_access",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "parking",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "parking_spaces",
+     "type": "number"
+    },
+    {
+     "name": "ada_parking",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "restroom",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "shower",
+     "type": "boolean",
+     "values": [
+      true
+     ]
+    },
+    {
+     "name": "lifeguard",
+     "type": "boolean",
+     "values": [
+      true
+     ]
+    },
+    {
+     "name": "boardwalk",
+     "type": "boolean",
+     "values": [
+      true
+     ]
+    },
+    {
+     "name": "notes",
+     "type": "string",
+     "values": [
+      "Undeveloped beach access",
+      "road wayside park"
+     ]
+    },
+    {
+     "name": "state_access_name",
+     "type": "string"
+    },
+    {
+     "name": "state_site_id",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://services1.arcgis.com/QB0VWfqR9MD4lF0F/arcgis/rest/services/Beach_Access/FeatureServer/0"
+     ]
+    },
+    {
+     "name": "run_by",
+     "type": "string",
+     "values": [
+      "Bay County",
+      "Mexico Beach",
+      "Panama City Beach"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "mb",
+      "pcb"
+     ]
+    }
+   ],
+   "json": "/downloads/beach-access.json",
+   "csv": "/downloads/beach-access.csv",
+   "api": "/api/v1/datasets/beach-access"
+  },
+  {
+   "id": "beach-parking",
+   "title": "Beach parking lots",
+   "description": "County-run beach parking lots: number of spaces, type of parking, map point and the nearest beach access.",
+   "rows": 18,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "lot_id",
+     "type": "string"
+    },
+    {
+     "name": "spaces",
+     "type": "number"
+    },
+    {
+     "name": "parking_type",
+     "type": "string",
+     "values": [
+      "Angle Parking",
+      "Angle and Perpendicular Parking",
+      "Parallel Parking",
+      "Perpendicular Parking"
+     ]
+    },
+    {
+     "name": "latitude",
+     "type": "number"
+    },
+    {
+     "name": "longitude",
+     "type": "number"
+    },
+    {
+     "name": "nearest_access",
+     "type": "string",
+     "values": [
+      "Beach Access 1",
+      "Beach Access 11",
+      "Beach Access 12",
+      "Beach Access 16",
+      "Beach Access 2",
+      "Beach Access 24",
+      "Beach Access 3",
+      "Beach Access 76b",
+      "Beach Access 77",
+      "Beach Access 86",
+      "Beach Access 92",
+      "Beach Access 93"
+     ]
+    },
+    {
+     "name": "nearest_access_id",
+     "type": "string",
+     "values": [
+      "bay-access-101",
+      "bay-access-17",
+      "bay-access-21",
+      "bay-access-24",
+      "bay-access-34",
+      "bay-access-36",
+      "bay-access-4",
+      "bay-access-40",
+      "bay-access-41",
+      "bay-access-42",
+      "bay-access-74",
+      "bay-access-8"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://services1.arcgis.com/QB0VWfqR9MD4lF0F/arcgis/rest/services/Bay_County_Beach_Parking/FeatureServer/0"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/beach-parking.json",
+   "csv": "/downloads/beach-parking.csv",
+   "api": "/api/v1/datasets/beach-parking"
+  },
+  {
+   "id": "beach-water-sites",
+   "title": "Beach water quality: sampling sites",
+   "description": "Each Florida Healthy Beaches Program sampling site in the county (Florida Department of Health), with its latest rated sample, the number of Good, Moderate and Poor samples since first_date, and how many came with a health advisory. Ratings: Good 0-35, Moderate 35.5-70, Poor 70.5 or more enterococci per 100 mL of water.",
+   "rows": 16,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "site_id",
+     "type": "string"
+    },
+    {
+     "name": "name",
+     "type": "string"
+    },
+    {
+     "name": "active",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "epa_beach_id",
+     "type": "string",
+     "values": [
+      "FL131708",
+      "FL173494",
+      "FL183543",
+      "FL289095",
+      "FL309173",
+      "FL311193",
+      "FL351066",
+      "FL414684",
+      "FL607825",
+      "FL751274",
+      "FL805924",
+      "FL819911",
+      "FL841281",
+      "FL888728"
+     ]
+    },
+    {
+     "name": "latitude",
+     "type": "number"
+    },
+    {
+     "name": "longitude",
+     "type": "number"
+    },
+    {
+     "name": "latest_date",
+     "type": "string",
+     "values": [
+      "2025-05-05",
+      "2025-10-27",
+      "2026-10-12"
+     ]
+    },
+    {
+     "name": "latest_enterococcus",
+     "type": "number"
+    },
+    {
+     "name": "latest_rating",
+     "type": "string",
+     "values": [
+      "Good",
+      "Poor"
+     ]
+    },
+    {
+     "name": "latest_advisory",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "samples",
+     "type": "number"
+    },
+    {
+     "name": "first_date",
+     "type": "string",
+     "values": [
+      "2022-10-17",
+      "2023-08-07",
+      "2024-04-15",
+      "2024-05-13",
+      "2024-05-28",
+      "2024-06-10",
+      "2024-07-08",
+      "2024-08-12",
+      "2024-09-16",
+      "2026-02-02"
+     ]
+    },
+    {
+     "name": "good",
+     "type": "number"
+    },
+    {
+     "name": "moderate",
+     "type": "number"
+    },
+    {
+     "name": "poor",
+     "type": "number"
+    },
+    {
+     "name": "advisories",
+     "type": "number"
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/beach-water-sites.json",
+   "csv": "/downloads/beach-water-sites.csv",
+   "api": "/api/v1/datasets/beach-water-sites"
+  },
+  {
+   "id": "beach-water-samples",
+   "title": "Beach water quality: samples",
+   "description": "Every published Healthy Beaches sample at each site: date, enterococcus count per 100 mL, the state's rating and whether a health advisory was issued. The state's lookup shows the latest 50 samples per site; samples are kept here as they come in, so history grows from 2026 on.",
+   "rows": 663,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "site_id",
+     "type": "string",
+     "values": [
+      "Bay1",
+      "Bay10",
+      "Bay11",
+      "Bay12",
+      "Bay13",
+      "Bay2",
+      "Bay3",
+      "Bay377",
+      "Bay4",
+      "Bay403",
+      "Bay404",
+      "Bay5",
+      "Bay6",
+      "Bay7",
+      "Bay9"
+     ]
+    },
+    {
+     "name": "site",
+     "type": "string",
+     "values": [
+      "37th St Public Access",
+      "8th Street",
+      "Bay County Public Beach Access 96",
+      "Beach Drive",
+      "Bid-a-wee Beach",
+      "Carl Gray Park",
+      "Earl Gilbert Park",
+      "Laguna Beach",
+      "Leslie Porter Wayside Park",
+      "Mexico Beach 1st St",
+      "PCB Beach Access 41",
+      "PCB City Pier",
+      "Rick Seltzer Park",
+      "Spyglass Drive",
+      "Sunset Park"
+     ]
+    },
+    {
+     "name": "sample_number",
+     "type": "string"
+    },
+    {
+     "name": "date",
+     "type": "string"
+    },
+    {
+     "name": "enterococcus",
+     "type": "number"
+    },
+    {
+     "name": "reported",
+     "type": "string"
+    },
+    {
+     "name": "advisory",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "rating",
+     "type": "string",
+     "values": [
+      "Good",
+      "Moderate",
+      "Poor"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://www.floridahealth.gov/community-environmental-public-health/environmental-public-health/water-quality/beach-water-quality/beach-detail/?County=Bay&SPLocation=37th STREET PUBLIC ACCESS&SPNo=&SPLat=29.948784&SPLong=-85.424798",
+      "https://www.floridahealth.gov/community-environmental-public-health/environmental-public-health/water-quality/beach-water-quality/beach-detail/?County=Bay&SPLocation=8TH+STREET&SPNo&SPLat=29.93689167&SPLong=-85.40334143",
+      "https://www.floridahealth.gov/community-environmental-public-health/environmental-public-health/water-quality/beach-water-quality/beach-detail/?County=Bay&SPLocation=BAY+COUNTY+PUBLIC+BEACH+ACCESS+96&SPNo=&SPLat=30.26048935&SPLong=-85.97525055",
+      "https://www.floridahealth.gov/community-environmental-public-health/environmental-public-health/water-quality/beach-water-quality/beach-detail/?County=Bay&SPLocation=BEACH+DRIVE&SPNo=&SPLat=30.1640757&SPLong=-85.68754788",
+      "https://www.floridahealth.gov/community-environmental-public-health/environmental-public-health/water-quality/beach-water-quality/beach-detail/?County=Bay&SPLocation=BID-A-WEE+BEACH&SPNo=&SPLat=30.20040528&SPLong=-85.85063557",
+      "https://www.floridahealth.gov/community-environmental-public-health/environmental-public-health/water-quality/beach-water-quality/beach-detail/?County=Bay&SPLocation=CARL+GRAY+PARK&SPNo=&SPLat=30.18776747&SPLong=-85.72827545",
+      "https://www.floridahealth.gov/community-environmental-public-health/environmental-public-health/water-quality/beach-water-quality/beach-detail/?County=Bay&SPLocation=DUPONT+BRIDGE&SPNo=&SPLat=30.10676237&SPLong=-85.60231328",
+      "https://www.floridahealth.gov/community-environmental-public-health/environmental-public-health/water-quality/beach-water-quality/beach-detail/?County=Bay&SPLocation=LAGUNA+BEACH&SPNo=&SPLat=30.23852787&SPLong=-85.92479022",
+      "https://www.floridahealth.gov/community-environmental-public-health/environmental-public-health/water-quality/beach-water-quality/beach-detail/?County=Bay&SPLocation=LESLIE+PORTER+WAYSIDE+PARK&SPNo=&SPLat=30.254081&SPLong=-85.646434",
+      "https://www.floridahealth.gov/community-environmental-public-health/environmental-public-health/water-quality/beach-water-quality/beach-detail/?County=Bay&SPLocation=MEXICO+BEACH+1st+STREET&SPNo=&SPLat=29.92927677&SPLong=-85.39425042",
+      "https://www.floridahealth.gov/community-environmental-public-health/environmental-public-health/water-quality/beach-water-quality/beach-detail/?County=Bay&SPLocation=PCB+Beach+Access&SPNo=&SPLat=30.183437&SPLong=-85.819953",
+      "https://www.floridahealth.gov/community-environmental-public-health/environmental-public-health/water-quality/beach-water-quality/beach-detail/?County=Bay&SPLocation=PCB+CITY+PIER&SPNo=&SPLat=30.2149011&SPLong=-85.87796972",
+      "https://www.floridahealth.gov/community-environmental-public-health/environmental-public-health/water-quality/beach-water-quality/beach-detail/?County=Bay&SPLocation=RICK+SELTZER+PARK&SPNo=&SPLat=30.15824017&SPLong=-85.77893633",
+      "https://www.floridahealth.gov/community-environmental-public-health/environmental-public-health/water-quality/beach-water-quality/beach-detail/?County=Bay&SPLocation=SPYGLASS+DRIVE&SPNo=&SPLat=30.13704533&SPLong=-85.7504149",
+      "https://www.floridahealth.gov/community-environmental-public-health/environmental-public-health/water-quality/beach-water-quality/beach-detail/?County=Bay&SPLocation=SUNSET+PARK&SPNo&SPLat=29.9422004&SPLong=-85.4107167"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/beach-water-samples.json",
+   "csv": "/downloads/beach-water-samples.csv",
+   "api": "/api/v1/datasets/beach-water-samples"
+  },
+  {
+   "id": "beach-conditions",
+   "title": "Beach conditions and flags",
+   "description": "From the National Weather Service Tallahassee surf zone forecast for the county's coast: kind forecast is one row per forecast period (rip current risk, surf height, UV index, water temperature, weather, winds, sunrise and sunset), the first carrying the beach flag color the beach officials reported to the weather service; kind alert is an active beach or coastal alert; kind flag is the flag color reported each day since we began recording; kind legend is what each flag color means. Refreshed daily.",
+   "rows": 11,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "zone",
+     "type": "string",
+     "values": [
+      "FLZ112"
+     ]
+    },
+    {
+     "name": "issued",
+     "type": "string",
+     "values": [
+      "2026-10-27T16:01:00+00:00"
+     ]
+    },
+    {
+     "name": "period",
+     "type": "string",
+     "values": [
+      "Friday",
+      "Rest Of Today",
+      "Saturday",
+      "Thursday",
+      "Wednesday"
+     ]
+    },
+    {
+     "name": "flag_color",
+     "type": "string",
+     "values": [
+      "Double red",
+      "Green",
+      "Purple",
+      "Red",
+      "Yellow"
+     ]
+    },
+    {
+     "name": "meaning",
+     "type": "string",
+     "values": [
+      "Dangerous marine life",
+      "High hazard",
+      "Low hazard",
+      "Medium hazard",
+      "Water closed to the public"
+     ]
+    },
+    {
+     "name": "rip_current_risk",
+     "type": "string",
+     "values": [
+      "Moderate"
+     ]
+    },
+    {
+     "name": "surf_height",
+     "type": "string",
+     "values": [
+      "1 foot or less",
+      "Around 1 foot"
+     ]
+    },
+    {
+     "name": "uv_index",
+     "type": "string",
+     "values": [
+      "High"
+     ]
+    },
+    {
+     "name": "water_temperature",
+     "type": "string",
+     "values": [
+      "75 degrees"
+     ]
+    },
+    {
+     "name": "weather",
+     "type": "string",
+     "values": [
+      "Sunny"
+     ]
+    },
+    {
+     "name": "high_temperature",
+     "type": "string",
+     "values": [
+      "Around 80",
+      "In the lower 80s"
+     ]
+    },
+    {
+     "name": "winds",
+     "type": "string",
+     "values": [
+      "Northeast winds 10 to 15 mph",
+      "Northeast winds 15 to 20 mph"
+     ]
+    },
+    {
+     "name": "sunrise",
+     "type": "string",
+     "values": [
+      "7:53 AM"
+     ]
+    },
+    {
+     "name": "sunset",
+     "type": "string",
+     "values": [
+      "7:00 PM",
+      "7:01 PM"
+     ]
+    },
+    {
+     "name": "summary",
+     "type": "string",
+     "values": [
+      "Calm conditions. Rip currents can still form near piers, jetties and sandbars.",
+      "High surf and/or strong currents. Experienced swimmers only, and only close to shore.",
+      "Jellyfish, stingrays or other marine life seen. Flies with another flag.",
+      "Moderate rip current risk*. Mostly sunny. Highs around 80. East winds around 15 mph.",
+      "Moderate rip current risk*. Mostly sunny. Highs in the upper 70s. East winds around 15 mph.",
+      "Moderate rip current risk*. Surf height 1 foot or less. Sunny. Highs around 80. Northeast winds around 15 mph.",
+      "Moderate surf and/or currents. Use caution.",
+      "Morning update: after communicating with St George Island State Park officials, beach flags may change from red to yellow this afternoon based on the latest conditions. Northeasterly winds will mostly be offshore which will keep surf heights low over the next several days. A moderate risk of rip currents is expected. The only exception is the Franklin County beaches, where the high risk looks to return on Wednesday and Thursday, due to an increasing component of Southeasterly swell.",
+      "Swimming and wading are against the law while double red flags fly (fines apply in Panama City Beach and unincorporated Bay County)."
+     ]
+    },
+    {
+     "name": "date",
+     "type": "string",
+     "values": [
+      "2026-10-27"
+     ]
+    },
+    {
+     "name": "ends",
+     "type": "string"
+    },
+    {
+     "name": "sort_order",
+     "type": "number"
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://api.weather.gov/products/1d2175a9-2fbe-4f4b-b3ea-4e25852ce9a8",
+      "https://www.pcbfl.gov/174/Beach-Flags"
+     ]
+    },
+    {
+     "name": "kind",
+     "type": "string",
+     "values": [
+      "flag",
+      "forecast",
+      "legend"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/beach-conditions.json",
+   "csv": "/downloads/beach-conditions.csv",
+   "api": "/api/v1/datasets/beach-conditions"
+  },
+  {
+   "id": "parks",
+   "title": "Parks",
+   "description": "Every public park in the county from the county's parks inventory (all governments): who runs it, acres, its main use, and yes/no for restrooms, pavilions, picnic tables, playgrounds, sports fields and courts, trails, beach access, boat ramps and docks and fishing piers. facilities and photo_url come from the county's park guide where it lists the park.",
+   "rows": 107,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "park_id",
+     "type": "string"
+    },
+    {
+     "name": "name",
+     "type": "string"
+    },
+    {
+     "name": "address",
+     "type": "string"
+    },
+    {
+     "name": "run_by",
+     "type": "string",
+     "values": [
+      "Bay County",
+      "Callaway",
+      "Lynn Haven",
+      "Mexico Beach",
+      "Panama City",
+      "Panama City Beach",
+      "Parker",
+      "Springfield",
+      "State DEP",
+      "State Forestry"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "sp"
+     ]
+    },
+    {
+     "name": "acres",
+     "type": "number"
+    },
+    {
+     "name": "kind",
+     "type": "string",
+     "values": [
+      "Athletic",
+      "Beach access",
+      "Boat ramp",
+      "Dogs",
+      "Fishing",
+      "Historical site",
+      "Lighted park",
+      "Nature park",
+      "Parking",
+      "Passive nature",
+      "Picnic",
+      "Playground",
+      "Recreation",
+      "Recreational",
+      "Retension pond",
+      "Social",
+      "Social center",
+      "Vest pocket",
+      "Walking",
+      "Water access"
+     ]
+    },
+    {
+     "name": "also",
+     "type": "string",
+     "values": [
+      "Athletic",
+      "Beach Access",
+      "Fishing",
+      "Nature area",
+      "Picnic",
+      "Playground",
+      "Recreation",
+      "Recreational",
+      "Skate Park",
+      "Social Center",
+      "Walking",
+      "War Memorial",
+      "Water Access"
+     ]
+    },
+    {
+     "name": "restroom",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "community_building",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "pavilion",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "picnic_tables",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "beach_access",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "boat_ramp",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "boat_dock",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "fishing_pier",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "baseball",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "basketball",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "football",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "soccer",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "volleyball",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "tennis",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "trail",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "playground",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "other",
+     "type": "string"
+    },
+    {
+     "name": "facilities",
+     "type": "string",
+     "values": [
+      "(1) 100-Yard Small Bore Rifle Range; (50) 25-Yard Small Bore Rifle Ranges; (1) 50-Foot Pistol Range; 15 Position Sporting Clay Course; Archery; Trap and Skeet Fields; Classroom; Restroom",
+      "3 Baseball Fields; Playground; Concession Stand; Restrooms; Picnic Pavilion; Basketball Half-Court; Multi-Purpose Soccer/Football Field",
+      "Baseball Field; Pavilion; Picnic Area; Parking",
+      "Baseball Fields; Concession Stand; Restrooms; Picnic Area; Playground; Pavilion",
+      "Baseball Fields; Picnic Area; Concession Stand; Restrooms; Swings; Lighted Parking",
+      "Baseball/Softball Fields; Picnic Tables; Pavilion; Swings; Walking Track; Parking; Restrooms",
+      "Beach Front on Gulf of Mexico; Covered Building; Restrooms; Gazebo; Parking; Boardwalks",
+      "Boat Ramps with dock; Restrooms; Picnic Area; Nature Trails; Observation Platform; Playground",
+      "Community Building",
+      "Community Building; Playground; Restrooms; Pavilions; Swings; Lighted Parking",
+      "Concrete Boat Ramp; Dock; Picnic Tables; Parking",
+      "Concrete Boat Ramp; Dock; Picnic Tables; Restrooms",
+      "Creative Playground; Picnic Area; Fitness Trail; Restrooms; Stage; Lighted Parking; Walking Track; Observation Platform; Canoe Launch; Nature Trail",
+      "Football Field; Baseball Field; Community Building; Picnic Area; Concession Stand; Restrooms; Playground; Pavilion; Tennis Courts",
+      "Football Stadium; Restrooms; Concession Stand; Lighted Parking",
+      "Parking Area (35 spaces)",
+      "Picnic Area; Swings; Lighted Parking",
+      "Picnic Tables; Ball Field; Nature Trail; Restrooms; Pavilion; Parking",
+      "Picnic Tables; Swings",
+      "Walking Trail; Catch and Release Fishing; Parking"
+     ]
+    },
+    {
+     "name": "photo_url",
+     "type": "string",
+     "values": [
+      "https://www.arcgis.com/sharing/rest/content/items/0f0e3b44ff1d4c1fa9b177796efd62dd/resources/5-stand%20sporting%20clay%20station__1506515909359__w1500.jpeg",
+      "https://www.arcgis.com/sharing/rest/content/items/0f0e3b44ff1d4c1fa9b177796efd62dd/resources/BV%20Buchanan%20Boat%20Ramp__1506717859407__w1500.jpg",
+      "https://www.arcgis.com/sharing/rest/content/items/0f0e3b44ff1d4c1fa9b177796efd62dd/resources/Bayou%20George__1510861061716__w1500.jpg",
+      "https://www.arcgis.com/sharing/rest/content/items/0f0e3b44ff1d4c1fa9b177796efd62dd/resources/David%20Hutchison%20Boat%20Ramp__1507050165048__w1500.jpg",
+      "https://www.arcgis.com/sharing/rest/content/items/0f0e3b44ff1d4c1fa9b177796efd62dd/resources/Deep%20Springs%20Pavillion__1510860838993__w600.jpg",
+      "https://www.arcgis.com/sharing/rest/content/items/0f0e3b44ff1d4c1fa9b177796efd62dd/resources/East%20Bay%20Community%20Park__1510945214680__w1500.jpg",
+      "https://www.arcgis.com/sharing/rest/content/items/0f0e3b44ff1d4c1fa9b177796efd62dd/resources/Hiland%20Park%20Ball%20Field__1510945125316__w1500.jpg",
+      "https://www.arcgis.com/sharing/rest/content/items/0f0e3b44ff1d4c1fa9b177796efd62dd/resources/IMG_0546__1506518713541__w640.jpg",
+      "https://www.arcgis.com/sharing/rest/content/items/0f0e3b44ff1d4c1fa9b177796efd62dd/resources/IMG_20171116_072248661__1510861231374__w1500.jpg",
+      "https://www.arcgis.com/sharing/rest/content/items/0f0e3b44ff1d4c1fa9b177796efd62dd/resources/IMG_20171116_075207327__1510862020577__w1500.jpg",
+      "https://www.arcgis.com/sharing/rest/content/items/0f0e3b44ff1d4c1fa9b177796efd62dd/resources/IMG_20171116_080441917__1510862059636__w1500.jpg",
+      "https://www.arcgis.com/sharing/rest/content/items/0f0e3b44ff1d4c1fa9b177796efd62dd/resources/IMG_20171116_081639033__1510862251801__w1500.jpg",
+      "https://www.arcgis.com/sharing/rest/content/items/0f0e3b44ff1d4c1fa9b177796efd62dd/resources/IMG_20171116_085658037__1510861547909__w1500.jpg",
+      "https://www.arcgis.com/sharing/rest/content/items/0f0e3b44ff1d4c1fa9b177796efd62dd/resources/IMG_20180628_110736779__1530211155309__w1500.jpg",
+      "https://www.arcgis.com/sharing/rest/content/items/0f0e3b44ff1d4c1fa9b177796efd62dd/resources/IslandViewPark__1510683780099__w1500.jpg",
+      "https://www.arcgis.com/sharing/rest/content/items/0f0e3b44ff1d4c1fa9b177796efd62dd/resources/Laird%20Park__1506717819669__w1500.jpg",
+      "https://www.arcgis.com/sharing/rest/content/items/0f0e3b44ff1d4c1fa9b177796efd62dd/resources/Lake%20Powell%20Boat%20Ramp__1506717901521__w1500.jpg",
+      "https://www.arcgis.com/sharing/rest/content/items/0f0e3b44ff1d4c1fa9b177796efd62dd/resources/Majette%20walking%20path__1510684200135__w1500.jpg",
+      "https://www.arcgis.com/sharing/rest/content/items/0f0e3b44ff1d4c1fa9b177796efd62dd/resources/McCall%20Everitt%20Salt__1506517730826__w1299.jpg",
+      "https://www.arcgis.com/sharing/rest/content/items/0f0e3b44ff1d4c1fa9b177796efd62dd/resources/Newbys%20Curve__1526672948642__w1500.jpg",
+      "https://www.arcgis.com/sharing/rest/content/items/0f0e3b44ff1d4c1fa9b177796efd62dd/resources/Pete%20Edwards%20Field__1510928184484__w1500.jpg",
+      "https://www.arcgis.com/sharing/rest/content/items/0f0e3b44ff1d4c1fa9b177796efd62dd/resources/Rick%20Seltzer__1506517095767__w1465.jpg",
+      "https://www.arcgis.com/sharing/rest/content/items/0f0e3b44ff1d4c1fa9b177796efd62dd/resources/Under%20the%20Oaks%20at%20dusk__1506515844723__w662.jpg",
+      "https://www.arcgis.com/sharing/rest/content/items/0f0e3b44ff1d4c1fa9b177796efd62dd/resources/ZollieYoung1__1510777321187__w960.jpg"
+     ]
+    },
+    {
+     "name": "latitude",
+     "type": "number"
+    },
+    {
+     "name": "longitude",
+     "type": "number"
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://services1.arcgis.com/QB0VWfqR9MD4lF0F/arcgis/rest/services/ParkPts/FeatureServer/0"
+     ]
+    }
+   ],
+   "json": "/downloads/parks.json",
+   "csv": "/downloads/parks.csv",
+   "api": "/api/v1/datasets/parks"
+  },
+  {
+   "id": "boat-ramps",
+   "title": "Boat ramps and launches",
+   "description": "Public boat ramps and small-craft launches: park, who runs it, fresh or salt water, waterbody, ramp surface, restroom, dock and fishing pier, and map point.",
+   "rows": 45,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "ramp_id",
+     "type": "string"
+    },
+    {
+     "name": "name",
+     "type": "string"
+    },
+    {
+     "name": "park",
+     "type": "string",
+     "values": [
+      "B V. Buchanan Park",
+      "Bob George Park",
+      "City Marina",
+      "David W Hutchison",
+      "High Point Park",
+      "Ira A. Hutchinson Park",
+      "John B Gore Park",
+      "Lake Powell Park",
+      "Leslie Porter Park",
+      "McCall-Everitt Park",
+      "Millville Waterfront Park",
+      "Pine Log State Park",
+      "Veterans Park",
+      "West Hathaway Bridge"
+     ]
+    },
+    {
+     "name": "address",
+     "type": "string"
+    },
+    {
+     "name": "run_by",
+     "type": "string",
+     "values": [
+      "Bay County",
+      "Callaway",
+      "Lynn Haven",
+      "Mexico Beach",
+      "Panama City",
+      "Parker",
+      "Springfield",
+      "State DEP",
+      "Tyndall AFB"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "sp"
+     ]
+    },
+    {
+     "name": "water",
+     "type": "string",
+     "values": [
+      "Salt",
+      "fresh",
+      "salt"
+     ]
+    },
+    {
+     "name": "waterbody",
+     "type": "string",
+     "values": [
+      "Burnt Mill Creek",
+      "Callaway Bayou",
+      "Crooked Creek",
+      "Deerpoint Lake",
+      "East Bay",
+      "Fanning Bayou",
+      "Farmdale Bayou",
+      "Grand Lagoon",
+      "Gulf of Mexico",
+      "Lake Powell",
+      "Martin Lake",
+      "North Bay",
+      "Pine Log Creek",
+      "Pretty Bayou",
+      "Sandy Creek",
+      "St Andrew Bay",
+      "St Andrew Sound",
+      "St Andrews Bay",
+      "Strange Bayou",
+      "Watson Bayou",
+      "West Bay Intercoastal"
+     ]
+    },
+    {
+     "name": "ramp_surface",
+     "type": "string",
+     "values": [
+      "Floating",
+      "concrete",
+      "dirt",
+      "shell"
+     ]
+    },
+    {
+     "name": "restroom",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "boat_dock",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "fishing_pier",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "acres",
+     "type": "number"
+    },
+    {
+     "name": "latitude",
+     "type": "number"
+    },
+    {
+     "name": "longitude",
+     "type": "number"
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://services1.arcgis.com/QB0VWfqR9MD4lF0F/arcgis/rest/services/Boat_Ramps/FeatureServer/0"
+     ]
+    }
+   ],
+   "json": "/downloads/boat-ramps.json",
+   "csv": "/downloads/boat-ramps.csv",
+   "api": "/api/v1/datasets/boat-ramps"
+  },
+  {
+   "id": "recreation-departments",
+   "title": "Parks and recreation departments",
+   "description": "Each local government's parks and recreation pages (and the state parks and forest in the county), for program and league sign-ups and facility rentals, checked by hand on as_of.",
+   "rows": 11,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "sp"
+     ]
+    },
+    {
+     "name": "name",
+     "type": "string"
+    },
+    {
+     "name": "run_by",
+     "type": "string",
+     "values": [
+      "Bay County",
+      "Callaway",
+      "Florida Forest Service",
+      "Florida State Parks",
+      "Lynn Haven",
+      "Mexico Beach",
+      "Panama City",
+      "Panama City Beach",
+      "Parker",
+      "Springfield"
+     ]
+    },
+    {
+     "name": "parks_url",
+     "type": "string"
+    },
+    {
+     "name": "programs_url",
+     "type": "string",
+     "values": [
+      "https://pcbfl.gov/departments/parks-recreation-department",
+      "https://www.baycountyfl.gov/296/Sports-Programs",
+      "https://www.cityoflynnhaven.gov/496/Sports-Recreation",
+      "https://www.panamacity.gov/688/Programs-Events",
+      "https://www.springfieldfl.net/parks-recreation"
+     ]
+    },
+    {
+     "name": "programs_label",
+     "type": "string",
+     "values": [
+      "Adult sports leagues",
+      "Camps, leagues and classes",
+      "Parks & recreation",
+      "Programs & events",
+      "Sports & recreation"
+     ]
+    },
+    {
+     "name": "as_of",
+     "type": "string",
+     "values": [
+      "2026-10-27"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/recreation-departments.json",
+   "csv": "/downloads/recreation-departments.csv",
+   "api": "/api/v1/datasets/recreation-departments"
+  },
+  {
+   "id": "trails",
+   "title": "Trails",
+   "description": "Named trails from the county's and Panama City Beach's trail maps, with segments added up: miles, surface, allowed uses, skill level and a map point at one end.",
+   "rows": 36,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "trail_id",
+     "type": "string"
+    },
+    {
+     "name": "name",
+     "type": "string"
+    },
+    {
+     "name": "area",
+     "type": "string",
+     "values": [
+      "Camp Helen State Park",
+      "Florida Trail",
+      "Lynn Haven Bayou Park and Preserve",
+      "PCB Conservation Park",
+      "PCB Trail",
+      "Pine Log State Forest",
+      "St. Andrews State Park"
+     ]
+    },
+    {
+     "name": "miles",
+     "type": "number"
+    },
+    {
+     "name": "surface",
+     "type": "string",
+     "values": [
+      "Asphalt",
+      "Asphalt, Concrete",
+      "Asphalt, Native",
+      "Native"
+     ]
+    },
+    {
+     "name": "uses",
+     "type": "string",
+     "values": [
+      "bikes, mountain bikes, walking",
+      "bikes, walking",
+      "mountain bikes",
+      "mountain bikes, walking",
+      "walking"
+     ]
+    },
+    {
+     "name": "skill_level",
+     "type": "string",
+     "values": [
+      "Advanced",
+      "Easy",
+      "Easy, Intermediate",
+      "Intermediate"
+     ]
+    },
+    {
+     "name": "latitude",
+     "type": "number"
+    },
+    {
+     "name": "longitude",
+     "type": "number"
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://services1.arcgis.com/QB0VWfqR9MD4lF0F/arcgis/rest/services/Trail/FeatureServer/0"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/trails.json",
+   "csv": "/downloads/trails.csv",
+   "api": "/api/v1/datasets/trails"
+  },
+  {
+   "id": "development-projects",
+   "title": "Development projects",
+   "description": "Development projects on each local government's public planning map: Bay County's development orders for the unincorporated county (site plans for commercial buildings, subdivisions, apartments and other projects, from application to approval) and Panama City Beach's development map. One row per project: name, what it is, size, address, status and the application, approval, building permit and occupancy dates on record. Projects with no date, or nothing since 2016, are left out. Owners and developers are not listed on the maps.",
+   "rows": 246,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "project_id",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "pcb"
+     ]
+    },
+    {
+     "name": "government",
+     "type": "string",
+     "values": [
+      "Bay County",
+      "Panama City Beach"
+     ]
+    },
+    {
+     "name": "name",
+     "type": "string"
+    },
+    {
+     "name": "case_number",
+     "type": "string"
+    },
+    {
+     "name": "description",
+     "type": "string"
+    },
+    {
+     "name": "size",
+     "type": "string"
+    },
+    {
+     "name": "location",
+     "type": "string"
+    },
+    {
+     "name": "status",
+     "type": "string",
+     "values": [
+      "Applied",
+      "Approved",
+      "Built",
+      "Permitted",
+      "Under review"
+     ]
+    },
+    {
+     "name": "applied_date",
+     "type": "string"
+    },
+    {
+     "name": "approved_date",
+     "type": "string"
+    },
+    {
+     "name": "permit_date",
+     "type": "string",
+     "values": [
+      "2019-05-17",
+      "2019-09-09",
+      "2019-11-15",
+      "2020-01-30",
+      "2020-03-24",
+      "2020-05-27",
+      "2021-01-07",
+      "2021-03-29"
+     ]
+    },
+    {
+     "name": "occupancy_date",
+     "type": "string",
+     "values": [
+      "2020-01-30",
+      "2020-06-29",
+      "2021-01-13",
+      "2021-03-11",
+      "2021-05-05"
+     ]
+    },
+    {
+     "name": "plans_url",
+     "type": "string"
+    },
+    {
+     "name": "lat",
+     "type": "number"
+    },
+    {
+     "name": "lng",
+     "type": "number"
+    },
+    {
+     "name": "source",
+     "type": "string",
+     "values": [
+      "Bay County development orders (unincorporated county)",
+      "Panama City Beach developments (city map layer)"
+     ]
+    },
+    {
+     "name": "source_page",
+     "type": "string",
+     "values": [
+      "https://www.baycountyfl.gov/157/Planning-Zoning",
+      "https://www.pcbfl.gov/departments/planning-zoning"
+     ]
+    },
+    {
+     "name": "fetched",
+     "type": "string",
+     "values": [
+      "2026-10-27"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://gis.baycountyfl.gov/arcgis/rest/services/Departmental/Planning/MapServer/18",
+      "https://gis.baycountyfl.gov/arcgis/rest/services/PanamaCityBeach/PanamaCityBeachPublic/MapServer/4"
+     ]
+    }
+   ],
+   "json": "/downloads/development-projects.json",
+   "csv": "/downloads/development-projects.csv",
+   "api": "/api/v1/datasets/development-projects"
+  },
+  {
+   "id": "housing-permits",
+   "title": "New homes permitted",
+   "description": "New privately owned homes authorized by building permits, per year, for the whole county, each city and the unincorporated area, from the U.S. Census Bureau's Building Permits Survey: single-family homes, homes in 2 to 4 unit buildings and in buildings with 5 or more units, with the construction value the permits list and a one-line summary. year_to_date rows cover this year so far (period). estimated is true when the government sent the Census Bureau no monthly reports that year and the figures are the Bureau's estimate.",
+   "rows": 99,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "area_id",
+     "type": "string",
+     "values": [
+      "county",
+      "county-total",
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "sp"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "sp"
+     ]
+    },
+    {
+     "name": "area",
+     "type": "string",
+     "values": [
+      "All of Bay County",
+      "Callaway",
+      "Lynn Haven",
+      "Mexico Beach",
+      "Panama City",
+      "Panama City Beach",
+      "Parker",
+      "Springfield",
+      "Unincorporated Bay County"
+     ]
+    },
+    {
+     "name": "year",
+     "type": "number"
+    },
+    {
+     "name": "period",
+     "type": "string",
+     "values": [
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024",
+      "2025",
+      "Jan to Aug 2026"
+     ]
+    },
+    {
+     "name": "months",
+     "type": "number"
+    },
+    {
+     "name": "year_to_date",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "months_reported",
+     "type": "number"
+    },
+    {
+     "name": "estimated",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "single_family_units",
+     "type": "number"
+    },
+    {
+     "name": "single_family_value",
+     "type": "number"
+    },
+    {
+     "name": "two_to_four_units",
+     "type": "number"
+    },
+    {
+     "name": "two_to_four_buildings",
+     "type": "number"
+    },
+    {
+     "name": "two_to_four_value",
+     "type": "number"
+    },
+    {
+     "name": "five_plus_units",
+     "type": "number"
+    },
+    {
+     "name": "five_plus_buildings",
+     "type": "number"
+    },
+    {
+     "name": "five_plus_value",
+     "type": "number"
+    },
+    {
+     "name": "total_units",
+     "type": "number"
+    },
+    {
+     "name": "total_value",
+     "type": "number"
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://www2.census.gov/econ/bps/County/co2016a.txt",
+      "https://www2.census.gov/econ/bps/County/co2017a.txt",
+      "https://www2.census.gov/econ/bps/County/co2018a.txt",
+      "https://www2.census.gov/econ/bps/County/co2019a.txt",
+      "https://www2.census.gov/econ/bps/County/co2020a.txt",
+      "https://www2.census.gov/econ/bps/County/co2021a.txt",
+      "https://www2.census.gov/econ/bps/County/co2022a.txt",
+      "https://www2.census.gov/econ/bps/County/co2023a.txt",
+      "https://www2.census.gov/econ/bps/County/co2024a.txt",
+      "https://www2.census.gov/econ/bps/County/co2025a.txt",
+      "https://www2.census.gov/econ/bps/County/co2608y.txt",
+      "https://www2.census.gov/econ/bps/Place/South%20Region/so2016a.txt",
+      "https://www2.census.gov/econ/bps/Place/South%20Region/so2017a.txt",
+      "https://www2.census.gov/econ/bps/Place/South%20Region/so2018a.txt",
+      "https://www2.census.gov/econ/bps/Place/South%20Region/so2019a.txt",
+      "https://www2.census.gov/econ/bps/Place/South%20Region/so2020a.txt",
+      "https://www2.census.gov/econ/bps/Place/South%20Region/so2021a.txt",
+      "https://www2.census.gov/econ/bps/Place/South%20Region/so2022a.txt",
+      "https://www2.census.gov/econ/bps/Place/South%20Region/so2023a.txt",
+      "https://www2.census.gov/econ/bps/Place/South%20Region/so2024a.txt",
+      "https://www2.census.gov/econ/bps/Place/South%20Region/so2025a.txt",
+      "https://www2.census.gov/econ/bps/Place/South%20Region/so2608y.txt"
+     ]
+    },
+    {
+     "name": "summary",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/housing-permits.json",
+   "csv": "/downloads/housing-permits.csv",
+   "api": "/api/v1/datasets/housing-permits"
+  },
+  {
+   "id": "road-contracts",
+   "title": "State road contracts",
+   "description": "Every Florida Department of Transportation construction and maintenance contract in the county that was under way in 2016 or later: what and where, the contractor, the current contract amount, letting, start, estimated finish and final acceptance dates, and status. status is Under way when FDOT's map shows the contract active. vendor_id links a contractor that local governments also paid. project_id is FDOT's item and segment number, which joins road-work-program.",
+   "rows": 85,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "agency",
+     "type": "string",
+     "values": [
+      "Florida Department of Transportation"
+     ]
+    },
+    {
+     "name": "contract_id",
+     "type": "string"
+    },
+    {
+     "name": "project_id",
+     "type": "string"
+    },
+    {
+     "name": "description",
+     "type": "string"
+    },
+    {
+     "name": "description_fdot",
+     "type": "string"
+    },
+    {
+     "name": "contract_type",
+     "type": "string",
+     "values": [
+      "Asset maintenance",
+      "Construction",
+      "Design-build",
+      "Lump sum construction",
+      "Maintenance"
+     ]
+    },
+    {
+     "name": "contract_type_code",
+     "type": "string",
+     "values": [
+      "CC",
+      "CDB",
+      "CLS",
+      "CSL",
+      "MAM",
+      "MLC"
+     ]
+    },
+    {
+     "name": "status",
+     "type": "string",
+     "values": [
+      "Complete",
+      "Under way"
+     ]
+    },
+    {
+     "name": "active_on_fdot_map",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "contractor",
+     "type": "string"
+    },
+    {
+     "name": "amount",
+     "type": "number"
+    },
+    {
+     "name": "let_date",
+     "type": "string"
+    },
+    {
+     "name": "executed_date",
+     "type": "string"
+    },
+    {
+     "name": "work_began_date",
+     "type": "string"
+    },
+    {
+     "name": "estimated_completion_date",
+     "type": "string"
+    },
+    {
+     "name": "final_acceptance_date",
+     "type": "string"
+    },
+    {
+     "name": "ended_date",
+     "type": "string"
+    },
+    {
+     "name": "bid_days",
+     "type": "number"
+    },
+    {
+     "name": "length_miles",
+     "type": "number"
+    },
+    {
+     "name": "lat",
+     "type": "number"
+    },
+    {
+     "name": "lng",
+     "type": "number"
+    },
+    {
+     "name": "district",
+     "type": "string",
+     "values": [
+      "03"
+     ]
+    },
+    {
+     "name": "website",
+     "type": "string",
+     "values": [
+      "http://www.nwflroads.com/"
+     ]
+    },
+    {
+     "name": "data_date",
+     "type": "string",
+     "values": [
+      "2026-08-01"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://gis.fdot.gov/arcgis/rest/services/All_Construction_Contracts/MapServer/0"
+     ]
+    },
+    {
+     "name": "financial_projects",
+     "type": "number"
+    },
+    {
+     "name": "roads",
+     "type": "string",
+     "values": [
+      "ARTHUR DRIVE OVER LYNN HAVEN BAYOU BRIDGE NO. 464514",
+      "CR 2327",
+      "CR 30",
+      "CR 389",
+      "OS 391",
+      "SR 20",
+      "SR 22",
+      "SR 30",
+      "SR 30A",
+      "SR 368",
+      "SR 368A",
+      "SR 388",
+      "SR 390",
+      "SR 391",
+      "SR 392A",
+      "SR 75",
+      "SR 77",
+      "SR 79"
+     ]
+    },
+    {
+     "name": "fetched",
+     "type": "string",
+     "values": [
+      "2026-10-27"
+     ]
+    },
+    {
+     "name": "vendor_id",
+     "type": "string",
+     "values": [
+      "anderson-columbia",
+      "bcl",
+      "cw-roberts",
+      "harders",
+      "ingram-signalization",
+      "phoenix",
+      "rj-gorman-contracting",
+      "roberts-and-roberts",
+      "rotolo-consultants"
+     ]
+    },
+    {
+     "name": "vendor_ids",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/road-contracts.json",
+   "csv": "/downloads/road-contracts.csv",
+   "api": "/api/v1/datasets/road-contracts"
+  },
+  {
+   "id": "road-work-program",
+   "title": "State road work program",
+   "description": "Projects in the Florida Department of Transportation's current adopted five-year work program in the county, one row per project and phase (planning, project development and environment study, design, right of way, construction, construction inspection): what and where, the kind of work, the fiscal years the phase is funded in (July to June, named for the year it ends) and the project's status. FDOT's map layers don't carry dollar amounts; contract amounts are in road-contracts.",
+   "rows": 143,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "agency",
+     "type": "string",
+     "values": [
+      "Florida Department of Transportation"
+     ]
+    },
+    {
+     "name": "project_id",
+     "type": "string"
+    },
+    {
+     "name": "phase_code",
+     "type": "string",
+     "values": [
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "9",
+      "C"
+     ]
+    },
+    {
+     "name": "phase",
+     "type": "string",
+     "values": [
+      "Capital",
+      "Construction",
+      "Construction Support",
+      "Environmental",
+      "PD&E",
+      "Preliminary Engineering",
+      "Right of Way"
+     ]
+    },
+    {
+     "name": "description",
+     "type": "string"
+    },
+    {
+     "name": "description_fdot",
+     "type": "string"
+    },
+    {
+     "name": "work_type",
+     "type": "string",
+     "values": [
+      "Add lanes and reconstruct",
+      "Bike lane and sidewalk",
+      "Bike path or trail",
+      "Bridge repair",
+      "Bridge replacement",
+      "Design (preliminary engineering)",
+      "Fender work",
+      "Interchange: add lanes",
+      "Intersection improvement",
+      "Landscaping",
+      "Lighting",
+      "New road construction",
+      "Pave shoulders",
+      "Project study (PD&E)",
+      "Rail capacity project",
+      "Resurfacing",
+      "Right of way for a future project",
+      "Safety project",
+      "Sidewalk",
+      "Traffic operations improvement",
+      "Traffic signals"
+     ]
+    },
+    {
+     "name": "project_status",
+     "type": "string",
+     "values": [
+      "Bids received",
+      "Buying land",
+      "Construction complete",
+      "Contract signed",
+      "Design under way",
+      "Not started",
+      "Out for bids",
+      "Under construction",
+      "Work in progress"
+     ]
+    },
+    {
+     "name": "length_miles",
+     "type": "number"
+    },
+    {
+     "name": "district",
+     "type": "string",
+     "values": [
+      "03",
+      "30"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://gis.fdot.gov/arcgis/rest/services/Work_Program_Current/MapServer/20"
+     ]
+    },
+    {
+     "name": "fiscal_years",
+     "type": "array"
+    },
+    {
+     "name": "first_fiscal_year",
+     "type": "number"
+    },
+    {
+     "name": "last_fiscal_year",
+     "type": "number"
+    },
+    {
+     "name": "fetched",
+     "type": "string",
+     "values": [
+      "2026-10-27"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/road-work-program.json",
+   "csv": "/downloads/road-work-program.csv",
+   "api": "/api/v1/datasets/road-work-program"
+  },
+  {
+   "id": "schools",
+   "title": "Public schools",
+   "description": "One row per public school in the district, open now or closed since 2016: state school number (school_id, district-school), federal id, level, grades taught, district or charter, address and phone of the school building, enrollment and teachers for the latest federal school directory year, students per teacher, share of students eligible for free or reduced-price lunch, latest state school grade and the one before it, latest per-student spending, and which attendance zone levels feed it. operator_entity_id is the nonprofit that runs a charter school (entity-profiles).",
+   "rows": 59,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "school_id",
+     "type": "string"
+    },
+    {
+     "name": "nces_id",
+     "type": "string"
+    },
+    {
+     "name": "name",
+     "type": "string"
+    },
+    {
+     "name": "status",
+     "type": "string",
+     "values": [
+      "Closed",
+      "Open"
+     ]
+    },
+    {
+     "name": "level",
+     "type": "string",
+     "values": [
+      "Combined",
+      "Elementary",
+      "High",
+      "Middle",
+      "Other"
+     ]
+    },
+    {
+     "name": "school_type",
+     "type": "string",
+     "values": [
+      "Alternative",
+      "Career and technical",
+      "Regular",
+      "Special education"
+     ]
+    },
+    {
+     "name": "grades",
+     "type": "string",
+     "values": [
+      "12",
+      "3-12",
+      "6-12",
+      "6-8",
+      "9-12",
+      "K-12",
+      "K-5",
+      "K-8",
+      "PK-12",
+      "PK-4",
+      "PK-5",
+      "PK-8"
+     ]
+    },
+    {
+     "name": "charter",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "virtual",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "operator_entity_id",
+     "type": "string",
+     "values": [
+      "nonprofit:np-261413851",
+      "nonprofit:np-651121807",
+      "nonprofit:np-800688292",
+      "nonprofit:np-861145087",
+      "nonprofit:np-880556695"
+     ]
+    },
+    {
+     "name": "address",
+     "type": "string"
+    },
+    {
+     "name": "city",
+     "type": "string",
+     "values": [
+      "Lynn Haven",
+      "Panama City",
+      "Panama City Beach",
+      "Southport",
+      "Tyndall AFB",
+      "Youngstown"
+     ]
+    },
+    {
+     "name": "zip",
+     "type": "string",
+     "values": [
+      "32401",
+      "32403",
+      "32404",
+      "32405",
+      "32407",
+      "32408",
+      "32409",
+      "32413",
+      "32444",
+      "32466"
+     ]
+    },
+    {
+     "name": "phone",
+     "type": "string"
+    },
+    {
+     "name": "latitude",
+     "type": "number"
+    },
+    {
+     "name": "longitude",
+     "type": "number"
+    },
+    {
+     "name": "enrollment",
+     "type": "number"
+    },
+    {
+     "name": "enrollment_year",
+     "type": "string",
+     "values": [
+      "2024-25"
+     ]
+    },
+    {
+     "name": "last_year_open",
+     "type": "string",
+     "values": [
+      "2015-16",
+      "2017-18",
+      "2019-20",
+      "2020-21",
+      "2022-23"
+     ]
+    },
+    {
+     "name": "teachers_fte",
+     "type": "number"
+    },
+    {
+     "name": "students_per_teacher",
+     "type": "number"
+    },
+    {
+     "name": "free_reduced_lunch_pct",
+     "type": "number"
+    },
+    {
+     "name": "latest_grade",
+     "type": "string"
+    },
+    {
+     "name": "latest_grade_year",
+     "type": "string"
+    },
+    {
+     "name": "prior_grade",
+     "type": "string"
+    },
+    {
+     "name": "grades_on_record",
+     "type": "number"
+    },
+    {
+     "name": "latest_per_student",
+     "type": "string"
+    },
+    {
+     "name": "latest_spending_year",
+     "type": "string"
+    },
+    {
+     "name": "zoned_levels",
+     "type": "string",
+     "values": [
+      "Elementary",
+      "Elementary, Middle",
+      "Elementary, Middle, High",
+      "High",
+      "Middle",
+      "Middle, High"
+     ]
+    },
+    {
+     "name": "district",
+     "type": "string",
+     "values": [
+      "Bay District Schools"
+     ]
+    },
+    {
+     "name": "page_url",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://educationdata.urban.org/api/v1/schools/ccd/directory/2024/?fips=12&leaid=1200090"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "schools"
+     ]
+    }
+   ],
+   "json": "/downloads/schools.json",
+   "csv": "/downloads/schools.csv",
+   "api": "/api/v1/datasets/schools"
+  },
+  {
+   "id": "school-grades",
+   "title": "School grades",
+   "description": "Every Florida school grade (A to F, or I for incomplete) on record for each school since 2016, from the Florida Department of Education's school grades file, one row per school and year. year is the school year's end (2025 = 2024-25). Components (percent of students: English and math achievement and learning gains, science, social studies, acceleration, graduation rate; total points and percent of points) are filled in for the latest year in the file. No grades were given for 2019-20 (testing was canceled); 2020-21 grades were only given to schools that asked; 2022-23 grades were an informational baseline (informational_baseline true).",
+   "rows": 0,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string"
+    },
+    {
+     "name": "school_id",
+     "type": "string"
+    },
+    {
+     "name": "school",
+     "type": "string"
+    },
+    {
+     "name": "school_year",
+     "type": "string"
+    },
+    {
+     "name": "grade",
+     "type": "string"
+    },
+    {
+     "name": "informational_baseline",
+     "type": "boolean"
+    },
+    {
+     "name": "year",
+     "type": "number"
+    },
+    {
+     "name": "ela_achievement",
+     "type": "number"
+    },
+    {
+     "name": "ela_gains",
+     "type": "number"
+    },
+    {
+     "name": "ela_gains_low25",
+     "type": "number"
+    },
+    {
+     "name": "math_achievement",
+     "type": "number"
+    },
+    {
+     "name": "math_gains",
+     "type": "number"
+    },
+    {
+     "name": "math_gains_low25",
+     "type": "number"
+    },
+    {
+     "name": "science_achievement",
+     "type": "number"
+    },
+    {
+     "name": "social_studies_achievement",
+     "type": "number"
+    },
+    {
+     "name": "middle_acceleration",
+     "type": "number"
+    },
+    {
+     "name": "graduation_rate",
+     "type": "number"
+    },
+    {
+     "name": "college_career_acceleration",
+     "type": "number"
+    },
+    {
+     "name": "total_points",
+     "type": "number"
+    },
+    {
+     "name": "percent_of_points",
+     "type": "number"
+    },
+    {
+     "name": "percent_tested",
+     "type": "number"
+    },
+    {
+     "name": "pct_economically_disadvantaged",
+     "type": "number"
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/school-grades.json",
+   "csv": "/downloads/school-grades.csv",
+   "api": "/api/v1/datasets/school-grades"
+  },
+  {
+   "id": "school-spending",
+   "title": "Spending per school",
+   "description": "Per-student spending at each school from the Florida Department of Education's yearly Every Student Succeeds Act (ESSA) per-pupil expenditure reports: federal, state and local, and total, one row per school and year (year = the school year's end). estimated_total multiplies the per-student figure by that year's enrollment from the federal school directory, so it is an estimate, not a reported total.",
+   "rows": 0,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string"
+    },
+    {
+     "name": "school_id",
+     "type": "string"
+    },
+    {
+     "name": "school",
+     "type": "string"
+    },
+    {
+     "name": "year",
+     "type": "number"
+    },
+    {
+     "name": "school_year",
+     "type": "string"
+    },
+    {
+     "name": "federal_per_student",
+     "type": "number"
+    },
+    {
+     "name": "state_local_per_student",
+     "type": "number"
+    },
+    {
+     "name": "total_per_student",
+     "type": "number"
+    },
+    {
+     "name": "enrollment",
+     "type": "number"
+    },
+    {
+     "name": "estimated_total",
+     "type": "number"
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/school-spending.json",
+   "csv": "/downloads/school-spending.csv",
+   "api": "/api/v1/datasets/school-spending"
+  },
+  {
+   "id": "school-enrollment",
+   "title": "School enrollment by year",
+   "description": "Students enrolled at each public school each school year since 2015-16 (year = the school year's end), from the U.S. Department of Education's Common Core of Data school directory.",
+   "rows": 486,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "school_id",
+     "type": "string"
+    },
+    {
+     "name": "school",
+     "type": "string"
+    },
+    {
+     "name": "year",
+     "type": "number"
+    },
+    {
+     "name": "school_year",
+     "type": "string",
+     "values": [
+      "2015-16",
+      "2016-17",
+      "2017-18",
+      "2018-19",
+      "2019-20",
+      "2020-21",
+      "2021-22",
+      "2022-23",
+      "2023-24",
+      "2024-25"
+     ]
+    },
+    {
+     "name": "enrollment",
+     "type": "number"
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://educationdata.urban.org/api/v1/schools/ccd/directory/2015/?fips=12&leaid=1200090",
+      "https://educationdata.urban.org/api/v1/schools/ccd/directory/2016/?fips=12&leaid=1200090",
+      "https://educationdata.urban.org/api/v1/schools/ccd/directory/2017/?fips=12&leaid=1200090",
+      "https://educationdata.urban.org/api/v1/schools/ccd/directory/2018/?fips=12&leaid=1200090",
+      "https://educationdata.urban.org/api/v1/schools/ccd/directory/2019/?fips=12&leaid=1200090",
+      "https://educationdata.urban.org/api/v1/schools/ccd/directory/2020/?fips=12&leaid=1200090",
+      "https://educationdata.urban.org/api/v1/schools/ccd/directory/2021/?fips=12&leaid=1200090",
+      "https://educationdata.urban.org/api/v1/schools/ccd/directory/2022/?fips=12&leaid=1200090",
+      "https://educationdata.urban.org/api/v1/schools/ccd/directory/2023/?fips=12&leaid=1200090",
+      "https://educationdata.urban.org/api/v1/schools/ccd/directory/2024/?fips=12&leaid=1200090"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "schools"
+     ]
+    }
+   ],
+   "json": "/downloads/school-enrollment.json",
+   "csv": "/downloads/school-enrollment.csv",
+   "api": "/api/v1/datasets/school-enrollment"
+  },
+  {
+   "id": "school-calendar",
+   "title": "School district calendar",
+   "description": "The school district's calendar as posted on its website: first and last day, holidays and breaks, no-school days, early release days, end of each grading period, graduations and School Board meetings. kind is first-day, last-day, no-school, break, early-release, grading, graduation, board-meeting or other. starts and ends are local dates (all_day) or local date and time. Refreshed daily; past events of the school year stay on file.",
+   "rows": 25,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "event_id",
+     "type": "string"
+    },
+    {
+     "name": "title",
+     "type": "string",
+     "values": [
+      "Arnold Graduation",
+      "Bay Graduation",
+      "Bay Virtual Graduation",
+      "Bozeman Graduation",
+      "Christmas Holidays",
+      "End of Second Nine Weeks",
+      "End of Third Nine Weeks",
+      "Good Friday - No School for Students",
+      "Haney Graduation",
+      "Last Day of School - Early Release Day",
+      "MKL and Mosley Graduations",
+      "Martin Luther King Jr's Birthday",
+      "Presidents' Day",
+      "Records Word Day - No school for Students",
+      "Rosenwald Graduation",
+      "Rutherford Graduation",
+      "School Board Meeting",
+      "School Board Meeting - Organizational Meeting",
+      "Spring Break",
+      "Teacher PLC Planning Day - No School for Students",
+      "Teacher Planning Day - No school for students",
+      "Thanksgiving Holiday - No school for students",
+      "Veterans Day - No school for students"
+     ]
+    },
+    {
+     "name": "kind",
+     "type": "string",
+     "values": [
+      "board-meeting",
+      "break",
+      "grading",
+      "graduation",
+      "last-day",
+      "no-school"
+     ]
+    },
+    {
+     "name": "starts",
+     "type": "string"
+    },
+    {
+     "name": "ends",
+     "type": "string"
+    },
+    {
+     "name": "all_day",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "venue",
+     "type": "string",
+     "values": [
+      "1311 Balboa Ave, Panama City, FL 32401"
+     ]
+    },
+    {
+     "name": "school_year",
+     "type": "string",
+     "values": [
+      "2026-27"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://www.bay.k12.fl.us/o/bds/page/academic-calendar"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "schools"
+     ]
+    }
+   ],
+   "json": "/downloads/school-calendar.json",
+   "csv": "/downloads/school-calendar.csv",
+   "api": "/api/v1/datasets/school-calendar"
+  },
+  {
+   "id": "school-zones",
+   "title": "School attendance zones",
+   "description": "The school district's attendance zones (which elementary, middle and high school serves each part of the county), from the county GIS server, one row per zone with the school it feeds (school_id), area in square miles, the county's last edit date and the zone's shape as GeoJSON (geometry, longitude/latitude, simplified to about 40 meters). mou_area marks zones the county map labels MOU (covered by a separate agreement). Choice, magnet and charter schools take students from outside their zone.",
+   "rows": 36,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "zone_id",
+     "type": "string"
+    },
+    {
+     "name": "level",
+     "type": "string",
+     "values": [
+      "Elementary",
+      "High",
+      "Middle"
+     ]
+    },
+    {
+     "name": "zone_name",
+     "type": "string"
+    },
+    {
+     "name": "school_id",
+     "type": "string",
+     "values": [
+      "03-0061",
+      "03-0071",
+      "03-0081",
+      "03-0091",
+      "03-0101",
+      "03-0111",
+      "03-0131",
+      "03-0151",
+      "03-0161",
+      "03-0171",
+      "03-0201",
+      "03-0211",
+      "03-0221",
+      "03-0251",
+      "03-0262",
+      "03-0331",
+      "03-0341",
+      "03-0391",
+      "03-0461",
+      "03-0471",
+      "03-0491",
+      "03-0501",
+      "03-0511",
+      "03-0521",
+      "03-0541",
+      "03-0551",
+      "03-0571",
+      "03-0611"
+     ]
+    },
+    {
+     "name": "school",
+     "type": "string",
+     "values": [
+      "A. Crawford Mosley High School",
+      "A. Gary Walsingham Academy",
+      "Bay High School",
+      "Breakfast Point Academy",
+      "Callaway Elementary School",
+      "Cedar Grove Elementary School",
+      "Deane Bozeman School",
+      "Deer Point Elementary School",
+      "Hiland Park Elementary School",
+      "Hutchison Beach Elementary School",
+      "J.R. Arnold High School",
+      "Jinks Middle School",
+      "Lucille Moore Elementary School",
+      "Lynn Haven Elementary School",
+      "Merriam Cherry Street Elementary",
+      "Merritt Brown Middle School",
+      "Mowat Middle School",
+      "Northside Elementary School",
+      "Oscar Patterson Academy",
+      "Parker Elementary School",
+      "Patronis Elementary School",
+      "Rutherford High School",
+      "Southport Elementary School",
+      "Surfside Middle School",
+      "Tommy Smith Elementary School",
+      "Tyndall Academy",
+      "Waller Elementary School",
+      "West Bay Elementary School"
+     ]
+    },
+    {
+     "name": "mou_area",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "pieces",
+     "type": "number"
+    },
+    {
+     "name": "area_sq_mi",
+     "type": "string"
+    },
+    {
+     "name": "last_edited",
+     "type": "string",
+     "values": [
+      "2026-09-23"
+     ]
+    },
+    {
+     "name": "geometry",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://gis.baycountyfl.gov/arcgis/rest/services/SchoolAttendanceZones/MapServer/0",
+      "https://gis.baycountyfl.gov/arcgis/rest/services/SchoolAttendanceZones/MapServer/1",
+      "https://gis.baycountyfl.gov/arcgis/rest/services/SchoolAttendanceZones/MapServer/2"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "schools"
+     ]
+    }
+   ],
+   "json": "/downloads/school-zones.json",
+   "csv": "/downloads/school-zones.csv",
+   "api": "/api/v1/datasets/school-zones"
+  },
+  {
+   "id": "evacuation-zones",
+   "title": "Hurricane evacuation zones",
+   "description": "Bay County's hurricane evacuation zones A to D, in the order they are usually called: where each zone is, when it is ordered and what to do, with each zone's shape (geometry, GeoJSON in WGS84, simplified to about 300 m; the county map is the authority). Look up the zone for an address at /api/v1/evacuation-zone.",
+   "rows": 4,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "zone",
+     "type": "string"
+    },
+    {
+     "name": "sort_order",
+     "type": "number"
+    },
+    {
+     "name": "color",
+     "type": "string"
+    },
+    {
+     "name": "where_it_is",
+     "type": "string"
+    },
+    {
+     "name": "when_ordered",
+     "type": "string"
+    },
+    {
+     "name": "plain",
+     "type": "string"
+    },
+    {
+     "name": "zone_edited",
+     "type": "string",
+     "values": [
+      "2023-01-23"
+     ]
+    },
+    {
+     "name": "geometry",
+     "type": "string"
+    },
+    {
+     "name": "map_url",
+     "type": "string",
+     "values": [
+      "https://gis.baycountyfl.gov/bayview/"
+     ]
+    },
+    {
+     "name": "layer_url",
+     "type": "string",
+     "values": [
+      "https://gis.baycountyfl.gov/arcgis/rest/services/Admin_A12/MapServer/80"
+     ]
+    },
+    {
+     "name": "as_of",
+     "type": "string",
+     "values": [
+      "2026-10-27"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://www.baycountyfl.gov/511/Evacuation-Zones"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/evacuation-zones.json",
+   "csv": "/downloads/evacuation-zones.csv",
+   "api": "/api/v1/datasets/evacuation-zones"
+  },
+  {
+   "id": "emergency-shelters",
+   "title": "Emergency shelters",
+   "description": "Every disaster shelter Bay County Emergency Services lists: special needs, general population, mass care support, recovery and extreme-weather shelters, with the address, the group's open or closed status as the county last posted it (status_as_of), the map point and the evacuation zone the shelter sits in. Not every shelter opens for every storm. The live status is in /api/v1/emergency.",
+   "rows": 8,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "shelter_id",
+     "type": "string"
+    },
+    {
+     "name": "name",
+     "type": "string"
+    },
+    {
+     "name": "address",
+     "type": "string"
+    },
+    {
+     "name": "shelter_type",
+     "type": "string",
+     "values": [
+      "extreme-weather",
+      "general",
+      "mass-care",
+      "recovery",
+      "special-needs"
+     ]
+    },
+    {
+     "name": "group_name",
+     "type": "string",
+     "values": [
+      "Alternate Risk and Extreme Weather Shelter",
+      "General Population (Risk-Based) Shelters",
+      "Mass Care Support Shelter",
+      "Recovery Shelter Locations",
+      "Special Needs Shelters"
+     ]
+    },
+    {
+     "name": "group_about",
+     "type": "string",
+     "values": [
+      "These shelters are designated for individuals with medical, access, or functional needs who cannot safely evacuate to a general population shelter. Pre-registration through the Florida Special Needs Registry is required.",
+      "These shelters are intended for the general public during evacuations and are selected for their safety standards, capacity, and geographic distribution.",
+      "These shelters are used during the post-impact phase to support residents who are displaced and unable to return home immediately following a disaster.",
+      "This facility is designated to support large-scale shelter operations and may serve as a technical support site during mass care incidents.",
+      "This location is activated on an as-needed basis to support overflow during major emergencies or to provide warming/cooling shelter during extreme temperatures."
+     ]
+    },
+    {
+     "name": "note",
+     "type": "string",
+     "values": [
+      "Functions as an overflow site for Merritt Brown Middle School."
+     ]
+    },
+    {
+     "name": "status",
+     "type": "string",
+     "values": [
+      "closed"
+     ]
+    },
+    {
+     "name": "status_as_of",
+     "type": "string",
+     "values": [
+      "2025-11-03"
+     ]
+    },
+    {
+     "name": "lat",
+     "type": "number"
+    },
+    {
+     "name": "lng",
+     "type": "number"
+    },
+    {
+     "name": "evacuation_zone",
+     "type": "string",
+     "values": [
+      "D"
+     ]
+    },
+    {
+     "name": "operator",
+     "type": "string",
+     "values": [
+      "Bay County Emergency Services"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://www.baycountyfl.gov/766/Emergency-Shelters"
+     ]
+    },
+    {
+     "name": "checked",
+     "type": "string",
+     "values": [
+      "2026-10-27"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/emergency-shelters.json",
+   "csv": "/downloads/emergency-shelters.csv",
+   "api": "/api/v1/datasets/emergency-shelters"
+  },
+  {
+   "id": "emergency-resources",
+   "title": "Emergency phone numbers and sign-ups",
+   "description": "The numbers, sign-ups, maps and outage pages people need before and during an emergency, from each organization's own site: 911, the county Emergency Operations Center, AlertBay, the special needs registry, weather offices, FL511 and power outage maps.",
+   "rows": 16,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "sort_order",
+     "type": "number"
+    },
+    {
+     "name": "resource_id",
+     "type": "string"
+    },
+    {
+     "name": "group",
+     "type": "string",
+     "values": [
+      "Call",
+      "Plan",
+      "Power",
+      "Roads",
+      "Sign up",
+      "Water",
+      "Weather"
+     ]
+    },
+    {
+     "name": "name",
+     "type": "string"
+    },
+    {
+     "name": "org",
+     "type": "string",
+     "values": [
+      "Bay County",
+      "Bay County 911",
+      "Bay County Emergency Services",
+      "Bay County GIS",
+      "City of Panama City Beach",
+      "Florida Department of Transportation",
+      "Florida Division of Emergency Management",
+      "Florida Power & Light",
+      "Gulf Coast Electric Cooperative",
+      "National Hurricane Center",
+      "National Weather Service"
+     ]
+    },
+    {
+     "name": "phone",
+     "type": "string",
+     "values": [
+      "511",
+      "800-468-8243",
+      "800-568-3667",
+      "850-248-6040",
+      "850-248-6090",
+      "911"
+     ]
+    },
+    {
+     "name": "url",
+     "type": "string",
+     "values": [
+      "https://fl511.com/",
+      "https://gis.baycountyfl.gov/bayview/",
+      "https://snr.floridadisaster.org/Signin?client=bay",
+      "https://www.alertbay.org",
+      "https://www.baycountyfl.gov/167/Post-Disaster-Re-Entry",
+      "https://www.baycountyfl.gov/511/Evacuation-Zones",
+      "https://www.baycountyfl.gov/722/Beach-Safety-Flags",
+      "https://www.baycountyfl.gov/836/Activation-Information",
+      "https://www.baycountyfl.gov/DocumentCenter/View/5659/BayCo-DisasterPreparednessGuide_v10_FINAL-web2",
+      "https://www.floridadisaster.org/knowyourzone/",
+      "https://www.fplmaps.com/",
+      "https://www.gcec.com/",
+      "https://www.nhc.noaa.gov/",
+      "https://www.pcbfl.gov/414/Boil-Water-Information",
+      "https://www.weather.gov/tae/"
+     ]
+    },
+    {
+     "name": "about",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "pcb"
+     ]
+    },
+    {
+     "name": "as_of",
+     "type": "string",
+     "values": [
+      "2026-10-27"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://fl511.com/",
+      "https://gis.baycountyfl.gov/bayview/",
+      "https://snr.floridadisaster.org/Signin?client=bay",
+      "https://www.alertbay.org",
+      "https://www.baycountyfl.gov/167/Post-Disaster-Re-Entry",
+      "https://www.baycountyfl.gov/511/Evacuation-Zones",
+      "https://www.baycountyfl.gov/722/Beach-Safety-Flags",
+      "https://www.baycountyfl.gov/836/Activation-Information",
+      "https://www.baycountyfl.gov/DocumentCenter/View/5659/BayCo-DisasterPreparednessGuide_v10_FINAL-web2",
+      "https://www.floridadisaster.org/knowyourzone/",
+      "https://www.fplmaps.com/",
+      "https://www.gcec.com/",
+      "https://www.nhc.noaa.gov/",
+      "https://www.pcbfl.gov/414/Boil-Water-Information",
+      "https://www.weather.gov/tae/"
+     ]
+    }
+   ],
+   "json": "/downloads/emergency-resources.json",
+   "csv": "/downloads/emergency-resources.csv",
+   "api": "/api/v1/datasets/emergency-resources"
+  },
+  {
+   "id": "emergency-notices",
+   "title": "Emergency notices archive",
+   "description": "Every emergency notice BayCounty.me has recorded for the county, newest first: National Weather Service watches, warnings and advisories, boil-water notices, road closures, water and sewer outages, evacuation orders, shelter openings and storm updates from each government's alert center and news feed, and FL511 state road closures. kind is the topic, status active (live at the last check), ended or lifted. first_seen and last_seen are when BayCounty.me saw it. The live list is /api/v1/emergency.",
+   "rows": 14,
+   "columns": [
+    {
+     "name": "notice_id",
+     "type": "string"
+    },
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "kind",
+     "type": "string",
+     "values": [
+      "boil-water",
+      "road",
+      "storm",
+      "utility"
+     ]
+    },
+    {
+     "name": "source",
+     "type": "string",
+     "values": [
+      "Bay County",
+      "City of Lynn Haven",
+      "City of Panama City",
+      "City of Panama City Beach"
+     ]
+    },
+    {
+     "name": "source_type",
+     "type": "string",
+     "values": [
+      "alert-center",
+      "news"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "lh",
+      "pc",
+      "pcb"
+     ]
+    },
+    {
+     "name": "title",
+     "type": "string"
+    },
+    {
+     "name": "summary",
+     "type": "string"
+    },
+    {
+     "name": "instruction",
+     "type": "string"
+    },
+    {
+     "name": "severity",
+     "type": "string",
+     "values": [
+      "minor",
+      "moderate"
+     ]
+    },
+    {
+     "name": "event",
+     "type": "string"
+    },
+    {
+     "name": "area",
+     "type": "string"
+    },
+    {
+     "name": "zones",
+     "type": "string"
+    },
+    {
+     "name": "issued",
+     "type": "string"
+    },
+    {
+     "name": "starts",
+     "type": "string"
+    },
+    {
+     "name": "ends",
+     "type": "string",
+     "values": [
+      "2026-10-10T14:22:59.000Z",
+      "2026-10-17T17:19:52.000Z",
+      "2026-10-18T16:07:00.000Z",
+      "2026-10-20T14:28:00.000Z",
+      "2026-10-22T20:05:36.000Z",
+      "2026-10-24T16:51:36.000Z",
+      "2026-10-24T17:52:00.000Z"
+     ]
+    },
+    {
+     "name": "updated",
+     "type": "string"
+    },
+    {
+     "name": "status",
+     "type": "string",
+     "values": [
+      "active",
+      "ended"
+     ]
+    },
+    {
+     "name": "full_closure",
+     "type": "string"
+    },
+    {
+     "name": "roadway",
+     "type": "string"
+    },
+    {
+     "name": "first_seen",
+     "type": "string",
+     "values": [
+      "2026-10-27T20:41:37.771Z"
+     ]
+    },
+    {
+     "name": "last_seen",
+     "type": "string",
+     "values": [
+      "2026-10-27T20:41:53.613Z"
+     ]
+    },
+    {
+     "name": "url",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://www.baycountyfl.gov/AlertCenter.aspx",
+      "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=224",
+      "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=324",
+      "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=325",
+      "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=326",
+      "https://www.cityoflynnhaven.gov/AlertCenter.aspx",
+      "https://www.cityoflynnhaven.gov/CivicAlerts.aspx?aid=353",
+      "https://www.panamacity.gov/AlertCenter.aspx",
+      "https://www.pcbfl.gov/AlertCenter.aspx",
+      "https://www.pcbfl.gov/CivicAlerts.aspx?aid=45",
+      "https://www.pcbfl.gov/storm"
+     ]
+    }
+   ],
+   "json": "/downloads/emergency-notices.json",
+   "csv": "/downloads/emergency-notices.csv",
+   "api": "/api/v1/datasets/emergency-notices"
+  },
+  {
+   "id": "hurricane-prep",
+   "title": "Hurricane prep steps",
+   "description": "Plain-English steps for hurricane season, sandbags, generator safety, an approaching storm and the days after, each with the agency it comes from (Bay County, Ready.gov, CDC, National Weather Service, FEMA, the Army Corps of Engineers).",
+   "rows": 16,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "sort_order",
+     "type": "number"
+    },
+    {
+     "name": "topic",
+     "type": "string",
+     "values": [
+      "After the storm",
+      "Before the season",
+      "Generator safety",
+      "Sandbags",
+      "When a storm is coming"
+     ]
+    },
+    {
+     "name": "step",
+     "type": "string"
+    },
+    {
+     "name": "text",
+     "type": "string"
+    },
+    {
+     "name": "source",
+     "type": "string",
+     "values": [
+      "Bay County Disaster Preparedness Guide",
+      "Bay County Disaster Preparedness Guide; FloodSmart",
+      "Bay County Emergency Services",
+      "Bay County news",
+      "CDC",
+      "City of Panama City Beach boil-water information",
+      "FEMA",
+      "Florida Division of Emergency Management",
+      "National Weather Service",
+      "Ready.gov",
+      "U.S. Army Corps of Engineers"
+     ]
+    },
+    {
+     "name": "as_of",
+     "type": "string",
+     "values": [
+      "2026-10-27"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://extension.usu.edu/post-wildfire/files/USACE-Sandbag-Pamphlet.pdf",
+      "https://snr.floridadisaster.org/Signin?client=bay",
+      "https://www.baycountyfl.gov/167/Post-Disaster-Re-Entry",
+      "https://www.baycountyfl.gov/511/Evacuation-Zones",
+      "https://www.baycountyfl.gov/CivicAlerts.aspx",
+      "https://www.baycountyfl.gov/DocumentCenter/View/5659/BayCo-DisasterPreparednessGuide_v10_FINAL-web2",
+      "https://www.cdc.gov/natural-disasters/psa-toolkit/use-a-generator-safely.html",
+      "https://www.disasterassistance.gov/",
+      "https://www.floodsmart.gov/",
+      "https://www.pcbfl.gov/414/Boil-Water-Information",
+      "https://www.ready.gov/hurricanes",
+      "https://www.ready.gov/kit",
+      "https://www.weather.gov/safety/hurricane-after"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/hurricane-prep.json",
+   "csv": "/downloads/hurricane-prep.csv",
+   "api": "/api/v1/datasets/hurricane-prep"
+  },
+  {
+   "id": "disaster-declarations",
+   "title": "Disaster declarations",
+   "description": "Every federal major disaster, emergency and fire management declaration that included the county since 2016, from OpenFEMA: the storm or event, the dates, and which FEMA programs were opened (individual aid to households, public aid to governments, hazard mitigation).",
+   "rows": 19,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "disaster_number",
+     "type": "number"
+    },
+    {
+     "name": "title",
+     "type": "string",
+     "values": [
+      "1707 Adkins Ave Fire",
+      "Chipola Fire Complex",
+      "Hurricane Debby",
+      "Hurricane Dorian",
+      "Hurricane Helene",
+      "Hurricane Ian",
+      "Hurricane Idalia",
+      "Hurricane Irma",
+      "Hurricane Isaias",
+      "Hurricane Michael",
+      "Hurricane Sally",
+      "Tropical Storm Debby",
+      "Tropical Storm Fred",
+      "Tropical Storm Helene",
+      "Tropical Storm Ian",
+      "Tropical Storm Idalia"
+     ]
+    },
+    {
+     "name": "kind",
+     "type": "string",
+     "values": [
+      "Emergency",
+      "Fire management",
+      "Major disaster"
+     ]
+    },
+    {
+     "name": "incident_type",
+     "type": "string",
+     "values": [
+      "Fire",
+      "Hurricane",
+      "Tropical Storm"
+     ]
+    },
+    {
+     "name": "declared",
+     "type": "string"
+    },
+    {
+     "name": "began",
+     "type": "string",
+     "values": [
+      "2017-09-04",
+      "2018-10-07",
+      "2019-08-28",
+      "2020-09-14",
+      "2021-08-13",
+      "2022-03-04",
+      "2022-09-23",
+      "2023-08-27",
+      "2024-08-01",
+      "2024-09-23",
+      "2026-10-06"
+     ]
+    },
+    {
+     "name": "ended",
+     "type": "string",
+     "values": [
+      "2017-10-18",
+      "2018-10-19",
+      "2019-09-09",
+      "2020-09-28",
+      "2021-08-19",
+      "2022-04-01",
+      "2022-11-04",
+      "2023-09-04",
+      "2024-08-27",
+      "2024-10-07",
+      "2026-10-12"
+     ]
+    },
+    {
+     "name": "individual_aid",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "public_aid",
+     "type": "boolean",
+     "values": [
+      true
+     ]
+    },
+    {
+     "name": "mitigation",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/disaster-declarations.json",
+   "csv": "/downloads/disaster-declarations.csv",
+   "api": "/api/v1/datasets/disaster-declarations"
+  },
+  {
+   "id": "rebuild-money",
+   "title": "Rebuild money by ZIP code",
+   "description": "Money that reached each ZIP code after storms since 2016, from OpenFEMA: FEMA housing aid to owners and renters (Individuals and Households Program: households that applied, approved, dollars, of which repair and rental help, and FEMA-inspected damage for owners) and flood insurance claims paid (NFIP, building, contents and compliance payments added). One row per ZIP, program and storm. Totals only; FEMA does not publish who received aid and neither does BayCounty.me.",
+   "rows": 164,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "zip",
+     "type": "string",
+     "values": [
+      "32401",
+      "32403",
+      "32404",
+      "32405",
+      "32407",
+      "32408",
+      "32409",
+      "32410",
+      "32413",
+      "32438",
+      "32444",
+      "32456",
+      "32466",
+      "other"
+     ]
+    },
+    {
+     "name": "area_name",
+     "type": "string",
+     "values": [
+      "East Panama City, Callaway, Springfield, Parker",
+      "Fountain",
+      "Lynn Haven",
+      "Mexico Beach",
+      "Mexico Beach and Port St. Joe area (part in Gulf County)",
+      "North Panama City, Lynn Haven area",
+      "Other ZIP codes (P.O. boxes or mailing addresses outside the county)",
+      "Panama City (downtown, St. Andrews)",
+      "Panama City Beach (central)",
+      "Panama City Beach (east)",
+      "Panama City Beach (west), Inlet Beach area",
+      "Southport, Bayou George",
+      "Tyndall Air Force Base",
+      "Youngstown"
+     ]
+    },
+    {
+     "name": "program",
+     "type": "string",
+     "values": [
+      "FEMA housing aid (owners)",
+      "FEMA housing aid (renters)",
+      "Flood insurance claims (NFIP)"
+     ]
+    },
+    {
+     "name": "disaster_number",
+     "type": "number"
+    },
+    {
+     "name": "event",
+     "type": "string",
+     "values": [
+      "Hurricane Eta",
+      "Hurricane Francine",
+      "Hurricane Helene",
+      "Hurricane Hermine",
+      "Hurricane Ian",
+      "Hurricane Irma",
+      "Hurricane Michael",
+      "Hurricane Milton",
+      "Hurricane Sally",
+      "Other flooding",
+      "Tropical Storm Claudette",
+      "Tropical Storm Fred",
+      "Tropical Storm Nicholas"
+     ]
+    },
+    {
+     "name": "year",
+     "type": "number"
+    },
+    {
+     "name": "count",
+     "type": "number"
+    },
+    {
+     "name": "count_label",
+     "type": "string",
+     "values": [
+      "claims",
+      "households that applied"
+     ]
+    },
+    {
+     "name": "approved",
+     "type": "number"
+    },
+    {
+     "name": "amount_paid",
+     "type": "number"
+    },
+    {
+     "name": "repair_amount",
+     "type": "number"
+    },
+    {
+     "name": "rental_amount",
+     "type": "number"
+    },
+    {
+     "name": "inspected_damage",
+     "type": "number"
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://www.fema.gov/openfema-data-page/fima-nfip-redacted-claims-v2",
+      "https://www.fema.gov/openfema-data-page/housing-assistance-program-data-owners-v2",
+      "https://www.fema.gov/openfema-data-page/housing-assistance-program-data-renters-v2"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/rebuild-money.json",
+   "csv": "/downloads/rebuild-money.csv",
+   "api": "/api/v1/datasets/rebuild-money"
+  },
+  {
+   "id": "elections",
+   "title": "Elections since 2016",
+   "description": "Every election the Bay County Supervisor of Elections has held since 2016, one row each: the date, name and kind (primary, general, municipal, runoff, referendum, recall, presidential preference primary), registered voters, ballots cast, turnout and precincts reporting. status is final (completely reported), counting (results still coming in) or canceled. A city's own view of a municipal election day and the 2018 recounts are folded into the countywide election. Contest results are in election-results.",
+   "rows": 32,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "election_id",
+     "type": "number"
+    },
+    {
+     "name": "date",
+     "type": "string"
+    },
+    {
+     "name": "name",
+     "type": "string",
+     "values": [
+      "General Election",
+      "Lynn Haven Recall Election",
+      "Lynn Haven Runoff",
+      "Lynn Haven Runoff Election",
+      "Mexico Beach Referendum",
+      "Municipal Runoff Election",
+      "Municipal Super Tuesday",
+      "Municipal Super Tuesday Election",
+      "Panama City Ward 2 Runoff",
+      "Presidential Preference Primary",
+      "Presidential Preference Primary Election",
+      "Primary",
+      "Primary Election",
+      "School Board Referendum / Municipal Election"
+     ]
+    },
+    {
+     "name": "kind",
+     "type": "string",
+     "values": [
+      "general",
+      "municipal",
+      "presidential preference primary",
+      "primary",
+      "recall",
+      "referendum",
+      "runoff"
+     ]
+    },
+    {
+     "name": "status",
+     "type": "string",
+     "values": [
+      "canceled",
+      "final"
+     ]
+    },
+    {
+     "name": "registered_voters",
+     "type": "number"
+    },
+    {
+     "name": "ballots_cast",
+     "type": "number"
+    },
+    {
+     "name": "turnout_pct",
+     "type": "number"
+    },
+    {
+     "name": "precincts_reporting",
+     "type": "number"
+    },
+    {
+     "name": "precincts_total",
+     "type": "number"
+    },
+    {
+     "name": "contests",
+     "type": "number"
+    },
+    {
+     "name": "updated",
+     "type": "string",
+     "values": [
+      "2019-06-05T22:16:27",
+      "2020-04-24T09:34:07",
+      "2020-11-16T12:29:08",
+      "2020-11-16T12:30:57",
+      "2020-11-16T12:32:26",
+      "2020-11-16T12:33:16",
+      "2020-11-16T12:33:56",
+      "2021-06-22T13:34:48",
+      "2021-06-22T13:39:16",
+      "2021-06-22T13:41:11",
+      "2021-06-22T13:43:27",
+      "2021-06-22T13:44:45",
+      "2021-06-23T10:14:43",
+      "2021-06-23T11:03:00",
+      "2022-06-27T12:32:13",
+      "2022-08-31T15:52:03",
+      "2023-01-12T08:58:16",
+      "2023-04-21T11:23:07",
+      "2023-05-18T10:41:21",
+      "2023-05-19T09:50:24",
+      "2024-04-08T14:41:14",
+      "2024-04-19T09:20:30",
+      "2025-04-25T11:16:02",
+      "2025-05-23T08:41:26",
+      "2026-01-05T16:02:06",
+      "2026-03-16T15:13:14",
+      "2026-03-16T15:38:55",
+      "2026-03-16T15:43:51",
+      "2026-04-24T10:00:37",
+      "2026-08-24T09:41:07"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/elections.json",
+   "csv": "/downloads/elections.csv",
+   "api": "/api/v1/datasets/elections"
+  },
+  {
+   "id": "election-results",
+   "title": "Election results since 2016",
+   "description": "Official results of every contest on a Bay County ballot since 2016, one row per choice: votes on Election Day, in early voting and by mail, the total and percent, and rank in the contest. level is Federal, State, Court, County, School district, City, Special district or Party; gov_id is the local government a contest elects or decides. measure is true for a yes-or-no ballot question. party_primary is REP or DEM for a closed party primary, or Universal primary when every voter could vote. recount is true where the 2018 recount figures replace the first count. person_entity_id links a local candidate to their profile. A blank vote count is 1 to 29 votes, which the law keeps from being reported for privacy. From the Supervisor of Elections' election results site.",
+   "rows": 756,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "election_id",
+     "type": "number"
+    },
+    {
+     "name": "election_date",
+     "type": "string"
+    },
+    {
+     "name": "election_name",
+     "type": "string",
+     "values": [
+      "General Election",
+      "Lynn Haven Recall Election",
+      "Lynn Haven Runoff",
+      "Lynn Haven Runoff Election",
+      "Mexico Beach Referendum",
+      "Municipal Runoff Election",
+      "Municipal Super Tuesday",
+      "Municipal Super Tuesday Election",
+      "Panama City Ward 2 Runoff",
+      "Presidential Preference Primary",
+      "Presidential Preference Primary Election",
+      "Primary",
+      "Primary Election",
+      "School Board Referendum / Municipal Election"
+     ]
+    },
+    {
+     "name": "election_kind",
+     "type": "string",
+     "values": [
+      "general",
+      "municipal",
+      "presidential preference primary",
+      "primary",
+      "recall",
+      "referendum",
+      "runoff"
+     ]
+    },
+    {
+     "name": "contest_id",
+     "type": "number"
+    },
+    {
+     "name": "contest",
+     "type": "string"
+    },
+    {
+     "name": "office",
+     "type": "string"
+    },
+    {
+     "name": "level",
+     "type": "string",
+     "values": [
+      "City",
+      "County",
+      "Court",
+      "Federal",
+      "Party",
+      "School district",
+      "Special district",
+      "State"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "schools",
+      "sp"
+     ]
+    },
+    {
+     "name": "measure",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "party_primary",
+     "type": "string",
+     "values": [
+      "DEM",
+      "REP",
+      "Universal primary"
+     ]
+    },
+    {
+     "name": "recount",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "choice",
+     "type": "string"
+    },
+    {
+     "name": "party",
+     "type": "string",
+     "values": [
+      "ASP",
+      "CPF",
+      "DEM",
+      "GRE",
+      "LPF",
+      "NON",
+      "NPA",
+      "PSL",
+      "REF",
+      "REP"
+     ]
+    },
+    {
+     "name": "person_entity_id",
+     "type": "string"
+    },
+    {
+     "name": "election_day",
+     "type": "number"
+    },
+    {
+     "name": "early_voting",
+     "type": "number"
+    },
+    {
+     "name": "vote_by_mail",
+     "type": "number"
+    },
+    {
+     "name": "votes",
+     "type": "number"
+    },
+    {
+     "name": "pct",
+     "type": "number"
+    },
+    {
+     "name": "rank",
+     "type": "number"
+    },
+    {
+     "name": "over_votes",
+     "type": "number"
+    },
+    {
+     "name": "under_votes",
+     "type": "number"
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/election-results.json",
+   "csv": "/downloads/election-results.csv",
+   "api": "/api/v1/datasets/election-results"
+  },
+  {
+   "id": "election-dates",
+   "title": "Election dates",
+   "description": "Key dates for Bay County elections: registration deadlines, early voting, vote-by-mail request and return deadlines and election days (kept by hand from the Supervisor of Elections' voter guide), plus the upcoming events on the Supervisor of Elections' calendar (canvassing board meetings, tests of the voting equipment), read daily. kind says which; starts_at is the start time when one is given.",
+   "rows": 18,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "date",
+     "type": "string",
+     "values": [
+      "2026-03-23",
+      "2026-04-21",
+      "2026-07-20",
+      "2026-08-18",
+      "2026-10-05",
+      "2026-10-19",
+      "2026-10-22",
+      "2026-10-29",
+      "2026-10-31",
+      "2026-11-01",
+      "2026-11-03",
+      "2026-11-05",
+      "2026-11-07",
+      "2026-11-13"
+     ]
+    },
+    {
+     "name": "end_date",
+     "type": "string",
+     "values": [
+      "2026-10-31"
+     ]
+    },
+    {
+     "name": "starts_at",
+     "type": "string",
+     "values": [
+      "2026-10-29T08:30",
+      "2026-11-01T13:00",
+      "2026-11-03T07:00",
+      "2026-11-03T15:00",
+      "2026-11-03T18:30",
+      "2026-11-05T17:01",
+      "2026-11-07T00:00",
+      "2026-11-13T17:01"
+     ]
+    },
+    {
+     "name": "election",
+     "type": "string",
+     "values": [
+      "2026 General Election",
+      "2026 Municipal Election (Mexico Beach and Springfield)",
+      "2026 Primary Election"
+     ]
+    },
+    {
+     "name": "kind",
+     "type": "string",
+     "values": [
+      "early_voting",
+      "election_day",
+      "mail_ballot_request_deadline",
+      "mail_ballot_return_deadline",
+      "registration_deadline",
+      "soe_event"
+     ]
+    },
+    {
+     "name": "title",
+     "type": "string"
+    },
+    {
+     "name": "source",
+     "type": "string",
+     "values": [
+      "Supervisor of Elections events",
+      "Supervisor of Elections voter guide"
+     ]
+    },
+    {
+     "name": "url",
+     "type": "string",
+     "values": [
+      "https://bay-soe.s3.amazonaws.com/uploads/2026/09/10131046/15004-E-Voters-Guide.pdf",
+      "https://www.bayvotesfl.gov/elections/upcoming-elections/",
+      "https://www.bayvotesfl.gov/events/canvass-of-vote-by-mail-ballots-2/",
+      "https://www.bayvotesfl.gov/events/canvass-vote-by-mail-ballots/",
+      "https://www.bayvotesfl.gov/events/canvass-vote-by-mail-report-preliminary-results/",
+      "https://www.bayvotesfl.gov/events/canvassing-board-meeting-2/",
+      "https://www.bayvotesfl.gov/events/canvassing-board-meeting-3/",
+      "https://www.bayvotesfl.gov/events/canvassing-board-meeting/",
+      "https://www.bayvotesfl.gov/events/early-voting-general-election-2/",
+      "https://www.bayvotesfl.gov/events/general-election/",
+      "https://www.bayvotesfl.gov/events/recount-if-required/",
+      "https://www.bayvotesfl.gov/voters/vote-early/"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://bay-soe.s3.amazonaws.com/uploads/2026/09/10131046/15004-E-Voters-Guide.pdf",
+      "https://www.bayvotesfl.gov/elections/events/",
+      "https://www.bayvotesfl.gov/elections/upcoming-elections/",
+      "https://www.bayvotesfl.gov/voters/vote-early/"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/election-dates.json",
+   "csv": "/downloads/election-dates.csv",
+   "api": "/api/v1/datasets/election-dates"
+  },
+  {
+   "id": "voting-locations",
+   "title": "Where to vote",
+   "description": "Every early voting site for the next countywide election (kind early_voting: any registered Bay County voter can vote at any of them, with the dates and hours) and the Election Day polling place for each of the county's precincts (kind polling_place: on Election Day you vote only at your own precinct's polling place). lat and lon place each on a map, from Bay County's address points. From the Supervisor of Elections.",
+   "rows": 38,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "kind",
+     "type": "string",
+     "values": [
+      "early_voting",
+      "polling_place"
+     ]
+    },
+    {
+     "name": "election",
+     "type": "string",
+     "values": [
+      "2026 General Election"
+     ]
+    },
+    {
+     "name": "starts",
+     "type": "string",
+     "values": [
+      "2026-10-19"
+     ]
+    },
+    {
+     "name": "ends",
+     "type": "string",
+     "values": [
+      "2026-10-31"
+     ]
+    },
+    {
+     "name": "hours",
+     "type": "string",
+     "values": [
+      "10 a.m. to 6 p.m. every day; the Supervisor of Elections Office opens at 8:30 a.m.",
+      "7 a.m. to 7 p.m. on Election Day",
+      "8:30 a.m. to 6 p.m."
+     ]
+    },
+    {
+     "name": "precinct",
+     "type": "string",
+     "values": [
+      "1",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15",
+      "16",
+      "17",
+      "18",
+      "19",
+      "2",
+      "20",
+      "21",
+      "22",
+      "23",
+      "24",
+      "25",
+      "26",
+      "27",
+      "28",
+      "29",
+      "3",
+      "30",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9"
+     ]
+    },
+    {
+     "name": "name",
+     "type": "string"
+    },
+    {
+     "name": "address",
+     "type": "string"
+    },
+    {
+     "name": "city",
+     "type": "string",
+     "values": [
+      "Callaway",
+      "Fountain",
+      "Lynn Haven",
+      "Mexico Beach",
+      "Panama City",
+      "Panama City Beach",
+      "Southport",
+      "Youngstown"
+     ]
+    },
+    {
+     "name": "zip",
+     "type": "string",
+     "values": [
+      "32401",
+      "32404",
+      "32405",
+      "32407",
+      "32408",
+      "32409",
+      "32413",
+      "32438",
+      "32444",
+      "32456",
+      "32466"
+     ]
+    },
+    {
+     "name": "lat",
+     "type": "number"
+    },
+    {
+     "name": "lon",
+     "type": "number"
+    },
+    {
+     "name": "url",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://www.bayvotesfl.gov/voters/vote-early/",
+      "https://www.voterfocus.com/PrecinctFinder/precinctDirectory?county=FL-BAY"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/voting-locations.json",
+   "csv": "/downloads/voting-locations.csv",
+   "api": "/api/v1/datasets/voting-locations"
+  },
+  {
+   "id": "public-notices",
+   "title": "Public notices",
+   "description": "Legal notices published by local governments and public agencies on the county's public notice website: bid and proposal requests, public hearings and ordinances, public meetings and other notices, with the government that posted it (gov_id, blank for agencies that are not one of the county's local governments), the date it was published, the first date it mentions after that (the meeting, hearing or bid due date) and the full text. Court, foreclosure, tax deed, probate and other private notices on the same site are left out. The site keeps 30 days; notices already on file stay as an archive.",
+   "rows": 63,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "notice_id",
+     "type": "string"
+    },
+    {
+     "name": "published",
+     "type": "string",
+     "values": [
+      "2026-09-29",
+      "2026-09-30",
+      "2026-10-01",
+      "2026-10-02",
+      "2026-10-05",
+      "2026-10-06",
+      "2026-10-07",
+      "2026-10-08",
+      "2026-10-09",
+      "2026-10-10",
+      "2026-10-12",
+      "2026-10-13",
+      "2026-10-14",
+      "2026-10-15",
+      "2026-10-16",
+      "2026-10-19",
+      "2026-10-21",
+      "2026-10-23",
+      "2026-10-25",
+      "2026-10-26",
+      "2026-10-27"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "pc",
+      "pcb",
+      "schools"
+     ]
+    },
+    {
+     "name": "agency",
+     "type": "string",
+     "values": [
+      "Bay County",
+      "Bay County Tax Collector",
+      "Bay District Schools",
+      "City of Callaway",
+      "City of Lynn Haven",
+      "City of Mexico Beach",
+      "City of Panama City",
+      "City of Panama City Beach",
+      "Community development district",
+      "Gulf Coast State College",
+      "Panama City Port Authority"
+     ]
+    },
+    {
+     "name": "kind",
+     "type": "string",
+     "values": [
+      "bid",
+      "hearing",
+      "meeting",
+      "other"
+     ]
+    },
+    {
+     "name": "kind_label",
+     "type": "string",
+     "values": [
+      "Bid or proposal request",
+      "Other notice",
+      "Public hearing or ordinance",
+      "Public meeting"
+     ]
+    },
+    {
+     "name": "title",
+     "type": "string"
+    },
+    {
+     "name": "event_date",
+     "type": "string",
+     "values": [
+      "2026-10-05",
+      "2026-10-06",
+      "2026-10-08",
+      "2026-10-13",
+      "2026-10-14",
+      "2026-10-15",
+      "2026-10-16",
+      "2026-10-20",
+      "2026-10-22",
+      "2026-10-26",
+      "2026-10-27",
+      "2026-10-28",
+      "2026-10-29",
+      "2026-10-30",
+      "2026-11-03",
+      "2026-11-04",
+      "2026-11-06",
+      "2026-11-09",
+      "2026-11-10",
+      "2026-11-13",
+      "2026-11-16",
+      "2026-11-17",
+      "2026-11-24",
+      "2026-12-15"
+     ]
+    },
+    {
+     "name": "notice_type",
+     "type": "string",
+     "values": [
+      "Display Ad (document upload)",
+      "Public Notice (Other)"
+     ]
+    },
+    {
+     "name": "text",
+     "type": "string"
+    },
+    {
+     "name": "pdf_url",
+     "type": "string",
+     "values": [
+      "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/FWn1lKy0wNoqUYXUyBZS/d907./cropped-396.pdf",
+      "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/S7f3hpLR5JJ4lv2ZRpPU/1fcd./cropped-040.pdf",
+      "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/XvEqLdNqllAzJJaTBax4/6569./cropped-028.pdf",
+      "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/fpVQpbPwReLj0eIEORUk/d519./cropped-668.pdf",
+      "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/jwNtuNJuKFjPXNPVcU44/dd7b./cropped-135.pdf",
+      "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/mlwyHIF8RUrB6T3Ot2Df/d59b./cropped-510.pdf",
+      "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/ubbtWJbCLCwAynktGtIJ/91ea./cropped-729.pdf",
+      "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/vTRrMPSA0xFut5Wk3QPA/1c8d./cropped-728.pdf",
+      "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/vji28BvaPG4UNufZGc0N/be71./cropped-699.pdf"
+     ]
+    },
+    {
+     "name": "publication",
+     "type": "string",
+     "values": [
+      "Bay County Publications"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://publicnoticesbaycountyfl.gov/"
+     ]
+    }
+   ],
+   "json": "/downloads/public-notices.json",
+   "csv": "/downloads/public-notices.csv",
+   "api": "/api/v1/datasets/public-notices"
+  },
+  {
+   "id": "job-openings",
+   "title": "Government job openings",
+   "description": "Open jobs posted by Bay County, Bay District Schools, the cities and the airport on their own job boards, read daily: title, department, job type, pay where posted, posting and closing dates and the link to apply. Jobs whose closing date has passed are left out. first_seen is the first day the job was on file.",
+   "rows": 126,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "job_id",
+     "type": "string"
+    },
+    {
+     "name": "board",
+     "type": "string",
+     "values": [
+      "airport",
+      "county",
+      "cw",
+      "lh",
+      "parker",
+      "pc",
+      "schools"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "parker",
+      "pc",
+      "schools"
+     ]
+    },
+    {
+     "name": "employer",
+     "type": "string",
+     "values": [
+      "Bay County",
+      "Bay District Schools",
+      "City of Callaway",
+      "City of Lynn Haven",
+      "City of Panama City",
+      "City of Parker",
+      "Northwest Florida Beaches International Airport"
+     ]
+    },
+    {
+     "name": "title",
+     "type": "string"
+    },
+    {
+     "name": "department",
+     "type": "string"
+    },
+    {
+     "name": "job_type",
+     "type": "string",
+     "values": [
+      "Confidential",
+      "Full Time",
+      "Full time",
+      "Full- Time",
+      "Instructional",
+      "Licensed",
+      "Part time",
+      "Part-Time",
+      "Substitutes",
+      "Support"
+     ]
+    },
+    {
+     "name": "pay",
+     "type": "string",
+     "values": [
+      "$16.07 Hourly",
+      "$33,425.60 Annually",
+      "$34,756.80 Annually",
+      "$36,150.40 Annually",
+      "$37,585.60 Annually",
+      "$39,104.00 Annually",
+      "$40,643.20 Annually",
+      "$43,950.40 Annually",
+      "$48,526.40 Annually",
+      "$51,958.40 Annually"
+     ]
+    },
+    {
+     "name": "posted",
+     "type": "string"
+    },
+    {
+     "name": "closes",
+     "type": "string",
+     "values": [
+      "2026-10-27",
+      "2026-10-28",
+      "2026-10-29",
+      "2026-10-30",
+      "2026-11-02",
+      "2026-11-03",
+      "2026-11-06",
+      "2027-04-30"
+     ]
+    },
+    {
+     "name": "ref",
+     "type": "string"
+    },
+    {
+     "name": "url",
+     "type": "string"
+    },
+    {
+     "name": "first_seen",
+     "type": "string",
+     "values": [
+      "2026-10-27"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://baycountyfl.wd12.myworkdayjobs.com/en-US/Bay_County_External_Career_Site",
+      "https://cityofparker.com/government/careers/",
+      "https://focus.bayschools.net/focus/jobs/#!Jobs",
+      "https://jobs.keldair.com/cityoflynnhaven",
+      "https://www.cityofcallaway.com/Jobs.aspx",
+      "https://www.governmentjobs.com/careers/pcgov",
+      "https://www.iflybeaches.com/airport-district/employment"
+     ]
+    }
+   ],
+   "json": "/downloads/job-openings.json",
+   "csv": "/downloads/job-openings.csv",
+   "api": "/api/v1/datasets/job-openings"
+  },
+  {
+   "id": "job-boards",
+   "title": "Government job boards",
+   "description": "Each local government's job board and whether its openings are read automatically: openings is how many are open now, blank where the board cannot be read (note says why and where to look).",
+   "rows": 10,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "board",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "schools",
+      "sp"
+     ]
+    },
+    {
+     "name": "employer",
+     "type": "string"
+    },
+    {
+     "name": "url",
+     "type": "string"
+    },
+    {
+     "name": "read",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "openings",
+     "type": "number"
+    },
+    {
+     "name": "note",
+     "type": "string",
+     "values": [
+      "Mexico Beach takes applications on its employment page; openings are not listed one by one.",
+      "Springfield posts openings as notices on its website.",
+      "The city's website turns away automated readers; see its job openings page."
+     ]
+    },
+    {
+     "name": "checked",
+     "type": "string",
+     "values": [
+      "2026-10-27"
+     ]
+    }
+   ],
+   "json": "/downloads/job-boards.json",
+   "csv": "/downloads/job-boards.csv",
+   "api": "/api/v1/datasets/job-boards"
+  },
+  {
    "id": "tax-districts",
    "title": "Tax districts",
    "description": "Which taxing authorities levy property tax in each tax district, and the combined millage. Rates by year are in property-tax-rates (authority_id).",
@@ -8854,6 +13682,7 @@
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1149,plainText=false)",
       "https://mexicobeachfl.gov/uploads/2026/09/October-13-2026-CIty-Council-Meeting-Agenda-Packet.pdf",
       "https://mexicobeachfl.gov/uploads/2026/09/October-27-2026-City-Council-Meeting-Packet.pdf",
+      "https://mexicobeachfl.gov/uploads/2026/10/October-30-2026-Special-Meeting-and-LDc-Workshop-Packet.pdf",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-912?packet=true",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10202026-915?packet=true",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10272026-902?packet=true"
