@@ -7,15 +7,17 @@ What it checks:
   * every file is named NNNN_<name>.sql and no number is used twice (gaps are fine)
   * the whole chain applies with the same runner the production sync uses (load.py --migrate)
   * a second run applies nothing, so schema_migrations records every file
+  * every published dataset (site/public/downloads/index.json) has a table with all of its columns, the same check
+    the sync makes, so a missing column fails the pull request instead of the sync after merge
 
 Supabase's built-in roles (anon, authenticated, service_role) and auth.uid() don't exist in plain Postgres,
 so a small stand-in is created first. Never point this at the production database.
 """
-import glob, os, re, sys
+import glob, json, os, re, sys
 import psycopg
 
 sys.path.insert(0, os.path.dirname(__file__))
-from load import ROOT, migrate
+from load import PUB, ROOT, migrate, table_columns
 
 STUB = '''
 do $$ begin
@@ -41,6 +43,21 @@ def check_names():
             problems.append(f'{f}: number {m.group(1)} is already used by {seen[m.group(1)]}')
         seen[m.group(1)] = f
     return [f for f in files if f.endswith('.sql')], problems
+
+
+def check_dataset_columns(cur):
+    cat = json.load(open(os.path.join(PUB, 'downloads', 'index.json')))
+    problems = []
+    for d in cat['datasets']:
+        table = d['id'].replace('-', '_')
+        cols = table_columns(cur, table)
+        if not cols:
+            problems.append(f'dataset "{d["id"]}": table {table} is missing')
+            continue
+        missing = [c['name'] for c in d['columns'] if c['name'] not in cols]
+        if missing:
+            problems.append(f'dataset "{d["id"]}": table {table} lacks {missing}')
+    return problems
 
 
 def main():
@@ -69,6 +86,10 @@ def main():
             raise SystemExit(1)
         with conn.transaction():
             migrate(conn.cursor())  # must apply nothing
+        gaps = check_dataset_columns(cur)
+        if gaps:
+            print('Datasets the sync would refuse (add a migration):\n  ' + '\n  '.join(gaps))
+            raise SystemExit(1)
     print(f'OK: all {len(files)} migrations applied in order.')
 
 
