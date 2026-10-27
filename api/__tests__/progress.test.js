@@ -34,6 +34,13 @@ test('totals, stages and the board-year grid', () => {
   assert.equal(d.cost, undefined);   // the public answer never carries costs
 });
 
+test('approved votes are not counted twice in Votes checked', () => {
+  // the live numbers on 2026-10-27: 2,981 passed, 265 flagged and approved by a person
+  const d = summarize([{board: 'pc', year: 2024, listed: 10, captured: 10, read: 10, motions: 3246, passed: 3246, flagged: 0, reviewed: 265}], [], {now: NOW});
+  assert.equal(d.stages[3].value, 3246);
+  assert.equal(d.stages[3].pct, 100);
+});
+
 test('time left uses the last week’s pace once reads exist, the schedule before', () => {
   assert.equal(summarize(rows, [], {now: NOW}).eta.basis, 'schedule');
   const fast = summarize(rows.map(r => r.board === 'pc' && r.year === 2016 ? {...r, read_7d: 70} : r), [], {now: NOW});

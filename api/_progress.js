@@ -80,7 +80,9 @@ function summarize(rows, runs = [], opts = {}) {
   });
 
   const done = T.read + T.unreadable;
-  const checked = T.passed + T.reviewed;
+  // Checked = every motion no longer waiting for a person. (passed already includes flagged votes a person approved,
+  // so adding reviewed counted those twice.)
+  const checked = Math.max(0, T.motions - T.flagged);
   const stages = [
     {key: 'found', label: 'Found in the archives', value: T.found, of: null, pct: T.listed_boards ? 100 : 0,
       detail: T.listed_boards ? `${T.listed_boards} of ${T.boards || Object.keys(BOARDS).length} boards’ archives counted` : 'Archives not counted yet'},
