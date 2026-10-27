@@ -199,8 +199,10 @@ def realtor_page(out_dir):
           <label class="rc-fld" style="flex:2 1 300px"><span>Bay County address</span>
             <div class="rc-ac"><input id="q" type="search" autocomplete="off" spellcheck="false" placeholder="e.g. 825 Ohio Ave" aria-autocomplete="list" aria-controls="acList"><ul id="acList" class="ac-list" role="listbox" hidden></ul></div></label>
           <label class="rc-fld"><span>Prepared for (optional)</span><input id="prepFor" type="text" maxlength="120" placeholder="Client name"></label>
+          <label class="rc-fld"><span>Cover photo for the PDF (optional)</span><input id="coverPhoto" type="file" accept="image/png,image/jpeg,image/webp"></label>
           <button class="rc-btn" id="runBtn" type="submit">Run report</button>
         </div>
+        <p class="muted small" id="coverNote">Your listing photo of the house goes across the top of the PDF. It stays in this browser and is never uploaded.</p>
         <p class="rc-err small" id="runErr" role="alert" hidden></p>
       </form>
       <div class="rc-acts" id="reportActs" hidden>

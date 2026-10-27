@@ -89,7 +89,23 @@ function brandNow() {
   return b;
 }
 function imgPreview() {
-  ['logo', 'photo'].forEach(k => {
+  // The PDF cover photo: cropped in the browser to the two frames the covers use and kept only in memory, never sent.
+let COVER = null;
+function cropTo(im, aspect, w) {
+  const W = im.naturalWidth, H = im.naturalHeight, cv = document.createElement('canvas'); let sx = 0, sy = 0, sw = W, sh = H;
+  if (W / H > aspect) { sw = H * aspect; sx = (W - sw) / 2; } else { sh = W / aspect; sy = (H - sh) / 2; }
+  cv.width = Math.min(w, Math.round(sw)); cv.height = Math.round(cv.width / aspect); cv.getContext('2d').drawImage(im, sx, sy, sw, sh, 0, 0, cv.width, cv.height);
+  return cv.toDataURL('image/jpeg', 0.85);
+}
+$('coverPhoto').addEventListener('change', e => {
+  const f = e.target.files && e.target.files[0], note = $('coverNote');
+  if (!f) { COVER = null; return; }
+  const url = URL.createObjectURL(f), im = new Image();
+  im.onload = () => { COVER = {full: cropTo(im, 612 / 330, 1600), band: cropTo(im, 532 / 220, 1600)}; URL.revokeObjectURL(url); note.textContent = 'Photo added to the PDF cover. It stays in this browser.'; };
+  im.onerror = () => { COVER = null; URL.revokeObjectURL(url); note.textContent = 'That photo couldn’t be read. Try a JPEG or PNG.'; };
+  im.src = url;
+});
+['logo', 'photo'].forEach(k => {
     const el = $('prev_' + k);
     el.innerHTML = IMG[k] ? `<img src="${esc(IMG[k])}" alt="">` : `<span>${k === 'logo' ? 'No logo yet' : 'No photo yet'}</span>`;
     $('rm_' + k).hidden = !IMG[k];
@@ -117,6 +133,22 @@ function readImage(file, kind) {
     im.src = url;
   });
 }
+// The PDF cover photo: cropped in the browser to the two frames the covers use and kept only in memory, never sent.
+let COVER = null;
+function cropTo(im, aspect, w) {
+  const W = im.naturalWidth, H = im.naturalHeight, cv = document.createElement('canvas'); let sx = 0, sy = 0, sw = W, sh = H;
+  if (W / H > aspect) { sw = H * aspect; sx = (W - sw) / 2; } else { sh = W / aspect; sy = (H - sh) / 2; }
+  cv.width = Math.min(w, Math.round(sw)); cv.height = Math.round(cv.width / aspect); cv.getContext('2d').drawImage(im, sx, sy, sw, sh, 0, 0, cv.width, cv.height);
+  return cv.toDataURL('image/jpeg', 0.85);
+}
+$('coverPhoto').addEventListener('change', e => {
+  const f = e.target.files && e.target.files[0], note = $('coverNote');
+  if (!f) { COVER = null; return; }
+  const url = URL.createObjectURL(f), im = new Image();
+  im.onload = () => { COVER = {full: cropTo(im, 612 / 330, 1600), band: cropTo(im, 532 / 220, 1600)}; URL.revokeObjectURL(url); note.textContent = 'Photo added to the PDF cover. It stays in this browser.'; };
+  im.onerror = () => { COVER = null; URL.revokeObjectURL(url); note.textContent = 'That photo couldn’t be read. Try a JPEG or PNG.'; };
+  im.src = url;
+});
 ['logo', 'photo'].forEach(k => {
   $('f_' + k).addEventListener('change', async e => {
     const f = e.target.files[0]; if (!f) return;
@@ -393,8 +425,8 @@ function buildDoc(opts = {}) {
         vLineWidth: i => (i > 0 && i < cols ? 6 : 0), vLineColor: () => '#FFFFFF', paddingLeft: () => 12, paddingRight: () => 10, paddingTop: () => 11, paddingBottom: () => 11}} : null; };
 
   // Cover. Agents with branding get their band; everyone else gets a clean default led by the place name.
-  // Photos arrive already cropped to their frame (pdfmake can't crop): opts.photo is the agent's listing photo for this
-  // report, opts.scene a photo of the town ({img, credit}).
+  // opts.photo / opts.bandPhoto: the agent's listing photo for this report, already cropped to its frame (pdfmake can't
+  // crop). With a photo the cover is 'photo'; without one it is 'type'.
   const branded = !!(b.agent_name || b.brokerage || b.logo);
   const city = /^City of /.test(r.jurisdiction || '') ? r.jurisdiction.replace(/^City of /, '') : 'Bay County';
   const cityLine = city === 'Bay County' ? 'Florida' : 'Bay County, Florida';
@@ -402,25 +434,16 @@ function buildDoc(opts = {}) {
   const kicker = (t, c = A) => ({text: t.toUpperCase(), fontSize: 7.5, bold: true, color: c, characterSpacing: 1.4});
   const bleed = (node, y, h) => ({...node, absolutePosition: {x: 0, y}, width: 612, height: h});
   const spacer = h => ({text: '', margin: [0, h, 0, 0]});
-  const style = branded ? 'branded' : (opts.style || DEFAULT_COVER);
+  const style = branded ? 'branded' : opts.photo ? 'photo' : (opts.style || DEFAULT_COVER);
   let cover;
   if (style === 'branded') {
-    cover = [band, {canvas: [{type: 'rect', x: 0, y: 0, w: W, h: 3, color: A}]}, opts.photo ? {image: opts.photo, width: W, height: 220, margin: [0, 14, 0, 0]} : null, title, glance() && {...glance(), margin: [0, 18, 0, 0]}];
+    cover = [band, {canvas: [{type: 'rect', x: 0, y: 0, w: W, h: 3, color: A}]}, opts.bandPhoto || opts.photo ? {image: opts.bandPhoto || opts.photo, width: W, height: 220, margin: [0, 14, 0, 0]} : null, title, glance() && {...glance(), margin: [0, 18, 0, 0]}];
   } else if (style === 'photo') { // the agent's listing photo, edge to edge, then the address on white
     const H = 330;
     cover = [opts.photo ? bleed({image: opts.photo}, 0, H) : {canvas: [{type: 'rect', x: 0, y: 0, w: 612, h: H, color: sunken}], absolutePosition: {x: 0, y: 0}},
       {canvas: [{type: 'rect', x: 0, y: 0, w: 612, h: 4, color: A}], absolutePosition: {x: 0, y: H}},
-      spacer(H - 44 + 14), {columns: [kicker(city + ', ' + (city === 'Bay County' ? 'Florida' : 'Florida')), {text: 'PROPERTY REPORT   ·   ' + day(r.generated_at).toUpperCase(), fontSize: 7.5, bold: true, color: faint, characterSpacing: 1.2, alignment: 'right'}]},
+      spacer(H - 44 + 14), {columns: [kicker(city + ', Florida'), {text: 'PROPERTY REPORT   ·   ' + day(r.generated_at).toUpperCase(), fontSize: 7.5, bold: true, color: faint, characterSpacing: 1.2, alignment: 'right'}]},
       addr(8, 28), {...glance(), margin: [0, 18, 0, 0]}];
-  } else if (style === 'scene') { // a photo of the town across the top, the place name over it
-    const H = 250, sc = opts.scene || {};
-    cover = [sc.img ? bleed({image: sc.img}, 0, H) : {canvas: [{type: 'rect', x: 0, y: 0, w: 612, h: H, color: P}], absolutePosition: {x: 0, y: 0}},
-      {canvas: [{type: 'rect', x: 0, y: 0, w: 612, h: 64, color: '#0B1220', fillOpacity: 0.5}], absolutePosition: {x: 0, y: H - 64}},
-      {absolutePosition: {x: 40, y: H - 52}, stack: [{text: city, fontSize: 24, bold: true, color: '#FFFFFF'}, {text: cityLine.toUpperCase(), fontSize: 7, bold: true, color: '#FFFFFF', characterSpacing: 1.4, opacity: 0.85, margin: [0, 1, 0, 0]}]},
-      {absolutePosition: {x: 380, y: H - 40}, width: 192, stack: [{text: 'PROPERTY REPORT', fontSize: 7.5, bold: true, color: '#FFFFFF', characterSpacing: 1.4, alignment: 'right'}, {text: day(r.generated_at), fontSize: 8.5, color: '#FFFFFF', alignment: 'right', margin: [0, 2, 0, 0]}]},
-      {canvas: [{type: 'rect', x: 0, y: 0, w: 612, h: 4, color: A}], absolutePosition: {x: 0, y: H}},
-      spacer(H - 44 + 8), sc.credit ? {text: 'Photo: ' + sc.credit, fontSize: 6.5, color: faint, alignment: 'right'} : null,
-      addr(16, 30), {...glance(), margin: [0, 22, 0, 0]}];
   } else { // type: no photo, a solid color block carrying the address and the key numbers
     const H = 470, inv = [];
     for (let i = 0; i < G.length; i += 3) inv.push([0, 1, 2].map(j => G[i + j] ? {stack: [{text: G[i + j][0].toUpperCase(), fontSize: 6.5, bold: true, color: FG, opacity: 0.7, characterSpacing: 0.7},
@@ -497,7 +520,7 @@ $('pdfBtn').addEventListener('click', async () => {
   try {
     await pdfReady();
     const slug = String(REPORT.address || 'address').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-    pdfMake.createPdf(buildDoc()).download(`property-report-${slug}.pdf`);
+    pdfMake.createPdf(buildDoc(COVER ? {photo: COVER.full, bandPhoto: COVER.band} : {})).download(`property-report-${slug}.pdf`);
   } catch (e) { $('runErr').textContent = 'The PDF couldn’t be made. Check your connection and try again.'; $('runErr').hidden = false; }
   btn.disabled = false; btn.innerHTML = label;
 });
