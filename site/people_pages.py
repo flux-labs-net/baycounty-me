@@ -119,7 +119,7 @@ def person_page(pid):
                   kpi('From businesses and groups', money(sum(l['amount'] or 0 for l, _ in gifts)), f'{len(gifts)} donors named on this page') if gifts else '',
                   kpi('From business owners', money(sum(l['amount'] or 0 for l, _ in owner_gifts)), f'{len(owner_gifts)} people who run a business, named') if owner_gifts else '',
                   kpi('Pay', money(sal), 'annual, latest on file') if sal else ''])
-    secs = ''
+    secs = vsecs = ''  # vote sections go right under the connections graph
     # roles
     roles = []
     for g in govs:
@@ -176,15 +176,15 @@ def person_page(pid):
     # votes on donors' contracts
     if mm:
         rows = ''.join(f'<li><b>{e(r["vote_date"])}</b>: voted {e(r["vote"])} on {e(r["item"])}{" · " + money(r["amount"]) if r.get("amount") else ""} ({e(r["outcome"])} {e(r["tally"])}{", consent agenda" if r.get("consent_agenda") else ""}). {link_name_vendor(r["donor"])} gave {money(r["gift_amount"])} {e(r["gift_before_or_after_vote"])} the vote. <a class="src" href="{e(r["source_url"])}" target="_blank" rel="noopener">Minutes</a></li>' for r in sorted(mm, key=lambda r: r['vote_date'], reverse=True))
-        secs += f'<section class="tx-sec"><div class="sec-hd"><h2 id="donor-votes" data-tile="Donor votes">Votes on contracts with their own donors</h2><span class="muted">From the Money map</span></div><ul class="plain mm-list">{rows}</ul><p class="note">{e(NOTE)}</p></section>'
+        vsecs += f'<section class="tx-sec"><div class="sec-hd"><h2 id="donor-votes" data-tile="Donor votes">Votes on contracts with their own donors</h2><span class="muted">From the Money map</span></div><ul class="plain mm-list">{rows}</ul><p class="note">{e(NOTE)}</p></section>'
     # votes on companies' contracts
     if voted:
         vr = ''.join(f'<tr><th scope="row">{link(o["entity_id"])}</th><td class="small">{e("; ".join(l["detail"]))}</td><td class="num">{l["records"]}</td><td class="small">{e(min(l["dates"]) if l["dates"] else "")}{(" to " + e(max(l["dates"]))) if len(set(l["dates"])) > 1 else ""}</td></tr>' for l, o in sorted(voted, key=lambda t: -t[0]['records']))
-        secs += f'<section class="tx-sec"><div class="sec-hd"><h2 id="contract-votes" data-tile="Contract votes">Votes on companies\' contracts</h2><span class="muted">Contract approvals matched to the minutes</span></div><div class="tablewrap"><table class="tx-table vd-table"><thead><tr><th scope="col">Company</th><th scope="col">Votes</th><th scope="col" class="num">Approvals</th><th scope="col">When</th></tr></thead><tbody>{vr}</tbody></table></div></section>'
+        vsecs += f'<section class="tx-sec"><div class="sec-hd"><h2 id="contract-votes" data-tile="Contract votes">Votes on companies\' contracts</h2><span class="muted">Contract approvals matched to the minutes</span></div><div class="tablewrap"><table class="tx-table vd-table"><thead><tr><th scope="col">Company</th><th scope="col">Votes</th><th scope="col" class="num">Approvals</th><th scope="col">When</th></tr></thead><tbody>{vr}</tbody></table></div></section>'
     # recent votes
     if mv:
         rv = ''.join(vote_card(r) for r in mv[:12])
-        secs += f'<section class="tx-sec"><div class="sec-hd"><h2 id="votes" data-tile="Latest votes">Latest recorded votes</h2><span class="muted">{len(mv):,} money votes on file</span></div><ul class="plain ui-votes">{rv}</ul><p class="small"><a href="/public-money/votes">Every recorded vote</a></p></section>'
+        vsecs += f'<section class="tx-sec"><div class="sec-hd"><h2 id="votes" data-tile="Latest votes">Latest recorded votes</h2><span class="muted">{len(mv):,} money votes on file</span></div><ul class="plain ui-votes">{rv}</ul><p class="small"><a href="/public-money/votes">Every recorded vote</a></p></section>'
     if pay:
         pr = ''.join(f'<li>{e(r.get("title"))}{", " + e(r.get("employer") or r.get("government")) if (r.get("employer") or r.get("government")) else ""}: {money(r.get("annual") or r.get("salary"))} ({e(r.get("year") or r.get("fiscal_year") or r.get("as_of") or "")}) <a class="src" href="{e(r.get("source_url"))}" target="_blank" rel="noopener">Source</a></li>' for r in pay)
         secs += f'<section class="tx-sec"><div class="sec-hd"><h2 id="pay">Pay</h2><span class="muted">Elected officials and department leaders only</span></div><ul class="plain">{pr}</ul></section>'
@@ -192,9 +192,10 @@ def person_page(pid):
     return f'''<div class="page tax">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow"><a href="/people">People</a>{" · " + eyebrow if eyebrow else ""}</span><h1>{e(x["name"])}</h1>
     {f'<p class="lede">{e(x["subtitle"])}</p>' if x.get("subtitle") else ''}</div>
-    <div class="stamp">{f'<dl class="ui-facts">{facts_h}</dl>' if facts_h else ''}<a class="pill" href="/alerts">Get alerts</a><a class="pill" href="/people#co">County officers and pay</a></div></header>
+    <div class="stamp">{f'<dl class="ui-facts">{facts_h}</dl>' if facts_h else ''}<a class="pill" href="/alerts">Get alerts</a><a class="pill" href="/people#co">Officers and pay</a></div></header>
   {f'<div class="kpis">{kp}</div>' if kp else ''}
   {profile_section(eid, 'Connections', 'Companies, groups and governments linked to ' + x['name'] + ' in the records')}
+  {vsecs}
   {secs}
   <section class="tx-sec method"><div class="sec-hd"><h2 id="src">About this page</h2></div><ul class="plain">
     <li>Names are matched across records on first and last name, with common nicknames. Board seats and businesses are listed only after an editor checks the match against the filing.</li>

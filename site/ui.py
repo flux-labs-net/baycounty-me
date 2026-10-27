@@ -160,6 +160,9 @@ def _short(t, n=64):
     return t if len(t) <= n else t[:n].rsplit(' ', 1)[0].rstrip(',;:·') + '…'
 
 
+_ACT_ICON = {'Get alerts': 'bell', 'Officers and pay': 'users', 'Company card on Contracts': 'file'}
+
+
 def _hero(body, path):
     m = re.search(r'<header class="tx-top">', body)
     if not m:
@@ -219,6 +222,19 @@ def _hero(body, path):
         badge_h = f'<span class="ui-badge t-{tone_of(title)}">{ico(badge)}</span>'
     else:
         badge_h = f'<span class="ui-badge t-{tone}">{ico(badge)}</span>'
+    if path.startswith(('/people/', '/public-money/vendors/')) and title and 'ui-facts' in stamp:
+        # a profile (person or company): name beside the photo or badge, the buttons at the right, the facts in one strip
+        cr = re.search(r'<p class="ui-photo-cr">.*?</p>', inner, re.S)
+        dl = re.search(r'<dl class="ui-facts">.*?</dl>', stamp, re.S)
+        if cr and dl:
+            inner = inner.replace(cr.group(0), '')
+        acts = ''.join(f'<a class="ui-btn{" pri" if i == 0 and len(links) > 1 else ""}"{a}>{ico(_ACT_ICON.get(_text(t), icon_for(_text(t))[0]))}{t}</a>'
+                       for i, (a, t) in enumerate(links))
+        sc = f'<div class="ui-pick ui-pf-scope">{scope}</div>' if scope else ''
+        facts = f'<div class="ui-pf-facts" data-report="skip">{sc}{dl.group(0)}{cr.group(0) if cr else ""}</div>' if dl else ''
+        new = (f'<header class="tx-top ui-hero ui-pf"><div class="ui-id">{badge_h}<div class="ui-hd">{inner}</div></div>'
+               f'{f"<div class=ui-pf-act>{acts}</div>" if acts else ""}{facts}</header>')
+        return body[:h0] + new + body[h1:]
     new = (f'<header class="tx-top ui-hero"><div class="ui-id">{badge_h}'
            f'<div class="ui-hd">{inner}{inner_tags}</div></div>{pick}</header>')
     return body[:h0] + new + body[h1:]
@@ -278,6 +294,8 @@ def enhance(body, path):
         return body
     body = re.sub(r'<div class="page tax(?=[ "])', '<div class="page tax ui', body, count=1)
     body = _hero(body, path)
+    if 'ui-hero ui-pf' in body:
+        body = body.replace('<div class="page tax ui', '<div class="page tax ui ui-pfp', 1)
     body, tiles = _sections(body)
     body = _kpis(body)
     body = body.replace('<span class="eyebrow">The simple version</span>',

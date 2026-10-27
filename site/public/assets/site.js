@@ -449,7 +449,10 @@ B.enhance();
       const cs = colsOf(tr);
       if (tr.cells.length === 1 && (tr.cells[0].colSpan || 1) > 1) { tr.classList.add('stk-span'); continue; }
       cs.forEach((c, i) => { if (c && !c.hasAttribute('data-label') && names[i]) c.setAttribute('data-label', names[i]); });
+      // phones put short values two to a line; long text, lists of links and the first cell keep the full width
+      for (const c of tr.cells) if (c !== tr.cells[0] && (c.textContent.trim().length > 32 || c.querySelectorAll('a').length > 1)) c.classList.add('stk-w');
     }
+    t.classList.add('stk-g');
   };
   let q = false;
   const run = () => { q = false; document.querySelectorAll('table').forEach(label); };
