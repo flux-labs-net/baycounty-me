@@ -224,5 +224,21 @@
         "util": "City of Mexico Beach"
       }
     }
-  ]
+  ],
+  "schools": {
+    "district_gov": "schools",
+    "district_name": "Bay District Schools",
+    "nces_leaid": "1200090",
+    "fips": 12,
+    "fldoe_district": "03",
+    "calendar_feed": "https://thrillshare-cmsv2.services.thrillshare.com/api/v4/o/31249/cms/events",
+    "calendar_page": "https://www.bay.k12.fl.us/o/bds/page/academic-calendar",
+    "zones_service": "https://gis.baycountyfl.gov/arcgis/rest/services/SchoolAttendanceZones/MapServer",
+    "zone_layers": {
+      "Elementary": 0,
+      "Middle": 1,
+      "High": 2
+    },
+    "website": "https://www.bay.k12.fl.us/"
+  }
 }

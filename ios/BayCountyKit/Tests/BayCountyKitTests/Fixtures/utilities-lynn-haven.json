@@ -1,0 +1,327 @@
+{
+ "data": {
+  "point": {
+   "lat": 30.245649,
+   "lon": -85.647793
+  },
+  "address": null,
+  "boundary": [
+   "Lynn Haven"
+  ],
+  "place_id": "fl-bay",
+  "area": "lh",
+  "area_name": "Lynn Haven",
+  "gov_id": "lh",
+  "services": [
+   {
+    "service": "water",
+    "service_label": "Water",
+    "providers": [
+     {
+      "provider": "City of Lynn Haven Utilities",
+      "entity_id": "gov:lh",
+      "provider_kind": "City utility",
+      "coverage": "all",
+      "phone": null,
+      "website": "https://www.cityoflynnhaven.gov/",
+      "outage_url": null,
+      "notes": null,
+      "source_url": "https://cityoflynnhaven.com/DocumentCenter/View/4411"
+     }
+    ]
+   },
+   {
+    "service": "sewer",
+    "service_label": "Sewer",
+    "providers": [
+     {
+      "provider": "City of Lynn Haven Utilities",
+      "entity_id": "gov:lh",
+      "provider_kind": "City utility",
+      "coverage": "all",
+      "phone": null,
+      "website": "https://www.cityoflynnhaven.gov/",
+      "outage_url": null,
+      "notes": "Residential sewer usage is capped at 12,000 gallons a month.",
+      "source_url": "https://cityoflynnhaven.com/DocumentCenter/View/4411"
+     }
+    ]
+   },
+   {
+    "service": "electric",
+    "service_label": "Electricity",
+    "providers": [
+     {
+      "provider": "Florida Power & Light (FPL)",
+      "entity_id": "vendor:fpl",
+      "provider_kind": "Investor-owned utility, regulated by the Florida Public Service Commission",
+      "coverage": "most",
+      "phone": "1-800-468-8243",
+      "website": "https://www.fpl.com/",
+      "outage_url": "https://www.fpl.com/outage.html",
+      "notes": "Serves most of Bay County, including the cities. FPL took over Gulf Power's Northwest Florida customers in 2022. Phone is FPL's outage line (1-800-4-OUTAGE).",
+      "source_url": "https://floridapsc.com/library/filings/2025/04200-2025/04200-2025.pdf"
+     }
+    ]
+   },
+   {
+    "service": "gas",
+    "service_label": "Natural gas",
+    "providers": [
+     {
+      "provider": "Peoples Gas",
+      "entity_id": "vendor:peoples-gas",
+      "provider_kind": "Natural gas utility, regulated by the Florida Public Service Commission",
+      "coverage": "some",
+      "phone": "(877) 832-6747",
+      "website": "https://www.peoplesgas.com/",
+      "outage_url": "https://www.peoplesgas.com/company/ournaturalgassystem/naturalgasoutages/",
+      "notes": "Natural gas where its lines run, in every Bay County city and parts of the unincorporated county. Many homes have no gas line; propane comes from private dealers. If you smell gas, leave and call 911 or the number here.",
+      "source_url": "https://www.peoplesgas.com/48ccab/siteassets/files/tariffpgs/tariffsection62.pdf"
+     }
+    ]
+   },
+   {
+    "service": "garbage",
+    "service_label": "Garbage",
+    "providers": [
+     {
+      "provider": "City of Lynn Haven Sanitation",
+      "entity_id": "gov:lh",
+      "provider_kind": "City service, billed on the water bill",
+      "coverage": "all",
+      "phone": "850-265-5989",
+      "website": "https://www.cityoflynnhaven.gov/174/Garbage-Trash",
+      "outage_url": null,
+      "notes": "City cart only. Put it out after 6 p.m. the night before and by 6 a.m., within 2 feet of the road, handle toward the house; bring it in by 9 a.m. the next day. An extra cart is $3.22 a month.",
+      "source_url": "https://www.cityoflynnhaven.gov/174/Garbage-Trash"
+     }
+    ]
+   },
+   {
+    "service": "yard_waste",
+    "service_label": "Yard waste and bulk trash",
+    "providers": [
+     {
+      "provider": "City of Lynn Haven Sanitation",
+      "entity_id": "gov:lh",
+      "provider_kind": "City service",
+      "coverage": "all",
+      "phone": "850-265-5989",
+      "website": "https://www.cityoflynnhaven.gov/174/Garbage-Trash",
+      "outage_url": null,
+      "notes": "Weekly yard trash: limbs under 4 inches across and 4 feet long, one pile up to 2 cubic yards, never in a garbage cart. Call to schedule couches, mattresses or appliances (fee added to the water bill).",
+      "source_url": "https://www.cityoflynnhaven.gov/174/Garbage-Trash"
+     }
+    ]
+   },
+   {
+    "service": "recycling",
+    "service_label": "Recycling",
+    "providers": [
+     {
+      "provider": "No public recycling program",
+      "entity_id": null,
+      "provider_kind": null,
+      "coverage": "all",
+      "phone": "850-236-2212",
+      "website": "https://www.baycountyfl.gov/728/Recycling-in-Bay-County",
+      "outage_url": null,
+      "notes": "Bay County's recycling program closed after Hurricane Michael (2018) and no city runs curbside recycling. The county keeps a list of private recycling outlets. Batteries, paint, oil and other household hazardous waste go free to the Steelfield Road Landfill.",
+      "source_url": "https://www.baycountyfl.gov/728/Recycling-in-Bay-County"
+     }
+    ]
+   },
+   {
+    "service": "internet",
+    "service_label": "Internet",
+    "providers": [
+     {
+      "provider": "Private internet providers",
+      "entity_id": null,
+      "provider_kind": "Private companies (cable, fiber, wireless, satellite)",
+      "coverage": "varies",
+      "phone": null,
+      "website": "https://broadbandmap.fcc.gov/home",
+      "outage_url": null,
+      "notes": "No local government sells internet here. The FCC's National Broadband Map lists the companies that report service at each address and their speeds.",
+      "source_url": "https://broadbandmap.fcc.gov/home"
+     }
+    ]
+   }
+  ],
+  "pickup": [
+   {
+    "service": "garbage",
+    "service_label": "Garbage",
+    "provider": "City of Lynn Haven",
+    "notes": null,
+    "source_url": "https://gis.baycountyfl.gov/arcgis/rest/services/LynnHaven/TrashGarbageRoutes/MapServer",
+    "zone": "ROUTE-E",
+    "zone_label": "route",
+    "days": "Friday",
+    "zone_area": null,
+    "rule": null,
+    "from_map": true
+   },
+   {
+    "service": "yard_waste",
+    "service_label": "Yard waste and bulk trash",
+    "provider": "City of Lynn Haven",
+    "notes": "Lynn Haven calls this \"trash\": yard trash and limbs.",
+    "source_url": "https://gis.baycountyfl.gov/arcgis/rest/services/LynnHaven/TrashGarbageRoutes/MapServer",
+    "zone": "ROUTE-A",
+    "zone_label": "route",
+    "days": "Monday",
+    "zone_area": null,
+    "rule": null,
+    "from_map": true
+   }
+  ],
+  "holidays": [
+   {
+    "provider": "City of Lynn Haven",
+    "holiday": "Thanksgiving Day",
+    "when_observed": "4th Thursday in November",
+    "garbage": "Moved to the Saturday after",
+    "yard_waste": "No pickup",
+    "source_url": "https://www.cityoflynnhaven.gov/174/Garbage-Trash"
+   },
+   {
+    "provider": "City of Lynn Haven",
+    "holiday": "Christmas Day",
+    "when_observed": "December 25",
+    "garbage": "No pickup; in 2025 Thursday's route moved to Saturday, December 27",
+    "yard_waste": "No pickup",
+    "source_url": "https://www.cityoflynnhaven.gov/174/Garbage-Trash"
+   },
+   {
+    "provider": "City of Lynn Haven",
+    "holiday": "New Year's Day",
+    "when_observed": "January 1",
+    "garbage": "No pickup; in 2026 Thursday's route moved to Saturday, January 3",
+    "yard_waste": "No pickup",
+    "source_url": "https://www.cityoflynnhaven.gov/174/Garbage-Trash"
+   },
+   {
+    "provider": "City of Lynn Haven",
+    "holiday": "Other city holidays",
+    "when_observed": "Any city-observed holiday",
+    "garbage": "Call Sanitation, 850-265-5989",
+    "yard_waste": "No pickup",
+    "source_url": "https://www.cityoflynnhaven.gov/174/Garbage-Trash"
+   }
+  ],
+  "rates": [
+   {
+    "provider": "City of Lynn Haven Utilities",
+    "service": "water",
+    "service_label": "Water",
+    "charge": "Base charge",
+    "amount": 16.85,
+    "unit": "per month",
+    "applies_to": "Inside the city",
+    "effective": "FY2025-26 rates as printed in budget approved Sept 23, 2025 (FY2026-27 budget exists but could not be downloaded; rates may have changed Oct 1, 2026)",
+    "notes": null,
+    "source_url": "https://cityoflynnhaven.com/DocumentCenter/View/4411"
+   },
+   {
+    "provider": "City of Lynn Haven Utilities",
+    "service": "water",
+    "service_label": "Water",
+    "charge": "Usage",
+    "amount": 4.05,
+    "unit": "per 1,000 gallons",
+    "applies_to": "Inside the city",
+    "effective": "FY2025-26 rates as printed in budget approved Sept 23, 2025 (FY2026-27 budget exists but could not be downloaded; rates may have changed Oct 1, 2026)",
+    "notes": null,
+    "source_url": "https://cityoflynnhaven.com/DocumentCenter/View/4411"
+   },
+   {
+    "provider": "City of Lynn Haven Utilities",
+    "service": "water",
+    "service_label": "Water",
+    "charge": "Base charge",
+    "amount": 21.06,
+    "unit": "per month",
+    "applies_to": "Outside the city",
+    "effective": "FY2025-26 rates as printed in budget approved Sept 23, 2025 (FY2026-27 budget exists but could not be downloaded; rates may have changed Oct 1, 2026)",
+    "notes": null,
+    "source_url": "https://cityoflynnhaven.com/DocumentCenter/View/4411"
+   },
+   {
+    "provider": "City of Lynn Haven Utilities",
+    "service": "water",
+    "service_label": "Water",
+    "charge": "Usage",
+    "amount": 5.06,
+    "unit": "per 1,000 gallons",
+    "applies_to": "Outside the city",
+    "effective": "FY2025-26 rates as printed in budget approved Sept 23, 2025 (FY2026-27 budget exists but could not be downloaded; rates may have changed Oct 1, 2026)",
+    "notes": null,
+    "source_url": "https://cityoflynnhaven.com/DocumentCenter/View/4411"
+   },
+   {
+    "provider": "City of Lynn Haven Utilities",
+    "service": "sewer",
+    "service_label": "Sewer",
+    "charge": "Base charge",
+    "amount": 16.95,
+    "unit": "per month",
+    "applies_to": "Inside the city",
+    "effective": "FY2025-26 rates as printed in budget approved Sept 23, 2025 (FY2026-27 budget exists but could not be downloaded; rates may have changed Oct 1, 2026)",
+    "notes": null,
+    "source_url": "https://cityoflynnhaven.com/DocumentCenter/View/4411"
+   },
+   {
+    "provider": "City of Lynn Haven Utilities",
+    "service": "sewer",
+    "service_label": "Sewer",
+    "charge": "Usage",
+    "amount": 10.17,
+    "unit": "per 1,000 gallons",
+    "applies_to": "Inside the city",
+    "effective": "FY2025-26 rates as printed in budget approved Sept 23, 2025 (FY2026-27 budget exists but could not be downloaded; rates may have changed Oct 1, 2026)",
+    "notes": null,
+    "source_url": "https://cityoflynnhaven.com/DocumentCenter/View/4411"
+   },
+   {
+    "provider": "City of Lynn Haven Utilities",
+    "service": "garbage",
+    "service_label": "Garbage",
+    "charge": "Garbage",
+    "amount": 24.86,
+    "unit": "per month",
+    "applies_to": "Residential",
+    "effective": "FY2025-26 rates as printed in budget approved Sept 23, 2025 (FY2026-27 budget exists but could not be downloaded; rates may have changed Oct 1, 2026)",
+    "notes": null,
+    "source_url": "https://cityoflynnhaven.com/DocumentCenter/View/4411"
+   },
+   {
+    "provider": "City of Lynn Haven Utilities",
+    "service": "bill",
+    "service_label": "Whole bill",
+    "charge": "Typical monthly bill at 5,000 gallons",
+    "amount": 129.76,
+    "unit": "per month",
+    "applies_to": "Residential, all city charges on the bill",
+    "effective": "FY2025-26 rates as printed in budget approved Sept 23, 2025 (FY2026-27 budget exists but could not be downloaded; rates may have changed Oct 1, 2026)",
+    "notes": "16.85 + 16.95 + 24.86 = 58.66 base; + 5 x (4.05 + 10.17) = 71.10; total = 129.76 (matches budget's own table: 5,000 gal - $129.76). Water+sewer only = 104.90",
+    "source_url": "https://cityoflynnhaven.com/DocumentCenter/View/4411"
+   },
+   {
+    "provider": "City of Lynn Haven Sanitation",
+    "service": "garbage",
+    "service_label": "Garbage",
+    "charge": "Extra garbage cart",
+    "amount": 3.22,
+    "unit": "per month",
+    "applies_to": "Each extra cart",
+    "effective": "Current (city page, 2026)",
+    "notes": null,
+    "source_url": "https://www.cityoflynnhaven.gov/174/Garbage-Trash"
+   }
+  ],
+  "note": "Providers and rules come from each city's and the county's own pages; pickup routes are read live from the city's route map. Electric co-op and FPL lines can run through the same neighborhood, so the name on your bill is the sure answer. Rates: utility-rates dataset."
+ }
+}

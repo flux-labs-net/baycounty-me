@@ -1,0 +1,16 @@
+{
+ "note": "Hand-checked. aliases: organization names on the volunteer boards that don't match a local nonprofit's IRS or Sunbiz name exactly -> nonprofit_id in data/nonprofits/bay/nonprofits.json. causes: the plain cause for a nonprofit where its IRS category doesn't say what volunteers do there (site/volunteer_data.py CAUSES).",
+ "aliases": {
+  "Rebuild Bay County, Inc": "np-833817372"
+ },
+ "causes": {
+  "np-590863698": "Food and basic needs",
+  "np-833817372": "Disaster and emergency",
+  "np-812636147": "Housing and neighborhoods",
+  "np-842966557": "Kids and mentoring",
+  "np-592849343": "Environment",
+  "np-590951529": "Health and hospice",
+  "np-591682455": "Schools and reading",
+  "np-596177716": "Food and basic needs"
+ }
+}

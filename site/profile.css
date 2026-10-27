@@ -30,3 +30,7 @@
 .pf-net svg.pf-sm text{font-size:14.5px}
 .pf-net svg.pf-sm .pf-me-t{font-size:15px}
 .pf-badge{display:inline-block;margin-left:4px;padding:1px 8px;border-radius:999px;background:var(--tint-salmon);color:var(--accent-ink);font:600 .72rem/1.5 var(--f-body);letter-spacing:.02em;vertical-align:middle;white-space:nowrap}
+.pf-res{display:inline-block;padding:1px 8px;border-radius:999px;font-weight:600;background:var(--sunken)}
+.pf-res.ok{background:color-mix(in srgb,var(--teal) 14%,transparent);color:var(--teal)}
+.pf-res.warn{background:color-mix(in srgb,var(--amber) 26%,transparent);color:var(--ink)}
+.pf-res.bad{background:color-mix(in srgb,var(--salmon) 16%,transparent);color:var(--accent-ink)}

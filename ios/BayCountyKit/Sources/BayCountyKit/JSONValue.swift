@@ -73,6 +73,11 @@ public enum JSONValue: Codable, Hashable, Sendable {
         return nil
     }
 
+    public var objectValue: [String: JSONValue]? {
+        if case .object(let o) = self { return o }
+        return nil
+    }
+
     /// All text in the value, for search.
     public var searchText: String {
         switch self {

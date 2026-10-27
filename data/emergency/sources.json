@@ -1,0 +1,32 @@
+{
+  "_about": "Where the emergency hub (/emergency, /api/v1/emergency) reads live notices, per place. Read by api/_emergency.js (live poller) and data/emergency/fetch_emergency.js (daily archive). Keys are place ids (places/<id>/place.json).",
+  "fl-bay": {
+    "timezone": "America/Chicago",
+    "nws": {
+      "zones": ["FLC005", "FLZ012", "FLZ112"],
+      "office": "TAE",
+      "office_name": "National Weather Service Tallahassee",
+      "url": "https://www.weather.gov/tae/"
+    },
+    "alert_centers": [
+      {"gov": "county", "name": "Bay County", "url": "https://www.baycountyfl.gov/RSSFeed.aspx?ModID=63&CID=All-0.xml", "page": "https://www.baycountyfl.gov/AlertCenter.aspx"},
+      {"gov": "pc", "name": "City of Panama City", "url": "https://www.panamacity.gov/RSSFeed.aspx?ModID=63&CID=All-0.xml", "page": "https://www.panamacity.gov/AlertCenter.aspx"},
+      {"gov": "pcb", "name": "City of Panama City Beach", "url": "https://www.pcbfl.gov/RSSFeed.aspx?ModID=63&CID=All-0.xml", "page": "https://www.pcbfl.gov/AlertCenter.aspx"},
+      {"gov": "lh", "name": "City of Lynn Haven", "url": "https://www.cityoflynnhaven.gov/RSSFeed.aspx?ModID=63&CID=All-0.xml", "page": "https://www.cityoflynnhaven.gov/AlertCenter.aspx"}
+    ],
+    "news_feeds": [
+      {"gov": "county", "name": "Bay County", "url": "https://www.baycountyfl.gov/RSSFeed.aspx?ModID=1&CID=All-newsflash.xml"},
+      {"gov": "pc", "name": "City of Panama City", "url": "https://www.panamacity.gov/RSSFeed.aspx?ModID=1&CID=All-newsflash.xml"},
+      {"gov": "pcb", "name": "City of Panama City Beach", "url": "https://www.pcbfl.gov/RSSFeed.aspx?ModID=1&CID=All-newsflash.xml"},
+      {"gov": "lh", "name": "City of Lynn Haven", "url": "https://www.cityoflynnhaven.gov/RSSFeed.aspx?ModID=1&CID=All-newsflash.xml"}
+    ],
+    "fl511": {"county": "Bay", "url": "https://fl511.com/", "layers": ["Closures", "Incidents", "Construction"]},
+    "shelters": {"page": "https://www.baycountyfl.gov/766/Emergency-Shelters", "gov": "county", "name": "Bay County Emergency Services"},
+    "zones": {
+      "layer": "https://gis.baycountyfl.gov/arcgis/rest/services/Admin_A12/MapServer/80",
+      "field": "EZONE",
+      "page": "https://www.baycountyfl.gov/511/Evacuation-Zones"
+    },
+    "addresses": {"layer": "https://gis.baycountyfl.gov/arcgis/rest/services/Admin_A12/MapServer/3"}
+  }
+}

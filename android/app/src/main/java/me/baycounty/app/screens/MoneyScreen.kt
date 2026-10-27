@@ -38,6 +38,7 @@ private enum class MoneySection(val title: String) {
 private val moneyItems: Map<MoneySection, List<MoneyItem>> = mapOf(
     MoneySection.PAY to listOf(
         MoneyItem("Tax calculator", "percent", "Your property tax bill, slice by slice", Route.TaxCalculator()),
+        MoneyItem("Utilities & trash day", "trash", "Who provides what, and your pickup day", Route.Utilities()),
         MoneyItem("Fees on your tax bill", "doc.plaintext", "Fire, stormwater and other flat fees", Route.Dataset("fees-assessments")),
         MoneyItem("Exemptions", "house", "Homestead, veterans, seniors and more", Route.Dataset("property-tax-exemptions")),
         MoneyItem("Amendment 3", "checklist", "What the ballot amendment would change", Route.Amendment3()),
@@ -52,6 +53,10 @@ private val moneyItems: Map<MoneySection, List<MoneyItem>> = mapOf(
         MoneyItem("CRA tax increment", "percent", "Property tax that goes to the CRAs instead", Route.CRAIncrement),
         MoneyItem("Sales tax projects", "road.lanes", "Half-cent projects: promised vs built", Route.Dataset("sales-tax-projects")),
         MoneyItem("Hurricane Michael", "hurricane", "Every FEMA rebuilding project", Route.Dataset("fema-michael-projects")),
+        MoneyItem("Development projects", "building.2", "Site plans and subdivisions in review or approved", Route.Dataset("development-projects")),
+        MoneyItem("New homes permitted", "house", "Each year, city by city, since 2016", Route.Dataset("housing-permits")),
+        MoneyItem("State road work", "road.lanes", "FDOT contracts, contractors and costs", Route.Dataset("road-contracts")),
+        MoneyItem("FDOT five-year plan", "calendar.badge.clock", "Road projects coming in the next five years", Route.Dataset("road-work-program")),
     ),
     MoneySection.ACCOUNTABILITY to listOf(
         MoneyItem("Accountability console", "checklist", "Projects from budget to close-out, with open questions", Route.Accountability),
@@ -74,7 +79,10 @@ private val moneyItems: Map<MoneySection, List<MoneyItem>> = mapOf(
         MoneyItem("Shared owners", "person.2", "Businesses with a shared owner that gave to the same candidate", site = "/connections/shared-owners"),
         MoneyItem("Nonprofits", "heart.text.square", "Every local nonprofit, its public money, and its board", Route.Dataset("nonprofits")),
         MoneyItem("Nonprofit boards", "person.3", "Who sits on each nonprofit's board", Route.Dataset("nonprofit-board-members")),
+        MoneyItem("Volunteer", "hand.raised", "Open needs from local nonprofits", Route.Volunteer),
         MoneyItem("Chambers of commerce", "storefront", "Boards, events and public money", Route.Chambers),
+        MoneyItem("Restaurant inspections", "fork.knife", "Every inspection, warning and closure since 2016", Route.Dataset("restaurants")),
+        MoneyItem("New businesses", "storefront", "Companies filed in Bay County since 2016", Route.Dataset("new-businesses")),
         MoneyItem("Military and the bases", "shield", "Base news and federal contracts to local firms", Route.Military),
         MoneyItem("Business ties", "briefcase", "Officials' and candidates' businesses", site = "/connections/business-ties"),
     ),

@@ -31,7 +31,9 @@ test('every icon and tone the emails can ask for has a light and a dark PNG', ()
 
 test('every email is a full document with preview text, dark mode and a text part', async () => {
   const {PREVIEWS, preview} = require('../_previews');
-  global.fetch = async () => ({ok: true, status: 200, json: async () => ({govs: [{key: 'lh', slug: 'lynn-haven', name: 'Lynn Haven',
+  const week = {week_of: '2026-10-26', rows: [{section: 'event', featured: true, title: 'Fall Festival', starts: '2026-10-31T16:00:00', town: 'Lynn Haven', url: 'https://example.gov/f'},
+    {section: 'contract', featured: true, title: 'Example Co', amount: 120000, date: '2026-10-21', government: 'Callaway', summary: 'Paving'}]};
+  global.fetch = async u => ({ok: true, status: 200, json: async () => String(u).includes('weekly.json') ? week : ({govs: [{key: 'lh', slug: 'lynn-haven', name: 'Lynn Haven',
     changes: [{date: new Date().toISOString().slice(0, 10), title: 'New page', text: 'A long update. '.repeat(30), url: 'https://baycounty.me/x'}],
     meetings: [{start: new Date(Date.now() + 2 * 864e5).toISOString(), title: 'City Commission', agenda_url: null, location: 'City Hall'}]}]})});
   for (const p of PREVIEWS) {

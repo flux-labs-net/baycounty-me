@@ -1,0 +1,17 @@
+{
+ "source": "https://www2.myfloridalicense.com/hotels-restaurants/public-records/",
+ "files": [
+  {
+   "url": "https://www2.myfloridalicense.com/sto/file_download/extracts/6fdinspi.csv",
+   "rows": 541,
+   "read": "2026-10-27T21:17:58Z"
+  },
+  {
+   "url": "https://www2.myfloridalicense.com/sto/file_download/extracts/hrfood6.csv",
+   "rows": 884,
+   "read": "2026-10-27T21:17:58Z"
+  }
+ ],
+ "inspections": 17180,
+ "latest_inspection": "2026-10-26"
+}
