@@ -77,6 +77,7 @@ def menu():
         {'label': 'Take part', 'question': 'Show up, ask, reuse',
          'start': _i('Meetings', '/meetings', 'When every board meets, with agendas'),
          'groups': [{'group': 'Show up, ask, reuse', 'items': [
+             _i('Events', '/events', "What's happening around the county"),
              _i('Email alerts', '/alerts', 'Weekly updates for your government'),
              _i('Request a record', '/records-request', 'Write a public records request'),
              _i('Letters to officials', '/correspondence', 'What we asked, and what they said'),

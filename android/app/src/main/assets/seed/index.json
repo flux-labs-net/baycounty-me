@@ -121,7 +121,7 @@
    "id": "votes",
    "title": "Recorded votes",
    "description": "Votes by the County Commission, School Board, city commissions and CRA boards since 2016, with how each member voted: hand-researched money votes plus every motion read from the official minutes.",
-   "rows": 3789,
+   "rows": 6714,
    "columns": [
     {
      "name": "date",
@@ -221,6 +221,7 @@
       "0-2",
       "0-3",
       "0-5",
+      "1-0",
       "1-2",
       "1-4",
       "2-0",
@@ -239,6 +240,7 @@
       "5-0 (minutes: 'carried unanimously')",
       "5-0 (minutes: 'carried unanimously'; Mayor Henderson attended by phone)",
       "6-0",
+      "five \"No's\" and zero \"Yes's\"",
       "not found",
       "unanimous",
       "unanimous (per news; names not listed)"
@@ -369,7 +371,7 @@
    "id": "member-votes",
    "title": "Votes by member",
    "description": "One row per member per vote (long format), for tallying individual records.",
-   "rows": 18418,
+   "rows": 32563,
    "columns": [
     {
      "name": "date",
@@ -3737,7 +3739,7 @@
    "id": "site-updates",
    "title": "What's new",
    "description": "Each change to the site's data and pages, newest first.",
-   "rows": 60,
+   "rows": 61,
    "columns": [
     {
      "name": "date",
@@ -7019,7 +7021,7 @@
    "id": "data-sources",
    "title": "Where the data comes from",
    "description": "Every source BayCounty.me takes records from, one row per source: the topic, the government it covers (or state and federal databases), the link, how we get it (automatic fetch, downloaded and read by hand, a state or federal bulk file, or a live lookup), how often, what we take from it, how we process it and the checks we run.",
-   "rows": 123,
+   "rows": 131,
    "columns": [
     {
      "name": "topic",
@@ -7031,6 +7033,7 @@
       "Businesses and owners",
       "Campaign money",
       "Chambers of commerce",
+      "Community events",
       "Contracts and change orders",
       "Elections",
       "Fees and bills",
@@ -7062,6 +7065,7 @@
       "contracts",
       "cra",
       "elections",
+      "events",
       "fees",
       "meetings",
       "michael",
@@ -7184,6 +7188,7 @@
       "Local news reports are cited for context (for example an arrest, a resignation or a policy change) when no official document says it.",
       "Money votes are read from adopted minutes (or draft minutes printed in the next agenda packet). Each motion is recorded with the roll call by name; the amount comes from the staff memo or resolution attached to the item. Scanned minutes are read with OCR.",
       "Pay comes from budget pay plans, published salary schedules, job postings and the state's report on officials' salaries.",
+      "Read every morning from each organizer's public calendar feed: the county and city calendars (RSS), The Events Calendar feeds on the library, visitor bureau and city sites, the Mexico Beach calendar export and the Panama City Beach Chamber. A feed that fails keeps yesterday's events.",
       "Records custodians, portals and policies are taken from each agency's official pages.",
       "Summary totals and the itemized export for each campaign are downloaded from the Supervisor of Elections' campaign finance system every day. Amended and deleted lines are applied, then businesses are matched to state corporate records.",
       "Tax rates (millage) come from state Department of Revenue and EDR files and the governments' adopted budgets. Assessments and exemptions come from the state's parcel and assessment roll files.",
@@ -7204,6 +7209,7 @@
       "Every agency-month matches the register's printed total to the cent. Payments to private individuals are counted, not listed.",
       "Failed fetches are logged and emailed to the site admins. Every version of every file is kept.",
       "Itemized sums are checked against the Supervisor's summary totals. Individual donors are only counted, never named, unless they run a registered business.",
+      "Library events outside Bay County are left out. Repeating programs (the same title on two or more dates) are flagged so pages can lead with one-off events.",
       "Matches between the map and the schedule are listed with their method.",
       "Names are checked against each board's roster. Every split or failed vote found is included.",
       "News is never the only source for a dollar figure.",
@@ -7230,6 +7236,7 @@
       "/connections/campaign-gifts",
       "/connections/nonprofits",
       "/elections",
+      "/events",
       "/governments",
       "/meetings",
       "/my-address",
@@ -7509,7 +7516,7 @@
    "id": "data-source-sites",
    "title": "Websites our records cite",
    "description": "Every website cited by the records behind BayCounty.me, per topic, with how many distinct documents and pages from it the data links to. Counted from the data files at each build.",
-   "rows": 326,
+   "rows": 336,
    "columns": [
     {
      "name": "website",
@@ -7525,6 +7532,7 @@
       "Businesses and owners",
       "Campaign money",
       "Chambers of commerce",
+      "Community events",
       "Contracts and change orders",
       "Elections",
       "Fees and bills",
@@ -7554,6 +7562,7 @@
       "contracts",
       "cra",
       "elections",
+      "events",
       "fees",
       "meetings",
       "michael",
@@ -7588,7 +7597,7 @@
    "id": "site-menu",
    "title": "Site menu",
    "description": "Every link in the site's main menu, one row per link, in English and Spanish: the section and the question it answers, the link's place in the section, and the section's start-here page. place_id is the place the menu belongs to (fl-bay = Bay County), so a menu for another place sits beside it.",
-   "rows": 58,
+   "rows": 59,
    "columns": [
     {
      "name": "place_id",
@@ -8493,6 +8502,10 @@
      ]
     },
     {
+     "name": "photo",
+     "type": "string"
+    },
+    {
      "name": "as_of",
      "type": "string",
      "values": [
@@ -8698,6 +8711,162 @@
    "json": "/downloads/chamber-events.json",
    "csv": "/downloads/chamber-events.csv",
    "api": "/api/v1/datasets/chamber-events"
+  },
+  {
+   "id": "community-events",
+   "title": "Community events",
+   "description": "What's happening around the county in the next two months, from public calendars: the county and city calendars, the library system, visitor bureaus and the Panama City Beach Chamber. One row per event date: title, start and end in local time, town, venue name, category (Community, Public meeting, Library, Chamber), recurring for programs listed on two or more dates, and the event's own link. Refreshed daily.",
+   "rows": 188,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "event_id",
+     "type": "string"
+    },
+    {
+     "name": "source_id",
+     "type": "string",
+     "values": [
+      "bay-county",
+      "callaway",
+      "destination-pc",
+      "library",
+      "lynn-haven",
+      "mexico-beach",
+      "panama-city",
+      "parker",
+      "pcb-chamber"
+     ]
+    },
+    {
+     "name": "source",
+     "type": "string",
+     "values": [
+      "Bay County",
+      "City of Callaway",
+      "City of Lynn Haven",
+      "City of Panama City",
+      "City of Parker",
+      "Destination Panama City",
+      "Mexico Beach (visitor events)",
+      "Northwest Regional Library System",
+      "Panama City Beach Chamber"
+     ]
+    },
+    {
+     "name": "gov",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "parker",
+      "pc"
+     ]
+    },
+    {
+     "name": "town",
+     "type": "string",
+     "values": [
+      "Bay County",
+      "Callaway",
+      "Lynn Haven",
+      "Mexico Beach",
+      "Panama City",
+      "Panama City Beach",
+      "Parker"
+     ]
+    },
+    {
+     "name": "title",
+     "type": "string"
+    },
+    {
+     "name": "starts",
+     "type": "string"
+    },
+    {
+     "name": "ends",
+     "type": "string"
+    },
+    {
+     "name": "all_day",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "venue",
+     "type": "string"
+    },
+    {
+     "name": "category",
+     "type": "string",
+     "values": [
+      "Chamber",
+      "Community",
+      "Library",
+      "Public meeting"
+     ]
+    },
+    {
+     "name": "recurring",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "cost",
+     "type": "string",
+     "values": [
+      "Free",
+      "Free for spectators"
+     ]
+    },
+    {
+     "name": "url",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://cityofparker.com/events/",
+      "https://pcbeach.org/local-events/",
+      "https://www.baycountyfl.gov/Calendar.aspx",
+      "https://www.cityofcallaway.com/Calendar.aspx",
+      "https://www.cityoflynnhaven.gov/Calendar.aspx",
+      "https://www.destinationpanamacity.com/events/",
+      "https://www.mexicobeach.com/events/",
+      "https://www.nwrls.com/events",
+      "https://www.panamacity.gov/Calendar.aspx"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "parker",
+      "pc"
+     ]
+    }
+   ],
+   "json": "/downloads/community-events.json",
+   "csv": "/downloads/community-events.csv",
+   "api": "/api/v1/datasets/community-events"
   },
   {
    "id": "beach-access",
@@ -10210,6 +10379,7 @@
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1149,plainText=false)",
       "https://mexicobeachfl.gov/uploads/2026/09/October-13-2026-CIty-Council-Meeting-Agenda-Packet.pdf",
       "https://mexicobeachfl.gov/uploads/2026/09/October-27-2026-City-Council-Meeting-Packet.pdf",
+      "https://mexicobeachfl.gov/uploads/2026/10/October-30-2026-Special-Meeting-and-LDc-Workshop-Packet.pdf",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-912?packet=true",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10202026-915?packet=true",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10272026-902?packet=true"

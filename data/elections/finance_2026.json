@@ -16,10 +16,10 @@
  },
  "summary": {
   "candidates": 42,
-  "total_raised_all": 392794.63,
-  "total_monetary_all": 383640.95,
+  "total_raised_all": 393294.63,
+  "total_monetary_all": 384140.95,
   "total_in_kind_all": 9153.68,
-  "total_spent_all": 321231.26,
+  "total_spent_all": 326220.5,
   "reconciled": 30,
   "no_activity": 12
  },
@@ -3189,18 +3189,18 @@
    "cand_id": 743,
    "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=35&c=bay&ca=743&rellevel=4&committee=N",
    "export_url": "https://www.voterfocus.com/CampaignFinance/export.php?op=CFINANCE&cand_id=743&dhc=0&county=bay",
-   "latest_report": "G5 / period 2026-10-03 to 2026-10-16 / due 2026-10-23",
+   "latest_report": "G5 (amended) / period 2026-10-03 to 2026-10-16 / due 2026-10-23",
    "through": "2026-10-16",
-   "total_raised": 17300.0,
-   "monetary": 17300.0,
+   "total_raised": 17800.0,
+   "monetary": 17800.0,
    "in_kind": 0.0,
    "loans": 850.0,
-   "total_spent": 12574.95,
-   "cash_on_hand_estimate": 4725.05,
-   "n_contributions": 30,
+   "total_spent": 17564.19,
+   "cash_on_hand_estimate": 235.81,
+   "n_contributions": 31,
    "from_individuals": {
-    "count": 17,
-    "total": 6100.0,
+    "count": 18,
+    "total": 6600.0,
     "bands": {
      "under_100": {
       "count": 1,
@@ -3211,8 +3211,8 @@
       "total": 1550.0
      },
      "500_999": {
-      "count": 5,
-      "total": 2500.0
+      "count": 6,
+      "total": 3000.0
      },
      "1000_plus": {
       "count": 2,
@@ -3220,8 +3220,8 @@
      }
     },
     "in_county": {
-     "count": 12,
-     "total": 4550.0
+     "count": 13,
+     "total": 5050.0
     },
     "out_of_county": {
      "count": 4,
@@ -3231,14 +3231,14 @@
      "count": 1,
      "total": 1000.0
     },
-    "unique_donors_approx": 17
+    "unique_donors_approx": 18
    },
    "candidate_self": {
     "contributions": 0.0,
     "loans": 850.0
    },
    "by_type_total": {
-    "individual": 6100.0,
+    "individual": 6600.0,
     "business": 10350.0,
     "pac": 0.0,
     "party": 0.0,
@@ -3354,9 +3354,9 @@
    "top_expenditures": [
     {
      "payee": "Neves Media Productions LLC",
-     "total": 7964.85,
-     "payments": 2,
-     "purpose": "RETAINER FOR SIGNS, POSTCARDS, AND GRAPHIC DESIGN; SIGNS, POST CARDS"
+     "total": 12964.85,
+     "payments": 3,
+     "purpose": "RETAINER FOR SIGNS, POSTCARDS, AND GRAPHIC DESIGN; MAILERS, GRAPHIC DESIGN; SIGNS, POST CARDS"
     },
     {
      "payee": "PTN CONSULTING",
@@ -3395,16 +3395,22 @@
      "purpose": "CAMPAIGN CARDS"
     },
     {
-     "payee": "WinRed",
-     "total": 31.52,
-     "payments": 4,
-     "purpose": "PROCESSING FEE"
-    },
-    {
      "payee": "Centennial Bank",
      "total": 31.0,
      "payments": 1,
      "purpose": "Purchase of bank checks."
+    },
+    {
+     "payee": "WinRed",
+     "total": 15.76,
+     "payments": 2,
+     "purpose": "PROCESSING FEE"
+    },
+    {
+     "payee": "CENTENNIAL BANK",
+     "total": 5.0,
+     "payments": 1,
+     "purpose": "BANK SERVICE CHARGE"
     }
    ],
    "reconciliation": "itemized matches summary",

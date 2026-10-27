@@ -3,7 +3,7 @@
 // fails, naming the page, when one is missing or points at a dataset that doesn't exist).
 // Served at GET /api/v1/pages. `none` explains a page that has no data of its own (a form, a policy, docs).
 const PAGES = {
-  '/': {datasets: ['site-updates', 'government-profiles', 'budget-detail', 'budget-per-resident', 'property-tax-rates', 'tax-districts', 'fema-michael-projects', 'debt', 'audit-findings', 'sales-tax-projects', 'cra-payments'],
+  '/': {datasets: ['site-updates', 'government-profiles', 'budget-detail', 'budget-per-resident', 'property-tax-rates', 'tax-districts', 'fema-michael-projects', 'debt', 'audit-findings', 'sales-tax-projects', 'cra-payments', 'community-events'],
     endpoints: ['/search']},
   '/my-address': {datasets: ['tax-districts', 'property-tax-rates', 'fees-assessments', 'cra-payments', 'property-tax-exemptions', 'meetings'],
     note: 'Per-parcel lookups (exemptions, districts) are not in the API yet.'},
@@ -22,6 +22,7 @@ const PAGES = {
   '/records-request': {none: 'a form that writes a records request'},
   '/correspondence': {endpoints: ['/correspondence']},
   '/connections/shared-owners': {datasets: ['shared-owner-groups', 'over-limit-gifts']},
+  '/events': {datasets: ['community-events']},
   '/beaches': {datasets: ['beach-conditions', 'beach-water-sites', 'beach-water-samples', 'beach-access', 'beach-parking']},
   '/parks': {datasets: ['parks', 'boat-ramps', 'trails', 'recreation-departments']},
   '/chambers': {datasets: ['chambers', 'chamber-leaders', 'chamber-events', 'nonprofit-payments', 'nonprofits']},

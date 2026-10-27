@@ -22,6 +22,7 @@ from correspondence_page import correspondence_page
 from shared_owners_page import shared_owners_page
 from nonprofits_page import nonprofits_page
 from chambers_page import chambers_page
+from events_page import events_page
 from outdoors_page import beaches_page, parks_page
 from business_ties_page import business_ties_page
 from updates import updates_page, rss, last_updated, nice as nice_date
@@ -683,6 +684,8 @@ PAGES = [
      'Emails BayCounty.me sent to Bay County elected officials and managers, and their replies, published as public records.', lambda: correspondence_page(OUT)),
     ('/connections/shared-owners', 'Shared-owner campaign gifts',
      'Groups of Bay County businesses that share an owner or officer in state corporate records and each gave to the same local candidate, checked by hand. People are not named.', lambda: shared_owners_page(OUT)),
+    ('/events', 'Events in Bay County',
+     "What's happening around Bay County in the next two months, from public calendars: the county and city calendars, the library system, the visitor bureaus and the chambers. Updated every morning.", lambda: events_page(OUT)),
     ('/connections/nonprofits', 'Nonprofits in Bay County',
      'Every nonprofit in Bay County: what each reports to the IRS, the government money and grants that reach it, and public officials who sit on its board.', lambda: nonprofits_page(OUT)),
     ('/chambers', 'Chambers of commerce',
@@ -783,6 +786,7 @@ def main():
     shutil.copy(os.path.join(ROOT, 'completeness.js'), os.path.join(OUT, 'assets', 'completeness.js'))
     shutil.copy(os.path.join(ROOT, 'gov.css'), os.path.join(OUT, 'assets', 'gov.css'))
     shutil.copy(os.path.join(ROOT, 'home.js'), os.path.join(OUT, 'assets', 'home.js'))
+    shutil.copy(os.path.join(ROOT, 'events.js'), os.path.join(OUT, 'assets', 'events.js'))
     shutil.copy(os.path.join(ROOT, 'report.js'), os.path.join(OUT, 'assets', 'report.js'))
     write_report_es(OUT)
     shutil.copy(os.path.join(ROOT, 'tables.js'), os.path.join(OUT, 'assets', 'tables.js'))

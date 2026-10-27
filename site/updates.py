@@ -9,6 +9,9 @@ from datetime import datetime, timezone
 import html
 
 CHANGES = [
+    {'date': '2026-10-27', 'title': "What's happening in Bay County",
+     'text': "The home page now opens its second section with what's happening today and coming soon around the county, and a new Events page lists the next two months in one calendar you can filter by town and kind: city and county events and meetings, library programs, visitor events in Panama City and Mexico Beach, and Panama City Beach Chamber events. Everything is read every morning from each organizer's public calendar, and each title links to the organizer's page. Chamber board and staff photos from the chambers' own websites now appear on the Chambers page. The apps have the same events on their home screens.",
+     'pages': ['/', '/events', '/chambers', '/meetings', '/open-data', '/developers']},
     {'date': '2026-10-27', 'title': 'Beaches and parks',
      'text': "Two new pages under a new Outdoors menu. Beaches shows today's beach flag and rip current risk (the flag color beach officials report to the National Weather Service, refreshed when you open the page), the next few days' surf forecast, what each flag means, the state health department's water quality samples at all 15 active sampling sites (each sample since late 2022, rated good, moderate or poor), and all 152 public beach accesses and the county's beach parking lots on a map, with wheelchair and drive-on access. Parks lists 107 public parks with their playgrounds, restrooms, fields, courts, piers and trails, 45 boat ramps and launches, 36 named trails, a map with directions, and each government's page for leagues, programs and rentals. The apps have the same screens.",
      'pages': ['/beaches', '/parks', '/open-data', '/developers']},
