@@ -31,6 +31,8 @@ table.at{width:100%;border-collapse:collapse;font-size:13px}
 .at th{text-align:left;font:500 .7rem var(--f-body);color:var(--muted);text-transform:uppercase;letter-spacing:.04em;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
 .at td{padding:7px 10px;border-bottom:1px solid var(--line);vertical-align:top}
 .at tr.click{cursor:pointer} .at tr.click:hover td{background:var(--sunken)}
+.at td.act,.at th.act{text-align:right;width:1%}
+.btn.sm{min-height:28px;padding:0 10px;font-size:.78rem}
 .at td.num,.at th.num{text-align:right;font-variant-numeric:tabular-nums}
 .tw{overflow-x:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
 .tw table tr:last-child td{border-bottom:0}
@@ -214,9 +216,13 @@ details.ag summary{cursor:pointer;color:var(--blue)} details.ag pre{white-space:
   body.an-lock{overflow:hidden}
 }
 /* phones: nothing in a pane may push the page sideways; wide tables scroll inside their own box */
+/* columns that give way first: md-hide (repeats a filter, e.g. the sending address) under 1200px, ph-hide on phones */
+@media (max-width:1200px){.at .md-hide{display:none!important}}
+@media (max-width:640px){.at .ph-hide{display:none!important}}
 @media (max-width:600px){
   .pane .row > .sel,.pane .row > input.sel,.pane .row > select.sel{min-width:0!important;flex:1 1 150px;max-width:100%}
   .pane .row > .h2.grow{flex-basis:100%}
+  .pane .row > p.grow{flex-basis:100%}
   .ac-snd{min-width:0}
   .td{grid-template-columns:1fr}
 }
@@ -429,7 +435,7 @@ def admin_page(out_dir):
         <select class="sel" id="se-days" aria-label="Window"><option value="1">Last 24 hours</option><option value="7" selected>Last 7 days</option><option value="30">Last 30 days</option><option value="90">Last 90 days</option></select>
       </div>
       <div class="card" id="se-detail" hidden style="margin-bottom:14px"></div>
-      <div class="tw"><table class="at" id="se-table" data-tt="off"><thead><tr><th>Sent</th><th>To</th><th>Subject</th><th>From</th><th>Status</th><th></th></tr></thead><tbody></tbody></table></div>
+      <div class="tw"><table class="at" id="se-table" data-tt="off"><thead><tr><th>Sent</th><th>Subject</th><th>To</th><th class="md-hide">From</th><th>Status</th><th class="act ph-hide"></th></tr></thead><tbody></tbody></table></div>
       <p class="muted small" id="se-foot"></p>
     </section>
 
