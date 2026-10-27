@@ -344,48 +344,7 @@ $('delAcct').addEventListener('click', async () => {
    one unbreakable block, so a heading never sits alone at the bottom of a page. */
 function load(src) { return new Promise((res, rej) => { const s = document.createElement('script'); s.src = src; s.onload = res; s.onerror = () => rej(new Error('load ' + src)); document.head.appendChild(s); }); }
 async function pdfReady() { if (!window.pdfMake) await load(PDFMAKE); if (!window.pdfMake.vfs || !Object.keys(window.pdfMake.vfs).length) await load(VFS); }
-/* ---------- aerial photos for the PDF cover ----------
-   County 2020 aerial tiles (public, served with CORS to baycounty.me) stitched on a canvas, with the parcel outlined.
-   Returns JPEG data URLs; any failure just means a cover without a photo. */
-const AERIAL = 'https://gis.baycountyfl.gov/arcgis/rest/services/Aerials/Aerials2020/MapServer/tile';
-const PARCELS = 'https://gis.baycountyfl.gov/arcgis/rest/services/Admin_A12/MapServer/6/query';
-const merc = (lon, lat, z) => { const n = 256 * 2 ** z, s = Math.sin(lat * Math.PI / 180); return [(lon + 180) / 360 * n, (0.5 - Math.log((1 + s) / (1 - s)) / (4 * Math.PI)) * n]; };
-async function parcelRing(r) {
-  try {
-    const q = new URLSearchParams({f: 'json', geometry: `${r.lon},${r.lat}`, geometryType: 'esriGeometryPoint', inSR: 4326, spatialRel: 'esriSpatialRelIntersects', outFields: 'A1RENUM', returnGeometry: 'true', outSR: 4326});
-    const j = await (await fetch(`${PARCELS}?${q}`)).json();
-    return (((j.features || [])[0] || {}).geometry || {}).rings || null;
-  } catch (e) { return null; }
-}
-function tileImg(z, x, y) { return new Promise(res => { const i = new Image(); i.crossOrigin = 'anonymous'; i.onload = () => res(i); i.onerror = () => res(null); i.src = `${AERIAL}/${z}/${y}/${x}`; }); }
-async function aerialShot(r, rings, {w, h, z, pin, accent}) {
-  const [cx, cy] = merc(r.lon, r.lat, z), x0 = cx - w / 2, y0 = cy - h / 2, cv = document.createElement('canvas'); cv.width = w; cv.height = h;
-  const g = cv.getContext('2d'); g.fillStyle = '#dfe5ec'; g.fillRect(0, 0, w, h);
-  const jobs = [];
-  for (let tx = Math.floor(x0 / 256); tx <= Math.floor((x0 + w) / 256); tx++) for (let ty = Math.floor(y0 / 256); ty <= Math.floor((y0 + h) / 256); ty++)
-    jobs.push(tileImg(z, tx, ty).then(i => { if (i) g.drawImage(i, tx * 256 - x0, ty * 256 - y0); return !!i; }));
-  if (!(await Promise.all(jobs)).some(Boolean)) return null;
-  if (rings && !pin) {
-    g.beginPath(); rings.forEach(ring => ring.forEach(([lon, lat], k) => { const [px, py] = merc(lon, lat, z); g[k ? 'lineTo' : 'moveTo'](px - x0, py - y0); }));
-    g.closePath(); g.lineJoin = 'round'; g.strokeStyle = 'rgba(255,255,255,.95)'; g.lineWidth = Math.max(6, w / 220); g.stroke(); g.strokeStyle = accent; g.lineWidth = Math.max(3, w / 450); g.stroke();
-  }
-  if (pin) { const R = Math.max(10, w / 70); g.beginPath(); g.arc(w / 2, h / 2, R, 0, 7); g.fillStyle = accent; g.fill(); g.lineWidth = R / 2.5; g.strokeStyle = '#fff'; g.stroke(); }
-  try { return cv.toDataURL('image/jpeg', 0.84); } catch (e) { return null; }
-}
-async function aerials(r, accent) {
-  if (r.lat == null || r.lon == null) return {};
-  const rings = await parcelRing(r);
-  let z = 20;
-  if (rings) { // zoom so the parcel fills about half the close-up
-    const pts = rings.flat(), lons = pts.map(p => p[0]), lats = pts.map(p => p[1]);
-    for (z = 21; z > 15; z--) { const [a, b] = merc(Math.min(...lons), Math.max(...lats), z), [c, d] = merc(Math.max(...lons), Math.min(...lats), z); if (c - a < 800 && d - b < 330) break; }
-  }
-  // One shot per frame shape the covers use, so nothing is stretched.
-  const shapes = {hero: [1600, 748], strip: [1600, 481], mid: [1380, 800], square: [940, 908], wide: [900, 980, true]};
-  const out = {}; await Promise.all(Object.entries(shapes).map(async ([k, [w, h, pin]]) => { out[k] = await aerialShot(r, rings, {w, h, z: pin ? Math.max(15, z - 3) : z, pin, accent}); }));
-  return out;
-}
-const DEFAULT_COVER = 'editorial';
+const DEFAULT_COVER = 'type';
 const RB = t => String(t ?? '').replace(/→/g, 'to').replace(/[←-⇿☀-➿]/g, '');
 function buildDoc(opts = {}) {
   // Clean brochure layout: brand band, the address, six at-a-glance numbers, then numbered sections whose facts sit
@@ -434,39 +393,45 @@ function buildDoc(opts = {}) {
         vLineWidth: i => (i > 0 && i < cols ? 6 : 0), vLineColor: () => '#FFFFFF', paddingLeft: () => 12, paddingRight: () => 10, paddingTop: () => 11, paddingBottom: () => 11}} : null; };
 
   // Cover. Agents with branding get their band; everyone else gets a clean default led by the place name.
-  const img = opts.img || {}, branded = !!(b.agent_name || b.brokerage || b.logo);
+  // Photos arrive already cropped to their frame (pdfmake can't crop): opts.photo is the agent's listing photo for this
+  // report, opts.scene a photo of the town ({img, credit}).
+  const branded = !!(b.agent_name || b.brokerage || b.logo);
   const city = /^City of /.test(r.jurisdiction || '') ? r.jurisdiction.replace(/^City of /, '') : 'Bay County';
   const cityLine = city === 'Bay County' ? 'Florida' : 'Bay County, Florida';
-  const credit = {text: 'Aerial photo: Bay County GIS, 2020. Parcel outline approximate.', fontSize: 6.5, color: faint, margin: [0, 4, 0, 0]};
-  const photo = (data, w, h) => data ? {image: data, width: w, height: h} : {canvas: [{type: 'rect', x: 0, y: 0, w, h, color: sunken}]};
-  const addr = (top = 22, size = 26) => ({margin: [0, top, 0, 0], stack: title.stack.slice(1).map((x, i) => (i === 0 ? {...x, fontSize: size, margin: [0, 0, 0, 3]} : x))});
+  const addr = (top = 22, size = 26, fg = null) => ({margin: [0, top, 0, 0], stack: title.stack.slice(1).map((x, i) => (i === 0 ? {...x, fontSize: size, margin: [0, 0, 0, 3]} : x)).map(x => (fg && x.text != null && !x.columns ? {...x, color: fg} : x))});
   const kicker = (t, c = A) => ({text: t.toUpperCase(), fontSize: 7.5, bold: true, color: c, characterSpacing: 1.4});
+  const bleed = (node, y, h) => ({...node, absolutePosition: {x: 0, y}, width: 612, height: h});
+  const spacer = h => ({text: '', margin: [0, h, 0, 0]});
   const style = branded ? 'branded' : (opts.style || DEFAULT_COVER);
   let cover;
   if (style === 'branded') {
-    cover = [band, {canvas: [{type: 'rect', x: 0, y: 0, w: W, h: 3, color: A}]}, img.strip ? {margin: [0, 14, 0, 0], stack: [photo(img.strip, W, 160), credit]} : null, title, glance() && {...glance(), margin: [0, 18, 0, 0]}];
-  } else if (style === 'aerial') { // full-bleed photo with the place name over it
-    const H = 286;
-    cover = [img.hero ? {image: img.hero, width: 612, height: H, absolutePosition: {x: 0, y: 0}} : {canvas: [{type: 'rect', x: 0, y: 0, w: 612, h: H, color: P}], absolutePosition: {x: 0, y: 0}},
-      {canvas: [{type: 'rect', x: 0, y: 0, w: 612, h: 74, color: '#0B1220', fillOpacity: 0.58}], absolutePosition: {x: 0, y: H - 74}},
-      {absolutePosition: {x: 40, y: H - 60}, stack: [{text: city.toUpperCase(), fontSize: 20, bold: true, color: '#FFFFFF', characterSpacing: 2.5}, {text: cityLine + '   ·   Property report', fontSize: 8.5, color: '#FFFFFF', opacity: 0.85, margin: [0, 3, 0, 0]}]},
+    cover = [band, {canvas: [{type: 'rect', x: 0, y: 0, w: W, h: 3, color: A}]}, opts.photo ? {image: opts.photo, width: W, height: 220, margin: [0, 14, 0, 0]} : null, title, glance() && {...glance(), margin: [0, 18, 0, 0]}];
+  } else if (style === 'photo') { // the agent's listing photo, edge to edge, then the address on white
+    const H = 330;
+    cover = [opts.photo ? bleed({image: opts.photo}, 0, H) : {canvas: [{type: 'rect', x: 0, y: 0, w: 612, h: H, color: sunken}], absolutePosition: {x: 0, y: 0}},
       {canvas: [{type: 'rect', x: 0, y: 0, w: 612, h: 4, color: A}], absolutePosition: {x: 0, y: H}},
-      {text: '', margin: [0, H - 44 + 6, 0, 0]}, {text: 'Aerial photo: Bay County GIS, 2020. Parcel outline approximate.', fontSize: 6.5, color: faint, alignment: 'right'},
-      addr(14), {...glance(), margin: [0, 20, 0, 0]}];
-  } else if (style === 'band') { // solid band with the place name, photo beside the numbers
-    cover = [{table: {widths: ['*', 'auto'], body: [[{stack: [{text: city, fontSize: 24, bold: true, color: '#FFFFFF'}, {text: cityLine.toUpperCase(), fontSize: 7.5, bold: true, color: '#FFFFFF', opacity: 0.8, characterSpacing: 1.4, margin: [0, 3, 0, 0]}]},
-        {stack: [{text: 'PROPERTY REPORT', fontSize: 7.5, bold: true, color: '#FFFFFF', characterSpacing: 1.4, alignment: 'right'}, {text: day(r.generated_at), fontSize: 9, color: '#FFFFFF', alignment: 'right', margin: [0, 3, 0, 0]}], margin: [0, 6, 0, 0]}]]},
-      layout: {...none, fillColor: () => P, paddingLeft: i => (i === 0 ? 18 : 0), paddingRight: i => (i === 1 ? 18 : 0), paddingTop: () => 18, paddingBottom: () => 18}},
-      {canvas: [{type: 'rect', x: 0, y: 0, w: W, h: 3, color: A}]}, addr(22),
-      {margin: [0, 20, 0, 0], columns: [{width: 236, stack: [photo(img.square, 236, 228), credit]}, {width: '*', stack: [glance(2, 15)].filter(Boolean)}], columnGap: 14}];
-  } else { // editorial (and the city-logo version of it): white page, place name as a wordmark, two photos side by side
-    const logoTile = style === 'logo' ? (opts.cityLogo ? {image: opts.cityLogo, fit: [44, 44], width: 44} : {width: 44, stack: [{canvas: [{type: 'ellipse', x: 22, y: 22, r1: 21, r2: 21, lineColor: line, lineWidth: 1, color: sunken}]}, {text: 'CITY\nLOGO', fontSize: 6, bold: true, color: faint, alignment: 'center', margin: [0, -29, 0, 0]}]}) : null;
-    cover = [{columns: [logoTile, {width: '*', stack: [{text: style === 'logo' ? (city === 'Bay County' ? 'Bay County' : 'City of ' + city) : city.toUpperCase(), fontSize: style === 'logo' ? 17 : 15, bold: true, color: P, characterSpacing: style === 'logo' ? 0 : 2.2}, {text: cityLine, fontSize: 8.5, color: muted, margin: [0, 2, 0, 0]}], margin: [0, logoTile ? 7 : 0, 0, 0]},
-        {width: 'auto', stack: [kicker('Property report'), {text: day(r.generated_at), fontSize: 8.5, color: muted, alignment: 'right', margin: [0, 3, 0, 0]}], margin: [0, logoTile ? 9 : 2, 0, 0]}].filter(Boolean), columnGap: 12},
-      {canvas: [{type: 'line', x1: 0, y1: 0, x2: W, y2: 0, lineWidth: 0.75, lineColor: line}, {type: 'rect', x: 0, y: -1.25, w: 48, h: 2.5, color: A}], margin: [0, 14, 0, 0]},
-      addr(20, 28),
-      {margin: [0, 18, 0, 0], columns: [{width: 338, stack: [photo(img.mid, 338, 196)]}, {width: '*', stack: [photo(img.wide, 180, 196)]}], columnGap: 14}, credit,
-      {...glance(), margin: [0, 18, 0, 0]}];
+      spacer(H - 44 + 14), {columns: [kicker(city + ', ' + (city === 'Bay County' ? 'Florida' : 'Florida')), {text: 'PROPERTY REPORT   ·   ' + day(r.generated_at).toUpperCase(), fontSize: 7.5, bold: true, color: faint, characterSpacing: 1.2, alignment: 'right'}]},
+      addr(8, 28), {...glance(), margin: [0, 18, 0, 0]}];
+  } else if (style === 'scene') { // a photo of the town across the top, the place name over it
+    const H = 250, sc = opts.scene || {};
+    cover = [sc.img ? bleed({image: sc.img}, 0, H) : {canvas: [{type: 'rect', x: 0, y: 0, w: 612, h: H, color: P}], absolutePosition: {x: 0, y: 0}},
+      {canvas: [{type: 'rect', x: 0, y: 0, w: 612, h: 64, color: '#0B1220', fillOpacity: 0.5}], absolutePosition: {x: 0, y: H - 64}},
+      {absolutePosition: {x: 40, y: H - 52}, stack: [{text: city, fontSize: 24, bold: true, color: '#FFFFFF'}, {text: cityLine.toUpperCase(), fontSize: 7, bold: true, color: '#FFFFFF', characterSpacing: 1.4, opacity: 0.85, margin: [0, 1, 0, 0]}]},
+      {absolutePosition: {x: 380, y: H - 40}, width: 192, stack: [{text: 'PROPERTY REPORT', fontSize: 7.5, bold: true, color: '#FFFFFF', characterSpacing: 1.4, alignment: 'right'}, {text: day(r.generated_at), fontSize: 8.5, color: '#FFFFFF', alignment: 'right', margin: [0, 2, 0, 0]}]},
+      {canvas: [{type: 'rect', x: 0, y: 0, w: 612, h: 4, color: A}], absolutePosition: {x: 0, y: H}},
+      spacer(H - 44 + 8), sc.credit ? {text: 'Photo: ' + sc.credit, fontSize: 6.5, color: faint, alignment: 'right'} : null,
+      addr(16, 30), {...glance(), margin: [0, 22, 0, 0]}];
+  } else { // type: no photo, a solid color block carrying the address and the key numbers
+    const H = 470, inv = [];
+    for (let i = 0; i < G.length; i += 3) inv.push([0, 1, 2].map(j => G[i + j] ? {stack: [{text: G[i + j][0].toUpperCase(), fontSize: 6.5, bold: true, color: FG, opacity: 0.7, characterSpacing: 0.7},
+      {text: RB(G[i + j][1]), fontSize: 17, bold: true, color: FG, margin: [0, 3, 0, 1]}, {text: G[i + j][2], fontSize: 7.5, color: FG, opacity: 0.7}]} : {text: ''}));
+    cover = [{canvas: [{type: 'rect', x: 0, y: 0, w: 612, h: H, color: P}, {type: 'rect', x: 40, y: H - 4, w: 64, h: 4, color: A}], absolutePosition: {x: 0, y: 0}},
+      {columns: [{text: city.toUpperCase(), fontSize: 9, bold: true, color: FG, characterSpacing: 2.2}, {text: 'PROPERTY REPORT   ·   ' + day(r.generated_at).toUpperCase(), fontSize: 7.5, bold: true, color: FG, opacity: 0.75, characterSpacing: 1.2, alignment: 'right'}], margin: [0, 0, 0, 0]},
+      {text: cityLine, fontSize: 8, color: FG, opacity: 0.7, margin: [0, 2, 0, 0]},
+      {text: RB(r.address || ''), fontSize: 42, bold: true, color: FG, margin: [0, 92, 0, 6], lineHeight: 1.0},
+      {text: [r.jurisdiction, r.zip ? 'FL ' + r.zip : '', r.parcel_id ? 'Parcel ' + r.parcel_id : ''].filter(Boolean).join('   ·   '), fontSize: 9.5, color: FG, opacity: 0.8},
+      inv.length ? {margin: [0, 48, 0, 0], table: {widths: ['*', '*', '*'], body: inv}, layout: {...none, hLineWidth: (i, n) => (i > 0 && i < n.table.body.length ? 0.5 : 0), hLineColor: () => FG, paddingTop: () => 10, paddingBottom: () => 10, paddingRight: () => 10}} : null,
+      spacer(64)];
   }
 
   // Sections.
@@ -530,14 +495,14 @@ function buildDoc(opts = {}) {
 $('pdfBtn').addEventListener('click', async () => {
   const btn = $('pdfBtn'); btn.disabled = true; const label = btn.innerHTML; btn.textContent = 'Making PDF…';
   try {
-    const [, img] = await Promise.all([pdfReady(), aerials(REPORT, color(((ME && ME.brand) || {}).color_accent, DEF.accent)).catch(() => ({}))]);
+    await pdfReady();
     const slug = String(REPORT.address || 'address').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-    pdfMake.createPdf(buildDoc({img})).download(`property-report-${slug}.pdf`);
+    pdfMake.createPdf(buildDoc()).download(`property-report-${slug}.pdf`);
   } catch (e) { $('runErr').textContent = 'The PDF couldn’t be made. Check your connection and try again.'; $('runErr').hidden = false; }
   btn.disabled = false; btn.innerHTML = label;
 });
 $('printBtn').addEventListener('click', () => window.print());
-window.BCRealtor = {buildDoc: o => buildDoc(o), aerials: () => aerials(REPORT, color(((ME && ME.brand) || {}).color_accent, DEF.accent)), report: () => REPORT, pdfReady};
+window.BCRealtor = {buildDoc: o => buildDoc(o), report: () => REPORT, pdfReady};
 
 start();
 })();
