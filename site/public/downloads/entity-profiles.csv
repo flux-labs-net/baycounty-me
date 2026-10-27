@@ -2,7 +2,7 @@ entity_id,kind,kind_label,name,subtitle,page_url,aliases,connections,amount_rece
 business:006041,business,Business,"Bay County Chamber of Commerce, Inc.",Registered business,/profile/business/006041,,4,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/BAY%20COUNTY%20CHAMBER%20OF%20COMMERCE%2C%20INC./Page1
 business:115350,business,Business,"St. Joe-Southwood Properties, Inc.",Registered business,/profile/business/115350,,5,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/ST.%20JOE-SOUTHWOOD%20PROPERTIES%2C%20INC./Page1
 business:117721,business,Business,A.M. Lewis Incorporated,Registered business (inactive),/profile/business/117721,,1,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/A.M.%20LEWIS%20INCORPORATED/Page1
-business:132442,business,Business,St. Joe,Registered business,/profile/business/132442,,23,,18400.0,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/St.%20Joe/Page1
+business:132442,business,Business,St. Joe,Registered business,/profile/business/132442,,25,,18400.0,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/St.%20Joe/Page1
 business:171056,business,Business,Trumbull Water Services,Registered business,/profile/business/171056,,1,,500.0,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/Trumbull%20Water%20Services/Page1
 business:205438,business,Business,Fowhand Furniture Inc,Registered business,/profile/business/205438,,1,,1000.0,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/Fowhand%20Furniture%20Inc/Page1
 business:210618,business,Business,Lewis -L D- Realty Co Inc,Registered business,/profile/business/210618,,1,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/Lewis%20-L%20D-%20Realty%20Co%20Inc/Page1
@@ -620,7 +620,7 @@ business:j-michael-s-restaurant,business,Business,J. Michael's Restaurant,Busine
 business:j01052,business,Business,"Waddell Plantation, Inc.",Registered business,/profile/business/j01052,,3,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/WADDELL%20PLANTATION%2C%20INC./Page1
 business:j03610,business,Business,"Hidden Valley, Inc.",Registered business,/profile/business/j03610,,2,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/HIDDEN%20VALLEY%2C%20INC./Page1
 business:j14619,business,Business,"Callaway Point, Inc.",Registered business,/profile/business/j14619,,1,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/Callaway%20Point%2C%20Inc./Page1
-business:j21833,business,Business,"Bill Cramer Automotive, Inc.",Registered business,/profile/business/j21833,,2,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/BILL%20CRAMER%20AUTOMOTIVE%2C%20INC./Page1
+business:j21833,business,Business,"Bill Cramer Automotive, Inc.",Registered business,/profile/business/j21833,,3,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/BILL%20CRAMER%20AUTOMOTIVE%2C%20INC./Page1
 business:j24251,business,Business,"Chateau General Partner, Inc.",Registered business (inactive),/profile/business/j24251,,1,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/CHATEAU%20GENERAL%20PARTNER%2C%20INC./Page1
 business:j31817,business,Business,"Nelson Marine Service, Inc.",Registered business,/profile/business/j31817,,4,,2075.0,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/Nelson%20Marine%20Service%2C%20Inc./Page1
 business:j44196,business,Business,Pilcher Storage,Registered business,/profile/business/j44196,,3,,1000.0,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/Pilcher%20Storage/Page1
@@ -1512,6 +1512,7 @@ business:l13000178378,business,Business,Wattenbarger Management,Registered busin
 business:l14000000212,business,Business,SNA Management LLC,Registered business,/profile/business/l14000000212,,1,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/SNA%20Management%20LLC/Page1
 business:l14000000284,business,Business,"North Lagoon Holdings, LLC",Registered business,/profile/business/l14000000284,,2,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/North%20Lagoon%20Holdings%2C%20LLC/Page1
 business:l14000001551,business,Business,"Coastal Investments of NW Florida, LLC",Registered business,/profile/business/l14000001551,,1,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/COASTAL%20INVESTMENTS%20OF%20NW%20FLORIDA%2C%20LLC/Page1
+business:l14000003912,business,Business,White Construction Company,Registered business,/profile/business/l14000003912,,1,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/White%20Construction%20Company/Page1
 business:l14000006898,business,Business,"Gold Standard Investments, LLC",Registered business (inactive),/profile/business/l14000006898,,1,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/GOLD%20STANDARD%20INVESTMENTS%2C%20LLC/Page1
 business:l14000010739,business,Business,Tlynch Consulting LLC,Registered business (inactive),/profile/business/l14000010739,,1,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/TLYNCH%20CONSULTING%20LLC/Page1
 business:l14000014340,business,Business,"D17 Properties, LLC",Registered business,/profile/business/l14000014340,,1,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/D17%20Properties%2C%20LLC/Page1
@@ -2016,6 +2017,7 @@ business:l17000253113,business,Business,"Kgsm, LLC",Registered business,/profile
 business:l17000253196,business,Business,One Focus Construction LLC,Registered business (inactive),/profile/business/l17000253196,,1,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/ONE%20FOCUS%20CONSTRUCTION%20LLC/Page1
 business:l17000253596,business,Business,"Pearl Center, LLC",Registered business,/profile/business/l17000253596,,1,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/Pearl%20Center%2C%20LLC/Page1
 business:l17000255698,business,Business,"G N Miller, LLC",Registered business,/profile/business/l17000255698,,1,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/G%20N%20Miller%2C%20LLC/Page1
+business:l17000256588,business,Business,Panhandle Pediatric Dentistry,Registered business,/profile/business/l17000256588,,1,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/Panhandle%20Pediatric%20Dentistry/Page1
 business:l17000257594,business,Business,"Wilderness Investments, LLC",Registered business (inactive),/profile/business/l17000257594,,1,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/WILDERNESS%20INVESTMENTS%2C%20LLC/Page1
 business:l17000258458,business,Business,Palmetto Paint PC LLC,Registered business (inactive),/profile/business/l17000258458,,1,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/PALMETTO%20PAINT%20PC%20LLC/Page1
 business:l17000258889,business,Business,"NW Florida Management Services, LLC",Registered business,/profile/business/l17000258889,,3,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/NW%20FLORIDA%20MANAGEMENT%20SERVICES%2C%20LLC/Page1
@@ -2952,6 +2954,7 @@ business:l23000189965,business,Business,"Jeremy Kennedy, LLC",Registered busines
 business:l23000191044,business,Business,YF Holdings LLC,Registered business,/profile/business/l23000191044,,1,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/YF%20Holdings%20LLC/Page1
 business:l23000194484,business,Business,"Rogers Ridge Development FL, LLC",Registered business,/profile/business/l23000194484,,1,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/ROGERS%20RIDGE%20DEVELOPMENT%20FL%2C%20LLC/Page1
 business:l23000195531,business,Business,Sudz Surface Cleaning LLC,Registered business (inactive),/profile/business/l23000195531,,1,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/SUDZ%20SURFACE%20CLEANING%20LLC/Page1
+business:l23000196080,business,Business,The Beach Wagon,Registered business,/profile/business/l23000196080,,1,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/The%20Beach%20Wagon/Page1
 business:l23000202119,business,Business,Next Level Lancaster LLC,Registered business,/profile/business/l23000202119,,2,,300.0,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/Next%20Level%20Lancaster%20LLC/Page1
 business:l23000203802,business,Business,Nancy Cobank Properties,Registered business,/profile/business/l23000203802,,1,,500.0,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/Nancy%20Cobank%20Properties/Page1
 business:l23000206279,business,Business,Scithe Media LLC,Registered business,/profile/business/l23000206279,,1,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/Scithe%20Media%20LLC/Page1
@@ -4195,7 +4198,7 @@ business:p14000102165,business,Business,"Marlin Holdings Group, Inc.",Registered
 business:p15000002896,business,Business,Nexus Realty,Registered business,/profile/business/p15000002896,,2,,1350.0,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/Nexus%20Realty/Page1
 business:p15000005746,business,Business,"Galbreath Ventures, Inc.",Registered business (inactive),/profile/business/p15000005746,,1,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/GALBREATH%20VENTURES%2C%20INC./Page1
 business:p15000008877,business,Business,"HY'S Toggery, Inc.",Registered business,/profile/business/p15000008877,,1,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/HY%27S%20Toggery%2C%20Inc./Page1
-business:p15000011330,business,Business,Glass Ventures,Registered business,/profile/business/p15000011330,,2,,1000.0,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/Glass%20Ventures/Page1
+business:p15000011330,business,Business,Glass Ventures,Registered business,/profile/business/p15000011330,,3,,1000.0,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/Glass%20Ventures/Page1
 business:p15000015525,business,Business,Portfolio Real Estate and Mana,Registered business,/profile/business/p15000015525,,1,,1000.0,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/Portfolio%20Real%20Estate%20and%20Mana/Page1
 business:p15000027393,business,Business,Thacker Construction,Registered business,/profile/business/p15000027393,,1,,500.0,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/Thacker%20Construction/Page1
 business:p15000032455,business,Business,California Cycles Import Export Inc.,Registered business (inactive),/profile/business/p15000032455,,1,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/CALIFORNIA%20CYCLES%20IMPORT%20EXPORT%20INC./Page1
@@ -4552,7 +4555,7 @@ business:p96000050380,business,Business,"Pro-Tech Services, Inc.",Registered bus
 business:p96000052523,business,Business,Vision Construction of North F,Registered business,/profile/business/p96000052523,,1,,250.0,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/Vision%20Construction%20of%20North%20F/Page1
 business:p96000054336,business,Business,"1904 Wilson Enterprises, Inc.",Registered business (inactive),/profile/business/p96000054336,,2,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/1904%20WILSON%20ENTERPRISES%2C%20INC./Page1
 business:p96000054494,business,Business,"Sugar Beach Motel, Inc.",Registered business (inactive),/profile/business/p96000054494,,1,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/SUGAR%20BEACH%20MOTEL%2C%20INC./Page1
-business:p96000055655,business,Business,Eastern Shipbuilding,Registered business,/profile/business/p96000055655,,3,,1500.0,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/Eastern%20Shipbuilding/Page1
+business:p96000055655,business,Business,Eastern Shipbuilding,Registered business,/profile/business/p96000055655,,4,,1500.0,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/Eastern%20Shipbuilding/Page1
 business:p96000055706,business,Business,Royal American Food Services,Registered business,/profile/business/p96000055706,,3,,500.0,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/Royal%20American%20Food%20Services/Page1
 business:p96000062018,business,Business,Beachcomber by the Sea Inc,Registered business,/profile/business/p96000062018,,3,,5000.0,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/Beachcomber%20by%20the%20Sea%20Inc/Page1
 business:p96000066176,business,Business,"Sicer Sojourns, Inc.",Registered business (inactive),/profile/business/p96000066176,,1,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/SICER%20SOJOURNS%2C%20INC./Page1
@@ -5026,7 +5029,7 @@ gov:clerk,gov,Government,Clerk of Court,Constitutional,/profile/gov/clerk,,4,,,c
 gov:county,gov,Government,Bay County,County government,/governments/bay-county,,194,32785.02,506748592.65,county,bay,
 gov:county_court,gov,Government,County Court,Court,/profile/gov/county_court,,9,,,county_court,bay,
 gov:cw,gov,Government,Callaway,City,/governments/callaway,,55,,9099602.92,cw,bay,
-gov:destination_pc,gov,Government,Destination Panama City,Tourism agency,/profile/gov/destination_pc,,173,,4471596.43,destination_pc,bay,
+gov:destination_pc,gov,Government,Destination Panama City,Tourism agency,/profile/gov/destination_pc,,174,,4471596.43,destination_pc,bay,
 gov:lake_powell_cdd,gov,Government,Lake Powell CDD,Special district,/profile/gov/lake_powell_cdd,,22,,,lake_powell_cdd,bay,
 gov:lh,gov,Government,Lynn Haven,City,/governments/lynn-haven,,118,,66738499.2,lh,bay,
 gov:mb,gov,Government,Mexico Beach,City,/governments/mexico-beach,,80,132344.88,17170285.87,mb,bay,
@@ -5041,8 +5044,8 @@ gov:schools,gov,Government,Bay District Schools,School district,/governments/bay
 gov:sheriff,gov,Government,Sheriff,Constitutional,/profile/gov/sheriff,,13,38351.7,,sheriff,bay,
 gov:soe,gov,Government,Supervisor of Elections,Constitutional,/profile/gov/soe,,6,,,soe,bay,
 gov:sp,gov,Government,Springfield,City,/governments/springfield,,35,,31729701.43,sp,bay,
-gov:tax_collector,gov,Government,Tax Collector,Constitutional,/profile/gov/tax_collector,,5,,,tax_collector,bay,
-gov:visit_pcb,gov,Government,Visit Panama City Beach,Tourism agency,/profile/gov/visit_pcb,,198,,49770899.27,visit_pcb,bay,
+gov:tax_collector,gov,Government,Tax Collector,Constitutional,/profile/gov/tax_collector,,6,,,tax_collector,bay,
+gov:visit_pcb,gov,Government,Visit Panama City Beach,Tourism agency,/profile/gov/visit_pcb,,199,,49770899.27,visit_pcb,bay,
 member:b_0004ffedc979,member,Nonprofit board member,Mike Owens,Nonprofit board member,/profile/member/b_0004ffedc979,,1,,,,bay,
 member:b_000fd55a4895,member,Nonprofit board member,Jon Dingus,Nonprofit board member,/profile/member/b_000fd55a4895,,1,,,,bay,
 member:b_00180695c69d,member,Nonprofit board member,Connie Head,Nonprofit board member,/profile/member/b_00180695c69d,,1,,,,bay,
@@ -5140,6 +5143,7 @@ member:b_02e40d8dda6f,member,Nonprofit board member,Christy Muller,Nonprofit boa
 member:b_02e9eb308171,member,Nonprofit board member,Michael Rabb,Nonprofit board member,/profile/member/b_02e9eb308171,,1,,,,bay,
 member:b_02eb473eddd2,member,Nonprofit board member,Pamela Stafford,Nonprofit board member,/profile/member/b_02eb473eddd2,,1,,,,bay,
 member:b_02f30a2b3785,member,Nonprofit board member,Martha Johnson,Nonprofit board member,/profile/member/b_02f30a2b3785,,1,,,,bay,
+member:b_02f69f1c6be4,member,Chamber board member,Ryan Thulin,Chamber of commerce board member,/profile/member/b_02f69f1c6be4,,1,,,,bay,
 member:b_02f7aee9fe4a,member,Nonprofit board member,Mike Fouts,Nonprofit board member,/profile/member/b_02f7aee9fe4a,,1,,,,bay,
 member:b_02f981c09204,member,Nonprofit board member,Steven Youngpeter,Nonprofit board member,/profile/member/b_02f981c09204,,2,,,,bay,
 member:b_02f9e0eb639f,member,Nonprofit board member,Steven Peters,Nonprofit board member,/profile/member/b_02f9e0eb639f,,5,,,,bay,
@@ -5152,10 +5156,11 @@ member:b_031742231f48,member,Nonprofit board member,Vickie Gainer,Nonprofit boar
 member:b_031c350e8173,member,Nonprofit board member,Kimberly S Godwin,Nonprofit board member,/profile/member/b_031c350e8173,,1,,,,bay,
 member:b_032d2b32cbaf,member,Nonprofit board member,Kylie Bucalo,Nonprofit board member,/profile/member/b_032d2b32cbaf,,1,,,,bay,
 member:b_0331979c9e01,member,Nonprofit board member,Alonna Howland Lewis,Nonprofit board member,/profile/member/b_0331979c9e01,,1,,,,bay,
-member:b_03348105cfdf,member,Nonprofit board member,Ryan Mulvey,Nonprofit board member,/profile/member/b_03348105cfdf,,2,,,,bay,
+member:b_03348105cfdf,member,Chamber board member,Ryan Mulvey,Nonprofit board member,/profile/member/b_03348105cfdf,,3,,,,bay,
 member:b_0337136e188d,member,Nonprofit board member,Don Giles,Nonprofit board member,/profile/member/b_0337136e188d,,1,,,,bay,
 member:b_0339cc9d1248,member,Nonprofit board member,Craig St Martin,Nonprofit board member,/profile/member/b_0339cc9d1248,,1,,,,bay,
 member:b_035ae6f3daeb,member,Nonprofit board member,Monique Williams,Nonprofit board member,/profile/member/b_035ae6f3daeb,,3,,,,bay,
+member:b_0360f01c68db,member,Chamber staff,Alex Wohlford,Chamber of commerce staff,/profile/member/b_0360f01c68db,,1,,,,bay,
 member:b_0361566f2c0c,member,Nonprofit board member,Mark Hyman,Nonprofit board member,/profile/member/b_0361566f2c0c,,1,,,,bay,
 member:b_036cecc2995b,member,Nonprofit board member,Christine Sanders,Nonprofit board member,/profile/member/b_036cecc2995b,,2,,,,bay,
 member:b_036f17369d9d,member,Nonprofit board member,Jeffrey Nelson,Nonprofit board member,/profile/member/b_036f17369d9d,,1,,,,bay,
@@ -5260,6 +5265,7 @@ member:b_065d2c1d58cf,member,Nonprofit board member,Bruce Reid,Nonprofit board m
 member:b_066b2be1e0af,member,Nonprofit board member,Alfred Savejs,Nonprofit board member,/profile/member/b_066b2be1e0af,,1,,,,bay,
 member:b_066f204be580,member,Nonprofit board member,Michele Lyerla,Nonprofit board member,/profile/member/b_066f204be580,,1,,,,bay,
 member:b_0674567baac6,member,Nonprofit board member,Mattie Green,Nonprofit board member,/profile/member/b_0674567baac6,,2,,,,bay,
+member:b_0675c6a12da6,member,Chamber staff,Sean Kim,Chamber of commerce staff,/profile/member/b_0675c6a12da6,,1,,,,bay,
 member:b_067835906b79,member,Nonprofit board member,Regina Pickett,Nonprofit board member,/profile/member/b_067835906b79,,1,,,,bay,
 member:b_067a3a02c07f,member,Nonprofit board member,Karim Janati,Nonprofit board member,/profile/member/b_067a3a02c07f,,1,,,,bay,
 member:b_067cbc35ab7a,member,Nonprofit board member,Larry Luther,Nonprofit board member,/profile/member/b_067cbc35ab7a,,1,,,,bay,
@@ -5365,7 +5371,7 @@ member:b_09aae587242d,member,Nonprofit board member,Theresa Travare,Nonprofit bo
 member:b_09bf52e27629,member,Nonprofit board member,Bruce Cable,Nonprofit board member,/profile/member/b_09bf52e27629,,2,,,,bay,
 member:b_09d3f12b0d7b,member,Nonprofit board member,Nicholas Atkinson,Nonprofit board member,/profile/member/b_09d3f12b0d7b,,1,,,,bay,
 member:b_09d9bee4e4e1,member,Nonprofit board member,Heather Vickers,Nonprofit board member,/profile/member/b_09d9bee4e4e1,,1,,,,bay,
-member:b_09da83b7da3b,member,Nonprofit board member,Glen McDonald,Nonprofit board member,/profile/member/b_09da83b7da3b,,5,,,,bay,
+member:b_09da83b7da3b,member,Chamber board member,Glen McDonald,Nonprofit board member,/profile/member/b_09da83b7da3b,,6,,,,bay,
 member:b_09e0dd7f23ce,member,Nonprofit board member,Mandy Pitts,Nonprofit board member,/profile/member/b_09e0dd7f23ce,,1,,,,bay,
 member:b_09e3c7d3beb6,member,Nonprofit board member,Josh Scribner,Nonprofit board member,/profile/member/b_09e3c7d3beb6,,1,,,,bay,
 member:b_0a09412dec13,member,Nonprofit board member,Jeremiah Lafountain,Nonprofit board member,/profile/member/b_0a09412dec13,,1,,,,bay,
@@ -5464,7 +5470,7 @@ member:b_0d5f8fd00337,member,Nonprofit board member,Jessie Parker,Nonprofit boar
 member:b_0d652de257f6,member,Nonprofit board member,Missimahou Gohoungo,Nonprofit board member,/profile/member/b_0d652de257f6,,1,,,,bay,
 member:b_0d6ebb974a3b,member,Nonprofit board member,Samantha Helias,Nonprofit board member,/profile/member/b_0d6ebb974a3b,,1,,,,bay,
 member:b_0d73f1dcace7,member,Nonprofit board member,Susie Owen,Nonprofit board member,/profile/member/b_0d73f1dcace7,,1,,,,bay,
-member:b_0d7ed65017eb,member,Nonprofit board member,Shane Boyett,Nonprofit board member,/profile/member/b_0d7ed65017eb,,6,,,,bay,
+member:b_0d7ed65017eb,member,Chamber board member,Shane Boyett,Nonprofit board member,/profile/member/b_0d7ed65017eb,,9,,,,bay,
 member:b_0d8c0c12e898,member,Nonprofit board member,Karen Gundaullus,Nonprofit board member,/profile/member/b_0d8c0c12e898,,1,,,,bay,
 member:b_0d8ea6c2d80c,member,Nonprofit board member,Susan Hitt,Nonprofit board member,/profile/member/b_0d8ea6c2d80c,,1,,,,bay,
 member:b_0d8f3f01cbc0,member,Nonprofit board member,Michelle Cammarata,Nonprofit board member,/profile/member/b_0d8f3f01cbc0,,2,,,,bay,
@@ -5595,6 +5601,7 @@ member:b_1161b193c29f,member,Nonprofit board member,Colleen Whitehead,Nonprofit 
 member:b_11724af66267,member,Nonprofit board member,Jodi Moore,Nonprofit board member,/profile/member/b_11724af66267,,5,,,,bay,
 member:b_11761768ea63,member,Nonprofit board member,Ken Redd,Nonprofit board member,/profile/member/b_11761768ea63,,1,,,,bay,
 member:b_117dd47bcff7,member,Nonprofit board member,William Holloway,Nonprofit board member,/profile/member/b_117dd47bcff7,,2,,,,bay,
+member:b_1180c7614391,member,Chamber board member,Robin Godwin,Chamber of commerce board member,/profile/member/b_1180c7614391,,1,,,,bay,
 member:b_118ca87032b5,member,Nonprofit board member,Steve Camp,Nonprofit board member,/profile/member/b_118ca87032b5,,1,,,,bay,
 member:b_11add904f890,member,Nonprofit board member,Shandra Jones,Nonprofit board member,/profile/member/b_11add904f890,,1,,,,bay,
 member:b_11c92fbf210d,member,Nonprofit board member,J Mack,Nonprofit board member,/profile/member/b_11c92fbf210d,,1,,,,bay,
@@ -5704,6 +5711,7 @@ member:b_1507ccbf1896,member,Nonprofit board member,Larry Mason,Nonprofit board 
 member:b_15164fa7ed5e,member,Nonprofit board member,Douglas Clifton,Nonprofit board member,/profile/member/b_15164fa7ed5e,,1,,,,bay,
 member:b_1518525ad8e3,member,Nonprofit board member,Jeffery Bottorf,Nonprofit board member,/profile/member/b_1518525ad8e3,,1,,,,bay,
 member:b_1525ce6996a4,member,Nonprofit board member,David Wommack,Nonprofit board member,/profile/member/b_1525ce6996a4,,1,,,,bay,
+member:b_1540d139ff5e,member,Chamber board member,Eric Arnold,Chamber of commerce board member,/profile/member/b_1540d139ff5e,,1,,,,bay,
 member:b_15429c63b388,member,Nonprofit board member,Harry W Gainer,Nonprofit board member,/profile/member/b_15429c63b388,,1,,,,bay,
 member:b_1545ce387187,member,Nonprofit board member,John Peek,Nonprofit board member,/profile/member/b_1545ce387187,,2,,,,bay,
 member:b_156174d5d858,member,Nonprofit board member,Olympia Cook,Nonprofit board member,/profile/member/b_156174d5d858,,1,,,,bay,
@@ -5730,7 +5738,7 @@ member:b_15dc641a0607,member,Nonprofit board member,Mike Reed,Nonprofit board me
 member:b_15dfdd8a44f2,member,Nonprofit board member,Edward San Juan,Nonprofit board member,/profile/member/b_15dfdd8a44f2,,2,,,,bay,
 member:b_15e81d1649bf,member,Nonprofit board member,Dr Soha Abdeljaber,Nonprofit board member,/profile/member/b_15e81d1649bf,,1,,,,bay,
 member:b_15f3204cc7bf,member,Nonprofit board member,Laurie Stevens,Nonprofit board member,/profile/member/b_15f3204cc7bf,,1,,,,bay,
-member:b_15f4c09cd2aa,member,Nonprofit board member,Jennifer Vigil,Nonprofit board member,/profile/member/b_15f4c09cd2aa,,4,,,,bay,
+member:b_15f4c09cd2aa,member,Chamber board member,Jennifer Vigil,Nonprofit board member,/profile/member/b_15f4c09cd2aa,,6,,,,bay,
 member:b_15f5cef6520f,member,Nonprofit board member,Michael Conley,Nonprofit board member,/profile/member/b_15f5cef6520f,,1,,,,bay,
 member:b_15fe68b3337f,member,Nonprofit board member,Lorrie Buschmeyer,Nonprofit board member,/profile/member/b_15fe68b3337f,,2,,,,bay,
 member:b_160966466c9a,member,Nonprofit board member,Barbara Sampson,Nonprofit board member,/profile/member/b_160966466c9a,,1,,,,bay,
@@ -5892,7 +5900,7 @@ member:b_1ab625c5f028,member,Nonprofit board member,Ryan Schoonover,Nonprofit bo
 member:b_1aba6fbc6ccb,member,Nonprofit board member,Aaron Little,Nonprofit board member,/profile/member/b_1aba6fbc6ccb,,1,,,,bay,
 member:b_1abc6b7cdf93,member,Nonprofit board member,Carolyn Battle,Nonprofit board member,/profile/member/b_1abc6b7cdf93,,1,,,,bay,
 member:b_1abcb4af922a,member,Nonprofit board member,Gwendolyn Edwards,Nonprofit board member,/profile/member/b_1abcb4af922a,,1,,,,bay,
-member:b_1ada6f4fedf7,member,Nonprofit board member,Tom Neubauer,Nonprofit board member,/profile/member/b_1ada6f4fedf7,,9,,,,bay,
+member:b_1ada6f4fedf7,member,Chamber board member,Tom Neubauer,Nonprofit board member,/profile/member/b_1ada6f4fedf7,,11,,,,bay,
 member:b_1afc4e7a051a,member,Nonprofit board member,Ralph Hammond,Nonprofit board member,/profile/member/b_1afc4e7a051a,,1,,,,bay,
 member:b_1b0a78e69586,member,Nonprofit board member,Allara Mills-Guthcher,Nonprofit board member,/profile/member/b_1b0a78e69586,,1,,,,bay,
 member:b_1b0e82d27f3c,member,Nonprofit board member,Janice Henderson,Nonprofit board member,/profile/member/b_1b0e82d27f3c,,1,,,,bay,
@@ -6078,7 +6086,7 @@ member:b_207054f4e306,member,Nonprofit board member,Steve Emmitt,Nonprofit board
 member:b_20773368038c,member,Nonprofit board member,Teresa Nooney,Nonprofit board member,/profile/member/b_20773368038c,,1,,,,bay,
 member:b_207bc821ac4f,member,Nonprofit board member,Albert Bacon,Nonprofit board member,/profile/member/b_207bc821ac4f,,1,,,,bay,
 member:b_207d9cf50ae8,member,Nonprofit board member,Leo Sand,Nonprofit board member,/profile/member/b_207d9cf50ae8,,2,,,,bay,
-member:b_208c7a35f4cb,member,Nonprofit board member,Lee Ann Leonard,Nonprofit board member,/profile/member/b_208c7a35f4cb,,2,,,,bay,
+member:b_208c7a35f4cb,member,Chamber board member,Lee Ann Leonard,Nonprofit board member,/profile/member/b_208c7a35f4cb,,3,,,,bay,
 member:b_209e8d99a38c,member,Nonprofit board member,Bonnie Haddock,Nonprofit board member,/profile/member/b_209e8d99a38c,,1,,,,bay,
 member:b_209ee8eda141,member,Nonprofit board member,Sandra Ford,Nonprofit board member,/profile/member/b_209ee8eda141,,1,,,,bay,
 member:b_20ad02d32017,member,Nonprofit board member,Cornell Meagan,Nonprofit board member,/profile/member/b_20ad02d32017,,1,,,,bay,
@@ -6117,6 +6125,7 @@ member:b_21bf8de5dd92,member,Nonprofit board member,Wes Hatcher,Nonprofit board 
 member:b_21c5dc7c400a,member,Nonprofit board member,Amy Miller,Nonprofit board member,/profile/member/b_21c5dc7c400a,,2,,,,bay,
 member:b_21cb02a62023,member,Nonprofit board member,Clarisa Owens,Nonprofit board member,/profile/member/b_21cb02a62023,,1,,,,bay,
 member:b_21d6d94d5ce8,member,Nonprofit board member,Lila Ruth Bates,Nonprofit board member,/profile/member/b_21d6d94d5ce8,,4,,,,bay,
+member:b_21d8c42995d9,member,Chamber board member,Jacy Elmore,Chamber of commerce board member,/profile/member/b_21d8c42995d9,,2,,,,bay,
 member:b_21ddf463922a,member,Nonprofit board member,Kasie Oswald,Nonprofit board member,/profile/member/b_21ddf463922a,,3,,,,bay,
 member:b_21e576b42250,member,Nonprofit board member,Bay Nguyen,Nonprofit board member,/profile/member/b_21e576b42250,,1,,,,bay,
 member:b_21e7e06b852a,member,Nonprofit board member,Craig Dorsa,Nonprofit board member,/profile/member/b_21e7e06b852a,,1,,,,bay,
@@ -6150,7 +6159,7 @@ member:b_22f29b90a2fd,member,Nonprofit board member,Allan Brach,Nonprofit board 
 member:b_22feaed6678a,member,Nonprofit board member,Scott Kozimor,Nonprofit board member,/profile/member/b_22feaed6678a,,1,,,,bay,
 member:b_230b29c48d57,member,Nonprofit board member,Mike Shanahan,Nonprofit board member,/profile/member/b_230b29c48d57,,1,,,,bay,
 member:b_23152c3ca15d,member,Nonprofit board member,Matt Cooper Jan-June,Nonprofit board member,/profile/member/b_23152c3ca15d,,1,,,,bay,
-member:b_2319e3d59a35,member,Nonprofit board member,Chris Cramer,Nonprofit board member,/profile/member/b_2319e3d59a35,,4,,,,bay,
+member:b_2319e3d59a35,member,Chamber board member,Chris Cramer,Nonprofit board member,/profile/member/b_2319e3d59a35,,6,,,,bay,
 member:b_23236ca4c2a1,member,Nonprofit board member,Michelle Lewis,Nonprofit board member,/profile/member/b_23236ca4c2a1,,1,,,,bay,
 member:b_23289a07b41c,member,Nonprofit board member,Brenda G Hendricks,Nonprofit board member,/profile/member/b_23289a07b41c,,3,,,,bay,
 member:b_232b3e3a333b,member,Nonprofit board member,John McLellan,Nonprofit board member,/profile/member/b_232b3e3a333b,,1,,,,bay,
@@ -6159,7 +6168,7 @@ member:b_234777578425,member,Nonprofit board member,Judy Peterson,Nonprofit boar
 member:b_2349980170d7,member,Nonprofit board member,Keith Cook,Nonprofit board member,/profile/member/b_2349980170d7,,1,,,,bay,
 member:b_23682a0be3d0,member,Nonprofit board member,Nixon Riley,Nonprofit board member,/profile/member/b_23682a0be3d0,,1,,,,bay,
 member:b_237b31db6c45,member,Nonprofit board member,Steven Kyle,Nonprofit board member,/profile/member/b_237b31db6c45,,1,,,,bay,
-member:b_23886aba0265,member,Nonprofit board member,Garrett Anderson,Nonprofit board member,/profile/member/b_23886aba0265,,11,,,,bay,
+member:b_23886aba0265,member,Chamber board member,Garrett Anderson,Nonprofit board member,/profile/member/b_23886aba0265,,12,,,,bay,
 member:b_239711d9808b,member,Nonprofit board member,Robert Hammer,Nonprofit board member,/profile/member/b_239711d9808b,,1,,,,bay,
 member:b_23989e8a6866,member,Nonprofit board member,Cecile Scoon,Nonprofit board member,/profile/member/b_23989e8a6866,,6,,,,bay,
 member:b_239c7ba2eb8c,member,Nonprofit board member,Deborah Howell,Nonprofit board member,/profile/member/b_239c7ba2eb8c,,1,,,,bay,
@@ -6235,7 +6244,7 @@ member:b_25b9823ab275,member,Nonprofit board member,Hali Naggiar,Nonprofit board
 member:b_25b9ee6ea484,member,Nonprofit board member,Wade Melvin,Nonprofit board member,/profile/member/b_25b9ee6ea484,,1,,,,bay,
 member:b_25bce2c50506,member,Nonprofit board member,Rachel Duval,Nonprofit board member,/profile/member/b_25bce2c50506,,1,,,,bay,
 member:b_25cfaa0a4fd1,member,Nonprofit board member,Donna Santana,Nonprofit board member,/profile/member/b_25cfaa0a4fd1,,8,,,,bay,
-member:b_25db47e00baf,member,Nonprofit board member,William Brock,Nonprofit board member,/profile/member/b_25db47e00baf,,43,,,,bay,
+member:b_25db47e00baf,member,Chamber board member,William Brock,Nonprofit board member,/profile/member/b_25db47e00baf,,45,,,,bay,
 member:b_25e1a36a2d66,member,Nonprofit board member,Chris Godwin,Nonprofit board member,/profile/member/b_25e1a36a2d66,,1,,,,bay,
 member:b_2606b242a348,member,Nonprofit board member,Virginia Whitehorn,Nonprofit board member,/profile/member/b_2606b242a348,,1,,,,bay,
 member:b_261028978026,member,Nonprofit board member,Ron Dubin,Nonprofit board member,/profile/member/b_261028978026,,1,,,,bay,
@@ -6272,10 +6281,11 @@ member:b_2706a207d19e,member,Nonprofit board member,William Swift,Nonprofit boar
 member:b_2715e1dc0924,member,Nonprofit board member,Marcee Wilkes,Nonprofit board member,/profile/member/b_2715e1dc0924,,1,,,,bay,
 member:b_273229a427dc,member,Nonprofit board member,Debra Enfinger,Nonprofit board member,/profile/member/b_273229a427dc,,1,,,,bay,
 member:b_27374dee4e61,member,Nonprofit board member,Stephanie Felty,Nonprofit board member,/profile/member/b_27374dee4e61,,1,,,,bay,
+member:b_27435eb06255,member,Chamber board member,Paul L. Stence Jr.,Chamber of commerce board member,/profile/member/b_27435eb06255,,1,,,,bay,
 member:b_2749c936aa5a,member,Nonprofit board member,Kenneth Frame,Nonprofit board member,/profile/member/b_2749c936aa5a,,2,,,,bay,
 member:b_274cc73c0d79,member,Nonprofit board member,Anil Patel,Nonprofit board member,/profile/member/b_274cc73c0d79,,3,,,,bay,
 member:b_274d200d8bd8,member,Nonprofit board member,Rebecca David,Nonprofit board member,/profile/member/b_274d200d8bd8,,1,,,,bay,
-member:b_274dfc1de4c9,member,Nonprofit board member,Ty Mitchell,Nonprofit board member,/profile/member/b_274dfc1de4c9,,4,,,,bay,
+member:b_274dfc1de4c9,member,Chamber board member,Ty Mitchell,Nonprofit board member,/profile/member/b_274dfc1de4c9,,6,,,,bay,
 member:b_2764088d639f,member,Nonprofit board member,Ryan Clepper,Nonprofit board member,/profile/member/b_2764088d639f,,1,,,,bay,
 member:b_2767859d185f,member,Nonprofit board member,Daniel K Holmes,Nonprofit board member,/profile/member/b_2767859d185f,,1,,,,bay,
 member:b_276b515c05c6,member,Nonprofit board member,Johnny Jenkins,Nonprofit board member,/profile/member/b_276b515c05c6,,1,,,,bay,
@@ -6337,7 +6347,7 @@ member:b_294e35e3ed40,member,Nonprofit board member,Michael Raffield,Nonprofit b
 member:b_295c7ba11276,member,Nonprofit board member,Yafa Nofal,Nonprofit board member,/profile/member/b_295c7ba11276,,2,,,,bay,
 member:b_29698e746cdf,member,Nonprofit board member,Gary McNally,Nonprofit board member,/profile/member/b_29698e746cdf,,1,,,,bay,
 member:b_296f4fa93ab6,member,Nonprofit board member,Avihai Vaturi,Nonprofit board member,/profile/member/b_296f4fa93ab6,,2,,,,bay,
-member:b_297272395985,member,Nonprofit board member,Alex Murphy,Nonprofit board member,/profile/member/b_297272395985,,2,,,,bay,
+member:b_297272395985,member,Chamber board member,Alex Murphy,Nonprofit board member,/profile/member/b_297272395985,,3,,,,bay,
 member:b_297294cbe7df,member,Nonprofit board member,Lori Ubowski,Nonprofit board member,/profile/member/b_297294cbe7df,,1,,,,bay,
 member:b_29752edbcb98,member,Nonprofit board member,Walt Rankin,Nonprofit board member,/profile/member/b_29752edbcb98,,1,,,,bay,
 member:b_297c8e78371d,member,Nonprofit board member,Tiesa Locklear,Nonprofit board member,/profile/member/b_297c8e78371d,,1,,,,bay,
@@ -6474,6 +6484,7 @@ member:b_2e156726df77,member,Nonprofit board member,Susan Barrs,Nonprofit board 
 member:b_2e1ae688f7e1,member,Nonprofit board member,Joesph Pippin,Nonprofit board member,/profile/member/b_2e1ae688f7e1,,1,,,,bay,
 member:b_2e206ceb59fe,member,Nonprofit board member,Brian McKinney,Nonprofit board member,/profile/member/b_2e206ceb59fe,,1,,,,bay,
 member:b_2e236c9885ff,member,Nonprofit board member,Rebecca Hull,Nonprofit board member,/profile/member/b_2e236c9885ff,,1,,,,bay,
+member:b_2e2838417968,member,Chamber board member,Andy Weddle,Chamber of commerce board member,/profile/member/b_2e2838417968,,2,,,,bay,
 member:b_2e4feb5b0994,member,Nonprofit board member,Stefanie Johnson- Band President,Nonprofit board member,/profile/member/b_2e4feb5b0994,,1,,,,bay,
 member:b_2e5734cbc1a6,member,Nonprofit board member,Ted Haney,Nonprofit board member,/profile/member/b_2e5734cbc1a6,,1,,,,bay,
 member:b_2e5c93957782,member,Nonprofit board member,Alex Alvarado,Nonprofit board member,/profile/member/b_2e5c93957782,,1,,,,bay,
@@ -6550,7 +6561,7 @@ member:b_302b3e3dee54,member,Nonprofit board member,Allene Snider,Nonprofit boar
 member:b_3034cf6b266d,member,Nonprofit board member,Von Whitlock,Nonprofit board member,/profile/member/b_3034cf6b266d,,1,,,,bay,
 member:b_30572b1c8dd9,member,Nonprofit board member,elizabeth Trusty,Nonprofit board member,/profile/member/b_30572b1c8dd9,,1,,,,bay,
 member:b_305e5bbaac67,member,Nonprofit board member,Robert Payne,Nonprofit board member,/profile/member/b_305e5bbaac67,,1,,,,bay,
-member:b_306bf96a9643,member,Nonprofit board member,Chris Moore,Nonprofit board member,/profile/member/b_306bf96a9643,,6,,,,bay,
+member:b_306bf96a9643,member,Chamber board member,Chris Moore,Nonprofit board member,/profile/member/b_306bf96a9643,,7,,,,bay,
 member:b_307093527780,member,Nonprofit board member,Earnest Tood,Nonprofit board member,/profile/member/b_307093527780,,1,,,,bay,
 member:b_307850700fca,member,Nonprofit board member,Aconda Thomas,Nonprofit board member,/profile/member/b_307850700fca,,1,,,,bay,
 member:b_3079ab679c2a,member,Nonprofit board member,Danielle Smiley,Nonprofit board member,/profile/member/b_3079ab679c2a,,1,,,,bay,
@@ -6784,7 +6795,7 @@ member:b_3776c48d3017,member,Nonprofit board member,Sebastian Roulhac,Nonprofit 
 member:b_37803bf2887c,member,Nonprofit board member,Frank Vandevander,Nonprofit board member,/profile/member/b_37803bf2887c,,1,,,,bay,
 member:b_3781b49d5dbf,member,Nonprofit board member,Regina Buxton,Nonprofit board member,/profile/member/b_3781b49d5dbf,,1,,,,bay,
 member:b_378b42c41c1b,member,Nonprofit board member,Sheila Outlaw,Nonprofit board member,/profile/member/b_378b42c41c1b,,1,,,,bay,
-member:b_378ba7ce590d,member,Nonprofit board member,Dr Irvin Clark,Nonprofit board member,/profile/member/b_378ba7ce590d,,11,,,,bay,
+member:b_378ba7ce590d,member,Chamber board member,Dr Irvin Clark,Nonprofit board member,/profile/member/b_378ba7ce590d,,12,,,,bay,
 member:b_378c8fcd60e1,member,Nonprofit board member,Mary Quinlan,Nonprofit board member,/profile/member/b_378c8fcd60e1,,1,,,,bay,
 member:b_378ea46dccd5,member,Nonprofit board member,Elizabeth Hooks,Nonprofit board member,/profile/member/b_378ea46dccd5,,2,,,,bay,
 member:b_3796d4e6ec2f,member,Nonprofit board member,Richard Smith,Nonprofit board member,/profile/member/b_3796d4e6ec2f,,1,,,,bay,
@@ -6801,7 +6812,7 @@ member:b_37d48feaec18,member,Nonprofit board member,Ryan Meyer,Nonprofit board m
 member:b_37d75bb49a83,member,Nonprofit board member,Regina Kirkland,Nonprofit board member,/profile/member/b_37d75bb49a83,,1,,,,bay,
 member:b_37daa1153c5d,member,Nonprofit board member,Alisha Gonzalez,Nonprofit board member,/profile/member/b_37daa1153c5d,,1,,,,bay,
 member:b_37e09e50d9af,member,Nonprofit board member,Dr Lewis Baber,Nonprofit board member,/profile/member/b_37e09e50d9af,,1,,,,bay,
-member:b_37ea1b8b5152,member,Nonprofit board member,Jeremy Hinton,Nonprofit board member,/profile/member/b_37ea1b8b5152,,3,,,,bay,
+member:b_37ea1b8b5152,member,Chamber board member,Jeremy Hinton,Nonprofit board member,/profile/member/b_37ea1b8b5152,,4,,,,bay,
 member:b_37f1c8c38451,member,Nonprofit board member,John Herring,Nonprofit board member,/profile/member/b_37f1c8c38451,,1,,,,bay,
 member:b_37f6b6cae7fe,member,Nonprofit board member,Shella Daniels,Nonprofit board member,/profile/member/b_37f6b6cae7fe,,1,,,,bay,
 member:b_37f801fafb4e,member,Nonprofit board member,Francis Wasikowski,Nonprofit board member,/profile/member/b_37f801fafb4e,,1,,,,bay,
@@ -6852,7 +6863,7 @@ member:b_394f4ff4ed82,member,Nonprofit board member,Wanda Segers,Nonprofit board
 member:b_3951b4d9f7d9,member,Nonprofit board member,Stehpanie Gagnon,Nonprofit board member,/profile/member/b_3951b4d9f7d9,,1,,,,bay,
 member:b_39528f82fe79,member,Nonprofit board member,Ann Jones,Nonprofit board member,/profile/member/b_39528f82fe79,,1,,,,bay,
 member:b_3956c43a2af7,member,Nonprofit board member,John Michael Dwyer,Nonprofit board member,/profile/member/b_3956c43a2af7,,1,,,,bay,
-member:b_396373afad12,member,Nonprofit board member,Stacie Galbreath,Nonprofit board member,/profile/member/b_396373afad12,,10,,,,bay,
+member:b_396373afad12,member,Chamber board member,Stacie Galbreath,Nonprofit board member,/profile/member/b_396373afad12,,12,,,,bay,
 member:b_396a58912a43,member,Nonprofit board member,Michelle Darko,Nonprofit board member,/profile/member/b_396a58912a43,,2,,,,bay,
 member:b_3975ba25bb09,member,Nonprofit board member,Timothy Ross,Nonprofit board member,/profile/member/b_3975ba25bb09,,1,,,,bay,
 member:b_3978d648d663,member,Nonprofit board member,Jennifer Guynn,Nonprofit board member,/profile/member/b_3978d648d663,,1,,,,bay,
@@ -6885,7 +6896,7 @@ member:b_3a644517a512,member,Nonprofit board member,Brent Hohbach,Nonprofit boar
 member:b_3a653f158a28,member,Nonprofit board member,Kate Hubbell,Nonprofit board member,/profile/member/b_3a653f158a28,,1,,,,bay,
 member:b_3a68e31fc198,member,Nonprofit board member,Amy Slay,Nonprofit board member,/profile/member/b_3a68e31fc198,,1,,,,bay,
 member:b_3a8c49f73145,member,Nonprofit board member,Mark Rix,Nonprofit board member,/profile/member/b_3a8c49f73145,,1,,,,bay,
-member:b_3a9b91f68598,member,Nonprofit board member,Aaron White,Nonprofit board member,/profile/member/b_3a9b91f68598,,1,,,,bay,
+member:b_3a9b91f68598,member,Chamber board member,Aaron White,Nonprofit board member,/profile/member/b_3a9b91f68598,,2,,,,bay,
 member:b_3aacc6d0a353,member,Nonprofit board member,Jeffrey Hargett,Nonprofit board member,/profile/member/b_3aacc6d0a353,,1,,,,bay,
 member:b_3aae2d17e5e4,member,Nonprofit board member,John Bankston,Nonprofit board member,/profile/member/b_3aae2d17e5e4,,1,,,,bay,
 member:b_3abce4b907f3,member,Nonprofit board member,Holton Harders,Nonprofit board member,/profile/member/b_3abce4b907f3,,1,,,,bay,
@@ -6927,7 +6938,7 @@ member:b_3be5ac40a609,member,Nonprofit board member,Vernon L Todd,Nonprofit boar
 member:b_3be6654072b5,member,Nonprofit board member,Robert Rhynearson,Nonprofit board member,/profile/member/b_3be6654072b5,,4,,,,bay,
 member:b_3be69f94c167,member,Nonprofit board member,Leonard Hall,Nonprofit board member,/profile/member/b_3be69f94c167,,2,,,,bay,
 member:b_3bf298947557,member,Nonprofit board member,Duke Pope,Nonprofit board member,/profile/member/b_3bf298947557,,1,,,,bay,
-member:b_3c080f9f7590,member,Nonprofit board member,Kristopher McLane,Nonprofit board member,/profile/member/b_3c080f9f7590,,6,,,,bay,
+member:b_3c080f9f7590,member,Chamber staff,Kristopher McLane,Nonprofit board member,/profile/member/b_3c080f9f7590,,7,,,,bay,
 member:b_3c107911970b,member,Nonprofit board member,Laura Villanueva,Nonprofit board member,/profile/member/b_3c107911970b,,1,,,,bay,
 member:b_3c1663f37704,member,Nonprofit board member,Charlie Allen,Nonprofit board member,/profile/member/b_3c1663f37704,,8,,,,bay,
 member:b_3c1cfc79aa23,member,Nonprofit board member,Ralph Morgan,Nonprofit board member,/profile/member/b_3c1cfc79aa23,,1,,,,bay,
@@ -6977,7 +6988,7 @@ member:b_3d7fb5f55a1c,member,Nonprofit board member,Tatishka Thomas,Nonprofit bo
 member:b_3da3f8a472c0,member,Nonprofit board member,Tieyone Mitchell,Nonprofit board member,/profile/member/b_3da3f8a472c0,,1,,,,bay,
 member:b_3da66c7fb08d,member,Nonprofit board member,Marsha Barnhart,Nonprofit board member,/profile/member/b_3da66c7fb08d,,1,,,,bay,
 member:b_3daa3251b665,member,Nonprofit board member,Michelle Camarrata,Nonprofit board member,/profile/member/b_3daa3251b665,,1,,,,bay,
-member:b_3daae5e41e3f,member,Nonprofit board member,Catherine Collins,Nonprofit board member,/profile/member/b_3daae5e41e3f,,3,,,,bay,
+member:b_3daae5e41e3f,member,Chamber board member,Catherine Collins,Nonprofit board member,/profile/member/b_3daae5e41e3f,,5,,,,bay,
 member:b_3daaeda6b6b7,member,Nonprofit board member,Stephanie Somerset,Nonprofit board member,/profile/member/b_3daaeda6b6b7,,5,,,,bay,
 member:b_3dad47b0023d,member,Nonprofit board member,Scott Farner,Nonprofit board member,/profile/member/b_3dad47b0023d,,2,,,,bay,
 member:b_3daedd6ab0fa,member,Nonprofit board member,Paul Deguzman,Nonprofit board member,/profile/member/b_3daedd6ab0fa,,2,,,,bay,
@@ -7121,6 +7132,7 @@ member:b_4217a1248038,member,Nonprofit board member,Gregory Broome,Nonprofit boa
 member:b_421c7fcda230,member,Nonprofit board member,Jill Neeley,Nonprofit board member,/profile/member/b_421c7fcda230,,2,,,,bay,
 member:b_42333d3a3468,member,Nonprofit board member,Marshall Wakefield,Nonprofit board member,/profile/member/b_42333d3a3468,,1,,,,bay,
 member:b_42337da47335,member,Nonprofit board member,Ginny Schmertmann,Nonprofit board member,/profile/member/b_42337da47335,,1,,,,bay,
+member:b_423549f85b41,member,Chamber board member,Shay Cattrett,Chamber of commerce board member,/profile/member/b_423549f85b41,,1,,,,bay,
 member:b_4236f8c7117c,member,Nonprofit board member,Ann Jeanette Haro,Nonprofit board member,/profile/member/b_4236f8c7117c,,1,,,,bay,
 member:b_423e0f9cfc16,member,Nonprofit board member,Mitchell Hagans,Nonprofit board member,/profile/member/b_423e0f9cfc16,,1,,,,bay,
 member:b_424dada2c85c,member,Nonprofit board member,Courtney Newell,Nonprofit board member,/profile/member/b_424dada2c85c,,1,,,,bay,
@@ -7245,6 +7257,7 @@ member:b_46394748c85b,member,Nonprofit board member,Chris Anderson,Nonprofit boa
 member:b_463b3296646f,member,Nonprofit board member,Tommy Roland,Nonprofit board member,/profile/member/b_463b3296646f,,1,,,,bay,
 member:b_464de27ed6ff,member,Nonprofit board member,Joseph Earnhardt Through 221,Nonprofit board member,/profile/member/b_464de27ed6ff,,1,,,,bay,
 member:b_464e0b6557d0,member,Nonprofit board member,Caitie Higginbotham,Nonprofit board member,/profile/member/b_464e0b6557d0,,1,,,,bay,
+member:b_4659f9b2c88c,member,Chamber board member,Allen Cotton,Chamber of commerce board member,/profile/member/b_4659f9b2c88c,,1,,,,bay,
 member:b_465dbcc48ef5,member,Nonprofit board member,Lynnette Hogan,Nonprofit board member,/profile/member/b_465dbcc48ef5,,1,,,,bay,
 member:b_465fa6f258d3,member,Nonprofit board member,Kalli Tayes,Nonprofit board member,/profile/member/b_465fa6f258d3,,1,,,,bay,
 member:b_46608c2d1c75,member,Nonprofit board member,Jacqueline McGee,Nonprofit board member,/profile/member/b_46608c2d1c75,,2,,,,bay,
@@ -7355,7 +7368,7 @@ member:b_49d77c32e569,member,Nonprofit board member,Adam Cogburn,Nonprofit board
 member:b_49d971b6d42d,member,Nonprofit board member,Matthew Lopes,Nonprofit board member,/profile/member/b_49d971b6d42d,,1,,,,bay,
 member:b_49d9be8841b3,member,Nonprofit board member,Chris Tucker,Nonprofit board member,/profile/member/b_49d9be8841b3,,2,,,,bay,
 member:b_49ddf3100d1b,member,Nonprofit board member,Zena Le,Nonprofit board member,/profile/member/b_49ddf3100d1b,,1,,,,bay,
-member:b_49de13537fd8,member,Nonprofit board member,Kim Bodine,Nonprofit board member,/profile/member/b_49de13537fd8,,4,,,,bay,
+member:b_49de13537fd8,member,Chamber board member,Kim Bodine,Nonprofit board member,/profile/member/b_49de13537fd8,,5,,,,bay,
 member:b_49e90fd84ae3,member,Nonprofit board member,Ann Lanier,Nonprofit board member,/profile/member/b_49e90fd84ae3,,2,,,,bay,
 member:b_49f61a969e84,member,Nonprofit board member,Angie Dyer,Nonprofit board member,/profile/member/b_49f61a969e84,,2,,,,bay,
 member:b_49fee9319000,member,Nonprofit board member,Kennard Watson,Nonprofit board member,/profile/member/b_49fee9319000,,1,,,,bay,
@@ -7369,7 +7382,7 @@ member:b_4a4192f6af8e,member,Nonprofit board member,Keith Partain,Nonprofit boar
 member:b_4a45883034f9,member,Nonprofit board member,Manav Shah,Nonprofit board member,/profile/member/b_4a45883034f9,,3,,,,bay,
 member:b_4a475f3a499c,member,Nonprofit board member,Driver Todd,Nonprofit board member,/profile/member/b_4a475f3a499c,,1,,,,bay,
 member:b_4a4a9148eb69,member,Nonprofit board member,Tamila Hennessy,Nonprofit board member,/profile/member/b_4a4a9148eb69,,1,,,,bay,
-member:b_4a555a81f71c,member,Nonprofit board member,Robert Carroll,Nonprofit board member,/profile/member/b_4a555a81f71c,,5,,,,bay,
+member:b_4a555a81f71c,member,Chamber board member,Robert Carroll,Nonprofit board member,/profile/member/b_4a555a81f71c,,6,,,,bay,
 member:b_4a58f9c4b609,member,Nonprofit board member,Jay Purut,Nonprofit board member,/profile/member/b_4a58f9c4b609,,1,,,,bay,
 member:b_4a6257096507,member,Nonprofit board member,Larry Thomspon,Nonprofit board member,/profile/member/b_4a6257096507,,1,,,,bay,
 member:b_4a7392dbc3f7,member,Nonprofit board member,Theresa Doorn,Nonprofit board member,/profile/member/b_4a7392dbc3f7,,1,,,,bay,
@@ -7385,6 +7398,7 @@ member:b_4ab7f7d459e8,member,Nonprofit board member,James Dyess,Nonprofit board 
 member:b_4aba39afb598,member,Nonprofit board member,David Cobb,Nonprofit board member,/profile/member/b_4aba39afb598,,4,,,,bay,
 member:b_4adb08aacd4d,member,Nonprofit board member,Phillip Warren,Nonprofit board member,/profile/member/b_4adb08aacd4d,,1,,,,bay,
 member:b_4ae119510dfa,member,Nonprofit board member,Teresa Alexander,Nonprofit board member,/profile/member/b_4ae119510dfa,,1,,,,bay,
+member:b_4af2063568b8,member,Chamber staff,Carley Morgan,Chamber of commerce staff,/profile/member/b_4af2063568b8,,1,,,,bay,
 member:b_4af6510a9049,member,Nonprofit board member,Tina Head,Nonprofit board member,/profile/member/b_4af6510a9049,,1,,,,bay,
 member:b_4af9ab719e46,member,Nonprofit board member,Scott Hofmeister,Nonprofit board member,/profile/member/b_4af9ab719e46,,1,,,,bay,
 member:b_4afc1749ab95,member,Nonprofit board member,Catherine Churchill,Nonprofit board member,/profile/member/b_4afc1749ab95,,1,,,,bay,
@@ -7419,6 +7433,7 @@ member:b_4b974fb17350,member,Nonprofit board member,Connie Gaines,Nonprofit boar
 member:b_4b9c845bd108,member,Nonprofit board member,Billie Lopez,Nonprofit board member,/profile/member/b_4b9c845bd108,,2,,,,bay,
 member:b_4b9f88883090,member,Nonprofit board member,Lindsey E Ivey,Nonprofit board member,/profile/member/b_4b9f88883090,,3,,,,bay,
 member:b_4b9f8db35d11,member,Nonprofit board member,Matthew Nienow,Nonprofit board member,/profile/member/b_4b9f8db35d11,,1,,,,bay,
+member:b_4ba582c05fb4,member,Chamber board member,Denise Rowan,Chamber of commerce board member,/profile/member/b_4ba582c05fb4,,1,,,,bay,
 member:b_4badbd87f3fe,member,Nonprofit board member,Grace Shaffer,Nonprofit board member,/profile/member/b_4badbd87f3fe,,1,,,,bay,
 member:b_4baf24769d19,member,Nonprofit board member,Rolando Zelaya,Nonprofit board member,/profile/member/b_4baf24769d19,,4,,,,bay,
 member:b_4bbd87bddec1,member,Nonprofit board member,Mike Baker,Nonprofit board member,/profile/member/b_4bbd87bddec1,,1,,,,bay,
@@ -7830,6 +7845,7 @@ member:b_59dff1a06541,member,Nonprofit board member,Janet Kennedy,Nonprofit boar
 member:b_59e38605769b,member,Nonprofit board member,Judy Wilson,Nonprofit board member,/profile/member/b_59e38605769b,,1,,,,bay,
 member:b_59f3b829c9fb,member,Nonprofit board member,Mickey Witt,Nonprofit board member,/profile/member/b_59f3b829c9fb,,1,,,,bay,
 member:b_5a0eb58a6c92,member,Nonprofit board member,Dave Schilling,Nonprofit board member,/profile/member/b_5a0eb58a6c92,,1,,,,bay,
+member:b_5a1ec86949b5,member,Chamber staff,Tamara Barnes,Chamber of commerce staff,/profile/member/b_5a1ec86949b5,,1,,,,bay,
 member:b_5a2476b1457c,member,Nonprofit board member,Penny Reddice,Nonprofit board member,/profile/member/b_5a2476b1457c,,1,,,,bay,
 member:b_5a29a1c9cbcc,member,Nonprofit board member,Beth Robinson,Nonprofit board member,/profile/member/b_5a29a1c9cbcc,,1,,,,bay,
 member:b_5a2c6b338dc5,member,Nonprofit board member,Myron Guilford,Nonprofit board member,/profile/member/b_5a2c6b338dc5,,4,,,,bay,
@@ -7840,7 +7856,7 @@ member:b_5a5d2f1b304d,member,Nonprofit board member,Chad Givens,Nonprofit board 
 member:b_5a5fba722d98,member,Nonprofit board member,Aimee Vershaw Bright,Nonprofit board member,/profile/member/b_5a5fba722d98,,1,,,,bay,
 member:b_5a6a5f58572b,member,Nonprofit board member,Maria N Adair,Nonprofit board member,/profile/member/b_5a6a5f58572b,,1,,,,bay,
 member:b_5a805296e1a9,member,Nonprofit board member,Daoris Cuttino,Nonprofit board member,/profile/member/b_5a805296e1a9,,1,,,,bay,
-member:b_5a90c94f8c0b,member,Nonprofit board member,Doug Moore,Nonprofit board member,/profile/member/b_5a90c94f8c0b,,4,,,,bay,
+member:b_5a90c94f8c0b,member,Chamber board member,Doug Moore,Nonprofit board member,/profile/member/b_5a90c94f8c0b,,5,,,,bay,
 member:b_5a9a20c7c627,member,Nonprofit board member,Michele Cook,Nonprofit board member,/profile/member/b_5a9a20c7c627,,1,,,,bay,
 member:b_5a9aa6eab89c,member,Nonprofit board member,Sherry Melton,Nonprofit board member,/profile/member/b_5a9aa6eab89c,,2,,,,bay,
 member:b_5aa4c2033927,member,Nonprofit board member,Latrika Quinn Pittman,Nonprofit board member,/profile/member/b_5aa4c2033927,,1,,,,bay,
@@ -8073,6 +8089,7 @@ member:b_624f21828d1c,member,Nonprofit board member,Jenny Reeves,Nonprofit board
 member:b_62583f87e9b9,member,Nonprofit board member,Don McClain,Nonprofit board member,/profile/member/b_62583f87e9b9,,1,,,,bay,
 member:b_62588d3ae9c7,member,Nonprofit board member,Todd Anderson,Nonprofit board member,/profile/member/b_62588d3ae9c7,,1,,,,bay,
 member:b_62648d1d641e,member,Nonprofit board member,Jackie Bagley,Nonprofit board member,/profile/member/b_62648d1d641e,,1,,,,bay,
+member:b_6269d63629e5,member,Chamber board member,Luke Ahmann,Chamber of commerce board member,/profile/member/b_6269d63629e5,,1,,,,bay,
 member:b_626f536b99ec,member,Nonprofit board member,Tracy Diermeier,Nonprofit board member,/profile/member/b_626f536b99ec,,1,,,,bay,
 member:b_627832df3c4c,member,Nonprofit board member,Brenda Keepin,Nonprofit board member,/profile/member/b_627832df3c4c,,2,,,,bay,
 member:b_627d75be382b,member,Nonprofit board member,Brittanie Tye,Nonprofit board member,/profile/member/b_627d75be382b,,1,,,,bay,
@@ -8387,7 +8404,7 @@ member:b_6ca0e32c8e7f,member,Nonprofit board member,George Pitts,Nonprofit board
 member:b_6ca5827dbb7e,member,Nonprofit board member,John Settles,Nonprofit board member,/profile/member/b_6ca5827dbb7e,,1,,,,bay,
 member:b_6cb00b23073e,member,Nonprofit board member,Jeffrey Blankenship,Nonprofit board member,/profile/member/b_6cb00b23073e,,2,,,,bay,
 member:b_6cb8cfb749ea,member,Nonprofit board member,Taylor Sawyer,Nonprofit board member,/profile/member/b_6cb8cfb749ea,,1,,,,bay,
-member:b_6cbcb0eb110e,member,Nonprofit board member,Rendy Lovelady,Nonprofit board member,/profile/member/b_6cbcb0eb110e,,1,,,,bay,
+member:b_6cbcb0eb110e,member,Chamber board member,Rendy Lovelady,Nonprofit board member,/profile/member/b_6cbcb0eb110e,,3,,,,bay,
 member:b_6cbe403552c4,member,Nonprofit board member,Kevin Amari,Nonprofit board member,/profile/member/b_6cbe403552c4,,1,,,,bay,
 member:b_6cbe81632e57,member,Nonprofit board member,Julie Breining,Nonprofit board member,/profile/member/b_6cbe81632e57,,1,,,,bay,
 member:b_6cc85e488d29,member,Nonprofit board member,Dottie Avery,Nonprofit board member,/profile/member/b_6cc85e488d29,,1,,,,bay,
@@ -8401,6 +8418,7 @@ member:b_6cf6a95d9f9f,member,Nonprofit board member,Shirley Neer,Nonprofit board
 member:b_6cf8b41c549a,member,Nonprofit board member,Janis Boatrigh,Nonprofit board member,/profile/member/b_6cf8b41c549a,,1,,,,bay,
 member:b_6d007e705e61,member,Nonprofit board member,Chelsey Bryant,Nonprofit board member,/profile/member/b_6d007e705e61,,1,,,,bay,
 member:b_6d052ac09e02,member,Nonprofit board member,John Doris,Nonprofit board member,/profile/member/b_6d052ac09e02,,1,,,,bay,
+member:b_6d0d75133712,member,Chamber board member,Julian Bennett,Chamber of commerce board member,/profile/member/b_6d0d75133712,,1,,,,bay,
 member:b_6d19644ca884,member,Nonprofit board member,Robert J Meguiar,Nonprofit board member,/profile/member/b_6d19644ca884,,1,,,,bay,
 member:b_6d1e146fe4d6,member,Nonprofit board member,Pam Ackerland,Nonprofit board member,/profile/member/b_6d1e146fe4d6,,1,,,,bay,
 member:b_6d2ee9631c60,member,Nonprofit board member,White Sr,Nonprofit board member,/profile/member/b_6d2ee9631c60,,2,,,,bay,
@@ -8482,7 +8500,7 @@ member:b_701f21e4ff9f,member,Nonprofit board member,Richard Wilkes,Nonprofit boa
 member:b_702bdce7e9da,member,Nonprofit board member,Shirley Wilson,Nonprofit board member,/profile/member/b_702bdce7e9da,,1,,,,bay,
 member:b_70305c412af0,member,Nonprofit board member,Annie Jones,Nonprofit board member,/profile/member/b_70305c412af0,,1,,,,bay,
 member:b_70330d330b58,member,Nonprofit board member,Michael Janocik,Nonprofit board member,/profile/member/b_70330d330b58,,2,,,,bay,
-member:b_7039947a6fc4,member,Nonprofit board member,Andrew Rowell,Nonprofit board member,/profile/member/b_7039947a6fc4,,6,,,,bay,
+member:b_7039947a6fc4,member,Chamber board member,Andrew Rowell,Nonprofit board member,/profile/member/b_7039947a6fc4,,7,,,,bay,
 member:b_703f29ee85db,member,Nonprofit board member,Charles D Martin,Nonprofit board member,/profile/member/b_703f29ee85db,,1,,,,bay,
 member:b_7056005495ff,member,Nonprofit board member,Thomas A Merritt,Nonprofit board member,/profile/member/b_7056005495ff,,1,,,,bay,
 member:b_707e1692f6e7,member,Nonprofit board member,Cambridge Carruth,Nonprofit board member,/profile/member/b_707e1692f6e7,,1,,,,bay,
@@ -9196,6 +9214,7 @@ member:b_861efc05b671,member,Nonprofit board member,Michael Redden,Nonprofit boa
 member:b_862b5aa90fa7,member,Nonprofit board member,Leslie Monroe,Nonprofit board member,/profile/member/b_862b5aa90fa7,,1,,,,bay,
 member:b_862cf455ab15,member,Nonprofit board member,Morgan Mullins,Nonprofit board member,/profile/member/b_862cf455ab15,,1,,,,bay,
 member:b_86401ab88511,member,Nonprofit board member,B Summer Chandler,Nonprofit board member,/profile/member/b_86401ab88511,,1,,,,bay,
+member:b_864825976060,member,Chamber board member,Jayna Leach,Chamber of commerce board member,/profile/member/b_864825976060,,2,,,,bay,
 member:b_865eb1f05f18,member,Nonprofit board member,Eddie Bell,Nonprofit board member,/profile/member/b_865eb1f05f18,,1,,,,bay,
 member:b_866f4a14de93,member,Nonprofit board member,Donald Burney,Nonprofit board member,/profile/member/b_866f4a14de93,,2,,,,bay,
 member:b_867de061f366,member,Nonprofit board member,Jim Koen,Nonprofit board member,/profile/member/b_867de061f366,,1,,,,bay,
@@ -9308,7 +9327,7 @@ member:b_8a3879c77ba0,member,Nonprofit board member,Susan Robinson,Nonprofit boa
 member:b_8a3ecf250a8f,member,Nonprofit board member,Anne Wing,Nonprofit board member,/profile/member/b_8a3ecf250a8f,,1,,,,bay,
 member:b_8a5d12cd6f2c,member,Nonprofit board member,Cynthia Morehouse,Nonprofit board member,/profile/member/b_8a5d12cd6f2c,,1,,,,bay,
 member:b_8a5f68e2b9ef,member,Nonprofit board member,Perry Cross,Nonprofit board member,/profile/member/b_8a5f68e2b9ef,,1,,,,bay,
-member:b_8a6eca1f0940,member,Nonprofit board member,Paul Corbin,Nonprofit board member,/profile/member/b_8a6eca1f0940,,1,,,,bay,
+member:b_8a6eca1f0940,member,Chamber board member,Paul Corbin,Nonprofit board member,/profile/member/b_8a6eca1f0940,,2,,,,bay,
 member:b_8a7c825bb467,member,Nonprofit board member,Ginnie Crawford,Nonprofit board member,/profile/member/b_8a7c825bb467,,1,,,,bay,
 member:b_8a7fe68638bb,member,Nonprofit board member,Waylon Yates,Nonprofit board member,/profile/member/b_8a7fe68638bb,,2,,,,bay,
 member:b_8a844055b7fc,member,Nonprofit board member,Tanya Russell,Nonprofit board member,/profile/member/b_8a844055b7fc,,2,,,,bay,
@@ -9360,6 +9379,7 @@ member:b_8bb431b0ebb4,member,Nonprofit board member,Dayle Schrock,Nonprofit boar
 member:b_8bb84baff08e,member,Nonprofit board member,Daniel Odom,Nonprofit board member,/profile/member/b_8bb84baff08e,,1,,,,bay,
 member:b_8bc699478577,member,Nonprofit board member,John Bonner,Nonprofit board member,/profile/member/b_8bc699478577,,1,,,,bay,
 member:b_8bd0d3d0f39c,member,Nonprofit board member,Allison MacLean,Nonprofit board member,/profile/member/b_8bd0d3d0f39c,,1,,,,bay,
+member:b_8bda218cd69e,member,Chamber staff,Jena Liles,Chamber of commerce staff,/profile/member/b_8bda218cd69e,,1,,,,bay,
 member:b_8bdab652e113,member,Nonprofit board member,Jason Kretzer,Nonprofit board member,/profile/member/b_8bdab652e113,,3,,,,bay,
 member:b_8bdac111f229,member,Nonprofit board member,Scott Buker,Nonprofit board member,/profile/member/b_8bdac111f229,,1,,,,bay,
 member:b_8bde363c3c01,member,Nonprofit board member,Mr Sam Zawahry,Nonprofit board member,/profile/member/b_8bde363c3c01,,1,,,,bay,
@@ -9546,7 +9566,7 @@ member:b_912891758dfc,member,Nonprofit board member,Gerndt Makayla,Nonprofit boa
 member:b_912f729df005,member,Nonprofit board member,Robert Henry,Nonprofit board member,/profile/member/b_912f729df005,,40,,,,bay,
 member:b_9136db5dc8ef,member,Nonprofit board member,Matthew Moore,Nonprofit board member,/profile/member/b_9136db5dc8ef,,2,,,,bay,
 member:b_9139bb0b99ec,member,Nonprofit board member,Matt Moskowitz,Nonprofit board member,/profile/member/b_9139bb0b99ec,,1,,,,bay,
-member:b_913d6d557826,member,Nonprofit board member,Jason Morehouse,Nonprofit board member,/profile/member/b_913d6d557826,,2,,,,bay,
+member:b_913d6d557826,member,Chamber board member,Jason Morehouse,Nonprofit board member,/profile/member/b_913d6d557826,,3,,,,bay,
 member:b_915096857016,member,Nonprofit board member,Beverly Lee,Nonprofit board member,/profile/member/b_915096857016,,3,,,,bay,
 member:b_9157abb17270,member,Nonprofit board member,Kevin Jordan,Nonprofit board member,/profile/member/b_9157abb17270,,2,,,,bay,
 member:b_9158505ad9f6,member,Nonprofit board member,Randy Butler,Nonprofit board member,/profile/member/b_9158505ad9f6,,2,,,,bay,
@@ -9556,6 +9576,7 @@ member:b_915e3f02f798,member,Nonprofit board member,Willie Spears,Nonprofit boar
 member:b_9161980aaa84,member,Nonprofit board member,Phyllis Mathis Grier,Nonprofit board member,/profile/member/b_9161980aaa84,,1,,,,bay,
 member:b_9162dc3be2fa,member,Nonprofit board member,Regina Jarvis,Nonprofit board member,/profile/member/b_9162dc3be2fa,,3,,,,bay,
 member:b_916c0207f54a,member,Nonprofit board member,Charles Nelson,Nonprofit board member,/profile/member/b_916c0207f54a,,1,,,,bay,
+member:b_9173994574c4,member,Chamber staff,Taylor Smith,Chamber of commerce staff,/profile/member/b_9173994574c4,,1,,,,bay,
 member:b_91746a129c5e,member,Nonprofit board member,Barros Angela,Nonprofit board member,/profile/member/b_91746a129c5e,,1,,,,bay,
 member:b_917f9e2b712c,member,Nonprofit board member,Jeff Bell,Nonprofit board member,/profile/member/b_917f9e2b712c,,2,,,,bay,
 member:b_91832b64db1b,member,Nonprofit board member,Sue Jiles,Nonprofit board member,/profile/member/b_91832b64db1b,,2,,,,bay,
@@ -9590,7 +9611,7 @@ member:b_926dab662ecd,member,Nonprofit board member,Hind Obid,Nonprofit board me
 member:b_9270fd44904e,member,Nonprofit board member,Suzanne McDowell,Nonprofit board member,/profile/member/b_9270fd44904e,,1,,,,bay,
 member:b_928514b09c74,member,Nonprofit board member,Jennifer Ledesma,Nonprofit board member,/profile/member/b_928514b09c74,,1,,,,bay,
 member:b_928cffbe6ecf,member,Nonprofit board member,Rose Clemo,Nonprofit board member,/profile/member/b_928cffbe6ecf,,1,,,,bay,
-member:b_929c3af26ccf,member,Nonprofit board member,Will Cramer,Nonprofit board member,/profile/member/b_929c3af26ccf,,8,,,,bay,
+member:b_929c3af26ccf,member,Chamber board member,Will Cramer,Nonprofit board member,/profile/member/b_929c3af26ccf,,9,,,,bay,
 member:b_929c75ea02ef,member,Nonprofit board member,Jonathan Smiley,Nonprofit board member,/profile/member/b_929c75ea02ef,,1,,,,bay,
 member:b_92a33d1138ef,member,Nonprofit board member,William Pfeffer,Nonprofit board member,/profile/member/b_92a33d1138ef,,1,,,,bay,
 member:b_92b9b6009c6f,member,Nonprofit board member,Chad Burns,Nonprofit board member,/profile/member/b_92b9b6009c6f,,2,,,,bay,
@@ -9612,6 +9633,7 @@ member:b_934149b55909,member,Nonprofit board member,Allen Johnson,Nonprofit boar
 member:b_934715e65ee3,member,Nonprofit board member,Lyndsey Blanks,Nonprofit board member,/profile/member/b_934715e65ee3,,2,,,,bay,
 member:b_936aff87a698,member,Nonprofit board member,Timothy Kickham,Nonprofit board member,/profile/member/b_936aff87a698,,2,,,,bay,
 member:b_936f4f77a9b0,member,Nonprofit board member,Glen Stewart,Nonprofit board member,/profile/member/b_936f4f77a9b0,,1,,,,bay,
+member:b_9381416a48af,member,Chamber board member,Chris Bishop,Chamber of commerce board member,/profile/member/b_9381416a48af,,1,,,,bay,
 member:b_939464067630,member,Nonprofit board member,Williard Anderson,Nonprofit board member,/profile/member/b_939464067630,,1,,,,bay,
 member:b_9394ac33fd74,member,Nonprofit board member,Annette Brown,Nonprofit board member,/profile/member/b_9394ac33fd74,,3,,,,bay,
 member:b_939df7c51bf7,member,Nonprofit board member,Heather Rich,Nonprofit board member,/profile/member/b_939df7c51bf7,,1,,,,bay,
@@ -9652,8 +9674,8 @@ member:b_948e0f23c4f6,member,Nonprofit board member,Amy Moore,Nonprofit board me
 member:b_94a325ec16bd,member,Nonprofit board member,Charlotte Lechene,Nonprofit board member,/profile/member/b_94a325ec16bd,,1,,,,bay,
 member:b_94a5df049941,member,Nonprofit board member,Heather Panabaker,Nonprofit board member,/profile/member/b_94a5df049941,,1,,,,bay,
 member:b_94a775b6a238,member,Nonprofit board member,Tiffany Pedro,Nonprofit board member,/profile/member/b_94a775b6a238,,1,,,,bay,
-member:b_94a96e48b54e,member,Nonprofit board member,Jeremy Bennett,Nonprofit board member,/profile/member/b_94a96e48b54e,,2,,,,bay,
-member:b_94b920eec061,member,Nonprofit board member,Skip Stoltz,Nonprofit board member,/profile/member/b_94b920eec061,,1,,,,bay,
+member:b_94a96e48b54e,member,Chamber board member,Jeremy Bennett,Nonprofit board member,/profile/member/b_94a96e48b54e,,3,,,,bay,
+member:b_94b920eec061,member,Chamber board member,Skip Stoltz,Nonprofit board member,/profile/member/b_94b920eec061,,2,,,,bay,
 member:b_94d07fce6f11,member,Nonprofit board member,Larry Carroll,Nonprofit board member,/profile/member/b_94d07fce6f11,,1,,,,bay,
 member:b_94d2d5885249,member,Nonprofit board member,Carlos Perez,Nonprofit board member,/profile/member/b_94d2d5885249,,1,,,,bay,
 member:b_950d4b8d080a,member,Nonprofit board member,Stacy Kehl,Nonprofit board member,/profile/member/b_950d4b8d080a,,1,,,,bay,
@@ -9725,7 +9747,7 @@ member:b_97308a0c781c,member,Nonprofit board member,Jason Starner,Nonprofit boar
 member:b_9740540bddb7,member,Nonprofit board member,Susan Bravo,Nonprofit board member,/profile/member/b_9740540bddb7,,1,,,,bay,
 member:b_974413a85b39,member,Nonprofit board member,Tiffany Dubose,Nonprofit board member,/profile/member/b_974413a85b39,,1,,,,bay,
 member:b_9750850e63c7,member,Nonprofit board member,Celeste Meadows,Nonprofit board member,/profile/member/b_9750850e63c7,,1,,,,bay,
-member:b_9752945efbb4,member,Nonprofit board member,Jason Hedden,Nonprofit board member,/profile/member/b_9752945efbb4,,2,,,,bay,
+member:b_9752945efbb4,member,Chamber board member,Jason Hedden,Nonprofit board member,/profile/member/b_9752945efbb4,,3,,,,bay,
 member:b_9766bbf5920b,member,Nonprofit board member,Sallie Brosnan,Nonprofit board member,/profile/member/b_9766bbf5920b,,2,,,,bay,
 member:b_977d2890d34d,member,Nonprofit board member,Yolanda Brown,Nonprofit board member,/profile/member/b_977d2890d34d,,1,,,,bay,
 member:b_978f0d9004d9,member,Nonprofit board member,Gregory Blank,Nonprofit board member,/profile/member/b_978f0d9004d9,,1,,,,bay,
@@ -9842,7 +9864,7 @@ member:b_9aefdafb07aa,member,Nonprofit board member,Robert Walker,Nonprofit boar
 member:b_9af94ea706b4,member,Nonprofit board member,Lecia Aldridge,Nonprofit board member,/profile/member/b_9af94ea706b4,,2,,,,bay,
 member:b_9afbc6e0d9e5,member,Nonprofit board member,Katie Hicks,Nonprofit board member,/profile/member/b_9afbc6e0d9e5,,1,,,,bay,
 member:b_9b016c63f2cf,member,Nonprofit board member,Joe Heath,Nonprofit board member,/profile/member/b_9b016c63f2cf,,1,,,,bay,
-member:b_9b08ca1454b5,member,Nonprofit board member,Becca Hardin,Nonprofit board member,/profile/member/b_9b08ca1454b5,,4,,,,bay,
+member:b_9b08ca1454b5,member,Chamber board member,Becca Hardin,Nonprofit board member,/profile/member/b_9b08ca1454b5,,6,,,,bay,
 member:b_9b09df40e2ba,member,Nonprofit board member,Tom Clark,Nonprofit board member,/profile/member/b_9b09df40e2ba,,1,,,,bay,
 member:b_9b178072598f,member,Nonprofit board member,Vickie Garrett,Nonprofit board member,/profile/member/b_9b178072598f,,2,,,,bay,
 member:b_9b23942a6dac,member,Nonprofit board member,Tiffanie Crabtree,Nonprofit board member,/profile/member/b_9b23942a6dac,,1,,,,bay,
@@ -9944,7 +9966,7 @@ member:b_9dbfcda91325,member,Nonprofit board member,Thomas Trossen,Nonprofit boa
 member:b_9dc3dadc6a75,member,Nonprofit board member,Dawn Graff,Nonprofit board member,/profile/member/b_9dc3dadc6a75,,1,,,,bay,
 member:b_9dced493f042,member,Nonprofit board member,Lynn Lewis,Nonprofit board member,/profile/member/b_9dced493f042,,1,,,,bay,
 member:b_9dd49c9ef856,member,Nonprofit board member,Robert Marcucci,Nonprofit board member,/profile/member/b_9dd49c9ef856,,1,,,,bay,
-member:b_9de9857d8510,member,Nonprofit board member,Arthur Cullen,Nonprofit board member,/profile/member/b_9de9857d8510,,3,,,,bay,
+member:b_9de9857d8510,member,Chamber board member,Arthur Cullen,Nonprofit board member,/profile/member/b_9de9857d8510,,4,,,,bay,
 member:b_9df526bd2eb5,member,Nonprofit board member,Charity Burns,Nonprofit board member,/profile/member/b_9df526bd2eb5,,3,,,,bay,
 member:b_9dfc34ca041f,member,Nonprofit board member,Elizabeth Newton Hesseltine,Nonprofit board member,/profile/member/b_9dfc34ca041f,,1,,,,bay,
 member:b_9dfd9e750596,member,Nonprofit board member,Pam Wanzel,Nonprofit board member,/profile/member/b_9dfd9e750596,,1,,,,bay,
@@ -10068,7 +10090,7 @@ member:b_a1bf08d1cd52,member,Nonprofit board member,Robert Fry,Nonprofit board m
 member:b_a1d556182142,member,Nonprofit board member,Garet Duff,Nonprofit board member,/profile/member/b_a1d556182142,,1,,,,bay,
 member:b_a1e3d25fc6ab,member,Nonprofit board member,Rudolph Shepard,Nonprofit board member,/profile/member/b_a1e3d25fc6ab,,3,,,,bay,
 member:b_a1edf0f276c7,member,Nonprofit board member,Judy Ring,Nonprofit board member,/profile/member/b_a1edf0f276c7,,1,,,,bay,
-member:b_a1f7fe42f955,member,Nonprofit board member,Jeremy Pridgeon,Nonprofit board member,/profile/member/b_a1f7fe42f955,,1,,,,bay,
+member:b_a1f7fe42f955,member,Chamber board member,Jeremy Pridgeon,Nonprofit board member,/profile/member/b_a1f7fe42f955,,2,,,,bay,
 member:b_a1fcdd49ade3,member,Nonprofit board member,Olivia Crosby-Sanchez,Nonprofit board member,/profile/member/b_a1fcdd49ade3,,1,,,,bay,
 member:b_a20b2661fc36,member,Nonprofit board member,Linda Fitzhugh,Nonprofit board member,/profile/member/b_a20b2661fc36,,2,,,,bay,
 member:b_a21e4c9dcf5c,member,Nonprofit board member,Deanna Hartog,Nonprofit board member,/profile/member/b_a21e4c9dcf5c,,1,,,,bay,
@@ -10119,6 +10141,7 @@ member:b_a3c249a32e9c,member,Nonprofit board member,Nallely Jones,Nonprofit boar
 member:b_a3c7d296dcc9,member,Nonprofit board member,Alicia Sinclair,Nonprofit board member,/profile/member/b_a3c7d296dcc9,,1,,,,bay,
 member:b_a3c7e5061176,member,Nonprofit board member,Ayeisha Roman,Nonprofit board member,/profile/member/b_a3c7e5061176,,2,,,,bay,
 member:b_a3c837e8bf37,member,Nonprofit board member,Wes Ezzell,Nonprofit board member,/profile/member/b_a3c837e8bf37,,3,,,,bay,
+member:b_a3c9ff8c8c85,member,Chamber board member,Brendan D'Isernia,Chamber of commerce board member,/profile/member/b_a3c9ff8c8c85,,2,,,,bay,
 member:b_a3ccfcf3aad9,member,Nonprofit board member,Stefanie Barron,Nonprofit board member,/profile/member/b_a3ccfcf3aad9,,1,,,,bay,
 member:b_a3d1d2f2fdad,member,Nonprofit board member,Luissette Nunez,Nonprofit board member,/profile/member/b_a3d1d2f2fdad,,1,,,,bay,
 member:b_a3d90c0f0105,member,Nonprofit board member,Alan Shadoin,Nonprofit board member,/profile/member/b_a3d90c0f0105,,1,,,,bay,
@@ -10152,7 +10175,7 @@ member:b_a47ae6785e66,member,Nonprofit board member,Eddie Allen,Nonprofit board 
 member:b_a47d33538789,member,Nonprofit board member,David Marut,Nonprofit board member,/profile/member/b_a47d33538789,,1,,,,bay,
 member:b_a47da39e834e,member,Nonprofit board member,Steve Davis,Nonprofit board member,/profile/member/b_a47da39e834e,,1,,,,bay,
 member:b_a499449bcb2f,member,Nonprofit board member,James Simms,Nonprofit board member,/profile/member/b_a499449bcb2f,,1,,,,bay,
-member:b_a49b4762f4ce,member,Nonprofit board member,Philomena Martrain,Nonprofit board member,/profile/member/b_a49b4762f4ce,,5,,,,bay,
+member:b_a49b4762f4ce,member,Chamber staff,Philomena Martrain,Nonprofit board member,/profile/member/b_a49b4762f4ce,,6,,,,bay,
 member:b_a4a4d1f31318,member,Nonprofit board member,Joel Heape,Nonprofit board member,/profile/member/b_a4a4d1f31318,,1,,,,bay,
 member:b_a4a6a1f915f2,member,Nonprofit board member,Tracey Burch,Nonprofit board member,/profile/member/b_a4a6a1f915f2,,1,,,,bay,
 member:b_a4b41589f925,member,Nonprofit board member,Brian Neubauer,Nonprofit board member,/profile/member/b_a4b41589f925,,1,,,,bay,
@@ -10310,10 +10333,11 @@ member:b_a99f40e10739,member,Nonprofit board member,Ines Villegas,Nonprofit boar
 member:b_a9aed24441c0,member,Nonprofit board member,Greg Brudnicki,Nonprofit board member,/profile/member/b_a9aed24441c0,,4,,,,bay,
 member:b_a9b0cee1a87a,member,Nonprofit board member,Anita Najieb,Nonprofit board member,/profile/member/b_a9b0cee1a87a,,2,,,,bay,
 member:b_a9b42e59e183,member,Nonprofit board member,Mary Fleck,Nonprofit board member,/profile/member/b_a9b42e59e183,,1,,,,bay,
+member:b_a9b81e65bbf2,member,Chamber staff,Gabby Champagne,Chamber of commerce staff,/profile/member/b_a9b81e65bbf2,,1,,,,bay,
 member:b_a9d1dc5c3933,member,Nonprofit board member,Denise M Johns-Smith,Nonprofit board member,/profile/member/b_a9d1dc5c3933,,2,,,,bay,
 member:b_a9d3ae126217,member,Nonprofit board member,Kenneth Hartley,Nonprofit board member,/profile/member/b_a9d3ae126217,,1,,,,bay,
 member:b_a9d5e3c7ce50,member,Nonprofit board member,Robert Croft,Nonprofit board member,/profile/member/b_a9d5e3c7ce50,,2,,,,bay,
-member:b_a9d9975b6876,member,Nonprofit board member,Dr Randy Hanna,Nonprofit board member,/profile/member/b_a9d9975b6876,,1,,,,bay,
+member:b_a9d9975b6876,member,Chamber board member,Dr Randy Hanna,Nonprofit board member,/profile/member/b_a9d9975b6876,,2,,,,bay,
 member:b_a9ddb425b462,member,Nonprofit board member,Barry Tate,Nonprofit board member,/profile/member/b_a9ddb425b462,,1,,,,bay,
 member:b_a9e7ce101675,member,Nonprofit board member,Chase Penny,Nonprofit board member,/profile/member/b_a9e7ce101675,,1,,,,bay,
 member:b_a9f026d66ce3,member,Nonprofit board member,Cris Rodriguez,Nonprofit board member,/profile/member/b_a9f026d66ce3,,1,,,,bay,
@@ -10539,7 +10563,7 @@ member:b_b1323fa5161e,member,Nonprofit board member,James M Dauphin,Nonprofit bo
 member:b_b137797a97ed,member,Nonprofit board member,Glenn Faust,Nonprofit board member,/profile/member/b_b137797a97ed,,1,,,,bay,
 member:b_b13b42b4c623,member,Nonprofit board member,David T Flatt,Nonprofit board member,/profile/member/b_b13b42b4c623,,1,,,,bay,
 member:b_b13d34f92bf9,member,Nonprofit board member,Allen Crabtree,Nonprofit board member,/profile/member/b_b13d34f92bf9,,1,,,,bay,
-member:b_b13d7462cc4a,member,Nonprofit board member,Tricia Berry,Nonprofit board member,/profile/member/b_b13d7462cc4a,,5,,,,bay,
+member:b_b13d7462cc4a,member,Chamber board member,Tricia Berry,Nonprofit board member,/profile/member/b_b13d7462cc4a,,7,,,,bay,
 member:b_b13eab646017,member,Nonprofit board member,Dien Tran,Nonprofit board member,/profile/member/b_b13eab646017,,2,,,,bay,
 member:b_b1423deddba0,member,Nonprofit board member,Cameron Neuman,Nonprofit board member,/profile/member/b_b1423deddba0,,2,,,,bay,
 member:b_b1478103ad3c,member,Nonprofit board member,Jimmy Vickers,Nonprofit board member,/profile/member/b_b1478103ad3c,,1,,,,bay,
@@ -10572,6 +10596,7 @@ member:b_b235faf66648,member,Nonprofit board member,Jackson Richert,Nonprofit bo
 member:b_b23743265c40,member,Nonprofit board member,Emily Gray,Nonprofit board member,/profile/member/b_b23743265c40,,1,,,,bay,
 member:b_b238348180f2,member,Nonprofit board member,Hasam Zawahry,Nonprofit board member,/profile/member/b_b238348180f2,,1,,,,bay,
 member:b_b24b1640a3f8,member,Nonprofit board member,Michael Kolbe,Nonprofit board member,/profile/member/b_b24b1640a3f8,,1,,,,bay,
+member:b_b24da4959eda,member,Chamber board member,Chad Pippin,Chamber of commerce board member,/profile/member/b_b24da4959eda,,2,,,,bay,
 member:b_b24f1e237d2a,member,Nonprofit board member,Mark Vaccaro,Nonprofit board member,/profile/member/b_b24f1e237d2a,,2,,,,bay,
 member:b_b250012ea221,member,Nonprofit board member,Scott A Pope,Nonprofit board member,/profile/member/b_b250012ea221,,3,,,,bay,
 member:b_b265575a66f1,member,Nonprofit board member,Ryan Nelson,Nonprofit board member,/profile/member/b_b265575a66f1,,1,,,,bay,
@@ -10750,7 +10775,7 @@ member:b_b866d748594b,member,Nonprofit board member,Misty Curtis,Nonprofit board
 member:b_b8737f821690,member,Nonprofit board member,Whitney Ochanda,Nonprofit board member,/profile/member/b_b8737f821690,,1,,,,bay,
 member:b_b87d0132e519,member,Nonprofit board member,John Juchniewicz,Nonprofit board member,/profile/member/b_b87d0132e519,,2,,,,bay,
 member:b_b88099489cea,member,Nonprofit board member,Carrie Le,Nonprofit board member,/profile/member/b_b88099489cea,,1,,,,bay,
-member:b_b881b57f9314,member,Nonprofit board member,Al McCambry,Nonprofit board member,/profile/member/b_b881b57f9314,,5,,,,bay,
+member:b_b881b57f9314,member,Chamber staff,Al McCambry,Nonprofit board member,/profile/member/b_b881b57f9314,,6,,,,bay,
 member:b_b890dddf7d6f,member,Nonprofit board member,Pamela Kelly,Nonprofit board member,/profile/member/b_b890dddf7d6f,,1,,,,bay,
 member:b_b895dd073df7,member,Nonprofit board member,Arthur Zediker,Nonprofit board member,/profile/member/b_b895dd073df7,,1,,,,bay,
 member:b_b8a26cebe949,member,Nonprofit board member,Nicole Miller,Nonprofit board member,/profile/member/b_b8a26cebe949,,1,,,,bay,
@@ -10765,6 +10790,7 @@ member:b_b8d799ac3c3a,member,Nonprofit board member,Julie Ashe,Nonprofit board m
 member:b_b8d991a2f986,member,Nonprofit board member,Dillard Ard,Nonprofit board member,/profile/member/b_b8d991a2f986,,1,,,,bay,
 member:b_b8db8c1e0c44,member,Nonprofit board member,Glenda Bennett,Nonprofit board member,/profile/member/b_b8db8c1e0c44,,1,,,,bay,
 member:b_b8e56463e7da,member,Nonprofit board member,Janet Preyer,Nonprofit board member,/profile/member/b_b8e56463e7da,,3,,,,bay,
+member:b_b8e65a9208d4,member,Chamber board member,John Skaggs,Chamber of commerce board member,/profile/member/b_b8e65a9208d4,,1,,,,bay,
 member:b_b8f45bece3b9,member,Nonprofit board member,Arij Yousef,Nonprofit board member,/profile/member/b_b8f45bece3b9,,1,,,,bay,
 member:b_b8f9b58afdd7,member,Nonprofit board member,Alan Graham,Nonprofit board member,/profile/member/b_b8f9b58afdd7,,2,,,,bay,
 member:b_b901f5bf8490,member,Nonprofit board member,Karen Davis,Nonprofit board member,/profile/member/b_b901f5bf8490,,1,,,,bay,
@@ -10880,6 +10906,7 @@ member:b_bd2d55908184,member,Nonprofit board member,Phillip Linsky,Nonprofit boa
 member:b_bd2f300ab269,member,Nonprofit board member,Heath Bailey,Nonprofit board member,/profile/member/b_bd2f300ab269,,1,,,,bay,
 member:b_bd3562cfc1fe,member,Nonprofit board member,Tania Watts,Nonprofit board member,/profile/member/b_bd3562cfc1fe,,1,,,,bay,
 member:b_bd5ce8db6b91,member,Nonprofit board member,Steven Neely,Nonprofit board member,/profile/member/b_bd5ce8db6b91,,4,,,,bay,
+member:b_bd6ad4cb9c23,member,Chamber board member,Cory Proctor,Chamber of commerce board member,/profile/member/b_bd6ad4cb9c23,,1,,,,bay,
 member:b_bd6bea816cda,member,Nonprofit board member,Anthony Workman,Nonprofit board member,/profile/member/b_bd6bea816cda,,1,,,,bay,
 member:b_bd79cc13ba7e,member,Nonprofit board member,Judith Hollinhead,Nonprofit board member,/profile/member/b_bd79cc13ba7e,,1,,,,bay,
 member:b_bd8b9f64c0bf,member,Nonprofit board member,Luis Padla,Nonprofit board member,/profile/member/b_bd8b9f64c0bf,,1,,,,bay,
@@ -10934,6 +10961,7 @@ member:b_bf3c17fdfae0,member,Nonprofit board member,Kathy Jaegle,Nonprofit board
 member:b_bf3ffc2f4f68,member,Nonprofit board member,Alicia Morris,Nonprofit board member,/profile/member/b_bf3ffc2f4f68,,1,,,,bay,
 member:b_bf454860e804,member,Nonprofit board member,Jack Crusan,Nonprofit board member,/profile/member/b_bf454860e804,,1,,,,bay,
 member:b_bf5681f4dde4,member,Nonprofit board member,Donna Ashbrook,Nonprofit board member,/profile/member/b_bf5681f4dde4,,1,,,,bay,
+member:b_bf5dc5bf3cba,member,Chamber board member,Tristan Oliveria,Chamber of commerce board member,/profile/member/b_bf5dc5bf3cba,,1,,,,bay,
 member:b_bf5fa4bfa52b,member,Nonprofit board member,Elizabeth Lopez,Nonprofit board member,/profile/member/b_bf5fa4bfa52b,,1,,,,bay,
 member:b_bf6530141846,member,Nonprofit board member,Anne Smith,Nonprofit board member,/profile/member/b_bf6530141846,,2,,,,bay,
 member:b_bf72a5ae0626,member,Nonprofit board member,David Rosier,Nonprofit board member,/profile/member/b_bf72a5ae0626,,1,,,,bay,
@@ -10962,7 +10990,7 @@ member:b_c02599b33e7c,member,Nonprofit board member,Melanie Raffel,Nonprofit boa
 member:b_c0296b388e54,member,Nonprofit board member,Jonathan McQuagge,Nonprofit board member,/profile/member/b_c0296b388e54,,1,,,,bay,
 member:b_c02b3d278d3f,member,Nonprofit board member,Faye Brown,Nonprofit board member,/profile/member/b_c02b3d278d3f,,1,,,,bay,
 member:b_c02d2020b8ee,member,Nonprofit board member,Goncalves Dos Santos,Nonprofit board member,/profile/member/b_c02d2020b8ee,,1,,,,bay,
-member:b_c033e925a30b,member,Nonprofit board member,Ramon Duvall,Nonprofit board member,/profile/member/b_c033e925a30b,,1,,,,bay,
+member:b_c033e925a30b,member,Chamber board member,Ramon Duvall,Nonprofit board member,/profile/member/b_c033e925a30b,,2,,,,bay,
 member:b_c03aa98f1aea,member,Nonprofit board member,Karen Doak,Nonprofit board member,/profile/member/b_c03aa98f1aea,,1,,,,bay,
 member:b_c04dc5e4814b,member,Nonprofit board member,Jason Sprenkle,Nonprofit board member,/profile/member/b_c04dc5e4814b,,1,,,,bay,
 member:b_c04f2e39eeb2,member,Nonprofit board member,Adolph Herrera,Nonprofit board member,/profile/member/b_c04f2e39eeb2,,1,,,,bay,
@@ -11005,6 +11033,7 @@ member:b_c17cc4c8e41b,member,Nonprofit board member,Jeff Weatherholtz,Nonprofit 
 member:b_c180cebdbe42,member,Nonprofit board member,Michael Ryan,Nonprofit board member,/profile/member/b_c180cebdbe42,,1,,,,bay,
 member:b_c185fe8383c6,member,Nonprofit board member,Daynna Tyler,Nonprofit board member,/profile/member/b_c185fe8383c6,,1,,,,bay,
 member:b_c1882ec7ad26,member,Nonprofit board member,Heather Centaure,Nonprofit board member,/profile/member/b_c1882ec7ad26,,1,,,,bay,
+member:b_c18af96f1eea,member,Chamber staff,Lisa Moore,Chamber of commerce staff,/profile/member/b_c18af96f1eea,,1,,,,bay,
 member:b_c1aadb644da5,member,Nonprofit board member,John Dipaola,Nonprofit board member,/profile/member/b_c1aadb644da5,,1,,,,bay,
 member:b_c1b364e87dd0,member,Nonprofit board member,Betsey Brewer Bethel,Nonprofit board member,/profile/member/b_c1b364e87dd0,,1,,,,bay,
 member:b_c1c2bb0f4543,member,Nonprofit board member,Michael Scott,Nonprofit board member,/profile/member/b_c1c2bb0f4543,,2,,,,bay,
@@ -11016,6 +11045,7 @@ member:b_c1e6af88f99b,member,Nonprofit board member,Scott Taccati,Nonprofit boar
 member:b_c1ebc4682855,member,Nonprofit board member,Danielle Pierce,Nonprofit board member,/profile/member/b_c1ebc4682855,,2,,,,bay,
 member:b_c1eda0ee6b91,member,Nonprofit board member,Sean Carruth,Nonprofit board member,/profile/member/b_c1eda0ee6b91,,5,,,,bay,
 member:b_c2005b569b87,member,Nonprofit board member,Donna Allen,Nonprofit board member,/profile/member/b_c2005b569b87,,1,,,,bay,
+member:b_c20fa41b5441,member,Chamber board member,Kristen Sheffield,Chamber of commerce board member,/profile/member/b_c20fa41b5441,,1,,,,bay,
 member:b_c219b5db00f4,member,Nonprofit board member,George Wilson,Nonprofit board member,/profile/member/b_c219b5db00f4,,2,,,,bay,
 member:b_c21f318d6b62,member,Nonprofit board member,Jerri Ingram,Nonprofit board member,/profile/member/b_c21f318d6b62,,1,,,,bay,
 member:b_c227b41ce469,member,Nonprofit board member,Nick Collida,Nonprofit board member,/profile/member/b_c227b41ce469,,1,,,,bay,
@@ -11024,7 +11054,7 @@ member:b_c2581dd80efe,member,Nonprofit board member,Brent Marlow,Nonprofit board
 member:b_c2590baed195,member,Nonprofit board member,Honey Swann,Nonprofit board member,/profile/member/b_c2590baed195,,1,,,,bay,
 member:b_c2600887b971,member,Nonprofit board member,Michael Duncan,Nonprofit board member,/profile/member/b_c2600887b971,,2,,,,bay,
 member:b_c26652725df7,member,Nonprofit board member,W Sparkman,Nonprofit board member,/profile/member/b_c26652725df7,,3,,,,bay,
-member:b_c26805152cde,member,Nonprofit board member,Grant Wittstruck,Nonprofit board member,/profile/member/b_c26805152cde,,2,,,,bay,
+member:b_c26805152cde,member,Chamber board member,Grant Wittstruck,Nonprofit board member,/profile/member/b_c26805152cde,,3,,,,bay,
 member:b_c26a148cf366,member,Nonprofit board member,Patricka Hogue,Nonprofit board member,/profile/member/b_c26a148cf366,,1,,,,bay,
 member:b_c27177b5ad9c,member,Nonprofit board member,Tyler Mauldin,Nonprofit board member,/profile/member/b_c27177b5ad9c,,1,,,,bay,
 member:b_c2736d77bbf4,member,Nonprofit board member,Robert Harned,Nonprofit board member,/profile/member/b_c2736d77bbf4,,2,,,,bay,
@@ -11173,7 +11203,7 @@ member:b_c6ee983c4ccf,member,Nonprofit board member,Kathleen Fontaine,Nonprofit 
 member:b_c6f0132dbc8e,member,Nonprofit board member,John Warren,Nonprofit board member,/profile/member/b_c6f0132dbc8e,,1,,,,bay,
 member:b_c6f1ffc9876e,member,Nonprofit board member,Jeff Potts,Nonprofit board member,/profile/member/b_c6f1ffc9876e,,1,,,,bay,
 member:b_c6f93264f115,member,Nonprofit board member,Crystal Lykins,Nonprofit board member,/profile/member/b_c6f93264f115,,1,,,,bay,
-member:b_c724f4103830,member,Nonprofit board member,Aaron Rich,Nonprofit board member,/profile/member/b_c724f4103830,,3,,,,bay,
+member:b_c724f4103830,member,Chamber board member,Aaron Rich,Nonprofit board member,/profile/member/b_c724f4103830,,5,,,,bay,
 member:b_c72b178e0d99,member,Nonprofit board member,Cathy Byrd,Nonprofit board member,/profile/member/b_c72b178e0d99,,1,,,,bay,
 member:b_c732ad8f2d50,member,Nonprofit board member,Jennifer Shumate,Nonprofit board member,/profile/member/b_c732ad8f2d50,,1,,,,bay,
 member:b_c736ae3e89d9,member,Nonprofit board member,Jerry Adcock,Nonprofit board member,/profile/member/b_c736ae3e89d9,,3,,,,bay,
@@ -11277,6 +11307,7 @@ member:b_ca05e73af731,member,Nonprofit board member,Mary Millett,Nonprofit board
 member:b_ca0861b3a33f,member,Nonprofit board member,Zebulon Taft,Nonprofit board member,/profile/member/b_ca0861b3a33f,,1,,,,bay,
 member:b_ca0a5d5aaaea,member,Nonprofit board member,Frankie Lumm,Nonprofit board member,/profile/member/b_ca0a5d5aaaea,,2,,,,bay,
 member:b_ca13f315df7c,member,Nonprofit board member,Michael Dupree,Nonprofit board member,/profile/member/b_ca13f315df7c,,3,,,,bay,
+member:b_ca16c74f38cb,member,Chamber staff,Victoria Pyle,Chamber of commerce staff,/profile/member/b_ca16c74f38cb,,1,,,,bay,
 member:b_ca1b6f9e5ef8,member,Nonprofit board member,Marilyn Strayn,Nonprofit board member,/profile/member/b_ca1b6f9e5ef8,,1,,,,bay,
 member:b_ca28afe70e91,member,Nonprofit board member,Herb Hinson,Nonprofit board member,/profile/member/b_ca28afe70e91,,1,,,,bay,
 member:b_ca320bd22847,member,Nonprofit board member,Kenneth Macklin,Nonprofit board member,/profile/member/b_ca320bd22847,,2,,,,bay,
@@ -11347,7 +11378,7 @@ member:b_cbfde40c6b18,member,Nonprofit board member,Robert George Zipperer,Nonpr
 member:b_cc1332e30fb3,member,Nonprofit board member,Lauren Campbell,Nonprofit board member,/profile/member/b_cc1332e30fb3,,1,,,,bay,
 member:b_cc16a90d71ae,member,Nonprofit board member,Esther G Coker,Nonprofit board member,/profile/member/b_cc16a90d71ae,,1,,,,bay,
 member:b_cc16eef418c5,member,Nonprofit board member,Joshua Petty,Nonprofit board member,/profile/member/b_cc16eef418c5,,1,,,,bay,
-member:b_cc178af39a3f,member,Nonprofit board member,Joe Holt,Nonprofit board member,/profile/member/b_cc178af39a3f,,3,,,,bay,
+member:b_cc178af39a3f,member,Chamber board member,Joe Holt,Nonprofit board member,/profile/member/b_cc178af39a3f,,4,,,,bay,
 member:b_cc187c7bd14a,member,Nonprofit board member,Eddie Johns,Nonprofit board member,/profile/member/b_cc187c7bd14a,,1,,,,bay,
 member:b_cc218ae72d9c,member,Nonprofit board member,Shelva C Biggs,Nonprofit board member,/profile/member/b_cc218ae72d9c,,1,,,,bay,
 member:b_cc25ab46ecc2,member,Nonprofit board member,Rich Clampitt,Nonprofit board member,/profile/member/b_cc25ab46ecc2,,1,,,,bay,
@@ -11490,6 +11521,7 @@ member:b_d04596c80a6d,member,Nonprofit board member,Brooke Conley,Nonprofit boar
 member:b_d058f769d636,member,Nonprofit board member,Beth Sturdivan,Nonprofit board member,/profile/member/b_d058f769d636,,1,,,,bay,
 member:b_d07356417d23,member,Nonprofit board member,Maria Fernandez,Nonprofit board member,/profile/member/b_d07356417d23,,1,,,,bay,
 member:b_d077cf1ffe3b,member,Nonprofit board member,Ted R Wilson,Nonprofit board member,/profile/member/b_d077cf1ffe3b,,2,,,,bay,
+member:b_d07cf938d403,member,Chamber board member,Andrew Starr,Chamber of commerce board member,/profile/member/b_d07cf938d403,,1,,,,bay,
 member:b_d081d2157d35,member,Nonprofit board member,Kirtikumar Patel,Nonprofit board member,/profile/member/b_d081d2157d35,,9,,,,bay,
 member:b_d088f01b0efd,member,Nonprofit board member,Mark Swartz,Nonprofit board member,/profile/member/b_d088f01b0efd,,1,,,,bay,
 member:b_d08e0307a32d,member,Nonprofit board member,Michael Avery,Nonprofit board member,/profile/member/b_d08e0307a32d,,1,,,,bay,
@@ -11618,7 +11650,7 @@ member:b_d49523e9b9c2,member,Nonprofit board member,Molly Allen,Nonprofit board 
 member:b_d495deb75773,member,Nonprofit board member,Kay Jackson,Nonprofit board member,/profile/member/b_d495deb75773,,1,,,,bay,
 member:b_d49b19b5c08e,member,Nonprofit board member,Mike Curtis,Nonprofit board member,/profile/member/b_d49b19b5c08e,,1,,,,bay,
 member:b_d4b15fc8895c,member,Nonprofit board member,Virginia White,Nonprofit board member,/profile/member/b_d4b15fc8895c,,1,,,,bay,
-member:b_d4bf8e0d810d,member,Nonprofit board member,Gina Littleton,Nonprofit board member,/profile/member/b_d4bf8e0d810d,,1,,,,bay,
+member:b_d4bf8e0d810d,member,Chamber board member,Gina Littleton,Nonprofit board member,/profile/member/b_d4bf8e0d810d,,3,,,,bay,
 member:b_d4c0c6ecccfe,member,Nonprofit board member,Michael Whitley,Nonprofit board member,/profile/member/b_d4c0c6ecccfe,,1,,,,bay,
 member:b_d4c2e6348154,member,Nonprofit board member,Gerry Clemons,Nonprofit board member,/profile/member/b_d4c2e6348154,,1,,,,bay,
 member:b_d4c92ff9fe23,member,Nonprofit board member,James Landers,Nonprofit board member,/profile/member/b_d4c92ff9fe23,,1,,,,bay,
@@ -11680,7 +11712,7 @@ member:b_d67a3574b868,member,Nonprofit board member,Jadwiga Tabaka,Nonprofit boa
 member:b_d67e7cfcfaa2,member,Nonprofit board member,Mike Hamm,Nonprofit board member,/profile/member/b_d67e7cfcfaa2,,1,,,,bay,
 member:b_d6816619762b,member,Nonprofit board member,Jacob Willenborg,Nonprofit board member,/profile/member/b_d6816619762b,,1,,,,bay,
 member:b_d68476d09651,member,Nonprofit board member,Lillian Stomp,Nonprofit board member,/profile/member/b_d68476d09651,,1,,,,bay,
-member:b_d69eac5df34f,member,Nonprofit board member,Chase Christianson,Nonprofit board member,/profile/member/b_d69eac5df34f,,4,,,,bay,
+member:b_d69eac5df34f,member,Chamber board member,Chase Christianson,Nonprofit board member,/profile/member/b_d69eac5df34f,,5,,,,bay,
 member:b_d69fdb30f99e,member,Nonprofit board member,Tim Mello,Nonprofit board member,/profile/member/b_d69fdb30f99e,,2,,,,bay,
 member:b_d6b6c56bed57,member,Nonprofit board member,Sylvia Jones,Nonprofit board member,/profile/member/b_d6b6c56bed57,,1,,,,bay,
 member:b_d6c349ad0d5c,member,Nonprofit board member,Andrea Webb Mullins,Nonprofit board member,/profile/member/b_d6c349ad0d5c,,1,,,,bay,
@@ -11726,6 +11758,7 @@ member:b_d7e3a868d141,member,Nonprofit board member,Adriana Cruz Betancourth,Non
 member:b_d7e9ce9340fe,member,Nonprofit board member,Margaret Webster,Nonprofit board member,/profile/member/b_d7e9ce9340fe,,2,,,,bay,
 member:b_d7ec497b44da,member,Nonprofit board member,Lolanda White,Nonprofit board member,/profile/member/b_d7ec497b44da,,2,,,,bay,
 member:b_d7ec91bfd6c6,member,Nonprofit board member,Sharon Matthews,Nonprofit board member,/profile/member/b_d7ec91bfd6c6,,1,,,,bay,
+member:b_d7ecdfb714c2,member,Chamber board member,Cynthia Fuller,Chamber of commerce board member,/profile/member/b_d7ecdfb714c2,,1,,,,bay,
 member:b_d7ffb71bff7e,member,Nonprofit board member,Anne Weekes,Nonprofit board member,/profile/member/b_d7ffb71bff7e,,1,,,,bay,
 member:b_d806ac118de8,member,Nonprofit board member,David McDermott,Nonprofit board member,/profile/member/b_d806ac118de8,,1,,,,bay,
 member:b_d80d7482edfe,member,Nonprofit board member,Denis Richard,Nonprofit board member,/profile/member/b_d80d7482edfe,,3,,,,bay,
@@ -11774,7 +11807,7 @@ member:b_d8fe8058326b,member,Nonprofit board member,Robin Fuller,Nonprofit board
 member:b_d9097d6b6848,member,Nonprofit board member,Walter Keaton,Nonprofit board member,/profile/member/b_d9097d6b6848,,1,,,,bay,
 member:b_d90ceae01db3,member,Nonprofit board member,Thomas Sum,Nonprofit board member,/profile/member/b_d90ceae01db3,,1,,,,bay,
 member:b_d916d6e96337,member,Nonprofit board member,Paul Bohac,Nonprofit board member,/profile/member/b_d916d6e96337,,1,,,,bay,
-member:b_d917686eedc9,member,Nonprofit board member,Clint Mizell,Nonprofit board member,/profile/member/b_d917686eedc9,,3,,,,bay,
+member:b_d917686eedc9,member,Chamber board member,Clint Mizell,Nonprofit board member,/profile/member/b_d917686eedc9,,4,,,,bay,
 member:b_d91ef6caa95d,member,Nonprofit board member,Garland E Frazier,Nonprofit board member,/profile/member/b_d91ef6caa95d,,1,,,,bay,
 member:b_d9211d4ca08f,member,Nonprofit board member,Connor Wood,Nonprofit board member,/profile/member/b_d9211d4ca08f,,1,,,,bay,
 member:b_d924bc007952,member,Nonprofit board member,Katherine Matthews,Nonprofit board member,/profile/member/b_d924bc007952,,4,,,,bay,
@@ -11837,7 +11870,7 @@ member:b_db2a03e425f0,member,Nonprofit board member,Alecia Clagett,Nonprofit boa
 member:b_db2d08d9e650,member,Nonprofit board member,Dawn McDonald,Nonprofit board member,/profile/member/b_db2d08d9e650,,1,,,,bay,
 member:b_db39f3148016,member,Nonprofit board member,Doyle Hill,Nonprofit board member,/profile/member/b_db39f3148016,,1,,,,bay,
 member:b_db3e4a9d2952,member,Nonprofit board member,Dianne Law,Nonprofit board member,/profile/member/b_db3e4a9d2952,,2,,,,bay,
-member:b_db43ff854cd4,member,Nonprofit board member,Allen Armstrong,Nonprofit board member,/profile/member/b_db43ff854cd4,,2,,,,bay,
+member:b_db43ff854cd4,member,Chamber board member,Allen Armstrong,Nonprofit board member,/profile/member/b_db43ff854cd4,,3,,,,bay,
 member:b_db54fa51a9d8,member,Nonprofit board member,Angie Tatom,Nonprofit board member,/profile/member/b_db54fa51a9d8,,1,,,,bay,
 member:b_db5c42e7b999,member,Nonprofit board member,John Chamber,Nonprofit board member,/profile/member/b_db5c42e7b999,,1,,,,bay,
 member:b_db61e96a3429,member,Nonprofit board member,Natalie Ryan,Nonprofit board member,/profile/member/b_db61e96a3429,,3,,,,bay,
@@ -11925,6 +11958,7 @@ member:b_dd97c57ce51c,member,Nonprofit board member,Gary Hall,Nonprofit board me
 member:b_ddac2760d064,member,Nonprofit board member,Devinya Murphy,Nonprofit board member,/profile/member/b_ddac2760d064,,1,,,,bay,
 member:b_ddb05bbe4e23,member,Nonprofit board member,Knetzer Laura,Nonprofit board member,/profile/member/b_ddb05bbe4e23,,1,,,,bay,
 member:b_ddb470d75565,member,Nonprofit board member,Christopher Zaiger,Nonprofit board member,/profile/member/b_ddb470d75565,,1,,,,bay,
+member:b_ddb588e93cef,member,Chamber board member,Abdalla Nassar,Chamber of commerce board member,/profile/member/b_ddb588e93cef,,1,,,,bay,
 member:b_ddbce5397cdc,member,Nonprofit board member,Sasha Pagano,Nonprofit board member,/profile/member/b_ddbce5397cdc,,1,,,,bay,
 member:b_ddbd6b1e74d4,member,Nonprofit board member,Inna Klavkina,Nonprofit board member,/profile/member/b_ddbd6b1e74d4,,1,,,,bay,
 member:b_ddc1a4d4ff17,member,Nonprofit board member,Chris Langford,Nonprofit board member,/profile/member/b_ddc1a4d4ff17,,1,,,,bay,
@@ -12026,7 +12060,7 @@ member:b_e0c3fc092cf2,member,Nonprofit board member,Beau Whitfield,Nonprofit boa
 member:b_e0c4988585c8,member,Nonprofit board member,Amy Putnam,Nonprofit board member,/profile/member/b_e0c4988585c8,,3,,,,bay,
 member:b_e0cc6a4128c0,member,Nonprofit board member,Kathie Kern,Nonprofit board member,/profile/member/b_e0cc6a4128c0,,1,,,,bay,
 member:b_e0e495b8068f,member,Nonprofit board member,Steve Kotan,Nonprofit board member,/profile/member/b_e0e495b8068f,,1,,,,bay,
-member:b_e0ea3990216e,member,Nonprofit board member,Robert Gates,Nonprofit board member,/profile/member/b_e0ea3990216e,,1,,,,bay,
+member:b_e0ea3990216e,member,Chamber board member,Robert Gates,Nonprofit board member,/profile/member/b_e0ea3990216e,,2,,,,bay,
 member:b_e0f03be6a24b,member,Nonprofit board member,G Parell,Nonprofit board member,/profile/member/b_e0f03be6a24b,,1,,,,bay,
 member:b_e105a1165574,member,Nonprofit board member,Mike Lawson,Nonprofit board member,/profile/member/b_e105a1165574,,2,,,,bay,
 member:b_e1066a10fb7f,member,Nonprofit board member,Jeremy Hatcher,Nonprofit board member,/profile/member/b_e1066a10fb7f,,1,,,,bay,
@@ -12131,7 +12165,7 @@ member:b_e4431786d728,member,Nonprofit board member,Bridgette Jencks,Nonprofit b
 member:b_e45d562dc50a,member,Nonprofit board member,Peter Kullen,Nonprofit board member,/profile/member/b_e45d562dc50a,,1,,,,bay,
 member:b_e476fce48a83,member,Nonprofit board member,Antwan Worlds,Nonprofit board member,/profile/member/b_e476fce48a83,,1,,,,bay,
 member:b_e47b14a5bd3c,member,Nonprofit board member,Lindsey Crelling,Nonprofit board member,/profile/member/b_e47b14a5bd3c,,1,,,,bay,
-member:b_e4804c6ddd37,member,Nonprofit board member,Matt Griffitts,Nonprofit board member,/profile/member/b_e4804c6ddd37,,2,,,,bay,
+member:b_e4804c6ddd37,member,Chamber board member,Matt Griffitts,Nonprofit board member,/profile/member/b_e4804c6ddd37,,3,,,,bay,
 member:b_e4837391fbb8,member,Nonprofit board member,John Piercy,Nonprofit board member,/profile/member/b_e4837391fbb8,,1,,,,bay,
 member:b_e490557626fb,member,Nonprofit board member,G Trollope,Nonprofit board member,/profile/member/b_e490557626fb,,1,,,,bay,
 member:b_e4a7b05d8424,member,Nonprofit board member,Mike Kerr,Nonprofit board member,/profile/member/b_e4a7b05d8424,,1,,,,bay,
@@ -12211,7 +12245,7 @@ member:b_e70811388ab1,member,Nonprofit board member,Rachel Duvall,Nonprofit boar
 member:b_e71a6ac53d0b,member,Nonprofit board member,Brandis Perdue,Nonprofit board member,/profile/member/b_e71a6ac53d0b,,2,,,,bay,
 member:b_e7252c9bc6e2,member,Nonprofit board member,Cheryl Flax-Hyman,Nonprofit board member,/profile/member/b_e7252c9bc6e2,,3,,,,bay,
 member:b_e72e06cf5875,member,Nonprofit board member,Luz Ramirez,Nonprofit board member,/profile/member/b_e72e06cf5875,,1,,,,bay,
-member:b_e73366fdadb4,member,Nonprofit board member,Steven Clements,Nonprofit board member,/profile/member/b_e73366fdadb4,,11,,,,bay,
+member:b_e73366fdadb4,member,Chamber board member,Steven Clements,Nonprofit board member,/profile/member/b_e73366fdadb4,,13,,,,bay,
 member:b_e73451943d94,member,Nonprofit board member,Karen Smith,Nonprofit board member,/profile/member/b_e73451943d94,,2,,,,bay,
 member:b_e7541aa83976,member,Nonprofit board member,Donal Hall,Nonprofit board member,/profile/member/b_e7541aa83976,,1,,,,bay,
 member:b_e754a033b0ff,member,Nonprofit board member,Jim Bryan,Nonprofit board member,/profile/member/b_e754a033b0ff,,2,,,,bay,
@@ -12261,7 +12295,7 @@ member:b_e894cc26fb54,member,Nonprofit board member,Valerie Law,Nonprofit board 
 member:b_e895a29637ab,member,Nonprofit board member,Kelly Littleton,Nonprofit board member,/profile/member/b_e895a29637ab,,2,,,,bay,
 member:b_e896a249381b,member,Nonprofit board member,Jeff Carter,Nonprofit board member,/profile/member/b_e896a249381b,,2,,,,bay,
 member:b_e8a2808ab720,member,Nonprofit board member,Greg Koontz,Nonprofit board member,/profile/member/b_e8a2808ab720,,1,,,,bay,
-member:b_e8a9f63b8932,member,Nonprofit board member,Shannon Richmond,Nonprofit board member,/profile/member/b_e8a9f63b8932,,1,,,,bay,
+member:b_e8a9f63b8932,member,Chamber staff,Shannon Richmond,Nonprofit board member,/profile/member/b_e8a9f63b8932,,2,,,,bay,
 member:b_e8b12e327ded,member,Nonprofit board member,Terri Hoehn,Nonprofit board member,/profile/member/b_e8b12e327ded,,1,,,,bay,
 member:b_e8ba4b7a229c,member,Nonprofit board member,Taylor Solum,Nonprofit board member,/profile/member/b_e8ba4b7a229c,,1,,,,bay,
 member:b_e8bca9652a71,member,Nonprofit board member,Allison Smith,Nonprofit board member,/profile/member/b_e8bca9652a71,,3,,,,bay,
@@ -12323,7 +12357,7 @@ member:b_eaa3f3cffbfe,member,Nonprofit board member,William Little,Nonprofit boa
 member:b_eaa471ad2158,member,Nonprofit board member,Roger Hagan,Nonprofit board member,/profile/member/b_eaa471ad2158,,1,,,,bay,
 member:b_eaa9fe92fbad,member,Nonprofit board member,Robyn Helt,Nonprofit board member,/profile/member/b_eaa9fe92fbad,,1,,,,bay,
 member:b_eabb264c1dea,member,Nonprofit board member,William Paul,Nonprofit board member,/profile/member/b_eabb264c1dea,,1,,,,bay,
-member:b_eacdfc58d64c,member,Nonprofit board member,Kyle Shoots,Nonprofit board member,/profile/member/b_eacdfc58d64c,,6,,,,bay,
+member:b_eacdfc58d64c,member,Chamber board member,Kyle Shoots,Nonprofit board member,/profile/member/b_eacdfc58d64c,,7,,,,bay,
 member:b_eada9f976e15,member,Nonprofit board member,Judy Harris,Nonprofit board member,/profile/member/b_eada9f976e15,,1,,,,bay,
 member:b_eae92ce119b5,member,Nonprofit board member,George T Gordon,Nonprofit board member,/profile/member/b_eae92ce119b5,,1,,,,bay,
 member:b_eaef0f1d4fa4,member,Nonprofit board member,Adriane Whitener,Nonprofit board member,/profile/member/b_eaef0f1d4fa4,,1,,,,bay,
@@ -12506,6 +12540,7 @@ member:b_f1b394b4d5b1,member,Nonprofit board member,Steven Nichols,Nonprofit boa
 member:b_f1cf8af28776,member,Nonprofit board member,Jesse Kinser,Nonprofit board member,/profile/member/b_f1cf8af28776,,1,,,,bay,
 member:b_f1d0850c857e,member,Nonprofit board member,Olen Barron,Nonprofit board member,/profile/member/b_f1d0850c857e,,3,,,,bay,
 member:b_f1d1c806f3a5,member,Nonprofit board member,Gamallah Nash,Nonprofit board member,/profile/member/b_f1d1c806f3a5,,1,,,,bay,
+member:b_f1d2b51ee200,member,Chamber staff,Anna Stephenson,Chamber of commerce staff,/profile/member/b_f1d2b51ee200,,1,,,,bay,
 member:b_f1e09430009c,member,Nonprofit board member,Brenton McLeod,Nonprofit board member,/profile/member/b_f1e09430009c,,3,,,,bay,
 member:b_f1f20380f531,member,Nonprofit board member,Philip McAfee,Nonprofit board member,/profile/member/b_f1f20380f531,,1,,,,bay,
 member:b_f202d69b545e,member,Nonprofit board member,John Ackerman,Nonprofit board member,/profile/member/b_f202d69b545e,,1,,,,bay,
@@ -12618,6 +12653,7 @@ member:b_f5d1ae84a620,member,Nonprofit board member,Byers Amanda,Nonprofit board
 member:b_f5d3d7c975f3,member,Nonprofit board member,Don Hundley,Nonprofit board member,/profile/member/b_f5d3d7c975f3,,1,,,,bay,
 member:b_f5e4f633dfc4,member,Nonprofit board member,Shelia Nogueira-Prewitt,Nonprofit board member,/profile/member/b_f5e4f633dfc4,,1,,,,bay,
 member:b_f5e90fefae7c,member,Nonprofit board member,Philip Cope,Nonprofit board member,/profile/member/b_f5e90fefae7c,,1,,,,bay,
+member:b_f5ecf284b1d3,member,Chamber board member,Lance VonGerichten,Chamber of commerce board member,/profile/member/b_f5ecf284b1d3,,1,,,,bay,
 member:b_f5f0448d8565,member,Nonprofit board member,Timothy Rosenbeck,Nonprofit board member,/profile/member/b_f5f0448d8565,,1,,,,bay,
 member:b_f5f137a8af55,member,Nonprofit board member,Justin Nyland,Nonprofit board member,/profile/member/b_f5f137a8af55,,3,,,,bay,
 member:b_f605d746d7bf,member,Nonprofit board member,Marilyn Denecke,Nonprofit board member,/profile/member/b_f605d746d7bf,,2,,,,bay,
@@ -12795,7 +12831,7 @@ member:b_fb6e1d1d17ec,member,Nonprofit board member,Deneka Rouhlac,Nonprofit boa
 member:b_fb7dd87784f5,member,Nonprofit board member,Darryl Martin,Nonprofit board member,/profile/member/b_fb7dd87784f5,,1,,,,bay,
 member:b_fb7eb19ba1e2,member,Nonprofit board member,Scott Kooken,Nonprofit board member,/profile/member/b_fb7eb19ba1e2,,1,,,,bay,
 member:b_fb7f9ad6ef37,member,Nonprofit board member,Jimmy Barr,Nonprofit board member,/profile/member/b_fb7f9ad6ef37,,6,,,,bay,
-member:b_fb81930b3e54,member,Nonprofit board member,Claire Sherman,Nonprofit board member,/profile/member/b_fb81930b3e54,,1,,,,bay,
+member:b_fb81930b3e54,member,Chamber board member,Claire Sherman,Nonprofit board member,/profile/member/b_fb81930b3e54,,2,,,,bay,
 member:b_fb820b979af0,member,Nonprofit board member,Michael Darby,Nonprofit board member,/profile/member/b_fb820b979af0,,1,,,,bay,
 member:b_fb8bf0b03e81,member,Nonprofit board member,Chuck Rachke,Nonprofit board member,/profile/member/b_fb8bf0b03e81,,1,,,,bay,
 member:b_fb8c51684473,member,Nonprofit board member,Marilyn Nations,Nonprofit board member,/profile/member/b_fb8c51684473,,1,,,,bay,
@@ -13264,7 +13300,7 @@ nonprofit:np-562350462,nonprofit,Nonprofit,St Andrews Episcopal Church Foundatio
 nonprofit:np-562501532,nonprofit,Nonprofit,Emerald Coast Business Womens Association Inc,Education · Panama City,/profile/nonprofit/np-562501532,,16,,,,bay,https://projects.propublica.org/nonprofits/organizations/562501532
 nonprofit:np-582661418,nonprofit,Nonprofit,Adventures of the Heart Ministries Inc,Church or religious group · Panama City Beach,/profile/nonprofit/np-582661418,,2,,,,bay,https://projects.propublica.org/nonprofits/organizations/582661418
 nonprofit:np-590246707,nonprofit,Nonprofit,Order of the Eastern Star of Florida Grand Chapter,"Club, lodge or veterans group · Lynn Haven",/profile/nonprofit/np-590246707,,37,7000.0,,,bay,https://projects.propublica.org/nonprofits/organizations/590246707
-nonprofit:np-590391375,nonprofit,Nonprofit,Bay County Chamber of Commerce Inc,Business league or chamber · Panama City,/profile/nonprofit/np-590391375,,71,,,,bay,https://projects.propublica.org/nonprofits/organizations/590391375
+nonprofit:np-590391375,nonprofit,Nonprofit,Bay County Chamber of Commerce Inc,Business league or chamber · Panama City,/profile/nonprofit/np-590391375,,127,,,,bay,https://projects.propublica.org/nonprofits/organizations/590391375
 nonprofit:np-590526027,nonprofit,Nonprofit,St Andrews Bay Yacht Club,"Club, lodge or veterans group · Panama City",/profile/nonprofit/np-590526027,,20,,,,bay,https://projects.propublica.org/nonprofits/organizations/590526027
 nonprofit:np-590604728,nonprofit,Nonprofit,Panama Country Club Inc,"Club, lodge or veterans group · Lynn Haven",/profile/nonprofit/np-590604728,,19,,,,bay,https://projects.propublica.org/nonprofits/organizations/590604728
 nonprofit:np-590685087,nonprofit,Nonprofit,Southeastern Fisheries Association Inc,Business league or chamber · Panama City,/profile/nonprofit/np-590685087,,27,,,,bay,https://projects.propublica.org/nonprofits/organizations/590685087
@@ -13276,7 +13312,7 @@ nonprofit:np-590791014,nonprofit,Nonprofit,Panama City First Baptist Church,Chur
 nonprofit:np-590824334,nonprofit,Nonprofit,Communication Workers of America,Other nonprofit · Panama City,/profile/nonprofit/np-590824334,,4,,,,bay,https://projects.propublica.org/nonprofits/organizations/590824334
 nonprofit:np-590838086,nonprofit,Nonprofit,First Assembly of GOD,Church or religious group · Panama City,/profile/nonprofit/np-590838086,,5,,,,bay,https://projects.propublica.org/nonprofits/organizations/590838086
 nonprofit:np-590855413,nonprofit,Nonprofit,United Cerebral Palsy of North Florida Inc,Human services · Panama City,/profile/nonprofit/np-590855413,,7,,,,bay,https://projects.propublica.org/nonprofits/organizations/590855413
-nonprofit:np-590863698,nonprofit,Nonprofit,United Way of Northwest Florida,Philanthropy and grantmaking · Panama City,/profile/nonprofit/np-590863698,,74,,6073746.0,,bay,https://projects.propublica.org/nonprofits/organizations/590863698
+nonprofit:np-590863698,nonprofit,Nonprofit,United Way of Northwest Florida,Philanthropy and grantmaking · Panama City,/profile/nonprofit/np-590863698,,75,,6073746.0,,bay,https://projects.propublica.org/nonprofits/organizations/590863698
 nonprofit:np-590908712,nonprofit,Nonprofit,First Baptist Church of Lynn Haven,Church or religious group · Lynn Haven,/profile/nonprofit/np-590908712,,6,,,,bay,https://projects.propublica.org/nonprofits/organizations/590908712
 nonprofit:np-590943067,nonprofit,Nonprofit,St Andrew Assembly of GOD,Church or religious group · Panama City,/profile/nonprofit/np-590943067,,3,,,,bay,https://projects.propublica.org/nonprofits/organizations/590943067
 nonprofit:np-590945473,nonprofit,Nonprofit,Immanuel Baptist Church,Church or religious group · Panama City,/profile/nonprofit/np-590945473,,4,,,,bay,https://projects.propublica.org/nonprofits/organizations/590945473
@@ -13390,7 +13426,7 @@ nonprofit:np-592827373,nonprofit,Nonprofit,Youngstown Baptist Church,Church or r
 nonprofit:np-592831906,nonprofit,Nonprofit,Christ OUR Savior Lutheran Church,Church or religious group · Panama City Beach,/profile/nonprofit/np-592831906,,2,,,,bay,https://projects.propublica.org/nonprofits/organizations/592831906
 nonprofit:np-592849343,nonprofit,Nonprofit,St Andrew Bay Resource Management Association,Other nonprofit · Panama City,/profile/nonprofit/np-592849343,,25,,,,bay,https://projects.propublica.org/nonprofits/organizations/592849343
 nonprofit:np-592853138,nonprofit,Nonprofit,Homeless & Hunger Coalition of Nwfl DBA Doorways of Nwfl,Other nonprofit · Panama City,/profile/nonprofit/np-592853138,,32,921000.0,1772498.0,,bay,https://projects.propublica.org/nonprofits/organizations/592853138
-nonprofit:np-592857564,nonprofit,Nonprofit,Panama City Beaches Chamber of Commerce Incorporated,Business league or chamber · Panama City Beach,/profile/nonprofit/np-592857564,,14,,,,bay,https://projects.propublica.org/nonprofits/organizations/592857564
+nonprofit:np-592857564,nonprofit,Nonprofit,Panama City Beaches Chamber of Commerce Incorporated,Business league or chamber · Panama City Beach,/profile/nonprofit/np-592857564,,47,,,,bay,https://projects.propublica.org/nonprofits/organizations/592857564
 nonprofit:np-592873426,nonprofit,Nonprofit,Sand Hills Assembly of GOD,Church or religious group · Panama City,/profile/nonprofit/np-592873426,,5,,,,bay,https://projects.propublica.org/nonprofits/organizations/592873426
 nonprofit:np-592873626,nonprofit,Nonprofit,First Assembly of GOD,Church or religious group · Panama City Beach,/profile/nonprofit/np-592873626,,4,,,,bay,https://projects.propublica.org/nonprofits/organizations/592873626
 nonprofit:np-592894461,nonprofit,Nonprofit,Shriners International,"Club, lodge or veterans group · Panama City",/profile/nonprofit/np-592894461,,5,,,,bay,https://projects.propublica.org/nonprofits/organizations/592894461
@@ -13449,7 +13485,7 @@ nonprofit:np-593239349,nonprofit,Nonprofit,Center Action Committee CAC,"Club, lo
 nonprofit:np-593245462,nonprofit,Nonprofit,Mental Health America of Bay County Inc,Other nonprofit · Lynn Haven,/profile/nonprofit/np-593245462,,15,34365.0,,,bay,https://projects.propublica.org/nonprofits/organizations/593245462
 nonprofit:np-593245806,nonprofit,Nonprofit,Mexico Beach First Baptist Church,Church or religious group · Mexico Beach,/profile/nonprofit/np-593245806,,0,,,,bay,https://projects.propublica.org/nonprofits/organizations/593245806
 nonprofit:np-593247661,nonprofit,Nonprofit,Dove Assembly of GOD,Church or religious group · Southport,/profile/nonprofit/np-593247661,,3,,,,bay,https://projects.propublica.org/nonprofits/organizations/593247661
-nonprofit:np-593250188,nonprofit,Nonprofit,Bay Defense Alliance Corporation,Business league or chamber · Panama City,/profile/nonprofit/np-593250188,,43,,,,bay,https://projects.propublica.org/nonprofits/organizations/593250188
+nonprofit:np-593250188,nonprofit,Nonprofit,Bay Defense Alliance Corporation,Business league or chamber · Panama City,/profile/nonprofit/np-593250188,,44,,,,bay,https://projects.propublica.org/nonprofits/organizations/593250188
 nonprofit:np-593252190,nonprofit,Nonprofit,Bay United Soccer Club Inc,Recreation and sports · Panama City,/profile/nonprofit/np-593252190,,9,,,,bay,https://projects.propublica.org/nonprofits/organizations/593252190
 nonprofit:np-593281750,nonprofit,Nonprofit,Tom P Haney Education Foundation Inc,Education · Panama City,/profile/nonprofit/np-593281750,,9,,,,bay,https://projects.propublica.org/nonprofits/organizations/593281750
 nonprofit:np-593290474,nonprofit,Nonprofit,Central Pentecostal Ministries Inc,Church or religious group · Lynn Haven,/profile/nonprofit/np-593290474,,4,,,,bay,https://projects.propublica.org/nonprofits/organizations/593290474
@@ -15539,7 +15575,7 @@ person:bill-mcglothlin,person,Past candidate,Bill McGlothlin,"Ran for Mexico Bea
 person:bill-musgrove,person,Past candidate,Bill Musgrove,"Ran for Lake Powell Community Development District, Seat 1 in 2016 (won)",/people/bill-musgrove,,1,,,lake_powell_cdd,bay,
 person:billy-rader,person,Former official,Billy Rader,"Former city commissioner, Ward 3, Panama City",/people/billy-rader,,22,7650.0,,pc,bay,
 person:bob-fletcher,person,Past candidate,Bob Fletcher,"Ran for Lake Powell Community Development District, Seat 5 in 2018",/people/bob-fletcher,,2,220.0,,lake_powell_cdd,bay,
-person:bob-majka,person,Department leader,Bob Majka,"Executive Director, Port Authority",/people/bob-majka,Robert (Bob) Majka,2,,,county,bay,
+person:bob-majka,person,Department leader,Bob Majka,"Executive Director, Port Authority",/people/bob-majka,Robert (Bob) Majka,3,,,county,bay,
 person:bob-pelletier,person,Elected official,Bob Pelletier,"Commissioner, Ward III, Callaway",/people/bob-pelletier,,18,2400.0,,cw,bay,
 person:bob-schultz,person,Past candidate,Bob Schultz,"Ran for Lynn Haven Commission, Seat 1 in 2019",/people/bob-schultz,,1,,,lh,bay,
 person:bobby-birdsell,person,Elected official,Bobby Birdsell,"Commissioner, Ward I, Callaway · running again in 2026",/people/bobby-birdsell,Bobby J. Birdsell,6,3000.0,,cw,bay,
@@ -15726,7 +15762,7 @@ person:margo-anderson,person,Former official,Margo Anderson,"Former mayor, Lynn 
 person:mario-gisbert,person,Former official,Mario Gisbert,"Former city manager, Panama City Beach",/people/mario-gisbert,,1,,,pcb,bay,
 person:mark-andersen,person,Past candidate,Mark Andersen,Ran for Supervisor of Elections in 2020 (won),/people/mark-andersen,,2,,,soe,bay,
 person:mark-big-chief-strickland,person,Past candidate,"Mark ""Big Chief"" Strickland","Ran for School Board, District 1 in 2020",/people/mark-big-chief-strickland,,2,100.0,,schools,bay,
-person:mark-mcqueen,person,Elected official,Mark McQueen,"Superintendent of Schools, Bay District Schools",/people/mark-mcqueen,,5,500.0,,county,bay,
+person:mark-mcqueen,person,Elected official,Mark McQueen,"Superintendent of Schools, Bay District Schools",/people/mark-mcqueen,,6,500.0,,county,bay,
 person:mark-meade,person,Past candidate,Mark Meade,Ran for Panama City Beach Mayor in 2024,/people/mark-meade,,3,500.0,,pcb,bay,
 person:mark-rega,person,Elected official,Mark Rega,"Council Member, Parker",/people/mark-rega,,1,,,parker,bay,
 person:mark-sheldon,person,Former official,Mark Sheldon,"Former mayor, Panama City Beach",/people/mark-sheldon,,186,151197.5,,pcb,bay,
@@ -15759,7 +15795,7 @@ person:nina-ward,person,Elected official,Nina Ward,Supervisor of Elections,/peop
 person:pamela-hiller,person,Past candidate,Pamela Hiller,"Ran for Lynn Haven Commission, Seat 2 in 2019",/people/pamela-hiller,,1,,,lh,bay,
 person:pamm-chapman,person,Former official,Pamm Chapman,"Former school board member, District 3, Bay District Schools",/people/pamm-chapman,,71,33638.75,,schools,bay,
 person:pamn-henderson,person,Elected official,Pamn Henderson,"Mayor, Callaway",/people/pamn-henderson,,16,2505.07,,cw,bay,
-person:parker-mcclellan,person,Department leader,Parker W. McClellan Jr.,"Executive Director, Airport District",/people/parker-mcclellan,,1,,,airport,bay,
+person:parker-mcclellan,person,Department leader,Parker W. McClellan Jr.,"Executive Director, Airport District",/people/parker-mcclellan,,3,,,airport,bay,
 person:pat-perno,person,Elected official,Pat Perno,"Commissioner, Lynn Haven",/people/pat-perno,,35,18509.0,,lh,bay,
 person:patricia-fousek,person,Past candidate,Patricia Fousek,Ran for Parker Mayor in 2023,/people/patricia-fousek,,2,200.0,,parker,bay,
 person:paul-bohac,person,Past candidate,Paul Bohac,"Ran for Callaway Commission, Ward 3 in 2016",/people/paul-bohac,,4,209.04,,cw,bay,
@@ -15853,7 +15889,7 @@ vendor:850,vendor,Company,850 Company LLC,Company paid or hired by local governm
 vendor:850-construction,vendor,Company,850 Construction Services,Company paid or hired by local governments,/public-money/vendors/850-construction,"850 Construction Services LLC; 850 Construction Services, LLC",10,4939953.13,,county,bay,
 vendor:a-b-collective,vendor,Company,A&B Collective,Company paid or hired by local governments,/profile/vendor/a-b-collective,,1,4225.0,,destination_pc,bay,
 vendor:a-c-schultes-florida,vendor,Company,"A.C. Schultes of Florida, Inc.",Company paid or hired by local governments,/public-money/vendors/a-c-schultes-florida,,7,24853081.99,,county,bay,
-vendor:aaron-rich-marketing,vendor,Company,Aaron Rich Marketing,Company paid or hired by local governments,/public-money/vendors/aaron-rich-marketing,,3,16890.07,500.0,destination_pc,bay,
+vendor:aaron-rich-marketing,vendor,Company,Aaron Rich Marketing,Company paid or hired by local governments,/public-money/vendors/aaron-rich-marketing,,4,16890.07,500.0,destination_pc,bay,
 vendor:abe-froman-productions,vendor,Company,Abe Froman Productions,Company paid or hired by local governments,/profile/vendor/abe-froman-productions,,1,92497.44,,visit_pcb,bay,
 vendor:abentras,vendor,Company,Abentras,Company paid or hired by local governments,/public-money/vendors/abentras,,1,5747714.16,,lh,bay,
 vendor:accurate-drilling-systems,vendor,Company,"Accurate Drilling Systems, Inc.",Company paid or hired by local governments,/public-money/vendors/accurate-drilling-systems,,7,13076705.0,,county,bay,
@@ -15958,7 +15994,7 @@ vendor:carvertise,vendor,Company,"Carvertise, Inc",Company paid or hired by loca
 vendor:catered-by-carla,vendor,Company,Catered by Carla,Company paid or hired by local governments,/profile/vendor/catered-by-carla,,1,3116.4,,destination_pc,bay,
 vendor:cathey-s-ace-hardware,vendor,Company,Cathey's Ace Hardware,Company paid or hired by local governments,/profile/vendor/cathey-s-ace-hardware,,1,13876.41,,mb_cdc,bay,
 vendor:cavalier-distributing-florida,vendor,Company,Cavalier Distributing Florida,Company paid or hired by local governments,/profile/vendor/cavalier-distributing-florida,,1,1325.64,,destination_pc,bay,
-vendor:cbc,vendor,Company,CBC Construction,Company paid or hired by local governments,/public-money/vendors/cbc,,11,12614452.22,,lh,bay,
+vendor:cbc,vendor,Company,CBC Construction,Company paid or hired by local governments,/public-money/vendors/cbc,,12,12614452.22,,lh,bay,
 vendor:cdr-maguire,vendor,Company,CDR Maguire,Company paid or hired by local governments,/public-money/vendors/cdr-maguire,"CDR Maguire / CDR Emergency Management; CDR Maguire Inc.; CDR Maguire, Inc.",3,9869167.0,,county,bay,
 vendor:center-action-committee,vendor,Company,Center Action Committee,Company paid or hired by local governments,/profile/vendor/center-action-committee,,1,2400.0,,destination_pc,bay,
 vendor:chandler-associates,vendor,Company,Chandler and Associates,Company paid or hired by local governments,/profile/vendor/chandler-associates,,1,,,pcb,bay,
@@ -16004,7 +16040,7 @@ vendor:dewberry,vendor,Company,Dewberry Engineers,Company paid or hired by local
 vendor:dex-imaging,vendor,Company,DEX imaging,Company paid or hired by local governments,/profile/vendor/dex-imaging,,1,874.71,,mb_cdc,bay,
 vendor:direct-deposit,vendor,Company,Direct Deposit,Company paid or hired by local governments,/profile/vendor/direct-deposit,,1,1307722.53,,visit_pcb,bay,
 vendor:disposal-services,vendor,Company,Disposal Services LLC,Company paid or hired by local governments,/public-money/vendors/disposal-services,"Disposal Services; Disposal Services, LLC",8,39636.2,3250.0,visit_pcb,bay,
-vendor:dmw-law-group,vendor,Company,DMW Law Group,Company paid or hired by local governments,/profile/vendor/dmw-law-group,,1,82408.14,,visit_pcb,bay,
+vendor:dmw-law-group,vendor,Company,DMW Law Group,Company paid or hired by local governments,/profile/vendor/dmw-law-group,,2,82408.14,,visit_pcb,bay,
 vendor:dominguez-design-build,vendor,Company,"Dominguez Design-Build, Inc.",Company paid or hired by local governments,/public-money/vendors/dominguez-design-build,,7,7619953.89,,county,bay,
 vendor:donnie-s-total-pride-pest-control,vendor,Company,Donnie's Total Pride Pest Control,Company paid or hired by local governments,/profile/vendor/donnie-s-total-pride-pest-control,,1,380.0,,mb_cdc,bay,
 vendor:down-to-earth-outdoor-services,vendor,Company,"Down to Earth Outdoor Services, LLC",Company paid or hired by local governments,/profile/vendor/down-to-earth-outdoor-services,,1,9300.0,,destination_pc,bay,
@@ -16051,7 +16087,7 @@ vendor:fmv-innovations,vendor,Company,FMV Innovations,Company paid or hired by l
 vendor:forgotten-coast-living,vendor,Company,Forgotten Coast Living,Company paid or hired by local governments,/profile/vendor/forgotten-coast-living,,1,300.0,,mb_cdc,bay,
 vendor:forgotten-coast-property-management,vendor,Company,Forgotten Coast Property Management,Company paid or hired by local governments,/profile/vendor/forgotten-coast-property-management,,1,700.0,,mb_cdc,bay,
 vendor:foundation-for-parks-recreation,vendor,Company,Foundation for Parks and Recreation,Company paid or hired by local governments,/profile/vendor/foundation-for-parks-recreation,,1,100000.0,,visit_pcb,bay,
-vendor:fpl,vendor,Company,Florida Power & Light,Company paid or hired by local governments,/public-money/vendors/fpl,Florida Power & Light Company,3,13356565.13,,county,bay,
+vendor:fpl,vendor,Company,Florida Power & Light,Company paid or hired by local governments,/public-money/vendors/fpl,Florida Power & Light Company,4,13356565.13,,county,bay,
 vendor:fpl-northwest-fl,vendor,Company,FPL Northwest FL,Company paid or hired by local governments,/profile/vendor/fpl-northwest-fl,,1,43557.42,,destination_pc,bay,
 vendor:frazer,vendor,Company,Frazer Ltd,Company paid or hired by local governments,/profile/vendor/frazer,,1,584256.98,,county,bay,
 vendor:frontline-insurance,vendor,Company,Frontline Insurance,Company paid or hired by local governments,/profile/vendor/frontline-insurance,,1,25794.82,,destination_pc,bay,
@@ -16249,7 +16285,7 @@ vendor:pavement-technology,vendor,Company,"Pavement Technology, Inc.",Company pa
 vendor:paychex,vendor,Company,Paychex,Company paid or hired by local governments,/profile/vendor/paychex,,1,67827.51,,visit_pcb,bay,
 vendor:paychex-dirdep-rcx,vendor,Company,Paychex DirDep-RCX,Company paid or hired by local governments,/profile/vendor/paychex-dirdep-rcx,,1,1198721.93,,visit_pcb,bay,
 vendor:paychex-taxpay,vendor,Company,Paychex Taxpay,Company paid or hired by local governments,/profile/vendor/paychex-taxpay,,1,403779.36,,visit_pcb,bay,
-vendor:pcb-entertainment,vendor,Company,PCB Entertainment LLC,Company paid or hired by local governments,/public-money/vendors/pcb-entertainment,,3,1250000.0,500.0,visit_pcb,bay,
+vendor:pcb-entertainment,vendor,Company,PCB Entertainment LLC,Company paid or hired by local governments,/public-money/vendors/pcb-entertainment,,4,1250000.0,500.0,visit_pcb,bay,
 vendor:pcb-map,vendor,Company,"PCB Map Company, Inc",Company paid or hired by local governments,/public-money/vendors/pcb-map,PCB Map,2,14770.0,300.0,destination_pc,bay,
 vendor:pcbh,vendor,Company,PCBH,Company paid or hired by local governments,/profile/vendor/pcbh,,1,31882.5,,pcb,bay,
 vendor:peoples-first-insurance-services,vendor,Company,"Peoples First Insurance Services, LLC",Company paid or hired by local governments,/profile/vendor/peoples-first-insurance-services,,1,252.5,,destination_pc,bay,

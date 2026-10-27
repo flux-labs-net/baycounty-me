@@ -3737,7 +3737,7 @@
    "id": "site-updates",
    "title": "What's new",
    "description": "Each change to the site's data and pages, newest first.",
-   "rows": 58,
+   "rows": 59,
    "columns": [
     {
      "name": "date",
@@ -3749,7 +3749,8 @@
       "2026-10-23",
       "2026-10-24",
       "2026-10-25",
-      "2026-10-26"
+      "2026-10-26",
+      "2026-10-27"
      ]
     },
     {
@@ -6575,7 +6576,7 @@
    "id": "entity-profiles",
    "title": "Profiles: people, companies and organizations",
    "description": "Every company, elected official, candidate, nonprofit, nonprofit board member, registered business, committee and government named in BayCounty.me records, one row each, with its profile page and how many documented connections it has. entity_id (kind:key) joins entity-connections. Board members are named as their nonprofits' public filings list them; individual campaign donors are included only when they run a registered business (owner-gifts).",
-   "rows": 16436,
+   "rows": 16472,
    "columns": [
     {
      "name": "entity_id",
@@ -6602,6 +6603,8 @@
       "Business",
       "Business owner",
       "Candidate",
+      "Chamber board member",
+      "Chamber staff",
       "Committee or PAC",
       "Company",
       "Department leader",
@@ -6690,7 +6693,7 @@
    "id": "entity-connections",
    "title": "Connections between people, companies and organizations",
    "description": "Every documented connection between two entities in entity-profiles, totalled per pair and kind: a government paid a payee, an organization gave to an official's or candidate's campaign, an official voted on a company's contracts, a person sits on a nonprofit's board or runs a business, a nonprofit gave a grant, two payees share a project. Each row has its source. Individual campaign donors are included only when they run a registered business (owner-gifts); officials' board seats and businesses are added by the API once checked by hand.",
-   "rows": 19609,
+   "rows": 19716,
    "columns": [
     {
      "name": "link_id",
@@ -6760,7 +6763,8 @@
       "same",
       "served",
       "serves",
-      "voted"
+      "voted",
+      "works"
      ]
     },
     {
@@ -6778,7 +6782,8 @@
       "serves",
       "shares a project or address with",
       "sits on the board of",
-      "voted on contracts with"
+      "voted on contracts with",
+      "works at"
      ]
     },
     {
@@ -7014,7 +7019,7 @@
    "id": "data-sources",
    "title": "Where the data comes from",
    "description": "Every source BayCounty.me takes records from, one row per source: the topic, the government it covers (or state and federal databases), the link, how we get it (automatic fetch, downloaded and read by hand, a state or federal bulk file, or a live lookup), how often, what we take from it, how we process it and the checks we run.",
-   "rows": 114,
+   "rows": 117,
    "columns": [
     {
      "name": "topic",
@@ -7024,6 +7029,7 @@
       "Budgets",
       "Businesses and owners",
       "Campaign money",
+      "Chambers of commerce",
       "Contracts and change orders",
       "Elections",
       "Fees and bills",
@@ -7051,6 +7057,7 @@
       "budgets",
       "businesses",
       "campaign",
+      "chambers",
       "contracts",
       "cra",
       "elections",
@@ -7128,6 +7135,7 @@
      "name": "refresh",
      "type": "string",
      "values": [
+      "As boards change",
       "As minutes are adopted",
       "As needed",
       "As new filings post",
@@ -7163,6 +7171,7 @@
       "Audited financial statements filed with the Florida Auditor General are read for debt (bonds, notes, loans, leases), audit findings and the auditor's opinion.",
       "Awards, change orders and emergency purchases are taken from agenda items and their attached memos and resolutions. An agenda item is a proposal, so where minutes exist the record is checked against them.",
       "Bed tax collections come from the Clerk's monthly reports. Payments by the three tourism agencies come from the Clerk's monthly check registers, read from text PDFs in the Clerk's public records search. State tax rates and history come from EDR.",
+      "Board, staff and program lists are copied by hand from each chamber's website. Upcoming events are read every day from the Panama City Beach Chamber's public calendar feed; the Bay County Chamber's calendar platform turns automated readers away.",
       "CRA spending is read from CRA annual reports, agendas, budgets and audits, one ledger line per payment or project. Tax increment comes from CRA reports, audits and budgets, split between the county and city by millage.",
       "Candidate lists, status and official results come from the Supervisor of Elections. Platforms come from candidates' own sites.",
       "Each government's agenda system is checked every 30 minutes on weekdays (when a notice email arrives) and swept twice a day. Every agenda, packet and minutes file is downloaded and fingerprinted; a changed file is kept as a new version. An AI model reads each new agenda into a list of items using only the agenda's own words (it is told not to guess). The meetings list combines the agenda system with the government's calendar; boards with no calendar get dates from their regular schedule, marked \"expected\".",
@@ -7184,6 +7193,7 @@
      "type": "string",
      "values": [
       "A name match is only a lead: nothing about a person is published until it is checked by hand. Street addresses are never stored or shown.",
+      "Board members are joined to other local filings by first and last name, and to an official only where the chamber names their government post. Organizations are joined to governments, paid companies, nonprofits or one Sunbiz filing with the exact same name.",
       "Each line carries its source and a confidence level; amounts inside a larger total are shown but counted once. Estimates are checked against official county figures.",
       "Each term names its source. Stretches nobody could confirm are marked unconfirmed, not guessed.",
       "Every agency-month matches the register's printed total to the cent. Payments to private individuals are counted, not listed.",
@@ -7209,6 +7219,7 @@
      "name": "page",
      "type": "string",
      "values": [
+      "/chambers",
       "/connections/business-ties",
       "/connections/campaign-gifts",
       "/connections/nonprofits",
@@ -7492,7 +7503,7 @@
    "id": "data-source-sites",
    "title": "Websites our records cite",
    "description": "Every website cited by the records behind BayCounty.me, per topic, with how many distinct documents and pages from it the data links to. Counted from the data files at each build.",
-   "rows": 308,
+   "rows": 312,
    "columns": [
     {
      "name": "website",
@@ -7506,6 +7517,7 @@
       "Budgets",
       "Businesses and owners",
       "Campaign money",
+      "Chambers of commerce",
       "Contracts and change orders",
       "Elections",
       "Fees and bills",
@@ -7531,6 +7543,7 @@
       "budgets",
       "businesses",
       "campaign",
+      "chambers",
       "contracts",
       "cra",
       "elections",
@@ -7567,7 +7580,7 @@
    "id": "site-menu",
    "title": "Site menu",
    "description": "Every link in the site's main menu, one row per link, in English and Spanish: the section and the question it answers, the link's place in the section, and the section's start-here page. place_id is the place the menu belongs to (fl-bay = Bay County), so a menu for another place sits beside it.",
-   "rows": 53,
+   "rows": 54,
    "columns": [
     {
      "name": "place_id",
@@ -8112,6 +8125,568 @@
    "json": "/downloads/cra-increment-checks.json",
    "csv": "/downloads/cra-increment-checks.csv",
    "api": "/api/v1/datasets/cra-increment-checks"
+  },
+  {
+   "id": "chambers",
+   "title": "Chambers of commerce",
+   "description": "One row per chamber of commerce: what it is and who it serves, its board meetings, its latest IRS Form 990 (revenue, expenses, assets, employees), public money paid to it by local governments and tourism agencies (from nonprofit-payments), its foundation, and links to its member directory, events and join page. entity_id is its profile (entity-profiles). Chambers are private, member-owned nonprofits, not government agencies.",
+   "rows": 2,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "chamber_id",
+     "type": "string"
+    },
+    {
+     "name": "name",
+     "type": "string"
+    },
+    {
+     "name": "short_name",
+     "type": "string"
+    },
+    {
+     "name": "legal_name",
+     "type": "string"
+    },
+    {
+     "name": "entity_id",
+     "type": "string"
+    },
+    {
+     "name": "page_url",
+     "type": "string"
+    },
+    {
+     "name": "ein",
+     "type": "string"
+    },
+    {
+     "name": "sunbiz_doc_number",
+     "type": "string",
+     "values": [
+      "N21370"
+     ]
+    },
+    {
+     "name": "tax_status",
+     "type": "string",
+     "values": [
+      "501(c)(6) business league"
+     ]
+    },
+    {
+     "name": "founded",
+     "type": "number"
+    },
+    {
+     "name": "serves",
+     "type": "string"
+    },
+    {
+     "name": "tagline",
+     "type": "string",
+     "values": [
+      "Building a Better Bay"
+     ]
+    },
+    {
+     "name": "about",
+     "type": "string"
+    },
+    {
+     "name": "mission",
+     "type": "string"
+    },
+    {
+     "name": "board_meets",
+     "type": "string",
+     "values": [
+      "The board meets at 11 a.m. on the third Thursday of each month; members are welcome. The executive committee meets at 11 a.m. on the second Thursday; those meetings are closed."
+     ]
+    },
+    {
+     "name": "board_seats",
+     "type": "number"
+    },
+    {
+     "name": "staff_listed",
+     "type": "number"
+    },
+    {
+     "name": "latest_return_year",
+     "type": "number"
+    },
+    {
+     "name": "latest_return_form",
+     "type": "string",
+     "values": [
+      "990"
+     ]
+    },
+    {
+     "name": "revenue",
+     "type": "number"
+    },
+    {
+     "name": "expenses",
+     "type": "number"
+    },
+    {
+     "name": "assets",
+     "type": "number"
+    },
+    {
+     "name": "employees",
+     "type": "number"
+    },
+    {
+     "name": "public_money_total",
+     "type": "number"
+    },
+    {
+     "name": "public_money_from",
+     "type": "string"
+    },
+    {
+     "name": "foundation_name",
+     "type": "string",
+     "values": [
+      "Bay County Chamber Foundation Inc"
+     ]
+    },
+    {
+     "name": "foundation_entity_id",
+     "type": "string",
+     "values": [
+      "nonprofit:np-593479027"
+     ]
+    },
+    {
+     "name": "foundation_revenue",
+     "type": "number"
+    },
+    {
+     "name": "website",
+     "type": "string"
+    },
+    {
+     "name": "events_url",
+     "type": "string"
+    },
+    {
+     "name": "directory_url",
+     "type": "string"
+    },
+    {
+     "name": "join_url",
+     "type": "string"
+    },
+    {
+     "name": "board_url",
+     "type": "string"
+    },
+    {
+     "name": "staff_url",
+     "type": "string"
+    },
+    {
+     "name": "as_of",
+     "type": "string",
+     "values": [
+      "2026-10-27"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/chambers.json",
+   "csv": "/downloads/chambers.csv",
+   "api": "/api/v1/datasets/chambers"
+  },
+  {
+   "id": "chamber-leaders",
+   "title": "Chambers of commerce: boards and staff",
+   "description": "Each chamber's board (executive committee, directors, ex officio and honorary members), staff and past chairs since 2016, as listed on the chamber's own website on as_of: name, title and the organization each board member represents. No phone numbers, emails or addresses. person_entity_id and organization_entity_id link to profiles; person_match and organization_match say how each link was made (blank = no match, shown as plain text).",
+   "rows": 89,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "chamber_id",
+     "type": "string",
+     "values": [
+      "bay-chamber",
+      "pcb-chamber"
+     ]
+    },
+    {
+     "name": "chamber",
+     "type": "string",
+     "values": [
+      "Bay County Chamber",
+      "Beach Chamber"
+     ]
+    },
+    {
+     "name": "chamber_entity_id",
+     "type": "string",
+     "values": [
+      "nonprofit:np-590391375",
+      "nonprofit:np-592857564"
+     ]
+    },
+    {
+     "name": "role_group",
+     "type": "string",
+     "values": [
+      "Board",
+      "Ex officio (non-voting)",
+      "Executive committee",
+      "Honorary",
+      "Past chairs",
+      "Staff"
+     ]
+    },
+    {
+     "name": "sort_order",
+     "type": "number"
+    },
+    {
+     "name": "person_name",
+     "type": "string"
+    },
+    {
+     "name": "title",
+     "type": "string"
+    },
+    {
+     "name": "organization",
+     "type": "string"
+    },
+    {
+     "name": "term_ends",
+     "type": "string",
+     "values": [
+      "2026-12-31",
+      "2027-12-31",
+      "2028-12-31"
+     ]
+    },
+    {
+     "name": "year",
+     "type": "number"
+    },
+    {
+     "name": "current",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "person_entity_id",
+     "type": "string"
+    },
+    {
+     "name": "person_url",
+     "type": "string"
+    },
+    {
+     "name": "person_match",
+     "type": "string",
+     "values": [
+      "official, named with their government post on the chamber site",
+      "same name on a local nonprofit filing"
+     ]
+    },
+    {
+     "name": "organization_entity_id",
+     "type": "string",
+     "values": [
+      "business:132442",
+      "business:j21833",
+      "business:l14000003912",
+      "business:l17000256588",
+      "business:l23000196080",
+      "business:p15000011330",
+      "business:p96000055655",
+      "gov:airport",
+      "gov:destination_pc",
+      "gov:port",
+      "gov:schools",
+      "gov:tax_collector",
+      "gov:visit_pcb",
+      "nonprofit:np-590863698",
+      "nonprofit:np-593250188",
+      "vendor:aaron-rich-marketing",
+      "vendor:cbc",
+      "vendor:dmw-law-group",
+      "vendor:fpl",
+      "vendor:pcb-entertainment"
+     ]
+    },
+    {
+     "name": "organization_url",
+     "type": "string",
+     "values": [
+      "/governments/bay-district-schools",
+      "/profile/business/132442",
+      "/profile/business/j21833",
+      "/profile/business/l14000003912",
+      "/profile/business/l17000256588",
+      "/profile/business/l23000196080",
+      "/profile/business/p15000011330",
+      "/profile/business/p96000055655",
+      "/profile/gov/airport",
+      "/profile/gov/destination_pc",
+      "/profile/gov/port",
+      "/profile/gov/tax_collector",
+      "/profile/gov/visit_pcb",
+      "/profile/nonprofit/np-590863698",
+      "/profile/nonprofit/np-593250188",
+      "/profile/vendor/dmw-law-group",
+      "/public-money/vendors/aaron-rich-marketing",
+      "/public-money/vendors/cbc",
+      "/public-money/vendors/fpl",
+      "/public-money/vendors/pcb-entertainment"
+     ]
+    },
+    {
+     "name": "organization_match",
+     "type": "string",
+     "values": [
+      "Sunbiz filing with the same name",
+      "company paid by a local government",
+      "government",
+      "nonprofit",
+      "set by hand"
+     ]
+    },
+    {
+     "name": "as_of",
+     "type": "string",
+     "values": [
+      "2026-10-27"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://panamacity.org/board-of-directors/",
+      "https://panamacity.org/staff/",
+      "https://pcbeach.org/board-of-directors/",
+      "https://pcbeach.org/chamber-staff/"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/chamber-leaders.json",
+   "csv": "/downloads/chamber-leaders.csv",
+   "api": "/api/v1/datasets/chamber-leaders"
+  },
+  {
+   "id": "chamber-events",
+   "title": "Chambers of commerce: events and programs",
+   "description": "Upcoming events from each chamber's public calendar (kind event: title, start and end in local time, venue and city, category, the event's own link) and each chamber's yearly and monthly signature programs (kind program: schedule and what it is). chamber_event is false for community events a chamber lists on its calendar. Refreshed daily where the calendar has a public feed.",
+   "rows": 59,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "chamber_id",
+     "type": "string",
+     "values": [
+      "bay-chamber",
+      "pcb-chamber"
+     ]
+    },
+    {
+     "name": "chamber",
+     "type": "string",
+     "values": [
+      "Bay County Chamber",
+      "Beach Chamber"
+     ]
+    },
+    {
+     "name": "kind",
+     "type": "string",
+     "values": [
+      "event",
+      "program"
+     ]
+    },
+    {
+     "name": "sort_order",
+     "type": "number"
+    },
+    {
+     "name": "title",
+     "type": "string"
+    },
+    {
+     "name": "schedule",
+     "type": "string",
+     "values": [
+      "December",
+      "Evenings, hosted by a different member business",
+      "February",
+      "First Friday of every month",
+      "May",
+      "Monthly",
+      "Monthly, Friday morning",
+      "Monthly, evenings",
+      "October",
+      "September",
+      "Twice a month (two groups)",
+      "Year-round",
+      "Yearly",
+      "Yearly class"
+     ]
+    },
+    {
+     "name": "about",
+     "type": "string",
+     "values": [
+      "A month of member recognition, networking and events.",
+      "A small-business forum for sharing ideas and connecting.",
+      "Awards and the installation of the new board chair.",
+      "Events recognizing the people and businesses in tourism and hospitality.",
+      "Informal networking for members and guests.",
+      "Leadership program for high school students.",
+      "Marathon and half marathon starting at Pier Park.",
+      "Members-only referral groups, one seat per industry.",
+      "Morning networking with community project updates, Chamber news and a featured speaker.",
+      "Networking evening with the Dino Races.",
+      "Networking hosted by a member business.",
+      "Recognizes Bay County's first responders of the year.",
+      "Shared with the Bay County Chamber.",
+      "Shared with the Beach Chamber: events for military leaders, the Gulf Coast Salute Air Show and change-of-command ceremonies.",
+      "The Beach Chamber's monthly breakfast meeting.",
+      "The Beach Chamber's yearly awards.",
+      "The foundation's months-long leadership program for current and emerging leaders."
+     ]
+    },
+    {
+     "name": "starts",
+     "type": "string"
+    },
+    {
+     "name": "ends",
+     "type": "string"
+    },
+    {
+     "name": "all_day",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "venue",
+     "type": "string"
+    },
+    {
+     "name": "city",
+     "type": "string",
+     "values": [
+      "Dothan",
+      "Lynn Haven",
+      "Panama City",
+      "Panama City Beach",
+      "Seacrest"
+     ]
+    },
+    {
+     "name": "category",
+     "type": "string",
+     "values": [
+      "Chamber Events",
+      "Chamber Events, Community Events",
+      "Community Events",
+      "Signature program"
+     ]
+    },
+    {
+     "name": "chamber_event",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "cost",
+     "type": "string"
+    },
+    {
+     "name": "event_id",
+     "type": "string"
+    },
+    {
+     "name": "url",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://panamacity.org/annual-gala/",
+      "https://panamacity.org/block-party/",
+      "https://panamacity.org/business-after-hours/",
+      "https://panamacity.org/committees/military-affairs-committee/",
+      "https://panamacity.org/first-friday/",
+      "https://panamacity.org/first-responders-appreciation/",
+      "https://panamacity.org/foundation/junior-leadership-bay/",
+      "https://panamacity.org/foundation/leadership-bay/",
+      "https://panamacity.org/membership-appreciation-month/",
+      "https://panamacity.org/tourism-appreciation-month/",
+      "https://pcbeach.org/annualdinner/",
+      "https://pcbeach.org/ideacamp-small-business-committee/",
+      "https://pcbeach.org/leads-group/",
+      "https://pcbeach.org/local-events/",
+      "https://pcbeach.org/local-events/category/chamber-events/",
+      "https://pcbeach.org/military-affairs-committee/",
+      "https://pcbeach.org/panama-city-beach-marathon/"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/chamber-events.json",
+   "csv": "/downloads/chamber-events.csv",
+   "api": "/api/v1/datasets/chamber-events"
   },
   {
    "id": "tax-districts",

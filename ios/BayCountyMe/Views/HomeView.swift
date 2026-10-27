@@ -307,7 +307,7 @@ struct HomeView: View {
             "vendor": .vendor("roberts-and-roberts"), "person": .person("clair-pease"), "explore": .explore,
             "votes": .dataset("votes"), "salaries": .dataset("salary-positions"),
             "accountability": .accountability, "accproject": .accountabilityProject("pcb-fbr-seg3"),
-            "budget": .budgetCompare(govID: "lh"), "craincrement": .craIncrement, "pastelections": .dataset("campaign-history"),
+            "budget": .budgetCompare(govID: "lh"), "craincrement": .craIncrement, "chambers": .chambers, "pastelections": .dataset("campaign-history"),
         ]
         if let r = simple[arg] { path = [r]; return }
         if arg == "tab:search" { path = [.search]; return }

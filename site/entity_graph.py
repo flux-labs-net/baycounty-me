@@ -52,6 +52,7 @@ RELATION = {
     'grant': ('gave a grant to', 'got a grant from'),
     'related': ('shares a project or address with', 'shares a project or address with'),
     'same': ('is the same organization as', 'is the same organization as'),
+    'works': ('works at', 'has on its staff'),
 }
 MAIN_GOVS = None
 _C = {}
@@ -449,6 +450,28 @@ def build():
             continue
         b = business(r['doc_number'], r['business'], 'Registered business' + (f" ({r['business_status'].lower()})" if r.get('business_status') and r['business_status'] != 'Active' else ''), r.get('source_url'))
         G.link(mid, b, 'runs', detail='Matched by ' + (r.get('match') or 'name').lower(), source_url=r.get('source_url'))
+
+    # chambers of commerce: board seats, staff and past chairs from each chamber's own website (chamber-leaders), and the
+    # organization each board member represents there
+    for r in _ds('chamber-leaders'):
+        cid, pid = r['chamber_entity_id'], r['person_entity_id']
+        if cid not in G.ents:
+            continue
+        staff = r['role_group'] == 'Staff'
+        if pid.startswith('member:'):
+            G.ent(pid, ids.person_case(r['person_name']), 'Chamber of commerce ' + ('staff' if staff else 'board member'), None)
+            G.ents[pid]['label'] = G.ents[pid].get('label') or ('Chamber staff' if staff else 'Chamber board member')
+        if pid not in G.ents:
+            continue
+        when = str(r['year']) if r.get('year') else (r.get('as_of') or '')[:4]
+        G.link(pid, cid, 'works' if staff else 'board', None, when,
+               r['title'] + (f" ({r['year']})" if r.get('year') else '' if staff else f" · {r['role_group'].lower()}" if r['role_group'] != 'Board' else ''),
+               r.get('source_url'), key=r['role_group'] + (str(r.get('year')) if r.get('year') else ''))
+        oid = r.get('organization_entity_id')
+        if oid and oid.startswith('business:') and oid not in G.ents:
+            oid = business(oid.split(':', 1)[1], r['organization'])
+        if oid and oid in G.ents and not pid.startswith('person:'):
+            G.link(pid, oid, 'works', None, when, f"Listed with it on the {r['chamber']} board", r.get('source_url'), key='chamber')
 
     # people who run a registered business and gave to a campaign personally (data/campaign/owner_gifts.py)
     for r in _ds('owner-gifts'):

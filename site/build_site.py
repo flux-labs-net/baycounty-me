@@ -21,6 +21,7 @@ from accountability_page import accountability_page
 from correspondence_page import correspondence_page
 from shared_owners_page import shared_owners_page
 from nonprofits_page import nonprofits_page
+from chambers_page import chambers_page
 from business_ties_page import business_ties_page
 from updates import updates_page, rss, last_updated, nice as nice_date
 OUT = os.path.join(ROOT, 'public')
@@ -683,6 +684,8 @@ PAGES = [
      'Groups of Bay County businesses that share an owner or officer in state corporate records and each gave to the same local candidate, checked by hand. People are not named.', lambda: shared_owners_page(OUT)),
     ('/connections/nonprofits', 'Nonprofits in Bay County',
      'Every nonprofit in Bay County: what each reports to the IRS, the government money and grants that reach it, and public officials who sit on its board.', lambda: nonprofits_page(OUT)),
+    ('/chambers', 'Chambers of commerce',
+     "Bay County's two chambers of commerce, the Bay County Chamber and the Panama City Beach Chamber: who sits on their boards and staff, upcoming events and programs, their IRS filings, the public money they get, and board members' businesses that do work for local governments.", lambda: chambers_page(OUT)),
     ('/connections/business-ties', "Officials' businesses",
      'Registered businesses and nonprofits that list a Bay County official, department leader or candidate, checked by hand, and where those businesses meet campaigns and public money.', lambda: business_ties_page(OUT)),
     ('/public-money/accountability', 'Accountability console: projects from budget to close-out',

@@ -9,6 +9,9 @@ from datetime import datetime, timezone
 import html
 
 CHANGES = [
+    {'date': '2026-10-27', 'title': 'Chambers of commerce',
+     'text': "A new page covers Bay County's two chambers of commerce, the Bay County Chamber and the Panama City Beach Chamber: who sits on their boards and staff (each name links to a profile with the person's other boards and records), the organizations those board members represent and what local governments paid them, upcoming chamber and community events, regular programs such as First Friday and Friday at the Beach, each chamber's IRS filings, and the tourism agency money paid to them. Board lists are copied from the chambers' own websites; no contact details are published. The apps have the same screen.",
+     'pages': ['/chambers', '/connections/nonprofits', '/people', '/open-data', '/developers']},
     {'date': '2026-10-26', 'title': 'Where our data comes from',
      'text': "A new page lists every source behind BayCounty.me: each government's agenda system, calendar, minutes, budgets and fee schedules, and every state and federal database we use (Florida Auditor General, Department of Revenue, EDR, Sunbiz, the Supervisor of Elections, IRS filings, OpenFEMA and more). For each one it shows the link, whether we fetch it automatically or read it by hand, how often, what we take and how we check it, plus a count of every website our records cite. A notice at the top of every page also says the data is still being loaded and checked, so some totals may change.",
      'pages': ['/data-sources', '/about', '/open-data']},

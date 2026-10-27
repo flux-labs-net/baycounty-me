@@ -20,6 +20,10 @@
     <lastmod>2026-10-20</lastmod>
   </url>
   <url>
+    <loc>https://baycounty.me/chambers</loc>
+    <lastmod>2026-10-27</lastmod>
+  </url>
+  <url>
     <loc>https://baycounty.me/compare</loc>
     <lastmod>2026-10-25</lastmod>
   </url>
@@ -37,7 +41,7 @@
   </url>
   <url>
     <loc>https://baycounty.me/connections/nonprofits</loc>
-    <lastmod>2026-10-25</lastmod>
+    <lastmod>2026-10-27</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/connections/shared-owners</loc>
@@ -53,7 +57,7 @@
   </url>
   <url>
     <loc>https://baycounty.me/developers</loc>
-    <lastmod>2026-10-25</lastmod>
+    <lastmod>2026-10-27</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/elections</loc>
@@ -192,11 +196,11 @@
   </url>
   <url>
     <loc>https://baycounty.me/open-data</loc>
-    <lastmod>2026-10-26</lastmod>
+    <lastmod>2026-10-27</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/people</loc>
-    <lastmod>2026-10-25</lastmod>
+    <lastmod>2026-10-27</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/people/adrian-welle</loc>
@@ -2192,6 +2196,6 @@
   </url>
   <url>
     <loc>https://baycounty.me/updates</loc>
-    <lastmod>2026-10-26</lastmod>
+    <lastmod>2026-10-27</lastmod>
   </url>
 </urlset>

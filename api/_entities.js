@@ -33,6 +33,7 @@ const RELATION = {
   grant: ['gave a grant to', 'got a grant from'],
   related: ['is connected to', 'is connected to'],
   same: ['is the same organization as', 'is the same organization as'],
+  works: ['works at', 'has on its staff'],
 };
 const KIND_LABEL = {gov: 'Government', vendor: 'Company', person: 'Official or candidate', nonprofit: 'Nonprofit', member: 'Nonprofit board member', owner: 'Business owner',
   business: 'Business', committee: 'Committee or PAC'};

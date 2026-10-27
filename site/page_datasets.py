@@ -250,6 +250,146 @@ def cra_increment_checks():
     return _cra_increment()[2]
 
 
+# --- Chambers of commerce (/chambers) -------------------------------------------------------------------------------------
+
+def _chamber_files():
+    """data/chambers/<county>/chambers.json (hand-copied from each chamber's site) and events.json (fetch_events.py)."""
+    import json
+    from place import PLACE_ID
+    d = os.path.join(HERE, '..', 'data', 'chambers', PLACE_ID.split('-', 1)[-1])
+    if not os.path.exists(os.path.join(d, 'chambers.json')):
+        return None, {'events': []}
+    ev = os.path.join(d, 'events.json')
+    return json.load(open(os.path.join(d, 'chambers.json'))), (json.load(open(ev)) if os.path.exists(ev) else {'events': []})
+
+
+def _member_key(name):
+    """The board-member id the nonprofits build gives this name ('b_' + sha1(county|LAST FIRST|middle), nicknames
+    folded; data/nonprofits/build_nonprofits.py group_key), so a chamber board member and the same person on another
+    nonprofit's IRS filing share one profile."""
+    import hashlib, re, ids
+    s = re.sub(r'\b(dr|mr|mrs|ms|jr|sr|ii|iii|iv)\b\.?', ' ', re.sub(r'\([^)]*\)', ' ', name), flags=re.I)
+    toks = [t for t in re.sub(r'[^A-Za-z ]', '', s.replace('-', ' ')).split() if len(t) > 1]
+    first, last = toks[0].lower(), toks[-1].upper()
+    county = os.environ.get('PLACE', 'fl-bay').split('-', 1)[-1]
+    return 'b_' + hashlib.sha1(f"{county}|{last} {ids.NICK.get(first, first).upper()}|".encode()).hexdigest()[:12]
+
+
+def _sunbiz_names():
+    """Active Bay County Sunbiz filings by normalized name (only names that match one filing)."""
+    import csv, gzip, re
+    from collections import defaultdict
+    p = os.path.join(HERE, '..', 'data', 'sunbiz', 'bay', 'entities.csv.gz')
+    by = defaultdict(set)
+    if os.path.exists(p):
+        for r in csv.DictReader(gzip.open(p, 'rt', encoding='utf-8', errors='replace')):
+            if r.get('status') == 'A':
+                by[_org_norm(r['name'])].add((r['doc_number'], r['name']))
+    return {k: next(iter(v)) for k, v in by.items() if len(v) == 1 and k}
+
+
+def _org_norm(s):
+    import re
+    s = re.sub(r"[.,'’&°]", ' ', (s or '').lower())
+    return ' '.join(w for w in s.split() if w not in ('inc', 'llc', 'co', 'corp', 'corporation', 'company', 'the', 'pa', 'pllc', 'of', 'incorporated'))
+
+
+def _chamber_rows():
+    import ids
+    from entity_graph import page_url
+    C, E = _chamber_files()
+    if not C:
+        return [], [], []
+    from opendata import datasets
+    fn = {d[0]: d[3] for d in datasets()}
+    nps = {n['nonprofit_id']: n for n in fn['nonprofits']()}
+    np_by_name = {_org_norm(n['name']): n['nonprofit_id'] for n in nps.values()}
+    members = {r['person_id'] for r in fn['nonprofit-board-members']()}
+    pay = fn['nonprofit-payments']()
+    sb = _sunbiz_names()
+    place = C['place_id']
+
+    def org_entity(name, explicit=None):
+        """How an organization name links: hand-set id, a government, a company paid by one, a local nonprofit, or one
+        active Sunbiz filing with exactly this name (two or more words, so 'Firefly' doesn't match a stranger)."""
+        if explicit:
+            return explicit, 'set by hand'
+        if not name or name == 'Consultant':
+            return None, None
+        g = ids.gov_id(name)
+        if g:
+            return 'gov:' + g, 'government'
+        v = ids.vendor_id(name)
+        if v:
+            return 'vendor:' + v, 'company paid by a local government'
+        k = _org_norm(name)
+        if k in np_by_name:
+            return 'nonprofit:' + np_by_name[k], 'nonprofit'
+        if len(k.split()) >= 2 and k in sb:
+            return 'business:' + sb[k][0].lower(), 'Sunbiz filing with the same name'
+        return None, None
+
+    chambers, leaders = [], []
+    for c in C['chambers']:
+        n = nps.get(c['nonprofit_id']) or {}
+        f = nps.get(c.get('foundation_id') or '') or {}
+        cp = [p for p in pay if p['nonprofit_id'] == c['nonprofit_id']]
+        rows = C['leaders'].get(c['chamber_id'], [])
+        chambers.append({
+            'place_id': place, 'chamber_id': c['chamber_id'], 'name': c['name'], 'short_name': c['short_name'],
+            'legal_name': ids.biz_case(n.get('name') or c['name']), 'entity_id': 'nonprofit:' + c['nonprofit_id'], 'page_url': page_url('nonprofit:' + c['nonprofit_id']),
+            'ein': n.get('ein'), 'sunbiz_doc_number': n.get('sunbiz_doc_number'), 'tax_status': n.get('subsection'), 'founded': c.get('founded'),
+            'serves': c['serves'], 'tagline': c.get('tagline'), 'about': c['about'], 'mission': (n.get('mission') or '').capitalize() or None,
+            'board_meets': c.get('board_meets'), 'board_seats': sum(1 for r in rows if r['group'] not in ('Staff', 'Past chairs')),
+            'staff_listed': sum(1 for r in rows if r['group'] == 'Staff'),
+            'latest_return_year': n.get('latest_return_year'), 'latest_return_form': n.get('latest_return_form'),
+            'revenue': n.get('total_revenue'), 'expenses': n.get('total_expenses'), 'assets': n.get('total_assets'), 'employees': n.get('employees'),
+            'public_money_total': round(sum(p['amount'] or 0 for p in cp), 2) or None,
+            'public_money_from': '; '.join(dict.fromkeys(p['payer'] for p in cp)) or None,
+            'foundation_name': ids.biz_case(f['name']) if f else None, 'foundation_entity_id': 'nonprofit:' + f['nonprofit_id'] if f else None,
+            'foundation_revenue': f.get('total_revenue') if f else None,
+            'website': c['website'], 'events_url': c['events_url'], 'directory_url': c['directory_url'], 'join_url': c['join_url'],
+            'board_url': c['board_url'], 'staff_url': c['staff_url'], 'as_of': C['as_of'], 'source_url': c['about_url']})
+        for i, r in enumerate(rows):
+            if r.get('person_id'):
+                pid, pmatch = 'person:' + r['person_id'], 'official, named with their government post on the chamber site'
+            else:
+                k = _member_key(r['name'])
+                pid, pmatch = 'member:' + k, ('same name on a local nonprofit filing' if k in members else None)
+            oid, omatch = org_entity(r.get('organization'), r.get('organization_id'))
+            leaders.append({
+                'place_id': place, 'chamber_id': c['chamber_id'], 'chamber': c['short_name'], 'chamber_entity_id': 'nonprofit:' + c['nonprofit_id'],
+                'role_group': r['group'], 'sort_order': i + 1,
+                'person_name': r['name'], 'title': r['title'], 'organization': r.get('organization'), 'term_ends': r.get('term_ends'), 'year': r.get('year'),
+                'current': r['group'] != 'Past chairs', 'person_entity_id': pid, 'person_url': page_url(pid), 'person_match': pmatch,
+                'organization_entity_id': oid, 'organization_url': page_url(oid) if oid else None, 'organization_match': omatch,
+                'as_of': C['as_of'], 'source_url': c['staff_url'] if r['group'] == 'Staff' else c['board_url']})
+    programs = []
+    for c in C['chambers']:
+        for i, p in enumerate(C.get('programs', {}).get(c['chamber_id'], [])):
+            programs.append({'place_id': place, 'chamber_id': c['chamber_id'], 'chamber': c['short_name'], 'kind': 'program', 'sort_order': i + 1,
+                             'title': p['name'], 'schedule': p['schedule'], 'about': p['about'], 'starts': None, 'ends': None, 'all_day': None,
+                             'venue': None, 'city': None, 'category': 'Signature program', 'chamber_event': True, 'cost': None,
+                             'event_id': f"{c['chamber_id']}:program:{i + 1}", 'url': p['url'], 'source_url': p['url']})
+    short = {c['chamber_id']: c['short_name'] for c in C['chambers']}
+    events = [{'place_id': place, 'chamber_id': e['chamber_id'], 'chamber': short.get(e['chamber_id']), 'kind': 'event', 'sort_order': None,
+               'title': e['title'], 'schedule': None, 'about': None, **{k: e.get(k) for k in ('starts', 'ends', 'all_day', 'venue', 'city', 'category', 'chamber_event', 'cost', 'event_id', 'url', 'source_url')}}
+              for e in E['events']]
+    return chambers, leaders, programs + events
+
+
+def chambers():
+    return _chamber_rows()[0]
+
+
+def chamber_leaders():
+    return _chamber_rows()[1]
+
+
+def chamber_events():
+    return _chamber_rows()[2]
+
+
 def tax_districts():
     """Which taxing authorities levy in each tax district (My Address, tax calculator); rates are in property-tax-rates."""
     from addr_page import address_data
@@ -779,5 +919,8 @@ DATASETS = [
     ('cra-agencies', 'CRAs: tax increment by agency', "One row per Community Redevelopment Agency that collects tax increment in Bay County: when it was created, its base year, the FY2025 increment and how much of it Bay County and the city paid, the total on record, its sunset date and what that date rests on, and the increment still to come under a 3%, 6% or 9% growth scenario. sunset_assumed is true where the CRA's plan was not found.", cra_agencies),
     ('cra-tax-increment', 'CRAs: tax increment by year', "Property tax paid to each CRA by fiscal year, split between Bay County and the city by millage. scenario history: basis reported (from CRA reports, audits and budgets) or filled gap (between two reported years). scenario low, mid, high: FY2026 to the CRA's sunset, from adopted budgets where they exist, then 3%, 6% or 9% growth a year (Front Beach Road capped at $30M). Schools and the water management district are exempt and pay nothing.", cra_tax_increment),
     ('cra-increment-checks', 'CRAs: estimate checked against official figures', "Official county figures for CRA payments next to this estimate for the same year, with the difference in percent.", cra_increment_checks),
+    ('chambers', 'Chambers of commerce', "One row per chamber of commerce: what it is and who it serves, its board meetings, its latest IRS Form 990 (revenue, expenses, assets, employees), public money paid to it by local governments and tourism agencies (from nonprofit-payments), its foundation, and links to its member directory, events and join page. entity_id is its profile (entity-profiles). Chambers are private, member-owned nonprofits, not government agencies.", chambers),
+    ('chamber-leaders', 'Chambers of commerce: boards and staff', "Each chamber's board (executive committee, directors, ex officio and honorary members), staff and past chairs since 2016, as listed on the chamber's own website on as_of: name, title and the organization each board member represents. No phone numbers, emails or addresses. person_entity_id and organization_entity_id link to profiles; person_match and organization_match say how each link was made (blank = no match, shown as plain text).", chamber_leaders),
+    ('chamber-events', 'Chambers of commerce: events and programs', "Upcoming events from each chamber's public calendar (kind event: title, start and end in local time, venue and city, category, the event's own link) and each chamber's yearly and monthly signature programs (kind program: schedule and what it is). chamber_event is false for community events a chamber lists on its calendar. Refreshed daily where the calendar has a public feed.", chamber_events),
     ('tax-districts', 'Tax districts', 'Which taxing authorities levy property tax in each tax district, and the combined millage. Rates by year are in property-tax-rates (authority_id).', tax_districts),
 ]

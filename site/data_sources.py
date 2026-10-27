@@ -69,6 +69,9 @@ TOPICS = [
      'Every tax-exempt organization with a county address is pulled from IRS data, with every 990, 990-EZ and 990-PF e-filed since 2019 (board members, pay, grants, revenue). '
      'State charity registrations and state corporate filings are joined in.',
      'Organizations are joined by EIN, then by exact name. Official-to-board matches are checked by hand before they are tagged.'),
+    ('chambers', 'Chambers of commerce', '/chambers',
+     "Board, staff and program lists are copied by hand from each chamber's website. Upcoming events are read every day from the Panama City Beach Chamber's public calendar feed; the Bay County Chamber's calendar platform turns automated readers away.",
+     'Board members are joined to other local filings by first and last name, and to an official only where the chamber names their government post. Organizations are joined to governments, paid companies, nonprofits or one Sunbiz filing with the exact same name.'),
     ('cra', 'Redevelopment agencies (CRAs)', '/public-money/cra-spending',
      'CRA spending is read from CRA annual reports, agendas, budgets and audits, one ledger line per payment or project. '
      'Tax increment comes from CRA reports, audits and budgets, split between the county and city by millage.',
@@ -180,6 +183,9 @@ src('elections', 'state', 'Florida election night results (Bay County)', 'https:
 # --- Businesses and nonprofits ---------------------------------------------------------------------------------------
 src('businesses', 'state', 'Florida Division of Corporations (Sunbiz) quarterly data file', 'https://dos.fl.gov/sunbiz/other-services/data-downloads/', BULK, 'Quarterly', 'Every business with a county address, its officers, managers and registered agents')
 src('businesses', 'state', 'Sunbiz business search', 'https://search.sunbiz.org/', BY_HAND, 'As needed', 'Links to each business\'s state record, used to check matches')
+src('chambers', 'county', 'Bay County Chamber of Commerce website (board, staff and programs)', 'https://panamacity.org/board-of-directors/', BY_HAND, 'As boards change', 'Board, staff and past chairs since 2016 by name, title and organization; regular programs')
+src('chambers', 'county', 'Panama City Beach Chamber of Commerce website (board, staff and programs)', 'https://pcbeach.org/board-of-directors/', BY_HAND, 'As boards change', 'Board and staff by name, title and organization; regular programs')
+src('chambers', 'county', 'Panama City Beach Chamber events calendar feed', 'https://pcbeach.org/local-events/', AUTO_DAILY, 'Daily', 'Upcoming chamber and community events: title, time, venue and link')
 src('nonprofits', 'state', 'IRS exempt organization and 990 data (GivingTuesday 990 data lake)', 'https://990data.givingtuesday.org/', BULK, 'As new filings post', 'Organizations, 990, 990-EZ, 990-PF and 990-N filings since 2019: board members, pay, grants and finances')
 src('nonprofits', 'state', 'ProPublica Nonprofit Explorer', 'https://projects.propublica.org/nonprofits/', BY_HAND, 'As needed', 'Links to each organization\'s filings')
 src('nonprofits', 'state', 'Florida Check-A-Charity (Department of Agriculture and Consumer Services)', 'https://csapp.fdacs.gov/', BULK, 'As needed', 'Charity registrations, reported finances, fundraisers, officers and directors')
@@ -259,7 +265,7 @@ FOLDER_TOPIC = {
     'agendas': 'meetings', 'meetings': 'meetings', 'votes': 'votes', 'contracts': 'contracts', 'budgets': 'budgets',
     'debt_audit': 'audits', 'money': 'audits', 'tax': 'property-tax', 'amendment3': 'property-tax', 'exemptions': 'property-tax',
     'salaries': 'salaries', 'campaign': 'campaign', 'elections': 'elections', 'sunbiz': 'businesses', 'careers': 'businesses',
-    'nonprofits': 'nonprofits', 'cra': 'cra', 'merged.json': 'cra', 'michael': 'michael', 'surtax': 'sales-tax',
+    'nonprofits': 'nonprofits', 'chambers': 'chambers', 'cra': 'cra', 'merged.json': 'cra', 'michael': 'michael', 'surtax': 'sales-tax',
     'tourism': 'tourist-tax', 'fees': 'fees', 'nearby': 'address', 'civic': 'records', 'projects': 'contracts',
 }
 SKIP_HOSTS = {'baycounty.me', 'www.baycounty.me', 'aptg.co'}
