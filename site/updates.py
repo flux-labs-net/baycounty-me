@@ -9,6 +9,9 @@ from datetime import datetime, timezone
 import html
 
 CHANGES = [
+    {'date': '2026-10-27', 'title': 'This week in Bay County, by email',
+     'text': "A new weekly email and page, This week in Bay County, puts the week in one place: events happening around the county, the public meetings on the calendar, and the votes, contracts and change orders that reached BayCounty.me in the past week, with split votes, failed motions, budgets and the biggest contracts first. Every company and official links to their profile. Sign up on the page for one short email on Monday mornings; every email has a one-click unsubscribe.",
+     'pages': ['/this-week', '/alerts', '/events', '/public-money/votes', '/public-money/contracts', '/open-data']},
     {'date': '2026-10-27', 'title': "What's happening in Bay County",
      'text': "The home page now opens its second section with what's happening today and coming soon around the county, and a new Events page lists the next two months in one calendar you can filter by town and kind: city and county events and meetings, library programs, visitor events in Panama City and Mexico Beach, and Panama City Beach Chamber events. Everything is read every morning from each organizer's public calendar, and each title links to the organizer's page. Chamber board and staff photos from the chambers' own websites now appear on the Chambers page. The apps have the same events on their home screens.",
      'pages': ['/', '/events', '/chambers', '/meetings', '/open-data', '/developers']},

@@ -203,6 +203,8 @@ public struct DatasetSpec: Sendable {
                                         date: ["date"], badge: "result", filters: ["result_level", "inspection_type", "city"], page: "restaurants"),
         "new-businesses": .init(.accountability, "storefront", title: ["name"], subtitle: ["filing_type", "city"], detail: "restaurants",
                                 date: ["filed_date"], badge: "status", filters: ["city", "filing_type", "status", "filed_month"], page: "new-businesses"),
+        "weekly-roundup": .init(.more, "envelope", title: ["title"], subtitle: ["government", "town", "venue"], detail: "summary",
+                                amount: ["amount"], date: ["starts", "date"], badge: "section", filters: ["section", "government"], page: "this-week"),
         "nonprofits": .init(.accountability, "heart.text.square", title: ["name"], subtitle: ["kind", "city"], detail: "subsection",
                             amount: ["total_revenue", "irs_revenue"], badge: "latest_return_form", filters: ["kind", "city", "subsection"], page: "connections/nonprofits"),
         "nonprofit-board-members": .init(.accountability, "person.3", title: ["person"], subtitle: ["nonprofit", "titles"], detail: "sources",

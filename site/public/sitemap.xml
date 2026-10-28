@@ -1580,7 +1580,7 @@
   </url>
   <url>
     <loc>https://baycounty.me/public-money/contracts</loc>
-    <lastmod>2026-10-23</lastmod>
+    <lastmod>2026-10-27</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/public-money/cra-spending</loc>
@@ -2225,7 +2225,7 @@
   </url>
   <url>
     <loc>https://baycounty.me/public-money/votes</loc>
-    <lastmod>2026-10-23</lastmod>
+    <lastmod>2026-10-27</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/records-request</loc>
@@ -2249,6 +2249,10 @@
   <url>
     <loc>https://baycounty.me/search</loc>
     <lastmod>2026-10-21</lastmod>
+  </url>
+  <url>
+    <loc>https://baycounty.me/this-week</loc>
+    <lastmod>2026-10-27</lastmod>
   </url>
   <url>
     <loc>https://baycounty.me/updates</loc>

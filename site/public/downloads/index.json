@@ -3739,7 +3739,7 @@
    "id": "site-updates",
    "title": "What's new",
    "description": "Each change to the site's data and pages, newest first.",
-   "rows": 64,
+   "rows": 65,
    "columns": [
     {
      "name": "date",
@@ -7503,7 +7503,7 @@
    "id": "site-menu",
    "title": "Site menu",
    "description": "Every link in the site's main menu, one row per link, in English and Spanish: the section and the question it answers, the link's place in the section, and the section's start-here page. place_id is the place the menu belongs to (fl-bay = Bay County), so a menu for another place sits beside it.",
-   "rows": 71,
+   "rows": 72,
    "columns": [
     {
      "name": "place_id",
@@ -14761,6 +14761,336 @@
    "json": "/downloads/new-businesses.json",
    "csv": "/downloads/new-businesses.csv",
    "api": "/api/v1/datasets/new-businesses"
+  },
+  {
+   "id": "weekly-roundup",
+   "title": "This week in Bay County",
+   "description": "This week's edition of the weekly email and the /this-week page, one row per item: events happening this week (one-off events first; repeating programs and meetings left out), public meetings this week, and votes, contracts and change orders that first appeared on BayCounty.me last week (first_seen; minutes come out weeks after a meeting, so date can be earlier). section is event, meeting, vote, contract or change_order; featured marks what the email shows. people lists who voted no, with profile links. Rebuilt every morning.",
+   "rows": 47,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "week_of",
+     "type": "string",
+     "values": [
+      "2026-10-26"
+     ]
+    },
+    {
+     "name": "section",
+     "type": "string",
+     "values": [
+      "contract",
+      "event",
+      "meeting"
+     ]
+    },
+    {
+     "name": "rank",
+     "type": "number"
+    },
+    {
+     "name": "featured",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "record_id",
+     "type": "string"
+    },
+    {
+     "name": "title",
+     "type": "string"
+    },
+    {
+     "name": "summary",
+     "type": "string",
+     "values": [
+      "Contract 26-57, Military Point automatic backwash filter rehab",
+      "Elgin Pelican mechanical street sweeper for the Front Beach Road CRA",
+      "Pierce Enforcer Ascendant 107-foot ladder aerial fire truck"
+     ]
+    },
+    {
+     "name": "date",
+     "type": "string",
+     "values": [
+      "2026-10-20",
+      "2026-10-22",
+      "2026-10-27",
+      "2026-10-28",
+      "2026-10-29",
+      "2026-10-30",
+      "2026-10-31"
+     ]
+    },
+    {
+     "name": "starts",
+     "type": "string"
+    },
+    {
+     "name": "ends",
+     "type": "string",
+     "values": [
+      "2026-10-27T09:30:00",
+      "2026-10-27T10:30:00",
+      "2026-10-27T11:00:00",
+      "2026-10-27T15:00:00",
+      "2026-10-27T15:30:00",
+      "2026-10-27T17:00:00",
+      "2026-10-27T18:30:00",
+      "2026-10-27T19:00:00",
+      "2026-10-27T20:00:00",
+      "2026-10-28T10:00:00",
+      "2026-10-28T15:00:00",
+      "2026-10-28T17:00:00",
+      "2026-10-28T18:30:00",
+      "2026-10-28T21:00:00",
+      "2026-10-29T10:30:00",
+      "2026-10-29T11:00:00",
+      "2026-10-29T13:00:00",
+      "2026-10-29T17:00:00",
+      "2026-10-29T19:00:00",
+      "2026-10-29T20:00:00",
+      "2026-10-30T11:00:00",
+      "2026-10-30T12:00:00",
+      "2026-10-30T14:00:00",
+      "2026-10-30T16:00:00",
+      "2026-10-30T17:00:00",
+      "2026-10-31T13:00:00",
+      "2026-10-31T16:00:00",
+      "2026-10-31T23:59:59",
+      "2026-11-01T23:59:59"
+     ]
+    },
+    {
+     "name": "all_day",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "pc",
+      "pcb",
+      "schools"
+     ]
+    },
+    {
+     "name": "government",
+     "type": "string",
+     "values": [
+      "Bay County",
+      "Bay District Schools",
+      "Callaway",
+      "Lynn Haven",
+      "Mexico Beach",
+      "Panama City",
+      "Panama City Beach"
+     ]
+    },
+    {
+     "name": "board",
+     "type": "string",
+     "values": [
+      "Bay District School Board",
+      "Callaway City Commission",
+      "Lynn Haven City Commission",
+      "Mexico Beach City Council",
+      "Panama City City Commission"
+     ]
+    },
+    {
+     "name": "town",
+     "type": "string",
+     "values": [
+      "Bay County",
+      "Mexico Beach",
+      "Panama City",
+      "Panama City Beach"
+     ]
+    },
+    {
+     "name": "venue",
+     "type": "string",
+     "values": [
+      "1311 Balboa Ave, Panama City, FL 32401",
+      "Bay County Govt. Center - 840 W. 11th St Panama City FL 32401",
+      "Bay County Public Library",
+      "Callaway Arts & Conference Center - 500 Callaway Park Way Callaway FL 32404",
+      "Dave & Buster’s",
+      "Hammerhead Fred’s",
+      "Panama City Beach Public Library",
+      "Papa Joe’s Bayside",
+      "Parker Park",
+      "PeoplesSouth Bank",
+      "The Sapp House",
+      "Venue not stated on the council meetings page; City of Mexico Beach offices: 201 Paradise Path, Mexico Beach, FL 32456",
+      "Walter T. Kelley Chambers - 825 Ohio Avenue Lynn Haven FL 32444",
+      "Wild Root Coffee & Tea",
+      "ZooWorld"
+     ]
+    },
+    {
+     "name": "category",
+     "type": "string",
+     "values": [
+      "Chamber",
+      "Community",
+      "Library"
+     ]
+    },
+    {
+     "name": "recurring",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "agenda_posted",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "amount",
+     "type": "number"
+    },
+    {
+     "name": "new_total",
+     "type": "string"
+    },
+    {
+     "name": "method",
+     "type": "string",
+     "values": [
+      "Competitive sealed bid (invitation to bid)",
+      "Cooperative purchasing contract (e.g., Sourcewell / FSA / OMNIA / state contract) (Sourcewell)",
+      "Not stated in agenda item"
+     ]
+    },
+    {
+     "name": "outcome",
+     "type": "string"
+    },
+    {
+     "name": "tally",
+     "type": "string"
+    },
+    {
+     "name": "split",
+     "type": "string"
+    },
+    {
+     "name": "voted_no",
+     "type": "string"
+    },
+    {
+     "name": "people",
+     "type": "string"
+    },
+    {
+     "name": "vendor",
+     "type": "string",
+     "values": [
+      "Marshall Brothers",
+      "Sansom Equipment Company, Inc.",
+      "Ten-8 Fire & Safety, LLC"
+     ]
+    },
+    {
+     "name": "vendor_entity_id",
+     "type": "string",
+     "values": [
+      "vendor:marshall-brothers",
+      "vendor:sansom-equipment",
+      "vendor:ten-8"
+     ]
+    },
+    {
+     "name": "vendor_url",
+     "type": "string",
+     "values": [
+      "https://baycounty.me/profile/vendor/sansom-equipment",
+      "https://baycounty.me/public-money/vendors/marshall-brothers",
+      "https://baycounty.me/public-money/vendors/ten-8"
+     ]
+    },
+    {
+     "name": "url",
+     "type": "string"
+    },
+    {
+     "name": "page_url",
+     "type": "string",
+     "values": [
+      "https://baycounty.me/events",
+      "https://baycounty.me/meetings",
+      "https://baycounty.me/public-money/contracts"
+     ]
+    },
+    {
+     "name": "source",
+     "type": "string",
+     "values": [
+      "Bay County",
+      "City of Panama City",
+      "Mexico Beach (visitor events)",
+      "Northwest Regional Library System",
+      "Panama City Beach Chamber"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=5259",
+      "https://lynnhavenfl.portal.civicclerk.com/",
+      "https://mexicobeachfl.gov/government/council-meetings/",
+      "https://pcbeach.org/local-events/",
+      "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&event_id=219",
+      "https://www.bay.k12.fl.us/school-board-meetings",
+      "https://www.baycountyfl.gov/Calendar.aspx",
+      "https://www.cityofcallaway.com/AgendaCenter",
+      "https://www.mexicobeach.com/events/",
+      "https://www.nwrls.com/events",
+      "https://www.panamacity.gov/AgendaCenter",
+      "https://www.panamacity.gov/Calendar.aspx"
+     ]
+    },
+    {
+     "name": "first_seen",
+     "type": "string",
+     "values": [
+      "2026-10-20",
+      "2026-10-22"
+     ]
+    }
+   ],
+   "json": "/downloads/weekly-roundup.json",
+   "csv": "/downloads/weekly-roundup.csv",
+   "api": "/api/v1/datasets/weekly-roundup"
   },
   {
    "id": "tax-districts",

@@ -84,7 +84,7 @@ function pill(t, text) {
 }
 
 // A meeting row with a month/day tile. mon/day are already formatted ("OCT", "28").
-function meeting({mon, day, title, time, agendaUrl, pending}) {
+function meeting({mon, day, title, time, agendaUrl, pending, linkLabel = 'Read the agenda'}) {
   return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td class="bc-ln" style="padding:12px 0;border-bottom:1px solid ${C.line}">` +
     `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>` +
     `<td width="52" valign="top" style="padding-right:14px"><table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr><td class="bc-sk" width="52" align="center" bgcolor="${C.sunken}" style="width:52px;background-color:${C.sunken};border-radius:12px;padding:7px 0 8px 0">` +
@@ -92,7 +92,7 @@ function meeting({mon, day, title, time, agendaUrl, pending}) {
     `<div class="bc-ink" style="font-family:${F};font-size:21px;line-height:24px;font-weight:600;color:${C.ink}">${day}</div></td></tr></table></td>` +
     `<td valign="top"><div class="bc-ink" style="font-family:${F};font-size:15px;line-height:22px;font-weight:600;color:${C.ink}">${title}</div>` +
     (time ? `<div class="bc-mu" style="font-family:${F};font-size:13px;line-height:19px;color:${C.muted};margin-top:2px">${time}</div>` : '') +
-    (agendaUrl ? `<div style="margin-top:7px;font-family:${F};font-size:13px;line-height:18px;font-weight:600">${a(agendaUrl, 'Read the agenda &rarr;')}</div>` : pending ? `<div style="margin-top:7px">${pill('amber', pending)}</div>` : '') +
+    (agendaUrl ? `<div style="margin-top:7px;font-family:${F};font-size:13px;line-height:18px;font-weight:600">${a(agendaUrl, `${linkLabel} &rarr;`)}</div>` : pending ? `<div style="margin-top:7px">${pill('amber', pending)}</div>` : '') +
     `</td></tr></table></td></tr></table>`;
 }
 

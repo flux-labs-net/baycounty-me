@@ -226,6 +226,8 @@ data class DatasetSpec(
                                         date = listOf("date"), badge = "result", filters = listOf("result_level", "inspection_type", "city"), page = "restaurants"),
         "new-businesses" to DatasetSpec(Section.ACCOUNTABILITY, "storefront", title = listOf("name"), subtitle = listOf("filing_type", "city"), detail = "restaurants",
                                 date = listOf("filed_date"), badge = "status", filters = listOf("city", "filing_type", "status", "filed_month"), page = "new-businesses"),
+        "weekly-roundup" to DatasetSpec(Section.MORE, "envelope", title = listOf("title"), subtitle = listOf("government", "town", "venue"), detail = "summary",
+                                amount = listOf("amount"), date = listOf("starts", "date"), badge = "section", filters = listOf("section", "government"), page = "this-week"),
         "nonprofits" to DatasetSpec(Section.ACCOUNTABILITY, "heart.text.square", title = listOf("name"), subtitle = listOf("kind", "city"), detail = "subsection",
                             amount = listOf("total_revenue", "irs_revenue"), badge = "latest_return_form", filters = listOf("kind", "city", "subsection"), page = "connections/nonprofits"),
         "nonprofit-board-members" to DatasetSpec(Section.ACCOUNTABILITY, "person.3", title = listOf("person"), subtitle = listOf("nonprofit", "titles"), detail = "sources",

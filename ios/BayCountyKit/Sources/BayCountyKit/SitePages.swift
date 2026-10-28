@@ -41,6 +41,7 @@ public enum SitePages {
         "/utilities": .native("Utilities and trash day (UtilitiesView, from /api/v1/utilities)"),
         "/restaurants": .dataset("restaurants"),
         "/new-businesses": .dataset("new-businesses"),
+        "/this-week": .web("the weekly email's page with its sign-up form; the events, meetings, votes and contracts in it are on native screens"),
         "/connections/business-ties": .web("confirmed official-to-business matches, read live from /api/v1/datasets/official-businesses and official-business-links"),
         "/correspondence": .web("published letters to officials, read live from /api/v1/correspondence"),
         "/alerts": .web("email alert sign-up; phone alerts are set on the Emergencies screen"),

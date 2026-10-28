@@ -58,6 +58,7 @@ def alerts_page(out_dir):
   <p class="note" style="margin:0">Looking for weather warnings, evacuation orders, shelters or boil-water notices? See <a href="/emergency">Emergencies and alerts</a>, updated every 5 minutes, and <a href="/hurricane-prep">Hurricane prep</a>.</p>
   <div class="al-status" id="alStatus" hidden></div>
   <form class="contact al-form" id="alForm" novalidate>
+    <div class="vf"><span>Countywide</span><label class="al-opt al-week"><input type="checkbox" name="g" value="week"><span><b>This week in Bay County</b>: events, meetings, new votes and contracts across the county (<a href="/this-week">see this week's</a>)</span></label></div>
     <div class="vf"><span>Follow</span><div class="al-grid" role="group" aria-label="Governments to follow">{boxes}</div>
       <button type="button" class="linkbtn al-all" id="alAll">Select all</button></div>
     <label class="cf-f"><span>Email</span><input name="email" type="email" autocomplete="email" required maxlength="200" placeholder="you@example.com"></label>
@@ -86,6 +87,7 @@ def alerts_page(out_dir):
       <p class="cf-note">We'll email you a link to confirm first. Keyword alerts read agenda item titles where the board posts them as text; PDF-only agendas are matched on the meeting title. A match only means a record mentions what you asked about.</p>
     </form></section>
   <section class="tx-sec method"><div class="sec-hd"><h2 id="what">What you'll get</h2></div><ul class="plain">
+    <li><b>This week in Bay County</b> (countywide, Mondays): events happening that week, public meetings, and the votes and contracts added the week before. <a href="/this-week">See this week's</a>.</li>
     <li><b>Weekly, only when there's news.</b> No email in a quiet week.</li>
     <li><b>What's new</b> for each government you follow: votes, contracts, data updates and corrections from the <a href="/updates">change log</a>.</li>
     <li><b>Meetings coming up</b> in the next week, with agenda links when they're posted. See all of them on the <a href="/meetings">meetings page</a>.</li>
@@ -114,7 +116,7 @@ def alerts_page(out_dir):
   f.addEventListener('submit', async e => {{
     e.preventDefault();
     const govs = boxes.filter(b => b.checked).map(b => b.value);
-    if (!govs.length) {{ msg.className = 'cf-msg err'; msg.textContent = 'Pick at least one government.'; return; }}
+    if (!govs.length) {{ msg.className = 'cf-msg err'; msg.textContent = 'Pick the weekly email or at least one government.'; return; }}
     if (!f.email.checkValidity() || !f.email.value) {{ msg.className = 'cf-msg err'; msg.textContent = 'Please enter a valid email address.'; f.email.focus(); return; }}
     btn.disabled = true; msg.className = 'cf-msg'; msg.textContent = 'Sending…';
     try {{

@@ -32,6 +32,7 @@ from elections_hub_page import results_page as election_results_page, voting_pag
 from notices_jobs_page import notices_page, jobs_page
 from utilities_page import utilities_page
 from restaurants_page import restaurants_page, new_businesses_page
+from weekly import this_week_page
 from business_ties_page import business_ties_page
 from updates import updates_page, rss, last_updated, nice as nice_date
 OUT = os.path.join(ROOT, 'public')
@@ -143,7 +144,7 @@ FOOTER = f'''<footer class="site-foot"><div class="site-foot-in">
   <nav class="foot-cols" aria-label="Footer">
     <div><b>Follow the money</b><a href="/public-money/tax-dollars">Tax dollars</a><a href="/governments">Governments</a><a href="/compare">Compare governments</a><a href="/public-money/contracts">Contracts</a></div>
     <div><b>Accountability</b><a href="/public-money/accountability">Accountability console</a><a href="/public-money/votes">How they voted</a><a href="/connections">Connections</a></div>
-    <div><b>Take part</b><a href="/meetings">Meetings</a><a href="/alerts">Email alerts</a><a href="/records-request">Request a record</a><a href="/open-data">Open data &amp; API</a></div>
+    <div><b>Take part</b><a href="/meetings">Meetings</a><a href="/this-week">This week</a><a href="/alerts">Email alerts</a><a href="/records-request">Request a record</a><a href="/open-data">Open data &amp; API</a></div>
   </nav>
   <div class="foot-base">
     <p class="muted foot-links">__UPDATED__<a href="/updates">What's new</a> · <a href="/updates.xml">RSS</a> · <a href="/data-sources">Where our data comes from</a> · <a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/about#contact">Send a correction</a> · <span class="sel">{EMAIL}</span></p>
@@ -702,6 +703,8 @@ PAGES = [
      'Groups of Bay County businesses that share an owner or officer in state corporate records and each gave to the same local candidate, checked by hand. People are not named.', lambda: shared_owners_page(OUT)),
     ('/events', 'Events in Bay County',
      "What's happening around Bay County in the next two months, from public calendars: the county and city calendars, the library system, the visitor bureaus and the chambers. Updated every morning.", lambda: events_page(OUT)),
+    ('/this-week', 'This week in Bay County',
+     "What's happening in Bay County this week, the public meetings on the calendar, and the votes and contracts added last week. The same list goes out by email every Monday.", lambda: this_week_page(OUT)),
     ('/connections/nonprofits', 'Nonprofits in Bay County',
      'Every nonprofit in Bay County: what each reports to the IRS, the government money and grants that reach it, and public officials who sit on its board.', lambda: nonprofits_page(OUT)),
     ('/schools', 'Public schools',
