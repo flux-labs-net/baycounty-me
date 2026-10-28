@@ -8793,7 +8793,7 @@
   {
    "id": "community-events",
    "title": "Community events",
-   "description": "What's happening around the county in the next two months, from public calendars: the county and city calendars, the library system, visitor bureaus and the Panama City Beach Chamber. One row per event date: title, start and end in local time, town, venue name, category (Community, Public meeting, Library, Chamber), recurring for programs listed on two or more dates, and the event's own link. Refreshed daily.",
+   "description": "What's happening around the county in the next two months, from public calendars: the county and city calendars, the library system, visitor bureaus and the Panama City Beach Chamber. One row per event date: title, start and end in local time, town, venue name, category (Community, Public meeting, Library, Chamber), recurring for programs listed on two or more dates, and the event's own link. Refreshed daily. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
    "rows": 175,
    "columns": [
     {
@@ -8928,6 +8928,22 @@
       "https://www.mexicobeach.com/events/",
       "https://www.nwrls.com/events",
       "https://www.panamacity.gov/Calendar.aspx"
+     ]
+    },
+    {
+     "name": "same_as",
+     "type": "string",
+     "values": [
+      "destination-pc:17846:2026-12-12",
+      "panama-city:7568:2026-11-02"
+     ]
+    },
+    {
+     "name": "first_posted",
+     "type": "string",
+     "values": [
+      "2026-11-02T17:00:00",
+      "2026-12-12T17:00:00"
      ]
     },
     {
@@ -12060,7 +12076,7 @@
   {
    "id": "emergency-notices",
    "title": "Emergency notices archive",
-   "description": "Every emergency notice BayCounty.me has recorded for the county, newest first: National Weather Service watches, warnings and advisories, boil-water notices, road closures, water and sewer outages, evacuation orders, shelter openings and storm updates from each government's alert center and news feed, and FL511 state road closures. kind is the topic, status active (live at the last check), ended or lifted. first_seen and last_seen are when BayCounty.me saw it. The live list is /api/v1/emergency.",
+   "description": "Every emergency notice BayCounty.me has recorded for the county, newest first: National Weather Service watches, warnings and advisories, boil-water notices, road closures, water and sewer outages, evacuation orders, shelter openings and storm updates from each government's alert center and news feed, and FL511 state road closures. kind is the topic, status active (live at the last check), ended or lifted. first_seen and last_seen are when BayCounty.me saw it. The live list is /api/v1/emergency. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
    "rows": 16,
    "columns": [
     {
@@ -12300,6 +12316,24 @@
       "https://www.pcbfl.gov/AlertCenter.aspx",
       "https://www.pcbfl.gov/CivicAlerts.aspx?aid=45",
       "https://www.pcbfl.gov/storm"
+     ]
+    },
+    {
+     "name": "same_as",
+     "type": "string",
+     "values": [
+      "alert:county:Activation-Information?activeLiveTab=widgets",
+      "alert:lh:145",
+      "news:pcb:storm"
+     ]
+    },
+    {
+     "name": "first_posted",
+     "type": "string",
+     "values": [
+      "2026-10-07T17:19:52.000Z",
+      "2026-10-08T13:03:43.000Z",
+      "2026-10-23T14:35:50.000Z"
      ]
     }
    ],
@@ -13269,7 +13303,7 @@
   {
    "id": "public-notices",
    "title": "Public notices",
-   "description": "Legal notices published by local governments and public agencies on the county's public notice website: bid and proposal requests, public hearings and ordinances, public meetings and other notices, with the government that posted it (gov_id, blank for agencies that are not one of the county's local governments), the date it was published, the first date it mentions after that (the meeting, hearing or bid due date) and the full text. Court, foreclosure, tax deed, probate and other private notices on the same site are left out. The site keeps 30 days; notices already on file stay as an archive.",
+   "description": "Legal notices published by local governments and public agencies on the county's public notice website: bid and proposal requests, public hearings and ordinances, public meetings and other notices, with the government that posted it (gov_id, blank for agencies that are not one of the county's local governments), the date it was published, the first date it mentions after that (the meeting, hearing or bid due date) and the full text. Court, foreclosure, tax deed, probate and other private notices on the same site are left out. The site keeps 30 days; notices already on file stay as an archive. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
    "rows": 63,
    "columns": [
     {
@@ -13434,6 +13468,21 @@
      "values": [
       "https://publicnoticesbaycountyfl.gov/"
      ]
+    },
+    {
+     "name": "same_as",
+     "type": "string",
+     "values": [
+      "pn:592cfc86f14e",
+      "pn:9c26a1d21bf3"
+     ]
+    },
+    {
+     "name": "first_posted",
+     "type": "string",
+     "values": [
+      "2026-10-08"
+     ]
     }
    ],
    "json": "/downloads/public-notices.json",
@@ -13443,7 +13492,7 @@
   {
    "id": "job-openings",
    "title": "Government job openings",
-   "description": "Open jobs posted by Bay County, Bay District Schools, the cities and the airport on their own job boards, read daily: title, department, job type, pay where posted, posting and closing dates and the link to apply. Jobs whose closing date has passed are left out. first_seen is the first day the job was on file.",
+   "description": "Open jobs posted by Bay County, Bay District Schools, the cities and the airport on their own job boards, read daily: title, department, job type, pay where posted, posting and closing dates and the link to apply. Jobs whose closing date has passed are left out. first_seen is the first day the job was on file. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
    "rows": 111,
    "columns": [
     {
@@ -13609,6 +13658,14 @@
       "https://www.governmentjobs.com/careers/pcgov",
       "https://www.iflybeaches.com/airport-district/employment"
      ]
+    },
+    {
+     "name": "same_as",
+     "type": "string"
+    },
+    {
+     "name": "first_posted",
+     "type": "string"
     }
    ],
    "json": "/downloads/job-openings.json",

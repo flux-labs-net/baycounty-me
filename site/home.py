@@ -161,7 +161,7 @@ def _today():
     flag = now.get('flag_color')
     beach = card('/beaches', 'flag', 'amber', html.escape(f'{flag} beach flag') if flag else 'Beach flags',
                  html.escape(f"{now['rip_current_risk']} rip current risk") if now.get('rip_current_risk') else "Today's flag at each beach")
-    act = [n for n in emergency_notices() if n.get('status') == 'active']
+    act = [n for n in emergency_notices() if n.get('status') == 'active' and not n.get('same_as')]
     kinds = {'weather': 'weather', 'boil-water': 'boil-water', 'evacuation': 'evacuation', 'road': 'road', 'utility': 'utility'}
     if act:
         by = {}
@@ -218,6 +218,7 @@ def home_page():
     short = {'Police / law enforcement': 'police', 'Administration & support': 'administration', 'Parks & recreation': 'parks', 'Fire': 'fire', 'Streets & public works': 'streets'}
     top2 = ', '.join(f'{short.get(n, n.lower())} {M(v)}' for n, v in bd['services'][:2])
     debt_bars = _bars(md['debt'], ['--salmon', '--salmon', '--gold', '--gold', '--bar'])
+    from ui import ico
     data = json.dumps(b, separators=(',', ':'))
     today = _today()
     doors = _doors()
@@ -231,7 +232,11 @@ def home_page():
         <input id="hq" name="q" type="search" placeholder="Enter your address" autocomplete="street-address">
         <button type="submit">Look up</button>
       </form>
-      <p class="h-addr-note">One page for your address: tax bill, trash day, zoned schools, evacuation zone, meetings and who represents you.</p>
+      <p class="h-addr-note" id="hAddrNote">One page for your address: tax bill, trash day, zoned schools, evacuation zone, meetings and who represents you.</p>
+      <div class="h-mine" id="hMine" hidden>
+        <a class="h-mine-main" id="hMineLink" href="/my-address/">{ico('home', 'blue')}<span class="h-mine-t"><span class="h-mine-k">Your home</span><b id="hMineAddr"></b><span id="hMineSub"></span></span><span class="h-mine-go">Open<span class="ico i-arrow" aria-hidden="true"></span></span></a>
+        <p class="h-mine-more"><a href="/account">My home: what's happening nearby</a><button type="button" id="hMineOther">Look up another address</button></p>
+      </div>
     </div>
     <div class="h-today" aria-labelledby="htd">
       <h2 class="eyebrow mute" id="htd">Today in {html.escape(NAME)}</h2>

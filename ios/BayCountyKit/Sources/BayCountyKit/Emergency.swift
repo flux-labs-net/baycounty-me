@@ -92,7 +92,7 @@ public enum Emergency {
 
     /// When the live feed can't be reached: the active notices from the last daily archive, and the dataset shelters.
     public static func offlineFeed(notices: [Row], shelters: [Row], zones: [Row]) -> Feed {
-        let active = sorted(notices.filter { $0.string("status") == "active" })
+        let active = sorted(notices.filter { $0.string("status") == "active" && ($0.string("same_as") ?? "").isEmpty })
         let sh = shelters.map { r -> Row in
             var v = r.values
             if v["type"] == nil { v["type"] = r["shelter_type"] }
@@ -276,6 +276,16 @@ public enum Emergency {
     }
 
     /// "Oct 27, 2:05 PM" in Central time.
+    /// The time line on a notice card: "Oct 23, 9:42 AM", or "Posted Oct 22, 3:10 PM · Updated Oct 23, 9:42 AM" for a notice
+    /// posted again with changes (first_posted from the live feed or the emergency-notices dataset; same as the site).
+    public static func posted(_ n: Row) -> String {
+        let issued = n.string("issued") ?? ""
+        if let first = n.string("first_posted"), !first.isEmpty, !issued.isEmpty, first < issued {
+            return "Posted \(when(first)) · Updated \(when(issued))"
+        }
+        return when(issued)
+    }
+
     public static func when(_ s: String?) -> String {
         guard let s, let d = parseISO(s) else { return "" }
         let f = DateFormatter(); f.locale = Locale(identifier: "en_US_POSIX"); f.timeZone = TimeZone(identifier: "America/Chicago")

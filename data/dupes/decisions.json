@@ -1,0 +1,5 @@
+{
+ "about": "Admin calls on repeated posts (the same notice, event or job listed twice) from /admin > Name matches. confirmed: one post; rejected: keep apart. Read by data/dupes.py and api/_dupes.js. Written by data/entities/export_name_decisions.py.",
+ "confirmed": [],
+ "rejected": []
+}

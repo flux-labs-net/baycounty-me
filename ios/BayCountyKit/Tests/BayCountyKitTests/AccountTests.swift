@@ -63,4 +63,15 @@ final class AccountTests: XCTestCase {
         XCTAssertEqual(r.httpMethod, "POST")
         XCTAssertNil(AccountClient.request(action: "me", token: nil, body: nil).value(forHTTPHeaderField: "Authorization"))
     }
+
+    func testSavedHomeBecomesThePhonesAddress() throws {
+        let j = #"{"user":{"email":"a@b.co"},"home":{"label":"Home","address":"1200 Beck Ave #4b 32401","city":"Panama City","zip":"32401","parcel_id":"12345-000-000","lat":30.17,"lon":-85.67,"gov_id":"pc","zone":"A"}}"#
+        let m = try XCTUnwrap(AccountMe.decode(Data(j.utf8)).home).addressMatch
+        XCTAssertEqual(m.address, "1200 BECK AVE"); XCTAssertEqual(m.unit, "4B"); XCTAssertEqual(m.zip, "32401")
+        XCTAssertEqual(m.renum, "12345-000-000"); XCTAssertEqual(m.community, "Panama City")
+        XCTAssertEqual(m.point, GeoPoint(x: -85.67, y: 30.17)); XCTAssertEqual(m.display, "1200 Beck Ave #4B")
+        let plain = #"{"user":{"email":"a@b.co"},"home":{"address":"825 Ohio Ave","zip":"32444","lat":30.24,"lon":-85.64}}"#
+        let p = try XCTUnwrap(AccountMe.decode(Data(plain.utf8)).home).addressMatch
+        XCTAssertEqual(p.address, "825 OHIO AVE"); XCTAssertNil(p.unit); XCTAssertNil(p.renum)
+    }
 }

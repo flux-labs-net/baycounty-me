@@ -249,7 +249,7 @@ async function route(req, res, action, me) {
       await audit(me.e, action, null, r);
       return r;
     }
-    case 'names': return require('./_name_matches').list({status: Q.status == null ? 'unreviewed' : String(Q.status), reason: String(Q.reason || ''), q: String(Q.q || '')});
+    case 'names': return require('./_name_matches').list({status: Q.status == null ? 'unreviewed' : String(Q.status), reason: String(Q.reason || ''), q: String(Q.q || ''), kind: String(Q.kind || 'name')});
     case 'names_review': {
       if (req.method !== 'POST') throw Object.assign(new Error('Use POST.'), {status: 405});
       const r = await require('./_name_matches').review(body, me.e);

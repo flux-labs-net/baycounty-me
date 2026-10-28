@@ -27,3 +27,20 @@
   range.addEventListener('input', () => { value = +range.value; draw(); });
   draw();
 })();
+
+// Signed in with a saved home (the bcm_in cookie; the home comes from /api/account?action=me): the home takes the
+// address box's place and opens its address page. Signed-out visitors and accounts without a home keep the box.
+(async () => {
+  const box = document.getElementById('hMine');
+  if (!box || !/(?:^|; )bcm_in=1/.test(document.cookie)) return;
+  let me;
+  try { const r = await fetch('/api/account?action=me', {credentials: 'same-origin'}); if (!r.ok) return; me = await r.json(); } catch (e) { return; }
+  const $ = id => document.getElementById(id), form = document.querySelector('.h-addr'), note = $('hAddrNote'), h = me && me.home;
+  if (!h) { note.innerHTML = 'Save your home on <a href="/account">My home</a> and it will be here next time, with what’s happening nearby.'; return; }
+  $('hMineAddr').textContent = String(h.address).replace(/\s+\d{5}(-\d{4})?$/, '');
+  $('hMineSub').textContent = [[h.city, h.zip].filter(Boolean).join(' '), h.zone ? `Evacuation zone ${h.zone}` : ''].filter(Boolean).join(' · ');
+  $('hMineLink').href = window.BCHomeLink(h);
+  $('hMineLink').setAttribute('aria-label', `Your home, ${$('hMineAddr').textContent}: tax bill, trash day, schools and more`);
+  form.hidden = true; note.hidden = true; box.hidden = false;
+  $('hMineOther').addEventListener('click', () => { form.hidden = false; note.hidden = false; $('hMineOther').hidden = true; $('hq').focus(); });
+})();

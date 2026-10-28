@@ -12,6 +12,7 @@ import datetime as dt, functools, json, os, re, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(HERE, '..', 'data')
 sys.path.insert(0, os.path.join(DATA, 'entities'))
+sys.path.insert(0, DATA)  # data/dupes.py
 
 
 def _place():
@@ -257,9 +258,15 @@ def public_notices():
     if not N:
         return []
     place = _place()
-    return [{'place_id': place, **{k: n.get(k) for k in ('notice_id', 'published', 'gov_id', 'agency', 'kind', 'kind_label', 'title', 'event_date',
+    rows = [{'place_id': place, **{k: n.get(k) for k in ('notice_id', 'published', 'gov_id', 'agency', 'kind', 'kind_label', 'title', 'event_date',
                                                        'notice_type', 'text', 'pdf_url', 'publication', 'source_url')}}
             for n in N['notices'] if (n.get('published') or '0') >= '2016']
+    # Legal notices often run on several days. Same agency, published within 3 weeks, same text and the same numbers
+    # (parcel, ordinance, bid) = one notice: the newest is kept, the others get same_as (data/dupes.py).
+    import dupes
+    items = [{'id': r['notice_id'], 'group': r['agency'] or r['gov_id'], 'when': r['published'], 'title': r['title'], 'body': r['text'],
+              'source': r['agency'], 'url': r['pdf_url'] or r['source_url']} for r in rows]
+    return dupes.mark(rows, dupes.find(items, window_hours=21 * 24, strict_numbers=True, decisions=dupes.load_decisions(), feed='notices'), 'notice_id', 'published')
 
 
 def notices_info():
@@ -309,7 +316,11 @@ def job_openings():
                     'employer': j['employer'], 'title': _tcase(j['title']), 'department': _tcase(j.get('department')), 'job_type': j.get('job_type'),
                     'pay': j.get('pay'), 'posted': j.get('posted'), 'closes': j.get('closes'), 'ref': j.get('ref'), 'url': url or None,
                     'first_seen': j.get('first_seen'), 'source_url': boards.get(j['board'], {}).get('url')})
-    return out
+    # The same opening posted twice on one board (no requisition numbers, or the same one), within 30 days: newest kept.
+    import dupes
+    items = [{'id': r['job_id'], 'group': r['board'], 'when': r['posted'] or r['first_seen'], 'title': r['title'], 'ref': r['ref'],
+              'source': r['employer'], 'url': r['url']} for r in out]
+    return dupes.mark(out, dupes.find(items, window_hours=30 * 24, decisions=dupes.load_decisions(), feed='jobs'), 'job_id', 'posted')
 
 
 def job_boards():
@@ -319,6 +330,8 @@ def job_boards():
     place = _place()
     counts = {}
     for j in job_openings():
+        if j.get('same_as'):
+            continue
         counts[j['board']] = counts.get(j['board'], 0) + 1
     return [{'place_id': place, 'board': b['key'], 'gov_id': b.get('gov_id'), 'employer': b['employer'], 'url': b['url'], 'read': b['read'],
              'openings': counts.get(b['key'], 0) if b['read'] else None, 'note': b.get('note'), 'checked': J.get('as_of', '')[:10] or None}

@@ -107,7 +107,7 @@ window.NJ = {one: 'notice', many: 'notices', kindOf: r => r.k, text: r => [r.t, 
     const who = r.g && D.gh[r.g] ? `<a href="${esc(D.gh[r.g])}">${esc(r.a)}</a>` : esc(r.a || 'Other agency');
     return `<article class="nj-item"><span class="ui-date" aria-hidden="true"><span class="mo">${mo}</span><span class="d">${d.getDate()}</span><span class="wd">${wd}</span></span><div class="nj-body">
       <h3>${r.pdf ? `<a href="${esc(r.pdf)}" target="_blank" rel="noopener">${esc(r.t)}</a>` : esc(r.t)}</h3>
-      <div class="nj-meta"><span class="nj-pill ${esc(r.k)}">${esc(D.kinds[r.k])}</span><span>${who}</span>${ev ? `<span>${evLab}: <b>${esc(ev)}</b></span>` : ''}<span>Published ${esc(d.toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'}))}${r.np ? ' in ' + esc(r.np) : ''}</span></div>
+      <div class="nj-meta"><span class="nj-pill ${esc(r.k)}">${esc(D.kinds[r.k])}</span><span>${who}</span>${ev ? `<span>${evLab}: <b>${esc(ev)}</b></span>` : ''}<span>${r.fp && r.fp < r.p ? `First published ${esc(new Date(r.fp + 'T12:00:00').toLocaleDateString('en-US', {month: 'short', day: 'numeric'}))}, again ` : 'Published '}${esc(d.toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'}))}${r.np ? ' in ' + esc(r.np) : ''}</span></div>
       <details><summary>Read the notice</summary><p>${esc(r.x)}</p></details></div></article>`;
   }};
 """
@@ -136,13 +136,14 @@ def notices_page():
     from page_datasets import public_notices
     from civic_data import notices_info
     rows, info = public_notices(), notices_info()
+    rows = [r for r in rows if not r.get('same_as')]  # a notice published on several days shows once (data/dupes.py)
     if not rows:
         return '<div class="page"><h1>Public notices</h1><p>No notices on file for this place yet.</p></div>'
     govs = _govs()
     today = dt.date.today().isoformat()
     kinds = {'bid': 'Bid or proposal', 'hearing': 'Public hearing', 'meeting': 'Meeting', 'other': 'Other notice'}
     data = {'gh': _gov_hrefs(), 'kinds': kinds, 'rows': [{'p': r['published'], 'g': r['gov_id'], 'a': r['agency'], 'k': r['kind'], 't': r['title'], 'ev': r['event_date'],
-                                      'x': r['text'], 'pdf': r['pdf_url'], 'np': r['publication']} for r in rows]}
+                                      'x': r['text'], 'pdf': r['pdf_url'], 'np': r['publication'], 'fp': r.get('first_posted')} for r in rows]}
     open_bids = sum(1 for r in rows if r['kind'] == 'bid' and (r['event_date'] or '') >= today)
     hearings = sum(1 for r in rows if r['kind'] == 'hearing' and (r['event_date'] or '') >= today)
     n_gov = len({r['gov_id'] or r['agency'] for r in rows})
@@ -182,6 +183,7 @@ def jobs_page():
     from page_datasets import job_openings, job_boards
     from civic_data import jobs_info
     rows, boards, info = job_openings(), job_boards(), jobs_info()
+    rows = [r for r in rows if not r.get('same_as')]  # one opening posted twice shows once (data/dupes.py)
     if not boards:
         return '<div class="page"><h1>Government jobs</h1><p>No job boards on file for this place yet.</p></div>'
     govs = _govs()

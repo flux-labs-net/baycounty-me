@@ -94,6 +94,16 @@ window.BCM_CITIES=[{"k":"county","s":"Bay County","slug":"bay-county","kind":"co
 window.BC = Object.assign(window.BC || {}, window.BCNames);
 (() => {
   if (/(?:^|; )bcm_in=1/.test(document.cookie)) document.documentElement.classList.add('signed-in');
+  // The address page for a saved home (My home, the homepage): street, unit and ZIP, with the point as a fallback. In the
+  // hash, so the address isn't sent to the server with the page request.
+  window.BCHomeLink = h => {
+    const m = /^(.*?)(?:\s*#\s*(\S+))?$/.exec(String(h.address || '').replace(/\s+\d{5}(-\d{4})?$/, '').trim());
+    const p = new URLSearchParams({a: m[1].toUpperCase()});
+    if (m[2]) p.set('u', m[2].toUpperCase());
+    if (h.zip) p.set('z', String(h.zip).slice(0, 5));
+    if (h.lat != null && h.lon != null) { p.set('lat', (+h.lat).toFixed(6)); p.set('lon', (+h.lon).toFixed(6)); }
+    return '/my-address/#' + p;
+  };
   const root = document.documentElement, tb = document.getElementById('themeBtn');
   const I = window.BCM_I18N || {}, NAMES = I.theme || {system: 'System', light: 'Light', dark: 'Dark'}, NEXT = {system: 'light', light: 'dark', dark: 'system'};
   const current = () => root.getAttribute('data-theme') || 'system';

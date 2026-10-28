@@ -26,6 +26,7 @@ import androidx.compose.runtime.saveable.rememberSaveableStateHolder
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.platform.LocalContext
 import me.baycounty.app.screens.*
 import me.baycounty.app.ui.*
 
@@ -67,6 +68,15 @@ fun AppRoot(store: AppStore, screen: String? = null, nav: Nav = remember { Nav()
         store.loadEssentials()
     }
     LaunchedEffect(screen) { if (screen != null) openScreenshotRoute(store, nav, screen) }
+    // Signed in: the account's saved home is the phone's address too (Today card, tax bill, trash day), so it follows
+    // the resident to any phone. Signing out leaves the phone's address as it was.
+    val context = LocalContext.current
+    LaunchedEffect(Unit) { Account.load(context); if (Account.signedIn && Account.me == null) Account.refresh(context) }
+    val accountHome = Account.me?.home
+    LaunchedEffect(accountHome) {
+        val m = accountHome?.addressMatch ?: return@LaunchedEffect
+        if (store.home?.id != m.id || store.home?.point != m.point) store.saveHome(m)
+    }
     CompositionLocalProvider(LocalStore provides store, LocalNav provides nav) {
         BackHandler(enabled = nav.stack().isNotEmpty() || nav.tab != Tab.HOME) {
             if (!nav.pop()) nav.tab = Tab.HOME

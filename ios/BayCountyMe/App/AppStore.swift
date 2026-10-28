@@ -1,5 +1,6 @@
 import Foundation
 import Observation
+import UIKit
 import BayCountyKit
 
 /// App-wide state: the catalog, governments, meetings, any dataset rows loaded so far, and the site's /data/app files.
@@ -98,7 +99,9 @@ final class AppStore {
         guard force || rows[id] == nil, !loading.contains(id) else { return }
         loading.insert(id); defer { loading.remove(id) }
         do {
-            let (r, f) = try await client.rows(datasetID: id)
+            let (all, f) = try await client.rows(datasetID: id)
+            // A row with same_as is a post listed twice (a re-posted alert, one event on two calendars); its kept row stands for it.
+            let r = all.filter { ($0.string("same_as") ?? "").isEmpty }
             rows[id] = r
             searchIndex[id] = Dictionary(uniqueKeysWithValues: r.map { ($0.id, $0.searchText) })
             freshness[id] = f; errors[id] = nil
@@ -165,7 +168,12 @@ final class AppStore {
         }
     }
 
-    func open(_ url: URL?) { presentedPage = url.map(PresentedPage.init(url:)) }
+    /// Web pages open in the in-app browser; map/directions, phone and email links open their own app (Maps, Phone, Mail).
+    func open(_ url: URL?) {
+        guard let url else { return }
+        if ExternalLinks.opensOutsideApp(url) { UIApplication.shared.open(url); return }
+        presentedPage = PresentedPage(url: url)
+    }
     func openSite(_ path: String) { open(URL(string: "https://baycounty.me" + (path.hasPrefix("/") ? path : "/" + path))) }
     func explain(_ termID: String) { presentedTerm = term(termID) }
 }
