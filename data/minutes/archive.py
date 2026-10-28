@@ -268,7 +268,8 @@ def schools(first, last):
 PCB_VIEW = "https://pcbgov.granicus.com/ViewPublisher.php?view_id=1"
 
 
-def parse_granicus(page):
+def granicus_rows(page):
+    """Council meetings in the Granicus list (no network): {date, name, minutes url or None, agenda url or None}."""
     out = []
     for row in re.findall(r'<tr class="listingRow".*?</tr>', page, re.S):
         nm = re.search(r'headers="Name"[^>]*>(.*?)</td>', row, re.S)
@@ -277,16 +278,116 @@ def parse_granicus(page):
             continue
         dm = re.search(r'headers="Date[^"]*"[^>]*>(.*?)</td>', row, re.S)
         d = fm.parse_date_text(fm.clean(dm.group(1)).split(" - ")[0]) if dm else None
-        mm = re.search(r'href="([^"]*MinutesViewer\.php[^"]*)"', row)
-        if not (d and mm):
+        if not d:
             continue
-        url = urllib.parse.urljoin("https://pcbgov.granicus.com/", html.unescape(mm.group(1)))
-        out.append({"date": d, "url": url, "board": "pcb", "title": name, "fetch": None, "source": "pcb"})
+        link = lambda kind: (lambda m: urllib.parse.urljoin("https://pcbgov.granicus.com/", html.unescape(m.group(1))) if m else None)(
+            re.search(r'href="([^"]*%s\.php[^"]*)"' % kind, row))
+        out.append({"date": d, "name": name, "minutes": link("MinutesViewer"), "agenda": link("AgendaViewer")})
     return out
 
 
+def parse_granicus(page):
+    return [{"date": r["date"], "url": r["minutes"], "board": "pcb", "title": r["name"], "fetch": None, "source": "pcb"}
+            for r in granicus_rows(page) if r["minutes"]]
+
+
+# Most 2022 to early-2024 council meetings have no minutes in Granicus. Their draft minutes are attached to the next
+# meeting's agenda ("Approval of minutes"), and the agenda PDF links each attachment. The files are Legistar
+# attachments named like "01.13.2022.Council_Meeting_Minutes.draft.pdf".
+LEGISTAR_LINK = re.compile(rb"/URI\s*\((https?://[^)]*?/attachment/pdf/(\d+)/([^)/]+))\)")
+DRAFT_LOOKAHEAD = 3   # agendas of the next few council meetings checked for one meeting's draft minutes
+
+
+def minutes_date(filename):
+    """'01.13.2022.Council_Meeting_Minutes.draft.pdf' / '7.27.23 Council Minutes' -> date, or None."""
+    m = re.search(r"(?<!\d)(\d{1,2})[._-](\d{1,2})[._-](\d{4}|\d{2})(?!\d)", filename)
+    if not m:
+        return None
+    mo, d, y = int(m.group(1)), int(m.group(2)), int(m.group(3))
+    y += 2000 if y < 100 else 0
+    try:
+        return dt.date(y, mo, d)
+    except ValueError:
+        return None
+
+
+def agenda_minutes_links(pdf):
+    """Agenda PDF bytes -> [(date, download url, file name)] for each minutes attachment it links (no network)."""
+    out = []
+    for _, att_id, name in LEGISTAR_LINK.findall(pdf):
+        name = urllib.parse.unquote(name.decode("latin-1"))
+        if not re.search(r"minute", name, re.I) or re.search(r"planning|board of adjustment|magistrate", name, re.I):
+            continue
+        d = minutes_date(name)
+        if d:
+            # the S3 link answers with a redirect page; Granicus serves the file itself
+            out.append((d, "https://pcbgov.granicus.com/services/legistar/download/pdf/%s/%s" % (att_id.decode(), urllib.parse.quote(name)), name))
+    return out
+
+
+class _NoRedirect(urllib.request.HTTPRedirectHandler):
+    def redirect_request(self, *a, **k):
+        return None
+
+
+def granicus_agenda(url):
+    """AgendaViewer link -> agenda PDF bytes. It redirects to an S3 bucket whose name has underscores, which fails the
+    certificate check as a host name, so the file is fetched path-style instead."""
+    req = urllib.request.Request(url, headers={"User-Agent": BROWSER_UA})
+    try:
+        with urllib.request.build_opener(_NoRedirect).open(req, timeout=60) as r:
+            return r.read()
+    except urllib.error.HTTPError as e:
+        loc = e.headers.get("Location") if 300 <= e.code < 400 else None
+        if not loc:
+            raise
+    u = urllib.parse.urlsplit(loc)
+    m = re.match(r"^(.+)\.s3\.amazonaws\.com$", u.netloc)
+    if m and "_" in m.group(1):
+        loc = "https://s3.amazonaws.com/%s%s" % (m.group(1), u.path)
+    return _req(loc, timeout=60)[0]
+
+
+def pcb_drafts(rows, first, last, get=None):
+    """Draft minutes, from later agendas, for council meetings in [first, last] with no minutes in Granicus. The
+    agendas checked are the next DRAFT_LOOKAHEAD council agendas after each meeting without minutes; every council
+    minutes file they link for a date with no minutes is taken (special meetings missing from Granicus included)."""
+    get = get or granicus_agenda
+    rows = sorted(rows, key=lambda r: r["date"])
+    have = {r["date"] for r in rows if r["minutes"]}
+    agendas = []
+    for i, r in enumerate(rows):
+        if r["minutes"] or r["date"] in have or not (max(first, FIRST_YEAR) <= r["date"].year <= last):
+            continue
+        for nxt in [x for x in rows[i + 1:] if x["date"] > r["date"] and x["agenda"]][:DRAFT_LOOKAHEAD]:
+            if nxt not in agendas:
+                agendas.append(nxt)
+    out, seen = [], set()
+    for a in agendas:
+        try:
+            links = agenda_minutes_links(get(a["agenda"]))
+        except Exception:
+            continue
+        for d, u, n in links:
+            key = (d, re.sub(r"[^a-z]", "", n.lower().replace("draft", "")))
+            if d in have or key in seen or d >= a["date"] or not (max(first, FIRST_YEAR) <= d.year <= last):
+                continue
+            seen.add(key)
+            kind = "special meeting" if re.search(r"special", n, re.I) else "workshop" if re.search(r"workshop", n, re.I) else "meeting"
+            out.append({"date": d, "url": u, "board": "pcb", "fetch": None, "source": "pcb",
+                        "title": "City Council %s draft minutes (in the %s agenda)" % (kind, a["date"].strftime("%b %-d, %Y"))})
+    return sorted(out, key=lambda r: r["date"])
+
+
 def pcb(first, last):
-    return [r for r in parse_granicus(_text(PCB_VIEW)) if max(first, FIRST_YEAR) <= r["date"].year <= last]
+    rows = granicus_rows(_text(PCB_VIEW))
+    got = [r for r in parse_granicus_rows(rows) if max(first, FIRST_YEAR) <= r["date"].year <= last]
+    return got + pcb_drafts(rows, first, last)
+
+
+def parse_granicus_rows(rows):
+    return [{"date": r["date"], "url": r["minutes"], "board": "pcb", "title": r["name"], "fetch": None, "source": "pcb"}
+            for r in rows if r["minutes"]]
 
 
 # ---------------------------------------------------------------------------------------------------------------

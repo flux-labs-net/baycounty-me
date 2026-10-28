@@ -170,7 +170,9 @@ def parse_tally(text):
 def member_votes(motion, meeting, board, date, data=None):
     """-> (votes {canonical name: yes|no|abstain|absent}, method, problems [str], unmatched [printed names])."""
     seats = roster(board, date, data)
-    names = [s["name"] for s in seats]
+    # one entry per person: someone moving seats (Callaway's Pelletier, ward to mayor) or a term with approximate dates
+    # can list a name twice, and two equal entries would make every match a tie
+    names = list(dict.fromkeys(s["name"] for s in seats))
     allnames = everyone(board, data)
     problems, unmatched = [], []
 
@@ -227,7 +229,8 @@ def checks(motion, votes, method, board, date, problems, unmatched, data=None, d
     out = list(problems)
     if unmatched:
         out.append("unmatched_name")
-    seats = roster(board, date, data)
+    # seats, not roster entries: approximate term dates can put a seat's outgoing and incoming holder both on the list
+    seats = {s["seat"] for s in roster(board, date, data)}
     y = sum(1 for v in votes.values() if v == "yes")
     n = sum(1 for v in votes.values() if v == "no")
     t = parse_tally(motion.get("tally_text"))

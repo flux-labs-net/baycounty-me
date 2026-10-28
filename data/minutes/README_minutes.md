@@ -32,7 +32,7 @@ spend and the estimated cost to finish.
 | Panama City + CRA | AgendaCenter year search | 2016 | 2016-2019 files are scans (OCR). |
 | Lynn Haven + CRA | Old AgendaCenter (until Aug 2026; CivicClerk after, which the watcher covers) | 2018 | No 2016-2017 commission minutes posted. |
 | Callaway + CRA | Archive Center modules 35 (commission) and 38 (CRA) | 2010 (we take 2016+) | AgendaCenter only starts in 2021. Scans. |
-| Panama City Beach | Granicus view 1 (`MinutesViewer.php`) | 2020 | 2019 and 2022-2024 mostly missing; those minutes are printed as drafts in the next meeting's agenda packet (not crawled yet). Scans. |
+| Panama City Beach | Granicus view 1 (`MinutesViewer.php`) | Dec 2019 | Minutes are filed under the later meeting that approved them, so one file often holds the minutes of an earlier meeting (the date check allows that). Most 2022 to Mar 2024 meetings have no minutes in Granicus: `pcb_drafts()` takes the draft minutes linked from the next meetings' agenda PDFs (Legistar attachments, text PDFs). Nothing before Dec 2019 is online. |
 | Springfield | `springfieldfl.net/meetings/recent?page=N` | 2018 | Scans. |
 | Parker | Agendas & Minutes page (filr table) | 2020; 2016 and 2017 as one file per year | Yearly files are read as several meetings. |
 | Mexico Beach | Council Meetings page, yearly accordion | 2022 | Earlier years list meetings without minutes. |
