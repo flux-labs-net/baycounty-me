@@ -38,3 +38,33 @@ test('sign-up is open unless REALTOR_SIGNUP=invite', () => {
   process.env.REALTOR_SIGNUP = 'invite'; assert.equal(R.signupMode(), 'invite');
   delete process.env.REALTOR_SIGNUP;
 });
+
+test('emailed reports go out from hello@baycounty.me under the agent’s name, replies to the agent, PDF attached', () => {
+  const pdf = Buffer.from('%PDF-1.3\n%test').toString('base64');
+  const agent = {email: 'login@sample.example'};
+  const m = R.reportEmail({to: 'Client@Buyer.example, second@buyer.example', pdf, address: '825 Ohio Ave', message: 'Hi Sam,\nhere it is', cc_me: true, filename: 'property-report-825-ohio-ave.pdf'},
+    agent, {agent_name: 'Alex "Ace" Rivera', brokerage: 'Sample Realty', email: 'alex@sample.example'});
+  assert.equal(m.from, '"Alex Ace Rivera via BayCounty.me" <hello@baycounty.me>');
+  assert.equal(m.reply_to, 'alex@sample.example');
+  assert.deepEqual(m.to, ['client@buyer.example', 'second@buyer.example']);
+  assert.deepEqual(m.cc, ['alex@sample.example']);
+  assert.equal(m.subject, 'Property report: 825 Ohio Ave');
+  assert.equal(m.attachments[0].filename, 'property-report-825-ohio-ave.pdf');
+  assert.match(m.text, /Hi Sam,\nhere it is/);
+  assert.match(m.html, /Sample Realty/);
+  // no branding: plain BayCounty.me name, replies to the sign-in address
+  const plain = R.reportEmail({to: 'a@b.example', pdf, address: '1 Main St', filename: '../../x.pdf'}, agent, null);
+  assert.equal(plain.from, '"BayCounty.me" <hello@baycounty.me>');
+  assert.equal(plain.reply_to, 'login@sample.example');
+  assert.equal(plain.attachments[0].filename, 'property-report.pdf');
+  assert.equal(plain.cc, undefined);
+});
+
+test('emailed reports are checked: real addresses, at most 5, a real PDF under 3 MB', () => {
+  const pdf = Buffer.from('%PDF-1.3\n').toString('base64'), a = {email: 'x@y.example'};
+  assert.throws(() => R.reportEmail({to: '', pdf, address: 'x'}, a), /at least one/);
+  assert.throws(() => R.reportEmail({to: 'nope', pdf, address: 'x'}, a), /isn’t a valid/);
+  assert.throws(() => R.reportEmail({to: 'a@b.co,c@b.co,d@b.co,e@b.co,f@b.co,g@b.co', pdf, address: 'x'}, a), /5 people/);
+  assert.throws(() => R.reportEmail({to: 'a@b.co', pdf: Buffer.from('<html>').toString('base64'), address: 'x'}, a), /didn’t come through/);
+  assert.throws(() => R.reportEmail({to: 'a@b.co', pdf: Buffer.from('%PDF-' + 'x'.repeat(3.2e6)).toString('base64'), address: 'x'}, a), /too big/);
+});

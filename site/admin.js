@@ -1311,9 +1311,9 @@
     $('#ra-tiles').innerHTML = [[r.signup === 'invite' ? 'Invite only' : 'Open', 'Sign-up'], [fmt(c.active), 'Active'], [fmt(c.pending), 'Waiting for you'], [fmt(c.paused), 'Paused']]
       .map(([v, l]) => `<div class="tile"><b>${v}</b><span>${l}</span></div>`).join('');
     $('#ra-table tbody').innerHTML = r.rows.map(a => `<tr><td><b>${esc(a.agent_name || a.email)}</b>${a.agent_name ? `<div class="muted small">${esc(a.email)}</div>` : ''}</td>
-      <td class="small">${esc(a.brokerage || '—')}</td><td class="small">${raDay(a.created_at)}</td><td class="small">${raDay(a.last_login_at)}</td><td class="small">${fmt(a.reports_run || 0)}</td>
+      <td class="small">${esc(a.brokerage || '—')}</td><td class="small">${raDay(a.created_at)}</td><td class="small">${raDay(a.last_login_at)}</td><td class="small">${fmt(a.reports_run || 0)}</td><td class="small">${fmt(a.reports_emailed || 0)}</td>
       <td><select class="sel" data-ra="${esc(a.email)}" aria-label="Access">${Object.entries(RA_ST).map(([k, v]) => `<option value="${k}"${k === a.status ? ' selected' : ''}>${v}</option>`).join('')}</select></td></tr>`).join('')
-      || '<tr><td colspan="6" class="empty">No agents yet.</td></tr>';
+      || '<tr><td colspan="7" class="empty">No agents yet.</td></tr>';
   }
   $('#ra-table').addEventListener('change', async e => {
     const s = e.target.closest('[data-ra]'); if (!s) return;

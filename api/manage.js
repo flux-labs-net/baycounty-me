@@ -144,3 +144,4 @@ module.exports = async (req, res) => {
 };
 module.exports.setGovs = setGovs;
 module.exports.unsubscribeAll = unsubscribeAll;
+module.exports.config = {api: {bodyParser: {sizeLimit: '4.5mb'}}}; // the realtor console posts a PDF to email
