@@ -66,6 +66,7 @@ enum Route: Hashable {
     case emergency
     case hurricanePrep
     case utilities(AddressMatch? = nil)
+    case volunteer
 }
 
 extension View {
@@ -105,6 +106,7 @@ extension View {
                 case .emergency: EmergencyView()
                 case .hurricanePrep: HurricanePrepView()
                 case .utilities(let m): UtilitiesView(match: m)
+                case .volunteer: VolunteerView()
                 }
             }
             .pageBackground()

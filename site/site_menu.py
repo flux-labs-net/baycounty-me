@@ -93,6 +93,7 @@ def menu():
              _i('Public notices', '/notices', 'Bids, hearings and meetings'),
              _i('Government jobs', '/jobs', 'Open jobs at every local government'),
              _i('This week', '/this-week', 'The weekly email: events, votes, contracts'),
+             _i('Volunteer', '/volunteer', 'Open needs from local nonprofits'),
              _i('Email alerts', '/alerts', 'Weekly updates for your government'),
              _i('Request a record', '/records-request', 'Write a public records request'),
              _i('Letters to officials', '/correspondence', 'What we asked, and what they said'),

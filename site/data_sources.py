@@ -106,6 +106,10 @@ TOPICS = [
     ('utilities', 'Utilities and trash day', '/utilities',
      "Providers, pickup rules, holiday schedules and rates are copied by hand from each city's and the county's utility and sanitation pages, rate ordinances and Public Service Commission filings. Pickup routes and the electric co-op territory are read live from public map layers for each lookup; the address isn't kept.",
      'Each provider row links its source page. The live lookup is checked against known addresses in every city with a route map (Panama City, Lynn Haven, Callaway, Parker).'),
+    ('volunteer', 'Volunteer needs', '/volunteer',
+     "Open volunteer needs are read every day from United Way of Northwest Florida's volunteer center and Idealist's listings for Bay County towns; only needs in a county town or ZIP are kept. "
+     'Volunteer counts come from Part I of each nonprofit\'s latest e-filed Form 990.',
+     'Organizations on the boards are joined to local nonprofits by exact name, with a few checked by hand (data/volunteer/bay/organizations.json).'),
     ('cra', 'Redevelopment agencies (CRAs)', '/public-money/cra-spending',
      'CRA spending is read from CRA annual reports, agendas, budgets and audits, one ledger line per payment or project. '
      'Tax increment comes from CRA reports, audits and budgets, split between the county and city by millage.',
@@ -275,6 +279,8 @@ src('development', 'county', 'Bay County planning map: development orders', 'htt
 src('development', 'pcb', 'Panama City Beach development map layer', 'https://gis.baycountyfl.gov/arcgis/rest/services/PanamaCityBeach/PanamaCityBeachPublic/MapServer/4', AUTO_WEEKLY, 'Weekly', 'Development projects with application, approval, building permit and occupancy dates')
 src('roads', 'state', 'FDOT All Construction Contracts map service', 'https://gis.fdot.gov/arcgis/rest/services/All_Construction_Contracts/MapServer/0', AUTO_WEEKLY, 'Weekly', 'Every FDOT construction and maintenance contract in the county: contractor, amount, dates and status')
 src('roads', 'state', 'FDOT current adopted work program map service', 'https://gis.fdot.gov/arcgis/rest/services/Work_Program_Current/MapServer', AUTO_WEEKLY, 'Weekly', 'Projects in the five-year work program: phases and the fiscal years they are funded in')
+src('volunteer', 'county-wide', 'United Way of Northwest Florida volunteer center', 'https://volunteer.unitedwaynwfl.org/need/', AUTO_DAILY, 'Daily', 'Open volunteer needs: title, agency, what volunteers do, when, city and ZIP')
+src('volunteer', 'county-wide', 'Idealist volunteer listings (Bay County towns)', 'https://www.idealist.org/en/volunteer-in-panama-city-fl', AUTO_DAILY, 'Daily', 'Open volunteer opportunities: title, organization, description, city, posted and closing dates')
 src('nonprofits', 'state', 'IRS exempt organization and 990 data (GivingTuesday 990 data lake)', 'https://990data.givingtuesday.org/', BULK, 'As new filings post', 'Organizations, 990, 990-EZ, 990-PF and 990-N filings since 2019: board members, pay, grants and finances')
 src('nonprofits', 'state', 'ProPublica Nonprofit Explorer', 'https://projects.propublica.org/nonprofits/', BY_HAND, 'As needed', 'Links to each organization\'s filings')
 src('nonprofits', 'state', 'Florida Check-A-Charity (Department of Agriculture and Consumer Services)', 'https://csapp.fdacs.gov/', BULK, 'As needed', 'Charity registrations, reported finances, fundraisers, officers and directors')
@@ -354,7 +360,7 @@ FOLDER_TOPIC = {
     'agendas': 'meetings', 'meetings': 'meetings', 'votes': 'votes', 'contracts': 'contracts', 'budgets': 'budgets',
     'debt_audit': 'audits', 'money': 'audits', 'tax': 'property-tax', 'amendment3': 'property-tax', 'exemptions': 'property-tax',
     'salaries': 'salaries', 'campaign': 'campaign', 'elections': 'elections', 'sunbiz': 'businesses', 'careers': 'businesses',
-    'nonprofits': 'nonprofits', 'chambers': 'chambers', 'events': 'events', 'outdoors': 'outdoors', 'development': 'development', 'roads': 'roads', 'emergency': 'emergency', 'notices': 'notices', 'jobs': 'jobs', 'utilities': 'utilities', 'restaurants': 'restaurants', 'cra': 'cra', 'merged.json': 'cra', 'michael': 'michael', 'surtax': 'sales-tax',
+    'nonprofits': 'nonprofits', 'chambers': 'chambers', 'events': 'events', 'outdoors': 'outdoors', 'development': 'development', 'roads': 'roads', 'emergency': 'emergency', 'notices': 'notices', 'jobs': 'jobs', 'utilities': 'utilities', 'restaurants': 'restaurants', 'volunteer': 'volunteer', 'cra': 'cra', 'merged.json': 'cra', 'michael': 'michael', 'surtax': 'sales-tax',
     'tourism': 'tourist-tax', 'fees': 'fees', 'nearby': 'address', 'civic': 'records', 'projects': 'contracts',
 }
 SKIP_HOSTS = {'baycounty.me', 'www.baycounty.me', 'aptg.co'}

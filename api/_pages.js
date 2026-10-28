@@ -33,6 +33,7 @@ const PAGES = {
   '/restaurants': {datasets: ['restaurants', 'restaurant-inspections']},
   '/new-businesses': {datasets: ['new-businesses', 'restaurants']},
   '/this-week': {datasets: ['weekly-roundup', 'community-events', 'meetings', 'votes', 'contracts', 'change-orders']},
+  '/volunteer': {datasets: ['volunteer-needs', 'volunteer-orgs', 'nonprofits']},
   '/chambers': {datasets: ['chambers', 'chamber-leaders', 'chamber-events', 'nonprofit-payments', 'nonprofits']},
   '/connections/nonprofits': {datasets: ['nonprofits', 'nonprofit-board-members', 'nonprofit-board-businesses', 'nonprofit-payments', 'nonprofit-grants', 'nonprofit-officials', 'charity-registrations']},
   '/connections/business-ties': {datasets: ['official-businesses', 'official-business-links']},

@@ -48,6 +48,7 @@ fun icon(symbol: String?): ImageVector = when (symbol) {
     "drop" -> Icons.Outlined.WaterDrop
     "trash" -> Icons.Outlined.Delete
     "fork.knife" -> Icons.Outlined.Restaurant
+    "hand.raised" -> Icons.Outlined.VolunteerActivism
     "sun.max" -> Icons.Outlined.WbSunny
     "repeat" -> Icons.Outlined.Repeat
     "building.columns" -> Icons.Outlined.AccountBalance
