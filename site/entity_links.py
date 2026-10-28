@@ -116,8 +116,17 @@ def names():
             for f in _forms(x['name']):
                 add(f, eid, 2, 12)
     out = {}
+    from entity_graph import _vendor_pages
+    same = {(l['from_id'], l['to_id']) for l in G.links.values() if l['relation'] == 'same'}
     for k, s in cand.items():
         if len(s) > 1:
+            # a vendor with no vendor page that is the same organization as a nonprofit: the nonprofit profile is fuller
+            for v in [i for i in s if i.startswith('vendor:') and i[7:] not in _vendor_pages()]:
+                if any((v, n) in same or (n, v) in same for n in s if n.startswith('nonprofit:')):
+                    s = s - {v}
+            if len(s) == 1:
+                out[k] = next(iter(s))
+                continue
             best = sorted(s, key=lambda i: rank[i.split(':')[0]])
             if rank[best[0].split(':')[0]] == rank[best[1].split(':')[0]]:
                 continue

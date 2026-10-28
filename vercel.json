@@ -34,6 +34,576 @@
   ],
   "redirects": [
     {
+      "source": "/people/eddie-cook",
+      "destination": "/people/ed-cook",
+      "permanent": true
+    },
+    {
+      "source": "/profile/person/eddie-cook",
+      "destination": "/people/ed-cook",
+      "permanent": true
+    },
+    {
+      "source": "/people/jack-kennington",
+      "destination": "/people/jackie-kennington",
+      "permanent": true
+    },
+    {
+      "source": "/profile/person/jack-kennington",
+      "destination": "/people/jackie-kennington",
+      "permanent": true
+    },
+    {
+      "source": "/people/judith-tinder",
+      "destination": "/people/judy-tinder",
+      "permanent": true
+    },
+    {
+      "source": "/profile/person/judith-tinder",
+      "destination": "/people/judy-tinder",
+      "permanent": true
+    },
+    {
+      "source": "/people/richard-musgrave",
+      "destination": "/people/rich-musgrave",
+      "permanent": true
+    },
+    {
+      "source": "/profile/person/richard-musgrave",
+      "destination": "/people/rich-musgrave",
+      "permanent": true
+    },
+    {
+      "source": "/people/timothy-linderman",
+      "destination": "/people/tim-linderman",
+      "permanent": true
+    },
+    {
+      "source": "/profile/person/timothy-linderman",
+      "destination": "/people/tim-linderman",
+      "permanent": true
+    },
+    {
+      "source": "/people/joseph-townsend",
+      "destination": "/people/joe-townsend",
+      "permanent": true
+    },
+    {
+      "source": "/profile/person/joseph-townsend",
+      "destination": "/people/joe-townsend",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/a-d-repairs-llc",
+      "destination": "/profile/business/l12000047749",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/aag-electric-motors-pumps-inc",
+      "destination": "/profile/business/p97000075160",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/acro-construction-llc",
+      "destination": "/profile/business/l06000080589",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/adam-s-pharmacy",
+      "destination": "/profile/business/h92314",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/advent-reef-jv-llc",
+      "destination": "/profile/business/l21000497616",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/advent-svcs-llc",
+      "destination": "/profile/business/l12000118277",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/alex-s-janitorial-remodeling-llc",
+      "destination": "/profile/business/l18000004585",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/all-services-llc",
+      "destination": "/profile/business/l05000119049",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/alpha-dewatering-of-florida-inc",
+      "destination": "/profile/business/p21000081092",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/asjv-llc",
+      "destination": "/profile/business/l24000250809",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/b-c-technologies-llc",
+      "destination": "/profile/business/l03000011537",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/b-t-scott-holdings-llc",
+      "destination": "/profile/business/l21000514840",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/b-w-enterprises-ii-llc",
+      "destination": "/profile/business/l09000019469",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/bay-engineering-solutions-llc",
+      "destination": "/profile/business/l04000033066",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/boats-n-hoes-maintenance-and-repair-llc",
+      "destination": "/profile/business/l23000142470",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/bob-little-estates-llc",
+      "destination": "/profile/business/l10000028355",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/bob-s-top-shop-inc",
+      "destination": "/profile/business/h08717",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/bouldin-precision-consults-llc",
+      "destination": "/profile/business/l20000091280",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/brooks-environmental-solutions-llc",
+      "destination": "/profile/business/l14000001107",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/brooks-esc-jv-llc",
+      "destination": "/profile/business/l21000349652",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/browne-appraisal-inc",
+      "destination": "/profile/business/p98000095069",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/c-coast-construction-of-northwest-florida-inc",
+      "destination": "/profile/business/p97000054692",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/c-lawrence-construction-company-inc",
+      "destination": "/profile/business/k55489",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/c4-group-llc",
+      "destination": "/profile/business/l05000045282",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/capt-anderson-s",
+      "destination": "/profile/business/capt-andersons",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/captain-andersons-restaurant",
+      "destination": "/profile/business/captain-anderson-s-restaurant",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/carter-restoration-bay-county-florida-llc",
+      "destination": "/profile/business/l20000065559",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/chandler-and-associates-of-panama-city-inc",
+      "destination": "/profile/business/579643",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/chenega-manufacturing-services-llc",
+      "destination": "/profile/business/m13000001452",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/cleaning-plus-janitorial-services-llc",
+      "destination": "/profile/business/l16000188856",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/coastal-air-service-inc",
+      "destination": "/profile/business/p98000006897",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/coastal-machine-llc",
+      "destination": "/profile/business/l16000022417",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/cognition-llc",
+      "destination": "/profile/business/m14000001078",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/complete-air-conditioning-refrigeration-inc",
+      "destination": "/profile/business/h68244",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/complete-electrical-services-of-nw-florida-llc",
+      "destination": "/profile/business/l07000005663",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/contego-environmental-llc",
+      "destination": "/profile/business/l14000097693",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/curb-appeal-services-inc",
+      "destination": "/profile/business/p14000002956",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/custom-marine-service-llc",
+      "destination": "/profile/business/l10000132402",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/david-perkins-enterprises-inc",
+      "destination": "/profile/business/p01000037208",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/detect-inc",
+      "destination": "/profile/business/p03000064934",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/dive-lab-inc",
+      "destination": "/profile/business/p00000025349",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/dmr-consulting-inc",
+      "destination": "/profile/business/p98000086663",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/dumpster-services-llc",
+      "destination": "/profile/business/l18000093762",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/emerald-coast-glass-products-inc",
+      "destination": "/profile/business/p12000023462",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/florida-hose-rubber-llc",
+      "destination": "/profile/business/l99000001261",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/florida-offshore-inc",
+      "destination": "/profile/business/g27892",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/h-b-m-inc",
+      "destination": "/profile/business/s37965",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/health-supply-770-inc",
+      "destination": "/profile/business/p20000027888",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/hii-unmanned-systems-inc",
+      "destination": "/profile/business/f22000003018",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/hull-s-environmental-services-inc",
+      "destination": "/profile/business/p10000049255",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/hydrogy-llc",
+      "destination": "/profile/business/l07000082577",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/iferd-s-auto-repair-center-inc",
+      "destination": "/profile/business/p11000025728",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/innovative-professional-solutions-inc",
+      "destination": "/profile/business/p01000115818",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/integrity-resorts-inc",
+      "destination": "/profile/business/p05000105384",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/jaco-management-inc",
+      "destination": "/profile/business/s81823",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/jay-m-radtke-m-d-p-a",
+      "destination": "/profile/business/p15000021234",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/jc-community-improvement-llc",
+      "destination": "/profile/business/l19000034567",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/jensen-usa-inc",
+      "destination": "/profile/business/f01000004215",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/keeton-corrections-inc",
+      "destination": "/profile/business/p08627",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/kenny-strange-electric-and-service-company-inc",
+      "destination": "/profile/business/p18000006298",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/landcure-llc",
+      "destination": "/profile/business/l23000372915",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/michael-l-anderson-inc",
+      "destination": "/profile/business/p02000031839",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/mid-south-lumber-co-of-northwest-florida-inc",
+      "destination": "/profile/business/l83979",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/mill-village-mhp-llc",
+      "destination": "/profile/business/l17000005455",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/mineral-beauty-707-inc",
+      "destination": "/profile/business/p19000081208",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/nanny-can-llc",
+      "destination": "/profile/business/l03000026252",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/nfg-consulting-inc",
+      "destination": "/profile/business/p19000053213",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/paradigm-leaders-llc",
+      "destination": "/profile/business/l15000014322",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/patriot-integrated-solutions-llc",
+      "destination": "/profile/business/l19000246788",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/pettibone-concrete-construction-inc",
+      "destination": "/profile/business/p96000004696",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/pineapple-willy-s",
+      "destination": "/profile/business/p94000007831",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/pro-floors-plus-llc",
+      "destination": "/profile/business/l03000023119",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/professional-systems-associates-inc",
+      "destination": "/profile/business/k40191",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/public-eye-llc-the",
+      "destination": "/profile/business/l15000062150",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/quantic-engineering-and-logistics-corporation",
+      "destination": "/profile/business/l59541",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/recoil-llc",
+      "destination": "/profile/business/l18000164916",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/robbins-metal-fab-llc",
+      "destination": "/profile/business/l14000161003",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/rsae-labs-inc",
+      "destination": "/profile/business/f15000003319",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/rssi-barriers-llc",
+      "destination": "/profile/business/l10000049588",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/s-t-a-r-k-survival-company",
+      "destination": "/profile/business/s23872",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/seitz-construction-service-llc",
+      "destination": "/profile/business/l10000115729",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/servpro-of-bay-county-inc",
+      "destination": "/profile/business/p03000066320",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/shae-cares-cpr-llc",
+      "destination": "/profile/business/l23000310955",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/shore-management-solutions-llc",
+      "destination": "/profile/business/l20000043901",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/shri-ganesh-enterprises-inc",
+      "destination": "/profile/business/p05000054664",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/signs-unlimited-of-bay-county-inc",
+      "destination": "/profile/business/l58169",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/sisco-marine-llc",
+      "destination": "/profile/business/l05000035814",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/smith-refrigeration-inc",
+      "destination": "/profile/business/p96000102769",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/steel-city-inc",
+      "destination": "/profile/business/g78338",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/supervisor-of-elections",
+      "destination": "/profile/gov/soe",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/teamworks-welding-fabrication-llc",
+      "destination": "/profile/business/l17000162225",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/tool-time-portable-buildings-and-storage-sheds-inc",
+      "destination": "/profile/business/p05000132182",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/travelers-property-llc",
+      "destination": "/profile/business/l15000154223",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/u-d-t-inc",
+      "destination": "/profile/business/p96000066660",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/visioners-hospitality-llc",
+      "destination": "/profile/business/l18000198001",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/wakstein-s",
+      "destination": "/profile/business/l10000093899",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/wausau-development-llc",
+      "destination": "/profile/business/l09000019958",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/weblife-stores-llc",
+      "destination": "/profile/business/l10000011835",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/white-s-wrecker-service",
+      "destination": "/profile/business/l06000003222",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/whittaker-electric-inc",
+      "destination": "/profile/business/p08000069204",
+      "permanent": true
+    },
+    {
+      "source": "/profile/committee/lynn-haven",
+      "destination": "/governments/lynn-haven",
+      "permanent": true
+    },
+    {
+      "source": "/profile/committee/supervisor-of-elections",
+      "destination": "/profile/gov/soe",
+      "permanent": true
+    },
+    {
       "source": "/public-money/cra-network",
       "destination": "/connections",
       "permanent": true

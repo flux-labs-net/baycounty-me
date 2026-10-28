@@ -324,6 +324,12 @@ def _clean_person(n):
 # hand-checked: different name keys that are one person (key, key, evidence)
 SAME_PERSON = [
     (('william', 'perdue'), ('charles', 'perdue'), 'Tax Collector William (Chuck) Perdue; the salary file lists "Chuck Perdue".'),
+    (('edward', 'cook'), ('eddie', 'cook'), 'Callaway City Manager Edward "Ed"/"Eddie" Cook: officeholders.py notes "Edward Cook"; salary, state pay and contacts files say "Ed Cook".'),
+    (('jackie', 'kennington'), ('jack', 'kennington'), 'Springfield Ward 3: Jackie Kennington was re-elected in 2018; the 2018 SOE campaign filing (cand 408) says "Jack".'),
+    (('judy', 'tinder'), ('judith', 'tinder'), 'Lynn Haven Seat 4 2017-2023, re-elected 2021: the 2021 filing (cand 540) says "Judith"; election results say "Judy".'),
+    (('richard', 'musgrave'), ('rich', 'musgrave'), 'Parker Mayor: officeholders.py notes "Rich Musgrave"; 2017/2021 filings say "Rich", 2019 "Richard P.".'),
+    (('timothy', 'linderman'), ('tim', 'linderman'), 'Mexico Beach Group 5 from 2024-04-16: the 2024 filing (cand 668) says "Timothy"; votes and results say "Tim".'),
+    (('joseph', 'townsend'), ('joe', 'townsend'), 'Callaway Ward 4 2016-2018: won the April 2016 race as "Joe Townsend" (cand 316).'),
 ]
 
 

@@ -91,6 +91,22 @@ def _vendor_pages():
     return _C['vp']
 
 
+def _vendor_single_docs():
+    """vendor id -> Sunbiz doc (lowercase) when exactly one Bay County filing has that vendor's name (ids.vendor_id, an
+    exact match after the usual suffix and spacing cleanup). Vendors whose name two filings share are left out."""
+    if 'v1' not in _C:
+        import csv, gzip
+        docs = defaultdict(set)
+        p = os.path.join(HERE, '..', 'data', 'sunbiz', 'bay', 'entities.csv.gz')
+        if os.path.exists(p):
+            for r in csv.DictReader(gzip.open(p, 'rt', encoding='utf-8', errors='replace')):
+                vid = ids.vendor_id(r['name'])
+                if vid:
+                    docs[vid].add(r['doc_number'].strip().lower())
+        _C['v1'] = {vid: next(iter(d)) for vid, d in docs.items() if len(d) == 1}
+    return _C['v1']
+
+
 def page_url(entity_id):
     """The profile URL for any entity id (the rule every page and script follows)."""
     kind, _, key = entity_id.partition(':')
@@ -390,11 +406,22 @@ def build():
             if r.get('vendor_id'):
                 doc_vendor[r['sunbiz_doc_number'].lower()] = r['vendor_id']
 
+    np_doc = {n['sunbiz_doc_number'].lower(): np_names[n['nonprofit_id']] for n in _ds('nonprofits')
+              if n.get('sunbiz_doc_number') and n['nonprofit_id'] in np_names}
+    one_doc = _vendor_single_docs()
+
     def business(doc, name, sub=None, url=None):
         doc = doc.lower()
         if doc in doc_vendor and 'vendor:' + doc_vendor[doc] in G.ents:
             G.alias['business:' + doc] = ('vendor:' + doc_vendor[doc], ids.biz_case(name))  # /profile/business/<doc> still finds it
             return 'vendor:' + doc_vendor[doc]
+        if doc in np_doc:  # the filing of a local nonprofit
+            G.alias['business:' + doc] = (np_doc[doc], ids.biz_case(name))
+            return np_doc[doc]
+        vid = ids.vendor_id(name)
+        if vid and one_doc.get(vid) == doc and 'vendor:' + vid in G.ents:  # the only Bay filing with a vendor's exact name
+            G.alias['business:' + doc] = ('vendor:' + vid, ids.biz_case(name))
+            return 'vendor:' + vid
         return G.ent('business:' + doc, ids.biz_case(name), sub or 'Registered business', None, url or
                      ids.sunbiz_url(name, doc))
 
@@ -403,6 +430,8 @@ def build():
         pid = ids.person_id(r['official'])
         if not pid or 'person:' + pid not in G.ents:
             continue
+        if ids.gov_id(r['donor']) or re.search(r'(?i)supervisor of elect|^city of |board of county comm', r['donor'] or ''):
+            continue  # a qualifying-fee or filing refund from a government, not a campaign gift
         if r.get('payee_entity_id'):
             frm = payee(r['payee_entity_id'], r['donor'])
         elif r['donor_type'] == 'business':
@@ -561,15 +590,28 @@ def connection_rows():
     return out
 
 
+AWARDED = ('Contracts', 'Change orders', 'Emergency purchases')
+PAID = ('Check registers', 'Tourism agency payments')
+
+
 def profile_rows():
     G = build()
     deg, got, gave = defaultdict(int), defaultdict(float), defaultdict(float)
+    # A contract award and the checks paid under it are the same money: per payer and payee, count the larger of
+    # awarded (contracts, change orders, emergency purchases) and paid (check registers, tourism payments), plus the
+    # rest (CRA ledger, federal contracts), the rule the vendor pages use (vendor_pages.build).
+    pair = defaultdict(lambda: defaultdict(float))
     for x in G.links.values():
         deg[x['from_id']] += 1
         deg[x['to_id']] += 1
         if x['relation'] in ('paid', 'gift', 'grant') and x['amount']:
-            gave[x['from_id']] += x['amount']
-            got[x['to_id']] += x['amount']
+            rt = (x['detail'][0] if x['detail'] else '').split(' (')[0] if x['relation'] == 'paid' else ''
+            part = 'awarded' if rt in AWARDED else 'paid' if rt in PAID else 'other'
+            pair[(x['from_id'], x['to_id'])][part] += x['amount']
+    for (a, b), t in pair.items():
+        amt = max(t['awarded'], t['paid']) + t['other']
+        gave[a] += amt
+        got[b] += amt
     out = []
     for eid, e in G.ents.items():
         keep = e['kind'] in ('gov', 'person', 'nonprofit', 'vendor') or deg[eid]  # every vendor: page names link to them

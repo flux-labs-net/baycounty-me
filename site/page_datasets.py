@@ -275,8 +275,21 @@ def _member_key(name):
     return 'b_' + hashlib.sha1(f"{county}|{last} {ids.NICK.get(first, first).upper()}|".encode()).hexdigest()[:12]
 
 
-def _sunbiz_names():
+def _np_by_doc(_c={}):
+    """Sunbiz document number (lowercase) -> nonprofit entity id, for filings that are a nonprofit with a profile."""
+    if 'm' not in _c:
+        _c['m'] = {n['sunbiz_doc_number'].lower(): 'nonprofit:' + n['nonprofit_id'] for n in nonprofits() if n.get('sunbiz_doc_number')}
+    return _c['m']
+
+
+def _sunbiz_names(_c={}):
     """Active Bay County Sunbiz filings by normalized name (only names that match one filing)."""
+    if 'm' not in _c:
+        _c['m'] = _sunbiz_names_load()
+    return _c['m']
+
+
+def _sunbiz_names_load():
     import csv, gzip, re
     from collections import defaultdict
     p = os.path.join(HERE, '..', 'data', 'sunbiz', 'bay', 'entities.csv.gz')
@@ -813,7 +826,10 @@ def _licensee_entity(name, sunbiz):
     hit = sunbiz.get(_org_norm(name))
     if hit:
         bid = 'business:' + hit[0].lower()
-        return G.alias[bid][0] if bid in G.alias else bid
+        if bid in G.alias:
+            return G.alias[bid][0]
+        np = _np_by_doc().get(hit[0].lower())
+        return np if np and np in G.ents else bid
     return None
 
 
@@ -978,7 +994,8 @@ def new_businesses():
             continue
         doc = r['doc_number'].strip()
         bid = 'business:' + doc.lower()
-        eid = G.alias[bid][0] if bid in G.alias else bid
+        np = _np_by_doc().get(doc.lower())
+        eid = np if np and np in G.ents else G.alias[bid][0] if bid in G.alias else bid
         last = r.get('last_txn_date') or ''
         out.append({'place_id': PLACE_ID, 'doc_number': doc, 'name': ids.biz_case(r['name'].strip()), 'filing_type': FILING_TYPE.get(r['filing_type'], r['filing_type']),
                     'filed_date': f'{d[4:]}-{d[:2]}-{d[2:4]}', 'filed_month': f'{d[4:]}-{d[:2]}',
@@ -1044,6 +1061,13 @@ def fed_recipient_id(name, _c={}):
     doc = _c['doc'].get(_c['norm'](name))
     if doc:
         return ('vendor:' + _c['dv'][doc], 'same Sunbiz filing as a local vendor') if doc in _c['dv'] else ('business:' + doc, 'same name as a business campaign donor (Sunbiz)')
+    hit = _sunbiz_names().get(_org_norm(name))
+    if hit:
+        doc = hit[0].lower()
+        if doc in _c['dv']:
+            return 'vendor:' + _c['dv'][doc], 'same Sunbiz filing as a local vendor'
+        np = _np_by_doc().get(doc)
+        return (np, 'same Sunbiz filing as a local nonprofit') if np else ('business:' + doc, 'one active Bay County Sunbiz filing with the same name')
     return 'business:' + re.sub(r'[^a-z0-9]+', '-', (name or '').lower()).strip('-')[:80], None
 
 
@@ -1554,9 +1578,12 @@ def owner_gifts():
     fp = os.path.join(HERE, '..', 'data', 'campaign', 'owner_gifts.json')
     if not os.path.exists(fp):
         return []
+    import cutoff
     d = json.load(open(fp))
     agg = {}
     for g in d['gifts']:
+        if not cutoff.keep(g.get('date')):
+            continue  # 2016 is the first year shown (some 2016 campaigns took gifts in 2015)
         r = agg.setdefault((g['owner_id'], g['cand_id']), {'n': 0, 'amt': 0.0, 'dates': []})
         r['n'] += 1
         r['amt'] += g['amount']
