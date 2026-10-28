@@ -3573,7 +3573,7 @@
    "id": "people-directory",
    "title": "People",
    "description": "Elected officials, department leaders and 2026 candidates named in BayCounty.me records, with their roles. sort_order is the People page's order: by the government they are listed under (primary_gov_id), then title (title_rank 0 mayor, chair or elected officer to 8 past candidate, named in title_group), then last name. status is current (in office, on staff or on the 2026 ballot) or past (former officials and past candidates).",
-   "rows": 323,
+   "rows": 321,
    "columns": [
     {
      "name": "person_id",
@@ -6578,7 +6578,7 @@
    "id": "entity-profiles",
    "title": "Profiles: people, companies and organizations",
    "description": "Every company, elected official, candidate, nonprofit, nonprofit board member, registered business, committee and government named in BayCounty.me records, one row each, with its profile page and how many documented connections it has. entity_id (kind:key) joins entity-connections. Board members are named as their nonprofits' public filings list them; individual campaign donors are included only when they run a registered business (owner-gifts).",
-   "rows": 16693,
+   "rows": 16664,
    "columns": [
     {
      "name": "entity_id",
@@ -6695,7 +6695,7 @@
    "id": "entity-connections",
    "title": "Connections between people, companies and organizations",
    "description": "Every documented connection between two entities in entity-profiles, totalled per pair and kind: a government paid a payee, an organization gave to an official's or candidate's campaign, an official voted on a company's contracts, a person sits on a nonprofit's board or runs a business, a nonprofit gave a grant, two payees share a project. Each row has its source. Individual campaign donors are included only when they run a registered business (owner-gifts); officials' board seats and businesses are added by the API once checked by hand.",
-   "rows": 20163,
+   "rows": 20137,
    "columns": [
     {
      "name": "link_id",
@@ -14251,7 +14251,7 @@
   {
    "id": "restaurants",
    "title": "Restaurants and food service",
-   "description": "One row per restaurant, food truck, caterer or other food service license in the county: today's state license list plus every license inspected since 2016 that is no longer listed (licensed_now false). Name, kind, license holder (licensee, linked to its profile through licensee_entity_id when it matches a company or Sunbiz filing), location (city and ZIP only for food trucks, caterers and event vendors, whose license address can be a home), seats, when it opened (its first licensing inspection), and its inspection record: the latest result, the latest routine inspection, inspections and high-priority violations in the last 12 months, and emergency closures. From the Florida DBPR Division of Hotels and Restaurants.",
+   "description": "One row per restaurant, food truck, caterer or other food service license in the county: today's state license list plus every license inspected since 2016 that is no longer listed (licensed_now false). Name, kind, license holder (licensee, linked to its profile through licensee_entity_id when it matches a company or Sunbiz filing; a person is named only when their name and the license address match an officer, manager or registered agent of a registered business), location (city and ZIP only for food trucks, caterers and event vendors, whose license address can be a home), seats, when it opened (its first licensing inspection), and its inspection record: the latest result, the latest routine inspection, inspections and high-priority violations in the last 12 months, and emergency closures. From the Florida DBPR Division of Hotels and Restaurants.",
    "rows": 1440,
    "columns": [
     {
@@ -15514,7 +15514,7 @@
    "id": "federal-contract-years",
    "title": "Federal contracts to local companies by year",
    "description": "Money obligated each calendar year since 2016 on federal contracts to companies based in the county, per company and signing agency, from USAspending.gov contract transactions: obligated dollars, number of contract actions and number of contracts.",
-   "rows": 1477,
+   "rows": 1431,
    "columns": [
     {
      "name": "place_id",

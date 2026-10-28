@@ -34,6 +34,26 @@
   ],
   "redirects": [
     {
+      "source": "/people/judith-vandergrift",
+      "destination": "/people/judy-vandergrift",
+      "permanent": true
+    },
+    {
+      "source": "/profile/person/judith-vandergrift",
+      "destination": "/people/judy-vandergrift",
+      "permanent": true
+    },
+    {
+      "source": "/people/jeffrey-snyder",
+      "destination": "/people/jeff-snyder",
+      "permanent": true
+    },
+    {
+      "source": "/profile/person/jeffrey-snyder",
+      "destination": "/people/jeff-snyder",
+      "permanent": true
+    },
+    {
       "source": "/people/eddie-cook",
       "destination": "/people/ed-cook",
       "permanent": true

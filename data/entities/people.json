@@ -1,6 +1,6 @@
 {
  "about": "Elected officials, department leaders, 2026 local candidates and local candidates since 2016 named in the site's datasets, one id per person. Names are matched on first and last name with common nicknames (Doug = Douglas, Chris = Christopher, Dave = David ...), ignoring middle initials, titles and notes in parentheses; \"(D2)\" style suffixes become the district field. People who appear under more than one government are listed in multi_government for checking. No other people are included.",
- "count": 323,
+ "count": 321,
  "people": [
   {
    "id": "adrian-welle",
@@ -1027,7 +1027,7 @@
    ],
    "roles": [
     {
-     "role": "Assistant City Manager and Interim City Clerk-Treasurer",
+     "role": "Assistant City Manager",
      "gov_id": "pc",
      "source": "salaries"
     },
@@ -4089,13 +4089,19 @@
    "id": "jeff-snyder",
    "name": "Jeff Snyder",
    "aliases": [
-    "Jeff Snyder"
+    "Jeff Snyder",
+    "Jeffrey Snyder"
    ],
    "district": null,
    "gov_ids": [
     "lh"
    ],
    "roles": [
+    {
+     "role": "2026 candidate: Lynn Haven Commissioner Seat 2",
+     "gov_id": "lh",
+     "source": "finance_2026"
+    },
     {
      "role": "2025 candidate: Lynn Haven Commission, Seat 4",
      "gov_id": "lh",
@@ -4123,24 +4129,6 @@
      "seat": "Group 5",
      "years": "until 2016",
      "source": "officeholders"
-    }
-   ]
-  },
-  {
-   "id": "jeffrey-snyder",
-   "name": "Jeffrey Snyder",
-   "aliases": [
-    "Jeffrey Snyder"
-   ],
-   "district": null,
-   "gov_ids": [
-    "lh"
-   ],
-   "roles": [
-    {
-     "role": "2026 candidate: Lynn Haven Commissioner Seat 2",
-     "gov_id": "lh",
-     "source": "finance_2026"
     }
    ]
   },
@@ -5194,27 +5182,6 @@
    ]
   },
   {
-   "id": "judith-vandergrift",
-   "name": "Judith Vandergrift",
-   "aliases": [
-    "Judith Vandergrift"
-   ],
-   "district": null,
-   "gov_ids": [
-    "schools"
-   ],
-   "roles": [
-    {
-     "role": "2020 candidate: Superintendent of Schools",
-     "gov_id": "schools",
-     "office": "Superintendent of Schools",
-     "year": 2020,
-     "outcome": "lost",
-     "source": "campaign_history"
-    }
-   ]
-  },
-  {
    "id": "judy-tinder",
    "name": "Judy Tinder",
    "aliases": [
@@ -5294,11 +5261,13 @@
    "id": "judy-vandergrift",
    "name": "Judy Vandergrift",
    "aliases": [
+    "Judith Vandergrift",
     "Judy Vandergrift"
    ],
    "district": null,
    "gov_ids": [
-    "lh"
+    "lh",
+    "schools"
    ],
    "roles": [
     {
@@ -5318,6 +5287,14 @@
      "office": "Lynn Haven Commission, Seat 4",
      "year": 2023,
      "outcome": "won",
+     "source": "campaign_history"
+    },
+    {
+     "role": "2020 candidate: Superintendent of Schools",
+     "gov_id": "schools",
+     "office": "Superintendent of Schools",
+     "year": 2020,
+     "outcome": "lost",
      "source": "campaign_history"
     },
     {
@@ -5850,7 +5827,7 @@
    ],
    "roles": [
     {
-     "role": "City Clerk-Treasurer (proposed contract)",
+     "role": "City Clerk-Treasurer",
      "gov_id": "pc",
      "source": "salaries"
     }
@@ -9924,6 +9901,97 @@
     ]
    ],
    "why": "Callaway Ward 4 2016-2018: won the April 2016 race as \"Joe Townsend\" (cand 316)."
+  },
+  {
+   "keys": [
+    [
+     "judy",
+     "vandergrift"
+    ],
+    [
+     "judith",
+     "vandergrift"
+    ]
+   ],
+   "why": "2020 Superintendent race: SOE results say \"Judy Vandergrift\", the filing (cand 502) \"Judith\"; Jeremy confirmed one person 2026-10-28."
+  },
+  {
+   "keys": [
+    [
+     "jeff",
+     "snyder"
+    ],
+    [
+     "jeffrey",
+     "snyder"
+    ]
+   ],
+   "why": "Lynn Haven candidate 2025 (Seat 4) and 2026 (Seat 2); Jeremy confirmed one person 2026-10-28."
+  },
+  {
+   "keys": [
+    [
+     "fred",
+     "broussard"
+    ],
+    [
+     "joseph",
+     "broussard"
+    ]
+   ],
+   "why": "2020 PCB Ward 2: results say \"Joseph F. Broussard\", the filing \"Fred Broussard\"; Jeremy confirmed 2026-10-28."
+  },
+  {
+   "keys": [
+    [
+     "shiela",
+     "ware"
+    ],
+    [
+     "sheila",
+     "ware"
+    ]
+   ],
+   "why": "Panama City Housing director: pay files say \"Shiela\", the photo and votes \"Sheila\"; Jeremy confirmed 2026-10-28."
+  },
+  {
+   "keys": [
+    [
+     "calvin",
+     "chester"
+    ],
+    [
+     "cal",
+     "chester"
+    ]
+   ],
+   "why": "2016 PCB Mayor race: results say \"Cal Chester\"."
+  },
+  {
+   "keys": [
+    [
+     "richard",
+     "mccoy"
+    ],
+    [
+     "dick",
+     "mccoy"
+    ]
+   ],
+   "why": "2020 Mexico Beach Group 5: results say \"Dick McCoy\"."
+  },
+  {
+   "keys": [
+    [
+     "ron",
+     "chaple"
+    ],
+    [
+     "ronald",
+     "chaple"
+    ]
+   ],
+   "why": "2021 Parker Seat 1: results say \"Ronald H. Chaple\"."
   }
  ],
  "multi_government": [
@@ -9935,6 +10003,17 @@
    ],
    "names": [
     "Phil Chester"
+   ]
+  },
+  {
+   "person_id": "judy-vandergrift",
+   "governments": [
+    "lh",
+    "schools"
+   ],
+   "names": [
+    "Judith Vandergrift",
+    "Judy Vandergrift"
    ]
   },
   {

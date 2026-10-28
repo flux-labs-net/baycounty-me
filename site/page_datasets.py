@@ -809,6 +809,34 @@ def _csv_rows(path):
     return list(csv.DictReader(open(path, encoding='utf-8'))) if os.path.exists(path) else []
 
 
+def _officer_at(name, zip_code, address, _c={}):
+    """The Sunbiz document number of the business a person runs when the name and street address on a license are the
+    same as an officer, manager or registered agent on that filing ('' when they run several), else None."""
+    sys.path.insert(0, os.path.join(HERE, '..', 'data', 'sunbiz'))
+    import build_sunbiz as B
+    from collections import defaultdict
+    if 'idx' not in _c:
+        _c['idx'] = defaultdict(set)
+        try:
+            _, roles = B.load_registry('bay')
+        except FileNotFoundError:
+            roles = []
+        for r in roles:
+            if r.get('is_person') and r.get('street') and r.get('zip5'):
+                _c['idx'][(B.split_name(r['raw_name'])[0], r['zip5'], r['street'])].add(r['doc_number'])
+    docs = _c['idx'].get((B.split_name((name or '').upper())[0], B.zip5(zip_code), B.street_key(address)))
+    if not docs:
+        return None
+    return next(iter(docs)) if len(docs) == 1 else ''
+
+
+def _doc_entity(doc):
+    from entity_graph import build
+    bid = 'business:' + doc.lower()
+    G = build()
+    return G.alias[bid][0] if bid in G.alias else bid
+
+
 def _licensee_entity(name, sunbiz):
     """The profile id for a license holder: a company local governments paid, a nonprofit, or one Sunbiz filing with the
     same name (business:<doc>, which the API turns into a profile even when nothing else names it)."""
@@ -903,6 +931,9 @@ def _restaurant_rows():
         name = (l or {}).get('business_name') or (last_raw or {}).get('business_name') or ''
         addr = '' if tcode in NO_ADDRESS else ' '.join(x for x in [(l or {}).get('address') or (last_raw or {}).get('address'), (l or {}).get('address2')] if x and x.strip())
         licensee = (l or {}).get('licensee') or None
+        runs = None if not licensee or _is_org(licensee) else _officer_at((l or {}).get('licensee'), (l or {}).get('zip'), (l or {}).get('address'))
+        if licensee and not _is_org(licensee) and runs is None:
+            licensee = None  # a private person is named only when they run a registered business (Jeremy, 2026-10-28)
         lname = (ids.biz_case(licensee) if _is_org(licensee) else ids.sunbiz_person(licensee)) if licensee else None
         opened = min((x['date'] for x, raw in hist if raw['inspection_type'] == 'Food-Licensing Inspection'), default=None)
         recent = [x for x, raw in hist if x['date'] >= year_ago]
@@ -911,7 +942,7 @@ def _restaurant_rows():
         out_r.append({
             'place_id': PLACE_ID, 'license_number': key, 'license_type': LICENSE_TYPE[tcode], 'kind': RANK.get((l or {}).get('rank'), LICENSE_TYPE[tcode]),
             'business_name': ids.biz_case(name), 'licensee': lname,
-            'licensee_entity_id': _licensee_entity(licensee, sunbiz) if licensee and _is_org(licensee) else None,
+            'licensee_entity_id': _licensee_entity(licensee, sunbiz) if licensee and _is_org(licensee) else _doc_entity(runs) if runs else None,
             'address': ids.biz_case(addr) if addr else None, 'city': ((l or {}).get('city') or (last_raw or {}).get('city') or '').title() or None,
             'zip': (l or {}).get('zip') or (last_raw or {}).get('zip') or None, 'seats': int(l['seats']) if l and l.get('seats') not in (None, '', '0') else None,
             'licensed_now': bool(l), 'license_expires': (l or {}).get('expires') or None, 'risk_level': (l or {}).get('risk_level') or None,
@@ -1103,6 +1134,13 @@ def military_news():
             for s in N['stories'] if (s.get('published') or cutoff.FIRST_DATE) >= cutoff.FIRST_DATE]
 
 
+def _fed_person(name):
+    """True for a recipient that is a person's name ('SMITH, DERON', 'WINNIE FEHNRICH'), not a company or a dba."""
+    if _is_org(name) or re.search(r'(?i)\b(incorporated|fund|fss|fsrl|department|resort|services?|camp|ground|music|navy|army|air force|electric|electrical|construction|roofing|plumbing|marine|supply|systems|solutions|technolog\w*|consulting|engineering|enterprises?|industries|group|associates|contracting|design|repair|builders|landscap\w*|lawn|pest|cleaning|janitorial|tech|aviation|equipment|machine|tool|works|shop|center|academy|realty|properties|holdings|partners|ventures|global|international|america|american|florida|gulf|coast|bay|panama|emerald|usa|us)\b|\d', name or ''):
+        return False
+    return 2 <= len(re.sub(r'[^A-Za-z ]', ' ', name).split()) <= 4
+
+
 def _fed_rows():
     if '_fed' in _MC:
         return _MC['_fed']
@@ -1120,6 +1158,8 @@ def _fed_rows():
             continue  # close-out entries on a contract that ended before 2016
         name = a.get('recipient') or ts[-1]['recipient']
         eid, match = fed_recipient_id(name)
+        if not match and _fed_person(name):  # a private person is named only when they run a registered business (Jeremy, 2026-10-28)
+            name, eid = 'Individual contractor (name withheld)', None
         agency, sub = a.get('agency') or ts[-1]['agency'], a.get('sub_agency') or ts[-1]['sub_agency']
         dates = sorted(t['date'] for t in ts)
         awards.append({'place_id': place, 'award_key': k, 'award_id': a.get('award_id') or ts[-1]['award_id'], 'recipient': name,
@@ -1982,7 +2022,7 @@ DATASETS = [
     ('utility-rates', 'Utilities: rates', "Monthly charges set by each public utility, one row per charge: water and sewer base and usage charges (inside and outside the city, senior rates, meter sizes), garbage and stormwater on the city bill, franchise fees and utility taxes, landfill fees, and a typical monthly bill at 5,000 gallons with its arithmetic in notes. effective says which rate schedule the row comes from.", utility_rates),
     ('trash-pickup', 'Trash pickup: routes and days', "Garbage, yard waste and bulk pickup in each city: one row per route with its usual pickup days, or the rule where a city has no route map (for example a private hauler sets the day). lookup_layer is the public map layer that holds the routes, zone_field the route field and day_field the day field; /api/v1/utilities?lat=&lon= reads them at an address. zone_area describes a route in words where there is no map.", trash_pickup),
     ('trash-holidays', 'Trash pickup: holiday changes', "How each city's garbage and yard waste pickup changes on holidays, as the city or its hauler publishes it: the holiday, when it falls, and what happens to garbage and yard waste pickup.", trash_holidays),
-    ('restaurants', 'Restaurants and food service', "One row per restaurant, food truck, caterer or other food service license in the county: today's state license list plus every license inspected since 2016 that is no longer listed (licensed_now false). Name, kind, license holder (licensee, linked to its profile through licensee_entity_id when it matches a company or Sunbiz filing), location (city and ZIP only for food trucks, caterers and event vendors, whose license address can be a home), seats, when it opened (its first licensing inspection), and its inspection record: the latest result, the latest routine inspection, inspections and high-priority violations in the last 12 months, and emergency closures. From the Florida DBPR Division of Hotels and Restaurants.", restaurants),
+    ('restaurants', 'Restaurants and food service', "One row per restaurant, food truck, caterer or other food service license in the county: today's state license list plus every license inspected since 2016 that is no longer listed (licensed_now false). Name, kind, license holder (licensee, linked to its profile through licensee_entity_id when it matches a company or Sunbiz filing; a person is named only when their name and the license address match an officer, manager or registered agent of a registered business), location (city and ZIP only for food trucks, caterers and event vendors, whose license address can be a home), seats, when it opened (its first licensing inspection), and its inspection record: the latest result, the latest routine inspection, inspections and high-priority violations in the last 12 months, and emergency closures. From the Florida DBPR Division of Hotels and Restaurants.", restaurants),
     ('restaurant-inspections', 'Restaurant inspections', "Every state food safety inspection of a restaurant, food truck, caterer or other food service license in the county since 2016, one row per visit: date, type (routine, complaint, licensing, or a follow-up visit when visit_number is over 1), the state's disposition and what it means in plain words (result, result_level ok, warning, fine or closed), violation counts by priority (high priority violations are the ones most likely to make someone sick), and the violation items cited. From the Florida DBPR Division of Hotels and Restaurants public records, refreshed daily.", restaurant_inspections),
     ('new-businesses', 'New businesses', "Every company, nonprofit and partnership filed with the Florida Division of Corporations (Sunbiz) since 2016 whose main address is in the county, newest first: name, type, filing date, whether it is still active, city and ZIP (street addresses are left out because many small companies list a home), its latest annual report, its profile id, any restaurant it holds a license for, and a link to its state record, which names its officers and registered agent. Out-of-state companies count from the day they registered to do business in Florida. Updated when the state publishes its quarterly corporate file.", new_businesses),
     ('weekly-roundup', 'This week in Bay County', "This week's edition of the weekly email and the /this-week page, one row per item: events happening this week (one-off events first; repeating programs and meetings left out), public meetings this week, and votes, contracts and change orders that first appeared on BayCounty.me last week (first_seen; minutes come out weeks after a meeting, so date can be earlier). section is event, meeting, vote, contract or change_order; featured marks what the email shows. people lists who voted no, with profile links. Rebuilt every morning.", weekly_roundup),
