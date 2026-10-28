@@ -1,7 +1,7 @@
 {
  "place_id": "fl-bay",
- "as_of": "2026-10-27",
- "fetched": "2026-10-27T15:25:44-0500",
+ "as_of": "2026-10-28",
+ "fetched": "2026-10-28T06:27:57-0500",
  "sources": [
   {
    "id": "bay-county",
@@ -52,281 +52,10 @@
  "errors": {},
  "events": [
   {
-   "event_id": "pcb-chamber:26651",
-   "source_id": "pcb-chamber",
-   "source": "Panama City Beach Chamber",
-   "town": "Panama City",
-   "title": "Ideacamp – October 2026",
-   "starts": "2026-10-27T08:00:00",
-   "ends": "2026-10-27T09:30:00",
-   "all_day": false,
-   "venue": "Papa Joe’s Bayside",
-   "category": "Chamber",
-   "cost": null,
-   "url": "https://pcbeach.org/local-event/ideacamp-october-2026/",
-   "source_url": "https://pcbeach.org/local-events/",
-   "recurring": false,
-   "gov": null
-  },
-  {
-   "event_id": "library:23205:2026-10-27",
-   "source_id": "library",
-   "source": "Northwest Regional Library System",
-   "town": "Panama City",
-   "title": "Bouncin’ Babies & Toddlin’ 2’s (Ages 0 – 2)",
-   "starts": "2026-10-27T09:30:00",
-   "ends": "2026-10-27T11:00:00",
-   "all_day": false,
-   "venue": "Bay County Public Library",
-   "category": "Library",
-   "cost": null,
-   "url": "https://www.nwrls.com/event/bouncin-babies-toddlin-2s-ages-0-2-9/",
-   "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
-  },
-  {
-   "event_id": "library:23757:2026-10-27",
-   "source_id": "library",
-   "source": "Northwest Regional Library System",
-   "town": "Panama City Beach",
-   "title": "Book Babies (Ages 0 – 2)",
-   "starts": "2026-10-27T10:00:00",
-   "ends": "2026-10-27T10:30:00",
-   "all_day": false,
-   "venue": "Panama City Beach Public Library",
-   "category": "Library",
-   "cost": null,
-   "url": "https://www.nwrls.com/event/book-babies-ages-0-2-5/",
-   "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
-  },
-  {
-   "event_id": "library:23851:2026-10-27",
-   "source_id": "library",
-   "source": "Northwest Regional Library System",
-   "town": "Panama City Beach",
-   "title": "Mahjong Meetup (Adults)",
-   "starts": "2026-10-27T12:00:00",
-   "ends": "2026-10-27T15:00:00",
-   "all_day": false,
-   "venue": "Panama City Beach Public Library",
-   "category": "Library",
-   "cost": null,
-   "url": "https://www.nwrls.com/event/mahjong-meetup-adults-9/",
-   "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
-  },
-  {
-   "event_id": "panama-city:6989:2026-10-27",
-   "source_id": "panama-city",
-   "source": "City of Panama City",
-   "town": "Panama City",
-   "title": "Knifty Crafters",
-   "starts": "2026-10-27T13:30:00",
-   "ends": "2026-10-27T15:30:00",
-   "all_day": false,
-   "venue": null,
-   "category": "Community",
-   "cost": null,
-   "url": "https://www.panamacity.gov/Calendar.aspx?EID=6989",
-   "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true,
-   "gov": "pc"
-  },
-  {
-   "event_id": "library:23917:2026-10-27",
-   "source_id": "library",
-   "source": "Northwest Regional Library System",
-   "town": "Panama City Beach",
-   "title": "Chapter Chat Book Club",
-   "starts": "2026-10-27T14:00:00",
-   "ends": "2026-10-27T15:00:00",
-   "all_day": false,
-   "venue": "Panama City Beach Public Library",
-   "category": "Library",
-   "cost": null,
-   "url": "https://www.nwrls.com/event/chapter-chat-book-club/",
-   "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
-  },
-  {
-   "event_id": "panama-city:7420:2026-10-27",
-   "source_id": "panama-city",
-   "source": "City of Panama City",
-   "town": "Panama City",
-   "title": "Dream Builders at MLK",
-   "starts": "2026-10-27T15:00:00",
-   "ends": "2026-10-27T17:00:00",
-   "all_day": false,
-   "venue": null,
-   "category": "Community",
-   "cost": null,
-   "url": "https://www.panamacity.gov/Calendar.aspx?EID=7420",
-   "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true,
-   "gov": "pc"
-  },
-  {
-   "event_id": "lynn-haven:1318:2026-10-27",
-   "source_id": "lynn-haven",
-   "source": "City of Lynn Haven",
-   "town": "Lynn Haven",
-   "title": "Combined Workshop Salary Study & City Clerk Duties",
-   "starts": "2026-10-27T15:30:00",
-   "ends": "2026-10-27T17:00:00",
-   "all_day": false,
-   "venue": null,
-   "category": "Public meeting",
-   "cost": null,
-   "url": "https://www.cityoflynnhaven.gov/Calendar.aspx?EID=1318",
-   "source_url": "https://www.cityoflynnhaven.gov/Calendar.aspx",
-   "recurring": false,
-   "gov": "lh"
-  },
-  {
-   "event_id": "panama-city:6361:2026-10-27",
-   "source_id": "panama-city",
-   "source": "City of Panama City",
-   "town": "Panama City",
-   "title": "55+ Club",
-   "starts": "2026-10-27T16:00:00",
-   "ends": "2026-10-27T20:00:00",
-   "all_day": false,
-   "venue": null,
-   "category": "Community",
-   "cost": null,
-   "url": "https://www.panamacity.gov/Calendar.aspx?EID=6361",
-   "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true,
-   "gov": "pc"
-  },
-  {
-   "event_id": "panama-city:6148:2026-10-27",
-   "source_id": "panama-city",
-   "source": "City of Panama City",
-   "town": "Panama City",
-   "title": "City Commission Meeting",
-   "starts": "2026-10-27T16:30:00",
-   "ends": "2026-10-27T19:00:00",
-   "all_day": false,
-   "venue": null,
-   "category": "Public meeting",
-   "cost": null,
-   "url": "https://www.panamacity.gov/Calendar.aspx?EID=6148",
-   "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": false,
-   "gov": "pc"
-  },
-  {
-   "event_id": "library:23403:2026-10-27",
-   "source_id": "library",
-   "source": "Northwest Regional Library System",
-   "town": "Panama City",
-   "title": "Photography Club (Adults)",
-   "starts": "2026-10-27T17:15:00",
-   "ends": "2026-10-27T18:30:00",
-   "all_day": false,
-   "venue": "Bay County Public Library",
-   "category": "Library",
-   "cost": null,
-   "url": "https://www.nwrls.com/event/photography-club-adults-2/",
-   "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
-  },
-  {
-   "event_id": "lynn-haven:1199:2026-10-27",
-   "source_id": "lynn-haven",
-   "source": "City of Lynn Haven",
-   "town": "Lynn Haven",
-   "title": "City Commission Meeting",
-   "starts": "2026-10-27T17:30:00",
-   "ends": "2026-10-27T19:30:00",
-   "all_day": false,
-   "venue": null,
-   "category": "Public meeting",
-   "cost": null,
-   "url": "https://www.cityoflynnhaven.gov/Calendar.aspx?EID=1199",
-   "source_url": "https://www.cityoflynnhaven.gov/Calendar.aspx",
-   "recurring": true,
-   "gov": "lh"
-  },
-  {
-   "event_id": "library:23395:2026-10-27",
-   "source_id": "library",
-   "source": "Northwest Regional Library System",
-   "town": "Panama City",
-   "title": "Shelf Indulgence Book Club (Off-Site)",
-   "starts": "2026-10-27T17:30:00",
-   "ends": "2026-10-27T18:30:00",
-   "all_day": false,
-   "venue": "Wild Root Coffee & Tea",
-   "category": "Library",
-   "cost": "Free",
-   "url": "https://www.nwrls.com/event/shelf-indulgence-book-club-off-site-2/",
-   "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
-  },
-  {
-   "event_id": "library:23182:2026-10-27",
-   "source_id": "library",
-   "source": "Northwest Regional Library System",
-   "town": "Panama City",
-   "title": "Teen Fright Night (Ages 12 – 17)",
-   "starts": "2026-10-27T17:30:00",
-   "ends": "2026-10-27T18:30:00",
-   "all_day": false,
-   "venue": "Bay County Public Library",
-   "category": "Library",
-   "cost": null,
-   "url": "https://www.nwrls.com/event/teen-fright-night-ages-12-17/",
-   "source_url": "https://www.nwrls.com/events",
-   "recurring": false,
-   "gov": null
-  },
-  {
-   "event_id": "callaway:2707:2026-10-27",
-   "source_id": "callaway",
-   "source": "City of Callaway",
-   "town": "Callaway",
-   "title": "Commission Meeting",
-   "starts": "2026-10-27T18:00:00",
-   "ends": "2026-10-27T20:00:00",
-   "all_day": false,
-   "venue": null,
-   "category": "Public meeting",
-   "cost": null,
-   "url": "https://www.cityofcallaway.com/Calendar.aspx?EID=2707",
-   "source_url": "https://www.cityofcallaway.com/Calendar.aspx",
-   "recurring": true,
-   "gov": "cw"
-  },
-  {
-   "event_id": "panama-city:7710:2026-10-27",
-   "source_id": "panama-city",
-   "source": "City of Panama City",
-   "town": "Panama City",
-   "title": "Double Dutch - Jump Rope Program",
-   "starts": "2026-10-27T18:00:00",
-   "ends": "2026-10-27T19:00:00",
-   "all_day": false,
-   "venue": null,
-   "category": "Community",
-   "cost": null,
-   "url": "https://www.panamacity.gov/Calendar.aspx?EID=7710",
-   "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true,
-   "gov": "pc"
-  },
-  {
    "event_id": "pcb-chamber:27622",
    "source_id": "pcb-chamber",
    "source": "Panama City Beach Chamber",
+   "gov": null,
    "town": "Panama City Beach",
    "title": "Heroes Breakfast",
    "starts": "2026-10-28T08:00:00",
@@ -337,13 +66,13 @@
    "cost": null,
    "url": "https://pcbeach.org/local-event/heroes-breakfast/",
    "source_url": "https://pcbeach.org/local-events/",
-   "recurring": false,
-   "gov": null
+   "recurring": false
   },
   {
    "event_id": "panama-city:7627:2026-10-28",
    "source_id": "panama-city",
    "source": "City of Panama City",
+   "gov": "pc",
    "town": "Panama City",
    "title": "PC Senior Arts",
    "starts": "2026-10-28T13:00:00",
@@ -354,13 +83,13 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=7627",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": false,
-   "gov": "pc"
+   "recurring": false
   },
   {
    "event_id": "panama-city:7486:2026-10-28",
    "source_id": "panama-city",
    "source": "City of Panama City",
+   "gov": "pc",
    "town": "Panama City",
    "title": "Card Club",
    "starts": "2026-10-28T14:00:00",
@@ -371,13 +100,13 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=7486",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true,
-   "gov": "pc"
+   "recurring": true
   },
   {
    "event_id": "panama-city:7421:2026-10-28",
    "source_id": "panama-city",
    "source": "City of Panama City",
+   "gov": "pc",
    "town": "Panama City",
    "title": "Dream Builders at MLK",
    "starts": "2026-10-28T15:00:00",
@@ -388,13 +117,13 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=7421",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true,
-   "gov": "pc"
+   "recurring": true
   },
   {
    "event_id": "panama-city:7336:2026-10-28",
    "source_id": "panama-city",
    "source": "City of Panama City",
+   "gov": "pc",
    "town": "Panama City",
    "title": "Jiu Jitsu For Mind, Body & Soul w/ Cameron",
    "starts": "2026-10-28T16:00:00",
@@ -405,13 +134,13 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=7336",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true,
-   "gov": "pc"
+   "recurring": true
   },
   {
    "event_id": "panama-city:7638:2026-10-28",
    "source_id": "panama-city",
    "source": "City of Panama City",
+   "gov": "pc",
    "town": "Panama City",
    "title": "Special Event Handbook Committee Meeting",
    "starts": "2026-10-28T16:00:00",
@@ -422,13 +151,13 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=7638",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": false,
-   "gov": "pc"
+   "recurring": false
   },
   {
    "event_id": "library:23188:2026-10-28",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City",
    "title": "Teen Game Night (Ages 13 – 18)",
    "starts": "2026-10-28T16:30:00",
@@ -439,13 +168,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/teen-game-night-ages-13-18-2/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": false,
-   "gov": null
+   "recurring": false
   },
   {
    "event_id": "lynn-haven:1317:2026-10-28",
    "source_id": "lynn-haven",
    "source": "City of Lynn Haven",
+   "gov": "lh",
    "town": "Lynn Haven",
    "title": "Charter Review Meeting",
    "starts": "2026-10-28T17:30:00",
@@ -456,13 +185,13 @@
    "cost": null,
    "url": "https://www.cityoflynnhaven.gov/Calendar.aspx?EID=1317",
    "source_url": "https://www.cityoflynnhaven.gov/Calendar.aspx",
-   "recurring": false,
-   "gov": "lh"
+   "recurring": false
   },
   {
    "event_id": "panama-city:6707:2026-10-28",
    "source_id": "panama-city",
    "source": "City of Panama City",
+   "gov": "pc",
    "town": "Panama City",
    "title": "PC Art Club",
    "starts": "2026-10-28T18:00:00",
@@ -473,13 +202,13 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=6707",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true,
-   "gov": "pc"
+   "recurring": true
   },
   {
    "event_id": "panama-city:6517:2026-10-29",
    "source_id": "panama-city",
    "source": "City of Panama City",
+   "gov": "pc",
    "town": "Panama City",
    "title": "PC Senior Living",
    "starts": "2026-10-29T09:00:00",
@@ -490,13 +219,13 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=6517",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true,
-   "gov": "pc"
+   "recurring": true
   },
   {
    "event_id": "library:23775:2026-10-29",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City Beach",
    "title": "Sail Into School (Ages 3 – 5)",
    "starts": "2026-10-29T10:00:00",
@@ -507,13 +236,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/sail-into-school-ages-3-5-5/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "library:23235:2026-10-29",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City",
    "title": "Read & Rhyme Storytime (Ages 3 – 5 with caregiver)",
    "starts": "2026-10-29T10:30:00",
@@ -524,13 +253,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/read-rhyme-storytime-ages-3-5-with-caregiver-9/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "panama-city:7422:2026-10-29",
    "source_id": "panama-city",
    "source": "City of Panama City",
+   "gov": "pc",
    "town": "Panama City",
    "title": "Dream Builders at MLK",
    "starts": "2026-10-29T15:00:00",
@@ -541,13 +270,13 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=7422",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true,
-   "gov": "pc"
+   "recurring": true
   },
   {
    "event_id": "bay-county:1711:2026-10-29",
    "source_id": "bay-county",
    "source": "Bay County",
+   "gov": "county",
    "town": "Bay County",
    "title": "Bay County Fire Rescue Open House",
    "starts": "2026-10-29T17:30:00",
@@ -558,13 +287,13 @@
    "cost": null,
    "url": "https://www.baycountyfl.gov/Calendar.aspx?EID=1711",
    "source_url": "https://www.baycountyfl.gov/Calendar.aspx",
-   "recurring": false,
-   "gov": "county"
+   "recurring": false
   },
   {
    "event_id": "panama-city:7532:2026-10-29",
    "source_id": "panama-city",
    "source": "City of Panama City",
+   "gov": "pc",
    "town": "Panama City",
    "title": "Sunset Yoga",
    "starts": "2026-10-29T18:00:00",
@@ -575,13 +304,13 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=7532",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true,
-   "gov": "pc"
+   "recurring": true
   },
   {
    "event_id": "library:23546:2026-10-30",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City Beach",
    "title": "Escape the Library (Ages 13+) (Registration Required)",
    "starts": "2026-10-30T09:00:00",
@@ -592,13 +321,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/escape-the-library-ages-13-registration-required/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "pcb-chamber:27606",
    "source_id": "pcb-chamber",
    "source": "Panama City Beach Chamber",
+   "gov": null,
    "town": "Panama City",
    "title": "Young Professionals Coffee, Conversations & Headshots",
    "starts": "2026-10-30T09:30:00",
@@ -609,13 +338,13 @@
    "cost": null,
    "url": "https://pcbeach.org/local-event/young-professionals-coffee-conversations-headshots/",
    "source_url": "https://pcbeach.org/local-events/",
-   "recurring": false,
-   "gov": null
+   "recurring": false
   },
   {
    "event_id": "library:23792:2026-10-30",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City Beach",
    "title": "Sea Needles",
    "starts": "2026-10-30T10:00:00",
@@ -626,13 +355,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/sea-needles-8/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "panama-city:6568:2026-10-30",
    "source_id": "panama-city",
    "source": "City of Panama City",
+   "gov": "pc",
    "town": "Panama City",
    "title": "Line Dancing",
    "starts": "2026-10-30T13:00:00",
@@ -643,13 +372,13 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=6568",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true,
-   "gov": "pc"
+   "recurring": true
   },
   {
    "event_id": "panama-city:7487:2026-10-30",
    "source_id": "panama-city",
    "source": "City of Panama City",
+   "gov": "pc",
    "town": "Panama City",
    "title": "Card Club",
    "starts": "2026-10-30T14:00:00",
@@ -660,13 +389,13 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=7487",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true,
-   "gov": "pc"
+   "recurring": true
   },
   {
    "event_id": "library:23419:2026-10-30",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City",
    "title": "Crafternoon @ The Library",
    "starts": "2026-10-30T14:00:00",
@@ -677,13 +406,13 @@
    "cost": "Free",
    "url": "https://www.nwrls.com/event/crafternoon-the-library-2/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "panama-city:7423:2026-10-30",
    "source_id": "panama-city",
    "source": "City of Panama City",
+   "gov": "pc",
    "town": "Panama City",
    "title": "Dream Builders at MLK",
    "starts": "2026-10-30T15:00:00",
@@ -694,13 +423,13 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=7423",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true,
-   "gov": "pc"
+   "recurring": true
   },
   {
    "event_id": "pcb-chamber:27665",
    "source_id": "pcb-chamber",
    "source": "Panama City Beach Chamber",
+   "gov": null,
    "town": "Panama City Beach",
    "title": "Boo Bash",
    "starts": "2026-10-31T00:00:00",
@@ -711,13 +440,13 @@
    "cost": null,
    "url": "https://pcbeach.org/local-event/boo-bash/",
    "source_url": "https://pcbeach.org/local-events/",
-   "recurring": false,
-   "gov": null
+   "recurring": false
   },
   {
    "event_id": "pcb-chamber:27698",
    "source_id": "pcb-chamber",
    "source": "Panama City Beach Chamber",
+   "gov": null,
    "town": "Panama City Beach",
    "title": "Toys for Kids Halloween Bash 2026",
    "starts": "2026-10-31T00:00:00",
@@ -728,13 +457,13 @@
    "cost": null,
    "url": "https://pcbeach.org/local-event/toys-for-kids-halloween-bash-2026/",
    "source_url": "https://pcbeach.org/local-events/",
-   "recurring": false,
-   "gov": null
+   "recurring": false
   },
   {
    "event_id": "pcb-chamber:27637",
    "source_id": "pcb-chamber",
    "source": "Panama City Beach Chamber",
+   "gov": null,
    "town": "Panama City Beach",
    "title": "ZooBoo",
    "starts": "2026-10-31T00:00:00",
@@ -745,13 +474,13 @@
    "cost": null,
    "url": "https://pcbeach.org/local-event/zooboo-2/",
    "source_url": "https://pcbeach.org/local-events/",
-   "recurring": false,
-   "gov": null
+   "recurring": false
   },
   {
    "event_id": "mexico-beach:10002079-1793433600-1793451600:2026-10-31",
    "source_id": "mexico-beach",
    "source": "Mexico Beach (visitor events)",
+   "gov": null,
    "town": "Mexico Beach",
    "title": "Fall Festival",
    "starts": "2026-10-31T08:00:00",
@@ -762,13 +491,13 @@
    "cost": null,
    "url": "https://mexicobeach.com/event/fall-festival/",
    "source_url": "https://www.mexicobeach.com/events/",
-   "recurring": false,
-   "gov": null
+   "recurring": false
   },
   {
    "event_id": "library:23536:2026-10-31",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City Beach",
    "title": "Craft Drop-in: Halloween",
    "starts": "2026-10-31T09:00:00",
@@ -779,13 +508,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/craft-drop-in-halloween/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": false,
-   "gov": null
+   "recurring": false
   },
   {
    "event_id": "panama-city:6225:2026-11-02",
    "source_id": "panama-city",
    "source": "City of Panama City",
+   "gov": "pc",
    "town": "Panama City",
    "title": "Monday Morning with the Manager",
    "starts": "2026-11-02T08:30:00",
@@ -796,13 +525,13 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=6225",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": false,
-   "gov": "pc"
+   "recurring": false
   },
   {
    "event_id": "panama-city:7424:2026-11-02",
    "source_id": "panama-city",
    "source": "City of Panama City",
+   "gov": "pc",
    "town": "Panama City",
    "title": "Dream Builders at MLK",
    "starts": "2026-11-02T15:00:00",
@@ -813,13 +542,13 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=7424",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true,
-   "gov": "pc"
+   "recurring": true
   },
   {
    "event_id": "panama-city:7510:2026-11-02",
    "source_id": "panama-city",
    "source": "City of Panama City",
+   "gov": "pc",
    "town": "Panama City",
    "title": "VOICES - Veteran Outreach",
    "starts": "2026-11-02T17:00:00",
@@ -830,13 +559,13 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=7510",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": false,
-   "gov": "pc"
+   "recurring": false
   },
   {
    "event_id": "panama-city:7568:2026-11-02",
    "source_id": "panama-city",
    "source": "City of Panama City",
+   "gov": "pc",
    "town": "Panama City",
    "title": "VOICES - Veteran Outreach",
    "starts": "2026-11-02T17:00:00",
@@ -847,13 +576,13 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=7568",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": false,
-   "gov": "pc"
+   "recurring": false
   },
   {
    "event_id": "panama-city:6939:2026-11-02",
    "source_id": "panama-city",
    "source": "City of Panama City",
+   "gov": "pc",
    "town": "Panama City",
    "title": "Zumba",
    "starts": "2026-11-02T17:30:00",
@@ -864,13 +593,13 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=6939",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true,
-   "gov": "pc"
+   "recurring": true
   },
   {
    "event_id": "bay-county:1594:2026-11-03",
    "source_id": "bay-county",
    "source": "Bay County",
+   "gov": "county",
    "town": "Bay County",
    "title": "Bay County Board of County Commissioners Meeting",
    "starts": "2026-11-03T09:00:00",
@@ -881,13 +610,13 @@
    "cost": null,
    "url": "https://www.baycountyfl.gov/Calendar.aspx?EID=1594",
    "source_url": "https://www.baycountyfl.gov/Calendar.aspx",
-   "recurring": false,
-   "gov": "county"
+   "recurring": false
   },
   {
    "event_id": "library:23217:2026-11-03",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City",
    "title": "Bouncin’ Babies & Toddlin’ 2’s (Ages 0 – 2)",
    "starts": "2026-11-03T09:30:00",
@@ -898,13 +627,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/bouncin-babies-toddlin-2s-ages-0-2-10/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "library:23755:2026-11-03",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City Beach",
    "title": "Book Babies (Ages 0 – 2)",
    "starts": "2026-11-03T10:00:00",
@@ -915,13 +644,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/book-babies-ages-0-2-6/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "library:23849:2026-11-03",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City Beach",
    "title": "Mahjong Meetup (Adults)",
    "starts": "2026-11-03T12:00:00",
@@ -932,13 +661,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/mahjong-meetup-adults-11/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "panama-city:6990:2026-11-03",
    "source_id": "panama-city",
    "source": "City of Panama City",
+   "gov": "pc",
    "town": "Panama City",
    "title": "Knifty Crafters",
    "starts": "2026-11-03T13:30:00",
@@ -949,13 +678,13 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=6990",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true,
-   "gov": "pc"
+   "recurring": true
   },
   {
    "event_id": "panama-city:7425:2026-11-03",
    "source_id": "panama-city",
    "source": "City of Panama City",
+   "gov": "pc",
    "town": "Panama City",
    "title": "Dream Builders at MLK",
    "starts": "2026-11-03T15:00:00",
@@ -966,13 +695,13 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=7425",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true,
-   "gov": "pc"
+   "recurring": true
   },
   {
    "event_id": "panama-city:6362:2026-11-03",
    "source_id": "panama-city",
    "source": "City of Panama City",
+   "gov": "pc",
    "town": "Panama City",
    "title": "55+ Club",
    "starts": "2026-11-03T16:00:00",
@@ -983,13 +712,13 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=6362",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true,
-   "gov": "pc"
+   "recurring": true
   },
   {
    "event_id": "library:23162:2026-11-03",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City",
    "title": "Teen Advisory Board (Ages 14 – 17)",
    "starts": "2026-11-03T16:00:00",
@@ -1000,13 +729,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/teen-advisory-board-ages-14-17-3/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "panama-city:6076:2026-11-03",
    "source_id": "panama-city",
    "source": "City of Panama City",
+   "gov": "pc",
    "town": "Panama City",
    "title": "Virtual CRA Workshop",
    "starts": "2026-11-03T16:30:00",
@@ -1017,13 +746,13 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=6076",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": false,
-   "gov": "pc"
+   "recurring": false
   },
   {
    "event_id": "parker:7057:2026-11-03",
    "source_id": "parker",
    "source": "City of Parker",
+   "gov": "parker",
    "town": "Parker",
    "title": "***CANCELLED – ELECTION DAY*** Agenda Regular Meeting, November 3, 2026, 5:30 PM",
    "starts": "2026-11-03T17:30:00",
@@ -1034,13 +763,13 @@
    "cost": null,
    "url": "https://cityofparker.com/event/cancelled-election-day-agenda-regular-meeting-november-3-2026-530-pm/",
    "source_url": "https://cityofparker.com/events/",
-   "recurring": false,
-   "gov": "parker"
+   "recurring": false
   },
   {
    "event_id": "callaway:2630:2026-11-03",
    "source_id": "callaway",
    "source": "City of Callaway",
+   "gov": "cw",
    "town": "Callaway",
    "title": "Planning Board Meeting (Potenital)",
    "starts": "2026-11-03T18:00:00",
@@ -1051,13 +780,13 @@
    "cost": null,
    "url": "https://www.cityofcallaway.com/Calendar.aspx?EID=2630",
    "source_url": "https://www.cityofcallaway.com/Calendar.aspx",
-   "recurring": false,
-   "gov": "cw"
+   "recurring": false
   },
   {
    "event_id": "library:23561:2026-11-04",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City Beach",
    "title": "Beach Book Club",
    "starts": "2026-11-04T10:30:00",
@@ -1068,13 +797,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/beach-book-club-3/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": false,
-   "gov": null
+   "recurring": false
   },
   {
    "event_id": "panama-city:7488:2026-11-04",
    "source_id": "panama-city",
    "source": "City of Panama City",
+   "gov": "pc",
    "town": "Panama City",
    "title": "Card Club",
    "starts": "2026-11-04T14:00:00",
@@ -1085,13 +814,13 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=7488",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true,
-   "gov": "pc"
+   "recurring": true
   },
   {
    "event_id": "panama-city:7426:2026-11-04",
    "source_id": "panama-city",
    "source": "City of Panama City",
+   "gov": "pc",
    "town": "Panama City",
    "title": "Dream Builders at MLK",
    "starts": "2026-11-04T15:00:00",
@@ -1102,13 +831,13 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=7426",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true,
-   "gov": "pc"
+   "recurring": true
   },
   {
    "event_id": "panama-city:6708:2026-11-04",
    "source_id": "panama-city",
    "source": "City of Panama City",
+   "gov": "pc",
    "town": "Panama City",
    "title": "PC Art Club",
    "starts": "2026-11-04T18:00:00",
@@ -1119,13 +848,13 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=6708",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true,
-   "gov": "pc"
+   "recurring": true
   },
   {
    "event_id": "panama-city:6518:2026-11-05",
    "source_id": "panama-city",
    "source": "City of Panama City",
+   "gov": "pc",
    "town": "Panama City",
    "title": "PC Senior Living",
    "starts": "2026-11-05T09:00:00",
@@ -1136,13 +865,13 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=6518",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true,
-   "gov": "pc"
+   "recurring": true
   },
   {
    "event_id": "library:23773:2026-11-05",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City Beach",
    "title": "Sail Into School (Ages 3 – 5)",
    "starts": "2026-11-05T10:00:00",
@@ -1153,13 +882,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/sail-into-school-ages-3-5-6/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "library:23233:2026-11-05",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City",
    "title": "Read & Rhyme Storytime (Ages 3 – 5 with caregiver)",
    "starts": "2026-11-05T10:30:00",
@@ -1170,13 +899,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/read-rhyme-storytime-ages-3-5-with-caregiver-10/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "panama-city:7731:2026-11-05",
    "source_id": "panama-city",
    "source": "City of Panama City",
+   "gov": "pc",
    "town": "Panama City",
    "title": "50 Year Time Capsule Re-opening",
    "starts": "2026-11-05T13:00:00",
@@ -1187,13 +916,13 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=7731",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": false,
-   "gov": "pc"
+   "recurring": false
   },
   {
    "event_id": "panama-city:7427:2026-11-05",
    "source_id": "panama-city",
    "source": "City of Panama City",
+   "gov": "pc",
    "town": "Panama City",
    "title": "Dream Builders at MLK",
    "starts": "2026-11-05T15:00:00",
@@ -1204,13 +933,13 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=7427",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true,
-   "gov": "pc"
+   "recurring": true
   },
   {
    "event_id": "panama-city:7533:2026-11-05",
    "source_id": "panama-city",
    "source": "City of Panama City",
+   "gov": "pc",
    "town": "Panama City",
    "title": "Sunset Yoga",
    "starts": "2026-11-05T18:00:00",
@@ -1221,13 +950,13 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=7533",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true,
-   "gov": "pc"
+   "recurring": true
   },
   {
    "event_id": "panama-city:7723:2026-11-05",
    "source_id": "panama-city",
    "source": "City of Panama City",
+   "gov": "pc",
    "town": "Panama City",
    "title": "Sandy Steppers - Dance Class",
    "starts": "2026-11-05T18:30:00",
@@ -1238,13 +967,13 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=7723",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": false,
-   "gov": "pc"
+   "recurring": false
   },
   {
    "event_id": "library:23550:2026-11-06",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City Beach",
    "title": "Escape the Library (Ages 13+) (Registration Required)",
    "starts": "2026-11-06T09:00:00",
@@ -1255,13 +984,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/escape-the-library-ages-13-registration-required-2/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "lynn-haven:1319:2026-11-06",
    "source_id": "lynn-haven",
    "source": "City of Lynn Haven",
+   "gov": "lh",
    "town": "Lynn Haven",
    "title": "Joint ULDC Workshop",
    "starts": "2026-11-06T09:30:00",
@@ -1272,13 +1001,13 @@
    "cost": null,
    "url": "https://www.cityoflynnhaven.gov/Calendar.aspx?EID=1319",
    "source_url": "https://www.cityoflynnhaven.gov/Calendar.aspx",
-   "recurring": false,
-   "gov": "lh"
+   "recurring": false
   },
   {
    "event_id": "library:23790:2026-11-06",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City Beach",
    "title": "Sea Needles",
    "starts": "2026-11-06T10:00:00",
@@ -1289,13 +1018,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/sea-needles-9/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "panama-city:6569:2026-11-06",
    "source_id": "panama-city",
    "source": "City of Panama City",
+   "gov": "pc",
    "town": "Panama City",
    "title": "Line Dancing",
    "starts": "2026-11-06T13:00:00",
@@ -1306,13 +1035,13 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=6569",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true,
-   "gov": "pc"
+   "recurring": true
   },
   {
    "event_id": "panama-city:7489:2026-11-06",
    "source_id": "panama-city",
    "source": "City of Panama City",
+   "gov": "pc",
    "town": "Panama City",
    "title": "Card Club",
    "starts": "2026-11-06T14:00:00",
@@ -1323,13 +1052,13 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=7489",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true,
-   "gov": "pc"
+   "recurring": true
   },
   {
    "event_id": "panama-city:7428:2026-11-06",
    "source_id": "panama-city",
    "source": "City of Panama City",
+   "gov": "pc",
    "town": "Panama City",
    "title": "Dream Builders at MLK",
    "starts": "2026-11-06T15:00:00",
@@ -1340,13 +1069,13 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=7428",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true,
-   "gov": "pc"
+   "recurring": true
   },
   {
    "event_id": "pcb-chamber:27561",
    "source_id": "pcb-chamber",
    "source": "Panama City Beach Chamber",
+   "gov": null,
    "town": "Panama City Beach",
    "title": "Boots & Bling Fundraiser",
    "starts": "2026-11-06T17:30:00",
@@ -1357,13 +1086,13 @@
    "cost": null,
    "url": "https://pcbeach.org/local-event/boots-bling-fundraiser/",
    "source_url": "https://pcbeach.org/local-events/",
-   "recurring": false,
-   "gov": null
+   "recurring": false
   },
   {
    "event_id": "destination-pc:19153:2026-11-06",
    "source_id": "destination-pc",
    "source": "Destination Panama City",
+   "gov": null,
    "town": "Panama City",
    "title": "Public Eye Soar",
    "starts": "2026-11-06T18:00:00",
@@ -1374,13 +1103,13 @@
    "cost": "Free",
    "url": "https://destinationpanamacity.com/annual-event/publiceyesoar/",
    "source_url": "https://www.destinationpanamacity.com/events/",
-   "recurring": false,
-   "gov": null
+   "recurring": false
   },
   {
    "event_id": "destination-pc:19160:2026-11-06",
    "source_id": "destination-pc",
    "source": "Destination Panama City",
+   "gov": null,
    "town": "Panama City",
    "title": "Panama City Songwriters Festival",
    "starts": "2026-11-06T18:30:00",
@@ -1391,13 +1120,13 @@
    "cost": null,
    "url": "https://destinationpanamacity.com/annual-event/panama-city-songwriters-festival/",
    "source_url": "https://www.destinationpanamacity.com/events/",
-   "recurring": false,
-   "gov": null
+   "recurring": false
   },
   {
    "event_id": "pcb-chamber:27383",
    "source_id": "pcb-chamber",
    "source": "Panama City Beach Chamber",
+   "gov": null,
    "town": "Panama City Beach",
    "title": "Visit Panama City Beach Ironman Florida",
    "starts": "2026-11-07T00:00:00",
@@ -1408,13 +1137,13 @@
    "cost": null,
    "url": "https://pcbeach.org/local-event/visit-panama-city-beach-ironman-florida-3/",
    "source_url": "https://pcbeach.org/local-events/",
-   "recurring": false,
-   "gov": null
+   "recurring": false
   },
   {
    "event_id": "panama-city:6052:2026-11-07",
    "source_id": "panama-city",
    "source": "City of Panama City",
+   "gov": "pc",
    "town": "Panama City",
    "title": "Town Hall",
    "starts": "2026-11-07T08:00:00",
@@ -1425,13 +1154,13 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=6052",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": false,
-   "gov": "pc"
+   "recurring": false
   },
   {
    "event_id": "library:24003:2026-11-07",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City",
    "title": "Explore Native Plants Event (All Ages)",
    "starts": "2026-11-07T09:00:00",
@@ -1442,13 +1171,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/explore-native-plant-event-all-ages/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": false,
-   "gov": null
+   "recurring": false
   },
   {
    "event_id": "panama-city:7618:2026-11-07",
    "source_id": "panama-city",
    "source": "City of Panama City",
+   "gov": "pc",
    "town": "Panama City",
    "title": "Touch-A-Truck 2026",
    "starts": "2026-11-07T10:00:00",
@@ -1459,13 +1188,13 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=7618",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": false,
-   "gov": "pc"
+   "recurring": false
   },
   {
    "event_id": "library:23534:2026-11-09",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City Beach",
    "title": "Craft Drop-in: Bookmarks",
    "starts": "2026-11-09T09:00:00",
@@ -1476,13 +1205,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/craft-drop-in-bookmarks/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": false,
-   "gov": null
+   "recurring": false
   },
   {
    "event_id": "panama-city:7429:2026-11-09",
    "source_id": "panama-city",
    "source": "City of Panama City",
+   "gov": "pc",
    "town": "Panama City",
    "title": "Dream Builders at MLK",
    "starts": "2026-11-09T15:00:00",
@@ -1493,13 +1222,13 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=7429",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true,
-   "gov": "pc"
+   "recurring": true
   },
   {
    "event_id": "library:23254:2026-11-09",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City",
    "title": "Craft Camp (Ages 8 – 12)",
    "starts": "2026-11-09T16:00:00",
@@ -1510,13 +1239,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/craft-camp-ages-8-12-2/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": false,
-   "gov": null
+   "recurring": false
   },
   {
    "event_id": "panama-city:7339:2026-11-09",
    "source_id": "panama-city",
    "source": "City of Panama City",
+   "gov": "pc",
    "town": "Panama City",
    "title": "Jiu Jitsu For Mind, Body & Soul w/ Cameron",
    "starts": "2026-11-09T16:00:00",
@@ -1527,13 +1256,13 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=7339",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true,
-   "gov": "pc"
+   "recurring": true
   },
   {
    "event_id": "panama-city:6258:2026-11-09",
    "source_id": "panama-city",
    "source": "City of Panama City",
+   "gov": "pc",
    "town": "Panama City",
    "title": "Planning Board Meeting",
    "starts": "2026-11-09T16:00:00",
@@ -1544,13 +1273,13 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=6258",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": false,
-   "gov": "pc"
+   "recurring": false
   },
   {
    "event_id": "library:23428:2026-11-09",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City",
    "title": "New Adult Social Hour (Ages 18 – 25)",
    "starts": "2026-11-09T17:00:00",
@@ -1561,13 +1290,13 @@
    "cost": "Free",
    "url": "https://www.nwrls.com/event/new-adult-social-hour-ages-18-25-4/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "panama-city:6940:2026-11-09",
    "source_id": "panama-city",
    "source": "City of Panama City",
+   "gov": "pc",
    "town": "Panama City",
    "title": "Zumba",
    "starts": "2026-11-09T17:30:00",
@@ -1578,13 +1307,13 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=6940",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true,
-   "gov": "pc"
+   "recurring": true
   },
   {
    "event_id": "library:22993:2026-11-09",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City",
    "title": "Astronomy 101: New Moon",
    "starts": "2026-11-09T19:00:00",
@@ -1595,13 +1324,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/astronomy-101-new-moon/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": false,
-   "gov": null
+   "recurring": false
   },
   {
    "event_id": "library:23203:2026-11-10",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City",
    "title": "Bouncin’ Babies & Toddlin’ 2’s (Ages 0 – 2)",
    "starts": "2026-11-10T09:30:00",
@@ -1612,13 +1341,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/bouncin-babies-toddlin-2s-ages-0-2-11/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "library:23743:2026-11-10",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City",
    "title": "Computer Basics (Registration Required)",
    "starts": "2026-11-10T09:30:00",
@@ -1629,13 +1358,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/computer-basics-registration-required-3/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "library:23753:2026-11-10",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City Beach",
    "title": "Book Babies (Ages 0 – 2)",
    "starts": "2026-11-10T10:00:00",
@@ -1646,13 +1375,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/book-babies-ages-0-2-7/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "library:23119:2026-11-10",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Parker",
    "title": "Crafternoon (Adults & Teens 16+)",
    "starts": "2026-11-10T11:00:00",
@@ -1663,13 +1392,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/crafternoon-adults-teens-16-5/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "library:23847:2026-11-10",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City Beach",
    "title": "Mahjong Meetup (Adults)",
    "starts": "2026-11-10T12:00:00",
@@ -1680,13 +1409,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/mahjong-meetup-adults-12/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "panama-city:6991:2026-11-10",
    "source_id": "panama-city",
    "source": "City of Panama City",
+   "gov": "pc",
    "town": "Panama City",
    "title": "Knifty Crafters",
    "starts": "2026-11-10T13:30:00",
@@ -1697,13 +1426,13 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=6991",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true,
-   "gov": "pc"
+   "recurring": true
   },
   {
    "event_id": "panama-city:7430:2026-11-10",
    "source_id": "panama-city",
    "source": "City of Panama City",
+   "gov": "pc",
    "town": "Panama City",
    "title": "Dream Builders at MLK",
    "starts": "2026-11-10T15:00:00",
@@ -1714,13 +1443,13 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=7430",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true,
-   "gov": "pc"
+   "recurring": true
   },
   {
    "event_id": "library:23542:2026-11-10",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City Beach",
    "title": "LEGO Club (Ages 7 – 11)",
    "starts": "2026-11-10T15:30:00",
@@ -1731,13 +1460,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/lego-club-ages-7-11-3/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": false,
-   "gov": null
+   "recurring": false
   },
   {
    "event_id": "panama-city:6363:2026-11-10",
    "source_id": "panama-city",
    "source": "City of Panama City",
+   "gov": "pc",
    "town": "Panama City",
    "title": "55+ Club",
    "starts": "2026-11-10T16:00:00",
@@ -1748,13 +1477,13 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=6363",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true,
-   "gov": "pc"
+   "recurring": true
   },
   {
    "event_id": "library:23171:2026-11-10",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City",
    "title": "Art Club (Ages 12 – 17)",
    "starts": "2026-11-10T16:00:00",
@@ -1765,13 +1494,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/art-club-ages-12-17-3/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "lynn-haven:1213:2026-11-10",
    "source_id": "lynn-haven",
    "source": "City of Lynn Haven",
+   "gov": "lh",
    "town": "Lynn Haven",
    "title": "City Commission Meeting",
    "starts": "2026-11-10T17:30:00",
@@ -1782,13 +1511,13 @@
    "cost": null,
    "url": "https://www.cityoflynnhaven.gov/Calendar.aspx?EID=1213",
    "source_url": "https://www.cityoflynnhaven.gov/Calendar.aspx",
-   "recurring": true,
-   "gov": "lh"
+   "recurring": false
   },
   {
    "event_id": "pcb-chamber:27730",
    "source_id": "pcb-chamber",
    "source": "Panama City Beach Chamber",
+   "gov": null,
    "town": "Panama City Beach",
    "title": "PCB Young Professionals Social: Small Things, Big Impact",
    "starts": "2026-11-10T17:30:00",
@@ -1799,13 +1528,13 @@
    "cost": null,
    "url": "https://pcbeach.org/local-event/pcb-young-professionals-giveback-small-things-big-impact/",
    "source_url": "https://pcbeach.org/local-events/",
-   "recurring": false,
-   "gov": null
+   "recurring": false
   },
   {
    "event_id": "callaway:2696:2026-11-10",
    "source_id": "callaway",
    "source": "City of Callaway",
+   "gov": "cw",
    "town": "Callaway",
    "title": "Commission Meeting",
    "starts": "2026-11-10T18:00:00",
@@ -1816,13 +1545,13 @@
    "cost": null,
    "url": "https://www.cityofcallaway.com/Calendar.aspx?EID=2696",
    "source_url": "https://www.cityofcallaway.com/Calendar.aspx",
-   "recurring": true,
-   "gov": "cw"
+   "recurring": false
   },
   {
    "event_id": "panama-city:7712:2026-11-10",
    "source_id": "panama-city",
    "source": "City of Panama City",
+   "gov": "pc",
    "town": "Panama City",
    "title": "Double Dutch - Jump Rope Program",
    "starts": "2026-11-10T18:00:00",
@@ -1833,13 +1562,64 @@
    "cost": null,
    "url": "https://www.panamacity.gov/Calendar.aspx?EID=7712",
    "source_url": "https://www.panamacity.gov/Calendar.aspx",
-   "recurring": true,
-   "gov": "pc"
+   "recurring": false
+  },
+  {
+   "event_id": "bay-county:1613:2026-11-11",
+   "source_id": "bay-county",
+   "source": "Bay County",
+   "gov": "county",
+   "town": "Bay County",
+   "title": "Veteran's Day - County Office will be closed.",
+   "starts": "2026-11-11T08:00:00",
+   "ends": "2026-11-11T17:00:00",
+   "all_day": false,
+   "venue": null,
+   "category": "Community",
+   "cost": null,
+   "url": "https://www.baycountyfl.gov/Calendar.aspx?EID=1613",
+   "source_url": "https://www.baycountyfl.gov/Calendar.aspx",
+   "recurring": false
+  },
+  {
+   "event_id": "panama-city:7707:2026-11-11",
+   "source_id": "panama-city",
+   "source": "City of Panama City",
+   "gov": "pc",
+   "town": "Panama City",
+   "title": "Veterans Day Holiday",
+   "starts": "2026-11-11T08:00:00",
+   "ends": "2026-11-11T17:00:00",
+   "all_day": false,
+   "venue": null,
+   "category": "Community",
+   "cost": null,
+   "url": "https://www.panamacity.gov/Calendar.aspx?EID=7707",
+   "source_url": "https://www.panamacity.gov/Calendar.aspx",
+   "recurring": false
+  },
+  {
+   "event_id": "panama-city:7340:2026-11-11",
+   "source_id": "panama-city",
+   "source": "City of Panama City",
+   "gov": "pc",
+   "town": "Panama City",
+   "title": "Jiu Jitsu For Mind, Body & Soul w/ Cameron",
+   "starts": "2026-11-11T16:00:00",
+   "ends": "2026-11-11T17:00:00",
+   "all_day": false,
+   "venue": null,
+   "category": "Community",
+   "cost": null,
+   "url": "https://www.panamacity.gov/Calendar.aspx?EID=7340",
+   "source_url": "https://www.panamacity.gov/Calendar.aspx",
+   "recurring": true
   },
   {
    "event_id": "pcb-chamber:27385",
    "source_id": "pcb-chamber",
    "source": "Panama City Beach Chamber",
+   "gov": null,
    "town": "Panama City Beach",
    "title": "Emerald Coast Cruzin’ Car Show",
    "starts": "2026-11-12T00:00:00",
@@ -1850,13 +1630,13 @@
    "cost": null,
    "url": "https://pcbeach.org/local-event/emerald-coast-cruzin-car-show-2/",
    "source_url": "https://pcbeach.org/local-events/",
-   "recurring": false,
-   "gov": null
+   "recurring": false
   },
   {
    "event_id": "pcb-chamber:27611",
    "source_id": "pcb-chamber",
    "source": "Panama City Beach Chamber",
+   "gov": null,
    "town": "Panama City Beach",
    "title": "Holly Fair 2026",
    "starts": "2026-11-12T00:00:00",
@@ -1867,13 +1647,13 @@
    "cost": null,
    "url": "https://pcbeach.org/local-event/holly-fair-2026/",
    "source_url": "https://pcbeach.org/local-events/",
-   "recurring": false,
-   "gov": null
+   "recurring": false
   },
   {
    "event_id": "library:23737:2026-11-12",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City",
    "title": "Internet Basics (Registration Required)",
    "starts": "2026-11-12T09:30:00",
@@ -1884,13 +1664,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/internet-basics-registration-required-3/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "library:23771:2026-11-12",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City Beach",
    "title": "Sail Into School (Ages 3 – 5)",
    "starts": "2026-11-12T10:00:00",
@@ -1901,13 +1681,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/sail-into-school-ages-3-5-7/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "library:23384:2026-11-12",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City",
    "title": "BCPL Virtual Book Club (Zoom Program, Registration Required)",
    "starts": "2026-11-12T10:30:00",
@@ -1918,13 +1698,13 @@
    "cost": "Free",
    "url": "https://www.nwrls.com/event/bcpl-virtual-book-club-zoom-program-registration-required-4/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "library:23231:2026-11-12",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City",
    "title": "Read & Rhyme Storytime (Ages 3 – 5 with caregiver)",
    "starts": "2026-11-12T10:30:00",
@@ -1935,13 +1715,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/read-rhyme-storytime-ages-3-5-with-caregiver-11/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "library:20541:2026-11-12",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City",
    "title": "Library Advisory Council Meeting",
    "starts": "2026-11-12T13:00:00",
@@ -1952,13 +1732,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/library-advisory-council-meeting-6/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": false,
-   "gov": null
+   "recurring": false
   },
   {
    "event_id": "pcb-chamber:26491",
    "source_id": "pcb-chamber",
    "source": "Panama City Beach Chamber",
+   "gov": null,
    "town": "Panama City Beach",
    "title": "Friday at the Beach – November 2026",
    "starts": "2026-11-13T07:30:00",
@@ -1969,13 +1749,13 @@
    "cost": null,
    "url": "https://pcbeach.org/local-event/friday-at-the-beach-nov-2026/",
    "source_url": "https://pcbeach.org/local-events/",
-   "recurring": false,
-   "gov": null
+   "recurring": false
   },
   {
    "event_id": "pcb-chamber:27477",
    "source_id": "pcb-chamber",
    "source": "Panama City Beach Chamber",
+   "gov": null,
    "town": "Panama City",
    "title": "Paychecks for Patriots 2026 Job Fair",
    "starts": "2026-11-13T10:00:00",
@@ -1986,13 +1766,13 @@
    "cost": null,
    "url": "https://pcbeach.org/local-event/paychecks-for-patriots-2026-job-fair/",
    "source_url": "https://pcbeach.org/local-events/",
-   "recurring": false,
-   "gov": null
+   "recurring": false
   },
   {
    "event_id": "library:23788:2026-11-13",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City Beach",
    "title": "Sea Needles",
    "starts": "2026-11-13T10:00:00",
@@ -2003,13 +1783,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/sea-needles-10/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "mexico-beach:10001863-1794643200-1794657600:2026-11-14",
    "source_id": "mexico-beach",
    "source": "Mexico Beach (visitor events)",
+   "gov": null,
    "town": "Mexico Beach",
    "title": "Farmers & Craft Market",
    "starts": "2026-11-14T08:00:00",
@@ -2020,13 +1800,13 @@
    "cost": null,
    "url": "https://mexicobeach.com/event/farmers-market/2026-11-14/",
    "source_url": "https://www.mexicobeach.com/events/",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "pcb-chamber:27564",
    "source_id": "pcb-chamber",
    "source": "Panama City Beach Chamber",
+   "gov": null,
    "town": "Panama City Beach",
    "title": "Women’s Civic Club Fall Fling Juried Arts and Crafts Show",
    "starts": "2026-11-14T09:00:00",
@@ -2037,13 +1817,13 @@
    "cost": null,
    "url": "https://pcbeach.org/local-event/womens-civic-club-fall-fling-juried-arts-and-crafts-show/",
    "source_url": "https://pcbeach.org/local-events/",
-   "recurring": false,
-   "gov": null
+   "recurring": false
   },
   {
    "event_id": "library:23132:2026-11-14",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Parker",
    "title": "Saturday Storytime (Ages 3 – 6)",
    "starts": "2026-11-14T11:00:00",
@@ -2054,13 +1834,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/saturday-storytime-ages-3-6-3/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "library:23141:2026-11-14",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Parker",
    "title": "Saturday Programs (Ages 6 – 12)",
    "starts": "2026-11-14T12:30:00",
@@ -2071,13 +1851,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/saturday-programs-ages-6-12-3/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "library:23112:2026-11-14",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Parker",
    "title": "Book Club",
    "starts": "2026-11-14T14:00:00",
@@ -2088,13 +1868,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/book-club-4/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": false,
-   "gov": null
+   "recurring": false
   },
   {
    "event_id": "library:23709:2026-11-14",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City",
    "title": "Teen Dungeons & Dragons (Ages 13 – 17)",
    "starts": "2026-11-14T14:00:00",
@@ -2105,13 +1885,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/teen-dungeons-dragons-ages-13-17-5/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "library:23699:2026-11-14",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City",
    "title": "The Nutcracker Ballet (All Ages)",
    "starts": "2026-11-14T14:00:00",
@@ -2122,13 +1902,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/the-nutcracker-ballet-all-ages/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": false,
-   "gov": null
+   "recurring": false
   },
   {
    "event_id": "library:23148:2026-11-14",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Parker",
    "title": "Adult Crafts",
    "starts": "2026-11-14T15:30:00",
@@ -2139,13 +1919,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/adult-crafts-3/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": false,
-   "gov": null
+   "recurring": false
   },
   {
    "event_id": "pcb-chamber:27774",
    "source_id": "pcb-chamber",
    "source": "Panama City Beach Chamber",
+   "gov": null,
    "town": "Panama City Beach",
    "title": "Stay Visible in AI Search: AEO, SEO, GEO, & Voice Optimization",
    "starts": "2026-11-16T11:30:00",
@@ -2156,13 +1936,13 @@
    "cost": null,
    "url": "https://pcbeach.org/local-event/stay-visible-in-ai-search-aeo-seo-geo-voice-optimization/",
    "source_url": "https://pcbeach.org/local-events/",
-   "recurring": false,
-   "gov": null
+   "recurring": false
   },
   {
    "event_id": "library:23219:2026-11-17",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City",
    "title": "Bouncin’ Babies & Toddlin’ 2’s (Ages 0 – 2)",
    "starts": "2026-11-17T09:30:00",
@@ -2173,13 +1953,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/bouncin-babies-toddlin-2s-ages-0-2-12/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "library:23751:2026-11-17",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City Beach",
    "title": "Book Babies (Ages 0 – 2)",
    "starts": "2026-11-17T10:00:00",
@@ -2190,13 +1970,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/book-babies-ages-0-2-8/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "library:23720:2026-11-17",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City",
    "title": "The Legal Clinic",
    "starts": "2026-11-17T10:00:00",
@@ -2207,13 +1987,13 @@
    "cost": "Free",
    "url": "https://www.nwrls.com/event/the-legal-clinic-4/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": false,
-   "gov": null
+   "recurring": false
   },
   {
    "event_id": "library:23845:2026-11-17",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City Beach",
    "title": "Mahjong Meetup (Adults)",
    "starts": "2026-11-17T12:00:00",
@@ -2224,13 +2004,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/mahjong-meetup-adults-13/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "library:23177:2026-11-17",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City",
    "title": "Anime Club (Ages 12 – 17)",
    "starts": "2026-11-17T16:00:00",
@@ -2241,13 +2021,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/anime-club-ages-12-17-2/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": false,
-   "gov": null
+   "recurring": false
   },
   {
    "event_id": "pcb-chamber:27776",
    "source_id": "pcb-chamber",
    "source": "Panama City Beach Chamber",
+   "gov": null,
    "town": "Panama City",
    "title": "Drop Anchor at GCSC Open House",
    "starts": "2026-11-17T16:00:00",
@@ -2258,13 +2038,13 @@
    "cost": null,
    "url": "https://pcbeach.org/local-event/drop-anchor-at-gcsc-open-house/",
    "source_url": "https://pcbeach.org/local-events/",
-   "recurring": false,
-   "gov": null
+   "recurring": false
   },
   {
    "event_id": "pcb-chamber:26798",
    "source_id": "pcb-chamber",
    "source": "Panama City Beach Chamber",
+   "gov": null,
    "town": "Panama City",
    "title": "IdeaCamp – November 2026",
    "starts": "2026-11-17T16:00:00",
@@ -2275,13 +2055,13 @@
    "cost": null,
    "url": "https://pcbeach.org/local-event/ideacamp-november-2026/",
    "source_url": "https://pcbeach.org/local-events/",
-   "recurring": false,
-   "gov": null
+   "recurring": false
   },
   {
    "event_id": "library:23903:2026-11-17",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City",
    "title": "Homemade for the Holidays (Registration Required)",
    "starts": "2026-11-17T17:00:00",
@@ -2292,13 +2072,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/homemade-for-the-holidays-registration-required/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": false,
-   "gov": null
+   "recurring": false
   },
   {
    "event_id": "pcb-chamber:27591",
    "source_id": "pcb-chamber",
    "source": "Panama City Beach Chamber",
+   "gov": null,
    "town": "Panama City Beach",
    "title": "Health Fair",
    "starts": "2026-11-18T10:00:00",
@@ -2309,13 +2089,13 @@
    "cost": null,
    "url": "https://pcbeach.org/local-event/health-fair-2/",
    "source_url": "https://pcbeach.org/local-events/",
-   "recurring": false,
-   "gov": null
+   "recurring": false
   },
   {
    "event_id": "library:23465:2026-11-18",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City",
    "title": "Youth Dungeons & Dragons (Ages 8 – 12)",
    "starts": "2026-11-18T14:00:00",
@@ -2326,13 +2106,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/youth-dungeons-dragons-ages-8-12-3/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "library:23869:2026-11-19",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City",
    "title": "Holiday Shopping, Safety, & Scams (Registration Required)",
    "starts": "2026-11-19T09:30:00",
@@ -2343,13 +2123,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/holiday-shopping-safety-scams-registration-required/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": false,
-   "gov": null
+   "recurring": false
   },
   {
    "event_id": "library:23769:2026-11-19",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City Beach",
    "title": "Sail Into School (Ages 3 – 5)",
    "starts": "2026-11-19T10:00:00",
@@ -2360,13 +2140,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/sail-into-school-ages-3-5-8/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "library:23229:2026-11-19",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City",
    "title": "Read & Rhyme Storytime (Ages 3 – 5 with caregiver)",
    "starts": "2026-11-19T10:30:00",
@@ -2377,13 +2157,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/read-rhyme-storytime-ages-3-5-with-caregiver-12/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "library:23682:2026-11-19",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City",
    "title": "Youth Writing Group (Ages 6 – 12)",
    "starts": "2026-11-19T15:30:00",
@@ -2394,13 +2174,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/youth-writing-group-ages-6-12-3/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "pcb-chamber:26955",
    "source_id": "pcb-chamber",
    "source": "Panama City Beach Chamber",
+   "gov": null,
    "town": "Panama City Beach",
    "title": "Business After Hours – November 2026",
    "starts": "2026-11-19T16:30:00",
@@ -2411,13 +2191,13 @@
    "cost": null,
    "url": "https://pcbeach.org/local-event/business-after-hours-nov-2026/",
    "source_url": "https://pcbeach.org/local-events/",
-   "recurring": false,
-   "gov": null
+   "recurring": false
   },
   {
    "event_id": "library:23393:2026-11-19",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City",
    "title": "Shelf Indulgence Book Club (Off-Site)",
    "starts": "2026-11-19T17:30:00",
@@ -2428,13 +2208,13 @@
    "cost": "Free",
    "url": "https://www.nwrls.com/event/shelf-indulgence-book-club-off-site-3/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "library:23786:2026-11-20",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City Beach",
    "title": "Sea Needles",
    "starts": "2026-11-20T10:00:00",
@@ -2445,13 +2225,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/sea-needles-14/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "library:23412:2026-11-20",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City",
    "title": "11th Street Dulcimer Group Practice",
    "starts": "2026-11-20T14:00:00",
@@ -2462,13 +2242,13 @@
    "cost": "Free",
    "url": "https://www.nwrls.com/event/11th-street-dulcimer-group-practice-4/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": false,
-   "gov": null
+   "recurring": false
   },
   {
    "event_id": "library:23417:2026-11-20",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City",
    "title": "Crafternoon @ The Library",
    "starts": "2026-11-20T14:00:00",
@@ -2479,13 +2259,13 @@
    "cost": "Free",
    "url": "https://www.nwrls.com/event/crafternoon-the-library-4/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "library:23528:2026-11-21",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City Beach",
    "title": "Middle Grades Book Club (Grades 6 – 8)",
    "starts": "2026-11-21T13:00:00",
@@ -2496,13 +2276,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/middle-grades-book-club-grades-6-8-2/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": false,
-   "gov": null
+   "recurring": false
   },
   {
    "event_id": "library:23707:2026-11-21",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City",
    "title": "Teen Dungeons & Dragons (Ages 13 – 17)",
    "starts": "2026-11-21T14:00:00",
@@ -2513,13 +2293,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/teen-dungeons-dragons-ages-13-17-6/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "pcb-chamber:27576",
    "source_id": "pcb-chamber",
    "source": "Panama City Beach Chamber",
+   "gov": null,
    "town": "Panama City Beach",
    "title": "8th Annual Festival of Trees",
    "starts": "2026-11-21T18:00:00",
@@ -2530,13 +2310,13 @@
    "cost": null,
    "url": "https://pcbeach.org/local-event/festival-of-trees-2/",
    "source_url": "https://pcbeach.org/local-events/",
-   "recurring": false,
-   "gov": null
+   "recurring": false
   },
   {
    "event_id": "pcb-chamber:27767",
    "source_id": "pcb-chamber",
    "source": "Panama City Beach Chamber",
+   "gov": null,
    "town": "Panama City",
    "title": "David Phelps I Speak of Love Tour",
    "starts": "2026-11-21T19:00:00",
@@ -2547,13 +2327,13 @@
    "cost": null,
    "url": "https://pcbeach.org/local-event/david-phelps-i-speak-of-love-tour/",
    "source_url": "https://pcbeach.org/local-events/",
-   "recurring": false,
-   "gov": null
+   "recurring": false
   },
   {
    "event_id": "library:23258:2026-11-23",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City",
    "title": "Mini Makers (Ages 5 – 7)",
    "starts": "2026-11-23T16:00:00",
@@ -2564,13 +2344,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/mini-makers-ages-5-7-2/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": false,
-   "gov": null
+   "recurring": false
   },
   {
    "event_id": "library:24067:2026-11-24",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City Beach",
    "title": "Chapter Chat Book Club",
    "starts": "2026-11-24T14:00:00",
@@ -2581,13 +2361,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/chapter-chat-book-club-2/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": false
   },
   {
    "event_id": "library:23405:2026-11-24",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City",
    "title": "Photography Club (Adults)",
    "starts": "2026-11-24T17:15:00",
@@ -2598,13 +2378,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/photography-club-adults-3/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": false
   },
   {
    "event_id": "library:23688:2026-11-25",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City",
    "title": "LEGO Club (Ages 6 – 12)",
    "starts": "2026-11-25T14:00:00",
@@ -2615,13 +2395,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/lego-club-ages-6-12-7/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "pcb-chamber:27688",
    "source_id": "pcb-chamber",
    "source": "Panama City Beach Chamber",
+   "gov": null,
    "town": "Panama City",
    "title": "Charlotte Claire’s Turkey Trot",
    "starts": "2026-11-26T07:30:00",
@@ -2632,13 +2412,13 @@
    "cost": null,
    "url": "https://pcbeach.org/local-event/charlotte-claires-turkey-trot/",
    "source_url": "https://pcbeach.org/local-events/",
-   "recurring": false,
-   "gov": null
+   "recurring": false
   },
   {
    "event_id": "mexico-beach:10001395-1795680000-1795680000:2026-11-26",
    "source_id": "mexico-beach",
    "source": "Mexico Beach (visitor events)",
+   "gov": null,
    "town": "Mexico Beach",
    "title": "Thanksgiving Turkey Trot",
    "starts": "2026-11-26T08:00:00",
@@ -2649,13 +2429,13 @@
    "cost": null,
    "url": "https://mexicobeach.com/event/thanksgiving-turkey-trot/",
    "source_url": "https://www.mexicobeach.com/events/",
-   "recurring": false,
-   "gov": null
+   "recurring": false
   },
   {
    "event_id": "pcb-chamber:27545",
    "source_id": "pcb-chamber",
    "source": "Panama City Beach Chamber",
+   "gov": null,
    "town": "Panama City Beach",
    "title": "Thanksgiving at LaCo",
    "starts": "2026-11-26T11:00:00",
@@ -2666,13 +2446,13 @@
    "cost": null,
    "url": "https://pcbeach.org/local-event/thanksgiving-at-laco-2/",
    "source_url": "https://pcbeach.org/local-events/",
-   "recurring": false,
-   "gov": null
+   "recurring": false
   },
   {
    "event_id": "pcb-chamber:27387",
    "source_id": "pcb-chamber",
    "source": "Panama City Beach Chamber",
+   "gov": null,
    "town": "Panama City Beach",
    "title": "Beach Home for the Holidays",
    "starts": "2026-11-27T00:00:00",
@@ -2683,13 +2463,13 @@
    "cost": null,
    "url": "https://pcbeach.org/local-event/beach-home-for-the-holidays-3/",
    "source_url": "https://pcbeach.org/local-events/",
-   "recurring": false,
-   "gov": null
+   "recurring": false
   },
   {
    "event_id": "mexico-beach:10001864-1795852800-1795867200:2026-11-28",
    "source_id": "mexico-beach",
    "source": "Mexico Beach (visitor events)",
+   "gov": null,
    "town": "Mexico Beach",
    "title": "Farmers & Craft Market",
    "starts": "2026-11-28T08:00:00",
@@ -2700,13 +2480,13 @@
    "cost": null,
    "url": "https://mexicobeach.com/event/farmers-market/2026-11-28/",
    "source_url": "https://www.mexicobeach.com/events/",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "mexico-beach:10001390-1795910400-1795996799:2026-11-29",
    "source_id": "mexico-beach",
    "source": "Mexico Beach (visitor events)",
+   "gov": null,
    "town": "Mexico Beach",
    "title": "License-Free Saltwater Fishing Day",
    "starts": "2026-11-29T00:00:00",
@@ -2717,13 +2497,13 @@
    "cost": null,
    "url": "https://mexicobeach.com/event/license-free-saltwater-fishing-day/",
    "source_url": "https://www.mexicobeach.com/events/",
-   "recurring": false,
-   "gov": null
+   "recurring": false
   },
   {
    "event_id": "library:24020:2026-12-01",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City",
    "title": "Bouncin’ Babies & Toddlin’ 2’s (Ages 0 – 2)",
    "starts": "2026-12-01T09:30:00",
@@ -2734,13 +2514,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/bouncin-babies-toddlin-2s-ages-0-2/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "library:24073:2026-12-01",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City",
    "title": "Teen Advisory Board (Ages 14 – 17)",
    "starts": "2026-12-01T16:00:00",
@@ -2751,13 +2531,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/teen-advisory-board-ages-14-17/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "library:24029:2026-12-03",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City",
    "title": "Read & Rhyme Storytime (Ages 3 – 5 with caregiver)",
    "starts": "2026-12-03T10:30:00",
@@ -2768,13 +2548,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/read-rhyme-storytime-ages-3-5-with-caregiver/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "pcb-chamber:22791",
    "source_id": "pcb-chamber",
    "source": "Panama City Beach Chamber",
+   "gov": null,
    "town": "Panama City Beach",
    "title": "Powerade Panama City Beach Marathon",
    "starts": "2026-12-05T00:00:00",
@@ -2785,13 +2565,13 @@
    "cost": null,
    "url": "https://pcbeach.org/local-event/panama-city-beach-marathon/",
    "source_url": "https://pcbeach.org/local-events/",
-   "recurring": false,
-   "gov": null
+   "recurring": false
   },
   {
    "event_id": "library:24225:2026-12-05",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Parker",
    "title": "Saturday Storytime (Ages 3 – 6)",
    "starts": "2026-12-05T11:00:00",
@@ -2802,13 +2582,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/saturday-storytime-ages-3-6/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "library:24235:2026-12-05",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Parker",
    "title": "Saturday Programs (Ages 6 – 12)",
    "starts": "2026-12-05T12:30:00",
@@ -2819,13 +2599,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/saturday-programs-ages-6-12/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "mexico-beach:10001391-1796580000-1796585400:2026-12-06",
    "source_id": "mexico-beach",
    "source": "Mexico Beach (visitor events)",
+   "gov": null,
    "town": "Mexico Beach",
    "title": "Christmas Tree Lighting",
    "starts": "2026-12-06T18:00:00",
@@ -2836,13 +2616,13 @@
    "cost": null,
    "url": "https://mexicobeach.com/event/christmas-tree-lighting/",
    "source_url": "https://www.mexicobeach.com/events/",
-   "recurring": false,
-   "gov": null
+   "recurring": false
   },
   {
    "event_id": "library:24152:2026-12-07",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City",
    "title": "New Adult Social Hour (Ages 18 – 25)",
    "starts": "2026-12-07T17:00:00",
@@ -2853,13 +2633,13 @@
    "cost": "Free",
    "url": "https://www.nwrls.com/event/new-adult-social-hour-ages-18-25/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "library:24018:2026-12-08",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City",
    "title": "Bouncin’ Babies & Toddlin’ 2’s (Ages 0 – 2)",
    "starts": "2026-12-08T09:30:00",
@@ -2870,13 +2650,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/bouncin-babies-toddlin-2s-ages-0-2-2/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "library:24155:2026-12-08",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City",
    "title": "Computer Basics (Registration Required)",
    "starts": "2026-12-08T09:30:00",
@@ -2887,13 +2667,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/computer-basics-registration-required/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "library:24249:2026-12-08",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Parker",
    "title": "Crafternoon (Adults & Teens 16+)",
    "starts": "2026-12-08T11:00:00",
@@ -2904,13 +2684,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/crafternoon-adults-teens-16/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "library:24083:2026-12-08",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City",
    "title": "Art Club (Ages 12 – 17)",
    "starts": "2026-12-08T16:00:00",
@@ -2921,13 +2701,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/art-club-ages-12-17/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "library:24050:2026-12-09",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City",
    "title": "Youth Dungeons & Dragons (Ages 8 – 12)",
    "starts": "2026-12-09T14:00:00",
@@ -2938,13 +2718,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/youth-dungeons-dragons-ages-8-12/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "library:24157:2026-12-10",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City",
    "title": "Internet Basics (Registration Required)",
    "starts": "2026-12-10T09:30:00",
@@ -2955,13 +2735,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/internet-basics-registration-required/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "library:24141:2026-12-10",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City",
    "title": "BCPL Virtual Book Club (Zoom Program, Registration Required)",
    "starts": "2026-12-10T10:30:00",
@@ -2972,13 +2752,13 @@
    "cost": "Free",
    "url": "https://www.nwrls.com/event/bcpl-virtual-book-club-zoom-program-registration-required/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "library:24042:2026-12-10",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City",
    "title": "Read & Rhyme Storytime (Ages 3 – 5 with caregiver)",
    "starts": "2026-12-10T10:30:00",
@@ -2989,13 +2769,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/read-rhyme-storytime-ages-3-5-with-caregiver-2/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "library:24052:2026-12-10",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City",
    "title": "Youth Writing Group (Ages 6 – 12)",
    "starts": "2026-12-10T15:30:00",
@@ -3006,13 +2786,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/youth-writing-group-ages-6-12/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "pcb-chamber:26653",
    "source_id": "pcb-chamber",
    "source": "Panama City Beach Chamber",
+   "gov": null,
    "town": "Panama City Beach",
    "title": "Business After Hours – Annual Christmas Party",
    "starts": "2026-12-10T16:30:00",
@@ -3023,13 +2803,13 @@
    "cost": null,
    "url": "https://pcbeach.org/local-event/business-after-hours-annual-christmas-party-26/",
    "source_url": "https://pcbeach.org/local-events/",
-   "recurring": false,
-   "gov": null
+   "recurring": false
   },
   {
    "event_id": "mexico-beach:10001865-1797062400-1797076800:2026-12-12",
    "source_id": "mexico-beach",
    "source": "Mexico Beach (visitor events)",
+   "gov": null,
    "town": "Mexico Beach",
    "title": "Farmers & Craft Market",
    "starts": "2026-12-12T08:00:00",
@@ -3040,13 +2820,13 @@
    "cost": null,
    "url": "https://mexicobeach.com/event/farmers-market/2026-12-12/",
    "source_url": "https://www.mexicobeach.com/events/",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "library:24063:2026-12-12",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City",
    "title": "Teen Dungeons & Dragons (Ages 13 – 17)",
    "starts": "2026-12-12T14:00:00",
@@ -3057,13 +2837,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/teen-dungeons-dragons-ages-13-17/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "destination-pc:17846:2026-12-12",
    "source_id": "destination-pc",
    "source": "Destination Panama City",
+   "gov": null,
    "town": "Panama City",
    "title": "40th Annual Boat Parade of Lights",
    "starts": "2026-12-12T17:00:00",
@@ -3074,13 +2854,13 @@
    "cost": "Free for spectators",
    "url": "https://destinationpanamacity.com/annual-event/boat-parade-of-lights/",
    "source_url": "https://www.destinationpanamacity.com/events/",
-   "recurring": false,
-   "gov": null
+   "recurring": false
   },
   {
    "event_id": "pcb-chamber:27536",
    "source_id": "pcb-chamber",
    "source": "Panama City Beach Chamber",
+   "gov": null,
    "town": "Panama City",
    "title": "40th Annual Boat Parade of Lights",
    "starts": "2026-12-12T17:30:00",
@@ -3091,13 +2871,13 @@
    "cost": null,
    "url": "https://pcbeach.org/local-event/40th-annual-boat-parade-of-lights/",
    "source_url": "https://pcbeach.org/local-events/",
-   "recurring": false,
-   "gov": null
+   "recurring": false
   },
   {
    "event_id": "library:24057:2026-12-14",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City",
    "title": "11th Street Dulcimer Group Holiday Concert",
    "starts": "2026-12-14T16:00:00",
@@ -3108,13 +2888,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/11th-street-dulcimer-group-holiday-concert/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": false,
-   "gov": null
+   "recurring": false
   },
   {
    "event_id": "library:24150:2026-12-14",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City",
    "title": "New Adult Social Hour (Ages 18 – 25)",
    "starts": "2026-12-14T17:00:00",
@@ -3125,13 +2905,13 @@
    "cost": "Free",
    "url": "https://www.nwrls.com/event/new-adult-social-hour-ages-18-25-2/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "library:24016:2026-12-15",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City",
    "title": "Bouncin’ Babies & Toddlin’ 2’s (Ages 0 – 2)",
    "starts": "2026-12-15T09:30:00",
@@ -3142,13 +2922,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/bouncin-babies-toddlin-2s-ages-0-2-3/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "library:24218:2026-12-16",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City",
    "title": "LEGO Club (Ages 6 – 12)",
    "starts": "2026-12-16T14:00:00",
@@ -3159,13 +2939,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/lego-club-ages-6-12/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "library:24040:2026-12-17",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City",
    "title": "Read & Rhyme Storytime (Ages 3 – 5 with caregiver)",
    "starts": "2026-12-17T10:30:00",
@@ -3176,13 +2956,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/read-rhyme-storytime-ages-3-5-with-caregiver-3/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "library:24054:2026-12-17",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City",
    "title": "Chess & Chat (Ages 8 – 12)",
    "starts": "2026-12-17T15:30:00",
@@ -3193,13 +2973,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/chess-chat-ages-8-12/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": false,
-   "gov": null
+   "recurring": false
   },
   {
    "event_id": "library:24171:2026-12-17",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City",
    "title": "Shelf Indulgence Book Club (Off-Site)",
    "starts": "2026-12-17T17:30:00",
@@ -3210,13 +2990,13 @@
    "cost": "Free",
    "url": "https://www.nwrls.com/event/shelf-indulgence-book-club-off-site/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "library:24061:2026-12-19",
    "source_id": "library",
    "source": "Northwest Regional Library System",
+   "gov": null,
    "town": "Panama City",
    "title": "Teen Dungeons & Dragons (Ages 13 – 17)",
    "starts": "2026-12-19T14:00:00",
@@ -3227,13 +3007,13 @@
    "cost": null,
    "url": "https://www.nwrls.com/event/teen-dungeons-dragons-ages-13-17-2/",
    "source_url": "https://www.nwrls.com/events",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   },
   {
    "event_id": "mexico-beach:10001866-1798272000-1798286400:2026-12-26",
    "source_id": "mexico-beach",
    "source": "Mexico Beach (visitor events)",
+   "gov": null,
    "town": "Mexico Beach",
    "title": "Farmers & Craft Market",
    "starts": "2026-12-26T08:00:00",
@@ -3244,8 +3024,7 @@
    "cost": null,
    "url": "https://mexicobeach.com/event/farmers-market/2026-12-26/",
    "source_url": "https://www.mexicobeach.com/events/",
-   "recurring": true,
-   "gov": null
+   "recurring": true
   }
  ]
 }

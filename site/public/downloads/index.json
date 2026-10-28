@@ -121,7 +121,7 @@
    "id": "votes",
    "title": "Recorded votes",
    "description": "Votes by the County Commission, School Board, city commissions and CRA boards since 2016, with how each member voted: hand-researched money votes plus every motion read from the official minutes.",
-   "rows": 6714,
+   "rows": 9788,
    "columns": [
     {
      "name": "date",
@@ -371,7 +371,7 @@
    "id": "member-votes",
    "title": "Votes by member",
    "description": "One row per member per vote (long format), for tallying individual records.",
-   "rows": 32563,
+   "rows": 47731,
    "columns": [
     {
      "name": "date",
@@ -4690,7 +4690,7 @@
    "id": "business-donor-sunbiz",
    "title": "Business donors in the state corporate registry",
    "description": "Each business that gave to a current officeholder or 2026 local candidate, matched to its Florida Division of Corporations (Sunbiz) record: document number, registered name, status and principal city, with the match method. Business-level only; no owner or officer names.",
-   "rows": 2665,
+   "rows": 2663,
    "columns": [
     {
      "name": "contributor",
@@ -6457,7 +6457,7 @@
    "id": "business-officers",
    "title": "Business officers",
    "description": "Officers, managers, members and the registered agent of each registered business that has a profile on BayCounty.me (a company paid by a local government, a campaign donor, a federal contractor, a restaurant license holder and others), as filed with the Florida Division of Corporations (Sunbiz). One row per person or company and title; names and titles only, never addresses. officer_entity_id links an officer who already has a profile tied to that business (a nonprofit board member or a business owner who gave to a campaign); entity_id is the business's profile.",
-   "rows": 13481,
+   "rows": 13483,
    "columns": [
     {
      "name": "place_id",
@@ -6645,7 +6645,7 @@
    "id": "entity-profiles",
    "title": "Profiles: people, companies and organizations",
    "description": "Every company, elected official, candidate, nonprofit, nonprofit board member, registered business, committee and government named in BayCounty.me records, one row each, with its profile page and how many documented connections it has. entity_id (kind:key) joins entity-connections. Board members are named as their nonprofits' public filings list them; individual campaign donors are included only when they run a registered business (owner-gifts).",
-   "rows": 16664,
+   "rows": 16660,
    "columns": [
     {
      "name": "entity_id",
@@ -7542,7 +7542,7 @@
    "id": "data-source-sites",
    "title": "Websites our records cite",
    "description": "Every website cited by the records behind BayCounty.me, per topic, with how many distinct documents and pages from it the data links to. Counted from the data files at each build.",
-   "rows": 411,
+   "rows": 410,
    "columns": [
     {
      "name": "website",
@@ -8581,7 +8581,7 @@
    "id": "chamber-events",
    "title": "Chambers of commerce: events and programs",
    "description": "Upcoming events from each chamber's public calendar (kind event: title, start and end in local time, venue and city, category, the event's own link) and each chamber's yearly and monthly signature programs (kind program: schedule and what it is). chamber_event is false for community events a chamber lists on its calendar. Refreshed daily where the calendar has a public feed.",
-   "rows": 59,
+   "rows": 58,
    "columns": [
     {
      "name": "place_id",
@@ -8683,7 +8683,39 @@
     },
     {
      "name": "venue",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "Aaron Bessant Park",
+      "Anchorage Children’s Home",
+      "Bay Point Golf Club",
+      "Captain Anderson’s Event Center",
+      "Dave & Buster’s",
+      "Dolly Parton’s Pirates Voyage Dinner & Show",
+      "Edgewater Beach & Golf Resort",
+      "Embassy Suites Panama City Beach, VUE55 (Rooftop)",
+      "Frank Brown Park",
+      "Frank Brown Park Recreation Center",
+      "Gulf Coast State College",
+      "Gulf Coast State College, Student Union East",
+      "Hammerhead Fred’s",
+      "Historic St. Andrews",
+      "LaCo",
+      "McGuire’s Irish Pub",
+      "National Peanut Festival",
+      "PCB Wheel",
+      "Panama City Beach Senior Center",
+      "Panama City Marina",
+      "Panama Country Club",
+      "PeoplesSouth Bank",
+      "Pier Park",
+      "St. Andrews Baptist Church",
+      "Start/Finish Line located at Pier Park",
+      "SweetBay Community",
+      "The Barn at The Wicked Wheel",
+      "The Sapp House",
+      "Webinar",
+      "ZooWorld"
+     ]
     },
     {
      "name": "city",
@@ -8762,7 +8794,7 @@
    "id": "community-events",
    "title": "Community events",
    "description": "What's happening around the county in the next two months, from public calendars: the county and city calendars, the library system, visitor bureaus and the Panama City Beach Chamber. One row per event date: title, start and end in local time, town, venue name, category (Community, Public meeting, Library, Chamber), recurring for programs listed on two or more dates, and the event's own link. Refreshed daily.",
-   "rows": 188,
+   "rows": 175,
    "columns": [
     {
      "name": "place_id",
@@ -9225,7 +9257,7 @@
      "values": [
       "2025-05-05",
       "2025-10-27",
-      "2026-10-12"
+      "2026-10-26"
      ]
     },
     {
@@ -9237,6 +9269,7 @@
      "type": "string",
      "values": [
       "Good",
+      "Moderate",
       "Poor"
      ]
     },
@@ -9301,7 +9334,7 @@
    "id": "beach-water-samples",
    "title": "Beach water quality: samples",
    "description": "Every published Healthy Beaches sample at each site: date, enterococcus count per 100 mL, the state's rating and whether a health advisory was issued. The state's lookup shows the latest 50 samples per site; samples are kept here as they come in, so history grows from 2026 on.",
-   "rows": 663,
+   "rows": 676,
    "columns": [
     {
      "name": "place_id",
@@ -9439,7 +9472,8 @@
      "name": "issued",
      "type": "string",
      "values": [
-      "2026-10-27T16:01:00+00:00"
+      "2026-10-27T16:01:00+00:00",
+      "2026-10-28T09:28:00+00:00"
      ]
     },
     {
@@ -9447,10 +9481,10 @@
      "type": "string",
      "values": [
       "Friday",
-      "Rest Of Today",
       "Saturday",
+      "Sunday",
       "Thursday",
-      "Wednesday"
+      "Today"
      ]
     },
     {
@@ -9479,6 +9513,7 @@
      "name": "rip_current_risk",
      "type": "string",
      "values": [
+      "High",
       "Moderate"
      ]
     },
@@ -9486,8 +9521,7 @@
      "name": "surf_height",
      "type": "string",
      "values": [
-      "1 foot or less",
-      "Around 1 foot"
+      "1 foot or less"
      ]
     },
     {
@@ -9508,7 +9542,7 @@
      "name": "weather",
      "type": "string",
      "values": [
-      "Sunny"
+      "Mostly sunny"
      ]
     },
     {
@@ -9523,23 +9557,24 @@
      "name": "winds",
      "type": "string",
      "values": [
-      "Northeast winds 10 to 15 mph",
-      "Northeast winds 15 to 20 mph"
+      "Northeast winds 15 to 20 mph",
+      "Northeast winds around 15 mph"
      ]
     },
     {
      "name": "sunrise",
      "type": "string",
      "values": [
-      "7:53 AM"
+      "7:53 AM",
+      "7:54 AM"
      ]
     },
     {
      "name": "sunset",
      "type": "string",
      "values": [
-      "7:00 PM",
-      "7:01 PM"
+      "6:59 PM",
+      "7:00 PM"
      ]
     },
     {
@@ -9547,13 +9582,13 @@
      "type": "string",
      "values": [
       "Calm conditions. Rip currents can still form near piers, jetties and sandbars.",
+      "High rip current risk*. Mostly cloudy. Showers likely and a chance of thunderstorms. Highs in the upper 70s. East winds around 20 mph.",
+      "High rip current risk*. Partly sunny. Highs in the upper 70s. East winds around 15 mph.",
       "High surf and/or strong currents. Experienced swimmers only, and only close to shore.",
       "Jellyfish, stingrays or other marine life seen. Flies with another flag.",
-      "Moderate rip current risk*. Mostly sunny. Highs around 80. East winds around 15 mph.",
-      "Moderate rip current risk*. Mostly sunny. Highs in the upper 70s. East winds around 15 mph.",
-      "Moderate rip current risk*. Surf height 1 foot or less. Sunny. Highs around 80. Northeast winds around 15 mph.",
+      "Moderate rip current risk*. Surf height 1 foot or less. Mostly sunny. Highs around 80. East winds around 15 mph.",
       "Moderate surf and/or currents. Use caution.",
-      "Morning update: after communicating with St George Island State Park officials, beach flags may change from red to yellow this afternoon based on the latest conditions. Northeasterly winds will mostly be offshore which will keep surf heights low over the next several days. A moderate risk of rip currents is expected. The only exception is the Franklin County beaches, where the high risk looks to return on Wednesday and Thursday, due to an increasing component of Southeasterly swell.",
+      "Northeasterly offshore winds through Friday should maintain a moderate rip current risk. The exception may be Franklin County, if enough of a onshore component develops, so a high risk upgrade cannot be ruled out the next couple of days. Looking ahead to this weekend, a southeasterly component of swell develops, which may lead to a high risk across much of the gulf beaches.",
       "Swimming and wading are against the law while double red flags fly (fines apply in Panama City Beach and unincorporated Bay County)."
      ]
     },
@@ -9577,6 +9612,7 @@
      "type": "string",
      "values": [
       "https://api.weather.gov/products/1d2175a9-2fbe-4f4b-b3ea-4e25852ce9a8",
+      "https://api.weather.gov/products/6a65d031-005b-4233-8791-6a06b466f47a",
       "https://www.pcbfl.gov/174/Beach-Flags"
      ]
     },
@@ -11876,7 +11912,7 @@
      "name": "checked",
      "type": "string",
      "values": [
-      "2026-10-27"
+      "2026-10-28"
      ]
     },
     {
@@ -12025,7 +12061,7 @@
    "id": "emergency-notices",
    "title": "Emergency notices archive",
    "description": "Every emergency notice BayCounty.me has recorded for the county, newest first: National Weather Service watches, warnings and advisories, boil-water notices, road closures, water and sewer outages, evacuation orders, shelter openings and storm updates from each government's alert center and news feed, and FL511 state road closures. kind is the topic, status active (live at the last check), ended or lifted. first_seen and last_seen are when BayCounty.me saw it. The live list is /api/v1/emergency.",
-   "rows": 14,
+   "rows": 16,
    "columns": [
     {
      "name": "notice_id",
@@ -12078,11 +12114,43 @@
     },
     {
      "name": "title",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "Bay County expands storm debris assistance",
+      "Damage Assessment Reporting",
+      "Florida Avenue & W. 7th Street Closure",
+      "Hurricane Isaias Emergency Information",
+      "Hurricane Response & Recovery",
+      "Know Your Evacuation Zone",
+      "Precautionary Boil Water Notice for Manistee Drive",
+      "Precautionary Boil Water Notice for Panama City some residents of Fairy Ave & Baker Court Updated on 2026-10-27",
+      "Precautionary Boil Water Notice issued for Brandeis Ave, Stanford Rd, Huntingdon Rd, & Rutgers Dr. Updated on 2026-10-27",
+      "Reuse System Offline Due to Repair",
+      "Reuse System Temporarily Out of Service",
+      "Road Closure Notice: Michigan Ave. between W 22nd St. and W 20th Ct.",
+      "Sand Available Ahead of Tropical Storm Isaias",
+      "Tropical Storm Isaias Updates"
+     ]
     },
     {
      "name": "summary",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "As the storms clear, Bay County Emergency Management asks the residents of the county to fill out their residential damage assessment form.",
+      "Beginning Monday, Oct. 26, Bay County crews will conduct a single roadside collection pass specifically for unbagged vegetative debris in the hardest-hit areas of unincorporated Bay County.",
+      "Beginning Monday, October 5, the following sections will be closed to vehicle traffic: - Florida Avenue: W. 7th Street to W. 8th Street - W. 7th Street: Ohio Avenue to Florida Avenue Detour signs will be in place to help motorists navigate the area",
+      "Due to an install of a new section of water main, 104-181 Manistee Drive is under a Precautionary Boil Water Notice in Panama City Beach.",
+      "For local information on Tropical Storm Isaias, please visit www.pcbfl.gov/storm.",
+      "For the latest on Hurricane Isaias response and recovery, visit www.pcbfl.gov/storm",
+      "Heavy rain is expected this weekend with Tropical Storm Isaias. Bay County has sand available to the public to help you protect your home and property. Find sandbag pickup locations and details below.",
+      "Hurricane Isaias Emergency Information",
+      "Precautionary Boil Water Notice for Panama City residents of 901, 909, 910, 912, 915 Fairy Ave & 1408 Baker Court. Update: Water restored at 6:00 PM Monday evening, October 26, 2026.",
+      "Precautionary Boil Water Notice issued for Brandeis Ave, Stanford Rd, Huntingdon Rd, & Rutgers Dr for Tues., Oct. 27 due to scheduled system upgrades. Update: Updated Maintenance Window: Water service will be interrupted starting at 11:00 a.m. Tuesday October 27, 2026, and ending at 7:00 p.m. Tuesday October 27 , 2026, due to scheduled system upgrades. A precautionary boil water notice will be in effect for this area once service is restored.",
+      "ROAD CLOSURE NOTICE: Michigan Avenue – Road Work",
+      "The City of Lynn Haven advises customers that the reuse water system is temporarily out of service as of Thursday, October 22, 2026, due to repair of a broken reuse water main.",
+      "The City of Lynn Haven advises customers that the reuse water system is temporarily out of service as of Thursday, October 22, 2026, through November 1, 2026, due to repair of a broken reuse water main.",
+      "With heavy rain expected, now is a good time to check your evacuation zone. Evacuation zones in Bay County may be different than you think. Look up your address on the Evacuation Zones map on the Bay County website below."
+     ]
     },
     {
      "name": "instruction",
@@ -12110,7 +12178,23 @@
     },
     {
      "name": "issued",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "2026-09-30T14:22:59.000Z",
+      "2026-10-07T17:19:52.000Z",
+      "2026-10-08T13:03:43.000Z",
+      "2026-10-08T16:07:00.000Z",
+      "2026-10-10T14:28:00.000Z",
+      "2026-10-12T20:05:36.000Z",
+      "2026-10-13T20:40:17.000Z",
+      "2026-10-14T16:51:36.000Z",
+      "2026-10-14T17:52:00.000Z",
+      "2026-10-23T14:35:50.000Z",
+      "2026-10-23T14:42:27.000Z",
+      "2026-10-27T14:16:07.000Z",
+      "2026-10-27T19:08:06.000Z",
+      "2026-10-27T22:46:29.000Z"
+     ]
     },
     {
      "name": "starts",
@@ -12131,7 +12215,23 @@
     },
     {
      "name": "updated",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "2026-09-30T14:22:59.000Z",
+      "2026-10-07T17:19:52.000Z",
+      "2026-10-08T13:03:43.000Z",
+      "2026-10-08T16:07:00.000Z",
+      "2026-10-10T14:28:00.000Z",
+      "2026-10-12T20:05:36.000Z",
+      "2026-10-13T20:40:17.000Z",
+      "2026-10-14T16:51:36.000Z",
+      "2026-10-14T17:52:00.000Z",
+      "2026-10-23T14:35:50.000Z",
+      "2026-10-23T14:42:27.000Z",
+      "2026-10-27T14:16:07.000Z",
+      "2026-10-27T19:08:06.000Z",
+      "2026-10-27T22:46:29.000Z"
+     ]
     },
     {
      "name": "status",
@@ -12153,19 +12253,37 @@
      "name": "first_seen",
      "type": "string",
      "values": [
-      "2026-10-27T20:41:37.771Z"
+      "2026-10-27T20:41:37.771Z",
+      "2026-10-28T00:40:09.58179+00:00"
      ]
     },
     {
      "name": "last_seen",
      "type": "string",
      "values": [
-      "2026-10-27T20:41:53.613Z"
+      "2026-10-27T20:41:53.613Z",
+      "2026-10-28T11:28:47.966Z"
      ]
     },
     {
      "name": "url",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "https://www.baycountyfl.gov/836/10348/Activation-Information?activeLiveTab=widgets",
+      "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=224",
+      "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=324",
+      "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=325",
+      "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=326",
+      "https://www.cityoflynnhaven.gov/AlertCenter.aspx?AID=144",
+      "https://www.cityoflynnhaven.gov/AlertCenter.aspx?AID=145",
+      "https://www.cityoflynnhaven.gov/CivicAlerts.aspx?aid=353",
+      "https://www.panamacity.gov/AlertCenter.aspx?AID=689",
+      "https://www.panamacity.gov/AlertCenter.aspx?AID=700",
+      "https://www.panamacity.gov/AlertCenter.aspx?AID=701",
+      "https://www.pcbfl.gov/AlertCenter.aspx?AID=23",
+      "https://www.pcbfl.gov/CivicAlerts.aspx?aid=45",
+      "https://www.pcbfl.gov/storm"
+     ]
     },
     {
      "name": "source_url",
@@ -13326,7 +13444,7 @@
    "id": "job-openings",
    "title": "Government job openings",
    "description": "Open jobs posted by Bay County, Bay District Schools, the cities and the airport on their own job boards, read daily: title, department, job type, pay where posted, posting and closing dates and the link to apply. Jobs whose closing date has passed are left out. first_seen is the first day the job was on file.",
-   "rows": 102,
+   "rows": 111,
    "columns": [
     {
      "name": "place_id",
@@ -13393,6 +13511,7 @@
       "Full time",
       "Full- Time",
       "Instructional",
+      "Licensed",
       "Part time",
       "Part-Time",
       "Substitutes",
@@ -13429,7 +13548,6 @@
       "2026-09-16",
       "2026-09-22",
       "2026-09-24",
-      "2026-09-27",
       "2026-09-28",
       "2026-09-29",
       "2026-09-30",
@@ -13475,7 +13593,8 @@
      "name": "first_seen",
      "type": "string",
      "values": [
-      "2026-10-27"
+      "2026-10-27",
+      "2026-10-28"
      ]
     },
     {
@@ -13561,7 +13680,7 @@
      "name": "checked",
      "type": "string",
      "values": [
-      "2026-10-27"
+      "2026-10-28"
      ]
     }
    ],
@@ -14654,7 +14773,7 @@
    "id": "restaurant-inspections",
    "title": "Restaurant inspections",
    "description": "Every state food safety inspection of a restaurant, food truck, caterer or other food service license in the county since 2016, one row per visit: date, type (routine, complaint, licensing, or a follow-up visit when visit_number is over 1), the state's disposition and what it means in plain words (result, result_level ok, warning, fine or closed), violation counts by priority (high priority violations are the ones most likely to make someone sick), and the violation items cited. From the Florida DBPR Division of Hotels and Restaurants public records, refreshed daily.",
-   "rows": 17175,
+   "rows": 17183,
    "columns": [
     {
      "name": "place_id",
@@ -14930,7 +15049,7 @@
    "id": "weekly-roundup",
    "title": "This week in Bay County",
    "description": "This week's edition of the weekly email and the /this-week page, one row per item: events happening this week (one-off events first; repeating programs and meetings left out), public meetings this week, and votes, contracts and change orders that first appeared on BayCounty.me last week (first_seen; minutes come out weeks after a meeting, so date can be earlier). section is event, meeting, vote, contract or change_order; featured marks what the email shows. people lists who voted no, with profile links. Rebuilt every morning.",
-   "rows": 47,
+   "rows": 30,
    "columns": [
     {
      "name": "place_id",
@@ -14973,7 +15092,36 @@
     },
     {
      "name": "title",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "Bay County Fire Rescue Open House",
+      "Boo Bash",
+      "Card Club",
+      "Craft Drop-in: Halloween",
+      "Crafternoon @ The Library",
+      "Dream Builders at MLK",
+      "Escape the Library (Ages 13+) (Registration Required)",
+      "Fall Festival",
+      "Heroes Breakfast",
+      "Jiu Jitsu For Mind, Body & Soul w/ Cameron",
+      "Line Dancing",
+      "Marshall Brothers",
+      "Mexico Beach: 3rd LDC Workshop",
+      "Mexico Beach: Special Meeting and 4th LDC Workshop",
+      "PC Art Club",
+      "PC Senior Arts",
+      "PC Senior Living",
+      "Read & Rhyme Storytime (Ages 3 – 5 with caregiver)",
+      "Sail Into School (Ages 3 – 5)",
+      "Sansom Equipment Company, Inc.",
+      "Sea Needles",
+      "Sunset Yoga",
+      "Teen Game Night (Ages 13 – 18)",
+      "Ten-8 Fire & Safety, LLC",
+      "Toys for Kids Halloween Bash 2026",
+      "Young Professionals Coffee, Conversations & Headshots",
+      "ZooBoo"
+     ]
     },
     {
      "name": "summary",
@@ -14990,7 +15138,6 @@
      "values": [
       "2026-10-20",
       "2026-10-22",
-      "2026-10-27",
       "2026-10-28",
       "2026-10-29",
       "2026-10-30",
@@ -14999,21 +15146,38 @@
     },
     {
      "name": "starts",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "2026-10-28T08:00:00",
+      "2026-10-28T13:00:00",
+      "2026-10-28T14:00:00",
+      "2026-10-28T15:00:00",
+      "2026-10-28T16:00:00",
+      "2026-10-28T16:30:00",
+      "2026-10-28T18:00:00",
+      "2026-10-29T09:00:00",
+      "2026-10-29T09:00:00-05:00",
+      "2026-10-29T10:00:00",
+      "2026-10-29T10:30:00",
+      "2026-10-29T15:00:00",
+      "2026-10-29T17:30:00",
+      "2026-10-29T18:00:00",
+      "2026-10-30T09:00:00",
+      "2026-10-30T09:00:00-05:00",
+      "2026-10-30T09:30:00",
+      "2026-10-30T10:00:00",
+      "2026-10-30T13:00:00",
+      "2026-10-30T14:00:00",
+      "2026-10-30T15:00:00",
+      "2026-10-31T00:00:00",
+      "2026-10-31T08:00:00",
+      "2026-10-31T09:00:00"
+     ]
     },
     {
      "name": "ends",
      "type": "string",
      "values": [
-      "2026-10-27T09:30:00",
-      "2026-10-27T10:30:00",
-      "2026-10-27T11:00:00",
-      "2026-10-27T15:00:00",
-      "2026-10-27T15:30:00",
-      "2026-10-27T17:00:00",
-      "2026-10-27T18:30:00",
-      "2026-10-27T19:00:00",
-      "2026-10-27T20:00:00",
       "2026-10-28T10:00:00",
       "2026-10-28T15:00:00",
       "2026-10-28T17:00:00",
@@ -15049,12 +15213,8 @@
      "type": "string",
      "values": [
       "county",
-      "cw",
-      "lh",
       "mb",
-      "pc",
-      "pcb",
-      "schools"
+      "pcb"
      ]
     },
     {
@@ -15062,11 +15222,7 @@
      "type": "string",
      "values": [
       "Bay County",
-      "Bay District Schools",
-      "Callaway",
-      "Lynn Haven",
       "Mexico Beach",
-      "Panama City",
       "Panama City Beach"
      ]
     },
@@ -15074,11 +15230,7 @@
      "name": "board",
      "type": "string",
      "values": [
-      "Bay District School Board",
-      "Callaway City Commission",
-      "Lynn Haven City Commission",
-      "Mexico Beach City Council",
-      "Panama City City Commission"
+      "Mexico Beach City Council"
      ]
     },
     {
@@ -15095,20 +15247,14 @@
      "name": "venue",
      "type": "string",
      "values": [
-      "1311 Balboa Ave, Panama City, FL 32401",
-      "Bay County Govt. Center - 840 W. 11th St Panama City FL 32401",
       "Bay County Public Library",
-      "Callaway Arts & Conference Center - 500 Callaway Park Way Callaway FL 32404",
       "Dave & Buster’s",
       "Hammerhead Fred’s",
       "Panama City Beach Public Library",
-      "Papa Joe’s Bayside",
       "Parker Park",
       "PeoplesSouth Bank",
       "The Sapp House",
       "Venue not stated on the council meetings page; City of Mexico Beach offices: 201 Paradise Path, Mexico Beach, FL 32456",
-      "Walter T. Kelley Chambers - 825 Ohio Avenue Lynn Haven FL 32444",
-      "Wild Root Coffee & Tea",
       "ZooWorld"
      ]
     },
@@ -15133,7 +15279,6 @@
      "name": "agenda_posted",
      "type": "boolean",
      "values": [
-      false,
       true
      ]
     },
@@ -15230,16 +15375,12 @@
      "type": "string",
      "values": [
       "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=5259",
-      "https://lynnhavenfl.portal.civicclerk.com/",
       "https://mexicobeachfl.gov/government/council-meetings/",
       "https://pcbeach.org/local-events/",
       "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&event_id=219",
-      "https://www.bay.k12.fl.us/school-board-meetings",
       "https://www.baycountyfl.gov/Calendar.aspx",
-      "https://www.cityofcallaway.com/AgendaCenter",
       "https://www.mexicobeach.com/events/",
       "https://www.nwrls.com/events",
-      "https://www.panamacity.gov/AgendaCenter",
       "https://www.panamacity.gov/Calendar.aspx"
      ]
     },
@@ -16052,7 +16193,7 @@
      "name": "as_of",
      "type": "string",
      "values": [
-      "2026-10-27"
+      "2026-10-28"
      ]
     },
     {
@@ -16217,7 +16358,7 @@
    "id": "meetings",
    "title": "Upcoming meetings",
    "description": "Scheduled and expected meetings for every board.",
-   "rows": 53,
+   "rows": 48,
    "columns": [
     {
      "name": "board",
@@ -16243,7 +16384,6 @@
      "type": "string",
      "values": [
       "10/13/26 CRA Board Meeting",
-      "10/20/26 Special Executive Session - Case No. 5:26-cv-00032-AW-MJF (Vickie Gainer v. City of Lynn Ha",
       "3rd LDC Workshop",
       "BOCC Regular Meeting",
       "Bay County Board of County Commissioners Meeting",
@@ -16265,8 +16405,7 @@
       "School Board Meeting",
       "School Board Meeting - Organizational Meeting",
       "Special Meeting and 4th LDC Workshop",
-      "Virtual CRA Workshop",
-      "Virtual Workshop Meeting of October 20, 2026."
+      "Virtual CRA Workshop"
      ]
     },
     {
@@ -16307,19 +16446,15 @@
       "https://cityofparker.com/wp-content/uploads/filr/7047/Agenda-Regular-Council-Meeting-Package.pdf",
       "https://cityofparker.com/wp-content/uploads/filr/7056/Agenda-Regular-Meeting-Cancelled-11.03.26.pdf",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1130,plainText=false)",
-      "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1137,plainText=false)",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1145,plainText=false)",
       "https://mexicobeachfl.gov/uploads/2026/09/Octerver-27-2026-City-Council-Meeting-Agena.pdf",
-      "https://mexicobeachfl.gov/uploads/2026/09/October-13-2026-City-Council-Meeting-Agenda.pdf",
       "https://mexicobeachfl.gov/uploads/2026/10/November-5-2026-Special-Meeting-LDC-Workshop.pdf",
       "https://mexicobeachfl.gov/uploads/2026/10/October-29-2026-LDC-Workshop-3.pdf",
       "https://mexicobeachfl.gov/uploads/2026/10/October-30-2026-Special-Meeting-LDC-Workshop-2.pdf",
       "https://pcbgov.granicus.com/AgendaViewer.php?view_id=1&clip_id=421",
       "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_09172026-423",
-      "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_10132026-425",
       "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_10272026-427",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-912?html=true",
-      "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10202026-915?html=true",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10272026-902?html=true",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_11032026-916",
       "https://www.springfieldfl.net/media/10901"
@@ -16331,13 +16466,10 @@
      "values": [
       "https://baycountyfl.primegov.com/Public/CompiledDocument?meetingTemplateId=1942&compileOutputType=1",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1131,plainText=false)",
-      "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1138,plainText=false)",
       "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1149,plainText=false)",
-      "https://mexicobeachfl.gov/uploads/2026/09/October-13-2026-CIty-Council-Meeting-Agenda-Packet.pdf",
       "https://mexicobeachfl.gov/uploads/2026/09/October-27-2026-City-Council-Meeting-Packet.pdf",
       "https://mexicobeachfl.gov/uploads/2026/10/October-30-2026-Special-Meeting-and-LDc-Workshop-Packet.pdf",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10132026-912?packet=true",
-      "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10202026-915?packet=true",
       "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10272026-902?packet=true"
      ]
     },
@@ -16414,7 +16546,6 @@
       "https://lynnhavenfl.portal.civicclerk.com/event/1094/files",
       "https://lynnhavenfl.portal.civicclerk.com/event/1095/files",
       "https://lynnhavenfl.portal.civicclerk.com/event/2130/files",
-      "https://lynnhavenfl.portal.civicclerk.com/event/2143/files",
       "https://www.bay.k12.fl.us/school-board-meetings",
       "https://www.baycountyfl.gov/calendar.aspx?EID=1594",
       "https://www.baycountyfl.gov/calendar.aspx?EID=1595",
@@ -16424,18 +16555,15 @@
       "https://www.baycountyfl.gov/calendar.aspx?EID=1686",
       "https://www.cityofcallaway.com/calendar.aspx?EID=2696",
       "https://www.cityofcallaway.com/calendar.aspx?EID=2697",
-      "https://www.cityofcallaway.com/calendar.aspx?EID=2707",
       "https://www.panamacity.gov/calendar.aspx?EID=6076",
       "https://www.panamacity.gov/calendar.aspx?EID=6077",
-      "https://www.panamacity.gov/calendar.aspx?EID=6148",
       "https://www.panamacity.gov/calendar.aspx?EID=7564",
       "https://www.panamacity.gov/calendar.aspx?EID=7565",
       "https://www.springfieldfl.net/community/meeting/commission-meeting-74",
       "https://www.springfieldfl.net/community/meeting/commission-meeting-76",
       "https://www.springfieldfl.net/community/meeting/commission-meeting-77",
       "https://www.springfieldfl.net/community/meeting/commission-workshop-54",
-      "https://www.springfieldfl.net/community/meeting/commission-workshop-55",
-      "https://youtube.com/live/aX2AYat8SmM?feature=share"
+      "https://www.springfieldfl.net/community/meeting/commission-workshop-55"
      ]
     },
     {
@@ -16447,19 +16575,17 @@
      "type": "array"
     },
     {
-     "name": "calendar_source",
-     "type": "string",
-     "values": [
-      "calendar:https://www.cityofcallaway.com/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar",
-      "calendar:https://www.cityoflynnhaven.gov/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar",
-      "calendar:https://www.panamacity.gov/common/modules/iCalendar/iCalendar.aspx?catID=22&feed=calendar"
-     ]
-    },
-    {
      "name": "cancelled",
      "type": "boolean",
      "values": [
       true
+     ]
+    },
+    {
+     "name": "calendar_source",
+     "type": "string",
+     "values": [
+      "calendar:https://www.cityoflynnhaven.gov/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar"
      ]
     },
     {

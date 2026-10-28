@@ -1,5 +1,5 @@
 {
- "fetched_at": "2026-10-27T20:37:21+00:00",
+ "fetched_at": "2026-10-28T11:28:45+00:00",
  "sites": [
   {
    "site_id": "Bay12",
@@ -549,6 +549,17 @@
    "source_url": "https://www.floridahealth.gov/community-environmental-public-health/environmental-public-health/water-quality/beach-water-quality/beach-detail/?County=Bay&SPLocation=BAY+COUNTY+PUBLIC+BEACH+ACCESS+96&SPNo=&SPLat=30.26048935&SPLong=-85.97525055"
   },
   {
+   "site_id": "Bay1",
+   "site": "Bay County Public Beach Access 96",
+   "sample_number": "1319",
+   "date": "2026-10-26",
+   "enterococcus": 10.0,
+   "reported": "10",
+   "advisory": false,
+   "rating": "Good",
+   "source_url": "https://www.floridahealth.gov/community-environmental-public-health/environmental-public-health/water-quality/beach-water-quality/beach-detail/?County=Bay&SPLocation=BAY+COUNTY+PUBLIC+BEACH+ACCESS+96&SPNo=&SPLat=30.26048935&SPLong=-85.97525055"
+  },
+  {
    "site_id": "Bay10",
    "site": "Beach Drive",
    "sample_number": "1204",
@@ -1081,6 +1092,17 @@
    "site": "Beach Drive",
    "sample_number": "1317",
    "date": "2026-10-12",
+   "enterococcus": 10.0,
+   "reported": "10",
+   "advisory": false,
+   "rating": "Good",
+   "source_url": "https://www.floridahealth.gov/community-environmental-public-health/environmental-public-health/water-quality/beach-water-quality/beach-detail/?County=Bay&SPLocation=BEACH+DRIVE&SPNo=&SPLat=30.1640757&SPLong=-85.68754788"
+  },
+  {
+   "site_id": "Bay10",
+   "site": "Beach Drive",
+   "sample_number": "1319",
+   "date": "2026-10-26",
    "enterococcus": 10.0,
    "reported": "10",
    "advisory": false,
@@ -2034,6 +2056,17 @@
    "source_url": "https://www.floridahealth.gov/community-environmental-public-health/environmental-public-health/water-quality/beach-water-quality/beach-detail/?County=Bay&SPLocation=8TH+STREET&SPNo&SPLat=29.93689167&SPLong=-85.40334143"
   },
   {
+   "site_id": "Bay12",
+   "site": "8th Street",
+   "sample_number": "1319",
+   "date": "2026-10-26",
+   "enterococcus": 30.0,
+   "reported": "30",
+   "advisory": false,
+   "rating": "Good",
+   "source_url": "https://www.floridahealth.gov/community-environmental-public-health/environmental-public-health/water-quality/beach-water-quality/beach-detail/?County=Bay&SPLocation=8TH+STREET&SPNo&SPLat=29.93689167&SPLong=-85.40334143"
+  },
+  {
    "site_id": "Bay13",
    "site": "Mexico Beach 1st St",
    "sample_number": "1281",
@@ -2423,6 +2456,17 @@
    "site": "Mexico Beach 1st St",
    "sample_number": "1317",
    "date": "2026-10-12",
+   "enterococcus": 10.0,
+   "reported": "10",
+   "advisory": false,
+   "rating": "Good",
+   "source_url": "https://www.floridahealth.gov/community-environmental-public-health/environmental-public-health/water-quality/beach-water-quality/beach-detail/?County=Bay&SPLocation=MEXICO+BEACH+1st+STREET&SPNo=&SPLat=29.92927677&SPLong=-85.39425042"
+  },
+  {
+   "site_id": "Bay13",
+   "site": "Mexico Beach 1st St",
+   "sample_number": "1319",
+   "date": "2026-10-26",
    "enterococcus": 10.0,
    "reported": "10",
    "advisory": false,
@@ -2980,6 +3024,17 @@
    "source_url": "https://www.floridahealth.gov/community-environmental-public-health/environmental-public-health/water-quality/beach-water-quality/beach-detail/?County=Bay&SPLocation=LAGUNA+BEACH&SPNo=&SPLat=30.23852787&SPLong=-85.92479022"
   },
   {
+   "site_id": "Bay2",
+   "site": "Laguna Beach",
+   "sample_number": "1319",
+   "date": "2026-10-26",
+   "enterococcus": 10.0,
+   "reported": "10",
+   "advisory": false,
+   "rating": "Good",
+   "source_url": "https://www.floridahealth.gov/community-environmental-public-health/environmental-public-health/water-quality/beach-water-quality/beach-detail/?County=Bay&SPLocation=LAGUNA+BEACH&SPNo=&SPLat=30.23852787&SPLong=-85.92479022"
+  },
+  {
    "site_id": "Bay3",
    "site": "PCB City Pier",
    "sample_number": "1199",
@@ -3519,6 +3574,17 @@
    "source_url": "https://www.floridahealth.gov/community-environmental-public-health/environmental-public-health/water-quality/beach-water-quality/beach-detail/?County=Bay&SPLocation=PCB+CITY+PIER&SPNo=&SPLat=30.2149011&SPLong=-85.87796972"
   },
   {
+   "site_id": "Bay3",
+   "site": "PCB City Pier",
+   "sample_number": "1319",
+   "date": "2026-10-26",
+   "enterococcus": 10.0,
+   "reported": "10",
+   "advisory": false,
+   "rating": "Good",
+   "source_url": "https://www.floridahealth.gov/community-environmental-public-health/environmental-public-health/water-quality/beach-water-quality/beach-detail/?County=Bay&SPLocation=PCB+CITY+PIER&SPNo=&SPLat=30.2149011&SPLong=-85.87796972"
+  },
+  {
    "site_id": "Bay377",
    "site": "Sunset Park",
    "sample_number": "1281",
@@ -3908,6 +3974,17 @@
    "site": "Sunset Park",
    "sample_number": "1317",
    "date": "2026-10-12",
+   "enterococcus": 10.0,
+   "reported": "10",
+   "advisory": false,
+   "rating": "Good",
+   "source_url": "https://www.floridahealth.gov/community-environmental-public-health/environmental-public-health/water-quality/beach-water-quality/beach-detail/?County=Bay&SPLocation=SUNSET+PARK&SPNo&SPLat=29.9422004&SPLong=-85.4107167"
+  },
+  {
+   "site_id": "Bay377",
+   "site": "Sunset Park",
+   "sample_number": "1319",
+   "date": "2026-10-26",
    "enterococcus": 10.0,
    "reported": "10",
    "advisory": false,
@@ -4465,6 +4542,17 @@
    "source_url": "https://www.floridahealth.gov/community-environmental-public-health/environmental-public-health/water-quality/beach-water-quality/beach-detail/?County=Bay&SPLocation=BID-A-WEE+BEACH&SPNo=&SPLat=30.20040528&SPLong=-85.85063557"
   },
   {
+   "site_id": "Bay4",
+   "site": "Bid-a-wee Beach",
+   "sample_number": "1319",
+   "date": "2026-10-26",
+   "enterococcus": 10.0,
+   "reported": "10",
+   "advisory": false,
+   "rating": "Good",
+   "source_url": "https://www.floridahealth.gov/community-environmental-public-health/environmental-public-health/water-quality/beach-water-quality/beach-detail/?County=Bay&SPLocation=BID-A-WEE+BEACH&SPNo=&SPLat=30.20040528&SPLong=-85.85063557"
+  },
+  {
    "site_id": "Bay403",
    "site": "Leslie Porter Wayside Park",
    "sample_number": "1281",
@@ -4861,6 +4949,17 @@
    "source_url": "https://www.floridahealth.gov/community-environmental-public-health/environmental-public-health/water-quality/beach-water-quality/beach-detail/?County=Bay&SPLocation=LESLIE+PORTER+WAYSIDE+PARK&SPNo=&SPLat=30.254081&SPLong=-85.646434"
   },
   {
+   "site_id": "Bay403",
+   "site": "Leslie Porter Wayside Park",
+   "sample_number": "1319",
+   "date": "2026-10-26",
+   "enterococcus": 41.0,
+   "reported": "41",
+   "advisory": false,
+   "rating": "Moderate",
+   "source_url": "https://www.floridahealth.gov/community-environmental-public-health/environmental-public-health/water-quality/beach-water-quality/beach-detail/?County=Bay&SPLocation=LESLIE+PORTER+WAYSIDE+PARK&SPNo=&SPLat=30.254081&SPLong=-85.646434"
+  },
+  {
    "site_id": "Bay404",
    "site": "37th St Public Access",
    "sample_number": "1281",
@@ -5250,6 +5349,17 @@
    "site": "37th St Public Access",
    "sample_number": "1317",
    "date": "2026-10-12",
+   "enterococcus": 10.0,
+   "reported": "10",
+   "advisory": false,
+   "rating": "Good",
+   "source_url": "https://www.floridahealth.gov/community-environmental-public-health/environmental-public-health/water-quality/beach-water-quality/beach-detail/?County=Bay&SPLocation=37th STREET PUBLIC ACCESS&SPNo=&SPLat=29.948784&SPLong=-85.424798"
+  },
+  {
+   "site_id": "Bay404",
+   "site": "37th St Public Access",
+   "sample_number": "1319",
+   "date": "2026-10-26",
    "enterococcus": 10.0,
    "reported": "10",
    "advisory": false,
@@ -6357,6 +6467,17 @@
    "source_url": "https://www.floridahealth.gov/community-environmental-public-health/environmental-public-health/water-quality/beach-water-quality/beach-detail/?County=Bay&SPLocation=RICK+SELTZER+PARK&SPNo=&SPLat=30.15824017&SPLong=-85.77893633"
   },
   {
+   "site_id": "Bay6",
+   "site": "Rick Seltzer Park",
+   "sample_number": "1319",
+   "date": "2026-10-26",
+   "enterococcus": 10.0,
+   "reported": "10",
+   "advisory": false,
+   "rating": "Good",
+   "source_url": "https://www.floridahealth.gov/community-environmental-public-health/environmental-public-health/water-quality/beach-water-quality/beach-detail/?County=Bay&SPLocation=RICK+SELTZER+PARK&SPNo=&SPLat=30.15824017&SPLong=-85.77893633"
+  },
+  {
    "site_id": "Bay7",
    "site": "Spyglass Drive",
    "sample_number": "1187",
@@ -6900,6 +7021,17 @@
    "site": "Spyglass Drive",
    "sample_number": "1317",
    "date": "2026-10-12",
+   "enterococcus": 10.0,
+   "reported": "10",
+   "advisory": false,
+   "rating": "Good",
+   "source_url": "https://www.floridahealth.gov/community-environmental-public-health/environmental-public-health/water-quality/beach-water-quality/beach-detail/?County=Bay&SPLocation=SPYGLASS+DRIVE&SPNo=&SPLat=30.13704533&SPLong=-85.7504149"
+  },
+  {
+   "site_id": "Bay7",
+   "site": "Spyglass Drive",
+   "sample_number": "1319",
+   "date": "2026-10-26",
    "enterococcus": 10.0,
    "reported": "10",
    "advisory": false,
@@ -7454,6 +7586,17 @@
    "reported": "10",
    "advisory": false,
    "rating": "Good",
+   "source_url": "https://www.floridahealth.gov/community-environmental-public-health/environmental-public-health/water-quality/beach-water-quality/beach-detail/?County=Bay&SPLocation=CARL+GRAY+PARK&SPNo=&SPLat=30.18776747&SPLong=-85.72827545"
+  },
+  {
+   "site_id": "Bay9",
+   "site": "Carl Gray Park",
+   "sample_number": "1319",
+   "date": "2026-10-26",
+   "enterococcus": 259.0,
+   "reported": "259",
+   "advisory": true,
+   "rating": "Poor",
    "source_url": "https://www.floridahealth.gov/community-environmental-public-health/environmental-public-health/water-quality/beach-water-quality/beach-detail/?County=Bay&SPLocation=CARL+GRAY+PARK&SPNo=&SPLat=30.18776747&SPLong=-85.72827545"
   }
  ],

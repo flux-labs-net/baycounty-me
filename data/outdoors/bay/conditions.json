@@ -1,35 +1,22 @@
 {
- "fetched_at": "2026-10-27T20:47:46+00:00",
- "issued": "2026-10-27T16:01:00+00:00",
- "product_url": "https://api.weather.gov/products/1d2175a9-2fbe-4f4b-b3ea-4e25852ce9a8",
+ "fetched_at": "2026-10-28T11:28:45+00:00",
+ "issued": "2026-10-28T09:28:00+00:00",
+ "product_url": "https://api.weather.gov/products/6a65d031-005b-4233-8791-6a06b466f47a",
  "zone": "FLZ112",
  "office": "TAE",
  "flag_label": "Bay",
- "flag": "Yellow",
- "outlook": "Morning update: after communicating with St George Island State Park officials, beach flags may change from red to yellow this afternoon based on the latest conditions. Northeasterly winds will mostly be offshore which will keep surf heights low over the next several days. A moderate risk of rip currents is expected. The only exception is the Franklin County beaches, where the high risk looks to return on Wednesday and Thursday, due to an increasing component of Southeasterly swell.",
+ "flag": null,
+ "outlook": "Northeasterly offshore winds through Friday should maintain a moderate rip current risk. The exception may be Franklin County, if enough of a onshore component develops, so a high risk upgrade cannot be ruled out the next couple of days. Looking ahead to this weekend, a southeasterly component of swell develops, which may lead to a high risk across much of the gulf beaches.",
  "periods": [
   {
-   "period": "Rest Of Today",
+   "period": "Today",
    "rip_current_risk": "Moderate",
    "surf_height": "1 foot or less",
    "uv_index": "High",
    "water_temperature": "75 degrees",
-   "weather": "Sunny",
+   "weather": "Mostly sunny",
    "high_temperature": "Around 80",
-   "winds": "Northeast winds 10 to 15 mph",
-   "sunrise": "7:53 AM",
-   "sunset": "7:01 PM",
-   "summary": null
-  },
-  {
-   "period": "Wednesday",
-   "rip_current_risk": "Moderate",
-   "surf_height": "Around 1 foot",
-   "uv_index": null,
-   "water_temperature": null,
-   "weather": "Sunny",
-   "high_temperature": "In the lower 80s",
-   "winds": "Northeast winds 15 to 20 mph",
+   "winds": "Northeast winds around 15 mph",
    "sunrise": "7:53 AM",
    "sunset": "7:00 PM",
    "summary": null
@@ -40,17 +27,17 @@
    "surf_height": "1 foot or less",
    "uv_index": null,
    "water_temperature": null,
-   "weather": null,
-   "high_temperature": null,
-   "winds": null,
-   "sunrise": null,
-   "sunset": null,
-   "summary": "Moderate rip current risk*. Surf height 1 foot or less. Sunny. Highs around 80. Northeast winds around 15 mph."
+   "weather": "Mostly sunny",
+   "high_temperature": "In the lower 80s",
+   "winds": "Northeast winds 15 to 20 mph",
+   "sunrise": "7:54 AM",
+   "sunset": "6:59 PM",
+   "summary": null
   },
   {
    "period": "Friday",
    "rip_current_risk": "Moderate",
-   "surf_height": null,
+   "surf_height": "1 foot or less",
    "uv_index": null,
    "water_temperature": null,
    "weather": null,
@@ -58,11 +45,11 @@
    "winds": null,
    "sunrise": null,
    "sunset": null,
-   "summary": "Moderate rip current risk*. Mostly sunny. Highs around 80. East winds around 15 mph."
+   "summary": "Moderate rip current risk*. Surf height 1 foot or less. Mostly sunny. Highs around 80. East winds around 15 mph."
   },
   {
    "period": "Saturday",
-   "rip_current_risk": "Moderate",
+   "rip_current_risk": "High",
    "surf_height": null,
    "uv_index": null,
    "water_temperature": null,
@@ -71,7 +58,20 @@
    "winds": null,
    "sunrise": null,
    "sunset": null,
-   "summary": "Moderate rip current risk*. Mostly sunny. Highs in the upper 70s. East winds around 15 mph."
+   "summary": "High rip current risk*. Partly sunny. Highs in the upper 70s. East winds around 15 mph."
+  },
+  {
+   "period": "Sunday",
+   "rip_current_risk": "High",
+   "surf_height": null,
+   "uv_index": null,
+   "water_temperature": null,
+   "weather": null,
+   "high_temperature": null,
+   "winds": null,
+   "sunrise": null,
+   "sunset": null,
+   "summary": "High rip current risk*. Mostly cloudy. Showers likely and a chance of thunderstorms. Highs in the upper 70s. East winds around 20 mph."
   }
  ],
  "alerts": [],

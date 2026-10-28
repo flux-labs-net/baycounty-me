@@ -1,5 +1,5 @@
 {
- "as_of": "2026-10-27",
+ "as_of": "2026-10-28",
  "method": "Business contributors to current officeholders (campaign.json), 2026 local candidates (../elections/finance_2026.json) and every other local campaign since 2016 (campaign_history.json) were compared with every payee on this site: contracts, change orders and emergency purchases (../contracts/contracts.json), Bay County and Lynn Haven check registers, payments by the three tourism agencies (../money/payments.json) and the CRA ledger (../merged.json). Both sides are resolved to vendor ids in ../entities/vendors.json: names are matched after removing punctuation, \"&\"/\"and\" and legal suffixes, plus hand-checked joins of truncated or misspelled names (each with its evidence in vendors.json). Nothing is fuzzy-matched. \"exact\" = the filed name matches the vendor's name; \"likely\" = the filing truncates, abbreviates or misspells it. One row per contributor spelling, candidate and paying government. A match shows only that an organization with the same name appears in both public records; it does not show why a gift was made or how a contract was awarded. Built by build_vendor_matches.py.",
  "count_rows": 545,
  "count_contributor_candidate_pairs": 206,
@@ -18,7 +18,7 @@
   "cra": 45,
   "change_order": 93,
   "contract": 415,
-  "register": 149,
+  "register": 146,
   "tdc": 64,
   "emergency": 70
  },
@@ -3289,7 +3289,7 @@
   {
    "contributor": "American Sand & Asphalt Paving",
    "contributor_spellings": null,
-   "vendor": "American Sand & Asphalt / X-Cavation / American Sand and Asphalt Paving",
+   "vendor": "American Sand and Asphalt Paving",
    "vendor_id": "american-sand",
    "vendor_entity": "American Sand & Asphalt Paving",
    "candidate": "Daniel Raffield",
@@ -3309,30 +3309,24 @@
     "Contract 2023-09-06: Contract 23-46, FY23 urban dirt road paving ($1,635,324.85)",
     "Contract 2024-05-21: Contract 24-27, FY24 annual resurfacing Phase 1 ($2,600,402.00)",
     "Contract 2024-08-06: Contract 24-47, FY24 annual resurfacing Phase 2 ($1,836,389.17)",
-    "Contract 2026-07-21: Contract 26-46, FY26 annual resurfacing Phase 2 ($773,938.43)",
-    "FY2024 check register, top-vendor list: $895,664.37 paid",
-    "FY2025 check register, top-vendor list: $3,732,858.25 paid"
+    "Contract 2026-07-21: Contract 26-46, FY26 annual resurfacing Phase 2 ($773,938.43)"
    ],
    "record_ids": [
     "contract:48",
     "contract:67",
     "contract:78",
-    "contract:147",
-    "register:0/top_vendors/14",
-    "register:1/top_vendors/8"
+    "contract:147"
    ],
    "contract_source_urls": [
     "https://baycountyfl.primegov.com/Public/CompiledDocument/1402",
     "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=2970",
     "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=3435",
-    "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=4934",
-    "https://baycountyfl.primegov.com/public/portal"
+    "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=4934"
    ],
    "contract_government": "Bay County BOCC",
    "contract_gov_id": "county",
    "record_types": [
-    "contract",
-    "register"
+    "contract"
    ],
    "match_confidence": "exact",
    "note": "Names match after removing punctuation and legal suffixes.",
@@ -5025,7 +5019,7 @@
   {
    "contributor": "American Sand and Asphalt Pavi",
    "contributor_spellings": null,
-   "vendor": "American Sand & Asphalt / X-Cavation / American Sand and Asphalt Paving",
+   "vendor": "American Sand and Asphalt Paving",
    "vendor_id": "american-sand",
    "vendor_entity": "American Sand & Asphalt Paving",
    "candidate": "Doug Crosby",
@@ -5045,30 +5039,24 @@
     "Contract 2023-09-06: Contract 23-46, FY23 urban dirt road paving ($1,635,324.85)",
     "Contract 2024-05-21: Contract 24-27, FY24 annual resurfacing Phase 1 ($2,600,402.00)",
     "Contract 2024-08-06: Contract 24-47, FY24 annual resurfacing Phase 2 ($1,836,389.17)",
-    "Contract 2026-07-21: Contract 26-46, FY26 annual resurfacing Phase 2 ($773,938.43)",
-    "FY2024 check register, top-vendor list: $895,664.37 paid",
-    "FY2025 check register, top-vendor list: $3,732,858.25 paid"
+    "Contract 2026-07-21: Contract 26-46, FY26 annual resurfacing Phase 2 ($773,938.43)"
    ],
    "record_ids": [
     "contract:48",
     "contract:67",
     "contract:78",
-    "contract:147",
-    "register:0/top_vendors/14",
-    "register:1/top_vendors/8"
+    "contract:147"
    ],
    "contract_source_urls": [
     "https://baycountyfl.primegov.com/Public/CompiledDocument/1402",
     "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=2970",
     "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=3435",
-    "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=4934",
-    "https://baycountyfl.primegov.com/public/portal"
+    "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=4934"
    ],
    "contract_government": "Bay County BOCC",
    "contract_gov_id": "county",
    "record_types": [
-    "contract",
-    "register"
+    "contract"
    ],
    "match_confidence": "likely",
    "note": "The filing spells the name \"American Sand and Asphalt Pavi\"; matched to American Sand & Asphalt Paving by a hand-checked spelling join. \"AMERICAN SAND &\" is the Lynn Haven warrant list cut at 15 characters; \"American Sand and Asphalt Pavi\" is a campaign filing cut at 30 characters.",
@@ -8054,7 +8042,7 @@
   {
    "contributor": "American Sand & Asphalt Paving",
    "contributor_spellings": null,
-   "vendor": "American Sand & Asphalt / X-Cavation / American Sand and Asphalt Paving",
+   "vendor": "American Sand and Asphalt Paving",
    "vendor_id": "american-sand",
    "vendor_entity": "American Sand & Asphalt Paving",
    "candidate": "Winston Chester",
@@ -8074,30 +8062,24 @@
     "Contract 2023-09-06: Contract 23-46, FY23 urban dirt road paving ($1,635,324.85)",
     "Contract 2024-05-21: Contract 24-27, FY24 annual resurfacing Phase 1 ($2,600,402.00)",
     "Contract 2024-08-06: Contract 24-47, FY24 annual resurfacing Phase 2 ($1,836,389.17)",
-    "Contract 2026-07-21: Contract 26-46, FY26 annual resurfacing Phase 2 ($773,938.43)",
-    "FY2024 check register, top-vendor list: $895,664.37 paid",
-    "FY2025 check register, top-vendor list: $3,732,858.25 paid"
+    "Contract 2026-07-21: Contract 26-46, FY26 annual resurfacing Phase 2 ($773,938.43)"
    ],
    "record_ids": [
     "contract:48",
     "contract:67",
     "contract:78",
-    "contract:147",
-    "register:0/top_vendors/14",
-    "register:1/top_vendors/8"
+    "contract:147"
    ],
    "contract_source_urls": [
     "https://baycountyfl.primegov.com/Public/CompiledDocument/1402",
     "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=2970",
     "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=3435",
-    "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=4934",
-    "https://baycountyfl.primegov.com/public/portal"
+    "https://baycountyfl.primegov.com/Portal/Meeting?compiledMeetingDocumentFileId=4934"
    ],
    "contract_government": "Bay County BOCC",
    "contract_gov_id": "county",
    "record_types": [
-    "contract",
-    "register"
+    "contract"
    ],
    "match_confidence": "exact",
    "note": "Names match after removing punctuation and legal suffixes.",
@@ -15759,7 +15741,7 @@
    "vendor_id": "bgn",
    "vendor_entity": "BGN Contractors (Gage Golden Construction)",
    "candidate": "Judith Vandergrift",
-   "person_id": "judith-vandergrift",
+   "person_id": "judy-vandergrift",
    "office": "Superintendent of Schools",
    "election": "2020 Primary (08/18/2020)/General Election (11/3/2020)",
    "gift_source": "past campaigns 2016-2025 (campaign_history.json)",
@@ -15809,7 +15791,7 @@
    "vendor_id": "bgn",
    "vendor_entity": "BGN Contractors (Gage Golden Construction)",
    "candidate": "Judith Vandergrift",
-   "person_id": "judith-vandergrift",
+   "person_id": "judy-vandergrift",
    "office": "Superintendent of Schools",
    "election": "2020 Primary (08/18/2020)/General Election (11/3/2020)",
    "gift_source": "past campaigns 2016-2025 (campaign_history.json)",
@@ -15852,7 +15834,7 @@
    "vendor_id": "bgn",
    "vendor_entity": "BGN Contractors (Gage Golden Construction)",
    "candidate": "Judith Vandergrift",
-   "person_id": "judith-vandergrift",
+   "person_id": "judy-vandergrift",
    "office": "Superintendent of Schools",
    "election": "2020 Primary (08/18/2020)/General Election (11/3/2020)",
    "gift_source": "past campaigns 2016-2025 (campaign_history.json)",
@@ -15891,7 +15873,7 @@
    "vendor_id": "bgn",
    "vendor_entity": "BGN Contractors (Gage Golden Construction)",
    "candidate": "Judith Vandergrift",
-   "person_id": "judith-vandergrift",
+   "person_id": "judy-vandergrift",
    "office": "Superintendent of Schools",
    "election": "2020 Primary (08/18/2020)/General Election (11/3/2020)",
    "gift_source": "past campaigns 2016-2025 (campaign_history.json)",
@@ -15933,7 +15915,7 @@
    "vendor_id": "bgn",
    "vendor_entity": "BGN Contractors (Gage Golden Construction)",
    "candidate": "Judith Vandergrift",
-   "person_id": "judith-vandergrift",
+   "person_id": "judy-vandergrift",
    "office": "Superintendent of Schools",
    "election": "2020 Primary (08/18/2020)/General Election (11/3/2020)",
    "gift_source": "past campaigns 2016-2025 (campaign_history.json)",

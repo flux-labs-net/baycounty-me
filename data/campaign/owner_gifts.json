@@ -1,5 +1,5 @@
 {
- "as_of": "2026-10-27",
+ "as_of": "2026-10-28",
  "source": "Bay County Supervisor of Elections itemized campaign finance exports (VoterFocus); Florida Division of Corporations (Sunbiz)",
  "method": "A contributor filed as an individual is listed when the name and the street address on the filing are the same as an officer, manager or registered agent of a for-profit business on Sunbiz that was active or still filing around the gift. Middle initials and Jr/Sr must agree. Protected voters are never matched. Name-only matches are not published.",
  "counts": {
@@ -7,7 +7,7 @@
   "published_lines": 1225,
   "protected_skipped": 512,
   "published_donors": 642,
-  "held_zip_only": 705
+  "held_zip_only": 704
  },
  "campaigns": {
   "294": {
@@ -240,13 +240,6 @@
    "gov": "pc",
    "election": "2017 Municipal Super Tuesday (4/18/2017)",
    "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=16&c=bay&ca=389&rellevel=4&committee=N"
-  },
-  "393": {
-   "candidate": "Judy Tinder",
-   "office": "Lynn Haven Commission, Seat 4",
-   "gov": "lh",
-   "election": "2017 Municipal Super Tuesday (4/18/2017)",
-   "report_url": "https://www.voterfocus.com/CampaignFinance/candidate_pr.php?op=cv&e=16&c=bay&ca=393&rellevel=4&committee=N"
   },
   "402": {
    "candidate": "Skip Stoltz",
@@ -9912,7 +9905,7 @@
    ]
   },
   "o_85e4eae6b3abc566": {
-   "name": "J'Lynn Holloway",
+   "name": "J\\'Lynn Holloway",
    "businesses": [
     {
      "doc_number": "L14000196489",

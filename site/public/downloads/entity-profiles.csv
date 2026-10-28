@@ -98,8 +98,6 @@ business:ace-home-helpers,business,Business,Ace Home Helpers,Business that gave 
 business:adam-hood-p-a,business,Business,"Adam Hood, P.A.",Business that gave to a local campaign,/profile/business/adam-hood-p-a,,1,,500.0,,bay,
 business:advent-ardent-jv-llc,business,Business,Advent-Ardent JV LLC,Company with federal contracts,/profile/business/advent-ardent-jv-llc,,1,2373893.94,,,bay,https://www.usaspending.gov/search
 business:advent-spees-jv-llc,business,Business,Advent Spees JV LLC,Company with federal contracts,/profile/business/advent-spees-jv-llc,,1,1593868.5,,,bay,https://www.usaspending.gov/search
-business:advisor-s-realty-of-panama-ci,business,Business,Advisor's Realty of Panama Ci,Business that gave to a local campaign,/profile/business/advisor-s-realty-of-panama-ci,,1,,500.0,,bay,
-business:advisor-s-realty-of-pc,business,Business,Advisor's Realty of PC,Business that gave to a local campaign,/profile/business/advisor-s-realty-of-pc,,1,,500.0,,bay,
 business:affordable-body-shop-inc,business,Business,"Affordable Body Shop, Inc.",Company with federal contracts,/profile/business/affordable-body-shop-inc,,1,76542.78,,,bay,https://www.usaspending.gov/search
 business:agr-gulf-llc,business,Business,"AGR Gulf, LLC",Business that gave to a local campaign,/profile/business/agr-gulf-llc,,1,,500.0,,bay,
 business:airgas-usa-llc,business,Business,"Airgas USA, LLC",Company with federal contracts,/profile/business/airgas-usa-llc,,1,301493.65,,,bay,https://www.usaspending.gov/search
@@ -650,7 +648,6 @@ business:islander-motel-l-l-c,business,Business,"Islander Motel, L.L.C.",Company
 business:it-s-personal-by-michele,business,Business,It's Personal by Michele,Business that gave to a local campaign,/profile/business/it-s-personal-by-michele,,1,,160.0,,bay,
 business:j-adam-albritton-law-office,business,Business,J Adam Albritton Law Office,Business that gave to a local campaign,/profile/business/j-adam-albritton-law-office,,1,,500.0,,bay,
 business:j-laymon-consultation-svc-llc,business,Business,J. Laymon Consultation Svc LLC,Business that gave to a local campaign,/profile/business/j-laymon-consultation-svc-llc,,1,,1000.0,,bay,
-business:j-michael-s-dockside-bar-gril,business,Business,J Michael's Dockside Bar&Gril,Business that gave to a local campaign,/profile/business/j-michael-s-dockside-bar-gril,,1,,400.0,,bay,
 business:j-michael-s-restaurant,business,Business,J. Michael's Restaurant,Business that gave to a local campaign,/profile/business/j-michael-s-restaurant,,1,,200.0,,bay,
 business:j01052,business,Business,"Waddell Plantation, Inc.",Registered business,/profile/business/j01052,,3,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/WADDELL%20PLANTATION%2C%20INC./Page1
 business:j03610,business,Business,"Hidden Valley, Inc.",Registered business,/profile/business/j03610,,2,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/HIDDEN%20VALLEY%2C%20INC./Page1
@@ -1145,6 +1142,7 @@ business:l08000070491,business,Business,Shamrock Estates LLC,Registered business
 business:l08000070729,business,Business,"Roberson Vincent, LLC",Registered business,/profile/business/l08000070729,,1,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/Roberson%20Vincent%2C%20LLC/Page1
 business:l08000076824,business,Business,"R&D Group Investments, LLC",Registered business (inactive),/profile/business/l08000076824,,1,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults?inquiryType=EntityName&searchTerm=R%26D%20GROUP%20INVESTMENTS%2C%20LLC
 business:l08000077691,business,Business,KB Engineering LLC,Registered business,/profile/business/l08000077691,,2,,2000.0,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/KB%20Engineering%20LLC/Page1
+business:l08000080345,business,Business,Pop's Dawgs,Registered business,/profile/business/l08000080345,,1,,100.0,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/Pop%27s%20Dawgs/Page1
 business:l08000080442,business,Business,"Hilmar of Bay County, LLC",Registered business,/profile/business/l08000080442,,1,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/Hilmar%20of%20Bay%20County%2C%20LLC/Page1
 business:l08000082779,business,Business,Bluewater Commercial LLC,Registered business,/profile/business/l08000082779,,1,,1000.0,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/Bluewater%20Commercial%20LLC/Page1
 business:l08000083694,business,Business,"Coastal Land Company of NW Florida, LLC",Registered business,/profile/business/l08000083694,,1,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/Coastal%20Land%20Company%20of%20NW%20Florida%2C%20LLC/Page1
@@ -4679,7 +4677,7 @@ business:p96000055706,business,Business,Royal American Food Services,Registered 
 business:p96000062018,business,Business,Beachcomber by the Sea Inc,Registered business,/profile/business/p96000062018,,3,,5000.0,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/Beachcomber%20by%20the%20Sea%20Inc/Page1
 business:p96000066176,business,Business,"Sicer Sojourns, Inc.",Registered business (inactive),/profile/business/p96000066176,,1,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/SICER%20SOJOURNS%2C%20INC./Page1
 business:p96000066660,business,Business,"U D T, Inc.",Company with federal contracts,/profile/business/p96000066660,,2,4334299.6,,,bay,https://www.usaspending.gov/search
-business:p96000082729,business,Business,j michaels dockside,Registered business,/profile/business/p96000082729,,1,,400.0,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/j%20michaels%20dockside/Page1
+business:p96000082729,business,Business,J Michael's Dockside Bar&Gril,Registered business,/profile/business/p96000082729,,2,,800.0,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults?inquiryType=EntityName&searchTerm=J%20Michael%27s%20Dockside%20Bar%26Gril
 business:p96000085291,business,Business,"Smile Specialists Orthodontics, P.A.",Registered business (inactive),/profile/business/p96000085291,,1,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/SMILE%20SPECIALISTS%20ORTHODONTICS%2C%20P.A./Page1
 business:p96000088025,business,Business,Corrections Communications,Registered business,/profile/business/p96000088025,,1,,500.0,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/Corrections%20Communications/Page1
 business:p96000088358,business,Business,"C-IV Ventures, Inc.",Registered business,/profile/business/p96000088358,,6,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/C-IV%20VENTURES%2C%20INC./Page1
@@ -4843,7 +4841,6 @@ business:pofolks-callaway-inc,business,Business,"PoFolks Callaway, Inc",Business
 business:pohaven-inc,business,Business,PoHaven INC,Business that gave to a local campaign,/profile/business/pohaven-inc,,11,,1389.04,,bay,
 business:pohaven-inc-operating,business,Business,"POHAVEN, Inc Operating",Business that gave to a local campaign,/profile/business/pohaven-inc-operating,,1,,100.0,,bay,
 business:pons-constr-co-inc,business,Business,Pons Constr Co Inc,Business that gave to a local campaign,/profile/business/pons-constr-co-inc,,1,,500.0,,bay,
-business:pop-s-dawgs,business,Business,Pop's Dawgs,Business that gave to a local campaign,/profile/business/pop-s-dawgs,,1,,100.0,,bay,
 business:postnet-fl-102,business,Business,Postnet FL 102,Business that gave to a local campaign,/profile/business/postnet-fl-102,,2,,1937.55,,bay,
 business:powder-room-shooting-range,business,Business,Powder Room Shooting Range,Business that gave to a local campaign,/profile/business/powder-room-shooting-range,,1,,250.0,,bay,
 business:powell-systems,business,Business,Powell Systems,Business that gave to a local campaign,/profile/business/powell-systems,,1,,1000.0,,bay,
@@ -4895,7 +4892,7 @@ business:rt-s-painting-llc,business,Business,RT's Painting LLC,Business that gav
 business:rubber-specialties-inc,business,Business,Rubber & Specialties Inc,Company with federal contracts,/profile/business/rubber-specialties-inc,,1,14750.0,,,bay,https://www.usaspending.gov/search
 business:runaway-island-restaurant,business,Business,Runaway Island Restaurant,Business that gave to a local campaign,/profile/business/runaway-island-restaurant,,1,,1000.0,,bay,
 business:rustic-sams-resort-camp-ground,business,Business,Rustic Sams Resort Camp Ground,Company with federal contracts,/profile/business/rustic-sams-resort-camp-ground,,1,121763.47,,,bay,https://www.usaspending.gov/search
-business:s10316,business,Business,"Webb's Seafood, Inc.",Registered business,/profile/business/s10316,,1,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/Webb%27s%20Seafood%2C%20Inc./Page1
+business:s10316,business,Business,Webb's Seafood,Registered business,/profile/business/s10316,,2,,1000.0,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/Webb%27s%20Seafood/Page1
 business:s11817,business,Business,Gulf Coast Pest Control,Registered business,/profile/business/s11817,,2,,100.0,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/Gulf%20Coast%20Pest%20Control/Page1
 business:s18129,business,Business,"B&S Liquors, INC",Registered business,/profile/business/s18129,,2,,2000.0,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults?inquiryType=EntityName&searchTerm=B%26S%20Liquors%2C%20INC
 business:s21561,business,Business,Federated Development Corp.,Registered business,/profile/business/s21561,,1,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/Federated%20Development%20Corp./Page1
@@ -4910,7 +4907,7 @@ business:s43831,business,Business,The Sterling Company of Bay Co,Registered busi
 business:s47944,business,Business,Bruno's Pizza,Registered business,/profile/business/s47944,,1,,500.0,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/Bruno%27s%20Pizza/Page1
 business:s47982,business,Business,"Phoenix Environmental, Inc.",Registered business (inactive),/profile/business/s47982,,1,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/PHOENIX%20ENVIRONMENTAL%2C%20INC./Page1
 business:s53436,business,Business,Hi Properties,Registered business,/profile/business/s53436,,1,,200.0,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/Hi%20Properties/Page1
-business:s57821,business,Business,"Advisor's Realty of Panama City, Inc.",Registered business,/profile/business/s57821,,1,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/Advisor%27s%20Realty%20of%20Panama%20City%2C%20Inc./Page1
+business:s57821,business,Business,Advisor's Realty of Panama Ci,Registered business,/profile/business/s57821,,3,,1000.0,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/Advisor%27s%20Realty%20of%20Panama%20Ci/Page1
 business:s65569,business,Business,CDE Consultants Inc,Registered business,/profile/business/s65569,,3,,750.0,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/CDE%20Consultants%20Inc/Page1
 business:s72067,business,Business,Merrick Industries Inc,Registered business,/profile/business/s72067,,5,,5000.0,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/Merrick%20Industries%20Inc/Page1
 business:s81823,business,Business,"Jaco Management, Inc.",Registered business,/profile/business/s81823,,4,9515.0,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/JACO%20MANAGEMENT%2C%20INC./Page1
@@ -5094,7 +5091,6 @@ business:waterworks-car-wash,business,Business,Waterworks Car Wash,Business that
 business:waterworx-express-car-wash,business,Business,Waterworx Express Car Wash,Business that gave to a local campaign,/profile/business/waterworx-express-car-wash,,1,,500.0,,bay,
 business:watford-engineering-inc,business,Business,"Watford Engineering, Inc",Business that gave to a local campaign,/profile/business/watford-engineering-inc,,4,,1750.0,,bay,
 business:waylon-graham-attorney-at-law,business,Business,Waylon Graham Attorney at Law,Business that gave to a local campaign,/profile/business/waylon-graham-attorney-at-law,,1,,1000.0,,bay,
-business:webb-s-seafood,business,Business,Webb's Seafood,Business that gave to a local campaign,/profile/business/webb-s-seafood,,1,,1000.0,,bay,
 business:weston-trawick-inc,business,Business,"Weston Trawick, Inc.",Business that gave to a local campaign,/profile/business/weston-trawick-inc,,1,,1000.0,,bay,
 business:whiskey-s-saloon,business,Business,Whiskey's Saloon,Business that gave to a local campaign,/profile/business/whiskey-s-saloon,,1,,350.0,,bay,
 business:white-s-wrecker,business,Business,White's Wrecker,Business that gave to a local campaign,/profile/business/white-s-wrecker,,1,,300.0,,bay,

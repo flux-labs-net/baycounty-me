@@ -1,8 +1,8 @@
 {
-  "generated": "2026-10-27T17:27:08-05:00",
+  "generated": "2026-10-28T06:23:10-05:00",
   "window": {
-    "from": "2026-10-27",
-    "to": "2026-12-26"
+    "from": "2026-10-28",
+    "to": "2026-12-27"
   },
   "timezone": "America/Chicago",
   "boards": [
@@ -57,7 +57,7 @@
       },
       "coverage": {
         "agenda_feed": 0,
-        "calendar": 3,
+        "calendar": 2,
         "expected": 0
       }
     },
@@ -71,11 +71,11 @@
       "calendar_url": "https://www.panamacity.gov/Calendar.aspx",
       "schedule_source_url": "https://panamacity.gov/401/About-Meetings",
       "sources": {
-        "AgendaCenter": "ok (27 records)",
-        "calendar (iCal cat 22)": "ok (52 records)"
+        "AgendaCenter": "ok (26 records)",
+        "calendar (iCal cat 22)": "ok (51 records)"
       },
       "coverage": {
-        "agenda_feed": 2,
+        "agenda_feed": 1,
         "calendar": 2,
         "expected": 0
       }
@@ -128,10 +128,10 @@
       "schedule_source_url": "https://www.cityoflynnhaven.gov/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar",
       "sources": {
         "CivicClerk": "ok (17 records)",
-        "calendar (iCal cat 14)": "ok (5 records)"
+        "calendar (iCal cat 14)": "ok (4 records)"
       },
       "coverage": {
-        "agenda_feed": 5,
+        "agenda_feed": 4,
         "calendar": 0,
         "expected": 0
       }
@@ -165,10 +165,10 @@
       "schedule_source_url": "https://www.cityofcallaway.com/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar",
       "sources": {
         "AgendaCenter": "ok (12 records)",
-        "calendar (iCal cat 14)": "ok (11 records)"
+        "calendar (iCal cat 14)": "ok (10 records)"
       },
       "coverage": {
-        "agenda_feed": 1,
+        "agenda_feed": 0,
         "calendar": 2,
         "expected": 0
       }
@@ -241,7 +241,7 @@
         "Council Meetings page": "ok (82 records)"
       },
       "coverage": {
-        "agenda_feed": 4,
+        "agenda_feed": 3,
         "calendar": 0,
         "expected": 4
       }
@@ -274,18 +274,6 @@
       "past": true
     },
     {
-      "board": "cw",
-      "title": "Regular Meeting",
-      "start": "2026-10-13",
-      "location": "Callaway Arts & Conference Center, 500 Callaway Pkwy, Callaway, FL 32404",
-      "agenda_url": "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_10132026-425",
-      "packet_url": null,
-      "minutes_url": null,
-      "source": "AgendaCenter:https://www.cityofcallaway.com/AgendaCenter",
-      "status": "posted",
-      "past": true
-    },
-    {
       "board": "lh-cra",
       "title": "10/13/26 CRA Board Meeting",
       "start": "2026-10-13T17:15:00-05:00",
@@ -303,19 +291,6 @@
         "Approval of new drive-through facility at 1615a Ohio Ave. Dutch Bros.",
         "Approval of new drive-through facility at 1615b Ohio Ave. Chipotle"
       ]
-    },
-    {
-      "board": "mb",
-      "title": "City Council Meeting",
-      "start": "2026-10-13T09:00:00-05:00",
-      "location": "Venue not stated on the council meetings page; City of Mexico Beach offices: 201 Paradise Path, Mexico Beach, FL 32456",
-      "agenda_url": "https://mexicobeachfl.gov/uploads/2026/09/October-13-2026-City-Council-Meeting-Agenda.pdf",
-      "packet_url": "https://mexicobeachfl.gov/uploads/2026/09/October-13-2026-CIty-Council-Meeting-Agenda-Packet.pdf",
-      "minutes_url": null,
-      "source": "MexicoBeach:https://mexicobeachfl.gov/government/council-meetings/",
-      "status": "posted",
-      "detail_url": "https://youtube.com/live/aX2AYat8SmM?feature=share",
-      "past": true
     },
     {
       "board": "pc-cra",
@@ -369,19 +344,6 @@
         "Incremental Development Alliance Summary Report.",
         "Motion to Adjourn Meeting Adjournment In accordance with the Americans with Disabilities Act and Section 286.26, Florida Statutes, persons with disabilities needing special accommodation to participate in this proceeding should contact the City's Human Resources Department one week prior to the proceeding at telephone (850) 872-3014 for assistance; if hearing impaired, telephone (850) 872-3028 (TD"
       ]
-    },
-    {
-      "board": "schools",
-      "title": "School Board Meeting",
-      "start": "2026-10-13T15:00:00-05:00",
-      "location": "1311 Balboa Ave, Panama City, FL 32401",
-      "agenda_url": null,
-      "packet_url": null,
-      "minutes_url": null,
-      "source": "Thrillshare:https://thrillshare-cmsv2.services.thrillshare.com/api/v4/o/31249/cms/events",
-      "status": "calendar",
-      "detail_url": "https://www.bay.k12.fl.us/school-board-meetings",
-      "past": true
     },
     {
       "board": "county",
@@ -458,23 +420,6 @@
       ]
     },
     {
-      "board": "lh",
-      "title": "10/20/26 Special Executive Session - Case No. 5:26-cv-00032-AW-MJF (Vickie Gainer v. City of Lynn Ha",
-      "start": "2026-10-20T15:30:00-05:00",
-      "location": "825 Ohio Avenue, Lynn Haven",
-      "agenda_url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1137,plainText=false)",
-      "packet_url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1138,plainText=false)",
-      "minutes_url": null,
-      "source": "CivicClerk:https://lynnhavenfl.portal.civicclerk.com",
-      "status": "posted",
-      "detail_url": "https://lynnhavenfl.portal.civicclerk.com/event/2143/files",
-      "past": true,
-      "items": [],
-      "agenda_items": [
-        "Overview of Attorney/Commission Executive Session (City Attorney) The Mayor announces the commencement of the private attorney/commission session and asks everyone except the required members to vacate the chambers. CONFIDENTIAL SESSION OPENS (state time) 10/20/26 Special Executive Session - Case No. 5:26-cv-00032-AW-MJF (Vickie Gainer v. City of Lynn Haven) The private session concludes and the M"
-      ]
-    },
-    {
       "board": "parker",
       "title": "Regular Meeting",
       "start": "2026-10-20T17:30:00-05:00",
@@ -485,23 +430,6 @@
       "source": "Parker:https://cityofparker.com/government/agendas-minutes/",
       "status": "posted",
       "past": true
-    },
-    {
-      "board": "pc",
-      "title": "Virtual Workshop Meeting of October 20, 2026.",
-      "start": "2026-10-20T16:30:00-05:00",
-      "location": "Virtual (live stream on the city website)",
-      "agenda_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10202026-915?html=true",
-      "packet_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10202026-915?packet=true",
-      "minutes_url": null,
-      "source": "AgendaCenter:https://www.panamacity.gov/AgendaCenter",
-      "status": "posted",
-      "past": true,
-      "items": [],
-      "agenda_items": [
-        "Agenda - 10/20/2026 AGENDA VIRTUAL WORKSHOP 501 HARRISON AVE. ROOM 10 OCTOBER 20, 2026, 4:30 p.m.",
-        "Virtual Workshop The City Commission of the City of Panama City will conduct a virtual workshop at 4:30 p.m. on Tuesday, October 20, 2026, to discuss various topics. This is a non-voting workshop, and no official actions will be taken. There will be no audience participation during the workshop. The meeting may be viewed live on the City’s website at www.panamacity.gov . The live stream will be br"
-      ]
     },
     {
       "board": "pcb",
@@ -518,28 +446,27 @@
     {
       "board": "cw",
       "title": "Regular Meeting",
-      "start": "2026-10-27T18:00:00-05:00",
-      "location": "Callaway Arts & Conference Center - 500 Callaway Park Way Callaway FL 32404",
+      "start": "2026-10-27",
+      "location": "Callaway Arts & Conference Center, 500 Callaway Pkwy, Callaway, FL 32404",
       "agenda_url": "https://www.cityofcallaway.com/AgendaCenter/ViewFile/Agenda/_10272026-427",
       "packet_url": null,
       "minutes_url": null,
       "source": "AgendaCenter:https://www.cityofcallaway.com/AgendaCenter",
       "status": "posted",
-      "detail_url": "https://www.cityofcallaway.com/calendar.aspx?EID=2707",
-      "calendar_source": "calendar:https://www.cityofcallaway.com/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar"
+      "past": true
     },
     {
       "board": "lh",
       "title": "City Commission Meeting",
       "start": "2026-10-27T17:30:00-05:00",
-      "location": "Walter T. Kelley Chambers - 825 Ohio Avenue Lynn Haven FL 32444",
+      "location": "Walter T. Kelley Commission Chambers, 825 Ohio Ave., Lynn Haven, FL 32444",
       "agenda_url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1145,plainText=false)",
       "packet_url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1149,plainText=false)",
       "minutes_url": null,
       "source": "CivicClerk:https://lynnhavenfl.portal.civicclerk.com",
       "status": "posted",
       "detail_url": "https://lynnhavenfl.portal.civicclerk.com/event/1093/files",
-      "calendar_source": "calendar:https://www.cityoflynnhaven.gov/common/modules/iCalendar/iCalendar.aspx?catID=14&feed=calendar",
+      "past": true,
       "items": [
         {
           "title": "Approve Resolution # 2026-10-601, Purchase - Sanitation, Labrie Garbage Truck.",
@@ -564,6 +491,7 @@
         "Final Reading of Ordinance 1192R Updating Rules of Conduct in City Parks",
         "First Reading of Ordinance 1197 — Approval of the Lynn Haven CRA TIF contribution to 75%",
         "Resolution 2026-10-599: Approval of Panhandle Task Order for the Design, permitting and surveying to replace Asbestos and Cast Iron Watermains (Project 22039).",
+        "Draft Ordinance 1191",
         "Mayor’s Report.",
         "Commissioners’ Reports.",
         "City Manager’s Report.",
@@ -580,20 +508,20 @@
       "packet_url": "https://mexicobeachfl.gov/uploads/2026/09/October-27-2026-City-Council-Meeting-Packet.pdf",
       "minutes_url": null,
       "source": "MexicoBeach:https://mexicobeachfl.gov/government/council-meetings/",
-      "status": "posted"
+      "status": "posted",
+      "past": true
     },
     {
       "board": "pc",
       "title": "City Commission Meeting of October 27, 2026.",
       "start": "2026-10-27T16:30:00-05:00",
-      "location": "Bay County Govt. Center - 840 W. 11th St Panama City FL 32401",
+      "location": "Bay County Government Center, 840 W. 11th St., Panama City, FL 32401",
       "agenda_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10272026-902?html=true",
       "packet_url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Agenda/_10272026-902?packet=true",
       "minutes_url": null,
       "source": "AgendaCenter:https://www.panamacity.gov/AgendaCenter",
       "status": "posted",
-      "detail_url": "https://www.panamacity.gov/calendar.aspx?EID=6148",
-      "calendar_source": "calendar:https://www.panamacity.gov/common/modules/iCalendar/iCalendar.aspx?catID=22&feed=calendar",
+      "past": true,
       "items": [
         {
           "title": "Presentation by Huron Consulting Group regarding zero-based budget process.",
@@ -682,7 +610,8 @@
       "minutes_url": null,
       "source": "Thrillshare:https://thrillshare-cmsv2.services.thrillshare.com/api/v4/o/31249/cms/events",
       "status": "calendar",
-      "detail_url": "https://www.bay.k12.fl.us/school-board-meetings"
+      "detail_url": "https://www.bay.k12.fl.us/school-board-meetings",
+      "past": true
     },
     {
       "board": "mb",

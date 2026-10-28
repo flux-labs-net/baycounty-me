@@ -1,7 +1,7 @@
 {
- "as_of": "2026-10-27",
+ "as_of": "2026-10-28",
  "fetched": {
-  "pcb-chamber": "2026-10-27T22:31:22+00:00",
+  "pcb-chamber": "2026-10-28T11:27:56+00:00",
   "bay-chamber": null
  },
  "errors": [
@@ -12,21 +12,6 @@
   }
  ],
  "events": [
-  {
-   "chamber_id": "pcb-chamber",
-   "event_id": "pcb-chamber:26651",
-   "title": "Ideacamp – October 2026",
-   "starts": "2026-10-27T08:00:00",
-   "ends": "2026-10-27T09:30:00",
-   "all_day": false,
-   "venue": "Papa Joe’s Bayside",
-   "city": "Panama City",
-   "category": "Chamber Events",
-   "chamber_event": true,
-   "cost": null,
-   "url": "https://pcbeach.org/local-event/ideacamp-october-2026/",
-   "source_url": "https://pcbeach.org/local-events/"
-  },
   {
    "chamber_id": "pcb-chamber",
    "event_id": "pcb-chamber:27622",
