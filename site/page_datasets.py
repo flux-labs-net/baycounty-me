@@ -1619,7 +1619,18 @@ _OFFICER_TITLE = {'RA': 'Registered agent', 'MGR': 'Manager', 'MANA': 'Manager',
                   'AUTH': 'Authorized person', 'AR': 'Authorized representative', 'MBR': 'Member', 'MEMB': 'Member', 'OWNE': 'Owner',
                   'G': 'General partner', 'GP': 'General partner', 'PRES': 'President', 'SECR': 'Secretary', 'SEC': 'Secretary', 'TREA': 'Treasurer',
                   'DIR': 'Director', 'DIRE': 'Director', 'CHAI': 'Chair', 'CHAIR': 'Chair', 'VP': 'Vice president', 'VC': 'Vice chair',
-                  'ASST': 'Assistant officer', 'SVP': 'Senior vice president', 'EVP': 'Executive vice president', 'GM': 'General manager'}
+                  'ASST': 'Assistant officer', 'SVP': 'Senior vice president', 'EVP': 'Executive vice president', 'GM': 'General manager',
+                  # short forms Sunbiz filers type by hand
+                  **{k: 'Manager' for k in ('MGMR', 'MNGR', 'MANG', 'MANE', 'MRG', 'MRGR', 'MGRE', 'MGRS', 'MGT', 'MGRF', 'MGMT')},
+                  **{k: 'Managing member' for k in ('MMGR', 'MGMB', 'MNGM', 'MRGM', 'MGM', 'MBMG', 'MBG', 'MM', 'MEMP')},
+                  **{k: 'Member' for k in ('MMBR', 'MEM')}, **{k: 'Officer' for k in ('OFFI', 'OFF', 'OFC', 'O', 'OTHE')},
+                  **{k: 'Treasurer' for k in ('TRES', 'TRE', 'TRS', 'TR')}, **{k: 'Trustee' for k in ('TRUS', 'TRTE')},
+                  **{k: 'Owner' for k in ('OWNR', 'OWN')}, **{k: 'Partner' for k in ('PART', 'PTNR')},
+                  'AMGR': 'Authorized manager', 'AREP': 'Authorized representative', 'ASSI': 'Assistant officer', 'AS': 'Assistant secretary',
+                  'AT': 'Assistant treasurer', 'VPRE': 'Vice president', 'VICE': 'Vice president', 'VPA': 'Vice president',
+                  'BOAR': 'Board member', 'EXEC': 'Executive', 'CHMN': 'Chair', 'CIO': 'Chief information officer', 'CTO': 'Chief technology officer',
+                  'CAO': 'Chief administrative officer', 'CSEC': 'Corporate secretary', 'SCTY': 'Secretary', 'REGI': 'Registered agent',
+                  'COOW': 'Co-owner', 'GMGR': 'General manager', 'FNDR': 'Founder', 'PRIN': 'Principal'}
 _OFFICER_LETTER = {'P': 'President', 'V': 'Vice president', 'S': 'Secretary', 'T': 'Treasurer', 'D': 'Director', 'C': 'Chair'}
 
 
@@ -1633,7 +1644,7 @@ def officer_title(code):
     if set(c) <= set(_OFFICER_LETTER):
         c = c.replace('VP', 'V')
         return ', '.join(dict.fromkeys(_OFFICER_LETTER[x] for x in c))
-    return code.strip().title()
+    return 'Officer'  # an unreadable hand-typed code ('Mrs.', 'Cpsf'); the Sunbiz link shows what was filed
 
 
 def business_officers():

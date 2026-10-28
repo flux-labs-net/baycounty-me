@@ -5692,8 +5692,8 @@
      "name": "grantor",
      "type": "string",
      "values": [
-      "AMERICAN LEGION",
       "EASTERN SHIPBUILDING CHARITIES INC",
+      "EMERALD COAST POST 10555 VETERANS OF FOREIGN WARS OF THE UNITED STATES, INC.",
       "GRAND CHAPTER OF FLORIDA ORDER OF THE EASTERN STAR CHARITABLE",
       "GULF COAST STATE COLLEGE FOUNDATION INC",
       "GULF COAST WORKFORCE DEVELOPMENT BOARD INC",
@@ -5705,9 +5705,10 @@
       "MELISSA RENEE BIGGS MEMORIAL TRUST",
       "ONE POSITIVE PLACE INC",
       "PANAMA CITY ADVANCED SCHOOL CORPORATION",
+      "PAUL W. AIREY AMERICAN LEGION POST 392 INC.",
+      "POST NAME TOM GLAZE POST #8205 VETERANS OF FOREIGN WARS OF THE UNITED STATES, INC.",
       "ST ANDREWS EPISCOPAL CHURCH FOUNDATION INC",
       "UNITED WAY OF NORTHWEST FLORIDA",
-      "VETERANS OF FOREIGN WARS OF THE UNITED STATES DEPT OF FLORIDA",
       "WOMENS CIVIC CLUB OF PANAMA CITY BEACH INC",
       "WORLD CHANGERS STUDENT MISSIONS",
       "ZOOLOGICAL ASSOCIATION OF AMERICA INCORPORATED"
@@ -6456,7 +6457,7 @@
    "id": "business-officers",
    "title": "Business officers",
    "description": "Officers, managers, members and the registered agent of each registered business that has a profile on BayCounty.me (a company paid by a local government, a campaign donor, a federal contractor, a restaurant license holder and others), as filed with the Florida Division of Corporations (Sunbiz). One row per person or company and title; names and titles only, never addresses. officer_entity_id links an officer who already has a profile tied to that business (a nonprofit board member or a business owner who gave to a campaign); entity_id is the business's profile.",
-   "rows": 13482,
+   "rows": 13481,
    "columns": [
     {
      "name": "place_id",

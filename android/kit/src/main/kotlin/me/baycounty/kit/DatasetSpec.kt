@@ -277,6 +277,9 @@ data class DatasetSpec(
         "owner-gifts" to DatasetSpec(Section.ELECTIONS, "person.text.rectangle", title = listOf("donor"), subtitle = listOf("candidate", "businesses"), amount = listOf("amount"),
                              date = listOf("last_date"), filters = listOf("candidate", "office"), page = "connections/campaign-gifts"),
         // Entity profiles (every person, company, nonprofit and government, and how they connect)
+        // officers, managers and registered agent of each business with a profile (Sunbiz; names and titles, never addresses)
+        "business-officers" to DatasetSpec(Section.ACCOUNTABILITY, "person.2", title = listOf("officer"), subtitle = listOf("title", "business"), badge = "business_status",
+                                   filters = listOf("officer_kind", "business_status"), page = "new-businesses"),
         // Emergencies and hurricane prep
         "evacuation-zones" to DatasetSpec(Section.MORE, "map", title = listOf("zone"), subtitle = listOf("where_it_is"), detail = "when_ordered", page = "emergency"),
         "emergency-shelters" to DatasetSpec(Section.MORE, "house.lodge", title = listOf("name"), subtitle = listOf("address", "group_name"), detail = "note", badge = "status", filters = listOf("shelter_type", "status", "evacuation_zone"), page = "emergency"),
