@@ -46,10 +46,11 @@ sealed class Route {
     object MyHome : Route()
     object AccountSettings : Route()
     data class GovBudget(val id: String) : Route()
+    object Meetings : Route()
 }
 
-/** Today, Places, Money and Meetings. Search opens from the field on Today. */
-enum class Tab { HOME, GOVERNMENTS, MONEY, MEETINGS }
+/** Today, Living here, Money, Who decides and Search: the site's menu sections (Meetings sit under Who decides). */
+enum class Tab { HOME, LIVING, MONEY, DECIDES, SEARCH }
 
 /** One back stack per tab, like a NavigationStack in each iOS tab. */
 class Nav {

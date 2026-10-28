@@ -69,6 +69,7 @@ enum Route: Hashable {
     case volunteer
     case military
     case myHome
+    case meetings
 }
 
 extension View {
@@ -105,6 +106,7 @@ extension View {
                 case .beaches: BeachesView()
                 case .parks: ParksView()
                 case .schools: SchoolsView()
+                case .meetings: MeetingsList()
                 case .emergency: EmergencyView()
                 case .hurricanePrep: HurricanePrepView()
                 case .utilities(let m): UtilitiesView(match: m)

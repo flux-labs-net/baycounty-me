@@ -1,7 +1,12 @@
 import SwiftUI
 import BayCountyKit
 
+/// Every upcoming meeting, opened from Who decides and from Today (Route.meetings).
 struct MeetingsView: View {
+    var body: some View { NavigationStack { MeetingsList().withRoutes() } }
+}
+
+struct MeetingsList: View {
     @Environment(AppStore.self) private var store
     @State private var gov: String = "all"
 
@@ -25,7 +30,6 @@ struct MeetingsView: View {
     }
 
     var body: some View {
-        NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 18) {
                     ChipRow(chips: chips, selected: gov) { id in withAnimation(.snappy) { gov = id } }
@@ -70,8 +74,6 @@ struct MeetingsView: View {
                     .accessibilityLabel(gov == "all" ? "Add every meeting to Calendar" : "Add \(Governments.names[gov] ?? "these") meetings to Calendar")
                 }
             }
-            .withRoutes()
-        }
     }
 }
 

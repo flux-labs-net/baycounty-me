@@ -106,9 +106,9 @@ window.BC = Object.assign(window.BC || {}, window.BCNames);
     show(m);
   });
   const btn = document.querySelector('.menu-btn'), menu = document.getElementById('site-menu');
-  const setMenu = o => { btn.setAttribute('aria-expanded', o); menu.classList.toggle('open', o); document.documentElement.classList.toggle('nav-locked', o); if (o) menu.scrollTop = 0;
-    // phone menu: open on the section that holds this page
-    const here = o && menu.querySelector('.has-sub.on > .sub-toggle'); if (here && !menu.querySelector('.sub-toggle[aria-expanded="true"]')) here.setAttribute('aria-expanded', 'true'); };
+  // phone menu: always opens on the list of sections
+  const setMenu = o => { btn.setAttribute('aria-expanded', o); menu.classList.toggle('open', o); document.documentElement.classList.toggle('nav-locked', o); menu.scrollTop = 0;
+    menu.querySelectorAll('.sub-toggle').forEach(x => x.setAttribute('aria-expanded', 'false')); };
   btn.addEventListener('click', () => setMenu(btn.getAttribute('aria-expanded') !== 'true'));
   menu.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false); });
   const mq = matchMedia('(min-width:981px)'), onMq = e => { if (e.matches) setMenu(false); };
@@ -116,10 +116,10 @@ window.BC = Object.assign(window.BC || {}, window.BCNames);
   document.querySelectorAll('.sub-toggle').forEach(t => t.addEventListener('click', e => {
     e.stopPropagation(); const o = t.getAttribute('aria-expanded') === 'true';
     document.querySelectorAll('.sub-toggle').forEach(x => x.setAttribute('aria-expanded', 'false'));
-    t.setAttribute('aria-expanded', !o); }));
+    t.setAttribute('aria-expanded', !o); if (innerWidth <= 980) { menu.scrollTop = 0; t.focus(); } }));
   // Line each mega menu up under its own button, nudged left only if it would run off the right edge.
   const placeMega = li => { const m = li.querySelector('.nav-mega'); if (!m || innerWidth <= 980) return;
-    const l = li.getBoundingClientRect().left, w = Math.min(760, innerWidth - 32);
+    const l = li.getBoundingClientRect().left, w = m.offsetWidth || Math.min(760, innerWidth - 32);
     m.style.setProperty('--mx', Math.max(16 - l, Math.min(0, innerWidth - 16 - w - l)) + 'px'); };
   document.querySelectorAll('.has-sub').forEach(li => ['mouseenter', 'focusin', 'click'].forEach(ev => li.addEventListener(ev, () => placeMega(li))));
   document.addEventListener('click', e => { if (!e.target.closest('.has-sub, .menu-btn')) document.querySelectorAll('.sub-toggle').forEach(x => x.setAttribute('aria-expanded', 'false')); });
