@@ -121,7 +121,7 @@
    "id": "votes",
    "title": "Recorded votes",
    "description": "Votes by the County Commission, School Board, city commissions and CRA boards since 2016, with how each member voted: hand-researched money votes plus every motion read from the official minutes.",
-   "rows": 11563,
+   "rows": 11770,
    "columns": [
     {
      "name": "date",
@@ -341,7 +341,7 @@
    "id": "member-votes",
    "title": "Votes by member",
    "description": "One row per member per vote (long format), for tallying individual records.",
-   "rows": 56387,
+   "rows": 57006,
    "columns": [
     {
      "name": "date",
@@ -7064,7 +7064,7 @@
    "id": "data-sources",
    "title": "Where the data comes from",
    "description": "Every source BayCounty.me takes records from, one row per source: the topic, the government it covers (or state and federal databases), the link, how we get it (automatic fetch, downloaded and read by hand, a state or federal bulk file, or a live lookup), how often, what we take from it, how we process it and the checks we run.",
-   "rows": 176,
+   "rows": 180,
    "columns": [
     {
      "name": "topic",
@@ -7512,7 +7512,7 @@
    "id": "data-source-sites",
    "title": "Websites our records cite",
    "description": "Every website cited by the records behind BayCounty.me, per topic, with how many distinct documents and pages from it the data links to. Counted from the data files at each build.",
-   "rows": 410,
+   "rows": 414,
    "columns": [
     {
      "name": "website",
@@ -8732,7 +8732,7 @@
    "id": "community-events",
    "title": "Community events",
    "description": "What's happening around the county in the next two months, from public calendars: the county and city calendars, the library system, visitor bureaus and the Panama City Beach Chamber. One row per event date: title, start and end in local time, town, venue name, category (Community, Public meeting, Library, Chamber), recurring for programs listed on two or more dates, and the event's own link. Refreshed daily. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 175,
+   "rows": 186,
    "columns": [
     {
      "name": "place_id",
@@ -12016,7 +12016,7 @@
    "id": "emergency-notices",
    "title": "Emergency notices archive",
    "description": "Every emergency notice BayCounty.me has recorded for the county, newest first: National Weather Service watches, warnings and advisories, boil-water notices, road closures, water and sewer outages, evacuation orders, shelter openings and storm updates from each government's alert center and news feed, and FL511 state road closures. kind is the topic, status active (live at the last check), ended or lifted. first_seen and last_seen are when BayCounty.me saw it. The live list is /api/v1/emergency. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 16,
+   "rows": 23,
    "columns": [
     {
      "name": "notice_id",
@@ -12044,7 +12044,9 @@
      "type": "string",
      "values": [
       "Bay County",
+      "City of Callaway",
       "City of Lynn Haven",
+      "City of Mexico Beach",
       "City of Panama City",
       "City of Panama City Beach"
      ]
@@ -12062,7 +12064,9 @@
      "type": "string",
      "values": [
       "county",
+      "cw",
       "lh",
+      "mb",
       "pc",
       "pcb"
      ]
@@ -12072,25 +12076,32 @@
      "type": "string",
      "values": [
       "Bay County expands storm debris assistance",
+      "Boil Water Notice Rescinded",
       "Damage Assessment Reporting",
       "Florida Avenue & W. 7th Street Closure",
       "Hurricane Isaias Emergency Information",
       "Hurricane Response & Recovery",
       "Know Your Evacuation Zone",
+      "PRECAUTIONARY BOIL WATER NOTICE",
+      "PRECAUTIONARY BOIL WATER NOTICE - Scheduled Outage",
+      "Precautionary Boil Water Norice",
       "Precautionary Boil Water Notice for Manistee Drive",
-      "Precautionary Boil Water Notice issued for Brandeis Ave, Stanford Rd, Huntingdon Rd, & Rutgers Dr. Updated on 2026-10-27",
-      "RESCINDED: Precautionary Boil Water Notice for Panama City some residents of Fairy Ave & Baker Court Updated on 2026-10-28",
+      "Precautionary Boil Water Notice for Sugar Sands & Sunstop Gas Station",
+      "RESCINDED: Precautionary Boil Water Notice for Panama City some residents of Fairy Ave & Baker Court Updated on 2026-10-27",
+      "RESCINDED: Precautionary Boil Water Notice issued for Brandeis Ave, Stanford Rd, Huntingdon Rd, & Rutgers Dr. Updated on 2026-10-27",
       "Reuse System Offline Due to Repair",
       "Reuse System Temporarily Out of Service",
       "Road Closure Notice: Michigan Ave. between W 22nd St. and W 20th Ct.",
       "Sand Available Ahead of Tropical Storm Isaias",
-      "Tropical Storm Isaias Updates"
+      "Tropical Storm Isaias Updates",
+      "Water Quality Advisory Issued for Carl Gray Park"
      ]
     },
     {
      "name": "summary",
      "type": "string",
      "values": [
+      "All of Nelle Street and Harvey Street.",
       "As the storms clear, Bay County Emergency Management asks the residents of the county to fill out their residential damage assessment form.",
       "Beginning Monday, Oct. 26, Bay County crews will conduct a single roadside collection pass specifically for unbagged vegetative debris in the hardest-hit areas of unincorporated Bay County.",
       "Beginning Monday, October 5, the following sections will be closed to vehicle traffic: - Florida Avenue: W. 7th Street to W. 8th Street - W. 7th Street: Ohio Avenue to Florida Avenue Detour signs will be in place to help motorists navigate the area",
@@ -12099,11 +12110,14 @@
       "For the latest on Hurricane Isaias response and recovery, visit www.pcbfl.gov/storm",
       "Heavy rain is expected this weekend with Tropical Storm Isaias. Bay County has sand available to the public to help you protect your home and property. Find sandbag pickup locations and details below.",
       "Hurricane Isaias Emergency Information",
-      "Precautionary Boil Water Notice issued for Brandeis Ave, Stanford Rd, Huntingdon Rd, & Rutgers Dr for Tues., Oct. 27 due to scheduled system upgrades. Update: Updated Maintenance Window: Water service will be interrupted starting at 11:00 a.m. Tuesday October 27, 2026, and ending at 7:00 p.m. Tuesday October 27 , 2026, due to scheduled system upgrades. A precautionary boil water notice will be in effect for this area once service is restored.",
-      "RESCINDED: Precautionary Boil Water Notice for Panama City residents of 901, 909, 910, 912, 915 Fairy Ave & 1408 Baker Court. Update: Precautionary Boil Water Notice RESCINDED for Panama City residents in the following areas: 901, 909, 910, 912, 915 Fairy Ave; 1408 Baker Ct The Monday October 26, 2026 , “Precautionary Boil Water Notice” is hereby rescinded following the satisfactory completion of the bacteriological survey showing that the water is safe to drink.",
+      "Olokee St. between S. Comet and S. Jan Dr.",
+      "On Fox Glenn",
+      "RESCINDED: Precautionary Boil Water Notice for Panama City residents of 901, 909, 910, 912, 915 Fairy Ave & 1408 Baker Court. Update: Water restored at 6:00 PM Monday evening, October 26, 2026.",
+      "RESCINDED: Precautionary Boil Water Notice issued for Brandeis Ave, Stanford Rd, Huntingdon Rd, & Rutgers Dr for Tues., Oct. 27 due to scheduled system upgrades. Update: Updated Maintenance Window: Water service will be interrupted starting at 11:00 a.m. Tuesday October 27, 2026, and ending at 7:00 p.m. Tuesday October 27 , 2026, due to scheduled system upgrades. A precautionary boil water notice will be in effect for this area once service is restored.",
       "ROAD CLOSURE NOTICE: Michigan Avenue – Road Work",
       "The City of Lynn Haven advises customers that the reuse water system is temporarily out of service as of Thursday, October 22, 2026, due to repair of a broken reuse water main.",
       "The City of Lynn Haven advises customers that the reuse water system is temporarily out of service as of Thursday, October 22, 2026, through November 1, 2026, due to repair of a broken reuse water main.",
+      "The Florida Department of Health in Bay County (DOH-Bay) has issued a water quality advisory for high bacterial levels for the following Panama City location: Carl Gray Park",
       "With heavy rain expected, now is a good time to check your evacuation zone. Evacuation zones in Bay County may be different than you think. Look up your address on the Evacuation Zones map on the Bay County website below."
      ]
     },
@@ -12135,20 +12149,28 @@
      "name": "issued",
      "type": "string",
      "values": [
-      "2026-09-30T14:22:59.000Z",
+      "2026-02-06T17:57:14.000Z",
+      "2026-07-07T12:17:32.000Z",
+      "2026-07-14T20:48:49.000Z",
+      "2026-09-30T13:22:59.000Z",
       "2026-10-07T17:19:52.000Z",
+      "2026-10-08T12:03:43.000Z",
       "2026-10-08T13:03:43.000Z",
-      "2026-10-08T16:07:00.000Z",
-      "2026-10-10T14:28:00.000Z",
+      "2026-10-08T15:07:00.000Z",
+      "2026-10-10T13:28:00.000Z",
       "2026-10-12T20:05:36.000Z",
-      "2026-10-13T20:40:17.000Z",
-      "2026-10-14T16:51:36.000Z",
-      "2026-10-14T17:52:00.000Z",
+      "2026-10-13T19:40:17.000Z",
+      "2026-10-14T15:51:36.000Z",
+      "2026-10-14T16:52:00.000Z",
+      "2026-10-23T13:42:27.000Z",
       "2026-10-23T14:35:50.000Z",
-      "2026-10-23T14:42:27.000Z",
-      "2026-10-27T19:08:06.000Z",
       "2026-10-27T22:46:29.000Z",
-      "2026-10-28T15:46:03.000Z"
+      "2026-10-28T18:47:00.000Z",
+      "2026-10-28T18:48:00.000Z",
+      "2026-10-28T18:55:43.000Z",
+      "2026-10-28T18:56:07.000Z",
+      "2026-10-28T21:03:00.000Z",
+      "2026-10-28T21:10:16.000Z"
      ]
     },
     {
@@ -12159,33 +12181,47 @@
      "name": "ends",
      "type": "string",
      "values": [
-      "2026-10-10T14:22:59.000Z",
+      "2026-02-16T17:57:14.000Z",
+      "2026-07-17T12:17:32.000Z",
+      "2026-07-24T20:48:49.000Z",
+      "2026-10-10T13:22:59.000Z",
       "2026-10-17T17:19:52.000Z",
-      "2026-10-18T16:07:00.000Z",
-      "2026-10-20T14:28:00.000Z",
+      "2026-10-18T15:07:00.000Z",
+      "2026-10-20T13:28:00.000Z",
       "2026-10-22T20:05:36.000Z",
-      "2026-10-24T16:51:36.000Z",
-      "2026-10-24T17:52:00.000Z"
+      "2026-10-24T15:51:36.000Z",
+      "2026-10-24T16:52:00.000Z",
+      "2026-11-07T18:47:00.000Z",
+      "2026-11-07T18:48:00.000Z",
+      "2026-11-07T21:03:00.000Z"
      ]
     },
     {
      "name": "updated",
      "type": "string",
      "values": [
-      "2026-09-30T14:22:59.000Z",
+      "2026-02-06T17:57:14.000Z",
+      "2026-07-07T12:17:32.000Z",
+      "2026-07-14T20:48:49.000Z",
+      "2026-09-30T13:22:59.000Z",
       "2026-10-07T17:19:52.000Z",
+      "2026-10-08T12:03:43.000Z",
       "2026-10-08T13:03:43.000Z",
-      "2026-10-08T16:07:00.000Z",
-      "2026-10-10T14:28:00.000Z",
+      "2026-10-08T15:07:00.000Z",
+      "2026-10-10T13:28:00.000Z",
       "2026-10-12T20:05:36.000Z",
-      "2026-10-13T20:40:17.000Z",
-      "2026-10-14T16:51:36.000Z",
-      "2026-10-14T17:52:00.000Z",
+      "2026-10-13T19:40:17.000Z",
+      "2026-10-14T15:51:36.000Z",
+      "2026-10-14T16:52:00.000Z",
+      "2026-10-23T13:42:27.000Z",
       "2026-10-23T14:35:50.000Z",
-      "2026-10-23T14:42:27.000Z",
-      "2026-10-27T19:08:06.000Z",
       "2026-10-27T22:46:29.000Z",
-      "2026-10-28T15:46:03.000Z"
+      "2026-10-28T18:47:00.000Z",
+      "2026-10-28T18:48:00.000Z",
+      "2026-10-28T18:55:43.000Z",
+      "2026-10-28T18:56:07.000Z",
+      "2026-10-28T21:03:00.000Z",
+      "2026-10-28T21:10:16.000Z"
      ]
     },
     {
@@ -12210,7 +12246,9 @@
      "type": "string",
      "values": [
       "2026-10-27T20:41:37.771Z",
-      "2026-10-28T00:40:09.58179+00:00"
+      "2026-10-28T00:40:09.58179+00:00",
+      "2026-10-28T21:06:37.512914+00:00",
+      "2026-10-28T21:10:22.208921+00:00"
      ]
     },
     {
@@ -12219,24 +12257,31 @@
      "values": [
       "2026-10-27T20:41:53.613Z",
       "2026-10-28T14:45:01.081378+00:00",
-      "2026-10-28T17:05:59.410Z"
+      "2026-10-28T22:29:30.597Z"
      ]
     },
     {
      "name": "url",
      "type": "string",
      "values": [
+      "https://mexicobeachfl.gov/announcements/precautionary-boil-water-norice/",
+      "https://mexicobeachfl.gov/announcements/precautionary-boil-water-notice-11/",
+      "https://mexicobeachfl.gov/announcements/precautionary-boil-water-notice-for-sugar-sands-sunstop-gas-station/",
       "https://www.baycountyfl.gov/836/10348/Activation-Information?activeLiveTab=widgets",
       "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=224",
       "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=324",
       "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=325",
       "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=326",
+      "https://www.cityofcallaway.com/CivicAlerts.aspx?aid=2155",
+      "https://www.cityofcallaway.com/CivicAlerts.aspx?aid=2156",
+      "https://www.cityofcallaway.com/CivicAlerts.aspx?aid=2157",
       "https://www.cityoflynnhaven.gov/AlertCenter.aspx?AID=144",
       "https://www.cityoflynnhaven.gov/AlertCenter.aspx?AID=145",
       "https://www.cityoflynnhaven.gov/CivicAlerts.aspx?aid=353",
       "https://www.panamacity.gov/AlertCenter.aspx?AID=689",
       "https://www.panamacity.gov/AlertCenter.aspx?AID=700",
       "https://www.panamacity.gov/AlertCenter.aspx?AID=701",
+      "https://www.panamacity.gov/AlertCenter.aspx?AID=702",
       "https://www.pcbfl.gov/AlertCenter.aspx?AID=23",
       "https://www.pcbfl.gov/CivicAlerts.aspx?aid=45",
       "https://www.pcbfl.gov/storm"
@@ -12246,11 +12291,15 @@
      "name": "source_url",
      "type": "string",
      "values": [
+      "https://mexicobeachfl.gov/government/news/",
       "https://www.baycountyfl.gov/AlertCenter.aspx",
       "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=224",
       "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=324",
       "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=325",
       "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=326",
+      "https://www.cityofcallaway.com/CivicAlerts.aspx?aid=2155",
+      "https://www.cityofcallaway.com/CivicAlerts.aspx?aid=2156",
+      "https://www.cityofcallaway.com/CivicAlerts.aspx?aid=2157",
       "https://www.cityoflynnhaven.gov/AlertCenter.aspx",
       "https://www.cityoflynnhaven.gov/CivicAlerts.aspx?aid=353",
       "https://www.panamacity.gov/AlertCenter.aspx",
@@ -12264,7 +12313,7 @@
      "type": "string",
      "values": [
       "alert:county:Activation-Information?activeLiveTab=widgets",
-      "alert:lh:145",
+      "alert:lh:144",
       "news:pcb:storm"
      ]
     },
@@ -12273,8 +12322,8 @@
      "type": "string",
      "values": [
       "2026-10-07T17:19:52.000Z",
-      "2026-10-08T13:03:43.000Z",
-      "2026-10-23T14:35:50.000Z"
+      "2026-10-08T12:03:43.000Z",
+      "2026-10-23T13:42:27.000Z"
      ]
     }
    ],
@@ -13245,7 +13294,7 @@
    "id": "public-notices",
    "title": "Public notices",
    "description": "Legal notices published by local governments and public agencies on the county's public notice website: bid and proposal requests, public hearings and ordinances, public meetings and other notices, with the government that posted it (gov_id, blank for agencies that are not one of the county's local governments), the date it was published, the first date it mentions after that (the meeting, hearing or bid due date) and the full text. Court, foreclosure, tax deed, probate and other private notices on the same site are left out. The site keeps 30 days; notices already on file stay as an archive. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 64,
+   "rows": 65,
    "columns": [
     {
      "name": "place_id",
@@ -13437,7 +13486,7 @@
    "id": "job-openings",
    "title": "Government job openings",
    "description": "Open jobs posted by Bay County, Bay District Schools, the cities and the airport on their own job boards, read daily: title, department, job type, pay where posted, posting and closing dates and the link to apply. Jobs whose closing date has passed are left out. first_seen is the first day the job was on file. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 110,
+   "rows": 108,
    "columns": [
     {
      "name": "place_id",
@@ -15053,7 +15102,7 @@
    "id": "weekly-roundup",
    "title": "This week in Bay County",
    "description": "This week's edition of the weekly email and the /this-week page, one row per item: events happening this week (one-off events first; repeating programs and meetings left out), public meetings this week, and votes, contracts and change orders that first appeared on BayCounty.me last week (first_seen; minutes come out weeks after a meeting, so date can be earlier). section is event, meeting, vote, contract or change_order; featured marks what the email shows. people lists who voted no, with profile links. Rebuilt every morning.",
-   "rows": 30,
+   "rows": 26,
    "columns": [
     {
      "name": "place_id",
@@ -15107,13 +15156,11 @@
       "Escape the Library (Ages 13+) (Registration Required)",
       "Fall Festival",
       "Heroes Breakfast",
-      "Jiu Jitsu For Mind, Body & Soul w/ Cameron",
       "Line Dancing",
       "Marshall Brothers",
       "Mexico Beach: 3rd LDC Workshop",
       "Mexico Beach: Special Meeting and 4th LDC Workshop",
       "PC Art Club",
-      "PC Senior Arts",
       "PC Senior Living",
       "Read & Rhyme Storytime (Ages 3 – 5 with caregiver)",
       "Sail Into School (Ages 3 – 5)",
@@ -15153,10 +15200,6 @@
      "type": "string",
      "values": [
       "2026-10-28T08:00:00",
-      "2026-10-28T13:00:00",
-      "2026-10-28T14:00:00",
-      "2026-10-28T15:00:00",
-      "2026-10-28T16:00:00",
       "2026-10-28T16:30:00",
       "2026-10-28T18:00:00",
       "2026-10-29T09:00:00",
@@ -15183,8 +15226,6 @@
      "type": "string",
      "values": [
       "2026-10-28T10:00:00",
-      "2026-10-28T15:00:00",
-      "2026-10-28T17:00:00",
       "2026-10-28T18:30:00",
       "2026-10-28T21:00:00",
       "2026-10-29T10:30:00",
@@ -16362,7 +16403,7 @@
    "id": "meetings",
    "title": "Upcoming meetings",
    "description": "Scheduled and expected meetings for every board.",
-   "rows": 48,
+   "rows": 49,
    "columns": [
     {
      "name": "board",
@@ -16388,6 +16429,7 @@
      "type": "string",
      "values": [
       "10/13/26 CRA Board Meeting",
+      "11/10/26 CRA Meeting",
       "3rd LDC Workshop",
       "BOCC Regular Meeting",
       "Bay County Board of County Commissioners Meeting",
@@ -16421,6 +16463,7 @@
      "type": "string",
      "values": [
       "1311 Balboa Ave, Panama City, FL 32401",
+      "825 Ohio Ave., Lynn Haven, FL 32444",
       "825 Ohio Avenue, Lynn Haven",
       "Bay County Government Center - 840 W 11th St. Panama City FL 32401",
       "Bay County Government Center, 840 W. 11th St., Panama City, FL",
@@ -16550,6 +16593,7 @@
       "https://lynnhavenfl.portal.civicclerk.com/event/1094/files",
       "https://lynnhavenfl.portal.civicclerk.com/event/1095/files",
       "https://lynnhavenfl.portal.civicclerk.com/event/2130/files",
+      "https://lynnhavenfl.portal.civicclerk.com/event/2150/files",
       "https://www.bay.k12.fl.us/school-board-meetings",
       "https://www.baycountyfl.gov/calendar.aspx?EID=1594",
       "https://www.baycountyfl.gov/calendar.aspx?EID=1595",
