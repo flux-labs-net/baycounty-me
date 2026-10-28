@@ -996,6 +996,139 @@ def weekly_roundup():
     return rows()
 
 
+# --- Military and the bases (/military) -----------------------------------------------------------------------------------
+
+def _military_files():
+    """data/military/<county>/installations.json (hand-checked), news.json (fetch_news.py) and federal_contracts.json
+    (fetch_contracts.py). Empty when the place has no military data."""
+    import json
+    from place import PLACE_ID
+    d = os.path.join(HERE, '..', 'data', 'military', PLACE_ID.split('-', 1)[-1])
+    load = lambda f, empty: json.load(open(os.path.join(d, f))) if os.path.exists(os.path.join(d, f)) else empty
+    return PLACE_ID, load('installations.json', {'installations': [], 'news_units': []}), load('news.json', {'stories': []}), \
+        load('federal_contracts.json', {'awards': [], 'transactions': []})
+
+
+DEFENSE = 'Department of Defense'
+FED_AGENCY_SHORT = {'Department of the Navy': 'U.S. Navy', 'Department of the Air Force': 'U.S. Air Force', 'Department of the Army': 'U.S. Army',
+                    'U.S. Coast Guard': 'U.S. Coast Guard', 'Defense Logistics Agency': 'Defense Logistics Agency'}
+
+
+def fed_agency_id(agency, sub_agency):
+    """Entity id for the federal agency that signed a contract: the military branch or sub-agency (Navy, Air Force, Coast
+    Guard, VA ...), so a company's profile says who in Washington paid it. Ids start with us- so they never meet a local
+    government key."""
+    import re
+    name = sub_agency or agency
+    return 'gov:us-' + re.sub(r'[^a-z0-9]+', '-', (name or '').lower()).strip('-')[:60] if name else None
+
+
+def fed_recipient_id(name, _c={}):
+    """One entity id per federal contractor, shared with the rest of the site: the company's vendor id when local
+    governments also paid it, its Sunbiz filing when it also gave to a campaign (business-donor-sunbiz), else a business
+    id from its name as registered in SAM.gov."""
+    import re
+    import ids
+    if 'doc' not in _c:
+        norm = lambda s: ' '.join(w for w in re.sub(r"[.,'&]", '', (s or '').lower()).split() if w not in ('inc', 'llc', 'co', 'corp', 'company', 'the', 'pa', 'pllc'))
+        _c['norm'] = norm
+        _c['doc'], _c['dv'] = {}, {}
+        for r in business_donor_sunbiz():
+            if r.get('sunbiz_doc_number'):
+                _c['doc'][norm(r['contributor'])] = r['sunbiz_doc_number'].lower()
+                if r.get('vendor_id'):
+                    _c['dv'][r['sunbiz_doc_number'].lower()] = r['vendor_id']
+    vid = ids.vendor_id(name)
+    if vid:
+        return 'vendor:' + vid, 'same name as a company local governments paid'
+    doc = _c['doc'].get(_c['norm'](name))
+    if doc:
+        return ('vendor:' + _c['dv'][doc], 'same Sunbiz filing as a local vendor') if doc in _c['dv'] else ('business:' + doc, 'same name as a business campaign donor (Sunbiz)')
+    return 'business:' + re.sub(r'[^a-z0-9]+', '-', (name or '').lower()).strip('-')[:80], None
+
+
+def _profile_url(eid):
+    from entity_graph import page_url
+    return page_url(eid) if eid else None
+
+
+def military_installations():
+    place, I, N, _ = _military_files()
+    out = []
+    for b in I['installations']:
+        st = [s for s in N['stories'] if s['installation_id'] == b['installation_id']]
+        out.append({'place_id': place, **{k: b.get(k) for k in ('installation_id', 'name', 'short_name', 'branch', 'host_unit', 'commander', 'commander_title',
+                    'commander_since', 'commander_source_url', 'location', 'opened', 'acres', 'personnel', 'mission', 'storm', 'tenants', 'website', 'dvids_url')},
+                    'news_units': '; '.join(u['unit'] for u in I['news_units'] if u['installation_id'] == b['installation_id']),
+                    'stories': len(st), 'latest_story': max((s['published'] or '' for s in st), default=None) or None,
+                    'as_of': I.get('as_of'), 'source_url': b.get('source_url')})
+    return out
+
+
+def military_news():
+    place, I, N, _ = _military_files()
+    name = {b['installation_id']: b['short_name'] for b in I['installations']}
+    return [{'place_id': place, 'news_id': s['news_id'], 'installation_id': s['installation_id'], 'installation': name.get(s['installation_id']),
+             'unit': s['unit'], 'unit_id': s['unit_id'], 'title': s['title'], 'summary': s.get('summary'), 'published': s.get('published'),
+             'author': s.get('author'), 'url': s['url'], 'image_url': s.get('image_url'), 'source_url': s.get('source_url')}
+            for s in N['stories'] if (s.get('published') or cutoff.FIRST_DATE) >= cutoff.FIRST_DATE]
+
+
+def _fed_rows():
+    if '_fed' in _MC:
+        return _MC['_fed']
+    from collections import defaultdict
+    place, _, _, F = _military_files()
+    tx = [t for t in F['transactions'] if (t.get('date') or '') >= cutoff.FIRST_DATE]
+    by_award = defaultdict(list)
+    for t in tx:
+        by_award[t['award_key']].append(t)
+    meta = {a['award_key']: a for a in F['awards']}
+    awards, years = [], defaultdict(lambda: {'obligated': 0.0, 'actions': 0, 'awards': set()})
+    for k, ts in by_award.items():
+        a = meta.get(k) or {}
+        if (a.get('end_date') or cutoff.FIRST_DATE) < cutoff.FIRST_DATE:
+            continue  # close-out entries on a contract that ended before 2016
+        name = a.get('recipient') or ts[-1]['recipient']
+        eid, match = fed_recipient_id(name)
+        agency, sub = a.get('agency') or ts[-1]['agency'], a.get('sub_agency') or ts[-1]['sub_agency']
+        dates = sorted(t['date'] for t in ts)
+        awards.append({'place_id': place, 'award_key': k, 'award_id': a.get('award_id') or ts[-1]['award_id'], 'recipient': name,
+                       'recipient_uei': a.get('uei') or ts[-1].get('uei'), 'recipient_city': a.get('recipient_city'),
+                       'recipient_entity_id': eid, 'recipient_url': _profile_url(eid), 'recipient_match': match,
+                       'agency': agency, 'sub_agency': sub, 'agency_entity_id': fed_agency_id(agency, sub), 'defense': agency == DEFENSE,
+                       'award_type': a.get('award_type'), 'description': a.get('description'), 'naics': a.get('naics'),
+                       'naics_description': a.get('naics_description'), 'psc': a.get('psc'), 'psc_description': a.get('psc_description'),
+                       'start_date': a.get('start_date'), 'end_date': a.get('end_date'), 'first_action_date': dates[0], 'last_action_date': dates[-1],
+                       'actions': len(ts), 'obligated': round(sum(t['amount'] or 0 for t in ts), 2), 'award_amount': a.get('award_amount'),
+                       'performance_city': a.get('performance_city'), 'performance_county': a.get('performance_county'),
+                       'performance_state': a.get('performance_state'), 'source_url': f'https://www.usaspending.gov/award/{k}'})
+        for t in ts:
+            y = years[(int(t['date'][:4]), eid, name, agency, sub)]
+            y['obligated'] += t['amount'] or 0
+            y['actions'] += 1
+            y['awards'].add(k)
+    awards.sort(key=lambda r: (-r['obligated'], r['award_key']))
+    yrows = [{'place_id': place, 'year': y, 'recipient': n, 'recipient_entity_id': eid, 'recipient_url': _profile_url(eid), 'agency': ag, 'sub_agency': sub,
+              'agency_entity_id': fed_agency_id(ag, sub), 'defense': ag == DEFENSE, 'obligated': round(v['obligated'], 2), 'actions': v['actions'],
+              'awards': len(v['awards']), 'source_url': 'https://www.usaspending.gov/search'}
+             for (y, eid, n, ag, sub), v in years.items()]
+    yrows.sort(key=lambda r: (r['year'], -r['obligated'], r['recipient']))
+    _MC['_fed'] = awards, yrows
+    return _MC['_fed']
+
+
+_MC = {}
+
+
+def federal_contracts():
+    return _fed_rows()[0]
+
+
+def federal_contract_years():
+    return _fed_rows()[1]
+
+
 def tax_districts():
     """Which taxing authorities levy in each tax district (My Address, tax calculator); rates are in property-tax-rates."""
     from addr_page import address_data
@@ -1821,6 +1954,10 @@ DATASETS = [
     ('restaurant-inspections', 'Restaurant inspections', "Every state food safety inspection of a restaurant, food truck, caterer or other food service license in the county since 2016, one row per visit: date, type (routine, complaint, licensing, or a follow-up visit when visit_number is over 1), the state's disposition and what it means in plain words (result, result_level ok, warning, fine or closed), violation counts by priority (high priority violations are the ones most likely to make someone sick), and the violation items cited. From the Florida DBPR Division of Hotels and Restaurants public records, refreshed daily.", restaurant_inspections),
     ('new-businesses', 'New businesses', "Every company, nonprofit and partnership filed with the Florida Division of Corporations (Sunbiz) since 2016 whose main address is in the county, newest first: name, type, filing date, whether it is still active, city and ZIP (street addresses are left out because many small companies list a home), its latest annual report, its profile id, any restaurant it holds a license for, and a link to its state record, which names its officers and registered agent. Out-of-state companies count from the day they registered to do business in Florida. Updated when the state publishes its quarterly corporate file.", new_businesses),
     ('weekly-roundup', 'This week in Bay County', "This week's edition of the weekly email and the /this-week page, one row per item: events happening this week (one-off events first; repeating programs and meetings left out), public meetings this week, and votes, contracts and change orders that first appeared on BayCounty.me last week (first_seen; minutes come out weeks after a meeting, so date can be earlier). section is event, meeting, vote, contract or change_order; featured marks what the email shows. people lists who voted no, with profile links. Rebuilt every morning.", weekly_roundup),
+    ('military-installations', 'Military installations', "One row per military base in the county: branch, host unit, commander (with the change-of-command story that names them), mission, main tenant commands, size and history, its website and DVIDS page, and how many news stories are on file. Hand-checked from the units' own stories and public base histories; commanders change every two to three years.", military_installations),
+    ('military-news', 'Military news from the bases', "News stories published by the public affairs offices of the units at Tyndall Air Force Base and Naval Support Activity Panama City (325th Fighter Wing, 601st Air and Space Operations Center, NSA Panama City, Naval Surface Warfare Center Panama City Division, Navy Experimental Diving Unit), read daily from each unit's DVIDS feed: title, summary, date (Central time), author and the story's own link. Story text and photos stay on DVIDS. 2016 and later.", military_news),
+    ('federal-contracts', 'Federal contracts to local companies', "Every federal contract with money obligated since 2016 to a company whose business address is in the county, from USAspending.gov: recipient (as registered in SAM.gov, with its city, never its street address), the agency and branch that signed it, what it buys (description, industry and product codes), start and end dates, and obligated, the money obligated from 2016 on (modifications and cuts included, so it can be negative). award_amount is USAspending's lifetime total, which can include earlier years. defense is true for Department of Defense contracts. recipient_entity_id links to the company's profile; recipient_match says how it was joined to other records (blank: by its own name only).", federal_contracts),
+    ('federal-contract-years', 'Federal contracts to local companies by year', "Money obligated each calendar year since 2016 on federal contracts to companies based in the county, per company and signing agency, from USAspending.gov contract transactions: obligated dollars, number of contract actions and number of contracts.", federal_contract_years),
     ('tax-districts', 'Tax districts', 'Which taxing authorities levy property tax in each tax district, and the combined millage. Rates by year are in property-tax-rates (authority_id).', tax_districts),
 ]
 

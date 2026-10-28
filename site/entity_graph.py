@@ -508,6 +508,19 @@ def build():
         if r.get('last_date') and r['last_date'] != r.get('first_date'):
             G.links[(oid, 'person:' + pid, 'gift', r.get('office') or '')]['dates'].append(r['last_date'])
 
+    # federal contracts to companies based in the county (USAspending, federal-contract-years): the signing agency or
+    # military branch paid the company, one link per agency and company with the money obligated since 2016
+    for r in _ds('federal-contract-years'):
+        aid, rid = r.get('agency_entity_id'), r.get('recipient_entity_id')
+        if not aid or not rid:
+            continue
+        G.ent(aid, r['sub_agency'] or r['agency'],
+              'Federal agency' + (f" · {r['agency']}" if r.get('sub_agency') and r['sub_agency'] != r['agency'] else ''), None, 'https://www.usaspending.gov/search')
+        if rid.startswith('business:') and rid not in G.ents:
+            G.ent(rid, ids.biz_case(r['recipient']), 'Company with federal contracts', None, 'https://www.usaspending.gov/search')
+        if rid in G.ents:
+            G.link(aid, rid, 'paid', r.get('obligated'), str(r['year']), 'Federal contracts', r.get('source_url'), key='federal')
+
     for r in _ds('nonprofit-grants'):
         a, b = np_names.get(r['grantor_id']), np_names.get(r.get('recipient_id'))
         if a and b:

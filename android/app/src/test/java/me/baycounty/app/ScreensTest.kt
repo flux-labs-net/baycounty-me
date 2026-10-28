@@ -107,6 +107,7 @@ suspend fun preload(store: AppStore, route: Route?) {
             store.utilities[m.id] = me.baycounty.kit.UtilityLookup.decode(File(System.getProperty("repoRoot") ?: "../..", "ios/BayCountyKit/Tests/BayCountyKitTests/Fixtures/utilities-lynn-haven.json").readText())
         }
         Route.Volunteer -> store.load(listOf("volunteer-needs", "volunteer-orgs"))
+        Route.Military -> store.load(listOf("military-installations", "military-news", "federal-contract-years"))
         is Route.Dataset -> store.load(route.id)
         is Route.Record -> {
             store.load(route.datasetID); store.loadVendors(); store.loadPeople()

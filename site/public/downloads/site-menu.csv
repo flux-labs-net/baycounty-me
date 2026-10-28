@@ -46,6 +46,7 @@ fl-bay,en,Outdoors,6,"Beaches, water and parks",,0,Beaches,/beaches,"Today's fla
 fl-bay,en,Outdoors,6,"Beaches, water and parks","Beaches, water and parks",1,Parks,/parks,"Parks, boat ramps, trails and sign-ups",False,
 fl-bay,en,Outdoors,6,"Beaches, water and parks","Beaches, water and parks",2,Water quality,/beaches#water,State bacteria tests at each beach,False,
 fl-bay,en,Outdoors,6,"Beaches, water and parks","Beaches, water and parks",3,Beach access,/beaches#access,"Every public access and lot, on a map",False,
+fl-bay,en,Outdoors,6,"Beaches, water and parks","Beaches, water and parks",4,Military and the bases,/military,Base news and federal contracts to local firms,False,
 fl-bay,en,Take part,7,"Show up, ask, reuse",,0,Meetings,/meetings,"When every board meets, with agendas",True,
 fl-bay,en,Take part,7,"Show up, ask, reuse","Show up, ask, reuse",1,Events,/events,What's happening around the county,False,
 fl-bay,en,Take part,7,"Show up, ask, reuse","Show up, ask, reuse",2,Emergencies & alerts,/emergency,"Weather warnings, evacuation zones, shelters, boil-water notices",False,

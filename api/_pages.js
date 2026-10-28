@@ -35,6 +35,7 @@ const PAGES = {
   '/this-week': {datasets: ['weekly-roundup', 'community-events', 'meetings', 'votes', 'contracts', 'change-orders']},
   '/volunteer': {datasets: ['volunteer-needs', 'volunteer-orgs', 'nonprofits']},
   '/chambers': {datasets: ['chambers', 'chamber-leaders', 'chamber-events', 'nonprofit-payments', 'nonprofits']},
+  '/military': {datasets: ['military-installations', 'military-news', 'federal-contracts', 'federal-contract-years']},
   '/connections/nonprofits': {datasets: ['nonprofits', 'nonprofit-board-members', 'nonprofit-board-businesses', 'nonprofit-payments', 'nonprofit-grants', 'nonprofit-officials', 'charity-registrations']},
   '/connections/business-ties': {datasets: ['official-businesses', 'official-business-links']},
   '/emergency': {datasets: ['evacuation-zones', 'emergency-shelters', 'emergency-resources', 'emergency-notices'], endpoints: ['/emergency', '/evacuation-zone']},

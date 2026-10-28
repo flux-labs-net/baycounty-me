@@ -83,6 +83,7 @@ def menu():
              _i('Parks', '/parks', 'Parks, boat ramps, trails and sign-ups'),
              _i('Water quality', '/beaches#water', 'State bacteria tests at each beach'),
              _i('Beach access', '/beaches#access', 'Every public access and lot, on a map'),
+             _i('Military and the bases', '/military', 'Base news and federal contracts to local firms'),
          ]}]},
         {'label': 'Take part', 'question': 'Show up, ask, reuse',
          'start': _i('Meetings', '/meetings', 'When every board meets, with agendas'),

@@ -3739,7 +3739,7 @@
    "id": "site-updates",
    "title": "What's new",
    "description": "Each change to the site's data and pages, newest first.",
-   "rows": 65,
+   "rows": 66,
    "columns": [
     {
      "name": "date",
@@ -6578,7 +6578,7 @@
    "id": "entity-profiles",
    "title": "Profiles: people, companies and organizations",
    "description": "Every company, elected official, candidate, nonprofit, nonprofit board member, registered business, committee and government named in BayCounty.me records, one row each, with its profile page and how many documented connections it has. entity_id (kind:key) joins entity-connections. Board members are named as their nonprofits' public filings list them; individual campaign donors are included only when they run a registered business (owner-gifts).",
-   "rows": 16500,
+   "rows": 16762,
    "columns": [
     {
      "name": "entity_id",
@@ -6695,7 +6695,7 @@
    "id": "entity-connections",
    "title": "Connections between people, companies and organizations",
    "description": "Every documented connection between two entities in entity-profiles, totalled per pair and kind: a government paid a payee, an organization gave to an official's or candidate's campaign, an official voted on a company's contracts, a person sits on a nonprofit's board or runs a business, a nonprofit gave a grant, two payees share a project. Each row has its source. Individual campaign donors are included only when they run a registered business (owner-gifts); officials' board seats and businesses are added by the API once checked by hand.",
-   "rows": 19764,
+   "rows": 20187,
    "columns": [
     {
      "name": "link_id",
@@ -7027,7 +7027,7 @@
    "id": "data-sources",
    "title": "Where the data comes from",
    "description": "Every source BayCounty.me takes records from, one row per source: the topic, the government it covers (or state and federal databases), the link, how we get it (automatic fetch, downloaded and read by hand, a state or federal bulk file, or a live lookup), how often, what we take from it, how we process it and the checks we run.",
-   "rows": 173,
+   "rows": 176,
    "columns": [
     {
      "name": "topic",
@@ -7376,7 +7376,7 @@
    "id": "data-source-sites",
    "title": "Websites our records cite",
    "description": "Every website cited by the records behind BayCounty.me, per topic, with how many distinct documents and pages from it the data links to. Counted from the data files at each build.",
-   "rows": 405,
+   "rows": 411,
    "columns": [
     {
      "name": "website",
@@ -7401,6 +7401,7 @@
       "Government jobs",
       "Hurricane Michael",
       "Meetings and agendas",
+      "Military and the bases",
       "My Address lookups",
       "Nonprofits",
       "Pay",
@@ -7437,6 +7438,7 @@
       "jobs",
       "meetings",
       "michael",
+      "military",
       "nonprofits",
       "notices",
       "outdoors",
@@ -7473,7 +7475,7 @@
    "id": "site-menu",
    "title": "Site menu",
    "description": "Every link in the site's main menu, one row per link, in English and Spanish: the section and the question it answers, the link's place in the section, and the section's start-here page. place_id is the place the menu belongs to (fl-bay = Bay County), so a menu for another place sits beside it.",
-   "rows": 73,
+   "rows": 74,
    "columns": [
     {
      "name": "place_id",
@@ -15061,6 +15063,520 @@
    "json": "/downloads/weekly-roundup.json",
    "csv": "/downloads/weekly-roundup.csv",
    "api": "/api/v1/datasets/weekly-roundup"
+  },
+  {
+   "id": "military-installations",
+   "title": "Military installations",
+   "description": "One row per military base in the county: branch, host unit, commander (with the change-of-command story that names them), mission, main tenant commands, size and history, its website and DVIDS page, and how many news stories are on file. Hand-checked from the units' own stories and public base histories; commanders change every two to three years.",
+   "rows": 2,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "installation_id",
+     "type": "string"
+    },
+    {
+     "name": "name",
+     "type": "string"
+    },
+    {
+     "name": "short_name",
+     "type": "string"
+    },
+    {
+     "name": "branch",
+     "type": "string"
+    },
+    {
+     "name": "host_unit",
+     "type": "string"
+    },
+    {
+     "name": "commander",
+     "type": "string"
+    },
+    {
+     "name": "commander_title",
+     "type": "string"
+    },
+    {
+     "name": "commander_since",
+     "type": "string"
+    },
+    {
+     "name": "commander_source_url",
+     "type": "string"
+    },
+    {
+     "name": "location",
+     "type": "string"
+    },
+    {
+     "name": "opened",
+     "type": "number"
+    },
+    {
+     "name": "acres",
+     "type": "number"
+    },
+    {
+     "name": "personnel",
+     "type": "number"
+    },
+    {
+     "name": "mission",
+     "type": "string"
+    },
+    {
+     "name": "storm",
+     "type": "string",
+     "values": [
+      "Hurricane Michael hit the base on October 10, 2018. In April 2019 the Air Force estimated the damage at $4.7 billion; the base is being rebuilt as an \"installation of the future.\""
+     ]
+    },
+    {
+     "name": "tenants",
+     "type": "string"
+    },
+    {
+     "name": "website",
+     "type": "string"
+    },
+    {
+     "name": "dvids_url",
+     "type": "string"
+    },
+    {
+     "name": "news_units",
+     "type": "string"
+    },
+    {
+     "name": "stories",
+     "type": "number"
+    },
+    {
+     "name": "latest_story",
+     "type": "string"
+    },
+    {
+     "name": "as_of",
+     "type": "string",
+     "values": [
+      "2026-10-27"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/military-installations.json",
+   "csv": "/downloads/military-installations.csv",
+   "api": "/api/v1/datasets/military-installations"
+  },
+  {
+   "id": "military-news",
+   "title": "Military news from the bases",
+   "description": "News stories published by the public affairs offices of the units at Tyndall Air Force Base and Naval Support Activity Panama City (325th Fighter Wing, 601st Air and Space Operations Center, NSA Panama City, Naval Surface Warfare Center Panama City Division, Navy Experimental Diving Unit), read daily from each unit's DVIDS feed: title, summary, date (Central time), author and the story's own link. Story text and photos stay on DVIDS. 2016 and later.",
+   "rows": 43,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "news_id",
+     "type": "string"
+    },
+    {
+     "name": "installation_id",
+     "type": "string",
+     "values": [
+      "nsa-panama-city",
+      "tyndall-afb"
+     ]
+    },
+    {
+     "name": "installation",
+     "type": "string",
+     "values": [
+      "NSA Panama City",
+      "Tyndall AFB"
+     ]
+    },
+    {
+     "name": "unit",
+     "type": "string",
+     "values": [
+      "325th Fighter Wing",
+      "601st Air and Space Operations Center",
+      "Naval Support Activity Panama City",
+      "Naval Surface Warfare Center Panama City Division",
+      "Navy Experimental Diving Unit"
+     ]
+    },
+    {
+     "name": "unit_id",
+     "type": "string",
+     "values": [
+      "325fw",
+      "601aoc",
+      "nedu",
+      "nsapc",
+      "nswc-pcd"
+     ]
+    },
+    {
+     "name": "title",
+     "type": "string"
+    },
+    {
+     "name": "summary",
+     "type": "string"
+    },
+    {
+     "name": "published",
+     "type": "string"
+    },
+    {
+     "name": "author",
+     "type": "string",
+     "values": [
+      "2nd Lt. Tyler Turnmire",
+      "Airman 1st Class Courtney McCants",
+      "Airman 1st Class Rosario Garcia",
+      "Airman Max Davis",
+      "Jeremy Roman",
+      "Lt. Col. Andrew Scott",
+      "Lt. Jennifer Jewell",
+      "Lt. Megan Leonard",
+      "Master Sgt. Regina Young",
+      "Michael Sparks",
+      "Petty Officer 1st Class Kyle Merritt",
+      "Re-Essa Buckels",
+      "Senior Airman Amanda Alvarez",
+      "Shauna Love-vonKnoblauch",
+      "Tech. Sgt. Charles Welty",
+      "Zachary Harris"
+     ]
+    },
+    {
+     "name": "url",
+     "type": "string"
+    },
+    {
+     "name": "image_url",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://www.dvidshub.net/unit/325FWPA",
+      "https://www.dvidshub.net/unit/601AOC",
+      "https://www.dvidshub.net/unit/NEDU",
+      "https://www.dvidshub.net/unit/NSAPC",
+      "https://www.dvidshub.net/unit/NSWC-PCD"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/military-news.json",
+   "csv": "/downloads/military-news.csv",
+   "api": "/api/v1/datasets/military-news"
+  },
+  {
+   "id": "federal-contracts",
+   "title": "Federal contracts to local companies",
+   "description": "Every federal contract with money obligated since 2016 to a company whose business address is in the county, from USAspending.gov: recipient (as registered in SAM.gov, with its city, never its street address), the agency and branch that signed it, what it buys (description, industry and product codes), start and end dates, and obligated, the money obligated from 2016 on (modifications and cuts included, so it can be negative). award_amount is USAspending's lifetime total, which can include earlier years. defense is true for Department of Defense contracts. recipient_entity_id links to the company's profile; recipient_match says how it was joined to other records (blank: by its own name only).",
+   "rows": 6425,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "award_key",
+     "type": "string"
+    },
+    {
+     "name": "award_id",
+     "type": "string"
+    },
+    {
+     "name": "recipient",
+     "type": "string"
+    },
+    {
+     "name": "recipient_uei",
+     "type": "string"
+    },
+    {
+     "name": "recipient_city",
+     "type": "string",
+     "values": [
+      "Chipley",
+      "Crestview",
+      "Fountain",
+      "Lynn Haven",
+      "Mexico Beach",
+      "Panama City",
+      "Panama City Beach",
+      "Port Saint Joe",
+      "Tyndall Afb",
+      "Youngstown"
+     ]
+    },
+    {
+     "name": "recipient_entity_id",
+     "type": "string"
+    },
+    {
+     "name": "recipient_url",
+     "type": "string"
+    },
+    {
+     "name": "recipient_match",
+     "type": "string",
+     "values": [
+      "same name as a business campaign donor (Sunbiz)",
+      "same name as a company local governments paid"
+     ]
+    },
+    {
+     "name": "agency",
+     "type": "string",
+     "values": [
+      "Department of Agriculture",
+      "Department of Commerce",
+      "Department of Defense",
+      "Department of Health and Human Services",
+      "Department of Homeland Security",
+      "Department of Justice",
+      "Department of State",
+      "Department of Transportation",
+      "Department of Veterans Affairs",
+      "Department of the Interior",
+      "Department of the Treasury",
+      "Environmental Protection Agency",
+      "General Services Administration",
+      "National Aeronautics and Space Administration",
+      "Office of Personnel Management",
+      "U.S. Agency for Global Media"
+     ]
+    },
+    {
+     "name": "sub_agency",
+     "type": "string"
+    },
+    {
+     "name": "agency_entity_id",
+     "type": "string"
+    },
+    {
+     "name": "defense",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "award_type",
+     "type": "string",
+     "values": [
+      "BPA CALL",
+      "DEFINITIVE CONTRACT",
+      "DELIVERY ORDER",
+      "PURCHASE ORDER"
+     ]
+    },
+    {
+     "name": "description",
+     "type": "string"
+    },
+    {
+     "name": "naics",
+     "type": "string"
+    },
+    {
+     "name": "naics_description",
+     "type": "string"
+    },
+    {
+     "name": "psc",
+     "type": "string"
+    },
+    {
+     "name": "psc_description",
+     "type": "string"
+    },
+    {
+     "name": "start_date",
+     "type": "string"
+    },
+    {
+     "name": "end_date",
+     "type": "string"
+    },
+    {
+     "name": "first_action_date",
+     "type": "string"
+    },
+    {
+     "name": "last_action_date",
+     "type": "string"
+    },
+    {
+     "name": "actions",
+     "type": "number"
+    },
+    {
+     "name": "obligated",
+     "type": "number"
+    },
+    {
+     "name": "award_amount",
+     "type": "number"
+    },
+    {
+     "name": "performance_city",
+     "type": "string"
+    },
+    {
+     "name": "performance_county",
+     "type": "string"
+    },
+    {
+     "name": "performance_state",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/federal-contracts.json",
+   "csv": "/downloads/federal-contracts.csv",
+   "api": "/api/v1/datasets/federal-contracts"
+  },
+  {
+   "id": "federal-contract-years",
+   "title": "Federal contracts to local companies by year",
+   "description": "Money obligated each calendar year since 2016 on federal contracts to companies based in the county, per company and signing agency, from USAspending.gov contract transactions: obligated dollars, number of contract actions and number of contracts.",
+   "rows": 1477,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "year",
+     "type": "number"
+    },
+    {
+     "name": "recipient",
+     "type": "string"
+    },
+    {
+     "name": "recipient_entity_id",
+     "type": "string"
+    },
+    {
+     "name": "recipient_url",
+     "type": "string"
+    },
+    {
+     "name": "agency",
+     "type": "string",
+     "values": [
+      "Department of Agriculture",
+      "Department of Commerce",
+      "Department of Defense",
+      "Department of Health and Human Services",
+      "Department of Homeland Security",
+      "Department of Justice",
+      "Department of State",
+      "Department of Transportation",
+      "Department of Veterans Affairs",
+      "Department of the Interior",
+      "Department of the Treasury",
+      "Environmental Protection Agency",
+      "General Services Administration",
+      "National Aeronautics and Space Administration",
+      "Office of Personnel Management",
+      "U.S. Agency for Global Media"
+     ]
+    },
+    {
+     "name": "sub_agency",
+     "type": "string"
+    },
+    {
+     "name": "agency_entity_id",
+     "type": "string"
+    },
+    {
+     "name": "defense",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "obligated",
+     "type": "number"
+    },
+    {
+     "name": "actions",
+     "type": "number"
+    },
+    {
+     "name": "awards",
+     "type": "number"
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://www.usaspending.gov/search"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/federal-contract-years.json",
+   "csv": "/downloads/federal-contract-years.csv",
+   "api": "/api/v1/datasets/federal-contract-years"
   },
   {
    "id": "tax-districts",
