@@ -28,6 +28,7 @@ public enum SitePages {
         "/compare": .web("side-by-side table; the Governments tab has the comparison charts"),
         "/open-data": .native("Every dataset (Explore)"),
         "/developers": .web("API documentation for developers"),
+        "/realtor": .web("realtor console: agent sign-in, branding and branded PDF address reports, from /api/v1/address-report"),
         "/records-request": .web("records request writer"),
         "/connections/shared-owners": .web("confirmed shared-owner groups and gifts over the limit, read live from /api/v1/datasets/shared-owner-groups and over-limit-gifts"),
         "/connections/nonprofits": .dataset("nonprofits"),

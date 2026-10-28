@@ -101,6 +101,7 @@ def menu():
              _i('Glossary', '/glossary', 'Government money, explained simply'),
              _i('Open data', '/open-data', 'Download every dataset'),
              _i('API', '/developers', 'Connect apps and AI assistants'),
+             _i('Realtor console', '/realtor', 'Branded address reports for agents'),
              _i("What's new", '/updates', 'New pages, data and corrections'),
              _i('Data sources', '/data-sources', 'Every source, link and process'),
              _i('About', '/about', 'Sources, method and corrections'),

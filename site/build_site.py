@@ -35,6 +35,7 @@ from restaurants_page import restaurants_page, new_businesses_page
 from weekly import this_week_page
 from volunteer_page import volunteer_page
 from military_page import military_page
+from realtor_page import realtor_page
 from business_ties_page import business_ties_page
 from updates import updates_page, rss, last_updated, nice as nice_date
 OUT = os.path.join(ROOT, 'public')
@@ -631,7 +632,7 @@ def about_page():
 def privacy_page():
     return '''<div class="page prose">
   <h1>Privacy</h1>
-  <p class="lede">BayCounty.me doesn't sell, share or track you. There are no accounts, no ads and no tracking cookies, on the website or in the iPhone and Android apps.</p>
+  <p class="lede">BayCounty.me doesn't sell, share or track you. There are no ads and no tracking cookies, on the website or in the iPhone and Android apps. The only accounts are for the realtor console.</p>
   <h2>The website</h2>
   <ul>
     <li><b>Visits.</b> The site counts page views with Vercel Web Analytics, which uses no cookies and doesn't identify you.</li>
@@ -639,6 +640,7 @@ def privacy_page():
     <li><b>Contact form.</b> Your message, name and email come to us by email so we can answer. They aren't added to any list.</li>
     <li><b>API.</b> Requests to the public API are logged with the caller's IP address for 90 days to stop abuse, then deleted.</li>
     <li><b>Ask.</b> Questions you type on the <a href="/ask">Ask</a> page are sent to an AI service to write the answer, along with the public records it looks up. BayCounty.me doesn't save your questions or the answers; it logs only how many were asked (with a scrambled form of your IP address, to enforce limits) and what they cost. Please don't type personal information.</li>
+    <li><b>Realtor console.</b> Agents who sign in to the <a href="/realtor">realtor console</a> have an account under their email address. We keep the branding they save (name, brokerage, contact details, logo, photo and colors) and the addresses they've run reports for, so they can run them again. A sign-in cookie keeps them signed in for 30 days. None of it is shared or shown to anyone else, and an agent can delete the account, branding and history from the console at any time. Addresses sent to the address report are not logged.</li>
     <li><b>My Address.</b> Address lookups go straight from your browser to Bay County's and FEMA's public map servers. BayCounty.me doesn't receive or store what you look up.</li>
   </ul>
   <h2>The iPhone and Android apps</h2>
@@ -672,6 +674,7 @@ PAGES = [
     ('/governments', "Bay County's local governments", 'A profile of every local government in Bay County, Florida: officials, budget, tax rate, debt, audits, votes, contracts and projects.', govs_index),
     ('/compare', 'Compare Bay County governments', 'Compare Bay County, its cities and the school district side by side: budget, property tax, debt, staff, audit findings, split votes and utility bills, per resident.', lambda: compare_page(OUT)),
     ('/open-data', 'Download the data', 'Every BayCounty.me dataset as CSV and JSON: votes, contracts, CRA spending, tax rates, debt, audits, FEMA projects and more.', lambda: opendata_page(OUT)),
+    ('/realtor', 'Realtor console: branded address reports', 'For real estate agents: type any Bay County address and download one branded PDF with the property, a tax estimate, flood and evacuation zones, schools, utilities, zoning and projects nearby, parks and who represents it.', lambda: realtor_page(OUT)),
     ('/developers', 'API for developers', 'Connect apps, spreadsheets and AI assistants to BayCounty.me: a free, read-only API and MCP server for Bay County public records.', lambda: developers_page(OUT)),
     ('/es', 'Registros públicos en español', 'BayCounty.me en español: estimado de impuestos por dirección, solicitudes de registros públicos y un glosario de términos de dinero público.', es_home),
     ('/es/mi-direccion', 'Mi dirección', 'Busque cualquier dirección del condado de Bay: estimado de impuestos a la propiedad, quién lo representa, escuelas, zonas de inundación y evacuación, y distritos de reurbanización.', lambda: es_addr_page(OUT)),
@@ -742,7 +745,7 @@ PAGES = [
     ('/ask', 'Ask BayCounty.me', 'Ask a question in your own words about Bay County budgets, taxes, votes, contracts, meetings or officials, and get an answer from the public records on BayCounty.me, with links to each source.', ask_page),
     ('/about', 'About', 'What BayCounty.me is, where its information comes from, and how to send a correction.', about_page),
     ('/data-sources', 'Where our data comes from', 'Every source behind BayCounty.me: each government\'s agenda systems, websites and documents, and every state and federal database, with links, how often we check them and how we process the records.', data_sources_page),
-    ('/privacy', 'Privacy', 'What BayCounty.me and its iPhone and Android apps collect: no accounts, no ads, no tracking.', privacy_page),
+    ('/privacy', 'Privacy', 'What BayCounty.me and its iPhone and Android apps collect: no ads, no tracking, and accounts only for the realtor console.', privacy_page),
 ]
 
 

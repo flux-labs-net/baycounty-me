@@ -31,6 +31,7 @@ object SitePages {
         "/compare" to Coverage.Web("side-by-side table; the Governments tab has the comparison charts"),
         "/open-data" to Coverage.Native("Every dataset (Explore)"),
         "/developers" to Coverage.Web("API documentation for developers"),
+        "/realtor" to Coverage.Web("realtor console: agent sign-in, branding and branded PDF address reports, from /api/v1/address-report"),
         "/records-request" to Coverage.Web("records request writer"),
         "/connections/shared-owners" to Coverage.Web("confirmed shared-owner groups and gifts over the limit, read live from /api/v1/datasets/shared-owner-groups and over-limit-gifts"),
         "/connections/nonprofits" to Coverage.Dataset("nonprofits"),
