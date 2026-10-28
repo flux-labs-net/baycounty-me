@@ -13,21 +13,18 @@ import os
 import re
 
 TONES = ['blue', 'teal', 'amber', 'salmon']
-_PHOTOS = None
 
 
 def photos():
-    """Official headshots by person id (data/civic/official_photos.json, dataset official-photos)."""
-    global _PHOTOS
-    if _PHOTOS is None:
-        f = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'data', 'civic', 'official_photos.json')
-        _PHOTOS = {r['person_id']: r for r in json.load(open(f))['photos']} if os.path.exists(f) else {}
-    return _PHOTOS
+    """Every person's photo by profile id ('person:x', 'member:b_...') and bare person id (site/person_photos.py,
+    dataset person-photos): official headshots first, then chamber board and staff headshots."""
+    from person_photos import by_id
+    return by_id()
 
 
-def photo_of(person_id):
-    """The photo's URL for a person id, or None (they keep their initials)."""
-    return (photos().get(person_id or '') or {}).get('photo_path')
+def photo_of(pid):
+    """The photo's URL for a person id or profile id, or None (they keep their initials)."""
+    return (photos().get(pid or '') or {}).get('photo_path')
 
 
 def ico(name, tone=None):

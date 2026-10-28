@@ -53,14 +53,15 @@ function urlFor(id, known) {
   return k === 'person' ? `/people/${v}` : `/profile/${k}/${v}`;
 }
 
-function shape(id, rows, labels = new Map()) {
+function shape(id, rows, labels = new Map(), photos = new Map()) {
   // one connection, from this entity's side
   return rows.map(r => {
     const out = r.from_id === id;
     const rel = r.relation;
     return {link_id: r.link_id, relation: rel, label: (RELATION[rel] || [rel, rel])[out ? 0 : 1], direction: out ? 'out' : 'in',
       other: {entity_id: out ? r.to_id : r.from_id, name: nameCase(out ? r.to_name : r.from_name, out ? r.to_kind : r.from_kind), kind: out ? r.to_kind : r.from_kind,
-        kind_label: labels.get(out ? r.to_id : r.from_id) || KIND_LABEL[out ? r.to_kind : r.from_kind] || null, page_url: out ? r.to_url : r.from_url},
+        kind_label: labels.get(out ? r.to_id : r.from_id) || KIND_LABEL[out ? r.to_kind : r.from_kind] || null, page_url: out ? r.to_url : r.from_url,
+        ...(photos.has(out ? r.to_id : r.from_id) ? {photo: photos.get(out ? r.to_id : r.from_id).url} : {})},
       amount: r.amount ?? null, records: r.records ?? null, first_date: r.first_date || null, last_date: r.last_date || null, detail: r.detail || null,
       source_url: r.source_url || null, dataset: r.dataset || 'entity-connections', checked_by_hand: r.checked_by_hand || undefined,
       merged_from: r.merged_from || undefined};
@@ -80,6 +81,16 @@ async function rowsWhere(req, catalog, did, filters) {
     const {rows} = await datasetRows(req, m);
     return rows.filter(r => Object.entries(filters).every(([k, v]) => (Array.isArray(v) ? v : [v]).includes(r[k])));
   }
+}
+
+// Every person photo by profile id ({url, credit, source_url}). The table is small (one row per person with a photo).
+async function photoMap(req, catalog) {
+  const m = meta(catalog, 'person-photos');
+  if (!m) return new Map();
+  let rows;
+  try { rows = (await rest('person_photos?select=entity_id,photo_url,credit,source_url&limit=5000', {timeout: 6000})).rows; }
+  catch (e) { rows = (await datasetRows(req, m).catch(() => ({rows: []}))).rows; }
+  return new Map(rows.map(r => [r.entity_id, {url: r.photo_url, credit: r.credit, source_url: r.source_url}]));
 }
 
 // Connections from the database-only datasets, as entity-connections rows.
@@ -210,10 +221,11 @@ async function getEntity(req, catalog, id) {
   if (!ent) throw Object.assign(new Error(`No entity "${id}".`), {status: 404, expose: true});
   live = live || await liveConnections(req, catalog, ent);
   if (ent.kind === 'member') ent = await withOfficial(req, catalog, ent);
-  if (ent.kind === 'person') {  // the official photo their government publishes (official-photos), when there is one
-    const ph = (await rowsWhere(req, catalog, 'official-photos', {entity_id: id}).catch(() => []))[0];
-    if (ph) ent = {...ent, photo: {url: ph.photo_url, credit: ph.credit, source_url: ph.source_url}};
-  }
+  // Faces: the photo the person's government or chamber publishes (person-photos), on the profile and on each person in
+  // its connections. A board member checked by hand as an official uses the official's photo when they have none.
+  const photos = await photoMap(req, catalog);
+  const ph = photos.get(id) || (ent.same_as && ent.same_as.entity_id && photos.get(ent.same_as.entity_id));
+  if (ph) ent = {...ent, photo: ph};
   if (ent.kind === 'business' || ent.kind === 'vendor' || ent.kind === 'nonprofit') {
     // when it was filed with the state (new-businesses, since 2016) and the restaurants it holds a license for
     if (ent.kind === 'business') {
@@ -228,7 +240,7 @@ async function getEntity(req, catalog, id) {
   }
   const all = mergeConfirmed(links, live);
   const labels = await personLabels(req, pm, all, id, source);
-  const connections = shape(id, all, labels).sort((a, b) => (b.amount || 0) - (a.amount || 0) || String(a.other.name).localeCompare(String(b.other.name)));
+  const connections = shape(id, all, labels, photos).sort((a, b) => (b.amount || 0) - (a.amount || 0) || String(a.other.name).localeCompare(String(b.other.name)));
   if (live.length) ent = {...ent, connections: connections.length};
   const counts = {};
   connections.forEach(c => { counts[c.relation] = (counts[c.relation] || 0) + 1; });

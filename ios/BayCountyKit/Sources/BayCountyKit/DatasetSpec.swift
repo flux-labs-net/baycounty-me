@@ -278,6 +278,8 @@ public struct DatasetSpec: Sendable {
                                     date: ["date_start", "date_end"], badge: "how", filters: ["government", "seat", "how"], page: "people"),
         // official headshots its government publishes, one row per person (the photo shows on People rows and person screens)
         "official-photos": .init(.peopleAndPay, "person.3", title: ["name"], subtitle: ["credit"], detail: "source_url", date: ["fetched_on"], page: "people"),
+        "person-photos": .init(.peopleAndPay, "person.crop.circle", title: ["name"], subtitle: ["credit"], detail: "source_url", date: ["fetched_on"],
+                               filters: ["published_by"], page: "people"),
         "glossary-terms": .init(.more, "book", title: ["term"], subtitle: ["group_name"], detail: "simple", filters: ["group_name"],
                                 page: "glossary"),
         "site-updates": .init(.more, "sparkles", title: ["title"], subtitle: ["date"], detail: "text", date: ["date"], page: "updates"),
