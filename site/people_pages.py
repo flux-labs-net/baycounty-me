@@ -36,18 +36,23 @@ def src(u, label='Source'):
 
 def embed(eid):
     """The entity and its build-time connections, in the API's shape (GET /api/v1/entities/<id>)."""
+    from ui import photos
     G = EG.build()
     x = G.ents[eid]
+    ph = photos()
+    face = lambda i: {'photo': ph[i]['photo_url']} if i in ph else {}
     conns = []
     for l, o, d in EG.neighbors(eid):
         out = d == 'out'
         conns.append({'relation': l['relation'], 'label': EG.RELATION[l['relation']][0 if out else 1], 'direction': d,
                       'other': {'entity_id': o['entity_id'], 'name': o['name'], 'kind': o['kind'], 'kind_label': o.get('label') or EG.KIND_LABEL[o['kind']],
-                                'page_url': EG.page_url(o['entity_id'])},
+                                'page_url': EG.page_url(o['entity_id']), **face(o['entity_id'])},
                       'amount': round(l['amount'], 2) if l['amount'] is not None else None, 'records': l['records'],
                       'first_date': EG._dates(l['dates'])[0], 'last_date': EG._dates(l['dates'])[1], 'detail': '; '.join(l['detail']) or None,
                       'source_url': l['source_url']})
     ent = _profiles().get(eid) or {'entity_id': eid, 'kind': x['kind'], 'name': x['name'], 'page_url': EG.page_url(eid)}
+    if eid in ph:
+        ent = {**ent, 'photo': {'url': ph[eid]['photo_url'], 'credit': ph[eid]['credit'], 'source_url': ph[eid]['source_url']}}
     return {'entity': ent, 'connections': conns}
 
 
@@ -366,8 +371,11 @@ def pages():
 
 
 def search_rows():
+    from ui import photo_of
     G = EG.build()
-    rows = [{'k': 'Person', 't': G.ents['person:' + p['id']]['name'], 's': G.ents['person:' + p['id']]['subtitle'] or '', 'u': f'/people/{p["id"]}'} for p in _people()]
+    # 'p': the person's photo, shown beside the name in the results
+    rows = [{'k': 'Person', 't': G.ents['person:' + p['id']]['name'], 's': G.ents['person:' + p['id']]['subtitle'] or '', 'u': f'/people/{p["id"]}',
+             **({'p': photo_of(p['id'])} if photo_of(p['id']) else {})} for p in _people()]
     for r in EG.profile_rows():
         if r['kind'] == 'nonprofit' and r['connections'] > 1:
             rows.append({'k': 'Nonprofit', 't': r['name'], 's': r['subtitle'] or '', 'u': r['page_url']})

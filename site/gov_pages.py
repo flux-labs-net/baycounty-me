@@ -226,7 +226,7 @@ def gov_page(key):
     glance = (f'<section class="tx-sec gx-glance" hidden><div class="sec-hd">{ico("pulse", "blue")}<h2 id="year">At a glance</h2><span class="muted" id="gxGlanceH"></span></div>'
               '<div class="kpis" id="gxGlance"></div><p class="muted small" data-gx-loading>Loading this government\'s records…</p></section>')
     cfg = {'key': key, 'short': p['short'], 'cra': cra or '', 'craName': CRA_NAME.get(cra, '') if cra else '', 'fyStart': fy_start,
-           'photos': {k: v['photo_path'] for k, v in photos().items()}}
+           'photos': {k: v['photo_path'] for k, v in photos().items() if ':' not in k}}
     year = '<label class="sc-f sc-year" data-scope><span>Year</span><select id="gxYear" aria-label="Year"><option value="all">All years</option></select></label>'
     bar = city_bar(None, fixed=key, extra=year)
     lede = g.get('blurb') or f'{e(p["name"])}: who runs it, what it spends and owes, how its commission votes, and what the auditors found, all from public records.'

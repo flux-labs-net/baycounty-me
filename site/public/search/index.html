@@ -90,7 +90,7 @@ addEventListener('DOMContentLoaded', () => {
     const {words, hits} = S.query(q), pending = S.pending();
     cnt.textContent = (hits.length ? `${hits.length.toLocaleString()} result${hits.length === 1 ? '' : 's'}${hits.length > 100 ? ', showing the top 100' : ''}` : pending ? 'No results yet.' : 'No results. Try fewer or different words.') + (pending ? ' Still loading records…' : '');
     const snip = r => { if (!r.x || words.some(w => r._s.includes(w))) return r.s; const i = r._x.indexOf(words[0]); return i < 0 ? r.s : '…' + r.x.slice(Math.max(0, i - 80), i + 140) + '…'; };
-    res.innerHTML = hits.slice(0, 100).map(([, r]) => `<li><a href="${S.esc(r.u)}"><span class="r-k">${S.esc(r.k)}</span><b>${S.hl(r.t, words)}</b><span class="r-s">${S.hl(snip(r), words)}</span></a></li>`).join('');
+    res.innerHTML = hits.slice(0, 100).map(([, r]) => `<li><a href="${S.esc(r.u)}"${r.p ? ' class="r-ph"' : ''}>${r.p ? `<img src="${S.esc(r.p)}" alt="" width="40" height="40" loading="lazy">` : ''}<span class="r-k">${S.esc(r.k)}</span><b>${S.hl(r.t, words)}</b><span class="r-s">${S.hl(snip(r), words)}</span></a></li>`).join('');
   }
   S.onUpdate(() => { if (inp.value.trim()) run(); });
   inp.addEventListener('input', () => { clearTimeout(t); t = setTimeout(run, 150); });

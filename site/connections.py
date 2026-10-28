@@ -192,6 +192,7 @@ def network_data():
     def office_gov(c):
         return c.get('gov') if c.get('gov') in G and c.get('gov') != 'constitutional' else (ids.gov_id(c.get('office'), contains=True) or ('county' if c.get('gov') == 'constitutional' else None))
 
+    from ui import photo_of
     officials = {}
     agg = {}
     for d in records.donations(GIFT_TYPES):
@@ -226,6 +227,8 @@ def network_data():
     for o in officials.values():
         o.pop('cand26', None)
         o['pid'] = ids.person_id(o['n'])  # /people/<pid>
+        if photo_of(o['pid']):
+            o['ph'] = photo_of(o['pid'])  # their published photo (person-photos), drawn in their circle
         o['gid'] = o['g'] or ''
         o['g'] = gkey(o['g']) or '' if o['g'] else ''  # city filter key (county officers count with the county)
         o['gp'] = [] if o['cand'] else [k for k, p in payers.items() if p['k'] != 'tourism' and k[k.index(':') + 1:] in (o['gid'], CRA_OF.get(o['gid']))]  # boards they sit on
