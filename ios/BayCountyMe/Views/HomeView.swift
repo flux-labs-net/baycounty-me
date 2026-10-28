@@ -9,6 +9,8 @@ struct HomeView: View {
     @AppStorage("taxDistrict") private var savedDistrict = ""
 
     private let browse: [(title: String, symbol: String, route: Route)] = [
+        ("Emergencies and alerts", "exclamationmark.triangle", .emergency),
+        ("Hurricane prep", "hurricane", .hurricanePrep),
         ("CRA spending", "building.2", .cra),
         ("Contracts", "signature", .dataset("contracts")),
         ("How they voted", "hand.raised", .dataset("votes")),
@@ -55,12 +57,17 @@ struct HomeView: View {
                         .accessibilityLabel("Ask a question")
                 }
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button { store.openSite("/alerts") } label: { Image(systemName: "bell") }
-                        .accessibilityLabel("Email alerts")
+                    Button { path.append(.emergency) } label: { Image(systemName: "bell") }
+                        .accessibilityLabel("Emergencies and alerts")
                 }
             }
             .refreshable { await store.refreshAll() }
             .withRoutes()
+            .onReceive(NotificationCenter.default.publisher(for: .openNotice)) { note in
+                // A tapped notification: emergency notices open the Emergencies screen, agenda items their agenda.
+                guard let url = note.object as? URL else { return }
+                if url.path.hasPrefix("/emergency") { store.tab = .home; path = [.emergency] } else { store.open(url) }
+            }
             .task {
                 await store.loadTax()
                 await store.loadAmendment3()
@@ -382,7 +389,7 @@ struct HomeView: View {
             "vendor": .vendor("roberts-and-roberts"), "person": .person("clair-pease"), "explore": .explore,
             "votes": .dataset("votes"), "salaries": .dataset("salary-positions"),
             "accountability": .accountability, "accproject": .accountabilityProject("pcb-fbr-seg3"),
-            "budget": .budgetCompare(govID: "lh"), "craincrement": .craIncrement, "chambers": .chambers, "events": .events, "beaches": .beaches, "parks": .parks, "schools": .schools, "pastelections": .dataset("campaign-history"),
+            "budget": .budgetCompare(govID: "lh"), "craincrement": .craIncrement, "chambers": .chambers, "events": .events, "beaches": .beaches, "parks": .parks, "schools": .schools, "emergency": .emergency, "hurricaneprep": .hurricanePrep, "pastelections": .dataset("campaign-history"),
             "roads": .dataset("road-contracts"), "development": .dataset("development-projects"),
         ]
         if let r = simple[arg] { path = [r]; return }

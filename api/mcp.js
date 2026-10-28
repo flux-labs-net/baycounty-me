@@ -103,6 +103,18 @@ const TOOLS = [
      id: {type: 'string', description: 'Entity id from find_entity, e.g. "vendor:dewberry" or "person:douglas-moore"'},
      limit: {type: 'integer', minimum: 1, maximum: 500, default: 100, description: 'Connections to return, largest amounts first'}}},
    annotations: {readOnlyHint: true}},
+  {name: 'emergency_now', title: 'Emergencies and alerts now',
+   description: 'What is happening now in Bay County: active National Weather Service watches and warnings, evacuation orders, open shelters, boil-water notices, road closures and storm updates from the county and cities, checked every 5 minutes, most serious first. Always tell people to follow instructions from emergency officials.',
+   inputSchema: {type: 'object', additionalProperties: false, properties: {
+     kind: {type: 'string', enum: ['evacuation', 'weather', 'shelter', 'boil-water', 'road', 'utility', 'storm'], description: 'Only this kind of notice'},
+     limit: {type: 'integer', minimum: 1, maximum: 100, default: 25}}},
+   annotations: {readOnlyHint: true}},
+  {name: 'evacuation_zone', title: 'Evacuation zone for an address',
+   description: 'The hurricane evacuation zone (A to D, or none) for a Bay County street address or point, what it means, whether an evacuation order covers it now, and the nearest county shelters.',
+   inputSchema: {type: 'object', additionalProperties: false, properties: {
+     address: {type: 'string', description: 'Street address, e.g. "825 Ohio Ave"'},
+     lat: {type: 'number'}, lng: {type: 'number'}}},
+   annotations: {readOnlyHint: true}},
   {name: 'search_site', title: 'Search BayCounty.me',
    description: 'Full-text search across every page and record on BayCounty.me. Returns titles, summaries and links.',
    inputSchema: {type: 'object', required: ['q'], additionalProperties: false, properties: {q: {type: 'string'}, limit: {type: 'integer', minimum: 1, maximum: 50, default: 10}}},
@@ -306,6 +318,18 @@ async function call(req, name, a = {}) {
     return {entity: {...d.entity, url: SITE + d.entity.page_url}, counts: d.counts, total: d.connections.length,
       connections: d.connections.slice(0, lim).map(x => ({...x, other: {...x.other, url: x.other.page_url ? SITE + x.other.page_url : null}})), note: d.note};
   }
+  if (name === 'emergency_now') {
+    const d = await require('./_emergency_feed').liveFeed(req, await load(req, '/downloads/index.json'));
+    const notices = (a.kind ? d.notices.filter(n => n.kind === a.kind) : d.notices).slice(0, Math.min(a.limit || 25, 100));
+    req._rows = notices.length;
+    return {headline: d.headline, checked_at: d.checked_at, counts: d.counts, shelters_open: d.shelters.filter(s => s.status === 'open'),
+      notices: notices.map(n => ({kind: n.kind, title: n.title, event: n.event, severity: n.severity, zones: n.zones, area: n.area, source: n.source, issued: n.issued, ends: n.ends, instruction: n.instruction, url: n.url, page: n.page})),
+      zones_ordered: d.zones.filter(z => z.ordered).map(z => z.zone), page: d.links.page, note: d.note};
+  }
+  if (name === 'evacuation_zone') {
+    if (!a.address && (a.lat == null || a.lng == null)) throw new Error('address, or lat and lng, is required');
+    return require('./_emergency_feed').zoneLookup(req, await load(req, '/downloads/index.json'), {address: a.address, lat: a.lat, lng: a.lng});
+  }
   if (name === 'search_site') {
     const idx = await load(req, '/data/search.json');
     const words = String(a.q || '').toLowerCase().split(/\s+/).filter(Boolean);
@@ -344,7 +368,7 @@ async function handle0(req, msg) {
     const v = VERSIONS.includes(params.protocolVersion) ? params.protocolVersion : VERSIONS[0];
     return ok(id, {protocolVersion: v, capabilities: {tools: {listChanged: false}, resources: {listChanged: false, subscribe: false}},
       serverInfo: {name: 'baycounty-me', title: 'BayCounty.me', version: '1.0.0', websiteUrl: SITE},
-      instructions: 'Public records for Bay County, Florida: local budgets, property taxes and exemptions, recorded votes, contracts, campaign money, 2026 candidates, public salaries, debt, audits and Hurricane Michael recovery. Use list_datasets, then query_dataset; upcoming_meetings, member_voting_record, vendor_profile and official_correspondence answer common questions directly, and each dataset is also a resource (baycounty://datasets/<id>). Always cite the source link on each row. BayCounty.me is neutral and does not endorse candidates.'});
+      instructions: 'Public records for Bay County, Florida: local budgets, property taxes and exemptions, recorded votes, contracts, campaign money, 2026 candidates, public salaries, debt, audits and Hurricane Michael recovery. Use list_datasets, then query_dataset; upcoming_meetings, member_voting_record, vendor_profile, official_correspondence, emergency_now and evacuation_zone answer common questions directly, and each dataset is also a resource (baycounty://datasets/<id>). Always cite the source link on each row. BayCounty.me is neutral and does not endorse candidates.'});
   }
   if (method === 'ping') return ok(id, {});
   if (method === 'tools/list') return ok(id, {tools: TOOLS});

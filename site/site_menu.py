@@ -82,6 +82,8 @@ def menu():
          'start': _i('Meetings', '/meetings', 'When every board meets, with agendas'),
          'groups': [{'group': 'Show up, ask, reuse', 'items': [
              _i('Events', '/events', "What's happening around the county"),
+             _i('Emergencies & alerts', '/emergency', 'Weather warnings, evacuation zones, shelters, boil-water notices'),
+             _i('Hurricane prep', '/hurricane-prep', 'Sandbags, generator safety, disaster declarations, FEMA rebuild money by ZIP code'),
              _i('Email alerts', '/alerts', 'Weekly updates for your government'),
              _i('Request a record', '/records-request', 'Write a public records request'),
              _i('Letters to officials', '/correspondence', 'What we asked, and what they said'),

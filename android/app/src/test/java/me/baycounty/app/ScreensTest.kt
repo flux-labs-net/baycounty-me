@@ -100,6 +100,8 @@ suspend fun preload(store: AppStore, route: Route?) {
         Route.Beaches -> store.load(me.baycounty.kit.Outdoors.beachDatasets)
         Route.Parks -> store.load(me.baycounty.kit.Outdoors.parkDatasets)
         Route.Schools -> store.load(me.baycounty.kit.Schools.datasets)
+        Route.Emergency -> store.load(me.baycounty.kit.Emergency.datasets)
+        Route.HurricanePrep -> store.load(me.baycounty.kit.Emergency.prepDatasets)
         is Route.Dataset -> store.load(route.id)
         is Route.Record -> {
             store.load(route.datasetID); store.loadVendors(); store.loadPeople()

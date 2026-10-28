@@ -3739,7 +3739,7 @@
    "id": "site-updates",
    "title": "What's new",
    "description": "Each change to the site's data and pages, newest first.",
-   "rows": 63,
+   "rows": 64,
    "columns": [
     {
      "name": "date",
@@ -7025,7 +7025,7 @@
    "id": "data-sources",
    "title": "Where the data comes from",
    "description": "Every source BayCounty.me takes records from, one row per source: the topic, the government it covers (or state and federal databases), the link, how we get it (automatic fetch, downloaded and read by hand, a state or federal bulk file, or a live lookup), how often, what we take from it, how we process it and the checks we run.",
-   "rows": 140,
+   "rows": 150,
    "columns": [
     {
      "name": "topic",
@@ -7041,6 +7041,7 @@
       "Community events",
       "Contracts and change orders",
       "Elections",
+      "Emergencies and hurricane prep",
       "Fees and bills",
       "Hurricane Michael",
       "Meetings and agendas",
@@ -7073,6 +7074,7 @@
       "cra",
       "development",
       "elections",
+      "emergency",
       "events",
       "fees",
       "meetings",
@@ -7141,6 +7143,7 @@
      "values": [
       "Automatic, daily",
       "Automatic, every 30 minutes on weekdays",
+      "Automatic, every 5 minutes",
       "Automatic, weekly",
       "Downloaded and read by hand",
       "Live lookup (nothing stored)",
@@ -7162,14 +7165,17 @@
       "As the district redraws zones",
       "As updated",
       "Daily",
+      "Daily (zones); live (address lookups)",
       "Daily, and live on the page",
       "Each election",
       "Each meeting",
       "Each search",
+      "Each season",
       "Each year",
       "Each year, as audits are filed",
       "Each year, when adopted",
       "Every 30 minutes on weekdays, and twice a day",
+      "Every 5 minutes",
       "Monthly",
       "Once",
       "Quarterly",
@@ -7212,6 +7218,7 @@
       "Tax rates (millage) come from state Department of Revenue and EDR files and the governments' adopted budgets. Assessments and exemptions come from the state's parcel and assessment roll files.",
       "The beach flag, rip current risk and surf forecast are read every morning from the National Weather Service surf zone forecast (and again in the visitor's browser). Water quality samples are read every day from the Florida Department of Health's Healthy Beaches lookup. Beach accesses, parking, parks, boat ramps and trails come from the county's and Panama City Beach's public GIS maps and the state's coastal access survey.",
       "The state's full corporate file (about 18 GB, updated quarterly) is filtered to businesses with an address in the county. Officers, managers and registered agents are grouped into people and matched to officials and donors.",
+      "Weather alerts, city and county alert centers and news feeds, FL511 road closures and the county shelter page are read every 5 minutes; a daily copy goes into the notices archive. Evacuation zones and address points come from the county's map service. Disaster declarations, FEMA housing aid and flood insurance claims come from OpenFEMA weekly.",
       "Who held each seat since 2016 is built from election results, minutes, budget books, city websites and news reports."
      ]
     },
@@ -7233,6 +7240,7 @@
       "Names are checked against each board's roster. Every split or failed vote found is included.",
       "News is never the only source for a dollar figure.",
       "Nothing you look up is sent to or stored by BayCounty.me.",
+      "Notices are sorted into kinds by the words in their titles; anything unclear stays a storm update. FEMA money is shown only as totals per ZIP code. Prep steps are summarized by hand and link their source.",
       "Office names are checked against the Notice of General Election.",
       "One row per contract (FDOT lists each road segment separately). A contract counts as under way only when FDOT flags it active. Contractors are joined to local vendors by name.",
       "Only audited figures are used. When a government's latest audit is not yet filed, the previous year is used and labeled.",
@@ -7258,6 +7266,7 @@
       "/connections/nonprofits",
       "/development",
       "/elections",
+      "/emergency",
       "/events",
       "/governments",
       "/meetings",
@@ -7540,7 +7549,7 @@
    "id": "data-source-sites",
    "title": "Websites our records cite",
    "description": "Every website cited by the records behind BayCounty.me, per topic, with how many distinct documents and pages from it the data links to. Counted from the data files at each build.",
-   "rows": 344,
+   "rows": 363,
    "columns": [
     {
      "name": "website",
@@ -7560,6 +7569,7 @@
       "Community events",
       "Contracts and change orders",
       "Elections",
+      "Emergencies and hurricane prep",
       "Fees and bills",
       "Hurricane Michael",
       "Meetings and agendas",
@@ -7589,6 +7599,7 @@
       "cra",
       "development",
       "elections",
+      "emergency",
       "events",
       "fees",
       "meetings",
@@ -7625,7 +7636,7 @@
    "id": "site-menu",
    "title": "Site menu",
    "description": "Every link in the site's main menu, one row per link, in English and Spanish: the section and the question it answers, the link's place in the section, and the section's start-here page. place_id is the place the menu belongs to (fl-bay = Bay County), so a menu for another place sits beside it.",
-   "rows": 62,
+   "rows": 64,
    "columns": [
     {
      "name": "place_id",
@@ -11628,7 +11639,7 @@
     },
     {
      "name": "area_sq_mi",
-     "type": "string"
+     "type": "number"
     },
     {
      "name": "last_edited",
@@ -11661,6 +11672,874 @@
    "json": "/downloads/school-zones.json",
    "csv": "/downloads/school-zones.csv",
    "api": "/api/v1/datasets/school-zones"
+  },
+  {
+   "id": "evacuation-zones",
+   "title": "Hurricane evacuation zones",
+   "description": "Bay County's hurricane evacuation zones A to D, in the order they are usually called: where each zone is, when it is ordered and what to do, with each zone's shape (geometry, GeoJSON in WGS84, simplified to about 300 m; the county map is the authority). Look up the zone for an address at /api/v1/evacuation-zone.",
+   "rows": 4,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "zone",
+     "type": "string"
+    },
+    {
+     "name": "sort_order",
+     "type": "number"
+    },
+    {
+     "name": "color",
+     "type": "string"
+    },
+    {
+     "name": "where_it_is",
+     "type": "string"
+    },
+    {
+     "name": "when_ordered",
+     "type": "string"
+    },
+    {
+     "name": "plain",
+     "type": "string"
+    },
+    {
+     "name": "zone_edited",
+     "type": "string",
+     "values": [
+      "2023-01-23"
+     ]
+    },
+    {
+     "name": "geometry",
+     "type": "string"
+    },
+    {
+     "name": "map_url",
+     "type": "string",
+     "values": [
+      "https://gis.baycountyfl.gov/bayview/"
+     ]
+    },
+    {
+     "name": "layer_url",
+     "type": "string",
+     "values": [
+      "https://gis.baycountyfl.gov/arcgis/rest/services/Admin_A12/MapServer/80"
+     ]
+    },
+    {
+     "name": "as_of",
+     "type": "string",
+     "values": [
+      "2026-10-27"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://www.baycountyfl.gov/511/Evacuation-Zones"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/evacuation-zones.json",
+   "csv": "/downloads/evacuation-zones.csv",
+   "api": "/api/v1/datasets/evacuation-zones"
+  },
+  {
+   "id": "emergency-shelters",
+   "title": "Emergency shelters",
+   "description": "Every disaster shelter Bay County Emergency Services lists: special needs, general population, mass care support, recovery and extreme-weather shelters, with the address, the group's open or closed status as the county last posted it (status_as_of), the map point and the evacuation zone the shelter sits in. Not every shelter opens for every storm. The live status is in /api/v1/emergency.",
+   "rows": 8,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "shelter_id",
+     "type": "string"
+    },
+    {
+     "name": "name",
+     "type": "string"
+    },
+    {
+     "name": "address",
+     "type": "string"
+    },
+    {
+     "name": "shelter_type",
+     "type": "string",
+     "values": [
+      "extreme-weather",
+      "general",
+      "mass-care",
+      "recovery",
+      "special-needs"
+     ]
+    },
+    {
+     "name": "group_name",
+     "type": "string",
+     "values": [
+      "Alternate Risk and Extreme Weather Shelter",
+      "General Population (Risk-Based) Shelters",
+      "Mass Care Support Shelter",
+      "Recovery Shelter Locations",
+      "Special Needs Shelters"
+     ]
+    },
+    {
+     "name": "group_about",
+     "type": "string",
+     "values": [
+      "These shelters are designated for individuals with medical, access, or functional needs who cannot safely evacuate to a general population shelter. Pre-registration through the Florida Special Needs Registry is required.",
+      "These shelters are intended for the general public during evacuations and are selected for their safety standards, capacity, and geographic distribution.",
+      "These shelters are used during the post-impact phase to support residents who are displaced and unable to return home immediately following a disaster.",
+      "This facility is designated to support large-scale shelter operations and may serve as a technical support site during mass care incidents.",
+      "This location is activated on an as-needed basis to support overflow during major emergencies or to provide warming/cooling shelter during extreme temperatures."
+     ]
+    },
+    {
+     "name": "note",
+     "type": "string",
+     "values": [
+      "Functions as an overflow site for Merritt Brown Middle School."
+     ]
+    },
+    {
+     "name": "status",
+     "type": "string",
+     "values": [
+      "closed"
+     ]
+    },
+    {
+     "name": "status_as_of",
+     "type": "string",
+     "values": [
+      "2025-11-03"
+     ]
+    },
+    {
+     "name": "lat",
+     "type": "number"
+    },
+    {
+     "name": "lng",
+     "type": "number"
+    },
+    {
+     "name": "evacuation_zone",
+     "type": "string",
+     "values": [
+      "D"
+     ]
+    },
+    {
+     "name": "operator",
+     "type": "string",
+     "values": [
+      "Bay County Emergency Services"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://www.baycountyfl.gov/766/Emergency-Shelters"
+     ]
+    },
+    {
+     "name": "checked",
+     "type": "string",
+     "values": [
+      "2026-10-27"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/emergency-shelters.json",
+   "csv": "/downloads/emergency-shelters.csv",
+   "api": "/api/v1/datasets/emergency-shelters"
+  },
+  {
+   "id": "emergency-resources",
+   "title": "Emergency phone numbers and sign-ups",
+   "description": "The numbers, sign-ups, maps and outage pages people need before and during an emergency, from each organization's own site: 911, the county Emergency Operations Center, AlertBay, the special needs registry, weather offices, FL511 and power outage maps.",
+   "rows": 16,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "sort_order",
+     "type": "number"
+    },
+    {
+     "name": "resource_id",
+     "type": "string"
+    },
+    {
+     "name": "group",
+     "type": "string",
+     "values": [
+      "Call",
+      "Plan",
+      "Power",
+      "Roads",
+      "Sign up",
+      "Water",
+      "Weather"
+     ]
+    },
+    {
+     "name": "name",
+     "type": "string"
+    },
+    {
+     "name": "org",
+     "type": "string",
+     "values": [
+      "Bay County",
+      "Bay County 911",
+      "Bay County Emergency Services",
+      "Bay County GIS",
+      "City of Panama City Beach",
+      "Florida Department of Transportation",
+      "Florida Division of Emergency Management",
+      "Florida Power & Light",
+      "Gulf Coast Electric Cooperative",
+      "National Hurricane Center",
+      "National Weather Service"
+     ]
+    },
+    {
+     "name": "phone",
+     "type": "string",
+     "values": [
+      "511",
+      "800-468-8243",
+      "800-568-3667",
+      "850-248-6040",
+      "850-248-6090",
+      "911"
+     ]
+    },
+    {
+     "name": "url",
+     "type": "string",
+     "values": [
+      "https://fl511.com/",
+      "https://gis.baycountyfl.gov/bayview/",
+      "https://snr.floridadisaster.org/Signin?client=bay",
+      "https://www.alertbay.org",
+      "https://www.baycountyfl.gov/167/Post-Disaster-Re-Entry",
+      "https://www.baycountyfl.gov/511/Evacuation-Zones",
+      "https://www.baycountyfl.gov/722/Beach-Safety-Flags",
+      "https://www.baycountyfl.gov/836/Activation-Information",
+      "https://www.baycountyfl.gov/DocumentCenter/View/5659/BayCo-DisasterPreparednessGuide_v10_FINAL-web2",
+      "https://www.floridadisaster.org/knowyourzone/",
+      "https://www.fplmaps.com/",
+      "https://www.gcec.com/",
+      "https://www.nhc.noaa.gov/",
+      "https://www.pcbfl.gov/414/Boil-Water-Information",
+      "https://www.weather.gov/tae/"
+     ]
+    },
+    {
+     "name": "about",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "pcb"
+     ]
+    },
+    {
+     "name": "as_of",
+     "type": "string",
+     "values": [
+      "2026-10-27"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://fl511.com/",
+      "https://gis.baycountyfl.gov/bayview/",
+      "https://snr.floridadisaster.org/Signin?client=bay",
+      "https://www.alertbay.org",
+      "https://www.baycountyfl.gov/167/Post-Disaster-Re-Entry",
+      "https://www.baycountyfl.gov/511/Evacuation-Zones",
+      "https://www.baycountyfl.gov/722/Beach-Safety-Flags",
+      "https://www.baycountyfl.gov/836/Activation-Information",
+      "https://www.baycountyfl.gov/DocumentCenter/View/5659/BayCo-DisasterPreparednessGuide_v10_FINAL-web2",
+      "https://www.floridadisaster.org/knowyourzone/",
+      "https://www.fplmaps.com/",
+      "https://www.gcec.com/",
+      "https://www.nhc.noaa.gov/",
+      "https://www.pcbfl.gov/414/Boil-Water-Information",
+      "https://www.weather.gov/tae/"
+     ]
+    }
+   ],
+   "json": "/downloads/emergency-resources.json",
+   "csv": "/downloads/emergency-resources.csv",
+   "api": "/api/v1/datasets/emergency-resources"
+  },
+  {
+   "id": "emergency-notices",
+   "title": "Emergency notices archive",
+   "description": "Every emergency notice BayCounty.me has recorded for the county, newest first: National Weather Service watches, warnings and advisories, boil-water notices, road closures, water and sewer outages, evacuation orders, shelter openings and storm updates from each government's alert center and news feed, and FL511 state road closures. kind is the topic, status active (live at the last check), ended or lifted. first_seen and last_seen are when BayCounty.me saw it. The live list is /api/v1/emergency.",
+   "rows": 14,
+   "columns": [
+    {
+     "name": "notice_id",
+     "type": "string"
+    },
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "kind",
+     "type": "string",
+     "values": [
+      "boil-water",
+      "road",
+      "storm",
+      "utility"
+     ]
+    },
+    {
+     "name": "source",
+     "type": "string",
+     "values": [
+      "Bay County",
+      "City of Lynn Haven",
+      "City of Panama City",
+      "City of Panama City Beach"
+     ]
+    },
+    {
+     "name": "source_type",
+     "type": "string",
+     "values": [
+      "alert-center",
+      "news"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "lh",
+      "pc",
+      "pcb"
+     ]
+    },
+    {
+     "name": "title",
+     "type": "string"
+    },
+    {
+     "name": "summary",
+     "type": "string"
+    },
+    {
+     "name": "instruction",
+     "type": "string"
+    },
+    {
+     "name": "severity",
+     "type": "string",
+     "values": [
+      "minor",
+      "moderate"
+     ]
+    },
+    {
+     "name": "event",
+     "type": "string"
+    },
+    {
+     "name": "area",
+     "type": "string"
+    },
+    {
+     "name": "zones",
+     "type": "string"
+    },
+    {
+     "name": "issued",
+     "type": "string"
+    },
+    {
+     "name": "starts",
+     "type": "string"
+    },
+    {
+     "name": "ends",
+     "type": "string",
+     "values": [
+      "2026-10-10T14:22:59.000Z",
+      "2026-10-17T17:19:52.000Z",
+      "2026-10-18T16:07:00.000Z",
+      "2026-10-20T14:28:00.000Z",
+      "2026-10-22T20:05:36.000Z",
+      "2026-10-24T16:51:36.000Z",
+      "2026-10-24T17:52:00.000Z"
+     ]
+    },
+    {
+     "name": "updated",
+     "type": "string"
+    },
+    {
+     "name": "status",
+     "type": "string",
+     "values": [
+      "active",
+      "ended"
+     ]
+    },
+    {
+     "name": "full_closure",
+     "type": "string"
+    },
+    {
+     "name": "roadway",
+     "type": "string"
+    },
+    {
+     "name": "first_seen",
+     "type": "string",
+     "values": [
+      "2026-10-27T20:41:37.771Z"
+     ]
+    },
+    {
+     "name": "last_seen",
+     "type": "string",
+     "values": [
+      "2026-10-27T20:41:53.613Z"
+     ]
+    },
+    {
+     "name": "url",
+     "type": "string"
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://www.baycountyfl.gov/AlertCenter.aspx",
+      "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=224",
+      "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=324",
+      "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=325",
+      "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=326",
+      "https://www.cityoflynnhaven.gov/AlertCenter.aspx",
+      "https://www.cityoflynnhaven.gov/CivicAlerts.aspx?aid=353",
+      "https://www.panamacity.gov/AlertCenter.aspx",
+      "https://www.pcbfl.gov/AlertCenter.aspx",
+      "https://www.pcbfl.gov/CivicAlerts.aspx?aid=45",
+      "https://www.pcbfl.gov/storm"
+     ]
+    }
+   ],
+   "json": "/downloads/emergency-notices.json",
+   "csv": "/downloads/emergency-notices.csv",
+   "api": "/api/v1/datasets/emergency-notices"
+  },
+  {
+   "id": "hurricane-prep",
+   "title": "Hurricane prep steps",
+   "description": "Plain-English steps for hurricane season, sandbags, generator safety, an approaching storm and the days after, each with the agency it comes from (Bay County, Ready.gov, CDC, National Weather Service, FEMA, the Army Corps of Engineers).",
+   "rows": 16,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "sort_order",
+     "type": "number"
+    },
+    {
+     "name": "topic",
+     "type": "string",
+     "values": [
+      "After the storm",
+      "Before the season",
+      "Generator safety",
+      "Sandbags",
+      "When a storm is coming"
+     ]
+    },
+    {
+     "name": "step",
+     "type": "string"
+    },
+    {
+     "name": "text",
+     "type": "string"
+    },
+    {
+     "name": "source",
+     "type": "string",
+     "values": [
+      "Bay County Disaster Preparedness Guide",
+      "Bay County Disaster Preparedness Guide; FloodSmart",
+      "Bay County Emergency Services",
+      "Bay County news",
+      "CDC",
+      "City of Panama City Beach boil-water information",
+      "FEMA",
+      "Florida Division of Emergency Management",
+      "National Weather Service",
+      "Ready.gov",
+      "U.S. Army Corps of Engineers"
+     ]
+    },
+    {
+     "name": "as_of",
+     "type": "string",
+     "values": [
+      "2026-10-27"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://extension.usu.edu/post-wildfire/files/USACE-Sandbag-Pamphlet.pdf",
+      "https://snr.floridadisaster.org/Signin?client=bay",
+      "https://www.baycountyfl.gov/167/Post-Disaster-Re-Entry",
+      "https://www.baycountyfl.gov/511/Evacuation-Zones",
+      "https://www.baycountyfl.gov/CivicAlerts.aspx",
+      "https://www.baycountyfl.gov/DocumentCenter/View/5659/BayCo-DisasterPreparednessGuide_v10_FINAL-web2",
+      "https://www.cdc.gov/natural-disasters/psa-toolkit/use-a-generator-safely.html",
+      "https://www.disasterassistance.gov/",
+      "https://www.floodsmart.gov/",
+      "https://www.pcbfl.gov/414/Boil-Water-Information",
+      "https://www.ready.gov/hurricanes",
+      "https://www.ready.gov/kit",
+      "https://www.weather.gov/safety/hurricane-after"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/hurricane-prep.json",
+   "csv": "/downloads/hurricane-prep.csv",
+   "api": "/api/v1/datasets/hurricane-prep"
+  },
+  {
+   "id": "disaster-declarations",
+   "title": "Disaster declarations",
+   "description": "Every federal major disaster, emergency and fire management declaration that included the county since 2016, from OpenFEMA: the storm or event, the dates, and which FEMA programs were opened (individual aid to households, public aid to governments, hazard mitigation).",
+   "rows": 19,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "disaster_number",
+     "type": "number"
+    },
+    {
+     "name": "title",
+     "type": "string",
+     "values": [
+      "1707 Adkins Ave Fire",
+      "Chipola Fire Complex",
+      "Hurricane Debby",
+      "Hurricane Dorian",
+      "Hurricane Helene",
+      "Hurricane Ian",
+      "Hurricane Idalia",
+      "Hurricane Irma",
+      "Hurricane Isaias",
+      "Hurricane Michael",
+      "Hurricane Sally",
+      "Tropical Storm Debby",
+      "Tropical Storm Fred",
+      "Tropical Storm Helene",
+      "Tropical Storm Ian",
+      "Tropical Storm Idalia"
+     ]
+    },
+    {
+     "name": "kind",
+     "type": "string",
+     "values": [
+      "Emergency",
+      "Fire management",
+      "Major disaster"
+     ]
+    },
+    {
+     "name": "incident_type",
+     "type": "string",
+     "values": [
+      "Fire",
+      "Hurricane",
+      "Tropical Storm"
+     ]
+    },
+    {
+     "name": "declared",
+     "type": "string"
+    },
+    {
+     "name": "began",
+     "type": "string",
+     "values": [
+      "2017-09-04",
+      "2018-10-07",
+      "2019-08-28",
+      "2020-09-14",
+      "2021-08-13",
+      "2022-03-04",
+      "2022-09-23",
+      "2023-08-27",
+      "2024-08-01",
+      "2024-09-23",
+      "2026-10-06"
+     ]
+    },
+    {
+     "name": "ended",
+     "type": "string",
+     "values": [
+      "2017-10-18",
+      "2018-10-19",
+      "2019-09-09",
+      "2020-09-28",
+      "2021-08-19",
+      "2022-04-01",
+      "2022-11-04",
+      "2023-09-04",
+      "2024-08-27",
+      "2024-10-07",
+      "2026-10-12"
+     ]
+    },
+    {
+     "name": "individual_aid",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "public_aid",
+     "type": "boolean",
+     "values": [
+      true
+     ]
+    },
+    {
+     "name": "mitigation",
+     "type": "boolean",
+     "values": [
+      false,
+      true
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string"
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/disaster-declarations.json",
+   "csv": "/downloads/disaster-declarations.csv",
+   "api": "/api/v1/datasets/disaster-declarations"
+  },
+  {
+   "id": "rebuild-money",
+   "title": "Rebuild money by ZIP code",
+   "description": "Money that reached each ZIP code after storms since 2016, from OpenFEMA: FEMA housing aid to owners and renters (Individuals and Households Program: households that applied, approved, dollars, of which repair and rental help, and FEMA-inspected damage for owners) and flood insurance claims paid (NFIP, building, contents and compliance payments added). One row per ZIP, program and storm. Totals only; FEMA does not publish who received aid and neither does BayCounty.me.",
+   "rows": 164,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "zip",
+     "type": "string",
+     "values": [
+      "32401",
+      "32403",
+      "32404",
+      "32405",
+      "32407",
+      "32408",
+      "32409",
+      "32410",
+      "32413",
+      "32438",
+      "32444",
+      "32456",
+      "32466",
+      "other"
+     ]
+    },
+    {
+     "name": "area_name",
+     "type": "string",
+     "values": [
+      "East Panama City, Callaway, Springfield, Parker",
+      "Fountain",
+      "Lynn Haven",
+      "Mexico Beach",
+      "Mexico Beach and Port St. Joe area (part in Gulf County)",
+      "North Panama City, Lynn Haven area",
+      "Other ZIP codes (P.O. boxes or mailing addresses outside the county)",
+      "Panama City (downtown, St. Andrews)",
+      "Panama City Beach (central)",
+      "Panama City Beach (east)",
+      "Panama City Beach (west), Inlet Beach area",
+      "Southport, Bayou George",
+      "Tyndall Air Force Base",
+      "Youngstown"
+     ]
+    },
+    {
+     "name": "program",
+     "type": "string",
+     "values": [
+      "FEMA housing aid (owners)",
+      "FEMA housing aid (renters)",
+      "Flood insurance claims (NFIP)"
+     ]
+    },
+    {
+     "name": "disaster_number",
+     "type": "number"
+    },
+    {
+     "name": "event",
+     "type": "string",
+     "values": [
+      "Hurricane Eta",
+      "Hurricane Francine",
+      "Hurricane Helene",
+      "Hurricane Hermine",
+      "Hurricane Ian",
+      "Hurricane Irma",
+      "Hurricane Michael",
+      "Hurricane Milton",
+      "Hurricane Sally",
+      "Other flooding",
+      "Tropical Storm Claudette",
+      "Tropical Storm Fred",
+      "Tropical Storm Nicholas"
+     ]
+    },
+    {
+     "name": "year",
+     "type": "number"
+    },
+    {
+     "name": "count",
+     "type": "number"
+    },
+    {
+     "name": "count_label",
+     "type": "string",
+     "values": [
+      "claims",
+      "households that applied"
+     ]
+    },
+    {
+     "name": "approved",
+     "type": "number"
+    },
+    {
+     "name": "amount_paid",
+     "type": "number"
+    },
+    {
+     "name": "repair_amount",
+     "type": "number"
+    },
+    {
+     "name": "rental_amount",
+     "type": "number"
+    },
+    {
+     "name": "inspected_damage",
+     "type": "number"
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://www.fema.gov/openfema-data-page/fima-nfip-redacted-claims-v2",
+      "https://www.fema.gov/openfema-data-page/housing-assistance-program-data-owners-v2",
+      "https://www.fema.gov/openfema-data-page/housing-assistance-program-data-renters-v2"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string"
+    }
+   ],
+   "json": "/downloads/rebuild-money.json",
+   "csv": "/downloads/rebuild-money.csv",
+   "api": "/api/v1/datasets/rebuild-money"
   },
   {
    "id": "tax-districts",

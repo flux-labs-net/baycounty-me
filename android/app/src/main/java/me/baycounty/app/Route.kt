@@ -38,6 +38,8 @@ sealed class Route {
     object Beaches : Route()
     object Parks : Route()
     object Schools : Route()
+    object Emergency : Route()
+    object HurricanePrep : Route()
     data class GovBudget(val id: String) : Route()
 }
 

@@ -86,6 +86,11 @@ jobs:
         # School Board meetings. A failure keeps the events on file and records the error.
         continue-on-error: true
         run: python data/schools/fetch_schools.py --only calendar
+      - name: Fetch emergency data
+        # Shelters, the evacuation zone shapes and the day's emergency notices (data/emergency/bay/). The live list is
+        # checked every 5 minutes by the site itself; this keeps the downloadable archive. A failure keeps yesterday's files.
+        continue-on-error: true
+        run: node data/emergency/fetch_emergency.js
       - name: Check campaign finance freshness
         # refresh.sh keeps the old file when the Elections Office site is down, so a long outage would be silent.
         id: finance_freshness
@@ -148,10 +153,10 @@ jobs:
       - name: Commit if changed
         id: commit_and_push
         run: |
-          src="data/meetings data/elections/finance_2026.json data/campaign/owner_gifts.json data/agendas/agenda_items.json data/votes/minutes_votes.json data/entities/name_decisions.json data/chambers/bay/events.json data/events/bay/events.json data/outdoors/bay data/schools/bay/calendar.json"
+          src="data/meetings data/elections/finance_2026.json data/campaign/owner_gifts.json data/agendas/agenda_items.json data/votes/minutes_votes.json data/entities/name_decisions.json data/chambers/bay/events.json data/events/bay/events.json data/outdoors/bay data/schools/bay/calendar.json data/emergency"
           # git status --porcelain also lists new, untracked files, which git diff --quiet ignores.
           if [ -z "$(git status --porcelain -- data site/public)" ]; then echo "No changes"; exit 0; fi
-          .github/scripts/push_refresh.sh "Daily refresh: meetings, agenda items, votes from minutes and campaign finance ($(date -u +%Y-%m-%d))" $src
+          .github/scripts/push_refresh.sh "Daily refresh: meetings, agenda items, votes from minutes and campaign finance, emergency notices ($(date -u +%Y-%m-%d))" $src
       - name: Deploy the refresh to Vercel
         # Vercel blocks Git deploys of commits whose author isn't on the Vercel team, which includes this bot's commits.
         # A deploy hook (Vercel > Project > Settings > Git > Deploy Hooks, branch main) builds main regardless; store

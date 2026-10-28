@@ -63,6 +63,8 @@ enum Route: Hashable {
     case beaches
     case parks
     case schools
+    case emergency
+    case hurricanePrep
 }
 
 extension View {
@@ -99,6 +101,8 @@ extension View {
                 case .beaches: BeachesView()
                 case .parks: ParksView()
                 case .schools: SchoolsView()
+                case .emergency: EmergencyView()
+                case .hurricanePrep: HurricanePrepView()
                 }
             }
             .pageBackground()

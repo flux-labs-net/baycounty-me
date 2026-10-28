@@ -109,5 +109,16 @@ fun icon(symbol: String?): ImageVector = when (symbol) {
     "testtube.2" -> Icons.Outlined.Science
     "arrow.up.right.square" -> Icons.Outlined.Launch
     "arrow.triangle.turn.up.right.diamond" -> Icons.Outlined.Directions
+    "car.side.arrowtriangle.up.fill" -> Icons.Outlined.DirectionsCar
+    "cloud.bolt.rain" -> Icons.Outlined.Thunderstorm
+    "house.lodge" -> Icons.Outlined.NightShelter
+    "drop.triangle", "drop" -> Icons.Outlined.WaterDrop
+    "phone" -> Icons.Outlined.Phone
+    "house.and.flag" -> Icons.Outlined.Cottage
+    "shield.lefthalf.filled" -> Icons.Outlined.Shield
+    "bolt.trianglebadge.exclamationmark" -> Icons.Outlined.ElectricBolt
+    "hammer" -> Icons.Outlined.Construction
+    "bell.badge" -> Icons.Outlined.NotificationsActive
+    "exclamationmark.octagon" -> Icons.Outlined.Report
     else -> Icons.Outlined.TableChart
 }

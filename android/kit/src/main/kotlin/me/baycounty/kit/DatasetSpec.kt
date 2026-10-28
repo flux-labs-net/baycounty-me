@@ -242,6 +242,14 @@ data class DatasetSpec(
         "owner-gifts" to DatasetSpec(Section.ELECTIONS, "person.text.rectangle", title = listOf("donor"), subtitle = listOf("candidate", "businesses"), amount = listOf("amount"),
                              date = listOf("last_date"), filters = listOf("candidate", "office"), page = "connections/campaign-gifts"),
         // Entity profiles (every person, company, nonprofit and government, and how they connect)
+        // Emergencies and hurricane prep
+        "evacuation-zones" to DatasetSpec(Section.MORE, "map", title = listOf("zone"), subtitle = listOf("where_it_is"), detail = "when_ordered", page = "emergency"),
+        "emergency-shelters" to DatasetSpec(Section.MORE, "house.lodge", title = listOf("name"), subtitle = listOf("address", "group_name"), detail = "note", badge = "status", filters = listOf("shelter_type", "status", "evacuation_zone"), page = "emergency"),
+        "emergency-resources" to DatasetSpec(Section.MORE, "phone", title = listOf("name"), subtitle = listOf("group", "phone"), detail = "about", filters = listOf("group"), page = "emergency"),
+        "emergency-notices" to DatasetSpec(Section.MORE, "exclamationmark.triangle", title = listOf("title"), subtitle = listOf("source", "kind"), detail = "summary", date = listOf("issued", "first_seen"), badge = "status", filters = listOf("kind", "source", "status"), page = "emergency"),
+        "hurricane-prep" to DatasetSpec(Section.MORE, "checklist", title = listOf("step"), subtitle = listOf("topic", "source"), detail = "text", filters = listOf("topic"), page = "hurricane-prep"),
+        "disaster-declarations" to DatasetSpec(Section.MORE, "hurricane", title = listOf("title"), subtitle = listOf("kind", "incident_type"), date = listOf("declared"), badge = "kind", filters = listOf("kind", "incident_type"), page = "hurricane-prep"),
+        "rebuild-money" to DatasetSpec(Section.MORE, "house.and.flag", title = listOf("area_name", "zip"), subtitle = listOf("zip", "program", "event"), amount = listOf("amount_paid"), date = listOf("year"), badge = "program", filters = listOf("program", "event", "zip", "year"), page = "hurricane-prep"),
         "entity-profiles" to DatasetSpec(Section.MORE, "person.crop.circle", title = listOf("name"), subtitle = listOf("kind_label", "subtitle"),
                                  amount = listOf("amount_received", "amount_given"), badge = "kind_label", filters = listOf("kind_label"), page = "people"),
         "entity-connections" to DatasetSpec(Section.MORE, "point.3.connected.trianglepath.dotted", title = listOf("from_name"), subtitle = listOf("relation_label", "to_name"),

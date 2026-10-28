@@ -26,6 +26,8 @@ from events_page import events_page
 from outdoors_page import beaches_page, parks_page
 from growth_pages import development_page, roads_page
 from schools_page import schools_page
+from emergency_page import emergency_page
+from hurricane_prep_page import hurricane_prep_page
 from business_ties_page import business_ties_page
 from updates import updates_page, rss, last_updated, nice as nice_date
 OUT = os.path.join(ROOT, 'public')
@@ -674,6 +676,10 @@ PAGES = [
     *([('/es/elecciones', 'Quiénes son candidatos en 2026', 'Cada contienda local en las boletas del condado de Bay en 2026: los candidatos, sus propuestas, enlaces a sus campañas y de dónde viene el dinero de su campaña.', es_elections_page)] if ELECTIONS_READY else []),
     ('/es/reuniones', 'Próximas reuniones públicas en el condado de Bay', 'Cuándo y dónde se reúnen la Comisión del Condado, la Junta Escolar y cada comisión de ciudad, con enlaces a las agendas y los temas de dinero de cada una.', es_meetings_page),
     ('/records-request', 'Request a public record', 'Write a Florida public records request to any Bay County government in a minute: pick a record the site is missing or describe your own.', lambda: records_page(OUT)),
+    ('/emergency', 'Emergencies and alerts in Bay County',
+     "What's happening now in Bay County: National Weather Service warnings, evacuation orders, open shelters, boil-water notices and road closures, checked every few minutes. Look up the evacuation zone for any address and find every county shelter.", lambda: emergency_page(OUT)),
+    ('/hurricane-prep', 'Hurricane prep for Bay County',
+     'Get ready for hurricane season in Bay County: a plan and a kit, sandbags, generator safety, what to do when a storm is coming and after it, every federal disaster declaration since 2016 and the FEMA rebuild money that reached each ZIP code.', hurricane_prep_page),
     ('/alerts', 'Get BayCounty.me updates by email', 'Follow Bay County, the school district or your city and get a short weekly email with new votes, data, corrections and upcoming meetings.', lambda: alerts_page(OUT)),
     ('/meetings', 'Upcoming public meetings in Bay County', 'When and where the County Commission, School Board and every city commission meet, with agenda links and the money items on each agenda.', lambda: meetings_page(OUT)),
     ('/connections/campaign-gifts', 'Campaign gifts and contracts', "Who funded the campaigns of Bay County's current elected officials, from Supervisor of Elections reports, and which donors also hold local government contracts.", campaign_page),

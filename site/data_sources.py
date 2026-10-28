@@ -21,6 +21,7 @@ GOV_NAME = dict(GOVS)
 AUTO_DAILY = 'Automatic, daily'
 AUTO_WEEKLY = 'Automatic, weekly'
 AUTO_30 = 'Automatic, every 30 minutes on weekdays'
+AUTO_5 = 'Automatic, every 5 minutes'
 BY_HAND = 'Downloaded and read by hand'
 BULK = 'State or federal bulk data file'
 LIVE = 'Live lookup (nothing stored)'
@@ -73,6 +74,10 @@ TOPICS = [
      "Every public school, its students and teachers since 2015-16 come from the U.S. Department of Education's school directory, read weekly through the Urban Institute's Education Data API. "
      "Attendance zones are read weekly from the county GIS server and the calendar every day from the district's website. State school grades and per-pupil spending files are read by hand, because the state's website turns automated readers away.",
      'Each zone is matched to its school by hand once. Charter schools are linked by hand to the nonprofit that runs them.'),
+    ('emergency', 'Emergencies and hurricane prep', '/emergency',
+     'Weather alerts, city and county alert centers and news feeds, FL511 road closures and the county shelter page are read every 5 minutes; a daily copy goes into the notices archive. '
+     'Evacuation zones and address points come from the county\'s map service. Disaster declarations, FEMA housing aid and flood insurance claims come from OpenFEMA weekly.',
+     'Notices are sorted into kinds by the words in their titles; anything unclear stays a storm update. FEMA money is shown only as totals per ZIP code. Prep steps are summarized by hand and link their source.'),
     ('chambers', 'Chambers of commerce', '/chambers',
      "Board, staff and program lists are copied by hand from each chamber's website. Upcoming events are read every day from the Panama City Beach Chamber's public calendar feed; the Bay County Chamber's calendar platform turns automated readers away.",
      'Board members are joined to other local filings by first and last name, and to an official only where the chamber names their government post. Organizations are joined to governments, paid companies, nonprofits or one Sunbiz filing with the exact same name.'),
@@ -211,6 +216,17 @@ src('schools', 'schools', 'U.S. Department of Education school directory (Common
 src('schools', 'schools', 'Bay County GIS school attendance zones', 'https://gis.baycountyfl.gov/arcgis/rest/services/SchoolAttendanceZones/MapServer', AUTO_WEEKLY, 'As the district redraws zones', 'Elementary, middle and high school zone shapes')
 src('schools', 'schools', 'Bay District Schools calendar', 'https://www.bay.k12.fl.us/o/bds/page/academic-calendar', AUTO_DAILY, 'As the district posts events', 'Days off, breaks, grading periods, graduations and School Board meetings')
 src('schools', 'schools', 'Florida Department of Education school grades and per-pupil expenditure reports', 'https://www.fldoe.org/accountability/accountability-reporting/school-grades/', BY_HAND, 'Yearly (grades in July)', 'Each school\'s grade and spending per student')
+# --- Emergencies and hurricane prep ----------------------------------------------------------------------------------
+src('emergency', 'state', 'National Weather Service active alerts (Bay County land and coastal zones)', 'https://api.weather.gov/alerts/active?zone=FLC005,FLZ012,FLZ112', AUTO_5, 'Every 5 minutes', 'Watches, warnings and advisories: event, area, times, severity and instructions')
+src('emergency', 'county', 'Bay County Alert Center and News Flash feeds', 'https://www.baycountyfl.gov/CivicAlerts.aspx', AUTO_5, 'Every 5 minutes', 'Boil-water notices, closures, evacuation orders, shelter openings and storm updates')
+src('emergency', 'pc', 'Panama City Alert Center and News Flash feeds', 'https://www.panamacity.gov/CivicAlerts.aspx', AUTO_5, 'Every 5 minutes', 'Boil-water notices, closures and storm updates')
+src('emergency', 'pcb', 'Panama City Beach Alert Center and News Flash feeds', 'https://www.pcbfl.gov/CivicAlerts.aspx', AUTO_5, 'Every 5 minutes', 'Boil-water notices, closures and storm updates')
+src('emergency', 'lh', 'Lynn Haven Alert Center and News Flash feeds', 'https://www.cityoflynnhaven.gov/CivicAlerts.aspx', AUTO_5, 'Every 5 minutes', 'Boil-water notices, closures and storm updates')
+src('emergency', 'state', 'FL511 closures, incidents and construction (Bay County)', 'https://fl511.com/list/closures', AUTO_5, 'Every 5 minutes', 'State road closures and incidents: road, direction, description and times')
+src('emergency', 'county-wide', 'Bay County Emergency Shelters page', 'https://www.baycountyfl.gov/766/Emergency-Shelters', AUTO_5, 'Every 5 minutes', 'Each shelter, its address, type and open or closed status')
+src('emergency', 'county-wide', 'Bay County GIS evacuation zones and address points', 'https://gis.baycountyfl.gov/arcgis/rest/services/Admin_A12/MapServer/80', AUTO_DAILY, 'Daily (zones); live (address lookups)', 'Zone A to D shapes; address points to place shelters and look up an address')
+src('emergency', 'state', 'OpenFEMA disaster declarations, housing assistance and flood insurance claims', 'https://www.fema.gov/about/openfema/data-sets', AUTO_WEEKLY, 'Weekly', 'Declarations since 2016; FEMA housing aid and NFIP claims paid, totals per ZIP code')
+src('emergency', 'county-wide', 'Bay County Disaster Preparedness Guide, Ready.gov, CDC and NWS safety pages', 'https://www.baycountyfl.gov/DocumentCenter/View/5659/BayCo-DisasterPreparednessGuide_v10_FINAL-web2', BY_HAND, 'Each season', 'Hurricane prep, sandbag and generator safety steps, summarized with a link to each source')
 src('chambers', 'county', 'Bay County Chamber of Commerce website (board, staff and programs)', 'https://panamacity.org/board-of-directors/', BY_HAND, 'As boards change', 'Board, staff and past chairs since 2016 by name, title and organization; regular programs')
 src('chambers', 'county', 'Panama City Beach Chamber of Commerce website (board, staff and programs)', 'https://pcbeach.org/board-of-directors/', BY_HAND, 'As boards change', 'Board and staff by name, title and organization; regular programs')
 src('chambers', 'county', 'Panama City Beach Chamber events calendar feed', 'https://pcbeach.org/local-events/', AUTO_DAILY, 'Daily', 'Upcoming chamber and community events: title, time, venue and link')
@@ -304,7 +320,7 @@ FOLDER_TOPIC = {
     'agendas': 'meetings', 'meetings': 'meetings', 'votes': 'votes', 'contracts': 'contracts', 'budgets': 'budgets',
     'debt_audit': 'audits', 'money': 'audits', 'tax': 'property-tax', 'amendment3': 'property-tax', 'exemptions': 'property-tax',
     'salaries': 'salaries', 'campaign': 'campaign', 'elections': 'elections', 'sunbiz': 'businesses', 'careers': 'businesses',
-    'nonprofits': 'nonprofits', 'chambers': 'chambers', 'events': 'events', 'outdoors': 'outdoors', 'development': 'development', 'roads': 'roads', 'cra': 'cra', 'merged.json': 'cra', 'michael': 'michael', 'surtax': 'sales-tax',
+    'nonprofits': 'nonprofits', 'chambers': 'chambers', 'events': 'events', 'outdoors': 'outdoors', 'development': 'development', 'roads': 'roads', 'emergency': 'emergency', 'cra': 'cra', 'merged.json': 'cra', 'michael': 'michael', 'surtax': 'sales-tax',
     'tourism': 'tourist-tax', 'fees': 'fees', 'nearby': 'address', 'civic': 'records', 'projects': 'contracts',
 }
 SKIP_HOSTS = {'baycounty.me', 'www.baycounty.me', 'aptg.co'}
