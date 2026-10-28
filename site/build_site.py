@@ -78,24 +78,33 @@ def _link(c, active):
 
 
 def _section(m, active):
-    """One drop-down. A section with a start page gets the compact layout: its links in two columns and the start page
-    as a card (first in the phone menu). The Spanish menu's sections keep the column-per-group layout."""
+    """One drop-down. A section with a start page shows the start page as a card beside one column per group (on a
+    phone every section is open: the start page first, then its links as wrapping buttons). The Spanish menu's
+    sections keep the column-per-group layout."""
     on = any(c['href'] == active for c in menu_links(m))
     q = f'<span class="st-q">{m["question"]}</span>' if m.get('question') else ''
-    btn = f'<button type="button" class="sub-toggle" aria-expanded="false"><span class="st-l">{m["label"]}{q}</span>{CHEV}</button>'
+    dot = '<i class="st-dot" aria-hidden="true"></i>' if m.get('season') else ''
+    btn = f'<button type="button" class="sub-toggle" aria-expanded="false"><span class="st-l"><span class="st-n">{dot}{m["label"]}</span>{q}</span>{CHEV}</button>'
     if m.get('start'):
         st = m['start']
         cur = ' aria-current="page"' if st['href'] == active else ''
         card = (f'<a class="nav-start" href="{st["href"]}"{cur}><span class="ns-e">Start here</span><span class="ns-t">{st["label"]}</span>'
                 f'<span class="ns-d">{st["desc"]}</span><span class="ns-go" aria-hidden="true">Open →</span></a>')
+        n = len(m['groups'])
         cols = ''.join(f'<div class="nav-col"><span class="nav-gh">{g["group"]}</span><ul class="nav-links">'
                        + ''.join(_link(c, active) for c in g['items']) + '</ul></div>' for g in m['groups'])
-        sub = f'<div class="nav-sub nav-mega has-start">{card}{cols}</div>'
+        sub = f'<div class="nav-sub nav-mega has-start{" one" if n == 1 else ""}" style="--cols:{n}">{card}{cols}</div>'
     else:
         sub = '<ul class="nav-sub nav-mega">' + ''.join(
             f'<li class="nav-grp"><span class="nav-gh">{g["group"]}</span><ul>' + ''.join(_link(c, active) for c in g['items']) + '</ul></li>'
             for g in m['groups']) + '</ul>'
     return f'<li class="has-sub{" on" if on else ""}">{btn}{sub}</li>'
+
+
+def _footer_section(m, active):
+    """'About & data': never a header drop-down; a short row of plain links at the end of the phone menu."""
+    links = ''.join(f'<a href="{c["href"]}"{" aria-current=page" if c["href"] == active else ""}>{c["label"]}</a>' for c in menu_links(m))
+    return f'<li class="nav-more"><span class="sr">{m["label"]}</span>{links}</li>'
 
 
 def search_dialog():
@@ -120,7 +129,9 @@ def nav_html(active):
     es = active.startswith('/es')
     items = []
     for m in (ES_MENU if es else MENU):
-        if 'groups' in m:
+        if m.get('footer'):
+            items.append(_footer_section(m, active))
+        elif 'groups' in m:
             items.append(_section(m, active))
         else:
             cur = ' aria-current="page"' if m['href'] == active else ''
@@ -141,16 +152,25 @@ def nav_html(active):
 {search_dialog()}'''
 
 
+def _foot_cols():
+    """One footer column per menu section: its start page and first links."""
+    return ''.join(f'<div><b>{m["label"]}</b>' + ''.join(f'<a href="{c["href"]}">{c["label"]}</a>' for c in
+                                                     [c for c in menu_links(m) if not c['href'].startswith('/governments/')][:6]) + '</div>'
+                   for m in MENU if m.get('start') and not m.get('season'))
+
+
+def _foot_about():
+    return ' · '.join(f'<a href="{c["href"]}">{c["label"]}</a>' for m in MENU if m.get('footer') for c in menu_links(m))
+
+
 FOOTER = f'''<footer class="site-foot"><div class="site-foot-in">
   <div class="foot-brand"><a class="wordmark" href="/"><span>{wordmark_html()}</span></a>
   <p>Public records for {PLACE_LABEL}, in plain view: what governments collect, what they spend, what they owe and what the auditors found.</p></div>
   <nav class="foot-cols" aria-label="Footer">
-    <div><b>Follow the money</b><a href="/public-money/tax-dollars">Tax dollars</a><a href="/governments">Governments</a><a href="/compare">Compare governments</a><a href="/public-money/contracts">Contracts</a></div>
-    <div><b>Accountability</b><a href="/public-money/accountability">Accountability console</a><a href="/public-money/votes">How they voted</a><a href="/connections">Connections</a></div>
-    <div><b>Take part</b><a href="/meetings">Meetings</a><a href="/this-week">This week</a><a href="/alerts">Email alerts</a><a href="/records-request">Request a record</a><a href="/open-data">Open data &amp; API</a></div>
+    {_foot_cols()}
   </nav>
   <div class="foot-base">
-    <p class="muted foot-links">__UPDATED__<a href="/updates">What's new</a> · <a href="/updates.xml">RSS</a> · <a href="/data-sources">Where our data comes from</a> · <a href="/about">About</a> · <a href="/privacy">Privacy</a> · <a href="/about#contact">Send a correction</a> · <span class="sel">{EMAIL}</span></p>
+    <p class="muted foot-links">__UPDATED__{_foot_about()} · <a href="/updates.xml">RSS</a> · <a href="/privacy">Privacy</a> · <a href="/about#contact">Send a correction</a> · <span class="sel">{EMAIL}</span></p>
     <a class="powered" href="{OPERATOR['url']}" target="_blank" rel="noopener"><span>Powered by</span><img src="{OPERATOR['logo']}" alt="{OPERATOR['name']}" width="140" height="25"></a>
   </div>
 </div></footer>'''
