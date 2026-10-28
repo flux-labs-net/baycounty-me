@@ -54,9 +54,10 @@ private data class TabItem(val tab: Tab, val label: String, val symbol: String)
 
 private val tabs = listOf(
     TabItem(Tab.HOME, "Today", "house"),
-    TabItem(Tab.GOVERNMENTS, "Places", "mappin.and.ellipse"),
+    TabItem(Tab.LIVING, "Living here", "mappin.and.ellipse"),
     TabItem(Tab.MONEY, "Money", "dollarsign.circle"),
-    TabItem(Tab.MEETINGS, "Meetings", "calendar"),
+    TabItem(Tab.DECIDES, "Who decides", "building.columns"),
+    TabItem(Tab.SEARCH, "Search", "magnifyingglass"),
 )
 
 @Composable
@@ -106,9 +107,10 @@ fun AppRoot(store: AppStore, screen: String? = null, nav: Nav = remember { Nav()
 @Composable
 private fun TabRoot(tab: Tab) = when (tab) {
     Tab.HOME -> HomeScreen()
-    Tab.GOVERNMENTS -> PlacesScreen()
+    Tab.LIVING -> LivingHereScreen()
     Tab.MONEY -> MoneyScreen()
-    Tab.MEETINGS -> MeetingsScreen()
+    Tab.DECIDES -> PlacesScreen()
+    Tab.SEARCH -> SearchScreen()
 }
 
 /** Every route resolves to the same screen from any tab. */
@@ -139,6 +141,7 @@ fun RouteScreen(route: Route) {
         is Route.Utilities -> UtilitiesScreen(route.match)
         Route.Volunteer -> VolunteerScreen()
         Route.Military -> MilitaryScreen()
+        Route.Meetings -> MeetingsScreen()
         is Route.BudgetCompare -> BudgetCompareScreen(route.govID)
         is Route.TaxCalculator -> TaxCalculatorScreen(route)
         is Route.GovBudget -> GovBudgetScreen(route.id)
@@ -169,10 +172,11 @@ suspend fun openScreenshotRoute(store: AppStore, nav: Nav, arg: String) {
     )
     simple[arg]?.let { nav.replace(it); return }
     when {
-        arg == "tab:search" -> nav.replace(Route.Search)
-        arg == "tab:governments" -> nav.tab = Tab.GOVERNMENTS
+        arg == "tab:search" -> nav.tab = Tab.SEARCH
+        arg == "tab:living" -> nav.tab = Tab.LIVING
+        arg == "tab:governments" || arg == "tab:decides" -> nav.tab = Tab.DECIDES
         arg == "tab:money" -> nav.tab = Tab.MONEY
-        arg == "tab:meetings" -> nav.tab = Tab.MEETINGS
+        arg == "tab:meetings" -> nav.replace(Route.Meetings)
         arg.startsWith("gov:") -> nav.replace(Route.Gov(arg.removePrefix("gov:")))
         arg == "record:contract" || arg == "record:vote" -> {
             val ds = if (arg == "record:contract") "contracts" else "votes"

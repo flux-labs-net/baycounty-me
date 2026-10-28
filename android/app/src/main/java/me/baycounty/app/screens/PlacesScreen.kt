@@ -47,13 +47,26 @@ enum class GovMetric(val short: String, val title: String, val caption: String?)
         govs.mapNotNull { g -> value(g)?.let { BarItem(g.govID, g.name, it) } }.sortedByDescending { it.value }
 }
 
-/** The Places tab: compare the governments, open any one of them, and find the people. */
+/** The Who decides tab: officials, meetings, votes and connections, then compare and open every government. */
 @Composable
 fun PlacesScreen() {
     val store = LocalStore.current
     val nav = LocalNav.current
     var metric by rememberSaveable { mutableStateOf(GovMetric.PER_RESIDENT) }
-    Screen("Places", onRefresh = { store.loadGovernments() }, spacing = 24) {
+    Screen("Who decides", onRefresh = { store.loadGovernments() }, spacing = 24) {
+        item {
+            CardList {
+                RouteRow(Route.People, "Officials, leaders and candidates", symbol = "person.3")
+                RowDivider(50.dp)
+                RouteRow(Route.Meetings, "Meetings", "When every board meets, with agendas", symbol = "calendar")
+                RowDivider(50.dp)
+                RouteRow(Route.Dataset("votes"), "How they voted", symbol = "checkmark.seal")
+                RowDivider(50.dp)
+                RouteRow(Route.DonorContracts, "Campaign gifts and contracts", symbol = "point.3.connected.trianglepath.dotted")
+                RowDivider(50.dp)
+                RouteRow(Route.Dataset("candidates-2026"), "Elections", "Who's running, where to vote, results", symbol = "checkmark.seal")
+            }
+        }
         if (store.governments.isEmpty()) {
             item {
                 val e = store.errors["government-profiles"]
@@ -94,8 +107,6 @@ fun PlacesScreen() {
             Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                 SectionHeader("People")
                 CardList {
-                    RouteRow(Route.People, "Officials, leaders and candidates", symbol = "person.3")
-                    RowDivider(50.dp)
                     RouteRow(Route.Schools, "Public schools", "Calendar, grades and students for every school", symbol = "graduationcap")
                     RowDivider(50.dp)
                     RouteRow(Route.Dataset("officials-pay"), "What officials are paid", symbol = "person.text.rectangle")

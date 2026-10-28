@@ -173,7 +173,7 @@ struct HomeView: View {
         if !days.isEmpty {
             let current = days.first { $0.key == pickedDay } ?? days[0]
             VStack(alignment: .leading, spacing: 12) {
-                SectionHeader(title: "Meetings coming up", action: "See all") { store.tab = .meetings }
+                SectionHeader(title: "Meetings coming up", action: "See all") { path.append(.meetings) }
                 HStack(spacing: 8) {
                     ForEach(days, id: \.key) { d in
                         let on = d.key == current.key
@@ -394,8 +394,9 @@ struct HomeView: View {
             "restaurants": .dataset("restaurants"), "newbusinesses": .dataset("new-businesses"),
         ]
         if let r = simple[arg] { path = [r]; return }
-        if arg == "tab:search" { path = [.search]; return }
-        let tabs: [String: AppStore.Tab] = ["tab:governments": .governments, "tab:money": .money, "tab:meetings": .meetings]
+        if arg == "tab:search" { store.tab = .search; return }
+        if arg == "tab:meetings" { path = [.meetings]; return }
+        let tabs: [String: AppStore.Tab] = ["tab:governments": .decides, "tab:decides": .decides, "tab:living": .living, "tab:money": .money]
         if let t = tabs[arg] { store.tab = t; return }
         if arg.hasPrefix("gov:") { path = [.government(String(arg.dropFirst(4)))]; return }
         if arg == "record:contract" || arg == "record:vote" {
