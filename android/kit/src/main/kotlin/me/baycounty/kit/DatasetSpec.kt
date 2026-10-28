@@ -254,6 +254,8 @@ data class DatasetSpec(
                                        amount = listOf("total_revenue"), badge = "status", filters = listOf("status", "city"), page = "connections/nonprofits"),
         "nonprofit-officials" to DatasetSpec(Section.ACCOUNTABILITY, "person.crop.square", title = listOf("official"), subtitle = listOf("nonprofit", "titles"),
                                      badge = "sources", filters = listOf("official", "nonprofit"), page = "connections/nonprofits"),
+        "business-officers" to DatasetSpec(Section.ELECTIONS, "person.text.rectangle", title = listOf("officer"), subtitle = listOf("title", "business"),
+                                   detail = "sunbiz_doc_number", badge = "business_status", filters = listOf("business_status", "officer_kind"), page = "connections/business-ties"),
         "official-businesses" to DatasetSpec(Section.ELECTIONS, "briefcase", title = listOf("business"), subtitle = listOf("official", "official_role"),
                                      detail = "titles", badge = "business_status", filters = listOf("official"), page = "connections/business-ties"),
         "official-business-links" to DatasetSpec(Section.ELECTIONS, "link", title = listOf("detail"), subtitle = listOf("official"),

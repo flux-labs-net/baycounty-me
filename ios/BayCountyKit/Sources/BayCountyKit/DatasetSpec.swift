@@ -231,6 +231,8 @@ public struct DatasetSpec: Sendable {
                                        amount: ["total_revenue"], badge: "status", filters: ["status", "city"], page: "connections/nonprofits"),
         "nonprofit-officials": .init(.accountability, "person.crop.square", title: ["official"], subtitle: ["nonprofit", "titles"],
                                      badge: "sources", filters: ["official", "nonprofit"], page: "connections/nonprofits"),
+        "business-officers": .init(.elections, "person.text.rectangle", title: ["officer"], subtitle: ["title", "business"],
+                                   detail: "sunbiz_doc_number", badge: "business_status", filters: ["business_status", "officer_kind"], page: "connections/business-ties"),
         "official-businesses": .init(.elections, "briefcase", title: ["business"], subtitle: ["official", "official_role"],
                                      detail: "titles", badge: "business_status", filters: ["official"], page: "connections/business-ties"),
         "official-business-links": .init(.elections, "link", title: ["detail"], subtitle: ["official"],
