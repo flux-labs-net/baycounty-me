@@ -20,7 +20,7 @@ const BOARDS = {
 const NOTES = {
   schools: 'Minutes before 2022 aren’t online; a records request is needed.',
   lh: 'No 2016–2017 commission minutes are posted.',
-  pcb: '2019 and 2022–2024 are mostly missing online; they’re printed as drafts in the next meeting’s agenda packet.',
+  pcb: 'Most 2022–2024 minutes come from the drafts attached to the next meeting’s agenda. Minutes before 2019 aren’t online.',
   mb: 'Minutes before 2022 aren’t posted.',
   parker: '2016 and 2017 are one file per year.',
   sp: 'Minutes online start in 2018.',

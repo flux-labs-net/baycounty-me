@@ -1,10 +1,15 @@
-"""How They Voted page for baycounty.me (data: data/votes/votes.json)."""
+"""How They Voted page for baycounty.me.
+
+Data: data/votes/votes.json (hand-researched votes) plus data/votes/minutes_votes.json (every motion read from the
+official minutes since 2016, data/minutes/export_votes.py). Both are the votes and member-votes datasets in /api/v1.
+The browser data is split per government (/data/votes-page/<gov>.json) so a government page loads only its own votes."""
 import json, os, html, shutil
 from collections import defaultdict, Counter
 from city_filter import city_bar, data_g, by_city
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 SRC = os.path.join(HERE, '..', 'data', 'votes', 'votes.json')
+MINUTES = os.path.join(HERE, '..', 'data', 'votes', 'minutes_votes.json')
 e = lambda s: html.escape(str(s if s is not None else ''))
 from datetime import date as _date
 import re as _re2
@@ -34,6 +39,7 @@ def src_label(v):
 METHOD = [
     'Each vote comes from the official minutes posted by that government. A few recent votes whose minutes aren\'t posted yet come from the agenda packet or local news, and the source link says so.',
     'Panama City, Lynn Haven, Panama City Beach and Parker minutes list how each member voted. Callaway, Mexico Beach and Springfield minutes usually say "carried unanimously" and name only the no votes, so members present are shown as yes. A member shown as absent may also have abstained or stepped out.',
+    'Votes since 2016 were read from the official minutes by an automated reader, then checked: the named votes must add up to the printed count, and every voter must have held a seat that day. Votes that fail a check wait for a person to review them before they appear here.',
     'County Commission items on the consent agenda are approved together in one vote. The count shown is that vote.',
     'Many city minutes are scanned images read with text recognition, so a name or number can be misread. Every vote links to its minutes so you can check.',
     'The headline and summary for each vote are rewritten in plain English from the motion in the minutes, without adding anything the minutes don\'t say. The dollar amount is the largest figure in the motion.',
@@ -61,13 +67,31 @@ def chips(bm):
     return ''.join(f'<span class="vchip v-{e(x)}">{e(n)} <b>{VL.get(x, e(x))}</b></span>' for n, x in items)
 
 
-CAT = {'budget': 'Budget', 'millage': 'Tax rate', 'contract': 'Contract', 'cra': 'CRA', 'land': 'Land', 'debt': 'Borrowing', 'other': 'Other'}
+CAT = {'budget': 'Budget', 'millage': 'Tax rate', 'contract': 'Contract', 'cra': 'CRA', 'land': 'Land', 'land use': 'Land use', 'debt': 'Borrowing',
+       'grant': 'Grant', 'property': 'Property', 'fees': 'Fees and rates', 'ordinance': 'Ordinance', 'resolution': 'Resolution',
+       'appointment': 'Appointment', 'personnel': 'Personnel', 'settlement': 'Settlement', 'policy': 'Policy',
+       'consent agenda': 'Consent agenda', 'procedural': 'Procedural', 'other': 'Other'}
+S_MAX = 320  # characters of motion text kept for each vote read from minutes (the full text is in /api/v1)
+
+
+def all_votes(d):
+    """Hand-researched votes plus every vote read from minutes (export_votes.py already drops minutes votes that repeat
+    a researched one)."""
+    try:
+        mv = json.load(open(MINUTES)).get('votes') or []
+    except (OSError, ValueError):
+        mv = []
+    out = list(d['votes'])
+    for v in mv:
+        s = v.get('summary') or ''
+        out.append({**v, 'summary': s if len(s) <= S_MAX else s[:S_MAX].rsplit(' ', 1)[0] + '…', 'minutes': True})
+    return out
 
 
 def votes_page(out_dir):
     d = json.load(open(SRC))
     bodies = {b['id']: b for b in d['bodies']}
-    vs = sorted(d['votes'], key=lambda v: v.get('date') or '', reverse=True)
+    vs = sorted(all_votes(d), key=lambda v: v.get('date') or '', reverse=True)
     cnt = Counter(v['body'] for v in vs)
     import re as _re
 
@@ -87,7 +111,16 @@ def votes_page(out_dir):
             'votes': [{'b': v['body'], 'g': gov_of(v['body']), 'd': v.get('date'), 'dn': nice(v.get('date')), 'c': v.get('category'), 'i': v.get('item'), 'a': v.get('amount'), 'o': v.get('outcome'), 't': tally(v.get('tally')),
                        'm': v.get('by_member') or {}, 'x': is_split(v), 'h': v.get('headline') or v.get('item'), 's': v.get('summary') or v.get('plain_summary'),
                        'u': v.get('source_url'), 'ut': v.get('source_title'), 'ul': src_label(v)} for v in vs]}
-    json.dump(data, open(os.path.join(out_dir, 'data', 'votes-page.json'), 'w'), ensure_ascii=False, separators=(',', ':'))
+    # one file per government; votes-page.json keeps the lists and names, with each government's file and count
+    per_g = defaultdict(list)
+    for v in data['votes']:
+        per_g[v['g']].append(v)
+    os.makedirs(os.path.join(out_dir, 'data', 'votes-page'), exist_ok=True)
+    for g, rows in per_g.items():
+        json.dump({'cat': CAT, 'votes': rows}, open(os.path.join(out_dir, 'data', 'votes-page', f'{g}.json'), 'w'), ensure_ascii=False, separators=(',', ':'))
+    meta = {k: data[k] for k in ('bodies', 'cat', 'govs')}
+    meta['files'] = {g: {'url': f'/data/votes-page/{g}.json', 'n': len(rows)} for g, rows in per_g.items()}
+    json.dump(meta, open(os.path.join(out_dir, 'data', 'votes-page.json'), 'w'), ensure_ascii=False, separators=(',', ':'))
     shutil.copy(os.path.join(HERE, 'votes.js'), os.path.join(out_dir, 'assets', 'votes.js'))
 
     roster = ''
@@ -121,10 +154,16 @@ def votes_page(out_dir):
         bs = [b for b in bodies if not b.endswith('-cra') and (k is None or gov_of(b) == k)]
         return f'{sum(1 for b in bs if cnt[b] or cnt[b.split("-")[0] + "-cra"])} of {len(bs)}'
     missing = [board_name(bodies[k]['name']) for k in bodies if not cnt[k] and not k.endswith('-cra')]
+    ds = sorted(v['date'] for v in vs if v.get('date'))
+    span = f"{_date.fromisoformat(ds[0]).strftime('%b %Y')} to {_date.fromisoformat(ds[-1]).strftime('%b %Y')}" if ds else ''
+    try:
+        updated = nice(json.load(open(MINUTES)).get('as_of') or d.get('as_of') or '')
+    except (OSError, ValueError):
+        updated = nice(d.get('as_of') or '')
     return f'''<div class="page tax">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Accountability · Votes</span><h1>How they voted</h1>
-    <p class="lede">Budgets, tax rates, big contracts, land deals and borrowing are decided by recorded votes. Here's how each elected official voted on the money decisions since 2024, from official minutes.</p></div>
-    <div class="stamp"><button type="button" class="pdf-btn" id="pdf"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 12v2h10v-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Export PDF</button><span>Minutes Jan 2024 to Oct 2026<br>Data updated Oct 20, 2026</span></div></header>
+    <p class="lede">Budgets, tax rates, big contracts, land deals and borrowing are decided by recorded votes. Here's how each elected official voted on every motion in the official minutes since 2016.</p></div>
+    <div class="stamp"><button type="button" class="pdf-btn" id="pdf"><svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8m0 0l-3-3m3 3l3-3M3 12v2h10v-2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Export PDF</button><span>Minutes {e(span)}<br>Data updated {e(updated)}</span></div></header>
   {city_bar(gk, legacy='g', hide=True)}
   <section class="explain"><div class="ex-txt"><span class="eyebrow">The simple version</span><h2>Reading the votes</h2>
     <ol class="ex-steps">
@@ -133,7 +172,7 @@ def votes_page(out_dir):
       <li><b>Absent isn't a no.</b> Members who missed a meeting are shown as absent.</li>
     </ol></div></section>
   <div class="kpis">
-    <div class="kpi"><span class="eyebrow">Votes recorded</span><span class="v"{per(lambda xs, k: len(xs))}>{len(vs)}</span><span class="s">Money decisions with a source</span></div>
+    <div class="kpi"><span class="eyebrow">Votes recorded</span><span class="v"{per(lambda xs, k: len(xs))}>{len(vs)}</span><span class="s">Each one links to its minutes</span></div>
     <div class="kpi"><span class="eyebrow">Split votes</span><span class="v"{per(lambda xs, k: sum(1 for v in xs if is_split(v)))}>{len(split)}</span><span class="s">Not unanimous</span></div>
     <div class="kpi"><span class="eyebrow">Tax rate votes</span><span class="v"{per(lambda xs, k: sum(1 for v in xs if v.get("category") == "millage"))}>{sum(1 for v in vs if v.get("category") == "millage")}</span><span class="s">Millage adoptions</span></div>
     <div class="kpi"><span class="eyebrow">Boards covered so far</span><span class="v"{per(boards)}>{boards(vs, None)}</span><span class="s">Every county, city and School Board</span></div>
