@@ -71,34 +71,47 @@
 .rs-ctl{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center}
 .rs-ctl input[type=search]{flex:1 1 260px;min-width:0;min-height:44px;padding:0 14px;border-radius:14px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:inherit}
 .rs-ctl select{min-height:44px;padding:0 12px;border-radius:14px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:inherit}
-.rs-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;margin-top:14px;align-items:start}
-.rs-card{display:flex;flex-direction:column;gap:8px;padding:16px 18px;border-radius:20px;background:var(--surface);box-shadow:var(--ui-shadow);min-width:0}
-.rs-card[hidden]{display:none}
-.rs-card:target{outline:2px solid var(--blue);outline-offset:2px}
-.rs-card h3{font-size:1rem;font-weight:600;margin:0;overflow-wrap:anywhere}
-.rs-sub{font-size:.82rem;color:var(--muted);margin:0;overflow-wrap:anywhere}
-.rs-sub a{color:inherit}
-.rs-row{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;font-size:.84rem}
-.rs-res{display:inline-block;padding:2px 10px;border-radius:999px;font-weight:600;font-size:.8rem;background:var(--sunken)}
-.rs-res.ok{background:color-mix(in srgb,var(--teal) 14%,transparent);color:var(--teal)}
-.rs-res.warn{background:color-mix(in srgb,var(--amber) 28%,transparent);color:var(--ink)}
-.rs-res.bad{background:color-mix(in srgb,var(--salmon) 16%,transparent);color:var(--accent-ink)}
-.rs-meta{color:var(--muted);font-variant-numeric:tabular-nums}
-.rs-card button.rs-more{align-self:flex-start;border:0;background:none;color:var(--blue);font:600 .84rem var(--f-body);padding:4px 0;cursor:pointer;min-height:32px}
-.rs-hist{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px;border-top:1px solid var(--line);padding-top:10px}
-.rs-hist li{font-size:.82rem;line-height:1.45}
-.rs-hist li b{font-variant-numeric:tabular-nums}
-.rs-hist .rs-items{color:var(--muted)}
-.rs-count{font-size:.86rem;color:var(--muted);margin:10px 0 0}
+.rs-find input[type=search]{min-height:54px;font-size:1rem;border:2px solid var(--blue);padding:0 16px 0 44px;background:var(--surface) no-repeat 14px 50%/20px url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233F6FB0' stroke-width='2.2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-3.5-3.5'/%3E%3C/svg%3E")}
+.rs-find select{min-height:54px}
+.rs-week{margin:0;font-size:.9rem;color:var(--muted)}
+.rs-week b{color:var(--ink);font-variant-numeric:tabular-nums}
+.rs-count{font-size:.86rem;color:var(--muted);margin:0}
+.rs-rows{list-style:none;margin:0;padding:0;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.rs-rows li{border-top:1px solid var(--line)}
+.rs-rows li:first-child{border-top:0}
+.rs-rows a.rs-r{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 16px;align-items:center;padding:12px 16px;color:inherit;text-decoration:none;min-height:56px}
+.rs-rows a.rs-r:hover{background:var(--sunken)}
+.rs-r b{font-weight:600;font-size:.95rem;overflow-wrap:anywhere}
+.rs-r small{display:block;color:var(--muted);font-size:.8rem;overflow-wrap:anywhere}
+.rs-r .rs-side{display:flex;flex-direction:column;align-items:flex-end;gap:5px;text-align:right}
+.rs-res{display:inline-block;padding:2px 10px;border-radius:999px;font-weight:600;font-size:.76rem;background:var(--sunken);white-space:nowrap}
+.rs-res.ok{background:var(--tint-teal);color:var(--teal)}
+.rs-res.warn{background:var(--tint-amber);color:var(--ink);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--amber) 60%,transparent)}
+.rs-res.bad{background:var(--tint-salmon);color:var(--accent-ink)}
+.rs-dots{display:inline-flex;gap:3px;align-items:center}
+.rs-dots i{width:10px;height:10px;border-radius:3px;background:var(--teal)}
+.rs-dots i.warn{background:var(--amber)}.rs-dots i.bad{background:var(--salmon)}.rs-dots i.none{background:var(--line)}
+.rs-date{font:500 .74rem var(--f-data);color:var(--muted);white-space:nowrap}
+.rs-tabs{display:flex;flex-wrap:wrap;gap:6px}
+.rs-pane[hidden]{display:none}
 .rs-tbl td,.rs-tbl th{vertical-align:top}
 .rs-tbl td.n,.rs-tbl th.n{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
 .rs-tbl small{display:block;color:var(--muted);font-size:.78rem}
 .rs-two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.rs-say{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:16px 18px;font-size:1rem;line-height:1.6;margin:0}
+.rs-tl{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.rs-tl li{display:grid;grid-template-columns:118px minmax(0,1fr);gap:4px 14px;padding:12px 16px;border-top:1px solid var(--line);font-size:.88rem}
+.rs-tl li:first-child{border-top:0}
+.rs-tl .d{font:500 .78rem var(--f-data);color:var(--muted);padding-top:3px}
+.rs-tl .what{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:center}
+.rs-tl small{display:block;color:var(--muted);font-size:.8rem;margin-top:3px}
+.rs-tl li.bad{background:var(--tint-salmon)}
+.rs-one .stamp .rs-res{align-self:center;font-size:.92rem;padding:4px 16px}
 .nb-month{display:flex;align-items:flex-end;gap:2px;height:120px;margin:8px 0 4px}
 .nb-month span{flex:1;background:var(--blue);border-radius:3px 3px 0 0;min-height:2px;opacity:.85}
 .nb-month span.cur{background:var(--salmon)}
 .nb-axis{display:flex;justify-content:space-between;font-size:.76rem;color:var(--muted)}
-@media (max-width:760px){.rs-two{grid-template-columns:1fr}.rs-list{grid-template-columns:1fr}}
+@media (max-width:760px){.rs-st{display:none}.rs-two{grid-template-columns:1fr}.rs-find select{flex:1 1 100%}.rs-tl li{grid-template-columns:1fr;gap:2px}.rs-rows a.rs-r{padding:11px 14px}}
 </style>
 <div class="page tax ui rs nb">
   <header class="tx-top ui-hero"><div class="ui-id"><span class="ui-badge t-teal"><span class="ico i-store" aria-hidden="true"></span></span><div class="ui-hd"><div class="tx-brand"><span class="eyebrow ui-kick k-teal"><span class="ico i-home" aria-hidden="true"></span>Living here</span><h1>New businesses</h1>
@@ -129,7 +142,7 @@
     <p class="note">Every name opens the business's profile. The state record names its officers and registered agent. Older filings back to 2016 are in the <a href="/api/v1/datasets/new-businesses">new-businesses</a> data.</p></section>
 
   <section class="tx-sec"><div class="sec-hd"><span class="ui-ti t-blue"><span class="ico i-chart" aria-hidden="true"></span></span><h2 id="restaurants" data-tile="New restaurants">New restaurants</h2><span class="muted">103 new food licenses in the last 12 months</span></div>
-    <div class="tablewrap"><table class="tx-table rs-tbl"><thead><tr><th>Business</th><th>City</th><th>License holder</th><th class="n">Opened</th></tr></thead><tbody><tr><td><a href="/restaurants#r1350515">SLIP</a><small>Food truck</small></td><td>Panama City</td><td><a href="/profile/business/l26000141318">Slip LLC</a></td><td class="n">Oct 23, 2026</td></tr><tr><td><a href="/restaurants#r1306133">Wild Root</a><small>Restaurant with seating</small></td><td>Lynn Haven</td><td><a href="/profile/business/l13000114185">Emch LLC</a></td><td class="n">Oct 21, 2026</td></tr><tr><td><a href="/restaurants#r1306132">Between Brewery</a><small>Restaurant with seating</small></td><td>Panama City Beach</td><td><a href="/profile/business/p25000014798">Between Brewery Inc</a></td><td class="n">Oct 16, 2026</td></tr><tr><td><a href="/restaurants#r1306131">Toucan&#x27;s</a><small>Restaurant with seating</small></td><td>Mexico Beach</td><td>Toucan&#x27;s Restaurant LLC</td><td class="n">Oct 8, 2026</td></tr><tr><td><a href="/restaurants#r1305373">Donatos Pizza</a><small>Restaurant with seating</small></td><td>Panama City</td><td><a href="/profile/business/l24000152661">NC Pizza LLC</a></td><td class="n">Oct 7, 2026</td></tr><tr><td><a href="/restaurants#r1306130">Panama City Coffee Co</a><small>Restaurant with seating</small></td><td>Panama City Beach</td><td><a href="/profile/business/l20000114384">Panama City Coffee Co</a></td><td class="n">Oct 7, 2026</td></tr><tr><td><a href="/restaurants#r1350518">Just Wingin IT Wings and More</a><small>Food truck</small></td><td>Panama City Beach</td><td><a href="/profile/business/l26000362869">Just Wingin IT Wings and More LLC</a></td><td class="n">Oct 2, 2026</td></tr><tr><td><a href="/restaurants#r1350516">CASA915</a><small>Food truck</small></td><td>Panama City</td><td>Kandy and Ivan Cadena</td><td class="n">Oct 1, 2026</td></tr><tr><td><a href="/restaurants#r1350517">Holy Joe Coffee Plus More</a><small>Food truck</small></td><td>Panama City Beach</td><td></td><td class="n">Oct 1, 2026</td></tr><tr><td><a href="/restaurants#r1306129">Pecan Jacks Ice Cream and Candy</a><small>Restaurant with seating</small></td><td>Panama City Beach</td><td><a href="/profile/business/l26000240000">Pecan Jacks LP LLC</a></td><td class="n">Oct 1, 2026</td></tr><tr><td><a href="/restaurants#r1305134">Subway</a><small>Restaurant with seating</small></td><td>Panama City Beach</td><td>Chandhry Inc</td><td class="n">Oct 1, 2026</td></tr><tr><td><a href="/restaurants#r1306128">Sugar Lab PCB</a><small>Restaurant with seating</small></td><td>Panama City</td><td><a href="/profile/business/p25000034903">Sugar Lab PCB Inc</a></td><td class="n">Sep 28, 2026</td></tr><tr><td><a href="/restaurants#r1306127">Panama City Beach Winery</a><small>Restaurant with seating</small></td><td>Panama City Beach</td><td><a href="/profile/business/l25000234264">YOUME149 LLC</a></td><td class="n">Sep 24, 2026</td></tr><tr><td><a href="/restaurants#r1350514">Ledlow&#x27;s Smokin BBQ</a><small>Food truck</small></td><td>Panama City</td><td></td><td class="n">Sep 11, 2026</td></tr><tr><td><a href="/restaurants#r1305133">Feast + Fire Brazilian Churrasco</a><small>Caterer</small></td><td>Panama City Beach</td><td>Feast + Fire Brazilian Churrasco LLC</td><td class="n">Sep 3, 2026</td></tr></tbody></table></div>
+    <div class="tablewrap"><table class="tx-table rs-tbl"><thead><tr><th>Business</th><th>City</th><th>License holder</th><th class="n">Opened</th></tr></thead><tbody><tr><td><a href="/restaurants/slip-1350515">Slip</a><small>Food truck</small></td><td>Panama City</td><td><a href="/profile/business/l26000141318">Slip LLC</a></td><td class="n">Oct 23, 2026</td></tr><tr><td><a href="/restaurants/wild-root-1306133">Wild Root</a><small>Restaurant with seating</small></td><td>Lynn Haven</td><td><a href="/profile/business/l13000114185">Emch LLC</a></td><td class="n">Oct 21, 2026</td></tr><tr><td><a href="/restaurants/between-brewery-1306132">Between Brewery</a><small>Restaurant with seating</small></td><td>Panama City Beach</td><td><a href="/profile/business/p25000014798">Between Brewery Inc</a></td><td class="n">Oct 16, 2026</td></tr><tr><td><a href="/restaurants/toucans-1306131">Toucan&#x27;s</a><small>Restaurant with seating</small></td><td>Mexico Beach</td><td>Toucan&#x27;s Restaurant LLC</td><td class="n">Oct 8, 2026</td></tr><tr><td><a href="/restaurants/donatos-pizza-1305373">Donatos Pizza</a><small>Restaurant with seating</small></td><td>Panama City</td><td><a href="/profile/business/l24000152661">NC Pizza LLC</a></td><td class="n">Oct 7, 2026</td></tr><tr><td><a href="/restaurants/panama-city-coffee-co-1306130">Panama City Coffee Co</a><small>Restaurant with seating</small></td><td>Panama City Beach</td><td><a href="/profile/business/l20000114384">Panama City Coffee Co</a></td><td class="n">Oct 7, 2026</td></tr><tr><td><a href="/restaurants/just-wingin-it-wings-and-more-1350518">Just Wingin It Wings and More</a><small>Food truck</small></td><td>Panama City Beach</td><td><a href="/profile/business/l26000362869">Just Wingin IT Wings and More LLC</a></td><td class="n">Oct 2, 2026</td></tr><tr><td><a href="/restaurants/casa915-1350516">Casa915</a><small>Food truck</small></td><td>Panama City</td><td>Kandy and Ivan Cadena</td><td class="n">Oct 1, 2026</td></tr><tr><td><a href="/restaurants/holy-joe-coffee-plus-more-1350517">Holy Joe Coffee Plus More</a><small>Food truck</small></td><td>Panama City Beach</td><td></td><td class="n">Oct 1, 2026</td></tr><tr><td><a href="/restaurants/pecan-jacks-ice-cream-and-candy-1306129">Pecan Jacks Ice Cream and Candy</a><small>Restaurant with seating</small></td><td>Panama City Beach</td><td><a href="/profile/business/l26000240000">Pecan Jacks LP LLC</a></td><td class="n">Oct 1, 2026</td></tr><tr><td><a href="/restaurants/subway-1305134">Subway</a><small>Restaurant with seating</small></td><td>Panama City Beach</td><td>Chandhry Inc</td><td class="n">Oct 1, 2026</td></tr><tr><td><a href="/restaurants/sugar-lab-pcb-1306128">Sugar Lab PCB</a><small>Restaurant with seating</small></td><td>Panama City</td><td><a href="/profile/business/p25000034903">Sugar Lab PCB Inc</a></td><td class="n">Sep 28, 2026</td></tr><tr><td><a href="/restaurants/panama-city-beach-winery-1306127">Panama City Beach Winery</a><small>Restaurant with seating</small></td><td>Panama City Beach</td><td><a href="/profile/business/l25000234264">YOUME149 LLC</a></td><td class="n">Sep 24, 2026</td></tr><tr><td><a href="/restaurants/ledlows-smokin-bbq-1350514">Ledlow&#x27;s Smokin BBQ</a><small>Food truck</small></td><td>Panama City</td><td></td><td class="n">Sep 11, 2026</td></tr><tr><td><a href="/restaurants/feast-fire-brazilian-churrasco-1305133">Feast + Fire Brazilian Churrasco</a><small>Caterer</small></td><td>Panama City Beach</td><td>Feast + Fire Brazilian Churrasco LLC</td><td class="n">Sep 3, 2026</td></tr></tbody></table></div>
     <p class="note">Each one's first inspection, and every one since, is on the <a href="/restaurants">Restaurant inspections</a> page.</p></section>
 
   <section class="tx-sec method"><div class="sec-hd"><span class="ui-ti t-teal"><span class="ico i-chart" aria-hidden="true"></span></span><h2 id="method">Where this comes from</h2></div>

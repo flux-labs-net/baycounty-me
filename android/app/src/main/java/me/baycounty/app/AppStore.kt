@@ -155,6 +155,17 @@ class AppStore(context: Context, client: BayCountyClient? = null) {
         } finally { loading.remove(id) }
     }
 
+    /** One restaurant's inspections by license number, newest first (from /api/v1, kept in memory). */
+    val restaurantVisits = mutableStateMapOf<String, List<Row>>()
+
+    suspend fun loadRestaurantVisits(license: String, force: Boolean = false) {
+        if (!force && restaurantVisits[license] != null) return
+        try {
+            restaurantVisits[license] = withContext(Dispatchers.Default) { client.restaurantInspections(license) }
+            errors.remove("visits:$license")
+        } catch (e: Exception) { errors["visits:$license"] = e.message ?: "Couldn't load" }
+    }
+
     suspend fun load(ids: List<String>) = coroutineScope { ids.map { async { load(it) } }.awaitAll(); Unit }
 
     private val loaded = mutableSetOf<String>()

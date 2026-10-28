@@ -15,7 +15,7 @@ struct LivingHereView: View {
             ("Parks and trails", "tree", .teal, .parks),
             ("Schools", "graduationcap", .amber, .schools),
             ("Trash and utilities", "trash", .teal, .utilities(store.home)),
-            ("Restaurants", "fork.knife", .salmon, .dataset("restaurants")),
+            ("Restaurants", "fork.knife", .salmon, .restaurants),
             ("New businesses", "storefront", .blue, .dataset("new-businesses")),
             ("Jobs", "briefcase", .amber, .dataset("job-openings")),
             ("Storms and alerts", "exclamationmark.triangle", .salmon, .emergency),

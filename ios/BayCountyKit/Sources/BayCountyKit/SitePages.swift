@@ -42,7 +42,7 @@ public enum SitePages {
         "/roads": .dataset("road-contracts"),
         "/schools": .native("Public schools (SchoolsView); zoned schools are on My Address"),
         "/utilities": .native("Utilities and trash day (UtilitiesView, from /api/v1/utilities)"),
-        "/restaurants": .dataset("restaurants"),
+        "/restaurants": .native("Restaurant inspections (RestaurantsView): search, latest result and six-visit strip"),
         "/new-businesses": .dataset("new-businesses"),
         "/this-week": .web("the weekly email's page with its sign-up form; the events, meetings, votes and contracts in it are on native screens"),
         "/military": .native("Military and the bases"),
@@ -81,6 +81,7 @@ public enum SitePages {
         "/governments/": .native("Government profile"),
         "/public-money/vendors/": .native("Company detail, opened from the Companies list"),
         "/people/": .native("Person detail, with a link to the web profile and its connection map"),
+        "/restaurants/": .native("Restaurant detail (RestaurantDetailView), its inspections from /api/v1/datasets/restaurant-inspections"),
         "/profile/": .web("entity profile and connection map, read live from /api/v1/entities/{id}"),
     ]
 

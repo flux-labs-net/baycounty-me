@@ -42,7 +42,7 @@ fun LivingHereScreen() {
         Tile("Parks and trails", "tree", Tone.TEAL, Route.Parks),
         Tile("Schools", "graduationcap", Tone.AMBER, Route.Schools),
         Tile("Trash and utilities", "trash", Tone.TEAL, Route.Utilities(home)),
-        Tile("Restaurants", "fork.knife", Tone.SALMON, Route.Dataset("restaurants")),
+        Tile("Restaurants", "fork.knife", Tone.SALMON, Route.Restaurants),
         Tile("New businesses", "storefront", Tone.BLUE, Route.Dataset("new-businesses")),
         Tile("Jobs", "briefcase", Tone.AMBER, Route.Dataset("job-openings")),
         Tile("Storms and alerts", "exclamationmark.triangle", Tone.SALMON, Route.Emergency),

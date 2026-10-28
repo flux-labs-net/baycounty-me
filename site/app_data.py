@@ -55,7 +55,7 @@ def _first_section(out_dir, path):
 def pages(out_dir, page_list):
     out = []
     for path, title, desc, _ in page_list:
-        if path.startswith('/es') or path.startswith(('/public-money/vendors/', '/people/', '/profile')) or path.startswith('/admin'):
+        if path.startswith('/es') or path.startswith(('/public-money/vendors/', '/people/', '/profile', '/restaurants/')) or path.startswith('/admin'):
             continue
         out.append({'path': path, 'title': title, 'description': desc, 'lede': _lede(out_dir, path),
                     'explainer': _first_section(out_dir, path)})

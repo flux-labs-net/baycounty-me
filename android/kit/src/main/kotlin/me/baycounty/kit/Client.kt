@@ -48,6 +48,13 @@ class BayCountyClient(
     suspend fun rows(dataset: DatasetInfo): Pair<List<Row>, Freshness> = rowsAt(dataset.json)
     suspend fun rows(datasetID: String): Pair<List<Row>, Freshness> = rowsAt("/downloads/$datasetID.json")
 
+    /** One restaurant's inspections, newest first: the API's filtered rows, or (offline) the full download filtered here. */
+    suspend fun restaurantInspections(license: String): List<Row> = try {
+        Restaurants.inspections(Row.decodeRows(get(Restaurants.inspectionsPath(license)).data), license)
+    } catch (e: Exception) {
+        Restaurants.inspections(rows("restaurant-inspections").first, license)
+    }
+
     suspend fun governments(): Pair<List<Government>, Freshness> =
         rows("government-profiles").let { (r, f) -> r.map { Government(it) } to f }
 

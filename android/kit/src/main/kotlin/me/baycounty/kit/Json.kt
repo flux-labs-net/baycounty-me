@@ -96,5 +96,12 @@ data class Row(val id: Int, val values: Map<String, JsonElement>) {
         fun decodeList(bytes: ByteArray): List<Row> = decodeList(bytes.decodeToString())
         fun decodeList(text: String): List<Row> =
             BCJson.parseToJsonElement(text).jsonArray.mapIndexed { i, e -> Row(i, e.jsonObject) }
+
+        /** Rows from an /api/v1/datasets response ({data: [...]}) or a plain download ([...]). */
+        fun decodeRows(bytes: ByteArray): List<Row> {
+            val e = BCJson.parseToJsonElement(bytes.decodeToString())
+            val list = (e as? JsonObject)?.get("data") as? JsonArray ?: e.jsonArray
+            return list.mapIndexed { i, x -> Row(i, x.jsonObject) }
+        }
     }
 }
