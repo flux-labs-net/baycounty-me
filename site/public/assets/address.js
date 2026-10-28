@@ -244,6 +244,7 @@ async function load(f) {
   renderCra(cra);
   renderSafe(flood, evac, mosq, tdc, fire, lib, park);
   renderGovLinks(govKey);
+  if (window.BCUtil) BCUtil.card($('utilBody'), {lat: pt.y, lon: pt.x}).then(() => { const m = document.createElement('p'); m.className = 'muted small'; m.innerHTML = '<a href="/utilities?a=' + encodeURIComponent(a.ADDRESS) + '">Full utilities page →</a>'; $('utilBody').append(m); });
   loadDev(pt, cityName);
   loadNear(pt, govKey);
   drawMap(pt, cityName, cra?.[0]?.CRA);

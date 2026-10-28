@@ -30,6 +30,7 @@ from emergency_page import emergency_page
 from hurricane_prep_page import hurricane_prep_page
 from elections_hub_page import results_page as election_results_page, voting_page
 from notices_jobs_page import notices_page, jobs_page
+from utilities_page import utilities_page
 from business_ties_page import business_ties_page
 from updates import updates_page, rss, last_updated, nice as nice_date
 OUT = os.path.join(ROOT, 'public')
@@ -704,6 +705,8 @@ PAGES = [
      'Every nonprofit in Bay County: what each reports to the IRS, the government money and grants that reach it, and public officials who sit on its board.', lambda: nonprofits_page(OUT)),
     ('/schools', 'Public schools',
      "Every public school in Bay County: which schools serve your address, the school district calendar, each school's state grades, students and spending per student since 2016, and schools that closed.", lambda: schools_page(OUT)),
+    ('/utilities', 'Utilities and trash day',
+     "Who provides water, sewer, electricity, natural gas and garbage pickup at any Bay County address, its trash and yard waste day, holiday changes, power outage lines and what each city charges for water and sewer.", lambda: utilities_page(OUT)),
     ('/chambers', 'Chambers of commerce',
      "Bay County's two chambers of commerce, the Bay County Chamber and the Panama City Beach Chamber: who sits on their boards and staff, upcoming events and programs, their IRS filings, the public money they get, and board members' businesses that do work for local governments.", lambda: chambers_page(OUT)),
     ('/beaches', 'Beaches: flags, rip currents, water quality and access',

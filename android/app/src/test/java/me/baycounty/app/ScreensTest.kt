@@ -102,6 +102,10 @@ suspend fun preload(store: AppStore, route: Route?) {
         Route.Schools -> store.load(me.baycounty.kit.Schools.datasets)
         Route.Emergency -> store.load(me.baycounty.kit.Emergency.datasets)
         Route.HurricanePrep -> store.load(me.baycounty.kit.Emergency.prepDatasets)
+        // The lookup is live in the app; a snapshot uses the saved /api/v1/utilities answer for the same address.
+        is Route.Utilities -> route.match?.let { m ->
+            store.utilities[m.id] = me.baycounty.kit.UtilityLookup.decode(File(System.getProperty("repoRoot") ?: "../..", "ios/BayCountyKit/Tests/BayCountyKitTests/Fixtures/utilities-lynn-haven.json").readText())
+        }
         is Route.Dataset -> store.load(route.id)
         is Route.Record -> {
             store.load(route.datasetID); store.loadVendors(); store.loadPeople()

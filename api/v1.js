@@ -23,6 +23,7 @@
 //   GET /api/v1/schools?address=|lat=&lon=  the elementary, middle and high school zoned for a place (api/_schools.js)
 //   GET /api/v1/emergency               live weather alerts, evacuation orders, shelters, boil-water notices, road closures (api/_emergency_feed.js)
 //   GET /api/v1/evacuation-zone?address= (or ?lat=&lng=)  the hurricane evacuation zone for a Bay County address
+//   GET /api/v1/utilities?lat=&lon=     water, sewer, power, gas, trash provider and pickup days at an address (api/_utilities.js)
 // Responses carry an ETag (and Last-Modified when the data's date is known); a matching If-None-Match or
 // If-Modified-Since gets 304 Not Modified with no body.
 const crypto = require('crypto');
@@ -207,9 +208,23 @@ function openapi(catalog) {
         description: 'The address is matched to Bay County\'s address points (house number and street; city and ZIP are ignored), then to the county\'s evacuation zone map.',
         parameters: [p('address', 'Street address, e.g. 825 Ohio Ave'), p('lat', 'Latitude (instead of address)', {type: 'number'}), p('lng', 'Longitude', {type: 'number'})],
         responses: {200: {description: '{query, found, address: {address, community, zip, lat, lng}, zone, in_zone, zone_info, what_to_do, orders_now: [{title, zones, includes_you}], nearest_shelters: [{name, address, type, status, miles}], map, source_url, note}'}, 400: {description: 'No address or point given'}}}},
+      '/utilities': {get: {operationId: 'utilitiesAtAddress', summary: 'Who provides water, sewer, electricity, natural gas, garbage, yard waste and recycling at an address, its trash pickup days, holiday changes and the rates its utilities charge',
+        description: 'Give lat and lon, or address (house number and street). The city comes from the county\'s boundary map; garbage and yard waste routes and days are read live from each city\'s route map where it publishes one (from_map true), otherwise the city\'s rule is returned (for example a private hauler sets the day). An electric co-op is listed only where its mapped territory covers the point; co-op and FPL lines can share a neighborhood, so the bill is the sure answer. Nothing about the search is stored. Rows: utility-providers, trash-pickup, trash-holidays and utility-rates datasets.',
+        parameters: [p('lat', 'Latitude, decimal degrees', {type: 'number'}), p('lon', 'Longitude, decimal degrees', {type: 'number'}), p('address', 'A street address instead of lat/lon, e.g. 825 Ohio Ave')],
+        responses: {200: {description: '{data: {point: {lat, lon}, address, other_matches, boundary, place_id, area, area_name, gov_id, services: [{service, service_label, providers: [{provider, entity_id, provider_kind, coverage, phone, website, outage_url, notes, source_url}]}], pickup: [{service, service_label, provider, zone, days, zone_area, rule, from_map, notes, source_url}], holidays: [{provider, holiday, when_observed, garbage, yard_waste, source_url}], rates: [{provider, service, charge, amount, unit, applies_to, effective, notes, source_url}], note}}'},
+          400: {description: 'Missing or bad lat/lon or address'}, 404: {description: 'No address found, or the point is outside the county'}, 502: {description: 'The county map server did not answer'}}}},
       '/search': {get: {operationId: 'searchSite', summary: 'Search every page on BayCounty.me', parameters: [{name: 'q', in: 'query', required: true, schema: {type: 'string'}}, p('limit', 'Results (default 20, max 100)', {type: 'integer'})], responses: {200: {description: 'Results'}}}},
     },
   };
+}
+
+// An address lookup never logs where someone lives: lat, lon and address are dropped from the request log.
+const PRIVATE_Q = q => Object.fromEntries(Object.entries(q || {}).filter(([k]) => !['lat', 'lon', 'lng', 'address'].includes(k)));
+// The four utilities datasets /utilities and the MCP tool read.
+async function utilityData(req, catalog) {
+  const rows = async id => { const m = catalog.datasets.find(d => d.id === id); return m ? (await datasetRows(req, m)).rows : []; };
+  const [providers, trash, holidays, rates] = await Promise.all(['utility-providers', 'trash-pickup', 'trash-holidays', 'utility-rates'].map(rows));
+  return {providers, trash, holidays, rates};
 }
 
 module.exports = async (req, res) => {
@@ -224,7 +239,7 @@ module.exports = async (req, res) => {
   const path = String(req.query.path || '').replace(/^\/+|\/+$/g, '');
   const parts = path ? path.split('/') : [];
   const ctx = await gate(req, res, 'api');
-  const info = {endpoint: path || 'index', dataset: parts[0] === 'datasets' ? parts[1] || null : null, query: cleanQuery(req.query)};
+  const info = {endpoint: path || 'index', dataset: parts[0] === 'datasets' ? parts[1] || null : null, query: cleanQuery(parts[0] === 'utilities' ? PRIVATE_Q(req.query) : req.query)};
   instrument(res, ctx, info);
   conditional(req, res);
   if (!ctx.ok) return res.status(ctx.status).json({error: ctx.message || 'Request not allowed.', reason: ctx.reason, docs: `${SITE}/developers#keys`});
@@ -234,7 +249,7 @@ module.exports = async (req, res) => {
     if (!parts.length) return res.status(200).json({
       name: 'BayCounty.me API', version: 'v1', updated: catalog.updated, docs: `${SITE}/developers`, openapi: `${SITE}/api/v1/openapi.json`, mcp: `${SITE}/api/mcp`,
       endpoints: {datasets: `${SITE}/api/v1/datasets`, governments: `${SITE}/api/v1/governments`, search: `${SITE}/api/v1/search?q=`,
-        entities: `${SITE}/api/v1/entities?q=`, budget_compare: `${SITE}/api/v1/budget-compare?gov=lh&from=2025&to=2026`, checkbook: `${SITE}/api/v1/checkbook?gov=lh`, budget_actual: `${SITE}/api/v1/budget-actual?gov=lh`, officials: `${SITE}/api/v1/officials?gov=lh&year=2019`, schools: `${SITE}/api/v1/schools?address=1200 Harrison Ave`, emergency: `${SITE}/api/v1/emergency`, evacuation_zone: `${SITE}/api/v1/evacuation-zone?address=825+Ohio+Ave`, status: `${SITE}/api/v1/status`, import_progress: `${SITE}/api/v1/import-progress`, changes: `${SITE}/api/v1/changes?since=`, meetings_calendar: `${SITE}/api/v1/meetings.ics?gov=`},
+        entities: `${SITE}/api/v1/entities?q=`, budget_compare: `${SITE}/api/v1/budget-compare?gov=lh&from=2025&to=2026`, checkbook: `${SITE}/api/v1/checkbook?gov=lh`, budget_actual: `${SITE}/api/v1/budget-actual?gov=lh`, officials: `${SITE}/api/v1/officials?gov=lh&year=2019`, schools: `${SITE}/api/v1/schools?address=1200 Harrison Ave`, emergency: `${SITE}/api/v1/emergency`, evacuation_zone: `${SITE}/api/v1/evacuation-zone?address=825+Ohio+Ave`, utilities: `${SITE}/api/v1/utilities?address=825+Ohio+Ave`, status: `${SITE}/api/v1/status`, import_progress: `${SITE}/api/v1/import-progress`, changes: `${SITE}/api/v1/changes?since=`, meetings_calendar: `${SITE}/api/v1/meetings.ics?gov=`},
       license: catalog.license, datasets: catalog.datasets.map(d => ({id: d.id, title: d.title, rows: d.rows, url: `${SITE}/api/v1/datasets/${d.id}`}))});
     if (parts[0] === 'openapi.json') return res.status(200).json(openapi(catalog));
     if (parts[0] === 'status') { res.locals.lastModified = null; return res.status(200).json(await status(catalog)); }
@@ -345,6 +360,15 @@ module.exports = async (req, res) => {
         return res.status(200).json({data: r, matched_address: matched});
       } catch (e) { if (e.expose) return res.status(e.status).json({error: e.message}); throw e; }
     }
+    if (parts[0] === 'utilities') {
+      // Who provides each utility at one address, and its trash pickup days. Read live from public map layers; nothing stored.
+      res.locals.lastModified = null;
+      const U = require('./_utilities');
+      if (!req.query.lat && !req.query.lon && !req.query.address) return res.status(200).json({note: 'Add ?lat=&lon= (or ?address=825 Ohio Ave) for one address. Every provider, route and rate is in the utility-providers, trash-pickup, trash-holidays and utility-rates datasets.'});
+      const D = await utilityData(req, catalog);
+      try { const r = await U.lookup(D, req.query); info.rows = r.services.length + r.pickup.length; return res.status(200).json({data: r}); }
+      catch (e) { if (e.expose) return res.status(e.status).json({error: e.message}); throw e; }
+    }
     if (parts[0] === 'checkbook' || parts[0] === 'budget-actual') {
       // Each government's own accounting, as published from its finance files. Rows can change any time a file is published.
       const O = require('./_openbooks');
@@ -397,3 +421,4 @@ module.exports.csvCell = csvCell;
 module.exports.openapi = openapi;
 module.exports.meetingsIcs = meetingsIcs;
 module.exports.conditional = conditional;
+module.exports.utilityData = utilityData;

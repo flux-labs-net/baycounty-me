@@ -48,6 +48,12 @@ const TOOLS = [
      lat: {type: 'number', description: 'Latitude, instead of address'},
      lon: {type: 'number', description: 'Longitude, instead of address'}}},
    annotations: {readOnlyHint: true}},
+  {name: 'utilities_at_address', title: 'Utilities and trash day at an address',
+   description: 'For a Bay County street address (or lat/lon): who provides water, sewer, electricity, natural gas, garbage, yard waste, recycling and internet, with phone numbers, websites and outage pages; the garbage and yard waste pickup days (read live from the city\'s route map where one exists, otherwise the city\'s rule, e.g. a private hauler sets the day); holiday pickup changes; and the rates the public utilities charge. An electric co-op is listed only where its mapped territory covers the address; the bill is the sure answer.',
+   inputSchema: {type: 'object', additionalProperties: false, properties: {
+     address: {type: 'string', description: 'House number and street, e.g. 825 Ohio Ave'},
+     lat: {type: 'number', description: 'Latitude instead of address'}, lon: {type: 'number', description: 'Longitude instead of address'}}},
+   annotations: {readOnlyHint: true}},
   {name: 'government_checkbook', title: 'Government checkbook',
    description: 'One government\'s payments in a fiscal year from its own check register: the total, payments by month, the top payees (with profile ids), by fund and payment method, and the largest payments. Payments to private individuals are counted but never named. Add payee to list every payment to one payee. Returns an empty governments list while nothing is published.',
    inputSchema: {type: 'object', additionalProperties: false, properties: {
@@ -274,6 +280,12 @@ async function call(req, name, a = {}) {
     if (lat == null || lon == null) return {schools: S.summary(schools), page: `${SITE}/schools/`};
     return {...S.zonedAt(await rowsOf(req, c, 'school-zones'), schools, lat, lon), matched_address: matched, page: `${SITE}/schools/`};
   }
+  if (name === 'utilities_at_address') {
+    const c = await load(req, '/downloads/index.json');
+    const [providers, trash, holidays, rates] = await Promise.all(['utility-providers', 'trash-pickup', 'trash-holidays', 'utility-rates'].map(id => rowsOf(req, c, id)));
+    const r = await require('./_utilities').lookup({providers, trash, holidays, rates}, a);
+    return {...r, page: `${SITE}/utilities`, cite: 'Cite each provider\'s and route\'s source_url.'};
+  }
   if (name === 'government_checkbook' || name === 'budget_vs_actual') {
     const O = require('./_openbooks');
     const c = await load(req, '/downloads/index.json');
@@ -348,7 +360,8 @@ function describe(m) {
   return {endpoint: m && m.method === 'tools/call' ? `tools/call:${p.name}` : (m && m.method) || null,
     dataset: m && m.method === 'tools/call' && p.arguments ? p.arguments.id || p.arguments.slug || p.arguments.vendor || p.arguments.member || p.arguments.gov || null
       : m && m.method === 'resources/read' ? String(p.uri || '').replace(/^baycounty:\/\/datasets\//, '').slice(0, 80) || null : null,
-    query: m && m.method === 'tools/call' ? JSON.stringify(p.arguments || {}).replace(/"api_key":"[^"]*"/, '') : null};
+    query: m && m.method === 'tools/call' && p.name === 'utilities_at_address' ? null // never log an address
+      : m && m.method === 'tools/call' ? JSON.stringify(p.arguments || {}).replace(/"api_key":"[^"]*"/, '') : null};
 }
 
 const ok = (id, result) => ({jsonrpc: '2.0', id, result});

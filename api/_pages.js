@@ -5,7 +5,8 @@
 const PAGES = {
   '/': {datasets: ['site-updates', 'government-profiles', 'budget-detail', 'budget-per-resident', 'property-tax-rates', 'tax-districts', 'fema-michael-projects', 'debt', 'audit-findings', 'sales-tax-projects', 'cra-payments', 'community-events'],
     endpoints: ['/search']},
-  '/my-address': {datasets: ['tax-districts', 'property-tax-rates', 'fees-assessments', 'cra-payments', 'property-tax-exemptions', 'meetings', 'schools', 'school-zones'], endpoints: ['/schools'],
+  '/my-address': {datasets: ['tax-districts', 'property-tax-rates', 'fees-assessments', 'cra-payments', 'property-tax-exemptions', 'meetings', 'schools', 'school-zones'], endpoints: ['/schools', 'utility-providers', 'trash-pickup', 'trash-holidays'],
+    endpoints: ['/utilities'],
     note: 'Per-parcel lookups (exemptions, districts) are not in the API yet.'},
   '/public-money/cra-spending': {datasets: ['cra-payments']},
   '/public-money/cra-tax-increment': {datasets: ['cra-agencies', 'cra-tax-increment', 'cra-increment-checks', 'property-tax-rates']},
@@ -28,6 +29,7 @@ const PAGES = {
   '/development': {datasets: ['housing-permits', 'development-projects']},
   '/roads': {datasets: ['road-contracts', 'road-work-program', 'sales-tax-projects', 'entity-profiles']},
   '/schools': {datasets: ['schools', 'school-grades', 'school-spending', 'school-enrollment', 'school-calendar', 'school-zones', 'meetings'], endpoints: ['/schools']},
+  '/utilities': {datasets: ['utility-providers', 'trash-pickup', 'trash-holidays', 'utility-rates'], endpoints: ['/utilities']},
   '/chambers': {datasets: ['chambers', 'chamber-leaders', 'chamber-events', 'nonprofit-payments', 'nonprofits']},
   '/connections/nonprofits': {datasets: ['nonprofits', 'nonprofit-board-members', 'nonprofit-board-businesses', 'nonprofit-payments', 'nonprofit-grants', 'nonprofit-officials', 'charity-registrations']},
   '/connections/business-ties': {datasets: ['official-businesses', 'official-business-links']},

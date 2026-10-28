@@ -36,6 +36,7 @@ const RELATION = {
   works: ['works at', 'has on its staff'],
   hired: ['hired', 'was hired by'],
   charter: ['runs a charter school for', 'has a charter school run by'],
+  utility: ['provides utility service in', 'gets utility service from'],
 };
 const KIND_LABEL = {gov: 'Government', vendor: 'Company', person: 'Official or candidate', nonprofit: 'Nonprofit', member: 'Nonprofit board member', owner: 'Business owner',
   business: 'Business', committee: 'Committee or PAC'};

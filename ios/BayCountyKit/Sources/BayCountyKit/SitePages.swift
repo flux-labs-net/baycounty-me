@@ -38,6 +38,7 @@ public enum SitePages {
         "/development": .dataset("development-projects"),
         "/roads": .dataset("road-contracts"),
         "/schools": .native("Public schools (SchoolsView); zoned schools are on My Address"),
+        "/utilities": .native("Utilities and trash day (UtilitiesView, from /api/v1/utilities)"),
         "/connections/business-ties": .web("confirmed official-to-business matches, read live from /api/v1/datasets/official-businesses and official-business-links"),
         "/correspondence": .web("published letters to officials, read live from /api/v1/correspondence"),
         "/alerts": .web("email alert sign-up; phone alerts are set on the Emergencies screen"),

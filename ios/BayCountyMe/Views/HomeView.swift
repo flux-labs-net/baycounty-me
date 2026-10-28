@@ -414,6 +414,11 @@ struct HomeView: View {
             if let r = pick ?? rows.first { path = [.record(ds, rowID: r.id)] }
             return
         }
+        if arg.hasPrefix("utilities:") {
+            let q = String(arg.dropFirst("utilities:".count))
+            if let m = try? await store.gis.search(q).matches.first { path = [.utilities(m)] }
+            return
+        }
         if arg.hasPrefix("address:") {
             let q = String(arg.dropFirst("address:".count))
             if let m = try? await store.gis.search(q).matches.first { path = [.address(m)] }

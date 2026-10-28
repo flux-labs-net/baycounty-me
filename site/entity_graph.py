@@ -55,6 +55,7 @@ RELATION = {
     'works': ('works at', 'has on its staff'),
     'hired': ('hired', 'was hired by'),
     'charter': ('runs a charter school for', 'has a charter school run by'),
+    'utility': ('provides utility service in', 'gets utility service from'),
 }
 MAIN_GOVS = None
 _C = {}
@@ -452,6 +453,17 @@ def build():
             continue
         b = business(r['doc_number'], r['business'], 'Registered business' + (f" ({r['business_status'].lower()})" if r.get('business_status') and r['business_status'] != 'Active' else ''), r.get('source_url'))
         G.link(mid, b, 'runs', detail='Matched by ' + (r.get('match') or 'name').lower(), source_url=r.get('source_url'))
+
+    # utilities: the companies that provide power, gas or garbage pickup in each part of the county (utility-providers,
+    # copied from city and county pages). A city's own utility is the government itself, so it gets no link.
+    for r in _ds('utility-providers'):
+        eid = r.get('entity_id')
+        if not eid or eid.startswith('gov:'):
+            continue
+        if eid not in G.ents:
+            G.ent(eid, r.get('entity_name') or r['provider'], r.get('provider_kind'), None, r.get('source_url'))
+        gid = 'gov:' + (r['gov_id'] or 'county')
+        G.link(eid, gid, 'utility', None, r.get('as_of'), r['service_label'] + ('' if r['gov_id'] else ' across the county'), r.get('source_url'), key=r['service'])
 
     # chambers of commerce: board seats, staff and past chairs from each chamber's own website (chamber-leaders), and the
     # organization each board member represents there

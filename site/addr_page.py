@@ -179,6 +179,7 @@ def addr_page(out_dir):
       <section class="card" id="cReps"><h3>Who represents you</h3><dl class="kv" id="repBody"></dl></section>
       <section class="card" id="cSch"><h3>Zoned public schools</h3><dl class="kv" id="schBody"></dl></section>
       <section class="card" id="cCra"><h3>Redevelopment district ({T('cra', 'CRA')})</h3><div id="craBody"></div></section>
+      <section class="card" id="cUtil"><h3>Utilities and trash day</h3><div id="utilBody"></div></section>
       <section class="card" id="cSafe"><h3>Flood, storms and services</h3><dl class="kv" id="safeBody"></dl></section>
       <section class="card" id="cDev"><h3>Zoning and development nearby</h3><div id="devBody"></div></section>
       <section class="card" id="cNear"><h3>Public money near you</h3><div id="nearBody"></div></section>
@@ -195,4 +196,6 @@ def addr_page(out_dir):
   <div class="tt" id="tt" role="tooltip" hidden></div>
 </div>
 <link rel="stylesheet" href="/assets/tax.css">
+<link rel="stylesheet" href="/assets/utilities.css">
+<script src="/assets/utilities.js" defer></script>
 <script src="/assets/address.js" defer></script>'''

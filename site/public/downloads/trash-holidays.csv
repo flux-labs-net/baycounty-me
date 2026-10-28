@@ -1,0 +1,21 @@
+place_id,area,area_name,gov_id,provider,holiday,when_observed,garbage,yard_waste,as_of,source_url
+fl-bay,pc,Panama City,pc,City of Panama City,New Year's Day,January 1,No pickup,No pickup,2026-10-27,https://www.panamacity.gov/154/Environmental-Services-Division-Solid-Wa
+fl-bay,pc,Panama City,pc,City of Panama City,Martin Luther King Jr. Day,3rd Monday in January,Normal,No pickup,2026-10-27,https://www.panamacity.gov/154/Environmental-Services-Division-Solid-Wa
+fl-bay,pc,Panama City,pc,City of Panama City,Presidents' Day,3rd Monday in February,Normal,No pickup,2026-10-27,https://www.panamacity.gov/154/Environmental-Services-Division-Solid-Wa
+fl-bay,pc,Panama City,pc,City of Panama City,Good Friday,Friday before Easter,Normal,No pickup,2026-10-27,https://www.panamacity.gov/154/Environmental-Services-Division-Solid-Wa
+fl-bay,pc,Panama City,pc,City of Panama City,Memorial Day,Last Monday in May,Normal,No pickup,2026-10-27,https://www.panamacity.gov/154/Environmental-Services-Division-Solid-Wa
+fl-bay,pc,Panama City,pc,City of Panama City,Juneteenth,June 19,No pickup,No pickup,2026-10-27,https://www.panamacity.gov/154/Environmental-Services-Division-Solid-Wa
+fl-bay,pc,Panama City,pc,City of Panama City,Independence Day,July 4,No pickup,No pickup,2026-10-27,https://www.panamacity.gov/154/Environmental-Services-Division-Solid-Wa
+fl-bay,pc,Panama City,pc,City of Panama City,Labor Day,1st Monday in September,Normal,No pickup,2026-10-27,https://www.panamacity.gov/154/Environmental-Services-Division-Solid-Wa
+fl-bay,pc,Panama City,pc,City of Panama City,Veterans Day,November 11,Normal,No pickup,2026-10-27,https://www.panamacity.gov/154/Environmental-Services-Division-Solid-Wa
+fl-bay,pc,Panama City,pc,City of Panama City,Thanksgiving Day,4th Thursday in November,No pickup,No pickup,2026-10-27,https://www.panamacity.gov/154/Environmental-Services-Division-Solid-Wa
+fl-bay,pc,Panama City,pc,City of Panama City,Day after Thanksgiving,Friday after Thanksgiving,Normal,No pickup,2026-10-27,https://www.panamacity.gov/154/Environmental-Services-Division-Solid-Wa
+fl-bay,pc,Panama City,pc,City of Panama City,Christmas Eve,December 24,Normal,No pickup,2026-10-27,https://www.panamacity.gov/154/Environmental-Services-Division-Solid-Wa
+fl-bay,pc,Panama City,pc,City of Panama City,Christmas Day,December 25,No pickup,No pickup,2026-10-27,https://www.panamacity.gov/154/Environmental-Services-Division-Solid-Wa
+fl-bay,pc,Panama City,pc,City of Panama City,Missed holiday pickups,Any holiday above,"Picked up on your next scheduled day, unless the city says otherwise",Picked up on your next scheduled day,2026-10-27,https://www.panamacity.gov/154/Environmental-Services-Division-Solid-Wa
+fl-bay,lh,Lynn Haven,lh,City of Lynn Haven,Thanksgiving Day,4th Thursday in November,Moved to the Saturday after,No pickup,2026-10-27,https://www.cityoflynnhaven.gov/174/Garbage-Trash
+fl-bay,lh,Lynn Haven,lh,City of Lynn Haven,Christmas Day,December 25,"No pickup; in 2025 Thursday's route moved to Saturday, December 27",No pickup,2026-10-27,https://www.cityoflynnhaven.gov/174/Garbage-Trash
+fl-bay,lh,Lynn Haven,lh,City of Lynn Haven,New Year's Day,January 1,"No pickup; in 2026 Thursday's route moved to Saturday, January 3",No pickup,2026-10-27,https://www.cityoflynnhaven.gov/174/Garbage-Trash
+fl-bay,lh,Lynn Haven,lh,City of Lynn Haven,Other city holidays,Any city-observed holiday,"Call Sanitation, 850-265-5989",No pickup,2026-10-27,https://www.cityoflynnhaven.gov/174/Garbage-Trash
+fl-bay,sp,Springfield,sp,Waste Pro,"Independence Day, Thanksgiving, Christmas, New Year's Day",When the holiday falls on a weekday,"Picked up the next day, and the rest of the week moves one day later (for example Friday moves to Saturday)",Same as garbage,2026-10-27,https://www.springfieldfl.net/publicworks/page/sanitation-service-information
+fl-bay,mb,Mexico Beach,mb,City of Mexico Beach,Holiday weeks,Some holiday weeks,Pickup days change; see the city's holiday schedule,See the city's holiday schedule,2026-10-27,https://mexicobeachfl.gov/uploads/2025/12/2026-sanitation-schedule.pdf

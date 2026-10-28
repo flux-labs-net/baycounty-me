@@ -6578,7 +6578,7 @@
    "id": "entity-profiles",
    "title": "Profiles: people, companies and organizations",
    "description": "Every company, elected official, candidate, nonprofit, nonprofit board member, registered business, committee and government named in BayCounty.me records, one row each, with its profile page and how many documented connections it has. entity_id (kind:key) joins entity-connections. Board members are named as their nonprofits' public filings list them; individual campaign donors are included only when they run a registered business (owner-gifts).",
-   "rows": 16497,
+   "rows": 16500,
    "columns": [
     {
      "name": "entity_id",
@@ -6695,7 +6695,7 @@
    "id": "entity-connections",
    "title": "Connections between people, companies and organizations",
    "description": "Every documented connection between two entities in entity-profiles, totalled per pair and kind: a government paid a payee, an organization gave to an official's or candidate's campaign, an official voted on a company's contracts, a person sits on a nonprofit's board or runs a business, a nonprofit gave a grant, two payees share a project. Each row has its source. Individual campaign donors are included only when they run a registered business (owner-gifts); officials' board seats and businesses are added by the API once checked by hand.",
-   "rows": 19758,
+   "rows": 19764,
    "columns": [
     {
      "name": "link_id",
@@ -6767,6 +6767,7 @@
       "same",
       "served",
       "serves",
+      "utility",
       "voted",
       "works"
      ]
@@ -6781,6 +6782,7 @@
       "is a candidate for office in",
       "is the same organization as",
       "paid",
+      "provides utility service in",
       "ran for office in",
       "runs",
       "runs a charter school for",
@@ -7025,7 +7027,7 @@
    "id": "data-sources",
    "title": "Where the data comes from",
    "description": "Every source BayCounty.me takes records from, one row per source: the topic, the government it covers (or state and federal databases), the link, how we get it (automatic fetch, downloaded and read by hand, a state or federal bulk file, or a live lookup), how often, what we take from it, how we process it and the checks we run.",
-   "rows": 163,
+   "rows": 168,
    "columns": [
     {
      "name": "topic",
@@ -7059,6 +7061,7 @@
       "Road projects",
       "Sales tax projects",
       "Tourist tax",
+      "Utilities and trash day",
       "Votes"
      ]
     },
@@ -7094,6 +7097,7 @@
       "sales-tax",
       "schools",
       "tourist-tax",
+      "utilities",
       "votes"
      ]
     },
@@ -7186,6 +7190,7 @@
       "New-home counts come from the Census Bureau's Building Permits Survey files for the county, each city and the unincorporated area. Development projects are read every week from the county's public planning map layers (Bay County's development orders and Panama City Beach's development map).",
       "Open jobs are read every day from each employer's public job board. Boards that turn automated readers away are listed with a link instead.",
       "Pay comes from budget pay plans, published salary schedules, job postings and the state's report on officials' salaries.",
+      "Providers, pickup rules, holiday schedules and rates are copied by hand from each city's and the county's utility and sanitation pages, rate ordinances and Public Service Commission filings. Pickup routes and the electric co-op territory are read live from public map layers for each lookup; the address isn't kept.",
       "Read every morning from each organizer's public calendar feed: the county and city calendars (RSS), The Events Calendar feeds on the library, visitor bureau and city sites, the Mexico Beach calendar export and the Panama City Beach Chamber. A feed that fails keeps yesterday's events.",
       "Records custodians, portals and policies are taken from each agency's official pages.",
       "State road contracts and FDOT's adopted five-year work program are read every week from FDOT's public map services, filtered to the county. County and city road work comes from the half-cent sales tax project map.",
@@ -7206,6 +7211,7 @@
       "Court, tax deed, foreclosure, probate and other private notices are left out. The posting government is matched from the notice's opening words.",
       "Each beach access is joined to the state's coastal access survey only when the two points are within about 200 feet. Parks in the county's park guide are joined to its parks inventory by name. Samples before 2016 are dropped; samples already on file are kept when the state's lookup stops showing them.",
       "Each line carries its source and a confidence level; amounts inside a larger total are shown but counted once. Estimates are checked against official county figures.",
+      "Each provider row links its source page. The live lookup is checked against known addresses in every city with a route map (Panama City, Lynn Haven, Callaway, Parker).",
       "Each term names its source. Stretches nobody could confirm are marked unconfirmed, not guessed.",
       "Each zone is matched to its school by hand once. Charter schools are linked by hand to the nonprofit that runs them.",
       "Every agency-month matches the register's printed total to the cent. Payments to private individuals are counted, not listed.",
@@ -7263,7 +7269,8 @@
       "/records-request",
       "/roads",
       "/schools",
-      "/updates"
+      "/updates",
+      "/utilities"
      ]
     },
     {
@@ -7528,7 +7535,7 @@
    "id": "data-source-sites",
    "title": "Websites our records cite",
    "description": "Every website cited by the records behind BayCounty.me, per topic, with how many distinct documents and pages from it the data links to. Counted from the data files at each build.",
-   "rows": 384,
+   "rows": 402,
    "columns": [
     {
      "name": "website",
@@ -7563,6 +7570,7 @@
       "Road projects",
       "Sales tax projects",
       "Tourist tax",
+      "Utilities and trash day",
       "Votes"
      ]
     },
@@ -7595,6 +7603,7 @@
       "salaries",
       "sales-tax",
       "tourist-tax",
+      "utilities",
       "votes"
      ]
     },
@@ -7619,7 +7628,7 @@
    "id": "site-menu",
    "title": "Site menu",
    "description": "Every link in the site's main menu, one row per link, in English and Spanish: the section and the question it answers, the link's place in the section, and the section's start-here page. place_id is the place the menu belongs to (fl-bay = Bay County), so a menu for another place sits beside it.",
-   "rows": 68,
+   "rows": 69,
    "columns": [
     {
      "name": "place_id",
@@ -13515,6 +13524,851 @@
    "json": "/downloads/job-boards.json",
    "csv": "/downloads/job-boards.csv",
    "api": "/api/v1/datasets/job-boards"
+  },
+  {
+   "id": "utility-providers",
+   "title": "Utilities: who provides each service",
+   "description": "Who provides water, sewer, electricity, natural gas, garbage, yard waste, recycling and internet in each part of the county (area: a city, unincorporated, or all for countywide providers): the provider, what kind of provider it is, whether it covers all, most or some of the area, its phone number, website and outage page, and notes on how the service works. entity_id is the provider's profile (entity-profiles) where there is one. /api/v1/utilities?lat=&lon= picks the rows for one address.",
+   "rows": 40,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "area",
+     "type": "string",
+     "values": [
+      "all",
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "sp"
+     ]
+    },
+    {
+     "name": "area_name",
+     "type": "string",
+     "values": [
+      "All of Bay County",
+      "Callaway",
+      "Lynn Haven",
+      "Mexico Beach",
+      "Panama City",
+      "Panama City Beach",
+      "Parker",
+      "Springfield",
+      "Unincorporated Bay County"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "sp"
+     ]
+    },
+    {
+     "name": "service",
+     "type": "string",
+     "values": [
+      "bulk",
+      "electric",
+      "garbage",
+      "gas",
+      "internet",
+      "recycling",
+      "sewer",
+      "water",
+      "yard_waste"
+     ]
+    },
+    {
+     "name": "service_label",
+     "type": "string",
+     "values": [
+      "Bulk pickup",
+      "Electricity",
+      "Garbage",
+      "Internet",
+      "Natural gas",
+      "Recycling",
+      "Sewer",
+      "Water",
+      "Yard waste and bulk trash"
+     ]
+    },
+    {
+     "name": "provider",
+     "type": "string",
+     "values": [
+      "A private hauler (Bargain Sanitation serves Callaway)",
+      "A private hauler you choose",
+      "Bay County Utility Services",
+      "City of Callaway Public Works",
+      "City of Callaway Utility Billing",
+      "City of Lynn Haven Sanitation",
+      "City of Lynn Haven Utilities",
+      "City of Mexico Beach",
+      "City of Mexico Beach Sanitation",
+      "City of Panama City Beach Street Division",
+      "City of Panama City Beach Utilities",
+      "City of Panama City Environmental Services",
+      "City of Panama City Utilities",
+      "City of Parker Public Works",
+      "City of Parker Utilities",
+      "City of Springfield Utility Billing",
+      "Florida Power & Light (FPL)",
+      "Gulf Coast Electric Cooperative",
+      "No county pickup",
+      "No public recycling program",
+      "Peoples Gas",
+      "Private internet providers",
+      "Waste Pro (under contract with the City of Springfield)"
+     ]
+    },
+    {
+     "name": "entity_id",
+     "type": "string",
+     "values": [
+      "gov:county",
+      "gov:cw",
+      "gov:lh",
+      "gov:mb",
+      "gov:parker",
+      "gov:pc",
+      "gov:pcb",
+      "gov:sp",
+      "vendor:bargain-sanitation",
+      "vendor:fpl",
+      "vendor:gulf-coast-electric-cooperative",
+      "vendor:peoples-gas",
+      "vendor:waste-pro"
+     ]
+    },
+    {
+     "name": "entity_name",
+     "type": "string",
+     "values": [
+      "Bargain Sanitation",
+      "Gulf Coast Electric Cooperative",
+      "Peoples Gas"
+     ]
+    },
+    {
+     "name": "provider_kind",
+     "type": "string",
+     "values": [
+      "City service",
+      "City service ($14.50 a month)",
+      "City service, billed on the utility bill",
+      "City service, billed on the water bill",
+      "City utility",
+      "City utility (treatment bought from Bay County)",
+      "City utility (water and treatment from Bay County)",
+      "City utility (water bought wholesale from Bay County)",
+      "County utility",
+      "Investor-owned utility, regulated by the Florida Public Service Commission",
+      "Member-owned electric cooperative",
+      "Natural gas utility, regulated by the Florida Public Service Commission",
+      "Private companies (cable, fiber, wireless, satellite)",
+      "Private hauler",
+      "Private hauler under city contract",
+      "Private hauler under city contract, billed by the city",
+      "Private licensed haulers"
+     ]
+    },
+    {
+     "name": "coverage",
+     "type": "string",
+     "values": [
+      "all",
+      "most",
+      "some",
+      "varies"
+     ]
+    },
+    {
+     "name": "phone",
+     "type": "string",
+     "values": [
+      "(850) 233-5100",
+      "(850) 639-2216",
+      "(850) 871-0016",
+      "(850) 871-1033",
+      "(850) 871-4104",
+      "(850) 871-4104 ext. 1132",
+      "(850) 871-4949",
+      "(850) 872-1800",
+      "(850) 872-7570",
+      "(877) 832-6747",
+      "1-800-468-8243",
+      "850-236-2212",
+      "850-265-5989",
+      "850-648-5700",
+      "850-871-1033",
+      "850-872-3166",
+      "850-872-3172"
+     ]
+    },
+    {
+     "name": "website",
+     "type": "string",
+     "values": [
+      "https://broadbandmap.fcc.gov/home",
+      "https://mexicobeachfl.gov/?p=119",
+      "https://mexicobeachfl.gov/residents/public-works-department/",
+      "https://www.baycountyfl.gov/728/Recycling-in-Bay-County",
+      "https://www.baycountyfl.gov/DocumentCenter/View/17301/Solid-Waste-Disposal-Guide-Pamphlet-2025-updated-4-9-25",
+      "https://www.baycountyfl.gov/DocumentCenter/View/19009/Solid-Waste-Haulers---Bay-County-updated-11-12-25",
+      "https://www.baycountyfl.gov/m/directory/department?did=19",
+      "https://www.cityofcallaway.com/102/Rates",
+      "https://www.cityofcallaway.com/84/Solid-Waste-Division",
+      "https://www.cityoflynnhaven.gov/",
+      "https://www.cityoflynnhaven.gov/174/Garbage-Trash",
+      "https://www.cityofparker.com/",
+      "https://www.cityofparker.com/departments/public-works/bulk-trash/",
+      "https://www.fpl.com/",
+      "https://www.gcec.com/",
+      "https://www.panamacity.gov/141/Utilities-Division",
+      "https://www.panamacity.gov/154/Environmental-Services-Division-Solid-Wa",
+      "https://www.pcbfl.gov/",
+      "https://www.pcbfl.gov/403/Yard-Debris",
+      "https://www.pcbfl.gov/405/Bulk-Waste-Pilot-Program",
+      "https://www.peoplesgas.com/",
+      "https://www.springfieldfl.net/publicworks/page/new-utility-service",
+      "https://www.springfieldfl.net/publicworks/page/sanitation-service-information"
+     ]
+    },
+    {
+     "name": "outage_url",
+     "type": "string",
+     "values": [
+      "https://www.fpl.com/outage.html",
+      "https://www.gcec.com/",
+      "https://www.peoplesgas.com/company/ournaturalgassystem/naturalgasoutages/"
+     ]
+    },
+    {
+     "name": "notes",
+     "type": "string"
+    },
+    {
+     "name": "as_of",
+     "type": "string",
+     "values": [
+      "2026-10-27"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://broadbandmap.fcc.gov/home",
+      "https://cityoflynnhaven.com/DocumentCenter/View/4411",
+      "https://cityofparker.com/wp-content/uploads/filr/6076/Ordinance-2025-425.pdf",
+      "https://floridapsc.com/library/filings/2025/04200-2025/04200-2025.pdf",
+      "https://mexicobeachfl.gov/?p=119",
+      "https://mexicobeachfl.gov/uploads/2026/04/SANITATION-PAMPHLET-Edited-AutoRecovered_ada.pdf",
+      "https://www.baycountyfl.gov/728/Recycling-in-Bay-County",
+      "https://www.baycountyfl.gov/DocumentCenter/View/16599/Utilities-FY-25-Fees-and-Fines",
+      "https://www.baycountyfl.gov/DocumentCenter/View/17301/Solid-Waste-Disposal-Guide-Pamphlet-2025-updated-4-9-25",
+      "https://www.baycountyfl.gov/DocumentCenter/View/19009/Solid-Waste-Haulers---Bay-County-updated-11-12-25",
+      "https://www.cityofcallaway.com/102/Rates",
+      "https://www.cityofcallaway.com/215/Trash-Yard-Waste-Information-PDF",
+      "https://www.cityoflynnhaven.gov/174/Garbage-Trash",
+      "https://www.cityofparker.com/departments/public-works/bulk-trash/",
+      "https://www.floridapsc.com/pscfiles/website-files/PDF/Utilities/Electricgas/EnergyInfrastructureStormHardening/UtilityFilings/2024/Rural%20Electric%20Cooperative%20Utility%20Storm%20Hardening%20Reports/Gulf%20Coast%20Electric%20Cooperative.pdf",
+      "https://www.panamacity.gov/141/Utilities-Division",
+      "https://www.panamacity.gov/154/Environmental-Services-Division-Solid-Wa",
+      "https://www.pcbfl.gov/403/Yard-Debris",
+      "https://www.pcbfl.gov/405/Bulk-Waste-Pilot-Program",
+      "https://www.pcbfl.gov/DocumentCenter/View/3907/CityRateSheet-2026",
+      "https://www.peoplesgas.com/48ccab/siteassets/files/tariffpgs/tariffsection62.pdf",
+      "https://www.springfieldfl.net/publicworks/page/sanitation-service-information",
+      "https://www.springfieldfl.net/publicworks/page/utility-billing-rates"
+     ]
+    }
+   ],
+   "json": "/downloads/utility-providers.json",
+   "csv": "/downloads/utility-providers.csv",
+   "api": "/api/v1/datasets/utility-providers"
+  },
+  {
+   "id": "utility-rates",
+   "title": "Utilities: rates",
+   "description": "Monthly charges set by each public utility, one row per charge: water and sewer base and usage charges (inside and outside the city, senior rates, meter sizes), garbage and stormwater on the city bill, franchise fees and utility taxes, landfill fees, and a typical monthly bill at 5,000 gallons with its arithmetic in notes. effective says which rate schedule the row comes from.",
+   "rows": 73,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "area",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "sp"
+     ]
+    },
+    {
+     "name": "area_name",
+     "type": "string",
+     "values": [
+      "Callaway",
+      "Lynn Haven",
+      "Mexico Beach",
+      "Panama City",
+      "Panama City Beach",
+      "Parker",
+      "Springfield",
+      "Unincorporated Bay County"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "sp"
+     ]
+    },
+    {
+     "name": "provider",
+     "type": "string",
+     "values": [
+      "Bay County Solid Waste",
+      "Bay County Utility Services (retail)",
+      "City of Callaway Utility Billing (water/sewer purchased wholesale from Bay County)",
+      "City of Lynn Haven Sanitation",
+      "City of Lynn Haven Utilities",
+      "City of Mexico Beach (water/wastewater supplied by Bay County; city bills)",
+      "City of Mexico Beach Sanitation",
+      "City of Panama City Beach Utilities",
+      "City of Panama City Utilities (water, wastewater, garbage)",
+      "City of Parker Public Works",
+      "City of Parker Utilities",
+      "City of Springfield Public Works / Utility Billing"
+     ]
+    },
+    {
+     "name": "service",
+     "type": "string",
+     "values": [
+      "bill",
+      "garbage",
+      "sewer",
+      "stormwater",
+      "water",
+      "yard_waste"
+     ]
+    },
+    {
+     "name": "service_label",
+     "type": "string",
+     "values": [
+      "Garbage",
+      "Sewer",
+      "Stormwater",
+      "Water",
+      "Whole bill",
+      "Yard waste and bulk trash"
+     ]
+    },
+    {
+     "name": "charge",
+     "type": "string",
+     "values": [
+      "Availability charge (not connected)",
+      "Base charge",
+      "Base charge (first 4,000 gallons)",
+      "Base charge (includes 6,000 gallons)",
+      "Bulk debris pickup fee",
+      "Extra garbage cart",
+      "Extra pickup",
+      "Franchise fee",
+      "Garbage",
+      "Household garbage or trash, Bayline Drive drop-off",
+      "Household garbage, Steelfield Road Landfill",
+      "Sewer-only flat charge",
+      "Solid waste (city trash and yard pickup)",
+      "Stormwater",
+      "Typical monthly bill at 5,000 gallons",
+      "Usage",
+      "Usage above 4,000 gallons",
+      "Usage above 6,000 gallons",
+      "Usage, 0-3,000 gallons",
+      "Usage, 3,001-6,000 gallons",
+      "Usage, 6,001-9,000 gallons",
+      "Usage, above 9,000 gallons",
+      "Utility tax",
+      "Yard debris, Steelfield Road Landfill"
+     ]
+    },
+    {
+     "name": "amount",
+     "type": "number"
+    },
+    {
+     "name": "unit",
+     "type": "string",
+     "values": [
+      "10% of water bill",
+      "7% of water",
+      "per 1,000 gallons",
+      "per can",
+      "per load",
+      "per month",
+      "per ton ($5 minimum)"
+     ]
+    },
+    {
+     "name": "applies_to",
+     "type": "string",
+     "values": [
+      "1-inch meter",
+      "3/4-inch meter",
+      "5/8 or 3/4-inch meter",
+      "Added to the water bill",
+      "All water used",
+      "Bay County residents, small loads",
+      "Each extra cart",
+      "Inside the city",
+      "Lots where sewer is available",
+      "Outside the city",
+      "Residential",
+      "Residential and commercial",
+      "Residential, all city charges on the bill",
+      "Seniors 65 and older",
+      "Sewer customers without county water",
+      "Single-family home"
+     ]
+    },
+    {
+     "name": "effective",
+     "type": "string",
+     "values": [
+      "Current (city page, 2026)",
+      "FY2025-26 rates as printed in budget approved Sept 23, 2025 (FY2026-27 budget exists but could not be downloaded; rates may have changed Oct 1, 2026)",
+      "February 1, 2026",
+      "Fee schedule header 'Effective April 21, 2026'; uses the '2026' column (prior '2025' column took effect Jan 1, 2025)",
+      "January 1, 2025 (good through December 31, 2025)",
+      "Not stated ('current monthly rates', page retrieved 2026-10-20); council raised water 2.6% and sewer 4% on Oct 28, 2025",
+      "Not stated on page (retrieved 2026-10-20)",
+      "October 1, 2025",
+      "October 2026 usage (first bills week of Nov 2, 2026)",
+      "Ordinance 2025-425 (April 15, 2025); rises 3% each October 1",
+      "Ordinance 881, effective February 10, 2026"
+     ]
+    },
+    {
+     "name": "notes",
+     "type": "string",
+     "values": [
+      "14.09 + 32.29 + 45.91 + 5 x 6.28 + 5 x 11.90 = 92.29 + 31.40 + 59.50 = 183.19 The city's FAQ says the average residential bill becomes 'approximately $92.29', which equals the three base charges alone - so usage may include an allowance not described in the notice. Treat the 5,000-gallon figure as provisional until the rate ordinance is checked.",
+      "16.85 + 16.95 + 24.86 = 58.66 base; + 5 x (4.05 + 10.17) = 71.10; total = 129.76 (matches budget's own table: 5,000 gal - $129.76). Water+sewer only = 104.90",
+      "2 pickups per week",
+      "5,000 gal is within the 6,000-gal minimum: water 37.54 + sewer 49.88 = 87.42 (rate sheet also shows combined 0-6,000 gal water+sewer = 87.42) Sheet says billing is bi-monthly on even months while headings say 'monthly ... per unit'; figure is per month as labeled.",
+      "Base 8.95 + 30.43 + 37.67 + 3.00 = 80.05 (city's stated total base); + 5 x (5.13 + 14.90) = 100.15; total = 180.20",
+      "Water 11.37 + 5 x 5.32 = 37.97; franchise fee 10% = 3.80; Sewer 30.69 + 5 x 6.13 = 61.34; Stormwater 1.00; Solid waste 13.00; Total = 117.11 The city's rates page mislabels its headings (outside-city base rates appear under 'per 1,000 gallons'); figures were matched by the stated 25% outside surcharge (11.37 x 1.25 = 14.21; 30.69 x 1.25 = 38.36; 5.32 x 1.25 = 6.65; 6.13 x 1.25 = 7.66). FY2027 budget assumes consumption rates rise $0.05 (water) and $0.15 (sewer) to cover county increases, which may not yet be on the page.",
+      "Water 40.83 + 1 x 3.68 = 44.51; utility tax 7% = 3.12; Sewer 55.07 + 1 x 5.20 = 60.27; Sanitation 40.00; Total = 147.90 (city's stated minimum bill is $138.76)",
+      "Water: 21.10 + 3 x 2.60 + 2 x 2.90 = 34.70; Sewer: 37.00 + 5 x 9.80 = 86.00; Total = 120.70 (3/4-inch meter, 2026 column; assumes wastewater volume charge on all metered water)"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://cityoflynnhaven.com/DocumentCenter/View/4411",
+      "https://cityofparker.com/wp-content/uploads/filr/6076/Ordinance-2025-425.pdf",
+      "https://mexicobeachfl.gov/residents/utilities-payments/",
+      "https://mexicobeachfl.gov/uploads/2026/04/SANITATION-PAMPHLET-Edited-AutoRecovered_ada.pdf",
+      "https://www.baycountyfl.gov/DocumentCenter/View/16599/Utilities-FY-25-Fees-and-Fines",
+      "https://www.baycountyfl.gov/DocumentCenter/View/17301/Solid-Waste-Disposal-Guide-Pamphlet-2025-updated-4-9-25",
+      "https://www.cityofcallaway.com/102/Rates",
+      "https://www.cityoflynnhaven.gov/174/Garbage-Trash",
+      "https://www.cityofparker.com/departments/public-works/bulk-trash/",
+      "https://www.panamacity.gov/DocumentCenter/View/12312",
+      "https://www.pcbfl.gov/DocumentCenter/View/3907/CityRateSheet-2026",
+      "https://www.springfieldfl.net/publicworks/page/utility-billing-rates"
+     ]
+    }
+   ],
+   "json": "/downloads/utility-rates.json",
+   "csv": "/downloads/utility-rates.csv",
+   "api": "/api/v1/datasets/utility-rates"
+  },
+  {
+   "id": "trash-pickup",
+   "title": "Trash pickup: routes and days",
+   "description": "Garbage, yard waste and bulk pickup in each city: one row per route with its usual pickup days, or the rule where a city has no route map (for example a private hauler sets the day). lookup_layer is the public map layer that holds the routes, zone_field the route field and day_field the day field; /api/v1/utilities?lat=&lon= reads them at an address. zone_area describes a route in words where there is no map.",
+   "rows": 48,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "area",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "sp"
+     ]
+    },
+    {
+     "name": "area_name",
+     "type": "string",
+     "values": [
+      "Callaway",
+      "Lynn Haven",
+      "Mexico Beach",
+      "Panama City",
+      "Panama City Beach",
+      "Parker",
+      "Springfield",
+      "Unincorporated Bay County"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "county",
+      "cw",
+      "lh",
+      "mb",
+      "parker",
+      "pc",
+      "pcb",
+      "sp"
+     ]
+    },
+    {
+     "name": "service",
+     "type": "string",
+     "values": [
+      "bulk",
+      "garbage",
+      "yard_waste"
+     ]
+    },
+    {
+     "name": "service_label",
+     "type": "string",
+     "values": [
+      "Bulk pickup",
+      "Garbage",
+      "Yard waste and bulk trash"
+     ]
+    },
+    {
+     "name": "provider",
+     "type": "string",
+     "values": [
+      "City of Callaway",
+      "City of Lynn Haven",
+      "City of Mexico Beach",
+      "City of Panama City",
+      "City of Panama City Beach",
+      "City of Parker",
+      "Waste Pro",
+      "Your private hauler"
+     ]
+    },
+    {
+     "name": "zone",
+     "type": "string"
+    },
+    {
+     "name": "pickup_days",
+     "type": "string",
+     "values": [
+      "April 13 and September 14, 2026",
+      "April 20 and September 21, 2026",
+      "Friday",
+      "Monday",
+      "Monday, Thursday",
+      "Thursday",
+      "Tuesday",
+      "Tuesday, Friday",
+      "Wednesday"
+     ]
+    },
+    {
+     "name": "zone_area",
+     "type": "string",
+     "values": [
+      "15th Street to Highway 386",
+      "Nautilus Street east to the city limits",
+      "Nautilus Street west to the city limits",
+      "Salt Creek to 15th Street, and the south side of Florida Avenue"
+     ]
+    },
+    {
+     "name": "rule",
+     "type": "string",
+     "values": [
+      "Call Waste Pro at (850) 872-1800 for your day. Bulk items usually go the same day.",
+      "No county pickup. Your hauler sets the day.",
+      "Once a week; the day is on the city's yard waste map and can shift with volume.",
+      "Your hauler sets the day (Bargain Sanitation: 850-871-0016).",
+      "Your hauler sets the day."
+     ]
+    },
+    {
+     "name": "lookup_layer",
+     "type": "string",
+     "values": [
+      "https://gis.baycountyfl.gov/arcgis/rest/services/Callaway/CallawayMain/MapServer/31",
+      "https://gis.baycountyfl.gov/arcgis/rest/services/LynnHaven/TrashGarbageRoutes/MapServer/3",
+      "https://gis.baycountyfl.gov/arcgis/rest/services/LynnHaven/TrashGarbageRoutes/MapServer/4",
+      "https://gis.baycountyfl.gov/arcgis/rest/services/Parker/Parker/MapServer/27",
+      "https://services3.arcgis.com/RfAh242jlP6Nb5vP/arcgis/rest/services/Residential_Garbage___ASL_Day_of_Week/FeatureServer/1"
+     ]
+    },
+    {
+     "name": "zone_field",
+     "type": "string",
+     "values": [
+      "PickupDay",
+      "ROUTE_NO",
+      "Route",
+      "Zone"
+     ]
+    },
+    {
+     "name": "day_field",
+     "type": "string",
+     "values": [
+      "DAY_OF_WEE",
+      "Day",
+      "PickupDay",
+      "ServDay"
+     ]
+    },
+    {
+     "name": "notes",
+     "type": "string",
+     "values": [
+      "A few addresses on routes 14 and 15 get one pickup a week; the map gives the day.",
+      "Lynn Haven calls this \"trash\": yard trash and limbs.",
+      "Twice a year; 2027 dates not posted yet.",
+      "Yard debris and bulk items.",
+      "Yard waste, bulk items and trash too big for a can."
+     ]
+    },
+    {
+     "name": "as_of",
+     "type": "string",
+     "values": [
+      "2026-10-27"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://experience.arcgis.com/experience/a0babd167a42451b9cc21acce58ac15d/",
+      "https://gis.baycountyfl.gov/arcgis/rest/services/Callaway/CallawayMain/MapServer/31",
+      "https://gis.baycountyfl.gov/arcgis/rest/services/LynnHaven/TrashGarbageRoutes/MapServer",
+      "https://mexicobeachfl.gov/uploads/2026/04/SANITATION-PAMPHLET-Edited-AutoRecovered_ada.pdf",
+      "https://www.baycountyfl.gov/DocumentCenter/View/19009/Solid-Waste-Haulers---Bay-County-updated-11-12-25",
+      "https://www.cityofparker.com/departments/public-works/bulk-trash/",
+      "https://www.panamacity.gov/154/Environmental-Services-Division-Solid-Wa",
+      "https://www.pcbfl.gov/405/Bulk-Waste-Pilot-Program",
+      "https://www.springfieldfl.net/publicworks/page/sanitation-service-information"
+     ]
+    }
+   ],
+   "json": "/downloads/trash-pickup.json",
+   "csv": "/downloads/trash-pickup.csv",
+   "api": "/api/v1/datasets/trash-pickup"
+  },
+  {
+   "id": "trash-holidays",
+   "title": "Trash pickup: holiday changes",
+   "description": "How each city's garbage and yard waste pickup changes on holidays, as the city or its hauler publishes it: the holiday, when it falls, and what happens to garbage and yard waste pickup.",
+   "rows": 20,
+   "columns": [
+    {
+     "name": "place_id",
+     "type": "string",
+     "values": [
+      "fl-bay"
+     ]
+    },
+    {
+     "name": "area",
+     "type": "string",
+     "values": [
+      "lh",
+      "mb",
+      "pc",
+      "sp"
+     ]
+    },
+    {
+     "name": "area_name",
+     "type": "string",
+     "values": [
+      "Lynn Haven",
+      "Mexico Beach",
+      "Panama City",
+      "Springfield"
+     ]
+    },
+    {
+     "name": "gov_id",
+     "type": "string",
+     "values": [
+      "lh",
+      "mb",
+      "pc",
+      "sp"
+     ]
+    },
+    {
+     "name": "provider",
+     "type": "string",
+     "values": [
+      "City of Lynn Haven",
+      "City of Mexico Beach",
+      "City of Panama City",
+      "Waste Pro"
+     ]
+    },
+    {
+     "name": "holiday",
+     "type": "string",
+     "values": [
+      "Christmas Day",
+      "Christmas Eve",
+      "Day after Thanksgiving",
+      "Good Friday",
+      "Holiday weeks",
+      "Independence Day",
+      "Independence Day, Thanksgiving, Christmas, New Year's Day",
+      "Juneteenth",
+      "Labor Day",
+      "Martin Luther King Jr. Day",
+      "Memorial Day",
+      "Missed holiday pickups",
+      "New Year's Day",
+      "Other city holidays",
+      "Presidents' Day",
+      "Thanksgiving Day",
+      "Veterans Day"
+     ]
+    },
+    {
+     "name": "when_observed",
+     "type": "string",
+     "values": [
+      "1st Monday in September",
+      "3rd Monday in February",
+      "3rd Monday in January",
+      "4th Thursday in November",
+      "Any city-observed holiday",
+      "Any holiday above",
+      "December 24",
+      "December 25",
+      "Friday after Thanksgiving",
+      "Friday before Easter",
+      "January 1",
+      "July 4",
+      "June 19",
+      "Last Monday in May",
+      "November 11",
+      "Some holiday weeks",
+      "When the holiday falls on a weekday"
+     ]
+    },
+    {
+     "name": "garbage",
+     "type": "string",
+     "values": [
+      "Call Sanitation, 850-265-5989",
+      "Moved to the Saturday after",
+      "No pickup",
+      "No pickup; in 2025 Thursday's route moved to Saturday, December 27",
+      "No pickup; in 2026 Thursday's route moved to Saturday, January 3",
+      "Normal",
+      "Picked up on your next scheduled day, unless the city says otherwise",
+      "Picked up the next day, and the rest of the week moves one day later (for example Friday moves to Saturday)",
+      "Pickup days change; see the city's holiday schedule"
+     ]
+    },
+    {
+     "name": "yard_waste",
+     "type": "string",
+     "values": [
+      "No pickup",
+      "Picked up on your next scheduled day",
+      "Same as garbage",
+      "See the city's holiday schedule"
+     ]
+    },
+    {
+     "name": "as_of",
+     "type": "string",
+     "values": [
+      "2026-10-27"
+     ]
+    },
+    {
+     "name": "source_url",
+     "type": "string",
+     "values": [
+      "https://mexicobeachfl.gov/uploads/2025/12/2026-sanitation-schedule.pdf",
+      "https://www.cityoflynnhaven.gov/174/Garbage-Trash",
+      "https://www.panamacity.gov/154/Environmental-Services-Division-Solid-Wa",
+      "https://www.springfieldfl.net/publicworks/page/sanitation-service-information"
+     ]
+    }
+   ],
+   "json": "/downloads/trash-holidays.json",
+   "csv": "/downloads/trash-holidays.csv",
+   "api": "/api/v1/datasets/trash-holidays"
   },
   {
    "id": "tax-districts",

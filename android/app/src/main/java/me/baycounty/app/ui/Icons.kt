@@ -43,6 +43,10 @@ fun icon(symbol: String?): ImageVector = when (symbol) {
     "graduationcap" -> Icons.Outlined.School
     "star" -> Icons.Outlined.StarOutline
     "xmark.circle" -> Icons.Outlined.HighlightOff
+    "bolt" -> Icons.Outlined.Bolt
+    "phone" -> Icons.Outlined.Phone
+    "drop" -> Icons.Outlined.WaterDrop
+    "trash" -> Icons.Outlined.Delete
     "sun.max" -> Icons.Outlined.WbSunny
     "repeat" -> Icons.Outlined.Repeat
     "building.columns" -> Icons.Outlined.AccountBalance

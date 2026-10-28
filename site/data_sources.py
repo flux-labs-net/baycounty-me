@@ -99,6 +99,9 @@ TOPICS = [
     ('roads', 'Road projects', '/roads',
      "State road contracts and FDOT's adopted five-year work program are read every week from FDOT's public map services, filtered to the county. County and city road work comes from the half-cent sales tax project map.",
      'One row per contract (FDOT lists each road segment separately). A contract counts as under way only when FDOT flags it active. Contractors are joined to local vendors by name.'),
+    ('utilities', 'Utilities and trash day', '/utilities',
+     "Providers, pickup rules, holiday schedules and rates are copied by hand from each city's and the county's utility and sanitation pages, rate ordinances and Public Service Commission filings. Pickup routes and the electric co-op territory are read live from public map layers for each lookup; the address isn't kept.",
+     'Each provider row links its source page. The live lookup is checked against known addresses in every city with a route map (Panama City, Lynn Haven, Callaway, Parker).'),
     ('cra', 'Redevelopment agencies (CRAs)', '/public-money/cra-spending',
      'CRA spending is read from CRA annual reports, agendas, budgets and audits, one ledger line per payment or project. '
      'Tax increment comes from CRA reports, audits and budgets, split between the county and city by millage.',
@@ -246,6 +249,11 @@ src('emergency', 'county-wide', 'Bay County Emergency Shelters page', 'https://w
 src('emergency', 'county-wide', 'Bay County GIS evacuation zones and address points', 'https://gis.baycountyfl.gov/arcgis/rest/services/Admin_A12/MapServer/80', AUTO_DAILY, 'Daily (zones); live (address lookups)', 'Zone A to D shapes; address points to place shelters and look up an address')
 src('emergency', 'state', 'OpenFEMA disaster declarations, housing assistance and flood insurance claims', 'https://www.fema.gov/about/openfema/data-sets', AUTO_WEEKLY, 'Weekly', 'Declarations since 2016; FEMA housing aid and NFIP claims paid, totals per ZIP code')
 src('emergency', 'county-wide', 'Bay County Disaster Preparedness Guide, Ready.gov, CDC and NWS safety pages', 'https://www.baycountyfl.gov/DocumentCenter/View/5659/BayCo-DisasterPreparednessGuide_v10_FINAL-web2', BY_HAND, 'Each season', 'Hurricane prep, sandbag and generator safety steps, summarized with a link to each source')
+src('utilities', 'county', 'Bay County utility services and solid waste haulers list', 'https://www.baycountyfl.gov/DocumentCenter/View/19009/Solid-Waste-Haulers---Bay-County-updated-11-12-25', BY_HAND, 'As the county updates it', 'Licensed private garbage haulers and county water and sewer service')
+src('utilities', 'county', 'City utility and sanitation pages and rate ordinances (all seven cities)', 'https://www.panamacity.gov/154/Environmental-Services-Division-Solid-Wa', BY_HAND, 'Yearly, with new rates', 'Who provides water, sewer and garbage in each city, pickup rules, holiday schedules and rates')
+src('utilities', 'county', 'City route maps (Panama City, Lynn Haven, Callaway, Parker)', 'https://gis.baycountyfl.gov/arcgis/rest/services/LynnHaven/TrashGarbageRoutes/MapServer', LIVE, 'Each lookup', 'Garbage and yard waste route and pickup day at a point')
+src('utilities', 'county', 'Bay County city limits map', 'https://gis.baycountyfl.gov/arcgis/rest/services/BayView/BayView/MapServer/6', LIVE, 'Each lookup', 'Which city an address is in')
+src('utilities', 'county', 'Electric service territories (Pacific Northwest National Laboratory)', 'https://eedgis.pnnl.gov/arcgis/rest/services/Hosted/Electric_Service_Territories/FeatureServer/0', LIVE, 'Each lookup', 'Whether Gulf Coast Electric Cooperative serves a point')
 src('chambers', 'county', 'Bay County Chamber of Commerce website (board, staff and programs)', 'https://panamacity.org/board-of-directors/', BY_HAND, 'As boards change', 'Board, staff and past chairs since 2016 by name, title and organization; regular programs')
 src('chambers', 'county', 'Panama City Beach Chamber of Commerce website (board, staff and programs)', 'https://pcbeach.org/board-of-directors/', BY_HAND, 'As boards change', 'Board and staff by name, title and organization; regular programs')
 src('chambers', 'county', 'Panama City Beach Chamber events calendar feed', 'https://pcbeach.org/local-events/', AUTO_DAILY, 'Daily', 'Upcoming chamber and community events: title, time, venue and link')
@@ -339,7 +347,7 @@ FOLDER_TOPIC = {
     'agendas': 'meetings', 'meetings': 'meetings', 'votes': 'votes', 'contracts': 'contracts', 'budgets': 'budgets',
     'debt_audit': 'audits', 'money': 'audits', 'tax': 'property-tax', 'amendment3': 'property-tax', 'exemptions': 'property-tax',
     'salaries': 'salaries', 'campaign': 'campaign', 'elections': 'elections', 'sunbiz': 'businesses', 'careers': 'businesses',
-    'nonprofits': 'nonprofits', 'chambers': 'chambers', 'events': 'events', 'outdoors': 'outdoors', 'development': 'development', 'roads': 'roads', 'emergency': 'emergency', 'notices': 'notices', 'jobs': 'jobs', 'cra': 'cra', 'merged.json': 'cra', 'michael': 'michael', 'surtax': 'sales-tax',
+    'nonprofits': 'nonprofits', 'chambers': 'chambers', 'events': 'events', 'outdoors': 'outdoors', 'development': 'development', 'roads': 'roads', 'emergency': 'emergency', 'notices': 'notices', 'jobs': 'jobs', 'utilities': 'utilities', 'cra': 'cra', 'merged.json': 'cra', 'michael': 'michael', 'surtax': 'sales-tax',
     'tourism': 'tourist-tax', 'fees': 'fees', 'nearby': 'address', 'civic': 'records', 'projects': 'contracts',
 }
 SKIP_HOSTS = {'baycounty.me', 'www.baycounty.me', 'aptg.co'}
