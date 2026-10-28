@@ -121,7 +121,7 @@
    "id": "votes",
    "title": "Recorded votes",
    "description": "Votes by the County Commission, School Board, city commissions and CRA boards since 2016, with how each member voted: hand-researched money votes plus every motion read from the official minutes.",
-   "rows": 9788,
+   "rows": 11563,
    "columns": [
     {
      "name": "date",
@@ -214,37 +214,7 @@
     },
     {
      "name": "tally",
-     "type": "string",
-     "values": [
-      "0-0",
-      "0-1",
-      "0-2",
-      "0-3",
-      "0-5",
-      "1-0",
-      "1-2",
-      "1-4",
-      "2-0",
-      "2-2",
-      "2-3",
-      "3-0",
-      "3-1",
-      "3-2",
-      "3-2 (failed)",
-      "4-0",
-      "4-0 (minutes: 'carried unanimously')",
-      "4-0 (unanimous)",
-      "4-1",
-      "5-0",
-      "5-0 (minutes: 'carried unanimously upon roll-call vote')",
-      "5-0 (minutes: 'carried unanimously')",
-      "5-0 (minutes: 'carried unanimously'; Mayor Henderson attended by phone)",
-      "6-0",
-      "five \"No's\" and zero \"Yes's\"",
-      "not found",
-      "unanimous",
-      "unanimous (per news; names not listed)"
-     ]
+     "type": "string"
     },
     {
      "name": "split",
@@ -371,7 +341,7 @@
    "id": "member-votes",
    "title": "Votes by member",
    "description": "One row per member per vote (long format), for tallying individual records.",
-   "rows": 47731,
+   "rows": 56387,
    "columns": [
     {
      "name": "date",
@@ -6523,7 +6493,7 @@
    "id": "owner-gifts",
    "title": "Campaign gifts from business owners",
    "description": "Personal gifts to local campaigns from people who run a registered Florida business, one row per person and campaign. A contributor filed as an individual is listed when the name and street address on the Supervisor of Elections filing are the same as an officer, manager or registered agent of a for-profit business on Sunbiz that was active around the gift; middle initials and Jr/Sr must agree, and protected voters are never matched. Other individual donors are never named. No addresses or occupations.",
-   "rows": 1114,
+   "rows": 1115,
    "columns": [
     {
      "name": "donor_id",
@@ -6645,7 +6615,7 @@
    "id": "entity-profiles",
    "title": "Profiles: people, companies and organizations",
    "description": "Every company, elected official, candidate, nonprofit, nonprofit board member, registered business, committee and government named in BayCounty.me records, one row each, with its profile page and how many documented connections it has. entity_id (kind:key) joins entity-connections. Board members are named as their nonprofits' public filings list them; individual campaign donors are included only when they run a registered business (owner-gifts).",
-   "rows": 16660,
+   "rows": 16661,
    "columns": [
     {
      "name": "entity_id",
@@ -6762,7 +6732,7 @@
    "id": "entity-connections",
    "title": "Connections between people, companies and organizations",
    "description": "Every documented connection between two entities in entity-profiles, totalled per pair and kind: a government paid a payee, an organization gave to an official's or candidate's campaign, an official voted on a company's contracts, a person sits on a nonprofit's board or runs a business, a nonprofit gave a grant, two payees share a project. Each row has its source. Individual campaign donors are included only when they run a registered business (owner-gifts); officials' board seats and businesses are added by the API once checked by hand.",
-   "rows": 20138,
+   "rows": 20140,
    "columns": [
     {
      "name": "link_id",
@@ -8581,7 +8551,7 @@
    "id": "chamber-events",
    "title": "Chambers of commerce: events and programs",
    "description": "Upcoming events from each chamber's public calendar (kind event: title, start and end in local time, venue and city, category, the event's own link) and each chamber's yearly and monthly signature programs (kind program: schedule and what it is). chamber_event is false for community events a chamber lists on its calendar. Refreshed daily where the calendar has a public feed.",
-   "rows": 58,
+   "rows": 59,
    "columns": [
     {
      "name": "place_id",
@@ -8683,39 +8653,7 @@
     },
     {
      "name": "venue",
-     "type": "string",
-     "values": [
-      "Aaron Bessant Park",
-      "Anchorage Children’s Home",
-      "Bay Point Golf Club",
-      "Captain Anderson’s Event Center",
-      "Dave & Buster’s",
-      "Dolly Parton’s Pirates Voyage Dinner & Show",
-      "Edgewater Beach & Golf Resort",
-      "Embassy Suites Panama City Beach, VUE55 (Rooftop)",
-      "Frank Brown Park",
-      "Frank Brown Park Recreation Center",
-      "Gulf Coast State College",
-      "Gulf Coast State College, Student Union East",
-      "Hammerhead Fred’s",
-      "Historic St. Andrews",
-      "LaCo",
-      "McGuire’s Irish Pub",
-      "National Peanut Festival",
-      "PCB Wheel",
-      "Panama City Beach Senior Center",
-      "Panama City Marina",
-      "Panama Country Club",
-      "PeoplesSouth Bank",
-      "Pier Park",
-      "St. Andrews Baptist Church",
-      "Start/Finish Line located at Pier Park",
-      "SweetBay Community",
-      "The Barn at The Wicked Wheel",
-      "The Sapp House",
-      "Webinar",
-      "ZooWorld"
-     ]
+     "type": "string"
     },
     {
      "name": "city",
@@ -9489,7 +9427,7 @@
      "type": "string",
      "values": [
       "2026-10-27T16:01:00+00:00",
-      "2026-10-28T09:28:00+00:00"
+      "2026-10-28T15:35:00+00:00"
      ]
     },
     {
@@ -9497,10 +9435,10 @@
      "type": "string",
      "values": [
       "Friday",
+      "Rest Of Today",
       "Saturday",
       "Sunday",
-      "Thursday",
-      "Today"
+      "Thursday"
      ]
     },
     {
@@ -9551,14 +9489,15 @@
      "name": "water_temperature",
      "type": "string",
      "values": [
-      "75 degrees"
+      "74 degrees"
      ]
     },
     {
      "name": "weather",
      "type": "string",
      "values": [
-      "Mostly sunny"
+      "Mostly sunny",
+      "Sunny"
      ]
     },
     {
@@ -9604,7 +9543,7 @@
       "Jellyfish, stingrays or other marine life seen. Flies with another flag.",
       "Moderate rip current risk*. Surf height 1 foot or less. Mostly sunny. Highs around 80. East winds around 15 mph.",
       "Moderate surf and/or currents. Use caution.",
-      "Northeasterly offshore winds through Friday should maintain a moderate rip current risk. The exception may be Franklin County, if enough of a onshore component develops, so a high risk upgrade cannot be ruled out the next couple of days. Looking ahead to this weekend, a southeasterly component of swell develops, which may lead to a high risk across much of the gulf beaches.",
+      "Northeasterly offshore winds through Friday should maintain a moderate rip current risk. An onshore component has developed, so a high risk upgrade cannot be ruled out the next couple of days. After contacting local beach officials, Franklin County beaches are now under a Rip Current Statement for a high risk for rip currents. Looking ahead to this weekend, a southeasterly component of swell develops, which may lead to a high risk across much of the gulf beaches.",
       "Swimming and wading are against the law while double red flags fly (fines apply in Panama City Beach and unincorporated Bay County)."
      ]
     },
@@ -9628,7 +9567,7 @@
      "type": "string",
      "values": [
       "https://api.weather.gov/products/1d2175a9-2fbe-4f4b-b3ea-4e25852ce9a8",
-      "https://api.weather.gov/products/6a65d031-005b-4233-8791-6a06b466f47a",
+      "https://api.weather.gov/products/fd163354-6a2e-4e1a-af1b-ef3134c08607",
       "https://www.pcbfl.gov/174/Beach-Flags"
      ]
     },
@@ -12139,8 +12078,8 @@
       "Hurricane Response & Recovery",
       "Know Your Evacuation Zone",
       "Precautionary Boil Water Notice for Manistee Drive",
-      "Precautionary Boil Water Notice for Panama City some residents of Fairy Ave & Baker Court Updated on 2026-10-27",
       "Precautionary Boil Water Notice issued for Brandeis Ave, Stanford Rd, Huntingdon Rd, & Rutgers Dr. Updated on 2026-10-27",
+      "RESCINDED: Precautionary Boil Water Notice for Panama City some residents of Fairy Ave & Baker Court Updated on 2026-10-28",
       "Reuse System Offline Due to Repair",
       "Reuse System Temporarily Out of Service",
       "Road Closure Notice: Michigan Ave. between W 22nd St. and W 20th Ct.",
@@ -12160,8 +12099,8 @@
       "For the latest on Hurricane Isaias response and recovery, visit www.pcbfl.gov/storm",
       "Heavy rain is expected this weekend with Tropical Storm Isaias. Bay County has sand available to the public to help you protect your home and property. Find sandbag pickup locations and details below.",
       "Hurricane Isaias Emergency Information",
-      "Precautionary Boil Water Notice for Panama City residents of 901, 909, 910, 912, 915 Fairy Ave & 1408 Baker Court. Update: Water restored at 6:00 PM Monday evening, October 26, 2026.",
       "Precautionary Boil Water Notice issued for Brandeis Ave, Stanford Rd, Huntingdon Rd, & Rutgers Dr for Tues., Oct. 27 due to scheduled system upgrades. Update: Updated Maintenance Window: Water service will be interrupted starting at 11:00 a.m. Tuesday October 27, 2026, and ending at 7:00 p.m. Tuesday October 27 , 2026, due to scheduled system upgrades. A precautionary boil water notice will be in effect for this area once service is restored.",
+      "RESCINDED: Precautionary Boil Water Notice for Panama City residents of 901, 909, 910, 912, 915 Fairy Ave & 1408 Baker Court. Update: Precautionary Boil Water Notice RESCINDED for Panama City residents in the following areas: 901, 909, 910, 912, 915 Fairy Ave; 1408 Baker Ct The Monday October 26, 2026 , “Precautionary Boil Water Notice” is hereby rescinded following the satisfactory completion of the bacteriological survey showing that the water is safe to drink.",
       "ROAD CLOSURE NOTICE: Michigan Avenue – Road Work",
       "The City of Lynn Haven advises customers that the reuse water system is temporarily out of service as of Thursday, October 22, 2026, due to repair of a broken reuse water main.",
       "The City of Lynn Haven advises customers that the reuse water system is temporarily out of service as of Thursday, October 22, 2026, through November 1, 2026, due to repair of a broken reuse water main.",
@@ -12207,9 +12146,9 @@
       "2026-10-14T17:52:00.000Z",
       "2026-10-23T14:35:50.000Z",
       "2026-10-23T14:42:27.000Z",
-      "2026-10-27T14:16:07.000Z",
       "2026-10-27T19:08:06.000Z",
-      "2026-10-27T22:46:29.000Z"
+      "2026-10-27T22:46:29.000Z",
+      "2026-10-28T15:46:03.000Z"
      ]
     },
     {
@@ -12244,9 +12183,9 @@
       "2026-10-14T17:52:00.000Z",
       "2026-10-23T14:35:50.000Z",
       "2026-10-23T14:42:27.000Z",
-      "2026-10-27T14:16:07.000Z",
       "2026-10-27T19:08:06.000Z",
-      "2026-10-27T22:46:29.000Z"
+      "2026-10-27T22:46:29.000Z",
+      "2026-10-28T15:46:03.000Z"
      ]
     },
     {
@@ -12254,7 +12193,8 @@
      "type": "string",
      "values": [
       "active",
-      "ended"
+      "ended",
+      "lifted"
      ]
     },
     {
@@ -12278,7 +12218,8 @@
      "type": "string",
      "values": [
       "2026-10-27T20:41:53.613Z",
-      "2026-10-28T11:28:47.966Z"
+      "2026-10-28T14:45:01.081378+00:00",
+      "2026-10-28T17:05:59.410Z"
      ]
     },
     {
@@ -13304,7 +13245,7 @@
    "id": "public-notices",
    "title": "Public notices",
    "description": "Legal notices published by local governments and public agencies on the county's public notice website: bid and proposal requests, public hearings and ordinances, public meetings and other notices, with the government that posted it (gov_id, blank for agencies that are not one of the county's local governments), the date it was published, the first date it mentions after that (the meeting, hearing or bid due date) and the full text. Court, foreclosure, tax deed, probate and other private notices on the same site are left out. The site keeps 30 days; notices already on file stay as an archive. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 63,
+   "rows": 64,
    "columns": [
     {
      "name": "place_id",
@@ -13341,7 +13282,8 @@
       "2026-10-23",
       "2026-10-25",
       "2026-10-26",
-      "2026-10-27"
+      "2026-10-27",
+      "2026-10-28"
      ]
     },
     {
@@ -13421,6 +13363,7 @@
       "2026-11-06",
       "2026-11-09",
       "2026-11-10",
+      "2026-11-12",
       "2026-11-13",
       "2026-11-16",
       "2026-11-17",
@@ -13444,6 +13387,7 @@
      "name": "pdf_url",
      "type": "string",
      "values": [
+      "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/ECG5sGMiJfgXdDy25NLb/cb22./cropped-220.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/FWn1lKy0wNoqUYXUyBZS/d907./cropped-396.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/S7f3hpLR5JJ4lv2ZRpPU/1fcd./cropped-040.pdf",
       "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/XvEqLdNqllAzJJaTBax4/6569./cropped-028.pdf",
@@ -13493,7 +13437,7 @@
    "id": "job-openings",
    "title": "Government job openings",
    "description": "Open jobs posted by Bay County, Bay District Schools, the cities and the airport on their own job boards, read daily: title, department, job type, pay where posted, posting and closing dates and the link to apply. Jobs whose closing date has passed are left out. first_seen is the first day the job was on file. same_as is set on a row that repeats another (the same post listed twice; it names the row kept for it) and first_posted on a kept row that was posted more than once; pages and apps show the kept rows only.",
-   "rows": 111,
+   "rows": 110,
    "columns": [
     {
      "name": "place_id",
@@ -13588,7 +13532,6 @@
      "type": "string",
      "values": [
       "2026-07-13",
-      "2026-07-30",
       "2026-08-03",
       "2026-08-06",
       "2026-08-10",
@@ -13614,7 +13557,8 @@
       "2026-10-22",
       "2026-10-23",
       "2026-10-26",
-      "2026-10-27"
+      "2026-10-27",
+      "2026-10-28"
      ]
     },
     {
@@ -17891,7 +17835,8 @@
       "2026-08-09",
       "2026-08-13",
       "2026-09-10",
-      "2026-10-16"
+      "2026-10-16",
+      "2026-11-16"
      ]
     },
     {

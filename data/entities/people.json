@@ -1422,7 +1422,7 @@
      "role": "former city commissioner, Ward 1",
      "gov_id": "sp",
      "seat": "Ward 1",
-     "years": "2016–2023",
+     "years": "2016–2020",
      "source": "officeholders"
     }
    ]
@@ -2577,6 +2577,13 @@
      "year": 2020,
      "outcome": "won",
      "source": "campaign_history"
+    },
+    {
+     "role": "former city commissioner, Ward 1",
+     "gov_id": "sp",
+     "seat": "Ward 1",
+     "years": "2020–2023",
+     "source": "officeholders"
     }
    ]
   },

@@ -3,6 +3,32 @@
  "checked": "2026-10-28",
  "notices": [
   {
+   "notice_id": "alert:pc:701",
+   "place_id": "fl-bay",
+   "kind": "boil-water",
+   "source": "City of Panama City",
+   "source_type": "alert-center",
+   "gov_id": "pc",
+   "title": "RESCINDED: Precautionary Boil Water Notice for Panama City some residents of Fairy Ave & Baker Court Updated on 2026-10-28",
+   "summary": "RESCINDED: Precautionary Boil Water Notice for Panama City residents of 901, 909, 910, 912, 915 Fairy Ave & 1408 Baker Court. Update: Precautionary Boil Water Notice RESCINDED for Panama City residents in the following areas: 901, 909, 910, 912, 915 Fairy Ave; 1408 Baker Ct The Monday October 26, 2026 , “Precautionary Boil Water Notice” is hereby rescinded following the satisfactory completion of the bacteriological survey showing that the water is safe to drink.",
+   "instruction": null,
+   "severity": "moderate",
+   "event": null,
+   "area": null,
+   "zones": null,
+   "issued": "2026-10-28T15:46:03.000Z",
+   "starts": null,
+   "ends": null,
+   "updated": "2026-10-28T15:46:03.000Z",
+   "status": "lifted",
+   "full_closure": null,
+   "roadway": null,
+   "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=701",
+   "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
+   "first_seen": "2026-10-27T20:41:37.771Z",
+   "last_seen": "2026-10-28T17:05:59.410Z"
+  },
+  {
    "notice_id": "alert:pcb:23",
    "place_id": "fl-bay",
    "kind": "boil-water",
@@ -26,7 +52,7 @@
    "url": "https://www.pcbfl.gov/AlertCenter.aspx?AID=23",
    "source_url": "https://www.pcbfl.gov/AlertCenter.aspx",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-10-28T11:28:47.966Z"
+   "last_seen": "2026-10-28T17:05:59.410Z"
   },
   {
    "notice_id": "alert:pc:700",
@@ -52,33 +78,7 @@
    "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=700",
    "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-10-28T11:28:47.966Z"
-  },
-  {
-   "notice_id": "alert:pc:701",
-   "place_id": "fl-bay",
-   "kind": "boil-water",
-   "source": "City of Panama City",
-   "source_type": "alert-center",
-   "gov_id": "pc",
-   "title": "Precautionary Boil Water Notice for Panama City some residents of Fairy Ave & Baker Court Updated on 2026-10-27",
-   "summary": "Precautionary Boil Water Notice for Panama City residents of 901, 909, 910, 912, 915 Fairy Ave & 1408 Baker Court. Update: Water restored at 6:00 PM Monday evening, October 26, 2026.",
-   "instruction": null,
-   "severity": "moderate",
-   "event": null,
-   "area": null,
-   "zones": null,
-   "issued": "2026-10-27T14:16:07.000Z",
-   "starts": null,
-   "ends": null,
-   "updated": "2026-10-27T14:16:07.000Z",
-   "status": "active",
-   "full_closure": null,
-   "roadway": null,
-   "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=701",
-   "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
-   "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-10-28T11:28:47.966Z"
+   "last_seen": "2026-10-28T17:05:59.410Z"
   },
   {
    "notice_id": "alert:lh:145",
@@ -104,7 +104,7 @@
    "url": "https://www.cityoflynnhaven.gov/AlertCenter.aspx?AID=145",
    "source_url": "https://www.cityoflynnhaven.gov/AlertCenter.aspx",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-10-28T11:28:47.966Z"
+   "last_seen": "2026-10-28T17:05:59.410Z"
   },
   {
    "notice_id": "alert:lh:144",
@@ -124,13 +124,13 @@
    "starts": null,
    "ends": null,
    "updated": "2026-10-23T14:35:50.000Z",
-   "status": "active",
+   "status": "ended",
    "full_closure": null,
    "roadway": null,
    "url": "https://www.cityoflynnhaven.gov/AlertCenter.aspx?AID=144",
    "source_url": "https://www.cityoflynnhaven.gov/AlertCenter.aspx",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-10-28T11:28:47.966Z"
+   "last_seen": "2026-10-28T14:45:01.081378+00:00"
   },
   {
    "notice_id": "news:county:326",
@@ -156,7 +156,7 @@
    "url": "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=326",
    "source_url": "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=326",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-10-28T11:28:47.966Z"
+   "last_seen": "2026-10-28T17:05:59.410Z"
   },
   {
    "notice_id": "news:county:324",
@@ -182,7 +182,7 @@
    "url": "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=324",
    "source_url": "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=324",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-10-28T11:28:47.966Z"
+   "last_seen": "2026-10-28T17:05:59.410Z"
   },
   {
    "notice_id": "alert:pc:689",
@@ -208,7 +208,7 @@
    "url": "https://www.panamacity.gov/AlertCenter.aspx?AID=689",
    "source_url": "https://www.panamacity.gov/AlertCenter.aspx",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-10-28T11:28:47.966Z"
+   "last_seen": "2026-10-28T17:05:59.410Z"
   },
   {
    "notice_id": "news:pcb:45",
@@ -234,7 +234,7 @@
    "url": "https://www.pcbfl.gov/CivicAlerts.aspx?aid=45",
    "source_url": "https://www.pcbfl.gov/CivicAlerts.aspx?aid=45",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-10-28T11:28:47.966Z"
+   "last_seen": "2026-10-28T17:05:59.410Z"
   },
   {
    "notice_id": "news:county:224",
@@ -260,7 +260,7 @@
    "url": "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=224",
    "source_url": "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=224",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-10-28T11:28:47.966Z"
+   "last_seen": "2026-10-28T17:05:59.410Z"
   },
   {
    "notice_id": "news:county:325",
@@ -286,7 +286,7 @@
    "url": "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=325",
    "source_url": "https://www.baycountyfl.gov/CivicAlerts.aspx?aid=325",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-10-28T11:28:47.966Z"
+   "last_seen": "2026-10-28T17:05:59.410Z"
   },
   {
    "notice_id": "alert:county:Activation-Information?activeLiveTab=widgets",
@@ -338,7 +338,7 @@
    "url": "https://www.baycountyfl.gov/836/10348/Activation-Information?activeLiveTab=widgets",
    "source_url": "https://www.baycountyfl.gov/AlertCenter.aspx",
    "first_seen": "2026-10-28T00:40:09.58179+00:00",
-   "last_seen": "2026-10-28T11:28:47.966Z"
+   "last_seen": "2026-10-28T17:05:59.410Z"
   },
   {
    "notice_id": "news:pcb:storm",
@@ -390,7 +390,7 @@
    "url": "https://www.pcbfl.gov/storm",
    "source_url": "https://www.pcbfl.gov/storm",
    "first_seen": "2026-10-28T00:40:09.58179+00:00",
-   "last_seen": "2026-10-28T11:28:47.966Z"
+   "last_seen": "2026-10-28T17:05:59.410Z"
   },
   {
    "notice_id": "news:lh:353",
@@ -416,7 +416,7 @@
    "url": "https://www.cityoflynnhaven.gov/CivicAlerts.aspx?aid=353",
    "source_url": "https://www.cityoflynnhaven.gov/CivicAlerts.aspx?aid=353",
    "first_seen": "2026-10-27T20:41:37.771Z",
-   "last_seen": "2026-10-28T11:28:47.966Z"
+   "last_seen": "2026-10-28T17:05:59.410Z"
   }
  ]
 }

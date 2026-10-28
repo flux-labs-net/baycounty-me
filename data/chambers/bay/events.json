@@ -1,7 +1,7 @@
 {
  "as_of": "2026-10-28",
  "fetched": {
-  "pcb-chamber": "2026-10-28T11:27:56+00:00",
+  "pcb-chamber": "2026-10-28T17:05:15+00:00",
   "bay-chamber": null
  },
  "errors": [
@@ -565,6 +565,21 @@
    "chamber_event": true,
    "cost": null,
    "url": "https://pcbeach.org/local-event/the-womens-series-5/",
+   "source_url": "https://pcbeach.org/local-events/"
+  },
+  {
+   "chamber_id": "pcb-chamber",
+   "event_id": "pcb-chamber:27793",
+   "title": "2nd Annual Bluegrass by the Bay",
+   "starts": "2027-04-03T00:00:00",
+   "ends": "2027-04-03T23:59:59",
+   "all_day": true,
+   "venue": "McKenize Park",
+   "city": "Panama City",
+   "category": "Community Events",
+   "chamber_event": false,
+   "cost": null,
+   "url": "https://pcbeach.org/local-event/2nd-annual-bluegrass-by-the-bay/",
    "source_url": "https://pcbeach.org/local-events/"
   },
   {

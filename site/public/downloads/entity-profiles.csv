@@ -3235,7 +3235,7 @@ business:l24000275098,business,Business,G9 Consulting Group LLC,Registered busin
 business:l24000276356,business,Business,"Anesthesia Recruiters, LLC",Registered business (inactive),/profile/business/l24000276356,,1,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/ANESTHESIA%20RECRUITERS%2C%20LLC/Page1
 business:l24000278883,business,Business,Seashore Realty Referral Agency LLC,Registered business,/profile/business/l24000278883,,1,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/SEASHORE%20REALTY%20REFERRAL%20AGENCY%20LLC/Page1
 business:l24000287851,business,Business,MIA & Holly LLC,Registered business (inactive),/profile/business/l24000287851,,2,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults?inquiryType=EntityName&searchTerm=MIA%20%26%20HOLLY%20LLC
-business:l24000295297,business,Business,Patriot Property Solutions LLC,Registered business,/profile/business/l24000295297,,1,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/Patriot%20Property%20Solutions%20LLC/Page1
+business:l24000295297,business,Business,Patriot Property Solutions LLC,Registered business,/profile/business/l24000295297,,2,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/Patriot%20Property%20Solutions%20LLC/Page1
 business:l24000295737,business,Business,"Beannie Enterprises, LLC",Registered business,/profile/business/l24000295737,,1,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/Beannie%20Enterprises%2C%20LLC/Page1
 business:l24000305145,business,Business,JNC Handyman Services LLC,Registered business (inactive),/profile/business/l24000305145,,1,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/JNC%20HANDYMAN%20SERVICES%20LLC/Page1
 business:l24000305698,business,Business,"Top FAN Development and Consulting, LLC",Registered business,/profile/business/l24000305698,,1,,,,bay,https://search.sunbiz.org/Inquiry/CorporationSearch/SearchResults/EntityName/Top%20FAN%20Development%20and%20Consulting%2C%20LLC/Page1
@@ -15588,6 +15588,7 @@ owner:o_c65f6f5e0e5abfa8,owner,Business owner,Stewart Hall,Runs a registered bus
 owner:o_c6a6979783e7bb83,owner,Business owner,Brenton Hitchcock,Runs a registered business · gave to a local campaign,/profile/owner/o_c6a6979783e7bb83,,8,,250.0,,bay,
 owner:o_c6aa8b8a783de325,owner,Business owner,Laura Davidenko,Runs a registered business · gave to a local campaign,/profile/owner/o_c6aa8b8a783de325,,4,,350.0,,bay,
 owner:o_c7b454a45be5ec88,owner,Business owner,Charles Emanuel,Runs a registered business · gave to a local campaign,/profile/owner/o_c7b454a45be5ec88,,2,,135.0,,bay,
+owner:o_c7eaa28582c8238c,owner,Business owner,Colleen Koch,Runs a registered business · gave to a local campaign,/profile/owner/o_c7eaa28582c8238c,,2,,100.0,,bay,
 owner:o_c806041aa804e773,owner,Business owner,Michael Werner,Runs a registered business · gave to a local campaign,/profile/owner/o_c806041aa804e773,,3,,100.0,,bay,
 owner:o_c8638e94d56ea9db,owner,Business owner,Kathryn J Hardy,Runs a registered business · gave to a local campaign,/profile/owner/o_c8638e94d56ea9db,,2,,250.0,,bay,
 owner:o_c8bee194640edd9d,owner,Business owner,Amy Marshall,Runs a registered business · gave to a local campaign,/profile/owner/o_c8bee194640edd9d,,4,,1000.0,,bay,
@@ -15827,7 +15828,7 @@ person:david-lanier,person,Past candidate,David Lanier,"Ran for Bay County Commi
 person:david-masters,person,Past candidate,David Masters,"Ran for Mexico Beach Council, Group 4 in 2022",/people/david-masters,,1,,,mb,bay,
 person:demetrius-rease,person,Past candidate,Demetrius Rease,"Ran for Panama City Commission, Ward 4 in 2025",/people/demetrius-rease,,8,4075.98,,pc,bay,
 person:denise-kelley,person,Department leader,Denise Kelley,"Deputy Superintendent - Teaching & Learning, Bay District Schools",/people/denise-kelley,,1,,,schools,bay,
-person:dennis-haddock,person,Former official,Dennis Haddock,"Ran for Springfield Commission, Ward 1 in 2020 (won)",/people/dennis-haddock,,2,,,sp,bay,
+person:dennis-haddock,person,Former official,Dennis Haddock,"Former city commissioner, Ward 1, Springfield",/people/dennis-haddock,,2,,,sp,bay,
 person:donny-walker,person,Past candidate,Donny Walker,"Ran for Mexico Beach Council, Group 4 in 2022",/people/donny-walker,,1,,,mb,bay,
 person:doug-baber,person,Former official,Doug Baber,"Former city administrator, Mexico Beach",/people/doug-baber,,1,,,mb,bay,
 person:doug-crosby,person,Elected official,Doug Crosby,"County Commissioner, District 3, Bay County",/people/doug-crosby,,85,49550.0,,county,bay,
@@ -15901,7 +15902,7 @@ person:joel-stephens,person,Past candidate,Joel Stephens,"Ran for Lake Powell Co
 person:john-curci,person,Past candidate,John Curci,Ran for Panama City Beach Mayor in 2016,/people/john-curci,,1,,,pcb,bay,
 person:john-delonjay,person,Past candidate,John DeLonjay,"Ran for Lynn Haven Commission, Seat 4 in 2025",/people/john-delonjay,,1,,,lh,bay,
 person:john-hagan,person,Past candidate,John Hagan,"Ran for Callaway Commission, Ward 3 in 2020",/people/john-hagan,,1,,,cw,bay,
-person:john-haley,person,Candidate,John Haley,"2026 candidate for Bay District School Board, District 3, Bay District Schools",/people/john-haley,Dr. John L. Haley,7,1850.0,,schools,bay,
+person:john-haley,person,Candidate,John Haley,"2026 candidate for Bay District School Board, District 3, Bay District Schools",/people/john-haley,Dr. John L. Haley,8,1950.0,,schools,bay,
 person:john-haney,person,Former official,John Haney,"Former council member, Seat 4, Parker",/people/john-haney,,2,,,parker,bay,
 person:john-kady,person,Former official,John Kady,"Former city commissioner, Ward 1, Panama City",/people/john-kady,,23,6530.0,,pc,bay,
 person:john-lincoln,person,Past candidate,John D Lincoln III,Ran for Panama City Beach Mayor in 2016,/people/john-lincoln,,3,502.0,,pcb,bay,
