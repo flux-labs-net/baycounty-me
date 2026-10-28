@@ -1,6 +1,6 @@
 {
  "name": "BayCounty.me open data",
- "updated": "2026-10-27",
+ "updated": "2026-10-28",
  "license": "Public records; free to reuse with credit to BayCounty.me",
  "datasets": [
   {
@@ -13158,7 +13158,7 @@
    "id": "job-openings",
    "title": "Government job openings",
    "description": "Open jobs posted by Bay County, Bay District Schools, the cities and the airport on their own job boards, read daily: title, department, job type, pay where posted, posting and closing dates and the link to apply. Jobs whose closing date has passed are left out. first_seen is the first day the job was on file.",
-   "rows": 126,
+   "rows": 102,
    "columns": [
     {
      "name": "place_id",
@@ -13221,12 +13221,10 @@
      "name": "job_type",
      "type": "string",
      "values": [
-      "Confidential",
       "Full Time",
       "Full time",
       "Full- Time",
       "Instructional",
-      "Licensed",
       "Part time",
       "Part-Time",
       "Substitutes",
@@ -13251,13 +13249,43 @@
     },
     {
      "name": "posted",
-     "type": "string"
+     "type": "string",
+     "values": [
+      "2026-07-13",
+      "2026-07-30",
+      "2026-08-03",
+      "2026-08-06",
+      "2026-08-10",
+      "2026-08-31",
+      "2026-09-14",
+      "2026-09-16",
+      "2026-09-22",
+      "2026-09-24",
+      "2026-09-27",
+      "2026-09-28",
+      "2026-09-29",
+      "2026-09-30",
+      "2026-10-02",
+      "2026-10-06",
+      "2026-10-07",
+      "2026-10-08",
+      "2026-10-13",
+      "2026-10-15",
+      "2026-10-16",
+      "2026-10-17",
+      "2026-10-19",
+      "2026-10-20",
+      "2026-10-21",
+      "2026-10-22",
+      "2026-10-23",
+      "2026-10-26",
+      "2026-10-27"
+     ]
     },
     {
      "name": "closes",
      "type": "string",
      "values": [
-      "2026-10-27",
       "2026-10-28",
       "2026-10-29",
       "2026-10-30",
