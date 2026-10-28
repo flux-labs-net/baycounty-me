@@ -532,7 +532,7 @@ def admin_page(out_dir):
         <input class="sel" id="ra-email" type="email" placeholder="agent@brokerage.com" aria-label="Agent email">
         <button class="btn" id="ra-add" type="button">Add agent</button>
       </div>
-      <div class="tw"><table class="at" id="ra-table" data-tt="off"><thead><tr><th>Agent</th><th>Brokerage</th><th>Joined</th><th>Last sign-in</th><th>Reports</th><th>Access</th></tr></thead><tbody></tbody></table></div>
+      <div class="tw"><table class="at" id="ra-table" data-tt="off"><thead><tr><th>Agent</th><th>Brokerage</th><th>Joined</th><th>Last sign-in</th><th>Reports</th><th>Emailed</th><th>Access</th></tr></thead><tbody></tbody></table></div>
     </section>
 
     <section id="tab-names" class="pane" hidden>

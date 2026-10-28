@@ -89,23 +89,7 @@ function brandNow() {
   return b;
 }
 function imgPreview() {
-  // The PDF cover photo: cropped in the browser to the two frames the covers use and kept only in memory, never sent.
-let COVER = null;
-function cropTo(im, aspect, w) {
-  const W = im.naturalWidth, H = im.naturalHeight, cv = document.createElement('canvas'); let sx = 0, sy = 0, sw = W, sh = H;
-  if (W / H > aspect) { sw = H * aspect; sx = (W - sw) / 2; } else { sh = W / aspect; sy = (H - sh) / 2; }
-  cv.width = Math.min(w, Math.round(sw)); cv.height = Math.round(cv.width / aspect); cv.getContext('2d').drawImage(im, sx, sy, sw, sh, 0, 0, cv.width, cv.height);
-  return cv.toDataURL('image/jpeg', 0.85);
-}
-$('coverPhoto').addEventListener('change', e => {
-  const f = e.target.files && e.target.files[0], note = $('coverNote');
-  if (!f) { COVER = null; return; }
-  const url = URL.createObjectURL(f), im = new Image();
-  im.onload = () => { COVER = {full: cropTo(im, 612 / 330, 1600), band: cropTo(im, 532 / 220, 1600)}; URL.revokeObjectURL(url); note.textContent = 'Photo added to the PDF cover. It stays in this browser.'; };
-  im.onerror = () => { COVER = null; URL.revokeObjectURL(url); note.textContent = 'That photo couldn’t be read. Try a JPEG or PNG.'; };
-  im.src = url;
-});
-['logo', 'photo'].forEach(k => {
+  ['logo', 'photo'].forEach(k => {
     const el = $('prev_' + k);
     el.innerHTML = IMG[k] ? `<img src="${esc(IMG[k])}" alt="">` : `<span>${k === 'logo' ? 'No logo yet' : 'No photo yet'}</span>`;
     $('rm_' + k).hidden = !IMG[k];
@@ -223,7 +207,7 @@ async function run() {
   if (!PICK && items.length && !list.hidden) pick(items[0]);
   const qs = PICK ? new URLSearchParams({lat: PICK.lat, lon: PICK.lon, label: PICK.address, parcel: PICK.parcel_id || ''}) : new URLSearchParams({address: inp.value});
   if (!PICK && !inp.value.trim()) { err.textContent = 'Type an address first.'; err.hidden = false; return; }
-  $('runBtn').disabled = true; $('report').innerHTML = '<div class="rc-loading"><span class="rc-spin" aria-hidden="true"></span>Gathering records for this address…</div>'; $('reportActs').hidden = true;
+  $('runBtn').disabled = true; $('mailForm').hidden = true; $('mailBtn').setAttribute('aria-expanded', 'false'); $('report').innerHTML = '<div class="rc-loading"><span class="rc-spin" aria-hidden="true"></span>Gathering records for this address…</div>'; $('reportActs').hidden = true;
   try {
     const r = await fetch('/api/v1/address-report?' + qs);
     const j = await r.json().catch(() => ({}));
@@ -234,7 +218,7 @@ async function run() {
     renderReport();
     const u = new URL(location.href); u.search = new URLSearchParams({lat: REPORT.lat, lon: REPORT.lon, a: REPORT.address || '', c: REPORT.city || '', z: REPORT.zip || '', p: REPORT.parcel_id || ''}); history.replaceState(null, '', u);
     api('report', {address: REPORT.address, city: REPORT.city, zip: REPORT.zip, parcel_id: REPORT.parcel_id, lat: REPORT.lat, lon: REPORT.lon, prepared_for: REPORT.prepared_for})
-      .then(() => api('me')).then(m => { ME = m; renderHistory(); }).catch(() => {});
+      .then(x => { if (x && x.id && REPORT) REPORT.saved_id = x.id; return api('me'); }).then(m => { ME = m; renderHistory(); }).catch(() => {});
   } catch (e2) { $('report').innerHTML = ''; err.textContent = e2.message; err.hidden = false; }
   $('runBtn').disabled = false;
 }
@@ -304,12 +288,6 @@ function sectionModel(s) {
       (d.seats || []).forEach(x => kv(x.office, x.name + (x.district ? ` (${x.district})` : ''), {html: nameLink(x.entity_id, x.name, x.page_url) + (x.district ? ` <span class="muted">${esc(x.district)}</span>` : '')}));
       if ((d.city_council || []).length) m.lists.push({h: d.local_government.replace(/^City of /, '') + ' commission and manager', cols: 2,
         items: d.city_council.map(x => ({t: x.name, html: nameLink(x.entity_id, x.name, x.page_url), sub: x.seat}))});
-      break;
-    }
-    case 'events': {
-      if ((d.meetings || []).length) m.lists.push({h: 'Public meetings', items: d.meetings.map(x => ({t: x.title, sub: [day(x.starts), x.location ? x.location.split(' - ').pop().split(',')[0] : ''].filter(Boolean).join(' · ')}))});
-      if ((d.events || []).length) m.lists.push({h: 'Community events', items: d.events.map(x => ({t: x.title, sub: [day(x.starts), x.venue, x.town].filter(Boolean).join(' · ')}))});
-      if (s.status === 'partial') m.note = null;
       break;
     }
     default: Object.entries(d).forEach(([k, v]) => { if (v == null || typeof v === 'object') return; kv(k.replace(/_/g, ' '), v); });
@@ -515,14 +493,45 @@ function buildDoc(opts = {}) {
     content: [...cover.filter(Boolean), ...sections, card, disc].filter(Boolean),
   };
 }
+const pdfName = () => `property-report-${String(REPORT.address || 'address').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}.pdf`;
+async function makePdf() { await pdfReady(); return pdfMake.createPdf(buildDoc(COVER ? {photo: COVER.full, bandPhoto: COVER.band} : {})); }
 $('pdfBtn').addEventListener('click', async () => {
   const btn = $('pdfBtn'); btn.disabled = true; const label = btn.innerHTML; btn.textContent = 'Making PDF…';
-  try {
-    await pdfReady();
-    const slug = String(REPORT.address || 'address').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-    pdfMake.createPdf(buildDoc(COVER ? {photo: COVER.full, bandPhoto: COVER.band} : {})).download(`property-report-${slug}.pdf`);
-  } catch (e) { $('runErr').textContent = 'The PDF couldn’t be made. Check your connection and try again.'; $('runErr').hidden = false; }
+  try { (await makePdf()).download(pdfName()); }
+  catch (e) { $('runErr').textContent = 'The PDF couldn’t be made. Check your connection and try again.'; $('runErr').hidden = false; }
   btn.disabled = false; btn.innerHTML = label;
+});
+
+/* ---------- email the report ----------
+   The PDF is made here, as for the download, and posted once to /api/realtor?action=email. It goes out from
+   hello@baycounty.me under the agent's name with replies going to the agent; nothing about it is kept but a count. */
+function openMail() {
+  const b = (ME && ME.brand) || {}, name = b.agent_name || '', reply = b.email || (ME && ME.agent.email) || '';
+  $('mailFrom').innerHTML = `Sent from hello@baycounty.me as <b>${esc(name ? name + ' via BayCounty.me' : 'BayCounty.me')}</b>, with the PDF attached. Replies go to <b>${esc(reply)}</b>.` +
+    (name ? '' : ' Add your name under Your branding so clients know it’s from you.');
+  $('m_subject').value = `Property report: ${REPORT.address || ''}`;
+  const first = (REPORT.prepared_for || '').split(/\s+/)[0];
+  $('m_message').value = `${first ? `Hi ${first},\n\n` : ''}Here’s the property report for ${REPORT.address || 'the address we talked about'}. Let me know if you have any questions.${name ? `\n\n${name}` : ''}`;
+  $('mailMsg').textContent = ''; $('mailMsg').className = 'rc-msg small';
+  $('mailForm').hidden = false; $('mailBtn').setAttribute('aria-expanded', 'true'); $('m_to').focus();
+}
+function closeMail() { $('mailForm').hidden = true; $('mailBtn').setAttribute('aria-expanded', 'false'); }
+$('mailBtn').addEventListener('click', () => ($('mailForm').hidden ? openMail() : closeMail()));
+$('mailCancel').addEventListener('click', closeMail);
+$('mailForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const msg = $('mailMsg'), btn = $('mailSend'), to = $('m_to').value.split(/[\s,;]+/).filter(Boolean);
+  msg.className = 'rc-msg small';
+  if (!to.length) { msg.className = 'rc-msg small err'; msg.textContent = 'Add at least one email address.'; return; }
+  btn.disabled = true; msg.textContent = 'Making the PDF…';
+  try {
+    const doc = await makePdf(), pdf = await new Promise(res => doc.getBase64(res));
+    msg.textContent = 'Sending…';
+    const r = await api('email', {to, subject: $('m_subject').value, message: $('m_message').value, cc_me: $('m_cc').checked, pdf, filename: pdfName(),
+      address: REPORT.address, prepared_for: REPORT.prepared_for, report_id: REPORT.saved_id || null});
+    msg.className = 'rc-msg small ok'; msg.textContent = `Sent to ${r.sent_to.join(', ')}. Replies go to ${r.reply_to}.`; $('m_to').value = '';
+  } catch (err) { msg.className = 'rc-msg small err'; msg.textContent = err.message || 'The email couldn’t be sent.'; }
+  btn.disabled = false;
 });
 $('printBtn').addEventListener('click', () => window.print());
 window.BCRealtor = {buildDoc: o => buildDoc(o), report: () => REPORT, pdfReady};
