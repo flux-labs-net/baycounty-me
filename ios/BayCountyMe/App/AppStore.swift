@@ -1,5 +1,6 @@
 import Foundation
 import Observation
+import UIKit
 import BayCountyKit
 
 /// App-wide state: the catalog, governments, meetings, any dataset rows loaded so far, and the site's /data/app files.
@@ -167,7 +168,12 @@ final class AppStore {
         }
     }
 
-    func open(_ url: URL?) { presentedPage = url.map(PresentedPage.init(url:)) }
+    /// Web pages open in the in-app browser; map/directions, phone and email links open their own app (Maps, Phone, Mail).
+    func open(_ url: URL?) {
+        guard let url else { return }
+        if ExternalLinks.opensOutsideApp(url) { UIApplication.shared.open(url); return }
+        presentedPage = PresentedPage(url: url)
+    }
     func openSite(_ path: String) { open(URL(string: "https://baycounty.me" + (path.hasPrefix("/") ? path : "/" + path))) }
     func explain(_ termID: String) { presentedTerm = term(termID) }
 }

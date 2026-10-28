@@ -101,10 +101,17 @@ object Outdoors {
 
     fun parkTags(p: Row): List<String> = amenities.filter { p.bool(it.first) == true }.map { it.second }
 
-    /** Driving directions to a row's map point (Google Maps). */
+    /** A geo: link to a row's map point, which opens the phone's Maps app with a pin and its name. */
     fun directions(r: Row): String? {
         val lat = r.number("latitude") ?: return null
         val lon = r.number("longitude") ?: return null
-        return "https://www.google.com/maps/dir/?api=1&destination=$lat,$lon"
+        val label = r.string("name")?.let { "(" + java.net.URLEncoder.encode(it, "UTF-8").replace("+", "%20") + ")" } ?: ""
+        return "geo:$lat,$lon?q=$lat,$lon$label"
+    }
+
+    /** Web fallback for a geo: link when no Maps app is installed (Google Maps directions). */
+    fun webDirections(geo: String): String? {
+        val m = Regex("""^geo:(-?[\d.]+),(-?[\d.]+)""").find(geo) ?: return null
+        return "https://www.google.com/maps/dir/?api=1&destination=${m.groupValues[1]},${m.groupValues[2]}"
     }
 }

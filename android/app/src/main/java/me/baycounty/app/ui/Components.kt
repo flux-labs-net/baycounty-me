@@ -67,6 +67,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.launch
+import me.baycounty.kit.Outdoors
 import me.baycounty.app.AppStore
 import me.baycounty.app.Nav
 import me.baycounty.app.R
@@ -85,9 +86,13 @@ val LocalNav = staticCompositionLocalOf<Nav> { error("no nav") }
 fun openURL(context: Context, url: String?, toolbar: Int? = null) {
     if (url.isNullOrBlank()) return
     val uri = Uri.parse(url)
-    if (uri.scheme == "webcal" || uri.scheme == "mailto" || uri.scheme == "tel") {
+    if (uri.scheme == "webcal" || uri.scheme == "mailto" || uri.scheme == "tel" || uri.scheme == "geo" || isMapLink(uri)) {
         val i = Intent(Intent.ACTION_VIEW, uri).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        val fallback = if (uri.scheme == "webcal") Intent(Intent.ACTION_VIEW, Uri.parse(url.replaceFirst("webcal://", "https://"))) else null
+        val fallback = when (uri.scheme) {
+            "webcal" -> Intent(Intent.ACTION_VIEW, Uri.parse(url.replaceFirst("webcal://", "https://")))
+            "geo" -> Outdoors.webDirections(url)?.let { Intent(Intent.ACTION_VIEW, Uri.parse(it)) }
+            else -> null
+        }
         runCatching { context.startActivity(i) }.onFailure { fallback?.let { f -> runCatching { context.startActivity(f.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)) } } }
         return
     }
@@ -96,6 +101,12 @@ fun openURL(context: Context, url: String?, toolbar: Int? = null) {
     runCatching { b.build().launchUrl(context, uri) }.onFailure {
         runCatching { context.startActivity(Intent(Intent.ACTION_VIEW, uri).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)) }
     }
+}
+
+/** Google Maps web links open the Maps app (it claims them), not the in-app browser. */
+private fun isMapLink(uri: Uri): Boolean {
+    val host = uri.host?.lowercase() ?: return false
+    return host == "maps.google.com" || ((host == "google.com" || host == "www.google.com") && (uri.path ?: "").startsWith("/maps"))
 }
 
 /** `open(url)` and `openSite(path)` for composables. */
