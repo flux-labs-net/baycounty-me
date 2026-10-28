@@ -19,86 +19,176 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import me.baycounty.app.Route
-import me.baycounty.app.Tab
 import me.baycounty.app.ui.*
 import me.baycounty.kit.Amendment3Model
 import me.baycounty.kit.Dates
 import me.baycounty.kit.Format
 import me.baycounty.kit.Meeting
 import me.baycounty.kit.TaxCalculator
-import java.time.Instant
+import me.baycounty.kit.Events
+import me.baycounty.kit.TodayBrief
+import me.baycounty.kit.UtilityLookup
+import me.baycounty.kit.Row as DataRow
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.Locale
 
-private data class BrowseItem(val title: String, val symbol: String, val route: Route)
-
-private val browse = listOf(
-    BrowseItem("Emergencies and alerts", "exclamationmark.triangle", Route.Emergency),
-    BrowseItem("Hurricane prep", "hurricane", Route.HurricanePrep),
-    BrowseItem("CRA spending", "building.2", Route.CRA),
-    BrowseItem("Contracts", "signature", Route.Dataset("contracts")),
-    BrowseItem("How they voted", "hand.raised", Route.Dataset("votes")),
-    BrowseItem("Companies", "building", Route.Vendors),
-    BrowseItem("Campaign money", "chart.bar", Route.Dataset("campaign-finance")),
-    BrowseItem("Accountability console", "checklist", Route.Accountability),
-    BrowseItem("Beaches", "beach.umbrella", Route.Beaches),
-    BrowseItem("Parks, ramps and trails", "tree", Route.Parks),
-    BrowseItem("Glossary", "character.book.closed", Route.Glossary),
-    BrowseItem("What's new", "sparkles", Route.Updates),
-)
-
-/** The Today tab: what's coming up this week, the ballot, your tax bill, the big numbers, and a list to browse. */
+/** The Today tab: a greeting, what's going on right now (beach flag, notices, next meeting, trash day), your address,
+ *  this weekend's events, what's coming up at city hall, then your tax bill and the big numbers. */
 @Composable
 fun HomeScreen() {
     val store = LocalStore.current
     val nav = LocalNav.current
     val o = rememberOpener()
-    LaunchedEffect(Unit) { store.loadTax(); store.loadAmendment3() }
+    val home = store.home
+    var utilities by remember(home?.id) { mutableStateOf(home?.let { store.utilities[it.id] }) }
+    LaunchedEffect(Unit) { store.loadTax(); store.loadAmendment3(); store.load(listOf(Events.DATASET, "beach-conditions", "emergency-notices")) }
+    // The saved home's trash day. The address isn't logged by the API and the answer isn't kept on disk.
+    LaunchedEffect(home?.id) { utilities = home?.let { runCatching { store.loadUtilities(it) }.getOrNull() } }
     Screen(
         "Today",
         navigationIcon = { BayMarkButton { nav.push(Route.About) } },
         actions = {
+            ToolbarIcon("magnifyingglass", "Search") { nav.push(Route.Search) }
             ToolbarIcon("bubble.left.and.text.bubble.right", "Ask a question") { o.openSite("/ask") }
             ToolbarIcon("bell", "Emergencies and alerts") { nav.push(Route.Emergency) }
         },
         onRefresh = { store.refreshAll() },
         spacing = 24,
     ) {
-        item { SearchField { nav.push(Route.Search) } }
+        item { Greeting(utilities) }
         item { BallotBanner() }
+        item { RightNow(TodayBrief.trashDays(utilities)) }
         item { AddressCard() }
-        item { HomeEventsSection() }
-        item { MeetingsSection() }
+        item { WeekendSection() }
+        item { CityHallSection() }
         item { TaxBillSection() }
         item { NumbersSection() }
-        item {
-            Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-                SectionHeader("Browse", "All public money") { nav.select(Tab.MONEY) }
-                CardList {
-                    browse.forEachIndexed { i, b ->
-                        RouteRow(b.route, b.title, symbol = b.symbol)
-                        if (i < browse.lastIndex) RowDivider(50.dp)
-                    }
-                }
-            }
-        }
         item {
             Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(6.dp)) {
                 FreshnessNote()
                 PoweredByFlux()
+            }
+        }
+    }
+}
+
+/** "Good morning" over "WEDNESDAY, OCT 28 · LYNN HAVEN": the date, and the saved home's city once it's known. */
+@Composable
+private fun Greeting(utilities: UtilityLookup?) {
+    val place = utilities?.let { if (it.area == "county") "Bay County" else it.areaName } ?: "Bay County"
+    val date = TodayBrief.dateLine(Events.todayKey())
+    Column(Modifier.semantics(mergeDescendants = true) { heading() }, verticalArrangement = Arrangement.spacedBy(4.dp)) {
+        Text("$date · $place".uppercase(), style = T.caption.copy(fontWeight = FontWeight.SemiBold, letterSpacing = 0.6.sp), color = Brand.secondary)
+        Text(TodayBrief.greeting(TodayBrief.hour()), style = T.bigNumber.copy(fontSize = 30.sp, lineHeight = 36.sp), color = Brand.text)
+    }
+}
+
+/** Beach flag, active notices, next meeting and trash day, two by two. Same cards as the site's home page. */
+@Composable
+private fun RightNow(trashDays: String?) {
+    val store = LocalStore.current
+    val nav = LocalNav.current
+    val cards = TodayBrief.cards(store.rows["beach-conditions"] ?: emptyList(), store.rows["emergency-notices"] ?: emptyList(), store.meetings, trashDays)
+    Grid2(cards) { c, m ->
+        val route = when (c.target) {
+            TodayBrief.Target.BEACHES -> Route.Beaches
+            TodayBrief.Target.EMERGENCY -> Route.Emergency
+            TodayBrief.Target.MEETINGS -> Route.Meetings
+            TodayBrief.Target.UTILITIES -> Route.Utilities(store.home)
+        }
+        val tone = when (c.tone) { "teal" -> Tone.TEAL; "amber" -> Tone.AMBER; "salmon" -> Tone.SALMON; else -> Tone.BLUE }
+        Column(
+            m.heightIn(min = 128.dp).card(16.dp).clickable { nav.push(route) }.padding(14.dp).semantics(mergeDescendants = true) {},
+            verticalArrangement = Arrangement.spacedBy(8.dp),
+        ) {
+            ToneIcon(c.symbol, tone, 34.dp)
+            Text(c.title, style = T.subheadBold, color = Brand.text)
+            Text(c.detail, style = T.caption, color = Brand.secondary)
+        }
+    }
+}
+
+/** One-off events this weekend (the coming Friday to Sunday, or the rest of it), or the next few weeks when the
+ *  weekend has nothing listed. */
+@Composable
+private fun WeekendSection() {
+    val store = LocalStore.current
+    val nav = LocalNav.current
+    val rows = store.rows[Events.DATASET] ?: return
+    val today = Events.todayKey()
+    val weekend = TodayBrief.weekendEvents(rows, today)
+    val picks = weekend.ifEmpty { Events.featured(rows, today, Events.plusDays(21)).take(4) }
+    Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+        SectionHeader(if (weekend.isEmpty()) "Coming up" else "This weekend", "All events") { nav.push(Route.Events) }
+        if (picks.isEmpty()) {
+            Text("Nothing listed yet.", style = T.subhead, color = Brand.secondary, modifier = Modifier.fillMaxWidth().card(14.dp).padding(14.dp))
+        } else {
+            CardList {
+                picks.forEachIndexed { i, r ->
+                    WeekendEventRow(r)
+                    if (i < picks.lastIndex) RowDivider(74.dp)
+                }
+            }
+        }
+    }
+}
+
+private val weekdayShort = DateTimeFormatter.ofPattern("EEE", Locale.US)
+
+/** An event on the Today tab: a day tile (SAT 31), the title, and when and where. Opens the event's page. */
+@Composable
+private fun WeekendEventRow(r: DataRow) {
+    val opener = rememberOpener()
+    val day = runCatching { LocalDate.parse((r.string("starts") ?: "").take(10)) }.getOrNull()
+    val c = if (r.string("category") != "Library") Brand.salmon else Brand.navy
+    Row(
+        Modifier.fillMaxWidth().clickable { opener.open(r.url("url")) }.padding(horizontal = 14.dp, vertical = 11.dp).semantics(mergeDescendants = true) {},
+        verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(14.dp),
+    ) {
+        Column(Modifier.size(46.dp, 50.dp).background(c.copy(alpha = 0.12f), RoundedCornerShape(12.dp)), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
+            Text(day?.format(weekdayShort)?.uppercase() ?: "", style = T.caption2.copy(fontWeight = FontWeight.Bold), color = c)
+            Text(day?.dayOfMonth?.toString() ?: "", style = T.number.copy(fontWeight = FontWeight.SemiBold), color = c)
+        }
+        Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
+            Text(r.string("title") ?: "", style = T.subheadBold, color = Brand.text)
+            val time = Events.time(r).takeIf { it != "All day" }
+            Text(listOfNotNull(time, r.string("venue"), r.string("town")).joinToString(" · "), style = T.caption, color = Brand.secondary)
+        }
+        Chevron()
+    }
+}
+
+/** The next three public meetings. */
+@Composable
+private fun CityHallSection() {
+    val store = LocalStore.current
+    val nav = LocalNav.current
+    val next = Meeting.upcoming(store.meetings).take(3)
+    if (next.isEmpty()) return
+    Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+        SectionHeader("At city hall", "Meetings") { nav.push(Route.Meetings) }
+        CardList {
+            next.forEachIndexed { i, m ->
+                Box(Modifier.clickable { nav.push(Route.MeetingDetail(m.id)) }) { TodayMeetingRow(m, showDay = true) }
+                if (i < next.lastIndex) RowDivider(66.dp)
             }
         }
     }
@@ -181,57 +271,17 @@ private fun AddressCardRow(symbol: String, eyebrow: String, title: String, detai
     }
 }
 
-private data class MeetingDay(val key: String, val date: Instant, val meetings: List<Meeting>)
-
-@Composable
-private fun MeetingsSection() {
-    val store = LocalStore.current
-    val nav = LocalNav.current
-    val limit = Instant.now().plusSeconds(14 * 86_400)
-    val soon = Meeting.upcoming(store.meetings).filter { (it.start ?: Instant.MAX) < limit }
-    val grouped = soon.groupBy { it.start?.let(Dates::dayKey) ?: "" }
-    val days = grouped.keys.sorted().take(4).mapNotNull { k -> grouped[k]?.firstOrNull()?.start?.let { MeetingDay(k, it, grouped[k]!!) } }
-    if (days.isEmpty()) return
-    var picked by rememberSaveable { mutableStateOf<String?>(null) }
-    val current = days.firstOrNull { it.key == picked } ?: days[0]
-    Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        SectionHeader("Meetings coming up", "See all") { nav.push(Route.Meetings) }
-        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            for (d in days) {
-                val on = d.key == current.key
-                Column(
-                    Modifier.weight(1f).heightIn(min = 64.dp)
-                        .then(if (on) Modifier.background(Brand.navyFill, RoundedCornerShape(14.dp)) else Modifier.card(14.dp))
-                        .clickable { picked = d.key }.padding(vertical = 6.dp)
-                        .semantics { contentDescription = "${Dates.display(d.date, false)}, ${d.meetings.size} meetings" },
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                ) {
-                    val fg = if (on) Color.White else Brand.text
-                    Text(Dates.format(d.date, "EEE").uppercase(), style = T.caption2.copy(fontWeight = FontWeight.SemiBold), color = fg)
-                    Text(Dates.format(d.date, "d"), style = T.number, color = fg)
-                    Text(if (d.meetings.size == 1) "1 mtg" else "${d.meetings.size} mtgs", style = T.caption2, color = if (on) Color.White.copy(alpha = 0.8f) else Brand.secondary)
-                }
-            }
-        }
-        CardList {
-            current.meetings.forEachIndexed { i, m ->
-                Box(Modifier.clickable { nav.push(Route.MeetingDetail(m.id)) }) { TodayMeetingRow(m) }
-                if (i < current.meetings.lastIndex) RowDivider(66.dp)
-            }
-        }
-    }
-}
-
 /** A meeting on the Today tab: government badge, board, time and place, and the dollars on its agenda. */
 @Composable
-fun TodayMeetingRow(meeting: Meeting) {
+fun TodayMeetingRow(meeting: Meeting, showDay: Boolean = false) {
     val place = meeting.location?.let { loc -> loc.split(" - ").first().split(",").first().trim() }
-    val time = if (meeting.hasTime) meeting.start?.let { Dates.format(it, "h:mm a") } else "Time not posted"
+    val day = if (showDay) meeting.start?.let { Dates.format(it, "EEE, MMM d") } else null
+    val time = if (meeting.hasTime) meeting.start?.let { Dates.format(it, "h:mm a") } else if (showDay) null else "Time not posted"
     Row(Modifier.fillMaxWidth().heightIn(min = 64.dp).padding(horizontal = 14.dp, vertical = 8.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(12.dp)) {
         GovBadge(meeting.govID)
         Column(Modifier.weight(1f)) {
             Text(meeting.boardName, style = T.subheadBold, color = Brand.text, maxLines = 1)
-            Text(listOfNotNull(time, place).joinToString(" · "), style = T.caption, color = Brand.secondary, maxLines = 1)
+            Text(listOfNotNull(day, time, place).joinToString(" · "), style = T.caption, color = Brand.secondary, maxLines = 1)
         }
         if (meeting.moneyTotal > 0) {
             Text(
