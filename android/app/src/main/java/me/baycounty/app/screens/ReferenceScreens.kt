@@ -107,7 +107,7 @@ fun AboutScreen() {
     Screen("About", spacing = 20) {
         item {
             Text(
-                "BayCounty.me puts Bay County, Florida public records in plain view: budgets, taxes, contracts, votes, campaign money and meetings. Every figure comes from a public record with a linked source. Nothing is estimated.",
+                "BayCounty.me is an independent, free website and app that puts Bay County, Florida public records in one place, in plain language: all nine local governments, their budgets, taxes, contracts, votes, campaign money and meetings, plus what's happening near your address. Every figure links to its public record, back to 2016. It is not run by any government.",
                 style = T.subhead, color = Brand.text, modifier = Modifier.fillMaxWidth().card(14.dp).padding(14.dp),
             )
         }
@@ -129,6 +129,15 @@ fun AboutScreen() {
                         if (i < labels.lastIndex) RowDivider()
                     }
                 }
+            }
+        }
+        item {
+            Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                EyebrowHeader("Who runs it")
+                Text(
+                    "Built and run by Flux Labs, a managed IT company in Panama City. We live and work here, and we built this so public records are easy to read without a records request. No ads, no tracking, and no money from any government, candidate or campaign.",
+                    style = T.subhead, color = Brand.text, modifier = Modifier.fillMaxWidth().card(14.dp).padding(14.dp),
+                )
             }
         }
         item {
