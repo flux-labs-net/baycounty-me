@@ -12,6 +12,8 @@ struct LivingHereView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: 24) {
                     section("Home and family") {
+                        RouteRow(route: .myHome, title: "My home", detail: "Sign in to see meetings, events, road work and alerts near your home", symbol: "person.crop.circle")
+                        RowDivider(inset: 50)
                         if let home = store.home {
                             RouteRow(route: .address(home), title: "My address", detail: home.display, symbol: "house")
                         } else {
