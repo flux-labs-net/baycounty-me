@@ -10,10 +10,10 @@ final class NumberPadDoneTests: XCTestCase {
         let field = app.textFields["assessedValue"]
         XCTAssertTrue(field.waitForExistence(timeout: 15), "Assessed value field not found")
 
-        field.tap()
-        // Clear the value and type a new one.
+        // Tap the right end so the cursor lands after the digits, then clear and type a new value.
+        field.coordinate(withNormalizedOffset: CGVector(dx: 0.97, dy: 0.5)).tap()
         let old = (field.value as? String) ?? ""
-        field.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: old.count + 2))
+        field.typeText(String(repeating: XCUIKeyboardKey.delete.rawValue, count: old.count + 4))
         field.typeText("400000")
         XCTAssertEqual(field.value as? String, "400,000")
 
