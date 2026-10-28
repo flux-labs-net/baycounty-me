@@ -63,4 +63,13 @@ class AccountTest {
         assertEquals("""{"radius_mi":2}""", r.body)
         assertNull(AccountClient(null).request("me", null).headers["Authorization"])
     }
+
+    @Test fun savedHomeBecomesThePhonesAddress() {
+        val m = assertNotNull(AccountMe.decode("""{"user":{"email":"a@b.co"},"home":{"label":"Home","address":"1200 Beck Ave #4b 32401","city":"Panama City","zip":"32401","parcel_id":"12345-000-000","lat":30.17,"lon":-85.67,"gov_id":"pc","zone":"A"}}""").home).addressMatch
+        assertEquals("1200 BECK AVE", m.address); assertEquals("4B", m.unit); assertEquals("32401", m.zip)
+        assertEquals("12345-000-000", m.renum); assertEquals("Panama City", m.community)
+        assertEquals(GeoPoint(-85.67, 30.17), m.point); assertEquals("1200 Beck Ave #4B", m.display)
+        val p = assertNotNull(AccountMe.decode("""{"user":{"email":"a@b.co"},"home":{"address":"825 Ohio Ave","zip":"32444","lat":30.24,"lon":-85.64}}""").home).addressMatch
+        assertEquals("825 OHIO AVE", p.address); assertNull(p.unit); assertNull(p.renum)
+    }
 }

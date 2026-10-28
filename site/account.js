@@ -115,7 +115,7 @@ function renderFeed() {
     return `<section class="mh-sec${s.id === 'alerts' ? ' wide' : ''}"><h2>${ico(i, tn)}${esc(s.title)}${s.count != null && s.count > s.items.length ? `<span class="n">${s.count} filed</span>` : ''}</h2>${s.items.length
       ? `<ul class="mh-items">${s.items.map(itemHtml).join('')}</ul>` : `<p class="mh-empty">${esc(s.empty)}</p>`}</section>`; };
   $('feed').innerHTML = `<div class="mh-today">${tiles}</div><div class="mh-grid">${secs.map(sec).join('')}</div>
-    <div class="mh-govs">${f.governments.map(g => `<a class="mh-btn ghost sm" href="${esc(g.url.replace('https://baycounty.me', ''))}">${esc(g.name)} →</a>`).join('')}<a class="mh-btn ghost sm" href="/my-address/?lat=${encodeURIComponent(ME.home.lat)}&lon=${encodeURIComponent(ME.home.lon)}">Tax bill, schools and more for this address →</a></div>
+    <div class="mh-govs">${f.governments.map(g => `<a class="mh-btn ghost sm" href="${esc(g.url.replace('https://baycounty.me', ''))}">${esc(g.name)} →</a>`).join('')}<a class="mh-btn ghost sm" href="${esc(window.BCHomeLink(ME.home))}">Tax bill, schools and more for this address →</a></div>
     <p class="mh-fine">${esc(f.note)}</p>`;
 }
 

@@ -103,7 +103,24 @@ public struct AccountMe: Decodable, Sendable {
         public let lon: Double
         public let govId: String?
         public let zone: String?
+        public let parcelId: String?
         public var subtitle: String { [city, zip].compactMap { $0 }.filter { !$0.isEmpty }.joined(separator: " ") }
+
+        /// The saved home as the phone's address ("825 Ohio Ave #2 32444" → street 825 OHIO AVE, unit 2), so the
+        /// Today card, tax bill and trash day use the account's home on any phone the resident signs in on. Same
+        /// rules as window.BCHomeLink on the site.
+        public var addressMatch: AddressMatch {
+            var s = address.trimmingCharacters(in: .whitespaces)
+            if let r = s.range(of: #"\s+\d{5}(-\d{4})?$"#, options: .regularExpression) { s = String(s[..<r.lowerBound]) }
+            var unit: String?
+            if let r = s.range(of: #"\s*#\s*\S+$"#, options: .regularExpression) {
+                unit = s[r].replacingOccurrences(of: "#", with: "").trimmingCharacters(in: .whitespaces).uppercased()
+                s = String(s[..<r.lowerBound])
+            }
+            let z = zip.map { String($0.prefix(5)) }
+            return AddressMatch(address: s.uppercased(), unit: unit, community: city, zip: z?.isEmpty == false ? z : nil,
+                                renum: parcelId?.isEmpty == false ? parcelId : nil, point: GeoPoint(x: lon, y: lat))
+        }
     }
     public struct Prefs: Decodable, Sendable, Equatable {
         public var weeklyEmail: Bool

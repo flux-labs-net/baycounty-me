@@ -209,7 +209,7 @@ function pick(f) {
   const a = f.attributes;
   inp.value = title(a.ADDRESS) + (a.UNIT ? ' #' + a.UNIT : '');
   const u = new URL(location.href); u.searchParams.set('a', a.ADDRESS); if (a.UNIT) u.searchParams.set('u', a.UNIT); else u.searchParams.delete('u'); u.searchParams.set('z', a.ZIP || '');
-  history.replaceState(null, '', u);
+  u.hash = ''; history.replaceState(null, '', u);
   load(f);
 }
 
@@ -523,16 +523,31 @@ async function drawMap(pt, cityName, craName) {
 window.BCReportTitle = () => 'Address report: ' + $('aTitle').textContent;
 window.BCReportMeta = () => `Address report: ${$('aTitle').textContent} · ${$('aSub').textContent}`;
 
-/* restore from URL */
+/* restore from URL: ?a=&u=&z= (a picked address), ?lat=&lon= (a saved home's point, used when ?a is missing or not
+   found: the nearest county address point within 60 m), or ?q= (prefill the search box). The same keys also work in
+   the hash (#a=…), which the saved-home links use so the address isn't sent with the page request. */
 (async () => {
-  const u = new URL(location.href), a = u.searchParams.get('a'), qq = u.searchParams.get('q');
-  if (!a && qq) { inp.value = qq; inp.focus({preventScroll: true}); suggest(); return; }
-  if (!a) { inp.focus({preventScroll: true}); return; }
-  inp.value = title(a);
+  const u = new URL(location.href);
+  new URLSearchParams(location.hash.slice(1)).forEach((v, k) => { if (!u.searchParams.has(k)) u.searchParams.set(k, v); });
+  const a = u.searchParams.get('a'), qq = u.searchParams.get('q');
+  const lat = parseFloat(u.searchParams.get('lat')), lon = parseFloat(u.searchParams.get('lon')), hasPt = isFinite(lat) && isFinite(lon);
+  if (!a && !hasPt && qq) { inp.value = qq; inp.focus({preventScroll: true}); suggest(); return; }
+  if (!a && !hasPt) { inp.focus({preventScroll: true}); return; }
+  if (a) inp.value = title(a);
+  const fields = {outFields: 'ADDRESS,UNIT,CMNTY,ZIP,RENUM', returnGeometry: 'true', outSR: 4326, resultRecordCount: 1};
   try {
-    const unit = u.searchParams.get('u'), z = u.searchParams.get('z');
-    let where = `ADDRESS = '${clean(a)}'` + (z ? ` AND ZIP = ${parseInt(z, 10) || 0}` : '') + (unit ? ` AND UNIT = '${clean(unit)}'` : '');
-    const f = await q('Admin_A12/MapServer/3', {where, outFields: 'ADDRESS,UNIT,CMNTY,ZIP,RENUM', returnGeometry: 'true', outSR: 4326, resultRecordCount: 1});
+    let f = [];
+    if (a) {
+      const unit = u.searchParams.get('u'), z = u.searchParams.get('z');
+      const where = `ADDRESS = '${clean(a)}'` + (z ? ` AND ZIP = ${parseInt(z, 10) || 0}` : '') + (unit ? ` AND UNIT = '${clean(unit)}'` : '');
+      f = await q('Admin_A12/MapServer/3', {where, ...fields});
+    }
+    if (!f[0] && hasPt) {
+      f = await q('Admin_A12/MapServer/3', {geometry: `${lon},${lat}`, geometryType: 'esriGeometryPoint', inSR: 4326, distance: 60, units: 'esriSRUnit_Meter', ...fields, resultRecordCount: 20});
+      const d = g => (g.geometry.x - lon) ** 2 + (g.geometry.y - lat) ** 2;
+      f = f.filter(g => g.geometry).sort((x, y) => d(x) - d(y));
+      if (f[0]) inp.value = title(f[0].attributes.ADDRESS) + (f[0].attributes.UNIT ? ' #' + f[0].attributes.UNIT : '');
+    }
     if (f[0]) load(f[0]); else { $('err').textContent = 'That address wasn\'t found. Try searching again.'; $('err').hidden = false; }
   } catch (e) { $('err').textContent = 'Bay County\'s map server didn\'t answer. Try again in a moment.'; $('err').hidden = false; }
 })();

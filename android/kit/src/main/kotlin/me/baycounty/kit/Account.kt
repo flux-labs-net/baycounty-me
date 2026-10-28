@@ -135,8 +135,20 @@ data class AccountMe(
     data class Home(
         val label: String? = null, val address: String, val city: String? = null, val zip: String? = null,
         val lat: Double, val lon: Double, @SerialName("gov_id") val govId: String? = null, val zone: String? = null,
+        @SerialName("parcel_id") val parcelId: String? = null,
     ) {
         val subtitle: String get() = listOfNotNull(city, zip).filter { it.isNotEmpty() }.joinToString(" ")
+
+        /** The saved home as the phone's address ("825 Ohio Ave #2 32444" → street 825 OHIO AVE, unit 2), so the
+         *  Today card, tax bill and trash day use the account's home on any phone the resident signs in on. Same rules
+         *  as window.BCHomeLink on the site. */
+        val addressMatch: AddressMatch get() {
+            var s = address.trim().replace(Regex("""\s+\d{5}(-\d{4})?$"""), "")
+            var unit: String? = null
+            Regex("""\s*#\s*(\S+)$""").find(s)?.let { unit = it.groupValues[1].uppercase(); s = s.substring(0, it.range.first) }
+            val z = zip?.take(5)?.takeIf { it.isNotEmpty() }
+            return AddressMatch(s.uppercase(), unit, city, z, parcelId?.takeIf { it.isNotEmpty() }, GeoPoint(lon, lat))
+        }
     }
     @Serializable
     data class Prefs(
