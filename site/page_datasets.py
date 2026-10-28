@@ -848,7 +848,12 @@ def _restaurant_rows():
     from collections import defaultdict
     from place import PLACE_ID
     d = _rest_dir()
-    ins = [r for r in _csv_rows(os.path.join(d, 'inspections.csv')) if r['date'][:4] >= str(cutoff.FIRST_YEAR)]
+    ins, seen = [], set()
+    for r in sorted(_csv_rows(os.path.join(d, 'inspections.csv')), key=lambda r: (len(r['visit_id'] or ''), r['visit_id'] or '')):
+        k = tuple(v for c, v in r.items() if c not in ('visit_id', 'inspection_number'))
+        if r['date'][:4] >= str(cutoff.FIRST_YEAR) and k not in seen:  # the state file records some visits twice under two ids
+            seen.add(k)
+            ins.append(r)
     lic = _csv_rows(os.path.join(d, 'licenses.csv'))
     if not ins and not lic:
         _RC['rest'] = ([], [])

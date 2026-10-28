@@ -604,6 +604,156 @@
       "permanent": true
     },
     {
+      "source": "/profile/business/all-steel-buildings",
+      "destination": "/profile/business/all-steel-buildings-inc",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/bay-county-board-of-county-commisioners",
+      "destination": "/governments/bay-county",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/bri-sharkey-s-llc",
+      "destination": "/profile/business/bri-sharkeys-llc",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/c-g-construction-equipment",
+      "destination": "/profile/business/c-g-construction-equipment-i",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/cahall-s-deli",
+      "destination": "/profile/business/cahalls-deli",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/captain-andersons",
+      "destination": "/profile/business/captain-anderson-s",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/casaloma",
+      "destination": "/profile/business/casa-loma",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/city-of-mexico-beach",
+      "destination": "/governments/mexico-beach",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/city-of-panama-city-beach",
+      "destination": "/governments/panama-city-beach",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/club-lavela",
+      "destination": "/profile/business/club-la-vela",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/commander-realty",
+      "destination": "/profile/business/commander-realty-inc",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/daffin-property-mgmt-llc",
+      "destination": "/profile/business/daffin-property-mgmt",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/days-inn-pcb",
+      "destination": "/profile/business/days-inn-pcb-inc",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/diegos",
+      "destination": "/profile/business/diego-s",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/gulf-asphalt-company",
+      "destination": "/profile/business/gulf-asphalt",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/hodges-bayou-development-1-ll",
+      "destination": "/profile/business/hodges-bayou-development-1-llc",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/m-b-farms-llc",
+      "destination": "/profile/business/mb-farms",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/mcs-general-contractors",
+      "destination": "/profile/business/mcs-general-contractors-inc",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/neve-s-media",
+      "destination": "/profile/business/neves-media",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/nichols-associates",
+      "destination": "/profile/business/nichols-and-associates",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/po-folks-callaway",
+      "destination": "/profile/business/pofolks-callaway-inc",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/pofolks-callaway",
+      "destination": "/profile/business/pofolks-callaway-inc",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/postnet-fl102",
+      "destination": "/profile/business/postnet-fl-102",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/prisevittles-inc",
+      "destination": "/profile/business/prise-vittles-inc",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/seahaven-residential-mgmt",
+      "destination": "/profile/business/seahaven-residential-mgmt-llc",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/sffig-inc",
+      "destination": "/profile/business/sffig",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/shuckums-oyster-pub-grill",
+      "destination": "/profile/business/shuckums-oyster-pub-and-grill",
+      "permanent": true
+    },
+    {
+      "source": "/profile/business/who-dey-prints-and-embroidery",
+      "destination": "/profile/business/who-dey-prints-embroidery",
+      "permanent": true
+    },
+    {
+      "source": "/profile/committee/committee-realtors-political-advocacy-co",
+      "destination": "/profile/committee/committee-realtors-political-advocacy",
+      "permanent": true
+    },
+    {
+      "source": "/profile/committee/realtors-political-advocacy",
+      "destination": "/profile/committee/realtors-political-advocacy-co",
+      "permanent": true
+    },
+    {
       "source": "/public-money/cra-network",
       "destination": "/connections",
       "permanent": true

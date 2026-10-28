@@ -41,6 +41,8 @@ LEVELS = [  # (level, gov_id, pattern); the first match wins
     ('State', None, r'^Partisan Election of Members of District School Boards'),  # a statewide amendment
     ('Court', 'county', r'^County Judge'),
     ('Court', None, r'Retention|Justice|Court of Appeal'),
+    ('Special district', 'beach_mosquito', r'Beach Mosquito Control'),
+    ('Special district', 'lake_powell_cdd', r'Lake Powell (Residential Golf )?Community Development'),
     ('Special district', None, r'Mosquito Control|Community Development District'),
     ('School district', 'schools', r'School Board|Superintendent of Schools|District School Boards'),
     ('County', 'county', r'County Commission|Property Appraiser|Tax Collector|Sheriff|Clerk of|Supervisor of Elections|'
@@ -180,6 +182,9 @@ def _results():
                 local = level in ('County', 'School district', 'City') or (level == 'Court' and gid == 'county')
                 for x in c['choices']:
                     pid = ids.person_id(x['choice']) if local and not measure else None
+                    if level == 'Special district' and gid and not measure:  # only someone already on record with that district
+                        pid = ids.person_id(x['choice'])
+                        pid = pid if pid and gid in ((ids.person(pid) or {}).get('gov_ids') or []) else None
                     results.append({'place_id': place, 'election_id': m['election_id'], 'election_date': d, 'election_name': m['name'],
                                     'election_kind': m['kind'], 'contest_id': c['contest_id'], 'contest': name, 'office': office,
                                     'level': level, 'gov_id': gid, 'measure': measure, 'party_primary': party_primary,

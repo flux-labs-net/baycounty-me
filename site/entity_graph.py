@@ -263,7 +263,7 @@ def service(p, gid, terms):
         a, b = (t.get('start_date') or '')[:4], (t.get('end_date') or '')[:4]
         return (a if a == b else f"{a}–{b or 'now'}") if a else f'until {b}' if b else 'current'
     parts, seats, kind = [], set(), None
-    pay = [r for r in roles if r.get('source') in ('salaries', 'officials-pay') and r.get('role')]
+    pay = [r for r in roles if r.get('source') in ('salaries', 'officials-pay') and r.get('role') and not re.search(r'(?i)\bformer\b', r['role'])]
     for t in now:
         seat = _seat(t.get('seat')) or (t.get('seat') or '').lower()
         title = next((r['role'] for r in pay if _seat(r['role']) == seat), None)  # 'Commissioner, Ward 4' from the pay record
@@ -375,6 +375,11 @@ def build():
         if kind in ('b', 's'):
             if payee_np.get(eid) and payee_np[eid] in np_names:
                 return np_names[payee_np[eid]]
+            gid = ids.gov_id(name)
+            if gid and 'gov:' + gid in G.ents:  # a city or county office paid as a payee
+                return 'gov:' + gid
+            if re.match(r'(?i)dda check\b', name or ''):
+                return None  # a bank check placeholder, not a payee
             return G.ent('business:' + key, name, 'Business paid by a local government')
         if kind == 'g':
             gid = ids.gov_id(name)
@@ -425,6 +430,14 @@ def build():
         return G.ent('business:' + doc, ids.biz_case(name), sub or 'Registered business', None, url or
                      ids.sunbiz_url(name, doc))
 
+    slug_of = {}
+
+    def donor_slug(name):
+        """One id per donor however the filings spell it ('Capt. Anderson's', 'Captain Andersons'): the first spelling's
+        slug for each matching key (ids.vkey, joined through name_joins.json)."""
+        k = ids.canon_key(ids.vkey(name)) or _slug(name)
+        return slug_of.setdefault(k, _slug(name))
+
     # campaign gifts from organizations (never individuals) to officials and candidates
     for r in _ds('connections-gifts'):
         pid = ids.person_id(r['official'])
@@ -435,10 +448,11 @@ def build():
         if r.get('payee_entity_id'):
             frm = payee(r['payee_entity_id'], r['donor'])
         elif r['donor_type'] == 'business':
-            doc = doc_of.get(_norm(r['donor']))
-            frm = business(doc, r['donor']) if doc else G.ent('business:' + _slug(r['donor']), ids.biz_case(r['donor']), 'Business that gave to a local campaign')
+            doc, vid = doc_of.get(_norm(r['donor'])), ids.vendor_id(r['donor'])
+            frm = (business(doc, r['donor']) if doc else 'vendor:' + vid if vid and 'vendor:' + vid in G.ents else
+                   G.ent('business:' + donor_slug(r['donor']), ids.biz_case(r['donor']), 'Business that gave to a local campaign'))
         else:
-            frm = G.ent('committee:' + _slug(r['donor']), ids.biz_case(r['donor']), {'pac': 'Political committee', 'committee': 'Committee'}.get(r['donor_type'], 'Organization') + ' that gave to a local campaign')
+            frm = G.ent('committee:' + donor_slug(r['donor']), ids.biz_case(r['donor']), {'pac': 'Political committee', 'committee': 'Committee'}.get(r['donor_type'], 'Organization') + ' that gave to a local campaign')
         if frm:
             G.link(frm, 'person:' + pid, 'gift', r.get('amount'), r.get('dates'), (r.get('office') or '') + (' (2026 candidate)' if r.get('candidate_2026') else f" ({r['past_campaign_year']} campaign)" if r.get('past_campaign_year') else ''),
                    r.get('report_url'), key=r.get('office') or '')
@@ -545,6 +559,9 @@ def build():
             continue
         G.ent(aid, r['sub_agency'] or r['agency'],
               'Federal agency' + (f" · {r['agency']}" if r.get('sub_agency') and r['sub_agency'] != r['agency'] else ''), None, 'https://www.usaspending.gov/search')
+        gid = ids.gov_id(r.get('recipient'))
+        if gid and 'gov:' + gid in G.ents:  # a city or the county as a federal contract recipient
+            rid = 'gov:' + gid
         if rid.startswith('business:') and rid not in G.ents:
             G.ent(rid, ids.biz_case(r['recipient']), 'Company with federal contracts', None, 'https://www.usaspending.gov/search')
         if rid in G.ents:

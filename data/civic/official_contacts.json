@@ -538,6 +538,14 @@
      "notes": "Florida DOE superintendent directory (official state page). The bay.k12.fl.us site sits behind a JavaScript bot challenge, so I couldn't confirm it there."
     },
     {
+     "seat": "District 1",
+     "holder": "Jerry Register",
+     "email": null,
+     "source_url": null,
+     "elected": true,
+     "notes": "Holder from data/civic/officeholders.json (terms data); no email found (board pages sit behind a JS challenge)."
+    },
+    {
      "seat": "District 2",
      "holder": "Ann Leonard (not seeking re-election); Ginger Littleton won Aug 18, 2026 primary, term begins Nov 2026",
      "email": null,
@@ -547,19 +555,27 @@
     },
     {
      "seat": "District 3",
-     "holder": null,
+     "holder": "Chris Moore",
      "email": null,
      "source_url": null,
      "elected": true,
-     "notes": "Roster has no holder. Board member pages couldn't be read (JS challenge)."
+     "notes": "Holder from data/civic/officeholders.json (terms data); no email found (board pages sit behind a JS challenge)."
+    },
+    {
+     "seat": "District 4",
+     "holder": "Winston Chester",
+     "email": null,
+     "source_url": null,
+     "elected": true,
+     "notes": "Holder from data/civic/officeholders.json (terms data); no email found (board pages sit behind a JS challenge)."
     },
     {
      "seat": "District 5",
-     "holder": null,
+     "holder": "Steve Moss",
      "email": null,
      "source_url": null,
      "elected": true,
-     "notes": "Roster has no holder. Board member pages couldn't be read (JS challenge)."
+     "notes": "Holder from data/civic/officeholders.json (terms data); no email found (board pages sit behind a JS challenge)."
     }
    ]
   }

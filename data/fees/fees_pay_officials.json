@@ -1957,6 +1957,12 @@
           "elected": true
         },
         {
+          "seat": "District 1",
+          "holder": "Jerry Register",
+          "term_end": null,
+          "elected": true
+        },
+        {
           "seat": "District 2",
           "holder": "Ann Leonard (not seeking re-election); Ginger Littleton won Aug 18, 2026 primary, term begins Nov 2026",
           "term_end": "Nov 2026",
@@ -1964,13 +1970,19 @@
         },
         {
           "seat": "District 3",
-          "holder": null,
+          "holder": "Chris Moore",
           "term_end": "Nov 2026 (on 2026 ballot)",
           "elected": true
         },
         {
+          "seat": "District 4",
+          "holder": "Winston Chester",
+          "term_end": null,
+          "elected": true
+        },
+        {
           "seat": "District 5",
-          "holder": null,
+          "holder": "Steve Moss",
           "term_end": "Nov 2026 (on 2026 ballot)",
           "elected": true
         }

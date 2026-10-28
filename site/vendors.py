@@ -33,7 +33,7 @@ def key(name):
 VENDORS = {
     '850-construction': ('850 Construction Services', ['850 constructio', '850 construction services'], 'business'),
     'american-sand': ('American Sand & Asphalt Paving', ['american sand', 'american sand asphalt', 'american sand asphalt paving',
-                                                         'american sand asphalt x-cavation', 'american sand asphalt pavi'], 'business'),
+                                                         'american sand asphalt pavi'], 'business'),
     'anderson-columbia': ('Anderson Columbia Co.', ['anderson columbia'], 'business'),
     'anderson-construction': ('Anderson Construction Co. of North Florida', ['anderson construction', 'anderson construction north florida'], 'business'),
     'arris': ('ARRIS General Contractors', ['arris general', 'arris general contractors'], 'business'),
@@ -69,7 +69,7 @@ VENDORS = {
     'marshall-brothers': ('Marshall Brothers Construction & Engineering', ['marshall brothers', 'marshall bothers', 'marshall brothers construction',
                                                                          'marshall brothers construction engineering'], 'business'),
     'metric': ('Metric Engineering', ['metric engineering'], 'business'),
-    'mott-macdonald': ('Mott MacDonald', ['mott macdonald', 'mott macdonald consultants', 'mott macdonald florida'], 'business'),
+    'mott-macdonald': ('Mott MacDonald', ['mott macdonald', 'mott macdonald florida'], 'business'),
     'mr-fence': ('Mr. Fence of Florida', ['mr fence', 'mr fence florida'], 'business'),
     'ovivo': ('Ovivo USA', ['ovivo usa'], 'business'),
     'panhandle-engineering': ('Panhandle Engineering', ['panhandle engin', 'panhandle engineering'], 'business'),
