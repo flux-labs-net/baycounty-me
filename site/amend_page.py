@@ -111,7 +111,7 @@ def amend_page(out_dir):
       <form class="calc-in" onsubmit="return false">
         <label class="fld"><span>Where is the property?</span><select id="cDist"></select></label>
         <label class="fld"><span>{T('assessed-value', 'Assessed value')}</span>
-          <span class="money"><span aria-hidden="true">$</span><input id="cVal" type="text" inputmode="numeric" autocomplete="off" value="250,000"></span>
+          <span class="money"><span aria-hidden="true">$</span><input id="cVal" type="text" inputmode="numeric" enterkeyhint="done" autocomplete="off" value="250,000"></span>
           <small class="muted">On your TRIM notice or the Property Appraiser's site.</small></label>
         <fieldset class="seg-ctl"><legend>This property is</legend>
           <label><input type="radio" name="kind" value="home" checked> My homestead, and I lived in Florida before 2027</label>

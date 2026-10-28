@@ -70,6 +70,8 @@ function calc() {
     bills[0].map((r, ri) => `<tr><th scope="row"><i class="dot" style="background:${col(r.g)}"></i>${esc(r.n)}</th><td class="num">${String(+r.m.toFixed(4))}</td>${bills.map(b => `<td class="num">${usd(b[ri].amt)}</td>`).join('')}</tr>`).join('') +
     `</tbody><tfoot><tr><th scope="row">Total</th><td></td>${tots.map(x => `<td class="num">${usd(x)}</td>`).join('')}</tr></tfoot>`;
 }
+// Phone keypads: Enter/Done closes the keypad.
+valIn.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); valIn.blur(); } });
 valIn.addEventListener('input', () => { const pos = valIn.value.length - valIn.selectionStart, n = readVal(); valIn.value = n ? n.toLocaleString('en-US') : ''; const p = Math.max(0, valIn.value.length - pos); valIn.setSelectionRange(p, p); calc(); });
 sel.addEventListener('change', calc);
 document.querySelectorAll('input[name="kind"]').forEach(r => r.addEventListener('change', calc));

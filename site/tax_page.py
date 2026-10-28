@@ -270,7 +270,7 @@ def tax_page(out_dir, gov_panel=True):
       <form class="calc-in" id="calcForm" onsubmit="return false">
         <label class="fld"><span>Where is the property?</span><select id="cDist"></select></label>
         <label class="fld"><span>{T('assessed-value', 'Assessed value')}</span>
-          <span class="money"><span aria-hidden="true">$</span><input id="cVal" type="text" inputmode="numeric" autocomplete="off" value="250,000" aria-describedby="cValHint"></span>
+          <span class="money"><span aria-hidden="true">$</span><input id="cVal" type="text" inputmode="numeric" enterkeyhint="done" autocomplete="off" value="250,000" aria-describedby="cValHint"></span>
           <small id="cValHint" class="muted">On your TRIM notice or the Property Appraiser's site. Not the sale price.</small></label>
         <label class="chk"><input id="cHome" type="checkbox" checked> <span>I live here full time and have a {T('homestead', 'homestead exemption')}</span></label>
       </form>

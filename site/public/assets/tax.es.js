@@ -87,6 +87,8 @@ function calc() {
   bindTips(tr, i => { const y = yrs[i]; return `<b>${y.fy}</b> · ${usd(y.tot)}<br>` + D.groups.map(([g]) => [g, y.rows.filter(r => r.g === g).reduce((a, r) => a + r.amt, 0)]).filter(x => x[1] > 0).map(([g, a]) => `<span class="tt-row"><i style="background:${col(g)}"></i>${esc(g === 'city' ? cityName(dist) : GN[g])} <b>${usd(a)}</b></span>`).join(''); });
 }
 function cityName(dist) { const c = dist.stack.find(id => D.auth[id].g === 'city'); return c ? D.auth[c].n : 'Su ciudad'; }
+// Phone keypads: Enter/Done closes the keypad.
+valIn.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); valIn.blur(); } });
 valIn.addEventListener('input', () => {
   const pos = valIn.value.length - valIn.selectionStart, n = readVal();
   valIn.value = n ? n.toLocaleString('es-US') : '';
