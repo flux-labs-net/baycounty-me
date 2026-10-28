@@ -619,13 +619,30 @@ def data_sources_page():
     return page(OUT)
 
 
+# Who runs BayCounty.me: the About page's last section (the apps say the same in fewer words).
+ABOUT_WHO = ('BayCounty.me is built and run by <a href="https://fluxlabs.net/" target="_blank" rel="noopener">Flux Labs</a>, '
+             'a managed IT company in Panama City. We live and work here, and we built this because public records should be easy '
+             'to read without filing a request or digging through a PDF. The site has no ads and doesn\'t track you, and it isn\'t '
+             'paid for by any government, candidate or campaign.')
+
+
 def about_page():
     return '''<div class="page prose">
   <span class="eyebrow">About</span>
   <h1>About BayCounty.me</h1>
-  <p>BayCounty.me is an independent project that collects Bay County, Florida public records and turns them into maps and tables anyone can read. It starts with how local governments spend public money and will grow from there.</p>
+  <p class="lede">BayCounty.me is an independent, free website and app that puts Bay County, Florida public records in one place, in plain language. It covers all nine local governments: Bay County, Bay District Schools, Panama City, Panama City Beach, Lynn Haven, Callaway, Springfield, Parker and Mexico Beach.</p>
+  <h2>What you can find here</h2>
+  <ul>
+    <li><b><a href="/my-address">Living here</a>.</b> Look up any address for its tax bill, schools, trash day, officials and nearby projects. Restaurant inspections, new businesses, road and building projects, beaches, parks, events, government jobs, emergency alerts and hurricane prep.</li>
+    <li><b><a href="/public-money/tax-dollars">Your money</a>.</b> Budgets by year, tax rates and fees, contracts and vendors, CRA and sales tax spending, Hurricane Michael recovery, and an <a href="/public-money/accountability">accountability console</a> that follows major projects from approval to final cost.</li>
+    <li><b><a href="/people">Who decides</a>.</b> Every elected official and department leader, their pay, <a href="/public-money/votes">how they voted</a>, <a href="/connections/campaign-gifts">campaign gifts</a>, and the business and nonprofit ties between people, companies and governments.</li>
+    <li><b><a href="/elections">Elections</a>.</b> Your ballot, where and when to vote, and results since 2016.</li>
+    <li><b><a href="/meetings">Get involved</a>.</b> Meetings with their agendas and minutes, public notices, records requests, email alerts, and an <a href="/ask">Ask page</a> that answers questions from the records on the site.</li>
+  </ul>
+  <p>Everything is also free to download as <a href="/open-data">open data</a> or use through the <a href="/developers">public API</a>.</p>
   <h2>Where the information comes from</h2>
-  <p>Everything on the site comes from documents the public can already request or download: city and county budgets, annual reports, audits filed with the Florida Auditor General, council and commission resolutions, Bay County GIS map layers, and reporting by local newsrooms. Each figure carries a link to its source. <a href="/data-sources">See every source we use</a>, with links and how we process each one.</p>
+  <p>Every figure comes from a public record: budgets, audits, annual financial reports, meeting agendas and minutes, resolutions, campaign finance reports, state business filings, GIS map layers and state inspection data. Each one links to its source, and records go back to 2016. An automated reader helps pull votes and agenda items out of long meeting documents, and those are checked against the source before they count. <a href="/data-sources">See every source we use</a>, with links and how we process each one.</p>
+  <p>BayCounty.me is not run by, and does not speak for, any government.</p>
   <h2>What the labels mean</h2>
   <ul>
     <li><b>Spent</b>: the record reports the money as paid.</li>
@@ -633,6 +650,8 @@ def about_page():
     <li><b>Budgeted</b> or <b>Proposed</b>: a plan or appropriation, not a payment.</li>
   </ul>
   <p>Totals count each dollar once. When one record is part of another (a change order inside a project total, for example), it stays visible but is left out of the totals.</p>
+  <h2>Who runs it</h2>
+  <p>__ABOUT_WHO__</p>
   <h2 id="contact">Corrections, records and questions</h2>
   <p>Found an error, or have a public record that fills a gap? Send it here. Corrections are dated on the page they affect and listed under <a href="/updates">What's new</a>.</p>
   <form class="contact" id="contactForm" novalidate>
@@ -676,9 +695,7 @@ def about_page():
     });
   })();
   </script>
-  <h2>Who runs it</h2>
-  <p>BayCounty.me is built and hosted by <a href="https://fluxlabs.net/" target="_blank" rel="noopener">Flux Labs</a>, a managed IT services company in Panama City.</p>
-</div>'''.replace('__PAGE_OPTS__', page_options())
+</div>'''.replace('__PAGE_OPTS__', page_options()).replace('__ABOUT_WHO__', ABOUT_WHO)
 
 
 def privacy_page():
