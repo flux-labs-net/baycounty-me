@@ -240,6 +240,12 @@ class AccountClient(var token: String?, val platform: String = "android", privat
     suspend fun linkDevice(pushToken: String, appVersion: String?) {
         call("device", buildJsonObject { put("token", pushToken); put("platform", platform); put("app_version", appVersion ?: "") })
     }
-    suspend fun logout() { runCatching { call("logout", JsonObject(emptyMap())) }; token = null }
+    suspend fun unlinkDevice(pushToken: String) {
+        call("device", buildJsonObject { put("token", pushToken); put("platform", platform); put("off", true) })
+    }
+    /** Ends the session; with this phone's push token, the phone stops getting alerts too. */
+    suspend fun logout(pushToken: String? = null) {
+        runCatching { call("logout", buildJsonObject { if (pushToken != null) put("token", pushToken) }) }; token = null
+    }
     suspend fun deleteAccount() { call("delete_account", JsonObject(emptyMap())); token = null }
 }

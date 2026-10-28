@@ -47,7 +47,7 @@ async function pushNear(place, today) {
   const pts = await db.q(`select p.* from push.agenda_points p where p.place_id = $1 and p.lat is not null and (p.meeting_date is null or p.meeting_date >= $2::date)
       and not exists (select 1 from push.sent s where s.notice_id = 'agenda:' || p.record_hash) limit 50`, [place, today]);
   if (!pts.length) return [];
-  const devs = await db.q(`select token, platform, lat, lng, radius_mi from push.devices where place_id = $1 and disabled_at is null and 'agenda' = any(topics) and lat is not null`, [place]);
+  const devs = await db.q(`select token, platform, lat, lng, radius_mi from push.devices where place_id = $1 and disabled_at is null and user_id is not null and 'agenda' = any(topics) and lat is not null`, [place]);
   const sent = [];
   for (const pt of pts) {
     const msg = message(pt);

@@ -15,7 +15,8 @@
 //   POST prefs {weekly_email, alert_email[], push_topics[], radius_mi, topics[]}
 //   GET  feed                             what's happening near the saved home (api/_nearby.js, the same as /api/v1/nearby)
 //   POST device {token, platform, app_version}   this phone gets notifications for the account's home and choices
-//   POST logout                           ends this session
+//   POST device {token, platform, off: true}      this phone stops getting them
+//   POST logout {token?}                  ends this session; with this phone's push token, the phone stops getting alerts
 //   POST delete_account                   deletes the person, their home, choices, sessions and send log
 //   GET/POST emails?t=                    the "change or stop these emails" page linked from every email, and RFC 8058
 //                                         one-click unsubscribe (signed token, no sign-in needed)
@@ -235,6 +236,9 @@ async function handler(req, res) {
     if (action === 'logout') {
       const u = await session(req);
       if (u) await q('delete from account.sessions where token_hash = $1', [u.token_hash]);
+      // Alerts need a signed-in phone, so signing out turns this phone's alerts off.
+      const token = String(body(req).token || '').trim();
+      if (u && token) await q('delete from push.devices where token = $1 and user_id = $2', [token, u.id]);
       setSession(res, '', 0);
       return res.status(200).json({ok: true});
     }
@@ -284,6 +288,10 @@ async function handler(req, res) {
       const platform = b.platform === 'android' ? 'android' : b.platform === 'ios' ? 'ios' : null;
       const token = String(b.token || '').trim();
       if (!platform || !({ios: /^[0-9a-f]{64,200}$/i, android: /^[\w:.-]{100,400}$/})[platform].test(token)) throw bad('A valid device token and platform are required.');
+      if (b.off === true) {
+        await q('delete from push.devices where token = $1 and user_id = $2', [token, u.id]);
+        return res.status(200).json({ok: true, removed: true});
+      }
       await q(`insert into push.devices (token, platform, place_id, app_version, user_id) values ($1, $2, $3, $4, $5)
           on conflict (token) do update set platform = excluded.platform, app_version = excluded.app_version, user_id = excluded.user_id, last_seen = now(), failures = 0, disabled_at = null`,
       [token, platform, u.place_id || 'fl-bay', text(b.app_version, 40), u.id]);

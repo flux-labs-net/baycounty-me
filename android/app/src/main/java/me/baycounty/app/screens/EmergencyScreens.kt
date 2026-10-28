@@ -1,10 +1,5 @@
 package me.baycounty.app.screens
 
-import android.Manifest
-import android.content.pm.PackageManager
-import android.os.Build
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -23,8 +18,6 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
-import androidx.compose.material3.Switch
-import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -37,14 +30,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.core.content.ContextCompat
 import kotlinx.coroutines.launch
-import me.baycounty.app.Push
 import me.baycounty.app.Route
 import me.baycounty.app.ui.*
 import me.baycounty.kit.BayCountyClient
@@ -61,7 +51,6 @@ private val floodColor = Color(0xFFD9902A)
 @Composable
 fun EmergencyScreen() {
     val store = LocalStore.current
-    val context = LocalContext.current
     val scope = rememberCoroutineScope()
     var feed by remember { mutableStateOf<Emergency.Feed?>(null) }
     var kind by rememberSaveable { mutableStateOf("") }
@@ -79,7 +68,6 @@ fun EmergencyScreen() {
         looking = false
     }
     LaunchedEffect(Unit) {
-        Push.load(context)
         store.load(Emergency.datasets)
         loadFeed()
         store.home?.let { h -> if (address.isEmpty()) { address = h.display; lookup(Emergency.zonePath(h.point.y, h.point.x)) } }
@@ -133,12 +121,13 @@ fun EmergencyScreen() {
         }
         item { Now(shown, kind) { kind = it } }
         item { Shelters(shown) }
-        item { Alerts() }
         item { Numbers(store.rows["emergency-resources"] ?: emptyList()) }
         item {
             Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
                 CardList {
                     RouteRow(Route.HurricanePrep, "Hurricane prep", "Sandbags, generators, rebuild money by ZIP code", symbol = "hurricane")
+                    RowDivider(50.dp)
+                    RouteRow(Route.MyHome, "Phone alerts", "Sign in, then turn them on in My home settings", symbol = "bell.badge")
                     RowDivider(50.dp)
                     WebRow("Zone map and every notice", "${BayCountyClient.SITE}/emergency", "On BayCounty.me", symbol = "safari")
                 }
@@ -245,68 +234,6 @@ private fun Shelters(f: Emergency.Feed) {
         }
     }
 }
-
-@Composable
-private fun Alerts() {
-    val store = LocalStore.current
-    val context = LocalContext.current
-    val scope = rememberCoroutineScope()
-    val home = store.home
-    val turnOn = { Push.enable(context, home?.point) { scope.launch { Push.sync(context, home?.point) } } }
-    val ask = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
-        if (granted) turnOn() else Push.status = "Notifications are off for BayCounty.me in Settings."
-    }
-    PageSection("Alerts on this phone", "bell.badge", Tone.AMBER,
-        "BayCounty.me sends a notification when the county, a city or the Weather Service posts one of these. Only this phone's token and your choices are stored.") {
-        Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-            Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
-                Text("Send me alerts", style = T.subheadBold, color = Brand.text, modifier = Modifier.weight(1f))
-                Switch(Push.enabled, { on ->
-                    if (!on) scope.launch { Push.disable(context) }
-                    else if (Build.VERSION.SDK_INT >= 33 && ContextCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) ask.launch(Manifest.permission.POST_NOTIFICATIONS)
-                    else turnOn()
-                }, colors = SwitchDefaults.colors(checkedTrackColor = Brand.navy))
-            }
-            if (Push.enabled) {
-                CardList {
-                    Emergency.pushTopics.forEachIndexed { i, t ->
-                        Row(Modifier.fillMaxWidth().padding(horizontal = 14.dp, vertical = 8.dp), verticalAlignment = Alignment.CenterVertically) {
-                            Column(Modifier.weight(1f)) {
-                                Text(t.label, style = T.subhead, color = Brand.text)
-                                Text(t.detail, style = T.caption, color = Brand.secondary)
-                            }
-                            Switch(t.id in Push.topics, { on -> Push.setTopic(context, t.id, on); scope.launch { Push.sync(context, home?.point) } },
-                                colors = SwitchDefaults.colors(checkedTrackColor = Brand.navy))
-                        }
-                        if (i < Emergency.pushTopics.lastIndex) RowDivider()
-                    }
-                }
-                if ("agenda" in Push.topics) {
-                    if (home != null) {
-                        Text("Agenda items within ${radiusLabel(Push.radius)} of ${home.display}.", style = T.footnote, color = Brand.secondary)
-                        ChipRow(Emergency.radiusChoices.map { it to radiusLabel(it) }, Push.radius) { r -> Push.setRadius(context, r); scope.launch { Push.sync(context, home.point) } }
-                    } else {
-                        Text("Save your address on Today to get agenda items near it.", style = T.footnote, color = Brand.secondary)
-                    }
-                }
-                Text("Boil-water notices and closures from", style = T.footnote.copy(fontWeight = FontWeight.SemiBold), color = Brand.text)
-                ChipLayout {
-                    for ((id, label) in Emergency.pushGovs) {
-                        val on = id in Push.govs
-                        Text(label, style = T.caption.copy(fontWeight = FontWeight.SemiBold), color = if (on) Color.White else Brand.text,
-                            modifier = Modifier.background(if (on) Brand.navy else Brand.hairline.copy(alpha = 0.35f), RoundedCornerShape(50))
-                                .clickable { Push.toggleGov(context, id); scope.launch { Push.sync(context, home?.point) } }
-                                .padding(horizontal = 10.dp, vertical = 6.dp))
-                    }
-                }
-                Text(if (Push.govs.isEmpty()) "None picked: every government." else "Only the ones picked.", style = T.caption, color = Brand.secondary)
-            }
-            Push.status?.let { Text(it, style = T.caption, color = Brand.secondary) }
-        }
-    }
-}
-
-private fun radiusLabel(r: Double): String = when (r) { 0.25 -> "¼ mile"; 0.5 -> "½ mile"; 1.0 -> "1 mile"; else -> "${r.toInt()} miles" }
 
 @Composable
 private fun Numbers(rows: List<DataRow>) {

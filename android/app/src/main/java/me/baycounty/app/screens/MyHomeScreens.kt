@@ -1,5 +1,11 @@
 package me.baycounty.app.screens
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Build
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -322,6 +328,11 @@ fun AccountSettingsScreen() {
     var confirmDelete by remember { mutableStateOf(false) }
     val c = me?.choices
     fun toggle(list: List<String>, k: String, on: Boolean) = if (on) (list + k).distinct() else list - k
+    LaunchedEffect(Unit) { Push.load(context) }
+    val turnOnAlerts = { Push.enable(context) { scope.launch { Account.linkPhone(context) } } }
+    val askNotify = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
+        if (granted) turnOnAlerts() else Push.status = "Notifications are off for BayCounty.me in the phone's Settings."
+    }
 
     Screen("Settings", actions = {
         TextButton({
@@ -360,6 +371,22 @@ fun AccountSettingsScreen() {
         val p = prefs
         if (p != null && c != null) {
             item {
+                PageSection("Phone alerts", "bell", Tone.SALMON, Push.status ?: if (Push.enabled)
+                    "For your home and the distance below. These follow your account on every phone you're signed in on."
+                    else "Evacuation orders, weather warnings, boil-water notices and agenda items near your home.") {
+                    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                        ToggleRow("Alerts on this phone", Push.enabled) { on ->
+                            if (!on) scope.launch { Push.disable(context) }
+                            else if (Build.VERSION.SDK_INT >= 33 && ContextCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) askNotify.launch(Manifest.permission.POST_NOTIFICATIONS)
+                            else turnOnAlerts()
+                        }
+                        if (Push.enabled) AccountMe.pushOrder.filter { c.pushTopics[it] != null }.forEach { k ->
+                            ToggleRow(c.pushTopics.getValue(k), k in p.pushTopics) { on -> prefs = p.copy(pushTopics = toggle(p.pushTopics, k, on)) }
+                        }
+                    }
+                }
+            }
+            item {
                 PageSection("Near my home", "mappin.and.ellipse", Tone.TEAL) {
                     Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                         FieldMenu("Distance", AccountMe.radiusLabel(p.radiusMi), AccountMe.radii.map { it to AccountMe.radiusLabel(it) }, Modifier.fillMaxWidth(), p.radiusMi) {
@@ -377,16 +404,6 @@ fun AccountSettingsScreen() {
                         ToggleRow("Monday email: your week near home", p.weeklyEmail) { prefs = p.copy(weeklyEmail = it) }
                         AccountMe.alertEmailOrder.filter { c.alertEmail[it] != null }.forEach { k ->
                             ToggleRow(c.alertEmail.getValue(k), k in p.alertEmail) { on -> prefs = p.copy(alertEmail = toggle(p.alertEmail, k, on)) }
-                        }
-                    }
-                }
-            }
-            item {
-                PageSection("Phone alerts", "bell", Tone.SALMON,
-                    if (Push.enabled) "These follow your home on every phone you're signed in on." else "Turn on alerts under Emergencies to get these on this phone.") {
-                    Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                        AccountMe.pushOrder.filter { c.pushTopics[it] != null }.forEach { k ->
-                            ToggleRow(c.pushTopics.getValue(k), k in p.pushTopics) { on -> prefs = p.copy(pushTopics = toggle(p.pushTopics, k, on)) }
                         }
                     }
                 }

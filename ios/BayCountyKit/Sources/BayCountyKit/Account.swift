@@ -226,6 +226,12 @@ public final class AccountClient: @unchecked Sendable {
     public func linkDevice(pushToken: String, appVersion: String?) async throws {
         _ = try await call("device", ["token": pushToken, "platform": platform, "app_version": appVersion ?? ""])
     }
-    public func logout() async { _ = try? await call("logout", [:]); token = nil }
+    public func unlinkDevice(pushToken: String) async throws {
+        _ = try await call("device", ["token": pushToken, "platform": platform, "off": true])
+    }
+    /// Ends the session; with this phone's push token, the phone stops getting alerts too.
+    public func logout(pushToken: String? = nil) async {
+        _ = try? await call("logout", pushToken.map { ["token": $0] } ?? [:]); token = nil
+    }
     public func deleteAccount() async throws { _ = try await call("delete_account", [:]); token = nil }
 }

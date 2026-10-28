@@ -341,6 +341,7 @@ struct AccountSettingsView: View {
     @State private var name = ""
     @State private var changingHome = false
     @State private var confirmDelete = false
+    @State private var push = PushManager.shared
 
     var body: some View {
         NavigationStack {
@@ -361,6 +362,19 @@ struct AccountSettingsView: View {
                     } header: { Text("Home") } footer: { Text("Kept private. Used only to pick what's near you.") }
                 }
                 if let p = Binding($prefs), let c = account.me?.choices {
+                    Section {
+                        Toggle("Alerts on this phone", isOn: Binding(get: { push.enabled }, set: { on in Task { if on { await push.enable() } else { await push.disable() } } }))
+                            .fontWeight(.semibold)
+                        if push.enabled {
+                            ForEach(AccountMe.pushOrder.filter { c.pushTopics[$0] != nil }, id: \.self) { k in
+                                Toggle(c.pushTopics[k]!, isOn: member(p.pushTopics, k))
+                            }
+                        }
+                    } header: { Text("Phone alerts") } footer: {
+                        Text(push.status ?? (push.enabled
+                            ? "For your home and the distance below. These follow your account on every phone you're signed in on."
+                            : "Evacuation orders, weather warnings, boil-water notices and agenda items near your home."))
+                    }
                     Section("Near my home") {
                         Picker("Distance", selection: p.radiusMi) {
                             ForEach(AccountMe.radii, id: \.self) { Text(AccountMe.radiusLabel($0)).tag($0) }
@@ -375,13 +389,6 @@ struct AccountSettingsView: View {
                             Toggle(c.alertEmail[k]!, isOn: member(p.alertEmail, k))
                         }
                     } header: { Text("Email") } footer: { Text("Emergency emails go out only when a notice reaches your home.") }
-                    Section {
-                        ForEach(AccountMe.pushOrder.filter { c.pushTopics[$0] != nil }, id: \.self) { k in
-                            Toggle(c.pushTopics[k]!, isOn: member(p.pushTopics, k))
-                        }
-                    } header: { Text("Phone alerts") } footer: {
-                        Text(PushManager.shared.enabled ? "These follow your home on every phone you're signed in on." : "Turn on alerts under Emergencies to get these on this phone.")
-                    }
                 }
                 Section {
                     Button("Sign out") { Task { await account.signOut(); dismiss() } }
