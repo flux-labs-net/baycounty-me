@@ -74,6 +74,8 @@ async function pushNew(place, notices, nowMs = Date.now()) {
     await db.q('update push.sent set devices = $2, delivered = $3, failed = $4 where notice_id = $1', [n.notice_id, devices.length, res.delivered, res.failed]);
     if (res.dead.length) await db.q('update push.devices set disabled_at = now() where token = any($1::text[])', [res.dead]);
     if (res.delivered) await db.q('update emergency_live set pushed_at = now() where notice_id = $1', [n.notice_id]);
+    // Residents with an account who asked for this topic by email, when the notice reaches their saved home (api/_account.js).
+    try { await require('./_account').emailNotice(place, n, topic); } catch (e) { console.error('account alert email', e.message); }
     sent.push({notice_id: n.notice_id, topic, devices: devices.length, delivered: res.delivered});
   }
   return sent;

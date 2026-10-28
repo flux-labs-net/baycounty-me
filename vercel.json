@@ -16,6 +16,9 @@
     "api/admin.js": {
       "maxDuration": 60,
       "includeFiles": "{data/civic/official_contacts.json,data/entities/vendor_review.json}"
+    },
+    "api/weekly.js": {
+      "maxDuration": 60
     }
   },
   "crons": [
@@ -30,6 +33,14 @@
     {
       "path": "/api/alerts-run",
       "schedule": "40 13 * * *"
+    },
+    {
+      "path": "/api/weekly?home=1",
+      "schedule": "30 13 * * 1"
+    },
+    {
+      "path": "/api/weekly?home=1",
+      "schedule": "30 14 * * 1"
     }
   ],
   "redirects": [
@@ -2528,6 +2539,10 @@
     {
       "source": "/api/realtor",
       "destination": "/api/manage?app=realtor"
+    },
+    {
+      "source": "/api/account",
+      "destination": "/api/manage?app=account"
     },
     {
       "source": "/api/v1/:path*",

@@ -43,6 +43,8 @@ sealed class Route {
     data class Utilities(val match: AddressMatch? = null) : Route()
     object Volunteer : Route()
     object Military : Route()
+    object MyHome : Route()
+    object AccountSettings : Route()
     data class GovBudget(val id: String) : Route()
     object Meetings : Route()
 }

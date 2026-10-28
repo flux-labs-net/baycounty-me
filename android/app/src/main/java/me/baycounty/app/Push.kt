@@ -104,6 +104,8 @@ object Push {
         val ver = runCatching { context.packageManager.getPackageInfo(context.packageName, 0).versionName }.getOrNull()
         val ok = post(Emergency.pushBody(t, "android", topics, govs, home?.y, home?.x, radius, ver))
         status = if (ok) "Alerts are on for this phone." else "Couldn't reach BayCounty.me. Your choices will be sent next time."
+        // Signed in to My home: this phone's alerts follow the account's home and choices.
+        if (ok) Account.linkPhone(context)
     }
 
     private suspend fun post(body: String): Boolean = withContext(Dispatchers.IO) {

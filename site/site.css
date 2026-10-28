@@ -734,3 +734,26 @@ select:not([multiple]):not([size])::-ms-expand{display:none}
 .he-faces img{width:40px;height:40px;border-radius:50%;object-fit:cover;margin-left:-8px;border:2px solid var(--surface);background:var(--sunken)}
 .he-faces:hover img{transform:translateY(-1px)}
 @media (max-width:560px){.he-chips{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-inline:-16px;padding-inline:16px}.he-chips::-webkit-scrollbar{display:none}.he-chips button{flex:none;min-height:38px}.ev-row{grid-template-columns:74px minmax(0,1fr)}.ev-t{font-size:.78rem}}
+/* header "Sign in" / "My home" (/account); <html class="signed-in"> swaps the label (build_site.ACCOUNT_BTN) */
+.acct-btn{order:3;display:inline-flex;align-items:center;gap:7px;height:40px;padding:0 12px;margin-left:6px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:500 .88rem var(--f-body);text-decoration:none;white-space:nowrap}
+.acct-btn:hover{background:var(--sunken)}
+.acct-btn .acct-in,.signed-in .acct-btn .acct-out{display:none}
+.signed-in .acct-btn .acct-in{display:inline}
+.signed-in .acct-btn{border-color:color-mix(in srgb,var(--blue) 40%,var(--line))}
+@media (max-width:1180px){
+  .acct-btn{width:40px;padding:0;justify-content:center}
+  .acct-btn span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+}
+@media (max-width:980px){.acct-btn{width:44px;height:44px}}
+.menu-acct{display:none}
+@media (max-width:520px){
+  .acct-btn{display:none}
+  /* the same row as a menu section (drill-in menu), last in the list */
+  .menu > li.menu-acct{display:block;border-top:1px solid var(--line)}
+  .menu > li.menu-acct > a{display:flex;align-items:center;gap:14px;min-height:72px;padding:10px 4px;color:var(--ink);text-decoration:none;white-space:normal}
+  .menu-acct .st-l{flex:1;min-width:0;gap:2px}
+  .menu-acct .st-n{font:600 1.02rem var(--f-body)}
+  .menu-acct .acct-chev{color:var(--muted);flex:none}
+  .menu-acct .acct-in,.signed-in .menu-acct .acct-out{display:none}
+  .signed-in .menu-acct .acct-in{display:inline}
+}

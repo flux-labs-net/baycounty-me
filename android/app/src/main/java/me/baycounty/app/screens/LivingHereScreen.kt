@@ -75,6 +75,8 @@ fun LivingHereScreen() {
             Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                 SectionHeader("More around town")
                 CardList {
+                    RouteRow(Route.MyHome, "My home", "Sign in to see meetings, events, road work and alerts near your home", symbol = "person.crop.circle")
+                    RowDivider(50.dp)
                     if (home != null) RouteRow(Route.Address(home), "My address", home.display, symbol = "house")
                     else RouteRow(Route.MyAddress, "My address", "Tax bill, districts and meetings for one address", symbol = "house")
                     RowDivider(50.dp)

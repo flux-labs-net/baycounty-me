@@ -126,6 +126,8 @@ fun icon(symbol: String?): ImageVector = when (symbol) {
     "shield.lefthalf.filled" -> Icons.Outlined.Shield
     "bolt.trianglebadge.exclamationmark" -> Icons.Outlined.ElectricBolt
     "hammer" -> Icons.Outlined.Construction
+    "gearshape" -> Icons.Outlined.Settings
+    "mappin" -> Icons.Outlined.Place
     "bell.badge" -> Icons.Outlined.NotificationsActive
     "exclamationmark.octagon" -> Icons.Outlined.Report
     else -> Icons.Outlined.TableChart

@@ -1,0 +1,298 @@
+{
+ "place_id": "fl-bay",
+ "today": "2026-10-27",
+ "city": "Lynn Haven",
+ "zip": null,
+ "gov_id": "lh",
+ "local_government": "City of Lynn Haven",
+ "zone": "D",
+ "radius_mi": 1,
+ "today_card": {
+  "trash": [
+   {
+    "service": "Garbage",
+    "days": "Friday",
+    "provider": "City of Lynn Haven"
+   },
+   {
+    "service": "Yard waste and bulk trash",
+    "days": "Monday",
+    "provider": "City of Lynn Haven"
+   }
+  ],
+  "beach": null,
+  "alerts": 2
+ },
+ "governments": [
+  {
+   "gov_id": "county",
+   "name": "Bay County",
+   "url": "https://baycounty.me/governments/bay-county"
+  },
+  {
+   "gov_id": "schools",
+   "name": "Bay District Schools",
+   "url": "https://baycounty.me/governments/bay-district-schools"
+  },
+  {
+   "gov_id": "lh",
+   "name": "Lynn Haven",
+   "url": "https://baycounty.me/governments/lynn-haven"
+  }
+ ],
+ "sections": [
+  {
+   "id": "alerts",
+   "title": "Alerts for your home",
+   "items": [
+    {
+     "kind": "utility",
+     "title": "Reuse System Offline Due to Repair",
+     "detail": "The City of Lynn Haven advises customers that the reuse water system is temporarily out of service as of Thursday, October 22, 2026, through November 1, 2026,\u2026",
+     "date": "2026-10-23T14:42:27.000Z",
+     "severity": "minor",
+     "url": "https://baycounty.me/emergency#n-alert%3Alh%3A145",
+     "id": "alert:lh:145"
+    },
+    {
+     "kind": "utility",
+     "title": "Reuse System Temporarily Out of Service",
+     "detail": "The City of Lynn Haven advises customers that the reuse water system is temporarily out of service as of Thursday, October 22, 2026, due to repair of a broken\u2026",
+     "date": "2026-10-23T14:35:50.000Z",
+     "severity": "minor",
+     "url": "https://baycounty.me/emergency#n-alert%3Alh%3A144",
+     "id": "alert:lh:144"
+    }
+   ],
+   "empty": "No warnings, evacuation orders or boil-water notices for your home right now."
+  },
+  {
+   "id": "meetings",
+   "title": "Public meetings coming up",
+   "items": [
+    {
+     "kind": "meeting",
+     "title": "School Board: School Board Meeting",
+     "date": "2026-10-27T15:00:00-05:00",
+     "gov_id": "schools",
+     "detail": "Agenda not posted yet",
+     "url": "https://www.bay.k12.fl.us/school-board-meetings"
+    },
+    {
+     "kind": "meeting",
+     "title": "Lynn Haven City Commission: City Commission Meeting",
+     "date": "2026-10-27T17:30:00-05:00",
+     "gov_id": "lh",
+     "detail": "Agenda posted",
+     "url": "https://lynnhavenfl.api.civicclerk.com/v1/Meetings/GetMeetingFileStream(fileId=1145,plainText=false)"
+    },
+    {
+     "kind": "meeting",
+     "title": "County Commission: Bay County Board of County Commissioners Meeting",
+     "date": "2026-11-03T09:00:00-06:00",
+     "gov_id": "county",
+     "detail": "Agenda not posted yet",
+     "url": "https://www.baycountyfl.gov/calendar.aspx?EID=1594"
+    },
+    {
+     "kind": "meeting",
+     "title": "School Board: School Board Meeting",
+     "date": "2026-11-10T15:00:00-06:00",
+     "gov_id": "schools",
+     "detail": "Agenda not posted yet",
+     "url": "https://www.bay.k12.fl.us/school-board-meetings"
+    },
+    {
+     "kind": "meeting",
+     "title": "Lynn Haven City Commission: City Commission Meeting",
+     "date": "2026-11-10T17:30:00-06:00",
+     "gov_id": "lh",
+     "detail": "Agenda not posted yet",
+     "url": "https://lynnhavenfl.portal.civicclerk.com/event/1069/files"
+    }
+   ],
+   "empty": "No meetings on the calendar in the next two weeks."
+  },
+  {
+   "id": "events",
+   "title": "Things to do",
+   "items": [
+    {
+     "kind": "event",
+     "title": "Ideacamp \u2013 October 2026",
+     "date": "2026-10-27T08:00:00",
+     "all_day": false,
+     "detail": "Papa Joe\u2019s Bayside \u00b7 Panama City",
+     "in_town": false,
+     "url": "https://pcbeach.org/local-event/ideacamp-october-2026/"
+    },
+    {
+     "kind": "event",
+     "title": "Teen Fright Night (Ages 12 \u2013 17)",
+     "date": "2026-10-27T17:30:00",
+     "all_day": false,
+     "detail": "Bay County Public Library \u00b7 Panama City",
+     "in_town": false,
+     "url": "https://www.nwrls.com/event/teen-fright-night-ages-12-17/"
+    },
+    {
+     "kind": "event",
+     "title": "Heroes Breakfast",
+     "date": "2026-10-28T08:00:00",
+     "all_day": false,
+     "detail": "PeoplesSouth Bank \u00b7 Panama City Beach",
+     "in_town": false,
+     "url": "https://pcbeach.org/local-event/heroes-breakfast/"
+    },
+    {
+     "kind": "event",
+     "title": "PC Senior Arts",
+     "date": "2026-10-28T13:00:00",
+     "all_day": false,
+     "detail": "Panama City",
+     "in_town": false,
+     "url": "https://www.panamacity.gov/Calendar.aspx?EID=7627"
+    },
+    {
+     "kind": "event",
+     "title": "Teen Game Night (Ages 13 \u2013 18)",
+     "date": "2026-10-28T16:30:00",
+     "all_day": false,
+     "detail": "Bay County Public Library \u00b7 Panama City",
+     "in_town": false,
+     "url": "https://www.nwrls.com/event/teen-game-night-ages-13-18-2/"
+    },
+    {
+     "kind": "event",
+     "title": "Bay County Fire Rescue Open House",
+     "date": "2026-10-29T17:30:00",
+     "all_day": false,
+     "detail": "Bay County",
+     "in_town": false,
+     "url": "https://www.baycountyfl.gov/Calendar.aspx?EID=1711"
+    },
+    {
+     "kind": "event",
+     "title": "Young Professionals Coffee, Conversations & Headshots",
+     "date": "2026-10-30T09:30:00",
+     "all_day": false,
+     "detail": "The Sapp House \u00b7 Panama City",
+     "in_town": false,
+     "url": "https://pcbeach.org/local-event/young-professionals-coffee-conversations-headshots/"
+    },
+    {
+     "kind": "event",
+     "title": "Boo Bash",
+     "date": "2026-10-31T00:00:00",
+     "all_day": true,
+     "detail": "Dave & Buster\u2019s \u00b7 Panama City Beach",
+     "in_town": false,
+     "url": "https://pcbeach.org/local-event/boo-bash/"
+    }
+   ],
+   "empty": "No events listed for the next two weeks."
+  },
+  {
+   "id": "projects",
+   "title": "Within a mile of home",
+   "items": [
+    {
+     "kind": "sales-tax",
+     "title": "Pedestrian Safety, City Sidewalks",
+     "detail": "Sales tax project \u00b7 Not started",
+     "date": null,
+     "miles": 0.3,
+     "gov_id": "lh",
+     "url": "https://baycounty.me/public-money/sales-tax-projects"
+    },
+    {
+     "kind": "development",
+     "title": "17th Street Medical Office",
+     "detail": "Approved \u00b7 1 acre \u00b7 229 W. 17th Street",
+     "date": "2026-09-01",
+     "miles": 0.92,
+     "gov_id": "county",
+     "url": "https://www.baycountyfl.gov/157/Planning-Zoning"
+    }
+   ],
+   "empty": "No building, development or road work on file near your home."
+  },
+  {
+   "id": "notices",
+   "title": "Public notices",
+   "items": [
+    {
+     "kind": "notice",
+     "title": "ITB 27-04: FY27 Annual Resurfacing Phase 1 (Local Roads)",
+     "detail": "Bid or proposal request \u00b7 Bay County",
+     "date": "2026-10-27",
+     "event_date": "2026-11-10",
+     "url": "https://publicnoticesbaycountyfl.gov/"
+    },
+    {
+     "kind": "notice",
+     "title": "Notice of Proposed Site Plan Development Order Quasi-judicial Public Hearing",
+     "detail": "Public hearing or ordinance \u00b7 City of Lynn Haven",
+     "date": "2026-10-26",
+     "event_date": "2026-11-10",
+     "url": "https://publicnoticesbaycountyfl.gov/"
+    },
+    {
+     "kind": "notice",
+     "title": "Notice of Proposed Site Plan Development Order Quasi-judicial Public Hearing",
+     "detail": "Public hearing or ordinance \u00b7 City of Lynn Haven",
+     "date": "2026-10-26",
+     "event_date": "2026-11-10",
+     "url": "https://publicnoticesbaycountyfl.gov/"
+    },
+    {
+     "kind": "notice",
+     "title": "Section 00010 Advertisement for Bids Notice to Receive Sealed Bids North Bay Haven Astroturf",
+     "detail": "Bid or proposal request \u00b7 Bay District Schools",
+     "date": "2026-10-26",
+     "event_date": "2026-11-24",
+     "url": "https://res.cloudinary.com/dgqq2xsfd/image/upload/enotice-production/notice_exports/jwNtuNJuKFjPXNPVcU44/dd7b./cropped-135.pdf"
+    },
+    {
+     "kind": "notice",
+     "title": "Request for Proposals",
+     "detail": "Bid or proposal request \u00b7 City of Lynn Haven",
+     "date": "2026-10-26",
+     "event_date": "2026-11-16",
+     "url": "https://publicnoticesbaycountyfl.gov/"
+    },
+    {
+     "kind": "notice",
+     "title": "The Lynn Haven Planning Commission Will Hold a Regular Meeting at 5:30 P.m., on November 3,\u2026",
+     "detail": "Public meeting \u00b7 City of Lynn Haven",
+     "date": "2026-10-26",
+     "event_date": "2026-11-03",
+     "url": "https://publicnoticesbaycountyfl.gov/"
+    }
+   ],
+   "empty": "No public notices from your governments in the last three weeks."
+  },
+  {
+   "id": "food",
+   "title": "Restaurant inspections in your ZIP",
+   "items": [],
+   "empty": "No inspections in your ZIP in the last two weeks."
+  },
+  {
+   "id": "business",
+   "title": "New businesses in your ZIP",
+   "count": 0,
+   "items": [],
+   "empty": "No new filings in your ZIP in the last 30 days."
+  }
+ ],
+ "note": "Everything here is public record from the datasets named in each section. Distances are from the address point.",
+ "home": {
+  "label": "Home",
+  "address": "825 Ohio Ave",
+  "city": "Lynn Haven",
+  "zip": "32444",
+  "zone": "D",
+  "gov_id": "lh"
+ }
+}

@@ -61,6 +61,14 @@ const TOOLS = [
      zip: {type: 'string', description: 'ZIP code, to narrow the address'},
      lat: {type: 'number'}, lon: {type: 'number'}}},
    annotations: {readOnlyHint: true, openWorldHint: true}},
+  {name: 'whats_happening_near', title: 'What\'s happening near an address',
+   description: 'What is going on near one Bay County address right now and in the next two weeks: emergency alerts that reach it (evacuation orders for its zone, boil-water notices for its city, weather warnings), trash day and today\'s beach flag, public meetings of its county, city and school board, things to do (its own town first), building, development, road work and agenda items within a radius, recent public notices, restaurant inspections and new businesses in its ZIP. Every item links to its public record. Give address (house number and street) or lat and lon.',
+   inputSchema: {type: 'object', additionalProperties: false, properties: {
+     address: {type: 'string', description: 'Street address, e.g. 825 Ohio Ave'},
+     lat: {type: 'number'}, lon: {type: 'number'},
+     radius_mi: {type: 'number', description: '0.25, 0.5, 1 (default), 2 or 5 miles for work nearby'},
+     topics: {type: 'string', description: 'Comma list: meetings, events, projects, notices, food, business (default all; alerts always included)'}}},
+   annotations: {readOnlyHint: true, openWorldHint: true}},
   {name: 'government_checkbook', title: 'Government checkbook',
    description: 'One government\'s payments in a fiscal year from its own check register: the total, payments by month, the top payees (with profile ids), by fund and payment method, and the largest payments. Payments to private individuals are counted but never named. Add payee to list every payment to one payee. Returns an empty governments list while nothing is published.',
    inputSchema: {type: 'object', additionalProperties: false, properties: {
@@ -275,6 +283,12 @@ async function call(req, name, a = {}) {
     return {...r, sections: r.sections.filter(x => x.status !== 'pending'), coming_soon: r.sections.filter(x => x.status === 'pending').map(x => x.title),
       page: `${SITE}/my-address`, note: r.note + ' Cite each section\'s sources.'};
   }
+  if (name === 'whats_happening_near') {
+    const c = await load(req, '/downloads/index.json');
+    const has = id => c.datasets.some(d => d.id === id);
+    const r = await require('./_nearby').forRequest(req, c, a, {rowsOf: id => (has(id) ? rowsOf(req, c, id) : null)});
+    return {...r, address: undefined, lat: undefined, lon: undefined, page: `${SITE}/account`, note: r.note + ' Cite each item\'s link.'};
+  }
   if (name === 'officials_in_office') {
     const O = require('./_officials');
     const rows = await rowsOf(req, await load(req, '/downloads/index.json'), 'officeholder-terms');
@@ -375,7 +389,7 @@ function describe(m) {
     dataset: m && m.method === 'tools/call' && p.arguments ? p.arguments.id || p.arguments.slug || p.arguments.vendor || p.arguments.member || p.arguments.gov || null
       : m && m.method === 'resources/read' ? String(p.uri || '').replace(/^baycounty:\/\/datasets\//, '').slice(0, 80) || null : null,
     query: m && m.method === 'tools/call' && p.name === 'utilities_at_address' ? null // never log an address
-      : m && m.method === 'tools/call' ? (p.name === 'address_report' ? null : JSON.stringify(p.arguments || {}).replace(/"api_key":"[^"]*"/, '')) : null};
+      : m && m.method === 'tools/call' ? (p.name === 'address_report' || p.name === 'whats_happening_near' ? null : JSON.stringify(p.arguments || {}).replace(/"api_key":"[^"]*"/, '')) : null};
 }
 
 const ok = (id, result) => ({jsonrpc: '2.0', id, result});

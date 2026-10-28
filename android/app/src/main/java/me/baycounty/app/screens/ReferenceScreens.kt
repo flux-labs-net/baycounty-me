@@ -170,7 +170,7 @@ fun AboutScreen() {
                     WebRow("baycounty.me", BayCountyClient.SITE, symbol = "safari")
                 }
                 Text(
-                    "The app collects no data: no accounts, analytics or ads. A saved home address stays on your phone.",
+                    "No analytics or ads. The address saved on My Address stays on your phone. A My home account keeps only your email, home address and first name, to show what's near you, and you can delete it any time.",
                     style = T.caption, color = Brand.secondary, modifier = Modifier.padding(horizontal = 4.dp),
                 )
             }

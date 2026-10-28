@@ -68,6 +68,7 @@ fun HomeScreen() {
         actions = {
             ToolbarIcon("magnifyingglass", "Search") { nav.push(Route.Search) }
             ToolbarIcon("bubble.left.and.text.bubble.right", "Ask a question") { o.openSite("/ask") }
+            ToolbarIcon("person.crop.circle", if (me.baycounty.app.Account.signedIn) "My home" else "Sign in") { nav.push(Route.MyHome) }
             ToolbarIcon("bell", "Emergencies and alerts") { nav.push(Route.Emergency) }
         },
         onRefresh = { store.refreshAll() },
