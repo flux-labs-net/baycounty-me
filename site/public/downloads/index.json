@@ -7064,7 +7064,7 @@
    "id": "data-sources",
    "title": "Where the data comes from",
    "description": "Every source BayCounty.me takes records from, one row per source: the topic, the government it covers (or state and federal databases), the link, how we get it (automatic fetch, downloaded and read by hand, a state or federal bulk file, or a live lookup), how often, what we take from it, how we process it and the checks we run.",
-   "rows": 176,
+   "rows": 180,
    "columns": [
     {
      "name": "topic",
@@ -7512,7 +7512,7 @@
    "id": "data-source-sites",
    "title": "Websites our records cite",
    "description": "Every website cited by the records behind BayCounty.me, per topic, with how many distinct documents and pages from it the data links to. Counted from the data files at each build.",
-   "rows": 410,
+   "rows": 414,
    "columns": [
     {
      "name": "website",

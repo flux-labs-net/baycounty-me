@@ -475,7 +475,7 @@ def write_downloads(out_dir):
 def opendata_page(out_dir):
     meta = write_downloads(out_dir)
     rows = ''.join(f'''<tr><th scope="row"><b>{e(t)}</b><small>{e(d)}</small><details class="flds"><summary>{len(k)} columns</summary><p class="small muted">{e(", ".join(k))}</p></details></th>
-      <td class="num">{n:,}</td><td class="dl"><a href="/downloads/{i}.csv" download>CSV</a> <span class="muted small">{sz/1024:,.0f} KB</span> · <a href="/downloads/{i}.json" download>JSON</a></td></tr>''' for i, t, d, n, k, sz in meta)
+      <td class="num">{n:,}</td><td class="dl"><a href="/downloads/{i}.csv" download>CSV</a> <span class="muted small">{sz/1024:,.0f} KB</span> · <a href="/downloads/{i}.json" download>JSON</a></td></tr>''' for i, t, d, n, k, sz in meta if n)  # an empty dataset stays in the API catalog but isn't offered as a download
     return f'''<div class="page tax">
   <header class="tx-top"><div class="tx-brand"><span class="eyebrow">Open data</span><h1>Download the data</h1>
     <p class="lede">Everything on BayCounty.me, as spreadsheets. Free to use for reporting, research or your own analysis. Please credit BayCounty.me, and check the original record before relying on any single figure: every row carries its source link.</p></div></header>
