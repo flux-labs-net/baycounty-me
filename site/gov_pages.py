@@ -226,7 +226,7 @@ def gov_page(key):
     hint = {'who': ', '.join(x for x in [f'{n_el} elected' if n_el else '', f'{len(seats) - n_el} appointed' if len(seats) > n_el else ''] if x),
             'money': f'{money(b["total"])} {e(b.get("status") or "").split(" ")[0].lower() or "budget"}'.strip() if b.get('total') else 'Money in and out',
             'rate': f'{mills:g} mills' if mills else ('No city property tax' if mills == 0 else 'Rate history'),
-            'contracts': 'Awards and how they were bid', 'cra': 'Redevelopment spending', 'projects': 'Budget to close-out', 'votes': 'Money votes',
+            'contracts': 'Awards and how they were bid', 'cra': 'Redevelopment spending', 'projects': 'Budget to close-out', 'votes': 'Every recorded vote',
             'meet': f'Next: {_md(up[0]["start"])}' if up else 'Calendar', 'debt': f'{money(p["debt"]["total"])} · {e(p["debt"].get("fy") or "").split(" ")[0]}' if p.get('debt') else 'What it owes',
             'audits': (lambda au: f'{len(au[0]["findings"])} finding{"s" if len(au[0]["findings"]) != 1 else ""} in {e(au[0]["fy"])}')(p['audits']) if p.get('audits') else 'Audit findings',
             'savings': savings_hint(key)}

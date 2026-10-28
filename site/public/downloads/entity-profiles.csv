@@ -5182,7 +5182,7 @@ gov:property_appraiser,gov,Government,Property Appraiser,Constitutional,/profile
 gov:schools,gov,Government,Bay District Schools,School district,/governments/bay-district-schools,,63,,,schools,bay,
 gov:sheriff,gov,Government,Sheriff,Constitutional,/profile/gov/sheriff,,13,38351.7,,sheriff,bay,
 gov:soe,gov,Government,Supervisor of Elections,Constitutional,/profile/gov/soe,,6,,,soe,bay,
-gov:sp,gov,Government,Springfield,City,/governments/springfield,,37,,31729701.43,sp,bay,
+gov:sp,gov,Government,Springfield,City,/governments/springfield,,38,,31729701.43,sp,bay,
 gov:tax_collector,gov,Government,Tax Collector,Constitutional,/profile/gov/tax_collector,,6,,,tax_collector,bay,
 gov:us-agricultural-research-service,gov,Government,Agricultural Research Service,Federal agency · Department of Agriculture,/profile/gov/us-agricultural-research-service,,2,,865079.78,,bay,https://www.usaspending.gov/search
 gov:us-animal-and-plant-health-inspection-service,gov,Government,Animal and Plant Health Inspection Service,Federal agency · Department of Agriculture,/profile/gov/us-animal-and-plant-health-inspection-service,,1,,25350.52,,bay,https://www.usaspending.gov/search
@@ -15827,7 +15827,7 @@ person:david-lanier,person,Past candidate,David Lanier,"Ran for Bay County Commi
 person:david-masters,person,Past candidate,David Masters,"Ran for Mexico Beach Council, Group 4 in 2022",/people/david-masters,,1,,,mb,bay,
 person:demetrius-rease,person,Past candidate,Demetrius Rease,"Ran for Panama City Commission, Ward 4 in 2025",/people/demetrius-rease,,8,4075.98,,pc,bay,
 person:denise-kelley,person,Department leader,Denise Kelley,"Deputy Superintendent - Teaching & Learning, Bay District Schools",/people/denise-kelley,,1,,,schools,bay,
-person:dennis-haddock,person,Past candidate,Dennis Haddock,"Ran for Springfield Commission, Ward 1 in 2020 (won)",/people/dennis-haddock,,1,,,sp,bay,
+person:dennis-haddock,person,Former official,Dennis Haddock,"Ran for Springfield Commission, Ward 1 in 2020 (won)",/people/dennis-haddock,,2,,,sp,bay,
 person:donny-walker,person,Past candidate,Donny Walker,"Ran for Mexico Beach Council, Group 4 in 2022",/people/donny-walker,,1,,,mb,bay,
 person:doug-baber,person,Former official,Doug Baber,"Former city administrator, Mexico Beach",/people/doug-baber,,1,,,mb,bay,
 person:doug-crosby,person,Elected official,Doug Crosby,"County Commissioner, District 3, Bay County",/people/doug-crosby,,85,49550.0,,county,bay,

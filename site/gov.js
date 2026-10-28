@@ -31,7 +31,7 @@ const termsFor = async () => {
   return (Array.isArray(f) ? f : []).filter(r => r.gov_id === K);
 };
 const [CT, P1, P2, AC, ST, FM, VT, GYr, OHr] = await Promise.all([...['/data/contracts-page.json', '/data/cra-pay-1.json', '/data/cra-pay-2.json',
-  '/data/accountability.json', '/data/surtax-projects.json', '/data/michael-page.json', '/data/votes-page.json'].map(get), yearsFor(), termsFor()]);
+  '/data/accountability.json', '/data/surtax-projects.json', '/data/michael-page.json', `/data/votes-page/${encodeURIComponent(K)}.json`].map(get), yearsFor(), termsFor()]);
 const OH = (OHr || []).slice().sort((a, b) => a.seat_order - b.seat_order || a.term_order - b.term_order);
 const GY = (GYr || []).slice().sort((a, b) => a.fiscal_year - b.fiscal_year);
 
@@ -143,11 +143,11 @@ function votes() {
   const rs = S.votes.filter(inYear).sort((a, b) => (b.d || '').localeCompare(a.d || '')), sp = rs.filter(v => v.x);
   const card = v => `<li class="fd vt"><span class="vt-meta muted">${esc(v.dn)} · ${esc(VT.cat[v.c] || v.c)}${v.a ? ' · ' + usd(v.a) : ''} · ${esc(v.t)} ${esc(v.o || '')}</span><div class="vt-h">${esc(v.h)}</div>${Object.keys(v.m).length ? `<p class="small">Voted no: ${esc(Object.entries(v.m).filter(([, x]) => x === 'no').map(([n]) => n).join(', ') || 'none recorded')}</p>` : ''}${v.u ? `<a class="src" href="${esc(v.u)}" target="_blank" rel="noopener">${esc(v.ul || 'Minutes')}</a>` : ''}</li>`;
   fill('votes', {
-    sub: `${plural(rs.length, 'money vote')} recorded in ${ylabel()}`,
-    kpis: rs.length ? kpi('Votes recorded', rs.length, 'Budgets, tax rates, contracts, land, borrowing') + kpi('Split votes', sp.length, rs.length ? Math.round(sp.length / rs.length * 100) + '% not unanimous' : '')
+    sub: `${plural(rs.length, 'vote')} recorded in ${ylabel()}`,
+    kpis: rs.length ? kpi('Votes recorded', rs.length, 'Every motion in the minutes') + kpi('Split votes', sp.length, rs.length ? Math.round(sp.length / rs.length * 100) + '% not unanimous' : '')
       + kpi('Money voted on', money(rs.reduce((s, v) => s + (v.a || 0), 0)), 'where the minutes give an amount') : '',
     body: rs.length ? `<h3 class="h4">${sp.length ? 'Most recent split votes' : 'Most recent votes'}</h3><ol class="findings">${(sp.length ? sp : rs).slice(0, 5).map(card).join('')}</ol>` : '',
-    empty: `No money votes recorded in ${ylabel()}.`,
+    empty: `No votes recorded in ${ylabel()}.`,
     link: `<a href="${dash('/public-money/votes', `&g=${K}`)}#all">Every ${esc(G.short)} vote, by member</a>`,
   });
 }
@@ -251,7 +251,7 @@ function glance() {
   const ct = money(c.reduce((s, x) => s + (x.a || 0), 0)), cr = money(r.reduce((s, x) => s + (x.amount || 0), 0)), splits = v.filter(x => x.x).length;
   if (S.contracts.length) t.push(['#contracts', 'Contracts awarded', ct, plural(c.length, 'contract'), 'file', 'blue']);
   if (G.cra) t.push(['#cra', 'CRA spent or committed', cr, plural(ra.length, 'CRA record'), 'columns', 'teal']);
-  if (S.votes.length) t.push(['#votes', 'Money votes', v.length.toLocaleString('en-US'), `${splits} split`, 'vote', 'amber']);
+  if (S.votes.length) t.push(['#votes', 'Votes recorded', v.length.toLocaleString('en-US'), `${splits} split`, 'vote', 'amber']);
   if (S.projects.length || S.salestax.length) t.push(['#projects', 'Projects active', pr.toLocaleString('en-US'), 'tracked and sales tax', 'crane', 'salmon']);
   $('#gxGlanceH').textContent = ysel.value === 'all' ? 'Across every year on record' : `In ${ysel.value}`;
   box.innerHTML = t.map(([h, l, v2, s, n, tn]) => `<a class="kpi gx-k" href="${h}">${ico(n, tn)}<span class="eyebrow">${l}</span><span class="v">${v2}</span><span class="s">${s}</span></a>`).join('');

@@ -1,7 +1,11 @@
 (async () => {
 const $ = id => document.getElementById(id);
 let D; // page data loads after the page has rendered; the markup shows a loading note until then
-try { const r = await fetch('/data/votes-page.json'); if (!r.ok) throw new Error(r.status); D = await r.json(); }
+// votes-page.json has the names and lists; each government's votes are in their own file
+const getJ = async u => { const r = await fetch(u); if (!r.ok) throw new Error(r.status); return r.json(); };
+try { D = await getJ('/data/votes-page.json');
+  D.votes = D.votes || (await Promise.all(Object.values(D.files || {}).map(f => getJ(f.url)))).flatMap(x => x.votes || []);
+  D.votes.sort((a, b) => (b.d || '').localeCompare(a.d || '')); }
 catch (e) { $('vtCount').textContent = 'The votes could not be loaded. Please refresh the page.'; return; }
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const V = {yes: 'Yes', no: 'No', absent: 'Absent', abstain: 'Abstained', unknown: '?'}, ORD = {no: 0, yes: 1, abstain: 2, absent: 3, unknown: 4};

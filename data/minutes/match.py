@@ -248,9 +248,21 @@ def checks(motion, votes, method, board, date, problems, unmatched, data=None, d
         out.append("outcome_unclear")
     if not seats:
         out.append("no_roster")
-    if doc_date and date and abs((_d(str(date)) - _d(str(doc_date))).days) > 4:
+    if doc_date and date and date_mismatch(date, doc_date):
         out.append("date_mismatch")
     return sorted(set(out))
+
+
+LATER_APPROVAL_DAYS = 200  # minutes filed under the later meeting that approved them
+
+
+def date_mismatch(date, doc_date):
+    """True when a meeting date read from the minutes doesn't fit the date the archive lists the file under.
+    Panama City Beach (Granicus) and Lynn Haven file minutes under the later meeting that approved them, often two to
+    six months on, sometimes several meetings in one file. So an earlier date is fine within LATER_APPROVAL_DAYS; a
+    later date, or one far earlier (usually a misread year), is flagged."""
+    days = (_d(str(doc_date)) - _d(str(date))).days
+    return days < -4 or days > LATER_APPROVAL_DAYS
 
 
 def tally_text(votes):

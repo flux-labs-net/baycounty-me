@@ -109,6 +109,14 @@ class Votes(unittest.TestCase):
         self.assertIn("date_mismatch", M.evaluate({"unanimous": True, "outcome": "passed"}, self.meeting, "pc",
                                                   doc_date="2016-11-22", data=DATA)["checks"])
 
+    def test_minutes_filed_under_a_later_meeting(self):
+        # Panama City Beach and Lynn Haven file minutes under the meeting that approved them, months later
+        self.assertFalse(M.date_mismatch("2020-01-09", "2020-02-13"))
+        self.assertFalse(M.date_mismatch("2020-12-09", "2021-06-10"))
+        self.assertFalse(M.date_mismatch("2020-01-09", "2020-01-12"))
+        self.assertTrue(M.date_mismatch("2020-01-20", "2020-01-09"))   # read date after the listed date
+        self.assertTrue(M.date_mismatch("2021-07-27", "2022-07-27"))   # a year off: likely a misread year
+
     def test_off_term_member_flagged(self):
         m = {"yes": ["Rohan", "Kady", "Brown", "Rader", "Nichols"], "outcome": "passed", "tally_text": "5-0"}
         r = M.evaluate(m, self.meeting, "pc", data=DATA)

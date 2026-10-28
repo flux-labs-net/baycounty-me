@@ -474,6 +474,22 @@
    "title": "WMBB, Mexico Beach strives for stability with not-so-new city administrator (2025)",
    "url": "https://www.mypanhandle.com/news/local-news/bay-county/mexico-beach-strives-for-stability-with-not-so-new-city-administrator/"
   },
+  "pc17m": {
+   "title": "Panama City commission minutes, Jun 13, 2017",
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Minutes/_06132017-294"
+  },
+  "pc21m": {
+   "title": "Panama City commission minutes, Jun 8, 2021",
+   "url": "https://www.panamacity.gov/AgendaCenter/ViewFile/Minutes/_06082021-513"
+  },
+  "sp20m": {
+   "title": "Springfield commission minutes, Oct 5, 2020",
+   "url": "https://www.springfieldfl.net/media/306"
+  },
+  "sp23m": {
+   "title": "Springfield commission minutes, Aug 7, 2023",
+   "url": "https://www.springfieldfl.net/media/926"
+  },
   "votes": {
    "title": "BayCounty.me vote records (roll calls in commission minutes, 2024-2026)",
    "url": "https://baycounty.me/public-money/votes"
@@ -1065,18 +1081,18 @@
      "terms": [
       {
        "name": "John Kady",
-       "end": "2017-04-18",
+       "end": "2017-06-13",
        "how": "elected",
        "src": "pc16",
-       "note": "Lost the 2017 election."
+       "note": "Lost the 2017 election. Still voting at the May 23, 2017 meeting (minutes)."
       },
       {
        "name": "Jenna Haligas",
-       "start": "2017-04-18",
+       "start": "2017-06-13",
        "end": "2025-05-20",
        "how": "elected",
-       "src": "e2017m",
-       "note": "Jenna Flint Haligas. Re-elected 2021."
+       "src": "pc17m",
+       "note": "Jenna Flint Haligas. Elected 2017; first voted at the June 13, 2017 meeting. Re-elected 2021."
       },
       {
        "name": "Robbie Hughes",
@@ -1134,17 +1150,17 @@
      "terms": [
       {
        "name": "Mike Nichols",
-       "end": "2021-04-20",
+       "end": "2021-06-08",
        "how": "elected",
        "src": "pc21",
-       "note": "Lost the 2021 election."
+       "note": "Lost the 2021 election. Still voting at the May 25, 2021 meeting (minutes)."
       },
       {
        "name": "Josh Street",
-       "start": "2021-04-20",
+       "start": "2021-06-08",
        "how": "elected",
-       "src": "e2021m",
-       "note": "Re-elected 2025."
+       "src": "pc21m",
+       "note": "Elected 2021; first voted at the June 8, 2021 meeting. Re-elected 2025."
       }
      ]
     },
@@ -1630,18 +1646,25 @@
       {
        "name": "Carl Curti",
        "start": "2016-04-19",
-       "end": "2023-04-18",
+       "end": "2020-10-05",
        "how": "elected",
        "src": "e2016m",
-       "note": "In office through at least 2019; ran for mayor in 2022. The year he left is not confirmed.",
+       "note": "Last in the minutes on Sep 3, 2019; Dennis Haddock held the seat by Oct 5, 2020. Ran for mayor in 2022.",
        "end_approx": true
       },
       {
-       "name": "Jack Griffis",
-       "start": "2023-04-18",
-       "src": "sp_now",
-       "note": "Serving since 2023.",
+       "name": "Dennis Haddock",
+       "start": "2020-10-05",
+       "end": "2023-08-07",
+       "src": "sp20m",
+       "note": "In the commission minutes from Oct 5, 2020 to Jul 3, 2023. When and how he took the seat is not confirmed.",
        "start_approx": true
+      },
+      {
+       "name": "Jack Griffis",
+       "start": "2023-08-07",
+       "src": "sp23m",
+       "note": "First in the minutes on Aug 7, 2023."
       }
      ]
     },

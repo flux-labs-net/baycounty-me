@@ -149,6 +149,10 @@ S = {
  'mb_hubbard': ('WJHG, Mexico Beach officials vote 4-1 to terminate City Administrator (Jul 24, 2024)', 'https://www.wjhg.com/2024/07/24/mexico-beach-officials-vote-4-1-terminate-city-administrator'),
  'mb_truitt': ('WJHG, Mexico Beach City Administrator fired; HR investigation report released (May 15, 2025)', 'https://www.wjhg.com/2025/05/15/mexico-beach-city-administrator-fired-city-officials-release-full-hr-investigation-report'),
  'mb_smig': ('WMBB, Mexico Beach strives for stability with not-so-new city administrator (2025)', 'https://www.mypanhandle.com/news/local-news/bay-county/mexico-beach-strives-for-stability-with-not-so-new-city-administrator/'),
+ 'pc17m': ('Panama City commission minutes, Jun 13, 2017', 'https://www.panamacity.gov/AgendaCenter/ViewFile/Minutes/_06132017-294'),
+ 'pc21m': ('Panama City commission minutes, Jun 8, 2021', 'https://www.panamacity.gov/AgendaCenter/ViewFile/Minutes/_06082021-513'),
+ 'sp20m': ('Springfield commission minutes, Oct 5, 2020', 'https://www.springfieldfl.net/media/306'),
+ 'sp23m': ('Springfield commission minutes, Aug 7, 2023', 'https://www.springfieldfl.net/media/926'),
  'votes': ('BayCounty.me vote records (roll calls in commission minutes, 2024-2026)', 'https://baycounty.me/public-money/votes'),
 }
 
@@ -217,15 +221,15 @@ G['pc'] = {'body': 'City Commission', 'seats': [
  ('Mayor', [T('Greg Brudnicki', None, '2023-05-16', 'elected', 'pc16', 'Re-elected 2019; lost the May 2023 runoff.'),
             T('Michael Rohan', '2023-05-16', '2025-04-22', 'elected', 'e2023r', 'Michael "Doc" Rohan. Lost the 2025 election.'),
             T('Allan Branch', '2025-04-22', None, 'elected', 'e2025m')]),
- ('Ward 1', [T('John Kady', None, '2017-04-18', 'elected', 'pc16', 'Lost the 2017 election.'),
-             T('Jenna Haligas', '2017-04-18', '2025-05-20', 'elected', 'e2017m', 'Jenna Flint Haligas. Re-elected 2021.'),
+ ('Ward 1', [T('John Kady', None, '2017-06-13', 'elected', 'pc16', 'Lost the 2017 election. Still voting at the May 23, 2017 meeting (minutes).'),
+             T('Jenna Haligas', '2017-06-13', '2025-05-20', 'elected', 'pc17m', 'Jenna Flint Haligas. Elected 2017; first voted at the June 13, 2017 meeting. Re-elected 2021.'),
              T('Robbie Hughes', '2025-05-20', None, 'elected', 'e2025r', 'Won the May 2025 runoff.')]),
  ('Ward 2', [T('Kenneth Brown', None, '2023-04-18', 'elected', 'e2015m', 'Kenneth E. Brown. Re-elected 2015 and 2019 (runoff).'),
              T('Janice Lucas', '2023-04-18', None, 'elected', 'e2023m')]),
  ('Ward 3', [T('Billy Rader', None, '2023-04-18', 'elected', 'pc18', 'Lost the 2023 election.'),
              T('Brian Grainger', '2023-04-18', None, 'elected', 'e2023m')]),
- ('Ward 4', [T('Mike Nichols', None, '2021-04-20', 'elected', 'pc21', 'Lost the 2021 election.'),
-             T('Josh Street', '2021-04-20', None, 'elected', 'e2021m', 'Re-elected 2025.')]),
+ ('Ward 4', [T('Mike Nichols', None, '2021-06-08', 'elected', 'pc21', 'Lost the 2021 election. Still voting at the May 25, 2021 meeting (minutes).'),
+             T('Josh Street', '2021-06-08', None, 'elected', 'pc21m', 'Elected 2021; first voted at the June 8, 2021 meeting. Re-elected 2025.')]),
 ]}
 G['pcb'] = {'body': 'City Council', 'seats': [
  ('Mayor', [T('Gayle Oberst', None, '2016-04-19', 'elected', 'pcb_oberst', 'Mayor from 2006; term-limited in 2016.'),
@@ -266,8 +270,9 @@ G['cw'] = {'body': 'City Commission', 'seats': [
 G['sp'] = {'body': 'City Commission', 'seats': [
  ('Mayor', [T('Ralph Hammond', '2013-04-16', None, 'elected', 'sp_mayor', 'Mayor since 2013; re-elected 2022 and 2026.', sa=True)]),
  ('Ward 1', [GAP(None, '2016-04-19', 'Holder before 2016 not confirmed.'),
-             T('Carl Curti', '2016-04-19', '2023-04-18', 'elected', 'e2016m', 'In office through at least 2019; ran for mayor in 2022. The year he left is not confirmed.', ea=True),
-             T('Jack Griffis', '2023-04-18', None, None, 'sp_now', 'Serving since 2023.', sa=True)]),
+             T('Carl Curti', '2016-04-19', '2020-10-05', 'elected', 'e2016m', 'Last in the minutes on Sep 3, 2019; Dennis Haddock held the seat by Oct 5, 2020. Ran for mayor in 2022.', ea=True),
+             T('Dennis Haddock', '2020-10-05', '2023-08-07', None, 'sp20m', 'In the commission minutes from Oct 5, 2020 to Jul 3, 2023. When and how he took the seat is not confirmed.', sa=True),
+             T('Jack Griffis', '2023-08-07', None, None, 'sp23m', 'First in the minutes on Aug 7, 2023.')]),
  ('Ward 2', [T('Phillip Dykes', None, '2024-04-16', None, 'sp19', 'On the commission in 2018 and 2019 minutes; start and end years not confirmed.', ea=True),
              T('Richard Chval', '2024-04-16', None, None, 'sp_now', 'Serving since 2024.', sa=True)]),
  ('Ward 3', [GAP(None, '2015-04-21', 'Holder before April 2015 not confirmed.'),
