@@ -25,6 +25,7 @@
 //   GET /api/v1/evacuation-zone?address= (or ?lat=&lng=)  the hurricane evacuation zone for a Bay County address
 //   GET /api/v1/utilities?lat=&lon=     water, sewer, power, gas, trash provider and pickup days at an address (api/_utilities.js)
 //   GET /api/v1/address-report?address=|lat=&lon=  everything on file for one address, by section (api/_address_report.js)
+//   GET /api/v1/nearby?address=|lat=&lon=&radius_mi=  what's happening near a place: alerts, meetings, events, work nearby (api/_nearby.js)
 // Responses carry an ETag (and Last-Modified when the data's date is known); a matching If-None-Match or
 // If-Modified-Since gets 304 Not Modified with no body.
 const crypto = require('crypto');
@@ -219,6 +220,13 @@ function openapi(catalog) {
         parameters: [p('address', 'Street address, e.g. 825 Ohio Ave, Lynn Haven'), p('zip', 'ZIP code, to narrow an address'), p('lat', 'Latitude (decimal degrees)', {type: 'number'}), p('lon', 'Longitude (decimal degrees)', {type: 'number'}), p('parcel', 'Property Appraiser parcel id, with lat/lon'), p('place', 'Place id (default fl-bay)')],
         responses: {200: {description: '{data: {place_id, address, city, zip, lat, lon, parcel_id, jurisdiction, generated_at, other_matches, sections: [{id, title, status, data, note, sources: [{label, url}]}], note}}. Section ids: property, tax, hazards, schools, utilities, zoning, roads, outdoors, services, officials.'},
           400: {description: 'No address or a bad location'}, 404: {description: 'No matching address, or a point outside the county'}, 502: {description: 'The county address service did not answer'}}}},
+      '/nearby': {get: {operationId: 'nearby', summary: 'What is happening near a place: emergency alerts that reach it, trash day, today\'s beach flag, public meetings of its governments, things to do, building, development, road work and agenda items nearby, public notices, restaurant inspections and new businesses in its ZIP',
+        description: 'Give address (house number and street) or lat and lon. The city and evacuation zone come from the county map; alerts include an evacuation order only when it names the zone (or no zone), and boil-water or road notices only from the city or the county. Work nearby is within radius_mi of the point, nearest first. Every item links to its public record. This is what a signed-in resident sees on My home at /account. The address you send is not logged. Rows: meetings, community-events, development-projects, sales-tax-projects, road-contracts, public-notices, restaurant-inspections, restaurants, new-businesses, beach-conditions and beach-access datasets, plus the live emergency feed.',
+        parameters: [p('address', 'Street address, e.g. 825 Ohio Ave'), p('lat', 'Latitude (decimal degrees)', {type: 'number'}), p('lon', 'Longitude (decimal degrees)', {type: 'number'}),
+          p('radius_mi', 'How far "nearby" reaches: 0.25, 0.5, 1 (default), 2 or 5 miles', {type: 'number'}), p('days', 'Days ahead for meetings and events (default 14, max 31)', {type: 'integer'}),
+          p('topics', 'Comma list of sections besides alerts: meetings, events, projects, notices, food, business (default all)')],
+        responses: {200: {description: '{data: {place_id, today, city, zip, gov_id, local_government, zone, radius_mi, address, lat, lon, today_card: {trash: [{service, days, provider}], beach: {flag, rip_current_risk, water_temperature, miles_to_beach, url}, alerts}, governments: [{gov_id, name, url}], sections: [{id, title, count?, items: [{kind, title, detail, date, url, miles?, entity_id?}], empty}], note}}. Section ids: alerts, meetings, events, projects, notices, food, business.'},
+          400: {description: 'No address or a bad location'}, 404: {description: 'No matching address, or a point outside the county'}}}},
       '/search': {get: {operationId: 'searchSite', summary: 'Search every page on BayCounty.me', parameters: [{name: 'q', in: 'query', required: true, schema: {type: 'string'}}, p('limit', 'Results (default 20, max 100)', {type: 'integer'})], responses: {200: {description: 'Results'}}}},
     },
   };
@@ -246,7 +254,7 @@ module.exports = async (req, res) => {
   const parts = path ? path.split('/') : [];
   const ctx = await gate(req, res, 'api');
   // An address report (and a utilities lookup) never logs where someone looked: address, lat, lon and parcel are dropped from the request log.
-  const logQuery = parts[0] === 'address-report' ? Object.fromEntries(Object.entries(req.query || {}).filter(([k]) => !['address', 'lat', 'lon', 'lng', 'parcel', 'zip', 'label'].includes(k))) : parts[0] === 'utilities' ? PRIVATE_Q(req.query) : req.query;
+  const logQuery = parts[0] === 'address-report' || parts[0] === 'nearby' ? Object.fromEntries(Object.entries(req.query || {}).filter(([k]) => !['address', 'lat', 'lon', 'lng', 'parcel', 'zip', 'label'].includes(k))) : parts[0] === 'utilities' ? PRIVATE_Q(req.query) : req.query;
   const info = {endpoint: path || 'index', dataset: parts[0] === 'datasets' ? parts[1] || null : null, query: cleanQuery(logQuery)};
   instrument(res, ctx, info);
   conditional(req, res);
@@ -257,7 +265,7 @@ module.exports = async (req, res) => {
     if (!parts.length) return res.status(200).json({
       name: 'BayCounty.me API', version: 'v1', updated: catalog.updated, docs: `${SITE}/developers`, openapi: `${SITE}/api/v1/openapi.json`, mcp: `${SITE}/api/mcp`,
       endpoints: {datasets: `${SITE}/api/v1/datasets`, governments: `${SITE}/api/v1/governments`, search: `${SITE}/api/v1/search?q=`,
-        entities: `${SITE}/api/v1/entities?q=`, budget_compare: `${SITE}/api/v1/budget-compare?gov=lh&from=2025&to=2026`, checkbook: `${SITE}/api/v1/checkbook?gov=lh`, budget_actual: `${SITE}/api/v1/budget-actual?gov=lh`, officials: `${SITE}/api/v1/officials?gov=lh&year=2019`, schools: `${SITE}/api/v1/schools?address=1200 Harrison Ave`, emergency: `${SITE}/api/v1/emergency`, evacuation_zone: `${SITE}/api/v1/evacuation-zone?address=825+Ohio+Ave`, utilities: `${SITE}/api/v1/utilities?address=825+Ohio+Ave`, address_report: `${SITE}/api/v1/address-report?address=825+Ohio+Ave`, status: `${SITE}/api/v1/status`, import_progress: `${SITE}/api/v1/import-progress`, changes: `${SITE}/api/v1/changes?since=`, meetings_calendar: `${SITE}/api/v1/meetings.ics?gov=`},
+        entities: `${SITE}/api/v1/entities?q=`, budget_compare: `${SITE}/api/v1/budget-compare?gov=lh&from=2025&to=2026`, checkbook: `${SITE}/api/v1/checkbook?gov=lh`, budget_actual: `${SITE}/api/v1/budget-actual?gov=lh`, officials: `${SITE}/api/v1/officials?gov=lh&year=2019`, schools: `${SITE}/api/v1/schools?address=1200 Harrison Ave`, emergency: `${SITE}/api/v1/emergency`, evacuation_zone: `${SITE}/api/v1/evacuation-zone?address=825+Ohio+Ave`, utilities: `${SITE}/api/v1/utilities?address=825+Ohio+Ave`, address_report: `${SITE}/api/v1/address-report?address=825+Ohio+Ave`, nearby: `${SITE}/api/v1/nearby?address=825+Ohio+Ave`, status: `${SITE}/api/v1/status`, import_progress: `${SITE}/api/v1/import-progress`, changes: `${SITE}/api/v1/changes?since=`, meetings_calendar: `${SITE}/api/v1/meetings.ics?gov=`},
       license: catalog.license, datasets: catalog.datasets.map(d => ({id: d.id, title: d.title, rows: d.rows, url: `${SITE}/api/v1/datasets/${d.id}`}))});
     if (parts[0] === 'openapi.json') return res.status(200).json(openapi(catalog));
     if (parts[0] === 'status') { res.locals.lastModified = null; return res.status(200).json(await status(catalog)); }
@@ -348,6 +356,12 @@ module.exports = async (req, res) => {
       const A = require('./_address_report');
       const rowsOf = async id => { const m = catalog.datasets.find(d => d.id === id); return m ? (await datasetRows(req, m)).rows : null; };
       try { const r = await A.forRequest(req.query, {catalog, rowsOf, file: f => load(req, f)}); info.rows = r.sections.length; return res.status(200).json({data: r}); }
+      catch (e) { if (e.expose) return res.status(e.status).json({error: e.message}); throw e; }
+    }
+    if (parts[0] === 'nearby') {
+      res.locals.lastModified = null;
+      const rowsOf = async id => { const m = catalog.datasets.find(d => d.id === id); return m ? (await datasetRows(req, m)).rows : null; };
+      try { const r = await require('./_nearby').forRequest(req, catalog, req.query, {rowsOf}); info.rows = r.sections.reduce((a, s) => a + s.items.length, 0); return res.status(200).json({data: r}); }
       catch (e) { if (e.expose) return res.status(e.status).json({error: e.message}); throw e; }
     }
     if (parts[0] === 'officials') {

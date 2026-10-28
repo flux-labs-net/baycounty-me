@@ -3,6 +3,7 @@
 // Default: saves it as a Resend broadcast DRAFT to the weekly list and emails the reviewer. WEEKLY_AUTOSEND=1 sends it.
 //   GET /api/weekly with Authorization: Bearer CRON_SECRET          the Monday run
 //   ...?test=1                                                      sends one copy to the reviewer only (no draft)
+//   ...?home=1                                                      "Your home this week" for residents with an account
 // The edition must be this week's (week_of = this Monday); a stale build stops the run and tells the reviewer.
 const {WEEKLY, FROM, resend, ensurePrefsProperty, prefsUrl} = require('./_alerts');
 const {weeklyEmail} = require('./_emails');
@@ -49,6 +50,12 @@ module.exports = async (req, res) => {
   if (!key) return res.status(500).json({ok: false, error: 'RESEND_FULL_KEY missing'});
   const reviewer = process.env.DIGEST_REVIEWER || 'hello@fluxlabs.net';
   const test = req.query && req.query.test === '1';
+  // ?home=1: the "Your home this week" emails for signed-in residents (api/_account.js). Two Monday runs an hour apart;
+  // each account gets the week once. With test=1, only the reviewer's own account (if they have one) gets a copy.
+  if (req.query && req.query.home === '1') {
+    try { return res.status(200).json({ok: true, home: await require('./_account').weeklyRun(req, {only: test ? reviewer : null})}); }
+    catch (e) { console.error('weekly home:', e.message); return res.status(500).json({ok: false, error: e.message}); }
+  }
   const fail = async (code, why) => {
     console.error('weekly:', why);
     if (!test) await resend('/emails', 'POST', {from: FROM, to: [reviewer], ...reviewEmail('failed', {why})}, key).catch(() => {});

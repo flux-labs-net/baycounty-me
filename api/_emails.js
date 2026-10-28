@@ -197,4 +197,69 @@ function weeklyEmail(ed) {
   return {subject, html, text, counts: n};
 }
 
-module.exports = {confirmEmail, manageLinkEmail, adminSignInEmail, realtorSignInEmail, realtorReportEmail, digestEmail, weeklyEmail, clip};
+
+// Citizen accounts (/account, api/_account.js). The sign-in email carries a 6-digit code (typed on the site or in the
+// app) and a button that signs in on the device where the email is opened.
+function accountCodeEmail(code, link, minutes = 15) {
+  const subject = `${code} is your BayCounty.me sign-in code`;
+  return {subject,
+    text: `Your BayCounty.me sign-in code is ${code}\n\nType it where you asked to sign in, or open this link on this device:\n${link}\n\nThe code works once and expires in ${minutes} minutes. If you didn't ask for it, ignore this email.`,
+    html: ui.layout({title: subject, preheader: `Your code is ${code}. It works once and expires in ${minutes} minutes.`, kicker: 'Your account',
+      hero: {tone: 'blue', icon: 'key', eyebrow: 'Sign in', title: 'Your sign-in code'},
+      body: ui.p('Type this code where you asked to sign in, on the website or in the BayCounty.me app.') + ui.code(code) +
+        ui.p('Reading this on the device you’re signing in on? Use the button instead.', {size: 14, lh: 21}) + ui.button(link, 'Sign in on this device') +
+        ui.note(`The code works once and expires in ${minutes} minutes. Didn’t ask for this? Ignore this email. Nobody can sign in without the code.`),
+      footer: 'You’re getting this because someone asked to sign in to BayCounty.me with this address.'})};
+}
+
+// The fuller weekday/time for an item's date ("Tue, Nov 3, 6 PM" or "Tue, Nov 3").
+const itemWhen = d => (!d ? '' : String(d).length > 10 ? local(String(d)).toLocaleString('en-US', {weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit', timeZone: TZ}).replace(':00', '')
+  : at(String(d)).toLocaleDateString('en-US', {weekday: 'short', month: 'short', day: 'numeric', timeZone: TZ}));
+const LOOK = {alerts: ['salmon', 'alert'], meetings: ['blue', 'calendar'], events: ['teal', 'spark'], projects: ['amber', 'search'], notices: ['blue', 'file'], food: ['salmon', 'check'], business: ['teal', 'dollar']};
+
+// "Your home this week" (Monday, api/_account.js weekly run). f is the GET /api/v1/nearby answer for the saved home;
+// manage is the signed link to change or stop these emails. Returns null when there's nothing to say.
+function homeWeeklyEmail(f, {home, name, manage}) {
+  const secs = (f.sections || []).filter(s => s.items && s.items.length);
+  if (!secs.length) return null;
+  const total = secs.reduce((a, s) => a + s.items.length, 0);
+  const where = home.label && home.label !== 'Home' ? home.label : (f.city || 'your home');
+  let body = name ? ui.p(`Hi ${esc(name)}, here’s what’s coming up and new near ${esc(home.address)}.`) : ui.p(`Here’s what’s coming up and new near <b>${esc(home.address)}</b>.`);
+  let text = `What's coming up and new near ${home.address}.\n`;
+  const t = f.today_card || {};
+  const facts = [t.trash && t.trash.length && ['Pickup', esc(t.trash.map(x => `${x.service}: ${x.days}`).join(' · '))], f.zone && ['Evacuation zone', `Zone ${esc(f.zone)}`],
+    t.beach && ['Beach flag today', esc(t.beach.flag)]].filter(Boolean);
+  if (facts.length) body += ui.facts(facts);
+  secs.forEach((s, i) => {
+    const [tone, icon] = LOOK[s.id] || ['blue', 'bell'];
+    const items = s.items.slice(0, s.id === 'alerts' ? 6 : 5);
+    body += (i ? ui.spacer(14) : '') + ui.section(tone, icon, esc(s.title), s.count || s.items.length) +
+      items.map(it => ui.item({title: esc(it.title), url: it.url, meta: esc([itemWhen(it.date), it.miles != null ? `${it.miles} mi` : null].filter(Boolean).join(' · ')), text: esc(it.detail || '')})).join('');
+    text += `\n${s.title.toUpperCase()}\n` + items.map(it => `- ${it.title}${it.date ? ' (' + itemWhen(it.date) + ')' : ''}${it.url ? ' ' + it.url : ''}`).join('\n') + '\n';
+  });
+  body += ui.button(`${SITE}/account`, 'Open My home', {mt: 22});
+  const subject = `Your week near ${where}: ${plural(total, 'thing')} to know`;
+  const footer = `You’re getting this because you turned on the weekly email in your BayCounty.me account. ${ui.footLink(manage, 'Change or stop these emails')}<br><br>${ui.ABOUT}`;
+  text += `\nOpen My home: ${SITE}/account\nChange or stop these emails: ${manage}\n`;
+  const first = secs[0].items[0];
+  const html = ui.layout({title: subject, preheader: `${first.title}${total > 1 ? ` and ${total - 1} more` : ''}.`, kicker: `My home · Week of ${nice(f.today)}`,
+    hero: {tone: 'teal', icon: 'calendar', eyebrow: esc(f.local_government || 'Bay County'), title: `Your week near ${esc(where)}`}, body, footer});
+  return {subject, html, text, items: total};
+}
+
+// One emergency notice that reaches a saved home (an evacuation order for its zone, a boil-water notice in its city,
+// a weather warning), sent right away when the account turned that topic on for email.
+function homeAlertEmail(n, {home, manage}) {
+  const LABEL = {evacuation: 'Evacuation order', water: 'Boil-water notice', weather: n.event || 'Weather alert', shelters: 'Shelter open', roads: 'Road closed'};
+  const head = LABEL[n.topic] || 'Alert';
+  const subject = `${head}${n.topic === 'evacuation' && home.zone ? ` for Zone ${home.zone}` : ''}: ${clip(n.title || '', 70)}`;
+  const url = `${SITE}/emergency#n-${encodeURIComponent(n.notice_id)}`;
+  const body = ui.p(`This affects your saved home at <b>${esc(home.address)}</b>${home.zone ? ` (evacuation Zone ${esc(home.zone)})` : ''}.`) +
+    ui.item({title: esc(n.title || head), url, meta: esc([n.source, n.issued ? itemWhen(n.issued) : null].filter(Boolean).join(' · ')), text: esc(clip(n.summary || n.instruction || '', 400))}) +
+    ui.button(url, 'See the details') + ui.note('Always follow instructions from emergency officials. BayCounty.me passes notices along from the National Weather Service, Bay County and the cities.');
+  const footer = `You’re getting this because you asked for emergency emails about your home in your BayCounty.me account. ${ui.footLink(manage, 'Change or stop these emails')}<br><br>${ui.ABOUT}`;
+  return {subject, text: `${head}\n\n${n.title || ''}\n${n.summary || ''}\n\nThis affects your saved home at ${home.address}.\n${url}\n\nChange or stop these emails: ${manage}`,
+    html: ui.layout({title: subject, preheader: clip(n.summary || n.title || '', 120), kicker: 'Alert for your home', hero: {tone: 'salmon', icon: 'alert', eyebrow: esc(head), title: esc(clip(n.title || head, 90))}, body, footer})};
+}
+
+module.exports = {accountCodeEmail, homeWeeklyEmail, homeAlertEmail, confirmEmail, manageLinkEmail, adminSignInEmail, realtorSignInEmail, realtorReportEmail, digestEmail, weeklyEmail, clip};

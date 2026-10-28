@@ -10,6 +10,10 @@ const PAGES = {
     note: 'Live map lookups (parcel, flood, districts) are made by the address-report endpoint at request time. Sections for utilities, schools, parks, beaches, and development read their datasets when those are published.'},
   '/my-address': {datasets: ['tax-districts', 'property-tax-rates', 'fees-assessments', 'cra-payments', 'property-tax-exemptions', 'meetings', 'schools', 'school-zones', 'utility-providers', 'trash-pickup', 'trash-holidays'], endpoints: ['/schools', '/utilities'],
     note: 'Per-parcel lookups (exemptions, districts) are not in the API yet.'},
+  // a resident's own page: their saved home and choices are private (api/_account.js, migration 0077); what it shows is
+  // the public nearby feed for that home
+  '/account': {datasets: ['meetings', 'community-events', 'development-projects', 'sales-tax-projects', 'road-contracts', 'public-notices', 'restaurant-inspections', 'restaurants', 'new-businesses', 'beach-conditions', 'beach-access', 'trash-pickup'],
+    endpoints: ['/nearby', '/emergency', '/utilities'], note: 'The saved home address and notification choices belong to the signed-in resident and are never published.'},
   '/public-money/cra-spending': {datasets: ['cra-payments']},
   '/public-money/cra-tax-increment': {datasets: ['cra-agencies', 'cra-tax-increment', 'cra-increment-checks', 'property-tax-rates']},
   '/public-money/tax-dollars': {datasets: ['property-tax-rates', 'tax-districts', 'budget-detail']},

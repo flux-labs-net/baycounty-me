@@ -36,6 +36,7 @@ from weekly import this_week_page
 from volunteer_page import volunteer_page
 from military_page import military_page
 from realtor_page import realtor_page
+from account_page import account_page
 from business_ties_page import business_ties_page
 from updates import updates_page, rss, last_updated, nice as nice_date
 OUT = os.path.join(ROOT, 'public')
@@ -116,6 +117,16 @@ def search_dialog():
 </div>'''
 
 
+# My home (/account). Page scripts mark <html class="signed-in"> when the bcm_in cookie is set (MENU_JS), which swaps the label.
+ACCOUNT_BTN = ('<a class="acct-btn" href="/account" aria-label="My home"><svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true">'
+               '<path d="M3.5 9.2 10 3.8l6.5 5.4V16a.8.8 0 0 1-.8.8h-3.4v-4.6H7.7v4.6H4.3a.8.8 0 0 1-.8-.8z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>'
+               '<span class="acct-out">Sign in</span><span class="acct-in">My home</span></a>')
+
+
+# On narrow phones the header has no room for the account button; the menu ends with it instead.
+MENU_ACCT = ('<li class="menu-acct"><a href="/account"><span class="acct-out">Sign in · My home</span><span class="acct-in">My home</span></a></li>')
+
+
 def nav_html(active):
     es = active.startswith('/es')
     items = []
@@ -131,10 +142,11 @@ def nav_html(active):
     lang = '<a class="lang-link" href="__LANGHREF__" lang="__LANGCODE__" hreflang="__LANGCODE__">__LANGLABEL__</a>' if es else ''
     return f'''<header class="site-head"><div class="site-head-in">
   <a class="wordmark" href="{'/es' if es else '/'}" aria-label="{SITE} {'inicio' if es else 'home'}"><span>{wordmark_html()}</span></a>
-  <nav aria-label="Main"><ul id="site-menu" class="menu">{"".join(items)}</ul></nav>
+  <nav aria-label="Main"><ul id="site-menu" class="menu">{"".join(items)}{'' if es else MENU_ACCT}</ul></nav>
   {lang}
   {ask}
   <a class="search-btn" href="/search" aria-label="Search" aria-keyshortcuts="/ Control+K">{SEARCH_ICON}</a>
+  {'' if es else ACCOUNT_BTN}
   <button type="button" class="theme-btn" id="themeBtn" aria-label="Theme: match system"><svg class="ti ti-system" width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="6.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 3.5a6.5 6.5 0 0 1 0 13z" fill="currentColor"/></svg><svg class="ti ti-light" width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="3.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 2v2.2M10 15.8V18M2 10h2.2M15.8 10H18M4.3 4.3l1.6 1.6M14.1 14.1l1.6 1.6M4.3 15.7l1.6-1.6M14.1 5.9l1.6-1.6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><svg class="ti ti-dark" width="18" height="18" viewBox="0 0 20 20" aria-hidden="true"><path d="M16 12.6A6.6 6.6 0 0 1 7.4 4a6.6 6.6 0 1 0 8.6 8.6z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg><span class="theme-lbl">System</span></button>
   <button type="button" class="menu-btn" aria-expanded="false" aria-controls="site-menu"><span class="sr">Menu</span><svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h14M3 10h14M3 14h14" stroke="currentColor" stroke-width="1.8"/></svg></button>
 </div></header>
@@ -156,6 +168,7 @@ FOOTER = f'''<footer class="site-foot"><div class="site-foot-in">
 </div></footer>'''
 
 MENU_JS = '''(() => {
+  if (/(?:^|; )bcm_in=1/.test(document.cookie)) document.documentElement.classList.add('signed-in');
   const root = document.documentElement, tb = document.getElementById('themeBtn');
   const I = window.BCM_I18N || {}, NAMES = I.theme || {system: 'System', light: 'Light', dark: 'Dark'}, NEXT = {system: 'light', light: 'dark', dark: 'system'};
   const current = () => root.getAttribute('data-theme') || 'system';
@@ -632,7 +645,7 @@ def about_page():
 def privacy_page():
     return '''<div class="page prose">
   <h1>Privacy</h1>
-  <p class="lede">BayCounty.me doesn't sell, share or track you. There are no ads and no tracking cookies, on the website or in the iPhone and Android apps. The only accounts are for the realtor console.</p>
+  <p class="lede">BayCounty.me doesn't sell, share or track you. There are no ads and no tracking cookies, on the website or in the iPhone and Android apps. Accounts are optional: residents can sign in to save their home, and agents to use the realtor console.</p>
   <h2>The website</h2>
   <ul>
     <li><b>Visits.</b> The site counts page views with Vercel Web Analytics, which uses no cookies and doesn't identify you.</li>
@@ -640,13 +653,15 @@ def privacy_page():
     <li><b>Contact form.</b> Your message, name and email come to us by email so we can answer. They aren't added to any list.</li>
     <li><b>API.</b> Requests to the public API are logged with the caller's IP address for 90 days to stop abuse, then deleted.</li>
     <li><b>Ask.</b> Questions you type on the <a href="/ask">Ask</a> page are sent to an AI service to write the answer, along with the public records it looks up. BayCounty.me doesn't save your questions or the answers; it logs only how many were asked (with a scrambled form of your IP address, to enforce limits) and what they cost. Please don't type personal information.</li>
+    <li><b>Your account (My home).</b> If you sign in at <a href="/account">My home</a> or in the app, we keep your email address, the first name you give (if any), the home address you save and what you asked to hear about, so we can show and send you what's happening near your home. Sign-in uses a code sent to your email; there are no passwords. A sign-in cookie keeps you signed in on the website. Your home address is never shown to anyone else, never published and never in a log; the feed uses it only to find what's nearby. You can change it, stop the emails, or delete your account and everything in it from My home at any time.</li>
     <li><b>Realtor console.</b> Agents who sign in to the <a href="/realtor">realtor console</a> have an account under their email address. We keep the branding they save (name, brokerage, contact details, logo, photo and colors) and the addresses they've run reports for, so they can run them again. A sign-in cookie keeps them signed in for 30 days. None of it is shared or shown to anyone else, and an agent can delete the account, branding and history from the console at any time. Addresses sent to the address report are not logged.</li>
     <li><b>My Address.</b> Address lookups go straight from your browser to Bay County's and FEMA's public map servers. BayCounty.me doesn't receive or store what you look up.</li>
   </ul>
   <h2>The iPhone and Android apps</h2>
   <ul>
-    <li><b>No data collected.</b> The app has no accounts, analytics or advertising, and sends nothing about you to BayCounty.me.</li>
-    <li><b>Your address and location.</b> If you save a home address, it stays on your phone. If you tap "Use my location," the app asks permission first and uses your location once to find your address on Bay County's public map server. It isn't stored or sent anywhere else.</li>
+    <li><b>No analytics or ads.</b> The app has no analytics or advertising. Signing in is optional; without an account it sends nothing about you to BayCounty.me.</li>
+    <li><b>If you sign in.</b> Signing in to My home in the app uses the same account as the website: your email address, your saved home address and your choices are kept as described above, so the app, the website and your emails agree. Signing out removes the account from the phone; deleting the account deletes it everywhere.</li>
+    <li><b>Your address and location.</b> If you save a home address without signing in, it stays on your phone. If you tap "Use my location," the app asks permission first and uses your location once to find your address on Bay County's public map server. It isn't stored or sent anywhere else.</li>
     <li><b>Downloaded data.</b> The app saves copies of the public records it shows so it works offline. Deleting the app deletes them.</li>
     <li><b>Maps.</b> The Android app draws its maps with OpenStreetMap tiles, so OpenStreetMap's servers see your IP address when they send them, as any website would. The iPhone app uses Apple Maps.</li>
     <li><b>Crash reports.</b> If you've allowed it in your phone's settings, Apple or Google may share anonymous crash reports with the developer.</li>
@@ -674,6 +689,7 @@ PAGES = [
     ('/governments', "Bay County's local governments", 'A profile of every local government in Bay County, Florida: officials, budget, tax rate, debt, audits, votes, contracts and projects.', govs_index),
     ('/compare', 'Compare Bay County governments', 'Compare Bay County, its cities and the school district side by side: budget, property tax, debt, staff, audit findings, split votes and utility bills, per resident.', lambda: compare_page(OUT)),
     ('/open-data', 'Download the data', 'Every BayCounty.me dataset as CSV and JSON: votes, contracts, CRA spending, tax rates, debt, audits, FEMA projects and more.', lambda: opendata_page(OUT)),
+    ('/account', 'My home', 'Sign in and save your home address to see what’s happening around it: alerts for your home, trash day, meetings, events, building and road work nearby, with an optional Monday email and phone notifications.', lambda: account_page(OUT)),
     ('/realtor', 'Realtor console: branded address reports', 'For real estate agents: type any Bay County address and download one branded PDF with the property, a tax estimate, flood and evacuation zones, schools, utilities, zoning and projects nearby, parks and who represents it.', lambda: realtor_page(OUT)),
     ('/developers', 'API for developers', 'Connect apps, spreadsheets and AI assistants to BayCounty.me: a free, read-only API and MCP server for Bay County public records.', lambda: developers_page(OUT)),
     ('/es', 'Registros públicos en español', 'BayCounty.me en español: estimado de impuestos por dirección, solicitudes de registros públicos y un glosario de términos de dinero público.', es_home),
@@ -745,7 +761,7 @@ PAGES = [
     ('/ask', 'Ask BayCounty.me', 'Ask a question in your own words about Bay County budgets, taxes, votes, contracts, meetings or officials, and get an answer from the public records on BayCounty.me, with links to each source.', ask_page),
     ('/about', 'About', 'What BayCounty.me is, where its information comes from, and how to send a correction.', about_page),
     ('/data-sources', 'Where our data comes from', 'Every source behind BayCounty.me: each government\'s agenda systems, websites and documents, and every state and federal database, with links, how often we check them and how we process the records.', data_sources_page),
-    ('/privacy', 'Privacy', 'What BayCounty.me and its iPhone and Android apps collect: no ads, no tracking, and accounts only for the realtor console.', privacy_page),
+    ('/privacy', 'Privacy', 'What BayCounty.me and its iPhone and Android apps collect: no ads, no tracking, and optional accounts for your home and for the realtor console.', privacy_page),
 ]
 
 

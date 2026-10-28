@@ -93,6 +93,7 @@ window.BCM_CITIES=[{"k":"county","s":"Bay County","slug":"bay-county","kind":"co
 
 window.BC = Object.assign(window.BC || {}, window.BCNames);
 (() => {
+  if (/(?:^|; )bcm_in=1/.test(document.cookie)) document.documentElement.classList.add('signed-in');
   const root = document.documentElement, tb = document.getElementById('themeBtn');
   const I = window.BCM_I18N || {}, NAMES = I.theme || {system: 'System', light: 'Light', dark: 'Dark'}, NEXT = {system: 'light', light: 'dark', dark: 'system'};
   const current = () => root.getAttribute('data-theme') || 'system';
