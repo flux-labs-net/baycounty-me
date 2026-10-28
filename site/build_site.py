@@ -78,13 +78,18 @@ def _link(c, active):
 
 
 def _section(m, active):
-    """One drop-down. A section with a start page shows the start page as a card beside one column per group (on a
-    phone every section is open: the start page first, then its links as wrapping buttons). The Spanish menu's
-    sections keep the column-per-group layout."""
+    """One drop-down. A section with a start page shows the start page as a card beside one column per group. On a
+    phone the menu lists only the sections; tapping one slides to its list (start page, then each group's links as
+    plain rows). The Spanish menu's sections keep the column-per-group layout."""
     on = any(c['href'] == active for c in menu_links(m))
     q = f'<span class="st-q">{m["question"]}</span>' if m.get('question') else ''
     dot = '<i class="st-dot" aria-hidden="true"></i>' if m.get('season') else ''
-    btn = f'<button type="button" class="sub-toggle" aria-expanded="false"><span class="st-l"><span class="st-n">{dot}{m["label"]}</span>{q}</span>{CHEV}</button>'
+    from ui import ico, SECTION_LOOK
+    icon, tone = SECTION_LOOK.get(m['label'], ('grid', 'blue'))
+    # On a phone the menu lists the sections as rows; tapping one slides to its own list ("‹ Menu" goes back).
+    back = f'<span class="st-back" aria-hidden="true">‹ {"Menú" if active.startswith("/es") else "Menu"}</span>'
+    btn = (f'<button type="button" class="sub-toggle" aria-expanded="false">{back}<span class="st-ic">{ico(icon, tone)}</span>'
+           f'<span class="st-l"><span class="st-n">{dot}{m["label"]}</span>{q}</span>{CHEV}</button>')
     if m.get('start'):
         st = m['start']
         cur = ' aria-current="page"' if st['href'] == active else ''
@@ -188,9 +193,9 @@ MENU_JS = '''(() => {
     show(m);
   });
   const btn = document.querySelector('.menu-btn'), menu = document.getElementById('site-menu');
-  const setMenu = o => { btn.setAttribute('aria-expanded', o); menu.classList.toggle('open', o); document.documentElement.classList.toggle('nav-locked', o); if (o) menu.scrollTop = 0;
-    // phone menu: open on the section that holds this page
-    const here = o && menu.querySelector('.has-sub.on > .sub-toggle'); if (here && !menu.querySelector('.sub-toggle[aria-expanded="true"]')) here.setAttribute('aria-expanded', 'true'); };
+  // phone menu: always opens on the list of sections
+  const setMenu = o => { btn.setAttribute('aria-expanded', o); menu.classList.toggle('open', o); document.documentElement.classList.toggle('nav-locked', o); menu.scrollTop = 0;
+    menu.querySelectorAll('.sub-toggle').forEach(x => x.setAttribute('aria-expanded', 'false')); };
   btn.addEventListener('click', () => setMenu(btn.getAttribute('aria-expanded') !== 'true'));
   menu.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false); });
   const mq = matchMedia('(min-width:981px)'), onMq = e => { if (e.matches) setMenu(false); };
@@ -198,10 +203,10 @@ MENU_JS = '''(() => {
   document.querySelectorAll('.sub-toggle').forEach(t => t.addEventListener('click', e => {
     e.stopPropagation(); const o = t.getAttribute('aria-expanded') === 'true';
     document.querySelectorAll('.sub-toggle').forEach(x => x.setAttribute('aria-expanded', 'false'));
-    t.setAttribute('aria-expanded', !o); }));
+    t.setAttribute('aria-expanded', !o); if (innerWidth <= 980) { menu.scrollTop = 0; t.focus(); } }));
   // Line each mega menu up under its own button, nudged left only if it would run off the right edge.
   const placeMega = li => { const m = li.querySelector('.nav-mega'); if (!m || innerWidth <= 980) return;
-    const l = li.getBoundingClientRect().left, w = Math.min(760, innerWidth - 32);
+    const l = li.getBoundingClientRect().left, w = m.offsetWidth || Math.min(760, innerWidth - 32);
     m.style.setProperty('--mx', Math.max(16 - l, Math.min(0, innerWidth - 16 - w - l)) + 'px'); };
   document.querySelectorAll('.has-sub').forEach(li => ['mouseenter', 'focusin', 'click'].forEach(ev => li.addEventListener(ev, () => placeMega(li))));
   document.addEventListener('click', e => { if (!e.target.closest('.has-sub, .menu-btn')) document.querySelectorAll('.sub-toggle').forEach(x => x.setAttribute('aria-expanded', 'false')); });

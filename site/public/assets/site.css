@@ -584,23 +584,52 @@ a.ent:hover{color:var(--blue);text-decoration-color:var(--blue)}
 .nav-gh{display:block;padding:4px 10px 6px;font:500 .68rem var(--f-data);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
 .nav-mega.has-start.one .nav-gh{display:none}
 .nav-mega .nav-start{grid-column:-2;grid-row:1}
+.st-back,.st-ic{display:none}
 @media (max-width:980px){
-  .menu > li > .sub-toggle{min-height:0;padding:16px 4px 8px;pointer-events:none}
-  .menu > li > .sub-toggle svg{display:none}
-  .menu > li > .sub-toggle .st-l{flex-direction:row;align-items:baseline;gap:10px;flex-wrap:wrap}
-  .st-q{margin-top:0}
-  .nav-mega.has-start,.nav-mega.has-start:not(.one),.has-sub:hover .nav-mega.has-start,.has-sub:focus-within .nav-mega.has-start,
-  .has-sub .sub-toggle[aria-expanded] + .nav-mega.has-start{display:flex;flex-direction:row;flex-wrap:wrap;gap:6px;position:static;width:auto;padding:0 0 14px;box-shadow:none;border:0;background:none}
-  .nav-mega .nav-col,.nav-mega .nav-links,.nav-mega .nav-links li{display:contents}
-  .nav-mega a.nav-start{order:0;flex-direction:row;align-items:center;min-height:40px;padding:6px 14px;border-radius:999px}
-  .nav-mega a.nav-start .ns-e{display:none}
-  .nav-mega a.nav-start .ns-t{font:600 .9rem var(--f-body)}
-  .nav-mega .nav-links a,.nav-mega.has-start:not(.one) .nav-links a{min-height:40px;padding:6px 14px;border-radius:999px;background:var(--sunken);justify-content:center;box-sizing:border-box}
-  .nav-mega .nav-links .k{font-size:.88rem}
-  .nav-more{display:flex;flex-wrap:wrap;gap:4px 16px;border-top:1px solid var(--line);padding:14px 4px 18px}
-  .nav-more a{font-size:.86rem;color:var(--muted);text-decoration:none;padding:6px 0}
-  .nav-more a:hover{color:var(--blue)}
+  /* Phone menu, "drill in" (2026-10-28): the sections are rows; tapping one slides to its list of plain rows. No pills. */
+  .menu > li.has-sub{border-top:1px solid var(--line)}
+  .menu > li > .sub-toggle{display:flex;align-items:center;gap:14px;min-height:72px;padding:10px 4px;text-align:left}
+  .menu > li > .sub-toggle .st-l{flex:1;min-width:0;flex-direction:column;align-items:flex-start;gap:2px}
+  .menu > li > .sub-toggle .st-n{font:600 1.02rem var(--f-body)}
+  .st-q{display:block;margin-top:0;font:400 .82rem var(--f-body);color:var(--muted)}
+  .st-ic{display:flex;flex:none}
+  .st-ic .ui-ti{width:40px;height:40px;border-radius:11px}
+  .menu > li > .sub-toggle svg{display:block;transform:rotate(-90deg);width:12px;height:12px;color:var(--muted);flex:none}
+  .menu > li.has-sub.on > .sub-toggle .st-n{color:var(--blue)}
+  /* one section open: hide the others, the button becomes the back link + title */
+  .menu:has(> li > .sub-toggle[aria-expanded="true"]) > li:not(:has(> .sub-toggle[aria-expanded="true"])){display:none}
+  .menu > li > .sub-toggle[aria-expanded="true"]{flex-wrap:wrap;gap:4px 12px;min-height:0;padding:6px 4px 14px}
+  .menu > li > .sub-toggle[aria-expanded="true"] .st-back{display:block;flex-basis:100%;font:500 .9rem var(--f-body);color:var(--blue);padding:8px 0 6px}
+  .menu > li > .sub-toggle[aria-expanded="true"] .st-n,.menu > li.has-sub.on > .sub-toggle[aria-expanded="true"] .st-n{font:700 1.5rem/1.2 var(--f-body);color:var(--ink)}
+  .menu > li > .sub-toggle[aria-expanded="true"] svg,.menu > li > .sub-toggle[aria-expanded="true"] .st-ic{display:none}
+  .menu > li.has-sub:has(> .sub-toggle[aria-expanded="true"]){border-top:0}
+  .menu > li > .sub-toggle[aria-expanded="true"],.menu > li > .sub-toggle[aria-expanded="true"]:hover{background:none}
+  .nav-mega,.nav-mega.has-start,.nav-mega.has-start:not(.one),.has-sub:hover .nav-mega,.has-sub:focus-within .nav-mega,
+  .has-sub:hover .nav-mega.has-start,.has-sub:focus-within .nav-mega.has-start{display:none;position:static;width:auto;padding:0 0 18px;box-shadow:none;border:0;background:none}
+  .has-sub .sub-toggle[aria-expanded="true"] + .nav-mega,.has-sub .sub-toggle[aria-expanded="true"] + .nav-mega.has-start{display:flex;flex-direction:column;gap:0;animation:nav-in .2s ease-out}
+  .nav-mega .nav-col,.nav-mega .nav-grp{display:block}
+  .nav-mega .nav-gh,.nav-col .nav-gh,.nav-mega.has-start.one .nav-gh{display:block;padding:20px 4px 6px;font:500 .7rem var(--f-data);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .nav-mega.has-start.one .nav-gh{display:none}
+  .nav-mega .nav-links,.nav-mega .nav-grp > ul{display:block;list-style:none;margin:0;padding:0}
+  .nav-mega .nav-links li{display:block}
+  .nav-mega a.nav-start{order:-1;display:flex;flex-direction:column;align-items:flex-start;gap:2px;min-height:0;margin:0 0 4px;padding:14px 16px;border-radius:14px;border:0;text-decoration:none}
+  .nav-mega a.nav-start .ns-e{display:block}
+  .nav-mega a.nav-start .ns-t{font:600 1.02rem var(--f-body)}
+  .nav-mega a.nav-start .ns-d{display:block;font-size:.8rem}
+  .nav-mega a.nav-start .ns-go{display:none}
+  .nav-mega .nav-links a,.nav-mega.has-start:not(.one) .nav-links a,.nav-mega .nav-grp a{position:relative;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;min-height:52px;text-align:left;padding:6px 32px 6px 4px;border-radius:0;background:none;border-bottom:1px solid var(--line);color:var(--ink);text-decoration:none;box-sizing:border-box}
+  .nav-mega .nav-links li:last-child a,.nav-mega .nav-grp li:last-child a{border-bottom:0}
+  .nav-mega .nav-links a::after,.nav-mega .nav-grp a::after{content:"";position:absolute;right:10px;top:50%;width:7px;height:7px;border:solid var(--muted);border-width:0 1.6px 1.6px 0;transform:translateY(-50%) rotate(-45deg)}
+  .nav-mega .nav-links a:hover,.nav-mega .nav-links a:focus-visible{background:var(--sunken)}
+  .nav-mega .nav-links .k{font:500 .98rem var(--f-body)}
+  .nav-mega .nav-links .kd{display:none}
+  .nav-mega .nav-links a[aria-current="page"] .k{color:var(--blue)}
+  .nav-more{display:flex;flex-wrap:wrap;gap:4px 18px;border-top:1px solid var(--line);padding:16px 4px 20px}
+  .menu > li.nav-more > a{width:auto;display:inline-block;font:400 .86rem var(--f-body);color:var(--muted);text-decoration:none;padding:6px 0;border-radius:0}
+  .menu > li.nav-more > a:hover{color:var(--blue);background:none}
 }
+@keyframes nav-in{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.nav-mega{animation:none !important}}
 
 html.sx-open{overflow:hidden}
 .sx{position:fixed;inset:0;z-index:100;background:var(--surface);color:var(--ink);display:flex;flex-direction:column;overflow-y:auto;overscroll-behavior:contain}
