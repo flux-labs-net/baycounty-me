@@ -38,10 +38,9 @@ final class HomeTileTests: XCTestCase {
         XCTAssertTrue(app.navigationBars["Search"].waitForExistence(timeout: 5))
     }
 
-    func testFourTabs() {
+    func testFiveTabs() {
         let app = XCUIApplication()
         app.launch()
-        for t in ["Today", "Places", "Money", "Meetings"] { XCTAssertTrue(app.tabBars.buttons[t].waitForExistence(timeout: 5), "Tab \(t)") }
-        XCTAssertFalse(app.tabBars.buttons["Search"].exists)
+        for t in ["Today", "Living here", "Money", "Who decides", "Search"] { XCTAssertTrue(app.tabBars.buttons[t].waitForExistence(timeout: 5), "Tab \(t)") }
     }
 }

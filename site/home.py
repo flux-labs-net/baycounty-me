@@ -118,6 +118,75 @@ def _bars(rows, colors):
                    for k, (n, v) in enumerate(rows[:5]))
 
 
+DOOR_LOOK = {'Living here': ('home', 'teal'), 'Your money': ('wallet', 'amber'), 'Who decides': ('county', 'blue'),
+             'Elections': ('vote', 'salmon'), 'Get involved': ('megaphone', 'teal')}
+# the links each homepage door shows first; the rest of its menu section opens under "All N"
+DOOR_PICKS = {'Living here': ['/my-address', '/utilities', '/schools', '/beaches', '/emergency', '/events'],
+              'Your money': ['/public-money/tax-dollars', '/public-money/budget-compare', '/public-money/contracts',
+                             '/public-money/accountability', '/public-money/votes'],
+              'Who decides': ['/people', '/governments', '/connections', '/connections/campaign-gifts', '/elections/results'],
+              'Elections': ['/elections', '/elections/voting', '/elections/results', '/elections/past'],
+              'Get involved': ['/meetings', '/notices', '/volunteer', '/records-request', '/alerts']}
+
+
+def _doors():
+    """One card per menu section (site_menu.menu()), so the homepage and the menu always list the same pages."""
+    from site_menu import menu, links
+    from ui import ico
+    out = []
+    for m in menu():
+        if m.get('footer'):
+            continue
+        ls = links(m)
+        picks = [l for h in DOOR_PICKS.get(m['label'], []) for l in ls if l['href'] == h] or ls[:5]
+        rest = [l for l in ls if l not in picks]
+        icon, tone = DOOR_LOOK.get(m['label'], ('grid', 'blue'))
+        li = lambda l: f'<li><a href="{l["href"]}">{html.escape(l["label"])}</a></li>'
+        more = (f'<details class="h-more"><summary>All {len(ls)}</summary><ul>{"".join(li(l) for l in rest)}</ul></details>' if rest else '')
+        out.append(f'<div class="h-door{" season" if m.get("season") else ""}">{ico(icon, tone)}<h3>{html.escape(m["label"])}</h3>'
+                   f'<p>{html.escape(m["question"])}</p><ul>{"".join(li(l) for l in picks)}</ul>{more}</div>')
+    return ''.join(out)
+
+
+def _today():
+    """Live cards: today's beach flag, active alerts, the next public meeting, and trash day (by address)."""
+    from datetime import datetime
+    from page_datasets import beach_conditions, emergency_notices
+    from govs import _load
+    from ui import ico
+    card = lambda href, icon, tone, title, sub: (f'<a class="h-td" href="{href}">{ico(icon, tone)}<span><b>{title}</b>'
+                                                 f'<span>{sub}</span></span></a>')
+    fc = sorted((r for r in beach_conditions() if r['kind'] == 'forecast'), key=lambda r: r['sort_order'])
+    now = fc[0] if fc else {}
+    flag = now.get('flag_color')
+    beach = card('/beaches', 'flag', 'amber', html.escape(f'{flag} beach flag') if flag else 'Beach flags',
+                 html.escape(f"{now['rip_current_risk']} rip current risk") if now.get('rip_current_risk') else "Today's flag at each beach")
+    act = [n for n in emergency_notices() if n.get('status') == 'active']
+    kinds = {'weather': 'weather', 'boil-water': 'boil-water', 'evacuation': 'evacuation', 'road': 'road', 'utility': 'utility'}
+    if act:
+        by = {}
+        for n in act:
+            k = kinds.get(n['kind'], 'other')
+            by[k] = by.get(k, 0) + 1
+        sub = ', '.join(f'{v} {k}' for k, v in sorted(by.items(), key=lambda x: -x[1]))
+        alerts = card('/emergency', 'storm', 'salmon', f'{len(act)} active notice{"s" if len(act) != 1 else ""}', html.escape(sub))
+    else:
+        alerts = card('/emergency', 'storm', 'salmon', 'No active alerts', 'Weather, boil-water and road notices')
+    md = _load().get('meetings') or {'boards': [], 'meetings': []}
+    boards = {b['id']: b for b in md.get('boards', [])}
+    stamp = datetime.now().strftime('%Y-%m-%dT%H:%M')
+    up = sorted((m for m in md['meetings'] if not m.get('past') and (m.get('start') or '') >= stamp), key=lambda m: m['start'])
+    if up:
+        m0 = up[0]
+        dt = datetime.fromisoformat(m0['start'][:16])
+        when = f"{dt.strftime('%a %b')} {dt.day}"
+        meet = card('/meetings', 'calendar', 'blue', 'Next meeting · ' + when, html.escape(boards.get(m0['board'], {}).get('name') or m0['board']))
+    else:
+        meet = card('/meetings', 'calendar', 'blue', 'Meetings', 'When every board meets, with agendas')
+    trash = card('/utilities', 'drop', 'teal', 'Trash day', 'Your pickup day and who provides water, power and internet')
+    return beach + alerts + meet + trash
+
+
 def home_page():
     s = stats()
     from updates import CHANGES, nice
@@ -150,12 +219,36 @@ def home_page():
     top2 = ', '.join(f'{short.get(n, n.lower())} {M(v)}' for n, v in bd['services'][:2])
     debt_bars = _bars(md['debt'], ['--salmon', '--salmon', '--gold', '--gold', '--bar'])
     data = json.dumps(b, separators=(',', ':'))
+    today = _today()
+    doors = _doors()
     return f'''<div class="page home h-home">
-  <section class="h-hero" aria-labelledby="h1">
+  <section class="h-top" aria-labelledby="h1">
+    <div class="h-lead">
+      <h1 id="h1">Everything about {html.escape(NAME)}, <span class="hl">in plain view.</span></h1>
+      <p class="lede">Trash day and schools, beaches and storms, your tax bill and who decides how it's spent. Every figure links to its source.</p>
+      <form class="h-addr" action="/my-address/" method="get" role="search">
+        <label class="sr" for="hq">Your address</label>
+        <input id="hq" name="q" type="search" placeholder="Enter your address" autocomplete="street-address">
+        <button type="submit">Look up</button>
+      </form>
+      <p class="h-addr-note">One page for your address: tax bill, trash day, zoned schools, evacuation zone, meetings and who represents you.</p>
+    </div>
+    <div class="h-today" aria-labelledby="htd">
+      <h2 class="eyebrow mute" id="htd">Today in {html.escape(NAME)}</h2>
+      {today}
+    </div>
+  </section>
+
+  <section class="h-doors-sec" aria-labelledby="hdoors">
+    <h2 id="hdoors" class="h-h2">Find your way around</h2>
+    <div class="h-doors">{doors}</div>
+  </section>
+
+  <section class="h-hero" aria-labelledby="hmoney">
     <div class="h-intro">
-      <span class="eyebrow">Step 1 · What you pay</span>
-      <h1 id="h1">Your money.<br>Their decisions.<br><span class="hl">Follow it.</span></h1>
-      <p class="lede">Start with your tax bill, then follow the spending, the debt and the audits for {html.escape(NAME)}. Every figure links to its source.</p>
+      <span class="eyebrow">Follow the money · What you pay</span>
+      <h2 id="hmoney" class="h-big">Your money.<br>Their decisions.<br><span class="hl">Follow it.</span></h2>
+      <p class="lede">Start with your tax bill, then follow the spending, the debt and the audits.</p>
       <div class="h-ctl">
         <span class="h-lbl" id="areaLbl">Where you live</span>
         <div class="h-chips" role="group" aria-labelledby="areaLbl">{chips}</div>
@@ -170,12 +263,7 @@ def home_page():
       <div class="hb-cols"><span>Levied by</span><span>Mills</span><span>You pay</span></div>
       <ul class="hb-lines" id="billLines">{lines}</ul>
       <div class="hb-total" aria-live="polite"><b>Total</b><span id="billMills">{area["t"]:.4f}</span><span id="billTotal">{_money(area["t"] * val / 1000)}</span></div>
-      <p class="hb-note">Rate × taxable value, before exemptions. Flat fees (fire, stormwater, garbage) are billed separately. <a href="/public-money/tax-dollars">Full calculator →</a> · <a href="/utilities">Utility rates and trash day →</a></p>
-      <form class="hb-addr" action="/my-address/" method="get" role="search">
-        <label class="sr" for="hq">Your address</label>
-        <input id="hq" name="q" type="search" placeholder="Use your exact address" autocomplete="off">
-        <button type="submit">Look up</button>
-      </form>
+      <p class="hb-note">Rate × taxable value, before exemptions. Flat fees (fire, stormwater, garbage) are billed separately. <a href="/public-money/tax-dollars">Full calculator →</a> · <a href="/public-money/fees-and-bills">Fees and bills →</a></p>
     </div>
     <div class="h-card h-compare">
         <div class="h-card-hd"><b>Same home, every area</b><span class="muted">at <span data-val>{_money(val)}</span></span></div>
@@ -183,10 +271,8 @@ def home_page():
       </div>
   </section>
 
-  {home_section()}
-
   <section class="h-follow" aria-labelledby="follow">
-    <div class="h-sec-hd"><div><span class="eyebrow">Step 2 · Follow it</span><h2 id="follow">Where it went, and who's checking.</h2></div><a href="/public-money/accountability">Accountability console →</a></div>
+    <div class="h-sec-hd"><div><span class="eyebrow">Follow the money · Where it went</span><h2 id="follow">Where it went, and who's checking.</h2></div><a href="/public-money/accountability">Accountability console →</a></div>
     <div class="h-tiles">
       <a class="h-tile t-blue" href="/compare#services">
         <span class="eyebrow">Spending · {bd['fy']}</span>
@@ -215,7 +301,9 @@ def home_page():
     </nav>
   </section>
 
-  <section class="h-row" aria-label="Governments and updates">
+  {home_section()}
+
+  <section class="h-row h-row2" aria-label="Governments and updates">
     <div class="h-card">
       <div class="h-card-hd"><b>Pick a government</b><a href="/compare">Compare →</a></div>
       <nav class="gov-chips" aria-label="Governments">{govchips}</nav>
@@ -223,10 +311,6 @@ def home_page():
     <div class="h-card">
       <div class="h-card-hd"><b>What's new</b><a href="/updates">All updates →</a></div>
       <ol class="h-news">{news}</ol>
-    </div>
-    <div class="h-card">
-      <div class="h-card-hd"><b>Take part</b></div>
-      <nav class="h-take" aria-label="Take part"><a href="/emergency">Emergencies &amp; alerts</a><a href="/utilities">Utilities &amp; trash day</a><a href="/meetings">Meetings</a><a href="/elections">2026 elections</a><a href="/elections/voting">Where to vote</a><a href="/elections/results">Election results</a><a href="/notices">Public notices</a><a href="/jobs">Government jobs</a><a href="/volunteer">Volunteer</a><a href="/records-request">Request a record</a><a href="/alerts">Email alerts</a><a href="/open-data">Open data</a><a href="/glossary">Plain-English guide</a><a href="/es" hreflang="es" lang="es">En español</a></nav>
     </div>
   </section>
 </div>
