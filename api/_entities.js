@@ -237,6 +237,18 @@ async function getEntity(req, catalog, id) {
       if (nb) ent = {...ent, filing: {doc_number: nb.doc_number, filing_type: nb.filing_type, filed_date: nb.filed_date, status: nb.status, city: nb.city,
         latest_annual_report: nb.latest_annual_report ?? null, source_url: nb.source_url}};
     }
+    // officers, managers and registered agent on its state filing (business-officers); an officer an editor confirmed
+    // as an official (official-businesses) links to their person page
+    const offs = await rowsWhere(req, catalog, 'business-officers', {entity_id: id}).catch(() => []);
+    if (offs.length) {
+      const confirmed = new Map(live.filter(r => r.from_kind === 'person' && r.relation === 'runs').map(r => [nameKey(r.from_name), r]));
+      ent = {...ent, officers: offs.map(o => {
+        const c = o.officer_kind === 'person' ? confirmed.get(nameKey(o.officer)) : null;
+        const oid = c ? c.from_id : o.officer_entity_id || null;
+        return {name: o.officer, title: o.title, kind: o.officer_kind, entity_id: oid, page_url: oid ? (c ? c.from_url : urlFor(oid)) : null,
+          official: !!c, doc_number: o.sunbiz_doc_number, business_status: o.business_status, source_url: o.source_url};
+      })};
+    }
     const lic = await rowsWhere(req, catalog, 'restaurants', {licensee_entity_id: id}).catch(() => []);
     if (lic.length) ent = {...ent, restaurants: lic.map(r => ({license_number: r.license_number, name: r.business_name, kind: r.kind, city: r.city, licensed_now: r.licensed_now,
       opened: r.opened || null, last_inspection: r.last_inspection || null, last_result: r.last_result || null, last_result_level: r.last_result_level || null,

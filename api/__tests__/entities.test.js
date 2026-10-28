@@ -86,6 +86,16 @@ test('a board member or business officer confirmed as an official shows once, as
   assert.equal(allan.first_date, '2025');
 });
 
+test('a business profile lists its officers from the state filing, never their addresses', async () => {
+  const rows = JSON.parse(fs.readFileSync(path.join(PUB, 'downloads', 'business-officers.json'), 'utf8'));
+  assert.ok(rows.length > 1000);
+  for (const r of rows.slice(0, 2000)) assert.ok(!('address' in r) && !('street' in r) && !('zip' in r), 'no address columns');
+  const id = rows.find(r => r.entity_id.startsWith('business:')).entity_id;
+  const d = await E().getEntity({}, catalog(), id);
+  assert.ok(d.entity.officers && d.entity.officers.length, `${id} shows its officers`);
+  assert.ok(d.entity.officers.every(o => o.name && o.title));
+});
+
 test('the merge folds nicknames and lone initials, and drops every build row for the same person', () => {
   const {mergeConfirmed} = E();
   const links = [

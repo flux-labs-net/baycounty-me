@@ -1614,6 +1614,78 @@ def business_donor_sunbiz():
     return rows
 
 
+_OFFICER_TITLE = {'RA': 'Registered agent', 'MGR': 'Manager', 'MANA': 'Manager', 'AMBR': 'Authorized member', 'MGRM': 'Managing member',
+                  'CEO': 'Chief executive', 'CFO': 'Chief financial officer', 'COO': 'Chief operating officer', 'AP': 'Authorized person',
+                  'AUTH': 'Authorized person', 'AR': 'Authorized representative', 'MBR': 'Member', 'MEMB': 'Member', 'OWNE': 'Owner',
+                  'G': 'General partner', 'GP': 'General partner', 'PRES': 'President', 'SECR': 'Secretary', 'SEC': 'Secretary', 'TREA': 'Treasurer',
+                  'DIR': 'Director', 'DIRE': 'Director', 'CHAI': 'Chair', 'CHAIR': 'Chair', 'VP': 'Vice president', 'VC': 'Vice chair',
+                  'ASST': 'Assistant officer', 'SVP': 'Senior vice president', 'EVP': 'Executive vice president', 'GM': 'General manager'}
+_OFFICER_LETTER = {'P': 'President', 'V': 'Vice president', 'S': 'Secretary', 'T': 'Treasurer', 'D': 'Director', 'C': 'Chair'}
+
+
+def officer_title(code):
+    """Sunbiz title codes as words: 'PSTD' -> 'President, Secretary, Treasurer, Director'."""
+    c = re.sub(r'[^A-Z]', '', (code or '').upper())
+    if not c:
+        return 'Officer'
+    if c in _OFFICER_TITLE:
+        return _OFFICER_TITLE[c]
+    if set(c) <= set(_OFFICER_LETTER):
+        c = c.replace('VP', 'V')
+        return ', '.join(dict.fromkeys(_OFFICER_LETTER[x] for x in c))
+    return code.strip().title()
+
+
+def business_officers():
+    """Officers, managers and registered agent of each registered business with a profile on the site, as filed with
+    the Florida Division of Corporations (Sunbiz). Names and titles only, never addresses. An officer who is also on a
+    profile for that business (a board member, or a business owner who gave to a campaign) carries that profile's id."""
+    import ids
+    from entity_graph import build
+    sys.path.insert(0, os.path.join(HERE, '..', 'data', 'sunbiz'))
+    import build_sunbiz as B
+    from place import PLACE_ID
+    G = build()
+    want = {}  # doc (upper) -> the profile that shows it
+    for eid in list(G.ents) + list(G.alias):
+        if eid.startswith('business:') and re.match(r'^[a-z0-9]+$', eid[9:]):
+            want[eid[9:].upper()] = G.alias[eid][0] if eid in G.alias else eid
+    for r in restaurants():
+        lid = r.get('licensee_entity_id') or ''
+        if lid.startswith('business:'):
+            want.setdefault(lid[9:].upper(), lid)
+    try:
+        ents, roles = B.load_registry('bay')
+    except FileNotFoundError:
+        return []
+    who = {}  # (profile id, person key) -> member:/owner: id already linked to that business
+    for x in G.links.values():
+        if x['relation'] in ('runs', 'board') and x['from_id'].split(':')[0] in ('member', 'owner', 'person'):
+            k = ids.person_key(G.ents[x['from_id']]['name'])
+            if k:
+                who.setdefault((x['to_id'], k), x['from_id'])
+    out, seen = [], set()
+    for r in roles:
+        doc = r['doc_number']
+        eid = want.get(doc)
+        if not eid or not r['raw_name']:
+            continue
+        name = ids.sunbiz_person(r['raw_name']) if r['is_person'] else ids.biz_case(r['raw_name'])
+        title = officer_title(r['title'])
+        k = (doc, name.lower(), title)
+        if k in seen:
+            continue
+        seen.add(k)
+        e = ents.get(doc) or {}
+        out.append({'place_id': PLACE_ID, 'entity_id': eid, 'sunbiz_doc_number': doc, 'business': ids.biz_case(e.get('name') or ''),
+                    'business_status': 'Active' if e.get('status') == 'A' else 'Inactive', 'officer': name, 'title': title,
+                    'officer_kind': 'person' if r['is_person'] else 'organization',
+                    'officer_entity_id': who.get((eid, ids.person_key(name))) if r['is_person'] else None,
+                    'source_url': ids.sunbiz_url(e.get('name') or '', doc)})
+    out.sort(key=lambda r: (r['entity_id'], r['title'] == 'Registered agent', r['officer']))
+    return out
+
+
 def owner_gifts():
     """Personal campaign gifts from people who run a registered business (data/campaign/owner_gifts.py), one row per
     person and campaign. The person is named, with the businesses they run; no addresses or occupations."""
@@ -1967,6 +2039,7 @@ DATASETS = [
     ('nonprofit-officials', 'Officials on nonprofit boards', 'Elected officials, department leaders and candidates listed as an officer or director of a local nonprofit in its IRS returns or state corporate filings. Only matches checked by hand are listed.', nonprofit_officials),
     ('official-businesses', "Officials' businesses", 'Registered businesses (Florida Division of Corporations) that list an elected official, department leader or local candidate as an officer, manager or registered agent, with the filing date and status. Each official-to-record match was checked by hand. Only officials and candidates are named.', official_businesses),
     ('official-business-links', "Officials' business ties", "How officials' and candidates' registered businesses connect to public life: two officials on the same business, an official's business giving to a campaign, a donor business that shares an officer with a candidate's business (the shared person is counted, not named), and an official's business paid by a local government. Published only for hand-checked matches.", official_business_links),
+    ('business-officers', 'Business officers', "Officers, managers, members and the registered agent of each registered business that has a profile on BayCounty.me (a company paid by a local government, a campaign donor, a federal contractor, a restaurant license holder and others), as filed with the Florida Division of Corporations (Sunbiz). One row per person or company and title; names and titles only, never addresses. officer_entity_id links an officer who already has a profile tied to that business (a nonprofit board member or a business owner who gave to a campaign); entity_id is the business's profile.", business_officers),
     ('owner-gifts', 'Campaign gifts from business owners', "Personal gifts to local campaigns from people who run a registered Florida business, one row per person and campaign. A contributor filed as an individual is listed when the name and street address on the Supervisor of Elections filing are the same as an officer, manager or registered agent of a for-profit business on Sunbiz that was active around the gift; middle initials and Jr/Sr must agree, and protected voters are never matched. Other individual donors are never named. No addresses or occupations.", owner_gifts),
     ('entity-profiles', 'Profiles: people, companies and organizations', 'Every company, elected official, candidate, nonprofit, nonprofit board member, registered business, committee and government named in BayCounty.me records, one row each, with its profile page and how many documented connections it has. entity_id (kind:key) joins entity-connections. Board members are named as their nonprofits\' public filings list them; individual campaign donors are included only when they run a registered business (owner-gifts).', entity_profiles),
     ('entity-connections', 'Connections between people, companies and organizations', "Every documented connection between two entities in entity-profiles, totalled per pair and kind: a government paid a payee, an organization gave to an official's or candidate's campaign, an official voted on a company's contracts, a person sits on a nonprofit's board or runs a business, a nonprofit gave a grant, two payees share a project. Each row has its source. Individual campaign donors are included only when they run a registered business (owner-gifts); officials' board seats and businesses are added by the API once checked by hand.", entity_connections),

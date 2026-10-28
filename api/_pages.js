@@ -70,7 +70,7 @@ const PAGES = {
     endpoints: ['/entities/{id}']},
   '/people': {datasets: ['entity-profiles', 'people-directory', 'owner-gifts', 'officials-pay', 'salary-leaders', 'officeholder-terms', 'official-photos'], endpoints: ['/entities']},
   // one shell page for every other profile: /profile/<kind>/<id> (vercel.json rewrite), filled from the API
-  '/profile': {datasets: ['entity-profiles', 'entity-connections', 'nonprofit-officials', 'official-businesses', 'official-business-links', 'shared-owner-groups', 'owner-gifts'],
+  '/profile': {datasets: ['entity-profiles', 'entity-connections', 'business-officers', 'nonprofit-officials', 'official-businesses', 'official-business-links', 'shared-owner-groups', 'owner-gifts'],
     endpoints: ['/entities/{id}']},
 };
 // Page families: each government's profile page.

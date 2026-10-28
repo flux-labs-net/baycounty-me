@@ -127,6 +127,15 @@
     if (f) h += `<section class="pf-grp"><div class="sec-hd"><h3>State filing</h3><span class="muted">Florida Division of Corporations</span></div>
       <p>${esc(f.filing_type)} filed ${esc(f.filed_date)}${f.city ? ', ' + esc(f.city) : ''}. ${f.status === 'Active' ? 'Active' : 'Inactive'}${f.latest_annual_report ? `; latest annual report ${esc(f.latest_annual_report)}` : ''}.
       <a href="${esc(f.source_url)}" target="_blank" rel="noopener">State record</a> (officers and registered agent). <a href="/new-businesses">New businesses →</a></p></section>`;
+    const of = e.officers || [];
+    if (of.length) {  // one line per person, every title they hold on the filing
+      const by = new Map();
+      of.forEach(o => { const k = (o.entity_id || o.name).toLowerCase(); const x = by.get(k) || by.set(k, {...o, titles: []}).get(k); if (!x.titles.includes(o.title)) x.titles.push(o.title); });
+      const ppl = [...by.values()].sort((a, b) => (a.titles.includes('Registered agent') && a.titles.length === 1) - (b.titles.includes('Registered agent') && b.titles.length === 1) || a.name.localeCompare(b.name));
+      h += `<section class="pf-grp"><div class="sec-hd"><h3>Officers</h3><span class="muted">${ppl.length} · as filed with the state (Sunbiz)</span></div>
+      <div class="tablewrap"><table class="tx-table vd-table" data-tt="off"><tbody>${ppl.map(o => `<tr><th scope="row">${o.page_url ? `<a href="${esc(o.page_url)}">${esc(o.name)}</a>` : esc(o.name)}${o.official ? ' <span class="pf-badge">Official</span>' : ''}<small>${esc(o.kind === 'organization' ? 'Company' : 'Person')}</small></th>
+        <td class="wrap small">${esc(o.titles.join(' · '))}</td><td><a class="src" href="${esc(o.source_url)}" target="_blank" rel="noopener">Source</a></td></tr>`).join('')}</tbody></table></div></section>`;
+    }
     const rs = e.restaurants || [];
     if (rs.length) h += `<section class="pf-grp"><div class="sec-hd"><h3>Restaurant licenses</h3><span class="muted">${rs.length} · state food safety inspections</span></div>
       <div class="tablewrap"><table class="tx-table vd-table" data-tt="off"><tbody>${rs.map(r => `<tr><td><a href="${esc(r.page_url)}">${esc(r.name)}</a><small>${esc([r.kind, r.city, r.licensed_now ? null : 'no longer licensed'].filter(Boolean).join(' · '))}</small></td>
@@ -145,7 +154,7 @@
       return `<section class="pf-grp"><div class="sec-hd"><h3>${esc(lbl.charAt(0).toUpperCase() + lbl.slice(1))}</h3><span class="muted">${rs.length.toLocaleString('en-US')}${tot ? ' · ' + money(tot) + ' in the records' : ''}</span></div>
         <div class="tablewrap"><table class="tx-table vd-table" data-tt="off" data-cols="|What|Amount|Dates|"><tbody>${rs.slice(0, SHOW).map(row).join('')}</tbody></table></div>
         ${rs.length > SHOW ? `<button type="button" class="pill pf-more" data-k="${esc(k)}">Show all ${rs.length.toLocaleString('en-US')}</button>` : ''}</section>`;
-    }).join('') || (d.entity.filing || d.entity.restaurants ? '' : '<p class="muted">No connections in the records yet.</p>');
+    }).join('') || (d.entity.filing || d.entity.restaurants || d.entity.officers ? '' : '<p class="muted">No connections in the records yet.</p>');
     box.insertAdjacentHTML('afterbegin', facts(d.entity));
     box.querySelectorAll('.pf-more').forEach(b => b.addEventListener('click', () => {
       const rs = groups.get(b.dataset.k), tb = b.previousElementSibling.querySelector('tbody');
