@@ -113,11 +113,26 @@ function parseRss(xml) {
   const tag = (it, t) => { const m = new RegExp(`<${t}[^>]*>([\\s\\S]*?)</${t}>`, 'i').exec(it); return m ? m[1].replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, '$1').trim() : ''; };
   return [...String(xml || '').matchAll(/<item>([\s\S]*?)<\/item>/gi)].map(m => ({
     title: decode(tag(m[1], 'title')).replace(/\s+/g, ' ').trim(), link: decode(tag(m[1], 'link')), pubDate: tag(m[1], 'pubDate'),
-    description: plain(tag(m[1], 'description')), category: decode(tag(m[1], 'category')),
+    description: plain(tag(m[1], 'description')).replace(/\s*The post [\s\S]*? appeared first on [\s\S]*$/, ''), category: decode(tag(m[1], 'category')),
   })).filter(i => i.title);
+}
+// CivicPlus feeds write the local clock time with the standard-time offset all year ("13:48:00 -0600" in October means
+// 1:48 PM Central daylight time). Read the clock time as local time in the place's time zone instead.
+function localTime(pubDate, tz) {
+  const m = /(\d{1,2}) (\w{3}) (\d{4}) (\d{2}):(\d{2})(?::(\d{2}))?/.exec(String(pubDate || ''));
+  if (!m || !tz) return iso(pubDate);
+  const mon = 'JanFebMarAprMayJunJulAugSepOctNovDec'.indexOf(m[2]) / 3;
+  if (mon < 0 || mon % 1) return iso(pubDate);
+  const wall = Date.UTC(+m[3], mon, +m[1], +m[4], +m[5], +(m[6] || 0));
+  // The zone's offset at that moment: format the instant in tz and compare (two passes settle a DST edge).
+  const off = t => { const p = Object.fromEntries(new Intl.DateTimeFormat('en-US', {timeZone: tz, hourCycle: 'h23', year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric'}).formatToParts(new Date(t)).map(x => [x.type, x.value]));
+    return Date.UTC(+p.year, p.month - 1, +p.day, +p.hour % 24, +p.minute, +p.second) - t; };
+  let t = wall - off(wall); t = wall - off(t);
+  return new Date(t).toISOString();
 }
 const SEV_OF = {evacuation: 'extreme', shelter: 'severe', 'boil-water': 'moderate', storm: 'moderate', road: 'minor', utility: 'minor'};
 function rssNotices(items, feed, place, sourceType) {
+  const tz = (SOURCES[place] || {}).timezone;
   const out = [];
   for (const it of items) {
     // Alert center items are all alerts; news items count only when they're about an emergency topic.
@@ -125,10 +140,11 @@ function rssNotices(items, feed, place, sourceType) {
     if (!kind) continue;
     const id = (/[?&](AID|ARC)=(\d+)/i.exec(it.link) || [])[2] || require('crypto').createHash('sha1').update(it.link || it.title).digest('hex').slice(0, 10);
     const text = `${it.title} ${it.description}`;
+    const when = /RSSFeed\.aspx/i.test(feed.url || '') ? localTime(it.pubDate, tz) : iso(it.pubDate);
     out.push(notice({
       notice_id: `${sourceType === 'alert-center' ? 'alert' : 'news'}:${feed.gov}:${id}`, place_id: place, kind, source: feed.name, source_type: sourceType,
       gov_id: feed.gov, title: it.title, summary: it.description, severity: SEV_OF[kind] || 'info', zones: kind === 'evacuation' ? zonesIn(text) : [],
-      issued: iso(it.pubDate), updated: iso(it.pubDate), status: (kind === 'boil-water' || kind === 'road' || kind === 'evacuation') && LIFTED.test(it.title) ? 'lifted' : 'active',
+      issued: when, updated: when, status: (kind === 'boil-water' || kind === 'road' || kind === 'evacuation') && LIFTED.test(it.title) ? 'lifted' : 'active',
       url: it.link, source_url: feed.page || it.link,
     }));
   }
@@ -148,6 +164,35 @@ async function newsFeeds(place = 'fl-bay', now = Date.now()) {
     return {...n, ends: n.issued ? new Date(Date.parse(n.issued) + NEWS_DAYS * 864e5).toISOString() : null, status: n.status === 'active' && age > NEWS_DAYS ? 'expired' : n.status};
   });
   return r;
+}
+
+// ---------- status pages (one page a government edits in place) ----------
+// Springfield keeps a single "Precautionary Boil Water Notices" page and rewrites its text: "There is currently no PBWN"
+// means none. Any other text is a notice; its id follows the text, so a new notice is new and an edit to the old one isn't lost.
+function statusPageText(html) {
+  const art = (/<article[^>]*class="[^"]*\bnode\b[\s\S]*?<\/article>/i.exec(html) || /<main[\s\S]*?<\/main>/i.exec(html) || [html])[0];
+  const body = /field--name-body[^>]*>([\s\S]*?)(?:<div class="print__wrapper|<\/article>)/i.exec(art);
+  return body ? plain(body[1]) : '';
+}
+function statusPageNotice(text, page, place) {
+  const t = String(text || '').trim();
+  if (!t || new RegExp(page.none, 'i').test(t)) return [];
+  const kind = page.kind || classify(t) || 'utility';
+  const lines = t.split('\n').filter(Boolean);
+  const title = clip(lines[0].length > 12 && lines[0].length < 160 ? lines[0] : `${page.name}: ${kind === 'boil-water' ? 'precautionary boil-water notice' : 'notice'}`, 240);
+  return [notice({
+    notice_id: `page:${page.gov}:${require('crypto').createHash('sha1').update(t).digest('hex').slice(0, 10)}`, place_id: place, kind, source: page.name,
+    source_type: 'status-page', gov_id: page.gov, title, summary: t, severity: SEV_OF[kind] || 'info', status: LIFTED.test(lines[0]) ? 'lifted' : 'active',
+    url: page.page, source_url: page.page,
+  })];
+}
+async function statusPages(place = 'fl-bay') {
+  const cfg = placeConfig(place), pages = cfg.status_pages || [];
+  return settle(pages.map(p => async () => {
+    const text = statusPageText(await get(p.page));
+    if (!text) throw new Error(`${p.name}: notice text not found (the page layout may have changed)`);
+    return statusPageNotice(text, p, place);
+  }), pages.map(p => 'page:' + p.gov));
 }
 
 // ---------- FL511 (state roads) ----------
@@ -291,17 +336,18 @@ async function settle(fns, names) {
 
 // Every live source for a place. Shelter rows come back too, so the caller can store their status.
 async function readAll(place = 'fl-bay', now = Date.now()) {
-  const parts = await Promise.allSettled([nws(place), alertCenters(place), newsFeeds(place, now), fl511(place), shelters(place)]);
+  const parts = await Promise.allSettled([nws(place), alertCenters(place), newsFeeds(place, now), fl511(place), shelters(place), statusPages(place)]);
   const out = {notices: [], errors: [], ok: [], shelters: null};
-  const [w, ac, nf, rd, sh] = parts;
+  const [w, ac, nf, rd, sh, sp] = parts;
   if (w.status === 'fulfilled') { out.notices.push(...w.value); out.ok.push('nws'); } else out.errors.push({source: 'nws', error: String(w.reason.message || w.reason)});
-  for (const p of [ac, nf, rd]) if (p.status === 'fulfilled') { out.notices.push(...p.value.notices); out.ok.push(...p.value.ok); out.errors.push(...p.value.errors); }
+  for (const p of [ac, nf, rd, sp]) if (p.status === 'fulfilled') { out.notices.push(...p.value.notices); out.ok.push(...p.value.ok); out.errors.push(...p.value.errors); }
   if (sh.status === 'fulfilled') { out.shelters = sh.value; out.notices.push(...shelterNotices(sh.value, place)); out.ok.push('shelters'); }
   else out.errors.push({source: 'shelters', error: String(sh.reason.message || sh.reason)});
   // The same notice can show up in a government's alert center and its news feed; keep the alert center's.
-  const seen = new Set(), keyOf = n => `${n.gov_id}|${n.title.toLowerCase()}`;
-  out.notices.sort((a, b) => (a.source_type === 'news') - (b.source_type === 'news'));
-  out.notices = out.notices.filter(n => { const k = keyOf(n); if (seen.has(k)) return false; seen.add(k); return true; });
+  // Two posts from one feed with the same title (Callaway titles every boil notice alike) are both kept.
+  const keyOf = n => `${n.gov_id}|${n.title.toLowerCase()}`;
+  const inAlerts = new Set(out.notices.filter(n => n.source_type === 'alert-center').map(keyOf));
+  out.notices = out.notices.filter(n => n.source_type !== 'news' || !inAlerts.has(keyOf(n)));
   return out;
 }
 
@@ -323,5 +369,5 @@ const SEV_RANK = {extreme: 0, severe: 1, moderate: 2, minor: 3, info: 4};
 const byUrgency = (a, b) => (SEV_RANK[a.severity] ?? 5) - (SEV_RANK[b.severity] ?? 5) || String(b.updated || b.issued || '').localeCompare(String(a.updated || a.issued || ''));
 
 module.exports = {SOURCES, placeConfig, plain, decode, clip, classify, zonesIn, parseRss, rssNotices, nwsNotice, nws, nwsRecent, alertCenters, newsFeeds,
-  fl511, fl511Notices, fl511Time, parseShelters, shelters, shelterNotices, zoneAt, geocode, zoneGeometry, readAll, pushTopic, TOPICS, DEFAULT_TOPICS,
+  localTime, statusPages, statusPageText, statusPageNotice, fl511, fl511Notices, fl511Time, parseShelters, shelters, shelterNotices, zoneAt, geocode, zoneGeometry, readAll, pushTopic, TOPICS, DEFAULT_TOPICS,
   byUrgency, NWS_PUSH, NEWS_DAYS, slug, notice};

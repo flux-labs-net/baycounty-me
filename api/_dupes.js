@@ -53,6 +53,9 @@ function compare(a, b, strictNumbers = false) {
   const out = {title: t, body, numbers, verdict: null};
   if (a.place && b.place && String(a.place).toLowerCase() !== String(b.place).toLowerCase()) return out; // one title in two towns
   if (a.ref && b.ref && a.ref !== b.ref) return out; // two job requisitions
+  // Bodies too short to compare by shingles, but both there and different: two posts under one stock title
+  // ("PRECAUTIONARY BOIL WATER NOTICE" for Olokee St., then again for Nelle St.).
+  if (body == null && words(a.body).length && words(b.body).length && jaccard(titleWords(a.body), titleWords(b.body)) < TITLE_MAYBE) return out;
   if (numbers && ((body != null && body >= BODY_SAME) || (t >= TITLE_SAME && (body == null || body >= BODY_MAYBE)))) out.verdict = 'same';
   else if (strictNumbers && !numbers) { /* different posts */ }
   else if ((body != null && (body >= BODY_SAME || (body >= BODY_MAYBE && t >= TITLE_MAYBE))) || (body == null && t >= TITLE_MAYBE)) out.verdict = 'maybe';

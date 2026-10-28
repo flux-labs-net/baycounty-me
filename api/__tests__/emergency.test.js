@@ -84,6 +84,7 @@ test('a notice ends only when its own source answered without it', () => {
   assert.equal(sourceKey({source_type: 'alert-center', gov_id: 'pcb'}), 'alert:pcb');
   assert.equal(sourceKey({source_type: 'news', gov_id: 'county'}), 'news:county');
   assert.equal(sourceKey({source_type: 'fl511', event: 'Incident'}), 'fl511:Incidents');
+  assert.equal(sourceKey({source_type: 'status-page', gov_id: 'sp'}), 'page:sp');
 });
 
 test('miles is a great-circle distance', () => {
@@ -102,4 +103,36 @@ test('phone sign-up needs an account: /api/push refuses a sign-up and only remov
   assert.equal(r.code, 401);
   assert.equal(r.body.signed_out, true);
   assert.equal((await call('GET')).code, 200);
+});
+
+test('a status page is a notice only when it says one is in effect', () => {
+  const page = {gov: 'sp', name: 'City of Springfield', kind: 'boil-water', page: 'https://example.gov/pbwn', none: '\\b(currently|presently) no\\b[^.]*\\b(PBWN|boil)'};
+  const html = t => `<nav><div class="field--name-body"><p>menu</p></div></nav><article class="node node--type-page"><div class="field field--name-body">${t}</div>
+    <div class="print__wrapper">View PDF</div></article>`;
+  assert.equal(E.statusPageText(html('<p>There is currently no PBWN in the City of Springfield.</p>')), 'There is currently no PBWN in the City of Springfield.');
+  assert.deepEqual(E.statusPageNotice('There is currently no PBWN in the City of Springfield.', page, 'fl-bay'), []);
+  const [n] = E.statusPageNotice(E.statusPageText(html('<p>Precautionary Boil Water Notice for Oak Ave</p><p>Boil water before drinking until further notice.</p>')), page, 'fl-bay');
+  assert.equal(n.kind, 'boil-water');
+  assert.equal(n.status, 'active');
+  assert.equal(n.gov_id, 'sp');
+  assert.equal(n.title, 'Precautionary Boil Water Notice for Oak Ave');
+  assert.match(n.notice_id, /^page:sp:[0-9a-f]{10}$/);
+  assert.equal(E.pushTopic(n), 'water');
+});
+
+test('two boil notices with the same title from one feed are both kept', () => {
+  const feed = {gov: 'cw', name: 'City of Callaway'};
+  const items = E.parseRss(`<item><title>PRECAUTIONARY BOIL WATER NOTICE</title><link>https://x.gov/CivicAlerts.aspx?AID=2157</link><description>Olokee St.</description></item>
+    <item><title>PRECAUTIONARY BOIL WATER NOTICE</title><link>https://x.gov/CivicAlerts.aspx?AID=2156</link><description>Nelle Street. The post X appeared first on Y.</description></item>`);
+  const ns = E.rssNotices(items, feed, 'fl-bay', 'news');
+  assert.deepEqual(ns.map(n => n.notice_id), ['news:cw:2157', 'news:cw:2156']);
+  assert.equal(ns[1].summary, 'Nelle Street.');
+});
+
+test('CivicPlus feed times are local clock times', () => {
+  assert.equal(E.localTime('Wed, 28 Oct 2026 13:48:00 -0600', 'America/Chicago'), '2026-10-28T18:48:00.000Z'); // daylight time
+  assert.equal(E.localTime('Mon, 07 Dec 2026 09:00:00 -0600', 'America/Chicago'), '2026-12-07T15:00:00.000Z'); // standard time
+  const [n] = E.rssNotices(E.parseRss('<item><title>Boil water notice</title><link>https://x.gov/CivicAlerts.aspx?AID=1</link><pubDate>Wed, 28 Oct 2026 13:48:00 -0600</pubDate></item>'),
+    {gov: 'cw', name: 'Callaway', url: 'https://x.gov/RSSFeed.aspx?ModID=1'}, 'fl-bay', 'news');
+  assert.equal(n.issued, '2026-10-28T18:48:00.000Z');
 });
