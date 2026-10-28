@@ -81,7 +81,7 @@ On GitHub, the **Android** workflow (`.github/workflows/android.yml`) runs on ev
    - App access: all functionality is available without special access
    - Content rating: fill in the questionnaire (reference app, no user content, no violence); expect Everyone
    - Target audience: 18 and over is simplest (13+ is fine too; don't pick children's ages)
-   - Data safety: **no data collected or shared**. The app has no accounts or analytics; location is used on the phone once to find the nearest address and isn't sent to us; a saved home address stays on the phone. Data is encrypted in transit (HTTPS).
+   - Data safety: **collected, not shared**, only when a resident makes an optional My home account: email address, home address and an optional first name, for app functionality, and the resident can delete them in the app (Settings → Delete account). No analytics or ads; location is used on the phone once to find the nearest address and isn't sent to us. Data is encrypted in transit (HTTPS).
    - Government apps: answer **No**. BayCounty.me is independent and isn't made by or for a government. Say so in the description too.
    - News app: No. Financial features: None.
 6. **Store listing:** everything is in `android/store/`: the text to paste (`listing.md`), the 512×512 icon, the 1024×500 feature graphic and phone screenshots. To refresh the screenshots, take them from the Android workflow's `screens-emulator` artifact; Play needs the long side at most twice the short side, so trim 1080×2400 shots to 2160 tall or less. Category: Education or News & Magazines; contact email hello@fluxlabs.net; website https://baycounty.me.

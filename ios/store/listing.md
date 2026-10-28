@@ -77,10 +77,16 @@ BayCounty.me is a free, read-only guide to public records for Bay County, Florid
 
 ## App Privacy (the "nutrition label")
 
-Answer **"No, we do not collect data from this app."** That gives the label **Data Not Collected**. Why it's true:
-no accounts, analytics or ads; location is used on the device and not sent; the saved address stays on the
-device; dataset downloads and searches aren't tied to a person or kept. This matches `PrivacyInfo.xcprivacy`
-(no collected data types, no tracking) and https://baycounty.me/privacy.
+Accounts are optional (My home). Answer **"Yes, we collect data from this app"** and declare only these, each
+**linked to the user**, **not used for tracking**, purpose **App Functionality**:
+
+- **Contact Info → Email Address** (to sign in and, if the resident opts in, the Monday email and alerts)
+- **Contact Info → Physical Address** (the saved home, to show and send what's near it)
+- **Contact Info → Name** (optional first name, used in the greeting)
+
+Nothing else: no analytics or ads; location used to find the nearest address stays on the device; dataset downloads
+and searches aren't tied to a person or kept. Without an account nothing is collected. This matches
+`PrivacyInfo.xcprivacy` and https://baycounty.me/privacy.
 
 ## Age rating answers
 

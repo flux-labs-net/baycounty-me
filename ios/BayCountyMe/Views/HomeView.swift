@@ -57,6 +57,10 @@ struct HomeView: View {
                         .accessibilityLabel("Ask a question")
                 }
                 ToolbarItem(placement: .topBarTrailing) {
+                    Button { path.append(.myHome) } label: { Image(systemName: AccountManager.shared.signedIn ? "person.crop.circle.fill" : "person.crop.circle") }
+                        .accessibilityLabel(AccountManager.shared.signedIn ? "My home" : "Sign in")
+                }
+                ToolbarItem(placement: .topBarTrailing) {
                     Button { path.append(.emergency) } label: { Image(systemName: "bell") }
                         .accessibilityLabel("Emergencies and alerts")
                 }
@@ -389,7 +393,7 @@ struct HomeView: View {
             "vendor": .vendor("roberts-and-roberts"), "person": .person("clair-pease"), "explore": .explore,
             "votes": .dataset("votes"), "salaries": .dataset("salary-positions"),
             "accountability": .accountability, "accproject": .accountabilityProject("pcb-fbr-seg3"),
-            "budget": .budgetCompare(govID: "lh"), "craincrement": .craIncrement, "chambers": .chambers, "events": .events, "beaches": .beaches, "parks": .parks, "schools": .schools, "emergency": .emergency, "hurricaneprep": .hurricanePrep, "volunteer": .volunteer, "military": .military, "pastelections": .dataset("campaign-history"),
+            "budget": .budgetCompare(govID: "lh"), "craincrement": .craIncrement, "chambers": .chambers, "events": .events, "beaches": .beaches, "parks": .parks, "schools": .schools, "emergency": .emergency, "hurricaneprep": .hurricanePrep, "volunteer": .volunteer, "military": .military, "myhome": .myHome, "myhome:settings": .myHome, "pastelections": .dataset("campaign-history"),
             "roads": .dataset("road-contracts"), "development": .dataset("development-projects"),
             "restaurants": .dataset("restaurants"), "newbusinesses": .dataset("new-businesses"),
         ]

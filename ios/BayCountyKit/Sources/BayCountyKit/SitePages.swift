@@ -16,6 +16,7 @@ public enum SitePages {
     public static let pages: [String: Coverage] = [
         "/": .native("Home"),
         "/my-address": .native("My Address"),
+        "/account": .native("My home: sign in with an emailed code, saved home, near-my-home feed from /api/v1/nearby and settings"),
         "/public-money/cra-spending": .native("CRA Spending"),
         "/public-money/cra-tax-increment": .native("CRA tax increment"),
         "/public-money/tax-dollars": .native("Tax calculator"),

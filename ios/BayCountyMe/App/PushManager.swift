@@ -64,7 +64,14 @@ final class PushManager {
 
     func didRegister(_ deviceToken: Data) {
         token = Emergency.hexToken(deviceToken)
-        Task { await sync(home: nil) }
+        Task { await sync(home: nil); await linkAccount() }
+    }
+
+    /// When the resident is signed in, tie this phone to their account so its alerts follow the home and choices
+    /// saved on My home (the same on the website).
+    func linkAccount() async {
+        guard enabled, let token, AccountManager.shared.signedIn else { return }
+        await AccountManager.shared.linkDevice(pushToken: token)
     }
 
     /// Send the current choices. `home` is the saved address's point, used for agenda items near me.
