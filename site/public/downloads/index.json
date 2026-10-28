@@ -14536,8 +14536,8 @@
   {
    "id": "restaurants",
    "title": "Restaurants and food service",
-   "description": "One row per restaurant, food truck, caterer or other food service license in the county: today's state license list plus every license inspected since 2016 that is no longer listed (licensed_now false). Name, kind, license holder (licensee, linked to its profile through licensee_entity_id when it matches a company or Sunbiz filing; a person is named only when their name and the license address match an officer, manager or registered agent of a registered business), location (city and ZIP only for food trucks, caterers and event vendors, whose license address can be a home), seats, when it opened (its first licensing inspection), and its inspection record: the latest result, the latest routine inspection, inspections and high-priority violations in the last 12 months, and emergency closures. From the Florida DBPR Division of Hotels and Restaurants.",
-   "rows": 1440,
+   "description": "One row per restaurant, food truck, caterer or other food service license in the county: today's state license list plus every license inspected since 2016 that is no longer listed (licensed_now false). Name, kind, license holder (licensee, linked to its profile through licensee_entity_id when it matches a company or Sunbiz filing; a person is named only when their name and the license address match an officer, manager or registered agent of a registered business), location (city and ZIP only for food trucks, caterers and event vendors, whose license address can be a home), seats, when it opened (its first licensing inspection), and its inspection record: the latest result, the latest routine inspection, inspections and high-priority violations in the last 12 months, emergency closures, the results of the last six inspections (recent_results, newest first) and its page on the site (page_url). From the Florida DBPR Division of Hotels and Restaurants.",
+   "rows": 1435,
    "columns": [
     {
      "name": "place_id",
@@ -14605,18 +14605,16 @@
       "Laguna Beach",
       "Lynn Haven",
       "Marianna",
-      "Mexico Bch",
       "Mexico Beach",
-      "Panama",
-      "Panama Cith Bch",
       "Panama City",
-      "Panama City Bch",
       "Panama City Beach",
       "Parker",
+      "Santa Rosa Beach",
+      "Shalimar",
       "Southport",
       "Springfield",
       "Sunnyside",
-      "Tyndall Afb",
+      "Tyndall AFB",
       "Youngstown"
      ]
     },
@@ -14642,9 +14640,11 @@
       "32444",
       "32446",
       "32456",
+      "32459",
       "32461",
       "32466",
-      "32536"
+      "32536",
+      "32579"
      ]
     },
     {
@@ -14695,14 +14695,14 @@
      "name": "last_result",
      "type": "string",
      "values": [
+      "Allowed to reopen",
       "Fine recommended (administrative complaint)",
       "Follow-up after complaint: fixed",
       "Follow-up visit: fixed",
       "Follow-up visit: more time given",
       "Follow-up visit: not fixed, fine recommended",
       "Met inspection standards",
-      "Not available electronically",
-      "Ordered closed (emergency order)",
+      "Stayed closed: more time given",
       "Warning, follow-up visit set"
      ]
     },
@@ -14750,6 +14750,14 @@
     },
     {
      "name": "last_closure",
+     "type": "string"
+    },
+    {
+     "name": "recent_results",
+     "type": "string"
+    },
+    {
+     "name": "page_url",
      "type": "string"
     },
     {
@@ -14807,13 +14815,8 @@
       "Laguna Beach",
       "Lynn Haven",
       "Marianna",
-      "Mexico Bch",
       "Mexico Beach",
-      "Panama",
-      "Panama Cith Bch",
       "Panama City",
-      "Panama City Bch",
-      "Panama City Bea",
       "Panama City Beach",
       "Parker",
       "Santa Rosa Beach",
@@ -14821,7 +14824,7 @@
       "Southport",
       "Springfield",
       "Sunnyside",
-      "Tyndall Afb",
+      "Tyndall AFB",
       "Youngstown"
      ]
     },
