@@ -198,7 +198,7 @@ $('testPush').addEventListener('click', async () => {
   $('testPush').disabled = true; msg('testMsg', 'Sending…');
   try {
     const r = await api('test_push', {});
-    msg('testMsg', r.delivered ? `Sent to ${r.delivered} phone${r.delivered === 1 ? '' : 's'}. It should arrive in a few seconds.` : 'Apple or Google didn’t accept it. Turn alerts off and on again in the app, then try again.', r.delivered ? 'ok' : 'err');
+    msg('testMsg', r.delivered ? `Sent to ${r.delivered} phone${r.delivered === 1 ? '' : 's'}. It should arrive in a few seconds.` : `Apple or Google didn’t accept it${r.reasons && r.reasons.length ? ' (' + r.reasons.join(', ') + ')' : ''}. Open the app, turn alerts off and on again in My home settings, then try again.`, r.delivered ? 'ok' : 'err');
   } catch (e) { msg('testMsg', e.message, 'err'); }
   $('testPush').disabled = false;
 });

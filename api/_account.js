@@ -293,7 +293,8 @@ async function handler(req, res) {
       const r = await P.send(devices, {title: 'Test alert · BayCounty.me', body: 'This is a test. Real alerts for your home will look like this.', topic: 'test',
         notice_id: 'test', url: 'https://baycounty.me/account', critical: false});
       if (r.dead.length) await q('update push.devices set disabled_at = now() where token = any($1::text[])', [r.dead]);
-      return res.status(200).json({ok: r.delivered > 0, phones: devices.length, delivered: r.delivered, failed: r.failed, skipped: r.skipped});
+      if (r.failed) console.error('test push', JSON.stringify(r.reasons));
+      return res.status(200).json({ok: r.delivered > 0, phones: devices.length, delivered: r.delivered, failed: r.failed, skipped: r.skipped, reasons: [...new Set(r.reasons)]});
     }
     if (action === 'device') {
       const platform = b.platform === 'android' ? 'android' : b.platform === 'ios' ? 'ios' : null;
