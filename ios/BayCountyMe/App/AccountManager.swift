@@ -72,19 +72,27 @@ final class AccountManager {
         do { me = try await client.save(firstName: firstName) } catch { handle(error) }
     }
 
-    /// Ties this phone's alerts to the account so they follow the saved home and choices.
-    func linkDevice(pushToken: String) async {
-        guard signedIn, !Self.demo else { return }
-        try? await client.linkDevice(pushToken: pushToken, appVersion: Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String)
+    /// Ties this phone's alerts to the account so they follow the saved home and choices. False when it didn't go through.
+    func linkDevice(pushToken: String) async -> Bool {
+        guard signedIn, !Self.demo else { return false }
+        do { try await client.linkDevice(pushToken: pushToken, appVersion: Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String); return true }
+        catch { return false }
     }
 
+    func unlinkDevice(pushToken: String) async {
+        guard signedIn, !Self.demo else { return }
+        try? await client.unlinkDevice(pushToken: pushToken)
+    }
+
+    /// Alerts need a signed-in phone, so signing out also stops this phone's alerts.
     func signOut() async {
-        await client.logout()
+        await client.logout(pushToken: PushManager.shared.token)
+        PushManager.shared.signedOut()
         clear()
     }
 
     func deleteAccount() async {
-        do { try await client.deleteAccount(); clear() } catch { handle(error) }
+        do { try await client.deleteAccount(); PushManager.shared.signedOut(); clear() } catch { handle(error) }
     }
 
     private func clear() {

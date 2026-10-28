@@ -16,18 +16,12 @@ import com.google.firebase.FirebaseOptions
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import me.baycounty.kit.BayCountyClient
-import me.baycounty.kit.Emergency
-import java.net.HttpURLConnection
-import java.net.URL
 
-/** Phone notifications through Firebase Cloud Messaging. The phone signs up at https://baycounty.me/api/push with the
- *  topics, cities and saved place chosen on the Emergencies screen; only the token, the choices and a rounded map point
- *  are sent. Firebase is set up from build settings (FCM_* environment variables at build time), so a build without
- *  them still works, with phone alerts off. */
+/** Phone notifications through Firebase Cloud Messaging. Alerts need a BayCounty.me account: the switch lives in
+ *  My home > Settings, and the phone is tied to the account (POST /api/account device), so its alerts follow the home
+ *  and choices saved there. Firebase is set up from build settings (FCM_* environment variables at build time), so a
+ *  build without them still works, with phone alerts off. */
 object Push {
     const val CHANNEL = "emergency"
     private const val PREFS = "push"
@@ -35,9 +29,6 @@ object Push {
     var token by mutableStateOf<String?>(null); private set
     var status by mutableStateOf<String?>(null)
     var enabled by mutableStateOf(false); private set
-    var topics by mutableStateOf(Emergency.defaultTopics); private set
-    var govs by mutableStateOf<List<String>>(emptyList()); private set
-    var radius by mutableStateOf(1.0); private set
     private var loaded = false
 
     /** True when this build has Firebase settings. */
@@ -47,17 +38,12 @@ object Push {
         if (loaded) return
         val p = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
         enabled = p.getBoolean("enabled", false)
-        topics = p.getStringSet("topics", null)?.toSet() ?: Emergency.defaultTopics
-        govs = p.getString("govs", "")!!.split(",").filter { it.isNotBlank() }
-        radius = p.getFloat("radius", 1f).toDouble()
         token = p.getString("token", null)
         loaded = true
     }
 
     private fun save(context: Context) {
-        context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).edit()
-            .putBoolean("enabled", enabled).putStringSet("topics", topics).putString("govs", govs.joinToString(","))
-            .putFloat("radius", radius.toFloat()).putString("token", token).apply()
+        context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).edit().putBoolean("enabled", enabled).putString("token", token).apply()
     }
 
     /** Called once from the Application: the notification channel, and Firebase when this build has its settings. */
@@ -76,49 +62,25 @@ object Push {
         }
     }
 
-    fun setTopic(context: Context, id: String, on: Boolean) { topics = if (on) topics + id else topics - id; save(context) }
-    fun toggleGov(context: Context, id: String) { govs = if (id in govs) govs - id else govs + id; save(context) }
-    fun setRadius(context: Context, r: Double) { radius = r; save(context) }
-
-    /** Turn alerts on (after the notification permission was granted): get the token, then sign up. */
-    fun enable(context: Context, home: me.baycounty.kit.GeoPoint?, onDone: () -> Unit = {}) {
+    /** Turn alerts on for the signed-in account (after the notification permission was granted): get the token, then
+     *  tie this phone to the account. */
+    fun enable(context: Context, onToken: () -> Unit) {
         load(context)
+        if (!Account.signedIn) { status = "Sign in to get alerts."; return }
         if (!configured || FirebaseApp.getApps(context).isEmpty()) { status = "Phone alerts aren't set up in this version of the app yet."; return }
-        enabled = true; save(context)
-        FirebaseMessaging.getInstance().token.addOnSuccessListener { t -> token = t; save(context); onDone() }
+        enabled = true; status = null; save(context)
+        FirebaseMessaging.getInstance().token.addOnSuccessListener { t -> token = t; save(context); onToken() }
             .addOnFailureListener { status = "Couldn't turn on alerts. Try again later." }
     }
 
     suspend fun disable(context: Context) {
         enabled = false; save(context)
-        val t = token ?: return
-        post(Emergency.unregisterBody(t, "android"))
-        status = "Alerts turned off."
+        token?.let { Account.unlinkPhone(it) }
+        status = "Alerts are off on this phone."
     }
 
-    /** Send the current choices. `home` is the saved address's point, used for agenda items near me. */
-    suspend fun sync(context: Context, home: me.baycounty.kit.GeoPoint?) {
-        load(context)
-        val t = token ?: return
-        if (!enabled) return
-        val ver = runCatching { context.packageManager.getPackageInfo(context.packageName, 0).versionName }.getOrNull()
-        val ok = post(Emergency.pushBody(t, "android", topics, govs, home?.y, home?.x, radius, ver))
-        status = if (ok) "Alerts are on for this phone." else "Couldn't reach BayCounty.me. Your choices will be sent next time."
-        // Signed in to My home: this phone's alerts follow the account's home and choices.
-        if (ok) Account.linkPhone(context)
-    }
-
-    private suspend fun post(body: String): Boolean = withContext(Dispatchers.IO) {
-        runCatching {
-            val c = URL(BayCountyClient.SITE + "/api/push").openConnection() as HttpURLConnection
-            c.requestMethod = "POST"; c.doOutput = true; c.connectTimeout = 15000; c.readTimeout = 15000
-            c.setRequestProperty("Content-Type", "application/json")
-            c.outputStream.use { it.write(body.toByteArray()) }
-            val code = c.responseCode
-            c.disconnect()
-            code == 200
-        }.getOrDefault(false)
-    }
+    /** Signing out turns alerts off: the server drops this phone in the same call (Account.signOut). */
+    fun signedOut(context: Context) { load(context); enabled = false; status = null; save(context) }
 
     fun onNewToken(context: Context, t: String) {
         load(context); token = t; save(context)
@@ -130,7 +92,7 @@ class PushService : FirebaseMessagingService() {
     override fun onNewToken(token: String) {
         Push.onNewToken(this, token)
         val app = application as? BayCountyApp ?: return
-        app.store.scope.launch { Push.sync(this@PushService, app.store.home?.point) }
+        app.store.scope.launch { Account.linkPhone(this@PushService) }
     }
 
     override fun onMessageReceived(message: RemoteMessage) {

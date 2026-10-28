@@ -13,7 +13,6 @@ struct EmergencyView: View {
     @State private var zone: Emergency.ZoneResult?
     @State private var zoneError: String?
     @State private var looking = false
-    @State private var push = PushManager.shared
 
     private var resources: [Row] { store.rows["emergency-resources"] ?? [] }
     /// The live feed once it loads; until then (or offline) the last daily archive.
@@ -34,13 +33,14 @@ struct EmergencyView: View {
                 zoneSection
                 nowSection(feed)
                 sheltersSection(feed)
-                alertsSection
                 numbersSection
             } else {
                 ProgressView().frame(maxWidth: .infinity, minHeight: 160)
             }
             CardList {
                 RouteRow(route: .hurricanePrep, title: "Hurricane prep", detail: "Sandbags, generators, rebuild money by ZIP code", symbol: "hurricane")
+                RowDivider(inset: 50)
+                RouteRow(route: .myHome, title: "Phone alerts", detail: "Sign in, then turn them on in My home settings", symbol: "bell.badge")
                 RowDivider(inset: 50)
                 WebRow(title: "Zone map and every notice", detail: "On BayCounty.me", symbol: "safari", url: URL(string: "https://baycounty.me/emergency"))
             }
@@ -229,61 +229,6 @@ struct EmergencyView: View {
             }
         }
     }
-
-    private var alertsSection: some View {
-        PageSection(title: "Alerts on this phone", symbol: "bell.badge", tone: .amber,
-                    caption: "BayCounty.me sends a notification when the county, a city or the Weather Service posts one of these. Only this phone's token and your choices are stored.") {
-            VStack(alignment: .leading, spacing: 10) {
-                Toggle("Send me alerts", isOn: Binding(get: { push.enabled }, set: { on in Task { if on { await push.enable() } else { await push.disable() } } }))
-                    .font(.subheadline.weight(.semibold))
-                if push.enabled {
-                    CardList {
-                        ForEach(Emergency.pushTopics, id: \.id) { t in
-                            Toggle(isOn: Binding(get: { push.topics.contains(t.id) }, set: { on in
-                                if on { push.topics.insert(t.id) } else { push.topics.remove(t.id) }
-                                Task { await push.sync(home: store.home?.point) }
-                            })) {
-                                VStack(alignment: .leading, spacing: 2) {
-                                    Text(t.label).font(.subheadline)
-                                    Text(t.detail).font(.caption).foregroundStyle(.secondary)
-                                }
-                            }
-                            .padding(.horizontal, 14).padding(.vertical, 8)
-                            if t.id != Emergency.pushTopics.last?.id { RowDivider() }
-                        }
-                    }
-                    if push.topics.contains("agenda") {
-                        if let home = store.home {
-                            Text("Agenda items within \(radiusLabel(push.radius)) of \(home.display).").font(.footnote).foregroundStyle(.secondary)
-                            Picker("Distance", selection: Binding(get: { push.radius }, set: { push.radius = $0; Task { await push.sync(home: home.point) } })) {
-                                ForEach(Emergency.radiusChoices, id: \.self) { Text(radiusLabel($0)).tag($0) }
-                            }
-                            .pickerStyle(.segmented)
-                        } else {
-                            Text("Save your address on Today to get agenda items near it.").font(.footnote).foregroundStyle(.secondary)
-                        }
-                    }
-                    Text("Boil-water notices and closures from").font(.footnote.weight(.semibold))
-                    ChipLayout(spacing: 8) {
-                        ForEach(Emergency.pushGovs, id: \.id) { g in
-                            let on = push.govs.contains(g.id)
-                            Button(g.label) {
-                                if on { push.govs.removeAll { $0 == g.id } } else { push.govs.append(g.id) }
-                                Task { await push.sync(home: store.home?.point) }
-                            }
-                            .font(.caption.weight(.semibold)).padding(.horizontal, 10).padding(.vertical, 6)
-                            .background(on ? Brand.navy : Brand.hairline.opacity(0.35), in: Capsule())
-                            .foregroundStyle(on ? Color.white : Color.primary)
-                        }
-                    }
-                    Text(push.govs.isEmpty ? "None picked: every government." : "Only the ones picked.").font(.caption).foregroundStyle(.secondary)
-                }
-                if let s = push.status { Text(s).font(.caption).foregroundStyle(.secondary) }
-            }
-        }
-    }
-
-    private func radiusLabel(_ r: Double) -> String { r < 1 ? (r == 0.25 ? "¼ mile" : "½ mile") : r == 1 ? "1 mile" : "\(Int(r)) miles" }
 
     private var numbersSection: some View {
         PageSection(title: "Phone numbers and links", symbol: "phone", tone: .blue) {

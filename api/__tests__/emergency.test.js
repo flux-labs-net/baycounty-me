@@ -90,3 +90,16 @@ test('miles is a great-circle distance', () => {
   const d = miles({lat: 30.1588, lng: -85.6602}, {lat: 30.2159, lng: -85.8555});
   assert.ok(d > 12 && d < 13, String(d));
 });
+
+test('phone sign-up needs an account: /api/push refuses a sign-up and only removes phones', async () => {
+  const push = require('../push');
+  const call = async (method, body) => {
+    const res = {code: 0, body: null, headers: {}, setHeader(k, v) { this.headers[k] = v; }, status(c) { this.code = c; return this; }, json(b) { this.body = b; return this; }};
+    await push({method, body, headers: {}, socket: {}}, res);
+    return res;
+  };
+  const r = await call('POST', {token: 'a'.repeat(64), platform: 'ios', topics: ['weather']});
+  assert.equal(r.code, 401);
+  assert.equal(r.body.signed_out, true);
+  assert.equal((await call('GET')).code, 200);
+});

@@ -3,9 +3,9 @@ import UIKit
 import UserNotifications
 import BayCountyKit
 
-/// Phone notifications: asks permission, gets the device token from Apple and signs the phone up at
-/// https://baycounty.me/api/push with the topics, cities and saved place chosen on the Emergencies screen.
-/// Nothing but the token, the choices and a rounded map point is sent.
+/// Phone notifications. Alerts need a BayCounty.me account: the switch lives in My home > Settings, and the phone is
+/// tied to the account (POST /api/account device), so its alerts follow the home and choices saved there. Only the
+/// token is sent from here; the server keeps the account's choices and a rounded map point of the home.
 @MainActor
 @Observable
 final class PushManager {
@@ -14,27 +14,11 @@ final class PushManager {
     private(set) var token: String?
     private(set) var authorized = false
     private(set) var status: String?
-
-    var topics: Set<String> { didSet { save() } }
-    var govs: [String] { didSet { save() } }
-    var useHomeForAgenda: Bool { didSet { save() } }
-    var radius: Double { didSet { save() } }
-    var enabled: Bool { didSet { save() } }
+    private(set) var enabled: Bool { didSet { UserDefaults.standard.set(enabled, forKey: "push.enabled") } }
 
     private init() {
-        let d = UserDefaults.standard
-        topics = Set(d.stringArray(forKey: "push.topics") ?? Array(Emergency.defaultTopics))
-        govs = d.stringArray(forKey: "push.govs") ?? []
-        useHomeForAgenda = d.object(forKey: "push.home") as? Bool ?? true
-        radius = d.object(forKey: "push.radius") as? Double ?? 1
-        enabled = d.bool(forKey: "push.enabled")
+        enabled = UserDefaults.standard.bool(forKey: "push.enabled")
         Task { await refreshAuthorization() }
-    }
-
-    private func save() {
-        let d = UserDefaults.standard
-        d.set(Array(topics), forKey: "push.topics"); d.set(govs, forKey: "push.govs")
-        d.set(useHomeForAgenda, forKey: "push.home"); d.set(radius, forKey: "push.radius"); d.set(enabled, forKey: "push.enabled")
     }
 
     func refreshAuthorization() async {
@@ -42,55 +26,37 @@ final class PushManager {
         authorized = s.authorizationStatus == .authorized || s.authorizationStatus == .provisional
     }
 
-    /// Turn notifications on: ask permission (once), then register with Apple; the token arrives in the app delegate.
+    /// Turn alerts on for the signed-in account: ask permission (once), then register with Apple. The token arrives in
+    /// the app delegate, which ties it to the account.
     func enable() async {
+        guard AccountManager.shared.signedIn else { status = "Sign in to get alerts."; return }
         do {
             authorized = try await UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge])
         } catch { authorized = false }
-        guard authorized else { status = "Notifications are off for BayCounty.me in Settings."; enabled = false; return }
+        guard authorized else { status = "Notifications are off for BayCounty.me in the iPhone's Settings app."; enabled = false; return }
         enabled = true
+        status = nil
         UIApplication.shared.registerForRemoteNotifications()
     }
 
     func disable() async {
         enabled = false
-        guard let token else { return }
-        var req = URLRequest(url: BayCountyClient.site.appendingPathComponent("api/push"))
-        req.httpMethod = "POST"; req.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        req.httpBody = try? JSONSerialization.data(withJSONObject: ["token": token, "platform": "ios", "action": "unregister"])
-        _ = try? await URLSession.shared.data(for: req)
-        status = "Notifications turned off."
+        if let token { await AccountManager.shared.unlinkDevice(pushToken: token) }
+        status = "Alerts are off on this phone."
     }
+
+    /// Signing out turns alerts off: the server drops this phone in the same call (AccountManager.signOut).
+    func signedOut() { enabled = false; status = nil }
 
     func didRegister(_ deviceToken: Data) {
         token = Emergency.hexToken(deviceToken)
-        Task { await sync(home: nil); await linkAccount() }
+        Task { await linkAccount() }
     }
 
-    /// When the resident is signed in, tie this phone to their account so its alerts follow the home and choices
-    /// saved on My home (the same on the website).
+    /// Ties this phone to the signed-in account (after sign-in, a new token, or a change to the home or choices).
     func linkAccount() async {
         guard enabled, let token, AccountManager.shared.signedIn else { return }
-        await AccountManager.shared.linkDevice(pushToken: token)
-    }
-
-    /// Send the current choices. `home` is the saved address's point, used for agenda items near me.
-    func sync(home: GeoPoint?) async {
-        guard enabled, let token else { return }
-        let pt = useHomeForAgenda ? (home ?? Self.savedHome()) : nil
-        var req = URLRequest(url: BayCountyClient.site.appendingPathComponent("api/push"))
-        req.httpMethod = "POST"; req.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        req.httpBody = Emergency.pushBody(token: token, platform: "ios", topics: topics, govs: govs, lat: pt?.y, lng: pt?.x, radius: radius,
-                                          appVersion: Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String)
-        do {
-            let (_, r) = try await URLSession.shared.data(for: req)
-            status = (r as? HTTPURLResponse)?.statusCode == 200 ? "Alerts are on for this phone." : "Couldn't save your choices. Try again later."
-        } catch { status = "Couldn't reach BayCounty.me. Your choices will be sent next time." }
-    }
-
-    private static func savedHome() -> GeoPoint? {
-        guard let d = UserDefaults.standard.data(forKey: "home"), let m = try? JSONDecoder().decode(AddressMatch.self, from: d) else { return nil }
-        return m.point
+        status = await AccountManager.shared.linkDevice(pushToken: token) ? "Alerts are on for this phone." : "Couldn't reach BayCounty.me. Try again later."
     }
 }
 

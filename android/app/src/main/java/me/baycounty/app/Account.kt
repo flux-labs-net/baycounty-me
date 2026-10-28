@@ -80,12 +80,23 @@ object Account {
         val t = Push.token ?: return
         if (!signedIn || !Push.enabled || client.token == DEMO) return
         val ver = runCatching { context.packageManager.getPackageInfo(context.packageName, 0).versionName }.getOrNull()
-        runCatching { client.linkDevice(t, ver) }
+        Push.status = if (runCatching { client.linkDevice(t, ver) }.isSuccess) "Alerts are on for this phone." else "Couldn't reach BayCounty.me. Try again later."
     }
 
-    suspend fun signOut(context: Context) { client.logout(); clear(context) }
+    suspend fun unlinkPhone(pushToken: String) {
+        if (!signedIn || client.token == DEMO) return
+        runCatching { client.unlinkDevice(pushToken) }
+    }
 
-    suspend fun deleteAccount(context: Context) = guard(context) { client.deleteAccount(); clear(context) }
+    /** Alerts need a signed-in phone, so signing out also stops this phone's alerts. */
+    suspend fun signOut(context: Context) {
+        Push.load(context)
+        client.logout(Push.token)
+        Push.signedOut(context)
+        clear(context)
+    }
+
+    suspend fun deleteAccount(context: Context) = guard(context) { client.deleteAccount(); Push.signedOut(context); clear(context) }
 
     private fun clear(context: Context) { saveToken(context, null); me = null; feed = null }
 

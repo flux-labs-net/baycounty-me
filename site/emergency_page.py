@@ -354,7 +354,7 @@ def emergency_page(out_dir):
 
   <section class="tx-sec"><div class="sec-hd"><h2 id="get-alerts" data-tile="Get alerts">Get alerts</h2></div>
     <div class="em-get">
-      <div><b>{ico("bell")} On your phone</b><small>In the BayCounty.me app, turn on alerts under Emergencies: weather warnings, evacuation orders, shelter openings, boil-water notices for the cities you pick, and agenda items near a place you save.</small></div>
+      <div><b>{ico("bell")} On your phone</b><small>Sign in to the BayCounty.me app, then turn on alerts in My home settings: weather warnings, evacuation orders, shelter openings, boil-water notices for your city, and agenda items near your home.</small></div>
       <a href="https://www.alertbay.org" target="_blank" rel="noopener"><b>{ico("megaphone")} AlertBay</b><small>Bay County's own text, call and email alerts, for unincorporated Bay County, every city and the schools.</small></a>
       <a href="/alerts"><b>{ico("mail")} Email from BayCounty.me</b><small>Weekly updates for the governments you follow, plus alerts for one thing.</small></a>
       <a href="/hurricane-prep"><b>{ico("shield")} Hurricane prep</b><small>Sandbags, generator safety, a kit and a plan, what to do after a storm, and the FEMA money past storms brought each ZIP code.</small></a>

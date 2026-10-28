@@ -47,9 +47,9 @@ async function store(place, notices, ok) {
   return gone.length;
 }
 
-// Phones that want this notice: the topic is on, and the notice's government is one they follow (or they follow all).
+// Signed-in phones that want this notice (only phones tied to an account get alerts): the topic is on, and the notice's government is one they follow (or they follow all).
 async function devicesFor(place, topic, n) {
-  return db.q(`select token, platform from push.devices where place_id = $1 and disabled_at is null and $2 = any(topics)
+  return db.q(`select token, platform from push.devices where place_id = $1 and disabled_at is null and user_id is not null and $2 = any(topics)
       and ($3::text is null or cardinality(govs) = 0 or $3 = any(govs))`, [place, topic, n.kind === 'boil-water' || n.kind === 'road' || n.kind === 'utility' ? n.gov_id : null]);
 }
 
