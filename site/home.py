@@ -170,7 +170,7 @@ def home_page():
       <div class="hb-cols"><span>Levied by</span><span>Mills</span><span>You pay</span></div>
       <ul class="hb-lines" id="billLines">{lines}</ul>
       <div class="hb-total" aria-live="polite"><b>Total</b><span id="billMills">{area["t"]:.4f}</span><span id="billTotal">{_money(area["t"] * val / 1000)}</span></div>
-      <p class="hb-note">Rate × taxable value, before exemptions. Flat fees (fire, stormwater, garbage) are billed separately. <a href="/public-money/tax-dollars">Full calculator →</a></p>
+      <p class="hb-note">Rate × taxable value, before exemptions. Flat fees (fire, stormwater, garbage) are billed separately. <a href="/public-money/tax-dollars">Full calculator →</a> · <a href="/utilities">Utility rates and trash day →</a></p>
       <form class="hb-addr" action="/my-address/" method="get" role="search">
         <label class="sr" for="hq">Your address</label>
         <input id="hq" name="q" type="search" placeholder="Use your exact address" autocomplete="off">
@@ -226,7 +226,7 @@ def home_page():
     </div>
     <div class="h-card">
       <div class="h-card-hd"><b>Take part</b></div>
-      <nav class="h-take" aria-label="Take part"><a href="/emergency">Emergencies &amp; alerts</a><a href="/meetings">Meetings</a><a href="/elections">2026 elections</a><a href="/elections/voting">Where to vote</a><a href="/elections/results">Election results</a><a href="/notices">Public notices</a><a href="/jobs">Government jobs</a><a href="/volunteer">Volunteer</a><a href="/records-request">Request a record</a><a href="/alerts">Email alerts</a><a href="/open-data">Open data</a><a href="/glossary">Plain-English guide</a><a href="/es" hreflang="es" lang="es">En español</a></nav>
+      <nav class="h-take" aria-label="Take part"><a href="/emergency">Emergencies &amp; alerts</a><a href="/utilities">Utilities &amp; trash day</a><a href="/meetings">Meetings</a><a href="/elections">2026 elections</a><a href="/elections/voting">Where to vote</a><a href="/elections/results">Election results</a><a href="/notices">Public notices</a><a href="/jobs">Government jobs</a><a href="/volunteer">Volunteer</a><a href="/records-request">Request a record</a><a href="/alerts">Email alerts</a><a href="/open-data">Open data</a><a href="/glossary">Plain-English guide</a><a href="/es" hreflang="es" lang="es">En español</a></nav>
     </div>
   </section>
 </div>

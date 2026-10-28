@@ -28,7 +28,7 @@ lh,Lynn Haven,actuals,Audited spending,FY2016–FY2025,9,10,years,90.0,partial,F
 lh,Lynn Haven,tax,Tax rates,FY2016–FY2027,7,12,years,58.3,partial,FY2016–FY2020,The property tax rate (millage) adopted for each fiscal year.,/governments/lynn-haven#rate,/data-sources#matrix
 lh,Lynn Haven,debt,Debt,FY2016–FY2025,1,10,years,10.0,missing,FY2016–FY2024,Total debt from each year's audited financial statements.,/governments/lynn-haven#debt,/data-sources#matrix
 lh,Lynn Haven,audits,Audit findings,FY2016–FY2025,3,10,years,30.0,missing,FY2016–FY2022,"Audits filed with the Florida Auditor General, read for findings and the auditor's opinion.",/governments/lynn-haven#audits,/data-sources#matrix
-lh,Lynn Haven,officials,Officials by year,2016–2026,64.8,64.9,seat-years,100.0,complete,,Seat-years since 2016 where the officeholder is confirmed from a record.,/governments/lynn-haven#who,/data-sources#matrix
+lh,Lynn Haven,officials,Officials by year,2016–2026,64.9,64.9,seat-years,100.0,complete,,Seat-years since 2016 where the officeholder is confirmed from a record.,/governments/lynn-haven#who,/data-sources#matrix
 cw,Callaway,budgets,Adopted budgets,FY2016–FY2027,7,12,years,58.3,partial,FY2016–FY2020,Adopted budget total or General Fund for each fiscal year.,/governments/callaway#money,/data-sources#matrix
 cw,Callaway,actuals,Audited spending,FY2016–FY2025,10,10,years,100.0,complete,,"From the state's Local Government Financial Reports, filed through FY2025.",/governments/callaway#money,/data-sources#matrix
 cw,Callaway,tax,Tax rates,FY2016–FY2027,7,12,years,58.3,partial,FY2016–FY2020,The property tax rate (millage) adopted for each fiscal year.,/governments/callaway#rate,/data-sources#matrix
@@ -52,4 +52,4 @@ mb,Mexico Beach,actuals,Audited spending,FY2016–FY2025,9,10,years,90.0,partial
 mb,Mexico Beach,tax,Tax rates,FY2016–FY2027,7,12,years,58.3,partial,FY2016–FY2020,The property tax rate (millage) adopted for each fiscal year.,/governments/mexico-beach#rate,/data-sources#matrix
 mb,Mexico Beach,debt,Debt,FY2016–FY2025,1,10,years,10.0,missing,FY2016–FY2024,Total debt from each year's audited financial statements.,/governments/mexico-beach#debt,/data-sources#matrix
 mb,Mexico Beach,audits,Audit findings,FY2016–FY2025,3,10,years,30.0,missing,FY2016–FY2022,"Audits filed with the Florida Auditor General, read for findings and the auditor's opinion.",/governments/mexico-beach#audits,/data-sources#matrix
-mb,Mexico Beach,officials,Officials by year,2016–2026,41.8,64.9,seat-years,64.5,partial,,Seat-years since 2016 where the officeholder is confirmed from a record.,/governments/mexico-beach#who,/data-sources#matrix
+mb,Mexico Beach,officials,Officials by year,2016–2026,41.9,64.9,seat-years,64.5,partial,,Seat-years since 2016 where the officeholder is confirmed from a record.,/governments/mexico-beach#who,/data-sources#matrix

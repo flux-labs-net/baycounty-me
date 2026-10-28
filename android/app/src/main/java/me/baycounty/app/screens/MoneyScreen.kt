@@ -83,6 +83,7 @@ private val moneyItems: Map<MoneySection, List<MoneyItem>> = mapOf(
         MoneyItem("Chambers of commerce", "storefront", "Boards, events and public money", Route.Chambers),
         MoneyItem("Restaurant inspections", "fork.knife", "Every inspection, warning and closure since 2016", Route.Dataset("restaurants")),
         MoneyItem("New businesses", "storefront", "Companies filed in Bay County since 2016", Route.Dataset("new-businesses")),
+        MoneyItem("Military and the bases", "shield", "Base news and federal contracts to local firms", Route.Military),
         MoneyItem("Business ties", "briefcase", "Officials' and candidates' businesses", site = "/connections/business-ties"),
     ),
     MoneySection.ELECTIONS to listOf(

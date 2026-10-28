@@ -51,7 +51,7 @@
   const ALIAS = {logs: 'analytics'};
   const loaders = {todo: loadTodo, keys: loadKeys, analytics: () => { loadStats(); loadLogs(true); }, settings: loadSettings, ingestion: loadIngestion,
     accounting: () => loadLedger(), agendas: loadAgendas, sent: loadSent, emails: loadEmails, compose: () => loadCompose(), correspondence: loadCorr,
-    records: loadRR, owners: loadOwners, limits: loadLimits, ties: loadTies, names: loadNames, boards: loadBoards, minutes: loadMinutes, progress: loadProgress};
+    records: loadRR, owners: loadOwners, limits: loadLimits, ties: loadTies, names: loadNames, realtors: loadRealtors, boards: loadBoards, minutes: loadMinutes, progress: loadProgress};
   const nav = $('#an-nav'), menuBtn = $('#an-open');
   function menu(open) {
     nav.classList.toggle('open', open); document.body.classList.toggle('an-lock', open);
@@ -1299,6 +1299,32 @@
   ['#nm-status', '#nm-reason'].forEach(s => $(s).addEventListener('change', loadNames));
   let nmTimer;
   $('#nm-q').addEventListener('input', () => { clearTimeout(nmTimer); nmTimer = setTimeout(loadNames, 300); });
+
+  // ---------- realtor agents (realtor.agents, api/_realtor.js) ----------
+  const RA_ST = {active: 'Active', pending: 'Pending', paused: 'Paused'};
+  const raDay = v => v ? new Date(v).toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'}) : '—';
+  async function loadRealtors() {
+    let r;
+    try { r = await api('realtors'); }
+    catch (e) { $('#ra-tiles').innerHTML = `<div class="banner bad"><div><b>Couldn’t load agents.</b><div class="small muted">${esc(e.message)}</div></div></div>`; return; }
+    const c = r.counts;
+    $('#ra-tiles').innerHTML = [[r.signup === 'invite' ? 'Invite only' : 'Open', 'Sign-up'], [fmt(c.active), 'Active'], [fmt(c.pending), 'Waiting for you'], [fmt(c.paused), 'Paused']]
+      .map(([v, l]) => `<div class="tile"><b>${v}</b><span>${l}</span></div>`).join('');
+    $('#ra-table tbody').innerHTML = r.rows.map(a => `<tr><td><b>${esc(a.agent_name || a.email)}</b>${a.agent_name ? `<div class="muted small">${esc(a.email)}</div>` : ''}</td>
+      <td class="small">${esc(a.brokerage || '—')}</td><td class="small">${raDay(a.created_at)}</td><td class="small">${raDay(a.last_login_at)}</td><td class="small">${fmt(a.reports_run || 0)}</td>
+      <td><select class="sel" data-ra="${esc(a.email)}" aria-label="Access">${Object.entries(RA_ST).map(([k, v]) => `<option value="${k}"${k === a.status ? ' selected' : ''}>${v}</option>`).join('')}</select></td></tr>`).join('')
+      || '<tr><td colspan="6" class="empty">No agents yet.</td></tr>';
+  }
+  $('#ra-table').addEventListener('change', async e => {
+    const s = e.target.closest('[data-ra]'); if (!s) return;
+    s.disabled = true;
+    try { await api('realtor_set', {method: 'POST', body: {email: s.dataset.ra, status: s.value}}); } catch (err) { alert(err.message); }
+    s.disabled = false; loadRealtors();
+  });
+  $('#ra-add').addEventListener('click', async () => {
+    const v = $('#ra-email').value.trim(); if (!v) return;
+    try { await api('realtor_set', {method: 'POST', body: {email: v, status: 'active'}}); $('#ra-email').value = ''; loadRealtors(); } catch (err) { alert(err.message); }
+  });
 
   // ---------- votes from minutes (agendas.motions, api/_minutes.js) ----------
   const MV_BOARD = {county: 'County Commission', schools: 'School Board', pc: 'Panama City', 'pc-cra': 'Panama City CRA', pcb: 'Panama City Beach',
