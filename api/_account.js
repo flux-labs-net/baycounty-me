@@ -284,6 +284,17 @@ async function handler(req, res) {
       await syncDevices(u.id);
       return res.status(200).json(await me(u));
     }
+    if (action === 'test_push') {
+      // A test notification to this account's own phones only, so a person can check alerts reach them.
+      if (limit('tp:' + u.id, 5, 3600e3)) throw bad('That’s enough tests for now. Try again in an hour.', 429);
+      const P = require('./_push');
+      const devices = await q('select token, platform from push.devices where user_id = $1 and disabled_at is null', [u.id]);
+      if (!devices.length) throw bad('No phones are signed in yet. Sign in to the BayCounty.me app and turn on alerts in My home settings.');
+      const r = await P.send(devices, {title: 'Test alert · BayCounty.me', body: 'This is a test. Real alerts for your home will look like this.', topic: 'test',
+        notice_id: 'test', url: 'https://baycounty.me/account', critical: false});
+      if (r.dead.length) await q('update push.devices set disabled_at = now() where token = any($1::text[])', [r.dead]);
+      return res.status(200).json({ok: r.delivered > 0, phones: devices.length, delivered: r.delivered, failed: r.failed, skipped: r.skipped});
+    }
     if (action === 'device') {
       const platform = b.platform === 'android' ? 'android' : b.platform === 'ios' ? 'ios' : null;
       const token = String(b.token || '').trim();
