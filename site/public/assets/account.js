@@ -192,7 +192,16 @@ function renderSettings() {
   checks('topics', c.topics || {}, p.topics || []);
   checks('pushTopics', c.push_topics || {}, p.push_topics || []);
   $('devices').textContent = ME.devices ? `${ME.devices} phone${ME.devices === 1 ? ' is' : 's are'} signed in.` : 'No phones signed in yet.';
+  $('testRow').hidden = !ME.devices;
 }
+$('testPush').addEventListener('click', async () => {
+  $('testPush').disabled = true; msg('testMsg', 'Sending…');
+  try {
+    const r = await api('test_push', {});
+    msg('testMsg', r.delivered ? `Sent to ${r.delivered} phone${r.delivered === 1 ? '' : 's'}. It should arrive in a few seconds.` : 'Apple or Google didn’t accept it. Turn alerts off and on again in the app, then try again.', r.delivered ? 'ok' : 'err');
+  } catch (e) { msg('testMsg', e.message, 'err'); }
+  $('testPush').disabled = false;
+});
 $('saveSet').addEventListener('click', async () => {
   $('saveSet').disabled = true; msg('setMsg', 'Saving…');
   try {
